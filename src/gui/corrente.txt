@@ -1,0 +1,20 @@
+Estado Atual da GUI
+
+Objetos Atualmente  ||||            Completude
+   Necessarios
+
+Janelas              ->  80% (falta: redmensionamento, maximizacao)
+Botoes               -> 100%
+Barras de Texto      ->  98% (falta: selecao de substrings: nao essencial)
+Menus                -> 100% 
+Fundo                -> 100%
+Barras de Rolagem    ->   0%
+Caixas de Selecao    -> 100%
+Barras de Progresso  ->   0%
+Textos Selecionaveis -> 100%
+Quadros de Texto     -> 100%
+Figura Interna       -> 100% 
+
+A medida que forem requeridos novos objetos (como grid de inventorio,etc), 
+o progresso dos mesmos sera aqui acrescentado.
+

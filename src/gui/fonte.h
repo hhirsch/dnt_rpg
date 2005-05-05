@@ -1,0 +1,52 @@
+#ifndef _fonte_h
+#define _fonte_h
+
+#include "desenho.h"
+#include <string.h>
+
+/* Alinhamentos  da Fonte */
+#define ESQUERDA         0
+#define DIREITA          1
+#define CENTRALIZADO     2
+#define TEMPOREPETICAO 100
+
+#define FFARSO     "Fnt/farso.fnt"
+#define FHELVETICA "Fnt/Helve.fnt"
+#define FMINI      "Fnt/mini.fnt"
+#define FNORMAL    "Fnt/normal.fnt"
+#define FNEGRITO   "Fnt/Neg.fnt"
+#define FPLATINA   "Fnt/Plat.fnt"
+#define FTIMES     "Fnt/times.fnt"
+
+/* Onde e definida a escrita de texto na superficie */
+
+typedef struct
+{
+   unsigned short int letra[257][16]; /* Cada Letra em HexaDecimal */
+   unsigned short int incCP;          /* O Incremento da Fonte */
+}fnt;                  /* Fonte do Tipo FNT */
+
+/* Escreve na superficie o texto
+ * screen      -> Superficie na qual sera escrito o texto
+ * x,y         -> Coordenada de base do Texto
+ * texto       -> o texto a ser escrito
+ * OPCIONAIS
+ * inic        -> posicao inicial
+ * fim         -> posicao final
+ * x1,y1,x2,y2 -> coordenadas limitrofes */
+void escxy(SDL_Surface *screen,int x,int y, char* texto);
+void escxy_Def(SDL_Surface *screen,int x,int y, char* texto,int inic,int fim);
+/*Retorna o y */
+int escxy_Area(SDL_Surface *screen,int x, int y, char* texto,int x1,int y1,
+                int x2,int y2);
+
+int fonte_incCP();
+
+/* Define a Fonte Ativa, retorna 0 caso nao encontre o arquivo
+ * nome   -> nome do arquivo contendo a fonte
+ * alinha -> alinhamento da fonte na tela
+ * tam    -> tamanho da fonte na tela */
+int selFonte(char* nome, int alinha, int tam);
+
+#endif
+
