@@ -1,5 +1,5 @@
-#include "../GUI/farso.h"
-#include "../ENGINE/conversa.h"
+#include "../gui/farso.h"
+#include "../engine/conversa.h"
 
 cores Cores;
 int sair;
@@ -256,7 +256,7 @@ int main(int argc, char *argv[])
 
    Cores.Iniciar();
 
-   interface* interf = new interface("pic/akira.bmp");
+   interface* interf = new interface("../data/pics/akira.bmp");
    
    principal=interf->ljan->InserirJanela(0,0,183,65,"Principal",1,1,NULL,NULL);
    barraAbrir = principal->objetos->InserirBarraTexto(10,23,173,36,"Arquivo",
@@ -280,7 +280,7 @@ int main(int argc, char *argv[])
    inserirObjsNPC();    
    inserirObjsPC();
    inserirObjsDialogo();
-   dialogos->objetos->InserirFigura(10,285,"pic/dcc.bmp");
+   dialogos->objetos->InserirFigura(10,285,"../data/pics/dcc.bmp");
 
    dialogos->fechavel = 0;
    dialogos->Ativar(interf->ljan,interf->tela2D);

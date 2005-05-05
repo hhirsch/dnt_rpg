@@ -1,10 +1,10 @@
 #ifndef _personagens_h
 #define _personagens_h
 
-#include "../GUI/desenho.h"
-#include "../GUI/figura.h"
-#include "../GUI/objeto.h"
-#include "../GUI/lista.h"
+#include "../gui/desenho.h"
+#include "../gui/figura.h"
+#include "../gui/objeto.h"
+#include "../gui/lista.h"
 //#include "habilidades.h"
 #include "glm.h"
 

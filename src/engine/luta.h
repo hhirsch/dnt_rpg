@@ -1,7 +1,7 @@
 #ifndef _luta_h
 #define _luta_h
 
-#include "../GUI/farso.h"
+#include "../gui/farso.h"
 
 
 #endif

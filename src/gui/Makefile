@@ -6,7 +6,7 @@ OBJS = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o fig
 OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o lista.o menu.o mouse.o nstring.o quadtexto.o seltexto.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL
 PROGFLAGs = 
-BIN = ../BIN/
+BIN = ../../bin/
 
 
 # Comente a linha abaixo se quiser movimento transparente das janelas

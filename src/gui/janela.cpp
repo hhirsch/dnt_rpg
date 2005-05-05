@@ -138,7 +138,7 @@ void janela::Desenhar(int salvar, SDL_Surface *screen)
    cor_Definir(Cores.corTexto.R,Cores.corTexto.G,Cores.corTexto.B);
    if (!selFonte(FFARSO,ESQUERDA,1))
    {
-      erro_Mensagem("Fonte Fnt/farso.fnt nao encontrada!\n",3);
+      erro_Mensagem("Fonte farso.fnt nao encontrada!\n",3);
    }
    escxy(cara,39,-2,texto);
    /* Desenho dos Botoes */

@@ -1,7 +1,7 @@
 #ifndef _conversa_h
 #define _conversa_h
 
-#include "../GUI/farso.h"
+#include "../gui/farso.h"
 
 typedef struct {
    char Se[140];

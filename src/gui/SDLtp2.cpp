@@ -527,7 +527,7 @@ void keyboard(SDL_Surface *screen)
          //SDL_SetAlpha(screen,0,0);
          cor_Definir(0,0,0);
          //retangulo_Colorir(sc,0,0,639,479,1);
-         interface* interf = new interface("pic/akira.bmp");
+         interface* interf = new interface("../../data/pics/akira.bmp");
          janela* jan;
          jan = interf->ljan->InserirJanela(330,100,500,350,"Janela",1,1,NULL,NULL);
          jan->Ativar(interf->ljan,interf->tela2D);

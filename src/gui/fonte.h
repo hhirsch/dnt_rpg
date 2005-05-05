@@ -10,13 +10,13 @@
 #define CENTRALIZADO     2
 #define TEMPOREPETICAO 100
 
-#define FFARSO     "Fnt/farso.fnt"
-#define FHELVETICA "Fnt/Helve.fnt"
-#define FMINI      "Fnt/mini.fnt"
-#define FNORMAL    "Fnt/normal.fnt"
-#define FNEGRITO   "Fnt/Neg.fnt"
-#define FPLATINA   "Fnt/Plat.fnt"
-#define FTIMES     "Fnt/times.fnt"
+#define FFARSO     "../data/fnt/farso.fnt"
+#define FHELVETICA "../data/fnt/Helve.fnt"
+#define FMINI      "../data/fnt/mini.fnt"
+#define FNORMAL    "../data/fnt/normal.fnt"
+#define FNEGRITO   "../data/fnt/Neg.fnt"
+#define FPLATINA   "../data/fnt/Plat.fnt"
+#define FTIMES     "../data/fnt/times.fnt"
 
 /* Onde e definida a escrita de texto na superficie */
 

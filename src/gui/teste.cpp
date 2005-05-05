@@ -30,11 +30,11 @@ int main(int argc, char *argv[])
    // cor_Definir(0,0,0);
    // retangulo_Colorir(screen,0,0,639,479,0);
 
-    interface* interf = new interface("pic/akira.bmp");
+    interface* interf = new interface("../data/pics/akira.bmp");
 
     janela *jan;
     jan=interf->ljan->InserirJanela(330,100,500,350,"Janela",1,1,NULL,NULL);
-    jan->objetos->InserirFigura(8,20,"pic/logan.bmp");
+    jan->objetos->InserirFigura(8,20,"../data/pics/logan/cara.bmp");
     jan->objetos->InserirQuadroTexto(90,20,160,95,1,"Fale humano ridiculo.Tens alguma comida?");
     jan->objetos->InserirSelTexto(8,100,160,250,"1 - Ora, o que faz um mutante nesta janela?",
                       "2 - Aonde esta sua orelha esquerda,mutante?",

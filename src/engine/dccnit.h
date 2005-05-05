@@ -1,8 +1,8 @@
 #ifndef _dccnit_h
 #define _dccnit_h
 
-#include "../GUI/farso.h"
-//#include "../MAPA/mapa.h"
+#include "../gui/farso.h"
+//#include "../map/map.h"
 #include "personagens.h"
 #include "luta.h"
 

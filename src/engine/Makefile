@@ -2,11 +2,11 @@ CC = g++
 CFLAGS = -g -c -Wall
 EFLAGS = -g -Wall -lm -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGS = 
-ENDGUI = ../GUI/
-ENDENGINE = ../ENGINE/
+ENDGUI = ../gui/
+ENDENGINE = ../engine/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
 OBJS = conversa.o dccnit.o glm.o personagens.o teste.o
-BIN = ../BIN/
+BIN = ../../bin/
 
 all: teste
 
