@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "glm.h"
+#include "../gui/desenho.h"
 
 /* Some <math.h> files do not define M_PI... */
 #ifndef M_PI
@@ -59,7 +60,7 @@ stralloc(const char *string)
 /* private functions */
 
 /* _glmMax: returns the maximum of two floats */
-static GLfloat
+GLfloat
 _glmMax(GLfloat a, GLfloat b) 
 {
   if (a > b)
@@ -68,7 +69,7 @@ _glmMax(GLfloat a, GLfloat b)
 }
 
 /* _glmAbs: returns the absolute value of a float */
-static GLfloat
+GLfloat
 _glmAbs(GLfloat f)
 {
   if (f < 0)
@@ -81,7 +82,7 @@ _glmAbs(GLfloat f)
  * u - array of 3 GLfloats (GLfloat u[3])
  * v - array of 3 GLfloats (GLfloat v[3])
  */
-static GLfloat
+GLfloat
 _glmDot(GLfloat* u, GLfloat* v)
 {
   assert(u);
@@ -97,7 +98,7 @@ _glmDot(GLfloat* u, GLfloat* v)
  * v - array of 3 GLfloats (GLfloat v[3])
  * n - array of 3 GLfloats (GLfloat n[3]) to return the cross product in
  */
-static GLvoid
+GLvoid
 _glmCross(GLfloat* u, GLfloat* v, GLfloat* n)
 {
   assert(u);
@@ -114,7 +115,7 @@ _glmCross(GLfloat* u, GLfloat* v, GLfloat* n)
  *
  * n - array of 3 GLfloats (GLfloat n[3]) to be normalized
  */
-static GLvoid
+GLvoid
 _glmNormalize(GLfloat* n)
 {
   GLfloat l;
@@ -135,7 +136,7 @@ _glmNormalize(GLfloat* n)
  * u - array of 3 GLfloats (GLfloat u[3])
  * v - array of 3 GLfloats (GLfloat v[3]) 
  */
-static GLboolean
+GLboolean
 _glmEqual(GLfloat* u, GLfloat* v, GLfloat epsilon)
 {
   if (_glmAbs(u[0] - v[0]) < epsilon &&
@@ -257,7 +258,7 @@ found:
  *
  * The return value should be free'd.
  */
-static char*
+char*
 _glmDirName(char* path)
 {
   char* dir;
@@ -280,7 +281,7 @@ _glmDirName(char* path)
  * model - properly initialized GLMmodel structure
  * name  - name of the material library
  */
-static GLvoid
+GLvoid
 _glmReadMTL(GLMmodel* model, char* name)
 {
   FILE* file;
@@ -460,17 +461,102 @@ _glmWriteMTL(GLMmodel* model, char* modelpath, char* mtllibname)
 }
 #endif
 
-void InsereTextura(GLMmodel* modelo, char* textura)
+/*Devolve a primeira potencia de 2 maior que n*/
+int PotenciaMaior(int n)
 {
-   /* procura pela textura */
-/*   GLuint aux=0;
-   GLMtexture* textura = modelo->texturas;
-   while(aux<modelo->numtexturas)
-   {
-   }*/
-   modelo->numtexturas++;
+   int aux=2;
+   while(aux<n)
+     aux*=2;
+   return(aux);
 }
 
+int IDTextura(GLMmodel* modelo, char* textura)
+{
+   /* procura pela textura */
+   GLuint aux=0;
+   GLMtexture* tex = modelo->texturas;
+   while(aux<modelo->numtexturas)
+   {
+      if(!strcmp(modelo->texturas[aux].nome, textura))
+         return(aux); //a textura ja esta presente 
+      tex = tex->proximo;
+      aux++;
+   }
+   return(-1);
+}
+
+/* Insere a textura dentre as utilizadas pelo objeto */
+void InsereTextura(GLMmodel* modelo, char* textura)
+{
+   /* Ignora os nulos */
+   if(!strcmp(textura,"(null)")) 
+     return;
+
+   /* procura pela textura */
+   GLuint aux=0;
+   GLMtexture* tex = modelo->texturas;
+   GLMtexture* ant = NULL;
+   while(aux < modelo->numtexturas)
+   {
+      if(!strcmp(modelo->texturas[aux].nome, textura))
+         return; //a textura ja esta presente 
+      ant = tex;
+      tex = tex->proximo;
+      aux++;
+   }
+
+   /* carrega a textura do arquivo */
+   char* arq = (char*)malloc(sizeof(char) * 
+           (strlen(modelo->diretorioTexturas) + strlen(textura) + 1));
+   strcpy(arq, modelo->diretorioTexturas);
+   strcat(arq, textura);
+   SDL_Surface* img = IMG_Load(arq);
+   if(!img)
+   {
+      printf("Erro ao abrir textura: %s\n",arq);
+      free(arq);
+      return;
+   }
+   
+   /* Transforma a textura em potencia de 2 */
+   printf("X:%d Y:%d\n",PotenciaMaior(img->w),PotenciaMaior(img->h));
+   SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       PotenciaMaior(img->w),PotenciaMaior(img->h),32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   SDL_Rect ret;
+   ret.x = 0; ret.y = 0; ret.w = img->w; ret.h = img->h;
+   SDL_BlitSurface(img,NULL,imgPotencia,NULL);  
+   
+   /* Insere realmente a textura */ 
+   tex = (GLMtexture*) malloc(sizeof(GLMtexture));
+   tex->proximo = NULL;
+   if(modelo->numtexturas == 0)
+   {
+      modelo->texturas = tex;
+   }
+   else
+   {
+     ant->proximo = tex;
+   }
+
+   tex->nome = stralloc(textura);
+   //tex->proximo = modelo->texturas;
+   //modelo->texturas = tex;
+   glGenTextures(1, &(tex->indice));
+   glBindTexture(GL_TEXTURE_2D, tex->indice);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
+                0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   modelo->numtexturas++;
+   //AtualizaTela2D(imgPotencia);
+   //scanf("%d",&aux);
+
+   /* Libera a memoria utilizada */
+   free(arq);
+   SDL_FreeSurface(img);
+   SDL_FreeSurface(imgPotencia);
+}
 
 /* _glmFirstPass: first pass at a Wavefront OBJ file that gets all the
  * statistics of the model (such as #vertices, #normals, etc)
@@ -478,7 +564,7 @@ void InsereTextura(GLMmodel* modelo, char* textura)
  * model - properly initialized GLMmodel structure
  * file  - (fopen'd) file descriptor 
  */
-static GLvoid
+GLvoid
 _glmFirstPass(GLMmodel* model, FILE* file) 
 {
   GLuint    numvertices;		/* number of vertices in model */
@@ -529,7 +615,7 @@ _glmFirstPass(GLMmodel* model, FILE* file)
       _glmReadMTL(model, buf);
       break;
     case 'u':
-      if ((strncmp(buf,"usemat",6)!=0) || (strncmp(buf,"usemap",6)!=0))
+      if ((strncmp(buf,"usemat",6)==0) || (strncmp(buf,"usemap",6)==0))
       {
           fgets(buf, sizeof(buf), file);
           sscanf(buf, "%s %s", buf, buf);
@@ -628,7 +714,7 @@ _glmFirstPass(GLMmodel* model, FILE* file)
  * model - properly initialized GLMmodel structure
  * file  - (fopen'd) file descriptor 
  */
-static GLvoid
+GLvoid
 _glmSecondPass(GLMmodel* model, FILE* file) 
 {
   GLuint    numvertices;		/* number of vertices in model */
@@ -640,7 +726,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
   GLfloat*  texcoords;			/* array of texture coordinates */
   GLMgroup* group;			/* current group pointer */
   GLuint    material;			/* current material */
-  GLuint*   texture;                    /* current texture */
+  int    texture;                    /* current texture */
   GLuint    v, n, t;
   char      buf[128];
 
@@ -656,7 +742,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
   numvertices = numnormals = numtexcoords = 1;
   numtriangles = 0;
   material = 0;
-  texture = NULL;
+  texture = -1;
 
   while(fscanf(file, "%s", buf) != EOF) {
     switch(buf[0]) {
@@ -696,12 +782,12 @@ _glmSecondPass(GLMmodel* model, FILE* file)
          /*group->material =*/ 
          material = _glmFindMaterial(model, buf);
       }
-      else if ((strncmp(buf,"usemat",6) !=0) || (strncmp(buf,"usemap",6) !=0))
+      else if ((strncmp(buf,"usemat",6) ==0) || (strncmp(buf,"usemap",6) ==0))
       {
          //carregamaterialdetextura
           fgets(buf, sizeof(buf), file);
           sscanf(buf, "%s %s", buf, buf);
-          //texture = inserirTextura(buf);
+          texture = IDTextura(model, buf);
       }
       break;
     case 'g':				/* group */
@@ -727,6 +813,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	T(numtriangles).vindices[2] = v;
 	T(numtriangles).nindices[2] = n;
         T(numtriangles).material = material;
+        T(numtriangles).texture = texture;
 	group->triangles[group->numtriangles++] = numtriangles;
 	numtriangles++;
 	while(fscanf(file, "%d//%d", &v, &n) > 0) {
@@ -737,6 +824,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	  T(numtriangles).vindices[2] = v;
 	  T(numtriangles).nindices[2] = n;
           T(numtriangles).material = material;
+          T(numtriangles).texture = texture;
 	  group->triangles[group->numtriangles++] = numtriangles;
 	  numtriangles++;
 	}
@@ -754,6 +842,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	T(numtriangles).tindices[2] = t;
 	T(numtriangles).nindices[2] = n;
         T(numtriangles).material = material;
+        T(numtriangles).texture = texture;
 	group->triangles[group->numtriangles++] = numtriangles;
 	numtriangles++;
 	while(fscanf(file, "%d/%d/%d", &v, &t, &n) > 0) {
@@ -767,6 +856,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	  T(numtriangles).tindices[2] = t;
 	  T(numtriangles).nindices[2] = n;
           T(numtriangles).material = material;
+          T(numtriangles).texture = texture;
 	  group->triangles[group->numtriangles++] = numtriangles;
 	  numtriangles++;
 	}
@@ -781,6 +871,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	T(numtriangles).vindices[2] = v;
 	T(numtriangles).tindices[2] = t;
         T(numtriangles).material = material;
+        T(numtriangles).texture = texture;
 	group->triangles[group->numtriangles++] = numtriangles;
 	numtriangles++;
 	while(fscanf(file, "%d/%d", &v, &t) > 0) {
@@ -791,6 +882,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	  T(numtriangles).vindices[2] = v;
 	  T(numtriangles).tindices[2] = t;
           T(numtriangles).material = material;
+          T(numtriangles).texture = texture;
 	  group->triangles[group->numtriangles++] = numtriangles;
 	  numtriangles++;
 	}
@@ -803,6 +895,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	fscanf(file, "%d", &v);
 	T(numtriangles).vindices[2] = v;
         T(numtriangles).material = material;
+        T(numtriangles).texture = texture;
 	group->triangles[group->numtriangles++] = numtriangles;
 	numtriangles++;
 	while(fscanf(file, "%d", &v) > 0) {
@@ -810,6 +903,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	  T(numtriangles).vindices[1] = T(numtriangles-1).vindices[2];
 	  T(numtriangles).vindices[2] = v;
           T(numtriangles).material = material;
+          T(numtriangles).texture = texture;
 	  group->triangles[group->numtriangles++] = numtriangles;
 	  numtriangles++;
 	}
@@ -1381,6 +1475,16 @@ glmDelete(GLMmodel* model)
     free(group->triangles);
     free(group);
   }
+  GLMtexture* tex = model->texturas;
+  GLMtexture* au;
+  for(i=0;i<model->numtexturas;i++)
+  {
+     au = tex;
+     tex = tex->proximo;
+     free(au->nome);
+     glDeleteTextures(1,&(au->indice));
+     free(au);
+  }
 
   free(model);
 }
@@ -1429,8 +1533,8 @@ glmReadOBJ(char* filename, char* diretorioTex)
   model->materials     = NULL;
   model->numgroups     = 0;
   model->groups        = NULL;
-  model->texturas      = NULL;
   model->numtexturas   = 0;
+  model->texturas      = NULL;
   model->position[0]   = 0.0;
   model->position[1]   = 0.0;
   model->position[2]   = 0.0;
@@ -1721,7 +1825,13 @@ glmDraw(GLMmodel* model, GLuint mode)
     }*/
 
     for (i = 0; i < group->numtriangles; i++) {
-      if (mode & GLM_MATERIAL) {
+      if ((mode & GLM_TEXTURE) && (T(group->triangles[i]).texture!=-1) )
+      {
+         glEnable(GL_TEXTURE_2D);
+         glBindTexture(GL_TEXTURE_2D, T(group->triangles[i]).texture);
+      }
+      if (mode & GLM_MATERIAL) 
+      {
          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
 	   	   model->materials[T(group->triangles[i]).material].ambient);
          glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, 
@@ -1774,12 +1884,15 @@ glmDraw(GLMmodel* model, GLuint mode)
 	     model->vertices[3 * T(group->triangles[i]).vindices[2] + Y],
 	     model->vertices[3 * T(group->triangles[i]).vindices[2] + Z]);
 #endif
-      
+      if(mode & GLM_TEXTURE)
+        glDisable(GL_TEXTURE_2D);
+     
     }
     
     group = group->next;
   }
   glEnd();
+  
 
   glPopMatrix();
 }

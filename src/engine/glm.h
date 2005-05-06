@@ -51,7 +51,7 @@ typedef struct {
   GLuint nindices[3];			/* array of triangle normal indices */
   GLuint tindices[3];			/* array of triangle texcoord indices*/
   GLuint findex;			/* index of triangle facet normal */
-  GLuint* texture;                      /* ponteiro para o indice da textura */
+  int texture;                      /* ponteiro para o indice da textura */
   GLuint material;                      /* material utilizado pela face */
 } GLMtriangle;
 
@@ -69,7 +69,8 @@ typedef struct _GLMgroup {
  */
 typedef struct _GLMtexture {
    char* nome;
-   GLuint* indice;
+   GLuint indice;
+   struct _GLMtexture* proximo;
 }GLMtexture;
 
 /* GLMmodel: Structure that defines a model.
@@ -101,7 +102,7 @@ typedef struct {
   GLMgroup*    groups;			/* linked list of groups */
 
   GLuint       numtexturas;             /* numero de texturas no modelo */
-  GLMtexture*  texturas;                /* lista encandeada de texturas */
+  GLMtexture*   texturas;               /* lista de texturas */
 
   GLfloat position[3];			/* position of the model */
 
