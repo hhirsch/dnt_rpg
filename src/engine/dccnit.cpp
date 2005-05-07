@@ -138,7 +138,7 @@ int engine::TrataES(SDL_Surface *screen)
    }
    if(keys[SDLK_LEFT])
    {
-       phi -=2;  // change
+       phi -=2;  
        redesenha = 1;
    }
    if(keys[SDLK_RIGHT])
