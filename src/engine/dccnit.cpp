@@ -155,17 +155,17 @@ int engine::TrataES(SDL_Surface *screen)
    }
    if(keys[SDLK_PAGEUP])
    {
-      if (theta < 85)
+      if (theta < 90)
       {
-         theta +=2;
+         theta +=1;
          redmensiona = 1;
       }
    }
    if(keys[SDLK_PAGEDOWN])
    {
-      if (theta >-85)
+      if (theta > 0)
       {
-         theta -=2;
+         theta -=1;
          redmensiona = 1;
       }
    }
