@@ -42,12 +42,6 @@ void engine::Redmensiona(SDL_Surface *screen)
    gluPerspective(45.0, 1.0, 1.0, 1000.0);
    
    glMatrixMode (GL_MODELVIEW);
-   glLoadIdentity();
-   //gluLookAt (7.0,7.0, 7.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0);
-   float x = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   float y = centroY + (float) 2*d * sin(deg2Rad(theta));
-   float z = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-   gluLookAt(x,y,z, centroX,centroY,centroZ,0,1,0);
 }
 
 /*********************************************************************
@@ -99,7 +93,6 @@ void engine::Iniciar(SDL_Surface *screen)
 int engine::TrataES(SDL_Surface *screen)
 {
    int redesenha = 0;
-   int redmensiona = 0;
    SDL_PumpEvents();
    Uint8 *keys;
    keys = SDL_GetKeyState(NULL);
@@ -135,30 +128,30 @@ int engine::TrataES(SDL_Surface *screen)
        if (d>1)
        {
           d--;
-          redmensiona = 1;
+          redesenha = 1;
        }
    }
    if(keys[SDLK_DOWN])
    {
        d++;
-       redmensiona = 1;
+       redesenha = 1;
    }
    if(keys[SDLK_LEFT])
    {
        phi -=2;  // change
-       redmensiona = 1;
+       redesenha = 1;
    }
    if(keys[SDLK_RIGHT])
    {
       phi +=2;
-      redmensiona = 1;
+      redesenha = 1;
    }
    if(keys[SDLK_PAGEUP])
    {
       if (theta < 90)
       {
          theta +=1;
-         redmensiona = 1;
+         redesenha = 1;
       }
    }
    if(keys[SDLK_PAGEDOWN])
@@ -166,14 +159,24 @@ int engine::TrataES(SDL_Surface *screen)
       if (theta > 0)
       {
          theta -=1;
-         redmensiona = 1;
+         redesenha = 1;
       }
    }
-   if(redmensiona)
+   
+   int x,y;
+   SDL_GetMouseState(&x,&y);
+   if(x == 0)
    {
-      Redmensiona(screen);
-      redesenha = 1;
+      phi-=2; 
+      redesenha = 1;  
    }
+   if(x == screen->w-1)
+   {
+     phi+=2; 
+     redesenha = 1;
+   }
+
+
    if(redesenha)
    {
       Desenhar();
@@ -189,6 +192,13 @@ int engine::TrataES(SDL_Surface *screen)
  *********************************************************************/
 void engine::Desenhar()
 {
+    glLoadIdentity();
+   //gluLookAt (7.0,7.0, 7.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0);
+   float x = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+   float y = centroY + (float) 2*d * sin(deg2Rad(theta));
+   float z = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+   gluLookAt(x,y,z, centroX,centroY,centroZ,0,1,0);
+
    glClear ((GL_COLOR_BUFFER_BIT));
    glClear (GL_DEPTH_BUFFER_BIT);
    glPushMatrix();
