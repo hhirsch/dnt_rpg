@@ -16,8 +16,10 @@ int main()
    Engine->Iniciar(screen);
 // int aux;
 // for(aux = 0;aux<10;aux++)
-   Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,"Logan",
-                                 "../data/models/BMWZ4J.obj","../../PICS/Logan/");
+   Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
+                 "Rainha","../data/models/queen.obj","../../PICS/Logan/");
+   Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
+                 "Logan","../data/models/BMWZ4J.obj","../../PICS/Logan/");
 
    Engine->Rodar(screen);
  

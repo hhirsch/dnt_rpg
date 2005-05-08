@@ -4,7 +4,7 @@
 #define DELAY 0
 
 /* Conversor de graus para radianos */
-inline double deg2Rad(double x){return 3.14159 * x/360.0;}
+inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
 
 /*********************************************************************
  *                       Construtor da Engine                        *
@@ -13,10 +13,11 @@ engine::engine(/*Tmapa map*/)
 {
    NPCs = new (Lpersonagem);
    PCs  = new (Lpersonagem);
-   theta=0.5;
+   theta=0;
    phi=0;
    d=150;
-   centroX = centroY = centroZ = 0;
+   centroX = centroZ = 0;
+   centroY = 30;
    
    //mapa = map;
 }
@@ -94,11 +95,15 @@ int engine::TrataES(SDL_Surface *screen)
 {
    int redesenha = 0;
    SDL_PumpEvents();
+
+   /* Tratamento das Teclas */
    Uint8 *keys;
    keys = SDL_GetKeyState(NULL);
-   if ( keys[SDLK_q] )
+   if ( keys[SDLK_ESCAPE] ) // Sai da Engine
       return(0);
-   if(keys[SDLK_x])
+
+   /* Tratamento das teclas para a Camera */
+   if(keys[SDLK_x]) 
    {
       RotacaoX+=5;
       if (RotacaoX >= 360) RotacaoX = 0;
@@ -116,14 +121,14 @@ int engine::TrataES(SDL_Surface *screen)
       if (RotacaoZ >= 360) RotacaoZ = 0;
       redesenha = 1;
    }
-   if(keys[SDLK_r])
+   if(keys[SDLK_r])  
    { 
       RotacaoX = 0;
       RotacaoY = 0;
       RotacaoZ = 0;
       redesenha = 1;
    }
-   if(keys[SDLK_UP])
+   if(keys[SDLK_UP])  // Aumenta o Zoom
    {
        if (d>1)
        {
@@ -131,22 +136,22 @@ int engine::TrataES(SDL_Surface *screen)
           redesenha = 1;
        }
    }
-   if(keys[SDLK_DOWN])
+   if(keys[SDLK_DOWN]) // Diminui o Zoom
    {
        d++;
        redesenha = 1;
    }
-   if(keys[SDLK_LEFT])
+   if(keys[SDLK_LEFT]) // Roda Camera Antihorariamente
    {
        phi -=2;  
        redesenha = 1;
    }
-   if(keys[SDLK_RIGHT])
+   if(keys[SDLK_RIGHT]) // Roda Camera Horariamente
    {
       phi +=2;
       redesenha = 1;
    }
-   if(keys[SDLK_PAGEUP])
+   if(keys[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
    {
       if (theta < 90)
       {
@@ -154,7 +159,7 @@ int engine::TrataES(SDL_Surface *screen)
          redesenha = 1;
       }
    }
-   if(keys[SDLK_PAGEDOWN])
+   if(keys[SDLK_PAGEDOWN]) // desce com a camera ate visao em 1ª pessoa
    {
       if (theta > 0)
       {
@@ -162,19 +167,84 @@ int engine::TrataES(SDL_Surface *screen)
          redesenha = 1;
       }
    }
+   /* Tratamento da tecla para Movimentacao do Personagem */
+   if(keys[SDLK_q]) // Anda com personagem de lado para esquerda
+   {
+         PCs->personagemAtivo->posicaoLadoX -= 0.5*
+                 cos(deg2Rad(PCs->personagemAtivo->orientacao));
+         PCs->personagemAtivo->posicaoLadoZ -= 0.5*
+                 sin(deg2Rad(PCs->personagemAtivo->orientacao));
+      redesenha = 1;
+   }
+   if(keys[SDLK_w]) // Anda com personagem para frente
+   {
+        PCs->personagemAtivo->posicaoLadoX -= 0.5*
+                 sin(deg2Rad(PCs->personagemAtivo->orientacao));
+        PCs->personagemAtivo->posicaoLadoZ -= 0.5*
+                 cos(deg2Rad(PCs->personagemAtivo->orientacao));
+        redesenha = 1;
+   }
+   if(keys[SDLK_e]) // Anda com personagem para esquerda
+   {
+         PCs->personagemAtivo->posicaoLadoX += 0.5*
+                 cos(deg2Rad(PCs->personagemAtivo->orientacao));
+         PCs->personagemAtivo->posicaoLadoZ += 0.5*
+                 sin(deg2Rad(PCs->personagemAtivo->orientacao));
+      redesenha = 1;
+   }
+   if(keys[SDLK_a]) // Gira personagem antihorariamente 
+   {
+      PCs->personagemAtivo->orientacao += 1.0;
+      if(PCs->personagemAtivo->orientacao > 360.0)
+         PCs->personagemAtivo->orientacao = 1.0;
+      redesenha = 1;
+   }
+   if(keys[SDLK_s]) // Anda com personagem para tras
+   {
+        PCs->personagemAtivo->posicaoLadoX += 0.5*
+                 sin(deg2Rad(PCs->personagemAtivo->orientacao));
+        PCs->personagemAtivo->posicaoLadoZ += 0.5*
+                 cos(deg2Rad(PCs->personagemAtivo->orientacao));
+        redesenha = 1;
+   }
+   if(keys[SDLK_d]) // Gira o personagem horariamente
+   {
+      PCs->personagemAtivo->orientacao -= 1.0;
+      if(PCs->personagemAtivo->orientacao < 0.0)
+         PCs->personagemAtivo->orientacao = 360.0;
+
+      redesenha = 1;
+   }
+   if(keys[SDLK_i])
+   {
+      printf("Orientacao %f°\t sen %f\tcos %f\trad %f\n",
+              PCs->personagemAtivo->orientacao,
+              sin(deg2Rad(PCs->personagemAtivo->orientacao)),
+              cos(deg2Rad(PCs->personagemAtivo->orientacao)),
+              deg2Rad(PCs->personagemAtivo->orientacao));
+      printf("PosicaoLadoX %f\n",PCs->personagemAtivo->posicaoLadoX);
+      printf("PosicaoLadoZ %f\n",PCs->personagemAtivo->posicaoLadoZ);
+      SDL_Delay(100);
+   }
    
+
+   /* Tratamento do Mouse */
    int x,y;
    SDL_GetMouseState(&x,&y);
-   if(x == 0)
+
+   /* Tratamento do Mouse para Camera */
+   if(x == 0)    // Gira a Camera Antihorariamente
    {
       phi-=2; 
       redesenha = 1;  
    }
-   if(x == screen->w-1)
+   if(x == screen->w-1) // Gira a camera horariamente
    {
      phi+=2; 
      redesenha = 1;
    }
+  
+   /* Tratamento do Mouse para Movimentacao do Personagem */
 
 
    if(redesenha)
@@ -209,7 +279,15 @@ void engine::Desenhar()
       int aux;
       for(aux=0;aux < PCs->total;aux++)
       {
+         glPushMatrix();
+         glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
+         /* O personagem nao movimenta no eixo Y, mas sim no Z (^) e X (>) */
+         //glTranslatef(per->posicaoLado*cos(deg2Rad(per->orientacao)), 0 ,
+         //             per->posicaoLado*sin(deg2Rad(per->orientacao)));
+         glRotatef(per->orientacao,0,1,0);
+         //glTranslatef(per->posicaoLado,0,0);
          glmDraw(per->modelo3d, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
+         glPopMatrix();
          per = (personagem*) per->proximo;
          glTranslatef(30,0,0);
       }

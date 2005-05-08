@@ -23,9 +23,9 @@ class engine
 
       int RotacaoX,RotacaoY,RotacaoZ; //variaveis de testeatual
 
-      /* Variaveis de COntrole da Camera/olho */
-      double theta, phi, d;
-      double centroX,centroY,centroZ;
+      /* Variaveis de Controle da Camera/olho */
+      double theta, phi, d;  //Rotacao pra cima, pro lado e zoom
+      double centroX,centroY,centroZ; // posicao central da camera
 
       /* Inicia a estrutura da Engine para utilizacao
        * screen -> ponteiro para a tela3d atual */

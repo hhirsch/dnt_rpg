@@ -32,11 +32,16 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
    novo->inteligencia = inteligencia;
    novo->esperteza    = esperteza;
    novo->armaAtual = NULL;
+   novo->orientacao = 0.0;
+   novo->posicaoFrente = 0.0;
+   novo->posicaoLadoX = 0.0;
+   novo->posicaoLadoZ = 0.0;
    novo->nome = nome;
    novo->retrato->InserirFigura(POSRETX,POSRETY,retrato);
    novo-> modelo3d = glmReadOBJ(arqmodelo,dirTexturas);
    novo->tipo = PERSONAGEM;
    InserirObj(novo);
+   personagemAtivo = novo;
    return(novo);
 } 
 

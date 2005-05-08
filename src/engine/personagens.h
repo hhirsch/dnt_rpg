@@ -29,6 +29,10 @@ class personagem: public Tobjeto
       int x,y;                  // coordenada do mapa que o bichinho esta
       char *nome;               // nome do personagem
       GLMmodel* modelo3d;       // modelo estatico do personagem
+      float orientacao;         // orientacao do personagem (onde esta sua cara)
+      float posicaoFrente;      // posicao do personagem pra frente
+      float posicaoLadoX;       // posicao do personagem pro lado
+      float posicaoLadoZ;       //
    // Lhabilidade* habilidades; // habilidades personagem (ex:kamasutramaster)
 };                 // O PERSONAGEM
 
