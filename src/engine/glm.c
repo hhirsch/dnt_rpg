@@ -4,7 +4,7 @@
  *  Written by Nate Robins, 1997.
  *  email: ndr@pobox.com
  *  www: http://www.pobox.com/~ndr
- *  Texture support by DccNiTghtmare
+ *  Texture and Color support by DccNiTghtmare
  *  email: dccnightmare@dcc.ufmg.br
  *  www: http://dccnitghtmare.sourceforge.net/
  */
@@ -477,7 +477,7 @@ int IDTextura(GLMmodel* modelo, char* textura)
    GLMtexture* tex = modelo->texturas;
    while(aux<modelo->numtexturas)
    {
-      if(!strcmp(modelo->texturas[aux].nome, textura))
+      if(!strcmp(tex->nome, textura))
          return(aux); //a textura ja esta presente 
       tex = tex->proximo;
       aux++;
@@ -498,7 +498,7 @@ void InsereTextura(GLMmodel* modelo, char* textura)
    GLMtexture* ant = NULL;
    while(aux < modelo->numtexturas)
    {
-      if(!strcmp(modelo->texturas[aux].nome, textura))
+      if(!strcmp(tex->nome, textura))
          return; //a textura ja esta presente 
       ant = tex;
       tex = tex->proximo;
@@ -519,7 +519,7 @@ void InsereTextura(GLMmodel* modelo, char* textura)
    }
    
    /* Transforma a textura em potencia de 2 */
-   printf("X:%d Y:%d\n",PotenciaMaior(img->w),PotenciaMaior(img->h));
+   printf("%s: X:%d Y:%d\n",arq,PotenciaMaior(img->w),PotenciaMaior(img->h));
    SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        PotenciaMaior(img->w),PotenciaMaior(img->h),32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
