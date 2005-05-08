@@ -16,7 +16,7 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "mapa.h"
+#include "map.h"
 
 /* !!!!!!!!!!!
  * TODO:
@@ -24,31 +24,36 @@
  */
 
 
-Hexagon::Hexagon()
+Square::Square()
 {
 	floor_texture_fname = NULL;
 	up = NULL;
 	down = NULL;
-	upleft = NULL;
-	upright = NULL;
-	downleft = NULL;
-	downright = NULL;
+	left = NULL;
+	right = NULL;
+	flags = 0;
 	return;
 }
 
-Hexagon::~Hexagon()
+Square::~Square()
 {
-	if( floor_texture_name == NULL )
+	if( floor_texture_fname == NULL )
 		free( floor_texture_fname );
 	return;
 }
 
-int Hexagon::draw( SDL_Surface * screen, int x, int y )
+int Square::draw( int x, int y )
 {
-	glBegin(GL_TRIANGLES);
-	glVertexf( x + 10, y + 5, 0 );
-	
+//	glEnable(GL_TEXTURE_2D);
+	glBegin(GL_POLYGON);
+	glColor3f( 0.5, 0.5, 0.5 );
+	glVertex2i( x + 2, y + 2 );
+	glVertex2i( x - 2, y + 2 );
+	glVertex2i( x + 2, y - 2 );
+	glVertex2i( x - 2, y - 2 );
+	glNormal3i( 0, 0, 1 );
 	glEnd();
+	return(0);
 }
 
 int Map::run_test( void )
@@ -58,7 +63,7 @@ int Map::run_test( void )
 	
 	// Abre a tela
 	if ( SDL_Init(SDL_INIT_VIDEO) < 0 )
-		perror("Não foi possível iniciar SDL\n",1);
+		perror("Não foi possível iniciar SDL\n");
 	
 	atexit(SDL_Quit);
 
@@ -98,10 +103,11 @@ int Map::run_test( void )
 	glShadeModel(GL_SMOOTH);
 
 	GLfloat mat_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+
 	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 
 	/* Luz no infinito, imitando o Sol */
-	GLfloat light_position[] = { 0.0, 0.0, 100.0, 0.0 };
+	GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat lm_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
 
 	/* Define as propriedades de material */
@@ -117,7 +123,7 @@ int Map::run_test( void )
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel (GL_FLAT);
 
-	center.draw(main_screen);
+	(*center).draw(0,0);
 	
 	while ( SDL_WaitEvent(&event) >= 0 )
 	{
@@ -127,8 +133,58 @@ int Map::run_test( void )
 	return(0);
 }
 
-Map::draw( SDL_Surface * screen )
+int Map::draw( SDL_Surface * screen )
 {
-	while
+	Square * ref = center, * aux = center;
+	int x = 0, y = 0;
+
+	while( ref != NULL )
+	{
+		while( aux != NULL )
+		{
+			(*aux).draw( x, y );
+			y += 4;
+			aux = (*aux).up;
+		}
+		
+		y = 0;
+		aux = ref;
+
+		while( aux != NULL )
+		{
+			(*aux).draw( x, y );
+			y -= 4;
+			aux = (*aux).down;
+		}
+		ref = (*ref).left;
+		x -= 4; y = 0;
+	}
+	
+	ref = (*center).right;
+	x = 4; y = 0;
+	
+	while( ref != NULL )
+	{
+		while( aux != NULL )
+		{
+			(*aux).draw( x, y );
+			y += 4; 
+			aux = (*aux).up;
+		}
+		
+		y = 0;
+		aux = ref;
+
+		while( aux != NULL )
+		{
+			(*aux).draw( x, y );
+			y -= 4;
+			aux = (*aux).down;
+		}
+		ref = (*ref).right;
+		x += 4; y = 0;
+	}
+	
+	return(0);
 
 }

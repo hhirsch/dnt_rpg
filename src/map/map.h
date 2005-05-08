@@ -23,21 +23,38 @@
  * Add support for objects
  */
 
-class Hexagon
+#include <stdio.h>
+#include <stdlib.h>
+#include <GL/glu.h>
+#include <GL/gl.h>
+#include <SDL/SDL.h>
+
+/* Flag masks */
+#define PISAVEL 1
+#define OCUPADO 2
+
+class Square
 {
 
 	public:
 
-		Octagon();
-		~Octagon();
-		init( char * texture_fname );
-		draw( SDLSurface * screen, int x, int y );
-		set_position( int newX, int newY);
+		/* Functions: */
+		Square();
+		~Square();
+		int init( char * texture_fname );
+		int draw( int x, int y );
+		int set_position( int newX, int newY);
+
+		/* Vars: */
+		Square * up, * down, * right, * left;
+		int flags;
+		/* Personagem * Ocupador; */
+		/* Ojeto * Objeto; */
 
 	private:
 		char * floor_texture_fname;
-		Hexagon * up, * down, * upright, * upleft, * downright, * downleft;
-}
+		
+};
 
 class Map
 {
@@ -45,11 +62,11 @@ class Map
 	public:
 		Map();
 		~Map();
-		draw( SDL_Surface * screen );
-		run_test();
+		int draw( SDL_Surface * screen );
+		int run_test();
 
 	private:
-		Hexagon * center;
-}
+		Square * center;
+};
 
 #endif
