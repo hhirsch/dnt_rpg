@@ -33,6 +33,9 @@
 #define PISAVEL 1
 #define OCUPADO 2
 
+/* Constraints */
+#define SQUARESIZE 0.4
+
 class Square
 {
 
@@ -42,8 +45,7 @@ class Square
 		Square();
 		~Square();
 		int init( char * texture_fname );
-		int draw( int x, int y );
-		int set_position( int newX, int newY);
+		int draw( GLfloat x, GLfloat y );
 
 		/* Vars: */
 		Square * up, * down, * right, * left;
@@ -60,12 +62,19 @@ class Map
 {
 	
 	public:
+		
+		/* Functions */
+		
 		Map();
 		~Map();
-		int draw( SDL_Surface * screen );
+		int draw( );
+		int open( void );
 		int run_test();
 
+		/* Vars */
+
 	private:
+		char * name;
 		Square * center;
 };
 

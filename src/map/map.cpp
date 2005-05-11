@@ -18,12 +18,6 @@
 
 #include "map.h"
 
-/* !!!!!!!!!!!
- * TODO:
- * Hexagon::draw
- */
-
-
 Square::Square()
 {
 	floor_texture_fname = NULL;
@@ -42,16 +36,19 @@ Square::~Square()
 	return;
 }
 
-int Square::draw( int x, int y )
+int Square::draw( GLfloat x, GLfloat y )
 {
+#ifdef DEBUG_MAP
+	printf("map.cpp - Square::draw(): Drawing square in (%f,%f)\n", x, y);
+#endif
 //	glEnable(GL_TEXTURE_2D);
+	glColor3f( 0.0, 0.0, 0.0 );
 	glBegin(GL_POLYGON);
-	glColor3f( 0.5, 0.5, 0.5 );
-	glVertex2i( x + 2, y + 2 );
-	glVertex2i( x - 2, y + 2 );
-	glVertex2i( x + 2, y - 2 );
-	glVertex2i( x - 2, y - 2 );
-	glNormal3i( 0, 0, 1 );
+	glVertex3f( x + (SQUARESIZE/2), y + (SQUARESIZE/2), 0.0 );
+	glVertex3f( x - (SQUARESIZE/2), y + (SQUARESIZE/2), 0.0 );
+	glVertex3f( x - (SQUARESIZE/2), y - (SQUARESIZE/2), 0.0 );
+	glVertex3f( x + (SQUARESIZE/2), y - (SQUARESIZE/2), 0.0 );
+//	glNormal3i( 0, 0, 1 );
 	glEnd();
 	return(0);
 }
@@ -60,57 +57,63 @@ int Map::run_test( void )
 {
 	SDL_Surface * main_screen;
 	SDL_Event event;
+
+#ifdef DEBUG_MAP
+	printf("map.cpp - Map::run_test(): Starting test\n");
+#endif
 	
 	// Abre a tela
 	if ( SDL_Init(SDL_INIT_VIDEO) < 0 )
 		perror("Não foi possível iniciar SDL\n");
-	
+
 	atexit(SDL_Quit);
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5 );
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );
 
-    main_screen = SDL_SetVideoMode(800, 600, 16, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_OPENGL);
-    if ( main_screen == NULL )
-       perror("Impossível ajustar o vídeo.\n");
+	main_screen = SDL_SetVideoMode(800, 600, 16, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_OPENGL);
+	if ( main_screen == NULL )
+		perror("Impossível ajustar o vídeo.\n");
 
-    SDL_WM_SetCaption("Map test","");
+	SDL_WM_SetCaption("Map test","");
 
-    //Define quais eventos irao ser ignorados
-    SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
-    SDL_EventState(SDL_ACTIVEEVENT, SDL_IGNORE);
-    SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-    SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
-    SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
-    SDL_EventState(SDL_JOYAXISMOTION, SDL_IGNORE);
-    SDL_EventState(SDL_JOYBALLMOTION, SDL_IGNORE);
-    SDL_EventState(SDL_JOYHATMOTION, SDL_IGNORE);
-    SDL_EventState(SDL_JOYBUTTONDOWN, SDL_IGNORE);
-    SDL_EventState(SDL_JOYBUTTONUP, SDL_IGNORE);
-    SDL_EventState(SDL_QUIT, SDL_IGNORE);
-    SDL_EventState(SDL_SYSWMEVENT, SDL_IGNORE);
-    SDL_EventState(SDL_VIDEORESIZE, SDL_IGNORE);
-    SDL_EventState(SDL_VIDEOEXPOSE, SDL_IGNORE);
-    SDL_EventState(SDL_USEREVENT, SDL_IGNORE);
+	//Define quais eventos irao ser ignorados
+	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
+	SDL_EventState(SDL_ACTIVEEVENT, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
+	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
+	SDL_EventState(SDL_JOYAXISMOTION, SDL_IGNORE);
+	SDL_EventState(SDL_JOYBALLMOTION, SDL_IGNORE);
+	SDL_EventState(SDL_JOYHATMOTION, SDL_IGNORE);
+	SDL_EventState(SDL_JOYBUTTONDOWN, SDL_IGNORE);
+	SDL_EventState(SDL_JOYBUTTONUP, SDL_IGNORE);
+	SDL_EventState(SDL_QUIT, SDL_IGNORE);
+	SDL_EventState(SDL_SYSWMEVENT, SDL_IGNORE);
+	SDL_EventState(SDL_VIDEORESIZE, SDL_IGNORE);
+	SDL_EventState(SDL_VIDEOEXPOSE, SDL_IGNORE);
+	SDL_EventState(SDL_USEREVENT, SDL_IGNORE);
 
-	glClearColor (0.0, 0.0, 0.0, 0.0);
-	glClearDepth(1.0);
+	glClearColor (0.1, 0.1, 0.1, 0.0);
+	glClear(GL_COLOR_BUFFER_BIT);
+//	glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+/*	glClearDepth(1.0);
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_DEPTH_TEST);
-	glShadeModel(GL_SMOOTH);
+	glShadeModel(GL_SMOOTH);*/
 
-	GLfloat mat_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+/*	GLfloat mat_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 
 	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 
-	/* Luz no infinito, imitando o Sol */
-	GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
+	// Luz no infinito, imitando o Sol
+	GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
 	GLfloat lm_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
 
-	/* Define as propriedades de material */
+	// Define as propriedades de material
 	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glMaterialf(GL_FRONT, GL_SHININESS, 50.0);
@@ -119,72 +122,136 @@ int Map::run_test( void )
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	/* Habilita o teste de profundidade dos poligonos */
-	glEnable(GL_DEPTH_TEST);
-	glShadeModel (GL_FLAT);
 
-	(*center).draw(0,0);
+	// Habilita o teste de profundidade dos poligonos
+	glEnable(GL_DEPTH_TEST);
+	glShadeModel (GL_FLAT); */
 	
+//	glLoadIdentity();
+	//gluLookAt( 0.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 );
+	(*this).draw();
+	
+/*	glBegin(GL_POLYGON);
+	glColor3f( 255.0, 255.0, 255.0 );
+	glVertex4f( 1.0, 1.0, 0.0, 0.0 );
+	glVertex4f( -1.0, -1.0, 0.0, 0.0 );
+	glVertex4f( -1.0, 1.0, 0.0, 0.0 );
+	glVertex4f( 1.0, -1.0, 0.0, 0.0 );
+//	glNormal3i( 0, 0, 1 );
+	glEnd();*/
+
+	glFlush();
+	SDL_GL_SwapBuffers();
+	fflush(NULL);
+
+#ifdef DEBUG_MAP
+	printf("map.cpp - Map::run_test(): Going into main loop\n");
+#endif
+
 	while ( SDL_WaitEvent(&event) >= 0 )
 	{
 		if( event.type == SDL_KEYDOWN )
-			return(0);
+			switch(event.key.keysym.sym)
+			{
+				case SDLK_ESCAPE:
+					return(0);
+					break;
+				case SDLK_r:
+					glLoadIdentity();
+					(*this).draw();
+					glFlush();
+					SDL_GL_SwapBuffers();
+					fflush(NULL);
+
+					break;
+				default:
+					printf("Tecla invalida pressionada.\n");
+			}
 	}
 	return(0);
 }
 
-int Map::draw( SDL_Surface * screen )
+int Map::draw()
 {
 	Square * ref = center, * aux = center;
-	int x = 0, y = 0;
-
+	GLfloat x = 0.0, y = 0.0;
+#ifdef DEBUG_MAP
+	printf("map.cpp - Map::draw(): Drawing map %s.\n", name);
+#endif
 	while( ref != NULL )
 	{
 		while( aux != NULL )
 		{
 			(*aux).draw( x, y );
-			y += 4;
+			y += SQUARESIZE;
 			aux = (*aux).up;
 		}
-		
-		y = 0;
-		aux = ref;
+
+		y = -SQUARESIZE;
+		aux = (*ref).down;
 
 		while( aux != NULL )
 		{
 			(*aux).draw( x, y );
-			y -= 4;
+			y -= SQUARESIZE;
 			aux = (*aux).down;
 		}
 		ref = (*ref).left;
-		x -= 4; y = 0;
+		aux = ref;
+		x -= SQUARESIZE; y = 0.0;
 	}
-	
+
 	ref = (*center).right;
-	x = 4; y = 0;
-	
+	x = SQUARESIZE; y = 0.0;
+
 	while( ref != NULL )
 	{
 		while( aux != NULL )
 		{
 			(*aux).draw( x, y );
-			y += 4; 
+			y += SQUARESIZE; 
 			aux = (*aux).up;
 		}
-		
-		y = 0;
+
+		y = 0.0;
 		aux = ref;
 
 		while( aux != NULL )
 		{
 			(*aux).draw( x, y );
-			y -= 4;
+			y -= SQUARESIZE;
 			aux = (*aux).down;
 		}
 		ref = (*ref).right;
-		x += 4; y = 0;
+		aux = ref;
+		x += SQUARESIZE; y = 0.0;
 	}
-	
+
 	return(0);
 
+}
+
+/* Construidor */
+
+Map::Map()
+{
+	center = NULL;
+	name = NULL;
+}
+
+int Map::open()
+{
+	center = new(Square);
+	(*center).up = new(Square);
+	(*center).down = new(Square);
+	(*center).left = new(Square);
+	(*center).right = new(Square);
+	name = "2014";
+	return(0);
+}
+
+/* Destruidor */
+
+Map::~Map()
+{
 }
