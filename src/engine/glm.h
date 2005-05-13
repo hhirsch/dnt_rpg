@@ -68,9 +68,9 @@ typedef struct _GLMgroup {
 /* GLMtexture: Estrutura que define texturas no modelo
  */
 typedef struct _GLMtexture {
-   char* nome;
-   GLuint indice;
-   struct _GLMtexture* proximo;
+   char* nome;                   /* Nome do arquivo ed Textura Correspondente */
+   GLuint indice;                /* Indice da Textura internamente */
+   struct _GLMtexture* proximo;  /* Proxima Textura na Lista */
 }GLMtexture;
 
 /* GLMmodel: Structure that defines a model.

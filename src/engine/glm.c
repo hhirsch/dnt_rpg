@@ -478,7 +478,9 @@ int IDTextura(GLMmodel* modelo, char* textura)
    while(aux<modelo->numtexturas)
    {
       if(!strcmp(tex->nome, textura))
-         return(aux); //a textura ja esta presente 
+      {
+         return(tex->indice); //a textura ja esta presente 
+      }
       tex = tex->proximo;
       aux++;
    }
@@ -517,16 +519,17 @@ void InsereTextura(GLMmodel* modelo, char* textura)
       free(arq);
       return;
    }
+
    
    /* Transforma a textura em potencia de 2 */
    printf("%s: X:%d Y:%d\n",arq,PotenciaMaior(img->w),PotenciaMaior(img->h));
    SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        PotenciaMaior(img->w),PotenciaMaior(img->h),32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   SDL_Rect ret;
-   ret.x = 0; ret.y = 0; ret.w = img->w; ret.h = img->h;
+   //SDL_Rect ret;
+   //ret.w = 0; ret.h = 0; ret.x = img->w; ret.y = img->h;
    SDL_BlitSurface(img,NULL,imgPotencia,NULL);  
-   
+
    /* Insere realmente a textura */ 
    tex = (GLMtexture*) malloc(sizeof(GLMtexture));
    tex->proximo = NULL;
@@ -540,17 +543,16 @@ void InsereTextura(GLMmodel* modelo, char* textura)
    }
 
    tex->nome = stralloc(textura);
-   //tex->proximo = modelo->texturas;
-   //modelo->texturas = tex;
    glGenTextures(1, &(tex->indice));
    glBindTexture(GL_TEXTURE_2D, tex->indice);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
                 0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
    modelo->numtexturas++;
-   //AtualizaTela2D(imgPotencia);
-   //scanf("%d",&aux);
 
    /* Libera a memoria utilizada */
    free(arq);
@@ -726,7 +728,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
   GLfloat*  texcoords;			/* array of texture coordinates */
   GLMgroup* group;			/* current group pointer */
   GLuint    material;			/* current material */
-  int    texture;                    /* current texture */
+  int    texture;                    /* textura atual */
   GLuint    v, n, t;
   char      buf[128];
 
@@ -770,6 +772,8 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	fscanf(file, "%f %f", 
 	       &texcoords[2 * numtexcoords + X],
 	       &texcoords[2 * numtexcoords + Y]);
+        //texcoords[2 * numtexcoords + X] = 0.8*texcoords[2 * numtexcoords + X]; 
+        //texcoords[2 * numtexcoords + Y] = 0.8*texcoords[2 * numtexcoords + Y]; 
 	numtexcoords++;
 	break;
       }
@@ -813,7 +817,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	T(numtriangles).vindices[2] = v;
 	T(numtriangles).nindices[2] = n;
         T(numtriangles).material = material;
-        T(numtriangles).texture = texture;
+        //T(numtriangles).texture = texture;
 	group->triangles[group->numtriangles++] = numtriangles;
 	numtriangles++;
 	while(fscanf(file, "%d//%d", &v, &n) > 0) {
@@ -824,7 +828,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	  T(numtriangles).vindices[2] = v;
 	  T(numtriangles).nindices[2] = n;
           T(numtriangles).material = material;
-          T(numtriangles).texture = texture;
+          //T(numtriangles).texture = texture;
 	  group->triangles[group->numtriangles++] = numtriangles;
 	  numtriangles++;
 	}
@@ -895,7 +899,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	fscanf(file, "%d", &v);
 	T(numtriangles).vindices[2] = v;
         T(numtriangles).material = material;
-        T(numtriangles).texture = texture;
+        //T(numtriangles).texture = texture;
 	group->triangles[group->numtriangles++] = numtriangles;
 	numtriangles++;
 	while(fscanf(file, "%d", &v) > 0) {
@@ -903,7 +907,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	  T(numtriangles).vindices[1] = T(numtriangles-1).vindices[2];
 	  T(numtriangles).vindices[2] = v;
           T(numtriangles).material = material;
-          T(numtriangles).texture = texture;
+          //T(numtriangles).texture = texture;
 	  group->triangles[group->numtriangles++] = numtriangles;
 	  numtriangles++;
 	}
@@ -1815,7 +1819,6 @@ glmDraw(GLMmodel* model, GLuint mode)
   glPushMatrix();
   glTranslatef(model->position[0], model->position[1], model->position[2]);
 
-  glBegin(GL_TRIANGLES);
   group = model->groups;
   while (group) {
     
@@ -1829,7 +1832,9 @@ glmDraw(GLMmodel* model, GLuint mode)
       {
          glEnable(GL_TEXTURE_2D);
          glBindTexture(GL_TEXTURE_2D, T(group->triangles[i]).texture);
+       //  printf("Text: %f | %f | %f\n",model->texcoords[2*T(group->triangles[i]).tindices[0]],model->texcoords[2*T(group->triangles[i]).tindices[1]],model->texcoords[2*T(group->triangles[i]).tindices[2]]);
       }
+   glBegin(GL_TRIANGLES);
       if (mode & GLM_MATERIAL) 
       {
          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
@@ -1876,14 +1881,19 @@ glmDraw(GLMmodel* model, GLuint mode)
 	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[2]]);
       if (mode & GLM_TEXTURE)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[2]]);
-     
+//        glTexCoord2f(model->vertices[3 * T(group->triangles[i]).tindices[2]],
+  //               model->vertices[3 * T(group->triangles[i]).tindices[2]]);
+
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[2]]);
+  
+  glEnd();
 #if 0
       printf("%f %f %f\n", 
 	     model->vertices[3 * T(group->triangles[i]).vindices[2] + X],
 	     model->vertices[3 * T(group->triangles[i]).vindices[2] + Y],
 	     model->vertices[3 * T(group->triangles[i]).vindices[2] + Z]);
 #endif
+    
       if(mode & GLM_TEXTURE)
         glDisable(GL_TEXTURE_2D);
      
@@ -1891,7 +1901,7 @@ glmDraw(GLMmodel* model, GLuint mode)
     
     group = group->next;
   }
-  glEnd();
+//  glEnd();
   
 
   glPopMatrix();

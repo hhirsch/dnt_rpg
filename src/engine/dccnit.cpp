@@ -170,25 +170,25 @@ int engine::TrataES(SDL_Surface *screen)
    /* Tratamento da tecla para Movimentacao do Personagem */
    if(keys[SDLK_q]) // Anda com personagem de lado para esquerda
    {
-         PCs->personagemAtivo->posicaoLadoX -= 0.5*
+         PCs->personagemAtivo->posicaoLadoX -= 1.0*
                  cos(deg2Rad(PCs->personagemAtivo->orientacao));
-         PCs->personagemAtivo->posicaoLadoZ -= 0.5*
+         PCs->personagemAtivo->posicaoLadoZ -= 1.0*
                  sin(deg2Rad(PCs->personagemAtivo->orientacao));
       redesenha = 1;
    }
    if(keys[SDLK_w]) // Anda com personagem para frente
    {
-        PCs->personagemAtivo->posicaoLadoX -= 0.5*
+        PCs->personagemAtivo->posicaoLadoX -= 1.0*
                  sin(deg2Rad(PCs->personagemAtivo->orientacao));
-        PCs->personagemAtivo->posicaoLadoZ -= 0.5*
+        PCs->personagemAtivo->posicaoLadoZ -= 1.0*
                  cos(deg2Rad(PCs->personagemAtivo->orientacao));
         redesenha = 1;
    }
    if(keys[SDLK_e]) // Anda com personagem para esquerda
    {
-         PCs->personagemAtivo->posicaoLadoX += 0.5*
+         PCs->personagemAtivo->posicaoLadoX += 1.0*
                  cos(deg2Rad(PCs->personagemAtivo->orientacao));
-         PCs->personagemAtivo->posicaoLadoZ += 0.5*
+         PCs->personagemAtivo->posicaoLadoZ += 1.0*
                  sin(deg2Rad(PCs->personagemAtivo->orientacao));
       redesenha = 1;
    }
@@ -201,9 +201,9 @@ int engine::TrataES(SDL_Surface *screen)
    }
    if(keys[SDLK_s]) // Anda com personagem para tras
    {
-        PCs->personagemAtivo->posicaoLadoX += 0.5*
+        PCs->personagemAtivo->posicaoLadoX += 1.0*
                  sin(deg2Rad(PCs->personagemAtivo->orientacao));
-        PCs->personagemAtivo->posicaoLadoZ += 0.5*
+        PCs->personagemAtivo->posicaoLadoZ += 1.0*
                  cos(deg2Rad(PCs->personagemAtivo->orientacao));
         redesenha = 1;
    }
@@ -224,6 +224,18 @@ int engine::TrataES(SDL_Surface *screen)
               deg2Rad(PCs->personagemAtivo->orientacao));
       printf("PosicaoLadoX %f\n",PCs->personagemAtivo->posicaoLadoX);
       printf("PosicaoLadoZ %f\n",PCs->personagemAtivo->posicaoLadoZ);
+      SDL_Delay(100);
+   }
+   if(keys[SDLK_t])
+   {
+      GLuint aux = 0;
+      GLMtexture* tex = PCs->personagemAtivo->modelo3d->texturas;
+      while(aux<PCs->personagemAtivo->modelo3d->numtexturas)
+      {
+         printf("Textura: %s\n",tex->nome);
+         tex = tex->proximo;
+         aux++;
+      }
       SDL_Delay(100);
    }
    
