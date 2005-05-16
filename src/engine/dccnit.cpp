@@ -40,7 +40,7 @@ void engine::Redmensiona(SDL_Surface *screen)
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
    //glOrtho(-61.0,61.0,-61.0,61.0,0.01,100.0);
-   gluPerspective(45.0, 1.0, 1.0, 1000.0);
+   gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 1000.0);
    
    glMatrixMode (GL_MODELVIEW);
 }
@@ -292,12 +292,9 @@ void engine::Desenhar()
       for(aux=0;aux < PCs->total;aux++)
       {
          glPushMatrix();
-         glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
          /* O personagem nao movimenta no eixo Y, mas sim no Z (^) e X (>) */
-         //glTranslatef(per->posicaoLado*cos(deg2Rad(per->orientacao)), 0 ,
-         //             per->posicaoLado*sin(deg2Rad(per->orientacao)));
+         glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
          glRotatef(per->orientacao,0,1,0);
-         //glTranslatef(per->posicaoLado,0,0);
          glmDraw(per->modelo3d, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
          glPopMatrix();
          per = (personagem*) per->proximo;

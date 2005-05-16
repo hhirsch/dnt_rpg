@@ -10,7 +10,7 @@ BIN = ../../bin/
 
 
 # Comente a linha abaixo se quiser movimento transparente das janelas
-# POR ENQUANTO, MOVIMENTO TRANSPARENTE NAO FUNCIONA!!!!!
+# POR ENQUANTO, MOVIMENTO TRANSPARENTE NAO FUNCIONA!!!!! (e provavelmente, nunca funcionara!!!)
 MOVOPACO =  -DMOVIMENTO_OPACO
 
 all: objeto teste fntEditor tp2
@@ -94,4 +94,4 @@ objeto: $(OBJSPP) testaObj.o
 	$(CPP) $(EFLAGSGL) $(OBJSPP) testaObj.o -o $(BIN)testaObj
 
 clean:
-	\rm -rf *.o *.e teste $(BIN)fntEditor $(BIN)testaObj $(BIN)tp2
+	\rm -rf *.o *.e $(BIN)teste $(BIN)fntEditor $(BIN)testaObj $(BIN)tp2

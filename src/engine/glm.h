@@ -70,6 +70,7 @@ typedef struct _GLMgroup {
 typedef struct _GLMtexture {
    char* nome;                   /* Nome do arquivo ed Textura Correspondente */
    GLuint indice;                /* Indice da Textura internamente */
+   GLuint w,h;
    struct _GLMtexture* proximo;  /* Proxima Textura na Lista */
 }GLMtexture;
 

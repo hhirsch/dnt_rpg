@@ -33,6 +33,8 @@ void cor_Pegar(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi);
  * salvar -> se !=0 atualiza a tela */
 void pixel_Desenhar(SDL_Surface *screen, int x, int y, int salvar);
 
+Uint32 pixel_Pegar(SDL_Surface *surface, int x, int y);
+
 /* Abre um BMP na superficie
  * file   -> nome do arquivo do BMP
  * screen -> superficie, nao alocada, na qual sera aberto o BMP

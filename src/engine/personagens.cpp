@@ -38,7 +38,7 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
    novo->posicaoLadoZ = 0.0;
    novo->nome = nome;
    novo->retrato->InserirFigura(POSRETX,POSRETY,retrato);
-   novo-> modelo3d = glmReadOBJ(arqmodelo,dirTexturas);
+   novo-> modelo3d = glmReadOBJ(arqmodelo,dirTexturas); 
    novo->tipo = PERSONAGEM;
    InserirObj(novo);
    personagemAtivo = novo;
