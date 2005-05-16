@@ -1,3 +1,8 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
+
 #include "farso.h"
 
 void Farso_Iniciar(SDL_Surface **screen, char* titulo)

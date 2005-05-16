@@ -1,3 +1,7 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
 #include "quadtexto.h"
 
 void quadroTexto::Desenhar(int Xjan,int Yjan, int Salvar, SDL_Surface *screen)

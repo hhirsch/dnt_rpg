@@ -1,3 +1,7 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
 #ifndef _janela_h
 #define _janela_h
 

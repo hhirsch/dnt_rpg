@@ -1,3 +1,7 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
 #ifndef _mouse_h
 #define _mouse_h
 

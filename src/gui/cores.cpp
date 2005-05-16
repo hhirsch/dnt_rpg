@@ -1,3 +1,7 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
 #include "cores.h"
 
 /*Em tese seria para ler de algum arquivo de configuracao, mas deixa assim

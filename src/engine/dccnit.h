@@ -1,3 +1,8 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
+
 #ifndef _dccnit_h
 #define _dccnit_h
 

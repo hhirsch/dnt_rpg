@@ -1,3 +1,8 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
+
 #include "bartexto.h"
 
 /* Escreve o texto da barra nela mesma */

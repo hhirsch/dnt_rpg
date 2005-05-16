@@ -1,3 +1,7 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
 #include "eventos.h"
 
 int mouseX=0,mouseY=0;

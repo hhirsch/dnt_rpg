@@ -1,3 +1,7 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
 #include "seltexto.h"
 
 void selTexto::Desenhar(int Xjan,int Yjan,int selecionado,int salvar,

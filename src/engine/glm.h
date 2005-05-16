@@ -8,6 +8,8 @@
  *  and blender .obj export support by DccNiTghtmare
  *  email: dccnightmare@dcc.ufmg.br
  *  www: http://dccnitghtmare.sourceforge.net/
+ *
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
 

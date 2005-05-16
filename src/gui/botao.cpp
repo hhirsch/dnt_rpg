@@ -1,3 +1,8 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
+
 #include "botao.h"
 #include "desenho.h"
 #include "cores.h"

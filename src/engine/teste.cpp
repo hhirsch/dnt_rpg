@@ -1,3 +1,8 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
+
 #include "../gui/farso.h"
 #include "dccnit.h"
 #include <GL/gl.h>

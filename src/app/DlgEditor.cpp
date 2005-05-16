@@ -1,3 +1,7 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
 #include "../gui/farso.h"
 #include "../engine/conversa.h"
 

@@ -1,3 +1,8 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
+
 #include "dccnit.h"
 #include <math.h>
 #define LADOHEXA 16

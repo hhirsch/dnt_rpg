@@ -1,3 +1,8 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
+
 #include "desenho.h"
 #include <GL/gl.h>
 #include <GL/glu.h>

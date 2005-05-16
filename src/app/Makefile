@@ -1,3 +1,4 @@
+#  DccNiTghtmare is public domain. Do whatever you want with this code.
 CC = g++
 CFLAGS = -g -c -Wall
 EFLAGS = -Wall -L/usr/X11R6/lib -lGLU -lGL -lSDL

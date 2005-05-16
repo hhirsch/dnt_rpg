@@ -1,3 +1,8 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
+
 #include "cxsel.h"
 
 void cxSel::Desenhar(int Xjan,int Yjan,int salvar,SDL_Surface *screen)

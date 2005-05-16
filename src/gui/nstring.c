@@ -1,3 +1,8 @@
+/*
+ *  DccNiTghtmare is public domain. Do whatever you want with this code.
+ */
+
+
 #include "nstring.h"
 
 /* Deleta n caracteres em st a partir de pos */

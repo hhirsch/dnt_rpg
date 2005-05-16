@@ -1,4 +1,5 @@
-# these are the subsystems to visit
+# DccNiTghtmare is public domain. Do whatever you want with this code.
+ 
 SUBSYSTEMS = gui engine app
 
 # type 'make all' to visit and build subsystems
