@@ -1654,6 +1654,8 @@ glmDraw(GLMmodel* model, GLuint mode)
   glTranslatef(model->position[0], model->position[1], model->position[2]);
 
   group = model->groups;
+
+
   while (group) {
     
 
@@ -1661,9 +1663,11 @@ glmDraw(GLMmodel* model, GLuint mode)
       glColor3fv(model->materials[group->material].diffuse);
     }*/
 
-    glBegin(GL_TRIANGLES);  
+    glBegin(GL_TRIANGLES); 
   
     for (i = 0; i < group->numtriangles; i++) {
+ 
+      /* Habilita Nova Textura, se necessario */
       if ((mode & GLM_TEXTURE) && (T(group->triangles[i]).texture!=-1) &&
           (T(group->triangles[i]).texture!=texturaAtual) )
       {
@@ -1672,14 +1676,14 @@ glmDraw(GLMmodel* model, GLuint mode)
          glBindTexture(GL_TEXTURE_2D, T(group->triangles[i]).texture);
          texturaAtual = T(group->triangles[i]).texture;
          glBegin(GL_TRIANGLES);
-       //  printf("Text: %f | %f | %f\n",model->texcoords[2*T(group->triangles[i]).tindices[0]],model->texcoords[2*T(group->triangles[i]).tindices[1]],model->texcoords[2*T(group->triangles[i]).tindices[2]]);
       }
+      /* Desabilita Textura Existente, caso necessario */
       else if( (texturaAtual == -1) && (T(group->triangles[i]).texture==-1))
       {
          texturaAtual = -1;
          glDisable(GL_TEXTURE_2D);
       }
-//   glBegin(GL_TRIANGLES);
+      /* Define o Material */
       if (mode & GLM_MATERIAL) 
       {
          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
@@ -1691,8 +1695,10 @@ glmDraw(GLMmodel* model, GLuint mode)
          glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 
    		   model->materials[T(group->triangles[i]).material].shininess);
       }
+      /* Define a Cor */
       if (mode & GLM_COLOR) 
         glColor3fv( model->materials[T(group->triangles[i]).material].diffuse);
+      /**/
       if (mode & GLM_FLAT)
 	glNormal3fv(&model->facetnorms[3 * T(group->triangles[i]).findex]);
       
@@ -1702,12 +1708,6 @@ glmDraw(GLMmodel* model, GLuint mode)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[0]]);
       
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[0]]);
-#if 0
-      printf("%f %f %f\n", 
-	     model->vertices[3 * T(group->triangles[i]).vindices[0] + X],
-	     model->vertices[3 * T(group->triangles[i]).vindices[0] + Y],
-	     model->vertices[3 * T(group->triangles[i]).vindices[0] + Z]);
-#endif
       
       if (mode & GLM_SMOOTH)
 	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[1]]);
@@ -1715,41 +1715,21 @@ glmDraw(GLMmodel* model, GLuint mode)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[1]]);
       
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[1]]);
-#if 0
-      printf("%f %f %f\n", 
-	     model->vertices[3 * T(group->triangles[i]).vindices[1] + X],
-	     model->vertices[3 * T(group->triangles[i]).vindices[1] + Y],
-	     model->vertices[3 * T(group->triangles[i]).vindices[1] + Z]);
-#endif
       
       if (mode & GLM_SMOOTH)
 	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[2]]);
       if (mode & GLM_TEXTURE)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[2]]);
-//        glTexCoord2f(model->vertices[3 * T(group->triangles[i]).tindices[2]],
-  //               model->vertices[3 * T(group->triangles[i]).tindices[2]]);
 
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[2]]);
-  
-//  glEnd();
-#if 0
-      printf("%f %f %f\n", 
-	     model->vertices[3 * T(group->triangles[i]).vindices[2] + X],
-	     model->vertices[3 * T(group->triangles[i]).vindices[2] + Y],
-	     model->vertices[3 * T(group->triangles[i]).vindices[2] + Z]);
-#endif
-    
-      /*if(mode & GLM_TEXTURE)
-        glDisable(GL_TEXTURE_2D);*/
-     
+
     }
     glEnd();
     
     group = group->next;
   }
-//  glEnd();
-  
-
+  if (texturaAtual != -1)
+     glDisable(GL_TEXTURE_2D);
   glPopMatrix();
 }
 

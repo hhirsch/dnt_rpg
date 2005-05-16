@@ -176,9 +176,9 @@ int engine::TrataES(SDL_Surface *screen)
    if(keys[SDLK_q]) // Anda com personagem de lado para esquerda
    {
          PCs->personagemAtivo->posicaoLadoX -= 1.0*
-                 cos(deg2Rad(PCs->personagemAtivo->orientacao));
+                 sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
          PCs->personagemAtivo->posicaoLadoZ -= 1.0*
-                 sin(deg2Rad(PCs->personagemAtivo->orientacao));
+                 cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
       redesenha = 1;
    }
    if(keys[SDLK_w]) // Anda com personagem para frente
@@ -192,9 +192,9 @@ int engine::TrataES(SDL_Surface *screen)
    if(keys[SDLK_e]) // Anda com personagem para esquerda
    {
          PCs->personagemAtivo->posicaoLadoX += 1.0*
-                 cos(deg2Rad(PCs->personagemAtivo->orientacao));
+                 sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
          PCs->personagemAtivo->posicaoLadoZ += 1.0*
-                 sin(deg2Rad(PCs->personagemAtivo->orientacao));
+                 cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
       redesenha = 1;
    }
    if(keys[SDLK_a]) // Gira personagem antihorariamente 
@@ -220,6 +220,22 @@ int engine::TrataES(SDL_Surface *screen)
 
       redesenha = 1;
    }
+   if(keys[SDLK_TAB]) //troca de personagem ativo
+   {
+      if(keys[SDLK_LCTRL]) //para tras
+      {
+         PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->anterior;
+         if(PCs->personagemAtivo == PCs->primeiro)
+            PCs->personagemAtivo = (personagem*)PCs->primeiro->anterior;
+      }
+      else //para frente
+      {
+         PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->proximo;
+         if(PCs->personagemAtivo == PCs->primeiro)
+            PCs->personagemAtivo = (personagem*)PCs->primeiro->proximo;
+      }
+      SDL_Delay(100);
+   }
    if(keys[SDLK_i])
    {
       printf("Orientacao %f°\t sen %f\tcos %f\trad %f\n",
@@ -243,7 +259,7 @@ int engine::TrataES(SDL_Surface *screen)
       }
       SDL_Delay(100);
    }
-   
+      
 
    /* Tratamento do Mouse */
    int x,y;
