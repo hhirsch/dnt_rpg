@@ -540,6 +540,7 @@ void InsereTextura(GLMmodel* modelo, char* textura)
    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   //glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST );
    //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
    modelo->numtexturas++;
 
@@ -1603,6 +1604,7 @@ glmDraw(GLMmodel* model, GLuint mode)
 {
   GLuint i;
   GLMgroup* group;
+  int texturaAtual = -1;
 
   assert(model);
   assert(model->vertices);
@@ -1659,14 +1661,25 @@ glmDraw(GLMmodel* model, GLuint mode)
       glColor3fv(model->materials[group->material].diffuse);
     }*/
 
+    glBegin(GL_TRIANGLES);  
+  
     for (i = 0; i < group->numtriangles; i++) {
-      if ((mode & GLM_TEXTURE) && (T(group->triangles[i]).texture!=-1) )
+      if ((mode & GLM_TEXTURE) && (T(group->triangles[i]).texture!=-1) &&
+          (T(group->triangles[i]).texture!=texturaAtual) )
       {
+         glEnd();
          glEnable(GL_TEXTURE_2D);
          glBindTexture(GL_TEXTURE_2D, T(group->triangles[i]).texture);
+         texturaAtual = T(group->triangles[i]).texture;
+         glBegin(GL_TRIANGLES);
        //  printf("Text: %f | %f | %f\n",model->texcoords[2*T(group->triangles[i]).tindices[0]],model->texcoords[2*T(group->triangles[i]).tindices[1]],model->texcoords[2*T(group->triangles[i]).tindices[2]]);
       }
-   glBegin(GL_TRIANGLES);
+      else if( (texturaAtual == -1) && (T(group->triangles[i]).texture==-1))
+      {
+         texturaAtual = -1;
+         glDisable(GL_TEXTURE_2D);
+      }
+//   glBegin(GL_TRIANGLES);
       if (mode & GLM_MATERIAL) 
       {
          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
@@ -1718,7 +1731,7 @@ glmDraw(GLMmodel* model, GLuint mode)
 
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[2]]);
   
-  glEnd();
+//  glEnd();
 #if 0
       printf("%f %f %f\n", 
 	     model->vertices[3 * T(group->triangles[i]).vindices[2] + X],
@@ -1726,10 +1739,11 @@ glmDraw(GLMmodel* model, GLuint mode)
 	     model->vertices[3 * T(group->triangles[i]).vindices[2] + Z]);
 #endif
     
-      if(mode & GLM_TEXTURE)
-        glDisable(GL_TEXTURE_2D);
+      /*if(mode & GLM_TEXTURE)
+        glDisable(GL_TEXTURE_2D);*/
      
     }
+    glEnd();
     
     group = group->next;
   }
