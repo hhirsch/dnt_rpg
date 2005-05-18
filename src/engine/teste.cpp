@@ -25,13 +25,16 @@ int main()
                  "Rainha","../data/models/queen.obj","../../PICS/Logan/");
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
                  "Homer","../data/models/logan_completo_final.obj","../../PICS/Logan/");
-//   Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
-//                 "BMW","/home/farrer/TP/TP1.obj","/home/farrer/TP/tp1_TX/");
+   Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
+                 "Castelo","../data/models/castelo.obj","../../PICS/Logan");
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
                  "Logan","../data/models/BMWZ4J.obj","../../PICS/Logan/");
 
-//   Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
-//                 "Logan","../data/models/lightPole.obj","../../PICS/Logan/");
+   Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
+                 "Logan","../data/models/computador.obj","../../PICS/Logan/");
+
+   Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
+                 "Logan","../data/models/mesa_redonda.obj","../../PICS/Logan/");
 
    Engine->Rodar(screen);
  

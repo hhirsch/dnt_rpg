@@ -5,6 +5,7 @@
 
 #include "dccnit.h"
 #include <math.h>
+
 #define LADOHEXA 16
 #define DELAY 0
 
@@ -282,8 +283,11 @@ int engine::TrataES(SDL_Surface *screen)
 
    if(redesenha)
    {
+      Uint32 antes = SDL_GetTicks();
       Desenhar();
       SDL_GL_SwapBuffers();
+      antes = SDL_GetTicks() - antes;
+      printf("FPS: %f\t",1000.0 / (float)antes);
       SDL_Delay(DELAY);
    }
    return(1);
