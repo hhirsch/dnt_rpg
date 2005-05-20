@@ -11,11 +11,10 @@
 #include "../gui/objeto.h"
 #include "../gui/lista.h"
 //#include "habilidades.h"
-#include "glm.h"
+#include "../etc/glm.h"
 
 #define POSRETX 8   // posicao x do retrato na janela
 #define POSRETY 20  // posicao y do retrato na janela
-#define PERSONAGEM 100 //valor interno do tipo personagem
 
 class personagem: public Tobjeto
 {

@@ -1,6 +1,6 @@
 # DccNiTghtmare is public domain. Do whatever you want with this code.
  
-SUBSYSTEMS = gui map engine app
+SUBSYSTEMS = gui etc map engine app
 
 # type 'make all' to visit and build subsystems
 all: buildparts

@@ -7,7 +7,7 @@ PROGFLAGS =
 ENDGUI = ../gui/
 ENDENGINE = ../engine/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
-OBJS = conversa.o dccnit.o glm.o personagens.o teste.o
+OBJS = conversa.o dccnit.o ../etc/glm.o personagens.o teste.o
 BIN = ../../bin/
 
 all: teste
@@ -17,9 +17,6 @@ conversa.o: conversa.cpp conversa.h
 
 dccnit.o: dccnit.h dccnit.cpp
 	$(CC) $(CFLAGS) dccnit.cpp -o dccnit.o
-
-glm.o: glm.h glm.c
-	$(CC) $(CFLAGS) glm.c -o glm.o
 
 personagens.o: personagens.cpp personagens.h
 	$(CC) $(CFLAGS) personagens.cpp -o personagens.o

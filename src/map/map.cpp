@@ -3,6 +3,10 @@
 
 #include "map.h"
 
+
+/********************************************************************
+ *                      Construtor do Quadrado                      *
+ ********************************************************************/
 Square::Square()
 {
 	floor_texture_fname = NULL;
@@ -14,6 +18,9 @@ Square::Square()
 	return;
 }
 
+/********************************************************************
+ *                       Destruidor do Quadrado                     *
+ ********************************************************************/
 Square::~Square()
 {
 	if( floor_texture_fname == NULL )
@@ -21,6 +28,71 @@ Square::~Square()
 	return;
 }
 
+/********************************************************************
+ *                      Retorna o indice da Textura                 *
+ ********************************************************************/
+int IDTextura(Map* mapa, char* textura)
+{
+   /* procura pela textura */
+   int aux=0;
+   GLMtexture* tex = mapa->Texturas;
+   while(aux<mapa->numtexturas)
+   {
+      if(!strcmp(tex->nome, textura))
+      {
+         return(tex->indice); //a textura ja esta presente 
+      }
+      tex = tex->proximo;
+      aux++;
+   }
+   return(-1);
+}
+
+/********************************************************************
+ *         Insere a textura dentre as utilizadas pelo objeto        *
+ ********************************************************************/
+void InserirTextura(Map* mapa, char* arq, char* nome)
+{
+   GLMtexture* tex;
+
+   SDL_Surface* img = IMG_Load(arq);
+   if(!img)
+   {
+      printf("Erro ao abrir textura: %s\n",arq);
+      free(arq);
+      return;
+   }
+
+   /* Insere realmente a textura */ 
+   tex = (GLMtexture*) malloc(sizeof(GLMtexture));
+   if(mapa->numtexturas == 0)
+   {
+      mapa->Texturas = tex;
+      tex->proximo = NULL;
+   }
+   else
+   {
+      tex->proximo = mapa->Texturas;
+      mapa->Texturas = tex;
+   }
+
+   tex->nome = nome;
+
+   glGenTextures(1, &(tex->indice));
+   glBindTexture(GL_TEXTURE_2D, tex->indice);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   mapa->numtexturas++;
+
+   /* Libera a memoria utilizada */
+   SDL_FreeSurface(img);
+}
+
+/********************************************************************
+ *                       Desenha o Quadrado                         *
+ ********************************************************************/
 int Square::draw( GLfloat x, GLfloat z )
 {
 #ifdef DEBUG_MAP
@@ -38,9 +110,12 @@ int Square::draw( GLfloat x, GLfloat z )
 	return(0);
 }
 
+/********************************************************************
+ *                           Desenha o Mapa                         *
+ ********************************************************************/
 int Map::draw()
 {
-	Square * ref = first;
+	//Square * ref = first;
         Square * aux = first;
 	GLfloat x = 0.0, y = 0.0;
 #ifdef DEBUG_MAP
@@ -49,16 +124,16 @@ int Map::draw()
 	while( aux != NULL )
 	{
            (*aux).draw(x,y);
-           aux = aux->right;
-           if(aux == NULL)   //chegou ao fim da linha
+           if(aux->right == NULL)   //chegou ao fim da linha
            {
-              aux = ref->down;
-              ref = ref->down;
+              aux = aux->down;
+              //ref = ref->down;
               y += SQUARESIZE;
               x = 0.0;
            } 
            else      //senao continua na linha
            {
+              aux = aux->right;
               x += SQUARESIZE;
            } 
         }
@@ -66,27 +141,143 @@ int Map::draw()
 
 }
 
-/* Construidor */
-
+/********************************************************************
+ *                     Construtor dos Mapas                         *
+ ********************************************************************/
 Map::Map()
 {
+	numtexturas = 0;
 	first = NULL;
 	name = NULL;
 }
 
+
+/********************************************************************
+ *                       Abre o Arquivo de Mapas                    *
+ ********************************************************************/
 int Map::open(char* arquivo)
 {
-	/*first = new(Square);
-	(*center).up = new(Square);
-	(*center).down = new(Square);
-	(*center).left = new(Square);
-	(*center).right = new(Square);
-	name = "2014";*/
+   FILE* arq;        // arquivo utilizado para o mapa
+   char buffer[128]; // buffer utilziado para ler
+   char nomeArq[128], nome[128];
+   Square* aux;
+   Square* ant, *primLinha;
+   int posX,posZ;    //posicao atual do quadrado anterior relativo
+   
+   if(!(arq = fopen(arquivo,"r")))
+   {
+      printf("Erro ao se tentar abrir mapa: %s\n",arquivo);
 	return(0);
+   }
+
+   /* Define o nome do mapa */
+   name = arquivo;
+
+   /* Faz a leitura do tamanho do mapa */   
+   fscanf(arq, "%s", buffer);
+   if(buffer[0] == 'T')
+   {
+      fgets(buffer, sizeof(buffer), arq); // lê até o final da linha 
+      sscanf(buffer,"%dX%d",&x,&z); // lê as dimensoes
+   }
+   else
+   {
+      printf("Não foi definido o tamanho do mapa %s\n", arquivo); 
+      printf(" Encontramos isso %s, ao invés de T iXi\n",buffer);
+      fclose(arq);
+      return(0);
+   }
+
+    /* Inicia Estruturas */
+   Objetos = new(LmapObjeto);
+   Texturas = NULL;
+
+   posX = x;
+   posZ = 0;
+
+   /* Vamos ler todo o arquivo */
+   while(fscanf(arq, "%s", buffer) != EOF)
+   {
+      switch(buffer[0])
+      {
+         case 'o': /* Insere Objetos no Mapa */
+         {
+             fgets(buffer, sizeof(buffer), arq); //até final da linha
+             sscanf(buffer, "%s %s",nomeArq,nome);
+             Objetos->InserirMapObjeto(nomeArq,nome);
+             break;
+         }
+         case 't': /* Insere Texturas no Mapa */
+         {
+            fgets(buffer, sizeof(buffer), arq); //até final da linha
+            sscanf(buffer, "%s %s",nome,nomeArq);  
+            InserirTextura(this,nomeArq, nome);
+            break;
+         }
+         case 'p': /* Inserção de um novo quadrado */
+         {
+            ant = aux;
+            aux = new(Square);
+            if(first == NULL)
+               first = aux;
+            if(posX == x) //fim da linha de quadrados
+            { 
+                aux->up = primLinha;
+                if(primLinha != NULL)
+                  primLinha->down = aux;
+                primLinha = aux;
+                posX = 1;
+                posZ++;
+            }
+            else  //continua na mesma linha
+            {
+               ant->right = aux;
+               aux->left = ant;
+               if(ant->up == NULL)
+                  aux->up = NULL;
+               else
+               {
+                  aux->up = ant->up->right;
+                  aux->up->down = aux;
+               }
+               posX++;
+            }
+            break;
+         }
+         case 'u':/* Utilização de Algo existente */
+         {
+            switch(buffer[1])
+            {
+               case 't': /* Define a Textura do Quadrado */
+               {
+                  break;
+               }
+               case 'o': /* Insere Objeto no Quadrado */
+               {
+                  break;
+               }
+               default:
+                       printf("Que merda eh essa: %s em %s\n",buffer,arquivo);
+                       break;
+            }
+            break; 
+         }
+         default:
+                 printf("Que merda eh essa: %s em %s\n",buffer,arquivo);
+                 break;
+      }
+   }
+   fclose(arq);
+   return(1);
 }
 
-/* Destruidor */
-
+/********************************************************************
+ *                       Destruidor do Mapa                         *
+ ********************************************************************/
 Map::~Map()
 {
+   
+   delete(Objetos);
+   //(Texturas);
 }
+

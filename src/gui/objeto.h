@@ -13,6 +13,8 @@
 #define SELTEXTO      5
 #define QUADROTEXTO   6
 #define MENUITEM      7
+#define MAPOBJETO     99
+#define PERSONAGEM    100 
 
 
 class Tobjeto{

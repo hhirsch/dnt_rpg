@@ -32,6 +32,7 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
    novo->objetos = new(Tlista);
    novo->x = x;
    novo->y = y;
+   novo->tipo = PERSONAGEM;
    novo->forca        = forca;
    novo->agilidade    = agilidade;
    novo->inteligencia = inteligencia;
