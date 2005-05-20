@@ -3,6 +3,7 @@ CPP = g++
 CFLAGS = -g -Wall -c -DDEBUG_MAP
 CLIBSDIR = -L/usr/X11/lib
 CLIBS = -lGLU -lGL -lSDL -lSDL_image
+BINDIR = ../../bin/
 
 all: teste
 
@@ -11,10 +12,10 @@ map.o: map.cpp map.h
 
 teste: map.o
 	$(CPP) $(CFLAGS) teste.c -o teste.o
-	$(CPP) $(CLIBSDIR) $(CLIBS) -g -Wall teste.o map.o -o teste
+	$(CPP) $(CLIBSDIR) $(CLIBS) -g -Wall teste.o map.o -o $(BINDIR)testeMapa
 
 run: teste
-	./teste
+	$(BINDIR)testeMapa
 
 clean: 
-	\rm -Rf ./*.o ./teste 
+	\rm -Rf ./*.o $(BINDIR)testeMapa 

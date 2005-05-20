@@ -1,23 +1,48 @@
+ DccNiTghmare é um programa de domínio público, faça o que bem
+entender de seu código e dados e, o mais  importante, divirta-
+se quanto  quanto nós  estamos nos divertindo desenvolvendo-o.
+
 ==============================================================
-                          DccNiTghtmare                      |
+|                         DccNiTghtmare                      |
 ==============================================================
 I) Pré Requisitos
 II) Instalação
 III) Execução
+IV) Contatos
 
 ==============================================================
 |                      I - Pré-Requisitos                    |
 ==============================================================
-   A compilação e a execução do DccNiTghtmare pressupõe
-a existência de alguns quesitos de software e outros de
+   A compilação e  a execução  do  DccNiTghtmare  pressupõe  a 
+existência   de  alguns  quesitos  de  software  e  outros  de 
 hardware. São eles:
 
    Software:
-   OpenGL   - Já instalado no Linux Padrão (X)
+   OpenGL   - Já instalado no Linux Padrão (X.org)
    SDL      - Versão 1.2.7, www.libsdl.org
    SDLImage - Versão 1.2.4, www.libsdl.org/projects/SDL_image/
 
    Hardware:
-     Placa de Vídeo com aceleração 3D compatível com OpenGl no
+   Placa de Vídeo com aceleração 3D compatível  com  OpenGl no
    linux, através de módulos acelerados.
 
+==============================================================
+|                      II - Instalação                       |
+==============================================================
+
+==============================================================
+|                       III - Execução                       |
+==============================================================
+
+==============================================================
+|                       IV - Contatos                        |
+==============================================================
+
+  Mensagens podem ser enviadas para dccnightmare@dcc.ufmg.br
+  Edite nosso wiki em 
+      http://dccnitghtmare.sourceforge.net/cgi-bin/wiki.cgi
+  Ou (não XOR) entre na página do projeto no sourceforge:
+      http://www.sourceforge.net/projects/dccnitghtmare
+
+
+DccNiTghtmare.
