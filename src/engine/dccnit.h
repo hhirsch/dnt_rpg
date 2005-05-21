@@ -7,7 +7,7 @@
 #define _dccnit_h
 
 #include "../gui/farso.h"
-//#include "../map/map.h"
+#include "../map/map.h"
 #include "personagens.h"
 #include "luta.h"
 
@@ -17,7 +17,7 @@ class engine
  
       /* Construtor da Engine
        * map -> ponteiro para o mapa utilizado pela engine */
-      engine(/*Tmapa* map*/);
+      engine(char* arqMapa);
       /* Destruidor da engine */
       ~engine();
  
@@ -56,6 +56,8 @@ class engine
       int  TrataES(SDL_Surface *screen);
 
  
+      Map* mapa; /* Mapa Utilizado pela Engine */
+
 };
 
 #endif

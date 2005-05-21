@@ -15,15 +15,16 @@
  *********************************************************************/
 int main()
 {
-   engine* Engine = new(engine);
+  
    SDL_Surface *screen;
    Farso_Iniciar(&screen,"Teste Engine DccNiTghtmare");
+   engine* Engine = new engine("arquivo.map");
    Engine->Iniciar(screen);
 // int aux;
 // for(aux = 0;aux<10;aux++)
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
-                 "Rainha","../data/models/queen.obj","../../PICS/Logan/");
-   Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
+                 "Rainha","../data/models/personagens/logan_completo_final.obj","../../PICS/Logan/");
+   /*Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
                  "Homer","../data/models/logan_completo_final.obj","../../PICS/Logan/");
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
                  "Castelo","../data/models/castelo.obj","../../PICS/Logan");
@@ -34,7 +35,7 @@ int main()
                  "Logan","../data/models/computador.obj","../../PICS/Logan/");
 
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
-                 "Logan","../data/models/mesa_redonda.obj","../../PICS/Logan/");
+                 "Logan","../data/models/mesa_redonda.obj","../../PICS/Logan/");*/
 
    Engine->Rodar(screen);
  

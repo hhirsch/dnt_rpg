@@ -1,7 +1,6 @@
 #ifndef _mapobjeto_h
 #define _mapobjeto_h
 
-#include "../etc/glm.h"
 #include "../gui/objeto.h"
 #include "../gui/lista.h"
 
@@ -18,9 +17,9 @@ class mapObjeto: public Tobjeto
       * distancia -> distancia do objeto ao observador*/
      void Desenhar(int x, int z,int distancia);
 
-     GLMmodel* modelo3d;     // Modelo com nível máximo de detalhe
-     GLMmodel* modeloMedio;  // Modelo com nível médio de detalhe
-     GLMmodel* modeloMinimo; // Modelo com nível mínimo de detalhe
+     void* modelo3d;     // Modelo com nível máximo de detalhe
+     void* modeloMedio;  // Modelo com nível médio de detalhe
+     void* modeloMinimo; // Modelo com nível mínimo de detalhe
 };  // OBJETO DO MAPA
 
 class LmapObjeto: public Tlista
@@ -34,6 +33,8 @@ class LmapObjeto: public Tlista
        /* Insere um objeto de mapa
         * arquivo -> nome do arquivo de definição do objeto*/
        mapObjeto* InserirMapObjeto(char* arquivo, char* nome);
+
+       mapObjeto* EndMapObjeto(char* nome);
 
        /* Retira um Objeto de Mapa da Lista
         * obj         -> ponteiro para o personagem que se deseja retirar

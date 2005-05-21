@@ -11,12 +11,6 @@
  * Add support for objects
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <GL/glu.h>
-#include <GL/gl.h>
-#include <SDL/SDL.h>
 #include "mapobjeto.h"
 //#include "../engine/glm.h" 
 
@@ -27,6 +21,7 @@
 
 /* Constraints */
 #define SQUARESIZE 0.4
+#define MAXOBJETOS 5
 
 class Square
 {
@@ -41,14 +36,23 @@ class Square
 
 		/* Vars: */
 		Square * up, * down, * right, * left;
-		int flags;
-		/* Personagem * Ocupador; */
-		
+                int flags;
+                GLuint textura;
+		Tobjeto* PersonagemOcupador;
+		mapObjeto *objetos[MAXOBJETOS];
+                int objetosDesenha[MAXOBJETOS];
 
 	private:
 		char * floor_texture_fname;
 		
 };
+
+typedef struct _texture {
+   char* nome;                   /* Nome do arquivo ed Textura Correspondente */
+   GLuint indice;                /* Indice da Textura internamente */
+   GLuint w,h;
+   struct _texture* proximo;  /* Proxima Textura na Lista */
+}texture;
 
 class Map
 {
@@ -65,12 +69,12 @@ class Map
 		/* Vars */
                 LmapObjeto* Objetos; 
                 int numtexturas;
-                GLMtexture* Texturas;
+                texture* Texturas;
 
 	private:
-		char * name;       /* Nome do Arquivo de Mapa Carregado */
-		Square * first;    /* Quadrado localizado no canto superior */
-		int x,z;           /* Dimensões do mapa */
+		char* name;    /* Nome do Arquivo de Mapa Carregado */
+		Square* first; /*Quadrado localizado no canto superior*/
+		int x,z;       /* Dimensões do mapa */
 };
 
 #endif

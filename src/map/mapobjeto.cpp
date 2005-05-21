@@ -1,17 +1,18 @@
 #include "mapobjeto.h"
+#include "../etc/glm.h"
 
 /*********************************************************************
  *                   Desenha o objeto de Mapa                        *
  *********************************************************************/
 void mapObjeto::Desenhar(int x, int z, int distancia)
 {
-   GLMmodel* modelo = modelo3d; //modelo a ser desenhado
+   GLMmodel* modelo = (GLMmodel*) modelo3d; //modelo a ser desenhado
  
    /* Define qual modelo desenhar */
    if(distancia<2*deltaVariacao)
-      modelo = modeloMedio;
+      modelo = (GLMmodel*) modeloMedio;
    else 
-      modelo = modeloMinimo;
+      modelo = (GLMmodel*) modeloMinimo;
 
    glmDraw(modelo, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
 }
@@ -47,7 +48,8 @@ mapObjeto* LmapObjeto::InserirMapObjeto(char* arquivo, char* nome)
  
    novo = new(mapObjeto);
    novo->tipo = MAPOBJETO;
-   novo->nome = nome;
+   novo->nome = (char*)malloc((strlen(nome)+1)*sizeof(char));
+   strcpy(novo->nome,nome);
 
    /* Le a variacao entre Modelos */
    fscanf(arq,"%d",&novo->deltaVariacao);
@@ -71,6 +73,7 @@ mapObjeto* LmapObjeto::InserirMapObjeto(char* arquivo, char* nome)
    }
 
    fclose(arq);
+   InserirObj(novo);
    return(novo);
 }
 
@@ -79,13 +82,30 @@ mapObjeto* LmapObjeto::InserirMapObjeto(char* arquivo, char* nome)
  *********************************************************************/
 void LmapObjeto::RetirarMapObjeto(mapObjeto* obj, int tiraMemoria)
 {
-   glmDelete(obj->modelo3d);
+   free(obj->nome);
+   glmDelete((GLMmodel*)obj->modelo3d);
    if(obj->modeloMedio)
-     glmDelete(obj->modeloMedio);
+     glmDelete((GLMmodel*)obj->modeloMedio);
    if(obj->modeloMinimo)
-     glmDelete(obj->modeloMinimo);
+     glmDelete((GLMmodel*)obj->modeloMinimo);
    if(tiraMemoria)
      Retirar(obj);
+}
+
+/*********************************************************************
+ *                 Retorna Objeto de nome nome                       *
+ *********************************************************************/
+mapObjeto* LmapObjeto::EndMapObjeto(char* nome)
+{
+   int aux;
+   mapObjeto* obj = (mapObjeto*) primeiro;
+   for(aux=0;aux<total;aux++)
+   {
+      if(!strcmp(obj->nome,nome))
+         return(obj);
+      obj = (mapObjeto*) obj->proximo;
+   }
+   return(NULL);
 }
 
 

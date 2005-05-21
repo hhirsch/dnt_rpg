@@ -2,6 +2,14 @@
  */
 
 #include "map.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <GL/glu.h>
+#include <GL/gl.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+
 
 
 /********************************************************************
@@ -35,7 +43,7 @@ int IDTextura(Map* mapa, char* textura)
 {
    /* procura pela textura */
    int aux=0;
-   GLMtexture* tex = mapa->Texturas;
+   texture* tex = mapa->Texturas;
    while(aux<mapa->numtexturas)
    {
       if(!strcmp(tex->nome, textura))
@@ -53,7 +61,7 @@ int IDTextura(Map* mapa, char* textura)
  ********************************************************************/
 void InserirTextura(Map* mapa, char* arq, char* nome)
 {
-   GLMtexture* tex;
+   texture* tex;
 
    SDL_Surface* img = IMG_Load(arq);
    if(!img)
@@ -64,7 +72,7 @@ void InserirTextura(Map* mapa, char* arq, char* nome)
    }
 
    /* Insere realmente a textura */ 
-   tex = (GLMtexture*) malloc(sizeof(GLMtexture));
+   tex = (texture*) malloc(sizeof(texture));
    if(mapa->numtexturas == 0)
    {
       mapa->Texturas = tex;
@@ -76,7 +84,8 @@ void InserirTextura(Map* mapa, char* arq, char* nome)
       mapa->Texturas = tex;
    }
 
-   tex->nome = nome;
+   tex->nome = (char*) malloc((strlen(nome)+1)*sizeof(char));
+   strcpy(tex->nome,nome);
 
    glGenTextures(1, &(tex->indice));
    glBindTexture(GL_TEXTURE_2D, tex->indice);
@@ -151,7 +160,6 @@ Map::Map()
 	name = NULL;
 }
 
-
 /********************************************************************
  *                       Abre o Arquivo de Mapas                    *
  ********************************************************************/
@@ -161,8 +169,12 @@ int Map::open(char* arquivo)
    char buffer[128]; // buffer utilziado para ler
    char nomeArq[128], nome[128];
    Square* aux;
-   Square* ant, *primLinha;
+   Square* ant = NULL, *primLinha=NULL;
    int posX,posZ;    //posicao atual do quadrado anterior relativo
+   int IDtexturaAtual = -1;
+   char* nomeTexturaAtual = "nada\0";
+   int numObjetosAtual;
+   int pisavel=0;
    
    if(!(arq = fopen(arquivo,"r")))
    {
@@ -203,7 +215,7 @@ int Map::open(char* arquivo)
          case 'o': /* Insere Objetos no Mapa */
          {
              fgets(buffer, sizeof(buffer), arq); //até final da linha
-             sscanf(buffer, "%s %s",nomeArq,nome);
+             sscanf(buffer, "%s %s",nome,nomeArq);
              Objetos->InserirMapObjeto(nomeArq,nome);
              break;
          }
@@ -218,6 +230,7 @@ int Map::open(char* arquivo)
          {
             ant = aux;
             aux = new(Square);
+            numObjetosAtual = 0;
             if(first == NULL)
                first = aux;
             if(posX == x) //fim da linha de quadrados
@@ -242,6 +255,9 @@ int Map::open(char* arquivo)
                }
                posX++;
             }
+            fgets(buffer, sizeof(buffer), arq); //até final da linha
+            sscanf(buffer, "%d",&pisavel);
+            if(pisavel) aux->flags |= PISAVEL;
             break;
          }
          case 'u':/* Utilização de Algo existente */
@@ -250,10 +266,30 @@ int Map::open(char* arquivo)
             {
                case 't': /* Define a Textura do Quadrado */
                {
+                  fgets(buffer, sizeof(buffer), arq);
+                  sscanf(buffer,"%s",nome);
+                  if(strcmp(nomeArq,nomeTexturaAtual))
+                  /* Se sao Diferentes, tem de ser mudadas */
+                  {
+                     nomeTexturaAtual = nome;
+                     IDtexturaAtual = IDTextura(this,nome);
+                  }
+                  aux->textura = IDtexturaAtual;
                   break;
                }
                case 'o': /* Insere Objeto no Quadrado */
                {
+                  if(numObjetosAtual >= MAXOBJETOS)
+                  {
+                     printf("Estourado Limite de objetos por Quadrado\n");
+                  }
+                  else
+                  {
+                     fgets(buffer, sizeof(buffer), arq);
+                     sscanf(buffer,"%s %d",nome,
+                                      &aux->objetosDesenha[numObjetosAtual]);
+                     aux->objetos[numObjetosAtual] = Objetos->EndMapObjeto(nome);
+                  }
                   break;
                }
                default:
@@ -276,8 +312,37 @@ int Map::open(char* arquivo)
  ********************************************************************/
 Map::~Map()
 {
+   /* Acabando com as texturas */
+   texture* tex = Texturas;
+   texture* au;
+   int i;
+   for(i=0;i<numtexturas;i++)
+   {
+      au = tex;
+      tex = tex->proximo;
+      free(au->nome);
+      glDeleteTextures(1,&(au->indice));
+      free(au);
+   }
    
+   /* Acabando com os objetos */
    delete(Objetos);
-   //(Texturas);
+
+   /* Acabando com os Quadrados */
+   Square* baixo, *direita;
+   baixo = first;
+   while(baixo != NULL)
+   {
+      first = baixo;
+      baixo = first->down;
+      direita = first->right;
+      while(direita != NULL)
+      {
+         delete(first);
+         first = direita; 
+         direita = direita->right;
+      }
+   }
+   
 }
 

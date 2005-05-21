@@ -1,18 +1,20 @@
  DccNiTghmare é um programa de domínio público, faça o que bem
 entender de seu código e dados e, o mais  importante, divirta-
-se quanto  quanto nós  estamos nos divertindo desenvolvendo-o.
+se tanto  quanto  nós  estamos nos divertindo desenvolvendo-o.
 
 ==============================================================
 |                         DccNiTghtmare                      |
 ==============================================================
-I) Pré Requisitos
-II) Instalação
-III) Execução
-IV) Contatos
+
+I   - Pré Requisitos
+II  - Instalação
+III - Execução
+IV  - Contatos
 
 ==============================================================
 |                      I - Pré-Requisitos                    |
 ==============================================================
+
    A compilação e  a execução  do  DccNiTghtmare  pressupõe  a 
 existência   de  alguns  quesitos  de  software  e  outros  de 
 hardware. São eles:
@@ -30,19 +32,64 @@ hardware. São eles:
 |                      II - Instalação                       |
 ==============================================================
 
+   Para  se "instalar"  dccnitghtmare,  basta  descompactar  o 
+tar.bz2 disponível,  adentrar-se no  diretório dccnitghtmare e
+rodar o comando "make".
+   Exemplo:
+   farrer@anamabeka:~/$ tar -xvjf dccnitghtmare.tar.bz2
+   farrer@anamabeka:~/$ cd dccnitghtmare
+   farrer@anamabeka:~/dccnitghtmare/$ make
+
 ==============================================================
 |                       III - Execução                       |
 ==============================================================
+
+   Para se executar o tp4, vá para a pasta ./bin  e  execute o
+arquivo dccnitghtmare . É necessário estar no modo X do linux.
+Prontamente  o  jogo  deverá  abrir,  sendo  a sua interação - 
+navegação a seguinte:
+
+                  Movimentação da Camera
+
+mouse canto esquerdo  =  gira para esquerda a camera  (0-360°)
+seta para esquerda    =  gira para esquerda a camera  (0-360°)
+mouse canto direito   =  gira para direita a camera   (0-360°)
+seta para direita     =  gira para direita a camera   (0-360°)
+seta para cima        =  aumenta o zoom da camera     (X-Ym)
+seta para baixo       =  diminui o zoom da camera     (X-Ym)
+pageup                =  sobe seguindo circuferencia  (0-90°)
+pagedown              =  desce seguindo circuferencia (0-90°)
+
+
+               Movimentação do Personagem
+
+a          =  gira o personagem para esquerda (0-360°)
+d          =  gira o personagem para direita (0-360°)
+w          =  move personagem para frente (0-?)
+s          =  move personagem para tras (0-?)
+q          =  move personagem para esquerda (0-?)
+e          =  move personagem para direita (0-?)
+tab        =  ativa o próximo personagem do grupo
+lctrl+tab  =  ativa o personagem anterior do grupo
 
 ==============================================================
 |                       IV - Contatos                        |
 ==============================================================
 
-  Mensagens podem ser enviadas para dccnightmare@dcc.ufmg.br
+  Mensagens  podem ser  enviadas para dccnightmare@dcc.ufmg.br
+
   Edite nosso wiki em 
       http://dccnitghtmare.sourceforge.net/cgi-bin/wiki.cgi
-  Ou (não XOR) entre na página do projeto no sourceforge:
+
+  Ou ( não XOR )  entre  na página do  projeto no sourceforge:
       http://www.sourceforge.net/projects/dccnitghtmare
 
 
 DccNiTghtmare.
+  
+   cesar@dcc.ufmg.br
+                    farrer@dcc.ufmg.br
+                                      mflima@dcc.ufmg.br
+                    silvio@dcc.ufmg.br
+   rui@dcc.ufmg.br
+   

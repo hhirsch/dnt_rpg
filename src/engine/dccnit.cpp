@@ -15,10 +15,11 @@ inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
 /*********************************************************************
  *                       Construtor da Engine                        *
  *********************************************************************/
-engine::engine(/*Tmapa map*/)
+engine::engine(char* arqMapa)
 {
    NPCs = new (Lpersonagem);
    PCs  = new (Lpersonagem);
+   mapa = new(Map);
    theta=0;
    phi=0;
    d=150;
@@ -35,6 +36,7 @@ engine::~engine()
 {
    delete(NPCs);
    delete(PCs);
+   delete(mapa);
 }
 
 /*********************************************************************
