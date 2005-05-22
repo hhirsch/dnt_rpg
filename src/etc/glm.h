@@ -4,8 +4,9 @@
  *  Written by Nate Robins, 1997.
  *  email: ndr@pobox.com
  *  www: http://www.pobox.com/~ndr
- *  Texture, more colors in group face support 
- *  and blender .obj export support by DccNiTghtmare
+ *  Texture, more colors in group face support, 
+ *  blender .obj export support and animation on group
+ *  support by DccNiTghtmare
  *  email: dccnightmare@dcc.ufmg.br
  *  www: http://dccnitghtmare.sourceforge.net/
  *
@@ -64,6 +65,9 @@ typedef struct _GLMgroup {
   GLuint  numtriangles;	      /* number of triangles in this group */
   GLuint* triangles;          /* array of triangle indices */
   //GLuint  material;           /* index to material for group */
+  GLfloat rotacao[3];
+  GLfloat translacao[3];
+  GLfloat escala[3];
   struct _GLMgroup* next;		/* pointer to next group in model */
 } GLMgroup;
 
@@ -270,3 +274,9 @@ glmList(GLMmodel* model, GLuint mode);
  */
 GLvoid
 glmWeld(GLMmodel* model, GLfloat epsilon);
+
+/* _glmFindGroup: Find a group in the model
+ */
+GLMgroup*
+_glmFindGroup(GLMmodel* model, char* name);
+

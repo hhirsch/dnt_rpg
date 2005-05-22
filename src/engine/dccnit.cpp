@@ -8,6 +8,8 @@
 
 #define LADOHEXA 16
 #define DELAY 0
+#define ANDAR 1.0
+#define DELTACAMERA 30.0
 
 /* Conversor de graus para radianos */
 inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
@@ -26,7 +28,8 @@ engine::engine(char* arqMapa)
    d=150;
    centroX = centroZ = 0;
    centroY = 30;
-   
+   //deltaCameraX = 0;
+   //deltaCameraZ = 0;   
    //mapa = map;
 }
 
@@ -75,7 +78,7 @@ void engine::Iniciar(SDL_Surface *screen)
    GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+   GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
    GLfloat mat_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
    GLfloat mat_diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -86,10 +89,10 @@ void engine::Iniciar(SDL_Surface *screen)
    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-   glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+   /*glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-   glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
+   glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);*/
    
    /* Habilita a iluminacao */
    glEnable(GL_LIGHTING);
@@ -103,6 +106,7 @@ void engine::Iniciar(SDL_Surface *screen)
 int engine::TrataES(SDL_Surface *screen)
 {
    int redesenha = 0;
+   double varX, varZ; // para evitar de ter de calcular 2 vezes
    SDL_PumpEvents();
 
    /* Tratamento das Teclas */
@@ -147,7 +151,7 @@ int engine::TrataES(SDL_Surface *screen)
    }
    if(keys[SDLK_DOWN]) // Diminui o Zoom
    {
-       d++;
+       d++; 
        redesenha = 1;
    }
    if(keys[SDLK_LEFT]) // Roda Camera Antihorariamente
@@ -177,44 +181,52 @@ int engine::TrataES(SDL_Surface *screen)
       }
    }
    /* Tratamento da tecla para Movimentacao do Personagem */
-   if(keys[SDLK_q]) // Anda com personagem de lado para esquerda
+
+   if(keys[SDLK_q] || keys[SDLK_e])
    {
-         PCs->personagemAtivo->posicaoLadoX -= 1.0*
-                 sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-         PCs->personagemAtivo->posicaoLadoZ -= 1.0*
-                 cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-      redesenha = 1;
+      varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
+      varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
+      if(keys[SDLK_q]) // Anda com personagem de lado para esquerda
+      {
+         PCs->personagemAtivo->posicaoLadoX -= varX;
+         PCs->personagemAtivo->posicaoLadoZ -= varZ;
+         redesenha = 1;
+      }
+      if(keys[SDLK_e]) // Anda com personagem para esquerda
+      {
+         PCs->personagemAtivo->posicaoLadoX += varX;
+         PCs->personagemAtivo->posicaoLadoZ += varZ;
+         redesenha = 1;
+      }
    }
-   if(keys[SDLK_w]) // Anda com personagem para frente
+   if(keys[SDLK_w] || keys[SDLK_s])
    {
-        PCs->personagemAtivo->posicaoLadoX -= 1.0*
-                 sin(deg2Rad(PCs->personagemAtivo->orientacao));
-        PCs->personagemAtivo->posicaoLadoZ -= 1.0*
-                 cos(deg2Rad(PCs->personagemAtivo->orientacao));
-        redesenha = 1;
+      varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao));
+      varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao));
+      if(keys[SDLK_w]) // Anda com personagem para frente
+      {
+           PCs->personagemAtivo->posicaoLadoX -= varX;
+           PCs->personagemAtivo->posicaoLadoZ -= varZ;
+           centroZ -= varZ;
+           centroX -= varX;
+           redesenha = 1;
+      }
+      if(keys[SDLK_s]) // Anda com personagem para tras
+      {
+          PCs->personagemAtivo->posicaoLadoX += varX;
+          PCs->personagemAtivo->posicaoLadoZ += varZ;
+          centroX += varX;
+          centroZ += varZ;
+          redesenha = 1;
+      }
    }
-   if(keys[SDLK_e]) // Anda com personagem para esquerda
-   {
-         PCs->personagemAtivo->posicaoLadoX += 1.0*
-                 sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-         PCs->personagemAtivo->posicaoLadoZ += 1.0*
-                 cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-      redesenha = 1;
-   }
+
    if(keys[SDLK_a]) // Gira personagem antihorariamente 
    {
       PCs->personagemAtivo->orientacao += 1.0;
       if(PCs->personagemAtivo->orientacao > 360.0)
          PCs->personagemAtivo->orientacao = 1.0;
       redesenha = 1;
-   }
-   if(keys[SDLK_s]) // Anda com personagem para tras
-   {
-        PCs->personagemAtivo->posicaoLadoX += 1.0*
-                 sin(deg2Rad(PCs->personagemAtivo->orientacao));
-        PCs->personagemAtivo->posicaoLadoZ += 1.0*
-                 cos(deg2Rad(PCs->personagemAtivo->orientacao));
-        redesenha = 1;
    }
    if(keys[SDLK_d]) // Gira o personagem horariamente
    {
@@ -239,6 +251,14 @@ int engine::TrataES(SDL_Surface *screen)
             PCs->personagemAtivo = (personagem*)PCs->primeiro->proximo;
       }
       SDL_Delay(100);
+   }
+   if(keys[SDLK_b])
+   {
+      if(keys[SDLK_LSHIFT])
+         PCs->personagemAtivo->braco_d->rotacao[1]+=1;
+      else
+         PCs->personagemAtivo->braco_d->rotacao[1]-=1;
+      redesenha = 1;
    }
    if(keys[SDLK_i])
    {
@@ -281,9 +301,6 @@ int engine::TrataES(SDL_Surface *screen)
      redesenha = 1;
    }
   
-   /* Tratamento do Mouse para Movimentacao do Personagem */
-
-
    if(redesenha)
    {
       Uint32 antes = SDL_GetTicks();

@@ -146,12 +146,13 @@ int Map::draw()
 #ifdef DEBUG_MAP
 	printf("map.cpp - Map::draw(): Drawing map %s.\n", name);
 #endif
-        GLfloat ambiente[3] = {0.1,0.1,0.1};
-        GLfloat difusa[3] = {0.1,0.1,0.1};
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difusa);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, difusa);
-        glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 125.0);
+        /*GLfloat mat_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
+        GLfloat mat_diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
+        GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+        glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 100.0);*/
         glNormal3i(0,1,0);
         glBegin(GL_QUADS);
 	while( aux != NULL )

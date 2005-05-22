@@ -225,6 +225,13 @@ _glmAddGroup(GLMmodel* model, char* name)
     group = (GLMgroup*)malloc(sizeof(GLMgroup));
     group->name = stralloc(name);
     group->numtriangles = 0;
+    int aux;
+    for(aux=0;aux<3;aux++)
+    {
+       group-> rotacao[aux] = 0;
+       group-> escala[aux] = 1;
+       group-> translacao[aux] = 0;
+    }
     group->triangles = NULL;
     group->next = model->groups;
     model->groups = group;
@@ -615,7 +622,7 @@ _glmFirstPass(GLMmodel* model, FILE* file)
           //texture = inserirTextura(buf);
       }
       break;
-    case 'g':				/* group */
+    case 'o':				/* group */
       /* eat up rest of line */
       fgets(buf, sizeof(buf), file);
       sscanf(buf, "%s", buf);
@@ -787,7 +794,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
           texture = IDTextura(model, buf, &largura, &altura);
       }
       break;
-    case 'g':				/* group */
+    case 'o':				/* group */
       /* eat up rest of line */
       fgets(buf, sizeof(buf), file);
       sscanf(buf, "%s", buf);
@@ -1658,7 +1665,12 @@ glmDraw(GLMmodel* model, GLuint mode)
 
   while (group) {
     
-
+    glPushMatrix();
+    glScalef(group->escala[0],group->escala[1],group->escala[2]);
+    glTranslatef(group->translacao[0],group->translacao[1],group->translacao[2]);
+    glRotatef(group->rotacao[0],1,0,0);
+    glRotatef(group->rotacao[1],0,1,0);
+    glRotatef(group->rotacao[2],0,0,1);
     /*if (mode & GLM_COLOR) {
       glColor3fv(model->materials[group->material].diffuse);
     }*/
@@ -1725,7 +1737,7 @@ glmDraw(GLMmodel* model, GLuint mode)
 
     }
     glEnd();
-    
+    glPopMatrix();
     group = group->next;
   }
   if (texturaAtual != -1)

@@ -44,7 +44,25 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
    novo->posicaoLadoZ = 0.0;
    novo->nome = nome;
    novo->retrato->InserirFigura(POSRETX,POSRETY,retrato);
+   /* Abre o modelo3d */
    novo-> modelo3d = glmReadOBJ(arqmodelo,dirTexturas); 
+   /* Define os grupos */
+     novo->pe_d = _glmFindGroup(novo->modelo3d, "pe_d");
+     novo->pe_e = _glmFindGroup(novo->modelo3d, "pe_e");
+     novo->perna_d = _glmFindGroup(novo->modelo3d, "perna_d");
+     novo->perna_e = _glmFindGroup(novo->modelo3d, "perna_e");
+     novo->coxa_d = _glmFindGroup(novo->modelo3d, "coxa_d");
+     novo->coxa_e = _glmFindGroup(novo->modelo3d, "coxa_e");
+     novo->bacia_d = _glmFindGroup(novo->modelo3d, "bacia_d");
+     novo->bacia_e = _glmFindGroup(novo->modelo3d, "bacia_e");
+     novo->tronco = _glmFindGroup(novo->modelo3d, "tronco");
+     novo->ante_d = _glmFindGroup(novo->modelo3d, "ante_d");
+     novo->ante_e = _glmFindGroup(novo->modelo3d, "ante_e");
+     novo->braco_d = _glmFindGroup(novo->modelo3d, "braco_d");
+     novo->braco_e = _glmFindGroup(novo->modelo3d, "braco_e");
+     novo->mao_d = _glmFindGroup(novo->modelo3d, "mao_d");
+     novo->mao_e = _glmFindGroup(novo->modelo3d, "mao_e");
+     novo->cabeca = _glmFindGroup(novo->modelo3d, "cabeca");
    novo->tipo = PERSONAGEM;
    InserirObj(novo);
    personagemAtivo = novo;
