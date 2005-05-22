@@ -199,6 +199,7 @@ int Map::draw()
         ref = first->down;
         aux = first;
         int o;
+        x = 0; z = 0;
 
         while(aux!=NULL)
         {

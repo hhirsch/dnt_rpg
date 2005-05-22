@@ -143,7 +143,7 @@ int engine::TrataES(SDL_Surface *screen)
    }
    if(keys[SDLK_UP])  // Aumenta o Zoom
    {
-       if (d>1)
+       if (d>80)
        {
           d--;
           redesenha = 1;
@@ -151,8 +151,11 @@ int engine::TrataES(SDL_Surface *screen)
    }
    if(keys[SDLK_DOWN]) // Diminui o Zoom
    {
+     if(d<280)
+     {
        d++; 
        redesenha = 1;
+     }
    }
    if(keys[SDLK_LEFT]) // Roda Camera Antihorariamente
    {
@@ -166,7 +169,7 @@ int engine::TrataES(SDL_Surface *screen)
    }
    if(keys[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
    {
-      if (theta < 90)
+      if (theta < 89)
       {
          theta +=1;
          redesenha = 1;
@@ -255,9 +258,17 @@ int engine::TrataES(SDL_Surface *screen)
    if(keys[SDLK_b])
    {
       if(keys[SDLK_LSHIFT])
+      {
          PCs->personagemAtivo->braco_d->rotacao[1]+=1;
+         PCs->personagemAtivo->mao_d->rotacao[1]+=1;
+         PCs->personagemAtivo->ante_d->rotacao[1]+=1;
+      }
       else
+      {
          PCs->personagemAtivo->braco_d->rotacao[1]-=1;
+         PCs->personagemAtivo->mao_d->rotacao[1]-=1;
+         PCs->personagemAtivo->ante_d->rotacao[1]-=1;
+      }
       redesenha = 1;
    }
    if(keys[SDLK_i])
