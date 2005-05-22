@@ -98,7 +98,7 @@ void LmapObjeto::RetirarMapObjeto(mapObjeto* obj, int tiraMemoria)
 mapObjeto* LmapObjeto::EndMapObjeto(char* nome)
 {
    int aux;
-   mapObjeto* obj = (mapObjeto*) primeiro;
+   mapObjeto* obj = (mapObjeto*) primeiro->proximo;
    for(aux=0;aux<total;aux++)
    {
       if(!strcmp(obj->nome,nome))

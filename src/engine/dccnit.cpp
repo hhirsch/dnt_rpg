@@ -20,6 +20,7 @@ engine::engine(char* arqMapa)
    NPCs = new (Lpersonagem);
    PCs  = new (Lpersonagem);
    mapa = new(Map);
+   mapa->open(arqMapa);
    theta=0;
    phi=0;
    d=150;
@@ -314,6 +315,7 @@ void engine::Desenhar()
    glRotatef(RotacaoX,1,0,0);
    glRotatef(RotacaoY,0,1,0);
    glRotatef(RotacaoZ,0,0,1);
+   mapa->draw();
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
       for(aux=0;aux < PCs->total;aux++)

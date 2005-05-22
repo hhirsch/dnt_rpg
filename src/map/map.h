@@ -20,7 +20,7 @@
 #define OCUPADO 2
 
 /* Constraints */
-#define SQUARESIZE 0.4
+#define SQUARESIZE 10
 #define MAXOBJETOS 5
 
 class Square
@@ -37,7 +37,7 @@ class Square
 		/* Vars: */
 		Square * up, * down, * right, * left;
                 int flags;
-                GLuint textura;
+                int textura;
 		Tobjeto* PersonagemOcupador;
 		mapObjeto *objetos[MAXOBJETOS];
                 int objetosDesenha[MAXOBJETOS];
@@ -70,6 +70,7 @@ class Map
                 LmapObjeto* Objetos; 
                 int numtexturas;
                 texture* Texturas;
+                int xInic,zInic;
 
 	private:
 		char* name;    /* Nome do Arquivo de Mapa Carregado */

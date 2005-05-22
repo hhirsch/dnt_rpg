@@ -44,7 +44,7 @@ int IDTextura(Map* mapa, char* textura)
    /* procura pela textura */
    int aux=0;
    texture* tex = mapa->Texturas;
-   while(aux<mapa->numtexturas)
+   while(aux < mapa->numtexturas)
    {
       if(!strcmp(tex->nome, textura))
       {
@@ -67,7 +67,6 @@ void InserirTextura(Map* mapa, char* arq, char* nome)
    if(!img)
    {
       printf("Erro ao abrir textura: %s\n",arq);
-      free(arq);
       return;
    }
 
@@ -95,6 +94,8 @@ void InserirTextura(Map* mapa, char* arq, char* nome)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
    mapa->numtexturas++;
 
+   printf("Inseri Textura: %s :%d %d\n",nome,img->w,img->h);
+
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
 }
@@ -108,14 +109,11 @@ int Square::draw( GLfloat x, GLfloat z )
 	printf("map.cpp - Square::draw(): Drawing square in (%f,%f)\n", x, z);
 #endif
 //	glEnable(GL_TEXTURE_2D);
-	glColor3f( 1.0, 1.0, 20.0 );
-	glBegin(GL_POLYGON);
-	glVertex3f( x + (SQUARESIZE/2), 0.0, z + (SQUARESIZE/2) );
-	glVertex3f( x - (SQUARESIZE/2), 0.0, z + (SQUARESIZE/2) );
-	glVertex3f( x - (SQUARESIZE/2), 0.0, z - (SQUARESIZE/2) );
-	glVertex3f( x + (SQUARESIZE/2), 0.0, z - (SQUARESIZE/2) );
+	//glColor3f( 1.0, 1.0, 20.0 );
+	//glBegin(GL_POLYGON);
+	
 //	glNormal3i( 0, 0, 1 );
-	glEnd();
+	//glEnd();
 	return(0);
 }
 
@@ -124,20 +122,48 @@ int Square::draw( GLfloat x, GLfloat z )
  ********************************************************************/
 int Map::draw()
 {
-	//Square * ref = first;
+	Square * ref = first->down;
         Square * aux = first;
-	GLfloat x = 0.0, y = 0.0;
+	GLfloat x = 0.0, z = 0.0;
+        int textura = -1;
+        if(aux) {
+           textura = aux->textura;
+           glEnable(GL_TEXTURE_2D);
+           glBindTexture(GL_TEXTURE_2D, textura);
+        }
 #ifdef DEBUG_MAP
 	printf("map.cpp - Map::draw(): Drawing map %s.\n", name);
 #endif
+        glBegin(GL_QUADS);
 	while( aux != NULL )
 	{
-           (*aux).draw(x,y);
+             if((textura!= -1) && (aux->textura == -1))
+             {
+                 glDisable(GL_TEXTURE_2D); 
+                 textura = -1;
+             }
+             else if(textura != aux->textura)
+             {
+                glEnd();
+                textura = aux->textura;
+                glEnable(GL_TEXTURE_2D);
+                glBindTexture(GL_TEXTURE_2D, textura);
+                glBegin(GL_QUADS);
+             }
+             glTexCoord2f(1,1);
+             glVertex3f( x + (SQUARESIZE/2), 0.0, z + (SQUARESIZE/2) );
+             glTexCoord2f(0,1);
+             glVertex3f( x - (SQUARESIZE/2), 0.0, z + (SQUARESIZE/2) );
+             glTexCoord2f(0,0);
+             glVertex3f( x - (SQUARESIZE/2), 0.0, z - (SQUARESIZE/2) );
+             glTexCoord2f(1,0);
+             glVertex3f( x + (SQUARESIZE/2), 0.0, z - (SQUARESIZE/2) );
+           //(*aux).draw(x,y);
            if(aux->right == NULL)   //chegou ao fim da linha
            {
-              aux = aux->down;
-              //ref = ref->down;
-              y += SQUARESIZE;
+              aux = ref;
+              if(ref!= NULL) ref = ref->down;
+              z += SQUARESIZE;
               x = 0.0;
            } 
            else      //senao continua na linha
@@ -146,6 +172,8 @@ int Map::draw()
               x += SQUARESIZE;
            } 
         }
+        glEnd();
+        glDisable(GL_TEXTURE_2D);
 	return(0);
 
 }
@@ -158,6 +186,7 @@ Map::Map()
 	numtexturas = 0;
 	first = NULL;
 	name = NULL;
+        x = z = xInic = zInic = 0;
 }
 
 /********************************************************************
@@ -212,6 +241,12 @@ int Map::open(char* arquivo)
    {
       switch(buffer[0])
       {
+         case 'i':/* Define a posição Inicial */
+         {
+            fgets(buffer, sizeof(buffer), arq); //até final da linha
+            sscanf(buffer, "%d,%d",&xInic,&zInic);
+            break;
+         }
          case 'o': /* Insere Objetos no Mapa */
          {
              fgets(buffer, sizeof(buffer), arq); //até final da linha
