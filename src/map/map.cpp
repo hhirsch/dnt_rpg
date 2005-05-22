@@ -23,6 +23,10 @@ Square::Square()
 	left = NULL;
 	right = NULL;
 	flags = 0;
+        int aux;
+        for(aux=0;aux<MAXOBJETOS;aux++)
+           objetos[aux] = NULL;
+           objetosDesenha[aux] = 0;
 	return;
 }
 
@@ -86,10 +90,17 @@ void InserirTextura(Map* mapa, char* arq, char* nome)
    tex->nome = (char*) malloc((strlen(nome)+1)*sizeof(char));
    strcpy(tex->nome,nome);
 
+   SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       img->w,img->h,32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   //SDL_Rect ret;
+   //ret.w = 0; ret.h = 0; ret.x = img->w; ret.y = img->h;
+   SDL_BlitSurface(img,NULL,imgPotencia,NULL);
+
    glGenTextures(1, &(tex->indice));
    glBindTexture(GL_TEXTURE_2D, tex->indice);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
+                0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
    mapa->numtexturas++;
@@ -98,6 +109,7 @@ void InserirTextura(Map* mapa, char* arq, char* nome)
 
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
+   SDL_FreeSurface(imgPotencia);
 }
 
 /********************************************************************
@@ -124,7 +136,7 @@ int Map::draw()
 {
 	Square * ref = first->down;
         Square * aux = first;
-	GLfloat x = 0.0, z = 0.0;
+	int x = 0, z = 0;
         int textura = -1;
         if(aux) {
            textura = aux->textura;
@@ -134,6 +146,13 @@ int Map::draw()
 #ifdef DEBUG_MAP
 	printf("map.cpp - Map::draw(): Drawing map %s.\n", name);
 #endif
+        GLfloat ambiente[3] = {0.1,0.1,0.1};
+        GLfloat difusa[3] = {0.1,0.1,0.1};
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difusa);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, difusa);
+        glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 125.0);
+        glNormal3i(0,1,0);
         glBegin(GL_QUADS);
 	while( aux != NULL )
 	{
@@ -150,21 +169,22 @@ int Map::draw()
                 glBindTexture(GL_TEXTURE_2D, textura);
                 glBegin(GL_QUADS);
              }
-             glTexCoord2f(1,1);
-             glVertex3f( x + (SQUARESIZE/2), 0.0, z + (SQUARESIZE/2) );
+             glTexCoord2f(0,0); 
+             glVertex3f( x - (SQUARESIZE/2), 0.0, z - (SQUARESIZE/2) );
              glTexCoord2f(0,1);
              glVertex3f( x - (SQUARESIZE/2), 0.0, z + (SQUARESIZE/2) );
-             glTexCoord2f(0,0);
-             glVertex3f( x - (SQUARESIZE/2), 0.0, z - (SQUARESIZE/2) );
+             glTexCoord2f(1,1);
+             glVertex3f( x + (SQUARESIZE/2), 0.0, z + (SQUARESIZE/2) );
              glTexCoord2f(1,0);
              glVertex3f( x + (SQUARESIZE/2), 0.0, z - (SQUARESIZE/2) );
+                          
            //(*aux).draw(x,y);
            if(aux->right == NULL)   //chegou ao fim da linha
            {
               aux = ref;
               if(ref!= NULL) ref = ref->down;
               z += SQUARESIZE;
-              x = 0.0;
+              x = 0;
            } 
            else      //senao continua na linha
            {
@@ -174,6 +194,31 @@ int Map::draw()
         }
         glEnd();
         glDisable(GL_TEXTURE_2D);
+
+        ref = first->down;
+        aux = first;
+        int o;
+
+        while(aux!=NULL)
+        {
+           for(o=0;o<MAXOBJETOS;o++)
+              if((aux->objetos[o] != NULL) && (aux->objetosDesenha[o] == 1) ){
+                  aux->objetos[o]->Desenhar(x,z,0);
+              }
+           if(aux->right == NULL)   //chegou ao fim da linha
+           {
+              aux = ref;
+              if(ref!= NULL) ref = ref->down;
+              z += SQUARESIZE;
+              x = 0;
+           } 
+           else      //senao continua na linha
+           {
+              aux = aux->right;
+              x += SQUARESIZE;
+           } 
+        }
+
 	return(0);
 
 }

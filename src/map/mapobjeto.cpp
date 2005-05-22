@@ -7,13 +7,16 @@
 void mapObjeto::Desenhar(int x, int z, int distancia)
 {
    GLMmodel* modelo = (GLMmodel*) modelo3d; //modelo a ser desenhado
- 
    /* Define qual modelo desenhar */
-   if(distancia<2*deltaVariacao)
+   if((distancia>deltaVariacao) && (distancia<2*deltaVariacao) &&
+      (modeloMedio != NULL))
       modelo = (GLMmodel*) modeloMedio;
-   else 
+   else if((distancia>2*deltaVariacao) && (modeloMinimo!=NULL))
       modelo = (GLMmodel*) modeloMinimo;
 
+   modelo->position[0] = x;
+   modelo->position[1] = 0;
+   modelo->position[2] = z;
    glmDraw(modelo, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
 }
 
@@ -102,7 +105,9 @@ mapObjeto* LmapObjeto::EndMapObjeto(char* nome)
    for(aux=0;aux<total;aux++)
    {
       if(!strcmp(obj->nome,nome))
+      {
          return(obj);
+      }
       obj = (mapObjeto*) obj->proximo;
    }
    return(NULL);
