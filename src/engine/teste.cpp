@@ -18,12 +18,12 @@ int main()
   
    SDL_Surface *screen;
    Farso_Iniciar(&screen,"Teste Engine DccNiTghtmare");
-   engine* Engine = new engine("arquivo.map");
+   engine* Engine = new engine("../data/mapas/arquivo.map");
    Engine->Iniciar(screen);
 // int aux;
 // for(aux = 0;aux<10;aux++)
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
-                 "Rainha","../data/models/personagens/logan_completo_final.obj","../../PICS/Logan/");
+                 "Rainha","../data/models/personagens/logan_completo_final.obj","../data/pics/logan/");
    /*Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
                  "Homer","../data/models/logan_completo_final.obj","../../PICS/Logan/");
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
