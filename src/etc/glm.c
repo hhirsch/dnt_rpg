@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <assert.h>
 #include "glm.h"
 #include "../gui/desenho.h"
 
@@ -76,8 +75,6 @@ GLMgroup*
 _glmFindGroup(GLMmodel* model, char* name)
 {
   GLMgroup* group;
-
-  assert(model);
 
   group = model->groups;
   while(group) {
@@ -751,8 +748,6 @@ glmDelete(GLMmodel* model)
   GLMgroup* group;
   GLuint i;
 
-  assert(model);
-
   if (model->pathname)   free(model->pathname);
   if (model->mtllibname) free(model->mtllibname);
   if (model->vertices)   free(model->vertices);
@@ -875,9 +870,6 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
     GLMgroup* group;
     int texturaAtual = -1;
 
-    assert(model);
-    assert(model->vertices);
-
     /* do a bit of warning */
     if (mode & GLM_FLAT && !model->facetnorms) {
       mode &= ~GLM_FLAT;
@@ -902,7 +894,7 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
     }
     if (mode & GLM_COLOR)
       glEnable(GL_COLOR_MATERIAL);
-     if (mode & GLM_MATERIAL)
+    if (mode & GLM_MATERIAL)
       glDisable(GL_COLOR_MATERIAL);
 
   group = model->groups;
@@ -910,7 +902,6 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
 
   while (group) {
     
-    //glPushMatrix();
     /*if (mode & GLM_COLOR) {
       glColor3fv(model->materials[group->material].diffuse);
     }*/
@@ -981,13 +972,11 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
     }
     glEnd();
     glEndList();
-    //glPopMatrix();
 
     group = group->next;
   }
   if (texturaAtual != -1)
      glDisable(GL_TEXTURE_2D);
-//  glPopMatrix();
 }
 
 
@@ -1001,9 +990,6 @@ glmDraw(GLMmodel* model)
 {
   GLMgroup* group;
   
-  assert(model);
-  assert(model->vertices);
-
   glPushMatrix();
   glTranslatef(model->position[0], model->position[1], model->position[2]);
 

@@ -1,44 +1,528 @@
-T 4X4
+T 14X16
+#
+# mapa de teste original!!!! por EU!
+#
 o cadeira ../data/models/objetos/icex/cadeira.dcc
 o mesa_redonda ../data/models/objetos/icex/mesa_redonda.dcc
+o parede ../data/models/objetos/icex/parede.dcc
 t chao_madeira ../data/texturas/chao_madeira.jpg
 t chao_cimento ../data/texturas/chao_cimento.jpg
+t chao_grama ../data/texturas/chao_grama.jpg
+t parede_rosa ../data/texturas/parede_rosa.jpg
+# Definicao dos Muros
+muro 0,0,13,0
+mt parede_rosa
+muro 0,1,0,5
+mt parede_rosa
+muro 13,1,13,5
+mt parede_rosa
+muro 1,5,2,5
+mt parede_rosa
+muro 5,1,5,5
+mt parede_rosa
+muro 6,5,9,5
+mt parede_rosa
+muro 12,5,13,5
+mt parede_rosa
+# 
+# primeira linha
 p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+# 
+# segunda linha
+p 0
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+p 1
 ut chao_madeira
 uo cadeira 1
 p 1
 ut chao_madeira
 p 1
 ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+uo cadeira
+p 1
+ut chao_madeira
 p 1
 ut chao_madeira
 p 0
+ut chao_madeira
+#
+#terceira linha
+p 0
+ut chao_madeira
+p 1
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+uo mesa 1
+p 1
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+#
+# Linha 4
+p 0
+ut chao_madeira
+p 1
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+uo mesa 1
+p 1
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+p 1
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+uo cadeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+#
+#Linha quinta
+p 0
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+p 1
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+uo cadeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+#
+# LINHA 6!!!!!!!!!
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+p 0
+ut chao_madeira
+#
+# LINHA 7
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+#
+# LINHA 8
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+uo mesa_redonda 0
+p 1
+ut chao_cimento
+uo mesa_redonda 0
+p 1
+ut chao_cimento
+uo mesa_redonda 0
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+#
+# LINHA 9
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_cimento
+uo mesa_redonda 0
+p 1
 ut chao_cimento
 uo mesa_redonda 1
-p 0
+p 1
 ut chao_cimento
 uo mesa_redonda 0
 p 1
-ut chao_madeira
+ut chao_grama
 p 1
-ut chao_madeira
-p 0
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+#
+# LINHA 10
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
 ut chao_cimento
 uo mesa_redonda 0
-p 0
+p 1
 ut chao_cimento
 uo mesa_redonda 0
 p 1
-ut chao_madeira
+ut chao_cimento
+uo mesa_redonda 0
 p 1
-ut chao_madeira
-p 0
-ut chao_madeira
-uo cadeira 1
+ut chao_grama
 p 1
-ut chao_madeira
+ut chao_grama
 p 1
-ut chao_madeira
+ut chao_grama
 p 1
-ut chao_madeira
-i 3,3
+ut chao_grama
+#
+#LINHA 11
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+#
+# Linha 12
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+# LINHA 13 !!!!!!
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+# LINHA CATORZE
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+# LINHA QUINZE
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+# LINHA DEZESSEIS!!!
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_cimento
+p 1
+ut chao_cimento
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+#
+i 4,8

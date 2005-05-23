@@ -146,15 +146,17 @@ int Map::draw()
 #ifdef DEBUG_MAP
 	printf("map.cpp - Map::draw(): Drawing map %s.\n", name);
 #endif
-        /*GLfloat mat_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
-        GLfloat mat_diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
+        GLfloat mat_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
+        GLfloat mat_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
         GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
         glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
         glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
         glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
-        glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 100.0);*/
-        glNormal3i(0,1,0);
+        glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 16.0784313725);
+        
         glBegin(GL_QUADS);
+        glNormal3i(0,1,0);
+        //glColor3fv(mat_ambient);
 	while( aux != NULL )
 	{
              if((textura!= -1) && (aux->textura == -1))
@@ -171,13 +173,13 @@ int Map::draw()
                 glBegin(GL_QUADS);
              }
              glTexCoord2f(0,0); 
-             glVertex3f( x - (SQUARESIZE/2), 0.0, z - (SQUARESIZE/2) );
+             glVertex3f( x , 0.0, z );
              glTexCoord2f(0,1);
-             glVertex3f( x - (SQUARESIZE/2), 0.0, z + (SQUARESIZE/2) );
+             glVertex3f( x , 0.0, z + (SQUARESIZE) );
              glTexCoord2f(1,1);
-             glVertex3f( x + (SQUARESIZE/2), 0.0, z + (SQUARESIZE/2) );
+             glVertex3f( x + (SQUARESIZE), 0.0, z + (SQUARESIZE) );
              glTexCoord2f(1,0);
-             glVertex3f( x + (SQUARESIZE/2), 0.0, z - (SQUARESIZE/2) );
+             glVertex3f( x + (SQUARESIZE), 0.0, z );
                           
            //(*aux).draw(x,y);
            if(aux->right == NULL)   //chegou ao fim da linha
@@ -194,12 +196,90 @@ int Map::draw()
            } 
         }
         glEnd();
+
+        /* Faz o desenho dos muros */
+        muro* maux = muros;
+        glBegin(GL_QUADS);
+        while(maux!=NULL)
+        {
+           
+           //if(x1 == x2) x2 += SQUARESIZE; 
+           //if(z1 == z2) z2 += SQUARESIZE;
+           if((textura!= -1) && (maux->textura == -1))
+           {
+               glDisable(GL_TEXTURE_2D); 
+               textura = -1;
+           }
+           else if(textura != maux->textura)
+           {
+              glEnd();
+              textura = maux->textura;
+              glEnable(GL_TEXTURE_2D);
+              glBindTexture(GL_TEXTURE_2D, textura);
+              glBegin(GL_QUADS);
+           }
+           /* Face de frente */
+              glNormal3i(0,0,1);
+              glTexCoord2f(0,0);
+              glVertex3f(maux->x1,MUROALTURA,maux->z1);
+              glTexCoord2f(1,0);
+              glVertex3f(maux->x2,MUROALTURA,maux->z1);
+              glTexCoord2f(1,1);
+              glVertex3f(maux->x2,0,maux->z1);
+              glTexCoord2f(0,1);
+              glVertex3f(maux->x1,0,maux->z1);
+           /* Face de tras */
+              glNormal3i(0,0,-1);
+              glTexCoord2f(0,0);
+              glVertex3f(maux->x1,MUROALTURA,maux->z2);
+              glTexCoord2f(1,0);
+              glVertex3f(maux->x2,MUROALTURA,maux->z2);
+              glTexCoord2f(1,1);
+              glVertex3f(maux->x2,0,maux->z2);
+              glTexCoord2f(0,1);
+              glVertex3f(maux->x1,0,maux->z2);
+           /* Face de esquerda */
+              glNormal3i(-1,0,0);
+              glTexCoord2f(0,0);
+              glVertex3f(maux->x1,MUROALTURA,maux->z1);
+              glTexCoord2f(1,0);
+              glVertex3f(maux->x1,MUROALTURA,maux->z2);
+              glTexCoord2f(1,1);
+              glVertex3f(maux->x1,0,maux->z2);
+              glTexCoord2f(0,1);
+              glVertex3f(maux->x1,0,maux->z1);
+           /* Face de direita */
+              glNormal3i(1,0,0);
+              glTexCoord2f(0,0);
+              glVertex3f(maux->x2,MUROALTURA,maux->z1);
+              glTexCoord2f(1,0);
+              glVertex3f(maux->x2,MUROALTURA,maux->z2);
+              glTexCoord2f(1,1);
+              glVertex3f(maux->x2,0,maux->z2);
+              glTexCoord2f(0,1);
+              glVertex3f(maux->x2,0,maux->z1);
+           /* Face de cima */
+              glNormal3i(0,1,0);
+              glTexCoord2f(0,0);
+              glVertex3f(maux->x1,MUROALTURA,maux->z1);
+              glTexCoord2f(1,0);
+              glVertex3f(maux->x2,MUROALTURA,maux->z1);
+              glTexCoord2f(1,1);
+              glVertex3f(maux->x2,MUROALTURA,maux->z2);
+              glTexCoord2f(0,1);
+              glVertex3f(maux->x1,MUROALTURA,maux->z2);
+
+           maux = maux->proximo;
+        }
+        glEnd();
         glDisable(GL_TEXTURE_2D);
 
+
+        /* Faz o desenho dos objetos */
         ref = first->down;
         aux = first;
         int o;
-        x = 0; z = 0;
+        x = HALFSQUARESIZE; z = HALFSQUARESIZE;
 
         while(aux!=NULL)
         {
@@ -212,7 +292,7 @@ int Map::draw()
               aux = ref;
               if(ref!= NULL) ref = ref->down;
               z += SQUARESIZE;
-              x = 0;
+              x = HALFSQUARESIZE;
            } 
            else      //senao continua na linha
            {
@@ -220,9 +300,7 @@ int Map::draw()
               x += SQUARESIZE;
            } 
         }
-
-	return(0);
-
+        return(0);
 }
 
 /********************************************************************
@@ -249,6 +327,8 @@ int Map::open(char* arquivo)
    int posX,posZ;    //posicao atual do quadrado anterior relativo
    int IDtexturaAtual = -1;
    char* nomeTexturaAtual = "nada\0";
+   int IDmuroTexturaAtual = -1;
+   char* nomeMuroTexturaAtual = "nada\0";
    int numObjetosAtual;
    int pisavel=0;
    
@@ -280,6 +360,8 @@ int Map::open(char* arquivo)
    Objetos = new(LmapObjeto);
    Texturas = NULL;
 
+   muro* maux = NULL;
+
    posX = x;
    posZ = 0;
 
@@ -288,6 +370,40 @@ int Map::open(char* arquivo)
    {
       switch(buffer[0])
       {
+         case 'm': /* Define Muros (paredes) */
+         {
+            switch(buffer[1])
+            {
+               case 'u': /* Define o muro */
+               {
+                  maux = new(muro);
+                  fgets(buffer, sizeof(buffer),arq);
+                  sscanf(buffer,"%d,%d,%d,%d",&maux->x1,&maux->z1,
+                                              &maux->x2,&maux->z2);
+                  maux->x1 = maux->x1*SQUARESIZE;
+                  maux->x2 = (maux->x2+1)*SQUARESIZE;
+                  maux->z1 = maux->z1*SQUARESIZE;
+                  maux->z2 = (maux->z2+1)*SQUARESIZE;
+                  maux->proximo = muros;
+                  maux->textura = -1;
+                  muros = maux;
+                  break;
+               }
+               case 't': /* Define a textura do muro */
+               {
+                  fgets(buffer, sizeof(buffer), arq);
+                  sscanf(buffer,"%s",nome);
+                  if(strcmp(nomeArq,nomeMuroTexturaAtual))
+                  {
+                     nomeMuroTexturaAtual = nome;
+                     IDmuroTexturaAtual = IDTextura(this,nome);
+                  }
+                  maux->textura = IDmuroTexturaAtual;
+                  break;
+               }
+            }
+            break;
+         }
          case 'i':/* Define a posição Inicial */
          {
             fgets(buffer, sizeof(buffer), arq); //até final da linha
@@ -380,6 +496,11 @@ int Map::open(char* arquivo)
             }
             break; 
          }
+         case '#': //ignora o comentario
+         {
+             fgets(buffer, sizeof(buffer), arq);
+             break;
+         }
          default:
                  printf("Que merda eh essa: %s em %s\n",buffer,arquivo);
                  break;
@@ -407,6 +528,16 @@ Map::~Map()
       free(au);
    }
    
+   /* Acabando com os muros */
+   muro* m = muros;
+   muro* am =NULL;
+   while(m)
+   {
+      am = m;
+      m = m->proximo;
+      free(am);
+   }
+
    /* Acabando com os objetos */
    delete(Objetos);
 

@@ -23,10 +23,10 @@ engine::engine(char* arqMapa)
    PCs  = new (Lpersonagem);
    mapa = new(Map);
    mapa->open(arqMapa);
-   mapaDesenhar = glGenLists(1);
-   glNewList(mapaDesenhar,GL_COMPILE);
-     mapa->draw();
-   glEndList();  
+   //mapaDesenhar = glGenLists(1);
+   //glNewList(mapaDesenhar,GL_COMPILE);
+    // mapa->draw();
+   //glEndList();  
    theta=0;
    phi=0;
    d=150;
@@ -42,7 +42,7 @@ engine::engine(char* arqMapa)
  *********************************************************************/
 engine::~engine()
 {
-   glDeleteLists(mapaDesenhar,1);
+   //glDeleteLists(mapaDesenhar,1);
    delete(NPCs);
    delete(PCs);
    delete(mapa);
@@ -80,14 +80,14 @@ void engine::Iniciar(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Definicao da Luz */
-   GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+   GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
-   GLfloat mat_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
+   /*GLfloat mat_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
    GLfloat mat_diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat high_shininess[] = { 100.0 };
+   GLfloat high_shininess[] = { 100.0 };*/
    
    /* Carrega a Luz */
    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
@@ -102,6 +102,18 @@ void engine::Iniciar(SDL_Surface *screen)
    /* Habilita a iluminacao */
    glEnable(GL_LIGHTING);
    glEnable(GL_LIGHT0);
+  
+   /*glEnable(GL_FOG);
+   {
+     GLfloat fogCor[4] = {1.0,1.0,1.0,1.0}; 
+     glFogi(GL_FOG_MODE,GL_LINEAR);
+     glFogfv(GL_FOG_COLOR,fogCor);
+     glFogf(GL_FOG_DENSITY,0.035);
+     glHint(GL_FOG_HINT,GL_DONT_CARE);
+     glFogf(GL_FOG_START,1.0);
+     glFogf(GL_FOG_END,1000.0);
+   }*/
+
 }
 
 
@@ -348,18 +360,17 @@ void engine::Desenhar()
    glRotatef(RotacaoX,1,0,0);
    glRotatef(RotacaoY,0,1,0);
    glRotatef(RotacaoZ,0,0,1);
-   //mapa->draw();
-   glCallList(mapaDesenhar);
+   mapa->draw();
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
       for(aux=0;aux < PCs->total;aux++)
       {
          glPushMatrix();
-         /* O personagem nao movimenta no eixo Y, mas sim no Z (^) e X (>) */
-         glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
-         glRotatef(per->orientacao,0,1,0);
-         //glCallList(per->personagemDesenhar);
-         glmDraw(per->modelo3d);
+           // O personagem nao movimenta no eixo Y, mas sim no Z (^) e X (>) 
+           glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
+           glRotatef(per->orientacao,0,1,0);
+           //glCallList(per->personagemDesenhar);
+           glmDraw(per->modelo3d);
          glPopMatrix();
          per = (personagem*) per->proximo;
          glTranslatef(30,0,0);

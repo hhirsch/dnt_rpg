@@ -58,7 +58,6 @@ class engine
 
  
       Map* mapa; /* Mapa Utilizado pela Engine */
-      GLuint mapaDesenhar;
 
 };
 

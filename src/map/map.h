@@ -21,7 +21,9 @@
 
 /* Constraints */
 #define SQUARESIZE 10
+#define HALFSQUARESIZE 5
 #define MAXOBJETOS 5
+#define MUROALTURA 50
 
 class Square
 {
@@ -54,6 +56,13 @@ typedef struct _texture {
    struct _texture* proximo;  /* Proxima Textura na Lista */
 }texture;
 
+typedef struct _muro
+{
+   GLuint x1,z1,x2,z2;
+   int textura;
+   struct _muro* proximo;
+}muro;
+
 class Map
 {
 	
@@ -74,8 +83,9 @@ class Map
 
 	private:
 		char* name;    /* Nome do Arquivo de Mapa Carregado */
-		Square* first; /*Quadrado localizado no canto superior*/
+		Square* first; /* Quadrado localizado no canto superior */
 		int x,z;       /* Dimensões do mapa */
+		muro* muros;   /* Muros presentes no mapa */
 };
 
 #endif
