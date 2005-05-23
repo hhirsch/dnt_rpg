@@ -1,0 +1,44 @@
+T 4X4
+o cadeira ../data/models/objetos/icex/cadeira.dcc
+o mesa_redonda ../data/models/objetos/icex/mesa_redonda.dcc
+t chao_madeira ../data/texturas/chao_madeira.jpg
+t chao_cimento ../data/texturas/chao_cimento.jpg
+p 0
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_cimento
+uo mesa_redonda 1
+p 0
+ut chao_cimento
+uo mesa_redonda 0
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_cimento
+uo mesa_redonda 0
+p 0
+ut chao_cimento
+uo mesa_redonda 0
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 0
+ut chao_madeira
+uo cadeira 1
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+p 1
+ut chao_madeira
+i 3,3
