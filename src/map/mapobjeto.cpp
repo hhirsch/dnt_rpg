@@ -17,7 +17,7 @@ void mapObjeto::Desenhar(int x, int z, int distancia)
    modelo->position[0] = x;
    modelo->position[1] = 0;
    modelo->position[2] = z;
-   glmDraw(modelo, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
+   glmDraw(modelo);
 }
 
 /*********************************************************************

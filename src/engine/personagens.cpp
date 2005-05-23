@@ -66,6 +66,10 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
    novo->tipo = PERSONAGEM;
    InserirObj(novo);
    personagemAtivo = novo;
+   /*novo->personagemDesenhar = glGenLists(1);
+   glNewList(novo->personagemDesenhar,GL_COMPILE);
+     glmDraw(novo->modelo3d, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
+   glEndList();*/
    return(novo);
 } 
 
@@ -74,6 +78,7 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
  *********************************************************************/
 void Lpersonagem::RetirarPersonagem(personagem* persona, int tiraMemoria)
 {
+   //glDeleteLists(persona->personagemDesenhar,1);
    glmDelete(persona->modelo3d);
    delete(persona->retrato);
    delete(persona->objetos);

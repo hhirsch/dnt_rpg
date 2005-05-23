@@ -23,6 +23,10 @@ engine::engine(char* arqMapa)
    PCs  = new (Lpersonagem);
    mapa = new(Map);
    mapa->open(arqMapa);
+   mapaDesenhar = glGenLists(1);
+   glNewList(mapaDesenhar,GL_COMPILE);
+     mapa->draw();
+   glEndList();  
    theta=0;
    phi=0;
    d=150;
@@ -38,6 +42,7 @@ engine::engine(char* arqMapa)
  *********************************************************************/
 engine::~engine()
 {
+   glDeleteLists(mapaDesenhar,1);
    delete(NPCs);
    delete(PCs);
    delete(mapa);
@@ -343,7 +348,8 @@ void engine::Desenhar()
    glRotatef(RotacaoX,1,0,0);
    glRotatef(RotacaoY,0,1,0);
    glRotatef(RotacaoZ,0,0,1);
-   mapa->draw();
+   //mapa->draw();
+   glCallList(mapaDesenhar);
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
       for(aux=0;aux < PCs->total;aux++)
@@ -352,7 +358,8 @@ void engine::Desenhar()
          /* O personagem nao movimenta no eixo Y, mas sim no Z (^) e X (>) */
          glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
          glRotatef(per->orientacao,0,1,0);
-         glmDraw(per->modelo3d, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
+         //glCallList(per->personagemDesenhar);
+         glmDraw(per->modelo3d);
          glPopMatrix();
          per = (personagem*) per->proximo;
          glTranslatef(30,0,0);
