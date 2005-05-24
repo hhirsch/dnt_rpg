@@ -100,6 +100,10 @@ typedef struct {
 
   GLfloat position[3];			/* position of the model */
 
+  GLfloat x1,z1,x2,z2;                  /* Imagem do bounding box no plano XZ */
+
+  GLuint boundingDefinido;              /* 0 senao 1 se definido */
+
 } GLMmodel;
 
 

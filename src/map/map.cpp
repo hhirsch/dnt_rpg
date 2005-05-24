@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <GL/glu.h>
 #include <GL/gl.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -136,7 +135,6 @@ int Map::draw()
 {
 	Square * ref = first->down;
         Square * aux = first;
-	int x = 0, z = 0;
         int textura = -1;
         if(aux) {
            textura = aux->textura;
@@ -173,26 +171,23 @@ int Map::draw()
                 glBegin(GL_QUADS);
              }
              glTexCoord2f(0,0); 
-             glVertex3f( x , 0.0, z );
+             glVertex3f( aux->x1 , 0.0, aux->z1 );
              glTexCoord2f(0,1);
-             glVertex3f( x , 0.0, z + (SQUARESIZE) );
+             glVertex3f( aux->x1 , 0.0, aux->z2);
              glTexCoord2f(1,1);
-             glVertex3f( x + (SQUARESIZE), 0.0, z + (SQUARESIZE) );
+             glVertex3f( aux->x2, 0.0, aux->z2 );
              glTexCoord2f(1,0);
-             glVertex3f( x + (SQUARESIZE), 0.0, z );
+             glVertex3f( aux->x2, 0.0, aux->z1 );
                           
            //(*aux).draw(x,y);
            if(aux->right == NULL)   //chegou ao fim da linha
            {
               aux = ref;
               if(ref!= NULL) ref = ref->down;
-              z += SQUARESIZE;
-              x = 0;
            } 
            else      //senao continua na linha
            {
               aux = aux->right;
-              x += SQUARESIZE;
            } 
         }
         glEnd();
@@ -279,25 +274,22 @@ int Map::draw()
         ref = first->down;
         aux = first;
         int o;
-        x = HALFSQUARESIZE; z = HALFSQUARESIZE;
 
         while(aux!=NULL)
         {
            for(o=0;o<MAXOBJETOS;o++)
               if((aux->objetos[o] != NULL) && (aux->objetosDesenha[o] == 1) ){
-                  aux->objetos[o]->Desenhar(x,z,0);
+                  aux->objetos[o]->Desenhar(aux->x1+HALFSQUARESIZE,
+                                            aux->z1+HALFSQUARESIZE,0);
               }
            if(aux->right == NULL)   //chegou ao fim da linha
            {
               aux = ref;
               if(ref!= NULL) ref = ref->down;
-              z += SQUARESIZE;
-              x = HALFSQUARESIZE;
            } 
            else      //senao continua na linha
            {
               aux = aux->right;
-              x += SQUARESIZE;
            } 
         }
         return(0);
@@ -380,9 +372,9 @@ int Map::open(char* arquivo)
                   fgets(buffer, sizeof(buffer),arq);
                   sscanf(buffer,"%d,%d,%d,%d",&maux->x1,&maux->z1,
                                               &maux->x2,&maux->z2);
-                  maux->x1 = maux->x1*SQUARESIZE;
+                  maux->x1 = (maux->x1)*SQUARESIZE;
                   maux->x2 = (maux->x2+1)*SQUARESIZE;
-                  maux->z1 = maux->z1*SQUARESIZE;
+                  maux->z1 = (maux->z1)*SQUARESIZE;
                   maux->z2 = (maux->z2+1)*SQUARESIZE;
                   maux->proximo = muros;
                   maux->textura = -1;
@@ -408,6 +400,15 @@ int Map::open(char* arquivo)
          {
             fgets(buffer, sizeof(buffer), arq); //até final da linha
             sscanf(buffer, "%d,%d",&xInic,&zInic);
+            Square *au = first;
+            int pos;
+            for(pos = 0; pos <= xInic; pos++) 
+                 au = au->right;
+            for(pos = 0; pos <= zInic; pos++) 
+                 au = au->down;
+            squareInic = au;
+            xInic = (xInic)*SQUARESIZE + HALFSQUARESIZE;
+            zInic = (zInic)*SQUARESIZE + HALFSQUARESIZE; 
             break;
          }
          case 'o': /* Insere Objetos no Mapa */
@@ -455,6 +456,12 @@ int Map::open(char* arquivo)
             }
             fgets(buffer, sizeof(buffer), arq); //até final da linha
             sscanf(buffer, "%d",&pisavel);
+            aux->x1 = (posX-1)*SQUARESIZE;
+            aux->x2 = aux->x1+SQUARESIZE;
+            aux->z1 = (posZ-1)*SQUARESIZE;
+            aux->z2 = aux->z1+SQUARESIZE; 
+            aux->posX = posX;
+            aux->posZ = posZ;
             if(pisavel) aux->flags |= PISAVEL;
             break;
          }

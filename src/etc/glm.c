@@ -570,12 +570,37 @@ _glmSecondPass(GLMmodel* model, FILE* file)
     case 'v':				/* v, vn, vt */
       switch(buf[1]) {
       case '\0':			/* vertex */
-	fscanf(file, "%f %f %f", 
+      {
+ 	fscanf(file, "%f %f %f", 
 	       &vertices[3 * numvertices + X], 
 	       &vertices[3 * numvertices + Y], 
 	       &vertices[3 * numvertices + Z]);
+        if(! model->boundingDefinido)
+        {
+           model->x1 = vertices[3 * numvertices + X];
+           model->x2 = vertices[3 * numvertices + X];
+           model->z1 = vertices[3 * numvertices + Z];
+           model->z2 = vertices[3 * numvertices + Z];
+           model->boundingDefinido = 1;
+        }
+        else if((model->x1 > vertices[3 * numvertices + X]) ||
+                (model->x2 < vertices[3 * numvertices + X]) ||
+                (model->z1 > vertices[3 * numvertices + Z]) ||
+                (model->z2 < vertices[3 * numvertices + Z]) )
+        {
+           if(model->x1 > vertices[3 * numvertices + X])
+              model->x1 = vertices[3 * numvertices + X];
+           else if(model->x2 < vertices[3 * numvertices + X])
+              model->x2 = vertices[3 * numvertices + X];
+           else if(model->z1 > vertices[3 * numvertices + Z])
+              model->z1 = vertices[3 * numvertices + Z];
+           else
+              model->z2 = vertices[3 * numvertices + Z];
+        }
+        
 	numvertices++;
 	break;
+      }
       case 'n':				/* normal */
 	fscanf(file, "%f %f %f", 
 	       &normals[3 * numnormals + X],
@@ -830,6 +855,8 @@ glmReadOBJ(char* filename, char* diretorioTex)
   model->position[0]   = 0.0;
   model->position[1]   = 0.0;
   model->position[2]   = 0.0;
+  model->boundingDefinido = 0;
+  model->x1 = model->x2 = model->z1 = model->z2 = 0.0;
 
   /* make a first pass through the file to get a count of the number
      of vertices, normals, texcoords & triangles */
@@ -859,7 +886,13 @@ glmReadOBJ(char* filename, char* diretorioTex)
 
   glmPrecomputaListas(model, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
 
+  /* //"Normaliza" NAO USADO!!!
+  model->x2 -= model->x1;
+  model->z2 -= model->z1;
+  model->x1 = 0;
+  model->z1 = 0;*/
 
+  printf("%s : %.3f,%.3f %.3f,%.3f\n",filename,model->x1,model->z1,model->x2, model->z2);
   return model;
 }
 

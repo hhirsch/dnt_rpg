@@ -10,6 +10,8 @@
 #define DELAY 0
 #define ANDAR 1.0
 #define DELTACAMERA 30.0
+#define ZOOMMAXIMO 80
+#define ZOOMMINIMO 280
 
 /* Conversor de graus para radianos */
 inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
@@ -80,7 +82,7 @@ void engine::Iniciar(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Definicao da Luz */
-   GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
+   GLfloat light_ambient[] = { 0.75, 0.75, 0.75, 1.0 };
    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
@@ -108,9 +110,9 @@ void engine::Iniciar(SDL_Surface *screen)
      GLfloat fogCor[4] = {1.0,1.0,1.0,1.0}; 
      glFogi(GL_FOG_MODE,GL_LINEAR);
      glFogfv(GL_FOG_COLOR,fogCor);
-     glFogf(GL_FOG_DENSITY,0.035);
+     glFogf(GL_FOG_DENSITY,0.35);
      glHint(GL_FOG_HINT,GL_DONT_CARE);
-     glFogf(GL_FOG_START,1.0);
+     glFogf(GL_FOG_START,300.0);
      glFogf(GL_FOG_END,1000.0);
    }*/
 
@@ -160,7 +162,7 @@ int engine::TrataES(SDL_Surface *screen)
    }
    if(keys[SDLK_UP])  // Aumenta o Zoom
    {
-       if (d>80)
+       if (d>ZOOMMAXIMO)
        {
           d--;
           redesenha = 1;
@@ -168,7 +170,7 @@ int engine::TrataES(SDL_Surface *screen)
    }
    if(keys[SDLK_DOWN]) // Diminui o Zoom
    {
-     if(d<280)
+     if(d<ZOOMMINIMO)
      {
        d++; 
        redesenha = 1;
@@ -206,14 +208,20 @@ int engine::TrataES(SDL_Surface *screen)
    {
       varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
       varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-      if(keys[SDLK_q]) // Anda com personagem de lado para esquerda
+      // Anda com personagem de lado para esquerda
+      if((keys[SDLK_q])&& (podeAndar(-varX,-varZ,0))) 
       {
          PCs->personagemAtivo->posicaoLadoX -= varX;
          PCs->personagemAtivo->posicaoLadoZ -= varZ;
+         centroX -= varX;
+         centroZ -= varZ;
          redesenha = 1;
       }
-      if(keys[SDLK_e]) // Anda com personagem para esquerda
+       // Anda com personagem para esquerda
+      if((keys[SDLK_e])&& (podeAndar(varX,varZ,0))) 
       {
+         centroX += varX;
+         centroZ += varZ;
          PCs->personagemAtivo->posicaoLadoX += varX;
          PCs->personagemAtivo->posicaoLadoZ += varZ;
          redesenha = 1;
@@ -223,7 +231,8 @@ int engine::TrataES(SDL_Surface *screen)
    {
       varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao));
       varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao));
-      if(keys[SDLK_w]) // Anda com personagem para frente
+        // Anda com personagem para frente
+      if((keys[SDLK_w]) && (podeAndar(-varX,-varZ,0)) ) 
       {
            PCs->personagemAtivo->posicaoLadoX -= varX;
            PCs->personagemAtivo->posicaoLadoZ -= varZ;
@@ -231,7 +240,8 @@ int engine::TrataES(SDL_Surface *screen)
            centroX -= varX;
            redesenha = 1;
       }
-      if(keys[SDLK_s]) // Anda com personagem para tras
+        // Anda com personagem para tras
+      if((keys[SDLK_s]) && (podeAndar(varX,varZ,0)) ) 
       {
           PCs->personagemAtivo->posicaoLadoX += varX;
           PCs->personagemAtivo->posicaoLadoZ += varZ;
@@ -241,19 +251,23 @@ int engine::TrataES(SDL_Surface *screen)
       }
    }
 
-   if(keys[SDLK_a]) // Gira personagem antihorariamente 
+   if( (keys[SDLK_a]) || (keys[SDLK_d]))
    {
-      PCs->personagemAtivo->orientacao += 1.0;
-      if(PCs->personagemAtivo->orientacao > 360.0)
-         PCs->personagemAtivo->orientacao = 1.0;
-      redesenha = 1;
-   }
-   if(keys[SDLK_d]) // Gira o personagem horariamente
-   {
-      PCs->personagemAtivo->orientacao -= 1.0;
-      if(PCs->personagemAtivo->orientacao < 0.0)
-         PCs->personagemAtivo->orientacao = 360.0;
-
+      // Gira personagem antihorariamente
+      if((keys[SDLK_a]) && (podeAndar(0,0,1.0)) )  
+      {
+         PCs->personagemAtivo->orientacao += 1.0;
+         if(PCs->personagemAtivo->orientacao > 360.0)
+            PCs->personagemAtivo->orientacao = 1.0;
+         redesenha = 1;
+      }
+      // Gira o personagem horariamente
+      if((keys[SDLK_d]) && (podeAndar(0,0,-1.0)) )
+      {
+         PCs->personagemAtivo->orientacao -= 1.0;
+         if(PCs->personagemAtivo->orientacao < 0.0)
+            PCs->personagemAtivo->orientacao = 360.0;
+      }
       redesenha = 1;
    }
    if(keys[SDLK_TAB]) //troca de personagem ativo
@@ -350,7 +364,8 @@ void engine::Desenhar()
     glLoadIdentity();
    //gluLookAt (7.0,7.0, 7.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0);
    float x = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   float y = centroY + (float) 2*d * sin(deg2Rad(theta));
+   //float y = centroY + (float) 2*d * sin(deg2Rad(theta));
+   float y = centroY + (float) d * sin(deg2Rad(theta));
    float z = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    gluLookAt(x,y,z, centroX,centroY,centroZ,0,1,0);
 
@@ -379,11 +394,169 @@ void engine::Desenhar()
    glFlush();
 }
 
+
+int estaDentro(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2, 
+               GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2)
+{
+   return( ( ((x1 >= u1) && (x1 <= u2)) || 
+             ((x2 >= u1) && (x2 <= u2)) ) && 
+           ( ((z1 >= v1) && (z1 <= v2)) || 
+             ((z2 >= v1) && (z2 <= v2)) ) );
+
+}
+
+Square* quadradoRelativo(int posX,int posZ, Square* quad)
+{
+   Square* result = quad;
+  // printf("%d %d\n",quad->posX,quad->posZ);
+   int aux;
+   for(aux=0;aux < (quad->posX-posX);aux++) result = result->left;
+   for(aux=0;aux < (posX-quad->posX);aux++) result = result->right;
+   for(aux=0;aux < (quad->posZ-posZ);aux++) result = result->up;
+   for(aux=0;aux < (posZ-quad->posZ);aux++) result = result->down;
+
+   return(result);
+}
+
+int testa(float x1,float z1,float x2,float z2, int posX, int posZ, Square* quad)
+{
+   int result = 0;
+   Square* proxima = quadradoRelativo(posX,posZ,quad);
+   if(proxima->flags & PISAVEL)
+   {
+     result = 1;
+   }
+   if(result) // Se eh possivel entrar, testa com os objetos
+   {
+      int aux = 1;
+   }
+
+   return(result);
+}
+
+/*********************************************************************
+ *                   Verifica se nao ha Colisao                      *
+ *********************************************************************/
+int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
+{
+   int result = 0;
+   GLfloat x1,x2,z1,z2;
+
+   /* Rotaciona o bounding para a posicao correrta */
+   if(PCs->personagemAtivo->orientacao+varAlpha != 0)
+   {
+      GLfloat xVelho = PCs->personagemAtivo->modelo3d->x1;
+      GLfloat zVelho = PCs->personagemAtivo->modelo3d->z1;
+      GLfloat x,z;
+      int aux;
+      GLfloat cosseno = cos(deg2Rad(PCs->personagemAtivo->orientacao +
+                            varAlpha));
+      GLfloat seno = sin(deg2Rad(PCs->personagemAtivo->orientacao +
+                            varAlpha));
+      x1 = zVelho*seno + xVelho*cosseno;
+      z1 = zVelho*cosseno - xVelho*seno;
+      x2 = x1;
+      z2 = z1;
+      xVelho = PCs->personagemAtivo->modelo3d->x2;
+      for(aux = 1;aux<4;aux++)
+      {
+         x = zVelho*seno + xVelho*cosseno;
+         z = zVelho*cosseno - xVelho*seno;
+         if(x < x1)
+           x1 = x;
+         if(x > x2)
+           x2 = x;
+         if(z < z1)
+           z1 = z;
+         if(z > z2)
+           z2 = z;
+         switch(aux)
+         {
+            case 1:
+               zVelho = PCs->personagemAtivo->modelo3d->z2;
+            break;
+            case 2:
+               xVelho = PCs->personagemAtivo->modelo3d->x1;
+            break;
+            default:
+            break;
+         }
+      }
+   }
+   else
+   {
+      /* Define a posicao com o bounding box */
+       x1 = PCs->personagemAtivo->modelo3d->x1;
+       x2 = PCs->personagemAtivo->modelo3d->x2;
+       z1 = PCs->personagemAtivo->modelo3d->z1;
+       z2 = PCs->personagemAtivo->modelo3d->z2;
+   }
+
+   /* translada o bounding box para o local correto*/
+   x1 += PCs->personagemAtivo->posicaoLadoX+varX;
+   z1 += PCs->personagemAtivo->posicaoLadoZ+varZ;
+   x2 += PCs->personagemAtivo->posicaoLadoX+varX;
+   z2 += PCs->personagemAtivo->posicaoLadoZ+varZ;
+  
+   if( (x1<0) || (x1>mapa->x*SQUARESIZE) || (x2<0) || 
+       (x2>mapa->x*SQUARESIZE) || (z1<0) || (z1>mapa->z*SQUARESIZE) ||
+       (z2<0) || (z2>mapa->z*SQUARESIZE-1) ) 
+   {
+       return(0);
+   }
+
+   /* Define os quadrados possiveis em que o personagem possa estar */
+   int posX1 = (int)floor(x1/SQUARESIZE)+1;
+   int posX2 = (int)floor(x2/SQUARESIZE)+1;
+   int posZ1 = (int)floor(z1/SQUARESIZE)+1;
+   int posZ2 = (int)floor(z2/SQUARESIZE)+1;
+
+   //printf("%d %d %d %d\n",posX1,posZ1,posX2,posZ2);
+
+   if((posX1 <= 0) || ( posX1 > mapa->x ) || (posZ1 <=0) || (posZ1 > mapa->z))
+      return(0);
+   result = testa(x1,z1,x2,z2,posX1,posZ1,PCs->personagemAtivo->ocupaQuad);
+
+   if(!result) 
+      return(0);
+
+   if( posX1 != posX2 )
+   {
+      if((posX2 <= 0) || ( posX2 > mapa->x ))
+        return(0);
+      result &= testa(x1,z1,x2,z2,posX2,posZ1,PCs->personagemAtivo->ocupaQuad);
+     if (!result) return(0);
+   }
+
+   if( posZ1 != posZ2 )
+   {
+      if((posZ2 <= 0) || ( posZ2 > mapa->z ))
+        return(0);
+      result &= testa(x1,z1,x2,z2,posX1,posZ2,PCs->personagemAtivo->ocupaQuad);
+      if(!result) 
+         return(0);
+      if( posX1 != posX2 )
+      {
+         result&=testa(x1,z1,x2,z2,posX2,posZ2,PCs->personagemAtivo->ocupaQuad);
+      }
+   }
+
+   PCs->personagemAtivo->ocupaQuad = quadradoRelativo(posX1,posZ1,
+                                       PCs->personagemAtivo->ocupaQuad);
+   return(result);
+}
+
 /*********************************************************************
  *                          Roda a Engine                            *
  *********************************************************************/
 int engine::Rodar(SDL_Surface *surface)
 {
+   PCs->personagemAtivo->posicaoLadoX = mapa->xInic;
+   PCs->personagemAtivo->posicaoLadoZ = mapa->zInic;
+   centroX = mapa->xInic;
+   centroZ = mapa->zInic;
+   PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
+   
    /* Desenha a primeira Cena */
    Desenhar();
    SDL_GL_SwapBuffers();

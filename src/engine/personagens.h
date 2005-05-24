@@ -12,6 +12,7 @@
 #include "../gui/lista.h"
 //#include "habilidades.h"
 #include "../etc/glm.h"
+#include "../map/map.h"
 
 #define POSRETX 8   // posicao x do retrato na janela
 #define POSRETY 20  // posicao y do retrato na janela
@@ -38,6 +39,8 @@ class personagem: public Tobjeto
       float posicaoLadoX;       // posicao do personagem pro lado
       float posicaoLadoZ;       // posicao do personagem pro lado
    // Lhabilidade* habilidades; // habilidades personagem (ex:kamasutramaster)
+
+      Square* ocupaQuad;        // quadrado do mapa que ele ocupa com x1,z1
 
       GLMgroup *pe_d,
                *pe_e,

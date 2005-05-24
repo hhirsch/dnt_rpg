@@ -4,7 +4,6 @@ T 14X16
 #
 o cadeira ../data/models/objetos/icex/cadeira.dcc
 o mesa_redonda ../data/models/objetos/icex/mesa_redonda.dcc
-o parede ../data/models/objetos/icex/parede.dcc
 t chao_madeira ../data/texturas/chao_madeira.jpg
 t chao_cimento ../data/texturas/chao_cimento.jpg
 t chao_grama ../data/texturas/chao_grama.jpg
@@ -182,11 +181,11 @@ p 1
 ut chao_madeira
 p 1
 ut chao_madeira
-uo cadeira
 p 1
 ut chao_madeira
 p 1
 ut chao_madeira
+uo cadeira 1
 p 0
 ut chao_madeira
 #
@@ -199,7 +198,7 @@ p 0
 ut chao_madeira
 p 1
 ut chao_madeira
-p 0
+p 1
 ut chao_madeira
 p 0
 ut chao_madeira
@@ -211,7 +210,7 @@ p 0
 ut chao_madeira
 p 1
 ut chao_madeira
-p 0
+p 1
 ut chao_madeira
 p 0
 ut chao_madeira

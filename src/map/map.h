@@ -37,12 +37,13 @@ class Square
 		int draw( GLfloat x, GLfloat y );
 
 		/* Vars: */
-		Square * up, * down, * right, * left;
-                int flags;
-                int textura;
-		Tobjeto* PersonagemOcupador;
-		mapObjeto *objetos[MAXOBJETOS];
-                int objetosDesenha[MAXOBJETOS];
+                int x1,z1,x2,z2;   // dimensoes do quadrado
+                int posX, posZ;    // posicao no mapa
+		Square * up, * down, * right, * left; //vizinhos
+                int flags;   // bandeiras
+                int textura; // qual textura ele usa
+		mapObjeto *objetos[MAXOBJETOS]; //objetos quele usa
+                int objetosDesenha[MAXOBJETOS]; //desenha objeto n?
 
 	private:
 		char * floor_texture_fname;
@@ -80,11 +81,12 @@ class Map
                 int numtexturas;
                 texture* Texturas;
                 int xInic,zInic;
+                Square* first; /* Quadrado localizado no canto superior */
+                Square* squareInic; /* quadrado inicial */
+                int x,z;       /* Dimensões do mapa */
 
 	private:
 		char* name;    /* Nome do Arquivo de Mapa Carregado */
-		Square* first; /* Quadrado localizado no canto superior */
-		int x,z;       /* Dimensões do mapa */
 		muro* muros;   /* Muros presentes no mapa */
 };
 
