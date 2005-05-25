@@ -32,6 +32,7 @@ engine::engine(char* arqMapa)
    theta=0;
    phi=0;
    d=150;
+   rotacaoX = rotacaoY = rotacaoZ = 0;
    centroX = centroZ = 0;
    centroY = 30;
    //deltaCameraX = 0;

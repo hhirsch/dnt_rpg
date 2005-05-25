@@ -303,6 +303,8 @@ Map::Map()
 	numtexturas = 0;
 	first = NULL;
 	name = NULL;
+        squareInic = NULL;
+        muros = NULL; 
         x = z = xInic = zInic = 0;
 }
 
