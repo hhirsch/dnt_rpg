@@ -493,9 +493,16 @@ int Map::open(char* arquivo)
                   else
                   {
                      fgets(buffer, sizeof(buffer), arq);
-                     sscanf(buffer,"%s %d",nome,
-                                      &aux->objetosDesenha[numObjetosAtual]);
+                     sscanf(buffer,"%s %d:%d,%d",nome,
+                                      &aux->objetosDesenha[numObjetosAtual],
+                                      &aux->Xobjetos[numObjetosAtual],
+                                      &aux->Zobjetos[numObjetosAtual]);
                      aux->objetos[numObjetosAtual] = Objetos->EndMapObjeto(nome);
+                     aux->Xobjetos[numObjetosAtual] = HALFSQUARESIZE +
+                          (aux->Xobjetos[numObjetosAtual]-1)*SQUARESIZE;
+                     aux->Zobjetos[numObjetosAtual] = HALFSQUARESIZE +
+                          (aux->Zobjetos[numObjetosAtual]-1)*SQUARESIZE;
+                     numObjetosAtual++;
                   }
                   break;
                }

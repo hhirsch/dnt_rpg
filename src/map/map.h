@@ -44,6 +44,8 @@ class Square
                 int textura; // qual textura ele usa
 		mapObjeto *objetos[MAXOBJETOS]; //objetos quele usa
                 int objetosDesenha[MAXOBJETOS]; //desenha objeto n?
+                int Xobjetos[MAXOBJETOS]; //x do objeto n
+                int Zobjetos[MAXOBJETOS]; //z do objeto n
 
 	private:
 		char * floor_texture_fname;

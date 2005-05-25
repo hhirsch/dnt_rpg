@@ -32,7 +32,7 @@ engine::engine(char* arqMapa)
    theta=0;
    phi=0;
    d=150;
-   rotacaoX = rotacaoY = rotacaoZ = 0;
+   RotacaoX = RotacaoY = RotacaoZ = 0;
    centroX = centroZ = 0;
    centroY = 30;
    //deltaCameraX = 0;
@@ -399,10 +399,11 @@ void engine::Desenhar()
 int estaDentro(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2, 
                GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2)
 {
-   return( ( ((x1 >= u1) && (x1 <= u2)) || 
-             ((x2 >= u1) && (x2 <= u2)) ) && 
-           ( ((z1 >= v1) && (z1 <= v2)) || 
-             ((z2 >= v1) && (z2 <= v2)) ) );
+   return(   ( ((x1 >= u1) && (x1 <= u2)) || 
+               ((x2 >= u1) && (x2 <= u2)) ) && 
+             ( ((z1 >= v1) && (z1 <= v2)) || 
+               ((z2 >= v1) && (z2 <= v2)) ) 
+          );
 
 }
 
@@ -419,7 +420,8 @@ Square* quadradoRelativo(int posX,int posZ, Square* quad)
    return(result);
 }
 
-int testa(float x1,float z1,float x2,float z2, int posX, int posZ, Square* quad)
+int testa(GLfloat x1,GLfloat z1,GLfloat x2,GLfloat z2, int posX, int posZ, 
+          Square* quad)
 {
    int result = 0;
    Square* proxima = quadradoRelativo(posX,posZ,quad);
@@ -429,7 +431,22 @@ int testa(float x1,float z1,float x2,float z2, int posX, int posZ, Square* quad)
    }
    if(result) // Se eh possivel entrar, testa com os objetos
    {
-      int aux = 1;
+      int ob = 0;
+      GLfloat u1,u2,v1,v2;
+      GLMmodel* modelo3d;
+      while(proxima->objetos[ob] != NULL)
+      {
+          modelo3d = (GLMmodel*)proxima->objetos[ob]->modelo3d;
+          u1 = modelo3d->x1+proxima->Xobjetos[ob];
+          u2 = modelo3d->x2+proxima->Xobjetos[ob];
+          v1 = modelo3d->z1+proxima->Zobjetos[ob];
+          v2 = modelo3d->z2+proxima->Zobjetos[ob];
+          printf("obj: %s %.3f,%.3f,%.3f,%.3f %.3f,%.3f,%.3f,%.3f\n",proxima->objetos[ob]->nome,u1,v1,u2,v2,x1,z1,x2,z2);
+          result &= !estaDentro(x1,z1,x2,z2,u1,v1,u2,v2);
+          if(!result) //se ja achou que nao pode cai fora
+             return(0);
+          ob++;
+      }
    }
 
    return(result);
