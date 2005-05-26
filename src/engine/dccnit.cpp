@@ -396,13 +396,17 @@ void engine::Desenhar()
 }
 
 
-int estaDentro(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2, 
+int estaDentro(GLfloat x[4], GLfloat z[4],
                GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2)
 {
-   return(   ( ((x1 >= u1) && (x1 <= u2)) || 
-               ((x2 >= u1) && (x2 <= u2)) ) && 
-             ( ((z1 >= v1) && (z1 <= v2)) || 
-               ((z2 >= v1) && (z2 <= v2)) ) 
+   return(   ( ((x[1] >= u1) && (x[1] <= u2)) || 
+               ((x[2] >= u1) && (x[2] <= u2)) ||
+               ((x[3] >= u1) && (x[3] <= u2)) || 
+               ((x[4] >= u1) && (x[4] <= u2)) ) && 
+             ( ((z[1] >= v1) && (z[1] <= v2)) || 
+               ((z[2] >= v1) && (z[2] <= v2)) ||
+               ((z[3] >= v1) && (z[3] <= v2)) || 
+               ((z[4] >= v1) && (z[4] <= v2)) ) 
           );
 
 }
@@ -420,8 +424,7 @@ Square* quadradoRelativo(int posX,int posZ, Square* quad)
    return(result);
 }
 
-int testa(GLfloat x1,GLfloat z1,GLfloat x2,GLfloat z2, int posX, int posZ, 
-          Square* quad)
+int testa(GLfloat x[4],GLfloat z[4], int posX, int posZ,Square* quad)
 {
    int result = 0;
    Square* proxima = quadradoRelativo(posX,posZ,quad);
@@ -441,9 +444,9 @@ int testa(GLfloat x1,GLfloat z1,GLfloat x2,GLfloat z2, int posX, int posZ,
           u2 = modelo3d->x2+proxima->Xobjetos[ob];
           v1 = modelo3d->z1+proxima->Zobjetos[ob];
           v2 = modelo3d->z2+proxima->Zobjetos[ob];
-          printf("obj: %s %.3f,%.3f,%.3f,%.3f %.3f,%.3f,%.3f,%.3f\n",proxima->objetos[ob]->nome,u1,v1,u2,v2,x1,z1,x2,z2);
-          result &= !estaDentro(x1,z1,x2,z2,u1,v1,u2,v2);
-          if(!result) //se ja achou que nao pode cai fora
+          //printf("obj: %s %.3f,%.3f,%.3f,%.3f %.3f,%.3f,%.3f,%.3f\n",proxima->objetos[ob]->nome,u1,v1,u2,v2,x1,z1,x2,z2);
+          result &= !estaDentro(x,z,u1,v1,u2,v2);
+          if(!result) //se ja achou que nao pode, cai fora
              return(0);
           ob++;
       }
@@ -458,108 +461,86 @@ int testa(GLfloat x1,GLfloat z1,GLfloat x2,GLfloat z2, int posX, int posZ,
 int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 {
    int result = 0;
-   GLfloat x1,x2,z1,z2;
+
+   GLfloat x[4],z[4];
+   int aux;
+
+   x[0] = PCs->personagemAtivo->modelo3d->x1;
+   z[0] = PCs->personagemAtivo->modelo3d->z1;
+
+   x[1] = PCs->personagemAtivo->modelo3d->x1;
+   z[1] = PCs->personagemAtivo->modelo3d->z2; 
+
+   x[2] = PCs->personagemAtivo->modelo3d->x2;
+   z[2] = PCs->personagemAtivo->modelo3d->z2;
+
+   x[3] = PCs->personagemAtivo->modelo3d->x2;
+   z[3] = PCs->personagemAtivo->modelo3d->z1;
 
    /* Rotaciona o bounding para a posicao correrta */
    if(PCs->personagemAtivo->orientacao+varAlpha != 0)
    {
-      GLfloat xVelho = PCs->personagemAtivo->modelo3d->x1;
-      GLfloat zVelho = PCs->personagemAtivo->modelo3d->z1;
-      GLfloat x,z;
-      int aux;
+      GLfloat xVelho, zVelho;
       GLfloat cosseno = cos(deg2Rad(PCs->personagemAtivo->orientacao +
                             varAlpha));
       GLfloat seno = sin(deg2Rad(PCs->personagemAtivo->orientacao +
                             varAlpha));
-      x1 = zVelho*seno + xVelho*cosseno;
-      z1 = zVelho*cosseno - xVelho*seno;
-      x2 = x1;
-      z2 = z1;
-      xVelho = PCs->personagemAtivo->modelo3d->x2;
-      for(aux = 1;aux<4;aux++)
+      for(aux = 0;aux<4;aux++)
       {
-         x = zVelho*seno + xVelho*cosseno;
-         z = zVelho*cosseno - xVelho*seno;
-         if(x < x1)
-           x1 = x;
-         if(x > x2)
-           x2 = x;
-         if(z < z1)
-           z1 = z;
-         if(z > z2)
-           z2 = z;
-         switch(aux)
-         {
-            case 1:
-               zVelho = PCs->personagemAtivo->modelo3d->z2;
-            break;
-            case 2:
-               xVelho = PCs->personagemAtivo->modelo3d->x1;
-            break;
-            default:
-            break;
-         }
+         xVelho = x[aux];
+         zVelho = z[aux];
+         x[aux] = zVelho*seno + xVelho*cosseno;
+         z[aux] = zVelho*cosseno - xVelho*seno;
       }
    }
-   else
-   {
-      /* Define a posicao com o bounding box */
-       x1 = PCs->personagemAtivo->modelo3d->x1;
-       x2 = PCs->personagemAtivo->modelo3d->x2;
-       z1 = PCs->personagemAtivo->modelo3d->z1;
-       z2 = PCs->personagemAtivo->modelo3d->z2;
-   }
+
+   int posX[4];
+   int posZ[4];
 
    /* translada o bounding box para o local correto*/
-   x1 += PCs->personagemAtivo->posicaoLadoX+varX;
-   z1 += PCs->personagemAtivo->posicaoLadoZ+varZ;
-   x2 += PCs->personagemAtivo->posicaoLadoX+varX;
-   z2 += PCs->personagemAtivo->posicaoLadoZ+varZ;
-  
-   if( (x1<0) || (x1>mapa->x*SQUARESIZE) || (x2<0) || 
-       (x2>mapa->x*SQUARESIZE) || (z1<0) || (z1>mapa->z*SQUARESIZE) ||
-       (z2<0) || (z2>mapa->z*SQUARESIZE-1) ) 
+   for(aux=0;aux<4;aux++)
    {
-       return(0);
+     x[aux] += PCs->personagemAtivo->posicaoLadoX+varX;
+     z[aux] += PCs->personagemAtivo->posicaoLadoZ+varZ;
+     if( (x[aux]<0) || (z[aux]<0) || 
+         (x[aux]>mapa->x*SQUARESIZE) || (z[aux]>mapa->z*SQUARESIZE))
+         return(0);
+
+     /* Define os quadrados possiveis em que o personagem possa estar */
+     posX[aux] = (int)floor(x[aux]/SQUARESIZE)+1;
+     posZ[aux] = (int)floor(z[aux]/SQUARESIZE)+1;
+     if((posX[aux] <= 0) || ( posX[aux] > mapa->x ) || 
+        (posZ[aux] <=0) || (posZ[aux] > mapa->z))
+          return(0);
    }
-
-   /* Define os quadrados possiveis em que o personagem possa estar */
-   int posX1 = (int)floor(x1/SQUARESIZE)+1;
-   int posX2 = (int)floor(x2/SQUARESIZE)+1;
-   int posZ1 = (int)floor(z1/SQUARESIZE)+1;
-   int posZ2 = (int)floor(z2/SQUARESIZE)+1;
-
-   //printf("%d %d %d %d\n",posX1,posZ1,posX2,posZ2);
-
-   if((posX1 <= 0) || ( posX1 > mapa->x ) || (posZ1 <=0) || (posZ1 > mapa->z))
-      return(0);
-   result = testa(x1,z1,x2,z2,posX1,posZ1,PCs->personagemAtivo->ocupaQuad);
-
+ 
+   
+   result = testa(x,z,posX[0],posZ[0],PCs->personagemAtivo->ocupaQuad);
    if(!result) 
       return(0);
 
-   if( posX1 != posX2 )
+   if( ( posX[1] != posX[0] ) || (posZ[1] != posZ[0]) )
    {
-      if((posX2 <= 0) || ( posX2 > mapa->x ))
-        return(0);
-      result &= testa(x1,z1,x2,z2,posX2,posZ1,PCs->personagemAtivo->ocupaQuad);
-     if (!result) return(0);
+      result &= testa(x,z,posX[1],posZ[1],PCs->personagemAtivo->ocupaQuad);
+      if (!result) return(0);
    }
 
-   if( posZ1 != posZ2 )
+   if( ((posX[2]!=posX[1]) || (posZ[2]!=posZ[1])) && 
+       ((posX[2]!=posX[0]) || (posZ[2]!=posZ[0])) )
    {
-      if((posZ2 <= 0) || ( posZ2 > mapa->z ))
-        return(0);
-      result &= testa(x1,z1,x2,z2,posX1,posZ2,PCs->personagemAtivo->ocupaQuad);
+      result &= testa(x,z,posX[2],posZ[2],PCs->personagemAtivo->ocupaQuad);
       if(!result) 
          return(0);
-      if( posX1 != posX2 )
-      {
-         result&=testa(x1,z1,x2,z2,posX2,posZ2,PCs->personagemAtivo->ocupaQuad);
-      }
    }
 
-   PCs->personagemAtivo->ocupaQuad = quadradoRelativo(posX1,posZ1,
+   if( ((posX[3]!=posX[1]) || (posZ[3]!=posZ[1])) && 
+       ((posX[3]!=posX[0]) || (posZ[3]!=posZ[0])) &&
+       ((posX[3]!=posX[2]) || (posZ[3]!=posZ[2])) )
+   {
+      result &= testa(x,z,posX[3],posZ[3],PCs->personagemAtivo->ocupaQuad);
+   }
+
+   PCs->personagemAtivo->ocupaQuad = quadradoRelativo(posX[0],posZ[0],
                                        PCs->personagemAtivo->ocupaQuad);
    return(result);
 }
