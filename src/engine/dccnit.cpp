@@ -401,16 +401,15 @@ void engine::Desenhar()
 int estaDentro(GLfloat x[4], GLfloat z[4],
                GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2)
 {
-   return(   ( ((x[1] >= u1) && (x[1] <= u2)) || 
-               ((x[2] >= u1) && (x[2] <= u2)) ||
-               ((x[3] >= u1) && (x[3] <= u2)) || 
-               ((x[4] >= u1) && (x[4] <= u2)) ) && 
-             ( ((z[1] >= v1) && (z[1] <= v2)) || 
-               ((z[2] >= v1) && (z[2] <= v2)) ||
-               ((z[3] >= v1) && (z[3] <= v2)) || 
-               ((z[4] >= v1) && (z[4] <= v2)) ) 
+   return(   ( ((x[0] >= u1) && (x[0] <= u2)) || 
+               ((x[1] >= u1) && (x[1] <= u2)) ||
+               ((x[2] >= u1) && (x[2] <= u2)) || 
+               ((x[3] >= u1) && (x[3] <= u2)) ) && 
+             ( ((z[0] >= v1) && (z[0] <= v2)) || 
+               ((z[1] >= v1) && (z[1] <= v2)) ||
+               ((z[2] >= v1) && (z[2] <= v2)) || 
+               ((z[3] >= v1) && (z[3] <= v2)) ) 
           );
-
 }
 
 Square* quadradoRelativo(int posX,int posZ, Square* quad)
@@ -426,10 +425,10 @@ Square* quadradoRelativo(int posX,int posZ, Square* quad)
    return(result);
 }
 
-int testa(GLfloat x[4],GLfloat z[4], int posX, int posZ,Square* quad)
+int testa(GLfloat x[4],GLfloat z[4],Square* quad)
 {
    int result = 0;
-   Square* proxima = quadradoRelativo(posX,posZ,quad);
+   Square* proxima = quad;
    if(proxima->flags & PISAVEL)
    {
      result = 1;
@@ -462,7 +461,7 @@ int testa(GLfloat x[4],GLfloat z[4], int posX, int posZ,Square* quad)
  *********************************************************************/
 int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 {
-   int result = 0;
+   int result = 1;
 
    GLfloat x[4],z[4];
    int aux;
@@ -491,13 +490,10 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       {
          xVelho = x[aux];
          zVelho = z[aux];
-         x[aux] = zVelho*seno + xVelho*cosseno;
-         z[aux] = zVelho*cosseno - xVelho*seno;
+         x[aux] = (zVelho*seno) + (xVelho*cosseno);
+         z[aux] = (zVelho*cosseno) - (xVelho*seno);
       }
    }
-
-   int posX[4];
-   int posZ[4];
 
    /* translada o bounding box para o local correto*/
    for(aux=0;aux<4;aux++)
@@ -507,42 +503,140 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
      if( (x[aux]<0) || (z[aux]<0) || 
          (x[aux]>mapa->x*SQUARESIZE) || (z[aux]>mapa->z*SQUARESIZE))
          return(0);
-
-     /* Define os quadrados possiveis em que o personagem possa estar */
-     posX[aux] = (int)floor(x[aux]/SQUARESIZE)+1;
-     posZ[aux] = (int)floor(z[aux]/SQUARESIZE)+1;
-     if((posX[aux] <= 0) || ( posX[aux] > mapa->x ) || 
-        (posZ[aux] <=0) || (posZ[aux] > mapa->z))
-          return(0);
    }
  
-   
-   result = testa(x,z,posX[0],posZ[0],PCs->personagemAtivo->ocupaQuad);
-   if(!result) 
-      return(0);
+   /* Testa quadrados a direita */
+   if((PCs->personagemAtivo->ocupaQuad->right)) 
+   { 
+      /* leste */
+      if(estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->right->x1,
+                 PCs->personagemAtivo->ocupaQuad->right->z1,
+                 PCs->personagemAtivo->ocupaQuad->right->x2,
+                 PCs->personagemAtivo->ocupaQuad->right->z2) )
+      {
+         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->right);
+         if(!result)
+         {
+            //printf("sai na direita\n"); 
+            return(0);
+         }
+      }
+      /* Nordeste */
+      if( (PCs->personagemAtivo->ocupaQuad->right->up) &&
+          estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->right->up->x1,
+                 PCs->personagemAtivo->ocupaQuad->right->up->z1,
+                 PCs->personagemAtivo->ocupaQuad->right->up->x2,
+                 PCs->personagemAtivo->ocupaQuad->right->up->z2) )
+      {
+         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->right->up);
+         if(!result) 
+         {
+            //printf("sai na direita->cima\n"); 
+            return(0);
+         }
 
-   if( ( posX[1] != posX[0] ) || (posZ[1] != posZ[0]) )
-   {
-      result &= testa(x,z,posX[1],posZ[1],PCs->personagemAtivo->ocupaQuad);
-      if (!result) return(0);
+      }
+      /* Sudeste */
+      if( (PCs->personagemAtivo->ocupaQuad->right->down) &&
+           estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->right->down->x1,
+                 PCs->personagemAtivo->ocupaQuad->right->down->z1,
+                 PCs->personagemAtivo->ocupaQuad->right->down->x2,
+                 PCs->personagemAtivo->ocupaQuad->right->down->z2))
+      {
+         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->right->down);
+         if(!result) 
+         {
+            //printf("sai na direita->baixo\n"); 
+            return(0);
+         }
+      }
    }
 
-   if( ((posX[2]!=posX[1]) || (posZ[2]!=posZ[1])) && 
-       ((posX[2]!=posX[0]) || (posZ[2]!=posZ[0])) )
-   {
-      result &= testa(x,z,posX[2],posZ[2],PCs->personagemAtivo->ocupaQuad);
+   /* Testa quadrados a esquerda */
+   if((PCs->personagemAtivo->ocupaQuad->left)) 
+   { 
+      /* oeste */
+      if(estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->left->x1,
+                 PCs->personagemAtivo->ocupaQuad->left->z1,
+                 PCs->personagemAtivo->ocupaQuad->left->x2,
+                 PCs->personagemAtivo->ocupaQuad->left->z2))
+      {
+         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->left);
+         if(!result) 
+         {
+            //printf("sai na esquerda\n"); 
+            return(0);
+         }
+      }
+
+      /* Noroeste */
+      if( (PCs->personagemAtivo->ocupaQuad->left->up) &&
+          estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->left->up->x1,
+                 PCs->personagemAtivo->ocupaQuad->left->up->z1,
+                 PCs->personagemAtivo->ocupaQuad->left->up->x2,
+                 PCs->personagemAtivo->ocupaQuad->left->up->z2) )
+      {
+         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->left->up);
+         if(!result) 
+         {
+            //printf("sai na esquerda->cima\n"); 
+            return(0);
+         }
+      }
+      /* Sudoeste */
+      if( (PCs->personagemAtivo->ocupaQuad->left->down) &&
+           estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->left->down->x1,
+                 PCs->personagemAtivo->ocupaQuad->left->down->z1,
+                 PCs->personagemAtivo->ocupaQuad->left->down->x2,
+                 PCs->personagemAtivo->ocupaQuad->left->down->z2))
+      {
+         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->left->down);
+         if(!result) 
+         {
+            //printf("sai na esquerda->baixo\n"); 
+            return(0);
+         }
+      }
+   }
+  
+   /* Testa quadrados abaixo */
+   if((PCs->personagemAtivo->ocupaQuad->down) && 
+      estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->down->x1,
+                 PCs->personagemAtivo->ocupaQuad->down->z1,
+                 PCs->personagemAtivo->ocupaQuad->down->x2,
+                 PCs->personagemAtivo->ocupaQuad->down->z2) )
+   { 
+      /* sul */
+      result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->down);
       if(!result) 
+      {
+         //printf("sai no de baixo\n"); 
          return(0);
+      }
    }
 
-   if( ((posX[3]!=posX[1]) || (posZ[3]!=posZ[1])) && 
-       ((posX[3]!=posX[0]) || (posZ[3]!=posZ[0])) &&
-       ((posX[3]!=posX[2]) || (posZ[3]!=posZ[2])) )
-   {
-      result &= testa(x,z,posX[3],posZ[3],PCs->personagemAtivo->ocupaQuad);
+   /* Testa quadrados acima */
+   if((PCs->personagemAtivo->ocupaQuad->up) && 
+      estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->up->x1,
+                 PCs->personagemAtivo->ocupaQuad->up->z1,
+                 PCs->personagemAtivo->ocupaQuad->up->x2,
+                 PCs->personagemAtivo->ocupaQuad->up->z2) )
+   { 
+      /* norte */
+      result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->up);
+      if(!result) 
+      {
+         //printf("sai no de cima\n"); 
+         return(0);
+      }
    }
 
-   PCs->personagemAtivo->ocupaQuad = quadradoRelativo(posX[0],posZ[0],
+   int posX =(int)floor((PCs->personagemAtivo->posicaoLadoX+varX) 
+                                                  / (SQUARESIZE))+1;
+   int posZ =(int)floor((PCs->personagemAtivo->posicaoLadoZ+varZ) 
+                                                  / (SQUARESIZE))+1;
+
+   PCs->personagemAtivo->ocupaQuad = quadradoRelativo(posX,posZ,
                                        PCs->personagemAtivo->ocupaQuad);
    return(result);
 }

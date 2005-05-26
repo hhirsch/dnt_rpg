@@ -301,6 +301,7 @@ int Map::draw()
 Map::Map()
 {
 	numtexturas = 0;
+        Texturas = NULL;
 	first = NULL;
 	name = NULL;
         squareInic = NULL;
