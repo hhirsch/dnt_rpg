@@ -35,6 +35,9 @@ engine::engine(char* arqMapa)
    RotacaoX = RotacaoY = RotacaoZ = 0;
    centroX = centroZ = 0;
    centroY = 30;
+   cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+   cameraY = centroY + (float) d * sin(deg2Rad(theta));
+   cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    //deltaCameraX = 0;
    //deltaCameraZ = 0;   
    //mapa = map;
@@ -364,11 +367,10 @@ void engine::Desenhar()
 {
     glLoadIdentity();
    //gluLookAt (7.0,7.0, 7.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0);
-   float x = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   //float y = centroY + (float) 2*d * sin(deg2Rad(theta));
-   float y = centroY + (float) d * sin(deg2Rad(theta));
-   float z = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-   gluLookAt(x,y,z, centroX,centroY,centroZ,0,1,0);
+   cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+   cameraY = centroY + (float) d * sin(deg2Rad(theta));
+   cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+   gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
 
    glClear ((GL_COLOR_BUFFER_BIT));
    glClear (GL_DEPTH_BUFFER_BIT);

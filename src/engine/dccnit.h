@@ -31,6 +31,7 @@ class engine
       /* Variaveis de Controle da Camera/olho */
       double theta, phi, d;  //Rotacao pra cima, pro lado e zoom
       double centroX,centroY,centroZ; // posicao central da camera
+      double cameraX,cameraY,cameraZ;
 //      double deltaCameraX, deltaCameraZ; // espera para movimentar camera
 
       /* Inicia a estrutura da Engine para utilizacao

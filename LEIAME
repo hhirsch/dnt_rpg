@@ -57,8 +57,8 @@ mouse canto direito   =  gira para direita a camera   (0-360°)
 seta para direita     =  gira para direita a camera   (0-360°)
 seta para cima        =  aumenta o zoom da camera     (X-Ym)
 seta para baixo       =  diminui o zoom da camera     (X-Ym)
-pageup                =  sobe seguindo circuferencia  (0-90°)
-pagedown              =  desce seguindo circuferencia (0-90°)
+pageup                =  sobe seguindo circuferencia  (0-89°)
+pagedown              =  desce seguindo circuferencia (0-89°)
 
 
                Movimentação do Personagem
@@ -71,6 +71,10 @@ q          =  move personagem para esquerda (0-?)
 e          =  move personagem para direita (0-?)
 tab        =  ativa o próximo personagem do grupo
 lctrl+tab  =  ativa o personagem anterior do grupo
+
+Para sair do jogo, pressione a tecla ESC. Uma pequena animação
+será mostrada como  maneira de ilustrar o sistema de animações
+implementado, mas ainda não completamente utilizável.
 
 ==============================================================
 |                       IV - Contatos                        |
