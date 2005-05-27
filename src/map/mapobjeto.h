@@ -15,7 +15,7 @@ class mapObjeto: public Tobjeto
       * observador (o que vai definir o LOD).
       * x,z       -> posicao do objeto
       * distancia -> distancia do objeto ao observador*/
-     void Desenhar(int x, int z,int distancia);
+     void Desenhar(int x, int z,GLfloat distancia);
 
      void* modelo3d;     // Modelo com nível máximo de detalhe
      void* modeloMedio;  // Modelo com nível médio de detalhe

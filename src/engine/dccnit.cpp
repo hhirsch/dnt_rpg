@@ -378,7 +378,7 @@ void engine::Desenhar()
    glRotatef(RotacaoX,1,0,0);
    glRotatef(RotacaoY,0,1,0);
    glRotatef(RotacaoZ,0,0,1);
-   mapa->draw();
+   mapa->draw(cameraX,cameraY,cameraZ);
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
       for(aux=0;aux < PCs->total;aux++)

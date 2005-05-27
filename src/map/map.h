@@ -75,7 +75,8 @@ class Map
 		
 		Map();                     /* Construtor */
 		~Map();                    /* Destruidor */
-		int draw( );               /* Desenha o mapa */
+                /* Desenha o Mapa */
+		int draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ);
 		int open( char* arquivo ); /* Abre o mapa do arquivo */
 
 		/* Vars */

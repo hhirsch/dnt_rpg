@@ -131,7 +131,7 @@ int Square::draw( GLfloat x, GLfloat z )
 /********************************************************************
  *                           Desenha o Mapa                         *
  ********************************************************************/
-int Map::draw()
+int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ)
 {
 	Square * ref = first->down;
         Square * aux = first;
@@ -274,14 +274,23 @@ int Map::draw()
         ref = first->down;
         aux = first;
         int o;
+        GLfloat distancia;
+        GLfloat deltaX, deltaZ;
+        GLfloat deltaY2 = cameraY*cameraY;
 
         while(aux!=NULL)
         {
+           deltaX = (cameraX - aux->x1+HALFSQUARESIZE);
+           deltaZ = (cameraZ - aux->z1+HALFSQUARESIZE);
+           distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / SQUARESIZE;
            for(o=0;o<MAXOBJETOS;o++)
-              if((aux->objetos[o] != NULL) && (aux->objetosDesenha[o] == 1) ){
+           {
+              if((aux->objetos[o] != NULL) && (aux->objetosDesenha[o] == 1) )
+              {
                   aux->objetos[o]->Desenhar(aux->x1+HALFSQUARESIZE,
-                                            aux->z1+HALFSQUARESIZE,0);
+                                            aux->z1+HALFSQUARESIZE,distancia);
               }
+           }
            if(aux->right == NULL)   //chegou ao fim da linha
            {
               aux = ref;
