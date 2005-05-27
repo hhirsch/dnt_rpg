@@ -657,7 +657,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	T(numtriangles).vindices[2] = v;
 	T(numtriangles).nindices[2] = n;
         T(numtriangles).material = material;
-        //T(numtriangles).texture = texture;
+        T(numtriangles).texture = -1;
 	group->triangles[group->numtriangles++] = numtriangles;
 	numtriangles++;
 	while(fscanf(file, "%d//%d", &v, &n) > 0) {
@@ -668,7 +668,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	  T(numtriangles).vindices[2] = v;
 	  T(numtriangles).nindices[2] = n;
           T(numtriangles).material = material;
-          //T(numtriangles).texture = texture;
+          T(numtriangles).texture = -1;
 	  group->triangles[group->numtriangles++] = numtriangles;
 	  numtriangles++;
 	}
@@ -739,7 +739,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	fscanf(file, "%d", &v);
 	T(numtriangles).vindices[2] = v;
         T(numtriangles).material = material;
-        //T(numtriangles).texture = texture;
+        T(numtriangles).texture = -1;
 	group->triangles[group->numtriangles++] = numtriangles;
 	numtriangles++;
 	while(fscanf(file, "%d", &v) > 0) {
@@ -747,7 +747,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 	  T(numtriangles).vindices[1] = T(numtriangles-1).vindices[2];
 	  T(numtriangles).vindices[2] = v;
           T(numtriangles).material = material;
-          //T(numtriangles).texture = texture;
+          T(numtriangles).texture = -1;
 	  group->triangles[group->numtriangles++] = numtriangles;
 	  numtriangles++;
 	}
@@ -938,7 +938,7 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
     /*if (mode & GLM_COLOR) {
       glColor3fv(model->materials[group->material].diffuse);
     }*/
-
+    texturaAtual = -1;
     group->listaDesenhar = glGenLists(1);
     glNewList(group->listaDesenhar,GL_COMPILE);
 
@@ -957,7 +957,7 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
          glBegin(GL_TRIANGLES);
       }
       /* Desabilita Textura Existente, caso necessario */
-      else if( (texturaAtual == -1) && (T(group->triangles[i]).texture==-1))
+      else if( (texturaAtual != -1) && (T(group->triangles[i]).texture==-1))
       {
          texturaAtual = -1;
          glDisable(GL_TEXTURE_2D);
@@ -1004,12 +1004,11 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
 
     }
     glEnd();
+    glDisable(GL_TEXTURE_2D);
     glEndList();
 
     group = group->next;
   }
-  if (texturaAtual != -1)
-     glDisable(GL_TEXTURE_2D);
 }
 
 
