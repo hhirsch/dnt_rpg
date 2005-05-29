@@ -2,6 +2,7 @@
  */
 
 #include "map.h"
+#include "../engine/culling.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,8 +25,11 @@ Square::Square()
 	flags = 0;
         int aux;
         for(aux=0;aux<MAXOBJETOS;aux++)
+        {
            objetos[aux] = NULL;
            objetosDesenha[aux] = 0;
+           quadObjetos[aux] = NULL;
+        }
 	return;
 }
 
@@ -131,11 +135,12 @@ int Square::draw( GLfloat x, GLfloat z )
 /********************************************************************
  *                           Desenha o Mapa                         *
  ********************************************************************/
-int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ)
+int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[6][4])
 {
 	Square * ref = first->down;
         Square * aux = first;
         int textura = -1;
+        int i;
         if(aux) {
            textura = aux->textura;
            glEnable(GL_TEXTURE_2D);
@@ -170,14 +175,25 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ)
                 glBindTexture(GL_TEXTURE_2D, textura);
                 glBegin(GL_QUADS);
              }
-             glTexCoord2f(0,0); 
-             glVertex3f( aux->x1 , 0.0, aux->z1 );
-             glTexCoord2f(0,1);
-             glVertex3f( aux->x1 , 0.0, aux->z2);
-             glTexCoord2f(1,1);
-             glVertex3f( aux->x2, 0.0, aux->z2 );
-             glTexCoord2f(1,0);
-             glVertex3f( aux->x2, 0.0, aux->z1 );
+             if(quadradoVisivel(aux->x1,0,aux->z1,aux->x2,ALTURAMAXIMA,aux->z2,matriz))
+             {
+                for(i=0;i<MAXOBJETOS;i++)
+                {
+                   if(aux->quadObjetos[i] != NULL){ 
+                       aux->quadObjetos[i]->visivel = 1;}
+                }
+                aux->visivel = 1;
+                glTexCoord2f(0,0); 
+                glVertex3f( aux->x1 , 0.0, aux->z1 );
+                glTexCoord2f(0,1);
+                glVertex3f( aux->x1 , 0.0, aux->z2);
+                glTexCoord2f(1,1);
+                glVertex3f( aux->x2, 0.0, aux->z2 );
+                glTexCoord2f(1,0);
+                glVertex3f( aux->x2, 0.0, aux->z1 );
+             }
+             else
+               aux->visivel = 0;
                           
            //(*aux).draw(x,y);
            if(aux->right == NULL)   //chegou ao fim da linha
@@ -213,6 +229,8 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ)
               glBindTexture(GL_TEXTURE_2D, textura);
               glBegin(GL_QUADS);
            }
+           if(quadradoVisivel(maux->x1,0,maux->z1,maux->x2,MUROALTURA,maux->z2,matriz))
+           {
            /* Face de frente */
               glNormal3i(0,0,1);
               glTexCoord2f(0,0);
@@ -263,7 +281,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ)
               glVertex3f(maux->x2,MUROALTURA,maux->z2);
               glTexCoord2f(0,1);
               glVertex3f(maux->x1,MUROALTURA,maux->z2);
-
+           }
            maux = maux->proximo;
         }
         glEnd();
@@ -280,6 +298,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ)
 
         while(aux!=NULL)
         {
+           if(aux->visivel){
            deltaX = (cameraX - aux->x1+HALFSQUARESIZE);
            deltaZ = (cameraZ - aux->z1+HALFSQUARESIZE);
            distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / SQUARESIZE;
@@ -291,6 +310,8 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ)
                                             aux->z1+HALFSQUARESIZE,distancia);
               }
            }
+           }
+           aux->visivel = 0;
            if(aux->right == NULL)   //chegou ao fim da linha
            {
               aux = ref;
@@ -318,6 +339,16 @@ Map::Map()
         x = z = xInic = zInic = 0;
 }
 
+
+Square* Map::quadradoRelativo(int x, int z)
+{
+   int ax,az;
+   Square* result = first;
+   for(ax=0;ax<(x-1);ax++) result = result->right;
+   for(az=0;az<(z-1);az++) result = result->down;
+   return(result);
+}
+
 /********************************************************************
  *                       Abre o Arquivo de Mapas                    *
  ********************************************************************/
@@ -333,7 +364,7 @@ int Map::open(char* arquivo)
    char* nomeTexturaAtual = "nada\0";
    int IDmuroTexturaAtual = -1;
    char* nomeMuroTexturaAtual = "nada\0";
-   int numObjetosAtual;
+   int numObjetosAtual = 0;
    int pisavel=0;
    
    if(!(arq = fopen(arquivo,"r")))
@@ -508,10 +539,6 @@ int Map::open(char* arquivo)
                                       &aux->Xobjetos[numObjetosAtual],
                                       &aux->Zobjetos[numObjetosAtual]);
                      aux->objetos[numObjetosAtual] = Objetos->EndMapObjeto(nome);
-                     aux->Xobjetos[numObjetosAtual] = HALFSQUARESIZE +
-                          (aux->Xobjetos[numObjetosAtual]-1)*SQUARESIZE;
-                     aux->Zobjetos[numObjetosAtual] = HALFSQUARESIZE +
-                          (aux->Zobjetos[numObjetosAtual]-1)*SQUARESIZE;
                      numObjetosAtual++;
                   }
                   break;
@@ -533,6 +560,34 @@ int Map::open(char* arquivo)
       }
    }
    fclose(arq);
+
+   /* Agora varre todo o mapa, atualizando os ponteiros para os quadrados de
+    * objeto. */
+   printf("rodando paso2\n");
+   aux = first;
+   ant = first->down;
+   int ax,az;
+   int i;
+   for(az=0;az<z;az++)
+   {
+       for(ax=0;ax<x;ax++)
+       {
+          for(i=0;i<MAXOBJETOS;i++)
+            if(aux->objetos[i] != NULL)
+            {
+               aux->quadObjetos[i] = quadradoRelativo(aux->Xobjetos[i],aux->Zobjetos[i]);
+               aux->Xobjetos[i] = HALFSQUARESIZE +
+                    (aux->Xobjetos[i]-1)*SQUARESIZE;
+               aux->Zobjetos[numObjetosAtual] = HALFSQUARESIZE +
+                    (aux->Zobjetos[i]-1)*SQUARESIZE;
+            }
+          aux = aux->right;
+       }
+       aux = ant;
+       if(ant!=NULL)
+         ant = ant->down;
+   }
+
    return(1);
 }
 

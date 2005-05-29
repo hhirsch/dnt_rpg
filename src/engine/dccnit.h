@@ -60,6 +60,8 @@ class engine
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
  
       Map* mapa; /* Mapa Utilizado pela Engine */
+ 
+      GLfloat matrizVisivel[6][4]; /* MAtriz do frustum atual */
 
 };
 

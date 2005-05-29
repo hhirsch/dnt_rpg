@@ -4,6 +4,7 @@
 
 
 #include "dccnit.h"
+#include "culling.h"
 #include <math.h>
 
 #define LADOHEXA 16
@@ -206,6 +207,26 @@ int engine::TrataES(SDL_Surface *screen)
          redesenha = 1;
       }
    }
+   if(keys[SDLK_HOME]) // Zoom Maximo
+   {
+      d = ZOOMMAXIMO;
+      redesenha = 1;
+   }
+   if(keys[SDLK_END]) // ZoomMinimo
+   {
+      d = ZOOMMINIMO;
+      redesenha = 1;
+   }
+   if(keys[SDLK_INSERT]) //Maximo para cima
+   {
+      theta = 89;
+      redesenha = 1;
+   }
+   if(keys[SDLK_DELETE]) //Maximo para baixo
+   {
+      theta = 0;
+      redesenha = 1;
+   }
    /* Tratamento da tecla para Movimentacao do Personagem */
 
    if(keys[SDLK_q] || keys[SDLK_e])
@@ -336,14 +357,14 @@ int engine::TrataES(SDL_Surface *screen)
    SDL_GetMouseState(&x,&y);
 
    /* Tratamento do Mouse para Camera */
-   if(x == 0)    // Gira a Camera Antihorariamente
+   if(x == 0)    // Gira a Camera horariamente
    {
-      phi-=2; 
+      phi+=2; 
       redesenha = 1;  
    }
-   if(x == screen->w-1) // Gira a camera horariamente
+   if(x == screen->w-1) // Gira a camera antihorariamente
    {
-     phi+=2; 
+     phi-=2; 
      redesenha = 1;
    }
   
@@ -365,12 +386,14 @@ int engine::TrataES(SDL_Surface *screen)
  *********************************************************************/
 void engine::Desenhar()
 {
-    glLoadIdentity();
+   glLoadIdentity();
    //gluLookAt (7.0,7.0, 7.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0);
    cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centroY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
+
+   AtualizaFrustum(matrizVisivel);
 
    glClear ((GL_COLOR_BUFFER_BIT));
    glClear (GL_DEPTH_BUFFER_BIT);
@@ -378,7 +401,7 @@ void engine::Desenhar()
    glRotatef(RotacaoX,1,0,0);
    glRotatef(RotacaoY,0,1,0);
    glRotatef(RotacaoZ,0,0,1);
-   mapa->draw(cameraX,cameraY,cameraZ);
+   mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
       for(aux=0;aux < PCs->total;aux++)

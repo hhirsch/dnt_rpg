@@ -7,10 +7,6 @@
 /* Que zona este código!!! Rui escreve em inglês e em português ao mesmo tempo
  * e Farrer em Português!! Viva o Esperanto!*/
 
-/* TODO: 
- * Add support for objects
- */
-
 #include "mapobjeto.h"
 //#include "../engine/glm.h" 
 
@@ -24,6 +20,7 @@
 #define HALFSQUARESIZE 5
 #define MAXOBJETOS 5
 #define MUROALTURA 50
+#define ALTURAMAXIMA 100
 
 class Square
 {
@@ -41,11 +38,13 @@ class Square
                 int posX, posZ;    // posicao no mapa
 		Square * up, * down, * right, * left; //vizinhos
                 int flags;   // bandeiras
+                int visivel;
                 int textura; // qual textura ele usa
 		mapObjeto *objetos[MAXOBJETOS]; //objetos quele usa
                 int objetosDesenha[MAXOBJETOS]; //desenha objeto n?
                 int Xobjetos[MAXOBJETOS]; //x do objeto n
                 int Zobjetos[MAXOBJETOS]; //z do objeto n
+                Square* quadObjetos[MAXOBJETOS];
 
 	private:
 		char * floor_texture_fname;
@@ -76,7 +75,7 @@ class Map
 		Map();                     /* Construtor */
 		~Map();                    /* Destruidor */
                 /* Desenha o Mapa */
-		int draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ);
+		int draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[6][4]);
 		int open( char* arquivo ); /* Abre o mapa do arquivo */
 
 		/* Vars */
@@ -91,6 +90,8 @@ class Map
 	private:
 		char* name;    /* Nome do Arquivo de Mapa Carregado */
 		muro* muros;   /* Muros presentes no mapa */
+                Square* quadradoRelativo(int x, int z);
+
 };
 
 #endif

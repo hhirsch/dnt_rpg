@@ -20,6 +20,7 @@ int main()
    Farso_Iniciar(&screen,"Teste Engine DccNiTghtmare");
    engine* Engine = new engine("../data/mapas/arquivo.map");
    Engine->Iniciar(screen);
+   //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 // int aux;
 // for(aux = 0;aux<10;aux++)
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
