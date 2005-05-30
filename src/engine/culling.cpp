@@ -89,7 +89,7 @@ void AtualizaFrustum(GLfloat matriz[6][4])
 	matriz[3][2] /= t;
 	matriz[3][3] /= t;
 
-/*	// Extract The FAR Plane
+	// Extract The FAR Plane
 	matriz[4][0] = clip[ 3] - clip[ 2];
 	matriz[4][1] = clip[ 7] - clip[ 6];
 	matriz[4][2] = clip[11] - clip[10];
@@ -100,7 +100,7 @@ void AtualizaFrustum(GLfloat matriz[6][4])
 	matriz[4][0] /= t;
 	matriz[4][1] /= t;
 	matriz[4][2] /= t;
-	matriz[4][3] /= t;*/
+	matriz[4][3] /= t;
 
 	// Extract The NEAR Plane
 	matriz[5][0] = clip[ 3] + clip[ 2];
@@ -150,7 +150,7 @@ int quadradoVisivel(GLfloat x1,GLfloat y1, GLfloat z1,GLfloat x2,GLfloat y2, GLf
        (matriz[3][0]*x2+matriz[3][1]*y1+matriz[3][2]*z1+matriz[3][3] <= 0) &&
        (matriz[3][0]*x2+matriz[3][1]*y1+matriz[3][2]*z2+matriz[3][3] <= 0) &&
        (matriz[3][0]*x2+matriz[3][1]*y2+matriz[3][2]*z1+matriz[3][3] <= 0) &&
-       (matriz[3][0]*x2+matriz[3][1]*y2+matriz[3][2]*z2+matriz[3][3] <= 0)) ||/*
+       (matriz[3][0]*x2+matriz[3][1]*y2+matriz[3][2]*z2+matriz[3][3] <= 0)) ||
       ((matriz[4][0]*x1+matriz[4][1]*y1+matriz[4][2]*z1+matriz[4][3] <= 0) &&
        (matriz[4][0]*x1+matriz[4][1]*y1+matriz[4][2]*z2+matriz[4][3] <= 0) &&
        (matriz[4][0]*x1+matriz[4][1]*y2+matriz[4][2]*z1+matriz[4][3] <= 0) &&
@@ -158,7 +158,7 @@ int quadradoVisivel(GLfloat x1,GLfloat y1, GLfloat z1,GLfloat x2,GLfloat y2, GLf
        (matriz[4][0]*x2+matriz[4][1]*y1+matriz[4][2]*z1+matriz[4][3] <= 0) &&
        (matriz[4][0]*x2+matriz[4][1]*y1+matriz[4][2]*z2+matriz[4][3] <= 0) &&
        (matriz[4][0]*x2+matriz[4][1]*y2+matriz[4][2]*z1+matriz[4][3] <= 0) &&
-       (matriz[4][0]*x2+matriz[4][1]*y2+matriz[4][2]*z2+matriz[4][3] <= 0)) ||*/
+       (matriz[4][0]*x2+matriz[4][1]*y2+matriz[4][2]*z2+matriz[4][3] <= 0)) ||
       ((matriz[5][0]*x1+matriz[5][1]*y1+matriz[5][2]*z1+matriz[5][3] <= 0) &&
        (matriz[5][0]*x1+matriz[5][1]*y1+matriz[5][2]*z2+matriz[5][3] <= 0) &&
        (matriz[5][0]*x1+matriz[5][1]*y2+matriz[5][2]*z1+matriz[5][3] <= 0) &&

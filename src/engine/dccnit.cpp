@@ -279,17 +279,17 @@ int engine::TrataES(SDL_Surface *screen)
    if( (keys[SDLK_a]) || (keys[SDLK_d]))
    {
       // Gira personagem antihorariamente
-      if((keys[SDLK_a]) && (podeAndar(0,0,1.0)) )  
+      if((keys[SDLK_a]) && (podeAndar(0,0,2.0)) )  
       {
-         PCs->personagemAtivo->orientacao += 1.0;
+         PCs->personagemAtivo->orientacao += 2.0;
          if(PCs->personagemAtivo->orientacao > 360.0)
-            PCs->personagemAtivo->orientacao = 1.0;
+            PCs->personagemAtivo->orientacao = 2.0;
          redesenha = 1;
       }
       // Gira o personagem horariamente
-      if((keys[SDLK_d]) && (podeAndar(0,0,-1.0)) )
+      if((keys[SDLK_d]) && (podeAndar(0,0,-2.0)) )
       {
-         PCs->personagemAtivo->orientacao -= 1.0;
+         PCs->personagemAtivo->orientacao -= 2.0;
          if(PCs->personagemAtivo->orientacao < 0.0)
             PCs->personagemAtivo->orientacao = 360.0;
       }

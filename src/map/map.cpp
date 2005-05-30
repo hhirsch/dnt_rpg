@@ -175,7 +175,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
                 glBindTexture(GL_TEXTURE_2D, textura);
                 glBegin(GL_QUADS);
              }
-             if(quadradoVisivel(aux->x1,0,aux->z1,aux->x2,ALTURAMAXIMA,aux->z2,matriz))
+             if((aux->visivel) || (quadradoVisivel(aux->x1,0,aux->z1,aux->x2,ALTURAMAXIMA,aux->z2,matriz)))
              {
                 for(i=0;i<MAXOBJETOS;i++)
                 {
