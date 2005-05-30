@@ -20,13 +20,14 @@ existência   de  alguns  quesitos  de  software  e  outros  de
 hardware. São eles:
 
    Software:
-   OpenGL   - Já instalado no Linux Padrão (X.org)
+   OpenGL   - Mesa3D 6.2, www.mesa3d.org (ou SGI-OpenGL 1.4)
    SDL      - Versão 1.2.7, www.libsdl.org
    SDLImage - Versão 1.2.4, www.libsdl.org/projects/SDL_image/
 
    Hardware:
    Placa de Vídeo com aceleração 3D compatível  com  OpenGl no
-   linux, através de módulos acelerados.
+   linux, através  de módulos  acelerados  (caso  contrário, a 
+   renderização é extremamente lenta).
 
 ==============================================================
 |                      II - Instalação                       |
@@ -51,14 +52,18 @@ navegação a seguinte:
 
                   Movimentação da Camera
 
-mouse canto esquerdo  =  gira para esquerda a camera  (0-360°)
+mouse canto esquerdo  =  gira camera horariamente   (0-360°)
 seta para esquerda    =  gira para esquerda a camera  (0-360°)
-mouse canto direito   =  gira para direita a camera   (0-360°)
+mouse canto direito   =  gira camera antihorariamente (0-360°)
 seta para direita     =  gira para direita a camera   (0-360°)
 seta para cima        =  aumenta o zoom da camera     (X-Ym)
 seta para baixo       =  diminui o zoom da camera     (X-Ym)
+home                  =  coloca o zoom no máximo
+end                   =  coloca zoom no mínimo
 pageup                =  sobe seguindo circuferencia  (0-89°)
 pagedown              =  desce seguindo circuferencia (0-89°)
+insert                =  coloca a câmera no topo
+delete                =  coloca a câmera no chão
 
 
                Movimentação do Personagem

@@ -181,12 +181,12 @@ int engine::TrataES(SDL_Surface *screen)
        redesenha = 1;
      }
    }
-   if(keys[SDLK_LEFT]) // Roda Camera Antihorariamente
+   if(keys[SDLK_RIGHT]) // Roda Camera Antihorariamente
    {
        phi -=2;  
        redesenha = 1;
    }
-   if(keys[SDLK_RIGHT]) // Roda Camera Horariamente
+   if(keys[SDLK_LEFT]) // Roda Camera Horariamente
    {
       phi +=2;
       redesenha = 1;

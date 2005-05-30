@@ -1,0 +1,630 @@
+T 17X13
+#
+#  mapa para testar o nosso LOD estatico. por EU!!
+#
+o computador ../data/models/objetos/geral/computador.dcc
+t chao_grama ../data/texturas/chao_grama.jpg
+t chao_asfalto ../data/texturas/chao_asfalto.jpg
+#nao tem muro algum
+#
+#
+#linha 1
+p 0
+ut chao_grama
+uo computador 1:1,1
+p 0
+ut chao_grama
+uo computador 1:2,1
+p 0
+ut chao_grama
+uo computador 1:3,1
+p 0
+ut chao_grama
+uo computador 1:4,1
+p 0
+ut chao_grama
+uo computador 1:5,1
+p 0
+ut chao_grama
+uo computador 1:6,1
+p 0
+ut chao_grama
+uo computador 1:7,1
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,1
+p 0
+ut chao_grama
+uo computador 1:12,1
+p 0
+ut chao_grama
+uo computador 1:13,1
+p 0
+ut chao_grama
+uo computador 1:14,1
+p 0
+ut chao_grama
+uo computador 1:15,1
+p 0
+ut chao_grama
+uo computador 1:16,1
+p 0
+ut chao_grama
+uo computador 1:17,1
+#
+#Linha 2
+#
+p 0
+ut chao_grama
+uo computador 1:1,2
+p 0
+ut chao_grama
+uo computador 1:2,2
+p 0
+ut chao_grama
+uo computador 1:3,2
+p 0
+ut chao_grama
+uo computador 1:4,2
+p 0
+ut chao_grama
+uo computador 1:5,2
+p 0
+ut chao_grama
+uo computador 1:6,2
+p 0
+ut chao_grama
+uo computador 1:7,2
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,2
+p 0
+ut chao_grama
+uo computador 1:12,2
+p 0
+ut chao_grama
+uo computador 1:13,2
+p 0
+ut chao_grama
+uo computador 1:14,2
+p 0
+ut chao_grama
+uo computador 1:15,2
+p 0
+ut chao_grama
+uo computador 1:16,2
+p 0
+ut chao_grama
+uo computador 1:17,2
+#
+#Linha 3
+#
+p 0
+ut chao_grama
+uo computador 1:1,3
+p 0
+ut chao_grama
+uo computador 1:2,3
+p 0
+ut chao_grama
+uo computador 1:3,3
+p 0
+ut chao_grama
+uo computador 1:4,3
+p 0
+ut chao_grama
+uo computador 1:5,3
+p 0
+ut chao_grama
+uo computador 1:6,3
+p 0
+ut chao_grama
+uo computador 1:7,3
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,3
+p 0
+ut chao_grama
+uo computador 1:12,3
+p 0
+ut chao_grama
+uo computador 1:13,3
+p 0
+ut chao_grama
+uo computador 1:14,3
+p 0
+ut chao_grama
+uo computador 1:15,3
+p 0
+ut chao_grama
+uo computador 1:16,3
+p 0
+ut chao_grama
+uo computador 1:17,3
+#
+#Linha 4
+#
+p 0
+ut chao_grama
+uo computador 1:1,4
+p 0
+ut chao_grama
+uo computador 1:2,4
+p 0
+ut chao_grama
+uo computador 1:3,4
+p 0
+ut chao_grama
+uo computador 1:4,4
+p 0
+ut chao_grama
+uo computador 1:5,4
+p 0
+ut chao_grama
+uo computador 1:6,4
+p 0
+ut chao_grama
+uo computador 1:7,4
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,4
+p 0
+ut chao_grama
+uo computador 1:12,4
+p 0
+ut chao_grama
+uo computador 1:13,4
+p 0
+ut chao_grama
+uo computador 1:14,4
+p 0
+ut chao_grama
+uo computador 1:15,4
+p 0
+ut chao_grama
+uo computador 1:16,4
+p 0
+ut chao_grama
+uo computador 1:17,4
+#
+#Linha 5
+#
+p 0
+ut chao_grama
+uo computador 1:1,5
+p 0
+ut chao_grama
+uo computador 1:2,5
+p 0
+ut chao_grama
+uo computador 1:3,5
+p 0
+ut chao_grama
+uo computador 1:4,5
+p 0
+ut chao_grama
+uo computador 1:5,5
+p 0
+ut chao_grama
+uo computador 1:6,5
+p 0
+ut chao_grama
+uo computador 1:7,5
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,5
+p 0
+ut chao_grama
+uo computador 1:12,5
+p 0
+ut chao_grama
+uo computador 1:13,5
+p 0
+ut chao_grama
+uo computador 1:14,5
+p 0
+ut chao_grama
+uo computador 1:15,5
+p 0
+ut chao_grama
+uo computador 1:16,5
+p 0
+ut chao_grama
+uo computador 1:17,5
+#
+# LINHA 6
+#
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+#
+# LINHA 7
+#
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+#
+# LINHA 8
+#
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+#
+#Linha 9
+#
+p 0
+ut chao_grama
+uo computador 1:1,9
+p 0
+ut chao_grama
+uo computador 1:2,9
+p 0
+ut chao_grama
+uo computador 1:3,9
+p 0
+ut chao_grama
+uo computador 1:4,9
+p 0
+ut chao_grama
+uo computador 1:5,9
+p 0
+ut chao_grama
+uo computador 1:6,9
+p 0
+ut chao_grama
+uo computador 1:7,9
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,9
+p 0
+ut chao_grama
+uo computador 1:12,9
+p 0
+ut chao_grama
+uo computador 1:13,9
+p 0
+ut chao_grama
+uo computador 1:14,9
+p 0
+ut chao_grama
+uo computador 1:15,9
+p 0
+ut chao_grama
+uo computador 1:16,9
+p 0
+ut chao_grama
+uo computador 1:17,9
+#
+#Linha 10
+#
+p 0
+ut chao_grama
+uo computador 1:1,10
+p 0
+ut chao_grama
+uo computador 1:2,10
+p 0
+ut chao_grama
+uo computador 1:3,10
+p 0
+ut chao_grama
+uo computador 1:4,10
+p 0
+ut chao_grama
+uo computador 1:5,10
+p 0
+ut chao_grama
+uo computador 1:6,10
+p 0
+ut chao_grama
+uo computador 1:7,10
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,10
+p 0
+ut chao_grama
+uo computador 1:12,10
+p 0
+ut chao_grama
+uo computador 1:13,10
+p 0
+ut chao_grama
+uo computador 1:14,10
+p 0
+ut chao_grama
+uo computador 1:15,10
+p 0
+ut chao_grama
+uo computador 1:16,10
+p 0
+ut chao_grama
+uo computador 1:17,10
+#
+#Linha 11
+#
+p 0
+ut chao_grama
+uo computador 1:1,11
+p 0
+ut chao_grama
+uo computador 1:2,11
+p 0
+ut chao_grama
+uo computador 1:3,11
+p 0
+ut chao_grama
+uo computador 1:4,11
+p 0
+ut chao_grama
+uo computador 1:5,11
+p 0
+ut chao_grama
+uo computador 1:6,11
+p 0
+ut chao_grama
+uo computador 1:7,11
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,11
+p 0
+ut chao_grama
+uo computador 1:12,11
+p 0
+ut chao_grama
+uo computador 1:13,11
+p 0
+ut chao_grama
+uo computador 1:14,11
+p 0
+ut chao_grama
+uo computador 1:15,11
+p 0
+ut chao_grama
+uo computador 1:16,11
+p 0
+ut chao_grama
+uo computador 1:17,11
+#
+#Linha 12
+#
+p 0
+ut chao_grama
+uo computador 1:1,12
+p 0
+ut chao_grama
+uo computador 1:2,12
+p 0
+ut chao_grama
+uo computador 1:3,12
+p 0
+ut chao_grama
+uo computador 1:4,12
+p 0
+ut chao_grama
+uo computador 1:5,12
+p 0
+ut chao_grama
+uo computador 1:6,12
+p 0
+ut chao_grama
+uo computador 1:7,12
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,12
+p 0
+ut chao_grama
+uo computador 1:12,12
+p 0
+ut chao_grama
+uo computador 1:13,12
+p 0
+ut chao_grama
+uo computador 1:14,12
+p 0
+ut chao_grama
+uo computador 1:15,12
+p 0
+ut chao_grama
+uo computador 1:16,12
+p 0
+ut chao_grama
+uo computador 1:17,12
+#
+#Linha 13
+#
+p 0
+ut chao_grama
+uo computador 1:1,13
+p 0
+ut chao_grama
+uo computador 1:2,13
+p 0
+ut chao_grama
+uo computador 1:3,13
+p 0
+ut chao_grama
+uo computador 1:4,13
+p 0
+ut chao_grama
+uo computador 1:5,13
+p 0
+ut chao_grama
+uo computador 1:6,13
+p 0
+ut chao_grama
+uo computador 1:7,13
+p 1
+ut chao_asfalto
+p 1 
+ut chao_asfalto
+p 1
+ut chao_asfalto
+p 0
+ut chao_grama
+uo computador 1:11,13
+p 0
+ut chao_grama
+uo computador 1:12,13
+p 0
+ut chao_grama
+uo computador 1:13,13
+p 0
+ut chao_grama
+uo computador 1:14,13
+p 0
+ut chao_grama
+uo computador 1:15,13
+p 0
+ut chao_grama
+uo computador 1:16,13
+p 0
+ut chao_grama
+uo computador 1:17,13
+i 8,1

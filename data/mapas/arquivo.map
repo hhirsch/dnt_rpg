@@ -2,8 +2,9 @@ T 14X16
 #
 # mapa de teste original!!!! por EU!
 #
-o cadeira ../data/models/objetos/icex/cadeira.dcc
+o cadeira ../data/models/objetos/icex/mesa_braco.dcc
 o mesa_redonda ../data/models/objetos/icex/mesa_redonda.dcc
+o mesa ../data/models/objetos/icex/mesa_braco.dcc
 t chao_madeira ../data/texturas/chao_madeira.jpg
 t chao_cimento ../data/texturas/chao_cimento.jpg
 t chao_grama ../data/texturas/chao_grama.jpg

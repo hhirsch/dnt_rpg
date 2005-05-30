@@ -18,7 +18,7 @@ int main()
   
    SDL_Surface *screen;
    Farso_Iniciar(&screen,"Teste Engine DccNiTghtmare");
-   engine* Engine = new engine("../data/mapas/arquivo.map");
+   engine* Engine = new engine("../data/mapas/mapaTp4.map");
    Engine->Iniciar(screen);
    //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 // int aux;
