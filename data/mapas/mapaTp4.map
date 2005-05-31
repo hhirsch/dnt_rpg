@@ -2,6 +2,15 @@ T 112X40
 #
 # mapa de Teste para o TP4. por NOS!
 #
+# Objetos utilizados
+o mesa_redonda ../data/models/objetos/icex/mesa_redonda.dcc
+o mesa_braco ../data/models/objetos/icex/mesa_braco.dcc
+o computador ../data/models/objetos/geral/computador.dcc
+o cadeira ../data/models/objetos/icex/cadeira.dcc
+o mesa ../data/models/objetos/icex/mesa.dcc
+o poste ../data/models/objetos/icex/poste.dcc
+o macaco ../data/models/objetos/geral/macaco.dcc
+# Texturas Utilizadas
 t parede_rosa ../data/texturas/parede_rosa.jpg
 t parede_grade ../data/texturas/parede_grade.jpg
 t chao_cimento ../data/texturas/chao_cimento.jpg
@@ -672,14 +681,19 @@ p 1
 ut chao_madeira
 p 1
 ut chao_madeira
+uo mesa 1:70,3
 p 1
 ut chao_madeira
+uo mesa 1:71,3
 p 1
 ut chao_madeira
+uo mesa 1:72,3
 p 1
 ut chao_madeira
+uo mesa 1:73,3
 p 1
 ut chao_madeira
+uo mesa 1:74,3
 p 1
 ut chao_madeira
 p 1
@@ -803,20 +817,24 @@ p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
+uo mesa_braco 1:22,4
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
+uo mesa_braco 1:25,4
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
+uo mesa_braco 1:28,4
 p 1
 ut chao_asfalto
+uo mesa_braco 1:29,4
 p 1
 ut chao_asfalto
 p 1
@@ -899,14 +917,19 @@ p 1
 ut chao_madeira
 p 1
 ut chao_madeira
+uo cadeira 1:70,4
 p 1
 ut chao_madeira
+uo cadeira 1:71,4
 p 1
 ut chao_madeira
+uo cadeira 1:72,4
 p 1
 ut chao_madeira
+uo cadeira 1:73,4
 p 1
 ut chao_madeira
+uo cadeira 1:74,4
 p 1
 ut chao_madeira
 p 1
@@ -1485,20 +1508,24 @@ p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
+uo mesa_braco 1:22,7
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
+uo mesa_braco 1:25,7
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
+uo mesa_braco 1:27,7
 p 1
 ut chao_asfalto
+uo mesa_braco 1:28,7
 p 1
 ut chao_asfalto
 p 1
@@ -1581,10 +1608,13 @@ p 1
 ut chao_madeira
 p 1
 ut chao_madeira
+uo mesa 1:70,7
 p 1
 ut chao_madeira
+uo mesa 1:71,7
 p 1
 ut chao_madeira
+uo mesa 1:72,7
 p 1
 ut chao_madeira
 p 1
@@ -1810,10 +1840,13 @@ p 1
 ut chao_madeira
 p 1
 ut chao_madeira
+uo cadeira 1:70,8
 p 1
 ut chao_madeira
+uo cadeira 1:71,8
 p 1
 ut chao_madeira
+uo cadeira 1:72,8
 p 1
 ut chao_madeira
 p 1
@@ -2170,20 +2203,24 @@ p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
+uo mesa_braco 1:22,10
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
+uo mesa_braco 1:25,10
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
 p 1
 ut chao_asfalto
+uo mesa_braco 1:27,10
 p 1
 ut chao_asfalto
+uo mesa_braco 1:28,10
 p 1
 ut chao_asfalto
 p 1
@@ -3194,6 +3231,7 @@ p 0
 ut chao_cimento
 p 1
 ut chao_cimento
+uo poste 1:80,14
 p 1
 ut chao_cimento
 p 1
@@ -3230,6 +3268,7 @@ p 1
 ut chao_cimento
 p 1
 ut chao_cimento
+uo poste 1:98,14
 p 0
 ut chao_cimento
 p 0
@@ -5089,6 +5128,7 @@ p 1
 ut chao_cimento
 p 1
 ut chao_cimento
+uo poste 1:6,23
 p 1
 ut chao_grama
 p 1
@@ -5139,6 +5179,7 @@ p 1
 ut chao_grama
 p 1
 ut chao_cimento
+uo poste 1:31,23
 p 1
 ut chao_cimento
 p 1
@@ -5179,6 +5220,7 @@ p 1
 ut chao_cimento
 p 1
 ut chao_cimento
+uo poste 1:51,23
 p 0
 ut chao_cimento
 p 0
@@ -5237,6 +5279,7 @@ p 0
 ut chao_cimento
 p 1
 ut chao_cimento
+uo poste 1:80,23
 p 1
 ut chao_cimento
 p 1
@@ -5325,35 +5368,38 @@ p 1
 ut chao_grama
 p 1
 ut chao_cimento
+uo mesa_redonda 0:12,25
+p 1
+ut chao_cimento
+uo mesa_redonda 0:12,25
+p 1
+ut chao_cimento
+uo mesa_redonda 0:12,25
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_tapetevermelho
+p 1
+ut chao_grama
+p 1
+ut chao_grama
+p 1
+ut chao_tapetevermelho
+p 1
+ut chao_grama
+p 1
+ut chao_grama
 p 1
 ut chao_cimento
 p 1
-ut chao_cimento
-p 1
-ut chao_grama
-p 1
-ut chao_grama
-p 1
-ut chao_grama
-p 1
-ut chao_grama
-p 1
-ut chao_grama
-p 1
-ut chao_tapetevermelho
-p 1
-ut chao_grama
-p 1
-ut chao_grama
-p 1
-ut chao_tapetevermelho
-p 1
-ut chao_grama
-p 1
-ut chao_grama
-p 1
-ut chao_cimento
-p 1
 ut chao_tapetevermelho
 p 1
 ut chao_tapetevermelho
@@ -5365,10 +5411,13 @@ p 1
 ut chao_tapetevermelho
 p 1
 ut chao_cimento
+uo mesa_redonda 0:32,25
 p 1
 ut chao_cimento
+uo mesa_redonda 0:32,25
 p 1
 ut chao_cimento
+uo mesa_redonda 0:32,25
 p 1
 ut chao_grama
 p 1
@@ -5439,12 +5488,14 @@ p 0
 ut chao_cimento
 p 1
 ut chao_tapeteroxo
+uo computador 1:68,24
 p 1
 ut chao_tapeteroxo
 p 1
 ut chao_tapeteroxo
 p 1
 ut chao_tapeteroxo
+uo computador 1:71,24
 p 1
 ut chao_tapeteroxo
 p 1
@@ -5552,10 +5603,13 @@ p 1
 ut chao_grama
 p 1
 ut chao_cimento
+uo mesa_redonda 0:12,25
 p 1
 ut chao_cimento
+uo mesa_redonda 1:12,25
 p 1
 ut chao_cimento
+uo mesa_redonda 0:12,25
 p 1
 ut chao_grama
 p 1
@@ -5592,10 +5646,13 @@ p 1
 ut chao_cimento
 p 1
 ut chao_cimento
+uo mesa_redonda 0:32,25
 p 1
 ut chao_cimento
+uo mesa_redonda 1:32,25
 p 1
 ut chao_cimento
+uo mesa_redonda 0:32,25
 p 1
 ut chao_grama
 p 1
@@ -5779,10 +5836,13 @@ p 1
 ut chao_grama
 p 1
 ut chao_cimento
+uo mesa_redonda 0:12,25
 p 1
 ut chao_cimento
+uo mesa_redonda 0:12,25
 p 1
 ut chao_cimento
+uo mesa_redonda 0:12,25
 p 1
 ut chao_grama
 p 1
@@ -5819,10 +5879,13 @@ p 1
 ut chao_cimento
 p 1
 ut chao_cimento
+uo mesa_redonda 0:32,25
 p 1
 ut chao_cimento
+uo mesa_redonda 0:32,25
 p 1
 ut chao_cimento
+uo mesa_redonda 0:32,25
 p 1
 ut chao_grama
 p 1
@@ -5994,10 +6057,13 @@ p 1
 ut chao_tapetevermelho
 p 1
 ut chao_cimento
+uo mesa_redonda 0:6,28
 p 1
 ut chao_cimento
+uo mesa_redonda 0:6,28
 p 1
 ut chao_tapetevermelho
+uo mesa_redonda 0:6,28
 p 1
 ut chao_cimento
 p 1
@@ -6220,10 +6286,13 @@ p 1
 ut chao_tapetevermelho
 p 1
 ut chao_cimento
+uo mesa_redonda 0:6,28
 p 1
 ut chao_cimento
+uo mesa_redonda 1:6,28
 p 1
 ut chao_tapetevermelho
+uo mesa_redonda 0:6,28
 p 1
 ut chao_cimento
 p 1
@@ -6447,10 +6516,13 @@ p 1
 ut chao_tapetevermelho
 p 1
 ut chao_cimento
+uo mesa_redonda 0:6,28
 p 1
 ut chao_cimento
+uo mesa_redonda 0:6,28
 p 1
 ut chao_tapetevermelho
+uo mesa_redonda 0:6,28
 p 1
 ut chao_cimento
 p 1
@@ -7099,6 +7171,7 @@ p 1
 ut chao_tapetevermelho
 p 1
 ut chao_tapetevermelho
+uo macaco 1:104,31
 p 1
 ut chao_tapetevermelho
 p 1
@@ -7395,10 +7468,13 @@ p 1
 ut chao_cimento
 p 1
 ut chao_cimento
+uo mesa_redonda 0:26,34
 p 1
 ut chao_cimento
+uo mesa_redonda 0:26,34
 p 1
 ut chao_cimento
+uo mesa_redonda 0:26,34
 p 1
 ut chao_grama
 p 1
@@ -7622,10 +7698,13 @@ p 1
 ut chao_cimento
 p 1
 ut chao_cimento
+uo mesa_redonda 0:26,34
 p 1
 ut chao_cimento
+uo mesa_redonda 1:26,34
 p 1
 ut chao_cimento
+uo mesa_redonda 0:26,34
 p 1
 ut chao_grama
 p 1
@@ -7849,10 +7928,13 @@ p 1
 ut chao_cimento
 p 1
 ut chao_cimento
+uo mesa_redonda 0:26,34
 p 1
 ut chao_cimento
+uo mesa_redonda 0:26,34
 p 1
 ut chao_cimento
+uo mesa_redonda 0:26,34
 p 1
 ut chao_grama
 p 1
@@ -7947,6 +8029,7 @@ p 1
 ut chao_tapeteroxo
 p 1
 ut chao_tapeteroxo
+uo computador 1:74,35
 p 1
 ut chao_tapeteroxo
 p 1
@@ -7955,6 +8038,7 @@ p 1
 ut chao_tapeteroxo
 p 1
 ut chao_tapeteroxo
+uo computador 1:78,35
 p 0
 ut chao_cimento
 p 1

@@ -30,8 +30,8 @@ teste.o: teste.cpp
 	$(CC) $(CFLAGS) teste.cpp -o teste.o
 
 teste: $(OBJSGUI) $(OBJSMAPA) $(OBJS) 
-	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJS) -o $(BIN)testeEngine
+	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJS) -o $(BIN)dccnitghtmare
 
 clean:
-	\rm -rf *.o *.e $(BIN)testeEngine
+	\rm -rf *.o *.e $(BIN)dccnitghtmare
 

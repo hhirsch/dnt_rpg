@@ -30,7 +30,7 @@ engine::engine(char* arqMapa)
    //glNewList(mapaDesenhar,GL_COMPILE);
     // mapa->draw();
    //glEndList();  
-   theta=0;
+   theta=35;
    phi=0;
    d=150;
    RotacaoX = RotacaoY = RotacaoZ = 0;
