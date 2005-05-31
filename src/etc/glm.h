@@ -125,7 +125,7 @@ glmDelete(GLMmodel* model);
  * diretorioTex - diretorio onde estao as texturas do modelo
  */
 GLMmodel* 
-glmReadOBJ(char* filename, char* diretorioTex);
+glmReadOBJ(char* filename, char* diretorioTex,int fazListas);
 
 /* glmDraw: Renders the model to the current OpenGL context using the
  * mode specified.
@@ -147,5 +147,5 @@ GLMgroup*
 _glmFindGroup(GLMmodel* model, char* name);
 
 void glmPrecomputaListas(GLMmodel* model, GLuint mode);
-
+GLvoid glmDrawLists(GLMmodel* model);
 

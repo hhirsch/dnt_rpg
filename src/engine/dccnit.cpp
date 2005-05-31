@@ -411,7 +411,7 @@ void engine::Desenhar()
            glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            //glCallList(per->personagemDesenhar);
-           glmDraw(per->modelo3d);
+           glmDrawLists(per->modelo3d);
          glPopMatrix();
          per = (personagem*) per->proximo;
          glTranslatef(30,0,0);

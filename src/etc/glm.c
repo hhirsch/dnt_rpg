@@ -813,7 +813,7 @@ glmDelete(GLMmodel* model)
  * filename - name of the file containing the Wavefront .OBJ format data.  
  */
 GLMmodel* 
-glmReadOBJ(char* filename, char* diretorioTex)
+glmReadOBJ(char* filename, char* diretorioTex, int fazListas)
 {
   GLMmodel* model;
   FILE*     file;
@@ -884,7 +884,8 @@ glmReadOBJ(char* filename, char* diretorioTex)
   /* close the file */
   fclose(file);
 
-  glmPrecomputaListas(model, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
+  if(fazListas)
+    glmPrecomputaListas(model, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
 
   /* //"Normaliza" NAO USADO!!!
   model->x2 -= model->x1;
@@ -1018,7 +1019,7 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
  * model    - initialized GLMmodel structure
  */
 GLvoid
-glmDraw(GLMmodel* model)
+glmDrawLists(GLMmodel* model)
 {
   GLMgroup* group;
   
@@ -1048,3 +1049,100 @@ glmDraw(GLMmodel* model)
   return;
 }
 
+GLvoid glmDraw(GLMmodel* model)
+{
+  GLMgroup* group;
+  int texturaAtual = -1;
+  GLuint i;
+
+  glEnable(GL_COLOR_MATERIAL);
+
+  glPushMatrix();
+  glTranslatef(model->position[0], model->position[1], model->position[2]);
+
+  group = model->groups;
+  
+
+  while (group) {
+    
+    glPushMatrix();
+    glScalef(group->escala[0],group->escala[1],group->escala[2]);
+    glTranslatef(group->translacao[0],group->translacao[1],group->translacao[2]);
+    glRotatef(group->rotacao[0],1,0,0);
+    glRotatef(group->rotacao[1],0,1,0);
+    glRotatef(group->rotacao[2],0,0,1);
+
+
+    texturaAtual = -1;
+    glBegin(GL_TRIANGLES); 
+  
+    for (i = 0; i < group->numtriangles; i++) {
+ 
+      /* Habilita Nova Textura, se necessario */
+      if ((T(group->triangles[i]).texture!=-1) &&
+          (T(group->triangles[i]).texture!=texturaAtual) )
+      {
+         glEnd();
+         glEnable(GL_TEXTURE_2D);
+         glBindTexture(GL_TEXTURE_2D, T(group->triangles[i]).texture);
+         texturaAtual = T(group->triangles[i]).texture;
+         glBegin(GL_TRIANGLES);
+      }
+      /* Desabilita Textura Existente, caso necessario */
+      else if( (texturaAtual != -1) && (T(group->triangles[i]).texture==-1))
+      {
+         texturaAtual = -1;
+         glDisable(GL_TEXTURE_2D);
+      }
+      /* Define o Material */
+      //if (mode & GLM_MATERIAL) 
+      //{
+         glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
+	   	   model->materials[T(group->triangles[i]).material].ambient);
+         glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, 
+		   model->materials[T(group->triangles[i]).material].diffuse);
+         glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, 
+		   model->materials[T(group->triangles[i]).material].specular);
+         glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 
+   		   model->materials[T(group->triangles[i]).material].shininess);
+      //}
+      /* Define a Cor */
+      //if (mode & GLM_COLOR) 
+        glColor3fv( model->materials[T(group->triangles[i]).material].diffuse);
+      /**/
+      //if (mode & GLM_FLAT)
+	//glNormal3fv(&model->facetnorms[3 * T(group->triangles[i]).findex]);
+      
+      //if (mode & GLM_SMOOTH)
+	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[0]]);
+      //if (mode & GLM_TEXTURE)
+	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[0]]);
+      
+      glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[0]]);
+      
+      //if (mode & GLM_SMOOTH)
+	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[1]]);
+      //if (mode & GLM_TEXTURE)
+	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[1]]);
+      
+      glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[1]]);
+      
+      //if (mode & GLM_SMOOTH)
+	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[2]]);
+      //if (mode & GLM_TEXTURE)
+	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[2]]);
+
+      glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[2]]);
+
+    }
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+
+
+    glPopMatrix();
+    group = group->next;
+  }
+  glPopMatrix();
+  return;
+}

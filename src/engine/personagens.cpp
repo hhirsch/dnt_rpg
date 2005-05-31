@@ -45,7 +45,7 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
    novo->nome = nome;
    novo->retrato->InserirFigura(POSRETX,POSRETY,retrato);
    /* Abre o modelo3d */
-   novo-> modelo3d = glmReadOBJ(arqmodelo,dirTexturas); 
+   novo-> modelo3d = glmReadOBJ(arqmodelo,dirTexturas,1); 
    /* Define os grupos */
      novo->pe_d = _glmFindGroup(novo->modelo3d, "pe_d");
      novo->pe_e = _glmFindGroup(novo->modelo3d, "pe_e");
