@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
    glLoadIdentity();
 
    glOrtho(0.0f, 800, 600, 0.0f, -1.0f, 1.0f);
+   //gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 1000.0);
 	
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();

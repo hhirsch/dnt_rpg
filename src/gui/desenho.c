@@ -200,10 +200,6 @@ void retangulo_Colorir(SDL_Surface *screen, int x1, int y1, int x2, int y2, int 
    ret.y = y1;
    ret.w = (x2 - x1)+1;
    ret.h = (y2 - y1)+1;
-   /*int x; int y;
-   for(x = x1; x<=x2; x++)
-      for(y = y1; y<=y2; y++)
-      pixel_Desenhar(screen,x,y,0);*/
    Uint32 cor = SDL_MapRGB(screen->format,R,G,B);
    if ( SDL_MUSTLOCK(screen) ) {
         if ( SDL_LockSurface(screen) < 0 ) {
@@ -334,14 +330,6 @@ void AtualizaTela2D(SDL_Surface *tela2D)
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    }    
 
-   /*glViewport(0,0,640,480);
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
-
-   glOrtho(0.0f, 640, 480, 0.0f, -1.0f, 1.0f);
-	
-   glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();*/
 
    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

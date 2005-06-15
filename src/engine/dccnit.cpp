@@ -8,7 +8,7 @@
 #include <math.h>
 
 #define DELAY 0
-#define ANDAR 2.0        // O quanto o personagem anda a cada frame
+#define ANDAR 1.5        // O quanto o personagem anda a cada frame
 #define GIRAR 4.0        // O quanto ele gira a cada frame
 #define DELTACAMERA 2.0  // O quanto a camera meche a cada frame
 #define ZOOMMAXIMO 80    // Valor máximo de zoom
@@ -137,9 +137,11 @@ int engine::TrataES(SDL_Surface *screen)
 
    tempo = SDL_GetTicks();
    //printf("%d %d %d\n",(1000 / (tempo-ultimaLeitura)),tempo, ultimaLeitura);
-   if( ((tempo-ultimaLeitura)) > 16)
+   if( ((tempo-ultimaLeitura)) >= 16)
    {
+       printf("FPS: %f\t",1000.0 / (float)(tempo-ultimaLeitura));
        ultimaLeitura = tempo;
+       
    /* Tratamento das Teclas */
    Uint8 *keys;
    keys = SDL_GetKeyState(NULL);
@@ -377,15 +379,15 @@ int engine::TrataES(SDL_Surface *screen)
      redesenha = 1;
    }
    }
-   //if(redesenha)
-   //{
+   if(redesenha)
+   {
       //Uint32 antes = SDL_GetTicks();
       Desenhar();
       SDL_GL_SwapBuffers();
       //antes = SDL_GetTicks() - antes;
       //printf("FPS: %f\t",1000.0 / (float)antes);
       //SDL_Delay(DELAY);
-   //}
+   }
    return(1);
 }
 
