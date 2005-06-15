@@ -63,6 +63,8 @@ class engine
  
       GLfloat matrizVisivel[6][4]; /* MAtriz do frustum atual */
 
+      Uint32 ultimaLeitura; //marca a ultima leitura da posicao do teclado
+
 };
 
 #endif

@@ -7,12 +7,12 @@
 #include "culling.h"
 #include <math.h>
 
-#define LADOHEXA 16
 #define DELAY 0
-#define ANDAR 1.0
-#define DELTACAMERA 30.0
-#define ZOOMMAXIMO 80
-#define ZOOMMINIMO 280
+#define ANDAR 2.0        // O quanto o personagem anda a cada frame
+#define GIRAR 4.0        // O quanto ele gira a cada frame
+#define DELTACAMERA 2.0  // O quanto a camera meche a cada frame
+#define ZOOMMAXIMO 80    // Valor máximo de zoom
+#define ZOOMMINIMO 280   // Valor mínimo do zoom
 
 /* Conversor de graus para radianos */
 inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
@@ -39,6 +39,7 @@ engine::engine(char* arqMapa)
    cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centroY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+   ultimaLeitura = SDL_GetTicks();
    //deltaCameraX = 0;
    //deltaCameraZ = 0;   
    //mapa = map;
@@ -130,9 +131,15 @@ void engine::Iniciar(SDL_Surface *screen)
 int engine::TrataES(SDL_Surface *screen)
 {
    int redesenha = 0;
+   Uint32 tempo;
    double varX, varZ; // para evitar de ter de calcular 2 vezes
    SDL_PumpEvents();
 
+   tempo = SDL_GetTicks();
+   //printf("%d %d %d\n",(1000 / (tempo-ultimaLeitura)),tempo, ultimaLeitura);
+   if( ((tempo-ultimaLeitura)) > 16)
+   {
+       ultimaLeitura = tempo;
    /* Tratamento das Teclas */
    Uint8 *keys;
    keys = SDL_GetKeyState(NULL);
@@ -169,7 +176,7 @@ int engine::TrataES(SDL_Surface *screen)
    {
        if (d>ZOOMMAXIMO)
        {
-          d--;
+          d-= DELTACAMERA+0.5;
           redesenha = 1;
        }
    }
@@ -177,25 +184,25 @@ int engine::TrataES(SDL_Surface *screen)
    {
      if(d<ZOOMMINIMO)
      {
-       d++; 
+       d+= DELTACAMERA+0.5; 
        redesenha = 1;
      }
    }
    if(keys[SDLK_RIGHT]) // Roda Camera Antihorariamente
    {
-       phi -=2;  
+       phi -= DELTACAMERA+0.5;  
        redesenha = 1;
    }
    if(keys[SDLK_LEFT]) // Roda Camera Horariamente
    {
-      phi +=2;
+      phi += DELTACAMERA+0.5;
       redesenha = 1;
    }
    if(keys[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
    {
       if (theta < 89)
       {
-         theta +=1;
+         theta += DELTACAMERA;
          redesenha = 1;
       }
    }
@@ -203,7 +210,7 @@ int engine::TrataES(SDL_Surface *screen)
    {
       if (theta > 0)
       {
-         theta -=1;
+         theta -= DELTACAMERA;
          redesenha = 1;
       }
    }
@@ -281,17 +288,19 @@ int engine::TrataES(SDL_Surface *screen)
       // Gira personagem antihorariamente
       if((keys[SDLK_a]) && (podeAndar(0,0,2.0)) )  
       {
-         PCs->personagemAtivo->orientacao += 2.0;
+         PCs->personagemAtivo->orientacao += GIRAR;
          if(PCs->personagemAtivo->orientacao > 360.0)
-            PCs->personagemAtivo->orientacao = 2.0;
+            PCs->personagemAtivo->orientacao = 
+                            PCs->personagemAtivo->orientacao  - 360.0;
          redesenha = 1;
       }
       // Gira o personagem horariamente
       if((keys[SDLK_d]) && (podeAndar(0,0,-2.0)) )
       {
-         PCs->personagemAtivo->orientacao -= 2.0;
+         PCs->personagemAtivo->orientacao -= GIRAR;
          if(PCs->personagemAtivo->orientacao < 0.0)
-            PCs->personagemAtivo->orientacao = 360.0;
+            PCs->personagemAtivo->orientacao = 360.0 + 
+                                     PCs->personagemAtivo->orientacao ;
       }
       redesenha = 1;
    }
@@ -367,16 +376,16 @@ int engine::TrataES(SDL_Surface *screen)
      phi-=2; 
      redesenha = 1;
    }
-  
-   if(redesenha)
-   {
-      Uint32 antes = SDL_GetTicks();
+   }
+   //if(redesenha)
+   //{
+      //Uint32 antes = SDL_GetTicks();
       Desenhar();
       SDL_GL_SwapBuffers();
-      antes = SDL_GetTicks() - antes;
-      printf("FPS: %f\t",1000.0 / (float)antes);
-      SDL_Delay(DELAY);
-   }
+      //antes = SDL_GetTicks() - antes;
+      //printf("FPS: %f\t",1000.0 / (float)antes);
+      //SDL_Delay(DELAY);
+   //}
    return(1);
 }
 
