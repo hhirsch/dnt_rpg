@@ -5,7 +5,7 @@
 #include <math.h>
 
 /* Atualiza os planos do View Frustum atual*/
-void AtualizaFrustum(GLfloat matriz[6][4]);
+void AtualizaFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16]);
 
 /* Testa se o quadrado está dentro do frustum */
 int quadradoVisivel(GLfloat x1,GLfloat y1,GLfloat z1,GLfloat x2,GLfloat y2,GLfloat z2,GLfloat matriz[6][4]);

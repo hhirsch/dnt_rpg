@@ -1,20 +1,19 @@
 #include "culling.h"
 
-
 /* Atualiza o Frustum para o culling ser feito. Como o mapa é plano,
  * e posicionado no plano XZ, com Y=0, ignora-se o eixo Y. */ 
-void AtualizaFrustum(GLfloat matriz[6][4])
+void AtualizaFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16])
 {
         GLfloat	clip[16];
-	GLfloat	proj[16];
-	GLfloat	modl[16];
+	/*GLfloat	proj[16];
+	GLfloat	modl[16];*/
 	GLfloat	t;
 
 	// Get The Current PROJECTION Matrix From OpenGL
-	glGetFloatv( GL_PROJECTION_MATRIX, proj );
+	glGetDoublev( GL_PROJECTION_MATRIX, proj );
 
 	// Get The Current MODELVIEW Matrix From OpenGL
-	glGetFloatv( GL_MODELVIEW_MATRIX, modl );
+	glGetDoublev( GL_MODELVIEW_MATRIX, modl );
 
 	// Combine The Two Matrices (Multiply Projection By Modelview)
 	clip[ 0] = modl[ 0] * proj[ 0] + modl[ 1] * proj[ 4] + modl[ 2] * proj[ 8] + modl[ 3] * proj[12];
@@ -114,6 +113,7 @@ void AtualizaFrustum(GLfloat matriz[6][4])
 	matriz[5][1] /= t;
 	matriz[5][2] /= t;
 	matriz[5][3] /= t;
+
 };
 
 int quadradoVisivel(GLfloat x1,GLfloat y1, GLfloat z1,GLfloat x2,GLfloat y2, GLfloat z2,GLfloat matriz[6][4])

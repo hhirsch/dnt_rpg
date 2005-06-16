@@ -66,6 +66,8 @@ void engine::Redmensiona(SDL_Surface *screen)
    glLoadIdentity ();
    //glOrtho(-61.0,61.0,-61.0,61.0,0.01,100.0);
    gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 1000.0);
+  
+   glGetIntegerv(GL_VIEWPORT, viewPort);
    
    glMatrixMode (GL_MODELVIEW);
 }
@@ -404,10 +406,13 @@ void engine::Desenhar()
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
 
-   AtualizaFrustum(matrizVisivel);
+   AtualizaFrustum(matrizVisivel,proj,modl);
 
    glClear ((GL_COLOR_BUFFER_BIT));
    glClear (GL_DEPTH_BUFFER_BIT);
+
+
+   
    glPushMatrix();
    glRotatef(RotacaoX,1,0,0);
    glRotatef(RotacaoY,0,1,0);
@@ -428,6 +433,22 @@ void engine::Desenhar()
          glTranslatef(30,0,0);
       }
    glPopMatrix();
+
+   GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
+   gluUnProject( 0, 0, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject( 0, 32,0.01, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject( 32, 32, 0.01, modl, proj, viewPort, &x3, &y3, &z3);
+   gluUnProject( 32, 0, 0.01, modl, proj, viewPort, &x4, &y4, &z4);
+   glBegin(GL_QUADS);
+      glColor3f(1,0,1);
+      glVertex3f(x1,y1,z1);
+      glVertex3f(x2,y2,z2);
+      glVertex3f(x3,y3,z3);
+      glVertex3f(x4,y4,z4);
+   glEnd();
+
+   glColor3f(1,1,1);
+
    glFlush();
 }
 

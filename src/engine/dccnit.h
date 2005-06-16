@@ -62,6 +62,9 @@ class engine
       Map* mapa; /* Mapa Utilizado pela Engine */
  
       GLfloat matrizVisivel[6][4]; /* MAtriz do frustum atual */
+      GLdouble proj[16];
+      GLdouble modl[16];
+      GLint viewPort[4];
 
       Uint32 ultimaLeitura; //marca a ultima leitura da posicao do teclado
 
