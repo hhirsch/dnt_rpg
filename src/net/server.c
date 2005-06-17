@@ -1,4 +1,10 @@
-#include "server.h"
+#include "network.h"
+#include <fcntl.h>
+
+//TODO: Criar outro vetor de pollfd pra não perder o antigo no loop !!!
+//      Criar um numclients temporário tb !
+//      Fragar o que é um "broken pipe" !!!
+
 
 void handlemesg( int size, void * buffer )
 {
@@ -8,13 +14,12 @@ void handlemesg( int size, void * buffer )
 
 int main( int argc, char ** argv )
 {
-	char opt, *bufreader;
+	char opt;
 	void * buffer;
-	int port = DEFAULTPORT, listenerfd, numclients = 0, fdmax, newfd, pollret, i, j, numbytes, saddrsize = sizeof(struct sockaddr);
-	struct sockaddr myaddr, *clients, *addr;
+	int port = DEFAULTPORT, listenerfd, numclients = 0, newfd, pollret, i, j, numbytes, saddrsize = sizeof(struct sockaddr);
+	struct sockaddr myaddr, *clients;
 	struct sockaddr_in * addr_in;
-	struct timeval timeout;
-	struct pollfd safefdset [MAXCLIENTS + 1], readfdset [MAXCLIENTS + 1];
+	struct pollfd readfdset [MAXCLIENTS + 1];
 
 	buffer = (void*) malloc( BUFFERSIZE + 1 );
     clients = (void*) malloc( sizeof( struct sockaddr )*MAXCLIENTS );
@@ -28,102 +33,121 @@ int main( int argc, char ** argv )
 				printf( "Set listen port to %d.\n", port );
 				break;
 			case ':':
-				exit(1);
+				return(1);
 				break;
 			case '?':
-				exit(1);
+				return(1);
 				break;
 		}
 	}
 	if ( (listenerfd = socket( AF_INET, SOCK_STREAM, 0 )) == -1 )
 	{
 		fprintf( stderr, "Error openning socket. Aborting\n" );
-		exit(1);
+		return(errno);
 	}
+	fcntl( listenerfd, F_SETFL, 0 );
 	addr_in = (struct sockaddr_in *) &myaddr;
 	addr_in->sin_family = AF_INET;
 	addr_in->sin_port = htons( port );
 	addr_in->sin_addr.s_addr = INADDR_ANY;
 	memset( &(addr_in->sin_zero), '\0', 8);
-	if ( bind( listenerfd, &myaddr, sizeof( struct sockaddr )) == -1 )
+	printf( "Binding socket %d to port %d\n", listenerfd, port );
+	if ( bind( listenerfd, &myaddr, sizeof( struct sockaddr )) != 0 )
 	{
 		fprintf( stderr, "Error binding socket to port %d. Aborting.\n", port );
-		exit(errno);
+		return(errno);
 	}
-	safefdset[0].fd = listenerfd;
-	safefdset[0].events = POLLIN | POLLPRI ;//| POLLHUP;
-	safefdset[0].revents = 0;
+	if ( listen( listenerfd, BACKLOG ) == -1 )
+	{
+		perror("listen");
+		return(errno);
+	}
+	
+	readfdset[0].fd = listenerfd;
+	readfdset[0].events = POLLIN | POLLPRI ;
+	readfdset[0].revents = 0;
 	while( 1 )
 	{
-		for( i = 0; i <= numclients; i++ )
-			readfdset[i] = safefdset[i];
-
-		timeout.tv_sec = LISTENTIMEOUT;
-		if ( ( pollret = poll( readfdset, numclients + 1, LISTENTIMEOUT * 1000 )) != -1 )
+		pollret = poll( readfdset, numclients + 1, (LISTENTIMEOUT * 1000) );
+		if ( pollret > 0 )
 		{
-			if ( pollret > 0 )
+			printf("Something happened...\n");
+			for ( i = 0; i <= numclients; i++ )
 			{
-				for ( i = 0; i <= numclients; i++ )
+				if ( readfdset[i].revents & ( POLLERR | POLLHUP | POLLNVAL ) )
 				{
-					if ( readfdset[i].revents & (POLLIN | POLLPRI))
+					addr_in = (struct sockaddr_in *) &(clients[i]);
+					printf( "Hungup connection with client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
+					close(i);
+					for( j = i; j < numclients; j++ )
+						readfdset[j] = readfdset[j+1];
+					numclients--;
+				}
+				else if ( readfdset[i].revents & (POLLIN | POLLPRI))
+				{
+					if ( readfdset[i].fd == listenerfd )
 					{
-						if ( i == listenerfd )
+						if ( numclients >= MAXCLIENTS )
 						{
-							if ( numclients >= MAXCLIENTS )
-							{
-								fprintf( stderr, "New connection atempt arrived, but already at max client number.\n" );
-							}
-							else
-							{
-								printf( "New connection attempt ( in socket %d; listener is %d).\n", i, listenerfd );
-								if (( newfd = accept( listenerfd, &(clients[numclients]), &saddrsize )) == -1 )
-								{
-									fprintf( stderr, "Could not stabilish the connection with remote host.\n" );
-								}else{
-									safefdset[i].fd = newfd;
-									safefdset[i].events = POLLIN | POLLPRI ;//| POLLHUP;
-									safefdset[i].revents = 0;
-									if( fdmax < newfd )
-										fdmax = newfd;
-								}
-							}
+							fprintf( stderr, "New connection atempt arrived, but already at max client number.\n" );
 						}
 						else
 						{
-							if( (numbytes = recv( i, buffer, BUFFERSIZE, 0)) == 0 )
+							printf( "New connection attempt.\n" );
+							if (( newfd = accept( listenerfd, &(clients[numclients]), &saddrsize )) == -1 )
 							{
-								addr_in = (struct sockaddr_in *) &(clients[i]);
-								printf( "Connection closed by client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
-								close(i);
-								// FD_CLR(i, &safefdset );
-							}
-							else if( numbytes > 0 )
-							{
-								handlemesg( numbytes, buffer );
+								fprintf( stderr, "Could not stabilish the connection with remote host.\n" );
 							}
 							else
 							{
-								fprintf(
-										stderr,
-										"%s %d, %s: Error receiving data.\n",
-										__FILE__,
-										__LINE__,
-										__FUNCTION__
-									   );
+								numclients++;
+								readfdset[numclients].fd = newfd;
+								readfdset[numclients].events = POLLIN | POLLPRI ;
+								readfdset[numclients].revents = 0;
 							}
 						}
 					}
-					/*
-					else if ( readfdset[i].revents & POLLHUP )
+					else
 					{
-						addr_in = (struct sockaddr_in *) &(clients[i]);
-						printf( "Hungup connection with client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
-						close(i);
-						// FD_CLR(i, &safefdset );
-					}*/
+						if( (numbytes = recv( i, buffer, BUFFERSIZE, 0)) == 0 )
+						{
+							addr_in = (struct sockaddr_in *) &(clients[i]);
+							printf( "Connection closed by client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
+							close(i);
+							for( j = i; j < numclients; j++ )
+								readfdset[j] = readfdset[j+1];
+							numclients--;
+						}
+						else if( numbytes > 0 )
+						{
+							handlemesg( numbytes, buffer );
+						}
+						else
+						{
+							fprintf(
+									stderr,
+									"%s %d, %s: Error receiving data. Closing connection.\n",
+									__FILE__,
+									__LINE__,
+									__FUNCTION__
+								   );
+							close(i);
+							for( j = i; j < numclients; j++ )
+								readfdset[j] = readfdset[j+1];
+							numclients--;
+						}
+					}
 				}
 			}
 		}
+		else if ( pollret == 0 )
+		{
+			printf("Timeout...\n");
+		}
+		else if ( pollret < 0 )
+		{
+			perror("poll");
+		}
 	}
-	return(0);
+return(0);
 }
