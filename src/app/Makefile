@@ -1,7 +1,7 @@
 #  DccNiTghtmare is public domain. Do whatever you want with this code.
 CC = g++
 CFLAGS = -g -c -Wall
-EFLAGS = -Wall -L/usr/X11R6/lib -lGLU -lGL -lSDL
+EFLAGS = -Wall -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGS = 
 ENDGUI = ../gui/
 ENDENGINE = ../engine/

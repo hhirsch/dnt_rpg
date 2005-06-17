@@ -43,7 +43,16 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
    novo->posicaoLadoX = 0.0;
    novo->posicaoLadoZ = 0.0;
    novo->nome = nome;
-   novo->retrato->InserirFigura(POSRETX,POSRETY,retrato);
+   /* Define os Retratos */
+   figura* fig;
+   fig = novo->retrato->InserirFigura(POSRETX,POSRETY,retrato);
+    glGenTextures(1, &novo->portrait);
+      glBindTexture(GL_TEXTURE_2D, novo->portrait);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fig->fig->w, fig->fig->h, 
+                                  0, GL_RGBA, GL_UNSIGNED_BYTE, fig->fig->pixels);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
    /* Abre o modelo3d */
    novo-> modelo3d = glmReadOBJ(arqmodelo,dirTexturas,1); 
    /* Define os grupos */
@@ -79,6 +88,7 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
 void Lpersonagem::RetirarPersonagem(personagem* persona, int tiraMemoria)
 {
    //glDeleteLists(persona->personagemDesenhar,1);
+   glDeleteTextures(1,&persona->portrait);
    glmDelete(persona->modelo3d);
    delete(persona->retrato);
    delete(persona->objetos);

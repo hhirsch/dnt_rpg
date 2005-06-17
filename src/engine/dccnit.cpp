@@ -8,8 +8,8 @@
 #include <math.h>
 
 #define DELAY 0
-#define ANDAR 1.5        // O quanto o personagem anda a cada frame
-#define GIRAR 4.0        // O quanto ele gira a cada frame
+#define ANDAR 1.0        // O quanto o personagem anda a cada frame
+#define GIRAR 2.5        // O quanto ele gira a cada frame
 #define DELTACAMERA 2.0  // O quanto a camera meche a cada frame
 #define ZOOMMAXIMO 80    // Valor máximo de zoom
 #define ZOOMMINIMO 280   // Valor mínimo do zoom
@@ -22,14 +22,15 @@ inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
  *********************************************************************/
 engine::engine(char* arqMapa)
 {
+   /* Inicia as Listas Internas */
    NPCs = new (Lpersonagem);
    PCs  = new (Lpersonagem);
+
+   /* Abre o Mapa Desejado */
    mapa = new(Map);
    mapa->open(arqMapa);
-   //mapaDesenhar = glGenLists(1);
-   //glNewList(mapaDesenhar,GL_COMPILE);
-    // mapa->draw();
-   //glEndList();  
+
+   /* Define a posicao da Camera Inicial */
    theta=35;
    phi=0;
    d=150;
@@ -39,10 +40,9 @@ engine::engine(char* arqMapa)
    cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centroY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+
+   /* Define a ultima vez em que desenhou (so por simplicidade) */
    ultimaLeitura = SDL_GetTicks();
-   //deltaCameraX = 0;
-   //deltaCameraZ = 0;   
-   //mapa = map;
 }
 
 /*********************************************************************
@@ -64,11 +64,8 @@ void engine::Redmensiona(SDL_Surface *screen)
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   //glOrtho(-61.0,61.0,-61.0,61.0,0.01,100.0);
    gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 1000.0);
-  
    glGetIntegerv(GL_VIEWPORT, viewPort);
-   
    glMatrixMode (GL_MODELVIEW);
 }
 
@@ -94,20 +91,12 @@ void engine::Iniciar(SDL_Surface *screen)
    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
-   /*GLfloat mat_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
-   GLfloat mat_diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
-   GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat high_shininess[] = { 100.0 };*/
    
    /* Carrega a Luz */
    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-   /*glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-   glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-   glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);*/
    
    /* Habilita a iluminacao */
    glEnable(GL_LIGHTING);
@@ -138,257 +127,250 @@ int engine::TrataES(SDL_Surface *screen)
    SDL_PumpEvents();
 
    tempo = SDL_GetTicks();
-   //printf("%d %d %d\n",(1000 / (tempo-ultimaLeitura)),tempo, ultimaLeitura);
+
    if( ((tempo-ultimaLeitura)) >= 16)
    {
-       printf("FPS: %f\t",1000.0 / (float)(tempo-ultimaLeitura));
-       ultimaLeitura = tempo;
+      printf("FPS: %f\t",1000.0 / (float)(tempo-ultimaLeitura));
+      ultimaLeitura = tempo;
        
-   /* Tratamento das Teclas */
-   Uint8 *keys;
-   keys = SDL_GetKeyState(NULL);
-   if ( keys[SDLK_ESCAPE] ) // Sai da Engine
-      return(0);
+      /* Tratamento das Teclas */
+      Uint8 *keys;
+      keys = SDL_GetKeyState(NULL);
+      if ( keys[SDLK_ESCAPE] ) // Sai da Engine
+         return(0);
 
-   /* Tratamento das teclas para a Camera */
-   if(keys[SDLK_x]) 
-   {
-      RotacaoX+=5;
-      if (RotacaoX >= 360) RotacaoX = 0;
-      redesenha = 1;
-   }
-   if(keys[SDLK_y])
-   {
-      RotacaoY+=5;
-      if (RotacaoY >= 360) RotacaoY = 0;
-      redesenha = 1;
-   }
-   if(keys[SDLK_z])
-   {
-      RotacaoZ+=5;
-      if (RotacaoZ >= 360) RotacaoZ = 0;
-      redesenha = 1;
-   }
-   if(keys[SDLK_r])  
-   { 
-      RotacaoX = 0;
-      RotacaoY = 0;
-      RotacaoZ = 0;
-      redesenha = 1;
-   }
-   if(keys[SDLK_UP])  // Aumenta o Zoom
-   {
-       if (d>ZOOMMAXIMO)
-       {
-          d-= DELTACAMERA+0.5;
-          redesenha = 1;
-       }
-   }
-   if(keys[SDLK_DOWN]) // Diminui o Zoom
-   {
-     if(d<ZOOMMINIMO)
-     {
-       d+= DELTACAMERA+0.5; 
-       redesenha = 1;
-     }
-   }
-   if(keys[SDLK_RIGHT]) // Roda Camera Antihorariamente
-   {
-       phi -= DELTACAMERA+0.5;  
-       redesenha = 1;
-   }
-   if(keys[SDLK_LEFT]) // Roda Camera Horariamente
-   {
-      phi += DELTACAMERA+0.5;
-      redesenha = 1;
-   }
-   if(keys[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
-   {
-      if (theta < 89)
+      /* Tratamento das teclas para a Camera */
+      if(keys[SDLK_x]) 
       {
-         theta += DELTACAMERA;
+         RotacaoX+=5;
+         if (RotacaoX >= 360) RotacaoX = 0;
          redesenha = 1;
       }
-   }
-   if(keys[SDLK_PAGEDOWN]) // desce com a camera ate visao em 1ª pessoa
-   {
-      if (theta > 0)
+      if(keys[SDLK_y])
       {
-         theta -= DELTACAMERA;
+         RotacaoY+=5;
+         if (RotacaoY >= 360) RotacaoY = 0;
          redesenha = 1;
       }
-   }
-   if(keys[SDLK_HOME]) // Zoom Maximo
-   {
-      d = ZOOMMAXIMO;
-      redesenha = 1;
-   }
-   if(keys[SDLK_END]) // ZoomMinimo
-   {
-      d = ZOOMMINIMO;
-      redesenha = 1;
-   }
-   if(keys[SDLK_INSERT]) //Maximo para cima
-   {
-      theta = 89;
-      redesenha = 1;
-   }
-   if(keys[SDLK_DELETE]) //Maximo para baixo
-   {
-      theta = 0;
-      redesenha = 1;
-   }
-   /* Tratamento da tecla para Movimentacao do Personagem */
-
-   if(keys[SDLK_q] || keys[SDLK_e])
-   {
-      varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-      varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-      // Anda com personagem de lado para esquerda
-      if((keys[SDLK_q])&& (podeAndar(-varX,-varZ,0))) 
+      if(keys[SDLK_z])
       {
-         PCs->personagemAtivo->posicaoLadoX -= varX;
-         PCs->personagemAtivo->posicaoLadoZ -= varZ;
-         centroX -= varX;
-         centroZ -= varZ;
+         RotacaoZ+=5;
+         if (RotacaoZ >= 360) RotacaoZ = 0;
          redesenha = 1;
       }
-       // Anda com personagem para esquerda
-      if((keys[SDLK_e])&& (podeAndar(varX,varZ,0))) 
-      {
-         centroX += varX;
-         centroZ += varZ;
-         PCs->personagemAtivo->posicaoLadoX += varX;
-         PCs->personagemAtivo->posicaoLadoZ += varZ;
+      if(keys[SDLK_r])  
+      { 
+         RotacaoX = 0;
+         RotacaoY = 0;
+         RotacaoZ = 0;
          redesenha = 1;
       }
-   }
-   if(keys[SDLK_w] || keys[SDLK_s])
-   {
-      varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao));
-      varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao));
-        // Anda com personagem para frente
-      if((keys[SDLK_w]) && (podeAndar(-varX,-varZ,0)) ) 
+      if(keys[SDLK_UP])  // Aumenta o Zoom
       {
-           PCs->personagemAtivo->posicaoLadoX -= varX;
-           PCs->personagemAtivo->posicaoLadoZ -= varZ;
-           centroZ -= varZ;
-           centroX -= varX;
-           redesenha = 1;
+          if (d>ZOOMMAXIMO)
+          {
+             d-= DELTACAMERA+0.5;
+             redesenha = 1;
+          }
       }
-        // Anda com personagem para tras
-      if((keys[SDLK_s]) && (podeAndar(varX,varZ,0)) ) 
+      if(keys[SDLK_DOWN]) // Diminui o Zoom
       {
-          PCs->personagemAtivo->posicaoLadoX += varX;
-          PCs->personagemAtivo->posicaoLadoZ += varZ;
-          centroX += varX;
-          centroZ += varZ;
+         if(d<ZOOMMINIMO)
+         {
+             d+= DELTACAMERA+0.5; 
+             redesenha = 1;
+         }
+      }
+      if(keys[SDLK_RIGHT]) // Roda Camera Antihorariamente
+      {
+          phi -= DELTACAMERA+0.5;  
           redesenha = 1;
       }
-   }
-
-   if( (keys[SDLK_a]) || (keys[SDLK_d]))
-   {
-      // Gira personagem antihorariamente
-      if((keys[SDLK_a]) && (podeAndar(0,0,2.0)) )  
+      if(keys[SDLK_LEFT]) // Roda Camera Horariamente
       {
-         PCs->personagemAtivo->orientacao += GIRAR;
-         if(PCs->personagemAtivo->orientacao > 360.0)
-            PCs->personagemAtivo->orientacao = 
-                            PCs->personagemAtivo->orientacao  - 360.0;
+         phi += DELTACAMERA+0.5;
          redesenha = 1;
       }
-      // Gira o personagem horariamente
-      if((keys[SDLK_d]) && (podeAndar(0,0,-2.0)) )
+      if(keys[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
       {
-         PCs->personagemAtivo->orientacao -= GIRAR;
-         if(PCs->personagemAtivo->orientacao < 0.0)
-            PCs->personagemAtivo->orientacao = 360.0 + 
-                                     PCs->personagemAtivo->orientacao ;
+         if (theta < 89)
+         {
+            theta += DELTACAMERA;
+            redesenha = 1;
+         }
       }
-      redesenha = 1;
-   }
-   if(keys[SDLK_TAB]) //troca de personagem ativo
-   {
-      if(keys[SDLK_LCTRL]) //para tras
+      if(keys[SDLK_PAGEDOWN]) // desce com a camera ate visao em 1ª pessoa
       {
-         PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->anterior;
-         if(PCs->personagemAtivo == PCs->primeiro)
-            PCs->personagemAtivo = (personagem*)PCs->primeiro->anterior;
+         if (theta > 0)
+         {
+            theta -= DELTACAMERA;
+            redesenha = 1;
+         }
       }
-      else //para frente
+      if (keys[SDLK_HOME]) // Zoom Maximo
       {
-         PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->proximo;
-         if(PCs->personagemAtivo == PCs->primeiro)
-            PCs->personagemAtivo = (personagem*)PCs->primeiro->proximo;
+         d = ZOOMMAXIMO;
+         redesenha = 1;
       }
-      SDL_Delay(100);
-   }
-   if(keys[SDLK_b])
-   {
-      if(keys[SDLK_LSHIFT])
+      if(keys[SDLK_END]) // ZoomMinimo
       {
-         PCs->personagemAtivo->braco_d->rotacao[1]+=1;
-         PCs->personagemAtivo->mao_d->rotacao[1]+=1;
-         PCs->personagemAtivo->ante_d->rotacao[1]+=1;
-      }
-      else
+         d = ZOOMMINIMO;
+         redesenha = 1;
+      }   
+      if(keys[SDLK_INSERT]) //Maximo para cima
       {
-         PCs->personagemAtivo->braco_d->rotacao[1]-=1;
-         PCs->personagemAtivo->mao_d->rotacao[1]-=1;
-         PCs->personagemAtivo->ante_d->rotacao[1]-=1;
+         theta = 89;
+         redesenha = 1;
       }
-      redesenha = 1;
-   }
-   if(keys[SDLK_i])
-   {
-      printf("Orientacao %f°\t sen %f\tcos %f\trad %f\n",
-              PCs->personagemAtivo->orientacao,
-              sin(deg2Rad(PCs->personagemAtivo->orientacao)),
-              cos(deg2Rad(PCs->personagemAtivo->orientacao)),
-              deg2Rad(PCs->personagemAtivo->orientacao));
-      printf("PosicaoLadoX %f\n",PCs->personagemAtivo->posicaoLadoX);
-      printf("PosicaoLadoZ %f\n",PCs->personagemAtivo->posicaoLadoZ);
-      SDL_Delay(100);
-   }
-   if(keys[SDLK_t])
-   {
-      GLuint aux = 0;
-      GLMtexture* tex = PCs->personagemAtivo->modelo3d->texturas;
-      while(aux<PCs->personagemAtivo->modelo3d->numtexturas)
+      if(keys[SDLK_DELETE]) //Maximo para baixo
       {
-         printf("Textura: %s\n",tex->nome);
-         tex = tex->proximo;
-         aux++;
+         theta = 0;
+         redesenha = 1;
       }
-      SDL_Delay(100);
-   }
+
+      /* Tratamento da tecla para Movimentacao do Personagem */
+      if(keys[SDLK_q] || keys[SDLK_e])
+      {
+          varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
+          varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
+         // Anda com personagem de lado para esquerda
+         if((keys[SDLK_q])&& (podeAndar(-varX,-varZ,0))) 
+         {
+            PCs->personagemAtivo->posicaoLadoX -= varX;
+            PCs->personagemAtivo->posicaoLadoZ -= varZ;
+            centroX -= varX;
+            centroZ -= varZ;
+            redesenha = 1;
+         }
+         // Anda com personagem para esquerda
+         if((keys[SDLK_e])&& (podeAndar(varX,varZ,0))) 
+         {
+            centroX += varX;
+            centroZ += varZ;
+            PCs->personagemAtivo->posicaoLadoX += varX;
+            PCs->personagemAtivo->posicaoLadoZ += varZ;
+            redesenha = 1;
+         }
+      }
+      if(keys[SDLK_w] || keys[SDLK_s])
+      { 
+         varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao));
+         varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao));
+           // Anda com personagem para frente
+         if((keys[SDLK_w]) && (podeAndar(-varX,-varZ,0)) ) 
+         {
+              PCs->personagemAtivo->posicaoLadoX -= varX;
+              PCs->personagemAtivo->posicaoLadoZ -= varZ;
+              centroZ -= varZ;
+              centroX -= varX;
+              redesenha = 1;
+         }
+           // Anda com personagem para tras
+         if((keys[SDLK_s]) && (podeAndar(varX,varZ,0)) ) 
+         {
+             PCs->personagemAtivo->posicaoLadoX += varX;
+             PCs->personagemAtivo->posicaoLadoZ += varZ;
+             centroX += varX;
+             centroZ += varZ;
+             redesenha = 1;
+         }
+      }
+
+      if( (keys[SDLK_a]) || (keys[SDLK_d]))
+      {
+         // Gira personagem antihorariamente
+         if((keys[SDLK_a]) && (podeAndar(0,0,2.0)) )  
+         {
+            PCs->personagemAtivo->orientacao += GIRAR;
+            if(PCs->personagemAtivo->orientacao > 360.0)
+               PCs->personagemAtivo->orientacao = 
+                               PCs->personagemAtivo->orientacao  - 360.0;
+            redesenha = 1;
+         }
+         // Gira o personagem horariamente
+         if((keys[SDLK_d]) && (podeAndar(0,0,-2.0)) )
+         {
+            PCs->personagemAtivo->orientacao -= GIRAR;
+            if(PCs->personagemAtivo->orientacao < 0.0)
+               PCs->personagemAtivo->orientacao = 360.0 + 
+                                        PCs->personagemAtivo->orientacao ;
+         }
+         redesenha = 1;
+      }
+      if(keys[SDLK_TAB]) //troca de personagem ativo
+      {
+         if(keys[SDLK_LCTRL]) //para tras
+         {
+            PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->anterior;
+            if(PCs->personagemAtivo == PCs->primeiro)
+               PCs->personagemAtivo = (personagem*)PCs->primeiro->anterior;
+         }
+         else //para frente
+         {
+            PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->proximo;
+            if(PCs->personagemAtivo == PCs->primeiro)
+               PCs->personagemAtivo = (personagem*)PCs->primeiro->proximo;
+         }
+      }
+      if(keys[SDLK_b])
+      {
+         if(keys[SDLK_LSHIFT])
+         {
+             PCs->personagemAtivo->braco_d->rotacao[1]+=1;
+             PCs->personagemAtivo->mao_d->rotacao[1]+=1;
+             PCs->personagemAtivo->ante_d->rotacao[1]+=1;
+         }
+         else
+         {
+             PCs->personagemAtivo->braco_d->rotacao[1]-=1;
+             PCs->personagemAtivo->mao_d->rotacao[1]-=1;
+             PCs->personagemAtivo->ante_d->rotacao[1]-=1;
+         }
+         redesenha = 1;
+      }
+      if(keys[SDLK_i])
+      {
+         printf("Orientacao %f°\t sen %f\tcos %f\trad %f\n",
+                 PCs->personagemAtivo->orientacao,
+                 sin(deg2Rad(PCs->personagemAtivo->orientacao)),
+                 cos(deg2Rad(PCs->personagemAtivo->orientacao)),
+                 deg2Rad(PCs->personagemAtivo->orientacao));
+         printf("PosicaoLadoX %f\n",PCs->personagemAtivo->posicaoLadoX);
+         printf("PosicaoLadoZ %f\n",PCs->personagemAtivo->posicaoLadoZ);
+      }
+      if(keys[SDLK_t])
+      {
+         GLuint aux = 0;
+         GLMtexture* tex = PCs->personagemAtivo->modelo3d->texturas;
+         while(aux<PCs->personagemAtivo->modelo3d->numtexturas)
+         {
+            printf("Textura: %s\n",tex->nome);
+            tex = tex->proximo;
+            aux++;
+          }
+      }
       
 
-   /* Tratamento do Mouse */
-   int x,y;
-   SDL_GetMouseState(&x,&y);
+      /* Tratamento do Mouse */
+      int x,y;
+      SDL_GetMouseState(&x,&y);
 
-   /* Tratamento do Mouse para Camera */
-   if(x == 0)    // Gira a Camera horariamente
-   {
-      phi+=2; 
-      redesenha = 1;  
-   }
-   if(x == screen->w-1) // Gira a camera antihorariamente
-   {
-     phi-=2; 
-     redesenha = 1;
-   }
+      /* Tratamento do Mouse para Camera */
+      if(x == 0)    // Gira a Camera horariamente
+      {
+         phi+=2; 
+         redesenha = 1;  
+      }
+      if(x == screen->w-1) // Gira a camera antihorariamente
+      {
+        phi-=2; 
+        redesenha = 1;
+      }
    }
    if(redesenha)
    {
-      //Uint32 antes = SDL_GetTicks();
       Desenhar();
       SDL_GL_SwapBuffers();
-      //antes = SDL_GetTicks() - antes;
-      //printf("FPS: %f\t",1000.0 / (float)antes);
-      //SDL_Delay(DELAY);
    }
    return(1);
 }
@@ -400,24 +382,30 @@ int engine::TrataES(SDL_Surface *screen)
 void engine::Desenhar()
 {
    glLoadIdentity();
-   //gluLookAt (7.0,7.0, 7.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0);
+
+   /* Redefine a posicao dinamica da camera */
    cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centroY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
-
+ 
+   /* Autaliza para fazer o culling e o desenho da GUI */
    AtualizaFrustum(matrizVisivel,proj,modl);
 
    glClear ((GL_COLOR_BUFFER_BIT));
    glClear (GL_DEPTH_BUFFER_BIT);
-
-
    
    glPushMatrix();
+   
+   /* Rotacoes no Mundo de Teste apenas, sumirao com o tempo */
    glRotatef(RotacaoX,1,0,0);
    glRotatef(RotacaoY,0,1,0);
    glRotatef(RotacaoZ,0,0,1);
+
+   /* Desenha o Mundo, fazendo culling do view frustum */
    mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
+
+   /* Desnha os Personagens do Jogador (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
       for(aux=0;aux < PCs->total;aux++)
@@ -430,29 +418,60 @@ void engine::Desenhar()
            glmDrawLists(per->modelo3d);
          glPopMatrix();
          per = (personagem*) per->proximo;
-         glTranslatef(30,0,0);
       }
    glPopMatrix();
 
+   /* Atualiza os Valores dos NPCS com o que já estiver no socket */
+   //AtualizaNPCs
+  
+   /* Desenha Entao os NPCs */
+      per = (personagem*) NPCs->primeiro->proximo;
+      for(aux=0;aux < NPCs->total;aux++)
+      {
+         glPushMatrix();
+           glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
+           glRotatef(per->orientacao,0,1,0);
+           glmDrawLists(per->modelo3d);
+         glPopMatrix();
+         per = (personagem*) per->proximo;
+      }
+
+   /* Faz o Desenho da GUI */
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
-   gluUnProject( 0, 0, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject( 0, 32,0.01, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject( 32, 32, 0.01, modl, proj, viewPort, &x3, &y3, &z3);
-   gluUnProject( 32, 0, 0.01, modl, proj, viewPort, &x4, &y4, &z4);
+   gluUnProject( 800, 600, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject( 800, 600-80,0.01, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject( 800-60, 600-80, 0.01, modl, proj, viewPort, &x3, &y3, &z3);
+   gluUnProject( 800-60, 600, 0.01, modl, proj, viewPort, &x4, &y4, &z4);
+
+   /* Desenho do Portrait do jogador */
+   per = (personagem*) PCs->personagemAtivo;
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, per->portrait );
    glBegin(GL_QUADS);
-      glColor3f(1,0,1);
+      glColor3f(1,1,1);
+      glTexCoord2f(1,0);
       glVertex3f(x1,y1,z1);
+      glTexCoord2f(1,1);
       glVertex3f(x2,y2,z2);
+      glTexCoord2f(0,1);
       glVertex3f(x3,y3,z3);
+      glTexCoord2f(0,0);
       glVertex3f(x4,y4,z4);
    glEnd();
-
-   glColor3f(1,1,1);
+   glDisable(GL_TEXTURE_2D);
 
    glFlush();
 }
 
 
+/******************************************/
+/*    PARTE DA DETECCAO DE COLISAO!!!!!!! */
+/******************************************/
+
+
+/*********************************************************************
+ *        Verifica se ha intersecao entre dois bounding boxes        *
+ *********************************************************************/
 int estaDentro(GLfloat x[4], GLfloat z[4],
                GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2)
 {
@@ -483,19 +502,24 @@ int estaDentro(GLfloat x[4], GLfloat z[4],
           );
 }
 
+/*********************************************************************
+ *      Retorna o Quadrado do mapa Relativo à posicao posX,posZ      *
+ *********************************************************************/
 Square* quadradoRelativo(int posX,int posZ, Square* quad)
 {
    Square* result = quad;
-  // printf("%d %d\n",quad->posX,quad->posZ);
    int aux;
    for(aux=0;aux < (quad->posX-posX);aux++) result = result->left;
    for(aux=0;aux < (posX-quad->posX);aux++) result = result->right;
    for(aux=0;aux < (quad->posZ-posZ);aux++) result = result->up;
    for(aux=0;aux < (posZ-quad->posZ);aux++) result = result->down;
-
    return(result);
 }
 
+/*********************************************************************
+ *          Faz o teste se o Quadrado quad é factivel de ser         *
+ *                    ocupado pelo personagem                        *
+ *********************************************************************/
 int testa(GLfloat x[4],GLfloat z[4],Square* quad)
 {
    int result = 0;
@@ -516,7 +540,6 @@ int testa(GLfloat x[4],GLfloat z[4],Square* quad)
           u2 = modelo3d->x2+proxima->Xobjetos[ob];
           v1 = modelo3d->z1+proxima->Zobjetos[ob];
           v2 = modelo3d->z2+proxima->Zobjetos[ob];
-          //printf("obj: %s %.3f,%.3f,%.3f,%.3f %.3f,%.3f,%.3f,%.3f\n",proxima->objetos[ob]->nome,u1,v1,u2,v2,x1,z1,x2,z2);
           result &= !estaDentro(x,z,u1,v1,u2,v2);
           if(!result) //se ja achou que nao pode, cai fora
              return(0);

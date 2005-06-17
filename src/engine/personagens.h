@@ -39,6 +39,7 @@ class personagem: public Tobjeto
       float posicaoLadoX;       // posicao do personagem pro lado
       float posicaoLadoZ;       // posicao do personagem pro lado
    // Lhabilidade* habilidades; // habilidades personagem (ex:kamasutramaster)
+      GLuint portrait;
 
       Square* ocupaQuad;        // quadrado do mapa que ele ocupa com x1,z1
 
