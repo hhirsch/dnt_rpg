@@ -3,7 +3,7 @@
 
 int initclientdata( clientdata_p_t cd )
 {
-	cd->buffer = malloc( NUFFERSIZE );
+	cd->buffer = malloc( BUFFERSIZE );
 	cd->buflen = 0;
 	return(0);
 }
