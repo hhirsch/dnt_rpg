@@ -1,19 +1,29 @@
-
 CC=gcc
-CFLAGS= -Wall
+CFLAGS= -Wall -g
 CLIBS=
 CLIBSDIR=
 
 all: server client.o
 
-client.o: client.c network.h
+common.o: common.c common.h
+	${CC} ${CFLAGS} -c common.c
+
+client.o: common.o client.c common.h
 	${CC} ${CFLAGS} -c client.c
+	${CC} ${CFLAGS} -o client client.o common.o
 
-server: server.c network.h
-	${CC} ${CFLAGS} server.c -o server
+server.o: server.c common.h
+	${CC} ${CFLAGS} -c server.c
 
-test: client.c network.h server
-	${CC} ${CFLAGS} -DCLIENT_TEST client.c -o client
+server: server.o common.o
+	${CC} ${CFLAGS} -o server server.o common.o
+
+client: common.o server client.c common.h
+	${CC} ${CFLAGS} -c -DCLIENT_TEST client.c
+	${CC} ${CFLAGS} -DCLIENT_TEST client.o common.o -o client
 
 clean:
-	rm -rf server client.o client
+	rm -rf server server.o common.o client.o client
+
+run: server client
+	./server

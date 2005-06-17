@@ -1,133 +1,143 @@
-#include "network.h"
-#include <fcntl.h>
+#include "common.h"
 
-void handlemesg( int size, void * buffer )
+void handlemesg( serverdata_p_t sd, int senderindex )
 {
-	printf("%s\n", (char *) buffer);
+	void * ackbuffer = malloc( BUFFERSIZE );
+	int acksize, * iaux, i;
+	iaux = sd->buffer;
+	acksize = buildmesg( ackbuffer, MT_ACK, 0, iaux );
+	for( i = 1; i <= sd->numclients; i++ )
+	{
+		if ( i == senderindex )
+		{
+			senddata( sd->readfdset[i].fd, ackbuffer, acksize );
+		}
+		else
+		{
+			senddata( sd->readfdset[i].fd, sd->buffer, sd->buflen );
+		}
+	}
 	return;
 }
 
 /* void bcastmesg( int size, void * buffer )*/
 
-int main( int argc, char ** argv )
+int initserverdata( serverdata_p_t sd )
 {
-	char opt;
-	void * buffer;
-	int port = DEFAULTPORT, listenerfd, numclients = 0, newfd, pollret, i, j, numbytes, saddrsize = sizeof(struct sockaddr);
-	struct sockaddr myaddr, *clients;
+	if (( sd->buffer = (void*) malloc( BUFFERSIZE + 1 )) == NULL ) return(1);
+    if (( sd->clients = (void*) malloc( sizeof( struct sockaddr )*MAXCLIENTS )) == NULL ) return(1);
+	sd->buflen = 0;
+	sd->port = DEFAULTPORT;
+	sd->numclients = 0;
+	return(0);
+}
+
+int initlisten( serverdata_p_t sd )
+{
 	struct sockaddr_in * addr_in;
-	struct pollfd readfdset [MAXCLIENTS + 1];
+	int yes = 1;
 
-	buffer = (void*) malloc( BUFFERSIZE + 1 );
-    clients = (void*) malloc( sizeof( struct sockaddr )*MAXCLIENTS );
-
-	while(( opt = getopt( argc, argv, "p:" )) != -1 )
+	if ( (sd->listenerfd = socket( AF_INET, SOCK_STREAM, 0 )) == -1 )
 	{
-		switch( opt )
-		{
-			case 'p':
-				port = atoi( optarg );
-				printf( "Set listen port to %d.\n", port );
-				break;
-			case ':':
-				return(1);
-				break;
-			case '?':
-				return(1);
-				break;
-		}
-	}
-	if ( (listenerfd = socket( AF_INET, SOCK_STREAM, 0 )) == -1 )
-	{
-		fprintf( stderr, "Error openning socket. Aborting\n" );
+		perror( "socket" );
 		return(errno);
 	}
-	fcntl( listenerfd, F_SETFL, 0 );
-	addr_in = (struct sockaddr_in *) &myaddr;
+	fcntl( sd->listenerfd, F_SETFL, 0 );
+	if ( setsockopt( sd->listenerfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1 )
+	{
+		perror("setsockopt");
+		return(errno);
+	}
+	addr_in = (struct sockaddr_in *) &(sd->myaddr);
 	addr_in->sin_family = AF_INET;
-	addr_in->sin_port = htons( port );
+	addr_in->sin_port = htons( sd->port );
 	addr_in->sin_addr.s_addr = INADDR_ANY;
 	memset( &(addr_in->sin_zero), '\0', 8);
-	printf( "Binding socket %d to port %d\n", listenerfd, port );
-	if ( bind( listenerfd, &myaddr, sizeof( struct sockaddr )) != 0 )
+	if ( bind( sd->listenerfd, &(sd->myaddr), addrlen ) != 0 )
 	{
-		fprintf( stderr, "Error binding socket to port %d. Aborting.\n", port );
+		perror("bind");
 		return(errno);
 	}
-	if ( listen( listenerfd, BACKLOG ) == -1 )
+	if ( listen( sd->listenerfd, BACKLOG ) == -1 )
 	{
 		perror("listen");
 		return(errno);
 	}
+	sd->readfdset[0].fd = sd->listenerfd;
+	sd->readfdset[0].events = POLLIN | POLLPRI ;
+	sd->readfdset[0].revents = 0;
+	return(0);
+}
 	
-	readfdset[0].fd = listenerfd;
-	readfdset[0].events = POLLIN | POLLPRI ;
-	readfdset[0].revents = 0;
+int mainloop( serverdata_p_t sd )
+{
+	int newfd, pollret, i, j;
+	struct sockaddr_in * addr_in;
+
 	while( 1 )
 	{
-		pollret = poll( readfdset, numclients + 1, (LISTENTIMEOUT * 1000) );
+		pollret = poll( sd->readfdset, sd->numclients + 1, (LISTENTIMEOUT * 1000) );
 		if ( pollret > 0 )
 		{
-			printf("Something happened...\n");
-			for ( i = 0; i <= numclients; i++ )
+			for ( i = 0; i <= sd->numclients; i++ )
 			{
-				if ( readfdset[i].revents & ( POLLERR | POLLHUP | POLLNVAL ) )
+				if ( sd->readfdset[i].revents & ( POLLERR | POLLHUP | POLLNVAL ) )
 				{
-					addr_in = (struct sockaddr_in *) &(clients[i]);
+					addr_in = (struct sockaddr_in *) &(sd->clients[i]);
 					printf( "Hungup connection with client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
-					close(readfdset[i].fd);
-					for( j = i; j < numclients; j++ )
-						readfdset[j] = readfdset[j+1];
-					numclients--;
+					close(sd->readfdset[i].fd);
+					for( j = i; j < sd->numclients; j++ )
+						sd->readfdset[j] = sd->readfdset[j+1];
+					sd->numclients--;
 					i--;
 				}
-				else if ( readfdset[i].revents & (POLLIN | POLLPRI))
+				else if ( sd->readfdset[i].revents & (POLLIN | POLLPRI))
 				{
-					if ( readfdset[i].fd == listenerfd )
+					if ( sd->readfdset[i].fd == sd->listenerfd )
 					{
-						if ( numclients >= MAXCLIENTS )
+						if ( sd->numclients >= MAXCLIENTS )
 						{
-							fprintf( stderr, "New connection atempt arrived, but already at max client number.\n" );
+							printf( "New connection atempt arrived, but already at max client number.\n" );
 						}
 						else
 						{
 							printf( "New connection attempt.\n" );
-							if (( newfd = accept( listenerfd, &(clients[numclients]), &saddrsize )) == -1 )
+							if (( newfd = accept( sd->listenerfd, &(sd->clients[sd->numclients]), &addrlen )) == -1 )
 							{
-								fprintf( stderr, "Could not stabilish the connection with remote host.\n" );
+								printf( "Could not stabilish the connection with remote host.\n" );
 							}
 							else
 							{
-								numclients++;
-								readfdset[numclients].fd = newfd;
-								readfdset[numclients].events = POLLIN | POLLPRI ;
-								readfdset[numclients].revents = 0;
+								sd->numclients++;
+								sd->readfdset[sd->numclients].fd = newfd;
+								sd->readfdset[sd->numclients].events = POLLIN | POLLPRI ;
+								sd->readfdset[sd->numclients].revents = 0;
 							}
 						}
 					}
 					else
 					{
-						if( (numbytes = recv( readfdset[i].fd, buffer, BUFFERSIZE, 0)) == 0 )
+						if( (sd->buflen = recv( sd->readfdset[i].fd, sd->buffer, BUFFERSIZE, 0)) == 0 )
 						{
-							addr_in = (struct sockaddr_in *) &(clients[i]);
+							addr_in = (struct sockaddr_in *) &(sd->clients[i]);
 							printf( "Connection closed by client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
-							close(readfdset[i].fd);
-							for( j = i; j < numclients; j++ )
-								readfdset[j] = readfdset[j+1];
-							numclients--;
+							close(sd->readfdset[i].fd);
+							for( j = i; j < sd->numclients; j++ )
+								sd->readfdset[j] = sd->readfdset[j+1];
+							sd->numclients--;
 							i--;
 						}
-						else if( numbytes > 0 )
+						else if( sd->buflen > 0 )
 						{
-							handlemesg( numbytes, buffer );
+							handlemesg( sd, i );
 						}
-						else if( numbytes == -1 )
+						else if( sd->buflen == -1 )
 						{
 							perror("recv");
-							close(readfdset[i].fd);
-							for( j = i; j < numclients; j++ )
-								readfdset[j] = readfdset[j+1];
-							numclients--;
+							close(sd->readfdset[i].fd);
+							for( j = i; j < sd->numclients; j++ )
+								sd->readfdset[j] = sd->readfdset[j+1];
+							sd->numclients--;
 							i--;
 						}
 					}
@@ -144,6 +154,36 @@ int main( int argc, char ** argv )
 			perror("poll");
 		}
 	}
-	close(listenerfd);
-return(0);
+	close(sd->listenerfd);
+	return(0);
 }
+
+int main( int argc, char ** argv )
+{
+	char opt;
+	serverdata_t sd;
+	
+
+	while(( opt = getopt( argc, argv, "p:" )) != -1 )
+	{
+		switch( opt )
+		{
+			case 'p':
+				sd.port = atoi( optarg );
+				printf( "Set listen port to %d.\n", sd.port );
+				break;
+			case ':':
+				return(1);
+				break;
+			case '?':
+				return(1);
+				break;
+		}
+	}
+	
+	initserverdata( &sd );
+	if (initlisten( &sd )) return(1);
+	mainloop( &sd );
+	return(0);
+}
+
