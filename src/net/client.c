@@ -74,6 +74,9 @@ int main( int argc, char ** argv )
 	int port = DEFAULTPORT;
 	char * server;
 	int fd;
+	void * mesgbuffer = malloc( BUFFERSIZE );
+	char * mesg;
+	mesg = mesgbuffer;
 	
 	while(( opt = getopt( argc, argv, "p:" )) != -1 )
 	{
@@ -107,6 +110,12 @@ int main( int argc, char ** argv )
 	else
 	{
 		printf("Aeeeeeh !!!\n");
+		sprintf(mesg, "Ate que enfim consegui fala coce, po !\n");
+		send_data( fd, mesg, strlen( mesg )+1 );
+		sleep(20);
+		sprintf(mesg, "To vazando !\n");
+		send_data( fd, mesg, strlen( mesg )+1 );
+
 		close_connection( fd );
 	}
 	return(0);

@@ -1,16 +1,13 @@
 #include "network.h"
 #include <fcntl.h>
 
-//TODO: Criar outro vetor de pollfd pra não perder o antigo no loop !!!
-//      Criar um numclients temporário tb !
-//      Fragar o que é um "broken pipe" !!!
-
-
 void handlemesg( int size, void * buffer )
 {
 	printf("%s\n", (char *) buffer);
 	return;
 }
+
+/* void bcastmesg( int size, void * buffer )*/
 
 int main( int argc, char ** argv )
 {
@@ -78,10 +75,11 @@ int main( int argc, char ** argv )
 				{
 					addr_in = (struct sockaddr_in *) &(clients[i]);
 					printf( "Hungup connection with client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
-					close(i);
+					close(readfdset[i].fd);
 					for( j = i; j < numclients; j++ )
 						readfdset[j] = readfdset[j+1];
 					numclients--;
+					i--;
 				}
 				else if ( readfdset[i].revents & (POLLIN | POLLPRI))
 				{
@@ -109,45 +107,43 @@ int main( int argc, char ** argv )
 					}
 					else
 					{
-						if( (numbytes = recv( i, buffer, BUFFERSIZE, 0)) == 0 )
+						if( (numbytes = recv( readfdset[i].fd, buffer, BUFFERSIZE, 0)) == 0 )
 						{
 							addr_in = (struct sockaddr_in *) &(clients[i]);
 							printf( "Connection closed by client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
-							close(i);
+							close(readfdset[i].fd);
 							for( j = i; j < numclients; j++ )
 								readfdset[j] = readfdset[j+1];
 							numclients--;
+							i--;
 						}
 						else if( numbytes > 0 )
 						{
 							handlemesg( numbytes, buffer );
 						}
-						else
+						else if( numbytes == -1 )
 						{
-							fprintf(
-									stderr,
-									"%s %d, %s: Error receiving data. Closing connection.\n",
-									__FILE__,
-									__LINE__,
-									__FUNCTION__
-								   );
-							close(i);
+							perror("recv");
+							close(readfdset[i].fd);
 							for( j = i; j < numclients; j++ )
 								readfdset[j] = readfdset[j+1];
 							numclients--;
+							i--;
 						}
 					}
 				}
 			}
 		}
+		/*
 		else if ( pollret == 0 )
 		{
 			printf("Timeout...\n");
-		}
+		}*/
 		else if ( pollret < 0 )
 		{
 			perror("poll");
 		}
 	}
+	close(listenerfd);
 return(0);
 }
