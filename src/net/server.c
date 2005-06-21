@@ -7,6 +7,8 @@ int initserverdata( serverdata_p_t sd )
 	if (( sd->inbuffer = (void*) malloc( BUFFERSIZE + 1 )) == NULL ) return(1);
 	sd->outlen = 0;
 	sd->inlen = 0;
+	sd->outoffset = 0;
+	sd->inoffset = 0;
 	sd->port = DEFAULTPORT;
 	sd->numclients = 0;
 	for( i = 0; i < MAXCLIENTS; i++ )
@@ -55,10 +57,11 @@ void sendstate( serverdata_p_t sd, int index )
 
 void handlemesg( serverdata_p_t sd, int index )
 {
-	int * iaux = sd->inbuffer;
+	int * iaux = (int*)(((char *)sd->inbuffer) + sd->inoffset);
 	double * daux = (double *) &(iaux[2]);
 	struct sockaddr_in * addr_in = (struct sockaddr_in *)&(sd->addresses[index]);
 	printf("Mesg size = %d\n", sd->inlen );
+	printf("Buffer offset = %d\n", sd->inoffset );
 	switch( iaux[0] )
 	{
 		/* MT_ACK */
@@ -77,6 +80,8 @@ void handlemesg( serverdata_p_t sd, int index )
 				fprintf( stderr, "Unexpected ACK from host %s.\n", inet_ntoa( addr_in->sin_addr ));
 				return;
 			}
+			sd->inlen -= MT_SIZE_ACK;
+			sd->inoffset += MT_SIZE_ACK;
 			break;
 
 		/* MT_NEWCHAR */
@@ -96,21 +101,22 @@ void handlemesg( serverdata_p_t sd, int index )
 				senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 				return;
 			}
-			else
-			{
-				sd->pcs[index].stat = PCSTAT_ON;
-				sd->pcs[index].x = daux[0];
-				sd->pcs[index].y = daux[1];
-				sd->pcs[index].teta = daux[2];
-				iaux[1] = index;
-			}
+			sd->pcs[index].stat = PCSTAT_ON;
+			sd->pcs[index].x = daux[0];
+			sd->pcs[index].y = daux[1];
+			sd->pcs[index].teta = daux[2];
+			iaux[1] = index;
 			bcastmesg( sd, index );
+			sd->inlen -= MT_SIZE_NEWCHAR;
+			sd->inoffset += MT_SIZE_NEWCHAR;
 			break;
 		case MT_SYNC:
 			printf("MT_SYNC received.\n");
 			sd->outlen = buildmesg( sd->outbuffer, MT_ACK, 0, MT_SYNC );
 			senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 			sendstate( sd, index );
+			sd->inlen -= MT_SIZE_SYNC;
+			sd->inoffset += MT_SIZE_SYNC;
 			break;
 		case MT_MOV:
 			printf("MT_MOV received.\n");
@@ -139,6 +145,8 @@ void handlemesg( serverdata_p_t sd, int index )
 			sd->pcs[index].y = daux[1];
 			sd->pcs[index].teta = daux[2];
 			bcastmesg( sd, index );
+			sd->inlen -= MT_SIZE_MOV;
+			sd->inoffset += MT_SIZE_MOV;
 			break;
 	}
 	return;
@@ -180,7 +188,7 @@ int initlisten( serverdata_p_t sd )
 	sd->fdset[0].revents = 0;
 	return(0);
 }
-	
+
 int mainloop( serverdata_p_t sd )
 {
 	int newfd, pollret, i, j;
@@ -243,10 +251,6 @@ int mainloop( serverdata_p_t sd )
 							sd->hoststat[i] = STAT_OFFLINE;
 							i--;
 						}
-						else if( sd->inlen > 0 )
-						{
-							handlemesg( sd, i );
-						}
 						else if( sd->inlen == -1 )
 						{
 							perror("recv");
@@ -257,15 +261,20 @@ int mainloop( serverdata_p_t sd )
 							sd->hoststat[i] = STAT_OFFLINE;
 							i--;
 						}
+						while( sd->inlen > 0 )
+						{
+							handlemesg( sd, i );
+						}
+						sd->inoffset = 0;
 					}
 				}
 			}
 		}
 		/*
-		else if ( pollret == 0 )
-		{
-			printf("Timeout...\n");
-		}*/
+		   else if ( pollret == 0 )
+		   {
+		   printf("Timeout...\n");
+		   }*/
 		else if ( pollret < 0 )
 		{
 			perror("poll");
@@ -279,7 +288,7 @@ int main( int argc, char ** argv )
 {
 	char opt;
 	serverdata_t sd;
-	
+
 
 	while(( opt = getopt( argc, argv, "p:" )) != -1 )
 	{
@@ -297,7 +306,7 @@ int main( int argc, char ** argv )
 				break;
 		}
 	}
-	
+
 	initserverdata( &sd );
 	if (initlisten( &sd )) return(1);
 	mainloop( &sd );

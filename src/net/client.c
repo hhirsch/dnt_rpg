@@ -13,6 +13,8 @@ int initclientdata( clientdata_p_t cd )
 	cd->outbuffer = malloc( BUFFERSIZE );
 	cd->inlen = 0;
 	cd->outlen = 0;
+	cd->inoffset = 0;
+	cd->outoffset = 0;
 	cd->stat = STAT_OFFLINE;
 	cd->pending = -1;
 	return(0);
@@ -20,8 +22,9 @@ int initclientdata( clientdata_p_t cd )
 
 int handlemesg( clientdata_p_t cd )
 {
-	int * iaux = cd->inbuffer;
+	int * iaux = (int*)(((char *)cd->inbuffer) + cd->inoffset);
 	printf("Mesg size = %d\n", cd->inlen );
+	printf("Buffer offset = %d\n", cd->inoffset );
 	//double * daux = (double *)&(iaux[2]);
 	switch ( iaux[0] )
 	{
@@ -30,6 +33,8 @@ int handlemesg( clientdata_p_t cd )
 			// HERE: character creation function call
 			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_NEWCHAR );
 			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+			cd->inlen -= MT_SIZE_NEWCHAR;
+			cd->inoffset += MT_SIZE_NEWCHAR;
 			break;
 		case MT_ACK:
 			printf("MT_ACK received.\n");
@@ -63,12 +68,16 @@ int handlemesg( clientdata_p_t cd )
 					cd->pending = MT_ENDSYNC;
 					break;
 			}
+			cd->inlen -= MT_SIZE_ACK;
+			cd->inoffset += MT_SIZE_ACK;
 			break;
 		case MT_MOV:
 			printf("MT_MOV received.\n");
 			// HERE: character movement function call
 			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_MOV );
 			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+			cd->inlen -= MT_SIZE_MOV;
+			cd->inoffset += MT_SIZE_MOV;
 			break;
 		case MT_ERROR:
 			printf("MT_ERROR received.\n");
@@ -87,6 +96,8 @@ int handlemesg( clientdata_p_t cd )
 					fprintf(stderr, "I'm trying to move an unexistent character in the server. Why ?\n");
 					break;
 			}
+			cd->inlen -= MT_SIZE_ERROR;
+			cd->inoffset += MT_SIZE_ERROR;
 			break;
 		case MT_ENDSYNC:
 			printf("MT_ENDSYNC received.\n");
@@ -97,6 +108,9 @@ int handlemesg( clientdata_p_t cd )
 			}
 			cd->pending = -1;
 			cd->stat &= ~( STAT_SYNCING | STAT_UNSYNC );
+			cd->inlen -= MT_SIZE_ENDSYNC;
+			cd->inoffset += MT_SIZE_ENDSYNC;
+			break;
 	}
 	return(0);
 }
@@ -176,16 +190,17 @@ int pollnet( clientdata_p_t cd )
 			closeconnection( cd );
 			return(-2);
 		}
-		else if ( cd->inlen > 0 )
-		{
-			return(handlemesg( cd ));
-		}
-		else
+		else if ( cd->inlen < 0 )
 		{
 			printf("Connection error with server.\n");
 			closeconnection( cd );
 			return(-2);
 		}
+		while ( cd->inlen > 0 )
+		{
+			handlemesg( cd );
+		}
+		cd->inoffset = 0;
 	}
 	return(0);
 }

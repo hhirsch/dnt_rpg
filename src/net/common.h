@@ -38,8 +38,8 @@ typedef struct _serverdata_t
 	struct pollfd fdset [MAXCLIENTS + 1];
 	void * outbuffer;
 	void * inbuffer;
-	int inlen;
-	int outlen;
+	int inlen, inoffset;
+	int outlen, outoffset;
 	// This will be in gamedata in near (?) future:
 	pc_t pcs [MAXCLIENTS + 1];
 } serverdata_t, *serverdata_p_t;
@@ -52,8 +52,8 @@ typedef struct _clientdata_t
 	struct pollfd fdset;
 	void * outbuffer;
 	void * inbuffer;
-	int inlen;
-	int outlen;
+	int inlen, inoffset;
+	int outlen, outoffset;
 	int pending;
 // This will be in gamedata in near (?) future:
 	int pcindex;
