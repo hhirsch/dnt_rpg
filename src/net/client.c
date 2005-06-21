@@ -23,6 +23,7 @@ int initclientdata( clientdata_p_t cd )
 int handlemesg( clientdata_p_t cd )
 {
 	int * iaux = (int*)(((char *)cd->inbuffer) + cd->inoffset);
+	double * daux = (double*)&(iaux[2]);
 	printf("Mesg size = %d\n", cd->inlen );
 	printf("Buffer offset = %d\n", cd->inoffset );
 	//double * daux = (double *)&(iaux[2]);
@@ -31,6 +32,10 @@ int handlemesg( clientdata_p_t cd )
 		case MT_NEWCHAR:
 			printf("MT_NEWCHAR received.\n");
 			// HERE: character creation function call
+			// Arguments:
+			// X = daux[0]
+			// Y = daux[1]
+			// TETA = daux[2]
 			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_NEWCHAR );
 			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 			cd->inlen -= MT_SIZE_NEWCHAR;
@@ -47,6 +52,10 @@ int handlemesg( clientdata_p_t cd )
 						return(-1);
 					}
 					// HERE: character creation function call
+					// Arguments:
+					// X = daux[0]
+					// Y = daux[1]
+					// TETA = daux[2]
 					cd->pcindex = iaux[1]; 
 					cd->pending = -1;
 					break;
@@ -57,6 +66,10 @@ int handlemesg( clientdata_p_t cd )
 						return(-1);
 					}
 					// HERE: character movement function call
+					// Arguments:
+					// X = daux[0]
+					// Y = daux[1]
+					// TETA = daux[2]
 					cd->pending = -1;
 					break;
 				case MT_SYNC:
@@ -74,6 +87,10 @@ int handlemesg( clientdata_p_t cd )
 		case MT_MOV:
 			printf("MT_MOV received.\n");
 			// HERE: character movement function call
+			// Arguments:
+			// X = daux[0]
+			// Y = daux[1]
+			// TETA = daux[2]
 			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_MOV );
 			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 			cd->inlen -= MT_SIZE_MOV;
