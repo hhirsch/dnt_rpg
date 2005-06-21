@@ -44,25 +44,26 @@ void sendstate( serverdata_p_t sd, int index )
 		{
 			sd->outlen = buildmesg( sd->outbuffer, MT_NEWCHAR, i, sd->pcs[i].x, sd->pcs[i].y, sd->pcs[i].teta );
 			senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen );
-			sd->acks[i]++;
+			sd->acks[index]++;
 		}
 	}
 	sd->outlen = buildmesg( sd->outbuffer, MT_ENDSYNC, 0 );
 	senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen );
-	sd->acks[i]++;
-	sd->hoststat[i] |= (STAT_ACKING | STAT_UNSYNC );
+	sd->acks[index]++;
+	sd->hoststat[index] |= (STAT_ACKING | STAT_UNSYNC );
 }
 
 void handlemesg( serverdata_p_t sd, int index )
 {
-	int i, * iaux = sd->inbuffer;
+	int * iaux = sd->inbuffer;
 	double * daux = (double *) &(iaux[2]);
 	struct sockaddr_in * addr_in = (struct sockaddr_in *)&(sd->addresses[index]);
-	
+	printf("Mesg size = %d\n", sd->inlen );
 	switch( iaux[0] )
 	{
 		/* MT_ACK */
 		case MT_ACK:
+			printf("MT_ACK received.\n");
 			if( sd->acks[index] > 0 )
 			{
 				sd->acks[index] --;
@@ -80,18 +81,19 @@ void handlemesg( serverdata_p_t sd, int index )
 
 		/* MT_NEWCHAR */
 		case MT_NEWCHAR:
+			printf("MT_NEWCHAR received.\n");
 			if( sd->hoststat[index] & STAT_UNSYNC )
 			{
 				fprintf( stderr, "Character creation from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
 				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_UNSYNC );
-				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 				return;
 			}
 			if( sd->pcs[index].stat & PCSTAT_ON )
 			{
 				fprintf( stderr, "Another character creation requisition from host %s.\n", inet_ntoa( addr_in->sin_addr ));
 				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_DOUBLECHAR );
-				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 				return;
 			}
 			else
@@ -105,30 +107,32 @@ void handlemesg( serverdata_p_t sd, int index )
 			bcastmesg( sd, index );
 			break;
 		case MT_SYNC:
+			printf("MT_SYNC received.\n");
 			sd->outlen = buildmesg( sd->outbuffer, MT_ACK, 0, MT_SYNC );
-			senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+			senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 			sendstate( sd, index );
 			break;
 		case MT_MOV:
+			printf("MT_MOV received.\n");
 			if( sd->hoststat[index] & STAT_UNSYNC )
 			{
 				fprintf( stderr, "Character movement from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
 				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_UNSYNC );
-				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 				return;
 			}
 			if( ! (sd->pcs[index].stat & PCSTAT_ON) )
 			{
 				fprintf( stderr, "Host %s trying to move unexistent character.\n", inet_ntoa( addr_in->sin_addr ));
 				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_NOCHAR );
-				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 				return;
 			}
 			if( iaux[1] != index )
 			{
 				fprintf( stderr, "Host %s trying to move another host character.\n", inet_ntoa( addr_in->sin_addr ));
 				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_OTHER );
-				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 				return;
 			}
 			sd->pcs[index].x = daux[0];
@@ -217,6 +221,7 @@ int mainloop( serverdata_p_t sd )
 							}
 							else
 							{
+								printf( "Connection stabilished with remote host (fd %d).\n", newfd );
 								sd->numclients++;
 								sd->hoststat[i] = STAT_ONLINE | STAT_UNSYNC;
 								sd->fdset[sd->numclients].fd = newfd;

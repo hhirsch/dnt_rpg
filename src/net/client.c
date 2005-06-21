@@ -2,6 +2,13 @@
 
 int initclientdata( clientdata_p_t cd )
 {
+	printf("MT_SIZE_ACK = %d\n", (sizeof(int)*3));
+	printf("MT_SIZE_NEWCHAR = %d\n", ((sizeof(int)*2)+(sizeof(double)*3)));
+	printf("MT_SIZE_MOV = %d\n", ((sizeof(int)*2)+(sizeof(double)*3)));
+	printf("MT_SIZE_ERROR = %d\n", (sizeof(int)*3));
+	printf("MT_SIZE_SYNC = %d\n", (sizeof(int)*2));
+	printf("MT_SIZE_ENDSYNC = %d\n", (sizeof(int)*2));
+
 	cd->inbuffer = malloc( BUFFERSIZE );
 	cd->outbuffer = malloc( BUFFERSIZE );
 	cd->inlen = 0;
@@ -14,15 +21,18 @@ int initclientdata( clientdata_p_t cd )
 int handlemesg( clientdata_p_t cd )
 {
 	int * iaux = cd->inbuffer;
+	printf("Mesg size = %d\n", cd->inlen );
 	//double * daux = (double *)&(iaux[2]);
 	switch ( iaux[0] )
 	{
 		case MT_NEWCHAR:
+			printf("MT_NEWCHAR received.\n");
 			// HERE: character creation function call
 			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_NEWCHAR );
 			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 			break;
 		case MT_ACK:
+			printf("MT_ACK received.\n");
 			switch ( cd->pending )
 			{
 				case MT_NEWCHAR:
@@ -50,16 +60,18 @@ int handlemesg( clientdata_p_t cd )
 						fprintf(stderr, "Unexpected ACK received ( expecting MT_SYNC ).\n");
 						return(-1);
 					}
+					cd->pending = MT_ENDSYNC;
 					break;
-					cd->pending = -1;
 			}
 			break;
 		case MT_MOV:
+			printf("MT_MOV received.\n");
 			// HERE: character movement function call
 			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_MOV );
 			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 			break;
 		case MT_ERROR:
+			printf("MT_ERROR received.\n");
 			switch ( iaux[2] )
 			{
 				case MT_ERROR_UNSYNC:
@@ -77,6 +89,7 @@ int handlemesg( clientdata_p_t cd )
 			}
 			break;
 		case MT_ENDSYNC:
+			printf("MT_ENDSYNC received.\n");
 			if ( cd->pending != MT_ENDSYNC )
 			{
 				fprintf(stderr, "Unexpected MT_ENDSYNC received.\n");
@@ -93,7 +106,7 @@ int startconnection( clientdata_p_t cd, char * server, int port )
 	struct sockaddr_in * addr_in;
 	//int * iaux = cd->inbuffer;
 	int yes = 1;
-	
+
 	addr_in = (struct sockaddr_in *)&(cd->serveraddr);
 	if( inet_aton( server, &(addr_in->sin_addr) ) == 0)
 	{
@@ -124,7 +137,7 @@ int startconnection( clientdata_p_t cd, char * server, int port )
 		return(-1);
 	}
 	fcntl( cd->fdset.fd, F_SETFL, 0 );
-	printf("Connecting to server %s ( port %d ) ", inet_ntoa((struct in_addr)addr_in->sin_addr), port);
+	printf("Connecting to server %s ( port %d, through fd %d ) ", inet_ntoa((struct in_addr)addr_in->sin_addr), port, cd->fdset.fd );
 	if ( connect(cd->fdset.fd, &(cd->serveraddr), sizeof( struct sockaddr )) == -1 )
 	{
 		printf("Error.\n");
@@ -152,7 +165,7 @@ int pollnet( clientdata_p_t cd )
 	int pollret;
 
 	cd->fdset.revents = 0;
-	
+
 	pollret = poll( &(cd->fdset), 1, 0 );
 	if ( pollret > 0 )
 	{
@@ -161,28 +174,31 @@ int pollnet( clientdata_p_t cd )
 		{
 			printf("Connection closed by server.\n");
 			closeconnection( cd );
-			return(-1);
+			return(-2);
 		}
 		else if ( cd->inlen > 0 )
 		{
-			handlemesg( cd );
+			return(handlemesg( cd ));
 		}
 		else
 		{
 			printf("Connection error with server.\n");
 			closeconnection( cd );
-			return(-1);
+			return(-2);
 		}
-		return(1);
 	}
 	return(0);
 }
 
 void entergame( clientdata_p_t cd )
 {
-	cd->outlen = buildmesg( cd->outbuffer, MT_SYNC, 0 );
-	senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
-	cd->pending = MT_SYNC;
+	if (( cd->stat & STAT_UNSYNC ) && (! ( cd->stat & STAT_SYNCING )))
+	{
+		cd->outlen = buildmesg( cd->outbuffer, MT_SYNC, 0 );
+		senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+		cd->pending = MT_SYNC;
+		cd->stat |= STAT_SYNCING;
+	}
 }
 
 #ifdef CLIENT_TEST
@@ -190,13 +206,13 @@ void entergame( clientdata_p_t cd )
 int main( int argc, char ** argv )
 {
 	char opt;
-	int port = DEFAULTPORT;
+	int port = DEFAULTPORT, pollret;
 	char * server;
 	clientdata_t cd;
 	void * mesgbuffer = malloc( BUFFERSIZE );
 	char * mesg;
 	mesg = mesgbuffer;
-	
+
 	while(( opt = getopt( argc, argv, "p:" )) != -1 )
 	{
 		switch( opt )
@@ -232,10 +248,15 @@ int main( int argc, char ** argv )
 		while(1)
 		{
 			entergame( &cd );
-			pollnet( &cd );
+			if ((pollret = pollnet( &cd )) == -1)
+			{
+				closeconnection( &cd );
+				break;
+			}
+			else if ( pollret == -2 )
+				break;
 			sleep(0.1);
 		}
-		closeconnection( &cd );
 	}
 	return(0);
 }

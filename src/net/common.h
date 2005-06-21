@@ -92,6 +92,13 @@ extern int addrlen;
 
 #define MT_STYPES { "i", "ddd", "ddd", "i", "", "" }
 
+#define MT_SIZE_ACK (sizeof(int)*3)
+#define MT_SIZE_NEWCHAR ((sizeof(int)*2)+(sizeof(double)*3))
+#define MT_SIZE_MOV ((sizeof(int)*2)+(sizeof(double)*3))
+#define MT_SIZE_ERROR (sizeof(int)*3)
+#define MT_SIZE_SYNC (sizeof(int)*2)
+#define MT_SIZE_ENDSYNC (sizeof(int)*2)
+
 extern const char * _mt_numargs[NUMMT];
 
 int buildmesg( void * data, int type, int obj, ... );

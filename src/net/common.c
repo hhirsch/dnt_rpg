@@ -50,7 +50,29 @@ int senddata( int socketfd, void * data, int datasize )
 {
 	int sent = 0;
 	int n;
+	int * iaux = data;
 	
+	switch( iaux[0] )
+	{
+		case MT_ACK:
+			printf("Sending MT_ACK to %d.\n", socketfd );
+			break;
+		case MT_NEWCHAR:
+			printf("Sending MT_NEWCHAR to %d.\n", socketfd );
+			break;
+		case MT_MOV:
+			printf("Sending MT_MOV to %d.\n", socketfd );
+			break;
+		case MT_ERROR:
+			printf("Sending MT_ERROR to %d.\n", socketfd );
+			break;
+		case MT_SYNC:
+			printf("Sending MT_SYNC to %d.\n", socketfd );
+			break;
+		case MT_ENDSYNC:
+			printf("Sending MT_ENDSYNC to %d.\n", socketfd );
+			break;
+	}
 	while( sent < datasize )
 	{
 		n = send( socketfd, data + sent, datasize - sent, 0);
