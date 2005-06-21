@@ -59,5 +59,3 @@ int senddata( int socketfd, void * data, int datasize )
 	}
 	return(0);
 }
-
-

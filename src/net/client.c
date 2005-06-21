@@ -1,29 +1,49 @@
 #include "common.h"
-// TODO: linha 14
 
 int initclientdata( clientdata_p_t cd )
 {
 	cd->buffer = malloc( BUFFERSIZE );
 	cd->buflen = 0;
+	cd->serverstat = STAT_OFFLINE;
 	return(0);
 }
 
 int handlemesg( clientdata_p_t cd )
 {
-	int * iaux, * type, * obj;
+	int * iaux, * type, * obj, size;
 	char * caux;
 	double * daux;
 	void * aux = cd->buffer;
 	iaux = aux;
 	switch ( iaux[0] )
 	{
+		case MT_WAIT:
+			wait();
+			size = buildmesg( cd->buffer, MT_ACK, iaux[1], MT_WAIT );
+			senddata( cd->fdset.fd, cd->buffer, size );
+			break;
 		case MT_NEWCHAR:
-			// character creation function call;
-			
+			// HERE: character creation function call
+			size = buildmesg( cd->buffer, MT_ACK, iaux[1], MT_NEWCHAR );
+			senddata( cd->fdset.fd, cd->buffer, size );
+			break;
+		case MT_ACK:
+			size = buildmesg( cd->buffer, MT_ACK, iaux[1], MT_ACK );
+			senddata( cd->fdset.fd, cd->buffer, size );
+			break;
+		case MT_MOV:
+			// HERE: character movement function call
+			size = buildmesg( cd->buffer, MT_ACK, iaux[1], MT_MOV );
+			senddata( cd->fdset.fd, cd->buffer, size );
+			break;
+	}
+	return(0);
+}
 
 int startconnection( clientdata_p_t cd, char * server, int port )
 {
 	struct sockaddr_in * addr_in;
+	int * iaux = cd->buffer;
 	int yes = 1;
 	
 	addr_in = (struct sockaddr_in *)&(cd->serveraddr);
@@ -64,6 +84,31 @@ int startconnection( clientdata_p_t cd, char * server, int port )
 		return(-1);
 	}
 	printf(": Connected\n");
+	if ( ( cd->buflen = recv(cd->fdset.fd, cd->buffer, BUFFERSIZE ) ) <= 0 )
+	{
+		fprintf(stderr, "Connection error. Aborting.\n");
+		return(-1);
+	}
+	else if ( iaux[0] != MT_WAIT )
+	{
+		fprintf(stderr, "Protocol error. Aborting.\n");
+		return(-1);
+	}
+	printf("Waiting for the other clients... Press ENTER when ready...\n");
+	fscanf( stdin, "\n" );
+	buildmesg( cd->buffer, MT_ACK, 0, MT_WAIT );
+	if ( ( cd->buflen = recv(cd->fdset.fd, cd->buffer, BUFFERSIZE ) ) <= 0 )
+	{
+		fprintf(stderr, "Connection error. Aborting.\n");
+		return(-1);
+	}
+	else if ( iaux[0] != MT_READY )
+	{
+		fprintf(stderr, "Protocol error. Aborting.\n");
+		return(-1);
+	}
+	buildmesg( cd->buffer, MT_ACK, 0, MT_WAIT );
+
 	return( 0 );
 }
 	

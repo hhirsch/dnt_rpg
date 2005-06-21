@@ -24,11 +24,14 @@ void handlemesg( serverdata_p_t sd, int senderindex )
 
 int initserverdata( serverdata_p_t sd )
 {
+	int i;
 	if (( sd->buffer = (void*) malloc( BUFFERSIZE + 1 )) == NULL ) return(1);
     if (( sd->clients = (void*) malloc( sizeof( struct sockaddr )*MAXCLIENTS )) == NULL ) return(1);
 	sd->buflen = 0;
 	sd->port = DEFAULTPORT;
 	sd->numclients = 0;
+	for( i = 0; i < MAXCLIENTS; i++ )
+		cd->clientstat[i] = STAT_OFFLINE;
 	return(0);
 }
 
