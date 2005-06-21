@@ -20,49 +20,77 @@
 #define BUFFERSIZE 1024
 #define BACKLOG 10
 
+/* This will be in gamedata.h or something like that in near (?) future: */
+typedef struct _pc_t
+{
+	int stat;
+	double x, y, teta;
+} pc_t, * pc_p_t;
+
 typedef struct _serverdata_t 
 {
 	int port;
 	int listenerfd;
 	int numclients;
-	int clientstat [MAXCLIENTS];
-	struct sockaddr myaddr;
-	struct sockaddr *clients;
-	struct pollfd readfdset [MAXCLIENTS + 1];
-	void * buffer;
-	int buflen;
+	int hoststat [MAXCLIENTS + 1];
+	int acks [MAXCLIENTS + 1];
+	struct sockaddr addresses [MAXCLIENTS + 1];
+	struct pollfd fdset [MAXCLIENTS + 1];
+	void * outbuffer;
+	void * inbuffer;
+	int inlen;
+	int outlen;
+	// This will be in gamedata in near (?) future:
+	pc_t pcs [MAXCLIENTS + 1];
 } serverdata_t, *serverdata_p_t;
 
 typedef struct _clientdata_t
 {
-	int serverstat;
+	int stat;
 	struct hostent * host;
 	struct sockaddr serveraddr;
 	struct pollfd fdset;
-	void * buffer;
-	int buflen;
+	void * outbuffer;
+	void * inbuffer;
+	int inlen;
+	int outlen;
+	int pending;
+// This will be in gamedata in near (?) future:
+	int pcindex;
 } clientdata_t, *clientdata_p_t;
 
-/* Client status flags: */
+
+/* Player character status flags: */
+#define PCSTAT_OFF 0
+#define PCSTAT_ON 1
+
+/* Remote host status flags: */
 #define STAT_OFFLINE 0
 #define STAT_ONLINE 1
 #define STAT_WAITING 2
 #define STAT_ACKING 4
-#define STAT_ 0
-#define STAT_OFFLINE 0
+#define STAT_UNSYNC 8
+#define STAT_SYNCING 16
 
 extern int addrlen;
 
 /* Number of msg types ( if you change above, change here to: ) */
-#define NUMMT 5
+#define NUMMT 6
 /* Msg types: */
 #define MT_ACK 0
-#define MT_READY 1
-#define MT_WAIT 2
-#define MT_NEWCHAR 3
-#define MT_MOV 4
+#define MT_NEWCHAR 1
+#define MT_MOV 2
+#define MT_ERROR 3
+#define MT_SYNC 4
+#define MT_ENDSYNC 5
 
-#define MT_STYPES { "i", "", "", "ddds", "ddd" }
+/* MT_ERROR error types: */
+#define MT_ERROR_UNSYNC 0
+#define MT_ERROR_DOUBLECHAR 1
+#define MT_ERROR_NOCHAR 2
+#define MT_ERROR_OTHER 3
+
+#define MT_STYPES { "i", "ddd", "ddd", "i", "", "" }
 
 extern const char * _mt_numargs[NUMMT];
 

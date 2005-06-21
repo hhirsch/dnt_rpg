@@ -10,7 +10,6 @@ common.o: common.c common.h
 
 client.o: common.o client.c common.h
 	${CC} ${CFLAGS} -c client.c
-	${CC} ${CFLAGS} -o client client.o common.o
 
 server.o: server.c common.h
 	${CC} ${CFLAGS} -c server.c

@@ -2,40 +2,88 @@
 
 int initclientdata( clientdata_p_t cd )
 {
-	cd->buffer = malloc( BUFFERSIZE );
-	cd->buflen = 0;
-	cd->serverstat = STAT_OFFLINE;
+	cd->inbuffer = malloc( BUFFERSIZE );
+	cd->outbuffer = malloc( BUFFERSIZE );
+	cd->inlen = 0;
+	cd->outlen = 0;
+	cd->stat = STAT_OFFLINE;
+	cd->pending = -1;
 	return(0);
 }
 
 int handlemesg( clientdata_p_t cd )
 {
-	int * iaux, * type, * obj, size;
-	char * caux;
-	double * daux;
-	void * aux = cd->buffer;
-	iaux = aux;
+	int * iaux = cd->inbuffer;
+	//double * daux = (double *)&(iaux[2]);
 	switch ( iaux[0] )
 	{
-		case MT_WAIT:
-			wait();
-			size = buildmesg( cd->buffer, MT_ACK, iaux[1], MT_WAIT );
-			senddata( cd->fdset.fd, cd->buffer, size );
-			break;
 		case MT_NEWCHAR:
 			// HERE: character creation function call
-			size = buildmesg( cd->buffer, MT_ACK, iaux[1], MT_NEWCHAR );
-			senddata( cd->fdset.fd, cd->buffer, size );
+			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_NEWCHAR );
+			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 			break;
 		case MT_ACK:
-			size = buildmesg( cd->buffer, MT_ACK, iaux[1], MT_ACK );
-			senddata( cd->fdset.fd, cd->buffer, size );
+			switch ( cd->pending )
+			{
+				case MT_NEWCHAR:
+					if ( iaux[2] != MT_NEWCHAR )
+					{
+						fprintf(stderr, "Unexpected ACK received ( expecting MT_NEWCHAR ).\n");
+						return(-1);
+					}
+					// HERE: character creation function call
+					cd->pcindex = iaux[1]; 
+					cd->pending = -1;
+					break;
+				case MT_MOV:
+					if ( iaux[2] != MT_MOV )
+					{
+						fprintf(stderr, "Unexpected ACK received ( expecting MT_MOV ).\n");
+						return(-1);
+					}
+					// HERE: character movement function call
+					cd->pending = -1;
+					break;
+				case MT_SYNC:
+					if ( iaux[2] != MT_SYNC )
+					{
+						fprintf(stderr, "Unexpected ACK received ( expecting MT_SYNC ).\n");
+						return(-1);
+					}
+					break;
+					cd->pending = -1;
+			}
 			break;
 		case MT_MOV:
 			// HERE: character movement function call
-			size = buildmesg( cd->buffer, MT_ACK, iaux[1], MT_MOV );
-			senddata( cd->fdset.fd, cd->buffer, size );
+			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_MOV );
+			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 			break;
+		case MT_ERROR:
+			switch ( iaux[2] )
+			{
+				case MT_ERROR_UNSYNC:
+					cd->outlen = buildmesg( cd->outbuffer, MT_SYNC, 0 );
+					senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+					cd->pending = MT_SYNC;
+					cd->stat |= STAT_SYNCING;
+					break;
+				case MT_ERROR_DOUBLECHAR:
+					fprintf(stderr, "I'm trying to create two playable characters on the server. Why ?\n");
+					break;
+				case MT_ERROR_NOCHAR:
+					fprintf(stderr, "I'm trying to move an unexistent character in the server. Why ?\n");
+					break;
+			}
+			break;
+		case MT_ENDSYNC:
+			if ( cd->pending != MT_ENDSYNC )
+			{
+				fprintf(stderr, "Unexpected MT_ENDSYNC received.\n");
+				return(-1);
+			}
+			cd->pending = -1;
+			cd->stat &= ~( STAT_SYNCING | STAT_UNSYNC );
 	}
 	return(0);
 }
@@ -43,7 +91,7 @@ int handlemesg( clientdata_p_t cd )
 int startconnection( clientdata_p_t cd, char * server, int port )
 {
 	struct sockaddr_in * addr_in;
-	int * iaux = cd->buffer;
+	//int * iaux = cd->inbuffer;
 	int yes = 1;
 	
 	addr_in = (struct sockaddr_in *)&(cd->serveraddr);
@@ -64,73 +112,60 @@ int startconnection( clientdata_p_t cd, char * server, int port )
 	addr_in->sin_family = AF_INET;
 	addr_in->sin_port = htons(port);
 	memset( &(addr_in->sin_zero), '\0', 8);
-	if ( (cd->fddata.fd = socket( AF_INET, SOCK_STREAM, 0 )) == -1 )
+	if ( (cd->fdset.fd = socket( AF_INET, SOCK_STREAM, 0 )) == -1 )
 	{
 		perror("Couldn't get socket descriptor. Aborting.\n");
 		return(-1);
 	}
-	cd->fddata.events = POLLIN | POLLPRI;
-	if ( setsockopt( cd->fddata.fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1 )
+	cd->fdset.events = POLLIN | POLLPRI;
+	if ( setsockopt( cd->fdset.fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1 )
 	{
 		perror("setsockopt");
 		return(-1);
 	}
-	fcntl( sd->listenerfd, F_SETFL, 0 );
+	fcntl( cd->fdset.fd, F_SETFL, 0 );
 	printf("Connecting to server %s ( port %d ) ", inet_ntoa((struct in_addr)addr_in->sin_addr), port);
-	if ( connect(cd->fddata.fd, &(cd->serveraddr), sizeof( struct sockaddr )) == -1 )
+	if ( connect(cd->fdset.fd, &(cd->serveraddr), sizeof( struct sockaddr )) == -1 )
 	{
 		printf("Error.\n");
 		perror("connect");
 		return(-1);
 	}
+	cd->stat = STAT_ONLINE | STAT_UNSYNC;
 	printf(": Connected\n");
-	if ( ( cd->buflen = recv(cd->fdset.fd, cd->buffer, BUFFERSIZE ) ) <= 0 )
-	{
-		fprintf(stderr, "Connection error. Aborting.\n");
-		return(-1);
-	}
-	else if ( iaux[0] != MT_WAIT )
-	{
-		fprintf(stderr, "Protocol error. Aborting.\n");
-		return(-1);
-	}
-	printf("Waiting for the other clients... Press ENTER when ready...\n");
-	fscanf( stdin, "\n" );
-	buildmesg( cd->buffer, MT_ACK, 0, MT_WAIT );
-	if ( ( cd->buflen = recv(cd->fdset.fd, cd->buffer, BUFFERSIZE ) ) <= 0 )
-	{
-		fprintf(stderr, "Connection error. Aborting.\n");
-		return(-1);
-	}
-	else if ( iaux[0] != MT_READY )
-	{
-		fprintf(stderr, "Protocol error. Aborting.\n");
-		return(-1);
-	}
-	buildmesg( cd->buffer, MT_ACK, 0, MT_WAIT );
-
 	return( 0 );
 }
-	
+
+int closeconnection( clientdata_p_t cd )
+{
+	printf("Disconnecting... ");
+	if ( close( cd->fdset.fd ) == -1 ){
+		printf("Error.\n");
+		return(1);
+	}
+	printf( "Done.\n" );
+	return(0);
+}
+
 int pollnet( clientdata_p_t cd )
 {
 	int pollret;
 
-	cd->fddata.revents = 0;
+	cd->fdset.revents = 0;
 	
-	pollret = poll( &(cd->fddata), 1, 0 );
+	pollret = poll( &(cd->fdset), 1, 0 );
 	if ( pollret > 0 )
 	{
-		cd->buflen = recv( sd->readfdset[i].fd, sd->buffer, BUFFERSIZE, 0);
-		if ( cd->buflen == 0 )
+		cd->inlen = recv( cd->fdset.fd, cd->inbuffer, BUFFERSIZE, 0);
+		if ( cd->inlen == 0 )
 		{
 			printf("Connection closed by server.\n");
 			closeconnection( cd );
 			return(-1);
 		}
-		else if ( cd->buflen > 0 )
+		else if ( cd->inlen > 0 )
 		{
-			handlemesg( sd );
+			handlemesg( cd );
 		}
 		else
 		{
@@ -143,15 +178,11 @@ int pollnet( clientdata_p_t cd )
 	return(0);
 }
 
-int closeconnection( clientdata_p_t cd )
+void entergame( clientdata_p_t cd )
 {
-	printf("Disconnecting... ");
-	if ( close( cd->fddata.fd ) == -1 ){
-		printf("Error.\n");
-		return(1);
-	}
-	printf( "Done.\n" );
-	return(0);
+	cd->outlen = buildmesg( cd->outbuffer, MT_SYNC, 0 );
+	senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+	cd->pending = MT_SYNC;
 }
 
 #ifdef CLIENT_TEST
@@ -198,14 +229,13 @@ int main( int argc, char ** argv )
 	}
 	else
 	{
-		printf("Aeeeeeh !!!\n");
-		sprintf(mesg, "Ate que enfim consegui fala coce, po !\n");
-		senddata( fd, mesg, strlen( mesg )+1 );
-		sleep(20);
-		sprintf(mesg, "To vazando !\n");
-		senddata( fd, mesg, strlen( mesg )+1 );
-
-		closeconnection( fd );
+		while(1)
+		{
+			entergame( &cd );
+			pollnet( &cd );
+			sleep(0.1);
+		}
+		closeconnection( &cd );
 	}
 	return(0);
 }

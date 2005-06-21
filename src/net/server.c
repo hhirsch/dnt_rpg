@@ -1,38 +1,143 @@
 #include "common.h"
 
-void handlemesg( serverdata_p_t sd, int senderindex )
+int initserverdata( serverdata_p_t sd )
 {
-	void * ackbuffer = malloc( BUFFERSIZE );
-	int acksize, * iaux, i;
-	iaux = sd->buffer;
-	acksize = buildmesg( ackbuffer, MT_ACK, 0, iaux );
+	int i;
+	if (( sd->outbuffer = (void*) malloc( BUFFERSIZE + 1 )) == NULL ) return(1);
+	if (( sd->inbuffer = (void*) malloc( BUFFERSIZE + 1 )) == NULL ) return(1);
+	sd->outlen = 0;
+	sd->inlen = 0;
+	sd->port = DEFAULTPORT;
+	sd->numclients = 0;
+	for( i = 0; i < MAXCLIENTS; i++ )
+	{
+		sd->hoststat[i] = STAT_OFFLINE;
+		sd->pcs[i].stat = PCSTAT_OFF;
+	}
+	return(0);
+}
+
+void bcastmesg( serverdata_p_t sd, int sindex )
+{
+	int i, *iaux = sd->inbuffer;
+	sd->outlen = buildmesg( sd->outbuffer, MT_ACK, iaux[1], iaux[0] );
 	for( i = 1; i <= sd->numclients; i++ )
 	{
-		if ( i == senderindex )
+		if ( i == sindex )
 		{
-			senddata( sd->readfdset[i].fd, ackbuffer, acksize );
+			senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen );
 		}
 		else
 		{
-			senddata( sd->readfdset[i].fd, sd->buffer, sd->buflen );
+			senddata( sd->fdset[i].fd, sd->inbuffer, sd->inlen );
 		}
 	}
 	return;
 }
 
-/* void bcastmesg( int size, void * buffer )*/
-
-int initserverdata( serverdata_p_t sd )
+void sendstate( serverdata_p_t sd, int index )
 {
 	int i;
-	if (( sd->buffer = (void*) malloc( BUFFERSIZE + 1 )) == NULL ) return(1);
-    if (( sd->clients = (void*) malloc( sizeof( struct sockaddr )*MAXCLIENTS )) == NULL ) return(1);
-	sd->buflen = 0;
-	sd->port = DEFAULTPORT;
-	sd->numclients = 0;
-	for( i = 0; i < MAXCLIENTS; i++ )
-		cd->clientstat[i] = STAT_OFFLINE;
-	return(0);
+	for ( i = 1; i <= MAXCLIENTS; i++ )
+	{
+		if( (sd->hoststat[i] & STAT_ONLINE) && (sd->pcs[i].stat & PCSTAT_ON) ) 
+		{
+			sd->outlen = buildmesg( sd->outbuffer, MT_NEWCHAR, i, sd->pcs[i].x, sd->pcs[i].y, sd->pcs[i].teta );
+			senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen );
+			sd->acks[i]++;
+		}
+	}
+	sd->outlen = buildmesg( sd->outbuffer, MT_ENDSYNC, 0 );
+	senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen );
+	sd->acks[i]++;
+	sd->hoststat[i] |= (STAT_ACKING | STAT_UNSYNC );
+}
+
+void handlemesg( serverdata_p_t sd, int index )
+{
+	int i, * iaux = sd->inbuffer;
+	double * daux = (double *) &(iaux[2]);
+	struct sockaddr_in * addr_in = (struct sockaddr_in *)&(sd->addresses[index]);
+	
+	switch( iaux[0] )
+	{
+		/* MT_ACK */
+		case MT_ACK:
+			if( sd->acks[index] > 0 )
+			{
+				sd->acks[index] --;
+				if ( sd->acks[index] == 0 )
+					sd->hoststat[index] &= ~(STAT_ACKING);
+				if ( iaux[2] == MT_ENDSYNC )
+					sd->hoststat[index] &= ~(STAT_UNSYNC);
+			}
+			else
+			{
+				fprintf( stderr, "Unexpected ACK from host %s.\n", inet_ntoa( addr_in->sin_addr ));
+				return;
+			}
+			break;
+
+		/* MT_NEWCHAR */
+		case MT_NEWCHAR:
+			if( sd->hoststat[index] & STAT_UNSYNC )
+			{
+				fprintf( stderr, "Character creation from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
+				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_UNSYNC );
+				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				return;
+			}
+			if( sd->pcs[index].stat & PCSTAT_ON )
+			{
+				fprintf( stderr, "Another character creation requisition from host %s.\n", inet_ntoa( addr_in->sin_addr ));
+				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_DOUBLECHAR );
+				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				return;
+			}
+			else
+			{
+				sd->pcs[index].stat = PCSTAT_ON;
+				sd->pcs[index].x = daux[0];
+				sd->pcs[index].y = daux[1];
+				sd->pcs[index].teta = daux[2];
+				iaux[1] = index;
+			}
+			bcastmesg( sd, index );
+			break;
+		case MT_SYNC:
+			sd->outlen = buildmesg( sd->outbuffer, MT_ACK, 0, MT_SYNC );
+			senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+			sendstate( sd, index );
+			break;
+		case MT_MOV:
+			if( sd->hoststat[index] & STAT_UNSYNC )
+			{
+				fprintf( stderr, "Character movement from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
+				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_UNSYNC );
+				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				return;
+			}
+			if( ! (sd->pcs[index].stat & PCSTAT_ON) )
+			{
+				fprintf( stderr, "Host %s trying to move unexistent character.\n", inet_ntoa( addr_in->sin_addr ));
+				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_NOCHAR );
+				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				return;
+			}
+			if( iaux[1] != index )
+			{
+				fprintf( stderr, "Host %s trying to move another host character.\n", inet_ntoa( addr_in->sin_addr ));
+				sd->outlen = buildmesg( sd->outbuffer, MT_ERROR, iaux[1], MT_ERROR_OTHER );
+				senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen);
+				return;
+			}
+			sd->pcs[index].x = daux[0];
+			sd->pcs[index].y = daux[1];
+			sd->pcs[index].teta = daux[2];
+			bcastmesg( sd, index );
+			break;
+	}
+	return;
 }
 
 int initlisten( serverdata_p_t sd )
@@ -51,12 +156,12 @@ int initlisten( serverdata_p_t sd )
 		perror("setsockopt");
 		return(errno);
 	}
-	addr_in = (struct sockaddr_in *) &(sd->myaddr);
+	addr_in = (struct sockaddr_in *) &(sd->addresses[0]);
 	addr_in->sin_family = AF_INET;
 	addr_in->sin_port = htons( sd->port );
 	addr_in->sin_addr.s_addr = INADDR_ANY;
 	memset( &(addr_in->sin_zero), '\0', 8);
-	if ( bind( sd->listenerfd, &(sd->myaddr), addrlen ) != 0 )
+	if ( bind( sd->listenerfd, &(sd->addresses[0]), addrlen ) != 0 )
 	{
 		perror("bind");
 		return(errno);
@@ -66,9 +171,9 @@ int initlisten( serverdata_p_t sd )
 		perror("listen");
 		return(errno);
 	}
-	sd->readfdset[0].fd = sd->listenerfd;
-	sd->readfdset[0].events = POLLIN | POLLPRI ;
-	sd->readfdset[0].revents = 0;
+	sd->fdset[0].fd = sd->listenerfd;
+	sd->fdset[0].events = POLLIN | POLLPRI ;
+	sd->fdset[0].revents = 0;
 	return(0);
 }
 	
@@ -79,24 +184,25 @@ int mainloop( serverdata_p_t sd )
 
 	while( 1 )
 	{
-		pollret = poll( sd->readfdset, sd->numclients + 1, (LISTENTIMEOUT * 1000) );
+		pollret = poll( sd->fdset, sd->numclients + 1, (LISTENTIMEOUT * 1000) );
 		if ( pollret > 0 )
 		{
 			for ( i = 0; i <= sd->numclients; i++ )
 			{
-				if ( sd->readfdset[i].revents & ( POLLERR | POLLHUP | POLLNVAL ) )
+				if ( sd->fdset[i].revents & ( POLLERR | POLLHUP | POLLNVAL ) )
 				{
-					addr_in = (struct sockaddr_in *) &(sd->clients[i]);
+					addr_in = (struct sockaddr_in *) &(sd->addresses[i]);
 					printf( "Hungup connection with client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
-					close(sd->readfdset[i].fd);
+					close(sd->fdset[i].fd);
 					for( j = i; j < sd->numclients; j++ )
-						sd->readfdset[j] = sd->readfdset[j+1];
+						sd->fdset[j] = sd->fdset[j+1];
 					sd->numclients--;
+					sd->hoststat[i] = STAT_OFFLINE;
 					i--;
 				}
-				else if ( sd->readfdset[i].revents & (POLLIN | POLLPRI))
+				else if ( sd->fdset[i].revents & (POLLIN | POLLPRI))
 				{
-					if ( sd->readfdset[i].fd == sd->listenerfd )
+					if ( sd->fdset[i].fd == sd->listenerfd )
 					{
 						if ( sd->numclients >= MAXCLIENTS )
 						{
@@ -105,42 +211,45 @@ int mainloop( serverdata_p_t sd )
 						else
 						{
 							printf( "New connection attempt.\n" );
-							if (( newfd = accept( sd->listenerfd, &(sd->clients[sd->numclients]), &addrlen )) == -1 )
+							if (( newfd = accept( sd->listenerfd, &(sd->addresses[sd->numclients + 1]), &addrlen )) == -1 )
 							{
 								printf( "Could not stabilish the connection with remote host.\n" );
 							}
 							else
 							{
 								sd->numclients++;
-								sd->readfdset[sd->numclients].fd = newfd;
-								sd->readfdset[sd->numclients].events = POLLIN | POLLPRI ;
-								sd->readfdset[sd->numclients].revents = 0;
+								sd->hoststat[i] = STAT_ONLINE | STAT_UNSYNC;
+								sd->fdset[sd->numclients].fd = newfd;
+								sd->fdset[sd->numclients].events = POLLIN | POLLPRI ;
+								sd->fdset[sd->numclients].revents = 0;
 							}
 						}
 					}
 					else
 					{
-						if( (sd->buflen = recv( sd->readfdset[i].fd, sd->buffer, BUFFERSIZE, 0)) == 0 )
+						if( (sd->inlen = recv( sd->fdset[i].fd, sd->inbuffer, BUFFERSIZE, 0)) == 0 )
 						{
-							addr_in = (struct sockaddr_in *) &(sd->clients[i]);
+							addr_in = (struct sockaddr_in *) &(sd->addresses[i]);
 							printf( "Connection closed by client ( host %s ).\n", inet_ntoa( addr_in->sin_addr ));
-							close(sd->readfdset[i].fd);
+							close(sd->fdset[i].fd);
 							for( j = i; j < sd->numclients; j++ )
-								sd->readfdset[j] = sd->readfdset[j+1];
+								sd->fdset[j] = sd->fdset[j+1];
 							sd->numclients--;
+							sd->hoststat[i] = STAT_OFFLINE;
 							i--;
 						}
-						else if( sd->buflen > 0 )
+						else if( sd->inlen > 0 )
 						{
 							handlemesg( sd, i );
 						}
-						else if( sd->buflen == -1 )
+						else if( sd->inlen == -1 )
 						{
 							perror("recv");
-							close(sd->readfdset[i].fd);
+							close(sd->fdset[i].fd);
 							for( j = i; j < sd->numclients; j++ )
-								sd->readfdset[j] = sd->readfdset[j+1];
+								sd->fdset[j] = sd->fdset[j+1];
 							sd->numclients--;
+							sd->hoststat[i] = STAT_OFFLINE;
 							i--;
 						}
 					}
