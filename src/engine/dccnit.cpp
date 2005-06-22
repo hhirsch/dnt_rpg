@@ -119,7 +119,7 @@ void engine::Iniciar(SDL_Surface *screen)
 /*********************************************************************
  *                      Tratamento do Teclado                        *
  *********************************************************************/
-int engine::TrataES(SDL_Surface *screen)
+int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 {
    int redesenha = 0;
    int andou = 0;
@@ -374,10 +374,11 @@ int engine::TrataES(SDL_Surface *screen)
         redesenha = 1;
       }
    }
-   if(redesenha)
+   if((redesenha) || (*forcaAtualizacao != 0 ))
    {
       Desenhar();
       SDL_GL_SwapBuffers();
+      *forcaAtualizacao = 0;
    }
  
    if(andou)
@@ -757,6 +758,9 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
  *********************************************************************/
 int engine::Rodar(SDL_Surface *surface)
 {
+
+   int forcaAtualizacao = 1; //forca a atualizacao da tela, qdo o npc anda
+	
    PCs->personagemAtivo->posicaoLadoX = mapa->xInic;
    PCs->personagemAtivo->posicaoLadoZ = mapa->zInic;
    centroX = mapa->xInic;
@@ -764,8 +768,8 @@ int engine::Rodar(SDL_Surface *surface)
    PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
    
    /* Desenha a primeira Cena */
-   Desenhar();
-   SDL_GL_SwapBuffers();
+//   Desenhar();
+//   SDL_GL_SwapBuffers();
 
    #ifdef REDE
      netevent_p_t eventoRede;
@@ -780,7 +784,7 @@ int engine::Rodar(SDL_Surface *surface)
    #endif
   
    /* Roda realmente a engine */
-   while(TrataES(surface))
+   while(TrataES(surface,&forcaAtualizacao))
    {
     #ifdef REDE
       while( (eventoRede = pollnet( &clientData ) ) != NULL )
@@ -793,11 +797,12 @@ int engine::Rodar(SDL_Surface *surface)
                 per = NPCs->InserirPersonagem(6,8,3,8,
                              "../data/pics/logan/cara.bmp",0,0,
                "LoganNPC","../data/models/personagens/logan_completo_final.obj",
-                  "../data/pics/rui/");
+                  "../data/pics/logan/");
                 per->posicaoLadoX = eventoRede->x;
                 per->posicaoLadoZ = eventoRede->y; 
                 per->orientacao = eventoRede->teta;
                 per->ID = eventoRede->obj;
+		forcaAtualizacao = 1;
                 break; 
              }
              case MT_MOV:
@@ -814,6 +819,7 @@ int engine::Rodar(SDL_Surface *surface)
                        per->posicaoLadoX = eventoRede->x;
                        per->posicaoLadoZ = eventoRede->y; 
                        per->orientacao = eventoRede->teta;
+		       forcaAtualizacao = 1;
                    }
                 }
                 break; 

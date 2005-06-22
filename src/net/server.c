@@ -28,10 +28,15 @@ void bcastmesg( serverdata_p_t sd, int sindex )
 	{
 		if ( i == sindex )
 		{
+			if ( iaux[0] != MT_MOV )
+			{
+			printf("Acking to %d.\n", i);
 			senddata( sd->fdset[i].fd, sd->outbuffer, sd->outlen );
+			}
 		}
 		else
 		{
+			printf("BCasting to %d.\n", i);
 			senddata( sd->fdset[i].fd, (void *)iaux, sd->inlen );
 		}
 	}
@@ -61,8 +66,9 @@ void handlemesg( serverdata_p_t sd, int index )
 	int * iaux = (int*)(((char *)sd->inbuffer) + sd->inoffset);
 	double * daux = (double *) &(iaux[2]);
 	struct sockaddr_in * addr_in = (struct sockaddr_in *)&(sd->addresses[index]);
-//	printf("Mesg size = %d\n", sd->inlen );
-//	printf("Buffer offset = %d\n", sd->inoffset );
+	if (( iaux[0] != MT_MOV ) && ( iaux[0] != MT_ACK ))
+	printf("Mesg size = %d\n", sd->inlen );
+	printf("Buffer offset = %d\n", sd->inoffset );
 	switch( iaux[0] )
 	{
 		/* MT_ACK */
@@ -120,7 +126,6 @@ void handlemesg( serverdata_p_t sd, int index )
 			sd->inoffset += MT_SIZE_SYNC;
 			break;
 		case MT_MOV:
-			// printf("MT_MOV received.\n");
 			if( sd->hoststat[index] & STAT_UNSYNC )
 			{
 				fprintf( stderr, "Character movement from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
@@ -142,6 +147,7 @@ void handlemesg( serverdata_p_t sd, int index )
 				senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 				return;
 			}
+			printf("MT_MOV received [ index = %d ].\n", index);
 			sd->pcs[index].x = daux[0];
 			sd->pcs[index].y = daux[1];
 			sd->pcs[index].teta = daux[2];

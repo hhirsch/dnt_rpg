@@ -19,9 +19,9 @@
 #define MAXCLIENTS 10
 #define LISTENTIMEOUT 10
 #define TIMEOUT 180
-#define BUFFERSIZE 1024
+#define BUFFERSIZE 4096
 #define BACKLOG 10
-#define MAXEVENTQUEUE 50
+#define MAXEVENTQUEUE 1000
 
 /* This will be in gamedata.h or something like that in near (?) future: */
 typedef struct _pc_t

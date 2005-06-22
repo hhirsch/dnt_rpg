@@ -20,8 +20,8 @@ int handlemesg( clientdata_p_t cd )
 	double * daux = (double*)&(iaux[2]);
 	netevent_p_t eaux;
 	
-//	printf("Mesg size = %d\n", cd->inlen );
-//	printf("Buffer offset = %d\n", cd->inoffset );
+	printf("Mesg size = %d\n", cd->inlen );
+	printf("Buffer offset = %d\n", cd->inoffset );
 	switch ( iaux[0] )
 	{
 		case MT_NEWCHAR:
@@ -103,9 +103,6 @@ int handlemesg( clientdata_p_t cd )
 			eaux->y = daux[1];
 			eaux->teta = daux[2];
 			fifopush( &(cd->eventfifo), eaux );
-
-			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_MOV );
-			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 			cd->inlen -= MT_SIZE_MOV;
 			cd->inoffset += MT_SIZE_MOV;
 			break;
@@ -288,7 +285,6 @@ int movchar( clientdata_p_t cd, int obj, double x, double y, double teta )
 	{
 		cd->outlen = buildmesg( cd->outbuffer, MT_MOV, obj, x, y, teta );
 		senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
-		cd->pending = MT_ACK;
 	}
 	return(0);
 }

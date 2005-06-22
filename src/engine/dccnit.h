@@ -64,7 +64,7 @@ class engine
 
       /* Trata as opcoes de Entrada e Saida na Engine
        * screen -> ponteiro para a tela3d atual */
-      int  TrataES(SDL_Surface *screen);
+      int  TrataES(SDL_Surface *screen,int *forcaAtualizacao);
 
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
  
