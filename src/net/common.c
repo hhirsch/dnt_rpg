@@ -9,7 +9,7 @@ int buildmesg( void * data, int type, int obj, ... )
 	va_list arglist;
 	int numfields = strlen( _mt_numargs[type] );
 	void * aux = data;
-	int * iaux = aux;
+	int * iaux = (int*)aux;
 	char * caux, * cauxaux;
 	double * daux;
 	int i;
@@ -22,9 +22,9 @@ int buildmesg( void * data, int type, int obj, ... )
 	
 	for( i = 0; i < numfields; i++ )
 	{
-		iaux = aux;
-		caux = aux;
-		daux = aux;
+		iaux = (int *)aux;
+		caux = (char *)aux;
+		daux = (double *)aux;
 		switch( _mt_numargs[type][i] )
 		{
 			case 'i':
@@ -43,14 +43,17 @@ int buildmesg( void * data, int type, int obj, ... )
 		}
 	}
 	va_end( arglist );
-	return( aux - data );
+	caux = (char *) aux;
+	cauxaux = (char *) data;
+	return( caux - cauxaux );
 }
 
 int senddata( int socketfd, void * data, int datasize )
 {
 	int sent = 0;
 	int n;
-	int * iaux = data;
+	int * iaux = (int *)data;
+	char * caux = (char *)data;
 	
 	switch( iaux[0] )
 	{
@@ -75,7 +78,7 @@ int senddata( int socketfd, void * data, int datasize )
 	}
 	while( sent < datasize )
 	{
-		n = send( socketfd, data + sent, datasize - sent, 0);
+		n = send( socketfd, caux + sent, datasize - sent, 0);
 		if( n < 0 ){ break; }
 		sent += n;
 	}

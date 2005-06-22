@@ -21,6 +21,7 @@
 #define TIMEOUT 180
 #define BUFFERSIZE 1024
 #define BACKLOG 10
+#define MAXEVENTQUEUE 50
 
 /* This will be in gamedata.h or something like that in near (?) future: */
 typedef struct _pc_t
@@ -28,6 +29,14 @@ typedef struct _pc_t
 	int stat;
 	double x, y, teta;
 } pc_t, * pc_p_t;
+
+typedef struct _netevent_t
+{
+	int type;
+	int obj;
+	int aux;
+	double x, y, teta;
+} netevent_t, * netevent_p_t;
 
 typedef struct _serverdata_t 
 {
@@ -57,6 +66,7 @@ typedef struct _clientdata_t
 	int inlen, inoffset;
 	int outlen, outoffset;
 	int pending;
+	fifo_t eventfifo;
 // This will be in gamedata in near (?) future:
 	int pcindex;
 } clientdata_t, *clientdata_p_t;
@@ -77,7 +87,7 @@ typedef struct _clientdata_t
 extern int addrlen;
 
 /* Number of msg types ( if you change above, change here to: ) */
-#define NUMMT 6
+#define NUMMT 7
 /* Msg types: */
 #define MT_ACK 0
 #define MT_NEWCHAR 1
@@ -85,6 +95,7 @@ extern int addrlen;
 #define MT_ERROR 3
 #define MT_SYNC 4
 #define MT_ENDSYNC 5
+#define MT_CLOSE 6
 
 /* MT_ERROR error types: */
 #define MT_ERROR_UNSYNC 0
@@ -92,7 +103,7 @@ extern int addrlen;
 #define MT_ERROR_NOCHAR 2
 #define MT_ERROR_OTHER 3
 
-#define MT_STYPES { "i", "ddd", "ddd", "i", "", "" }
+#define MT_STYPES { "i", "ddd", "ddd", "i", "", "", "" }
 
 #define MT_SIZE_ACK (sizeof(int)*3)
 #define MT_SIZE_NEWCHAR ((sizeof(int)*2)+(sizeof(double)*3))
@@ -100,6 +111,7 @@ extern int addrlen;
 #define MT_SIZE_ERROR (sizeof(int)*3)
 #define MT_SIZE_SYNC (sizeof(int)*2)
 #define MT_SIZE_ENDSYNC (sizeof(int)*2)
+#define MT_SIZE_CLOSE (sizeof(int)*2)
 
 extern const char * _mt_numargs[NUMMT];
 

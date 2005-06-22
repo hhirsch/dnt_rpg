@@ -21,7 +21,7 @@ int initserverdata( serverdata_p_t sd )
 
 void bcastmesg( serverdata_p_t sd, int sindex )
 {
-	int i, *iaux = sd->inbuffer;
+	int i, *iaux = (int*)sd->inbuffer;
 	sd->outlen = buildmesg( sd->outbuffer, MT_ACK, iaux[1], iaux[0] );
 	for( i = 1; i <= sd->numclients; i++ )
 	{
@@ -223,7 +223,7 @@ int mainloop( serverdata_p_t sd )
 						else
 						{
 							printf( "New connection attempt.\n" );
-							if (( newfd = accept( sd->listenerfd, &(sd->addresses[sd->numclients + 1]), &addrlen )) == -1 )
+							if (( newfd = accept( sd->listenerfd, &(sd->addresses[sd->numclients + 1]), (socklen_t *)&addrlen )) == -1 )
 							{
 								printf( "Could not stabilish the connection with remote host.\n" );
 							}

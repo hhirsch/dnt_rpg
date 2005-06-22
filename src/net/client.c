@@ -2,13 +2,7 @@
 
 int initclientdata( clientdata_p_t cd )
 {
-	printf("MT_SIZE_ACK = %d\n", (sizeof(int)*3));
-	printf("MT_SIZE_NEWCHAR = %d\n", ((sizeof(int)*2)+(sizeof(double)*3)));
-	printf("MT_SIZE_MOV = %d\n", ((sizeof(int)*2)+(sizeof(double)*3)));
-	printf("MT_SIZE_ERROR = %d\n", (sizeof(int)*3));
-	printf("MT_SIZE_SYNC = %d\n", (sizeof(int)*2));
-	printf("MT_SIZE_ENDSYNC = %d\n", (sizeof(int)*2));
-
+	fifoinit( &(cd->eventfifo), MAXEVENTQUEUE );
 	cd->inbuffer = malloc( BUFFERSIZE );
 	cd->outbuffer = malloc( BUFFERSIZE );
 	cd->inlen = 0;
@@ -24,18 +18,24 @@ int handlemesg( clientdata_p_t cd )
 {
 	int * iaux = (int*)(((char *)cd->inbuffer) + cd->inoffset);
 	double * daux = (double*)&(iaux[2]);
+	netevent_p_t eaux;
+	
 	printf("Mesg size = %d\n", cd->inlen );
 	printf("Buffer offset = %d\n", cd->inoffset );
-	//double * daux = (double *)&(iaux[2]);
 	switch ( iaux[0] )
 	{
 		case MT_NEWCHAR:
 			printf("MT_NEWCHAR received.\n");
-			// HERE: character creation function call
-			// Arguments:
-			// X = daux[0]
-			// Y = daux[1]
-			// TETA = daux[2]
+			
+			eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
+			eaux->type = iaux[0];
+			eaux->obj = iaux[1];
+			eaux->aux = -1;
+			eaux->x = daux[0];
+			eaux->y = daux[1];
+			eaux->teta = daux[2];
+			fifopush( &(cd->eventfifo), eaux );
+
 			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_NEWCHAR );
 			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 			cd->inlen -= MT_SIZE_NEWCHAR;
@@ -51,11 +51,15 @@ int handlemesg( clientdata_p_t cd )
 						fprintf(stderr, "Unexpected ACK received ( expecting MT_NEWCHAR ).\n");
 						return(-1);
 					}
-					// HERE: character creation function call
-					// Arguments:
-					// X = daux[0]
-					// Y = daux[1]
-					// TETA = daux[2]
+					eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
+					eaux->type = iaux[0];
+					eaux->obj = iaux[1];
+					eaux->aux = -1;
+					eaux->x = daux[0];
+					eaux->y = daux[1];
+					eaux->teta = daux[2];
+					fifopush( &(cd->eventfifo), eaux );
+
 					cd->pcindex = iaux[1]; 
 					cd->pending = -1;
 					break;
@@ -65,11 +69,15 @@ int handlemesg( clientdata_p_t cd )
 						fprintf(stderr, "Unexpected ACK received ( expecting MT_MOV ).\n");
 						return(-1);
 					}
-					// HERE: character movement function call
-					// Arguments:
-					// X = daux[0]
-					// Y = daux[1]
-					// TETA = daux[2]
+					eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
+					eaux->type = iaux[0];
+					eaux->obj = iaux[1];
+					eaux->aux = -1;
+					eaux->x = daux[0];
+					eaux->y = daux[1];
+					eaux->teta = daux[2];
+					fifopush( &(cd->eventfifo), eaux );
+
 					cd->pending = -1;
 					break;
 				case MT_SYNC:
@@ -86,11 +94,16 @@ int handlemesg( clientdata_p_t cd )
 			break;
 		case MT_MOV:
 			printf("MT_MOV received.\n");
-			// HERE: character movement function call
-			// Arguments:
-			// X = daux[0]
-			// Y = daux[1]
-			// TETA = daux[2]
+
+			eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
+			eaux->type = iaux[0];
+			eaux->obj = iaux[1];
+			eaux->aux = -1;
+			eaux->x = daux[0];
+			eaux->y = daux[1];
+			eaux->teta = daux[2];
+			fifopush( &(cd->eventfifo), eaux );
+
 			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_MOV );
 			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 			cd->inlen -= MT_SIZE_MOV;
@@ -191,9 +204,18 @@ int closeconnection( clientdata_p_t cd )
 	return(0);
 }
 
-int checknet( clientdata_p_t cd )
+/* Isso faz o que vc queria, Farrer:
+ * Da uma olhada em netevent_t em common.h
+ *
+ * Essa função retorna NULL se evento nenhum ocorreu, 
+ * ou um apontador para o tipo netevent_t, cujo campo
+ * type determina o tipo do evento ( MT_NEWCHAR, MT_MOV, MT_CLOSE ).
+ */
+
+netevent_p_t pollnet( clientdata_p_t cd )
 {
 	int pollret;
+	netevent_p_t eaux;
 
 	cd->fdset.revents = 0;
 
@@ -205,13 +227,17 @@ int checknet( clientdata_p_t cd )
 		{
 			printf("Connection closed by server.\n");
 			closeconnection( cd );
-			return(-2);
+			eaux = (netevent_p_t)malloc( sizeof( netevent_t) );
+			eaux->type = MT_CLOSE;
+			return(eaux);
 		}
 		else if ( cd->inlen < 0 )
 		{
 			printf("Connection error with server.\n");
 			closeconnection( cd );
-			return(-2);
+			eaux = (netevent_p_t)malloc( sizeof( netevent_t) );
+			eaux->type = MT_CLOSE;
+			return(eaux);
 		}
 		while ( cd->inlen > 0 )
 		{
@@ -219,7 +245,7 @@ int checknet( clientdata_p_t cd )
 		}
 		cd->inoffset = 0;
 	}
-	return(0);
+	return( (netevent_p_t) fifopop( &(cd->eventfifo) ) );
 }
 
 void entergame( clientdata_p_t cd )
@@ -233,26 +259,19 @@ void entergame( clientdata_p_t cd )
 	}
 }
 
-/* Isso faz o que vc queria, Farrer:
- * Da uma olhada em netevent_t em common.h
- */
-
-netevent_p_t pollnet( clientdata_p_t cd )
-{
-
-}
 
 #ifdef CLIENT_TEST
 
 int main( int argc, char ** argv )
 {
 	char opt;
-	int port = DEFAULTPORT, pollret;
+	int port = DEFAULTPORT;
 	char * server;
 	clientdata_t cd;
 	void * mesgbuffer = malloc( BUFFERSIZE );
 	char * mesg;
-	mesg = mesgbuffer;
+	netevent_p_t eaux;
+	mesg = (char *)mesgbuffer;
 
 	while(( opt = getopt( argc, argv, "p:" )) != -1 )
 	{
@@ -289,14 +308,13 @@ int main( int argc, char ** argv )
 		while(1)
 		{
 			entergame( &cd );
-			if ((pollret = pollnet( &cd )) == -1)
+			eaux = pollnet( &cd );
+			if((eaux != NULL ) && ( eaux->type == MT_CLOSE ))
 			{
 				closeconnection( &cd );
 				break;
 			}
-			else if ( pollret == -2 )
-				break;
-			sleep(0.1);
+			sleep(1);
 		}
 	}
 	return(0);
