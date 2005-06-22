@@ -817,24 +817,29 @@ int engine::Rodar(SDL_Surface *surface)
                    }
                 }
                 break; 
-              }
-				 case MT_ERROR:
-				 {
-					 exit(0);
-				}
-				case MT_ENDSYNC:
-				{
-					charindex = createchar( &clientData, 0, 0, 0 );
-					if( charindex == -2 )
-					{
-						entergame( &clientData );
-					}
-					else if ( charindex == -1 )
-					{
-						exit(1);
-					}
-				}
-            default:break; /* Por default nao faz nada! */
+             }
+             case MT_ERROR:
+             {
+                 printf("Recebi Erro do Servidor\n");
+                 return(1);
+             }
+             case MT_ENDSYNC:
+             {
+                 PCs->personagemAtivo->ID = createchar( &clientData, 
+                   PCs->personagemAtivo->posicaoLadoX, 
+                   PCs->personagemAtivo->posicaoLadoZ, 
+                   PCs->personagemAtivo->orientacao );
+                 if( PCs->personagemAtivo->ID == -2 )
+                 {
+                     entergame( &clientData );
+                 }
+                 else if ( PCs->personagemAtivo->ID == -1 )
+                 {
+                     printf("Servidor Lotado\n");
+                     return(1);
+                 }
+             }
+             default:break; /* Por default nao faz nada! */
          }
       }
     #endif

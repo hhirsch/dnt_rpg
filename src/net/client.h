@@ -15,4 +15,6 @@ void entergame( clientdata_p_t cd );
 
 int movchar( clientdata_p_t cd, int obj, double x, double y, double teta );
 
+int createchar( clientdata_p_t cd, double x, double y, double teta );
+
 #endif

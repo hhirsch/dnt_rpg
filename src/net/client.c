@@ -295,8 +295,9 @@ int movchar( clientdata_p_t cd, int obj, double x, double y, double teta )
 int createchar( clientdata_p_t cd, double x, double y, double teta )
 {
 	netevent_p_t eaux;
-	int iaux = (int*)cd->inbuffer;
+	int* iaux = (int*)cd->inbuffer;
 	int pollret;
+	int obj;
 	
 	if (( cd->stat & STAT_UNSYNC ) && (! ( cd->stat & STAT_SYNCING )))
 	{
