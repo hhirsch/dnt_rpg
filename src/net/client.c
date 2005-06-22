@@ -25,7 +25,7 @@ int handlemesg( clientdata_p_t cd )
 	switch ( iaux[0] )
 	{
 		case MT_NEWCHAR:
-			printf("MT_NEWCHAR received.\n");
+			//printf("MT_NEWCHAR received.\n");
 			
 			eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
 			eaux->type = iaux[0];
@@ -42,7 +42,7 @@ int handlemesg( clientdata_p_t cd )
 			cd->inoffset += MT_SIZE_NEWCHAR;
 			break;
 		case MT_ACK:
-			printf("MT_ACK received.\n");
+			//printf("MT_ACK received.\n");
 			switch ( cd->pending )
 			{
 				case MT_NEWCHAR:
@@ -93,7 +93,7 @@ int handlemesg( clientdata_p_t cd )
 			cd->inoffset += MT_SIZE_ACK;
 			break;
 		case MT_MOV:
-			printf("MT_MOV received.\n");
+			// printf("MT_MOV received.\n");
 
 			eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
 			eaux->type = iaux[0];
@@ -136,7 +136,7 @@ int handlemesg( clientdata_p_t cd )
 			cd->inoffset += MT_SIZE_ERROR;
 			break;
 		case MT_ENDSYNC:
-			printf("MT_ENDSYNC received.\n");
+			// printf("MT_ENDSYNC received.\n");
 			if ( cd->pending != MT_ENDSYNC )
 			{
 				fprintf(stderr, "Unexpected MT_ENDSYNC received.\n");
@@ -170,16 +170,16 @@ int startconnection( clientdata_p_t cd, char * server, int port )
 	addr_in = (struct sockaddr_in *)&(cd->serveraddr);
 	if( inet_aton( server, &(addr_in->sin_addr) ) == 0)
 	{
-		printf("Resolving %s... ", server);
+		printf("Resolving %s ", server);
 		fflush(NULL);
 		if ( (cd->host = gethostbyname( server ) ) == NULL )
 		{
-			printf("Error\n");
+			printf(": Error\n");
 			herror("gethostbyname");
 			fprintf( stderr, "Couldn't resolv host name %s. Aborting.\n", server);
 			return(-1);
 		}
-		printf( "%s\n", inet_ntoa(*((struct in_addr *)cd->host->h_addr)));
+		printf( ": %s\n", inet_ntoa(*((struct in_addr *)cd->host->h_addr)));
 		addr_in->sin_addr = *((struct in_addr *)cd->host->h_addr);
 	}
 	addr_in->sin_family = AF_INET;
@@ -197,10 +197,10 @@ int startconnection( clientdata_p_t cd, char * server, int port )
 		return(-1);
 	}
 	fcntl( cd->fdset.fd, F_SETFL, 0 );
-	printf("Connecting to server %s ( port %d, through fd %d ) ", inet_ntoa((struct in_addr)addr_in->sin_addr), port, cd->fdset.fd );
+	printf("Connecting to server %s ( port %d, through socket %d ) ", inet_ntoa((struct in_addr)addr_in->sin_addr), port, cd->fdset.fd );
 	if ( connect(cd->fdset.fd, &(cd->serveraddr), sizeof( struct sockaddr )) == -1 )
 	{
-		printf("Error.\n");
+		printf(": Error.\n");
 		perror("connect");
 		return(-1);
 	}
@@ -211,12 +211,12 @@ int startconnection( clientdata_p_t cd, char * server, int port )
 
 int closeconnection( clientdata_p_t cd )
 {
-	printf("Disconnecting... ");
+	printf("Disconnecting");
 	if ( close( cd->fdset.fd ) == -1 ){
-		printf("Error.\n");
+		printf(": Error.\n");
 		return(1);
 	}
-	printf( "Done.\n" );
+	printf( ": Done\n" );
 	return(0);
 }
 
@@ -306,7 +306,7 @@ int createchar( clientdata_p_t cd, double x, double y, double teta )
 	}
 	else
 	{
-		printf("Sending MT_NEWCHAR to %d.\n", cd->fdset.fd );
+		//printf("Sending MT_NEWCHAR to %d.\n", cd->fdset.fd );
 		cd->outlen = buildmesg( cd->outbuffer, MT_NEWCHAR, obj, x, y, teta );
 		senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
 		cd->pending = MT_NEWCHAR;
@@ -315,7 +315,6 @@ int createchar( clientdata_p_t cd, double x, double y, double teta )
 	{
 		printf("Did you get my MT_NEWCHAR, server ?\n");
 		cd->inlen = recv( cd->fdset.fd, cd->inbuffer, BUFFERSIZE, 0);
-		printf("Yes you did !\n");
 		if ( cd->inlen == 0 )
 		{
 			printf("Connection closed by server.\n");
@@ -337,12 +336,12 @@ int createchar( clientdata_p_t cd, double x, double y, double teta )
 		{
 			if( eaux->type == MT_ACK )
 			{
-				printf("Aeeeh !\n");
+				printf("Yes you did ! Good boy !\n");
 				return( iaux[1] );
 			}
 			else
 			{
-				printf("Aaaahh !\n");
+				printf("You didn't ! No donnut for you too !\n");
 				return(-2);
 			}
 		}

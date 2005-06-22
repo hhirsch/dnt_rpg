@@ -4,6 +4,7 @@ CLIBS=
 CLIBSDIR=
 INCLUDESDIR=-I../etc
 CFLAGS= -Wall -g ${INCLUDESDIR} ${CLIBS} ${CLIBSDIR}
+BINDIR=../../bin
 
 all: server client.o
 
@@ -19,6 +20,7 @@ server.o: server.c common.h
 
 server: server.o common.o
 	${CPP} ${CFLAGS} -o server server.o common.o
+	cp server ${BINDIR}
 
 client: common.o server client.o common.h
 	${CPP} ${CFLAGS} -c -DCLIENT_TEST client.c

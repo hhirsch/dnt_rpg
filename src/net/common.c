@@ -54,7 +54,7 @@ int senddata( int socketfd, void * data, int datasize )
 	int n;
 	int * iaux = (int *)data;
 	char * caux = (char *)data;
-	
+/*	
 	switch( iaux[0] )
 	{
 		case MT_ACK:
@@ -76,6 +76,7 @@ int senddata( int socketfd, void * data, int datasize )
 			printf("Sending MT_ENDSYNC to %d.\n", socketfd );
 			break;
 	}
+*/
 	while( sent < datasize )
 	{
 		n = send( socketfd, caux + sent, datasize - sent, 0);

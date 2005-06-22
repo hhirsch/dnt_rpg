@@ -45,13 +45,16 @@ rodar o comando "make".
 |                       III - Execução                       |
 ==============================================================
 
-   Para se executar o tp5, vá para a pasta ./src/net e execute
-o arquivo  server, iniciando  assim o servidor. Em seguida, vá 
-para ./bin  e  execute o  arquivo dccnitghtmare . É necessário 
-estar no modo X do linux. Prontamente  o  jogo  deverá  abrir, 
-requerendo o IP do servidor a conectar (o qual foi iniciado no
-passo anterior).   Em  seguida  o  jogo  abre,  sendo   a  sua 
-interação / navegação a seguinte:
+	Para se executar o servidor vá para a pasta ./bin e execute
+o arquivo server.
+
+   Para se executar o cliente, vá para a pasta ./bin e execute
+o arquivo dccnitghtmare. É necessário estar no modo X do linux.
+Você deverá digitar então, quando questionado, o endereço IP
+ou nome do servidor. Por exemplo, caso o servidor esteja na
+mesma maquina do cliente, digite "localhost".
+Prontamente  o  jogo  deverá  abrir,  sendo  a sua interação - 
+navegação a seguinte:
 
                   Movimentação da Camera
 

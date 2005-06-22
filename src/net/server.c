@@ -67,7 +67,7 @@ void handlemesg( serverdata_p_t sd, int index )
 	{
 		/* MT_ACK */
 		case MT_ACK:
-			printf("MT_ACK received.\n");
+			// printf("MT_ACK received.\n");
 			if( sd->acks[index] > 0 )
 			{
 				sd->acks[index] --;
@@ -120,7 +120,7 @@ void handlemesg( serverdata_p_t sd, int index )
 			sd->inoffset += MT_SIZE_SYNC;
 			break;
 		case MT_MOV:
-			printf("MT_MOV received.\n");
+			// printf("MT_MOV received.\n");
 			if( sd->hoststat[index] & STAT_UNSYNC )
 			{
 				fprintf( stderr, "Character movement from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
