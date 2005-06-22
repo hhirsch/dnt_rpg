@@ -122,6 +122,7 @@ void engine::Iniciar(SDL_Surface *screen)
 int engine::TrataES(SDL_Surface *screen)
 {
    int redesenha = 0;
+   int andou = 0;
    Uint32 tempo;
    double varX, varZ; // para evitar de ter de calcular 2 vezes
    SDL_PumpEvents();
@@ -241,6 +242,7 @@ int engine::TrataES(SDL_Surface *screen)
             centroX -= varX;
             centroZ -= varZ;
             redesenha = 1;
+            andou = 1;
          }
          // Anda com personagem para esquerda
          if((keys[SDLK_e])&& (podeAndar(varX,varZ,0))) 
@@ -250,6 +252,7 @@ int engine::TrataES(SDL_Surface *screen)
             PCs->personagemAtivo->posicaoLadoX += varX;
             PCs->personagemAtivo->posicaoLadoZ += varZ;
             redesenha = 1;
+            andou = 1;
          }
       }
       if(keys[SDLK_w] || keys[SDLK_s])
@@ -264,6 +267,7 @@ int engine::TrataES(SDL_Surface *screen)
               centroZ -= varZ;
               centroX -= varX;
               redesenha = 1;
+              andou = 1;
          }
            // Anda com personagem para tras
          if((keys[SDLK_s]) && (podeAndar(varX,varZ,0)) ) 
@@ -273,6 +277,7 @@ int engine::TrataES(SDL_Surface *screen)
              centroX += varX;
              centroZ += varZ;
              redesenha = 1;
+             andou  = 1;
          }
       }
 
@@ -286,6 +291,7 @@ int engine::TrataES(SDL_Surface *screen)
                PCs->personagemAtivo->orientacao = 
                                PCs->personagemAtivo->orientacao  - 360.0;
             redesenha = 1;
+            andou = 1;
          }
          // Gira o personagem horariamente
          if((keys[SDLK_d]) && (podeAndar(0,0,-2.0)) )
@@ -296,6 +302,7 @@ int engine::TrataES(SDL_Surface *screen)
                                         PCs->personagemAtivo->orientacao ;
          }
          redesenha = 1;
+         andou = 1;
       }
       if(keys[SDLK_TAB]) //troca de personagem ativo
       {
@@ -372,6 +379,16 @@ int engine::TrataES(SDL_Surface *screen)
       Desenhar();
       SDL_GL_SwapBuffers();
    }
+ 
+   if(andou)
+   {
+      #ifdef REDE
+        movchar(&clientData, PCs->personagemAtivo->ID, 
+          PCs->personagemAtivo->posicaoLadoX,PCs->personagemAtivo->posicaoLadoZ,
+          PCs->personagemAtivo->orientacao );
+      #endif
+   }
+ 
    return(1);
 }
 
@@ -751,8 +768,8 @@ int engine::Rodar(SDL_Surface *surface)
    SDL_GL_SwapBuffers();
 
    #ifdef REDE
-     float[3] dataux;
-     clientdata clientData;
+     netevent_p_t eventoRede;
+     
      initclientdata( &clientData );
      if ( ( startconnection( &clientData, server, DEFAULTPORT )) == -1 )
      {
@@ -766,40 +783,44 @@ int engine::Rodar(SDL_Surface *surface)
    while(TrataES(surface))
    {
     #ifdef REDE
-      switch(handlemesg( clientData, dataux))
+      eventoRede = pollnet( &clientData );
+      if(eventoRede)
       {
-          case MT_NEWCHAR: /* Insere Novo Caractere */
-          {
-             personagem* per;
-             per = NPCs->InserirPersonagem(6,8,3,8,
-                          "../data/pics/logan/cara.bmp",0,0,
-               "LoganNPC","../data/models/personagens/logan_completo_final.obj",
-               "../data/pics/rui/");
-             per->posicaoLadoX = dataux[0];
-             per->posicaoLadoZ = dataux[1]; 
-             per->orientacao = dataux[2];
-             per->ID = dataux[3];
-             break; 
-          }
-          case MT_MOV:
-          {
-             personagem* per = NPCs->primeiro->proximo
-             if(per != NPCs->primeiro) 
+         switch(eventoRede->type)
+         {
+             case MT_NEWCHAR: /* Insere Novo Caractere */
              {
-                while((per != NPCs->primeiro) && (dataux[3] != per->ID))
-                {
-                   per = per->proximo;
-                }
-                if(per!=NPCs->primeiro)
-                {
-                    per->posicaoLadoX = dataux[0];
-                    per->posicaoLadoZ = dataux[1]; 
-                    per->orientacao = dataux[2];
-                }
+                personagem* per;
+                per = NPCs->InserirPersonagem(6,8,3,8,
+                             "../data/pics/logan/cara.bmp",0,0,
+               "LoganNPC","../data/models/personagens/logan_completo_final.obj",
+                  "../data/pics/rui/");
+                per->posicaoLadoX = eventoRede->x;
+                per->posicaoLadoZ = eventoRede->y; 
+                per->orientacao = eventoRede->teta;
+                per->ID = eventoRede->obj;
+                break; 
              }
-             break; 
-          }
-          default:break; /* Por default nao faz nada! */
+             case MT_MOV:
+             {
+                personagem* per = (personagem*)NPCs->primeiro->proximo;
+                if(per != NPCs->primeiro) 
+                {
+                   while((per!=NPCs->primeiro) && (eventoRede->obj!=per->ID))
+                   {
+                      per = (personagem*) per->proximo;
+                   }
+                   if(per!=NPCs->primeiro)
+                   {
+                       per->posicaoLadoX = eventoRede->x;
+                       per->posicaoLadoZ = eventoRede->y; 
+                       per->orientacao = eventoRede->teta;
+                   }
+                }
+                break; 
+              }
+              default:break; /* Por default nao faz nada! */
+         }
       }
     #endif
    }

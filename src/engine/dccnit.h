@@ -12,6 +12,7 @@
 #include "luta.h"
 #ifdef REDE
   #include "../net/client.h"
+//  #include "../net/common.h"
 #endif
 
 class engine
@@ -33,6 +34,7 @@ class engine
 
       #ifdef REDE
          char *server; /* Define o servidor a se conectar */
+         clientdata_t clientData;
       #endif
 
       /* Variaveis de Controle da Camera/olho */

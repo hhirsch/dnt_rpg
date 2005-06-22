@@ -13,7 +13,7 @@
 #include <errno.h>
 #include <fcntl.h>
 
-#include <fifo.h>
+#include "../etc/fifo.h"
 
 #define DEFAULTPORT 9001
 #define MAXCLIENTS 10
