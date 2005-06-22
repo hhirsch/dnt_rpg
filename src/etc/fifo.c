@@ -36,7 +36,6 @@ int fifosize( fifo_p_t fi )
 }
 
 #ifdef FIFO_TEST
-#include <stdio.h>
 
 void printstat( fifo_p_t fi )
 {
