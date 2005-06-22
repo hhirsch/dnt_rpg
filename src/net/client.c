@@ -1,4 +1,4 @@
-#include "common.h"
+#include "client.h"
 
 int initclientdata( clientdata_p_t cd )
 {
