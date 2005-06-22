@@ -19,8 +19,14 @@ int main()
    SDL_Surface *screen;
    Farso_Iniciar(&screen,"Teste Engine DccNiTghtmare");
    engine* Engine = new engine("../data/mapas/mapaTp4.map");
+
+   #ifdef REDE
+      printf("IP ou Nome do servidor: ");
+      scanf("%s\n",&engine->server);
+   #endif   
+
    Engine->Iniciar(screen);
-   //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+ //  glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 // int aux;
 // for(aux = 0;aux<10;aux++)
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",0,0,
@@ -35,7 +41,10 @@ int main()
                   "LoganNPC","../data/models/personagens/logan_completo_final.obj","../data/pics/rui/");
    per->posicaoLadoX = 30;
    per->posicaoLadoZ = 60;
-   
+   /*per = Engine->NPCs->InserirPersonagem(6,8,3,8,"../data/pics/logan/cara.bmp",0,0,
+                  "LoganNPC","/home/farrer/test.obj","../data/pics/rui/");
+   per->posicaoLadoX = 90;
+   per->posicaoLadoZ = 60;*/
 
    /*Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/cara.bmp",0,0,
                  "Homer","../data/models/logan_completo_final.obj","../../PICS/Logan/");
