@@ -13,6 +13,8 @@
 #include <errno.h>
 #include <fcntl.h>
 
+#include <fifo.h>
+
 #define DEFAULTPORT 9001
 #define MAXCLIENTS 10
 #define LISTENTIMEOUT 10

@@ -191,7 +191,7 @@ int closeconnection( clientdata_p_t cd )
 	return(0);
 }
 
-int pollnet( clientdata_p_t cd )
+int checknet( clientdata_p_t cd )
 {
 	int pollret;
 
@@ -231,6 +231,15 @@ void entergame( clientdata_p_t cd )
 		cd->pending = MT_SYNC;
 		cd->stat |= STAT_SYNCING;
 	}
+}
+
+/* Isso faz o que vc queria, Farrer:
+ * Da uma olhada em netevent_t em common.h
+ */
+
+netevent_p_t pollnet( clientdata_p_t cd )
+{
+
 }
 
 #ifdef CLIENT_TEST
