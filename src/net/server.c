@@ -21,7 +21,8 @@ int initserverdata( serverdata_p_t sd )
 
 void bcastmesg( serverdata_p_t sd, int sindex )
 {
-	int i, *iaux = (int*)sd->inbuffer;
+	int * iaux = (int*)(((char *)sd->inbuffer) + sd->inoffset);
+	int i;
 	sd->outlen = buildmesg( sd->outbuffer, MT_ACK, iaux[1], iaux[0] );
 	for( i = 1; i <= sd->numclients; i++ )
 	{
@@ -31,7 +32,7 @@ void bcastmesg( serverdata_p_t sd, int sindex )
 		}
 		else
 		{
-			senddata( sd->fdset[i].fd, sd->inbuffer, sd->inlen );
+			senddata( sd->fdset[i].fd, (void *)iaux, sd->inlen );
 		}
 	}
 	return;
@@ -42,7 +43,7 @@ void sendstate( serverdata_p_t sd, int index )
 	int i;
 	for ( i = 1; i <= MAXCLIENTS; i++ )
 	{
-		if( (sd->hoststat[i] & STAT_ONLINE) && (sd->pcs[i].stat & PCSTAT_ON) ) 
+		if( sd->pcs[i].stat & PCSTAT_ON) 
 		{
 			sd->outlen = buildmesg( sd->outbuffer, MT_NEWCHAR, i, sd->pcs[i].x, sd->pcs[i].y, sd->pcs[i].teta );
 			senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen );
@@ -66,7 +67,7 @@ void handlemesg( serverdata_p_t sd, int index )
 	{
 		/* MT_ACK */
 		case MT_ACK:
-//			printf("MT_ACK received.\n");
+			printf("MT_ACK received.\n");
 			if( sd->acks[index] > 0 )
 			{
 				sd->acks[index] --;
@@ -86,7 +87,7 @@ void handlemesg( serverdata_p_t sd, int index )
 
 		/* MT_NEWCHAR */
 		case MT_NEWCHAR:
-//			printf("MT_NEWCHAR received.\n");
+			printf("MT_NEWCHAR received.\n");
 			if( sd->hoststat[index] & STAT_UNSYNC )
 			{
 				fprintf( stderr, "Character creation from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
@@ -111,7 +112,7 @@ void handlemesg( serverdata_p_t sd, int index )
 			sd->inoffset += MT_SIZE_NEWCHAR;
 			break;
 		case MT_SYNC:
-//			printf("MT_SYNC received.\n");
+			printf("MT_SYNC received.\n");
 			sd->outlen = buildmesg( sd->outbuffer, MT_ACK, 0, MT_SYNC );
 			senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 			sendstate( sd, index );
@@ -119,7 +120,7 @@ void handlemesg( serverdata_p_t sd, int index )
 			sd->inoffset += MT_SIZE_SYNC;
 			break;
 		case MT_MOV:
-//			printf("MT_MOV received.\n");
+			printf("MT_MOV received.\n");
 			if( sd->hoststat[index] & STAT_UNSYNC )
 			{
 				fprintf( stderr, "Character movement from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
@@ -211,6 +212,7 @@ int mainloop( serverdata_p_t sd )
 						sd->fdset[j] = sd->fdset[j+1];
 					sd->numclients--;
 					sd->hoststat[i] = STAT_OFFLINE;
+					sd->pcs[i].stat = PCSTAT_OFF;
 					i--;
 				}
 				else if ( sd->fdset[i].revents & (POLLIN | POLLPRI))
@@ -250,6 +252,7 @@ int mainloop( serverdata_p_t sd )
 								sd->fdset[j] = sd->fdset[j+1];
 							sd->numclients--;
 							sd->hoststat[i] = STAT_OFFLINE;
+							sd->pcs[i].stat = PCSTAT_OFF;
 							i--;
 						}
 						else if( sd->inlen == -1 )
@@ -260,6 +263,7 @@ int mainloop( serverdata_p_t sd )
 								sd->fdset[j] = sd->fdset[j+1];
 							sd->numclients--;
 							sd->hoststat[i] = STAT_OFFLINE;
+							sd->pcs[i].stat = PCSTAT_OFF;
 							i--;
 						}
 						while( sd->inlen > 0 )

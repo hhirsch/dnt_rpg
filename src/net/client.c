@@ -20,8 +20,8 @@ int handlemesg( clientdata_p_t cd )
 	double * daux = (double*)&(iaux[2]);
 	netevent_p_t eaux;
 	
-	printf("Mesg size = %d\n", cd->inlen );
-	printf("Buffer offset = %d\n", cd->inoffset );
+//	printf("Mesg size = %d\n", cd->inlen );
+//	printf("Buffer offset = %d\n", cd->inoffset );
 	switch ( iaux[0] )
 	{
 		case MT_NEWCHAR:
@@ -152,7 +152,8 @@ int handlemesg( clientdata_p_t cd )
 			fifopush( &(cd->eventfifo), eaux );
 
 			cd->pending = -1;
-			cd->stat &= ~( STAT_SYNCING | STAT_UNSYNC );
+			cd->stat &= ~( STAT_SYNCING );
+			cd->stat &= ~( STAT_UNSYNC );
 			cd->inlen -= MT_SIZE_ENDSYNC;
 			cd->inoffset += MT_SIZE_ENDSYNC;
 			break;
@@ -305,12 +306,16 @@ int createchar( clientdata_p_t cd, double x, double y, double teta )
 	}
 	else
 	{
+		printf("Sending MT_NEWCHAR to %d.\n", cd->fdset.fd );
 		cd->outlen = buildmesg( cd->outbuffer, MT_NEWCHAR, obj, x, y, teta );
 		senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+		cd->pending = MT_NEWCHAR;
 	}
 	while(1)
 	{
+		printf("Did you get my MT_NEWCHAR, server ?\n");
 		cd->inlen = recv( cd->fdset.fd, cd->inbuffer, BUFFERSIZE, 0);
+		printf("Yes you did !\n");
 		if ( cd->inlen == 0 )
 		{
 			printf("Connection closed by server.\n");
@@ -330,13 +335,14 @@ int createchar( clientdata_p_t cd, double x, double y, double teta )
 		cd->inoffset = 0;
 		while( ( eaux = (netevent_p_t) fifopop( &(cd->eventfifo) )) != NULL )
 		{
-			if( eaux->type == MT_NEWCHAR )
+			if( eaux->type == MT_ACK )
 			{
+				printf("Aeeeh !\n");
 				return( iaux[1] );
 			}
 			else
 			{
-				cd->stat |= STAT_UNSYNC;
+				printf("Aaaahh !\n");
 				return(-2);
 			}
 		}
