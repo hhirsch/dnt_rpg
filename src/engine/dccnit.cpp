@@ -749,9 +749,60 @@ int engine::Rodar(SDL_Surface *surface)
    /* Desenha a primeira Cena */
    Desenhar();
    SDL_GL_SwapBuffers();
+
+   #ifdef REDE
+     float[3] dataux;
+     clientdata clientData;
+     initclientdata( &clientData );
+     if ( ( startconnection( &clientData, server, DEFAULTPORT )) == -1 )
+     {
+         printf("Não Consegui Iniciar Conexão!\nAbortando Uso.\n");
+         return(1);
+     }
+     entergame( &clientData );
+   #endif
   
    /* Roda realmente a engine */
-   while(TrataES(surface));
+   while(TrataES(surface))
+   {
+    #ifdef REDE
+      switch(handlemesg( clientData, dataux))
+      {
+          case MT_NEWCHAR: /* Insere Novo Caractere */
+          {
+             personagem* per;
+             per = NPCs->InserirPersonagem(6,8,3,8,
+                          "../data/pics/logan/cara.bmp",0,0,
+               "LoganNPC","../data/models/personagens/logan_completo_final.obj",
+               "../data/pics/rui/");
+             per->posicaoLadoX = dataux[0];
+             per->posicaoLadoZ = dataux[1]; 
+             per->orientacao = dataux[2];
+             per->ID = dataux[3];
+             break; 
+          }
+          case MT_MOV:
+          {
+             personagem* per = NPCs->primeiro->proximo
+             if(per != NPCs->primeiro) 
+             {
+                while((per != NPCs->primeiro) && (dataux[3] != per->ID))
+                {
+                   per = per->proximo;
+                }
+                if(per!=NPCs->primeiro)
+                {
+                    per->posicaoLadoX = dataux[0];
+                    per->posicaoLadoZ = dataux[1]; 
+                    per->orientacao = dataux[2];
+                }
+             }
+             break; 
+          }
+          default:break; /* Por default nao faz nada! */
+      }
+    #endif
+   }
    return(1);
 }
 

@@ -10,6 +10,9 @@
 #include "../map/map.h"
 #include "personagens.h"
 #include "luta.h"
+#ifdef REDE
+  #include "../net/client.h"
+#endif
 
 class engine
 {
@@ -27,6 +30,10 @@ class engine
       int x,y;           // Coordenada Central do mapa atualmente visto
 
       int RotacaoX,RotacaoY,RotacaoZ; //variaveis de testeatual
+
+      #ifdef REDE
+         char *server; /* Define o servidor a se conectar */
+      #endif
 
       /* Variaveis de Controle da Camera/olho */
       double theta, phi, d;  //Rotacao pra cima, pro lado e zoom

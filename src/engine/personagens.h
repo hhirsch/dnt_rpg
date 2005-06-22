@@ -43,6 +43,8 @@ class personagem: public Tobjeto
 
       Square* ocupaQuad;        // quadrado do mapa que ele ocupa com x1,z1
 
+      int ID;
+
       GLMgroup *pe_d,
                *pe_e,
                *perna_d,
