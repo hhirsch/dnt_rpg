@@ -1,18 +1,20 @@
 #include "fifo.h"
 
-void fifoinit( fifo_p_t fi )
+void fifoinit( fifo_p_t fi, int maxlen )
 {
 	fi->numitens = 0;
 	fi->start = 0;
 	fi->end = 0;
+	fi->maxlen = maxlen;
+	fi->itens = (void **)malloc( sizeof( void * ) * maxlen );
 }
 
 void * fifopush( fifo_p_t fi, void * item )
 {
-	if( ((( fi->end + 1 ) % FIFOSIZE ) == fi->start ) || ( fi->numitens == FIFOSIZE ))
+	if( ((( fi->end + 1 ) % fi->maxlen ) == fi->start ) || ( fi->numitens == fi->maxlen ))
 		return(NULL);
 	fi->itens[fi->end] = item;
-	fi->end = (fi->end + 1) % FIFOSIZE;
+	fi->end = (fi->end + 1) % fi->maxlen;
 	fi->numitens++;
 	return( item );
 }
@@ -23,7 +25,7 @@ void * fifopop( fifo_p_t fi )
 	if(( fi->end == fi->start ) || ( fi->numitens == 0 ))
 		return(NULL);
 	aux = fi->itens[fi->start];
-	fi->start = (fi->start+1) % FIFOSIZE;
+	fi->start = (fi->start+1) % fi->maxlen;
 	fi->numitens--;
 	return( aux );
 }
@@ -38,7 +40,7 @@ int fifosize( fifo_p_t fi )
 
 void printstat( fifo_p_t fi )
 {
-	printf( "start=%d, end=%d, size=%d, max=%d\n", fi->start, fi->end, fi->numitens, FIFOSIZE );
+	printf( "start=%d, end=%d, size=%d, max=%d\n", fi->start, fi->end, fi->numitens, fi->maxlen );
 }
 
 int main( int argc, char ** argv )
@@ -48,7 +50,7 @@ int main( int argc, char ** argv )
 	fifo_t fi;
 	char * bliu;
 	
-	fifoinit(&fi);
+	fifoinit(&fi, 7);
 	for( j = 0; j < 10; j++ )
 	{
 		for( i = 0; i < 4; i++ )
