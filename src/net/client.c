@@ -259,6 +259,23 @@ void entergame( clientdata_p_t cd )
 	}
 }
 
+int movchar( clientdata_p_t cd, int obj, double x, double y, double teta )
+{
+	if (( cd->stat & STAT_UNSYNC ) && (! ( cd->stat & STAT_SYNCING )))
+	{
+		cd->outlen = buildmesg( cd->outbuffer, MT_SYNC, 0 );
+		senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+		cd->pending = MT_SYNC;
+		cd->stat |= STAT_SYNCING;
+	}
+	else
+	{
+		cd->outlen = buildmesg( cd->outbuffer, MT_MOV, obj, x, y, teta );
+		senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+		cd->pending = MT_ACK;
+	}
+	return(0);
+}
 
 #ifdef CLIENT_TEST
 
