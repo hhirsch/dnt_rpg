@@ -60,13 +60,13 @@ void handlemesg( serverdata_p_t sd, int index )
 	int * iaux = (int*)(((char *)sd->inbuffer) + sd->inoffset);
 	double * daux = (double *) &(iaux[2]);
 	struct sockaddr_in * addr_in = (struct sockaddr_in *)&(sd->addresses[index]);
-	printf("Mesg size = %d\n", sd->inlen );
-	printf("Buffer offset = %d\n", sd->inoffset );
+//	printf("Mesg size = %d\n", sd->inlen );
+//	printf("Buffer offset = %d\n", sd->inoffset );
 	switch( iaux[0] )
 	{
 		/* MT_ACK */
 		case MT_ACK:
-			printf("MT_ACK received.\n");
+//			printf("MT_ACK received.\n");
 			if( sd->acks[index] > 0 )
 			{
 				sd->acks[index] --;
@@ -86,7 +86,7 @@ void handlemesg( serverdata_p_t sd, int index )
 
 		/* MT_NEWCHAR */
 		case MT_NEWCHAR:
-			printf("MT_NEWCHAR received.\n");
+//			printf("MT_NEWCHAR received.\n");
 			if( sd->hoststat[index] & STAT_UNSYNC )
 			{
 				fprintf( stderr, "Character creation from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
@@ -111,7 +111,7 @@ void handlemesg( serverdata_p_t sd, int index )
 			sd->inoffset += MT_SIZE_NEWCHAR;
 			break;
 		case MT_SYNC:
-			printf("MT_SYNC received.\n");
+//			printf("MT_SYNC received.\n");
 			sd->outlen = buildmesg( sd->outbuffer, MT_ACK, 0, MT_SYNC );
 			senddata( sd->fdset[index].fd, sd->outbuffer, sd->outlen);
 			sendstate( sd, index );
@@ -119,7 +119,7 @@ void handlemesg( serverdata_p_t sd, int index )
 			sd->inoffset += MT_SIZE_SYNC;
 			break;
 		case MT_MOV:
-			printf("MT_MOV received.\n");
+//			printf("MT_MOV received.\n");
 			if( sd->hoststat[index] & STAT_UNSYNC )
 			{
 				fprintf( stderr, "Character movement from unsynced host %s.\n", inet_ntoa( addr_in->sin_addr ));
@@ -183,6 +183,7 @@ int initlisten( serverdata_p_t sd )
 		perror("listen");
 		return(errno);
 	}
+	printf("DCCNitghtmare Server v.0.0.0.1\n\nListening for connections ( max %d clients ) on port %d\n", MAXCLIENTS, sd->port );
 	sd->fdset[0].fd = sd->listenerfd;
 	sd->fdset[0].events = POLLIN | POLLPRI ;
 	sd->fdset[0].revents = 0;
@@ -296,7 +297,7 @@ int main( int argc, char ** argv )
 		{
 			case 'p':
 				sd.port = atoi( optarg );
-				printf( "Set listen port to %d.\n", sd.port );
+				//printf( "Set listen port to %d.\n", sd.port );
 				break;
 			case ':':
 				return(1);

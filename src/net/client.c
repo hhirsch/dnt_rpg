@@ -53,8 +53,8 @@ int handlemesg( clientdata_p_t cd )
 					}
 					eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
 					eaux->type = iaux[0];
-					eaux->obj = iaux[1];
-					eaux->aux = -1;
+					eaux->obj = -1;
+					eaux->aux = MT_NEWCHAR;
 					eaux->x = daux[0];
 					eaux->y = daux[1];
 					eaux->teta = daux[2];
@@ -72,7 +72,7 @@ int handlemesg( clientdata_p_t cd )
 					eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
 					eaux->type = iaux[0];
 					eaux->obj = iaux[1];
-					eaux->aux = -1;
+					eaux->aux = MT_MOV;
 					eaux->x = daux[0];
 					eaux->y = daux[1];
 					eaux->teta = daux[2];
@@ -126,6 +126,12 @@ int handlemesg( clientdata_p_t cd )
 					fprintf(stderr, "I'm trying to move an unexistent character in the server. Why ?\n");
 					break;
 			}
+			eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
+			eaux->type = iaux[0];
+			eaux->obj = iaux[1];
+			eaux->aux = iaux[2];
+			fifopush( &(cd->eventfifo), eaux );
+			
 			cd->inlen -= MT_SIZE_ERROR;
 			cd->inoffset += MT_SIZE_ERROR;
 			break;
@@ -136,6 +142,15 @@ int handlemesg( clientdata_p_t cd )
 				fprintf(stderr, "Unexpected MT_ENDSYNC received.\n");
 				return(-1);
 			}
+			cd->outlen = buildmesg( cd->outbuffer, MT_ACK, iaux[1], MT_ENDSYNC );
+			senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+			
+			eaux = (netevent_p_t)malloc( sizeof( netevent_t ) );
+			eaux->type = iaux[0];
+			eaux->obj = iaux[1];
+			eaux->aux = iaux[2];
+			fifopush( &(cd->eventfifo), eaux );
+
 			cd->pending = -1;
 			cd->stat &= ~( STAT_SYNCING | STAT_UNSYNC );
 			cd->inlen -= MT_SIZE_ENDSYNC;
@@ -275,6 +290,57 @@ int movchar( clientdata_p_t cd, int obj, double x, double y, double teta )
 		cd->pending = MT_ACK;
 	}
 	return(0);
+}
+
+int createchar( clientdata_p_t cd, double x, double y, double teta )
+{
+	netevent_p_t eaux;
+	int iaux = (int*)cd->inbuffer;
+	int pollret;
+	
+	if (( cd->stat & STAT_UNSYNC ) && (! ( cd->stat & STAT_SYNCING )))
+	{
+		return(-2);
+	}
+	else
+	{
+		cd->outlen = buildmesg( cd->outbuffer, MT_NEWCHAR, obj, x, y, teta );
+		senddata( cd->fdset.fd, cd->outbuffer, cd->outlen );
+	}
+	while(1)
+	{
+		cd->inlen = recv( cd->fdset.fd, cd->inbuffer, BUFFERSIZE, 0);
+		if ( cd->inlen == 0 )
+		{
+			printf("Connection closed by server.\n");
+			closeconnection( cd );
+			return(-1);
+		}
+		else if ( cd->inlen < 0 )
+		{
+			printf("Connection error with server.\n");
+			closeconnection( cd );
+			return(-1);
+		}
+		while ( cd->inlen > 0 )
+		{
+			handlemesg( cd );
+		}
+		cd->inoffset = 0;
+		while( ( eaux = (netevent_p_t) fifopop( &(cd->eventfifo) )) != NULL )
+		{
+			if( eaux->type == MT_NEWCHAR )
+			{
+				return( iaux[1] );
+			}
+			else
+			{
+				cd->stat |= STAT_UNSYNC;
+				return(-2);
+			}
+		}
+	}
+	return(-1);
 }
 
 #ifdef CLIENT_TEST

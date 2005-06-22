@@ -131,7 +131,7 @@ int engine::TrataES(SDL_Surface *screen)
 
    if( ((tempo-ultimaLeitura)) >= 16)
    {
-      printf("FPS: %f\t",1000.0 / (float)(tempo-ultimaLeitura));
+//      printf("FPS: %f\t",1000.0 / (float)(tempo-ultimaLeitura));
       ultimaLeitura = tempo;
        
       /* Tratamento das Teclas */
@@ -783,8 +783,7 @@ int engine::Rodar(SDL_Surface *surface)
    while(TrataES(surface))
    {
     #ifdef REDE
-      eventoRede = pollnet( &clientData );
-      if(eventoRede)
+      while( (eventoRede = pollnet( &clientData ) ) != NULL )
       {
          switch(eventoRede->type)
          {
@@ -819,7 +818,23 @@ int engine::Rodar(SDL_Surface *surface)
                 }
                 break; 
               }
-              default:break; /* Por default nao faz nada! */
+				 case MT_ERROR:
+				 {
+					 exit(0);
+				}
+				case MT_ENDSYNC:
+				{
+					charindex = createchar( &clientData, 0, 0, 0 );
+					if( charindex == -2 )
+					{
+						entergame( &clientData );
+					}
+					else if ( charindex == -1 )
+					{
+						exit(1);
+					}
+				}
+            default:break; /* Por default nao faz nada! */
          }
       }
     #endif
