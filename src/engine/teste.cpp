@@ -18,16 +18,16 @@ int main()
   
    SDL_Surface *screen;
    
-   engine* Engine = new engine("../data/mapas/mapaTp4.map");
-
    #ifdef REDE
       printf("IP ou Nome do servidor: ");
-      Engine->server = (char*) malloc(55*sizeof(char));
-      scanf("%s",Engine->server);
-      printf("Vou conectar entao a %s\n",Engine->server);
+      char* server = (char*) malloc(55*sizeof(char));
+      scanf("%s",server);
+      printf("Vou conectar entao a %s\n",server);
    #endif   
    Farso_Iniciar(&screen,"Teste Engine DccNiTghtmare");
+   engine* Engine = new engine("../data/mapas/mapaTp4.map");
    Engine->Iniciar(screen);
+   Engine->server = server;
  //  glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",0,0,
