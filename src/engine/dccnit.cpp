@@ -766,6 +766,8 @@ int engine::Rodar(SDL_Surface *surface)
    centroX = mapa->xInic;
    centroZ = mapa->zInic;
    PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
+
+   /* ia = new(AI); */
    
    /* Desenha a primeira Cena */
 //   Desenhar();
@@ -786,6 +788,18 @@ int engine::Rodar(SDL_Surface *surface)
    /* Roda realmente a engine */
    while(TrataES(surface,&forcaAtualizacao))
    {
+       /* Trata a IA dos Personagens */
+       /* 
+           ia->iniciaListaCampos();
+           ia->campoInfluencia(PCs->personagemAtivo->posicaoLadoX,
+                               PCs->personagemAtivo->posicaoLadoZ,
+                               TIPOPC, 100);
+           enquanto dentro do campo de visao
+           se tem objeto ou quadrado nao eh pisavel
+              ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
+       */
+
+
     #ifdef REDE
       while( (eventoRede = pollnet( &clientData ) ) != NULL )
       {
