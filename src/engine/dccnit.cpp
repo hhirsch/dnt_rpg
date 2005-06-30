@@ -125,13 +125,13 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    int andou = 0;
    Uint32 tempo;
    double varX, varZ; // para evitar de ter de calcular 2 vezes
-   SDL_PumpEvents();
 
    tempo = SDL_GetTicks();
 
    if( ((tempo-ultimaLeitura)) >= 16)
    {
 //      printf("FPS: %f\t",1000.0 / (float)(tempo-ultimaLeitura));
+      SDL_PumpEvents();
       ultimaLeitura = tempo;
        
       /* Tratamento das Teclas */
