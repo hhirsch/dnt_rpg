@@ -44,9 +44,13 @@ class AI
 // private:
        
 //     int velocidade;
-     
-		 
-	void campoInfluencia (double posY, double posZ, item *itens);
+        
+	/* A funcao iniciaListaCampos() zera uma lista de campos para uso */  
+        void AI::iniciaListaCampos();
+   
+
+	/* A funcao campoInfluencia insere um novo campo de influencia na lista dos que estao influenciando */	 
+	void AI:: campoInfluencia (double posX, double posZ, int tipo, double raio );
 	void moverNpc (personagem *npc, double posX, double posZ);
 		 
 	void calculaCampo(double posXP, double posZP, double posXO, 
