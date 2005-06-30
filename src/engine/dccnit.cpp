@@ -863,6 +863,8 @@ int engine::Rodar(SDL_Surface *surface)
          }
       }
     #endif
+
+
    }
    return(1);
 }
