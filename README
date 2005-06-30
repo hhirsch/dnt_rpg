@@ -1,0 +1,97 @@
+    DccNiTghmare is a  program registered in public domain, do
+whatever  you  want  with  its  code  and  data.
+
+==============================================================
+|                         DccNiTghtmare                      |
+==============================================================
+
+I   - Requeriments
+II  - Instalation
+III - Execution
+IV  - Contacts
+
+==============================================================
+|                      I - Requeriments                      |
+==============================================================
+
+   The DccNiTghtmare's compilation and execution needs some 
+software and hardware. They are:
+
+   Software:
+   OpenGL   - Mesa3D 6.2, www.mesa3d.org (or SGI-OpenGL 1.4)
+   SDL      - Versão 1.2.7, www.libsdl.org
+   SDLImage - Versão 1.2.4, www.libsdl.org/projects/SDL_image/
+
+   Hardware:
+   Video Card with 3D aceleration, OpenGl compatible in Linux.
+
+==============================================================
+|                      II - Instalation                      |
+==============================================================
+
+   To   "install"   dccnitghtmare,   decompact   the  tar.bz2,  
+go to the directory dccnitghtmare and run "make".
+   Exemple:
+   farrer@anamabeka:~/$ tar -xvjf dccnitghtmare.tar.bz2
+   farrer@anamabeka:~/$ cd dccnitghtmare
+   farrer@anamabeka:~/dccnitghtmare/$ make
+
+==============================================================
+|                       III - Execution                       |
+==============================================================
+
+   To execute  the  program,  go to directory ./bin and run the 
+file dccnitghtmare. It's needed  to be on X. We really hope the
+game  will  open in  this case, and  the  interation-navigation 
+follows:
+
+                  Camera Movimentation
+
+mouse at left corner  =  turn camera                  (0-360°)
+left arrow            =  turn camera left             (0-360°)
+mouse at right corner =  turn camera                  (0-360°)
+right arrow           =  turn camera right            (0-360°)
+up arrow              =  increases zoom               (X-Ym)
+down arrow            =  decreases zoom               (X-Ym)
+home                  =  maximize zoom
+end                   =  minimize zoom
+pageup                =  camera up                    (0-89°)
+pagedown              =  camera down                  (0-89°)
+insert                =  put camera on the top
+delete                =  put camera on the floor
+
+
+               Character Movimentation
+
+a          =  turn left                       (0-360°)
+d          =  turn right                      (0-360°)
+w          =  forward                         (0-?)
+s          =  backward                        (0-?)
+q          =  move left                       (0-?)
+e          =  move right                      (0-?)
+tab        =  make active next character
+lctrl+tab  =  make active previous character
+
+To end the game, press ESC key.
+
+==============================================================
+|                       IV - Contacts                        |
+==============================================================
+
+  Messages can be delivered to dccnightmare@dcc.ufmg.br
+
+  Edit our wiki on 
+      http://dccnitghtmare.sourceforge.net/cgi-bin/wiki.cgi
+
+  Or ( not XOR )  visit  the project page on sourceforge:
+      http://www.sourceforge.net/projects/dccnitghtmare
+
+
+DccNiTghtmare.
+  
+   cesar@dcc.ufmg.br
+                    farrer@dcc.ufmg.br
+                                      mflima@dcc.ufmg.br
+                    silvio@dcc.ufmg.br
+   rui@dcc.ufmg.br
+   
