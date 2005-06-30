@@ -19,8 +19,21 @@ int main()
 	return(EXIT_SUCCESS);
 }
 
-void AI:: campoInfluencia (double posY, double posZ, item *itens)
+void AI::iniciaListaCampos()
 {
+   //tamanhoLista = 0;   //coloca o item atual no 0;
+}
+
+void AI:: campoInfluencia (double posX, double posZ, int tipo, double raio )
+{
+    /* Versao Farrer */
+    /*
+        lista[tamanhoLista].x = posX;
+        lista[tamanhoLista].z = posZ;
+        lista[tamanhoLista].tipo = tipo;
+        lista[tamanhoLista].raio
+        tamanhoLista++;
+    */
 	item item2;
 	item2.x = 10;
 	item2.z = 10;

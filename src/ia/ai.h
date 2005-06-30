@@ -7,7 +7,7 @@
 #define TIPOPC -100       //associada ao campo feito por pc, note q e' atracao  
 #define TIPONPC 260 
 
-#define COVELOCIDADE 100 //converte de agilidade para o numero de ciclos de espera      
+#define COVELOCIDADE 100 //converte de agilidade para o n° de ciclos de espera      
 #define PASSO 40 //distancia percorrida a cada passo dos personagens
 
 typedef struct item {
@@ -35,16 +35,12 @@ class AI
     */
    
    public:
-//    void destinoNpcs(Lpersonagem * npc);
+        //void destinoNpcs(Lpersonagem * npc);
 
 	AI(){} //Construtor
 	~AI(){} //DESTRUIDOR !!!
 	void destinoNpc(personagem * npc);
       
-// private:
-       
-//     int velocidade;
-        
 	/* A funcao iniciaListaCampos() zera uma lista de campos para uso */  
         void AI::iniciaListaCampos();
    
