@@ -27,7 +27,9 @@ int main()
    Farso_Iniciar(&screen,"Teste Engine DccNiTghtmare");
    engine* Engine = new engine("../data/mapas/mapaTp4.map");
    Engine->Iniciar(screen);
-   Engine->server = server;
+   #ifdef REDE
+      Engine->server = server;
+   #endif
  //  glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",0,0,
@@ -35,7 +37,9 @@ int main()
 
    Engine->Rodar(screen);
 
-   free(Engine->server); 
+   #ifdef REDE
+      free(Engine->server); 
+   #endif
    free(Engine);
 
    return(0); 

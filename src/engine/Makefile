@@ -10,10 +10,10 @@ ENDMAPA = ../map/
 ENDNET = ../net/
 OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapobjeto.o
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
-OBJSNET = $(ENDNET)client.o $(ENDNET)common.o
+OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJS = conversa.o culling.o dccnit.o ../etc/glm.o personagens.o teste.o
 BIN = ../../bin/
-SUPREDE = -DREDE #comente para nao ter suporte a rede na bagaca
+SUPREDE = #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
 
 all: teste
