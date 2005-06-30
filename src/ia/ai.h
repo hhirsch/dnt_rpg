@@ -10,12 +10,19 @@
 #define COVELOCIDADE 100 //converte de agilidade para o n° de ciclos de espera      
 #define PASSO 40 //distancia percorrida a cada passo dos personagens
 
+#define TLISTACAMPOS 20
+
 typedef struct item {
     double x, z;       /* Coordenadas */
     int tipo;          /* Tipo do Item */
     item * prox;       /* Proximo na lista */
-    int raio;          /* Raio de acao */
+    double raio;          /* Raio de acao */
 } item;    
+
+typedef struct Litem {
+	item campos[TLISTACAMPOS];
+	int tamanhoLista;
+} Litem;
 
 /* As duas funcoes abaixo fornecem da engine o que e' necessario para a ai
  * campoInfluencia recebe a posicao inicial, e o raio de acao do campo
@@ -35,14 +42,16 @@ class AI
     */
    
    public:
-        //void destinoNpcs(Lpersonagem * npc);
+   //void destinoNpcs(Lpersonagem * npc);
 
 	AI(){} //Construtor
 	~AI(){} //DESTRUIDOR !!!
+
+	/* Para onde vai o NPC ? */
 	void destinoNpc(personagem * npc);
       
 	/* A funcao iniciaListaCampos() zera uma lista de campos para uso */  
-        void AI::iniciaListaCampos();
+   void AI::iniciaListaCampos();
    
 
 	/* A funcao campoInfluencia insere um novo campo de influencia na lista dos que estao influenciando */	 

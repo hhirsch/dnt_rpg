@@ -1,14 +1,19 @@
 #include "ai.h"
 
+Litem listaCampos;
+	
 int main()
 {
+	
 	double total[2];
 	personagem npc;
-	AI npc_ai;	
+	AI npc_ai;
 	int i;
 
-	npc.posicaoLadoX = 0;
-	npc.posicaoLadoZ = 0;
+
+	npc.posicaoLadoX = 2;
+	npc.posicaoLadoZ = 3;
+	npc_ai.iniciaListaCampos();
 
 	for (i = 0 ; i < 5 ; i++)
 	{
@@ -21,30 +26,35 @@ int main()
 
 void AI::iniciaListaCampos()
 {
-   //tamanhoLista = 0;   //coloca o item atual no 0;
+	int i;
+	int aux = 1;
+
+	listaCampos.tamanhoLista = 0;   //coloca o item atual no 0;
+
+	for (i = 0; i < TLISTACAMPOS; i++){
+		listaCampos.campos[i].x = aux + 5;
+		listaCampos.campos[i].z = aux + 3;
+		listaCampos.campos[i].tipo = TIPOOBSTACULO;
+		listaCampos.campos[i].raio = aux + 7;
+		aux *= -3;
+	}
+	
 }
 
 void AI:: campoInfluencia (double posX, double posZ, int tipo, double raio )
 {
-    /* Versao Farrer */
-    /*
-        lista[tamanhoLista].x = posX;
-        lista[tamanhoLista].z = posZ;
-        lista[tamanhoLista].tipo = tipo;
-        lista[tamanhoLista].raio
-        tamanhoLista++;
-    */
-	item item2;
-	item2.x = 10;
-	item2.z = 10;
-	item2.tipo = TIPOOBSTACULO;
-	item2.prox = NULL;
-	itens->prox = &item2; 
+        listaCampos.campos[listaCampos.tamanhoLista].x = posX;
+        listaCampos.campos[listaCampos.tamanhoLista].z = posZ;
+        listaCampos.campos[listaCampos.tamanhoLista].tipo = tipo;
+        listaCampos.campos[listaCampos.tamanhoLista].raio = raio;
+        listaCampos.tamanhoLista++;
 }
     
 void AI:: moverNpc (personagem *npc, double posX, double posZ)
 {
-	printf("Posicao do elemento:%.3lf,%.3lf\n", posX, posZ);
+	npc->posicaoLadoX += posX;
+	npc->posicaoLadoZ += posZ;
+	printf("Posicao do elemento: %.3lf , %.3lf\n", posX, posZ);
 }
 
 void AI:: calculaCampo(double posXP, double posZP,double posXO, double posZO,
@@ -52,7 +62,7 @@ void AI:: calculaCampo(double posXP, double posZP,double posXO, double posZO,
 {
      double quadradoDifX= ((posXP - posXO)*(posXP - posXO));
      double quadradoDifZ= ((posZP - posZO)*(posZP - posZO));
-     
+
      if (tipoCampo== TIPOOBSTACULO || tipoCampo== TIPONPC)
      {
          /* o campo nestes casos varia com d a quarta */
@@ -67,53 +77,41 @@ void AI:: calculaCampo(double posXP, double posZP,double posXO, double posZO,
      if (quadradoDifZ)
        retorno[1]= (tipoCampo * brutalidade) /quadradoDifZ;
      else retorno[1]=0;
+	  
 }               
         
 void AI:: normalizarVetor (double * vetor)
 {
-      double x = vetor[0]*vetor[0];
-      double z = vetor[1]*vetor[1];
-      double norma = sqrt((x+z));
+	double x = vetor[0]*vetor[0];
+	double z = vetor[1]*vetor[1];
+	double norma = sqrt((x+z));
       
-      vetor[0]/= norma;
-      vetor[1]/= norma;
-      vetor[0]*=PASSO;
-      vetor[1]*=PASSO;
-      
+	vetor[0]/= norma;
+	vetor[1]/= norma;
+	vetor[0]*=PASSO;
+	vetor[1]*=PASSO;
 }
 
 void AI:: calculaVetorResultante (personagem npc, double * total)
 {
-      item itens; //nodo cabeca da lista
-      item * aux;
-      item * desalocar;
       double vetorParcial [2];
-      
-      campoInfluencia (npc.posicaoLadoX,npc.posicaoLadoZ, &itens); 
-      aux= itens.prox; 
-      int x;
-      while(x != 1)
-      {
-        calculaCampo(npc.posicaoLadoX, npc.posicaoLadoZ,aux->x, aux->z,
-                     aux->tipo, npc.brutalidade, vetorParcial);
+		int tipo = TIPONPC;
+		double raio = 20.0;
+		int i;
+
+      for(i = 0; i < TLISTACAMPOS; i++){
+		
+      	campoInfluencia (listaCampos.campos[i].x, listaCampos.campos[i].z, 
+								  listaCampos.campos[i].tipo, listaCampos.campos[i].raio); 
+			
+   	   calculaCampo(npc.posicaoLadoX, npc.posicaoLadoZ, listaCampos.campos[i].x, 
+							 listaCampos.campos[i].z, listaCampos.campos[i].tipo, npc.brutalidade,
+							 vetorParcial);
                      
          total[0]+= vetorParcial[0];
          total[1]+= vetorParcial[1];
-         if (aux->prox == NULL)
-	    break;
-	 aux= aux->prox;
-	 x = 1;
       }
-      /* nada de memory leak :-) */
-      aux= itens.prox;
-      while (x!=1)
-      {
-          desalocar= aux->prox;
-          free(aux);
-          aux= desalocar;
-          x = 1;
-      }
-  }
+}
   
 /*              
 // Necessário na Função do cesão de múltiplos NPCs
