@@ -34,9 +34,9 @@ void AI:: moverNpc (personagem *npc, double posX, double posZ)
 	printf("Posicao do elemento:%.3lf,%.3lf\n", posX, posZ);
 }
 
- void AI:: calculaCampo(double posXP, double posZP,double posXO, double posZO,
+void AI:: calculaCampo(double posXP, double posZP,double posXO, double posZO,
                         int tipoCampo, int brutalidade, double * retorno)
- {
+{
      double quadradoDifX= ((posXP - posXO)*(posXP - posXO));
      double quadradoDifZ= ((posZP - posZO)*(posZP - posZO));
      
@@ -54,10 +54,10 @@ void AI:: moverNpc (personagem *npc, double posX, double posZ)
      if (quadradoDifZ)
        retorno[1]= (tipoCampo * brutalidade) /quadradoDifZ;
      else retorno[1]=0;
-  }               
+}               
         
-  void AI:: normalizarVetor (double * vetor)
-  {
+void AI:: normalizarVetor (double * vetor)
+{
       double x = vetor[0]*vetor[0];
       double z = vetor[1]*vetor[1];
       double norma = sqrt((x+z));
@@ -65,12 +65,12 @@ void AI:: moverNpc (personagem *npc, double posX, double posZ)
       vetor[0]/= norma;
       vetor[1]/= norma;
       vetor[0]*=PASSO;
-      vetor[1]*=PASSO;     
+      vetor[1]*=PASSO;
       
-  }
-  
-  void AI:: calculaVetorResultante (personagem npc, double * total)
-  {
+}
+
+void AI:: calculaVetorResultante (personagem npc, double * total)
+{
       item itens; //nodo cabeca da lista
       item * aux;
       item * desalocar;
@@ -86,10 +86,10 @@ void AI:: moverNpc (personagem *npc, double posX, double posZ)
                      
          total[0]+= vetorParcial[0];
          total[1]+= vetorParcial[1];
-			if (aux->prox == NULL)
-				break;
-	      aux= aux->prox;
-			x = 1;
+         if (aux->prox == NULL)
+	    break;
+	 aux= aux->prox;
+	 x = 1;
       }
       /* nada de memory leak :-) */
       aux= itens.prox;
@@ -98,8 +98,8 @@ void AI:: moverNpc (personagem *npc, double posX, double posZ)
           desalocar= aux->prox;
           free(aux);
           aux= desalocar;
-			 x = 1;
-      }                  
+          x = 1;
+      }
   }
   
 /*              
@@ -125,7 +125,7 @@ void AI:: destinoNpc(personagem * npc)
 
 }
 
- /*
+/*
 
 // Função do Cesão pra múltiplos NPCs
  
@@ -161,7 +161,7 @@ void AI:: destinoNpc(personagem * npc)
           {
             velocidades[contagem++]= (atual->agilidade)* COVELOCIDADE;
             atual= atual->proximo;
-          }      
+          }     
             
       }
       atual= npc->primeiro->proximo;

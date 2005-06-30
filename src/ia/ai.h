@@ -11,10 +11,10 @@
 #define PASSO 40 //distancia percorrida a cada passo dos personagens
 
 typedef struct item {
-    double x, z;
-    int tipo; //de acordo com os tipos acima
-    item * prox;
-	 int raio;
+    double x, z;       /* Coordenadas */
+    int tipo;          /* Tipo do Item */
+    item * prox;       /* Proximo na lista */
+    int raio;          /* Raio de acao */
 } item;    
 
 /* As duas funcoes abaixo fornecem da engine o que e' necessario para a ai
@@ -37,36 +37,34 @@ class AI
    public:
 //    void destinoNpcs(Lpersonagem * npc);
 
-		AI(){} //Construtor
-		~AI(){} //DESTRUIDOR !!!
-		void destinoNpc(personagem * npc);
+	AI(){} //Construtor
+	~AI(){} //DESTRUIDOR !!!
+	void destinoNpc(personagem * npc);
       
 // private:
        
 //     int velocidade;
      
 		 
-	    void campoInfluencia (double posY, double posZ, item *itens);
-		 void moverNpc (personagem *npc, double posX, double posZ);
+	void campoInfluencia (double posY, double posZ, item *itens);
+	void moverNpc (personagem *npc, double posX, double posZ);
 		 
-       void calculaCampo(double posXP, double posZP, double posXO, double posZO,
-		 						 int tipoCampo, int brutalidade, double * retorno);
+	void calculaCampo(double posXP, double posZP, double posXO, 
+			double posZO,int tipoCampo, int brutalidade, 
+			double * retorno);
                          
        /* NNormaliza vetor e' para garantir uma distancia de passo fixa.
         */                  
-       
        void normalizarVetor (double * vetor);
        
        /* calculaVetorResultante calcula o vetor envolvendo todas as forcas
         * sobre o npc e a retorna. Nao normaliza.
         */
-       
        void calculaVetorResultante (personagem npc, double * total);
        
        /* Para variar a velocidade dos personagens e tornar o movimento visivel
         * alguns dos ciclos os npcs nao terao a posicao modificada
         */
-       
        int deveMover (int indice);
         
 };                 
