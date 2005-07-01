@@ -1,7 +1,8 @@
 #include "ai.h"
 
 Litem listaCampos;
-	
+
+#ifdef TESTE	
 int main()
 {
 	
@@ -23,6 +24,8 @@ int main()
 
 	return(EXIT_SUCCESS);
 }
+
+#endif
 
 void AI::iniciaListaCampos()
 {
