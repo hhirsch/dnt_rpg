@@ -10,6 +10,7 @@
 #include "../map/map.h"
 #include "personagens.h"
 #include "luta.h"
+#include "../ia/ai.h"
 #ifdef REDE
   #include "../net/client.h"
 //  #include "../net/common.h"

@@ -55,8 +55,8 @@ void AI:: campoInfluencia (double posX, double posZ, int tipo, double raio )
     
 void AI:: moverNpc (personagem *npc, double posX, double posZ)
 {
-	npc->posicaoLadoX += posX;
-	npc->posicaoLadoZ += posZ;
+	npc->posicaoLadoX = posX;
+	npc->posicaoLadoZ = posZ;
 	printf("Posicao do elemento: %.3lf , %.3lf\n", posX, posZ);
 }
 

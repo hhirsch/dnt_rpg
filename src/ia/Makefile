@@ -12,7 +12,7 @@ ai.o: ai.cpp ai.h
 	$(CPP) $(CFLAGS) ai.cpp -o ai.o
 
 teste: ai.cpp ai.h
-	$(CPP) $(CFLAGS) -DTESTE ai.cpp -o testeai
+	$(CPP) $(EFLAGS) -DTESTE ai.cpp -o testeai
 
 clean:
 	\rm -rf $(OBJS) ./testeai

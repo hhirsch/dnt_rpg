@@ -767,7 +767,7 @@ int engine::Rodar(SDL_Surface *surface)
    centroZ = mapa->zInic;
    PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
 
-   /* ia = new(AI); */
+   AI* ia = new(AI); 
    
    /* Desenha a primeira Cena */
 //   Desenhar();
@@ -789,17 +789,25 @@ int engine::Rodar(SDL_Surface *surface)
    while(TrataES(surface,&forcaAtualizacao))
    {
        /* Trata a IA dos Personagens */
-       /* 
+        
            ia->iniciaListaCampos();
            ia->campoInfluencia(PCs->personagemAtivo->posicaoLadoX,
                                PCs->personagemAtivo->posicaoLadoZ,
                                TIPOPC, 100);
-           enquanto dentro do campo de visao
+       /*    enquanto dentro do campo de visao
            se tem objeto ou quadrado nao eh pisavel
               ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
        */
 
 
+
+      /* Trata a Rede. Por padrao, nao estamos usando a rede, uma vez 
+       * que a mesma nao se encontra no escopo inicial do projeto, somente
+       * sendo util quando se estiver em um estado estável do jogo.
+       * No mais, MMORPG é um saco. O bom de rede eh jogar com conhecidos.
+       * Mais uma vez farrer fazendo juízos no meio do código. Deve ser louco
+       * mesmo. argh!
+       */
     #ifdef REDE
       while( (eventoRede = pollnet( &clientData ) ) != NULL )
       {
@@ -866,6 +874,8 @@ int engine::Rodar(SDL_Surface *surface)
 
 
    }
+
+   delete(ia);
    return(1);
 }
 
