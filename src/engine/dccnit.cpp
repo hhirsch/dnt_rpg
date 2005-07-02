@@ -374,7 +374,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
         redesenha = 1;
       }
    }
-   if((redesenha) || (*forcaAtualizacao != 0 ))
+   if((redesenha) || ((*forcaAtualizacao != 0)&&((tempo-ultimaLeitura)>=16)))
    {
       Desenhar();
       SDL_GL_SwapBuffers();
@@ -769,10 +769,6 @@ int engine::Rodar(SDL_Surface *surface)
 
    AI* ia = new(AI); 
    
-   /* Desenha a primeira Cena */
-//   Desenhar();
-//   SDL_GL_SwapBuffers();
-
    #ifdef REDE
      netevent_p_t eventoRede;
      
@@ -794,7 +790,7 @@ int engine::Rodar(SDL_Surface *surface)
            ia->campoInfluencia(PCs->personagemAtivo->posicaoLadoX,
                                PCs->personagemAtivo->posicaoLadoZ,
                                TIPOPC, 100);
-       /*    enquanto dentro do campo de visao
+       /*    enquanto dentro do campo de visao do npc
            se tem objeto ou quadrado nao eh pisavel
               ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
        */
