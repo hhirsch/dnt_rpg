@@ -35,6 +35,12 @@ int main()
    Engine->PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",0,0,
                  "Rainha","../data/models/personagens/logan_completo_final.obj","../data/pics/logan/");
 
+   personagem* per;
+   per = Engine->NPCs->InserirPersonagem(7,6,10,6,"../data/pics/logan/portrait.jpg",0,
+                     0,"NPC","../data/models/personagens/logan_completo_final.obj", "../data/pics/logan/");
+   per->posicaoLadoX = 300;
+   per->posicaoLadoZ = 200;
+
    Engine->Rodar(screen);
 
    #ifdef REDE

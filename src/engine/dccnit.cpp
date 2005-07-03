@@ -70,7 +70,7 @@ void engine::Redmensiona(SDL_Surface *screen)
 }
 
 /*********************************************************************
- *                    Inicia e Engine para Uso                       *
+ *                   Inicia e Engine para Uso                        *
  *********************************************************************/
 void engine::Iniciar(SDL_Surface *screen)
 {
@@ -127,12 +127,14 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    double varX, varZ; // para evitar de ter de calcular 2 vezes
 
    tempo = SDL_GetTicks();
-
    if( ((tempo-ultimaLeitura)) >= 16)
    {
 //      printf("FPS: %f\t",1000.0 / (float)(tempo-ultimaLeitura));
       SDL_PumpEvents();
       ultimaLeitura = tempo;
+
+        
+      TrataIA();
        
       /* Tratamento das Teclas */
       Uint8 *keys;
@@ -374,7 +376,13 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
         redesenha = 1;
       }
    }
-   if((redesenha) || ((*forcaAtualizacao != 0)&&((tempo-ultimaLeitura)>=16)))
+
+   /*if((*forcaAtualizacao != 0))
+      printf("Era para forcar %d %d\n",tempo, ultimaLeitura);
+   if((tempo-ultimaLeitura)>=16)
+      printf("Maior que 16\n");*/
+
+   if( (redesenha) || ( (*forcaAtualizacao != 0)/* && ((tempo-ultimaLeitura)>=16)*/))
    {
       Desenhar();
       SDL_GL_SwapBuffers();
@@ -753,6 +761,62 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    return(result);
 }
 
+
+/*********************************************************************
+ *                      Tratamento da IA dos NPCs                    *
+ *********************************************************************/
+void engine::TrataIA()
+{
+   int posX, posZ;     //Posicao Auxiliar
+   personagem* per;    //Personagem Atual
+   per = (personagem*) NPCs->primeiro->proximo;
+
+   ia->iniciaListaCampos();
+
+   /* Coloca o Unico PC existente */
+   ia->campoInfluencia(PCs->personagemAtivo->posicaoLadoX,
+                       PCs->personagemAtivo->posicaoLadoZ,
+                       TIPOPC, 100);
+
+    /* Em tese seria para todos os NPCs, mas como a perseguicao
+       atual eh para so um NPC, entao roda so para ele.
+    */
+
+    /* Testa-se entao o campo de visao, montando os campos de influencia */
+    if(per->ocupaQuad->up)
+    {
+        if(per->ocupaQuad->up->flags & PISAVEL)
+        {
+            if(per->ocupaQuad->up->objetos[0])
+            {
+               ia->campoInfluencia(per->ocupaQuad->up->posX,
+                                   per->ocupaQuad->up->posZ,
+                                   TIPOOBSTACULO,30);
+            }
+        }
+        else
+          ia->campoInfluencia(per->ocupaQuad->up->posX,
+                              per->ocupaQuad->up->posZ,
+                              TIPOOBSTACULO,30);
+        if(per->ocupaQuad->up->up)
+        {
+        }
+    }
+    if(per->ocupaQuad->down)
+    {
+    }
+    /*    enquanto dentro do campo de visao do npc
+       se tem objeto ou quadrado nao eh pisavel
+         ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
+    */
+
+    /* Define-se A posicao do Personagem NPC */  
+    posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
+    posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
+    per->ocupaQuad = quadradoRelativo(posX,posZ,per->ocupaQuad);
+}
+
+
 /*********************************************************************
  *                          Roda a Engine                            *
  *********************************************************************/
@@ -760,14 +824,25 @@ int engine::Rodar(SDL_Surface *surface)
 {
 
    int forcaAtualizacao = 1; //forca a atualizacao da tela, qdo o npc anda
+   int posX, posZ;           //Posicao Auxiliar
+
+   personagem* per;
 	
+   /* Coloca Personagem Ativo na posicao de Inicio do Mapa */
    PCs->personagemAtivo->posicaoLadoX = mapa->xInic;
    PCs->personagemAtivo->posicaoLadoZ = mapa->zInic;
    centroX = mapa->xInic;
    centroZ = mapa->zInic;
    PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
 
-   AI* ia = new(AI); 
+   /* Define a Posicao do NPC em Squares */
+   per = (personagem*) NPCs->primeiro->proximo;
+   posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
+   posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
+   per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
+
+   /* Inicia AI -- Vai mudar com o tempo e ser relativa a cada NPC */
+   ia = new(AI); 
    
    #ifdef REDE
      netevent_p_t eventoRede;
@@ -784,19 +859,6 @@ int engine::Rodar(SDL_Surface *surface)
    /* Roda realmente a engine */
    while(TrataES(surface,&forcaAtualizacao))
    {
-       /* Trata a IA dos Personagens */
-        
-           ia->iniciaListaCampos();
-           ia->campoInfluencia(PCs->personagemAtivo->posicaoLadoX,
-                               PCs->personagemAtivo->posicaoLadoZ,
-                               TIPOPC, 100);
-       /*    enquanto dentro do campo de visao do npc
-           se tem objeto ou quadrado nao eh pisavel
-              ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
-       */
-
-
-
       /* Trata a Rede. Por padrao, nao estamos usando a rede, uma vez 
        * que a mesma nao se encontra no escopo inicial do projeto, somente
        * sendo util quando se estiver em um estado estável do jogo.

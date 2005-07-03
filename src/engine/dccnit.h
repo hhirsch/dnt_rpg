@@ -67,8 +67,11 @@ class engine
        * screen -> ponteiro para a tela3d atual */
       int  TrataES(SDL_Surface *screen,int *forcaAtualizacao);
 
+      /* Trata a IA dos NPCS */
+      void TrataIA();
+
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
- 
+
       Map* mapa; /* Mapa Utilizado pela Engine */
  
       GLfloat matrizVisivel[6][4]; /* MAtriz do frustum atual */
@@ -77,6 +80,8 @@ class engine
       GLint viewPort[4];
 
       Uint32 ultimaLeitura; //marca a ultima leitura da posicao do teclado
+
+      AI* ia;
 
 };
 

@@ -47,7 +47,7 @@ class Square
                 Square* quadObjetos[MAXOBJETOS];
 
 	private:
-		char * floor_texture_fname;
+		char* floor_texture_fname;
 		
 };
 
@@ -77,6 +77,7 @@ class Map
                 /* Desenha o Mapa */
 		int draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[6][4]);
 		int open( char* arquivo ); /* Abre o mapa do arquivo */
+                Square* quadradoRelativo(int x, int z);
 
 		/* Vars */
                 LmapObjeto* Objetos; 
@@ -90,7 +91,7 @@ class Map
 	private:
 		char* name;    /* Nome do Arquivo de Mapa Carregado */
 		muro* muros;   /* Muros presentes no mapa */
-                Square* quadradoRelativo(int x, int z);
+                
 
 };
 
