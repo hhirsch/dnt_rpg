@@ -134,7 +134,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       ultimaLeitura = tempo;
 
         
-      TrataIA();
+      redesenha = TrataIA();
        
       /* Tratamento das Teclas */
       Uint8 *keys;
@@ -777,9 +777,9 @@ inline void engine::verificaQuad(Square* quad)
                                    TIPOOBSTACULO,30);
             }
         }
-        else
-           ia->campoInfluencia(quad->posX,quad->posZ,
-                               TIPOOBSTACULO,30);
+        //else
+        //   ia->campoInfluencia(quad->posX,quad->posZ,
+        //                       TIPOOBSTACULO,30);
    }
 }
 
@@ -801,11 +801,12 @@ inline void engine::verificaLinha(Square* centro)
    }   
 }
 
-
-void engine::TrataIA()
+/* Retorno !=0 se modificou posicao do personagem */
+int engine::TrataIA()
 {   
 
    int posX, posZ;     //Posicao Auxiliar
+   double antX,antZ;
    personagem* per;    //Personagem Atual
    per = (personagem*) NPCs->primeiro->proximo;
 
@@ -821,24 +822,34 @@ void engine::TrataIA()
     */
 
     /* Testa-se entao o campo de visao, montando os campos de influencia */
-    verificaLinha(per->ocupaQuad);
-    if(per->ocupaQuad->up)
+    if(per->ocupaQuad)
     {
-       verificaLinha(per->ocupaQuad->up);
-       verificaLinha(per->ocupaQuad->up);
+       verificaLinha(per->ocupaQuad);
+       if(per->ocupaQuad->up)
+       {
+          verificaLinha(per->ocupaQuad->up);
+          verificaLinha(per->ocupaQuad->up);
+       }
+       verificaLinha(per->ocupaQuad->down);
+       /*    enquanto dentro do campo de visao do npc
+          se tem objeto ou quadrado nao eh pisavel
+            ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
+       */
     }
-    verificaLinha(per->ocupaQuad->down);
-    /*    enquanto dentro do campo de visao do npc
-       se tem objeto ou quadrado nao eh pisavel
-         ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
-    */
+    else
+      printf("O Personagem Saiu do Mapa!\n");
    
+    antX = per->posicaoLadoX;
+    antZ = per->posicaoLadoZ;
     ia->destinoNpc(per);
 
     /* Define-se A posicao do Personagem NPC */  
     posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
     posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
+    printf("X:%d Z:%d QX:%d QZ:%d\n",posX,posZ,per->ocupaQuad->posX,per->ocupaQuad->posZ);
     per->ocupaQuad = quadradoRelativo(posX,posZ,per->ocupaQuad);
+    //per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
+    return( (antX!=per->posicaoLadoX) || (antZ!=per->posicaoLadoZ));
 }
 
 
