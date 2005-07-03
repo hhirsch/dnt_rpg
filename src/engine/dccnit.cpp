@@ -832,6 +832,8 @@ void engine::TrataIA()
        se tem objeto ou quadrado nao eh pisavel
          ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
     */
+   
+    ia->destinoNpc(per);
 
     /* Define-se A posicao do Personagem NPC */  
     posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
