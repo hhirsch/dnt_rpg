@@ -765,6 +765,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 /*********************************************************************
  *                      Tratamento da IA dos NPCs                    *
  *********************************************************************/
+/* Monta Conjunto de campos do Quadrado */
 inline void engine::verificaQuad(Square* quad)
 {
    if(quad)
@@ -783,6 +784,7 @@ inline void engine::verificaQuad(Square* quad)
    }
 }
 
+/* Monta conjunto de Campos da linha */
 inline void engine::verificaLinha(Square* centro)
 {
    if(centro)
@@ -831,10 +833,6 @@ int engine::TrataIA()
           verificaLinha(per->ocupaQuad->up);
        }
        verificaLinha(per->ocupaQuad->down);
-       /*    enquanto dentro do campo de visao do npc
-          se tem objeto ou quadrado nao eh pisavel
-            ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
-       */
     }
     else
       printf("O Personagem Saiu do Mapa!\n");
@@ -846,9 +844,8 @@ int engine::TrataIA()
     /* Define-se A posicao do Personagem NPC */  
     posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
     posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
-    //printf("X:%d Z:%d QX:%d QZ:%d\n",posX,posZ,per->ocupaQuad->posX,per->ocupaQuad->posZ);
     per->ocupaQuad = quadradoRelativo(posX,posZ,per->ocupaQuad);
-    //per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
+
     return( (antX!=per->posicaoLadoX) || (antZ!=per->posicaoLadoZ));
 }
 

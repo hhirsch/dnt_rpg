@@ -3,35 +3,25 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define TIPOOBSTACULO -240 //constante associada ao campo feito por obstaculo
-#define TIPOPC 100       //associada ao campo feito por pc, note q e' atracao  
+#define TIPOOBSTACULO -240 
+#define TIPOPC 100           
 #define TIPONPC -260 
 
-#define COVELOCIDADE 100 //converte de agilidade para o n° de ciclos de espera      
-#define PASSO 2 //distancia percorrida a cada passo dos personagens
+#define PASSO 1         // distancia percorrida a cada passo dos personagens
 
-#define TLISTACAMPOS 20
+#define TLISTACAMPOS 20 // maximo total de campos de influencia
 
 typedef struct item {
     double x, z;       /* Coordenadas */
     int tipo;          /* Tipo do Item */
     item * prox;       /* Proximo na lista */
-    double raio;          /* Raio de acao */
+    double raio;       /* Raio de acao */
 } item;    
 
 typedef struct Litem {
 	item campos[TLISTACAMPOS];
 	int tamanhoLista;
 } Litem;
-
-/* As duas funcoes abaixo fornecem da engine o que e' necessario para a ai
- * campoInfluencia recebe a posicao inicial, e o raio de acao do campo
- * e retorna uma lista de itens para os objetos que influenciam o personagem
- * dentro do raio dado.
- * A funcao moverNpc passa o npc com a posicao atual e passa para onde ele
- * vai. A funcao deve realizar o movimento e checar se ele pode mover
- * para o destino, caso nao possa, simplesmente nao mova.
-*/
 
 
 class AI
@@ -42,38 +32,34 @@ class AI
     */
    
    public:
-   //void destinoNpcs(Lpersonagem * npc);
 
 	AI(){} //Construtor
 	~AI(){} //DESTRUIDOR !!!
+      
+	/* A funcao iniciaListaCampos() zera uma lista de campos para uso */  
+	void AI::iniciaListaCampos();
+
+	/* A funcao campoInfluencia insere um novo campo de influencia na 
+	 * lista dos que estao influenciando */	 
+	void AI:: campoInfluencia (double posX, double posZ, int tipo, 
+                                   double raio );
 
 	/* Para onde vai o NPC ? */
 	void destinoNpc(personagem * npc);
-      
-	/* A funcao iniciaListaCampos() zera uma lista de campos para uso */  
-   void AI::iniciaListaCampos();
-   
 
-	/* A funcao campoInfluencia insere um novo campo de influencia na lista dos que estao influenciando */	 
-	void AI:: campoInfluencia (double posX, double posZ, int tipo, double raio );
-	void moverNpc (personagem *npc, double posX, double posZ);
-		 
-	void calculaCampo(double posXP, double posZP, double posXO, 
-			double posZO,int tipoCampo, int brutalidade, 
-			double * retorno);
-                         
-       /* NNormaliza vetor e' para garantir uma distancia de passo fixa.
-        */                  
-       void normalizarVetor (double * vetor);
-       
-       /* calculaVetorResultante calcula o vetor envolvendo todas as forcas
-        * sobre o npc e a retorna. Nao normaliza.
-        */
-       void calculaVetorResultante (personagem npc, double * total);
-       
-       /* Para variar a velocidade dos personagens e tornar o movimento visivel
-        * alguns dos ciclos os npcs nao terao a posicao modificada
-        */
-       int deveMover (int indice);
+	private:
+	/* Normaliza vetor e' para garantir uma distancia de passo fixa.
+	 */                  
+	void normalizarVetor (double * vetor);
+
+	/* calculaVetorResultante calcula o vetor envolvendo todas as forcas
+	 * sobre o npc e a retorna. Nao normaliza.
+	 */
+	void calculaVetorResultante (personagem npc, double * total);
+
+        /* Atualiza as coordenadas do NPC */
+        void moverNpc (personagem *npc, double posX, double posZ);
+ 
+        Litem listaCampos;
         
 };                 
