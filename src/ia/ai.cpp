@@ -33,12 +33,12 @@ void AI::iniciaListaCampos()
 
 	listaCampos.tamanhoLista = 0;   //coloca o item atual no 0;
 
-	for (i = 0; i < TLISTACAMPOS; i++){
+	/*for (i = 0; i < TLISTACAMPOS; i++){
 		listaCampos.campos[i].x = 0;
 		listaCampos.campos[i].z = 0;
 		listaCampos.campos[i].tipo = TIPOOBSTACULO;
 		listaCampos.campos[i].raio = 0;
-	}
+	}*/
 	
 }
 
@@ -53,14 +53,34 @@ void AI:: campoInfluencia (double posX, double posZ, int tipo, double raio )
     
 void AI:: moverNpc (personagem *npc, double posX, double posZ)
 {
-	npc->posicaoLadoX = posX;
-	npc->posicaoLadoZ = posZ;
-	printf("Posicao do elemento: %.3lf , %.3lf\n", posX, posZ);
+	if(posX>=0)
+          npc->posicaoLadoX = posX;
+        else
+          npc->posicaoLadoX = 0;
+	if(posZ>=0)
+          npc->posicaoLadoZ = posZ;
+        else
+          npc->posicaoLadoZ = 0;
+	//printf("Posicao do elemento: %.3lf , %.3lf\n", posX, posZ);
 }
 
 void AI:: calculaCampo(double posXP, double posZP,double posXO, double posZO,
                         int tipoCampo, int brutalidade, double * retorno)
 {
+#if 0
+   if(tipoCampo == TIPOPC)
+   {
+      retorno[0] = -(posXP - posXO);
+      retorno[1] = -(posZP - posZO);
+   }
+   else
+   {
+      retorno[0] = (posXP - posXO);
+      retorno[1] = (posZP - posZO);
+   }
+#endif
+
+//#if 0
      double quadradoDifX= ((posXP - posXO)*(posXP - posXO));
      double quadradoDifZ= ((posZP - posZO)*(posZP - posZO));
 
@@ -78,6 +98,8 @@ void AI:: calculaCampo(double posXP, double posZP,double posXO, double posZO,
      if (quadradoDifZ)
        retorno[1]= (tipoCampo * brutalidade) /quadradoDifZ;
      else retorno[1]=0;
+
+//#endif
 	  
 }               
         
@@ -87,7 +109,7 @@ void AI:: normalizarVetor (double * vetor)
 	double z = vetor[1]*vetor[1];
 	double norma = sqrt((x+z));
       
-	vetor[0]/= norma;
+        vetor[0]/= norma;
 	vetor[1]/= norma;
 	vetor[0]*=PASSO;
 	vetor[1]*=PASSO;
@@ -96,19 +118,30 @@ void AI:: normalizarVetor (double * vetor)
 void AI:: calculaVetorResultante (personagem npc, double * total)
 {
       double vetorParcial [2];
-		int tipo = TIPONPC;
-		double raio = 20.0;
+		//int tipo = TIPONPC;
+		//double raio = 20.0;
 		int i;
-
-      for(i = 0; i < TLISTACAMPOS; i++){
+      total[0] = 0;
+      total[1] = 0;
+      //printf("lista: %d\n",listaCampos.tamanhoLista);
+      for(i = 0; i < listaCampos.tamanhoLista; i++){
 		
-      	campoInfluencia (listaCampos.campos[i].x, listaCampos.campos[i].z, 
-								  listaCampos.campos[i].tipo, listaCampos.campos[i].raio); 
+      	//campoInfluencia (listaCampos.campos[i].x, listaCampos.campos[i].z,
+        //             listaCampos.campos[i].tipo, listaCampos.campos[i].raio); 
 			
-   	   calculaCampo(npc.posicaoLadoX, npc.posicaoLadoZ, listaCampos.campos[i].x, 
-							 listaCampos.campos[i].z, listaCampos.campos[i].tipo, npc.brutalidade,
-							 vetorParcial);
-                     
+         /*calculaCampo(npc.posicaoLadoX, npc.posicaoLadoZ, 
+                      listaCampos.campos[i].x, 
+                      listaCampos.campos[i].z, listaCampos.campos[i].tipo, 
+                      npc.brutalidade,vetorParcial);*/
+
+         vetorParcial[0] = npc.posicaoLadoX - listaCampos.campos[i].x;
+         vetorParcial[1] = npc.posicaoLadoZ - listaCampos.campos[i].z;
+         //printf("%f %f\n",vetorParcial[0],vetorParcial[1]);
+         if(listaCampos.campos[i].tipo == TIPOPC)
+         {
+             vetorParcial[0] = -1*vetorParcial[0];
+             vetorParcial[1] = -1*vetorParcial[1];
+         }            
          total[0]+= vetorParcial[0];
          total[1]+= vetorParcial[1];
       }

@@ -777,9 +777,9 @@ inline void engine::verificaQuad(Square* quad)
                                    TIPOOBSTACULO,30);
             }
         }
-        //else
-        //   ia->campoInfluencia(quad->posX,quad->posZ,
-        //                       TIPOOBSTACULO,30);
+        else
+           ia->campoInfluencia(quad->posX,quad->posZ,
+                               TIPOOBSTACULO,30);
    }
 }
 
@@ -846,7 +846,7 @@ int engine::TrataIA()
     /* Define-se A posicao do Personagem NPC */  
     posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
     posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
-    printf("X:%d Z:%d QX:%d QZ:%d\n",posX,posZ,per->ocupaQuad->posX,per->ocupaQuad->posZ);
+    //printf("X:%d Z:%d QX:%d QZ:%d\n",posX,posZ,per->ocupaQuad->posX,per->ocupaQuad->posZ);
     per->ocupaQuad = quadradoRelativo(posX,posZ,per->ocupaQuad);
     //per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
     return( (antX!=per->posicaoLadoX) || (antZ!=per->posicaoLadoZ));
