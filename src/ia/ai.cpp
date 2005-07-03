@@ -30,16 +30,14 @@ int main()
 void AI::iniciaListaCampos()
 {
 	int i;
-	int aux = 1;
 
 	listaCampos.tamanhoLista = 0;   //coloca o item atual no 0;
 
 	for (i = 0; i < TLISTACAMPOS; i++){
-		listaCampos.campos[i].x = aux + 5;
-		listaCampos.campos[i].z = aux + 3;
+		listaCampos.campos[i].x = 0;
+		listaCampos.campos[i].z = 0;
 		listaCampos.campos[i].tipo = TIPOOBSTACULO;
-		listaCampos.campos[i].raio = aux + 7;
-		aux *= -3;
+		listaCampos.campos[i].raio = 0;
 	}
 	
 }
@@ -66,11 +64,11 @@ void AI:: calculaCampo(double posXP, double posZP,double posXO, double posZO,
      double quadradoDifX= ((posXP - posXO)*(posXP - posXO));
      double quadradoDifZ= ((posZP - posZO)*(posZP - posZO));
 
-     if (tipoCampo== TIPOOBSTACULO || tipoCampo== TIPONPC)
+     if (tipoCampo== TIPOOBSTACULO /*|| tipoCampo== TIPONPC*/)
      {
          /* o campo nestes casos varia com d a quarta */
-         quadradoDifX*= quadradoDifX; 
-         quadradoDifZ*= quadradoDifZ;
+         quadradoDifX*= (quadradoDifX * quadradoDifX); 
+         quadradoDifZ*= (quadradoDifZ * quadradoDifZ);
      }                               
      
      if (quadradoDifX) 

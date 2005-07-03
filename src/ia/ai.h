@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define TIPOOBSTACULO 240 //constante associada ao campo feito por obstaculo
-#define TIPOPC -100       //associada ao campo feito por pc, note q e' atracao  
-#define TIPONPC 260 
+#define TIPOOBSTACULO -240 //constante associada ao campo feito por obstaculo
+#define TIPOPC 100       //associada ao campo feito por pc, note q e' atracao  
+#define TIPONPC -260 
 
 #define COVELOCIDADE 100 //converte de agilidade para o n° de ciclos de espera      
-#define PASSO 40 //distancia percorrida a cada passo dos personagens
+#define PASSO 2 //distancia percorrida a cada passo dos personagens
 
 #define TLISTACAMPOS 20
 
