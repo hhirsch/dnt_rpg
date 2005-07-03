@@ -68,6 +68,8 @@ class engine
       int  TrataES(SDL_Surface *screen,int *forcaAtualizacao);
 
       /* Trata a IA dos NPCS */
+      inline void verificaQuad(Square* quad);
+      inline void verificaLinha(Square* centro);
       void TrataIA();
 
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);

@@ -765,8 +765,46 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 /*********************************************************************
  *                      Tratamento da IA dos NPCs                    *
  *********************************************************************/
-void engine::TrataIA()
+inline void engine::verificaQuad(Square* quad)
 {
+   if(quad)
+   {
+       if(quad->flags & PISAVEL)
+       {
+            if(quad->objetos[0])
+            {
+               ia->campoInfluencia(quad->posX,quad->posZ,
+                                   TIPOOBSTACULO,30);
+            }
+        }
+        else
+           ia->campoInfluencia(quad->posX,quad->posZ,
+                               TIPOOBSTACULO,30);
+   }
+}
+
+inline void engine::verificaLinha(Square* centro)
+{
+   if(centro)
+   {
+       verificaQuad(centro);
+       if(centro->left)
+       {
+          verificaQuad(centro->left);
+          verificaQuad(centro->left->left);
+       }
+       if(centro->right)
+       {
+          verificaQuad(centro->right);
+          verificaQuad(centro->right->right);
+       }
+   }   
+}
+
+
+void engine::TrataIA()
+{   
+
    int posX, posZ;     //Posicao Auxiliar
    personagem* per;    //Personagem Atual
    per = (personagem*) NPCs->primeiro->proximo;
@@ -783,28 +821,13 @@ void engine::TrataIA()
     */
 
     /* Testa-se entao o campo de visao, montando os campos de influencia */
+    verificaLinha(per->ocupaQuad);
     if(per->ocupaQuad->up)
     {
-        if(per->ocupaQuad->up->flags & PISAVEL)
-        {
-            if(per->ocupaQuad->up->objetos[0])
-            {
-               ia->campoInfluencia(per->ocupaQuad->up->posX,
-                                   per->ocupaQuad->up->posZ,
-                                   TIPOOBSTACULO,30);
-            }
-        }
-        else
-          ia->campoInfluencia(per->ocupaQuad->up->posX,
-                              per->ocupaQuad->up->posZ,
-                              TIPOOBSTACULO,30);
-        if(per->ocupaQuad->up->up)
-        {
-        }
+       verificaLinha(per->ocupaQuad->up);
+       verificaLinha(per->ocupaQuad->up);
     }
-    if(per->ocupaQuad->down)
-    {
-    }
+    verificaLinha(per->ocupaQuad->down);
     /*    enquanto dentro do campo de visao do npc
        se tem objeto ou quadrado nao eh pisavel
          ia->campoInfluencia(posX, posZ, TIPOOBSTACULO, 30);
