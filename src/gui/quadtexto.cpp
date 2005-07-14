@@ -21,7 +21,7 @@ void quadroTexto::Desenhar(int Xjan,int Yjan, int Salvar, SDL_Surface *screen)
    {
       //SDL_Flip(screen);
       //SDL_GL_SwapBuffers();
-      AtualizaTela2D(screen);
+      //AtualizaTela2D(screen);
    }
 }
 

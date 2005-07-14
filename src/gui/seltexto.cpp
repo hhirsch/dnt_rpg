@@ -29,7 +29,7 @@ void selTexto::Desenhar(int Xjan,int Yjan,int selecionado,int salvar,
    if(salvar)
    {
      //SDL_Flip(screen);
-     AtualizaTela2D(screen);
+     //AtualizaTela2D(screen);
    }
 }
 
@@ -64,55 +64,44 @@ void selTexto::EscreveSelecionado(int Xjan,int Yjan,int selecionado,
 
    /*SDL_Flip(screen);
    SDL_GL_SwapBuffers();*/
-   AtualizaTela2D(screen);
+   //AtualizaTela2D(screen);
 }
 
-void selTexto::Tratar(int Xjan,int Yjan,SDL_Surface *screen)
+int selTexto::Tratar(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen, 
+                     int Xjan, int Yjan)
 {
-    int pronto = 0;
-    int selecionado = -1;
-    int selaux;
+    int selaux = 1;
     int aux;
-    int xa,ya;
-    Uint8 Mbotao;
 
-    while(!pronto)
+    /* Descolore o ultimo selecionado */
+    EscreveSelecionado(0,0,-1, screen);
+
+    if(!mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,xa,ya))
+       return(0);
+
+    /* Trata o caso do mouse encima do texto */
+    for(aux=0;aux<5;aux++)
     {
-        SDL_PumpEvents();
-        Mbotao = SDL_GetMouseState(&xa,&ya);
-        if(!mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,xa,ya))
-           pronto = 1;
-        else
+        if((aux>0) && (aux<4))
         {
-        /* Trata o caso do mouse encima do texto */
-        for(aux=0;aux<5;aux++)
-        {
-            if((aux>0) && (aux<4))
-            {
-               if((ya > (Yjan+y[aux-1]+11)) && (ya < (Yjan+y[aux+1]) ) )
-                  selaux = aux;
-            }
-            else if( (aux==0) && (ya < (Yjan + y[aux+1])))
-               selaux = aux;
-            else if( (aux==4) && (ya > Yjan + y[aux-1]+11) )
-               selaux = aux;
-        } 
-        if(selaux != selecionado)
-        {
-           selecionado = selaux;
-           /* Descolore o ultimo selecionado */
-           EscreveSelecionado(Xjan,Yjan,-1, screen);
-           /* Colore o selecionado atual */
-           EscreveSelecionado(Xjan,Yjan, selecionado, screen);
+           if((ya > (Yjan+y[aux-1]+11)) && (ya < (Yjan+y[aux+1]) ) )
+              selaux = aux;
         }
-        /* Testa pressionamento do texto */
-        if( Mbotao & SDL_BUTTON(1) && procPres != NULL )
-        {
-            procPres(screen, selecionado);
-        }
-        }
+        else if( (aux==0) && (ya < (Yjan + y[aux+1])))
+           selaux = aux;
+        else if( (aux==4) && (ya > Yjan + y[aux-1]+11) )
+           selaux = aux;
+    } 
+ 
+    /* Colore o selecionado atual */
+    EscreveSelecionado(0,0, selaux, screen);
+
+    /* Testa pressionamento do texto */
+    if( Mbotao & SDL_BUTTON(1) && procPres != NULL )
+    {
+        procPres(screen, selaux);
     }
-    EscreveSelecionado(Xjan,Yjan, -1, screen);
+    return(1);
 }
 
 

@@ -25,6 +25,7 @@ engine::engine(char* arqMapa)
    /* Inicia as Listas Internas */
    NPCs = new (Lpersonagem);
    PCs  = new (Lpersonagem);
+   gui  = new interface(NULL);
 
    /* Abre o Mapa Desejado */
    mapa = new(Map);
@@ -53,6 +54,7 @@ engine::~engine()
    //glDeleteLists(mapaDesenhar,1);
    delete(NPCs);
    delete(PCs);
+   delete(gui);
    delete(mapa);
 }
 
@@ -112,7 +114,17 @@ void engine::Iniciar(SDL_Surface *screen)
      glFogf(GL_FOG_START,300.0);
      glFogf(GL_FOG_END,1000.0);
    }*/
-
+   janela *jan = gui->ljan->InserirJanela(0,0,255,127,"Janela",1,1,NULL,NULL);
+   jan->Ativar(gui->ljan);
+   jan=gui->ljan->InserirJanela(100,100,355,355,"Logan, O Mutante",1,1,NULL,NULL);
+   jan->objetos->InserirFigura(8,20,"../data/pics/logan/cara.bmp");
+   jan->objetos->InserirQuadroTexto(90,20,250,95,1,"Fale humano ridiculo.Tens alguma comida? Os avestruzes voam sem asas e os grilos pulam feito GRILOS! Ou seriam gafanhotos?");
+   jan->objetos->InserirSelTexto(8,100,250,250,"1 - Ora, o que faz um mutante nesta janela? Nao tens medo de virar um quadro?",
+                      "2 - Aonde esta sua orelha esquerda, mutante?",
+                      "3 - (entrega um grilo ao mutante) Fiquei sabendo que eh esta sua comida habitual.", 
+                      "4 - EBA!","5 - Uai so, que que eu to fazendo aqui, num tenho mais ess cabelo nao!!",NULL);
+   /* janela_Desenhar(*j.primeiro->proximo,1,screen, REDESENHA); */
+   jan->Ativar(gui->ljan);
 }
 
 
@@ -134,11 +146,23 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       ultimaLeitura = tempo;
 
         
-      redesenha = TrataIA();
+      //redesenha = TrataIA();
        
       /* Tratamento das Teclas */
       Uint8 *keys;
       keys = SDL_GetKeyState(NULL);
+
+      int x,y;
+      Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+
+      /* Trata A GUI */
+      if(gui->ManipulaEventos(x,y,Mbotao,keys)!=NADA)
+      {
+         redesenha = 1;
+      }
+      else
+      {
+
       if ( keys[SDLK_ESCAPE] ) // Sai da Engine
          return(0);
 
@@ -361,8 +385,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       
 
       /* Tratamento do Mouse */
-      int x,y;
-      SDL_GetMouseState(&x,&y);
 
       /* Tratamento do Mouse para Camera */
       if(x == 0)    // Gira a Camera horariamente
@@ -376,11 +398,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
         redesenha = 1;
       }
    }
-
-   /*if((*forcaAtualizacao != 0))
-      printf("Era para forcar %d %d\n",tempo, ultimaLeitura);
-   if((tempo-ultimaLeitura)>=16)
-      printf("Maior que 16\n");*/
+   }
 
    if( (redesenha) || ( (*forcaAtualizacao != 0)/* && ((tempo-ultimaLeitura)>=16)*/))
    {
@@ -485,6 +503,8 @@ void engine::Desenhar()
       glVertex3f(x4,y4,z4);
    glEnd();
    glDisable(GL_TEXTURE_2D);
+
+   gui->Desenhar(proj,modl,viewPort);
 
    glFlush();
 }

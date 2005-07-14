@@ -9,7 +9,7 @@
 #include "fonte.h"
 
 /*Desenha o botao (bot) na tela*/
-void botao::Desenhar(int Xjan,int Yjan,int pres,int salvar,SDL_Surface *screen)
+void botao::Desenhar(int pres, SDL_Surface *screen)
 {
    int R1,R2,G1,G2,B1,B2; //cores do contorno
    if(pres) 
@@ -32,69 +32,45 @@ void botao::Desenhar(int Xjan,int Yjan,int pres,int salvar,SDL_Surface *screen)
    }
    
    cor_Definir(R,G,B);
-   retangulo_Colorir(screen,x1+Xjan+1,y1+Yjan+1,x2+Xjan-1,y2+Yjan-1,0);
+   retangulo_Colorir(screen,x1+1,y1+1,x2-1,y2-1,0);
    cor_Definir(R1,G1,B1);
    if(oval)
-      retangulo_Oval(screen,x1+Xjan,y1+Yjan,x2+Xjan,y2+Yjan,R2,B2,G2,0);
+      retangulo_Oval(screen,x1,y1,x2,y2,R2,B2,G2,0);
    else
-      retangulo_2Cores(screen,x1+Xjan,y1+Yjan,x2+Xjan,y2+Yjan,R2,B2,G2,0);
+      retangulo_2Cores(screen,x1,y1,x2,y2,R2,B2,G2,0);
    /*Aqui deve entrar a escrita do texto*/
 
    cor_Definir(Cores.corTexto.R,Cores.corTexto.G,Cores.corTexto.B);
-   int ya=y1+Yjan;
-   int xa=x1+Xjan;
+   int ya=y1;
+   int xa=x1;
    if(pres) 
    {
      ya++;
      xa+=2;
    }
    selFonte(FFARSO,CENTRALIZADO,1);
-   xa = ((xa+x2+Xjan) /2);
+   xa = ((xa+x2) /2);
    //y1-=6;
    if(!strcmp("\36",texto) || !strcmp("\37",texto))
      ya -= 6;
    escxy(screen,xa,ya,texto);
    selFonte(FFARSO,ESQUERDA,1);
-
-   if (salvar)
-   {
-      // SDL_Flip(screen);
-      // SDL_GL_SwapBuffers();
-      AtualizaTela2D(screen);
-   }
 }
 
-int botao::Pressionar(int Xjan,int Yjan, SDL_Surface *screen)
+int botao::Pressionar(int Xjan, int Yjan, SDL_Surface *screen, 
+                      int x, int y, Uint8 Mbotao, int* pronto)
 {
-   int pronto = 0;
+   *pronto = 0;
    int pres = 1;
-   int Mbotao;
-   int x,y, xAntes = 0,yAntes = 0;
-   Desenhar(Xjan,Yjan,pres,1,screen);
-   while(!pronto)
-   {
-      SDL_PumpEvents();
-      Mbotao = SDL_GetMouseState(&x,&y);
-      if (!pres && mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,
-                                x,y) && ( (x!=xAntes) || (y!=yAntes)))
-      {
-          pres = 1;
-          Desenhar(Xjan,Yjan,pres,1,screen);
-      }
-      else if(pres && !mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,
-                                    x,y)&& ( (x!=xAntes) || (y!=yAntes)) )
-      {
-         pres = 0;
-         Desenhar(Xjan,Yjan,pres,1,screen);
-      }
-      /* Testa se botao do mouse foi solto */
-      pronto = !(Mbotao & SDL_BUTTON(1));
+
+   pres = (mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,x,y));
+
+   /* Testa se botao do mouse foi solto */
+   *pronto = !(Mbotao & SDL_BUTTON(1));
       
-   }
-
-   if(pres) Desenhar(Xjan,Yjan,0,1,screen);
+   Desenhar(pres,screen);
+   if(*pronto) Desenhar(0,screen);
    return(pres);
-
 }
 
 

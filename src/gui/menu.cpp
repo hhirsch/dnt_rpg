@@ -62,12 +62,6 @@ void menu::Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen)
    int y1 = Yjan + y;
    int y2 = (total*11) + y1  + 5; /* bizarrice da versao do DOS ehhehe */
    
-   SDL_Rect ret;
-   ret.x = x1;
-   ret.y = y1;
-   ret.w = x2-x1;
-   ret.h = y2-y1; 
-
    /* Verifica extremos */
    if (x2 > screen->w-1)
    {
@@ -120,139 +114,75 @@ void menu::Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen)
   
 //   SDL_Flip(screen);
 //   SDL_GL_SwapBuffers();
-   AtualizaTela2D(screen);
+//   AtualizaTela2D(screen);
 }
 
 
-int menu::Rodar(int Xjan, int Yjan, SDL_Surface *screen)
+int menu::Rodar(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
+                SDL_Surface *screen, int *pronto, int Xjan, int Yjan)
 {
-   SDL_Rect ret;
    selFonte(FFARSO,ESQUERDA,1);
-   /* Inicia coordenadas */
-   ret.x = Xjan + x;
-   ret.w = (maxCarac)*(fonte_incCP()+1)+5;
-   ret.y = Yjan + y;
-   ret.h = (total*11)+6;/*
-   ret2.x = 0;
-   ret2.w = ret.w;
-   ret2.y = 0;
-   ret2.h = ret.h;*/
-
-   /* Salva inferior ao meu */
-  // SDL_Surface *fundo = SDL_CreateRGBSurface(SDL_HWSURFACE,ret.w,ret.h, 
-     //                         32, 0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   //SDL_BlitSurface(screen,&ret,fundo,&ret2);
-   //SDL_Flip(screen);
-   //SDL_GL_SwapBuffers();
-//   AtualizaTela2D(screen);
 
    /* Desenha menu */
-   Desenhar(Xjan,Yjan,0,screen);
+   Desenhar(0,0,0,screen);
+   int altura = (total*11)+6;
+   int largura = (maxCarac)*(fonte_incCP()+1)+5;
 
    /* Executa */
-   //SDL_Event evento;
-   int mouseX = ret.x; 
-   int mouseY = ret.y;
-   int pronto = 0;
+   *pronto = 0;
    int tecla = 0;
-   int item = 1;
-   int item2;
-   Uint8 Mbotao;
-   Uint8 *teclado;
-   int xa,ya;
-   Uint32 tempo = 0;
-   Uint32 tempo2 = 0;
-   Uint32 ultimaTecla = 0;
+   //int xa,ya;
 
-   cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
-   retangulo_Oval(screen,ret.x+2,(item-1)*11+ret.y+4,ret.x+ret.w-2,
-                  (item)*11+ret.y+4,Cores.corCont[2].R,
-                  Cores.corCont[2].G,Cores.corCont[2].B,1);
-   while(!pronto)
-   {
-      item2 = item;
-      SDL_PumpEvents();
-      Mbotao = SDL_GetMouseState(&xa,&ya);
-      teclado = SDL_GetKeyState(NULL);
-      tempo2 = SDL_GetTicks();
       /* Verifica Movimentacao do Mouse */
-      if((mouseX != xa || mouseY != ya) && 
-            mouse_NaArea(ret.x,ret.y,ret.x+ret.w,ret.y+ret.h-3,xa,ya)) 
+      if(mouse_NaArea(x+Xjan, y+Yjan, x+largura+Xjan,
+                      y+altura+Yjan-3, mouseX, mouseY)) 
       {
-          item2 = ((ya - ret.y-4) / 11) + 1;
-          mouseX = xa;
-          mouseY = ya;
+          itemAtual = ((mouseY - (y+Yjan)-4) / 11) + 1;
       }
       /* Verifica Botao do Mouse Pressionado */
       if(Mbotao & SDL_BUTTON(1))
       {
-         mouseX = xa;
-         mouseY = ya;
-         pronto = 1;
+         *pronto = 1;
       }
       /* Faz a verificacao do Teclado */
-      if(teclado[SDLK_UP] && (item-1 > 0))
+      if(teclado[SDLK_UP] && (itemAtual-1 > 0))
       {
-         if( (ultimaTecla != SDLK_UP) || (tempo2 >= tempo + TEMPOREPETICAO) )
-         {
-            item2 = item-1;
-            tempo = tempo2;
-         }
-         ultimaTecla = SDLK_UP;
+         itemAtual --;
       }
-      else if(teclado[SDLK_DOWN] && (item+1 <= total))
+      else if(teclado[SDLK_DOWN] && (itemAtual+1 <= total))
       {
-         if( (ultimaTecla != SDLK_DOWN) || (tempo2 >= tempo + TEMPOREPETICAO) )
-         {
-            item2 = item + 1;
-            tempo = tempo2;
-         }
-         ultimaTecla = SDLK_DOWN;
+         itemAtual++;
       }
       else if( (teclado[SDLK_RETURN] || teclado[SDLK_KP_ENTER]) )
       {
-         pronto = 1;
+         *pronto = 1;
          tecla = 1;
       }
       else if( teclado[SDLK_ESCAPE])
       {
-         pronto = 1;
+         *pronto = 1;
          tecla = 0;
       }
-      /* Refaz o retangulo oval, se necessario */
-      if(item2 != item)
-      {
-          cor_Definir(Cores.corMenu.R,Cores.corMenu.G,Cores.corMenu.B);
-          retangulo_Oval(screen,ret.x+2,(item-1)*11+ret.y+4,
-                         ret.x+ret.w-2,(item)*11+ret.y+4,
-                         Cores.corMenu.R,Cores.corMenu.G,Cores.corMenu.B,0);
-          item = item2;
-          cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
-          retangulo_Oval(screen,ret.x+2,(item-1)*11+ret.y+4,
-                         ret.x+ret.w-2,(item)*11+ret.y+4,
-                         Cores.corCont[2].R,Cores.corCont[2].G,
-                         Cores.corCont[2].B,1);
-      }
-   }
+
+      cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
+      retangulo_Oval(screen,x+2,(itemAtual-1)*11+y+4,
+                     x+largura-2,(itemAtual)*11+y+4,
+                     Cores.corCont[2].R,Cores.corCont[2].G,
+                     Cores.corCont[2].B,1);
 
    /* Calcula o Retorno */
-   if(mouse_NaArea(ret.x,ret.y,ret.x+ret.w,ret.y+ret.h-3,mouseX,mouseY) &&
-      (!tecla))
+   if(mouse_NaArea(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3,
+                   mouseX,mouseY) && (!tecla))
    {
-      item = ((mouseY - ret.y-4) / 11) + 1;
-      if (!ItemDisponivel(item)) item = 0;
+      //itemAtual = ((mouseY - y-4) / 11) + 1;
+      if (!ItemDisponivel(itemAtual)) itemAtual = 0;
    }
-   else if (!tecla)
-      item = 0;
+   else if ( (!tecla) )
+      itemAtual = 0;
+   //else
+   //   item = itemAtual;
 
-   /* Refaz o fundo salvo */
-//   SDL_BlitSurface(fundo, NULL, screen, &ret);
-   //SDL_Flip(screen);
-   //SDL_GL_SwapBuffers();
-//   AtualizaTela2D(screen);
-//   SDL_FreeSurface(fundo);
-   SDL_Delay(100);
-   return(item);
+   return(itemAtual);
 }
 
 

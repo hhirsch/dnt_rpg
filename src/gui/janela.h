@@ -27,6 +27,8 @@ class janela: public Tobjeto
       Tlista *objetos;           /* Lista dos Objetos presentes */
       SDL_Surface *cara;         /* Cara da Janela */
       int fechavel;              /* != 0 se for fechavel */
+      int difx;                  /* Diferenca de qdo o mouse clicou */
+      int dify;                  /* No momento de inicio da movimentacao */
       cores Cores;
                                  /* Procedimento na ativacao */
       void (*procAtiva)(janela* jan, SDL_Surface *screen);
@@ -35,40 +37,26 @@ class janela: public Tobjeto
 
       /* Desenha na superficie a janela com todos seus derivados
        * jan    -> a janela a ser desenhada
-       * salvar -> se !=0 atualiza a tela
-       * screen -> a superficie na qual se desenhara a janela */
-      void Desenhar(int salvar, SDL_Surface *screen);
-
-      /**/
-      void PoeCaraNaTela(int salvar,SDL_Surface *screen);
+       */
+      void Desenhar();
 
       /* Ativa a Janela jan, inativando a currentemente ativa 
        * jan    -> janela a ser ativada
-       * screen -> superficie na qual sera ativada a janela */
-      void Ativar(Tlista *lista,SDL_Surface* screen);
+       */
+      void Ativar(Tlista *lista);
 
       /*Fecha a janela, limpando seu espaco na tela*/
-      void Fechar(Tlista *ljan, SDL_Surface *screen, SDL_Surface* fundo);
+      void Fechar(Tlista *ljan);
 
       /* Faz a movimentacao da janela pela superficie 
        * jan    -> a janela a se movimentar
        * lista  -> a lista onde a janela esta presente
        * screen -> a superficie na qual esta a janela */
-      void Mover(Tlista *lista, SDL_Surface *screen, SDL_Surface* fundo);
-
-      /* Verifica se j esta sobreposta a h2 ou vice-versa
-       * h2 -> outra janela */
-      int Sobreposta(janela h2);
-
-      //void janela_Redmensionar
-      //void janela_MaxiMini
+      int Mover(Tlista *lista, SDL_Surface *screen, SDL_Surface* fundo,
+                int xinic, int yinic, int Mbotao);
 
    private:
-      void BarraInativa(SDL_Surface *screen);
-      void RefazerFundo(Tlista *lista, SDL_Surface *screen, SDL_Surface* fundo);
-      void FazMudanca(int mouseX, int mouseY, Tlista *lista,
-                      SDL_Surface *screen, SDL_Surface* fundo);
-
+      void BarraInativa();
 
 };                     /* Janela */
 
@@ -92,7 +80,7 @@ class Ljanela: public Tlista
                          void (*procPres)(janela* jan,int x, int y, 
                                SDL_Surface *screen));
 
-      void Ljanela::RetirarJanela(janela *jan,SDL_Surface *screen);
+      void Ljanela::RetirarJanela(janela *jan);
 
 }; 
 

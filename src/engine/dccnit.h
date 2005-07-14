@@ -57,6 +57,8 @@ class engine
        * apos o termino da funcao. */
       void Desenhar();
 
+      interface* gui;
+
    private:
 
       /* Redefine a tela para o tamanho da tela atual

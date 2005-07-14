@@ -31,9 +31,10 @@ class menu: public Tlista
       void (*procSelecionado)(void* jan, void* botao,menuItem* item,
                              SDL_Surface* screen);
       cores Cores;
+      int itemAtual;
    
       menu(): Tlista()
-           {/*x=xa;y=ya;*/procSelecionado=NULL;maxCarac=0;Cores.Iniciar();};
+           {itemAtual = 1;procSelecionado=NULL;maxCarac=0;Cores.Iniciar();};
       ~menu();
 
       /* Insere um novo menuItem no menu
@@ -49,12 +50,13 @@ class menu: public Tlista
       /* Faz a execucao do menu, retorna o valor do item selecionado ou -1;
        * men    -> menu a ser executado 
        * screen -> superficie na qual esta o menu*/
-      int Rodar(int Xjan, int Yjan, SDL_Surface *screen);
+      int Rodar(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
+                SDL_Surface *screen, int* pronto, int Xjan, int Yjan);
 
       /*Retorna o i-esimo item*/
       menuItem* Item(int i);
 
-protected:
+   protected:
       /* Verifica se o item esta disponivel */
       int ItemDisponivel(int item);
       void Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen);

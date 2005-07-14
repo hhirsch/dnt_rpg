@@ -37,7 +37,7 @@ void barraTexto::PoeTexto(int Xjan, int Yjan,int salvar,unsigned int pos, int ma
    {
      //SDL_Flip(screen);
      //SDL_GL_SwapBuffers();
-     AtualizaTela2D(screen);
+     //AtualizaTela2D(screen);
    }
 }
 
@@ -52,7 +52,7 @@ void barraTexto::Desenhar(int Xjan, int Yjan,int salvar, SDL_Surface *screen)
    {
        //SDL_Flip(screen);
        //SDL_GL_SwapBuffers();
-       AtualizaTela2D(screen);
+      // AtualizaTela2D(screen);
    }
 }
 

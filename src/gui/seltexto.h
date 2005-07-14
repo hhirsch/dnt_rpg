@@ -33,7 +33,8 @@ class selTexto: public Tobjeto
       /* Enquanto o mouse estiver sobre a seltexto faz o tratamento da mesma
        * Xjan, Yjan -> coordenadas da janela
        * screen     -> superficie na qual se encontra a selTexto */
-      void Tratar(int Xjan,int Yjan,SDL_Surface *screen);
+      int Tratar(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen,
+                 int Xjan, int Yjan);
 
    private:
    

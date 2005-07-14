@@ -79,11 +79,6 @@ void pixel_Desenhar(SDL_Surface *screen, int x, int y, int salvar)
     if ( SDL_MUSTLOCK(screen) ) {
         SDL_UnlockSurface(screen);
     }
-    if(salvar){
-     /* SDL_Flip(screen);
-      SDL_GL_SwapBuffers();*/
-      AtualizaTela2D(screen);
-    }
 }
 
 
@@ -113,13 +108,6 @@ void linha_Desenhar(SDL_Surface *screen, int x1, int y1, int x2, int y2, int sal
       y+=yInc;
       pixel_Desenhar(screen, round(x), round(y), 0);
    }
-   if (salvar)
-   { 
-      //SDL_Flip(screen);
-      //SDL_GL_SwapBuffers();
-      //SDL_UpdateRect(screen, x1, y1, x2, y2);
-      AtualizaTela2D(screen);
-   }
 }
 
 
@@ -130,13 +118,6 @@ void retangulo_Desenhar(SDL_Surface *screen, int x1, int y1, int x2, int y2, int
     linha_Desenhar(screen,x1,y2,x2,y2,0);
     linha_Desenhar(screen,x1,y1,x1,y2,0);
     linha_Desenhar(screen,x2,y1,x2,y2,0);
-    if (salvar)
-    {
-//       SDL_Flip(screen);
-  //     SDL_GL_SwapBuffers();
-      AtualizaTela2D(screen);
-    //SDL_UpdateRect(screen, x1, y1, x2, y2);
-    }
 }
 
 
@@ -150,13 +131,6 @@ void retangulo_2Cores(SDL_Surface *screen, int x1, int y1, int x2, int y2, int R
     linha_Desenhar(screen,x1,y2,x2,y2,0);
     linha_Desenhar(screen,x2,y1,x2,y2,0);
     cor_Definir(Ra,Ga,Ba);
-    if (salvar)
-    {
-       //SDL_Flip(screen);
-       //SDL_GL_SwapBuffers();
-       AtualizaTela2D(screen);
-    //SDL_UpdateRect(screen, x1, y1, x2, y2);
-    }
 }
 
 
@@ -211,13 +185,6 @@ void retangulo_Colorir(SDL_Surface *screen, int x1, int y1, int x2, int y2, int 
    {
         SDL_UnlockSurface(screen);
    }
-   if (salvar) 
-   {
-      //SDL_Flip(screen);
-      //SDL_GL_SwapBuffers();
-      AtualizaTela2D(screen);
-   }
-      //SDL_UpdateRect(screen, x1, y1, x2, y2);
 }
 
 
@@ -247,13 +214,6 @@ void retangulo_Oval(SDL_Surface *screen, int x1, int y1, int x2, int y2, int Ri,
    linha_Desenhar(screen,x2-2,y2,x2,y2-2,0);
    linha_Desenhar(screen,x2,y2-2,x2,y1+2,0);
    linha_Desenhar(screen,x2-2,y1,x2,y1+2,0);
-   if (salvar) 
-   {
-      //SDL_Flip(screen);
-      //SDL_UpdateRect(screen, x1, y1, x2, y2);
-      //SDL_GL_SwapBuffers();
-      AtualizaTela2D(screen);
-   }
    cor_Definir(Ra,Ga,Ba);
 }
 
@@ -282,15 +242,6 @@ void circulo_Desenhar(SDL_Surface *screen,int xC, int yC, int r, int salvar)
       pixel_Desenhar(screen,xC-y, yC-x, 0);
       pixel_Desenhar(screen,xC-x, yC+y, 0);
    }
-   if (salvar) {
-     /* int x1=xC-r-1,y1=yC-r-1,x2=r+xC+1,y2=r+yC+1;
-      if( x1 <= 0) x1 = 0;
-      if( y1 <= 0) y1 = 0;
-      SDL_UpdateRect(screen, x1, y1, x2, y2);*/
-      //SDL_Flip(screen);
-      //SDL_GL_SwapBuffers();
-      AtualizaTela2D(screen);
-   }
 }
 
 
@@ -309,15 +260,10 @@ void hexagono_Desenhar(SDL_Surface *screen, int x,int y, int lado, int salvar)
    linha_Desenhar(screen,x+lado+2*aux,y,x+aux+lado,y+auy,0);
    linha_Desenhar(screen,x+aux+lado,y+auy,x+aux,y+auy,0);
    linha_Desenhar(screen,x+aux,y+auy,x,y,0);
-   if(salvar)
-   {
-     //SDL_Flip(screen);
-     //SDL_GL_SwapBuffers();
-     AtualizaTela2D(screen);
-   }
 }
 
-void AtualizaTela2D(SDL_Surface *tela2D)
+void AtualizaTela2D(SDL_Surface *tela2D, GLdouble proj[16],GLdouble modl[16], 
+                    GLint viewPort[4],int x, int y, double profundidade)
 {
    GLuint texturaID;
    if ( tela2D ) {
@@ -330,6 +276,13 @@ void AtualizaTela2D(SDL_Surface *tela2D)
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    }    
 
+   GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
+   gluUnProject( x,(600-y), profundidade, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject( x,(600-y)-tela2D->h,profundidade, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject( x+tela2D->w, (600-y)-tela2D->h, profundidade, modl, proj, viewPort, 
+                 &x3, &y3, &z3);
+   gluUnProject( x+tela2D->w,(600-y),profundidade, modl, proj, viewPort, &x4, &y4, &z4);
+
 
    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -338,22 +291,22 @@ void AtualizaTela2D(SDL_Surface *tela2D)
 
    glBegin(GL_QUADS);
       glTexCoord2f(0,0);
-      glVertex3f(0.0, 0.0, 0.0);
+      glVertex3f(x1, y1, z1);
 	
       glTexCoord2f(1,0);
-      glVertex3f(tela2D->w, 0.0, 0.0);
+      glVertex3f(x4, y4, z4);
 	
       glTexCoord2f(1,1);
-      glVertex3f(tela2D->w, tela2D->h, 0.0);
+      glVertex3f(x3, y3, z3);
 	
       glTexCoord2f(0,1);
-      glVertex3f(0.0, tela2D->h, 0.0);
+      glVertex3f(x2, y2, z2);
    glEnd();
 
    glDisable(GL_TEXTURE_2D);
 
-   glFlush();
-   SDL_GL_SwapBuffers();
+/*   glFlush();
+   SDL_GL_SwapBuffers();*/
 
    glDeleteTextures(1,&texturaID);
 

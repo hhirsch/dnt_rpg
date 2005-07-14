@@ -29,16 +29,34 @@
 #define JANELAMOVIMENTADA    9
 #define JANELACLICADA       10
 
+/* Constantes de Foco */
+#define FOCO_JANELA       1
+#define FOCO_BARRATEXTO   2
+#define FOCO_BOTAO        3
+#define FOCO_CXSEL        4
+#define FOCO_MENU         5
+#define FOCO_SELTEXTO     6
+#define FOCO_JANELAMOVER  7
+#define FOCO_MENUJANELA   8
+#define FOCO_JOGO         100
+
+
 class interface
 {
    public:
       Ljanela* ljan;
       Tlista* objetos;
-      SDL_Surface* tela2D;
       SDL_Surface* fundo;
-      int ManipulaEventos(SDL_Surface *screen);
+      int ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla);
+      void Desenhar(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
       interface(char* arqFundo);
       ~interface();
+      
+      int foco;
+
+   private:
+      Tobjeto* objAtivo;
+     
 
 };
 
