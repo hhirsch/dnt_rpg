@@ -85,23 +85,36 @@ cxSel* Tlista::InserirCxSel(int xa,int ya,int selecionada)
 /* Insere uma nova figura na lista */
 figura* Tlista::InserirFigura(int x,int y,char* arquivo)
 {
+   printf("Pondo Figura\n");
    figura* novo;
    novo = new figura;
    novo->x = x;
    novo->y = y;
  
-   SDL_Surface* img = IMG_Load(arquivo);
-
-   novo->fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       img->w,img->h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    //SDL_Rect ret;
    //ret.w = 0; ret.h = 0; ret.x = img->w; ret.y = img->h;
-   SDL_BlitSurface(img,NULL,novo->fig,NULL);
+   
+   if(arquivo!=NULL)
+   {
+      printf("Arquivo: %s\n",arquivo);
+      SDL_Surface* img = IMG_Load(arquivo);
+      novo->fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       img->w,img->h,32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+      SDL_BlitSurface(img,NULL,novo->fig,NULL);
+      SDL_FreeSurface(img);
+   }
+   else
+   {
+      printf("NULL\n");
+      novo->fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       240,95,32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   }
 
-   SDL_FreeSurface(img);
    if ( novo->fig == NULL )
         erro_Mensagem("Não foi possível carregar figura\n",10);
+
    novo->tipo = FIGURA;
    InserirObj(novo);
    return(novo);

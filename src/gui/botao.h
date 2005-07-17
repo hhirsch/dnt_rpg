@@ -29,13 +29,13 @@ class botao: public Tobjeto{
        * pres      -> !=0 se o botao estiver pressionado
        * salvar    -> atualiza a tela se != 0
        * screen    -> superficie na qual se quer desenhar o botao */
-      void Desenhar(int pres, SDL_Surface *screen);
+      void Desenhar(int pres, void* jan, int Salvar);
 
       /* Faz o Pressionamento do botao, retornando != 0 se ele ficou pressio
        * nado ate o final
        * Xjan, Yjan -> coordenadas da janela que o botao esta
        * screen     -> superficie em que o botao esta */
-       int Pressionar(int Xjan, int Yjan, SDL_Surface *screen, 
+       int Pressionar(int Xjan, int Yjan, void* jan, 
                       int x, int y, Uint8 Mbotao, 
                       int* pronto);
 

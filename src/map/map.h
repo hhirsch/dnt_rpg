@@ -75,7 +75,9 @@ class Map
 		Map();                     /* Construtor */
 		~Map();                    /* Destruidor */
                 /* Desenha o Mapa */
-		int draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[6][4]);
+		int draw(GLfloat cameraX, GLfloat cameraY, 
+                         GLfloat cameraZ, GLfloat matriz[6][4]);
+                void drawMinimap(SDL_Surface* img);
 		int open( char* arquivo ); /* Abre o mapa do arquivo */
                 Square* quadradoRelativo(int x, int z);
 

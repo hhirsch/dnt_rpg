@@ -8,7 +8,7 @@
 #include <math.h>
 
 #define DELAY 0
-#define ANDAR 1.0        // O quanto o personagem anda a cada frame
+#define ANDAR 1.5        // O quanto o personagem anda a cada frame
 #define GIRAR 2.5        // O quanto ele gira a cada frame
 #define DELTACAMERA 2.0  // O quanto a camera meche a cada frame
 #define ZOOMMAXIMO 80    // Valor máximo de zoom
@@ -52,6 +52,8 @@ engine::engine(char* arqMapa)
 engine::~engine()
 {
    //glDeleteLists(mapaDesenhar,1);
+   gluDeleteQuadric(atmosfera);
+   glDeleteTextures(1, &ceu);
    delete(NPCs);
    delete(PCs);
    delete(gui);
@@ -66,7 +68,7 @@ void engine::Redmensiona(SDL_Surface *screen)
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 1000.0);
+   gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 10000.0);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
 }
@@ -89,42 +91,66 @@ void engine::Iniciar(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Definicao da Luz */
-   GLfloat light_ambient[] = { 0.75, 0.75, 0.75, 1.0 };
+   GLfloat light_ambient[] = { 0.6, 0.6, 0.6, 1.0 };
    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
+   GLfloat light_position[] = { 300.0, 10.0, 200.0, 1.0 };
    
    /* Carrega a Luz */
    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-   glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+   //glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+   //glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
    
    /* Habilita a iluminacao */
    glEnable(GL_LIGHTING);
    glEnable(GL_LIGHT0);
   
-   /*glEnable(GL_FOG);
+   glEnable(GL_FOG);
    {
      GLfloat fogCor[4] = {1.0,1.0,1.0,1.0}; 
      glFogi(GL_FOG_MODE,GL_LINEAR);
      glFogfv(GL_FOG_COLOR,fogCor);
-     glFogf(GL_FOG_DENSITY,0.35);
+     glFogf(GL_FOG_DENSITY,0.60);
      glHint(GL_FOG_HINT,GL_DONT_CARE);
-     glFogf(GL_FOG_START,300.0);
-     glFogf(GL_FOG_END,1000.0);
-   }*/
-   janela *jan = gui->ljan->InserirJanela(0,0,255,127,"Janela",1,1,NULL,NULL);
-   jan->Ativar(gui->ljan);
+     glFogf(GL_FOG_START,250.0);
+     glFogf(GL_FOG_END,600.0);
+   }
+   abreMiniMapa();
+   janela* jan;
    jan=gui->ljan->InserirJanela(100,100,355,355,"Logan, O Mutante",1,1,NULL,NULL);
    jan->objetos->InserirFigura(8,20,"../data/pics/logan/cara.bmp");
    jan->objetos->InserirQuadroTexto(90,20,250,95,1,"Fale humano ridiculo.Tens alguma comida? Os avestruzes voam sem asas e os grilos pulam feito GRILOS! Ou seriam gafanhotos?");
    jan->objetos->InserirSelTexto(8,100,250,250,"1 - Ora, o que faz um mutante nesta janela? Nao tens medo de virar um quadro?",
                       "2 - Aonde esta sua orelha esquerda, mutante?",
                       "3 - (entrega um grilo ao mutante) Fiquei sabendo que eh esta sua comida habitual.", 
-                      "4 - EBA!","5 - Uai so, que que eu to fazendo aqui, num tenho mais ess cabelo nao!!",NULL);
-   /* janela_Desenhar(*j.primeiro->proximo,1,screen, REDESENHA); */
-   jan->Ativar(gui->ljan);
+                      "4 - EBA!","5 - Uai so, que que eu to fazendo aqui, num tenho mais esse cabelo todo nao!!",NULL);
+   jan->Abrir(gui->ljan);
+
+   janAtalhos = gui->ljan->InserirJanela(0, 472, 511, 599, "Atalhos",1,1,NULL,NULL);
+   FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
+   FPS->texto = (char*)malloc(50*sizeof(char));
+   sprintf(FPS->texto,"FPS:");
+   janAtalhos->Abrir(gui->ljan);
+
+   atmosfera = gluNewQuadric ();
+   gluQuadricTexture(atmosfera, GL_TRUE);
+
+   SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
+   SDL_Surface* fg = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                      img->w,img->h,32,
+                      0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   SDL_BlitSurface(img,NULL,fg,NULL);
+   SDL_FreeSurface(img);
+
+   glGenTextures(1, &ceu);
+   glBindTexture(GL_TEXTURE_2D, ceu);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fg->w, fg->h, 
+                0, GL_RGBA, GL_UNSIGNED_BYTE, fg->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(fg);
 }
 
 
@@ -139,10 +165,15 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    double varX, varZ; // para evitar de ter de calcular 2 vezes
 
    tempo = SDL_GetTicks();
-   if( ((tempo-ultimaLeitura)) >= 16)
+   if( ((tempo-ultimaLeitura)) >= /*16*/20)
    {
 //      printf("FPS: %f\t",1000.0 / (float)(tempo-ultimaLeitura));
       SDL_PumpEvents();
+      if(janAtalhos)
+      {
+         sprintf(FPS->texto,"FPS %3.2f",1000.0 / (tempo-ultimaLeitura));
+         janAtalhos->Desenhar();
+      }
       ultimaLeitura = tempo;
 
         
@@ -166,6 +197,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if ( keys[SDLK_ESCAPE] ) // Sai da Engine
          return(0);
 
+      if(keys[SDLK_m])
+      {
+          if(!janMiniMapa)
+             abreMiniMapa();
+      }
       /* Tratamento das teclas para a Camera */
       if(keys[SDLK_x]) 
       {
@@ -261,17 +297,13 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
           varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
          // Anda com personagem de lado para esquerda
-         if((keys[SDLK_q])&& (podeAndar(-varX,-varZ,0))) 
+         if(keys[SDLK_q]) 
          {
-            PCs->personagemAtivo->posicaoLadoX -= varX;
-            PCs->personagemAtivo->posicaoLadoZ -= varZ;
-            centroX -= varX;
-            centroZ -= varZ;
-            redesenha = 1;
-            andou = 1;
+             varX *= -1;
+             varZ *= -1;
          }
-         // Anda com personagem para esquerda
-         if((keys[SDLK_e])&& (podeAndar(varX,varZ,0))) 
+
+         if(podeAndar(varX,varZ,0)) 
          {
             centroX += varX;
             centroZ += varZ;
@@ -280,23 +312,32 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             redesenha = 1;
             andou = 1;
          }
+         else if( (varX != 0) && (podeAndar(varX,0,0)))
+         {
+            centroX += varX;
+            PCs->personagemAtivo->posicaoLadoX += varX;
+            redesenha = 1;
+            andou = 1;
+         }
+         else if( (varZ != 0) && podeAndar(0,varZ,0)) 
+         {
+            centroZ += varZ;
+            PCs->personagemAtivo->posicaoLadoZ += varZ;
+            redesenha = 1;
+            andou = 1;
+         }
+        
       }
       if(keys[SDLK_w] || keys[SDLK_s])
       { 
          varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao));
          varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao));
-           // Anda com personagem para frente
-         if((keys[SDLK_w]) && (podeAndar(-varX,-varZ,0)) ) 
+         if(keys[SDLK_w]) 
          {
-              PCs->personagemAtivo->posicaoLadoX -= varX;
-              PCs->personagemAtivo->posicaoLadoZ -= varZ;
-              centroZ -= varZ;
-              centroX -= varX;
-              redesenha = 1;
-              andou = 1;
+              varX *= -1;
+              varZ *= -1;
          }
-           // Anda com personagem para tras
-         if((keys[SDLK_s]) && (podeAndar(varX,varZ,0)) ) 
+         if((podeAndar(varX,varZ,0)) ) 
          {
              PCs->personagemAtivo->posicaoLadoX += varX;
              PCs->personagemAtivo->posicaoLadoZ += varZ;
@@ -305,12 +346,27 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
              redesenha = 1;
              andou  = 1;
          }
+         else if((varX != 0) && (podeAndar(varX,0,0)))
+         {
+              PCs->personagemAtivo->posicaoLadoX += varX;
+              centroX += varX;
+              redesenha = 1;
+              andou = 1;
+         }
+         else if((varZ!=0) && (podeAndar(0,varZ,0)))
+         {
+              PCs->personagemAtivo->posicaoLadoZ += varZ;
+              centroZ += varZ;
+              redesenha = 1;
+              andou = 1;
+         }
+
       }
 
       if( (keys[SDLK_a]) || (keys[SDLK_d]))
       {
          // Gira personagem antihorariamente
-         if((keys[SDLK_a]) && (podeAndar(0,0,2.0)) )  
+         if((keys[SDLK_a]) && (podeAndar(0,0,GIRAR)) )  
          {
             PCs->personagemAtivo->orientacao += GIRAR;
             if(PCs->personagemAtivo->orientacao > 360.0)
@@ -320,7 +376,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             andou = 1;
          }
          // Gira o personagem horariamente
-         if((keys[SDLK_d]) && (podeAndar(0,0,-2.0)) )
+         if((keys[SDLK_d]) && (podeAndar(0,0,-GIRAR)) )
          {
             PCs->personagemAtivo->orientacao -= GIRAR;
             if(PCs->personagemAtivo->orientacao < 0.0)
@@ -350,13 +406,13 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          if(keys[SDLK_LSHIFT])
          {
              PCs->personagemAtivo->braco_d->rotacao[1]+=1;
-             PCs->personagemAtivo->mao_d->rotacao[1]+=1;
+             PCs->personagemAtivo->mao_d->rotacao[2]-=1;
              PCs->personagemAtivo->ante_d->rotacao[1]+=1;
          }
          else
          {
              PCs->personagemAtivo->braco_d->rotacao[1]-=1;
-             PCs->personagemAtivo->mao_d->rotacao[1]-=1;
+             PCs->personagemAtivo->mao_d->rotacao[2]+=1;
              PCs->personagemAtivo->ante_d->rotacao[1]-=1;
          }
          redesenha = 1;
@@ -487,6 +543,8 @@ void engine::Desenhar()
    gluUnProject( 800-60, 600-80, 0.01, modl, proj, viewPort, &x3, &y3, &z3);
    gluUnProject( 800-60, 600, 0.01, modl, proj, viewPort, &x4, &y4, &z4);
 
+   glDisable(GL_LIGHTING);
+
    /* Desenho do Portrait do jogador */
    per = (personagem*) PCs->personagemAtivo;
    glEnable(GL_TEXTURE_2D);
@@ -503,8 +561,29 @@ void engine::Desenhar()
       glVertex3f(x4,y4,z4);
    glEnd();
    glDisable(GL_TEXTURE_2D);
-
+   
    gui->Desenhar(proj,modl,viewPort);
+  
+   glEnable(GL_LIGHTING);
+
+   glPushMatrix();
+      glEnable(GL_TEXTURE_2D);
+      glBindTexture(GL_TEXTURE_2D, ceu);
+      //
+      //glTranslatef(PCs->personagemAtivo->posicaoLadoX,
+      //             0,PCs->personagemAtivo->posicaoLadoZ);
+      //glTranslatef(cameraX,cameraY,cameraZ);
+      glTranslatef(mapa->x*SQUARESIZE / 2.0, 0 , mapa->z*SQUARESIZE);
+      glRotatef(90,1,1,0);
+      gluSphere(atmosfera,999,5,5);
+      //glRotatef(90,0,0,1);
+      //gluCylinder(atmosfera,(double)(mapa->x*SQUARESIZE) / 2.0,
+      //            (double)(mapa->x*SQUARESIZE) / 2.0,
+      //            100,30,30);
+      glDisable(GL_TEXTURE_2D);
+   glPopMatrix();
+
+   
 
    glFlush();
 }
@@ -868,6 +947,16 @@ int engine::TrataIA()
 
     return( (antX!=per->posicaoLadoX) || (antZ!=per->posicaoLadoZ));
 }
+
+void engine::abreMiniMapa()
+{
+   janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,"Mapa",1,1,NULL,NULL);
+   figura* fig = janMiniMapa->objetos->InserirFigura(8,20,NULL);
+   mapa->drawMinimap(fig->fig);
+
+   janMiniMapa->Abrir(gui->ljan);
+}
+
 
 
 /*********************************************************************

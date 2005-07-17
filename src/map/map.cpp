@@ -175,7 +175,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
                 glBindTexture(GL_TEXTURE_2D, textura);
                 glBegin(GL_QUADS);
              }
-             if((aux->visivel) || (quadradoVisivel(aux->x1,0,aux->z1,aux->x2,ALTURAMAXIMA,aux->z2,matriz)))
+             if((aux->visivel) || (quadradoVisivel(aux->x1,0,aux->z1,
+                                                   aux->x2,ALTURAMAXIMA,
+                                                   aux->z2,matriz)))
              {
                 for(i=0;i<MAXOBJETOS;i++)
                 {
@@ -563,7 +565,6 @@ int Map::open(char* arquivo)
 
    /* Agora varre todo o mapa, atualizando os ponteiros para os quadrados de
     * objeto. */
-   printf("rodando paso2\n");
    aux = first;
    ant = first->down;
    int ax,az;
@@ -638,5 +639,33 @@ Map::~Map()
       }
    }
    
+}
+
+
+/********************************************************************
+ *               Desenha um  MiniMapa na Superfície                 *
+ ********************************************************************/
+void Map::drawMinimap(SDL_Surface* img)
+{
+   int x1,y1,x2,y2;
+   //printf("%d,%d %d,%d\n",img->w,img->h,x,z);
+   //double razaoX = (float)img->w / (float)(x+1) ;
+   //double razaoY = (float)img->h / (float)(z+1);
+   cor_Definir(1, 1, 1);
+   retangulo_2Cores(img,0,0,x-1,z-1,0,0,0,0);
+   
+   muro* maux = muros;
+   while(maux!=NULL)
+   {
+       x1 = (int) ( (float)maux->x1 / (float)SQUARESIZE /** razaoX*/ );
+       x2 = (int) ( (((float)maux->x2 / (float)SQUARESIZE)-1) /** razaoX*/);
+       y1 = (int) ( (float)maux->z1 / (float)SQUARESIZE /** razaoY*/ );
+       y2 = (int) ( (((float)maux->z2 / (float)SQUARESIZE)-1) /** razaoY*/);
+       //printf("%d,%d,%d,%d  %f,%f\n",x1,y1,x2,y2,razaoX, razaoY);
+       cor_Definir(255,40,30);
+       linha_Desenhar(img, x1,y1,x2,y2, 0);
+       maux = maux->proximo;
+   }
+
 }
 

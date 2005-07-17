@@ -1,0 +1,19 @@
+
+================================================
+|               Version 0.0.2                  |
+================================================
+ - Gui is now corrected on Graphical Engine;
+ - Better  Walk algorithm and colision detection
+more permissive;
+ - 
+
+================================================
+|               Version 0.0.1                  |
+================================================
+ - First Release of DccNiTghtmare;
+ - View Frustum Culling;
+ - Static LOD;
+ - First Implementation of Colision Detection;
+ - First Step to animation (body division);
+ - The Character can Walk;
+ - The Camera can move; 

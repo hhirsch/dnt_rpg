@@ -262,26 +262,18 @@ void hexagono_Desenhar(SDL_Surface *screen, int x,int y, int lado, int salvar)
    linha_Desenhar(screen,x+aux,y+auy,x,y,0);
 }
 
-void AtualizaTela2D(SDL_Surface *tela2D, GLdouble proj[16],GLdouble modl[16], 
-                    GLint viewPort[4],int x, int y, double profundidade)
+void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16], 
+                    GLint viewPort[4],int xa, int ya, int xb, int yb, 
+                    double profundidade)
 {
-   GLuint texturaID;
-   if ( tela2D ) {
-        
-      glGenTextures(1, &texturaID);
-      glBindTexture(GL_TEXTURE_2D, texturaID);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tela2D->w, tela2D->h, 
-                                  0, GL_RGBA, GL_UNSIGNED_BYTE, tela2D->pixels);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   }    
+       
 
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
-   gluUnProject( x,(600-y), profundidade, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject( x,(600-y)-tela2D->h,profundidade, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject( x+tela2D->w, (600-y)-tela2D->h, profundidade, modl, proj, viewPort, 
-                 &x3, &y3, &z3);
-   gluUnProject( x+tela2D->w,(600-y),profundidade, modl, proj, viewPort, &x4, &y4, &z4);
+   gluUnProject(xa,(600-ya), profundidade, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject(xa,(600-yb-1),profundidade, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(xb+1, (600-yb-1), profundidade, modl, proj, viewPort, 
+                &x3, &y3, &z3);
+   gluUnProject(xb+1,(600-ya),profundidade, modl, proj, viewPort, &x4, &y4, &z4);
 
 
    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -308,7 +300,7 @@ void AtualizaTela2D(SDL_Surface *tela2D, GLdouble proj[16],GLdouble modl[16],
 /*   glFlush();
    SDL_GL_SwapBuffers();*/
 
-   glDeleteTextures(1,&texturaID);
+   //glDeleteTextures(1,&texturaID);
 
 }
 

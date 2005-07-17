@@ -58,7 +58,7 @@ class engine
       void Desenhar();
 
       interface* gui;
-
+ 
    private:
 
       /* Redefine a tela para o tamanho da tela atual
@@ -76,13 +76,22 @@ class engine
 
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
+      /* Tratamento de Janelas Especiais */
+      void abreMiniMapa();
+
       Map* mapa; /* Mapa Utilizado pela Engine */
  
       GLfloat matrizVisivel[6][4]; /* MAtriz do frustum atual */
       GLdouble proj[16];
       GLdouble modl[16];
       GLint viewPort[4];
+      GLUquadricObj* atmosfera;
+      GLuint ceu;
 
+      quadroTexto* FPS;
+      janela* janAtalhos;
+      janela* janMiniMapa;
+   
       Uint32 ultimaLeitura; //marca a ultima leitura da posicao do teclado
 
       AI* ia;

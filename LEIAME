@@ -28,6 +28,8 @@ hardware. São eles:
    Placa de Vídeo com aceleração 3D compatível  com  OpenGl no
    linux, através  de módulos  acelerados  (caso  contrário, a 
    renderização é extremamente lenta).
+   64 MB de memória RAM
+   Um bom processador.
 
 ==============================================================
 |                      II - Instalação                       |

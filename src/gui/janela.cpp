@@ -60,6 +60,8 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,char *text,
    novo->Gtxt = novo->Cores.corTexto.G;
    novo->Btxt = novo->Cores.corTexto.B;
    novo->fechavel = 1;
+   novo->caraTextura = 0;
+   novo->temTextura = 0;
    novo->cara = SDL_CreateRGBSurface(SDL_HWSURFACE,xb-xa+1,yb-ya+1,32,
                          0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    novo->objetos = new Tlista;
@@ -105,6 +107,7 @@ void Ljanela::RetirarJanela(janela *jan)
    } 
    delete(jan->objetos);
    delete(jan);
+   jan = NULL;
    total--;
 }
 
@@ -146,7 +149,7 @@ void janela::Desenhar()
       {
          case BOTAO:{
               botao *b = (botao*) obj;   
-              b->Desenhar(0,cara);
+              b->Desenhar(0,this,0);
               break;
          }
          case BARRATEXTO:{
@@ -179,6 +182,7 @@ void janela::Desenhar()
       } //case
       obj = obj->proximo;
    }
+   AtualizaCara();
 }
 
 /*********************************************************************
@@ -194,6 +198,16 @@ void janela::BarraInativa()
    escxy(cara,39,-2,texto);
 }
 
+void janela::BarraAtiva()
+{
+   int dx = x2-x1;
+   cor_Definir(Cores.corBarra.R,Cores.corBarra.G,Cores.corBarra.B);
+   retangulo_Colorir(cara,36,3,dx-3,12,0);
+   cor_Definir(Cores.corTexto.R,Cores.corTexto.G,Cores.corTexto.B);
+   selFonte(FFARSO,ESQUERDA,1);
+   escxy(cara,39,-2,texto);
+}
+
 /*********************************************************************
  *                       Torna a janela Ativa                        *
  *********************************************************************/
@@ -203,13 +217,22 @@ void janela::Ativar(Tlista *lista)
   if (ljan->janelaAtiva != NULL)
   {
      ljan->janelaAtiva->BarraInativa();
+     ljan->janelaAtiva->AtualizaCara();
   }
   ljan->janelaAtiva = this;
-  Desenhar();
+  BarraAtiva();
+  AtualizaCara();
+  //Desenhar();
   if(procAtiva != NULL)
   {
      procAtiva(this,NULL);
   }
+}
+
+void janela::Abrir(Tlista *lista)
+{
+   Ativar(lista);
+   Desenhar();
 }
 
 /*********************************************************************
@@ -218,6 +241,12 @@ void janela::Ativar(Tlista *lista)
 void janela::Fechar(Tlista *ljan)
 {
    Ljanela* lista = (Ljanela*) ljan;
+   if(glIsTexture(caraTextura))
+   {
+      glDeleteTextures(1,&caraTextura);
+      caraTextura = 0;
+      temTextura = 0;
+   }
    lista->RetirarJanela(this);
 }
 
@@ -263,3 +292,21 @@ int janela::Mover(Tlista *lista, SDL_Surface *screen, SDL_Surface* fundo,
       return(1);
 }
 
+
+void janela::AtualizaCara()
+{
+   if(temTextura)
+   {
+      glDeleteTextures(1,&caraTextura);
+      temTextura = 0;
+   }
+   
+   glGenTextures(1, &caraTextura);
+   glBindTexture(GL_TEXTURE_2D, caraTextura);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cara->w, cara->h, 
+                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                               cara->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   temTextura = 1;
+}

@@ -5,12 +5,15 @@
 
 #include "botao.h"
 #include "desenho.h"
+#include "janela.h"
 #include "cores.h"
 #include "fonte.h"
 
 /*Desenha o botao (bot) na tela*/
-void botao::Desenhar(int pres, SDL_Surface *screen)
+void botao::Desenhar(int pres, void* jan, 
+                     int Salvar )
 {
+   janela* j = (janela*) jan;
    int R1,R2,G1,G2,B1,B2; //cores do contorno
    if(pres) 
    {
@@ -32,12 +35,12 @@ void botao::Desenhar(int pres, SDL_Surface *screen)
    }
    
    cor_Definir(R,G,B);
-   retangulo_Colorir(screen,x1+1,y1+1,x2-1,y2-1,0);
+   retangulo_Colorir(j->cara,x1+1,y1+1,x2-1,y2-1,0);
    cor_Definir(R1,G1,B1);
    if(oval)
-      retangulo_Oval(screen,x1,y1,x2,y2,R2,B2,G2,0);
+      retangulo_Oval(j->cara,x1,y1,x2,y2,R2,B2,G2,0);
    else
-      retangulo_2Cores(screen,x1,y1,x2,y2,R2,B2,G2,0);
+      retangulo_2Cores(j->cara,x1,y1,x2,y2,R2,B2,G2,0);
    /*Aqui deve entrar a escrita do texto*/
 
    cor_Definir(Cores.corTexto.R,Cores.corTexto.G,Cores.corTexto.B);
@@ -53,23 +56,32 @@ void botao::Desenhar(int pres, SDL_Surface *screen)
    //y1-=6;
    if(!strcmp("\36",texto) || !strcmp("\37",texto))
      ya -= 6;
-   escxy(screen,xa,ya,texto);
+   escxy(j->cara,xa,ya,texto);
    selFonte(FFARSO,ESQUERDA,1);
+   
+   if(Salvar)
+   {
+      j->AtualizaCara();
+   }
+
 }
 
-int botao::Pressionar(int Xjan, int Yjan, SDL_Surface *screen, 
+int botao::Pressionar(int Xjan, int Yjan, void* jan, 
                       int x, int y, Uint8 Mbotao, int* pronto)
 {
+ 
+   //janela* j = (janela*) jan;  
+
    *pronto = 0;
-   int pres = 1;
+   int pres;
 
    pres = (mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,x,y));
 
    /* Testa se botao do mouse foi solto */
    *pronto = !(Mbotao & SDL_BUTTON(1));
       
-   Desenhar(pres,screen);
-   if(*pronto) Desenhar(0,screen);
+   Desenhar(pres,jan,1);
+   if(*pronto) Desenhar(0,jan,1);
    return(pres);
 }
 

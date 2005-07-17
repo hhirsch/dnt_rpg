@@ -103,8 +103,9 @@ void circulo_Desenhar(SDL_Surface *screen,int xC, int yC, int r, int salvar);
 void hexagono_Desenhar(SDL_Surface *screen, int x,int y, int lado, int salvar);
 
 /* Copia a superficie para a tela como uma textura  */
-void AtualizaTela2D(SDL_Surface *tela2D, GLdouble proj[16],GLdouble modl[16], 
-                    GLint viewPort[4], int x, int y, double profundidade);
+void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16], 
+                    GLint viewPort[4], int xa, int ya,int xb, int yb,
+                    double profundidade);
 
 
 #endif

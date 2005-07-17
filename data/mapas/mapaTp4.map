@@ -14,7 +14,7 @@ o macaco ../data/models/objetos/geral/macaco.dcc
 t parede_rosa ../data/texturas/parede_rosa.jpg
 t parede_grade ../data/texturas/parede_grade.jpg
 t chao_cimento ../data/texturas/chao_cimento.jpg
-t chao_tapeteroxo ../data/texturas/chao_tapeteroxo.jpg
+t chao_tapeteroxo ../data/texturas/chao_asfalto.jpg
 t chao_tapeteazul ../data/texturas/chao_tapeteazul.jpg
 t chao_tapetevermelho ../data/texturas/chao_tapetevermelho.jpg
 t chao_asfalto ../data/texturas/chao_asfalto.jpg

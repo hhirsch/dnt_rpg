@@ -60,7 +60,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
 
     /* Verifica Movimentacao do Mouse para mudanca de foco */
     if( (x != mouseX || y != mouseY) && 
-        (foco != FOCO_MENU && foco != FOCO_MENUJANELA) )
+        (foco == FOCO_JOGO) )
     {
         mouseX = x;
         mouseY = y;
@@ -202,7 +202,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         botao* bot = (botao*)objAtivo;
         if (bot->Pressionar(ljan->janelaAtiva->x1,
                             ljan->janelaAtiva->y1,
-                            ljan->janelaAtiva->cara, x, y, Mbotao, 
+                            ljan->janelaAtiva, x, y, Mbotao, 
                             &pronto))
         {
            if(pronto)
@@ -247,6 +247,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         bart->Escrever(ljan->janelaAtiva->x1,
                        ljan->janelaAtiva->y1,
                        x,y,NULL);
+        ljan->janelaAtiva->AtualizaCara();
         if(bart->procEditada != NULL)
         {
               bart->procEditada(bart,NULL);
@@ -259,13 +260,11 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
     if(foco == FOCO_CXSEL)
     {
        cxSel* cx = (cxSel*)objAtivo;
-       if(cx->selecionada)
-           cx->selecionada = 0;
-       else
-           cx->selecionada = 1;
+       cx->selecionada = !cx->selecionada;
        cx->Desenhar(ljan->janelaAtiva->x1,
                     ljan->janelaAtiva->y1,
-                    1,NULL);
+                    1,ljan->janelaAtiva->cara);
+       ljan->janelaAtiva->AtualizaCara();
        foco = FOCO_JOGO;
        return(CXSELMODIFICADA);
     }
@@ -281,6 +280,9 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                             ljan->janelaAtiva->cara,&pronto,
                             ljan->janelaAtiva->x1,
                             ljan->janelaAtiva->y1);
+
+       ljan->janelaAtiva->AtualizaCara();
+
         
        if((foco == FOCO_MENUJANELA) && (res==4) && (pronto))
        {
@@ -316,6 +318,9 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         if(!st->Tratar(x,y,Mbotao,ljan->janelaAtiva->cara,
                        ljan->janelaAtiva->x1, ljan->janelaAtiva->y1))
             foco = FOCO_JOGO;
+
+        ljan->janelaAtiva->AtualizaCara();
+
         return(SELTEXTOMODIFICADA);
     }
 
@@ -337,16 +342,17 @@ void interface::Desenhar(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    {
       if(jan != ljan->janelaAtiva)
       {
-          AtualizaTela2D(jan->cara,proj,modl,viewPort,jan->x1,jan->y1, 
-                         profundidade);
+          AtualizaTela2D(jan->caraTextura,proj,modl,viewPort,jan->x1,jan->y1, 
+                         jan->x2,jan->y2,profundidade);
           profundidade += 0.001;
       }
       jan = (janela*) jan->proximo;
    }
 
    /* Desenha a janelaAtiva */
-   AtualizaTela2D(ljan->janelaAtiva->cara,proj,modl,viewPort,
-                     ljan->janelaAtiva->x1,ljan->janelaAtiva->y1,0.011);
+   AtualizaTela2D(ljan->janelaAtiva->caraTextura,proj,modl,viewPort,
+                     ljan->janelaAtiva->x1,ljan->janelaAtiva->y1,
+                     ljan->janelaAtiva->x2,ljan->janelaAtiva->y2, 0.011);
 }
 
 

@@ -23,9 +23,9 @@ void cores::Iniciar()
    corTexto.R = 255;
    corTexto.G = 255;
    corTexto.B = 255;
-   corTextoSel.R = 16;
-   corTextoSel.G = 160;
-   corTextoSel.B = 15;
+   corTextoSel.R = 26;
+   corTextoSel.G = 230;
+   corTextoSel.B = 25;
    corBarra.R = 77;
    corBarra.G = 0;
    corBarra.B = 3;

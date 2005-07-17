@@ -30,6 +30,8 @@ class janela: public Tobjeto
       int difx;                  /* Diferenca de qdo o mouse clicou */
       int dify;                  /* No momento de inicio da movimentacao */
       cores Cores;
+      GLuint caraTextura;        /* Textura da cara */
+      int temTextura;            /* Se ja tem Textura ou Nao */
                                  /* Procedimento na ativacao */
       void (*procAtiva)(janela* jan, SDL_Surface *screen);
                                  /* Procedimento qdo Pressionada nela */
@@ -45,6 +47,8 @@ class janela: public Tobjeto
        */
       void Ativar(Tlista *lista);
 
+      void Abrir(Tlista *lista);
+
       /*Fecha a janela, limpando seu espaco na tela*/
       void Fechar(Tlista *ljan);
 
@@ -55,8 +59,12 @@ class janela: public Tobjeto
       int Mover(Tlista *lista, SDL_Surface *screen, SDL_Surface* fundo,
                 int xinic, int yinic, int Mbotao);
 
+      /* Atualiza textura da janela */
+      void AtualizaCara();
+
    private:
       void BarraInativa();
+      void BarraAtiva();
 
 };                     /* Janela */
 
