@@ -14,6 +14,10 @@
 #define ZOOMMAXIMO 80    // Valor máximo de zoom
 #define ZOOMMINIMO 280   // Valor mínimo do zoom
 
+#define CORNEBLINA_R 1.0
+#define CORNEBLINA_G 1.0
+#define CORNEBLINA_B 1.0
+
 /* Conversor de graus para radianos */
 inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
 
@@ -68,7 +72,7 @@ void engine::Redmensiona(SDL_Surface *screen)
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 10000.0);
+   gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 650.0);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
 }
@@ -108,7 +112,7 @@ void engine::Iniciar(SDL_Surface *screen)
   
    glEnable(GL_FOG);
    {
-     GLfloat fogCor[4] = {1.0,1.0,1.0,1.0}; 
+     GLfloat fogCor[4] = {CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,1.0}; 
      glFogi(GL_FOG_MODE,GL_LINEAR);
      glFogfv(GL_FOG_COLOR,fogCor);
      glFogf(GL_FOG_DENSITY,0.60);
@@ -134,7 +138,8 @@ void engine::Iniciar(SDL_Surface *screen)
    janAtalhos->Abrir(gui->ljan);
 
    atmosfera = gluNewQuadric ();
-   gluQuadricTexture(atmosfera, GL_TRUE);
+   //gluQuadricTexture(atmosfera, GL_TRUE);
+   gluQuadricTexture(atmosfera, GL_FALSE);
 
    SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
    SDL_Surface* fg = SDL_CreateRGBSurface(SDL_HWSURFACE,
@@ -167,7 +172,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    tempo = SDL_GetTicks();
    if( ((tempo-ultimaLeitura)) >= /*16*/20)
    {
-//      printf("FPS: %f\t",1000.0 / (float)(tempo-ultimaLeitura));
       SDL_PumpEvents();
       if(janAtalhos)
       {
@@ -481,6 +485,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
  *********************************************************************/
 void engine::Desenhar()
 {
+   glClearColor(CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,1.0);
    glLoadIdentity();
 
    /* Redefine a posicao dinamica da camera */
@@ -567,20 +572,20 @@ void engine::Desenhar()
    glEnable(GL_LIGHTING);
 
    glPushMatrix();
-      glEnable(GL_TEXTURE_2D);
-      glBindTexture(GL_TEXTURE_2D, ceu);
+      //glEnable(GL_TEXTURE_2D);
+      //glBindTexture(GL_TEXTURE_2D, ceu);
       //
       //glTranslatef(PCs->personagemAtivo->posicaoLadoX,
       //             0,PCs->personagemAtivo->posicaoLadoZ);
-      //glTranslatef(cameraX,cameraY,cameraZ);
-      glTranslatef(mapa->x*SQUARESIZE / 2.0, 0 , mapa->z*SQUARESIZE);
-      glRotatef(90,1,1,0);
-      gluSphere(atmosfera,999,5,5);
+      //glTranslatef(cameraX,0.0,cameraZ);
+      //glTranslatef(mapa->x*SQUARESIZE / 2.0, 0 , mapa->z*SQUARESIZE);
+      //glRotatef(90,1,1,0);
+      //gluSphere(atmosfera,699,5,5);
       //glRotatef(90,0,0,1);
       //gluCylinder(atmosfera,(double)(mapa->x*SQUARESIZE) / 2.0,
       //            (double)(mapa->x*SQUARESIZE) / 2.0,
       //            100,30,30);
-      glDisable(GL_TEXTURE_2D);
+      //glDisable(GL_TEXTURE_2D);
    glPopMatrix();
 
    
