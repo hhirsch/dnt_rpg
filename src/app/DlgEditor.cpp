@@ -4,6 +4,7 @@
 
 #include "../gui/farso.h"
 #include "../engine/conversa.h"
+#include "../engine/culling.h"
 
 cores Cores;
 int sair;
@@ -61,7 +62,7 @@ janela* dialogos;
 
 int ProcedimentoSair(void* jan, void* ljan, SDL_Surface* screen)
 {
-   sair = 1;
+   sair = SAIR;
    return(1);
 }
 
@@ -73,7 +74,8 @@ void ProcedimentoMenus(void* jan, void* bot,menuItem* item,
       botao* b=(botao*)bot;
       b->texto = item->texto;
       janela* j=(janela*)jan;
-      j->Desenhar(1,screen);
+      j->Desenhar();
+      j->AtualizaCara();
    }
 }
 
@@ -260,9 +262,9 @@ int main(int argc, char *argv[])
 
    Cores.Iniciar();
 
-   interface* interf = new interface("../data/pics/akira.bmp");
+   interface* interf = new interface(NULL);
    
-   principal=interf->ljan->InserirJanela(0,0,183,65,"Principal",1,1,NULL,NULL);
+   principal=interf->ljan->InserirJanela(0,0,255,63,"Principal",1,1,NULL,NULL);
    barraAbrir = principal->objetos->InserirBarraTexto(10,23,173,36,"Arquivo",
                                                       0,NULL);
    botaoAbrirArquivo = principal->objetos->InserirBotao(15,40,65,56,
@@ -275,9 +277,9 @@ int main(int argc, char *argv[])
                               Cores.corBot.G,
                               Cores.corBot.B,"Sair",1,&ProcedimentoSair);
    principal->fechavel = 0;
-   principal->Ativar(interf->ljan,interf->tela2D);
+   principal->Abrir(interf->ljan);
 
-   dialogos=interf->ljan->InserirJanela(0,70,450,500,"Dialogo",1,1,NULL,NULL);
+   dialogos=interf->ljan->InserirJanela(0,70,511,581,"Dialogo",1,1,NULL,NULL);
    dialogos->objetos->InserirQuadroTexto(7,15,443,62,1,"NPC:");
    
    criaMenus();
@@ -287,11 +289,42 @@ int main(int argc, char *argv[])
    dialogos->objetos->InserirFigura(10,285,"../data/pics/dcc.bmp");
 
    dialogos->fechavel = 0;
-   dialogos->Ativar(interf->ljan,interf->tela2D);
+   dialogos->Abrir(interf->ljan);
 
-   sair = 0;
+   sair = -2;
 
-   while (interf->ManipulaEventos(screen) && !sair);
+   GLfloat matriz[6][4];
+   GLdouble proj[16];
+   GLdouble modl[16];
+   AtualizaFrustum(matriz, proj, modl);
+   GLint viewPort[4];
+   glGetIntegerv(GL_VIEWPORT, viewPort);
+   Uint8 *keys; 
+   Uint8 Mbotao;
+   int x,y;
+
+   Uint32 tempo;
+   Uint32 tempoAnterior = 0;
+
+   while (!(sair == SAIR))
+   {
+      tempo = SDL_GetTicks();
+      if(tempo - tempoAnterior >= 20)
+      {
+         glClearColor(0,0,0,1);
+         tempoAnterior = tempo;
+         SDL_PumpEvents();
+         keys = SDL_GetKeyState(NULL);
+         Mbotao = SDL_GetMouseState(&x,&y);
+         interf->ManipulaEventos(x,y,Mbotao,keys);
+         if(keys[SDLK_ESCAPE])
+           sair = SAIR;
+         interf->Desenhar(proj,modl,viewPort);
+         glFlush();
+         SDL_GL_SwapBuffers();
+         //printf("%d\n",sair);
+      }
+   }
     
    delete(interf);
    delete(acoes);

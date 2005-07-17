@@ -261,9 +261,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
     {
        cxSel* cx = (cxSel*)objAtivo;
        cx->selecionada = !cx->selecionada;
-       cx->Desenhar(ljan->janelaAtiva->x1,
-                    ljan->janelaAtiva->y1,
-                    1,ljan->janelaAtiva->cara);
+       cx->Desenhar(ljan->janelaAtiva->cara);
        ljan->janelaAtiva->AtualizaCara();
        foco = FOCO_JOGO;
        return(CXSELMODIFICADA);

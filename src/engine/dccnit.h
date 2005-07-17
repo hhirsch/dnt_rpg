@@ -78,6 +78,7 @@ class engine
 
       /* Tratamento de Janelas Especiais */
       void abreMiniMapa();
+      void engine::abreAtalhos();
 
       Map* mapa; /* Mapa Utilizado pela Engine */
  

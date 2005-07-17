@@ -77,6 +77,7 @@ void engine::Redmensiona(SDL_Surface *screen)
    glMatrixMode (GL_MODELVIEW);
 }
 
+
 /*********************************************************************
  *                   Inicia e Engine para Uso                        *
  *********************************************************************/
@@ -117,25 +118,22 @@ void engine::Iniciar(SDL_Surface *screen)
      glFogfv(GL_FOG_COLOR,fogCor);
      glFogf(GL_FOG_DENSITY,0.60);
      glHint(GL_FOG_HINT,GL_DONT_CARE);
-     glFogf(GL_FOG_START,250.0);
+     glFogf(GL_FOG_START,200.0);
      glFogf(GL_FOG_END,600.0);
    }
    abreMiniMapa();
-   janela* jan;
-   jan=gui->ljan->InserirJanela(100,100,355,355,"Logan, O Mutante",1,1,NULL,NULL);
+   abreAtalhos();
+   //janela* jan;
+   /*jan=gui->ljan->InserirJanela(100,100,355,355,"Logan, O Mutante",1,1,NULL,NULL);
    jan->objetos->InserirFigura(8,20,"../data/pics/logan/cara.bmp");
    jan->objetos->InserirQuadroTexto(90,20,250,95,1,"Fale humano ridiculo.Tens alguma comida? Os avestruzes voam sem asas e os grilos pulam feito GRILOS! Ou seriam gafanhotos?");
    jan->objetos->InserirSelTexto(8,100,250,250,"1 - Ora, o que faz um mutante nesta janela? Nao tens medo de virar um quadro?",
                       "2 - Aonde esta sua orelha esquerda, mutante?",
                       "3 - (entrega um grilo ao mutante) Fiquei sabendo que eh esta sua comida habitual.", 
                       "4 - EBA!","5 - Uai so, que que eu to fazendo aqui, num tenho mais esse cabelo todo nao!!",NULL);
-   jan->Abrir(gui->ljan);
+   jan->Abrir(gui->ljan);*/
 
-   janAtalhos = gui->ljan->InserirJanela(0, 472, 511, 599, "Atalhos",1,1,NULL,NULL);
-   FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
-   FPS->texto = (char*)malloc(50*sizeof(char));
-   sprintf(FPS->texto,"FPS:");
-   janAtalhos->Abrir(gui->ljan);
+   
 
    atmosfera = gluNewQuadric ();
    //gluQuadricTexture(atmosfera, GL_TRUE);
@@ -204,7 +202,19 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if(keys[SDLK_m])
       {
           if(!janMiniMapa)
+          {
              abreMiniMapa();
+             redesenha = 1;
+          }
+      }
+
+      if(keys[SDLK_n])
+      {
+          if(!janAtalhos)
+          {
+              abreAtalhos();
+              redesenha = 1;
+          }
       }
       /* Tratamento das teclas para a Camera */
       if(keys[SDLK_x]) 
@@ -958,12 +968,20 @@ void engine::abreMiniMapa()
    janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,"Mapa",1,1,NULL,NULL);
    figura* fig = janMiniMapa->objetos->InserirFigura(8,20,NULL);
    mapa->drawMinimap(fig->fig);
-
+   janMiniMapa->ptrExterno = &janMiniMapa;
    janMiniMapa->Abrir(gui->ljan);
 }
 
 
-
+void engine::abreAtalhos()
+{
+   janAtalhos = gui->ljan->InserirJanela(0,472,511,599,"Atalhos",1,1,NULL,NULL);
+   FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
+   FPS->texto = (char*)malloc(50*sizeof(char));
+   sprintf(FPS->texto,"FPS:");
+   janAtalhos->ptrExterno = &janAtalhos;
+   janAtalhos->Abrir(gui->ljan);
+}
 /*********************************************************************
  *                          Roda a Engine                            *
  *********************************************************************/

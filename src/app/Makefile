@@ -6,7 +6,7 @@ PROGFLAGS =
 ENDGUI = ../gui/
 ENDENGINE = ../engine/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
-OBJSENGINE = $(ENDENGINE)conversa.o
+OBJSENGINE = $(ENDENGINE)conversa.o $(ENDENGINE)culling.o
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
@@ -16,7 +16,7 @@ DlgEditor.o: DlgEditor.cpp
 	$(CC) $(CFLAGS) DlgEditor.cpp -o DlgEditor.o
 
 DlgEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJS)
-	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJS) -o $(BIN)DlgEditor
+	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) $(OBJS) -o $(BIN)DlgEditor
 
 clean:
 	\rm -rf *.o *.e $(BIN)DlgEditor

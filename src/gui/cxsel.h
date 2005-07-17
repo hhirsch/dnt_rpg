@@ -21,7 +21,7 @@ class cxSel: public Tobjeto
        * cx -> cxSel a ser desenhada
        * salvar -> != 0 se for para atualizar a superficie
        * screen -> superficie na qual sera desenhada a cxSel*/
-      void Desenhar(int Xjan,int Yjan,int salvar,SDL_Surface *screen);
+      void Desenhar(SDL_Surface *screen);
 
 };                  /* CAIXA DE SELECAO */
 

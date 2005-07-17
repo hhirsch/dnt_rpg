@@ -15,25 +15,7 @@ BIN = ../../bin/
 # POR ENQUANTO, MOVIMENTO TRANSPARENTE NAO FUNCIONA!!!!! (e provavelmente, nunca funcionara!!!)
 MOVOPACO =  -DMOVIMENTO_OPACO
 
-all: objeto teste fntEditor tp2
-
-teste: $(OBJSPP) teste.o 
-	$(CPP) $(EFLAGSGL) $(OBJSPP) teste.o -o $(BIN)teste
-
-tp2: $(OBJSPP) SDLtp2.o
-	$(CPP) $(EFLAGSGL) $(OBJSPP) SDLtp2.o -o $(BIN)tp2
-
-fntEditor: $(OBJSPP) fntEditor.o
-	$(CPP) $(EFLAGSGL) $(OBJSPP) fntEditor.o -o $(BIN)fntEditor
-
-SDLtp2.o: SDLtp2.cpp
-	$(CPP) $(CFLAGS) SDLtp2.cpp -o SDLtp2.o
-
-fntEditor.o: fntEditor.cpp
-	$(CPP) $(CFLAGS) fntEditor.cpp -o fntEditor.o
-
-teste.o: teste.cpp
-	$(CPP) $(CFLAGS) teste.cpp -o teste.o
+all: objeto  
 
 bartexto.o: bartexto.h bartexto.cpp
 	$(CPP) $(CFLAGS) bartexto.cpp -o bartexto.o
@@ -86,14 +68,10 @@ quadtexto.o: quadtexto.h quadtexto.cpp
 seltexto.o: seltexto.h seltexto.cpp
 	$(CPP) $(CFLAGS) seltexto.cpp -o seltexto.o
 
-run: teste
-	./teste $(PROGFLAGs)
-
 testaObj.o: testaObj.cpp
 	$(CPP) $(CFLAGS) testaObj.cpp -o testaObj.o
 
-objeto: $(OBJSPP) testaObj.o 
-	$(CPP) $(EFLAGSGL) $(OBJSPP) testaObj.o -o $(BIN)testaObj
+objeto: $(OBJSPP)
 
 clean:
 	\rm -rf *.o *.e $(BIN)teste $(BIN)fntEditor $(BIN)testaObj $(BIN)tp2

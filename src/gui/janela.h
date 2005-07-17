@@ -30,12 +30,15 @@ class janela: public Tobjeto
       int difx;                  /* Diferenca de qdo o mouse clicou */
       int dify;                  /* No momento de inicio da movimentacao */
       cores Cores;
+      janela **ptrExterno;       /* Ponteiro pro Ponteiro externo da Janela */
       GLuint caraTextura;        /* Textura da cara */
       int temTextura;            /* Se ja tem Textura ou Nao */
                                  /* Procedimento na ativacao */
       void (*procAtiva)(janela* jan, SDL_Surface *screen);
                                  /* Procedimento qdo Pressionada nela */
       void (*procPres)(janela* jan,int x, int y, SDL_Surface *screen);
+
+      void (*procFechar)();
 
       /* Desenha na superficie a janela com todos seus derivados
        * jan    -> a janela a ser desenhada

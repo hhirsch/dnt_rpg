@@ -40,6 +40,8 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,char *text,
    novo = new janela;
    novo->procAtiva = procAtiva;
    novo->procPres = procPres;
+   novo->procFechar = NULL;
+   novo->ptrExterno = NULL;
    novo->Cores.Iniciar();
    novo->x1 = xa;
    novo->x2 = xb;
@@ -159,7 +161,7 @@ void janela::Desenhar()
          }
          case CXSEL:{
               cxSel *cx = (cxSel*) obj;
-              cx->Desenhar(0,0,0,cara);
+              cx->Desenhar(cara);
               break;
          }
          case SELTEXTO:{
@@ -240,6 +242,10 @@ void janela::Abrir(Tlista *lista)
  *********************************************************************/
 void janela::Fechar(Tlista *ljan)
 {
+   if(procFechar)
+      procFechar();
+   if(ptrExterno != NULL)
+     *ptrExterno = NULL;
    Ljanela* lista = (Ljanela*) ljan;
    if(glIsTexture(caraTextura))
    {
