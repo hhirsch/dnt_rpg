@@ -68,9 +68,6 @@ quadtexto.o: quadtexto.h quadtexto.cpp
 seltexto.o: seltexto.h seltexto.cpp
 	$(CPP) $(CFLAGS) seltexto.cpp -o seltexto.o
 
-testaObj.o: testaObj.cpp
-	$(CPP) $(CFLAGS) testaObj.cpp -o testaObj.o
-
 objeto: $(OBJSPP)
 
 clean:
