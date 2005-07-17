@@ -44,6 +44,7 @@ class Square
                 int objetosDesenha[MAXOBJETOS]; //desenha objeto n?
                 int Xobjetos[MAXOBJETOS]; //x do objeto n
                 int Zobjetos[MAXOBJETOS]; //z do objeto n
+                GLuint R,G,B;            /* Cores do Quadrado para o MINIMAPA */
                 Square* quadObjetos[MAXOBJETOS];
 
 	private:
@@ -55,6 +56,7 @@ typedef struct _texture {
    char* nome;                   /* Nome do arquivo ed Textura Correspondente */
    GLuint indice;                /* Indice da Textura internamente */
    GLuint w,h;
+   GLuint R,G,B;                   /* Cores da Textura para o MINIMAPA */
    struct _texture* proximo;  /* Proxima Textura na Lista */
 }texture;
 

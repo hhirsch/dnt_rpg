@@ -46,7 +46,7 @@ Square::~Square()
 /********************************************************************
  *                      Retorna o indice da Textura                 *
  ********************************************************************/
-int IDTextura(Map* mapa, char* textura)
+int IDTextura(Map* mapa, char* textura, GLuint* R, GLuint* G, GLuint* B)
 {
    /* procura pela textura */
    int aux=0;
@@ -55,6 +55,7 @@ int IDTextura(Map* mapa, char* textura)
    {
       if(!strcmp(tex->nome, textura))
       {
+         *R = tex->R; *G = tex->G; *B = tex->B;
          return(tex->indice); //a textura ja esta presente 
       }
       tex = tex->proximo;
@@ -66,7 +67,8 @@ int IDTextura(Map* mapa, char* textura)
 /********************************************************************
  *         Insere a textura dentre as utilizadas pelo objeto        *
  ********************************************************************/
-void InserirTextura(Map* mapa, char* arq, char* nome)
+void InserirTextura(Map* mapa, char* arq, char* nome, 
+                    GLuint R, GLuint G, GLuint B)
 {
    texture* tex;
 
@@ -99,6 +101,10 @@ void InserirTextura(Map* mapa, char* arq, char* nome)
    //SDL_Rect ret;
    //ret.w = 0; ret.h = 0; ret.x = img->w; ret.y = img->h;
    SDL_BlitSurface(img,NULL,imgPotencia,NULL);
+ 
+   tex->R = R;
+   tex->G = G;
+   tex->B = B;
 
    glGenTextures(1, &(tex->indice));
    glBindTexture(GL_TEXTURE_2D, tex->indice);
@@ -368,6 +374,8 @@ int Map::open(char* arquivo)
    char* nomeMuroTexturaAtual = "nada\0";
    int numObjetosAtual = 0;
    int pisavel=0;
+   GLuint R,G,B;
+   GLuint Ratual,Gatual,Batual;
    
    if(!(arq = fopen(arquivo,"r")))
    {
@@ -433,7 +441,7 @@ int Map::open(char* arquivo)
                   if(strcmp(nomeArq,nomeMuroTexturaAtual))
                   {
                      nomeMuroTexturaAtual = nome;
-                     IDmuroTexturaAtual = IDTextura(this,nome);
+                     IDmuroTexturaAtual = IDTextura(this,nome,&R,&G,&B);
                   }
                   maux->textura = IDmuroTexturaAtual;
                   break;
@@ -466,8 +474,8 @@ int Map::open(char* arquivo)
          case 't': /* Insere Texturas no Mapa */
          {
             fgets(buffer, sizeof(buffer), arq); //até final da linha
-            sscanf(buffer, "%s %s",nome,nomeArq);  
-            InserirTextura(this,nomeArq, nome);
+            sscanf(buffer, "%s %s %d %d %d",nome,nomeArq,&R,&G,&B);  
+            InserirTextura(this,nomeArq, nome,R,G,B);
             break;
          }
          case 'p': /* Inserção de um novo quadrado */
@@ -522,9 +530,12 @@ int Map::open(char* arquivo)
                   /* Se sao Diferentes, tem de ser mudadas */
                   {
                      nomeTexturaAtual = nome;
-                     IDtexturaAtual = IDTextura(this,nome);
+                     IDtexturaAtual = IDTextura(this,nome,&Ratual,&Gatual,&Batual);
                   }
                   aux->textura = IDtexturaAtual;
+                  aux->R = Ratual;
+                  aux->G = Gatual;
+                  aux->B = Batual;
                   break;
                }
                case 'o': /* Insere Objeto no Quadrado */
@@ -651,6 +662,25 @@ void Map::drawMinimap(SDL_Surface* img)
    //printf("%d,%d %d,%d\n",img->w,img->h,x,z);
    //double razaoX = (float)img->w / (float)(x+1) ;
    //double razaoY = (float)img->h / (float)(z+1);
+
+   Square* primeiroLinha = first;
+   Square* atual;
+   x1 = 0; y1 = 0;
+   while(primeiroLinha != NULL)
+   {
+      atual = primeiroLinha;
+      while(atual != NULL)
+      {
+          cor_Definir(atual->R,atual->G,atual->B);
+          pixel_Desenhar(img,x1,y1,0); 
+          atual = atual->right;
+          x1++;
+      }
+      primeiroLinha = primeiroLinha->down;
+      x1 = 0;
+      y1++;
+   }
+
    cor_Definir(1, 1, 1);
    retangulo_2Cores(img,0,0,x-1,z-1,0,0,0,0);
    

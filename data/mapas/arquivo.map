@@ -5,10 +5,10 @@ T 14X16
 o cadeira ../data/models/objetos/icex/mesa_braco.dcc
 o mesa_redonda ../data/models/objetos/icex/mesa_redonda.dcc
 o mesa ../data/models/objetos/icex/mesa_braco.dcc
-t chao_madeira ../data/texturas/chao_madeira.jpg
-t chao_cimento ../data/texturas/chao_cimento.jpg
-t chao_grama ../data/texturas/chao_grama.jpg
-t parede_rosa ../data/texturas/parede_rosa.jpg
+t chao_madeira ../data/texturas/chao_madeira.jpg 128 82 56
+t chao_cimento ../data/texturas/chao_cimento.jpg 206 213 206
+t chao_grama ../data/texturas/chao_grama.jpg 130 148 96
+t parede_rosa ../data/texturas/parede_rosa.jpg 233 173 174
 # Definicao dos Muros
 muro 0,0,13,0
 mt parede_rosa
