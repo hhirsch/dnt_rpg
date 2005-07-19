@@ -19,8 +19,8 @@ software and hardware. They are:
 
    Software:
    OpenGL   - Mesa3D 6.2, www.mesa3d.org (or SGI-OpenGL 1.4)
-   SDL      - Versão 1.2.7, www.libsdl.org
-   SDLImage - Versão 1.2.4, www.libsdl.org/projects/SDL_image/
+   SDL      - Version 1.2.7, www.libsdl.org
+   SDLImage - Version 1.2.4, www.libsdl.org/projects/SDL_image/
 
    Hardware:
    Video Card with 3D aceleration, OpenGl compatible in Linux.
@@ -45,7 +45,9 @@ file dccnitghtmare. It's needed  to be on X. We really hope the
 game  will  open in  this case, and  the  interation-navigation 
 follows:
 
-                  Camera Movimentation
+                 ========================
+                 | Camera Movimentation |
+                 ========================
 
 mouse at left corner  =  turn camera                  (0-360°)
 left arrow            =  turn camera left             (0-360°)
@@ -60,8 +62,9 @@ pagedown              =  camera down                  (0-89°)
 insert                =  put camera on the top
 delete                =  put camera on the floor
 
-
-               Character Movimentation
+              ===========================
+              | Character Movimentation |
+              ===========================
 
 a          =  turn left                       (0-360°)
 d          =  turn right                      (0-360°)
@@ -71,6 +74,13 @@ q          =  move left                       (0-?)
 e          =  move right                      (0-?)
 tab        =  make active next character
 lctrl+tab  =  make active previous character
+ 
+                    =====================
+                    | Auxiliars Windows |
+                    =====================
+
+m      =  Open MiniMap window, if it isn't opened
+n      =  Open ShortCut window, if it isn't opened
 
 To end the game, press ESC key.
 
@@ -87,11 +97,5 @@ To end the game, press ESC key.
       http://www.sourceforge.net/projects/dccnitghtmare
 
 
-DccNiTghtmare.
-  
-   cesar@dcc.ufmg.br
-                    farrer@dcc.ufmg.br
-                                      mflima@dcc.ufmg.br
-                    silvio@dcc.ufmg.br
-   rui@dcc.ufmg.br
-   
+DccNiTghtmare - dccnightmare@dcc.ufmg.br.
+
