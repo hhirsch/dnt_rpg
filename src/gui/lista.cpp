@@ -85,7 +85,7 @@ cxSel* Tlista::InserirCxSel(int xa,int ya,int selecionada)
 /* Insere uma nova figura na lista */
 figura* Tlista::InserirFigura(int x,int y,char* arquivo)
 {
-   printf("Pondo Figura\n");
+   //printf("Pondo Figura\n");
    figura* novo;
    novo = new figura;
    novo->x = x;
@@ -96,7 +96,7 @@ figura* Tlista::InserirFigura(int x,int y,char* arquivo)
    
    if(arquivo!=NULL)
    {
-      printf("Arquivo: %s\n",arquivo);
+      //printf("Arquivo: %s\n",arquivo);
       SDL_Surface* img = IMG_Load(arquivo);
       novo->fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
@@ -106,7 +106,7 @@ figura* Tlista::InserirFigura(int x,int y,char* arquivo)
    }
    else
    {
-      printf("NULL\n");
+      //printf("NULL\n");
       novo->fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        240,95,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);

@@ -114,7 +114,7 @@ void InserirTextura(Map* mapa, char* arq, char* nome,
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
    mapa->numtexturas++;
 
-   printf("Inseri Textura: %s :%d %d\n",nome,img->w,img->h);
+   //printf("Inseri Textura: %s :%d %d\n",nome,img->w,img->h);
 
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);

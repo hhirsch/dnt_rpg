@@ -56,38 +56,28 @@ void barraTexto::Desenhar(int Xjan, int Yjan,int salvar, SDL_Surface *screen)
    }
 }
 
-void barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
+int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
                           int mouseY, SDL_Surface *screen)
 {
+#if 0
    SDLMod Modificador;
    SDL_Event evento;
    int c;
-   int pronto = 0;
+   //int pronto = 0;
    unsigned int pos = (mouseX-(Xjan+x1+2)) / (fonte_incCP()+1);
    int x;
    int y;
    if (pos>strlen(texto)) pos = strlen(texto);
    PoeTexto(Xjan,Yjan,1,pos,1,screen);
-   while (!pronto)
-   {
-      if(SDL_PollEvent(&evento))
-      {
-         switch(evento.type)
-         {
-            case SDL_KEYDOWN:
-               switch(evento.key.keysym.sym)
-               {
-                  /* Teclas de Finalizacao */
-                  case SDLK_ESCAPE:
-                     pronto = 1;
-                  break;
-                  case SDLK_RETURN:
-                  case SDLK_KP_ENTER:
-                     pronto = 1;
-                  break;
-                  /* Teclas de Movimentacao */
-                  case SDLK_HOME:
-                     pos = 0;
+
+   Uint8* teclas = SDL_getKeyState(NULL);
+
+   /* Teclas de Finalizacao */
+   if(teclas[SDLK_ESCAPE] || teclas[SDLK_RETURN] || teclas[SDLK_KP_ENTER])
+      return(0);
+   /* Teclas de Movimentacao */
+   if(SDLK_HOME)
+       pos = 0;
                   break;
                   case SDLK_END:
                      pos = strlen(texto);
@@ -159,8 +149,10 @@ void barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
       }
 
    }
-   PoeTexto(Xjan,Yjan,1,0,0,screen);
-   SDL_Delay(150);
+#endif
+   return(0);
+   //PoeTexto(Xjan,Yjan,1,0,0,screen);
+   //SDL_Delay(150);
 }
 
 

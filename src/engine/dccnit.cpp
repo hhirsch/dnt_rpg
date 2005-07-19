@@ -24,7 +24,7 @@ inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
 /*********************************************************************
  *                       Construtor da Engine                        *
  *********************************************************************/
-engine::engine(char* arqMapa)
+engine::engine()
 {
    /* Inicia as Listas Internas */
    NPCs = new (Lpersonagem);
@@ -33,7 +33,7 @@ engine::engine(char* arqMapa)
 
    /* Abre o Mapa Desejado */
    mapa = new(Map);
-   mapa->open(arqMapa);
+   
 
    /* Define a posicao da Camera Inicial */
    theta=35;
@@ -62,6 +62,80 @@ engine::~engine()
    delete(PCs);
    delete(gui);
    delete(mapa);
+}
+
+
+int engine::CarregaMapa(char* arqMapa)
+{
+   glDisable(GL_LIGHTING);
+   SDL_Surface* img = IMG_Load("../data/texturas/carregar.jpg");
+   SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       img->w,img->h,32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   SDL_BlitSurface(img,NULL,fig,NULL);
+   SDL_FreeSurface(img);
+   img = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       256,32,32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+
+   cor_Definir(0,0,0);
+   retangulo_Colorir(img,0,0,255,31,0);
+   cor_Definir(200,20,20);
+   selFonte(FFARSO,CENTRALIZADO,3);
+   escxy(img,128,0,"Carregando Mapa...");
+   GLuint texturaTexto;
+   glGenTextures(1,&texturaTexto);
+   glBindTexture(GL_TEXTURE_2D,texturaTexto);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
+                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                               img->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+   GLuint texturaCarga;
+   glGenTextures(1,&texturaCarga);
+   glBindTexture(GL_TEXTURE_2D, texturaCarga);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fig->w, fig->h, 
+                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                               fig->pixels);
+   SDL_FreeSurface(fig);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   AtualizaFrustum(matrizVisivel,proj,modl);
+   AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
+   AtualizaTela2D(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
+   glFlush();
+   SDL_GL_SwapBuffers();
+   mapa->open(arqMapa);
+   
+   abreMiniMapa();
+   abreAtalhos();
+
+   glDeleteTextures(1,&texturaTexto);
+   cor_Definir(0,0,0);
+   retangulo_Colorir(img,0,0,255,31,0);
+   cor_Definir(200,20,20);
+   selFonte(FFARSO,CENTRALIZADO,3);
+   escxy(img,128,0,"Carregando Personagens...");
+   glGenTextures(1,&texturaTexto);
+   glBindTexture(GL_TEXTURE_2D,texturaTexto);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
+                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                               img->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
+   AtualizaTela2D(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
+   glFlush();
+   SDL_GL_SwapBuffers();
+
+   glDeleteTextures(1,&texturaCarga);
+   glDeleteTextures(1,&texturaTexto);
+
+   glEnable(GL_LIGHTING);
+   return(1);
+
 }
 
 /*********************************************************************
@@ -121,8 +195,7 @@ void engine::Iniciar(SDL_Surface *screen)
      glFogf(GL_FOG_START,200.0);
      glFogf(GL_FOG_END,600.0);
    }
-   abreMiniMapa();
-   abreAtalhos();
+   
    //janela* jan;
    /*jan=gui->ljan->InserirJanela(100,100,355,355,"Logan, O Mutante",1,1,NULL,NULL);
    jan->objetos->InserirFigura(8,20,"../data/pics/logan/cara.bmp");

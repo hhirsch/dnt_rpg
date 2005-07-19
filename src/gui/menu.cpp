@@ -172,12 +172,12 @@ int menu::Rodar(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
 
    /* Calcula o Retorno */
    if(mouse_NaArea(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3,
-                   mouseX,mouseY) && (!tecla))
+                   mouseX,mouseY) && (!tecla) &&(*pronto))
    {
       //itemAtual = ((mouseY - y-4) / 11) + 1;
       if (!ItemDisponivel(itemAtual)) itemAtual = 0;
    }
-   else if ( (!tecla) )
+   else if ( (!tecla) && (*pronto))
       itemAtual = 0;
    //else
    //   item = itemAtual;

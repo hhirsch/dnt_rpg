@@ -39,7 +39,7 @@ class barraTexto: public Tobjeto
        * Xjan,Yjan     -> coordenada da janela na qual esta a barra  
        * mouseX,mouseY -> coordenada do mouse ao entrar na barra 
        * screen        -> a superficie na qual se encontra a barra*/
-      void Escrever(int Xjan,int Yjan,int mouseX,int mouseY,
+      int Escrever(int Xjan,int Yjan,int mouseX,int mouseY,
                     SDL_Surface *screen);
 
    private:

@@ -22,7 +22,7 @@ class engine
  
       /* Construtor da Engine
        * map -> ponteiro para o mapa utilizado pela engine */
-      engine(char* arqMapa);
+      engine();
       /* Destruidor da engine */
       ~engine();
  
@@ -56,6 +56,8 @@ class engine
        * É necessario utilizar SDL_GL_SwapBuffers();
        * apos o termino da funcao. */
       void Desenhar();
+
+      int CarregaMapa(char* arqMapa);
 
       interface* gui;
  

@@ -342,7 +342,7 @@ void InsereTextura(GLMmodel* modelo, char* textura)
 
    
    /* Transforma a textura em potencia de 2 */
-   printf("%s: X:%d Y:%d\n",arq,img->w,img->h);
+   //printf("%s: X:%d Y:%d\n",arq,img->w,img->h);
    SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
@@ -893,7 +893,7 @@ glmReadOBJ(char* filename, char* diretorioTex, int fazListas)
   model->x1 = 0;
   model->z1 = 0;*/
 
-  printf("%s : %.3f,%.3f %.3f,%.3f\n",filename,model->x1,model->z1,model->x2, model->z2);
+  //printf("%s : %.3f,%.3f %.3f,%.3f\n",filename,model->x1,model->z1,model->x2, model->z2);
   return model;
 }
 

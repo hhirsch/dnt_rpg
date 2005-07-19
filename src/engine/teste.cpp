@@ -25,8 +25,11 @@ int main(int argc, char **argv)
       printf("Vou conectar entao a %s\n",server);
    #endif   
    Farso_Iniciar(&screen,"Teste Engine DccNiTghtmare");
-   engine* Engine = new engine("../data/mapas/mapaTp4.map");
+   engine* Engine = new engine();
+   
+
    Engine->Iniciar(screen);
+   Engine->CarregaMapa("../data/mapas/mapaTp4.map");
    #ifdef REDE
       Engine->server = server;
    #endif

@@ -244,14 +244,17 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
     {
         barraTexto* bart = (barraTexto*)objAtivo;
         //TODO
-        bart->Escrever(ljan->janelaAtiva->x1,
+        if(!(bart->Escrever(ljan->janelaAtiva->x1,
                        ljan->janelaAtiva->y1,
-                       x,y,NULL);
-        ljan->janelaAtiva->AtualizaCara();
-        if(bart->procEditada != NULL)
+                       x,y,ljan->janelaAtiva->cara)))
         {
-              bart->procEditada(bart,NULL);
+            foco = FOCO_JOGO;
+            if(bart->procEditada != NULL)
+            {
+                  bart->procEditada(bart,NULL);
+            }
         }
+        ljan->janelaAtiva->AtualizaCara();
         return(BARRATEXTOESCRITA);
     }
     
@@ -284,10 +287,10 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         
        if((foco == FOCO_MENUJANELA) && (res==4) && (pronto))
        {
-           //TODO BUG!
            if(ljan->janelaAtiva->fechavel)
               ljan->janelaAtiva->Fechar(ljan);
-           printf("saiu!\n");
+           else
+              ljan->janelaAtiva->Desenhar();
            foco = FOCO_JOGO;
            return(JANELAFECHADA);
        }
