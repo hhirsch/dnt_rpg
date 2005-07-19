@@ -29,12 +29,26 @@ software and hardware. They are:
 |                      II - Instalation                      |
 ==============================================================
 
+1) Source-Code Distribution
+
+   a) LINUX   
+
    To   "install"   dccnitghtmare,   decompact   the  tar.bz2,  
 go to the directory dccnitghtmare and run "make".
    Exemple:
    farrer@anamabeka:~/$ tar -xvjf dccnitghtmare.tar.bz2
    farrer@anamabeka:~/$ cd dccnitghtmare
    farrer@anamabeka:~/dccnitghtmare/$ make
+
+   b) WINDOWS
+
+   To  compile  dccnitghtmare  on  windows,  you'll  need  the 
+dev-c++  compiler  (a.k.a. gcc port and ide to Windows).  Open
+the project DccNiTghtmare.dev on it and compile.
+
+2) Binary Distribution
+
+    Only decompact the archive you downloaded.
 
 ==============================================================
 |                       III - Execution                       |

@@ -1,0 +1,108 @@
+# Project: DccNiTghtmare
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/nstring.o src/gui/quadtexto.o src/gui/seltexto.o src/ia/ai.o src/map/map.o src/map/mapobjeto.o $(RES)
+LINKOBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/nstring.o src/gui/quadtexto.o src/gui/seltexto.o src/ia/ai.o src/map/map.o src/map/mapobjeto.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_image  
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+BIN  = bin/DccNiTghtmare.exe
+CXXFLAGS = $(CXXINCS)  
+CFLAGS = $(INCS)  
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before bin/DccNiTghtmare.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "bin\DccNiTghtmare.exe" $(LIBS)
+
+src/engine/teste.o: src/engine/teste.cpp
+	$(CPP) -c src/engine/teste.cpp -o src/engine/teste.o $(CXXFLAGS)
+
+src/engine/conversa.o: src/engine/conversa.cpp
+	$(CPP) -c src/engine/conversa.cpp -o src/engine/conversa.o $(CXXFLAGS)
+
+src/engine/culling.o: src/engine/culling.cpp
+	$(CPP) -c src/engine/culling.cpp -o src/engine/culling.o $(CXXFLAGS)
+
+src/engine/dccnit.o: src/engine/dccnit.cpp
+	$(CPP) -c src/engine/dccnit.cpp -o src/engine/dccnit.o $(CXXFLAGS)
+
+src/engine/personagens.o: src/engine/personagens.cpp
+	$(CPP) -c src/engine/personagens.cpp -o src/engine/personagens.o $(CXXFLAGS)
+
+src/etc/fifo.o: src/etc/fifo.c
+	$(CPP) -c src/etc/fifo.c -o src/etc/fifo.o $(CXXFLAGS)
+
+src/etc/glm.o: src/etc/glm.c
+	$(CPP) -c src/etc/glm.c -o src/etc/glm.o $(CXXFLAGS)
+
+src/gui/bartexto.o: src/gui/bartexto.cpp
+	$(CPP) -c src/gui/bartexto.cpp -o src/gui/bartexto.o $(CXXFLAGS)
+
+src/gui/botao.o: src/gui/botao.cpp
+	$(CPP) -c src/gui/botao.cpp -o src/gui/botao.o $(CXXFLAGS)
+
+src/gui/cores.o: src/gui/cores.cpp
+	$(CPP) -c src/gui/cores.cpp -o src/gui/cores.o $(CXXFLAGS)
+
+src/gui/cxsel.o: src/gui/cxsel.cpp
+	$(CPP) -c src/gui/cxsel.cpp -o src/gui/cxsel.o $(CXXFLAGS)
+
+src/gui/desenho.o: src/gui/desenho.c
+	$(CPP) -c src/gui/desenho.c -o src/gui/desenho.o $(CXXFLAGS)
+
+src/gui/erro.o: src/gui/erro.c
+	$(CPP) -c src/gui/erro.c -o src/gui/erro.o $(CXXFLAGS)
+
+src/gui/eventos.o: src/gui/eventos.cpp
+	$(CPP) -c src/gui/eventos.cpp -o src/gui/eventos.o $(CXXFLAGS)
+
+src/gui/farso.o: src/gui/farso.c
+	$(CPP) -c src/gui/farso.c -o src/gui/farso.o $(CXXFLAGS)
+
+src/gui/figura.o: src/gui/figura.cpp
+	$(CPP) -c src/gui/figura.cpp -o src/gui/figura.o $(CXXFLAGS)
+
+src/gui/fonte.o: src/gui/fonte.c
+	$(CPP) -c src/gui/fonte.c -o src/gui/fonte.o $(CXXFLAGS)
+
+src/gui/janela.o: src/gui/janela.cpp
+	$(CPP) -c src/gui/janela.cpp -o src/gui/janela.o $(CXXFLAGS)
+
+src/gui/lista.o: src/gui/lista.cpp
+	$(CPP) -c src/gui/lista.cpp -o src/gui/lista.o $(CXXFLAGS)
+
+src/gui/menu.o: src/gui/menu.cpp
+	$(CPP) -c src/gui/menu.cpp -o src/gui/menu.o $(CXXFLAGS)
+
+src/gui/mouse.o: src/gui/mouse.c
+	$(CPP) -c src/gui/mouse.c -o src/gui/mouse.o $(CXXFLAGS)
+
+src/gui/nstring.o: src/gui/nstring.c
+	$(CPP) -c src/gui/nstring.c -o src/gui/nstring.o $(CXXFLAGS)
+
+src/gui/quadtexto.o: src/gui/quadtexto.cpp
+	$(CPP) -c src/gui/quadtexto.cpp -o src/gui/quadtexto.o $(CXXFLAGS)
+
+src/gui/seltexto.o: src/gui/seltexto.cpp
+	$(CPP) -c src/gui/seltexto.cpp -o src/gui/seltexto.o $(CXXFLAGS)
+
+src/ia/ai.o: src/ia/ai.cpp
+	$(CPP) -c src/ia/ai.cpp -o src/ia/ai.o $(CXXFLAGS)
+
+src/map/map.o: src/map/map.cpp
+	$(CPP) -c src/map/map.cpp -o src/map/map.o $(CXXFLAGS)
+
+src/map/mapobjeto.o: src/map/mapobjeto.cpp
+	$(CPP) -c src/map/mapobjeto.cpp -o src/map/mapobjeto.o $(CXXFLAGS)

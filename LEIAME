@@ -52,7 +52,9 @@ o arquivo dccnitghtmare.É necessário estar no modo X do linux.
 Prontamente  o  jogo  deverá  abrir,  sendo  a sua interação - 
 navegação a seguinte:
 
-                  Movimentação da Camera
+                 ==========================
+                 | Movimentação da Camera |
+                 ==========================
 
 mouse canto esquerdo  =  gira camera horariamente   (0-360°)
 seta para esquerda    =  gira para esquerda a camera  (0-360°)
@@ -67,8 +69,9 @@ pagedown              =  desce seguindo circuferencia (0-89°)
 insert                =  coloca a câmera no topo
 delete                =  coloca a câmera no chão
 
-
-               Movimentação do Personagem
+              ==============================
+              | Movimentação do Personagem |
+              ==============================
 
 a          =  gira o personagem para esquerda (0-360°)
 d          =  gira o personagem para direita (0-360°)
@@ -78,6 +81,13 @@ q          =  move personagem para esquerda (0-?)
 e          =  move personagem para direita (0-?)
 tab        =  ativa o próximo personagem do grupo
 lctrl+tab  =  ativa o personagem anterior do grupo
+ 
+                 ======================
+                 | Janelas Auxiliares |
+                 ======================
+
+m = Abre Janela de Mapas, se já não estiver aberta
+n = Abre Janela de Atalhos, se já não estiver aberta 
 
 Para sair do jogo, pressione a tecla ESC.
 
@@ -94,11 +104,4 @@ Para sair do jogo, pressione a tecla ESC.
       http://www.sourceforge.net/projects/dccnitghtmare
 
 
-DccNiTghtmare.
-  
-   cesar@dcc.ufmg.br
-                    farrer@dcc.ufmg.br
-                                      mflima@dcc.ufmg.br
-                    silvio@dcc.ufmg.br
-   rui@dcc.ufmg.br
-   
+DccNiTghtmare - dccnightmare@dcc.ufmg.br.
