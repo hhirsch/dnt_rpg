@@ -65,7 +65,6 @@ engine::~engine()
       delete(gui);
    if(mapa)
    {
-      printf("Adeus MApa\n");
       delete(mapa);
    }
 }
@@ -124,17 +123,12 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
 
    /* Carregando o Mapa */
 
-   printf("Olhando Mapa\n");
    if(mapa) 
    {
-     printf("Vou deletar o Mapa\n");
      delete(mapa);
-     printf("Deletei mapa Atual\n");
    }
    mapa = new(Map);
-   printf("Fiz Novo Mapa\n");
    mapa->open(arqMapa);
-   printf("Abri Mapa\n");
    
    if(janMiniMapa)
      janMiniMapa->Fechar(gui->ljan);

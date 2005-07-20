@@ -620,8 +620,6 @@ Map::~Map()
       glDeleteTextures(1,&(au->indice));
       free(au);
    }
-
-   printf("Deletei Todas Texturas\n");
    
    /* Acabando com os muros */
    muro* m = muros;
@@ -633,13 +631,10 @@ Map::~Map()
       free(am);
    }
 
-   printf("Deletei com todos os muros\n");
 
    /* Acabando com os objetos */
    delete(Objetos);
   
-   printf("Deletei os Objetos\n");
-
    /* Acabando com os Quadrados */
    Square* baixo, *direita;
    baixo = first;
@@ -655,9 +650,6 @@ Map::~Map()
          direita = direita->right;
       }
    }
-   
-   printf("Acabei com os Quadrados\n");
-
 }
 
 

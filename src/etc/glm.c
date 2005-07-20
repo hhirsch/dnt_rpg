@@ -773,29 +773,18 @@ glmDelete(GLMmodel* model)
   GLMgroup* group;
   GLuint i;
 
-  printf("Limpando Coisas\n");
-
   if (model->pathname)   free(model->pathname);
-  printf("Adeus path\n");
   if (model->mtllibname) free(model->mtllibname);
-  printf("Adeus mtllib\n");
   if (model->vertices)   free(model->vertices);
-  printf("Adeus Vertices\n");
-  if (model->normals){printf("normais: %d\n",model->numnormals);    free(model->normals);}
-  printf("Adeus Normais\n");
+  if (model->normals)    free(model->normals);
   if (model->texcoords)  free(model->texcoords);
-  printf("Adeus textcoord\n");
   if (model->facetnorms) free(model->facetnorms);
-  printf("Adeus facet\n");
   if (model->triangles)  free(model->triangles);
-  printf("limpando nome de materiais\n");
   if (model->materials) {
     for (i = 0; i < model->nummaterials; i++)
       free(model->materials[i].name);
   }
-  printf("limpando materiais\n");
   free(model->materials);
-  printf("limpando grupos\n");
   while(model->groups) {
     group = model->groups;
     model->groups = model->groups->next;
@@ -803,7 +792,6 @@ glmDelete(GLMmodel* model)
     free(group->triangles);
     free(group);
   }
-  printf("Limpando TExturas\n");
   GLMtexture* tex = model->texturas;
   GLMtexture* au;
   for(i=0;i<model->numtexturas;i++)
@@ -814,9 +802,7 @@ glmDelete(GLMmodel* model)
      glDeleteTextures(1,&(au->indice));
      free(au);
   }
-  printf("Adeus Modelo\n");
   free(model);
-  printf("Prontinho!\n");
 }
 
 /* glmReadOBJ: Reads a model description from a Wavefront .OBJ file.
