@@ -57,7 +57,12 @@ class engine
        * apos o termino da funcao. */
       void Desenhar();
 
-      int CarregaMapa(char* arqMapa);
+      /* Faz a carga do Mapa */
+      int CarregaMapa(char* arqMapa, int RecarregaPCs);
+
+      /* Abre a Tela Inicial, com seus tratamentos.
+       * Retorna 0 se é para sair, 1 caso contrario */
+      int TelaInicial();
 
       interface* gui;
  

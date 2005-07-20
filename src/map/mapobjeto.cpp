@@ -27,10 +27,14 @@ LmapObjeto::~LmapObjeto()
 {
    mapObjeto* obj = (mapObjeto*) primeiro->proximo;
    int aux;
-   for(aux=0;aux<total;aux++)
+   //int t = total;
+   for(aux=0; aux<total; aux++)
    {
+      //printf("total: %d\n",total);
+      printf("Tirei: %d\n",aux);
       RetirarMapObjeto(obj,0);
       obj = (mapObjeto*) obj->proximo;
+      //obj = (mapObjeto*) obj->proximo;
    }
 }
 
@@ -85,14 +89,30 @@ mapObjeto* LmapObjeto::InserirMapObjeto(char* arquivo, char* nome)
  *********************************************************************/
 void LmapObjeto::RetirarMapObjeto(mapObjeto* obj, int tiraMemoria)
 {
-   free(obj->nome);
+   printf("%s\n",obj->nome);
    glmDelete((GLMmodel*)obj->modelo3d);
+   printf("ADEUS modelo\n");
    if(obj->modeloMedio)
+   {
+     printf("TemMedio\n");
      glmDelete((GLMmodel*)obj->modeloMedio);
+     printf("adeus medioa\n");
+   }
    if(obj->modeloMinimo)
-     glmDelete((GLMmodel*)obj->modeloMinimo);
+   {
+     printf("Tem minimo\n");
+     glmDelete((GLMmodel*)obj->modeloMinimo); 
+     printf("Adeus Minimo\n");
+   }
    if(tiraMemoria)
+   {
+     printf("vou tirar memoria\n");
      Retirar(obj);
+     printf("tirei\n");
+   }
+   free(obj->nome);
+   printf("Adeus nome\n");
+   printf("Beleza\n");
 }
 
 /*********************************************************************

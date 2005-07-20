@@ -6,20 +6,12 @@ Ks 1.0 1.0 1.0
 d 1.0
 illum 2
 
-newmtl floorplane
-Ns 96.0784313725
-Kd 0.729758381844 0.705190956593 0.692907273769
-Ka 1.0 1.0 1.0
-Ks 1.0 1.0 1.0
-d 1.0
-illum 2
-
 newmtl glass
 Ns 762.745098039
 Kd 1.0 1.0 1.0
 Ka 1.0 1.0 1.0
 Ks 1.0 1.0 1.0
-d 0.0
+d 1.0
 illum 2
 
 newmtl topBlack.001

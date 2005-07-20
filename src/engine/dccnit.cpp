@@ -27,13 +27,12 @@ inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
 engine::engine()
 {
    /* Inicia as Listas Internas */
-   NPCs = new (Lpersonagem);
-   PCs  = new (Lpersonagem);
    gui  = new interface(NULL);
-
-   /* Abre o Mapa Desejado */
-   mapa = new(Map);
-   
+   mapa = NULL;
+   PCs = NULL;
+   NPCs = NULL;
+   janMiniMapa = NULL;
+   janAtalhos = NULL;
 
    /* Define a posicao da Camera Inicial */
    theta=35;
@@ -58,15 +57,40 @@ engine::~engine()
    //glDeleteLists(mapaDesenhar,1);
    gluDeleteQuadric(atmosfera);
    glDeleteTextures(1, &ceu);
-   delete(NPCs);
-   delete(PCs);
-   delete(gui);
-   delete(mapa);
+   if(NPCs)
+      delete(NPCs);
+   if(PCs)
+      delete(PCs);
+   if(gui)
+      delete(gui);
+   if(mapa)
+   {
+      printf("Adeus MApa\n");
+      delete(mapa);
+   }
 }
 
-
-int engine::CarregaMapa(char* arqMapa)
+/*********************************************************************
+ *                     Aloca uma Textura no OPENGL                   *
+ *********************************************************************/
+void carregaTextura(SDL_Surface* img, GLuint* textID)
 {
+   glGenTextures(1,textID);
+   glBindTexture(GL_TEXTURE_2D,*textID);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
+                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                               img->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
+
+/*********************************************************************
+ *                       Carrega Mapa na Engine                      *
+ *********************************************************************/
+int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
+{
+   glClearColor(0,0,0,1);
+   glClear ((GL_COLOR_BUFFER_BIT));
    glDisable(GL_LIGHTING);
    SDL_Surface* img = IMG_Load("../data/texturas/carregar.jpg");
    SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
@@ -78,37 +102,44 @@ int engine::CarregaMapa(char* arqMapa)
                        256,32,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
 
+
    cor_Definir(0,0,0);
    retangulo_Colorir(img,0,0,255,31,0);
    cor_Definir(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
    escxy(img,128,0,"Carregando Mapa...");
    GLuint texturaTexto;
-   glGenTextures(1,&texturaTexto);
-   glBindTexture(GL_TEXTURE_2D,texturaTexto);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
-                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
-                               img->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   carregaTextura(img,&texturaTexto);
 
    GLuint texturaCarga;
-   glGenTextures(1,&texturaCarga);
-   glBindTexture(GL_TEXTURE_2D, texturaCarga);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fig->w, fig->h, 
-                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
-                               fig->pixels);
+   carregaTextura(fig,&texturaCarga);
    SDL_FreeSurface(fig);
 
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
    AtualizaFrustum(matrizVisivel,proj,modl);
    AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
    AtualizaTela2D(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
    glFlush();
    SDL_GL_SwapBuffers();
+
+   /* Carregando o Mapa */
+
+   printf("Olhando Mapa\n");
+   if(mapa) 
+   {
+     printf("Vou deletar o Mapa\n");
+     delete(mapa);
+     printf("Deletei mapa Atual\n");
+   }
+   mapa = new(Map);
+   printf("Fiz Novo Mapa\n");
    mapa->open(arqMapa);
+   printf("Abri Mapa\n");
    
+   if(janMiniMapa)
+     janMiniMapa->Fechar(gui->ljan);
+   if(janAtalhos)
+     janAtalhos->Fechar(gui->ljan);
    abreMiniMapa();
    abreAtalhos();
 
@@ -118,24 +149,96 @@ int engine::CarregaMapa(char* arqMapa)
    cor_Definir(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
    escxy(img,128,0,"Carregando Personagens...");
-   glGenTextures(1,&texturaTexto);
-   glBindTexture(GL_TEXTURE_2D,texturaTexto);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
-                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
-                               img->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   carregaTextura(img,&texturaTexto);
+   
    AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
    AtualizaTela2D(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
    glFlush();
    SDL_GL_SwapBuffers();
 
+   SDL_FreeSurface(img);
    glDeleteTextures(1,&texturaCarga);
    glDeleteTextures(1,&texturaTexto);
+
+   /* Carregando Entao os NPCs */
+   if(NPCs)
+     delete(NPCs);
+   NPCs = new (Lpersonagem);
+   personagem* per;
+   per = NPCs->InserirPersonagem(7,6,10,6,
+                                 "../data/pics/logan/portrait.jpg",0,
+                                 0,"NPC",
+                        "../data/models/personagens/logan_completo_final.obj", 
+                                 "../data/pics/logan/");
+   per->posicaoLadoX = 30;
+   per->posicaoLadoZ = 20;
+
+   if(RecarregaPCs)
+   {
+       if(PCs)
+          delete(PCs);
+       PCs  = new (Lpersonagem);
+       PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",0,0,
+                              "Logan",
+                       "../data/models/personagens/logan_completo_final.obj",
+                              "../data/pics/logan/");
+   }
 
    glEnable(GL_LIGHTING);
    return(1);
 
+}
+
+
+int engine::TelaInicial()
+{
+   glClearColor(0,0,0,1);
+   glClear ((GL_COLOR_BUFFER_BIT));
+   glDisable(GL_LIGHTING);
+   SDL_Surface* img = IMG_Load("../data/texturas/menuEnglish.jpg");
+   SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       img->w,img->h,32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   SDL_BlitSurface(img,NULL,fig,NULL);
+   SDL_FreeSurface(img);
+   
+   GLuint textID;
+   carregaTextura(fig,&textID);
+   SDL_FreeSurface(fig);
+
+   AtualizaFrustum(matrizVisivel,proj,modl);
+   AtualizaTela2D(textID,proj,modl,viewPort,336,172,463,427,0.01);
+   glFlush();
+   SDL_GL_SwapBuffers();
+
+   int pronto = 0;
+   int result;
+   Uint8 Mbotao;
+   int x,y;
+
+   while(!pronto)   
+   {
+        SDL_PumpEvents();
+        Mbotao = SDL_GetMouseState(&x,&y);
+        if(Mbotao & SDL_BUTTON(1))
+        {
+            if(mouse_NaArea(360,208,440,242,x,y))
+            {
+                result = 1;
+                pronto = 1;
+            }
+            else
+            if(mouse_NaArea(360,358,440,392,x,y))
+            {
+                result = 0;
+                pronto = 1;
+            }
+        }
+   }
+
+   glDeleteTextures(1,&textID);
+
+   return(result);
 }
 
 /*********************************************************************

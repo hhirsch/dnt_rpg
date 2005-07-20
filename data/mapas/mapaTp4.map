@@ -8,7 +8,7 @@ o mesa_braco ../data/models/objetos/icex/mesa_braco.dcc
 o computador ../data/models/objetos/geral/computador.dcc
 o cadeira ../data/models/objetos/icex/cadeira.dcc
 o mesa ../data/models/objetos/icex/mesa.dcc
-o poste ../data/models/objetos/icex/poste.dcc
+o poste ../data/models/objetos/icex/mesa.dcc
 o macaco ../data/models/objetos/geral/macaco.dcc
 # Texturas Utilizadas
 t parede_rosa ../data/texturas/parede_rosa.jpg 233 173 174
