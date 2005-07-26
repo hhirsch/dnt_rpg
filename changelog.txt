@@ -5,12 +5,14 @@
  - Gui is now avaible on Graphical Engine;
  - Better  Walk algorithm and colision detection
 more permissive;
- - Corrected bug in 2 chairs of map;
  - Makefile to compile on Windows (Dev-C++);
  - Use Fog to improve performance (by renderizing 
 less things per frame);
  - MiniMap implementated;
  - Limited Frames per second implemented;
+ - Constant Character & Camera Velocity;
+ - Initial Menu;
+ - Loading Map Screen;
  - 
  - Minor bugs fixes; 
 
