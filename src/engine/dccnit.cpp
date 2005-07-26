@@ -8,15 +8,20 @@
 #include <math.h>
 
 #define DELAY 0
-#define ANDAR 1.5        // O quanto o personagem anda a cada frame
+
+#define ANDAR 1.5        /* O quanto o personagem anda a cada frame
+                          * A Velocidade do Caracter pode ser calculada
+                          * por ANDAR / 20, em unidades/milisegundo 
+                          */
+ 
 #define GIRAR 2.5        // O quanto ele gira a cada frame
-#define DELTACAMERA 2.0  // O quanto a camera meche a cada frame
+#define DELTACAMERA 2.5  // O quanto a camera meche a cada frame
 #define ZOOMMAXIMO 80    // Valor máximo de zoom
 #define ZOOMMINIMO 280   // Valor mínimo do zoom
 
-#define CORNEBLINA_R 1.0
-#define CORNEBLINA_G 1.0
-#define CORNEBLINA_B 1.0
+#define CORNEBLINA_R 0.2
+#define CORNEBLINA_G 0.8
+#define CORNEBLINA_B 0.4
 
 /* Conversor de graus para radianos */
 inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
@@ -337,9 +342,22 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    Uint32 tempo;
    double varX, varZ; // para evitar de ter de calcular 2 vezes
 
+   double passo;  // O quanto realmente anda, em decorrencia do tempo decorrido
+   double rotacao;// O quanto realmente roda, em decorrencia do tempo (FPS)
+   double varCamera;
+   double varTempo;
+
    tempo = SDL_GetTicks();
-   if( ((tempo-ultimaLeitura)) >= /*16*/20)
+   varTempo = (tempo-ultimaLeitura);
+   if( ((varTempo)) >= /*16*/20)
    {
+      /* Calcula as Modificações Reais no Andar, rotacionar, girar, etc */
+      varTempo /= 20.0;
+      passo = (varTempo)*ANDAR;
+      rotacao = (varTempo)*GIRAR;
+      varCamera = varTempo*DELTACAMERA;
+       
+
       SDL_PumpEvents();
       if(janAtalhos)
       {
@@ -416,7 +434,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
           if (d>ZOOMMAXIMO)
           {
-             d-= DELTACAMERA+0.5;
+             d-= varCamera;
              redesenha = 1;
           }
       }
@@ -424,25 +442,25 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
          if(d<ZOOMMINIMO)
          {
-             d+= DELTACAMERA+0.5; 
+             d+= varCamera; 
              redesenha = 1;
          }
       }
       if(keys[SDLK_RIGHT]) // Roda Camera Antihorariamente
       {
-          phi -= DELTACAMERA+0.5;  
+          phi -= varCamera;  
           redesenha = 1;
       }
       if(keys[SDLK_LEFT]) // Roda Camera Horariamente
       {
-         phi += DELTACAMERA+0.5;
+         phi += varCamera;
          redesenha = 1;
       }
       if(keys[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
       {
          if (theta < 89)
          {
-            theta += DELTACAMERA;
+            theta += varCamera;
             redesenha = 1;
          }
       }
@@ -450,7 +468,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
          if (theta > 0)
          {
-            theta -= DELTACAMERA;
+            theta -= varCamera;
             redesenha = 1;
          }
       }
@@ -478,8 +496,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       /* Tratamento da tecla para Movimentacao do Personagem */
       if(keys[SDLK_q] || keys[SDLK_e])
       {
-          varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-          varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
+          varX = passo * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
+          varZ = passo * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
          // Anda com personagem de lado para esquerda
          if(keys[SDLK_q]) 
          {
@@ -514,8 +532,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       }
       if(keys[SDLK_w] || keys[SDLK_s])
       { 
-         varX = ANDAR * sin(deg2Rad(PCs->personagemAtivo->orientacao));
-         varZ = ANDAR * cos(deg2Rad(PCs->personagemAtivo->orientacao));
+         varX = passo * sin(deg2Rad(PCs->personagemAtivo->orientacao));
+         varZ = passo * cos(deg2Rad(PCs->personagemAtivo->orientacao));
          if(keys[SDLK_w]) 
          {
               varX *= -1;
@@ -550,9 +568,9 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if( (keys[SDLK_a]) || (keys[SDLK_d]))
       {
          // Gira personagem antihorariamente
-         if((keys[SDLK_a]) && (podeAndar(0,0,GIRAR)) )  
+         if((keys[SDLK_a]) && (podeAndar(0,0,rotacao)) )  
          {
-            PCs->personagemAtivo->orientacao += GIRAR;
+            PCs->personagemAtivo->orientacao += rotacao;
             if(PCs->personagemAtivo->orientacao > 360.0)
                PCs->personagemAtivo->orientacao = 
                                PCs->personagemAtivo->orientacao  - 360.0;
@@ -560,9 +578,9 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             andou = 1;
          }
          // Gira o personagem horariamente
-         if((keys[SDLK_d]) && (podeAndar(0,0,-GIRAR)) )
+         if((keys[SDLK_d]) && (podeAndar(0,0,-rotacao)) )
          {
-            PCs->personagemAtivo->orientacao -= GIRAR;
+            PCs->personagemAtivo->orientacao -= rotacao;
             if(PCs->personagemAtivo->orientacao < 0.0)
                PCs->personagemAtivo->orientacao = 360.0 + 
                                         PCs->personagemAtivo->orientacao ;
@@ -639,7 +657,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       }
    }
    }
-
+   
    if( (redesenha) || ( (*forcaAtualizacao != 0)/* && ((tempo-ultimaLeitura)>=16)*/))
    {
       Desenhar();
