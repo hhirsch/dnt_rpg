@@ -19,9 +19,9 @@
 #define ZOOMMAXIMO 80    // Valor máximo de zoom
 #define ZOOMMINIMO 280   // Valor mínimo do zoom
 
-#define CORNEBLINA_R 0.2
-#define CORNEBLINA_G 0.8
-#define CORNEBLINA_B 0.4
+#define CORNEBLINA_R 1.0
+#define CORNEBLINA_G 1.0
+#define CORNEBLINA_B 1.0
 
 /* Conversor de graus para radianos */
 inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
@@ -60,8 +60,8 @@ engine::engine()
 engine::~engine()
 {
    //glDeleteLists(mapaDesenhar,1);
-   gluDeleteQuadric(atmosfera);
-   glDeleteTextures(1, &ceu);
+   //gluDeleteQuadric(atmosfera);
+   //glDeleteTextures(1, &ceu);
    if(NPCs)
       delete(NPCs);
    if(PCs)
@@ -94,7 +94,7 @@ void carregaTextura(SDL_Surface* img, GLuint* textID)
 int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
 {
    glClearColor(0,0,0,1);
-   glClear ((GL_COLOR_BUFFER_BIT));
+   glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
    SDL_Surface* img = IMG_Load("../data/texturas/carregar.jpg");
    SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
@@ -192,7 +192,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
 int engine::TelaInicial()
 {
    glClearColor(0,0,0,1);
-   glClear ((GL_COLOR_BUFFER_BIT));
+   glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
    SDL_Surface* img = IMG_Load("../data/texturas/menuEnglish.jpg");
    SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
@@ -205,8 +205,20 @@ int engine::TelaInicial()
    carregaTextura(fig,&textID);
    SDL_FreeSurface(fig);
 
+   img = IMG_Load("../data/texturas/fundo.jpg");
+   fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       img->w,img->h,32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   SDL_BlitSurface(img,NULL,fig,NULL);
+   SDL_FreeSurface(img);
+   GLuint tituloID;
+   carregaTextura(fig,&tituloID);
+   SDL_FreeSurface(fig);
+
+
    AtualizaFrustum(matrizVisivel,proj,modl);
    AtualizaTela2D(textID,proj,modl,viewPort,336,172,463,427,0.01);
+   AtualizaTela2D(tituloID,proj,modl,viewPort,144,44,655,555,0.012);
    glFlush();
    SDL_GL_SwapBuffers();
 
@@ -236,6 +248,7 @@ int engine::TelaInicial()
    }
 
    glDeleteTextures(1,&textID);
+   glDeleteTextures(1,&tituloID);
 
    return(result);
 }
@@ -297,38 +310,6 @@ void engine::Iniciar(SDL_Surface *screen)
      glFogf(GL_FOG_START,200.0);
      glFogf(GL_FOG_END,600.0);
    }
-   
-   //janela* jan;
-   /*jan=gui->ljan->InserirJanela(100,100,355,355,"Logan, O Mutante",1,1,NULL,NULL);
-   jan->objetos->InserirFigura(8,20,"../data/pics/logan/cara.bmp");
-   jan->objetos->InserirQuadroTexto(90,20,250,95,1,"Fale humano ridiculo.Tens alguma comida? Os avestruzes voam sem asas e os grilos pulam feito GRILOS! Ou seriam gafanhotos?");
-   jan->objetos->InserirSelTexto(8,100,250,250,"1 - Ora, o que faz um mutante nesta janela? Nao tens medo de virar um quadro?",
-                      "2 - Aonde esta sua orelha esquerda, mutante?",
-                      "3 - (entrega um grilo ao mutante) Fiquei sabendo que eh esta sua comida habitual.", 
-                      "4 - EBA!","5 - Uai so, que que eu to fazendo aqui, num tenho mais esse cabelo todo nao!!",NULL);
-   jan->Abrir(gui->ljan);*/
-
-   
-
-   atmosfera = gluNewQuadric ();
-   //gluQuadricTexture(atmosfera, GL_TRUE);
-   gluQuadricTexture(atmosfera, GL_FALSE);
-
-   SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
-   SDL_Surface* fg = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                      img->w,img->h,32,
-                      0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   SDL_BlitSurface(img,NULL,fg,NULL);
-   SDL_FreeSurface(img);
-
-   glGenTextures(1, &ceu);
-   glBindTexture(GL_TEXTURE_2D, ceu);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fg->w, fg->h, 
-                0, GL_RGBA, GL_UNSIGNED_BYTE, fg->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-   SDL_FreeSurface(fg);
 }
 
 
@@ -458,19 +439,17 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       }
       if(keys[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
       {
-         if (theta < 89)
-         {
             theta += varCamera;
             redesenha = 1;
-         }
+            if(theta > 89) 
+               theta = 89;
       }
       if(keys[SDLK_PAGEDOWN]) // desce com a camera ate visao em 1ª pessoa
       {
-         if (theta > 0)
-         {
-            theta -= varCamera;
-            redesenha = 1;
-         }
+         theta -= varCamera;
+         redesenha = 1;
+         if(theta < 0)
+            theta = 0;
       }
       if (keys[SDLK_HOME]) // Zoom Maximo
       {
@@ -683,7 +662,9 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
  *********************************************************************/
 void engine::Desenhar()
 {
-   glClearColor(CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,1.0);
+   glClearColor(CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,0.0);
+   glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+
    glLoadIdentity();
 
    /* Redefine a posicao dinamica da camera */

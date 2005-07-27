@@ -332,8 +332,6 @@ int main(int argc, char *argv[])
    delete(operComp);
    delete(operMod);
    
-   printf("Teste finalizado com exito\n");
-
    return(0);
 
 

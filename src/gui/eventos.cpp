@@ -211,6 +211,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                   bot->procPres(ljan->janelaAtiva,ljan,NULL);
               else if (bot->men != NULL)
               {
+                 chamador = bot;
                  objAtivo = (Tobjeto*) bot->men;
                  menu* men = (menu*)objAtivo;
                  men->Coordenada(bot->x1,bot->y2+1);
@@ -297,7 +298,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
        else if((res) && (men->procSelecionado) &&(pronto)) 
        {
            men->procSelecionado(ljan->janelaAtiva,
-                                NULL,men->Item(res),
+                                chamador,men->Item(res),
                                 NULL);
            foco = FOCO_JOGO;
        }

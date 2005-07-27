@@ -56,7 +56,7 @@ class interface
 
    private:
       Tobjeto* objAtivo;
-     
+      Tobjeto* chamador;
 
 };
 
