@@ -93,8 +93,8 @@ lctrl+tab  =  make active previous character
                     | Auxiliars Windows |
                     =====================
 
-m      =  Open MiniMap window, if it isn't opened
-n      =  Open ShortCut window, if it isn't opened
+m      =  Open MiniMap window
+n      =  Open ShortCut window
 
 To end the game, press ESC key.
 

@@ -167,7 +167,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per = NPCs->InserirPersonagem(7,6,10,6,
                                  "../data/pics/logan/portrait.jpg",0,
                                  0,"NPC",
-                        "../data/models/personagens/logan_completo_final.obj", 
+                        "../data/models/objetos/icex/parede.obj", 
                                  "../data/pics/logan/");
    per->posicaoLadoX = 30;
    per->posicaoLadoZ = 20;
@@ -179,7 +179,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        PCs  = new (Lpersonagem);
        PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",0,0,
                               "Logan",
-                       "../data/models/personagens/logan_completo_final.obj",
+                       "../data/models/objetos/icex/parede.obj",
                               "../data/pics/logan/");
    }
 
@@ -676,8 +676,8 @@ void engine::Desenhar()
    /* Autaliza para fazer o culling e o desenho da GUI */
    AtualizaFrustum(matrizVisivel,proj,modl);
 
-   glClear ((GL_COLOR_BUFFER_BIT));
-   glClear (GL_DEPTH_BUFFER_BIT);
+   //glClear ((GL_COLOR_BUFFER_BIT));
+   //glClear (GL_DEPTH_BUFFER_BIT);
    
    glPushMatrix();
    

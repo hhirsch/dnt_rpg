@@ -91,10 +91,10 @@ class Map
                 Square* first; /* Quadrado localizado no canto superior */
                 Square* squareInic; /* quadrado inicial */
                 int x,z;       /* Dimensões do mapa */
+                muro* muros;  /* Muros Presentes no Mapa */
 
 	private:
 		char* name;    /* Nome do Arquivo de Mapa Carregado */
-		muro* muros;   /* Muros presentes no mapa */
                 
 
 };
