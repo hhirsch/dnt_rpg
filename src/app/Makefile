@@ -13,7 +13,7 @@ OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDENGINE)cull
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-all: DlgEditor 
+all: DlgEditor MapEditor
 
 MapEditor.o: MapEditor.cpp
 	$(CC) $(CFLAGS) MapEditor.cpp -o MapEditor.o

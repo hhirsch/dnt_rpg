@@ -54,6 +54,7 @@ class Square
 
 typedef struct _texture {
    char* nome;                   /* Nome do arquivo ed Textura Correspondente */
+   char* arqNome;
    GLuint indice;                /* Indice da Textura internamente */
    GLuint w,h;
    GLuint R,G,B;                   /* Cores da Textura para o MINIMAPA */
@@ -82,6 +83,7 @@ class Map
                 void drawMinimap(SDL_Surface* img);
 		int open( char* arquivo ); /* Abre o mapa do arquivo */
                 Square* quadradoRelativo(int x, int z);
+                int save( char* arquivo ); /* Salva o Mapa */
 
 		/* Vars */
                 LmapObjeto* Objetos; 

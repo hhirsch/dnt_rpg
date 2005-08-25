@@ -134,6 +134,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    }
    mapa = new(Map);
    mapa->open(arqMapa);
+
    
    if(janMiniMapa)
      janMiniMapa->Fechar(gui->ljan);
@@ -141,6 +142,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
      janAtalhos->Fechar(gui->ljan);
    abreMiniMapa();
    abreAtalhos();
+
 
    glDeleteTextures(1,&texturaTexto);
    cor_Definir(0,0,0);

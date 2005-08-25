@@ -10,6 +10,7 @@ class mapObjeto: public Tobjeto
      int deltaVariacao;   /* De quantas em quantas unidades de distancia 
                            * se dá a troca de nivel de detalhe do modelo.*/
      char* nome;
+     char* nomeArq;
 
      /* Desenha o objeto, estando em x,z a uma distancia do
       * observador (o que vai definir o LOD).

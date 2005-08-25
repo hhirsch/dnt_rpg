@@ -64,6 +64,24 @@ int IDTextura(Map* mapa, char* textura, GLuint* R, GLuint* G, GLuint* B)
    return(-1);
 }
 
+/*********************************************************************
+ *                   Retorna o nome da textura                       *
+ *********************************************************************/
+char* NomeTextura(Map* mapa, GLuint ID)
+{
+   int aux=0;
+   texture* tex = mapa->Texturas;
+   while(aux < mapa->numtexturas)
+   {
+      if(tex->indice == ID)
+      {
+         return(tex->nome);
+      }
+      tex = tex->proximo;
+      aux++;
+   }
+   return(NULL);
+}
 /********************************************************************
  *         Insere a textura dentre as utilizadas pelo objeto        *
  ********************************************************************/
@@ -93,6 +111,9 @@ void InserirTextura(Map* mapa, char* arq, char* nome,
    }
 
    tex->nome = (char*) malloc((strlen(nome)+1)*sizeof(char));
+   tex->arqNome = (char*) malloc((strlen(arq)+1)*sizeof(char));
+
+   strcpy(tex->arqNome,arq);
    strcpy(tex->nome,nome);
 
    SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
@@ -573,7 +594,7 @@ int Map::open(char* arquivo)
       }
    }
    fclose(arq);
-
+  
    /* Agora varre todo o mapa, atualizando os ponteiros para os quadrados de
     * objeto. */
    aux = first;
@@ -599,7 +620,90 @@ int Map::open(char* arquivo)
        if(ant!=NULL)
          ant = ant->down;
    }
+ 
+   return(1);
+}
 
+/********************************************************************
+ *                      Salva o Arquivo de Mapas                    *
+ ********************************************************************/
+int Map::save(char* arquivo)
+{
+   FILE* arq;
+
+   if(!(arq = fopen(arquivo,"w")))
+   {
+      printf("Erro ao se tentar Salvar mapa: %s\n",arquivo);
+	return(0);
+   }
+   
+   /* Escreve Dimensões do Arquivo */
+   fprintf(arq,"T %dX%d\n",x,z);
+   fprintf(arq,"# Criado pelo Editor de Mapas do DccNiTghtmare, versao 0.0.2\n");
+
+   /* Escreve os Objetos Utilizados */
+   mapObjeto* objAux = (mapObjeto*)Objetos->primeiro->proximo;
+   while(objAux != Objetos->primeiro)
+   {
+      fprintf(arq,"o %s %s\n",objAux->nome,objAux->nomeArq);
+      objAux = (mapObjeto*)objAux->proximo;
+   }
+
+   /* Escreve as Texturas Utilizadas */
+   texture* tex = (texture*)Texturas;
+   while(tex)
+   {
+      fprintf(arq,"t %s %s %d %d %d\n",tex->nome,tex->arqNome,tex->R,tex->G,tex->B);
+      tex = (texture*)tex->proximo;
+   }
+   
+   /* Escreve os Muros */
+   muro* maux = (muro*)muros;
+   int x1,z1,x2,z2;
+   while(maux)
+   {
+      x1 = maux->x1 / SQUARESIZE;
+      x2 = (maux->x2 / SQUARESIZE)-1;
+      z1 = maux->z1 / SQUARESIZE;
+      z2 = (maux->z2 / SQUARESIZE)-1;
+      fprintf(arq,"muro %d,%d,%d,%d\n",x1,z1,x2,z2);
+      fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura));
+      maux = (muro*)maux->proximo;
+   }
+ 
+   /* Escreve Quadrados, linha a linha */
+   Square* saux = first;
+   Square* ultLinha;
+   for(z1=0;z1<z;z1++)
+   {
+      ultLinha = saux;
+      for(x1=0;x1<x;x1++)
+      {
+          fprintf(arq,"p %d\n",saux->flags & PISAVEL);
+          fprintf(arq,"ut %s\n",NomeTextura(this, saux->textura));
+          int aux;
+          for(aux=0;aux<MAXOBJETOS;aux++)
+          {
+            if(saux->objetos[aux])
+            {
+               x2 = saux->Xobjetos[aux] / SQUARESIZE;
+               z2 = saux->Zobjetos[aux] / SQUARESIZE;
+               fprintf(arq,"uo %s %d:%d,%d\n",saux->objetos[aux]->nome,
+                                            saux->objetosDesenha[aux],
+                                            x2+1,z2+1);
+            }
+          }
+          saux = saux->right;
+      }
+      saux = ultLinha->down;
+   }
+
+   /* Escreve Quadrado de Inicio */
+   x1 = xInic / SQUARESIZE;
+   z1 = zInic / SQUARESIZE;
+   fprintf(arq,"i %d,%d\n",x1,z1);
+
+   fclose(arq);
    return(1);
 }
 

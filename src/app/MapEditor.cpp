@@ -246,8 +246,14 @@ int main(int argc, char **argv)
          {
              if(estado == MUROINIC)
              {
-                 //maux->z1 = qz;
-                 //maux->z2 = qz;
+                /*int max = maux->x2 / SQUARESIZE;
+                int x = maux->x1 / SQUARESIZE;
+                int z = maux->z1 / SQUARESIZE;
+                Square* saux;
+                for(aux = maux->x1 / SQUARESIZE;aux<=max;aux++) 
+                {
+                    saux = quadradoRelativo(x,z);
+                }*/
 
 //TODO Colocar Pisavel = 0 para todos quadrados que o muro ocupa
                  estado = MURO;
@@ -311,6 +317,11 @@ int main(int argc, char **argv)
          {
             phi += 1;
             //phi = phi % 360;
+         }
+         if(teclas[SDLK_s])
+         {
+            mapa->save("../data/mapas/teste.map");
+            SDL_Delay(200);
          }
       }
       glClearColor(0,0,0,0);

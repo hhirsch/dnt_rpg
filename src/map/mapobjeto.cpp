@@ -52,12 +52,14 @@ mapObjeto* LmapObjeto::InserirMapObjeto(char* arquivo, char* nome)
    novo = new(mapObjeto);
    novo->tipo = MAPOBJETO;
    novo->nome = (char*)malloc((strlen(nome)+1)*sizeof(char));
+   novo->nomeArq = (char*)malloc((strlen(arquivo)+1)*sizeof(char));
    strcpy(novo->nome,nome);
+   strcpy(novo->nomeArq,arquivo);
 
    /* Le a variacao entre Modelos */
    fscanf(arq,"%d",&novo->deltaVariacao);
    fscanf(arq,"%s",arqModelo);
-   fscanf(arq,"%s",dirTexturas);
+   fscanf(arq,"%s",dirTexturas); 
    novo->modelo3d = glmReadOBJ(arqModelo,dirTexturas,0);
 
    if(novo->deltaVariacao !=0) //S'existe variacao, le os outros modelos
