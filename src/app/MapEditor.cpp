@@ -22,6 +22,9 @@ GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
 GLdouble proj[16];
 GLdouble modl[16];
 GLint viewPort[4];
+GLuint texturaAtual;
+Map* mapa;
+
 
 int botaoChao(void *jan,void *ljan,SDL_Surface *screen)
 {
@@ -33,6 +36,53 @@ int botaoMuro(void *jan,void *ljan,SDL_Surface *screen)
 {
     estado = MURO;
     return(1);
+}
+
+int TexturaAnterior(Map* mapa, GLuint ID)
+{
+   int aux=0;
+   texture* tex = mapa->Texturas;
+   while(aux < mapa->numtexturas-1)
+   {
+      if(tex->proximo->indice == ID)
+      {
+         return(tex->indice);
+      }
+      tex = tex->proximo;
+      aux++;
+   }
+   return(mapa->Texturas->indice);
+}
+
+int ProximaTextura(Map* mapa, GLuint ID)
+{
+   int aux=0;
+   texture* tex = mapa->Texturas;
+   while(aux < mapa->numtexturas)
+   {
+      if(tex->indice == ID)
+      {
+         if(tex->proximo)
+           return(tex->proximo->indice);
+         else
+           return(tex->indice);
+      }
+      tex = tex->proximo;
+      aux++;
+   }
+   return(-1);
+}
+
+int botaoProximaTextura(void *jan,void *ljan,SDL_Surface *screen)
+{
+   texturaAtual = ProximaTextura(mapa,texturaAtual);
+   return(1);
+}
+
+int botaoTexturaAnterior(void *jan,void *ljan,SDL_Surface *screen)
+{
+   texturaAtual = TexturaAnterior(mapa,texturaAtual);
+   return(1);
 }
 
 void Redmensiona(SDL_Surface *screen)
@@ -178,9 +228,9 @@ void novoMapa(Map* mapa, int x, int z)
    {
       for(auxX = 0; auxX < x; auxX++)
       {
-          saux->x1 = (auxX-1)*SQUARESIZE;
+          saux->x1 = (auxX)*SQUARESIZE;
           saux->x2 = saux->x1+SQUARESIZE;
-          saux->z1 = (auxZ-1)*SQUARESIZE;
+          saux->z1 = (auxZ)*SQUARESIZE;
           saux->z2 = saux->z1+SQUARESIZE; 
           saux->posX = auxX;
           saux->posZ = auxZ;
@@ -223,11 +273,9 @@ int main(int argc, char **argv)
    printf(" DccNitghtmare - Editor de Mapas\n");
    /* Inicia ou abre mapa Existente */
    char* entrada; /*Arquivo de entrada*/
-   int w,h;
    int chamadaCorreta=0;
    char c;
-   Map* mapa;
-
+   
    /* Cosntantes de CAMERA */
       double theta=37;
       double phi=0;
@@ -276,6 +324,7 @@ int main(int argc, char **argv)
    mapa = new(Map);
    if(novo)
    {
+      /* Cria um mapa ja existente */
       novoMapa(mapa,x,z);
    }
    else
@@ -287,7 +336,6 @@ int main(int argc, char **argv)
    Uint8 *teclas;
    int mouseX,mouseY;
    double varX, varZ;
-   double orientacao = 0;
 
    interface* gui = new interface(NULL);
    janela* principal;
@@ -315,11 +363,13 @@ int main(int argc, char **argv)
    principal->objetos->InserirBotao(130,17,200,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Textura >",1,NULL);
+                                                "Textura >",1,
+                                                &botaoProximaTextura);
    principal->objetos->InserirBotao(130,37,200,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Textura <",1,NULL);
+                                                "Textura <",1,
+                                                &botaoTexturaAnterior);
    principal->objetos->InserirBotao(130,57,200,75,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
@@ -332,6 +382,7 @@ int main(int argc, char **argv)
  
    muro* maux = NULL;
    int qx; int qz;
+   texturaAtual = mapa->Texturas->indice;
 
    while(!sair)
    {
@@ -359,7 +410,7 @@ int main(int argc, char **argv)
             else if (qz < 0) qz = 0;
              
             if(estado == CHAO)
-               colocaTextura(mapa, (int)xReal / SQUARESIZE, (int)zReal / SQUARESIZE, mapa->Texturas->indice);
+               colocaTextura(mapa, (int)xReal / SQUARESIZE, (int)zReal / SQUARESIZE, texturaAtual);
             else if (estado == MURO)
             {
                 maux = new(muro);
@@ -369,7 +420,7 @@ int main(int argc, char **argv)
                 maux->x2 = (qx)*SQUARESIZE;
                 maux->z1 = qz*SQUARESIZE;
                 maux->z2 = (qz)*SQUARESIZE;
-                maux->textura = mapa->Texturas->indice;
+                maux->textura = texturaAtual;
                 estado = MUROINIC;
                 
             }
@@ -378,23 +429,41 @@ int main(int argc, char **argv)
                 maux->x2 = (qx)*SQUARESIZE;
                 maux->z2 = (qz)*SQUARESIZE;
             }
-            //centroX = xReal; centroZ = zReal;
-            //printf("%.3f , %.3f , %.3f %d,%d\n",xReal,yReal,zReal,mouseX,mouseY);
          }
          else
          {
              if(estado == MUROINIC)
              {
-                /*int max = maux->x2 / SQUARESIZE;
-                int x = maux->x1 / SQUARESIZE;
-                int z = maux->z1 / SQUARESIZE;
-                Square* saux;
-                for(aux = maux->x1 / SQUARESIZE;aux<=max;aux++) 
+                int max = (maux->x2 / SQUARESIZE);
+                int inix = (maux->x1 / SQUARESIZE);
+                int maz = (maux->z2 / SQUARESIZE);
+                int iniz = (maux->z1 / SQUARESIZE);
+                int x;// = maux->x1 / SQUARESIZE;
+                int z;// = maux->z1 / SQUARESIZE;
+                if(iniz > maz)
                 {
-                    saux = quadradoRelativo(x,z);
-                }*/
-
-//TODO Colocar Pisavel = 0 para todos quadrados que o muro ocupa
+                    z = iniz;
+                    iniz = maz;
+                    maz = z;
+                }
+                if(inix > max) 
+                {
+                    x = inix;
+                    inix = max;
+                    max = x;
+                }
+                max--;
+                maz++;
+                Square* saux;
+                for(z = maux->z1 / SQUARESIZE;z<=maz;z++)
+                {
+                  for(x = maux->x1 / SQUARESIZE;x<=max;x++) 
+                  {
+                      //printf("%d %d   %d %d\n",x,z,max,maz);
+                      saux = mapa->quadradoRelativo(x+1,z+1);
+                      saux->flags &= !PISAVEL;
+                  }
+                }
                  estado = MURO;
              }
          }

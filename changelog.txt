@@ -3,16 +3,15 @@
 |               Version 0.0.2                  |
 ================================================
  - Gui is now avaible on Graphical Engine;
- - Better  Walk algorithm and colision detection
-more permissive;
+ - Colision detection more permissive;
  - Makefile to compile on Windows (Dev-C++);
- - Use Fog to improve performance (by renderizing 
-less things per frame);
  - MiniMap implementated;
  - Limited Frames per second implemented;
  - Constant Character & Camera Velocity;
  - Initial Menu;
  - Loading Map Screen;
+ - Functional Map Editor (only on Portuguese);
+ - Some new 3D Models;
  - 
  - Minor bugs fixes; 
 
@@ -24,5 +23,5 @@ less things per frame);
  - Static LOD;
  - First Implementation of Colision Detection;
  - First Step to animation (body division);
- - The Character can Walk;
+ - The Character can "Walk" (erh, fly??);
  - The Camera can move; 

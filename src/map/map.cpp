@@ -424,10 +424,6 @@ int Map::open(char* arquivo)
       return(0);
    }
 
-    /* Inicia Estruturas */
-   //Objetos = new(LmapObjeto);
-   //Texturas = NULL;
-
    muro* maux = NULL;
 
    posX = x;

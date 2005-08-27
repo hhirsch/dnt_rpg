@@ -208,7 +208,10 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
            if(pronto)
            {
               if(bot->procPres != NULL)
+              {
                   bot->procPres(ljan->janelaAtiva,ljan,NULL);
+                  foco = FOCO_JOGO;
+              }
               else if (bot->men != NULL)
               {
                  chamador = bot;
