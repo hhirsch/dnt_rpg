@@ -169,7 +169,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per = NPCs->InserirPersonagem(7,6,10,6,
                                  "../data/pics/logan/portrait.jpg",0,
                                  0,"NPC",
-                        "../data/models/objetos/icex/parede.obj", 
+                        "../data/models/personagens/logan_completo_final.obj", 
                                  "../data/pics/logan/");
    per->posicaoLadoX = 30;
    per->posicaoLadoZ = 20;
@@ -181,7 +181,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        PCs  = new (Lpersonagem);
        PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",0,0,
                               "Logan",
-                       "../data/models/objetos/icex/parede.obj",
+                       "../data/models/personagens/logan_completo_final.obj",
                               "../data/pics/logan/");
    }
 
