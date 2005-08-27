@@ -365,6 +365,8 @@ Map::Map()
 	name = NULL;
         squareInic = NULL;
         muros = NULL; 
+        /* Inicia Estruturas */
+        Objetos = new(LmapObjeto);
         x = z = xInic = zInic = 0;
 }
 
@@ -423,8 +425,8 @@ int Map::open(char* arquivo)
    }
 
     /* Inicia Estruturas */
-   Objetos = new(LmapObjeto);
-   Texturas = NULL;
+   //Objetos = new(LmapObjeto);
+   //Texturas = NULL;
 
    muro* maux = NULL;
 
@@ -642,11 +644,14 @@ int Map::save(char* arquivo)
    fprintf(arq,"# Criado pelo Editor de Mapas do DccNiTghtmare, versao 0.0.2\n");
 
    /* Escreve os Objetos Utilizados */
-   mapObjeto* objAux = (mapObjeto*)Objetos->primeiro->proximo;
-   while(objAux != Objetos->primeiro)
+   if(Objetos->total>0)
    {
-      fprintf(arq,"o %s %s\n",objAux->nome,objAux->nomeArq);
-      objAux = (mapObjeto*)objAux->proximo;
+      mapObjeto* objAux = (mapObjeto*)Objetos->primeiro->proximo;
+      while(objAux != Objetos->primeiro)
+      {
+         fprintf(arq,"o %s %s\n",objAux->nome,objAux->nomeArq);
+         objAux = (mapObjeto*)objAux->proximo;
+      }
    }
 
    /* Escreve as Texturas Utilizadas */

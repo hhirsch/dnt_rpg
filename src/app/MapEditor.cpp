@@ -1,6 +1,9 @@
+/* Editor de Mapas, em domínio público. Código mais zoneado impossível. */
+
 #include "../gui/farso.h"
 #include "../map/map.h"
 #include "../engine/culling.h"
+#include <SDL/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -12,10 +15,10 @@
 #define DELMURO   5
 #define DELOBJETO 6
 
-double deg2Rad(double x){return 6.2831853 * x/360.0;}
+double deg2Rad(double x){return 3.1415927 * x/180.0;}
 
 int estado;
-GLfloat matrizVisivel[6][4]; /* MAtriz do frustum atual */
+GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
 GLdouble proj[16];
 GLdouble modl[16];
 GLint viewPort[4];
@@ -98,6 +101,122 @@ void colocaTextura(Map* mapa, int x, int z, GLuint texturaID)
 }
 
 
+int inserirTextura(Map* mapa, char* arq, char* nome, 
+                    GLuint R, GLuint G, GLuint B)
+{
+   texture* tex;
+
+   SDL_Surface* img = IMG_Load(arq);
+   if(!img)
+   {
+      printf("Erro ao abrir textura: %s\n",arq);
+      return(-1);
+   }
+
+   /* Insere realmente a textura */ 
+   tex = (texture*) malloc(sizeof(texture));
+   if(mapa->numtexturas == 0)
+   {
+      mapa->Texturas = tex;
+      tex->proximo = NULL;
+   }
+   else
+   {
+      tex->proximo = mapa->Texturas;
+      mapa->Texturas = tex;
+   }
+
+   tex->nome = (char*) malloc((strlen(nome)+1)*sizeof(char));
+   tex->arqNome = (char*) malloc((strlen(arq)+1)*sizeof(char));
+
+   strcpy(tex->arqNome,arq);
+   strcpy(tex->nome,nome);
+
+   SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       img->w,img->h,32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   //SDL_Rect ret;
+   //ret.w = 0; ret.h = 0; ret.x = img->w; ret.y = img->h;
+   SDL_BlitSurface(img,NULL,imgPotencia,NULL);
+ 
+   tex->R = R;
+   tex->G = G;
+   tex->B = B;
+
+   glGenTextures(1, &(tex->indice));
+   glBindTexture(GL_TEXTURE_2D, tex->indice);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
+                0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   mapa->numtexturas++;
+
+   //printf("Inseri Textura: %s :%d %d\n",nome,img->w,img->h);
+
+   /* Libera a memoria utilizada */
+   SDL_FreeSurface(img);
+   SDL_FreeSurface(imgPotencia);
+   return(tex->indice);
+}
+
+void novoMapa(Map* mapa, int x, int z)
+{
+   int auxX, auxZ;
+   Square* saux = new(Square);
+   Square* primLinha = saux;
+   mapa->first = saux;
+   mapa->x = x;
+   mapa->z = z;
+
+   printf("Iniciando Novo mapa %d,%d\n",x,z);
+   
+   int IDtextura = inserirTextura(mapa,"../data/texturas/chao_grama.jpg", 
+                  "chao_grama",130, 148, 96);
+
+   /* Cria todos os quadrados necessários */
+   for(auxZ = 0; auxZ < z; auxZ++)
+   {
+      for(auxX = 0; auxX < x; auxX++)
+      {
+          saux->x1 = (auxX-1)*SQUARESIZE;
+          saux->x2 = saux->x1+SQUARESIZE;
+          saux->z1 = (auxZ-1)*SQUARESIZE;
+          saux->z2 = saux->z1+SQUARESIZE; 
+          saux->posX = auxX;
+          saux->posZ = auxZ;
+          saux->flags |= PISAVEL;
+          saux->textura = IDtextura;
+          saux->R = 130;
+          saux->G = 148;
+          saux->B = 96;
+          if(auxX != x-1)
+          {
+             saux->right = new(Square);
+             saux->right->left = saux;
+             if(saux->up == NULL)
+                saux->right->up = NULL;
+             else
+             {
+                saux->right->up = saux->up->right;
+                saux->right->up->down = saux->right;
+             }
+             saux = saux->right;
+          }
+          else
+          {
+             primLinha->down = new(Square);
+             primLinha->down->up = primLinha;
+             primLinha = primLinha->down;
+             saux = primLinha;
+          }
+      }
+   }
+
+   mapa->xInic = 1*SQUARESIZE;
+   mapa->zInic = 1*SQUARESIZE;
+   mapa->squareInic = mapa->first;
+} 
+
 int main(int argc, char **argv)
 {
    estado = CHAO;
@@ -110,24 +229,39 @@ int main(int argc, char **argv)
    Map* mapa;
 
    /* Cosntantes de CAMERA */
-      double theta=0;
+      double theta=37;
       double phi=0;
-      double d=1;
-      double centroX = 0;
-      double centroZ = 0;
+      double d=210;
+      double centroX = 70;
+      double centroZ = 208;
       double centroY = 30;
       double cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
       double cameraY = centroY + (float) d * sin(deg2Rad(theta));
       double cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
       
 
-   while((c=getopt(argc,argv,"e:a:l")) != -1){
+   int novo = 0;
+   int x,z;
+
+   while((c=getopt(argc,argv,"e:a:l:n")) != -1){
       switch(c){
-         case 'e':entrada = optarg;
-                  chamadaCorreta = 1; 
-                  break;
+         case 'e':{
+                     entrada = optarg;
+                     chamadaCorreta = 1; 
+                     novo = 0;
+                     break;
+                  }
 	 case 'a':break;  
          case 'l':break;
+         case 'n':{
+                    novo = 1;
+                    printf("Numero de Linhas: ");
+                    scanf("%d",&x);
+                    printf("Numero de Colunas: ");
+                    scanf("%d",&z);
+                    chamadaCorreta = 1;
+                    break; 
+                  }
          default: erro();
       } 
    } 
@@ -140,8 +274,13 @@ int main(int argc, char **argv)
    Iniciar(screen);  
 
    mapa = new(Map);
-   /* Abre mapa ja existente */
-   mapa->open(entrada);
+   if(novo)
+   {
+      novoMapa(mapa,x,z);
+   }
+   else
+      /* Abre mapa ja existente */
+      mapa->open(entrada);
 
    int sair = 0;
    Uint8 Mbotao;
@@ -322,6 +461,10 @@ int main(int argc, char **argv)
          {
             mapa->save("../data/mapas/teste.map");
             SDL_Delay(200);
+         }
+         if(teclas[SDLK_i])
+         {
+             printf("x:%.3f z:%.3f phi:%.3f theta:%.3f \n",centroX, centroZ,phi,theta);
          }
       }
       glClearColor(0,0,0,0);
