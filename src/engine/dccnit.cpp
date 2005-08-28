@@ -288,8 +288,8 @@ void engine::Iniciar(SDL_Surface *screen)
 
    /* Definicao da Luz */
    GLfloat light_ambient[] = { 0.6, 0.6, 0.6, 1.0 };
-   GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   //GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+   //GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_position[] = { 300.0, 10.0, 200.0, 1.0 };
    
    /* Carrega a Luz */
@@ -388,6 +388,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           }
       }
       /* Tratamento das teclas para a Camera */
+#ifdef ROTACOES
       if(keys[SDLK_x]) 
       {
          RotacaoX+=5;
@@ -413,6 +414,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          RotacaoZ = 0;
          redesenha = 1;
       }
+#endif
       if(keys[SDLK_UP])  // Aumenta o Zoom
       {
           if (d>ZOOMMAXIMO)
@@ -684,9 +686,11 @@ void engine::Desenhar()
    glPushMatrix();
    
    /* Rotacoes no Mundo de Teste apenas, sumirao com o tempo */
+#ifdef ROTACOES
    glRotatef(RotacaoX,1,0,0);
    glRotatef(RotacaoY,0,1,0);
    glRotatef(RotacaoZ,0,0,1);
+#endif
 
    /* Desenha o Mundo, fazendo culling do view frustum */
    mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);

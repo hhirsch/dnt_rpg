@@ -133,6 +133,8 @@ barraTexto* Tlista::InserirBarraTexto(int xa,int ya,int xb,int yb,
    novo->y2 = yb;
    novo->inic = 0;
    novo->fim = 0;
+   novo->pos = 0;
+   novo->ultEsc = 0;
    novo->texto = text;
    novo->cript = cript;
    novo->tipo = BARRATEXTO;

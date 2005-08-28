@@ -13,5 +13,5 @@ buildparts:
 
 clean:
 	for dir in $(SUBSYSTEMS);do \
-	(cd $$dir; ${MAKE} clean); \
+	(echo "Apagando $$dir";cd $$dir; ${MAKE} clean); \
 	done

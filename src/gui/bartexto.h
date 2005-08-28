@@ -25,6 +25,8 @@ class barraTexto: public Tobjeto
       cript;              /* Pseudo criptografada? */
       int inic,fim;       /* Extremos do texto visivel atualmente */
       char* texto;        /* Texto Presente na Caixa */
+      unsigned int pos;
+      int ultEsc;
                           /* Procedimento Acionado Depois de Editada */
       void (*procEditada)(barraTexto* bart,SDL_Surface *screen);
       cores Cores;
@@ -40,7 +42,7 @@ class barraTexto: public Tobjeto
        * mouseX,mouseY -> coordenada do mouse ao entrar na barra 
        * screen        -> a superficie na qual se encontra a barra*/
       int Escrever(int Xjan,int Yjan,int mouseX,int mouseY,
-                    SDL_Surface *screen);
+                    SDL_Surface *screen, Uint8 Mbotao, Uint8* teclas);
 
    private:
       void PoeTexto(int Xjan, int Yjan,int salvar,unsigned int pos, int marca,

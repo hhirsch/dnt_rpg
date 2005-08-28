@@ -142,6 +142,10 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                                    bart->y2+ljan->janelaAtiva->y1,x,y))
                    {
                        objAtivo = bart;
+                       bart->pos = (mouseX-(ljan->janelaAtiva->x1+bart->x1+2)) 
+                                               / (fonte_incCP()+1);
+                       if (bart->pos>strlen(bart->texto)) 
+                           bart->pos = strlen(bart->texto);
                        foco = FOCO_BARRATEXTO;
                    }
                }
@@ -247,16 +251,19 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
     if (foco == FOCO_BARRATEXTO)
     {
         barraTexto* bart = (barraTexto*)objAtivo;
-        //TODO
-        if(!(bart->Escrever(ljan->janelaAtiva->x1,
-                       ljan->janelaAtiva->y1,
-                       x,y,ljan->janelaAtiva->cara)))
+        if((SDL_GetTicks() - bart->ultEsc) >= 100) 
         {
-            foco = FOCO_JOGO;
-            if(bart->procEditada != NULL)
-            {
-                  bart->procEditada(bart,NULL);
-            }
+           if((bart->Escrever(ljan->janelaAtiva->x1,
+                          ljan->janelaAtiva->y1,
+                          x,y,ljan->janelaAtiva->cara,Mbotao,tecla)))
+           {
+               foco = FOCO_JOGO;
+               if(bart->procEditada != NULL)
+               {
+                     bart->procEditada(bart,NULL);
+               }
+               return(BARRATEXTOESCRITA);
+           }
         }
         ljan->janelaAtiva->AtualizaCara();
         return(BARRATEXTOESCRITA);

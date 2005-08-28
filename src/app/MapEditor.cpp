@@ -130,9 +130,9 @@ void Iniciar(SDL_Surface *screen)
 void erro()
 {
    printf("/\n");
-   printf("| Utiliza-se:\n");
-   printf("| Para um novo Mapa: MapEditor -e arquivo.map -a ALTURA -l LARGURA\n");
-   printf("| Para um Mapa Existente: MapEditor -e arquivo.map\n\n");
+   printf("| Use:\n");
+   printf("| To edit a new Map: MapEditor -n\n");
+   printf("| To edit an existent map: MapEditor -e file.map\n\n");
    exit(2);
 }
 
@@ -159,7 +159,7 @@ int inserirTextura(Map* mapa, char* arq, char* nome,
    SDL_Surface* img = IMG_Load(arq);
    if(!img)
    {
-      printf("Erro ao abrir textura: %s\n",arq);
+      printf("Error on open texture : %s\n",arq);
       return(-1);
    }
 
@@ -218,7 +218,7 @@ void novoMapa(Map* mapa, int x, int z)
    mapa->x = x;
    mapa->z = z;
 
-   printf("Iniciando Novo mapa %d,%d\n",x,z);
+   printf("Begining a new Map: %d,%d\n",x,z);
    
    int IDtextura = inserirTextura(mapa,"../data/texturas/chao_grama.jpg", 
                   "chao_grama",130, 148, 96);
@@ -270,7 +270,7 @@ void novoMapa(Map* mapa, int x, int z)
 int main(int argc, char **argv)
 {
    estado = CHAO;
-   printf(" DccNitghtmare - Editor de Mapas\n");
+   printf(" DccNitghtmare - Map Editor\n");
    /* Inicia ou abre mapa Existente */
    char* entrada; /*Arquivo de entrada*/
    int chamadaCorreta=0;
@@ -303,9 +303,9 @@ int main(int argc, char **argv)
          case 'l':break;
          case 'n':{
                     novo = 1;
-                    printf("Numero de Linhas: ");
+                    printf("Number of Lines: ");
                     scanf("%d",&x);
-                    printf("Numero de Colunas: ");
+                    printf("Number of Columns: ");
                     scanf("%d",&z);
                     chamadaCorreta = 1;
                     break; 
@@ -318,7 +318,7 @@ int main(int argc, char **argv)
 
    /* Inicia o Sistema Bizarro */ 
    SDL_Surface* screen;
-   Farso_Iniciar(&screen,"Editor de Mapas");
+   Farso_Iniciar(&screen,"DccNiTghtmare's Map Editor");
    Iniciar(screen);  
 
    mapa = new(Map);
@@ -339,45 +339,53 @@ int main(int argc, char **argv)
 
    interface* gui = new interface(NULL);
    janela* principal;
-   principal = gui->ljan->InserirJanela(0,0,255,127,"Editor de Mapas",1,1,NULL,NULL);
+   principal = gui->ljan->InserirJanela(0,0,255,127,"Main",1,1,NULL,NULL);
    principal->objetos->InserirBotao(10,17,50,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Chao",1,&botaoChao);
+                                                "Floor",1,&botaoChao);
    principal->objetos->InserirBotao(10,37,50,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Muro",1,&botaoMuro);
+                                                "Wall",1,&botaoMuro);
    principal->objetos->InserirBotao(55,17,125,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Objetos",1,NULL);
+                                                "Objects",1,NULL);
    principal->objetos->InserirBotao(55,57,125,75,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Destruir",1,NULL);
+                                                "Destroy",1,NULL);
    principal->objetos->InserirBotao(55,37,125,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Pegar Obj",1,NULL);
+                                                "Take Obj",1,NULL);
    principal->objetos->InserirBotao(130,17,200,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Textura >",1,
+                                                "Texture >",1,
                                                 &botaoProximaTextura);
    principal->objetos->InserirBotao(130,37,200,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Textura <",1,
+                                                "Texture <",1,
                                                 &botaoTexturaAnterior);
    principal->objetos->InserirBotao(130,57,200,75,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Objeto >",1,NULL); 
+                                                "Object >",1,NULL); 
    principal->objetos->InserirBotao(130,77,200,95,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Objeto <",1,NULL);
+                                                "Object <",1,NULL);
+   principal->objetos->InserirBarraTexto(10,97,128,113,
+                                         "../data/texturas/chao_grama.jpg",
+                                         0,NULL);
+   principal->objetos->InserirBotao(130,97,200,113,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "Insert",1,NULL);
+   principal->fechavel = 0;
    principal->Abrir(gui->ljan);
  
    muro* maux = NULL;
@@ -397,8 +405,8 @@ int main(int argc, char **argv)
             double xReal, zReal, yReal;
             float wx,wy,wz;
             wx = mouseX; wy = 600-mouseY; 
-            glReadPixels(wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
-            //wz = 0;
+            
+            glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
             gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
  
             qx = (int)xReal / SQUARESIZE; 
@@ -434,9 +442,9 @@ int main(int argc, char **argv)
          {
              if(estado == MUROINIC)
              {
-                int max = (maux->x2 / SQUARESIZE);
+                int max = (maux->x2 / SQUARESIZE)-1;
                 int inix = (maux->x1 / SQUARESIZE);
-                int maz = (maux->z2 / SQUARESIZE);
+                int maz = (maux->z2 / SQUARESIZE)-1;
                 int iniz = (maux->z1 / SQUARESIZE);
                 int x;// = maux->x1 / SQUARESIZE;
                 int z;// = maux->z1 / SQUARESIZE;
@@ -452,8 +460,6 @@ int main(int argc, char **argv)
                     inix = max;
                     max = x;
                 }
-                max--;
-                maz++;
                 Square* saux;
                 for(z = maux->z1 / SQUARESIZE;z<=maz;z++)
                 {

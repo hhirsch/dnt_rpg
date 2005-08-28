@@ -2,18 +2,20 @@
 ================================================
 |               Version 0.0.2                  |
 ================================================
- - Gui is now avaible on Graphical Engine;
+ - Gui is now avaible on graphical engine;
  - Colision detection more permissive;
- - Makefile to compile on Windows (Dev-C++);
+ - Makefile to compile on window$ (Dev-C++);
  - MiniMap implementated;
- - Limited Frames per second implemented;
- - Constant Character & Camera Velocity;
- - Initial Menu;
- - Loading Map Screen;
- - Functional Map Editor (only on Portuguese);
- - Some new 3D Models;
- - 
- - Minor bugs fixes; 
+ - Limited frames per second;
+ - Constant character & camera velocity;
+ - Initial menu;
+ - Loading screen;
+ - Functional and VERY ugly map editor;
+ - Some new 3D models;
+ - Map to map navigation;
+ - New test maps;
+ -
+ - Some bugs fixed; 
 
 ================================================
 |               Version 0.0.1                  |

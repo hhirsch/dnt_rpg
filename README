@@ -20,7 +20,7 @@ software and hardware. They are:
    Software:
    OpenGL   - Mesa3D 6.2, www.mesa3d.org (or SGI-OpenGL 1.4)
    SDL      - Version 1.2.7, www.libsdl.org
-   SDLImage - Version 1.2.4, www.libsdl.org/projects/SDL_image/
+   SDLimage - Version 1.2.4, www.libsdl.org/projects/SDL_image/
 
    Hardware:
    Video Card with 3D aceleration, OpenGl compatible in Linux.
@@ -86,7 +86,7 @@ w          =  forward                         (0-?)
 s          =  backward                        (0-?)
 q          =  move left                       (0-?)
 e          =  move right                      (0-?)
-tab        =  make active next character
+tab        =  make active next character 
 lctrl+tab  =  make active previous character
  
                     =====================
@@ -96,7 +96,8 @@ lctrl+tab  =  make active previous character
 m      =  Open MiniMap window
 n      =  Open ShortCut window
 
-To end the game, press ESC key.
+   To  end  the  game,  simple  press  ESC key,  and  click on 
+button exit.
 
 ==============================================================
 |                       IV - Contacts                        |
@@ -104,12 +105,7 @@ To end the game, press ESC key.
 
   Messages can be delivered to dccnightmare@dcc.ufmg.br
 
-  Edit our wiki on 
-      http://dccnitghtmare.sourceforge.net/cgi-bin/wiki.cgi
-
-  Or ( not XOR )  visit  the project page on sourceforge:
-      http://www.sourceforge.net/projects/dccnitghtmare
-
+  http://dccnitghtmare.sf.net
 
 DccNiTghtmare - dccnightmare@dcc.ufmg.br.
 
