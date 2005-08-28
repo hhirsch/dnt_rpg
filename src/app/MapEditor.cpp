@@ -24,6 +24,7 @@ GLdouble modl[16];
 GLint viewPort[4];
 GLuint texturaAtual;
 Map* mapa;
+barraTexto* bartInserir;
 
 
 int botaoChao(void *jan,void *ljan,SDL_Surface *screen)
@@ -151,8 +152,7 @@ void colocaTextura(Map* mapa, int x, int z, GLuint texturaID)
 }
 
 
-int inserirTextura(Map* mapa, char* arq, char* nome, 
-                    GLuint R, GLuint G, GLuint B)
+int inserirTextura(Map* mapa, char* arq, char* nome)
 {
    texture* tex;
 
@@ -189,6 +189,10 @@ int inserirTextura(Map* mapa, char* arq, char* nome,
    //ret.w = 0; ret.h = 0; ret.x = img->w; ret.y = img->h;
    SDL_BlitSurface(img,NULL,imgPotencia,NULL);
  
+   Uint8 R,G,B;
+   
+   Uint32 pixel = pixel_Pegar(imgPotencia,10,10);
+   SDL_GetRGB(pixel,imgPotencia->format, &R, &G, &B);
    tex->R = R;
    tex->G = G;
    tex->B = B;
@@ -209,6 +213,21 @@ int inserirTextura(Map* mapa, char* arq, char* nome,
    return(tex->indice);
 }
 
+int botaoInserir(void *jan,void *ljan,SDL_Surface *screen)
+{
+   int tam = strlen(bartInserir->texto);
+   if(bartInserir->texto[tam-1] == 'g') /* g, de jpg, textura*/
+   {
+       inserirTextura(mapa,bartInserir->texto,bartInserir->texto);
+       printf("Inserted Texture: %s\n",bartInserir->texto);
+   }
+   else
+   if(bartInserir->texto[tam-1] == 'c') /* c, de dcc, objeto*/
+   {
+   }
+   return(1);
+}
+
 void novoMapa(Map* mapa, int x, int z)
 {
    int auxX, auxZ;
@@ -221,7 +240,7 @@ void novoMapa(Map* mapa, int x, int z)
    printf("Begining a new Map: %d,%d\n",x,z);
    
    int IDtextura = inserirTextura(mapa,"../data/texturas/chao_grama.jpg", 
-                  "chao_grama",130, 148, 96);
+                  "chao_grama");
 
    /* Cria todos os quadrados necessários */
    for(auxZ = 0; auxZ < z; auxZ++)
@@ -378,13 +397,13 @@ int main(int argc, char **argv)
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Object <",1,NULL);
-   principal->objetos->InserirBarraTexto(10,97,128,113,
+   bartInserir = principal->objetos->InserirBarraTexto(10,97,128,113,
                                          "../data/texturas/chao_grama.jpg",
                                          0,NULL);
    principal->objetos->InserirBotao(130,97,200,113,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Insert",1,NULL);
+                                                "Insert",1,&botaoInserir);
    principal->fechavel = 0;
    principal->Abrir(gui->ljan);
  
