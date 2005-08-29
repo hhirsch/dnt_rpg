@@ -23,9 +23,15 @@ GLdouble proj[16];
 GLdouble modl[16];
 GLint viewPort[4];
 GLuint texturaAtual;
+mapObjeto* objAtual;
 Map* mapa;
 barraTexto* bartInserir;
 
+int botaoObjeto(void *jan,void *ljan,SDL_Surface *screen)
+{
+   estado = OBJETO;
+   return(1);
+}
 
 int botaoChao(void *jan,void *ljan,SDL_Surface *screen)
 {
@@ -237,7 +243,7 @@ void novoMapa(Map* mapa, int x, int z)
    mapa->x = x;
    mapa->z = z;
 
-   printf("Begining a new Map: %d,%d\n",x,z);
+   printf("Beginning a new Map: %d,%d\n",x,z);
    
    int IDtextura = inserirTextura(mapa,"../data/texturas/chao_grama.jpg", 
                   "chao_grama");
@@ -370,7 +376,7 @@ int main(int argc, char **argv)
    principal->objetos->InserirBotao(55,17,125,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Objects",1,NULL);
+                                                "Objects",1,&botaoObjeto);
    principal->objetos->InserirBotao(55,57,125,75,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
@@ -410,6 +416,7 @@ int main(int argc, char **argv)
    muro* maux = NULL;
    int qx; int qz;
    texturaAtual = mapa->Texturas->indice;
+   objAtual = (mapObjeto*)mapa->Objetos->primeiro->proximo;
 
    while(!sair)
    {
