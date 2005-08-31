@@ -101,6 +101,8 @@ class engine
       janela* janMiniMapa;
    
       Uint32 ultimaLeitura; //marca a ultima leitura da posicao do teclado
+      Uint32 ultimaFPS;
+      double FPSatual;
 
       AI* ia;
 

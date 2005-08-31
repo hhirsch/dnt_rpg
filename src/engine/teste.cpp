@@ -19,10 +19,10 @@ int main(int argc, char **argv)
    SDL_Surface *screen;
    
    #ifdef REDE
-      printf("IP ou Nome do servidor: ");
+      printf("Server IP or Name: ");
       char* server = (char*) malloc(55*sizeof(char));
       scanf("%s",server);
-      printf("Vou conectar entao a %s\n",server);
+      printf("I'll conect to %s\n",server);
    #endif   
    Farso_Iniciar(&screen,"DccNiTghtmare 0.0.2CVS");
    engine* Engine = new engine();

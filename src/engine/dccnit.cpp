@@ -111,7 +111,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    retangulo_Colorir(img,0,0,255,31,0);
    cor_Definir(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
-   escxy(img,128,0,"Carregando Mapa...");
+   escxy(img,128,0,"Loading Map...");
    GLuint texturaTexto;
    carregaTextura(img,&texturaTexto);
 
@@ -149,7 +149,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    retangulo_Colorir(img,0,0,255,31,0);
    cor_Definir(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
-   escxy(img,128,0,"Carregando Personagens...");
+   escxy(img,128,0,"Loading Character...");
    carregaTextura(img,&texturaTexto);
    
    AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
@@ -337,14 +337,19 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       /* Calcula as Modificações Reais no Andar, rotacionar, girar, etc */
       varTempo /= 20.0;
       passo = (varTempo)*ANDAR;
+//TODO better walk
+      if(passo > 9)
+        passo = 9; /* Para evitar que atravesse paredes ao ter LAG*/
       rotacao = (varTempo)*GIRAR;
       varCamera = varTempo*DELTACAMERA;
-       
+      
+      FPSatual = (FPSatual + (1000.0 / varTempo)) / 2; 
 
       SDL_PumpEvents();
-      if(janAtalhos)
+      if( (janAtalhos) && (tempo-ultimaFPS >= 300))
       {
-         sprintf(FPS->texto,"FPS %3.2f",1000.0 / (tempo-ultimaLeitura));
+         ultimaFPS = tempo;
+         sprintf(FPS->texto,"FPS: %3.2f",1000.0 / (tempo-ultimaLeitura));
          janAtalhos->Desenhar();
       }
       ultimaLeitura = tempo;
@@ -618,7 +623,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          GLMtexture* tex = PCs->personagemAtivo->modelo3d->texturas;
          while(aux<PCs->personagemAtivo->modelo3d->numtexturas)
          {
-            printf("Textura: %s\n",tex->nome);
+            printf("Texture: %s\n",tex->nome);
             tex = tex->proximo;
             aux++;
           }
@@ -843,12 +848,26 @@ int testa(GLfloat x[4],GLfloat z[4],Square* quad)
    {
      result = 1;
    }
+   if(result) // Se possivel entrar, testa com Muros
+   {
+      int mur = 0;
+      while((proxima->muros[mur] != NULL))
+      {
+         result &= !estaDentro(x,z,proxima->muros[mur]->x1,
+                                   proxima->muros[mur]->z1,
+                                   proxima->muros[mur]->x2,
+                                   proxima->muros[mur]->z2);
+         if(!result)
+           return(0);
+         mur++;
+      }
+   }
    if(result) // Se eh possivel entrar, testa com os objetos
    {
       int ob = 0;
       GLfloat u1,u2,v1,v2;
       GLMmodel* modelo3d;
-      while(proxima->objetos[ob] != NULL)
+      while( (proxima->objetos[ob] != NULL)) 
       {
           modelo3d = (GLMmodel*)proxima->objetos[ob]->modelo3d;
           u1 = modelo3d->x1+proxima->Xobjetos[ob];
@@ -913,6 +932,21 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          (x[aux]>mapa->x*SQUARESIZE) || (z[aux]>mapa->z*SQUARESIZE))
          return(0);
    }
+
+   /* Testa o Atual, ja que eh GRANDE! */
+   if(estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->x1,
+                 PCs->personagemAtivo->ocupaQuad->z1,
+                 PCs->personagemAtivo->ocupaQuad->x2,
+                 PCs->personagemAtivo->ocupaQuad->z2) )
+   {
+      result &= testa(x,z,PCs->personagemAtivo->ocupaQuad);
+      if(!result)
+      {
+         //printf("sai na atual\n"); 
+         return(0);
+      }
+   }
+
  
    /* Testa quadrados a direita */
    if((PCs->personagemAtivo->ocupaQuad->right)) 
@@ -1124,7 +1158,7 @@ int engine::TrataIA()
        verificaLinha(per->ocupaQuad->down);
     }
     else
-      printf("O Personagem Saiu do Mapa!\n");
+      printf("What the HEll!! Square Map Out of bounds!\n");
    
     antX = per->posicaoLadoX;
     antZ = per->posicaoLadoZ;
@@ -1140,7 +1174,7 @@ int engine::TrataIA()
 
 void engine::abreMiniMapa()
 {
-   janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,"Mapa",1,1,NULL,NULL);
+   janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,"Map",1,1,NULL,NULL);
    figura* fig = janMiniMapa->objetos->InserirFigura(8,20,NULL);
    mapa->drawMinimap(fig->fig);
    janMiniMapa->ptrExterno = &janMiniMapa;
@@ -1150,7 +1184,7 @@ void engine::abreMiniMapa()
 
 void engine::abreAtalhos()
 {
-   janAtalhos = gui->ljan->InserirJanela(0,472,511,599,"Atalhos",1,1,NULL,NULL);
+   janAtalhos = gui->ljan->InserirJanela(0,472,511,599,"ShortCuts",1,1,NULL,NULL);
    FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
    FPS->texto = (char*)malloc(50*sizeof(char));
    sprintf(FPS->texto,"FPS:");
@@ -1165,6 +1199,8 @@ int engine::Rodar(SDL_Surface *surface)
 
    int forcaAtualizacao = 1; //forca a atualizacao da tela, qdo o npc anda
    int posX, posZ;           //Posicao Auxiliar
+   FPSatual = 10.0;
+   ultimaFPS = 0;
 
    personagem* per;
 	
@@ -1190,7 +1226,7 @@ int engine::Rodar(SDL_Surface *surface)
      initclientdata( &clientData );
      if ( ( startconnection( &clientData, server, DEFAULTPORT )) == -1 )
      {
-         printf("Não Consegui Iniciar Conexão!\nAbortando Uso.\n");
+         printf("Can't connect!\nAborting...\n");
          return(1);
      }
      entergame( &clientData );
@@ -1246,7 +1282,7 @@ int engine::Rodar(SDL_Surface *surface)
              }
              case MT_ERROR:
              {
-                 printf("Recebi Erro do Servidor\n");
+                 printf("Arrived error from server\n");
                  return(1);
              }
              case MT_ENDSYNC:
@@ -1261,7 +1297,7 @@ int engine::Rodar(SDL_Surface *surface)
                  }
                  else if ( PCs->personagemAtivo->ID == -1 )
                  {
-                     printf("Servidor Lotado\n");
+                     printf("Server Full\n");
                      return(1);
                  }
              }

@@ -13,13 +13,13 @@ o macaco ../data/models/objetos/geral/macaco.dcc
 # Texturas Utilizadas
 t parede_rosa ../data/texturas/parede_rosa.jpg 233 173 174
 t parede_grade ../data/texturas/parede_grade.jpg 86 64 51
-t chao_cimento ../data/texturas/chao_cimento.jpg 206 213 206
+t chao_cimento ../data/texturas/chao_asfalto.jpg 206 213 206
 t chao_tapeteroxo ../data/texturas/chao_asfalto.jpg 65 60 57
 t chao_tapeteazul ../data/texturas/chao_tapeteazul.jpg 43 54 84
 t chao_tapetevermelho ../data/texturas/chao_tapetevermelho.jpg 205 52 70
 t chao_asfalto ../data/texturas/chao_asfalto.jpg 65 60 57
 t chao_madeira ../data/texturas/chao_madeira.jpg 128 82 56
-t chao_grama ../data/texturas/chao_grama.jpg 130 148 96
+t chao_grama ../data/texturas/chao_grama2.jpg 130 148 96
 #definicao dos muros
 muro 0,0,31,0
 mt parede_rosa

@@ -30,6 +30,8 @@ Square::Square()
            objetosDesenha[aux] = 0;
            quadObjetos[aux] = NULL;
         }
+        for(aux=0;aux<MAXMUROS;aux++)
+           muros[aux] = NULL;
 	return;
 }
 
@@ -216,6 +218,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
                 glVertex3f( aux->x1 , 0.0, aux->z1 );
                 glTexCoord2f(0,1);
                 glVertex3f( aux->x1 , 0.0, aux->z2);
+                //glEnable(GL_TEXTURE_2D);
+                //glBindTexture(GL_TEXTURE_2D, Texturas->indice);
+                //textura = Texturas->indice;
                 glTexCoord2f(1,1);
                 glVertex3f( aux->x2, 0.0, aux->z2 );
                 glTexCoord2f(1,0);
@@ -442,12 +447,25 @@ int Map::open(char* arquivo)
                {
                   maux = new(muro);
                   fgets(buffer, sizeof(buffer),arq);
-                  sscanf(buffer,"%d,%d,%d,%d",&maux->x1,&maux->z1,
+                  sscanf(buffer,"%f,%f,%f,%f",&maux->x1,&maux->z1,
                                               &maux->x2,&maux->z2);
-                  maux->x1 = (maux->x1)*SQUARESIZE;
-                  maux->x2 = (maux->x2+1)*SQUARESIZE;
-                  maux->z1 = (maux->z1)*SQUARESIZE;
-                  maux->z2 = (maux->z2+1)*SQUARESIZE;
+                  //maux->x1 = (maux->x1)*SQUARESIZE;
+                  //maux->x2 = (maux->x2+1)*SQUARESIZE;
+                  //maux->z1 = (maux->z1)*SQUARESIZE;
+                  //maux->z2 = (maux->z2+1)*SQUARESIZE;
+                  double tmp;
+                  if(maux->x2 < maux->x1)
+                  {
+                     tmp = maux->x2;
+                     maux->x2 = maux->x1;
+                     maux->x1 = tmp;
+                  }
+                  if(maux->z2 < maux->z1)
+                  {
+                     tmp = maux->z2;
+                     maux->z2 = maux->z1;
+                     maux->z1 = tmp;
+                  }  
                   maux->proximo = muros;
                   maux->textura = -1;
                   muros = maux;
@@ -561,7 +579,7 @@ int Map::open(char* arquivo)
                {
                   if(numObjetosAtual >= MAXOBJETOS)
                   {
-                     printf("Estourado Limite de objetos por Quadrado\n");
+                     printf("Overflow of objects per Square\n");
                   }
                   else
                   {
@@ -576,7 +594,7 @@ int Map::open(char* arquivo)
                   break;
                }
                default:
-                       printf("Que merda eh essa: %s em %s\n",buffer,arquivo);
+                       printf("What the Hell: %s on %s\n",buffer,arquivo);
                        break;
             }
             break; 
@@ -587,7 +605,7 @@ int Map::open(char* arquivo)
              break;
          }
          default:
-                 printf("Que merda eh essa: %s em %s\n",buffer,arquivo);
+                 printf("What is: %s on %s\n",buffer,arquivo);
                  break;
       }
    }
@@ -618,6 +636,42 @@ int Map::open(char* arquivo)
        if(ant!=NULL)
          ant = ant->down;
    }
+
+   /* Agora atualiza os ponteiros dos Muros */
+   maux = muros;
+   int inix,iniz,maxx,maxz;
+   int indiceMuro;
+   
+   while(maux)
+   {
+      inix = (int)floor(maux->x1 / SQUARESIZE);
+      iniz = (int)floor(maux->z1 / SQUARESIZE);
+      maxx = (int)floor(maux->x2 / SQUARESIZE);
+      maxz = (int)floor(maux->z2 / SQUARESIZE);
+      printf("%d %d %d %d\n",inix,iniz,maxx,maxz);
+      for(ax = inix;ax<=maxx;ax++)
+      {
+          for(az = iniz;az<=maxz;az++)
+          {
+              indiceMuro = 0;
+              aux = quadradoRelativo(ax+1,az+1);
+              while((indiceMuro < MAXMUROS) && (aux->muros[indiceMuro] != NULL))
+              {
+                 //printf("%p\n",aux->muros[indiceMuro]);
+                 indiceMuro++;
+              }
+              if(indiceMuro < MAXMUROS)
+              {
+                 printf("Added %d° wall on quad: %d %d\n",indiceMuro,ax+1,az+1);
+                 aux->muros[indiceMuro] = maux;
+              }
+              else
+                 printf("Quad: %d %d has more walls than permitted: %d\n",ax,az,
+                          indiceMuro);
+          }
+      }
+      maux = maux->proximo;
+   }
  
    return(1);
 }
@@ -631,13 +685,13 @@ int Map::save(char* arquivo)
 
    if(!(arq = fopen(arquivo,"w")))
    {
-      printf("Erro ao se tentar Salvar mapa: %s\n",arquivo);
+      printf("Error while creating: %s to save\n",arquivo);
 	return(0);
    }
    
    /* Escreve Dimensões do Arquivo */
    fprintf(arq,"T %dX%d\n",x,z);
-   fprintf(arq,"# Criado pelo Editor de Mapas do DccNiTghtmare, versao 0.0.2\n");
+   fprintf(arq,"# Made by DccNiTghtmare's MapEditor, v0.0.2\n");
 
    /* Escreve os Objetos Utilizados */
    if(Objetos->total>0)
@@ -663,11 +717,11 @@ int Map::save(char* arquivo)
    int x1,z1,x2,z2;
    while(maux)
    {
-      x1 = maux->x1 / SQUARESIZE;
-      x2 = (maux->x2 / SQUARESIZE)-1;
-      z1 = maux->z1 / SQUARESIZE;
-      z2 = (maux->z2 / SQUARESIZE)-1;
-      fprintf(arq,"muro %d,%d,%d,%d\n",x1,z1,x2,z2);
+      //x1 = maux->x1 / SQUARESIZE;
+      //x2 = (maux->x2 / SQUARESIZE)-1;
+      //z1 = maux->z1 / SQUARESIZE;
+      //z2 = (maux->z2 / SQUARESIZE)-1;
+      fprintf(arq,"muro %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
       fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura));
       maux = (muro*)maux->proximo;
    }

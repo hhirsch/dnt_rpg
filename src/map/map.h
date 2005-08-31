@@ -16,11 +16,19 @@
 #define OCUPADO 2
 
 /* Constraints */
-#define SQUARESIZE 10
+#define SQUARESIZE 64
 #define HALFSQUARESIZE 5
-#define MAXOBJETOS 5
+#define MAXOBJETOS 10
+#define MAXMUROS 5
 #define MUROALTURA 50
 #define ALTURAMAXIMA 100
+
+typedef struct _muro
+{
+   GLfloat x1,z1,x2,z2;
+   int textura;
+   struct _muro* proximo;
+}muro;
 
 class Square
 {
@@ -44,6 +52,7 @@ class Square
                 int objetosDesenha[MAXOBJETOS]; //desenha objeto n?
                 int Xobjetos[MAXOBJETOS]; //x do objeto n
                 int Zobjetos[MAXOBJETOS]; //z do objeto n
+                muro* muros[MAXMUROS];
                 GLuint R,G,B;            /* Cores do Quadrado para o MINIMAPA */
                 Square* quadObjetos[MAXOBJETOS];
 
@@ -60,13 +69,6 @@ typedef struct _texture {
    GLuint R,G,B;                   /* Cores da Textura para o MINIMAPA */
    struct _texture* proximo;  /* Proxima Textura na Lista */
 }texture;
-
-typedef struct _muro
-{
-   GLuint x1,z1,x2,z2;
-   int textura;
-   struct _muro* proximo;
-}muro;
 
 class Map
 {

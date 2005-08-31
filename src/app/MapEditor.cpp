@@ -9,8 +9,10 @@
 #include <unistd.h>
 
 #define CHAO      1
-#define MURO      2
-#define MUROINIC  3
+#define MUROX      2
+#define MUROXINIC  3
+#define MUROZ      8
+#define MUROZINIC  7
 #define OBJETO    4
 #define DELMURO   5
 #define DELOBJETO 6
@@ -39,11 +41,18 @@ int botaoChao(void *jan,void *ljan,SDL_Surface *screen)
     return(1);
 }
 
-int botaoMuro(void *jan,void *ljan,SDL_Surface *screen)
+int botaoMuroX(void *jan,void *ljan,SDL_Surface *screen)
 {
-    estado = MURO;
+    estado = MUROX;
     return(1);
 }
+
+int botaoMuroZ(void *jan,void *ljan,SDL_Surface *screen)
+{
+    estado = MUROZ;
+    return(1);
+}
+
 
 int TexturaAnterior(Map* mapa, GLuint ID)
 {
@@ -245,8 +254,8 @@ void novoMapa(Map* mapa, int x, int z)
 
    printf("Beginning a new Map: %d,%d\n",x,z);
    
-   int IDtextura = inserirTextura(mapa,"../data/texturas/chao_grama.jpg", 
-                  "chao_grama");
+   int IDtextura = inserirTextura(mapa,"../data/texturas/chao_grama2.jpg", 
+                  "chao_grama2");
 
    /* Cria todos os quadrados necessários */
    for(auxZ = 0; auxZ < z; auxZ++)
@@ -372,7 +381,11 @@ int main(int argc, char **argv)
    principal->objetos->InserirBotao(10,37,50,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Wall",1,&botaoMuro);
+                                                "XWall",1,&botaoMuroX);
+   principal->objetos->InserirBotao(10,57,50,75,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "ZWall",1,&botaoMuroZ);
    principal->objetos->InserirBotao(55,17,125,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
@@ -445,33 +458,47 @@ int main(int argc, char **argv)
              
             if(estado == CHAO)
                colocaTextura(mapa, (int)xReal / SQUARESIZE, (int)zReal / SQUARESIZE, texturaAtual);
-            else if (estado == MURO)
+            else if( (estado == MUROX) || (estado == MUROZ))
             {
                 maux = new(muro);
                 maux->proximo = mapa->muros;
                 mapa->muros = maux;
-                maux->x1 = qx*SQUARESIZE;
-                maux->x2 = (qx)*SQUARESIZE;
-                maux->z1 = qz*SQUARESIZE;
-                maux->z2 = (qz)*SQUARESIZE;
+                maux->x1 = xReal/*qx*SQUARESIZE*/;
+                //maux->x2 = xReal;//(qx)*SQUARESIZE;
+                maux->z1 = zReal;
+                //maux->z2 = zReal+10;//(qz)*SQUARESIZE;
                 maux->textura = texturaAtual;
-                estado = MUROINIC;
-                
+                if(estado == MUROX)
+                {
+                   estado = MUROXINIC;
+                   maux->x2 = xReal;
+                   maux->z2 = zReal+10;
+                }
+                else
+                {
+                   estado = MUROZINIC;
+                   maux->z2 = zReal;
+                   maux->x2 = xReal+10;
+                }
             }
-            else if (estado == MUROINIC)
+            else if ((estado == MUROXINIC) || (estado == MUROZINIC))
             {
-                maux->x2 = (qx)*SQUARESIZE;
-                maux->z2 = (qz)*SQUARESIZE;
+                if(estado == MUROXINIC)
+                   maux->x2 = xReal;//(qx)*SQUARESIZE;
+                else
+                   maux->z2 = zReal;//(qz)*SQUARESIZE;
             }
          }
          else
          {
-             if(estado == MUROINIC)
+             if((estado == MUROXINIC) || (estado == MUROZINIC))
              {
-                int max = (maux->x2 / SQUARESIZE)-1;
-                int inix = (maux->x1 / SQUARESIZE);
-                int maz = (maux->z2 / SQUARESIZE)-1;
-                int iniz = (maux->z1 / SQUARESIZE);
+                printf("Definido Muro: %f,%f,%f,%f\n",maux->x1,
+                         maux->z1, maux->x2, maux->z2);
+                /*int max = ((int)maux->x2 / SQUARESIZE)-1;
+                int inix = ((int)maux->x1 / SQUARESIZE);
+                int maz = ((int)maux->z2 / SQUARESIZE)-1;
+                int iniz = ((int)maux->z1 / SQUARESIZE);
                 int x;// = maux->x1 / SQUARESIZE;
                 int z;// = maux->z1 / SQUARESIZE;
                 if(iniz > maz)
@@ -487,16 +514,19 @@ int main(int argc, char **argv)
                     max = x;
                 }
                 Square* saux;
-                for(z = maux->z1 / SQUARESIZE;z<=maz;z++)
+                for(z = iniz;z<=maz;z++)
                 {
-                  for(x = maux->x1 / SQUARESIZE;x<=max;x++) 
+                  for(x = inix / SQUARESIZE;x<=max;x++) 
                   {
                       //printf("%d %d   %d %d\n",x,z,max,maz);
                       saux = mapa->quadradoRelativo(x+1,z+1);
-                      saux->flags &= !PISAVEL;
+                      //saux->flags &= !PISAVEL;
                   }
-                }
-                 estado = MURO;
+                }*/
+                if(estado == MUROXINIC)
+                   estado = MUROX;
+                else
+                   estado = MUROZ;
              }
          }
   
