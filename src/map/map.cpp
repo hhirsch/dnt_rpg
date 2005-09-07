@@ -655,17 +655,19 @@ int Map::open(char* arquivo)
           {
               indiceMuro = 0;
               aux = quadradoRelativo(ax+1,az+1);
-              while((indiceMuro < MAXMUROS) && (aux->muros[indiceMuro] != NULL))
+              //printf("QuadRelativo: %d %d\n",ax+1,az+1);
+              while((aux!=NULL) && (indiceMuro < MAXMUROS) && 
+                    (aux->muros[indiceMuro] != NULL))
               {
-                 //printf("%p\n",aux->muros[indiceMuro]);
+                 //printf("%d %d %p\n",ax+1,az+1,aux->muros[indiceMuro]);
                  indiceMuro++;
               }
-              if(indiceMuro < MAXMUROS)
+              if((aux!=NULL) && (indiceMuro < MAXMUROS))
               {
                  printf("Added %d° wall on quad: %d %d\n",indiceMuro,ax+1,az+1);
                  aux->muros[indiceMuro] = maux;
               }
-              else
+              else if(indiceMuro >= MAXMUROS)
                  printf("Quad: %d %d has more walls than permitted: %d\n",ax,az,
                           indiceMuro);
           }
@@ -831,25 +833,28 @@ void Map::drawMinimap(SDL_Surface* img)
       while(atual != NULL)
       {
           cor_Definir(atual->R,atual->G,atual->B);
-          pixel_Desenhar(img,x1,y1,0); 
+          pixel_Desenhar(img,x1,y1,0);
+          pixel_Desenhar(img,x1+1,y1,0); 
+          pixel_Desenhar(img,x1+1,y1+1,0);
+          pixel_Desenhar(img,x1,y1+1,0);
           atual = atual->right;
-          x1++;
+          x1+=2;
       }
       primeiroLinha = primeiroLinha->down;
       x1 = 0;
-      y1++;
+      y1+=2;
    }
 
    cor_Definir(1, 1, 1);
-   retangulo_2Cores(img,0,0,x-1,z-1,0,0,0,0);
+   retangulo_2Cores(img,0,0,x*2-1,z*2-1,0,0,0,0);
    
    muro* maux = muros;
    while(maux!=NULL)
    {
        x1 = (int) ( (float)maux->x1 / (float)SQUARESIZE /** razaoX*/ );
-       x2 = (int) ( (((float)maux->x2 / (float)SQUARESIZE)-1) /** razaoX*/);
+       x2 = (int) ( (((float)maux->x2 / (float)SQUARESIZE))-1 /** razaoX*/)*2;
        y1 = (int) ( (float)maux->z1 / (float)SQUARESIZE /** razaoY*/ );
-       y2 = (int) ( (((float)maux->z2 / (float)SQUARESIZE)-1) /** razaoY*/);
+       y2 = (int) ( (((float)maux->z2 / (float)SQUARESIZE))-1 /** razaoY*/)*2;
        //printf("%d,%d,%d,%d  %f,%f\n",x1,y1,x2,y2,razaoX, razaoY);
        cor_Definir(255,40,30);
        linha_Desenhar(img, x1,y1,x2,y2, 0);

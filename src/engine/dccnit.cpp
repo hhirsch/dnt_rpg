@@ -332,7 +332,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
    tempo = SDL_GetTicks();
    varTempo = (tempo-ultimaLeitura);
-   if( ((varTempo)) >= /*16*/20)
+   if( ((varTempo)) >= 20)
    {
       /* Calcula as Modificações Reais no Andar, rotacionar, girar, etc */
       varTempo /= 20.0;
@@ -596,14 +596,17 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          if(keys[SDLK_LSHIFT])
          {
              PCs->personagemAtivo->braco_d->rotacao[1]+=1;
-             PCs->personagemAtivo->mao_d->rotacao[2]-=1;
+             PCs->personagemAtivo->mao_d->rotacao[1]+=1;
              PCs->personagemAtivo->ante_d->rotacao[1]+=1;
          }
          else
          {
              PCs->personagemAtivo->braco_d->rotacao[1]-=1;
-             PCs->personagemAtivo->mao_d->rotacao[2]+=1;
+             PCs->personagemAtivo->mao_d->rotacao[1]-=1;
              PCs->personagemAtivo->ante_d->rotacao[1]-=1;
+             PCs->personagemAtivo->braco_d->rotacao[2]+=1;
+             PCs->personagemAtivo->mao_d->rotacao[2]+=1;
+             PCs->personagemAtivo->ante_d->rotacao[2]+=1;
          }
          redesenha = 1;
       }
