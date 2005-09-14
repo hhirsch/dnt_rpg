@@ -376,12 +376,15 @@ Map::Map()
 }
 
 
-Square* Map::quadradoRelativo(int x, int z)
+Square* Map::quadradoRelativo(int xa, int za)
 {
+   //printf("qrel: %d %d\n",x,z);
+   if(x < xa) return(NULL);
+   if(z < za) return(NULL);
    int ax,az;
    Square* result = first;
-   for(ax=0;ax<(x-1);ax++) result = result->right;
-   for(az=0;az<(z-1);az++) result = result->down;
+   for(ax=0;ax<(xa-1);ax++) result = result->right;
+   for(az=0;az<(za-1);az++) result = result->down;
    return(result);
 }
 

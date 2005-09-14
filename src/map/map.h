@@ -84,7 +84,7 @@ class Map
                          GLfloat cameraZ, GLfloat matriz[6][4]);
                 void drawMinimap(SDL_Surface* img);
 		int open( char* arquivo ); /* Abre o mapa do arquivo */
-                Square* quadradoRelativo(int x, int z);
+                Square* quadradoRelativo(int xa, int za);
                 int save( char* arquivo ); /* Salva o Mapa */
 
 		/* Vars */

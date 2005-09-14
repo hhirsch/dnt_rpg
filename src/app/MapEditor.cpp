@@ -31,12 +31,18 @@ mapObjeto* objAtual;
 Map* mapa;
 barraTexto* bartInserir;
 
+/************************************************************************
+ *              Trata Botao Objeto                                      *
+ ************************************************************************/
 int botaoObjeto(void *jan,void *ljan,SDL_Surface *screen)
 {
    estado = OBJETO;
    return(1);
 }
 
+/************************************************************************
+ *              Trata Botao Proximo Objeto                              *
+ ************************************************************************/
 int botaoProximoObjeto(void *jan,void *ljan,SDL_Surface *screen)
 {
    if(objAtual)
@@ -45,6 +51,9 @@ int botaoProximoObjeto(void *jan,void *ljan,SDL_Surface *screen)
    return(1);
 }
 
+/************************************************************************
+ *              Trata Botao Objeto Anterior                             *
+ ************************************************************************/
 int botaoObjetoAnterior(void *jan,void *ljan,SDL_Surface *screen)
 {
    if(objAtual)
@@ -52,25 +61,36 @@ int botaoObjetoAnterior(void *jan,void *ljan,SDL_Surface *screen)
    return(1);
 }
 
+/************************************************************************
+ *                     Trata Botao Chao                                 *
+ ************************************************************************/
 int botaoChao(void *jan,void *ljan,SDL_Surface *screen)
 {
     estado = CHAO; 
     return(1);
 }
 
+/************************************************************************
+ *                     Trata Botao MuroX                                *
+ ************************************************************************/
 int botaoMuroX(void *jan,void *ljan,SDL_Surface *screen)
 {
     estado = MUROX;
     return(1);
 }
 
+/************************************************************************
+ *                     Trata Botao MuroY                                *
+ ************************************************************************/
 int botaoMuroZ(void *jan,void *ljan,SDL_Surface *screen)
 {
     estado = MUROZ;
     return(1);
 }
 
-
+/************************************************************************
+ *                   Ativa a Textura Anterior                           *
+ ************************************************************************/
 int TexturaAnterior(Map* mapa, GLuint ID)
 {
    int aux=0;
@@ -87,6 +107,9 @@ int TexturaAnterior(Map* mapa, GLuint ID)
    return(mapa->Texturas->indice);
 }
 
+/************************************************************************
+ *                   Ativa a Proxima Textura                            *
+ ************************************************************************/
 int ProximaTextura(Map* mapa, GLuint ID)
 {
    int aux=0;
@@ -106,18 +129,27 @@ int ProximaTextura(Map* mapa, GLuint ID)
    return(-1);
 }
 
+/************************************************************************
+ *                     Trata Botao Proxima Textura                      *
+ ************************************************************************/
 int botaoProximaTextura(void *jan,void *ljan,SDL_Surface *screen)
 {
    texturaAtual = ProximaTextura(mapa,texturaAtual);
    return(1);
 }
 
+/************************************************************************
+ *                     Trata Botao Textura Anterior                     *
+ ************************************************************************/
 int botaoTexturaAnterior(void *jan,void *ljan,SDL_Surface *screen)
 {
    texturaAtual = TexturaAnterior(mapa,texturaAtual);
    return(1);
 }
 
+/************************************************************************
+ *                     Redmensionamento da Janela SDL                   *
+ ************************************************************************/
 void Redmensiona(SDL_Surface *screen)
 {
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
@@ -128,6 +160,9 @@ void Redmensiona(SDL_Surface *screen)
    glMatrixMode (GL_MODELVIEW);
 }
 
+/************************************************************************
+ *                     Chamada Inicial SDL                              *
+ ************************************************************************/
 void Iniciar(SDL_Surface *screen)
 {
   
@@ -160,6 +195,9 @@ void Iniciar(SDL_Surface *screen)
   
 }
 
+/************************************************************************
+ *                     Chamada de Erro de Invocacao                     *
+ ************************************************************************/
 void erro()
 {
    printf("/\n");
@@ -169,6 +207,9 @@ void erro()
    exit(2);
 }
 
+/************************************************************************
+ *                     Insere Textura no Quadrado                       *
+ ************************************************************************/
 void colocaTextura(Map* mapa, int x, int z, GLuint texturaID)
 {
     if( (x <= mapa->x) && (z <= mapa->z) )
@@ -183,7 +224,9 @@ void colocaTextura(Map* mapa, int x, int z, GLuint texturaID)
     }
 }
 
-
+/************************************************************************
+ *             Insere Textura na Lista de Texturas                      *
+ ************************************************************************/
 int inserirTextura(Map* mapa, char* arq, char* nome)
 {
    texture* tex;
@@ -245,6 +288,9 @@ int inserirTextura(Map* mapa, char* arq, char* nome)
    return(tex->indice);
 }
 
+/************************************************************************
+ *                     Trata Botao Inserir                              *
+ ************************************************************************/
 int botaoInserir(void *jan,void *ljan,SDL_Surface *screen)
 {
    int tam = strlen(bartInserir->texto);
@@ -263,6 +309,9 @@ int botaoInserir(void *jan,void *ljan,SDL_Surface *screen)
    return(1);
 }
 
+/************************************************************************
+ *                     Cria um Novo Mapa                                *
+ ************************************************************************/
 void novoMapa(Map* mapa, int x, int z)
 {
    int auxX, auxZ;
@@ -321,6 +370,9 @@ void novoMapa(Map* mapa, int x, int z)
    mapa->squareInic = mapa->first;
 } 
 
+/************************************************************************
+ *                     Escopo Principal                                 *
+ ************************************************************************/
 int main(int argc, char **argv)
 {
    estado = CHAO;
@@ -378,6 +430,16 @@ int main(int argc, char **argv)
    mapa = new(Map);
    if(novo)
    {
+      if(x < 3) 
+      {
+          printf("Lines must be 3 or more. Setting to 3.\n");
+          x = 3;
+      }
+      if(z<3)
+      {
+          printf("Columns must be 3 or more. Setting to 3.\n");
+          z = 3;
+      }
       /* Cria um mapa ja existente */
       novoMapa(mapa,x,z);
    }
@@ -625,17 +687,24 @@ int main(int argc, char **argv)
          {
              if(estado == MUROXINIC)
              {
-                 maux->x1 = ((int)(maux->x1) / SQUARESIZE)*SQUARESIZE;
-                 maux->x2 = ((int)(maux->x2) / SQUARESIZE)*SQUARESIZE;
-                 maux->z1 = ((int)(maux->z1 / SQUARESIZE))*SQUARESIZE;
+                 float cmp = ((int)(maux->z1) / SQUARESIZE)*SQUARESIZE;
+                 maux->x1 = ((int)round((maux->x1) / SQUARESIZE))*SQUARESIZE;
+                 maux->x2 = ((int)round((maux->x2) / SQUARESIZE))*SQUARESIZE;
+                 maux->z1 = ((int)round((maux->z1 / SQUARESIZE)))*SQUARESIZE;
+                 if(cmp < maux->z1)
+                       maux->z1 = maux->z1-10;
                  maux->z2 = maux->z1+10;
+//TODO Minimize wall sobreposition
                  estado = MUROXINICQUAD;
              }
              else if(estado == MUROZINIC)
              {
-                 maux->z1 = ((int)(maux->z1) / SQUARESIZE)*SQUARESIZE;
-                 maux->z2 = ((int)(maux->z2) / SQUARESIZE)*SQUARESIZE;
-                 maux->x1 = ((int)(maux->x1 / SQUARESIZE))*SQUARESIZE;
+                 float cmp = ((int)(maux->x1) / SQUARESIZE)*SQUARESIZE;
+                 maux->z1 = ((int)round((maux->z1) / SQUARESIZE))*SQUARESIZE;
+                 maux->z2 = ((int)round((maux->z2) / SQUARESIZE))*SQUARESIZE;
+                 maux->x1 = ((int)round((maux->x1 / SQUARESIZE)))*SQUARESIZE;
+                 if(cmp < maux->x1)
+                       maux->x1 = maux->x1-10;
                  maux->x2 = maux->x1+10;
                  estado = MUROZINICQUAD;             }
          } 
