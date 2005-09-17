@@ -587,8 +587,10 @@ int Map::open(char* arquivo)
                   else
                   {
                      fgets(buffer, sizeof(buffer), arq);
-                     sscanf(buffer,"%s %d:%d,%d",nome,
+                     sscanf(buffer,"%s %d:%d,%d:%f,%f",nome,
                                       &aux->objetosDesenha[numObjetosAtual],
+                                      &aux->quadXobjetos[numObjetosAtual],
+                                      &aux->quadZobjetos[numObjetosAtual],
                                       &aux->Xobjetos[numObjetosAtual],
                                       &aux->Zobjetos[numObjetosAtual]);
                      aux->objetos[numObjetosAtual] = Objetos->EndMapObjeto(nome);
@@ -627,11 +629,12 @@ int Map::open(char* arquivo)
           for(i=0;i<MAXOBJETOS;i++)
             if(aux->objetos[i] != NULL)
             {
-               aux->quadObjetos[i] = quadradoRelativo(aux->Xobjetos[i],aux->Zobjetos[i]);
-               aux->Xobjetos[i] = HALFSQUARESIZE +
+               aux->quadObjetos[i] = quadradoRelativo(aux->quadXobjetos[i],
+                                                      aux->quadZobjetos[i]);
+               /*aux->Xobjetos[i] = HALFSQUARESIZE +
                     (aux->Xobjetos[i]-1)*SQUARESIZE;
                aux->Zobjetos[numObjetosAtual] = HALFSQUARESIZE +
-                    (aux->Zobjetos[i]-1)*SQUARESIZE;
+                    (aux->Zobjetos[i]-1)*SQUARESIZE;*/
             }
           aux = aux->right;
        }
@@ -680,6 +683,18 @@ int Map::open(char* arquivo)
  
    return(1);
 }
+
+/*******************************************************************
+ *   Otimiza o mapa (sobreposicao de muros, quadrados ocp por obj) *
+ *******************************************************************/
+void Map::optimize()
+{
+    /* Verifica Sobreposicao de Muros */
+
+
+   /* Verifica quadrados ocupados pelos Objetos */
+}
+
 
 /********************************************************************
  *                      Salva o Arquivo de Mapas                    *
@@ -746,11 +761,13 @@ int Map::save(char* arquivo)
           {
             if(saux->objetos[aux])
             {
-               x2 = saux->Xobjetos[aux] / SQUARESIZE;
-               z2 = saux->Zobjetos[aux] / SQUARESIZE;
-               fprintf(arq,"uo %s %d:%d,%d\n",saux->objetos[aux]->nome,
+               x2 = (int)saux->Xobjetos[aux] / SQUARESIZE;
+               z2 = (int)saux->Zobjetos[aux] / SQUARESIZE;
+               fprintf(arq,"uo %s %d:%d,%d:%f,%f\n",saux->objetos[aux]->nome,
                                             saux->objetosDesenha[aux],
-                                            x2+1,z2+1);
+                                            x2+1,z2+1,
+                                            saux->Xobjetos[aux],
+                                            saux->Zobjetos[aux]);
             }
           }
           saux = saux->right;
@@ -764,6 +781,7 @@ int Map::save(char* arquivo)
    fprintf(arq,"i %d,%d\n",x1,z1);
 
    fclose(arq);
+   optimize();
    return(1);
 }
 

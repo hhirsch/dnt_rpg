@@ -47,7 +47,8 @@ int botaoProximoObjeto(void *jan,void *ljan,SDL_Surface *screen)
 {
    if(objAtual)
       objAtual = (mapObjeto*)objAtual->proximo;
-//TODO evitar nodo cabeca
+  if(objAtual == mapa->Objetos->primeiro)
+      objAtual = (mapObjeto*)objAtual->proximo;
    return(1);
 }
 
@@ -58,6 +59,9 @@ int botaoObjetoAnterior(void *jan,void *ljan,SDL_Surface *screen)
 {
    if(objAtual)
       objAtual = (mapObjeto*)objAtual->anterior;
+   if(objAtual == mapa->Objetos->primeiro)
+      objAtual = (mapObjeto*)objAtual->anterior;
+
    return(1);
 }
 
@@ -553,8 +557,10 @@ int main(int argc, char **argv)
                   if(ob<MAXOBJETOS)
                   {
                      saux->objetos[ob] = objAtual;
-                     saux->Xobjetos[ob] = HALFSQUARESIZE+qx*SQUARESIZE;
-                     saux->Zobjetos[ob] = HALFSQUARESIZE+qz*SQUARESIZE;
+                     //saux->quadXobjetos[ob] = qx;
+                     //saux->quadZobjetos[ob] = qz;
+                     saux->Xobjetos[ob] = xReal;
+                     saux->Zobjetos[ob] = zReal;
                      saux->objetosDesenha[ob] = 1;
                      printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
                      SDL_Delay(500);
@@ -646,34 +652,7 @@ int main(int argc, char **argv)
              {
                 printf("Definido Muro: %f,%f,%f,%f\n",maux->x1,
                          maux->z1, maux->x2, maux->z2);
-                /*int max = ((int)maux->x2 / SQUARESIZE)-1;
-                int inix = ((int)maux->x1 / SQUARESIZE);
-                int maz = ((int)maux->z2 / SQUARESIZE)-1;
-                int iniz = ((int)maux->z1 / SQUARESIZE);
-                int x;// = maux->x1 / SQUARESIZE;
-                int z;// = maux->z1 / SQUARESIZE;
-                if(iniz > maz)
-                {
-                    z = iniz;
-                    iniz = maz;
-                    maz = z;
-                }
-                if(inix > max) 
-                {
-                    x = inix;
-                    inix = max;
-                    max = x;
-                }
-                Square* saux;
-                for(z = iniz;z<=maz;z++)
-                {
-                  for(x = inix / SQUARESIZE;x<=max;x++) 
-                  {
-                      //printf("%d %d   %d %d\n",x,z,max,maz);
-                      saux = mapa->quadradoRelativo(x+1,z+1);
-                      //saux->flags &= !PISAVEL;
-                  }
-                }*/
+                
                 if( (estado == MUROXINIC)||(estado == MUROXINICQUAD))
                    estado = MUROX;
                 else
@@ -771,7 +750,8 @@ int main(int argc, char **argv)
          }
          if(teclas[SDLK_i])
          {
-             printf("x:%.3f z:%.3f phi:%.3f theta:%.3f \n",centroX, centroZ,phi,theta);
+             printf("x:%.3f z:%.3f phi:%.3f theta:%.3f \n",centroX, centroZ,
+                                                           phi,theta);
          }
       }
       glClearColor(0,0,0,0);

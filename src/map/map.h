@@ -50,8 +50,10 @@ class Square
                 int textura; // qual textura ele usa
 		mapObjeto *objetos[MAXOBJETOS]; //objetos quele usa
                 int objetosDesenha[MAXOBJETOS]; //desenha objeto n?
-                int Xobjetos[MAXOBJETOS]; //x do objeto n
-                int Zobjetos[MAXOBJETOS]; //z do objeto n
+		int quadXobjetos[MAXOBJETOS]; // X do quadrado do objeto 
+		int quadZobjetos[MAXOBJETOS]; // Z do quadrado do objeto
+                float Xobjetos[MAXOBJETOS]; //x do objeto n
+                float Zobjetos[MAXOBJETOS]; //z do objeto n
                 muro* muros[MAXMUROS];
                 GLuint R,G,B;            /* Cores do Quadrado para o MINIMAPA */
                 Square* quadObjetos[MAXOBJETOS];
@@ -86,6 +88,8 @@ class Map
 		int open( char* arquivo ); /* Abre o mapa do arquivo */
                 Square* quadradoRelativo(int xa, int za);
                 int save( char* arquivo ); /* Salva o Mapa */
+                void optimize();
+
 
 		/* Vars */
                 LmapObjeto* Objetos; 
