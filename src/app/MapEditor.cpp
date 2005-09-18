@@ -3,6 +3,7 @@
 #include "../gui/farso.h"
 #include "../map/map.h"
 #include "../engine/culling.h"
+#include "../etc/glm.h"
 #include <SDL/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -545,7 +546,8 @@ int main(int argc, char **argv)
             else if (qz < 0) qz = 0;
              
             if(estado == CHAO)
-               colocaTextura(mapa, (int)xReal / SQUARESIZE, (int)zReal / SQUARESIZE, texturaAtual);
+               colocaTextura(mapa, (int)xReal / SQUARESIZE, 
+                             (int)zReal / SQUARESIZE, texturaAtual);
             else if(estado == OBJETO)
             {
                Square* saux = mapa->quadradoRelativo(qx+1,qz+1);
@@ -559,10 +561,44 @@ int main(int argc, char **argv)
                      saux->objetos[ob] = objAtual;
                      //saux->quadXobjetos[ob] = qx;
                      //saux->quadZobjetos[ob] = qz;
+                     //objAtual->x
                      saux->Xobjetos[ob] = xReal;
                      saux->Zobjetos[ob] = zReal;
                      saux->objetosDesenha[ob] = 1;
                      printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
+                     
+                     GLMmodel* modelo = (GLMmodel*)objAtual->modelo3d; 
+                     int minqx, minqz, maxqx, maxqz;
+                     minqx = (int)(modelo->x1 + xReal) / SQUARESIZE;
+                     minqz = (int)(modelo->z1 + zReal) / SQUARESIZE;
+                     maxqx = (int)(modelo->x2 + xReal) / SQUARESIZE;
+                     maxqz = (int)(modelo->z2 + zReal) / SQUARESIZE; 
+                     int X, Z;
+                     Square* qaux;
+                     for(X = minqx; X<=maxqx; X++)
+                     {
+                         for(Z = minqz; Z <=maxqz; Z++) 
+                         {
+                             qaux = mapa->quadradoRelativo(X+1,Z+1);
+                             if((qaux) && (qaux != saux))
+                             {
+                                 ob =0;
+                                 while( (ob < MAXOBJETOS ) && 
+                                        (qaux->objetos[ob] != NULL))
+                                           ob++;
+                                 if(ob < MAXOBJETOS)
+                                 {
+                                    qaux->objetos[ob] = objAtual;
+                                    qaux->Xobjetos[ob] = xReal;
+                                    qaux->Zobjetos[ob] = zReal;
+                                    qaux->objetosDesenha[ob] = 0;
+                                    printf("%d° Object Inserted on %d %d\n",
+                                            ob,X+1,Z+1);
+                                 }
+                             }
+                         }
+                     }
+                     
                      SDL_Delay(500);
                   }
                   else
@@ -650,6 +686,18 @@ int main(int argc, char **argv)
              if((estado == MUROXINIC) || (estado == MUROZINIC) || 
                 (estado == MUROXINICQUAD) || (estado == MUROZINICQUAD))
              {
+                if(maux->x2 < maux->x1)
+                {
+                   float aux = maux->x1;
+                   maux->x1 = maux->x2;
+                   maux->x2 = aux;
+                }
+                if(maux->z2 < maux->z1)
+                {
+                    float aux = maux->z1;
+                    maux->z1 = maux->z2;
+                    maux->z2 = aux;
+                }
                 printf("Definido Muro: %f,%f,%f,%f\n",maux->x1,
                          maux->z1, maux->x2, maux->z2);
                 

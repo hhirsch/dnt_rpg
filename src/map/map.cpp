@@ -340,8 +340,8 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
            {
               if((aux->objetos[o] != NULL) && (aux->objetosDesenha[o] == 1) )
               {
-                  aux->objetos[o]->Desenhar(aux->x1+HALFSQUARESIZE,
-                                            aux->z1+HALFSQUARESIZE,distancia);
+                  aux->objetos[o]->Desenhar(aux->Xobjetos[o],
+                                            aux->Zobjetos[o],distancia);
               }
            }
            }
@@ -410,7 +410,7 @@ int Map::open(char* arquivo)
    
    if(!(arq = fopen(arquivo,"r")))
    {
-      printf("Erro ao se tentar abrir mapa: %s\n",arquivo);
+      printf("Error while opening map file: %s\n",arquivo);
 	return(0);
    }
 
@@ -426,8 +426,8 @@ int Map::open(char* arquivo)
    }
    else
    {
-      printf("Não foi definido o tamanho do mapa %s\n", arquivo); 
-      printf(" Encontramos isso %s, ao invés de T iXi\n",buffer);
+      printf("Map Size not defined: %s\n", arquivo); 
+      printf(" Found %s, where espected T iXi\n",buffer);
       fclose(arq);
       return(0);
    }
@@ -610,7 +610,7 @@ int Map::open(char* arquivo)
              break;
          }
          default:
-                 printf("What is: %s on %s\n",buffer,arquivo);
+                 printf("What is: %s on %s ?\n",buffer,arquivo);
                  break;
       }
    }
@@ -690,7 +690,87 @@ int Map::open(char* arquivo)
 void Map::optimize()
 {
     /* Verifica Sobreposicao de Muros */
-
+    muro* maux = muros;
+    while(maux != NULL)
+    {
+        muro* maux2 = muros;
+        while(maux2 !=NULL)
+        {
+            if(maux != maux2)
+            {
+                if( (maux->x1 == maux2->x1) && 
+                    ( (maux->z1 >= maux2->z1) && (maux->z2 <= maux2->z2) ||
+                      (maux->z1 <= maux2->z1) && (maux->z2 >= maux2->z2) ))
+                {
+                    if(maux->x2 != maux->x1+10)
+                    {
+                       maux->x1 += 10;
+                    }
+                    else if(maux2->x2 != maux2->x1+10)
+                    {
+                       maux2->x1+= 10;
+                    }
+                    else
+                    {
+                       //deleta maux(2)
+                    }
+                }
+                else if( (maux->x2 == maux2->x2) && 
+                    ( (maux->z1 >= maux2->z1) && (maux->z2 <= maux2->z2) ||
+                      (maux->z1 <= maux2->z1) && (maux->z2 >= maux2->z2) ))
+                {
+                    if(maux->x2 != maux->x1+10)
+                    {
+                       maux->x2 -= 10;
+                    }
+                    else if(maux2->x2 != maux2->x1+10)
+                    {
+                       maux2->x2 -= 10;
+                    }
+                    else
+                    {
+                       //deleta maux(2)
+                    }
+                }
+                else if( (maux->z1 == maux2->z1) && 
+                    ( (maux->x1 >= maux2->x1) && (maux->x2 <= maux2->x2) ||
+                      (maux->x1 <= maux2->x1) && (maux->x2 >= maux2->x2) ))
+                {
+                    if(maux->z2 != maux->z1+10)
+                    {
+                       maux->z1 += 10;
+                    }
+                    else if(maux2->z2 != maux2->z1+10)
+                    {
+                       maux2->z1+= 10;
+                    }
+                    else
+                    {
+                       //deleta maux(2)
+                    }
+                }
+                else if( (maux->z2 == maux2->z2) && 
+                    ( (maux->x1 >= maux2->x1) && (maux->x2 <= maux2->x2) ||
+                      (maux->x1 <= maux2->x1) && (maux->x2 >= maux2->x2) ))
+                {
+                    if(maux->z2 != maux->z1+10)
+                    {
+                       maux->z2 -= 10;
+                    }
+                    else if(maux2->z2 != maux2->z1+10)
+                    {
+                       maux2->z2 -= 10;
+                    }
+                    else
+                    {
+                       //deleta maux(2)
+                    }
+                }
+            }
+            maux2 = maux2->proximo;
+        }
+        maux = maux->proximo;
+    }
 
    /* Verifica quadrados ocupados pelos Objetos */
 }
@@ -701,6 +781,7 @@ void Map::optimize()
  ********************************************************************/
 int Map::save(char* arquivo)
 {
+   optimize();
    FILE* arq;
 
    if(!(arq = fopen(arquivo,"w")))
@@ -781,7 +862,6 @@ int Map::save(char* arquivo)
    fprintf(arq,"i %d,%d\n",x1,z1);
 
    fclose(arq);
-   optimize();
    return(1);
 }
 

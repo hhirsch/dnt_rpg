@@ -4,7 +4,7 @@
 /*********************************************************************
  *                   Desenha o objeto de Mapa                        *
  *********************************************************************/
-void mapObjeto::Desenhar(int x, int z, GLfloat distancia)
+void mapObjeto::Desenhar(float x, float z, GLfloat distancia)
 {
    GLMmodel* modelo = (GLMmodel*) modelo3d; //modelo a ser desenhado
    /* Define qual modelo desenhar */
