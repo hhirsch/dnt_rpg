@@ -38,6 +38,7 @@ barraTexto* bartInserir;
 int botaoObjeto(void *jan,void *ljan,SDL_Surface *screen)
 {
    estado = OBJETO;
+
    return(1);
 }
 
@@ -517,6 +518,9 @@ int main(int argc, char **argv)
  
    muro* maux = NULL;
    int qx; int qz;
+   double xReal, zReal, yReal;
+   float wx,wy,wz;
+
    texturaAtual = mapa->Texturas->indice;
    objAtual = (mapObjeto*)mapa->Objetos->primeiro->proximo;
 
@@ -526,19 +530,19 @@ int main(int argc, char **argv)
       SDL_PumpEvents();
       Mbotao = SDL_GetMouseState(&mouseX,&mouseY);
       teclas = SDL_GetKeyState(NULL);
+
+      wx = mouseX; wy = 600-mouseY; 
+            
+      glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
+      gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
+ 
+      qx = (int)xReal / SQUARESIZE; 
+      qz = (int)zReal / SQUARESIZE;
+
       if(gui->ManipulaEventos(mouseX,mouseY,Mbotao,teclas)==NADA)
       {
          if(Mbotao & SDL_BUTTON(1))
          {
-            double xReal, zReal, yReal;
-            float wx,wy,wz;
-            wx = mouseX; wy = 600-mouseY; 
-            
-            glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
-            gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
- 
-            qx = (int)xReal / SQUARESIZE; 
-            qz = (int)zReal / SQUARESIZE;
 
             if (qx > mapa->x) qx = mapa->x;
             else if (qx < 0) qx = 0;
@@ -818,6 +822,8 @@ int main(int argc, char **argv)
       glDisable(GL_LIGHTING);
       gui->Desenhar(proj,modl,viewPort);
       glEnable(GL_LIGHTING);
+      if( (estado == OBJETO) && (objAtual))
+         objAtual->Desenhar(xReal, zReal, 0);
       //glPushMatrix();
       glFlush();
       SDL_GL_SwapBuffers();

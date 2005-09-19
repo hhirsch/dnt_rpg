@@ -400,7 +400,7 @@ int Map::open(char* arquivo)
    Square* ant = NULL, *primLinha=NULL;
    int posX,posZ;    //posicao atual do quadrado anterior relativo
    int IDtexturaAtual = -1;
-   char* nomeTexturaAtual = "nada\0";
+   //char* nomeTexturaAtual = "nada\0";
    int IDmuroTexturaAtual = -1;
    char* nomeMuroTexturaAtual = "nada\0";
    int numObjetosAtual = 0;
@@ -566,12 +566,14 @@ int Map::open(char* arquivo)
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                  if(strcmp(nomeArq,nomeTexturaAtual))
+                  //printf("Uses:  %s Was: %s\n",nome, nomeTexturaAtual);
+                  //if(strcmp(nomeArq,nomeTexturaAtual))
                   /* Se sao Diferentes, tem de ser mudadas */
-                  {
-                     nomeTexturaAtual = nome;
+                  //{
+                     //strcpy(&nomeTexturaAtual[0],&nome[0]);
+                     
                      IDtexturaAtual = IDTextura(this,nome,&Ratual,&Gatual,&Batual);
-                  }
+                  //}
                   aux->textura = IDtexturaAtual;
                   aux->R = Ratual;
                   aux->G = Gatual;
