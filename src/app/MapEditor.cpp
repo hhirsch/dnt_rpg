@@ -226,7 +226,8 @@ void colocaTextura(Map* mapa, int x, int z, GLuint texturaID)
           quad = quad->right;
        for(aux = 0; aux<z; aux++)
           quad = quad->down;
-       quad->textura = texturaID;
+       if(quad) 
+         quad->textura = texturaID;
     }
 }
 

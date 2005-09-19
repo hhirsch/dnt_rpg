@@ -170,6 +170,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                 ljan->janelaAtiva->procPres(ljan->janelaAtiva,x,y,NULL);
                 return(JANELACLICADA);
             }
+            return(JANELACLICADA);
         }
         else if ( (ljan->janelaAtiva != NULL))
         {
@@ -251,8 +252,6 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
     if (foco == FOCO_BARRATEXTO)
     {
         barraTexto* bart = (barraTexto*)objAtivo;
-        if((SDL_GetTicks() - bart->ultEsc) >= 100) 
-        {
            if((bart->Escrever(ljan->janelaAtiva->x1,
                           ljan->janelaAtiva->y1,
                           x,y,ljan->janelaAtiva->cara,Mbotao,tecla)))
@@ -264,7 +263,6 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                }
                return(BARRATEXTOESCRITA);
            }
-        }
         ljan->janelaAtiva->AtualizaCara();
         return(BARRATEXTOESCRITA);
     }

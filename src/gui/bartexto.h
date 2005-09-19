@@ -27,6 +27,7 @@ class barraTexto: public Tobjeto
       char* texto;        /* Texto Presente na Caixa */
       unsigned int pos;
       int ultEsc;
+      char ultChar;
                           /* Procedimento Acionado Depois de Editada */
       void (*procEditada)(barraTexto* bart,SDL_Surface *screen);
       cores Cores;

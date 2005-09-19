@@ -65,7 +65,7 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
    int pronto = 0;
    //unsigned int pos = (mouseX-(Xjan+x1+2)) / (fonte_incCP()+1);
    //if (pos>strlen(texto)) pos = strlen(texto);
-   ultEsc = SDL_GetTicks();
+   int ult = SDL_GetTicks();
    int maiuscula = (teclas[SDLK_CAPSLOCK] || teclas[SDLK_LSHIFT] || 
                     teclas[SDLK_RSHIFT]);
 
@@ -76,38 +76,48 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
       pronto = 1;
    /* Teclas de Movimentacao */
    else
-   if (teclas[SDLK_HOME])
-       pos = 0;
-   else
-   if (teclas[SDLK_END])
-       pos = strlen(texto);
-   else
-   if (teclas[SDLK_RIGHT])
+   if ( (teclas[SDLK_HOME]) && ((ult - ultEsc) >= 100))
    {
-       if(pos<strlen(texto)) pos++; 
+       pos = 0;
+       ultEsc = ult;
    }
    else
-   if (teclas[SDLK_LEFT])
+   if ( (teclas[SDLK_END]) && ((ult - ultEsc) >= 100))
+   {
+       pos = strlen(texto);
+       ultEsc = ult;
+   }
+   else
+   if ((teclas[SDLK_RIGHT]) && ((ult - ultEsc) >= 100))
+   {
+       if(pos<strlen(texto)) pos++; 
+       ultEsc = ult;
+   }
+   else
+   if ((teclas[SDLK_LEFT]) && ((ult - ultEsc) >= 100))
    {
        if(pos>0) pos--;
+       ultEsc = ult;
    }
    else
       /* Teclas de Apagar */
-   if(teclas[SDLK_DELETE])
+   if( (teclas[SDLK_DELETE]) && ((ult - ultEsc) >= 100))
    {
        if(pos<strlen(texto))
        {   
           texto = string_Deletar(texto,pos,1);
        }
+       ultEsc = ult;
    }
    else
-   if(teclas[SDLK_BACKSPACE])
+   if((teclas[SDLK_BACKSPACE]) && ((ult - ultEsc) >= 100))
    {
       if(pos>0)
       {
          pos--;
          texto = string_Deletar(texto,pos,1);
       }
+      ultEsc = ult;
    }
    else
    {
@@ -463,8 +473,11 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
             c = ' ';
       }      
 
-      if(c!=-1)
+      if( (((ult - ultEsc) >= 100) || (ultChar!=c)) && 
+          (c!=-1))
       {
+        ultChar = c;
+        ultEsc = ult;
         texto = string_Colocar(texto,c,pos);
         pos++;
       }
