@@ -52,6 +52,7 @@ class Square
                 int objetosDesenha[MAXOBJETOS]; //desenha objeto n?
 		int quadXobjetos[MAXOBJETOS]; // X do quadrado do objeto 
 		int quadZobjetos[MAXOBJETOS]; // Z do quadrado do objeto
+                int orientacaoObjetos[MAXOBJETOS];
                 float Xobjetos[MAXOBJETOS]; //x do objeto n
                 float Zobjetos[MAXOBJETOS]; //z do objeto n
                 muro* muros[MAXMUROS];

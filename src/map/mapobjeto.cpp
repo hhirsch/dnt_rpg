@@ -4,7 +4,7 @@
 /*********************************************************************
  *                   Desenha o objeto de Mapa                        *
  *********************************************************************/
-void mapObjeto::Desenhar(float x, float z, GLfloat distancia)
+void mapObjeto::Desenhar(float x, float z, GLfloat distancia, float orientacao)
 {
    GLMmodel* modelo = (GLMmodel*) modelo3d; //modelo a ser desenhado
    /* Define qual modelo desenhar */
@@ -14,10 +14,15 @@ void mapObjeto::Desenhar(float x, float z, GLfloat distancia)
    else if((distancia>2*deltaVariacao) && (modeloMinimo!=NULL))
       modelo = (GLMmodel*) modeloMinimo;
 
-   modelo->position[0] = x;
+   /*modelo->position[0] = x;
    modelo->position[1] = 0;
-   modelo->position[2] = z;
-   glmDraw(modelo);
+   modelo->position[2] = z;*/
+   //modelo->orientacao = orientacao;
+   glPushMatrix();
+      glTranslatef(x, 0 ,z);
+      glRotatef(orientacao,0,1,0);
+      glmDraw(modelo);
+  glPopMatrix();
 }
 
 /*********************************************************************

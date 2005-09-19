@@ -341,7 +341,8 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
               if((aux->objetos[o] != NULL) && (aux->objetosDesenha[o] == 1) )
               {
                   aux->objetos[o]->Desenhar(aux->Xobjetos[o],
-                                            aux->Zobjetos[o],distancia);
+                                            aux->Zobjetos[o],distancia,
+                                            aux->orientacaoObjetos[o]);
               }
            }
            }
@@ -589,12 +590,13 @@ int Map::open(char* arquivo)
                   else
                   {
                      fgets(buffer, sizeof(buffer), arq);
-                     sscanf(buffer,"%s %d:%d,%d:%f,%f",nome,
+                     sscanf(buffer,"%s %d:%d,%d:%f,%f:%d",nome,
                                       &aux->objetosDesenha[numObjetosAtual],
                                       &aux->quadXobjetos[numObjetosAtual],
                                       &aux->quadZobjetos[numObjetosAtual],
                                       &aux->Xobjetos[numObjetosAtual],
-                                      &aux->Zobjetos[numObjetosAtual]);
+                                      &aux->Zobjetos[numObjetosAtual],
+                                      &aux->orientacaoObjetos[numObjetosAtual]);
                      aux->objetos[numObjetosAtual] = Objetos->EndMapObjeto(nome);
                      numObjetosAtual++;
                   }
@@ -846,11 +848,12 @@ int Map::save(char* arquivo)
             {
                x2 = (int)saux->Xobjetos[aux] / SQUARESIZE;
                z2 = (int)saux->Zobjetos[aux] / SQUARESIZE;
-               fprintf(arq,"uo %s %d:%d,%d:%f,%f\n",saux->objetos[aux]->nome,
+               fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d\n",saux->objetos[aux]->nome,
                                             saux->objetosDesenha[aux],
                                             x2+1,z2+1,
                                             saux->Xobjetos[aux],
-                                            saux->Zobjetos[aux]);
+                                            saux->Zobjetos[aux],
+                                            saux->orientacaoObjetos[aux]);
             }
           }
           saux = saux->right;

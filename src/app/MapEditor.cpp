@@ -459,6 +459,7 @@ int main(int argc, char **argv)
    Uint8 *teclas;
    int mouseX,mouseY;
    double varX, varZ;
+   int orObj = 0;
 
    interface* gui = new interface(NULL);
    janela* principal;
@@ -569,6 +570,7 @@ int main(int argc, char **argv)
                      //objAtual->x
                      saux->Xobjetos[ob] = xReal;
                      saux->Zobjetos[ob] = zReal;
+                     saux->orientacaoObjetos[ob] = orObj;
                      saux->objetosDesenha[ob] = 1;
                      printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
                      
@@ -806,6 +808,16 @@ int main(int argc, char **argv)
              printf("x:%.3f z:%.3f phi:%.3f theta:%.3f \n",centroX, centroZ,
                                                            phi,theta);
          }
+         if( (teclas[SDLK_k]) & (estado == OBJETO))
+         {
+             orObj += 1;
+             orObj %= 360;
+         }
+         if((teclas[SDLK_l]) && (estado == OBJETO) )
+         {
+            orObj -= 1;
+            orObj %= 360;
+         }
       }
       glClearColor(0,0,0,0);
       glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
@@ -824,7 +836,7 @@ int main(int argc, char **argv)
       gui->Desenhar(proj,modl,viewPort);
       glEnable(GL_LIGHTING);
       if( (estado == OBJETO) && (objAtual))
-         objAtual->Desenhar(xReal, zReal, 0);
+         objAtual->Desenhar(xReal, zReal, 0, orObj);
       //glPushMatrix();
       glFlush();
       SDL_GL_SwapBuffers();
