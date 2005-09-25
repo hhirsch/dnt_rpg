@@ -11,9 +11,11 @@
  - Initial menu;
  - Loading screen;
  - Functional and VERY ugly map editor;
- - Some new 3D models;
+ - Some new objects;
  - Map to map navigation;
  - New test maps;
+ - Objects orientation possible
+ - Better Floor & Walls Representation
  -
  - Some bugs fixed; 
 

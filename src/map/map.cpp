@@ -95,7 +95,7 @@ void InserirTextura(Map* mapa, char* arq, char* nome,
    SDL_Surface* img = IMG_Load(arq);
    if(!img)
    {
-      printf("Erro ao abrir textura: %s\n",arq);
+      printf("Error Opening Texture: %s\n",arq);
       return;
    }
 
@@ -658,7 +658,7 @@ int Map::open(char* arquivo)
       iniz = (int)floor(maux->z1 / SQUARESIZE);
       maxx = (int)floor(maux->x2 / SQUARESIZE);
       maxz = (int)floor(maux->z2 / SQUARESIZE);
-      printf("%d %d %d %d\n",inix,iniz,maxx,maxz);
+      //printf("%d %d %d %d\n",inix,iniz,maxx,maxz);
       for(ax = inix;ax<=maxx;ax++)
       {
           for(az = iniz;az<=maxz;az++)
@@ -674,7 +674,7 @@ int Map::open(char* arquivo)
               }
               if((aux!=NULL) && (indiceMuro < MAXMUROS))
               {
-                 printf("Added %d° wall on quad: %d %d\n",indiceMuro,ax+1,az+1);
+                 //printf("Added %d° wall on quad: %d %d\n",indiceMuro,ax+1,az+1);
                  aux->muros[indiceMuro] = maux;
               }
               else if(indiceMuro >= MAXMUROS)

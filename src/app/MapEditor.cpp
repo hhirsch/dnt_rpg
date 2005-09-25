@@ -37,7 +37,8 @@ barraTexto* bartInserir;
  ************************************************************************/
 int botaoObjeto(void *jan,void *ljan,SDL_Surface *screen)
 {
-   estado = OBJETO;
+   if(objAtual != mapa->Objetos->primeiro)
+      estado = OBJETO;
 
    return(1);
 }
@@ -476,18 +477,26 @@ int main(int argc, char **argv)
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "ZWall",1,&botaoMuroZ);
+   principal->objetos->InserirBotao(10,77,50,95,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "Door",1,NULL);
    principal->objetos->InserirBotao(55,17,125,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Objects",1,&botaoObjeto);
-   principal->objetos->InserirBotao(55,57,125,75,principal->Cores.corBot.R,
-                                                principal->Cores.corBot.G,
-                                                principal->Cores.corBot.B,
-                                                "Destroy",1,NULL);
    principal->objetos->InserirBotao(55,37,125,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Take Obj",1,NULL);
+   principal->objetos->InserirBotao(55,57,125,75,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "Destroy",1,NULL);
+   principal->objetos->InserirBotao(55,77,125,95,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "Portal",1,NULL);
    principal->objetos->InserirBotao(130,17,200,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,

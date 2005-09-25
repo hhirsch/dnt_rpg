@@ -28,5 +28,5 @@ DlgEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJS)
 	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) $(OBJS) -o $(BIN)DlgEditor
 
 clean:
-	\rm -rf *.o *.e $(BIN)DlgEditor
+	\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor
 

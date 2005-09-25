@@ -7,7 +7,7 @@ whatever  you  want  with  its  code  and  data.
 
 I   - Requeriments
 II  - Instalation
-III - Execution
+III - Execution (and Keys)
 IV  - Contacts
 
 ==============================================================
@@ -23,7 +23,7 @@ software and hardware. They are:
    SDLimage - Version 1.2.4, www.libsdl.org/projects/SDL_image/
 
    Hardware:
-   Video Card with 3D aceleration, OpenGl compatible in Linux.
+   Video Card with 3D aceleration, OpenGl compatible.
 
 ==============================================================
 |                      II - Instalation                      |
