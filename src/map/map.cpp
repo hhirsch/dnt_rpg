@@ -939,28 +939,31 @@ void Map::drawMinimap(SDL_Surface* img)
       while(atual != NULL)
       {
           cor_Definir(atual->R,atual->G,atual->B);
-          pixel_Desenhar(img,x1,y1,0);
+          /*pixel_Desenhar(img,x1,y1,0);
           pixel_Desenhar(img,x1+1,y1,0); 
           pixel_Desenhar(img,x1+1,y1+1,0);
-          pixel_Desenhar(img,x1,y1+1,0);
+          pixel_Desenhar(img,x1,y1+1,0);*/
+          retangulo_Colorir(img, x1, y1, x1+2, y1+2, 0);
           atual = atual->right;
-          x1+=2;
+          x1+=3;
       }
       primeiroLinha = primeiroLinha->down;
       x1 = 0;
-      y1+=2;
+      y1+=3;
    }
 
    cor_Definir(1, 1, 1);
-   retangulo_2Cores(img,0,0,x*2-1,z*2-1,0,0,0,0);
+   retangulo_2Cores(img,0,0,x*3-1,z*3-1,0,0,0,0);
    
    muro* maux = muros;
    while(maux!=NULL)
    {
-       x1 = (int) ( (float)maux->x1 / (float)SQUARESIZE /** razaoX*/ );
-       x2 = (int) ( (((float)maux->x2 / (float)SQUARESIZE))-1 /** razaoX*/)*2;
-       y1 = (int) ( (float)maux->z1 / (float)SQUARESIZE /** razaoY*/ );
-       y2 = (int) ( (((float)maux->z2 / (float)SQUARESIZE))-1 /** razaoY*/)*2;
+       x1 = (int) ( ((float)maux->x1 / (float)SQUARESIZE /** razaoX*/ ))*3;
+       x2 = (int) ( (((float)maux->x2 / (float)SQUARESIZE))-1 /** razaoX*/)*3;
+       y1 = (int) ( ((float)maux->z1 / (float)SQUARESIZE /** razaoY*/ ))*3;
+       y2 = (int) ( (((float)maux->z2 / (float)SQUARESIZE))-1 /** razaoY*/)*3;
+       //if(x1!=x2) x2*=2;
+       //else if(y1!=y2) y2*=2;
        //printf("%d,%d,%d,%d  %f,%f\n",x1,y1,x2,y2,razaoX, razaoY);
        cor_Definir(255,40,30);
        linha_Desenhar(img, x1,y1,x2,y2, 0);
