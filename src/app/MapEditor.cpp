@@ -714,7 +714,7 @@ int main(int argc, char **argv)
                     maux->z1 = maux->z2;
                     maux->z2 = aux;
                 }
-                printf("Definido Muro: %f,%f,%f,%f\n",maux->x1,
+                printf("Added Wall: %f,%f,%f,%f\n",maux->x1,
                          maux->z1, maux->x2, maux->z2);
                 
                 if( (estado == MUROXINIC)||(estado == MUROXINICQUAD))
@@ -737,7 +737,6 @@ int main(int argc, char **argv)
                  if(cmp < maux->z1)
                        maux->z1 = maux->z1-10;
                  maux->z2 = maux->z1+10;
-//TODO Minimize wall sobreposition
                  estado = MUROXINICQUAD;
              }
              else if(estado == MUROZINIC)
@@ -810,6 +809,7 @@ int main(int argc, char **argv)
          if(teclas[SDLK_s])
          {
             mapa->save("../data/mapas/teste.map");
+            printf("Saved Map as `../data/mapas/teste.map`\n");
             SDL_Delay(200);
          }
          if(teclas[SDLK_i])
