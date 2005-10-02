@@ -872,11 +872,47 @@ int testa(GLfloat x[4],GLfloat z[4],Square* quad)
       GLMmodel* modelo3d;
       while( (proxima->objetos[ob] != NULL)) 
       {
+
           modelo3d = (GLMmodel*)proxima->objetos[ob]->modelo3d;
-          u1 = modelo3d->x1+proxima->Xobjetos[ob];
-          u2 = modelo3d->x2+proxima->Xobjetos[ob];
-          v1 = modelo3d->z1+proxima->Zobjetos[ob];
-          v2 = modelo3d->z2+proxima->Zobjetos[ob];
+          float X[2], Z[2];
+          X[0] = modelo3d->x1;
+          X[1] = modelo3d->x2;
+          Z[0] = modelo3d->z1;
+          Z[1] = modelo3d->z2;
+          if(proxima->orientacaoObjetos[ob]!=0)
+          {
+              GLfloat xVelho, zVelho;
+              GLfloat cosseno = cos(deg2Rad(proxima->orientacaoObjetos[ob]));
+              GLfloat seno = sin(deg2Rad(proxima->orientacaoObjetos[ob]));
+              int aux;
+              for(aux = 0;aux<=1;aux++)
+              {
+                  xVelho = X[aux];
+                  zVelho = Z[aux];
+                  X[aux] = (zVelho*seno) + (xVelho*cosseno);
+                  Z[aux] = (zVelho*cosseno) - (xVelho*seno);
+              }
+              if(X[0]>X[1])
+              {
+                 xVelho = X[0];
+                 X[0] = X[1];
+                 X[1] = xVelho;
+              }
+              if(Z[0]>Z[1])
+              {
+                 zVelho = Z[0];
+                 Z[0] = Z[1];
+                 Z[1] = zVelho;
+              }
+          }
+
+          //printf("%f %f %f %f\n",x[0],z[0],x[1],z[1]);
+          u1 = X[0]+proxima->Xobjetos[ob];
+          u2 = X[1]+proxima->Xobjetos[ob];
+          v1 = Z[0]+proxima->Zobjetos[ob];
+          v2 = Z[1]+proxima->Zobjetos[ob];
+          //printf("%f %f %f %f\n",u1,v1,u2,v2);
+          //printf("%f %f %f %f %f %f %f %f\n",);
           result &= !estaDentro(x,z,u1,v1,u2,v2);
           if(!result) //se ja achou que nao pode, cai fora
              return(0);

@@ -958,6 +958,10 @@ void Map::drawMinimap(SDL_Surface* img)
        x2 = (int) ( (((float)maux->x2 / (float)SQUARESIZE))-1 /** razaoX*/)*3;
        y1 = (int) ( ((float)maux->z1 / (float)SQUARESIZE /** razaoY*/ ))*3;
        y2 = (int) ( (((float)maux->z2 / (float)SQUARESIZE))-1 /** razaoY*/)*3;
+       if( (x2-x1) < (y2-y1))
+          x2 = x1;
+       else 
+          y2 = y1;
        cor_Definir(255,40,30);
        linha_Desenhar(img, x1,y1,x2,y2, 0);
        maux = maux->proximo;

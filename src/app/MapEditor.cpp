@@ -1,5 +1,6 @@
 /* Editor de Mapas, em domínio público. Código mais zoneado impossível. */
 
+
 #include "../gui/farso.h"
 #include "../map/map.h"
 #include "../engine/culling.h"
@@ -584,6 +585,7 @@ int main(int argc, char **argv)
                      printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
                      
                      GLMmodel* modelo = (GLMmodel*)objAtual->modelo3d; 
+//TODO
                      int minqx, minqz, maxqx, maxqz;
                      minqx = (int)(modelo->x1 + xReal) / SQUARESIZE;
                      minqz = (int)(modelo->z1 + zReal) / SQUARESIZE;
