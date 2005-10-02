@@ -585,19 +585,51 @@ int main(int argc, char **argv)
                      printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
                      
                      GLMmodel* modelo = (GLMmodel*)objAtual->modelo3d; 
-//TODO
-                     int minqx, minqz, maxqx, maxqz;
-                     minqx = (int)(modelo->x1 + xReal) / SQUARESIZE;
-                     minqz = (int)(modelo->z1 + zReal) / SQUARESIZE;
-                     maxqx = (int)(modelo->x2 + xReal) / SQUARESIZE;
-                     maxqz = (int)(modelo->z2 + zReal) / SQUARESIZE; 
-                     int X, Z;
-                     Square* qaux;
-                     for(X = minqx; X<=maxqx; X++)
+
+                     float X[2], Z[2];
+                     X[0] = modelo->x1;
+                     X[1] = modelo->x2;
+                     Z[0] = modelo->z1;
+                     Z[1] = modelo->z2;
+                     if(orObj!=0)
                      {
-                         for(Z = minqz; Z <=maxqz; Z++) 
+                        GLfloat xVelho, zVelho;
+                        GLfloat cosseno = cos(deg2Rad(orObj));
+                        GLfloat seno = sin(deg2Rad(orObj));
+                        int aux;
+                        for(aux = 0;aux<=1;aux++)
+                        {
+                            xVelho = X[aux];
+                            zVelho = Z[aux];
+                            X[aux] = (zVelho*seno) + (xVelho*cosseno);
+                            Z[aux] = (zVelho*cosseno) - (xVelho*seno);
+                        }
+                        if(X[0]>X[1])
+                        {
+                           xVelho = X[0];
+                           X[0] = X[1];
+                           X[1] = xVelho;
+                        }
+                        if(Z[0]>Z[1])
+                        {
+                           zVelho = Z[0];
+                           Z[0] = Z[1];
+                           Z[1] = zVelho;
+                        }
+                     }
+
+                     int minqx, minqz, maxqx, maxqz;
+                     minqx = (int)(X[0] + xReal) / SQUARESIZE;
+                     minqz = (int)(Z[0] + zReal) / SQUARESIZE;
+                     maxqx = (int)(X[1] + xReal) / SQUARESIZE;
+                     maxqz = (int)(Z[1] + zReal) / SQUARESIZE; 
+                     int X1, Z1;
+                     Square* qaux;
+                     for(X1 = minqx; X1<=maxqx; X1++)
+                     {
+                         for(Z1 = minqz; Z1 <=maxqz; Z1++) 
                          {
-                             qaux = mapa->quadradoRelativo(X+1,Z+1);
+                             qaux = mapa->quadradoRelativo(X1+1,Z1+1);
                              if((qaux) && (qaux != saux))
                              {
                                  ob =0;
@@ -611,7 +643,7 @@ int main(int argc, char **argv)
                                     qaux->Zobjetos[ob] = zReal;
                                     qaux->objetosDesenha[ob] = 0;
                                     printf("%d° Object Inserted on %d %d\n",
-                                            ob,X+1,Z+1);
+                                            ob,X1+1,Z1+1);
                                  }
                              }
                          }
