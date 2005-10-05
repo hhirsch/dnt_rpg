@@ -20,6 +20,7 @@
 #define OBJETO         4
 #define DELMURO        5
 #define DELOBJETO      6
+#define PEGAOBJETO     11
 
 double deg2Rad(double x){return 3.1415927 * x/180.0;}
 
@@ -154,6 +155,17 @@ int botaoTexturaAnterior(void *jan,void *ljan,SDL_Surface *screen)
    texturaAtual = TexturaAnterior(mapa,texturaAtual);
    return(1);
 }
+
+/************************************************************************
+ *                     Trata Botao PEGA OBJETO                          *
+ ************************************************************************/
+int botaoPegaObjeto(void *jan,void *ljan,SDL_Surface *screen)
+{
+    estado = PEGAOBJETO; 
+    return(1);
+}
+
+
 
 /************************************************************************
  *                     Redmensionamento da Janela SDL                   *
@@ -489,7 +501,7 @@ int main(int argc, char **argv)
    principal->objetos->InserirBotao(55,37,125,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Take Obj",1,NULL);
+                                                "Take Obj",1,&botaoPegaObjeto);
    principal->objetos->InserirBotao(55,57,125,75,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
