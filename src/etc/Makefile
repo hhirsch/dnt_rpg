@@ -4,7 +4,10 @@ CPP = g++
 CC = gcc
 CFLAGS = -g -Wall
 
-all: glm.o fifo.o
+all: glm.o fifo.o texture.o
+
+texture.o: texture.h texture.cpp
+	$(CPP) $(CFLAGS) -c texture.cpp -o texture.o
 
 glm.o: glm.h glm.c
 	$(CPP) $(CFLAGS) -c glm.c -o glm.o

@@ -30,6 +30,17 @@ typedef struct _muro
    struct _muro* proximo;
 }muro;
 
+typedef struct _texture
+{
+   char* nome;
+   char* arqNome;
+   GLuint indice;                /* Indice da Textura internamente */
+   GLuint w,h;
+   GLuint R,G,B;                 /* Cores da Textura para o MINIMAPA */
+   struct _texture* proximo;
+}texture;
+
+
 class Square
 {
 
@@ -64,14 +75,7 @@ class Square
 		
 };
 
-typedef struct _texture {
-   char* nome;                   /* Nome do arquivo ed Textura Correspondente */
-   char* arqNome;
-   GLuint indice;                /* Indice da Textura internamente */
-   GLuint w,h;
-   GLuint R,G,B;                   /* Cores da Textura para o MINIMAPA */
-   struct _texture* proximo;  /* Proxima Textura na Lista */
-}texture;
+
 
 class Map
 {
