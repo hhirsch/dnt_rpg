@@ -43,12 +43,13 @@ engine::engine()
    theta=35;
    phi=0;
    d=150;
-   RotacaoX = RotacaoY = RotacaoZ = 0;
    centroX = centroZ = 0;
    centroY = 30;
    cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centroY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+   mouseX = 0;
+   mouseY = 0;
 
    /* Define a ultima vez em que desenhou (so por simplicidade) */
    ultimaLeitura = SDL_GetTicks();
@@ -207,7 +208,7 @@ int engine::TelaInicial()
    carregaTextura(fig,&textID);
    SDL_FreeSurface(fig);
 
-   img = IMG_Load("../data/texturas/fundo.jpg");
+   /*img = IMG_Load("../data/texturas/fundo.jpg");
    fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
@@ -215,12 +216,12 @@ int engine::TelaInicial()
    SDL_FreeSurface(img);
    GLuint tituloID;
    carregaTextura(fig,&tituloID);
-   SDL_FreeSurface(fig);
+   SDL_FreeSurface(fig);*/
 
 
    AtualizaFrustum(matrizVisivel,proj,modl);
    AtualizaTela2D(textID,proj,modl,viewPort,336,172,463,427,0.01);
-   AtualizaTela2D(tituloID,proj,modl,viewPort,144,44,655,555,0.012);
+//   AtualizaTela2D(tituloID,proj,modl,viewPort,144,44,655,555,0.012);
    glFlush();
    SDL_GL_SwapBuffers();
 
@@ -250,7 +251,7 @@ int engine::TelaInicial()
    }
 
    glDeleteTextures(1,&textID);
-   glDeleteTextures(1,&tituloID);
+  // glDeleteTextures(1,&tituloID);
 
    return(result);
 }
@@ -329,6 +330,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    double rotacao;// O quanto realmente roda, em decorrencia do tempo (FPS)
    double varCamera;
    double varTempo;
+   float wx,wy,wz;
 
    tempo = SDL_GetTicks();
    varTempo = (tempo-ultimaLeitura);
@@ -371,7 +373,19 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       }
       else
       {
-
+      if( (x != mouseX) || ( y != mouseY))
+      {
+         mouseX = x;
+         mouseY = y;
+         wx = mouseX; wy = 600-mouseY; 
+            
+         glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
+         gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal); 
+      }
+      if(Mbotao & SDL_BUTTON(1)) 
+      {
+            
+      }
       if ( keys[SDLK_ESCAPE] ) // Sai da Engine
          return(0);
 

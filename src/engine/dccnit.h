@@ -13,36 +13,27 @@
 #include "../ia/ai.h"
 #ifdef REDE
   #include "../net/client.h"
-//  #include "../net/common.h"
 #endif
 
 class engine
 {
    public:
  
-      /* Construtor da Engine
-       * map -> ponteiro para o mapa utilizado pela engine */
-      engine();
-      /* Destruidor da engine */
-      ~engine();
+      engine();                        /* Construtor da Engine */
+      ~engine();                       /* Destruidor da engine */
  
-      //Tmapa mapa;        // Mapa
-      Lpersonagem *NPCs; // NPCs presentes na tela carregada atual
-      Lpersonagem *PCs;  // PCs na engine
-      int x,y;           // Coordenada Central do mapa atualmente visto
-
-      int RotacaoX,RotacaoY,RotacaoZ; //variaveis de testeatual
+      Lpersonagem *NPCs;               /* NPCs no mapa carregada atual */
+      Lpersonagem *PCs;                /* PCs na engine */
 
       #ifdef REDE
-         char *server; /* Define o servidor a se conectar */
-         clientdata_t clientData;
+         char *server;                 /* Define o servidor a se conectar */
+         clientdata_t clientData;      /* Dados do Cliente */
       #endif
 
-      /* Variaveis de Controle da Camera/olho */
-      double theta, phi, d;  //Rotacao pra cima, pro lado e zoom
-      double centroX,centroY,centroZ; // posicao central da camera
-      double cameraX,cameraY,cameraZ;
-//      double deltaCameraX, deltaCameraZ; // espera para movimentar camera
+      double theta, phi, d;            /* Rotacao pra cima, pro lado e zoom */
+      double centroX,centroY,centroZ;  /* Posicao central da camera */
+      double cameraX,cameraY,cameraZ;  /* Posicao da Camera */
+      interface* gui;                  /* GUI utilizada na Engine */
 
       /* Inicia a estrutura da Engine para utilizacao
        * screen -> ponteiro para a tela3d atual */
@@ -64,8 +55,6 @@ class engine
        * Retorna 0 se é para sair, 1 caso contrario */
       int TelaInicial();
 
-      interface* gui;
- 
    private:
 
       /* Redefine a tela para o tamanho da tela atual
@@ -81,30 +70,35 @@ class engine
       inline void verificaLinha(Square* centro);
       int TrataIA();
 
+      /* Testa Colisão do personagem no ponto determinado. */
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
       /* Tratamento de Janelas Especiais */
       void abreMiniMapa();
-      void engine::abreAtalhos();
+      void abreAtalhos();
 
-      Map* mapa; /* Mapa Utilizado pela Engine */
+      Map* mapa;                   /* Mapa Utilizado pela Engine */
  
-      GLfloat matrizVisivel[6][4]; /* MAtriz do frustum atual */
-      GLdouble proj[16];
-      GLdouble modl[16];
-      GLint viewPort[4];
-      GLUquadricObj* atmosfera;
-      GLuint ceu;
+      GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
+      GLdouble proj[16];           /* Matriz de Projecao utilizada */
+      GLdouble modl[16];           /* Matriz de ModelView Utilizada  */
+      GLint viewPort[4];           /* Matriz de ViewPort Utilizada */
+      GLUquadricObj* atmosfera;    /* Poligono da Atmosfera, onde fica o ceu */
+      GLuint ceu;                  /* Textura do Ceu, quando utilizado */
+      int mouseX,mouseY;           /* Coordenada Atual do Mouse na Tela */
+      double xReal, zReal, yReal;  /* Coordenada Atual do Mouse no Mundo */
 
-      quadroTexto* FPS;
-      janela* janAtalhos;
-      janela* janMiniMapa;
+      //texturasLista* listaTexturas;
+
+      quadroTexto* FPS;            /* Quadro de Texto que mostra o n. de FPS */
+      janela* janAtalhos;          /* Janela de Atalhos */
+      janela* janMiniMapa;         /* Janela do Mini Mapa */
    
-      Uint32 ultimaLeitura; //marca a ultima leitura da posicao do teclado
-      Uint32 ultimaFPS;
-      double FPSatual;
+      Uint32 ultimaLeitura;        /* Ultima leitura da posicao do teclado */
+      Uint32 ultimaFPS;            /* Ultima FPS obtida */
+      double FPSatual;             /* FPS Atual */
 
-      AI* ia;
+      AI* ia;                      /* Modulo de IA. Temporiamente aqui. */
 
 };
 
