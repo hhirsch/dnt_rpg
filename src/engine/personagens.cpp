@@ -23,15 +23,15 @@ Lpersonagem::~Lpersonagem()
  *                    Insere Personagem na Lista                     *
  *********************************************************************/
 personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligencia,
-                                int esperteza,char* retrato,int x, int y,
+                                int esperteza,char* retrato,/*int x, int y,*/
                                 char *nome, char* arqmodelo, char* dirTexturas)
 {
    personagem* novo;
    novo = new(personagem);
    novo->retrato = new(Tlista);
    novo->objetos = new(Tlista);
-   novo->x = x;
-   novo->y = y;
+   //novo->x = x;
+   //novo->y = y;
    novo->tipo = PERSONAGEM;
    novo->forca        = forca;
    novo->agilidade    = agilidade;
@@ -42,6 +42,7 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,int inteligen
    novo->posicaoFrente = 0.0;
    novo->posicaoLadoX = 0.0;
    novo->posicaoLadoZ = 0.0;
+   novo->posicaoLadoY = 0.0;
    novo->nome = nome;
    /* Define os Retratos */
    figura* fig;

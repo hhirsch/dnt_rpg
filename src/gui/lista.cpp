@@ -155,7 +155,8 @@ quadroTexto* Tlista::InserirQuadroTexto(int xa,int ya,int xb,int yb,
    novo->y1 = ya;
    novo->y2 = yb;
    novo->moldura = moldura;
-   novo->texto = text;
+   novo->texto = (char*) malloc(256*sizeof(char));
+   sprintf(novo->texto,"%s",text);
    novo->tipo = QUADROTEXTO;
    novo->Cores.Iniciar();
    InserirObj(novo);

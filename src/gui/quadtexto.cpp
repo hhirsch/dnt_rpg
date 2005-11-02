@@ -4,6 +4,11 @@
 
 #include "quadtexto.h"
 
+quadroTexto::~quadroTexto()
+{
+   free(texto);
+}
+
 void quadroTexto::Desenhar(int Xjan,int Yjan, int Salvar, SDL_Surface *screen)
 {
    cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);

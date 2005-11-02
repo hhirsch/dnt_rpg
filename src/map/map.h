@@ -21,6 +21,7 @@
 #define MAXOBJETOS 10
 #define MAXMUROS 5
 #define MUROALTURA 50
+#define MEIOFIOALTURA 2
 #define ALTURAMAXIMA 100
 
 typedef struct _muro
@@ -105,6 +106,7 @@ class Map
                 Square* squareInic; /* quadrado inicial */
                 int x,z;       /* Dimensões do mapa */
                 muro* muros;  /* Muros Presentes no Mapa */
+                muro* meiosFio; /* Meios-Fio presentes no mapa */
 
 	private:
 		char* name;    /* Nome do Arquivo de Mapa Carregado */

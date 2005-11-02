@@ -168,8 +168,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    NPCs = new (Lpersonagem);
    personagem* per;
    per = NPCs->InserirPersonagem(7,6,10,6,
-                                 "../data/pics/logan/portrait.jpg",0,
-                                 0,"NPC",
+                                 "../data/pics/logan/portrait.jpg","NPC",
                         "../data/models/personagens/logan_completo_final.obj", 
                                  "../data/pics/logan/");
    per->posicaoLadoX = 30;
@@ -180,7 +179,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        if(PCs)
           delete(PCs);
        PCs  = new (Lpersonagem);
-       PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",0,0,
+       PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
                        "../data/models/personagens/logan_completo_final.obj",
                               "../data/pics/logan/");
@@ -315,6 +314,23 @@ void engine::Iniciar(SDL_Surface *screen)
    }
 }
 
+int pontoInterno(double x1,double z1, double x2, double z2, double X, double Z)
+{
+   double aux;
+   if(x1 > x2)
+   {
+      aux = x1; 
+      x1 = x2;
+      x2 = x1;
+   }
+   if(z1 > z2)
+   {
+      aux = z1; 
+      z1 = z2;
+      z2 = z1;
+   }
+   return( ((X>=x1) && (X<=x2)) && ((Z>=z1) && (Z<=z2)) );
+}
 
 /*********************************************************************
  *                      Tratamento do Teclado                        *
@@ -327,7 +343,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    double varX, varZ; // para evitar de ter de calcular 2 vezes
 
    double passo;  // O quanto realmente anda, em decorrencia do tempo decorrido
-   double rotacao;// O quanto realmente roda, em decorrencia do tempo (FPS)
+   double rotacao; // O quanto realmente roda, em decorrencia do tempo (FPS)
    double varCamera;
    double varTempo;
    float wx,wy,wz;
@@ -381,6 +397,43 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             
          glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
          gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal); 
+       
+         int qx, qz;
+         qx = (int)xReal / SQUARESIZE;
+         qz = (int)zReal / SQUARESIZE;
+         Square* quaux = mapa->quadradoRelativo(qx,qz);
+         printf("Bingo %d %d %f %f %d %d %p\n",qx,qz,xReal,zReal,x,y,quaux);
+       if(quaux != NULL)
+       {
+         int pronto;
+         int obj = 0;
+         for(pronto = 0; ( (obj<MAXOBJETOS) && (!pronto) );obj++)
+         {
+            printf("pronto: %d obj: %d\n",pronto,obj);
+            if(quaux->objetos[obj])
+            {
+               printf("obj: %d\n",obj);
+               GLMmodel* modelo3d = (GLMmodel*) quaux->objetos[obj]->modelo3d;
+               if(pontoInterno(quaux->Xobjetos[obj]+modelo3d->x1,
+                               quaux->Xobjetos[obj]+modelo3d->z1,
+                               quaux->Xobjetos[obj]+modelo3d->x2,
+                               quaux->Xobjetos[obj]+modelo3d->z2,
+                               xReal,zReal))
+               {
+                   sprintf(ObjTxt->texto,"%s",quaux->objetos[obj]->nome); 
+                   janAtalhos->Desenhar();
+                   pronto = 1;
+               }
+            }
+         }
+         printf("Saiu\n");
+         if(obj == MAXOBJETOS)
+         {
+            //sprintf(ObjTxt->texto,"Nothing"); 
+            janAtalhos->Desenhar();
+         }      
+        }
+        printf("Yeba\n");
       }
       if(Mbotao & SDL_BUTTON(1)) 
       {
@@ -724,7 +777,8 @@ void engine::Desenhar()
       {
          glPushMatrix();
            // O personagem nao movimenta no eixo Y, mas sim no Z (^) e X (>) 
-           glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
+           glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
+                        per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            //glCallList(per->personagemDesenhar);
            glmDrawLists(per->modelo3d);
@@ -812,14 +866,55 @@ void engine::Desenhar()
 int estaDentro(GLfloat x[4], GLfloat z[4],
                GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2)
 {
-   return( ( ( ((x[0] >= u1) && (x[0] <= u2)) || 
-               ((x[1] >= u1) && (x[1] <= u2)) ||
-               ((x[2] >= u1) && (x[2] <= u2)) || 
-               ((x[3] >= u1) && (x[3] <= u2)) ) && 
-             ( ((z[0] >= v1) && (z[0] <= v2)) || 
-               ((z[1] >= v1) && (z[1] <= v2)) ||
-               ((z[2] >= v1) && (z[2] <= v2)) || 
-               ((z[3] >= v1) && (z[3] <= v2)) ) ) || 
+   if( ( ((x[0] >= u1) && (x[0] <= u2)) || 
+         ((x[1] >= u1) && (x[1] <= u2)) ||
+         ((x[2] >= u1) && (x[2] <= u2)) || 
+         ((x[3] >= u1) && (x[3] <= u2)) ) && 
+       ( ((z[0] >= v1) && (z[0] <= v2)) || 
+         ((z[1] >= v1) && (z[1] <= v2)) ||
+         ((z[2] >= v1) && (z[2] <= v2)) || 
+         ((z[3] >= v1) && (z[3] <= v2)) ) )
+   {
+      return(1);
+   }
+
+   if( ( ((x[0] <= u1) && (z[0] >= v1) && (z[0] <= v2)) &&
+       ( ((x[1] >= u2) && (z[1] >= v1) && (z[1] <= v2)) || 
+         ((x[2] >= u2) && (z[2] >= v1) && (z[2] <= v2)) || 
+         ((x[3] >= u2) && (z[3] >= v1) && (z[3] <= v2))) ) ||
+       ( ((x[1] <= u1) && (z[1] >= v1) && (z[1] <= v2)) &&
+       ( ((x[0] >= u2) && (z[0] >= v1) && (z[0] <= v2)) || 
+         ((x[2] >= u2) && (z[2] >= v1) && (z[2] <= v2)) || 
+         ((x[3] >= u2) && (z[3] >= v1) && (z[3] <= v2)) )) || 
+       ( ((x[2] <= u1) && (z[2] >= v1) && (z[2] <= v2)) &&
+       ( ((x[0] >= u2) && (z[0] >= v1) && (z[0] <= v2)) || 
+         ((x[1] >= u2) && (z[1] >= v1) && (z[1] <= v2)) || 
+         ((x[3] >= u2) && (z[3] >= v1) && (z[3] <= v2)) )) ||
+       ( ((x[3] <= u1) && (z[3] >= v1) && (z[3] <= v2)) &&
+       ( ((x[0] >= u2) && (z[0] >= v1) && (z[0] <= v2)) || 
+         ((x[1] >= u2) && (z[1] >= v1) && (z[1] <= v2)) || 
+         ((x[2] >= u2) && (z[2] >= v1) && (z[2] <= v2)) )) )
+       return(1);
+
+   if( ( ((z[0] <= v1) && (x[0] >= u1) && (x[0] <= u2)) &&
+       ( ((z[1] >= v2) && (x[1] >= u1) && (x[1] <= u2)) || 
+         ((z[2] >= v2) && (x[2] >= u1) && (x[2] <= u2)) || 
+         ((z[3] >= v2) && (x[3] >= u1) && (x[3] <= u2)) )) ||
+       ( ((z[1] <= v1) && (x[1] >= u1) && (x[1] <= u2)) &&
+       ( ((z[0] >= v2) && (x[0] >= u1) && (x[0] <= u2)) || 
+         ((z[2] >= v2) && (x[2] >= u1) && (x[2] <= u2)) || 
+         ((z[3] >= v2) && (x[3] >= u1) && (x[3] <= u2)) )) || 
+       ( ((z[2] <= v1) && (x[2] >= u1) && (x[2] <= u2)) &&
+       ( ((z[0] >= v2) && (x[0] >= u1) && (x[0] <= u2)) || 
+         ((z[1] >= v2) && (x[1] >= u1) && (x[1] <= u2)) || 
+         ((z[3] >= v2) && (x[3] >= u1) && (x[3] <= u2)) )) ||
+       ( ((z[3] <= v1) && (x[3] >= u1) && (x[3] <= u2)) &&
+       ( ((z[0] >= v2) && (x[0] >= u1) && (x[0] <= u2)) || 
+         ((z[1] >= v2) && (x[1] >= u1) && (x[1] <= u2)) || 
+         ((z[2] >= v2) && (x[2] >= u1) && (x[2] <= u2)) )) )
+       return(1);
+
+   return(  
            ( ( ((u1<=x[0]) && ((u1 >= x[1]) || (u1 >= x[2]) || (u1 >= x[3]))) ||
                ((u1<=x[1]) && ((u1 >= x[0]) || (u1 >= x[2]) || (u1 >= x[3]))) ||
                ((u1<=x[2]) && ((u1 >= x[1]) || (u1 >= x[0]) || (u1 >= x[3]))) ||
@@ -835,8 +930,8 @@ int estaDentro(GLfloat x[4], GLfloat z[4],
                ((v2<=z[0]) && ((v2 >= z[1]) || (v2 >= z[2]) || (v2 >= z[3]))) ||
                ((v2<=z[1]) && ((v2 >= z[0]) || (v2 >= z[2]) || (v2 >= z[3]))) ||
                ((v2<=z[2]) && ((v2 >= z[1]) || (v2 >= z[0]) || (v2 >= z[3]))) ||
-               ((v2<=z[3]) && ((v2 >= z[1]) || (v2 >= z[2]) || (v2 >= z[0]))) ))
-          );
+               ((v2<=z[3]) && ((v2 >= z[1]) || (v2 >= z[2]) || (v2 >= z[0]))) )) );
+   
 }
 
 /*********************************************************************
@@ -935,6 +1030,22 @@ int testa(GLfloat x[4],GLfloat z[4],Square* quad)
    }
 
    return(result);
+}
+
+/*********************************************************************
+ *                   Verifica Colisao com MeioFio                    *
+ *********************************************************************/
+int ColisaoComMeioFio(GLfloat x[4],GLfloat z[4], muro* meiosFio)
+{
+    muro* maux = meiosFio;
+    while(maux)
+    {
+       if( (estaDentro(x, z, maux->x1, maux->z1, maux->x2, maux->z2)) )
+          return(1);
+       //printf("Fora: %.3f %.3f %.3f %.3f,\n %.3f %.3f %.3f %.3f,\n %.3f %.3f %.3f %.3f\n ", maux->x1, maux->z1, maux->x2, maux->z2, x[0],x[1],x[2],x[3],z[0],z[1],z[2],z[3]);
+       maux = maux->proximo;
+    }
+    return(0);
 }
 
 /*********************************************************************
@@ -1127,6 +1238,15 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
    }
 
+   if( ColisaoComMeioFio( x, z, mapa->meiosFio) )
+   {
+      PCs->personagemAtivo->posicaoLadoY = MEIOFIOALTURA+0.1;
+   }
+   else
+   {
+      PCs->personagemAtivo->posicaoLadoY = 0.0;
+   }
+
    int posX =(int)floor((PCs->personagemAtivo->posicaoLadoX+varX) 
                                                   / (SQUARESIZE))+1;
    int posZ =(int)floor((PCs->personagemAtivo->posicaoLadoZ+varZ) 
@@ -1134,6 +1254,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
    PCs->personagemAtivo->ocupaQuad = quadradoRelativo(posX,posZ,
                                        PCs->personagemAtivo->ocupaQuad);
+   
    return(result);
 }
 
@@ -1239,8 +1360,11 @@ void engine::abreAtalhos()
 {
    janAtalhos = gui->ljan->InserirJanela(0,472,511,599,"ShortCuts",1,1,NULL,NULL);
    FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
-   FPS->texto = (char*)malloc(50*sizeof(char));
-   sprintf(FPS->texto,"FPS:");
+   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,100,71,0,"Nothing");
+   //ObjTxt->texto = (char*)malloc(80*sizeof(char));
+   //sprintf("ObjTxt->texto = ");
+   //FPS->texto = (char*)malloc(50*sizeof(char));
+   //sprintf(FPS->texto,"FPS:");
    janAtalhos->ptrExterno = &janAtalhos;
    janAtalhos->Abrir(gui->ljan);
 }
@@ -1286,6 +1410,7 @@ int engine::Rodar(SDL_Surface *surface)
    #endif
   
    /* Roda realmente a engine */
+   Desenhar();
    while(TrataES(surface,&forcaAtualizacao))
    {
       /* Trata a Rede. Por padrao, nao estamos usando a rede, uma vez 

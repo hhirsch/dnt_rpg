@@ -31,12 +31,13 @@ class personagem: public Tobjeto
       Tlista *retrato;          // portraits
       Tlista *objetos;          // objetos do personagem
       Tobjeto *armaAtual;       // armaAtual do personagem
-      int x,y;                  // coordenada do mapa que o bichinho esta
+      //int x,y;                  // coordenada do mapa que o bichinho esta
       char *nome;               // nome do personagem
       GLMmodel* modelo3d;       // modelo estatico do personagem
       float orientacao;         // orientacao do personagem (onde esta sua cara)
       float posicaoFrente;      // posicao do personagem pra frente
       float posicaoLadoX;       // posicao do personagem pro lado
+      float posicaoLadoY;       // posicao vertical do personagem
       float posicaoLadoZ;       // posicao do personagem pro lado
    // Lhabilidade* habilidades; // habilidades personagem (ex:kamasutramaster)
       GLuint portrait;
@@ -82,7 +83,7 @@ class Lpersonagem: public Tlista
        * nome                    -> Nome do Personagem
        * arqmodelo               -> nome do arquivo do modelo3d do personagem*/
       personagem* InserirPersonagem(int forca,int agilidade,int inteligencia,
-                          int esperteza,char* retrato,int x, int y,
+                          int esperteza,char* retrato,/*int x, int y,*/
                           char* nome, char* arqmodelo, char* dirTexturas);
 
       /* Retira um Personagem da Lista

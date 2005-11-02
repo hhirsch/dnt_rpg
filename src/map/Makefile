@@ -7,7 +7,7 @@ BINDIR = ../../bin/
 ENDGUI = ../gui/
 DIRENGINE = ../engine/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
-DEPENDENCIAS = map.o $(OBJSGUI) mapobjeto.o ../etc/glm.o $(DIRENGINE)culling.o
+DEPENDENCIAS = map.o $(OBJSGUI) mapobjeto.o ../etc/glm.o ../etc/texture.o $(DIRENGINE)culling.o
 
 all: objetos
 

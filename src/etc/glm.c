@@ -1044,6 +1044,23 @@ glmDrawLists(GLMmodel* model)
     glPopMatrix();
     group = group->next;
   }
+
+  glPushMatrix();
+   //glScalef(group->escala[0],group->escala[1],group->escala[2]);
+   //glTranslatef(group->translacao[0],group->translacao[1],group->translacao[2]);
+   //glRotatef(group->rotacao[0],1,0,0);
+   //glRotatef(group->rotacao[1],0,1,0);
+   //glRotatef(group->rotacao[2],0,0,1);
+   glColor3f(1.0,0.0,0.0);
+   glBegin(GL_POLYGON);
+     glVertex3f(model->x1,1,model->z1);
+     glVertex3f(model->x1,1,model->z2);
+     glVertex3f(model->x2,1,model->z2); 
+     glVertex3f(model->x2,1,model->z1);
+   glEnd();
+
+  glPopMatrix();
+
   glPopMatrix();
   return;
 }

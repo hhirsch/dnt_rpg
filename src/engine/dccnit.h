@@ -91,6 +91,7 @@ class engine
       //texturasLista* listaTexturas;
 
       quadroTexto* FPS;            /* Quadro de Texto que mostra o n. de FPS */
+      quadroTexto* ObjTxt;         /* Mostra o Objeto Atual */
       janela* janAtalhos;          /* Janela de Atalhos */
       janela* janMiniMapa;         /* Janela do Mini Mapa */
    

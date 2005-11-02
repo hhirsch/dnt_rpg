@@ -242,10 +242,12 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
         }
         glEnd();
 
-        /* Faz o desenho dos muros */
+        /* Faz o desenho dos muros e meios Fio*/
         muro* maux = muros;
+        int fezMeioFio = 0;
+        GLfloat altura = MUROALTURA;
         glBegin(GL_QUADS);
-        while(maux!=NULL)
+        while( (maux != NULL) )
         {
            
            //if(x1 == x2) x2 += SQUARESIZE; 
@@ -263,14 +265,14 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
               glBindTexture(GL_TEXTURE_2D, textura);
               glBegin(GL_QUADS);
            }
-           if(quadradoVisivel(maux->x1,0,maux->z1,maux->x2,MUROALTURA,maux->z2,matriz))
+           if(quadradoVisivel(maux->x1,0,maux->z1,maux->x2,altura,maux->z2,matriz))
            {
            /* Face de frente */
               glNormal3i(0,0,1);
               glTexCoord2f(0,0);
-              glVertex3f(maux->x1,MUROALTURA,maux->z1);
+              glVertex3f(maux->x1,altura,maux->z1);
               glTexCoord2f(1,0);
-              glVertex3f(maux->x2,MUROALTURA,maux->z1);
+              glVertex3f(maux->x2,altura,maux->z1);
               glTexCoord2f(1,1);
               glVertex3f(maux->x2,0,maux->z1);
               glTexCoord2f(0,1);
@@ -278,9 +280,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
            /* Face de tras */
               glNormal3i(0,0,-1);
               glTexCoord2f(0,0);
-              glVertex3f(maux->x1,MUROALTURA,maux->z2);
+              glVertex3f(maux->x1,altura,maux->z2);
               glTexCoord2f(1,0);
-              glVertex3f(maux->x2,MUROALTURA,maux->z2);
+              glVertex3f(maux->x2,altura,maux->z2);
               glTexCoord2f(1,1);
               glVertex3f(maux->x2,0,maux->z2);
               glTexCoord2f(0,1);
@@ -288,9 +290,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
            /* Face de esquerda */
               glNormal3i(-1,0,0);
               glTexCoord2f(0,0);
-              glVertex3f(maux->x1,MUROALTURA,maux->z1);
+              glVertex3f(maux->x1,altura,maux->z1);
               glTexCoord2f(1,0);
-              glVertex3f(maux->x1,MUROALTURA,maux->z2);
+              glVertex3f(maux->x1,altura,maux->z2);
               glTexCoord2f(1,1);
               glVertex3f(maux->x1,0,maux->z2);
               glTexCoord2f(0,1);
@@ -298,9 +300,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
            /* Face de direita */
               glNormal3i(1,0,0);
               glTexCoord2f(0,0);
-              glVertex3f(maux->x2,MUROALTURA,maux->z1);
+              glVertex3f(maux->x2,altura,maux->z1);
               glTexCoord2f(1,0);
-              glVertex3f(maux->x2,MUROALTURA,maux->z2);
+              glVertex3f(maux->x2,altura,maux->z2);
               glTexCoord2f(1,1);
               glVertex3f(maux->x2,0,maux->z2);
               glTexCoord2f(0,1);
@@ -308,15 +310,21 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
            /* Face de cima */
               glNormal3i(0,1,0);
               glTexCoord2f(0,0);
-              glVertex3f(maux->x1,MUROALTURA,maux->z1);
+              glVertex3f(maux->x1,altura,maux->z1);
               glTexCoord2f(1,0);
-              glVertex3f(maux->x2,MUROALTURA,maux->z1);
+              glVertex3f(maux->x2,altura,maux->z1);
               glTexCoord2f(1,1);
-              glVertex3f(maux->x2,MUROALTURA,maux->z2);
+              glVertex3f(maux->x2,altura,maux->z2);
               glTexCoord2f(0,1);
-              glVertex3f(maux->x1,MUROALTURA,maux->z2);
+              glVertex3f(maux->x1,altura,maux->z2);
            }
            maux = maux->proximo;
+           if( (!maux) && (!fezMeioFio) )
+           {
+               maux = meiosFio;
+               fezMeioFio = 1;
+               altura = MEIOFIOALTURA;
+           }
         }
         glEnd();
         glDisable(GL_TEXTURE_2D);
@@ -370,7 +378,8 @@ Map::Map()
 	first = NULL;
 	name = NULL;
         squareInic = NULL;
-        muros = NULL; 
+        muros = NULL;
+        meiosFio = NULL; 
         /* Inicia Estruturas */
         Objetos = new(LmapObjeto);
         x = z = xInic = zInic = 0;
@@ -443,7 +452,7 @@ int Map::open(char* arquivo)
    {
       switch(buffer[0])
       {
-         case 'm': /* Define Muros (paredes) */
+         case 'm': /* Define Muros (paredes) e Meios-Fio */
          {
             switch(buffer[1])
             {
@@ -475,7 +484,7 @@ int Map::open(char* arquivo)
                   muros = maux;
                   break;
                }
-               case 't': /* Define a textura do muro */
+               case 't': /* Define a textura do muro ou meio-Fio */
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
@@ -485,6 +494,31 @@ int Map::open(char* arquivo)
                      IDmuroTexturaAtual = IDTextura(this,nome,&R,&G,&B);
                   }
                   maux->textura = IDmuroTexturaAtual;
+                  break;
+               }
+               case 'e': /* Define MeioFio */
+               {
+                  maux = new(muro);
+                  fgets(buffer, sizeof(buffer),arq);
+                  sscanf(buffer,"%f,%f,%f,%f",&maux->x1,&maux->z1,
+                                              &maux->x2,&maux->z2);
+
+                  double tmp;
+                  if(maux->x2 < maux->x1)
+                  {
+                     tmp = maux->x2;
+                     maux->x2 = maux->x1;
+                     maux->x1 = tmp;
+                  }
+                  if(maux->z2 < maux->z1)
+                  {
+                     tmp = maux->z2;
+                     maux->z2 = maux->z1;
+                     maux->z1 = tmp;
+                  }  
+                  maux->proximo = meiosFio;
+                  maux->textura = -1;
+                  meiosFio = maux;
                   break;
                }
             }
@@ -830,6 +864,16 @@ int Map::save(char* arquivo)
       fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura));
       maux = (muro*)maux->proximo;
    }
+
+   /* Escreve Meios Fio */
+   maux = (muro*)meiosFio;
+   while(maux)
+   {
+      fprintf(arq,"meioFio %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
+      fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura));
+      maux = (muro*)maux->proximo;
+   }
+
  
    /* Escreve Quadrados, linha a linha */
    Square* saux = first;

@@ -13,6 +13,7 @@
 class quadroTexto: public Tobjeto
 {
    public:
+      ~quadroTexto();
       int x1,y1,x2,y2;     /* Coordenadas da Janela */
       int moldura;         /* Possui Moldura, se != 0 */
       char* texto;         /* Texto Escrito */
