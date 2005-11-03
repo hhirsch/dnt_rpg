@@ -14,8 +14,11 @@
  - Some new objects;
  - Map to map navigation;
  - New test maps;
- - Objects orientation possible
- - Better Floor & Walls Representation
+ - Objects orientation possible;
+ - Better Floor & Walls Representation;
+ - Variable floor height;
+ - Object pass throught added;
+ - Interactive Doors Added;
  -
  - Some bugs fixed; 
 

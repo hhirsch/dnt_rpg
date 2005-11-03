@@ -55,6 +55,7 @@ class Square
 
 		/* Vars: */
                 int x1,z1,x2,z2;   // dimensoes do quadrado
+                GLfloat h1,h2,h3,h4; //altura de cada vertice do quadrado
                 int posX, posZ;    // posicao no mapa
 		Square * up, * down, * right, * left; //vizinhos
                 int flags;   // bandeiras

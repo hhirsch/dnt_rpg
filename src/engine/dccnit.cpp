@@ -1276,8 +1276,6 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
    d4 = (SQUARESIZE - sqrt( dx2 + dz1 )) / SQUARESIZE;
 
-   printf("%f %f %f %f \n",d1,d2,d3,d4);
-
    PCs->personagemAtivo->posicaoLadoY+=(d1*PCs->personagemAtivo->ocupaQuad->h1)
                                       +(d3*PCs->personagemAtivo->ocupaQuad->h3)
                                       +(d2*PCs->personagemAtivo->ocupaQuad->h2)

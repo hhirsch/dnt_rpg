@@ -586,8 +586,6 @@ int Map::open(char* arquivo)
             fgets(buffer, sizeof(buffer), arq); //até final da linha
             sscanf(buffer, "%d,%f,%f,%f,%f",&pisavel,&aux->h1,&aux->h2,&aux->h3,
                                             &aux->h4);
-            printf("%d %f %f %f %f\n",pisavel,aux->h1,aux->h2,aux->h3,
-                                            aux->h4);
             aux->x1 = (posX-1)*SQUARESIZE;
             aux->x2 = aux->x1+SQUARESIZE;
             aux->z1 = (posZ-1)*SQUARESIZE;
