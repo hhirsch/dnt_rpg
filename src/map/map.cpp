@@ -23,6 +23,7 @@ Square::Square()
 	left = NULL;
 	right = NULL;
 	flags = 0;
+        h1 = h2 = h3 = h4 = 0;
         int aux;
         for(aux=0;aux<MAXOBJETOS;aux++)
         {
@@ -215,16 +216,16 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
                 }
                 aux->visivel = 1;
                 glTexCoord2f(0,0); 
-                glVertex3f( aux->x1 , 0.0, aux->z1 );
+                glVertex3f( aux->x1 , aux->h1 , aux->z1 );
                 glTexCoord2f(0,1);
-                glVertex3f( aux->x1 , 0.0, aux->z2);
+                glVertex3f( aux->x1 , aux->h2 , aux->z2);
                 //glEnable(GL_TEXTURE_2D);
                 //glBindTexture(GL_TEXTURE_2D, Texturas->indice);
                 //textura = Texturas->indice;
                 glTexCoord2f(1,1);
-                glVertex3f( aux->x2, 0.0, aux->z2 );
+                glVertex3f( aux->x2, aux->h3 , aux->z2 );
                 glTexCoord2f(1,0);
-                glVertex3f( aux->x2, 0.0, aux->z1 );
+                glVertex3f( aux->x2, aux->h4, aux->z1 );
              }
              else
                aux->visivel = 0;
@@ -583,7 +584,10 @@ int Map::open(char* arquivo)
                posX++;
             }
             fgets(buffer, sizeof(buffer), arq); //até final da linha
-            sscanf(buffer, "%d",&pisavel);
+            sscanf(buffer, "%d,%f,%f,%f,%f",&pisavel,&aux->h1,&aux->h2,&aux->h3,
+                                            &aux->h4);
+            printf("%d %f %f %f %f\n",pisavel,aux->h1,aux->h2,aux->h3,
+                                            aux->h4);
             aux->x1 = (posX-1)*SQUARESIZE;
             aux->x2 = aux->x1+SQUARESIZE;
             aux->z1 = (posZ-1)*SQUARESIZE;
@@ -883,7 +887,8 @@ int Map::save(char* arquivo)
       ultLinha = saux;
       for(x1=0;x1<x;x1++)
       {
-          fprintf(arq,"p %d\n",saux->flags & PISAVEL);
+          fprintf(arq,"p %d,%f,%f,%f,%f\n",saux->flags & PISAVEL,saux->h1,
+                                           saux->h2,saux->h3,saux->h4);
           fprintf(arq,"ut %s\n",NomeTextura(this, saux->textura));
           int aux;
           for(aux=0;aux<MAXOBJETOS;aux++)

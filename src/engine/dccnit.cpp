@@ -1247,13 +1247,45 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       PCs->personagemAtivo->posicaoLadoY = 0.0;
    }
 
-   int posX =(int)floor((PCs->personagemAtivo->posicaoLadoX+varX) 
-                                                  / (SQUARESIZE))+1;
-   int posZ =(int)floor((PCs->personagemAtivo->posicaoLadoZ+varZ) 
-                                                  / (SQUARESIZE))+1;
+   GLfloat nx = (PCs->personagemAtivo->posicaoLadoX+varX);
+   GLfloat nz = (PCs->personagemAtivo->posicaoLadoZ+varZ);
+
+   int posX =(int)floor( nx / (SQUARESIZE))+1;
+
+   int posZ =(int)floor( nz / (SQUARESIZE))+1;
 
    PCs->personagemAtivo->ocupaQuad = quadradoRelativo(posX,posZ,
                                        PCs->personagemAtivo->ocupaQuad);
+
+   GLfloat d1,d2,d3,d4; //distancia ao vertice do quadrado
+
+   GLfloat dx1 = nx - PCs->personagemAtivo->ocupaQuad->x1;
+   dx1 *= dx1;
+   GLfloat dz1 = nz - PCs->personagemAtivo->ocupaQuad->z1;
+   dz1 *= dz1;
+   GLfloat dx2 = nx - PCs->personagemAtivo->ocupaQuad->x2;
+   dx2 *= dx2;
+   GLfloat dz2 = nz - PCs->personagemAtivo->ocupaQuad->z2;
+   dz2 *= dz2;
+
+   d1 = (SQUARESIZE - sqrt( dx1 + dz1 )) / SQUARESIZE;
+
+   d2 = (SQUARESIZE - sqrt( dx1 + dz2 )) / SQUARESIZE;
+
+   d3 = (SQUARESIZE - sqrt( dx2 + dz2 )) / SQUARESIZE;
+
+   d4 = (SQUARESIZE - sqrt( dx2 + dz1 )) / SQUARESIZE;
+
+   printf("%f %f %f %f \n",d1,d2,d3,d4);
+
+   PCs->personagemAtivo->posicaoLadoY+=(d1*PCs->personagemAtivo->ocupaQuad->h1)
+                                      +(d3*PCs->personagemAtivo->ocupaQuad->h3)
+                                      +(d2*PCs->personagemAtivo->ocupaQuad->h2)
+                                      +(d4*PCs->personagemAtivo->ocupaQuad->h4);
+
+   if(PCs->personagemAtivo->posicaoLadoY < 0 )
+     PCs->personagemAtivo->posicaoLadoY = 0;
+
    
    return(result);
 }
