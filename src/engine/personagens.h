@@ -11,15 +11,25 @@
 #include "../gui/objeto.h"
 #include "../gui/lista.h"
 //#include "habilidades.h"
-#include "../etc/glm.h"
+//#include "../etc/glm.h"
+#include <cal3d/cal3d.h> //for now, utilising cal3d
+#include <string>
+using namespace std;
 #include "../map/map.h"
 
 #define POSRETX 8   // posicao x do retrato na janela
 #define POSRETY 20  // posicao y do retrato na janela
 
+#define STATE_IDLE    0 
+#define STATE_WALK  1
+
+
 class personagem: public Tobjeto
 {
    public:
+
+      int m_state;
+
       int agilidade;            // agility
       int bovinice;             // taylor's bovinice
       int brutalidade;          // brutality
@@ -31,9 +41,8 @@ class personagem: public Tobjeto
       Tlista *retrato;          // portraits
       Tlista *objetos;          // objetos do personagem
       Tobjeto *armaAtual;       // armaAtual do personagem
-      //int x,y;                  // coordenada do mapa que o bichinho esta
-      char *nome;               // nome do personagem
-      GLMmodel* modelo3d;       // modelo estatico do personagem
+
+      string nome;               // nome do personagem
       float orientacao;         // orientacao do personagem (onde esta sua cara)
       float posicaoFrente;      // posicao do personagem pra frente
       float posicaoLadoX;       // posicao do personagem pro lado
@@ -42,26 +51,39 @@ class personagem: public Tobjeto
    // Lhabilidade* habilidades; // habilidades personagem (ex:kamasutramaster)
       GLuint portrait;
 
-      Square* ocupaQuad;        // quadrado do mapa que ele ocupa com x1,z1
+      Square* ocupaQuad;   // quadrado do mapa que ele ocupa com x1,z1
 
       int ID;
 
-      GLMgroup *pe_d,
-               *pe_e,
-               *perna_d,
-               *perna_e,
-               *coxa_d,
-               *coxa_e,
-               *bacia_d,
-               *bacia_e,
-               *tronco,
-               *ante_d,
-               *ante_e,
-               *braco_d,
-               *braco_e,
-               *mao_d,
-               *mao_e,
-               *cabeca;
+      personagem();
+      ~personagem();
+      bool LoadModel(const string& strFilename);
+      GLuint loadTexture(const string& strFilename);
+      void SetState(int state);
+      void Render();
+
+
+
+
+// CAL3D related member variables
+
+   CalCoreModel* m_calCoreModel;
+  CalModel* m_calModel;
+
+ 
+protected:
+  
+  int m_animationId[16];
+  int m_animationCount;
+  int m_meshId[32];
+  int m_meshCount;
+  GLuint m_textureId[32];
+  int m_textureCount;
+  float m_motionBlend[3];
+  float m_renderScale;
+  float m_lodLevel;
+  std::string m_path;
+
 
 };                 // O PERSONAGEM
 
@@ -82,9 +104,10 @@ class Lpersonagem: public Tlista
        * x,y                     -> coordenada do personagem no Mapa
        * nome                    -> Nome do Personagem
        * arqmodelo               -> nome do arquivo do modelo3d do personagem*/
-      personagem* InserirPersonagem(int forca,int agilidade,int inteligencia,
-                          int esperteza,char* retrato,/*int x, int y,*/
-                          char* nome, char* arqmodelo, char* dirTexturas);
+      personagem* InserirPersonagem(int forca,int agilidade,
+                          int inteligencia,
+                          int esperteza, char* retrato,
+                          string nome, string arqmodelo);
 
       /* Retira um Personagem da Lista
        * persona -> ponteiro para o personagem que se deseja retirar

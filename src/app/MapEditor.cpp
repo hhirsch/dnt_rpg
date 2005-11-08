@@ -10,17 +10,25 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define CHAO           1
-#define MUROX          2
-#define MUROXINIC      3
-#define MUROXINICQUAD  9
-#define MUROZ          8
-#define MUROZINIC      7
-#define MUROZINICQUAD 10
-#define OBJETO         4
-#define DELMURO        5
-#define DELOBJETO      6
-#define PEGAOBJETO     11
+#define CHAO               1
+#define MUROX              2
+#define MUROXINIC          3
+#define MUROXINICQUAD      9
+#define MUROZ              8
+#define MUROZINIC          7
+#define MUROZINICQUAD     10
+#define OBJETO             4
+#define DELMURO            5
+#define DELOBJETO          6
+#define PEGAOBJETO        11
+#define MODALTURA         12
+#define MEIOFIOX          13
+#define MEIOFIOXINIC      14
+#define MEIOFIOXINICQUAD  15
+#define MEIOFIOZ          16
+#define MEIOFIOZINIC      17
+#define MEIOFIOZINICQUAD  18
+
 
 double deg2Rad(double x){return 3.1415927 * x/180.0;}
 
@@ -165,6 +173,14 @@ int botaoPegaObjeto(void *jan,void *ljan,SDL_Surface *screen)
     return(1);
 }
 
+/************************************************************************
+ *                     Trata Botao ALTURA                               *
+ ************************************************************************/
+int botaoAltura(void *jan,void *ljan,SDL_Surface *screen)
+{
+   estado = MODALTURA;
+   return(1);
+}
 
 
 /************************************************************************
@@ -537,6 +553,11 @@ int main(int argc, char **argv)
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Insert",1,&botaoInserir);
+   principal->objetos->InserirBotao(205,17,250,35,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "Height",1,&botaoAltura);
+
    principal->fechavel = 0;
    principal->Abrir(gui->ljan);
  
@@ -565,15 +586,94 @@ int main(int argc, char **argv)
 
       if(gui->ManipulaEventos(mouseX,mouseY,Mbotao,teclas)==NADA)
       {
+         if (qx > mapa->x) qx = mapa->x;
+         else if (qx < 0) qx = 0;
+         if (qz > mapa->z) qz = mapa->z;
+         else if (qz < 0) qz = 0;
+
          if(Mbotao & SDL_BUTTON(1))
          {
 
-            if (qx > mapa->x) qx = mapa->x;
-            else if (qx < 0) qx = 0;
-            if (qz > mapa->z) qz = mapa->z;
-            else if (qz < 0) qz = 0;
-             
-            if(estado == CHAO)
+                        
+            if(estado == MODALTURA)
+            {
+               Square* saux = mapa->quadradoRelativo(qx+1,qz+1);
+ 
+               if(saux)
+               {
+ 
+                  GLfloat d1,d2,d3,d4; //distancia ao vertice do quadrado
+
+                  GLfloat dx1 = xReal - saux->x1;
+                  dx1 *= dx1;
+                  GLfloat dz1 = zReal - saux->z1;
+                  dz1 *= dz1;
+                  GLfloat dx2 = xReal - saux->x2;
+                  dx2 *= dx2;
+                  GLfloat dz2 = zReal - saux->z2;
+                  dz2 *= dz2;
+
+                  d1 = (sqrt( dx1 + dz1 ));
+
+                  d2 = (sqrt( dx1 + dz2 ));
+
+                  d3 = (sqrt( dx2 + dz2 ));
+
+                  d4 = (sqrt( dx2 + dz1 ));
+               
+
+
+                  if( (d1<=d2) && (d1<=d3) && (d1<=d4) )
+                  {
+                     saux->h1 += 1;
+                     if(saux->left)
+                        saux->left->h4 += 1;
+                     if(saux->up)
+                     {
+                        saux->up->h2 += 1;
+                        if(saux->up->left)
+                          saux->up->left->h3 += 1;
+                     }
+                  }
+                  else if( (d2<=d1) && (d2<=d3) && (d2<=d4) )
+                  {
+                     saux->h2 += 1;
+                     if(saux->left)
+                       saux->left->h3 += 1;
+                     if(saux->down)
+                     { 
+                        saux->down->h1 += 1;
+                        if(saux->down->left)
+                          saux->down->left->h4 += 1;
+                     } 
+                  } 
+                  else if( (d3<=d1) && (d3<=d2) && (d1<=d4) )
+                  {
+                     saux->h3 += 1;
+                     if(saux->right)
+                        saux->right->h2 += 1;
+                     if(saux->down)
+                     {
+                        saux->down->h4 += 1;
+                        if(saux->down->right)
+                            saux->down->right->h1 += 1;
+                     }
+                  }
+                  else if( (d4<=d1) && (d4<=d2) && (d4<=d3) )
+                  {
+                     saux->h4 += 1;
+                     if(saux->right)
+                       saux->right->h1 += 1;
+                     if(saux->up)
+                     {
+                        saux->up->h3 += 1;
+                        if(saux->up->right)
+                            saux->up->right->h2 += 1;
+                     }
+                  }
+               }
+            } 
+            else if(estado == CHAO)
                colocaTextura(mapa, (int)xReal / SQUARESIZE, 
                              (int)zReal / SQUARESIZE, texturaAtual);
             else if(estado == OBJETO)
@@ -770,6 +870,89 @@ int main(int argc, char **argv)
              }
          }
   
+         if(Mbotao & SDL_BUTTON(3))
+         {
+            if(estado == MODALTURA)
+            {
+               Square* saux = mapa->quadradoRelativo(qx+1,qz+1);
+
+               if(saux)
+               {
+ 
+               GLfloat d1,d2,d3,d4; //distancia ao vertice do quadrado
+
+               GLfloat dx1 = xReal - saux->x1;
+               dx1 *= dx1;
+               GLfloat dz1 = zReal - saux->z1;
+               dz1 *= dz1;
+               GLfloat dx2 = xReal - saux->x2;
+               dx2 *= dx2;
+               GLfloat dz2 = zReal - saux->z2;
+               dz2 *= dz2;
+
+               d1 = (sqrt( dx1 + dz1 ));
+
+               d2 = (sqrt( dx1 + dz2 ));
+
+               d3 = (sqrt( dx2 + dz2 ));
+
+               d4 = (sqrt( dx2 + dz1 ));
+               
+
+
+               if( (d1<=d2) && (d1<=d3) && (d1<=d4) )
+               {
+                  if(saux->h1 >= 1) saux->h1 -= 1;
+                  if( (saux->left) && (saux->left->h4 >= 1))
+                  {
+                     saux->left->h4 -= 1;
+                  }
+                  if(saux->up)
+                  {
+                     if(saux->up->h2>=1) saux->up->h2 -= 1;
+                     if( (saux->up->left) && (saux->up->left->h3>=1))
+                       saux->up->left->h3 -= 1;
+                  }
+               }
+               else if( (d2<=d1) && (d2<=d3) && (d2<=d4) )
+               {
+                  if(saux->h2>=1)saux->h2 -= 1;
+                  if((saux->left) &&(saux->left->h3 >=1))
+                    saux->left->h3 -= 1;
+                  if(saux->down)
+                  { 
+                     if(saux->down->h1>=1) saux->down->h1 -= 1;
+                     if( (saux->down->left) && (saux->down->left->h4>=1))
+                       saux->down->left->h4 -= 1;
+                  } 
+               } 
+               else if( (d3<=d1) && (d3<=d2) && (d1<=d4) )
+               {
+                  if(saux->h3>=1) saux->h3 -= 1;
+                  if( (saux->right) && (saux->right->h2>=1))
+                    saux->right->h2 -= 1;
+                  if(saux->down)
+                  {
+                     if(saux->down->h4>=1) saux->down->h4 -= 1;
+                     if( (saux->down->right) && (saux->down->right->h1>=1))
+                         saux->down->right->h1 -= 1;
+                  }
+               }
+               else if( (d4<=d1) && (d4<=d2) && (d4<=d3) )
+               {
+                  if(saux->h4>=1)saux->h4 -= 1;
+                  if((saux->right) && (saux->right->h1 >= 1))
+                    saux->right->h1 -= 1;
+                  if(saux->up)
+                  {
+                     if(saux->up->h3>=1) saux->up->h3 -= 1;
+                     if((saux->up->right) && (saux->up->right->h2>=1))
+                         saux->up->right->h2 -= 1;
+                  }
+               }
+            }
+            }
+         }
  
          sair = teclas[SDLK_ESCAPE];
          if(teclas[SDLK_b])

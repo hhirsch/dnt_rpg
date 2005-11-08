@@ -6,10 +6,13 @@
 #include "dccnit.h"
 #include "culling.h"
 #include <math.h>
+#include <SDL/SDL_image.h>
+#include "../etc/glm.h"
+
 
 #define DELAY 0
 
-#define ANDAR 1.5        /* O quanto o personagem anda a cada frame
+#define ANDAR 0.75        /* O quanto o personagem anda a cada frame
                           * A Velocidade do Caracter pode ser calculada
                           * por ANDAR / 20, em unidades/milisegundo 
                           */
@@ -169,8 +172,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    personagem* per;
    per = NPCs->InserirPersonagem(7,6,10,6,
                                  "../data/pics/logan/portrait.jpg","NPC",
-                        "../data/models/personagens/logan_completo_final.obj", 
-                                 "../data/pics/logan/");
+                        "/home/farrer/tp2/TPS/TP2/Logan/logan_completo.cfg");
    per->posicaoLadoX = 30;
    per->posicaoLadoZ = 20;
 
@@ -181,8 +183,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        PCs  = new (Lpersonagem);
        PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
-                       "../data/models/personagens/logan_completo_final.obj",
-                              "../data/pics/logan/");
+                       "/home/farrer/tp2/TPS/TP2/Logan/logan_completo.cfg");
    }
 
    glEnable(GL_LIGHTING);
@@ -337,8 +338,9 @@ int pontoInterno(double x1,double z1, double x2, double z2, double X, double Z)
  *********************************************************************/
 int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 {
-   int redesenha = 0;
-   int andou = 0;
+   bool redesenha = false;
+   bool andou = false;
+   //bool parado = false;
    Uint32 tempo;
    double varX, varZ; // para evitar de ter de calcular 2 vezes
 
@@ -352,6 +354,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    varTempo = (tempo-ultimaLeitura);
    if( ((varTempo)) >= 20)
    {
+      redesenha = true;
       /* Calcula as Modificações Reais no Andar, rotacionar, girar, etc */
       varTempo /= 20.0;
       passo = (varTempo)*ANDAR;
@@ -385,7 +388,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       /* Trata A GUI */
       if(gui->ManipulaEventos(x,y,Mbotao,keys)!=NADA)
       {
-         redesenha = 1;
+         redesenha = true;
       }
       else
       {
@@ -447,7 +450,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           if(!janMiniMapa)
           {
              abreMiniMapa();
-             redesenha = 1;
+             redesenha = true;
           }
       }
 
@@ -456,7 +459,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           if(!janAtalhos)
           {
               abreAtalhos();
-              redesenha = 1;
+              redesenha = true;
           }
       }
       /* Tratamento das teclas para a Camera */
@@ -465,26 +468,26 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
          RotacaoX+=5;
          if (RotacaoX >= 360) RotacaoX = 0;
-         redesenha = 1;
+         redesenha = true;
       }
       if(keys[SDLK_y])
       {
          RotacaoY+=5;
          if (RotacaoY >= 360) RotacaoY = 0;
-         redesenha = 1;
+         redesenha = true;
       }
       if(keys[SDLK_z])
       {
          RotacaoZ+=5;
          if (RotacaoZ >= 360) RotacaoZ = 0;
-         redesenha = 1;
+         redesenha = true;
       }
       if(keys[SDLK_r])  
       { 
          RotacaoX = 0;
          RotacaoY = 0;
          RotacaoZ = 0;
-         redesenha = 1;
+         redesenha = true;
       }
 #endif
       if(keys[SDLK_UP])  // Aumenta o Zoom
@@ -492,7 +495,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           if (d>ZOOMMAXIMO)
           {
              d-= varCamera;
-             redesenha = 1;
+             redesenha = true;
           }
       }
       if(keys[SDLK_DOWN]) // Diminui o Zoom
@@ -500,52 +503,52 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          if(d<ZOOMMINIMO)
          {
              d+= varCamera; 
-             redesenha = 1;
+             redesenha = true;
          }
       }
       if(keys[SDLK_RIGHT]) // Roda Camera Antihorariamente
       {
           phi -= varCamera;  
-          redesenha = 1;
+          redesenha = true;
       }
       if(keys[SDLK_LEFT]) // Roda Camera Horariamente
       {
          phi += varCamera;
-         redesenha = 1;
+         redesenha = true;
       }
       if(keys[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
       {
             theta += varCamera;
-            redesenha = 1;
+            redesenha = true;
             if(theta > 89) 
                theta = 89;
       }
       if(keys[SDLK_PAGEDOWN]) // desce com a camera ate visao em 1ª pessoa
       {
          theta -= varCamera;
-         redesenha = 1;
+         redesenha = true;
          if(theta < 0)
             theta = 0;
       }
       if (keys[SDLK_HOME]) // Zoom Maximo
       {
          d = ZOOMMAXIMO;
-         redesenha = 1;
+         redesenha = true;
       }
       if(keys[SDLK_END]) // ZoomMinimo
       {
          d = ZOOMMINIMO;
-         redesenha = 1;
+         redesenha = true;
       }   
       if(keys[SDLK_INSERT]) //Maximo para cima
       {
          theta = 89;
-         redesenha = 1;
+         redesenha = true;
       }
       if(keys[SDLK_DELETE]) //Maximo para baixo
       {
          theta = 0;
-         redesenha = 1;
+         redesenha = true;
       }
 
       /* Tratamento da tecla para Movimentacao do Personagem */
@@ -566,22 +569,22 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             centroZ += varZ;
             PCs->personagemAtivo->posicaoLadoX += varX;
             PCs->personagemAtivo->posicaoLadoZ += varZ;
-            redesenha = 1;
-            andou = 1;
+            redesenha = true;
+            andou = true;
          }
          else if( (varX != 0) && (podeAndar(varX,0,0)))
          {
             centroX += varX;
             PCs->personagemAtivo->posicaoLadoX += varX;
-            redesenha = 1;
-            andou = 1;
+            redesenha = true;
+            andou = true;
          }
          else if( (varZ != 0) && podeAndar(0,varZ,0)) 
          {
             centroZ += varZ;
             PCs->personagemAtivo->posicaoLadoZ += varZ;
-            redesenha = 1;
-            andou = 1;
+            redesenha = true;
+            andou = true;
          }
         
       }
@@ -600,22 +603,22 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
              PCs->personagemAtivo->posicaoLadoZ += varZ;
              centroX += varX;
              centroZ += varZ;
-             redesenha = 1;
-             andou  = 1;
+             redesenha = true;
+             andou  = true;
          }
          else if((varX != 0) && (podeAndar(varX,0,0)))
          {
               PCs->personagemAtivo->posicaoLadoX += varX;
               centroX += varX;
-              redesenha = 1;
-              andou = 1;
+              redesenha = true;
+              andou = true;
          }
          else if((varZ!=0) && (podeAndar(0,varZ,0)))
          {
               PCs->personagemAtivo->posicaoLadoZ += varZ;
               centroZ += varZ;
-              redesenha = 1;
-              andou = 1;
+              redesenha = true;
+              andou = true;
          }
 
       }
@@ -629,8 +632,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             if(PCs->personagemAtivo->orientacao > 360.0)
                PCs->personagemAtivo->orientacao = 
                                PCs->personagemAtivo->orientacao  - 360.0;
-            redesenha = 1;
-            andou = 1;
+            redesenha = true;
+            andou = true;
          }
          // Gira o personagem horariamente
          if((keys[SDLK_d]) && (podeAndar(0,0,-rotacao)) )
@@ -640,8 +643,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                PCs->personagemAtivo->orientacao = 360.0 + 
                                         PCs->personagemAtivo->orientacao ;
          }
-         redesenha = 1;
-         andou = 1;
+         redesenha = true;
+         andou = true;
       }
       if(keys[SDLK_TAB]) //troca de personagem ativo
       {
@@ -658,25 +661,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                PCs->personagemAtivo = (personagem*)PCs->primeiro->proximo;
          }
       }
-      if(keys[SDLK_b])
-      {
-         if(keys[SDLK_LSHIFT])
-         {
-             PCs->personagemAtivo->braco_d->rotacao[1]+=1;
-             PCs->personagemAtivo->mao_d->rotacao[1]+=1;
-             PCs->personagemAtivo->ante_d->rotacao[1]+=1;
-         }
-         else
-         {
-             PCs->personagemAtivo->braco_d->rotacao[1]-=1;
-             PCs->personagemAtivo->mao_d->rotacao[1]-=1;
-             PCs->personagemAtivo->ante_d->rotacao[1]-=1;
-             PCs->personagemAtivo->braco_d->rotacao[2]+=1;
-             PCs->personagemAtivo->mao_d->rotacao[2]+=1;
-             PCs->personagemAtivo->ante_d->rotacao[2]+=1;
-         }
-         redesenha = 1;
-      }
+      
       if(keys[SDLK_i])
       {
          printf("Orientacao %f°\t sen %f\tcos %f\trad %f\n",
@@ -687,18 +672,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          printf("PosicaoLadoX %f\n",PCs->personagemAtivo->posicaoLadoX);
          printf("PosicaoLadoZ %f\n",PCs->personagemAtivo->posicaoLadoZ);
       }
-      if(keys[SDLK_t])
-      {
-         GLuint aux = 0;
-         GLMtexture* tex = PCs->personagemAtivo->modelo3d->texturas;
-         while(aux<PCs->personagemAtivo->modelo3d->numtexturas)
-         {
-            printf("Texture: %s\n",tex->nome);
-            tex = tex->proximo;
-            aux++;
-          }
-      }
-      
 
       /* Tratamento do Mouse */
 
@@ -706,18 +679,28 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if(x == 0)    // Gira a Camera horariamente
       {
          phi+=2; 
-         redesenha = 1;  
+         redesenha = true;  
       }
       if(x == screen->w-1) // Gira a camera antihorariamente
       {
         phi-=2; 
-        redesenha = 1;
+        redesenha = true;
       }
    }
    }
    
    if( (redesenha) || ( (*forcaAtualizacao != 0)/* && ((tempo-ultimaLeitura)>=16)*/))
    {
+//TODO set ALL update for ALL characters
+      GLfloat segundos = varTempo / 100.0;
+      int aux;
+      PCs->personagemAtivo->m_calModel->update(segundos);
+      personagem *per = (personagem*) NPCs->primeiro->proximo;
+      for(aux=0;aux < NPCs->total;aux++)
+      {
+         per->m_calModel->update(segundos);   
+         per = (personagem*) per->proximo;
+      } 
       Desenhar();
       SDL_GL_SwapBuffers();
       *forcaAtualizacao = 0;
@@ -725,11 +708,16 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
  
    if(andou)
    {
+      PCs->personagemAtivo->SetState(STATE_WALK);
       #ifdef REDE
         movchar(&clientData, PCs->personagemAtivo->ID, 
           PCs->personagemAtivo->posicaoLadoX,PCs->personagemAtivo->posicaoLadoZ,
           PCs->personagemAtivo->orientacao );
       #endif
+   }
+   else
+   {
+      PCs->personagemAtivo->SetState(STATE_IDLE);
    }
  
    return(1);
@@ -781,7 +769,8 @@ void engine::Desenhar()
                         per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            //glCallList(per->personagemDesenhar);
-           glmDrawLists(per->modelo3d);
+           //glmDrawLists(per->modelo3d);
+           per->Render();
          glPopMatrix();
          per = (personagem*) per->proximo;
       }
@@ -797,7 +786,8 @@ void engine::Desenhar()
          glPushMatrix();
            glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
-           glmDrawLists(per->modelo3d);
+           //glmDrawLists(per->modelo3d);
+           per->Render();
          glPopMatrix();
          per = (personagem*) per->proximo;
       }
@@ -866,6 +856,7 @@ void engine::Desenhar()
 int estaDentro(GLfloat x[4], GLfloat z[4],
                GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2)
 {
+   /* Algum ponto de x,z dentro do retangulo */
    if( ( ((x[0] >= u1) && (x[0] <= u2)) || 
          ((x[1] >= u1) && (x[1] <= u2)) ||
          ((x[2] >= u1) && (x[2] <= u2)) || 
@@ -878,6 +869,7 @@ int estaDentro(GLfloat x[4], GLfloat z[4],
       return(1);
    }
 
+   /* Caso de cruz 1 */
    if( ( ((x[0] <= u1) && (z[0] >= v1) && (z[0] <= v2)) &&
        ( ((x[1] >= u2) && (z[1] >= v1) && (z[1] <= v2)) || 
          ((x[2] >= u2) && (z[2] >= v1) && (z[2] <= v2)) || 
@@ -896,6 +888,7 @@ int estaDentro(GLfloat x[4], GLfloat z[4],
          ((x[2] >= u2) && (z[2] >= v1) && (z[2] <= v2)) )) )
        return(1);
 
+   /* Caso de cruz 2 */
    if( ( ((z[0] <= v1) && (x[0] >= u1) && (x[0] <= u2)) &&
        ( ((z[1] >= v2) && (x[1] >= u1) && (x[1] <= u2)) || 
          ((z[2] >= v2) && (x[2] >= u1) && (x[2] <= u2)) || 
@@ -914,6 +907,7 @@ int estaDentro(GLfloat x[4], GLfloat z[4],
          ((z[2] >= v2) && (x[2] >= u1) && (x[2] <= u2)) )) )
        return(1);
 
+   /* algum ponto do retangulo dentro do poligono de x,z */
    return(  
            ( ( ((u1<=x[0]) && ((u1 >= x[1]) || (u1 >= x[2]) || (u1 >= x[3]))) ||
                ((u1<=x[1]) && ((u1 >= x[0]) || (u1 >= x[2]) || (u1 >= x[3]))) ||
@@ -1057,6 +1051,12 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
    GLfloat x[4],z[4];
    int aux;
+
+   return(1);
+
+//TODO re-do with new bounding calculation
+
+ #if 0  
 
    x[0] = PCs->personagemAtivo->modelo3d->x1;
    z[0] = PCs->personagemAtivo->modelo3d->z1;
@@ -1257,35 +1257,24 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    PCs->personagemAtivo->ocupaQuad = quadradoRelativo(posX,posZ,
                                        PCs->personagemAtivo->ocupaQuad);
 
-   GLfloat d1,d2,d3,d4; //distancia ao vertice do quadrado
+   Square* saux = mapa->quadradoRelativo( (int)(nx/SQUARESIZE)+1,
+                                          (int)(nz/SQUARESIZE)+1);
 
-   GLfloat dx1 = nx - PCs->personagemAtivo->ocupaQuad->x1;
-   dx1 *= dx1;
-   GLfloat dz1 = nz - PCs->personagemAtivo->ocupaQuad->z1;
-   dz1 *= dz1;
-   GLfloat dx2 = nx - PCs->personagemAtivo->ocupaQuad->x2;
-   dx2 *= dx2;
-   GLfloat dz2 = nz - PCs->personagemAtivo->ocupaQuad->z2;
-   dz2 *= dz2;
+   GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
+   GLfloat dz1 = fabs(nz - saux->z1) / SQUARESIZE;
+   GLfloat dx2 = fabs(nx - saux->x2) / SQUARESIZE;
+   GLfloat dz2 = fabs(nz - saux->z2) / SQUARESIZE;
 
-   d1 = (SQUARESIZE - sqrt( dx1 + dz1 )) / SQUARESIZE;
-
-   d2 = (SQUARESIZE - sqrt( dx1 + dz2 )) / SQUARESIZE;
-
-   d3 = (SQUARESIZE - sqrt( dx2 + dz2 )) / SQUARESIZE;
-
-   d4 = (SQUARESIZE - sqrt( dx2 + dz1 )) / SQUARESIZE;
-
-   PCs->personagemAtivo->posicaoLadoY+=(d1*PCs->personagemAtivo->ocupaQuad->h1)
-                                      +(d3*PCs->personagemAtivo->ocupaQuad->h3)
-                                      +(d2*PCs->personagemAtivo->ocupaQuad->h2)
-                                      +(d4*PCs->personagemAtivo->ocupaQuad->h4);
-
-   if(PCs->personagemAtivo->posicaoLadoY < 0 )
-     PCs->personagemAtivo->posicaoLadoY = 0;
+   GLfloat ha = (dx2 * PCs->personagemAtivo->ocupaQuad->h1) + 
+                (dx1 * PCs->personagemAtivo->ocupaQuad->h4);
+   GLfloat hb = (dx2 * PCs->personagemAtivo->ocupaQuad->h2) + 
+                (dx1 * PCs->personagemAtivo->ocupaQuad->h3);
+ 
+   PCs->personagemAtivo->posicaoLadoY += (ha * dz2) + (hb * dz1);
 
    
    return(result);
+#endif
 }
 
 

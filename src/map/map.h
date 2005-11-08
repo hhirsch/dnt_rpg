@@ -17,7 +17,8 @@
 
 /* Constraints */
 #define SQUARESIZE 64
-#define HALFSQUARESIZE 5
+#define HALFSQUARESIZE 32
+#define SQUAREDIAGONALSIZE 90.509668
 #define MAXOBJETOS 10
 #define MAXMUROS 5
 #define MUROALTURA 50
