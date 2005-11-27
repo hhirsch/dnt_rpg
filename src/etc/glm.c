@@ -579,6 +579,8 @@ _glmSecondPass(GLMmodel* model, FILE* file)
         {
            model->x1 = vertices[3 * numvertices + X];
            model->x2 = vertices[3 * numvertices + X];
+           model->y1 = vertices[3 * numvertices + Y];
+           model->y2 = vertices[3 * numvertices + Y];
            model->z1 = vertices[3 * numvertices + Z];
            model->z2 = vertices[3 * numvertices + Z];
            model->boundingDefinido = 1;
@@ -586,7 +588,9 @@ _glmSecondPass(GLMmodel* model, FILE* file)
         else if((model->x1 > vertices[3 * numvertices + X]) ||
                 (model->x2 < vertices[3 * numvertices + X]) ||
                 (model->z1 > vertices[3 * numvertices + Z]) ||
-                (model->z2 < vertices[3 * numvertices + Z]) )
+                (model->z2 < vertices[3 * numvertices + Z]) ||
+                (model->y1 > vertices[3 * numvertices + Y]) ||
+                (model->y2 < vertices[3 * numvertices + Y]) )
         {
            if(model->x1 > vertices[3 * numvertices + X])
               model->x1 = vertices[3 * numvertices + X];
@@ -594,8 +598,12 @@ _glmSecondPass(GLMmodel* model, FILE* file)
               model->x2 = vertices[3 * numvertices + X];
            else if(model->z1 > vertices[3 * numvertices + Z])
               model->z1 = vertices[3 * numvertices + Z];
-           else
+           else if(model->z2 < vertices[3* numvertices + Z])
               model->z2 = vertices[3 * numvertices + Z];
+           else if(model->y1 > vertices[3 * numvertices + Y])
+              model->y1 = vertices[3 * numvertices + Y];
+           else if(model->y2 < vertices[3* numvertices + Y])
+              model->y2 = vertices[3 * numvertices + Y];
         }
         
 	numvertices++;

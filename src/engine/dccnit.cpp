@@ -48,6 +48,7 @@ engine::engine()
    d=150;
    centroX = centroZ = 0;
    centroY = 30;
+   deltaY = 0;
    cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centroY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
@@ -153,7 +154,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    retangulo_Colorir(img,0,0,255,31,0);
    cor_Definir(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
-   escxy(img,128,0,"Loading Character...");
+   escxy(img,128,0,"Loading Characters...");
    carregaTextura(img,&texturaTexto);
    
    AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
@@ -172,7 +173,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    personagem* per;
    per = NPCs->InserirPersonagem(7,6,10,6,
                                  "../data/pics/logan/portrait.jpg","NPC",
-                        "/home/farrer/tp2/TPS/TP2/Logan/logan_completo.cfg");
+                        "../data/models/personagens/Logan/modelo.cfg");
    per->posicaoLadoX = 30;
    per->posicaoLadoZ = 20;
 
@@ -183,7 +184,13 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        PCs  = new (Lpersonagem);
        PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
+                       "../data/models/personagens/Logan/modelo.cfg");
+       /*per = PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
+                              "Logan",
                        "/home/farrer/tp2/TPS/TP2/Logan/logan_completo.cfg");
+       per->posicaoLadoX = 100;
+       per->posicaoLadoZ = 100;*/
+
    }
 
    glEnable(GL_LIGHTING);
@@ -264,7 +271,7 @@ void engine::Redmensiona(SDL_Surface *screen)
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 650.0);
+   gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 1650.0);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
 }
@@ -289,14 +296,14 @@ void engine::Iniciar(SDL_Surface *screen)
 
    /* Definicao da Luz */
    GLfloat light_ambient[] = { 0.6, 0.6, 0.6, 1.0 };
-   //GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-   //GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_position[] = { 300.0, 10.0, 200.0, 1.0 };
    
    /* Carrega a Luz */
    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-   //glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-   //glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+   glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
    
    /* Habilita a iluminacao */
@@ -310,8 +317,8 @@ void engine::Iniciar(SDL_Surface *screen)
      glFogfv(GL_FOG_COLOR,fogCor);
      glFogf(GL_FOG_DENSITY,0.60);
      glHint(GL_FOG_HINT,GL_DONT_CARE);
-     glFogf(GL_FOG_START,200.0);
-     glFogf(GL_FOG_END,600.0);
+     glFogf(GL_FOG_START,500.0);
+     glFogf(GL_FOG_END,1600.0);
    }
 }
 
@@ -340,6 +347,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 {
    bool redesenha = false;
    bool andou = false;
+   bool passouTempo = false;
    //bool parado = false;
    Uint32 tempo;
    double varX, varZ; // para evitar de ter de calcular 2 vezes
@@ -355,17 +363,35 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    if( ((varTempo)) >= 20)
    {
       redesenha = true;
+      passouTempo = true;
+
+      /* Atualiza Animacoes dos personagens */
+      GLfloat segundos = varTempo / 1000.0;
+      int aux;
+      personagem *per = (personagem*) PCs->primeiro->proximo;
+      for(aux=0;aux< PCs->total;aux++)
+      {
+         per->m_calModel->update(segundos); 
+         per->CalculateBoundingBox();  
+         per = (personagem*) per->proximo;
+      }
+      per = (personagem*) NPCs->primeiro->proximo;
+      for(aux=0;aux < NPCs->total;aux++)
+      {
+         per->m_calModel->update(segundos);   
+         per = (personagem*) per->proximo;
+      }
+
       /* Calcula as Modificações Reais no Andar, rotacionar, girar, etc */
       varTempo /= 20.0;
       passo = (varTempo)*ANDAR;
-//TODO better walk
       if(passo > 9)
         passo = 9; /* Para evitar que atravesse paredes ao ter LAG*/
       rotacao = (varTempo)*GIRAR;
       varCamera = varTempo*DELTACAMERA;
       
       FPSatual = (FPSatual + (1000.0 / varTempo)) / 2; 
-
+     
       SDL_PumpEvents();
       if( (janAtalhos) && (tempo-ultimaFPS >= 300))
       {
@@ -660,6 +686,10 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             if(PCs->personagemAtivo == PCs->primeiro)
                PCs->personagemAtivo = (personagem*)PCs->primeiro->proximo;
          }
+         centroX = PCs->personagemAtivo->posicaoLadoX;
+         centroZ = PCs->personagemAtivo->posicaoLadoZ;
+         redesenha = true;
+         SDL_Delay(100);
       }
       
       if(keys[SDLK_i])
@@ -691,16 +721,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    
    if( (redesenha) || ( (*forcaAtualizacao != 0)/* && ((tempo-ultimaLeitura)>=16)*/))
    {
-//TODO set ALL update for ALL characters
-      GLfloat segundos = varTempo / 100.0;
-      int aux;
-      PCs->personagemAtivo->m_calModel->update(segundos);
-      personagem *per = (personagem*) NPCs->primeiro->proximo;
-      for(aux=0;aux < NPCs->total;aux++)
-      {
-         per->m_calModel->update(segundos);   
-         per = (personagem*) per->proximo;
-      } 
       Desenhar();
       SDL_GL_SwapBuffers();
       *forcaAtualizacao = 0;
@@ -715,7 +735,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           PCs->personagemAtivo->orientacao );
       #endif
    }
-   else
+   else if(passouTempo)
    {
       PCs->personagemAtivo->SetState(STATE_IDLE);
    }
@@ -736,11 +756,11 @@ void engine::Desenhar()
 
    /* Redefine a posicao dinamica da camera */
    cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   cameraY = centroY + (float) d * sin(deg2Rad(theta));
+   cameraY = centroY + deltaY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
  
-   /* Autaliza para fazer o culling e o desenho da GUI */
+   /* Atualiza para fazer o culling e o desenho da GUI */
    AtualizaFrustum(matrizVisivel,proj,modl);
 
    //glClear ((GL_COLOR_BUFFER_BIT));
@@ -764,17 +784,41 @@ void engine::Desenhar()
       for(aux=0;aux < PCs->total;aux++)
       {
          glPushMatrix();
-           // O personagem nao movimenta no eixo Y, mas sim no Z (^) e X (>) 
            glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
                         per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
-           //glCallList(per->personagemDesenhar);
-           //glmDrawLists(per->modelo3d);
            per->Render();
+           per->RenderBoundingBox();
+           glDisable(GL_LIGHTING);
+           glColor3f(0.6,0.1,0.1);
+           glBegin(GL_POLYGON);
+              glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
+              glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
+              glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
+              glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+
+              /*glVertex3f(per->min[0],per->min[1],per->min[2]);
+              glVertex3f(per->min[0],per->min[1],per->max[2]);
+              glVertex3f(per->min[0],per->max[1],per->max[2]);
+              glVertex3f(per->min[0],per->max[1],per->min[2]);
+
+              glVertex3f(per->max[0],per->min[1],per->min[2]);
+              glVertex3f(per->max[0],per->min[1],per->max[2]);
+              glVertex3f(per->max[0],per->max[1],per->max[2]);
+              glVertex3f(per->max[0],per->max[1],per->min[2]);
+
+              glVertex3f(per->min[0],per->max[1],per->min[2]);
+              glVertex3f(per->min[0],per->max[1],per->max[2]);
+              glVertex3f(per->max[0],per->max[1],per->max[2]);
+              glVertex3f(per->max[0],per->max[1],per->min[2]);*/
+           glEnd();
+           glEnable(GL_LIGHTING);
          glPopMatrix();
          per = (personagem*) per->proximo;
       }
    glPopMatrix();
+
+ 
 
    /* Atualiza os Valores dos NPCS com o que já estiver no socket */
    //AtualizaNPCs
@@ -788,6 +832,7 @@ void engine::Desenhar()
            glRotatef(per->orientacao,0,1,0);
            //glmDrawLists(per->modelo3d);
            per->Render();
+           per->RenderBoundingBox();
          glPopMatrix();
          per = (personagem*) per->proximo;
       }
@@ -849,83 +894,101 @@ void engine::Desenhar()
 /*    PARTE DA DETECCAO DE COLISAO!!!!!!! */
 /******************************************/
 
+//min[x,y,z] max[x,y,z]
 
 /*********************************************************************
  *        Verifica se ha intersecao entre dois bounding boxes        *
  *********************************************************************/
-int estaDentro(GLfloat x[4], GLfloat z[4],
-               GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2)
+int estaDentro(GLfloat min1[3], GLfloat max1[3],
+               GLfloat min2[3], GLfloat max2[3],
+               int inverso)
 {
-   /* Algum ponto de x,z dentro do retangulo */
-   if( ( ((x[0] >= u1) && (x[0] <= u2)) || 
-         ((x[1] >= u1) && (x[1] <= u2)) ||
-         ((x[2] >= u1) && (x[2] <= u2)) || 
-         ((x[3] >= u1) && (x[3] <= u2)) ) && 
-       ( ((z[0] >= v1) && (z[0] <= v2)) || 
-         ((z[1] >= v1) && (z[1] <= v2)) ||
-         ((z[2] >= v1) && (z[2] <= v2)) || 
-         ((z[3] >= v1) && (z[3] <= v2)) ) )
+   //testa o mínimo X do 2
+   if( (min1[0] < min2[0]) && (max1[0] > min2[0]  ) )
+   {
+      //testa minimo Y
+      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
+      //{
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      //}
+      //testa maximo Y
+      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
+      {
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      }*/
+   }
+   
+   //testa com o máximo X do 2
+   if( (min1[0] < max2[0]) && (max1[0] > max2[0]) )
+   {
+      //testa minimo Y
+      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
+      //{
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      //}
+      //testa maximo Y
+      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
+      {
+         testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      }*/
+   }
+
+   //testa casos de cruz + 
+   if( (min2[0] < min1[0]) && (max2[0] > max1[0]) &&
+       (min2[2] > min1[2]) && (min2[2] < max1[2]))
+   {
+      return(1);
+   }
+   if( (min2[2] < min1[2]) && (max2[2] > max1[2]) &&
+       (min2[0] > min1[0]) && (min2[0] < max1[0]))
    {
       return(1);
    }
 
-   /* Caso de cruz 1 */
-   if( ( ((x[0] <= u1) && (z[0] >= v1) && (z[0] <= v2)) &&
-       ( ((x[1] >= u2) && (z[1] >= v1) && (z[1] <= v2)) || 
-         ((x[2] >= u2) && (z[2] >= v1) && (z[2] <= v2)) || 
-         ((x[3] >= u2) && (z[3] >= v1) && (z[3] <= v2))) ) ||
-       ( ((x[1] <= u1) && (z[1] >= v1) && (z[1] <= v2)) &&
-       ( ((x[0] >= u2) && (z[0] >= v1) && (z[0] <= v2)) || 
-         ((x[2] >= u2) && (z[2] >= v1) && (z[2] <= v2)) || 
-         ((x[3] >= u2) && (z[3] >= v1) && (z[3] <= v2)) )) || 
-       ( ((x[2] <= u1) && (z[2] >= v1) && (z[2] <= v2)) &&
-       ( ((x[0] >= u2) && (z[0] >= v1) && (z[0] <= v2)) || 
-         ((x[1] >= u2) && (z[1] >= v1) && (z[1] <= v2)) || 
-         ((x[3] >= u2) && (z[3] >= v1) && (z[3] <= v2)) )) ||
-       ( ((x[3] <= u1) && (z[3] >= v1) && (z[3] <= v2)) &&
-       ( ((x[0] >= u2) && (z[0] >= v1) && (z[0] <= v2)) || 
-         ((x[1] >= u2) && (z[1] >= v1) && (z[1] <= v2)) || 
-         ((x[2] >= u2) && (z[2] >= v1) && (z[2] <= v2)) )) )
-       return(1);
-
-   /* Caso de cruz 2 */
-   if( ( ((z[0] <= v1) && (x[0] >= u1) && (x[0] <= u2)) &&
-       ( ((z[1] >= v2) && (x[1] >= u1) && (x[1] <= u2)) || 
-         ((z[2] >= v2) && (x[2] >= u1) && (x[2] <= u2)) || 
-         ((z[3] >= v2) && (x[3] >= u1) && (x[3] <= u2)) )) ||
-       ( ((z[1] <= v1) && (x[1] >= u1) && (x[1] <= u2)) &&
-       ( ((z[0] >= v2) && (x[0] >= u1) && (x[0] <= u2)) || 
-         ((z[2] >= v2) && (x[2] >= u1) && (x[2] <= u2)) || 
-         ((z[3] >= v2) && (x[3] >= u1) && (x[3] <= u2)) )) || 
-       ( ((z[2] <= v1) && (x[2] >= u1) && (x[2] <= u2)) &&
-       ( ((z[0] >= v2) && (x[0] >= u1) && (x[0] <= u2)) || 
-         ((z[1] >= v2) && (x[1] >= u1) && (x[1] <= u2)) || 
-         ((z[3] >= v2) && (x[3] >= u1) && (x[3] <= u2)) )) ||
-       ( ((z[3] <= v1) && (x[3] >= u1) && (x[3] <= u2)) &&
-       ( ((z[0] >= v2) && (x[0] >= u1) && (x[0] <= u2)) || 
-         ((z[1] >= v2) && (x[1] >= u1) && (x[1] <= u2)) || 
-         ((z[2] >= v2) && (x[2] >= u1) && (x[2] <= u2)) )) )
-       return(1);
-
-   /* algum ponto do retangulo dentro do poligono de x,z */
-   return(  
-           ( ( ((u1<=x[0]) && ((u1 >= x[1]) || (u1 >= x[2]) || (u1 >= x[3]))) ||
-               ((u1<=x[1]) && ((u1 >= x[0]) || (u1 >= x[2]) || (u1 >= x[3]))) ||
-               ((u1<=x[2]) && ((u1 >= x[1]) || (u1 >= x[0]) || (u1 >= x[3]))) ||
-               ((u1<=x[3]) && ((u1 >= x[1]) || (u1 >= x[2]) || (u1 >= x[0]))) ||
-               ((u2<=x[0]) && ((u2 >= x[1]) || (u2 >= x[2]) || (u2 >= x[3]))) ||
-               ((u2<=x[1]) && ((u2 >= x[0]) || (u2 >= x[2]) || (u2 >= x[3]))) ||
-               ((u2<=x[2]) && ((u2 >= x[1]) || (u2 >= x[0]) || (u2 >= x[3]))) ||
-               ((u2<=x[3]) && ((u2 >= x[1]) || (u2 >= x[2]) || (u2 >= x[0]))))&&
-             ( ((v1<=z[0]) && ((v1 >= z[1]) || (v1 >= z[2]) || (v1 >= z[3]))) ||
-               ((v1<=z[1]) && ((v1 >= z[0]) || (v1 >= z[2]) || (v1 >= z[3]))) ||
-               ((v1<=z[2]) && ((v1 >= z[1]) || (v1 >= z[0]) || (v1 >= z[3]))) ||
-               ((v1<=z[3]) && ((v1 >= z[1]) || (v1 >= z[2]) || (v1 >= z[0]))) ||
-               ((v2<=z[0]) && ((v2 >= z[1]) || (v2 >= z[2]) || (v2 >= z[3]))) ||
-               ((v2<=z[1]) && ((v2 >= z[0]) || (v2 >= z[2]) || (v2 >= z[3]))) ||
-               ((v2<=z[2]) && ((v2 >= z[1]) || (v2 >= z[0]) || (v2 >= z[3]))) ||
-               ((v2<=z[3]) && ((v2 >= z[1]) || (v2 >= z[2]) || (v2 >= z[0]))) )) );
-   
+   if(inverso)
+   {
+      return( estaDentro(min2, max2, min1, max1, 0));
+   }
+   else 
+   {
+      return(0);
+   }
 }
 
 /*********************************************************************
@@ -934,6 +997,8 @@ int estaDentro(GLfloat x[4], GLfloat z[4],
 Square* quadradoRelativo(int posX,int posZ, Square* quad)
 {
    Square* result = quad;
+   if( (posX < 0) || (posZ < 0))
+     return(NULL);
    int aux;
    for(aux=0;aux < (quad->posX-posX);aux++) result = result->left;
    for(aux=0;aux < (posX-quad->posX);aux++) result = result->right;
@@ -946,9 +1011,12 @@ Square* quadradoRelativo(int posX,int posZ, Square* quad)
  *          Faz o teste se o Quadrado quad é factivel de ser         *
  *                    ocupado pelo personagem                        *
  *********************************************************************/
-int testa(GLfloat x[4],GLfloat z[4],Square* quad)
+int testa(GLfloat min[3], GLfloat max[3],Square* quad)
 {
    int result = 0;
+   GLfloat min2[3];
+   GLfloat max2[3];
+
    Square* proxima = quad;
    if(proxima->flags & PISAVEL)
    {
@@ -959,10 +1027,13 @@ int testa(GLfloat x[4],GLfloat z[4],Square* quad)
       int mur = 0;
       while((proxima->muros[mur] != NULL))
       {
-         result &= !estaDentro(x,z,proxima->muros[mur]->x1,
-                                   proxima->muros[mur]->z1,
-                                   proxima->muros[mur]->x2,
-                                   proxima->muros[mur]->z2);
+         min2[0] = proxima->muros[mur]->x1; 
+         min2[1] = 0; 
+         min2[2] = proxima->muros[mur]->z1;
+         max2[0] = proxima->muros[mur]->x2; 
+         max2[1] = MUROALTURA; 
+         max2[2] = proxima->muros[mur]->z2;
+         result &= !estaDentro(min,max,min2,max2,1);
          if(!result)
            return(0);
          mur++;
@@ -971,7 +1042,7 @@ int testa(GLfloat x[4],GLfloat z[4],Square* quad)
    if(result) // Se eh possivel entrar, testa com os objetos
    {
       int ob = 0;
-      GLfloat u1,u2,v1,v2;
+      //GLfloat u1,u2,v1,v2;
       GLMmodel* modelo3d;
       while( (proxima->objetos[ob] != NULL)) 
       {
@@ -1010,13 +1081,15 @@ int testa(GLfloat x[4],GLfloat z[4],Square* quad)
           }
 
           //printf("%f %f %f %f\n",x[0],z[0],x[1],z[1]);
-          u1 = X[0]+proxima->Xobjetos[ob];
-          u2 = X[1]+proxima->Xobjetos[ob];
-          v1 = Z[0]+proxima->Zobjetos[ob];
-          v2 = Z[1]+proxima->Zobjetos[ob];
+          min2[0] = X[0]+proxima->Xobjetos[ob];
+          max2[0] = X[1]+proxima->Xobjetos[ob];
+          min2[1] = modelo3d->y1;//+Yobjetos. TODO
+          max2[1] = modelo3d->y2;
+          min2[2] = Z[0]+proxima->Zobjetos[ob];
+          max2[2] = Z[1]+proxima->Zobjetos[ob];
           //printf("%f %f %f %f\n",u1,v1,u2,v2);
           //printf("%f %f %f %f %f %f %f %f\n",);
-          result &= !estaDentro(x,z,u1,v1,u2,v2);
+          result &= !estaDentro(min,max,min2,max2,1);
           if(!result) //se ja achou que nao pode, cai fora
              return(0);
           ob++;
@@ -1029,12 +1102,20 @@ int testa(GLfloat x[4],GLfloat z[4],Square* quad)
 /*********************************************************************
  *                   Verifica Colisao com MeioFio                    *
  *********************************************************************/
-int ColisaoComMeioFio(GLfloat x[4],GLfloat z[4], muro* meiosFio)
+int ColisaoComMeioFio(GLfloat min[3],GLfloat max[3], muro* meiosFio)
 {
+    GLfloat min2[3];
+    GLfloat max2[3];
     muro* maux = meiosFio;
     while(maux)
     {
-       if( (estaDentro(x, z, maux->x1, maux->z1, maux->x2, maux->z2)) )
+       min2[0] = maux->x1;
+       max2[0] = maux->x2;
+       min2[1] = 0;
+       max2[1] = MEIOFIOALTURA;
+       min2[2] = maux->z1;
+       max2[2] = maux->z2;
+       if( (estaDentro(min, max, min2, max2, 1)) )
           return(1);
        //printf("Fora: %.3f %.3f %.3f %.3f,\n %.3f %.3f %.3f %.3f,\n %.3f %.3f %.3f %.3f\n ", maux->x1, maux->z1, maux->x2, maux->z2, x[0],x[1],x[2],x[3],z[0],z[1],z[2],z[3]);
        maux = maux->proximo;
@@ -1049,26 +1130,23 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 {
    int result = 1;
 
+   GLfloat min[3],min2[3];
+   GLfloat max[3],max2[3];
+   uint aux;
+
    GLfloat x[4],z[4];
-   int aux;
 
-   return(1);
+   x[0] = PCs->personagemAtivo->min[0];
+   z[0] = PCs->personagemAtivo->min[2];
 
-//TODO re-do with new bounding calculation
+   x[1] = PCs->personagemAtivo->min[0];
+   z[1] = PCs->personagemAtivo->max[2]; 
 
- #if 0  
+   x[2] = PCs->personagemAtivo->max[0];
+   z[2] = PCs->personagemAtivo->max[2];
 
-   x[0] = PCs->personagemAtivo->modelo3d->x1;
-   z[0] = PCs->personagemAtivo->modelo3d->z1;
-
-   x[1] = PCs->personagemAtivo->modelo3d->x1;
-   z[1] = PCs->personagemAtivo->modelo3d->z2; 
-
-   x[2] = PCs->personagemAtivo->modelo3d->x2;
-   z[2] = PCs->personagemAtivo->modelo3d->z2;
-
-   x[3] = PCs->personagemAtivo->modelo3d->x2;
-   z[3] = PCs->personagemAtivo->modelo3d->z1;
+   x[3] = PCs->personagemAtivo->max[0];
+   z[3] = PCs->personagemAtivo->min[2];
 
    /* Rotaciona o bounding para a posicao correrta */
    if(PCs->personagemAtivo->orientacao+varAlpha != 0)
@@ -1087,23 +1165,59 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
    }
 
+   
    /* translada o bounding box para o local correto*/
+   min[1] += PCs->personagemAtivo->min[1]+PCs->personagemAtivo->posicaoLadoY;
+   max[1] += PCs->personagemAtivo->max[1]+PCs->personagemAtivo->posicaoLadoY;
    for(aux=0;aux<4;aux++)
    {
      x[aux] += PCs->personagemAtivo->posicaoLadoX+varX;
      z[aux] += PCs->personagemAtivo->posicaoLadoZ+varZ;
-     if( (x[aux]<0) || (z[aux]<0) || 
-         (x[aux]>mapa->x*SQUARESIZE) || (z[aux]>mapa->z*SQUARESIZE))
+     if( (x[aux]<2) || (z[aux]<2) || 
+         (x[aux]>mapa->x*SQUARESIZE-2) || (z[aux]>mapa->z*SQUARESIZE-2))
+     {
          return(0);
+     }
+     if(aux == 0)
+     {
+        min[0] = x[0]; max[0] = x[0];
+        min[2] = z[0]; max[2] = z[0];
+     }
+     else
+     {
+         if(x[aux] < min[0])
+         {
+            min[0] = x[aux];
+         }
+         if(x[aux] > max[0])
+         {
+            max[0] = x[aux];
+         }
+         if(z[aux] < min[2])
+         {
+            min[2] = z[aux];
+         }
+         if(z[aux] > max[2])
+         {
+            max[2] = z[aux];
+         }
+
+     }
    }
+   
+
+
 
    /* Testa o Atual, ja que eh GRANDE! */
-   if(estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->x1,
-                 PCs->personagemAtivo->ocupaQuad->z1,
-                 PCs->personagemAtivo->ocupaQuad->x2,
-                 PCs->personagemAtivo->ocupaQuad->z2) )
+   min2[0] = PCs->personagemAtivo->ocupaQuad->x1;
+   min2[1] = 0;
+   min2[2] = PCs->personagemAtivo->ocupaQuad->z1;
+   max2[0] = PCs->personagemAtivo->ocupaQuad->x2;
+   max2[1] = 400;
+   max2[2] = PCs->personagemAtivo->ocupaQuad->z2;
+   if(estaDentro(min,max,min2,max2,1))
    {
-      result &= testa(x,z,PCs->personagemAtivo->ocupaQuad);
+      result &= testa(min,max,PCs->personagemAtivo->ocupaQuad);
       if(!result)
       {
          //printf("sai na atual\n"); 
@@ -1116,12 +1230,13 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    if((PCs->personagemAtivo->ocupaQuad->right)) 
    { 
       /* leste */
-      if(estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->right->x1,
-                 PCs->personagemAtivo->ocupaQuad->right->z1,
-                 PCs->personagemAtivo->ocupaQuad->right->x2,
-                 PCs->personagemAtivo->ocupaQuad->right->z2) )
+      min2[0] = PCs->personagemAtivo->ocupaQuad->right->x1;
+      min2[2] = PCs->personagemAtivo->ocupaQuad->right->z1;
+      max2[0] = PCs->personagemAtivo->ocupaQuad->right->x2;
+      max2[2] = PCs->personagemAtivo->ocupaQuad->right->z2;
+      if(estaDentro(min,max,min2,max2,1) )
       {
-         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->right);
+         result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->right);
          if(!result)
          {
             //printf("sai na direita\n"); 
@@ -1129,32 +1244,37 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          }
       }
       /* Nordeste */
-      if( (PCs->personagemAtivo->ocupaQuad->right->up) &&
-          estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->right->up->x1,
-                 PCs->personagemAtivo->ocupaQuad->right->up->z1,
-                 PCs->personagemAtivo->ocupaQuad->right->up->x2,
-                 PCs->personagemAtivo->ocupaQuad->right->up->z2) )
+      if( (PCs->personagemAtivo->ocupaQuad->right->up))
       {
-         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->right->up);
-         if(!result) 
+         min2[0] = PCs->personagemAtivo->ocupaQuad->right->up->x1;
+         min2[2] = PCs->personagemAtivo->ocupaQuad->right->up->z1;
+         max2[0] = PCs->personagemAtivo->ocupaQuad->right->up->x2;
+         max2[2] = PCs->personagemAtivo->ocupaQuad->right->up->z2;
+         if(estaDentro(min,max,min2,max2,1) )
          {
-            //printf("sai na direita->cima\n"); 
-            return(0);
+            result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->right->up);
+            if(!result) 
+            {
+               //printf("sai na direita->cima\n"); 
+               return(0);
+            }
          }
-
       }
       /* Sudeste */
-      if( (PCs->personagemAtivo->ocupaQuad->right->down) &&
-           estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->right->down->x1,
-                 PCs->personagemAtivo->ocupaQuad->right->down->z1,
-                 PCs->personagemAtivo->ocupaQuad->right->down->x2,
-                 PCs->personagemAtivo->ocupaQuad->right->down->z2))
+      if( (PCs->personagemAtivo->ocupaQuad->right->down))
       {
-         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->right->down);
-         if(!result) 
+         min2[0] = PCs->personagemAtivo->ocupaQuad->right->down->x1;
+         min2[2] = PCs->personagemAtivo->ocupaQuad->right->down->z1;
+         max2[0] = PCs->personagemAtivo->ocupaQuad->right->down->x2;
+         max2[2] = PCs->personagemAtivo->ocupaQuad->right->down->z2;
+         if(estaDentro(min,max,min2,max2,1))
          {
-            //printf("sai na direita->baixo\n"); 
-            return(0);
+            result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->right->down);
+            if(!result) 
+            {
+               //printf("sai na direita->baixo\n"); 
+               return(0);
+            }
          }
       }
    }
@@ -1163,12 +1283,13 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    if((PCs->personagemAtivo->ocupaQuad->left)) 
    { 
       /* oeste */
-      if(estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->left->x1,
-                 PCs->personagemAtivo->ocupaQuad->left->z1,
-                 PCs->personagemAtivo->ocupaQuad->left->x2,
-                 PCs->personagemAtivo->ocupaQuad->left->z2))
+      min2[0] = PCs->personagemAtivo->ocupaQuad->left->x1;
+      min2[2] = PCs->personagemAtivo->ocupaQuad->left->z1;
+      max2[0] = PCs->personagemAtivo->ocupaQuad->left->x2;
+      max2[2] = PCs->personagemAtivo->ocupaQuad->left->z2;
+      if(estaDentro(min,max,min2,max2,1))
       {
-         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->left);
+         result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->left);
          if(!result) 
          {
             //printf("sai na esquerda\n"); 
@@ -1177,68 +1298,80 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
 
       /* Noroeste */
-      if( (PCs->personagemAtivo->ocupaQuad->left->up) &&
-          estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->left->up->x1,
-                 PCs->personagemAtivo->ocupaQuad->left->up->z1,
-                 PCs->personagemAtivo->ocupaQuad->left->up->x2,
-                 PCs->personagemAtivo->ocupaQuad->left->up->z2) )
+      if( (PCs->personagemAtivo->ocupaQuad->left->up))
       {
-         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->left->up);
-         if(!result) 
+         min2[0] = PCs->personagemAtivo->ocupaQuad->left->up->x1;
+         min2[2] = PCs->personagemAtivo->ocupaQuad->left->up->z1;
+         max2[0] = PCs->personagemAtivo->ocupaQuad->left->up->x2;
+         max2[2] = PCs->personagemAtivo->ocupaQuad->left->up->z2;
+         if(estaDentro(min,max,min2,max2,1) )
          {
-            //printf("sai na esquerda->cima\n"); 
-            return(0);
+            result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->left->up);
+            if(!result) 
+            {
+               //printf("sai na esquerda->cima\n"); 
+               return(0);
+            }
          }
       }
       /* Sudoeste */
-      if( (PCs->personagemAtivo->ocupaQuad->left->down) &&
-           estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->left->down->x1,
-                 PCs->personagemAtivo->ocupaQuad->left->down->z1,
-                 PCs->personagemAtivo->ocupaQuad->left->down->x2,
-                 PCs->personagemAtivo->ocupaQuad->left->down->z2))
-      {
-         result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->left->down);
-         if(!result) 
+      if( (PCs->personagemAtivo->ocupaQuad->left->down))
+      { 
+         min2[0] = PCs->personagemAtivo->ocupaQuad->left->down->x1;
+         min2[2] = PCs->personagemAtivo->ocupaQuad->left->down->z1;
+         max2[0] = PCs->personagemAtivo->ocupaQuad->left->down->x2;
+         max2[2] = PCs->personagemAtivo->ocupaQuad->left->down->z2;
+         if(estaDentro(min,max,min2,max2,1))
          {
-            //printf("sai na esquerda->baixo\n"); 
-            return(0);
+            result &=testa(min,max,PCs->personagemAtivo->ocupaQuad->left->down);
+            if(!result) 
+            {
+                //printf("sai na esquerda->baixo\n"); 
+               return(0);
+            }
          }
       }
    }
   
    /* Testa quadrados abaixo */
-   if((PCs->personagemAtivo->ocupaQuad->down) && 
-      estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->down->x1,
-                 PCs->personagemAtivo->ocupaQuad->down->z1,
-                 PCs->personagemAtivo->ocupaQuad->down->x2,
-                 PCs->personagemAtivo->ocupaQuad->down->z2) )
-   { 
-      /* sul */
-      result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->down);
-      if(!result) 
-      {
-         //printf("sai no de baixo\n"); 
-         return(0);
+   if((PCs->personagemAtivo->ocupaQuad->down)) 
+   {   
+      min2[0] = PCs->personagemAtivo->ocupaQuad->down->x1;
+      min2[2] = PCs->personagemAtivo->ocupaQuad->down->z1;
+      max2[0] = PCs->personagemAtivo->ocupaQuad->down->x2;
+      max2[2] = PCs->personagemAtivo->ocupaQuad->down->z2;
+      if(estaDentro(min,max,min2,max2,1) )
+      { 
+         /* sul */
+         result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->down);
+         if(!result) 
+         {
+            //printf("sai no de baixo\n"); 
+            return(0);
+         }
       }
    }
 
    /* Testa quadrados acima */
-   if((PCs->personagemAtivo->ocupaQuad->up) && 
-      estaDentro(x,z,PCs->personagemAtivo->ocupaQuad->up->x1,
-                 PCs->personagemAtivo->ocupaQuad->up->z1,
-                 PCs->personagemAtivo->ocupaQuad->up->x2,
-                 PCs->personagemAtivo->ocupaQuad->up->z2) )
-   { 
-      /* norte */
-      result &= testa(x,z,PCs->personagemAtivo->ocupaQuad->up);
-      if(!result) 
-      {
-         //printf("sai no de cima\n"); 
-         return(0);
+   if((PCs->personagemAtivo->ocupaQuad->up))
+   {  
+      min2[0] = PCs->personagemAtivo->ocupaQuad->up->x1;
+      min2[2] = PCs->personagemAtivo->ocupaQuad->up->z1;
+      max2[0] = PCs->personagemAtivo->ocupaQuad->up->x2;
+      max2[2] = PCs->personagemAtivo->ocupaQuad->up->z2;
+      if(estaDentro(min,max,min2,max2,1) )
+      { 
+         /* norte */
+         result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->up);
+         if(!result) 
+         {
+            //printf("sai no de cima\n"); 
+            return(0);
+         }
       }
    }
 
-   if( ColisaoComMeioFio( x, z, mapa->meiosFio) )
+   if( ColisaoComMeioFio( min, max, mapa->meiosFio) )
    {
       PCs->personagemAtivo->posicaoLadoY = MEIOFIOALTURA+0.1;
    }
@@ -1247,8 +1380,8 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       PCs->personagemAtivo->posicaoLadoY = 0.0;
    }
 
-   GLfloat nx = (PCs->personagemAtivo->posicaoLadoX+varX);
-   GLfloat nz = (PCs->personagemAtivo->posicaoLadoZ+varZ);
+   GLfloat nx = ((min[0] + max[0]) / 2);//(PCs->personagemAtivo->posicaoLadoX+varX);
+   GLfloat nz = ((min[2] + max[2]) / 2);//(PCs->personagemAtivo->posicaoLadoZ+varZ);
 
    int posX =(int)floor( nx / (SQUARESIZE))+1;
 
@@ -1269,12 +1402,14 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
                 (dx1 * PCs->personagemAtivo->ocupaQuad->h4);
    GLfloat hb = (dx2 * PCs->personagemAtivo->ocupaQuad->h2) + 
                 (dx1 * PCs->personagemAtivo->ocupaQuad->h3);
+
+   GLfloat res = (ha * dz2) + (hb * dz1);
  
-   PCs->personagemAtivo->posicaoLadoY += (ha * dz2) + (hb * dz1);
+   PCs->personagemAtivo->posicaoLadoY += res;
+   deltaY = res;
 
    
    return(result);
-#endif
 }
 
 

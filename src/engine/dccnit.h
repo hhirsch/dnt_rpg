@@ -33,6 +33,7 @@ class engine
       double theta, phi, d;            /* Rotacao pra cima, pro lado e zoom */
       double centroX,centroY,centroZ;  /* Posicao central da camera */
       double cameraX,cameraY,cameraZ;  /* Posicao da Camera */
+      double deltaY;                   /* DeltaY da camera */
       interface* gui;                  /* GUI utilizada na Engine */
 
       /* Inicia a estrutura da Engine para utilizacao

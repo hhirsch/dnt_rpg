@@ -48,6 +48,10 @@ class personagem: public Tobjeto
       float posicaoLadoX;       // posicao do personagem pro lado
       float posicaoLadoY;       // posicao vertical do personagem
       float posicaoLadoZ;       // posicao do personagem pro lado
+
+      GLfloat min[3];           // pontos de minimo do bounding box estatico
+      GLfloat max[3];           // pontos de maximo do bounding box estatico
+
    // Lhabilidade* habilidades; // habilidades personagem (ex:kamasutramaster)
       GLuint portrait;
 
@@ -61,6 +65,9 @@ class personagem: public Tobjeto
       GLuint loadTexture(const string& strFilename);
       void SetState(int state);
       void Render();
+      void CalculateBoundingBox();
+      void RenderBoundingBox();
+
 
 
 

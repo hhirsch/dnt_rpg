@@ -51,7 +51,6 @@ GLuint personagem::loadTexture(const string& strFilename)
    }
 
    
-   /* Transforma a textura em potencia de 2 */
    SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
@@ -73,6 +72,54 @@ GLuint personagem::loadTexture(const string& strFilename)
 
    return pId;
 } 
+
+
+void personagem::CalculateBoundingBox()
+{
+   /* Calcula Bounding box Estatico */
+  m_calModel->getSkeleton()->calculateBoundingBoxes();
+
+  uint aux, aux2;
+  int computed = 0;
+
+  CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
+
+  std::vector<CalBone*> &vectorCoreBone = pCalSkeleton->getVectorBone();
+  for(aux = 0; aux < vectorCoreBone.size(); aux++)
+  {
+     CalBoundingBox &calBoundingBox=vectorCoreBone[aux]->getBoundingBox();
+
+     CalVector p[8];
+     calBoundingBox.computePoints(p);
+     
+     for(aux2 = 0;aux2 < 8; aux2++)
+     {
+        if(!computed)
+        {
+           min[0] = p[aux2].x; max[0] = p[aux2].x; 
+           min[1] = p[aux2].y; max[1] = p[aux2].y;
+           min[2] = p[aux2].z; max[2] = p[aux2].z;
+           computed = 1;
+        }
+        else
+        {
+           if(p[aux2].x > max[0])
+             max[0] = p[aux2].x/2;
+           if(p[aux2].x < min[0])
+             min[0] = p[aux2].x/2;
+           if(p[aux2].y > max[1])
+             max[1] = p[aux2].y;
+           if(p[aux2].y < min[1])
+             min[1] = p[aux2].y;
+           if(p[aux2].z > max[2])
+             max[2] = p[aux2].z;
+           if(p[aux2].z < min[2])
+             min[2] = p[aux2].z;
+        }
+     }
+  }
+
+}
 
 /*********************************************************************
  *              Carrega o modelo Cal3d do personagem                 *
@@ -159,7 +206,7 @@ bool personagem::LoadModel(const string& strFilename)
     else if(strKey == "skeleton")
     {
       // load core skeleton
-      std::cout << "Loading skeleton '" << strData << "'..." << std::endl;
+      //std::cout << "Loading skeleton '" << strData << "'..." << std::endl;
       if(!m_calCoreModel->loadCoreSkeleton(strPath + strData))
       {
         CalError::printLastError();
@@ -169,7 +216,7 @@ bool personagem::LoadModel(const string& strFilename)
     else if(strKey == "animation")
     {
       // load core animation
-      std::cout << "Loading animation '" << strData << "'..." << std::endl;
+      //std::cout << "Loading animation '" << strData << animationCount <<"'..." << std::endl;
       m_animationId[animationCount] = m_calCoreModel->loadCoreAnimation(strPath + strData);
       if(m_animationId[animationCount] == -1)
       {
@@ -182,7 +229,7 @@ bool personagem::LoadModel(const string& strFilename)
     else if(strKey == "mesh")
     {
       // load core mesh
-      std::cout << "Loading mesh '" << strData << "'..." << std::endl;
+      //std::cout << "Loading mesh '" << strData << "'..." << std::endl;
       if(m_calCoreModel->loadCoreMesh(strPath + strData) == -1)
       {
         CalError::printLastError();
@@ -192,7 +239,7 @@ bool personagem::LoadModel(const string& strFilename)
     else if(strKey == "material")
     {
       // load core material
-      std::cout << "Loading material '" << strData << "'..." << std::endl;
+      //std::cout << "Loading material '" << strData << "'..." << std::endl;
       if(m_calCoreModel->loadCoreMaterial(strPath + strData) == -1)
       {
         CalError::printLastError();
@@ -201,7 +248,7 @@ bool personagem::LoadModel(const string& strFilename)
     }
     else
     {
-      std::cerr << strFilename << "(" << line << "): Invalid syntax." << std::endl;
+      std::cerr << strFilename << "(" << line << "): Invalid Syntax." << std::endl;
       return false;
     }
   }
@@ -235,7 +282,6 @@ bool personagem::LoadModel(const string& strFilename)
   }
 
   // make one material thread for each material
-  // NOTE: this is not the right way to do it, but this viewer can't do the right
   // mapping without further information on the model etc.
   for(materialId = 0; materialId < m_calCoreModel->getCoreMaterialCount(); materialId++)
   {
@@ -266,15 +312,82 @@ bool personagem::LoadModel(const string& strFilename)
   m_state = -1;
   SetState(STATE_IDLE);
 
+  m_calModel->update(10);
+
    /* End of CAL3D LOAD */
    return(true);
 }
+
+
+void personagem::RenderBoundingBox()
+{  
+
+   CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
+
+   std::vector<CalBone*> &vectorCoreBone = pCalSkeleton->getVectorBone();
+
+   glColor3f(1.0f, 1.0f, 0.5f);
+   glBegin(GL_LINES);      
+
+   for(size_t boneId=0;boneId<vectorCoreBone.size();++boneId)
+   {
+      CalBoundingBox & calBoundingBox  = vectorCoreBone[boneId]->getBoundingBox();
+
+	  CalVector p[8];
+	  calBoundingBox.computePoints(p);
+
+	  
+	  glVertex3f(p[0].x,p[0].y,p[0].z);
+	  glVertex3f(p[1].x,p[1].y,p[1].z);
+
+	  glVertex3f(p[0].x,p[0].y,p[0].z);
+	  glVertex3f(p[2].x,p[2].y,p[2].z);
+
+	  glVertex3f(p[1].x,p[1].y,p[1].z);
+	  glVertex3f(p[3].x,p[3].y,p[3].z);
+
+	  glVertex3f(p[2].x,p[2].y,p[2].z);
+	  glVertex3f(p[3].x,p[3].y,p[3].z);
+
+  	  glVertex3f(p[4].x,p[4].y,p[4].z);
+	  glVertex3f(p[5].x,p[5].y,p[5].z);
+
+	  glVertex3f(p[4].x,p[4].y,p[4].z);
+	  glVertex3f(p[6].x,p[6].y,p[6].z);
+
+	  glVertex3f(p[5].x,p[5].y,p[5].z);
+	  glVertex3f(p[7].x,p[7].y,p[7].z);
+
+	  glVertex3f(p[6].x,p[6].y,p[6].z);
+	  glVertex3f(p[7].x,p[7].y,p[7].z);
+
+	  glVertex3f(p[0].x,p[0].y,p[0].z);
+	  glVertex3f(p[4].x,p[4].y,p[4].z);
+
+	  glVertex3f(p[1].x,p[1].y,p[1].z);
+	  glVertex3f(p[5].x,p[5].y,p[5].z);
+
+	  glVertex3f(p[2].x,p[2].y,p[2].z);
+	  glVertex3f(p[6].x,p[6].y,p[6].z);
+
+	  glVertex3f(p[3].x,p[3].y,p[3].z);
+	  glVertex3f(p[7].x,p[7].y,p[7].z);  
+
+   }
+
+   glEnd();
+
+}
+
+
 
 /*********************************************************************
  *                       Renderiza Personagem                        *
  *********************************************************************/
 void personagem::Render()
 {
+
+  m_calModel->getSkeleton()->calculateBoundingBoxes();
   // get the renderer of the model
   CalRenderer *pCalRenderer;
   pCalRenderer = m_calModel->getRenderer();
@@ -327,7 +440,7 @@ void personagem::Render()
 
         // set the material shininess factor
         float shininess;
-        shininess = 50.0f; //TODO: pCalRenderer->getShininess();
+        shininess = /*50.0f;*/ pCalRenderer->getShininess();
         glMaterialfv(GL_FRONT, GL_SHININESS, &shininess);
 
         // get the transformed vertices of the submesh
@@ -396,6 +509,7 @@ void personagem::Render()
 
   pCalRenderer->endRendering();
 
+
 }
 
 /*********************************************************************
@@ -407,20 +521,21 @@ void personagem::SetState(int state)
    {
        if(state == STATE_IDLE)
        {
-           m_calModel->getMixer()->clearCycle(m_animationId[STATE_WALK],0.02);
+           m_calModel->getMixer()->clearCycle(m_animationId[STATE_WALK],0.1f);
            m_calModel->getMixer()->blendCycle(m_animationId[STATE_IDLE],
-                                             1.0f,0.0);
+                                             1.0f,0.1f);
          
           m_state = STATE_IDLE;
        }
        else if(state == STATE_WALK)
        {
-          m_calModel->getMixer()->clearCycle(m_animationId[STATE_IDLE],0.02);
+          m_calModel->getMixer()->clearCycle(m_animationId[STATE_IDLE],0.1f);
           m_calModel->getMixer()->blendCycle(m_animationId[STATE_WALK],
-                                             1.0f,0.0);
+                                             1.0f,0.1f);
           m_state = STATE_WALK;
 
        }
+//       m_calModel->update(1);
 //TODO add others states to model
    }
 }
@@ -477,50 +592,14 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-#if 0
-   /* Abre o modelo3d */
-   novo-> modelo3d = glmReadOBJ(arqmodelo,dirTexturas,1); 
-   /* Define os grupos */
-     novo->pe_d = _glmFindGroup(novo->modelo3d, "pe_d");
-     novo->pe_e = _glmFindGroup(novo->modelo3d, "pe_e");
-     novo->perna_d = _glmFindGroup(novo->modelo3d, "perna_d");
-     novo->perna_e = _glmFindGroup(novo->modelo3d, "perna_e");
-     novo->coxa_d = _glmFindGroup(novo->modelo3d, "coxa_d");
-     novo->coxa_e = _glmFindGroup(novo->modelo3d, "coxa_e");
-     novo->bacia_d = _glmFindGroup(novo->modelo3d, "bacia_d");
-     novo->bacia_e = _glmFindGroup(novo->modelo3d, "bacia_e");
-     novo->tronco = _glmFindGroup(novo->modelo3d, "tronco");
-     novo->ante_d = _glmFindGroup(novo->modelo3d, "ante_d");
-     novo->ante_e = _glmFindGroup(novo->modelo3d, "ante_e");
-     novo->braco_d = _glmFindGroup(novo->modelo3d, "braco_d");
-     novo->braco_e = _glmFindGroup(novo->modelo3d, "braco_e");
-     novo->mao_d = _glmFindGroup(novo->modelo3d, "mao_d");
-     novo->mao_e = _glmFindGroup(novo->modelo3d, "mao_e");
-     novo->cabeca = _glmFindGroup(novo->modelo3d, "cabeca");
-#endif
-
-   /*string arquivo;
-
-   //Initialize model
-   novo->coreModel = new CalCoreModel(nome);
-   arquivo = arqmodelo + "modelo.xsf";
-   //Next, Load model's armature
-   if(!novo->coreModel->loadCoreSkeleton(arquivo))
-   {
-     printf("Can't Load Armature for Character: ");
-     cout << arquivo << endl;
-   }
-   //Next, load model's meshes*/
 
    novo->LoadModel(arqmodelo);
-      
+
    novo->tipo = PERSONAGEM;
+
    InserirObj(novo);
    personagemAtivo = novo;
-   /*novo->personagemDesenhar = glGenLists(1);
-   glNewList(novo->personagemDesenhar,GL_COMPILE);
-     glmDraw(novo->modelo3d, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
-   glEndList();*/
+
    return(novo);
 } 
 
@@ -529,9 +608,7 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,
  *********************************************************************/
 void Lpersonagem::RetirarPersonagem(personagem* persona, int tiraMemoria)
 {
-   //glDeleteLists(persona->personagemDesenhar,1);
    glDeleteTextures(1,&persona->portrait);
-   //glmDelete(persona->modelo3d);
    delete(persona->m_calCoreModel);
    delete(persona->m_calModel);
    delete(persona->retrato);
