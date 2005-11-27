@@ -17,10 +17,14 @@
                           * por ANDAR / 20, em unidades/milisegundo 
                           */
  
-#define GIRAR 2.5        // O quanto ele gira a cada frame
-#define DELTACAMERA 2.5  // O quanto a camera meche a cada frame
-#define ZOOMMAXIMO 80    // Valor máximo de zoom
-#define ZOOMMINIMO 280   // Valor mínimo do zoom
+#define GIRAR         2.5        // O quanto ele gira a cada frame
+#define DELTACAMERA   2.5  // O quanto a camera meche a cada frame
+#define ZOOMMAXIMO   80    // Valor máximo de zoom
+#define ZOOMMINIMO  280   // Valor mínimo do zoom
+
+#define FARVIEW       (SQUARESIZE * 25)
+#define HALFFARVIEW   (FARVIEW / 2)
+
 
 #define CORNEBLINA_R 1.0
 #define CORNEBLINA_G 1.0
@@ -65,8 +69,8 @@ engine::engine()
 engine::~engine()
 {
    //glDeleteLists(mapaDesenhar,1);
-   //gluDeleteQuadric(atmosfera);
-   //glDeleteTextures(1, &ceu);
+   gluDeleteQuadric(atmosfera);
+   glDeleteTextures(1, &ceu);
    if(NPCs)
       delete(NPCs);
    if(PCs)
@@ -271,9 +275,11 @@ void engine::Redmensiona(SDL_Surface *screen)
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, (GLsizei) screen->w / (GLsizei) screen->h, 1.0, 1650.0);
+   gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, FARVIEW);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
+
+   printf("FARVIEW: %d  HALFFARVIEW: %d\n",FARVIEW,HALFFARVIEW);
 }
 
 
@@ -320,6 +326,34 @@ void engine::Iniciar(SDL_Surface *screen)
      glFogf(GL_FOG_START,500.0);
      glFogf(GL_FOG_END,1600.0);
    }
+
+   atmosfera = gluNewQuadric ();
+   //gluQuadricTexture(atmosfera, GL_TRUE);
+   gluQuadricTexture(atmosfera, GL_FALSE);
+
+   SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
+   SDL_Surface* fg = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                      img->w,img->h,32,
+                      0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   SDL_BlitSurface(img,NULL,fg,NULL);
+   SDL_FreeSurface(img);
+
+   glGenTextures(1, &ceu);
+   glBindTexture(GL_TEXTURE_2D, ceu);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fg->w, fg->h, 
+                0, GL_RGBA, GL_UNSIGNED_BYTE, fg->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   /*glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                  GL_NEAREST);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                  GL_NEAREST);*/
+  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+
+   SDL_FreeSurface(fg);
+
 }
 
 int pontoInterno(double x1,double z1, double x2, double z2, double X, double Z)
@@ -703,6 +737,12 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          printf("PosicaoLadoZ %f\n",PCs->personagemAtivo->posicaoLadoZ);
       }
 
+      if(keys[SDLK_f])
+      {
+         redesenha = true;
+         d = ZOOMMAXIMO+FARVIEW;
+      }
+
       /* Tratamento do Mouse */
 
       /* Tratamento do Mouse para Camera */
@@ -743,14 +783,13 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    return(1);
 }
 
-
 /*********************************************************************
  *                Funcao para desenhar a cena                        *
  *********************************************************************/
 void engine::Desenhar()
 {
-   glClearColor(CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,0.0);
-   glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+   //glClearColor(CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,0.0);
+   glClear (/*(GL_COLOR_BUFFER_BIT |*/ GL_DEPTH_BUFFER_BIT);
 
    glLoadIdentity();
 
@@ -762,6 +801,30 @@ void engine::Desenhar()
  
    /* Atualiza para fazer o culling e o desenho da GUI */
    AtualizaFrustum(matrizVisivel,proj,modl);
+
+   /* CEU */
+     glDisable(GL_DEPTH_TEST);
+     glDisable(GL_LIGHTING);
+
+   
+   glPushMatrix();
+      glEnable(GL_TEXTURE_2D);
+      glBindTexture(GL_TEXTURE_2D, ceu);
+      //
+      //glTranslatef(PCs->personagemAtivo->posicaoLadoX,
+      //             0,PCs->personagemAtivo->posicaoLadoZ);
+      //glTranslatef(cameraX,0.0,cameraZ);
+      glTranslatef(mapa->x*HALFSQUARESIZE, 0 , mapa->z*HALFSQUARESIZE);
+      //glRotatef(90,1,1,0);
+      gluSphere(atmosfera,HALFFARVIEW,5,5);
+      //glRotatef(90,0,0,1);
+      //gluCylinder(atmosfera,HALFFARVIEW, 20, HALFFARVIEW, 5, 5);
+      glDisable(GL_TEXTURE_2D);
+   glPopMatrix();
+
+   glEnable(GL_DEPTH_TEST);
+   glEnable(GL_LIGHTING);
+
 
    //glClear ((GL_COLOR_BUFFER_BIT));
    //glClear (GL_DEPTH_BUFFER_BIT);
@@ -866,26 +929,7 @@ void engine::Desenhar()
    gui->Desenhar(proj,modl,viewPort);
   
    glEnable(GL_LIGHTING);
-
-   glPushMatrix();
-      //glEnable(GL_TEXTURE_2D);
-      //glBindTexture(GL_TEXTURE_2D, ceu);
-      //
-      //glTranslatef(PCs->personagemAtivo->posicaoLadoX,
-      //             0,PCs->personagemAtivo->posicaoLadoZ);
-      //glTranslatef(cameraX,0.0,cameraZ);
-      //glTranslatef(mapa->x*SQUARESIZE / 2.0, 0 , mapa->z*SQUARESIZE);
-      //glRotatef(90,1,1,0);
-      //gluSphere(atmosfera,699,5,5);
-      //glRotatef(90,0,0,1);
-      //gluCylinder(atmosfera,(double)(mapa->x*SQUARESIZE) / 2.0,
-      //            (double)(mapa->x*SQUARESIZE) / 2.0,
-      //            100,30,30);
-      //glDisable(GL_TEXTURE_2D);
-   glPopMatrix();
-
-   
-
+ 
    glFlush();
 }
 

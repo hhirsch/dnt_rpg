@@ -2,21 +2,22 @@
 ================================================
 |               Version 0.0.2                  |
 ================================================
+ - Support to Cal3D format for character models,
+ - Some animations added.
  - Gui is now avaible on graphical engine;
  - Colision detection more permissive;
  - Makefile to compile on window$ (Dev-C++);
  - MiniMap implementated;
- - Limited frames per second;
  - Constant character & camera velocity;
  - Initial menu;
  - Loading screen;
  - Functional and VERY ugly map editor;
- - Some new objects;
+ - Some new objects and characters;
  - Map to map navigation;
  - New test maps;
  - Objects orientation possible;
  - Better Floor & Walls Representation;
- - Variable floor height;
+ - Variable terrain height;
  - Object pass throught added;
  - Interactive Doors Added;
  -
