@@ -279,7 +279,6 @@ void engine::Redmensiona(SDL_Surface *screen)
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
 
-   printf("FARVIEW: %d  HALFFARVIEW: %d\n",FARVIEW,HALFFARVIEW);
 }
 
 
@@ -356,7 +355,8 @@ void engine::Iniciar(SDL_Surface *screen)
 
 }
 
-int pontoInterno(double x1,double z1, double x2, double z2, double X, double Z)
+/*int pontoInterno(double x1,double z1, double x2, double z2, 
+                 double X, double Z, double X2, double Z2, bool inverso)
 {
    double aux;
    if(x1 > x2)
@@ -371,8 +371,115 @@ int pontoInterno(double x1,double z1, double x2, double z2, double X, double Z)
       z1 = z2;
       z2 = z1;
    }
-   return( ((X>=x1) && (X<=x2)) && ((Z>=z1) && (Z<=z2)) );
+   if( ( ((X>=x1) && (X<=x2)) && ((Z>=z1) && (Z<=z2))  ) ||
+       ( ((X2>=x1) && (X2<=x2)) && ((Z>=z1) && (Z<=z2))) ||
+       ( ((X>=x1) && (X<=x2)) && ((Z2>=z1) && (Z2<=z2))) ||
+       ( ((X2>=x1) && (X2<=x2)) && ((Z2>=z1) && (Z2<=z2))  ) )  
+   {
+      return(1);
+   }
+   else if(inverso)
+   {
+      return(pontoInterno(X,Z,X2,Z2,x1,z1,x2,z2,false));
+   }
+   return(0);
+}*/
+
+/*********************************************************************
+ *        Verifica se ha intersecao entre dois bounding boxes        *
+ *********************************************************************/
+int estaDentro(GLfloat min1[3], GLfloat max1[3],
+               GLfloat min2[3], GLfloat max2[3],
+               int inverso)
+{
+   //testa o mínimo X do 2
+   if( (min1[0] < min2[0]) && (max1[0] > min2[0]  ) )
+   {
+      //testa minimo Y
+      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
+      //{
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      //}
+      //testa maximo Y
+      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
+      {
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      }*/
+   }
+   
+   //testa com o máximo X do 2
+   if( (min1[0] < max2[0]) && (max1[0] > max2[0]) )
+   {
+      //testa minimo Y
+      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
+      //{
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      //}
+      //testa maximo Y
+      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
+      {
+         testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      }*/
+   }
+
+   //testa casos de cruz + 
+   if( (min2[0] < min1[0]) && (max2[0] > max1[0]) &&
+       (min2[2] > min1[2]) && (min2[2] < max1[2]))
+   {
+      return(1);
+   }
+   if( (min2[2] < min1[2]) && (max2[2] > max1[2]) &&
+       (min2[0] > min1[0]) && (min2[0] < max1[0]))
+   {
+      return(1);
+   }
+
+   if(inverso)
+   {
+      return( estaDentro(min2, max2, min1, max1, 0));
+   }
+   else 
+   {
+      return(0);
+   }
 }
+
 
 /*********************************************************************
  *                      Tratamento do Teclado                        *
@@ -460,28 +567,68 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             
          glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
          gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal); 
+
        
          int qx, qz;
          qx = (int)xReal / SQUARESIZE;
          qz = (int)zReal / SQUARESIZE;
-         Square* quaux = mapa->quadradoRelativo(qx,qz);
-         printf("Bingo %d %d %f %f %d %d %p\n",qx,qz,xReal,zReal,x,y,quaux);
+         Square* quaux = mapa->quadradoRelativo(qx+1,qz+1);
        if(quaux != NULL)
        {
          int pronto;
          int obj = 0;
+         GLfloat minObj[3], maxObj[3];
+         GLfloat minMouse[3], maxMouse[3];
+         minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
+         minMouse[1] = 0.0;      maxMouse[1] = 0.0;
+         minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
          for(pronto = 0; ( (obj<MAXOBJETOS) && (!pronto) );obj++)
          {
-            printf("pronto: %d obj: %d\n",pronto,obj);
             if(quaux->objetos[obj])
             {
-               printf("obj: %d\n",obj);
                GLMmodel* modelo3d = (GLMmodel*) quaux->objetos[obj]->modelo3d;
-               if(pontoInterno(quaux->Xobjetos[obj]+modelo3d->x1,
-                               quaux->Xobjetos[obj]+modelo3d->z1,
-                               quaux->Xobjetos[obj]+modelo3d->x2,
-                               quaux->Xobjetos[obj]+modelo3d->z2,
-                               xReal,zReal))
+
+               /* Rotaciona o bounding para a posicao correrta */
+               if(quaux->orientacaoObjetos[obj] != 0)
+               {
+                  GLfloat cosseno=cos(deg2Rad(quaux->orientacaoObjetos[obj]));
+                  GLfloat seno = sin(deg2Rad(quaux->orientacaoObjetos[obj]));
+                  
+                  minObj[0] = (modelo3d->z1*seno) + (modelo3d->x1*cosseno);
+                  minObj[2] = (modelo3d->z1*cosseno) - (modelo3d->x1*seno);
+                  maxObj[0] = (modelo3d->z2*seno) + (modelo3d->x2*cosseno);
+                  maxObj[2] = (modelo3d->z2*cosseno) - (modelo3d->x2*seno);
+               }
+               minObj[0] += (quaux->Xobjetos[obj]);
+               minObj[1] = 0.0;
+               minObj[2] += (quaux->Zobjetos[obj]);
+               maxObj[0] += (quaux->Xobjetos[obj]);
+               maxObj[1] = 0.0;
+               maxObj[2] += (quaux->Zobjetos[obj]);
+
+
+               if(minObj[0] > maxObj[0])
+               {
+                  GLfloat swp = minObj[0];
+                  minObj[0] = maxObj[0];
+                  maxObj[0] = swp; 
+               }
+               if(minObj[2] > maxObj[2])
+               {
+                  GLfloat swp = minObj[2];
+                  minObj[2] = maxObj[2];
+                  maxObj[2] = swp; 
+               }
+
+               /*printf("OBJ: %.3f %.3f %.3f %.3f\n",minObj[0],minObj[2],maxObj[0],maxObj[2]);
+               printf("MSE:  %.3f %.3f %.3f %.3f\n",minMouse[0],minMouse[2],maxMouse[0],maxMouse[2]);*/
+
+               if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
+               /*if(pontoInterno((quaux->Xobjetos[obj]+modelo3d->x1),
+                               (quaux->Zobjetos[obj]+modelo3d->z1),
+                               (quaux->Xobjetos[obj]+modelo3d->x2),
+                               (quaux->Zobjetos[obj]+modelo3d->z2),
+                               xReal-2,zReal-2, xReal+2, zReal+2, true))*/
                {
                    sprintf(ObjTxt->texto,"%s",quaux->objetos[obj]->nome); 
                    janAtalhos->Desenhar();
@@ -489,14 +636,17 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                }
             }
          }
-         printf("Saiu\n");
+         if(!pronto)
+         {
+            sprintf(ObjTxt->texto,"Nothing"); 
+            janAtalhos->Desenhar();
+         }
          if(obj == MAXOBJETOS)
          {
             //sprintf(ObjTxt->texto,"Nothing"); 
             janAtalhos->Desenhar();
          }      
         }
-        printf("Yeba\n");
       }
       if(Mbotao & SDL_BUTTON(1)) 
       {
@@ -803,10 +953,9 @@ void engine::Desenhar()
    AtualizaFrustum(matrizVisivel,proj,modl);
 
    /* CEU */
-     glDisable(GL_DEPTH_TEST);
-     glDisable(GL_LIGHTING);
+   glDisable(GL_DEPTH_TEST);
+   glDisable(GL_LIGHTING);
 
-   
    glPushMatrix();
       glEnable(GL_TEXTURE_2D);
       glBindTexture(GL_TEXTURE_2D, ceu);
@@ -824,6 +973,18 @@ void engine::Desenhar()
 
    glEnable(GL_DEPTH_TEST);
    glEnable(GL_LIGHTING);
+
+     /* DEBUG */
+  glPushMatrix();
+    glColor3f(0.5,0.8,0.1);
+    glBegin(GL_POLYGON);
+      glVertex3f(xReal-2, 0.2, zReal-2);
+      glVertex3f(xReal-2, 0.2, zReal+2);
+      glVertex3f(xReal+2, 0.2, zReal+2);
+      glVertex3f(xReal+2, 0.2, zReal-2);
+    glEnd();
+  glPopMatrix();
+
 
 
    //glClear ((GL_COLOR_BUFFER_BIT));
@@ -940,100 +1101,6 @@ void engine::Desenhar()
 
 //min[x,y,z] max[x,y,z]
 
-/*********************************************************************
- *        Verifica se ha intersecao entre dois bounding boxes        *
- *********************************************************************/
-int estaDentro(GLfloat min1[3], GLfloat max1[3],
-               GLfloat min2[3], GLfloat max2[3],
-               int inverso)
-{
-   //testa o mínimo X do 2
-   if( (min1[0] < min2[0]) && (max1[0] > min2[0]  ) )
-   {
-      //testa minimo Y
-      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
-      //{
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      //}
-      //testa maximo Y
-      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
-      {
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      }*/
-   }
-   
-   //testa com o máximo X do 2
-   if( (min1[0] < max2[0]) && (max1[0] > max2[0]) )
-   {
-      //testa minimo Y
-      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
-      //{
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      //}
-      //testa maximo Y
-      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
-      {
-         testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      }*/
-   }
-
-   //testa casos de cruz + 
-   if( (min2[0] < min1[0]) && (max2[0] > max1[0]) &&
-       (min2[2] > min1[2]) && (min2[2] < max1[2]))
-   {
-      return(1);
-   }
-   if( (min2[2] < min1[2]) && (max2[2] > max1[2]) &&
-       (min2[0] > min1[0]) && (min2[0] < max1[0]))
-   {
-      return(1);
-   }
-
-   if(inverso)
-   {
-      return( estaDentro(min2, max2, min1, max1, 0));
-   }
-   else 
-   {
-      return(0);
-   }
-}
 
 /*********************************************************************
  *      Retorna o Quadrado do mapa Relativo à posicao posX,posZ      *
