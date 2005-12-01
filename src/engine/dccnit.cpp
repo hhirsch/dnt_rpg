@@ -10,25 +10,28 @@
 #include "../etc/glm.h"
 
 
-#define DELAY 0
+#define DELAY           0
 
-#define ANDAR 0.75        /* O quanto o personagem anda a cada frame
-                          * A Velocidade do Caracter pode ser calculada
-                          * por ANDAR / 20, em unidades/milisegundo 
-                          */
+#define ANDAR           0.75     /* O quanto o personagem anda a cada frame
+                                  * A Velocidade do Caracter pode ser calculada
+                                  * por ANDAR / 20, em unidades/milisegundo 
+                                  */
  
-#define GIRAR         2.5        // O quanto ele gira a cada frame
-#define DELTACAMERA   2.5  // O quanto a camera meche a cada frame
-#define ZOOMMAXIMO   80    // Valor máximo de zoom
-#define ZOOMMINIMO  280   // Valor mínimo do zoom
+#define GIRAR           2.5     // O quanto ele gira a cada frame
+#define DELTACAMERA     2.5     // O quanto a camera meche a cada frame
+#define ZOOMMAXIMO      80      // Valor máximo de zoom
+#define ZOOMMINIMO      280     // Valor mínimo do zoom
 
-#define FARVIEW       (SQUARESIZE * 25)
-#define HALFFARVIEW   (FARVIEW / 2)
+#define SCREEN_X        800     // Largura da tela
+#define SCREEN_Y        600     // Altura da tela
+
+#define FARVIEW       (SQUARESIZE * 25)  // FARVIEW da camera 
+#define HALFFARVIEW   (FARVIEW / 2)      // Metade do Farview
 
 
-#define CORNEBLINA_R 1.0
-#define CORNEBLINA_G 1.0
-#define CORNEBLINA_B 1.0
+#define CORNEBLINA_R    1.0      // Componente vermelha da neblina
+#define CORNEBLINA_G    1.0      // Componente verde da neblina
+#define CORNEBLINA_B    1.0      // Componente azul da neblina
 
 /* Conversor de graus para radianos */
 inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
@@ -202,7 +205,9 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
 
 }
 
-
+/*********************************************************************
+ *                       Menu Inicial do Jogo                        *
+ *********************************************************************/
 int engine::TelaInicial()
 {
    glClearColor(0,0,0,1);
@@ -354,36 +359,6 @@ void engine::Iniciar(SDL_Surface *screen)
    SDL_FreeSurface(fg);
 
 }
-
-/*int pontoInterno(double x1,double z1, double x2, double z2, 
-                 double X, double Z, double X2, double Z2, bool inverso)
-{
-   double aux;
-   if(x1 > x2)
-   {
-      aux = x1; 
-      x1 = x2;
-      x2 = x1;
-   }
-   if(z1 > z2)
-   {
-      aux = z1; 
-      z1 = z2;
-      z2 = z1;
-   }
-   if( ( ((X>=x1) && (X<=x2)) && ((Z>=z1) && (Z<=z2))  ) ||
-       ( ((X2>=x1) && (X2<=x2)) && ((Z>=z1) && (Z<=z2))) ||
-       ( ((X>=x1) && (X<=x2)) && ((Z2>=z1) && (Z2<=z2))) ||
-       ( ((X2>=x1) && (X2<=x2)) && ((Z2>=z1) && (Z2<=z2))  ) )  
-   {
-      return(1);
-   }
-   else if(inverso)
-   {
-      return(pontoInterno(X,Z,X2,Z2,x1,z1,x2,z2,false));
-   }
-   return(0);
-}*/
 
 /*********************************************************************
  *        Verifica se ha intersecao entre dois bounding boxes        *
@@ -563,7 +538,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
          mouseX = x;
          mouseY = y;
-         wx = mouseX; wy = 600-mouseY; 
+         wx = mouseX; wy = SCREEN_Y - mouseY; 
             
          glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
          gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal); 
@@ -641,11 +616,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             sprintf(ObjTxt->texto,"Nothing"); 
             janAtalhos->Desenhar();
          }
-         if(obj == MAXOBJETOS)
-         {
-            //sprintf(ObjTxt->texto,"Nothing"); 
-            janAtalhos->Desenhar();
-         }      
         }
       }
       if(Mbotao & SDL_BUTTON(1)) 
@@ -938,8 +908,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
  *********************************************************************/
 void engine::Desenhar()
 {
-   //glClearColor(CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,0.0);
-   glClear (/*(GL_COLOR_BUFFER_BIT |*/ GL_DEPTH_BUFFER_BIT);
+   glClear (GL_DEPTH_BUFFER_BIT);
 
    glLoadIdentity();
 
@@ -959,15 +928,8 @@ void engine::Desenhar()
    glPushMatrix();
       glEnable(GL_TEXTURE_2D);
       glBindTexture(GL_TEXTURE_2D, ceu);
-      //
-      //glTranslatef(PCs->personagemAtivo->posicaoLadoX,
-      //             0,PCs->personagemAtivo->posicaoLadoZ);
-      //glTranslatef(cameraX,0.0,cameraZ);
       glTranslatef(mapa->x*HALFSQUARESIZE, 0 , mapa->z*HALFSQUARESIZE);
-      //glRotatef(90,1,1,0);
       gluSphere(atmosfera,HALFFARVIEW,5,5);
-      //glRotatef(90,0,0,1);
-      //gluCylinder(atmosfera,HALFFARVIEW, 20, HALFFARVIEW, 5, 5);
       glDisable(GL_TEXTURE_2D);
    glPopMatrix();
 
@@ -985,11 +947,6 @@ void engine::Desenhar()
     glEnd();
   glPopMatrix();
 
-
-
-   //glClear ((GL_COLOR_BUFFER_BIT));
-   //glClear (GL_DEPTH_BUFFER_BIT);
-   
    glPushMatrix();
    
    /* Rotacoes no Mundo de Teste apenas, sumirao com o tempo */
@@ -1002,7 +959,7 @@ void engine::Desenhar()
    /* Desenha o Mundo, fazendo culling do view frustum */
    mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
 
-   /* Desnha os Personagens do Jogador (PCs) */
+   /* Desenha os Personagens do Jogador (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
       for(aux=0;aux < PCs->total;aux++)
@@ -1012,7 +969,6 @@ void engine::Desenhar()
                         per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            per->Render();
-           per->RenderBoundingBox();
            glDisable(GL_LIGHTING);
            glColor3f(0.6,0.1,0.1);
            glBegin(GL_POLYGON);
@@ -1021,20 +977,6 @@ void engine::Desenhar()
               glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
 
-              /*glVertex3f(per->min[0],per->min[1],per->min[2]);
-              glVertex3f(per->min[0],per->min[1],per->max[2]);
-              glVertex3f(per->min[0],per->max[1],per->max[2]);
-              glVertex3f(per->min[0],per->max[1],per->min[2]);
-
-              glVertex3f(per->max[0],per->min[1],per->min[2]);
-              glVertex3f(per->max[0],per->min[1],per->max[2]);
-              glVertex3f(per->max[0],per->max[1],per->max[2]);
-              glVertex3f(per->max[0],per->max[1],per->min[2]);
-
-              glVertex3f(per->min[0],per->max[1],per->min[2]);
-              glVertex3f(per->min[0],per->max[1],per->max[2]);
-              glVertex3f(per->max[0],per->max[1],per->max[2]);
-              glVertex3f(per->max[0],per->max[1],per->min[2]);*/
            glEnd();
            glEnable(GL_LIGHTING);
          glPopMatrix();
@@ -1054,19 +996,17 @@ void engine::Desenhar()
          glPushMatrix();
            glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
-           //glmDrawLists(per->modelo3d);
            per->Render();
-           per->RenderBoundingBox();
          glPopMatrix();
          per = (personagem*) per->proximo;
       }
 
    /* Faz o Desenho da GUI */
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
-   gluUnProject( 800, 600, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject( 800, 600-80,0.01, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject( 800-60, 600-80, 0.01, modl, proj, viewPort, &x3, &y3, &z3);
-   gluUnProject( 800-60, 600, 0.01, modl, proj, viewPort, &x4, &y4, &z4);
+   gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject(SCREEN_X,SCREEN_Y-80,0.01, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(SCREEN_X-60,SCREEN_Y-80,0.01,modl,proj,viewPort, &x3, &y3, &z3);
+   gluUnProject(SCREEN_X-60,SCREEN_Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
 
    glDisable(GL_LIGHTING);
 
@@ -1611,6 +1551,9 @@ int engine::TrataIA()
     return( (antX!=per->posicaoLadoX) || (antZ!=per->posicaoLadoZ));
 }
 
+/*********************************************************************
+ *                       Carrega Janela de MiniMapa                  *
+ *********************************************************************/
 void engine::abreMiniMapa()
 {
    janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,"Map",1,1,NULL,NULL);
@@ -1620,26 +1563,25 @@ void engine::abreMiniMapa()
    janMiniMapa->Abrir(gui->ljan);
 }
 
-
+/*********************************************************************
+ *                       Carrega Janela de Atalhos                   *
+ *********************************************************************/
 void engine::abreAtalhos()
 {
    janAtalhos = gui->ljan->InserirJanela(0,472,511,599,"ShortCuts",1,1,NULL,NULL);
    FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
    ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,100,71,0,"Nothing");
-   //ObjTxt->texto = (char*)malloc(80*sizeof(char));
-   //sprintf("ObjTxt->texto = ");
-   //FPS->texto = (char*)malloc(50*sizeof(char));
-   //sprintf(FPS->texto,"FPS:");
    janAtalhos->ptrExterno = &janAtalhos;
    janAtalhos->Abrir(gui->ljan);
 }
+
 /*********************************************************************
  *                          Roda a Engine                            *
  *********************************************************************/
 int engine::Rodar(SDL_Surface *surface)
 {
 
-   int forcaAtualizacao = 1; //forca a atualizacao da tela, qdo o npc anda
+   int forcaAtualizacao = 0; //forca a atualizacao da tela, qdo o npc anda
    int posX, posZ;           //Posicao Auxiliar
    FPSatual = 10.0;
    ultimaFPS = 0;
