@@ -147,15 +147,6 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    mapa = new(Map);
    mapa->open(arqMapa);
 
-   
-   if(janMiniMapa)
-     janMiniMapa->Fechar(gui->ljan);
-   if(janAtalhos)
-     janAtalhos->Fechar(gui->ljan);
-   abreMiniMapa();
-   abreAtalhos();
-
-
    glDeleteTextures(1,&texturaTexto);
    cor_Definir(0,0,0);
    retangulo_Colorir(img,0,0,255,31,0);
@@ -199,6 +190,13 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        per->posicaoLadoZ = 100;*/
 
    }
+
+   if(janMiniMapa)
+     janMiniMapa->Fechar(gui->ljan);
+   if(janAtalhos)
+     janAtalhos->Fechar(gui->ljan);
+   abreMiniMapa();
+   abreAtalhos();
 
    glEnable(GL_LIGHTING);
    return(1);
@@ -643,33 +641,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           }
       }
       /* Tratamento das teclas para a Camera */
-#ifdef ROTACOES
-      if(keys[SDLK_x]) 
-      {
-         RotacaoX+=5;
-         if (RotacaoX >= 360) RotacaoX = 0;
-         redesenha = true;
-      }
-      if(keys[SDLK_y])
-      {
-         RotacaoY+=5;
-         if (RotacaoY >= 360) RotacaoY = 0;
-         redesenha = true;
-      }
-      if(keys[SDLK_z])
-      {
-         RotacaoZ+=5;
-         if (RotacaoZ >= 360) RotacaoZ = 0;
-         redesenha = true;
-      }
-      if(keys[SDLK_r])  
-      { 
-         RotacaoX = 0;
-         RotacaoY = 0;
-         RotacaoZ = 0;
-         redesenha = true;
-      }
-#endif
       if(keys[SDLK_UP])  // Aumenta o Zoom
       {
           if (d>ZOOMMAXIMO)
@@ -846,23 +817,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          SDL_Delay(100);
       }
       
-      if(keys[SDLK_i])
-      {
-         printf("Orientacao %f°\t sen %f\tcos %f\trad %f\n",
-                 PCs->personagemAtivo->orientacao,
-                 sin(deg2Rad(PCs->personagemAtivo->orientacao)),
-                 cos(deg2Rad(PCs->personagemAtivo->orientacao)),
-                 deg2Rad(PCs->personagemAtivo->orientacao));
-         printf("PosicaoLadoX %f\n",PCs->personagemAtivo->posicaoLadoX);
-         printf("PosicaoLadoZ %f\n",PCs->personagemAtivo->posicaoLadoZ);
-      }
-
-      if(keys[SDLK_f])
-      {
-         redesenha = true;
-         d = ZOOMMAXIMO+FARVIEW;
-      }
-
       /* Tratamento do Mouse */
 
       /* Tratamento do Mouse para Camera */
@@ -881,6 +835,29 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    
    if( (redesenha) || ( (*forcaAtualizacao != 0)/* && ((tempo-ultimaLeitura)>=16)*/))
    {
+      if(janMiniMapa)
+      {
+         GLint x = (int)(((PCs->personagemAtivo->posicaoLadoX) / (SQUARESIZE)));
+         if(x > mapa->x-1)
+         {
+            x = mapa->x-1;
+         }
+         GLint z = (int)(((PCs->personagemAtivo->posicaoLadoZ) / (SQUARESIZE)));
+         if( z > mapa->z-1)
+         {
+            z = mapa->z-1;
+         }
+         x = 8 + (x*3);
+         z = 20 + (z*3);
+
+         botPerMiniMap->x1 = x;
+         botPerMiniMap->x2 = x+2;
+         botPerMiniMap->y1 = z;
+         botPerMiniMap->y2 = z+2;
+
+         janMiniMapa->Desenhar();
+      }
+  
       Desenhar();
       SDL_GL_SwapBuffers();
       *forcaAtualizacao = 0;
@@ -937,7 +914,7 @@ void engine::Desenhar()
    glEnable(GL_LIGHTING);
 
      /* DEBUG */
-  glPushMatrix();
+   glPushMatrix();
     glColor3f(0.5,0.8,0.1);
     glBegin(GL_POLYGON);
       glVertex3f(xReal-2, 0.2, zReal-2);
@@ -945,17 +922,10 @@ void engine::Desenhar()
       glVertex3f(xReal+2, 0.2, zReal+2);
       glVertex3f(xReal+2, 0.2, zReal-2);
     glEnd();
-  glPopMatrix();
+   glPopMatrix();
 
    glPushMatrix();
    
-   /* Rotacoes no Mundo de Teste apenas, sumirao com o tempo */
-#ifdef ROTACOES
-   glRotatef(RotacaoX,1,0,0);
-   glRotatef(RotacaoY,0,1,0);
-   glRotatef(RotacaoZ,0,0,1);
-#endif
-
    /* Desenha o Mundo, fazendo culling do view frustum */
    mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
 
@@ -1556,9 +1526,26 @@ int engine::TrataIA()
  *********************************************************************/
 void engine::abreMiniMapa()
 {
+   GLint x = (int)(((PCs->personagemAtivo->posicaoLadoX) / (SQUARESIZE)));
+   if(x > mapa->x-1)
+   {
+      x = mapa->x-1;
+   }
+   GLint z = (int)(((PCs->personagemAtivo->posicaoLadoZ) / (SQUARESIZE)));
+   if( z > mapa->z-1)
+   {
+      z = mapa->z-1;
+   }
+   x = 8 + (x*3);
+   z = 20 + (z*3);
    janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,"Map",1,1,NULL,NULL);
+
+   botPerMiniMap = janMiniMapa->objetos->InserirBotao(x,z,x+2,z+2,255,255,128,
+                                                      "",0,NULL);
    figura* fig = janMiniMapa->objetos->InserirFigura(8,20,NULL);
    mapa->drawMinimap(fig->fig);
+   
+                   
    janMiniMapa->ptrExterno = &janMiniMapa;
    janMiniMapa->Abrir(gui->ljan);
 }

@@ -95,6 +95,8 @@ class engine
       quadroTexto* ObjTxt;         /* Mostra o Objeto Atual */
       janela* janAtalhos;          /* Janela de Atalhos */
       janela* janMiniMapa;         /* Janela do Mini Mapa */
+
+      botao* botPerMiniMap;
    
       Uint32 ultimaLeitura;        /* Ultima leitura da posicao do teclado */
       Uint32 ultimaFPS;            /* Ultima FPS obtida */
