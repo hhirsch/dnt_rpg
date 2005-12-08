@@ -64,6 +64,7 @@ engine::engine()
 
    /* Define a ultima vez em que desenhou (so por simplicidade) */
    ultimaLeitura = SDL_GetTicks();
+   ultimoMouse = ultimaLeitura;
 }
 
 /*********************************************************************
@@ -532,8 +533,9 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       }
       else
       {
-      if( (x != mouseX) || ( y != mouseY))
+      if((tempo-ultimoMouse>=100 ))
       {
+         ultimoMouse = tempo;
          mouseX = x;
          mouseY = y;
          wx = mouseX; wy = SCREEN_Y - mouseY; 
@@ -545,7 +547,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          int qx, qz;
          qx = (int)xReal / SQUARESIZE;
          qz = (int)zReal / SQUARESIZE;
-         Square* quaux = mapa->quadradoRelativo(qx+1,qz+1);
+         Square* quaux = mapa->quadradoRelativo(qx,qz);
        if(quaux != NULL)
        {
          int pronto;
@@ -1013,22 +1015,6 @@ void engine::Desenhar()
 
 
 /*********************************************************************
- *      Retorna o Quadrado do mapa Relativo à posicao posX,posZ      *
- *********************************************************************/
-Square* quadradoRelativo(int posX,int posZ, Square* quad)
-{
-   Square* result = quad;
-   if( (posX < 0) || (posZ < 0))
-     return(NULL);
-   int aux;
-   for(aux=0;aux < (quad->posX-posX);aux++) result = result->left;
-   for(aux=0;aux < (posX-quad->posX);aux++) result = result->right;
-   for(aux=0;aux < (quad->posZ-posZ);aux++) result = result->up;
-   for(aux=0;aux < (posZ-quad->posZ);aux++) result = result->down;
-   return(result);
-}
-
-/*********************************************************************
  *          Faz o teste se o Quadrado quad é factivel de ser         *
  *                    ocupado pelo personagem                        *
  *********************************************************************/
@@ -1150,6 +1136,7 @@ int ColisaoComMeioFio(GLfloat min[3],GLfloat max[3], muro* meiosFio)
 int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 {
    int result = 1;
+   Square* saux;
 
    GLfloat min[3],min2[3];
    GLfloat max[3],max2[3];
@@ -1248,16 +1235,18 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
  
    /* Testa quadrados a direita */
-   if((PCs->personagemAtivo->ocupaQuad->right)) 
+   saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
+                             PCs->personagemAtivo->ocupaQuad->posZ);
+   if(saux) 
    { 
       /* leste */
-      min2[0] = PCs->personagemAtivo->ocupaQuad->right->x1;
-      min2[2] = PCs->personagemAtivo->ocupaQuad->right->z1;
-      max2[0] = PCs->personagemAtivo->ocupaQuad->right->x2;
-      max2[2] = PCs->personagemAtivo->ocupaQuad->right->z2;
+      min2[0] = saux->x1;
+      min2[2] = saux->z1;
+      max2[0] = saux->x2;
+      max2[2] = saux->z2;
       if(estaDentro(min,max,min2,max2,1) )
       {
-         result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->right);
+         result &= testa(min,max,saux);
          if(!result)
          {
             //printf("sai na direita\n"); 
@@ -1265,15 +1254,17 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          }
       }
       /* Nordeste */
-      if( (PCs->personagemAtivo->ocupaQuad->right->up))
+      saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
+                             PCs->personagemAtivo->ocupaQuad->posZ-1);
+      if( saux )
       {
-         min2[0] = PCs->personagemAtivo->ocupaQuad->right->up->x1;
-         min2[2] = PCs->personagemAtivo->ocupaQuad->right->up->z1;
-         max2[0] = PCs->personagemAtivo->ocupaQuad->right->up->x2;
-         max2[2] = PCs->personagemAtivo->ocupaQuad->right->up->z2;
+         min2[0] = saux->x1;
+         min2[2] = saux->z1;
+         max2[0] = saux->x2;
+         max2[2] = saux->z2;
          if(estaDentro(min,max,min2,max2,1) )
          {
-            result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->right->up);
+            result &= testa(min,max,saux);
             if(!result) 
             {
                //printf("sai na direita->cima\n"); 
@@ -1282,15 +1273,17 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          }
       }
       /* Sudeste */
-      if( (PCs->personagemAtivo->ocupaQuad->right->down))
+      saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
+                             PCs->personagemAtivo->ocupaQuad->posZ+1);
+      if( saux )
       {
-         min2[0] = PCs->personagemAtivo->ocupaQuad->right->down->x1;
-         min2[2] = PCs->personagemAtivo->ocupaQuad->right->down->z1;
-         max2[0] = PCs->personagemAtivo->ocupaQuad->right->down->x2;
-         max2[2] = PCs->personagemAtivo->ocupaQuad->right->down->z2;
+         min2[0] = saux->x1;
+         min2[2] = saux->z1;
+         max2[0] = saux->x2;
+         max2[2] = saux->z2;
          if(estaDentro(min,max,min2,max2,1))
          {
-            result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->right->down);
+            result &= testa(min,max,saux);
             if(!result) 
             {
                //printf("sai na direita->baixo\n"); 
@@ -1301,16 +1294,18 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
 
    /* Testa quadrados a esquerda */
-   if((PCs->personagemAtivo->ocupaQuad->left)) 
+   saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
+                             PCs->personagemAtivo->ocupaQuad->posZ);
+   if( saux ) 
    { 
       /* oeste */
-      min2[0] = PCs->personagemAtivo->ocupaQuad->left->x1;
-      min2[2] = PCs->personagemAtivo->ocupaQuad->left->z1;
-      max2[0] = PCs->personagemAtivo->ocupaQuad->left->x2;
-      max2[2] = PCs->personagemAtivo->ocupaQuad->left->z2;
+      min2[0] = saux->x1;
+      min2[2] = saux->z1;
+      max2[0] = saux->x2;
+      max2[2] = saux->z2;
       if(estaDentro(min,max,min2,max2,1))
       {
-         result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->left);
+         result &= testa(min,max,saux);
          if(!result) 
          {
             //printf("sai na esquerda\n"); 
@@ -1319,15 +1314,17 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
 
       /* Noroeste */
-      if( (PCs->personagemAtivo->ocupaQuad->left->up))
+      saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
+                             PCs->personagemAtivo->ocupaQuad->posZ-1);
+      if( saux )
       {
-         min2[0] = PCs->personagemAtivo->ocupaQuad->left->up->x1;
-         min2[2] = PCs->personagemAtivo->ocupaQuad->left->up->z1;
-         max2[0] = PCs->personagemAtivo->ocupaQuad->left->up->x2;
-         max2[2] = PCs->personagemAtivo->ocupaQuad->left->up->z2;
+         min2[0] = saux->x1;
+         min2[2] = saux->z1;
+         max2[0] = saux->x2;
+         max2[2] = saux->z2;
          if(estaDentro(min,max,min2,max2,1) )
          {
-            result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->left->up);
+            result &= testa(min,max,saux);
             if(!result) 
             {
                //printf("sai na esquerda->cima\n"); 
@@ -1336,15 +1333,17 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          }
       }
       /* Sudoeste */
-      if( (PCs->personagemAtivo->ocupaQuad->left->down))
+      saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
+                             PCs->personagemAtivo->ocupaQuad->posZ+1);
+      if( saux )
       { 
-         min2[0] = PCs->personagemAtivo->ocupaQuad->left->down->x1;
-         min2[2] = PCs->personagemAtivo->ocupaQuad->left->down->z1;
-         max2[0] = PCs->personagemAtivo->ocupaQuad->left->down->x2;
-         max2[2] = PCs->personagemAtivo->ocupaQuad->left->down->z2;
+         min2[0] = saux->x1;
+         min2[2] = saux->z1;
+         max2[0] = saux->x2;
+         max2[2] = saux->z2;
          if(estaDentro(min,max,min2,max2,1))
          {
-            result &=testa(min,max,PCs->personagemAtivo->ocupaQuad->left->down);
+            result &=testa(min,max,saux);
             if(!result) 
             {
                 //printf("sai na esquerda->baixo\n"); 
@@ -1355,16 +1354,18 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
   
    /* Testa quadrados abaixo */
-   if((PCs->personagemAtivo->ocupaQuad->down)) 
+   saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX,
+                             PCs->personagemAtivo->ocupaQuad->posZ+1);
+   if( saux ) 
    {   
-      min2[0] = PCs->personagemAtivo->ocupaQuad->down->x1;
-      min2[2] = PCs->personagemAtivo->ocupaQuad->down->z1;
-      max2[0] = PCs->personagemAtivo->ocupaQuad->down->x2;
-      max2[2] = PCs->personagemAtivo->ocupaQuad->down->z2;
+      min2[0] = saux->x1;
+      min2[2] = saux->z1;
+      max2[0] = saux->x2;
+      max2[2] = saux->z2;
       if(estaDentro(min,max,min2,max2,1) )
       { 
          /* sul */
-         result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->down);
+         result &= testa(min,max,saux);
          if(!result) 
          {
             //printf("sai no de baixo\n"); 
@@ -1374,16 +1375,18 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
 
    /* Testa quadrados acima */
-   if((PCs->personagemAtivo->ocupaQuad->up))
+   saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX,
+                             PCs->personagemAtivo->ocupaQuad->posZ-1);
+   if( saux )
    {  
-      min2[0] = PCs->personagemAtivo->ocupaQuad->up->x1;
-      min2[2] = PCs->personagemAtivo->ocupaQuad->up->z1;
-      max2[0] = PCs->personagemAtivo->ocupaQuad->up->x2;
-      max2[2] = PCs->personagemAtivo->ocupaQuad->up->z2;
+      min2[0] = saux->x1;
+      min2[2] = saux->z1;
+      max2[0] = saux->x2;
+      max2[2] = saux->z2;
       if(estaDentro(min,max,min2,max2,1) )
       { 
          /* norte */
-         result &= testa(min,max,PCs->personagemAtivo->ocupaQuad->up);
+         result &= testa(min,max,saux);
          if(!result) 
          {
             //printf("sai no de cima\n"); 
@@ -1404,15 +1407,14 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    GLfloat nx = ((min[0] + max[0]) / 2);//(PCs->personagemAtivo->posicaoLadoX+varX);
    GLfloat nz = ((min[2] + max[2]) / 2);//(PCs->personagemAtivo->posicaoLadoZ+varZ);
 
-   int posX =(int)floor( nx / (SQUARESIZE))+1;
+   int posX =(int)floor( nx / (SQUARESIZE));
 
-   int posZ =(int)floor( nz / (SQUARESIZE))+1;
+   int posZ =(int)floor( nz / (SQUARESIZE));
 
-   PCs->personagemAtivo->ocupaQuad = quadradoRelativo(posX,posZ,
-                                       PCs->personagemAtivo->ocupaQuad);
+   PCs->personagemAtivo->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
 
-   Square* saux = mapa->quadradoRelativo( (int)(nx/SQUARESIZE)+1,
-                                          (int)(nz/SQUARESIZE)+1);
+   saux = mapa->quadradoRelativo( (int)(nx/SQUARESIZE),
+                                  (int)(nz/SQUARESIZE));
 
    GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
    GLfloat dz1 = fabs(nz - saux->z1) / SQUARESIZE;
@@ -1459,18 +1461,23 @@ inline void engine::verificaQuad(Square* quad)
 /* Monta conjunto de Campos da linha */
 inline void engine::verificaLinha(Square* centro)
 {
+   Square* saux;
    if(centro)
    {
        verificaQuad(centro);
-       if(centro->left)
+       saux = mapa->quadradoRelativo(centro->posX-1,centro->posZ);
+       if(saux)
        {
-          verificaQuad(centro->left);
-          verificaQuad(centro->left->left);
+          verificaQuad(saux);
+          saux = mapa->quadradoRelativo(centro->posX-2,centro->posZ);
+          verificaQuad(saux);
        }
-       if(centro->right)
+       saux = mapa->quadradoRelativo(centro->posX+1,centro->posZ);
+       if(saux)
        {
-          verificaQuad(centro->right);
-          verificaQuad(centro->right->right);
+          verificaQuad(saux);
+          saux = mapa->quadradoRelativo(centro->posX+2,centro->posZ);
+          verificaQuad(saux);
        }
    }   
 }
@@ -1481,6 +1488,7 @@ int engine::TrataIA()
 
    int posX, posZ;     //Posicao Auxiliar
    double antX,antZ;
+   Square* saux;
    personagem* per;    //Personagem Atual
    per = (personagem*) NPCs->primeiro->proximo;
 
@@ -1499,12 +1507,16 @@ int engine::TrataIA()
     if(per->ocupaQuad)
     {
        verificaLinha(per->ocupaQuad);
-       if(per->ocupaQuad->up)
+       saux = mapa->quadradoRelativo(per->ocupaQuad->posX,
+                                     per->ocupaQuad->posZ-1);
+       if(saux)
        {
-          verificaLinha(per->ocupaQuad->up);
-          verificaLinha(per->ocupaQuad->up);
+          verificaLinha(saux);
+          verificaLinha(saux);
        }
-       verificaLinha(per->ocupaQuad->down);
+       saux = mapa->quadradoRelativo(per->ocupaQuad->posX,
+                                     per->ocupaQuad->posZ+1);
+       verificaLinha(saux);
     }
     else
       printf("What the HEll!! Square Map Out of bounds!\n");
@@ -1516,7 +1528,7 @@ int engine::TrataIA()
     /* Define-se A posicao do Personagem NPC */  
     posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
     posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
-    per->ocupaQuad = quadradoRelativo(posX,posZ,per->ocupaQuad);
+    per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
 
     return( (antX!=per->posicaoLadoX) || (antZ!=per->posicaoLadoZ));
 }

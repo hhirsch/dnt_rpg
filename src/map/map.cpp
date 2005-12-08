@@ -18,10 +18,6 @@
 Square::Square()
 {
 	floor_texture_fname = NULL;
-	up = NULL;
-	down = NULL;
-	left = NULL;
-	right = NULL;
 	flags = 0;
         h1 = h2 = h3 = h4 = 0;
         int aux;
@@ -88,7 +84,7 @@ char* NomeTextura(Map* mapa, GLuint ID)
 /********************************************************************
  *         Insere a textura dentre as utilizadas pelo objeto        *
  ********************************************************************/
-void InserirTextura(Map* mapa, char* arq, char* nome, 
+GLuint InserirTextura(Map* mapa, char* arq, char* nome, 
                     GLuint R, GLuint G, GLuint B)
 {
    texture* tex;
@@ -97,7 +93,7 @@ void InserirTextura(Map* mapa, char* arq, char* nome,
    if(!img)
    {
       printf("Error Opening Texture: %s\n",arq);
-      return;
+      return(0);
    }
 
    /* Insere realmente a textura */ 
@@ -143,6 +139,7 @@ void InserirTextura(Map* mapa, char* arq, char* nome,
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
    SDL_FreeSurface(imgPotencia);
+   return(tex->indice);
 }
 
 /********************************************************************
@@ -167,15 +164,13 @@ int Square::draw( GLfloat x, GLfloat z )
  ********************************************************************/
 int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[6][4])
 {
-	Square * ref = first->down;
-        Square * aux = first;
         int textura = -1;
-        int i;
-        if(aux) {
-           textura = aux->textura;
+        int i, Xaux = 0, Zaux = 0;
+        //if(aux) {
+           textura = MapSquares[Xaux][Zaux]->textura;
            glEnable(GL_TEXTURE_2D);
            glBindTexture(GL_TEXTURE_2D, textura);
-        }
+        //}
 #ifdef DEBUG_MAP
 	printf("map.cpp - Map::draw(): Drawing map %s.\n", name);
 #endif
@@ -190,56 +185,60 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
         glBegin(GL_QUADS);
         glNormal3i(0,1,0);
         //glColor3fv(mat_ambient);
-	while( aux != NULL )
-	{
-             if((textura!= -1) && (aux->textura == -1))
+        for(Xaux = 0; Xaux < x; Xaux++)
+        {
+           for(Zaux = 0; Zaux < z; Zaux++)
+           {
+             if((textura!= -1) && (MapSquares[Xaux][Zaux]->textura == -1))
              {
                  glDisable(GL_TEXTURE_2D); 
                  textura = -1;
              }
-             else if(textura != aux->textura)
+             else if(textura != MapSquares[Xaux][Zaux]->textura)
              {
                 glEnd();
-                textura = aux->textura;
+                textura = MapSquares[Xaux][Zaux]->textura;
                 glEnable(GL_TEXTURE_2D);
                 glBindTexture(GL_TEXTURE_2D, textura);
                 glBegin(GL_QUADS);
              }
-             if((aux->visivel) || (quadradoVisivel(aux->x1,0,aux->z1,
-                                                   aux->x2,ALTURAMAXIMA,
-                                                   aux->z2,matriz)))
+             if( (MapSquares[Xaux][Zaux]->visivel) || 
+                 (quadradoVisivel(MapSquares[Xaux][Zaux]->x1,0,
+                                  MapSquares[Xaux][Zaux]->z1,
+                                  MapSquares[Xaux][Zaux]->x2,
+                                  ALTURAMAXIMA,
+                                  MapSquares[Xaux][Zaux]->z2, matriz)))
              {
                 for(i=0;i<MAXOBJETOS;i++)
                 {
-                   if(aux->quadObjetos[i] != NULL){ 
-                       aux->quadObjetos[i]->visivel = 1;}
+                   if(MapSquares[Xaux][Zaux]->quadObjetos[i] != NULL)
+                   { 
+                     MapSquares[Xaux][Zaux]->quadObjetos[i]->visivel = 1;
+                   }
                 }
-                aux->visivel = 1;
+                MapSquares[Xaux][Zaux]->visivel = 1;
                 glTexCoord2f(0,0); 
-                glVertex3f( aux->x1 , aux->h1 , aux->z1 );
+                glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
+                            MapSquares[Xaux][Zaux]->h1 , 
+                            MapSquares[Xaux][Zaux]->z1 );
                 glTexCoord2f(0,1);
-                glVertex3f( aux->x1 , aux->h2 , aux->z2);
-                //glEnable(GL_TEXTURE_2D);
-                //glBindTexture(GL_TEXTURE_2D, Texturas->indice);
-                //textura = Texturas->indice;
+                glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
+                            MapSquares[Xaux][Zaux]->h2 , 
+                            MapSquares[Xaux][Zaux]->z2);
                 glTexCoord2f(1,1);
-                glVertex3f( aux->x2, aux->h3 , aux->z2 );
+                glVertex3f( MapSquares[Xaux][Zaux]->x2, 
+                            MapSquares[Xaux][Zaux]->h3 , 
+                            MapSquares[Xaux][Zaux]->z2 );
                 glTexCoord2f(1,0);
-                glVertex3f( aux->x2, aux->h4, aux->z1 );
+                glVertex3f( MapSquares[Xaux][Zaux]->x2, 
+                            MapSquares[Xaux][Zaux]->h4, 
+                            MapSquares[Xaux][Zaux]->z1 );
              }
              else
-               aux->visivel = 0;
-                          
-           //(*aux).draw(x,y);
-           if(aux->right == NULL)   //chegou ao fim da linha
-           {
-              aux = ref;
-              if(ref!= NULL) ref = ref->down;
-           } 
-           else      //senao continua na linha
-           {
-              aux = aux->right;
-           } 
+             {
+               MapSquares[Xaux][Zaux]->visivel = 0;
+             }
+           }
         }
         glEnd();
 
@@ -266,7 +265,8 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
               glBindTexture(GL_TEXTURE_2D, textura);
               glBegin(GL_QUADS);
            }
-           if(quadradoVisivel(maux->x1,0,maux->z1,maux->x2,altura,maux->z2,matriz))
+           if(quadradoVisivel(maux->x1,0,maux->z1,maux->x2,
+                              altura,maux->z2,matriz))
            {
            /* Face de frente */
               glNormal3i(0,0,1);
@@ -332,39 +332,33 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
 
 
         /* Faz o desenho dos objetos */
-        ref = first->down;
-        aux = first;
         int o;
         GLfloat distancia;
         GLfloat deltaX, deltaZ;
         GLfloat deltaY2 = cameraY*cameraY;
 
-        while(aux!=NULL)
+        for(Xaux = 0; Xaux < x; Xaux++)
+        for(Zaux = 0; Zaux < z; Zaux++)
         {
-           if(aux->visivel){
-           deltaX = (cameraX - aux->x1+HALFSQUARESIZE);
-           deltaZ = (cameraZ - aux->z1+HALFSQUARESIZE);
-           distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / SQUARESIZE;
+           if(MapSquares[Xaux][Zaux]->visivel){
+           deltaX = (cameraX-MapSquares[Xaux][Zaux]->x1+HALFSQUARESIZE);
+           deltaZ = (cameraZ-MapSquares[Xaux][Zaux]->z1+HALFSQUARESIZE);
+           distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) 
+                                                          / SQUARESIZE;
            for(o=0;o<MAXOBJETOS;o++)
            {
-              if((aux->objetos[o] != NULL) && (aux->objetosDesenha[o] == 1) )
+              if( (MapSquares[Xaux][Zaux]->objetos[o] != NULL) && 
+                  (MapSquares[Xaux][Zaux]->objetosDesenha[o] == 1) )
               {
-                  aux->objetos[o]->Desenhar(aux->Xobjetos[o],
-                                            aux->Zobjetos[o],distancia,
-                                            aux->orientacaoObjetos[o]);
+                  MapSquares[Xaux][Zaux]->objetos[o]->Desenhar(
+                          MapSquares[Xaux][Zaux]->Xobjetos[o],
+                          MapSquares[Xaux][Zaux]->Zobjetos[o],
+                          distancia,
+                          MapSquares[Xaux][Zaux]->orientacaoObjetos[o]);
               }
            }
            }
-           aux->visivel = 0;
-           if(aux->right == NULL)   //chegou ao fim da linha
-           {
-              aux = ref;
-              if(ref!= NULL) ref = ref->down;
-           } 
-           else      //senao continua na linha
-           {
-              aux = aux->right;
-           } 
+           MapSquares[Xaux][Zaux]->visivel = 0;
         }
         return(0);
 }
@@ -376,11 +370,12 @@ Map::Map()
 {
 	numtexturas = 0;
         Texturas = NULL;
-	first = NULL;
+	//first = NULL;
 	name = NULL;
         squareInic = NULL;
         muros = NULL;
         meiosFio = NULL; 
+        MapSquares = NULL;
         /* Inicia Estruturas */
         Objetos = new(LmapObjeto);
         x = z = xInic = zInic = 0;
@@ -390,13 +385,13 @@ Map::Map()
 Square* Map::quadradoRelativo(int xa, int za)
 {
    //printf("qrel: %d %d\n",x,z);
-   if(x < xa) return(NULL);
-   if(z < za) return(NULL);
-   int ax,az;
+   if( (z <= za) || (x <= xa) || ( xa < 0) || (za < 0)) 
+      return(NULL);
+   /*int ax,az;
    Square* result = first;
    for(ax=0;ax<(xa-1);ax++) result = result->right;
-   for(az=0;az<(za-1);az++) result = result->down;
-   return(result);
+   for(az=0;az<(za-1);az++) result = result->down;*/
+   return(MapSquares[xa][za]);
 }
 
 /********************************************************************
@@ -407,8 +402,9 @@ int Map::open(char* arquivo)
    FILE* arq;        // arquivo utilizado para o mapa
    char buffer[128]; // buffer utilziado para ler
    char nomeArq[128], nome[128];
-   Square* aux;
-   Square* ant = NULL, *primLinha=NULL;
+   int i;
+   //Square* aux;
+   //Square* ant = NULL, *primLinha=NULL;
    int posX,posZ;    //posicao atual do quadrado anterior relativo
    int IDtexturaAtual = -1;
    //char* nomeTexturaAtual = "nada\0";
@@ -443,9 +439,24 @@ int Map::open(char* arquivo)
       return(0);
    }
 
+   /* Alloc MapSquares */
+   MapSquares = (Square***) malloc(x*sizeof(Square*));
+   for(i = 0; i < x; i++)
+   {
+      MapSquares[i] = (Square**) malloc(z*sizeof(Square));
+   } 
+
+   for(posX = 0; posX < x; posX++)
+   {
+      for(posZ = 0; posZ < z; posZ++)
+      {
+         MapSquares[posX][posZ] = new(Square);
+      }
+   }
+
    muro* maux = NULL;
 
-   posX = x;
+   posX = -1;
    posZ = 0;
 
    /* Vamos ler todo o arquivo */
@@ -463,10 +474,6 @@ int Map::open(char* arquivo)
                   fgets(buffer, sizeof(buffer),arq);
                   sscanf(buffer,"%f,%f,%f,%f",&maux->x1,&maux->z1,
                                               &maux->x2,&maux->z2);
-                  //maux->x1 = (maux->x1)*SQUARESIZE;
-                  //maux->x2 = (maux->x2+1)*SQUARESIZE;
-                  //maux->z1 = (maux->z1)*SQUARESIZE;
-                  //maux->z2 = (maux->z2+1)*SQUARESIZE;
                   double tmp;
                   if(maux->x2 < maux->x1)
                   {
@@ -529,13 +536,7 @@ int Map::open(char* arquivo)
          {
             fgets(buffer, sizeof(buffer), arq); //até final da linha
             sscanf(buffer, "%d,%d",&xInic,&zInic);
-            Square *au = first;
-            int pos;
-            for(pos = 0; pos <= xInic; pos++) 
-                 au = au->right;
-            for(pos = 0; pos <= zInic; pos++) 
-                 au = au->down;
-            squareInic = au;
+            squareInic = MapSquares[xInic][zInic];
             xInic = (xInic)*SQUARESIZE + HALFSQUARESIZE;
             zInic = (zInic)*SQUARESIZE + HALFSQUARESIZE; 
             break;
@@ -556,43 +557,32 @@ int Map::open(char* arquivo)
          }
          case 'p': /* Inserção de um novo quadrado */
          {
-            ant = aux;
-            aux = new(Square);
             numObjetosAtual = 0;
-            if(first == NULL)
-               first = aux;
-            if(posX == x) //fim da linha de quadrados
+            if(posX == (x-1)) //fim da linha de quadrados
             { 
-                aux->up = primLinha;
-                if(primLinha != NULL)
-                  primLinha->down = aux;
-                primLinha = aux;
-                posX = 1;
+                posX = 0;
                 posZ++;
             }
             else  //continua na mesma linha
             {
-               ant->right = aux;
-               aux->left = ant;
-               if(ant->up == NULL)
-                  aux->up = NULL;
-               else
-               {
-                  aux->up = ant->up->right;
-                  aux->up->down = aux;
-               }
                posX++;
             }
             fgets(buffer, sizeof(buffer), arq); //até final da linha
-            sscanf(buffer, "%d,%f,%f,%f,%f",&pisavel,&aux->h1,&aux->h2,&aux->h3,
-                                            &aux->h4);
-            aux->x1 = (posX-1)*SQUARESIZE;
-            aux->x2 = aux->x1+SQUARESIZE;
-            aux->z1 = (posZ-1)*SQUARESIZE;
-            aux->z2 = aux->z1+SQUARESIZE; 
-            aux->posX = posX;
-            aux->posZ = posZ;
-            if(pisavel) aux->flags |= PISAVEL;
+            sscanf(buffer, "%d,%f,%f,%f,%f",&pisavel,
+                                 &MapSquares[posX][posZ]->h1,
+                                 &MapSquares[posX][posZ]->h2,
+                                 &MapSquares[posX][posZ]->h3,
+                                 &MapSquares[posX][posZ]->h4);
+            MapSquares[posX][posZ]->x1 = (posX) * SQUARESIZE;
+            MapSquares[posX][posZ]->x2 = MapSquares[posX][posZ]->x1 + SQUARESIZE;
+            MapSquares[posX][posZ]->z1 = (posZ) * SQUARESIZE;
+            MapSquares[posX][posZ]->z2 = MapSquares[posX][posZ]->z1 + SQUARESIZE; 
+            MapSquares[posX][posZ]->posX = posX;
+            MapSquares[posX][posZ]->posZ = posZ;
+            if(pisavel) 
+            {
+               MapSquares[posX][posZ]->flags |= PISAVEL;
+            }
             break;
          }
          case 'u':/* Utilização de Algo existente */
@@ -603,18 +593,11 @@ int Map::open(char* arquivo)
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                  //printf("Uses:  %s Was: %s\n",nome, nomeTexturaAtual);
-                  //if(strcmp(nomeArq,nomeTexturaAtual))
-                  /* Se sao Diferentes, tem de ser mudadas */
-                  //{
-                     //strcpy(&nomeTexturaAtual[0],&nome[0]);
-                     
-                     IDtexturaAtual = IDTextura(this,nome,&Ratual,&Gatual,&Batual);
-                  //}
-                  aux->textura = IDtexturaAtual;
-                  aux->R = Ratual;
-                  aux->G = Gatual;
-                  aux->B = Batual;
+                  IDtexturaAtual = IDTextura(this,nome,&Ratual,&Gatual,&Batual);
+                  MapSquares[posX][posZ]->textura = IDtexturaAtual;
+                  MapSquares[posX][posZ]->R = Ratual;
+                  MapSquares[posX][posZ]->G = Gatual;
+                  MapSquares[posX][posZ]->B = Batual;
                   break;
                }
                case 'o': /* Insere Objeto no Quadrado */
@@ -627,13 +610,15 @@ int Map::open(char* arquivo)
                   {
                      fgets(buffer, sizeof(buffer), arq);
                      sscanf(buffer,"%s %d:%d,%d:%f,%f:%d",nome,
-                                      &aux->objetosDesenha[numObjetosAtual],
-                                      &aux->quadXobjetos[numObjetosAtual],
-                                      &aux->quadZobjetos[numObjetosAtual],
-                                      &aux->Xobjetos[numObjetosAtual],
-                                      &aux->Zobjetos[numObjetosAtual],
-                                      &aux->orientacaoObjetos[numObjetosAtual]);
-                     aux->objetos[numObjetosAtual] = Objetos->EndMapObjeto(nome);
+                       &MapSquares[posX][posZ]->objetosDesenha[numObjetosAtual],
+                       &MapSquares[posX][posZ]->quadXobjetos[numObjetosAtual],
+                       &MapSquares[posX][posZ]->quadZobjetos[numObjetosAtual],
+                       &MapSquares[posX][posZ]->Xobjetos[numObjetosAtual],
+                       &MapSquares[posX][posZ]->Zobjetos[numObjetosAtual],
+                       &MapSquares[posX][posZ]->orientacaoObjetos[numObjetosAtual]);
+                     MapSquares[posX][posZ]->objetos[numObjetosAtual] = 
+                                                    Objetos->EndMapObjeto(nome);
+                     MapSquares[posX][posZ]->quadObjetos[i] = quadradoRelativo(MapSquares[posX][posZ]->quadXobjetos[numObjetosAtual], MapSquares[posX][posZ]->quadZobjetos[numObjetosAtual] );
                      numObjetosAtual++;
                   }
                   break;
@@ -655,38 +640,13 @@ int Map::open(char* arquivo)
       }
    }
    fclose(arq);
-  
-   /* Agora varre todo o mapa, atualizando os ponteiros para os quadrados de
-    * objeto. */
-   aux = first;
-   ant = first->down;
-   int ax,az;
-   int i;
-   for(az=0;az<z;az++)
-   {
-       for(ax=0;ax<x;ax++)
-       {
-          for(i=0;i<MAXOBJETOS;i++)
-            if(aux->objetos[i] != NULL)
-            {
-               aux->quadObjetos[i] = quadradoRelativo(aux->quadXobjetos[i],
-                                                      aux->quadZobjetos[i]);
-               /*aux->Xobjetos[i] = HALFSQUARESIZE +
-                    (aux->Xobjetos[i]-1)*SQUARESIZE;
-               aux->Zobjetos[numObjetosAtual] = HALFSQUARESIZE +
-                    (aux->Zobjetos[i]-1)*SQUARESIZE;*/
-            }
-          aux = aux->right;
-       }
-       aux = ant;
-       if(ant!=NULL)
-         ant = ant->down;
-   }
 
+   int ax,az;
    /* Agora atualiza os ponteiros dos Muros */
    maux = muros;
    int inix,iniz,maxx,maxz;
    int indiceMuro;
+   Square* aux;
    
    while(maux)
    {
@@ -694,23 +654,19 @@ int Map::open(char* arquivo)
       iniz = (int)floor(maux->z1 / SQUARESIZE);
       maxx = (int)floor(maux->x2 / SQUARESIZE);
       maxz = (int)floor(maux->z2 / SQUARESIZE);
-      //printf("%d %d %d %d\n",inix,iniz,maxx,maxz);
       for(ax = inix;ax<=maxx;ax++)
       {
           for(az = iniz;az<=maxz;az++)
           {
               indiceMuro = 0;
-              aux = quadradoRelativo(ax+1,az+1);
-              //printf("QuadRelativo: %d %d\n",ax+1,az+1);
+              aux = quadradoRelativo(ax,az);
               while((aux!=NULL) && (indiceMuro < MAXMUROS) && 
                     (aux->muros[indiceMuro] != NULL))
               {
-                 //printf("%d %d %p\n",ax+1,az+1,aux->muros[indiceMuro]);
                  indiceMuro++;
               }
               if((aux!=NULL) && (indiceMuro < MAXMUROS))
               {
-                 //printf("Added %d° wall on quad: %d %d\n",indiceMuro,ax+1,az+1);
                  aux->muros[indiceMuro] = maux;
               }
               else if(indiceMuro >= MAXMUROS)
@@ -720,9 +676,66 @@ int Map::open(char* arquivo)
       }
       maux = maux->proximo;
    }
- 
    return(1);
 }
+
+
+/************************************************************************
+ *                     Cria um Novo Mapa                                *
+ ************************************************************************/
+void Map::newMap(int X, int Z)
+{
+   int auxX, auxZ;
+   int i;
+
+   printf("Beginning a new Map: %d,%d\n",X,Z);
+
+   /* Alloc MapSquares */
+   MapSquares = (Square***) malloc(x*sizeof(Square*));
+   for(i = 0; i < X; i++)
+   {
+      MapSquares[i] = (Square**) malloc(z*sizeof(Square));
+   } 
+
+   for(auxX = 0; auxX < X; auxX++)
+   {
+      for(auxZ = 0; auxZ < Z; auxZ++)
+      {
+         MapSquares[auxX][auxZ] = new(Square);
+      }
+   }
+   
+   Square* saux;
+   x = X;
+   z = Z;
+   int IDtextura = InserirTextura(this,
+                                  "../data/texturas/chao_grama2.jpg", 
+                                  "chao_grama2",20,20,100);
+
+   for(auxZ = 0; auxZ < z; auxZ++)
+   {
+      for(auxX = 0; auxX < x; auxX++)
+      {
+          saux = quadradoRelativo(auxX,auxZ);
+          saux->x1 = (auxX)*SQUARESIZE;
+          saux->x2 = saux->x1+SQUARESIZE;
+          saux->z1 = (auxZ)*SQUARESIZE;
+          saux->z2 = saux->z1+SQUARESIZE; 
+          saux->posX = auxX;
+          saux->posZ = auxZ;
+          saux->flags |= PISAVEL;
+          saux->textura = IDtextura;
+          saux->R = 130;
+          saux->G = 148;
+          saux->B = 96;
+      }
+   }
+
+   xInic = 1*SQUARESIZE;
+   zInic = 1*SQUARESIZE;
+   squareInic = quadradoRelativo(0,0);
+}
+
 
 /*******************************************************************
  *   Otimiza o mapa (sobreposicao de muros, quadrados ocp por obj) *
@@ -878,34 +891,38 @@ int Map::save(char* arquivo)
 
  
    /* Escreve Quadrados, linha a linha */
-   Square* saux = first;
-   Square* ultLinha;
+   //Square* saux = first;
+   //Square* ultLinha;
    for(z1=0;z1<z;z1++)
    {
-      ultLinha = saux;
+      //ultLinha = saux;
       for(x1=0;x1<x;x1++)
       {
-          fprintf(arq,"p %d,%f,%f,%f,%f\n",saux->flags & PISAVEL,saux->h1,
-                                           saux->h2,saux->h3,saux->h4);
-          fprintf(arq,"ut %s\n",NomeTextura(this, saux->textura));
+          fprintf(arq,"p %d,%f,%f,%f,%f\n",
+                  MapSquares[x1][z1]->flags & PISAVEL,
+                  MapSquares[x1][z1]->h1,
+                  MapSquares[x1][z1]->h2,
+                  MapSquares[x1][z1]->h3,
+                  MapSquares[x1][z1]->h4);
+          fprintf(arq,"ut %s\n",NomeTextura(this, 
+                                            MapSquares[x1][z1]->textura));
           int aux;
           for(aux=0;aux<MAXOBJETOS;aux++)
           {
-            if(saux->objetos[aux])
+            if(MapSquares[x1][z1]->objetos[aux])
             {
-               x2 = (int)saux->Xobjetos[aux] / SQUARESIZE;
-               z2 = (int)saux->Zobjetos[aux] / SQUARESIZE;
-               fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d\n",saux->objetos[aux]->nome,
-                                            saux->objetosDesenha[aux],
-                                            x2+1,z2+1,
-                                            saux->Xobjetos[aux],
-                                            saux->Zobjetos[aux],
-                                            saux->orientacaoObjetos[aux]);
+               x2 = (int)MapSquares[x1][z1]->Xobjetos[aux] / SQUARESIZE;
+               z2 = (int)MapSquares[x1][z1]->Zobjetos[aux] / SQUARESIZE;
+               fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d\n",
+                       MapSquares[x1][z1]->objetos[aux]->nome,
+                       MapSquares[x1][z1]->objetosDesenha[aux],
+                       x2+1,z2+1,
+                       MapSquares[x1][z1]->Xobjetos[aux],
+                       MapSquares[x1][z1]->Zobjetos[aux],
+                       MapSquares[x1][z1]->orientacaoObjetos[aux]);
             }
           }
-          saux = saux->right;
       }
-      saux = ultLinha->down;
    }
 
    /* Escreve Quadrado de Inicio */
@@ -950,20 +967,19 @@ Map::~Map()
    delete(Objetos);
   
    /* Acabando com os Quadrados */
-   Square* baixo, *direita;
-   baixo = first;
-   while(baixo != NULL)
+   int x1,z1;
+   for(x1 = 0; x1<x; x1++)
    {
-      first = baixo;
-      baixo = first->down;
-      direita = first->right;
-      while(direita != NULL)
+      for(z1 = 0; z1<z;z1++)
       {
-         delete(first);
-         first = direita; 
-         direita = direita->right;
+         delete(MapSquares[x1][z1]);
       }
    }
+   for(x1 = 0; x1<x;x1++)
+   {
+      free(MapSquares[x1]);
+   }
+   free(MapSquares);
 }
 
 
@@ -972,25 +988,22 @@ Map::~Map()
  ********************************************************************/
 void Map::drawMinimap(SDL_Surface* img)
 {
-   int x1,y1,x2,y2;
+   int x1,y1,x2,y2, X, Z;
    //printf("%d,%d %d,%d\n",img->w,img->h,x,z);
    //double razaoX = (float)img->w / (float)(x+1) ;
    //double razaoY = (float)img->h / (float)(z+1);
 
-   Square* primeiroLinha = first;
-   Square* atual;
    x1 = 0; y1 = 0;
-   while(primeiroLinha != NULL)
+   for(X = 0; X < x; X++)
    {
-      atual = primeiroLinha;
-      while(atual != NULL)
+      for(Z = 0; Z < z; Z++)
       {
-          cor_Definir(atual->R,atual->G,atual->B);
+          cor_Definir(MapSquares[X][Z]->R,
+                      MapSquares[X][Z]->G,
+                      MapSquares[X][Z]->B);
           retangulo_Colorir(img, x1, y1, x1+2, y1+2, 0);
-          atual = atual->right;
           x1+=3;
       }
-      primeiroLinha = primeiroLinha->down;
       x1 = 0;
       y1+=3;
    }

@@ -99,6 +99,7 @@ class engine
       botao* botPerMiniMap;
    
       Uint32 ultimaLeitura;        /* Ultima leitura da posicao do teclado */
+      Uint32 ultimoMouse;          /* Ultima Leitura dos objetos apontados */
       Uint32 ultimaFPS;            /* Ultima FPS obtida */
       double FPSatual;             /* FPS Atual */
 

@@ -248,16 +248,10 @@ void erro()
  ************************************************************************/
 void colocaTextura(Map* mapa, int x, int z, GLuint texturaID)
 {
-    if( (x <= mapa->x) && (z <= mapa->z) )
+    Square* quad = mapa->quadradoRelativo(x,z);
+    if(quad)
     {
-       Square* quad = mapa->first;
-       int aux;
-       for(aux = 0; aux<x; aux++) 
-          quad = quad->right;
-       for(aux = 0; aux<z; aux++)
-          quad = quad->down;
-       if(quad) 
-         quad->textura = texturaID;
+       quad->textura = texturaID;
     }
 }
 
@@ -347,67 +341,6 @@ int botaoInserir(void *jan,void *ljan,SDL_Surface *screen)
 }
 
 /************************************************************************
- *                     Cria um Novo Mapa                                *
- ************************************************************************/
-void novoMapa(Map* mapa, int x, int z)
-{
-   int auxX, auxZ;
-   Square* saux = new(Square);
-   Square* primLinha = saux;
-   mapa->first = saux;
-   mapa->x = x;
-   mapa->z = z;
-
-   printf("Beginning a new Map: %d,%d\n",x,z);
-   
-   int IDtextura = inserirTextura(mapa,"../data/texturas/chao_grama2.jpg", 
-                  "chao_grama2");
-
-   /* Cria todos os quadrados necessários */
-   for(auxZ = 0; auxZ < z; auxZ++)
-   {
-      for(auxX = 0; auxX < x; auxX++)
-      {
-          saux->x1 = (auxX)*SQUARESIZE;
-          saux->x2 = saux->x1+SQUARESIZE;
-          saux->z1 = (auxZ)*SQUARESIZE;
-          saux->z2 = saux->z1+SQUARESIZE; 
-          saux->posX = auxX;
-          saux->posZ = auxZ;
-          saux->flags |= PISAVEL;
-          saux->textura = IDtextura;
-          saux->R = 130;
-          saux->G = 148;
-          saux->B = 96;
-          if(auxX != x-1)
-          {
-             saux->right = new(Square);
-             saux->right->left = saux;
-             if(saux->up == NULL)
-                saux->right->up = NULL;
-             else
-             {
-                saux->right->up = saux->up->right;
-                saux->right->up->down = saux->right;
-             }
-             saux = saux->right;
-          }
-          else
-          {
-             primLinha->down = new(Square);
-             primLinha->down->up = primLinha;
-             primLinha = primLinha->down;
-             saux = primLinha;
-          }
-      }
-   }
-
-   mapa->xInic = 1*SQUARESIZE;
-   mapa->zInic = 1*SQUARESIZE;
-   mapa->squareInic = mapa->first;
-} 
-
-/************************************************************************
  *                     Escopo Principal                                 *
  ************************************************************************/
 int main(int argc, char **argv)
@@ -478,7 +411,7 @@ int main(int argc, char **argv)
           z = 3;
       }
       /* Cria um mapa ja existente */
-      novoMapa(mapa,x,z);
+      mapa->newMap(x,z);
    }
    else
       /* Abre mapa ja existente */
@@ -597,7 +530,7 @@ int main(int argc, char **argv)
                         
             if(estado == MODALTURA)
             {
-               Square* saux = mapa->quadradoRelativo(qx+1,qz+1);
+               Square* saux = mapa->quadradoRelativo(qx,qz);
  
                if(saux)
                {
@@ -626,49 +559,61 @@ int main(int argc, char **argv)
                   if( (d1<=d2) && (d1<=d3) && (d1<=d4) )
                   {
                      saux->h1 += 1;
-                     if(saux->left)
-                        saux->left->h4 += 1;
-                     if(saux->up)
+                     saux = mapa->quadradoRelativo(qx-1,qz);
+                     if(saux)
+                        saux->h4 += 1;
+                     saux = mapa->quadradoRelativo(qx,qz-1);
+                     if(saux)
                      {
-                        saux->up->h2 += 1;
-                        if(saux->up->left)
-                          saux->up->left->h3 += 1;
+                        saux->h2 += 1;
+                        saux = mapa->quadradoRelativo(qx-1,qz-1); 
+                        if(saux)
+                          saux->h3 += 1;
                      }
                   }
                   else if( (d2<=d1) && (d2<=d3) && (d2<=d4) )
                   {
                      saux->h2 += 1;
-                     if(saux->left)
-                       saux->left->h3 += 1;
-                     if(saux->down)
+                     saux = mapa->quadradoRelativo(qx-1,qz);
+                     if(saux)
+                       saux->h3 += 1;
+                     saux = mapa->quadradoRelativo(qx,qz+1);
+                     if(saux)
                      { 
-                        saux->down->h1 += 1;
-                        if(saux->down->left)
-                          saux->down->left->h4 += 1;
+                        saux->h1 += 1;
+                        saux = mapa->quadradoRelativo(qx-1,qz+1);
+                        if(saux)
+                          saux->h4 += 1;
                      } 
                   } 
                   else if( (d3<=d1) && (d3<=d2) && (d1<=d4) )
                   {
                      saux->h3 += 1;
-                     if(saux->right)
-                        saux->right->h2 += 1;
-                     if(saux->down)
+                     saux = mapa->quadradoRelativo(qx+1,qz);
+                     if(saux)
+                        saux->h2 += 1;
+                     saux = mapa->quadradoRelativo(qx,qz+1);
+                     if(saux)
                      {
-                        saux->down->h4 += 1;
-                        if(saux->down->right)
-                            saux->down->right->h1 += 1;
+                        saux->h4 += 1;
+                        saux = mapa->quadradoRelativo(qx+1,qz+1);
+                        if(saux)
+                            saux->h1 += 1;
                      }
                   }
                   else if( (d4<=d1) && (d4<=d2) && (d4<=d3) )
                   {
                      saux->h4 += 1;
-                     if(saux->right)
-                       saux->right->h1 += 1;
-                     if(saux->up)
+                     saux = mapa->quadradoRelativo(qx+1,qz);
+                     if(saux)
+                       saux->h1 += 1;
+                     saux = mapa->quadradoRelativo(qx,qz-1);
+                     if(saux)
                      {
-                        saux->up->h3 += 1;
-                        if(saux->up->right)
-                            saux->up->right->h2 += 1;
+                        saux->h3 += 1;
+                        saux = mapa->quadradoRelativo(qx+1,qz-1);
+                        if(saux)
+                            saux->h2 += 1;
                      }
                   }
                }
@@ -678,7 +623,7 @@ int main(int argc, char **argv)
                              (int)zReal / SQUARESIZE, texturaAtual);
             else if(estado == OBJETO)
             {
-               Square* saux = mapa->quadradoRelativo(qx+1,qz+1);
+               Square* saux = mapa->quadradoRelativo(qx,qz);
                int ob=0;
                if(saux)
                {
@@ -741,7 +686,7 @@ int main(int argc, char **argv)
                      {
                          for(Z1 = minqz; Z1 <=maxqz; Z1++) 
                          {
-                             qaux = mapa->quadradoRelativo(X1+1,Z1+1);
+                             qaux = mapa->quadradoRelativo(X1,Z1);
                              if((qaux) && (qaux != saux))
                              {
                                  ob =0;
@@ -874,7 +819,7 @@ int main(int argc, char **argv)
          {
             if(estado == MODALTURA)
             {
-               Square* saux = mapa->quadradoRelativo(qx+1,qz+1);
+               Square* saux = mapa->quadradoRelativo(qx,qz);
 
                if(saux)
                {
@@ -903,51 +848,63 @@ int main(int argc, char **argv)
                if( (d1<=d2) && (d1<=d3) && (d1<=d4) )
                {
                   if(saux->h1 >= 1) saux->h1 -= 1;
-                  if( (saux->left) && (saux->left->h4 >= 1))
+                  saux = mapa->quadradoRelativo(qx-1,qz);
+                  if( (saux) && (saux->h4 >= 1))
                   {
-                     saux->left->h4 -= 1;
+                     saux->h4 -= 1;
                   }
-                  if(saux->up)
+                  saux = mapa->quadradoRelativo(qx,qz-1);
+                  if(saux)
                   {
-                     if(saux->up->h2>=1) saux->up->h2 -= 1;
-                     if( (saux->up->left) && (saux->up->left->h3>=1))
-                       saux->up->left->h3 -= 1;
+                     if(saux->h2>=1) saux->h2 -= 1;
+                     saux = mapa->quadradoRelativo(qx-1,qz-1);
+                     if( (saux) && (saux->h3>=1))
+                       saux->h3 -= 1;
                   }
                }
                else if( (d2<=d1) && (d2<=d3) && (d2<=d4) )
                {
                   if(saux->h2>=1)saux->h2 -= 1;
-                  if((saux->left) &&(saux->left->h3 >=1))
-                    saux->left->h3 -= 1;
-                  if(saux->down)
+                  saux = mapa->quadradoRelativo(qx-1,qz);
+                  if((saux) &&(saux->h3 >=1))
+                    saux->h3 -= 1;
+                  saux = mapa->quadradoRelativo(qx,qz+1);
+                  if(saux)
                   { 
-                     if(saux->down->h1>=1) saux->down->h1 -= 1;
-                     if( (saux->down->left) && (saux->down->left->h4>=1))
-                       saux->down->left->h4 -= 1;
+                     if(saux->h1>=1) saux->h1 -= 1;
+                     saux = mapa->quadradoRelativo(qx-1,qz+1);
+                     if( (saux) && (saux->h4>=1))
+                       saux->h4 -= 1;
                   } 
                } 
                else if( (d3<=d1) && (d3<=d2) && (d1<=d4) )
                {
                   if(saux->h3>=1) saux->h3 -= 1;
-                  if( (saux->right) && (saux->right->h2>=1))
-                    saux->right->h2 -= 1;
-                  if(saux->down)
+                  saux = mapa->quadradoRelativo(qx+1,qz);
+                  if( (saux) && (saux->h2>=1))
+                    saux->h2 -= 1;
+                  saux = mapa->quadradoRelativo(qx,qz+1);
+                  if(saux)
                   {
-                     if(saux->down->h4>=1) saux->down->h4 -= 1;
-                     if( (saux->down->right) && (saux->down->right->h1>=1))
-                         saux->down->right->h1 -= 1;
+                     if(saux->h4>=1) saux->h4 -= 1;
+                     saux = mapa->quadradoRelativo(qx+1,qz+1);
+                     if( (saux) && (saux->h1>=1))
+                         saux->h1 -= 1;
                   }
                }
                else if( (d4<=d1) && (d4<=d2) && (d4<=d3) )
                {
                   if(saux->h4>=1)saux->h4 -= 1;
-                  if((saux->right) && (saux->right->h1 >= 1))
-                    saux->right->h1 -= 1;
-                  if(saux->up)
+                  saux = mapa->quadradoRelativo(qx+1,qz);
+                  if((saux) && (saux->h1 >= 1))
+                    saux->h1 -= 1;
+                  saux = mapa->quadradoRelativo(qx,qz-1);
+                  if(saux)
                   {
-                     if(saux->up->h3>=1) saux->up->h3 -= 1;
-                     if((saux->up->right) && (saux->up->right->h2>=1))
-                         saux->up->right->h2 -= 1;
+                     if(saux->h3>=1) saux->h3 -= 1;
+                     saux = mapa->quadradoRelativo(qx+1,qz-1);
+                     if((saux) && (saux->h2>=1))
+                         saux->h2 -= 1;
                   }
                }
             }
@@ -1037,8 +994,8 @@ int main(int argc, char **argv)
          }
          if(teclas[SDLK_s])
          {
-            mapa->save("../data/mapas/teste.map");
-            printf("Saved Map as `../data/mapas/teste.map`\n");
+            mapa->save("../data/mapas/novo.map");
+            printf("Saved Map as `../data/mapas/novo.map`\n");
             SDL_Delay(200);
          }
          if(teclas[SDLK_i])

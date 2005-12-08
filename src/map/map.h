@@ -58,7 +58,7 @@ class Square
                 int x1,z1,x2,z2;   // dimensoes do quadrado
                 GLfloat h1,h2,h3,h4; //altura de cada vertice do quadrado
                 int posX, posZ;    // posicao no mapa
-		Square * up, * down, * right, * left; //vizinhos
+		//Square * up, * down, * right, * left; //vizinhos
                 int flags;   // bandeiras
                 int visivel;
                 int textura; // qual textura ele usa
@@ -73,7 +73,6 @@ class Square
                 GLuint R,G,B;            /* Cores do Quadrado para o MINIMAPA */
                 Square* quadObjetos[MAXOBJETOS];
 
-	private:
 		char* floor_texture_fname;
 		
 };
@@ -93,6 +92,7 @@ class Map
 		int draw(GLfloat cameraX, GLfloat cameraY, 
                          GLfloat cameraZ, GLfloat matriz[6][4]);
                 void drawMinimap(SDL_Surface* img);
+                void newMap(int X,int Z);
 		int open( char* arquivo ); /* Abre o mapa do arquivo */
                 Square* quadradoRelativo(int xa, int za);
                 int save( char* arquivo ); /* Salva o Mapa */
@@ -104,7 +104,7 @@ class Map
                 int numtexturas;
                 texture* Texturas;
                 int xInic,zInic;
-                Square* first; /* Quadrado localizado no canto superior */
+                //Square* first; /* Quadrado localizado no canto superior */
                 Square* squareInic; /* quadrado inicial */
                 int x,z;       /* Dimensões do mapa */
                 muro* muros;  /* Muros Presentes no Mapa */
@@ -112,6 +112,7 @@ class Map
 
 	private:
 		char* name;    /* Nome do Arquivo de Mapa Carregado */
+                Square*** MapSquares;
                 
 
 };
