@@ -130,8 +130,18 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
    glBindTexture(GL_TEXTURE_2D, tex->indice);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
                 0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+   glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+                   GL_LINEAR_MIPMAP_LINEAR );
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+
+   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imgPotencia->w,
+                     imgPotencia->h, GL_RGBA, GL_UNSIGNED_BYTE, 
+                     imgPotencia->pixels );
+
    mapa->numtexturas++;
 
    //printf("Inseri Textura: %s :%d %d\n",nome,img->w,img->h);
