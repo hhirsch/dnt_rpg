@@ -691,10 +691,10 @@ void Map::newMap(int X, int Z)
    printf("Beginning a new Map: %d,%d\n",X,Z);
 
    /* Alloc MapSquares */
-   MapSquares = (Square***) malloc(x*sizeof(Square*));
+   MapSquares = (Square***) malloc(X*sizeof(Square*));
    for(i = 0; i < X; i++)
    {
-      MapSquares[i] = (Square**) malloc(z*sizeof(Square));
+      MapSquares[i] = (Square**) malloc(Z*sizeof(Square));
    } 
 
    for(auxX = 0; auxX < X; auxX++)
