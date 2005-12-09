@@ -106,6 +106,9 @@ void carregaTextura(SDL_Surface* img, GLuint* textID)
  *********************************************************************/
 int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
 {
+   char* arq = (char*) malloc(sizeof(char)*255);
+   /* to avoyd lose mapname while deleting map */
+   strcpy(arq,arqMapa);
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
@@ -140,13 +143,12 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    SDL_GL_SwapBuffers();
 
    /* Carregando o Mapa */
-
    if(mapa) 
    {
      delete(mapa);
    }
    mapa = new(Map);
-   mapa->open(arqMapa);
+   mapa->open(arq);
 
    glDeleteTextures(1,&texturaTexto);
    cor_Definir(0,0,0);
@@ -200,6 +202,23 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    abreAtalhos();
 
    glEnable(GL_LIGHTING);
+
+   free(arq);
+
+   /* Coloca Personagem Ativo na posicao de Inicio do Mapa */
+   PCs->personagemAtivo->posicaoLadoX = mapa->xInic;
+   PCs->personagemAtivo->posicaoLadoZ = mapa->zInic;
+   centroX = mapa->xInic;
+   centroZ = mapa->zInic;
+   PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
+
+   /* Define a Posicao do NPC em Squares */
+   per = (personagem*) NPCs->primeiro->proximo;
+   int posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
+   int posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
+   per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
+
+
    return(1);
 
 }
@@ -545,7 +564,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       }
       else
       {
-      if((tempo-ultimoMouse>=100 ))
+      if( (tempo-ultimoMouse>=100 ) || (Mbotao & SDL_BUTTON(1)) )
       {
          ultimoMouse = tempo;
          mouseX = x;
@@ -623,6 +642,32 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                }
             }
          }
+         /* Verifica Conexão do Mapa */
+         if( quaux->mapConection.active )
+         {
+            GLfloat minCon[3], maxCon[3];
+            minCon[0] = quaux->mapConection.x1;
+            minCon[0] = 0.0;
+            minCon[2] = quaux->mapConection.z1;
+            maxCon[0] = quaux->mapConection.x2;
+            maxCon[0] = 0.0;
+            maxCon[2] = quaux->mapConection.z2;
+            GLfloat minMouse[3], maxMouse[3];
+            minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
+            minMouse[1] = 0.0;      maxMouse[1] = 0.0;
+            minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
+            if( estaDentro( minCon, maxCon, minMouse, maxMouse, 1 ) )
+            {
+               sprintf(ObjTxt->texto,quaux->mapConection.mapName); 
+               janAtalhos->Desenhar();
+               pronto = 1;
+               if(Mbotao & SDL_BUTTON(1))
+               {
+                  CarregaMapa(quaux->mapConection.mapName, 1);
+                  return(1);
+               }
+            }
+         }
          if(!pronto)
          {
             sprintf(ObjTxt->texto,"Nothing"); 
@@ -630,10 +675,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          }
         }
       }
-      if(Mbotao & SDL_BUTTON(1)) 
-      {
-            
-      }
+
+
       if ( keys[SDLK_ESCAPE] ) // Sai da Engine
          return(0);
 
@@ -1593,25 +1636,10 @@ int engine::Rodar(SDL_Surface *surface)
 {
 
    int forcaAtualizacao = 0; //forca a atualizacao da tela, qdo o npc anda
-   int posX, posZ;           //Posicao Auxiliar
    FPSatual = 10.0;
    ultimaFPS = 0;
 
-   personagem* per;
-	
-   /* Coloca Personagem Ativo na posicao de Inicio do Mapa */
-   PCs->personagemAtivo->posicaoLadoX = mapa->xInic;
-   PCs->personagemAtivo->posicaoLadoZ = mapa->zInic;
-   centroX = mapa->xInic;
-   centroZ = mapa->zInic;
-   PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
-
-   /* Define a Posicao do NPC em Squares */
-   per = (personagem*) NPCs->primeiro->proximo;
-   posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
-   posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
-   per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
-
+   
    /* Inicia AI -- Vai mudar com o tempo e ser relativa a cada NPC */
    ia = new(AI); 
    

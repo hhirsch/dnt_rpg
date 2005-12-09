@@ -25,6 +25,13 @@
 #define MEIOFIOALTURA 2
 #define ALTURAMAXIMA 100
 
+typedef struct _conection
+{
+   bool active;         /* Active Conection */
+   GLfloat x1,z1,x2,z2; /* Map Position */
+   char* mapName;       /* Map filename */ 
+}conection;
+
 typedef struct _muro
 {
    GLfloat x1,z1,x2,z2;
@@ -72,6 +79,8 @@ class Square
                 muro* muros[MAXMUROS];
                 GLuint R,G,B;            /* Cores do Quadrado para o MINIMAPA */
                 Square* quadObjetos[MAXOBJETOS];
+
+                conection mapConection; /* Conection to other map */
 
 		char* floor_texture_fname;
 		

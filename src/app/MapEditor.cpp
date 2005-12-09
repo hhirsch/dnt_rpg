@@ -41,6 +41,8 @@ GLuint texturaAtual;
 mapObjeto* objAtual;
 Map* mapa;
 barraTexto* bartInserir;
+barraTexto* bartSalvar;
+int sair;
 
 /************************************************************************
  *              Trata Botao Objeto                                      *
@@ -104,6 +106,27 @@ int botaoMuroZ(void *jan,void *ljan,SDL_Surface *screen)
     estado = MUROZ;
     return(1);
 }
+
+/************************************************************************
+ *                     Trata Botao Salvar                               *
+ ************************************************************************/
+int botaoSalvar(void *jan,void *ljan, SDL_Surface *screen)
+{
+   mapa->save(bartSalvar->texto);
+   printf("Saved Map as `%s`\n",bartSalvar->texto);
+   SDL_Delay(200);
+   return(1);
+}
+
+/************************************************************************
+ *                     Trata Botao Sair                                 *
+ ************************************************************************/
+int botaoSair(void *jan,void *ljan, SDL_Surface *screen)
+{
+   sair = 1;
+   return(1);
+}
+
 
 /************************************************************************
  *                   Ativa a Textura Anterior                           *
@@ -348,7 +371,7 @@ int main(int argc, char **argv)
    estado = CHAO;
    printf(" DccNitghtmare - Map Editor\n");
    /* Inicia ou abre mapa Existente */
-   char* entrada; /*Arquivo de entrada*/
+   char* entrada = ""; /*Arquivo de entrada*/
    int chamadaCorreta=0;
    char c;
    
@@ -417,7 +440,7 @@ int main(int argc, char **argv)
       /* Abre mapa ja existente */
       mapa->open(entrada);
 
-   int sair = 0;
+   sair = 0;
    Uint8 Mbotao;
    Uint8 *teclas;
    int mouseX,mouseY;
@@ -426,7 +449,7 @@ int main(int argc, char **argv)
 
    interface* gui = new interface(NULL);
    janela* principal;
-   principal = gui->ljan->InserirJanela(0,0,255,127,"Main",1,1,NULL,NULL);
+   principal = gui->ljan->InserirJanela(0,64,255,191,"Main",1,1,NULL,NULL);
    principal->objetos->InserirBotao(10,17,50,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
@@ -493,6 +516,23 @@ int main(int argc, char **argv)
 
    principal->fechavel = 0;
    principal->Abrir(gui->ljan);
+
+   principal = gui->ljan->InserirJanela(0,0,127,63,"Actions",1,1,NULL,NULL);
+   principal->objetos->InserirBotao(10,37,50,55,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "Save",1,&botaoSalvar);
+   principal->objetos->InserirBotao(77,37,117,55,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "Exit",1,&botaoSair);
+   bartSalvar = principal->objetos->InserirBarraTexto(10,17,118,33,
+                                         entrada,
+                                         0,NULL);
+
+   principal->fechavel = 0;
+   principal->Abrir(gui->ljan);
+
  
    muro* maux = NULL;
    int qx; int qz;
@@ -992,12 +1032,10 @@ int main(int argc, char **argv)
             phi += 1;
             //phi = phi % 360;
          }
-         if(teclas[SDLK_s])
+         /*if(teclas[SDLK_s])
          {
-            mapa->save("../data/mapas/novo.map");
-            printf("Saved Map as `../data/mapas/novo.map`\n");
-            SDL_Delay(200);
-         }
+            
+         }*/
          if(teclas[SDLK_i])
          {
              printf("x:%.3f z:%.3f phi:%.3f theta:%.3f \n",centroX, centroZ,

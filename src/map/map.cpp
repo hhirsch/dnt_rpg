@@ -20,6 +20,8 @@ Square::Square()
 	floor_texture_fname = NULL;
 	flags = 0;
         h1 = h2 = h3 = h4 = 0;
+        mapConection.active = false;
+        mapConection.mapName = (char*)malloc(255*sizeof(char));
         int aux;
         for(aux=0;aux<MAXOBJETOS;aux++)
         {
@@ -37,6 +39,7 @@ Square::Square()
  ********************************************************************/
 Square::~Square()
 {
+        free(mapConection.mapName);
 	if( floor_texture_fname == NULL )
 		free( floor_texture_fname );
 	return;
@@ -599,6 +602,19 @@ int Map::open(char* arquivo)
          {
             switch(buffer[1])
             {
+               case 'c': /* define conection on square */
+               {
+                 fgets(buffer, sizeof(buffer), arq);
+                 sscanf(buffer,"%f,%f,%f,%f:%s",
+                        &MapSquares[posX][posZ]->mapConection.x1,
+                        &MapSquares[posX][posZ]->mapConection.z1,
+                        &MapSquares[posX][posZ]->mapConection.x2,
+                        &MapSquares[posX][posZ]->mapConection.z2,
+                        nome );
+                 strcpy(MapSquares[posX][posZ]->mapConection.mapName,nome);
+                 MapSquares[posX][posZ]->mapConection.active = true;
+                 break;
+               }
                case 't': /* Define a Textura do Quadrado */
                {
                   fgets(buffer, sizeof(buffer), arq);
@@ -686,6 +702,7 @@ int Map::open(char* arquivo)
       }
       maux = maux->proximo;
    }
+
    return(1);
 }
 
@@ -916,6 +933,15 @@ int Map::save(char* arquivo)
                   MapSquares[x1][z1]->h4);
           fprintf(arq,"ut %s\n",NomeTextura(this, 
                                             MapSquares[x1][z1]->textura));
+          if( MapSquares[x1][z1]->mapConection.active )
+          {
+              fprintf(arq,"uc %f,%f,%f,%f:%s\n",
+                      &MapSquares[x1][z1]->mapConection.x1,
+                      &MapSquares[x1][z1]->mapConection.z1,
+                      &MapSquares[x1][z1]->mapConection.x2,
+                      &MapSquares[x1][z1]->mapConection.z2,
+                      MapSquares[x1][z1]->mapConection.mapName);
+          }
           int aux;
           for(aux=0;aux<MAXOBJETOS;aux++)
           {

@@ -31,7 +31,7 @@ int main(int argc, char **argv)
    Engine->Iniciar(screen);
    while(Engine->TelaInicial())
    {
-       Engine->CarregaMapa("../data/mapas/um.map",1);
+       Engine->CarregaMapa("../data/mapas/quatro.map",1);
        #ifdef REDE
           Engine->server = server;
        #endif
