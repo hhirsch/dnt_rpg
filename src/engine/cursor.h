@@ -11,7 +11,8 @@
 #define CURSOR_MAPTRAVEL 3
 #define CURSOR_TALK      4
 #define CURSOR_GET       5
-#define CURSOR_TOTAL     6
+#define CURSOR_INVENTORY 6
+#define CURSOR_TOTAL     7
 
 class cursor
 {

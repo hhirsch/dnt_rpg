@@ -20,6 +20,9 @@
  - Variable terrain height;
  - Object pass throught added;
  - Interactive Doors Added;
+ - Objects Selection;
+ - Optimized intern map representation;
+ - Color mouse cursors;
  -
  - Some bugs fixed; 
 

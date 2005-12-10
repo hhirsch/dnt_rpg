@@ -981,17 +981,6 @@ void engine::Desenhar()
    glEnable(GL_DEPTH_TEST);
    glEnable(GL_LIGHTING);
 
-     /* DEBUG */
-   glPushMatrix();
-    glColor3f(0.5,0.8,0.1);
-    glBegin(GL_POLYGON);
-      glVertex3f(xReal-2, 0.2, zReal-2);
-      glVertex3f(xReal-2, 0.2, zReal+2);
-      glVertex3f(xReal+2, 0.2, zReal+2);
-      glVertex3f(xReal+2, 0.2, zReal-2);
-    glEnd();
-   glPopMatrix();
-
    glPushMatrix();
    
    /* Desenha o Mundo, fazendo culling do view frustum */

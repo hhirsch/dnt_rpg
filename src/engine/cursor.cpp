@@ -8,6 +8,7 @@ cursor::cursor()
    textura[CURSOR_MAPTRAVEL] = LoadCursor("../data/cursors/MapTravel.png");
    textura[CURSOR_TALK] = LoadCursor("../data/cursors/talk.png");
    textura[CURSOR_GET] = LoadCursor("../data/cursors/Get.png");
+   textura[CURSOR_INVENTORY] = LoadCursor("../data/cursors/Inventory.png");
    actualCursor = CURSOR_WALK;
 }
 
