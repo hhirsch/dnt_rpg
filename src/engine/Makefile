@@ -13,7 +13,7 @@ OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapobjeto.o
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)ai.o
-OBJS = conversa.o culling.o dccnit.o ../etc/glm.o ../etc/texture.o personagens.o teste.o
+OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o ../etc/texture.o personagens.o teste.o
 BIN = ../../bin/
 SUPREDE = #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
@@ -25,6 +25,9 @@ conversa.o: conversa.cpp conversa.h
 
 culling.o: culling.cpp culling.h
 	$(CC) $(CFLAGS) culling.cpp -o culling.o
+
+cursor.o: cursor.cpp cursor.h
+	$(CC) $(CFLAGS) cursor.cpp -o cursor.o
 
 dccnit.o: dccnit.h dccnit.cpp
 	$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o

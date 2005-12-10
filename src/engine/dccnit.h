@@ -8,6 +8,7 @@
 
 #include "../gui/farso.h"
 #include "../map/map.h"
+#include "cursor.h"
 #include "personagens.h"
 #include "luta.h"
 #include "../ia/ai.h"
@@ -79,6 +80,7 @@ class engine
       void abreAtalhos();
 
       Map* mapa;                   /* Mapa Utilizado pela Engine */
+      cursor* cursors;             /* Utilized mouse cursors */
  
       GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
       GLdouble proj[16];           /* Matriz de Projecao utilizada */

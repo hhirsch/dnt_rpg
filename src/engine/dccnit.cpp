@@ -62,6 +62,8 @@ engine::engine()
    mouseX = 0;
    mouseY = 0;
 
+   cursors = new(cursor);
+
    /* Define a ultima vez em que desenhou (so por simplicidade) */
    ultimaLeitura = SDL_GetTicks();
    ultimoMouse = ultimaLeitura;
@@ -85,6 +87,7 @@ engine::~engine()
    {
       delete(mapa);
    }
+   delete(cursors);
 }
 
 /*********************************************************************
@@ -228,6 +231,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
  *********************************************************************/
 int engine::TelaInicial()
 {
+   SDL_ShowCursor(SDL_ENABLE);
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
@@ -286,6 +290,8 @@ int engine::TelaInicial()
 
    glDeleteTextures(1,&textID);
   // glDeleteTextures(1,&tituloID);
+
+   SDL_ShowCursor(SDL_DISABLE);
 
    return(result);
 }
@@ -556,6 +562,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
       int x,y;
       Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+      mouseX = x;
+      mouseY = y;
 
       /* Trata A GUI */
       if(gui->ManipulaEventos(x,y,Mbotao,keys)!=NADA)
@@ -566,9 +574,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
       if( (tempo-ultimoMouse>=100 ) || (Mbotao & SDL_BUTTON(1)) )
       {
+         cursors->SetActual(CURSOR_WALK);
          ultimoMouse = tempo;
-         mouseX = x;
-         mouseY = y;
          wx = mouseX; wy = SCREEN_Y - mouseY; 
             
          glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
@@ -636,6 +643,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                                (quaux->Zobjetos[obj]+modelo3d->z2),
                                xReal-2,zReal-2, xReal+2, zReal+2, true))*/
                {
+                   cursors->SetActual(CURSOR_GET);
                    sprintf(ObjTxt->texto,"%s",quaux->objetos[obj]->nome); 
                    janAtalhos->Desenhar();
                    pronto = 1;
@@ -660,6 +668,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             {
                sprintf(ObjTxt->texto,quaux->mapConection.mapName); 
                janAtalhos->Desenhar();
+               cursors->SetActual(CURSOR_MAPTRAVEL);
                pronto = 1;
                if(Mbotao & SDL_BUTTON(1))
                {
@@ -942,6 +951,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
  *********************************************************************/
 void engine::Desenhar()
 {
+   GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
+
    glClear (GL_DEPTH_BUFFER_BIT);
 
    glLoadIdentity();
@@ -1029,7 +1040,6 @@ void engine::Desenhar()
       }
 
    /* Faz o Desenho da GUI */
-   GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
    gluUnProject(SCREEN_X,SCREEN_Y-80,0.01, modl, proj, viewPort, &x2, &y2, &z2);
    gluUnProject(SCREEN_X-60,SCREEN_Y-80,0.01,modl,proj,viewPort, &x3, &y3, &z3);
@@ -1053,8 +1063,36 @@ void engine::Desenhar()
       glVertex3f(x4,y4,z4);
    glEnd();
    glDisable(GL_TEXTURE_2D);
-   
+
    gui->Desenhar(proj,modl,viewPort);
+
+   glEnable(GL_BLEND);
+   //glEnable(GL_ALPHA_TEST);
+   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+   //glAlphaFunc(GL_GREATER, 0.1f);
+   /* Desnho do cursor do mouse */
+   GLuint Y = SCREEN_Y - mouseY;
+   gluUnProject(mouseX,Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject(mouseX,Y-32,0.01, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(mouseX+32,Y-32,0.01,modl,proj,viewPort, &x3, &y3, &z3);
+   gluUnProject(mouseX+32,Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, cursors->actualCursor );
+   glBegin(GL_QUADS);
+      glColor4f(1,1,1,1);
+      glTexCoord2f(0,0);
+      glVertex3f(x1,y1,z1);
+      glTexCoord2f(0,1);
+      glVertex3f(x2,y2,z2);
+      glTexCoord2f(1,1);
+      glVertex3f(x3,y3,z3);
+      glTexCoord2f(1,0);
+      glVertex3f(x4,y4,z4);
+   glEnd();
+   glDisable(GL_TEXTURE_2D);
+   glDisable(GL_BLEND);
+   //glDisable(GL_ALPHA_TEST);
+
   
    glEnable(GL_LIGHTING);
  
