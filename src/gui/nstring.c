@@ -8,9 +8,8 @@
 /* Deleta n caracteres em st a partir de pos */
 char* string_Deletar(char *st,int pos, int n)
 {
-   char* depois = &st[pos+n];
    if(pos>0) 
-   {  /*GAMBIARRRAAAAA!!!!!!!!!!!!!!!!!!!!!****************************/
+   {
       char* antes = (char*) malloc(255*sizeof(char));
       int aux;
       for(aux=0;aux<pos;aux++)
@@ -22,15 +21,15 @@ char* string_Deletar(char *st,int pos, int n)
          aux++;aux2++;
       }
       antes[aux] = '\0';
-      //free(st); 
+      free(st); 
       return(antes);
    }
    else
-      return(depois);
+      return(st);
 }
 
 char* string_Colocar(char* st,char c,int pos)
-{  /*MAIS GAMBIARRA!!!!!!!***************************/
+{  
    char* result= (char*) malloc(sizeof(char)*255);
    int aux; 
    for (aux=0;aux<pos;aux++)
@@ -42,6 +41,7 @@ char* string_Colocar(char* st,char c,int pos)
       aux++;
    }
    result[aux+1] = '\0';
+   free(st);
    return(result);
 }
 
