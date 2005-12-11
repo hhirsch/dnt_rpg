@@ -15,11 +15,14 @@
 #include "nstring.h"
 #include "objeto.h"
 
+
 /* Definicao e Procedimentos de uma Barra de Texto */
 
 class barraTexto: public Tobjeto
 {
    public:
+      barraTexto();
+      ~barraTexto();
       int x1,y1,x2,y2;    /* Coordenadas na janela */
       int disp,           /* Disponivel? */
       cript;              /* Pseudo criptografada? */

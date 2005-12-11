@@ -5,6 +5,15 @@
 
 #include "bartexto.h"
 
+barraTexto::barraTexto()
+{
+}
+
+barraTexto::~barraTexto()
+{
+   free(texto);
+}
+
 /* Escreve o texto da barra nela mesma */
 void barraTexto::PoeTexto(int Xjan, int Yjan,int salvar,unsigned int pos, int marca,
                           SDL_Surface *screen)
@@ -472,7 +481,6 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
           else
             c = ' ';
       }      
-
       if( (((ult - ultEsc) >= 100) || (ultChar!=c)) && 
           (c!=-1))
       {
@@ -483,6 +491,7 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
       }
        
    }
+
    if(Mbotao & SDL_BUTTON(1))
    {
        if(mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,mouseX,mouseY))
