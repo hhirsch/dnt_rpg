@@ -32,7 +32,50 @@ void Tlista::Retirar(Tobjeto *obj)
 {
    obj->anterior->proximo = obj->proximo;
    obj->proximo->anterior = obj->anterior;
-   delete obj;
+   switch (obj->tipo) 
+   {
+      case BOTAO:
+      {
+         botao* b = (botao*) obj;
+         delete(b);
+         break;
+      }
+      case BARRATEXTO:
+      {
+         barraTexto* b = (barraTexto*) obj;
+         delete(b);
+         break;
+      }
+      case CXSEL:
+      {
+         cxSel* c = (cxSel*) obj;
+         delete(c);
+         break;
+      }
+      case FIGURA:
+      {
+         figura* f = (figura*) obj;
+         delete(f);
+         break;
+      }
+      case SELTEXTO:
+      {
+         selTexto* s = (selTexto*) obj;
+         delete(s);
+         break;
+      }
+      case QUADROTEXTO:
+      {
+         quadroTexto* q = (quadroTexto*) obj;
+         delete(q);
+         break;
+      }
+      default: 
+      {
+        delete(obj);
+        break;
+      }
+   }
    total--;
 }
 
@@ -125,7 +168,7 @@ barraTexto* Tlista::InserirBarraTexto(int xa,int ya,int xb,int yb,
                        void (*procEditada)(barraTexto* bart,SDL_Surface *screen))
 {
    barraTexto* novo;
-   novo = new barraTexto;
+   novo = new(barraTexto);
    novo->procEditada = procEditada;
    novo->x1 = xa;
    novo->x2 = xb;
@@ -136,10 +179,11 @@ barraTexto* Tlista::InserirBarraTexto(int xa,int ya,int xb,int yb,
    novo->pos = 0;
    novo->ultEsc = 0;
    novo->ultChar='\0';
-   novo->texto = text;
    novo->cript = cript;
    novo->tipo = BARRATEXTO;
    novo->Cores.Iniciar();
+   novo->texto = (char*) malloc(256*sizeof(char));
+   strcpy(novo->texto,text);
    InserirObj(novo);
    return(novo);
 } 
