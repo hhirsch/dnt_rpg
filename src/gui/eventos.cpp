@@ -261,6 +261,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                {
                      bart->procEditada(bart,NULL);
                }
+               ljan->janelaAtiva->AtualizaCara();
                return(BARRATEXTOESCRITA);
            }
         ljan->janelaAtiva->AtualizaCara();

@@ -499,16 +499,16 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
            /* Calcula a nova posicao */
            pos=(mouseX -(Xjan+x1+2))/(fonte_incCP()+1) + inic;
            if (pos>strlen(texto)) pos = strlen(texto);
-               PoeTexto(Xjan,Yjan,1,pos,1,screen);
+               PoeTexto(0,0,1,pos,1,screen);
        }
        else
           pronto = 1;
   }
 
   if(!pronto)
-    PoeTexto(Xjan,Yjan,1,pos,1,screen);
+    PoeTexto(0,0,1,pos,1,screen);
   else
-    PoeTexto(Xjan,Yjan,1,0,0,screen);
+    PoeTexto(0,0,1,0,0,screen);
 
   return(pronto);
    //PoeTexto(Xjan,Yjan,1,0,0,screen);
