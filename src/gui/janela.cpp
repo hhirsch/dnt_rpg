@@ -17,7 +17,7 @@ Ljanela::~Ljanela()
 {
    janela* jan;
    jan = (janela*)primeiro->proximo;
-   while(jan->proximo != primeiro )
+   while(jan != primeiro )
    {
       //RetirarJanela((janela*)(primeiro->proximo),NULL);
       SDL_FreeSurface(jan->cara);
