@@ -5,6 +5,9 @@
 #ifndef _lista_h
 #define _lista_h
 
+#include <string>
+using namespace std;
+
 #include "objeto.h"
 #include "bartexto.h"
 #include "botao.h"
@@ -32,7 +35,7 @@ class Tlista{
        * proc        -> ponteiro pro proc a ser chamado qdo o botao 
        *                for pressionado*/
       botao* InserirBotao(int xa,int ya,int xb,int yb,int Ra,int Ga,
-                int Ba,char* text,int oval,
+                int Ba,const char* text,int oval,
                 int (*proc)(void *jan,void *ljan,SDL_Surface *screen));
 
       /* Insere uma nova cxSel  na lista
@@ -45,15 +48,15 @@ class Tlista{
        * x,y     -> coordenada da figura
        * arquivo -> nome do arquivo que contem a figura
        * lista   -> lista onde sera inserida a figura */
-      figura* InserirFigura(int x,int y,char* arquivo);
+      figura* InserirFigura(int x,int y,const char* arquivo);
 
       /* Insere uma nova barra de texto na lista
        * xa,ya,xb,yb -> Dimensoes da barra de texto
        * text        -> Texto da Barra de Texto
        * cript       -> <>0 se estiver "criptografada"
        * lista       -> ponteiro para lista de barra de texto */
-      barraTexto* InserirBarraTexto(int xa,int ya,int xb,int yb,char* text,
-                         int cript,
+      barraTexto* InserirBarraTexto(int xa,int ya,int xb,int yb,
+                                    const char* text, int cript,
                      void (*procEditada)(barraTexto* bart,SDL_Surface *screen));
 
       /* Insere um novo quadro de Texto na lista 
@@ -62,16 +65,16 @@ class Tlista{
        * text        -> texto do novo quadro de texto
        * lista       -> lista onde se inserira o novo quadro de texto*/
       quadroTexto* InserirQuadroTexto(int xa,int ya,int xb,int yb,int moldura,
-                                       char* text);
+                                       const char* text);
 
       /* Insere um novo selTexto na lista
        * xa,ya,xb,yb -> coordenadas da selTexto (yb eh calculada ao desenhar)
        * textX       -> texto de escolha de numero X
        * proc        -> procedimento a rodar qdo ocorrer escolha
        * lista       -> lista na qual a selTexto vai ser inserida*/
-      selTexto* InserirSelTexto(int xa,int ya,int xb,int yb,char* text0,
-                            char* text1,char* text2,char* text3, 
-                            char* text4,int (*proc)(SDL_Surface *screen, 
+      selTexto* InserirSelTexto(int xa,int ya,int xb,int yb,string text0,
+                            string text1,string text2,string text3, 
+                            string text4,int (*proc)(SDL_Surface *screen, 
                             int texto));
 
 

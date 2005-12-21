@@ -162,6 +162,21 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                        foco = FOCO_CXSEL;
                    }
                }
+               else if(obj->tipo == SELTEXTO)
+               {
+                  selTexto* st = (selTexto*) obj;
+                  if(mouse_NaArea(st->x1+ljan->janelaAtiva->x1,
+                                  st->y1+ljan->janelaAtiva->y1,
+                                  st->x2+ljan->janelaAtiva->x1,
+                                  st->y2+ljan->janelaAtiva->y1,x,y))
+                  {
+                     objAtivo = st;
+                     if(st->procPres != NULL)
+                        st->procPres(NULL, 
+                            st->Selecionada(y,ljan->janelaAtiva->y1));
+                     foco = FOCO_SELTEXTO;
+                  }
+               }
                obj = obj->proximo;
             }
             /* Se saiu do for, sem objeto algum, chama o proc da janela */
@@ -224,13 +239,13 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                  menu* men = (menu*)objAtivo;
                  men->Coordenada(bot->x1,bot->y2+1);
                  men->itemAtual = 1;
-                 if (!strcmp(bot->texto,"_"))
+                 if (!bot->texto.compare("_"))
                     foco = FOCO_MENUJANELA;
                  else
                     foco = FOCO_MENU;
                  
               }
-              else if (!strcmp(bot->texto,"*"))
+              else if (!bot->texto.compare("*"))
               {
                    /* Fecha a Janela */
                   if(ljan->janelaAtiva->fechavel)

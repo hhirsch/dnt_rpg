@@ -38,10 +38,10 @@ typedef struct
  * inic        -> posicao inicial
  * fim         -> posicao final
  * x1,y1,x2,y2 -> coordenadas limitrofes */
-void escxy(SDL_Surface *screen,int x,int y, char* texto);
-void escxy_Def(SDL_Surface *screen,int x,int y, char* texto,int inic,int fim);
+void escxy(SDL_Surface *screen,int x,int y, const char* texto);
+void escxy_Def(SDL_Surface *screen,int x,int y, const char* texto,int inic,int fim);
 /*Retorna o y */
-int escxy_Area(SDL_Surface *screen,int x, int y, char* texto,int x1,int y1,
+int escxy_Area(SDL_Surface *screen,int x, int y, const char* texto,int x1,int y1,
                 int x2,int y2);
 
 int fonte_incCP();

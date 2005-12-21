@@ -31,7 +31,8 @@ int selFonte(char* nome, int alinha, int Tamanho)
 }
 
 /* Procedimento interno e geral de escrita */
-int escxy_Int(SDL_Surface *screen,int x,int y,char* texto,int inic,int fim,
+int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
+              int fim,
                int x1,int y1,int x2,int y2)
 {
    if(texto[0]=='\0') return(-1);
@@ -89,19 +90,20 @@ int escxy_Int(SDL_Surface *screen,int x,int y,char* texto,int inic,int fim,
 }
 
 
-void escxy(SDL_Surface *screen,int x,int y,char* texto)
+void escxy(SDL_Surface *screen,int x,int y,const char* texto)
 {
    escxy_Int(screen,x,y,texto,0,strlen(texto)-1,0,0,screen->w-1,screen->h-1);
 }
 
-int escxy_Area(SDL_Surface *screen,int x, int y,char* texto,int x1,int y1,
+int escxy_Area(SDL_Surface *screen,int x, int y,const char* texto,int x1,int y1,
                 int x2,int y2)
 {
    return(escxy_Int(screen,x,y,texto,0,strlen(texto)-1,x1,y1,x2,y2));
 }
 
 
-void escxy_Def(SDL_Surface *screen,int x,int y,char* texto,int inic,int fim)
+void escxy_Def(SDL_Surface *screen,int x,int y,const char* texto,
+               int inic,int fim)
 {
    escxy_Int(screen,x,y,texto,inic,fim,0,0,screen->w-1,screen->h-1);
 }

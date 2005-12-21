@@ -329,15 +329,15 @@ void engine::Iniciar(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Definicao da Luz */
-   GLfloat light_ambient[] = { 0.6, 0.6, 0.6, 1.0 };
-   GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat light_position[] = { 300.0, 10.0, 200.0, 1.0 };
+   GLfloat light_ambient[] = { 0.6, 0.62, 0.6, 1.0 };
+   //GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+   //GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat light_position[] = { 0.0, 0.0, 1.0, 0.0 };
    
    /* Carrega a Luz */
    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-   glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+   //glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+   //glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
    
    /* Habilita a iluminacao */
@@ -491,6 +491,70 @@ int estaDentro(GLfloat min1[3], GLfloat max1[3],
    }
 }
 
+/*********************************************************************
+ *               Rotaciona e Translada o Bounding Box                *
+ *********************************************************************/
+void rotTransBoundingBox(GLfloat orientacao, GLfloat x[4], GLfloat z[4],
+                         GLfloat varX, GLfloat varMinY, GLfloat varMaxY, 
+                         GLfloat varZ,
+                         GLfloat min[4], GLfloat max[4])
+{
+   int aux;
+   /* Rotaciona o bounding para a posicao correrta */
+   if(orientacao != 0)
+   {
+      GLfloat xVelho, zVelho;
+      GLfloat cosseno = cos(deg2Rad(orientacao));
+      GLfloat seno = sin(deg2Rad(orientacao));
+      for(aux = 0;aux<4;aux++)
+      {
+         xVelho = x[aux];
+         zVelho = z[aux];
+         x[aux] = (zVelho*seno) + (xVelho*cosseno);
+         z[aux] = (zVelho*cosseno) - (xVelho*seno);
+      }
+   }
+
+   
+   /* translada o bounding box para o local correto*/
+   min[1] += varMinY;
+   max[1] += varMaxY;
+   for(aux=0;aux<4;aux++)
+   {
+     x[aux] += varX;
+     z[aux] += varZ;
+     /*if( (x[aux]<2) || (z[aux]<2) || 
+         (x[aux]>mapa->x*SQUARESIZE-2) || (z[aux]>mapa->z*SQUARESIZE-2))
+     {
+         return(0);
+     }*/
+     if(aux == 0)
+     {
+        min[0] = x[0]; max[0] = x[0];
+        min[2] = z[0]; max[2] = z[0];
+     }
+     else
+     {
+         if(x[aux] < min[0])
+         {
+            min[0] = x[aux];
+         }
+         if(x[aux] > max[0])
+         {
+            max[0] = x[aux];
+         }
+         if(z[aux] < min[2])
+         {
+            min[2] = z[aux];
+         }
+         if(z[aux] > max[2])
+         {
+            max[2] = z[aux];
+         }
+
+     }
+   }
+}
 
 /*********************************************************************
  *                      Tratamento do Teclado                        *
@@ -531,6 +595,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       for(aux=0;aux < NPCs->total;aux++)
       {
          per->m_calModel->update(segundos);   
+         per->CalculateBoundingBox();
          per = (personagem*) per->proximo;
       }
 
@@ -581,7 +646,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
          gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal); 
 
-       
+         GLfloat minMouse[3], maxMouse[3];
+         minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
+         minMouse[1] = 0.0;      maxMouse[1] = 0.0;
+         minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
+
          int qx, qz;
          qx = (int)xReal / SQUARESIZE;
          qz = (int)zReal / SQUARESIZE;
@@ -591,65 +660,108 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          int pronto;
          int obj = 0;
          GLfloat minObj[3], maxObj[3];
-         GLfloat minMouse[3], maxMouse[3];
-         minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
-         minMouse[1] = 0.0;      maxMouse[1] = 0.0;
-         minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
          for(pronto = 0; ( (obj<MAXOBJETOS) && (!pronto) );obj++)
          {
             if(quaux->objetos[obj])
             {
                GLMmodel* modelo3d = (GLMmodel*) quaux->objetos[obj]->modelo3d;
-
-               /* Rotaciona o bounding para a posicao correrta */
-               if(quaux->orientacaoObjetos[obj] != 0)
-               {
-                  GLfloat cosseno=cos(deg2Rad(quaux->orientacaoObjetos[obj]));
-                  GLfloat seno = sin(deg2Rad(quaux->orientacaoObjetos[obj]));
-                  
-                  minObj[0] = (modelo3d->z1*seno) + (modelo3d->x1*cosseno);
-                  minObj[2] = (modelo3d->z1*cosseno) - (modelo3d->x1*seno);
-                  maxObj[0] = (modelo3d->z2*seno) + (modelo3d->x2*cosseno);
-                  maxObj[2] = (modelo3d->z2*cosseno) - (modelo3d->x2*seno);
-               }
-               minObj[0] += (quaux->Xobjetos[obj]);
-               minObj[1] = 0.0;
-               minObj[2] += (quaux->Zobjetos[obj]);
-               maxObj[0] += (quaux->Xobjetos[obj]);
-               maxObj[1] = 0.0;
-               maxObj[2] += (quaux->Zobjetos[obj]);
-
-
-               if(minObj[0] > maxObj[0])
-               {
-                  GLfloat swp = minObj[0];
-                  minObj[0] = maxObj[0];
-                  maxObj[0] = swp; 
-               }
-               if(minObj[2] > maxObj[2])
-               {
-                  GLfloat swp = minObj[2];
-                  minObj[2] = maxObj[2];
-                  maxObj[2] = swp; 
-               }
-
-               /*printf("OBJ: %.3f %.3f %.3f %.3f\n",minObj[0],minObj[2],maxObj[0],maxObj[2]);
-               printf("MSE:  %.3f %.3f %.3f %.3f\n",minMouse[0],minMouse[2],maxMouse[0],maxMouse[2]);*/
+               GLfloat X[2]; GLfloat Z[2];
+               X[0] = modelo3d->x1;
+               X[1] = modelo3d->x2;
+               Z[0] = modelo3d->z1;
+               Z[1] = modelo3d->z2;
+               rotTransBoundingBox(quaux->orientacaoObjetos[obj], X, Z,
+                              quaux->Xobjetos[obj], 0.0, 
+                              0.0,quaux->Zobjetos[obj], 
+                              minObj, maxObj);
 
                if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
-               /*if(pontoInterno((quaux->Xobjetos[obj]+modelo3d->x1),
-                               (quaux->Zobjetos[obj]+modelo3d->z1),
-                               (quaux->Xobjetos[obj]+modelo3d->x2),
-                               (quaux->Zobjetos[obj]+modelo3d->z2),
-                               xReal-2,zReal-2, xReal+2, zReal+2, true))*/
                {
                    cursors->SetActual(CURSOR_GET);
                    sprintf(ObjTxt->texto,"%s",quaux->objetos[obj]->nome); 
                    janAtalhos->Desenhar();
+                   if(Mbotao & SDL_BUTTON(1))
+                   {
+                      if(strcmp(ObjTxt->texto,"Door") == 0)
+                      {
+                          ///TODO door open
+                         quaux->orientacaoObjetos[obj] += 90; 
+                      }
+                   }
                    pronto = 1;
                }
             }
          }
+         /* TODO Verifica Inventorio */
+         personagem* pers = (personagem*) PCs->primeiro->proximo;
+         while( (pers != PCs->primeiro) && (!pronto) )
+         {
+            GLfloat x[4],z[4];
+            GLfloat min[3], max[3];
+
+            x[0] = pers->min[0];
+            z[0] = pers->min[2];
+
+            x[1] = pers->min[0];
+            z[1] = pers->max[2]; 
+
+            x[2] = pers->max[0];
+            z[2] = pers->max[2];
+
+            x[3] = pers->max[0];
+            z[3] = pers->min[2];
+
+            /* Rotaciona e translada o Bounding Box */
+            rotTransBoundingBox(pers->orientacao, x, z,
+                                pers->posicaoLadoX, 
+                                0.0, 0.0, 
+                                pers->posicaoLadoZ, min, max );
+
+            if(estaDentro( min, max, minMouse, maxMouse, 1))
+            {
+                cursors->SetActual(CURSOR_INVENTORY);
+                sprintf(ObjTxt->texto,"%s",pers->nome.c_str()); 
+                janAtalhos->Desenhar();
+                pronto = 1;
+            }
+            pers = (personagem*) pers->proximo;
+         }
+
+         /* TODO Verifica Conversas */
+         pers = (personagem*) NPCs->primeiro->proximo;
+         while( (pers != NPCs->primeiro) && (!pronto) )
+         {
+            GLfloat x[4],z[4];
+            GLfloat min[3], max[3];
+
+            x[0] = pers->min[0];
+            z[0] = pers->min[2];
+
+            x[1] = pers->min[0];
+            z[1] = pers->max[2]; 
+
+            x[2] = pers->max[0];
+            z[2] = pers->max[2];
+
+            x[3] = pers->max[0];
+            z[3] = pers->min[2];
+
+            /* Rotaciona e translada o Bounding Box */
+            rotTransBoundingBox(pers->orientacao, x, z,
+                                pers->posicaoLadoX, 
+                                0.0, 0.0, 
+                                pers->posicaoLadoZ, min, max );
+
+            if(estaDentro( min, max, minMouse, maxMouse, 1))
+            {
+                cursors->SetActual(CURSOR_TALK);
+                sprintf(ObjTxt->texto,"%s",pers->nome.c_str()); 
+                janAtalhos->Desenhar();
+                pronto = 1;
+            }
+            pers = (personagem*) pers->proximo;
+         }
+
          /* Verifica Conexão do Mapa */
          if( quaux->mapConection.active )
          {
@@ -677,6 +789,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                }
             }
          }
+
          if(!pronto)
          {
             sprintf(ObjTxt->texto,"Nothing"); 
@@ -985,7 +1098,7 @@ void engine::Desenhar()
    
    /* Desenha o Mundo, fazendo culling do view frustum */
    mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
-
+  
    /* Desenha os Personagens do Jogador (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
@@ -996,16 +1109,14 @@ void engine::Desenhar()
                         per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            per->Render();
-           glDisable(GL_LIGHTING);
-           glColor3f(0.6,0.1,0.1);
+           /*glColor3f(0.6,0.1,0.1);
            glBegin(GL_POLYGON);
               glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
               glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
 
-           glEnd();
-           glEnable(GL_LIGHTING);
+           glEnd();*/
          glPopMatrix();
          per = (personagem*) per->proximo;
       }
@@ -1142,40 +1253,13 @@ int testa(GLfloat min[3], GLfloat max[3],Square* quad)
           X[1] = modelo3d->x2;
           Z[0] = modelo3d->z1;
           Z[1] = modelo3d->z2;
-          if(proxima->orientacaoObjetos[ob]!=0)
-          {
-              GLfloat xVelho, zVelho;
-              GLfloat cosseno = cos(deg2Rad(proxima->orientacaoObjetos[ob]));
-              GLfloat seno = sin(deg2Rad(proxima->orientacaoObjetos[ob]));
-              int aux;
-              for(aux = 0;aux<=1;aux++)
-              {
-                  xVelho = X[aux];
-                  zVelho = Z[aux];
-                  X[aux] = (zVelho*seno) + (xVelho*cosseno);
-                  Z[aux] = (zVelho*cosseno) - (xVelho*seno);
-              }
-              if(X[0]>X[1])
-              {
-                 xVelho = X[0];
-                 X[0] = X[1];
-                 X[1] = xVelho;
-              }
-              if(Z[0]>Z[1])
-              {
-                 zVelho = Z[0];
-                 Z[0] = Z[1];
-                 Z[1] = zVelho;
-              }
-          }
 
-          //printf("%f %f %f %f\n",x[0],z[0],x[1],z[1]);
-          min2[0] = X[0]+proxima->Xobjetos[ob];
-          max2[0] = X[1]+proxima->Xobjetos[ob];
-          min2[1] = modelo3d->y1;//+Yobjetos. TODO
-          max2[1] = modelo3d->y2;
-          min2[2] = Z[0]+proxima->Zobjetos[ob];
-          max2[2] = Z[1]+proxima->Zobjetos[ob];
+/* TODO +Yobjetos */
+          rotTransBoundingBox(proxima->orientacaoObjetos[ob], X, Z,
+                              proxima->Xobjetos[ob], modelo3d->y1, 
+                              modelo3d->y2,proxima->Zobjetos[ob], 
+                              min2, max2);
+
           //printf("%f %f %f %f\n",u1,v1,u2,v2);
           //printf("%f %f %f %f %f %f %f %f\n",);
           result &= !estaDentro(min,max,min2,max2,1);
@@ -1238,64 +1322,24 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    x[3] = PCs->personagemAtivo->max[0];
    z[3] = PCs->personagemAtivo->min[2];
 
-   /* Rotaciona o bounding para a posicao correrta */
-   if(PCs->personagemAtivo->orientacao+varAlpha != 0)
-   {
-      GLfloat xVelho, zVelho;
-      GLfloat cosseno = cos(deg2Rad(PCs->personagemAtivo->orientacao +
-                            varAlpha));
-      GLfloat seno = sin(deg2Rad(PCs->personagemAtivo->orientacao +
-                            varAlpha));
-      for(aux = 0;aux<4;aux++)
-      {
-         xVelho = x[aux];
-         zVelho = z[aux];
-         x[aux] = (zVelho*seno) + (xVelho*cosseno);
-         z[aux] = (zVelho*cosseno) - (xVelho*seno);
-      }
-   }
+   /* Rotaciona e translada o Bounding Box */
+   rotTransBoundingBox(PCs->personagemAtivo->orientacao+varAlpha, x, z,
+                       PCs->personagemAtivo->posicaoLadoX+varX, 
+                       PCs->personagemAtivo->min[1] + 
+                         PCs->personagemAtivo->posicaoLadoY, 
+                       PCs->personagemAtivo->max[1] + 
+                         PCs->personagemAtivo->posicaoLadoY,
+                       PCs->personagemAtivo->posicaoLadoZ+varZ,
+                       min, max );
 
-   
-   /* translada o bounding box para o local correto*/
-   min[1] += PCs->personagemAtivo->min[1]+PCs->personagemAtivo->posicaoLadoY;
-   max[1] += PCs->personagemAtivo->max[1]+PCs->personagemAtivo->posicaoLadoY;
    for(aux=0;aux<4;aux++)
    {
-     x[aux] += PCs->personagemAtivo->posicaoLadoX+varX;
-     z[aux] += PCs->personagemAtivo->posicaoLadoZ+varZ;
      if( (x[aux]<2) || (z[aux]<2) || 
          (x[aux]>mapa->x*SQUARESIZE-2) || (z[aux]>mapa->z*SQUARESIZE-2))
      {
          return(0);
      }
-     if(aux == 0)
-     {
-        min[0] = x[0]; max[0] = x[0];
-        min[2] = z[0]; max[2] = z[0];
-     }
-     else
-     {
-         if(x[aux] < min[0])
-         {
-            min[0] = x[aux];
-         }
-         if(x[aux] > max[0])
-         {
-            max[0] = x[aux];
-         }
-         if(z[aux] < min[2])
-         {
-            min[2] = z[aux];
-         }
-         if(z[aux] > max[2])
-         {
-            max[2] = z[aux];
-         }
-
-     }
    }
-   
-
 
 
    /* Testa o Atual, ja que eh GRANDE! */
@@ -1477,6 +1521,38 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
    }
 
+   /* Testa colisao com npcs */
+   personagem* pers = (personagem*) NPCs->primeiro->proximo;
+   while( (pers != NPCs->primeiro) )
+   {
+      x[0] = pers->min[0];
+      z[0] = pers->min[2];
+
+      x[1] = pers->min[0];
+      z[1] = pers->max[2]; 
+
+      x[2] = pers->max[0];
+      z[2] = pers->max[2];
+
+      x[3] = pers->max[0];
+      z[3] = pers->min[2];
+
+      /* Rotaciona e translada o Bounding Box */
+      rotTransBoundingBox(pers->orientacao, x, z,
+                          pers->posicaoLadoX, 
+                          0.0, 0.0, 
+                          pers->posicaoLadoZ, min2, max2 );
+
+      if(estaDentro( min, max, min2, max2, 1))
+      {
+         return(0);
+      }
+    
+      pers = (personagem*) pers->proximo;
+   }
+
+   
+   /* Testa Meio-fio */
    if( ColisaoComMeioFio( min, max, mapa->meiosFio) )
    {
       PCs->personagemAtivo->posicaoLadoY = MEIOFIOALTURA+0.1;

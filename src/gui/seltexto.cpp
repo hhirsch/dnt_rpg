@@ -17,7 +17,7 @@ void selTexto::Desenhar(int Xjan,int Yjan,int selecionado,int salvar,
       else
          cor_Definir(Cores.corTextoSel.R,Cores.corTextoSel.G,
                      Cores.corTextoSel.B);
-      ya = escxy_Area(screen,Xjan+4+x1,ya,texto[aux],
+      ya = escxy_Area(screen,Xjan+4+x1,ya,texto[aux].c_str(),
                  Xjan+x1+1,Yjan+y1+1,Xjan+x2-1,Yjan+y2-1);
       y[aux] = ya-Yjan;
       ya += 11;
@@ -58,7 +58,7 @@ void selTexto::EscreveSelecionado(int Xjan,int Yjan,int selecionado,
       cor_Definir(Cores.corTexto.R,Cores.corTexto.G,Cores.corTexto.B);
    }
    selFonte(FHELVETICA,ESQUERDA,1);
-   escxy_Area(screen,Xjan+4+x1,ya,texto[aux],
+   escxy_Area(screen,Xjan+4+x1,ya,texto[aux].c_str(),
                  Xjan+x1+1,Yjan+y1+1,Xjan+x2-1,Yjan+y2-1);
    selec = selecionado;
 
@@ -67,20 +67,11 @@ void selTexto::EscreveSelecionado(int Xjan,int Yjan,int selecionado,
    //AtualizaTela2D(screen);
 }
 
-int selTexto::Tratar(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen, 
-                     int Xjan, int Yjan)
+int selTexto::Selecionada(int ya, int Yjan)
 {
-    int selaux = 1;
-    int aux;
-
-    /* Descolore o ultimo selecionado */
-    EscreveSelecionado(0,0,-1, screen);
-
-    if(!mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,xa,ya))
-       return(0);
-
-    /* Trata o caso do mouse encima do texto */
-    for(aux=0;aux<5;aux++)
+   int aux;
+   int selaux = -1;
+   for(aux=0;aux<5;aux++)
     {
         if((aux>0) && (aux<4))
         {
@@ -92,6 +83,22 @@ int selTexto::Tratar(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen,
         else if( (aux==4) && (ya > Yjan + y[aux-1]+11) )
            selaux = aux;
     } 
+    return(selaux);
+}
+
+int selTexto::Tratar(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen, 
+                     int Xjan, int Yjan)
+{
+    int selaux = 1;
+
+    /* Descolore o ultimo selecionado */
+    EscreveSelecionado(0,0,-1, screen);
+
+    if(!mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,xa,ya))
+       return(0);
+
+    /* Trata o caso do mouse encima do texto */
+    selaux = Selecionada(ya,Yjan);
  
     /* Colore o selecionado atual */
     EscreveSelecionado(0,0, selaux, screen);

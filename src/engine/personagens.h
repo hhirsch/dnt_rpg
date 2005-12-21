@@ -38,11 +38,15 @@ class personagem: public Tobjeto
       int gambiarrice;          // gambiarry
       int inteligencia;         // inteligency
       int odio;                 // hate
+
+      bool amigavel;            //friendly 
+ 
       Tlista *retrato;          // portraits
       Tlista *objetos;          // objetos do personagem
       Tobjeto *armaAtual;       // armaAtual do personagem
 
-      string nome;               // nome do personagem
+      string nome;              // nome do personagem
+      string retratoConversa;   // arquivo de retrato de conversa
       float orientacao;         // orientacao do personagem (onde esta sua cara)
       float posicaoFrente;      // posicao do personagem pra frente
       float posicaoLadoX;       // posicao do personagem pro lado

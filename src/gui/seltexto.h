@@ -5,6 +5,9 @@
 #ifndef _seltexto_h
 #define _seltexto_h
 
+#include <string>
+using namespace std;
+
 #include "desenho.h"
 #include "fonte.h"
 #include "cores.h"
@@ -14,7 +17,7 @@
 class selTexto: public Tobjeto
 {
    public:
-      char *texto[5];      /* 5 Opcoes de Texto a selecionar */
+      string texto[5];     /* 5 Opcoes de Texto a selecionar */
       int y[5];            /* 5 y de cada um - preenchido depois de desenhado */
       int selec;           /* Ultimo Item a ser selecionado no texto */
                            /* Procedimento de qdo seleciona item */
@@ -35,6 +38,9 @@ class selTexto: public Tobjeto
        * screen     -> superficie na qual se encontra a selTexto */
       int Tratar(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen,
                  int Xjan, int Yjan);
+
+      int Selecionada(int ya, int Yjan);
+
 
    private:
    

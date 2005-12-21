@@ -89,7 +89,7 @@ void Tlista::InserirObj(Tobjeto* obj)
 }
 
 botao* Tlista::InserirBotao(int xa,int ya,int xb,int yb,int Ra,int Ga,
-                int Ba,char* text,int oval,
+                int Ba,const char* text,int oval,
                 int (*proc)(void *jan,void *ljan,SDL_Surface *screen))
 {
    botao* novo;
@@ -126,7 +126,7 @@ cxSel* Tlista::InserirCxSel(int xa,int ya,int selecionada)
 }
 
 /* Insere uma nova figura na lista */
-figura* Tlista::InserirFigura(int x,int y,char* arquivo)
+figura* Tlista::InserirFigura(int x,int y,const char* arquivo)
 {
    //printf("Pondo Figura\n");
    figura* novo;
@@ -164,7 +164,7 @@ figura* Tlista::InserirFigura(int x,int y,char* arquivo)
 } 
 
 barraTexto* Tlista::InserirBarraTexto(int xa,int ya,int xb,int yb,
-                                      char* text,int cript,
+                                      const char* text,int cript,
                        void (*procEditada)(barraTexto* bart,SDL_Surface *screen))
 {
    barraTexto* novo;
@@ -190,7 +190,7 @@ barraTexto* Tlista::InserirBarraTexto(int xa,int ya,int xb,int yb,
  
 /* Insere um novo quadro de Texto na lista */
 quadroTexto* Tlista::InserirQuadroTexto(int xa,int ya,int xb,int yb,
-                                        int moldura,char* text)
+                                        int moldura,const char* text)
 {
    quadroTexto* novo;
    novo = new quadroTexto;
@@ -208,10 +208,11 @@ quadroTexto* Tlista::InserirQuadroTexto(int xa,int ya,int xb,int yb,
 } 
 
 /* Insere um novo selTexto na lista */
-selTexto* Tlista::InserirSelTexto(int xa,int ya,int xb,int yb,char* text0,
-                                  char* text1,char* text2,char* text3, 
-                                  char* text4,int (*proc)(SDL_Surface *screen, 
-                                                          int texto))
+selTexto* Tlista::InserirSelTexto(int xa,int ya,int xb,int yb,
+                                  string text0, string text1,
+                                  string text2, string text3, 
+                                  string text4,
+                             int (*proc)(SDL_Surface *screen,int texto))
 {
    selTexto* novo;
    novo = new selTexto;

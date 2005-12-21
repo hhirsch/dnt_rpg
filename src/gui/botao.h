@@ -6,6 +6,10 @@
 #ifndef _botao_h
 #define _botao_h
 
+
+#include <string>
+using namespace std;
+
 #include "objeto.h"
 #include "cores.h"
 #include "desenho.h"
@@ -21,7 +25,7 @@ class botao: public Tobjeto{
       void* men;              // Menu Vinculado ao Botao
       int R; int G; int B;    // Cor do botao
       int oval;               // Oval ou Retangular
-      char* texto;            // Texto Mostrado
+      string texto;            // Texto Mostrado
       cores Cores;
 
       /* Desenha o botao na superficie

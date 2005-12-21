@@ -13,7 +13,7 @@ OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDENGINE)cull
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-all: DlgEditor MapEditor
+all: DlgEditor MapEditor dlgCompiler
 
 MapEditor.o: MapEditor.cpp
 	$(CC) $(CFLAGS) MapEditor.cpp -o MapEditor.o
@@ -24,8 +24,14 @@ MapEditor: $(OBJSGUI) $(OBJSMAPA) MapEditor.o
 DlgEditor.o: DlgEditor.cpp
 	$(CC) $(CFLAGS) DlgEditor.cpp -o DlgEditor.o
 
-DlgEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJS)
+DlgEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJS) 
 	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) $(OBJS) -o $(BIN)DlgEditor
+
+dlgCompiler.o: dlgCompiler.cpp
+	$(CC) $(CFLAGS) dlgCompiler.cpp -o dlgCompiler.o
+
+dlgCompiler: $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o
+	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o -o $(BIN)dlgCompiler
 
 clean:
 	\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor

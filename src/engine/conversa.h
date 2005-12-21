@@ -6,18 +6,55 @@
 #ifndef _conversa_h
 #define _conversa_h
 
+
+#define ACTION_GOTO   0
+#define ACTION_FIGHT  1
+#define ACTION_CLOSE  2
+#define ACTION_MODPC  3
+#define ACTION_MODNPC 4
+
+#define OPER_EQUAL        0
+#define OPER_GREATER      1
+#define OPER_GREATEREQUAL 2
+#define OPER_LESSER       3
+#define OPER_LESSEREQUAL  4
+
+#define OPER_ZERO  0
+#define OPER_MINUS 1
+#define OPER_PLUS  2      
+
+#define ATT_AGILITY     0
+#define ATT_BOVINICE    1
+#define ATT_BRUTALITY   2
+#define ATT_WISDOW      3
+#define ATT_STRONG      4
+#define ATT_GAMBIARRY   5
+#define ATT_INTELIGENCY 6
+#define ATT_HATE        7
+
 #include "../gui/farso.h"
+#include "personagens.h"
+#include <string>
+using namespace std;
+
+typedef struct 
+{
+   int id;
+   int oper;
+   int qty;
+   int att;
+}action;
 
 typedef struct {
-   char Se[140];
-   char Atributo[30];
-   char Operador[3];
+   string Se;
+   int Atributo;
+   int Operador;
    int Limite;
    
-   char Senao[140];  
+   string Senao;  
 
-   char SeAcao[30];
-   char SenaoAcao[30];
+   action SeAcao;
+   action SenaoAcao;
     
 }seSenao;
 
@@ -35,6 +72,7 @@ class conversa
       dialogo* primeiro;                /*Nodo cabeca*/
       int total;                        /*Total de Dialogos*/
       int atual;                        /*Dialogo Atualmente Utilizado*/
+      janela* jan;
  
       conversa();                       /*Construtor*/
       ~conversa();                      /*Destruidor*/
@@ -55,8 +93,16 @@ class conversa
       void retirarDialogo(int num);     
 
       /* Abre a conversa na janela
-       * numDialogo -> numero do dialogo a ser aberto */
-      void abrirDialogo(int numDialogo);
+       * numDialogo -> numero do dialogo a ser aberto 
+       * gui -> interface de jaelas utilizada */
+      void abrirDialogo(int numDialogo, interface* gui, personagem* pers,
+                        int (*procPres)(SDL_Surface *screen, int texto));
+
+      int ProcessaAcao(int numDialogo, int opcao,interface* gui,
+                           personagem* PC, personagem* NPC);
+
+
+
 };
 
 

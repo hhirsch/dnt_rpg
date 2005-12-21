@@ -22,12 +22,12 @@
 #define DELOBJETO          6
 #define PEGAOBJETO        11
 #define MODALTURA         12
-#define MEIOFIOX          13
-#define MEIOFIOXINIC      14
-#define MEIOFIOXINICQUAD  15
-#define MEIOFIOZ          16
-#define MEIOFIOZINIC      17
-#define MEIOFIOZINICQUAD  18
+#define MEIOX             13
+#define MEIOZ             14
+#define MEIOXINIC         15
+#define MEIOZINIC         16
+#define MEIOXINICQUAD     17
+#define MEIOZINICQUAD     18
 
 
 double deg2Rad(double x){return 3.1415927 * x/180.0;}
@@ -106,6 +106,25 @@ int botaoMuroZ(void *jan,void *ljan,SDL_Surface *screen)
     estado = MUROZ;
     return(1);
 }
+
+/************************************************************************
+ *                     Trata Botao MuroX                                *
+ ************************************************************************/
+int botaoMeioX(void *jan,void *ljan,SDL_Surface *screen)
+{
+    estado = MEIOX;
+    return(1);
+}
+
+/************************************************************************
+ *                     Trata Botao MuroY                                *
+ ************************************************************************/
+int botaoMeioZ(void *jan,void *ljan,SDL_Surface *screen)
+{
+    estado = MEIOZ;
+    return(1);
+}
+
 
 /************************************************************************
  *                     Trata Botao Salvar                               *
@@ -449,6 +468,7 @@ int main(int argc, char **argv)
 
    interface* gui = new interface(NULL);
    janela* principal;
+   janela* janSalvar;
    principal = gui->ljan->InserirJanela(0,64,255,191,"Main",1,1,NULL,NULL);
    principal->objetos->InserirBotao(10,17,50,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
@@ -513,25 +533,33 @@ int main(int argc, char **argv)
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Height",1,&botaoAltura);
+   principal->objetos->InserirBotao(205,37,250,55,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "1/2 X",1,&botaoMeioX);
+   principal->objetos->InserirBotao(205,57,250,75,principal->Cores.corBot.R,
+                                                principal->Cores.corBot.G,
+                                                principal->Cores.corBot.B,
+                                                "1/2 Z",1,&botaoMeioZ);
 
    principal->fechavel = 0;
    principal->Abrir(gui->ljan);
 
-   principal = gui->ljan->InserirJanela(0,0,127,63,"Actions",1,1,NULL,NULL);
-   principal->objetos->InserirBotao(10,37,50,55,principal->Cores.corBot.R,
+   janSalvar = gui->ljan->InserirJanela(0,0,127,63,"Actions",1,1,NULL,NULL);
+   janSalvar->objetos->InserirBotao(10,37,50,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Save",1,&botaoSalvar);
-   principal->objetos->InserirBotao(77,37,117,55,principal->Cores.corBot.R,
+   janSalvar->objetos->InserirBotao(77,37,117,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Exit",1,&botaoSair);
-   bartSalvar = principal->objetos->InserirBarraTexto(10,17,118,33,
+   bartSalvar = janSalvar->objetos->InserirBarraTexto(10,17,118,33,
                                          entrada,
                                          0,NULL);
 
-   principal->fechavel = 0;
-   principal->Abrir(gui->ljan);
+   janSalvar->fechavel = 0;
+   janSalvar->Abrir(gui->ljan);
 
  
    muro* maux = NULL;
@@ -754,10 +782,19 @@ int main(int argc, char **argv)
                else
                  printf("Out of Map's Limits!\n");
             }
-            else if( (estado == MUROX) || (estado == MUROZ))
+            else if( (estado == MUROX) || (estado == MUROZ) || 
+                     (estado == MEIOX) || (estado == MEIOZ) )
             {
                 /* Compara com Muros existentes, para "ligar"/"colar" */
-                muro* m = mapa->muros;
+                muro* m;
+                if( (estado == MUROX) || (estado == MUROZ) )
+                {
+                   m  = mapa->muros;
+                }
+                else
+                {
+                   m = mapa->meiosFio;
+                }   
                 while( (m!=NULL))
                 {
                     if(sqrt( (m->x1 - xReal)*(m->x1 - xReal) +
@@ -792,38 +829,63 @@ int main(int argc, char **argv)
                       m = m->proximo;
                 }
                 maux = new(muro);
-                maux->proximo = mapa->muros;
-                mapa->muros = maux;
+                if ( (estado == MUROX) || (estado == MUROZ))
+                {
+                    maux->proximo = mapa->muros;
+                    mapa->muros = maux;
+                }
+                else
+                {
+                    maux->proximo = mapa->meiosFio;
+                    mapa->meiosFio = maux;
+                }
                 maux->x1 = xReal/*qx*SQUARESIZE*/;
                 //maux->x2 = xReal;//(qx)*SQUARESIZE;
                 maux->z1 = zReal;
                 //maux->z2 = zReal+10;//(qz)*SQUARESIZE;
                 maux->textura = texturaAtual;
-                if(estado == MUROX)
+                if( (estado == MUROX) || (estado == MEIOX))
                 {
-                   estado = MUROXINIC;
                    maux->x2 = xReal;
-                   maux->z2 = zReal+10;
+                   if(estado == MEIOX)
+                   {
+                     maux->z2 = zReal+2.5;  
+                     estado = MEIOXINIC;
+                   }
+                   else
+                   {
+                     maux->z2 = zReal+10;
+                     estado = MUROXINIC;
+                   }
                 }
                 else
                 {
-                   estado = MUROZINIC;
                    maux->z2 = zReal;
-                   maux->x2 = xReal+10;
+                   if (estado == MEIOZ)
+                   {
+                      maux->x2 = xReal+2.5;
+                      estado = MEIOZINIC;
+                   }
+                   else
+                   {
+                      maux->x2 = xReal+10; 
+                      estado = MUROZINIC;
+                   }
                 }
             }
-            else if ((estado == MUROXINIC) || (estado == MUROZINIC))
+            else if ( (estado == MUROXINIC) || (estado == MUROZINIC) ||
+                      (estado == MEIOXINIC) || (estado == MEIOZINIC) )
             {
-                if(estado == MUROXINIC)
+                if( (estado == MUROXINIC) || (estado == MEIOXINIC))
                    maux->x2 = xReal;//(qx)*SQUARESIZE;
                 else
                    maux->z2 = zReal;//(qz)*SQUARESIZE;
             }
-            else if(estado == MUROXINICQUAD)
+            else if( (estado == MUROXINICQUAD) || (estado == MEIOXINICQUAD))
             {
                 maux->x2 = (qx+1)*SQUARESIZE;
             }
-            else if(estado == MUROZINICQUAD)
+            else if( (estado == MUROZINICQUAD) || (estado == MEIOZINICQUAD) )
             {
                maux->z2 = (qz+1)*SQUARESIZE;
             }
@@ -831,7 +893,9 @@ int main(int argc, char **argv)
          else
          {
              if((estado == MUROXINIC) || (estado == MUROZINIC) || 
-                (estado == MUROXINICQUAD) || (estado == MUROZINICQUAD))
+                (estado == MUROXINICQUAD) || (estado == MUROZINICQUAD) ||
+                (estado == MEIOXINIC) || (estado == MEIOZINIC) || 
+                (estado == MEIOXINICQUAD) || (estado == MEIOZINICQUAD))
              {
                 if(maux->x2 < maux->x1)
                 {
@@ -850,8 +914,13 @@ int main(int argc, char **argv)
                 
                 if( (estado == MUROXINIC)||(estado == MUROXINICQUAD))
                    estado = MUROX;
-                else
+                else if ( (estado == MUROZINIC)||(estado == MUROZINICQUAD))
                    estado = MUROZ;
+                else if( (estado == MEIOXINIC)||(estado == MEIOXINICQUAD))
+                   estado = MEIOX;
+                else if ( (estado == MEIOZINIC)||(estado == MEIOZINICQUAD))
+                   estado = MEIOZ;
+
              }
          }
   
@@ -954,27 +1023,54 @@ int main(int argc, char **argv)
          sair = teclas[SDLK_ESCAPE];
          if(teclas[SDLK_b])
          {
-             if(estado == MUROXINIC)
+             if( (estado == MUROXINIC) || (estado == MEIOXINIC) )
              {
                  float cmp = ((int)(maux->z1) / SQUARESIZE)*SQUARESIZE;
                  maux->x1 = ((int)round((maux->x1) / SQUARESIZE))*SQUARESIZE;
                  maux->x2 = ((int)round((maux->x2) / SQUARESIZE))*SQUARESIZE;
                  maux->z1 = ((int)round((maux->z1 / SQUARESIZE)))*SQUARESIZE;
                  if(cmp < maux->z1)
-                       maux->z1 = maux->z1-10;
-                 maux->z2 = maux->z1+10;
-                 estado = MUROXINICQUAD;
+                 {
+                       if(estado == MUROXINIC)
+                          maux->z1 = maux->z1-10;
+                       else
+                          maux->z1 = maux->z1-2.5;
+                 }
+                 if(estado == MUROXINIC)
+                 {
+                    maux->z2 = maux->z1+10;
+                    estado = MUROXINICQUAD;
+                 }
+                 else
+                 {
+                    maux->z2 = maux->z1+2.5;
+                    estado = MEIOXINICQUAD;
+                 }
              }
-             else if(estado == MUROZINIC)
+             else if( (estado == MUROZINIC) || (estado == MEIOZINIC) )
              {
                  float cmp = ((int)(maux->x1) / SQUARESIZE)*SQUARESIZE;
                  maux->z1 = ((int)round((maux->z1) / SQUARESIZE))*SQUARESIZE;
                  maux->z2 = ((int)round((maux->z2) / SQUARESIZE))*SQUARESIZE;
                  maux->x1 = ((int)round((maux->x1 / SQUARESIZE)))*SQUARESIZE;
                  if(cmp < maux->x1)
-                       maux->x1 = maux->x1-10;
-                 maux->x2 = maux->x1+10;
-                 estado = MUROZINICQUAD;             }
+                 {
+                       if(estado == MUROZINIC)
+                          maux->x1 = maux->x1-10;
+                       else
+                          maux->x1 = maux->x1-2.5;
+                 }
+                 if(estado == MUROZINIC)
+                 {
+                    maux->x2 = maux->x1+10;
+                    estado = MUROZINICQUAD;             
+                 }
+                 else
+                 {
+                    maux->x2 = maux->x1+2.5;
+                    estado = MEIOZINICQUAD;
+                 }
+             }
          } 
          if(teclas[SDLK_UP] || teclas[SDLK_DOWN])
          {

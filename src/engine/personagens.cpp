@@ -39,9 +39,7 @@ GLuint personagem::loadTexture(const string& strFilename)
    GLuint pId = 0;
  
    /* carrega a textura do arquivo */
-   const char* arq;
-   arq = strFilename.c_str();
-   SDL_Surface* img = IMG_Load(arq);
+   SDL_Surface* img = IMG_Load(strFilename.c_str());
    if(!img)
    {
       printf("Can't Open Texture");

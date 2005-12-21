@@ -54,9 +54,9 @@ void botao::Desenhar(int pres, void* jan,
    selFonte(FFARSO,CENTRALIZADO,1);
    xa = ((xa+x2) /2);
    //y1-=6;
-   if(!strcmp("\36",texto) || !strcmp("\37",texto))
+   if(!texto.compare("\36") || !texto.compare("\37"))
      ya -= 6;
-   escxy(j->cara,xa,ya,texto);
+   escxy(j->cara,xa,ya,texto.c_str());
    selFonte(FFARSO,ESQUERDA,1);
    
    if(Salvar)
