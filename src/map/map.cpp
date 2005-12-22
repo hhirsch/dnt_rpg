@@ -13,40 +13,37 @@
 
 
 /********************************************************************
- *                      Construtor do Quadrado                      *
+ *                      Square Constructor                          *
  ********************************************************************/
 Square::Square()
 {
-	floor_texture_fname = NULL;
-	flags = 0;
-        h1 = h2 = h3 = h4 = 0;
-        mapConection.active = false;
-        mapConection.mapName = (char*)malloc(255*sizeof(char));
-        int aux;
-        for(aux=0;aux<MAXOBJETOS;aux++)
-        {
-           objetos[aux] = NULL;
-           objetosDesenha[aux] = 0;
-           quadObjetos[aux] = NULL;
-        }
-        for(aux=0;aux<MAXMUROS;aux++)
-           muros[aux] = NULL;
-	return;
+   flags = 0;
+   h1 = h2 = h3 = h4 = 0;
+   mapConection.active = false;
+   mapConection.mapName = (char*)malloc(255*sizeof(char));
+   int aux;
+   for(aux=0;aux<MAXOBJETOS;aux++)
+   {
+      objetos[aux] = NULL;
+      objetosDesenha[aux] = 0;
+      quadObjetos[aux] = NULL;
+   }
+   for(aux=0;aux<MAXMUROS;aux++)
+     muros[aux] = NULL;
+   return;
 }
 
 /********************************************************************
- *                       Destruidor do Quadrado                     *
+ *                       Square Destructor                          *
  ********************************************************************/
 Square::~Square()
 {
-        free(mapConection.mapName);
-	if( floor_texture_fname == NULL )
-		free( floor_texture_fname );
-	return;
+   free(mapConection.mapName);
+   return;
 }
 
 /********************************************************************
- *                      Retorna o indice da Textura                 *
+ *                             Texture ID                           *
  ********************************************************************/
 int IDTextura(Map* mapa, char* textura, GLuint* R, GLuint* G, GLuint* B)
 {
@@ -67,7 +64,7 @@ int IDTextura(Map* mapa, char* textura, GLuint* R, GLuint* G, GLuint* B)
 }
 
 /*********************************************************************
- *                   Retorna o nome da textura                       *
+ *                   Returns texture's name                          *
  *********************************************************************/
 char* NomeTextura(Map* mapa, GLuint ID)
 {
@@ -85,7 +82,7 @@ char* NomeTextura(Map* mapa, GLuint ID)
    return(NULL);
 }
 /********************************************************************
- *         Insere a textura dentre as utilizadas pelo objeto        *
+ *                         Insert texture                           *
  ********************************************************************/
 GLuint InserirTextura(Map* mapa, char* arq, char* nome, 
                     GLuint R, GLuint G, GLuint B)
@@ -121,8 +118,6 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
    SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   //SDL_Rect ret;
-   //ret.w = 0; ret.h = 0; ret.x = img->w; ret.y = img->h;
    SDL_BlitSurface(img,NULL,imgPotencia,NULL);
  
    tex->R = R;
@@ -147,29 +142,10 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
 
    mapa->numtexturas++;
 
-   //printf("Inseri Textura: %s :%d %d\n",nome,img->w,img->h);
-
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
    SDL_FreeSurface(imgPotencia);
    return(tex->indice);
-}
-
-/********************************************************************
- *                       Desenha o Quadrado                         *
- ********************************************************************/
-int Square::draw( GLfloat x, GLfloat z )
-{
-#ifdef DEBUG_MAP
-	printf("map.cpp - Square::draw(): Drawing square in (%f,%f)\n", x, z);
-#endif
-//	glEnable(GL_TEXTURE_2D);
-	//glColor3f( 1.0, 1.0, 20.0 );
-	//glBegin(GL_POLYGON);
-	
-//	glNormal3i( 0, 0, 1 );
-	//glEnd();
-	return(0);
 }
 
 /********************************************************************
@@ -179,14 +155,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
 {
         int textura = -1;
         int i, Xaux = 0, Zaux = 0;
-        //if(aux) {
            textura = MapSquares[Xaux][Zaux]->textura;
            glEnable(GL_TEXTURE_2D);
            glBindTexture(GL_TEXTURE_2D, textura);
-        //}
-#ifdef DEBUG_MAP
-	printf("map.cpp - Map::draw(): Drawing map %s.\n", name);
-#endif
         GLfloat mat_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
         GLfloat mat_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
         GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -197,7 +168,6 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
         
         glBegin(GL_QUADS);
         glNormal3i(0,1,0);
-        //glColor3fv(mat_ambient);
         for(Xaux = 0; Xaux < x; Xaux++)
         {
            for(Zaux = 0; Zaux < z; Zaux++)
@@ -258,13 +228,16 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
         /* Faz o desenho dos muros e meios Fio*/
         muro* maux = muros;
         int fezMeioFio = 0;
+        if(!maux)
+        {
+            maux = meiosFio;
+            fezMeioFio = 1;
+        }
         GLfloat altura = MUROALTURA;
         glBegin(GL_QUADS);
         while( (maux != NULL) )
         {
            
-           //if(x1 == x2) x2 += SQUARESIZE; 
-           //if(z1 == z2) z2 += SQUARESIZE;
            if((textura!= -1) && (maux->textura == -1))
            {
                glDisable(GL_TEXTURE_2D); 
@@ -288,9 +261,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
               glTexCoord2f(1,0);
               glVertex3f(maux->x2,altura,maux->z1);
               glTexCoord2f(1,1);
-              glVertex3f(maux->x2,0,maux->z1);
+              glVertex3f(maux->x2,-1,maux->z1);
               glTexCoord2f(0,1);
-              glVertex3f(maux->x1,0,maux->z1);
+              glVertex3f(maux->x1,-1,maux->z1);
            /* Face de tras */
               glNormal3i(0,0,-1);
               glTexCoord2f(0,0);
@@ -298,9 +271,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
               glTexCoord2f(1,0);
               glVertex3f(maux->x2,altura,maux->z2);
               glTexCoord2f(1,1);
-              glVertex3f(maux->x2,0,maux->z2);
+              glVertex3f(maux->x2,-1,maux->z2);
               glTexCoord2f(0,1);
-              glVertex3f(maux->x1,0,maux->z2);
+              glVertex3f(maux->x1,-1,maux->z2);
            /* Face de esquerda */
               glNormal3i(-1,0,0);
               glTexCoord2f(0,0);
@@ -308,9 +281,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
               glTexCoord2f(1,0);
               glVertex3f(maux->x1,altura,maux->z2);
               glTexCoord2f(1,1);
-              glVertex3f(maux->x1,0,maux->z2);
+              glVertex3f(maux->x1,-1,maux->z2);
               glTexCoord2f(0,1);
-              glVertex3f(maux->x1,0,maux->z1);
+              glVertex3f(maux->x1,-1,maux->z1);
            /* Face de direita */
               glNormal3i(1,0,0);
               glTexCoord2f(0,0);
@@ -318,9 +291,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
               glTexCoord2f(1,0);
               glVertex3f(maux->x2,altura,maux->z2);
               glTexCoord2f(1,1);
-              glVertex3f(maux->x2,0,maux->z2);
+              glVertex3f(maux->x2,-1,maux->z2);
               glTexCoord2f(0,1);
-              glVertex3f(maux->x2,0,maux->z1);
+              glVertex3f(maux->x2,-1,maux->z1);
            /* Face de cima */
               glNormal3i(0,1,0);
               glTexCoord2f(0,0);
@@ -381,34 +354,31 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
  ********************************************************************/
 Map::Map()
 {
-	numtexturas = 0;
-        Texturas = NULL;
-	//first = NULL;
-	name = NULL;
-        squareInic = NULL;
-        muros = NULL;
-        meiosFio = NULL; 
-        MapSquares = NULL;
-        /* Inicia Estruturas */
-        Objetos = new(LmapObjeto);
-        x = z = xInic = zInic = 0;
+   numtexturas = 0;
+   Texturas = NULL;
+   name = NULL;
+   squareInic = NULL;
+   muros = NULL;
+   meiosFio = NULL; 
+   MapSquares = NULL;
+   /* Inicia Estruturas */
+   Objetos = new(LmapObjeto);
+   x = z = xInic = zInic = 0;
 }
 
-
+/********************************************************************
+ *               Returns Square Relative to coordinate              *
+ ********************************************************************/
 Square* Map::quadradoRelativo(int xa, int za)
 {
-   //printf("qrel: %d %d\n",x,z);
    if( (z <= za) || (x <= xa) || ( xa < 0) || (za < 0)) 
       return(NULL);
-   /*int ax,az;
-   Square* result = first;
-   for(ax=0;ax<(xa-1);ax++) result = result->right;
-   for(az=0;az<(za-1);az++) result = result->down;*/
+
    return(MapSquares[xa][za]);
 }
 
 /********************************************************************
- *                       Abre o Arquivo de Mapas                    *
+ *                       Open Map File                              *
  ********************************************************************/
 int Map::open(char* arquivo)
 {
@@ -416,11 +386,8 @@ int Map::open(char* arquivo)
    char buffer[128]; // buffer utilziado para ler
    char nomeArq[128], nome[128];
    int i;
-   //Square* aux;
-   //Square* ant = NULL, *primLinha=NULL;
    int posX,posZ;    //posicao atual do quadrado anterior relativo
    int IDtexturaAtual = -1;
-   //char* nomeTexturaAtual = "nada\0";
    int IDmuroTexturaAtual = -1;
    char* nomeMuroTexturaAtual = "nada\0";
    int numObjetosAtual = 0;
@@ -587,9 +554,9 @@ int Map::open(char* arquivo)
                                  &MapSquares[posX][posZ]->h3,
                                  &MapSquares[posX][posZ]->h4);
             MapSquares[posX][posZ]->x1 = (posX) * SQUARESIZE;
-            MapSquares[posX][posZ]->x2 = MapSquares[posX][posZ]->x1 + SQUARESIZE;
+            MapSquares[posX][posZ]->x2 = MapSquares[posX][posZ]->x1+SQUARESIZE;
             MapSquares[posX][posZ]->z1 = (posZ) * SQUARESIZE;
-            MapSquares[posX][posZ]->z2 = MapSquares[posX][posZ]->z1 + SQUARESIZE; 
+            MapSquares[posX][posZ]->z2 = MapSquares[posX][posZ]->z1+SQUARESIZE; 
             MapSquares[posX][posZ]->posX = posX;
             MapSquares[posX][posZ]->posZ = posZ;
             if(pisavel) 
@@ -708,7 +675,7 @@ int Map::open(char* arquivo)
 
 
 /************************************************************************
- *                     Cria um Novo Mapa                                *
+ *                     Create a new Map                                 *
  ************************************************************************/
 void Map::newMap(int X, int Z)
 {
@@ -765,7 +732,7 @@ void Map::newMap(int X, int Z)
 
 
 /*******************************************************************
- *   Otimiza o mapa (sobreposicao de muros, quadrados ocp por obj) *
+ *   Optimize map (wall sobreposition, object squares, etc)        *
  *******************************************************************/
 void Map::optimize()
 {
@@ -853,11 +820,12 @@ void Map::optimize()
     }
 
    /* Verifica quadrados ocupados pelos Objetos */
+//TODO
 }
 
 
 /********************************************************************
- *                      Salva o Arquivo de Mapas                    *
+ *                          Save Map File                           *
  ********************************************************************/
 int Map::save(char* arquivo)
 {
@@ -898,10 +866,6 @@ int Map::save(char* arquivo)
    int x1,z1,x2,z2;
    while(maux)
    {
-      //x1 = maux->x1 / SQUARESIZE;
-      //x2 = (maux->x2 / SQUARESIZE)-1;
-      //z1 = maux->z1 / SQUARESIZE;
-      //z2 = (maux->z2 / SQUARESIZE)-1;
       fprintf(arq,"muro %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
       fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura));
       maux = (muro*)maux->proximo;
@@ -918,11 +882,8 @@ int Map::save(char* arquivo)
 
  
    /* Escreve Quadrados, linha a linha */
-   //Square* saux = first;
-   //Square* ultLinha;
    for(z1=0;z1<z;z1++)
    {
-      //ultLinha = saux;
       for(x1=0;x1<x;x1++)
       {
           fprintf(arq,"p %d,%f,%f,%f,%f\n",
@@ -971,7 +932,7 @@ int Map::save(char* arquivo)
 }
 
 /********************************************************************
- *                       Destruidor do Mapa                         *
+ *                         Map Destructor                           *
  ********************************************************************/
 Map::~Map()
 {
@@ -1020,19 +981,16 @@ Map::~Map()
 
 
 /********************************************************************
- *               Desenha um  MiniMapa na Superfície                 *
+ *                       Draw MiniMap on Surface                    *
  ********************************************************************/
 void Map::drawMinimap(SDL_Surface* img)
 {
    int x1,y1,x2,y2, X, Z;
-   //printf("%d,%d %d,%d\n",img->w,img->h,x,z);
-   //double razaoX = (float)img->w / (float)(x+1) ;
-   //double razaoY = (float)img->h / (float)(z+1);
 
    x1 = 0; y1 = 0;
-   for(X = 0; X < x; X++)
+   for(Z = 0; Z < z; Z++)
    {
-      for(Z = 0; Z < z; Z++)
+      for(X = 0; X < x; X++)
       {
           cor_Definir(MapSquares[X][Z]->R,
                       MapSquares[X][Z]->G,
