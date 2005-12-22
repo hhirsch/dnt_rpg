@@ -16,23 +16,36 @@ BIN = ../../bin/
 all: DlgEditor MapEditor dlgCompiler
 
 MapEditor.o: MapEditor.cpp
-	$(CC) $(CFLAGS) MapEditor.cpp -o MapEditor.o
+	@printf "Making MapEditor.o... "
+	@$(CC) $(CFLAGS) MapEditor.cpp -o MapEditor.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 MapEditor: $(OBJSGUI) $(OBJSMAPA) MapEditor.o
-	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) MapEditor.o -o $(BIN)MapEditor
+	@printf "Linking MapEditor... "
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) MapEditor.o -o $(BIN)MapEditor
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 DlgEditor.o: DlgEditor.cpp
-	$(CC) $(CFLAGS) DlgEditor.cpp -o DlgEditor.o
+	@printf "Making DlgEditor.o... "
+	@$(CC) $(CFLAGS) DlgEditor.cpp -o DlgEditor.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 DlgEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJS) 
-	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) $(OBJS) -o $(BIN)DlgEditor
+	@printf "Linking DlgEditor... "
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) $(OBJS) -o $(BIN)DlgEditor
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 dlgCompiler.o: dlgCompiler.cpp
-	$(CC) $(CFLAGS) dlgCompiler.cpp -o dlgCompiler.o
+	@printf "Making dlgCompiler.o... "
+	@$(CC) $(CFLAGS) dlgCompiler.cpp -o dlgCompiler.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 dlgCompiler: $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o
-	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o -o $(BIN)dlgCompiler
+	@printf "Linking dlgCompiler... "
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o -o $(BIN)dlgCompiler
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
-	\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor
-
+	@printf "Cleaning App Bin Files... "
+	@\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor
+	@printf "\e[0;32mDone.\e[0;0m\n"

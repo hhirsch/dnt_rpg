@@ -6,12 +6,16 @@ SUBSYSTEMS = gui etc map ia engine app
 all: buildparts
 
 buildparts:
-	echo "Compilando DccNiTghtmare..."
-	for dir in ${SUBSYSTEMS}; do \
+	@printf "Making DccNiTghtmare...\n"
+	@for dir in ${SUBSYSTEMS}; do \
 	   (echo "Compilando $$dir";echo " ";cd $$dir; ${MAKE} all;echo " "); \
 	done
+	@printf "\e[0;32mAll Done.\e[0;0m\n"
 
 clean:
-	for dir in $(SUBSYSTEMS);do \
-	(echo "Apagando $$dir";cd $$dir; ${MAKE} clean); \
+	@printf "Cleaning DccNiTghmare Bin Files...\n"
+	@for dir in $(SUBSYSTEMS);do \
+	(cd $$dir; ${MAKE} clean); \
 	done
+	@printf "\e[0;32mAll Done.\e[0;0m\n"
+

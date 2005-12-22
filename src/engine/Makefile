@@ -21,26 +21,41 @@ FIFO = ../etc/fifo.o
 all: teste
 
 conversa.o: conversa.cpp conversa.h
-	$(CC) $(CFLAGS) conversa.cpp -o conversa.o
+	@printf "Making conversa.o... "
+	@$(CC) $(CFLAGS) conversa.cpp -o conversa.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 culling.o: culling.cpp culling.h
-	$(CC) $(CFLAGS) culling.cpp -o culling.o
+	@printf "Making culling.o... "
+	@$(CC) $(CFLAGS) culling.cpp -o culling.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 cursor.o: cursor.cpp cursor.h
-	$(CC) $(CFLAGS) cursor.cpp -o cursor.o
+	@printf "Making cursor.o... "
+	@$(CC) $(CFLAGS) cursor.cpp -o cursor.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 dccnit.o: dccnit.h dccnit.cpp
-	$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
+	@printf "Making dccnit.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 personagens.o: personagens.cpp personagens.h
-	$(CC) $(CFLAGS) personagens.cpp -o personagens.o
+	@printf "Making personagens.o... "
+	@$(CC) $(CFLAGS) personagens.cpp -o personagens.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 teste.o: teste.cpp
-	$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o teste.o
+	@printf "Making teste.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o teste.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJS) 
-	$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
+	@printf "Linking dccnitghtmare... "
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
-	\rm -rf *.o *.e $(BIN)dccnitghtmare
-
+	@printf "Cleaning Engine Bin Files... "
+	@\rm -rf *.o *.e $(BIN)dccnitghtmare
+	@printf "\e[0;32mDone.\e[0;0m\n"

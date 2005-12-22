@@ -9,10 +9,16 @@ OBJS = ai.o
 all: $(OBJS)
 
 ai.o: ai.cpp ai.h
-	$(CPP) $(CFLAGS) ai.cpp -o ai.o
+	@printf "Making ai.o... "
+	@$(CPP) $(CFLAGS) ai.cpp -o ai.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 teste: ai.cpp ai.h
-	$(CPP) $(EFLAGS) -DTESTE ai.cpp -o testeai
+	@printf "Making & Linking TesteAi... "
+	@$(CPP) $(EFLAGS) -DTESTE ai.cpp -o testeai
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
-	\rm -rf $(OBJS) ./testeai
+	@printf "Cleaning AI Bin Files... "
+	@\rm -rf $(OBJS) ./testeai
+	@printf "\e[0;32mDone.\e[0;0m\n"

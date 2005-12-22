@@ -19,7 +19,7 @@ meioFio 256.000000,256.000000,512.000000,258.500000
 mt ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-uc 0.0,0.0,32.0,10.0:../data/mapas/dois.map
+uc 0.0,0.0,32.0,32.0:../data/mapas/outro.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000

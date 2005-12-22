@@ -1,16 +1,9 @@
 #  DccNiTghtmare is public domain. Do whatever you want with this code.
 
-SUBSYSTEMS = src
-
-# type 'make all' to visit and build subsystems
 all: buildparts
 
 buildparts:
-	for dir in ${SUBSYSTEMS}; do \
-	   (cd $$dir; ${MAKE} all); \
-	done
+	cd ./src && ${MAKE} all;
 
 clean:
-	for dir in $(SUBSYSTEMS);do \
-	(cd $$dir; ${MAKE} clean); \
-	done
+	cd ./src && ${MAKE} clean;

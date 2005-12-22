@@ -9,7 +9,9 @@ BINDIR=../../bin
 all: server client.o
 
 common.o: common.c common.h
-	${CPP} ${CFLAGS} -c common.c
+	@printf "Making common.o... "
+	@${CPP} ${CFLAGS} -c common.c
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 client.o: common.o client.c common.h
 	make -C ../etc fifo.o
