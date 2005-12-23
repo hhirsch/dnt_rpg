@@ -246,7 +246,7 @@ int engine::TelaInicial()
    carregaTextura(fig,&textID);
    SDL_FreeSurface(fig);
 
-   /*img = IMG_Load("../data/texturas/fundo.jpg");
+   img = IMG_Load("../data/texturas/fundo.png");
    fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
@@ -254,13 +254,12 @@ int engine::TelaInicial()
    SDL_FreeSurface(img);
    GLuint tituloID;
    carregaTextura(fig,&tituloID);
-   SDL_FreeSurface(fig);*/
+   SDL_FreeSurface(fig);
 
 
    AtualizaFrustum(matrizVisivel,proj,modl);
    AtualizaTela2D(textID,proj,modl,viewPort,336,172,463,427,0.01);
-//   AtualizaTela2D(tituloID,proj,modl,viewPort,144,44,655,555,0.012);
-   glFlush();
+   AtualizaTela2D(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
    SDL_GL_SwapBuffers();
 
    int pronto = 0;
