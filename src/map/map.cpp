@@ -149,7 +149,7 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
 }
 
 /********************************************************************
- *                           Desenha o Mapa                         *
+ *                           Draw  Map                              *
  ********************************************************************/
 int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[6][4])
 {
@@ -228,12 +228,13 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
         /* Faz o desenho dos muros e meios Fio*/
         muro* maux = muros;
         int fezMeioFio = 0;
+        GLfloat altura = MUROALTURA;
         if(!maux)
         {
             maux = meiosFio;
             fezMeioFio = 1;
+            altura = MEIOFIOALTURA;
         }
-        GLfloat altura = MUROALTURA;
         glBegin(GL_QUADS);
         while( (maux != NULL) )
         {

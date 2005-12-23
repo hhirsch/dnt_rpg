@@ -28,6 +28,8 @@
 #define MEIOZINIC         16
 #define MEIOXINICQUAD     17
 #define MEIOZINICQUAD     18
+#define PORTAL            19
+#define PORTALINIC        20
 
 
 double deg2Rad(double x){return 3.1415927 * x/180.0;}
@@ -43,6 +45,17 @@ Map* mapa;
 barraTexto* bartInserir;
 barraTexto* bartSalvar;
 int sair;
+
+
+/************************************************************************
+ *              Trata Botao Objeto                                      *
+ ************************************************************************/
+int botaoPortal(void *jan,void *ljan,SDL_Surface *screen)
+{
+   estado = PORTAL;
+   return(1);
+}
+
 
 /************************************************************************
  *              Trata Botao Objeto                                      *
@@ -501,7 +514,7 @@ int main(int argc, char **argv)
    principal->objetos->InserirBotao(55,77,125,95,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Portal",1,NULL);
+                                                "Portal",1,&botaoPortal);
    principal->objetos->InserirBotao(130,17,200,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
@@ -566,6 +579,7 @@ int main(int argc, char **argv)
    int qx; int qz;
    double xReal, zReal, yReal;
    float wx,wy,wz;
+   GLfloat portalX[2], portalZ[2];
 
    texturaAtual = mapa->Texturas->indice;
    objAtual = (mapObjeto*)mapa->Objetos->primeiro->proximo;
@@ -581,9 +595,26 @@ int main(int argc, char **argv)
             
       glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
       gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
+
+      if(xReal < 0)
+        xReal = 0;
+      if(zReal < 0)
+        zReal = 0;
+
+      if(xReal > mapa->x*SQUARESIZE)
+        xReal = mapa->x*SQUARESIZE;
+
+      if(zReal > mapa->z*SQUARESIZE)
+        zReal = mapa->z*SQUARESIZE;
  
       qx = (int)xReal / SQUARESIZE; 
       qz = (int)zReal / SQUARESIZE;
+
+      if(qx > mapa->x-1)
+        qx = mapa->x-1;
+
+      if(qz > mapa->z-1) 
+        qz = mapa->z-1;
 
       if(gui->ManipulaEventos(mouseX,mouseY,Mbotao,teclas)==NADA)
       {
@@ -595,8 +626,20 @@ int main(int argc, char **argv)
          if(Mbotao & SDL_BUTTON(1))
          {
 
-                        
-            if(estado == MODALTURA)
+            if( estado == PORTAL )
+            {
+                portalX[0] = xReal;
+                portalX[1] = xReal;
+                portalZ[0] = zReal;
+                portalZ[1] = zReal;
+                estado = PORTALINIC;
+            }
+            else if(estado == PORTALINIC)
+            {
+                portalX[1] = xReal;
+                portalZ[1] = zReal;
+            }
+            else if(estado == MODALTURA)
             {
                Square* saux = mapa->quadradoRelativo(qx,qz);
  
@@ -892,6 +935,32 @@ int main(int argc, char **argv)
          }
          else
          {
+             if(estado == PORTALINIC)
+             {
+                 portalX[1] = xReal;
+                 portalZ[1] = zReal;
+                 Square* s = mapa->quadradoRelativo(qx,qz);
+                 s->mapConection.active = true;
+                 if(portalX[0] > portalX[1])
+                 {
+                    GLfloat tmp = portalX[0];
+                    portalX[0] = portalX[1];
+                    portalX[1] = tmp;
+                 }
+                 if(portalZ[0] > portalZ[1])
+                 {
+                    GLfloat tmp = portalZ[0];
+                    portalZ[0] = portalZ[1];
+                    portalZ[1] = tmp;
+                 } 
+                 s->mapConection.x1 = portalX[0];
+                 s->mapConection.x2 = portalX[1];
+                 s->mapConection.z1 = portalZ[0];
+                 s->mapConection.z2 = portalZ[1];
+                 s->mapConection.mapName = "TODO"; //TODO mapname prompt
+                 estado = PORTAL;
+             }
+             else
              if((estado == MUROXINIC) || (estado == MUROZINIC) || 
                 (estado == MUROXINICQUAD) || (estado == MUROZINICQUAD) ||
                 (estado == MEIOXINIC) || (estado == MEIOZINIC) || 
@@ -1121,17 +1190,11 @@ int main(int argc, char **argv)
          if(teclas[SDLK_PERIOD])
          {
             phi -= 1;
-            //phi = phi % 360;
          }
          if(teclas[SDLK_COMMA])
          {
             phi += 1;
-            //phi = phi % 360;
          }
-         /*if(teclas[SDLK_s])
-         {
-            
-         }*/
          if(teclas[SDLK_i])
          {
              printf("x:%.3f z:%.3f phi:%.3f theta:%.3f \n",centroX, centroZ,
@@ -1148,7 +1211,7 @@ int main(int argc, char **argv)
             orObj %= 360;
          }
       }
-      glClearColor(0,0,0,0);
+      glClearColor(0,0,0,1);
       glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
       glLoadIdentity();
@@ -1158,15 +1221,34 @@ int main(int argc, char **argv)
       cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
       gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
       AtualizaFrustum(matrizVisivel,proj,modl);
+
+      glPushMatrix();
+      if( (estado == PORTALINIC) )
+      {
+         glBegin(GL_QUADS);
+         glVertex3f(portalX[0],1.0,portalZ[0]);
+         glVertex3f(portalX[0],1.0,portalZ[1]);
+         glVertex3f(portalX[1],1.0,portalZ[1]);
+         glVertex3f(portalX[1],1.0,portalZ[0]);
+         glEnd();
+      }
+      glPopMatrix();
       
-      //glPopMatrix();
-      mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
+      glPushMatrix();
+         mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
+      glPopMatrix();
+      
+      glPushMatrix();
       glDisable(GL_LIGHTING);
       gui->Desenhar(proj,modl,viewPort);
       glEnable(GL_LIGHTING);
+      glPopMatrix();
+
+      glPushMatrix();
       if( (estado == OBJETO) && (objAtual))
          objAtual->Desenhar(xReal, zReal, 0, orObj);
-      //glPushMatrix();
+      glPopMatrix();
+
       glFlush();
       SDL_GL_SwapBuffers();
 

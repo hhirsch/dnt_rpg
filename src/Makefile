@@ -8,7 +8,7 @@ all: buildparts
 buildparts:
 	@printf "Making DccNiTghtmare...\n"
 	@for dir in ${SUBSYSTEMS}; do \
-	   (echo "Compilando $$dir";echo " ";cd $$dir; ${MAKE} all;echo " "); \
+	   (echo "Making $$dir";echo " ";cd $$dir; ${MAKE} all;echo " "); \
 	done
 	@printf "\e[0;32mAll Done.\e[0;0m\n"
 
