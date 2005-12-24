@@ -21,7 +21,7 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );
 
-    *screen = SDL_SetVideoMode(800, 600, 16, /*SDL_FULLSCREEN | SDL_HWSURFACE | SDL_DOUBLEBUF |*/ SDL_OPENGL);
+    *screen = SDL_SetVideoMode(800, 600, 16, SDL_FULLSCREEN | /*SDL_HWSURFACE | SDL_DOUBLEBUF |*/ SDL_OPENGL);
     if ( screen == NULL ) {
        erro_Mensagem("Oxi! Can't ajust video mode!\n",2);
     }

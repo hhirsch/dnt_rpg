@@ -18,7 +18,7 @@
                                   */
  
 #define GIRAR           2.5     // O quanto ele gira a cada frame
-#define DELTACAMERA     2.5     // O quanto a camera meche a cada frame
+#define DELTACAMERA     1.5     // O quanto a camera meche a cada frame
 #define ZOOMMAXIMO      80      // Valor máximo de zoom
 #define ZOOMMINIMO      280     // Valor mínimo do zoom
 

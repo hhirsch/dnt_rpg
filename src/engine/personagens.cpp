@@ -42,8 +42,7 @@ GLuint personagem::loadTexture(const string& strFilename)
    SDL_Surface* img = IMG_Load(strFilename.c_str());
    if(!img)
    {
-      printf("Can't Open Texture");
-      cout << strFilename << endl; 
+      cout << "Can't Open Texture" << strFilename << endl; 
       //free(arq);
       return(0);
    }
@@ -61,6 +60,10 @@ GLuint personagem::loadTexture(const string& strFilename)
                 0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imgPotencia->w,
+                     imgPotencia->h, GL_RGBA, GL_UNSIGNED_BYTE, 
+                     imgPotencia->pixels );
 
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);

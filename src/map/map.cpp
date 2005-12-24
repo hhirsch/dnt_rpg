@@ -255,55 +255,58 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
            if(quadradoVisivel(maux->x1,0,maux->z1,maux->x2,
                               altura,maux->z2,matriz))
            {
+              double X = (maux->x2-maux->x1) / 16 ;
+              double Z = (maux->z2-maux->z1) / 16;
+              double Y = (altura+1) / 16;
            /* Face de frente */
               glNormal3i(0,0,1);
-              glTexCoord2f(0,0);
+              glTexCoord2f(0,Y);
               glVertex3f(maux->x1,altura,maux->z1);
-              glTexCoord2f(1,0);
+              glTexCoord2f(X,Y);
               glVertex3f(maux->x2,altura,maux->z1);
-              glTexCoord2f(1,1);
+              glTexCoord2f(X,0);
               glVertex3f(maux->x2,-1,maux->z1);
-              glTexCoord2f(0,1);
+              glTexCoord2f(0,0);
               glVertex3f(maux->x1,-1,maux->z1);
            /* Face de tras */
               glNormal3i(0,0,-1);
-              glTexCoord2f(0,0);
+              glTexCoord2f(0,Y);
               glVertex3f(maux->x1,altura,maux->z2);
-              glTexCoord2f(1,0);
+              glTexCoord2f(X,Y);
               glVertex3f(maux->x2,altura,maux->z2);
-              glTexCoord2f(1,1);
+              glTexCoord2f(X,0);
               glVertex3f(maux->x2,-1,maux->z2);
-              glTexCoord2f(0,1);
+              glTexCoord2f(0,0);
               glVertex3f(maux->x1,-1,maux->z2);
            /* Face de esquerda */
               glNormal3i(-1,0,0);
-              glTexCoord2f(0,0);
+              glTexCoord2f(Y,0);
               glVertex3f(maux->x1,altura,maux->z1);
-              glTexCoord2f(1,0);
+              glTexCoord2f(Y,Z);
               glVertex3f(maux->x1,altura,maux->z2);
-              glTexCoord2f(1,1);
+              glTexCoord2f(0,Z);
               glVertex3f(maux->x1,-1,maux->z2);
-              glTexCoord2f(0,1);
+              glTexCoord2f(0,0);
               glVertex3f(maux->x1,-1,maux->z1);
            /* Face de direita */
               glNormal3i(1,0,0);
-              glTexCoord2f(0,0);
+              glTexCoord2f(Y,0);
               glVertex3f(maux->x2,altura,maux->z1);
-              glTexCoord2f(1,0);
+              glTexCoord2f(Y,Z);
               glVertex3f(maux->x2,altura,maux->z2);
-              glTexCoord2f(1,1);
+              glTexCoord2f(0,Z);
               glVertex3f(maux->x2,-1,maux->z2);
-              glTexCoord2f(0,1);
+              glTexCoord2f(0,0);
               glVertex3f(maux->x2,-1,maux->z1);
            /* Face de cima */
               glNormal3i(0,1,0);
               glTexCoord2f(0,0);
               glVertex3f(maux->x1,altura,maux->z1);
-              glTexCoord2f(1,0);
+              glTexCoord2f(X,0);
               glVertex3f(maux->x2,altura,maux->z1);
-              glTexCoord2f(1,1);
+              glTexCoord2f(X,Z);
               glVertex3f(maux->x2,altura,maux->z2);
-              glTexCoord2f(0,1);
+              glTexCoord2f(0,Z);
               glVertex3f(maux->x1,altura,maux->z2);
            }
            maux = maux->proximo;
