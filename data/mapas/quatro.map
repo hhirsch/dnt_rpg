@@ -4,7 +4,7 @@ o Door ../data/models/objetos/geral/porta.dcc
 t ../data/texturas/chao_madeira.jpg ../data/texturas/chao_madeira.jpg 115 58 29
 t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
 t ../data/texturas/chao_cimento.jpg ../data/texturas/chao_marble.jpg 207 212 206
-t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 221 169 171
+t ../data/texturas/parede_rosa.jpg ../data/texturas/tijolinhos.jpg 221 169 171
 muro 10.000000,64.000000,128.000000,74.000000
 mt ../data/texturas/parede_rosa.jpg
 muro 10.000000,566.000000,128.000000,576.000000
@@ -19,7 +19,7 @@ meioFio 256.000000,256.000000,512.000000,258.500000
 mt ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-uc 0.0,0.0,32.0,32.0:../data/mapas/outro.map
+uc 0.0,0.0,64.0,64.0:../data/mapas/outro.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
