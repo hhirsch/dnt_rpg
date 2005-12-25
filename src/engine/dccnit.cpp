@@ -762,14 +762,14 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
          /* Verifica Conexão do Mapa */
-         if( quaux->mapConection.active )
+         if( ( quaux->mapConection.active ) && (!pronto) )
          {
             GLfloat minCon[3], maxCon[3];
             minCon[0] = quaux->mapConection.x1;
-            minCon[0] = 0.0;
+            minCon[1] = 0.0;
             minCon[2] = quaux->mapConection.z1;
             maxCon[0] = quaux->mapConection.x2;
-            maxCon[0] = 0.0;
+            maxCon[1] = 0.0;
             maxCon[2] = quaux->mapConection.z2;
             GLfloat minMouse[3], maxMouse[3];
             minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
