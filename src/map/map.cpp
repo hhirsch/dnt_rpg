@@ -888,6 +888,7 @@ int Map::save(char* arquivo)
    /* Escreve Quadrados, linha a linha */
    for(z1=0;z1<z;z1++)
    {
+      fprintf(arq,"#Z: %d\n",z1);
       for(x1=0;x1<x;x1++)
       {
           fprintf(arq,"p %d,%f,%f,%f,%f\n",
@@ -901,10 +902,10 @@ int Map::save(char* arquivo)
           if( MapSquares[x1][z1]->mapConection.active )
           {
               fprintf(arq,"uc %f,%f,%f,%f:%s\n",
-                      &MapSquares[x1][z1]->mapConection.x1,
-                      &MapSquares[x1][z1]->mapConection.z1,
-                      &MapSquares[x1][z1]->mapConection.x2,
-                      &MapSquares[x1][z1]->mapConection.z2,
+                      MapSquares[x1][z1]->mapConection.x1,
+                      MapSquares[x1][z1]->mapConection.z1,
+                      MapSquares[x1][z1]->mapConection.x2,
+                      MapSquares[x1][z1]->mapConection.z2,
                       MapSquares[x1][z1]->mapConection.mapName);
           }
           int aux;

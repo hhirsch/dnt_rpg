@@ -493,25 +493,21 @@ int estaDentro(GLfloat min1[3], GLfloat max1[3],
 /*********************************************************************
  *               Rotaciona e Translada o Bounding Box                *
  *********************************************************************/
-void rotTransBoundingBox(GLfloat orientacao, GLfloat x[4], GLfloat z[4],
+void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
                          GLfloat varX, GLfloat varMinY, GLfloat varMaxY, 
                          GLfloat varZ,
                          GLfloat min[4], GLfloat max[4])
 {
    int aux;
+   GLfloat x[4];
+   GLfloat z[4];
    /* Rotaciona o bounding para a posicao correrta */
-   if(orientacao != 0)
+   GLfloat cosseno = cos(deg2Rad(orientacao));
+   GLfloat seno = sin(deg2Rad(orientacao));
+   for(aux = 0;aux<4;aux++)
    {
-      GLfloat xVelho, zVelho;
-      GLfloat cosseno = cos(deg2Rad(orientacao));
-      GLfloat seno = sin(deg2Rad(orientacao));
-      for(aux = 0;aux<4;aux++)
-      {
-         xVelho = x[aux];
-         zVelho = z[aux];
-         x[aux] = (zVelho*seno) + (xVelho*cosseno);
-         z[aux] = (zVelho*cosseno) - (xVelho*seno);
-      }
+      x[aux] = (Z[aux]*seno) + (X[aux]*cosseno);
+      z[aux] = (Z[aux]*cosseno) - (X[aux]*seno);
    }
 
    
@@ -522,11 +518,6 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat x[4], GLfloat z[4],
    {
      x[aux] += varX;
      z[aux] += varZ;
-     /*if( (x[aux]<2) || (z[aux]<2) || 
-         (x[aux]>mapa->x*SQUARESIZE-2) || (z[aux]>mapa->z*SQUARESIZE-2))
-     {
-         return(0);
-     }*/
      if(aux == 0)
      {
         min[0] = x[0]; max[0] = x[0];
@@ -673,7 +664,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                               quaux->Xobjetos[obj], 0.0, 
                               0.0,quaux->Zobjetos[obj], 
                               minObj, maxObj);
-
                if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
                {
                    cursors->SetActual(CURSOR_GET);
@@ -1243,24 +1233,25 @@ int testa(GLfloat min[3], GLfloat max[3],Square* quad)
       int ob = 0;
       //GLfloat u1,u2,v1,v2;
       GLMmodel* modelo3d;
+      GLfloat X[4], Z[4];
       while( (proxima->objetos[ob] != NULL)) 
       {
 
           modelo3d = (GLMmodel*)proxima->objetos[ob]->modelo3d;
-          float X[2], Z[2];
           X[0] = modelo3d->x1;
-          X[1] = modelo3d->x2;
           Z[0] = modelo3d->z1;
+          X[1] = modelo3d->x1;
           Z[1] = modelo3d->z2;
-
+          X[2] = modelo3d->x2;
+          Z[2] = modelo3d->z2;
+          X[3] = modelo3d->x2;
+          Z[3] = modelo3d->z1;
 /* TODO +Yobjetos */
           rotTransBoundingBox(proxima->orientacaoObjetos[ob], X, Z,
-                              proxima->Xobjetos[ob], modelo3d->y1, 
-                              modelo3d->y2,proxima->Zobjetos[ob], 
+                              proxima->Xobjetos[ob],0.0 /*modelo3d->y1*/, 
+                              /*modelo3d->y2*/0.0,proxima->Zobjetos[ob], 
                               min2, max2);
 
-          //printf("%f %f %f %f\n",u1,v1,u2,v2);
-          //printf("%f %f %f %f %f %f %f %f\n",);
           result &= !estaDentro(min,max,min2,max2,1);
           if(!result) //se ja achou que nao pode, cai fora
              return(0);
@@ -1331,13 +1322,11 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
                        PCs->personagemAtivo->posicaoLadoZ+varZ,
                        min, max );
 
-   for(aux=0;aux<4;aux++)
+   /* Testa limites do Mapa */
+   if( (min[0]<2) || (min[2]<2) || 
+       (max[0]>mapa->x*SQUARESIZE-2) || (max[2]>mapa->z*SQUARESIZE-2))
    {
-     if( (x[aux]<2) || (z[aux]<2) || 
-         (x[aux]>mapa->x*SQUARESIZE-2) || (z[aux]>mapa->z*SQUARESIZE-2))
-     {
-         return(0);
-     }
+      return(0);
    }
 
 

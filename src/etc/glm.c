@@ -368,12 +368,11 @@ void InsereTextura(GLMmodel* modelo, char* textura)
    glBindTexture(GL_TEXTURE_2D, tex->indice);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
                 0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
-   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imgPotencia->w,
+                     imgPotencia->h, GL_RGBA, GL_UNSIGNED_BYTE, 
+                     imgPotencia->pixels );
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   //glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST );
-   //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
    modelo->numtexturas++;
 
    /* Libera a memoria utilizada */
@@ -768,7 +767,6 @@ _glmSecondPass(GLMmodel* model, FILE* file)
       break;
     }
   }
-
 }
 
 /* glmDelete: Deletes a GLMmodel structure.
@@ -1095,7 +1093,6 @@ GLvoid glmDraw(GLMmodel* model)
     glRotatef(group->rotacao[0],1,0,0);
     glRotatef(group->rotacao[1],0,1,0);
     glRotatef(group->rotacao[2],0,0,1);
-
 
     texturaAtual = -1;
     glBegin(GL_TRIANGLES); 
