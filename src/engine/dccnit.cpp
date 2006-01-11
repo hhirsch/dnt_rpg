@@ -1248,8 +1248,8 @@ int testa(GLfloat min[3], GLfloat max[3],Square* quad)
           Z[3] = modelo3d->z1;
 /* TODO +Yobjetos */
           rotTransBoundingBox(proxima->orientacaoObjetos[ob], X, Z,
-                              proxima->Xobjetos[ob],0.0 /*modelo3d->y1*/, 
-                              /*modelo3d->y2*/0.0,proxima->Zobjetos[ob], 
+                              proxima->Xobjetos[ob], modelo3d->y1, 
+                              modelo3d->y2,proxima->Zobjetos[ob], 
                               min2, max2);
 
           result &= !estaDentro(min,max,min2,max2,1);
@@ -1280,7 +1280,6 @@ int ColisaoComMeioFio(GLfloat min[3],GLfloat max[3], muro* meiosFio)
        max2[2] = maux->z2;
        if( (estaDentro(min, max, min2, max2, 1)) )
           return(1);
-       //printf("Fora: %.3f %.3f %.3f %.3f,\n %.3f %.3f %.3f %.3f,\n %.3f %.3f %.3f %.3f\n ", maux->x1, maux->z1, maux->x2, maux->z2, x[0],x[1],x[2],x[3],z[0],z[1],z[2],z[3]);
        maux = maux->proximo;
     }
     return(0);
@@ -1296,7 +1295,6 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
    GLfloat min[3],min2[3];
    GLfloat max[3],max2[3];
-   uint aux;
 
    GLfloat x[4],z[4];
 
