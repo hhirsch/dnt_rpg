@@ -23,9 +23,6 @@
  - Objects Selection;
  - Optimized intern map representation;
  - Colored mouse cursors;
- - Character Navigation by mouse;
- - Some possible actions;
- - Some new AI;
  - Some bugs fixed; 
 
 ================================================
