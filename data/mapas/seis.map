@@ -1,30 +1,25 @@
 T 10X10
 # Made by DccNiTghtmare's MapEditor, v0.0.2
-o Jacaranda ../data/models/jacaranda.dcc
 o Door ../data/models/objetos/geral/porta.dcc
-o Guitarra ../data/models/objetos/geral/guitarra.dcc
-t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 221 169 171
-t ../data/texturas/chao_cimento.jpg ../data/texturas/chao_marble.jpg 207 212 206
-t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
 t ../data/texturas/chao_madeira.jpg ../data/texturas/chao_madeira.jpg 115 58 29
-muro 0.000000,64.000000,10.000000,576.000000
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,384.000000,128.000000,394.000000
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,256.000000,128.000000,266.000000
+t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
+t ../data/texturas/chao_cimento.jpg ../data/texturas/chao_marble.jpg 207 212 206
+t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 221 169 171
+muro 10.000000,64.000000,128.000000,74.000000
 mt ../data/texturas/parede_rosa.jpg
 muro 10.000000,566.000000,128.000000,576.000000
 mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,64.000000,128.000000,74.000000
+muro 10.000000,256.000000,128.000000,266.000000
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,384.000000,128.000000,394.000000
+mt ../data/texturas/parede_rosa.jpg
+muro 0.000000,64.000000,10.000000,576.000000
 mt ../data/texturas/parede_rosa.jpg
 meioFio 256.000000,256.000000,512.000000,258.500000
 mt ../data/texturas/chao_cimento.jpg
-#Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-uc 0.000000,0.000000,64.000000,64.000000:../data/mapas/outro.map
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_cimento.jpg
+uc 0.0,0.0,64.0,64.0:../data/mapas/outro.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -41,30 +36,8 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-#Z: 1
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_madeira.jpg
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_madeira.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
-uo Jacaranda 0:5,2:280.910828,94.578255:0
-p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
-uo Jacaranda 1:5,2:280.910828,94.578255:0
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_cimento.jpg
-p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_cimento.jpg
-#Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -85,7 +58,6 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-#Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -106,7 +78,26 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-#Z: 4
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_cimento.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut chao_grama2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut chao_grama2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_cimento.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut chao_grama2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut chao_grama2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut chao_grama2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -127,7 +118,6 @@ p 1,0.000000,9.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-#Z: 5
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -148,7 +138,6 @@ p 1,9.000000,14.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-#Z: 6
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -169,7 +158,6 @@ p 1,14.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-#Z: 7
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -190,10 +178,8 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-#Z: 8
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
-uc 0.000000,0.000000,0.000000,0.000000:../data/texturas/chao_madeira.jpg
 uo Door 1:1,9:40.695976,531.302490:-93
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
@@ -201,8 +187,6 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uc 0.000000,0.000000,0.000000,0.000000:
-uo Guitarra 1:4,9:227.257553,521.047058:-63
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -215,7 +199,6 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-#Z: 9
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
