@@ -188,7 +188,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        PCs  = new (Lpersonagem);
        PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
-                       "../data/models/personagens/Logan/modelo.cfg");
+                       "../data/models/personagens/Ratazana/modelo.cfg");
        /*per = PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
                        "/home/farrer/tp2/TPS/TP2/Logan/logan_completo.cfg");
@@ -235,7 +235,7 @@ int engine::TelaInicial()
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
-   SDL_Surface* img = IMG_Load("../data/texturas/menuEnglish.jpg");
+/*   SDL_Surface* img = IMG_Load("../data/texturas/menuEnglish.jpg");
    SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
@@ -244,10 +244,10 @@ int engine::TelaInicial()
    
    GLuint textID;
    carregaTextura(fig,&textID);
-   SDL_FreeSurface(fig);
+   SDL_FreeSurface(fig);*/
 
-   img = IMG_Load("../data/texturas/fundo.png");
-   fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
+   SDL_Surface* img = IMG_Load("../data/texturas/inicioIngles.png");
+   SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    SDL_BlitSurface(img,NULL,fig,NULL);
@@ -258,7 +258,7 @@ int engine::TelaInicial()
 
 
    AtualizaFrustum(matrizVisivel,proj,modl);
-   AtualizaTela2D(textID,proj,modl,viewPort,336,172,463,427,0.01);
+   //AtualizaTela2D(textID,proj,modl,viewPort,336,172,463,427,0.01);
    AtualizaTela2D(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
    SDL_GL_SwapBuffers();
 
@@ -273,13 +273,13 @@ int engine::TelaInicial()
         Mbotao = SDL_GetMouseState(&x,&y);
         if(Mbotao & SDL_BUTTON(1))
         {
-            if(mouse_NaArea(360,208,440,242,x,y))
+            if(mouse_NaArea(461,12,531,35,x,y))
             {
                 result = 1;
                 pronto = 1;
             }
             else
-            if(mouse_NaArea(360,358,440,392,x,y))
+            if(mouse_NaArea(382,474,446,505,x,y))
             {
                 result = 0;
                 pronto = 1;
@@ -287,8 +287,8 @@ int engine::TelaInicial()
         }
    }
 
-   glDeleteTextures(1,&textID);
-  // glDeleteTextures(1,&tituloID);
+   //glDeleteTextures(1,&textID);
+   glDeleteTextures(1,&tituloID);
 
    SDL_ShowCursor(SDL_DISABLE);
 
