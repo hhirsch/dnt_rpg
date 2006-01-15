@@ -243,7 +243,9 @@ void janela::Abrir(Tlista *lista)
 void janela::Fechar(Tlista *ljan)
 {
    if(procFechar)
+   {
       procFechar();
+   }
    if(ptrExterno != NULL)
      *ptrExterno = NULL;
    Ljanela* lista = (Ljanela*) ljan;

@@ -7,7 +7,7 @@
 int mouseX=0,mouseY=0;
 
 /*********************************************************************
- *                El Construtor de la Interface                      *
+ *                             GUI Constructor                       *
  *********************************************************************/
 interface::interface(char* arqfundo)
 {
@@ -32,7 +32,7 @@ interface::interface(char* arqfundo)
 }
 
 /*********************************************************************
- *                El Destruidor de la Interface                      *
+ *                           GUI Destructor                          *
  *********************************************************************/
 interface::~interface()
 {
@@ -42,29 +42,29 @@ interface::~interface()
 }
 
 /*********************************************************************
- *            Manipula a los Eventos de E/S de la GUI                *
+ *                   Take care of GUI I/O Events                     *
  *********************************************************************/
 int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
 {
     int aux;
-   
     if(ljan->janelaAtiva == NULL)
        return(NADA);
 
-    /* Verifica Eventos do Teclado */
+    /* Keyboard Events */
     if ( (tecla[SDLK_ESCAPE]) && (foco != FOCO_JOGO))
     {
        foco = FOCO_JOGO;
        return(SAIR);
     }
 
-    /* Verifica Movimentacao do Mouse para mudanca de foco */
+    /* Mouse move to change focus */
     if( (x != mouseX || y != mouseY) && 
         (foco == FOCO_JOGO) )
     {
         mouseX = x;
         mouseY = y;
-        /* Testa selTexto */
+
+        /* Test selTexto */
         if ((ljan->janelaAtiva != NULL) &&
              mouse_NaArea(ljan->janelaAtiva->x1,
                           ljan->janelaAtiva->y1,
@@ -92,7 +92,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         }
     }
 
-    /* Verifica Pressao do mouse para mudanca de foco*/
+    /* Verify mouse button for focus change */
     if((Mbotao & SDL_BUTTON(1)) &&  (foco == FOCO_JOGO))
     {
         if( (ljan->janelaAtiva != NULL) &&
@@ -101,7 +101,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                           ljan->janelaAtiva->x2-3,
                           ljan->janelaAtiva->y1+12,x,y))
         {
-            /* Movimentacao da Janela Ativa */
+            /* Active Window Moves */
             ljan->janelaAtiva->difx = x - ljan->janelaAtiva->x1;
             ljan->janelaAtiva->dify = y - ljan->janelaAtiva->y1;
             foco = FOCO_JANELAMOVER;
@@ -112,14 +112,14 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                                 ljan->janelaAtiva->x2, 
                                 ljan->janelaAtiva->y2,x,y))
         {
-            /* Aqui entra o tratamento de cliques dentro da janela*/
+            /* Here are the internal windows clicks verification */
             Tobjeto *obj = ljan->janelaAtiva->objetos->primeiro->proximo;
             int aux;
             for(aux=0; aux<ljan->janelaAtiva->objetos->total; aux++)
             {
                if(obj->tipo == BOTAO)
                {
-                  /* Tratamento de Botoes */
+                  /* Verify Click on Button */
                   botao *bot = (botao*) obj;
                   if(mouse_NaArea(bot->x1+ljan->janelaAtiva->x1,
                                   bot->y1+ljan->janelaAtiva->y1,
@@ -129,10 +129,9 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                       
                      objAtivo = bot;
                      foco = FOCO_BOTAO;
-                     //return(BOTAONAOPRESSIONADO);
                   }
                }
-               /* Tratamento das Barras de Texto */ 
+               /* Verify Click on TextBar */ 
                else if(obj->tipo == BARRATEXTO)
                {
                    barraTexto *bart = (barraTexto*) obj;
@@ -149,7 +148,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                        foco = FOCO_BARRATEXTO;
                    }
                }
-               /* Tratamento de Caixas de Selecao */
+               /* Verify RadioBoxes */
                else if(obj->tipo == CXSEL)
                {
                    cxSel* cx = (cxSel*) obj;
@@ -179,7 +178,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                }
                obj = obj->proximo;
             }
-            /* Se saiu do for, sem objeto algum, chama o proc da janela */
+            /* If out of for, without objects, call window external function */
             if(ljan->janelaAtiva->procPres != NULL)
             {
                 ljan->janelaAtiva->procPres(ljan->janelaAtiva,x,y,NULL);
@@ -189,7 +188,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         }
         else if ( (ljan->janelaAtiva != NULL))
         {
-           /* Testa a Ativacao de Outras Janelas */
+           /* Test Other Windows Activation */
            int aux; 
            janela *jaux=(janela*)ljan->primeiro->proximo;
            for(aux=0;aux<ljan->total;aux++)
@@ -206,7 +205,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         } 
     }
 
-    /*   FOCO NA MOVIMENTACAO DA JANELA  */
+    /*  FOCUS ON WINDOW MOVIMENTATION  */
     if (foco == FOCO_JANELAMOVER)
     {
         if(!(ljan->janelaAtiva->Mover(ljan,NULL,fundo,x,y,Mbotao)))
@@ -214,7 +213,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         return(JANELAMOVIMENTADA);
     }
 
-    /* FOCO NO PRESSIONAMENTO DE UM BOTAO */
+    /* FOCUS ON BUTTON PRESSED */
     else
     if(foco == FOCO_BOTAO)
     {
@@ -247,11 +246,13 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
               }
               else if (!bot->texto.compare("*"))
               {
-                   /* Fecha a Janela */
+                   /* Close Window */
                   if(ljan->janelaAtiva->fechavel)
-                       ljan->janelaAtiva->Fechar(ljan);
-                       return(JANELAFECHADA);
+                  {
+                     ljan->janelaAtiva->Fechar(ljan);
+                  }
                   foco = FOCO_JOGO;
+                  return(JANELAFECHADA);
               }
               else
                   foco = FOCO_JOGO;
@@ -262,7 +263,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         return(BOTAOPRESSIONADO);
     }
  
-    /* FOCO NA ESCRITA DE UMA BARRATEXTO */
+    /* FOCUS ON BARTEXT WRITE */
     else 
     if (foco == FOCO_BARRATEXTO)
     {
@@ -283,7 +284,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         return(BARRATEXTOESCRITA);
     }
     
-    /* FOCO NO TRATAMENTO DE CAIXAS DE TEXTO */
+    /* FOCUS ON RADIOBOXES */
     else 
     if(foco == FOCO_CXSEL)
     {
@@ -295,7 +296,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
        return(CXSELMODIFICADA);
     }
 
-    /* FOCO NO TRATAMENTO DOS MENUS */
+    /* FOCUS ON MENUS */
     else
     if ((foco == FOCO_MENU) || (foco == FOCO_MENUJANELA))
     {
@@ -334,7 +335,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
        return(MENUSELECIONADO);
     }
 
-    /* FOCO NA MOVIMENTACAO DO MOUSE NUMA SELTEXTO  */
+    /* FOCUS ON TEXT SELECT  */
     else
     if ((foco == FOCO_SELTEXTO) /*&& (x != mouseX || y != mouseY)*/ )
     {
@@ -350,10 +351,13 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         return(SELTEXTOMODIFICADA);
     }
 
-    /* Nao fez nada de util para a GUI */
+    /* If here, no actions were made on GUI */
     return(NADA);
 }
 
+/*********************************************************************
+ *                   Draw Graphic User Interface                     *
+ *********************************************************************/
 void interface::Desenhar(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int aux;
@@ -363,7 +367,7 @@ void interface::Desenhar(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    if(ljan->janelaAtiva == NULL)
      return;
    
-   /* Desenha as Janelas Inativas */
+   /* Draw Inative Windows */
    for(aux = 0;aux<ljan->total;aux++)
    {
       if(jan != ljan->janelaAtiva)
@@ -375,7 +379,7 @@ void interface::Desenhar(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
       jan = (janela*) jan->proximo;
    }
 
-   /* Desenha a janelaAtiva */
+   /* Draw Active Window */
    AtualizaTela2D(ljan->janelaAtiva->caraTextura,proj,modl,viewPort,
                      ljan->janelaAtiva->x1,ljan->janelaAtiva->y1,
                      ljan->janelaAtiva->x2,ljan->janelaAtiva->y2, 0.011);

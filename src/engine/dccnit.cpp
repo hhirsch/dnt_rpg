@@ -626,7 +626,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          redesenha = true;
       }
       else
-      {
+      { 
       if( (tempo-ultimoMouse>=100 ) || (Mbotao & SDL_BUTTON(1)) )
       {
          cursors->SetActual(CURSOR_WALK);
@@ -667,8 +667,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
                {
                    cursors->SetActual(CURSOR_GET);
-                   sprintf(ObjTxt->texto,"%s",quaux->objetos[obj]->nome); 
-                   janAtalhos->Desenhar();
+                   if(janAtalhos)
+                   {
+                      sprintf(ObjTxt->texto,"%s",quaux->objetos[obj]->nome); 
+                      janAtalhos->Desenhar();
+                   }
                    if(Mbotao & SDL_BUTTON(1))
                    {
                       if(strcmp(ObjTxt->texto,"Door") == 0)
@@ -709,8 +712,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             if(estaDentro( min, max, minMouse, maxMouse, 1))
             {
                 cursors->SetActual(CURSOR_INVENTORY);
-                sprintf(ObjTxt->texto,"%s",pers->nome.c_str()); 
-                janAtalhos->Desenhar();
+                if(janAtalhos)
+                {
+                   sprintf(ObjTxt->texto,"%s",pers->nome.c_str()); 
+                   janAtalhos->Desenhar();
+                }
                 pronto = 1;
             }
             pers = (personagem*) pers->proximo;
@@ -744,8 +750,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             if(estaDentro( min, max, minMouse, maxMouse, 1))
             {
                 cursors->SetActual(CURSOR_TALK);
-                sprintf(ObjTxt->texto,"%s",pers->nome.c_str()); 
-                janAtalhos->Desenhar();
+                if(janAtalhos)
+                {
+                   sprintf(ObjTxt->texto,"%s",pers->nome.c_str()); 
+                   janAtalhos->Desenhar();
+                }
                 pronto = 1;
             }
             pers = (personagem*) pers->proximo;
@@ -767,8 +776,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
             if( estaDentro( minCon, maxCon, minMouse, maxMouse, 1 ) )
             {
-               sprintf(ObjTxt->texto,quaux->mapConection.mapName); 
-               janAtalhos->Desenhar();
+               if(janAtalhos)
+               {
+                  sprintf(ObjTxt->texto,quaux->mapConection.mapName); 
+                  janAtalhos->Desenhar();
+               }
                cursors->SetActual(CURSOR_MAPTRAVEL);
                pronto = 1;
                if(Mbotao & SDL_BUTTON(1))
@@ -779,7 +791,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             }
          }
 
-         if(!pronto)
+         if( (janAtalhos) && (!pronto) )
          {
             sprintf(ObjTxt->texto,"Nothing"); 
             janAtalhos->Desenhar();
