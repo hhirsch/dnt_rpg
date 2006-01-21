@@ -56,6 +56,8 @@ int botaoSair(void *jan,void *ljan,SDL_Surface *screen)
 int initialScreen::Execute(int Status,GLdouble proj[16],
                            GLdouble modl[16], GLint viewPort[4])
 {
+   Uint32 tempo;
+   Uint32 tempoAnterior = 0;
    pronto = 0;
    janela* jan = gui->ljan->InserirJanela(335,235,462,362,
                                           "0.0.2",1,1,
@@ -111,14 +113,18 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    SDL_ShowCursor(SDL_ENABLE);
    while (!pronto)
    {
-      SDL_PumpEvents();
-      keys = SDL_GetKeyState(NULL);
-      Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-      AtualizaTela2D(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
-      gui->ManipulaEventos(x,y,Mbotao,keys);
-      gui->Desenhar(proj,modl,viewPort);
-      glFlush();
-      SDL_GL_SwapBuffers();
+      tempo = SDL_GetTicks();
+      if(tempo - tempoAnterior > 20) 
+      {
+         SDL_PumpEvents();
+         keys = SDL_GetKeyState(NULL);
+         Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+         AtualizaTela2D(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
+         gui->ManipulaEventos(x,y,Mbotao,keys);
+         gui->Desenhar(proj,modl,viewPort);
+         glFlush();
+         SDL_GL_SwapBuffers();
+      }
    }
 
 
