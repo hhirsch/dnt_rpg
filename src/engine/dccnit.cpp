@@ -91,20 +91,6 @@ engine::~engine()
 }
 
 /*********************************************************************
- *                     Aloca uma Textura no OPENGL                   *
- *********************************************************************/
-void carregaTextura(SDL_Surface* img, GLuint* textID)
-{
-   glGenTextures(1,textID);
-   glBindTexture(GL_TEXTURE_2D,*textID);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
-                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
-                               img->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-}
-
-/*********************************************************************
  *                       Carrega Mapa na Engine                      *
  *********************************************************************/
 int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
@@ -229,69 +215,12 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
 /*********************************************************************
  *                       Menu Inicial do Jogo                        *
  *********************************************************************/
-int engine::TelaInicial()
+int engine::TelaInicial(int Status)
 {
-   SDL_ShowCursor(SDL_ENABLE);
-   glClearColor(0,0,0,1);
-   glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-   glDisable(GL_LIGHTING);
-/*   SDL_Surface* img = IMG_Load("../data/texturas/menuEnglish.jpg");
-   SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       img->w,img->h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   SDL_BlitSurface(img,NULL,fig,NULL);
-   SDL_FreeSurface(img);
-   
-   GLuint textID;
-   carregaTextura(fig,&textID);
-   SDL_FreeSurface(fig);*/
-
-   SDL_Surface* img = IMG_Load("../data/texturas/inicioIngles.png");
-   SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       img->w,img->h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   SDL_BlitSurface(img,NULL,fig,NULL);
-   SDL_FreeSurface(img);
-   GLuint tituloID;
-   carregaTextura(fig,&tituloID);
-   SDL_FreeSurface(fig);
-
-
    AtualizaFrustum(matrizVisivel,proj,modl);
-   //AtualizaTela2D(textID,proj,modl,viewPort,336,172,463,427,0.01);
-   AtualizaTela2D(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
-   SDL_GL_SwapBuffers();
-
-   int pronto = 0;
-   int result;
-   Uint8 Mbotao;
-   int x,y;
-
-   while(!pronto)   
-   {
-        SDL_PumpEvents();
-        Mbotao = SDL_GetMouseState(&x,&y);
-        if(Mbotao & SDL_BUTTON(1))
-        {
-            if(mouse_NaArea(461,12,531,35,x,y))
-            {
-                result = 1;
-                pronto = 1;
-            }
-            else
-            if(mouse_NaArea(382,474,446,505,x,y))
-            {
-                result = 0;
-                pronto = 1;
-            }
-        }
-   }
-
-   //glDeleteTextures(1,&textID);
-   glDeleteTextures(1,&tituloID);
-
-   SDL_ShowCursor(SDL_DISABLE);
-
+   initialScreen* inic = new(initialScreen);
+   int result = inic->Execute(Status, proj, modl, viewPort);
+   delete(inic);
    return(result);
 }
 
@@ -330,18 +259,28 @@ void engine::Iniciar(SDL_Surface *screen)
    /* Definicao da Luz */
    GLfloat light_ambient[] = { 0.6, 0.62, 0.6, 1.0 };
    //GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-   //GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_position[] = { 0.0, 0.0, 1.0, 0.0 };
+   GLfloat light_position2[] = {240.0,30.0,25.0,1.0};
+   GLfloat light_direction[] = {1.0,-1.0,0.0};
    
    /* Carrega a Luz */
    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-   //glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-   //glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+   //-glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+   //-glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+   /* Luz1 */
+   glLightfv(GL_LIGHT1, GL_AMBIENT, light_specular);
+   glLightfv(GL_LIGHT1, GL_POSITION, light_position2);
+   glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
+   glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
+   glLightf (GL_LIGHT1, GL_SPOT_EXPONENT, 2.5);
    
    /* Habilita a iluminacao */
    glEnable(GL_LIGHTING);
    glEnable(GL_LIGHT0);
+   //glEnable(GL_LIGHT1);
   
    glEnable(GL_FOG);
    {
@@ -547,7 +486,7 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
 }
 
 /*********************************************************************
- *                      Tratamento do Teclado                        *
+ *                      Tratamento da Entrada/Saida                  *
  *********************************************************************/
 int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 {
@@ -1082,7 +1021,7 @@ void engine::Desenhar()
 
    /* CEU */
    glDisable(GL_DEPTH_TEST);
-   glDisable(GL_LIGHTING);
+   //glDisable(GL_LIGHTING);
 
    glPushMatrix();
       glEnable(GL_TEXTURE_2D);
@@ -1093,7 +1032,7 @@ void engine::Desenhar()
    glPopMatrix();
 
    glEnable(GL_DEPTH_TEST);
-   glEnable(GL_LIGHTING);
+   //glEnable(GL_LIGHTING);
 
    glPushMatrix();
    

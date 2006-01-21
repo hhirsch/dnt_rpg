@@ -12,6 +12,7 @@
 #include "personagens.h"
 #include "luta.h"
 #include "../ia/ai.h"
+#include "initial.h"
 #ifdef REDE
   #include "../net/client.h"
 #endif
@@ -55,7 +56,7 @@ class engine
 
       /* Abre a Tela Inicial, com seus tratamentos.
        * Retorna 0 se é para sair, 1 caso contrario */
-      int TelaInicial();
+      int TelaInicial(int Status);
 
    private:
 

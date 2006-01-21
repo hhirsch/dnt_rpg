@@ -304,4 +304,17 @@ void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16],
 
 }
 
+/*********************************************************************
+ *                     Aloca uma Textura no OPENGL                   *
+ *********************************************************************/
+void carregaTextura(SDL_Surface* img, GLuint* textID)
+{
+   glGenTextures(1,textID);
+   glBindTexture(GL_TEXTURE_2D,*textID);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
+                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                               img->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
 

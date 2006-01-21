@@ -62,6 +62,7 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,char *text,
    novo->Gtxt = novo->Cores.corTexto.G;
    novo->Btxt = novo->Cores.corTexto.B;
    novo->fechavel = 1;
+   novo->movivel = 1;
    novo->caraTextura = 0;
    novo->temTextura = 0;
    novo->cara = SDL_CreateRGBSurface(SDL_HWSURFACE,xb-xa+1,yb-ya+1,32,

@@ -27,6 +27,7 @@ class janela: public Tobjeto
       Tlista *objetos;           /* Lista dos Objetos presentes */
       SDL_Surface *cara;         /* Cara da Janela */
       int fechavel;              /* != 0 se for fechavel */
+      int movivel;
       int difx;                  /* Diferenca de qdo o mouse clicou */
       int dify;                  /* No momento de inicio da movimentacao */
       cores Cores;

@@ -3,6 +3,7 @@
  */
 
 #include "eventos.h"
+#include <SDL/SDL_image.h>
 
 int mouseX=0,mouseY=0;
 
@@ -15,7 +16,7 @@ interface::interface(char* arqfundo)
    objetos = new Tlista;
    if(arqfundo != NULL)
    {
-      fundo = SDL_LoadBMP(arqfundo);
+      fundo = IMG_Load(arqfundo);
       if(!fundo) printf("Nao abri arquivo de fundo\n");
    } 
    else
@@ -95,7 +96,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
     /* Verify mouse button for focus change */
     if((Mbotao & SDL_BUTTON(1)) &&  (foco == FOCO_JOGO))
     {
-        if( (ljan->janelaAtiva != NULL) &&
+        if( ( (ljan->janelaAtiva != NULL) && (ljan->janelaAtiva->movivel) ) &&
              mouse_NaArea(ljan->janelaAtiva->x1+36,
                           ljan->janelaAtiva->y1, 
                           ljan->janelaAtiva->x2-3,
