@@ -297,7 +297,7 @@ void engine::Iniciar(SDL_Surface *screen)
    //gluQuadricTexture(atmosfera, GL_TRUE);
    gluQuadricTexture(atmosfera, GL_FALSE);
 
-   SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
+   SDL_Surface* img = IMG_Load("../data/texturas/sky_18.jpg");
    SDL_Surface* fg = SDL_CreateRGBSurface(SDL_HWSURFACE,
                       img->w,img->h,32,
                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);

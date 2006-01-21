@@ -30,18 +30,21 @@ int main(int argc, char **argv)
 
    Engine->Iniciar(screen);
 
-   int status = ON_INIT;
+   int result = Engine->TelaInicial(ON_INIT);
 
-   while(Engine->TelaInicial(status))
+   while(result != EXIT_GAME)
    {
-       Engine->CarregaMapa("../data/mapas/quatro.map",1);
+       if(result == NEW_GAME)
+       {
+          Engine->CarregaMapa("../data/mapas/quatro.map",1);
+       }
        #ifdef REDE
           Engine->server = server;
        #endif
        //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
        Engine->Rodar(screen);
-       status = IN_GAME;
+       result = Engine->TelaInicial(IN_GAME);
        #ifdef REDE
           free(Engine->server); 
        #endif
