@@ -27,6 +27,7 @@ Square::Square()
       objetos[aux] = NULL;
       objetosDesenha[aux] = 0;
       quadObjetos[aux] = NULL;
+      statusObj[aux] = 0;
    }
    for(aux=0;aux<MAXMUROS;aux++)
      muros[aux] = NULL;

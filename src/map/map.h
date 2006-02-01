@@ -82,6 +82,7 @@ class Square
       GLuint R,G,B;                     /* Square Color to MINIMAP */
       Square* quadObjetos[MAXOBJETOS];  /* Orign object from square: */
       conection mapConection;           /* Conection to other map */
+      int statusObj[MAXOBJETOS];        /* Current Status of Object */
 };
 
 

@@ -167,6 +167,12 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoX = 30;
    per->posicaoLadoZ = 20;
 
+   per = NPCs->InserirPersonagem(2,2,5,3,
+                                 "../data/pics/logan/portrait.jpg","Jacaranda",
+                       "../data/models/personagens/Jacaranda/modelo.cfg");
+   per->posicaoLadoX = 280;
+   per->posicaoLadoZ = 200;
+
    if(RecarregaPCs)
    {
        if(PCs)
@@ -174,7 +180,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        PCs  = new (Lpersonagem);
        PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
-                       "../data/models/personagens/Ratazana/modelo.cfg");
+                       "../data/models/personagens/Logan/modelo.cfg");
        /*per = PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
                        "/home/farrer/tp2/TPS/TP2/Logan/logan_completo.cfg");
@@ -297,7 +303,7 @@ void engine::Iniciar(SDL_Surface *screen)
    //gluQuadricTexture(atmosfera, GL_TRUE);
    gluQuadricTexture(atmosfera, GL_FALSE);
 
-   SDL_Surface* img = IMG_Load("../data/texturas/sky_18.jpg");
+   SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
    SDL_Surface* fg = SDL_CreateRGBSurface(SDL_HWSURFACE,
                       img->w,img->h,32,
                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
@@ -615,8 +621,16 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                    {
                       if(strcmp(ObjTxt->texto,"Door") == 0)
                       {
-                          ///TODO door open
-                         quaux->orientacaoObjetos[obj] += 90; 
+                         if(quaux->statusObj[obj] == 0 ) 
+                         {
+                           quaux->orientacaoObjetos[obj] += 90; 
+                           quaux->statusObj[obj] = 1;
+                         }
+                         else
+                         {
+                            quaux->orientacaoObjetos[obj] -= 90;
+                            quaux->statusObj[obj] = 0;  
+                         }
                       }
                    }
                    pronto = 1;
@@ -759,6 +773,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
               redesenha = true;
           }
       }
+
       /* Tratamento das teclas para a Camera */
       if(keys[SDLK_UP])  // Aumenta o Zoom
       {
@@ -858,7 +873,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          }
         
       }
-      if(keys[SDLK_w] || keys[SDLK_s])
+      else if(keys[SDLK_w] || keys[SDLK_s])
       { 
          varX = passo * sin(deg2Rad(PCs->personagemAtivo->orientacao));
          varZ = passo * cos(deg2Rad(PCs->personagemAtivo->orientacao));
