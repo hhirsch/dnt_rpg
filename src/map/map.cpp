@@ -28,6 +28,7 @@ Square::Square()
       objetosDesenha[aux] = 0;
       quadObjetos[aux] = NULL;
       statusObj[aux] = 0;
+      pisavelObj[aux] = 0;
    }
    for(aux=0;aux<MAXMUROS;aux++)
      muros[aux] = NULL;
@@ -607,13 +608,14 @@ int Map::open(char* arquivo)
                   else
                   {
                      fgets(buffer, sizeof(buffer), arq);
-                     sscanf(buffer,"%s %d:%d,%d:%f,%f:%d",nome,
+                     sscanf(buffer,"%s %d:%d,%d:%f,%f:%d:%d",nome,
                        &MapSquares[posX][posZ]->objetosDesenha[numObjetosAtual],
                        &MapSquares[posX][posZ]->quadXobjetos[numObjetosAtual],
                        &MapSquares[posX][posZ]->quadZobjetos[numObjetosAtual],
                        &MapSquares[posX][posZ]->Xobjetos[numObjetosAtual],
                        &MapSquares[posX][posZ]->Zobjetos[numObjetosAtual],
-                       &MapSquares[posX][posZ]->orientacaoObjetos[numObjetosAtual]);
+                       &MapSquares[posX][posZ]->orientacaoObjetos[numObjetosAtual],
+                       &MapSquares[posX][posZ]->pisavelObj[numObjetosAtual]);
                      MapSquares[posX][posZ]->objetos[numObjetosAtual] = 
                                                     Objetos->EndMapObjeto(nome);
                      MapSquares[posX][posZ]->quadObjetos[i] = quadradoRelativo(MapSquares[posX][posZ]->quadXobjetos[numObjetosAtual], MapSquares[posX][posZ]->quadZobjetos[numObjetosAtual] );
@@ -916,13 +918,14 @@ int Map::save(char* arquivo)
             {
                x2 = (int)MapSquares[x1][z1]->Xobjetos[aux] / SQUARESIZE;
                z2 = (int)MapSquares[x1][z1]->Zobjetos[aux] / SQUARESIZE;
-               fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d\n",
+               fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d:%d\n",
                        MapSquares[x1][z1]->objetos[aux]->nome,
                        MapSquares[x1][z1]->objetosDesenha[aux],
                        x2+1,z2+1,
                        MapSquares[x1][z1]->Xobjetos[aux],
                        MapSquares[x1][z1]->Zobjetos[aux],
-                       MapSquares[x1][z1]->orientacaoObjetos[aux]);
+                       MapSquares[x1][z1]->orientacaoObjetos[aux],
+                       MapSquares[x1][z1]->pisavelObj[aux]);
             }
           }
       }

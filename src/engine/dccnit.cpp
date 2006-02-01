@@ -1202,7 +1202,8 @@ int testa(GLfloat min[3], GLfloat max[3],Square* quad)
       GLfloat X[4], Z[4];
       while( (proxima->objetos[ob] != NULL)) 
       {
-
+        if(!proxima->pisavelObj[ob])
+        {
           modelo3d = (GLMmodel*)proxima->objetos[ob]->modelo3d;
           X[0] = modelo3d->x1;
           Z[0] = modelo3d->z1;
@@ -1221,7 +1222,8 @@ int testa(GLfloat min[3], GLfloat max[3],Square* quad)
           result &= !estaDentro(min,max,min2,max2,1);
           if(!result) //se ja achou que nao pode, cai fora
              return(0);
-          ob++;
+        }
+        ob++;
       }
    }
 

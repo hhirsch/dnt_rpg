@@ -83,6 +83,7 @@ class Square
       Square* quadObjetos[MAXOBJETOS];  /* Orign object from square: */
       conection mapConection;           /* Conection to other map */
       int statusObj[MAXOBJETOS];        /* Current Status of Object */
+      int pisavelObj[MAXOBJETOS];       /* Object collision or not */
 };
 
 
