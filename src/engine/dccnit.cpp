@@ -90,6 +90,25 @@ engine::~engine()
    delete(cursors);
 }
 
+void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto, 
+                   GLuint texturaCarga, char* texto,
+                   GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
+{
+   glDeleteTextures(1,texturaTexto);
+   cor_Definir(0,0,0);
+   retangulo_Colorir(img,0,0,255,31,0);
+   cor_Definir(200,20,20);
+   selFonte(FFARSO,CENTRALIZADO,3);
+   escxy(img,128,0,texto);
+   carregaTextura(img,texturaTexto);
+   
+   AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
+   AtualizaTela2D(*texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
+   glFlush();
+   SDL_GL_SwapBuffers();
+}
+
+
 /*********************************************************************
  *                       Carrega Mapa na Engine                      *
  *********************************************************************/
@@ -139,22 +158,9 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    mapa = new(Map);
    mapa->open(arq);
 
-   glDeleteTextures(1,&texturaTexto);
-   cor_Definir(0,0,0);
-   retangulo_Colorir(img,0,0,255,31,0);
-   cor_Definir(200,20,20);
-   selFonte(FFARSO,CENTRALIZADO,3);
-   escxy(img,128,0,"Loading Characters...");
-   carregaTextura(img,&texturaTexto);
-   
-   AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
-   AtualizaTela2D(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
-   glFlush();
-   SDL_GL_SwapBuffers();
-
-   SDL_FreeSurface(img);
-   glDeleteTextures(1,&texturaCarga);
-   glDeleteTextures(1,&texturaTexto);
+   atualizaCarga(img,&texturaTexto,texturaCarga,
+                 "Loading NPC: Logan",
+                 proj, modl, viewPort);
 
    /* Carregando Entao os NPCs */
    if(NPCs)
@@ -162,10 +168,15 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    NPCs = new (Lpersonagem);
    personagem* per;
    per = NPCs->InserirPersonagem(7,6,10,6,
-                                 "../data/pics/logan/portrait.jpg","NPC",
+                                 "../data/pics/logan/portrait.jpg","Logan",
                         "../data/models/personagens/Logan/modelo.cfg");
    per->posicaoLadoX = 30;
    per->posicaoLadoZ = 20;
+
+   atualizaCarga(img,&texturaTexto,texturaCarga,
+                 "Loading NPC: Jacaranda",
+                 proj, modl, viewPort);
+
 
    per = NPCs->InserirPersonagem(2,2,5,3,
                                  "../data/pics/logan/portrait.jpg","Jacaranda",
@@ -173,21 +184,43 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoX = 280;
    per->posicaoLadoZ = 200;
 
+   atualizaCarga(img,&texturaTexto,texturaCarga,
+                 "Loading NPC: Ratazana",
+                 proj, modl, viewPort);
+
+   per = NPCs->InserirPersonagem(2,2,5,3,
+                                 "../data/pics/logan/portrait.jpg","Ratazana",
+                       "../data/models/personagens/Ratazana/modelo.cfg");
+   per->posicaoLadoX = 580;
+   per->posicaoLadoZ = 600;
+
+   atualizaCarga(img,&texturaTexto,texturaCarga,
+                 "Loading NPC: Ameiva",
+                 proj, modl, viewPort);
+
+   per = NPCs->InserirPersonagem(2,2,5,3,
+                                 "../data/pics/logan/portrait.jpg","Ameiva",
+                       "../data/models/personagens/Ameiva/modelo.cfg");
+   per->posicaoLadoX = 360;
+   per->posicaoLadoZ = 380;
+
+
    if(RecarregaPCs)
    {
        if(PCs)
           delete(PCs);
        PCs  = new (Lpersonagem);
+       atualizaCarga(img,&texturaTexto,texturaCarga,
+                 "Loading Character: Logan",
+                 proj, modl, viewPort);
        PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
                        "../data/models/personagens/Logan/modelo.cfg");
-       /*per = PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
-                              "Logan",
-                       "/home/farrer/tp2/TPS/TP2/Logan/logan_completo.cfg");
-       per->posicaoLadoX = 100;
-       per->posicaoLadoZ = 100;*/
-
    }
+
+   atualizaCarga(img,&texturaTexto,texturaCarga,
+                 "Puting Windows...",
+                 proj, modl, viewPort);
 
    if(janMiniMapa)
      janMiniMapa->Fechar(gui->ljan);
@@ -195,6 +228,14 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
      janAtalhos->Fechar(gui->ljan);
    abreMiniMapa();
    abreAtalhos();
+      int aux;
+      per = (personagem*) PCs->primeiro->proximo;
+      for(aux=0;aux< PCs->total;aux++)
+      {
+         per->m_calModel->update(0); 
+         per->CalculateBoundingBox();  
+         per = (personagem*) per->proximo;
+      }
 
    glEnable(GL_LIGHTING);
 
@@ -207,12 +248,19 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    centroZ = mapa->zInic;
    PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
 
-   /* Define a Posicao do NPC em Squares */
+   /* Define a Posicao do NPC em Squares 
    per = (personagem*) NPCs->primeiro->proximo;
    int posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
    int posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
-   per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
+   per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);*/
 
+   atualizaCarga(img,&texturaTexto,texturaCarga,
+                 "Done!",
+                 proj, modl, viewPort);
+
+   SDL_FreeSurface(img);
+   glDeleteTextures(1,&texturaCarga);
+   glDeleteTextures(1,&texturaTexto);
 
    return(1);
 
@@ -523,7 +571,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       for(aux=0;aux< PCs->total;aux++)
       {
          per->m_calModel->update(segundos); 
-         per->CalculateBoundingBox();  
+         //per->CalculateBoundingBox(); use only one bounding, for better walk
          per = (personagem*) per->proximo;
       }
       per = (personagem*) NPCs->primeiro->proximo;
@@ -1076,6 +1124,7 @@ void engine::Desenhar()
          per = (personagem*) per->proximo;
       }
    glPopMatrix();
+
 
  
 
