@@ -794,6 +794,7 @@ glmDelete(GLMmodel* model)
   while(model->groups) {
     group = model->groups;
     model->groups = model->groups->next;
+    glDeleteLists(group->listaDesenhar,1);
     free(group->name);
     free(group->triangles);
     free(group);
@@ -905,36 +906,9 @@ glmReadOBJ(char* filename, char* diretorioTex, int fazListas)
 
 void glmPrecomputaListas(GLMmodel* model, GLuint mode)
 {
-    GLuint i;
-    GLMgroup* group;
-    int texturaAtual = -1;
-
-    /* do a bit of warning */
-    if (mode & GLM_FLAT && !model->facetnorms) {
-      mode &= ~GLM_FLAT;
-    }
-    if (mode & GLM_SMOOTH && !model->normals) {
-      mode &= ~GLM_SMOOTH;
-    }
-    if (mode & GLM_TEXTURE && !model->texcoords) {
-      mode &= ~GLM_TEXTURE;
-    }
-    if (mode & GLM_FLAT && mode & GLM_SMOOTH) {
-      mode &= ~GLM_FLAT;
-    }
-    if (mode & GLM_COLOR && !model->materials) {
-      mode &= ~GLM_COLOR;
-    }
-    if (mode & GLM_MATERIAL && !model->materials) {
-      mode &= ~GLM_MATERIAL;
-    }
-    if (mode & GLM_COLOR && mode & GLM_MATERIAL) {
-       mode &= ~GLM_COLOR;
-    }
-    if (mode & GLM_COLOR)
-      glEnable(GL_COLOR_MATERIAL);
-    if (mode & GLM_MATERIAL)
-      glDisable(GL_COLOR_MATERIAL);
+  GLuint i;
+  GLMgroup* group;
+  int texturaAtual = -1;
 
   group = model->groups;
 
@@ -953,7 +927,7 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
     for (i = 0; i < group->numtriangles; i++) {
  
       /* Habilita Nova Textura, se necessario */
-      if ((mode & GLM_TEXTURE) && (T(group->triangles[i]).texture!=-1) &&
+      if ((T(group->triangles[i]).texture!=-1) &&
           (T(group->triangles[i]).texture!=texturaAtual) )
       {
          glEnd();
@@ -969,8 +943,8 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
          glDisable(GL_TEXTURE_2D);
       }
       /* Define o Material */
-      if (mode & GLM_MATERIAL) 
-      {
+      //if (mode & GLM_MATERIAL) 
+      //{
          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
 	   	   model->materials[T(group->triangles[i]).material].ambient);
          glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, 
@@ -979,31 +953,31 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
 		   model->materials[T(group->triangles[i]).material].specular);
          glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 
    		   model->materials[T(group->triangles[i]).material].shininess);
-      }
+      //}
       /* Define a Cor */
-      if (mode & GLM_COLOR) 
+      //if (mode & GLM_COLOR) 
         glColor3fv( model->materials[T(group->triangles[i]).material].diffuse);
       /**/
-      if (mode & GLM_FLAT)
-	glNormal3fv(&model->facetnorms[3 * T(group->triangles[i]).findex]);
+      //if (mode & GLM_FLAT)
+	//glNormal3fv(&model->facetnorms[3 * T(group->triangles[i]).findex]);
       
-      if (mode & GLM_SMOOTH)
+      //if (mode & GLM_SMOOTH)
 	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[0]]);
-      if (mode & GLM_TEXTURE)
+      if (T(group->triangles[i]).texture!=-1)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[0]]);
       
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[0]]);
       
-      if (mode & GLM_SMOOTH)
+      //if (mode & GLM_SMOOTH)
 	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[1]]);
-      if (mode & GLM_TEXTURE)
+      if (T(group->triangles[i]).texture!=-1)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[1]]);
       
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[1]]);
       
-      if (mode & GLM_SMOOTH)
+      //if (mode & GLM_SMOOTH)
 	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[2]]);
-      if (mode & GLM_TEXTURE)
+      if(T(group->triangles[i]).texture!=-1)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[2]]);
 
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[2]]);
@@ -1051,21 +1025,6 @@ glmDrawLists(GLMmodel* model)
     group = group->next;
   }
 
-  glPushMatrix();
-   //glScalef(group->escala[0],group->escala[1],group->escala[2]);
-   //glTranslatef(group->translacao[0],group->translacao[1],group->translacao[2]);
-   //glRotatef(group->rotacao[0],1,0,0);
-   //glRotatef(group->rotacao[1],0,1,0);
-   //glRotatef(group->rotacao[2],0,0,1);
-   glColor3f(1.0,0.0,0.0);
-   glBegin(GL_POLYGON);
-     glVertex3f(model->x1,1,model->z1);
-     glVertex3f(model->x1,1,model->z2);
-     glVertex3f(model->x2,1,model->z2); 
-     glVertex3f(model->x2,1,model->z1);
-   glEnd();
-
-  glPopMatrix();
 
   glPopMatrix();
   return;

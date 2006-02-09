@@ -12,7 +12,7 @@
  - Initial menu;
  - Loading screen;
  - Functional and ugly map editor (only on CVS);
- - Some new objects and characters;
+ - Some new objects and characters added;
  - Map to map navigation;
  - New test maps;
  - Objects orientation possible;

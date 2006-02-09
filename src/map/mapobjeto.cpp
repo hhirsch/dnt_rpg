@@ -21,7 +21,8 @@ void mapObjeto::Desenhar(float x, float z, GLfloat distancia, float orientacao)
    glPushMatrix();
       glTranslatef(x, 0 ,z);
       glRotatef(orientacao,0,1,0);
-      glmDraw(modelo);
+      //glmDraw(modelo);
+      glmDrawLists(modelo);
   glPopMatrix();
 }
 
@@ -65,7 +66,7 @@ mapObjeto* LmapObjeto::InserirMapObjeto(char* arquivo, char* nome)
    fscanf(arq,"%d",&novo->deltaVariacao);
    fscanf(arq,"%s",arqModelo);
    fscanf(arq,"%s",dirTexturas); 
-   novo->modelo3d = glmReadOBJ(arqModelo,dirTexturas,0);
+   novo->modelo3d = glmReadOBJ(arqModelo,dirTexturas,1);
 
    if(novo->deltaVariacao !=0) //S'existe variacao, le os outros modelos
    {
