@@ -2,8 +2,8 @@
 ================================================
 |               Version 0.0.2                  |
 ================================================
- - Support to Cal3D format for character models,
- - Some animations added.
+ - Support for Cal3D format for character models;
+ - Some animations added;
  - Gui is now avaible on graphical engine;
  - Colision detection more permissive;
  - Makefile to compile on window$ (Dev-C++);
@@ -11,7 +11,7 @@
  - Constant character & camera velocity;
  - Initial menu;
  - Loading screen;
- - Functional and VERY ugly map editor;
+ - Functional and ugly map editor (only on CVS);
  - Some new objects and characters;
  - Map to map navigation;
  - New test maps;
@@ -23,7 +23,7 @@
  - Objects Selection;
  - Optimized intern map representation;
  - Colored mouse cursors;
- - Some bugs fixed; 
+ - Some bugs fixed.
 
 ================================================
 |               Version 0.0.1                  |
@@ -34,4 +34,4 @@
  - First Implementation of Colision Detection;
  - First Step to animation (body division);
  - The Character can "Walk" (erh, fly??);
- - The Camera can move; 
+ - The Camera can move. 

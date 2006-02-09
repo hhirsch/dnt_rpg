@@ -10,7 +10,8 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
 
     
     //Comeca a abrir a tela
-    if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) {
+    if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
+    {
         erro_Mensagem("Argh! Can't init SDL!\n",1);
     }
     atexit(SDL_Quit);
@@ -21,8 +22,9 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );
 
-    *screen = SDL_SetVideoMode(800, 600, 16,/* SDL_FULLSCREEN | SDL_HWSURFACE | SDL_DOUBLEBUF |*/ SDL_OPENGL);
-    if ( screen == NULL ) {
+    *screen = SDL_SetVideoMode(800, 600, 16, /*SDL_FULLSCREEN | SDL_HWSURFACE | SDL_DOUBLEBUF |*/ SDL_OPENGL);
+    if ( screen == NULL ) 
+    {
        erro_Mensagem("Oxi! Can't ajust video mode!\n",2);
     }
 
@@ -41,7 +43,7 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
     SDL_EventState(SDL_JOYHATMOTION, SDL_IGNORE);
     SDL_EventState(SDL_JOYBUTTONDOWN, SDL_IGNORE);
     SDL_EventState(SDL_JOYBUTTONUP, SDL_IGNORE);
-    SDL_EventState(SDL_QUIT, SDL_IGNORE);
+    //SDL_EventState(SDL_QUIT, SDL_IGNORE);
     SDL_EventState(SDL_SYSWMEVENT, SDL_IGNORE);
     SDL_EventState(SDL_VIDEORESIZE, SDL_IGNORE);
     SDL_EventState(SDL_VIDEOEXPOSE, SDL_IGNORE);

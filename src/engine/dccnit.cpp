@@ -213,9 +213,15 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading Character: Logan",
                  proj, modl, viewPort);
-       PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
+       per = PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
                        "../data/models/personagens/Logan/modelo.cfg");
+       atualizaCarga(img,&texturaTexto,texturaCarga,
+                 "Loading Character: Gushm",
+                 proj, modl, viewPort);
+       PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
+                              "Gushm",
+                       "../data/models/personagens/Gushm/modelo.cfg");
    }
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
@@ -1556,6 +1562,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
    
    /* Testa Meio-fio */
+   float altura_atual = PCs->personagemAtivo->posicaoLadoY;
    if( ColisaoComMeioFio( min, max, mapa->meiosFio) )
    {
       PCs->personagemAtivo->posicaoLadoY = MEIOFIOALTURA+0.1;
@@ -1588,6 +1595,12 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
                 (dx1 * PCs->personagemAtivo->ocupaQuad->h3);
 
    GLfloat res = (ha * dz2) + (hb * dz1);
+
+   if( res - altura_atual > ANDAR)
+   {
+       PCs->personagemAtivo->posicaoLadoY = altura_atual;
+       return(0);
+   }
  
    PCs->personagemAtivo->posicaoLadoY += res;
    deltaY = res;
