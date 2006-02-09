@@ -216,12 +216,12 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        per = PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
                        "../data/models/personagens/Logan/modelo.cfg");
-       atualizaCarga(img,&texturaTexto,texturaCarga,
+       /*atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading Character: Gushm",
                  proj, modl, viewPort);
        PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Gushm",
-                       "../data/models/personagens/Gushm/modelo.cfg");
+                       "../data/models/personagens/Gushm/modelo.cfg");*/
    }
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
@@ -826,6 +826,41 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
               abreAtalhos();
               redesenha = true;
           }
+      }
+
+      if(keys[SDLK_F1])
+      {
+         //Tela de Informações // HELP
+         SDL_Surface* img = IMG_Load("../data/texturas/info.png");
+         SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                          img->w,img->h,32,
+                          0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+         SDL_BlitSurface(img,NULL,fig,NULL);
+         SDL_FreeSurface(img);
+
+         GLuint texturaInfo;
+         carregaTextura(fig,&texturaInfo);
+         SDL_FreeSurface(fig);
+
+
+         AtualizaFrustum(matrizVisivel,proj,modl);
+         AtualizaTela2D(texturaInfo,proj,modl,viewPort,272,44,527,555,0.0001);
+         glFlush();
+         SDL_GL_SwapBuffers();
+
+         SDL_Delay(100);
+         SDL_PumpEvents();
+         keys = SDL_GetKeyState(NULL);
+         while(!(keys[SDLK_F1] || keys[SDLK_ESCAPE] || keys[SDLK_RETURN]) )
+         {
+            SDL_Delay(40);
+            SDL_PumpEvents();
+            keys = SDL_GetKeyState(NULL);
+         }
+
+         glDeleteTextures(1,&texturaInfo);
+         SDL_Delay(100);
+         redesenha = true;
       }
 
       /* Tratamento das teclas para a Camera */
@@ -1743,7 +1778,11 @@ void engine::abreAtalhos()
 {
    janAtalhos = gui->ljan->InserirJanela(0,472,511,599,"ShortCuts",1,1,NULL,NULL);
    FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
+   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,76,180,101,0,"Press F1 for Help!");
+   ObjTxt->Cores.corCont[1].R = 255; ObjTxt->Cores.corCont[1].G = 255; 
+   ObjTxt->Cores.corCont[1].B = 255;
    ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,100,71,0,"Nothing");
+   
    janAtalhos->ptrExterno = &janAtalhos;
    janAtalhos->Abrir(gui->ljan);
 }
