@@ -1,7 +1,7 @@
 [Project]
 FileName=DccNiTghtmare.dev
 Name=DccNiTghtmare
-UnitCount=56
+UnitCount=58
 Type=1
 Ver=1
 ObjFiles=
@@ -589,7 +589,6 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-
 [VersionInfo]
 Major=0
 Minor=1
@@ -607,4 +606,24 @@ OriginalFilename=
 ProductName=
 ProductVersion=
 AutoIncBuildNr=0
+
+[Unit57]
+FileName=src\engine\cursor.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit58]
+FileName=src\engine\cursor.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 
