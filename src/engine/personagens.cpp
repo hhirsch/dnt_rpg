@@ -80,7 +80,7 @@ void personagem::CalculateBoundingBox()
    /* Calcula Bounding box Estatico */
   m_calModel->getSkeleton()->calculateBoundingBoxes();
 
-  uint aux, aux2;
+  GLuint aux, aux2;
   int computed = 0;
 
   CalSkeleton *pCalSkeleton = m_calModel->getSkeleton();
