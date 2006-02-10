@@ -129,7 +129,7 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
    glGenTextures(1, &(tex->indice));
    glBindTexture(GL_TEXTURE_2D, tex->indice);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
-                0, GL_BGRA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
+                0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
 
    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
