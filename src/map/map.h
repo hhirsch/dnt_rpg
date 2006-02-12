@@ -55,6 +55,19 @@ typedef struct _texture
 }texture;
 
 /****************************************************
+ *                  Map's Doors                     *
+ ****************************************************/
+typedef struct _door
+{
+  mapObjeto* objeto;
+  GLfloat x,z;
+  GLint status;
+  GLint orientacao;
+  struct _door* proximo;
+}door;
+
+
+/****************************************************
  *                  Map's Square                    *
  ****************************************************/
 class Square
@@ -154,6 +167,7 @@ class Map
       int x,z;              /* Map Dimensions */
       muro* muros;          /* Map Walls */
       muro* meiosFio;       /* Map Meio Fios (how translate this?) */
+      door* portas;         /* Map Doors */
 
       private:
          char* name;           /* File name of loaded map */

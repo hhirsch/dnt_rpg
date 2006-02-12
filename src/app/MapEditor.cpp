@@ -35,6 +35,109 @@
 
 double deg2Rad(double x){return 3.1415927 * x/180.0;}
 
+
+Map* mapa;
+
+
+void inserirObjetoMapa(GLfloat xReal, GLfloat zReal, int orObj,
+                       mapObjeto* objAtual, int qx, int qz)
+{
+   Square* saux = mapa->quadradoRelativo(qx,qz);
+   int ob=0;
+   if(saux)
+   {
+     while( (ob < MAXOBJETOS ) && (saux->objetos[ob] != NULL))
+     {
+        ob++;
+     }
+     if(ob<MAXOBJETOS)
+     {
+        saux->objetos[ob] = objAtual;
+        //saux->quadXobjetos[ob] = qx;
+        //saux->quadZobjetos[ob] = qz;
+        //objAtual->x
+        saux->Xobjetos[ob] = xReal;
+        saux->Zobjetos[ob] = zReal;
+        saux->orientacaoObjetos[ob] = orObj;
+        saux->objetosDesenha[ob] = 1;
+        printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
+                  
+        GLMmodel* modelo = (GLMmodel*)objAtual->modelo3d; 
+
+        float X[2], Z[2];
+        X[0] = modelo->x1;
+        X[1] = modelo->x2;
+        Z[0] = modelo->z1;
+        Z[1] = modelo->z2;
+        if(orObj!=0)
+        {
+           GLfloat xVelho, zVelho;
+           GLfloat cosseno = cos(deg2Rad(orObj));
+           GLfloat seno = sin(deg2Rad(orObj));
+           int aux;
+           for(aux = 0;aux<=1;aux++)
+           {
+              xVelho = X[aux];
+              zVelho = Z[aux];
+              X[aux] = (zVelho*seno) + (xVelho*cosseno);
+              Z[aux] = (zVelho*cosseno) - (xVelho*seno);
+           }
+           if(X[0]>X[1])
+           {
+              xVelho = X[0];
+              X[0] = X[1];
+              X[1] = xVelho;
+           }
+           if(Z[0]>Z[1])
+           {
+              zVelho = Z[0];
+              Z[0] = Z[1];
+              Z[1] = zVelho;
+           }
+       }
+
+       int minqx, minqz, maxqx, maxqz;
+       minqx = (int)(X[0] + xReal) / SQUARESIZE;
+       minqz = (int)(Z[0] + zReal) / SQUARESIZE;
+       maxqx = (int)(X[1] + xReal) / SQUARESIZE;
+       maxqz = (int)(Z[1] + zReal) / SQUARESIZE; 
+       int X1, Z1;
+       Square* qaux;
+       for(X1 = minqx; X1<=maxqx; X1++)
+       {
+          for(Z1 = minqz; Z1 <=maxqz; Z1++) 
+          {
+             qaux = mapa->quadradoRelativo(X1,Z1);
+             if((qaux) && (qaux != saux))
+             {
+                ob =0;
+                while( (ob < MAXOBJETOS ) && 
+                       (qaux->objetos[ob] != NULL))
+                {
+                   ob++;
+                }
+                if(ob < MAXOBJETOS)
+                {
+                   qaux->objetos[ob] = objAtual;
+                   qaux->Xobjetos[ob] = xReal;
+                   qaux->Zobjetos[ob] = zReal;
+                   qaux->objetosDesenha[ob] = 0;
+                   printf("%d° Object Inserted on %d %d\n",ob,X1+1,Z1+1);
+                }
+             }
+          }
+       }
+                     
+       SDL_Delay(500);
+     }
+     else
+       printf("Objects Overflow on Square %d %d\n",qx+1,qz+1);
+   }
+   else
+     printf("Out of Map's Limits!\n");
+}
+
+
 int estado;
 GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
 GLdouble proj[16];
@@ -44,8 +147,8 @@ GLuint texturaAtual;
 mapObjeto* objAtual;
 mapObjeto* porta;
 muro* muroPorta;
-GLdouble xPorta, zPorta, orPorta;
-Map* mapa;
+GLdouble xPorta, zPorta;
+int orPorta;
 int modoPorta;
 barraTexto* bartInserir;
 barraTexto* bartSalvar;
@@ -693,94 +796,25 @@ int main(int argc, char **argv)
                   novoMuro->z2 = mz2;
                }
                novoMuro->textura = muroPorta->textura;
-               maux = mapa->muros->proximo;
-               mapa->muros->proximo = novoMuro;
+               maux = mapa->muros;
+               mapa->muros = novoMuro;
                novoMuro->proximo = maux;
 
-               //Coloca a Porta no Quadrado
-               Square* saux = mapa->quadradoRelativo(qx,qz);
-               int ob=0;
-               if(saux)
-               {
-                  while( (ob < MAXOBJETOS ) && (saux->objetos[ob] != NULL))
-                     ob++;
-                  if(ob<MAXOBJETOS)
-                  {
-                     saux->objetos[ob] = porta;
-                     //saux->quadXobjetos[ob] = qx;
-                     //saux->quadZobjetos[ob] = qz;
-                     //objAtual->x
-                     saux->Xobjetos[ob] = xPorta;
-                     saux->Zobjetos[ob] = zPorta;
-                     saux->orientacaoObjetos[ob] = (int)orPorta;
-                     saux->objetosDesenha[ob] = 1;
-                     printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
-                     
-                     float X[2], Z[2];
-                     X[0] = modelo->x1;
-                     X[1] = modelo->x2;
-                     Z[0] = modelo->z1;
-                     Z[1] = modelo->z2;
-                     if(orObj!=0)
-                     {
-                        GLfloat xVelho, zVelho;
-                        GLfloat cosseno = cos(deg2Rad(orPorta));
-                        GLfloat seno = sin(deg2Rad(orPorta));
-                        int aux;
-                        for(aux = 0;aux<=1;aux++)
-                        {
-                            xVelho = X[aux];
-                            zVelho = Z[aux];
-                            X[aux] = (zVelho*seno) + (xVelho*cosseno);
-                            Z[aux] = (zVelho*cosseno) - (xVelho*seno);
-                        }
-                        if(X[0]>X[1])
-                        {
-                           xVelho = X[0];
-                           X[0] = X[1];
-                           X[1] = xVelho;
-                        }
-                        if(Z[0]>Z[1])
-                        {
-                           zVelho = Z[0];
-                           Z[0] = Z[1];
-                           Z[1] = zVelho;
-                        }
-                     }
-
-                     int minqx, minqz, maxqx, maxqz;
-                     minqx = (int)(X[0] + xReal) / SQUARESIZE;
-                     minqz = (int)(Z[0] + zReal) / SQUARESIZE;
-                     maxqx = (int)(X[1] + xReal) / SQUARESIZE;
-                     maxqz = (int)(Z[1] + zReal) / SQUARESIZE; 
-                     int X1, Z1;
-                     Square* qaux;
-                     for(X1 = minqx; X1<=maxqx; X1++)
-                     {
-                         for(Z1 = minqz; Z1 <=maxqz; Z1++) 
-                         {
-                             qaux = mapa->quadradoRelativo(X1,Z1);
-                             if((qaux) && (qaux != saux))
-                             {
-                                 ob =0;
-                                 while( (ob < MAXOBJETOS ) && 
-                                        (qaux->objetos[ob] != NULL))
-                                           ob++;
-                                 if(ob < MAXOBJETOS)
-                                 {
-                                    qaux->objetos[ob] = porta;
-                                    qaux->Xobjetos[ob] = xPorta;
-                                    qaux->Zobjetos[ob] = zPorta;
-                                    qaux->objetosDesenha[ob] = 0;
-                                    printf("%d° Object Inserted on %d %d\n",
-                                            ob,X1+1,Z1+1);
-                                 }
-                             }
-                         }
-                     }
-                  }   
-               }
-             SDL_Delay(500);
+               //Coloca a Porta no Mapa
+               /*inserirObjetoMapa(xPorta, zPorta, orPorta, porta, 
+                                 (int)(xPorta / SQUARESIZE), 
+                                 (int)(zPorta / SQUARESIZE) );*/
+               door* novaPorta = new(door);
+               novaPorta->x = xPorta;
+               novaPorta->z = zPorta;
+               novaPorta->orientacao = orPorta;
+               novaPorta->objeto = porta;
+               door* paux = mapa->portas;
+               paux = mapa->portas;
+               mapa->portas = novaPorta;
+               novaPorta->proximo = paux;
+               printf("Added Door: %.3f %.3f\n",xPorta,zPorta);
+               SDL_Delay(500);
             }
             else if( estado == PORTAL )
             {
@@ -890,96 +924,7 @@ int main(int argc, char **argv)
                              (int)zReal / SQUARESIZE, texturaAtual);
             else if(estado == OBJETO)
             {
-               Square* saux = mapa->quadradoRelativo(qx,qz);
-               int ob=0;
-               if(saux)
-               {
-                  while( (ob < MAXOBJETOS ) && (saux->objetos[ob] != NULL))
-                     ob++;
-                  if(ob<MAXOBJETOS)
-                  {
-                     saux->objetos[ob] = objAtual;
-                     //saux->quadXobjetos[ob] = qx;
-                     //saux->quadZobjetos[ob] = qz;
-                     //objAtual->x
-                     saux->Xobjetos[ob] = xReal;
-                     saux->Zobjetos[ob] = zReal;
-                     saux->orientacaoObjetos[ob] = orObj;
-                     saux->objetosDesenha[ob] = 1;
-                     printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
-                     
-                     GLMmodel* modelo = (GLMmodel*)objAtual->modelo3d; 
-
-                     float X[2], Z[2];
-                     X[0] = modelo->x1;
-                     X[1] = modelo->x2;
-                     Z[0] = modelo->z1;
-                     Z[1] = modelo->z2;
-                     if(orObj!=0)
-                     {
-                        GLfloat xVelho, zVelho;
-                        GLfloat cosseno = cos(deg2Rad(orObj));
-                        GLfloat seno = sin(deg2Rad(orObj));
-                        int aux;
-                        for(aux = 0;aux<=1;aux++)
-                        {
-                            xVelho = X[aux];
-                            zVelho = Z[aux];
-                            X[aux] = (zVelho*seno) + (xVelho*cosseno);
-                            Z[aux] = (zVelho*cosseno) - (xVelho*seno);
-                        }
-                        if(X[0]>X[1])
-                        {
-                           xVelho = X[0];
-                           X[0] = X[1];
-                           X[1] = xVelho;
-                        }
-                        if(Z[0]>Z[1])
-                        {
-                           zVelho = Z[0];
-                           Z[0] = Z[1];
-                           Z[1] = zVelho;
-                        }
-                     }
-
-                     int minqx, minqz, maxqx, maxqz;
-                     minqx = (int)(X[0] + xReal) / SQUARESIZE;
-                     minqz = (int)(Z[0] + zReal) / SQUARESIZE;
-                     maxqx = (int)(X[1] + xReal) / SQUARESIZE;
-                     maxqz = (int)(Z[1] + zReal) / SQUARESIZE; 
-                     int X1, Z1;
-                     Square* qaux;
-                     for(X1 = minqx; X1<=maxqx; X1++)
-                     {
-                         for(Z1 = minqz; Z1 <=maxqz; Z1++) 
-                         {
-                             qaux = mapa->quadradoRelativo(X1,Z1);
-                             if((qaux) && (qaux != saux))
-                             {
-                                 ob =0;
-                                 while( (ob < MAXOBJETOS ) && 
-                                        (qaux->objetos[ob] != NULL))
-                                           ob++;
-                                 if(ob < MAXOBJETOS)
-                                 {
-                                    qaux->objetos[ob] = objAtual;
-                                    qaux->Xobjetos[ob] = xReal;
-                                    qaux->Zobjetos[ob] = zReal;
-                                    qaux->objetosDesenha[ob] = 0;
-                                    printf("%d° Object Inserted on %d %d\n",
-                                            ob,X1+1,Z1+1);
-                                 }
-                             }
-                         }
-                     }
-                     
-                     SDL_Delay(500);
-                  }
-                  else
-                     printf("Objects Overflow on Square %d %d\n",qx+1,qz+1);
-               }
-               else
-                 printf("Out of Map's Limits!\n");
+               inserirObjetoMapa(xReal, zReal, orObj, objAtual, qx, qz);
             }
             else if( (estado == MUROX) || (estado == MUROZ) || 
                      (estado == MEIOX) || (estado == MEIOZ) )
@@ -1125,8 +1070,7 @@ int main(int argc, char **argv)
                    {
                       xPorta = muroPorta->x1;
                    }
-                   orPorta = 90.0;  
-                   //TODO colocar dimensao da porta em jogo
+                   orPorta = 90;  
                    if(zReal > muroPorta->z2)
                    {
                       zPorta = muroPorta->z2; 
@@ -1150,8 +1094,7 @@ int main(int argc, char **argv)
                    {
                       zPorta = muroPorta->z1;
                    }
-                   orPorta = 0.0;
-                   //TODO colocar dimensao da porta em jogo
+                   orPorta = 0;
                    if(xReal > muroPorta->x2)
                    {
                       xPorta = muroPorta->x2; 
@@ -1486,9 +1429,18 @@ int main(int argc, char **argv)
       glPopMatrix();
  
       glPushMatrix();
+      int delta = -2;
       if( (estado == PORTA) && (porta))
       {
-         porta->Desenhar(xPorta, zPorta, 0, orPorta);
+         if(modoPorta) delta = 2;
+         if(orPorta)
+         {
+           porta->Desenhar(xPorta+delta, zPorta, 0, orPorta);
+         }
+         else
+         {
+           porta->Desenhar(xPorta, zPorta+delta, 0, orPorta);
+         }
          glBegin(GL_QUADS);
             glVertex3f(xReal-2,1,zReal-2);
             glVertex3f(xReal-2,1,zReal+2);

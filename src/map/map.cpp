@@ -322,6 +322,14 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
         glEnd();
         glDisable(GL_TEXTURE_2D);
 
+        /* Faz o Desenho das Portas */
+        door* porta = portas;
+        while(porta != NULL)
+        {
+           porta->objeto->Desenhar(porta->x,porta->z,0,porta->orientacao);
+           porta = porta->proximo;
+        }
+
 
         /* Faz o desenho dos objetos */
         int o;
@@ -367,6 +375,7 @@ Map::Map()
    muros = NULL;
    meiosFio = NULL; 
    MapSquares = NULL;
+   portas = NULL;
    /* Inicia Estruturas */
    Objetos = new(LmapObjeto);
    x = z = xInic = zInic = 0;
@@ -441,6 +450,7 @@ int Map::open(char* arquivo)
    }
 
    muro* maux = NULL;
+   door* porta = NULL;
 
    posX = -1;
    posZ = 0;
@@ -450,6 +460,18 @@ int Map::open(char* arquivo)
    {
       switch(buffer[0])
       {
+         case 'd': /* Define Portas (Doors) */
+         {
+            porta = new(door);
+            fgets(buffer, sizeof(buffer),arq);
+            sscanf(buffer,"%s %f,%f:%d",nome,&porta->x,&porta->z,
+                                        &porta->orientacao);
+            porta->objeto = Objetos->EndMapObjeto(nome);
+            porta->status = 0;
+            porta->proximo = portas;
+            portas = porta;
+            break;
+         }
          case 'm': /* Define Muros (paredes) e Meios-Fio */
          {
             switch(buffer[1])
@@ -867,6 +889,15 @@ int Map::save(char* arquivo)
       fprintf(arq,"t %s %s %d %d %d\n",tex->nome,tex->arqNome,tex->R,tex->G,tex->B);
       tex = (texture*)tex->proximo;
    }
+
+   /* Escreve Portas */
+   door* porta = (door*)portas;
+   while(porta != NULL)
+   {
+      fprintf(arq,"d %s %f,%f:%d\n",porta->objeto->nome,porta->x,porta->z,
+                                     porta->orientacao);
+      porta = porta->proximo;
+   }
    
    /* Escreve os Muros */
    muro* maux = (muro*)muros;
@@ -967,6 +998,18 @@ Map::~Map()
       m = m->proximo;
       free(am);
    }
+
+   /* Acabando com as Portas */
+   /* Acabando com os muros */
+   door* porta = portas;
+   door* auxporta =NULL;
+   while(porta)
+   {
+      auxporta = porta;
+      porta = porta->proximo;
+      free(auxporta);
+   }
+
 
 
    /* Acabando com os objetos */

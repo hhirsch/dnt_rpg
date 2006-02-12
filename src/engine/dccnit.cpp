@@ -495,7 +495,7 @@ int estaDentro(GLfloat min1[3], GLfloat max1[3],
 void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
                          GLfloat varX, GLfloat varMinY, GLfloat varMaxY, 
                          GLfloat varZ,
-                         GLfloat min[4], GLfloat max[4])
+                         GLfloat min[3], GLfloat max[3])
 {
    int aux;
    GLfloat x[4];
@@ -655,25 +655,22 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             if(quaux->objetos[obj])
             {
                GLMmodel* modelo3d = (GLMmodel*) quaux->objetos[obj]->modelo3d;
-               GLfloat X[2]; GLfloat Z[2];
+               GLfloat X[4]; GLfloat Z[4];
                X[0] = modelo3d->x1;
-               X[1] = modelo3d->x2;
                Z[0] = modelo3d->z1;
-               Z[1] = modelo3d->z2;
+               X[1] = modelo3d->x1;
+               Z[1] = modelo3d->z2; 
+               X[2] = modelo3d->x2;
+               Z[2] = modelo3d->z2;
+               X[3] = modelo3d->x2;
+               Z[3] = modelo3d->z1;
                rotTransBoundingBox(quaux->orientacaoObjetos[obj], X, Z,
                               quaux->Xobjetos[obj], 0.0, 
                               0.0,quaux->Zobjetos[obj], 
                               minObj, maxObj);
                if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
                {
-                   if(strcmp(quaux->objetos[obj]->nome,"Door") == 0)
-                   {
-                       cursors->SetActual(CURSOR_DOOR);
-                   }
-                   else
-                   {
-                      cursors->SetActual(CURSOR_GET);
-                   }
+                   cursors->SetActual(CURSOR_GET);
                    if(janAtalhos)
                    {
                       sprintf(ObjTxt->texto,"%s",quaux->objetos[obj]->nome); 
@@ -682,24 +679,59 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                    if(Mbotao & SDL_BUTTON(1))
                    {
                       ultimaPressaoMouse = tempo;
-                      if(strcmp(ObjTxt->texto,"Door") == 0)
-                      {
-                         if(quaux->statusObj[obj] == 0 ) 
-                         {
-                           quaux->orientacaoObjetos[obj] += 90; 
-                           quaux->statusObj[obj] = 1;
-                         }
-                         else
-                         {
-                            quaux->orientacaoObjetos[obj] -= 90;
-                            quaux->statusObj[obj] = 0;  
-                         }
-                      }
                    }
                    pronto = 1;
                }
             }
          }
+
+         /* Verificacao de Portas */
+         door* porta = mapa->portas;
+         while( (porta != NULL) && (!pronto) )
+         {
+             GLMmodel* modelo3d = (GLMmodel*) porta->objeto->modelo3d;
+             GLfloat X[4]; GLfloat Z[4];
+             X[0] = modelo3d->x1;
+             Z[0] = modelo3d->z1;
+             X[1] = modelo3d->x1;
+             Z[1] = modelo3d->z2; 
+             X[2] = modelo3d->x2;
+             Z[2] = modelo3d->z2;
+             X[3] = modelo3d->x2;
+             Z[3] = modelo3d->z1;
+             rotTransBoundingBox(porta->orientacao, X, Z,
+                                 porta->x, 0.0, 
+                                 0.0,porta->z, 
+                                 minObj, maxObj);
+             if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
+             {
+                 cursors->SetActual(CURSOR_DOOR);
+                 if(janAtalhos)
+                 {
+                    sprintf(ObjTxt->texto,"Door"); 
+                    janAtalhos->Desenhar();
+                 }
+                 if(Mbotao & SDL_BUTTON(1))
+                 {
+                    ultimaPressaoMouse = tempo;
+                    if(porta->status)
+                    {
+                       porta->orientacao -= 90;
+                       porta->status = 0;
+                    }
+                    else
+                    {
+                       porta->orientacao += 90;
+                       porta->status = 1;
+                    }
+                    redesenha = 1; 
+                 }
+                 pronto = 1;
+             }
+           porta = porta->proximo;
+         }
+
+
          /* TODO Abrir Inventorio */
          personagem* pers = (personagem*) PCs->primeiro->proximo;
          while( (pers != PCs->primeiro) && (!pronto) )
@@ -1394,6 +1426,33 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       return(0);
    }
 
+   /* Testa Portas */
+   door* porta = mapa->portas;
+   while( porta != NULL )
+   {
+      GLfloat minObj[3], maxObj[3];
+      GLMmodel* modeloPorta = (GLMmodel*) porta->objeto->modelo3d;
+      GLfloat XA[4]; GLfloat ZA[4];
+      XA[0] = modeloPorta->x1;
+      ZA[0] = modeloPorta->z1;
+
+      XA[1] = modeloPorta->x1;
+      ZA[1] = modeloPorta->z2; 
+
+      XA[2] = modeloPorta->x2;
+      ZA[2] = modeloPorta->z2;
+
+      XA[3] = modeloPorta->x2;
+      ZA[3] = modeloPorta->z1;
+      rotTransBoundingBox(porta->orientacao, XA, ZA,
+                          porta->x, 0.0,0.0,porta->z, 
+                          minObj, maxObj);
+      if(estaDentro( min, max, minObj, maxObj, 1))
+      {
+         return(0);
+      }
+      porta = porta->proximo;
+   }
 
    /* Testa o Atual, ja que eh GRANDE! */
    min2[0] = PCs->personagemAtivo->ocupaQuad->x1;

@@ -1,30 +1,41 @@
 T 10X10
 # Made by DccNiTghtmare's MapEditor, v0.0.2
-o Small_Kalashnikov ../data/models/objetos/armas/kalashnikov_pequena.dcc
-o Computer ../data/models/objetos/geral/computador.dcc
-o Stop ../data/models/objetos/geral/placa_pare.dcc
-o IcexTable ../data/models/objetos/icex/mesa_redonda.dcc
-o Door ../data/models/objetos/geral/porta.dcc
-o Farrer's_Guitar ../data/models/objetos/geral/guitarra.dcc
-o Faca ../data/models/objetos/armas/faca.dcc
-o Adaga ../data/models/objetos/armas/adaga.dcc
-o Chair ../data/models/objetos/icex/cadeira.dcc
-o Table ../data/models/objetos/icex/mesa.dcc
-o TableChair ../data/models/objetos/icex/mesa_braco.dcc
 o Kalashnikov ../data/models/objetos/armas/kalashnikov.dcc
-t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 221 169 171
-t ../data/texturas/chao_cimento.jpg ../data/texturas/chao_marble.jpg 207 212 206
-t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
+o TableChair ../data/models/objetos/icex/mesa_braco.dcc
+o Table ../data/models/objetos/icex/mesa.dcc
+o Chair ../data/models/objetos/icex/cadeira.dcc
+o Adaga ../data/models/objetos/armas/adaga.dcc
+o Faca ../data/models/objetos/armas/faca.dcc
+o Farrer's_Guitar ../data/models/objetos/geral/guitarra.dcc
+o Door ../data/models/objetos/geral/porta.dcc
+o IcexTable ../data/models/objetos/icex/mesa_redonda.dcc
+o Stop ../data/models/objetos/geral/placa_pare.dcc
+o Computer ../data/models/objetos/geral/computador.dcc
+o Small_Kalashnikov ../data/models/objetos/armas/kalashnikov_pequena.dcc
 t ../data/texturas/chao_madeira.jpg ../data/texturas/chao_madeira.jpg 115 58 29
+t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
+t ../data/texturas/chao_cimento.jpg ../data/texturas/chao_marble.jpg 207 212 206
+t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 221 169 171
+d Door 61.099251,576.000000:0
+d Door 128.000000,352.047180:90
+d Door 128.000000,186.888641:90
+muro 82.937042,566.000000,118.000000,576.000000
+mt ../data/texturas/parede_rosa.jpg
+muro 118.000000,352.047180,128.000000,576.000000
+mt ../data/texturas/parede_rosa.jpg
+muro 118.000000,186.888641,128.000000,330.209381
+mt ../data/texturas/parede_rosa.jpg
+muro 118.000000,64.000000,128.000000,165.050858
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,64.000000,118.000000,74.000000
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,566.000000,61.099251,576.000000
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,256.000000,118.000000,266.000000
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,384.000000,118.000000,394.000000
+mt ../data/texturas/parede_rosa.jpg
 muro 0.000000,64.000000,10.000000,576.000000
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,384.000000,128.000000,394.000000
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,256.000000,128.000000,266.000000
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,566.000000,128.000000,576.000000
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,64.000000,128.000000,74.000000
 mt ../data/texturas/parede_rosa.jpg
 meioFio 256.000000,256.000000,512.000000,258.500000
 mt ../data/texturas/chao_cimento.jpg
@@ -72,11 +83,11 @@ uc 0.000000,0.000000,0.000000,0.000000:chao_grama2
 uo Stop 0:3,1:191.754654,63.958508:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uc 0.000000,0.000000,0.000000,0.000000:
+uc 0.000000,0.000000,0.000000,0.000000:chao_grama2
 uo Kalashnikov 1:5,2:313.869751,122.443565:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
-uc 0.000000,0.000000,0.000000,0.000000:
+uc 0.000000,0.000000,0.000000,0.000000:../data/texturas/chao_cimento.jpg
 uo Kalashnikov 0:5,2:313.869751,122.443565:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -104,6 +115,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
+uc 0.000000,0.000000,0.000000,0.000000:
 uo Small_Kalashnikov 1:6,3:337.078918,144.558838:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -239,7 +251,6 @@ ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
 uc 0.000000,0.000000,0.000000,0.000000:../data/texturas/chao_madeira.jpg
-uo Door 1:1,9:40.695976,531.302490:-93:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
