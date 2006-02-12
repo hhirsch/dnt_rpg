@@ -9,6 +9,7 @@ cursor::cursor()
    textura[CURSOR_TALK] = LoadCursor("../data/cursors/talk.png");
    textura[CURSOR_GET] = LoadCursor("../data/cursors/Get.png");
    textura[CURSOR_INVENTORY] = LoadCursor("../data/cursors/Inventory.png");
+   textura[CURSOR_DOOR] = LoadCursor("../data/cursors/Door.png");
    actualCursor = CURSOR_WALK;
 }
 

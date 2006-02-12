@@ -12,7 +12,8 @@
 #define CURSOR_TALK      4
 #define CURSOR_GET       5
 #define CURSOR_INVENTORY 6
-#define CURSOR_TOTAL     7
+#define CURSOR_DOOR      7
+#define CURSOR_TOTAL     8
 
 class cursor
 {

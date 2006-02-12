@@ -626,7 +626,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       }
       else
       { 
-      if( (tempo-ultimoMouse>=100 ) || (Mbotao & SDL_BUTTON(1)) )
+      if( (tempo-ultimoMouse>=100 ) || 
+          ( (Mbotao & SDL_BUTTON(1)) && (tempo-ultimaPressaoMouse>=100)) )
       {
          cursors->SetActual(CURSOR_WALK);
          ultimoMouse = tempo;
@@ -665,7 +666,14 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                               minObj, maxObj);
                if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
                {
-                   cursors->SetActual(CURSOR_GET);
+                   if(strcmp(quaux->objetos[obj]->nome,"Door") == 0)
+                   {
+                       cursors->SetActual(CURSOR_DOOR);
+                   }
+                   else
+                   {
+                      cursors->SetActual(CURSOR_GET);
+                   }
                    if(janAtalhos)
                    {
                       sprintf(ObjTxt->texto,"%s",quaux->objetos[obj]->nome); 
@@ -673,6 +681,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                    }
                    if(Mbotao & SDL_BUTTON(1))
                    {
+                      ultimaPressaoMouse = tempo;
                       if(strcmp(ObjTxt->texto,"Door") == 0)
                       {
                          if(quaux->statusObj[obj] == 0 ) 
@@ -691,7 +700,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                }
             }
          }
-         /* TODO Verifica Inventorio */
+         /* TODO Abrir Inventorio */
          personagem* pers = (personagem*) PCs->primeiro->proximo;
          while( (pers != PCs->primeiro) && (!pronto) )
          {
@@ -729,7 +738,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             pers = (personagem*) pers->proximo;
          }
 
-         /* TODO Verifica Conversas */
+         /* TODO Abrir Conversas */
          pers = (personagem*) NPCs->primeiro->proximo;
          while( (pers != NPCs->primeiro) && (!pronto) )
          {

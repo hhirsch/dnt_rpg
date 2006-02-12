@@ -30,6 +30,7 @@
 #define MEIOZINICQUAD     18
 #define PORTAL            19
 #define PORTALINIC        20
+#define PORTA             21
 
 
 double deg2Rad(double x){return 3.1415927 * x/180.0;}
@@ -41,20 +42,57 @@ GLdouble modl[16];
 GLint viewPort[4];
 GLuint texturaAtual;
 mapObjeto* objAtual;
+mapObjeto* porta;
+muro* muroPorta;
+GLdouble xPorta, zPorta, orPorta;
 Map* mapa;
+int modoPorta;
 barraTexto* bartInserir;
 barraTexto* bartSalvar;
 int sair;
 
 
+
+int estaDentro(GLfloat ax, GLfloat  az, 
+               GLfloat bx1, GLfloat  bz1, GLfloat bx2, GLfloat bz2)
+{
+   return( (ax >= bx1 ) && (ax <= bx2) && (az >= bz1) && (az <=bz2) );
+}
+
+
+
 /************************************************************************
- *              Trata Botao Objeto                                      *
+ *              Trata Botao Portal                                      *
  ************************************************************************/
 int botaoPortal(void *jan,void *ljan,SDL_Surface *screen)
 {
    estado = PORTAL;
    return(1);
 }
+
+/************************************************************************
+ *              Trata Botao Porta                                       *
+ ************************************************************************/
+int botaoPorta(void *jan,void *ljan,SDL_Surface *screen)
+{
+   if(!mapa->muros)
+   {
+      return(0);
+   }
+   porta = (mapObjeto*) mapa->Objetos->primeiro->proximo;
+   while( (porta != mapa->Objetos->primeiro) && 
+          (strcmp(porta->nome,"Door") != 0) ) 
+   {
+      porta = (mapObjeto*) porta->proximo;
+   }
+   if(porta != mapa->Objetos->primeiro) 
+   {
+      estado = PORTA;
+      modoPorta = 1;
+   }
+   return(1);
+}
+
 
 
 /************************************************************************
@@ -498,7 +536,7 @@ int main(int argc, char **argv)
    principal->objetos->InserirBotao(10,77,50,95,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
-                                                "Door",1,NULL);
+                                                "Door",1,&botaoPorta);
    principal->objetos->InserirBotao(55,17,125,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
@@ -626,7 +664,125 @@ int main(int argc, char **argv)
          if(Mbotao & SDL_BUTTON(1))
          {
 
-            if( estado == PORTAL )
+            if( estado == PORTA )
+            {
+               GLfloat mx1,mx2,mz1,mz2;
+               mx1 = muroPorta->x1;
+               mx2 = muroPorta->x2;
+               mz1 = muroPorta->z1;
+               mz2 = muroPorta->z2;
+               muro* novoMuro;
+               muro* maux;
+               GLMmodel* modelo = (GLMmodel*)porta->modelo3d;
+               if( orPorta == 0 )
+               {
+                  muroPorta->x2 = xPorta;
+                  novoMuro = new(muro);
+                  novoMuro->x1 = xPorta + (modelo->x2 - modelo->x1);
+                  novoMuro->x2 = mx2;
+                  novoMuro->z1 = mz1;
+                  novoMuro->z2 = mz2;
+               }
+               else
+               {
+                  muroPorta->z2 = zPorta;
+                  novoMuro = new(muro);
+                  novoMuro->z1 = zPorta + (modelo->z2 - modelo->z1);
+                  novoMuro->x2 = mx2;
+                  novoMuro->x1 = mx1;
+                  novoMuro->z2 = mz2;
+               }
+               novoMuro->textura = muroPorta->textura;
+               maux = mapa->muros->proximo;
+               mapa->muros->proximo = novoMuro;
+               novoMuro->proximo = maux;
+
+               //Coloca a Porta no Quadrado
+               Square* saux = mapa->quadradoRelativo(qx,qz);
+               int ob=0;
+               if(saux)
+               {
+                  while( (ob < MAXOBJETOS ) && (saux->objetos[ob] != NULL))
+                     ob++;
+                  if(ob<MAXOBJETOS)
+                  {
+                     saux->objetos[ob] = porta;
+                     //saux->quadXobjetos[ob] = qx;
+                     //saux->quadZobjetos[ob] = qz;
+                     //objAtual->x
+                     saux->Xobjetos[ob] = xPorta;
+                     saux->Zobjetos[ob] = zPorta;
+                     saux->orientacaoObjetos[ob] = (int)orPorta;
+                     saux->objetosDesenha[ob] = 1;
+                     printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
+                     
+                     float X[2], Z[2];
+                     X[0] = modelo->x1;
+                     X[1] = modelo->x2;
+                     Z[0] = modelo->z1;
+                     Z[1] = modelo->z2;
+                     if(orObj!=0)
+                     {
+                        GLfloat xVelho, zVelho;
+                        GLfloat cosseno = cos(deg2Rad(orPorta));
+                        GLfloat seno = sin(deg2Rad(orPorta));
+                        int aux;
+                        for(aux = 0;aux<=1;aux++)
+                        {
+                            xVelho = X[aux];
+                            zVelho = Z[aux];
+                            X[aux] = (zVelho*seno) + (xVelho*cosseno);
+                            Z[aux] = (zVelho*cosseno) - (xVelho*seno);
+                        }
+                        if(X[0]>X[1])
+                        {
+                           xVelho = X[0];
+                           X[0] = X[1];
+                           X[1] = xVelho;
+                        }
+                        if(Z[0]>Z[1])
+                        {
+                           zVelho = Z[0];
+                           Z[0] = Z[1];
+                           Z[1] = zVelho;
+                        }
+                     }
+
+                     int minqx, minqz, maxqx, maxqz;
+                     minqx = (int)(X[0] + xReal) / SQUARESIZE;
+                     minqz = (int)(Z[0] + zReal) / SQUARESIZE;
+                     maxqx = (int)(X[1] + xReal) / SQUARESIZE;
+                     maxqz = (int)(Z[1] + zReal) / SQUARESIZE; 
+                     int X1, Z1;
+                     Square* qaux;
+                     for(X1 = minqx; X1<=maxqx; X1++)
+                     {
+                         for(Z1 = minqz; Z1 <=maxqz; Z1++) 
+                         {
+                             qaux = mapa->quadradoRelativo(X1,Z1);
+                             if((qaux) && (qaux != saux))
+                             {
+                                 ob =0;
+                                 while( (ob < MAXOBJETOS ) && 
+                                        (qaux->objetos[ob] != NULL))
+                                           ob++;
+                                 if(ob < MAXOBJETOS)
+                                 {
+                                    qaux->objetos[ob] = porta;
+                                    qaux->Xobjetos[ob] = xPorta;
+                                    qaux->Zobjetos[ob] = zPorta;
+                                    qaux->objetosDesenha[ob] = 0;
+                                    printf("%d° Object Inserted on %d %d\n",
+                                            ob,X1+1,Z1+1);
+                                 }
+                             }
+                         }
+                     }
+                  }   
+               }
+             SDL_Delay(500);
+            }
+            else if( estado == PORTAL )
             {
                 portalX[0] = xReal;
                 portalX[1] = xReal;
@@ -935,7 +1091,82 @@ int main(int argc, char **argv)
          }
          else
          {
-             if(estado == PORTALINIC)
+             if(estado == PORTA)
+             {
+                //Pega Muro Mais Proximo
+                muro* m = mapa->muros;
+                muroPorta = m;
+
+                while( m != NULL )
+                {
+                   if( estaDentro(xReal,zReal,m->x1,m->z1,m->x2,m->z2) ||
+                       estaDentro(xReal-2,zReal,m->x1,m->z1,m->x2,m->z2) ||
+                       estaDentro(xReal+2,zReal,m->x1,m->z1,m->x2,m->z2) ||
+                       estaDentro(xReal,zReal-2,m->x1,m->z1,m->x2,m->z2) ||
+                       estaDentro(xReal-2,zReal-2,m->x1,m->z1,m->x2,m->z2) ||
+                       estaDentro(xReal+2,zReal-2,m->x1,m->z1,m->x2,m->z2) ||
+                      estaDentro(xReal,zReal+2,m->x1,m->z1,m->x2,m->z2) ||
+                       estaDentro(xReal-2,zReal+2,m->x1,m->z1,m->x2,m->z2) ||
+                       estaDentro(xReal+2,zReal+2,m->x1,m->z1,m->x2,m->z2))
+                   {
+                      muroPorta = m;
+                   }
+
+                   m = m->proximo;
+                }
+                //Coloca X ou Z da porta fixo nele
+                if( (muroPorta->x2 - muroPorta->x1) == 10)
+                {
+                   if(modoPorta)
+                   {
+                      xPorta = muroPorta->x2;
+                   }
+                   else
+                   {
+                      xPorta = muroPorta->x1;
+                   }
+                   orPorta = 90.0;  
+                   //TODO colocar dimensao da porta em jogo
+                   if(zReal > muroPorta->z2)
+                   {
+                      zPorta = muroPorta->z2; 
+                   }
+                   else if(zReal < muroPorta->z1)
+                   {
+                      zPorta = muroPorta->z1;
+                   } 
+                   else
+                   {
+                      zPorta = zReal; 
+                   }
+                }
+                else
+                {
+                   if(modoPorta)
+                   {
+                      zPorta = muroPorta->z2;
+                   }
+                   else
+                   {
+                      zPorta = muroPorta->z1;
+                   }
+                   orPorta = 0.0;
+                   //TODO colocar dimensao da porta em jogo
+                   if(xReal > muroPorta->x2)
+                   {
+                      xPorta = muroPorta->x2; 
+                   }
+                   else if(xReal < muroPorta->x1)
+                   {
+                      xPorta = muroPorta->x1;
+                   } 
+                   else
+                   {
+                      xPorta = xReal; 
+                   }
+                }
+             }
+             else if(estado == PORTALINIC)
              {
                  portalX[1] = xReal;
                  portalZ[1] = zReal;
@@ -1092,7 +1323,12 @@ int main(int argc, char **argv)
          sair = teclas[SDLK_ESCAPE];
          if(teclas[SDLK_b])
          {
-             if( (estado == MUROXINIC) || (estado == MEIOXINIC) )
+             if(estado == PORTA)
+             {
+                modoPorta = !modoPorta;
+                SDL_Delay(150);
+             }
+             else if( (estado == MUROXINIC) || (estado == MEIOXINIC) )
              {
                  float cmp = ((int)(maux->z1) / SQUARESIZE)*SQUARESIZE;
                  maux->x1 = ((int)round((maux->x1) / SQUARESIZE))*SQUARESIZE;
@@ -1248,6 +1484,20 @@ int main(int argc, char **argv)
       if( (estado == OBJETO) && (objAtual))
          objAtual->Desenhar(xReal, zReal, 0, orObj);
       glPopMatrix();
+ 
+      glPushMatrix();
+      if( (estado == PORTA) && (porta))
+      {
+         porta->Desenhar(xPorta, zPorta, 0, orPorta);
+         glBegin(GL_QUADS);
+            glVertex3f(xReal-2,1,zReal-2);
+            glVertex3f(xReal-2,1,zReal+2);
+            glVertex3f(xReal+2,1,zReal+2);
+            glVertex3f(xReal+2,1,zReal-2);
+         glEnd();
+      }
+      glPopMatrix();
+
 
       glFlush();
       SDL_GL_SwapBuffers();

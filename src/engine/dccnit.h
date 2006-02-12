@@ -103,6 +103,7 @@ class engine
    
       Uint32 ultimaLeitura;        /* Ultima leitura da posicao do teclado */
       Uint32 ultimoMouse;          /* Ultima Leitura dos objetos apontados */
+      Uint32 ultimaPressaoMouse;   /* Ultima Pressao do Mouse nos objetos */
       Uint32 ultimaFPS;            /* Ultima FPS obtida */
       double FPSatual;             /* FPS Atual */
 
