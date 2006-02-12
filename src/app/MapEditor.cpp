@@ -685,9 +685,9 @@ int main(int argc, char **argv)
                }
                else
                {
-                  muroPorta->z2 = zPorta;
+                  muroPorta->z2 = zPorta - (modelo->x2 - modelo->x1);
                   novoMuro = new(muro);
-                  novoMuro->z1 = zPorta + (modelo->z2 - modelo->z1);
+                  novoMuro->z1 = zPorta;
                   novoMuro->x2 = mx2;
                   novoMuro->x1 = mx1;
                   novoMuro->z2 = mz2;
