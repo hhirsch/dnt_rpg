@@ -1311,7 +1311,7 @@ int testa(GLfloat min[3], GLfloat max[3],Square* quad)
    if(result) // Se possivel entrar, testa com Muros
    {
       int mur = 0;
-      while((proxima->muros[mur] != NULL))
+      while((mur < MAXMUROS ) && (proxima->muros[mur] != NULL))
       {
          min2[0] = proxima->muros[mur]->x1; 
          min2[1] = 0; 

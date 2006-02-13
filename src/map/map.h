@@ -16,7 +16,7 @@
 #define HALFSQUARESIZE         32
 #define SQUAREDIAGONALSIZE     90.509668
 #define MAXOBJETOS             10
-#define MAXMUROS                5
+#define MAXMUROS                8
 #define MUROALTURA             50
 #define MEIOFIOALTURA           2
 #define ALTURAMAXIMA          100
