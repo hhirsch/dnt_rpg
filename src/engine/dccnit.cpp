@@ -18,7 +18,7 @@
                                   */
  
 #define GIRAR           2.5     // O quanto ele gira a cada frame
-#define DELTACAMERA     1.5     // O quanto a camera meche a cada frame
+#define DELTACAMERA     1.5     // O quanto a camera move a cada frame
 #define ZOOMMAXIMO      80      // Valor máximo de zoom
 #define ZOOMMINIMO      280     // Valor mínimo do zoom
 
@@ -158,20 +158,20 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    mapa = new(Map);
    mapa->open(arq);
 
-   atualizaCarga(img,&texturaTexto,texturaCarga,
+   /*atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading NPC: Logan",
-                 proj, modl, viewPort);
+                 proj, modl, viewPort);*/
 
    /* Carregando Entao os NPCs */
    if(NPCs)
      delete(NPCs);
    NPCs = new (Lpersonagem);
    personagem* per;
-   per = NPCs->InserirPersonagem(7,6,10,6,
+   /*per = NPCs->InserirPersonagem(7,6,10,6,
                                  "../data/pics/logan/portrait.jpg","Logan",
                         "../data/models/personagens/Logan/modelo.cfg");
    per->posicaoLadoX = 30;
-   per->posicaoLadoZ = 20;
+   per->posicaoLadoZ = 20;*/
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading NPC: Jacaranda",
@@ -181,8 +181,20 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per = NPCs->InserirPersonagem(2,2,5,3,
                                  "../data/pics/logan/portrait.jpg","Jacaranda",
                        "../data/models/personagens/Jacaranda/modelo.cfg");
-   per->posicaoLadoX = 280;
-   per->posicaoLadoZ = 200;
+   per->posicaoLadoX = 300;
+   per->posicaoLadoZ = 300;
+
+   atualizaCarga(img,&texturaTexto,texturaCarga,
+                 "Loading NPC: Arvore",
+                 proj, modl, viewPort);
+
+
+   per = NPCs->InserirPersonagem(2,2,5,3,
+                                 "../data/pics/logan/portrait.jpg","Arvore",
+                       "../data/models/personagens/Arvore/modelo.cfg");
+   per->posicaoLadoX = 80;
+   per->posicaoLadoZ = 720;
+
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading NPC: Ratazana",
@@ -191,8 +203,8 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per = NPCs->InserirPersonagem(2,2,5,3,
                                  "../data/pics/logan/portrait.jpg","Ratazana",
                        "../data/models/personagens/Ratazana/modelo.cfg");
-   per->posicaoLadoX = 580;
-   per->posicaoLadoZ = 600;
+   per->posicaoLadoX = 128;
+   per->posicaoLadoZ = 400;
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading NPC: Ameiva",
@@ -1844,12 +1856,13 @@ void engine::abreMiniMapa()
  *********************************************************************/
 void engine::abreAtalhos()
 {
-   janAtalhos = gui->ljan->InserirJanela(0,472,511,599,"ShortCuts",1,1,NULL,NULL);
+   janAtalhos=gui->ljan->InserirJanela(0,472,511,599,"ShortCuts",1,1,NULL,NULL);
    FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
-   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,76,180,101,0,"Press F1 for Help!");
+   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,76,180,101,0,
+                                                          "Press F1 for Help!");
    ObjTxt->Cores.corCont[1].R = 255; ObjTxt->Cores.corCont[1].G = 255; 
    ObjTxt->Cores.corCont[1].B = 255;
-   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,100,71,0,"Nothing");
+   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,150,71,0,"Nothing");
    
    janAtalhos->ptrExterno = &janAtalhos;
    janAtalhos->Abrir(gui->ljan);

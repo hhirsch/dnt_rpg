@@ -1132,6 +1132,7 @@ int main(int argc, char **argv)
                  s->mapConection.z1 = portalZ[0];
                  s->mapConection.z2 = portalZ[1];
                  s->mapConection.mapName = "TODO"; //TODO mapname prompt
+                 printf("MapPortal on %d %d\n",qx,qz);
                  estado = PORTAL;
              }
              else

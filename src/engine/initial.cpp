@@ -4,6 +4,7 @@
 
 #include "initial.h"
 #include <SDL/SDL_image.h>
+#include "../lang/lang.h"
 
 int result;
 int pronto;
@@ -60,7 +61,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    Uint32 tempoAnterior = 0;
    pronto = 0;
    janela* jan = gui->ljan->InserirJanela(335,235,462,362,
-                                          "0.0.2",1,1,
+                                          VERSION,1,1,
                                           NULL,NULL);  
    jan->fechavel = 0;
    jan->movivel = 0;
@@ -68,26 +69,26 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    {
       jan->objetos->InserirBotao(30,20,98,38,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 "New",1,&botaoNovo);
+                                 INITIAL_NEW,1,&botaoNovo);
    }
    else
    {
       jan->objetos->InserirBotao(30,20,98,38,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 "Continue",1,&botaoContinuar);
+                                 INITIAL_CONTINUE,1,&botaoContinuar);
    }
    jan->objetos->InserirBotao(30,40,98,58,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 "Save",1,&botaoSalvar);
+                                 INITIAL_SAVE,1,&botaoSalvar);
    jan->objetos->InserirBotao(30,60,98,78,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 "Load",1,&botaoCarregar);
+                                 INITIAL_LOAD,1,&botaoCarregar);
    jan->objetos->InserirBotao(30,80,98,98,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 "Options",1,NULL);
+                                 INITIAL_OPTIONS,1,NULL);
    jan->objetos->InserirBotao(30,100,98,118,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 "Exit",1,&botaoSair);
+                                 INITIAL_EXIT,1,&botaoSair);
  
    jan->Abrir(gui->ljan);
 

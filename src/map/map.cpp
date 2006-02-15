@@ -202,19 +202,19 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
                    }
                 }
                 MapSquares[Xaux][Zaux]->visivel = 1;
-                glTexCoord2f(0,0); 
+                glTexCoord2f(0.0,0.0); 
                 glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
                             MapSquares[Xaux][Zaux]->h1 , 
                             MapSquares[Xaux][Zaux]->z1 );
-                glTexCoord2f(0,1);
+                glTexCoord2f(0.0,1.0);
                 glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
                             MapSquares[Xaux][Zaux]->h2 , 
                             MapSquares[Xaux][Zaux]->z2);
-                glTexCoord2f(1,1);
+                glTexCoord2f(1.0,1.0);
                 glVertex3f( MapSquares[Xaux][Zaux]->x2, 
                             MapSquares[Xaux][Zaux]->h3 , 
                             MapSquares[Xaux][Zaux]->z2 );
-                glTexCoord2f(1,0);
+                glTexCoord2f(1.0,0.0);
                 glVertex3f( MapSquares[Xaux][Zaux]->x2, 
                             MapSquares[Xaux][Zaux]->h4, 
                             MapSquares[Xaux][Zaux]->z1 );
