@@ -51,7 +51,7 @@ mapObjeto* LmapObjeto::InserirMapObjeto(char* arquivo, char* nome)
 
    if(!(arq=fopen(arquivo,"r")))
    {
-       printf("Erro ao abrir objeto %s\n",arquivo);
+       printf("Error on open object %s\n",arquivo);
        return(NULL);
    }
  

@@ -16,12 +16,22 @@ map.o: map.cpp map.h
 	@$(CPP) $(CFLAGS) map.cpp -o map.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+mapfog.o: mapfog.cpp mapfog.h
+	@printf "Making mapfog.o... "
+	@$(CC) $(CFLAGS) mapfog.cpp -o mapfog.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+maplights.o: maplights.cpp maplights.h
+	@printf "Making maplights.o... "
+	@$(CC) $(CFLAGS) maplights.cpp -o maplights.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 mapobjeto.o: mapobjeto.cpp mapobjeto.h
 	@printf "Making mapobjeto.o... "
 	@$(CC) $(CFLAGS) mapobjeto.cpp -o mapobjeto.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-objetos: map.o mapobjeto.o
+objetos: map.o mapfog.o maplights.o mapobjeto.o 
 
 clean: 
 	@printf  "Cleaning Map Bin Files... "

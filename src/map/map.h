@@ -5,6 +5,8 @@
  */
 
 #include "mapobjeto.h"
+#include "mapfog.h"
+#include "maplights.h"
 
 
 /* Flag masks */
@@ -160,6 +162,8 @@ class Map
 
       /* Vars */
       LmapObjeto* Objetos;  /* Map's objects list */
+      mapFog fog;           /* Map's Fog */
+      mapLights lights;     /* Map's Lights */
       int numtexturas;      /* Number of distint Textures on Map */
       texture* Texturas;    /* List of textures on Map */
       int xInic,zInic;      /* Coordinate where PCs starts */
