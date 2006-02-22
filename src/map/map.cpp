@@ -460,6 +460,20 @@ int Map::open(char* arquivo)
    {
       switch(buffer[0])
       {
+         case 'l':/* Define Luzes */
+         {
+            fgets(buffer, sizeof(buffer),arq);
+            sscanf(buffer,"%s",nome);
+            lights.Load(nome);
+            break;
+         }
+         case 'f':/* Define Fog(Neblina) */
+         {
+            fgets(buffer, sizeof(buffer),arq);
+            sscanf(buffer,"%s",nome);
+            fog.Load(nome);
+            break;
+         }
          case 'd': /* Define Portas (Doors) */
          {
             porta = new(door);

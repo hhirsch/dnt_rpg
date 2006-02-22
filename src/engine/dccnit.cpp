@@ -158,6 +158,20 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    mapa = new(Map);
    mapa->open(arq);
 
+   if(mapa->fog.enabled)
+   {
+      glEnable(GL_FOG);
+      {
+        //GLfloat fogCor[4] = {CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,1.0}; 
+        glFogi(GL_FOG_MODE,GL_LINEAR);
+        glFogfv(GL_FOG_COLOR,mapa->fog.color);
+        glFogf(GL_FOG_DENSITY,mapa->fog.density);
+        glHint(GL_FOG_HINT,GL_DONT_CARE);
+        glFogf(GL_FOG_START,mapa->fog.start);
+        glFogf(GL_FOG_END,mapa->fog.end);
+      }
+   }
+
    /*atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading NPC: Logan",
                  proj, modl, viewPort);*/
@@ -329,17 +343,17 @@ void engine::Iniciar(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Definicao da Luz */
-   GLfloat light_ambient[] = { 0.6, 0.62, 0.6, 1.0 };
-   //GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat light_ambient[] = { 0.9, 0.9, 0.9, 1.0 };
+   GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat light_position[] = { 0.0, 0.0, 1.0, 0.0 };
+   GLfloat light_position[] = { 1.0, 1.0, 0.0, 1.0 };
    GLfloat light_position2[] = {240.0,30.0,25.0,1.0};
    GLfloat light_direction[] = {1.0,-1.0,0.0};
    
    /* Carrega a Luz */
    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-   //-glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-   //-glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+   glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
    /* Luz1 */
@@ -348,22 +362,16 @@ void engine::Iniciar(SDL_Surface *screen)
    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
    glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
    glLightf (GL_LIGHT1, GL_SPOT_EXPONENT, 2.5);
+ 
+   //glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,1);
+   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
    
    /* Habilita a iluminacao */
    glEnable(GL_LIGHTING);
-   glEnable(GL_LIGHT0);
+   //glEnable(GL_LIGHT0);
+   //glDisable(GL_LIGHT0);
    //glEnable(GL_LIGHT1);
   
-   glEnable(GL_FOG);
-   {
-     GLfloat fogCor[4] = {CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,1.0}; 
-     glFogi(GL_FOG_MODE,GL_LINEAR);
-     glFogfv(GL_FOG_COLOR,fogCor);
-     glFogf(GL_FOG_DENSITY,0.60);
-     glHint(GL_FOG_HINT,GL_DONT_CARE);
-     glFogf(GL_FOG_START,500.0);
-     glFogf(GL_FOG_END,1600.0);
-   }
 
    atmosfera = gluNewQuadric ();
    //gluQuadricTexture(atmosfera, GL_TRUE);
@@ -393,14 +401,6 @@ void engine::Iniciar(SDL_Surface *screen)
    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, fg->w,
                      fg->h, GL_RGBA, GL_UNSIGNED_BYTE, 
                      fg->pixels );
-
-   /*glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
-                  GL_NEAREST);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-                  GL_NEAREST);*/
-  //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
 
    SDL_FreeSurface(fg);
 
@@ -466,12 +466,12 @@ int estaDentro(GLfloat min1[3], GLfloat max1[3],
       //testa maximo Y
       /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
       {
-         testa minimoZ
+         //testa minimoZ
          if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
          {
             return(1);
          }
-         testa maximoZ
+         //testa maximoZ
          if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
          {
             return(1);
@@ -895,9 +895,10 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          carregaTextura(fig,&texturaInfo);
          SDL_FreeSurface(fig);
 
-
+         glDisable(GL_LIGHTING);
          AtualizaFrustum(matrizVisivel,proj,modl);
          AtualizaTela2D(texturaInfo,proj,modl,viewPort,272,44,527,555,0.0001);
+         glEnable(GL_LIGHTING);
          glFlush();
          SDL_GL_SwapBuffers();
 
@@ -1177,9 +1178,6 @@ void engine::Desenhar()
    AtualizaFrustum(matrizVisivel,proj,modl);
 
    /* CEU */
-   glDisable(GL_DEPTH_TEST);
-   //glDisable(GL_LIGHTING);
-
    glPushMatrix();
       glEnable(GL_TEXTURE_2D);
       glBindTexture(GL_TEXTURE_2D, ceu);
@@ -1188,11 +1186,8 @@ void engine::Desenhar()
       glDisable(GL_TEXTURE_2D);
    glPopMatrix();
 
-   glEnable(GL_DEPTH_TEST);
-   //glEnable(GL_LIGHTING);
-
    glPushMatrix();
-   
+
    /* Desenha o Mundo, fazendo culling do view frustum */
    mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
   

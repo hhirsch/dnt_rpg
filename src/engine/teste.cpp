@@ -36,7 +36,7 @@ int main(int argc, char **argv)
    {
        if(result == NEW_GAME)
        {
-          Engine->CarregaMapa("../data/mapas/dois.map",1);
+          Engine->CarregaMapa("../data/mapas/casa.map",1);
        }
        #ifdef REDE
           Engine->server = server;

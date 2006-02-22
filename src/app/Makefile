@@ -9,7 +9,7 @@ ENDMAPA = ../map/
 ENDETC = ../etc/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
 OBJSENGINE = $(ENDENGINE)conversa.o $(ENDENGINE)culling.o
-OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDENGINE)culling.o
+OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDENGINE)culling.o
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
