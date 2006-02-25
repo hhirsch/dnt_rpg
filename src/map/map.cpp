@@ -10,6 +10,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+#define SQUAREMINI 16
+
 
 
 /********************************************************************
@@ -1061,23 +1063,23 @@ void Map::drawMinimap(SDL_Surface* img)
           cor_Definir(MapSquares[X][Z]->R,
                       MapSquares[X][Z]->G,
                       MapSquares[X][Z]->B);
-          retangulo_Colorir(img, x1, y1, x1+2, y1+2, 0);
-          x1+=3;
+          retangulo_Colorir(img, x1, y1, x1+3, y1+3, 0);
+          x1+=4;
       }
       x1 = 0;
-      y1+=3;
+      y1+=4;
    }
 
    cor_Definir(1, 1, 1);
-   retangulo_2Cores(img,0,0,x*3-1,z*3-1,0,0,0,0);
+   retangulo_2Cores(img,0,0,x*4-1,z*4-1,0,0,0,0);
    
    muro* maux = muros;
    while(maux!=NULL)
    {
-       x1 = (int) ( ((float)maux->x1 / (float)SQUARESIZE /** razaoX*/ ))*3;
-       x2 = (int) ( (((float)maux->x2 / (float)SQUARESIZE))-1 /** razaoX*/)*3;
-       y1 = (int) ( ((float)maux->z1 / (float)SQUARESIZE /** razaoY*/ ))*3;
-       y2 = (int) ( (((float)maux->z2 / (float)SQUARESIZE))-1 /** razaoY*/)*3;
+       x1 = (int) ( ((float)maux->x1 / (float)SQUAREMINI /** razaoX*/ ));
+       x2 = (int) ( (((float)maux->x2 / (float)SQUAREMINI))-1 /** razaoX*/);
+       y1 = (int) ( ((float)maux->z1 / (float)SQUAREMINI /** razaoY*/ ));
+       y2 = (int) ( (((float)maux->z2 / (float)SQUAREMINI))-1 /** razaoY*/);
        if( (x2-x1) < (y2-y1))
           x2 = x1;
        else 
