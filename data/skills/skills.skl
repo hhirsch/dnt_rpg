@@ -1,47 +1,47 @@
-00 notused.ski
-01 forca.ski
-02 destreza.ski
-03 constituicao.ski
-04 inteligencia.ski
-05 sabedoria.ski
-06 carisma.ski
-07 acrobacias.ski
-08 adestrarbichos.ski
-09 artedoescape.ski
-10 arrombar.ski
-11 blefar.ski
-12 bovinice.ski
-13 carisma.ski
-14 cnhsofrimento.ski
-15 cnhtagmedicinal.ski
-16 discursoprof.ski
-17 disfarces.ski
-18 montar.ski
-19 passelivre.ski
-20 penosaco.ski
-21 performar.ski
-22 roupasbizarras.ski
-23 semtempo.ski
-24 curar.ski
-25 diplomacia.ski
-26 equilibrio.ski
-27 escalar.ski
-28 esconder.ski
-29 notused.ski
-30 notused.ski
-31 notused.ski
-32 notused.ski
-33 notused.ski
-34 notused.ski
-35 notused.ski
-36 notused.ski
-37 notused.ski
-38 notused.ski
-39 notused.ski
-40 notused.ski
-41 notused.ski
-42 notused.ski
-43 notused.ski
-44 notused.ski
-45 notused.ski
-46 notused.ski
+00 notused.ski ../data/skills/Img/na.png
+01 forca.ski   ../data/skills/Img/na.png
+02 destreza.ski ../data/skills/Img/na.png
+03 constituicao.ski ../data/skills/Img/na.png
+04 inteligencia.ski ../data/skills/Img/na.png
+05 sabedoria.ski ../data/skills/Img/na.png
+06 carisma.ski ../data/skills/Img/na.png
+07 acrobacias.ski ../data/skills/Img/acrobacias.png
+08 adestrarbichos.ski ../data/skills/Img/adestrar.png
+09 artedoescape.ski ../data/skills/Img/artedoescape.png
+10 arrombar.ski ../data/skills/Img/arrombar.png
+11 blefar.ski ../data/skills/Img/blefar.png
+12 bovinice.ski ../data/skills/Img/bovinice.png
+13 cnhsofrimento.ski ../data/skills/Img/cnhsofrimento.png
+14 cnhtagmedicinal.ski ../data/skills/Img/tagarelice.png
+15 discursoprof.ski ../data/skills/Img/discursoprof.png
+16 disfarces.ski ../data/skills/Img/disfarces.png
+17 montar.ski ../data/skills/Img/montar.png
+18 passelivre.ski ../data/skills/Img/passelivre.png
+19 penosaco.ski ../data/skills/Img/penosaco.png
+20 performar.ski ../data/skills/Img/performar.png
+21 roupasbizarras.ski ../data/skills/Img/roupasbizarras.png
+22 semtempo.ski ../data/skills/Img/semtempo.png
+23 curar.ski ../data/skills/Img/curar.png
+24 diplomacia.ski ../data/skills/Img/diplomacia.png
+25 equilibrio.ski ../data/skills/Img/equilibrio.png
+26 escalar.ski ../data/skills/Img/escalar.png
+27 esconder.ski ../data/skills/Img/esconder.png
+28 notused.ski ../data/skills/Img/na.png
+29 notused.ski ../data/skills/Img/na.png
+30 notused.ski ../data/skills/Img/na.png
+31 notused.ski ../data/skills/Img/na.png
+32 notused.ski ../data/skills/Img/na.png
+33 notused.ski ../data/skills/Img/na.png
+34 notused.ski ../data/skills/Img/na.png
+35 notused.ski ../data/skills/Img/na.png
+36 notused.ski ../data/skills/Img/na.png
+37 notused.ski ../data/skills/Img/na.png
+38 notused.ski ../data/skills/Img/na.png
+39 notused.ski ../data/skills/Img/na.png
+40 notused.ski ../data/skills/Img/na.png
+41 notused.ski ../data/skills/Img/na.png
+42 notused.ski ../data/skills/Img/na.png
+43 notused.ski ../data/skills/Img/na.png
+44 notused.ski ../data/skills/Img/na.png
+45 notused.ski ../data/skills/Img/na.png
+46 notused.ski ../data/skills/Img/na.png
