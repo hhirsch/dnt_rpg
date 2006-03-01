@@ -126,7 +126,7 @@ cxSel* Tlista::InserirCxSel(int xa,int ya,int selecionada)
 }
 
 /* Insere uma nova figura na lista */
-figura* Tlista::InserirFigura(int x,int y,const char* arquivo)
+figura* Tlista::InserirFigura(int x,int y,int w,int h,const char* arquivo)
 {
    //printf("Pondo Figura\n");
    figura* novo;
@@ -146,17 +146,20 @@ figura* Tlista::InserirFigura(int x,int y,const char* arquivo)
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
       SDL_BlitSurface(img,NULL,novo->fig,NULL);
       SDL_FreeSurface(img);
+      if ( novo->fig == NULL )
+         erro_Mensagem("Não foi possível carregar figura\n",10);
    }
-   else
+   else if( (w > 0) && (h > 0) )
    {
       //printf("NULL\n");
       novo->fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       240,95,32,
+                       w,h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    }
-
-   if ( novo->fig == NULL )
-        erro_Mensagem("Não foi possível carregar figura\n",10);
+   else
+   {
+      novo->fig = NULL;
+   }
 
    novo->tipo = FIGURA;
    InserirObj(novo);
@@ -182,8 +185,7 @@ barraTexto* Tlista::InserirBarraTexto(int xa,int ya,int xb,int yb,
    novo->cript = cript;
    novo->tipo = BARRATEXTO;
    novo->Cores.Iniciar();
-   novo->texto = (char*) malloc(256*sizeof(char));
-   strcpy(novo->texto,text);
+   novo->texto = text;
    InserirObj(novo);
    return(novo);
 } 
@@ -199,9 +201,11 @@ quadroTexto* Tlista::InserirQuadroTexto(int xa,int ya,int xb,int yb,
    novo->y1 = ya;
    novo->y2 = yb;
    novo->moldura = moldura;
-   novo->texto = (char*) malloc(256*sizeof(char));
-   sprintf(novo->texto,"%s",text);
+   novo->texto = text; 
    novo->tipo = QUADROTEXTO;
+   novo->fonte = FHELVETICA;
+   novo->tamFonte = 1;
+   novo->aliFonte = ESQUERDA;
    novo->Cores.Iniciar();
    InserirObj(novo);
    return(novo);

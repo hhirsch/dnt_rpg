@@ -9,11 +9,13 @@ ENDENGINE = ../engine/
 ENDMAPA = ../map/
 ENDNET = ../net/
 ENDIA = ../ia/
+ENDCLASSES = ../classes/
 OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o
-OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
+OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)ai.o
-OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o ../etc/texture.o personagens.o teste.o
+OBJSCLASSES = $(ENDCLASSES)skills.o
+OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o ../etc/texture.o personagens.o skillwindow.o teste.o
 BIN = ../../bin/
 SUPREDE = #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
@@ -50,14 +52,19 @@ personagens.o: personagens.cpp personagens.h
 	@$(CC) $(CFLAGS) personagens.cpp -o personagens.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+skillwindow.o: skillwindow.h skillwindow.cpp
+	@printf "Making skillwindow.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) skillwindow.cpp -o skillwindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 teste.o: teste.cpp
 	@printf "Making teste.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o teste.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJS) 
+teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJS) 
 	@printf "Linking dccnitghtmare... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:

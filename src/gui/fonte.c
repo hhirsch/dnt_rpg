@@ -5,12 +5,12 @@
 #include "fonte.h"
 #include <stdio.h>
 
-char* arqFonte=" "; //Arquivo de Fonte atualmente utilizado
+char arqFonte[255]; //Arquivo de Fonte atualmente utilizado
 fnt Fonte;          //Fonte Ativa
 int Tamanho;        //Tamanho da Fonte Ativa 
 int Alinhamento;    //Alinhamento da Fonte Ativa
 
-int selFonte(char* nome, int alinha, int Tamanho)
+int selFonte(const char* nome, int alinha, int Tamanho)
 {
    Tamanho = Tamanho;
    Alinhamento = alinha;
@@ -23,7 +23,7 @@ int selFonte(char* nome, int alinha, int Tamanho)
       }
       
       fread(&Fonte,sizeof(fnt),1,arq);
-      arqFonte = nome;
+      strcpy(arqFonte,nome);
       fclose(arq);
       return(1);
    }
@@ -49,6 +49,11 @@ int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
    for(aux=inic;(aux<=fim);aux++)
    {
      c=texto[aux];
+     if(c < 0) /* Corrige leitura de caracteres nao padrao */
+     {
+        c = 256 + c;
+       
+     }
      ax=x;
      for (aux1=0;aux1<16;aux1++)
      {

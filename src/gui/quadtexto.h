@@ -9,6 +9,9 @@
 #include "desenho.h"
 #include "fonte.h"
 #include "objeto.h"
+#include <string>
+using namespace std;
+
 
 class quadroTexto: public Tobjeto
 {
@@ -16,8 +19,11 @@ class quadroTexto: public Tobjeto
       ~quadroTexto();
       int x1,y1,x2,y2;     /* Coordenadas da Janela */
       int moldura;         /* Possui Moldura, se != 0 */
-      char* texto;         /* Texto Escrito */
+      string texto;         /* Texto Escrito */
       cores Cores;
+      string fonte;
+      int aliFonte;
+      int tamFonte;
 
       /* Desenha na superficie um qudroTexto
        * Xjan, Yjan -> coordenadas da janela

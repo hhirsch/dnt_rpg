@@ -286,7 +286,7 @@ int main(int argc, char *argv[])
    inserirObjsNPC();    
    inserirObjsPC();
    inserirObjsDialogo();
-   dialogos->objetos->InserirFigura(10,285,"../data/pics/dcc.bmp");
+   dialogos->objetos->InserirFigura(10,285,0,0,"../data/pics/dcc.bmp");
 
    dialogos->fechavel = 0;
    dialogos->Abrir(interf->ljan);

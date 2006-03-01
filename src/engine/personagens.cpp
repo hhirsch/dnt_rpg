@@ -585,7 +585,7 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,
    novo->nome = nome;
    /* Define os Retratos */
    figura* fig;
-   fig = novo->retrato->InserirFigura(POSRETX,POSRETY,retrato);
+   fig = novo->retrato->InserirFigura(POSRETX,POSRETY,0,0,retrato);
     glGenTextures(1, &novo->portrait);
       glBindTexture(GL_TEXTURE_2D, novo->portrait);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fig->fig->w, fig->fig->h, 

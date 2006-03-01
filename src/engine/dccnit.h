@@ -13,6 +13,8 @@
 #include "luta.h"
 #include "../ia/ai.h"
 #include "initial.h"
+#include "skillwindow.h"
+#include "../classes/skills.h"
 #ifdef REDE
   #include "../net/client.h"
 #endif
@@ -37,6 +39,9 @@ class engine
       double cameraX,cameraY,cameraZ;  /* Posicao da Camera */
       double deltaY;                   /* DeltaY da camera */
       interface* gui;                  /* GUI utilizada na Engine */
+      GLdouble proj[16];               /* Matriz de Projecao utilizada */
+      GLdouble modl[16];               /* Matriz de ModelView Utilizada  */
+      GLint viewPort[4];               /* Matriz de ViewPort Utilizada */
 
       /* Inicia a estrutura da Engine para utilizacao
        * screen -> ponteiro para a tela3d atual */
@@ -56,7 +61,7 @@ class engine
 
       /* Abre a Tela Inicial, com seus tratamentos.
        * Retorna 0 se é para sair, 1 caso contrario */
-      int TelaInicial(int Status);
+      int TelaInicial(int Status, GLuint* idTextura);
 
    private:
 
@@ -84,9 +89,6 @@ class engine
       cursor* cursors;             /* Utilized mouse cursors */
  
       GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
-      GLdouble proj[16];           /* Matriz de Projecao utilizada */
-      GLdouble modl[16];           /* Matriz de ModelView Utilizada  */
-      GLint viewPort[4];           /* Matriz de ViewPort Utilizada */
       GLUquadricObj* atmosfera;    /* Poligono da Atmosfera, onde fica o ceu */
       GLuint ceu;                  /* Textura do Ceu, quando utilizado */
       int mouseX,mouseY;           /* Coordenada Atual do Mouse na Tela */

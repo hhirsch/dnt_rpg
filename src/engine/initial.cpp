@@ -55,7 +55,8 @@ int botaoSair(void *jan,void *ljan,SDL_Surface *screen)
 
 
 int initialScreen::Execute(int Status,GLdouble proj[16],
-                           GLdouble modl[16], GLint viewPort[4])
+                           GLdouble modl[16], GLint viewPort[4],
+                           GLuint* tituloID)
 {
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
@@ -64,7 +65,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
                                           VERSION,1,1,
                                           NULL,NULL);  
    jan->fechavel = 0;
-   jan->movivel = 0;
+   //jan->movivel = 0;
    if(Status == ON_INIT)
    {
       jan->objetos->InserirBotao(30,20,98,38,jan->Cores.corBot.R, 
@@ -104,8 +105,8 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    SDL_BlitSurface(img,NULL,fig,NULL);
    SDL_FreeSurface(img);
-   GLuint tituloID;
-   carregaTextura(fig,&tituloID);
+   //GLuint tituloID;
+   carregaTextura(fig,tituloID);
    SDL_FreeSurface(fig);
 
    Uint8 *keys;
@@ -119,15 +120,16 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
       {
          SDL_PumpEvents();
          keys = SDL_GetKeyState(NULL);
+         glClearColor(0,0,0,1);
+         glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         AtualizaTela2D(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
+         AtualizaTela2D(*tituloID,proj,modl,viewPort,0,0,799,599,0.011);
          gui->ManipulaEventos(x,y,Mbotao,keys);
          gui->Desenhar(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
       }
    }
-
 
    glEnable(GL_LIGHTING);
    SDL_ShowCursor(SDL_DISABLE);

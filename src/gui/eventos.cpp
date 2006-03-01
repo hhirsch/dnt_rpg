@@ -144,8 +144,8 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                        objAtivo = bart;
                        bart->pos = (mouseX-(ljan->janelaAtiva->x1+bart->x1+2)) 
                                                / (fonte_incCP()+1);
-                       if (bart->pos>strlen(bart->texto)) 
-                           bart->pos = strlen(bart->texto);
+                       if (bart->pos > bart->texto.length()) 
+                           bart->pos = bart->texto.length();
                        foco = FOCO_BARRATEXTO;
                    }
                }

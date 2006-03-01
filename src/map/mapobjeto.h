@@ -33,9 +33,9 @@ class LmapObjeto: public Tlista
 
        /* Insere um objeto de mapa
         * arquivo -> nome do arquivo de definição do objeto*/
-       mapObjeto* InserirMapObjeto(char* arquivo, char* nome);
+       mapObjeto* InserirMapObjeto(const char* arquivo, const char* nome);
 
-       mapObjeto* EndMapObjeto(char* nome);
+       mapObjeto* EndMapObjeto(const char* nome);
 
        /* Retira um Objeto de Mapa da Lista
         * obj         -> ponteiro para o personagem que se deseja retirar

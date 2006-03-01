@@ -50,7 +50,7 @@ int fonte_incCP();
  * nome   -> nome do arquivo contendo a fonte
  * alinha -> alinhamento da fonte na tela
  * tam    -> tamanho da fonte na tela */
-int selFonte(char* nome, int alinha, int tam);
+int selFonte(const char* nome, int alinha, int tam);
 
 #endif
 

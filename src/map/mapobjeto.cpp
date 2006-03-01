@@ -43,7 +43,7 @@ LmapObjeto::~LmapObjeto()
 /*********************************************************************
  *                 Insere objeto de mapa na Lista                    *
  *********************************************************************/
-mapObjeto* LmapObjeto::InserirMapObjeto(char* arquivo, char* nome)
+mapObjeto* LmapObjeto::InserirMapObjeto(const char* arquivo, const  char* nome)
 {
    FILE* arq;
    mapObjeto* novo;
@@ -112,7 +112,7 @@ void LmapObjeto::RetirarMapObjeto(mapObjeto* obj, int tiraMemoria)
 /*********************************************************************
  *                 Retorna Objeto de nome nome                       *
  *********************************************************************/
-mapObjeto* LmapObjeto::EndMapObjeto(char* nome)
+mapObjeto* LmapObjeto::EndMapObjeto(const char* nome)
 {
    int aux;
    mapObjeto* obj = (mapObjeto*) primeiro->proximo;

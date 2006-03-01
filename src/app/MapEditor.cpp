@@ -285,8 +285,8 @@ int botaoMeioZ(void *jan,void *ljan,SDL_Surface *screen)
  ************************************************************************/
 int botaoSalvar(void *jan,void *ljan, SDL_Surface *screen)
 {
-   mapa->save(bartSalvar->texto);
-   printf("Saved Map as `%s`\n",bartSalvar->texto);
+   mapa->save(bartSalvar->texto.c_str());
+   printf("Saved Map as `%s`\n",bartSalvar->texto.c_str());
    SDL_Delay(200);
    return(1);
 }
@@ -454,7 +454,7 @@ void colocaTextura(Map* mapa, int x, int z, GLuint texturaID)
 /************************************************************************
  *             Insere Textura na Lista de Texturas                      *
  ************************************************************************/
-int inserirTextura(Map* mapa, char* arq, char* nome)
+int inserirTextura(Map* mapa, const char* arq, const char* nome)
 {
    texture* tex;
 
@@ -520,18 +520,19 @@ int inserirTextura(Map* mapa, char* arq, char* nome)
  ************************************************************************/
 int botaoInserir(void *jan,void *ljan,SDL_Surface *screen)
 {
-   int tam = strlen(bartInserir->texto);
+   int tam = strlen(bartInserir->texto.c_str());
    if(bartInserir->texto[tam-1] == 'g') /* g, de jpg, textura*/
    {
-       inserirTextura(mapa,bartInserir->texto,bartInserir->texto);
-       printf("Inserted Texture: %s\n",bartInserir->texto);
+       inserirTextura(mapa,bartInserir->texto.c_str(),
+                      bartInserir->texto.c_str());
+       printf("Inserted Texture: %s\n",bartInserir->texto.c_str());
    }
    else
    if(bartInserir->texto[tam-1] == 'c') /* c, de dcc, objeto*/
    {
-       objAtual = mapa->Objetos->InserirMapObjeto(bartInserir->texto,
-                                               bartInserir->texto);
-       printf("Inserted Object: %s\n",bartInserir->texto);
+       objAtual = mapa->Objetos->InserirMapObjeto(bartInserir->texto.c_str(),
+                                               bartInserir->texto.c_str());
+       printf("Inserted Object: %s\n",bartInserir->texto.c_str());
    }
    return(1);
 }

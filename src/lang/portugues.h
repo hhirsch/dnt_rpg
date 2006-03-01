@@ -28,6 +28,16 @@
 #define INITIAL_EXIT        "Sair"
 #define INITIAL_OPTIONS     "Opções"
 
+/* skillwindow.cpp */
+#define SKILL_TITLE         "Perícias"
+#define SKILL_FREE_POINTS   "Pontos Livres:"
+#define SKILL_POINTS        "Pontos:"
+#define SKILL_COST          "Custo:"
+#define SKILL_CONFIRM       "Confirmar"
+#define SKILL_CANCEL        "Cancelar"
+
+/* DIRECTORYS */
+#define SKILLS_DIR          "../data/skills/Portugues/"
 
 /* Erros */
 #define ERROR_MAP_OUT       "Argh! Mapa fora dos limites!\n"

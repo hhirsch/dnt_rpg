@@ -7,13 +7,23 @@ ENDGUI = ../gui/
 ENDENGINE = ../engine/
 ENDMAPA = ../map/
 ENDETC = ../etc/
-OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
+OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
 OBJSENGINE = $(ENDENGINE)conversa.o $(ENDENGINE)culling.o
 OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDENGINE)culling.o
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-all: DlgEditor MapEditor dlgCompiler
+all: DlgEditor MapEditor fntEditor dlgCompiler
+
+fntEditor.o: fntEditor.cpp
+	@printf "Making fntEditor.o... "
+	@$(CC) $(CFLAGS) fntEditor.cpp -o fntEditor.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+fntEditor: $(OBJSGUI) $(OBJSENGINE) fntEditor.o
+	@printf "Linking fntEditor... "
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) fntEditor.o -o $(BIN)fntEditor
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 MapEditor.o: MapEditor.cpp
 	@printf "Making MapEditor.o... "
@@ -47,5 +57,5 @@ dlgCompiler: $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o
 
 clean:
 	@printf "Cleaning App Bin Files... "
-	@\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor
+	@\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor $(BIN)fntEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"

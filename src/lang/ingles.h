@@ -29,7 +29,16 @@
 #define INITIAL_EXIT        "Exit"
 #define INITIAL_OPTIONS     "Options"
 
+/* skillwindow.cpp */
+#define SKILL_TITLE         "Skill"
+#define SKILL_FREE_POINTS   "Total Free Points:"
+#define SKILL_POINTS        "Points:"
+#define SKILL_COST          "Cost:"
+#define SKILL_CONFIRM       "Confirm"
+#define SKILL_CANCEL        "Cancel"
 
+/* DIRECTORYS */
+#define SKILLS_DIR          "../data/skills/Ingles/"
 
 /* ERROS */
 #define ERROR_MAP_OUT       "What the HEll!! Square Map Out of bounds!\n"

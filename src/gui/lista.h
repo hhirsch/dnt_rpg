@@ -48,7 +48,7 @@ class Tlista{
        * x,y     -> coordenada da figura
        * arquivo -> nome do arquivo que contem a figura
        * lista   -> lista onde sera inserida a figura */
-      figura* InserirFigura(int x,int y,const char* arquivo);
+      figura* InserirFigura(int x,int y,int w,int h,const char* arquivo);
 
       /* Insere uma nova barra de texto na lista
        * xa,ya,xb,yb -> Dimensoes da barra de texto

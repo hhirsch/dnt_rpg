@@ -872,7 +872,7 @@ void Map::optimize()
 /********************************************************************
  *                          Save Map File                           *
  ********************************************************************/
-int Map::save(char* arquivo)
+int Map::save(const char* arquivo)
 {
    optimize();
    FILE* arq;
@@ -1076,10 +1076,10 @@ void Map::drawMinimap(SDL_Surface* img)
    muro* maux = muros;
    while(maux!=NULL)
    {
-       x1 = (int) ( ((float)maux->x1 / (float)SQUAREMINI /** razaoX*/ ));
-       x2 = (int) ( (((float)maux->x2 / (float)SQUAREMINI))-1 /** razaoX*/);
-       y1 = (int) ( ((float)maux->z1 / (float)SQUAREMINI /** razaoY*/ ));
-       y2 = (int) ( (((float)maux->z2 / (float)SQUAREMINI))-1 /** razaoY*/);
+       x1 = (int) ( ((float)maux->x1 / (float)SQUAREMINI ));
+       x2 = (int) ( (((float)maux->x2 / (float)SQUAREMINI))-1 );
+       y1 = (int) ( ((float)maux->z1 / (float)SQUAREMINI ));
+       y2 = (int) ( (((float)maux->z2 / (float)SQUAREMINI))-1 );
        if( (x2-x1) < (y2-y1))
           x2 = x1;
        else 

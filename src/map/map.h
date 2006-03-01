@@ -152,7 +152,7 @@ class Map
        * Param:
        *         arquivo -> file name to be saved
        ***************************************************************/
-      int save( char* arquivo ); 
+      int save( const char* arquivo ); 
       /*************************************************************** 
        * Reason: Optimize Map Structs
        * Param:

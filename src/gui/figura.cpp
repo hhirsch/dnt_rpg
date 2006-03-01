@@ -7,7 +7,8 @@
 
 figura::~figura()
 {
-   SDL_FreeSurface(fig);
+   if (fig)
+      SDL_FreeSurface(fig);
 }
 
 void figura::Desenhar(int Xjan,int Yjan,int salvar,SDL_Surface *screen)

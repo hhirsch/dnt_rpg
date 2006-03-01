@@ -12,8 +12,10 @@
 #include "desenho.h"
 #include "fonte.h"
 #include "mouse.h"
-#include "nstring.h"
 #include "objeto.h"
+
+#include <string>
+using namespace std;
 
 
 /* Definicao e Procedimentos de uma Barra de Texto */
@@ -27,7 +29,7 @@ class barraTexto: public Tobjeto
       int disp,           /* Disponivel? */
       cript;              /* Pseudo criptografada? */
       int inic,fim;       /* Extremos do texto visivel atualmente */
-      char* texto;        /* Texto Presente na Caixa */
+      string texto;       /* Texto Presente na Caixa */
       unsigned int pos;
       int ultEsc;
       char ultChar;

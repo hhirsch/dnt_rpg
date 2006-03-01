@@ -301,11 +301,11 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
 /*********************************************************************
  *                       Menu Inicial do Jogo                        *
  *********************************************************************/
-int engine::TelaInicial(int Status)
+int engine::TelaInicial(int Status, GLuint* idTextura)
 {
    AtualizaFrustum(matrizVisivel,proj,modl);
    initialScreen* inic = new(initialScreen);
-   int result = inic->Execute(Status, proj, modl, viewPort);
+   int result = inic->Execute(Status, proj, modl, viewPort, idTextura);
    delete(inic);
    return(result);
 }
@@ -614,7 +614,9 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if( (janAtalhos) && (tempo-ultimaFPS >= 300))
       {
          ultimaFPS = tempo;
-         sprintf(FPS->texto,"FPS: %3.2f",1000.0 / (tempo-ultimaLeitura));
+         char texto[15];
+         sprintf(texto,"FPS: %3.2f",1000.0 / (tempo-ultimaLeitura));
+         FPS->texto = texto;
          janAtalhos->Desenhar();
       }
       ultimaLeitura = tempo;
@@ -685,7 +687,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                    cursors->SetActual(CURSOR_GET);
                    if(janAtalhos)
                    {
-                      sprintf(ObjTxt->texto,"%s",quaux->objetos[obj]->nome); 
+                      ObjTxt->texto = quaux->objetos[obj]->nome; 
                       janAtalhos->Desenhar();
                    }
                    if(Mbotao & SDL_BUTTON(1))
@@ -720,7 +722,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                  cursors->SetActual(CURSOR_DOOR);
                  if(janAtalhos)
                  {
-                    sprintf(ObjTxt->texto,"Door"); 
+                    ObjTxt->texto = "Door"; 
                     janAtalhos->Desenhar();
                  }
                  if(Mbotao & SDL_BUTTON(1))
@@ -774,7 +776,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                 cursors->SetActual(CURSOR_INVENTORY);
                 if(janAtalhos)
                 {
-                   sprintf(ObjTxt->texto,"%s",pers->nome.c_str()); 
+                   ObjTxt->texto = pers->nome; 
                    janAtalhos->Desenhar();
                 }
                 pronto = 1;
@@ -812,7 +814,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                 cursors->SetActual(CURSOR_TALK);
                 if(janAtalhos)
                 {
-                   sprintf(ObjTxt->texto,"%s",pers->nome.c_str()); 
+                   ObjTxt->texto = pers->nome; 
                    janAtalhos->Desenhar();
                 }
                 pronto = 1;
@@ -838,7 +840,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             {
                if(janAtalhos)
                {
-                  sprintf(ObjTxt->texto,quaux->mapConection.mapName); 
+                  ObjTxt->texto = quaux->mapConection.mapName; 
                   janAtalhos->Desenhar();
                }
                cursors->SetActual(CURSOR_MAPTRAVEL);
@@ -853,7 +855,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
          if( (janAtalhos) && (!pronto) )
          {
-            sprintf(ObjTxt->texto,"Nothing"); 
+            ObjTxt->texto = "Nothing"; 
             janAtalhos->Desenhar();
          }
         }
@@ -914,6 +916,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
          glDeleteTextures(1,&texturaInfo);
          SDL_Delay(100);
+         ultimaLeitura = SDL_GetTicks();
          redesenha = true;
       }
 
@@ -1838,7 +1841,7 @@ void engine::abreMiniMapa()
 
    botPerMiniMap = janMiniMapa->objetos->InserirBotao(x,z,x+2,z+2,255,255,128,
                                                       "",0,NULL);
-   figura* fig = janMiniMapa->objetos->InserirFigura(8,20,NULL);
+   figura* fig = janMiniMapa->objetos->InserirFigura(8,20,240,95,NULL);
    mapa->drawMinimap(fig->fig);
    
                    
@@ -1855,7 +1858,7 @@ void engine::abreAtalhos()
    FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
    ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,76,180,101,0,
                                                           "Press F1 for Help!");
-   ObjTxt->Cores.corCont[1].R = 255; ObjTxt->Cores.corCont[1].G = 255; 
+   ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
    ObjTxt->Cores.corCont[1].B = 255;
    ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,150,71,0,"Nothing");
    

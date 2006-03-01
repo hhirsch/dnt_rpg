@@ -34,6 +34,7 @@
 #define ERROR_MAP_OUT          "Argh! Mapa fuera de los límites!\n"
 #define ERROR_INIT_SDL         "Argh! No puedo iniciar SDL!\n"
 
+/*  */
 
 #endif
 

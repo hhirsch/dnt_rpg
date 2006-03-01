@@ -4,8 +4,8 @@ CC = gcc
 CPP = g++
 CFLAGS = -g -c -Wall
 EFLAGS = -g -Wall -lm -lSDL -lSDL_image
-OBJS = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o menu.o mouse.o nstring.o quadtexto.o seltexto.o 
-OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o lista.o menu.o mouse.o nstring.o quadtexto.o seltexto.o
+OBJS = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o menu.o mouse.o quadtexto.o seltexto.o 
+OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o lista.o menu.o mouse.o quadtexto.o seltexto.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -85,11 +85,6 @@ menu.o: menu.h menu.cpp
 mouse.o: mouse.h mouse.c
 	@printf "Making mouse.o... "
 	@$(CPP) $(CFLAGS) mouse.c -o mouse.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-nstring.o: nstring.h nstring.c
-	@printf "Making nstring.o... "
-	@$(CPP) $(CFLAGS) nstring.c -o nstring.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 quadtexto.o: quadtexto.h quadtexto.cpp
