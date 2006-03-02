@@ -5,6 +5,7 @@
 
 #include "dccnit.h"
 #include "culling.h"
+#include "../lang/lang.h"
 #include <math.h>
 #include <SDL/SDL_image.h>
 #include "../etc/glm.h"
@@ -309,6 +310,45 @@ int engine::TelaInicial(int Status, GLuint* idTextura)
    delete(inic);
    return(result);
 }
+
+/*********************************************************************
+ *                Tela de Criação/Evolução de Personagem             *
+ *********************************************************************/
+int engine::TelaPersonagens(GLuint* idTextura)
+{
+   int charCreation = CHAR_OTHER;
+   int tempo = SDL_GetTicks();
+   int tempoAnterior = 0;
+   Uint8* keys;
+   int x,y;
+
+   skills* sk = new skills(SKILLS_DIR,"../data/skills/skills.skl"); 
+   skillWindow* skWindow = new skillWindow(sk, 20, gui);
+
+   while( (charCreation != CHAR_CANCEL) && 
+          (charCreation != CHAR_CONFIRM))
+   {
+      tempo = SDL_GetTicks();
+      if(tempo - tempoAnterior > 20) 
+      {
+         SDL_PumpEvents();
+         glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR);
+         glClearColor(0,0,0,0);
+         keys = SDL_GetKeyState(NULL);
+         Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+         gui->ManipulaEventos(x,y,Mbotao,keys);
+         AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.011);
+         gui->Desenhar(proj,modl,viewPort);
+         glFlush();
+         SDL_GL_SwapBuffers();
+      }
+      charCreation = skWindow->treat(gui);
+   }
+   delete(sk);
+   delete(skWindow);
+   return(charCreation);
+}
+
 
 /*********************************************************************
  *                 Redmensiona a Engine para a Tela                  *

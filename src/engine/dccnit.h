@@ -63,6 +63,9 @@ class engine
        * Retorna 0 se é para sair, 1 caso contrario */
       int TelaInicial(int Status, GLuint* idTextura);
 
+      /* Abre a tela de cricao de caracteres, retornando de acordo */
+      int TelaPersonagens(GLuint* idTextura);
+
    private:
 
       /* Redefine a tela para o tamanho da tela atual
