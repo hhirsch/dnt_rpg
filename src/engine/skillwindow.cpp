@@ -133,18 +133,14 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
 
 
    /* Confirm Button */
-   baux = window->objetos->InserirBotao(181,225,251,242, 72,147,52, 
+   baux = window->objetos->InserirBotao(181,225,251,244, window->Cores.corBot.R,
+                                 window->Cores.corBot.G,window->Cores.corBot.B,
                                         SKILL_CONFIRM,1,&botaoConfirm);
-   baux->Cores.corCont[0].R = 89; 
-   baux->Cores.corCont[0].G = 196; 
-   baux->Cores.corCont[0].B = 61; 
    
    /* Cancel Button */
-   baux = window->objetos->InserirBotao(8,225,78,242, 92,95,94, 
+   baux = window->objetos->InserirBotao(8,225,78,244, window->Cores.corBot.R,
+                                 window->Cores.corBot.G,window->Cores.corBot.B,
                                         SKILL_CANCEL,1,&botaoCancel);
-   baux->Cores.corCont[0].R = 211; 
-   baux->Cores.corCont[0].G = 213; 
-   baux->Cores.corCont[0].B = 212; 
    
    /* Open Skill Window */
    window->ptrExterno = &window;

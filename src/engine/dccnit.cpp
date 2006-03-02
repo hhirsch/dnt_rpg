@@ -1167,13 +1167,13 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          {
             z = mapa->z-1;
          }
-         x = 8 + (x*3);
-         z = 20 + (z*3);
+         x = 8 + (x*4);
+         z = 20 + (z*4);
 
          botPerMiniMap->x1 = x;
-         botPerMiniMap->x2 = x+2;
+         botPerMiniMap->x2 = x+3;
          botPerMiniMap->y1 = z;
-         botPerMiniMap->y2 = z+2;
+         botPerMiniMap->y2 = z+3;
 
          janMiniMapa->Desenhar();
       }
@@ -1881,6 +1881,16 @@ void engine::abreMiniMapa()
 
    botPerMiniMap = janMiniMapa->objetos->InserirBotao(x,z,x+2,z+2,255,255,128,
                                                       "",0,NULL);
+   botPerMiniMap->Cores.corCont[0].R = 255;
+   botPerMiniMap->Cores.corCont[0].G = 255;
+   botPerMiniMap->Cores.corCont[0].B = 128;
+   botPerMiniMap->Cores.corCont[1].R = 255;
+   botPerMiniMap->Cores.corCont[1].G = 255;
+   botPerMiniMap->Cores.corCont[1].B = 128;
+   botPerMiniMap->Cores.corCont[2].R = 255;
+   botPerMiniMap->Cores.corCont[2].G = 255;
+   botPerMiniMap->Cores.corCont[2].B = 128;
+
    figura* fig = janMiniMapa->objetos->InserirFigura(8,20,240,95,NULL);
    mapa->drawMinimap(fig->fig);
    
