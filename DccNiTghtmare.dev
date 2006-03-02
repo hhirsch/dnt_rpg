@@ -1,7 +1,7 @@
 [Project]
 FileName=DccNiTghtmare.dev
 Name=DccNiTghtmare
-UnitCount=58
+UnitCount=64
 Type=1
 Ver=1
 ObjFiles=
@@ -460,26 +460,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit44]
-FileName=src\gui\nstring.c
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit45]
-FileName=src\gui\nstring.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit46]
 FileName=src\gui\objeto.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -489,7 +469,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit47]
+[Unit45]
 FileName=src\gui\quadtexto.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -499,7 +479,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit48]
+[Unit46]
 FileName=src\gui\quadtexto.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -509,7 +489,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit49]
+[Unit47]
 FileName=src\gui\seltexto.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -519,7 +499,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit50]
+[Unit48]
 FileName=src\ia\ai.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -529,7 +509,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit51]
+[Unit49]
 FileName=src\ia\ai.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -539,7 +519,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit52]
+[Unit50]
 FileName=src\map\mapobjeto.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -549,7 +529,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit53]
+[Unit51]
 FileName=src\map\map.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -559,7 +539,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit54]
+[Unit52]
 FileName=src\map\map.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -569,7 +549,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit55]
+[Unit53]
 FileName=src\map\mapobjeto.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -579,8 +559,28 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit56]
+[Unit54]
 FileName=src\engine\initial.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit55]
+FileName=src\engine\cursor.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit56]
+FileName=src\engine\cursor.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
@@ -608,7 +608,7 @@ ProductVersion=
 AutoIncBuildNr=0
 
 [Unit57]
-FileName=src\engine\cursor.h
+FileName=src\engine\skillwindow.h
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
@@ -618,7 +618,67 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit58]
-FileName=src\engine\cursor.cpp
+FileName=src\engine\skillwindow.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit59]
+FileName=src\classes\skills.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit60]
+FileName=src\classes\skills.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit61]
+FileName=src\map\maplights.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit62]
+FileName=src\map\mapfog.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit63]
+FileName=src\map\mapfog.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit64]
+FileName=src\map\maplights.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
