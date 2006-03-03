@@ -2,7 +2,7 @@
 
 CC = g++
 CFLAGS = -g -c -Wall
-EFLAGS = -g -Wall -lm -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image -lcal3d
+EFLAGS = -g -Wall -lm -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image -lSDL_mixer -lcal3d
 PROGFLAGS = 
 ENDGUI = ../gui/
 ENDENGINE = ../engine/
@@ -10,11 +10,13 @@ ENDMAPA = ../map/
 ENDNET = ../net/
 ENDIA = ../ia/
 ENDCLASSES = ../classes/
+ENDSOUND = ../sound/
 OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)ai.o
 OBJSCLASSES = $(ENDCLASSES)skills.o
+OBJSSOUND = $(ENDSOUND)sound.o
 OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o ../etc/texture.o personagens.o skillwindow.o teste.o
 BIN = ../../bin/
 SUPREDE = #-DREDE #comente para nao ter suporte a rede na bagaca
@@ -62,9 +64,9 @@ teste.o: teste.cpp
 	@$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o teste.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJS) 
+teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSSOUND) $(OBJS) 
 	@printf "Linking dccnitghtmare... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSSOUND) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:

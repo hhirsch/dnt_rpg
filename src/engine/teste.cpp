@@ -35,7 +35,6 @@ int main(int argc, char **argv)
    int result = Engine->TelaInicial(ON_INIT,&tituloID);
    int charCreation;
    
-
    while(result != EXIT_GAME)
    {
        if(result == NEW_GAME)

@@ -15,6 +15,7 @@
 #include "initial.h"
 #include "skillwindow.h"
 #include "../classes/skills.h"
+#include "../sound/sound.h"
 #ifdef REDE
   #include "../net/client.h"
 #endif
@@ -111,6 +112,9 @@ class engine
       Uint32 ultimaPressaoMouse;   /* Ultima Pressao do Mouse nos objetos */
       Uint32 ultimaFPS;            /* Ultima FPS obtida */
       double FPSatual;             /* FPS Atual */
+
+      sound* snd;
+      Mix_Music* musica;
 
       AI* ia;                      /* Modulo de IA. Temporiamente aqui. */
 

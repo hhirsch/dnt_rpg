@@ -64,6 +64,8 @@ engine::engine()
    mouseY = 0;
 
    cursors = new(cursor);
+   snd = new(sound);
+   musica = NULL;
 
    /* Define a ultima vez em que desenhou (so por simplicidade) */
    ultimaLeitura = SDL_GetTicks();
@@ -76,6 +78,12 @@ engine::engine()
 engine::~engine()
 {
    //glDeleteLists(mapaDesenhar,1);
+   if(musica)
+   {
+      snd->StopMusic(musica);
+   }
+   delete(snd);
+
    gluDeleteQuadric(atmosfera);
    glDeleteTextures(1, &ceu);
    if(NPCs)
@@ -304,6 +312,11 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
  *********************************************************************/
 int engine::TelaInicial(int Status, GLuint* idTextura)
 {
+   if(musica)
+   {
+     snd->StopMusic(musica);
+   }
+   musica = snd->LoadMusic("../data/music/musica1.ogg");
    AtualizaFrustum(matrizVisivel,proj,modl);
    initialScreen* inic = new(initialScreen);
    int result = inic->Execute(Status, proj, modl, viewPort, idTextura);
@@ -1185,6 +1198,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
  
    if(andou)
    {
+      snd->PlaySample(SOUND_WALK);
       PCs->personagemAtivo->SetState(STATE_WALK);
       #ifdef REDE
         movchar(&clientData, PCs->personagemAtivo->ID, 
@@ -1195,6 +1209,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    else if(passouTempo)
    {
       PCs->personagemAtivo->SetState(STATE_IDLE);
+      snd->StopSample(SOUND_WALK);
    }
  
    return(1);
@@ -1921,6 +1936,14 @@ void engine::abreAtalhos()
  *********************************************************************/
 int engine::Rodar(SDL_Surface *surface)
 {
+
+   if(musica)
+   {
+      snd->StopMusic(musica);
+   }
+   musica = snd->LoadMusic("../data/music/musica2.ogg");
+
+   snd->LoadSample(SOUND_WALK,"../data/sndfx/passos.ogg");
 
    int forcaAtualizacao = 0; //forca a atualizacao da tela, qdo o npc anda
    FPSatual = 10.0;

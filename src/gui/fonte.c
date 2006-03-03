@@ -55,36 +55,40 @@ int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
        
      }
      ax=x;
-     for (aux1=0;aux1<16;aux1++)
+     
+     if(c != '|')
      {
-        sobra=Fonte.letra[c][aux1];
-        for (aux2=0;aux2<16;aux2++)
+        for (aux1=0;aux1<16;aux1++)
         {
-           if (sobra % 2==1)
+           sobra=Fonte.letra[c][aux1];
+           for (aux2=0;aux2<16;aux2++)
            {
-              pixel_Desenhar(screen,x,y,0);
-              if(Tamanho>1) pixel_Desenhar(screen,x+1,y,0);
-              if(Tamanho>2) pixel_Desenhar(screen,x+1,y+1,0);
-              if (Tamanho>3)
+              if (sobra % 2==1)
               {
-                 pixel_Desenhar(screen,x,y+1,0);
-                 pixel_Desenhar(screen,x+2,y+1,0);
-                 pixel_Desenhar(screen,x+2,y+2,0);
-                 pixel_Desenhar(screen,x+1,y+2,0);
+                 pixel_Desenhar(screen,x,y,0);
+                 if(Tamanho>1) pixel_Desenhar(screen,x+1,y,0);
+                 if(Tamanho>2) pixel_Desenhar(screen,x+1,y+1,0);
+                 if (Tamanho>3)
+                 {
+                    pixel_Desenhar(screen,x,y+1,0);
+                    pixel_Desenhar(screen,x+2,y+1,0);
+                    pixel_Desenhar(screen,x+2,y+2,0);
+                    pixel_Desenhar(screen,x+1,y+2,0);
+                 }
               }
+              sobra = sobra / 2;
+              y++;
+              if (Tamanho>2) y++;
            }
-           sobra = sobra / 2;
-           y++;
-           if (Tamanho>2) y++;
+           y = k;
+           x++;
         }
-        y = k;
-        x++;
      }
 
      if (Tamanho<2) x-=( x-ax-Fonte.incCP);
      else if (Tamanho==2) x-= x-ax-Fonte.incCP-1;
      else x-=(x-ax-Fonte.incCP) / 2;
-     if(x+Fonte.incCP > x2)
+     if( (x+Fonte.incCP > x2) || (c == '|')  )
      {
         x = x1;
         k += 11;

@@ -351,7 +351,7 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
       if( teclas[SDLK_BACKSLASH])
       {
           if (maiuscula)
-            c[0] = '|';
+            c[0] = '?';
           else
             c[0] = '\\';
       }

@@ -681,7 +681,7 @@ int main(int argc, char *argv[])
 
     delete(interf);
 
-    int d = 'Á';
+    int d = '|';
     printf("%c %d\n",d,d);
     d = 'É';
     printf("%c %d\n",d,d);    
