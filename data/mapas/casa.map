@@ -1,0 +1,61 @@
+T 3X3
+# Made by DccNiTghtmare's MapEditor, v0.0.2
+o Cadeira ../data/models/objetos/icex/cadeira.dcc
+o Porta ../data/models/objetos/geral/porta3.dcc
+t ../data/texturas/chao_madeira.jpg ../data/texturas/chao_madeira.jpg 213 181 96
+t madeira2 ../data/texturas/parede_madeira2.png 213 181 96
+t chao_grama2 ../data/texturas/chao_grama2.jpg 20 20 100
+d Porta 74.929779,192.000000:0
+d Porta 134.730026,99.000000:0
+d Porta 25.147425,100.763916:0
+muro 9.906322,100.763916,25.147425,110.763916
+mt madeira2
+muro 63.807148,100.763916,73.807152,180.497696
+mt madeira2
+muro 100.000000,99.000000,110.000000,182.000000
+mt madeira2
+muro 182.000000,0.000000,192.000000,192.000000
+mt madeira2
+muro 0.000000,0.000000,10.000000,192.000000
+mt madeira2
+muro 10.000000,182.000000,74.929779,192.000000
+mt madeira2
+muro 10.000000,0.000000,182.000000,10.000000
+mt madeira2
+muro 110.000000,99.000000,134.730026,109.000000
+mt madeira2
+muro 96.767570,182.000000,182.000000,192.000000
+mt madeira2
+muro 156.567810,99.000000,182.000000,109.000000
+mt madeira2
+muro 46.985218,100.763916,63.807148,110.763916
+mt madeira2
+#Z: 0
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+#Z: 1
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+#Z: 2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+uc 71.600716,181.598984,100.004463,192.000000:../data/mapas/dois.map
+uo Cadeira 1:2,3:117.302170,173.965866:-88:0
+uo Cadeira 1:2,3:117.289787,155.095627:-88:0
+uo Cadeira 1:2,3:116.964790,136.476685:-88:0
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_madeira.jpg
+uo Cadeira 1:3,3:149.321793,172.875031:-88:0
+uo Cadeira 1:3,3:149.109283,160.700104:-88:0
+uo Cadeira 1:3,3:148.708771,137.755066:-88:0
+i 1,1

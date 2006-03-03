@@ -1,5 +1,7 @@
 T 7X12
 # Made by DccNiTghtmare's MapEditor, v0.0.2
+f ../data/mapas/dois.fog
+# l ../data/mapas/dois.lgt
 o Farrer's_Guitar ../data/models/objetos/geral/guitarra.dcc
 o Stop_Sign ../data/models/objetos/geral/placa_pare.dcc
 o Door ../data/models/objetos/geral/porta.dcc

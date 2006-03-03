@@ -14,6 +14,7 @@ o Computer ../data/models/objetos/geral/computador.dcc
 o Small_Kalashnikov ../data/models/objetos/armas/kalashnikov_pequena.dcc
 t ../data/texturas/chao_madeira.jpg ../data/texturas/chao_madeira.jpg 115 58 29
 t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
+t chao_grama_lama ../data/texturas/chao_grama_lama.png 69 93 15
 t ../data/texturas/chao_cimento.jpg ../data/texturas/chao_marble.jpg 207 212 206
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 221 169 171
 d Door 61.099251,576.000000:0
