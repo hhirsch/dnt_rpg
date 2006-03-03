@@ -1,10 +1,10 @@
 00 notused.ski ../data/skills/Img/na.png
-01 forca.ski   ../data/skills/Img/na.png
-02 destreza.ski ../data/skills/Img/na.png
-03 constituicao.ski ../data/skills/Img/na.png
-04 inteligencia.ski ../data/skills/Img/na.png
-05 sabedoria.ski ../data/skills/Img/na.png
-06 carisma.ski ../data/skills/Img/na.png
+01 forca.ski   ../data/skills/Img/forca.png
+02 destreza.ski ../data/skills/Img/destreza.png
+03 constituicao.ski ../data/skills/Img/constituicao.png
+04 inteligencia.ski ../data/skills/Img/inteligencia.png
+05 sabedoria.ski ../data/skills/Img/sabedoria.png
+06 carisma.ski ../data/skills/Img/carisma.png
 07 acrobacias.ski ../data/skills/Img/acrobacias.png
 08 adestrarbichos.ski ../data/skills/Img/adestrar.png
 09 artedoescape.ski ../data/skills/Img/artedoescape.png
