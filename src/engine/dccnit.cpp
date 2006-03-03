@@ -396,7 +396,7 @@ void engine::Iniciar(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Definicao da Luz */
-   GLfloat light_ambient[] = { 0.9, 0.9, 0.9, 1.0 };
+   GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_position[] = { 1.0, 1.0, 0.0, 1.0 };

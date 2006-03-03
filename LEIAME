@@ -20,28 +20,33 @@ existência   de  alguns  quesitos  de  software  e  outros  de
 hardware. São eles:
 
    Software:
-   OpenGL   - Mesa3D 6.2, www.mesa3d.org (ou SGI-OpenGL 1.4)
-   SDL      - Versão 1.2.7, www.libsdl.org
-   SDLImage - Versão 1.2.4, www.libsdl.org/projects/SDL_image/
-   Cal3D    - Versão 0.10, http://cal3d.sf.net
+   Cal3D     - Versão 0.10, http://cal3d.sf.net
+   LibVorbis - http://www.vorbis.com/
+   OpenGL    - Mesa3D 6.2, www.mesa3d.org (ou SGI-OpenGL 1.4)
+   SDL       - Versão 1.2.7, www.libsdl.org
+   SDLImage  - Versão 1.2.4, www.libsdl.org/projects/SDL_image/
+   SDLmixer  - Versão 1.2.6, http://www.libsdl.org/projects/SDL_mixer/
 
    Hardware:
    Placa de Vídeo com aceleração 3D compatível  com  OpenGl no
    linux, através  de módulos  acelerados  (caso  contrário, a 
    renderização é extremamente lenta).
-   64 MB de memória RAM
-   Um bom processador.
 
 ==============================================================
 |                      II - Instalação                       |
 ==============================================================
 
    Para  se "instalar"  dccnitghtmare,  basta  descompactar  o 
-tar.bz2 disponível,  adentrar-se no  diretório dccnitghtmare e
-rodar o comando "make".
+tar.bz2 disponível,  adentrar-se no  diretório  dccnitghtmare,
+realizar  uma  pequena  alteração  para  obter  os  textos  em 
+Português e rodar o comando "make".
    Exemplo:
    farrer@anamabeka:~/$ tar -xvjf dccnitghtmare.tar.bz2
    farrer@anamabeka:~/$ cd dccnitghtmare
+   farrer@anamabeka:~/dccnitghtmare/$ gvim src/lang/lang.h
+   Comentar a linha: #include "../lang/ingles.h" e
+   descomentar a linha: #include "../lang/portugues.h";
+   Salvar;
    farrer@anamabeka:~/dccnitghtmare/$ make
 
 ==============================================================

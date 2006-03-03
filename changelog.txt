@@ -11,7 +11,6 @@
  - Constant character & camera velocity;
  - Initial menu;
  - Loading screen;
- - Functional and ugly map editor (only on CVS);
  - Some new objects and characters added;
  - Map to map navigation;
  - New test maps;
@@ -23,6 +22,7 @@
  - Objects Selection;
  - Optimized intern map representation;
  - Colored mouse cursors;
+ - New things on maps;
  - Some bugs fixed.
 
 ================================================
