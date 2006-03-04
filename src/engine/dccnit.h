@@ -13,6 +13,7 @@
 #include "luta.h"
 #include "../ia/ai.h"
 #include "initial.h"
+#include "options.h"
 #include "skillwindow.h"
 #include "../classes/skills.h"
 #include "../sound/sound.h"
@@ -67,6 +68,9 @@ class engine
       /* Abre a tela de cricao de caracteres, retornando de acordo */
       int TelaPersonagens(GLuint* idTextura);
 
+      /* Abre a tela de opções/ ajustes do jogo */
+      int TelaOpcoes(GLuint* idTextura);
+
    private:
 
       /* Redefine a tela para o tamanho da tela atual
@@ -113,8 +117,9 @@ class engine
       Uint32 ultimaFPS;            /* Ultima FPS obtida */
       double FPSatual;             /* FPS Atual */
 
-      sound* snd;
-      Mix_Music* musica;
+      sound* snd;                  /* Actual Sounds thing */
+      Mix_Music* musica;           /* Actual playing music */
+      options* option;             /* Current Options */
 
       AI* ia;                      /* Modulo de IA. Temporiamente aqui. */
 

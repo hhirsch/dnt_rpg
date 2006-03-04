@@ -67,9 +67,13 @@ engine::engine()
    snd = new(sound);
    musica = NULL;
 
+   option = new options("dcc.opc");
+   snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
+
    /* Define a ultima vez em que desenhou (so por simplicidade) */
    ultimaLeitura = SDL_GetTicks();
    ultimoMouse = ultimaLeitura;
+
 }
 
 /*********************************************************************
@@ -82,7 +86,10 @@ engine::~engine()
    {
       snd->StopMusic(musica);
    }
+
    delete(snd);
+
+   delete(option);
 
    gluDeleteQuadric(atmosfera);
    glDeleteTextures(1, &ceu);
@@ -322,6 +329,50 @@ int engine::TelaInicial(int Status, GLuint* idTextura)
    int result = inic->Execute(Status, proj, modl, viewPort, idTextura);
    delete(inic);
    return(result);
+}
+
+/*********************************************************************
+ *                       Tela de Opcoes do Jogo                      *
+ *********************************************************************/
+int engine::TelaOpcoes(GLuint* idTextura)
+{
+   glDisable(GL_LIGHTING);
+   SDL_ShowCursor(SDL_ENABLE);
+
+   int optionW = OPTIONSW_OTHER;
+   int tempo = SDL_GetTicks();
+   int tempoAnterior = 0;
+   Uint8* keys;
+   int x,y;
+
+   option->DisplayOptionsScreen(gui);
+
+   while( (optionW != OPTIONSW_CANCEL) && 
+          (optionW != OPTIONSW_CONFIRM))
+   {
+      tempo = SDL_GetTicks();
+      if(tempo - tempoAnterior > 20) 
+      {
+         SDL_PumpEvents();
+         glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR);
+         glClearColor(0,0,0,0);
+         keys = SDL_GetKeyState(NULL);
+         Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+         gui->ManipulaEventos(x,y,Mbotao,keys);
+         AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.011);
+         gui->Desenhar(proj,modl,viewPort);
+         glFlush();
+         SDL_GL_SwapBuffers();
+      }
+      optionW = option->Treat(gui);
+   }
+
+   snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
+
+   glEnable(GL_LIGHTING);
+   SDL_ShowCursor(SDL_DISABLE);
+
+   return(optionW);
 }
 
 /*********************************************************************

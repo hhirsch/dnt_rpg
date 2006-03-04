@@ -27,13 +27,15 @@ class sound
       void PlaySample(int smp);
       void StopSample(int smp);
 
-      int volume;
+      void ChangeVolume(int music, int sndfx);
 
    private:
-     Mix_Chunk* walk;
-     Mix_Chunk* action1;
-     Mix_Chunk* action2;
-     Mix_Chunk* action3;
+     int         musicVolume;
+     int         sndfxVolume;
+     Mix_Chunk*  walk;
+     Mix_Chunk*  action1;
+     Mix_Chunk*  action2;
+     Mix_Chunk*  action3;
 };
 
 #endif

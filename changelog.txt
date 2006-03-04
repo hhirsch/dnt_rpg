@@ -3,6 +3,8 @@
 |               Version 0.0.2                  |
 ================================================
  - Support for Cal3D format for character models;
+ - Support for sound and music;
+ - Basic Character Creation (class, skills, etc);
  - Some animations added;
  - Gui is now avaible on graphical engine;
  - Colision detection more permissive;
@@ -13,7 +15,7 @@
  - Loading screen;
  - Some new objects and characters added;
  - Map to map navigation;
- - New test maps;
+ - Added Options Screen;
  - Objects orientation possible;
  - Better Floor & Walls Representation;
  - Variable terrain height;

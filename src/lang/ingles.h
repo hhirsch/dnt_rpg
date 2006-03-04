@@ -37,6 +37,11 @@
 #define SKILL_CONFIRM       "Confirm"
 #define SKILL_CANCEL        "Cancel"
 
+/* options.cpp */
+#define OPTIONS_TITLE        "Options"
+#define OPTIONS_MUSIC_VOLUME "Music Volume:"
+#define OPTIONS_SNDFX_VOLUME "Effects Volume:"
+
 /* DIRECTORYS */
 #define SKILLS_DIR          "../data/skills/Ingles/"
 

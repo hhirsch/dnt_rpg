@@ -16,7 +16,8 @@ sound::sound()
    action1 = NULL;
    action2 = NULL;
    action3 = NULL;
-   volume = SDL_MIX_MAXVOLUME - 20;
+   musicVolume = SDL_MIX_MAXVOLUME - 20;
+   sndfxVolume = SDL_MIX_MAXVOLUME;
    
 }
 
@@ -54,7 +55,7 @@ Mix_Music* sound::LoadMusic(string file)
       printf("Error ao abrir arquivo de música: %s\n",file.c_str());
    }
    Mix_PlayMusic(music, -1);
-   Mix_VolumeMusic(volume);
+   Mix_VolumeMusic(musicVolume);
    return(music);
 }
 
@@ -187,5 +188,15 @@ void sound::StopSample(int smp)
          break;
       }
    }
+}
+
+
+void sound::ChangeVolume(int music, int sndfx)
+{
+   musicVolume = music;
+   sndfxVolume = sndfx;
+
+   Mix_Volume(-1, sndfxVolume);
+   Mix_VolumeMusic(musicVolume);
 }
 

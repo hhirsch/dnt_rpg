@@ -45,14 +45,19 @@ int main(int argc, char **argv)
              Engine->CarregaMapa("../data/mapas/casa.map",1);
           }
        }
+
+       if(result == OPTIONS)
+       {
+          Engine->TelaOpcoes(&tituloID);
+       }
        #ifdef REDE
           Engine->server = server;
        #endif
       //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
       glDeleteTextures(1,&tituloID);
 
-      if( (result != NEW_GAME) || 
-          ( ((result == NEW_GAME)) && (charCreation == CHAR_CONFIRM) ) )
+      if( (result != OPTIONS ) && ((result != NEW_GAME) || 
+          ( ((result == NEW_GAME)) && (charCreation == CHAR_CONFIRM) ) ))
       {
          Engine->Rodar(screen);
          result = Engine->TelaInicial(IN_GAME,&tituloID);

@@ -53,6 +53,12 @@ int botaoSair(void *jan,void *ljan,SDL_Surface *screen)
    return(1);
 }
 
+int botaoOpcoes(void *jan,void *ljan,SDL_Surface *screen)
+{
+   result = OPTIONS;
+   pronto = 1;
+   return(1);
+}
 
 int initialScreen::Execute(int Status,GLdouble proj[16],
                            GLdouble modl[16], GLint viewPort[4],
@@ -86,7 +92,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
                                  INITIAL_LOAD,1,&botaoCarregar);
    jan->objetos->InserirBotao(30,80,98,98,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 INITIAL_OPTIONS,1,NULL);
+                                 INITIAL_OPTIONS,1,&botaoOpcoes);
    jan->objetos->InserirBotao(30,100,98,118,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
                                  INITIAL_EXIT,1,&botaoSair);

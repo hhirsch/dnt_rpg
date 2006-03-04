@@ -28,6 +28,11 @@
 #define INITIAL_EXIT        "Sair"
 #define INITIAL_OPTIONS     "Opções"
 
+/* options.cpp */
+#define OPTIONS_TITLE        "Opções"
+#define OPTIONS_MUSIC_VOLUME "Volume da Música:"
+#define OPTIONS_SNDFX_VOLUME "Volume dos Efeitos:"
+
 /* skillwindow.cpp */
 #define SKILL_TITLE         "Perícias"
 #define SKILL_FREE_POINTS   "Pontos Livres:"

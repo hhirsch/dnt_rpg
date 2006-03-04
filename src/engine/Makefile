@@ -17,7 +17,7 @@ OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)ai.o
 OBJSCLASSES = $(ENDCLASSES)skills.o
 OBJSSOUND = $(ENDSOUND)sound.o
-OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o ../etc/texture.o personagens.o skillwindow.o teste.o
+OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o skillwindow.o teste.o
 BIN = ../../bin/
 SUPREDE = #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
@@ -47,6 +47,11 @@ dccnit.o: dccnit.h dccnit.cpp
 initial.o: initial.h initial.cpp
 	@printf "Making initial.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) initial.cpp -o initial.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+options.o: options.h options.cpp
+	@printf "Making options.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) options.cpp -o options.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 personagens.o: personagens.cpp personagens.h

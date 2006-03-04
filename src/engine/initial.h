@@ -13,6 +13,7 @@
 #define LOAD_GAME     2
 #define SAVE_GAME     3
 #define CONTINUE_GAME 4
+#define OPTIONS       5
 
 /* initialScreen Status */
 #define ON_INIT 1
