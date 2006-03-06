@@ -360,12 +360,12 @@ int engine::TelaOpcoes(GLuint* idTextura)
       if(tempo - tempoAnterior > 20) 
       {
          SDL_PumpEvents();
-         glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR);
-         glClearColor(0,0,0,0);
+         glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+         glClearColor(0,0,0,1);
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          gui->ManipulaEventos(x,y,Mbotao,keys);
-         AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.011);
+         AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          gui->Desenhar(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
@@ -402,12 +402,12 @@ int engine::TelaPersonagens(GLuint* idTextura)
       if(tempo - tempoAnterior > 20) 
       {
          SDL_PumpEvents();
-         glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR);
-         glClearColor(0,0,0,0);
+         glClearColor(0,0,0,1);
+         glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          gui->ManipulaEventos(x,y,Mbotao,keys);
-         AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.011);
+         AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          gui->Desenhar(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
@@ -1994,6 +1994,12 @@ void engine::abreAtalhos()
 int engine::Rodar(SDL_Surface *surface)
 {
 
+   if(!mapa->music.empty())
+   {
+      snd->StopMusic(musica);
+      musica = snd->LoadMusic(mapa->music);
+   }
+
    snd->LoadSample(SOUND_WALK,"../data/sndfx/passos.ogg");
 
    int forcaAtualizacao = 0; //forca a atualizacao da tela, qdo o npc anda
@@ -2093,6 +2099,11 @@ int engine::Rodar(SDL_Surface *surface)
 
 
    }
+
+   if(janAtalhos)
+      janAtalhos->Fechar(gui->ljan);
+   if(janMiniMapa)
+      janMiniMapa->Fechar(gui->ljan);
 
    delete(ia);
    return(1);

@@ -33,6 +33,7 @@ int main(int argc, char **argv)
  
    GLuint tituloID;
    int result = Engine->TelaInicial(ON_INIT,&tituloID);
+   int estado = ON_INIT;
    int charCreation;
    
    while(result != EXIT_GAME)
@@ -56,15 +57,16 @@ int main(int argc, char **argv)
       //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
       glDeleteTextures(1,&tituloID);
 
-      if( (result != OPTIONS ) && ((result != NEW_GAME) || 
-          ( ((result == NEW_GAME)) && (charCreation == CHAR_CONFIRM) ) ))
+      if( (result == CONTINUE_GAME) || 
+          ( ((result == NEW_GAME)) && (charCreation == CHAR_CONFIRM) ) ) 
       {
          Engine->Rodar(screen);
-         result = Engine->TelaInicial(IN_GAME,&tituloID);
+         estado = IN_GAME;
+         result = Engine->TelaInicial(estado,&tituloID);
       }
       else
       {
-         result = Engine->TelaInicial(ON_INIT,&tituloID);
+         result = Engine->TelaInicial(estado,&tituloID);
       }
       charCreation = CHAR_OTHER;
        

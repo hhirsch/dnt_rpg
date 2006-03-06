@@ -71,6 +71,10 @@ class engine
       /* Abre a tela de opções/ ajustes do jogo */
       int TelaOpcoes(GLuint* idTextura);
 
+      /* Tratamento de Janelas Especiais */
+      void abreMiniMapa();
+      void abreAtalhos();
+
    private:
 
       /* Redefine a tela para o tamanho da tela atual
@@ -89,9 +93,6 @@ class engine
       /* Testa Colisão do personagem no ponto determinado. */
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
-      /* Tratamento de Janelas Especiais */
-      void abreMiniMapa();
-      void abreAtalhos();
 
       Map* mapa;                   /* Mapa Utilizado pela Engine */
       cursor* cursors;             /* Utilized mouse cursors */
