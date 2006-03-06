@@ -310,6 +310,12 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    glDeleteTextures(1,&texturaCarga);
    glDeleteTextures(1,&texturaTexto);
 
+   if(!mapa->music.empty())
+   {
+      snd->StopMusic(musica);
+      musica = snd->LoadMusic(mapa->music);
+   }
+
    return(1);
 
 }
@@ -1987,12 +1993,6 @@ void engine::abreAtalhos()
  *********************************************************************/
 int engine::Rodar(SDL_Surface *surface)
 {
-
-   if(musica)
-   {
-      snd->StopMusic(musica);
-   }
-   musica = snd->LoadMusic("../data/music/musica2.ogg");
 
    snd->LoadSample(SOUND_WALK,"../data/sndfx/passos.ogg");
 

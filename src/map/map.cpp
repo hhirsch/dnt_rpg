@@ -259,9 +259,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
            if(quadradoVisivel(maux->x1,0,maux->z1,maux->x2,
                               altura,maux->z2,matriz))
            {
-              double X = (maux->x2-maux->x1) / 16 ;
-              double Z = (maux->z2-maux->z1) / 16;
-              double Y = (altura+1) / 16;
+              double X = (maux->x2-maux->x1) / maux->dX;
+              double Z = (maux->z2-maux->z1) / maux->dZ;
+              double Y = (altura+1) / maux->dY;
            /* Face de frente */
               glNormal3i(0,0,1);
               glTexCoord2f(0,Y);
@@ -378,6 +378,7 @@ Map::Map()
    meiosFio = NULL; 
    MapSquares = NULL;
    portas = NULL;
+   music = "";
    /* Inicia Estruturas */
    Objetos = new(LmapObjeto);
    x = z = xInic = zInic = 0;
@@ -488,6 +489,13 @@ int Map::open(char* arquivo)
             portas = porta;
             break;
          }
+         case 'M': /* Define Musica */
+         {
+            fgets(buffer,sizeof(buffer),arq);
+            sscanf(buffer,"%s",nome);
+            music = nome;
+            break;
+         }
          case 'm': /* Define Muros (paredes) e Meios-Fio */
          {
             switch(buffer[1])
@@ -496,8 +504,9 @@ int Map::open(char* arquivo)
                {
                   maux = new(muro);
                   fgets(buffer, sizeof(buffer),arq);
-                  sscanf(buffer,"%f,%f,%f,%f",&maux->x1,&maux->z1,
-                                              &maux->x2,&maux->z2);
+                  sscanf(buffer,"%f,%f,%f,%f:%d,%d,%d",&maux->x1,&maux->z1,
+                                              &maux->x2,&maux->z2,
+                                              &maux->dX,&maux->dY,&maux->dZ);
                   double tmp;
                   if(maux->x2 < maux->x1)
                   {
@@ -920,7 +929,8 @@ int Map::save(const char* arquivo)
    int x1,z1,x2,z2;
    while(maux)
    {
-      fprintf(arq,"muro %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
+      fprintf(arq,"muro %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
+              maux->z2,maux->dX,maux->dY,maux->dZ);
       fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura));
       maux = (muro*)maux->proximo;
    }

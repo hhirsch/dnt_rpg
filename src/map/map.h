@@ -39,6 +39,7 @@ typedef struct _conection
 typedef struct _muro
 {
    GLfloat x1,z1,x2,z2;   /* Coordenates */
+   GLuint dX,dY,dZ;       /* Delta X, Y & Z of texture cycle */
    int textura;           /* Texture ID */
    struct _muro* proximo; /* Next on list */
 }muro;
@@ -172,6 +173,7 @@ class Map
       muro* muros;          /* Map Walls */
       muro* meiosFio;       /* Map Meio Fios (how translate this?) */
       door* portas;         /* Map Doors */
+      string music;         /* Map Music */
 
       private:
          char* name;           /* File name of loaded map */

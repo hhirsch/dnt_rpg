@@ -974,6 +974,7 @@ int main(int argc, char **argv)
                       m = m->proximo;
                 }
                 maux = new(muro);
+                maux->dX = 16; maux->dY = 16; maux->dZ = 16;
                 if ( (estado == MUROX) || (estado == MUROZ))
                 {
                     maux->proximo = mapa->muros;
@@ -1391,6 +1392,30 @@ int main(int argc, char **argv)
             orObj -= 1;
             orObj %= 360;
          }
+
+         if( (teclas[SDLK_x]) && (maux) )
+         {
+            if(teclas[SDLK_LSHIFT])
+              maux->dX--;
+            else
+              maux->dX++;
+         }
+         if( (teclas[SDLK_y]) && (maux) )
+         {
+            if(teclas[SDLK_LSHIFT])
+              maux->dY--;
+            else
+              maux->dY++;
+         }
+         if( (teclas[SDLK_z]) && (maux) )
+         {
+            if(teclas[SDLK_LSHIFT])
+              maux->dZ--;
+            else
+              maux->dZ++;
+         }
+
+
       }
       glClearColor(0,0,0,1);
       glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
