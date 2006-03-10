@@ -110,6 +110,8 @@ void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto,
                    GLuint texturaCarga, char* texto,
                    GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
 {
+   glClearColor(0,0,0,1);
+   glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDeleteTextures(1,texturaTexto);
    cor_Definir(0,0,0);
    retangulo_Colorir(img,0,0,255,31,0);
