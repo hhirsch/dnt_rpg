@@ -1,0 +1,31 @@
+0.0.2
+../data/texturas/info.png
+Loading NPC: %s
+Loading Character: %s
+Loading Map: %s
+Puting Windows on Screen
+Done!
+Door
+Nothing
+Map
+ShortCuts
+Press F1 for Help
+FPS:
+New
+Continue
+Save
+Load
+Exit
+Options
+Skill
+Total Free Points:
+Points:
+Cost:
+Confirm
+Cancel
+Options
+Music Volume:
+Effects Volume:
+../data/skills/Ingles/
+What the HEll!! Square Map Out of bounds!\n
+Argh! Can't init SDL!\n

@@ -1,0 +1,31 @@
+0.0.2
+../data/texturas/infoPort.png
+Carregando NPC: %s
+Carregando Personagem: %s
+Carregando Mapa: %s
+Colocando Janelas na Tela
+Pronto!
+Porta
+Nada
+Mapa
+Atalhos
+Pressione F1 para Ajuda
+FPS:
+Novo
+Continuar
+Salvar
+Carregar
+Sair
+Opções
+Opções
+Volume da Música:
+Volume dos Efeitos:
+Perícias
+Pontos Livres:
+Pontos:
+Custo:
+Confirmar
+Cancelar
+../data/skills/Portugues/
+Argh! Mapa fora dos limites!\n
+Oxi! Não consegui iniciar o SDL!\n
