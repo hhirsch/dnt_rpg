@@ -273,9 +273,9 @@ int skillWindow::treat(interface* inter)
    if( externalSkill->m_skills[curSkill].pontos > 
        externalSkill->m_skills[curSkill].antPontos )
    {
-      txtPoints->Cores.corTexto.R = 40;
-      txtPoints->Cores.corTexto.G = 147;
-      txtPoints->Cores.corTexto.B = 100; 
+      txtPoints->Cores.corTexto.R = 13;
+      txtPoints->Cores.corTexto.G = 250;
+      txtPoints->Cores.corTexto.B = 85; 
    }
    else
    {

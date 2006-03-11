@@ -5,6 +5,8 @@
 
 #define VERSION                "0.0.2"
 
+#define TEXTURE_INFORMATION    "../data/texturas/infoPort.png"
+
 
 /* dccnit.cpp */
 #define LOAD_NPC               "Cargando NPC: %s"
@@ -28,6 +30,22 @@
 #define INITIAL_LOAD        "Cargar"
 #define INITIAL_EXIT        "Salir"
 #define INITIAL_OPTIONS     "Opciones"
+
+/* skillwindow.cpp */
+#define SKILL_TITLE         "Habilidad"
+#define SKILL_FREE_POINTS   "Puntos Libres:"
+#define SKILL_POINTS        "Puntos:"
+#define SKILL_COST          "Coste:"
+#define SKILL_CONFIRM       "Aceptar"
+#define SKILL_CANCEL        "Cancelar"
+
+/* options.cpp */
+#define OPTIONS_TITLE        "Opciones"
+#define OPTIONS_MUSIC_VOLUME "Volumen de Música:"
+#define OPTIONS_SNDFX_VOLUME "Volumen de Efectos:"
+
+/* DIRECTORYS */
+#define SKILLS_DIR          "../data/skills/Portugues/"
 
 
 /* ERROS */

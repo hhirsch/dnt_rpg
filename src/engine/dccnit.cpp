@@ -974,7 +974,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
          if( (janAtalhos) && (!pronto) )
          {
-            ObjTxt->texto = "Nothing"; 
+            ObjTxt->texto = OBJ_NOTHING; 
             janAtalhos->Desenhar();
          }
         }

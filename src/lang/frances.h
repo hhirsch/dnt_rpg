@@ -4,7 +4,7 @@
 
 
 #define VERSION                "0.0.2"
-
+#define TEXTURE_INFORMATION    "../data/texturas/info.png"
 
 /* dccnit.cpp */
 #define LOAD_NPC               "Chargement NPC: %s"
@@ -29,6 +29,21 @@
 #define INITIAL_EXIT        "Sortir"
 #define INITIAL_OPTIONS     "Préférences"
 
+/* options.cpp */
+#define OPTIONS_TITLE        "Préférences"
+#define OPTIONS_MUSIC_VOLUME "Volume de Musique:"
+#define OPTIONS_SNDFX_VOLUME "Volume d'Effets:"
+
+/* skillwindow.cpp */
+#define SKILL_TITLE         "Qualifications"
+#define SKILL_FREE_POINTS   "Points Libres :"
+#define SKILL_POINTS        "Points:"
+#define SKILL_COST          "Coût:"
+#define SKILL_CONFIRM       "Confirmez"
+#define SKILL_CANCEL        "Décommandez"
+
+/* DIRECTORYS */
+#define SKILLS_DIR          "../data/skills/Portugues/"
 
 /* Erros */
 #define ERROR_MAP_OUT       "Argh! Carte hors des limites!\n"
