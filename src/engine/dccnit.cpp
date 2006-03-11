@@ -132,6 +132,7 @@ void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto,
  *********************************************************************/
 int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
 {
+   char texto[255];
    char* arq = (char*) malloc(sizeof(char)*255);
    /* to avoyd lose mapname while deleting map */
    strcpy(arq,arqMapa);
@@ -153,7 +154,8 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    retangulo_Colorir(img,0,0,255,31,0);
    cor_Definir(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
-   escxy(img,128,0,"Loading Map...");
+   sprintf(texto,LOAD_MAP,arqMapa);
+   escxy(img,128,0,texto);
    GLuint texturaTexto;
    carregaTextura(img,&texturaTexto);
 
@@ -205,8 +207,9 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoX = 30;
    per->posicaoLadoZ = 20;*/
 
+   sprintf(texto, LOAD_NPC, "Ente");
    atualizaCarga(img,&texturaTexto,texturaCarga,
-                 "Loading NPC: Jacaranda",
+                 texto,
                  proj, modl, viewPort);
 
 
@@ -216,8 +219,9 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoX = 300;
    per->posicaoLadoZ = 300;
 
+   sprintf(texto, LOAD_NPC, "Arvore");
    atualizaCarga(img,&texturaTexto,texturaCarga,
-                 "Loading NPC: Arvore",
+                 texto,
                  proj, modl, viewPort);
 
 
@@ -228,8 +232,9 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoZ = 720;
 
 
+   sprintf(texto, LOAD_NPC, "Ratazana");
    atualizaCarga(img,&texturaTexto,texturaCarga,
-                 "Loading NPC: Ratazana",
+                 texto,
                  proj, modl, viewPort);
 
    per = NPCs->InserirPersonagem(2,2,5,3,
@@ -238,8 +243,9 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoX = 128;
    per->posicaoLadoZ = 400;
 
+   sprintf(texto, LOAD_NPC, "Ameiva");
    atualizaCarga(img,&texturaTexto,texturaCarga,
-                 "Loading NPC: Ameiva",
+                 texto,
                  proj, modl, viewPort);
 
    per = NPCs->InserirPersonagem(2,2,5,3,
@@ -254,8 +260,9 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        if(PCs)
           delete(PCs);
        PCs  = new (Lpersonagem);
+       sprintf(texto, LOAD_PC, "Logan");
        atualizaCarga(img,&texturaTexto,texturaCarga,
-                 "Loading Character: Logan",
+                 texto,
                  proj, modl, viewPort);
        per = PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Logan",
@@ -269,7 +276,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    }
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
-                 "Puting Windows...",
+                 LOAD_WINDOWS,
                  proj, modl, viewPort);
 
    if(janMiniMapa)
@@ -305,7 +312,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);*/
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
-                 "Done!",
+                 LOAD_DONE,
                  proj, modl, viewPort);
 
    SDL_FreeSurface(img);
@@ -834,7 +841,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                  cursors->SetActual(CURSOR_DOOR);
                  if(janAtalhos)
                  {
-                    ObjTxt->texto = "Door"; 
+                    ObjTxt->texto = OBJ_DOOR; 
                     janAtalhos->Desenhar();
                  }
                  if(Mbotao & SDL_BUTTON(1))
@@ -998,7 +1005,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if(keys[SDLK_F1])
       {
          //Tela de Informações // HELP
-         SDL_Surface* img = IMG_Load("../data/texturas/info.png");
+         SDL_Surface* img = IMG_Load(TEXTURE_INFORMATION);
          SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                           img->w,img->h,32,
                           0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
@@ -1951,7 +1958,8 @@ void engine::abreMiniMapa()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,"Map",1,1,NULL,NULL);
+   janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,WINDOW_MAP,1,1,
+                                          NULL,NULL);
 
    botPerMiniMap = janMiniMapa->objetos->InserirBotao(x,z,x+2,z+2,255,255,128,
                                                       "",0,NULL);
@@ -1978,13 +1986,15 @@ void engine::abreMiniMapa()
  *********************************************************************/
 void engine::abreAtalhos()
 {
-   janAtalhos=gui->ljan->InserirJanela(0,472,511,599,"ShortCuts",1,1,NULL,NULL);
-   FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,"FPS:");
+   janAtalhos=gui->ljan->InserirJanela(0,472,511,599,WINDOW_SHORTCUTS,1,1,
+                                       NULL,NULL);
+   FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,
+                                                 WINDOW_SHORTCUTS_FPS);
    ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,76,180,101,0,
-                                                          "Press F1 for Help!");
+                                                    WINDOW_SHORTCUTS_HELP);
    ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
    ObjTxt->Cores.corCont[1].B = 255;
-   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,150,71,0,"Nothing");
+   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,150,71,0,OBJ_NOTHING);
    
    janAtalhos->ptrExterno = &janAtalhos;
    janAtalhos->Abrir(gui->ljan);

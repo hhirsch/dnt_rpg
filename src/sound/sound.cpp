@@ -8,7 +8,7 @@ sound::sound()
 {
    if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,CHANNELS,BUFFER)<0)
    {
-      printf("Erro ao abrir dispositivo de audio\n");
+      printf("Error while opening SDL_MIX\n");
       return;
    }
    Mix_AllocateChannels(SAMPLE_CHANNELS);
@@ -52,7 +52,7 @@ Mix_Music* sound::LoadMusic(string file)
    music = Mix_LoadMUS( file.c_str() );
    if(!music)
    {
-      printf("Error ao abrir arquivo de música: %s\n",file.c_str());
+      printf("Error while opening music file: %s\n",file.c_str());
    }
    Mix_PlayMusic(music, -1);
    Mix_VolumeMusic(musicVolume);

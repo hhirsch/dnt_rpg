@@ -5,6 +5,7 @@
 
 #define VERSION                "0.0.2"
 
+#define TEXTURE_INFORMATION    "../data/texturas/info.png"
 
 /* dccnit.cpp */
 #define LOAD_NPC               "Loading NPC: %s"

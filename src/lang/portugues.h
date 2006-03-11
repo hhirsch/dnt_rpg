@@ -5,6 +5,8 @@
 
 #define VERSION                "0.0.2"
 
+#define TEXTURE_INFORMATION    "../data/texturas/infoPort.png"
+
 /* dccnit.cpp */
 #define LOAD_NPC               "Carregando NPC: %s"
 #define LOAD_PC                "Carregando Personagem: %s"
