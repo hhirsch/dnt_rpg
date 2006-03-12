@@ -48,26 +48,19 @@ GLuint personagem::loadTexture(const string& strFilename)
    }
 
    
-   SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       img->w,img->h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   SDL_BlitSurface(img,NULL,imgPotencia,NULL);  
-
-
    glGenTextures(1, &pId);
    glBindTexture(GL_TEXTURE_2D, pId);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
-                0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h, 
+                0, GL_RGB, GL_UNSIGNED_BYTE, img->pixels);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imgPotencia->w,
-                     imgPotencia->h, GL_RGBA, GL_UNSIGNED_BYTE, 
-                     imgPotencia->pixels );
+   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
+                     img->h, GL_RGB, GL_UNSIGNED_BYTE, 
+                     img->pixels );
 
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
-   SDL_FreeSurface(imgPotencia);
 
    //free(arq);
 

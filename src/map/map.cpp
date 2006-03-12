@@ -119,19 +119,15 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
    strcpy(tex->arqNome,arq);
    strcpy(tex->nome,nome);
 
-   SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       img->w,img->h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   SDL_BlitSurface(img,NULL,imgPotencia,NULL);
- 
    tex->R = R;
    tex->G = G;
    tex->B = B;
 
    glGenTextures(1, &(tex->indice));
    glBindTexture(GL_TEXTURE_2D, tex->indice);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
-                0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h, 
+                0, GL_RGB, GL_UNSIGNED_BYTE, img->pixels);
+
 
    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
@@ -140,15 +136,14 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 
-   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imgPotencia->w,
-                     imgPotencia->h, GL_RGBA, GL_UNSIGNED_BYTE, 
-                     imgPotencia->pixels );
+   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
+                     img->h, GL_RGB, GL_UNSIGNED_BYTE, 
+                     img->pixels );
 
    mapa->numtexturas++;
 
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
-   SDL_FreeSurface(imgPotencia);
    return(tex->indice);
 }
 
@@ -204,19 +199,19 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
                    }
                 }
                 MapSquares[Xaux][Zaux]->visivel = 1;
-                glTexCoord2f(0.0,0.0); 
+                glTexCoord2i(0,0);
                 glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
                             MapSquares[Xaux][Zaux]->h1 , 
                             MapSquares[Xaux][Zaux]->z1 );
-                glTexCoord2f(0.0,1.0);
+                glTexCoord2i(0,1);
                 glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
                             MapSquares[Xaux][Zaux]->h2 , 
                             MapSquares[Xaux][Zaux]->z2);
-                glTexCoord2f(1.0,1.0);
+                glTexCoord2i(1,1);
                 glVertex3f( MapSquares[Xaux][Zaux]->x2, 
                             MapSquares[Xaux][Zaux]->h3 , 
                             MapSquares[Xaux][Zaux]->z2 );
-                glTexCoord2f(1.0,0.0);
+                glTexCoord2i(1,0);
                 glVertex3f( MapSquares[Xaux][Zaux]->x2, 
                             MapSquares[Xaux][Zaux]->h4, 
                             MapSquares[Xaux][Zaux]->z1 );

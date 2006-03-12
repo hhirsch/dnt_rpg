@@ -108,6 +108,8 @@ void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16],
                     double profundidade);
 
 void carregaTextura(SDL_Surface* img, GLuint* textID);
+void carregaTexturaRGBA(SDL_Surface* img, GLuint* textID);
+
 
 #endif
 

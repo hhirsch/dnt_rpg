@@ -121,7 +121,7 @@ void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto,
    cor_Definir(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
    escxy(img,128,0,texto);
-   carregaTextura(img,texturaTexto);
+   carregaTexturaRGBA(img,texturaTexto);
    
    AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
    AtualizaTela2D(*texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
@@ -142,17 +142,17 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
-   SDL_Surface* img = IMG_Load("../data/texturas/carregar.jpg");
-   SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       img->w,img->h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   SDL_BlitSurface(img,NULL,fig,NULL);
-   SDL_FreeSurface(img);
-   img = SDL_CreateRGBSurface(SDL_HWSURFACE,
+   SDL_Surface* fig = IMG_Load("../data/texturas/carregar.jpg");
+   
+   GLuint texturaCarga;
+   carregaTextura(fig,&texturaCarga);
+   SDL_FreeSurface(fig);
+   
+
+   SDL_Surface* img = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        256,32,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-
-
+   
    cor_Definir(0,0,0);
    retangulo_Colorir(img,0,0,255,31,0);
    cor_Definir(200,20,20);
@@ -160,12 +160,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    sprintf(texto,language.LOAD_MAP.c_str(),arqMapa);
    escxy(img,128,0,texto);
    GLuint texturaTexto;
-   carregaTextura(img,&texturaTexto);
-
-   GLuint texturaCarga;
-   carregaTextura(fig,&texturaCarga);
-   SDL_FreeSurface(fig);
-
+   carregaTexturaRGBA(img,&texturaTexto);
 
    AtualizaFrustum(matrizVisivel,proj,modl);
    AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
@@ -501,18 +496,11 @@ void engine::Iniciar(SDL_Surface *screen)
    gluQuadricTexture(atmosfera, GL_FALSE);
 
    SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
-   SDL_Surface* fg = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                      img->w,img->h,32,
-                      0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   SDL_BlitSurface(img,NULL,fg,NULL);
-   SDL_FreeSurface(img);
 
    glGenTextures(1, &ceu);
    glBindTexture(GL_TEXTURE_2D, ceu);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fg->w, fg->h, 
-                0, GL_RGBA, GL_UNSIGNED_BYTE, fg->pixels);
-   /*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 
+                0, GL_RGB, GL_UNSIGNED_BYTE, img->pixels);
 
    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
@@ -521,11 +509,11 @@ void engine::Iniciar(SDL_Surface *screen)
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 
-   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, fg->w,
-                     fg->h, GL_RGBA, GL_UNSIGNED_BYTE, 
-                     fg->pixels );
+   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
+                     img->h, GL_RGB, GL_UNSIGNED_BYTE, 
+                     img->pixels );
 
-   SDL_FreeSurface(fg);
+   SDL_FreeSurface(img);
 
 }
 
@@ -1010,15 +998,9 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
          //Tela de Informações // HELP
          SDL_Surface* img = IMG_Load(language.TEXTURE_INFORMATION.c_str());
-         SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                          img->w,img->h,32,
-                          0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-         SDL_BlitSurface(img,NULL,fig,NULL);
-         SDL_FreeSurface(img);
 
          GLuint texturaInfo;
-         carregaTextura(fig,&texturaInfo);
-         SDL_FreeSurface(fig);
+         carregaTextura(img,&texturaInfo);
 
          glDisable(GL_LIGHTING);
          AtualizaFrustum(matrizVisivel,proj,modl);
