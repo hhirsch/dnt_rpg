@@ -13,6 +13,10 @@
 #define ACT_LNG_SUB  7
 #define ACT_CANCEL   8
 
+#define NM_PORTUGUES "Português"
+#define NM_INGLES    "English"
+#define NM_FRANCES   "Français"
+#define NM_ESPANHOL  "Español"
 
 int cAction = ACT_NONE;
 
@@ -39,6 +43,19 @@ int botaoSndSub(void *jan,void *ljan,SDL_Surface *screen)
    cAction = ACT_SND_SUB;
    return(1);
 }
+
+int botaoLngSum(void *jan,void *ljan,SDL_Surface *screen)
+{
+   cAction = ACT_LNG_SUM;
+   return(1);
+}
+
+int botaoLngSub(void *jan,void *ljan,SDL_Surface *screen)
+{
+   cAction = ACT_LNG_SUB;
+   return(1);
+}
+
 
 int botaoConf(void *jan,void *ljan,SDL_Surface *screen)
 {
@@ -90,7 +107,37 @@ void options::Save()
       return;
    }
    fprintf(arq,"Sons: %d %d %d",musicVolume,sndfxVolume,langNumber);
+   language.ReloadFile(langNumber);
    fclose(arq);
+}
+
+string options::languageName()
+{
+   string saux;
+   switch(langNumber)
+   {
+      case LANG_PORTUGUES:
+      {
+         saux = NM_PORTUGUES;
+         break;
+      }
+      case LANG_ESPANHOL:
+      {
+         saux = NM_ESPANHOL;
+         break;
+      }
+      case LANG_FRANCES: 
+      {
+         saux = NM_FRANCES;
+         break;
+      }
+      case LANG_INGLES:
+      {
+         saux = NM_INGLES;
+         break;
+      }
+   }
+   return(saux);
 }
 
 /****************************************************************
@@ -140,6 +187,22 @@ void options::DisplayOptionsScreen(interface* inter)
    window->objetos->InserirBotao(198,38,208,55,window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  ">",0,&botaoSndSum);
+
+   /* Language Things */
+   prevLanguage = langNumber;
+   saux = languageName();
+   qt = window->objetos->InserirQuadroTexto(8,56,145,73,0,
+                                         language.OPTIONS_LANGUAGE.c_str());
+   qt->fonte = FMINI;
+   window->objetos->InserirBotao(131,56,141,73,window->Cores.corBot.R,
+                                 window->Cores.corBot.G,window->Cores.corBot.B,
+                                 "<",0,&botaoLngSub);
+   txtLanguage = window->objetos->InserirQuadroTexto(142,56,212,73,1,
+                                 saux.c_str());
+   txtLanguage->fonte = FMINI;
+   window->objetos->InserirBotao(213,56,223,73,window->Cores.corBot.R,
+                                 window->Cores.corBot.G,window->Cores.corBot.B,
+                                 ">",0,&botaoLngSum);
 
    /* Confirm Button */
    window->objetos->InserirBotao(181,225,251,244, window->Cores.corBot.R,
@@ -193,6 +256,22 @@ int options::Treat(interface* interf)
          }
          break;
       }
+      case ACT_LNG_SUM:
+      {
+         if(langNumber < LANG_LAST)
+         {
+            langNumber++;
+         }
+         break;
+      }
+      case ACT_LNG_SUB:
+      {
+         if(langNumber > LANG_FIRST)
+         {
+            langNumber--;
+         }
+         break;
+      }
       case ACT_CONFIRM: 
       {
          Save();
@@ -205,6 +284,7 @@ int options::Treat(interface* interf)
       {
          musicVolume = prevMusicVolume;
          sndfxVolume = prevSndfxVolume;
+         langNumber  = prevLanguage;
          window->Fechar(interf->ljan);
          cAction = ACT_NONE;
          return(OPTIONSW_CANCEL);
@@ -218,6 +298,8 @@ int options::Treat(interface* interf)
 
    sprintf(tmp,"%d",sndfxVolume);
    txtSndfxVolume->texto = tmp;
+
+   txtLanguage->texto = languageName();
 
    window->Desenhar();
    cAction = ACT_NONE;

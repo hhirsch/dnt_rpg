@@ -31,9 +31,13 @@ class options
       string       fileName;
       quadroTexto* txtMusicVolume;
       quadroTexto* txtSndfxVolume;
+      quadroTexto* txtLanguage;
       int          prevMusicVolume;
       int          prevSndfxVolume;
+      int          prevLanguage;
       lang         language;
+
+      string languageName();
 };
 
 

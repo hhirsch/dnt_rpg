@@ -3,7 +3,7 @@
 |               Version 0.0.2                  |
 ================================================
  - Support for Cal3D format for character models;
- - Support for sound and music;
+ - Support for sound and music (SDL_Mixer);
  - Basic Character Creation (class, skills, etc);
  - Some animations added;
  - Gui is now avaible on graphical engine;
@@ -25,6 +25,9 @@
  - Optimized intern map representation;
  - Colored mouse cursors;
  - New things on maps;
+ - Wrote player's book document;
+ - Full English & Portuguese support;
+ - Partial French & Spanish support;
  - Some bugs fixed.
 
 ================================================

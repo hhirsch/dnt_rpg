@@ -87,6 +87,7 @@ void lang::ReloadFile(int lng)
    getline(file, OPTIONS_TITLE);
    getline(file, OPTIONS_MUSIC_VOLUME);
    getline(file, OPTIONS_SNDFX_VOLUME);
+   getline(file, OPTIONS_LANGUAGE);
 
    /* skillwindow.cpp */
    getline(file, SKILL_TITLE);
@@ -139,6 +140,7 @@ string lang::VERSION;
    string lang::OPTIONS_TITLE;
    string lang::OPTIONS_MUSIC_VOLUME;
    string lang::OPTIONS_SNDFX_VOLUME;
+   string lang::OPTIONS_LANGUAGE;
 
    
    string lang::SKILL_TITLE;

@@ -17,15 +17,16 @@ Save
 Load
 Exit
 Options
+Options
+Music Volume:
+Effects Volume:
+Language:
 Skill
 Total Free Points:
 Points:
 Cost:
 Confirm
 Cancel
-Options
-Music Volume:
-Effects Volume:
 ../data/skills/Ingles/
 What the HEll!! Square Map Out of bounds!\n
 Argh! Can't init SDL!\n

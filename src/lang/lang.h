@@ -4,11 +4,13 @@
 #include <string>
 using namespace std;
 
+#define LANG_FIRST     1
+#define LANG_LAST      4
 
-#define LANG_PORTUGUES 1
+#define LANG_PORTUGUES 4
 #define LANG_ESPANHOL  2
 #define LANG_FRANCES   3
-#define LANG_INGLES    4
+#define LANG_INGLES    1
 
 class lang
 {
@@ -48,6 +50,7 @@ class lang
    static string OPTIONS_TITLE;
    static string OPTIONS_MUSIC_VOLUME;
    static string OPTIONS_SNDFX_VOLUME;
+   static string OPTIONS_LANGUAGE;
 
    /* skillwindow.cpp */
    static string SKILL_TITLE;

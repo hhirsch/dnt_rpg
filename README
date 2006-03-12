@@ -28,6 +28,10 @@ software and hardware. They are:
    Hardware:
    Video Card with 3D aceleration, OpenGl compatible.
 
+   We not recommend to use it on Window$, because on it the 
+   render is slower and the quality is worst (to  only  say
+   tecnology's arguments). 
+
 ==============================================================
 |                      II - Instalation                      |
 ==============================================================
@@ -43,7 +47,7 @@ go to the directory dccnitghtmare and run "make".
    farrer@anamabeka:~/$ cd dccnitghtmare
    farrer@anamabeka:~/dccnitghtmare/$ make
 
-   b) WINDOWS
+   b) WINDOWS (We hope you're not using it on Ruindow$).
 
    To  compile  dccnitghtmare  on  windows,  you'll  need  the 
 dev-c++  compiler  (a.k.a. gcc port and ide to Windows).  Open
@@ -106,9 +110,9 @@ button exit.
 |                       IV - Contacts                        |
 ==============================================================
 
-  Messages can be delivered to dccnightmare@dcc.ufmg.br
+  Messages can be delivered to dccnightmare@listas.dcc.ufmg.br
 
   http://dccnitghtmare.sf.net
 
-DccNiTghtmare - dccnightmare@dcc.ufmg.br.
+DccNiTghtmare - dccnightmare@listas.dcc.ufmg.br.
 
