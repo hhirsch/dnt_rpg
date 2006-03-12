@@ -7,11 +7,11 @@ o Chair ../data/models/objetos/icex/cadeira.dcc
 o Adaga ../data/models/objetos/armas/adaga.dcc
 o Faca ../data/models/objetos/armas/faca.dcc
 o Farrer's_Guitar ../data/models/objetos/geral/guitarra.dcc
-o Door ../data/models/objetos/geral/porta.dcc
 o IcexTable ../data/models/objetos/icex/mesa_redonda.dcc
 o Stop ../data/models/objetos/geral/placa_pare.dcc
 o Computer ../data/models/objetos/geral/computador.dcc
 o Small_Kalashnikov ../data/models/objetos/armas/kalashnikov_pequena.dcc
+o Door ../data/models/objetos/geral/porta.dcc
 t ../data/texturas/chao_asfalto.jpg ../data/texturas/chao_asfalto.jpg 85 85 85
 t ../data/texturas/chao_madeira.jpg ../data/texturas/chao_madeira.jpg 115 58 29
 t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
@@ -251,7 +251,6 @@ ut ../data/texturas/chao_asfalto.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
 uc 0.000000,0.000000,0.000000,0.000000:../data/texturas/chao_madeira.jpg
-uo Door 1:1,9:40.695976,531.302490:-93:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
