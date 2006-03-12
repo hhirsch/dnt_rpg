@@ -175,7 +175,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
-uc 424.517548,322.251404,446.207275,508.493011:../data/mapas/um.map
+uc 424.517548,322.251404,446.207275,508.493011:../data/mapas/porta.map
 #Z: 8
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
