@@ -30,7 +30,7 @@ Ljanela::~Ljanela()
 /*********************************************************************
  *                Insere Uma nova Janela na Lista                    *
  *********************************************************************/
-janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,char *text,
+janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
                          int maximiz,int redmens, 
                          void (*procAtiva)(janela* jan, SDL_Surface *screen),
                          void (*procPres)(janela* jan,int x, int y, 
@@ -142,7 +142,7 @@ void janela::Desenhar()
    {
       erro_Mensagem("Fonte farso.fnt nao encontrada!\n",3);
    }
-   escxy(cara,39,-2,texto);
+   escxy(cara,39,-2,texto.c_str());
    /* Desenho dos Botoes */
    Tobjeto *obj=objetos->primeiro->proximo;
    int aux;
@@ -198,7 +198,7 @@ void janela::BarraInativa()
    retangulo_Colorir(cara,36,3,dx-3,12,0);
    cor_Definir(0,0,0);
    selFonte(FFARSO,ESQUERDA,1);
-   escxy(cara,39,-2,texto);
+   escxy(cara,39,-2,texto.c_str());
 }
 
 void janela::BarraAtiva()
@@ -208,7 +208,7 @@ void janela::BarraAtiva()
    retangulo_Colorir(cara,36,3,dx-3,12,0);
    cor_Definir(Cores.corTexto.R,Cores.corTexto.G,Cores.corTexto.B);
    selFonte(FFARSO,ESQUERDA,1);
-   escxy(cara,39,-2,texto);
+   escxy(cara,39,-2,texto.c_str());
 }
 
 /*********************************************************************

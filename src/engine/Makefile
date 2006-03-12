@@ -11,12 +11,14 @@ ENDNET = ../net/
 ENDIA = ../ia/
 ENDCLASSES = ../classes/
 ENDSOUND = ../sound/
+ENDLANG = ../lang/
 OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)ai.o
 OBJSCLASSES = $(ENDCLASSES)skills.o
 OBJSSOUND = $(ENDSOUND)sound.o
+OBJSLANG = $(ENDLANG)lang.o
 OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o skillwindow.o teste.o
 BIN = ../../bin/
 SUPREDE = #-DREDE #comente para nao ter suporte a rede na bagaca
@@ -69,9 +71,9 @@ teste.o: teste.cpp
 	@$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o teste.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSSOUND) $(OBJS) 
+teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJS) 
 	@printf "Linking dccnitghtmare... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSSOUND) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSSOUND) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:

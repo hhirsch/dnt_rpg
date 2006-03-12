@@ -68,6 +68,9 @@ engine::engine()
    musica = NULL;
 
    option = new options("dcc.opc");
+
+   language.ReloadFile(option->langNumber);
+
    snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
 
    /* Define a ultima vez em que desenhou (so por simplicidade) */
@@ -107,7 +110,7 @@ engine::~engine()
 }
 
 void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto, 
-                   GLuint texturaCarga, char* texto,
+                   GLuint texturaCarga, const char* texto,
                    GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
 {
    glClearColor(0,0,0,1);
@@ -154,7 +157,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    retangulo_Colorir(img,0,0,255,31,0);
    cor_Definir(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
-   sprintf(texto,LOAD_MAP,arqMapa);
+   sprintf(texto,language.LOAD_MAP.c_str(),arqMapa);
    escxy(img,128,0,texto);
    GLuint texturaTexto;
    carregaTextura(img,&texturaTexto);
@@ -207,7 +210,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoX = 30;
    per->posicaoLadoZ = 20;*/
 
-   sprintf(texto, LOAD_NPC, "Ente");
+   sprintf(texto, language.LOAD_NPC.c_str(), "Ente");
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  texto,
                  proj, modl, viewPort);
@@ -219,7 +222,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoX = 300;
    per->posicaoLadoZ = 300;
 
-   sprintf(texto, LOAD_NPC, "Arvore");
+   sprintf(texto, language.LOAD_NPC.c_str(), "Arvore");
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  texto,
                  proj, modl, viewPort);
@@ -232,7 +235,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoZ = 720;
 
 
-   sprintf(texto, LOAD_NPC, "Ratazana");
+   sprintf(texto, language.LOAD_NPC.c_str(), "Ratazana");
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  texto,
                  proj, modl, viewPort);
@@ -243,7 +246,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->posicaoLadoX = 128;
    per->posicaoLadoZ = 400;
 
-   sprintf(texto, LOAD_NPC, "Ameiva");
+   sprintf(texto, language.LOAD_NPC.c_str(), "Ameiva");
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  texto,
                  proj, modl, viewPort);
@@ -260,7 +263,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
        if(PCs)
           delete(PCs);
        PCs  = new (Lpersonagem);
-       sprintf(texto, LOAD_PC, "Logan");
+       sprintf(texto, language.LOAD_PC.c_str(), "Logan");
        atualizaCarga(img,&texturaTexto,texturaCarga,
                  texto,
                  proj, modl, viewPort);
@@ -276,7 +279,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    }
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
-                 LOAD_WINDOWS,
+                 language.LOAD_WINDOWS.c_str(),
                  proj, modl, viewPort);
 
    if(janMiniMapa)
@@ -312,7 +315,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);*/
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
-                 LOAD_DONE,
+                 language.LOAD_DONE.c_str(),
                  proj, modl, viewPort);
 
    SDL_FreeSurface(img);
@@ -401,7 +404,8 @@ int engine::TelaPersonagens(GLuint* idTextura)
    Uint8* keys;
    int x,y;
 
-   skills* sk = new skills(SKILLS_DIR,"../data/skills/skills.skl"); 
+   skills* sk = new skills(language.SKILLS_DIR.c_str(),
+                           "../data/skills/skills.skl"); 
    skillWindow* skWindow = new skillWindow(sk, 20, gui);
 
    while( (charCreation != CHAR_CANCEL) && 
@@ -841,7 +845,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                  cursors->SetActual(CURSOR_DOOR);
                  if(janAtalhos)
                  {
-                    ObjTxt->texto = OBJ_DOOR; 
+                    ObjTxt->texto = language.OBJ_DOOR.c_str(); 
                     janAtalhos->Desenhar();
                  }
                  if(Mbotao & SDL_BUTTON(1))
@@ -974,7 +978,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
          if( (janAtalhos) && (!pronto) )
          {
-            ObjTxt->texto = OBJ_NOTHING; 
+            ObjTxt->texto = language.OBJ_NOTHING.c_str(); 
             janAtalhos->Desenhar();
          }
         }
@@ -1005,7 +1009,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if(keys[SDLK_F1])
       {
          //Tela de Informações // HELP
-         SDL_Surface* img = IMG_Load(TEXTURE_INFORMATION);
+         SDL_Surface* img = IMG_Load(language.TEXTURE_INFORMATION.c_str());
          SDL_Surface* fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                           img->w,img->h,32,
                           0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
@@ -1958,7 +1962,8 @@ void engine::abreMiniMapa()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,WINDOW_MAP,1,1,
+   janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,
+                                          language.WINDOW_MAP.c_str(),1,1,
                                           NULL,NULL);
 
    botPerMiniMap = janMiniMapa->objetos->InserirBotao(x,z,x+2,z+2,255,255,128,
@@ -1986,15 +1991,17 @@ void engine::abreMiniMapa()
  *********************************************************************/
 void engine::abreAtalhos()
 {
-   janAtalhos=gui->ljan->InserirJanela(0,472,511,599,WINDOW_SHORTCUTS,1,1,
+   janAtalhos=gui->ljan->InserirJanela(0,472,511,599,
+                                  language.WINDOW_SHORTCUTS.c_str(),1,1,
                                        NULL,NULL);
    FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,
-                                                 WINDOW_SHORTCUTS_FPS);
+                                  language.WINDOW_SHORTCUTS_FPS.c_str());
    ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,76,180,101,0,
-                                                    WINDOW_SHORTCUTS_HELP);
+                                  language.WINDOW_SHORTCUTS_HELP.c_str());
    ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
    ObjTxt->Cores.corCont[1].B = 255;
-   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,150,71,0,OBJ_NOTHING);
+   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,150,71,0,
+                                 language.OBJ_NOTHING.c_str());
    
    janAtalhos->ptrExterno = &janAtalhos;
    janAtalhos->Abrir(gui->ljan);

@@ -9,7 +9,9 @@
 #define ACT_SND_SUM  3
 #define ACT_SND_SUB  4
 #define ACT_CONFIRM  5
-#define ACT_CANCEL   6
+#define ACT_LNG_SUM  6
+#define ACT_LNG_SUB  7
+#define ACT_CANCEL   8
 
 
 int cAction = ACT_NONE;
@@ -62,7 +64,7 @@ options::options(string file)
       return;
    }
    fileName = file;
-   fscanf(arq,"%s %d %d",&buffer[0],&musicVolume,&sndfxVolume);
+   fscanf(arq,"%s %d %d %d",&buffer[0],&musicVolume,&sndfxVolume,&langNumber);
    if(musicVolume > SDL_MIX_MAXVOLUME)
    {
       musicVolume = SDL_MIX_MAXVOLUME;
@@ -87,7 +89,7 @@ void options::Save()
       printf("Error while opening Options: %s\n",fileName.c_str());
       return;
    }
-   fprintf(arq,"Sons: %d %d",musicVolume,sndfxVolume);
+   fprintf(arq,"Sons: %d %d %d",musicVolume,sndfxVolume,langNumber);
    fclose(arq);
 }
 
@@ -103,13 +105,15 @@ void options::DisplayOptionsScreen(interface* inter)
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
-   window = inter->ljan->InserirJanela(316,186,571,441,OPTIONS_TITLE,
+   window = inter->ljan->InserirJanela(316,186,571,441,
+                                       language.OPTIONS_TITLE.c_str(),
                                        1,1,NULL,NULL);
 
    /* Music Things */
    sprintf(tmp,"%d",musicVolume);
    saux = tmp;
-   qt = window->objetos->InserirQuadroTexto(8,20,145,37,0,OPTIONS_MUSIC_VOLUME);
+   qt = window->objetos->InserirQuadroTexto(8,20,145,37,0,
+                                         language.OPTIONS_MUSIC_VOLUME.c_str());
    qt->fonte = FMINI;
    window->objetos->InserirBotao(146,20,156,37,window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
@@ -124,7 +128,8 @@ void options::DisplayOptionsScreen(interface* inter)
    /* Sound Effects Things */
    sprintf(tmp,"%d",sndfxVolume);
    saux = tmp;
-   qt = window->objetos->InserirQuadroTexto(8,38,145,55,0,OPTIONS_SNDFX_VOLUME);
+   qt = window->objetos->InserirQuadroTexto(8,38,145,55,0,
+                                         language.OPTIONS_SNDFX_VOLUME.c_str());
    qt->fonte = FMINI;
    window->objetos->InserirBotao(146,38,156,55,window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
@@ -139,12 +144,12 @@ void options::DisplayOptionsScreen(interface* inter)
    /* Confirm Button */
    window->objetos->InserirBotao(181,225,251,244, window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 SKILL_CONFIRM,1,&botaoConf);
+                                 language.SKILL_CONFIRM.c_str(),1,&botaoConf);
    
    /* Cancel Button */
    window->objetos->InserirBotao(8,225,78,244, window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 SKILL_CANCEL,1,&botaoCanc);
+                                 language.SKILL_CANCEL.c_str(),1,&botaoCanc);
 
    /* Open Skill Window */
    window->ptrExterno = &window;

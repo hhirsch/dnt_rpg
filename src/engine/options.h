@@ -2,6 +2,7 @@
 #define _options_h
 
 #include "../gui/farso.h"
+#include "../lang/lang.h"
 #include <string>
 using namespace std;
 
@@ -22,6 +23,7 @@ class options
 
       int     musicVolume;
       int     sndfxVolume;
+      int     langNumber;
       janela* window;
 
 
@@ -31,6 +33,7 @@ class options
       quadroTexto* txtSndfxVolume;
       int          prevMusicVolume;
       int          prevSndfxVolume;
+      lang         language;
 };
 
 

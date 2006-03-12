@@ -3,6 +3,7 @@
 
 #include "../gui/farso.h"
 #include "../classes/skills.h"
+#include "../lang/lang.h"
 
 #define CHAR_CANCEL  0
 #define CHAR_CONFIRM 1
@@ -31,6 +32,7 @@ class skillWindow
       quadroTexto* txtPoints;        /* Actual Points Text */
       quadroTexto* txtCosts;         /* Actual Cost Text */
       figura*      skFig;            /* Actual skill Image */
+      lang language;
  
 };
 

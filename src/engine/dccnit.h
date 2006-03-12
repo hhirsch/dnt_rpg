@@ -17,6 +17,7 @@
 #include "skillwindow.h"
 #include "../classes/skills.h"
 #include "../sound/sound.h"
+#include "../lang/lang.h"
 #ifdef REDE
   #include "../net/client.h"
 #endif
@@ -123,6 +124,8 @@ class engine
       options* option;             /* Current Options */
 
       AI* ia;                      /* Modulo de IA. Temporiamente aqui. */
+
+      lang language;
 
 };
 

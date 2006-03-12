@@ -6,6 +6,7 @@
 #define _initial_h
 
 #include "../gui/farso.h"
+#include "../lang/lang.h"
 
 /* initialScreen Returns Values */
 #define EXIT_GAME     0
@@ -30,6 +31,7 @@ class initialScreen
                            GLuint* idTextura);
    private:
       interface* gui;  /* GUI for Windows */
+      lang language;
 
 };
 

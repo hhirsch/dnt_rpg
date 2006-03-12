@@ -70,13 +70,15 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    }
    
    /* Create Skill Window */
-   window = inter->ljan->InserirJanela(316,186,571,441,SKILL_TITLE,
+   window = inter->ljan->InserirJanela(316,186,571,441,
+                                       language.SKILL_TITLE.c_str(),
                                        1,1,NULL,NULL);
 
    /* Free Points */
    sprintf(tmp,"%d",avaiblePoints);
    saux = tmp;
-   window->objetos->InserirQuadroTexto(8,20,125,33,0,SKILL_FREE_POINTS);
+   window->objetos->InserirQuadroTexto(8,20,125,33,0,
+                                       language.SKILL_FREE_POINTS.c_str());
    txtAvaiblePoints = window->objetos->InserirQuadroTexto(127,20,162,33,0,
                                                                   saux.c_str());
 
@@ -108,7 +110,8 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    skFig->fig = externalSkill->m_skills[curSkill].imagem;
  
    /* Skill Points */
-   window->objetos->InserirQuadroTexto(52,200,101,214,0,SKILL_POINTS);
+   window->objetos->InserirQuadroTexto(52,200,101,214,0,
+                                       language.SKILL_POINTS.c_str());
    sprintf(tmp,"%d",externalSkill->m_skills[curSkill].pontos);
    saux = tmp;
    txtPoints = window->objetos->InserirQuadroTexto(113,198,135,216,1,
@@ -122,7 +125,8 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
                                  "<",0,&botaoSub);
 
    /* Skill Costs */
-   window->objetos->InserirQuadroTexto(160,200,215,214,0,SKILL_COST);
+   window->objetos->InserirQuadroTexto(160,200,215,214,0,
+                                       language.SKILL_COST.c_str());
    sprintf(tmp,"%d",externalSkill->m_skills[curSkill].mod);
    saux = tmp;
    txtCosts = window->objetos->InserirQuadroTexto(216,200,251,214,0,
@@ -134,13 +138,13 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
 
    /* Confirm Button */
    baux = window->objetos->InserirBotao(181,225,251,244, window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                        SKILL_CONFIRM,1,&botaoConfirm);
+                                window->Cores.corBot.G,window->Cores.corBot.B,
+                                language.SKILL_CONFIRM.c_str(),1,&botaoConfirm);
    
    /* Cancel Button */
    baux = window->objetos->InserirBotao(8,225,78,244, window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                        SKILL_CANCEL,1,&botaoCancel);
+                                 language.SKILL_CANCEL.c_str(),1,&botaoCancel);
    
    /* Open Skill Window */
    window->ptrExterno = &window;

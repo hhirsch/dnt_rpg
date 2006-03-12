@@ -1,6 +1,6 @@
 # DccNiTghtmare is public domain. Do whatever you want with this code.
  
-SUBSYSTEMS = gui etc classes map ia sound engine app
+SUBSYSTEMS = lang gui etc classes map ia sound engine app
 
 # type 'make all' to visit and build subsystems
 all: buildparts

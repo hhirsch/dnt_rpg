@@ -13,12 +13,16 @@
 #include "objeto.h"
 #include "lista.h"
 
+#include <string>
+using namespace std;
+
+
 class janela: public Tobjeto
 {
    public:
       int x1,y1,x2,y2;           /* Dimensoes da Janela */
       int minX,minY;             /* Tamanho minimo dos eixos da Janela */
-      char *texto;               /* Texto de Titulo da Janela */
+      string texto;              /* Texto de Titulo da Janela */
       int Rjan,Gjan,Bjan;        /* Cor da Janela */
       int Rbar,Gbar,Bbar;        /* Cor da barra principal da Janela */
       int Rtxt,Gtxt,Btxt;        /* Cor do Texto de titulo da Janela */
@@ -86,7 +90,7 @@ class Ljanela: public Tlista
        * procAtiva   -> procedimento chamado qdo a janela for ativada
        * maximiz     -> !=0 se maximizavel
        * redmens     -> !=0 se redmensionavel*/
-      janela* InserirJanela(int xa,int ya,int xb,int yb,char *text,
+      janela* InserirJanela(int xa,int ya,int xb,int yb,const char *text,
                          int maximiz,int redmens, 
                          void (*procAtiva)(janela* jan, SDL_Surface *screen),
                          void (*procPres)(janela* jan,int x, int y, 
