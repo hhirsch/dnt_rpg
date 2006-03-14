@@ -1108,17 +1108,23 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             redesenha = true;
             andou = true;
          }
-         else if( (varX != 0) && (podeAndar(varX,0,0)))
+         else if( ((varX > 0) && (podeAndar(passo,0,0))) ||
+                  ((varX < 0) && (podeAndar(-passo,0,0))) )       
          {
-            centroX += varX;
-            PCs->personagemAtivo->posicaoLadoX += varX;
+            if(varX < 0)
+               passo *= -1;
+            centroX += passo;
+            PCs->personagemAtivo->posicaoLadoX += passo;
             redesenha = true;
             andou = true;
          }
-         else if( (varZ != 0) && podeAndar(0,varZ,0)) 
+         else if( ((varZ > 0) && podeAndar(0,passo,0)) ||
+                  ((varZ < 0) && podeAndar(0,-passo,0)) )
          {
-            centroZ += varZ;
-            PCs->personagemAtivo->posicaoLadoZ += varZ;
+            if(varZ < 0) 
+               passo *= -1;
+            centroZ += passo;
+            PCs->personagemAtivo->posicaoLadoZ += passo;
             redesenha = true;
             andou = true;
          }
@@ -1142,17 +1148,24 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
              redesenha = true;
              andou  = true;
          }
-         else if((varX != 0) && (podeAndar(varX,0,0)))
+         else if( ((varX > 0) && (podeAndar(passo,0,0))) ||
+                  ((varX < 0) && (podeAndar(-passo,0,0))) ) 
+                   
          {
-              PCs->personagemAtivo->posicaoLadoX += varX;
-              centroX += varX;
+              if(varX < 0 )
+                 passo *= -1;
+              PCs->personagemAtivo->posicaoLadoX += passo;
+              centroX += passo;
               redesenha = true;
               andou = true;
          }
-         else if((varZ!=0) && (podeAndar(0,varZ,0)))
+         else if( ((varZ > 0) && (podeAndar(0,passo,0))) ||
+                  ((varZ < 0) && (podeAndar(0,-passo,0))) )
          {
-              PCs->personagemAtivo->posicaoLadoZ += varZ;
-              centroZ += varZ;
+              if( varZ < 0 )
+                 passo *= -1;
+              PCs->personagemAtivo->posicaoLadoZ += passo;
+              centroZ += passo;
               redesenha = true;
               andou = true;
          }

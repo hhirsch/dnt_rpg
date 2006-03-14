@@ -131,11 +131,9 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
 
    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                   GL_LINEAR_MIPMAP_LINEAR );
+                   GL_NEAREST_MIPMAP_LINEAR );
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-
+   
    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
                      img->h, GL_RGB, GL_UNSIGNED_BYTE, 
                      img->pixels );
@@ -150,7 +148,8 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
 /********************************************************************
  *                           Draw  Map                              *
  ********************************************************************/
-int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[6][4])
+int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+              GLfloat matriz[6][4])
 {
         int textura = -1;
         int i, Xaux = 0, Zaux = 0;
@@ -164,6 +163,10 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
         glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
         glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
         glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 16.0784313725);
+
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+
         
         glBegin(GL_QUADS);
         glNormal3i(0,1,0);
@@ -182,6 +185,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
                 textura = MapSquares[Xaux][Zaux]->textura;
                 glEnable(GL_TEXTURE_2D);
                 glBindTexture(GL_TEXTURE_2D, textura);
+                glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+                glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+
                 glBegin(GL_QUADS);
              }
              if( (MapSquares[Xaux][Zaux]->visivel) || 
@@ -225,6 +231,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
         glEnd();
 
         /* Faz o desenho dos muros e meios Fio*/
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+
         muro* maux = muros;
         int fezMeioFio = 0;
         GLfloat altura = MUROALTURA;
@@ -249,6 +258,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, GLfloat matriz[
               textura = maux->textura;
               glEnable(GL_TEXTURE_2D);
               glBindTexture(GL_TEXTURE_2D, textura);
+              glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+              glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+
               glBegin(GL_QUADS);
            }
            if(quadradoVisivel(maux->x1,0,maux->z1,maux->x2,

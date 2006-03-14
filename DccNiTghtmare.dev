@@ -1,7 +1,7 @@
 [Project]
 FileName=DccNiTghtmare.dev
 Name=DccNiTghtmare
-UnitCount=68
+UnitCount=69
 Type=1
 Ver=1
 ObjFiles=
@@ -719,6 +719,16 @@ BuildCmd=
 
 [Unit68]
 FileName=src\engine\options.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit69]
+FileName=src\lang\lang.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
