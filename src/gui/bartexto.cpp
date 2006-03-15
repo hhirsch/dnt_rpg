@@ -308,6 +308,14 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
             c[0] = 'u';
       }
       else 
+      if( teclas[SDLK_v])
+      {
+          if (maiuscula)
+            c[0] = 'V';
+          else
+            c[0] = 'v';
+      }
+      else 
       if( teclas[SDLK_w])
       {
           if (maiuscula)
