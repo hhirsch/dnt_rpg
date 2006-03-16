@@ -180,7 +180,6 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
    {
       glEnable(GL_FOG);
       {
-        //GLfloat fogCor[4] = {CORNEBLINA_R,CORNEBLINA_G,CORNEBLINA_B,1.0}; 
         glFogi(GL_FOG_MODE,GL_LINEAR);
         glFogfv(GL_FOG_COLOR,mapa->fog.color);
         glFogf(GL_FOG_DENSITY,mapa->fog.density);
@@ -188,6 +187,10 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
         glFogf(GL_FOG_START,mapa->fog.start);
         glFogf(GL_FOG_END,mapa->fog.end);
       }
+   }
+   else
+   {
+      glDisable(GL_FOG);
    }
 
    /*atualizaCarga(img,&texturaTexto,texturaCarga,

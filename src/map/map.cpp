@@ -543,11 +543,11 @@ int Map::open(string arquivo)
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                  if(nomeMuroTexturaAtual.compare(nomeArq) != 0 )
-                  {
+                  //if(nomeMuroTexturaAtual.compare(nomeArq) != 0 )
+                  //{
                      nomeMuroTexturaAtual = nome;
                      IDmuroTexturaAtual = IDTextura(this,nome,&R,&G,&B);
-                  }
+                  //}
                   maux->textura = IDmuroTexturaAtual;
                   break;
                }

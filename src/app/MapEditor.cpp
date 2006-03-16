@@ -137,6 +137,59 @@ void inserirObjetoMapa(GLfloat xReal, GLfloat zReal, int orObj,
      printf("Out of Map's Limits!\n");
 }
 
+void inserirPortal(float portalX[2], float portalZ[2], int qx, int qz)
+{
+   Square* s = mapa->quadradoRelativo(qx,qz);
+   if(s)
+   {
+       if(portalX[0] > portalX[1])
+       {
+           GLfloat tmp = portalX[0];
+           portalX[0] = portalX[1];
+           portalX[1] = tmp;
+       }
+       if(portalZ[0] > portalZ[1])
+       {
+           GLfloat tmp = portalZ[0];
+           portalZ[0] = portalZ[1];
+           portalZ[1] = tmp;
+       } 
+       s->mapConection.x1 = portalX[0];
+       s->mapConection.x2 = portalX[1];
+       s->mapConection.z1 = portalZ[0];
+       s->mapConection.z2 = portalZ[1];
+       s->mapConection.mapName = "TODO"; //TODO mapname prompt
+       s->mapConection.active = true;
+       printf("MapPortal on %d %d\n",qx,qz);
+
+      
+       int minqx, minqz, maxqx, maxqz;
+       minqx = (int)(portalX[0]) / SQUARESIZE;
+       minqz = (int)(portalZ[0]) / SQUARESIZE;
+       maxqx = (int)(portalX[1]) / SQUARESIZE;
+       maxqz = (int)(portalZ[1]) / SQUARESIZE; 
+       int X1, Z1;
+       Square* q;
+       for(X1 = minqx; X1<=maxqx; X1++)
+       {
+          for(Z1 = minqz; Z1 <=maxqz; Z1++) 
+          {
+             q = mapa->quadradoRelativo(X1,Z1);
+             if((q) && (q != s))
+             {
+                 q->mapConection.x1 = portalX[0];
+                 q->mapConection.x2 = portalX[1];
+                 q->mapConection.z1 = portalZ[0];
+                 q->mapConection.z2 = portalZ[1];
+                 q->mapConection.mapName = "TODO"; //TODO mapname prompt
+                 q->mapConection.active = true;
+                 printf("MapPortal on %d %d\n",X1,Z1);
+             }
+          }
+       }
+   }
+}
+
 
 int estado;
 GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
@@ -1117,26 +1170,7 @@ int main(int argc, char **argv)
              {
                  portalX[1] = xReal;
                  portalZ[1] = zReal;
-                 Square* s = mapa->quadradoRelativo(qx,qz);
-                 s->mapConection.active = true;
-                 if(portalX[0] > portalX[1])
-                 {
-                    GLfloat tmp = portalX[0];
-                    portalX[0] = portalX[1];
-                    portalX[1] = tmp;
-                 }
-                 if(portalZ[0] > portalZ[1])
-                 {
-                    GLfloat tmp = portalZ[0];
-                    portalZ[0] = portalZ[1];
-                    portalZ[1] = tmp;
-                 } 
-                 s->mapConection.x1 = portalX[0];
-                 s->mapConection.x2 = portalX[1];
-                 s->mapConection.z1 = portalZ[0];
-                 s->mapConection.z2 = portalZ[1];
-                 s->mapConection.mapName = "TODO"; //TODO mapname prompt
-                 printf("MapPortal on %d %d\n",qx,qz);
+                 inserirPortal(portalX, portalZ, qx, qz); 
                  estado = PORTAL;
              }
              else
