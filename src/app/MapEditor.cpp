@@ -466,7 +466,7 @@ int inserirTextura(Map* mapa, const char* arq, const char* nome)
    }
 
    /* Insere realmente a textura */ 
-   tex = (texture*) malloc(sizeof(texture));
+   tex = (texture*) new(texture);
    if(mapa->numtexturas == 0)
    {
       mapa->Texturas = tex;
@@ -478,11 +478,11 @@ int inserirTextura(Map* mapa, const char* arq, const char* nome)
       mapa->Texturas = tex;
    }
 
-   tex->nome = (char*) malloc((strlen(nome)+1)*sizeof(char));
-   tex->arqNome = (char*) malloc((strlen(arq)+1)*sizeof(char));
+   /*tex->nome = (char*) malloc((strlen(nome)+1)*sizeof(char));
+   tex->arqNome = (char*) malloc((strlen(arq)+1)*sizeof(char));*/
 
-   strcpy(tex->arqNome,arq);
-   strcpy(tex->nome,nome);
+   tex->arqNome = arq;
+   tex->nome = nome;
 
    SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
@@ -493,7 +493,7 @@ int inserirTextura(Map* mapa, const char* arq, const char* nome)
  
    Uint8 R,G,B;
    
-   Uint32 pixel = pixel_Pegar(imgPotencia,10,10);
+   Uint32 pixel = pixel_Pegar(imgPotencia,15,15);
    SDL_GetRGB(pixel,imgPotencia->format, &R, &G, &B);
    tex->R = R;
    tex->G = G;
@@ -752,11 +752,11 @@ int main(int argc, char **argv)
       qx = (int)xReal / SQUARESIZE; 
       qz = (int)zReal / SQUARESIZE;
 
-      if(qx > mapa->x-1)
-        qx = mapa->x-1;
+      if(qx > mapa->x)
+        qx = mapa->x;
 
-      if(qz > mapa->z-1) 
-        qz = mapa->z-1;
+      if(qz > mapa->z) 
+        qz = mapa->z;
 
       if(gui->ManipulaEventos(mouseX,mouseY,Mbotao,teclas)==NADA)
       {
@@ -776,12 +776,15 @@ int main(int argc, char **argv)
                mz1 = muroPorta->z1;
                mz2 = muroPorta->z2;
                muro* novoMuro;
+               novoMuro = new(muro);
+               novoMuro->dX = muroPorta->dX;
+               novoMuro->dY = muroPorta->dY;
+               novoMuro->dZ = muroPorta->dZ;
                muro* maux;
                GLMmodel* modelo = (GLMmodel*)porta->modelo3d;
                if( orPorta == 0 )
                {
                   muroPorta->x2 = xPorta;
-                  novoMuro = new(muro);
                   novoMuro->x1 = xPorta + (modelo->x2 - modelo->x1);
                   novoMuro->x2 = mx2;
                   novoMuro->z1 = mz1;
@@ -790,7 +793,6 @@ int main(int argc, char **argv)
                else
                {
                   muroPorta->z2 = zPorta - (modelo->x2 - modelo->x1);
-                  novoMuro = new(muro);
                   novoMuro->z1 = zPorta;
                   novoMuro->x2 = mx2;
                   novoMuro->x1 = mx1;
@@ -1029,11 +1031,11 @@ int main(int argc, char **argv)
             }
             else if( (estado == MUROXINICQUAD) || (estado == MEIOXINICQUAD))
             {
-                maux->x2 = (qx+1)*SQUARESIZE;
+                maux->x2 = (qx)*SQUARESIZE;
             }
             else if( (estado == MUROZINICQUAD) || (estado == MEIOZINICQUAD) )
             {
-               maux->z2 = (qz+1)*SQUARESIZE;
+               maux->z2 = (qz)*SQUARESIZE;
             }
          }
          else

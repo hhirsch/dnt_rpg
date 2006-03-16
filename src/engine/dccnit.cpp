@@ -133,12 +133,10 @@ void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto,
 /*********************************************************************
  *                       Carrega Mapa na Engine                      *
  *********************************************************************/
-int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
+int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
 {
    char texto[255];
-   char* arq = (char*) malloc(sizeof(char)*255);
-   /* to avoyd lose mapname while deleting map */
-   strcpy(arq,arqMapa);
+   string arqVelho = "nada";
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
@@ -157,7 +155,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    retangulo_Colorir(img,0,0,255,31,0);
    cor_Definir(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
-   sprintf(texto,language.LOAD_MAP.c_str(),arqMapa);
+   sprintf(texto,language.LOAD_MAP.c_str(),arqMapa.c_str());
    escxy(img,128,0,texto);
    GLuint texturaTexto;
    carregaTexturaRGBA(img,&texturaTexto);
@@ -171,10 +169,12 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
    /* Carregando o Mapa */
    if(mapa) 
    {
+     arqVelho = mapa->name;
      delete(mapa);
    }
    mapa = new(Map);
-   mapa->open(arq);
+   mapa->name = arqVelho;
+   mapa->open(arqMapa);
 
    if(mapa->fog.enabled)
    {
@@ -294,7 +294,7 @@ int engine::CarregaMapa(char* arqMapa, int RecarregaPCs)
 
    glEnable(GL_LIGHTING);
 
-   free(arq);
+   //free(arq);
 
    /* Coloca Personagem Ativo na posicao de Inicio do Mapa */
    PCs->personagemAtivo->posicaoLadoX = mapa->xInic;

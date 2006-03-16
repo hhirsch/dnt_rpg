@@ -60,7 +60,7 @@ class engine
       void Desenhar();
 
       /* Faz a carga do Mapa */
-      int CarregaMapa(char* arqMapa, int RecarregaPCs);
+      int CarregaMapa(string arqMapa, int RecarregaPCs);
 
       /* Abre a Tela Inicial, com seus tratamentos.
        * Retorna 0 se é para sair, 1 caso contrario */

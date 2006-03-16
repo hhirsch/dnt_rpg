@@ -22,7 +22,7 @@ Square::Square()
    flags = 0;
    h1 = h2 = h3 = h4 = 0;
    mapConection.active = false;
-   mapConection.mapName = (char*)malloc(255*sizeof(char));
+   mapConection.mapName = "Nothing";
    int aux;
    for(aux=0;aux<MAXOBJETOS;aux++)
    {
@@ -42,21 +42,20 @@ Square::Square()
  ********************************************************************/
 Square::~Square()
 {
-   free(mapConection.mapName);
    return;
 }
 
 /********************************************************************
  *                             Texture ID                           *
  ********************************************************************/
-int IDTextura(Map* mapa, char* textura, GLuint* R, GLuint* G, GLuint* B)
+int IDTextura(Map* mapa, string textura, GLuint* R, GLuint* G, GLuint* B)
 {
    /* procura pela textura */
    int aux=0;
    texture* tex = mapa->Texturas;
    while(aux < mapa->numtexturas)
    {
-      if(!strcmp(tex->nome, textura))
+      if(!(tex->nome.compare(textura)) )
       {
          *R = tex->R; *G = tex->G; *B = tex->B;
          return(tex->indice); //a textura ja esta presente 
@@ -70,7 +69,7 @@ int IDTextura(Map* mapa, char* textura, GLuint* R, GLuint* G, GLuint* B)
 /*********************************************************************
  *                   Returns texture's name                          *
  *********************************************************************/
-char* NomeTextura(Map* mapa, GLuint ID)
+string NomeTextura(Map* mapa, GLuint ID)
 {
    int aux=0;
    texture* tex = mapa->Texturas;
@@ -88,20 +87,20 @@ char* NomeTextura(Map* mapa, GLuint ID)
 /********************************************************************
  *                         Insert texture                           *
  ********************************************************************/
-GLuint InserirTextura(Map* mapa, char* arq, char* nome, 
+GLuint InserirTextura(Map* mapa, string arq, string nome, 
                     GLuint R, GLuint G, GLuint B)
 {
    texture* tex;
 
-   SDL_Surface* img = IMG_Load(arq);
+   SDL_Surface* img = IMG_Load(arq.c_str());
    if(!img)
    {
-      printf("Error Opening Texture: %s\n",arq);
+      printf("Error Opening Texture: %s\n",arq.c_str());
       return(0);
    }
 
    /* Insere realmente a textura */ 
-   tex = (texture*) malloc(sizeof(texture));
+   tex = new(texture);
    if(mapa->numtexturas == 0)
    {
       mapa->Texturas = tex;
@@ -113,11 +112,11 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
       mapa->Texturas = tex;
    }
 
-   tex->nome = (char*) malloc((strlen(nome)+1)*sizeof(char));
-   tex->arqNome = (char*) malloc((strlen(arq)+1)*sizeof(char));
+   //tex->nome = (char*) malloc((strlen(nome)+1)*sizeof(char));
+   //tex->arqNome = (char*) malloc((strlen(arq)+1)*sizeof(char));
 
-   strcpy(tex->arqNome,arq);
-   strcpy(tex->nome,nome);
+   tex->arqNome = arq.c_str();
+   tex->nome = nome.c_str();
 
    tex->R = R;
    tex->G = G;
@@ -142,6 +141,7 @@ GLuint InserirTextura(Map* mapa, char* arq, char* nome,
 
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
+
    return(tex->indice);
 }
 
@@ -379,7 +379,7 @@ Map::Map()
 {
    numtexturas = 0;
    Texturas = NULL;
-   name = NULL;
+   name = "oxi!";
    squareInic = NULL;
    muros = NULL;
    meiosFio = NULL; 
@@ -405,29 +405,34 @@ Square* Map::quadradoRelativo(int xa, int za)
 /********************************************************************
  *                       Open Map File                              *
  ********************************************************************/
-int Map::open(char* arquivo)
+int Map::open(string arquivo)
 {
    FILE* arq;        // arquivo utilizado para o mapa
    char buffer[128]; // buffer utilziado para ler
    char nomeArq[128], nome[128];
+   string arqVelho;
    int i;
    int posX,posZ;    //posicao atual do quadrado anterior relativo
    int IDtexturaAtual = -1;
    int IDmuroTexturaAtual = -1;
-   char* nomeMuroTexturaAtual = "nada\0";
+   string nomeMuroTexturaAtual = "nada";
    int numObjetosAtual = 0;
    int pisavel=0;
    GLuint R,G,B;
    GLuint Ratual,Gatual,Batual;
+  
    
-   if(!(arq = fopen(arquivo,"r")))
+   if(!(arq = fopen(arquivo.c_str(),"r")))
    {
-      printf("Error while opening map file: %s\n",arquivo);
+      printf("Error while opening map file: %s\n",arquivo.c_str());
 	return(0);
    }
 
    /* Define o nome do mapa */
+   arqVelho = name;
    name = arquivo;
+
+   xInic = -1;
 
    /* Faz a leitura do tamanho do mapa */   
    fscanf(arq, "%s", buffer);
@@ -438,11 +443,12 @@ int Map::open(char* arquivo)
    }
    else
    {
-      printf("Map Size not defined: %s\n", arquivo); 
+      printf("Map Size not defined: %s\n", arquivo.c_str()); 
       printf(" Found %s, where espected T iXi\n",buffer);
       fclose(arq);
       return(0);
    }
+
 
    /* Alloc MapSquares */
    MapSquares = (Square***) malloc(x*sizeof(Square*));
@@ -459,6 +465,7 @@ int Map::open(char* arquivo)
       }
    }
 
+   
    muro* maux = NULL;
    door* porta = NULL;
 
@@ -536,7 +543,7 @@ int Map::open(char* arquivo)
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                  if(strcmp(nomeArq,nomeMuroTexturaAtual))
+                  if(nomeMuroTexturaAtual.compare(nomeArq) != 0 )
                   {
                      nomeMuroTexturaAtual = nome;
                      IDmuroTexturaAtual = IDTextura(this,nome,&R,&G,&B);
@@ -575,10 +582,13 @@ int Map::open(char* arquivo)
          case 'i':/* Define a posição Inicial */
          {
             fgets(buffer, sizeof(buffer), arq); //até final da linha
-            sscanf(buffer, "%d,%d",&xInic,&zInic);
-            squareInic = MapSquares[xInic][zInic];
-            xInic = (xInic)*SQUARESIZE + HALFSQUARESIZE;
-            zInic = (zInic)*SQUARESIZE + HALFSQUARESIZE; 
+            if(xInic == -1)
+            {
+               sscanf(buffer, "%d,%d",&xInic,&zInic);
+               squareInic = MapSquares[xInic][zInic];
+               xInic = (xInic)*SQUARESIZE + HALFSQUARESIZE;
+               zInic = (zInic)*SQUARESIZE + HALFSQUARESIZE; 
+            }
             break;
          }
          case 'o': /* Insere Objetos no Mapa */
@@ -638,8 +648,18 @@ int Map::open(char* arquivo)
                         &MapSquares[posX][posZ]->mapConection.x2,
                         &MapSquares[posX][posZ]->mapConection.z2,
                         nome );
-                 strcpy(MapSquares[posX][posZ]->mapConection.mapName,nome);
+                 MapSquares[posX][posZ]->mapConection.mapName = nome;
                  MapSquares[posX][posZ]->mapConection.active = true;
+
+                 if(arqVelho.compare(nome) == 0)
+                 {
+                     xInic = posX;
+                     zInic = posZ;
+                     squareInic = MapSquares[xInic][zInic];
+                     xInic = (xInic)*SQUARESIZE + HALFSQUARESIZE;
+                     zInic = (zInic)*SQUARESIZE + HALFSQUARESIZE;
+                 }
+
                  break;
                }
                case 't': /* Define a Textura do Quadrado */
@@ -678,7 +698,7 @@ int Map::open(char* arquivo)
                   break;
                }
                default:
-                       printf("What the Hell: %s on %s\n",buffer,arquivo);
+                       printf("What the Hell: %s on %s\n",buffer,arquivo.c_str());
                        break;
             }
             break; 
@@ -689,7 +709,7 @@ int Map::open(char* arquivo)
              break;
          }
          default:
-                 printf("What is: %s on %s ?\n",buffer,arquivo);
+                 printf("What is: %s on %s ?\n",buffer,arquivo.c_str());
                  break;
       }
    }
@@ -888,14 +908,14 @@ void Map::optimize()
 /********************************************************************
  *                          Save Map File                           *
  ********************************************************************/
-int Map::save(const char* arquivo)
+int Map::save(string arquivo)
 {
    optimize();
    FILE* arq;
 
-   if(!(arq = fopen(arquivo,"w")))
+   if(!(arq = fopen(arquivo.c_str(),"w")))
    {
-      printf("Error while creating: %s to save\n",arquivo);
+      printf("Error while creating: %s to save\n",arquivo.c_str());
 	return(0);
    }
    
@@ -918,7 +938,7 @@ int Map::save(const char* arquivo)
    texture* tex = (texture*)Texturas;
    while(tex)
    {
-      fprintf(arq,"t %s %s %d %d %d\n",tex->nome,tex->arqNome,tex->R,tex->G,tex->B);
+      fprintf(arq,"t %s %s %d %d %d\n",tex->nome.c_str(),tex->arqNome.c_str(),tex->R,tex->G,tex->B);
       tex = (texture*)tex->proximo;
    }
 
@@ -938,7 +958,7 @@ int Map::save(const char* arquivo)
    {
       fprintf(arq,"muro %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
               maux->z2,maux->dX,maux->dY,maux->dZ);
-      fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura));
+      fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura).c_str());
       maux = (muro*)maux->proximo;
    }
 
@@ -947,7 +967,7 @@ int Map::save(const char* arquivo)
    while(maux)
    {
       fprintf(arq,"meioFio %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
-      fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura));
+      fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura).c_str());
       maux = (muro*)maux->proximo;
    }
 
@@ -965,7 +985,7 @@ int Map::save(const char* arquivo)
                   MapSquares[x1][z1]->h3,
                   MapSquares[x1][z1]->h4);
           fprintf(arq,"ut %s\n",NomeTextura(this, 
-                                            MapSquares[x1][z1]->textura));
+                      MapSquares[x1][z1]->textura).c_str());
           if( MapSquares[x1][z1]->mapConection.active )
           {
               fprintf(arq,"uc %f,%f,%f,%f:%s\n",
@@ -973,7 +993,7 @@ int Map::save(const char* arquivo)
                       MapSquares[x1][z1]->mapConection.z1,
                       MapSquares[x1][z1]->mapConection.x2,
                       MapSquares[x1][z1]->mapConection.z2,
-                      MapSquares[x1][z1]->mapConection.mapName);
+                      MapSquares[x1][z1]->mapConection.mapName.c_str());
           }
           int aux;
           for(aux=0;aux<MAXOBJETOS;aux++)
@@ -1017,9 +1037,8 @@ Map::~Map()
    {
       au = tex;
       tex = tex->proximo;
-      free(au->nome);
       glDeleteTextures(1,&(au->indice));
-      free(au);
+      delete(au);
    }
    
    /* Acabando com os muros */

@@ -7,7 +7,8 @@
 #include "mapobjeto.h"
 #include "mapfog.h"
 #include "maplights.h"
-
+#include <string>
+using namespace std;
 
 /* Flag masks */
 #define PISAVEL 1
@@ -30,7 +31,7 @@ typedef struct _conection
 {
    bool active;         /* Active Conection */
    GLfloat x1,z1,x2,z2; /* Map Position */
-   char* mapName;       /* Map filename */ 
+   string mapName;       /* Map filename */ 
 }conection;
 
 /****************************************************
@@ -49,8 +50,8 @@ typedef struct _muro
  ****************************************************/
 typedef struct _texture
 {
-   char* nome;               /* Name */
-   char* arqNome;            /* File Name */
+   string nome;               /* Name */
+   string arqNome;            /* File Name */
    GLuint indice;            /* Texture ID */
    GLuint w,h;               /* Dimmensions */
    GLuint R,G,B;             /* Colors to MINIMAP */
@@ -141,7 +142,7 @@ class Map
        * Param:
        *        arquivo ->  Name of file to be opened
        ***************************************************************/
-      int open( char* arquivo ); 
+      int open( string arquivo ); 
       /*************************************************************** 
        * Reason: Returns coordinate relative square
        * Param:
@@ -153,7 +154,7 @@ class Map
        * Param:
        *         arquivo -> file name to be saved
        ***************************************************************/
-      int save( const char* arquivo ); 
+      int save( string arquivo ); 
       /*************************************************************** 
        * Reason: Optimize Map Structs
        * Param:
@@ -174,9 +175,9 @@ class Map
       muro* meiosFio;       /* Map Meio Fios (how translate this?) */
       door* portas;         /* Map Doors */
       string music;         /* Map Music */
+      string name;          /* File name of loaded map */
 
       private:
-         char* name;           /* File name of loaded map */
          Square*** MapSquares; /* Internal squares of Map */
 };
 
