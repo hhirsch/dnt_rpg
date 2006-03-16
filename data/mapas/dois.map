@@ -56,7 +56,6 @@ mt ../data/texturas/chao_marble.jpg
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
-uc 0.000000,0.000000,126.849525,18.425005:../data/mapas/tres.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
 p 1,0.000000,0.000000,0.000000,0.000000

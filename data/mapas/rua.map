@@ -67,6 +67,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
+uc 439.207611,70.443718,447.284851,254.292892:../data/mapas/porta.map
 #Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
@@ -82,6 +83,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto_rhcont.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto_rhcont.jpg
+uc 439.207611,70.443718,447.284851,254.292892:../data/mapas/porta.map
 #Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
@@ -97,6 +99,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
+uc 439.207611,70.443718,447.284851,254.292892:../datas/mapa/porta.map
 #Z: 4
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
