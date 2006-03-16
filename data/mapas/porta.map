@@ -1,42 +1,45 @@
 T 10X10
 # Made by DccNiTghtmare's MapEditor, v0.0.2
-o Kalashnikov ../data/models/objetos/armas/kalashnikov.dcc
-o TableChair ../data/models/objetos/icex/mesa_braco.dcc
-o Table ../data/models/objetos/icex/mesa.dcc
-o Chair ../data/models/objetos/icex/cadeira.dcc
-o Adaga ../data/models/objetos/armas/adaga.dcc
-o Faca ../data/models/objetos/armas/faca.dcc
-o Farrer's_Guitar ../data/models/objetos/geral/guitarra.dcc
-o IcexTable ../data/models/objetos/icex/mesa_redonda.dcc
-o Stop ../data/models/objetos/geral/placa_pare.dcc
-o Computer ../data/models/objetos/geral/computador.dcc
-o Small_Kalashnikov ../data/models/objetos/armas/kalashnikov_pequena.dcc
+f ../data/mapas/porta.fog
 o Door ../data/models/objetos/geral/porta.dcc
-t ../data/texturas/chao_asfalto.jpg ../data/texturas/chao_asfalto.jpg 85 85 85
-t ../data/texturas/chao_madeira.jpg ../data/texturas/chao_madeira.jpg 115 58 29
-t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
-t ../data/texturas/chao_cimento.jpg ../data/texturas/chao_marble.jpg 207 212 206
+o Small_Kalashnikov ../data/models/objetos/armas/kalashnikov_pequena.dcc
+o Computer ../data/models/objetos/geral/computador.dcc
+o Stop ../data/models/objetos/geral/placa_pare.dcc
+o IcexTable ../data/models/objetos/icex/mesa_redonda.dcc
+o Farrer's_Guitar ../data/models/objetos/geral/guitarra.dcc
+o Faca ../data/models/objetos/armas/faca.dcc
+o Adaga ../data/models/objetos/armas/adaga.dcc
+o Chair ../data/models/objetos/icex/cadeira.dcc
+o Table ../data/models/objetos/icex/mesa.dcc
+o TableChair ../data/models/objetos/icex/mesa_braco.dcc
+o Kalashnikov ../data/models/objetos/armas/kalashnikov.dcc
+t ../data/texturas/chao_asfalto_ce.jpg ../data/texturas/chao_asfalto_ce.jpg 85 85 85
+t ../data/texturas/chao_asfalto_cd.jpg ../data/texturas/chao_asfalto_cd.jpg 85 85 85
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 221 169 171
-d Door 64.903030,384.000000:0
-d Door 58.678040,266.000000:0
+t ../data/texturas/chao_cimento.jpg ../data/texturas/chao_marble.jpg 207 212 206
+t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
+t ../data/texturas/chao_madeira.jpg ../data/texturas/chao_madeira.jpg 115 58 29
+t ../data/texturas/chao_asfalto.jpg ../data/texturas/chao_asfalto.jpg 85 85 85
 d Door 128.000000,505.426422:90
-muro 86.740822,384.000000,118.000000,394.000000:1065353216,1128267776,0
-mt ../data/texturas/parede_rosa.jpg
-muro 80.515831,256.000000,118.000000,266.000000:-64512,-1239941112,0
-mt ../data/texturas/parede_rosa.jpg
-muro 118.000000,505.426422,128.000000,576.000000:137598816,134830368,0
-mt ../data/texturas/parede_rosa.jpg
-muro 118.000000,64.000000,128.000000,483.588654:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,64.000000,118.000000,74.000000:384,137184120,0
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,566.000000,118.000000,576.000000:255,65280,16711680
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,256.000000,58.678040,266.000000:255,65280,16711680
+d Door 58.678040,266.000000:0
+d Door 64.903030,384.000000:0
+muro 0.000000,64.000000,10.000000,576.000000:-1209615792,0,136266328
 mt ../data/texturas/parede_rosa.jpg
 muro 10.000000,384.000000,64.903030,394.000000:136276504,136268448,136664704
 mt ../data/texturas/parede_rosa.jpg
-muro 0.000000,64.000000,10.000000,576.000000:-1209615792,0,136266328
+muro 10.000000,256.000000,58.678040,266.000000:255,65280,16711680
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,566.000000,118.000000,576.000000:255,65280,16711680
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,64.000000,118.000000,74.000000:384,137184120,0
+mt ../data/texturas/parede_rosa.jpg
+muro 118.000000,64.000000,128.000000,483.588654:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 118.000000,505.426422,128.000000,576.000000:137598816,134830368,0
+mt ../data/texturas/parede_rosa.jpg
+muro 80.515831,256.000000,118.000000,266.000000:-64512,-1239941112,0
+mt ../data/texturas/parede_rosa.jpg
+muro 86.740822,384.000000,118.000000,394.000000:1065353216,1128267776,0
 mt ../data/texturas/parede_rosa.jpg
 meioFio 256.000000,256.000000,512.000000,258.500000
 mt ../data/texturas/chao_cimento.jpg
@@ -51,26 +54,27 @@ ut ../data/texturas/chao_asfalto.jpg
 uc 0.000000,0.000000,0.000000,0.000000:../data/texturas/chao_cimento.jpg
 uo Stop 1:3,1:191.754654,63.958508:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 uc 0.000000,0.000000,0.000000,0.000000:../data/texturas/chao_cimento.jpg
 uo Stop 0:3,1:191.754654,63.958508:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut ../data/texturas/chao_asfalto_ce.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 #Z: 1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
+uc 0.000000,0.000000,0.000000,0.000000:
 uo Adaga 1:2,2:99.369072,89.657806:0:1
 uo Faca 1:2,2:100.050522,93.193474:0:1
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -86,17 +90,17 @@ ut chao_grama2
 uc 0.000000,0.000000,0.000000,0.000000:chao_grama2
 uo Kalashnikov 1:5,2:313.869751,122.443565:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 uc 0.000000,0.000000,0.000000,0.000000:../data/texturas/chao_cimento.jpg
 uo Kalashnikov 0:5,2:313.869751,122.443565:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_ce.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
 #Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
@@ -114,17 +118,17 @@ ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
-uc 0.000000,0.000000,0.000000,0.000000:
+ut chao_grama2
+uc 0.000000,0.000000,0.000000,0.000000:../data/texturas/chao_asfalto.jpg
 uo Small_Kalashnikov 1:6,3:337.078918,144.558838:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_ce.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
 #Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
@@ -145,15 +149,15 @@ ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_asfalto_ce.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
 #Z: 4
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
@@ -168,15 +172,15 @@ ut chao_grama2
 p 1,0.000000,22.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,11.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_ce.jpg
 p 1,0.000000,11.000000,9.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,0.000000,9.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 uo IcexTable 1:10,5:614.045837,286.656921:0:0
 #Z: 5
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -193,15 +197,15 @@ ut chao_grama2
 p 1,22.000000,21.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,26.000000,11.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_ce.jpg
 p 1,11.000000,26.000000,14.000000,9.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,9.000000,14.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 #Z: 6
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
@@ -214,15 +218,15 @@ ut chao_grama2
 p 1,21.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,0.000000,26.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_ce.jpg
 p 1,26.000000,0.000000,0.000000,14.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,14.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 #Z: 7
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
@@ -238,15 +242,15 @@ ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_asfalto_ce.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
 #Z: 8
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_cimento.jpg
@@ -262,15 +266,15 @@ uo Farrer's_Guitar 1:4,9:227.257553,521.047058:-63:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_asfalto_ce.jpg
+p 1,0.000000,0.000000,0.000000,0.000000
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
-p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
 #Z: 9
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
@@ -279,17 +283,17 @@ ut ../data/texturas/chao_asfalto.jpg
 p 1,0.000000,0.000000,10.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
 p 1,0.000000,10.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut ../data/texturas/chao_asfalto_ce.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut ../data/texturas/chao_asfalto_cd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/chao_asfalto.jpg
+ut chao_grama2
 i 2,2
