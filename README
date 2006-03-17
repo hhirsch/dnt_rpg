@@ -51,11 +51,8 @@ go to the directory dccnitghtmare and run "make".
 
    To  compile  dccnitghtmare  on  windows,  you'll  need  the 
 dev-c++  compiler  (a.k.a. gcc port and ide to Windows).  Open
-the project DccNiTghtmare.dev on it and compile.
-
-2) Binary Distribution
-
-    Only decompact the archive you downloaded.
+the project DccNiTghtmare.dev on it and compile. BUG:Music may
+be distorted on window$. Don't blame us. Blame Microsoft!
 
 ==============================================================
 |                       III - Execution                       |

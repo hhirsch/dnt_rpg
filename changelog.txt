@@ -4,7 +4,6 @@
 ================================================
  - Support for Cal3D format for character models;
  - Support for sound and music (SDL_Mixer);
- - Basic Character Creation (class, skills, etc);
  - Some animations added;
  - Gui is now avaible on graphical engine;
  - Colision detection more permissive;
@@ -26,6 +25,7 @@
  - Colored mouse cursors;
  - New things on maps;
  - Wrote player's book document;
+ - Skill Window;
  - Full English & Portuguese support;
  - Partial French & Spanish support;
  - Some bugs fixed.

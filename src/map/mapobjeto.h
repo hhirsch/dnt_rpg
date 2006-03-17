@@ -1,16 +1,21 @@
 #ifndef _mapobjeto_h
 #define _mapobjeto_h
 
+/*   DCC Nightmare is Public Domain - Do whatever you want with this code.
+ */
+
 #include "../gui/objeto.h"
 #include "../gui/lista.h"
 
+/****************************************************
+ *               Map's Objects                      *
+ ****************************************************/
 class mapObjeto: public Tobjeto
 {
    public:
-     int deltaVariacao;   /* De quantas em quantas unidades de distancia 
-                           * se dá a troca de nivel de detalhe do modelo.*/
-     char* nome;
-     char* nomeArq;
+     int deltaVariacao;   /* For how many distance change static LOD*/
+     char* nome;          /* Name of the object  */
+     char* nomeArq;       /* File Name of the object */
 
      /* Desenha o objeto, estando em x,z a uma distancia do
       * observador (o que vai definir o LOD).

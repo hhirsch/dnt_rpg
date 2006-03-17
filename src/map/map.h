@@ -12,7 +12,6 @@ using namespace std;
 
 /* Flag masks */
 #define PISAVEL 1
-#define OCUPADO 2
 
 /* Constraints */
 #define SQUARESIZE             64
@@ -29,8 +28,8 @@ using namespace std;
  ****************************************************/
 typedef struct _conection
 {
-   bool active;         /* Active Conection */
-   GLfloat x1,z1,x2,z2; /* Map Position */
+   bool active;          /* Active Conection */
+   GLfloat x1,z1,x2,z2;  /* Map Position */
    string mapName;       /* Map filename */ 
 }conection;
 
@@ -50,8 +49,8 @@ typedef struct _muro
  ****************************************************/
 typedef struct _texture
 {
-   string nome;               /* Name */
-   string arqNome;            /* File Name */
+   string nome;              /* Name */
+   string arqNome;           /* File Name */
    GLuint indice;            /* Texture ID */
    GLuint w,h;               /* Dimmensions */
    GLuint R,G,B;             /* Colors to MINIMAP */
@@ -63,11 +62,11 @@ typedef struct _texture
  ****************************************************/
 typedef struct _door
 {
-  mapObjeto* objeto;
-  GLfloat x,z;
-  GLint status;
-  GLint orientacao;
-  struct _door* proximo;
+  mapObjeto* objeto;       /* pointer to door map object */
+  GLfloat x,z;             /* position on map */
+  GLint status;            /* actual status (opened, closed) */
+  GLint orientacao;        /* orientation */
+  struct _door* proximo;   /* pointer to next door on map */
 }door;
 
 
@@ -176,6 +175,7 @@ class Map
       door* portas;         /* Map Doors */
       string music;         /* Map Music */
       string name;          /* File name of loaded map */
+      string npcFileName;   /* Static NPC's on map filename */
 
       private:
          Square*** MapSquares; /* Internal squares of Map */

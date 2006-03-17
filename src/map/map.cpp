@@ -13,7 +13,6 @@
 #define SQUAREMINI 16
 
 
-
 /********************************************************************
  *                      Square Constructor                          *
  ********************************************************************/
@@ -386,6 +385,7 @@ Map::Map()
    MapSquares = NULL;
    portas = NULL;
    music = "";
+   npcFileName = "";
    /* Inicia Estruturas */
    Objetos = new(LmapObjeto);
    x = z = xInic = zInic = 0;
@@ -489,6 +489,13 @@ int Map::open(string arquivo)
             fgets(buffer, sizeof(buffer),arq);
             sscanf(buffer,"%s",nome);
             fog.Load(nome);
+            break;
+         }
+         case 'n':
+         {
+            fgets(buffer, sizeof(buffer),arq);
+            sscanf(buffer,"%s",nome);
+            npcFileName = nome;
             break;
          }
          case 'd': /* Define Portas (Doors) */
@@ -922,6 +929,25 @@ int Map::save(string arquivo)
    /* Escreve Dimensões do Arquivo */
    fprintf(arq,"T %dX%d\n",x,z);
    fprintf(arq,"# Made by DccNiTghtmare's MapEditor, v0.0.2\n");
+
+   /* Escreve o arquivo de neblina, se existente */
+   if( !fog.fileName.empty())
+   {
+     fprintf(arq,"f %s\n",fog.fileName.c_str());
+   }
+  
+   /* Escreve o arquivo de npcs, se existente */
+   if( !npcFileName.empty())
+   {
+     fprintf(arq,"npc %s\n",npcFileName.c_str());
+   }
+ 
+   /* Escreve o arquivo de música, se existente */
+   if( !music.empty())
+   {
+     fprintf(arq,"MUSICA %s\n",music.c_str());
+   }
+
 
    /* Escreve os Objetos Utilizados */
    if(Objetos->total>0)

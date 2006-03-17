@@ -1,5 +1,6 @@
 T 7X7
 # Made by DccNiTghtmare's MapEditor, v0.0.2
+npc ../data/mapas/rua.npc
 o Door ../data/models/objetos/geral/porta.dcc
 t ../data/texturas/chao_marble.jpg ../data/texturas/chao_marble.jpg 234 234 234
 t ../data/texturas/chao_asfalto_rhcont.jpg ../data/texturas/chao_asfalto_rhcont.jpg 85 85 85
@@ -99,7 +100,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
-uc 439.207611,70.443718,447.284851,254.292892:../datas/mapa/porta.map
+uc 439.207611,70.443718,447.284851,254.292892:../datas/mapas/porta.map
 #Z: 4
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg

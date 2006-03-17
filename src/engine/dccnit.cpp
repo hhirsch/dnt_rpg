@@ -193,68 +193,47 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
       glDisable(GL_FOG);
    }
 
-   /*atualizaCarga(img,&texturaTexto,texturaCarga,
-                 "Loading NPC: Logan",
-                 proj, modl, viewPort);*/
-
    /* Carregando Entao os NPCs */
    if(NPCs)
      delete(NPCs);
-   NPCs = new (Lpersonagem);
+
    personagem* per;
-   /*per = NPCs->InserirPersonagem(7,6,10,6,
-                                 "../data/pics/logan/portrait.jpg","Logan",
-                        "../data/models/personagens/Logan/modelo.cfg");
-   per->posicaoLadoX = 30;
-   per->posicaoLadoZ = 20;*/
-
-   sprintf(texto, language.LOAD_NPC.c_str(), "Ente");
-   atualizaCarga(img,&texturaTexto,texturaCarga,
-                 texto,
-                 proj, modl, viewPort);
 
 
-   per = NPCs->InserirPersonagem(2,2,5,3,
-                                 "../data/pics/logan/portrait.jpg","Jacaranda",
-                       "../data/models/personagens/Jacaranda/modelo.cfg");
-   per->posicaoLadoX = 300;
-   per->posicaoLadoZ = 300;
+   if(!mapa->npcFileName.empty())
+   {
+      NPCs = new (Lpersonagem);
+      
+      FILE* arq;
+      if(!(arq = fopen(mapa->npcFileName.c_str(),"r")))
+      {
+         printf("Por questões de não disponibilidade de arquivo, o que contém as definições acerca de NPCs, de nome %s não pôde ser carregado.\n",mapa->npcFileName.c_str());
+      }
+      else
+      {
+         int total;
+         int npc;
+         char nome[30];
+         char arquivo[255];
+         float posX, posZ;
+         fscanf(arq,"%d",&total);
+         for(npc = 0; npc < total; npc++)
+         {
+           fscanf(arq,"%s %s %f %f",&nome[0],&arquivo[0],&posX,&posZ);
+           sprintf(texto, language.LOAD_NPC.c_str(), nome);
+           atualizaCarga(img,&texturaTexto,texturaCarga,
+                         texto,
+                         proj, modl, viewPort);
+           per = NPCs->InserirPersonagem(2,2,5,3,
+                                 "../data/pics/logan/portrait.jpg",nome,
+                                 arquivo);
+           per->posicaoLadoX = posX;
+           per->posicaoLadoZ = posZ;
 
-   sprintf(texto, language.LOAD_NPC.c_str(), "Arvore");
-   atualizaCarga(img,&texturaTexto,texturaCarga,
-                 texto,
-                 proj, modl, viewPort);
-
-
-   per = NPCs->InserirPersonagem(2,2,5,3,
-                                 "../data/pics/logan/portrait.jpg","Arvore",
-                       "../data/models/personagens/Arvore/modelo.cfg");
-   per->posicaoLadoX = 80;
-   per->posicaoLadoZ = 720;
-
-
-   sprintf(texto, language.LOAD_NPC.c_str(), "Ratazana");
-   atualizaCarga(img,&texturaTexto,texturaCarga,
-                 texto,
-                 proj, modl, viewPort);
-
-   per = NPCs->InserirPersonagem(2,2,5,3,
-                                 "../data/pics/logan/portrait.jpg","Ratazana",
-                       "../data/models/personagens/Ratazana/modelo.cfg");
-   per->posicaoLadoX = 128;
-   per->posicaoLadoZ = 400;
-
-   sprintf(texto, language.LOAD_NPC.c_str(), "Ameiva");
-   atualizaCarga(img,&texturaTexto,texturaCarga,
-                 texto,
-                 proj, modl, viewPort);
-
-   per = NPCs->InserirPersonagem(2,2,5,3,
-                                 "../data/pics/logan/portrait.jpg","Ameiva",
-                       "../data/models/personagens/Ameiva/modelo.cfg");
-   per->posicaoLadoX = 360;
-   per->posicaoLadoZ = 380;
-
+         }
+         fclose(arq);
+      }  
+   }
 
    if(RecarregaPCs)
    {
@@ -706,12 +685,16 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          //per->CalculateBoundingBox(); use only one bounding, for better walk
          per = (personagem*) per->proximo;
       }
-      per = (personagem*) NPCs->primeiro->proximo;
-      for(aux=0;aux < NPCs->total;aux++)
+    
+      if(NPCs)
       {
-         per->m_calModel->update(segundos);   
-         per->CalculateBoundingBox();
-         per = (personagem*) per->proximo;
+        per = (personagem*) NPCs->primeiro->proximo;
+        for(aux=0;aux < NPCs->total;aux++)
+        {
+           per->m_calModel->update(segundos);   
+           per->CalculateBoundingBox();
+           per = (personagem*) per->proximo;
+        } 
       }
 
       /* Calcula as Modificações Reais no Andar, rotacionar, girar, etc */
@@ -899,41 +882,44 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
          /* TODO Abrir Conversas */
-         pers = (personagem*) NPCs->primeiro->proximo;
-         while( (pers != NPCs->primeiro) && (!pronto) )
+         if(NPCs)
          {
-            GLfloat x[4],z[4];
-            GLfloat min[3], max[3];
+            pers = (personagem*) NPCs->primeiro->proximo;
+            while( (pers != NPCs->primeiro) && (!pronto) )
+            {
+               GLfloat x[4],z[4];
+               GLfloat min[3], max[3];
 
-            x[0] = pers->min[0];
-            z[0] = pers->min[2];
+               x[0] = pers->min[0];
+               z[0] = pers->min[2];
 
-            x[1] = pers->min[0];
-            z[1] = pers->max[2]; 
+               x[1] = pers->min[0];
+               z[1] = pers->max[2]; 
 
-            x[2] = pers->max[0];
-            z[2] = pers->max[2];
+               x[2] = pers->max[0];
+               z[2] = pers->max[2];
 
-            x[3] = pers->max[0];
-            z[3] = pers->min[2];
+               x[3] = pers->max[0];
+               z[3] = pers->min[2];
 
-            /* Rotaciona e translada o Bounding Box */
-            rotTransBoundingBox(pers->orientacao, x, z,
+               /* Rotaciona e translada o Bounding Box */
+               rotTransBoundingBox(pers->orientacao, x, z,
                                 pers->posicaoLadoX, 
                                 0.0, 0.0, 
                                 pers->posicaoLadoZ, min, max );
 
-            if(estaDentro( min, max, minMouse, maxMouse, 1))
-            {
-                cursors->SetActual(CURSOR_TALK);
-                if(janAtalhos)
-                {
-                   ObjTxt->texto = pers->nome; 
-                   janAtalhos->Desenhar();
-                }
-                pronto = 1;
+              if(estaDentro( min, max, minMouse, maxMouse, 1))
+              {
+                   cursors->SetActual(CURSOR_TALK);
+                   if(janAtalhos)
+                   {
+                      ObjTxt->texto = pers->nome; 
+                      janAtalhos->Desenhar();
+                   }
+                   pronto = 1;
+               }
+               pers = (personagem*) pers->proximo;
             }
-            pers = (personagem*) pers->proximo;
          }
 
          /* Verifica Conexão do Mapa */
@@ -961,7 +947,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                pronto = 1;
                if(Mbotao & SDL_BUTTON(1))
                {
-                  CarregaMapa(quaux->mapConection.mapName, 1);
+                  CarregaMapa(quaux->mapConection.mapName, 0);
                   return(1);
                }
             }
@@ -1347,6 +1333,8 @@ void engine::Desenhar()
    //AtualizaNPCs
   
    /* Desenha Entao os NPCs */
+   if(NPCs)
+   {
       per = (personagem*) NPCs->primeiro->proximo;
       for(aux=0;aux < NPCs->total;aux++)
       {
@@ -1357,6 +1345,7 @@ void engine::Desenhar()
          glPopMatrix();
          per = (personagem*) per->proximo;
       }
+   }
 
    /* Faz o Desenho da GUI */
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
@@ -1767,33 +1756,36 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
 
    /* Testa colisao com npcs */
-   personagem* pers = (personagem*) NPCs->primeiro->proximo;
-   while( (pers != NPCs->primeiro) )
+   if(NPCs)
    {
-      x[0] = pers->min[0];
-      z[0] = pers->min[2];
+      personagem* pers = (personagem*) NPCs->primeiro->proximo;
+      while( (pers != NPCs->primeiro) )
+      {
+         x[0] = pers->min[0];
+         z[0] = pers->min[2];
 
-      x[1] = pers->min[0];
-      z[1] = pers->max[2]; 
+         x[1] = pers->min[0];
+         z[1] = pers->max[2]; 
 
-      x[2] = pers->max[0];
-      z[2] = pers->max[2];
+         x[2] = pers->max[0];
+         z[2] = pers->max[2];
+ 
+         x[3] = pers->max[0];
+         z[3] = pers->min[2];
 
-      x[3] = pers->max[0];
-      z[3] = pers->min[2];
-
-      /* Rotaciona e translada o Bounding Box */
-      rotTransBoundingBox(pers->orientacao, x, z,
+         /* Rotaciona e translada o Bounding Box */
+         rotTransBoundingBox(pers->orientacao, x, z,
                           pers->posicaoLadoX, 
                           0.0, 0.0, 
                           pers->posicaoLadoZ, min2, max2 );
 
-      if(estaDentro( min, max, min2, max2, 1))
-      {
-         return(0);
-      }
+         if(estaDentro( min, max, min2, max2, 1))
+         {
+            return(0);
+         }
     
-      pers = (personagem*) pers->proximo;
+         pers = (personagem*) pers->proximo;
+      }
    }
 
    

@@ -13,6 +13,7 @@ class mapFog
       GLfloat start;
       GLfloat end;
       bool enabled;
+      string fileName;
 
       mapFog();
       ~mapFog();

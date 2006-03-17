@@ -1,57 +1,57 @@
 T 7X12
 # Made by DccNiTghtmare's MapEditor, v0.0.2
 f ../data/mapas/dois.fog
-# l ../data/mapas/dois.lgt
+npc ../data/mapas/dois.npc
 MUSICA ../data/music/musica2.ogg
-o Farrer's_Guitar ../data/models/objetos/geral/guitarra.dcc
-o Stop_Sign ../data/models/objetos/geral/placa_pare.dcc
-o Door ../data/models/objetos/geral/porta.dcc
-o Door2 ../data/models/objetos/geral/porta2.dcc
 o Kalashnikov ../data/models/objetos/armas/kalashnikov.dcc
-t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 99 83 97
-t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 218 168 169
-t ../data/texturas/chao_lama.png ../data/texturas/chao_lama.png 148 106 66
-t ../data/texturas/chao_marble.jpg ../data/texturas/chao_marble.jpg 234 234 234
-t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
-t chao_grama_lama ../data/texturas/chao_grama_lama.png 69 93 15
+o Door2 ../data/models/objetos/geral/porta2.dcc
+o Door ../data/models/objetos/geral/porta.dcc
+o Stop_Sign ../data/models/objetos/geral/placa_pare.dcc
+o Farrer's_Guitar ../data/models/objetos/geral/guitarra.dcc
 t ../data/texturas/tijolos.png ../data/texturas/tijolos.png 146 121 105
-d Door 189.583511,54.000000:0
-d Door 128.000000,165.083481:90
-d Door2 344.082092,726.475403:0
+t chao_grama_lama ../data/texturas/chao_grama_lama.png 69 93 15
+t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
+t ../data/texturas/chao_marble.jpg ../data/texturas/chao_marble.jpg 234 234 234
+t ../data/texturas/chao_lama.png ../data/texturas/chao_lama.png 148 106 66
+t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 218 168 169
+t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 99 83 97
 d Door2 320.000000,690.435059:90
-muro 365.919891,726.475403,382.170410,736.475403:16,16,16
-mt ../data/texturas/tijolos.png
-muro 320.000000,690.435059,330.000000,726.475403:16,16,16
-mt ../data/texturas/tijolos.png
-muro 320.000000,640.000000,448.000000,650.000000:16,16,16
-mt ../data/texturas/tijolos.png
-muro 320.000000,650.000000,330.000000,668.597290:16,16,16
-mt ../data/texturas/tijolos.png
-muro 320.000000,726.475403,344.082092,736.475403:16,16,16
-mt ../data/texturas/tijolos.png
-muro 320.000000,736.475403,330.000000,767.906006:16,16,16
-mt ../data/texturas/tijolos.png
-muro 382.170410,726.475403,392.170410,768.000000:16,16,16
-mt ../data/texturas/tijolos.png
-muro 211.421310,54.000000,256.000000,64.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 128.000000,165.083481,138.000000,256.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 138.000000,246.000000,246.000000,256.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 128.000000,64.000000,138.000000,143.245682:16,16,16
+d Door2 344.082092,726.475403:0
+d Door 128.000000,165.083481:90
+d Door 189.583511,54.000000:0
+muro 128.000000,54.000000,189.583511,64.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
 muro 246.000000,64.000000,256.000000,256.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-muro 128.000000,54.000000,189.583511,64.000000:16,16,16
+muro 128.000000,64.000000,138.000000,143.245682:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-meioFio 0.000000,576.000000,64.000000,578.500000
-mt ../data/texturas/chao_marble.jpg
-meioFio 64.000000,576.000000,256.000000,578.500000
+muro 138.000000,246.000000,246.000000,256.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 128.000000,165.083481,138.000000,256.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 211.421310,54.000000,256.000000,64.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 382.170410,726.475403,392.170410,768.000000:16,16,16
+mt ../data/texturas/tijolos.png
+muro 320.000000,736.475403,330.000000,767.906006:16,16,16
+mt ../data/texturas/tijolos.png
+muro 320.000000,726.475403,344.082092,736.475403:16,16,16
+mt ../data/texturas/tijolos.png
+muro 320.000000,650.000000,330.000000,668.597290:16,16,16
+mt ../data/texturas/tijolos.png
+muro 320.000000,640.000000,448.000000,650.000000:16,16,16
+mt ../data/texturas/tijolos.png
+muro 320.000000,690.435059,330.000000,726.475403:16,16,16
+mt ../data/texturas/tijolos.png
+muro 365.919891,726.475403,382.170410,736.475403:16,16,16
+mt ../data/texturas/tijolos.png
+meioFio 256.000000,512.000000,448.000000,514.500000
 mt ../data/texturas/chao_marble.jpg
 meioFio 256.000000,512.000000,258.500000,576.000000
 mt ../data/texturas/chao_marble.jpg
-meioFio 256.000000,512.000000,448.000000,514.500000
+meioFio 64.000000,576.000000,256.000000,578.500000
+mt ../data/texturas/chao_marble.jpg
+meioFio 0.000000,576.000000,64.000000,578.500000
 mt ../data/texturas/chao_marble.jpg
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000

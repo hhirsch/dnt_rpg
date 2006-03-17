@@ -3,10 +3,12 @@
 mapFog::mapFog()
 {
    enabled = false;
+   fileName = "";
 }
 
 mapFog::~mapFog()
 {
+   fileName = "";
 }
 
 
@@ -19,6 +21,7 @@ void mapFog::Load(string arq)
        printf("Error while opening fog: %s\n",arq.c_str());
        return;
    }
+   fileName = arq;
    fscanf(file,"%f %f %f %f",&color[0],&color[1],&color[2],&color[3]);
    fscanf(file,"%f",&density);
    fscanf(file,"%f",&start);
