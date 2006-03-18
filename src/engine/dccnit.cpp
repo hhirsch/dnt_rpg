@@ -197,13 +197,14 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
    if(NPCs)
      delete(NPCs);
 
+  NPCs = NULL;
+
    personagem* per;
 
 
    if(!mapa->npcFileName.empty())
    {
-      NPCs = new (Lpersonagem);
-      
+            
       FILE* arq;
       if(!(arq = fopen(mapa->npcFileName.c_str(),"r")))
       {
@@ -211,6 +212,8 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
       }
       else
       {
+         NPCs = new (Lpersonagem);
+
          int total;
          int npc;
          char nome[30];
@@ -312,13 +315,14 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
 /*********************************************************************
  *                       Menu Inicial do Jogo                        *
  *********************************************************************/
-int engine::TelaInicial(int Status, GLuint* idTextura)
+int engine::TelaInicial(int Status, GLuint* idTextura, bool reloadMusic)
 {
-   if(musica)
+   if( (musica) && (reloadMusic) )
    {
      snd->StopMusic(musica);
    }
-   musica = snd->LoadMusic("../data/music/musica1.ogg");
+   if(reloadMusic)
+      musica = snd->LoadMusic("../data/music/musica1.ogg");
    AtualizaFrustum(matrizVisivel,proj,modl);
    initialScreen* inic = new(initialScreen);
    int result = inic->Execute(Status, proj, modl, viewPort, idTextura);

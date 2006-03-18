@@ -64,7 +64,7 @@ class engine
 
       /* Abre a Tela Inicial, com seus tratamentos.
        * Retorna 0 se é para sair, 1 caso contrario */
-      int TelaInicial(int Status, GLuint* idTextura);
+      int TelaInicial(int Status, GLuint* idTextura, bool reloadMusic);
 
       /* Abre a tela de cricao de caracteres, retornando de acordo */
       int TelaPersonagens(GLuint* idTextura);

@@ -32,18 +32,20 @@ int main(int argc, char **argv)
    Engine->Iniciar(screen);
  
    GLuint tituloID;
-   int result = Engine->TelaInicial(ON_INIT,&tituloID);
+   int result = Engine->TelaInicial(ON_INIT,&tituloID,true);
    int estado = ON_INIT;
    int charCreation;
+   bool reloadMusic;
    
    while(result != EXIT_GAME)
    {
+       reloadMusic = false;
        if(result == NEW_GAME)
        {
           charCreation = Engine->TelaPersonagens(&tituloID);
           if( charCreation == CHAR_CONFIRM)
           {
-             Engine->CarregaMapa("../data/mapas/casa.map",1);
+             Engine->CarregaMapa("../data/mapas/rua.map",1);
           }
        }
 
@@ -61,12 +63,13 @@ int main(int argc, char **argv)
           ( ((result == NEW_GAME)) && (charCreation == CHAR_CONFIRM) ) ) 
       {
          Engine->Rodar(screen);
+         reloadMusic = true;
          estado = IN_GAME;
-         result = Engine->TelaInicial(estado,&tituloID);
+         result = Engine->TelaInicial(estado,&tituloID,reloadMusic);
       }
       else
       {
-         result = Engine->TelaInicial(estado,&tituloID);
+         result = Engine->TelaInicial(estado,&tituloID,reloadMusic);
       }
       charCreation = CHAR_OTHER;
        
