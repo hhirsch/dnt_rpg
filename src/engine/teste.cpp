@@ -25,7 +25,7 @@ int main(int argc, char **argv)
       scanf("%s",server);
       printf("I'll conect to %s\n",server);
    #endif   
-   Farso_Iniciar(&screen,"DccNiTghtmare 0.0.2");
+   Farso_Iniciar(&screen,"DccNiTghtmare");
    engine* Engine = new engine();
    
 

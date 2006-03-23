@@ -77,6 +77,11 @@ engine::engine()
    ultimaLeitura = SDL_GetTicks();
    ultimoMouse = ultimaLeitura;
 
+   particula = new part1(150,60,120); 
+   particula2 = new part2(200,0,220);
+   particula3 = new part3(300,20,300);
+   particula4 = new part4(240,0,220);
+
 }
 
 /*********************************************************************
@@ -91,6 +96,11 @@ engine::~engine()
    }
 
    delete(snd);
+
+   delete(particula);
+   delete(particula2);
+   delete(particula3);
+   delete(particula4);
 
    delete(option);
 
@@ -669,7 +679,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    double passo;  // O quanto realmente anda, em decorrencia do tempo decorrido
    double rotacao; // O quanto realmente roda, em decorrencia do tempo (FPS)
    double varCamera;
-   double varTempo;
+   double varTempo; 
    float wx,wy,wz;
 
    tempo = SDL_GetTicks();
@@ -680,7 +690,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       passouTempo = true;
 
       /* Atualiza Animacoes dos personagens */
-      GLfloat segundos = varTempo / 1000.0;
+      segundos = varTempo / 1000.0;
       int aux;
       personagem *per = (personagem*) PCs->primeiro->proximo;
       for(aux=0;aux< PCs->total;aux++)
@@ -718,6 +728,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          char texto[15];
          sprintf(texto,"FPS: %3.2f",1000.0 / (tempo-ultimaLeitura));
          FPS->texto = texto;
+         sprintf(texto,"Part: %d",particula->numParticles() 
+                                 + 4*particula2->numParticles() 
+                                 + particula3->numParticles()
+                                 + 4*particula4->numParticles() );
+         FPS->texto += texto;
          janAtalhos->Desenhar();
       }
       ultimaLeitura = tempo;
@@ -1289,7 +1304,7 @@ void engine::Desenhar()
    cameraY = centroY + deltaY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
- 
+
    /* Atualiza para fazer o culling e o desenho da GUI */
    AtualizaFrustum(matrizVisivel,proj,modl);
 
@@ -1306,7 +1321,7 @@ void engine::Desenhar()
 
    /* Desenha o Mundo, fazendo culling do view frustum */
    mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
-  
+
    /* Desenha os Personagens do Jogador (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
@@ -1331,8 +1346,6 @@ void engine::Desenhar()
    glPopMatrix();
 
 
- 
-
    /* Atualiza os Valores dos NPCS com o que já estiver no socket */
    //AtualizaNPCs
   
@@ -1351,6 +1364,14 @@ void engine::Desenhar()
       }
    }
 
+   glPushMatrix();
+      particula->NextStep(segundos);
+      particula2->NextStep(segundos);
+      particula3->NextStep(segundos);
+      particula4->NextStep(segundos);
+   glPopMatrix();
+
+
    /* Faz o Desenho da GUI */
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
    gluUnProject(SCREEN_X,SCREEN_Y-80,0.01, modl, proj, viewPort, &x2, &y2, &z2);
@@ -1358,6 +1379,7 @@ void engine::Desenhar()
    gluUnProject(SCREEN_X-60,SCREEN_Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
 
    glDisable(GL_LIGHTING);
+   glDisable(GL_DEPTH_TEST);
 
    /* Desenho do Portrait do jogador */
    per = (personagem*) PCs->personagemAtivo;
@@ -1407,6 +1429,7 @@ void engine::Desenhar()
 
   
    glEnable(GL_LIGHTING);
+   glEnable(GL_DEPTH_TEST);
  
    glFlush();
 }
