@@ -4,7 +4,8 @@
 #include <math.h>
 #include <GL/gl.h>
 
-part4::part4(float cX,float cY,float cZ):particleSystem(100)
+part4::part4(float cX,float cY,float cZ):
+                               particleSystem(100,PARTICLE_DRAW_INDIVIDUAL)
 {
    centerX = cX; 
    centerY=cY; 

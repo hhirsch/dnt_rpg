@@ -5,6 +5,9 @@
 #define PARTICLE_STATUS_ALIVE  1  /* Say that a particle is alive */
 #define PARTICLE_STATUS_STATIC 2  /* Say that a particle don't change anymore */
 
+#define PARTICLE_DRAW_GROUPS     0
+#define PARTICLE_DRAW_INDIVIDUAL 1
+
 /* A Particle Alone */
 typedef struct part_
 {
@@ -28,7 +31,7 @@ class particleSystem
        * Param: 
        *         total -> max particles to create
        ***************************************************************/
-      particleSystem(int total);
+      particleSystem(int total, int mode);
       /***************************************************************
        * Reason: destruct internal structs
        * Param: 
@@ -84,12 +87,15 @@ class particleSystem
        ***************************************************************/
       void DoStep(); 
 
-      int actualParticles; 
+      int actualParticles;
+      int drawMode;
       
 
    protected:
       particle* particles;
       int       maxParticles;
+      float*    vertexArray;
+      float*    colorArray;
 };
 
 #endif

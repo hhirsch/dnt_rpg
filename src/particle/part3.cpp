@@ -2,14 +2,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <GL/gl.h>
-part3::part3(float cX,float cY,float cZ):particleSystem(200)
+part3::part3(float cX,float cY,float cZ):
+                                    particleSystem(150,PARTICLE_DRAW_INDIVIDUAL)
 {
    centerX = cX; 
-   centerY=cY; 
-   centerZ=cZ;
+   centerY = cY; 
+   centerZ = cZ;
+   otherY = cY + 5;
    actualParticles = 0;
    alpha = 0.6;
    gravity = -20;
+   time = -1;
 }
 
 part3::~part3()
@@ -19,7 +22,10 @@ part3::~part3()
 void part3::Render(particle* part)
 {
    glColor4f(part->R,part->G,part->B,alpha);
-   glVertex3f(part->posX,part->posY,part->posZ);
+   glVertex3f(part->posX,
+              part->posY,
+              part->posZ);
+   glNormal3f(0,1,0);
 }
 
 void part3::InitRender()
@@ -41,9 +47,35 @@ void part3::EndRender()
 
 void part3::actualize(particle* part)
 {
-   float aux = part->prvY;
-   part->prvY = part->posY;
-   part->posY = aux;
+   /*float aux = part->prvY;
+   part->prvY = part->posY;*/
+   int next = part->internalNumber+2 ;
+   if(part->internalNumber == 0)
+   {
+     if(time == 6)
+     {
+        part->prvY = ((rand() / ((double)RAND_MAX + 1))); 
+        time = 1;
+     }
+     else
+     {
+        time++;
+     }
+     if(time >= 3)
+        part->posY = (time/3.0)*part->prvY + centerY;
+     else
+        part->posY = ((3-(time-3))/3.0)*part->prvY + centerY;
+     particles[part->internalNumber+1].posY = part->posY;
+     particles[next].posY = part->posY;  
+   }
+   else
+   {
+      if(next < maxParticles )
+      {
+         particles[next].posY = part->prvY;
+         part->prvY = part->posY;
+      }
+   }
 }
 
 bool part3::continueLive(particle* part)
@@ -66,6 +98,7 @@ void part3::createParticle(particle* part)
    part->prvX = part->posX;
    part->prvZ = part->posZ;
    part->posY = centerY;
+   part->prvY = 0;
    part->velY = -1.0;
    part->velX = 0.0;
    part->velZ = 0.0;
@@ -78,9 +111,15 @@ void part3::createParticle(particle* part)
       centerX += 2;
       
       if( (actualParticles % 4 == 0))
+      {
         centerY -= 5;
+        otherY += 5;
+      }
       else
+      {
         centerY += 5;
+        otherY -= 5;
+      }
    }
    else
    {

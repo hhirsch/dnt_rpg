@@ -728,10 +728,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          char texto[15];
          sprintf(texto,"FPS: %3.2f",1000.0 / (tempo-ultimaLeitura));
          FPS->texto = texto;
-         sprintf(texto,"Part: %d",particula->numParticles() 
+         sprintf(texto,"    Part: %d",
+                                   particula->numParticles() 
                                  + 4*particula2->numParticles() 
                                  + particula3->numParticles()
-                                 + 4*particula4->numParticles() );
+                                 + 4*particula4->numParticles());
          FPS->texto += texto;
          janAtalhos->Desenhar();
       }
@@ -1318,7 +1319,6 @@ void engine::Desenhar()
    glPopMatrix();
 
    glPushMatrix();
-
    /* Desenha o Mundo, fazendo culling do view frustum */
    mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
 
@@ -1365,12 +1365,13 @@ void engine::Desenhar()
    }
 
    glPushMatrix();
+      /* primeiro as nao texturizadas */
       particula->NextStep(segundos);
-      particula2->NextStep(segundos);
       particula3->NextStep(segundos);
       particula4->NextStep(segundos);
+      /* agora as texturizadas */
+      particula2->NextStep(segundos);
    glPopMatrix();
-
 
    /* Faz o Desenho da GUI */
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);

@@ -55,8 +55,11 @@ class part3: particleSystem
       int numParticles();
 
    private:
-      float centerX,centerY, centerZ;
+      float centerX, centerY, centerZ;
+      float otherX, otherY, otherZ;
       float gravity;
+
+      int time;
 
       float alpha;
       float seconds; 
