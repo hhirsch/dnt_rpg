@@ -3,29 +3,32 @@
 #include <stdio.h>
 #include <math.h>
 #include <GL/gl.h>
+#include <SDL/SDL_image.h>
 
 part4::part4(float cX,float cY,float cZ):
-                               particleSystem(100,PARTICLE_DRAW_INDIVIDUAL)
+                               particleSystem(50,PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
    centerY=cY; 
    centerZ=cZ;
    actualParticles = 0;
-   alpha = 0.5;
-   gravity = 15;
-   maxLive = 80;
-   finalR = 0.387;
-   finalG = 0.387;
-   finalB = 0.387;
+   alpha = 1.0;
+   gravity = 20;
+   maxLive = 100;
+   finalR = 1.0;
+   finalG = 1.0;
+   finalB = 1.0;
    initR = 0;
    initG = 0;
    initB = 0;
-   drawSphereToList(3.0,6,6); 
+   partTexture = LoadTexture("../data/particles/part5.png");
+   //drawSphereToList(3.0,6,6); 
 }
 
 part4::~part4()
 {
-   glDeleteLists(sphereList,1);
+   glDeleteTextures(1,&partTexture);
+   //glDeleteLists(sphereList,1);
 }
 
 void part4::drawSphereToList(double r, int lats, int longs) 
@@ -61,52 +64,59 @@ void part4::drawSphereToList(double r, int lats, int longs)
 
 void part4::Render(particle* part)
 {
-   glPushMatrix();
-   glColor4f(part->R,part->G,part->B,alpha);
-   glTranslatef(part->posX,part->posY,part->posZ);
-   glCallList(sphereList);
-   glPopMatrix();
-   glPushMatrix();
-   glColor4f(part->prvR,part->prvG,part->prvB,alpha);
-   glTranslatef(part->prvX,part->prvY,part->prvZ);
-   glCallList(sphereList);
-   glPopMatrix();
-   glPushMatrix();
-   glColor4f( (0.67*part->prvR + 0.33*part->R), 
-              (0.67*part->prvG + 0.33*part->G),
-              (0.67*part->prvB + 0.33*part->B), alpha);
-   glTranslatef((0.67*part->prvX + 0.33*part->posX),
-                (0.67*part->prvY + 0.33*part->posY),
-                (0.67*part->prvZ + 0.33*part->posZ));
-   glCallList(sphereList);
-   glPopMatrix();
-   glPushMatrix();
-   glColor4f( (0.33*part->prvR + 0.67*part->R), 
-              (0.33*part->prvG + 0.67*part->G),
-              (0.33*part->prvB + 0.67*part->B), alpha);
-   glTranslatef((0.33*part->prvX + 0.67*part->posX),
-                (0.33*part->prvY+ 0.67*part->posY),
-                (0.33*part->prvZ + 0.67*part->posZ));
-   glCallList(sphereList);
-   glPopMatrix();
-
 }
 
 void part4::InitRender()
 {
-   glDisable(GL_LIGHTING);
-   glDisable(GL_TEXTURE_2D);
-   glEnable( GL_BLEND );
-   glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+  /* glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );*/
+  glDisable(GL_LIGHTING);
+   glEnable(GL_DEPTH_TEST);
+   glDepthFunc(GL_LESS);
+   glDepthMask(GL_FALSE);
+   glEnable(GL_CULL_FACE);
+   //glEnable(GL_ALPHA_TEST);
+
+   glEnable(GL_TEXTURE_2D);
+   //glBlendFunc(GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   //glBlendFunc(GL_DST_ALPHA, GL_ZERO);
+   glEnable(GL_BLEND);
+    
+   float MaxPointSize;
+   glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
+
+   float quadratic[] =  { 0.01f, 0.01f, 0.0f };
+   PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
+
+   PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
+   PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
+   PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
+
+   //glBlendFunc(GL_DST_ALPHA, GL_SRC_ALPHA);
+   //glBlendFunc( GL_DST_ALPHA, GL_ZERO_MINUS_SRC_ALPHA );
+   //glEnable( GL_BLEND );
+   /*glBlendFunc( GL_SRC_ALPHA, GL_ONE );
    glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-//   glMaterialf(GL_FRONT_AND_BACK, GL_DIFFUSE, 50);
+   glMaterialf(GL_FRONT_AND_BACK, GL_DIFFUSE, 50);*/
+   glPointSize(32);
+
+   glBindTexture(GL_TEXTURE_2D, partTexture);
+   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
+   glEnable(GL_POINT_SPRITE_ARB);
 }
 
 void part4::EndRender()
 {
+   glDisable(GL_CULL_FACE);
+   glEnable(GL_DEPTH_TEST);
+   glDepthFunc(GL_LESS);
+   glDepthMask(GL_TRUE);
+   glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
+   glDisable(GL_TEXTURE_2D);
+   glDisable(GL_POINT_SPRITE_ARB);
    glEnable(GL_LIGHTING);
    glDisable( GL_BLEND );
-   glLineWidth(1);
 }
 
 void part4::actualize(particle* part)
@@ -133,7 +143,10 @@ void part4::actualize(particle* part)
 
    part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
 
-   part->velX += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
+   if(part->posY >= 5)
+     part->velX += seconds*(gravity/2.0)*(((rand() / ((double)RAND_MAX + 1))));
+   else
+     part->velX += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
    part->velZ += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
 
    part->posY += part->velY*seconds;
@@ -144,26 +157,26 @@ void part4::actualize(particle* part)
 bool part4::continueLive(particle* part)
 {
    return( (part->age < maxLive) &&
-           ((rand() % 200) != 5) );
+           ((rand() % 300) != 5) );
 }
 
 int part4::needCreate()
 {
-   return(rand() % 80);
+   return(rand() % 100);
 }
 
 void part4::createParticle(particle* part)
 {
-   part->posX = ((rand() / ((double)RAND_MAX + 1))) +centerX;
-   part->posY = ((rand() / ((double)RAND_MAX + 1))) +centerY;
-   part->posZ = ((rand() / ((double)RAND_MAX + 1))) +centerZ;
+   part->posX = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerX;
+   part->posY = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerY;
+   part->posZ = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerZ;
    part->prvX = part->posX;
    part->prvY = part->posY;
    part->prvZ = part->posZ;
    part->size = 4; 
    part->velY = 1.0;
-   part->velX = 2*(rand() / ((double)RAND_MAX + 1))-1;
-   part->velZ = 2*(rand() / ((double)RAND_MAX + 1))-1;
+   part->velX = 1*(rand() / ((double)RAND_MAX + 1))-0.5;
+   part->velZ = 1*(rand() / ((double)RAND_MAX + 1))-0.5;
    part->R = initR;//(0.40*(rand() / ((double)RAND_MAX + 1))) + 0.12;
    part->G = initG;//(0.22*(rand() / ((double)RAND_MAX + 1))) + 0.42;
    part->B = initB;//0.84;
@@ -181,5 +194,22 @@ void part4::NextStep(float sec)
 int part4::numParticles()
 {
    return(actualParticles);
+}
+
+GLuint part4::LoadTexture(char* fileName)
+{
+   GLuint indice;
+   SDL_Surface* img = IMG_Load(fileName);
+
+   glGenTextures(1, &(indice));
+   glBindTexture(GL_TEXTURE_2D, indice);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+   return(indice);
 }
 

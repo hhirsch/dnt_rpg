@@ -54,6 +54,9 @@ class part4: particleSystem
       void NextStep(float sec);
 
       int numParticles();
+     
+      GLuint LoadTexture(char* fileName);
+
 
    private:
       float centerX,centerY, centerZ;
@@ -68,6 +71,7 @@ class part4: particleSystem
       float initR, initG, initB;
 
       GLuint sphereList;
+      GLuint partTexture;
 
 
       void drawSphereToList(double r, int lats, int longs);

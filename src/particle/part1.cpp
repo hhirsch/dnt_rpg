@@ -126,9 +126,9 @@ void part1::createParticle(particle* part)
    part->velY = -1.0;
    part->velX = (rand() / ((double)RAND_MAX + 1))-0.5;
    part->velZ = (rand() / ((double)RAND_MAX + 1))-0.5;
-   part->R = (0.1*(rand() / ((double)RAND_MAX + 1))) + 0.21;
-   part->G = (0.1*(rand() / ((double)RAND_MAX + 1))) + 0.21;
-   part->B = 1.0;
+   part->R = (0.1*(rand() / ((double)RAND_MAX + 1)))+0.8;
+   part->G = (0.1*(rand() / ((double)RAND_MAX + 1)))+0.8;
+   part->B = 0.8;
 }
 
 void part1::NextStep(float sec)

@@ -11,6 +11,11 @@ particleSystem::particleSystem(int total, int mode)
    particles = (particle*) malloc(total*sizeof(particle));
    maxParticles = total;
 
+   PointParameterf = (PFNGLPOINTPARAMETERFARBPROC)
+                                  SDL_GL_GetProcAddress("glPointParameterfARB");
+   PointParameterfv = (PFNGLPOINTPARAMETERFVARBPROC) 
+                                 SDL_GL_GetProcAddress("glPointParameterfvARB");
+
    int n;
    for(n = 0; n < maxParticles; n++ )
    {

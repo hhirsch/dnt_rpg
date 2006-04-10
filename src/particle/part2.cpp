@@ -11,8 +11,6 @@
 part2::part2(float cX,float cY,float cZ):
                                particleSystem(200, PARTICLE_DRAW_GROUPS)
 {
-   PointParameterf  = (PFNGLPOINTPARAMETERFARBPROC)SDL_GL_GetProcAddress("glPointParameterfARB");
-   PointParameterfv = (PFNGLPOINTPARAMETERFVARBPROC)SDL_GL_GetProcAddress("glPointParameterfvARB");
    centerX = cX; 
    centerY=cY; 
    centerZ=cZ;
@@ -20,9 +18,9 @@ part2::part2(float cX,float cY,float cZ):
    alpha = 1.0;
    gravity = 12;
    maxLive = 100;
-   finalR = 0.47;
+   finalR = 0.27;
    finalG = 0.04;
-   finalB = 0.10;
+   finalB = 0.04;
    /*initR = 1;
    initG = 0.964;
    initB = 0;*/
@@ -224,8 +222,11 @@ void part2::actualize(particle* part)
 
    part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
 
-   part->velX += seconds*(30*((rand() / ((double)RAND_MAX + 1))) - 15);
-   part->velZ += seconds*(30*((rand() / ((double)RAND_MAX + 1))) - 15);
+   float vXZ = 30*(1-percent) + 10*(percent);
+   float vXZ2 = vXZ / 2.0;
+
+   part->velX += seconds*(vXZ*((rand() / ((double)RAND_MAX + 1))) - vXZ2);
+   part->velZ += seconds*(vXZ*((rand() / ((double)RAND_MAX + 1))) - vXZ2);
 
    part->posY += part->velY*seconds;
    part->posX += part->velX*seconds;
@@ -245,8 +246,8 @@ int part2::needCreate()
 
 void part2::createParticle(particle* part)
 {
-   part->posX = ((rand() / ((double)RAND_MAX + 1))) +centerX;
-   part->posY = ((rand() / ((double)RAND_MAX + 1))) +centerY;
+   part->posX = (2*(rand() / ((double)RAND_MAX + 1))-1) +centerX;
+   part->posY = (2*(rand() / ((double)RAND_MAX + 1))-1) +centerY;
    part->posZ = ((rand() / ((double)RAND_MAX + 1))) +centerZ;
    part->prvX = part->posX;
    part->prvY = part->posY;

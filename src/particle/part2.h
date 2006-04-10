@@ -2,7 +2,6 @@
 #define _part2_h
 
 #include "particle.h"
-#include <GL/gl.h>
 
 class part2: particleSystem
 {
@@ -74,9 +73,6 @@ class part2: particleSystem
 
 
       void drawSphereToList(int lats, int longs);
-
-      PFNGLPOINTPARAMETERFARBPROC  PointParameterf;
-      PFNGLPOINTPARAMETERFVARBPROC PointParameterfv;
 
 };
 

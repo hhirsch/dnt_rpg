@@ -1,6 +1,9 @@
 #ifndef _particle_h
 #define _particle_h
 
+#include <GL/gl.h>
+#include <SDL/SDL.h>
+
 #define PARTICLE_STATUS_DEAD   0  /* Say that a particle is dead */
 #define PARTICLE_STATUS_ALIVE  1  /* Say that a particle is alive */
 #define PARTICLE_STATUS_STATIC 2  /* Say that a particle don't change anymore */
@@ -89,6 +92,9 @@ class particleSystem
 
       int actualParticles;
       int drawMode;
+
+      PFNGLPOINTPARAMETERFARBPROC PointParameterf;
+      PFNGLPOINTPARAMETERFVARBPROC PointParameterfv;
       
 
    protected:
