@@ -1,3 +1,5 @@
+/* Waterfall */
+
 #include "part1.h"
 #include <stdlib.h>
 #include <stdio.h>

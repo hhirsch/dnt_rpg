@@ -22,6 +22,7 @@
 #include "../particle/part2.h"
 #include "../particle/part3.h"
 #include "../particle/part4.h"
+#include "../particle/part5.h"
 #ifdef REDE
   #include "../net/client.h"
 #endif
@@ -135,6 +136,7 @@ class engine
       part2* particula2;
       part3* particula3;
       part4* particula4;
+      part5* particula5;
       GLfloat segundos; 
 
 };

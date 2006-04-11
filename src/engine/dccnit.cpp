@@ -81,6 +81,7 @@ engine::engine()
    particula2 = new part2(200,0,220);
    particula3 = new part3(300,20,300);
    particula4 = new part4(240,0,220);
+   particula5 = new part5(120,30,300);
 
 }
 
@@ -101,6 +102,7 @@ engine::~engine()
    delete(particula2);
    delete(particula3);
    delete(particula4);
+   delete(particula5);
 
    delete(option);
 
@@ -1368,9 +1370,10 @@ void engine::Desenhar()
       /* primeiro as nao texturizadas */
       particula->NextStep(segundos);
       particula3->NextStep(segundos);
-      particula4->NextStep(segundos);
       /* agora as texturizadas */
+      particula4->NextStep(segundos);
       particula2->NextStep(segundos);
+      particula5->NextStep(segundos);
    glPopMatrix();
 
    /* Faz o Desenho da GUI */

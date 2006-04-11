@@ -1,39 +1,39 @@
-/* Smoke */
+/* Blood */
 
-#include "part4.h"
+#include "part5.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <GL/gl.h>
 #include <SDL/SDL_image.h>
 
-part4::part4(float cX,float cY,float cZ):
-                               particleSystem(50,PARTICLE_DRAW_GROUPS)
+part5::part5(float cX,float cY,float cZ):
+                               particleSystem(100,PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
    centerY=cY; 
    centerZ=cZ;
    actualParticles = 0;
    alpha = 1.0;
-   gravity = 20;
+   gravity = -20;
    maxLive = 100;
    finalR = 1.0;
-   finalG = 1.0;
-   finalB = 1.0;
-   initR = 0;
-   initG = 0;
-   initB = 0;
-   partTexture = LoadTexture("../data/particles/part5.png");
+   finalG = 0;
+   finalB = 0;
+   initR = 0.6;
+   initG = 0.2;
+   initB = 0.2;
+   partTexture = LoadTexture("../data/particles/part2.png");
    //drawSphereToList(3.0,6,6); 
 }
 
-part4::~part4()
+part5::~part5()
 {
    glDeleteTextures(1,&partTexture);
    //glDeleteLists(sphereList,1);
 }
 
-void part4::drawSphereToList(double r, int lats, int longs) 
+void part5::drawSphereToList(double r, int lats, int longs) 
 {
    sphereList = glGenLists(1);
    glNewList(sphereList,GL_COMPILE);
@@ -64,11 +64,11 @@ void part4::drawSphereToList(double r, int lats, int longs)
    glEndList();
 }
 
-void part4::Render(particle* part)
+void part5::Render(particle* part)
 {
 }
 
-void part4::InitRender()
+void part5::InitRender()
 {
   /* glBlendFunc( GL_SRC_ALPHA, GL_ONE );
    glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );*/
@@ -101,14 +101,14 @@ void part4::InitRender()
    /*glBlendFunc( GL_SRC_ALPHA, GL_ONE );
    glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
    glMaterialf(GL_FRONT_AND_BACK, GL_DIFFUSE, 50);*/
-   glPointSize(32);
+   glPointSize(8);
 
    glBindTexture(GL_TEXTURE_2D, partTexture);
    glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
    glEnable(GL_POINT_SPRITE_ARB);
 }
 
-void part4::EndRender()
+void part5::EndRender()
 {
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
@@ -121,53 +121,61 @@ void part4::EndRender()
    glDisable( GL_BLEND );
 }
 
-void part4::actualize(particle* part)
+void part5::actualize(particle* part)
 {
-   float percent = (float) part->age / (float) (maxLive-1);
+   if(part->posY <= 0 )
+   {
+     part->status =  PARTICLE_STATUS_STATIC;
+     part->posY = 0;
+   }
+   else
+   {
+      float percent = (float) part->age / (float) (maxLive-1);
 
-   part->size -= 0.1*(rand() / ((double)RAND_MAX + 1));
+      part->size -= 0.1*(rand() / ((double)RAND_MAX + 1));
 
-   part->prvR = part->R;
-   part->prvG = part->G;
-   part->prvB = part->B;
+      part->prvR = part->R;
+      part->prvG = part->G;
+      part->prvB = part->B;
 
-   part->R = (1 - (percent) ) * initR + 
+      part->R = (1 - (percent) ) * initR + 
                   (percent) * finalR;
-   part->G = (1 - (percent) ) * initG + 
+      part->G = (1 - (percent) ) * initG + 
                   (percent) * finalG; 
-   part->B = (1 - (percent) ) * initB + 
+      part->B = (1 - (percent) ) * initB + 
                   (percent) * finalB;
 
-   part->prvX = part->posX;
-   part->prvY = part->posY;
-   part->prvZ = part->posZ;
+      part->prvX = part->posX;
+      part->prvY = part->posY;
+      part->prvZ = part->posZ;
    
 
-   part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
+      part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
 
-   if(part->posY >= 5)
-     part->velX += seconds*(gravity/2.0)*(((rand() / ((double)RAND_MAX + 1))));
-   else
-     part->velX += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
-   part->velZ += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
+      if(part->posY >= 5)
+        part->velX += seconds*(gravity/2.0)*(((rand() / ((double)RAND_MAX + 1))));
+      else
+        part->velX += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
+      part->velZ += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
 
-   part->posY += part->velY*seconds;
-   part->posX += part->velX*seconds;
-   part->posZ += part->velZ*seconds;
+      part->posY += part->velY*seconds;
+      part->posX += part->velX*seconds;
+      part->posZ += part->velZ*seconds;
+   }
 }
 
-bool part4::continueLive(particle* part)
+bool part5::continueLive(particle* part)
 {
-   return( (part->age < maxLive) &&
-           ((rand() % 300) != 5) );
+   return( /*(part->age < maxLive) &&
+           ((rand() % 300) != 5)*/ true );
 }
 
-int part4::needCreate()
+int part5::needCreate()
 {
    return(rand() % 100);
 }
 
-void part4::createParticle(particle* part)
+void part5::createParticle(particle* part)
 {
    part->posX = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerX;
    part->posY = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerY;
@@ -187,18 +195,18 @@ void part4::createParticle(particle* part)
    part->prvB = part->B;
 }
 
-void part4::NextStep(float sec)
+void part5::NextStep(float sec)
 {
    seconds = 0.02;
    DoStep();
 }
 
-int part4::numParticles()
+int part5::numParticles()
 {
    return(actualParticles);
 }
 
-GLuint part4::LoadTexture(char* fileName)
+GLuint part5::LoadTexture(char* fileName)
 {
    GLuint indice;
    SDL_Surface* img = IMG_Load(fileName);
