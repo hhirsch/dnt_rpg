@@ -10,7 +10,7 @@
  * posteriormente utilizada para o desenvolvimento das primitivas
  * 'janeliferas'.*/
 #include <SDL/SDL.h>
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include <GL/glu.h>
 #include <stdlib.h>
 #include <math.h>

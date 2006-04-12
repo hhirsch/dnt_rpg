@@ -1,7 +1,7 @@
 #ifndef _texture_h
 #define _texture_h
 
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include <SDL/SDL_image.h>
 
 typedef struct _texture

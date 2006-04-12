@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include <GL/gl.h>
 #include <SDL/SDL_image.h>
 
 part4::part4(float cX,float cY,float cZ):

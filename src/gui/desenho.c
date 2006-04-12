@@ -4,7 +4,7 @@
 
 
 #include "desenho.h"
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include <GL/glu.h>
 
 

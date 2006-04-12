@@ -15,7 +15,7 @@
 
 
 /* includes */
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include <SDL/SDL_image.h>
 
 

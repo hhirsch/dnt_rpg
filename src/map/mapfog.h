@@ -1,7 +1,7 @@
 #ifndef _mapfog_h
 #define _mapfog_h
 
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include <string>
 using namespace std;
 

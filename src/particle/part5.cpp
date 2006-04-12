@@ -4,18 +4,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include <GL/gl.h>
 #include <SDL/SDL_image.h>
 
 part5::part5(float cX,float cY,float cZ):
-                               particleSystem(100,PARTICLE_DRAW_GROUPS)
+                               particleSystem(300,PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
    centerY=cY; 
    centerZ=cZ;
    actualParticles = 0;
    alpha = 1.0;
-   gravity = -20;
+   gravity = -40;
    maxLive = 100;
    finalR = 1.0;
    finalG = 0;
@@ -24,44 +23,11 @@ part5::part5(float cX,float cY,float cZ):
    initG = 0.2;
    initB = 0.2;
    partTexture = LoadTexture("../data/particles/part2.png");
-   //drawSphereToList(3.0,6,6); 
 }
 
 part5::~part5()
 {
    glDeleteTextures(1,&partTexture);
-   //glDeleteLists(sphereList,1);
-}
-
-void part5::drawSphereToList(double r, int lats, int longs) 
-{
-   sphereList = glGenLists(1);
-   glNewList(sphereList,GL_COMPILE);
-   glScalef(r,r,r);
-   int i, j;
-   for(i = 0; i <= lats; i++) {
-      double lat0 = M_PI * (-0.5 + (double) (i - 1) / lats);
-      double z0  = sin(lat0);
-      double zr0 =  cos(lat0);
-    
-      double lat1 = M_PI * (-0.5 + (double) i / lats);
-      double z1 = sin(lat1);
-      double zr1 = cos(lat1);
- 
-      glBegin(GL_QUAD_STRIP);
-      for(j = 0; j <= longs; j++) {
-         double lng = 2 * M_PI * (double) (j - 1) / longs;
-         double x = cos(lng);
-         double y = sin(lng);
- 
-         glNormal3f(x * zr0, y * zr0, z0);
-         glVertex3f(x * zr0, y * zr0, z0);
-         glNormal3f(x * zr1, y * zr1, z1);
-         glVertex3f(x * zr1, y * zr1, z1);
-      }
-      glEnd();
-   }
-   glEndList();
 }
 
 void part5::Render(particle* part)
@@ -172,24 +138,24 @@ bool part5::continueLive(particle* part)
 
 int part5::needCreate()
 {
-   return(rand() % 10);
+   return(rand() % 30);
 }
 
 void part5::createParticle(particle* part)
 {
-   part->posX = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerX;
-   part->posY = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerY;
-   part->posZ = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerZ;
+   part->posX = (0.20*(rand() / ((double)RAND_MAX + 1))-0.10) +centerX;
+   part->posY = (0.20*(rand() / ((double)RAND_MAX + 1))-0.10) +centerY;
+   part->posZ = (0.20*(rand() / ((double)RAND_MAX + 1))-0.10) +centerZ;
    part->prvX = part->posX;
    part->prvY = part->posY;
    part->prvZ = part->posZ;
    part->size = 4; 
-   part->velY = 1.0;
+   part->velY = -1.0;
    part->velX = 1*(rand() / ((double)RAND_MAX + 1))-0.5;
    part->velZ = 1*(rand() / ((double)RAND_MAX + 1))-0.5;
-   part->R = initR;//(0.40*(rand() / ((double)RAND_MAX + 1))) + 0.12;
-   part->G = initG;//(0.22*(rand() / ((double)RAND_MAX + 1))) + 0.42;
-   part->B = initB;//0.84;
+   part->R = initR;
+   part->G = initG;
+   part->B = initB;
    part->prvR = part->R;
    part->prvG = part->G; 
    part->prvB = part->B;

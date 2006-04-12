@@ -1,7 +1,7 @@
 #ifndef _maplights_h
 #define _maplights_h
 
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include <string>
 using namespace std;
 

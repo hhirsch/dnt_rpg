@@ -3,7 +3,7 @@
 #include "part3.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <GL/gl.h>
+
 part3::part3(float cX,float cY,float cZ):
                                     particleSystem(150,PARTICLE_DRAW_INDIVIDUAL)
 {

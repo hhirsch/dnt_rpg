@@ -1,7 +1,7 @@
 #ifndef _culling_h
 #define _culling_h
 
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include <math.h>
 
 /* Atualiza os planos do View Frustum atual*/

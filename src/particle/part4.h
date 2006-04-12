@@ -2,7 +2,6 @@
 #define _part4_h
 
 #include "particle.h"
-#include <GL/gl.h>
 
 class part4: particleSystem
 {

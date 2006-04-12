@@ -6,7 +6,7 @@
 #include "../gui/farso.h"
 #include "dccnit.h"
 #include "../lang/lang.h"
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <stdlib.h>
 

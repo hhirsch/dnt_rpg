@@ -1,7 +1,7 @@
 #ifndef _particle_h
 #define _particle_h
 
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 
 #define PARTICLE_STATUS_DEAD   0  /* Say that a particle is dead */

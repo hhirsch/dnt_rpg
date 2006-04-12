@@ -2,7 +2,6 @@
 #define _part5_h
 
 #include "particle.h"
-#include <GL/gl.h>
 
 class part5: particleSystem
 {
@@ -70,11 +69,7 @@ class part5: particleSystem
       float finalR, finalG, finalB;
       float initR, initG, initB;
 
-      GLuint sphereList;
       GLuint partTexture;
-
-
-      void drawSphereToList(double r, int lats, int longs);
 };
 
 
