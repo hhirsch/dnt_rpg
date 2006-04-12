@@ -172,7 +172,7 @@ bool part5::continueLive(particle* part)
 
 int part5::needCreate()
 {
-   return(rand() % 100);
+   return(rand() % 10);
 }
 
 void part5::createParticle(particle* part)
