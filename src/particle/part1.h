@@ -6,7 +6,7 @@
 class part1: particleSystem
 {
    public:
-      part1(float cX,float cY,float cZ);
+      part1(float cX,float cY,float cZ, string fileName);
       ~part1();
 
       /***************************************************************
@@ -55,10 +55,6 @@ class part1: particleSystem
       int numParticles();
 
    private:
-      float centerX,centerY, centerZ;
-      float gravity;
-
-      float alpha;
       float seconds; 
    
 };

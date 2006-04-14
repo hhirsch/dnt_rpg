@@ -9,32 +9,18 @@
 
 #include <GL/glext.h>
 
-part2::part2(float cX,float cY,float cZ):
-                               particleSystem(200, PARTICLE_DRAW_GROUPS)
+part2::part2(float cX,float cY,float cZ, string fileName):
+                               particleSystem(fileName, PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
-   centerY=cY; 
-   centerZ=cZ;
+   centerY = cY; 
+   centerZ = cZ;
    actualParticles = 0;
-   alpha = 1.0;
-   gravity = 12;
-   maxLive = 100;
-   finalR = 0.27;
-   finalG = 0.04;
-   finalB = 0.04;
-   /*initR = 1;
-   initG = 0.964;
-   initB = 0;*/
-   initR = 0.18;
-   initG = 0.18;
-   initB = 0;
    partTexture = LoadTexture("../data/particles/part2.png");
-   //drawSphereToList(5,5); 
 }
 
 part2::~part2()
 {
-   //glDeleteLists(sphereList,1);
    glDeleteTextures(1,&partTexture);
 }
 
@@ -71,76 +57,23 @@ void part2::drawSphereToList(int lats, int longs)
 
 void part2::Render(particle* part)
 {
-   //glLineWidth(part->size);
-   //glPointSize(part->size);
-   //glBegin(GL_POINTS);
    glColor3f(part->R,part->G,part->B);
    glVertex3f(part->posX,part->posY,part->posZ);
    glColor3f(part->prvR,part->prvG,part->prvB);
    glVertex3f(part->prvX,part->prvY,part->prvZ);
-   /*glColor4f( (0.67*part->prvR + 0.33*part->R), 
-              (0.67*part->prvG + 0.33*part->G),
-              (0.67*part->prvB + 0.33*part->B), alpha);
-   glVertex3f((0.67*part->prvX + 0.33*part->posX),
-                (0.67*part->prvY + 0.33*part->posY),
-                (0.67*part->prvZ + 0.33*part->posZ));
-   glColor4f( (0.33*part->prvR + 0.67*part->R), 
-              (0.33*part->prvG + 0.67*part->G),
-              (0.33*part->prvB + 0.67*part->B), alpha);
-   glVertex3f((0.33*part->prvX + 0.67*part->posX),
-                (0.33*part->prvY+ 0.67*part->posY),
-                (0.33*part->prvZ + 0.67*part->posZ));*/
-   //glEnd();
-   /*glPushMatrix();
-   glColor4f(part->R,part->G,part->B,alpha);
-   glTranslatef(part->posX,part->posY,part->posZ);
-   glScalef(part->size,part->size,part->size);
-   glCallList(sphereList);
-   glPopMatrix();
-   glPushMatrix();
-   glColor4f(part->prvR,part->prvG,part->prvB,alpha);
-   glTranslatef(part->prvX,part->prvY,part->prvZ);
-   glScalef(part->size,part->size,part->size);
-   glCallList(sphereList);
-   glPopMatrix();
-   glPushMatrix();
-   glColor4f( (0.67*part->prvR + 0.33*part->R), 
-              (0.67*part->prvG + 0.33*part->G),
-              (0.67*part->prvB + 0.33*part->B), alpha);
-   glTranslatef((0.67*part->prvX + 0.33*part->posX),
-                (0.67*part->prvY + 0.33*part->posY),
-                (0.67*part->prvZ + 0.33*part->posZ));
-   glScalef(part->size,part->size,part->size);
-   glCallList(sphereList);
-   glPopMatrix();
-   glPushMatrix();
-   glColor4f( (0.33*part->prvR + 0.67*part->R), 
-              (0.33*part->prvG + 0.67*part->G),
-              (0.33*part->prvB + 0.67*part->B), alpha);
-   glTranslatef((0.33*part->prvX + 0.67*part->posX),
-                (0.33*part->prvY+ 0.67*part->posY),
-                (0.33*part->prvZ + 0.67*part->posZ));
-   glScalef(part->size,part->size,part->size);
-   glCallList(sphereList);
-   glPopMatrix();*/
 }
 
 void part2::InitRender()
 {
-   //glPushMatrix();
-   /*glDrawBuffer(GL_AUX0);
-   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);*/
    glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
    glDepthMask(GL_FALSE);
    glEnable(GL_CULL_FACE);
-   //glEnable(GL_ALPHA_TEST);
 
    glEnable(GL_TEXTURE_2D);
    glBlendFunc(GL_DST_ALPHA,GL_SRC_ALPHA); 
    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-   //glBlendFunc(GL_DST_ALPHA, GL_ONE);
    glEnable(GL_BLEND);
     
    float MaxPointSize;
@@ -153,27 +86,16 @@ void part2::InitRender()
    PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
-   //glBlendFunc(GL_DST_ALPHA, GL_SRC_ALPHA);
-   //glBlendFunc( GL_DST_ALPHA, GL_ZERO_MINUS_SRC_ALPHA );
-   //glEnable( GL_BLEND );
-   /*glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-   glMaterialf(GL_FRONT_AND_BACK, GL_DIFFUSE, 50);*/
    glPointSize(32);
 
    glBindTexture(GL_TEXTURE_2D, partTexture);
    glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
    glEnable(GL_POINT_SPRITE_ARB);
 
-   //glPushMatrix();
-   //glBegin(GL_POINTS);
-   //glEnable(GL_POINT_SMOOTH);
 }
 
 void part2::EndRender()
 {
-   //glEnd();
-   //glPopMatrix();
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
@@ -181,27 +103,13 @@ void part2::EndRender()
    glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
    glDisable(GL_TEXTURE_2D);
    glDisable(GL_POINT_SPRITE_ARB);
-   /*glDrawBuffer(GL_BACK);
-   glReadBuffer(GL_AUX0);
-   glCopyPixels(0,0,800,600,GL_COLOR);
-   //glCopyPixels(0,0,800,600,GL_DEPTH);
-   glReadBuffer(GL_BACK);*/
    glEnable(GL_LIGHTING);
    glDisable( GL_BLEND );
-  
-   //glPopMatrix();
-
-   //glReadBuffer(GL_BACK);
-   //glDrawBuffer(GL_BACK);
-   
-   //glDisable(GL_POINT_SMOOTH);
 }
  
 void part2::actualize(particle* part)
 {
    float percent = (float) part->age / (float) (maxLive-1);
-
-   //part->size =  (1-percent)*1 + 0.1*(rand() / ((double)RAND_MAX + 1))+1;
 
    part->size =  (1-percent)*5 + 0.1*(rand() / ((double)RAND_MAX + 1))+2;
 
@@ -223,7 +131,7 @@ void part2::actualize(particle* part)
 
    part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
 
-   float vXZ = 30*(1-percent) + 10*(percent);
+   float vXZ = dMultPos[0]*(1-percent) + dMultPos[2]*(percent);
    float vXZ2 = vXZ / 2.0;
 
    part->velX += seconds*(vXZ*((rand() / ((double)RAND_MAX + 1))) - vXZ2);
@@ -247,16 +155,19 @@ int part2::needCreate()
 
 void part2::createParticle(particle* part)
 {
-   part->posX = (2*(rand() / ((double)RAND_MAX + 1))-1) +centerX;
-   part->posY = (2*(rand() / ((double)RAND_MAX + 1))-1) +centerY;
-   part->posZ = ((rand() / ((double)RAND_MAX + 1))) +centerZ;
+   part->posX = (dMultCenter[0]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[0])
+                + centerX;
+   part->posY = (dMultCenter[1]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[1])
+                + centerY;
+   part->posZ = (dMultCenter[2]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[2])
+                + centerZ;
    part->prvX = part->posX;
    part->prvY = part->posY;
    part->prvZ = part->posZ;
    part->size = 2; 
    part->velY = 1.0;
-   part->velX = 2*(rand() / ((double)RAND_MAX + 1))-1;
-   part->velZ = 2*(rand() / ((double)RAND_MAX + 1))-1;
+   part->velX = dMultVel[0]*(rand() / ((double)RAND_MAX + 1))+dSumVel[0];
+   part->velZ = dMultVel[2]*(rand() / ((double)RAND_MAX + 1))+dSumVel[2];
    part->R = initR;//(0.40*(rand() / ((double)RAND_MAX + 1))) + 0.12;
    part->G = initG;//(0.22*(rand() / ((double)RAND_MAX + 1))) + 0.42;
    part->B = initB;//0.84;

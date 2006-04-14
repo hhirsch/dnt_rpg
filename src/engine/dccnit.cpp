@@ -77,11 +77,11 @@ engine::engine()
    ultimaLeitura = SDL_GetTicks();
    ultimoMouse = ultimaLeitura;
 
-   particula = new part1(150,60,120); 
-   particula2 = new part2(200,0,220);
+   particula = new part1(150,60,120,"../data/particles/waterfall1.par"); 
+   particula2 = new part2(200,0,220,"../data/particles/fire1.par");
    particula3 = new part3(300,20,300);
-   particula4 = new part4(240,0,220);
-   particula5 = new part5(120,30,300);
+   particula4 = new part4(240,0,220,"../data/particles/smoke1.par");
+   particula5 = new part5(120,30,300, "../data/particles/blood1.par");
 
 }
 
@@ -732,9 +732,10 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          FPS->texto = texto;
          sprintf(texto,"    Part: %d",
                                    particula->numParticles() 
-                                 + 4*particula2->numParticles() 
+                                 + particula2->numParticles() 
                                  + particula3->numParticles()
-                                 + 4*particula4->numParticles());
+                                 + particula4->numParticles()
+                                 + particula5->numParticles());
          FPS->texto += texto;
          janAtalhos->Desenhar();
       }
@@ -1000,8 +1001,16 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if(keys[SDLK_p])
       {
           delete(particula5);
-          particula5 = new part5(PCs->personagemAtivo->posicaoLadoX,30,
-                                 PCs->personagemAtivo->posicaoLadoZ);
+          particula5 = new part5(PCs->personagemAtivo->posicaoLadoX,28,
+                                 PCs->personagemAtivo->posicaoLadoZ, 
+                                 "../data/particles/blood1.par");
+      }
+      if(keys[SDLK_o])
+      {
+          delete(particula5);
+          particula5 = new part5(PCs->personagemAtivo->posicaoLadoX,28,
+                                 PCs->personagemAtivo->posicaoLadoZ, 
+                                 "../data/particles/blood2.par");
       }
 
       if(keys[SDLK_n])

@@ -6,7 +6,7 @@
 class part4: particleSystem
 {
    public:
-      part4(float cX,float cY,float cZ);
+      part4(float cX,float cY,float cZ, string fileName);
       ~part4();
 
       /***************************************************************
@@ -58,17 +58,7 @@ class part4: particleSystem
 
 
    private:
-      float centerX,centerY, centerZ;
-      float gravity;
-
-      float alpha;
       float seconds;
-
-      int maxLive;
-
-      float finalR, finalG, finalB;
-      float initR, initG, initB;
-
       GLuint partTexture;
 };
 

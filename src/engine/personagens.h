@@ -20,7 +20,7 @@ using namespace std;
 #define POSRETX 8   // posicao x do retrato na janela
 #define POSRETY 20  // posicao y do retrato na janela
 
-#define STATE_IDLE    0 
+#define STATE_IDLE  0 
 #define STATE_WALK  1
 
 

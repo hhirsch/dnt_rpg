@@ -55,21 +55,12 @@ class part3: particleSystem
       int numParticles();
    
    private:
-      float centerX, centerY, centerZ;
       float otherX, otherY, otherZ;
-      float gravity;
-
       int time;
-
-      float alpha;
       float seconds;
-
       int xCoord, yCoord; /* Texture coordinate for actual particle */
-
       GLuint partTexture; 
-  
       GLuint LoadTexture(char* fileName);
-   
 };
 
 

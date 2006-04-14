@@ -6,22 +6,13 @@
 #include <math.h>
 #include <SDL/SDL_image.h>
 
-part4::part4(float cX,float cY,float cZ):
-                               particleSystem(50,PARTICLE_DRAW_GROUPS)
+part4::part4(float cX,float cY,float cZ, string fileName):
+                               particleSystem(fileName,PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
-   centerY=cY; 
-   centerZ=cZ;
+   centerY = cY; 
+   centerZ = cZ;
    actualParticles = 0;
-   alpha = 1.0;
-   gravity = 20;
-   maxLive = 100;
-   finalR = 1.0;
-   finalG = 1.0;
-   finalB = 1.0;
-   initR = 0;
-   initG = 0;
-   initB = 0;
    partTexture = LoadTexture("../data/particles/part5.png");
 }
 
@@ -100,11 +91,13 @@ void part4::actualize(particle* part)
 
    part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
 
-   if(part->posY >= 5)
-     part->velX += seconds*(gravity/2.0)*(((rand() / ((double)RAND_MAX + 1))));
-   else
-     part->velX += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
-   part->velZ += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
+   //if(part->posY >= 5)
+   //  part->velX += seconds*(gravity/2.0)*(((rand() / ((double)RAND_MAX + 1))));
+   //else
+     part->velX += seconds*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
+                   + dSumVel[0]);
+   part->velZ += seconds*(dMultVel[2]*((rand() / ((double)RAND_MAX + 1))) 
+                   + dSumVel[2]);
 
    part->posY += part->velY*seconds;
    part->posX += part->velX*seconds;
@@ -119,21 +112,24 @@ bool part4::continueLive(particle* part)
 
 int part4::needCreate()
 {
-   return(rand() % 100);
+   return(rand() % 10);
 }
 
 void part4::createParticle(particle* part)
 {
-   part->posX = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerX;
-   part->posY = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerY;
-   part->posZ = (0.20*(rand() / ((double)RAND_MAX + 1))+0.10) +centerZ;
+   part->posX = (dMultCenter[0]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[0])
+                + centerX;
+   part->posY = (dMultCenter[1]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[1])
+                + centerY;
+   part->posZ = (dMultCenter[2]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[2])
+                + centerZ;
    part->prvX = part->posX;
    part->prvY = part->posY;
    part->prvZ = part->posZ;
    part->size = 4; 
    part->velY = 1.0;
-   part->velX = 1*(rand() / ((double)RAND_MAX + 1))-0.5;
-   part->velZ = 1*(rand() / ((double)RAND_MAX + 1))-0.5;
+   part->velX = dMultVel[0]*(rand() / ((double)RAND_MAX + 1))+dSumVel[0];
+   part->velZ = dMultVel[2]*(rand() / ((double)RAND_MAX + 1))+dSumVel[2];
    part->R = initR;
    part->G = initG;
    part->B = initB;

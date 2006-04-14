@@ -6,7 +6,7 @@
 class part2: particleSystem
 {
    public:
-      part2(float cX,float cY,float cZ);
+      part2(float cX,float cY,float cZ, string fileName);
       ~part2();
 
       /***************************************************************
@@ -57,20 +57,9 @@ class part2: particleSystem
       GLuint LoadTexture(char* fileName);
 
    private:
-      float centerX,centerY, centerZ;
-      float gravity;
-
-      float alpha;
       float seconds;
-
-      int maxLive;
-
-      float finalR, finalG, finalB;
-      float initR, initG, initB;
-
       GLuint sphereList;
       GLuint partTexture;
-
 
       void drawSphereToList(int lats, int longs);
 

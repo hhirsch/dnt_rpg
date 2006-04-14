@@ -6,22 +6,13 @@
 #include <math.h>
 #include <SDL/SDL_image.h>
 
-part5::part5(float cX,float cY,float cZ):
-                               particleSystem(300,PARTICLE_DRAW_GROUPS)
+part5::part5(float cX,float cY,float cZ, string fileName):
+                               particleSystem(fileName,PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
    centerY=cY; 
    centerZ=cZ;
    actualParticles = 0;
-   alpha = 1.0;
-   gravity = -40;
-   maxLive = 100;
-   finalR = 1.0;
-   finalG = 0;
-   finalB = 0;
-   initR = 0.6;
-   initG = 0.2;
-   initB = 0.2;
    partTexture = LoadTexture("../data/particles/part2.png");
 }
 
@@ -36,19 +27,14 @@ void part5::Render(particle* part)
 
 void part5::InitRender()
 {
-  /* glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );*/
   glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
    glDepthMask(GL_FALSE);
    glEnable(GL_CULL_FACE);
-   //glEnable(GL_ALPHA_TEST);
 
    glEnable(GL_TEXTURE_2D);
-   //glBlendFunc(GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   //glBlendFunc(GL_DST_ALPHA, GL_ZERO);
    glEnable(GL_BLEND);
     
    float MaxPointSize;
@@ -61,12 +47,6 @@ void part5::InitRender()
    PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
-   //glBlendFunc(GL_DST_ALPHA, GL_SRC_ALPHA);
-   //glBlendFunc( GL_DST_ALPHA, GL_ZERO_MINUS_SRC_ALPHA );
-   //glEnable( GL_BLEND );
-   /*glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-   glMaterialf(GL_FRONT_AND_BACK, GL_DIFFUSE, 50);*/
    glPointSize(8);
 
    glBindTexture(GL_TEXTURE_2D, partTexture);
@@ -118,11 +98,17 @@ void part5::actualize(particle* part)
 
       part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
 
-      if(part->posY >= 5)
+      /*if(part->posY >= 5)
+      {
         part->velX += seconds*(gravity/2.0)*(((rand() / ((double)RAND_MAX + 1))));
+      }
       else
-        part->velX += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
-      part->velZ += seconds*(8*((rand() / ((double)RAND_MAX + 1))) - 4);
+      {*/
+        part->velX += seconds*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
+                      + dSumVel[0]);
+      //}
+      part->velZ += seconds*(dMultVel[2]*((rand() / ((double)RAND_MAX + 1))) 
+                      + dSumVel[2]);
 
       part->posY += part->velY*seconds;
       part->posX += part->velX*seconds;
@@ -132,8 +118,7 @@ void part5::actualize(particle* part)
 
 bool part5::continueLive(particle* part)
 {
-   return( /*(part->age < maxLive) &&
-           ((rand() % 300) != 5)*/ true );
+   return( true );
 }
 
 int part5::needCreate()
@@ -143,9 +128,12 @@ int part5::needCreate()
 
 void part5::createParticle(particle* part)
 {
-   part->posX = (0.20*(rand() / ((double)RAND_MAX + 1))-0.10) +centerX;
-   part->posY = (0.20*(rand() / ((double)RAND_MAX + 1))-0.10) +centerY;
-   part->posZ = (0.20*(rand() / ((double)RAND_MAX + 1))-0.10) +centerZ;
+   part->posX = (dMultCenter[0]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[0])
+                + centerX;
+   part->posY = (dMultCenter[1]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[1])
+                + centerY;
+   part->posZ = (dMultCenter[2]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[2])
+                + centerZ;
    part->prvX = part->posX;
    part->prvY = part->posY;
    part->prvZ = part->posZ;

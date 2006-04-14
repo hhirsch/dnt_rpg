@@ -3,10 +3,96 @@
 #include <stdio.h>
 #include <GL/gl.h>
 
+#include <iostream>
+#include <fstream>
+
 /***************************************************************
  *                 Particle System Constructor                 *
  ***************************************************************/
 particleSystem::particleSystem(int total, int mode)
+{
+   init(total, mode);
+}
+
+/***************************************************************
+ *                 Particle System Constructor                 *
+ ***************************************************************/
+particleSystem::particleSystem(string fileName, int mode)
+{
+   std::ifstream file;
+   string aux;
+   char aux2[20];
+
+   file.open(fileName.c_str(), ios::in | ios::binary);
+
+
+   if(!file)
+   {
+      printf("Error while opening particle file: %s\n",fileName.c_str());
+      return;
+   }
+
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %d",&aux2[0], &maxLive);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %d",&aux2[0], &maxParticles);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &centerX);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &centerY);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &centerZ);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &gravity);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &initR);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &initG);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &initB);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &finalR);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &finalG);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &finalB);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f",&aux2[0], &alpha);
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dMultCenter[0],
+                             &dMultCenter[1], &dMultCenter[2] );
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dSumCenter[0],
+                             &dSumCenter[1], &dSumCenter[2] );
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dMultPos[0],
+                             &dMultPos[1], &dMultPos[2] );
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dSumPos[0],
+                             &dSumPos[1], &dSumPos[2] );
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dMultColor[0],
+                             &dMultColor[1], &dMultColor[2] );
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dSumColor[0],
+                             &dSumColor[1], &dSumColor[2] );
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dMultVel[0],
+                             &dMultVel[1], &dMultVel[2] );
+   getline(file, aux);
+   sscanf(aux.c_str(), "%s %f %f %f",&aux2[0], &dSumVel[0],
+                             &dSumVel[1], &dSumVel[2] );
+
+   file.close();
+
+   init(maxParticles, mode);
+  
+}
+
+/***************************************************************
+ *                Particle System Initialization               *
+ ***************************************************************/
+void particleSystem::init(int total, int mode)
 {
    particles = (particle*) malloc(total*sizeof(particle));
    maxParticles = total;
