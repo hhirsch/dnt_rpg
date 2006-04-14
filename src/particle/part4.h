@@ -69,11 +69,7 @@ class part4: particleSystem
       float finalR, finalG, finalB;
       float initR, initG, initB;
 
-      GLuint sphereList;
       GLuint partTexture;
-
-
-      void drawSphereToList(double r, int lats, int longs);
 };
 
 

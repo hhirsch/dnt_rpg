@@ -23,44 +23,11 @@ part4::part4(float cX,float cY,float cZ):
    initG = 0;
    initB = 0;
    partTexture = LoadTexture("../data/particles/part5.png");
-   //drawSphereToList(3.0,6,6); 
 }
 
 part4::~part4()
 {
    glDeleteTextures(1,&partTexture);
-   //glDeleteLists(sphereList,1);
-}
-
-void part4::drawSphereToList(double r, int lats, int longs) 
-{
-   sphereList = glGenLists(1);
-   glNewList(sphereList,GL_COMPILE);
-   glScalef(r,r,r);
-   int i, j;
-   for(i = 0; i <= lats; i++) {
-      double lat0 = M_PI * (-0.5 + (double) (i - 1) / lats);
-      double z0  = sin(lat0);
-      double zr0 =  cos(lat0);
-    
-      double lat1 = M_PI * (-0.5 + (double) i / lats);
-      double z1 = sin(lat1);
-      double zr1 = cos(lat1);
- 
-      glBegin(GL_QUAD_STRIP);
-      for(j = 0; j <= longs; j++) {
-         double lng = 2 * M_PI * (double) (j - 1) / longs;
-         double x = cos(lng);
-         double y = sin(lng);
- 
-         glNormal3f(x * zr0, y * zr0, z0);
-         glVertex3f(x * zr0, y * zr0, z0);
-         glNormal3f(x * zr1, y * zr1, z1);
-         glVertex3f(x * zr1, y * zr1, z1);
-      }
-      glEnd();
-   }
-   glEndList();
 }
 
 void part4::Render(particle* part)
@@ -69,19 +36,14 @@ void part4::Render(particle* part)
 
 void part4::InitRender()
 {
-  /* glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );*/
   glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
    glDepthMask(GL_FALSE);
    glEnable(GL_CULL_FACE);
-   //glEnable(GL_ALPHA_TEST);
 
    glEnable(GL_TEXTURE_2D);
-   //glBlendFunc(GL_DST_ALPHA,GL_ONE_MINUS_SRC_ALPHA); 
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   //glBlendFunc(GL_DST_ALPHA, GL_ZERO);
    glEnable(GL_BLEND);
     
    float MaxPointSize;
@@ -94,12 +56,6 @@ void part4::InitRender()
    PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
-   //glBlendFunc(GL_DST_ALPHA, GL_SRC_ALPHA);
-   //glBlendFunc( GL_DST_ALPHA, GL_ZERO_MINUS_SRC_ALPHA );
-   //glEnable( GL_BLEND );
-   /*glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-   glMaterialf(GL_FRONT_AND_BACK, GL_DIFFUSE, 50);*/
    glPointSize(32);
 
    glBindTexture(GL_TEXTURE_2D, partTexture);
@@ -178,9 +134,9 @@ void part4::createParticle(particle* part)
    part->velY = 1.0;
    part->velX = 1*(rand() / ((double)RAND_MAX + 1))-0.5;
    part->velZ = 1*(rand() / ((double)RAND_MAX + 1))-0.5;
-   part->R = initR;//(0.40*(rand() / ((double)RAND_MAX + 1))) + 0.12;
-   part->G = initG;//(0.22*(rand() / ((double)RAND_MAX + 1))) + 0.42;
-   part->B = initB;//0.84;
+   part->R = initR;
+   part->G = initG;
+   part->B = initB;
    part->prvR = part->R;
    part->prvG = part->G; 
    part->prvB = part->B;

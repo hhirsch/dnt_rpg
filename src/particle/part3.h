@@ -53,7 +53,7 @@ class part3: particleSystem
       void NextStep(float sec);
 
       int numParticles();
-
+   
    private:
       float centerX, centerY, centerZ;
       float otherX, otherY, otherZ;
@@ -62,7 +62,13 @@ class part3: particleSystem
       int time;
 
       float alpha;
-      float seconds; 
+      float seconds;
+
+      int xCoord, yCoord; /* Texture coordinate for actual particle */
+
+      GLuint partTexture; 
+  
+      GLuint LoadTexture(char* fileName);
    
 };
 

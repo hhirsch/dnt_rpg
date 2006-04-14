@@ -3,6 +3,7 @@
 #include "part3.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <SDL/SDL_image.h>
 
 part3::part3(float cX,float cY,float cZ):
                                     particleSystem(150,PARTICLE_DRAW_INDIVIDUAL)
@@ -15,10 +16,15 @@ part3::part3(float cX,float cY,float cZ):
    alpha = 0.6;
    gravity = -20;
    time = -1;
+   xCoord = 0;
+   yCoord = 0;
+   //partTexture = LoadTexture("../data/particles/watersurf.png"); 
+   //partTexture = LoadTexture("../data/particles/part2.png");
 }
 
 part3::~part3()
 {
+   //glDeleteTextures(1,&partTexture);
 }
 
 void part3::Render(particle* part)
@@ -27,22 +33,53 @@ void part3::Render(particle* part)
    glVertex3f(part->posX,
               part->posY,
               part->posZ);
+   //glTexCoord2i(xCoord,yCoord);
    glNormal3f(0,1,0);
+
+   /* From 0,0 to 0,1 to 1,0 to 1,1 */
+   /*if(xCoord == 0)
+   {
+      if(yCoord == 0)
+      {
+          yCoord = 1;  
+      }
+      else
+      {
+          xCoord = 1;
+          yCoord = 0;
+      }
+   } 
+   else 
+   {
+      if(yCoord == 0)
+      {
+          yCoord = 1;  
+      }
+      else
+      {
+          xCoord = 0;
+          yCoord = 0;
+      }
+
+   }*/
 }
 
 void part3::InitRender()
 {
    glDisable(GL_LIGHTING);
-   glDisable(GL_TEXTURE_2D);
+   //glEnable(GL_TEXTURE_2D);
    glEnable( GL_BLEND );
-   glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+   /*glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );*/
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   //glBindTexture(GL_TEXTURE_2D, partTexture);
    glBegin(GL_QUAD_STRIP);
 }
 
 void part3::EndRender()
 {
    glEnd();
+   glDisable(GL_TEXTURE_2D);
    glEnable(GL_LIGHTING);
    glDisable( GL_BLEND );
 }
@@ -54,19 +91,19 @@ void part3::actualize(particle* part)
    int next = part->internalNumber+2 ;
    if(part->internalNumber == 0)
    {
-     if(time == 6)
+     if(time == 10)
      {
-        part->prvY = ((rand() / ((double)RAND_MAX + 1))); 
+        part->prvY = 2 + 0.1*((rand() / ((double)RAND_MAX + 1))); 
         time = 1;
      }
      else
      {
         time++;
      }
-     if(time >= 3)
-        part->posY = (time/3.0)*part->prvY + centerY;
+     if(time <= 5)
+        part->posY = (time/5.0)*part->prvY + centerY;
      else
-        part->posY = ((3-(time-3))/3.0)*part->prvY + centerY;
+        part->posY = ((5-(time-5))/5.0)*part->prvY + centerY;
      particles[part->internalNumber+1].posY = part->posY;
      particles[next].posY = part->posY;  
    }
@@ -110,9 +147,9 @@ void part3::createParticle(particle* part)
    if((actualParticles % 2) == 0 )
    {
       centerZ -= 10;
-      centerX += 2;
+      centerX += 10;
       
-      if( (actualParticles % 4 == 0))
+      /*if( (actualParticles % 4 == 0))
       {
         centerY -= 5;
         otherY += 5;
@@ -121,7 +158,7 @@ void part3::createParticle(particle* part)
       {
         centerY += 5;
         otherY -= 5;
-      }
+      }*/
    }
    else
    {
@@ -140,3 +177,20 @@ int part3::numParticles()
    return(actualParticles);
 }
 
+
+GLuint part3::LoadTexture(char* fileName)
+{
+   GLuint indice;
+   SDL_Surface* img = IMG_Load(fileName);
+
+   glGenTextures(1, &(indice));
+   glBindTexture(GL_TEXTURE_2D, indice);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+   return(indice);
+}

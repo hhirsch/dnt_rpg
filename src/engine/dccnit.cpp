@@ -996,11 +996,12 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           }
       }
 
-      /* Temporariamente, para visuallizar o efeito de sangue */
+      /* Temporariamente, para visualizar o efeito de sangue */
       if(keys[SDLK_p])
       {
           delete(particula5);
-          particula5 = new part5(120,30,300);
+          particula5 = new part5(PCs->personagemAtivo->posicaoLadoX,30,
+                                 PCs->personagemAtivo->posicaoLadoZ);
       }
 
       if(keys[SDLK_n])
