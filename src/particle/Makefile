@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -g -c -Wall
-OBJS = particle.o part1.o part2.o part3.o part4.o part5.o
+OBJS = particle.o part1.o part2.o part3.o part4.o part5.o part6.o
 
 all: $(OBJS)
 
@@ -34,6 +34,10 @@ part5.o: part5.cpp part5.h
 	@$(CC) $(CFLAGS) part5.cpp -o part5.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+part6.o: part6.cpp part6.h
+	@printf "Making part6.o (Lightning)... "
+	@$(CC) $(CFLAGS) part6.cpp -o part6.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean: 
 	@printf "Cleaning Particle Bin Files... "

@@ -1,13 +1,13 @@
-#ifndef _part4_h
-#define _part4_h
+#ifndef _part6_h
+#define _part6_h
 
 #include "particle.h"
 
-class part4: particleSystem
+class part6: particleSystem
 {
    public:
-      part4(float cX,float cY,float cZ, string fileName);
-      ~part4();
+      part6(float cX,float cY,float cZ, string fileName);
+      ~part6();
 
       /***************************************************************
        * Reason: Render one particle on screen
@@ -59,7 +59,8 @@ class part4: particleSystem
 
    private:
       float seconds;
-      GLuint partTexture[4];
+      float actualY;
+      GLuint partTexture;
 };
 
 

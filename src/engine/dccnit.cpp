@@ -82,6 +82,7 @@ engine::engine()
    particula3 = new part3(300,20,300);
    particula4 = new part4(240,0,220,"../data/particles/smoke1.par");
    particula5 = new part5(120,30,300, "../data/particles/blood1.par");
+   particula6 = new part6(50,250,100,"../data/particles/lightning1.par");
 
 }
 
@@ -103,6 +104,7 @@ engine::~engine()
    delete(particula3);
    delete(particula4);
    delete(particula5);
+   delete(particula6);
 
    delete(option);
 
@@ -735,7 +737,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                                  + particula2->numParticles() 
                                  + particula3->numParticles()
                                  + particula4->numParticles()
-                                 + particula5->numParticles());
+                                 + particula5->numParticles()
+                                 + particula6->numParticles() );
          FPS->texto += texto;
          janAtalhos->Desenhar();
       }
@@ -1011,6 +1014,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           particula5 = new part5(PCs->personagemAtivo->posicaoLadoX,28,
                                  PCs->personagemAtivo->posicaoLadoZ, 
                                  "../data/particles/blood2.par");
+      }
+      if(keys[SDLK_l])
+      {
+         delete(particula6);
+         particula6 = new part6(50,250,100,"../data/particles/lightning1.par");
       }
 
       if(keys[SDLK_n])
@@ -1391,6 +1399,7 @@ void engine::Desenhar()
       particula4->NextStep(segundos);
       particula2->NextStep(segundos);
       particula5->NextStep(segundos);
+      particula6->NextStep(segundos);
    glPopMatrix();
 
    /* Faz o Desenho da GUI */

@@ -7,22 +7,37 @@
 #include <SDL/SDL_image.h>
 
 part4::part4(float cX,float cY,float cZ, string fileName):
-                               particleSystem(fileName,PARTICLE_DRAW_GROUPS)
+                               particleSystem(fileName,PARTICLE_DRAW_INDIVIDUAL)
 {
    centerX = cX; 
    centerY = cY; 
    centerZ = cZ;
    actualParticles = 0;
-   partTexture = LoadTexture("../data/particles/part5.png");
+   //partTexture = LoadTexture("../data/particles/part5.png");
+   partTexture[0] = LoadTexture("../data/particles/smoke1.png");
+   partTexture[1] = LoadTexture("../data/particles/smoke2.png");
+   partTexture[2] = LoadTexture("../data/particles/smoke3.png");
+   partTexture[3] = LoadTexture("../data/particles/smoke4.png");
 }
 
 part4::~part4()
 {
-   glDeleteTextures(1,&partTexture);
+   glDeleteTextures(1,&partTexture[0]);
+   glDeleteTextures(1,&partTexture[1]);
+   glDeleteTextures(1,&partTexture[2]);
+   glDeleteTextures(1,&partTexture[3]);
 }
 
 void part4::Render(particle* part)
 {
+   float percent = (float) part->age / (float) (maxLive-1);
+   int tex = (int)(percent*3);
+   glBindTexture(GL_TEXTURE_2D, partTexture[tex]);
+   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
+   glBegin(GL_POINTS);
+     glColor3f(part->R,part->G,part->B);
+     glVertex3f(part->posX,part->posY,part->posZ);
+   glEnd();
 }
 
 void part4::InitRender()
@@ -40,17 +55,18 @@ void part4::InitRender()
    float MaxPointSize;
    glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
 
-   float quadratic[] =  { 0.01f, 0.01f, 0.0f };
+   float quadratic[] =  { 2.0f, 0.0f, 0.0f };
+   //derived_size = clamp(size * sqrt(1 / (a + b * d + c * d ^ 2))) 
    PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
 
-   PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
-   PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
+   PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 1.0f );
+   PointParameterf( GL_POINT_SIZE_MIN_ARB, 32.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
-   glPointSize(32);
+   glPointSize(64);
 
-   glBindTexture(GL_TEXTURE_2D, partTexture);
-   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
+  /* glBindTexture(GL_TEXTURE_2D, partTexture);
+   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);*/
    glEnable(GL_POINT_SPRITE_ARB);
 }
 
@@ -106,13 +122,12 @@ void part4::actualize(particle* part)
 
 bool part4::continueLive(particle* part)
 {
-   return( (part->age < maxLive) &&
-           ((rand() % 300) != 5) );
+   return( (part->age < maxLive) );
 }
 
 int part4::needCreate()
 {
-   return(rand() % 10);
+   return(rand() % (maxParticles / 20));
 }
 
 void part4::createParticle(particle* part)
