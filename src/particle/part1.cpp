@@ -31,6 +31,9 @@ void part1::InitRender()
    glEnable( GL_BLEND );
    glBlendFunc( GL_SRC_ALPHA, GL_ONE );
    glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+   //glEnable(GL_LINE_SMOOTH);
+   //glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+   glLineWidth(1.0);
    glBegin(GL_LINES);
 }
 
@@ -38,7 +41,8 @@ void part1::EndRender()
 {
    glEnd();
    glEnable(GL_LIGHTING);
-   glDisable( GL_BLEND );
+   glDisable( GL_BLEND ); 
+   glDisable(GL_LINE_SMOOTH);
 }
 
 void part1::actualize(particle* part)

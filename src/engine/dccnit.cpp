@@ -439,7 +439,7 @@ void engine::Redmensiona(SDL_Surface *screen)
    gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, FARVIEW);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
-
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }
 
 
@@ -454,6 +454,7 @@ void engine::Iniciar(SDL_Surface *screen)
    /* Limpa */
    glClearColor (0.0, 0.0, 0.0, 0.0);
    glClearDepth(1.0);
+   glClearStencil(0);
 
    /* Define detalhamento */
    glDepthFunc(GL_LEQUAL);
@@ -1323,8 +1324,8 @@ void engine::Desenhar()
 {
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
-   glClear (GL_DEPTH_BUFFER_BIT);
-
+   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   
    glLoadIdentity();
 
    /* Redefine a posicao dinamica da camera */
@@ -1354,6 +1355,7 @@ void engine::Desenhar()
       int aux;
       for(aux=0;aux < PCs->total;aux++)
       {
+         /* Draw Character */
          glPushMatrix();
            glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
                         per->posicaoLadoZ);
@@ -1368,10 +1370,10 @@ void engine::Desenhar()
 
            glEnd();*/
          glPopMatrix();
+         
          per = (personagem*) per->proximo;
       }
    glPopMatrix();
-
 
    /* Atualiza os Valores dos NPCS com o que já estiver no socket */
    //AtualizaNPCs
@@ -1397,9 +1399,9 @@ void engine::Desenhar()
       particula3->NextStep(segundos);
       /* agora as texturizadas */
       particula4->NextStep(segundos);
-      particula2->NextStep(segundos);
       particula5->NextStep(segundos);
       particula6->NextStep(segundos);
+      particula2->NextStep(segundos);
    glPopMatrix();
 
    /* Faz o Desenho da GUI */

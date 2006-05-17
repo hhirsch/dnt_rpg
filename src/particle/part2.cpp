@@ -80,9 +80,10 @@ void part2::InitRender()
    glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
 
    float quadratic[] =  { 0.01f, 0.01f, 0.0f };
+   //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
    PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
 
-   PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
+   //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
    PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 

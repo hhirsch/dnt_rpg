@@ -144,10 +144,7 @@ GLuint InserirTextura(Map* mapa, string arq, string nome,
    return(tex->indice);
 }
 
-/********************************************************************
- *                           Draw  Map                              *
- ********************************************************************/
-int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
               GLfloat matriz[6][4])
 {
         int textura = -1;
@@ -166,7 +163,6 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 
-        
         glBegin(GL_QUADS);
         glNormal3i(0,1,0);
         for(Xaux = 0; Xaux < x; Xaux++)
@@ -228,6 +224,24 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
            }
         }
         glEnd();
+ 
+        return(1);
+}
+
+/********************************************************************
+ *                           Draw  Map                              *
+ ********************************************************************/
+int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+              GLfloat matriz[6][4])
+{
+        int textura = -1;
+        int Xaux = 0, Zaux = 0;
+           
+        drawFloor( cameraX, cameraY, cameraZ, matriz );
+
+        textura = MapSquares[Xaux][Zaux]->textura;
+           glEnable(GL_TEXTURE_2D);
+           glBindTexture(GL_TEXTURE_2D, textura);
 
         /* Faz o desenho dos muros e meios Fio*/
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );

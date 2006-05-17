@@ -121,6 +121,8 @@ class Map
        ***************************************************************/
       int draw(GLfloat cameraX, GLfloat cameraY, 
                GLfloat cameraZ, GLfloat matriz[6][4]);
+      int drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+              GLfloat matriz[6][4]);
       /*************************************************************** 
        * Reason: Draw Minimap, relative to current map and character
        *         position.

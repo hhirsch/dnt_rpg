@@ -59,7 +59,7 @@ class part4: particleSystem
 
    private:
       float seconds;
-      GLuint partTexture[4];
+      GLuint partTexture;
 };
 
 

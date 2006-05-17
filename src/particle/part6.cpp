@@ -28,6 +28,14 @@ void part6::Render(particle* part)
 
 void part6::InitRender()
 {
+  /* test atenuation */
+  /*int viewPort[4];
+  float mat[16];
+  glGetFloatv(GL_PROJECTION_MATRIX,mat);
+  glGetIntegerv(GL_VIEWPORT, viewPort);
+
+  printf("V2 = %d M0 = %.3f \n",viewPort[2], mat[0]);*/
+   
   glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
@@ -41,18 +49,22 @@ void part6::InitRender()
    float MaxPointSize;
    glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
 
-   float quadratic[] =  { 0.01f, 0.01f, 0.0f };
-   PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
+   //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
+   //float quadratic[] =  { 0.01f, 0.01f, 0.0f };
+   //float quadratic[] =  { 1.0f, 0.0f, 0.0f };
+   //PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
 
-   PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
-   PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
+   //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
+   PointParameterf( GL_POINT_SIZE_MIN_ARB, 5.0 );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
-   glPointSize(16);
+   glPointSize(8);
 
    glBindTexture(GL_TEXTURE_2D, partTexture);
    glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
    glEnable(GL_POINT_SPRITE_ARB);
+   //glEnable(GL_POINT_SMOOTH);
+   //glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
 }
 
 void part6::EndRender()

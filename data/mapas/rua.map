@@ -3,6 +3,7 @@ T 7X7
 MUSICA ../data/music/musica3.ogg
 npc ../data/mapas/rua.npc
 o Door ../data/models/objetos/geral/porta.dcc
+o Katana ../data/models/objetos/armas/dark_katana.dcc
 t ../data/texturas/chao_marble.jpg ../data/texturas/chao_marble.jpg 234 234 234
 t ../data/texturas/chao_asfalto_rhcont.jpg ../data/texturas/chao_asfalto_rhcont.jpg 85 85 85
 t ../data/texturas/chao_asfalto_rcont.jpg ../data/texturas/chao_asfalto_rcont.jpg 85 85 85

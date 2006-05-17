@@ -7,32 +7,26 @@
 #include <SDL/SDL_image.h>
 
 part4::part4(float cX,float cY,float cZ, string fileName):
-                               particleSystem(fileName,PARTICLE_DRAW_INDIVIDUAL)
+                               particleSystem(fileName,PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
    centerY = cY; 
    centerZ = cZ;
    actualParticles = 0;
-   //partTexture = LoadTexture("../data/particles/part5.png");
-   partTexture[0] = LoadTexture("../data/particles/smoke1.png");
-   partTexture[1] = LoadTexture("../data/particles/smoke2.png");
-   partTexture[2] = LoadTexture("../data/particles/smoke3.png");
-   partTexture[3] = LoadTexture("../data/particles/smoke4.png");
+   //partTexture = LoadTexture("/home/farrer/water_texture.png");
+   partTexture = LoadTexture("../data/particles/smoke.png");
 }
 
 part4::~part4()
 {
-   glDeleteTextures(1,&partTexture[0]);
-   glDeleteTextures(1,&partTexture[1]);
-   glDeleteTextures(1,&partTexture[2]);
-   glDeleteTextures(1,&partTexture[3]);
+   glDeleteTextures(1,&partTexture);
 }
 
 void part4::Render(particle* part)
 {
-   float percent = (float) part->age / (float) (maxLive-1);
-   int tex = (int)(percent*3);
-   glBindTexture(GL_TEXTURE_2D, partTexture[tex]);
+   //float percent = (float) part->age / (float) (maxLive-1);
+   //int tex = (int)(percent*3);
+   glBindTexture(GL_TEXTURE_2D, partTexture);
    glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
    glBegin(GL_POINTS);
      glColor3f(part->R,part->G,part->B);
@@ -49,24 +43,27 @@ void part4::InitRender()
    glEnable(GL_CULL_FACE);
 
    glEnable(GL_TEXTURE_2D);
+   /*glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
+   glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_BLEND);
     
    float MaxPointSize;
    glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
 
-   float quadratic[] =  { 2.0f, 0.0f, 0.0f };
+   float quadratic[] =  { 0.01f, 0.01f, 0.0f };
+   //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
    //derived_size = clamp(size * sqrt(1 / (a + b * d + c * d ^ 2))) 
    PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
 
-   PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 1.0f );
-   PointParameterf( GL_POINT_SIZE_MIN_ARB, 32.0f );
+   //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
+   PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
-   glPointSize(64);
+   glPointSize(16);
 
-  /* glBindTexture(GL_TEXTURE_2D, partTexture);
-   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);*/
+   glBindTexture(GL_TEXTURE_2D, partTexture);
+   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
    glEnable(GL_POINT_SPRITE_ARB);
 }
 
@@ -127,7 +124,7 @@ bool part4::continueLive(particle* part)
 
 int part4::needCreate()
 {
-   return(rand() % (maxParticles / 20));
+   return(rand() % (maxParticles / 40));
 }
 
 void part4::createParticle(particle* part)
