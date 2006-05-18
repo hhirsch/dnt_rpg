@@ -14,7 +14,7 @@ part4::part4(float cX,float cY,float cZ, string fileName):
    centerZ = cZ;
    actualParticles = 0;
    //partTexture = LoadTexture("/home/farrer/water_texture.png");
-   partTexture = LoadTexture("../data/particles/smoke.png");
+   partTexture = LoadTexture("../data/particles/smoke5.png");
 }
 
 part4::~part4()
