@@ -14,7 +14,7 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
     {
         erro_Mensagem("Argh! Can't init SDL!\n",1);
     }
-    atexit(SDL_Quit);
+    //atexit(SDL_Quit);
    
     /*SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
