@@ -7,13 +7,16 @@ ENDGUI = ../gui/
 ENDENGINE = ../engine/
 ENDMAPA = ../map/
 ENDETC = ../etc/
+ENDPARTICLE = ../particle/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
 OBJSENGINE = $(ENDENGINE)conversa.o $(ENDENGINE)culling.o
 OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDENGINE)culling.o
+OBJSPARTICLE = $(ENDPARTICLE)particle.o $(ENDPARTICLE)part1.o $(ENDPARTICLE)part2.o $(ENDPARTICLE)part3.o $(ENDPARTICLE)part4.o $(ENDPARTICLE)part5.o $(ENDPARTICLE)part6.o
+
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-all: DlgEditor MapEditor fntEditor dlgCompiler
+all: DlgEditor MapEditor fntEditor dlgCompiler partEditor
 
 fntEditor.o: fntEditor.cpp
 	@printf "Making fntEditor.o... "
@@ -55,7 +58,18 @@ dlgCompiler: $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o
 	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o -o $(BIN)dlgCompiler
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+
+partEditor.o: partEditor.cpp
+	@printf "Making partEditor.o... "
+	@$(CC) $(CFLAGS) partEditor.cpp -o partEditor.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+partEditor: $(OBJSGUI) $(OBJSENGINE) partEditor.o
+	@printf "Linking partEditor... "
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) $(OBJSPARTICLE) partEditor.o -o $(BIN)partEditor
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 clean:
 	@printf "Cleaning App Bin Files... "
-	@\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor $(BIN)fntEditor
+	@\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor $(BIN)fntEditor $(BIN)partEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
