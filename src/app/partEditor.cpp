@@ -87,10 +87,11 @@ void erro()
 {
    printf("/\n");
    printf("| Use:\n");
-   printf("| To edit a new Particle: partEditor -n -t X\n");
-   printf("| To edit an existent Particle: partEditor -e file.par -t X\n\n");
+   printf("| To edit an existent Particle: partEditor -e file.par\n\n");
    exit(2);
 }
+
+
 
 
 /************************************************************************
@@ -102,6 +103,124 @@ int botaoSair(void *jan,void *ljan, SDL_Surface *screen)
    return(1);
 }
 
+
+void deleteParticle()
+{
+   switch(tipo)
+   {
+      case 1:
+             { 
+                delete(p1);
+                break;
+             }
+      case 2:
+             {
+                delete(p2);
+                break;
+             }
+      case 3:
+             {
+                delete(p3);
+                break;
+             }
+      case 4:
+             {
+                delete(p4);
+                break;
+             }
+      case 5:
+             {
+               delete(p5);
+               break;
+             }
+      case 6:
+             {
+               delete(p6);
+               break;
+             }
+   }
+}
+
+void createParticle(char* entrada)
+{
+    switch(tipo)
+   {
+      case 1:
+             { 
+                p1 = new part1(50,60,120,entrada);
+                break;
+             }
+      case 2:
+             {
+                p2 = new part2(50,0,120,entrada);
+                break;
+             }
+      case 3:
+             {
+                p3 = new part3(50,20,120);
+                break;
+             }
+      case 4:
+             {
+                p4 = new part4(50,0,120,entrada);
+                break;
+             }
+      case 5:
+             {
+               p5 = new part5(50,30,120,entrada);
+               break;
+             }
+      case 6:
+             {
+               p6 = new part6(50,250,120,entrada);
+               break;
+             }
+      default:
+             {
+                printf("Que merda é essa???");
+                erro();
+                break;
+             }
+   }
+}
+
+
+void actualizeParticle(double segundos)
+{
+   switch(tipo)
+         {
+           case 1:
+                  { 
+                     p1->NextStep(segundos);
+                     break;
+                  }
+           case 2:
+                  {
+                     p2->NextStep(segundos);
+                     break;
+                  }
+           case  3:
+                  {
+                     p3->NextStep(segundos);
+                     break;
+                  }
+           case 4:
+                  {
+                     p4->NextStep(segundos);
+                     break;
+                  }
+           case 5:
+                  {
+                    p5->NextStep(segundos);
+                    break;
+                  }
+           case 6:
+                  {
+                    p6->NextStep(segundos);
+                    break;
+                  }
+         }
+}
 
 /************************************************************************
  *                     Escopo Principal                                 *
@@ -154,46 +273,7 @@ int main(int argc, char **argv)
    Farso_Iniciar(&screen,"DccNiTghtmare's Particle Editor");
    Iniciar(screen);
 
-   switch(tipo)
-   {
-      case 1:
-             { 
-                p1 = new part1(50,60,120,entrada);
-                break;
-             }
-      case 2:
-             {
-                p2 = new part2(50,0,120,entrada);
-                break;
-             }
-      case 3:
-             {
-                p3 = new part3(50,20,120);
-                break;
-             }
-      case 4:
-             {
-                p4 = new part4(50,0,120,entrada);
-                break;
-             }
-      case 5:
-             {
-               p5 = new part5(50,30,120,entrada);
-               break;
-             }
-      case 6:
-             {
-               p6 = new part6(50,250,120,entrada);
-               break;
-             }
-      default:
-             {
-                printf("Que merda é essa???");
-                erro();
-                break;
-             }
-   }
-
+   createParticle(entrada);
 
    Uint8 Mbotao;
    Uint8 *teclas;
@@ -220,6 +300,7 @@ int main(int argc, char **argv)
 
    float wx,wy,wz;
    double xReal, zReal, yReal;
+   double varX, varZ;
 
    double varTempo, segundos;
    double ultimaLeitura = 0;
@@ -238,13 +319,76 @@ int main(int argc, char **argv)
          teclas = SDL_GetKeyState(NULL);
 
          wx = mouseX; wy = 600-mouseY; 
+
+         
               
         // glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
         // gluUnProject(wx,wy,wz,modl,proj,viewPort, &xReal, &yReal, &zReal);
 
-         if(gui->ManipulaEventos(mouseX,mouseY,Mbotao,teclas)==NADA)
+         if(gui->ManipulaEventos(mouseX,mouseY,Mbotao,teclas) == NADA)
          {
-         } 
+            if(teclas[SDLK_UP] || teclas[SDLK_DOWN])
+            {
+               varX = 2.0 * sin(deg2Rad(phi));
+               varZ = 2.0 * cos(deg2Rad(phi));
+               if(teclas[SDLK_UP]) 
+               {
+                    varX *= -1;
+                    varZ *= -1;
+               }
+               centroX += varX;
+               centroZ += varZ;
+            }
+            if(teclas[SDLK_RIGHT] || teclas[SDLK_LEFT])
+            {
+               varX = 2.0 * sin(deg2Rad(phi)+deg2Rad(90));
+               varZ = 2.0 * cos(deg2Rad(phi)+deg2Rad(90));
+               if(teclas[SDLK_LEFT])
+               {
+                   varX *= -1;
+                   varZ *= -1;
+               }
+               centroX += varX;
+               centroZ += varZ;
+            }
+            if(teclas[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
+            {
+               theta += 1;
+               if(theta > 89) 
+                  theta = 89;
+            }
+            if(teclas[SDLK_PAGEDOWN]) // desce com a camera ate visao em 1ª pessoa
+            {
+               theta -= 1;
+               if(theta < 0)
+                  theta = 0;
+            }
+            if(teclas[SDLK_HOME])
+            {
+               d -= 1;
+               if (d<1) d = 1;
+            }
+            if(teclas[SDLK_END])
+            {
+               d += 1;
+               if (d>300) d = 300;
+            }
+            if(teclas[SDLK_PERIOD])
+            {
+               phi -= 1;
+            }
+            if(teclas[SDLK_COMMA])
+            {
+               phi += 1;
+            }
+
+            if(teclas[SDLK_r])
+            {
+               deleteParticle();
+               createParticle(entrada);
+            }
+
+         }
 
          /* Draw */
   
@@ -262,44 +406,12 @@ int main(int argc, char **argv)
          
          /* Part Draw */
          glPushMatrix();
-         switch(tipo)
-         {
-           case 1:
-                  { 
-                     p1->NextStep(segundos);
-                     break;
-                  }
-           case 2:
-                  {
-                     p2->NextStep(segundos);
-                     break;
-                  }
-           case  3:
-                  {
-                     p3->NextStep(segundos);
-                     break;
-                  }
-           case 4:
-                  {
-                     p4->NextStep(segundos);
-                     break;
-                  }
-           case 5:
-                  {
-                    p5->NextStep(segundos);
-                    break;
-                  }
-           case 6:
-                  {
-                    p6->NextStep(segundos);
-                    break;
-                  }
-         }
+           actualizeParticle(segundos);
          glPopMatrix();
 
          glDisable(GL_LIGHTING);
-/*         glDisable(GL_DEPTH_TEST);
-         glDisable(GL_TEXTURE_2D);
+         glDisable(GL_DEPTH_TEST);
+/*         glDisable(GL_TEXTURE_2D);
          glDisable(GL_BLEND);
          glDisable(GL_COLOR_MATERIAL);*/
          //glPushMatrix();
@@ -317,6 +429,8 @@ int main(int argc, char **argv)
    }
 
    delete(gui);
+
+   deleteParticle(); 
 
 }
 
