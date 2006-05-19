@@ -109,10 +109,9 @@ class particleSystem
       /* The OpenGL extended point functions */
       PFNGLPOINTPARAMETERFARBPROC PointParameterf;   
       PFNGLPOINTPARAMETERFVARBPROC PointParameterfv;
-      
 
    protected:
-      particle* particles;     /* Internal Particles Vector */
+
       int maxLive;             /* Max live of a particle  */
       int maxParticles;        /* Max number of particles */
       float* vertexArray;      /* Vertex array to draw */
@@ -142,6 +141,9 @@ class particleSystem
 
       float dMultVel[3];       /* Multiply values to Actual Velocity */
       float dSumVel[3];        /* Sum Values to Actual Velocity */
+
+      particle* particles;     /* Internal Particles Vector */
+
 };
 
 #endif
