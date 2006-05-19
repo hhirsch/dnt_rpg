@@ -3,7 +3,7 @@
 
 #include "particle.h"
 
-class part5: particleSystem
+class part5: public particleSystem
 {
    public:
       part5(float cX,float cY,float cZ, string fileName);

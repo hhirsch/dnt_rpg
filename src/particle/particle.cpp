@@ -216,3 +216,50 @@ void particleSystem::DoStep()
 
 }
 
+
+void particleSystem::Save( string fileName)
+{
+   std::ofstream file;
+   string aux;
+
+   file.open(fileName.c_str(), ios::out | ios::binary);
+
+
+   if(!file)
+   {
+      printf("Error while opening particle file: %s\n",fileName.c_str());
+      return;
+   }
+
+   file << "MAXLIVE " << maxLive << "\n";
+   file << "MAXPARTICLES " << maxParticles << "\n";
+   file << "CENTERX " << centerX << "\n";
+   file << "CENTERY " << centerY << "\n"; 
+   file << "CENTERZ " << centerZ << "\n";
+   file << "GRAVITY " << gravity << "\n";
+   file << "INITR " << initR << "\n";
+   file << "INITG " << initG << "\n";
+   file << "INITB " << initB << "\n";
+   file << "FINALR " << finalR << "\n";
+   file << "FINALG " << finalG << "\n";
+   file << "FINALB " << finalB << "\n";
+   file << "ALPHA " << alpha << "\n";
+   file << "DMULTCENTER " << dMultCenter[0] << " " << dMultCenter[1] << " " << 
+                             dMultCenter[2] << "\n";
+   file << "DSUMCENTER " << dSumCenter[0] << " " <<  dSumCenter[1] << " " <<  
+                            dSumCenter[2] << "\n";
+   file << "DMULTPOS " << dMultPos[0] << " " <<  dMultPos[1] << " " << 
+                          dMultPos[2] << "\n";
+   file << "DSUMPOS " << dSumPos[0] << " " <<  dSumPos[1] << " " << 
+                         dSumPos[2] << "\n";
+   file << "DMULTCOLOR " << dMultColor[0] << " " <<  dMultColor[1] << " " <<  
+                            dMultColor[2] << "\n";
+   file << "DSUMCOLOR " << dSumColor[0] << " " << dSumColor[1] << " " <<  
+                           dSumColor[2] << "\n";
+   file << "DMULTVEL " << dMultVel[0] << " " <<  dMultVel[1] << " " << 
+                             dMultVel[2] << "\n";
+   file << "DSUMVEL " << dSumVel[0] << " " <<  dSumVel[1] << " " << 
+                           dSumVel[2] << "\n";
+
+   file.close();
+}

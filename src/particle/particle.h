@@ -52,6 +52,7 @@ class particleSystem
       virtual ~particleSystem();
 
       void init(int total, int mode);
+      void Save( string fileName);
 
 
       /***************************************************************
