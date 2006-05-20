@@ -142,6 +142,232 @@ float part::getFinalB()
   return(finalB);
 }
 
+void part::updateAlpha(float a)
+{
+  alpha = a;
+}
+
+float part::getAlpha()
+{
+  return(alpha);
+}
+
+void part::updateDMultCenterX(float d)
+{
+   dMultCenter[0] = d;
+}
+float part::getDMultCenterX()
+{
+   return(dMultCenter[0]);
+}
+
+void part::updateDMultCenterY(float d)
+{
+   dMultCenter[1] = d;
+}
+float part::getDMultCenterY()
+{
+   return(dMultCenter[1]);
+}
+
+void part::updateDMultCenterZ(float d)
+{
+   dMultCenter[2] = d;
+}
+float part::getDMultCenterZ()
+{
+   return(dMultCenter[2]);
+}
+
+void part::updateDSumCenterX(float d)
+{
+   dSumCenter[0] = d;
+}
+float part::getDSumCenterX()
+{
+   return(dSumCenter[0]);
+}
+
+void part::updateDSumCenterY(float d)
+{
+   dSumCenter[1] = d;
+}
+float part::getDSumCenterY()
+{
+   return(dSumCenter[1]);
+}
+
+void part::updateDSumCenterZ(float d)
+{
+   dSumCenter[2] = d;
+}
+float part::getDSumCenterZ()
+{
+   return(dSumCenter[2]);
+}
+
+void part::updateDMultPosX(float d)
+{
+   dMultPos[0] = d;
+}
+float part::getDMultPosX()
+{
+   return(dMultPos[0]);
+}
+
+void part::updateDMultPosY(float d)
+{
+   dMultPos[1] = d;
+}
+float part::getDMultPosY()
+{
+   return(dMultPos[1]);
+}
+
+void part::updateDMultPosZ(float d)
+{
+   dMultPos[2] = d;
+}
+float part::getDMultPosZ()
+{
+   return(dMultPos[2]);
+}
+
+void part::updateDSumPosX(float d)
+{
+   dSumPos[0] = d;
+}
+float part::getDSumPosX()
+{
+   return(dSumPos[0]);
+}
+
+void part::updateDSumPosY(float d)
+{
+   dSumPos[1] = d;
+}
+float part::getDSumPosY()
+{
+   return(dSumPos[1]);
+}
+
+void part::updateDSumPosZ(float d)
+{
+   dSumPos[2] = d;
+}
+float part::getDSumPosZ()
+{
+   return(dSumPos[2]);
+}
+
+void part::updateDMultVelX(float d)
+{
+   dMultVel[0] = d;
+}
+float part::getDMultVelX()
+{
+   return(dMultVel[0]);
+}
+
+void part::updateDMultVelY(float d)
+{
+   dMultVel[1] = d;
+}
+float part::getDMultVelY()
+{
+   return(dMultVel[1]);
+}
+
+void part::updateDMultVelZ(float d)
+{
+   dMultVel[2] = d;
+}
+float part::getDMultVelZ()
+{
+   return(dMultVel[2]);
+}
+
+void part::updateDSumVelX(float d)
+{
+   dSumVel[0] = d;
+}
+float part::getDSumVelX()
+{
+   return(dSumVel[0]);
+}
+
+void part::updateDSumVelY(float d)
+{
+   dSumVel[1] = d;
+}
+float part::getDSumVelY()
+{
+   return(dSumVel[1]);
+}
+
+void part::updateDSumVelZ(float d)
+{
+   dSumVel[2] = d;
+}
+float part::getDSumVelZ()
+{
+   return(dSumVel[2]);
+}
+
+void part::updateDMultColorR(float d)
+{
+   dMultColor[0] = d;
+}
+float part::getDMultColorR()
+{
+   return(dMultColor[0]);
+}
+
+void part::updateDMultColorG(float d)
+{
+   dMultColor[1] = d;
+}
+float part::getDMultColorG()
+{
+   return(dMultColor[1]);
+}
+
+void part::updateDMultColorB(float d)
+{
+   dMultColor[2] = d;
+}
+float part::getDMultColorB()
+{
+   return(dMultColor[2]);
+}
+
+void part::updateDSumColorR(float d)
+{
+   dSumColor[0] = d;
+}
+float part::getDSumColorR()
+{
+   return(dSumColor[0]);
+}
+
+void part::updateDSumColorG(float d)
+{
+   dSumColor[1] = d;
+}
+float part::getDSumColorG()
+{
+   return(dSumColor[1]);
+}
+
+void part::updateDSumColorB(float d)
+{
+   dSumColor[2] = d;
+}
+float part::getDSumColorB()
+{
+   return(dSumColor[2]);
+}
+
 
 
 /************************************************************************
@@ -472,6 +698,180 @@ void editedFinalB(barraTexto* bart,SDL_Surface *screen)
    p->updateFinalB(i);
 }
 
+void editedAlpha(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateAlpha(i);
+}
+
+void editedDMultCenterX(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultCenterX(i);
+}
+
+void editedDMultCenterY(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultCenterY(i);
+}
+
+void editedDMultCenterZ(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultCenterZ(i);
+}
+
+void editedDSumCenterX(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumCenterX(i);
+}
+
+void editedDSumCenterY(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumCenterY(i);
+}
+
+void editedDSumCenterZ(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumCenterZ(i);
+}
+
+void editedDMultPosX(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultPosX(i);
+}
+
+void editedDMultPosY(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultPosY(i);
+}
+
+void editedDMultPosZ(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultPosZ(i);
+}
+
+void editedDSumPosX(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumPosX(i);
+}
+
+void editedDSumPosY(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumPosY(i);
+}
+
+void editedDSumPosZ(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumPosZ(i);
+}
+
+void editedDMultVelX(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultVelX(i);
+}
+
+void editedDMultVelY(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultVelY(i);
+}
+
+void editedDMultVelZ(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultVelZ(i);
+}
+
+void editedDSumVelX(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumVelX(i);
+}
+
+void editedDSumVelY(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumVelY(i);
+}
+
+void editedDSumVelZ(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumVelZ(i);
+}
+
+void editedDMultColorR(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultColorR(i);
+}
+
+void editedDMultColorG(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultColorG(i);
+}
+
+void editedDMultColorB(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDMultColorB(i);
+}
+
+void editedDSumColorR(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumColorR(i);
+}
+
+void editedDSumColorG(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumColorG(i);
+}
+
+void editedDSumColorB(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateDSumColorB(i);
+}
 
 
 /************************************************************************
@@ -602,10 +1002,103 @@ int main(int argc, char **argv)
    sprintf(aux, "%.3f", p->getFinalB());
    janEditar->objetos->InserirBarraTexto(60,237,123,253,aux,0,&editedFinalB);
 
+   janEditar->objetos->InserirQuadroTexto(3,257,60,273,0,"Alpha");
+   sprintf(aux, "%.3f", p->getAlpha());
+   janEditar->objetos->InserirBarraTexto(60,257,123,273,aux,0,&editedAlpha);
+
+   janEditar->objetos->InserirQuadroTexto(3,277,60,293,0,"MCntX");
+   sprintf(aux, "%.3f", p->getDMultCenterX());
+   janEditar->objetos->InserirBarraTexto(60,277,123,293,aux,0,&editedDMultCenterX);
+   janEditar->objetos->InserirQuadroTexto(3,297,60,313,0,"MCntY");
+   sprintf(aux, "%.3f", p->getDMultCenterY());
+   janEditar->objetos->InserirBarraTexto(60,297,123,313,aux,0,&editedDMultCenterY);
+   janEditar->objetos->InserirQuadroTexto(3,317,60,333,0,"MCntZ");
+   sprintf(aux, "%.3f", p->getDMultCenterZ());
+   janEditar->objetos->InserirBarraTexto(60,317,123,333,aux,0,&editedDMultCenterZ);
+
+   janEditar->objetos->InserirQuadroTexto(3,337,60,353,0,"SCntX");
+   sprintf(aux, "%.3f", p->getDSumCenterX());
+   janEditar->objetos->InserirBarraTexto(60,337,123,353,aux,0,&editedDSumCenterX);
+   janEditar->objetos->InserirQuadroTexto(3,357,60,373,0,"SCntY");
+   sprintf(aux, "%.3f", p->getDSumCenterY());
+   janEditar->objetos->InserirBarraTexto(60,357,123,373,aux,0,&editedDSumCenterY);
+   janEditar->objetos->InserirQuadroTexto(3,377,60,393,0,"SCntZ");
+   sprintf(aux, "%.3f", p->getDSumCenterZ());
+   janEditar->objetos->InserirBarraTexto(60,377,123,393,aux,0,&editedDSumCenterZ);
+
+   janEditar->objetos->InserirQuadroTexto(3,397,60,413,0,"MPosX");
+   sprintf(aux, "%.3f", p->getDMultPosX());
+   janEditar->objetos->InserirBarraTexto(60,397,123,413,aux,0,&editedDMultPosX);
+   janEditar->objetos->InserirQuadroTexto(3,417,60,433,0,"MPosY");
+   sprintf(aux, "%.3f", p->getDMultPosY());
+   janEditar->objetos->InserirBarraTexto(60,417,123,433,aux,0,&editedDMultPosY);
+   janEditar->objetos->InserirQuadroTexto(3,437,60,453,0,"MPosZ");
+   sprintf(aux, "%.3f", p->getDMultPosZ());
+   janEditar->objetos->InserirBarraTexto(60,437,123,453,aux,0,&editedDMultPosZ);
+
+   janEditar->objetos->InserirQuadroTexto(3,457,60,473,0,"SPosX");
+   sprintf(aux, "%.3f", p->getDSumPosX());
+   janEditar->objetos->InserirBarraTexto(60,457,123,473,aux,0,&editedDSumPosX);
+   janEditar->objetos->InserirQuadroTexto(3,474,60,490,0,"SPosY");
+   sprintf(aux, "%.3f", p->getDSumPosY());
+   janEditar->objetos->InserirBarraTexto(60,474,123,490,aux,0,&editedDSumPosY);
+   janEditar->objetos->InserirQuadroTexto(3,491,60,505,0,"SPosZ");
+   sprintf(aux, "%.3f", p->getDSumPosZ());
+   janEditar->objetos->InserirBarraTexto(60,491,123,505,aux,0,&editedDSumPosZ);
+
+   janEditar->fechavel = 0;
+   janEditar->Abrir(gui->ljan);
 
 
+   janEditar = gui->ljan->InserirJanela(672,64,799,575,"Edit-2",1,1,NULL,NULL);
 
+   janEditar->objetos->InserirQuadroTexto(3,17,60,33,0,"DMColorR");
+   sprintf(aux, "%d", p->getMaxLive());
+   janEditar->objetos->InserirBarraTexto(60,17,123,33,aux,0,&editedDMultColorR);
 
+   janEditar->objetos->InserirQuadroTexto(3,37,60,53,0,"DMColorG");
+   sprintf(aux, "%d", p->getMaxParticles());
+   janEditar->objetos->InserirBarraTexto(60,37,123,53,aux,0,&editedDMultColorG);
+
+   janEditar->objetos->InserirQuadroTexto(3,57,60,73,0,"DMColorB");
+   sprintf(aux, "%.3f", p->getCenterX());
+   janEditar->objetos->InserirBarraTexto(60,57,123,73,aux,0,&editedDMultColorB);
+
+   janEditar->objetos->InserirQuadroTexto(3,77,60,93,0,"DSColorR");
+   sprintf(aux, "%.3f", p->getCenterY());
+   janEditar->objetos->InserirBarraTexto(60,77,123,93,aux,0,&editedDSumColorR);
+
+   janEditar->objetos->InserirQuadroTexto(3,97,60,113,0,"DSColorG");
+   sprintf(aux, "%.3f", p->getCenterZ());
+   janEditar->objetos->InserirBarraTexto(60,97,123,113,aux,0,&editedDSumColorG);
+
+   janEditar->objetos->InserirQuadroTexto(3,117,60,133,0,"DSColorB");
+   sprintf(aux, "%.3f", p->getGravity());
+   janEditar->objetos->InserirBarraTexto(60,117,123,133,aux,0,&editedDSumColorB);
+
+   janEditar->objetos->InserirQuadroTexto(3,137,60,153,0,"DMVelX");
+   sprintf(aux, "%.3f", p->getInitR());
+   janEditar->objetos->InserirBarraTexto(60,137,123,153,aux,0,&editedDMultVelX);
+
+   janEditar->objetos->InserirQuadroTexto(3,157,60,173,0,"DMVelY");
+   sprintf(aux, "%.3f", p->getInitG());
+   janEditar->objetos->InserirBarraTexto(60,157,123,173,aux,0,&editedDMultVelY);
+
+   janEditar->objetos->InserirQuadroTexto(3,177,60,193,0,"DMVelZ");
+   sprintf(aux, "%.3f", p->getInitB());
+   janEditar->objetos->InserirBarraTexto(60,177,123,193,aux,0,&editedDMultVelZ);
+
+   janEditar->objetos->InserirQuadroTexto(3,197,60,213,0,"DSVelX");
+   sprintf(aux, "%.3f", p->getFinalR());
+   janEditar->objetos->InserirBarraTexto(60,197,123,213,aux,0,&editedDSumVelX);
+
+   janEditar->objetos->InserirQuadroTexto(3,217,60,233,0,"DSVelY");
+   sprintf(aux, "%.3f", p->getFinalG());
+   janEditar->objetos->InserirBarraTexto(60,217,123,233,aux,0,&editedDSumVelY);
+
+   janEditar->objetos->InserirQuadroTexto(3,237,60,253,0,"DSVelZ");
+   sprintf(aux, "%.3f", p->getFinalB());
+   janEditar->objetos->InserirBarraTexto(60,237,123,253,aux,0,&editedDSumVelZ);
 
    janEditar->fechavel = 0;
    janEditar->Abrir(gui->ljan);

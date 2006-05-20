@@ -51,31 +51,64 @@ class part: public particleSystem
       void updateFinalB(float cor);
       float getFinalB();
 
+      void updateAlpha(float a);
+      float getAlpha();
 
-#if 0     
-      float gravity;           /* Force of Gravity */
-      float initR,             /* Initial Red Color */ 
-            initG,             /* Initial Green Color */
-            initB;             /* Initial Blue Color */
-      float finalR,            /* Final Red Color */
-            finalG,            /* Final Green Color */
-            finalB;            /* Final Blue Color */
-      float alpha;             /* Global Alpha Value */
+      void updateDMultCenterX(float d);
+      float getDMultCenterX();
+      void updateDMultCenterY(float d);
+      float getDMultCenterY();
+      void updateDMultCenterZ(float d);
+      float getDMultCenterZ();
+   
+      void updateDSumCenterX(float d);
+      float getDSumCenterX();
+      void updateDSumCenterY(float d);
+      float getDSumCenterY();
+      void updateDSumCenterZ(float d);
+      float getDSumCenterZ();
 
-      /* Probability Values */
- 
-      float dMultCenter[3];    /* Multiply values to Center Position */
-      float dSumCenter[3];     /* Sum Values to Center Position */
+      void updateDMultPosX(float d);
+      float getDMultPosX();
+      void updateDMultPosY(float d);
+      float getDMultPosY();
+      void updateDMultPosZ(float d);
+      float getDMultPosZ();
+   
+      void updateDSumPosX(float d);
+      float getDSumPosX();
+      void updateDSumPosY(float d);
+      float getDSumPosY();
+      void updateDSumPosZ(float d);
+      float getDSumPosZ();
 
-      float dMultPos[3];       /* Multiply values to Actual Position */
-      float dSumPos[3];        /* Sum Values to Actual Position */
+      void updateDMultColorR(float d);
+      float getDMultColorR();
+      void updateDMultColorG(float d);
+      float getDMultColorG();
+      void updateDMultColorB(float d);
+      float getDMultColorB();
+   
+      void updateDSumColorR(float d);
+      float getDSumColorR();
+      void updateDSumColorG(float d);
+      float getDSumColorG();
+      void updateDSumColorB(float d);
+      float getDSumColorB();
 
-      float dMultColor[3];     /* Multiply values to inital Color */
-      float dSumColor[3];      /* Sum Values to initial Color */
-
-      float dMultVel[3];       /* Multiply values to Actual Velocity */
-      float dSumVel[3]
-#endif
+      void updateDMultVelX(float d);
+      float getDMultVelX();
+      void updateDMultVelY(float d);
+      float getDMultVelY();
+      void updateDMultVelZ(float d);
+      float getDMultVelZ();
+   
+      void updateDSumVelX(float d);
+      float getDSumVelX();
+      void updateDSumVelY(float d);
+      float getDSumVelY();
+      void updateDSumVelZ(float d);
+      float getDSumVelZ();
 
 };
 
