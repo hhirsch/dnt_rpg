@@ -33,16 +33,26 @@ class part: public particleSystem
       float getCenterY();
       void updateCenterZ(float center);
       float getCenterZ();
+       
+      void updateGravity(float grv);
+      float getGravity();
 
+      void updateInitR(float cor);
+      float getInitR();
+      void updateInitG(float cor);
+      float getInitG();
+      void updateInitB(float cor);
+      float getInitB();
+
+      void updateFinalR(float cor);
+      float getFinalR();
+      void updateFinalG(float cor);
+      float getFinalG();
+      void updateFinalB(float cor);
+      float getFinalB();
 
 
 #if 0     
-      int maxParticles;        /* Max number of particles */
-      float* vertexArray;      /* Vertex array to draw */
-      float* colorArray;       /* Color array to draw */
-      float centerX,           /* X initial position */
-            centerY,           /* Y initial position */
-            centerZ;           /* Z initial position */
       float gravity;           /* Force of Gravity */
       float initR,             /* Initial Red Color */ 
             initG,             /* Initial Green Color */

@@ -71,6 +71,79 @@ float part::getCenterZ()
 }
 
 
+void part::updateGravity(float grv)
+{
+   gravity = grv;
+}
+
+float part::getGravity()
+{
+   return(gravity);
+}
+
+
+void part::updateInitR(float cor)
+{
+   initR = cor;
+}
+
+float part::getInitR()
+{
+  return(initR);
+}
+
+void part::updateInitG(float cor)
+{
+   initG = cor;
+}
+
+float part::getInitG()
+{
+  return(initG);
+}
+
+void part::updateInitB(float cor)
+{
+   initB = cor;
+}
+
+float part::getInitB()
+{
+  return(initB);
+}
+
+void part::updateFinalR(float cor)
+{
+   initR = cor;
+}
+
+float part::getFinalR()
+{
+  return(initR);
+}
+
+void part::updateFinalG(float cor)
+{
+   finalG = cor;
+}
+
+float part::getFinalG()
+{
+  return(finalG);
+}
+
+void part::updateFinalB(float cor)
+{
+   finalB = cor;
+}
+
+float part::getFinalB()
+{
+  return(finalB);
+}
+
+
+
 /************************************************************************
  *                     Redmensionamento da Janela SDL                   *
  ************************************************************************/
@@ -350,6 +423,57 @@ void editedCenterZ(barraTexto* bart,SDL_Surface *screen)
    p->updateCenterZ(i);
 }
 
+void editedGravity(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateGravity(i);
+}
+
+void editedInitR(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateInitR(i);
+}
+
+void editedInitG(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateInitG(i);
+}
+
+void editedInitB(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateInitB(i);
+}
+
+void editedFinalR(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateFinalR(i);
+}
+
+void editedFinalG(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateFinalG(i);
+}
+
+void editedFinalB(barraTexto* bart,SDL_Surface *screen)
+{
+   float i;
+   sscanf(bart->texto.c_str(),"%f",&i);
+   p->updateFinalB(i);
+}
+
+
+
 /************************************************************************
  *                     Escopo Principal                                 *
  ************************************************************************/
@@ -450,12 +574,43 @@ int main(int argc, char **argv)
    sprintf(aux, "%.3f", p->getCenterZ());
    janEditar->objetos->InserirBarraTexto(60,97,123,113,aux,0,&editedCenterZ);
 
+   janEditar->objetos->InserirQuadroTexto(3,117,60,133,0,"Gravity");
+   sprintf(aux, "%.3f", p->getGravity());
+   janEditar->objetos->InserirBarraTexto(60,117,123,133,aux,0,&editedGravity);
+
+   janEditar->objetos->InserirQuadroTexto(3,137,60,153,0,"InitR");
+   sprintf(aux, "%.3f", p->getInitR());
+   janEditar->objetos->InserirBarraTexto(60,137,123,153,aux,0,&editedInitR);
+
+   janEditar->objetos->InserirQuadroTexto(3,157,60,173,0,"InitG");
+   sprintf(aux, "%.3f", p->getInitG());
+   janEditar->objetos->InserirBarraTexto(60,157,123,173,aux,0,&editedInitG);
+
+   janEditar->objetos->InserirQuadroTexto(3,177,60,193,0,"InitB");
+   sprintf(aux, "%.3f", p->getInitB());
+   janEditar->objetos->InserirBarraTexto(60,177,123,193,aux,0,&editedInitB);
+
+   janEditar->objetos->InserirQuadroTexto(3,197,60,213,0,"FinalR");
+   sprintf(aux, "%.3f", p->getFinalR());
+   janEditar->objetos->InserirBarraTexto(60,197,123,213,aux,0,&editedFinalR);
+
+   janEditar->objetos->InserirQuadroTexto(3,217,60,233,0,"FinalG");
+   sprintf(aux, "%.3f", p->getFinalG());
+   janEditar->objetos->InserirBarraTexto(60,217,123,233,aux,0,&editedFinalG);
+
+   janEditar->objetos->InserirQuadroTexto(3,237,60,253,0,"FinalB");
+   sprintf(aux, "%.3f", p->getFinalB());
+   janEditar->objetos->InserirBarraTexto(60,237,123,253,aux,0,&editedFinalB);
+
+
+
+
+
 
    janEditar->fechavel = 0;
    janEditar->Abrir(gui->ljan);
 
-   float wx,wy,wz;
-   double xReal, zReal, yReal;
+   float wx,wy;
    double varX, varZ;
 
    double varTempo, segundos;
