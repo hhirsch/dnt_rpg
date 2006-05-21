@@ -2029,6 +2029,10 @@ void engine::abreMiniMapa()
 
    figura* fig = janMiniMapa->objetos->InserirFigura(8,20,240,95,NULL);
    mapa->drawMinimap(fig->fig);
+
+   janMiniMapa->objetos->InserirFigura(3,15,252,120,
+                                       "../data/texturas/shortcut2.png");
+
    
                    
    janMiniMapa->ptrExterno = &janMiniMapa;
@@ -2051,6 +2055,9 @@ void engine::abreAtalhos()
    ObjTxt->Cores.corCont[1].B = 255;
    ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,150,71,0,
                                  language.OBJ_NOTHING.c_str());
+
+   janAtalhos->objetos->InserirFigura(252,15,508,120,"../data/texturas/shortcuts.png");
+   janAtalhos->objetos->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
    
    janAtalhos->ptrExterno = &janAtalhos;
    janAtalhos->Abrir(gui->ljan);

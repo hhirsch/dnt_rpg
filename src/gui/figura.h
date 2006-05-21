@@ -13,7 +13,7 @@
 class figura: public Tobjeto
 {
    public:
-      int x,y;              /* Coordenadas Iniciais da Figura */
+      int x1,y1,x2,y2;              /* Coordenadas Iniciais da Figura */
       SDL_Surface *fig;     /* A figura em si */
 
       /* Desenha na superficie a figura desejada

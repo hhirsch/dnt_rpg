@@ -14,8 +14,8 @@ figura::~figura()
 void figura::Desenhar(int Xjan,int Yjan,int salvar,SDL_Surface *screen)
 {
    SDL_Rect Ret;
-   Ret.x = x+Xjan;
-   Ret.y = y+Yjan;
+   Ret.x = x1+Xjan;
+   Ret.y = y1+Yjan;
    Ret.w = fig->w;
    Ret.h = fig->h;
    SDL_BlitSurface(fig,NULL,screen,&Ret);

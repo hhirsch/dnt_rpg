@@ -131,8 +131,10 @@ figura* Tlista::InserirFigura(int x,int y,int w,int h,const char* arquivo)
    //printf("Pondo Figura\n");
    figura* novo;
    novo = new figura;
-   novo->x = x;
-   novo->y = y;
+   novo->x1 = x;
+   novo->y1 = y;
+   novo->x2 = w;
+   novo->y2 = h;
  
    //SDL_Rect ret;
    //ret.w = 0; ret.h = 0; ret.x = img->w; ret.y = img->h;
