@@ -48,7 +48,7 @@ class janela: public Tobjeto
       /* Desenha na superficie a janela com todos seus derivados
        * jan    -> a janela a ser desenhada
        */
-      void Desenhar();
+      void Desenhar(int mouseX, int mouseY);
 
       /* Ativa a Janela jan, inativando a currentemente ativa 
        * jan    -> janela a ser ativada

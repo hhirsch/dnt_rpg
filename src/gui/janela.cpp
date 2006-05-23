@@ -117,7 +117,7 @@ void Ljanela::RetirarJanela(janela *jan)
 /*********************************************************************
  *                Desenha a janela em seu buffer interno             *
  *********************************************************************/
-void janela::Desenhar()
+void janela::Desenhar(int mouseX, int mouseY)
 {
    int dx = x2 - x1 + 1;
    int dy = y2 - y1 + 1;
@@ -180,6 +180,11 @@ void janela::Desenhar()
               quad->Desenhar(0,0,0,cara);
               break;
          }
+         case TABBOTAO:{
+              tabBotao *bt = (tabBotao*) obj; 
+              bt->Desenhar(mouseX, mouseY, x1, y1, cara);
+              break;
+         }
          default:break;
        
       } //case
@@ -235,7 +240,7 @@ void janela::Ativar(Tlista *lista)
 void janela::Abrir(Tlista *lista)
 {
    Ativar(lista);
-   Desenhar();
+   Desenhar(0,0);
 }
 
 /*********************************************************************

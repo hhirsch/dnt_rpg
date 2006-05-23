@@ -124,46 +124,27 @@ cxSel* Tlista::InserirCxSel(int xa,int ya,int selecionada)
    InserirObj(novo);
    return(novo);
 }
-
+ 
 /* Insere uma nova figura na lista */
 figura* Tlista::InserirFigura(int x,int y,int w,int h,const char* arquivo)
 {
    //printf("Pondo Figura\n");
    figura* novo;
-   novo = new figura;
-   novo->x1 = x;
-   novo->y1 = y;
-   novo->x2 = w;
-   novo->y2 = h;
- 
-   //SDL_Rect ret;
-   //ret.w = 0; ret.h = 0; ret.x = img->w; ret.y = img->h;
+   novo = new figura(x,y,w,h,arquivo);
    
-   if(arquivo!=NULL)
-   {
-      //printf("Arquivo: %s\n",arquivo);
-      SDL_Surface* img = IMG_Load(arquivo);
-      novo->fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       img->w,img->h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-      SDL_BlitSurface(img,NULL,novo->fig,NULL);
-      SDL_FreeSurface(img);
-      if ( novo->fig == NULL )
-         erro_Mensagem("Não foi possível carregar figura\n",10);
-   }
-   else if( (w > 0) && (h > 0) )
-   {
-      //printf("NULL\n");
-      novo->fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       w,h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   }
-   else
-   {
-      novo->fig = NULL;
-   }
 
    novo->tipo = FIGURA;
+   InserirObj(novo);
+   return(novo);
+} 
+
+tabBotao* Tlista::InserirTabBotao(int x,int y,int w,int h,const char* arquivo)
+{
+   tabBotao* novo;
+   novo = new tabBotao(x,y,arquivo);
+   
+
+   novo->tipo = TABBOTAO;
    InserirObj(novo);
    return(novo);
 } 

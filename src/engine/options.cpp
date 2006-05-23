@@ -301,7 +301,7 @@ int options::Treat(interface* interf)
 
    txtLanguage->texto = languageName();
 
-   window->Desenhar();
+   window->Desenhar(0,0);
    cAction = ACT_NONE;
    return(OPTIONSW_OTHER);
 } 

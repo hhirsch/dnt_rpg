@@ -100,7 +100,6 @@ class engine
       /* Testa Colisão do personagem no ponto determinado. */
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
-
       Map* mapa;                   /* Mapa Utilizado pela Engine */
       cursor* cursors;             /* Utilized mouse cursors */
  
@@ -140,7 +139,6 @@ class engine
       part5* particula5;
       part6* particula6;
       GLfloat segundos; 
-
 };
 
 #endif

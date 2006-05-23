@@ -288,7 +288,7 @@ int skillWindow::treat(interface* inter)
       txtPoints->Cores.corTexto.B = 255;
    }
    
-   window->Desenhar();
+   window->Desenhar(0,0);
    curAction = ACT_NONE;
    return(SKILLW_OTHER);
 }

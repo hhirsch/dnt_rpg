@@ -5,7 +5,7 @@ CPP = g++
 CFLAGS = -g -c -Wall
 EFLAGS = -g -Wall -lm -lSDL -lSDL_image
 OBJS = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o menu.o mouse.o quadtexto.o seltexto.o 
-OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o lista.o menu.o mouse.o quadtexto.o seltexto.o
+OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o lista.o menu.o mouse.o quadtexto.o seltexto.o tabbotao.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -96,6 +96,12 @@ seltexto.o: seltexto.h seltexto.cpp
 	@printf "Making seltexto.o... "
 	@$(CPP) $(CFLAGS) seltexto.cpp -o seltexto.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
+
+tabbotao.o: tabbotao.h tabbotao.cpp
+	@printf "Making tabbotao.o... "
+	@$(CPP) $(CFLAGS) tabbotao.cpp -o tabbotao.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 
 objeto: $(OBJSPP)
 

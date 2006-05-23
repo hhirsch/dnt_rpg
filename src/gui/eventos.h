@@ -28,6 +28,7 @@
 #define JANELAATIVADA        8
 #define JANELAMOVIMENTADA    9
 #define JANELACLICADA       10
+#define TABBOTAOPRESSIONADO 11
 
 /* Constantes de Foco */
 #define FOCO_JANELA       1

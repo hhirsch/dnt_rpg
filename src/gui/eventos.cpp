@@ -177,6 +177,15 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                      foco = FOCO_SELTEXTO;
                   }
                }
+               else if(obj->tipo == TABBOTAO)
+               {
+                  tabBotao* tb = (tabBotao*) obj;
+                  if( tb->VerificarSobrePosicao(x,y,ljan->janelaAtiva->x1,
+                                                ljan->janelaAtiva->y1) )
+                  {
+                    return(TABBOTAOPRESSIONADO);
+                  }
+               }
                obj = obj->proximo;
             }
             /* If out of for, without objects, call window external function */
@@ -317,7 +326,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
            if(ljan->janelaAtiva->fechavel)
               ljan->janelaAtiva->Fechar(ljan);
            else
-              ljan->janelaAtiva->Desenhar();
+              ljan->janelaAtiva->Desenhar(x,y);
            foco = FOCO_JOGO;
            return(JANELAFECHADA);
        }
@@ -330,7 +339,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
        }
        else if(pronto)
        {
-          ljan->janelaAtiva->Desenhar();
+          ljan->janelaAtiva->Desenhar(x,y);
           foco = FOCO_JOGO;
        }
        return(MENUSELECIONADO);

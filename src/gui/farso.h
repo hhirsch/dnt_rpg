@@ -24,6 +24,7 @@
 #include "figura.h"
 #include "menu.h"
 #include "mouse.h"
+#include "tabbotao.h"
 
 void Farso_Iniciar(SDL_Surface **screen, char* titulo);
 void Farso_Terminar(SDL_Surface *screen);

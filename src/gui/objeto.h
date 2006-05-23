@@ -13,6 +13,7 @@
 #define SELTEXTO      5
 #define QUADROTEXTO   6
 #define MENUITEM      7
+#define TABBOTAO      8
 #define MAPOBJETO     99
 #define PERSONAGEM    100 
 

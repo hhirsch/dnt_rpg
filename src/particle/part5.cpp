@@ -14,6 +14,7 @@ part5::part5(float cX,float cY,float cZ, string fileName):
    centerZ=cZ;
    actualParticles = 0;
    partTexture = LoadTexture("../data/particles/part2.png");
+   //partTexture = LoadTexture("../data/particles/smoke5.png");
 }
 
 part5::~part5()

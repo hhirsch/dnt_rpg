@@ -97,7 +97,7 @@ int botao_VaiPara(void* jan,void *ljan,SDL_Surface *screen)
     int cDesejado =  atoi(btVaiPara->texto.c_str());
     printf("%c %d\n",cDesejado,cDesejado);
     pegaLetra(cDesejado);
-    janelaEdicao->Desenhar();
+    janelaEdicao->Desenhar(0,0);
     return(1);
 }
 
@@ -137,7 +137,7 @@ int botao_Abrir(void* jan,void *ljan,SDL_Surface *screen)
   fclose(arq);
   sprintf(tmp,"%d",fonte.incCP);
   btCP->texto = tmp;
-  j->Desenhar();
+  j->Desenhar(0,0);
   tecAberta = -1;
   return(1);
 }
@@ -173,7 +173,7 @@ void colocaCor(janela* jan, int x, int y, SDL_Surface* suf)
       retangulo_Colorir( grid->fig,((nx-1)*14)+1,((ny-1)*14)+1,
                          ((nx)*14)-1,((ny)*14)-1,0);
       caractere[nx-1][ny-1]=corAtv;
-      jan->Desenhar();
+      jan->Desenhar(0,0);
    }
 }
 
@@ -207,7 +207,7 @@ void grade()
         }
     }
     //janela_PoeCaraNaTela(jan,1,screen);
-    janelaEdicao->Desenhar();
+    janelaEdicao->Desenhar(0,0);
 
 }
 
@@ -668,7 +668,7 @@ int main(int argc, char *argv[])
           {
              pegaLetra(c[0]);
 //             janelaEdicao->Ativar(interf->ljan);
-             janelaEdicao->Desenhar();
+             janelaEdicao->Desenhar(0,0);
           }
        }
        

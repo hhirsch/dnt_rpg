@@ -37,6 +37,8 @@
 /* Conversor de graus para radianos */
 inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
 
+int exitEngine;
+
 /*********************************************************************
  *                       Construtor da Engine                        *
  *********************************************************************/
@@ -674,6 +676,7 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
  *********************************************************************/
 int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 {
+   exitEngine = 0;
    bool redesenha = false;
    bool andou = false;
    bool passouTempo = false;
@@ -741,7 +744,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                                  + particula5->numParticles()
                                  + particula6->numParticles() );
          FPS->texto += texto;
-         janAtalhos->Desenhar();
+         janAtalhos->Desenhar(mouseX, mouseY);
       }
       ultimaLeitura = tempo;
 
@@ -812,7 +815,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                    if(janAtalhos)
                    {
                       ObjTxt->texto = quaux->objetos[obj]->nome; 
-                      janAtalhos->Desenhar();
+                      janAtalhos->Desenhar(mouseX,mouseY);
                    }
                    if(Mbotao & SDL_BUTTON(1))
                    {
@@ -847,7 +850,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                  if(janAtalhos)
                  {
                     ObjTxt->texto = language.OBJ_DOOR.c_str(); 
-                    janAtalhos->Desenhar();
+                    janAtalhos->Desenhar(mouseX, mouseY);
                  }
                  if(Mbotao & SDL_BUTTON(1))
                  {
@@ -901,7 +904,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                 if(janAtalhos)
                 {
                    ObjTxt->texto = pers->nome; 
-                   janAtalhos->Desenhar();
+                   janAtalhos->Desenhar(mouseX, mouseY);
                 }
                 pronto = 1;
             }
@@ -941,7 +944,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                    if(janAtalhos)
                    {
                       ObjTxt->texto = pers->nome; 
-                      janAtalhos->Desenhar();
+                      janAtalhos->Desenhar(mouseX, mouseY);
                    }
                    pronto = 1;
                }
@@ -968,7 +971,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                if(janAtalhos)
                {
                   ObjTxt->texto = quaux->mapConection.mapName; 
-                  janAtalhos->Desenhar();
+                  janAtalhos->Desenhar(mouseX, mouseY);
                }
                cursors->SetActual(CURSOR_MAPTRAVEL);
                pronto = 1;
@@ -983,7 +986,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          if( (janAtalhos) && (!pronto) )
          {
             ObjTxt->texto = language.OBJ_NOTHING.c_str(); 
-            janAtalhos->Desenhar();
+            janAtalhos->Desenhar(mouseX, mouseY);
          }
         }
       }
@@ -1290,7 +1293,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          botPerMiniMap->y1 = z;
          botPerMiniMap->y2 = z+3;
 
-         janMiniMapa->Desenhar();
+         janMiniMapa->Desenhar(mouseX, mouseY);
       }
   
       Desenhar();
@@ -1314,7 +1317,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       snd->StopSample(SOUND_WALK);
    }
  
-   return(1);
+   return(!exitEngine);
 }
 
 /*********************************************************************
@@ -1437,11 +1440,18 @@ void engine::Desenhar()
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    //glAlphaFunc(GL_GREATER, 0.1f);
    /* Desnho do cursor do mouse */
+
+  /* if(mouseY+32 > SCREEN_Y)
+   {
+      mouseY = SCREEN_Y-32;
+   }*/ 
+   
+   GLfloat Z = 0.01;
    GLuint Y = SCREEN_Y - mouseY;
-   gluUnProject(mouseX,Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject(mouseX,Y-32,0.01, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject(mouseX+32,Y-32,0.01,modl,proj,viewPort, &x3, &y3, &z3);
-   gluUnProject(mouseX+32,Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
+   gluUnProject(mouseX,Y, Z, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject(mouseX,Y-32,Z, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(mouseX+32,Y-32,Z,modl,proj,viewPort, &x3, &y3, &z3);
+   gluUnProject(mouseX+32,Y,Z, modl, proj, viewPort, &x4, &y4, &z4);
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, cursors->actualCursor );
    glBegin(GL_QUADS);
@@ -2042,6 +2052,12 @@ void engine::abreMiniMapa()
 /*********************************************************************
  *                       Carrega Janela de Atalhos                   *
  *********************************************************************/
+int botaoMenu(void *jan,void *ljan,SDL_Surface *screen)
+{
+   exitEngine = 1;
+   return(1);
+}
+
 void engine::abreAtalhos()
 {
    janAtalhos=gui->ljan->InserirJanela(0,472,511,599,
@@ -2056,7 +2072,50 @@ void engine::abreAtalhos()
    ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,150,71,0,
                                  language.OBJ_NOTHING.c_str());
 
-   janAtalhos->objetos->InserirFigura(252,15,508,120,"../data/texturas/shortcuts.png");
+   janAtalhos->objetos->InserirBotao(6,102,74,120,janAtalhos->Cores.corBot.R, 
+                                 janAtalhos->Cores.corBot.G,
+                                 janAtalhos->Cores.corBot.B,
+                                 language.INITIAL_SAVE.c_str(),
+                                 0,NULL);
+   janAtalhos->objetos->InserirBotao(75,102,143,120,janAtalhos->Cores.corBot.R, 
+                                 janAtalhos->Cores.corBot.G,
+                                 janAtalhos->Cores.corBot.B,
+                                 "Menu",
+                                 0,&botaoMenu);
+   janAtalhos->objetos->InserirBotao(144,102,212,120,
+                                 janAtalhos->Cores.corBot.R, 
+                                 janAtalhos->Cores.corBot.G,
+                                 janAtalhos->Cores.corBot.B,
+                                 language.INITIAL_LOAD.c_str(),
+                                 0,NULL);
+
+   tabBotao* tb;
+   tb = janAtalhos->objetos->InserirTabBotao(252,15,0,0,
+                                             "../data/texturas/shortcuts.png");
+   tb->inserirBotao(7,4,43,36,NULL);/* Attack Mode */
+   tb->inserirBotao(7,40,43,72,NULL);/* Attack 1 */
+   tb->inserirBotao(7,75,43,107,NULL);/* Attack 7 */
+
+   tb->inserirBotao(53,4,89,36,NULL);/* Guard/Sleep Mode */
+   tb->inserirBotao(53,40,89,72,NULL);/* Attack 2 */
+   tb->inserirBotao(53,75,89,107,NULL);/* Attack 8 */
+
+   tb->inserirBotao(99,4,135,36,NULL);/* Inventory */
+   tb->inserirBotao(99,40,135,72,NULL);/* Attack 3 */
+   tb->inserirBotao(99,75,135,107,NULL);/* Attack 9 */
+
+   tb->inserirBotao(141,4,177,36,NULL);/* Map */
+   tb->inserirBotao(141,40,177,72,NULL);/* Attack 4 */
+   tb->inserirBotao(141,75,177,107,NULL);/* Attack 10 */
+   
+   tb->inserirBotao(180,4,216,36,NULL);/* Party */
+   tb->inserirBotao(180,40,216,72,NULL);/* Attack 5 */
+   tb->inserirBotao(180,75,216,107,NULL);/* Assign Attacks */
+
+   tb->inserirBotao(220,4,256,36,NULL);/* Get */
+   tb->inserirBotao(220,40,256,72,NULL);/* Attack 6 */
+   tb->inserirBotao(220,75,256,107,NULL);/* Info */
+
    janAtalhos->objetos->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
    
    janAtalhos->ptrExterno = &janAtalhos;
@@ -2174,11 +2233,6 @@ int engine::Rodar(SDL_Surface *surface)
 
 
    }
-
-   if(janAtalhos)
-      janAtalhos->Fechar(gui->ljan);
-   if(janMiniMapa)
-      janMiniMapa->Fechar(gui->ljan);
 
    delete(ia);
    return(1);

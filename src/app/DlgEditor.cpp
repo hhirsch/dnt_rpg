@@ -74,7 +74,7 @@ void ProcedimentoMenus(void* jan, void* bot,menuItem* item,
       botao* b=(botao*)bot;
       b->texto = item->texto;
       janela* j=(janela*)jan;
-      j->Desenhar();
+      j->Desenhar(0,0);
       j->AtualizaCara();
    }
 }
