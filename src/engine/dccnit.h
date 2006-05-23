@@ -78,6 +78,8 @@ class engine
       /* Abre a tela de opções/ ajustes do jogo */
       int TelaOpcoes(GLuint* idTextura);
 
+      void InformationScreen();
+
       /* Tratamento de Janelas Especiais */
       void abreMiniMapa();
       void abreAtalhos();

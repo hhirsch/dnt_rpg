@@ -146,6 +146,36 @@ void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto,
 }
 
 
+void engine::InformationScreen()
+{
+   Uint8 *keys;
+   SDL_Surface* img = IMG_Load(language.TEXTURE_INFORMATION.c_str());
+
+   GLuint texturaInfo;
+   carregaTextura(img,&texturaInfo);
+
+   glDisable(GL_LIGHTING);
+   AtualizaFrustum(matrizVisivel,proj,modl);
+   AtualizaTela2D(texturaInfo,proj,modl,viewPort,272,44,527,555,0.0001);
+   glEnable(GL_LIGHTING);
+   glFlush();
+   SDL_GL_SwapBuffers();
+
+   SDL_Delay(100);
+   SDL_PumpEvents();
+   keys = SDL_GetKeyState(NULL);
+   while(!(keys[SDLK_F1] || keys[SDLK_ESCAPE] || keys[SDLK_RETURN]) )
+   {
+       SDL_Delay(40);
+       SDL_PumpEvents();
+       keys = SDL_GetKeyState(NULL);
+   }
+
+   glDeleteTextures(1,&texturaInfo);
+   SDL_Delay(100);
+   ultimaLeitura = SDL_GetTicks();
+}
+
 /*********************************************************************
  *                       Carrega Mapa na Engine                      *
  *********************************************************************/
@@ -1037,31 +1067,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if(keys[SDLK_F1])
       {
          //Tela de Informações // HELP
-         SDL_Surface* img = IMG_Load(language.TEXTURE_INFORMATION.c_str());
-
-         GLuint texturaInfo;
-         carregaTextura(img,&texturaInfo);
-
-         glDisable(GL_LIGHTING);
-         AtualizaFrustum(matrizVisivel,proj,modl);
-         AtualizaTela2D(texturaInfo,proj,modl,viewPort,272,44,527,555,0.0001);
-         glEnable(GL_LIGHTING);
-         glFlush();
-         SDL_GL_SwapBuffers();
-
-         SDL_Delay(100);
-         SDL_PumpEvents();
-         keys = SDL_GetKeyState(NULL);
-         while(!(keys[SDLK_F1] || keys[SDLK_ESCAPE] || keys[SDLK_RETURN]) )
-         {
-            SDL_Delay(40);
-            SDL_PumpEvents();
-            keys = SDL_GetKeyState(NULL);
-         }
-
-         glDeleteTextures(1,&texturaInfo);
-         SDL_Delay(100);
-         ultimaLeitura = SDL_GetTicks();
+         InformationScreen();
          redesenha = true;
       }
 
@@ -1269,6 +1275,12 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
         redesenha = true;
       }
    }
+   }
+   else if(*forcaAtualizacao == 0)
+   {
+      int tmp = (int) (20 - varTempo - 1);
+      if(tmp > 0)
+      SDL_Delay(tmp);
    }
    
    if( (redesenha) || ( (*forcaAtualizacao != 0)/* && ((tempo-ultimaLeitura)>=16)*/))
