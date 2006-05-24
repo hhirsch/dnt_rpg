@@ -122,8 +122,9 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    while (!pronto)
    {
       tempo = SDL_GetTicks();
-      if(tempo - tempoAnterior > 20) 
+      if(tempo - tempoAnterior >= 20) 
       {
+         tempoAnterior = tempo;
          SDL_PumpEvents();
          keys = SDL_GetKeyState(NULL);
          glClearColor(0,0,0,1);
@@ -134,6 +135,10 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          gui->Desenhar(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
+      }
+      else if(19 - (tempo - tempoAnterior) > 0 ) 
+      {
+         SDL_Delay(19 - (tempo - tempoAnterior) );
       }
    }
 

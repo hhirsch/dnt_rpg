@@ -398,8 +398,9 @@ int engine::TelaOpcoes(GLuint* idTextura)
           (optionW != OPTIONSW_CONFIRM))
    {
       tempo = SDL_GetTicks();
-      if(tempo - tempoAnterior > 20) 
+      if(tempo - tempoAnterior >= 20) 
       {
+         tempoAnterior = tempo;
          SDL_PumpEvents();
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          glClearColor(0,0,0,1);
@@ -411,6 +412,11 @@ int engine::TelaOpcoes(GLuint* idTextura)
          glFlush();
          SDL_GL_SwapBuffers();
       }
+      else if(19 - (tempo - tempoAnterior) > 0 ) 
+      {
+         SDL_Delay(19 - (tempo - tempoAnterior) );
+      }
+
       optionW = option->Treat(interf);
    }
 
@@ -443,8 +449,9 @@ int engine::TelaPersonagens(GLuint* idTextura)
           (charCreation != CHAR_CONFIRM))
    {
       tempo = SDL_GetTicks();
-      if(tempo - tempoAnterior > 20) 
+      if(tempo - tempoAnterior >= 20) 
       {
+         tempoAnterior = tempo;
          SDL_PumpEvents();
          glClearColor(0,0,0,1);
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -456,6 +463,11 @@ int engine::TelaPersonagens(GLuint* idTextura)
          glFlush();
          SDL_GL_SwapBuffers();
       }
+      else if(19 - (tempo - tempoAnterior) > 0 ) 
+      {
+         SDL_Delay(19 - (tempo - tempoAnterior) );
+      }
+
       charCreation = skWindow->treat(gui);
    }
    delete(sk);
