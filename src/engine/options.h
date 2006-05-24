@@ -17,7 +17,7 @@ class options
       options(string file);
       ~options();
 
-      void DisplayOptionsScreen(interface* inter);
+      void DisplayOptionsScreen(interface* interf);
       void Save();
       int Treat(interface* interf);
 

@@ -381,6 +381,8 @@ int engine::TelaInicial(int Status, GLuint* idTextura, bool reloadMusic)
  *********************************************************************/
 int engine::TelaOpcoes(GLuint* idTextura)
 {
+   interface* interf = new interface(NULL);
+
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
 
@@ -390,7 +392,7 @@ int engine::TelaOpcoes(GLuint* idTextura)
    Uint8* keys;
    int x,y;
 
-   option->DisplayOptionsScreen(gui);
+   option->DisplayOptionsScreen(interf);
 
    while( (optionW != OPTIONSW_CANCEL) && 
           (optionW != OPTIONSW_CONFIRM))
@@ -403,19 +405,21 @@ int engine::TelaOpcoes(GLuint* idTextura)
          glClearColor(0,0,0,1);
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         gui->ManipulaEventos(x,y,Mbotao,keys);
+         interf->ManipulaEventos(x,y,Mbotao,keys);
          AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
-         gui->Desenhar(proj,modl,viewPort);
+         interf->Desenhar(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
       }
-      optionW = option->Treat(gui);
+      optionW = option->Treat(interf);
    }
 
    snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
 
    glEnable(GL_LIGHTING);
    SDL_ShowCursor(SDL_DISABLE);
+
+   delete(interf);
 
    return(optionW);
 }

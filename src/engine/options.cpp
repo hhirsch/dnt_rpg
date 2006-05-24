@@ -92,6 +92,7 @@ options::options(string file)
    }
 
    fclose(arq);
+
 }
 
 options::~options()
@@ -143,7 +144,7 @@ string options::languageName()
 /****************************************************************
  *                    Open Options Screen                       *
  ****************************************************************/
-void options::DisplayOptionsScreen(interface* inter)
+void options::DisplayOptionsScreen(interface* interf)
 {
    char tmp[5];
    string saux;
@@ -152,7 +153,7 @@ void options::DisplayOptionsScreen(interface* inter)
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
-   window = inter->ljan->InserirJanela(316,186,571,441,
+   window = interf->ljan->InserirJanela(316,186,571,441,
                                        language.OPTIONS_TITLE.c_str(),
                                        1,1,NULL,NULL);
 
@@ -217,7 +218,7 @@ void options::DisplayOptionsScreen(interface* inter)
    /* Open Skill Window */
    window->ptrExterno = &window;
    window->fechavel = false;
-   window->Abrir(inter->ljan);
+   window->Abrir(interf->ljan);
 }
 
 int options::Treat(interface* interf)
