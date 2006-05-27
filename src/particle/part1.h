@@ -56,6 +56,9 @@ class part1: public particleSystem
 
    private:
       float seconds; 
+      GLuint partTexture;
+      GLuint LoadTexture(char* fileName);
+
    
 };
 
