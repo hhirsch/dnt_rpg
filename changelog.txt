@@ -2,7 +2,12 @@
 |               Version 0.0.3                  |
 ================================================
  - Particle System;
- - Little Bugs fixes;
+ - Particles (blood, fire, smoke, water surface,
+              lightning, waterfall);
+ - Engine Optimization;
+ - New Animations;
+ - New Models;
+ - Minor Bugs fixes;
  
 ================================================
 |               Version 0.0.2                  |
@@ -34,7 +39,7 @@
  - Full English & Portuguese support;
  - Partial French & Spanish support;
  - Some bugs fixed.
-
+ 
 ================================================
 |               Version 0.0.1                  |
 ================================================
@@ -45,3 +50,4 @@
  - First Step to animation (body division);
  - The Character can "Walk" (erh, fly??);
  - The Camera can move. 
+ 

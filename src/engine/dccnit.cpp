@@ -11,7 +11,7 @@
 #include "../etc/glm.h"
 
 
-#define DELAY           0
+//#define DELAY           0
 
 #define ANDAR           0.75     /* O quanto o personagem anda a cada frame
                                   * A Velocidade do Caracter pode ser calculada
@@ -93,7 +93,6 @@ engine::engine()
  *********************************************************************/
 engine::~engine()
 {
-   //glDeleteLists(mapaDesenhar,1);
    if(musica)
    {
       snd->StopMusic(musica);
@@ -325,7 +324,6 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
 
    glEnable(GL_LIGHTING);
 
-   //free(arq);
 
    /* Coloca Personagem Ativo na posicao de Inicio do Mapa */
    PCs->personagemAtivo->posicaoLadoX = mapa->xInic;
@@ -333,12 +331,6 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
    centroX = mapa->xInic;
    centroZ = mapa->zInic;
    PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
-
-   /* Define a Posicao do NPC em Squares 
-   per = (personagem*) NPCs->primeiro->proximo;
-   int posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
-   int posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
-   per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);*/
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  language.LOAD_DONE.c_str(),
@@ -530,7 +522,6 @@ void engine::Iniciar(SDL_Surface *screen)
    glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
    glLightf (GL_LIGHT1, GL_SPOT_EXPONENT, 2.5);
  
-   //glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,1);
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
    
    /* Habilita a iluminacao */
@@ -726,7 +717,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    bool redesenha = false;
    bool andou = false;
    bool passouTempo = false;
-   //bool parado = false;
    Uint32 tempo;
    double varX, varZ; // para evitar de ter de calcular 2 vezes
 
@@ -1294,12 +1284,12 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    }
    else if(*forcaAtualizacao == 0)
    {
-      int tmp = (int) (20 - varTempo - 1);
+      int tmp = (int) (19 - varTempo);
       if(tmp > 0)
       SDL_Delay(tmp);
    }
    
-   if( (redesenha) || ( (*forcaAtualizacao != 0)/* && ((tempo-ultimaLeitura)>=16)*/))
+   if( (redesenha) || ( (*forcaAtualizacao != 0)))
    {
       if(janMiniMapa)
       {
@@ -1464,16 +1454,9 @@ void engine::Desenhar()
    gui->Desenhar(proj,modl,viewPort);
 
    glEnable(GL_BLEND);
-   //glEnable(GL_ALPHA_TEST);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-   //glAlphaFunc(GL_GREATER, 0.1f);
    /* Desnho do cursor do mouse */
 
-  /* if(mouseY+32 > SCREEN_Y)
-   {
-      mouseY = SCREEN_Y-32;
-   }*/ 
-   
    GLfloat Z = 0.01;
    GLuint Y = SCREEN_Y - mouseY;
    gluUnProject(mouseX,Y, Z, modl, proj, viewPort, &x1, &y1, &z1);
