@@ -17,6 +17,7 @@ part3* p3;
 part4* p4;
 part5* p5;
 part6* p6;
+part7* p7;
 part* p;
 
 
@@ -114,12 +115,12 @@ float part::getInitB()
 
 void part::updateFinalR(float cor)
 {
-   initR = cor;
+   finalR = cor;
 }
 
 float part::getFinalR()
 {
-  return(initR);
+  return(finalR);
 }
 
 void part::updateFinalG(float cor)
@@ -477,6 +478,11 @@ int botaoSalvar(void *jan,void *ljan, SDL_Surface *screen)
                p6->Save(bartSalvar->texto);
                break;
              }
+      case 7:
+             {
+               p7->Save(bartSalvar->texto);
+               break;
+             }
    }
    printf("With a lot of hope, i've saved as: %s\n",bartSalvar->texto.c_str());
    return(1);
@@ -515,6 +521,11 @@ void deleteParticle()
       case 6:
              {
                delete(p6);
+               break;
+             }
+      case 7:
+             {
+               delete(p7);
                break;
              }
    }
@@ -560,6 +571,13 @@ void createParticle(char* entrada)
                p = (part*) p6;
                break;
              }
+      case 7:
+             {
+               p7 = new part7(50,80,120,entrada);
+               p = (part*) p7;
+               break;
+             }
+
       default:
              {
                 printf("What the hell is type %d???\n",tipo);
@@ -602,6 +620,11 @@ void actualizeParticle(double segundos)
            case 6:
                   {
                     p6->NextStep(segundos);
+                    break;
+                  }
+            case 7:
+                  {
+                    p7->NextStep(segundos);
                     break;
                   }
          }
@@ -917,7 +940,7 @@ int main(int argc, char **argv)
 
    if(!chamadaCorreta) erro();
 
-   printf("Type of System ( 1 .. 6 ): ");
+   printf("Type of System ( 1 .. 7 ): ");
    scanf("%d",&tipo);
 
    /* Inicia o Sistema Bizarro */ 

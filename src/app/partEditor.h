@@ -9,6 +9,7 @@
 #include "../particle/part4.h"
 #include "../particle/part5.h"
 #include "../particle/part6.h"
+#include "../particle/part7.h"
 #include "../engine/culling.h"
 #include <SDL/SDL_image.h>
 #include <stdio.h>

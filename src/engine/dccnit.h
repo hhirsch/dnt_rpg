@@ -24,6 +24,7 @@
 #include "../particle/part4.h"
 #include "../particle/part5.h"
 #include "../particle/part6.h"
+#include "../particle/part7.h"
 #ifdef REDE
   #include "../net/client.h"
 #endif
@@ -83,6 +84,8 @@ class engine
       /* Tratamento de Janelas Especiais */
       void abreMiniMapa();
       void abreAtalhos();
+
+      int botaoMapa(void *jan,void *ljan,SDL_Surface *screen);
 
    private:
 

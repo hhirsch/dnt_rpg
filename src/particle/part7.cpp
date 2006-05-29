@@ -1,41 +1,34 @@
-/* Lightning */
+/* Snow */
 
-#include "part6.h"
+#include "part7.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <SDL/SDL_image.h>
 
-part6::part6(float cX,float cY,float cZ, string fileName):
+part7::part7(float cX,float cY,float cZ, string fileName):
                                particleSystem(fileName,PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
-   centerY = cY; 
-   centerZ = cZ;
-   actualY = centerY;
+   centerY=cY; 
+   centerZ=cZ;
    actualParticles = 0;
    partTexture = LoadTexture("../data/particles/part2.png");
+   //partTexture = LoadTexture("../data/particles/part3.png");
+   //partTexture = LoadTexture("../data/particles/smoke5.png");
 }
 
-part6::~part6()
+part7::~part7()
 {
    glDeleteTextures(1,&partTexture);
 }
 
-void part6::Render(particle* part)
+void part7::Render(particle* part)
 {
 }
 
-void part6::InitRender()
+void part7::InitRender()
 {
-  /* test atenuation */
-  /*int viewPort[4];
-  float mat[16];
-  glGetFloatv(GL_PROJECTION_MATRIX,mat);
-  glGetIntegerv(GL_VIEWPORT, viewPort);
-
-  printf("V2 = %d M0 = %.3f \n",viewPort[2], mat[0]);*/
-   
   glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
@@ -49,13 +42,12 @@ void part6::InitRender()
    float MaxPointSize;
    glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
 
+   float quadratic[] =  { 0.01f, 0.01f, 0.0f };
    //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
-   //float quadratic[] =  { 0.01f, 0.01f, 0.0f };
-   //float quadratic[] =  { 1.0f, 0.0f, 0.0f };
-   //PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
+   PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
 
    //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
-   PointParameterf( GL_POINT_SIZE_MIN_ARB, 5.0 );
+   PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
    glPointSize(16);
@@ -63,11 +55,9 @@ void part6::InitRender()
    glBindTexture(GL_TEXTURE_2D, partTexture);
    glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
    glEnable(GL_POINT_SPRITE_ARB);
-   //glEnable(GL_POINT_SMOOTH);
-   //glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
 }
 
-void part6::EndRender()
+void part7::EndRender()
 {
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
@@ -80,9 +70,9 @@ void part6::EndRender()
    glDisable( GL_BLEND );
 }
 
-void part6::actualize(particle* part)
+void part7::actualize(particle* part)
 {
-   /*if(part->posY <= 0 )
+   if(part->posY <= 0 )
    {
      part->status =  PARTICLE_STATUS_STATIC;
      part->posY = 0;
@@ -110,14 +100,14 @@ void part6::actualize(particle* part)
    
 
       part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
-*/
+
       /*if(part->posY >= 5)
       {
         part->velX += seconds*(gravity/2.0)*(((rand() / ((double)RAND_MAX + 1))));
       }
       else
       {*/
-  /*      part->velX += seconds*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
+        part->velX += seconds*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
                       + dSumVel[0]);
       //}
       part->velZ += seconds*(dMultVel[2]*((rand() / ((double)RAND_MAX + 1))) 
@@ -126,30 +116,27 @@ void part6::actualize(particle* part)
       part->posY += part->velY*seconds;
       part->posX += part->velX*seconds;
       part->posZ += part->velZ*seconds;
-   }*/
+   }
 }
 
-bool part6::continueLive(particle* part)
+bool part7::continueLive(particle* part)
 {
-   return( true );
+   return( part->age < maxLive );
 }
 
-int part6::needCreate()
+int part7::needCreate()
 {
-   if(actualY <= 0 )
-      return(0);
-   else
-      return((int)gravity);
+   return(rand() % 2);
 }
 
-void part6::createParticle(particle* part)
+void part7::createParticle(particle* part)
 {
-   dSumVel[0] += (2*(rand() / ((double)RAND_MAX + 1))) - 1;
-   part->posX = dSumVel[0] + centerX;
-   part->posY = actualY;/*(dMultCenter[1]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[1])
-                + centerY;*/
-   dSumVel[2] += (2*(rand() / ((double)RAND_MAX + 1))) - 1;
-   part->posZ = dSumVel[2] + centerZ;
+   part->posX = (dMultCenter[0]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[0])
+                + centerX;
+   part->posY = (dMultCenter[1]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[1])
+                + centerY;
+   part->posZ = (dMultCenter[2]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[2])
+                + centerZ;
    part->prvX = part->posX;
    part->prvY = part->posY;
    part->prvZ = part->posZ;
@@ -163,22 +150,20 @@ void part6::createParticle(particle* part)
    part->prvR = part->R;
    part->prvG = part->G; 
    part->prvB = part->B;
-   part->status =  PARTICLE_STATUS_STATIC;
-   actualY+=(-1*dSumVel[1]);
 }
 
-void part6::NextStep(float sec)
+void part7::NextStep(float sec)
 {
    seconds = 0.02;
    DoStep();
 }
 
-int part6::numParticles()
+int part7::numParticles()
 {
    return(actualParticles);
 }
 
-GLuint part6::LoadTexture(char* fileName)
+GLuint part7::LoadTexture(char* fileName)
 {
    GLuint indice;
    SDL_Surface* img = IMG_Load(fileName);
