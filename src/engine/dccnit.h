@@ -143,6 +143,7 @@ class engine
       part4* particula4;
       part5* particula5;
       part6* particula6;
+      part7* particula7;
       GLfloat segundos; 
 };
 

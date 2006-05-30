@@ -85,6 +85,7 @@ engine::engine()
    particula4 = new part4(240,0,220,"../data/particles/smoke1.par");
    particula5 = new part5(120,30,300, "../data/particles/blood1.par");
    particula6 = new part6(50,250,100,"../data/particles/lightning1.par");
+   particula7 = new part7(100,80,100,"../data/particles/snow1.par");
 
 }
 
@@ -106,6 +107,7 @@ engine::~engine()
    delete(particula4);
    delete(particula5);
    delete(particula6);
+   delete(particula7);
 
    delete(option);
 
@@ -778,7 +780,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                                  + particula3->numParticles()
                                  + particula4->numParticles()
                                  + particula5->numParticles()
-                                 + particula6->numParticles() );
+                                 + particula6->numParticles()
+                                 + particula7->numParticles() );
          FPS->texto += texto;
          janAtalhos->Desenhar(mouseX, mouseY);
       }
@@ -1416,11 +1419,12 @@ void engine::Desenhar()
 
    glPushMatrix();
       /* primeiro as nao texturizadas */
-      particula->NextStep(segundos);
       particula3->NextStep(segundos);
       /* agora as texturizadas */
+      particula->NextStep(segundos);
       particula4->NextStep(segundos);
       particula5->NextStep(segundos);
+      particula7->NextStep(segundos);
       particula6->NextStep(segundos);
       particula2->NextStep(segundos);
    glPopMatrix();
