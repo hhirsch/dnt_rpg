@@ -3,10 +3,11 @@
 ================================================
  - Particle System;
  - Particles (blood, fire, smoke, water surface,
-              lightning, waterfall);
+              lightning, waterfall, snow);
  - Engine Optimization;
  - New Animations;
  - New Models;
+ - Camera follow active character on height;
  - Minor Bugs fixes;
  
 ================================================

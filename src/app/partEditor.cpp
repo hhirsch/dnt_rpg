@@ -1238,6 +1238,7 @@ int main(int argc, char **argv)
 
          glDisable(GL_LIGHTING);
          glDisable(GL_DEPTH_TEST);
+         glDisable(GL_BLEND);
 /*         glDisable(GL_TEXTURE_2D);
          glDisable(GL_BLEND);
          glDisable(GL_COLOR_MATERIAL);*/

@@ -26,7 +26,7 @@
 #define SCREEN_X        800     // Largura da tela
 #define SCREEN_Y        600     // Altura da tela
 
-#define FARVIEW       (SQUARESIZE * 25)  // FARVIEW da camera 
+#define FARVIEW       (SQUARESIZE * 500)  // FARVIEW da camera 
 #define HALFFARVIEW   (FARVIEW / 2)      // Metade do Farview
 
 
@@ -34,8 +34,11 @@
 #define CORNEBLINA_G    1.0      // Componente verde da neblina
 #define CORNEBLINA_B    1.0      // Componente azul da neblina
 
+#define TWOPI 2 * M_PI   
+#define PID2  M_PI / 2
+
 /* Conversor de graus para radianos */
-inline double deg2Rad(double x){return 6.2831853 * x/360.0;}
+inline double deg2Rad(double x){return M_PI * x/180.0;}
 
 int exitEngine;
 
@@ -112,6 +115,7 @@ engine::~engine()
    delete(option);
 
    gluDeleteQuadric(atmosfera);
+   glDeleteLists(listAtmosfera,1);
    glDeleteTextures(1, &ceu);
    if(NPCs)
       delete(NPCs);
@@ -479,9 +483,77 @@ void engine::Redmensiona(SDL_Surface *screen)
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
    gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, FARVIEW);
+//   glFrustum(-1.0, 1.0, 1.0, 1.0, -1.0, FARVIEW);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+}
+
+void engine::drawSphereToList(int lats, int longs) 
+{
+   listAtmosfera = glGenLists(1);
+   glNewList(listAtmosfera,GL_COMPILE);
+
+   /*int i, j;
+   for(i = 0; i <= lats; i++) {
+      double lat0 = M_PI * (-0.5 + (double) (i - 1) / lats);
+      double z0  = sin(lat0);
+      double zr0 =  cos(lat0);
+    
+      double lat1 = M_PI * (-0.5 + (double) i / lats);
+      double z1 = sin(lat1);
+      double zr1 = cos(lat1);
+ 
+      glBegin(GL_QUAD_STRIP);
+      for(j = 0; j <= longs; j++) 
+      {
+         double lng = 2 * M_PI * (double) (j - 1) / longs;
+         double x = cos(lng);
+         double y = sin(lng);
+ 
+         glNormal3f(x * zr0, y * zr0, z0);
+         glVertex3f(x * zr0, y * zr0, z0);
+         glTexCoord2f(i / (float)lats, 2*(j+1) / (float)longs);
+         glNormal3f(x * zr1, y * zr1, z1);
+         glVertex3f(x * zr1, y * zr1, z1);
+         glTexCoord2f(i / (float)lats, 2*j / (float)longs);
+      }
+      glEnd();
+   }*/
+
+   int i,j;
+   double theta1,theta2,theta3;
+   double ex,ey,ez;
+   int n = lats;
+
+   for (j=0;j<n/2;j++) {
+      theta1 = j * TWOPI / n - PID2;
+      theta2 = (j + 1) * TWOPI / n - PID2;
+
+      glBegin(GL_QUAD_STRIP);
+      for (i=0;i<=n;i++) {
+         theta3 = i * TWOPI / n;
+
+         ex = cos(theta2) * cos(theta3);
+         ey = sin(theta2);
+         ez = cos(theta2) * sin(theta3);
+
+         glNormal3f(ex,ey,ez);
+         glTexCoord2f(i/(double)n,2*(j+1)/(double)n);
+         glVertex3f(ex,ey,ez);
+
+         ex = cos(theta1) * cos(theta3);
+         ey = sin(theta1);
+         ez = cos(theta1) * sin(theta3);
+
+         glNormal3f(ex,ey,ez);
+         glTexCoord2f(i/(double)n,2*j/(double)n);
+         glVertex3f(ex,ey,ez);
+      }
+      glEnd();
+   }
+
+   glEndList();
 }
 
 
@@ -504,6 +576,7 @@ void engine::Iniciar(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Definicao da Luz */
+#if 0
    GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -523,7 +596,8 @@ void engine::Iniciar(SDL_Surface *screen)
    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
    glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
    glLightf (GL_LIGHT1, GL_SPOT_EXPONENT, 2.5);
- 
+#endif
+   GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
    
    /* Habilita a iluminacao */
@@ -534,8 +608,9 @@ void engine::Iniciar(SDL_Surface *screen)
   
 
    atmosfera = gluNewQuadric ();
-   //gluQuadricTexture(atmosfera, GL_TRUE);
-   gluQuadricTexture(atmosfera, GL_FALSE);
+   gluQuadricTexture(atmosfera, GL_TRUE);
+   drawSphereToList(10,10);
+   //gluQuadricTexture(atmosfera, GL_FALSE);
 
    SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
 
@@ -603,21 +678,7 @@ int estaDentro(GLfloat min1[3], GLfloat max1[3],
    if( (min1[0] < max2[0]) && (max1[0] > max2[0]) )
    {
       //testa minimo Y
-      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
-      //{
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      //}
-      //testa maximo Y
-      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
+      if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
       {
          //testa minimoZ
          if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
@@ -629,7 +690,21 @@ int estaDentro(GLfloat min1[3], GLfloat max1[3],
          {
             return(1);
          }
-      }*/
+      }
+      //testa maximo Y
+      if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
+      {
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      }
    }
 
    //testa casos de cruz + 
@@ -1349,7 +1424,6 @@ void engine::Desenhar()
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
    glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-   
    glLoadIdentity();
 
    /* Redefine a posicao dinamica da camera */
@@ -1366,7 +1440,11 @@ void engine::Desenhar()
       glEnable(GL_TEXTURE_2D);
       glBindTexture(GL_TEXTURE_2D, ceu);
       glTranslatef(mapa->x*HALFSQUARESIZE, 0 , mapa->z*HALFSQUARESIZE);
-      gluSphere(atmosfera,HALFFARVIEW,5,5);
+      glScalef(HALFFARVIEW,HALFFARVIEW,HALFFARVIEW);
+      glRotated(90,0,1,0);
+      glRotated(180,1,0,0);
+      //gluSphere(atmosfera,HALFFARVIEW,5,5);
+      glCallList(listAtmosfera);
       glDisable(GL_TEXTURE_2D);
    glPopMatrix();
 
@@ -1872,7 +1950,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
    }
 
-   
+      
    /* Testa Meio-fio */
    float altura_atual = PCs->personagemAtivo->posicaoLadoY;
    if( ColisaoComMeioFio( min, max, mapa->meiosFio) )
@@ -1883,7 +1961,10 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    {
       PCs->personagemAtivo->posicaoLadoY = 0.0;
    }
+  
+   
 
+   
    GLfloat nx = ((min[0] + max[0]) / 2);//(PCs->personagemAtivo->posicaoLadoX+varX);
    GLfloat nz = ((min[2] + max[2]) / 2);//(PCs->personagemAtivo->posicaoLadoZ+varZ);
 
@@ -1915,8 +1996,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
  
    PCs->personagemAtivo->posicaoLadoY += res;
-   deltaY = res;
-
+   centroY = res+30;
    
    return(result);
 }

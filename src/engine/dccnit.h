@@ -105,11 +105,15 @@ class engine
       /* Testa Colisão do personagem no ponto determinado. */
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
+
+      void drawSphereToList(int lats, int longs);
+
       Map* mapa;                   /* Mapa Utilizado pela Engine */
       cursor* cursors;             /* Utilized mouse cursors */
  
       GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
       GLUquadricObj* atmosfera;    /* Poligono da Atmosfera, onde fica o ceu */
+      GLuint listAtmosfera;
       GLuint ceu;                  /* Textura do Ceu, quando utilizado */
       int mouseX,mouseY;           /* Coordenada Atual do Mouse na Tela */
       double xReal, zReal, yReal;  /* Coordenada Atual do Mouse no Mundo */

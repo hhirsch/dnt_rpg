@@ -126,7 +126,7 @@ bool part7::continueLive(particle* part)
 
 int part7::needCreate()
 {
-   return(rand() % 2);
+   return(rand() % (int)alpha);
 }
 
 void part7::createParticle(particle* part)
