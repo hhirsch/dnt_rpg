@@ -21,7 +21,7 @@ OBJSCLASSES = $(ENDCLASSES)skills.o
 OBJSSOUND = $(ENDSOUND)sound.o
 OBJSLANG = $(ENDLANG)lang.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o
-OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o skillwindow.o teste.o
+OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o skillwindow.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
@@ -71,6 +71,11 @@ skillwindow.o: skillwindow.h skillwindow.cpp
 teste.o: teste.cpp
 	@printf "Making teste.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o teste.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+util.o: util.cpp util.h
+	@printf "Making util.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) util.cpp -o util.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJS) 

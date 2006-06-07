@@ -1,0 +1,177 @@
+#include "util.h"
+
+
+/*********************************************************************
+ *                   Loading Screen Atualization                     *
+ *********************************************************************/
+void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto, 
+                   GLuint texturaCarga, const char* texto,
+                   GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
+{
+   glClearColor(0,0,0,1);
+   glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+   glDeleteTextures(1,texturaTexto);
+   cor_Definir(0,0,0);
+   retangulo_Colorir(img,0,0,255,31,0);
+   cor_Definir(200,20,20);
+   selFonte(FFARSO,CENTRALIZADO,3);
+   escxy(img,128,0,texto);
+   carregaTexturaRGBA(img,texturaTexto);
+   
+   AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
+   AtualizaTela2D(*texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
+   glFlush();
+   SDL_GL_SwapBuffers();
+}
+
+/*********************************************************************
+ *                Verify if two bounding boxes intercepts            *
+ *********************************************************************/
+int estaDentro(GLfloat min1[3], GLfloat max1[3],
+               GLfloat min2[3], GLfloat max2[3],
+               int inverso)
+{
+   //testa o mínimo X do 2
+   if( (min1[0] < min2[0]) && (max1[0] > min2[0]  ) )
+   {
+      //testa minimo Y
+      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
+      //{
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      //}
+      //testa maximo Y
+      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
+      {
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      }*/
+   }
+   
+   //testa com o máximo X do 2
+   if( (min1[0] < max2[0]) && (max1[0] > max2[0]) )
+   {
+      //testa minimo Y
+      if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
+      {
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      }
+      //testa maximo Y
+      if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
+      {
+         //testa minimoZ
+         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
+         {
+            return(1);
+         }
+         //testa maximoZ
+         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
+         {
+            return(1);
+         }
+      }
+   }
+
+   //testa casos de cruz + 
+   if( (min2[0] < min1[0]) && (max2[0] > max1[0]) &&
+       (min2[2] > min1[2]) && (min2[2] < max1[2]))
+   {
+      return(1);
+   }
+   if( (min2[2] < min1[2]) && (max2[2] > max1[2]) &&
+       (min2[0] > min1[0]) && (min2[0] < max1[0]))
+   {
+      return(1);
+   }
+
+   if(inverso)
+   {
+      return( estaDentro(min2, max2, min1, max1, 0));
+   }
+   else 
+   {
+      return(0);
+   }
+}
+
+/*********************************************************************
+ *                Rotate and Translate a Bounding Box                *
+ *********************************************************************/
+void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
+                         GLfloat varX, GLfloat varMinY, GLfloat varMaxY, 
+                         GLfloat varZ,
+                         GLfloat min[3], GLfloat max[3])
+{
+   int aux;
+   GLfloat x[4];
+   GLfloat z[4];
+   /* Rotaciona o bounding para a posicao correrta */
+   GLfloat cosseno = cos(deg2Rad(orientacao));
+   GLfloat seno = sin(deg2Rad(orientacao));
+   for(aux = 0;aux<4;aux++)
+   {
+      x[aux] = (Z[aux]*seno) + (X[aux]*cosseno);
+      z[aux] = (Z[aux]*cosseno) - (X[aux]*seno);
+   }
+
+   
+   /* translada o bounding box para o local correto*/
+   min[1] += varMinY;
+   max[1] += varMaxY;
+   for(aux=0;aux<4;aux++)
+   {
+     x[aux] += varX;
+     z[aux] += varZ;
+     if(aux == 0)
+     {
+        min[0] = x[0]; max[0] = x[0];
+        min[2] = z[0]; max[2] = z[0];
+     }
+     else
+     {
+         if(x[aux] < min[0])
+         {
+            min[0] = x[aux];
+         }
+         if(x[aux] > max[0])
+         {
+            max[0] = x[aux];
+         }
+         if(z[aux] < min[2])
+         {
+            min[2] = z[aux];
+         }
+         if(z[aux] > max[2])
+         {
+            max[2] = z[aux];
+         }
+
+     }
+   }
+}
+

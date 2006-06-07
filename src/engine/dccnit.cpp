@@ -1,53 +1,26 @@
-/*
- *  DccNiTghtmare is public domain. Do whatever you want with this code.
- */
-
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
 
 #include "dccnit.h"
 #include "culling.h"
+#include "util.h"
 #include "../lang/lang.h"
 #include <math.h>
 #include <SDL/SDL_image.h>
 #include "../etc/glm.h"
 
-
-//#define DELAY           0
-
-#define ANDAR           0.75     /* O quanto o personagem anda a cada frame
-                                  * A Velocidade do Caracter pode ser calculada
-                                  * por ANDAR / 20, em unidades/milisegundo 
-                                  */
- 
-#define GIRAR           2.5     // O quanto ele gira a cada frame
-#define DELTACAMERA     1.5     // O quanto a camera move a cada frame
-#define ZOOMMAXIMO      80      // Valor máximo de zoom
-#define ZOOMMINIMO      280     // Valor mínimo do zoom
-
-#define SCREEN_X        800     // Largura da tela
-#define SCREEN_Y        600     // Altura da tela
-
-#define FARVIEW       (SQUARESIZE * 500)  // FARVIEW da camera 
-#define HALFFARVIEW   (FARVIEW / 2)      // Metade do Farview
-
-
-#define CORNEBLINA_R    1.0      // Componente vermelha da neblina
-#define CORNEBLINA_G    1.0      // Componente verde da neblina
-#define CORNEBLINA_B    1.0      // Componente azul da neblina
-
-#define TWOPI 2 * M_PI   
-#define PID2  M_PI / 2
-
-/* Conversor de graus para radianos */
-inline double deg2Rad(double x){return M_PI * x/180.0;}
-
-int exitEngine;
+/********************************************************************
+ *                      Engine's Variables                          *
+ ********************************************************************/
+int exitEngine; //if defined, exits engine.
 
 /*********************************************************************
- *                       Construtor da Engine                        *
+ *                       Engine's Constructor                        *
  *********************************************************************/
 engine::engine()
 {
-   /* Inicia as Listas Internas */
+   /* Initialize internal lists */
    gui  = new interface(NULL);
    mapa = NULL;
    PCs = NULL;
@@ -55,8 +28,8 @@ engine::engine()
    janMiniMapa = NULL;
    janAtalhos = NULL;
 
-   /* Define a posicao da Camera Inicial */
-   theta=35;
+   /* Define Camera initial Position */
+   theta=25;
    phi=0;
    d=150;
    centroX = centroZ = 0;
@@ -65,23 +38,30 @@ engine::engine()
    cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centroY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-   mouseX = 0;
-   mouseY = 0;
 
+   /* Initialize the Cursor */
    cursors = new(cursor);
+
+   /* Initialize sounds and musics */
    snd = new(sound);
    musica = NULL;
 
+   /* Load Options */
    option = new options("dcc.opc");
 
+   /* Load Language's files */
    language.ReloadFile(option->langNumber);
 
+   /* Set sound and music volume, based on options */
    snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
 
-   /* Define a ultima vez em que desenhou (so por simplicidade) */
+   /* Initialize readModes variables */
    ultimaLeitura = SDL_GetTicks();
    ultimoMouse = ultimaLeitura;
+   mouseX = 0;
+   mouseY = 0;
 
+   /* TODO Initialize Particles, it will not be here!! */
    particula = new part1(150,60,120,"../data/particles/waterfall1.par"); 
    particula2 = new part2(200,0,220,"../data/particles/fire1.par");
    particula3 = new part3(300,20,300);
@@ -89,21 +69,21 @@ engine::engine()
    particula5 = new part5(120,30,300, "../data/particles/blood1.par");
    particula6 = new part6(50,250,100,"../data/particles/lightning1.par");
    particula7 = new part7(100,80,100,"../data/particles/snow1.par");
-
 }
 
 /*********************************************************************
- *                      Destruidor da Engine                         *
+ *                         Engine Destructor                         *
  *********************************************************************/
 engine::~engine()
 {
+   /* Stops and free music & sounds */
    if(musica)
    {
       snd->StopMusic(musica);
    }
-
    delete(snd);
 
+   /* Delete particles */
    delete(particula);
    delete(particula2);
    delete(particula3);
@@ -112,45 +92,37 @@ engine::~engine()
    delete(particula6);
    delete(particula7);
 
+   /* Close option */
    delete(option);
 
+   /* Clear Sky */
    gluDeleteQuadric(atmosfera);
    glDeleteLists(listAtmosfera,1);
    glDeleteTextures(1, &ceu);
+
+   /* Clear Characters */
    if(NPCs)
       delete(NPCs);
    if(PCs)
       delete(PCs);
+
+   /* Clear GUI */
    if(gui)
       delete(gui);
+
+   /* Clear Maps */
    if(mapa)
    {
       delete(mapa);
    }
+ 
+   /* Clear Cursors */
    delete(cursors);
 }
 
-void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto, 
-                   GLuint texturaCarga, const char* texto,
-                   GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
-{
-   glClearColor(0,0,0,1);
-   glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-   glDeleteTextures(1,texturaTexto);
-   cor_Definir(0,0,0);
-   retangulo_Colorir(img,0,0,255,31,0);
-   cor_Definir(200,20,20);
-   selFonte(FFARSO,CENTRALIZADO,3);
-   escxy(img,128,0,texto);
-   carregaTexturaRGBA(img,texturaTexto);
-   
-   AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
-   AtualizaTela2D(*texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
-   glFlush();
-   SDL_GL_SwapBuffers();
-}
-
-
+/*********************************************************************
+ *                       Informations Screen                         *
+ *********************************************************************/
 void engine::InformationScreen()
 {
    Uint8 *keys;
@@ -169,6 +141,8 @@ void engine::InformationScreen()
    SDL_Delay(100);
    SDL_PumpEvents();
    keys = SDL_GetKeyState(NULL);
+
+   /* Wait user requests to exit from this screen */
    while(!(keys[SDLK_F1] || keys[SDLK_ESCAPE] || keys[SDLK_RETURN]) )
    {
        SDL_Delay(40);
@@ -182,7 +156,7 @@ void engine::InformationScreen()
 }
 
 /*********************************************************************
- *                       Carrega Mapa na Engine                      *
+ *                         Load Map to Engine                        *
  *********************************************************************/
 int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
 {
@@ -192,7 +166,8 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
    SDL_Surface* fig = IMG_Load("../data/texturas/carregar.jpg");
-   
+
+   /* Initializing Load Screen*/
    GLuint texturaCarga;
    carregaTextura(fig,&texturaCarga);
    SDL_FreeSurface(fig);
@@ -217,7 +192,7 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
    glFlush();
    SDL_GL_SwapBuffers();
 
-   /* Carregando o Mapa */
+   /* Loading Map */
    if(mapa) 
    {
      arqVelho = mapa->name;
@@ -227,6 +202,7 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
    mapa->name = arqVelho;
    mapa->open(arqMapa);
 
+   /* Enable, if needed, the FOG */
    if(mapa->fog.enabled)
    {
       glEnable(GL_FOG);
@@ -244,27 +220,21 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
       glDisable(GL_FOG);
    }
 
-   /* Carregando Entao os NPCs */
+   /* Loading NPCs */
    if(NPCs)
      delete(NPCs);
-
-  NPCs = NULL;
-
+   NPCs = NULL;
    personagem* per;
-
-
    if(!mapa->npcFileName.empty())
    {
-            
       FILE* arq;
       if(!(arq = fopen(mapa->npcFileName.c_str(),"r")))
       {
-         printf("Por questões de não disponibilidade de arquivo, o que contém as definições acerca de NPCs, de nome %s não pôde ser carregado.\n",mapa->npcFileName.c_str());
+         printf("Ouch, can't load NPC's file: %s.\n",mapa->npcFileName.c_str());
       }
       else
       {
          NPCs = new (Lpersonagem);
-
          int total;
          int npc;
          char nome[30];
@@ -283,12 +253,12 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
                                  arquivo);
            per->posicaoLadoX = posX;
            per->posicaoLadoZ = posZ;
-
          }
          fclose(arq);
       }  
    }
 
+   /* Loading PCs */
    if(RecarregaPCs)
    {
        if(PCs)
@@ -309,6 +279,7 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
                        "../data/models/personagens/Gushm/modelo.cfg");*/
    }
 
+   /* Loading Internal Windows */
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  language.LOAD_WINDOWS.c_str(),
                  proj, modl, viewPort);
@@ -319,19 +290,30 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
      janAtalhos->Fechar(gui->ljan);
    abreMiniMapa();
    abreAtalhos();
-      int aux;
-      per = (personagem*) PCs->primeiro->proximo;
-      for(aux=0;aux< PCs->total;aux++)
-      {
-         per->m_calModel->update(0); 
-         per->CalculateBoundingBox();  
-         per = (personagem*) per->proximo;
-      }
+
+   /* Updating the BoundingBoxes for PCs */
+   int aux;
+   per = (personagem*) PCs->primeiro->proximo;
+   for(aux=0;aux < PCs->total;aux++)
+   {
+      per->m_calModel->update(0); 
+      per->CalculateBoundingBox();  
+      per = (personagem*) per->proximo;
+   }
+
+   /* Updating the BoundingBoxes for NPCs */
+   per = (personagem*) NPCs->primeiro->proximo;
+   for(aux=0; aux < NPCs->total;aux++)
+   {
+      per->m_calModel->update(0); 
+      per->CalculateBoundingBox();  
+      per = (personagem*) per->proximo;
+   }
 
    glEnable(GL_LIGHTING);
 
 
-   /* Coloca Personagem Ativo na posicao de Inicio do Mapa */
+   /* Put Active Party in Init Position */
    PCs->personagemAtivo->posicaoLadoX = mapa->xInic;
    PCs->personagemAtivo->posicaoLadoZ = mapa->zInic;
    centroX = mapa->xInic;
@@ -342,10 +324,12 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
                  language.LOAD_DONE.c_str(),
                  proj, modl, viewPort);
 
+   /* Free Loading Textures */
    SDL_FreeSurface(img);
    glDeleteTextures(1,&texturaCarga);
    glDeleteTextures(1,&texturaTexto);
 
+   /* Change Music, if needed */
    if(!mapa->music.empty())
    {
       snd->StopMusic(musica);
@@ -353,20 +337,22 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
    }
 
    return(1);
-
 }
 
 /*********************************************************************
- *                       Menu Inicial do Jogo                        *
+ *                       Call Initial Game Menu                      *
  *********************************************************************/
 int engine::TelaInicial(int Status, GLuint* idTextura, bool reloadMusic)
 {
+   /* Reload Music, if needed */
    if( (musica) && (reloadMusic) )
    {
      snd->StopMusic(musica);
    }
    if(reloadMusic)
       musica = snd->LoadMusic("../data/music/musica1.ogg");
+
+   /* Executes Initial Screen */
    AtualizaFrustum(matrizVisivel,proj,modl);
    initialScreen* inic = new(initialScreen);
    int result = inic->Execute(Status, proj, modl, viewPort, idTextura);
@@ -375,7 +361,7 @@ int engine::TelaInicial(int Status, GLuint* idTextura, bool reloadMusic)
 }
 
 /*********************************************************************
- *                       Tela de Opcoes do Jogo                      *
+ *                       Call Options Game Screen                    *
  *********************************************************************/
 int engine::TelaOpcoes(GLuint* idTextura)
 {
@@ -429,7 +415,7 @@ int engine::TelaOpcoes(GLuint* idTextura)
 }
 
 /*********************************************************************
- *                Tela de Criação/Evolução de Personagem             *
+ *              Call Screens to Create, Evolute Character            *
  *********************************************************************/
 int engine::TelaPersonagens(GLuint* idTextura)
 {
@@ -438,7 +424,10 @@ int engine::TelaPersonagens(GLuint* idTextura)
    int tempoAnterior = 0;
    Uint8* keys;
    int x,y;
+  
+   /*TODO Other screens*/
 
+   /* Call Skill Screen */
    skills* sk = new skills(language.SKILLS_DIR.c_str(),
                            "../data/skills/skills.skl"); 
    skillWindow* skWindow = new skillWindow(sk, 20, gui);
@@ -475,7 +464,7 @@ int engine::TelaPersonagens(GLuint* idTextura)
 
 
 /*********************************************************************
- *                 Redmensiona a Engine para a Tela                  *
+ *                  Redmensionate Engine to Screen                   *
  *********************************************************************/
 void engine::Redmensiona(SDL_Surface *screen)
 {
@@ -489,37 +478,13 @@ void engine::Redmensiona(SDL_Surface *screen)
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }
 
+/*********************************************************************
+ *                  Draw a sphere Sky to SkyList                     *
+ *********************************************************************/
 void engine::drawSphereToList(int lats, int longs) 
 {
    listAtmosfera = glGenLists(1);
    glNewList(listAtmosfera,GL_COMPILE);
-
-   /*int i, j;
-   for(i = 0; i <= lats; i++) {
-      double lat0 = M_PI * (-0.5 + (double) (i - 1) / lats);
-      double z0  = sin(lat0);
-      double zr0 =  cos(lat0);
-    
-      double lat1 = M_PI * (-0.5 + (double) i / lats);
-      double z1 = sin(lat1);
-      double zr1 = cos(lat1);
- 
-      glBegin(GL_QUAD_STRIP);
-      for(j = 0; j <= longs; j++) 
-      {
-         double lng = 2 * M_PI * (double) (j - 1) / longs;
-         double x = cos(lng);
-         double y = sin(lng);
- 
-         glNormal3f(x * zr0, y * zr0, z0);
-         glVertex3f(x * zr0, y * zr0, z0);
-         glTexCoord2f(i / (float)lats, 2*(j+1) / (float)longs);
-         glNormal3f(x * zr1, y * zr1, z1);
-         glVertex3f(x * zr1, y * zr1, z1);
-         glTexCoord2f(i / (float)lats, 2*j / (float)longs);
-      }
-      glEnd();
-   }*/
 
    int i,j;
    double theta1,theta2,theta3;
@@ -558,24 +523,24 @@ void engine::drawSphereToList(int lats, int longs)
 
 
 /*********************************************************************
- *                   Inicia e Engine para Uso                        *
+ *                       Init Engine Function                        *
  *********************************************************************/
 void engine::Iniciar(SDL_Surface *screen)
 {
   
    Redmensiona(screen);
    
-   /* Limpa */
+   /* Clear */
    glClearColor (0.0, 0.0, 0.0, 0.0);
    glClearDepth(1.0);
    glClearStencil(0);
 
-   /* Define detalhamento */
+   /* Details Definition */
    glDepthFunc(GL_LEQUAL);
    glEnable(GL_DEPTH_TEST);
    glShadeModel(GL_SMOOTH);
 
-   /* Definicao da Luz */
+   /* Light Definition */
 #if 0
    GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -599,21 +564,17 @@ void engine::Iniciar(SDL_Surface *screen)
 #endif
    GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
-   
-   /* Habilita a iluminacao */
    glEnable(GL_LIGHTING);
    //glEnable(GL_LIGHT0);
    //glDisable(GL_LIGHT0);
    //glEnable(GL_LIGHT1);
   
-
+   /* Sky Creation */
    atmosfera = gluNewQuadric ();
    gluQuadricTexture(atmosfera, GL_TRUE);
    drawSphereToList(10,10);
-   //gluQuadricTexture(atmosfera, GL_FALSE);
 
    SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
-
    glGenTextures(1, &ceu);
    glBindTexture(GL_TEXTURE_2D, ceu);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 
@@ -631,176 +592,25 @@ void engine::Iniciar(SDL_Surface *screen)
                      img->pixels );
 
    SDL_FreeSurface(img);
-
 }
 
-/*********************************************************************
- *        Verifica se ha intersecao entre dois bounding boxes        *
- *********************************************************************/
-int estaDentro(GLfloat min1[3], GLfloat max1[3],
-               GLfloat min2[3], GLfloat max2[3],
-               int inverso)
-{
-   //testa o mínimo X do 2
-   if( (min1[0] < min2[0]) && (max1[0] > min2[0]  ) )
-   {
-      //testa minimo Y
-      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
-      //{
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      //}
-      //testa maximo Y
-      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
-      {
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      }*/
-   }
-   
-   //testa com o máximo X do 2
-   if( (min1[0] < max2[0]) && (max1[0] > max2[0]) )
-   {
-      //testa minimo Y
-      if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
-      {
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      }
-      //testa maximo Y
-      if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
-      {
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      }
-   }
-
-   //testa casos de cruz + 
-   if( (min2[0] < min1[0]) && (max2[0] > max1[0]) &&
-       (min2[2] > min1[2]) && (min2[2] < max1[2]))
-   {
-      return(1);
-   }
-   if( (min2[2] < min1[2]) && (max2[2] > max1[2]) &&
-       (min2[0] > min1[0]) && (min2[0] < max1[0]))
-   {
-      return(1);
-   }
-
-   if(inverso)
-   {
-      return( estaDentro(min2, max2, min1, max1, 0));
-   }
-   else 
-   {
-      return(0);
-   }
-}
 
 /*********************************************************************
- *               Rotaciona e Translada o Bounding Box                *
- *********************************************************************/
-void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
-                         GLfloat varX, GLfloat varMinY, GLfloat varMaxY, 
-                         GLfloat varZ,
-                         GLfloat min[3], GLfloat max[3])
-{
-   int aux;
-   GLfloat x[4];
-   GLfloat z[4];
-   /* Rotaciona o bounding para a posicao correrta */
-   GLfloat cosseno = cos(deg2Rad(orientacao));
-   GLfloat seno = sin(deg2Rad(orientacao));
-   for(aux = 0;aux<4;aux++)
-   {
-      x[aux] = (Z[aux]*seno) + (X[aux]*cosseno);
-      z[aux] = (Z[aux]*cosseno) - (X[aux]*seno);
-   }
-
-   
-   /* translada o bounding box para o local correto*/
-   min[1] += varMinY;
-   max[1] += varMaxY;
-   for(aux=0;aux<4;aux++)
-   {
-     x[aux] += varX;
-     z[aux] += varZ;
-     if(aux == 0)
-     {
-        min[0] = x[0]; max[0] = x[0];
-        min[2] = z[0]; max[2] = z[0];
-     }
-     else
-     {
-         if(x[aux] < min[0])
-         {
-            min[0] = x[aux];
-         }
-         if(x[aux] > max[0])
-         {
-            max[0] = x[aux];
-         }
-         if(z[aux] < min[2])
-         {
-            min[2] = z[aux];
-         }
-         if(z[aux] > max[2])
-         {
-            max[2] = z[aux];
-         }
-
-     }
-   }
-}
-
-/*********************************************************************
- *                      Tratamento da Entrada/Saida                  *
+ *                   Threat Input/Output Events                      *
  *********************************************************************/
 int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 {
-   exitEngine = 0;
-   bool redesenha = false;
-   bool andou = false;
-   bool passouTempo = false;
-   Uint32 tempo;
-   double varX, varZ; // para evitar de ter de calcular 2 vezes
+   exitEngine = 0;           // Exit the engine ?
+   bool redesenha = false;   // Redraw things ?
+   bool andou = false;       // Character Walk ?
+   bool passouTempo = false; // The time to actualize passes ?
+   Uint32 tempo;             // Actual Time
+   double varX, varZ;        // to avoid double calculate
 
-   double passo;  // O quanto realmente anda, em decorrencia do tempo decorrido
-   double rotacao; // O quanto realmente roda, em decorrencia do tempo (FPS)
-   double varCamera;
-   double varTempo; 
+   double passo;     // How much the character walks, based on time
+   double rotacao;   // How much the character turns, based on time
+   double varCamera; // Camera Variation
+   double varTempo;  // Time Variation
    float wx,wy,wz;
 
    tempo = SDL_GetTicks();
@@ -810,7 +620,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       redesenha = true;
       passouTempo = true;
 
-      /* Atualiza Animacoes dos personagens */
+      /* Actualize Characters Animations */
       segundos = varTempo / 1000.0;
       int aux;
       personagem *per = (personagem*) PCs->primeiro->proximo;
@@ -832,11 +642,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
         } 
       }
 
-      /* Calcula as Modificações Reais no Andar, rotacionar, girar, etc */
+      /* Calculate the real Modification on walk, rotate, turn, etc */
       varTempo /= 20.0;
       passo = (varTempo)*ANDAR;
       if(passo > 9)
-        passo = 9; /* Para evitar que atravesse paredes ao ter LAG*/
+        passo = 9;  /* To avoid phantom efects when LAGs occurs */
       rotacao = (varTempo)*GIRAR;
       varCamera = varTempo*DELTACAMERA;
       
@@ -865,7 +675,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
         
       //redesenha = TrataIA();
        
-      /* Tratamento das Teclas */
+      /* Keyboard Events */
       Uint8 *keys;
       keys = SDL_GetKeyState(NULL);
 
@@ -874,7 +684,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       mouseX = x;
       mouseY = y;
 
-      /* Trata A GUI */
+      /* GUI Events */
       if(gui->ManipulaEventos(x,y,Mbotao,keys)!=NADA)
       {
          redesenha = true;
@@ -940,7 +750,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             }
          }
 
-         /* Verificacao de Portas */
+         /* Doors Verification */
          door* porta = mapa->portas;
          while( (porta != NULL) && (!pronto) )
          {
@@ -987,7 +797,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
 
-         /* TODO Abrir Inventorio */
+         /* TODO Inventory Verification */
          personagem* pers = (personagem*) PCs->primeiro->proximo;
          while( (pers != PCs->primeiro) && (!pronto) )
          {
@@ -1006,7 +816,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             x[3] = pers->max[0];
             z[3] = pers->min[2];
 
-            /* Rotaciona e translada o Bounding Box */
             rotTransBoundingBox(pers->orientacao, x, z,
                                 pers->posicaoLadoX, 
                                 0.0, 0.0, 
@@ -1025,7 +834,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             pers = (personagem*) pers->proximo;
          }
 
-         /* TODO Abrir Conversas */
+         /* TODO Talk Events Verification */
          if(NPCs)
          {
             pers = (personagem*) NPCs->primeiro->proximo;
@@ -1046,7 +855,6 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                x[3] = pers->max[0];
                z[3] = pers->min[2];
 
-               /* Rotaciona e translada o Bounding Box */
                rotTransBoundingBox(pers->orientacao, x, z,
                                 pers->posicaoLadoX, 
                                 0.0, 0.0, 
@@ -1066,7 +874,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             }
          }
 
-         /* Verifica Conexão do Mapa */
+         /* Map Connections Verification */
          if( ( quaux->mapConection.active ) && (!pronto) )
          {
             GLfloat minCon[3], maxCon[3];
@@ -1105,11 +913,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
         }
       }
 
-
-      if ( keys[SDLK_ESCAPE] ) // Sai da Engine
+      /* Keyboar Verification */
+      if ( keys[SDLK_ESCAPE] ) // Exit Engine
          return(0);
 
-      if(keys[SDLK_m])
+      if(keys[SDLK_m]) //Open Minimap
       {
           if(!janMiniMapa)
           {
@@ -1148,15 +956,14 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
           }
       }
 
-      if(keys[SDLK_F1])
+      if(keys[SDLK_F1]) //Call Information Screen
       {
-         //Tela de Informações // HELP
          InformationScreen();
          redesenha = true;
       }
 
-      /* Tratamento das teclas para a Camera */
-      if(keys[SDLK_UP])  // Aumenta o Zoom
+      /* Keys to Camera Moviments */
+      if(keys[SDLK_UP])  // Increases Zoom
       {
           if (d>ZOOMMAXIMO)
           {
@@ -1164,7 +971,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
              redesenha = true;
           }
       }
-      if(keys[SDLK_DOWN]) // Diminui o Zoom
+      if(keys[SDLK_DOWN]) // Decreases Zoom
       {
          if(d<ZOOMMINIMO)
          {
@@ -1172,57 +979,57 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
              redesenha = true;
          }
       }
-      if(keys[SDLK_RIGHT]) // Roda Camera Antihorariamente
+      if(keys[SDLK_RIGHT]) // Rotate Camera CounterClockWise
       {
           phi -= varCamera;  
           redesenha = true;
       }
-      if(keys[SDLK_LEFT]) // Roda Camera Horariamente
+      if(keys[SDLK_LEFT]) // Rotate Camera ClockWise
       {
          phi += varCamera;
          redesenha = true;
       }
-      if(keys[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
+      if(keys[SDLK_PAGEUP]) // Maximize Up Camera
       {
             theta += varCamera;
             redesenha = true;
             if(theta > 89) 
                theta = 89;
       }
-      if(keys[SDLK_PAGEDOWN]) // desce com a camera ate visao em 1ª pessoa
+      if(keys[SDLK_PAGEDOWN]) // Minimize Up Camera
       {
          theta -= varCamera;
          redesenha = true;
          if(theta < 0)
             theta = 0;
       }
-      if (keys[SDLK_HOME]) // Zoom Maximo
+      if (keys[SDLK_HOME]) // Maximize zoom
       {
          d = ZOOMMAXIMO;
          redesenha = true;
       }
-      if(keys[SDLK_END]) // ZoomMinimo
+      if(keys[SDLK_END]) // Minimize zoom
       {
          d = ZOOMMINIMO;
          redesenha = true;
       }   
-      if(keys[SDLK_INSERT]) //Maximo para cima
+      if(keys[SDLK_INSERT]) //Up view Max
       {
          theta = 89;
          redesenha = true;
       }
-      if(keys[SDLK_DELETE]) //Maximo para baixo
+      if(keys[SDLK_DELETE]) //Down view Max
       {
          theta = 0;
          redesenha = true;
       }
 
-      /* Tratamento da tecla para Movimentacao do Personagem */
+      /* Keys to character's movimentation */
       if(keys[SDLK_q] || keys[SDLK_e])
       {
           varX = passo * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
           varZ = passo * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-         // Anda com personagem de lado para esquerda
+         // Left walk
          if(keys[SDLK_q]) 
          {
              varX *= -1;
@@ -1304,7 +1111,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
       if( (keys[SDLK_a]) || (keys[SDLK_d]))
       {
-         // Gira personagem antihorariamente
+         // CounterClockWise Character turn
          if((keys[SDLK_a]) && (podeAndar(0,0,rotacao)) )  
          {
             PCs->personagemAtivo->orientacao += rotacao;
@@ -1314,7 +1121,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             redesenha = true;
             andou = true;
          }
-         // Gira o personagem horariamente
+         // Clockwise Character Turn
          if((keys[SDLK_d]) && (podeAndar(0,0,-rotacao)) )
          {
             PCs->personagemAtivo->orientacao -= rotacao;
@@ -1325,15 +1132,15 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          redesenha = true;
          andou = true;
       }
-      if(keys[SDLK_TAB]) //troca de personagem ativo
+      if(keys[SDLK_TAB]) //Activate Character
       {
-         if(keys[SDLK_LCTRL]) //para tras
+         if(keys[SDLK_LCTRL]) //Previous Character
          {
             PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->anterior;
             if(PCs->personagemAtivo == PCs->primeiro)
                PCs->personagemAtivo = (personagem*)PCs->primeiro->anterior;
          }
-         else //para frente
+         else //Next Character
          {
             PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->proximo;
             if(PCs->personagemAtivo == PCs->primeiro)
@@ -1345,15 +1152,15 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          SDL_Delay(100);
       }
       
-      /* Tratamento do Mouse */
+      /* Mouse Verification */
 
-      /* Tratamento do Mouse para Camera */
-      if(x == 0)    // Gira a Camera horariamente
+      /* Mouse to move Camera */
+      if(x == 0)  // Turn Clockwise
       {
          phi+=2; 
          redesenha = true;  
       }
-      if(x == screen->w-1) // Gira a camera antihorariamente
+      if(x == screen->w-1) // Turn CounterClockWise
       {
         phi-=2; 
         redesenha = true;
@@ -1417,7 +1224,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 }
 
 /*********************************************************************
- *                Funcao para desenhar a cena                        *
+ *                       Draw Scene Function                         *
  *********************************************************************/
 void engine::Desenhar()
 {
@@ -1426,16 +1233,16 @@ void engine::Desenhar()
    glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
    glLoadIdentity();
 
-   /* Redefine a posicao dinamica da camera */
+   /* Redefine camera position */
    cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centroY + deltaY + (float) d * sin(deg2Rad(theta));
    cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
 
-   /* Atualiza para fazer o culling e o desenho da GUI */
+   /* Atualize to culling and to GUI */
    AtualizaFrustum(matrizVisivel,proj,modl);
 
-   /* CEU */
+   /* SKY */
    glPushMatrix();
       glEnable(GL_TEXTURE_2D);
       glBindTexture(GL_TEXTURE_2D, ceu);
@@ -1449,10 +1256,11 @@ void engine::Desenhar()
    glPopMatrix();
 
    glPushMatrix();
-   /* Desenha o Mundo, fazendo culling do view frustum */
+
+   /* Draws World, doing view frustum culling */
    mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
 
-   /* Desenha os Personagens do Jogador (PCs) */
+   /* Draw Playable Characters (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
       for(aux=0;aux < PCs->total;aux++)
@@ -1477,10 +1285,7 @@ void engine::Desenhar()
       }
    glPopMatrix();
 
-   /* Atualiza os Valores dos NPCS com o que já estiver no socket */
-   //AtualizaNPCs
-  
-   /* Desenha Entao os NPCs */
+   /* Draw the NPCs */
    if(NPCs)
    {
       per = (personagem*) NPCs->primeiro->proximo;
@@ -1495,10 +1300,9 @@ void engine::Desenhar()
       }
    }
 
+   /* Draw Particles */
    glPushMatrix();
-      /* primeiro as nao texturizadas */
       particula3->NextStep(segundos);
-      /* agora as texturizadas */
       particula->NextStep(segundos);
       particula4->NextStep(segundos);
       particula5->NextStep(segundos);
@@ -1507,7 +1311,7 @@ void engine::Desenhar()
       particula2->NextStep(segundos);
    glPopMatrix();
 
-   /* Faz o Desenho da GUI */
+   /* Draw the GUI and others */
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
    gluUnProject(SCREEN_X,SCREEN_Y-80,0.01, modl, proj, viewPort, &x2, &y2, &z2);
    gluUnProject(SCREEN_X-60,SCREEN_Y-80,0.01,modl,proj,viewPort, &x3, &y3, &z3);
@@ -1516,7 +1320,7 @@ void engine::Desenhar()
    glDisable(GL_LIGHTING);
    glDisable(GL_DEPTH_TEST);
 
-   /* Desenho do Portrait do jogador */
+   /* Player's Portrait */
    per = (personagem*) PCs->personagemAtivo;
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, per->portrait );
@@ -1537,14 +1341,15 @@ void engine::Desenhar()
 
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-   /* Desnho do cursor do mouse */
-
+   
+   /* mouse Cursor Draw */
    GLfloat Z = 0.01;
    GLuint Y = SCREEN_Y - mouseY;
    gluUnProject(mouseX,Y, Z, modl, proj, viewPort, &x1, &y1, &z1);
    gluUnProject(mouseX,Y-32,Z, modl, proj, viewPort, &x2, &y2, &z2);
    gluUnProject(mouseX+32,Y-32,Z,modl,proj,viewPort, &x3, &y3, &z3);
    gluUnProject(mouseX+32,Y,Z, modl, proj, viewPort, &x4, &y4, &z4);
+   //TODO BUG when mouse after screenY-32
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, cursors->actualCursor );
    glBegin(GL_QUADS);
@@ -1562,7 +1367,6 @@ void engine::Desenhar()
    glDisable(GL_BLEND);
    //glDisable(GL_ALPHA_TEST);
 
-  
    glEnable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
  
@@ -1573,9 +1377,6 @@ void engine::Desenhar()
 /******************************************/
 /*    PARTE DA DETECCAO DE COLISAO!!!!!!! */
 /******************************************/
-
-//min[x,y,z] max[x,y,z]
-
 
 /*********************************************************************
  *          Faz o teste se o Quadrado quad é factivel de ser         *
