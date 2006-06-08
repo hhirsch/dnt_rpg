@@ -125,12 +125,19 @@ class engine
 
    private:
 
-      /* Redefine a tela para o tamanho da tela atual
-       * screen -> ponteiro para a tela3d atual */
+      /*************************************************************** 
+       * Reason: Define Screen to actual Screen Size  
+       * Param:
+       *        screen -> Pointer to the Screen's Surface
+       ***************************************************************/
       void Redmensiona(SDL_Surface *screen);
 
-      /* Trata as opcoes de Entrada e Saida na Engine
-       * screen -> ponteiro para a tela3d atual */
+      /*************************************************************** 
+       * Reason: Threat Input/Output Events
+       * Param:
+       *        screen -> Pointer to the Screen's Surface
+       *        forcaAtualizacao -> to force the draw
+       ***************************************************************/
       int  TrataES(SDL_Surface *screen,int *forcaAtualizacao);
 
       /* Trata a IA dos NPCS */

@@ -1946,7 +1946,7 @@ void engine::OpenMiniMapWindow()
 }
 
 /*********************************************************************
- *                       Carrega Janela de Atalhos                   *
+ *                         Load ShortCuts Window                     *
  *********************************************************************/
 int botaoMenu(void *jan,void *ljan,SDL_Surface *screen)
 {
@@ -2019,7 +2019,7 @@ void engine::OpenShortcutsWindow()
 }
 
 /*********************************************************************
- *                          Roda a Engine                            *
+ *                          Runs the Engine                          *
  *********************************************************************/
 int engine::Run(SDL_Surface *surface)
 {
@@ -2053,7 +2053,6 @@ int engine::Run(SDL_Surface *surface)
    #endif
   
    /* Roda realmente a engine */
-   Draw();
    while(TrataES(surface,&forcaAtualizacao))
    {
       /* Trata a Rede. Por padrao, nao estamos usando a rede, uma vez 
