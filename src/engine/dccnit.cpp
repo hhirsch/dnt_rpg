@@ -158,7 +158,7 @@ void engine::InformationScreen()
 /*********************************************************************
  *                         Load Map to Engine                        *
  *********************************************************************/
-int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
+int engine::LoadMap(string arqMapa, int RecarregaPCs)
 {
    char texto[255];
    string arqVelho = "nada";
@@ -288,8 +288,8 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
      janMiniMapa->Fechar(gui->ljan);
    if(janAtalhos)
      janAtalhos->Fechar(gui->ljan);
-   abreMiniMapa();
-   abreAtalhos();
+   OpenMiniMapWindow();
+   OpenShortcutsWindow();
 
    /* Updating the BoundingBoxes for PCs */
    int aux;
@@ -342,7 +342,7 @@ int engine::CarregaMapa(string arqMapa, int RecarregaPCs)
 /*********************************************************************
  *                       Call Initial Game Menu                      *
  *********************************************************************/
-int engine::TelaInicial(int Status, GLuint* idTextura, bool reloadMusic)
+int engine::InitialScreen(int Status, GLuint* idTextura, bool reloadMusic)
 {
    /* Reload Music, if needed */
    if( (musica) && (reloadMusic) )
@@ -363,7 +363,7 @@ int engine::TelaInicial(int Status, GLuint* idTextura, bool reloadMusic)
 /*********************************************************************
  *                       Call Options Game Screen                    *
  *********************************************************************/
-int engine::TelaOpcoes(GLuint* idTextura)
+int engine::OptionsScreen(GLuint* idTextura)
 {
    interface* interf = new interface(NULL);
 
@@ -417,7 +417,7 @@ int engine::TelaOpcoes(GLuint* idTextura)
 /*********************************************************************
  *              Call Screens to Create, Evolute Character            *
  *********************************************************************/
-int engine::TelaPersonagens(GLuint* idTextura)
+int engine::CharacterScreen(GLuint* idTextura)
 {
    int charCreation = CHAR_OTHER;
    int tempo = SDL_GetTicks();
@@ -525,7 +525,7 @@ void engine::drawSphereToList(int lats, int longs)
 /*********************************************************************
  *                       Init Engine Function                        *
  *********************************************************************/
-void engine::Iniciar(SDL_Surface *screen)
+void engine::Init(SDL_Surface *screen)
 {
   
    Redmensiona(screen);
@@ -899,7 +899,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                pronto = 1;
                if(Mbotao & SDL_BUTTON(1))
                {
-                  CarregaMapa(quaux->mapConection.mapName, 0);
+                  LoadMap(quaux->mapConection.mapName, 0);
                   return(1);
                }
             }
@@ -921,7 +921,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
           if(!janMiniMapa)
           {
-             abreMiniMapa();
+             OpenMiniMapWindow();
              redesenha = true;
           }
       }
@@ -951,7 +951,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
           if(!janAtalhos)
           {
-              abreAtalhos();
+              OpenShortcutsWindow();
               redesenha = true;
           }
       }
@@ -1199,7 +1199,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          janMiniMapa->Desenhar(mouseX, mouseY);
       }
   
-      Desenhar();
+      Draw();
       SDL_GL_SwapBuffers();
       *forcaAtualizacao = 0;
    }
@@ -1226,7 +1226,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 /*********************************************************************
  *                       Draw Scene Function                         *
  *********************************************************************/
-void engine::Desenhar()
+void engine::Draw()
 {
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
@@ -1903,7 +1903,7 @@ int engine::TrataIA()
 /*********************************************************************
  *                       Carrega Janela de MiniMapa                  *
  *********************************************************************/
-void engine::abreMiniMapa()
+void engine::OpenMiniMapWindow()
 {
    GLint x = (int)(((PCs->personagemAtivo->posicaoLadoX) / (SQUARESIZE)));
    if(x > mapa->x-1)
@@ -1954,7 +1954,7 @@ int botaoMenu(void *jan,void *ljan,SDL_Surface *screen)
    return(1);
 }
 
-void engine::abreAtalhos()
+void engine::OpenShortcutsWindow()
 {
    janAtalhos=gui->ljan->InserirJanela(0,472,511,599,
                                   language.WINDOW_SHORTCUTS.c_str(),1,1,
@@ -2021,7 +2021,7 @@ void engine::abreAtalhos()
 /*********************************************************************
  *                          Roda a Engine                            *
  *********************************************************************/
-int engine::Rodar(SDL_Surface *surface)
+int engine::Run(SDL_Surface *surface)
 {
 
    if(!mapa->music.empty())
@@ -2053,7 +2053,7 @@ int engine::Rodar(SDL_Surface *surface)
    #endif
   
    /* Roda realmente a engine */
-   Desenhar();
+   Draw();
    while(TrataES(surface,&forcaAtualizacao))
    {
       /* Trata a Rede. Por padrao, nao estamos usando a rede, uma vez 

@@ -1,8 +1,9 @@
 #ifndef _mapa_h
 #define _mapa_h
 
-/*   DCC Nightmare is Public Domain - Do whatever you want with this code.
- */
+/*************************************************************************
+ * DccNiTghtmare is Public Domain - Do whatever you want with this code. *
+ *************************************************************************/
 
 #include "mapobjeto.h"
 #include "mapfog.h"

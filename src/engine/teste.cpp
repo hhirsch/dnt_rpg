@@ -29,10 +29,10 @@ int main(int argc, char **argv)
    engine* Engine = new engine();
    
 
-   Engine->Iniciar(screen);
+   Engine->Init(screen);
  
    GLuint tituloID;
-   int result = Engine->TelaInicial(ON_INIT,&tituloID,true);
+   int result = Engine->InitialScreen(ON_INIT,&tituloID,true);
    int estado = ON_INIT;
    int charCreation;
    bool reloadMusic;
@@ -42,16 +42,16 @@ int main(int argc, char **argv)
        reloadMusic = false;
        if(result == NEW_GAME)
        {
-          charCreation = Engine->TelaPersonagens(&tituloID);
+          charCreation = Engine->CharacterScreen(&tituloID);
           if( charCreation == CHAR_CONFIRM)
           {
-             Engine->CarregaMapa("../data/mapas/rua.map",1);
+             Engine->LoadMap("../data/mapas/rua.map",1);
           }
        }
 
        if(result == OPTIONS)
        {
-          Engine->TelaOpcoes(&tituloID);
+          Engine->OptionsScreen(&tituloID);
        }
        #ifdef REDE
           Engine->server = server;
@@ -62,14 +62,14 @@ int main(int argc, char **argv)
       if( (result == CONTINUE_GAME) || 
           ( ((result == NEW_GAME)) && (charCreation == CHAR_CONFIRM) ) ) 
       {
-         Engine->Rodar(screen);
+         Engine->Run(screen);
          reloadMusic = true;
          estado = IN_GAME;
-         result = Engine->TelaInicial(estado,&tituloID,reloadMusic);
+         result = Engine->InitialScreen(estado,&tituloID,reloadMusic);
       }
       else
       {
-         result = Engine->TelaInicial(estado,&tituloID,reloadMusic);
+         result = Engine->InitialScreen(estado,&tituloID,reloadMusic);
       }
       charCreation = CHAR_OTHER;
        

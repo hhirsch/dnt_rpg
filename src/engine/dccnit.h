@@ -1,6 +1,6 @@
-/*
- *  DccNiTghtmare is public domain. Do whatever you want with this code.
- */
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
 
 
 #ifndef _dccnit_h
@@ -33,59 +33,95 @@ class engine
 {
    public:
  
-      engine();                        /* Construtor da Engine */
-      ~engine();                       /* Destruidor da engine */
+      engine();                        /* Engine Constructor */
+      ~engine();                       /* Engine Desctructor */
  
-      Lpersonagem *NPCs;               /* NPCs no mapa carregada atual */
-      Lpersonagem *PCs;                /* PCs na engine */
+      Lpersonagem *NPCs;               /* NPC's List */
+      Lpersonagem *PCs;                /* PC's List */
 
       #ifdef REDE
-         char *server;                 /* Define o servidor a se conectar */
-         clientdata_t clientData;      /* Dados do Cliente */
+         char *server;                 /* Server to Connect */
+         clientdata_t clientData;      /* Client Data */
       #endif
 
-      double theta, phi, d;            /* Rotacao pra cima, pro lado e zoom */
-      double centroX,centroY,centroZ;  /* Posicao central da camera */
-      double cameraX,cameraY,cameraZ;  /* Posicao da Camera */
-      double deltaY;                   /* DeltaY da camera */
-      interface* gui;                  /* GUI utilizada na Engine */
-      GLdouble proj[16];               /* Matriz de Projecao utilizada */
-      GLdouble modl[16];               /* Matriz de ModelView Utilizada  */
-      GLint viewPort[4];               /* Matriz de ViewPort Utilizada */
+      double theta, phi, d;            /* Rotation Up, Sides and Zoom */
+      double centroX,centroY,centroZ;  /* Camera Central Position */
+      double cameraX,cameraY,cameraZ;  /* Camera Position */
+      double deltaY;                   /* Camera DeltaY */
+      interface* gui;                  /* GUI use on Engine */
+      GLdouble proj[16];               /* Projection Matrix */
+      GLdouble modl[16];               /* ModelView Matrix  */
+      GLint viewPort[4];               /* ViewPort Matrix */
 
-      /* Inicia a estrutura da Engine para utilizacao
-       * screen -> ponteiro para a tela3d atual */
-      void Iniciar(SDL_Surface *screen);
+      /*************************************************************** 
+       * Reason: Init Engine to utilization  
+       * Param:
+       *        screen -> Pointer to the Screen's Surface
+       ***************************************************************/
+      void Init(SDL_Surface *screen);
 
-      /* Faz a rodagem principal da engine
-       * surface -> ponteiro para a tela3d atual */
-      int  Rodar(SDL_Surface *surface);    
+      /*************************************************************** 
+       * Reason: Runs the Engine  
+       * Param:
+       *        screen -> Pointer to the Screen's Surface
+       ***************************************************************/
+      int  Run(SDL_Surface *surface);    
 
-      /* Faz o desenho da engine na tela atualmente
-       * É necessario utilizar SDL_GL_SwapBuffers();
-       * apos o termino da funcao. */
-      void Desenhar();
+      /*************************************************************** 
+       * Reason: Draws the Engine  
+       * Param:
+       * Obs:    Need to run SDL_GL_SwapBuffers() after;
+       ***************************************************************/
+      void Draw();
 
-      /* Faz a carga do Mapa */
-      int CarregaMapa(string arqMapa, int RecarregaPCs);
+      /*************************************************************** 
+       * Reason: Load and activate Map to engine
+       * Param:
+       *          arqMapa -> string with filename
+       *          RecarregaPCs -> 1 to reload PCs 0 to not.
+       ***************************************************************/
+      int LoadMap(string arqMapa, int RecarregaPCs);
 
-      /* Abre a Tela Inicial, com seus tratamentos.
-       * Retorna 0 se é para sair, 1 caso contrario */
-      int TelaInicial(int Status, GLuint* idTextura, bool reloadMusic);
+      /*************************************************************** 
+       * Reason: Load Initial Menu
+       * Param:
+       *          Status -> ON_INIT or IN_GAME
+       *          idTextura -> pointer to initial screen texture
+       *          reloadMusic -> true to reload the music
+       ***************************************************************/
+      int InitialScreen(int Status, GLuint* idTextura, bool reloadMusic);
 
-      /* Abre a tela de cricao de caracteres, retornando de acordo */
-      int TelaPersonagens(GLuint* idTextura);
+      /*************************************************************** 
+       * Reason: Load Character's Screens
+       * Param:
+       *          idTextura -> pointer to initial screen texture
+       ***************************************************************/
+      int CharacterScreen(GLuint* idTextura);
 
-      /* Abre a tela de opções/ ajustes do jogo */
-      int TelaOpcoes(GLuint* idTextura);
+      /*************************************************************** 
+       * Reason: Load Options Screen
+       * Param:
+       *          idTextura -> pointer to initial screen texture
+       ***************************************************************/
+      int OptionsScreen(GLuint* idTextura);
 
+      /*************************************************************** 
+       * Reason: Load Informations Screen
+       * Param:
+       ***************************************************************/
       void InformationScreen();
 
-      /* Tratamento de Janelas Especiais */
-      void abreMiniMapa();
-      void abreAtalhos();
+      /*************************************************************** 
+       * Reason: Load MiniMap Window
+       * Param:
+       ***************************************************************/
+      void OpenMiniMapWindow();
 
-      int botaoMapa(void *jan,void *ljan,SDL_Surface *screen);
+      /*************************************************************** 
+       * Reason: Load ShortCuts
+       * Param:
+       ***************************************************************/
+      void OpenShortcutsWindow();
 
    private:
 
