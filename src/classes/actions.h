@@ -12,5 +12,9 @@
 #define ACT_TAKE         8
 #define ACT_FREE         9
 
+#define ACT_TYPE_FREE_ACTION       0
+#define ACT_TYPE_NORMAL_ACTION     1
+#define ACT_TYPE_SECUNDARY_ACTION  2
+
 #endif
 

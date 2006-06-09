@@ -31,7 +31,7 @@ typedef struct _skill
    string nome;            /* Skill Name */
    string descricao;       /* Skill Description */
    int habilidadeBase;     /* Base Attibute */
-   SDL_Surface* imagem;    /* Imagem da Pericia */
+   SDL_Surface* imagem;    /* Skill Image */
 }skill;
 
 
