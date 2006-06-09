@@ -180,8 +180,12 @@ class Map
       string name;          /* File name of loaded map */
       string npcFileName;   /* Static NPC's on map filename */
 
+      int SQUAREMINISIZE;
+      int SQUAREMINIDIV;
+
+
       private:
-         Square*** MapSquares; /* Internal squares of Map */
+         Square*** MapSquares; /* Internal Map squares */
 };
 
 #endif

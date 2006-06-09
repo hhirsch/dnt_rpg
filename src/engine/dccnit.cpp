@@ -302,12 +302,15 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    }
 
    /* Updating the BoundingBoxes for NPCs */
-   per = (personagem*) NPCs->primeiro->proximo;
-   for(aux=0; aux < NPCs->total;aux++)
-   {
-      per->m_calModel->update(0); 
-      per->CalculateBoundingBox();  
-      per = (personagem*) per->proximo;
+   if(NPCs)
+   { 
+      per = (personagem*) NPCs->primeiro->proximo;
+      for(aux=0; aux < NPCs->total;aux++)
+      {
+         per->m_calModel->update(0); 
+         per->CalculateBoundingBox();  
+         per = (personagem*) per->proximo;
+      }
    }
 
    glEnable(GL_LIGHTING);

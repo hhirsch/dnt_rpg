@@ -1,5 +1,6 @@
-/* DCC Nightmare is Public Domain - Do whatever you want with this code.
- */
+/*************************************************************************
+ * DccNiTghtmare is Public Domain - Do whatever you want with this code. *
+ *************************************************************************/
 
 #include "map.h"
 #include "../engine/culling.h"
@@ -10,7 +11,6 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
-#define SQUAREMINI 16
 
 
 /********************************************************************
@@ -403,6 +403,8 @@ Map::Map()
    /* Inicia Estruturas */
    Objetos = new(LmapObjeto);
    x = z = xInic = zInic = 0;
+   SQUAREMINISIZE = 4;
+   SQUAREMINIDIV = (SQUARESIZE / SQUAREMINISIZE);
 }
 
 /********************************************************************
@@ -1139,23 +1141,24 @@ void Map::drawMinimap(SDL_Surface* img)
           cor_Definir(MapSquares[X][Z]->R,
                       MapSquares[X][Z]->G,
                       MapSquares[X][Z]->B);
-          retangulo_Colorir(img, x1, y1, x1+3, y1+3, 0);
-          x1+=4;
+          retangulo_Colorir(img, x1, y1, 
+                            x1+SQUAREMINISIZE-1, y1+SQUAREMINISIZE-1, 0);
+          x1+=SQUAREMINISIZE;
       }
       x1 = 0;
-      y1+=4;
+      y1+=SQUAREMINISIZE;
    }
 
    cor_Definir(1, 1, 1);
-   retangulo_2Cores(img,0,0,x*4-1,z*4-1,0,0,0,0);
+   retangulo_2Cores(img,0,0,x*SQUAREMINISIZE-1,z*SQUAREMINISIZE-1,0,0,0,0);
    
    muro* maux = muros;
    while(maux!=NULL)
    {
-       x1 = (int) ( ((float)maux->x1 / (float)SQUAREMINI ));
-       x2 = (int) ( (((float)maux->x2 / (float)SQUAREMINI))-1 );
-       y1 = (int) ( ((float)maux->z1 / (float)SQUAREMINI ));
-       y2 = (int) ( (((float)maux->z2 / (float)SQUAREMINI))-1 );
+       x1 = (int) ( ((float)maux->x1 / (float)SQUAREMINIDIV ));
+       x2 = (int) ( (((float)maux->x2 / (float)SQUAREMINIDIV))-1 );
+       y1 = (int) ( ((float)maux->z1 / (float)SQUAREMINIDIV ));
+       y2 = (int) ( (((float)maux->z2 / (float)SQUAREMINIDIV))-1 );
        if( (x2-x1) < (y2-y1))
           x2 = x1;
        else 
