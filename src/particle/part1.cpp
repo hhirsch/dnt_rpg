@@ -12,6 +12,7 @@ part1::part1(float cX,float cY,float cZ, string fileName):
    centerY = cY; 
    centerZ = cZ;
    actualParticles = 0;
+   actualPlanes = 0;
    partTexture = LoadTexture("../data/particles/part2.png");
 }
 
@@ -22,23 +23,10 @@ part1::~part1()
 
 void part1::Render(particle* part)
 {
-  /* glColor4f(part->R,part->G,part->B,alpha);
-   glVertex3f(part->prvX,part->prvY,part->prvZ);
-   glVertex3f(part->posX,part->posY,part->posZ);*/
 }
 
 void part1::InitRender()
 {
-/*   glDisable(GL_LIGHTING);
-   glDisable(GL_TEXTURE_2D);
-   glEnable( GL_BLEND );
-   glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-   //glEnable(GL_LINE_SMOOTH);
-   //glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-   glLineWidth(1.0);
-   glBegin(GL_LINES);*/
-
    glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
@@ -53,10 +41,8 @@ void part1::InitRender()
    glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
 
    float quadratic[] =  { 0.01f, 0.01f, 0.0f };
-   //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
    PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
 
-   //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
    PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
@@ -69,10 +55,6 @@ void part1::InitRender()
 
 void part1::EndRender()
 {
-  /* glEnd();
-   glEnable(GL_LIGHTING);
-   glDisable( GL_BLEND ); 
-   glDisable(GL_LINE_SMOOTH);*/
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
@@ -86,24 +68,25 @@ void part1::EndRender()
 
 void part1::actualize(particle* part)
 {
-
-   //part->R -= 0.005*((rand() / ((double)RAND_MAX + 1)));
-
    part->prvX = part->posX;
    part->prvY = part->posY;
    part->prvZ = part->posZ;
    
+   float dX = -1.0;   
+   float dZ = 0.0;
 
-   if( (part->posY <= 0) || ( (part->posY <= centerY-20) && 
+   if( (part->posY <= 0) || intersectPlanes(part,&dX,&dZ)
+                            /*( (part->posY <= centerY-20) && 
                               (part->posY >= centerY-25) && 
                               (part->posX >= centerX-2)  &&
                               (part->posX <= centerX+3)  && 
                               (part->posZ >= centerZ-2)  &&
-                              (part->posZ <= centerZ+3) ) )
+                              (part->posZ <= centerZ+3) )*/ )
    {
        part->velY = -0.2*part->velY+(-gravity)*seconds;
 
-       part->velX += -1*part->velY*seconds*gravity*((rand() / ((double)RAND_MAX + 1)));
+       part->velX += dX*part->velY*seconds*gravity*((rand() / ((double)RAND_MAX + 1)));
+       part->velZ += dZ*part->velY*seconds*gravity*((rand() / ((double)RAND_MAX + 1)));
 
       part->posY += part->velY*seconds;
       part->posX += part->velX*seconds;
@@ -178,5 +161,79 @@ GLuint part1::LoadTexture(char* fileName)
 
    SDL_FreeSurface(img);
    return(indice);
+}
+
+void part1::addPlane(float x1, float y1, float z1, 
+                     float x2, float y2, float z2,
+                     float dX, float dZ, int inclination)
+{
+   if(actualPlanes < PART1_MAX_PLANES)
+   {
+      intersections[actualPlanes].x1 = x1;
+      intersections[actualPlanes].y1 = y1;
+      intersections[actualPlanes].z1 = z1;
+      intersections[actualPlanes].x2 = x2;
+      intersections[actualPlanes].y2 = y2;
+      intersections[actualPlanes].z2 = z2;
+      intersections[actualPlanes].dX = dX;
+      intersections[actualPlanes].dZ = dZ;
+      intersections[actualPlanes].inclination = inclination;
+      actualPlanes++;
+   }
+}
+
+
+bool part1::intersectPlanes(particle* part, float* dX, float* dZ)
+{
+   int i;
+   float yOnPlane;
+   float size;
+   for(i = 0; i < actualPlanes; i++)
+   {
+      if( (part->posX <= intersections[i].x2) && 
+          (part->posX >= intersections[i].x1) &&
+          (part->posZ <= intersections[i].z2) && 
+          (part->posZ >= intersections[i].z1) )
+      {
+         switch(intersections[i].inclination)
+         { 
+             case PLANE_NO_INCLINATION: 
+                   yOnPlane = intersections[i].y1;
+             break;
+             case PLANE_INCLINATION_X:
+             {
+                size = (intersections[i].x2 - intersections[i].x1);
+                yOnPlane = ((intersections[i].x2 - part->posX) / size) * 
+                             intersections[i].y1 +
+                           ((part->posX - intersections[i].x1) / size) * 
+                             intersections[i].y2;
+             }
+             break;
+             case PLANE_INCLINATION_Z:
+             {
+                size = (intersections[i].z2 - intersections[i].z1);
+                yOnPlane = ((intersections[i].z2 - part->posZ) / size) * 
+                             intersections[i].y1 +
+                           ((part->posZ - intersections[i].z1) / size) * 
+                             intersections[i].y2;
+             }
+             break;
+         }
+         if( (part->posY <= yOnPlane + 1) && 
+             (part->posY >= yOnPlane - 1 ) )
+         {
+            *dX = intersections[i].dX;
+            *dZ = intersections[i].dZ;
+            return(true);
+         }
+      }
+   }
+   return(false);
+}
+
+void part1::removePlane(float x1, float y1, float z1, 
+                        float x2, float y2, float z2)
+{
+   //TODO
 }
 

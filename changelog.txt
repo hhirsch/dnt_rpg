@@ -5,6 +5,7 @@
  - Particles (blood, fire, smoke, water surface,
               lightning, waterfall, snow);
  - Engine Optimization;
+ - Better Sky;
  - New Animations;
  - New Models;
  - Camera follow active character on height;

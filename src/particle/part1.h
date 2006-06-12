@@ -3,6 +3,21 @@
 
 #include "particle.h"
 
+#define PART1_MAX_PLANES 10
+
+#define PLANE_NO_INCLINATION 0
+#define PLANE_INCLINATION_X  1
+#define PLANE_INCLINATION_Z  2
+
+typedef struct 
+{
+   float x1,x2;  /* X's coordinates of plane */
+   float y1,y2;  /* Y's coordinates of plane */
+   float z1,z2;  /* Z's coordinates of plane */
+   float dX, dZ; /* Variation of water on plane */
+   int inclination;
+}interPlane; /* Intersection Plane */
+
 class part1: public particleSystem
 {
    public:
@@ -53,11 +68,22 @@ class part1: public particleSystem
       void NextStep(float sec);
 
       int numParticles();
+ 
+      void addPlane(float x1, float y1, float z1, 
+                    float x2, float y2, float z2, 
+                    float dX, float dZ, int inclination);
+
+      void removePlane(float x1, float y1, float z1, 
+                       float x2, float y2, float z2);
+
+      bool intersectPlanes(particle* part, float* dX, float* dZ); 
 
    private:
       float seconds; 
       GLuint partTexture;
       GLuint LoadTexture(char* fileName);
+      interPlane intersections[PART1_MAX_PLANES];
+      int actualPlanes;
 
    
 };
