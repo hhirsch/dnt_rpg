@@ -13,8 +13,8 @@ part7::part7(float cX,float cY,float cZ, string fileName):
    centerY=cY; 
    centerZ=cZ;
    actualParticles = 0;
-   partTexture = LoadTexture("../data/particles/part2.png");
-   //partTexture = LoadTexture("../data/particles/part3.png");
+   //partTexture = LoadTexture("../data/particles/part2.png");
+   partTexture = LoadTexture("../data/particles/snow.png");
    //partTexture = LoadTexture("../data/particles/smoke5.png");
 }
 
@@ -50,7 +50,7 @@ void part7::InitRender()
    PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
-   glPointSize(16);
+   glPointSize(8);
 
    glBindTexture(GL_TEXTURE_2D, partTexture);
    glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);

@@ -63,8 +63,9 @@ engine::engine()
 
    /* TODO Initialize Particles, it will not be here!! */
    particula = new part1(150,60,120,"../data/particles/waterfall1.par"); 
-   particula->addPlane(148,40,118,153,40,123,-1,0,PLANE_NO_INCLINATION);
-   particula->addPlane(154,20,118,160,20,123,-1,0,PLANE_NO_INCLINATION);
+   particula->addPlane(148,59,118,152,59,123,-1,0,PLANE_NO_INCLINATION);
+   particula->addPlane(150,40,118,160,32,123,-1,0,PLANE_INCLINATION_X);
+   particula->addPlane(160,20,110,175,20,130,-1,0,PLANE_NO_INCLINATION);
    particula2 = new part2(200,0,220,"../data/particles/fire1.par");
    particula3 = new part3(300,20,300);
    particula4 = new part4(240,0,220,"../data/particles/smoke1.par");

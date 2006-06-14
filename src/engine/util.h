@@ -7,7 +7,7 @@
 #include <math.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL.h>
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 #include "../gui/farso.h"
 
 /********************************************************************

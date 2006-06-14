@@ -7,8 +7,6 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
-#include <GL/glext.h>
-
 part2::part2(float cX,float cY,float cZ, string fileName):
                                particleSystem(fileName, PARTICLE_DRAW_GROUPS)
 {

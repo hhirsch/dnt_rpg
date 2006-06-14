@@ -62,32 +62,47 @@ void part1::EndRender()
    glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
    glDisable(GL_TEXTURE_2D);
    glDisable(GL_POINT_SPRITE_ARB);
-   glEnable(GL_LIGHTING);
    glDisable( GL_BLEND );
+
+   /*int i;
+   for(i = 0; i < actualPlanes; i++)
+   {  
+      glBegin(GL_QUADS);
+      glColor3f(1.0f,0.1f,0.1f);
+      glVertex3f(intersections[i].x1,intersections[i].y1,intersections[i].z1);
+      switch(intersections[i].inclination)
+      {
+         case PLANE_NO_INCLINATION:
+              glVertex3f(intersections[i].x1,intersections[i].y1,intersections[i].z2);
+              glVertex3f(intersections[i].x2,intersections[i].y2,intersections[i].z2);
+              glVertex3f(intersections[i].x2,intersections[i].y1,intersections[i].z1);
+         break;
+         case PLANE_INCLINATION_X:
+         break;
+         case PLANE_INCLINATION_Z:
+         break;
+      }
+      glEnd();
+   }*/
+
+   glEnable(GL_LIGHTING);
 }
 
 void part1::actualize(particle* part)
 {
-   part->prvX = part->posX;
-   part->prvY = part->posY;
-   part->prvZ = part->posZ;
-   
    float dX = -1.0;   
    float dZ = 0.0;
 
-   if( (part->posY <= 0) || intersectPlanes(part,&dX,&dZ)
-                            /*( (part->posY <= centerY-20) && 
-                              (part->posY >= centerY-25) && 
-                              (part->posX >= centerX-2)  &&
-                              (part->posX <= centerX+3)  && 
-                              (part->posZ >= centerZ-2)  &&
-                              (part->posZ <= centerZ+3) )*/ )
+   if( (part->posY <= 0) || intersectPlanes(part,&dX,&dZ) )
    {
-       part->velY = -0.2*part->velY+(-gravity)*seconds;
+       part->velY = -0.02*part->velY+(-gravity)*seconds;
 
        part->velX += dX*part->velY*seconds*gravity*((rand() / ((double)RAND_MAX + 1)));
        part->velZ += dZ*part->velY*seconds*gravity*((rand() / ((double)RAND_MAX + 1)));
 
+      part->prvX = part->posX;
+      part->prvY = part->posY;
+      part->prvZ = part->posZ;
       part->posY += part->velY*seconds;
       part->posX += part->velX*seconds;
       part->posZ += part->velZ*seconds;
@@ -99,6 +114,9 @@ void part1::actualize(particle* part)
       part->velX += seconds*(4*((rand() / ((double)RAND_MAX + 1))) - 2);
       part->velZ += seconds*(4*((rand() / ((double)RAND_MAX + 1))) - 2);
 
+      part->prvX = part->posX;
+      part->prvY = part->posY;
+      part->prvZ = part->posZ;
       part->posY += part->velY*seconds;
       part->posX += part->velX*seconds;
       part->posZ += part->velZ*seconds;
@@ -107,13 +125,13 @@ void part1::actualize(particle* part)
 
 bool part1::continueLive(particle* part)
 {
-   return( (part->age < maxLive) /*&& (part->posY > 0)*/ &&
-           ((rand() % 200) != 5) );
+   return( (part->age < maxLive) /*&&
+           ((rand() % 200) != 5)*/ );
 }
 
 int part1::needCreate()
 {
-   return(rand() % 120);
+   return(rand() % (int) (maxParticles / maxLive));
 }
 
 void part1::createParticle(particle* part)
@@ -219,21 +237,30 @@ bool part1::intersectPlanes(particle* part, float* dX, float* dZ)
              }
              break;
          }
-         if( (part->posY <= yOnPlane + 1) && 
-             (part->posY >= yOnPlane - 1 ) )
+         if( ((part->posY >= yOnPlane - 1) && (part->posY <= yOnPlane + 1)) )
+             
          {
             *dX = intersections[i].dX;
             *dZ = intersections[i].dZ;
             return(true);
          }
+         /*else if (((part->posY <= yOnPlane +1) && (part->prvY >= yOnPlane -1) ))
+         {
+            printf("Alguem\n");
+            part->posY = yOnPlane;
+            *dX = intersections[i].dX;
+            *dZ = intersections[i].dZ;
+            return(true);
+         }*/
+         /*else
+         { printf("prv: %.3f act: %.3f onP: %.3f",part->prvY,part->posY,yOnPlane); }*/
       }
    }
    return(false);
 }
 
-void part1::removePlane(float x1, float y1, float z1, 
-                        float x2, float y2, float z2)
+void part1::removeCharacterPlanes()
 {
-   //TODO
+   actualPlanes -= 4;
 }
 
