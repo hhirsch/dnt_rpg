@@ -6,6 +6,7 @@
  *************************************************************************/
 
 #include <SDL/SDL.h>
+#include "defs.h"
 #include <string>
 using namespace std;
 
@@ -29,6 +30,7 @@ typedef struct _featDesc
    int costToUse;                  /* Cost, in PP to use */
    int actionType;                 /* Action Type of the feat */
    int action;                     /* Defined Action of the feat */
+   diceThing diceInfo;             /* Defined Dice*/
    string name;                    /* Feat Name */
    string description;             /* Feat Description */
    depFeat depFeats[MAX_DEP_FEATS];/* Feat Dependency */
@@ -43,6 +45,7 @@ typedef struct _feat
    int costToUse;                   /* Cost, in PP to use */
    int actionType;                  /* Action Type of the feat */
    int action;                      /* Defined Action of the feat */
+   diceThing diceInfo;              /* Defined Dice*/
    string name;                     /* Feat Name */
    depFeat depFeats[MAX_DEP_FEATS]; /* Feat Dependency */
 }feat;                              /* Feat Struct */

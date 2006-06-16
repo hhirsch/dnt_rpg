@@ -9,7 +9,7 @@ DIRENGINE = ../engine/
 
 all: objetos
 
-classes.o: classes.cpp classes.h actions.h skills.h feats.h
+classes.o: classes.cpp classes.h actions.h skills.h feats.h dices.h
 	@printf "Making classes.o... "
 	@$(CPP) $(CFLAGS) classes.cpp -o classes.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -19,7 +19,7 @@ skills.o: skills.cpp skills.h
 	@$(CC) $(CFLAGS) skills.cpp -o skills.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-feats.o: feats.cpp feats.h actions.h defs.h
+feats.o: feats.cpp feats.h actions.h defs.h dices.h
 	@printf "Making feats.o... "
 	@$(CC) $(CFLAGS) feats.cpp -o feats.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

@@ -126,6 +126,13 @@ featsList::featsList(string dir, string arq)
       fscanf(desc,"%d",&m_feats[aux].requeridedLevel);
       fscanf(desc,"%s",&buffer[0]);
       m_feats[aux].requeridedClass = numberClass(buffer);
+      fscanf(desc,"%d*d%d+%d",&m_feats[aux].diceInfo.baseDice.numberOfDices,
+                              &m_feats[aux].diceInfo.baseDice.diceID,
+                              &m_feats[aux].diceInfo.baseDice.sumNumber);
+      fscanf(desc,"%d*d%d+%d",
+                             &m_feats[aux].diceInfo.aditionalDice.numberOfDices,
+                             &m_feats[aux].diceInfo.aditionalDice.diceID,
+                             &m_feats[aux].diceInfo.aditionalDice.sumNumber);
       fscanf(desc,"%d",&m_feats[aux].quantityPerDay);
       fscanf(desc,"%d",&m_feats[aux].costToUse);
       fscanf(desc,"%d",&m_feats[aux].actionType);
