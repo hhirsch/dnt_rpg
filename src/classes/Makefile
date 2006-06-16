@@ -24,8 +24,8 @@ feats.o: feats.cpp feats.h actions.h defs.h
 	@$(CC) $(CFLAGS) feats.cpp -o feats.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste: skills.o teste.cpp
-	g++ -g -Wall teste.cpp skills.o -o teste
+teste: feats.o teste.cpp
+	g++ -g -Wall -lSDL -lSDL_image teste.cpp feats.o -o teste
 
 objetos: skills.o feats.o 
 

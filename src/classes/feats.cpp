@@ -118,12 +118,13 @@ featsList::featsList(string dir, string arq)
          printf("Can't open feat file: %s \n",arqDescricao.c_str() );
          return;
       }
+      m_feats[aux].internalListNumber = aux;
       fgets(buffer, sizeof(buffer), desc);
       m_feats[aux].name = buffer;
       fgets(buffer, sizeof(buffer), desc);
       m_feats[aux].description = buffer;
       fscanf(desc,"%d",&m_feats[aux].requeridedLevel);
-      fgets(buffer, sizeof(buffer), desc);
+      fscanf(desc,"%s",&buffer[0]);
       m_feats[aux].requeridedClass = numberClass(buffer);
       fscanf(desc,"%d",&m_feats[aux].quantityPerDay);
       fscanf(desc,"%d",&m_feats[aux].costToUse);
