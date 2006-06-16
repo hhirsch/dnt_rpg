@@ -27,7 +27,7 @@ feats.o: feats.cpp feats.h actions.h
 teste: skills.o teste.cpp
 	g++ -g -Wall teste.cpp skills.o -o teste
 
-objetos: skills.o 
+objetos: skills.o feats.o 
 
 clean: 
 	@printf  "Cleaning Classes Bin Files... "
