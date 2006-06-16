@@ -1,4 +1,6 @@
 #include "feats.h" 
+#include "defs.h"
+#include <SDL/SDL_image.h>
 
 
 feats::feats()
@@ -58,9 +60,81 @@ bool feats::insertFeat(featDescription featInsert)
    return(false);
 }
 
+int numberClass(string buffer)
+{
+   int ret = -1;
+   if(buffer.compare(STR_EADM) == 0)
+     ret = CLASS_EADM;
+   else if(buffer.compare(STR_EBIOLOGIA) == 0)
+     ret = CLASS_EBIOLOGIA;
+   else if(buffer.compare(STR_EDCC) == 0)
+     ret = CLASS_EDCC;
+   else if(buffer.compare(STR_EDFISICA) == 0)
+     ret = CLASS_EDFISICA;
+   else if(buffer.compare(STR_EMECANICA) == 0)
+     ret = CLASS_EMECANICA;
+   else if(buffer.compare(STR_EFILOSOFIA) == 0)
+     ret = CLASS_EFILOSOFIA;
+   else if(buffer.compare(STR_EFISIOTERAPIA) == 0)
+     ret = CLASS_EFISIOTERAPIA;
+   else if(buffer.compare(STR_EMEDICINA) == 0)
+     ret = CLASS_EMEDICINA;
+   else if(buffer.compare(STR_EMUSICA) == 0)
+     ret = CLASS_EMUSICA;
+   else if(buffer.compare(STR_ETO) == 0)
+     ret = CLASS_ETO;
+
+   return(ret);
+}
+
 featsList::featsList(string dir, string arq)
 {
-   //TODO
+   FILE* file;
+   string arqDescricao;
+   string arqImagem;
+   char buffer[1024];
+   char buf2[128];
+   char buf3[128];
+   int num;
+   if(!(file=fopen(arq.c_str(),"r")))
+   {
+       printf("Error while opening feats list: %s\n",arq.c_str());
+       return;
+   }
+   
+   int aux;
+   for(aux = 0; aux < NUMBER_OF_FEATS; aux++)
+   {
+      //fscanf(file,"%d %s",&num,&buffer[0]);
+      fgets(buffer, sizeof(buffer), file);
+      sscanf(buffer,"%d %s %s",&num,&buf2[0],&buf3[0]);
+      arqImagem = buf3;
+      arqDescricao = buf2;
+      arqDescricao = dir+arqDescricao;
+
+      FILE* desc;
+      if(! (desc = fopen(arqDescricao.c_str(), "r")))
+      {
+         printf("Can't open feat file: %s \n",arqDescricao.c_str() );
+         return;
+      }
+      fgets(buffer, sizeof(buffer), desc);
+      m_feats[aux].name = buffer;
+      fgets(buffer, sizeof(buffer), desc);
+      m_feats[aux].description = buffer;
+      fscanf(desc,"%d",&m_feats[aux].requeridedLevel);
+      fgets(buffer, sizeof(buffer), desc);
+      m_feats[aux].requeridedClass = numberClass(buffer);
+      fscanf(desc,"%d",&m_feats[aux].quantityPerDay);
+      fscanf(desc,"%d",&m_feats[aux].costToUse);
+      fscanf(desc,"%d",&m_feats[aux].actionType);
+      fscanf(desc,"%d",&m_feats[aux].action);
+      //TODO DEPENDENT FEATS READ
+      m_feats[aux].image = IMG_Load(arqImagem.c_str());
+      fclose(desc);
+   }
+
+   fclose(file);
 }
 
 featsList::~featsList()
