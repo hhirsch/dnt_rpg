@@ -96,13 +96,14 @@ featsList::featsList(string dir, string arq)
    char buf2[128];
    char buf3[128];
    int num;
+   int i;
+   int aux;
    if(!(file=fopen(arq.c_str(),"r")))
    {
        printf("Error while opening feats list: %s\n",arq.c_str());
        return;
    }
    
-   int aux;
    for(aux = 0; aux < NUMBER_OF_FEATS; aux++)
    {
       //fscanf(file,"%d %s",&num,&buffer[0]);
@@ -137,7 +138,14 @@ featsList::featsList(string dir, string arq)
       fscanf(desc,"%d",&m_feats[aux].costToUse);
       fscanf(desc,"%d",&m_feats[aux].actionType);
       fscanf(desc,"%d",&m_feats[aux].action);
-      //TODO DEPENDENT FEATS READ
+      //Read Dependent Feats
+      for(i=0; i<MAX_DEP_FEATS;i++)
+      {
+         fscanf(desc,"%s %f,%d",&buf2[0],
+                                &m_feats[aux].depFeats[i].reason,
+                                &m_feats[aux].depFeats[i].used);
+         m_feats[aux].depFeats[i].featName = buf2;
+      }
       m_feats[aux].image = IMG_Load(arqImagem.c_str());
       fclose(desc);
    }
