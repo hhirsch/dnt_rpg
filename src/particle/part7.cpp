@@ -100,16 +100,8 @@ void part7::actualize(particle* part)
    
 
       part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
-
-      /*if(part->posY >= 5)
-      {
-        part->velX += seconds*(gravity/2.0)*(((rand() / ((double)RAND_MAX + 1))));
-      }
-      else
-      {*/
-        part->velX += seconds*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
+      part->velX += seconds*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
                       + dSumVel[0]);
-      //}
       part->velZ += seconds*(dMultVel[2]*((rand() / ((double)RAND_MAX + 1))) 
                       + dSumVel[2]);
 

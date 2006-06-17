@@ -60,7 +60,7 @@ void part4::InitRender()
    PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
    PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
-   glPointSize(16);
+   glPointSize(8);
 
    glBindTexture(GL_TEXTURE_2D, partTexture);
    glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
