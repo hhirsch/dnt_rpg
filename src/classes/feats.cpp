@@ -40,8 +40,11 @@ bool feats::insertFeat(featDescription featInsert)
    int i;
    if(totalFeats < MAX_FEATS)
    {
-      m_feats[totalFeats].internalListNumber = featInsert.internalListNumber;
+      m_feats[totalFeats].internalListNumber = featInsert.internalListNumber; 
+      m_feats[totalFeats].requeridedLevel = featInsert.requeridedLevel;
       m_feats[totalFeats].quantityPerDay = featInsert.quantityPerDay;
+      m_feats[totalFeats].aditionalQuantity = featInsert.aditionalQuantity;
+      m_feats[totalFeats].aditionalLevels = featInsert.aditionalLevels;
       m_feats[totalFeats].actualQuantity = featInsert.quantityPerDay;
       m_feats[totalFeats].costToUse = featInsert.costToUse;
       m_feats[totalFeats].actionType = featInsert.actionType;
@@ -134,17 +137,20 @@ featsList::featsList(string dir, string arq)
                              &m_feats[aux].diceInfo.aditionalDice.numberOfDices,
                              &m_feats[aux].diceInfo.aditionalDice.diceID,
                              &m_feats[aux].diceInfo.aditionalDice.sumNumber);
-      fscanf(desc,"%d",&m_feats[aux].quantityPerDay);
-      fscanf(desc,"%d",&m_feats[aux].costToUse);
-      fscanf(desc,"%d",&m_feats[aux].actionType);
-      fscanf(desc,"%d",&m_feats[aux].action);
+      fscanf(desc,"%d,%d,%d",&m_feats[aux].quantityPerDay,
+                             &m_feats[aux].aditionalQuantity,
+                             &m_feats[aux].aditionalLevels);
+      fscanf(desc,"%d,%d,%d",&m_feats[aux].costToUse,
+                             &m_feats[aux].actionType,
+                             &m_feats[aux].action);
       //Read Dependent Feats
       for(i=0; i<MAX_DEP_FEATS;i++)
       {
          fscanf(desc,"%s %f,%d",&buf2[0],
                                 &m_feats[aux].depFeats[i].reason,
-                                &m_feats[aux].depFeats[i].used);
+                                &num);
          m_feats[aux].depFeats[i].featName = buf2;
+         m_feats[aux].depFeats[i].used = num == 1;
       }
       m_feats[aux].image = IMG_Load(arqImagem.c_str());
       fclose(desc);

@@ -27,6 +27,8 @@ typedef struct _featDesc
    int requeridedLevel;            /* Requerided Character class level to use */
    int requeridedClass;            /* Requerided Character Class */
    int quantityPerDay;             /* Quantity avaible to use per day*/
+   int aditionalQuantity;          /* Quantity Added per Aditional Level */
+   int aditionalLevels;            /* Number of Levels to Aditional Quantity */
    int costToUse;                  /* Cost, in PP to use */
    int actionType;                 /* Action Type of the feat */
    int action;                     /* Defined Action of the feat */
@@ -40,7 +42,10 @@ typedef struct _featDesc
 typedef struct _feat
 {
    int internalListNumber;          /* Number on List */
+   int requeridedLevel;             /* Requerided Level to use */
    int quantityPerDay;              /* Quantity avaible to use per day*/
+   int aditionalQuantity;           /* Quantity Added per Aditional Level */
+   int aditionalLevels;             /* Number of Levels to Aditional Quantity */
    int actualQuantity;              /* Actual quantity to use */
    int costToUse;                   /* Cost, in PP to use */
    int actionType;                  /* Action Type of the feat */
