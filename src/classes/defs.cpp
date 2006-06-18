@@ -92,5 +92,23 @@ int numberConstant(string buffer)
    else if(buffer.compare(SKILL_STR_TOCAR_INST) == 0)
       ret = SKILL_TOCAR_INST;
 
+   else if(buffer.compare(ATT_STR_LEVEL) == 0)
+      ret = ATT_LEVEL;
+   else if(buffer.compare(ATT_STR_STRENGHT) == 0)
+      ret = ATT_STRENGHT;
+   else if(buffer.compare(ATT_STR_DEXTERY) == 0)
+      ret = ATT_DEXTERY;
+   else if(buffer.compare(ATT_STR_CONSTITUTION) == 0)
+      ret = ATT_CONSTITUTION;
+   else if(buffer.compare(ATT_STR_INTELIGENCY) == 0)
+      ret = ATT_INTELIGENCY;
+   else if(buffer.compare(ATT_STR_WISDOW) == 0)
+      ret = ATT_WISDOW;
+   else if(buffer.compare(ATT_STR_CHARISM) == 0)
+      ret = ATT_CHARISM;
+
+   else if(buffer.compare(STR_WORK_ON_ALL) == 0)
+      ret = WORK_ON_ALL;
+
    return(ret);
 }

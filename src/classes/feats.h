@@ -32,6 +32,9 @@ typedef struct _featDesc
    int costToUse;                  /* Cost, in PP to use */
    int actionType;                 /* Action Type of the feat */
    int action;                     /* Defined Action of the feat */
+   int conceptBonus;               /* Define the concept that bonus the feat */
+   int conceptAgainst;             /* Define the concept against the feat */
+   int conceptTarget;              /* Define the valid target of feat */
    diceThing diceInfo;             /* Defined Dice*/
    string name;                    /* Feat Name */
    string description;             /* Feat Description */

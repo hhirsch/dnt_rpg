@@ -103,6 +103,12 @@ featsList::featsList(string dir, string arq)
       fscanf(desc,"%d",&m_feats[aux].requeridedLevel);
       fscanf(desc,"%s",&buffer[0]);
       m_feats[aux].requeridedClass = numberConstant(buffer);
+      fscanf(desc,"%s",&buffer[0]);
+      m_feats[aux].conceptBonus = numberConstant(buffer);
+      fscanf(desc,"%s",&buffer[0]);
+      m_feats[aux].conceptAgainst = numberConstant(buffer);
+      fscanf(desc,"%s",&buffer[0]);
+      m_feats[aux].conceptTarget = numberConstant(buffer);
       fscanf(desc,"%d*d%d+%d",&m_feats[aux].diceInfo.baseDice.numberOfDices,
                               &m_feats[aux].diceInfo.baseDice.diceID,
                               &m_feats[aux].diceInfo.baseDice.sumNumber);

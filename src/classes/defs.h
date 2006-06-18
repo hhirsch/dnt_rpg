@@ -163,7 +163,8 @@ using namespace std;
 #define TEND_SP_NEUTRO         207
 #define TEND_SP_CAOTICO        208
 
-#define WORK_ON_ALL            0
+#define WORK_ON_ALL            10000
+#define STR_WORK_ON_ALL        "WORK_ON_ALL"
 
 int numberConstant(string buffer);
 
