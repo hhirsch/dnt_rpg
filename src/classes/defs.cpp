@@ -1,6 +1,6 @@
 #include "feats.h"
 
-int numberClass(string buffer)
+int numberConstant(string buffer)
 {
    int ret = -1;
    if(buffer.compare(STR_EADM) == 0)
@@ -24,13 +24,8 @@ int numberClass(string buffer)
    else if(buffer.compare(STR_ETO) == 0)
      ret = CLASS_ETO;
 
-   return(ret);
-}
 
-int numberSkill(string buffer)
-{
-   int ret = -1;
-   if(buffer.compare(SKILL_STR_ACROBACIAS) == 0)
+   else if(buffer.compare(SKILL_STR_ACROBACIAS) == 0)
       ret = SKILL_ACROBACIAS;
    else if(buffer.compare(SKILL_STR_ADESTRAR_BICHOS) == 0)
       ret = SKILL_ADESTRAR_BICHOS;

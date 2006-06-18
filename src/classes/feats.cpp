@@ -102,7 +102,7 @@ featsList::featsList(string dir, string arq)
       m_feats[aux].description = buffer;
       fscanf(desc,"%d",&m_feats[aux].requeridedLevel);
       fscanf(desc,"%s",&buffer[0]);
-      m_feats[aux].requeridedClass = numberClass(buffer);
+      m_feats[aux].requeridedClass = numberConstant(buffer);
       fscanf(desc,"%d*d%d+%d",&m_feats[aux].diceInfo.baseDice.numberOfDices,
                               &m_feats[aux].diceInfo.baseDice.diceID,
                               &m_feats[aux].diceInfo.baseDice.sumNumber);

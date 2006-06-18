@@ -165,8 +165,6 @@ using namespace std;
 
 #define WORK_ON_ALL            0
 
-int numberClass(string buffer);
-
-int numberSkill(string buffer);
+int numberConstant(string buffer);
 
 #endif
