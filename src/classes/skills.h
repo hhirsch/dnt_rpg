@@ -1,19 +1,6 @@
 #ifndef _skills_h
 #define _skills_h
 
-#define ATT_FORCA        1
-#define ATT_DESTREZA     2
-#define ATT_CONSTITUICAO 3
-#define ATT_INTELIGENCIA 4
-#define ATT_SABEDORIA    5
-#define ATT_CARISMA      6
-
-#define VAR_AUX1         40
-#define VAR_AUX2         41
-#define VAR_AUX3         42
-#define VAR_AUX4         43
-#define VAR_AUX5         44
-#define VAR_AUX6         45
 
 #define MAX_SKILLS       46
 

@@ -63,33 +63,6 @@ bool feats::insertFeat(featDescription featInsert)
    return(false);
 }
 
-int numberClass(string buffer)
-{
-   int ret = -1;
-   if(buffer.compare(STR_EADM) == 0)
-     ret = CLASS_EADM;
-   else if(buffer.compare(STR_EBIOLOGIA) == 0)
-     ret = CLASS_EBIOLOGIA;
-   else if(buffer.compare(STR_EDCC) == 0)
-     ret = CLASS_EDCC;
-   else if(buffer.compare(STR_EDFISICA) == 0)
-     ret = CLASS_EDFISICA;
-   else if(buffer.compare(STR_EMECANICA) == 0)
-     ret = CLASS_EMECANICA;
-   else if(buffer.compare(STR_EFILOSOFIA) == 0)
-     ret = CLASS_EFILOSOFIA;
-   else if(buffer.compare(STR_EFISIOTERAPIA) == 0)
-     ret = CLASS_EFISIOTERAPIA;
-   else if(buffer.compare(STR_EMEDICINA) == 0)
-     ret = CLASS_EMEDICINA;
-   else if(buffer.compare(STR_EMUSICA) == 0)
-     ret = CLASS_EMUSICA;
-   else if(buffer.compare(STR_ETO) == 0)
-     ret = CLASS_ETO;
-
-   return(ret);
-}
-
 featsList::featsList(string dir, string arq)
 {
    FILE* file;
