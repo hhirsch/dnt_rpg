@@ -142,6 +142,16 @@ using namespace std;
 #define RACE_MANIACO_SKINHEAD 107
 #define RACE_MUTANTE          108
 
+#define RACE_STR_AUTISTA_ESTRANHO "RACE_AUTISTA_ESTRANHO"
+#define RACE_STR_BOY_PATY         "RACE_BOY_PATY"
+#define RACE_STR_GOTICO           "RACE_GOTICO"
+#define RACE_STR_HIPPIE           "RACE_HIPPIE"
+#define RACE_STR_HUMANO           "RACE_HUMANO"
+#define RACE_STR_LLAMA_HUMANA     "RACE_LLAMA_HUMANA"
+#define RACE_STR_METALEIRO        "RACE_METALEIRO"
+#define RACE_STR_MANIACO_SKINHEAD "RACE_MANIACO_SKINHEAD"
+#define RACE_STR_MUTANTE          "RACE_MUTANTE"
+
 
 /******************************************************************
  *                        NPC RACES CONSTANTS                     *
@@ -149,6 +159,11 @@ using namespace std;
 #define RACE_RATAZANA         120
 #define RACE_ENTE             121
 #define RACE_AMEIVA           122
+
+#define RACE_STR_RATAZANA  "RACE_RATAZANA"
+#define RACE_STR_ENTE      "RACE_ENTE"
+#define RACE_STR_AMEIVA    "RACE_AMEIVA"
+
 
 /******************************************************************
  *                         TENDENCY CONSTANTS                     *
@@ -163,9 +178,68 @@ using namespace std;
 #define TEND_SP_NEUTRO         207
 #define TEND_SP_CAOTICO        208
 
+#define TEND_STR_SL_LIBERTARIO     "TEND_SL_LIBERTARIO"
+#define TEND_STR_SL_CENTRISTA      "TEND_SL_CENTRISTA"
+#define TEND_STR_SL_CAPITALISTA    "TEND_SL_CAPITALISTA"
+#define TEND_STR_NEUTRO_FUNCIONAL  "TEND_NEUTRO_FUNCIONAL"
+#define TEND_STR_NEUTRO_CENTRISTA  "TEND_NEUTRO_CENTRISTA"
+#define TEND_STR_NEUTRO_CAOTICO    "TEND_NEUTRO_CAOTICO"
+#define TEND_STR_SP_CAPITALISTA    "TEND_SP_CAPITALISTA"
+#define TEND_STR_SP_NEUTRO         "TEND_SP_NEUTRO"
+#define TEND_STR_SP_CAOTICO        "TEND_SP_CAOTICO"
+
+
 #define WORK_ON_ALL            10000
 #define STR_WORK_ON_ALL        "WORK_ON_ALL"
 
+/*************************************************************** 
+ * Reason: Return the number of the concept with name buffer  
+ * Param:
+ *        buffer -> string with the name of the concept
+ ***************************************************************/
 int numberConstant(string buffer);
+
+/*************************************************************** 
+ * Reason: Return true if the number represents a skill  
+ * Param:
+ *        number -> a number that represents some concept
+ ***************************************************************/
+bool isSkill(int number);
+
+/*************************************************************** 
+ * Reason: Return true if the number represents a class  
+ * Param:
+ *        number -> a number that represents some concept
+ ***************************************************************/
+bool isClass(int number);
+
+/*************************************************************** 
+ * Reason: Return true if the number represents a tendency  
+ * Param:
+ *        number -> a number that represents some concept
+ ***************************************************************/
+bool isTendency(int number);
+
+/*************************************************************** 
+ * Reason: Return true if the number represents a race  
+ * Param:
+ *        number -> a number that represents some concept
+ ***************************************************************/
+bool isRace(int number);
+
+/*************************************************************** 
+ * Reason: Return true if the number represents an attribute  
+ * Param:
+ *        number -> a number that represents some concept
+ ***************************************************************/
+bool isAttribute(int number);
+
+/*************************************************************** 
+ * Reason: Return true if the number represents a variable  
+ * Param:
+ *        number -> a number that represents some concept
+ ***************************************************************/
+bool isVariable(int number);
+
 
 #endif

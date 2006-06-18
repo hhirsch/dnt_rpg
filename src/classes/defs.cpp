@@ -24,6 +24,31 @@ int numberConstant(string buffer)
    else if(buffer.compare(STR_ETO) == 0)
      ret = CLASS_ETO;
 
+   else if(buffer.compare(RACE_STR_AUTISTA_ESTRANHO) == 0 ) 
+      ret = RACE_AUTISTA_ESTRANHO;
+   else if(buffer.compare(RACE_STR_BOY_PATY) == 0 )
+      ret = RACE_BOY_PATY;
+   else if(buffer.compare(RACE_STR_GOTICO) == 0 )
+      ret = RACE_GOTICO;
+   else if(buffer.compare(RACE_STR_HIPPIE) == 0 )
+      ret = RACE_HIPPIE;
+   else if(buffer.compare(RACE_STR_HUMANO) == 0 )
+      ret = RACE_HUMANO;
+   else if(buffer.compare(RACE_STR_LLAMA_HUMANA) == 0 )
+      ret = RACE_LLAMA_HUMANA;
+   else if(buffer.compare(RACE_STR_METALEIRO) == 0 )
+      ret = RACE_METALEIRO;
+   else if(buffer.compare(RACE_STR_MANIACO_SKINHEAD) == 0 )
+      ret = RACE_MANIACO_SKINHEAD;
+   else if(buffer.compare(RACE_STR_MUTANTE) == 0 )
+      ret = RACE_MUTANTE;
+
+   else if(buffer.compare(RACE_STR_RATAZANA) == 0 )
+      ret = RACE_RATAZANA;
+   else if(buffer.compare(RACE_STR_ENTE) == 0 )
+      ret = RACE_ENTE;
+   else if(buffer.compare(RACE_STR_AMEIVA) == 0 )
+      ret = RACE_AMEIVA;
 
    else if(buffer.compare(SKILL_STR_ACROBACIAS) == 0)
       ret = SKILL_ACROBACIAS;
@@ -107,8 +132,58 @@ int numberConstant(string buffer)
    else if(buffer.compare(ATT_STR_CHARISM) == 0)
       ret = ATT_CHARISM;
 
+   else if(buffer.compare(TEND_STR_SL_LIBERTARIO) == 0)
+     ret = TEND_SL_LIBERTARIO;
+   else if(buffer.compare(TEND_STR_SL_CENTRISTA) == 0)
+     ret = TEND_SL_CENTRISTA;
+   else if(buffer.compare(TEND_STR_SL_CAPITALISTA) == 0)
+     ret = TEND_SL_CAPITALISTA;
+   else if(buffer.compare(TEND_STR_NEUTRO_FUNCIONAL) == 0)
+     ret = TEND_NEUTRO_FUNCIONAL;
+   else if(buffer.compare(TEND_STR_NEUTRO_CENTRISTA) == 0)
+     ret = TEND_NEUTRO_CENTRISTA;
+   else if(buffer.compare(TEND_STR_NEUTRO_CAOTICO) == 0)
+     ret = TEND_NEUTRO_CAOTICO;
+   else if(buffer.compare(TEND_STR_SP_CAPITALISTA) == 0)
+     ret = TEND_SP_CAPITALISTA;
+   else if(buffer.compare(TEND_STR_SP_NEUTRO) == 0)
+     ret = TEND_SP_NEUTRO;
+   else if(buffer.compare(TEND_STR_SP_CAOTICO) == 0)
+     ret = TEND_SP_CAOTICO;
+
    else if(buffer.compare(STR_WORK_ON_ALL) == 0)
       ret = WORK_ON_ALL;
 
    return(ret);
+}
+
+
+bool isSkill(int number)
+{
+   return( (number >= SKILL_ACROBACIAS) && (number <= SKILL_TOCAR_INST));
+}
+
+bool isClass(int number)
+{
+   return( (number >= CLASS_EADM) && (number <= CLASS_ETO) );
+}
+
+bool isTendency(int number)
+{
+   return( (number >= TEND_SL_LIBERTARIO) && (number <= TEND_SP_CAOTICO) );
+}
+
+bool isRace(int number)
+{
+   return( (number >= RACE_AUTISTA_ESTRANHO) && (number <= RACE_AMEIVA) );
+}
+
+bool isAttribute(int number)
+{
+   return( (number >= ATT_LEVEL) && (number <= ATT_CHARISM) );
+}
+
+bool isVariable(int number)
+{
+   return( (number >= VAR_AUX1) && (number <= VAR_AUX6) );
 }

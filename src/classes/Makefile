@@ -9,7 +9,7 @@ DIRENGINE = ../engine/
 objetos = skills.o feats.o defs.o
 
 
-all: objetos
+all: $(objetos)
 
 classes.o: classes.cpp classes.h actions.h skills.h feats.h dices.h defs.h
 	@printf "Making classes.o... "
