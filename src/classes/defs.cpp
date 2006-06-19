@@ -153,6 +153,9 @@ int numberConstant(string buffer)
 
    else if(buffer.compare(STR_WORK_ON_ALL) == 0)
       ret = WORK_ON_ALL;
+   else if(buffer.compare(STR_NONE) == 0)
+      ret = NONE;
+
 
    return(ret);
 }

@@ -191,6 +191,8 @@ using namespace std;
 
 #define WORK_ON_ALL            10000
 #define STR_WORK_ON_ALL        "WORK_ON_ALL"
+#define NONE                   10001
+#define STR_NONE               "NONE" 
 
 /*************************************************************** 
  * Reason: Return the number of the concept with name buffer  

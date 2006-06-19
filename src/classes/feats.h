@@ -10,7 +10,7 @@
 #include <string>
 using namespace std;
 
-#define NUMBER_OF_FEATS     1 /* Total Number of Feats */
+#define NUMBER_OF_FEATS     2 /* Total Number of Feats */
 #define MAX_FEATS          30 /* Max Number of Know Feats for character */
 #define MAX_DEP_FEATS       5 /* Max number of cost this, cost that feats */
 
@@ -21,6 +21,11 @@ typedef struct _depfeat
    bool   used;        /* Dependence used or not? */
 }depFeat;
 
+
+/* Note: this is a definition based on an attack feature. If the feature is
+   an aditional concept feature, the numbers in quantityPerDay, 
+   aditionalQuantity and aditionalLevels refers to, respectively, the concepts
+   described on conceptBonus, conceptAgainst and conceptTarget.*/
 typedef struct _featDesc
 {
    int internalListNumber;         /* Number on List */

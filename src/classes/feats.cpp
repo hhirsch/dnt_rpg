@@ -1,5 +1,6 @@
 #include "feats.h" 
 #include "defs.h"
+#include "actions.h"
 #include <SDL/SDL_image.h>
 
 
@@ -119,9 +120,10 @@ featsList::featsList(string dir, string arq)
       fscanf(desc,"%d,%d,%d",&m_feats[aux].quantityPerDay,
                              &m_feats[aux].aditionalQuantity,
                              &m_feats[aux].aditionalLevels);
-      fscanf(desc,"%d,%d,%d",&m_feats[aux].costToUse,
-                             &m_feats[aux].actionType,
-                             &m_feats[aux].action);
+      fscanf(desc,"%d %s %s",&m_feats[aux].costToUse,
+                             &buf2[0],&buf3[0]);
+      m_feats[aux].actionType = numberActionType(buf2);
+      m_feats[aux].action = numberAction(buf3);
       //Read Dependent Feats
       for(i=0; i<MAX_DEP_FEATS;i++)
       {
