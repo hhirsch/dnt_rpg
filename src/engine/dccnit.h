@@ -177,17 +177,9 @@ class engine
 
       AI* ia;                      /* Modulo de IA. Temporiamente aqui. */
 
-      lang language;
+      lang language;               /* Language struct: internationalization */
 
-      /*part1* particula;
-      part2* particula2;
-      part3* particula3;
-      part4* particula4;
-      part5* particula5;
-      part6* particula6;
-      part7* particula7;*/
-
-      partSystem* particleSystem;
+      partSystem* particleSystem;  /* The Particle System */
       GLfloat segundos; 
 };
 

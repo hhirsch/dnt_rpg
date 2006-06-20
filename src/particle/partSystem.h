@@ -1,3 +1,7 @@
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #ifndef _partSystem_h
 #define _partSystem_h
 
@@ -35,20 +39,48 @@ class partSystem
       partSystem();
       ~partSystem();
 
+      /*************************************************************** 
+       * Reason: Actualize and Render all Active Systems
+       * Param:
+       ***************************************************************/
       void actualizeAll();
+
+      /*************************************************************** 
+       * Reason: add a Particle System to the System
+       * Param:
+       *        type -> the type of the System (PART_BLOOD, PART_FIRE)
+       *        X, Y, Z -> coordinates
+       *        fileName -> name of the file containing the definition
+       * Returns:
+       *        particle address;
+       ***************************************************************/
       particle* addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
                             string fileName );
+
+      /*************************************************************** 
+       * Reason: Remove an particle system from the system
+       * Param:
+       *       type -> the type of the System (PART_BLOOD, PART_FIRE)
+       *       part -> address of the Particle
+       ***************************************************************/
       void removeParticle(int type, particle* part);
+
+      /*************************************************************** 
+       * Reason: Returns the total numbers of particles
+       * Param:
+       * Return: 
+       *        Total Number of particles on system, from all systems
+       ***************************************************************/
       int numParticles();
 
    private:
-      part1* waterfall[MAX_WATERFALL];
-      part2* fire[MAX_FIRE];
-      part3* waterSurface[MAX_WATER_SURFACE];
-      part4* smoke[MAX_SMOKE];
-      part5* blood[MAX_BLOOD];
-      part6* lightning[MAX_LIGHTNING];
-      part7* snow[MAX_SNOW];
+      part1* waterfall[MAX_WATERFALL];        /* Waterfall Particles */
+      part2* fire[MAX_FIRE];                  /* Fire Particles */
+      part3* waterSurface[MAX_WATER_SURFACE]; /* WaterSurfaces Particles */
+      part4* smoke[MAX_SMOKE];                /* Smoke Particles */
+      part5* blood[MAX_BLOOD];                /* Blood Particles */
+      part6* lightning[MAX_LIGHTNING];        /* Lightning Particles */
+      part7* snow[MAX_SNOW];                  /* Snow Particles */
 
 };
 
