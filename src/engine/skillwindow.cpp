@@ -1,5 +1,6 @@
 #include "skillwindow.h"
 #include "../lang/lang.h"
+#include "../classes/defs.h"
 
 #define ACT_NONE    0
 #define ACT_SUM     1
@@ -55,7 +56,7 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    botao* baux;
    int aux;
 
-   curSkill = ATT_CARISMA+1; //Set to first skill after attribute
+   curSkill = ATT_SKILL_FIRST; //Set to first skill after attributes
    externalSkill = sk;
    avaiblePoints = points;
 
@@ -64,7 +65,7 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    SDL_ShowCursor(SDL_ENABLE);
 
    /* Define previous points, for undo */
-   for(aux = curSkill; aux < VAR_AUX1; aux++)
+   for(aux = curSkill; aux < ATT_SKILL_LAST; aux++)
    { 
      externalSkill->m_skills[aux].antPontos=externalSkill->m_skills[aux].pontos;
    }
@@ -197,13 +198,13 @@ int skillWindow::treat(interface* inter)
       }
       case ACT_NEXT:
       {
-         if(curSkill < VAR_AUX1-1)
+         if(curSkill < ATT_SKILL_LAST)
          {
             curSkill++;
          }
          else
          {
-            curSkill = ATT_CARISMA+1;
+            curSkill = ATT_SKILL_FIRST;
          } 
          skillName->texto = externalSkill->m_skills[curSkill].nome.c_str();
          desc->texto = externalSkill->m_skills[curSkill].descricao.c_str();
@@ -221,13 +222,13 @@ int skillWindow::treat(interface* inter)
       }
       case ACT_PREV:
       {
-         if(curSkill > ATT_CARISMA+1)
+         if(curSkill > ATT_SKILL_FIRST)
          {
             curSkill--;
          }
          else
          {
-            curSkill = VAR_AUX1-1;
+            curSkill = ATT_SKILL_LAST;
          }
          skillName->texto = externalSkill->m_skills[curSkill].nome.c_str();
          desc->texto = externalSkill->m_skills[curSkill].descricao.c_str();
