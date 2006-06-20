@@ -113,6 +113,12 @@ class featsList           /* List of All Feats on Game */
        ***************************************************************/
       featDescription featByNumber(int featNumber);
 
+      /*int applyAttackAndBreakFeat(int featNumber);
+      int applyCureAndFixFeat(int featNumber);
+      int applyModifyObjectFeat(int featNumber);
+      int applyConjureFeat(int featNumber);
+      int applyInvocaionFeat(int featNumber);*/
+
    private:
       featDescription m_feats[NUMBER_OF_FEATS]; /* Internal Desc Struct */
 };

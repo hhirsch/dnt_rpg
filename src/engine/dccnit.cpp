@@ -61,17 +61,30 @@ engine::engine()
    mouseX = 0;
    mouseY = 0;
 
+   particleSystem = new partSystem();
+
    /* TODO Initialize Particles, it will not be here!! */
-   particula = new part1(150,60,120,"../data/particles/waterfall1.par"); 
+
+   part1* particula;
+
+   particula = (part1*) particleSystem->addParticle(PART_WATERFALL,
+                                                    150,60,120,
+                                            "../data/particles/waterfall1.par");
    particula->addPlane(148,59,118,152,59,123,-1,0,PLANE_NO_INCLINATION);
    particula->addPlane(150,40,118,160,32,123,-1,0,PLANE_INCLINATION_X);
    particula->addPlane(160,20,110,175,20,130,-1,0,PLANE_NO_INCLINATION);
-   particula2 = new part2(200,0,220,"../data/particles/fire1.par");
-   particula3 = new part3(300,20,300);
-   particula4 = new part4(240,0,220,"../data/particles/smoke1.par");
-   particula5 = new part5(120,30,300, "../data/particles/blood1.par");
-   particula6 = new part6(50,250,100,"../data/particles/lightning1.par");
-   particula7 = new part7(100,80,100,"../data/particles/snow1.par");
+
+   particleSystem->addParticle(PART_FIRE,200,0,220,
+                                          "../data/particles/firescimitar.par");
+   particleSystem->addParticle(PART_WATER_SURFACE,300,20,300,"");
+   particleSystem->addParticle(PART_SMOKE,240,0,220,
+                                                "../data/particles/smoke1.par");
+   particleSystem->addParticle(PART_BLOOD,120,30,300,
+                                                "../data/particles/blood1.par");
+   particleSystem->addParticle(PART_LIGHTNING,50,250,100,
+                                            "../data/particles/lightning1.par");
+   particleSystem->addParticle(PART_SNOW,100,80,100,
+                                                 "../data/particles/snow1.par");
 }
 
 /*********************************************************************
@@ -87,13 +100,8 @@ engine::~engine()
    delete(snd);
 
    /* Delete particles */
-   delete(particula);
-   delete(particula2);
-   delete(particula3);
-   delete(particula4);
-   delete(particula5);
-   delete(particula6);
-   delete(particula7);
+   if(particleSystem != NULL)
+      delete(particleSystem);
 
    /* Close option */
    delete(option);
@@ -665,14 +673,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          char texto[15];
          sprintf(texto,"FPS: %3.2f",1000.0 / (tempo-ultimaLeitura));
          FPS->texto = texto;
-         sprintf(texto,"    Part: %d",
-                                   particula->numParticles() 
-                                 + particula2->numParticles() 
-                                 + particula3->numParticles()
-                                 + particula4->numParticles()
-                                 + particula5->numParticles()
-                                 + particula6->numParticles()
-                                 + particula7->numParticles() );
+         sprintf(texto,"    Part: %d",particleSystem->numParticles());
          FPS->texto += texto;
          janAtalhos->Desenhar(mouseX, mouseY);
       }
@@ -935,22 +936,24 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       /* Temporariamente, para visualizar o efeito de sangue */
       if(keys[SDLK_p])
       {
-          delete(particula5);
-          particula5 = new part5(PCs->personagemAtivo->posicaoLadoX,28,
+          particleSystem->addParticle(PART_BLOOD,
+                                 PCs->personagemAtivo->posicaoLadoX,28,
                                  PCs->personagemAtivo->posicaoLadoZ, 
                                  "../data/particles/blood1.par");
       }
       if(keys[SDLK_o])
       {
-          delete(particula5);
-          particula5 = new part5(PCs->personagemAtivo->posicaoLadoX,28,
-                                 PCs->personagemAtivo->posicaoLadoZ, 
-                                 "../data/particles/blood2.par");
+          particleSystem->addParticle(PART_BLOOD,
+                                      PCs->personagemAtivo->posicaoLadoX,28,
+                                      PCs->personagemAtivo->posicaoLadoZ, 
+                                      "../data/particles/blood2.par");
       }
       if(keys[SDLK_l])
       {
-         delete(particula6);
-         particula6 = new part6(50,250,100,"../data/particles/lightning1.par");
+         particleSystem->addParticle(PART_LIGHTNING,
+                                     PCs->personagemAtivo->posicaoLadoX,250,
+                                     PCs->personagemAtivo->posicaoLadoZ,
+                                     "../data/particles/lightning1.par");
       }
 
       if(keys[SDLK_n])
@@ -1308,13 +1311,7 @@ void engine::Draw()
 
    /* Draw Particles */
    glPushMatrix();
-      particula3->NextStep(segundos);
-      particula->NextStep(segundos);
-      particula4->NextStep(segundos);
-      particula5->NextStep(segundos);
-      particula7->NextStep(segundos);
-      particula6->NextStep(segundos);
-      particula2->NextStep(segundos);
+      particleSystem->actualizeAll();
    glPopMatrix();
 
    /* Draw the GUI and others */
