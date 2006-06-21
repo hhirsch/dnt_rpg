@@ -135,47 +135,54 @@ class engine
        ***************************************************************/
       int  TrataES(SDL_Surface *screen,int *forcaAtualizacao);
 
-      /* Trata a IA dos NPCS */
+      /* Threat NPCs IA TODO not here!*/
       inline void verificaQuad(Square* quad);
       inline void verificaLinha(Square* centro);
       int TrataIA();
 
-      /* Testa Colisão do personagem no ponto determinado. */
+      /*************************************************************** 
+       * Reason: Threat PC Colision
+       * Param:
+       *        varX, varZ -> Variation Position
+       *        varAlpha -> Variation angle
+       ***************************************************************/
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
-
+      /*************************************************************** 
+       * Reason: Draws the sky sphere to the list
+       * Param:
+       *        lats -> How many latitudes
+       *        longs -> How many longitudes
+       ***************************************************************/
       void drawSphereToList(int lats, int longs);
 
-      Map* mapa;                   /* Mapa Utilizado pela Engine */
+      Map* mapa;                   /* Actual Engine Map */
       cursor* cursors;             /* Utilized mouse cursors */
  
-      GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
-      GLUquadricObj* atmosfera;    /* Poligono da Atmosfera, onde fica o ceu */
-      GLuint listAtmosfera;
-      GLuint ceu;                  /* Textura do Ceu, quando utilizado */
-      int mouseX,mouseY;           /* Coordenada Atual do Mouse na Tela */
-      double xReal, zReal, yReal;  /* Coordenada Atual do Mouse no Mundo */
+      GLfloat matrizVisivel[6][4]; /* Actual Frustum Matrix */
+      GLuint listAtmosfera;        /* Sky List */
+      GLuint ceu;                  /* Sky Texture */
+      int mouseX,mouseY;           /* Actual mouse coordinates on screen */
+      double xReal, zReal, yReal;  /* Actual mouse coordinates on World */
 
-      //texturasLista* listaTexturas;
-
-      quadroTexto* FPS;            /* Quadro de Texto que mostra o n. de FPS */
-      quadroTexto* ObjTxt;         /* Mostra o Objeto Atual */
-      janela* janAtalhos;          /* Janela de Atalhos */
-      janela* janMiniMapa;         /* Janela do Mini Mapa */
-
-      botao* botPerMiniMap;
+      quadroTexto* FPS;            /* Text that shows FPS */
+      quadroTexto* ObjTxt;         /* Text that shows actual pointed object */
+      janela* janAtalhos;          /* ShortCuts Window */
+      janela* janMiniMapa;         /* MiniMap Window */
+      botao* botPerMiniMap;        /* MiniMap Button */
    
-      Uint32 ultimaLeitura;        /* Ultima leitura da posicao do teclado */
-      Uint32 ultimoMouse;          /* Ultima Leitura dos objetos apontados */
-      Uint32 ultimaPressaoMouse;   /* Ultima Pressao do Mouse nos objetos */
-      Uint32 ultimaFPS;            /* Ultima FPS obtida */
-      double FPSatual;             /* FPS Atual */
+      Uint32 ultimaLeitura;        /* Last Verification */
+      Uint32 ultimoMouse;          /* Last read from mouse */
+      Uint32 ultimaPressaoMouse;   /* Last mouse pressure */
+      Uint32 ultimaFPS;            /* Last obtained FPS */
+      Uint32 ultimaKeyb;           /* Last read from keybord */
+      double FPSatual;             /* Actual FPS */
 
       sound* snd;                  /* Actual Sounds thing */
       Mix_Music* musica;           /* Actual playing music */
       options* option;             /* Current Options */
 
-      AI* ia;                      /* Modulo de IA. Temporiamente aqui. */
+      AI* ia;                      /* IA Module. TODO Not Here. */
 
       lang language;               /* Language struct: internationalization */
 

@@ -10,6 +10,9 @@
 #include <SDL/SDL_image.h>
 #include "../etc/glm.h"
 
+#define REFRESH_RATE 170
+
+
 /********************************************************************
  *                      Engine's Variables                          *
  ********************************************************************/
@@ -58,6 +61,7 @@ engine::engine()
    /* Initialize readModes variables */
    ultimaLeitura = SDL_GetTicks();
    ultimoMouse = ultimaLeitura;
+   ultimaKeyb = ultimaLeitura;
    mouseX = 0;
    mouseY = 0;
 
@@ -107,7 +111,6 @@ engine::~engine()
    delete(option);
 
    /* Clear Sky */
-   gluDeleteQuadric(atmosfera);
    glDeleteLists(listAtmosfera,1);
    glDeleteTextures(1, &ceu);
 
@@ -584,8 +587,6 @@ void engine::Init(SDL_Surface *screen)
    //glEnable(GL_LIGHT1);
   
    /* Sky Creation */
-   atmosfera = gluNewQuadric ();
-   gluQuadricTexture(atmosfera, GL_TRUE);
    drawSphereToList(10,10);
 
    SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
@@ -657,12 +658,12 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       }
 
       /* Calculate the real Modification on walk, rotate, turn, etc */
-      varTempo /= 20.0;
-      passo = (varTempo)*ANDAR;
+      double vt = varTempo / 20.0;
+      passo = (vt)*ANDAR;
       if(passo > 9)
         passo = 9;  /* To avoid phantom efects when LAGs occurs */
-      rotacao = (varTempo)*GIRAR;
-      varCamera = varTempo*DELTACAMERA;
+      rotacao = (vt)*GIRAR;
+      varCamera = vt*DELTACAMERA;
       
       FPSatual = (FPSatual + (1000.0 / varTempo)) / 2; 
      
@@ -920,40 +921,45 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
         }
       }
 
-      /* Keyboar Verification */
-      if ( keys[SDLK_ESCAPE] ) // Exit Engine
-         return(0);
+      if(tempo-ultimaKeyb >= REFRESH_RATE)
+      {
+         ultimaKeyb = tempo;
+         /* Keyboard Verification */
+         if ( keys[SDLK_ESCAPE] ) // Exit Engine
+            return(0);
 
-      if(keys[SDLK_m]) //Open Minimap
-      {
-          if(!janMiniMapa)
-          {
-             OpenMiniMapWindow();
-             redesenha = true;
-          }
-      }
+         if(keys[SDLK_m]) //Open Minimap
+         {
+             if(!janMiniMapa)
+             {
+               OpenMiniMapWindow();
+               redesenha = true;
+             }
+         }
 
-      /* Temporariamente, para visualizar o efeito de sangue */
-      if(keys[SDLK_p])
-      {
-          particleSystem->addParticle(PART_BLOOD,
-                                 PCs->personagemAtivo->posicaoLadoX,28,
-                                 PCs->personagemAtivo->posicaoLadoZ, 
-                                 "../data/particles/blood1.par");
-      }
-      if(keys[SDLK_o])
-      {
-          particleSystem->addParticle(PART_BLOOD,
-                                      PCs->personagemAtivo->posicaoLadoX,28,
-                                      PCs->personagemAtivo->posicaoLadoZ, 
-                                      "../data/particles/blood2.par");
-      }
-      if(keys[SDLK_l])
-      {
-         particleSystem->addParticle(PART_LIGHTNING,
-                                     PCs->personagemAtivo->posicaoLadoX,250,
-                                     PCs->personagemAtivo->posicaoLadoZ,
-                                     "../data/particles/lightning1.par");
+         /* Temporariamente, para visualizar o efeito de sangue */
+         if(keys[SDLK_p])
+         {
+             particleSystem->addParticle(PART_BLOOD,
+                                    PCs->personagemAtivo->posicaoLadoX,28,
+                                    PCs->personagemAtivo->posicaoLadoZ, 
+                                    "../data/particles/blood1.par");
+         }   
+         if(keys[SDLK_o])
+         {
+             particleSystem->addParticle(PART_BLOOD,
+                                         PCs->personagemAtivo->posicaoLadoX,28,
+                                         PCs->personagemAtivo->posicaoLadoZ, 
+                                         "../data/particles/blood2.par");
+         }
+         if(keys[SDLK_l])
+         {
+            particleSystem->addParticle(PART_LIGHTNING,
+                                        PCs->personagemAtivo->posicaoLadoX,250,
+                                        PCs->personagemAtivo->posicaoLadoZ,
+                                        "../data/particles/lightning1.par");
+         }
+
       }
 
       if(keys[SDLK_n])

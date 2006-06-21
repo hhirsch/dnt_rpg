@@ -5,6 +5,9 @@
 
 #include "bartexto.h"
 
+#define REFRESH_RATE 170
+
+
 barraTexto::barraTexto()
 {
 }
@@ -85,32 +88,32 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
       pronto = 1;
    /* Teclas de Movimentacao */
    else
-   if ( (teclas[SDLK_HOME]) && ((ult - ultEsc) >= 100))
+   if ( (teclas[SDLK_HOME]) && ((ult - ultEsc) >= REFRESH_RATE))
    {
        pos = 0;
        ultEsc = ult;
    }
    else
-   if ( (teclas[SDLK_END]) && ((ult - ultEsc) >= 100))
+   if ( (teclas[SDLK_END]) && ((ult - ultEsc) >= REFRESH_RATE))
    {
        pos = texto.length();
        ultEsc = ult;
    }
    else
-   if ((teclas[SDLK_RIGHT]) && ((ult - ultEsc) >= 100))
+   if ((teclas[SDLK_RIGHT]) && ((ult - ultEsc) >= REFRESH_RATE))
    {
        if(pos<texto.length()) pos++; 
        ultEsc = ult;
    }
    else
-   if ((teclas[SDLK_LEFT]) && ((ult - ultEsc) >= 100))
+   if ((teclas[SDLK_LEFT]) && ((ult - ultEsc) >= REFRESH_RATE))
    {
        if(pos>0) pos--;
        ultEsc = ult;
    }
    else
       /* Teclas de Apagar */
-   if( (teclas[SDLK_DELETE]) && ((ult - ultEsc) >= 100))
+   if( (teclas[SDLK_DELETE]) && ((ult - ultEsc) >= REFRESH_RATE))
    {
        if(pos<texto.length())
        {   
@@ -120,7 +123,7 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
        ultEsc = ult;
    }
    else
-   if((teclas[SDLK_BACKSPACE]) && ((ult - ultEsc) >= 100))
+   if((teclas[SDLK_BACKSPACE]) && ((ult - ultEsc) >= REFRESH_RATE))
    {
       if(pos>0)
       {
@@ -491,7 +494,7 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
           else
             c[0] = ' ';
       }      
-      if( (((ult - ultEsc) >= 100) || (ultChar!=c[0])) && 
+      if( (((ult - ultEsc) >= REFRESH_RATE) || (ultChar!=c[0])) && 
           (c[0]!=-1))
       {
         ultChar = c[0];
