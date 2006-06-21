@@ -119,6 +119,8 @@ void particleSystem::init(int total, int mode)
       vertexArray = NULL;
       colorArray = NULL;
    }
+   followPC = false;
+   windAffect = false;
 }
 
 /***************************************************************
@@ -262,4 +264,10 @@ void particleSystem::Save( string fileName)
                            dSumVel[2] << "\n";
 
    file.close();
+}
+
+void particleSystem::definePosition(float cX, float cZ)
+{
+   centerX = cX;
+   centerZ = cZ;
 }

@@ -101,9 +101,14 @@ class particleSystem
        ***************************************************************/
       void DoStep(); 
 
+      void definePosition(float cX, float cZ);
+
+
       /* Public Variables */
       int actualParticles;   /* Number of actual alive particles */
       int drawMode;          /* DrawMode of the system */
+      bool followPC;         /* If the orign of System Follows PC */
+      bool windAffect;       /* If Wind Affects the System */
       
 
       /* The OpenGL extended point functions */

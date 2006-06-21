@@ -552,10 +552,8 @@ Lpersonagem::~Lpersonagem()
 /*********************************************************************
  *                    Insere Personagem na Lista                     *
  *********************************************************************/
-personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,
-                                           int inteligencia,
-                                           int esperteza, char* retrato,
-                                           string nome, string arqmodelo)
+personagem* Lpersonagem::InserirPersonagem(char* retrato, string nome, 
+                                           string arqmodelo)
 
 {
    personagem* novo;
@@ -565,10 +563,6 @@ personagem* Lpersonagem::InserirPersonagem(int forca,int agilidade,
    //novo->x = x;
    //novo->y = y;
    novo->tipo = PERSONAGEM;
-   novo->forca        = forca;
-   novo->agilidade    = agilidade;
-   novo->inteligencia = inteligencia;
-   novo->esperteza    = esperteza;
    novo->armaAtual = NULL;
    novo->orientacao = 0.0;
    novo->posicaoFrente = 0.0;

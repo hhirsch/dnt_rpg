@@ -170,7 +170,7 @@ int conversa::ProcessaAcao(int numDialogo, int opcao,interface* gui,
          return(numDialogo);
       break;
       case ACTION_FIGHT:
-         NPC->amigavel = false; //brigar
+         //NPC->amigavel = false; //brigar
       break;
       case ACTION_CLOSE:
          jan->Fechar(gui->ljan);

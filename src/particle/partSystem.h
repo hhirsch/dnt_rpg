@@ -43,7 +43,7 @@ class partSystem
        * Reason: Actualize and Render all Active Systems
        * Param:
        ***************************************************************/
-      void actualizeAll();
+      void actualizeAll(float PCposX, float PCposZ);
 
       /*************************************************************** 
        * Reason: add a Particle System to the System
@@ -54,8 +54,8 @@ class partSystem
        * Returns:
        *        particle address;
        ***************************************************************/
-      particle* addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
-                            string fileName );
+      particleSystem* addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
+                                  string fileName );
 
       /*************************************************************** 
        * Reason: Remove an particle system from the system
@@ -63,7 +63,7 @@ class partSystem
        *       type -> the type of the System (PART_BLOOD, PART_FIRE)
        *       part -> address of the Particle
        ***************************************************************/
-      void removeParticle(int type, particle* part);
+      void removeParticle(int type, particleSystem* part);
 
       /*************************************************************** 
        * Reason: Returns the total numbers of particles

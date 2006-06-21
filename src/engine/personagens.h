@@ -30,17 +30,6 @@ class personagem: public Tobjeto
 
       int m_state;
 
-      int agilidade;            // agility
-      int bovinice;             // taylor's bovinice
-      int brutalidade;          // brutality
-      int esperteza;            // wisdow
-      int forca;                // strong
-      int gambiarrice;          // gambiarry
-      int inteligencia;         // inteligency
-      int odio;                 // hate
-
-      bool amigavel;            //friendly 
- 
       Tlista *retrato;          // portraits
       Tlista *objetos;          // objetos do personagem
       Tobjeto *armaAtual;       // armaAtual do personagem
@@ -115,11 +104,8 @@ class Lpersonagem: public Tlista
        * x,y                     -> coordenada do personagem no Mapa
        * nome                    -> Nome do Personagem
        * arqmodelo               -> nome do arquivo do modelo3d do personagem*/
-      personagem* InserirPersonagem(int forca,int agilidade,
-                          int inteligencia,
-                          int esperteza, char* retrato,
-                          string nome, string arqmodelo);
-
+      personagem* InserirPersonagem(char* retrato,string nome,string arqmodelo);
+                                    
       /* Retira um Personagem da Lista
        * persona -> ponteiro para o personagem que se deseja retirar
        * tiraMemoria -> != 0 se eh para retirar realmente o personagem 

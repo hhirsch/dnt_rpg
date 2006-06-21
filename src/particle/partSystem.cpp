@@ -93,55 +93,97 @@ partSystem::~partSystem()
 
 }
 
-void partSystem::actualizeAll()
+void partSystem::actualizeAll(float PCposX, float PCposZ)
 {
    int i;
    
    for(i = 0; i < MAX_WATERFALL; i++)
    {
       if( waterfall[i] != NULL)
+      {
+         if(waterfall[i]->followPC)
+         {
+            waterfall[i]->definePosition(PCposX, PCposZ);
+         }
          waterfall[i]->NextStep(0.0);
+      }
    }
 
    for(i = 0; i < MAX_FIRE; i++)
    {
       if(fire[i] != NULL)
+      {
+         if(fire[i]->followPC)
+         {
+            fire[i]->definePosition(PCposX, PCposZ);
+         }
          fire[i]->NextStep(0.0);
+      }
    }
 
    for(i = 0; i < MAX_WATER_SURFACE; i++)
    {
       if(waterSurface[i] != NULL)
+      {
+         if(waterSurface[i]->followPC)
+         {
+            waterSurface[i]->definePosition(PCposX, PCposZ);
+         }
          waterSurface[i]->NextStep(0.0);
+      }
    }
 
    for(i = 0; i < MAX_SMOKE; i++)
    {
       if(smoke[i] != NULL)
+      {
+         if(smoke[i]->followPC)
+         {
+            smoke[i]->definePosition(PCposX, PCposZ);
+         }
          smoke[i]->NextStep(0.0);
+      }
    }
 
    for(i = 0; i < MAX_BLOOD; i++)
    {
       if(blood[i] != NULL)
+      {
+         if(blood[i]->followPC)
+         {
+            blood[i]->definePosition(PCposX, PCposZ);
+         }
          blood[i]->NextStep(0.0);
+      }
    }
 
    for(i = 0; i < MAX_LIGHTNING; i++)
    {
       if(lightning[i] != NULL)
+      {
+         if(lightning[i]->followPC)
+         {
+            lightning[i]->definePosition(PCposX, PCposZ);
+         }
          lightning[i]->NextStep(0.0);
+      }
    }
 
    for(i = 0; i < MAX_SNOW; i++)
    {
       if(snow[i] != NULL)
-        snow[i]->NextStep(0.0);
+      {
+         if(snow[i]->followPC)
+         {
+            snow[i]->definePosition(PCposX, PCposZ);
+         }
+         snow[i]->NextStep(0.0);
+      }
    }
 }
 
-particle* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
-                                  string fileName )
+particleSystem* partSystem::addParticle(int type, GLfloat X, GLfloat Y, 
+                                        GLfloat Z, string fileName )
 { 
    int i;
 
@@ -153,7 +195,7 @@ particle* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
              if( waterfall[i] == NULL)
              {
                  waterfall[i] = new part1(X,Y,Z,fileName);
-                 return((particle*)waterfall[i]);
+                 return(waterfall[i]);
              }
           }
           if(i == MAX_WATERFALL)
@@ -167,7 +209,7 @@ particle* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
              if( fire[i] == NULL)
              {
                  fire[i] = new part2(X,Y,Z,fileName);
-                 return((particle*)fire[i]);
+                 return(fire[i]);
              }
           }
           if(i == MAX_FIRE)
@@ -181,7 +223,7 @@ particle* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
              if( waterSurface[i] == NULL)
              {
                  waterSurface[i] = new part3(X,Y,Z);
-                 return((particle*)waterSurface[i]);
+                 return(waterSurface[i]);
              }
           }
           if(i == MAX_WATER_SURFACE)
@@ -195,7 +237,7 @@ particle* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
              if( smoke[i] == NULL)
              {
                  smoke[i] = new part4(X,Y,Z,fileName);
-                 return((particle*)smoke[i]);
+                 return(smoke[i]);
              }
           }
           if(i == MAX_SMOKE)
@@ -209,7 +251,7 @@ particle* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
              if( blood[i] == NULL)
              {
                  blood[i] = new part5(X,Y,Z,fileName);
-                 return((particle*)blood[i]);
+                 return(blood[i]);
              }
           }
           if(i == MAX_BLOOD)
@@ -223,7 +265,7 @@ particle* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
              if( lightning[i] == NULL)
              {
                  lightning[i] = new part6(X,Y,Z,fileName);
-                 return((particle*)lightning[i]);
+                 return(lightning[i]);
              }
           }
           if(i == MAX_LIGHTNING)
@@ -237,7 +279,7 @@ particle* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
              if( snow[i] == NULL)
              {
                  snow[i] = new part7(X,Y,Z,fileName);
-                 return((particle*)snow[i]);
+                 return(snow[i]);
              }
           }
           if(i == MAX_SNOW)
@@ -250,7 +292,7 @@ particle* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
    return(NULL);
 }
 
-void partSystem::removeParticle(int type, particle* part)
+void partSystem::removeParticle(int type, particleSystem* part)
 { 
    int i;
 
@@ -259,7 +301,7 @@ void partSystem::removeParticle(int type, particle* part)
        case PART_WATERFALL:
           for(i = 0; i < MAX_WATERFALL; i++)
           {
-             if( (particle*)waterfall[i] == part)
+             if( (particleSystem*)waterfall[i] == part)
              {
                  delete(waterfall[i]);
                  waterfall[i] = NULL;
@@ -270,7 +312,7 @@ void partSystem::removeParticle(int type, particle* part)
        case PART_FIRE:
           for(i = 0; i < MAX_FIRE; i++)
           {
-             if( (particle*)fire[i] == part)
+             if( (particleSystem*)fire[i] == part)
              {
                  delete(fire[i]);
                  fire[i] = NULL;
@@ -281,7 +323,7 @@ void partSystem::removeParticle(int type, particle* part)
        case PART_WATER_SURFACE:
           for(i = 0; i < MAX_WATER_SURFACE; i++)
           {
-             if( (particle*)waterSurface[i] == part)
+             if( (particleSystem*)waterSurface[i] == part)
              {
                  delete(waterSurface[i]);
                  waterSurface[i] = NULL;
@@ -292,7 +334,7 @@ void partSystem::removeParticle(int type, particle* part)
        case PART_SMOKE:
           for(i = 0; i < MAX_SMOKE; i++)
           {
-             if( (particle*)smoke[i] == part)
+             if( (particleSystem*)smoke[i] == part)
              {
                  delete(smoke[i]);
                  smoke[i] = NULL;
@@ -303,7 +345,7 @@ void partSystem::removeParticle(int type, particle* part)
        case PART_BLOOD:
           for(i = 0; i < MAX_BLOOD; i++)
           {
-             if( (particle*)blood[i] == part)
+             if( (particleSystem*)blood[i] == part)
              {
                  delete(blood[i]);
                  blood[i] = NULL;
@@ -314,7 +356,7 @@ void partSystem::removeParticle(int type, particle* part)
        case PART_LIGHTNING:
           for(i = 0; i < MAX_LIGHTNING; i++)
           {
-             if( (particle*)lightning[i] == part)
+             if( (particleSystem*)lightning[i] == part)
              {
                  delete(lightning[i]);
                  lightning[i] = NULL;
@@ -325,7 +367,7 @@ void partSystem::removeParticle(int type, particle* part)
        case PART_SNOW:
           for(i = 0; i < MAX_SNOW; i++)
           {
-             if( (particle*)snow[i] == part)
+             if( (particleSystem*)snow[i] == part)
              {
                  delete(snow[i]);
                  snow[i] = NULL;

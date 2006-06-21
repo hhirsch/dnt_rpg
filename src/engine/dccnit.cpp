@@ -262,9 +262,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
            atualizaCarga(img,&texturaTexto,texturaCarga,
                          texto,
                          proj, modl, viewPort);
-           per = NPCs->InserirPersonagem(2,2,5,3,
-                                 "../data/pics/logan/portrait.jpg",nome,
-                                 arquivo);
+           per = NPCs->InserirPersonagem("../data/pics/logan/portrait.jpg",
+                                         nome,arquivo);
            per->posicaoLadoX = posX;
            per->posicaoLadoZ = posZ;
          }
@@ -282,7 +281,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
        atualizaCarga(img,&texturaTexto,texturaCarga,
                  texto,
                  proj, modl, viewPort);
-       per = PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
+       per = PCs->InserirPersonagem("../data/pics/logan/portrait.jpg",
                               "Logan",
                        "../data/models/personagens/Logan/modelo.cfg");
        /*atualizaCarga(img,&texturaTexto,texturaCarga,
@@ -940,17 +939,21 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          /* Temporariamente, para visualizar o efeito de sangue */
          if(keys[SDLK_p])
          {
-             particleSystem->addParticle(PART_BLOOD,
+            part5 *p;
+            p =  (part5*)particleSystem->addParticle(PART_BLOOD,
                                     PCs->personagemAtivo->posicaoLadoX,28,
                                     PCs->personagemAtivo->posicaoLadoZ, 
                                     "../data/particles/blood1.par");
+            p->followPC = true;
          }   
          if(keys[SDLK_o])
          {
-             particleSystem->addParticle(PART_BLOOD,
+             part5 *p;
+             p = (part5*) particleSystem->addParticle(PART_BLOOD,
                                          PCs->personagemAtivo->posicaoLadoX,28,
                                          PCs->personagemAtivo->posicaoLadoZ, 
                                          "../data/particles/blood2.par");
+             p->followPC = true;
          }
          if(keys[SDLK_l])
          {
@@ -1317,7 +1320,8 @@ void engine::Draw()
 
    /* Draw Particles */
    glPushMatrix();
-      particleSystem->actualizeAll();
+      particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
+                                   PCs->personagemAtivo->posicaoLadoZ);
    glPopMatrix();
 
    /* Draw the GUI and others */

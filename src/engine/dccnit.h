@@ -175,7 +175,7 @@ class engine
       Uint32 ultimoMouse;          /* Last read from mouse */
       Uint32 ultimaPressaoMouse;   /* Last mouse pressure */
       Uint32 ultimaFPS;            /* Last obtained FPS */
-      Uint32 ultimaKeyb;           /* Last read from keybord */
+      Uint32 ultimaKeyb;           /* Last read from keyboard */
       double FPSatual;             /* Actual FPS */
 
       sound* snd;                  /* Actual Sounds thing */
