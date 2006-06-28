@@ -188,6 +188,8 @@ class engine
 
       partSystem* particleSystem;  /* The Particle System */
       GLfloat segundos; 
+      
+      int imgNumber;
 };
 
 #endif

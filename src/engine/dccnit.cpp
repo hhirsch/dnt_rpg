@@ -30,7 +30,7 @@ engine::engine()
    NPCs = NULL;
    janMiniMapa = NULL;
    janAtalhos = NULL;
-
+   imgNumber = 0;
    /* Define Camera initial Position */
    theta=25;
    phi=0;
@@ -79,15 +79,14 @@ engine::engine()
    particula->addPlane(160,20,110,175,20,130,-1,0,PLANE_NO_INCLINATION);
 
    particleSystem->addParticle(PART_FIRE,200,0,220,
-                                          "../data/particles/firescimitar.par");
+                                          "../data/particles/fire1.par");
+
+   particleSystem->addParticle(PART_FIRE,200,0,350,
+                                          "../data/particles/fire2.par");
    particleSystem->addParticle(PART_WATER_SURFACE,300,20,300,"");
-   particleSystem->addParticle(PART_SMOKE,240,0,220,
-                                                "../data/particles/smoke1.par");
-   particleSystem->addParticle(PART_BLOOD,120,30,300,
-                                                "../data/particles/blood1.par");
-   particleSystem->addParticle(PART_LIGHTNING,50,250,100,
-                                            "../data/particles/lightning1.par");
-   particleSystem->addParticle(PART_SNOW,100,80,100,
+   particleSystem->addParticle(PART_SMOKE,240,0,340,
+                                          "../data/particles/smoke1.par");
+   particleSystem->addParticle(PART_SNOW,340,80,100,
                                                  "../data/particles/snow1.par");
 }
 
@@ -608,6 +607,18 @@ void engine::Init(SDL_Surface *screen)
    SDL_FreeSurface(img);
 }
 
+
+void ScreenDump(char *destFile, short W, short H) 
+{
+  FILE   *out = fopen(destFile, "w");
+  char   pixel_data[3*W*H];
+  short  TGAhead[] = {0, 2, 0, 0, 0, 0, W, H, 24};
+  glReadBuffer(GL_FRONT);
+  glReadPixels(0, 0, W, H, GL_BGR, GL_UNSIGNED_BYTE, pixel_data);
+  fwrite(&TGAhead, sizeof(TGAhead), 1, out);
+  fwrite(pixel_data, 3*W*H, 1, out);
+  fclose(out); 
+}
 
 /*********************************************************************
  *                   Threat Input/Output Events                      *
@@ -1216,9 +1227,20 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
          janMiniMapa->Desenhar(mouseX, mouseY);
       }
-  
+      
       Draw();
       SDL_GL_SwapBuffers();
+      char name[50];
+      if(imgNumber < 10)
+         sprintf(name,"img/teste000%d.tga",imgNumber);
+      else if(imgNumber < 100)
+         sprintf(name,"img/teste00%d.tga",imgNumber);
+      else if(imgNumber < 1000)
+         sprintf(name,"img/teste0%d.tga",imgNumber);
+      else
+         sprintf(name,"img/teste%d.tga",imgNumber);
+      //ScreenDump(name,800,600);
+      imgNumber++;
       *forcaAtualizacao = 0;
    }
  
