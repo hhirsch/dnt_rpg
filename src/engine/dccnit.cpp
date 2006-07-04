@@ -683,7 +683,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       {
          ultimaFPS = tempo;
          char texto[15];
-         sprintf(texto,"FPS: %3.2f",50.0/*1000.0 / (tempo-ultimaLeitura)*/);
+         sprintf(texto,"FPS: %3.2f",1000.0 / (tempo-ultimaLeitura));
          FPS->texto = texto;
          sprintf(texto,"    Part: %d",particleSystem->numParticles());
          FPS->texto += texto;
