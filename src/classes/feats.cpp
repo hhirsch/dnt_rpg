@@ -120,6 +120,10 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
       if(diceValue - target.armatureClass <= 0)
       {
          brief += "Miss.";
+         if( diceValue <= 2)
+         {
+             brief += " Critical Miss!" ;
+         }
          return(true);
       }
       else
@@ -142,7 +146,7 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
       /* apply damage on thing */
       target.lifePoints -= damage;
 
-      if( diceValue >= 18)
+      if( diceValue >= 19)
       {
           brief += " Critical Hit!" ;
       }
