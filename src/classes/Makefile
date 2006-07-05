@@ -6,7 +6,7 @@ CLIBS = -lGLU -lGL -lSDL -lSDL_image
 BINDIR = ../../bin/
 ENDGUI = ../gui/
 DIRENGINE = ../engine/
-objetos = skills.o feats.o defs.o actions.o
+objetos = skills.o feats.o defs.o actions.o thing.o
 
 
 all: $(objetos)
@@ -34,6 +34,11 @@ feats.o: feats.cpp feats.h actions.h defs.h dices.h
 actions.o: actions.cpp actions.h
 	@printf "Making actions.o... "
 	@$(CC) $(CFLAGS) actions.cpp -o actions.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+thing.o: thing.cpp thing.h
+	@printf "Making thing.o... "
+	@$(CC) $(CFLAGS) thing.cpp -o thing.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 teste: $(objetos) teste.cpp

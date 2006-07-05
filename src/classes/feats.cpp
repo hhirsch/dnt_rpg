@@ -3,6 +3,9 @@
 #include "actions.h"
 #include <SDL/SDL_image.h>
 
+/**************************************************************************
+ *                                    FEAT                                *
+ **************************************************************************/
 
 feats::feats()
 {
@@ -14,26 +17,26 @@ feats::~feats()
    totalFeats = 0;
 }
 
-feat feats::featByNumber(int featNumber)
+feat* feats::featByNumber(int featNumber)
 {
    if( (featNumber > 0) && (featNumber < totalFeats) )
    {
-      return(m_feats[featNumber]);
+      return(&m_feats[featNumber]);
    }
-   return(m_feats[0]);
+   return(NULL);
 }
 
-feat feats::featByName(string featName)
+feat* feats::featByName(string featName)
 {
    int i;
    for(i=0;i<totalFeats;i++)
    {
       if(featName.compare(m_feats[i].name) == 0)
       {
-         return(m_feats[i]);
+         return(&m_feats[i]);
       }
    }
-   return(m_feats[0]);
+   return(NULL);
 }
 
 bool feats::insertFeat(featDescription featInsert)
@@ -51,6 +54,7 @@ bool feats::insertFeat(featDescription featInsert)
       m_feats[totalFeats].actionType = featInsert.actionType;
       m_feats[totalFeats].action = featInsert.action;
       m_feats[totalFeats].name = featInsert.name;
+      m_feats[totalFeats].diceInfo = featInsert.diceInfo;
       for(i = 0; i < MAX_DEP_FEATS; i++)
       {
          m_feats[totalFeats].depFeats[i].reason = featInsert.depFeats[i].reason;
@@ -64,6 +68,103 @@ bool feats::insertFeat(featDescription featInsert)
    return(false);
 }
 
+void feats::useFeat(int featNumber)
+{
+   int i;
+   feat* ft;
+   m_feats[featNumber].actualQuantity--;
+   for(i=0;i<MAX_DEP_FEATS;i++)
+   {
+       if(m_feats[featNumber].depFeats[i].used)
+       {
+          ft = featByName(m_feats[featNumber].depFeats[i].featName);
+          ft->actualQuantity -= 1.0 / m_feats[featNumber].depFeats[i].reason;
+       }
+   }
+}
+
+
+bool feats::applyAttackAndBreakFeat(int featNumber, thing& target, 
+                                      string& brief)
+{
+   int diceValue;
+   int damage = 0;
+   int i;
+   char texto[15];
+
+   if( (featNumber < 0) || (featNumber >= totalFeats) )
+   {
+      brief = "Invalid Feat!";
+      return(false);
+   }
+
+   srand(SDL_GetTicks());
+
+   if( (m_feats[featNumber].actualQuantity >= m_feats[featNumber].costToUse)
+       || (m_feats[featNumber].costToUse) > 0 )
+   {
+      sprintf(texto,"%s ",m_feats[featNumber].name.c_str());
+      brief = texto;
+      /* apply Costs */
+      useFeat(featNumber);
+      //TODO verify if can use or not based on target thing
+
+      diceValue = (rand() % DICE_D20); 
+      sprintf(texto,"%d x %d : ",diceValue,target.armatureClass);
+      brief += texto;
+      //TODO apply reflexes bonus, esquive bonus, etc 
+      /*TODO apply resistances  */
+
+      //TODO apply bonus (skill bonus)
+
+      if(diceValue - target.armatureClass <= 0)
+      {
+         brief += "Miss.";
+         return(true);
+      }
+      else
+      {
+         brief += "Hit for ";
+      }
+
+      /* Apply Base Damage Dices */
+      for(i = 0; i < m_feats[featNumber].diceInfo.baseDice.numberOfDices; i++)
+      {
+          damage += rand() % m_feats[featNumber].diceInfo.baseDice.diceID;
+      }
+      damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
+
+      sprintf(texto,"%d points.",damage);
+      brief += texto;
+
+      /*TODO apply aditional dices */
+
+      /* apply damage on thing */
+      target.lifePoints -= damage;
+
+      if( diceValue >= 18)
+      {
+          brief += " Critical Hit!" ;
+      }
+
+      return(true);
+   }
+   brief = "Not Enough Points to Use!";
+   return(false);
+}
+
+void feats::newDay()
+{
+   int i;
+   for(i=0;i<totalFeats;i++)
+   {
+      m_feats[i].actualQuantity = m_feats[i].quantityPerDay;
+   }
+}
+
+/**************************************************************************
+ *                           FEAT DESCRIPTION                             *
+ **************************************************************************/
 featsList::featsList(string dir, string arq)
 {
    FILE* file;
@@ -75,6 +176,9 @@ featsList::featsList(string dir, string arq)
    int num;
    int i;
    int aux;
+
+//   srand(SDL_GetTicks());
+
    if(!(file=fopen(arq.c_str(),"r")))
    {
        printf("Error while opening feats list: %s\n",arq.c_str());
@@ -165,5 +269,4 @@ featDescription featsList::featByNumber(int featNumber)
    }
    return(m_feats[0]);
 }
-
 

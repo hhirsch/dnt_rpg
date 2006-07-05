@@ -27,6 +27,7 @@ class skills
    public:
       skills(string dir, string arq);
       skills(skills* sk);
+      skills();
       ~skills();
 
      skill m_skills[MAX_SKILLS];

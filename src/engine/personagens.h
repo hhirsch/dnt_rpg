@@ -10,6 +10,7 @@
 #include "../gui/figura.h"
 #include "../gui/objeto.h"
 #include "../gui/lista.h"
+#include "../classes/thing.h"
 //#include "habilidades.h"
 //#include "../etc/glm.h"
 #include <cal3d/cal3d.h> //for now, utilising cal3d
@@ -24,7 +25,7 @@ using namespace std;
 #define STATE_WALK  1
 
 
-class personagem: public Tobjeto
+class personagem: public Tobjeto, public thing
 {
    public:
 

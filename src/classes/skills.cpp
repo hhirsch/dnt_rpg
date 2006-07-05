@@ -61,6 +61,52 @@ skills::skills(skills* sk)
       m_skills[aux].habilidadeBase = sk->m_skills[aux].habilidadeBase;
       m_skills[aux].imagem = NULL;
    }
+}
+
+skills::skills()
+{
+   FILE* file;
+   string arqDescricao;
+   string arqImagem;
+   char buffer[1024];
+   char buf2[128];
+   char buf3[128];
+   int num;
+   if(!(file=fopen("../data/skills/skills.skl","r")))
+   {
+       printf("Error while opening skills list: ../data/skills/skills.skl\n");
+       return;
+   }
+   
+   int aux;
+   for(aux = 0; aux<MAX_SKILLS; aux++)
+   {
+      //fscanf(file,"%d %s",&num,&buffer[0]);
+      fgets(buffer, sizeof(buffer), file);
+      sscanf(buffer,"%d %s %s",&num,&buf2[0],&buf3[0]);
+      arqImagem = buf3;
+      arqDescricao = buf2;
+      arqDescricao = "../data/skills/Portugues/"+arqDescricao;
+
+      FILE* desc;
+      if(! (desc = fopen(arqDescricao.c_str(), "r")))
+      {
+         printf("Can't open skill file: %s \n",arqDescricao.c_str() );
+         return;
+      }
+      fgets(buffer, sizeof(buffer), desc);
+      m_skills[aux].nome = buffer;
+      fgets(buffer, sizeof(buffer), desc);
+      m_skills[aux].descricao = "";
+      fscanf(desc,"%d",&m_skills[aux].habilidadeBase);
+      m_skills[aux].pontos = 0;
+      m_skills[aux].mod = 2;
+      m_skills[aux].antPontos = 0;
+      m_skills[aux].imagem = NULL;//IMG_Load(arqImagem.c_str());
+      fclose(desc);
+   }
+
+   fclose(file);
 
 }
 

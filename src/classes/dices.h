@@ -25,7 +25,7 @@ typedef struct _dice
 typedef struct _diceThing
 {
    /* Note: the number is calculated by: 
-        baseDice + ((level-initialLevel)/aditionalLevels)*aditionalDice
+        baseDice + SUM((level-initialLevel)/aditionalLevels)*aditionalDice
         And Level can be anything that is needed, from level itself to 
         skills and base attributes.
     */
