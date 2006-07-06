@@ -98,7 +98,7 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
       return(false);
    }
 
-   srand(SDL_GetTicks());
+   srand48(SDL_GetTicks());
 
    if( (m_feats[featNumber].actualQuantity >= m_feats[featNumber].costToUse)
        || (m_feats[featNumber].costToUse) > 0 )
@@ -109,7 +109,7 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
       useFeat(featNumber);
       //TODO verify if can use or not based on target thing
 
-      diceValue = (rand() % DICE_D20); 
+      diceValue = (lrand48() % DICE_D20); 
       sprintf(texto,"%d x %d : ",diceValue,target.armatureClass);
       brief += texto;
       //TODO apply reflexes bonus, esquive bonus, etc 
@@ -134,7 +134,7 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
       /* Apply Base Damage Dices */
       for(i = 0; i < m_feats[featNumber].diceInfo.baseDice.numberOfDices; i++)
       {
-          damage += rand() % m_feats[featNumber].diceInfo.baseDice.diceID;
+          damage += lrand48() % m_feats[featNumber].diceInfo.baseDice.diceID;
       }
       damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
 
