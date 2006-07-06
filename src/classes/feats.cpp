@@ -88,8 +88,11 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
                                       string& brief)
 {
    int diceValue;
+   int criticalRoll = -1;
    int damage = 0;
    int i;
+   bool criticalHit = false;
+   bool criticalMiss = false;
    char texto[15];
 
    if( (featNumber < 0) || (featNumber >= totalFeats) )
@@ -105,13 +108,47 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
    {
       sprintf(texto,"%s ",m_feats[featNumber].name.c_str());
       brief = texto;
+
       /* apply Costs */
       useFeat(featNumber);
+
       //TODO verify if can use or not based on target thing
 
-      diceValue = (lrand48() % DICE_D20); 
-      sprintf(texto,"%d x %d : ",diceValue,target.armatureClass);
+      diceValue = (lrand48() % DICE_D20)+1; 
+   
+      /* verify critical Hit */
+      if(diceValue == DICE_D20)
+      {
+          criticalRoll = lrand48() % DICE_D20 +1;
+          if((criticalRoll) - (target.armatureClass) > 0)
+          {
+              criticalHit = true;
+          }
+      }
+      else
+      /* verify critical Miss */
+      if( diceValue == 1)  
+      {
+          criticalRoll = (lrand48() % DICE_D20 +1);
+          if( (criticalRoll - target.armatureClass) <= 0 )
+          {
+             criticalMiss = true;
+          }
+      }
+
+      /* Put Dice Values on Briefing */
+      if(criticalRoll != -1)
+      {
+         sprintf(texto,"%d (%d) x %d : ",diceValue,criticalRoll,
+                                         target.armatureClass);
+      }
+      else
+      {
+         sprintf(texto,"%d x %d : ",diceValue,target.armatureClass);
+      }
       brief += texto;
+
+
       //TODO apply reflexes bonus, esquive bonus, etc 
       /*TODO apply resistances  */
 
@@ -120,7 +157,7 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
       if(diceValue - target.armatureClass <= 0)
       {
          brief += "Miss.";
-         if( diceValue <= 2)
+         if( criticalMiss )
          {
              brief += " Critical Miss!" ;
          }
@@ -134,9 +171,15 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
       /* Apply Base Damage Dices */
       for(i = 0; i < m_feats[featNumber].diceInfo.baseDice.numberOfDices; i++)
       {
-          damage += lrand48() % m_feats[featNumber].diceInfo.baseDice.diceID;
+          damage+=(lrand48() % m_feats[featNumber].diceInfo.baseDice.diceID)+1;
       }
       damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
+
+      /* Apply Critical Hit */
+      if(criticalHit)
+      {
+         damage *= 2;
+      }
 
       sprintf(texto,"%d points.",damage);
       brief += texto;
@@ -146,7 +189,7 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
       /* apply damage on thing */
       target.lifePoints -= damage;
 
-      if( diceValue >= 19)
+      if( criticalHit)
       {
           brief += " Critical Hit!" ;
       }
