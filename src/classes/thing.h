@@ -2,6 +2,7 @@
 #define _thing_h
 
 #include "skills.h"
+#include "defs.h"
 
 class thing
 {
@@ -17,7 +18,10 @@ class thing
       int displacement;
       int level;
 
-      //skills sk; //skills without images and description
+      skills sk; //skills without images and description
+
+      int skillBonus(int skillNumber);
+      int attBonus(int attNumber);
 };
 
 #endif

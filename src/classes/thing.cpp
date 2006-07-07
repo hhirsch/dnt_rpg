@@ -1,4 +1,5 @@
 #include "thing.h"
+#include <math.h>
 
 thing::thing()
 {
@@ -14,3 +15,30 @@ thing::thing()
 thing::~thing()
 {
 }
+
+int thing::skillBonus(int skillNumber)
+{
+   int att;
+   if( (skillNumber >= ATT_SKILL_FIRST) && (ATT_SKILL_LAST))
+   {
+      att = attBonus(sk.m_skills[skillNumber].habilidadeBase);
+      return(att + sk.m_skills[skillNumber].pontos);
+   }
+   else
+   {
+      return(0);
+   }
+}
+
+int thing::attBonus(int attNumber)
+{
+   if( (attNumber >= ATT_STRENGHT) || (attNumber <= ATT_CHARISM))
+   { 
+       return((int)floor(sk.m_skills[attNumber].pontos / 2.0));
+   } 
+   else
+   {
+      return(0);
+   }
+}
+

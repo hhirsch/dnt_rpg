@@ -32,8 +32,6 @@ initiative::~initiative()
  ***************************************************************/
 void initiative::includeCharacter(personagem* pers)
 {
-   //TODO Apply DEXTERY BONUS
-
    initiativeStruct *cmp, *aux, *oth;
    srand48(SDL_GetTicks());
 
@@ -42,13 +40,17 @@ void initiative::includeCharacter(personagem* pers)
    {
       first = new(initiativeStruct);
       first->next = NULL;
-      first->initiativeValue = (lrand48() % DICE_D20 +1);
+      first->initiativeValue = (lrand48() % DICE_D20 +1) +  
+                               pers->attBonus(ATT_DEXTERY);
+      first->character = pers;
       actual = first;
    }
    else
    {
       aux = new initiativeStruct;
-      aux->initiativeValue = (lrand48() % DICE_D20 +1);
+      aux->initiativeValue = (lrand48() % DICE_D20 +1) +
+                             pers->attBonus(ATT_DEXTERY);
+      aux->character = pers;
       cmp = first; 
       oth = NULL;
       while( (cmp != NULL) && 
