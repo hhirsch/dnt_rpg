@@ -1,6 +1,13 @@
 #include "thing.h"
 #include <math.h>
 
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
+/******************************************************
+ *                   Constructor                      *
+ ******************************************************/
 thing::thing()
 {
    lifePoints = 0;
@@ -12,10 +19,16 @@ thing::thing()
    level = 0;
 }
 
+/******************************************************
+ *                    Destructor                      *
+ ******************************************************/
 thing::~thing()
 {
 }
 
+/******************************************************
+ *                   skillBonus                       *
+ ******************************************************/
 int thing::skillBonus(int skillNumber)
 {
    int att;
@@ -30,11 +43,14 @@ int thing::skillBonus(int skillNumber)
    }
 }
 
+/******************************************************
+ *                     attBonus                       *
+ ******************************************************/
 int thing::attBonus(int attNumber)
 {
    if( (attNumber >= ATT_STRENGHT) || (attNumber <= ATT_CHARISM))
    { 
-       return((int)floor(sk.m_skills[attNumber].pontos / 2.0));
+       return((int)floor((sk.m_skills[attNumber].pontos-10) / 2.0));
    } 
    else
    {

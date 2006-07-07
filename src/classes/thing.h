@@ -1,6 +1,10 @@
 #ifndef _thing_h
 #define _thing_h
 
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include "skills.h"
 #include "defs.h"
 

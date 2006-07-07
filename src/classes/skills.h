@@ -1,6 +1,9 @@
 #ifndef _skills_h
 #define _skills_h
 
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
 
 #define MAX_SKILLS       46
 

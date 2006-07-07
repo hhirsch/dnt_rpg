@@ -1,3 +1,7 @@
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include "skills.h"
 
 skills::skills(string dir, string arq)
@@ -102,7 +106,7 @@ skills::skills()
       m_skills[aux].pontos = 0;
       m_skills[aux].mod = 2;
       m_skills[aux].antPontos = 0;
-      m_skills[aux].imagem = NULL;//IMG_Load(arqImagem.c_str());
+      m_skills[aux].imagem = NULL;
       fclose(desc);
    }
 
