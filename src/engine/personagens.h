@@ -47,7 +47,6 @@ class personagem: public Tobjeto, public thing
       GLfloat min[3];           // pontos de minimo do bounding box estatico
       GLfloat max[3];           // pontos de maximo do bounding box estatico
 
-   // Lhabilidade* habilidades; // habilidades personagem (ex:kamasutramaster)
       GLuint portrait;
 
       Square* ocupaQuad;   // quadrado do mapa que ele ocupa com x1,z1
