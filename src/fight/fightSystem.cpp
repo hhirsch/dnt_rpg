@@ -1,3 +1,7 @@
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include "fightSystem.h"
 
 /***************************************************************
@@ -21,7 +25,15 @@ bool fightSystem::insertPC(personagem* pers, int group)
 {
    if( (group >= 0) && (group < FIGHT_MAX_PC_GROUPS))
    {
-      return(pcGroups[group].insertCharacter(pers));
+      if(pcGroups[group].insertCharacter(pers))
+      {
+          charsInitiatives.insertCharacter(pers);
+          return(true);
+      }
+      else
+      {
+          return(false);
+      }
    }
    else
    {
@@ -43,3 +55,42 @@ bool fightSystem::insertNPC(personagem* pers, int group)
       return(false); 
    }
 }
+
+/***************************************************************
+ *                             isPC                            *
+ ***************************************************************/
+bool fightSystem::isPC(personagem* pers)
+{
+   int i;
+   for(i=0;i<FIGHT_MAX_PC_GROUPS;i++)
+   {
+      if(pcGroups[i].isCharacterIn(pers))
+      {
+          return(true);
+      }
+   }
+   return(false);
+}
+
+/***************************************************************
+ *                           doRound                           *
+ ***************************************************************/
+void fightSystem::doRound()
+{
+   personagem* pers;
+   charsInitiatives.newRound();
+   pers = charsInitiatives.nextCharacter();
+   while(pers != NULL)
+   {
+      if(isPC(pers))
+      {
+         //TODO get user action to character
+      }
+      else
+      {
+         //TODO get AI action to character
+      }
+      pers = charsInitiatives.nextCharacter();
+   }
+}
+

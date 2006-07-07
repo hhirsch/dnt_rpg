@@ -1,3 +1,7 @@
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include "initiative.h"
 #include <SDL/SDL.h>
 #include "../classes/dices.h"
@@ -28,9 +32,9 @@ initiative::~initiative()
 }
 
 /***************************************************************
- *                     includeCharacter                        *
+ *                     insertCharacter                        *
  ***************************************************************/
-void initiative::includeCharacter(personagem* pers)
+void initiative::insertCharacter(personagem* pers)
 {
    initiativeStruct *cmp, *aux, *oth;
    srand48(SDL_GetTicks());

@@ -1,6 +1,10 @@
 #ifndef _initiative_h
 #define _initiative_h
 
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include <stdlib.h>
 #include "../engine/personagens.h"
 
@@ -28,7 +32,7 @@ class initiative
      * Param:
      *        pers -> Pointer to Character
      ***************************************************************/
-     void includeCharacter(personagem* pers);
+     void insertCharacter(personagem* pers);
      /*************************************************************** 
      * Reason: Actualize the pointers to a new Round.  
      * Param:

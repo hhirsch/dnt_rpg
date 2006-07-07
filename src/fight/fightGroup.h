@@ -1,10 +1,17 @@
 #ifndef _fightGroup_h
 #define _fightGroup_h
 
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include "../engine/personagens.h"
 
 #define FIGHT_MAX_CHARACTERS_PER_GROUP 5
 
+/* A fight group is a group of allied characters in battle.*/
+
+//TODO friendly and enemy groups to a group.
 
 class fightGroup
 {
@@ -18,6 +25,12 @@ class fightGroup
      *        pers -> Pointer to Character
      ***************************************************************/
      bool insertCharacter(personagem* pers);
+     /*************************************************************** 
+     * Reason: Verify if character is in Group  
+     * Param:
+     *        pers -> Pointer to Character
+     ***************************************************************/
+     bool isCharacterIn(personagem* pers);
 
    private:
      /* Pointers to Characters on Group */
