@@ -13,6 +13,7 @@ ENDCLASSES = ../classes/
 ENDSOUND = ../sound/
 ENDLANG = ../lang/
 ENDPART = ../particle/
+ENDFIGHT = ../fight/
 OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
@@ -21,6 +22,7 @@ OBJSCLASSES = $(ENDCLASSES)skills.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(E
 OBJSSOUND = $(ENDSOUND)sound.o
 OBJSLANG = $(ENDLANG)lang.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o
+OBJSFIGHT = $(ENDFIGHT)fightSystem.o
 OBJS = conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o skillwindow.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DREDE #comente para nao ter suporte a rede na bagaca
@@ -78,9 +80,9 @@ util.o: util.cpp util.h
 	@$(CC) $(CFLAGS) $(SUPREDE) util.cpp -o util.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJS) 
+teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) 
 	@printf "Linking dccnitghtmare... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSSOUND) $(OBJSPART) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:

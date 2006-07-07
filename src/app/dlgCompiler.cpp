@@ -1,4 +1,5 @@
 #include "../engine/conversa.h"
+#include "../classes/defs.h"
 
 void erro()
 {
@@ -28,7 +29,7 @@ string returnString(char buffer[512])
 
 int defineAtt(string att)
 {
-    if (!att.compare("AGILITY"))
+    /*if (!att.compare("AGILITY"))
     {
        return(ATT_AGILITY);
     }
@@ -59,7 +60,7 @@ int defineAtt(string att)
     if (!att.compare("HATE"))
     {
        return(ATT_HATE);
-    }
+    }*/
     return(-1);
 }
 

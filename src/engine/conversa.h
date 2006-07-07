@@ -6,7 +6,6 @@
 #ifndef _conversa_h
 #define _conversa_h
 
-
 #define ACTION_GOTO   0
 #define ACTION_FIGHT  1
 #define ACTION_CLOSE  2
@@ -22,15 +21,6 @@
 #define OPER_ZERO  0
 #define OPER_MINUS 1
 #define OPER_PLUS  2      
-
-#define ATT_AGILITY     0
-#define ATT_BOVINICE    1
-#define ATT_BRUTALITY   2
-#define ATT_WISDOW      3
-#define ATT_STRONG      4
-#define ATT_GAMBIARRY   5
-#define ATT_INTELIGENCY 6
-#define ATT_HATE        7
 
 #include "../gui/farso.h"
 #include "personagens.h"

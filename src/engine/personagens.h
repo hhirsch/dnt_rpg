@@ -11,6 +11,7 @@
 #include "../gui/objeto.h"
 #include "../gui/lista.h"
 #include "../classes/thing.h"
+#include "../classes/feats.h"
 //#include "habilidades.h"
 //#include "../etc/glm.h"
 #include <cal3d/cal3d.h> //for now, utilising cal3d
@@ -62,6 +63,8 @@ class personagem: public Tobjeto, public thing
       void CalculateBoundingBox();
       void RenderBoundingBox();
 
+      feats actualFeats;
+
 
 
 
@@ -69,7 +72,7 @@ class personagem: public Tobjeto, public thing
 // CAL3D related member variables
 
    CalCoreModel* m_calCoreModel;
-  CalModel* m_calModel;
+   CalModel* m_calModel;
 
  
 protected:

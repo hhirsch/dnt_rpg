@@ -98,11 +98,21 @@ class feats               /* Character's Feats */
        *        featInsert -> featDescription of feat to insert
        ***************************************************************/
       bool insertFeat(featDescription featInsert);
-
+      /*************************************************************** 
+       * Reason: Refresh Quantities to use on a new day to all feats.
+       * Param:
+       ***************************************************************/
       void newDay();
-
+      /*************************************************************** 
+       * Reason: Apply an attack or break feat. Returns true if used.
+       * Param:
+       *        featNumber -> Number of Feat on List
+       *        target -> target to use the Feat
+       *        brief -> string that will have briefing
+       ***************************************************************/
       bool applyAttackAndBreakFeat(int featNumber, thing& target, 
                                    string& brief);
+
       /*int applyCureAndFixFeat(int featNumber);
       int applyModifyObjectFeat(int featNumber);
       int applyConjureFeat(int featNumber);
@@ -112,7 +122,13 @@ class feats               /* Character's Feats */
       feat m_feats[MAX_FEATS]; /* Internal Feats Struct */
       int  totalFeats;         /* Actual Number of Feats */
 
-      void useFeat(int featNumber);
+      /*************************************************************** 
+       * Reason: Use a quantity of the feat and propagate to other
+       *         dependent feats.
+       * Param:
+       *        featNumber -> feat to use
+       ***************************************************************/
+       void useFeat(int featNumber);
 };
 
 
