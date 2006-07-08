@@ -58,7 +58,9 @@ int thing::attBonus(int attNumber)
    }
 }
 
-
+/******************************************************
+ *                   getBonusValue                    *
+ ******************************************************/
 int thing::getBonusValue(int something)
 {
    if(isSkill(something))

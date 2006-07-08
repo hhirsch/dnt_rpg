@@ -55,6 +55,9 @@ bool feats::insertFeat(featDescription featInsert)
       m_feats[totalFeats].action = featInsert.action;
       m_feats[totalFeats].name = featInsert.name;
       m_feats[totalFeats].diceInfo = featInsert.diceInfo;
+      m_feats[totalFeats].conceptBonus = featInsert.conceptBonus;
+      m_feats[totalFeats].conceptAgainst = featInsert.conceptAgainst;
+      m_feats[totalFeats].conceptTarget = featInsert.conceptTarget;
       for(i = 0; i < MAX_DEP_FEATS; i++)
       {
          m_feats[totalFeats].depFeats[i].reason = featInsert.depFeats[i].reason;
@@ -95,7 +98,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
    int i;
    bool criticalHit = false;
    bool criticalMiss = false;
-   char texto[15];
+   char texto[50];
 
    if( (featNumber < 0) || (featNumber >= totalFeats) )
    {
@@ -119,7 +122,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       //verify Bonus
       bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus);
 
-      diceValue = ((lrand48() % DICE_D20)+1) + bonus; 
+      diceValue = ((lrand48() % DICE_D20)+1); 
 
       //TODO apply reflexes bonus, esquive bonus, etc 
       targetValue = target.armatureClass;
@@ -128,7 +131,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       if(diceValue == DICE_D20)
       {
           criticalRoll = lrand48() % DICE_D20 +1;
-          if((criticalRoll) - (targetValue) > 0)
+          if( (criticalRoll + bonus - targetValue) > 0)
           {
               criticalHit = true;
           }
@@ -138,7 +141,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       if( diceValue == 1)  
       {
           criticalRoll = (lrand48() % DICE_D20 +1);
-          if( (criticalRoll - targetValue) <= 0 )
+          if( (criticalRoll + bonus - targetValue) <= 0 )
           {
              criticalMiss = true;
           }
@@ -147,18 +150,19 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       /* Put Dice Values on Briefing */
       if(criticalRoll != -1)
       {
-         sprintf(texto,"%d (%d) x %d : ",diceValue,criticalRoll,
-                                         targetValue);
+         sprintf(texto,"%d(+%d) & (%d+%d) x %d : ",diceValue,bonus,criticalRoll,
+                                         bonus,targetValue);
       }
       else
       {
-         sprintf(texto,"%d x %d : ",diceValue,targetValue);
+         sprintf(texto,"%d(+%d) x %d : ",diceValue,bonus,targetValue);
       }
       brief += texto;
 
-      /*TODO apply resistances  */
+      //apply bonus (skill bonus)
+      diceValue += bonus;
 
-      //TODO apply bonus (skill bonus)
+      /*TODO apply resistances  */
 
       if(diceValue - targetValue <= 0)
       {
