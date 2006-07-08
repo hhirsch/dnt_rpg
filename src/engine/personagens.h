@@ -32,9 +32,9 @@ class personagem: public Tobjeto, public thing
 
       int m_state;
 
-      Tlista *retrato;          // portraits
-      Tlista *objetos;          // objetos do personagem
-      Tobjeto *armaAtual;       // armaAtual do personagem
+      Tlista *portraits;        // all character portraits
+      Tlista *objects;          // actual character objects
+      Tobjeto *actualWeapon;    // actual weapon
 
       string nome;              // nome do personagem
       string retratoConversa;   // arquivo de retrato de conversa
@@ -63,6 +63,9 @@ class personagem: public Tobjeto, public thing
       void RenderBoundingBox();
 
       feats actualFeats;
+
+      int actualFightGroup; /* fightGroup of character, only used on battles */
+      bool dead;            /* dead state or not. (if dead is only a corpse) */
 
 
 

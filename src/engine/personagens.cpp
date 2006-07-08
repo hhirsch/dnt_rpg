@@ -558,21 +558,22 @@ personagem* Lpersonagem::InserirPersonagem(char* retrato, string nome,
 {
    personagem* novo;
    novo = new(personagem);
-   novo->retrato = new(Tlista);
-   novo->objetos = new(Tlista);
+   novo->portraits = new(Tlista);
+   novo->objects = new(Tlista);
    //novo->x = x;
    //novo->y = y;
    novo->tipo = PERSONAGEM;
-   novo->armaAtual = NULL;
+   novo->actualWeapon = NULL;
    novo->orientacao = 0.0;
    novo->posicaoFrente = 0.0;
    novo->posicaoLadoX = 0.0;
    novo->posicaoLadoZ = 0.0;
    novo->posicaoLadoY = 0.0;
+   novo->dead = false;
    novo->nome = nome;
    /* Define os Retratos */
    figura* fig;
-   fig = novo->retrato->InserirFigura(POSRETX,POSRETY,0,0,retrato);
+   fig = novo->portraits->InserirFigura(POSRETX,POSRETY,0,0,retrato);
     glGenTextures(1, &novo->portrait);
       glBindTexture(GL_TEXTURE_2D, novo->portrait);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fig->fig->w, fig->fig->h, 
@@ -599,8 +600,8 @@ void Lpersonagem::RetirarPersonagem(personagem* persona, int tiraMemoria)
    glDeleteTextures(1,&persona->portrait);
    delete(persona->m_calCoreModel);
    delete(persona->m_calModel);
-   delete(persona->retrato);
-   delete(persona->objetos);
+   delete(persona->portraits);
+   delete(persona->objects);
    if(tiraMemoria)
      Retirar(persona);
 }

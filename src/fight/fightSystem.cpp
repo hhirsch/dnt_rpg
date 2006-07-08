@@ -27,6 +27,7 @@ bool fightSystem::insertPC(personagem* pers, int group,  string& brief)
    {
       if(pcGroups[group].insertCharacter(pers))
       {
+          pers->actualFightGroup = group;
           charsInitiatives.insertCharacter(pers,brief);
           return(true);
       }
@@ -50,6 +51,7 @@ bool fightSystem::insertNPC(personagem* pers, int group, string& brief)
    {
       if(npcGroups[group].insertCharacter(pers))
       {
+         pers->actualFightGroup = group;
          charsInitiatives.insertCharacter(pers,brief);
          return(true);
       }
@@ -92,18 +94,18 @@ void fightSystem::doRound()
    {
       if(isPC(pers))
       {
-         //TODO get user action to character
+         getPCAction(pers);
       }
       else
       {
-         //TODO get AI action to character
+         doNPCAction(pers);
       }
       pers = charsInitiatives.nextCharacter();
    }
 }
 
 
-bool fightSystem::doBattle()
+bool fightSystem::doBattleCicle()
 {
    doRound();
    //TODO Verify battle end conditions
@@ -113,3 +115,48 @@ bool fightSystem::doBattle()
    //Third condition: all PCs dies, game over
    return(true);
 }
+
+void fightSystem::doNPCAction(personagem* pers)
+{
+   personagem* target;
+   int attackFeat;
+
+   //doMovimentation, if wanted, before
+   doNPCMovimentation(pers, FIGHT_MOVIMENTATION_BEFORE);
+
+   //TODO if is badly wounded and can heal, heal (or heal group)
+
+   //TODO some song or enchantment
+
+   //else, do an basic attack
+   target =  getNPCEnemy(pers);
+   attackFeat = getNPCAttackFeat(pers,target);
+ 
+   doNPCMovimentation(pers,FIGHT_MOVIMENTATION_AFTER);
+
+}
+
+void fightSystem::getPCAction(personagem* pers)
+{
+   //TODO
+}
+
+
+int fightSystem::getNPCAttackFeat(personagem* pers, personagem* target)
+{
+   //TODO
+   return(0);
+}
+
+personagem* fightSystem::getNPCEnemy(personagem* pers)
+{
+   //TODO
+   return(NULL);
+}
+
+void fightSystem::doNPCMovimentation(personagem* pers, int when)
+{
+   //TODO
+}
+
+

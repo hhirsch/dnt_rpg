@@ -12,6 +12,8 @@
 #define FIGHT_MAX_NPC_GROUPS 5
 #define FIGHT_MAX_PC_GROUPS  1
 
+#define FIGHT_MOVIMENTATION_BEFORE 1
+#define FIGHT_MOVIMENTATION_AFTER  2
 
 class fightSystem
 {
@@ -35,10 +37,10 @@ class fightSystem
      bool insertNPC(personagem* pers, int group, string& brief);
 
      /*************************************************************** 
-     * Reason: doBattle Events. Returns false when battle ends.
+     * Reason: do Battle Events. Returns false when battle ends.
      * Param:
      ***************************************************************/
-     bool doBattle();
+     bool doBattleCicle();
 
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS]; /* PCs groups */
@@ -56,6 +58,39 @@ class fightSystem
      * Param:
      ***************************************************************/
      void doRound();
+     /*************************************************************** 
+     * Reason: Do a npc action for character.  
+     * Param:
+     *        pers -> Pointer to Character that will act
+     ***************************************************************/
+     void doNPCAction(personagem* pers);
+     /*************************************************************** 
+     * Reason: Get an action for player character.  
+     * Param:
+     *        pers -> Pointer to Character that will act
+     ***************************************************************/
+     void getPCAction(personagem* pers);
+     /*************************************************************** 
+     * Reason: Returns the attack feat for NPC to use  
+     * Param:
+     *        pers -> Pointer to Character that will use feat
+     *        target -> Pointer to Character that will receive feat
+     ***************************************************************/
+     int getNPCAttackFeat(personagem* pers, personagem* target);
+     /*************************************************************** 
+     * Reason: Returns an ememy character to attack.  
+     * Param:
+     *        pers -> Pointer to Character that will act
+     ***************************************************************/
+     personagem* getNPCEnemy(personagem* pers);
+     /*************************************************************** 
+     * Reason: Do, if wanted, NPC movimentation  
+     * Param:
+     *        pers -> Pointer to Character that will act
+     *        when -> time when do movimentation (before or after 
+     *                attack) 
+     ***************************************************************/
+     void doNPCMovimentation(personagem* pers, int when);
 };
 
 #endif
