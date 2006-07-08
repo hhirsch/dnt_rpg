@@ -25,14 +25,14 @@ class fightSystem
      *        pers -> Pointer to Character
      *        group -> PC group Number
      ***************************************************************/
-     bool insertPC(personagem* pers, int group);
+     bool insertPC(personagem* pers, int group, string& brief);
      /*************************************************************** 
      * Reason: Insert Character on NPCs List.  
      * Param:
      *        pers -> Pointer to Character
      *        group -> NPC group Number
      ***************************************************************/
-     bool insertNPC(personagem* pers, int group);
+     bool insertNPC(personagem* pers, int group, string& brief);
 
      /*************************************************************** 
      * Reason: doBattle Events. Returns false when battle ends.

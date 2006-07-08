@@ -21,13 +21,13 @@ fightSystem::~fightSystem()
 /***************************************************************
  *                         insertPC                            *
  ***************************************************************/
-bool fightSystem::insertPC(personagem* pers, int group)
+bool fightSystem::insertPC(personagem* pers, int group,  string& brief)
 {
    if( (group >= 0) && (group < FIGHT_MAX_PC_GROUPS))
    {
       if(pcGroups[group].insertCharacter(pers))
       {
-          charsInitiatives.insertCharacter(pers);
+          charsInitiatives.insertCharacter(pers,brief);
           return(true);
       }
       else
@@ -44,11 +44,19 @@ bool fightSystem::insertPC(personagem* pers, int group)
 /***************************************************************
  *                         insertNPC                           *
  ***************************************************************/
-bool fightSystem::insertNPC(personagem* pers, int group)
+bool fightSystem::insertNPC(personagem* pers, int group, string& brief)
 {
    if( (group >= 0) && (group < FIGHT_MAX_NPC_GROUPS))
    {
-      return(npcGroups[group].insertCharacter(pers));
+      if(npcGroups[group].insertCharacter(pers))
+      {
+         charsInitiatives.insertCharacter(pers,brief);
+         return(true);
+      }
+      else
+      {
+         return(false);
+      }
    }
    else
    {

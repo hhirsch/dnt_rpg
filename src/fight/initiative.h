@@ -6,6 +6,8 @@
  *************************************************************************/
 
 #include <stdlib.h>
+#include <string>
+using namespace std;
 #include "../engine/personagens.h"
 
 
@@ -32,7 +34,7 @@ class initiative
      * Param:
      *        pers -> Pointer to Character
      ***************************************************************/
-     void insertCharacter(personagem* pers);
+     void insertCharacter(personagem* pers, string& brief);
      /*************************************************************** 
      * Reason: Actualize the pointers to a new Round.  
      * Param:

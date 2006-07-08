@@ -21,6 +21,8 @@ class thing
       int armatureClass;
       int displacement;
       int level;
+      int baseAttackModifier;
+      int sizeModifier;
 
       skills sk; //skills without images and description
 

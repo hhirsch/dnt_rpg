@@ -34,10 +34,13 @@ initiative::~initiative()
 /***************************************************************
  *                     insertCharacter                        *
  ***************************************************************/
-void initiative::insertCharacter(personagem* pers)
+void initiative::insertCharacter(personagem* pers, string& brief)
 {
+   char text[20];
    initiativeStruct *cmp, *aux, *oth;
    srand48(SDL_GetTicks());
+
+   brief = pers->nome + " rolls initiative: ";
 
    /* Insertion on List, orded by initiativeValue (decrescent order) */
    if(first == NULL)
@@ -46,6 +49,8 @@ void initiative::insertCharacter(personagem* pers)
       first->next = NULL;
       first->initiativeValue = (lrand48() % DICE_D20 +1) +  
                                pers->attBonus(ATT_DEXTERY);
+      sprintf(text,"%d.",first->initiativeValue);
+      brief += text;
       first->character = pers;
       actual = first;
    }
@@ -54,6 +59,8 @@ void initiative::insertCharacter(personagem* pers)
       aux = new initiativeStruct;
       aux->initiativeValue = (lrand48() % DICE_D20 +1) +
                              pers->attBonus(ATT_DEXTERY);
+      sprintf(text,"%d.",aux->initiativeValue);
+      brief += text;
       aux->character = pers;
       cmp = first; 
       oth = NULL;

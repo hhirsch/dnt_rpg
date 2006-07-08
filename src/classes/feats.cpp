@@ -7,16 +7,25 @@
  *                                    FEAT                                *
  **************************************************************************/
 
+/***************************************************************
+ *                       Constructor                           *
+ ***************************************************************/
 feats::feats()
 {
    totalFeats = 0;
 }
 
+/***************************************************************
+ *                        Destructor                           *
+ ***************************************************************/
 feats::~feats()
 {
    totalFeats = 0;
 }
 
+/***************************************************************
+ *                       featByNumber                          *
+ ***************************************************************/
 feat* feats::featByNumber(int featNumber)
 {
    if( (featNumber > 0) && (featNumber < totalFeats) )
@@ -26,6 +35,9 @@ feat* feats::featByNumber(int featNumber)
    return(NULL);
 }
 
+/***************************************************************
+ *                       featByName                            *
+ ***************************************************************/
 feat* feats::featByName(string featName)
 {
    int i;
@@ -39,6 +51,9 @@ feat* feats::featByName(string featName)
    return(NULL);
 }
 
+/***************************************************************
+ *                       insertFeat                            *
+ ***************************************************************/
 bool feats::insertFeat(featDescription featInsert)
 {
    int i;
@@ -71,6 +86,9 @@ bool feats::insertFeat(featDescription featInsert)
    return(false);
 }
 
+/***************************************************************
+ *                          useFeat                            *
+ ***************************************************************/
 void feats::useFeat(int featNumber)
 {
    int i;
@@ -86,7 +104,9 @@ void feats::useFeat(int featNumber)
    }
 }
 
-
+/***************************************************************
+ *                 applyAttackAndBreakFeat                     *
+ ***************************************************************/
 bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
                                     thing& target, string& brief)
 {
@@ -120,11 +140,12 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       //TODO verify if can use or not based on target thing and range
 
       //verify Bonus
-      bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus);
+      bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus) + 
+              attacker.sizeModifier + attacker.baseAttackModifier;
 
       diceValue = ((lrand48() % DICE_D20)+1); 
 
-      //TODO apply reflexes bonus, esquive bonus, etc 
+      //TODO apply reflexes bonus, esquive bonus, etc, to target 
       targetValue = target.armatureClass;
    
       /* verify critical Hit */
@@ -220,6 +241,9 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
    return(false);
 }
 
+/***************************************************************
+ *                         New Day                             *
+ ***************************************************************/
 void feats::newDay()
 {
    int i;
@@ -232,6 +256,10 @@ void feats::newDay()
 /**************************************************************************
  *                           FEAT DESCRIPTION                             *
  **************************************************************************/
+
+/***************************************************************
+ *                       Constructor                           *
+ ***************************************************************/
 featsList::featsList(string dir, string arq)
 {
    FILE* file;
@@ -311,10 +339,16 @@ featsList::featsList(string dir, string arq)
    fclose(file);
 }
 
+/***************************************************************
+ *                        Destructor                           *
+ ***************************************************************/
 featsList::~featsList()
 {
 }
 
+/***************************************************************
+ *                        featByName                           *
+ ***************************************************************/
 featDescription featsList::featByName(string featName)
 {
    int i;
@@ -328,6 +362,9 @@ featDescription featsList::featByName(string featName)
    return(m_feats[0]);
 }
 
+/***************************************************************
+ *                        featByNumber                         *
+ ***************************************************************/
 featDescription featsList::featByNumber(int featNumber)
 {
    if( (featNumber > 0) && (featNumber < NUMBER_OF_FEATS) )
