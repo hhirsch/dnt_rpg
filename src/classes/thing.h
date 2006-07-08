@@ -26,6 +26,7 @@ class thing
 
       int skillBonus(int skillNumber);
       int attBonus(int attNumber);
+      int getBonusValue(int something);
 };
 
 #endif

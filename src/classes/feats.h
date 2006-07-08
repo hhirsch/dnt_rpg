@@ -110,8 +110,8 @@ class feats               /* Character's Feats */
        *        target -> target to use the Feat
        *        brief -> string that will have briefing
        ***************************************************************/
-      bool applyAttackAndBreakFeat(int featNumber, thing& target, 
-                                   string& brief);
+      bool applyAttackAndBreakFeat(thing& attacker, int featNumber, 
+                                   thing& target, string& brief);
 
       /*int applyCureAndFixFeat(int featNumber);
       int applyModifyObjectFeat(int featNumber);

@@ -84,13 +84,14 @@ void feats::useFeat(int featNumber)
 }
 
 
-bool feats::applyAttackAndBreakFeat(int featNumber, thing& target, 
-                                      string& brief)
+bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
+                                    thing& target, string& brief)
 {
    int diceValue;
    int criticalRoll = -1;
    int damage = 0;
-   int targetValue;
+   int targetValue; 
+   int bonus;
    int i;
    bool criticalHit = false;
    bool criticalMiss = false;
@@ -115,7 +116,10 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
 
       //TODO verify if can use or not based on target thing and range
 
-      diceValue = (lrand48() % DICE_D20)+1; 
+      //verify Bonus
+      bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus);
+
+      diceValue = ((lrand48() % DICE_D20)+1) + bonus; 
 
       //TODO apply reflexes bonus, esquive bonus, etc 
       targetValue = target.armatureClass;
@@ -162,6 +166,7 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
          if( criticalMiss )
          {
              brief += " Critical Miss!" ;
+             //TODO lose weapon;
          }
          return(true);
       }

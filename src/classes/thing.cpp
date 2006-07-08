@@ -58,3 +58,18 @@ int thing::attBonus(int attNumber)
    }
 }
 
+
+int thing::getBonusValue(int something)
+{
+   if(isSkill(something))
+   {
+     return(skillBonus(something));
+   }
+   else
+   if(isAttribute(something))
+   {
+     return(attBonus(something));
+   }
+   return(0);
+}
+
