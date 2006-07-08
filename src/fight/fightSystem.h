@@ -34,6 +34,12 @@ class fightSystem
      ***************************************************************/
      bool insertNPC(personagem* pers, int group);
 
+     /*************************************************************** 
+     * Reason: doBattle Events. Returns false when battle ends.
+     * Param:
+     ***************************************************************/
+     bool doBattle();
+
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS]; /* PCs groups */
      fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /* NPCs groups */

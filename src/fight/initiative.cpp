@@ -39,7 +39,7 @@ void initiative::insertCharacter(personagem* pers)
    initiativeStruct *cmp, *aux, *oth;
    srand48(SDL_GetTicks());
 
-   /* Insertion on List, orded by initiativeValue (crescent order) */
+   /* Insertion on List, orded by initiativeValue (decrescent order) */
    if(first == NULL)
    {
       first = new(initiativeStruct);
@@ -58,7 +58,7 @@ void initiative::insertCharacter(personagem* pers)
       cmp = first; 
       oth = NULL;
       while( (cmp != NULL) && 
-             (aux->initiativeValue >= cmp->initiativeValue) )
+             (aux->initiativeValue < cmp->initiativeValue) )
       {
          oth = cmp;
          cmp = cmp->next;

@@ -74,7 +74,7 @@ bool fightSystem::isPC(personagem* pers)
 
 /***************************************************************
  *                           doRound                           *
- ***************************************************************/
+ ***************************************************************/ 
 void fightSystem::doRound()
 {
    personagem* pers;
@@ -94,3 +94,14 @@ void fightSystem::doRound()
    }
 }
 
+
+bool fightSystem::doBattle()
+{
+   doRound();
+   //TODO Verify battle end conditions
+   //Condition: No more enemies.
+   //First condition: enemies dies
+   //Second condition: enemies out of range
+   //Third condition: all PCs dies, game over
+   return(true);
+}
