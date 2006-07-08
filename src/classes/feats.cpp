@@ -175,6 +175,8 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
       {
           damage+=(lrand48() % m_feats[featNumber].diceInfo.baseDice.diceID)+1;
       }
+      /* Sum Dice Damage Number */
+      damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
 
       /* Apply Critical Hit */
       if(criticalHit)
@@ -184,10 +186,11 @@ bool feats::applyAttackAndBreakFeat(int featNumber, thing& target,
          {
              damage+=(lrand48()%m_feats[featNumber].diceInfo.baseDice.diceID)+1;
          }
+         /* Sum Dice Damage Number */
+         damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
       }
 
-      /* Sum Dice Damage Number */
-      damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
+      
 
       /*TODO apply aditional dices */
 
