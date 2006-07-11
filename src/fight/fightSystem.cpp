@@ -101,11 +101,12 @@ void fightSystem::doRound(string& brief)
          brief += "|" + tmp;
       }
       else
-      {
+      { 
          doNPCAction(pers,tmp);
          brief += "|" + tmp;
       }
       pers = charsInitiatives.nextCharacter();
+      SDL_Delay(150);
    }
    brief += "|Round Ends.";
 }
@@ -127,12 +128,14 @@ bool fightSystem::doBattleCicle(string& brief)
            verifyPCs = true;
        }
    }
-
+#if 0
    if(!verifyPCs)
    {
       /* All PCs dies. */
+      brief += "| All PCs Dies.";
       return(false); 
    }
+#endif
 
    /* Verify if some enemy NPC is alive and in range area*/
    for(i=0; i < FIGHT_MAX_NPC_GROUPS; i++)
@@ -145,7 +148,7 @@ bool fightSystem::doBattleCicle(string& brief)
        }
    }
 
-   
+   brief += "| No more enemies.";
    return(false);
 }
 
@@ -175,6 +178,13 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
       {
          pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
                                                    *pers->actualEnemy, brief);
+         brief += "\n"+pers->nome+" attacked "+pers->actualEnemy->nome+"\n";
+ 
+         if(pers->actualEnemy->dead)
+         {
+            brief += pers->actualEnemy->nome + " is Dead!\n";
+         }
+        
       }
 
    //TODO call the animations and sound effects.
@@ -224,7 +234,7 @@ personagem* fightSystem::getNPCEnemy(personagem* pers)
    
    group = 0;
    //OtherWise, take on NPCGroups
-   while( (ch == NULL) && (group < FIGHT_MAX_PC_GROUPS))
+   while( (ch == NULL) && (group < FIGHT_MAX_NPC_GROUPS))
    {
       if(group != pers->actualFightGroup)
       {

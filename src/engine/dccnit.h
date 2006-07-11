@@ -16,6 +16,7 @@
 #include "options.h"
 #include "skillwindow.h"
 #include "../classes/skills.h"
+#include "../classes/feats.h"
 #include "../sound/sound.h"
 #include "../lang/lang.h"
 #include "../particle/partSystem.h"
@@ -183,6 +184,7 @@ class engine
       options* option;             /* Current Options */
 
       AI* ia;                      /* IA Module. TODO Not Here. */
+      featsList* features;         /* Feats descriptions */
 
       lang language;               /* Language struct: internationalization */
 

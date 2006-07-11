@@ -75,7 +75,7 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
    {
       srand48(SDL_GetTicks());
       int ch = ((lrand48() % actualCharacters));
-      if(!characters[ch]->dead)
+      if( (!characters[ch]->dead) && (characters[ch] != pers) )
       {
          return(characters[ch]);
       }
@@ -83,7 +83,7 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
       {
          for(ch=0;ch<actualCharacters;ch++)
          {
-            if(!characters[ch]->dead)
+            if( (!characters[ch]->dead) && (characters[ch] != pers))
             {
                return(characters[ch]);
             }
@@ -93,7 +93,7 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
    }
    else if(actualCharacters == 1)
    {
-      if(!characters[0]->dead)
+      if( (!characters[0]->dead) && (characters[0] != pers))
       {
          return(characters[0]);
       }

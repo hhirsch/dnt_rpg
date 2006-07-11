@@ -272,7 +272,8 @@ int feats::getNPCAttackFeat(thing* pers, thing* target)
       srand48(SDL_GetTicks());
       ft = (lrand48() % totalFeats);
 
-      if( (m_feats[ft].action == ACT_ATTACK)  && 
+      if( (ft != FEAT_RANGED_ATTACK) && (ft != FEAT_MELEE_ATTACK) &&
+          (m_feats[ft].action == ACT_ATTACK)  && 
           ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
           || (m_feats[ft].costToUse) == 0 ))
       {
@@ -299,23 +300,23 @@ int feats::getNPCAttackFeat(thing* pers, thing* target)
 /***************************************************************
  *                      defineMeleeWeapon                      *
  ***************************************************************/
-void feats::defineMeleeWeapon(diceThing* weaponDice)
+void feats::defineMeleeWeapon(diceThing& weaponDice)
 { 
    /* Disable Ranged Attacks */
    m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel = 0;
    /* Enable Melee Attacks */
-   m_feats[FEAT_MELEE_ATTACK].diceInfo = *weaponDice;
+   m_feats[FEAT_MELEE_ATTACK].diceInfo = weaponDice;
 }
 
 /***************************************************************
  *                      defineRangedWeapon                     *
  ***************************************************************/
-void feats::defineRangedWeapon(diceThing* weaponDice)
+void feats::defineRangedWeapon(diceThing& weaponDice)
 {
    /* Disable Melee Attacks */
    m_feats[FEAT_MELEE_ATTACK].diceInfo.initialLevel = 0;
    /* Enable Ranged Attacks */
-   m_feats[FEAT_RANGED_ATTACK].diceInfo = *weaponDice;
+   m_feats[FEAT_RANGED_ATTACK].diceInfo = weaponDice;
 
 }
 

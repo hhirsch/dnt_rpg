@@ -9,10 +9,11 @@
 /*********************************************************************
  *                    Construtor do Personagem                       *
  *********************************************************************/
-personagem::personagem()
+personagem::personagem(featsList* ft)
 {
-  m_calCoreModel = new CalCoreModel("");
 
+  /* Animation details */
+  m_calCoreModel = new CalCoreModel("");
   m_state = STATE_IDLE;
   m_motionBlend[0] = 1.0f;
   m_motionBlend[1] = 1.0f;
@@ -21,6 +22,10 @@ personagem::personagem()
   m_meshCount = 0;
   m_renderScale = 1.0f;
   m_lodLevel = 1.0f;
+
+  /* Feat Details */
+  actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
+  actualFeats.insertFeat(ft->featByNumber(FEAT_RANGED_ATTACK));
 }
 
 /*********************************************************************
@@ -553,11 +558,11 @@ Lpersonagem::~Lpersonagem()
  *                    Insere Personagem na Lista                     *
  *********************************************************************/
 personagem* Lpersonagem::InserirPersonagem(char* retrato, string nome, 
-                                           string arqmodelo)
+                                           string arqmodelo,featsList* ft)
 
 {
    personagem* novo;
-   novo = new(personagem);
+   novo = new personagem(ft);
    novo->portraits = new(Tlista);
    novo->objects = new(Tlista);
    //novo->x = x;

@@ -57,6 +57,9 @@ engine::engine()
 
    /* Set sound and music volume, based on options */
    snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
+  
+   /* FIXME internationalization here, please! */
+   features = new featsList("../data/feats/Portugues/","../data/feats/feats.ftl");
 
    /* Initialize readModes variables */
    ultimaLeitura = SDL_GetTicks();
@@ -262,7 +265,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                          texto,
                          proj, modl, viewPort);
            per = NPCs->InserirPersonagem("../data/pics/logan/portrait.jpg",
-                                         nome,arquivo);
+                                         nome,arquivo,features);
            per->posicaoLadoX = posX;
            per->posicaoLadoZ = posZ;
          }
@@ -282,7 +285,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                  proj, modl, viewPort);
        per = PCs->InserirPersonagem("../data/pics/logan/portrait.jpg",
                               "Logan",
-                       "../data/models/personagens/Logan/modelo.cfg");
+                       "../data/models/personagens/Logan/modelo.cfg",
+                       features);
        /*atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading Character: Gushm",
                  proj, modl, viewPort);
@@ -2111,7 +2115,7 @@ int engine::Run(SDL_Surface *surface)
                 per = NPCs->InserirPersonagem(6,8,3,8,
                              "../data/pics/logan/cara.bmp",0,0,
                "LoganNPC","../data/models/personagens/logan_completo_final.obj",
-                  "../data/pics/logan/");
+                  "../data/pics/logan/",features);
                 per->posicaoLadoX = eventoRede->x;
                 per->posicaoLadoZ = eventoRede->y; 
                 per->orientacao = eventoRede->teta;

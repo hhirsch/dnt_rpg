@@ -2,10 +2,13 @@
 CPP = g++
 CFLAGS = -g -Wall -c #-DDEBUG_MAP
 CLIBSDIR = -L/usr/X11/lib
-CLIBS = -lGLU -lGL -lSDL -lSDL_image
+CLIBS = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image -lcal3d
 BINDIR = ../../bin/
 ENDGUI = ../gui/
-DIRENGINE = ../engine/
+ENDENGINE = ../engine/
+ENDFIGHT = ../fight/
+OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
+OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o $(ENDENGINE)personagens.o $(OBJSGUI)
 objetos = skills.o feats.o defs.o actions.o thing.o
 
 
@@ -41,8 +44,8 @@ thing.o: thing.cpp thing.h
 	@$(CC) $(CFLAGS) thing.cpp -o thing.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste: $(objetos) teste.cpp
-	g++ -g -Wall -lSDL -lSDL_image teste.cpp $(objetos) -o teste
+teste: $(objetos) $(OBJSFIGHT) teste.cpp
+	g++ -g -Wall $(CLIBS) teste.cpp $(objetos) $(OBJSFIGHT) -o teste
 
 clean: 
 	@printf  "Cleaning Classes Bin Files... "

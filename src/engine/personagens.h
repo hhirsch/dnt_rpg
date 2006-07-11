@@ -53,7 +53,7 @@ class personagem: public Tobjeto, public thing
 
       int ID;
 
-      personagem();
+      personagem(featsList* ft);
       ~personagem();
       bool LoadModel(const string& strFilename);
       GLuint loadTexture(const string& strFilename);
@@ -110,7 +110,8 @@ class Lpersonagem: public Tlista
        * x,y                     -> coordenada do personagem no Mapa
        * nome                    -> Nome do Personagem
        * arqmodelo               -> nome do arquivo do modelo3d do personagem*/
-      personagem* InserirPersonagem(char* retrato,string nome,string arqmodelo);
+      personagem* InserirPersonagem(char* retrato,string nome,string arqmodelo,
+                                    featsList* ft);
                                     
       /* Retira um Personagem da Lista
        * persona -> ponteiro para o personagem que se deseja retirar
