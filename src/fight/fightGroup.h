@@ -31,7 +31,16 @@ class fightGroup
      *        pers -> Pointer to Character
      ***************************************************************/
      bool isCharacterIn(personagem* pers);
-
+     /*************************************************************** 
+     * Reason: Verify if there's any character alive and in range 
+     *         in the Group  
+     * Param:
+     ***************************************************************/
+     bool anyoneIsAliveAndInRange();
+     /*************************************************************** 
+     * Reason: Get better to attack character enemy to pers.  
+     * Param:
+     ***************************************************************/
      personagem* getNPCEnemy(personagem* pers);
 
    private:

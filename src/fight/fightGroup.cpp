@@ -64,7 +64,9 @@ bool fightGroup::isCharacterIn(personagem* pers)
    return(false);
 }
 
-
+/***************************************************************
+ *                        getNPCEnemy                          *
+ ***************************************************************/
 personagem* fightGroup::getNPCEnemy(personagem* pers)
 {
    /* FIXME For now, get a random enemy on list, better 
@@ -106,3 +108,18 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
    }
 }
 
+/***************************************************************
+ *                  anyoneIsAliveAndInRange                    *
+ ***************************************************************/
+bool fightGroup::anyoneIsAliveAndInRange()
+{ 
+   int i;
+   for(i=0;i<actualCharacters;i++)
+   {
+      if(!characters[i]->dead)
+      {
+         return(true);
+      }
+   }
+   return(false);
+}

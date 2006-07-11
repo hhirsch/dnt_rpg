@@ -115,13 +115,38 @@ void fightSystem::doRound(string& brief)
  ***************************************************************/
 bool fightSystem::doBattleCicle(string& brief)
 {
+   int i;
+   bool verifyPCs = false;
    doRound(brief);
-   //TODO Verify battle end conditions
-   //Condition: No more enemies.
-   //First condition: enemies dies
-   //Second condition: enemies out of range
-   //Third condition: all PCs dies, game over
-   return(true);
+
+   /* Verify if any PC is alive */
+   for(i=0; i < FIGHT_MAX_PC_GROUPS; i++)
+   {
+       if(pcGroups[i].anyoneIsAliveAndInRange())
+       {
+           verifyPCs = true;
+       }
+   }
+
+   if(!verifyPCs)
+   {
+      /* All PCs dies. */
+      return(false); 
+   }
+
+   /* Verify if some enemy NPC is alive and in range area*/
+   for(i=0; i < FIGHT_MAX_NPC_GROUPS; i++)
+   {
+       if(npcGroups[i].anyoneIsAliveAndInRange())
+       {
+           //TODO verify if npc group is evil or not to PC.
+           /* at last one enemy NPC is alive */
+           return(true);
+       }
+   }
+
+   
+   return(false);
 }
 
 /***************************************************************

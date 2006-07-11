@@ -123,6 +123,9 @@ class feats               /* Character's Feats */
        ***************************************************************/
       int getNPCAttackFeat(thing* pers, thing* target);
 
+      void defineMeleeWeapon(diceThing* weaponDice);
+      void defineRangedWeapon(diceThing* weaponDice);
+
       /*int applyCureAndFixFeat(int featNumber);
       int applyModifyObjectFeat(int featNumber);
       int applyConjureFeat(int featNumber);

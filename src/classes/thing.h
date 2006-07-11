@@ -24,6 +24,8 @@ class thing
       int baseAttackModifier;
       int sizeModifier;
 
+      bool dead;   /* dead state or not.(if dead is only a corpse)*/
+
       skills sk; //skills without images and description
 
       int skillBonus(int skillNumber);

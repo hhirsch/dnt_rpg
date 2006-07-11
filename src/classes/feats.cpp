@@ -235,6 +235,12 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
           brief += " Critical Hit!" ;
       }
 
+      if(target.lifePoints <= 0)
+      {
+         //FIXME Other states, like partial death to be implemented
+         target.dead = true;
+      }
+
       return(true);
    }
    brief += "Not Enough Points to Use!";
@@ -266,8 +272,6 @@ int feats::getNPCAttackFeat(thing* pers, thing* target)
       srand48(SDL_GetTicks());
       ft = (lrand48() % totalFeats);
 
-      //TODO verify if current weapon is melee or ranged.
-
       if( (m_feats[ft].action == ACT_ATTACK)  && 
           ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
           || (m_feats[ft].costToUse) == 0 ))
@@ -277,12 +281,42 @@ int feats::getNPCAttackFeat(thing* pers, thing* target)
       }
       else
       {
-          /* otherwise, use melee attack */
-          return(FEAT_MELEE_ATTACK);
+          /* otherwise, use base attack (melee or ranged) */
+          if(m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel == 0)
+          {
+              return(FEAT_MELEE_ATTACK);
+          }
+          else
+          {
+             return(FEAT_RANGED_ATTACK);
+          }
       }
    }
    
    return(-1);
+}
+
+/***************************************************************
+ *                      defineMeleeWeapon                      *
+ ***************************************************************/
+void feats::defineMeleeWeapon(diceThing* weaponDice)
+{ 
+   /* Disable Ranged Attacks */
+   m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel = 0;
+   /* Enable Melee Attacks */
+   m_feats[FEAT_MELEE_ATTACK].diceInfo = *weaponDice;
+}
+
+/***************************************************************
+ *                      defineRangedWeapon                     *
+ ***************************************************************/
+void feats::defineRangedWeapon(diceThing* weaponDice)
+{
+   /* Disable Melee Attacks */
+   m_feats[FEAT_MELEE_ATTACK].diceInfo.initialLevel = 0;
+   /* Enable Ranged Attacks */
+   m_feats[FEAT_RANGED_ATTACK].diceInfo = *weaponDice;
+
 }
 
 /**************************************************************************
