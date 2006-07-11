@@ -132,7 +132,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
    srand48(SDL_GetTicks());
 
    if( (m_feats[featNumber].actualQuantity >= m_feats[featNumber].costToUse)
-       || (m_feats[featNumber].costToUse) > 0 )
+       || (m_feats[featNumber].costToUse) == 0 )
    {
       /* apply Costs */
       useFeat(featNumber);
@@ -253,8 +253,40 @@ void feats::newDay()
    }
 }
 
+/***************************************************************
+ *                      getNPCAttackFeat                       *
+ ***************************************************************/
+int feats::getNPCAttackFeat(thing* pers, thing* target)
+{
+   int ft;
+   //FIXME do in a better way than that random stuff;
+
+   if( (target != NULL) && (pers != NULL))
+   {
+      srand48(SDL_GetTicks());
+      ft = (lrand48() % totalFeats);
+
+      //TODO verify if current weapon is melee or ranged.
+
+      if( (m_feats[ft].action == ACT_ATTACK)  && 
+          ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
+          || (m_feats[ft].costToUse) == 0 ))
+      {
+          /* is avaible */
+          return(ft);
+      }
+      else
+      {
+          /* otherwise, use melee attack */
+          return(FEAT_MELEE_ATTACK);
+      }
+   }
+   
+   return(-1);
+}
+
 /**************************************************************************
- *                           FEAT DESCRIPTION                             *
+ *                               FEATS LIST                               *
  **************************************************************************/
 
 /***************************************************************

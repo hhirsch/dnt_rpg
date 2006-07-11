@@ -3,6 +3,8 @@
  *************************************************************************/
 
 #include "fightGroup.h"
+#include <SDL/SDL.h>
+#include <stdlib.h>
 
 /***************************************************************
  *                        CONSTRUCTOR                          *
@@ -60,5 +62,47 @@ bool fightGroup::isCharacterIn(personagem* pers)
       }
    }
    return(false);
+}
+
+
+personagem* fightGroup::getNPCEnemy(personagem* pers)
+{
+   /* FIXME For now, get a random enemy on list, better 
+      make this in a more expert way */
+   if(actualCharacters > 1)
+   {
+      srand48(SDL_GetTicks());
+      int ch = ((lrand48() % actualCharacters));
+      if(!characters[ch]->dead)
+      {
+         return(characters[ch]);
+      }
+      else
+      {
+         for(ch=0;ch<actualCharacters;ch++)
+         {
+            if(!characters[ch]->dead)
+            {
+               return(characters[ch]);
+            }
+         }
+         return(NULL);
+      }
+   }
+   else if(actualCharacters == 1)
+   {
+      if(!characters[0]->dead)
+      {
+         return(characters[0]);
+      }
+      else
+      {
+         return(NULL);
+      }
+   }
+   else
+   {
+      return(NULL);
+   }
 }
 

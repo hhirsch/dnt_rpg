@@ -53,6 +53,7 @@ bool fightSystem::insertNPC(personagem* pers, int group, string& brief)
       {
          pers->actualFightGroup = group;
          charsInitiatives.insertCharacter(pers,brief);
+         pers->actualEnemy = NULL;
          return(true);
       }
       else
@@ -85,29 +86,36 @@ bool fightSystem::isPC(personagem* pers)
 /***************************************************************
  *                           doRound                           *
  ***************************************************************/ 
-void fightSystem::doRound()
+void fightSystem::doRound(string& brief)
 {
+   string tmp;
    personagem* pers;
+   brief = "Round Begins.";
    charsInitiatives.newRound();
    pers = charsInitiatives.nextCharacter();
    while(pers != NULL)
    {
       if(isPC(pers))
       {
-         getPCAction(pers);
+         getPCAction(pers,tmp);
+         brief += "|" + tmp;
       }
       else
       {
-         doNPCAction(pers);
+         doNPCAction(pers,tmp);
+         brief += "|" + tmp;
       }
       pers = charsInitiatives.nextCharacter();
    }
+   brief += "|Round Ends.";
 }
 
-
-bool fightSystem::doBattleCicle()
+/***************************************************************
+ *                       doBattleCicle                         *
+ ***************************************************************/
+bool fightSystem::doBattleCicle(string& brief)
 {
-   doRound();
+   doRound(brief);
    //TODO Verify battle end conditions
    //Condition: No more enemies.
    //First condition: enemies dies
@@ -116,9 +124,11 @@ bool fightSystem::doBattleCicle()
    return(true);
 }
 
-void fightSystem::doNPCAction(personagem* pers)
+/***************************************************************
+ *                       doNPCAction                           *
+ ***************************************************************/
+void fightSystem::doNPCAction(personagem* pers, string& brief)
 {
-   personagem* target;
    int attackFeat;
 
    //doMovimentation, if wanted, before
@@ -126,34 +136,84 @@ void fightSystem::doNPCAction(personagem* pers)
 
    //TODO if is badly wounded and can heal, heal (or heal group)
 
-   //TODO some song or enchantment
+   //TODO else some sing or enchantment
 
    //else, do an basic attack
-   target =  getNPCEnemy(pers);
-   attackFeat = getNPCAttackFeat(pers,target);
+      if( (pers->actualEnemy == NULL) || (pers->actualEnemy->dead))
+      {
+         pers->actualEnemy =  getNPCEnemy(pers);
+      }
+
+      attackFeat = getNPCAttackFeat(pers,pers->actualEnemy);
+
+      if( (pers->actualEnemy != NULL) && (attackFeat != -1))
+      {
+         pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
+                                                   *pers->actualEnemy, brief);
+      }
+
+   //TODO call the animations and sound effects.
  
    doNPCMovimentation(pers,FIGHT_MOVIMENTATION_AFTER);
 
 }
 
-void fightSystem::getPCAction(personagem* pers)
+/***************************************************************
+ *                       getPCAction                           *
+ ***************************************************************/
+void fightSystem::getPCAction(personagem* pers, string& brief)
 {
    //TODO
 }
 
-
+/***************************************************************
+ *                       getNPCAttackFeat                      *
+ ***************************************************************/
 int fightSystem::getNPCAttackFeat(personagem* pers, personagem* target)
 {
-   //TODO
-   return(0);
+   if( (target != NULL) && (pers != NULL))
+   { 
+       return(pers->actualFeats.getNPCAttackFeat(pers,target));
+   }
+   
+   return(-1);
 }
 
+/***************************************************************
+ *                       getNPCEnemy                           *
+ ***************************************************************/
 personagem* fightSystem::getNPCEnemy(personagem* pers)
 {
-   //TODO
-   return(NULL);
+   /*FIXME For now, get the enemy on first enemy list. 
+     better make this in a more expert way */
+
+   personagem *ch = NULL;
+   int group = 0;
+
+   //Take enemy on PCGroups
+   while( (ch == NULL) && (group < FIGHT_MAX_PC_GROUPS))
+   {
+      ch = pcGroups[group].getNPCEnemy(pers);
+      group++;
+   }
+   
+   group = 0;
+   //OtherWise, take on NPCGroups
+   while( (ch == NULL) && (group < FIGHT_MAX_PC_GROUPS))
+   {
+      if(group != pers->actualFightGroup)
+      {
+         ch = npcGroups[group].getNPCEnemy(pers);
+      }
+      group++;
+   }
+
+   return(ch);
 }
 
+/***************************************************************
+ *                   doNPCMovimentation                        *
+ ***************************************************************/
 void fightSystem::doNPCMovimentation(personagem* pers, int when)
 {
    //TODO

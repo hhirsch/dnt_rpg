@@ -32,6 +32,8 @@ class fightGroup
      ***************************************************************/
      bool isCharacterIn(personagem* pers);
 
+     personagem* getNPCEnemy(personagem* pers);
+
    private:
      /* Pointers to Characters on Group */
      personagem* characters[FIGHT_MAX_CHARACTERS_PER_GROUP]; 

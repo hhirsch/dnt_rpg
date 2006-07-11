@@ -33,14 +33,16 @@ class fightSystem
      * Param:
      *        pers -> Pointer to Character
      *        group -> NPC group Number
+     *        brief -> briefing string
      ***************************************************************/
      bool insertNPC(personagem* pers, int group, string& brief);
 
      /*************************************************************** 
      * Reason: do Battle Events. Returns false when battle ends.
      * Param:
+     *        brief -> briefing to print, lines separed by '|' .
      ***************************************************************/
-     bool doBattleCicle();
+     bool doBattleCicle(string& brief);
 
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS]; /* PCs groups */
@@ -56,20 +58,21 @@ class fightSystem
      /*************************************************************** 
      * Reason: Do a complete round on game.  
      * Param:
+     *        brief -> briefing to print, lines separed by '|' .
      ***************************************************************/
-     void doRound();
+     void doRound(string& brief);
      /*************************************************************** 
      * Reason: Do a npc action for character.  
      * Param:
      *        pers -> Pointer to Character that will act
      ***************************************************************/
-     void doNPCAction(personagem* pers);
+     void doNPCAction(personagem* pers, string& brief);
      /*************************************************************** 
      * Reason: Get an action for player character.  
      * Param:
      *        pers -> Pointer to Character that will act
      ***************************************************************/
-     void getPCAction(personagem* pers);
+     void getPCAction(personagem* pers, string& brief);
      /*************************************************************** 
      * Reason: Returns the attack feat for NPC to use  
      * Param:

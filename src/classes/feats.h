@@ -12,9 +12,12 @@ using namespace std;
 
 #include "thing.h"
 
-#define NUMBER_OF_FEATS     2 /* Total Number of Feats */
+#define NUMBER_OF_FEATS     4 /* Total Number of Feats */
 #define MAX_FEATS          30 /* Max Number of Know Feats for character */
 #define MAX_DEP_FEATS       5 /* Max number of cost this, cost that feats */
+
+#define FEAT_MELEE_ATTACK   0 /* Melee Attack */
+#define FEAT_RANGED_ATTACK  1 /* Ranged Attack */
 
 /*************************************************************************
  * Note: Dependence Feats  are feats  that  has number of uses affected  *
@@ -112,6 +115,13 @@ class feats               /* Character's Feats */
        ***************************************************************/
       bool applyAttackAndBreakFeat(thing& attacker, int featNumber, 
                                    thing& target, string& brief);
+      /*************************************************************** 
+       * Reason: Return an attack feat that can be used.
+       * Param:
+       *        pers -> character that will use the feat
+       *        target -> thing that will receive the feat.
+       ***************************************************************/
+      int getNPCAttackFeat(thing* pers, thing* target);
 
       /*int applyCureAndFixFeat(int featNumber);
       int applyModifyObjectFeat(int featNumber);

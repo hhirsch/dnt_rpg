@@ -64,8 +64,9 @@ class personagem: public Tobjeto, public thing
 
       feats actualFeats;
 
-      int actualFightGroup; /* fightGroup of character, only used on battles */
-      bool dead;            /* dead state or not. (if dead is only a corpse) */
+      int actualFightGroup;    /* fightGroup of character, used on battles*/
+      bool dead;               /* dead state or not.(if dead is only a corpse)*/
+      personagem* actualEnemy; /* pointer to actual fight enemy (target) */
 
 
 
