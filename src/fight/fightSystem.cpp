@@ -131,6 +131,7 @@ bool fightSystem::doRound(string& brief)
    {
       if(!pers->dead)
       {
+         tmp = "";
          if(isPC(pers))
          {
             getPCAction(pers,tmp);
@@ -185,13 +186,13 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
 
       if( (pers->actualEnemy != NULL) && (attackFeat != -1))
       {
+         brief += pers->nome+" attacks "+pers->actualEnemy->nome+" | ";
          pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
                                                    *pers->actualEnemy, brief);
-         brief += "\n"+pers->nome+" attacked "+pers->actualEnemy->nome+"\n";
- 
+         
          if(pers->actualEnemy->dead)
          {
-            brief += pers->actualEnemy->nome + " is Dead!\n";
+            brief += " | " + pers->actualEnemy->nome + " is Dead!\n";
          }
         
       }

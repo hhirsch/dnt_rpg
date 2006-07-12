@@ -122,12 +122,12 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
    if( (featNumber < 0) || (featNumber >= totalFeats) )
    {
-      brief = "Invalid Feat!";
+      brief += "Invalid Feat!";
       return(false);
    }
 
    sprintf(texto,"%s ",m_feats[featNumber].name.c_str());
-   brief = texto;
+   brief += texto;
 
    srand48(SDL_GetTicks());
 
