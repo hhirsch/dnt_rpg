@@ -83,6 +83,9 @@ bool fightSystem::isPC(personagem* pers)
    return(false);
 }
 
+/***************************************************************
+ *                           hasEnemies                        *
+ ***************************************************************/
 bool fightSystem::hasEnemies(personagem* pers, string& brief)
 {
    int i;
@@ -90,7 +93,7 @@ bool fightSystem::hasEnemies(personagem* pers, string& brief)
 
    //TODO friendly groups;
 
-   /* Verify if any PC is alive */
+   /* Verify if some enemy PC is alive */
    for(i=0; i < FIGHT_MAX_PC_GROUPS; i++)
    {
        if( ((isNPC) || (pers->actualFightGroup != i) ) &&  
@@ -120,37 +123,67 @@ bool fightSystem::hasEnemies(personagem* pers, string& brief)
 /***************************************************************
  *                           doRound                           *
  ***************************************************************/ 
-bool fightSystem::doRound(string& brief)
+bool fightSystem::doTurn(string& brief)
 {
    string tmp;
    personagem* pers;
-   brief = "Round Begins.";
-   charsInitiatives.newRound();
+   brief = "";
+
    pers = charsInitiatives.nextCharacter();
-   while(pers != NULL)
+
+   if(pers == NULL)
    {
-      if(!pers->dead)
-      {
-         tmp = "";
-         if(isPC(pers))
-         {
-            getPCAction(pers,tmp);
-            brief += "|" + tmp;
-            if(!hasEnemies(pers, brief))
-               return(false);
-         }
-         else
-         { 
-            doNPCAction(pers,tmp);
-            brief += "|" + tmp;
-            if(!hasEnemies(pers, brief))
-               return(false);
-         }
-         SDL_Delay(150);
-      }
+      /* Begin new Round */
+      brief += "New Round.|";
+      charsInitiatives.newRound(); 
       pers = charsInitiatives.nextCharacter();
+      if(pers == NULL)
+      {
+         brief += "Error: No Characters!";
+         return(false);
+      }
    }
-   brief += "|Round Ends.";
+
+   /* don't play with dead characters */
+   while(pers->dead)
+   {
+      pers = charsInitiatives.nextCharacter();
+      if(pers == NULL)
+      {
+         /* Begin new Round */
+         brief += "New Round.|";
+         charsInitiatives.newRound(); 
+         pers = charsInitiatives.nextCharacter();
+         if(pers == NULL)
+         {
+            brief += "Error: No Characters!";
+            return(false);
+         }
+      }
+   }
+
+   tmp = "";
+   if(isPC(pers))
+   {
+      getPCAction(pers,tmp);
+      brief += "|" + tmp;
+   }
+   else
+   { 
+      doNPCAction(pers,tmp);
+      brief += "|" + tmp;
+   }
+
+   if(!hasEnemies(pers, brief))
+   {
+      /* There's no more enemies, so no more battle */
+      return(false);
+   }
+
+   /*FIXME Delay here is only for test on text mode... 
+     on graphic it won't be necessary. */
+   SDL_Delay(1);
+
    return(true);
 }
 
@@ -159,7 +192,7 @@ bool fightSystem::doRound(string& brief)
  ***************************************************************/
 bool fightSystem::doBattleCicle(string& brief)
 {
-   return(doRound(brief));
+   return(doTurn(brief));
 }
 
 /***************************************************************
@@ -192,7 +225,7 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
          
          if(pers->actualEnemy->dead)
          {
-            brief += " | " + pers->actualEnemy->nome + " is Dead!\n";
+            brief += " | " + pers->actualEnemy->nome + " is Dead!";
          }
         
       }

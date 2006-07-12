@@ -60,7 +60,7 @@ class fightSystem
      * Param:
      *        brief -> briefing to print, lines separed by '|' .
      ***************************************************************/
-     bool doRound(string& brief);
+     bool doTurn(string& brief);
      /*************************************************************** 
      * Reason: Do a npc action for character.  
      * Param:

@@ -52,7 +52,6 @@ void initiative::insertCharacter(personagem* pers, string& brief)
       sprintf(text,"%d.",first->initiativeValue);
       brief += text;
       first->character = pers;
-      actual = first;
    }
    else
    {
@@ -74,7 +73,6 @@ void initiative::insertCharacter(personagem* pers, string& brief)
       if(oth == NULL) //it will be the first on list
       {
          aux->next = first;
-         //aux = first;
          first = aux;
       }
       else //can be on any place of the list
