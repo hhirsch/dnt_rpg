@@ -146,9 +146,9 @@ bool fightSystem::doRound(string& brief)
             if(!hasEnemies(pers, brief))
                return(false);
          }
-         pers = charsInitiatives.nextCharacter();
          SDL_Delay(150);
       }
+      pers = charsInitiatives.nextCharacter();
    }
    brief += "|Round Ends.";
    return(true);
