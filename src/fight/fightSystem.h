@@ -60,7 +60,7 @@ class fightSystem
      * Param:
      *        brief -> briefing to print, lines separed by '|' .
      ***************************************************************/
-     void doRound(string& brief);
+     bool doRound(string& brief);
      /*************************************************************** 
      * Reason: Do a npc action for character.  
      * Param:
@@ -94,6 +94,8 @@ class fightSystem
      *                attack) 
      ***************************************************************/
      void doNPCMovimentation(personagem* pers, int when);
+
+     bool hasEnemies(personagem* pers, string& brief);
 };
 
 #endif

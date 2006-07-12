@@ -83,64 +83,28 @@ bool fightSystem::isPC(personagem* pers)
    return(false);
 }
 
-/***************************************************************
- *                           doRound                           *
- ***************************************************************/ 
-void fightSystem::doRound(string& brief)
-{
-   string tmp;
-   personagem* pers;
-   brief = "Round Begins.";
-   charsInitiatives.newRound();
-   pers = charsInitiatives.nextCharacter();
-   while(pers != NULL)
-   {
-      if(isPC(pers))
-      {
-         getPCAction(pers,tmp);
-         brief += "|" + tmp;
-      }
-      else
-      { 
-         doNPCAction(pers,tmp);
-         brief += "|" + tmp;
-      }
-      pers = charsInitiatives.nextCharacter();
-      SDL_Delay(150);
-   }
-   brief += "|Round Ends.";
-}
-
-/***************************************************************
- *                       doBattleCicle                         *
- ***************************************************************/
-bool fightSystem::doBattleCicle(string& brief)
+bool fightSystem::hasEnemies(personagem* pers, string& brief)
 {
    int i;
-   bool verifyPCs = false;
-   doRound(brief);
+   bool isNPC = !isPC(pers);
+
+   //TODO friendly groups;
 
    /* Verify if any PC is alive */
    for(i=0; i < FIGHT_MAX_PC_GROUPS; i++)
    {
-       if(pcGroups[i].anyoneIsAliveAndInRange())
+       if( ((isNPC) || (pers->actualFightGroup != i) ) &&  
+           (pcGroups[i].anyoneIsAliveAndInRange()) )
        {
-           verifyPCs = true;
+           return(true);
        }
    }
-#if 0
-   if(!verifyPCs)
-   {
-      /* All PCs dies. */
-      brief += "| All PCs Dies.";
-      return(false); 
-   }
-#endif
 
    /* Verify if some enemy NPC is alive and in range area*/
    for(i=0; i < FIGHT_MAX_NPC_GROUPS; i++)
    {
-       if(npcGroups[i].anyoneIsAliveAndInRange())
+       if( ((!isNPC) || (pers->actualFightGroup != i) ) &&
+           (npcGroups[i].anyoneIsAliveAndInRange()) )
        {
            //TODO verify if npc group is evil or not to PC.
            /* at last one enemy NPC is alive */
@@ -150,6 +114,51 @@ bool fightSystem::doBattleCicle(string& brief)
 
    brief += "| No more enemies.";
    return(false);
+}
+
+
+/***************************************************************
+ *                           doRound                           *
+ ***************************************************************/ 
+bool fightSystem::doRound(string& brief)
+{
+   string tmp;
+   personagem* pers;
+   brief = "Round Begins.";
+   charsInitiatives.newRound();
+   pers = charsInitiatives.nextCharacter();
+   while(pers != NULL)
+   {
+      if(!pers->dead)
+      {
+         if(isPC(pers))
+         {
+            getPCAction(pers,tmp);
+            brief += "|" + tmp;
+            if(!hasEnemies(pers, brief))
+               return(false);
+         }
+         else
+         { 
+            doNPCAction(pers,tmp);
+            brief += "|" + tmp;
+            if(!hasEnemies(pers, brief))
+               return(false);
+         }
+         pers = charsInitiatives.nextCharacter();
+         SDL_Delay(150);
+      }
+   }
+   brief += "|Round Ends.";
+   return(true);
+}
+
+/***************************************************************
+ *                       doBattleCicle                         *
+ ***************************************************************/
+bool fightSystem::doBattleCicle(string& brief)
+{
+   return(doRound(brief));
 }
 
 /***************************************************************
