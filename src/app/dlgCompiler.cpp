@@ -68,23 +68,23 @@ int defineOper(string sinal)
 {
    if(!sinal.compare(">="))
    {
-      return(OPER_GREATEREQUAL);
+      return(TALK_OPER_GREATEREQUAL);
    }
    if(!sinal.compare("<="))
    {
-      return(OPER_LESSEREQUAL);
+      return(TALK_OPER_LESSEREQUAL);
    }
    if(!sinal.compare("="))
    {
-      return(OPER_EQUAL);
+      return(TALK_OPER_EQUAL);
    }
    if(!sinal.compare(">"))
    {
-      return(OPER_GREATER);
+      return(TALK_OPER_GREATER);
    }
    if(!sinal.compare("<"))
    {
-      return(OPER_LESSER);
+      return(TALK_OPER_LESSER);
    }
    return(-1);
 }
@@ -93,15 +93,15 @@ int defineOperAct(string oper)
 {
   if(!oper.compare("0"))
   {
-    return(OPER_ZERO);
+    return(TALK_OPER_ZERO);
   }
   if(!oper.compare("-"))
   {
-    return(OPER_MINUS);
+    return(TALK_OPER_MINUS);
   }
   if(!oper.compare("+"))
   {
-    return(OPER_PLUS);
+    return(TALK_OPER_PLUS);
   }
   return(-1);
 }
@@ -110,15 +110,15 @@ int defineAction(string act,int oper,int att, int* errors, int line)
 {
    if(!act.compare("GOTO"))
    {
-      return(ACTION_GOTO);
+      return(TALK_ACTION_GOTO);
    }
    if(!act.compare("FIGHT"))
    {
-      return(ACTION_FIGHT);
+      return(TALK_ACTION_FIGHT);
    }
    if(!act.compare("CLOSE"))
    {
-      return(ACTION_CLOSE);
+      return(TALK_ACTION_CLOSE);
    }
    if(!act.compare("MODPC"))
    {
@@ -132,7 +132,7 @@ int defineAction(string act,int oper,int att, int* errors, int line)
          printf("Error: Unknow Operation on line: %d\n",line);
          *errors++;
       }
-      return(ACTION_MODPC);
+      return(TALK_ACTION_MODPC);
    }
    if(!act.compare("MODNPC"))
    {
@@ -146,7 +146,7 @@ int defineAction(string act,int oper,int att, int* errors, int line)
          printf("Error: Unknow Operation on line: %d\n",line);
          *errors++;
       }
-      return(ACTION_MODNPC);
+      return(TALK_ACTION_MODNPC);
    }
    printf("Error: Unknow Action: %s , on line: %d\n",act.c_str(),line);
    *errors++;
@@ -384,7 +384,7 @@ int main(int argc, char **argv)
                   se = &dlg->Opcoes[actualPC];
                }
          break;
-         case 'a': /* ACTION */
+         case 'a': /* TALK_ACTION */
               if(foundAction) 
                {
                   printf("Error: duplicated action: %d\n",line);

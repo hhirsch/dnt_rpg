@@ -1,6 +1,12 @@
 #ifndef _actions_h
 #define _actions_h
 
+/** \file actions.h
+    The actions are define in two manners: by internal number and by string
+   name. The string is usually to be loaded from a file, and the number is
+   the internal representation on game structs.
+*/
+
 #include <string>
 using namespace std;
 
@@ -52,17 +58,19 @@ using namespace std;
 #define ACT_TYPE_STR_NO_ACTION         "ACT_TYPE_NO_ACTION"
 
 
-/*************************************************************** 
- * Reason: Return the number of the action with name buffer  
- * Param:
- *        buffer -> string with the name of the concept
+/*!
+ ************************************************************* 
+ * Return the number of the action with name buffer  
+ * \param buffer -> string with the name of the concept
+ * \return correspondent action Type number.
  ***************************************************************/
 int numberAction(string buffer);
 
-/*************************************************************** 
- * Reason: Return the number of the Action Type with name buffer  
- * Param:
- *        buffer -> string with the name of the concept
+/*!
+ ************************************************************** 
+ * Return the number of the Action Type with name buffer  
+ * \param buffer -> string with the name of the concept
+ * \return correspondent action Type number.
  ***************************************************************/
 int numberActionType(string buffer);
 

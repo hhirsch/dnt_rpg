@@ -4,9 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*! FIFO - First In First Out struct. */
 typedef struct _fifo_t
 {
-	int numitens, start, end, maxlen;
+	int numitens, 
+            start, 
+            end, 
+            maxlen;
 	void ** itens;
 } fifo_t, * fifo_p_t;
 

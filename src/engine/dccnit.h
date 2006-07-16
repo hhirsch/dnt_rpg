@@ -26,175 +26,197 @@
   #include "../net/client.h"
 #endif
 
-//! Engine Class
-
 /*!
     The Engine Class is where all things are "merged" on game.
  */
-
 class engine
 {
    public:
-      /* Engine Constructor */
+      /*! Engine Constructor */
       engine();
-      /* Engine Desctructor */                        
+      /*! Engine Desctructor */                        
       ~engine();                       
  
-      Lpersonagem *NPCs;               /* NPC's List */
-      Lpersonagem *PCs;                /* PC's List */
+      Lpersonagem *NPCs;               /**< NPC's List */
+      Lpersonagem *PCs;                /**< PC's List */
 
       #ifdef REDE
-         char *server;                 /* Server to Connect */
-         clientdata_t clientData;      /* Client Data */
+         char *server;                 /**< Server to Connect \b NOTUSED */
+         clientdata_t clientData;      /**< Client Data \b NOTUSED */
       #endif
 
-      double theta, phi, d;            /* Rotation Up, Sides and Zoom */
-      double centroX,centroY,centroZ;  /* Camera Central Position */
-      double cameraX,cameraY,cameraZ;  /* Camera Position */
-      double deltaY;                   /* Camera DeltaY */
-      interface* gui;                  /* GUI used on Engine */
-      GLdouble proj[16];               /* Projection Matrix */
-      GLdouble modl[16];               /* ModelView Matrix  */
-      GLint viewPort[4];               /* ViewPort Matrix */
+      double theta;                    /**< Rotation Up*/
+      double ph                        /**< Rotation to Sides*/
+      double d;                        /**< Zoom */
+      double centroX,                  /**< Camera Central X Position */
+      centroY,                         /**< Camera Central Y Position */
+      centroZ;                         /**< Camera Central Z Position */
+      double cameraX,                  /**< Camera X Position */
+             cameraY,                  /**< Camera Y Position */
+             cameraZ;                  /**< Camera Z Position */
+      double deltaY;                   /**< Camera DeltaY */
+      interface* gui;                  /**< GUI used on Engine */
+      GLdouble proj[16];               /**< Projection Matrix */
+      GLdouble modl[16];               /**< ModelView Matrix  */
+      GLint viewPort[4];               /**< ViewPort Matrix */
 
-      /*************************************************************** 
-       * Reason: Init Engine to utilization  
-       * param screen -> Pointer to the Screen's Surface
+      /*!
+       **************************************************************** 
+       * Init Engine to utilization  
+       * \param screen -> Pointer to the Screen's Surface
        ***************************************************************/
       void Init(SDL_Surface *screen);
 
-      /*************************************************************** 
-       * Reason: Runs the Engine  
-       * param screen -> Pointer to the Screen's Surface
+      /*!
+       **************************************************************** 
+       * Runs the Engine  
+       * \param surface -> Pointer to the Screen's Surface
+       * \return 0 when stop running the main loop in engine.
        ***************************************************************/
       int  Run(SDL_Surface *surface);    
 
-      /*************************************************************** 
-       * Reason: Draws the Engine  
-       * Obs:    Need to run SDL_GL_SwapBuffers() after;
+      /*!
+       **************************************************************** 
+       * Draws the Engine  
+       * \note Need to run \b SDL_GL_SwapBuffers() after;
        ***************************************************************/
       void Draw();
 
-      /*************************************************************** 
-       * Reason: Load and activate Map to engine
-       * param arqMapa -> string with filename
-       * param RecarregaPCs -> 1 to reload PCs 0 to not.
+      /*!
+       **************************************************************** 
+       * Load and activate Map to engine
+       * \param arqMapa -> string with filename
+       * \param RecarregaPCs -> 1 to reload PCs 0 to not.
+       * \return 0 if can't load file .
        ***************************************************************/
       int LoadMap(string arqMapa, int RecarregaPCs);
 
-      /*************************************************************** 
-       * Reason: Load Initial Menu
-       * param Status -> ON_INIT or IN_GAME
-       * param idTextura -> pointer to initial screen texture
-       * param reloadMusic -> true to reload the music
+      /*!
+       **************************************************************** 
+       * Load Initial Menu
+       * \param Status -> ON_INIT or IN_GAME
+       * \param idTextura -> pointer to initial screen texture
+       * \param reloadMusic -> true to reload the music
+       * \return initialScreen return Values
        ***************************************************************/
       int InitialScreen(int Status, GLuint* idTextura, bool reloadMusic);
 
-      /*************************************************************** 
-       * Reason: Load Character's Screens
-       * Param:
-       *          idTextura -> pointer to initial screen texture
+      /*!
+       **************************************************************** 
+       * Load Character's Screens
+       * \param idTextura -> pointer to initial screen texture
+       * \return CharacterScreens return values
        ***************************************************************/
       int CharacterScreen(GLuint* idTextura);
 
-      /*************************************************************** 
-       * Reason: Load Options Screen
-       * Param:
-       *          idTextura -> pointer to initial screen texture
+      /*!
+       *************************************************************** 
+       * Load Options Screen
+       * \param idTextura -> pointer to initial screen texture
+       * \return Options Screen Return Value.
        ***************************************************************/
       int OptionsScreen(GLuint* idTextura);
 
-      /*************************************************************** 
-       * Reason: Load Informations Screen
-       * Param:
+      /*!
+       *************************************************************** 
+       * Load Informations Screen
        ***************************************************************/
       void InformationScreen();
 
-      /*************************************************************** 
+      /*!
+       *************************************************************** 
        * Reason: Load MiniMap Window
-       * Param:
        ***************************************************************/
       void OpenMiniMapWindow();
 
-      /*************************************************************** 
-       * Reason: Load ShortCuts
-       * Param:
+      /*!
+       *************************************************************** 
+       * Load ShortCuts Window
        ***************************************************************/
       void OpenShortcutsWindow();
 
    private:
 
-      /*************************************************************** 
-       * Reason: Define Screen to actual Screen Size  
-       * Param:
-       *        screen -> Pointer to the Screen's Surface
+      /*!
+       *************************************************************** 
+       * Define Screen to actual Screen Size  
+       * \param screen -> Pointer to the Screen's Surface
        ***************************************************************/
       void Redmensiona(SDL_Surface *screen);
 
-      /*************************************************************** 
-       * Reason: Threat Input/Output Events
-       * Param:
-       *        screen -> Pointer to the Screen's Surface
-       *        forcaAtualizacao -> to force the draw
+      /*!
+       *************************************************************** 
+       * Threat Input/Output Events
+       * \param screen -> Pointer to the Screen's Surface
+       * \param forcaAtualizacao -> to force the draw
        ***************************************************************/
       int  TrataES(SDL_Surface *screen,int *forcaAtualizacao);
 
-      /* Threat NPCs IA TODO not here!*/
+      /*! Verify Square on IA TODO oxi, out here.
+       * \param quad -> square to verify */
       inline void verificaQuad(Square* quad);
+      /*! Verify Square Line on IA TODO oxi, out here.
+       * \param centro -> center square of line */
       inline void verificaLinha(Square* centro);
+      /*! Threat NPCs IA TODO not here!*/
       int TrataIA();
 
-      /*************************************************************** 
-       * Reason: Threat PC Colision
-       * Param:
-       *        varX, varZ -> Variation Position
-       *        varAlpha -> Variation angle
+      /*!
+       *************************************************************** 
+       * Threat PC Colision (can walk?)
+       * \param varX -> Variation on X position
+       * \param varZ -> Variation on Z position
+       * \param varAlpha -> Variation on angle
+       * \return 1 if can walk to new position
        ***************************************************************/
       int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
-      /*************************************************************** 
-       * Reason: Draws the sky sphere to the list
-       * Param:
-       *        lats -> How many latitudes
-       *        longs -> How many longitudes
+      /*!
+       ************************************************************** 
+       * Draws the sky sphere to the list
+       * \param lats -> How many latitudes
+       * \param longs -> How many longitudes
        ***************************************************************/
       void drawSphereToList(int lats, int longs);
 
-      Map* mapa;                   /* Actual Engine Map */
-      cursor* cursors;             /* Utilized mouse cursors */
+      Map* mapa;                   /**< Actual Engine Map */
+      cursor* cursors;             /**< Utilized mouse cursors */
  
-      GLfloat matrizVisivel[6][4]; /* Actual Frustum Matrix */
-      GLuint listAtmosfera;        /* Sky List */
-      GLuint ceu;                  /* Sky Texture */
-      int mouseX,mouseY;           /* Actual mouse coordinates on screen */
-      double xReal, zReal, yReal;  /* Actual mouse coordinates on World */
+      GLfloat matrizVisivel[6][4]; /**< Actual Frustum Matrix */
+      GLuint listAtmosfera;        /**< Sky List */
+      GLuint ceu;                  /**< Sky Texture */
+      int mouseX,                  /**< Actual mouse X coordinates on screen */
+          mouseY;                  /**< Actual mouse Y coordinates on screen */
+      double xReal,                /**< Actual mouse X coordinates on World */
+             zReal,                /**< Actual mouse Z coordinates on World */
+             yReal;                /**< Actual mouse Y coordinates on World */
 
-      quadroTexto* FPS;            /* Text that shows FPS */
-      quadroTexto* ObjTxt;         /* Text that shows actual pointed object */
-      janela* janAtalhos;          /* ShortCuts Window */
-      janela* janMiniMapa;         /* MiniMap Window */
-      botao* botPerMiniMap;        /* MiniMap Button */
+      quadroTexto* FPS;            /**< Text that shows FPS */
+      quadroTexto* ObjTxt;         /**< Text that shows actual pointed object */
+      janela* janAtalhos;          /**< ShortCuts Window */
+      janela* janMiniMapa;         /**< MiniMap Window */
+      botao* botPerMiniMap;        /**< MiniMap Button */
    
-      Uint32 ultimaLeitura;        /* Last Verification */
-      Uint32 ultimoMouse;          /* Last read from mouse */
-      Uint32 ultimaPressaoMouse;   /* Last mouse pressure */
-      Uint32 ultimaFPS;            /* Last obtained FPS */
-      Uint32 ultimaKeyb;           /* Last read from keyboard */
-      double FPSatual;             /* Actual FPS */
+      Uint32 ultimaLeitura;        /**< Last Verification */
+      Uint32 ultimoMouse;          /**< Last read from mouse */
+      Uint32 ultimaPressaoMouse;   /**< Last mouse pressure */
+      Uint32 ultimaFPS;            /**< Last obtained FPS */
+      Uint32 ultimaKeyb;           /**< Last read from keyboard */
+      double FPSatual;             /**< Actual FPS */
 
-      sound* snd;                  /* Actual Sounds thing */
-      Mix_Music* musica;           /* Actual playing music */
-      options* option;             /* Current Options */
+      sound* snd;                  /**< Actual Sounds thing */
+      Mix_Music* musica;           /**< Actual playing music */
+      options* option;             /**< Current Options */
 
-      AI* ia;                      /* IA Module. TODO Not Here. */
-      featsList* features;         /* Feats descriptions */
+      AI* ia;                      /**< IA Module. TODO Not Here. */
+      featsList* features;         /**< Feats descriptions */
 
-      lang language;               /* Language struct: internationalization */
+      lang language;               /**< Language struct: internationalization */
 
-      partSystem* particleSystem;  /* The Particle System */
-      GLfloat segundos; 
+      partSystem* particleSystem;  /**< The Particle System */
+      GLfloat segundos;            /**< Seconds from actualization \b NOTUSED */
       
-      int imgNumber;
+      int imgNumber;               /**< Used on exporting images to make video*/
 };
 
 #endif

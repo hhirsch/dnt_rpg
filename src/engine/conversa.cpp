@@ -166,18 +166,18 @@ int conversa::ProcessaAcao(int numDialogo, int opcao,interface* gui,
 //TODO verificar atributos se senao   
    switch(action)
    {
-      case ACTION_GOTO:
+      case TALK_ACTION_GOTO:
          return(numDialogo);
       break;
-      case ACTION_FIGHT:
+      case TALK_ACTION_FIGHT:
          //NPC->amigavel = false; //brigar
       break;
-      case ACTION_CLOSE:
+      case TALK_ACTION_CLOSE:
          jan->Fechar(gui->ljan);
       break;
-      case ACTION_MODPC:
+      case TALK_ACTION_MODPC:
       break;
-      case ACTION_MODNPC:
+      case TALK_ACTION_MODNPC:
       break;
    }
    return(-1);

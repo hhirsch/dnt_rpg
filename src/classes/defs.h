@@ -1,6 +1,10 @@
 #ifndef _defs_h
 #define _defs_h
 
+/** \file defs.h
+ *  Here is where all game rules definitions resides. Again, some of them are define two times, one with the internal number, other with the definition string.
+ */
+
 #include "dices.h"
 #include <string>
 using namespace std;
@@ -194,52 +198,59 @@ using namespace std;
 #define NONE                   10001
 #define STR_NONE               "NONE" 
 
-/*************************************************************** 
- * Reason: Return the number of the concept with name buffer  
- * Param:
- *        buffer -> string with the name of the concept
+/*!
+ **************************************************************** 
+ * Convert the concept with name buffer to its internal number  
+ * \param buffer -> string with the name of the concept
+ * \return the internal number of the constant.
  ***************************************************************/
 int numberConstant(string buffer);
 
-/*************************************************************** 
- * Reason: Return true if the number represents a skill  
- * Param:
- *        number -> a number that represents some concept
+/*!
+ **************************************************************** 
+ * Verifies if the number represents a skill  
+ * \param number -> a number that represents some concept
+ * \return \c true if is a Skill, \c false otherwise.
  ***************************************************************/
 bool isSkill(int number);
 
-/*************************************************************** 
- * Reason: Return true if the number represents a class  
- * Param:
- *        number -> a number that represents some concept
+/*!
+ ************************************************************** 
+ * Verifies if the number represents a class 
+ * \param number -> a number that represents some concept
+ * \return \c true if is a Class, \c false otherwise.
  ***************************************************************/
 bool isClass(int number);
 
-/*************************************************************** 
- * Reason: Return true if the number represents a tendency  
- * Param:
- *        number -> a number that represents some concept
+/*!
+ ************************************************************** 
+ * Verifies if the number represents a tendency.  
+ * \param number -> a number that represents some concept
+ * \return \c true if is a Tendency, \c false otherwise.
  ***************************************************************/
 bool isTendency(int number);
 
-/*************************************************************** 
- * Reason: Return true if the number represents a race  
- * Param:
- *        number -> a number that represents some concept
+/*!
+ ************************************************************** 
+ * Verifies if the number represents a race  
+ * \param number -> a number that represents some concept
+ * \return \c true if is a Race, \c false otherwise.
  ***************************************************************/
 bool isRace(int number);
 
-/*************************************************************** 
- * Reason: Return true if the number represents an attribute  
- * Param:
- *        number -> a number that represents some concept
+/*!
+ ************************************************************** 
+ * Verifies if the number represents an attribute  
+ * \param number -> a number that represents some concept
+ * \return \c true if is an Attribute, \c false otherwise.
  ***************************************************************/
 bool isAttribute(int number);
 
-/*************************************************************** 
- * Reason: Return true if the number represents a variable  
- * Param:
- *        number -> a number that represents some concept
+/*!
+ ************************************************************** 
+ * Verifies if the number represents a variable  
+ * \param number -> a number that represents some concept
+ * \return \c true if is a Variable, \c false otherwise.
  ***************************************************************/
 bool isVariable(int number);
 

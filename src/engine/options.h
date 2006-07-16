@@ -7,36 +7,46 @@
 using namespace std;
 
 
-#define OPTIONSW_CANCEL  0
-#define OPTIONSW_CONFIRM 1
-#define OPTIONSW_OTHER   2
+#define OPTIONSW_CANCEL  0  /**< Cancel Return Value */
+#define OPTIONSW_CONFIRM 1  /**< Confirm Return Value */
+#define OPTIONSW_OTHER   2  /**< Other Return Value */
 
+/*! Options Class */
 class options
 {
    public:
+      /*! options Constructor that will load options from file.
+       * \param file -> filename with the options file to be loaded. */
       options(string file);
+      /*! options destructor */
       ~options();
 
+      /*! Display the Options Screen 
+       * \param interf -> GUI interface to be used.*/
       void DisplayOptionsScreen(interface* interf);
+      /*! Save actual options on file. */
       void Save();
+      /*! Treat options Window Events */
       int Treat(interface* interf);
 
-      int     musicVolume;
-      int     sndfxVolume;
-      int     langNumber;
-      janela* window;
+      int     musicVolume; /**< Actual Music Volume */
+      int     sndfxVolume; /**< Actual Sound Effects Volume */
+      int     langNumber;  /**< Actual Language Number */
+      janela* window;      /**< Options Window Pointer */
 
 
    private:
-      string       fileName;
-      quadroTexto* txtMusicVolume;
-      quadroTexto* txtSndfxVolume;
-      quadroTexto* txtLanguage;
-      int          prevMusicVolume;
-      int          prevSndfxVolume;
-      int          prevLanguage;
-      lang         language;
+      string       fileName;       /**< options fileName to be used */
+      quadroTexto* txtMusicVolume; /**< Music Volume Text on Window*/
+      quadroTexto* txtSndfxVolume; /**< Sound Effects Volume Text on Window*/
+      quadroTexto* txtLanguage;    /**< Language Text on Window */
+      int          prevMusicVolume;/**< Previous used Music Volume */
+      int          prevSndfxVolume;/**< Previous Used Sound Effects Volume */
+      int          prevLanguage;   /**< Previous Used Language */
+      lang         language;       /**< Language Used */
 
+      /*! Get the Actual Language Name
+       * \return the name of the language. */
       string languageName();
 };
 
