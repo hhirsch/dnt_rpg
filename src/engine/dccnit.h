@@ -20,17 +20,25 @@
 #include "../sound/sound.h"
 #include "../lang/lang.h"
 #include "../particle/partSystem.h"
+#include "../fight/fightSystem.h"
 
 #ifdef REDE
   #include "../net/client.h"
 #endif
 
+//! Engine Class
+
+/*!
+    The Engine Class is where all things are "merged" on game.
+ */
+
 class engine
 {
    public:
- 
-      engine();                        /* Engine Constructor */
-      ~engine();                       /* Engine Desctructor */
+      /* Engine Constructor */
+      engine();
+      /* Engine Desctructor */                        
+      ~engine();                       
  
       Lpersonagem *NPCs;               /* NPC's List */
       Lpersonagem *PCs;                /* PC's List */
@@ -44,46 +52,41 @@ class engine
       double centroX,centroY,centroZ;  /* Camera Central Position */
       double cameraX,cameraY,cameraZ;  /* Camera Position */
       double deltaY;                   /* Camera DeltaY */
-      interface* gui;                  /* GUI use on Engine */
+      interface* gui;                  /* GUI used on Engine */
       GLdouble proj[16];               /* Projection Matrix */
       GLdouble modl[16];               /* ModelView Matrix  */
       GLint viewPort[4];               /* ViewPort Matrix */
 
       /*************************************************************** 
        * Reason: Init Engine to utilization  
-       * Param:
-       *        screen -> Pointer to the Screen's Surface
+       * param screen -> Pointer to the Screen's Surface
        ***************************************************************/
       void Init(SDL_Surface *screen);
 
       /*************************************************************** 
        * Reason: Runs the Engine  
-       * Param:
-       *        screen -> Pointer to the Screen's Surface
+       * param screen -> Pointer to the Screen's Surface
        ***************************************************************/
       int  Run(SDL_Surface *surface);    
 
       /*************************************************************** 
        * Reason: Draws the Engine  
-       * Param:
        * Obs:    Need to run SDL_GL_SwapBuffers() after;
        ***************************************************************/
       void Draw();
 
       /*************************************************************** 
        * Reason: Load and activate Map to engine
-       * Param:
-       *          arqMapa -> string with filename
-       *          RecarregaPCs -> 1 to reload PCs 0 to not.
+       * param arqMapa -> string with filename
+       * param RecarregaPCs -> 1 to reload PCs 0 to not.
        ***************************************************************/
       int LoadMap(string arqMapa, int RecarregaPCs);
 
       /*************************************************************** 
        * Reason: Load Initial Menu
-       * Param:
-       *          Status -> ON_INIT or IN_GAME
-       *          idTextura -> pointer to initial screen texture
-       *          reloadMusic -> true to reload the music
+       * param Status -> ON_INIT or IN_GAME
+       * param idTextura -> pointer to initial screen texture
+       * param reloadMusic -> true to reload the music
        ***************************************************************/
       int InitialScreen(int Status, GLuint* idTextura, bool reloadMusic);
 

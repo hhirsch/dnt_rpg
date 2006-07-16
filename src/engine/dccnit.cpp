@@ -332,7 +332,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    glEnable(GL_LIGHTING);
 
 
-   /* Put Active Party in Init Position */
+   /* Put Active Party on Init Position */
    PCs->personagemAtivo->posicaoLadoX = mapa->xInic;
    PCs->personagemAtivo->posicaoLadoZ = mapa->zInic;
    centroX = mapa->xInic;
@@ -1236,6 +1236,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       Draw();
       SDL_GL_SwapBuffers();
 #ifdef VIDEO_MODE
+      /* Save frame images to compose demonstration video */
       char name[50];
       if(imgNumber < 10)
          sprintf(name,"img/teste000%d.tga",imgNumber);
@@ -1943,7 +1944,7 @@ int engine::TrataIA()
 }
 
 /*********************************************************************
- *                       Carrega Janela de MiniMapa                  *
+ *                       Load MiniMap Window                         *
  *********************************************************************/
 void engine::OpenMiniMapWindow()
 {
@@ -2074,15 +2075,16 @@ int engine::Run(SDL_Surface *surface)
 
    snd->LoadSample(SOUND_WALK,"../data/sndfx/passos.ogg");
 
-   int forcaAtualizacao = 0; //forca a atualizacao da tela, qdo o npc anda
+   int forcaAtualizacao = 0; //force screen atualization FIXME, no more used
    FPSatual = 10.0;
    ultimaFPS = 0;
 
    
-   /* Inicia AI -- Vai mudar com o tempo e ser relativa a cada NPC */
+   /* AI init FIXME not here, but in NPCs, etc */
    ia = new(AI); 
    
    #ifdef REDE
+     /* if using network. FIXME abandoned code, almost for now. */
      netevent_p_t eventoRede;
      
      initclientdata( &clientData );
@@ -2094,22 +2096,20 @@ int engine::Run(SDL_Surface *surface)
      entergame( &clientData );
    #endif
   
-   /* Roda realmente a engine */
+   /* Main Things Run */
    while(TrataES(surface,&forcaAtualizacao))
    {
-      /* Trata a Rede. Por padrao, nao estamos usando a rede, uma vez 
-       * que a mesma nao se encontra no escopo inicial do projeto, somente
-       * sendo util quando se estiver em um estado estável do jogo.
-       * No mais, MMORPG é um saco. O bom de rede eh jogar com conhecidos.
-       * Mais uma vez farrer fazendo juízos no meio do código. Deve ser louco
-       * mesmo. argh!
+     #ifdef REDE
+      /* Network Code. For now, we aren't using the network anymore, 
+       * it's not on the initial project scope, only being useful in
+       * an estable state. In other words, we hate MMORPG, and don't
+       * plain to do one. This will be a standalone RPG.
        */
-    #ifdef REDE
       while( (eventoRede = pollnet( &clientData ) ) != NULL )
       {
          switch(eventoRede->type)
          {
-             case MT_NEWCHAR: /* Insere Novo Caractere */
+             case MT_NEWCHAR: /* Insert new character */
              {
                 personagem* per;
                 per = NPCs->InserirPersonagem(6,8,3,8,
@@ -2123,7 +2123,7 @@ int engine::Run(SDL_Surface *surface)
 		forcaAtualizacao = 1;
                 break; 
              }
-             case MT_MOV:
+             case MT_MOV: /* character movimentation */
              {
                 personagem* per = (personagem*)NPCs->primeiro->proximo;
                 if(per != NPCs->primeiro) 
@@ -2163,7 +2163,7 @@ int engine::Run(SDL_Surface *surface)
                      return(1);
                  }
              }
-             default:break; /* Por default nao faz nada! */
+             default:break; /* By default, nothing! */
          }
       }
     #endif

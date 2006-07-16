@@ -123,3 +123,4 @@ bool fightGroup::anyoneIsAliveAndInRange()
    }
    return(false);
 }
+
