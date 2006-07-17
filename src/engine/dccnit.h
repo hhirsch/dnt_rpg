@@ -46,7 +46,7 @@ class engine
       #endif
 
       double theta;                    /**< Rotation Up*/
-      double ph                        /**< Rotation to Sides*/
+      double phi;                      /**< Rotation to Sides*/
       double d;                        /**< Zoom */
       double centroX,                  /**< Camera Central X Position */
       centroY,                         /**< Camera Central Y Position */
