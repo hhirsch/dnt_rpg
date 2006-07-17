@@ -7,46 +7,51 @@
 
 #include "../engine/personagens.h"
 
-#define FIGHT_MAX_CHARACTERS_PER_GROUP 5
+#define FIGHT_MAX_CHARACTERS_PER_GROUP 5 /**< Max avaible characters per group*/
 
-/* A fight group is a group of allied characters in battle.*/
-
+/*! A fight group is a group of allied characters in battle.*/
 //TODO friendly and enemy groups to a group.
-
 class fightGroup
 {
    public:
+     /*! Group Constructor */
      fightGroup();
+     /*! Group Destructor */
      ~fightGroup();
 
-    /*************************************************************** 
-     * Reason: Insert Character on Group. Return true if OK.  
-     * Param:
-     *        pers -> Pointer to Character
+    /*!
+     *************************************************************** 
+     * Insert Character on Group. Return true if OK.  
+     * \param pers -> Pointer to Character
+     * \return true if success.
      ***************************************************************/
      bool insertCharacter(personagem* pers);
-     /*************************************************************** 
-     * Reason: Verify if character is in Group  
-     * Param:
-     *        pers -> Pointer to Character
+     /*!
+     *************************************************************** 
+     * Verify if character is in Group  
+     * \param pers -> Pointer to Character
+     * \return true if character is in group.
      ***************************************************************/
      bool isCharacterIn(personagem* pers);
-     /*************************************************************** 
-     * Reason: Verify if there's any character alive and in range 
-     *         in the Group  
-     * Param:
+     /*!
+     *************************************************************** 
+     * Verify if there's any character alive and in range 
+     * in the Group  
+     * \return true if someone is alive and in range.
      ***************************************************************/
      bool anyoneIsAliveAndInRange();
-     /*************************************************************** 
-     * Reason: Get better to attack character enemy to pers.  
-     * Param:
+     /*!
+     *************************************************************** 
+     * Get better to attack character enemy to pers.  
+     * \param pers -> character pointer.
+     * \return an character pointer, enemy to this one.
      ***************************************************************/
      personagem* getNPCEnemy(personagem* pers);
 
    private:
-     /* Pointers to Characters on Group */
+     /*! Pointers to Characters on Group */
      personagem* characters[FIGHT_MAX_CHARACTERS_PER_GROUP]; 
-     /* Total number of Characters on Group */
+     /*! Total number of Characters on Group */
      int actualCharacters;
 };
 

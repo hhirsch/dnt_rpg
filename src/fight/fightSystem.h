@@ -9,92 +9,112 @@
 #include "initiative.h"
 
 
-#define FIGHT_MAX_NPC_GROUPS 5
-#define FIGHT_MAX_PC_GROUPS  1
+#define FIGHT_MAX_NPC_GROUPS 5 /**< Max groups of NPCs characters */
+#define FIGHT_MAX_PC_GROUPS  1 /**< Max groups of PCs characters */
 
-#define FIGHT_MOVIMENTATION_BEFORE 1
-#define FIGHT_MOVIMENTATION_AFTER  2
+#define FIGHT_MOVIMENTATION_BEFORE 1 /**< Movimentation before action */
+#define FIGHT_MOVIMENTATION_AFTER  2 /**< Movimentation after action */
 
+/*! The fight System Implementation */
 class fightSystem
 {
    public:
+     /*! Constructor */
      fightSystem();
+     /*! Destructor */
      ~fightSystem();
   
-     /*************************************************************** 
-     * Reason: Insert Character on PCs List.  
-     * Param:
-     *        pers -> Pointer to Character
-     *        group -> PC group Number
+     /*!
+     *************************************************************** 
+     * Insert Character on PCs List.  
+     * \param pers -> Pointer to Character
+     * \param group -> PC group Number
+     * \param brief -> briefing string
+     * \return true if success.
      ***************************************************************/
      bool insertPC(personagem* pers, int group, string& brief);
-     /*************************************************************** 
-     * Reason: Insert Character on NPCs List.  
-     * Param:
-     *        pers -> Pointer to Character
-     *        group -> NPC group Number
-     *        brief -> briefing string
+     /*!
+     *************************************************************** 
+     * Insert Character on NPCs List.  
+     * \param pers -> Pointer to Character
+     * \param group -> NPC group Number
+     * \param brief -> briefing string
+     * \return true if success.
      ***************************************************************/
      bool insertNPC(personagem* pers, int group, string& brief);
 
-     /*************************************************************** 
-     * Reason: do Battle Events. Returns false when battle ends.
-     * Param:
-     *        brief -> briefing to print, lines separed by '|' .
+     /*!
+     *************************************************************** 
+     * Do Battle Events. Returns false when battle ends.
+     * \param brief -> briefing to print, lines separed by '|' .
+     * \return true if battle continue, false otherwise.
      ***************************************************************/
      bool doBattleCicle(string& brief);
 
    private:
-     fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS]; /* PCs groups */
-     fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /* NPCs groups */
-     initiative charsInitiatives;     /* Character's Initiative */
+     fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS]; /**< PCs groups */
+     fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /**< NPCs groups */
+     initiative charsInitiatives;     /**< Character's Initiative */
 
-     /*************************************************************** 
-     * Reason: Verify if character is PC (and is on pcList).  
-     * Param:
-     *        pers -> Pointer to Character
+     /*!
+     *************************************************************** 
+     * Verify if character is PC (and is on pcList).  
+     * \param pers -> Pointer to Character
+     * \return true if character is a PC.
      ***************************************************************/
      bool isPC(personagem* pers);
-     /*************************************************************** 
-     * Reason: Do a complete round on game.  
-     * Param:
-     *        brief -> briefing to print, lines separed by '|' .
+     /*!
+     *************************************************************** 
+     * Do a complete turn on game.  
+     * \param brief -> briefing to print, lines separed by '|' .
+     * \return true if battle continue, false otherwise.
      ***************************************************************/
      bool doTurn(string& brief);
-     /*************************************************************** 
-     * Reason: Do a npc action for character.  
-     * Param:
-     *        pers -> Pointer to Character that will act
+     /*!
+     *************************************************************** 
+     * Do a npc action for character.  
+     * \param pers -> Pointer to Character that will act
+     * \param brief -> briefing to print, lines separed by '|' .
      ***************************************************************/
      void doNPCAction(personagem* pers, string& brief);
-     /*************************************************************** 
-     * Reason: Get an action for player character.  
-     * Param:
-     *        pers -> Pointer to Character that will act
+     /*!
+     *************************************************************** 
+     * Get an action for player character.  
+     * \param pers -> Pointer to Character that will act
+     * \param brief -> briefing to print, lines separed by '|' .
      ***************************************************************/
      void getPCAction(personagem* pers, string& brief);
-     /*************************************************************** 
-     * Reason: Returns the attack feat for NPC to use  
-     * Param:
-     *        pers -> Pointer to Character that will use feat
-     *        target -> Pointer to Character that will receive feat
+     /*!
+     *************************************************************** 
+     * Get the attack feat for NPC to use  
+     * \param pers -> Pointer to Character that will use feat
+     * \param target -> Pointer to Character that will receive feat
+     * \return feat number to use.
      ***************************************************************/
      int getNPCAttackFeat(personagem* pers, personagem* target);
-     /*************************************************************** 
-     * Reason: Returns an ememy character to attack.  
-     * Param:
-     *        pers -> Pointer to Character that will act
+     /*!
+     *************************************************************** 
+     * Get an ememy character to attack.  
+     * \param pers -> Pointer to Character that will act
+     * \return enemy character target.
      ***************************************************************/
      personagem* getNPCEnemy(personagem* pers);
-     /*************************************************************** 
-     * Reason: Do, if wanted, NPC movimentation  
-     * Param:
-     *        pers -> Pointer to Character that will act
-     *        when -> time when do movimentation (before or after 
+     /*!
+     *************************************************************** 
+     * Do, if wanted, NPC movimentation  
+     * \param pers -> Pointer to Character that will act
+     * \param when -> time when do movimentation (before or after 
      *                attack) 
      ***************************************************************/
      void doNPCMovimentation(personagem* pers, int when);
 
+     /*!
+     ***************************************************************
+     * Verifies if character has enemies.
+     * \param pers -> pointer to character to verify.
+     * \param brief -> briefing to print, lines separed by '|' .
+     * \return true if has enemies, false otherwise.
+     *************************************************************/
      bool hasEnemies(personagem* pers, string& brief);
 };
 

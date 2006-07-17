@@ -14,112 +14,128 @@
 #include "../classes/feats.h"
 //#include "habilidades.h"
 //#include "../etc/glm.h"
-#include <cal3d/cal3d.h> //for now, utilising cal3d
+#include <cal3d/cal3d.h>
 #include <string>
 using namespace std;
 #include "../map/map.h"
 
-#define POSRETX 8   // posicao x do retrato na janela
-#define POSRETY 20  // posicao y do retrato na janela
+#define POSRETX 8   /**< X screen portrait position */
+#define POSRETY 20  /**< Y screen portrait position */
 
-#define STATE_IDLE  0 
-#define STATE_WALK  1
+#define STATE_IDLE  0 /**< Character Animation State Idle */
+#define STATE_WALK  1 /**< Character Animation State Walking */
 
 
+/*! Character Class */
 class personagem: public Tobjeto, public thing
 {
    public:
 
-      int m_state;
+      int m_state;              /**< current animation state */
 
-      Tlista *portraits;        // all character portraits
-      Tlista *objects;          // actual character objects
-      Tobjeto *actualWeapon;    // actual weapon
+      Tlista *portraits;        /**< All character's portraits */
+      Tlista *objects;          /**< Actual character objects */
+      Tobjeto *actualWeapon;    /**< Actual weapon */
 
-      string nome;              // nome do personagem
-      string retratoConversa;   // arquivo de retrato de conversa
-      float orientacao;         // orientacao do personagem (onde esta sua cara)
-      float posicaoFrente;      // posicao do personagem pra frente
-      float posicaoLadoX;       // posicao do personagem pro lado
-      float posicaoLadoY;       // posicao vertical do personagem
-      float posicaoLadoZ;       // posicao do personagem pro lado
+      string nome;              /**< Character's name */
+      string retratoConversa;   /**< Portrait talk file name */
+      float orientacao;         /**< Character's orientation (angle) */
+      float posicaoFrente;      /**< Character's front postion. FIXME Used?? */
+      float posicaoLadoX;       /**< Character's X Position */
+      float posicaoLadoY;       /**< Character's Y Position (UP) */
+      float posicaoLadoZ;       /**< Character's Z Position */
 
-      GLfloat min[3];           // pontos de minimo do bounding box estatico
-      GLfloat max[3];           // pontos de maximo do bounding box estatico
+      GLfloat min[3];           /**< Min points of static bounding box */
+      GLfloat max[3];           /**< Max points of static bounding box */
 
-      GLuint portrait;
+      GLuint portrait;          /**< Up screen portrait GL texture */
 
-      Square* ocupaQuad;   // quadrado do mapa que ele ocupa com x1,z1
+      Square* ocupaQuad;        /**< Square occuped by character */
+      int ID;                   /**< Character's ID FIXME used?? */
 
-      int ID;
+      feats actualFeats;        /**< Feats owned by character */
 
+      int actualFightGroup;     /**< fightGroup of character, used on battles*/
+      personagem* actualEnemy;  /**< Pointer to actual fight enemy (target) */
+
+      // CAL3D related member variables
+      CalCoreModel* m_calCoreModel;  /**< Cal3D Core Model of character */
+      CalModel* m_calModel;          /**< Cal3D Model of character */
+
+
+      /*! Constructor
+       * \param ft -> pointer to all feats list */
       personagem(featsList* ft);
+      /*! Destructor */
       ~personagem();
+
+      /*! Load the cal3D model to be this character's body and animations.
+       * \param strFilename -> \c string with the cal3d file name.
+       * \return true if success on load. */
       bool LoadModel(const string& strFilename);
+
+      /*! Load the a texture to the model.
+       * \param strFilename -> \c string with the texture file name.
+       * \return the \c GLuint with the GL texture ID. */
       GLuint loadTexture(const string& strFilename);
+
+      /*! Set the animation state of the model.
+       * \param state -> state ID to be defined. */
       void SetState(int state);
+
+      /*! Render the model to the current frame state on screen. */
       void Render();
+
+      /*! Calculate the model static bounding box */
       void CalculateBoundingBox();
+
+      /*! Render the model bounding box. Only used on debugging */
       void RenderBoundingBox();
 
-      feats actualFeats;
-
-      int actualFightGroup;    /* fightGroup of character, used on battles*/
-      personagem* actualEnemy; /* pointer to actual fight enemy (target) */
-
-
-
-
-
-// CAL3D related member variables
-
-   CalCoreModel* m_calCoreModel;
-   CalModel* m_calModel;
-
- 
 protected:
   
-  int m_animationId[16];
-  int m_animationCount;
-  int m_meshId[32];
-  int m_meshCount;
-  GLuint m_textureId[32];
-  int m_textureCount;
-  float m_motionBlend[3];
-  float m_renderScale;
-  float m_lodLevel;
-  std::string m_path;
+  int m_animationId[16]; /**< Cal3D animation ID */
+  int m_animationCount;  /**< Cal3D number of animations */
+  int m_meshId[32];      /**< Cal3D meshes ID */
+  int m_meshCount;       /**< Cal3D meshes count */
+  GLuint m_textureId[32];/**< Cal3D texture ID */
+  int m_textureCount;    /**< Cal3D texture Count */
+  float m_motionBlend[3];/**< Cal3D motion blend */
+  float m_renderScale;   /**< Cal3D scale on render */
+  float m_lodLevel;      /**< Cal3D Level of Detail to render */
+  std::string m_path;    /**< Path to cal3D model */
+
+};
 
 
-};                 // O PERSONAGEM
-
+/*! Character's List */
 class Lpersonagem: public Tlista
 {
    public:
-      personagem* personagemAtivo;  // Personagem ativo pelo jogador atualmente
+      personagem* personagemAtivo;  /**< Active Character's on list */
 
-      /* Construtor da Lista */
+      /*! List Constructor */
       Lpersonagem():Tlista(){personagemAtivo=NULL;};
-      /* Destruidor da Lista */
+      /*! List Destructor */
       ~Lpersonagem();
 
-      /* Insere um personagem na Lista
-       * forca, agilidade, etc,
-       * inteligencia, esperteza -> atributos do personagem  
-       * retrato                 -> nome do arquivo de retrato
-       * x,y                     -> coordenada do personagem no Mapa
-       * nome                    -> Nome do Personagem
-       * arqmodelo               -> nome do arquivo do modelo3d do personagem*/
+      /*!
+       * Insert one character on list
+       * \param retrato -> file name of the portrait
+       * \param nome -> Character's Name
+       * \param arqmodelo -> character's Cal3D file name
+       * \param ft -> featsList of all feats on game */
       personagem* InserirPersonagem(char* retrato,string nome,string arqmodelo,
                                     featsList* ft);
                                     
-      /* Retira um Personagem da Lista
-       * persona -> ponteiro para o personagem que se deseja retirar
-       * tiraMemoria -> != 0 se eh para retirar realmente o personagem 
-       *                da lista, 0 senao (para o caso do destruidor)*/
+      /*!
+       * Remove one character from list
+       * \param persona -> character pointer to remove
+       * \param tiraMemoria -> != 0 if remove character from memory list, 
+                             0 in the case the destructor calls the function. */
       void Lpersonagem::RetirarPersonagem(personagem* persona, int tiraMemoria);
 
-};               // LISTA DE PERSONAGENS
+};
 
 #endif
 

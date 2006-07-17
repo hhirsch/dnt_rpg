@@ -18,35 +18,48 @@
 using namespace std;
 
 
-/* Definicao e Procedimentos de uma Barra de Texto */
-
+/*! Text Bar Definition */
 class barraTexto: public Tobjeto
 {
    public:
+      /*! Constructor */
       barraTexto();
+      /*! Destructor */
       ~barraTexto();
-      int x1,y1,x2,y2;    /* Coordenadas na janela */
-      int disp,           /* Disponivel? */
-      cript;              /* Pseudo criptografada? */
-      int inic,fim;       /* Extremos do texto visivel atualmente */
-      string texto;       /* Texto Presente na Caixa */
-      unsigned int pos;
-      int ultEsc;
-      char ultChar;
-                          /* Procedimento Acionado Depois de Editada */
+      int x1,              /**< Coordinate on Window */
+          y1,              /**< Coordinate on Window */
+          x2,              /**< Coordinate on Window */
+          y2;              /**< Coordinate on Window */
+      int disp,            /**< Avaible? */
+      cript;               /**< Pseudo-criptography? */
+      int inic,            /**< Actual first visible character on string */
+          fim;             /**< Actual last visible character on string */
+      string texto;        /**< Text on the bar */
+      unsigned int pos;    /**< Current cursor position */
+      int ultEsc;          /**< Last time when write */
+      char ultChar;        /**< Last Character writed */
+
+                           /*! After Edition Called Procedure  */
       void (*procEditada)(barraTexto* bart,SDL_Surface *screen);
       cores Cores;
 
-      /* Desenha uma barra de texto na tela
-       * Xjan, Yjan -> origem da janela em que esta inserida
-       * salvar     -> 0 nao atualiza a tela 1 atualiza
-       * screen     -> superficie em que esta presente */
+      /*!
+       * Draw the text bar on a surface
+       * \param Xjan -> window origin
+       * \param Yjan -> window origin
+       * \param salvar -> always 0.
+       * \param screen > suface to draw */
       void Desenhar(int Xjan, int Yjan,int salvar,SDL_Surface *screen);
 
-      /* Procede a escrita de texto em uma barra de texto
-       * Xjan,Yjan     -> coordenada da janela na qual esta a barra  
-       * mouseX,mouseY -> coordenada do mouse ao entrar na barra 
-       * screen        -> a superficie na qual se encontra a barra*/
+      /*!
+       * Make the write thing on text bar
+       * \param Xjan -> window origin
+       * \param Yjan -> window origin
+       * \param mouseX -> mouse X coordinate
+       * \param mouseY -> mouse Y coordinate
+       * \param screen -> surface to draw the text bar
+       * \param Mbotao -> SDL mouse buttons state info
+       * \param teclas -> SDL keyboard state info */
       int Escrever(int Xjan,int Yjan,int mouseX,int mouseY,
                     SDL_Surface *screen, Uint8 Mbotao, Uint8* teclas);
 
@@ -55,7 +68,6 @@ class barraTexto: public Tobjeto
                          SDL_Surface *screen);
 
 
-};          /* Barra de Texto */
-
-
+};
+ 
 #endif

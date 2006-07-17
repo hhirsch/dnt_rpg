@@ -7,46 +7,56 @@
 #include "../gui/objeto.h"
 #include "../gui/lista.h"
 
-/****************************************************
+/*!
+ ****************************************************
  *               Map's Objects                      *
  ****************************************************/
 class mapObjeto: public Tobjeto
 {
    public:
-     int deltaVariacao;   /* For how many distance change static LOD*/
-     char* nome;          /* Name of the object  */
-     char* nomeArq;       /* File Name of the object */
+     int deltaVariacao;   /**< For how many distance change static LOD*/
+     char* nome;          /**< Name of the object  */
+     char* nomeArq;       /**< File Name of the object */
 
-     /* Desenha o objeto, estando em x,z a uma distancia do
-      * observador (o que vai definir o LOD).
-      * x,z       -> posicao do objeto
-      * distancia -> distancia do objeto ao observador*/
+     /*!
+      * Draws the object
+      * \param x -> X position 
+      * \param z -> Z posotion
+      * \param distancia -> distance from observator (defines the LOD used)
+      * \param orientacao -> orientation angle of the object */
      void Desenhar(float x, float z,GLfloat distancia, float orientacao);
 
-     void* modelo3d;     // Modelo com nível máximo de detalhe
-     void* modeloMedio;  // Modelo com nível médio de detalhe
-     void* modeloMinimo; // Modelo com nível mínimo de detalhe
-};  // OBJETO DO MAPA
+     void* modelo3d;     /**< Max LOD Model */
+     void* modeloMedio;  /**< Med LOD Model */
+     void* modeloMinimo; /**< Min LOD Model */
+};
 
+/*! Map Objects list */
 class LmapObjeto: public Tlista
 {
     public:
-       /* Construtor */
+       /*! Constructor */
        LmapObjeto():Tlista(){};
-       /* Destruidor */
+       /*! Destruictor */
        ~LmapObjeto();
 
-       /* Insere um objeto de mapa
-        * arquivo -> nome do arquivo de definição do objeto*/
+       /*!
+        * Insert object on map list
+        * \param arquivo -> filename to load
+        * \param nome -> object name 
+        * \return pointer to the map Object created */
        mapObjeto* InserirMapObjeto(const char* arquivo, const char* nome);
-
+       /*!
+        * Search for object on map list
+        * \param nome -> object name 
+        * \return pointer to the map Object founded. */
        mapObjeto* EndMapObjeto(const char* nome);
 
-       /* Retira um Objeto de Mapa da Lista
-        * obj         -> ponteiro para o personagem que se deseja retirar
-        * tiraMemoria -> != 0 se eh para retirar realmente o objeto 
-        *                da lista, 0 senao (para o caso do destruidor)*/
+       /*!
+        * Remove object from list
+        * \param obj-> pointer to the object to remove.
+        * \param tiraMemoria -> != 0 if is to remove the memory from list,              *                or 0 when calling by the destructor.*/
        void RetirarMapObjeto(mapObjeto* obj, int tiraMemoria);
-}; // LISTA DE OBJETOS DO MAPA
+}; 
 
 #endif

@@ -3,119 +3,138 @@
 
 #include "particle.h"
 
-/******************************************
+/*!
+ ******************************************
  *            Max Planes Number           *
  ******************************************/
 #define PART1_MAX_PLANES 10
 
-/******************************************
- *        Plane Inclination Types         *
- ******************************************/
-#define PLANE_NO_INCLINATION 0
-#define PLANE_INCLINATION_X  1
-#define PLANE_INCLINATION_Z  2
+#define PLANE_NO_INCLINATION 0 /**< No Inclination on Plane */
+#define PLANE_INCLINATION_X  1 /**< Inclination on X axis */
+#define PLANE_INCLINATION_Z  2 /**< Inclination on Z axis */
 
+/*! Intersection Plane */
 typedef struct 
 {
-   float x1,x2;     /* X's coordinates of plane */
-   float y1,y2;     /* Y's coordinates of plane */
-   float z1,z2;     /* Z's coordinates of plane */
-   float dX, dZ;    /* Variation of water on plane */
-   int inclination; /* Inclination Type of plane */
-}interPlane; /* Intersection Plane */
+   float x1,        /**< X coordinate of plane */
+         x2;        /**< X coordinate of plane */
+   float y1,        /**< Y coordinate of plane */
+         y2;        /**< Y coordinate of plane */
+   float z1,        /**< Z coordinate of plane */
+         z2;        /**< Z coordinate of plane */
+   float dX,        /**< Variation X of water on plane */
+         dZ;        /**< Variation Z of water on plane */
+   int inclination; /**< Inclination Type of plane */
+}interPlane; 
 
+/*! WaterFalls Particle */
 class part1: public particleSystem
 {
    public:
-      part1(float cX,float cY,float cZ, string fileName);
+      /*! Contructor
+       * \param cX -> center X position
+       * \param cY -> center Y position
+       * \param cZ -> center Z position 
+       * \param fileName -> file name of the file to load */
+      part1(float cX,float cY,float cZ, string fileName); 
+      /*! Destructor */
       ~part1();
 
-      /***************************************************************
-       * Reason: Render one particle on screen
-       * Param: 
-       *         part -> particle to render
+      /*!
+       ***************************************************************
+       * Render one particle on screen
+       * \param part -> particle to render
        ***************************************************************/
       void Render(particle* part);
-      /***************************************************************
-       * Reason: Do things before render (like glBegin)
-       * Param: 
+      /*!
+       ***************************************************************
+       * Do things before render (like glBegin)
        ***************************************************************/ 
       void InitRender();
-      /***************************************************************
-       * Reason: Do things after render (like glEnd)
-       * Param: 
+      /*!
+       ***************************************************************
+       * Do things after render (like glEnd)
        ***************************************************************/ 
       void EndRender();
-      /***************************************************************
-       * Reason: actualize particles attributes (with global independent
+      /*!
+       ***************************************************************
+       * actualize particles attributes (with global independent
        *         forces and influentions).
-       * Param: 
-       *         part -> particle to actualize
+       * \param part -> particle to actualize
        ***************************************************************/
       void actualize(particle* part);
-      /***************************************************************
-       * Reason: true if particle continue live, false, otherwise.
-       * Param: 
-       *         part -> particle to verify
+      /*!
+       ***************************************************************
+       * Verifies if the particle continue live or not.
+       * \param part -> particle to verify
+       * \return true if particle continue live, false, otherwise.
        ***************************************************************/
       bool continueLive(particle* part);
-      /***************************************************************
-       * Reason: Total Particles needed to create on this step
-       * Param: 
+      /*!
+       ***************************************************************
+       * Total Particles needed to create on this step
+       * \return Number of particles to create
        ***************************************************************/
       int needCreate();
-      /***************************************************************
-       * Reason: create a particle (its position, color, etc);
-       * Param: 
-       *         part -> particle struct that will have the new created;
+      /*!
+       ***************************************************************
+       * Create a particle (its position, color, etc);
+       * \param part -> particle struct that will have the new created;
        ***************************************************************/
       void createParticle(particle* part);
-      /***************************************************************
-       * Reason: Do a step on system after sec seconds
-       * Param: 
-       *        sec -> time (on seconds);
+      /*!
+       ***************************************************************
+       * Do a step on system after sec seconds
+       * \param sec -> time (on seconds) \b NOT \b USED;
        ***************************************************************/
       void NextStep(float sec);
-      /***************************************************************
-       * Reason: Return the number of actual active particles
-       * Param: 
+      /*!
+       ***************************************************************
+       * Gets the number of actual active particles
+       * \return number of actual living particles. 
        ***************************************************************/
       int numParticles();
-      /***************************************************************
-       * Reason: Add one plane to internal Planes
-       * Param: 
-       *         x1,y1,z1 -> initial plane coordinates
-       *         x2,y2,z2 -> final plane coordinates
-       *         dX, dZ   -> particle axys variation when plane contact
-       *         inclination -> plane inclination type
+      /*!
+       ***************************************************************
+       * Add one plane to internal Planes
+       * \param x1 -> initial x plane coordinate 
+       * \param y1 -> initial y plane coordinate
+       * \param z1 -> initial z plane coordinate
+       * \param x2 -> final x plane coordinate 
+       * \param y2 -> final y plane coordinate
+       * \param z2 -> final z plane coordinate
+       * \param dX -> particle X variation when plane contact
+       * \param dZ -> particle Z variation when plane contact
+       * \param inclination -> plane inclination type
        ***************************************************************/
       void addPlane(float x1, float y1, float z1, 
                     float x2, float y2, float z2, 
                     float dX, float dZ, int inclination);
-      /***************************************************************
-       * Reason: Remove The Character's Planes
-       * Param: 
+      /*!
+       ***************************************************************
+       * Removes The Character's Planes
        ***************************************************************/
       void removeCharacterPlanes();
-      /***************************************************************
-       * Reason: Verify if Particle intersects one internal Plane
-       * Param: 
-       *         part -> particle struct;
-       *         dX -> Variation on X particle axys when intersects
-       *         dZ -> Variation on Z particle axys when intersects
+      /*!
+       ***************************************************************
+       * Verify if Particle intersects one internal Plane
+       * \param part -> particle struct;
+       * \param dX -> Variation on X particle axys when intersects
+       * \param dZ -> Variation on Z particle axys when intersects
+       * \return true if intersects.
        ***************************************************************/
       bool intersectPlanes(particle* part, float* dX, float* dZ); 
 
    private:
-      float seconds;         /* Actual Time on particle */
-      GLuint partTexture;    /* Current particle texture */
-      interPlane intersections[PART1_MAX_PLANES]; /* The internal Planes */
-      int actualPlanes;      /* actual number of planes */
+      float seconds;         /**< Actual Time on particle */
+      GLuint partTexture;    /**< Current particle texture */
+      interPlane intersections[PART1_MAX_PLANES]; /**< The internal Planes */
+      int actualPlanes;      /**< actual number of planes */
 
-      /***************************************************************
-       * Reason: Load the particle texture file
-       * Param: 
-       *        fileName -> texture file name;
+      /*!
+       **************************************************************
+       * Load the particle texture file
+       * \param fileName -> texture file name;
        ***************************************************************/
       GLuint LoadTexture(char* fileName);
 };

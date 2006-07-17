@@ -3,63 +3,84 @@
 
 #include "particle.h"
 
+/*! Snow Particle */
 class part7: public particleSystem
 {
    public:
+      /*! Contructor
+       * \param cX -> center X position
+       * \param cY -> center Y position
+       * \param cZ -> center Z position 
+       * \param fileName -> file name of the file to load */
       part7(float cX,float cY,float cZ, string fileName);
+      /*! Destructor */
       ~part7();
 
-      /***************************************************************
-       * Reason: Render one particle on screen
-       * Param: 
-       *         part -> particle to render
+      /*!
+       ***************************************************************
+       * Render one particle on screen
+       * \param part -> particle to render
        ***************************************************************/
       void Render(particle* part);
-      /***************************************************************
-       * Reason: Do things before render (like glBegin)
-       * Param: 
+      /*!
+       ***************************************************************
+       * Do things before render (like glBegin)
        ***************************************************************/ 
       void InitRender();
-      /***************************************************************
-       * Reason: Do things after render (like glEnd)
-       * Param: 
+      /*!
+       ***************************************************************
+       * Do things after render (like glEnd)
        ***************************************************************/ 
       void EndRender();
-      /***************************************************************
-       * Reason: actualize particles attributes (with global independent
+      /*!
+       ****************************************************************
+       * Actualize particles attributes (with global independent
        *         forces and influentions).
-       * Param: 
-       *         part -> particle to actualize
+       * \param part -> particle to actualize
        ***************************************************************/
       void actualize(particle* part);
-      /***************************************************************
-       * Reason: true if particle continue live, false, otherwise.
-       * Param: 
-       *         part -> particle to verify
+      /*!
+       ***************************************************************
+       * Verifies if a particle continue live
+       * \param part -> particle to verify
+       * \return true if particle continue live, false, otherwise.
        ***************************************************************/
       bool continueLive(particle* part);
-      /***************************************************************
-       * Reason: Total Particles needed to create on this step
-       * Param: 
+      /*!
+       ***************************************************************
+       * Total Particles needed to create on this step
+       * \return number of particles to create. 
        ***************************************************************/
       int needCreate();
-      /***************************************************************
-       * Reason: create a particle (its position, color, etc);
-       * Param: 
-       *         part -> particle struct that will have the new created;
+      /*!
+       ***************************************************************
+       * Create a particle (its position, color, etc);
+       * \param part -> particle struct that will have the new created;
        ***************************************************************/
       void createParticle(particle* part);
-
+      /*!
+       ***************************************************************
+       * Do Next Step on System, rendering and actualizing
+       * \param sec -> \b NOT \b USED \b ANYMORE
+       ***************************************************************/
       void NextStep(float sec);
-
+      /*!
+       ***************************************************************
+       * Gets total living particles.
+       * \return number of living particles
+       ***************************************************************/
       int numParticles();
-     
+      /*!
+       **************************************************************
+       * Load the particle texture file
+       * \param fileName -> texture file name;
+       ***************************************************************/
       GLuint LoadTexture(char* fileName);
 
 
    private:
-      float seconds;
-      GLuint partTexture;
+      float seconds;     /**< Seconds, not used anymore. */
+      GLuint partTexture;/**< GL Particle Texture */
 };
 
 

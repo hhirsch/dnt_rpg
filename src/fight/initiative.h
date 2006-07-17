@@ -10,45 +10,51 @@
 using namespace std;
 #include "../engine/personagens.h"
 
-
+/*! Implementation of the Struct of Initiative */
 class initiativeStruct
 {
    public:
-
+      /*! Constructor */
       initiativeStruct(){};
+      /*! Destructor */
       ~initiativeStruct(){};
  
-      personagem* character;   /* Character Pointer */
-      initiativeStruct* next;  /* Next Character on Initiative Pointer */
-      int initiativeValue;     /* Initiative Value of the Character */
+      personagem* character;   /**< Character Pointer */
+      initiativeStruct* next;  /**< Next Character on Initiative Pointer */
+      int initiativeValue;     /**< Initiative Value of the Character */
 };
 
+/*! Initiatives Implementation */
 class initiative
 {
    public:
+     /*! Constructor */
      initiative();
+     /*! Destructor */
      ~initiative();
 
-     /*************************************************************** 
-     * Reason: Insert Character on Initiative.  
-     * Param:
-     *        pers -> Pointer to Character
+     /*!
+     *************************************************************** 
+     * Insert Character on Initiative.  
+     * \param pers -> Pointer to Character
+     * \param brief -> briefing string
      ***************************************************************/
      void insertCharacter(personagem* pers, string& brief);
-     /*************************************************************** 
-     * Reason: Actualize the pointers to a new Round.  
-     * Param:
+     /*!
+     *************************************************************** 
+     * Actualize the pointers to a new Round.  
      ***************************************************************/
      void newRound();
-     /*************************************************************** 
-     * Reason: Return the next Character to Play.  
-     * Param:
+     /*!
+     *************************************************************** 
+     * Gets the next Character to Play.  
+     * \return pointer to next character to play.
      ***************************************************************/
      personagem* nextCharacter();
 
    private:
-     initiativeStruct* first;  /* First character on initiative list */
-     initiativeStruct* actual; /* Actual character on initiative list */
+     initiativeStruct* first;  /**< First character on initiative list */
+     initiativeStruct* actual; /**< Actual character on initiative list */
 };
 
 #endif

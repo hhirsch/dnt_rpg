@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <math.h>
 
+/*! \file ai.h
+ * Currently the file is no use anymore, so not documented. */
+
 #define TIPOOBSTACULO -240 
 #define TIPOPC 100           
 #define TIPONPC -260 

@@ -5,35 +5,39 @@
 #include "../classes/skills.h"
 #include "../lang/lang.h"
 
-#define CHAR_CANCEL  0
-#define CHAR_CONFIRM 1
-#define CHAR_OTHER   2
+#define CHAR_CANCEL  0 /**< Cancel Character Edition Return TODO not here*/
+#define CHAR_CONFIRM 1 /**< Confirm Character Edition Return TODO not here */
+#define CHAR_OTHER   2 /**< Other Character Edition Return TODO not here */
 
-#define SKILLW_CANCEL  0
-#define SKILLW_CONFIRM 1
-#define SKILLW_OTHER   2
+#define SKILLW_CANCEL  0 /**< Cancel return from Skill Window */
+#define SKILLW_CONFIRM 1 /**< Confirm return from skill window */
+#define SKILLW_OTHER   2 /**< Other return from Skill Window */
 
+/*! Skills Edition Window */
 class skillWindow
 {
    public:
-      /* Skill Window constructor */
+      /*! Skill Window constructor */
       skillWindow(skills* sk, int points, interface* inter);
-      /* Treat Events on Window. Returns 0 on close, 1 otherwise */
+
+      /*! Treat Events on Window. 
+       * \param inter -> pointer to GUI interface
+       * \return 0 on close, 1 otherwise */
       int treat(interface* inter);
 
-      janela*      window;           /* Pointer to the internal window */
+      janela*      window;           /**< Pointer to the internal window */
+
    private:
-      skills*      externalSkill;    /* Pointer to the edited skillList */
-      int          avaiblePoints;    /* Avaible points to distribute */
-      int          curSkill;         /* Actual Skill */
-      quadroTexto* desc;             /* Description Text */
-      quadroTexto* txtAvaiblePoints; /* Avaible Points Text */
-      quadroTexto* skillName;        /* Actual Skill Name */
-      quadroTexto* txtPoints;        /* Actual Points Text */
-      quadroTexto* txtCosts;         /* Actual Cost Text */
-      figura*      skFig;            /* Actual skill Image */
-      lang language;
- 
+      skills*      externalSkill;    /**< Pointer to the edited skillList */
+      int          avaiblePoints;    /**< Avaible points to distribute */
+      int          curSkill;         /**< Actual Skill */
+      quadroTexto* desc;             /**< Description Text */
+      quadroTexto* txtAvaiblePoints; /**< Avaible Points Text */
+      quadroTexto* skillName;        /**< Actual Skill Name */
+      quadroTexto* txtPoints;        /**< Actual Points Text */
+      quadroTexto* txtCosts;         /**< Actual Cost Text */
+      figura*      skFig;            /**< Actual skill Image */
+      lang language;                 /**< Language internationalization */
 };
 
 #endif

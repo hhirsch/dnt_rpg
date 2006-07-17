@@ -4,20 +4,25 @@
 #include <string>
 using namespace std;
 
-#define LANG_FIRST     1
-#define LANG_LAST      4
+#define LANG_FIRST     1 /**< First Language*/
+#define LANG_LAST      4 /**< Las Language */
 
-#define LANG_PORTUGUES 4
-#define LANG_ESPANHOL  2
-#define LANG_FRANCES   3
-#define LANG_INGLES    1
+#define LANG_PORTUGUES 4 /**< Portuguese Language */
+#define LANG_ESPANHOL  2 /**< Spanish Language */
+#define LANG_FRANCES   3 /**< French Language */
+#define LANG_INGLES    1 /**< English Language */
 
+/*! Language Internationalization Class */
 class lang
 {
   public:
+     /*! Constructor */
      lang();
+     /*! Destructor */
      ~lang();
-
+ 
+     /*! Reload the language file
+      * \param lng -> language ID of language to load. */
      void ReloadFile(int lng);
 
    static string VERSION;
@@ -68,15 +73,6 @@ class lang
    static string ERROR_INIT_SDL;
    
 };
-
-
-
-
-//#include "../lang/portugues.h"
-//#include "../lang/espanhol.h"
-//#include "../lang/ingles.h"
-//#include "../lang/frances.h"
-
 
 #endif
 
