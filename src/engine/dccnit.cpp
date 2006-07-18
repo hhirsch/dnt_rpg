@@ -1328,7 +1328,7 @@ void engine::Draw()
                         per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            per->Render();
-           per->RenderBoundingBox();
+           /*per->RenderBoundingBox();
            glColor3f(0.6,0.1,0.1);
            glBegin(GL_POLYGON);
               glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
@@ -1336,7 +1336,7 @@ void engine::Draw()
               glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
 
-           glEnd();
+           glEnd();*/
          glPopMatrix();
          
          per = (personagem*) per->proximo;
@@ -1353,7 +1353,7 @@ void engine::Draw()
            glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            per->Render();
-           per->RenderBoundingBox();
+           /*per->RenderBoundingBox();
            glColor3f(0.6,0.1,0.1);
            glBegin(GL_POLYGON);
               glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
@@ -1361,7 +1361,7 @@ void engine::Draw()
               glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
 
-           glEnd();
+           glEnd();*/
          glPopMatrix();
          per = (personagem*) per->proximo;
       }
