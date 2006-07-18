@@ -974,7 +974,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                                          PCs->personagemAtivo->posicaoLadoX,28,
                                          PCs->personagemAtivo->posicaoLadoZ, 
                                          "../data/particles/blood2.par");
-             p->followPC = true;
+             if(p) 
+               p->followPC = true;
          }
          if(keys[SDLK_l])
          {
