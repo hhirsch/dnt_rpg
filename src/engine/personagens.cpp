@@ -22,7 +22,7 @@ personagem::personagem(featsList* ft)
   m_meshCount = 0;
   m_renderScale = 1.0f;
   m_lodLevel = 1.0f;
-  lifeBar = new healthBar(10,100,117,120);
+  lifeBar = new healthBar(10,103,117,123);
 
   /* Feat Details */
   actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
@@ -104,9 +104,9 @@ void personagem::CalculateBoundingBox()
         else
         {
            if(p[aux2].x > max[0])
-             max[0] = p[aux2].x/2;
+             max[0] = p[aux2].x;
            if(p[aux2].x < min[0])
-             min[0] = p[aux2].x/2;
+             min[0] = p[aux2].x;
            if(p[aux2].y > max[1])
              max[1] = p[aux2].y;
            if(p[aux2].y < min[1])

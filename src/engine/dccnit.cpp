@@ -314,6 +314,9 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    {
       per->m_calModel->update(0); 
       per->CalculateBoundingBox();  
+      //FIXME gambiarra to make logan bounding ok when arms down.
+        per->max[0] /= 2.0;
+        per->min[0] /= 2.0;
       per = (personagem*) per->proximo;
    }
 
@@ -662,7 +665,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       for(aux=0;aux< PCs->total;aux++)
       {
          per->m_calModel->update(segundos); 
-         //per->CalculateBoundingBox(); use only one bounding, for better walk
+         //per->CalculateBoundingBox(); 
          per = (personagem*) per->proximo;
       }
     
@@ -1325,14 +1328,15 @@ void engine::Draw()
                         per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            per->Render();
-           /*glColor3f(0.6,0.1,0.1);
+           per->RenderBoundingBox();
+           glColor3f(0.6,0.1,0.1);
            glBegin(GL_POLYGON);
               glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
               glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
 
-           glEnd();*/
+           glEnd();
          glPopMatrix();
          
          per = (personagem*) per->proximo;
@@ -1349,6 +1353,15 @@ void engine::Draw()
            glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            per->Render();
+           per->RenderBoundingBox();
+           glColor3f(0.6,0.1,0.1);
+           glBegin(GL_POLYGON);
+              glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
+              glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
+              glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
+              glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+
+           glEnd();
          glPopMatrix();
          per = (personagem*) per->proximo;
       }
