@@ -19,6 +19,7 @@ class thing
       ~thing();
 
       int lifePoints;         /**< Thing's Life points */
+      int maxLifePoints;      /**< Thing's Max Life Points */
       int fortitude;          /**< Thing's Fortitude */
       int reflexes;           /**< Thing's Reflexes */
       int will;               /**< Thing's Will */

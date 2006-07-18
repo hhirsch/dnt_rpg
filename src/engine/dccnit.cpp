@@ -540,7 +540,6 @@ void engine::drawSphereToList(int lats, int longs)
    glEndList();
 }
 
-
 /*********************************************************************
  *                       Init Engine Function                        *
  *********************************************************************/
@@ -581,9 +580,14 @@ void engine::Init(SDL_Surface *screen)
    glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
    glLightf (GL_LIGHT1, GL_SPOT_EXPONENT, 2.5);
 #endif
+
    GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
+   glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
+   glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
+
    glEnable(GL_LIGHTING);
+
    //glEnable(GL_LIGHT0);
    //glDisable(GL_LIGHT0);
    //glEnable(GL_LIGHT1);
@@ -644,6 +648,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    float wx,wy,wz;
 
    tempo = SDL_GetTicks();
+   srand(tempo);
    varTempo = (tempo-ultimaLeitura);
    if( ((varTempo)) >= 20)
    {
@@ -1365,20 +1370,7 @@ void engine::Draw()
 
    /* Player's Portrait */
    per = (personagem*) PCs->personagemAtivo;
-   glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, per->portrait );
-   glBegin(GL_QUADS);
-      glColor3f(1,1,1);
-      glTexCoord2f(1,0);
-      glVertex3f(x1,y1,z1);
-      glTexCoord2f(1,1);
-      glVertex3f(x2,y2,z2);
-      glTexCoord2f(0,1);
-      glVertex3f(x3,y3,z3);
-      glTexCoord2f(0,0);
-      glVertex3f(x4,y4,z4);
-   glEnd();
-   glDisable(GL_TEXTURE_2D);
+   per->DrawMainPortrait(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4);
 
    gui->Desenhar(proj,modl,viewPort);
 

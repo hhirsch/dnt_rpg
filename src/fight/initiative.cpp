@@ -38,7 +38,7 @@ void initiative::insertCharacter(personagem* pers, string& brief)
 {
    char text[20];
    initiativeStruct *cmp, *aux, *oth;
-   srand48(SDL_GetTicks());
+   srand(SDL_GetTicks());
 
    brief = pers->nome + " rolls initiative: ";
 
@@ -47,7 +47,7 @@ void initiative::insertCharacter(personagem* pers, string& brief)
    {
       first = new(initiativeStruct);
       first->next = NULL;
-      first->initiativeValue = (lrand48() % DICE_D20 +1) +  
+      first->initiativeValue = (rand() % DICE_D20 +1) +  
                                pers->attBonus(ATT_DEXTERY);
       sprintf(text,"%d.",first->initiativeValue);
       brief += text;
@@ -56,7 +56,7 @@ void initiative::insertCharacter(personagem* pers, string& brief)
    else
    {
       aux = new initiativeStruct;
-      aux->initiativeValue = (lrand48() % DICE_D20 +1) +
+      aux->initiativeValue = (rand() % DICE_D20 +1) +
                              pers->attBonus(ATT_DEXTERY);
       sprintf(text,"%d.",aux->initiativeValue);
       brief += text;

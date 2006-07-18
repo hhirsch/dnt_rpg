@@ -22,6 +22,7 @@ personagem::personagem(featsList* ft)
   m_meshCount = 0;
   m_renderScale = 1.0f;
   m_lodLevel = 1.0f;
+  lifeBar = new healthBar(10,100,117,120);
 
   /* Feat Details */
   actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
@@ -33,7 +34,7 @@ personagem::personagem(featsList* ft)
  *********************************************************************/
 personagem::~personagem()
 {
-  
+   delete(lifeBar);
 }
 
 /*********************************************************************
@@ -539,6 +540,51 @@ void personagem::SetState(int state)
    }
 }
 
+void personagem::DefineMaxLifePoints(int maxPoints)
+{
+  maxLifePoints = maxPoints;
+  lifeBar->defineMaxHealth(maxPoints);
+  DefineActualLifePoints(maxPoints);
+}
+
+void personagem::DefineActualLifePoints(int newLife)
+{
+   lifePoints = newLife;
+   lifeBar->defineActualHealth(newLife);
+   figura* fig = (figura*) portraits->primeiro->proximo;
+
+   lifeBar->draw(fig->fig);
+
+   glGenTextures(1, &portrait);
+      glBindTexture(GL_TEXTURE_2D, portrait);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fig->fig->w, fig->fig->h, 
+                   0, GL_RGBA, GL_UNSIGNED_BYTE, fig->fig->pixels);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
+
+
+void personagem::DrawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
+                                  GLdouble x2, GLdouble y2, GLdouble z2,
+                                  GLdouble x3, GLdouble y3, GLdouble z3,
+                                  GLdouble x4, GLdouble y4, GLdouble z4)
+{
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, portrait );
+   glBegin(GL_QUADS);
+      glColor3f(1,1,1);
+      glTexCoord2f(1,0);
+      glVertex3f(x1,y1,z1);
+      glTexCoord2f(1,1);
+      glVertex3f(x2,y2,z2);
+      glTexCoord2f(0,1);
+      glVertex3f(x3,y3,z3);
+      glTexCoord2f(0,0);
+      glVertex3f(x4,y4,z4);
+   glEnd();
+   glDisable(GL_TEXTURE_2D);
+}
+
 
 /*********************************************************************
  *                      Destruidor da Lista                          *
@@ -577,15 +623,10 @@ personagem* Lpersonagem::InserirPersonagem(char* retrato, string nome,
    novo->dead = false;
    novo->nome = nome;
    /* Define os Retratos */
-   figura* fig;
-   fig = novo->portraits->InserirFigura(POSRETX,POSRETY,0,0,retrato);
-    glGenTextures(1, &novo->portrait);
-      glBindTexture(GL_TEXTURE_2D, novo->portrait);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fig->fig->w, fig->fig->h, 
-                                  0, GL_RGBA, GL_UNSIGNED_BYTE, fig->fig->pixels);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+   novo->portraits->InserirFigura(POSRETX,POSRETY,0,0,retrato);
+    
+   //FIXME redefine it by class or something different.
+   novo->DefineMaxLifePoints(10);
 
    novo->LoadModel(arqmodelo);
 

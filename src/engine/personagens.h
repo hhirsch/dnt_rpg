@@ -10,6 +10,7 @@
 #include "../gui/figura.h"
 #include "../gui/objeto.h"
 #include "../gui/lista.h"
+#include "../gui/healthBar.h"
 #include "../classes/thing.h"
 #include "../classes/feats.h"
 //#include "habilidades.h"
@@ -48,8 +49,6 @@ class personagem: public Tobjeto, public thing
       GLfloat min[3];           /**< Min points of static bounding box */
       GLfloat max[3];           /**< Max points of static bounding box */
 
-      GLuint portrait;          /**< Up screen portrait GL texture */
-
       Square* ocupaQuad;        /**< Square occuped by character */
       int ID;                   /**< Character's ID FIXME used?? */
 
@@ -57,6 +56,9 @@ class personagem: public Tobjeto, public thing
 
       int actualFightGroup;     /**< fightGroup of character, used on battles*/
       personagem* actualEnemy;  /**< Pointer to actual fight enemy (target) */
+
+      GLuint portrait;          /**< Up screen portrait GL texture */
+      healthBar* lifeBar;       /**< Character's Life Bar */
 
       // CAL3D related member variables
       CalCoreModel* m_calCoreModel;  /**< Cal3D Core Model of character */
@@ -92,6 +94,14 @@ class personagem: public Tobjeto, public thing
       /*! Render the model bounding box. Only used on debugging */
       void RenderBoundingBox();
 
+      void DrawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
+                                  GLdouble x2, GLdouble y2, GLdouble z2,
+                                  GLdouble x3, GLdouble y3, GLdouble z3,
+                                  GLdouble x4, GLdouble y4, GLdouble z4);
+      void DefineActualLifePoints(int newLife);
+      void DefineMaxLifePoints(int maxPoints);
+
+
 protected:
   
   int m_animationId[16]; /**< Cal3D animation ID */
@@ -104,7 +114,6 @@ protected:
   float m_renderScale;   /**< Cal3D scale on render */
   float m_lodLevel;      /**< Cal3D Level of Detail to render */
   std::string m_path;    /**< Path to cal3D model */
-
 };
 
 

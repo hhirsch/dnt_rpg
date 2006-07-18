@@ -73,8 +73,8 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
       make this in a more expert way */
    if(actualCharacters > 1)
    {
-      srand48(SDL_GetTicks());
-      int ch = ((lrand48() % actualCharacters));
+      srand(SDL_GetTicks());
+      int ch = ((rand() % actualCharacters));
       if( (!characters[ch]->dead) && (characters[ch] != pers) )
       {
          return(characters[ch]);

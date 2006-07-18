@@ -129,7 +129,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
    sprintf(texto,"%s ",m_feats[featNumber].name.c_str());
    brief += texto;
 
-   srand48(SDL_GetTicks());
+   srand(SDL_GetTicks());
 
    if( (m_feats[featNumber].actualQuantity >= m_feats[featNumber].costToUse)
        || (m_feats[featNumber].costToUse) == 0 )
@@ -143,7 +143,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus) + 
               attacker.sizeModifier + attacker.baseAttackModifier;
 
-      diceValue = ((lrand48() % DICE_D20)+1); 
+      diceValue = ((rand() % DICE_D20)+1); 
 
       //TODO apply reflexes bonus, esquive bonus, etc, to target 
       targetValue = target.armatureClass;
@@ -151,7 +151,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       /* verify critical Hit */
       if(diceValue == DICE_D20)
       {
-          criticalRoll = lrand48() % DICE_D20 +1;
+          criticalRoll = rand() % DICE_D20 +1;
           if( (criticalRoll + bonus - targetValue) > 0)
           {
               criticalHit = true;
@@ -161,7 +161,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       /* verify critical Miss */
       if( diceValue == 1)  
       {
-          criticalRoll = (lrand48() % DICE_D20 +1);
+          criticalRoll = (rand() % DICE_D20 +1);
           if( (criticalRoll + bonus - targetValue) <= 0 )
           {
              criticalMiss = true;
@@ -203,7 +203,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       /* Apply Base Damage Dices */
       for(i = 0; i < m_feats[featNumber].diceInfo.baseDice.numberOfDices; i++)
       {
-          damage+=(lrand48() % m_feats[featNumber].diceInfo.baseDice.diceID)+1;
+          damage+=(rand() % m_feats[featNumber].diceInfo.baseDice.diceID)+1;
       }
       /* Sum Dice Damage Number */
       damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
@@ -214,7 +214,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
          /* Double Base Damage Dices */
          for(i = 0; i<m_feats[featNumber].diceInfo.baseDice.numberOfDices; i++)
          {
-             damage+=(lrand48()%m_feats[featNumber].diceInfo.baseDice.diceID)+1;
+             damage+=(rand()%m_feats[featNumber].diceInfo.baseDice.diceID)+1;
          }
          /* Sum Dice Damage Number */
          damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
@@ -269,8 +269,8 @@ int feats::getNPCAttackFeat(thing* pers, thing* target)
 
    if( (target != NULL) && (pers != NULL))
    {
-      srand48(SDL_GetTicks());
-      ft = (lrand48() % totalFeats);
+      srand(SDL_GetTicks());
+      ft = (rand() % totalFeats);
 
       if( (ft != FEAT_RANGED_ATTACK) && (ft != FEAT_MELEE_ATTACK) &&
           (m_feats[ft].action == ACT_ATTACK)  && 
