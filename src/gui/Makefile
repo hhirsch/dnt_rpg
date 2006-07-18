@@ -4,8 +4,8 @@ CC = gcc
 CPP = g++
 CFLAGS = -g -c -Wall
 EFLAGS = -g -Wall -lm -lSDL -lSDL_image
-OBJS = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o menu.o mouse.o quadtexto.o seltexto.o 
-OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o janela.o lista.o menu.o mouse.o quadtexto.o seltexto.o tabbotao.o
+OBJS = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o menu.o mouse.o quadtexto.o seltexto.o 
+OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o lista.o menu.o mouse.o quadtexto.o seltexto.o tabbotao.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -65,6 +65,11 @@ figura.o: figura.h figura.cpp
 fonte.o: fonte.h fonte.c
 	@printf "Making fonte.o... "
 	@$(CPP) $(CFLAGS) fonte.c -o fonte.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+healthBar.o: healthBar.h healthBar.cpp
+	@printf "Making healthBar.o... "
+	@$(CPP) $(CFLAGS) healthBar.cpp -o healthBar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 janela.o: janela.h janela.cpp

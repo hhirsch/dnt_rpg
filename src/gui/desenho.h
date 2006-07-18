@@ -6,7 +6,7 @@
 #ifndef _desenho_h
 #define _desenho_h
 
-/* desenho.h, onde sao definidas as instrucoes de desenho na tela,
+/*! \file desenho.h, onde sao definidas as instrucoes de desenho na tela,
  * posteriormente utilizada para o desenvolvimento das primitivas
  * 'janeliferas'.*/
 #include <SDL/SDL.h>
