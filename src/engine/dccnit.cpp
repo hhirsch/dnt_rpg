@@ -70,7 +70,7 @@ engine::engine()
 
    particleSystem = new partSystem();
 
-   /* TODO Initialize Particles, it will not be here!! */
+   /* FIXME Initialize Particles, it will not be here!! */
 
    part1* particula;
 
@@ -1398,7 +1398,8 @@ void engine::Draw()
    gluUnProject(mouseX,Y-32,Z, modl, proj, viewPort, &x2, &y2, &z2);
    gluUnProject(mouseX+32,Y-32,Z,modl,proj,viewPort, &x3, &y3, &z3);
    gluUnProject(mouseX+32,Y,Z, modl, proj, viewPort, &x4, &y4, &z4);
-   //TODO BUG when mouse after screenY-32
+
+   //FIXME BUG when mouse after screenY-32
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, cursors->actualCursor );
    glBegin(GL_QUADS);

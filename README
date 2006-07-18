@@ -18,12 +18,12 @@ IV  - Contacts
 software and hardware. They are:
 
    Software:
-   Cal3D     - Version 0.10, http://cal3d.sf.net
+   Cal3D     - Version 0.11, http://cal3d.sf.net
    LibVorbis - http://www.vorbis.com/
-   OpenGL    - Mesa3D 6.2, www.mesa3d.org (or SGI-OpenGL 1.4)
-   SDL       - Version 1.2.7, www.libsdl.org
-   SDLimage  - Version 1.2.4, www.libsdl.org/projects/SDL_image/
-   SDLmixer  - Version 1.2.6, http://www.libsdl.org/projects/SDL_mixer/
+   OpenGL    
+   SDL       - Version 1.2.11, www.libsdl.org
+   SDLimage  - Version 1.2.5, www.libsdl.org/projects/SDL_image/
+   SDLmixer  - Version 1.2.7, http://www.libsdl.org/projects/SDL_mixer/
    
    Hardware:
    Video Card with 3D aceleration, OpenGl compatible.

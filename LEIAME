@@ -20,12 +20,12 @@ existência   de  alguns  quesitos  de  software  e  outros  de
 hardware. São eles:
 
    Software:
-   Cal3D     - Versão 0.10, http://cal3d.sf.net
+   Cal3D     - Versão 0.11, http://cal3d.sf.net
    LibVorbis - http://www.vorbis.com/
-   OpenGL    - Mesa3D 6.2, www.mesa3d.org (ou SGI-OpenGL 1.4)
-   SDL       - Versão 1.2.7, www.libsdl.org
-   SDLImage  - Versão 1.2.4, www.libsdl.org/projects/SDL_image/
-   SDLMixer  - Versão 1.2.6, http://www.libsdl.org/projects/SDL_mixer/
+   OpenGL
+   SDL       - Versão 1.2.11, www.libsdl.org
+   SDLImage  - Versão 1.2.5, www.libsdl.org/projects/SDL_image/
+   SDLMixer  - Versão 1.2.7, http://www.libsdl.org/projects/SDL_mixer/
 
    Hardware:
    Placa de Vídeo com aceleração 3D compatível  com  OpenGl no
