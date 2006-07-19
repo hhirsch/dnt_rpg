@@ -24,11 +24,12 @@ figura::figura(int x,int y,int w,int h,const char* arquivo)
    if(arquivo!=NULL)
    {
       SDL_Surface* img = IMG_Load(arquivo);
-      fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
+      fig = img;
+      /*fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
       SDL_BlitSurface(img,NULL,fig,NULL);
-      SDL_FreeSurface(img);
+      SDL_FreeSurface(img);*/
       if ( fig == NULL )
          erro_Mensagem("Não foi possível carregar figura\n",10);
    }

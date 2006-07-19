@@ -287,6 +287,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                               "Logan",
                        "../data/models/personagens/Logan/modelo.cfg",
                        features);
+       per->DefineActualLifePoints(7);
        /*atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading Character: Gushm",
                  proj, modl, viewPort);
