@@ -199,10 +199,10 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = window->objetos->InserirQuadroTexto(8,95,145,112,0,
                                          language.OPTIONS_LANGUAGE.c_str());
    qt->fonte = FMINI;
-   window->objetos->InserirBotao(131,95,141,112,window->Cores.corBot.R,
+   window->objetos->InserirBotao(121,95,131,112,window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  "<",0,&botaoLngSub);
-   txtLanguage = window->objetos->InserirQuadroTexto(142,95,197,112,1,
+   txtLanguage = window->objetos->InserirQuadroTexto(132,95,197,112,1,
                                  saux.c_str());
    txtLanguage->fonte = FMINI;
    window->objetos->InserirBotao(198,95,208,112,window->Cores.corBot.R,
