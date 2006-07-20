@@ -13,11 +13,11 @@ Serrez F1 pour l'aide
 FPS:
 Nouveau
 Continue
-Enregistrer
+Registrer
 Charger
 Sortir
-Préférences
-Préférences
+Options
+Options
 Volume de Musique:
 Volume d'Effets:
 Langue:
@@ -26,7 +26,7 @@ Points Libres :
 Points:
 Coût:
 Confirmez
-Décommandez
+Annuler
 ../data/skills/Portugues/
 Argh! Carte hors des limites!\n
 Mon Dieu! Ne peut pas init SDL\n
