@@ -115,7 +115,7 @@ bool fightSystem::hasEnemies(personagem* pers, string& brief)
        }
    }
 
-   brief += "| No more enemies.";
+   brief += "| "+ language.FIGHT_END_NOENEMIES;
    return(false);
 }
 
@@ -134,12 +134,12 @@ bool fightSystem::doTurn(string& brief)
    if(pers == NULL)
    {
       /* Begin new Round */
-      brief += "New Round.|";
+      brief += language.FIGHT_ROUND_NEW  + "|";
       charsInitiatives.newRound(); 
       pers = charsInitiatives.nextCharacter();
       if(pers == NULL)
       {
-         brief += "Error: No Characters!";
+         brief += language.FIGHT_ERROR_NO_CHARACTERS;
          return(false);
       }
    }
@@ -151,12 +151,12 @@ bool fightSystem::doTurn(string& brief)
       if(pers == NULL)
       {
          /* Begin new Round */
-         brief += "New Round.|";
+         brief += language.FIGHT_ROUND_NEW  + "|";;
          charsInitiatives.newRound(); 
          pers = charsInitiatives.nextCharacter();
          if(pers == NULL)
          {
-            brief += "Error: No Characters!";
+            brief += language.FIGHT_ERROR_NO_CHARACTERS;
             return(false);
          }
       }
@@ -219,13 +219,14 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
 
       if( (pers->actualEnemy != NULL) && (attackFeat != -1))
       {
-         brief += pers->nome+" attacks "+pers->actualEnemy->nome+" | ";
+         brief += pers->nome + " " + language.FIGHT_ATTACKS + " " + 
+                  pers->actualEnemy->nome + " | ";
          pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
                                                    *pers->actualEnemy, brief);
          
          if(pers->actualEnemy->dead)
          {
-            brief += " | " + pers->actualEnemy->nome + " is Dead!";
+            brief += " | " + pers->actualEnemy->nome +" "+ language.FIGHT_DEAD;
          }
         
       }

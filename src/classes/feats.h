@@ -11,6 +11,7 @@
 using namespace std;
 
 #include "thing.h"
+#include "../lang/lang.h"
 
 #define NUMBER_OF_FEATS     4 /**< Total Number of Feats */
 #define MAX_FEATS          30 /**< Max Number of Know Feats for character */
@@ -168,6 +169,7 @@ class feats
    private:
       feat m_feats[MAX_FEATS]; /**< Internal Feats Struct */
       int  totalFeats;         /**< Actual Number of Feats */
+      lang language; /**< Language Internationalization */
 
       /*!
        **************************************************************** 

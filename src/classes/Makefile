@@ -45,7 +45,7 @@ thing.o: thing.cpp thing.h
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 teste: $(objetos) $(OBJSFIGHT) teste.cpp
-	g++ -g -Wall $(CLIBS) teste.cpp $(objetos) $(OBJSFIGHT) -o teste
+	g++ -g -Wall $(CLIBS) teste.cpp $(objetos) $(OBJSFIGHT) ../gui/healthBar.o ../lang/lang.o -o teste
 
 clean: 
 	@printf  "Cleaning Classes Bin Files... "

@@ -40,7 +40,7 @@ void initiative::insertCharacter(personagem* pers, string& brief)
    initiativeStruct *cmp, *aux, *oth;
    srand(SDL_GetTicks());
 
-   brief = pers->nome + " rolls initiative: ";
+   brief = pers->nome + " " + language.FIGHT_ROLLS_INITIATIVE + " ";
 
    /* Insertion on List, orded by initiativeValue (decrescent order) */
    if(first == NULL)

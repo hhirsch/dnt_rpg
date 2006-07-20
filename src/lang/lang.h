@@ -65,6 +65,23 @@ class lang
    static string SKILL_CONFIRM;
    static string SKILL_CANCEL;
 
+   /* figths */
+   static string FIGHT_ROLLS_INITIATIVE;
+   static string FIGHT_END_NOENEMIES;
+   static string FIGHT_ROUND_NEW;
+   static string FIGHT_ERROR_NO_CHARACTERS;
+   static string FIGHT_ATTACKS;
+   static string FIGHT_DEAD;
+
+   /* feats */
+   static string FEAT_INVALID;
+   static string FEAT_HIT_FOR;
+   static string FEAT_CRITICAL_HIT;
+   static string FEAT_MISS;
+   static string FEAT_CRITICAL_MISS;
+   static string FEAT_POINTS;
+   static string FEAT_NO_MORE_POINTS;
+
    /* DIRECTORYS */
    static string SKILLS_DIR;
 

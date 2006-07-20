@@ -97,6 +97,23 @@ void lang::ReloadFile(int lng)
    getline(file, SKILL_CONFIRM);
    getline(file, SKILL_CANCEL);
 
+   /* fight */
+   getline(file,FIGHT_ROLLS_INITIATIVE);
+   getline(file,FIGHT_END_NOENEMIES);
+   getline(file,FIGHT_ROUND_NEW);
+   getline(file,FIGHT_ERROR_NO_CHARACTERS);
+   getline(file,FIGHT_ATTACKS);
+   getline(file,FIGHT_DEAD);
+
+   /* feats */
+   getline(file,FEAT_INVALID);
+   getline(file,FEAT_HIT_FOR);
+   getline(file,FEAT_CRITICAL_HIT);
+   getline(file,FEAT_MISS);
+   getline(file,FEAT_CRITICAL_MISS);
+   getline(file,FEAT_POINTS);
+   getline(file,FEAT_NO_MORE_POINTS);
+
    /* DIRECTORYS */
    getline(file, SKILLS_DIR);
 
@@ -149,6 +166,23 @@ string lang::VERSION;
    string lang::SKILL_COST;
    string lang::SKILL_CONFIRM;
    string lang::SKILL_CANCEL;
+
+   /*fight */
+   string lang::FIGHT_ROLLS_INITIATIVE;
+   string lang::FIGHT_END_NOENEMIES;
+   string lang::FIGHT_ROUND_NEW;
+   string lang::FIGHT_ERROR_NO_CHARACTERS;
+   string lang::FIGHT_ATTACKS;
+   string lang::FIGHT_DEAD;
+
+   /* feats */
+   string lang::FEAT_INVALID;
+   string lang::FEAT_HIT_FOR;
+   string lang::FEAT_CRITICAL_HIT;
+   string lang::FEAT_MISS;
+   string lang::FEAT_CRITICAL_MISS;
+   string lang::FEAT_POINTS;
+   string lang::FEAT_NO_MORE_POINTS;
 
    /* DIRECTORYS */
    string lang::SKILLS_DIR;

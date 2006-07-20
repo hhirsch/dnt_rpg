@@ -122,7 +122,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
    if( (featNumber < 0) || (featNumber >= totalFeats) )
    {
-      brief += "Invalid Feat!";
+      brief += language.FEAT_INVALID;
       return(false);
    }
 
@@ -187,17 +187,17 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       if(diceValue - targetValue <= 0)
       {
-         brief += "Miss.";
+         brief += language.FEAT_MISS;
          if( criticalMiss )
          {
-             brief += " Critical Miss!" ;
+             brief += " "+language.FEAT_CRITICAL_MISS ;
              //TODO lose weapon;
          }
          return(true);
       }
       else
       {
-         brief += "Hit for ";
+         brief += language.FEAT_HIT_FOR+" ";
       }
 
       /* Apply Base Damage Dices */
@@ -224,15 +224,16 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       /*TODO apply aditional dices */
 
-      sprintf(texto,"%d points.",damage);
+      sprintf(texto,"%d",damage);
       brief += texto;
+      brief += " " + language.FEAT_POINTS;
 
       /* apply damage on thing */
       target.lifePoints -= damage;
 
       if( criticalHit)
       {
-          brief += " Critical Hit!" ;
+          brief += " "+ language.FEAT_CRITICAL_HIT ;
       }
 
       if(target.lifePoints <= 0)
@@ -243,7 +244,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       return(true);
    }
-   brief += "Not Enough Points to Use!";
+   brief += language.FEAT_NO_MORE_POINTS;
    return(false);
 }
 

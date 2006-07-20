@@ -27,6 +27,19 @@ Pontos:
 Custo:
 Confirmar
 Cancelar
+rola iniciativa:
+Sem inimigos.
+Novo Turno
+Erro: Sem Personagens!
+ataca
+morreu!
+Habilidade Inválida
+Acertou em
+Acerto Crítico!
+Falha.
+Falha Crítica!
+pontos.
+Pontos insuficientes para utilizar!
 ../data/skills/Portugues/
 Argh! Mapa fora dos limites!\n
 Oxi! Não consegui iniciar o SDL!\n

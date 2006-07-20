@@ -2,10 +2,13 @@
 #include "thing.h"
 #include "../engine/personagens.h"
 #include "../fight/fightSystem.h"
+#include "../lang/lang.h"
 
 
 int main()
 {
+   lang language;
+   language.ReloadFile(LANG_PORTUGUES);
    featsList* ft;
    ft = new featsList("../data/feats/Ingles/","../data/feats/feats.ftl");
 

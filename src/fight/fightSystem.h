@@ -7,6 +7,7 @@
 
 #include "fightGroup.h"
 #include "initiative.h"
+#include "../lang/lang.h"
 
 
 #define FIGHT_MAX_NPC_GROUPS 5 /**< Max groups of NPCs characters */
@@ -52,9 +53,10 @@ class fightSystem
      bool doBattleCicle(string& brief);
 
    private:
-     fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS]; /**< PCs groups */
+     fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
      fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /**< NPCs groups */
      initiative charsInitiatives;     /**< Character's Initiative */
+     lang language;              /* Language Internationalization */
 
      /*!
      *************************************************************** 
