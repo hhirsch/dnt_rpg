@@ -400,6 +400,7 @@ Map::Map()
    portas = NULL;
    music = "";
    npcFileName = "";
+   particlesFileName = "";
    /* Inicia Estruturas */
    Objetos = new(LmapObjeto);
    x = z = xInic = zInic = 0;
@@ -493,18 +494,25 @@ int Map::open(string arquivo)
    {
       switch(buffer[0])
       {
-         case 'l':/* Define Luzes */
+         case 'l':/* Define Light File */
          {
             fgets(buffer, sizeof(buffer),arq);
             sscanf(buffer,"%s",nome);
             lights.Load(nome);
             break;
          }
-         case 'f':/* Define Fog(Neblina) */
+         case 'f':/* Define Fog File */
          {
             fgets(buffer, sizeof(buffer),arq);
             sscanf(buffer,"%s",nome);
             fog.Load(nome);
+            break;
+         }
+         case 'P':/* Define Particle System File */
+         {
+            fgets(buffer, sizeof(buffer),arq);
+            sscanf(buffer,"%s",nome);
+            particlesFileName = nome;
             break;
          }
          case 'n':
@@ -944,7 +952,7 @@ int Map::save(string arquivo)
    
    /* Escreve Dimensões do Arquivo */
    fprintf(arq,"T %dX%d\n",x,z);
-   fprintf(arq,"# Made by DccNiTghtmare's MapEditor, v0.0.2\n");
+   fprintf(arq,"# Made by DccNiTghtmare's MapEditor, v0.0.3\n");
 
    /* Escreve o arquivo de neblina, se existente */
    if( !fog.fileName.empty())
@@ -957,6 +965,13 @@ int Map::save(string arquivo)
    {
      fprintf(arq,"npc %s\n",npcFileName.c_str());
    }
+
+   /* Write Particles file */
+   if( !particlesFileName.empty())
+   {
+     fprintf(arq,"PS %s\n",particlesFileName.c_str());
+   }
+
  
    /* Escreve o arquivo de música, se existente */
    if( !music.empty())

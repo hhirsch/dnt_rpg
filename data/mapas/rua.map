@@ -1,6 +1,7 @@
 T 7X7
 # Made by DccNiTghtmare's MapEditor, v0.0.2
 npc ../data/mapas/rua.npc
+PS ../data/mapas/rua.par
 MUSICA ../data/music/musica3.ogg
 o Axe ../data/models/objetos/armas/axe.dcc
 o Scimitar ../data/models/objetos/armas/scimitar.dcc

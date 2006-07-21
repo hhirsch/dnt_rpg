@@ -88,6 +88,20 @@ class partSystem
        ***************************************************************/
       void stabilizeAll();
 
+      /*!
+       *************************************************************** 
+       * Load Particles Systens from file.
+       * \param fileName -> name of the file to load.
+       ***************************************************************/
+      void loadFromFile(string fileName);
+
+      /*!
+       *************************************************************** 
+       * Remove all particle systens from the system
+       ***************************************************************/
+      void deleteAll();
+
+
    private:
       part1* waterfall[MAX_WATERFALL];        /**< Waterfall Particles */
       part2* fire[MAX_FIRE];                  /**< Fire Particles */

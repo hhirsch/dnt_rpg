@@ -47,50 +47,75 @@ partSystem::partSystem()
 
 partSystem::~partSystem()
 {
+   deleteAll();
+}
+
+void partSystem::deleteAll()
+{
    int i;
    
    for(i = 0; i < MAX_WATERFALL; i++)
    {
       if( waterfall[i] != NULL)
+      {
          delete(waterfall[i]);
+         waterfall[i] = NULL;
+      }
    }
 
    for(i = 0; i < MAX_FIRE; i++)
    {
       if(fire[i] != NULL)
+      {
          delete(fire[i]);
+         fire[i] = NULL;
+      }
    }
 
    for(i = 0; i < MAX_WATER_SURFACE; i++)
    {
       if(waterSurface[i] != NULL)
+      {
          delete(waterSurface[i]);
+         waterSurface[i] = NULL;
+      }
    }
 
    for(i = 0; i < MAX_SMOKE; i++)
    {
       if(smoke[i] != NULL)
+      {
          delete(smoke[i]);
+         smoke[i] = NULL;
+      }
    }
 
    for(i = 0; i < MAX_BLOOD; i++)
    {
       if(blood[i] != NULL)
+      {
          delete(blood[i]);
+         blood[i] = NULL;
+      }
    }
 
    for(i = 0; i < MAX_LIGHTNING; i++)
    {
       if(lightning[i] != NULL)
+      {
          delete(lightning[i]);
+         lightning[i] = NULL;
+      }
    }
 
    for(i = 0; i < MAX_SNOW; i++)
    {
       if(snow[i] != NULL)
-        delete(snow[i]);
+      {
+         delete(snow[i]);
+         snow[i] = NULL;
+      }
    }
-
 }
 
 void partSystem::actualizeAll(float PCposX, float PCposZ)
@@ -438,3 +463,24 @@ int partSystem::numParticles()
 
    return(total);
 }
+
+void partSystem::loadFromFile(string fileName)
+{
+   FILE* file; 
+   int type; GLfloat X,Y,Z;
+   char buffer[150];
+
+   deleteAll();
+
+   if(!(file=fopen(fileName.c_str(),"r")))
+   {
+       printf("Error while opening Map particle file: %s\n",fileName.c_str());
+       return;
+   }
+   while(fscanf(file,"%d %f %f %f %s",&type,&X,&Y,&Z,&buffer[0]) != EOF)
+   {
+      addParticle(type, X, Y, Z, buffer);
+   }
+   fclose(file);
+}
+

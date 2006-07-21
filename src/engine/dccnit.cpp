@@ -72,7 +72,7 @@ engine::engine()
 
    /* FIXME Initialize Particles, it will not be here!! */
 
-   part1* particula;
+   /*part1* particula;
 
    particula = (part1*) particleSystem->addParticle(PART_WATERFALL,
                                                     150,60,120,
@@ -91,6 +91,7 @@ engine::engine()
                                           "../data/particles/smoke1.par");
    particleSystem->addParticle(PART_SNOW,340,80,100,
                                                  "../data/particles/snow1.par");
+   */
 }
 
 /*********************************************************************
@@ -337,8 +338,16 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  language.LOAD_PARTICLE.c_str(),
                  proj, modl, viewPort);
-   //TODO Load particles per map here!
-   particleSystem->stabilizeAll();
+   if(!actualMap->particlesFileName.empty())
+   {
+       particleSystem->loadFromFile(actualMap->particlesFileName);
+       particleSystem->stabilizeAll();
+   }
+   else
+   {
+      particleSystem->deleteAll();
+   }
+   
 
    glEnable(GL_LIGHTING);
 

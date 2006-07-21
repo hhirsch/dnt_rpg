@@ -198,6 +198,7 @@ class Map
       door* portas;         /**< Map Doors */
       string music;         /**< Map Music */
       string name;          /**< File name of loaded map */
+      string particlesFileName; /**< File Name of Map Particles Systens */
       string npcFileName;   /**< Static NPC's on map filename */
 
       int SQUAREMINISIZE;   /**< Minimap square size */
