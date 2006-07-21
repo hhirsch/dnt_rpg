@@ -211,9 +211,9 @@ void grade()
 
 }
 
-char defineCaractere(Uint8* teclas)
+void defineCaractere(Uint8* teclas, char* c)
 {
-   char c[1];
+   c[0] = ' ';
 
    int maiuscula = (teclas[SDLK_CAPSLOCK] || teclas[SDLK_LSHIFT] || 
                     teclas[SDLK_RSHIFT]);
@@ -569,7 +569,6 @@ char defineCaractere(Uint8* teclas)
           else
             c[0] = ' ';
       }
-    return(c[0]);
 }
 
 
@@ -598,14 +597,14 @@ int main(int argc, char *argv[])
 //    retangulo_Colorir(screen,0,0,639,479,0);
     fonte.incCP = 1;
     corAtv = 1;
+    string txt = "Arquivo a Abrir";
 
     //Ljanela j;
     interface* interf = new interface(NULL);
     
     jan = interf->ljan->InserirJanela(0,0,255,255,"fntEditor",1,1,NULL,NULL);
     jan->fechavel = 0;
-    arquivo = jan->objetos->InserirBarraTexto(24,20,176,34,
-                                              "Arquivo a Abrir",0,NULL);
+    arquivo = jan->objetos->InserirBarraTexto(24,20,176,34,txt.c_str(),0,NULL);
     jan->objetos->InserirBotao(24,42,74,60,Cores.corBot.R,Cores.corBot.G,
                                Cores.corBot.B,"Nova",1,&botao_Novo);
     jan->objetos->InserirBotao(75,42,125,60,Cores.corBot.R,Cores.corBot.G,
@@ -620,8 +619,8 @@ int main(int argc, char *argv[])
                          Cores.corBot.B,"Cor Inativa",1,&botao_CorInativa);
     jan->objetos->InserirBotao(130,220,180,238,Cores.corBot.R,Cores.corBot.G,
                                Cores.corBot.B,"Sair",1,&botao_Sair);
-
-    btVaiPara = jan->objetos->InserirBarraTexto(40,112,84,126,"233",0,NULL);
+    txt = "233";
+    btVaiPara = jan->objetos->InserirBarraTexto(40,112,84,126,txt.c_str(),0,NULL);
     jan->objetos->InserirBotao(90,110,155,128,Cores.corBot.R,Cores.corBot.G,
                                Cores.corBot.B,"VaiPara",1,&botao_VaiPara);
 
@@ -663,9 +662,10 @@ int main(int argc, char *argv[])
        pronto = !interf->ManipulaEventos(x,y,Mbotao, keys);
        if(pronto != BARRATEXTOESCRITA)
        {
-          c[0] = defineCaractere(keys);
-          if(c[0] != ultimaLetra)
+          defineCaractere(keys,c);
+          if( (c[0] != ultimaLetra) && (c[0] != ' '))
           {
+             printf("%c\n",c[0]);
              pegaLetra(c[0]);
 //             janelaEdicao->Ativar(interf->ljan);
              janelaEdicao->Desenhar(0,0);
@@ -675,15 +675,16 @@ int main(int argc, char *argv[])
        interf->Desenhar(proj,modl,viewPort);
        glFlush();
        SDL_GL_SwapBuffers();
+       SDL_Delay(50);
     }
 
     atexit(SDL_Quit);
 
     delete(interf);
 
-    int d = '|';
+    int d = 'û';
     printf("%c %d\n",d,d);
-    d = 'É';
+    d = 'Û';
     printf("%c %d\n",d,d);    
 
     return(0);

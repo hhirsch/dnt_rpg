@@ -204,7 +204,7 @@ void part1::addPlane(float x1, float y1, float z1,
 bool part1::intersectPlanes(particle* part, float* dX, float* dZ)
 {
    int i;
-   float yOnPlane;
+   float yOnPlane = 0;
    float size;
    for(i = 0; i < actualPlanes; i++)
    {

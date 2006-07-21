@@ -37,7 +37,7 @@ class barraTexto: public Tobjeto
       string texto;        /**< Text on the bar */
       unsigned int pos;    /**< Current cursor position */
       int ultEsc;          /**< Last time when write */
-      char ultChar;        /**< Last Character writed */
+      string ultChar;      /**< Last Character writed */
 
                            /*! After Edition Called Procedure  */
       void (*procEditada)(barraTexto* bart,SDL_Surface *screen);

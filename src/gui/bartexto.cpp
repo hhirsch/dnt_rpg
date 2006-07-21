@@ -72,8 +72,8 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
                           Uint8 Mbotao, Uint8* teclas)
 {
    //SDLMod Modificador;
-   char c[1];
-   c[0] = -1;
+   string c;
+   c = "";
    int pronto = 0;
    //unsigned int pos = (mouseX-(Xjan+x1+2)) / (fonte_incCP()+1);
    //if (pos>strlen(texto)) pos = strlen(texto);
@@ -138,368 +138,368 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
       if( teclas[SDLK_KP_DIVIDE])
       {
           if(maiuscula)
-            c[0] = '?';
+            c = '?';
           else 
-            c[0] = '/';
+            c = '/';
       }
       else 
       if( teclas[SDLK_a])
       {
           if (maiuscula)
-            c[0] = 'A';
+            c = 'A';
           else
-            c[0] = 'a';
+            c = 'a';
       } 
       else 
       if( teclas[SDLK_b])
       {
           if (maiuscula)
-            c[0] = 'B';
+            c = 'B';
           else
-            c[0] = 'b';
+            c = 'b';
       }
       else 
       if( teclas[SDLK_c])
       {
           if (maiuscula)
-            c[0] = 'C';
+            c = 'C';
           else
-            c[0] = 'c';
+            c = 'c';
       } 
       else 
       if( teclas[SDLK_d])
       {
           if (maiuscula)
-            c[0] = 'D';
+            c = 'D';
           else
-            c[0] = 'd';
+            c = 'd';
       }
       else 
       if( teclas[SDLK_e])
       {
           if (maiuscula)
-            c[0] = 'E';
+            c = 'E';
           else
-            c[0] = 'e';
+            c = 'e';
       }
       else 
       if( teclas[SDLK_f])
       {
           if (maiuscula)
-            c[0] = 'F';
+            c = 'F';
           else
-            c[0] = 'f';
+            c = 'f';
       }
       else 
       if( teclas[SDLK_g])
       {
           if (maiuscula)
-            c[0] = 'G';
+            c = 'G';
           else
-            c[0] = 'g';
+            c = 'g';
       }
       else 
       if( teclas[SDLK_h])
       {
           if (maiuscula)
-            c[0] = 'H';
+            c = 'H';
           else
-            c[0] = 'h';
+            c = 'h';
       }
       else 
       if( teclas[SDLK_i])
       {
           if (maiuscula)
-            c[0] = 'I';
+            c = 'I';
           else
-            c[0] = 'i';
+            c = 'i';
       }
       else 
       if( teclas[SDLK_j])
       {
           if (maiuscula)
-            c[0] = 'J';
+            c = 'J';
           else
-            c[0] = 'j';
+            c = 'j';
       }
       else 
       if( teclas[SDLK_k])
       {
           if (maiuscula)
-            c[0] = 'K';
+            c = 'K';
           else
-            c[0] = 'k';
+            c = 'k';
       }
       else 
       if( teclas[SDLK_l])
       {
           if (maiuscula)
-            c[0] = 'L';
+            c = 'L';
           else
-            c[0] = 'l';
+            c = 'l';
       }
       else 
       if( teclas[SDLK_m])
       {
           if (maiuscula)
-            c[0] = 'M';
+            c = 'M';
           else
-            c[0] = 'm';
+            c = 'm';
       }
       else 
       if( teclas[SDLK_n])
       {
           if (maiuscula)
-            c[0] = 'N';
+            c = 'N';
           else
-            c[0] = 'n';
+            c = 'n';
       }
       else 
       if( teclas[SDLK_o])
       {
           if (maiuscula)
-            c[0] = 'O';
+            c = 'O';
           else
-            c[0] = 'o';
+            c = 'o';
       }
       else 
       if( teclas[SDLK_p])
       {
           if (maiuscula)
-            c[0] = 'P';
+            c = 'P';
           else
-            c[0] = 'p';
+            c = 'p';
       }
       else 
       if( teclas[SDLK_q])
       {
           if (maiuscula)
-            c[0] = 'Q';
+            c = 'Q';
           else
-            c[0] = 'q';
+            c = 'q';
       }
       else 
       if( teclas[SDLK_r])
       {
           if (maiuscula)
-            c[0] = 'R';
+            c = 'R';
           else
-            c[0] = 'r';
+            c = 'r';
       }
       else 
       if( teclas[SDLK_s])
       {
           if (maiuscula)
-            c[0] = 'S';
+            c = 'S';
           else
-            c[0] = 's';
+            c = 's';
       }
       else 
       if( teclas[SDLK_t])
       {
           if (maiuscula)
-            c[0] = 'T';
+            c = 'T';
           else
-            c[0] = 't';
+            c = 't';
       }
       else 
       if( teclas[SDLK_u])
       {
           if (maiuscula)
-            c[0] = 'U';
+            c = 'U';
           else
-            c[0] = 'u';
+            c = 'u';
       }
       else 
       if( teclas[SDLK_v])
       {
           if (maiuscula)
-            c[0] = 'V';
+            c = 'V';
           else
-            c[0] = 'v';
+            c = 'v';
       }
       else 
       if( teclas[SDLK_w])
       {
           if (maiuscula)
-            c[0] = 'W';
+            c = 'W';
           else
-            c[0] = 'w';
+            c = 'w';
       }
       else 
       if( teclas[SDLK_x])
       {
           if (maiuscula)
-            c[0] = 'X';
+            c = 'X';
           else
-            c[0] = 'x';
+            c = 'x';
       }
       else 
       if( teclas[SDLK_y])
       {
           if (maiuscula)
-            c[0] = 'Y';
+            c = 'Y';
           else
-            c[0] = 'y';
+            c = 'y';
       }
       else 
       if( teclas[SDLK_z])
       {
           if (maiuscula)
-            c[0] = 'Z';
+            c = 'Z';
           else
-            c[0] = 'z';
+            c = 'z';
       }
       else 
       if( teclas[SDLK_SLASH])
       {
           if (maiuscula)
-            c[0] = '?';
+            c = '?';
           else
-            c[0] = '/';
+            c = '/';
       }
       else 
       if( teclas[SDLK_BACKSLASH])
       {
           if (maiuscula)
-            c[0] = '?';
+            c = '?';
           else
-            c[0] = '\\';
+            c = '\\';
       }
       else 
       if( teclas[SDLK_SEMICOLON])
       {
           if (maiuscula)
-            c[0] = ':';
+            c = ':';
           else
-            c[0] = ';';
+            c = ';';
       }
       else 
       if( teclas[SDLK_0])
       {
           if (maiuscula)
-            c[0] = ')';
+            c = ')';
           else
-            c[0] = '0';
+            c = '0';
       }
       else 
       if( teclas[SDLK_1])
       {
           if (maiuscula)
-            c[0] = '!';
+            c = '!';
           else
-            c[0] = '1';
+            c = '1';
       }
       else 
       if( teclas[SDLK_2])
       {
           if (maiuscula)
-            c[0] = '@';
+            c = '@';
           else
-            c[0] = '2';
+            c = '2';
       }
       else 
       if( teclas[SDLK_3])
       {
           if (maiuscula)
-            c[0] = '#';
+            c = '#';
           else
-            c[0] = '3';
+            c = '3';
       }
       else 
       if( teclas[SDLK_4])
       {
           if (maiuscula)
-            c[0] = '$';
+            c = '$';
           else
-            c[0] = '4';
+            c = '4';
       }
       else 
       if( teclas[SDLK_5])
       {
           if (maiuscula)
-            c[0] = '%';
+            c = '%';
           else
-            c[0] = '5';
+            c = '5';
       }
       else 
       if( teclas[SDLK_6])
       {
           if (maiuscula)
-            c[0] = '"';
+            c = '"';
           else
-            c[0] = '6';
+            c = '6';
       }
       else 
       if( teclas[SDLK_7])
       {
           if (maiuscula)
-            c[0] = '&';
+            c = '&';
           else
-            c[0] = '7';
+            c = '7';
       }
       else 
       if( teclas[SDLK_8])
       {
           if (maiuscula)
-            c[0] = '*';
+            c = '*';
           else
-            c[0] = '8';
+            c = '8';
       }
       else 
       if( teclas[SDLK_9])
       {
           if (maiuscula)
-            c[0] = '(';
+            c = '(';
           else
-            c[0] = '9';
+            c = '9';
       }
       else 
       if( teclas[SDLK_BACKQUOTE])
       {
           if (maiuscula)
-            c[0] = '"';
+            c = '"';
           else
-            c[0] = '\'';
+            c = '\'';
       }
       else 
       if( teclas[SDLK_MINUS])
       {
           if (maiuscula)
-            c[0] = '_';
+            c = '_';
           else
-            c[0] = '-';
+            c = '-';
       }
       else 
       if( teclas[SDLK_PERIOD])
       {
           if (maiuscula)
-            c[0] = '>';
+            c = '>';
           else
-            c[0] = '.';
+            c = '.';
       }
       else 
       if( teclas[SDLK_COMMA])
       {
           if (maiuscula)
-            c[0] = '<';
+            c = '<';
           else
-            c[0] = ',';
+            c = ',';
       }
       else 
       if( teclas[SDLK_SPACE])
       {
           if (maiuscula)
-            c[0] = ' ';
+            c = ' ';
           else
-            c[0] = ' ';
+            c = ' ';
       }      
-      if( (((ult - ultEsc) >= REFRESH_RATE) || (ultChar!=c[0])) && 
-          (c[0]!=-1))
+      if( (((ult - ultEsc) >= REFRESH_RATE) || (ultChar!=c)) && 
+          (c!=""))
       {
-        ultChar = c[0];
+        ultChar = c;
         ultEsc = ult;
-        texto.insert(pos,c);
+        texto.insert(pos,c.c_str());
         pos++;
       }
        
