@@ -34,7 +34,7 @@ int main(int argc, char **argv)
    GLuint tituloID;
    int result = Engine->InitialScreen(ON_INIT,&tituloID,true);
    int estado = ON_INIT;
-   int charCreation;
+   int charCreation = 0;
    bool reloadMusic;
    
    while(result != EXIT_GAME)

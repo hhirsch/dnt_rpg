@@ -159,7 +159,7 @@ int main(int argc, char **argv)
    printf("DccNiTghtmare Dialog Compiler\n");
    printf("\tCompiler Version 0.1,\n\tfor Dccnitghtmare Version 0.0.2\n");
 
-   char* entrada;
+   char* entrada = NULL;
    char c;
    int chamadaCorreta = 0;
 
@@ -183,7 +183,7 @@ int main(int argc, char **argv)
    int line = 0;
    int errors = 0;
  
-   dialogo* dlg;
+   dialogo* dlg = NULL;
    conversa* conv = new(conversa);
 
    if(!(arq = fopen(entrada,"r")))
@@ -203,7 +203,7 @@ int main(int argc, char **argv)
    string sinal;
    string acao;
 
-   seSenao* se;
+   seSenao* se = NULL;
 
    printf("\nProcessing lines\n");
 

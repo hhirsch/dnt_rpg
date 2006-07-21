@@ -28,7 +28,7 @@ conversa::~conversa()
 
 int conversa::carregarArquivo(char* nome)
 {
-  dialogo* dlg;
+  dialogo* dlg = NULL;
   int aux;
 
   FILE* arq= fopen(nome,"r");
