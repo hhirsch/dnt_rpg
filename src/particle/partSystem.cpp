@@ -380,6 +380,14 @@ void partSystem::removeParticle(int type, particleSystem* part)
    return;
 }
 
+void partSystem::stabilizeAll()
+{
+   int i;
+   for(i=0; i< PART_STABILIZE_LOOP;i++)
+   {
+      actualizeAll(0,0);
+   }
+}
 
 int partSystem::numParticles()
 {

@@ -66,6 +66,7 @@ void lang::ReloadFile(int lng)
    getline(file, LOAD_PC);
    getline(file, LOAD_MAP);
    getline(file, LOAD_WINDOWS);
+   getline(file, LOAD_PARTICLE);
    getline(file, LOAD_DONE);
 
    getline(file, OBJ_DOOR);
@@ -137,6 +138,7 @@ string lang::VERSION;
    string lang::LOAD_PC;
    string lang::LOAD_MAP;
    string lang::LOAD_WINDOWS;
+   string lang::LOAD_PARTICLE;
    string lang::LOAD_DONE;
 
    string lang::OBJ_DOOR;

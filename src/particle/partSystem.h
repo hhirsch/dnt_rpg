@@ -33,6 +33,9 @@ using namespace std;
 #define MAX_SNOW          1  /**< Max number of snow per map */
 #define MAX_LIGHTNING     3  /**< Max number of simultaniously lightinings */
 
+/*! Number of actualizations to stabilize all systens */
+#define PART_STABILIZE_LOOP 600  
+
 /*! The patSytem class controls all particles systens, 
     make their atualizations, renderizations, etc. */
 class partSystem
@@ -78,6 +81,12 @@ class partSystem
        * \return Total Number of particles on system, from all systems
        ***************************************************************/
       int numParticles();
+
+      /*!
+       *************************************************************** 
+       * Puts all particle system on a stable state.
+       ***************************************************************/
+      void stabilizeAll();
 
    private:
       part1* waterfall[MAX_WATERFALL];        /**< Waterfall Particles */

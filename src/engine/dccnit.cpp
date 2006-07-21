@@ -333,6 +333,13 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       }
    }
 
+   /* Update  particle System to a stable state */
+   atualizaCarga(img,&texturaTexto,texturaCarga,
+                 language.LOAD_PARTICLE.c_str(),
+                 proj, modl, viewPort);
+   //TODO Load particles per map here!
+   particleSystem->stabilizeAll();
+
    glEnable(GL_LIGHTING);
 
 

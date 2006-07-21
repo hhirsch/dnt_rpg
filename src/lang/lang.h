@@ -33,6 +33,7 @@ class lang
    static string LOAD_PC;
    static string LOAD_MAP;
    static string LOAD_WINDOWS;
+   static string LOAD_PARTICLE;
    static string LOAD_DONE;
 
    static string OBJ_DOOR;
