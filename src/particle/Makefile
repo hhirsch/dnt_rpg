@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -g -c -Wall
+CFLAGS = -g -c -Wall -O2
 OBJS = particle.o part1.o part2.o part3.o part4.o part5.o part6.o part7.o partSystem.o
 
 all: $(OBJS)

@@ -116,6 +116,7 @@ void lang::ReloadFile(int lng)
 
    /* DIRECTORYS */
    getline(file, SKILLS_DIR);
+   getline(file, FEATS_DIR);
 
    /* Errors */
    getline(file, ERROR_MAP_OUT);
@@ -186,6 +187,7 @@ string lang::VERSION;
 
    /* DIRECTORYS */
    string lang::SKILLS_DIR;
+   string lang::FEATS_DIR;
 
    /* Errors */
    string lang::ERROR_MAP_OUT;

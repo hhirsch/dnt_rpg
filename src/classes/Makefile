@@ -1,6 +1,6 @@
 # DccNiTghtmare is public domain. Do whatever you want with this code.
 CPP = g++
-CFLAGS = -g -Wall -c #-DDEBUG_MAP
+CFLAGS = -g -Wall -c -O2 #-DDEBUG_MAP
 CLIBSDIR = -L/usr/X11/lib
 CLIBS = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image -lcal3d
 BINDIR = ../../bin/

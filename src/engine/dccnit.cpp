@@ -25,29 +25,29 @@ engine::engine()
 {
    /* Initialize internal lists */
    gui  = new interface(NULL);
-   mapa = NULL;
+   actualMap = NULL;
    PCs = NULL;
    NPCs = NULL;
-   janMiniMapa = NULL;
-   janAtalhos = NULL;
+   miniMapWindow = NULL;
+   shortCutsWindow = NULL;
    imgNumber = 0;
    /* Define Camera initial Position */
    theta=25;
    phi=0;
    d=150;
-   centroX = centroZ = 0;
-   centroY = 30;
+   centerX = centerZ = 0;
+   centerY = 30;
    deltaY = 0;
-   cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   cameraY = centroY + (float) d * sin(deg2Rad(theta));
-   cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+   cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+   cameraY = centerY + (float) d * sin(deg2Rad(theta));
+   cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
 
    /* Initialize the Cursor */
    cursors = new(cursor);
 
    /* Initialize sounds and musics */
    snd = new(sound);
-   musica = NULL;
+   music = NULL;
 
    /* Load Options */
    option = new options("dcc.opc");
@@ -58,13 +58,13 @@ engine::engine()
    /* Set sound and music volume, based on options */
    snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
   
-   /* FIXME internationalization here, please! */
-   features = new featsList("../data/feats/Portugues/","../data/feats/feats.ftl");
+   /* Load Features List */
+   features = new featsList(language.FEATS_DIR,"../data/feats/feats.ftl");
 
    /* Initialize readModes variables */
-   ultimaLeitura = SDL_GetTicks();
-   ultimoMouse = ultimaLeitura;
-   ultimaKeyb = ultimaLeitura;
+   lastRead = SDL_GetTicks();
+   lastMouse = lastRead;
+   lastKeyb = lastRead;
    mouseX = 0;
    mouseY = 0;
 
@@ -99,9 +99,9 @@ engine::engine()
 engine::~engine()
 {
    /* Stops and free music & sounds */
-   if(musica)
+   if(music)
    {
-      snd->StopMusic(musica);
+      snd->StopMusic(music);
    }
    delete(snd);
 
@@ -113,8 +113,8 @@ engine::~engine()
    delete(option);
 
    /* Clear Sky */
-   glDeleteLists(listAtmosfera,1);
-   glDeleteTextures(1, &ceu);
+   glDeleteLists(skyList,1);
+   glDeleteTextures(1, &sky);
 
    /* Clear Characters */
    if(NPCs)
@@ -127,9 +127,9 @@ engine::~engine()
       delete(gui);
 
    /* Clear Maps */
-   if(mapa)
+   if(actualMap)
    {
-      delete(mapa);
+      delete(actualMap);
    }
  
    /* Clear Cursors */
@@ -148,7 +148,7 @@ void engine::InformationScreen()
    carregaTextura(img,&texturaInfo);
 
    glDisable(GL_LIGHTING);
-   AtualizaFrustum(matrizVisivel,proj,modl);
+   AtualizaFrustum(visibleMatrix,proj,modl);
    AtualizaTela2D(texturaInfo,proj,modl,viewPort,272,44,527,555,0.0001);
    glEnable(GL_LIGHTING);
    glFlush();
@@ -168,7 +168,7 @@ void engine::InformationScreen()
 
    glDeleteTextures(1,&texturaInfo);
    SDL_Delay(100);
-   ultimaLeitura = SDL_GetTicks();
+   lastRead = SDL_GetTicks();
 }
 
 /*********************************************************************
@@ -202,33 +202,33 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    GLuint texturaTexto;
    carregaTexturaRGBA(img,&texturaTexto);
 
-   AtualizaFrustum(matrizVisivel,proj,modl);
+   AtualizaFrustum(visibleMatrix,proj,modl);
    AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
    AtualizaTela2D(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
    glFlush();
    SDL_GL_SwapBuffers();
 
    /* Loading Map */
-   if(mapa) 
+   if(actualMap) 
    {
-     arqVelho = mapa->name;
-     delete(mapa);
+     arqVelho = actualMap->name;
+     delete(actualMap);
    }
-   mapa = new(Map);
-   mapa->name = arqVelho;
-   mapa->open(arqMapa);
+   actualMap = new(Map);
+   actualMap->name = arqVelho;
+   actualMap->open(arqMapa);
 
    /* Enable, if needed, the FOG */
-   if(mapa->fog.enabled)
+   if(actualMap->fog.enabled)
    {
       glEnable(GL_FOG);
       {
         glFogi(GL_FOG_MODE,GL_LINEAR);
-        glFogfv(GL_FOG_COLOR,mapa->fog.color);
-        glFogf(GL_FOG_DENSITY,mapa->fog.density);
+        glFogfv(GL_FOG_COLOR,actualMap->fog.color);
+        glFogf(GL_FOG_DENSITY,actualMap->fog.density);
         glHint(GL_FOG_HINT,GL_DONT_CARE);
-        glFogf(GL_FOG_START,mapa->fog.start);
-        glFogf(GL_FOG_END,mapa->fog.end);
+        glFogf(GL_FOG_START,actualMap->fog.start);
+        glFogf(GL_FOG_END,actualMap->fog.end);
       }
    }
    else
@@ -241,12 +241,12 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
      delete(NPCs);
    NPCs = NULL;
    personagem* per;
-   if(!mapa->npcFileName.empty())
+   if(!actualMap->npcFileName.empty())
    {
       FILE* arq;
-      if(!(arq = fopen(mapa->npcFileName.c_str(),"r")))
+      if(!(arq = fopen(actualMap->npcFileName.c_str(),"r")))
       {
-         printf("Ouch, can't load NPC's file: %s.\n",mapa->npcFileName.c_str());
+         printf("Ouch, can't load NPC's file: %s.\n",actualMap->npcFileName.c_str());
       }
       else
       {
@@ -301,10 +301,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                  language.LOAD_WINDOWS.c_str(),
                  proj, modl, viewPort);
 
-   if(janMiniMapa)
-     janMiniMapa->Fechar(gui->ljan);
-   if(janAtalhos)
-     janAtalhos->Fechar(gui->ljan);
+   if(miniMapWindow)
+     miniMapWindow->Fechar(gui->ljan);
+   if(shortCutsWindow)
+     shortCutsWindow->Fechar(gui->ljan);
    OpenMiniMapWindow();
    OpenShortcutsWindow();
 
@@ -337,11 +337,11 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
 
    /* Put Active Party on Init Position */
-   PCs->personagemAtivo->posicaoLadoX = mapa->xInic;
-   PCs->personagemAtivo->posicaoLadoZ = mapa->zInic;
-   centroX = mapa->xInic;
-   centroZ = mapa->zInic;
-   PCs->personagemAtivo->ocupaQuad = mapa->squareInic;
+   PCs->personagemAtivo->posicaoLadoX = actualMap->xInic;
+   PCs->personagemAtivo->posicaoLadoZ = actualMap->zInic;
+   centerX = actualMap->xInic;
+   centerZ = actualMap->zInic;
+   PCs->personagemAtivo->ocupaQuad = actualMap->squareInic;
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  language.LOAD_DONE.c_str(),
@@ -353,10 +353,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    glDeleteTextures(1,&texturaTexto);
 
    /* Change Music, if needed */
-   if(!mapa->music.empty())
+   if(!actualMap->music.empty())
    {
-      snd->StopMusic(musica);
-      musica = snd->LoadMusic(mapa->music);
+      snd->StopMusic(music);
+      music = snd->LoadMusic(actualMap->music);
    }
 
    return(1);
@@ -368,15 +368,15 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 int engine::InitialScreen(int Status, GLuint* idTextura, bool reloadMusic)
 {
    /* Reload Music, if needed */
-   if( (musica) && (reloadMusic) )
+   if( (music) && (reloadMusic) )
    {
-     snd->StopMusic(musica);
+     snd->StopMusic(music);
    }
    if(reloadMusic)
-      musica = snd->LoadMusic("../data/music/musica1.ogg");
+      music = snd->LoadMusic("../data/music/musica1.ogg");
 
    /* Executes Initial Screen */
-   AtualizaFrustum(matrizVisivel,proj,modl);
+   AtualizaFrustum(visibleMatrix,proj,modl);
    initialScreen* inic = new(initialScreen);
    int result = inic->Execute(Status, proj, modl, viewPort, idTextura);
    delete(inic);
@@ -487,9 +487,9 @@ int engine::CharacterScreen(GLuint* idTextura)
 
 
 /*********************************************************************
- *                  Redmensionate Engine to Screen                   *
+ *                  redmensionateWindowte Engine to Screen                   *
  *********************************************************************/
-void engine::Redmensiona(SDL_Surface *screen)
+void engine::redmensionateWindow(SDL_Surface *screen)
 {
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
@@ -506,8 +506,8 @@ void engine::Redmensiona(SDL_Surface *screen)
  *********************************************************************/
 void engine::drawSphereToList(int lats, int longs) 
 {
-   listAtmosfera = glGenLists(1);
-   glNewList(listAtmosfera,GL_COMPILE);
+   skyList = glGenLists(1);
+   glNewList(skyList,GL_COMPILE);
 
    int i,j;
    double theta1,theta2,theta3;
@@ -550,7 +550,7 @@ void engine::drawSphereToList(int lats, int longs)
 void engine::Init(SDL_Surface *screen)
 {
   
-   Redmensiona(screen);
+   redmensionateWindow(screen);
    
    /* Clear */
    glClearColor (0.0, 0.0, 0.0, 0.0);
@@ -600,8 +600,8 @@ void engine::Init(SDL_Surface *screen)
    drawSphereToList(10,10);
 
    SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
-   glGenTextures(1, &ceu);
-   glBindTexture(GL_TEXTURE_2D, ceu);
+   glGenTextures(1, &sky);
+   glBindTexture(GL_TEXTURE_2D, sky);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 
                 0, GL_RGB, GL_UNSIGNED_BYTE, img->pixels);
 
@@ -636,7 +636,7 @@ void ScreenDump(char *destFile, short W, short H)
 /*********************************************************************
  *                   Threat Input/Output Events                      *
  *********************************************************************/
-int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
+int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 {
    exitEngine = 0;           // Exit the engine ?
    bool redesenha = false;   // Redraw things ?
@@ -653,19 +653,19 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
    tempo = SDL_GetTicks();
    srand(tempo);
-   varTempo = (tempo-ultimaLeitura);
+   varTempo = (tempo-lastRead);
    if( ((varTempo)) >= 20)
    {
       redesenha = true;
       passouTempo = true;
 
       /* Actualize Characters Animations */
-      segundos = varTempo / 1000.0;
+      seconds = varTempo / 1000.0;
       int aux;
       personagem *per = (personagem*) PCs->primeiro->proximo;
       for(aux=0;aux< PCs->total;aux++)
       {
-         per->m_calModel->update(segundos); 
+         per->m_calModel->update(seconds); 
          //per->CalculateBoundingBox(); 
          per = (personagem*) per->proximo;
       }
@@ -675,7 +675,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
         per = (personagem*) NPCs->primeiro->proximo;
         for(aux=0;aux < NPCs->total;aux++)
         {
-           per->m_calModel->update(segundos);   
+           per->m_calModel->update(seconds);   
            per->CalculateBoundingBox();
            per = (personagem*) per->proximo;
         } 
@@ -689,20 +689,20 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       rotacao = (vt)*GIRAR;
       varCamera = vt*DELTACAMERA;
       
-      FPSatual = (FPSatual + (1000.0 / varTempo)) / 2; 
+      actualFPS = (actualFPS + (1000.0 / varTempo)) / 2; 
      
       SDL_PumpEvents();
-      if( (janAtalhos) && (tempo-ultimaFPS >= 300))
+      if( (shortCutsWindow) && (tempo-lastFPS >= 300))
       {
-         ultimaFPS = tempo;
+         lastFPS = tempo;
          char texto[15];
-         sprintf(texto,"FPS: %3.2f",1000.0 / (tempo-ultimaLeitura));
+         sprintf(texto,"FPS: %3.2f",1000.0 / (tempo-lastRead));
          FPS->texto = texto;
-         sprintf(texto,"    Part: %d",particleSystem->numParticles());
+         sprintf(texto," Part: %d",particleSystem->numParticles());
          FPS->texto += texto;
-         janAtalhos->Desenhar(mouseX, mouseY);
+         shortCutsWindow->Desenhar(mouseX, mouseY);
       }
-      ultimaLeitura = tempo;
+      lastRead = tempo;
 
         
       //redesenha = TrataIA();
@@ -723,11 +723,11 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       }
       else
       { 
-      if( (tempo-ultimoMouse>=100 ) || 
-          ( (Mbotao & SDL_BUTTON(1)) && (tempo-ultimaPressaoMouse>=100)) )
+      if( (tempo-lastMouse>=100 ) || 
+          ( (Mbotao & SDL_BUTTON(1)) && (tempo-lastMousePression>=100)) )
       {
          cursors->SetActual(CURSOR_WALK);
-         ultimoMouse = tempo;
+         lastMouse = tempo;
          wx = mouseX; wy = SCREEN_Y - mouseY; 
             
          glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
@@ -741,7 +741,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          int qx, qz;
          qx = (int)xReal / SQUARESIZE;
          qz = (int)zReal / SQUARESIZE;
-         Square* quaux = mapa->quadradoRelativo(qx,qz);
+         Square* quaux = actualMap->quadradoRelativo(qx,qz);
        if(quaux != NULL)
        {
          int pronto;
@@ -768,14 +768,14 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
                if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
                {
                    cursors->SetActual(CURSOR_GET);
-                   if(janAtalhos)
+                   if(shortCutsWindow)
                    {
                       ObjTxt->texto = quaux->objetos[obj]->nome; 
-                      janAtalhos->Desenhar(mouseX,mouseY);
+                      shortCutsWindow->Desenhar(mouseX,mouseY);
                    }
                    if(Mbotao & SDL_BUTTON(1))
                    {
-                      ultimaPressaoMouse = tempo;
+                      lastMousePression = tempo;
                    }
                    pronto = 1;
                }
@@ -783,7 +783,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
          /* Doors Verification */
-         door* porta = mapa->portas;
+         door* porta = actualMap->portas;
          while( (porta != NULL) && (!pronto) )
          {
              GLMmodel* modelo3d = (GLMmodel*) porta->objeto->modelo3d;
@@ -803,14 +803,14 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
              if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
              {
                  cursors->SetActual(CURSOR_DOOR);
-                 if(janAtalhos)
+                 if(shortCutsWindow)
                  {
                     ObjTxt->texto = language.OBJ_DOOR.c_str(); 
-                    janAtalhos->Desenhar(mouseX, mouseY);
+                    shortCutsWindow->Desenhar(mouseX, mouseY);
                  }
                  if(Mbotao & SDL_BUTTON(1))
                  {
-                    ultimaPressaoMouse = tempo;
+                    lastMousePression = tempo;
                     if(porta->status)
                     {
                        porta->orientacao -= 90;
@@ -856,10 +856,10 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             if(estaDentro( min, max, minMouse, maxMouse, 1))
             {
                 cursors->SetActual(CURSOR_INVENTORY);
-                if(janAtalhos)
+                if(shortCutsWindow)
                 {
                    ObjTxt->texto = pers->nome; 
-                   janAtalhos->Desenhar(mouseX, mouseY);
+                   shortCutsWindow->Desenhar(mouseX, mouseY);
                 }
                 pronto = 1;
             }
@@ -895,10 +895,10 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
               if(estaDentro( min, max, minMouse, maxMouse, 1))
               {
                    cursors->SetActual(CURSOR_TALK);
-                   if(janAtalhos)
+                   if(shortCutsWindow)
                    {
                       ObjTxt->texto = pers->nome; 
-                      janAtalhos->Desenhar(mouseX, mouseY);
+                      shortCutsWindow->Desenhar(mouseX, mouseY);
                    }
                    pronto = 1;
                }
@@ -922,10 +922,10 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
             if( estaDentro( minCon, maxCon, minMouse, maxMouse, 1 ) )
             {
-               if(janAtalhos)
+               if(shortCutsWindow)
                {
                   ObjTxt->texto = quaux->mapConection.mapName; 
-                  janAtalhos->Desenhar(mouseX, mouseY);
+                  shortCutsWindow->Desenhar(mouseX, mouseY);
                }
                cursors->SetActual(CURSOR_MAPTRAVEL);
                pronto = 1;
@@ -937,24 +937,24 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             }
          }
 
-         if( (janAtalhos) && (!pronto) )
+         if( (shortCutsWindow) && (!pronto) )
          {
             ObjTxt->texto = language.OBJ_NOTHING.c_str(); 
-            janAtalhos->Desenhar(mouseX, mouseY);
+            shortCutsWindow->Desenhar(mouseX, mouseY);
          }
         }
       }
 
-      if(tempo-ultimaKeyb >= REFRESH_RATE)
+      if(tempo-lastKeyb >= REFRESH_RATE)
       {
-         ultimaKeyb = tempo;
+         lastKeyb = tempo;
          /* Keyboard Verification */
          if ( keys[SDLK_ESCAPE] ) // Exit Engine
             return(0);
 
          if(keys[SDLK_m]) //Open Minimap
          {
-             if(!janMiniMapa)
+             if(!miniMapWindow)
              {
                OpenMiniMapWindow();
                redesenha = true;
@@ -993,7 +993,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
 
       if(keys[SDLK_n])
       {
-          if(!janAtalhos)
+          if(!shortCutsWindow)
           {
               OpenShortcutsWindow();
               redesenha = true;
@@ -1080,31 +1080,31 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
              varZ *= -1;
          }
 
-         if(podeAndar(varX,varZ,0)) 
+         if(canWalk(varX,varZ,0)) 
          {
-            centroX += varX;
-            centroZ += varZ;
+            centerX += varX;
+            centerZ += varZ;
             PCs->personagemAtivo->posicaoLadoX += varX;
             PCs->personagemAtivo->posicaoLadoZ += varZ;
             redesenha = true;
             andou = true;
          }
-         else if( ((varX > 0) && (podeAndar(passo,0,0))) ||
-                  ((varX < 0) && (podeAndar(-passo,0,0))) )       
+         else if( ((varX > 0) && (canWalk(passo,0,0))) ||
+                  ((varX < 0) && (canWalk(-passo,0,0))) )       
          {
             if(varX < 0)
                passo *= -1;
-            centroX += passo;
+            centerX += passo;
             PCs->personagemAtivo->posicaoLadoX += passo;
             redesenha = true;
             andou = true;
          }
-         else if( ((varZ > 0) && podeAndar(0,passo,0)) ||
-                  ((varZ < 0) && podeAndar(0,-passo,0)) )
+         else if( ((varZ > 0) && canWalk(0,passo,0)) ||
+                  ((varZ < 0) && canWalk(0,-passo,0)) )
          {
             if(varZ < 0) 
                passo *= -1;
-            centroZ += passo;
+            centerZ += passo;
             PCs->personagemAtivo->posicaoLadoZ += passo;
             redesenha = true;
             andou = true;
@@ -1120,33 +1120,33 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
               varX *= -1;
               varZ *= -1;
          }
-         if((podeAndar(varX,varZ,0)) ) 
+         if((canWalk(varX,varZ,0)) ) 
          {
              PCs->personagemAtivo->posicaoLadoX += varX;
              PCs->personagemAtivo->posicaoLadoZ += varZ;
-             centroX += varX;
-             centroZ += varZ;
+             centerX += varX;
+             centerZ += varZ;
              redesenha = true;
              andou  = true;
          }
-         else if( ((varX > 0) && (podeAndar(passo,0,0))) ||
-                  ((varX < 0) && (podeAndar(-passo,0,0))) ) 
+         else if( ((varX > 0) && (canWalk(passo,0,0))) ||
+                  ((varX < 0) && (canWalk(-passo,0,0))) ) 
                    
          {
               if(varX < 0 )
                  passo *= -1;
               PCs->personagemAtivo->posicaoLadoX += passo;
-              centroX += passo;
+              centerX += passo;
               redesenha = true;
               andou = true;
          }
-         else if( ((varZ > 0) && (podeAndar(0,passo,0))) ||
-                  ((varZ < 0) && (podeAndar(0,-passo,0))) )
+         else if( ((varZ > 0) && (canWalk(0,passo,0))) ||
+                  ((varZ < 0) && (canWalk(0,-passo,0))) )
          {
               if( varZ < 0 )
                  passo *= -1;
               PCs->personagemAtivo->posicaoLadoZ += passo;
-              centroZ += passo;
+              centerZ += passo;
               redesenha = true;
               andou = true;
          }
@@ -1156,7 +1156,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
       if( (keys[SDLK_a]) || (keys[SDLK_d]))
       {
          // CounterClockWise Character turn
-         if((keys[SDLK_a]) && (podeAndar(0,0,rotacao)) )  
+         if((keys[SDLK_a]) && (canWalk(0,0,rotacao)) )  
          {
             PCs->personagemAtivo->orientacao += rotacao;
             if(PCs->personagemAtivo->orientacao > 360.0)
@@ -1166,7 +1166,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             andou = true;
          }
          // Clockwise Character Turn
-         if((keys[SDLK_d]) && (podeAndar(0,0,-rotacao)) )
+         if((keys[SDLK_d]) && (canWalk(0,0,-rotacao)) )
          {
             PCs->personagemAtivo->orientacao -= rotacao;
             if(PCs->personagemAtivo->orientacao < 0.0)
@@ -1190,8 +1190,8 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
             if(PCs->personagemAtivo == PCs->primeiro)
                PCs->personagemAtivo = (personagem*)PCs->primeiro->proximo;
          }
-         centroX = PCs->personagemAtivo->posicaoLadoX;
-         centroZ = PCs->personagemAtivo->posicaoLadoZ;
+         centerX = PCs->personagemAtivo->posicaoLadoX;
+         centerZ = PCs->personagemAtivo->posicaoLadoZ;
          redesenha = true;
          SDL_Delay(100);
       }
@@ -1220,17 +1220,17 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
    
    if( (redesenha) || ( (*forcaAtualizacao != 0)))
    {
-      if(janMiniMapa)
+      if(miniMapWindow)
       {
          GLint x = (int)(((PCs->personagemAtivo->posicaoLadoX) / (SQUARESIZE)));
-         if(x > mapa->x-1)
+         if(x > actualMap->x-1)
          {
-            x = mapa->x-1;
+            x = actualMap->x-1;
          }
          GLint z = (int)(((PCs->personagemAtivo->posicaoLadoZ) / (SQUARESIZE)));
-         if( z > mapa->z-1)
+         if( z > actualMap->z-1)
          {
-            z = mapa->z-1;
+            z = actualMap->z-1;
          }
          x = 8 + (x*4);
          z = 20 + (z*4);
@@ -1240,7 +1240,7 @@ int engine::TrataES(SDL_Surface *screen,int *forcaAtualizacao)
          botPerMiniMap->y1 = z;
          botPerMiniMap->y2 = z+3;
 
-         janMiniMapa->Desenhar(mouseX, mouseY);
+         miniMapWindow->Desenhar(mouseX, mouseY);
       }
       
       Draw();
@@ -1292,31 +1292,31 @@ void engine::Draw()
    glLoadIdentity();
 
    /* Redefine camera position */
-   cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   cameraY = centroY + deltaY + (float) d * sin(deg2Rad(theta));
-   cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-   gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
+   cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+   cameraY = centerY + deltaY + (float) d * sin(deg2Rad(theta));
+   cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+   gluLookAt(cameraX,cameraY,cameraZ, centerX,centerY,centerZ,0,1,0);
 
    /* Atualize to culling and to GUI */
-   AtualizaFrustum(matrizVisivel,proj,modl);
+   AtualizaFrustum(visibleMatrix,proj,modl);
 
    /* SKY */
    glPushMatrix();
       glEnable(GL_TEXTURE_2D);
-      glBindTexture(GL_TEXTURE_2D, ceu);
-      glTranslatef(mapa->x*HALFSQUARESIZE, 0 , mapa->z*HALFSQUARESIZE);
+      glBindTexture(GL_TEXTURE_2D, sky);
+      glTranslatef(actualMap->x*HALFSQUARESIZE, 0 , actualMap->z*HALFSQUARESIZE);
       glScalef(HALFFARVIEW,HALFFARVIEW,HALFFARVIEW);
       glRotated(90,0,1,0);
       glRotated(180,1,0,0);
       //gluSphere(atmosfera,HALFFARVIEW,5,5);
-      glCallList(listAtmosfera);
+      glCallList(skyList);
       glDisable(GL_TEXTURE_2D);
    glPopMatrix();
 
    glPushMatrix();
 
    /* Draws World, doing view frustum culling */
-   mapa->draw(cameraX,cameraY,cameraZ,matrizVisivel);
+   actualMap->draw(cameraX,cameraY,cameraZ,visibleMatrix);
 
    /* Draw Playable Characters (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
@@ -1523,7 +1523,7 @@ int ColisaoComMeioFio(GLfloat min[3],GLfloat max[3], muro* meiosFio)
 /*********************************************************************
  *                   Verifica se nao ha Colisao                      *
  *********************************************************************/
-int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
+int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 {
    int result = 1;
    Square* saux;
@@ -1557,13 +1557,13 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
    /* Testa limites do Mapa */
    if( (min[0]<2) || (min[2]<2) || 
-       (max[0]>mapa->x*SQUARESIZE-2) || (max[2]>mapa->z*SQUARESIZE-2))
+       (max[0]>actualMap->x*SQUARESIZE-2) || (max[2]>actualMap->z*SQUARESIZE-2))
    {
       return(0);
    }
 
    /* Testa Portas */
-   door* porta = mapa->portas;
+   door* porta = actualMap->portas;
    while( porta != NULL )
    {
       GLfloat minObj[3], maxObj[3];
@@ -1609,7 +1609,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
  
    /* Testa quadrados a direita */
-   saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
+   saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
                              PCs->personagemAtivo->ocupaQuad->posZ);
    if(saux) 
    { 
@@ -1628,7 +1628,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          }
       }
       /* Nordeste */
-      saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
+      saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
                              PCs->personagemAtivo->ocupaQuad->posZ-1);
       if( saux )
       {
@@ -1647,7 +1647,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          }
       }
       /* Sudeste */
-      saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
+      saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
                              PCs->personagemAtivo->ocupaQuad->posZ+1);
       if( saux )
       {
@@ -1668,7 +1668,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
 
    /* Testa quadrados a esquerda */
-   saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
+   saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
                              PCs->personagemAtivo->ocupaQuad->posZ);
    if( saux ) 
    { 
@@ -1688,7 +1688,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
 
       /* Noroeste */
-      saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
+      saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
                              PCs->personagemAtivo->ocupaQuad->posZ-1);
       if( saux )
       {
@@ -1707,7 +1707,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          }
       }
       /* Sudoeste */
-      saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
+      saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
                              PCs->personagemAtivo->ocupaQuad->posZ+1);
       if( saux )
       { 
@@ -1728,7 +1728,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
   
    /* Testa quadrados abaixo */
-   saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX,
+   saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX,
                              PCs->personagemAtivo->ocupaQuad->posZ+1);
    if( saux ) 
    {   
@@ -1749,7 +1749,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
 
    /* Testa quadrados acima */
-   saux = mapa->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX,
+   saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX,
                              PCs->personagemAtivo->ocupaQuad->posZ-1);
    if( saux )
    {  
@@ -1805,7 +1805,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       
    /* Testa Meio-fio */
    float altura_atual = PCs->personagemAtivo->posicaoLadoY;
-   if( ColisaoComMeioFio( min, max, mapa->meiosFio) )
+   if( ColisaoComMeioFio( min, max, actualMap->meiosFio) )
    {
       PCs->personagemAtivo->posicaoLadoY = MEIOFIOALTURA+0.1;
    }
@@ -1824,9 +1824,9 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
    int posZ =(int)floor( nz / (SQUARESIZE));
 
-   PCs->personagemAtivo->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
+   PCs->personagemAtivo->ocupaQuad = actualMap->quadradoRelativo(posX,posZ);
 
-   saux = mapa->quadradoRelativo( (int)(nx/SQUARESIZE),
+   saux = actualMap->quadradoRelativo( (int)(nx/SQUARESIZE),
                                   (int)(nz/SQUARESIZE));
 
    GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
@@ -1848,7 +1848,7 @@ int engine::podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
  
    PCs->personagemAtivo->posicaoLadoY += res;
-   centroY = res+30;
+   centerY = res+30;
    
    return(result);
 }
@@ -1877,24 +1877,24 @@ inline void engine::verificaQuad(Square* quad)
 }
 
 /* Monta conjunto de Campos da linha */
-inline void engine::verificaLinha(Square* centro)
+inline void engine::verificaLinha(Square* center)
 {
    Square* saux;
-   if(centro)
+   if(center)
    {
-       verificaQuad(centro);
-       saux = mapa->quadradoRelativo(centro->posX-1,centro->posZ);
+       verificaQuad(center);
+       saux = actualMap->quadradoRelativo(center->posX-1,center->posZ);
        if(saux)
        {
           verificaQuad(saux);
-          saux = mapa->quadradoRelativo(centro->posX-2,centro->posZ);
+          saux = actualMap->quadradoRelativo(center->posX-2,center->posZ);
           verificaQuad(saux);
        }
-       saux = mapa->quadradoRelativo(centro->posX+1,centro->posZ);
+       saux = actualMap->quadradoRelativo(center->posX+1,center->posZ);
        if(saux)
        {
           verificaQuad(saux);
-          saux = mapa->quadradoRelativo(centro->posX+2,centro->posZ);
+          saux = actualMap->quadradoRelativo(center->posX+2,center->posZ);
           verificaQuad(saux);
        }
    }   
@@ -1925,14 +1925,14 @@ int engine::TrataIA()
     if(per->ocupaQuad)
     {
        verificaLinha(per->ocupaQuad);
-       saux = mapa->quadradoRelativo(per->ocupaQuad->posX,
+       saux = actualMap->quadradoRelativo(per->ocupaQuad->posX,
                                      per->ocupaQuad->posZ-1);
        if(saux)
        {
           verificaLinha(saux);
           verificaLinha(saux);
        }
-       saux = mapa->quadradoRelativo(per->ocupaQuad->posX,
+       saux = actualMap->quadradoRelativo(per->ocupaQuad->posX,
                                      per->ocupaQuad->posZ+1);
        verificaLinha(saux);
     }
@@ -1946,7 +1946,7 @@ int engine::TrataIA()
     /* Define-se A posicao do Personagem NPC */  
     posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
     posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
-    per->ocupaQuad = mapa->quadradoRelativo(posX,posZ);
+    per->ocupaQuad = actualMap->quadradoRelativo(posX,posZ);
 
     return( (antX!=per->posicaoLadoX) || (antZ!=per->posicaoLadoZ));
 }
@@ -1957,22 +1957,22 @@ int engine::TrataIA()
 void engine::OpenMiniMapWindow()
 {
    GLint x = (int)(((PCs->personagemAtivo->posicaoLadoX) / (SQUARESIZE)));
-   if(x > mapa->x-1)
+   if(x > actualMap->x-1)
    {
-      x = mapa->x-1;
+      x = actualMap->x-1;
    }
    GLint z = (int)(((PCs->personagemAtivo->posicaoLadoZ) / (SQUARESIZE)));
-   if( z > mapa->z-1)
+   if( z > actualMap->z-1)
    {
-      z = mapa->z-1;
+      z = actualMap->z-1;
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   janMiniMapa = gui->ljan->InserirJanela(0,344,255,471,
+   miniMapWindow = gui->ljan->InserirJanela(512,472,799,599,//0,344,255,471,
                                           language.WINDOW_MAP.c_str(),1,1,
                                           NULL,NULL);
 
-   botPerMiniMap = janMiniMapa->objetos->InserirBotao(x,z,x+2,z+2,255,255,128,
+   botPerMiniMap = miniMapWindow->objetos->InserirBotao(x,z,x+2,z+2,255,255,128,
                                                       "",0,NULL);
    botPerMiniMap->Cores.corCont[0].R = 255;
    botPerMiniMap->Cores.corCont[0].G = 255;
@@ -1984,16 +1984,16 @@ void engine::OpenMiniMapWindow()
    botPerMiniMap->Cores.corCont[2].G = 255;
    botPerMiniMap->Cores.corCont[2].B = 128;
 
-   figura* fig = janMiniMapa->objetos->InserirFigura(8,20,240,95,NULL);
-   mapa->drawMinimap(fig->fig);
+   figura* fig = miniMapWindow->objetos->InserirFigura(8,20,240,95,NULL);
+   actualMap->drawMinimap(fig->fig);
 
-   janMiniMapa->objetos->InserirFigura(3,15,252,120,
-                                       "../data/texturas/shortcut2.png");
+   miniMapWindow->objetos->InserirFigura(3,15,252,120,
+                                       "../data/texturas/map.png");
 
    
                    
-   janMiniMapa->ptrExterno = &janMiniMapa;
-   janMiniMapa->Abrir(gui->ljan);
+   miniMapWindow->ptrExterno = &miniMapWindow;
+   miniMapWindow->Abrir(gui->ljan);
 }
 
 /*********************************************************************
@@ -2007,37 +2007,37 @@ int botaoMenu(void *jan,void *ljan,SDL_Surface *screen)
 
 void engine::OpenShortcutsWindow()
 {
-   janAtalhos=gui->ljan->InserirJanela(0,472,511,599,
+   shortCutsWindow=gui->ljan->InserirJanela(0,472,511,599,
                                   language.WINDOW_SHORTCUTS.c_str(),1,1,
                                        NULL,NULL);
-   FPS = janAtalhos->objetos->InserirQuadroTexto(8,20,100,45,0,
+   FPS = shortCutsWindow->objetos->InserirQuadroTexto(8,20,150/*100*/,35,2,
                                   language.WINDOW_SHORTCUTS_FPS.c_str());
-   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,76,180,101,0,
+   ObjTxt = shortCutsWindow->objetos->InserirQuadroTexto(8,36,249,100,2,
                                   language.WINDOW_SHORTCUTS_HELP.c_str());
-   ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
-   ObjTxt->Cores.corCont[1].B = 255;
-   ObjTxt = janAtalhos->objetos->InserirQuadroTexto(8,46,150,71,0,
+   /*ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
+   ObjTxt->Cores.corCont[1].B = 255;*/
+   ObjTxt = shortCutsWindow->objetos->InserirQuadroTexto(151,20,249,35,2,
                                  language.OBJ_NOTHING.c_str());
 
-   janAtalhos->objetos->InserirBotao(6,102,74,120,janAtalhos->Cores.corBot.R, 
-                                 janAtalhos->Cores.corBot.G,
-                                 janAtalhos->Cores.corBot.B,
+   shortCutsWindow->objetos->InserirBotao(25,102,93,120,shortCutsWindow->Cores.corBot.R, 
+                                 shortCutsWindow->Cores.corBot.G,
+                                 shortCutsWindow->Cores.corBot.B,
                                  language.INITIAL_SAVE.c_str(),
                                  0,NULL);
-   janAtalhos->objetos->InserirBotao(75,102,143,120,janAtalhos->Cores.corBot.R, 
-                                 janAtalhos->Cores.corBot.G,
-                                 janAtalhos->Cores.corBot.B,
+   shortCutsWindow->objetos->InserirBotao(94,102,162,120,shortCutsWindow->Cores.corBot.R, 
+                                 shortCutsWindow->Cores.corBot.G,
+                                 shortCutsWindow->Cores.corBot.B,
                                  "Menu",
                                  0,&botaoMenu);
-   janAtalhos->objetos->InserirBotao(144,102,212,120,
-                                 janAtalhos->Cores.corBot.R, 
-                                 janAtalhos->Cores.corBot.G,
-                                 janAtalhos->Cores.corBot.B,
+   shortCutsWindow->objetos->InserirBotao(163,102,231,120,
+                                 shortCutsWindow->Cores.corBot.R, 
+                                 shortCutsWindow->Cores.corBot.G,
+                                 shortCutsWindow->Cores.corBot.B,
                                  language.INITIAL_LOAD.c_str(),
                                  0,NULL);
 
    tabBotao* tb;
-   tb = janAtalhos->objetos->InserirTabBotao(252,15,0,0,
+   tb = shortCutsWindow->objetos->InserirTabBotao(252,15,0,0,
                                              "../data/texturas/shortcuts.png");
    tb->inserirBotao(7,4,43,36,NULL);/* Attack Mode */
    tb->inserirBotao(7,40,43,72,NULL);/* Attack 1 */
@@ -2063,10 +2063,10 @@ void engine::OpenShortcutsWindow()
    tb->inserirBotao(220,40,256,72,NULL);/* Attack 6 */
    tb->inserirBotao(220,75,256,107,NULL);/* Info */
 
-   janAtalhos->objetos->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
+   shortCutsWindow->objetos->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
    
-   janAtalhos->ptrExterno = &janAtalhos;
-   janAtalhos->Abrir(gui->ljan);
+   shortCutsWindow->ptrExterno = &shortCutsWindow;
+   shortCutsWindow->Abrir(gui->ljan);
 }
 
 /*********************************************************************
@@ -2075,17 +2075,17 @@ void engine::OpenShortcutsWindow()
 int engine::Run(SDL_Surface *surface)
 {
 
-   if(!mapa->music.empty())
+   if(!actualMap->music.empty())
    {
-      snd->StopMusic(musica);
-      musica = snd->LoadMusic(mapa->music);
+      snd->StopMusic(music);
+      music = snd->LoadMusic(actualMap->music);
    }
 
    snd->LoadSample(SOUND_WALK,"../data/sndfx/passos.ogg");
 
    int forcaAtualizacao = 0; //force screen atualization FIXME, no more used
-   FPSatual = 10.0;
-   ultimaFPS = 0;
+   actualFPS = 10.0;
+   lastFPS = 0;
 
    
    /* AI init FIXME not here, but in NPCs, etc */
@@ -2105,7 +2105,7 @@ int engine::Run(SDL_Surface *surface)
    #endif
   
    /* Main Things Run */
-   while(TrataES(surface,&forcaAtualizacao))
+   while(threatIO(surface,&forcaAtualizacao))
    {
      #ifdef REDE
       /* Network Code. For now, we aren't using the network anymore, 

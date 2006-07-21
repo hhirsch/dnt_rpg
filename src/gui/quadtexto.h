@@ -12,13 +12,12 @@
 #include <string>
 using namespace std;
 
-
 class quadroTexto: public Tobjeto
 {
    public:
       ~quadroTexto();
       int x1,y1,x2,y2;     /* Coordenadas da Janela */
-      int moldura;         /* Possui Moldura, se != 0 */
+      int moldura;         /* 1, moldura e fundo, 2 so moldura */
       string texto;         /* Texto Escrito */
       cores Cores;
       string fonte;

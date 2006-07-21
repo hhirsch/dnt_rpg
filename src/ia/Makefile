@@ -1,8 +1,8 @@
 # DccNiTghtmare is public domain. Do whatever you want with this code.
 
 CPP = g++
-CFLAGS = -g -c -Wall
-EFLAGS = -g -Wall -lm
+CFLAGS = -g -c -Wall -O2
+EFLAGS = -g -Wall -O2 -lm
 OBJS = ai.o
 
 

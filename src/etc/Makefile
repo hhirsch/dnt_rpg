@@ -2,7 +2,7 @@
 
 CPP = g++
 CC = gcc
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -O2
 
 all: glm.o fifo.o texture.o
 

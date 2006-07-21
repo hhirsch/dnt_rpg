@@ -84,6 +84,7 @@ class lang
 
    /* DIRECTORYS */
    static string SKILLS_DIR;
+   static string FEATS_DIR;
 
    /* Errors */
    static string ERROR_MAP_OUT;

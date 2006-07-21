@@ -2,8 +2,8 @@
 
 CC = gcc
 CPP = g++
-CFLAGS = -g -c -Wall
-EFLAGS = -g -Wall -lm -lSDL -lSDL_image
+CFLAGS = -g -c -Wall -O2
+EFLAGS = -g -Wall -O2 -lm -lSDL -lSDL_image
 OBJS = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o menu.o mouse.o quadtexto.o seltexto.o 
 OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o lista.o menu.o mouse.o quadtexto.o seltexto.o tabbotao.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image

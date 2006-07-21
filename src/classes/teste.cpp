@@ -8,7 +8,7 @@
 int main()
 {
    lang language;
-   language.ReloadFile(LANG_PORTUGUES);
+   language.ReloadFile(LANG_FRANCES);
    featsList* ft;
    ft = new featsList("../data/feats/Ingles/","../data/feats/feats.ftl");
 

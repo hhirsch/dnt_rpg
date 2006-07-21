@@ -48,9 +48,9 @@ class engine
       double theta;                    /**< Rotation Up*/
       double phi;                      /**< Rotation to Sides*/
       double d;                        /**< Zoom */
-      double centroX,                  /**< Camera Central X Position */
-      centroY,                         /**< Camera Central Y Position */
-      centroZ;                         /**< Camera Central Z Position */
+      double centerX,                  /**< Camera Central X Position */
+      centerY,                         /**< Camera Central Y Position */
+      centerZ;                         /**< Camera Central Z Position */
       double cameraX,                  /**< Camera X Position */
              cameraY,                  /**< Camera Y Position */
              cameraZ;                  /**< Camera Z Position */
@@ -142,7 +142,7 @@ class engine
        * Define Screen to actual Screen Size  
        * \param screen -> Pointer to the Screen's Surface
        ***************************************************************/
-      void Redmensiona(SDL_Surface *screen);
+      void redmensionateWindow(SDL_Surface *screen);
 
       /*!
        *************************************************************** 
@@ -150,7 +150,7 @@ class engine
        * \param screen -> Pointer to the Screen's Surface
        * \param forcaAtualizacao -> to force the draw
        ***************************************************************/
-      int  TrataES(SDL_Surface *screen,int *forcaAtualizacao);
+      int threatIO(SDL_Surface *screen,int *forcaAtualizacao);
 
       /*! Verify Square on IA TODO oxi, out here.
        * \param quad -> square to verify */
@@ -169,7 +169,7 @@ class engine
        * \param varAlpha -> Variation on angle
        * \return 1 if can walk to new position
        ***************************************************************/
-      int podeAndar(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
+      int canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
       /*!
        ************************************************************** 
@@ -179,12 +179,12 @@ class engine
        ***************************************************************/
       void drawSphereToList(int lats, int longs);
 
-      Map* mapa;                   /**< Actual Engine Map */
+      Map* actualMap;              /**< Actual Engine Map */
       cursor* cursors;             /**< Utilized mouse cursors */
  
-      GLfloat matrizVisivel[6][4]; /**< Actual Frustum Matrix */
-      GLuint listAtmosfera;        /**< Sky List */
-      GLuint ceu;                  /**< Sky Texture */
+      GLfloat visibleMatrix[6][4]; /**< Actual Frustum Matrix */
+      GLuint skyList;              /**< Sky GL List */
+      GLuint sky;                  /**< Sky Texture */
       int mouseX,                  /**< Actual mouse X coordinates on screen */
           mouseY;                  /**< Actual mouse Y coordinates on screen */
       double xReal,                /**< Actual mouse X coordinates on World */
@@ -193,19 +193,19 @@ class engine
 
       quadroTexto* FPS;            /**< Text that shows FPS */
       quadroTexto* ObjTxt;         /**< Text that shows actual pointed object */
-      janela* janAtalhos;          /**< ShortCuts Window */
-      janela* janMiniMapa;         /**< MiniMap Window */
+      janela* shortCutsWindow;     /**< ShortCuts Window */
+      janela* miniMapWindow;       /**< MiniMap Window */
       botao* botPerMiniMap;        /**< MiniMap Button */
    
-      Uint32 ultimaLeitura;        /**< Last Verification */
-      Uint32 ultimoMouse;          /**< Last read from mouse */
-      Uint32 ultimaPressaoMouse;   /**< Last mouse pressure */
-      Uint32 ultimaFPS;            /**< Last obtained FPS */
-      Uint32 ultimaKeyb;           /**< Last read from keyboard */
-      double FPSatual;             /**< Actual FPS */
+      Uint32 lastRead;             /**< Last Verification of I/O */
+      Uint32 lastMouse;            /**< Last read from mouse */
+      Uint32 lastMousePression;    /**< Last mouse pressure */
+      Uint32 lastFPS;              /**< Last obtained FPS */
+      Uint32 lastKeyb;             /**< Last read from keyboard */
+      double actualFPS;            /**< Actual FPS */
 
       sound* snd;                  /**< Actual Sounds thing */
-      Mix_Music* musica;           /**< Actual playing music */
+      Mix_Music* music;            /**< Actual playing music */
       options* option;             /**< Current Options */
 
       AI* ia;                      /**< IA Module. TODO Not Here. */
@@ -214,7 +214,7 @@ class engine
       lang language;               /**< Language struct: internationalization */
 
       partSystem* particleSystem;  /**< The Particle System */
-      GLfloat segundos;            /**< Seconds from actualization \b NOTUSED */
+      GLfloat seconds;             /**< Seconds from last actualization */
       
       int imgNumber;               /**< Used on exporting images to make video*/
 };

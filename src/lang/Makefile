@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -g -c -Wall
+CFLAGS = -g -c -Wall -O2
 OBJS = lang.o
 
 all: $(OBJS)
