@@ -46,20 +46,20 @@ void inserirObjetoMapa(GLfloat xReal, GLfloat zReal, int orObj,
    int ob=0;
    if(saux)
    {
-     while( (ob < MAXOBJETOS ) && (saux->objetos[ob] != NULL))
+     while( (ob < MAXOBJETOS ) && (saux->objects[ob] != NULL))
      {
         ob++;
      }
      if(ob<MAXOBJETOS)
      {
-        saux->objetos[ob] = objAtual;
-        //saux->quadXobjetos[ob] = qx;
-        //saux->quadZobjetos[ob] = qz;
+        saux->objects[ob] = objAtual;
+        //saux->quadXobjects[ob] = qx;
+        //saux->quadZobjects[ob] = qz;
         //objAtual->x
-        saux->Xobjetos[ob] = xReal;
-        saux->Zobjetos[ob] = zReal;
-        saux->orientacaoObjetos[ob] = orObj;
-        saux->objetosDesenha[ob] = 1;
+        saux->Xobjects[ob] = xReal;
+        saux->Zobjects[ob] = zReal;
+        saux->objectsOrientation[ob] = orObj;
+        saux->objectsDesenha[ob] = 1;
         printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
                   
         GLMmodel* modelo = (GLMmodel*)objAtual->modelo3d; 
@@ -112,16 +112,16 @@ void inserirObjetoMapa(GLfloat xReal, GLfloat zReal, int orObj,
              {
                 ob =0;
                 while( (ob < MAXOBJETOS ) && 
-                       (qaux->objetos[ob] != NULL))
+                       (qaux->objects[ob] != NULL))
                 {
                    ob++;
                 }
                 if(ob < MAXOBJETOS)
                 {
-                   qaux->objetos[ob] = objAtual;
-                   qaux->Xobjetos[ob] = xReal;
-                   qaux->Zobjetos[ob] = zReal;
-                   qaux->objetosDesenha[ob] = 0;
+                   qaux->objects[ob] = objAtual;
+                   qaux->Xobjects[ob] = xReal;
+                   qaux->Zobjects[ob] = zReal;
+                   qaux->objectsDesenha[ob] = 0;
                    printf("%d° Object Inserted on %d %d\n",ob,X1+1,Z1+1);
                 }
              }
@@ -581,7 +581,7 @@ int botaoInserir(void *jan,void *ljan,SDL_Surface *screen)
        printf("Inserted Texture: %s\n",bartInserir->texto.c_str());
    }
    else
-   if(bartInserir->texto[tam-1] == 'c') /* c, de dcc, objeto*/
+   if(bartInserir->texto[tam-1] == 'c') /* c, de dcc, object*/
    {
        objAtual = mapa->Objetos->InserirMapObjeto(bartInserir->texto.c_str(),
                                                bartInserir->texto.c_str());
@@ -678,74 +678,74 @@ int main(int argc, char **argv)
    janela* principal;
    janela* janSalvar;
    principal = gui->ljan->InserirJanela(0,64,255,191,"Main",1,1,NULL,NULL);
-   principal->objetos->InserirBotao(10,17,50,35,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(10,17,50,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Floor",1,&botaoChao);
-   principal->objetos->InserirBotao(10,37,50,55,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(10,37,50,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "XWall",1,&botaoMuroX);
-   principal->objetos->InserirBotao(10,57,50,75,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(10,57,50,75,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "ZWall",1,&botaoMuroZ);
-   principal->objetos->InserirBotao(10,77,50,95,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(10,77,50,95,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Door",1,&botaoPorta);
-   principal->objetos->InserirBotao(55,17,125,35,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(55,17,125,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Objects",1,&botaoObjeto);
-   principal->objetos->InserirBotao(55,37,125,55,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(55,37,125,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Take Obj",1,&botaoPegaObjeto);
-   principal->objetos->InserirBotao(55,57,125,75,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(55,57,125,75,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Destroy",1,NULL);
-   principal->objetos->InserirBotao(55,77,125,95,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(55,77,125,95,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Portal",1,&botaoPortal);
-   principal->objetos->InserirBotao(130,17,200,35,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(130,17,200,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Texture >",1,
                                                 &botaoProximaTextura);
-   principal->objetos->InserirBotao(130,37,200,55,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(130,37,200,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Texture <",1,
                                                 &botaoTexturaAnterior);
-   principal->objetos->InserirBotao(130,57,200,75,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(130,57,200,75,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Object >",1,
                                                 &botaoProximoObjeto); 
-   principal->objetos->InserirBotao(130,77,200,95,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(130,77,200,95,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Object <",1,
                                                 &botaoObjetoAnterior);
-   bartInserir = principal->objetos->InserirBarraTexto(10,97,128,113,
+   bartInserir = principal->objects->InserirBarraTexto(10,97,128,113,
                                          "../data/texturas/chao_grama.jpg",
                                          0,NULL);
-   principal->objetos->InserirBotao(130,97,200,113,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(130,97,200,113,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Insert",1,&botaoInserir);
-   principal->objetos->InserirBotao(205,17,250,35,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(205,17,250,35,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Height",1,&botaoAltura);
-   principal->objetos->InserirBotao(205,37,250,55,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(205,37,250,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "1/2 X",1,&botaoMeioX);
-   principal->objetos->InserirBotao(205,57,250,75,principal->Cores.corBot.R,
+   principal->objects->InserirBotao(205,57,250,75,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "1/2 Z",1,&botaoMeioZ);
@@ -754,15 +754,15 @@ int main(int argc, char **argv)
    principal->Abrir(gui->ljan);
 
    janSalvar = gui->ljan->InserirJanela(0,0,127,63,"Actions",1,1,NULL,NULL);
-   janSalvar->objetos->InserirBotao(10,37,50,55,principal->Cores.corBot.R,
+   janSalvar->objects->InserirBotao(10,37,50,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Save",1,&botaoSalvar);
-   janSalvar->objetos->InserirBotao(77,37,117,55,principal->Cores.corBot.R,
+   janSalvar->objects->InserirBotao(77,37,117,55,principal->Cores.corBot.R,
                                                 principal->Cores.corBot.G,
                                                 principal->Cores.corBot.B,
                                                 "Exit",1,&botaoSair);
-   bartSalvar = janSalvar->objetos->InserirBarraTexto(10,17,118,33,
+   bartSalvar = janSalvar->objects->InserirBarraTexto(10,17,118,33,
                                          entrada,
                                          0,NULL);
 
@@ -775,6 +775,7 @@ int main(int argc, char **argv)
    double xReal, zReal, yReal;
    float wx,wy,wz;
    GLfloat portalX[2], portalZ[2];
+   Tobjeto* object = NULL;
 
    texturaAtual = mapa->Texturas->indice;
    objAtual = (mapObjeto*)mapa->Objetos->primeiro->proximo;
@@ -811,7 +812,7 @@ int main(int argc, char **argv)
       if(qz > mapa->z) 
         qz = mapa->z;
 
-      if(gui->ManipulaEventos(mouseX,mouseY,Mbotao,teclas)==NADA)
+      if(gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,object)==NADA)
       {
          if (qx > mapa->x) qx = mapa->x;
          else if (qx < 0) qx = 0;
@@ -864,7 +865,7 @@ int main(int argc, char **argv)
                novaPorta->x = xPorta;
                novaPorta->z = zPorta;
                novaPorta->orientacao = orPorta;
-               novaPorta->objeto = porta;
+               novaPorta->object = porta;
                door* paux = mapa->portas;
                paux = mapa->portas;
                mapa->portas = novaPorta;
@@ -1482,7 +1483,7 @@ int main(int argc, char **argv)
       
       glPushMatrix();
       glDisable(GL_LIGHTING);
-      gui->Desenhar(proj,modl,viewPort);
+      gui->draw(proj,modl,viewPort);
       glEnable(GL_LIGHTING);
       glPopMatrix();
 

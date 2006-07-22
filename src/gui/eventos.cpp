@@ -13,7 +13,7 @@ int mouseX=0,mouseY=0;
 interface::interface(char* arqfundo)
 {
    ljan = new Ljanela;
-   objetos = new Tlista;
+   objects = new Tlista;
    if(arqfundo != NULL)
    {
       fundo = IMG_Load(arqfundo);
@@ -38,16 +38,18 @@ interface::interface(char* arqfundo)
 interface::~interface()
 {
    delete(ljan);
-   delete(objetos);
+   delete(objects);
    SDL_FreeSurface(fundo);
 }
 
 /*********************************************************************
  *                   Take care of GUI I/O Events                     *
  *********************************************************************/
-int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
+int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+                                Tobjeto* selectObject)
 {
     int aux;
+    selectObject = NULL;
     if(ljan->janelaAtiva == NULL)
        return(NADA);
 
@@ -73,8 +75,8 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                           ljan->janelaAtiva->y2,
                           x, y))
         {
-            Tobjeto *obj = ljan->janelaAtiva->objetos->primeiro->proximo;
-            for(aux=0;aux<ljan->janelaAtiva->objetos->total;aux++)
+            Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
+            for(aux=0;aux<ljan->janelaAtiva->objects->total;aux++)
             {
                if(obj->tipo == SELTEXTO)
                {
@@ -114,9 +116,9 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                                 ljan->janelaAtiva->y2,x,y))
         {
             /* Here are the internal windows clicks verification */
-            Tobjeto *obj = ljan->janelaAtiva->objetos->primeiro->proximo;
+            Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
             int aux;
-            for(aux=0; aux<ljan->janelaAtiva->objetos->total; aux++)
+            for(aux=0; aux<ljan->janelaAtiva->objects->total; aux++)
             {
                if(obj->tipo == BOTAO)
                {
@@ -162,6 +164,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                        foco = FOCO_CXSEL;
                    }
                }
+               /* Verify Text Select */
                else if(obj->tipo == SELTEXTO)
                {
                   selTexto* st = (selTexto*) obj;
@@ -177,12 +180,14 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                      foco = FOCO_SELTEXTO;
                   }
                }
+               /* Verify Button Table */
                else if(obj->tipo == TABBOTAO)
                {
                   tabBotao* tb = (tabBotao*) obj;
                   if( tb->VerificarSobrePosicao(x,y,ljan->janelaAtiva->x1,
                                                 ljan->janelaAtiva->y1) )
                   {
+                    selectObject = obj;
                     return(TABBOTAOPRESSIONADO);
                   }
                }
@@ -192,8 +197,8 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
             if(ljan->janelaAtiva->procPres != NULL)
             {
                 ljan->janelaAtiva->procPres(ljan->janelaAtiva,x,y,NULL);
-                return(JANELACLICADA);
             }
+            selectObject = (Tobjeto*) ljan->janelaAtiva;
             return(JANELACLICADA);
         }
         else if ( (ljan->janelaAtiva != NULL))
@@ -208,6 +213,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
                {
                     foco = FOCO_JOGO;
                     jaux->Ativar(ljan);
+                    selectObject = (Tobjeto*) jaux;
                     return(JANELAATIVADA);
                }
                jaux = (janela*) jaux->proximo;
@@ -215,6 +221,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
         } 
     }
 
+    selectObject = objAtivo;
     /*  FOCUS ON WINDOW MOVIMENTATION  */
     if (foco == FOCO_JANELAMOVER)
     {
@@ -368,7 +375,7 @@ int interface::ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla)
 /*********************************************************************
  *                   Draw Graphic User Interface                     *
  *********************************************************************/
-void interface::Desenhar(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
+void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int aux;
    double profundidade = 0.012;

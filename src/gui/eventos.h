@@ -46,10 +46,11 @@ class interface
 {
    public:
       Ljanela* ljan;
-      Tlista* objetos;
+      Tlista* objects;
       SDL_Surface* fundo;
-      int ManipulaEventos(int x, int y, Uint8 Mbotao, Uint8* tecla);
-      void Desenhar(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+      int manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+                                Tobjeto* selectObjetc);
+      void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
       interface(char* arqFundo);
       ~interface();
       

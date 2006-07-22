@@ -604,24 +604,24 @@ int main(int argc, char *argv[])
     
     jan = interf->ljan->InserirJanela(0,0,255,255,"fntEditor",1,1,NULL,NULL);
     jan->fechavel = 0;
-    arquivo = jan->objetos->InserirBarraTexto(24,20,176,34,txt.c_str(),0,NULL);
-    jan->objetos->InserirBotao(24,42,74,60,Cores.corBot.R,Cores.corBot.G,
+    arquivo = jan->objects->InserirBarraTexto(24,20,176,34,txt.c_str(),0,NULL);
+    jan->objects->InserirBotao(24,42,74,60,Cores.corBot.R,Cores.corBot.G,
                                Cores.corBot.B,"Nova",1,&botao_Novo);
-    jan->objetos->InserirBotao(75,42,125,60,Cores.corBot.R,Cores.corBot.G,
+    jan->objects->InserirBotao(75,42,125,60,Cores.corBot.R,Cores.corBot.G,
                                Cores.corBot.B,"Abrir",1,&botao_Abrir);
-    jan->objetos->InserirBotao(126,42,176,60,Cores.corBot.R,Cores.corBot.G,
+    jan->objects->InserirBotao(126,42,176,60,Cores.corBot.R,Cores.corBot.G,
                                Cores.corBot.B,"Salvar",1,&botao_Salvar);
-    jan->objetos->InserirQuadroTexto(24,67,61,80,0,"INCP:");
-    btCP = jan->objetos->InserirBarraTexto(60,66,84,80,"1",0,&DefCP);
-    jan->objetos->InserirBotao(13,90,93,108,Cores.corBot.R,Cores.corBot.G,
+    jan->objects->InserirQuadroTexto(24,67,61,80,0,"INCP:");
+    btCP = jan->objects->InserirBarraTexto(60,66,84,80,"1",0,&DefCP);
+    jan->objects->InserirBotao(13,90,93,108,Cores.corBot.R,Cores.corBot.G,
                             Cores.corBot.B,"Cor Ativa",1,&botao_CorAtiva);
-    jan->objetos->InserirBotao(96,90,185,108,Cores.corBot.R,Cores.corBot.G,
+    jan->objects->InserirBotao(96,90,185,108,Cores.corBot.R,Cores.corBot.G,
                          Cores.corBot.B,"Cor Inativa",1,&botao_CorInativa);
-    jan->objetos->InserirBotao(130,220,180,238,Cores.corBot.R,Cores.corBot.G,
+    jan->objects->InserirBotao(130,220,180,238,Cores.corBot.R,Cores.corBot.G,
                                Cores.corBot.B,"Sair",1,&botao_Sair);
     txt = "233";
-    btVaiPara = jan->objetos->InserirBarraTexto(40,112,84,126,txt.c_str(),0,NULL);
-    jan->objetos->InserirBotao(90,110,155,128,Cores.corBot.R,Cores.corBot.G,
+    btVaiPara = jan->objects->InserirBarraTexto(40,112,84,126,txt.c_str(),0,NULL);
+    jan->objects->InserirBotao(90,110,155,128,Cores.corBot.R,Cores.corBot.G,
                                Cores.corBot.B,"VaiPara",1,&botao_VaiPara);
 
     jan->Abrir(interf->ljan);
@@ -629,7 +629,7 @@ int main(int argc, char *argv[])
     janelaEdicao = interf->ljan->InserirJanela(10,210,265,465,
                                   "Caractere",1,1,NULL,&colocaCor);
     janelaEdicao->fechavel = 0;
-    grid = janelaEdicao->objetos->InserirFigura(8,18,256,256,NULL);
+    grid = janelaEdicao->objects->InserirFigura(8,18,256,256,NULL);
     grade();
     zera();
     janelaEdicao->Abrir(interf->ljan);
@@ -647,6 +647,7 @@ int main(int argc, char *argv[])
     GLdouble modl[16];
     GLint viewPort[4];
     GLfloat matrizVisivel[6][4];
+    Tobjeto* object = NULL;
 
     glGetIntegerv(GL_VIEWPORT, viewPort);
 
@@ -659,7 +660,7 @@ int main(int argc, char *argv[])
        glClearColor(0,0,0,1);
        glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
        Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-       pronto = !interf->ManipulaEventos(x,y,Mbotao, keys);
+       pronto = !interf->manipulateEvents(x,y,Mbotao, keys, object);
        if(pronto != BARRATEXTOESCRITA)
        {
           defineCaractere(keys,c);
@@ -672,7 +673,7 @@ int main(int argc, char *argv[])
           }
        }
        
-       interf->Desenhar(proj,modl,viewPort);
+       interf->draw(proj,modl,viewPort);
        glFlush();
        SDL_GL_SwapBuffers();
        SDL_Delay(50);

@@ -960,15 +960,15 @@ int main(int argc, char **argv)
    char aux[10];
 
    janSalvar = gui->ljan->InserirJanela(0,0,127,63,"Actions",1,1,NULL,NULL);
-   janSalvar->objetos->InserirBotao(10,37,50,55,janSalvar->Cores.corBot.R,
+   janSalvar->objects->InserirBotao(10,37,50,55,janSalvar->Cores.corBot.R,
                                                 janSalvar->Cores.corBot.G,
                                                 janSalvar->Cores.corBot.B,
                                                 "Save",1,&botaoSalvar);
-   janSalvar->objetos->InserirBotao(77,37,117,55,janSalvar->Cores.corBot.R,
+   janSalvar->objects->InserirBotao(77,37,117,55,janSalvar->Cores.corBot.R,
                                                 janSalvar->Cores.corBot.G,
                                                 janSalvar->Cores.corBot.B,
                                                 "Exit",1,&botaoSair);
-   bartSalvar = janSalvar->objetos->InserirBarraTexto(10,17,118,33,
+   bartSalvar = janSalvar->objects->InserirBarraTexto(10,17,118,33,
                                          entrada,
                                          0,NULL);
 
@@ -977,97 +977,97 @@ int main(int argc, char **argv)
 
    janEditar = gui->ljan->InserirJanela(0,64,127,575,"Edit",1,1,NULL,NULL);
    
-   janEditar->objetos->InserirQuadroTexto(3,17,60,33,0,"MaxLive");
+   janEditar->objects->InserirQuadroTexto(3,17,60,33,0,"MaxLive");
    sprintf(aux, "%d", p->getMaxLive());
-   janEditar->objetos->InserirBarraTexto(60,17,123,33,aux,0,&editedMaxLive);
+   janEditar->objects->InserirBarraTexto(60,17,123,33,aux,0,&editedMaxLive);
 
-   janEditar->objetos->InserirQuadroTexto(3,37,60,53,0,"MaxParts");
+   janEditar->objects->InserirQuadroTexto(3,37,60,53,0,"MaxParts");
    sprintf(aux, "%d", p->getMaxParticles());
-   janEditar->objetos->InserirBarraTexto(60,37,123,53,aux,0,&editedMaxParticles);
+   janEditar->objects->InserirBarraTexto(60,37,123,53,aux,0,&editedMaxParticles);
 
-   janEditar->objetos->InserirQuadroTexto(3,57,60,73,0,"CenterX");
+   janEditar->objects->InserirQuadroTexto(3,57,60,73,0,"CenterX");
    sprintf(aux, "%.3f", p->getCenterX());
-   janEditar->objetos->InserirBarraTexto(60,57,123,73,aux,0,&editedCenterX);
+   janEditar->objects->InserirBarraTexto(60,57,123,73,aux,0,&editedCenterX);
 
-   janEditar->objetos->InserirQuadroTexto(3,77,60,93,0,"CenterY");
+   janEditar->objects->InserirQuadroTexto(3,77,60,93,0,"CenterY");
    sprintf(aux, "%.3f", p->getCenterY());
-   janEditar->objetos->InserirBarraTexto(60,77,123,93,aux,0,&editedCenterY);
+   janEditar->objects->InserirBarraTexto(60,77,123,93,aux,0,&editedCenterY);
 
-   janEditar->objetos->InserirQuadroTexto(3,97,60,113,0,"CenterZ");
+   janEditar->objects->InserirQuadroTexto(3,97,60,113,0,"CenterZ");
    sprintf(aux, "%.3f", p->getCenterZ());
-   janEditar->objetos->InserirBarraTexto(60,97,123,113,aux,0,&editedCenterZ);
+   janEditar->objects->InserirBarraTexto(60,97,123,113,aux,0,&editedCenterZ);
 
-   janEditar->objetos->InserirQuadroTexto(3,117,60,133,0,"Gravity");
+   janEditar->objects->InserirQuadroTexto(3,117,60,133,0,"Gravity");
    sprintf(aux, "%.3f", p->getGravity());
-   janEditar->objetos->InserirBarraTexto(60,117,123,133,aux,0,&editedGravity);
+   janEditar->objects->InserirBarraTexto(60,117,123,133,aux,0,&editedGravity);
 
-   janEditar->objetos->InserirQuadroTexto(3,137,60,153,0,"InitR");
+   janEditar->objects->InserirQuadroTexto(3,137,60,153,0,"InitR");
    sprintf(aux, "%.3f", p->getInitR());
-   janEditar->objetos->InserirBarraTexto(60,137,123,153,aux,0,&editedInitR);
+   janEditar->objects->InserirBarraTexto(60,137,123,153,aux,0,&editedInitR);
 
-   janEditar->objetos->InserirQuadroTexto(3,157,60,173,0,"InitG");
+   janEditar->objects->InserirQuadroTexto(3,157,60,173,0,"InitG");
    sprintf(aux, "%.3f", p->getInitG());
-   janEditar->objetos->InserirBarraTexto(60,157,123,173,aux,0,&editedInitG);
+   janEditar->objects->InserirBarraTexto(60,157,123,173,aux,0,&editedInitG);
 
-   janEditar->objetos->InserirQuadroTexto(3,177,60,193,0,"InitB");
+   janEditar->objects->InserirQuadroTexto(3,177,60,193,0,"InitB");
    sprintf(aux, "%.3f", p->getInitB());
-   janEditar->objetos->InserirBarraTexto(60,177,123,193,aux,0,&editedInitB);
+   janEditar->objects->InserirBarraTexto(60,177,123,193,aux,0,&editedInitB);
 
-   janEditar->objetos->InserirQuadroTexto(3,197,60,213,0,"FinalR");
+   janEditar->objects->InserirQuadroTexto(3,197,60,213,0,"FinalR");
    sprintf(aux, "%.3f", p->getFinalR());
-   janEditar->objetos->InserirBarraTexto(60,197,123,213,aux,0,&editedFinalR);
+   janEditar->objects->InserirBarraTexto(60,197,123,213,aux,0,&editedFinalR);
 
-   janEditar->objetos->InserirQuadroTexto(3,217,60,233,0,"FinalG");
+   janEditar->objects->InserirQuadroTexto(3,217,60,233,0,"FinalG");
    sprintf(aux, "%.3f", p->getFinalG());
-   janEditar->objetos->InserirBarraTexto(60,217,123,233,aux,0,&editedFinalG);
+   janEditar->objects->InserirBarraTexto(60,217,123,233,aux,0,&editedFinalG);
 
-   janEditar->objetos->InserirQuadroTexto(3,237,60,253,0,"FinalB");
+   janEditar->objects->InserirQuadroTexto(3,237,60,253,0,"FinalB");
    sprintf(aux, "%.3f", p->getFinalB());
-   janEditar->objetos->InserirBarraTexto(60,237,123,253,aux,0,&editedFinalB);
+   janEditar->objects->InserirBarraTexto(60,237,123,253,aux,0,&editedFinalB);
 
-   janEditar->objetos->InserirQuadroTexto(3,257,60,273,0,"Alpha");
+   janEditar->objects->InserirQuadroTexto(3,257,60,273,0,"Alpha");
    sprintf(aux, "%.3f", p->getAlpha());
-   janEditar->objetos->InserirBarraTexto(60,257,123,273,aux,0,&editedAlpha);
+   janEditar->objects->InserirBarraTexto(60,257,123,273,aux,0,&editedAlpha);
 
-   janEditar->objetos->InserirQuadroTexto(3,277,60,293,0,"MCntX");
+   janEditar->objects->InserirQuadroTexto(3,277,60,293,0,"MCntX");
    sprintf(aux, "%.3f", p->getDMultCenterX());
-   janEditar->objetos->InserirBarraTexto(60,277,123,293,aux,0,&editedDMultCenterX);
-   janEditar->objetos->InserirQuadroTexto(3,297,60,313,0,"MCntY");
+   janEditar->objects->InserirBarraTexto(60,277,123,293,aux,0,&editedDMultCenterX);
+   janEditar->objects->InserirQuadroTexto(3,297,60,313,0,"MCntY");
    sprintf(aux, "%.3f", p->getDMultCenterY());
-   janEditar->objetos->InserirBarraTexto(60,297,123,313,aux,0,&editedDMultCenterY);
-   janEditar->objetos->InserirQuadroTexto(3,317,60,333,0,"MCntZ");
+   janEditar->objects->InserirBarraTexto(60,297,123,313,aux,0,&editedDMultCenterY);
+   janEditar->objects->InserirQuadroTexto(3,317,60,333,0,"MCntZ");
    sprintf(aux, "%.3f", p->getDMultCenterZ());
-   janEditar->objetos->InserirBarraTexto(60,317,123,333,aux,0,&editedDMultCenterZ);
+   janEditar->objects->InserirBarraTexto(60,317,123,333,aux,0,&editedDMultCenterZ);
 
-   janEditar->objetos->InserirQuadroTexto(3,337,60,353,0,"SCntX");
+   janEditar->objects->InserirQuadroTexto(3,337,60,353,0,"SCntX");
    sprintf(aux, "%.3f", p->getDSumCenterX());
-   janEditar->objetos->InserirBarraTexto(60,337,123,353,aux,0,&editedDSumCenterX);
-   janEditar->objetos->InserirQuadroTexto(3,357,60,373,0,"SCntY");
+   janEditar->objects->InserirBarraTexto(60,337,123,353,aux,0,&editedDSumCenterX);
+   janEditar->objects->InserirQuadroTexto(3,357,60,373,0,"SCntY");
    sprintf(aux, "%.3f", p->getDSumCenterY());
-   janEditar->objetos->InserirBarraTexto(60,357,123,373,aux,0,&editedDSumCenterY);
-   janEditar->objetos->InserirQuadroTexto(3,377,60,393,0,"SCntZ");
+   janEditar->objects->InserirBarraTexto(60,357,123,373,aux,0,&editedDSumCenterY);
+   janEditar->objects->InserirQuadroTexto(3,377,60,393,0,"SCntZ");
    sprintf(aux, "%.3f", p->getDSumCenterZ());
-   janEditar->objetos->InserirBarraTexto(60,377,123,393,aux,0,&editedDSumCenterZ);
+   janEditar->objects->InserirBarraTexto(60,377,123,393,aux,0,&editedDSumCenterZ);
 
-   janEditar->objetos->InserirQuadroTexto(3,397,60,413,0,"MPosX");
+   janEditar->objects->InserirQuadroTexto(3,397,60,413,0,"MPosX");
    sprintf(aux, "%.3f", p->getDMultPosX());
-   janEditar->objetos->InserirBarraTexto(60,397,123,413,aux,0,&editedDMultPosX);
-   janEditar->objetos->InserirQuadroTexto(3,417,60,433,0,"MPosY");
+   janEditar->objects->InserirBarraTexto(60,397,123,413,aux,0,&editedDMultPosX);
+   janEditar->objects->InserirQuadroTexto(3,417,60,433,0,"MPosY");
    sprintf(aux, "%.3f", p->getDMultPosY());
-   janEditar->objetos->InserirBarraTexto(60,417,123,433,aux,0,&editedDMultPosY);
-   janEditar->objetos->InserirQuadroTexto(3,437,60,453,0,"MPosZ");
+   janEditar->objects->InserirBarraTexto(60,417,123,433,aux,0,&editedDMultPosY);
+   janEditar->objects->InserirQuadroTexto(3,437,60,453,0,"MPosZ");
    sprintf(aux, "%.3f", p->getDMultPosZ());
-   janEditar->objetos->InserirBarraTexto(60,437,123,453,aux,0,&editedDMultPosZ);
+   janEditar->objects->InserirBarraTexto(60,437,123,453,aux,0,&editedDMultPosZ);
 
-   janEditar->objetos->InserirQuadroTexto(3,457,60,473,0,"SPosX");
+   janEditar->objects->InserirQuadroTexto(3,457,60,473,0,"SPosX");
    sprintf(aux, "%.3f", p->getDSumPosX());
-   janEditar->objetos->InserirBarraTexto(60,457,123,473,aux,0,&editedDSumPosX);
-   janEditar->objetos->InserirQuadroTexto(3,474,60,490,0,"SPosY");
+   janEditar->objects->InserirBarraTexto(60,457,123,473,aux,0,&editedDSumPosX);
+   janEditar->objects->InserirQuadroTexto(3,474,60,490,0,"SPosY");
    sprintf(aux, "%.3f", p->getDSumPosY());
-   janEditar->objetos->InserirBarraTexto(60,474,123,490,aux,0,&editedDSumPosY);
-   janEditar->objetos->InserirQuadroTexto(3,491,60,505,0,"SPosZ");
+   janEditar->objects->InserirBarraTexto(60,474,123,490,aux,0,&editedDSumPosY);
+   janEditar->objects->InserirQuadroTexto(3,491,60,505,0,"SPosZ");
    sprintf(aux, "%.3f", p->getDSumPosZ());
-   janEditar->objetos->InserirBarraTexto(60,491,123,505,aux,0,&editedDSumPosZ);
+   janEditar->objects->InserirBarraTexto(60,491,123,505,aux,0,&editedDSumPosZ);
 
    janEditar->fechavel = 0;
    janEditar->Abrir(gui->ljan);
@@ -1075,53 +1075,53 @@ int main(int argc, char **argv)
 
    janEditar = gui->ljan->InserirJanela(672,64,799,575,"Edit-2",1,1,NULL,NULL);
 
-   janEditar->objetos->InserirQuadroTexto(3,17,60,33,0,"DMColorR");
+   janEditar->objects->InserirQuadroTexto(3,17,60,33,0,"DMColorR");
    sprintf(aux, "%d", p->getMaxLive());
-   janEditar->objetos->InserirBarraTexto(60,17,123,33,aux,0,&editedDMultColorR);
+   janEditar->objects->InserirBarraTexto(60,17,123,33,aux,0,&editedDMultColorR);
 
-   janEditar->objetos->InserirQuadroTexto(3,37,60,53,0,"DMColorG");
+   janEditar->objects->InserirQuadroTexto(3,37,60,53,0,"DMColorG");
    sprintf(aux, "%d", p->getMaxParticles());
-   janEditar->objetos->InserirBarraTexto(60,37,123,53,aux,0,&editedDMultColorG);
+   janEditar->objects->InserirBarraTexto(60,37,123,53,aux,0,&editedDMultColorG);
 
-   janEditar->objetos->InserirQuadroTexto(3,57,60,73,0,"DMColorB");
+   janEditar->objects->InserirQuadroTexto(3,57,60,73,0,"DMColorB");
    sprintf(aux, "%.3f", p->getCenterX());
-   janEditar->objetos->InserirBarraTexto(60,57,123,73,aux,0,&editedDMultColorB);
+   janEditar->objects->InserirBarraTexto(60,57,123,73,aux,0,&editedDMultColorB);
 
-   janEditar->objetos->InserirQuadroTexto(3,77,60,93,0,"DSColorR");
+   janEditar->objects->InserirQuadroTexto(3,77,60,93,0,"DSColorR");
    sprintf(aux, "%.3f", p->getCenterY());
-   janEditar->objetos->InserirBarraTexto(60,77,123,93,aux,0,&editedDSumColorR);
+   janEditar->objects->InserirBarraTexto(60,77,123,93,aux,0,&editedDSumColorR);
 
-   janEditar->objetos->InserirQuadroTexto(3,97,60,113,0,"DSColorG");
+   janEditar->objects->InserirQuadroTexto(3,97,60,113,0,"DSColorG");
    sprintf(aux, "%.3f", p->getCenterZ());
-   janEditar->objetos->InserirBarraTexto(60,97,123,113,aux,0,&editedDSumColorG);
+   janEditar->objects->InserirBarraTexto(60,97,123,113,aux,0,&editedDSumColorG);
 
-   janEditar->objetos->InserirQuadroTexto(3,117,60,133,0,"DSColorB");
+   janEditar->objects->InserirQuadroTexto(3,117,60,133,0,"DSColorB");
    sprintf(aux, "%.3f", p->getGravity());
-   janEditar->objetos->InserirBarraTexto(60,117,123,133,aux,0,&editedDSumColorB);
+   janEditar->objects->InserirBarraTexto(60,117,123,133,aux,0,&editedDSumColorB);
 
-   janEditar->objetos->InserirQuadroTexto(3,137,60,153,0,"DMVelX");
+   janEditar->objects->InserirQuadroTexto(3,137,60,153,0,"DMVelX");
    sprintf(aux, "%.3f", p->getInitR());
-   janEditar->objetos->InserirBarraTexto(60,137,123,153,aux,0,&editedDMultVelX);
+   janEditar->objects->InserirBarraTexto(60,137,123,153,aux,0,&editedDMultVelX);
 
-   janEditar->objetos->InserirQuadroTexto(3,157,60,173,0,"DMVelY");
+   janEditar->objects->InserirQuadroTexto(3,157,60,173,0,"DMVelY");
    sprintf(aux, "%.3f", p->getInitG());
-   janEditar->objetos->InserirBarraTexto(60,157,123,173,aux,0,&editedDMultVelY);
+   janEditar->objects->InserirBarraTexto(60,157,123,173,aux,0,&editedDMultVelY);
 
-   janEditar->objetos->InserirQuadroTexto(3,177,60,193,0,"DMVelZ");
+   janEditar->objects->InserirQuadroTexto(3,177,60,193,0,"DMVelZ");
    sprintf(aux, "%.3f", p->getInitB());
-   janEditar->objetos->InserirBarraTexto(60,177,123,193,aux,0,&editedDMultVelZ);
+   janEditar->objects->InserirBarraTexto(60,177,123,193,aux,0,&editedDMultVelZ);
 
-   janEditar->objetos->InserirQuadroTexto(3,197,60,213,0,"DSVelX");
+   janEditar->objects->InserirQuadroTexto(3,197,60,213,0,"DSVelX");
    sprintf(aux, "%.3f", p->getFinalR());
-   janEditar->objetos->InserirBarraTexto(60,197,123,213,aux,0,&editedDSumVelX);
+   janEditar->objects->InserirBarraTexto(60,197,123,213,aux,0,&editedDSumVelX);
 
-   janEditar->objetos->InserirQuadroTexto(3,217,60,233,0,"DSVelY");
+   janEditar->objects->InserirQuadroTexto(3,217,60,233,0,"DSVelY");
    sprintf(aux, "%.3f", p->getFinalG());
-   janEditar->objetos->InserirBarraTexto(60,217,123,233,aux,0,&editedDSumVelY);
+   janEditar->objects->InserirBarraTexto(60,217,123,233,aux,0,&editedDSumVelY);
 
-   janEditar->objetos->InserirQuadroTexto(3,237,60,253,0,"DSVelZ");
+   janEditar->objects->InserirQuadroTexto(3,237,60,253,0,"DSVelZ");
    sprintf(aux, "%.3f", p->getFinalB());
-   janEditar->objetos->InserirBarraTexto(60,237,123,253,aux,0,&editedDSumVelZ);
+   janEditar->objects->InserirBarraTexto(60,237,123,253,aux,0,&editedDSumVelZ);
 
    janEditar->fechavel = 0;
    janEditar->Abrir(gui->ljan);
@@ -1131,6 +1131,7 @@ int main(int argc, char **argv)
 
    double varTempo, segundos;
    double ultimaLeitura = 0;
+   Tobjeto* object = NULL;
    
 
    while(!sair)
@@ -1152,7 +1153,7 @@ int main(int argc, char **argv)
         // glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
         // gluUnProject(wx,wy,wz,modl,proj,viewPort, &xReal, &yReal, &zReal);
 
-         if(gui->ManipulaEventos(mouseX,mouseY,Mbotao,teclas) == NADA)
+         if(gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,object) == NADA)
          {
             if(teclas[SDLK_UP] || teclas[SDLK_DOWN])
             {
@@ -1244,7 +1245,7 @@ int main(int argc, char **argv)
          glDisable(GL_COLOR_MATERIAL);*/
          //glPushMatrix();
            
-            gui->Desenhar(proj,modl,viewPort);
+            gui->draw(proj,modl,viewPort);
             
          //glPopMatrix();
 

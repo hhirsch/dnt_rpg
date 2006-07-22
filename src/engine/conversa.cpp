@@ -138,9 +138,9 @@ void conversa::abrirDialogo(int numDialogo, interface* gui,
    }
  
    janela* jan = gui->ljan->InserirJanela(330,100,585,355,"Dialog",1,1,NULL,NULL);
-   jan->objetos->InserirFigura(8,20,0,0,pers->retratoConversa.c_str());
-   jan->objetos->InserirQuadroTexto(90,20,160,95,1,NPC.c_str());
-   jan->objetos->InserirSelTexto(8,100,160,252,Opcoes[0],
+   jan->objects->InserirFigura(8,20,0,0,pers->retratoConversa.c_str());
+   jan->objects->InserirQuadroTexto(90,20,160,95,1,NPC.c_str());
+   jan->objects->InserirSelTexto(8,100,160,252,Opcoes[0],
                       Opcoes[1], Opcoes[2],
                       Opcoes[3], Opcoes[4], procPres);
    jan->ptrExterno = &jan;

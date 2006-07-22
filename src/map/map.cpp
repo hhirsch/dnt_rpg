@@ -25,8 +25,8 @@ Square::Square()
    int aux;
    for(aux=0;aux<MAXOBJETOS;aux++)
    {
-      objetos[aux] = NULL;
-      objetosDesenha[aux] = 0;
+      objects[aux] = NULL;
+      objectsDesenha[aux] = 0;
       quadObjetos[aux] = NULL;
       statusObj[aux] = 0;
       pisavelObj[aux] = 0;
@@ -348,12 +348,12 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         door* porta = portas;
         while(porta != NULL)
         {
-           porta->objeto->Desenhar(porta->x,porta->z,0,porta->orientacao);
+           porta->object->Desenhar(porta->x,porta->z,0,porta->orientacao);
            porta = porta->proximo;
         }
 
 
-        /* Faz o desenho dos objetos */
+        /* Faz o desenho dos objects */
         int o;
         GLfloat distancia;
         GLfloat deltaX, deltaZ;
@@ -369,14 +369,14 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                                                           / SQUARESIZE;
            for(o=0;o<MAXOBJETOS;o++)
            {
-              if( (MapSquares[Xaux][Zaux]->objetos[o] != NULL) && 
-                  (MapSquares[Xaux][Zaux]->objetosDesenha[o] == 1) )
+              if( (MapSquares[Xaux][Zaux]->objects[o] != NULL) && 
+                  (MapSquares[Xaux][Zaux]->objectsDesenha[o] == 1) )
               {
-                  MapSquares[Xaux][Zaux]->objetos[o]->Desenhar(
-                          MapSquares[Xaux][Zaux]->Xobjetos[o],
-                          MapSquares[Xaux][Zaux]->Zobjetos[o],
+                  MapSquares[Xaux][Zaux]->objects[o]->Desenhar(
+                          MapSquares[Xaux][Zaux]->Xobjects[o],
+                          MapSquares[Xaux][Zaux]->Zobjects[o],
                           distancia,
-                          MapSquares[Xaux][Zaux]->orientacaoObjetos[o]);
+                          MapSquares[Xaux][Zaux]->objectsOrientation[o]);
               }
            }
            }
@@ -528,7 +528,7 @@ int Map::open(string arquivo)
             fgets(buffer, sizeof(buffer),arq);
             sscanf(buffer,"%s %f,%f:%d",nome,&porta->x,&porta->z,
                                         &porta->orientacao);
-            porta->objeto = Objetos->EndMapObjeto(nome);
+            porta->object = Objetos->EndMapObjeto(nome);
             porta->status = 0;
             porta->proximo = portas;
             portas = porta;
@@ -714,16 +714,16 @@ int Map::open(string arquivo)
                   {
                      fgets(buffer, sizeof(buffer), arq);
                      sscanf(buffer,"%s %d:%d,%d:%f,%f:%d:%d",nome,
-                       &MapSquares[posX][posZ]->objetosDesenha[numObjetosAtual],
-                       &MapSquares[posX][posZ]->quadXobjetos[numObjetosAtual],
-                       &MapSquares[posX][posZ]->quadZobjetos[numObjetosAtual],
-                       &MapSquares[posX][posZ]->Xobjetos[numObjetosAtual],
-                       &MapSquares[posX][posZ]->Zobjetos[numObjetosAtual],
-                       &MapSquares[posX][posZ]->orientacaoObjetos[numObjetosAtual],
+                       &MapSquares[posX][posZ]->objectsDesenha[numObjetosAtual],
+                       &MapSquares[posX][posZ]->quadXobjects[numObjetosAtual],
+                       &MapSquares[posX][posZ]->quadZobjects[numObjetosAtual],
+                       &MapSquares[posX][posZ]->Xobjects[numObjetosAtual],
+                       &MapSquares[posX][posZ]->Zobjects[numObjetosAtual],
+                       &MapSquares[posX][posZ]->objectsOrientation[numObjetosAtual],
                        &MapSquares[posX][posZ]->pisavelObj[numObjetosAtual]);
-                     MapSquares[posX][posZ]->objetos[numObjetosAtual] = 
+                     MapSquares[posX][posZ]->objects[numObjetosAtual] = 
                                                     Objetos->EndMapObjeto(nome);
-                     MapSquares[posX][posZ]->quadObjetos[i] = quadradoRelativo(MapSquares[posX][posZ]->quadXobjetos[numObjetosAtual], MapSquares[posX][posZ]->quadZobjetos[numObjetosAtual] );
+                     MapSquares[posX][posZ]->quadObjetos[i] = quadradoRelativo(MapSquares[posX][posZ]->quadXobjects[numObjetosAtual], MapSquares[posX][posZ]->quadZobjects[numObjetosAtual] );
                      numObjetosAtual++;
                   }
                   break;
@@ -1003,7 +1003,7 @@ int Map::save(string arquivo)
    door* porta = (door*)portas;
    while(porta != NULL)
    {
-      fprintf(arq,"d %s %f,%f:%d\n",porta->objeto->nome,porta->x,porta->z,
+      fprintf(arq,"d %s %f,%f:%d\n",porta->object->nome,porta->x,porta->z,
                                      porta->orientacao);
       porta = porta->proximo;
    }
@@ -1055,17 +1055,17 @@ int Map::save(string arquivo)
           int aux;
           for(aux=0;aux<MAXOBJETOS;aux++)
           {
-            if(MapSquares[x1][z1]->objetos[aux])
+            if(MapSquares[x1][z1]->objects[aux])
             {
-               x2 = (int)MapSquares[x1][z1]->Xobjetos[aux] / SQUARESIZE;
-               z2 = (int)MapSquares[x1][z1]->Zobjetos[aux] / SQUARESIZE;
+               x2 = (int)MapSquares[x1][z1]->Xobjects[aux] / SQUARESIZE;
+               z2 = (int)MapSquares[x1][z1]->Zobjects[aux] / SQUARESIZE;
                fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d:%d\n",
-                       MapSquares[x1][z1]->objetos[aux]->nome,
-                       MapSquares[x1][z1]->objetosDesenha[aux],
+                       MapSquares[x1][z1]->objects[aux]->nome,
+                       MapSquares[x1][z1]->objectsDesenha[aux],
                        x2+1,z2+1,
-                       MapSquares[x1][z1]->Xobjetos[aux],
-                       MapSquares[x1][z1]->Zobjetos[aux],
-                       MapSquares[x1][z1]->orientacaoObjetos[aux],
+                       MapSquares[x1][z1]->Xobjects[aux],
+                       MapSquares[x1][z1]->Zobjects[aux],
+                       MapSquares[x1][z1]->objectsOrientation[aux],
                        MapSquares[x1][z1]->pisavelObj[aux]);
             }
           }
@@ -1121,7 +1121,7 @@ Map::~Map()
 
 
 
-   /* Acabando com os objetos */
+   /* Acabando com os objects */
    delete(Objetos);
   
    /* Acabando com os Quadrados */

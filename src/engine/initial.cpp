@@ -67,6 +67,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
    pronto = 0;
+   Tobjeto* object = NULL;
    janela* jan = gui->ljan->InserirJanela(335,235,462,362,
                                           language.VERSION.c_str(),1,1,
                                           NULL,NULL);  
@@ -74,30 +75,30 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    //jan->movivel = 0;
    if(Status == ON_INIT)
    {
-      jan->objetos->InserirBotao(30,20,98,38,jan->Cores.corBot.R, 
+      jan->objects->InserirBotao(30,20,98,38,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
                                  language.INITIAL_NEW.c_str(),1,&botaoNovo);
    }
    else
    {
-      jan->objetos->InserirBotao(30,20,98,38,jan->Cores.corBot.R, 
+      jan->objects->InserirBotao(30,20,98,38,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
                                  language.INITIAL_CONTINUE.c_str(),
                                  1,&botaoContinuar);
    }
-   jan->objetos->InserirBotao(30,40,98,58,jan->Cores.corBot.R, 
+   jan->objects->InserirBotao(30,40,98,58,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
                                  language.INITIAL_SAVE.c_str(),
                                  1,&botaoSalvar);
-   jan->objetos->InserirBotao(30,60,98,78,jan->Cores.corBot.R, 
+   jan->objects->InserirBotao(30,60,98,78,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
                                  language.INITIAL_LOAD.c_str(),
                                  1,&botaoCarregar);
-   jan->objetos->InserirBotao(30,80,98,98,jan->Cores.corBot.R, 
+   jan->objects->InserirBotao(30,80,98,98,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
                                  language.INITIAL_OPTIONS.c_str(),
                                  1,&botaoOpcoes);
-   jan->objetos->InserirBotao(30,100,98,118,jan->Cores.corBot.R, 
+   jan->objects->InserirBotao(30,100,98,118,jan->Cores.corBot.R, 
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
                                  language.INITIAL_EXIT.c_str(),
                                  1,&botaoSair);
@@ -131,8 +132,8 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          AtualizaTela2D(*tituloID,proj,modl,viewPort,0,0,799,599,0.012);
-         gui->ManipulaEventos(x,y,Mbotao,keys);
-         gui->Desenhar(proj,modl,viewPort);
+         gui->manipulateEvents(x,y,Mbotao,keys, object);
+         gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
       }

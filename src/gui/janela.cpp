@@ -21,7 +21,7 @@ Ljanela::~Ljanela()
    {
       //RetirarJanela((janela*)(primeiro->proximo),NULL);
       SDL_FreeSurface(jan->cara);
-      delete(jan->objetos);
+      delete(jan->objects);
       jan = (janela*)jan->proximo;
    }
    //delete(primeiro);
@@ -67,9 +67,9 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
    novo->temTextura = 0;
    novo->cara = SDL_CreateRGBSurface(SDL_HWSURFACE,xb-xa+1,yb-ya+1,32,
                          0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   novo->objetos = new Tlista;
+   novo->objects = new Tlista;
    botao* tmp;
-   tmp = novo->objetos->InserirBotao(3,3,13,12,novo->Cores.corBot.R,
+   tmp = novo->objects->InserirBotao(3,3,13,12,novo->Cores.corBot.R,
                   novo->Cores.corBot.G,novo->Cores.corBot.B,"_",0,
                   NULL);
    tmp->men = new menu();
@@ -78,10 +78,10 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
    men->InserirMenuItem("-",0);
    men->InserirMenuItem("Maximizar",0);
    men->InserirMenuItem("Mover",0); 
-   novo->objetos->InserirBotao(14,3,24,12,novo->Cores.corBot.R,
+   novo->objects->InserirBotao(14,3,24,12,novo->Cores.corBot.R,
                   novo->Cores.corBot.G,novo->Cores.corBot.B,"*",0,
                   NULL);
-   novo->objetos->InserirBotao(25,3,35,12,novo->Cores.corBot.R,
+   novo->objects->InserirBotao(25,3,35,12,novo->Cores.corBot.R,
                   novo->Cores.corBot.G,novo->Cores.corBot.B,"\36",0,
                   NULL);
    novo->tipo = JANELA;
@@ -108,7 +108,7 @@ void Ljanela::RetirarJanela(janela *jan)
          j->Ativar(this);
       }
    } 
-   delete(jan->objetos);
+   delete(jan->objects);
    delete(jan);
    jan = NULL;
    total--;
@@ -144,9 +144,9 @@ void janela::Desenhar(int mouseX, int mouseY)
    }
    escxy(cara,39,-2,texto.c_str());
    /* Desenho dos Botoes */
-   Tobjeto *obj=objetos->primeiro->proximo;
+   Tobjeto *obj=objects->primeiro->proximo;
    int aux;
-   for(aux=0;aux<objetos->total;aux++)
+   for(aux=0;aux<objects->total;aux++)
    {
       switch(obj->tipo)
       {

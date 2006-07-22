@@ -118,50 +118,50 @@ void criaMenus()
 
 void inserirObjsNPC()
 {
-   cxSelNPC = dialogos->objetos->InserirCxSel(35,24,0);
-   dialogos->objetos->InserirQuadroTexto(47,23,77,36,0,"Se");
-   botaoAttSeNPC = dialogos->objetos->InserirBotao(67,21,137,37,Cores.corBot.R,
+   cxSelNPC = dialogos->objects->InserirCxSel(35,24,0);
+   dialogos->objects->InserirQuadroTexto(47,23,77,36,0,"Se");
+   botaoAttSeNPC = dialogos->objects->InserirBotao(67,21,137,37,Cores.corBot.R,
                              Cores.corBot.G,
                              Cores.corBot.B,"Atributo",0,NULL);
    botaoAttSeNPC->men = atributos;
-   botaoOperSeNPC = dialogos->objetos->InserirBotao(139,21,159,37,
+   botaoOperSeNPC = dialogos->objects->InserirBotao(139,21,159,37,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,">=",0,NULL);
    botaoOperSeNPC->men = operComp;
-   barraValSeNPC = dialogos->objetos->InserirBarraTexto(160,22,180,36,"10",
+   barraValSeNPC = dialogos->objects->InserirBarraTexto(160,22,180,36,"10",
                                       0,NULL);
-   barraTextoSeNPC = dialogos->objetos->InserirBarraTexto(181,22,280,36,
+   barraTextoSeNPC = dialogos->objects->InserirBarraTexto(181,22,280,36,
                                         "Texto",0,NULL);
-   dialogos->objetos->InserirQuadroTexto(281,22,320,36,0,"Senao");
-   barraTextoSenaoNPC = dialogos->objetos->InserirBarraTexto(320,22,420,36,
+   dialogos->objects->InserirQuadroTexto(281,22,320,36,0,"Senao");
+   barraTextoSenaoNPC = dialogos->objects->InserirBarraTexto(320,22,420,36,
                                            "Texto",0,NULL);
-   botaoAcaoSeNPC = dialogos->objetos->InserirBotao(55,38,125,54,
+   botaoAcaoSeNPC = dialogos->objects->InserirBotao(55,38,125,54,
                               Cores.corBot.R,Cores.corBot.G,
                               Cores.corBot.B,"Acao",0,NULL);
    botaoAcaoSeNPC->men = acoes;
-   botaoAcaoAttSeNPC = dialogos->objetos->InserirBotao(127,38,197,54,
+   botaoAcaoAttSeNPC = dialogos->objects->InserirBotao(127,38,197,54,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,"Atributo",0,NULL);
    botaoAcaoAttSeNPC->men = atributos;
-   botaoAcaoOperSeNPC = dialogos->objetos->InserirBotao(199,38,215,54,
+   botaoAcaoOperSeNPC = dialogos->objects->InserirBotao(199,38,215,54,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,"+",0,NULL);
    botaoAcaoOperSeNPC->men = operMod;
-   barraAcaoValSeNPC = dialogos->objetos->InserirBarraTexto(217,39,237,53,
+   barraAcaoValSeNPC = dialogos->objects->InserirBarraTexto(217,39,237,53,
                              "10",0,NULL);
-   botaoAcaoSenaoNPC = dialogos->objetos->InserirBotao(255,38,325,54,
+   botaoAcaoSenaoNPC = dialogos->objects->InserirBotao(255,38,325,54,
                               Cores.corBot.R,Cores.corBot.G,
                               Cores.corBot.B,"Acao",0,NULL);
    botaoAcaoSenaoNPC->men = acoes;
-   botaoAcaoAttSenaoNPC = dialogos->objetos->InserirBotao(327,38,397,54,
+   botaoAcaoAttSenaoNPC = dialogos->objects->InserirBotao(327,38,397,54,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,"Atributo",0,NULL);
    botaoAcaoAttSenaoNPC->men = atributos;
-   botaoAcaoOperSenaoNPC = dialogos->objetos->InserirBotao(399,38,415,54,
+   botaoAcaoOperSenaoNPC = dialogos->objects->InserirBotao(399,38,415,54,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,"+",0,NULL);
    botaoAcaoOperSenaoNPC->men = operMod;
-   barraAcaoValSenaoNPC = dialogos->objetos->InserirBarraTexto(417,39,437,53,
+   barraAcaoValSenaoNPC = dialogos->objects->InserirBarraTexto(417,39,437,53,
                              "10",0,NULL);
 }
 
@@ -169,53 +169,53 @@ void inserirObjsPC()
 {
   int i;
   int y = 71;
-  dialogos->objetos->InserirQuadroTexto(7,63,443,272,1,"PC:");
+  dialogos->objects->InserirQuadroTexto(7,63,443,272,1,"PC:");
   for(i=0;i<5;i++)
   {
-   cxSelPC[5] = dialogos->objetos->InserirCxSel(35,y+3,0);
-   dialogos->objetos->InserirQuadroTexto(47,y+2,77,y+15,0,"Se");
-   botaoAttSePC[i] = dialogos->objetos->InserirBotao(67,y,137,y+16,Cores.corBot.R,
+   cxSelPC[5] = dialogos->objects->InserirCxSel(35,y+3,0);
+   dialogos->objects->InserirQuadroTexto(47,y+2,77,y+15,0,"Se");
+   botaoAttSePC[i] = dialogos->objects->InserirBotao(67,y,137,y+16,Cores.corBot.R,
                              Cores.corBot.G,
                              Cores.corBot.B,"Atributo",0,NULL);
    botaoAttSePC[i]->men = atributos;
-   botaoOperSePC[i] = dialogos->objetos->InserirBotao(139,y,159,y+16,
+   botaoOperSePC[i] = dialogos->objects->InserirBotao(139,y,159,y+16,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,">=",0,NULL);
    botaoOperSePC[i]->men = operComp;
-   barraValSePC[i] = dialogos->objetos->InserirBarraTexto(160,y+1,180,y+15,"10",
+   barraValSePC[i] = dialogos->objects->InserirBarraTexto(160,y+1,180,y+15,"10",
                                       0,NULL);
-   barraTextoSePC[i] = dialogos->objetos->InserirBarraTexto(181,y+1,280,y+15,
+   barraTextoSePC[i] = dialogos->objects->InserirBarraTexto(181,y+1,280,y+15,
                                         "Texto",0,NULL);
-   dialogos->objetos->InserirQuadroTexto(281,y+1,320,y+15,0,"Senao");
-   barraTextoSenaoPC[i] = dialogos->objetos->InserirBarraTexto(320,y+1,420,y+15,
+   dialogos->objects->InserirQuadroTexto(281,y+1,320,y+15,0,"Senao");
+   barraTextoSenaoPC[i] = dialogos->objects->InserirBarraTexto(320,y+1,420,y+15,
                                            "Texto",0,NULL);
-   botaoAcaoSePC[i] = dialogos->objetos->InserirBotao(55,y+17,125,y+33,
+   botaoAcaoSePC[i] = dialogos->objects->InserirBotao(55,y+17,125,y+33,
                               Cores.corBot.R,Cores.corBot.G,
                               Cores.corBot.B,"Acao",0,NULL);
    botaoAcaoSePC[i]->men = acoes;
-   botaoAcaoAttSePC[i] = dialogos->objetos->InserirBotao(127,y+17,197,y+33,
+   botaoAcaoAttSePC[i] = dialogos->objects->InserirBotao(127,y+17,197,y+33,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,"Atributo",0,NULL);
    botaoAcaoAttSePC[i]->men = atributos;
-   botaoAcaoOperSePC[i] = dialogos->objetos->InserirBotao(199,y+17,215,y+33,
+   botaoAcaoOperSePC[i] = dialogos->objects->InserirBotao(199,y+17,215,y+33,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,"+",0,NULL);
    botaoAcaoOperSePC[i]->men = operMod;
-   barraAcaoValSePC[i] = dialogos->objetos->InserirBarraTexto(217,y+18,237,y+32,
+   barraAcaoValSePC[i] = dialogos->objects->InserirBarraTexto(217,y+18,237,y+32,
                              "10",0,NULL);
-   botaoAcaoSenaoPC[i] = dialogos->objetos->InserirBotao(255,y+17,325,y+33,
+   botaoAcaoSenaoPC[i] = dialogos->objects->InserirBotao(255,y+17,325,y+33,
                               Cores.corBot.R,Cores.corBot.G,
                               Cores.corBot.B,"Acao",0,NULL);
    botaoAcaoSenaoPC[i]->men = acoes;
-   botaoAcaoAttSenaoPC[i] = dialogos->objetos->InserirBotao(327,y+17,397,y+33,
+   botaoAcaoAttSenaoPC[i] = dialogos->objects->InserirBotao(327,y+17,397,y+33,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,"Atributo",0,NULL);
    botaoAcaoAttSenaoPC[i]->men = atributos;
-   botaoAcaoOperSenaoPC[i] = dialogos->objetos->InserirBotao(399,y+17,415,y+33,
+   botaoAcaoOperSenaoPC[i] = dialogos->objects->InserirBotao(399,y+17,415,y+33,
                              Cores.corBot.R,Cores.corBot.G,
                              Cores.corBot.B,"+",0,NULL);
    botaoAcaoOperSenaoPC[i]->men = operMod;
-   barraAcaoValSenaoPC[i] = dialogos->objetos->InserirBarraTexto(417,y+18,437,y+32,
+   barraAcaoValSenaoPC[i] = dialogos->objects->InserirBarraTexto(417,y+18,437,y+32,
                              "10",0,NULL);
    y+=40;
 
@@ -225,25 +225,25 @@ void inserirObjsPC()
 
 void inserirObjsDialogo()
 {
-   dialogos->objetos->InserirQuadroTexto(7,353,443,425,1,"Dialogo:");
-   botaoAnterior = dialogos->objetos->InserirBotao(53,405,138,421,
+   dialogos->objects->InserirQuadroTexto(7,353,443,425,1,"Dialogo:");
+   botaoAnterior = dialogos->objects->InserirBotao(53,405,138,421,
                                    Cores.corBot.R,Cores.corBot.G,Cores.corBot.G,
                                    "<- Anterior",0,NULL);
-   botaoPrimeiro = dialogos->objetos->InserirBotao(139,405,219,421,
+   botaoPrimeiro = dialogos->objects->InserirBotao(139,405,219,421,
                                    Cores.corBot.R,Cores.corBot.G,Cores.corBot.G,
                                    "Primeiro",0,NULL);
-   botaoUltimo = dialogos->objetos->InserirBotao(220,405,297,421,
+   botaoUltimo = dialogos->objects->InserirBotao(220,405,297,421,
                                    Cores.corBot.R,Cores.corBot.G,Cores.corBot.G,
                                    "Ultimo",0,NULL);
-   botaoProximo = dialogos->objetos->InserirBotao(298,405,385,421,
+   botaoProximo = dialogos->objects->InserirBotao(298,405,385,421,
                                    Cores.corBot.R,Cores.corBot.G,Cores.corBot.G,
                                    "Proximo ->",0,NULL);
-   barraVaiPara=dialogos->objetos->InserirBarraTexto(233,380,263,394,"",0,NULL);
-   botaoVaiPara = dialogos->objetos->InserirBotao(160,379,231,395,
+   barraVaiPara=dialogos->objects->InserirBarraTexto(233,380,263,394,"",0,NULL);
+   botaoVaiPara = dialogos->objects->InserirBotao(160,379,231,395,
                                    Cores.corBot.R,Cores.corBot.G,Cores.corBot.G,
                                    "Vai Para",0,NULL);
-   dialogos->objetos->InserirQuadroTexto(185,360,210,374,0,"id:");
-   quadroID = dialogos->objetos->InserirQuadroTexto(211,360,241,374,1,"100");
+   dialogos->objects->InserirQuadroTexto(185,360,210,374,0,"id:");
+   quadroID = dialogos->objects->InserirQuadroTexto(211,360,241,374,1,"100");
 }
 
 int main(int argc, char *argv[])
@@ -265,28 +265,28 @@ int main(int argc, char *argv[])
    interface* interf = new interface(NULL);
    
    principal=interf->ljan->InserirJanela(0,0,255,63,"Principal",1,1,NULL,NULL);
-   barraAbrir = principal->objetos->InserirBarraTexto(10,23,173,36,"Arquivo",
+   barraAbrir = principal->objects->InserirBarraTexto(10,23,173,36,"Arquivo",
                                                       0,NULL);
-   botaoAbrirArquivo = principal->objetos->InserirBotao(15,40,65,56,
+   botaoAbrirArquivo = principal->objects->InserirBotao(15,40,65,56,
                                   Cores.corBot.R,Cores.corBot.G,
                                   Cores.corBot.B,"Abrir",1,NULL);
-   botaoSalvarArquivo = principal->objetos->InserirBotao(66,40,116,56,
+   botaoSalvarArquivo = principal->objects->InserirBotao(66,40,116,56,
                               Cores.corBot.R,Cores.corBot.G,
                               Cores.corBot.B,"Salvar",1,NULL);
-   botaoSair = principal->objetos->InserirBotao(117,40,167,56,Cores.corBot.R,
+   botaoSair = principal->objects->InserirBotao(117,40,167,56,Cores.corBot.R,
                               Cores.corBot.G,
                               Cores.corBot.B,"Sair",1,&ProcedimentoSair);
    principal->fechavel = 0;
    principal->Abrir(interf->ljan);
 
    dialogos=interf->ljan->InserirJanela(0,70,511,581,"Dialogo",1,1,NULL,NULL);
-   dialogos->objetos->InserirQuadroTexto(7,15,443,62,1,"NPC:");
+   dialogos->objects->InserirQuadroTexto(7,15,443,62,1,"NPC:");
    
    criaMenus();
    inserirObjsNPC();    
    inserirObjsPC();
    inserirObjsDialogo();
-   dialogos->objetos->InserirFigura(10,285,0,0,"../data/pics/dcc.bmp");
+   dialogos->objects->InserirFigura(10,285,0,0,"../data/pics/dcc.bmp");
 
    dialogos->fechavel = 0;
    dialogos->Abrir(interf->ljan);
@@ -302,6 +302,7 @@ int main(int argc, char *argv[])
    Uint8 *keys; 
    Uint8 Mbotao;
    int x,y;
+   Tobjeto* object;
 
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
@@ -316,10 +317,10 @@ int main(int argc, char *argv[])
          SDL_PumpEvents();
          keys = SDL_GetKeyState(NULL);
          Mbotao = SDL_GetMouseState(&x,&y);
-         interf->ManipulaEventos(x,y,Mbotao,keys);
+         interf->manipulateEvents(x,y,Mbotao,keys, object);
          if(keys[SDLK_ESCAPE])
            sair = SAIR;
-         interf->Desenhar(proj,modl,viewPort);
+         interf->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
          //printf("%d\n",sair);

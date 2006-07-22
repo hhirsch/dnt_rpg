@@ -72,7 +72,7 @@ typedef struct _texture
  ****************************************************/
 typedef struct _door
 {
-  mapObjeto* objeto;       /**< pointer to door map object */
+  mapObjeto* object;       /**< pointer to door map object */
   GLfloat x,z;             /**< position on map */
   GLint status;            /**< actual status (opened, closed) */
   GLint orientacao;        /**< orientation */
@@ -96,13 +96,13 @@ class Square
       int flags;                        /**< Condition flag */
       int visivel;                      /**< Visible on active frame ? */
       int textura;                      /**< Actual Texture */
-      mapObjeto *objetos[MAXOBJETOS];   /**< Objects on Square */
-      int objetosDesenha[MAXOBJETOS];   /**< Draw object on active frame ? */
-      int quadXobjetos[MAXOBJETOS];     /**< Object Square X coordinate */ 
-      int quadZobjetos[MAXOBJETOS];     /**< Object Square Z coordinate */
-      int orientacaoObjetos[MAXOBJETOS];/**< Object Orientation */
-      float Xobjetos[MAXOBJETOS];       /**< Object X coordinate */
-      float Zobjetos[MAXOBJETOS];       /**< Object Z coordinate */
+      mapObjeto *objects[MAXOBJETOS];   /**< Objects on Square */
+      int objectsDesenha[MAXOBJETOS];   /**< Draw object on active frame ? */
+      int quadXobjects[MAXOBJETOS];     /**< Object Square X coordinate */ 
+      int quadZobjects[MAXOBJETOS];     /**< Object Square Z coordinate */
+      int objectsOrientation[MAXOBJETOS];/**< Object Orientation */
+      float Xobjects[MAXOBJETOS];       /**< Object X coordinate */
+      float Zobjects[MAXOBJETOS];       /**< Object Z coordinate */
       muro* muros[MAXMUROS];            /**< Square walls on */
       GLuint R,G,B;                     /**< Square Color to MINIMAP */
       Square* quadObjetos[MAXOBJETOS];  /**< Orign object from square: */

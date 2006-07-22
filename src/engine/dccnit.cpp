@@ -414,6 +414,7 @@ int engine::OptionsScreen(GLuint* idTextura)
    int tempoAnterior = 0;
    Uint8* keys;
    int x,y;
+   Tobjeto* object = NULL;
 
    option->DisplayOptionsScreen(interf);
 
@@ -429,9 +430,9 @@ int engine::OptionsScreen(GLuint* idTextura)
          glClearColor(0,0,0,1);
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         interf->ManipulaEventos(x,y,Mbotao,keys);
+         interf->manipulateEvents(x,y,Mbotao,keys,object);
          AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
-         interf->Desenhar(proj,modl,viewPort);
+         interf->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
       }
@@ -463,6 +464,8 @@ int engine::CharacterScreen(GLuint* idTextura)
    int tempoAnterior = 0;
    Uint8* keys;
    int x,y;
+   Tobjeto* object = NULL;
+
   
    /*TODO Other screens*/
 
@@ -483,9 +486,9 @@ int engine::CharacterScreen(GLuint* idTextura)
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         gui->ManipulaEventos(x,y,Mbotao,keys);
+         gui->manipulateEvents(x,y,Mbotao,keys,object);
          AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
-         gui->Desenhar(proj,modl,viewPort);
+         gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
       }
@@ -733,7 +736,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       mouseY = y;
 
       /* GUI Events */
-      if(gui->ManipulaEventos(x,y,Mbotao,keys)!=NADA)
+      Tobjeto* object = NULL;
+      if(gui->manipulateEvents(x,y,Mbotao,keys, object) != NADA)
       {
          redesenha = true;
       }
@@ -765,9 +769,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          GLfloat minObj[3], maxObj[3];
          for(pronto = 0; ( (obj<MAXOBJETOS) && (!pronto) );obj++)
          {
-            if(quaux->objetos[obj])
+            if(quaux->objects[obj])
             {
-               GLMmodel* modelo3d = (GLMmodel*) quaux->objetos[obj]->modelo3d;
+               GLMmodel* modelo3d = (GLMmodel*) quaux->objects[obj]->modelo3d;
                GLfloat X[4]; GLfloat Z[4];
                X[0] = modelo3d->x1;
                Z[0] = modelo3d->z1;
@@ -777,16 +781,16 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                Z[2] = modelo3d->z2;
                X[3] = modelo3d->x2;
                Z[3] = modelo3d->z1;
-               rotTransBoundingBox(quaux->orientacaoObjetos[obj], X, Z,
-                              quaux->Xobjetos[obj], 0.0, 
-                              0.0,quaux->Zobjetos[obj], 
+               rotTransBoundingBox(quaux->objectsOrientation[obj], X, Z,
+                              quaux->Xobjects[obj], 0.0, 
+                              0.0,quaux->Zobjects[obj], 
                               minObj, maxObj);
                if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
                {
                    cursors->SetActual(CURSOR_GET);
                    if(shortCutsWindow)
                    {
-                      ObjTxt->texto = quaux->objetos[obj]->nome; 
+                      ObjTxt->texto = quaux->objects[obj]->nome; 
                       shortCutsWindow->Desenhar(mouseX,mouseY);
                    }
                    if(Mbotao & SDL_BUTTON(1))
@@ -802,7 +806,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          door* porta = actualMap->portas;
          while( (porta != NULL) && (!pronto) )
          {
-             GLMmodel* modelo3d = (GLMmodel*) porta->objeto->modelo3d;
+             GLMmodel* modelo3d = (GLMmodel*) porta->object->modelo3d;
              GLfloat X[4]; GLfloat Z[4];
              X[0] = modelo3d->x1;
              Z[0] = modelo3d->z1;
@@ -1403,7 +1407,7 @@ void engine::Draw()
    per = (personagem*) PCs->personagemAtivo;
    per->DrawMainPortrait(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4);
 
-   gui->Desenhar(proj,modl,viewPort);
+   gui->draw(proj,modl,viewPort);
 
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
@@ -1507,17 +1511,17 @@ int testa(GLfloat min[3], GLfloat max[3],Square* quad)
          mur++;
       }
    }
-   if(result) // Se eh possivel entrar, testa com os objetos
+   if(result) // Se eh possivel entrar, testa com os objects
    {
       int ob = 0;
       //GLfloat u1,u2,v1,v2;
       GLMmodel* modelo3d;
       GLfloat X[4], Z[4];
-      while( (proxima->objetos[ob] != NULL)) 
+      while( (proxima->objects[ob] != NULL)) 
       {
         if(!proxima->pisavelObj[ob])
         {
-          modelo3d = (GLMmodel*)proxima->objetos[ob]->modelo3d;
+          modelo3d = (GLMmodel*)proxima->objects[ob]->modelo3d;
           X[0] = modelo3d->x1;
           Z[0] = modelo3d->z1;
           X[1] = modelo3d->x1;
@@ -1526,10 +1530,10 @@ int testa(GLfloat min[3], GLfloat max[3],Square* quad)
           Z[2] = modelo3d->z2;
           X[3] = modelo3d->x2;
           Z[3] = modelo3d->z1;
-/* TODO +Yobjetos */
-          rotTransBoundingBox(proxima->orientacaoObjetos[ob], X, Z,
-                              proxima->Xobjetos[ob], modelo3d->y1, 
-                              modelo3d->y2,proxima->Zobjetos[ob], 
+/* TODO +Yobjects */
+          rotTransBoundingBox(proxima->objectsOrientation[ob], X, Z,
+                              proxima->Xobjects[ob], modelo3d->y1, 
+                              modelo3d->y2,proxima->Zobjects[ob], 
                               min2, max2);
 
           result &= !estaDentro(min,max,min2,max2,1);
@@ -1613,7 +1617,7 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    while( porta != NULL )
    {
       GLfloat minObj[3], maxObj[3];
-      GLMmodel* modeloPorta = (GLMmodel*) porta->objeto->modelo3d;
+      GLMmodel* modeloPorta = (GLMmodel*) porta->object->modelo3d;
       GLfloat XA[4]; GLfloat ZA[4];
       XA[0] = modeloPorta->x1;
       ZA[0] = modeloPorta->z1;
@@ -1910,7 +1914,7 @@ inline void engine::verificaQuad(Square* quad)
    {
        if(quad->flags & PISAVEL)
        {
-            if(quad->objetos[0])
+            if(quad->objects[0])
             {
                ia->campoInfluencia(quad->posX,quad->posZ,
                                    TIPOOBSTACULO,30);
@@ -2018,7 +2022,7 @@ void engine::OpenMiniMapWindow()
                                           language.WINDOW_MAP.c_str(),1,1,
                                           NULL,NULL);
 
-   botPerMiniMap = miniMapWindow->objetos->InserirBotao(x,z,x+2,z+2,255,255,128,
+   botPerMiniMap = miniMapWindow->objects->InserirBotao(x,z,x+2,z+2,255,255,128,
                                                       "",0,NULL);
    botPerMiniMap->Cores.corCont[0].R = 255;
    botPerMiniMap->Cores.corCont[0].G = 255;
@@ -2030,10 +2034,10 @@ void engine::OpenMiniMapWindow()
    botPerMiniMap->Cores.corCont[2].G = 255;
    botPerMiniMap->Cores.corCont[2].B = 128;
 
-   figura* fig = miniMapWindow->objetos->InserirFigura(8,20,240,95,NULL);
+   figura* fig = miniMapWindow->objects->InserirFigura(8,20,240,95,NULL);
    actualMap->drawMinimap(fig->fig);
 
-   miniMapWindow->objetos->InserirFigura(3,15,252,120,
+   miniMapWindow->objects->InserirFigura(3,15,252,120,
                                        "../data/texturas/map.png");
 
    
@@ -2056,26 +2060,26 @@ void engine::OpenShortcutsWindow()
    shortCutsWindow=gui->ljan->InserirJanela(0,472,511,599,
                                   language.WINDOW_SHORTCUTS.c_str(),1,1,
                                        NULL,NULL);
-   FPS = shortCutsWindow->objetos->InserirQuadroTexto(8,20,150/*100*/,35,2,
+   FPS = shortCutsWindow->objects->InserirQuadroTexto(8,20,150/*100*/,35,2,
                                   language.WINDOW_SHORTCUTS_FPS.c_str());
-   ObjTxt = shortCutsWindow->objetos->InserirQuadroTexto(8,36,249,100,2,
+   ObjTxt = shortCutsWindow->objects->InserirQuadroTexto(8,36,249,100,2,
                                   language.WINDOW_SHORTCUTS_HELP.c_str());
    /*ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
    ObjTxt->Cores.corCont[1].B = 255;*/
-   ObjTxt = shortCutsWindow->objetos->InserirQuadroTexto(151,20,249,35,2,
+   ObjTxt = shortCutsWindow->objects->InserirQuadroTexto(151,20,249,35,2,
                                  language.OBJ_NOTHING.c_str());
 
-   shortCutsWindow->objetos->InserirBotao(25,102,93,120,shortCutsWindow->Cores.corBot.R, 
+   shortCutsWindow->objects->InserirBotao(25,102,93,120,shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
                                  shortCutsWindow->Cores.corBot.B,
                                  language.INITIAL_SAVE.c_str(),
                                  0,NULL);
-   shortCutsWindow->objetos->InserirBotao(94,102,162,120,shortCutsWindow->Cores.corBot.R, 
+   shortCutsWindow->objects->InserirBotao(94,102,162,120,shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
                                  shortCutsWindow->Cores.corBot.B,
                                  "Menu",
                                  0,&botaoMenu);
-   shortCutsWindow->objetos->InserirBotao(163,102,231,120,
+   shortCutsWindow->objects->InserirBotao(163,102,231,120,
                                  shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
                                  shortCutsWindow->Cores.corBot.B,
@@ -2083,7 +2087,7 @@ void engine::OpenShortcutsWindow()
                                  0,NULL);
 
    tabBotao* tb;
-   tb = shortCutsWindow->objetos->InserirTabBotao(252,15,0,0,
+   tb = shortCutsWindow->objects->InserirTabBotao(252,15,0,0,
                                              "../data/texturas/shortcuts.png");
    tb->inserirBotao(7,4,43,36,NULL);/* Attack Mode */
    tb->inserirBotao(7,40,43,72,NULL);/* Attack 1 */
@@ -2109,7 +2113,7 @@ void engine::OpenShortcutsWindow()
    tb->inserirBotao(220,40,256,72,NULL);/* Attack 6 */
    tb->inserirBotao(220,75,256,107,NULL);/* Info */
 
-   shortCutsWindow->objetos->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
+   shortCutsWindow->objects->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
    
    shortCutsWindow->ptrExterno = &shortCutsWindow;
    shortCutsWindow->Abrir(gui->ljan);

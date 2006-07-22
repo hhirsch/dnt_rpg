@@ -28,7 +28,7 @@ class janela: public Tobjeto
       int Rtxt,Gtxt,Btxt;        /* Cor do Texto de titulo da Janela */
       int maximiz;               /* Permite a Maximizacao de uma janela */
       int redmens;               /* Permite o Redmensionamento de uma janela */
-      Tlista *objetos;           /* Lista dos Objetos presentes */
+      Tlista *objects;           /* Lista dos Objetos presentes */
       SDL_Surface *cara;         /* Cara da Janela */
       int fechavel;              /* != 0 se for fechavel */
       int movivel;
