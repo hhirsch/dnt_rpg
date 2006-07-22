@@ -45,19 +45,22 @@ interface::~interface()
 /*********************************************************************
  *                   Take care of GUI I/O Events                     *
  *********************************************************************/
-int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
-                                Tobjeto* selectObject)
+Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+                                     int* eventInfo)
 {
     int aux;
-    selectObject = NULL;
     if(ljan->janelaAtiva == NULL)
-       return(NADA);
+    {
+       *eventInfo = 1;
+       return(NULL);
+    }
 
     /* Keyboard Events */
     if ( (tecla[SDLK_ESCAPE]) && (foco != FOCO_JOGO))
     {
        foco = FOCO_JOGO;
-       return(SAIR);
+       *eventInfo = SAIR;
+       return(NULL);
     }
 
     /* Mouse move to change focus */
@@ -183,12 +186,15 @@ int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                /* Verify Button Table */
                else if(obj->tipo == TABBOTAO)
                {
-                  tabBotao* tb = (tabBotao*) obj;
-                  if( tb->VerificarSobrePosicao(x,y,ljan->janelaAtiva->x1,
-                                                ljan->janelaAtiva->y1) )
+                  tabButton* tb = (tabButton*) obj;
+                  Tobjeto* object = tb->verifyPosition(x,y,Mbotao,
+                                                       ljan->janelaAtiva->x1,
+                                                       ljan->janelaAtiva->y1);
+                  if( object != NULL )
                   {
-                    selectObject = obj;
-                    return(TABBOTAOPRESSIONADO);
+                    //selectObject = &object;
+                    *eventInfo = TABBOTAOPRESSIONADO;
+                    return(object);
                   }
                }
                obj = obj->proximo;
@@ -198,8 +204,8 @@ int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             {
                 ljan->janelaAtiva->procPres(ljan->janelaAtiva,x,y,NULL);
             }
-            selectObject = (Tobjeto*) ljan->janelaAtiva;
-            return(JANELACLICADA);
+            *eventInfo = JANELACLICADA;
+            return((Tobjeto*) ljan->janelaAtiva);
         }
         else if ( (ljan->janelaAtiva != NULL))
         {
@@ -213,21 +219,21 @@ int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                {
                     foco = FOCO_JOGO;
                     jaux->Ativar(ljan);
-                    selectObject = (Tobjeto*) jaux;
-                    return(JANELAATIVADA);
+                    *eventInfo = JANELAATIVADA;
+                    return((Tobjeto*) jaux);
                }
                jaux = (janela*) jaux->proximo;
            }
         } 
     }
 
-    selectObject = objAtivo;
     /*  FOCUS ON WINDOW MOVIMENTATION  */
     if (foco == FOCO_JANELAMOVER)
     {
         if(!(ljan->janelaAtiva->Mover(ljan,NULL,fundo,x,y,Mbotao)))
            foco = FOCO_JOGO;
-        return(JANELAMOVIMENTADA);
+        *eventInfo = JANELAMOVIMENTADA;
+        return(objAtivo);
     }
 
     /* FOCUS ON BUTTON PRESSED */
@@ -269,15 +275,23 @@ int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                      ljan->janelaAtiva->Fechar(ljan);
                   }
                   foco = FOCO_JOGO;
-                  return(JANELAFECHADA);
+                  *eventInfo = JANELAFECHADA;
+                  return(NULL);
               }
               else
+              {
                   foco = FOCO_JOGO;
+              }
+              *eventInfo = BOTAOPRESSIONADO;
+              return(objAtivo);
            }
         }
         else if(pronto)
+        {
            foco = FOCO_JOGO;
-        return(BOTAOPRESSIONADO);
+        }
+        *eventInfo = BOTAOEMPRESSAO;
+        return(objAtivo);
     }
  
     /* FOCUS ON BARTEXT WRITE */
@@ -295,10 +309,12 @@ int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                      bart->procEditada(bart,NULL);
                }
                ljan->janelaAtiva->AtualizaCara();
-               return(BARRATEXTOESCRITA);
+               *eventInfo = BARRATEXTOESCRITA;
+               return(objAtivo);
            }
         ljan->janelaAtiva->AtualizaCara();
-        return(BARRATEXTOESCRITA);
+        *eventInfo = BARRATEXTOESCRITA; 
+        return(objAtivo);
     }
     
     /* FOCUS ON RADIOBOXES */
@@ -310,7 +326,8 @@ int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
        cx->Desenhar(ljan->janelaAtiva->cara);
        ljan->janelaAtiva->AtualizaCara();
        foco = FOCO_JOGO;
-       return(CXSELMODIFICADA);
+       *eventInfo = CXSELMODIFICADA;
+       return(objAtivo);
     }
 
     /* FOCUS ON MENUS */
@@ -335,7 +352,8 @@ int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
            else
               ljan->janelaAtiva->Desenhar(x,y);
            foco = FOCO_JOGO;
-           return(JANELAFECHADA);
+           *eventInfo = JANELAFECHADA;
+           return(NULL);
        }
        else if((res) && (men->procSelecionado) &&(pronto)) 
        {
@@ -349,7 +367,8 @@ int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
           ljan->janelaAtiva->Desenhar(x,y);
           foco = FOCO_JOGO;
        }
-       return(MENUSELECIONADO);
+       *eventInfo = MENUSELECIONADO;
+       return(objAtivo);
     }
 
     /* FOCUS ON TEXT SELECT  */
@@ -365,11 +384,13 @@ int interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
 
         ljan->janelaAtiva->AtualizaCara();
 
-        return(SELTEXTOMODIFICADA);
+        *eventInfo = SELTEXTOMODIFICADA;
+        return(objAtivo);
     }
 
     /* If here, no actions were made on GUI */
-    return(NADA);
+    *eventInfo = NADA;
+    return(NULL);
 }
 
 /*********************************************************************

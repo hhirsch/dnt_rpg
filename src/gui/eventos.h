@@ -29,6 +29,7 @@
 #define JANELAMOVIMENTADA    9
 #define JANELACLICADA       10
 #define TABBOTAOPRESSIONADO 11
+#define BOTAOEMPRESSAO      12
 
 /* Constantes de Foco */
 #define FOCO_JANELA       1
@@ -48,8 +49,8 @@ class interface
       Ljanela* ljan;
       Tlista* objects;
       SDL_Surface* fundo;
-      int manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
-                                Tobjeto* selectObjetc);
+      Tobjeto* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+                                int* eventInfo);
       void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
       interface(char* arqFundo);
       ~interface();

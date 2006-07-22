@@ -181,8 +181,8 @@ void janela::Desenhar(int mouseX, int mouseY)
               break;
          }
          case TABBOTAO:{
-              tabBotao *bt = (tabBotao*) obj; 
-              bt->Desenhar(mouseX, mouseY, x1, y1, cara);
+              tabButton *bt = (tabButton*) obj; 
+              bt->draw(mouseX, mouseY, x1, y1, cara);
               break;
          }
          default:break;

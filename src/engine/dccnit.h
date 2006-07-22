@@ -195,7 +195,11 @@ class engine
       quadroTexto* ObjTxt;         /**< Text that shows actual pointed object */
       janela* shortCutsWindow;     /**< ShortCuts Window */
       janela* miniMapWindow;       /**< MiniMap Window */
-      botao* botPerMiniMap;        /**< MiniMap Button */
+      botao* botPerMiniMap;        /**< Character MiniMap Button */
+
+      botao* buttonMenu;           /**< Butto to call Menu */
+      oneTabButton* buttonAttackMode;/**< Button to Enter on Attack Mode */
+      oneTabButton* buttonMap;     /**< Call MiniMap Button */
    
       Uint32 lastRead;             /**< Last Verification of I/O */
       Uint32 lastMouse;            /**< Last read from mouse */
@@ -217,6 +221,8 @@ class engine
       GLfloat seconds;             /**< Seconds from last actualization */
       
       int imgNumber;               /**< Used on exporting images to make video*/
+
+      int exitEngine;              /**< Control if is to exit the engine */
 };
 
 #endif

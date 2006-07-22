@@ -1153,7 +1153,9 @@ int main(int argc, char **argv)
         // glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
         // gluUnProject(wx,wy,wz,modl,proj,viewPort, &xReal, &yReal, &zReal);
 
-         if(gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,object) == NADA)
+         int eventInfo = NADA;
+         object = gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,&eventInfo);
+         if(eventInfo == NADA)
          {
             if(teclas[SDLK_UP] || teclas[SDLK_DOWN])
             {

@@ -138,10 +138,10 @@ figura* Tlista::InserirFigura(int x,int y,int w,int h,const char* arquivo)
    return(novo);
 } 
 
-tabBotao* Tlista::InserirTabBotao(int x,int y,int w,int h,const char* arquivo)
+tabButton* Tlista::InserirTabButton(int x,int y,int w,int h,const char* arquivo)
 {
-   tabBotao* novo;
-   novo = new tabBotao(x,y,arquivo);
+   tabButton* novo;
+   novo = new tabButton(x,y,arquivo);
    
 
    novo->tipo = TABBOTAO;

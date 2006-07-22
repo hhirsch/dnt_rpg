@@ -50,7 +50,7 @@ class Tlista{
        * arquivo -> nome do arquivo que contem a figura
        * lista   -> lista onde sera inserida a figura */
       figura* InserirFigura(int x,int y,int w,int h,const char* arquivo);
-      tabBotao* InserirTabBotao(int x,int y,int w,int h,const char* arquivo);
+      tabButton* InserirTabButton(int x,int y,int w,int h,const char* arquivo);
 
       /* Insere uma nova barra de texto na lista
        * xa,ya,xb,yb -> Dimensoes da barra de texto

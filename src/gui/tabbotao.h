@@ -4,29 +4,34 @@
 #include "figura.h"
 #include "cores.h"
 
-#define MAX_TABBOTOES 20
+#define MAX_TABBUTTONS 20 /**< Max Buttons per table of buttons */
 
-typedef struct 
-{
-   int x1, y1, x2, y2;
-   int (*procPres)(void *jan,void *ljan,SDL_Surface *screen);
-}quad;
-
-
-class tabBotao: public figura
+/*! oneTabButton is a class to define what is a button on a table of buttons */
+class oneTabButton :Tobjeto
 {
    public:
-      tabBotao(int x,int y,const char* arquivo);
-      ~tabBotao(){};
-      void inserirBotao(int x1, int y1, int x2, int y2, 
-                        int (*proc)(void *jan,void *ljan,SDL_Surface *screen));
-      void Desenhar(int mouseX, int mouseY, int Xjan, int Yjan,
+      int x1,  /**< X Coordinate */
+          y1,  /**< Y Coordinate */
+          x2,  /**< X Coordinate */
+          y2;  /**< Y Coordinate */
+};
+
+/*! The table of Buttons class. Its a figura divided in squares each one 
+    representing (and acting as) a button. */
+class tabButton: public figura
+{
+   public:
+      tabButton(int x,int y,const char* arquivo);
+      ~tabButton(){};
+      oneTabButton* insertButton(int x1, int y1, int x2, int y2); 
+      void draw(int mouseX, int mouseY, int Xjan, int Yjan,
                     SDL_Surface *screen);
-      bool VerificarSobrePosicao(int mouseX, int mouseY, int Xjan, int Yjan);
+      Tobjeto* verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
+                          int Xjan, int Yjan);
 
    private:
-      int numBotoes;
-      quad Botoes[MAX_TABBOTOES];
+      int numButtons;
+      oneTabButton Buttons[MAX_TABBUTTONS];
 };
 
 

@@ -775,7 +775,8 @@ int main(int argc, char **argv)
    double xReal, zReal, yReal;
    float wx,wy,wz;
    GLfloat portalX[2], portalZ[2];
-   Tobjeto* object = NULL;
+   //Tobjeto* object = NULL;
+   int eventInfo = NADA;
 
    texturaAtual = mapa->Texturas->indice;
    objAtual = (mapObjeto*)mapa->Objetos->primeiro->proximo;
@@ -812,7 +813,8 @@ int main(int argc, char **argv)
       if(qz > mapa->z) 
         qz = mapa->z;
 
-      if(gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,object)==NADA)
+      gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,&eventInfo);
+      if(eventInfo == NADA)
       {
          if (qx > mapa->x) qx = mapa->x;
          else if (qx < 0) qx = 0;

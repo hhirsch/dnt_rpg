@@ -302,7 +302,8 @@ int main(int argc, char *argv[])
    Uint8 *keys; 
    Uint8 Mbotao;
    int x,y;
-   Tobjeto* object;
+   //Tobjeto* object = NULL;
+   int eventInfo = NADA;
 
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
@@ -317,7 +318,7 @@ int main(int argc, char *argv[])
          SDL_PumpEvents();
          keys = SDL_GetKeyState(NULL);
          Mbotao = SDL_GetMouseState(&x,&y);
-         interf->manipulateEvents(x,y,Mbotao,keys, object);
+         interf->manipulateEvents(x,y,Mbotao,keys, &eventInfo);
          if(keys[SDLK_ESCAPE])
            sair = SAIR;
          interf->draw(proj,modl,viewPort);

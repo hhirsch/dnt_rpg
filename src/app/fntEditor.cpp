@@ -660,7 +660,7 @@ int main(int argc, char *argv[])
        glClearColor(0,0,0,1);
        glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
        Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-       pronto = !interf->manipulateEvents(x,y,Mbotao, keys, object);
+       object = interf->manipulateEvents(x,y,Mbotao, keys, &pronto);
        if(pronto != BARRATEXTOESCRITA)
        {
           defineCaractere(keys,c);

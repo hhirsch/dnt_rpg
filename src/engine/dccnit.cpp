@@ -13,11 +13,6 @@
 #define REFRESH_RATE 100
 
 
-/********************************************************************
- *                      Engine's Variables                          *
- ********************************************************************/
-int exitEngine; //if defined, exits engine.
-
 /*********************************************************************
  *                       Engine's Constructor                        *
  *********************************************************************/
@@ -414,7 +409,8 @@ int engine::OptionsScreen(GLuint* idTextura)
    int tempoAnterior = 0;
    Uint8* keys;
    int x,y;
-   Tobjeto* object = NULL;
+   //Tobjeto* object = NULL;
+   int eventInfo = NADA;
 
    option->DisplayOptionsScreen(interf);
 
@@ -430,7 +426,7 @@ int engine::OptionsScreen(GLuint* idTextura)
          glClearColor(0,0,0,1);
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         interf->manipulateEvents(x,y,Mbotao,keys,object);
+         interf->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
          AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          interf->draw(proj,modl,viewPort);
          glFlush();
@@ -464,7 +460,8 @@ int engine::CharacterScreen(GLuint* idTextura)
    int tempoAnterior = 0;
    Uint8* keys;
    int x,y;
-   Tobjeto* object = NULL;
+   //Tobjeto* object = NULL;
+   int eventInfo = NADA;
 
   
    /*TODO Other screens*/
@@ -486,7 +483,7 @@ int engine::CharacterScreen(GLuint* idTextura)
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         gui->manipulateEvents(x,y,Mbotao,keys,object);
+         gui->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
          AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          gui->draw(proj,modl,viewPort);
          glFlush();
@@ -731,14 +728,43 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       keys = SDL_GetKeyState(NULL);
 
       int x,y;
+      int guiEvent = 0;
       Uint8 Mbotao = SDL_GetMouseState(&x,&y);
       mouseX = x;
       mouseY = y;
 
       /* GUI Events */
-      Tobjeto* object = NULL;
-      if(gui->manipulateEvents(x,y,Mbotao,keys, object) != NADA)
+      Tobjeto* object;
+      object = gui->manipulateEvents(x,y,Mbotao,keys, &guiEvent);
+      if(guiEvent != NADA)
       {
+         switch(guiEvent)
+         {
+             case TABBOTAOPRESSIONADO:
+             {
+                 if(object == (Tobjeto*) buttonAttackMode)
+                 {
+                    printf("Enter Attack Mode! Yeba!\n");
+                 }
+                 else if( object == (Tobjeto*) buttonMap)
+                 {
+                    /* Open, if not opened, the minimap window */
+                    if(!miniMapWindow)
+                    {
+                        OpenMiniMapWindow();
+                    }
+                 } 
+                 break;
+             }
+             case BOTAOPRESSIONADO:
+             {
+                if(object == (Tobjeto*) buttonMenu)
+                {
+                   exitEngine = 1;
+                }
+                break;
+             }
+         }
          redesenha = true;
       }
       else
@@ -2049,12 +2075,6 @@ void engine::OpenMiniMapWindow()
 /*********************************************************************
  *                         Load ShortCuts Window                     *
  *********************************************************************/
-int botaoMenu(void *jan,void *ljan,SDL_Surface *screen)
-{
-   exitEngine = 1;
-   return(1);
-}
-
 void engine::OpenShortcutsWindow()
 {
    shortCutsWindow=gui->ljan->InserirJanela(0,472,511,599,
@@ -2074,11 +2094,12 @@ void engine::OpenShortcutsWindow()
                                  shortCutsWindow->Cores.corBot.B,
                                  language.INITIAL_SAVE.c_str(),
                                  0,NULL);
-   shortCutsWindow->objects->InserirBotao(94,102,162,120,shortCutsWindow->Cores.corBot.R, 
+   buttonMenu = shortCutsWindow->objects->InserirBotao(94,102,162,120,
+                                 shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
                                  shortCutsWindow->Cores.corBot.B,
                                  "Menu",
-                                 0,&botaoMenu);
+                                 0,NULL);
    shortCutsWindow->objects->InserirBotao(163,102,231,120,
                                  shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
@@ -2086,32 +2107,32 @@ void engine::OpenShortcutsWindow()
                                  language.INITIAL_LOAD.c_str(),
                                  0,NULL);
 
-   tabBotao* tb;
-   tb = shortCutsWindow->objects->InserirTabBotao(252,15,0,0,
+   tabButton* tb;
+   tb = shortCutsWindow->objects->InserirTabButton(252,15,0,0,
                                              "../data/texturas/shortcuts.png");
-   tb->inserirBotao(7,4,43,36,NULL);/* Attack Mode */
-   tb->inserirBotao(7,40,43,72,NULL);/* Attack 1 */
-   tb->inserirBotao(7,75,43,107,NULL);/* Attack 7 */
+   buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
+   tb->insertButton(7,40,43,72);/* Attack 1 */
+   tb->insertButton(7,75,43,10);/* Attack 7 */
 
-   tb->inserirBotao(53,4,89,36,NULL);/* Guard/Sleep Mode */
-   tb->inserirBotao(53,40,89,72,NULL);/* Attack 2 */
-   tb->inserirBotao(53,75,89,107,NULL);/* Attack 8 */
+   tb->insertButton(53,4,89,36);/* Guard/Sleep Mode */
+   tb->insertButton(53,40,89,72);/* Attack 2 */
+   tb->insertButton(53,75,89,107);/* Attack 8 */
 
-   tb->inserirBotao(99,4,135,36,NULL);/* Inventory */
-   tb->inserirBotao(99,40,135,72,NULL);/* Attack 3 */
-   tb->inserirBotao(99,75,135,107,NULL);/* Attack 9 */
+   tb->insertButton(99,4,135,36);/* Inventory */
+   tb->insertButton(99,40,135,72);/* Attack 3 */
+   tb->insertButton(99,75,135,107);/* Attack 9 */
 
-   tb->inserirBotao(141,4,177,36,NULL);/* Map */
-   tb->inserirBotao(141,40,177,72,NULL);/* Attack 4 */
-   tb->inserirBotao(141,75,177,107,NULL);/* Attack 10 */
+   buttonMap = tb->insertButton(141,4,177,36);/* Map */
+   tb->insertButton(141,40,177,72);/* Attack 4 */
+   tb->insertButton(141,75,177,107);/* Attack 10 */
    
-   tb->inserirBotao(180,4,216,36,NULL);/* Party */
-   tb->inserirBotao(180,40,216,72,NULL);/* Attack 5 */
-   tb->inserirBotao(180,75,216,107,NULL);/* Assign Attacks */
+   tb->insertButton(180,4,216,36);/* Party */
+   tb->insertButton(180,40,216,72);/* Attack 5 */
+   tb->insertButton(180,75,216,107);/* Assign Attacks */
 
-   tb->inserirBotao(220,4,256,36,NULL);/* Get */
-   tb->inserirBotao(220,40,256,72,NULL);/* Attack 6 */
-   tb->inserirBotao(220,75,256,107,NULL);/* Info */
+   tb->insertButton(220,4,256,36);/* Get */
+   tb->insertButton(220,40,256,72);/* Attack 6 */
+   tb->insertButton(220,75,256,107);/* Info */
 
    shortCutsWindow->objects->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
    

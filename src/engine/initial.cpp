@@ -67,7 +67,8 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
    pronto = 0;
-   Tobjeto* object = NULL;
+   //Tobjeto* object = NULL;
+   int eventInfo = NADA;
    janela* jan = gui->ljan->InserirJanela(335,235,462,362,
                                           language.VERSION.c_str(),1,1,
                                           NULL,NULL);  
@@ -132,7 +133,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          AtualizaTela2D(*tituloID,proj,modl,viewPort,0,0,799,599,0.012);
-         gui->manipulateEvents(x,y,Mbotao,keys, object);
+         gui->manipulateEvents(x,y,Mbotao,keys, &eventInfo);
          gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
