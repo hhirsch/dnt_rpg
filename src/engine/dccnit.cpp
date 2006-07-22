@@ -1410,11 +1410,29 @@ void engine::Draw()
    
    /* mouse Cursor Draw */
    GLfloat Z = 0.01;
+
    GLuint Y = SCREEN_Y - mouseY;
+
+   /*if(mouseY > SCREEN_Y - 32)
+   {
+      Y = 32;
+   }
+   else
+   {
+      Y = SCREEN_Y - mouseY;
+   }*/
+
    gluUnProject(mouseX,Y, Z, modl, proj, viewPort, &x1, &y1, &z1);
    gluUnProject(mouseX,Y-32,Z, modl, proj, viewPort, &x2, &y2, &z2);
    gluUnProject(mouseX+32,Y-32,Z,modl,proj,viewPort, &x3, &y3, &z3);
    gluUnProject(mouseX+32,Y,Z, modl, proj, viewPort, &x4, &y4, &z4);
+
+   /*gluUnProject(0,SCREEN_Y, Z, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject(0,SCREEN_Y-32,Z, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(32,SCREEN_Y-32,Z,modl,proj,viewPort, &x3, &y3, &z3);
+   gluUnProject(32,SCREEN_Y,Z, modl, proj, viewPort, &x4, &y4, &z4);*/
+
+   glPushMatrix();
 
    //FIXME BUG when mouse after screenY-32
    glEnable(GL_TEXTURE_2D);
@@ -1429,9 +1447,21 @@ void engine::Draw()
       glVertex3f(x3,y3,z3);
       glTexCoord2f(1,0);
       glVertex3f(x4,y4,z4);
+      /*glNormal3f( 0, 0, 1 );
+      glTexCoord2f(0,0);
+      glVertex2f(mouseX,Y);
+      glTexCoord2f(0,1);
+      glVertex2f(mouseX,Y-32);
+      glTexCoord2f(1,1);
+      glVertex2f(mouseX+32,Y-32);
+      glTexCoord2f(1,0);
+      glVertex2f(mouseX+32,Y);*/
    glEnd();
    glDisable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
+
+   glPopMatrix();
+
    //glDisable(GL_ALPHA_TEST);
 
    glEnable(GL_LIGHTING);
