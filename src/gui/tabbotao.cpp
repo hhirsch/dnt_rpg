@@ -55,7 +55,6 @@ Tobjeto* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
          if(Mbuttons & SDL_BUTTON(1))
          {
             return((Tobjeto*) &Buttons[i]);
-            //printf("tabObject: %p\n", object);
          }
          else
          {

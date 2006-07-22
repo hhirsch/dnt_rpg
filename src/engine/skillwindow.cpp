@@ -6,7 +6,6 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
 {
    char tmp[5];
    string saux;
-   botao* baux;
    int aux;
 
    curSkill = ATT_SKILL_FIRST; //Set to first skill after attributes

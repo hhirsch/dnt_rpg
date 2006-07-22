@@ -65,7 +65,7 @@ engine::engine()
 
    particleSystem = new partSystem();
 
-   /* FIXME Initialize Particles, it will not be here!! */
+   engineMode = ENGINE_MODE_REAL_TIME;
 
    /*part1* particula;
 
@@ -648,6 +648,54 @@ void ScreenDump(char *destFile, short W, short H)
 #endif
 
 /*********************************************************************
+ *                         Threat GUI Events                         *
+ *********************************************************************/
+void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
+{
+   switch(eventInfo)
+   {
+       case TABBOTAOPRESSIONADO:
+       {
+           if(object == (Tobjeto*) buttonAttackMode)
+           {
+              if( engineMode != ENGINE_MODE_TURN_BATTLE )
+              {
+                 engineMode = ENGINE_MODE_TURN_BATTLE;
+                 briefTxt->texto = "Enter Attack Mode!";
+                 //printf("Enter Attack Mode! Yeba!\n");
+              }
+           }
+           else if( object == (Tobjeto*) buttonMap)
+           {
+              /* Open, if not opened, the minimap window */
+              if(!miniMapWindow)
+              {
+                  OpenMiniMapWindow();
+              }
+           } 
+           else if(object == (Tobjeto*) buttonEndTurn)
+           {
+              if( engineMode == ENGINE_MODE_TURN_BATTLE )
+              {
+                 //TODO verifies battle end, etc.
+                 engineMode = ENGINE_MODE_REAL_TIME;
+                 briefTxt->texto = "Exit Attack Mode!";
+              }
+           }
+           break;
+       }
+       case BOTAOPRESSIONADO:
+       {
+         if(object == (Tobjeto*) buttonMenu)
+         {
+            exitEngine = 1;
+         }
+         break;
+       }
+   }
+}
+
+/*********************************************************************
  *                   Threat Input/Output Events                      *
  *********************************************************************/
 int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
@@ -736,33 +784,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       object = gui->manipulateEvents(x,y,Mbotao,keys, &guiEvent);
       if(guiEvent != NADA)
       {
-         switch(guiEvent)
-         {
-             case TABBOTAOPRESSIONADO:
-             {
-                 if(object == (Tobjeto*) buttonAttackMode)
-                 {
-                    printf("Enter Attack Mode! Yeba!\n");
-                 }
-                 else if( object == (Tobjeto*) buttonMap)
-                 {
-                    /* Open, if not opened, the minimap window */
-                    if(!miniMapWindow)
-                    {
-                        OpenMiniMapWindow();
-                    }
-                 } 
-                 break;
-             }
-             case BOTAOPRESSIONADO:
-             {
-                if(object == (Tobjeto*) buttonMenu)
-                {
-                   exitEngine = 1;
-                }
-                break;
-             }
-         }
+         threatGuiEvents(object, guiEvent);
          redesenha = true;
       }
       else
@@ -2080,7 +2102,7 @@ void engine::OpenShortcutsWindow()
                                        NULL,NULL);
    FPS = shortCutsWindow->objects->InserirQuadroTexto(8,20,150/*100*/,35,2,
                                   language.WINDOW_SHORTCUTS_FPS.c_str());
-   ObjTxt = shortCutsWindow->objects->InserirQuadroTexto(8,36,249,100,2,
+   briefTxt = shortCutsWindow->objects->InserirQuadroTexto(8,36,249,100,2,
                                   language.WINDOW_SHORTCUTS_HELP.c_str());
    /*ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
    ObjTxt->Cores.corCont[1].B = 255;*/
@@ -2130,7 +2152,7 @@ void engine::OpenShortcutsWindow()
 
    tb->insertButton(220,4,256,36);/* Get */
    tb->insertButton(220,40,256,72);/* Attack 6 */
-   tb->insertButton(220,75,256,107);/* Info */
+   buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 
    shortCutsWindow->objects->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
    

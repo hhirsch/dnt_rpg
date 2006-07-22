@@ -26,6 +26,9 @@
   #include "../net/client.h"
 #endif
 
+#define ENGINE_MODE_REAL_TIME 1    /**< Real Time Mode, not in battle */
+#define ENGINE_MODE_TURN_BATTLE 2  /**< Turn Mode, in battles */
+
 /*!
     The Engine Class is where all things are "merged" on game.
  */
@@ -152,6 +155,15 @@ class engine
        ***************************************************************/
       int threatIO(SDL_Surface *screen,int *forcaAtualizacao);
 
+      /*!
+       **************************************************************
+       * Threat Gui Events
+       * \param object -> last object modifief on GUI
+       * \param eventInfo -> las event on GUI
+       **************************************************************/
+      void threatGuiEvents(Tobjeto* object, int eventInfo);
+
+
       /*! Verify Square on IA TODO oxi, out here.
        * \param quad -> square to verify */
       inline void verificaQuad(Square* quad);
@@ -193,6 +205,7 @@ class engine
 
       quadroTexto* FPS;            /**< Text that shows FPS */
       quadroTexto* ObjTxt;         /**< Text that shows actual pointed object */
+      quadroTexto* briefTxt;       /**< Briefing Text */
       janela* shortCutsWindow;     /**< ShortCuts Window */
       janela* miniMapWindow;       /**< MiniMap Window */
       botao* botPerMiniMap;        /**< Character MiniMap Button */
@@ -200,6 +213,7 @@ class engine
       botao* buttonMenu;           /**< Butto to call Menu */
       oneTabButton* buttonAttackMode;/**< Button to Enter on Attack Mode */
       oneTabButton* buttonMap;     /**< Call MiniMap Button */
+      oneTabButton* buttonEndTurn; /**< End Turn Button */
    
       Uint32 lastRead;             /**< Last Verification of I/O */
       Uint32 lastMouse;            /**< Last read from mouse */
@@ -223,6 +237,8 @@ class engine
       int imgNumber;               /**< Used on exporting images to make video*/
 
       int exitEngine;              /**< Control if is to exit the engine */
+
+      int engineMode;              /**< Current Mode of the Engine */
 };
 
 #endif
