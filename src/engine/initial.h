@@ -44,6 +44,15 @@ class initialScreen
       interface* gui;  /**< GUI for Windows */
       lang language;   /**< language internationalization */
 
+      int result;      /**< Result of the initial Screen */
+      int done;
+      
+      botao* buttonNew;
+      botao* buttonContinue;
+      botao* buttonSave;
+      botao* buttonLoad;
+      botao* buttonOptions;
+      botao* buttonExit;
 };
 
 #endif
