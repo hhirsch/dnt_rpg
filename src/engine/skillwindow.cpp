@@ -2,53 +2,6 @@
 #include "../lang/lang.h"
 #include "../classes/defs.h"
 
-#define ACT_NONE    0
-#define ACT_SUM     1
-#define ACT_SUB     2
-#define ACT_NEXT    3
-#define ACT_PREV    4
-#define ACT_CONFIRM 5
-#define ACT_CANCEL  6
-
-int curAction = ACT_NONE;
-
-int botaoSum(void *jan,void *ljan,SDL_Surface *screen)
-{
-   curAction = ACT_SUM;
-   return(1);
-}
-
-int botaoSub(void *jan,void *ljan,SDL_Surface *screen)
-{
-   curAction = ACT_SUB;
-   return(1);
-}
-
-int botaoNext(void *jan,void *ljan,SDL_Surface *screen)
-{
-   curAction = ACT_NEXT;
-   return(1);
-}
-
-int botaoPrev(void *jan,void *ljan,SDL_Surface *screen)
-{
-   curAction = ACT_PREV;
-   return(1);
-}
-
-int botaoConfirm(void *jan,void *ljan,SDL_Surface *screen)
-{
-   curAction = ACT_CONFIRM;
-   return(1);
-}
-
-int botaoCancel(void *jan,void *ljan,SDL_Surface *screen)
-{
-   curAction = ACT_CANCEL;
-   return(1);
-}
-
-
 skillWindow::skillWindow(skills* sk, int points, interface* inter)
 {
    char tmp[5];
@@ -96,12 +49,14 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    desc->tamFonte = 1;
  
    /* Skill Name & Selectors */
-   window->objects->InserirBotao(52,175,66,193,window->Cores.corBot.R,
+   buttonPrevious = window->objects->InserirBotao(52,175,66,193,
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,&botaoPrev);
-   window->objects->InserirBotao(237,175,251,193,window->Cores.corBot.R,
+                                 "<",0,NULL);
+   buttonNext = window->objects->InserirBotao(237,175,251,193,
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,&botaoNext);
+                                 ">",0,NULL);
    skillName = window->objects->InserirQuadroTexto(67,175,236,193,1,
                                 externalSkill->m_skills[curSkill].nome.c_str());
    skillName->fonte = FMINI;
@@ -118,12 +73,14 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    txtPoints = window->objects->InserirQuadroTexto(113,198,135,216,1,
                                                    saux.c_str());
    txtPoints->fonte = FMINI;
-   baux = window->objects->InserirBotao(136,198,146,216, window->Cores.corBot.R,
+   buttonSum = window->objects->InserirBotao(136,198,146,216,
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,&botaoSum);
-   baux = window->objects->InserirBotao(102,198,112,216, window->Cores.corBot.R,
+                                 ">",0,NULL);
+   buttonDec = window->objects->InserirBotao(102,198,112,216, 
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,&botaoSub);
+                                 "<",0,NULL);
 
    /* Skill Costs */
    window->objects->InserirQuadroTexto(160,200,215,214,0,
@@ -138,14 +95,16 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
 
 
    /* Confirm Button */
-   baux = window->objects->InserirBotao(181,225,251,244, window->Cores.corBot.R,
+   buttonConfirm = window->objects->InserirBotao(181,225,251,244, 
+                                window->Cores.corBot.R,
                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                language.SKILL_CONFIRM.c_str(),1,&botaoConfirm);
+                                language.SKILL_CONFIRM.c_str(),1,NULL);
    
    /* Cancel Button */
-   baux = window->objects->InserirBotao(8,225,78,244, window->Cores.corBot.R,
+   buttonCancel = window->objects->InserirBotao(8,225,78,244, 
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.SKILL_CANCEL.c_str(),1,&botaoCancel);
+                                 language.SKILL_CANCEL.c_str(),1,NULL);
    
    /* Open Skill Window */
    window->ptrExterno = &window;
@@ -154,11 +113,11 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
  
 }
 
-int skillWindow::treat(interface* inter)
+int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
 {
-   switch(curAction)
+   if(eventInfo == BOTAOPRESSIONADO)
    {
-      case ACT_SUM:
+      if(object == (Tobjeto*) buttonSum)
       {
          if( avaiblePoints - externalSkill->m_skills[curSkill].mod >=0 )
          {
@@ -175,9 +134,8 @@ int skillWindow::treat(interface* inter)
              txtPoints->texto = saux;
 
          }
-         break;
       }
-      case ACT_SUB:
+      else if(object == (Tobjeto*) buttonDec)
       {
          if(externalSkill->m_skills[curSkill].pontos - 1 >= 
             externalSkill->m_skills[curSkill].antPontos)
@@ -194,9 +152,8 @@ int skillWindow::treat(interface* inter)
             saux = tmp;
             txtPoints->texto = saux;
          }
-         break;
       }
-      case ACT_NEXT:
+      else if(object == (Tobjeto*) buttonNext)
       {
          if(curSkill < ATT_SKILL_LAST)
          {
@@ -218,9 +175,8 @@ int skillWindow::treat(interface* inter)
          saux = tmp;
          txtCosts->texto = saux;
 
-         break;
       }
-      case ACT_PREV:
+      else if(object == (Tobjeto*) buttonPrevious)
       {
          if(curSkill > ATT_SKILL_FIRST)
          {
@@ -242,20 +198,17 @@ int skillWindow::treat(interface* inter)
          saux = tmp;
          txtCosts->texto = saux;
 
-         break;
       }
-      case ACT_CONFIRM:
+      else if(object == (Tobjeto*) buttonConfirm)
       {
          skFig->fig = NULL; //to not delete skill images
          window->Fechar(inter->ljan);
          window = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
-         curAction = ACT_NONE;
          return(SKILLW_CONFIRM);
-         break;
       }
-      case ACT_CANCEL: 
+      else if(object == (Tobjeto*) buttonCancel) 
       {
          /* Undo */
          int aux;
@@ -269,9 +222,7 @@ int skillWindow::treat(interface* inter)
           window = NULL;
           glEnable(GL_LIGHTING);
           SDL_ShowCursor(SDL_DISABLE);
-          curAction = ACT_NONE;
          return(SKILLW_CANCEL);
-         break;
       }
    }
 
@@ -290,7 +241,6 @@ int skillWindow::treat(interface* inter)
    }
    
    window->Desenhar(0,0);
-   curAction = ACT_NONE;
    return(SKILLW_OTHER);
 }
 

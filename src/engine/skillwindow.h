@@ -23,7 +23,7 @@ class skillWindow
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \return 0 on close, 1 otherwise */
-      int treat(interface* inter);
+      int treat(Tobjeto* object, int eventInfo, interface* inter);
 
       janela*      window;           /**< Pointer to the internal window */
 
@@ -36,6 +36,14 @@ class skillWindow
       quadroTexto* skillName;        /**< Actual Skill Name */
       quadroTexto* txtPoints;        /**< Actual Points Text */
       quadroTexto* txtCosts;         /**< Actual Cost Text */
+
+      botao* buttonSum;
+      botao* buttonDec;
+      botao* buttonPrevious;
+      botao* buttonNext;
+      botao* buttonConfirm;
+      botao* buttonCancel;
+
       figura*      skFig;            /**< Actual skill Image */
       lang language;                 /**< Language internationalization */
 };

@@ -459,7 +459,7 @@ int engine::CharacterScreen(GLuint* idTextura)
    int tempoAnterior = 0;
    Uint8* keys;
    int x,y;
-   //Tobjeto* object = NULL;
+   Tobjeto* object = NULL;
    int eventInfo = NADA;
 
   
@@ -482,18 +482,17 @@ int engine::CharacterScreen(GLuint* idTextura)
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         gui->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
+         object = gui->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
          AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
+         charCreation = skWindow->treat(object, eventInfo, gui);
       }
       else if(19 - (tempo - tempoAnterior) > 0 ) 
       {
          SDL_Delay(19 - (tempo - tempoAnterior) );
       }
-
-      charCreation = skWindow->treat(gui);
    }
    delete(sk);
    delete(skWindow);
