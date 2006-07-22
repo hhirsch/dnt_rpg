@@ -409,7 +409,7 @@ int engine::OptionsScreen(GLuint* idTextura)
    int tempoAnterior = 0;
    Uint8* keys;
    int x,y;
-   //Tobjeto* object = NULL;
+   Tobjeto* object = NULL;
    int eventInfo = NADA;
 
    option->DisplayOptionsScreen(interf);
@@ -426,18 +426,17 @@ int engine::OptionsScreen(GLuint* idTextura)
          glClearColor(0,0,0,1);
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         interf->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
+         object = interf->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
          AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          interf->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
+         optionW = option->Treat(object, eventInfo, interf);
       }
       else if(19 - (tempo - tempoAnterior) > 0 ) 
       {
          SDL_Delay(19 - (tempo - tempoAnterior) );
       }
-
-      optionW = option->Treat(interf);
    }
 
    snd->ChangeVolume(option->musicVolume, option->sndfxVolume);

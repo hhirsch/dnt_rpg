@@ -27,7 +27,7 @@ class options
       /*! Save actual options on file. */
       void Save();
       /*! Treat options Window Events */
-      int Treat(interface* interf);
+      int Treat(Tobjeto* object, int eventInfo, interface* interf);
 
       int     musicVolume; /**< Actual Music Volume */
       int     sndfxVolume; /**< Actual Sound Effects Volume */
@@ -44,6 +44,15 @@ class options
       int          prevSndfxVolume;/**< Previous Used Sound Effects Volume */
       int          prevLanguage;   /**< Previous Used Language */
       lang         language;       /**< Language Used */
+
+      botao* buttonMusSum;
+      botao* buttonMusDec;
+      botao* buttonSndSum;
+      botao* buttonSndDec;
+      botao* buttonLangSum;
+      botao* buttonLangDec;
+      botao* buttonConfirm;
+      botao* buttonCancel;
 
       /*! Get the Actual Language Name
        * \return the name of the language. */

@@ -3,73 +3,10 @@
 #include "../lang/lang.h"
 #include "../sound/sound.h"
 
-#define ACT_NONE     0
-#define ACT_MUS_SUM  1
-#define ACT_MUS_SUB  2
-#define ACT_SND_SUM  3
-#define ACT_SND_SUB  4
-#define ACT_CONFIRM  5
-#define ACT_LNG_SUM  6
-#define ACT_LNG_SUB  7
-#define ACT_CANCEL   8
-
 #define NM_PORTUGUES "Português"
 #define NM_INGLES    "English"
 #define NM_FRANCES   "Français"
 #define NM_ESPANHOL  "Español"
-
-int cAction = ACT_NONE;
-
-int botaoMusSum(void *jan,void *ljan,SDL_Surface *screen)
-{
-   cAction = ACT_MUS_SUM;
-   return(1);
-}
-
-int botaoMusSub(void *jan,void *ljan,SDL_Surface *screen)
-{
-   cAction = ACT_MUS_SUB;
-   return(1);
-}
-
-int botaoSndSum(void *jan,void *ljan,SDL_Surface *screen)
-{
-   cAction = ACT_SND_SUM;
-   return(1);
-}
-
-int botaoSndSub(void *jan,void *ljan,SDL_Surface *screen)
-{
-   cAction = ACT_SND_SUB;
-   return(1);
-}
-
-int botaoLngSum(void *jan,void *ljan,SDL_Surface *screen)
-{
-   cAction = ACT_LNG_SUM;
-   return(1);
-}
-
-int botaoLngSub(void *jan,void *ljan,SDL_Surface *screen)
-{
-   cAction = ACT_LNG_SUB;
-   return(1);
-}
-
-
-int botaoConf(void *jan,void *ljan,SDL_Surface *screen)
-{
-   cAction = ACT_CONFIRM;
-   return(1);
-}
-
-int botaoCanc(void *jan,void *ljan,SDL_Surface *screen)
-{
-   cAction = ACT_CANCEL;
-   return(1);
-}
-
-
 
 options::options(string file)
 {
@@ -163,15 +100,17 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = window->objects->InserirQuadroTexto(8,27,145,44,0,
                                          language.OPTIONS_MUSIC_VOLUME.c_str());
    qt->fonte = FMINI;
-   window->objects->InserirBotao(146,27,156,44,window->Cores.corBot.R,
+   buttonMusDec = window->objects->InserirBotao(146,27,156,44,
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,&botaoMusSub);
+                                 "<",0,NULL);
    txtMusicVolume = window->objects->InserirQuadroTexto(157,27,197,44,1,
                                  saux.c_str());
    txtMusicVolume->fonte = FMINI;
-   window->objects->InserirBotao(198,27,208,44,window->Cores.corBot.R,
+   buttonMusSum = window->objects->InserirBotao(198,27,208,44,
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                   ">",0,&botaoMusSum);
+                                   ">",0,NULL);
    window->objects->InserirFigura(210,20,40,112,"../data/texturas/options/music.png");
    
   
@@ -181,15 +120,17 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = window->objects->InserirQuadroTexto(8,61,145,78,0,
                                          language.OPTIONS_SNDFX_VOLUME.c_str());
    qt->fonte = FMINI;
-   window->objects->InserirBotao(146,61,156,78,window->Cores.corBot.R,
+   buttonSndDec = window->objects->InserirBotao(146,61,156,78,
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,&botaoSndSub);
+                                 "<",0,NULL);
    txtSndfxVolume = window->objects->InserirQuadroTexto(157,61,197,78,1,
                                  saux.c_str());
    txtSndfxVolume->fonte = FMINI;
-   window->objects->InserirBotao(198,61,208,78,window->Cores.corBot.R,
+   buttonSndSum = window->objects->InserirBotao(198,61,208,78,
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,&botaoSndSum);
+                                 ">",0,NULL);
    window->objects->InserirFigura(210,54,40,112,"../data/texturas/options/sndfx.png");
 
 
@@ -199,27 +140,31 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = window->objects->InserirQuadroTexto(8,95,145,112,0,
                                          language.OPTIONS_LANGUAGE.c_str());
    qt->fonte = FMINI;
-   window->objects->InserirBotao(121,95,131,112,window->Cores.corBot.R,
+   buttonLangDec = window->objects->InserirBotao(121,95,131,112,
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,&botaoLngSub);
+                                 "<",0,NULL);
    txtLanguage = window->objects->InserirQuadroTexto(132,95,197,112,1,
                                  saux.c_str());
    txtLanguage->fonte = FMINI;
-   window->objects->InserirBotao(198,95,208,112,window->Cores.corBot.R,
+   buttonLangSum = window->objects->InserirBotao(198,95,208,112,
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,&botaoLngSum);
+                                 ">",0,NULL);
    window->objects->InserirFigura(210,88,40,112,"../data/texturas/options/language.png");
 
 
    /* Confirm Button */
-   window->objects->InserirBotao(181,225,251,244, window->Cores.corBot.R,
+   buttonConfirm = window->objects->InserirBotao(181,225,251,244, 
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.SKILL_CONFIRM.c_str(),1,&botaoConf);
+                                 language.SKILL_CONFIRM.c_str(),1,NULL);
    
    /* Cancel Button */
-   window->objects->InserirBotao(8,225,78,244, window->Cores.corBot.R,
+   buttonCancel = window->objects->InserirBotao(8,225,78,244, 
+                                 window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.SKILL_CANCEL.c_str(),1,&botaoCanc);
+                                 language.SKILL_CANCEL.c_str(),1,NULL);
 
    /* Open Skill Window */
    window->ptrExterno = &window;
@@ -227,75 +172,65 @@ void options::DisplayOptionsScreen(interface* interf)
    window->Abrir(interf->ljan);
 }
 
-int options::Treat(interface* interf)
+int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
 {
-   switch(cAction)
+   if(eventInfo == BOTAOPRESSIONADO)
    {
-      case ACT_MUS_SUM: 
+      if(object == (Tobjeto*) buttonMusSum)
       {
          if(musicVolume < SDL_MIX_MAXVOLUME)
          {
              musicVolume++;
          }
-         break;
       }
-      case ACT_MUS_SUB: 
+      if(object == (Tobjeto*) buttonMusDec) 
       {
          if(musicVolume > 0)
          {
              musicVolume--;
          }
-         break;
       }
-      case ACT_SND_SUM: 
+      if(object == (Tobjeto*) buttonSndSum) 
       {
          if(sndfxVolume < SDL_MIX_MAXVOLUME)
          {
              sndfxVolume++;
          }
-         break;
       }
-      case ACT_SND_SUB: 
+      if(object == (Tobjeto*) buttonSndDec) 
       {
          if(sndfxVolume > 0)
          {
              sndfxVolume--;
          }
-         break;
       }
-      case ACT_LNG_SUM:
+      if(object == (Tobjeto*) buttonLangSum)
       {
          if(langNumber < LANG_LAST)
          {
             langNumber++;
          }
-         break;
       }
-      case ACT_LNG_SUB:
+      if(object == (Tobjeto*) buttonLangDec)
       {
          if(langNumber > LANG_FIRST)
          {
             langNumber--;
          }
-         break;
       }
-      case ACT_CONFIRM: 
+      if(object == (Tobjeto*) buttonConfirm) 
       {
          Save();
          window->Fechar(interf->ljan);
-         cAction = ACT_NONE;
          return(OPTIONSW_CONFIRM);
-         break;
       }
-      case ACT_CANCEL:
+      if(object == (Tobjeto*) buttonCancel)
       {
          musicVolume = prevMusicVolume;
          sndfxVolume = prevSndfxVolume;
          langNumber  = prevLanguage;
          window->Fechar(interf->ljan);
-         cAction = ACT_NONE;
          return(OPTIONSW_CANCEL);
-         break;
       }
    }
    
@@ -309,7 +244,6 @@ int options::Treat(interface* interf)
    txtLanguage->texto = languageName();
 
    window->Desenhar(0,0);
-   cAction = ACT_NONE;
    return(OPTIONSW_OTHER);
 } 
 
