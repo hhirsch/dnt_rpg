@@ -652,3 +652,19 @@ void Lpersonagem::RetirarPersonagem(personagem* persona, int tiraMemoria)
      Retirar(persona);
 }
 
+/*********************************************************************
+ *                   Get Next Avaible Hostile Character              *
+ *********************************************************************/
+personagem* Lpersonagem::getEnemyCharacter(personagem* last)
+{
+   while(last != primeiro)
+   {
+      if(last->psychoState == PSYCHO_HOSTILE)
+      {
+         return(last);
+      }
+      last = (personagem*) last->proximo;
+   }
+   return(NULL);
+}
+

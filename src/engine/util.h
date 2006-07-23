@@ -19,6 +19,7 @@
  ********************************************************************/
 #define ANDAR  0.75    /**< The distance that normal character walks */
 #define GIRAR  2.5     /**< The turn velocity of normal character */
+#define WALK_PER_MOVE_ACTION 60 /**< Distance that can be walked per move */
 
 /********************************************************************
  *                      Camera's constants                          *

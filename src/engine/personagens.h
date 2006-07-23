@@ -142,7 +142,14 @@ class Lpersonagem: public Tlista
        * \param persona -> character pointer to remove
        * \param tiraMemoria -> != 0 if remove character from memory list, 
                              0 in the case the destructor calls the function. */
-      void Lpersonagem::RetirarPersonagem(personagem* persona, int tiraMemoria);
+      void RetirarPersonagem(personagem* persona, int tiraMemoria);
+
+      /*!
+       * Gets hostile characters from the list
+       * \param last -> last hostile taken
+       * \return pointer to the hostile character
+       */
+      personagem* getEnemyCharacter(personagem* last);
 
 };
 

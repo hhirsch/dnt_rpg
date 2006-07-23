@@ -8,6 +8,10 @@
 #include "skills.h"
 #include "defs.h"
 
+#define PSYCHO_HOSTILE 0
+#define PSYCHO_NEUTRAL 1
+#define PSYCHO_FRIENDLY 2
+
 /*! Define what is a thing on game, in other words, what is the base fields
  * for characters and map objects.*/
 class thing
@@ -28,6 +32,7 @@ class thing
       int level;              /**< Thing's Level */
       int baseAttackModifier; /**< Thing's Base Attack Modifier */
       int sizeModifier;       /**< Thing's Size Modifier */
+      int psychoState;        /**< Thing's Psycho State */
 
       bool dead;             /**< Dead state or not.(if dead is only a corpse)*/
 

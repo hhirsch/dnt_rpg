@@ -144,8 +144,8 @@ bool fightSystem::doTurn(string& brief)
       }
    }
 
-   /* don't play with dead characters */
-   while(pers->dead)
+   /* don't play with dead characters or not Hostile Ones */
+   while( (pers->dead) || (pers->psychoState != PSYCHO_HOSTILE) )
    {
       pers = charsInitiatives.nextCharacter();
       if(pers == NULL)
@@ -298,4 +298,21 @@ void fightSystem::doNPCMovimentation(personagem* pers, int when)
    //TODO
 }
 
+/***************************************************************
+ *                          empty                              *
+ ***************************************************************/
+void fightSystem::empty()
+{
+   int i;
+
+   for(i=0; i < FIGHT_MAX_PC_GROUPS; i++)
+   {
+       pcGroups[i].empty();
+   }
+
+   for(i=0; i < FIGHT_MAX_NPC_GROUPS; i++)
+   {
+       npcGroups[i].empty();
+   }
+}
 

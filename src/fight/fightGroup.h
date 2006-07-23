@@ -48,6 +48,12 @@ class fightGroup
      ***************************************************************/
      personagem* getNPCEnemy(personagem* pers);
 
+     /*!
+     *************************************************************** 
+     * Empty the group  
+     ***************************************************************/
+     void empty();
+
    private:
      /*! Pointers to Characters on Group */
      personagem* characters[FIGHT_MAX_CHARACTERS_PER_GROUP]; 

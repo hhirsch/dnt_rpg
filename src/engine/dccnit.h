@@ -239,6 +239,17 @@ class engine
       int exitEngine;              /**< Control if is to exit the engine */
 
       int engineMode;              /**< Current Mode of the Engine */
+
+      GLfloat moveCircleX,         /**< The Battle Move Circle X Coordinate */ 
+              moveCircleY,         /**< The Battle Move Circle Y Coordinate */
+              moveCircleZ;         /**< The Battle Move Circle Z Coordinate */
+
+
+      /* Combat Things */
+      GLuint  normalMoveCircle,    /**< One Movimentation Circle */
+              fullMoveCircle;      /**< Full Round Movimentation Circle */
+
+      fightSystem fight;           /**< The Engine fight System */
 };
 
 #endif

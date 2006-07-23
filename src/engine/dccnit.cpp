@@ -112,6 +112,10 @@ engine::~engine()
    glDeleteLists(skyList,1);
    glDeleteTextures(1, &sky);
 
+   /* Clear Other Textures */
+   glDeleteTextures(1, &normalMoveCircle);
+   glDeleteTextures(1, &fullMoveCircle);
+
    /* Clear Characters */
    if(NPCs)
       delete(NPCs);
@@ -631,6 +635,41 @@ void engine::Init(SDL_Surface *screen)
                      img->pixels );
 
    SDL_FreeSurface(img);
+
+   /* Battle Circle Textures */
+   img = IMG_Load("../data/texturas/fightMode/normalMovCircle.png");
+   if(!img)
+   {
+      printf("Error: can't Load Texure: fightMode/normalMovCircle.png\n");
+   }
+   glGenTextures(1, &normalMoveCircle);
+
+   glBindTexture(GL_TEXTURE_2D, normalMoveCircle);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+
+   img = IMG_Load("../data/texturas/fightMode/fullMovCircle.png");
+   if(!img)
+   {
+      printf("Error: can't Load Texure: fightMode/fullMovCircle.png\n");
+   }
+
+   glGenTextures(1, &fullMoveCircle);
+
+   glBindTexture(GL_TEXTURE_2D, fullMoveCircle);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+
 }
 
 #ifdef VIDEO_MODE
@@ -652,6 +691,9 @@ void ScreenDump(char *destFile, short W, short H)
  *********************************************************************/
 void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
 {
+   int numEnemies = 0;
+   personagem* ch;
+   string briefInit;
    switch(eventInfo)
    {
        case TABBOTAOPRESSIONADO:
@@ -660,9 +702,43 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
            {
               if( engineMode != ENGINE_MODE_TURN_BATTLE )
               {
-                 engineMode = ENGINE_MODE_TURN_BATTLE;
-                 briefTxt->texto = "Enter Attack Mode!";
-                 //printf("Enter Attack Mode! Yeba!\n");
+                 briefTxt->texto = "";
+                 fight.empty();
+                 ch =(personagem*) NPCs->primeiro->proximo;
+                 while(ch != NPCs->primeiro)
+                 {
+                    //TODO put enemies on groups, when enemy from enemy
+                    fight.insertNPC(ch, 0, briefInit);
+                    briefTxt->texto += briefInit + "|";
+                    numEnemies++;
+                    ch = (personagem*) ch->proximo; 
+                    SDL_Delay(1);
+                 }
+                 
+                 if(numEnemies > 0)
+                 {
+                    engineMode = ENGINE_MODE_TURN_BATTLE;
+                    moveCircleX = PCs->personagemAtivo->posicaoLadoX;
+                    moveCircleY = PCs->personagemAtivo->posicaoLadoY;
+                    moveCircleZ = PCs->personagemAtivo->posicaoLadoZ;
+
+                    /* Put the PCs on group */
+                    ch =(personagem*) PCs->primeiro->proximo;
+                    while(ch != PCs->primeiro)
+                    {
+                       fight.insertPC(ch, 0, briefInit);
+                       briefTxt->texto += briefInit + "|";
+                       ch = (personagem*) ch->proximo; 
+                       SDL_Delay(1);
+                    }
+
+                    briefTxt->texto += "Enter Attack Mode!";
+                    //printf("Enter Attack Mode! Yeba!\n");
+                 }
+                 else
+                 {
+                    briefTxt->texto = "No NPCs in the Area.";
+                 }
               }
            }
            else if( object == (Tobjeto*) buttonMap)
@@ -754,7 +830,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       actualFPS = (actualFPS + (1000.0 / varTempo)) / 2; 
      
       SDL_PumpEvents();
-      if( (shortCutsWindow) && (tempo-lastFPS >= 300))
+      if( (shortCutsWindow) && (tempo-lastFPS >= 500))
       {
          lastFPS = tempo;
          char texto[15];
@@ -1434,11 +1510,66 @@ void engine::Draw()
       }
    }
 
+   /* Draw Combat Mode Things */
+   if(engineMode == ENGINE_MODE_TURN_BATTLE)
+   {
+       /* Draw Movimentation Circles */
+       glColor4f(1,1,1,1);
+       glEnable(GL_BLEND);
+       glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+       /* Full Circle */
+       glPushMatrix();
+         glEnable(GL_TEXTURE_2D);
+         glBindTexture(GL_TEXTURE_2D, fullMoveCircle );
+         glBegin(GL_QUADS);
+            glTexCoord2f(0,0);
+            glVertex3f(moveCircleX-2*WALK_PER_MOVE_ACTION, 0.1, 
+                       moveCircleZ-2*WALK_PER_MOVE_ACTION);
+            glTexCoord2f(0,1);
+            glVertex3f(moveCircleX-2*WALK_PER_MOVE_ACTION, 0.1, 
+                       moveCircleZ+2*WALK_PER_MOVE_ACTION);
+            glTexCoord2f(1,1);
+            glVertex3f(moveCircleX+2*WALK_PER_MOVE_ACTION, 0.1, 
+                       moveCircleZ+2*WALK_PER_MOVE_ACTION);
+            glTexCoord2f(1,0);
+            glVertex3f(moveCircleX+2*WALK_PER_MOVE_ACTION, 0.1, 
+                       moveCircleZ-2*WALK_PER_MOVE_ACTION);
+         glEnd();
+         glDisable(GL_TEXTURE_2D);
+      glPopMatrix();
+
+
+       /* Normal Circle */
+       glPushMatrix();
+         glEnable(GL_TEXTURE_2D);
+         glBindTexture(GL_TEXTURE_2D, normalMoveCircle );
+         glBegin(GL_QUADS);
+            glTexCoord2f(0,0);
+            glVertex3f(moveCircleX-WALK_PER_MOVE_ACTION, 0.2, 
+                       moveCircleZ-WALK_PER_MOVE_ACTION);
+            glTexCoord2f(0,1);
+            glVertex3f(moveCircleX-WALK_PER_MOVE_ACTION, 0.2, 
+                       moveCircleZ+WALK_PER_MOVE_ACTION);
+            glTexCoord2f(1,1);
+            glVertex3f(moveCircleX+WALK_PER_MOVE_ACTION, 0.2, 
+                       moveCircleZ+WALK_PER_MOVE_ACTION);
+            glTexCoord2f(1,0);
+            glVertex3f(moveCircleX+WALK_PER_MOVE_ACTION, 0.2, 
+                       moveCircleZ-WALK_PER_MOVE_ACTION);
+         glEnd();
+         glDisable(GL_TEXTURE_2D);
+      glPopMatrix();
+
+      glDisable(GL_BLEND);
+   }
+
    /* Draw Particles */
    glPushMatrix();
       particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
                                    PCs->personagemAtivo->posicaoLadoZ);
    glPopMatrix();
+
 
    /* Draw the GUI and others */
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);

@@ -51,6 +51,12 @@ class fightSystem
      * \return true if battle continue, false otherwise.
      ***************************************************************/
      bool doBattleCicle(string& brief);
+ 
+     /*!
+     *************************************************************** 
+     * Empty All the Battle System
+     ***************************************************************/
+     void empty();
 
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */

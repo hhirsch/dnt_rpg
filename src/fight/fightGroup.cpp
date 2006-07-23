@@ -11,6 +11,14 @@
  ***************************************************************/
 fightGroup::fightGroup()
 {
+   empty();
+}
+
+/***************************************************************
+ *                         Empty                               *
+ ***************************************************************/
+void fightGroup::empty()
+{
    int i;
 
    /* mark with NULL all pointers */
@@ -113,10 +121,12 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
  ***************************************************************/
 bool fightGroup::anyoneIsAliveAndInRange()
 { 
+   //TODO verify range!
    int i;
    for(i=0;i<actualCharacters;i++)
    {
-      if(!characters[i]->dead)
+      if( (!characters[i]->dead) && 
+          (characters[i]->psychoState == PSYCHO_HOSTILE) )
       {
          return(true);
       }

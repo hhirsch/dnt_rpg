@@ -102,7 +102,7 @@ personagem* initiative::nextCharacter()
    {
       actual = actual->next;
    }
-   if(ret)
+   if( (ret) )
    {
       return(ret->character);
    }
