@@ -52,6 +52,12 @@ class initiative
      * \return pointer to next character to play.
      ***************************************************************/
      personagem* nextCharacter();
+     /*!
+     *************************************************************** 
+     * Gets the actual Character to Playing.  
+     * \return pointer to actual character to playing.
+     ***************************************************************/
+     personagem* actualCharacter();
 
    private:
      initiativeStruct* first;  /**< First character on initiative list */

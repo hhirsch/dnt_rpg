@@ -125,21 +125,25 @@ int main()
    string brief;
 
    fightSystem fight;
+   attacker.psychoState = PSYCHO_HOSTILE;
    fight.insertNPC(&attacker, 0, brief);
    printf("%s\n",brief.c_str());
    brief = "";
+   target.psychoState = PSYCHO_HOSTILE;
    fight.insertNPC(&target, 1, brief);
    printf("%s\n",brief.c_str());
    brief = "";
+   other.psychoState = PSYCHO_HOSTILE;
    fight.insertNPC(&other, 0, brief);
    printf("%s\n",brief.c_str());
    brief = "";
+   ot.psychoState = PSYCHO_HOSTILE;
    fight.insertNPC(&ot, 2, brief);
    printf("%s\n",brief.c_str());
    brief = "";
 
 
-   while(fight.doBattleCicle(brief))
+   while(fight.doBattleCicle(brief) != FIGHT_END)
    {
       printf("%s\n",brief.c_str());
       brief = "";

@@ -16,6 +16,10 @@
 #define FIGHT_MOVIMENTATION_BEFORE 1 /**< Movimentation before action */
 #define FIGHT_MOVIMENTATION_AFTER  2 /**< Movimentation after action */
 
+#define FIGHT_END 0
+#define FIGHT_PC_TURN 1
+#define FIGHT_CONTINUE 2
+
 /*! The fight System Implementation */
 class fightSystem
 {
@@ -50,13 +54,20 @@ class fightSystem
      * \param brief -> briefing to print, lines separed by '|' .
      * \return true if battle continue, false otherwise.
      ***************************************************************/
-     bool doBattleCicle(string& brief);
+     int doBattleCicle(string& brief);
  
      /*!
      *************************************************************** 
      * Empty All the Battle System
      ***************************************************************/
      void empty();
+
+     /*!
+     *************************************************************** 
+     * Gets actual character's that is in turn
+     * \return character that is in turn.
+     ***************************************************************/
+     personagem* actualCharacterTurn();
 
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
@@ -77,7 +88,7 @@ class fightSystem
      * \param brief -> briefing to print, lines separed by '|' .
      * \return true if battle continue, false otherwise.
      ***************************************************************/
-     bool doTurn(string& brief);
+     int doTurn(string& brief);
      /*!
      *************************************************************** 
      * Do a npc action for character.  
@@ -85,13 +96,6 @@ class fightSystem
      * \param brief -> briefing to print, lines separed by '|' .
      ***************************************************************/
      void doNPCAction(personagem* pers, string& brief);
-     /*!
-     *************************************************************** 
-     * Get an action for player character.  
-     * \param pers -> Pointer to Character that will act
-     * \param brief -> briefing to print, lines separed by '|' .
-     ***************************************************************/
-     void getPCAction(personagem* pers, string& brief);
      /*!
      *************************************************************** 
      * Get the attack feat for NPC to use  

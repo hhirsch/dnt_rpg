@@ -115,7 +115,7 @@ bool fightSystem::hasEnemies(personagem* pers, string& brief)
        }
    }
 
-   brief += "| "+ language.FIGHT_END_NOENEMIES;
+   brief += "|"+ language.FIGHT_END_NOENEMIES;
    return(false);
 }
 
@@ -123,7 +123,7 @@ bool fightSystem::hasEnemies(personagem* pers, string& brief)
 /***************************************************************
  *                           doRound                           *
  ***************************************************************/ 
-bool fightSystem::doTurn(string& brief)
+int fightSystem::doTurn(string& brief)
 {
    string tmp;
    personagem* pers;
@@ -140,12 +140,13 @@ bool fightSystem::doTurn(string& brief)
       if(pers == NULL)
       {
          brief += language.FIGHT_ERROR_NO_CHARACTERS;
-         return(false);
+         return(FIGHT_END);
       }
    }
 
    /* don't play with dead characters or not Hostile Ones */
-   while( (pers->dead) || (pers->psychoState != PSYCHO_HOSTILE) )
+   while( (pers->dead) || 
+          ( (!isPC(pers)) && (pers->psychoState != PSYCHO_HOSTILE)) )
    {
       pers = charsInitiatives.nextCharacter();
       if(pers == NULL)
@@ -157,7 +158,7 @@ bool fightSystem::doTurn(string& brief)
          if(pers == NULL)
          {
             brief += language.FIGHT_ERROR_NO_CHARACTERS;
-            return(false);
+            return(FIGHT_END);
          }
       }
    }
@@ -165,8 +166,13 @@ bool fightSystem::doTurn(string& brief)
    tmp = "";
    if(isPC(pers))
    {
-      getPCAction(pers,tmp);
-      brief += "|" + tmp;
+       if(!hasEnemies(pers, brief))
+       {
+          /* There's no more enemies, so no more battle */
+          return(FIGHT_END);
+       }
+       brief = pers->nome + "turn.";
+       return(FIGHT_PC_TURN);
    }
    else
    { 
@@ -177,20 +183,16 @@ bool fightSystem::doTurn(string& brief)
    if(!hasEnemies(pers, brief))
    {
       /* There's no more enemies, so no more battle */
-      return(false);
+      return(FIGHT_END);
    }
 
-   /*FIXME Delay here is only for test on text mode... 
-     on graphic it won't be necessary. */
-   SDL_Delay(1);
-
-   return(true);
+   return(FIGHT_CONTINUE);
 }
 
 /***************************************************************
  *                       doBattleCicle                         *
  ***************************************************************/
-bool fightSystem::doBattleCicle(string& brief)
+int fightSystem::doBattleCicle(string& brief)
 {
    return(doTurn(brief));
 }
@@ -220,29 +222,20 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
       if( (pers->actualEnemy != NULL) && (attackFeat != -1))
       {
          brief += pers->nome + " " + language.FIGHT_ATTACKS + " " + 
-                  pers->actualEnemy->nome + " | ";
+                  pers->actualEnemy->nome + "|";
          pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
                                                    *pers->actualEnemy, brief);
          
          if(pers->actualEnemy->dead)
          {
-            brief += " | " + pers->actualEnemy->nome +" "+ language.FIGHT_DEAD;
+            brief += "|" + pers->actualEnemy->nome +" "+ language.FIGHT_DEAD;
          }
         
       }
 
    //TODO call the animations and sound effects.
- 
    doNPCMovimentation(pers,FIGHT_MOVIMENTATION_AFTER);
 
-}
-
-/***************************************************************
- *                       getPCAction                           *
- ***************************************************************/
-void fightSystem::getPCAction(personagem* pers, string& brief)
-{
-   //TODO
 }
 
 /***************************************************************
@@ -314,5 +307,13 @@ void fightSystem::empty()
    {
        npcGroups[i].empty();
    }
+}
+
+/***************************************************************
+ *                  actualCharacterTurn                        *
+ ***************************************************************/
+personagem* fightSystem::actualCharacterTurn()
+{
+   return(charsInitiatives.actualCharacter());
 }
 

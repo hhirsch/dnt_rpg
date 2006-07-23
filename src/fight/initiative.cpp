@@ -111,3 +111,18 @@ personagem* initiative::nextCharacter()
       return(NULL);
    }
 }
+
+/***************************************************************
+ *                       actualCharacter                       *
+ ***************************************************************/
+personagem* initiative::actualCharacter()
+{
+   if(actual)
+   {
+      return(actual->character);
+   }
+   else
+   {
+      return(NULL);
+   }
+}

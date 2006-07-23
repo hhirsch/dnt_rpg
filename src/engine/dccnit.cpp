@@ -731,9 +731,11 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                        ch = (personagem*) ch->proximo; 
                        SDL_Delay(1);
                     }
+                    
+                    /* Define PC turn, cause the round of surprise attack! */
+                    fightStatus = FIGHT_PC_TURN;
 
-                    briefTxt->texto += "Enter Attack Mode!";
-                    //printf("Enter Attack Mode! Yeba!\n");
+                    briefTxt->texto += "Surprise Attack Turn!";
                  }
                  else
                  {
@@ -751,11 +753,11 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
            } 
            else if(object == (Tobjeto*) buttonEndTurn)
            {
-              if( engineMode == ENGINE_MODE_TURN_BATTLE )
+              /* END TURN */
+              if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
+                  (fightStatus == FIGHT_PC_TURN) )
               {
-                 //TODO verifies battle end, etc.
-                 engineMode = ENGINE_MODE_REAL_TIME;
-                 briefTxt->texto = "Exit Attack Mode!";
+                 fightStatus = FIGHT_CONTINUE;
               }
            }
            break;
@@ -1511,7 +1513,8 @@ void engine::Draw()
    }
 
    /* Draw Combat Mode Things */
-   if(engineMode == ENGINE_MODE_TURN_BATTLE)
+   if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
+       (fightStatus == FIGHT_PC_TURN))
    {
        /* Draw Movimentation Circles */
        glColor4f(1,1,1,1);
@@ -2306,6 +2309,7 @@ int engine::Run(SDL_Surface *surface)
    snd->LoadSample(SOUND_WALK,"../data/sndfx/passos.ogg");
 
    int forcaAtualizacao = 0; //force screen atualization FIXME, no more used
+   int time;
    actualFPS = 10.0;
    lastFPS = 0;
 
@@ -2329,6 +2333,33 @@ int engine::Run(SDL_Surface *surface)
    /* Main Things Run */
    while(threatIO(surface,&forcaAtualizacao))
    {
+
+     /* Verify End of battle */
+     if(engineMode == ENGINE_MODE_TURN_BATTLE) 
+     {
+        time = SDL_GetTicks();
+        if(fightStatus == FIGHT_END)
+        {
+           engineMode = ENGINE_MODE_REAL_TIME;
+           briefTxt->texto += "|Exit Attack Mode!";
+        }
+        //FIXME define max time by animations "called". call animations. jeje
+        else if( (fightStatus == FIGHT_CONTINUE) &&
+                 (lastTurnTime - time > 1000) ) 
+        {
+           lastTurnTime = time;
+           fightStatus = fight.doBattleCicle(briefTxt->texto);
+
+           if(fightStatus == FIGHT_PC_TURN)
+           {
+               PCs->personagemAtivo = fight.actualCharacterTurn();
+               moveCircleX = PCs->personagemAtivo->posicaoLadoX;
+               moveCircleY = PCs->personagemAtivo->posicaoLadoY;
+               moveCircleZ = PCs->personagemAtivo->posicaoLadoZ;
+           }
+ 
+        }
+     }
      #ifdef REDE
       /* Network Code. For now, we aren't using the network anymore, 
        * it's not on the initial project scope, only being useful in

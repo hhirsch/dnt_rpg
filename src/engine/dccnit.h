@@ -250,6 +250,10 @@ class engine
               fullMoveCircle;      /**< Full Round Movimentation Circle */
 
       fightSystem fight;           /**< The Engine fight System */
+
+      GLuint lastTurnTime;        /**< Time when last calls for turn */
+      int fightStatus;             /**< Current Fight Status */
+
 };
 
 #endif
