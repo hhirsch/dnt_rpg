@@ -735,11 +735,11 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                     /* Define PC turn, cause the round of surprise attack! */
                     fightStatus = FIGHT_PC_TURN;
 
-                    briefTxt->texto += "Surprise Attack Turn!";
+                    briefTxt->texto += language.FIGHT_SURPRISE_TURN;
                  }
                  else
                  {
-                    briefTxt->texto = "No NPCs in the Area.";
+                    briefTxt->texto = language.FIGHT_NO_NPCS;
                  }
               }
            }
@@ -2341,7 +2341,7 @@ int engine::Run(SDL_Surface *surface)
         if(fightStatus == FIGHT_END)
         {
            engineMode = ENGINE_MODE_REAL_TIME;
-           briefTxt->texto += "|Exit Attack Mode!";
+           briefTxt->texto += "|" + language.FIGHT_EXIT;
         }
         //FIXME define max time by animations "called". call animations. jeje
         else if( (fightStatus == FIGHT_CONTINUE) &&

@@ -73,6 +73,10 @@ class lang
    static string FIGHT_ERROR_NO_CHARACTERS;
    static string FIGHT_ATTACKS;
    static string FIGHT_DEAD;
+   static string FIGHT_TURN;
+   static string FIGHT_EXIT;
+   static string FIGHT_SURPRISE_TURN;
+   static string FIGHT_NO_NPCS;
 
    /* feats */
    static string FEAT_INVALID;

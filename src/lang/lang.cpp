@@ -105,6 +105,10 @@ void lang::ReloadFile(int lng)
    getline(file,FIGHT_ERROR_NO_CHARACTERS);
    getline(file,FIGHT_ATTACKS);
    getline(file,FIGHT_DEAD);
+   getline(file,FIGHT_TURN);
+   getline(file,FIGHT_EXIT);
+   getline(file,FIGHT_SURPRISE_TURN);
+   getline(file,FIGHT_NO_NPCS);
 
    /* feats */
    getline(file,FEAT_INVALID);
@@ -177,6 +181,10 @@ string lang::VERSION;
    string lang::FIGHT_ERROR_NO_CHARACTERS;
    string lang::FIGHT_ATTACKS;
    string lang::FIGHT_DEAD;
+   string lang::FIGHT_TURN;
+   string lang::FIGHT_EXIT;
+   string lang::FIGHT_SURPRISE_TURN;
+   string lang::FIGHT_NO_NPCS;
 
    /* feats */
    string lang::FEAT_INVALID;
