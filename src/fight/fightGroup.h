@@ -37,9 +37,10 @@ class fightGroup
      *************************************************************** 
      * Verify if there's any character alive and in range 
      * in the Group  
+     * \param onlyHostile -> if true, only accept hostile characters
      * \return true if someone is alive and in range.
      ***************************************************************/
-     bool anyoneIsAliveAndInRange();
+     bool anyoneIsAliveAndInRange(bool onlyHostile);
      /*!
      *************************************************************** 
      * Get better to attack character enemy to pers.  

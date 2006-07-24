@@ -540,6 +540,11 @@ void personagem::SetState(int state)
    }
 }
 
+int personagem::GetState()
+{
+   return(m_state);
+}
+
 void personagem::DefineMaxLifePoints(int maxPoints)
 {
   maxLifePoints = maxPoints;
@@ -603,16 +608,18 @@ Lpersonagem::~Lpersonagem()
 /*********************************************************************
  *                    Insere Personagem na Lista                     *
  *********************************************************************/
-personagem* Lpersonagem::InserirPersonagem(char* retrato, string nome, 
-                                           string arqmodelo,featsList* ft)
+personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
 
 {
+   FILE* arq;
+   char buffer[128];
+   char buf2[128];
+   string buf;
+   string arqModelo;
    personagem* novo;
    novo = new personagem(ft);
    novo->portraits = new(Tlista);
    novo->objects = new(Tlista);
-   //novo->x = x;
-   //novo->y = y;
    novo->tipo = PERSONAGEM;
    novo->actualWeapon = NULL;
    novo->orientacao = 0.0;
@@ -621,17 +628,108 @@ personagem* Lpersonagem::InserirPersonagem(char* retrato, string nome,
    novo->posicaoLadoZ = 0.0;
    novo->posicaoLadoY = 0.0;
    novo->dead = false;
-   novo->nome = nome;
+
+   if(!(arq = fopen(file.c_str(),"r")))
+   {
+      printf("Error while opening character file: %s\n",file.c_str());
+	return(0);
+   }
+
+   /* Character Name */
+   fscanf(arq, "%s", buffer);
+   novo->nome = buffer;
+   fscanf(arq, "%s", buffer);
+   arqModelo = buffer;
+   fscanf(arq, "%s", buffer);
+   novo->retratoConversa = buffer;
+
+   while(fscanf(arq, "%s", buffer) != EOF)
+   {
+      buf = buffer;
+      if(buf == "maxLifePoints")
+      {
+         fgets(buffer, sizeof(buffer),arq);
+         sscanf(buffer, "%d", &novo->lifePoints);
+         novo->maxLifePoints = novo->lifePoints;
+      }
+      else if (buf == "baseModifier")
+      {
+         fgets(buffer, sizeof(buffer),arq);
+         sscanf(buffer,  "%d/%d/%d", &novo->fortitude, &novo->reflexes, 
+                                     &novo->will); 
+      }
+      else if (buf == "attackModifier")
+      {
+         fgets(buffer, sizeof(buffer),arq);
+         sscanf(buffer, "%d", &novo->baseAttackModifier);
+         //TODO others attack modifiers
+      }
+      else if (buf == "sizeModifier")
+      {
+         fgets(buffer, sizeof(buffer),arq);
+         sscanf(buffer, "%d", &novo->sizeModifier);
+      }
+      else if (buf == "lifeDice")
+      {
+         fgets(buffer, sizeof(buffer),arq);
+         sscanf(buffer, "d%d", &novo->lifeDice);
+      }
+      else if (buf == "race")
+      {
+         fgets(buffer, sizeof(buffer),arq);
+         sscanf(buffer, "%s", &buf2[0]);
+         novo->race = numberConstant(buf2);
+      }
+      else if (buf == "class")
+      {
+         fgets(buffer, sizeof(buffer),arq);
+         sscanf(buffer, "%s", &buf2[0]);
+         novo->cclass = numberConstant(buf2);
+      }
+      else if (buf == "tendency")
+      {
+         fgets(buffer, sizeof(buffer),arq);
+         sscanf(buffer, "%s", &buf2[0]);
+         novo->tendency = numberConstant(buf2);
+      }
+      else if (buf == "psychoState")
+      {
+         fgets(buffer, sizeof(buffer),arq);
+         sscanf(buffer, "%d", &novo->psychoState);
+      }
+      else
+      {
+         int cn;
+         cn = numberConstant(buffer);
+         if( (isAttribute(cn)) || (isSkill(cn)) )
+         {
+            fgets(buffer, sizeof(buffer),arq);
+            sscanf(buffer, "%d", &novo->sk.m_skills[cn].pontos);
+            //TODO COSTS per SKILL, based on classes...
+         }
+         else
+         {
+            fgets(buffer, sizeof(buffer),arq);
+         }
+         //TODO FEATS.
+      }
+
+      /*else if ( (buf == ATT_STR_LEVEL) || (buf == ATT_STR_STRENGHT) ||
+                (buf == ATT_STR_DEXTERY) || (buf == ATT_STR_CONSTITUTION) ||
+                (buf == ATT_STR_INTELIGENCY) || (buf == ATT_STR_WISDOW) ||
+                (buf == ATT_STR_CHARISM) )*/
+
+   }
+  
+   /* Define CA TODO others values to sum here*/ 
+   novo->armatureClass = 10 + novo->sizeModifier + novo->attBonus(ATT_DEXTERY);
+   
    /* Define os Retratos */
-   novo->portraits->InserirFigura(POSRETX,POSRETY,0,0,retrato);
-    
-   //FIXME redefine it by class or something different.
-   novo->DefineMaxLifePoints(10);
+   novo->portraits->InserirFigura(POSRETX,POSRETY,0,0,
+                                         novo->retratoConversa.c_str());
+   novo->LoadModel(arqModelo);
 
-   novo->LoadModel(arqmodelo);
-
-   novo->tipo = PERSONAGEM;
-
+   
    InserirObj(novo);
    personagemAtivo = novo;
 

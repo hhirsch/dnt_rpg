@@ -12,7 +12,7 @@
 initiative::initiative()
 {
    first = NULL;
-   actual = NULL;
+   next = NULL;
 }
 
 /***************************************************************
@@ -28,7 +28,7 @@ initiative::~initiative()
       delete(first);
    }
    first = NULL;
-   actual = NULL;
+   next = NULL;
 }
 
 /***************************************************************
@@ -89,7 +89,7 @@ void initiative::insertCharacter(personagem* pers, string& brief)
  ***************************************************************/
 void initiative::newRound()
 {
-   actual = first;
+   next = first;
 }
 
 /***************************************************************
@@ -97,14 +97,14 @@ void initiative::newRound()
  ***************************************************************/
 personagem* initiative::nextCharacter()
 {
-   initiativeStruct* ret = actual;
-   if(actual)
+   actual = next;
+   if(next)
    {
-      actual = actual->next;
+      next = next->next;
    }
-   if( (ret) )
+   if( actual )
    {
-      return(ret->character);
+      return(actual->character);
    }
    else
    {
@@ -113,7 +113,7 @@ personagem* initiative::nextCharacter()
 }
 
 /***************************************************************
- *                       actualCharacter                       *
+ *                       nextCharacter                       *
  ***************************************************************/
 personagem* initiative::actualCharacter()
 {

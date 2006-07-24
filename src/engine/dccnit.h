@@ -191,6 +191,12 @@ class engine
        ***************************************************************/
       void drawSphereToList(int lats, int longs);
 
+      /*!
+       ************************************************************** 
+       * actualize all PCs health bars to the current pcs life
+       ***************************************************************/
+      void actualizeAllHealthBars();
+
       Map* actualMap;              /**< Actual Engine Map */
       cursor* cursors;             /**< Utilized mouse cursors */
  
@@ -254,6 +260,9 @@ class engine
       GLuint lastTurnTime;        /**< Time when last calls for turn */
       int fightStatus;            /**< Current Fight Status */
       bool fullMovePCAction;      /**< Taked Full Move Action on round? */
+      bool canAttack;             /**< can attack in the round? */
+      bool canMove;               /**< can move more in the round? */
+      int attackFeat;             /**< attack feat to use. */
 
 };
 

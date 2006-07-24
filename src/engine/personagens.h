@@ -85,6 +85,10 @@ class personagem: public Tobjeto, public thing
        * \param state -> state ID to be defined. */
       void SetState(int state);
 
+      /*! Gets the animation state of the model.
+       * \return state ID of the current animation */
+      int GetState();
+
       /*! Render the model to the current frame state on screen. */
       void Render();
 
@@ -134,8 +138,7 @@ class Lpersonagem: public Tlista
        * \param nome -> Character's Name
        * \param arqmodelo -> character's Cal3D file name
        * \param ft -> featsList of all feats on game */
-      personagem* InserirPersonagem(char* retrato,string nome,string arqmodelo,
-                                    featsList* ft);
+      personagem* InserirPersonagem(string file, featsList* ft);
                                     
       /*!
        * Remove one character from list

@@ -264,8 +264,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
            atualizaCarga(img,&texturaTexto,texturaCarga,
                          texto,
                          proj, modl, viewPort);
-           per = NPCs->InserirPersonagem("../data/pics/logan/portrait.jpg",
-                                         nome,arquivo,features);
+           per = NPCs->InserirPersonagem(arquivo,features);
            per->posicaoLadoX = posX;
            per->posicaoLadoZ = posZ;
          }
@@ -283,11 +282,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
        atualizaCarga(img,&texturaTexto,texturaCarga,
                  texto,
                  proj, modl, viewPort);
-       per = PCs->InserirPersonagem("../data/pics/logan/portrait.jpg",
-                              "Logan",
-                       "../data/models/personagens/Logan/modelo.cfg",
-                       features);
-       per->DefineActualLifePoints(7);
+       per = PCs->InserirPersonagem("../data/characters/pcs/logan.pc",features);
+       per->DefineMaxLifePoints(per->maxLifePoints);
        /*atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading Character: Gushm",
                  proj, modl, viewPort);
@@ -694,6 +690,14 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
    int numEnemies = 0;
    personagem* ch;
    string briefInit;
+
+   //FIXME not here the dices!
+   diceThing dc;
+   dc.baseDice.diceID = DICE_D8;
+   dc.baseDice.numberOfDices = 2;
+   dc.baseDice.sumNumber = 4;
+   dc.initialLevel = 1;
+
    switch(eventInfo)
    {
        case TABBOTAOPRESSIONADO:
@@ -711,6 +715,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                     fight.insertNPC(ch, 0, briefInit);
                     briefTxt->texto += briefInit + "|";
                     numEnemies++;
+                    ch->actualFeats.defineMeleeWeapon(dc); //FIXME
                     ch = (personagem*) ch->proximo; 
                     SDL_Delay(1);
                  }
@@ -728,6 +733,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                     {
                        fight.insertPC(ch, 0, briefInit);
                        briefTxt->texto += briefInit + "|";
+                       ch->actualFeats.defineMeleeWeapon(dc); //FIXME
                        ch = (personagem*) ch->proximo; 
                        SDL_Delay(1);
                     }
@@ -735,6 +741,10 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                     /* Define PC turn, cause the round of surprise attack! */
                     fightStatus = FIGHT_PC_TURN;
                     fullMovePCAction = false;
+                    canMove = true;
+                    //TODO Verify if weapon is ranged before do this
+                    attackFeat = FEAT_MELEE_ATTACK;
+                    canAttack = true;
 
                     briefTxt->texto += language.FIGHT_SURPRISE_TURN;
                  }
@@ -1039,15 +1049,45 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
               if(estaDentro( min, max, minMouse, maxMouse, 1))
               {
-                   cursors->SetActual(CURSOR_TALK);
-                   if(shortCutsWindow)
-                   {
-                      ObjTxt->texto = pers->nome; 
-                      shortCutsWindow->Desenhar(mouseX, mouseY);
-                   }
-                   pronto = 1;
-               }
-               pers = (personagem*) pers->proximo;
+                 if( engineMode == ENGINE_MODE_REAL_TIME )
+                 {
+                    cursors->SetActual(CURSOR_TALK);
+                    if(shortCutsWindow)
+                    {
+                       ObjTxt->texto = pers->nome; 
+                       shortCutsWindow->Desenhar(mouseX, mouseY);
+                    }
+                    pronto = 1;
+                 }
+                 else
+                 if( (engineMode == ENGINE_MODE_TURN_BATTLE) && (canAttack) &&
+                     (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
+                 {
+                     //TODO verify in-range distances
+                     cursors->SetActual(CURSOR_ATTACK);
+                     if(shortCutsWindow)
+                     {
+                        ObjTxt->texto = pers->nome; 
+                        shortCutsWindow->Desenhar(mouseX, mouseY);
+                     }
+                     if(Mbotao & SDL_BUTTON(1))
+                     {
+                        briefTxt->texto = "";
+                        canAttack = !PCs->personagemAtivo->actualFeats.
+                                                        applyAttackAndBreakFeat(
+                                                          *PCs->personagemAtivo,
+                                                          attackFeat, *pers, 
+                                                          briefTxt->texto);
+                        if( pers->psychoState != PSYCHO_HOSTILE)
+                        {
+                            pers->psychoState = PSYCHO_HOSTILE;
+                        }
+
+                     }
+                     pronto = 1;
+                 }
+              }
+              pers = (personagem*) pers->proximo;
             }
          }
 
@@ -1418,7 +1458,13 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       #endif
    }
    else if(passouTempo)
-   {
+   { 
+      if( (PCs->personagemAtivo->GetState() == STATE_WALK) &&
+          (engineMode == ENGINE_MODE_TURN_BATTLE) && 
+          (fightStatus == FIGHT_PC_TURN) )
+      {
+         canMove = false;
+      }
       PCs->personagemAtivo->SetState(STATE_IDLE);
       snd->StopSample(SOUND_WALK);
    }
@@ -1773,6 +1819,11 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
        (fightStatus == FIGHT_PC_TURN))
    {
+      if(!canMove)
+      {
+         /* Already Moved */
+         return(0);
+      }
       //verify distance to the orign point
       dist = sqrt( (PCs->personagemAtivo->posicaoLadoX + varX - moveCircleX) *
                    (PCs->personagemAtivo->posicaoLadoX + varX - moveCircleX) +
@@ -2335,6 +2386,19 @@ void engine::OpenShortcutsWindow()
 }
 
 /*********************************************************************
+ *                    Actualize Actual Health Bars                   *
+ *********************************************************************/
+void engine::actualizeAllHealthBars()
+{
+   personagem* pers = (personagem*) PCs->primeiro->proximo;
+   while(pers != PCs->primeiro)
+   {
+      pers->DefineActualLifePoints(pers->lifePoints);
+      pers = (personagem*) pers->proximo;
+   }
+}
+
+/*********************************************************************
  *                          Runs the Engine                          *
  *********************************************************************/
 int engine::Run(SDL_Surface *surface)
@@ -2385,18 +2449,31 @@ int engine::Run(SDL_Surface *surface)
         }
         //FIXME define max time by animations "called". call animations. jeje
         else if( (fightStatus == FIGHT_CONTINUE) &&
-                 (lastTurnTime - time > 1000) ) 
+                 ((time - lastTurnTime) > 4000) ) 
         {
            lastTurnTime = time;
            fightStatus = fight.doBattleCicle(briefTxt->texto);
+           actualizeAllHealthBars();
 
            if(fightStatus == FIGHT_PC_TURN)
            {
-               PCs->personagemAtivo = fight.actualCharacterTurn();
-               fullMovePCAction = false;
-               moveCircleX = PCs->personagemAtivo->posicaoLadoX;
-               moveCircleY = PCs->personagemAtivo->posicaoLadoY;
-               moveCircleZ = PCs->personagemAtivo->posicaoLadoZ;
+               if(fight.actualCharacterTurn()) 
+               {
+                  PCs->personagemAtivo = fight.actualCharacterTurn();
+                  fullMovePCAction = false;
+                  canMove = true;
+                  //TODO Verify if weapon is ranged before do this
+                  attackFeat = FEAT_MELEE_ATTACK;
+                  canAttack = true;
+
+                  moveCircleX = PCs->personagemAtivo->posicaoLadoX;
+                  moveCircleY = PCs->personagemAtivo->posicaoLadoY;
+                  moveCircleZ = PCs->personagemAtivo->posicaoLadoZ;
+               }
+               else
+               { //FIXME
+                  fightStatus = FIGHT_CONTINUE;
+               }
            }
  
         }

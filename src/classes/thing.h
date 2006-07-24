@@ -33,6 +33,11 @@ class thing
       int baseAttackModifier; /**< Thing's Base Attack Modifier */
       int sizeModifier;       /**< Thing's Size Modifier */
       int psychoState;        /**< Thing's Psycho State */
+      int lifeDice;           /**< Thing's life Dice */
+
+      int race;               /**< Thing's Race */
+      int cclass;             /**< Thing's Class */
+      int tendency;           /**< Thing's Tendency */
 
       bool dead;             /**< Dead state or not.(if dead is only a corpse)*/
 

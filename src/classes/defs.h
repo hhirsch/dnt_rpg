@@ -112,16 +112,16 @@ using namespace std;
 /******************************************************************
  *                        CLASSES CONSTANTS                       *
  ******************************************************************/
-#define CLASS_EADM          0
-#define CLASS_EBIOLOGIA     1
-#define CLASS_EDCC          2
-#define CLASS_EDFISICA      3
-#define CLASS_EMECANICA     4
-#define CLASS_EFILOSOFIA    5
-#define CLASS_EFISIOTERAPIA 6
-#define CLASS_EMEDICINA     7
-#define CLASS_EMUSICA       8
-#define CLASS_ETO           9
+#define CLASS_EADM          300
+#define CLASS_EBIOLOGIA     301
+#define CLASS_EDCC          302
+#define CLASS_EDFISICA      303
+#define CLASS_EMECANICA     304
+#define CLASS_EFILOSOFIA    305
+#define CLASS_EFISIOTERAPIA 306
+#define CLASS_EMEDICINA     307
+#define CLASS_EMUSICA       308
+#define CLASS_ETO           309
 #define STR_EADM          "EADM"
 #define STR_EBIOLOGIA     "EBIOLOGIA"
 #define STR_EDCC          "EDCC"

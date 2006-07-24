@@ -61,6 +61,7 @@ class initiative
 
    private:
      initiativeStruct* first;  /**< First character on initiative list */
+     initiativeStruct* next;   /**< Next character on initiative list */
      initiativeStruct* actual; /**< Actual character on initiative list */
      lang language; /**< Language Internationalization */
 };

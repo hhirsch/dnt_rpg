@@ -97,7 +97,7 @@ bool fightSystem::hasEnemies(personagem* pers, string& brief)
    for(i=0; i < FIGHT_MAX_PC_GROUPS; i++)
    {
        if( ((isNPC) || (pers->actualFightGroup != i) ) &&  
-           (pcGroups[i].anyoneIsAliveAndInRange()) )
+           (pcGroups[i].anyoneIsAliveAndInRange(false)) )
        {
            return(true);
        }
@@ -107,7 +107,7 @@ bool fightSystem::hasEnemies(personagem* pers, string& brief)
    for(i=0; i < FIGHT_MAX_NPC_GROUPS; i++)
    {
        if( ((!isNPC) || (pers->actualFightGroup != i) ) &&
-           (npcGroups[i].anyoneIsAliveAndInRange()) )
+           (npcGroups[i].anyoneIsAliveAndInRange(true)) )
        {
            //TODO verify if npc group is evil or not to PC.
            /* at last one enemy NPC is alive */
@@ -160,7 +160,7 @@ int fightSystem::doTurn(string& brief)
             brief += language.FIGHT_ERROR_NO_CHARACTERS;
             return(FIGHT_END);
          }
-      }
+      } 
    }
 
    tmp = "";
@@ -171,7 +171,7 @@ int fightSystem::doTurn(string& brief)
           /* There's no more enemies, so no more battle */
           return(FIGHT_END);
        }
-       brief = pers->nome + language.FIGHT_TURN;
+       brief +="|"+ pers->nome + language.FIGHT_TURN;
        return(FIGHT_PC_TURN);
    }
    else

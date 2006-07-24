@@ -119,14 +119,14 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
 /***************************************************************
  *                  anyoneIsAliveAndInRange                    *
  ***************************************************************/
-bool fightGroup::anyoneIsAliveAndInRange()
+bool fightGroup::anyoneIsAliveAndInRange(bool onlyHostile)
 { 
    //TODO verify range!
    int i;
    for(i=0;i<actualCharacters;i++)
    {
       if( (!characters[i]->dead) && 
-          (characters[i]->psychoState == PSYCHO_HOSTILE) )
+          ( (!onlyHostile) || (characters[i]->psychoState == PSYCHO_HOSTILE)) )
       {
          return(true);
       }

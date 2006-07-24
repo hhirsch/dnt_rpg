@@ -34,6 +34,10 @@ void healthBar::draw(SDL_Surface* surface)
 
    /* Defines the percentual colored of the bar */
    double perc = actualHealth / (double) maxHealth;
+   if(perc < 0)
+   {
+      perc = 0;
+   }
    int mx2 = (int) (perc * (x2-x1-4)) + x1+2;
    retangulo_Colorir(surface, x1+2, y1+2, mx2, y2-2, 0);
 }
