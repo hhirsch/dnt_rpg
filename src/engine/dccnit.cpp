@@ -734,6 +734,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                     
                     /* Define PC turn, cause the round of surprise attack! */
                     fightStatus = FIGHT_PC_TURN;
+                    fullMovePCAction = false;
 
                     briefTxt->texto += language.FIGHT_SURPRISE_TURN;
                  }
@@ -1757,9 +1758,32 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 {
    int result = 1;
    Square* saux;
+   GLfloat dist = 0;
 
    GLfloat min[3],min2[3];
    GLfloat max[3],max2[3];
+
+   if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
+       (fightStatus != FIGHT_PC_TURN))
+   {
+       /* In turn mode, and not character's turn. */
+       return(0);
+   }
+   else
+   if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
+       (fightStatus == FIGHT_PC_TURN))
+   {
+      //verify distance to the orign point
+      dist = sqrt( (PCs->personagemAtivo->posicaoLadoX + varX - moveCircleX) *
+                   (PCs->personagemAtivo->posicaoLadoX + varX - moveCircleX) +
+                   (PCs->personagemAtivo->posicaoLadoZ + varZ - moveCircleZ) *
+                   (PCs->personagemAtivo->posicaoLadoZ + varZ - moveCircleZ) );
+      if(dist > 2*WALK_PER_MOVE_ACTION)
+      {
+         return(0);
+      }
+   }
+
 
    GLfloat x[4],z[4];
 
@@ -2079,6 +2103,22 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
  
    PCs->personagemAtivo->posicaoLadoY += res;
    centerY = res+30;
+
+   if(result)
+   {
+      if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
+         (fightStatus == FIGHT_PC_TURN))
+      {
+         if(dist > WALK_PER_MOVE_ACTION)
+         {
+            fullMovePCAction = true;
+         }
+         else
+         {
+            fullMovePCAction = false;
+         }
+      }
+   }
    
    return(result);
 }
@@ -2266,7 +2306,7 @@ void engine::OpenShortcutsWindow()
                                              "../data/texturas/shortcuts.png");
    buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
    tb->insertButton(7,40,43,72);/* Attack 1 */
-   tb->insertButton(7,75,43,10);/* Attack 7 */
+   tb->insertButton(7,75,43,107);/* Attack 7 */
 
    tb->insertButton(53,4,89,36);/* Guard/Sleep Mode */
    tb->insertButton(53,40,89,72);/* Attack 2 */
@@ -2334,7 +2374,7 @@ int engine::Run(SDL_Surface *surface)
    while(threatIO(surface,&forcaAtualizacao))
    {
 
-     /* Verify End of battle */
+     /* Verify battle events */
      if(engineMode == ENGINE_MODE_TURN_BATTLE) 
      {
         time = SDL_GetTicks();
@@ -2353,6 +2393,7 @@ int engine::Run(SDL_Surface *surface)
            if(fightStatus == FIGHT_PC_TURN)
            {
                PCs->personagemAtivo = fight.actualCharacterTurn();
+               fullMovePCAction = false;
                moveCircleX = PCs->personagemAtivo->posicaoLadoX;
                moveCircleY = PCs->personagemAtivo->posicaoLadoY;
                moveCircleZ = PCs->personagemAtivo->posicaoLadoZ;
@@ -2360,6 +2401,7 @@ int engine::Run(SDL_Surface *surface)
  
         }
      }
+
      #ifdef REDE
       /* Network Code. For now, we aren't using the network anymore, 
        * it's not on the initial project scope, only being useful in
