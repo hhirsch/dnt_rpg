@@ -285,6 +285,11 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
               *eventInfo = BOTAOPRESSIONADO;
               return(objAtivo);
            }
+           else
+           {
+              *eventInfo = BOTAOEMPRESSAO;
+              return(objAtivo);
+           }
         }
         else if(pronto)
         {

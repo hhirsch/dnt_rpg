@@ -45,6 +45,8 @@ class options
       int          prevLanguage;   /**< Previous Used Language */
       lang         language;       /**< Language Used */
 
+      int timeLastOperation;       /**< Ticks when done last operation */
+
       botao* buttonMusSum;
       botao* buttonMusDec;
       botao* buttonSndSum;

@@ -12,6 +12,9 @@ options::options(string file)
 {
    FILE* arq;
    char buffer[128];
+  
+   timeLastOperation = SDL_GetTicks();
+
    if(!(arq = fopen(file.c_str(),"r")))
    {
       printf("Error while opening Options: %s\n",file.c_str());
@@ -174,8 +177,11 @@ void options::DisplayOptionsScreen(interface* interf)
 
 int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
 {
-   if(eventInfo == BOTAOPRESSIONADO)
+   if( (eventInfo == BOTAOEMPRESSAO) && 
+         (SDL_GetTicks() - timeLastOperation > 100) )
    {
+      timeLastOperation = SDL_GetTicks();
+
       if(object == (Tobjeto*) buttonMusSum)
       {
          if(musicVolume < SDL_MIX_MAXVOLUME)
@@ -218,13 +224,16 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
             langNumber--;
          }
       }
-      if(object == (Tobjeto*) buttonConfirm) 
+   }
+   else if(eventInfo == BOTAOPRESSIONADO) 
+   {
+      if( (object == (Tobjeto*) buttonConfirm) )
       {
          Save();
          window->Fechar(interf->ljan);
          return(OPTIONSW_CONFIRM);
       }
-      if(object == (Tobjeto*) buttonCancel)
+      if( (object == (Tobjeto*) buttonCancel) )
       {
          musicVolume = prevMusicVolume;
          sndfxVolume = prevSndfxVolume;
@@ -233,7 +242,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          return(OPTIONSW_CANCEL);
       }
    }
-   
+
    char tmp[5];
    sprintf(tmp,"%d",musicVolume);
    txtMusicVolume->texto = tmp;
