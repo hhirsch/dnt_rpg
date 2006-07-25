@@ -1097,7 +1097,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
          /* Map Connections Verification */
-         if( ( quaux->mapConection.active ) && (!pronto) )
+         if( ( quaux->mapConection.active ) && (!pronto) && 
+             (engineMode == ENGINE_MODE_REAL_TIME) ) 
+             /* Don't travel on battle mode */
          {
             GLfloat minCon[3], maxCon[3];
             minCon[0] = quaux->mapConection.x1;
