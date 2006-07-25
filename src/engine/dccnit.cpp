@@ -708,6 +708,11 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
               {
                  briefTxt->texto = "";
                  fight.empty();
+                 if(!NPCs)
+                 {
+                    briefTxt->texto = language.FIGHT_NO_NPCS;
+                    return;
+                 }
                  ch =(personagem*) NPCs->primeiro->proximo;
                  while(ch != NPCs->primeiro)
                  {
