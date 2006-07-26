@@ -13,6 +13,7 @@ initiative::initiative()
 {
    first = NULL;
    next = NULL;
+   actual = NULL;
 }
 
 /***************************************************************

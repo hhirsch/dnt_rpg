@@ -128,7 +128,7 @@ int fightSystem::doTurn(string& brief)
    string tmp;
    personagem* pers;
    brief = "";
-
+ 
    pers = charsInitiatives.nextCharacter();
 
    if(pers == NULL)

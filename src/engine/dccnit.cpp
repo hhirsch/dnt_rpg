@@ -771,7 +771,8 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
            {
               /* END TURN */
               if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
-                  (fightStatus == FIGHT_PC_TURN) )
+                  (fightStatus == FIGHT_PC_TURN)  && 
+                  ((SDL_GetTicks() - lastTurnTime) > 200) )
               {
                  fightStatus = FIGHT_CONTINUE;
               }
