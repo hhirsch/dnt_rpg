@@ -21,15 +21,7 @@ initiative::initiative()
  ***************************************************************/
 initiative::~initiative()
 {
-   initiativeStruct* aux;
-   while(first)
-   {
-      aux = first;
-      first = aux->next;
-      delete(first);
-   }
-   first = NULL;
-   next = NULL;
+   clear();
 }
 
 /***************************************************************
@@ -114,7 +106,7 @@ personagem* initiative::nextCharacter()
 }
 
 /***************************************************************
- *                       nextCharacter                       *
+ *                       nextCharacter                         *
  ***************************************************************/
 personagem* initiative::actualCharacter()
 {
@@ -126,4 +118,20 @@ personagem* initiative::actualCharacter()
    {
       return(NULL);
    }
+}
+
+/***************************************************************
+ *                            clear                            *
+ ***************************************************************/
+void initiative::clear()
+{
+   initiativeStruct* aux;
+   while(first)
+   {
+      aux = first;
+      first = aux->next;
+      delete(first);
+   }
+   first = NULL;
+   next = NULL;
 }

@@ -307,6 +307,8 @@ void fightSystem::empty()
    {
        npcGroups[i].empty();
    }
+
+   charsInitiatives.clear();
 }
 
 /***************************************************************

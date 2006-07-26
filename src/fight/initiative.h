@@ -58,6 +58,11 @@ class initiative
      * \return pointer to actual character to playing.
      ***************************************************************/
      personagem* actualCharacter();
+     /*!
+     *************************************************************** 
+     * Clears The initiative List.  
+     ***************************************************************/
+     void clear();
 
    private:
      initiativeStruct* first;  /**< First character on initiative list */
