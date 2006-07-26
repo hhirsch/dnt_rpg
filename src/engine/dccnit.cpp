@@ -1078,12 +1078,19 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                      }
                      if(Mbotao & SDL_BUTTON(1))
                      {
-                        briefTxt->texto = "";
+                        briefTxt->texto = PCs->personagemAtivo->nome + " " + 
+                                          language.FIGHT_ATTACKS + " " + 
+                                          pers->nome + "|";
                         canAttack = !PCs->personagemAtivo->actualFeats.
                                                         applyAttackAndBreakFeat(
                                                           *PCs->personagemAtivo,
                                                           attackFeat, *pers, 
                                                           briefTxt->texto);
+                        if(pers->dead)
+                        {
+                           briefTxt->texto += "|" + pers->nome + " " +  
+                                              language.FIGHT_DEAD;
+                        }
                         if( pers->psychoState != PSYCHO_HOSTILE)
                         {
                             pers->psychoState = PSYCHO_HOSTILE;
