@@ -727,6 +727,8 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                  
                  if(numEnemies > 0)
                  {
+                    snd->LoadSample(SOUND_ACTION3,"../data/sndfx/battleMode.ogg");
+                    snd->PlaySample(SOUND_ACTION3);
                     engineMode = ENGINE_MODE_TURN_BATTLE;
                     moveCircleX = PCs->personagemAtivo->posicaoLadoX;
                     moveCircleY = PCs->personagemAtivo->posicaoLadoY;
@@ -1027,7 +1029,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             pers = (personagem*) pers->proximo;
          }
 
-         /* TODO Talk Events Verification */
+         /* Talk And Attack Events Verification */
          if(NPCs)
          {
             pers = (personagem*) NPCs->primeiro->proximo;
@@ -1063,6 +1065,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                        ObjTxt->texto = pers->nome; 
                        shortCutsWindow->Desenhar(mouseX, mouseY);
                     }
+                    //TODO Talk
                     pronto = 1;
                  }
                  else

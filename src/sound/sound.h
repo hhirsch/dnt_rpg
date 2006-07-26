@@ -38,7 +38,7 @@ class sound
       /*! Play Sample
        * \param smp ->  sample reference ID.
        */
-      void PlaySample(int smp);
+      void PlaySample(int smp, int cnt=0);
       /*! Stop playing Sample
        * \param smp ->  sample reference ID.
        * */
@@ -57,6 +57,7 @@ class sound
      Mix_Chunk*  action1;     /**< Action 1 effect */
      Mix_Chunk*  action2;     /**< Action 2 effect */
      Mix_Chunk*  action3;     /**< Action 3 effect */
+     int channel[4];          /**< Channel Used By th Sound */
 };
 
 #endif

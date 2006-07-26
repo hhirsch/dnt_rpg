@@ -18,6 +18,12 @@ sound::sound()
    action3 = NULL;
    musicVolume = SDL_MIX_MAXVOLUME - 20;
    sndfxVolume = SDL_MIX_MAXVOLUME;
+
+   int i;
+   for(i = 0; i<SAMPLE_CHANNELS;i++)
+   {
+      channel[i] = -1;
+   }
    
 }
 
@@ -112,7 +118,7 @@ void sound::LoadSample(int smp, string file)
    }
 }
 
-void sound::PlaySample(int smp)
+void sound::PlaySample(int smp, int cnt)
 {
    switch(smp)
    {
@@ -120,9 +126,9 @@ void sound::PlaySample(int smp)
       {
          if(walk)
          {
-            if(!Mix_Playing(1))
+            if((channel[0] == -1) || (!Mix_Playing(channel[0])))
             {
-               Mix_PlayChannel(1, walk, 0);
+               channel[0] = Mix_PlayChannel(-1, walk, cnt);
             }
          }
          break;
@@ -131,9 +137,9 @@ void sound::PlaySample(int smp)
       {
          if(action1)
          { 
-            if(!Mix_Playing(2))
+            if( (channel[1] == -1) || (!Mix_Playing(channel[1])))
             {
-               Mix_PlayChannel(2, action1, 0);
+               channel[1] = Mix_PlayChannel(-1, action1, cnt);
             }
          }
          break;
@@ -142,9 +148,9 @@ void sound::PlaySample(int smp)
       {
          if(action2)
          {
-            if(!Mix_Playing(3))
+            if((channel[2] == -1) || (!Mix_Playing(channel[2])))
             {
-               Mix_PlayChannel(3, action2, 0);
+               channel[2] = Mix_PlayChannel(-1, action2, cnt);
             }
          }
          break;
@@ -153,9 +159,9 @@ void sound::PlaySample(int smp)
       {
          if(action3)
          {
-            if(!Mix_Playing(4))
+            if((channel[3] ==-1) || (!Mix_Playing(channel[3])))
             {
-               Mix_PlayChannel(4, action3, 0);
+               channel[3] = Mix_PlayChannel(-1, action3, cnt);
             }
          }
          break;
@@ -165,11 +171,16 @@ void sound::PlaySample(int smp)
 
 void sound::StopSample(int smp)
 {
-   switch(smp)
+   if(channel[smp-1] != -1)
+   {
+      Mix_HaltChannel(channel[smp-1]);
+      channel[smp-1] = -1;
+   }
+  /* switch(smp)
    {
       case SOUND_WALK:
       {
-         Mix_HaltChannel(1);
+         Mix_HaltChannel(channel[0]);
          break;
       }
       case SOUND_ACTION1:
@@ -187,7 +198,7 @@ void sound::StopSample(int smp)
          Mix_HaltChannel(4);
          break;
       }
-   }
+   }*/
 }
 
 
