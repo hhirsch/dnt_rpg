@@ -197,6 +197,12 @@ class engine
        ***************************************************************/
       void actualizeAllHealthBars();
 
+      /*!
+       ************************************************************** 
+       * Calls the game over screen
+       ***************************************************************/
+      void gameOver();
+
       Map* actualMap;              /**< Actual Engine Map */
       cursor* cursors;             /**< Utilized mouse cursors */
  

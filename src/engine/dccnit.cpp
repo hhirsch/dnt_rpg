@@ -1847,7 +1847,8 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
                    (PCs->personagemAtivo->posicaoLadoX + varX - moveCircleX) +
                    (PCs->personagemAtivo->posicaoLadoZ + varZ - moveCircleZ) *
                    (PCs->personagemAtivo->posicaoLadoZ + varZ - moveCircleZ) );
-      if(dist > 2*WALK_PER_MOVE_ACTION)
+      if( ( (canAttack) && (dist > 2*WALK_PER_MOVE_ACTION)) || 
+            (!canAttack) && (dist > WALK_PER_MOVE_ACTION))
       {
          return(0);
       }
@@ -2416,6 +2417,23 @@ void engine::actualizeAllHealthBars()
    }
 }
 
+
+void engine::gameOver()
+{
+   GLuint id;
+   SDL_Surface* img = IMG_Load("../data/texturas/fightMode/death.png"); 
+   /*cor_Definir(245,25,25);
+   selFonte(FPLATINA, CENTRALIZADO, 3);
+   escxy(img,256,426,"All Playable Characters Died.");*/
+   carregaTextura(img,&id);
+   SDL_FreeSurface(img);
+   AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
+   glFlush();
+   SDL_GL_SwapBuffers();
+   SDL_Delay(4000);
+   glDeleteTextures(1,&id);
+}
+
 /*********************************************************************
  *                          Runs the Engine                          *
  *********************************************************************/
@@ -2464,6 +2482,23 @@ int engine::Run(SDL_Surface *surface)
         {
            engineMode = ENGINE_MODE_REAL_TIME;
            briefTxt->texto += "|" + language.FIGHT_EXIT;
+           /* Verify if any PC is alive. */
+           personagem* pers = (personagem*) PCs->primeiro->proximo;
+           bool alive = false;
+           while((!alive) && (pers != PCs->primeiro))
+           {
+              if(!pers->dead)
+              {
+                 alive = true;
+              }
+              pers = (personagem*) pers->proximo;
+           }
+           if(!alive)
+           {
+              //TODO call the game over screen
+              gameOver();
+              return(0);
+           }
         }
         //FIXME define max time by animations "called". call animations. jeje
         else if( (fightStatus == FIGHT_CONTINUE) &&

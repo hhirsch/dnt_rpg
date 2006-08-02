@@ -62,9 +62,15 @@ int main(int argc, char **argv)
       if( (result == CONTINUE_GAME) || 
           ( ((result == NEW_GAME)) && (charCreation == CHAR_CONFIRM) ) ) 
       {
-         Engine->Run(screen);
+         if(Engine->Run(screen) == 1)
+         {
+            estado = IN_GAME;
+         }
+         else
+         {
+            estado = ON_INIT;
+         }
          reloadMusic = true;
-         estado = IN_GAME;
          result = Engine->InitialScreen(estado,&tituloID,reloadMusic);
       }
       else
