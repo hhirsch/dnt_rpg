@@ -611,7 +611,7 @@ void engine::Init(SDL_Surface *screen)
    //glEnable(GL_LIGHT1);
   
    /* Sky Creation */
-   drawSphereToList(10,10);
+   drawSphereToList(80,80);
 
    SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
    glGenTextures(1, &sky);

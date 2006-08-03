@@ -1,13 +1,18 @@
 ================================================
 |               Version 0.0.3                  |
 ================================================
+ - Fight System;
  - Particle System;
- - Particles (blood, fire, smoke, water surface,
-              lightning, waterfall, snow);
+ - Particles (blood, fire, smoke, waterfall, 
+              snow);
+ - Dialogs with NPCs;
+ - Some "stupid" AI;
+ - Rules System;
  - Engine Optimization;
  - Better Sky;
  - New Animations;
  - New Models;
+ - GUI more smooth and functional;
  - Camera follow active character on height;
  - Minor Bugs fixes;
  
