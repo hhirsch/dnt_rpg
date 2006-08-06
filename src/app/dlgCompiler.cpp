@@ -157,7 +157,7 @@ int defineAction(string act,int oper,int att, int* errors, int line)
 int main(int argc, char **argv)
 {
    printf("DccNiTghtmare Dialog Compiler\n");
-   printf("\tCompiler Version 0.1,\n\tfor Dccnitghtmare Version 0.0.2\n");
+   printf("\tCompiler Version 0.2,\n\tfor Dccnitghtmare Version 0.0.3\n");
 
    char* entrada = NULL;
    char c;

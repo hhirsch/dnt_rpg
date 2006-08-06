@@ -34,6 +34,7 @@ void fightGroup::empty()
  ***************************************************************/
 fightGroup::~fightGroup()
 {
+   empty();
    actualCharacters = 0;
 }
 

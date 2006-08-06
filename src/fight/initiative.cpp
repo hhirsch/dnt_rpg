@@ -130,7 +130,7 @@ void initiative::clear()
    {
       aux = first;
       first = aux->next;
-      delete(first);
+      delete(aux);
    }
    first = NULL;
    next = NULL;
