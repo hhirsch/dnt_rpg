@@ -1,6 +1,7 @@
 T 10X10
 # Made by DccNiTghtmare's MapEditor, v0.0.2
 f ../data/mapas/porta.fog
+MUSICA ../data/music/musica6.ogg
 o Door ../data/models/objetos/geral/porta.dcc
 o Small_Kalashnikov ../data/models/objetos/armas/kalashnikov_pequena.dcc
 o Computer ../data/models/objetos/geral/computador.dcc

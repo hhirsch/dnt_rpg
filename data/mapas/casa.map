@@ -1,5 +1,6 @@
 T 3X3
 # Made by DccNiTghtmare's MapEditor, v0.0.2
+MUSICA ../data/music/musica8.ogg
 o Door ../data/models/objetos/geral/porta3.dcc
 o Cadeira ../data/models/objetos/icex/cadeira.dcc
 t madeira2 ../data/texturas/parede_madeira2.png 213 181 96
