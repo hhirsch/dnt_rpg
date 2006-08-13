@@ -47,7 +47,8 @@ class skillWindow
       botao* buttonCancel;
 
       figura*      skFig;            /**< Actual skill Image */
-      lang language;                 /**< Language internationalization */
+      lang language;                 /**< Language internationalization */ 
+
 };
 
 #endif

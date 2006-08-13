@@ -462,16 +462,21 @@ int engine::CharacterScreen(GLuint* idTextura)
    Tobjeto* object = NULL;
    int eventInfo = NADA;
 
+   int status = 0;
+
   
    /*TODO Other screens*/
+   
+    skills* sk = new skills(language.SKILLS_DIR.c_str(),
+                           "../data/skills/skills.skl"); 
+
+   /* Call Att Screen */
+   attWindow* atWindow = new attWindow(sk, gui);
 
    /* Call Skill Screen */
-   skills* sk = new skills(language.SKILLS_DIR.c_str(),
-                           "../data/skills/skills.skl"); 
-   skillWindow* skWindow = new skillWindow(sk, 20, gui);
+   skillWindow* skWindow = NULL;
 
-   while( (charCreation != CHAR_CANCEL) && 
-          (charCreation != CHAR_CONFIRM))
+   while( (status != 2) )
    {
       tempo = SDL_GetTicks();
       if(tempo - tempoAnterior >= 20) 
@@ -483,11 +488,45 @@ int engine::CharacterScreen(GLuint* idTextura)
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          object = gui->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
+
          AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
-         charCreation = skWindow->treat(object, eventInfo, gui);
+
+         if(status == 0)
+         {
+             charCreation = atWindow->treat(object, eventInfo, gui);
+             if(charCreation == ATTW_CONFIRM)
+             {
+                status = 1;
+                delete(atWindow);
+                skWindow = new skillWindow(sk, 20, gui);
+             }
+             else if(charCreation == ATTW_CANCEL)
+             {
+                status = 2;
+                delete(atWindow);
+                charCreation = CHAR_CANCEL;
+             }
+         }
+         else if(status == 1)
+         {
+            charCreation = skWindow->treat(object, eventInfo, gui); 
+            if(charCreation == SKILLW_CONFIRM)
+            {
+               status = 2;
+               delete(skWindow);
+               charCreation = CHAR_CONFIRM;
+            }
+            else if(charCreation == SKILLW_CANCEL)
+            {
+               status = 2;
+               delete(skWindow);
+               charCreation = CHAR_CANCEL;
+            }
+         }
+         
       }
       else if(19 - (tempo - tempoAnterior) > 0 ) 
       {
@@ -495,7 +534,6 @@ int engine::CharacterScreen(GLuint* idTextura)
       }
    }
    delete(sk);
-   delete(skWindow);
    return(charCreation);
 }
 
@@ -1172,7 +1210,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                     PCs->personagemAtivo->posicaoLadoX,28,
                                     PCs->personagemAtivo->posicaoLadoZ, 
                                     "../data/particles/blood1.par");
-            p->followPC = true;
+            if(p)
+               p->followPC = true;
          }   
          if(keys[SDLK_o])
          {

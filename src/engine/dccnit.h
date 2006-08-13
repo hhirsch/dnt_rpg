@@ -15,6 +15,7 @@
 #include "initial.h"
 #include "options.h"
 #include "skillwindow.h"
+#include "attwindow.h"
 #include "../classes/skills.h"
 #include "../classes/feats.h"
 #include "../sound/sound.h"

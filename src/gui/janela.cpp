@@ -67,6 +67,7 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
    novo->temTextura = 0;
    novo->cara = SDL_CreateRGBSurface(SDL_HWSURFACE,xb-xa+1,yb-ya+1,32,
                          0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+
    novo->objects = new Tlista;
    botao* tmp;
    tmp = novo->objects->InserirBotao(3,3,13,12,novo->Cores.corBot.R,

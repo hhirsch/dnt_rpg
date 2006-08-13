@@ -463,7 +463,8 @@ void Iniciar(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Definicao da Luz */
-   GLfloat light_ambient[] = { 0.8, 0.6, 0.6, 1.0 };
+   GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
+#if 0 
    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat light_position[] = { 30.0, 10.0, 20.0, 0.0 };
@@ -473,6 +474,11 @@ void Iniciar(SDL_Surface *screen)
    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+#endif
+   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
+   glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
+   glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
    
    /* Habilita a iluminacao */
    glEnable(GL_LIGHTING);
