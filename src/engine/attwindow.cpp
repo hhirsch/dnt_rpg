@@ -46,6 +46,7 @@ attWindow::attWindow(skills* sk, interface* inter)
 
    window->objects->InserirQuadroTexto(8,46,85,59,0,"Strenght");
    attPoints[0] = window->objects->InserirQuadroTexto(98,44,115,61,1,"");
+   attPoints[0]->fonte = FMINI;
    attButtonPrev[0] = window->objects->InserirBotao(87,44,97,61,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
@@ -62,6 +63,7 @@ attWindow::attWindow(skills* sk, interface* inter)
 
    window->objects->InserirQuadroTexto(8,78,85,91,0,"Dextery");
    attPoints[1] = window->objects->InserirQuadroTexto(98,76,115,93,1,"");
+   attPoints[1]->fonte = FMINI;
    attButtonPrev[1] = window->objects->InserirBotao(87,76,97,93,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
@@ -78,6 +80,7 @@ attWindow::attWindow(skills* sk, interface* inter)
 
    window->objects->InserirQuadroTexto(8,112,87,125,0,"Constitution");
    attPoints[2] = window->objects->InserirQuadroTexto(98,110,115,127,1,"");
+   attPoints[2]->fonte = FMINI;
    attButtonPrev[2] = window->objects->InserirBotao(87,110,97,127,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
@@ -95,6 +98,7 @@ attWindow::attWindow(skills* sk, interface* inter)
 
    window->objects->InserirQuadroTexto(8,144,87,157,0,"Inteligency");
    attPoints[3] = window->objects->InserirQuadroTexto(98,142,115,159,1,"");
+   attPoints[3]->fonte = FMINI;
    attButtonPrev[3] = window->objects->InserirBotao(87,142,97,159,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
@@ -112,6 +116,7 @@ attWindow::attWindow(skills* sk, interface* inter)
 
    window->objects->InserirQuadroTexto(8,176,87,189,0,"Wisdow");
    attPoints[4] = window->objects->InserirQuadroTexto(98,174,115,191,1,"");
+   attPoints[4]->fonte = FMINI;
    attButtonPrev[4] = window->objects->InserirBotao(87,174,97,191,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
@@ -129,6 +134,7 @@ attWindow::attWindow(skills* sk, interface* inter)
 
    window->objects->InserirQuadroTexto(8,208,87,221,0,"Charism");
    attPoints[5] = window->objects->InserirQuadroTexto(98,206,115,223,1,"");
+   attPoints[5]->fonte = FMINI;
    attButtonPrev[5] = window->objects->InserirBotao(87,206,97,223,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
@@ -139,7 +145,7 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[0] = window->objects->InserirQuadroTexto(162,207,245,222,0,
+   attMods[5] = window->objects->InserirQuadroTexto(162,207,245,222,0,
                                                     "T:?? M:??");
    window->objects->InserirFigura(128,197,0,0,"../data/skills/Img/carisma.png");
                                               
