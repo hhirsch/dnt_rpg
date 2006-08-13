@@ -1,12 +1,14 @@
 T 7X7
-# Made by DccNiTghtmare's MapEditor, v0.0.2
+# Made by DccNiTghtmare's MapEditor, v0.0.3
 npc ../data/mapas/rua.npc
 PS ../data/mapas/rua.par
 MUSICA ../data/music/musica7.ogg
 o Axe ../data/models/objetos/armas/axe.dcc
 o Scimitar ../data/models/objetos/armas/scimitar.dcc
 o Katana ../data/models/objetos/armas/dark_katana.dcc
+o Barrel ../data/models/objetos/geral/barrel.dcc
 o Door ../data/models/objetos/geral/porta.dcc
+o fire ../data/models/natural/fogueira.dcc
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 218 168 169
 t ../data/texturas/chao_asfalto_curva_db.jpg ../data/texturas/chao_asfalto_curva_db.jpg 85 85 85
 t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
@@ -132,6 +134,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
+uo fire 1:3,6:183.000000,328.000000:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto_rcont.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -153,6 +156,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo Barrel 1:6,7:339.646057,436.001343:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 i 1,1
