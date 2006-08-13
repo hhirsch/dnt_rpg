@@ -13,6 +13,7 @@ attWindow::attWindow(skills* sk, interface* inter)
    {
       points[i] = 0;
       used[i] = false;
+      attPointsIndex[i] = -1;
    }
 
    window = inter->ljan->InserirJanela(316,186,571,441,
@@ -37,6 +38,11 @@ attWindow::attWindow(skills* sk, interface* inter)
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  "Reroll",1,NULL);
+   clearButton = window->objects->InserirBotao(175,16,220,33,
+                                 window->Cores.corBot.R,
+                                 window->Cores.corBot.G,window->Cores.corBot.B,
+                                 "Clear",1,NULL);
+
 
    window->objects->InserirQuadroTexto(8,46,85,59,0,"Strenght");
    attPoints[0] = window->objects->InserirQuadroTexto(98,44,115,61,1,"");
@@ -50,6 +56,8 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
+   attMods[0] = window->objects->InserirQuadroTexto(162,45,245,60,0,
+                                                    "T:?? M:??");
    window->objects->InserirFigura(128,37,0,0,"../data/skills/Img/forca.png");
 
    window->objects->InserirQuadroTexto(8,78,85,91,0,"Dextery");
@@ -64,6 +72,8 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
+   attMods[1] = window->objects->InserirQuadroTexto(162,77,245,92,0,
+                                                    "T:?? M:??");
    window->objects->InserirFigura(128,69,0,0,"../data/skills/Img/destreza.png");
 
    window->objects->InserirQuadroTexto(8,112,87,125,0,"Constitution");
@@ -78,6 +88,8 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
+   attMods[2] = window->objects->InserirQuadroTexto(162,111,245,126,0,
+                                                    "T:?? M:??");
    window->objects->InserirFigura(128,101,0,0,
                                          "../data/skills/Img/constituicao.png");
 
@@ -93,6 +105,8 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
+   attMods[3] = window->objects->InserirQuadroTexto(162,143,245,88,0,
+                                                    "T:?? M:??");
    window->objects->InserirFigura(128,133,0,0,
                                          "../data/skills/Img/inteligencia.png");
 
@@ -108,6 +122,8 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
+   attMods[4] = window->objects->InserirQuadroTexto(162,175,245,190,0,
+                                                    "T:?? M:??");
    window->objects->InserirFigura(128,165,0,0,
                                             "../data/skills/Img/sabedoria.png");
 
@@ -123,6 +139,8 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
+   attMods[0] = window->objects->InserirQuadroTexto(162,207,245,222,0,
+                                                    "T:?? M:??");
    window->objects->InserirFigura(128,197,0,0,"../data/skills/Img/carisma.png");
                                               
 
@@ -180,8 +198,85 @@ void attWindow::rollAllDices()
       points[i] = rollDices();
       SDL_Delay(40);
    }
-   
 }
+
+int attWindow::nextAvaiblePoints(int att)
+{
+   int i = attPointsIndex[att];
+   if(i < 0)
+   {
+      i = 0;
+   }
+   else
+   {
+      used[i] = false;
+   }
+
+   i++;
+   if(i >= 6)
+   {
+      i = 0;
+   }
+   
+   while(used[i]) 
+   {
+      i++;
+      if(i >= 6)
+      {
+         i = 0;
+      }
+   }
+
+   attPointsIndex[att] = i;
+   used[i] = true;
+   return(i);
+}
+
+int attWindow::previousAvaiblePoints(int att)
+{
+   int i = attPointsIndex[att];
+   if(i < 0)
+   {
+      i = 0;
+   }
+   else
+   {
+      used[i] = false;
+   }
+
+   i--;
+   if(i < 0)
+   {
+      i = 5;
+   }
+
+   
+   while(used[i])
+   {
+      i--;
+      if(i < 0)
+      {
+         i = 5;
+      }
+   }
+
+   attPointsIndex[att] = i;
+   used[i] = true;
+   return(i);
+}
+
+void attWindow::clear()
+{
+   int i;
+   for( i = 0; i < 6; i++)
+   {
+      used[i] = false;
+      attPointsIndex[i] = -1;
+      attPoints[i]->texto = "";
+      window->Desenhar(0,0);
+   }
+}
+
 
 int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
 {
@@ -209,6 +304,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
       }
       else if(object == (Tobjeto*) rerollButton)
       {
+          clear();
           /* ReRoll All Dices */
           rollAllDices();
           rolledPoints->texto = "";
@@ -218,6 +314,30 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
               rolledPoints->texto += tmp;
           }
           window->Desenhar(0,0);
+      }
+      else if(object == (Tobjeto*) clearButton)
+      {
+         clear();
+      }
+      else
+      {
+         for(i=0; i<6; i++) 
+         {
+            if(object == (Tobjeto*) attButtonNext[i])
+            {
+                nextAvaiblePoints(i);
+                sprintf(tmp,"%d", points[attPointsIndex[i]]);
+                attPoints[i]->texto = tmp;
+                window->Desenhar(0,0);
+            }
+            else if(object == (Tobjeto*) attButtonPrev[i])
+            {
+                previousAvaiblePoints(i);
+                sprintf(tmp,"%d", points[attPointsIndex[i]]);
+                attPoints[i]->texto = tmp;
+                window->Desenhar(0,0);
+            }
+         }
       }
    }
    return(ATTW_OTHER);

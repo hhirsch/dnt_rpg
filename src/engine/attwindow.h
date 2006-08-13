@@ -35,10 +35,12 @@ class attWindow
 
       quadroTexto* rolledPoints;
       quadroTexto* attPoints[6];
+      int attPointsIndex[6];
       quadroTexto* attMods[6];
       botao* attButtonNext[6];
       botao* attButtonPrev[6];
       botao* rerollButton;
+      botao* clearButton;
 
       botao* buttonConfirm;
       botao* buttonCancel;
@@ -47,6 +49,11 @@ class attWindow
       int rollDices();
       /*! Roll All Att Dices */
       void rollAllDices();
+
+      int nextAvaiblePoints(int att);
+      int previousAvaiblePoints(int att);
+
+      void clear();
 };
 
 #endif
