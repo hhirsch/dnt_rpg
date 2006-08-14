@@ -185,19 +185,19 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       /*TODO apply resistances  */
 
-      if(diceValue - targetValue <= 0)
+      if(diceValue - targetValue < 0)
       {
          brief += language.FEAT_MISS;
          if( criticalMiss )
          {
-             brief += " "+language.FEAT_CRITICAL_MISS ;
+             brief += "|"+language.FEAT_CRITICAL_MISS ;
              //TODO lose weapon;
          }
          return(true);
       }
       else
       {
-         brief += language.FEAT_HIT_FOR+" ";
+         brief += "|"+language.FEAT_HIT_FOR+" ";
       }
 
       /* Apply Base Damage Dices */
@@ -233,7 +233,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       if( criticalHit)
       {
-          brief += " "+ language.FEAT_CRITICAL_HIT ;
+          brief += "|"+ language.FEAT_CRITICAL_HIT ;
       }
 
       if(target.lifePoints <= 0)

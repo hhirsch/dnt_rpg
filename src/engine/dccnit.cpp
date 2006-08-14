@@ -26,6 +26,7 @@ engine::engine()
    miniMapWindow = NULL;
    shortCutsWindow = NULL;
    imgNumber = 0;
+
    /* Define Camera initial Position */
    theta=25;
    phi=0;
@@ -470,10 +471,10 @@ int engine::CharacterScreen(GLuint* idTextura)
     skills* sk = new skills(language.SKILLS_DIR.c_str(),
                            "../data/skills/skills.skl"); 
 
-   /* Call Att Screen */
+   /* Att Screen */
    attWindow* atWindow = new attWindow(sk, gui);
 
-   /* Call Skill Screen */
+   /* Skill Screen */
    skillWindow* skWindow = NULL;
 
    while( (status != 2) )
@@ -539,7 +540,7 @@ int engine::CharacterScreen(GLuint* idTextura)
 
 
 /*********************************************************************
- *                  redmensionateWindowte Engine to Screen                   *
+ *                  redmensionate Window to Screen                   *
  *********************************************************************/
 void engine::redmensionateWindow(SDL_Surface *screen)
 {
