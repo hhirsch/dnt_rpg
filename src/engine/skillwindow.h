@@ -1,6 +1,10 @@
 #ifndef _skillwindow_h
 #define _skillwindow_h
 
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include "../gui/farso.h"
 #include "../classes/skills.h"
 #include "../lang/lang.h"

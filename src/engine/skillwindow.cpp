@@ -1,3 +1,7 @@
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include "skillwindow.h"
 #include "../lang/lang.h"
 #include "../classes/defs.h"
