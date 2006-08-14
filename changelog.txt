@@ -1,17 +1,26 @@
 ================================================
-|               Version 0.0.3                  |
+|                Version 0.1                   |
 ================================================
  - Fight System;
  - Particle System;
  - Particles (blood, fire, smoke, waterfall, 
               snow);
  - Dialogs with NPCs;
- - Some "stupid" AI;
+ - Some AI;
  - Rules System;
+ - Character Navigation by Mouse;
+ - Full Character Creation;
  - Engine Optimization;
  - Better Sky;
  - New Animations;
  - New Models;
+ - New Musics and Sound Effects;
+ - New Maps;
+ - Initial Story on Game;
+ - Use some itens;
+ - Use some weapons;
+ - Inventory;
+ - Ocult Realtime Surface Rendering;
  - GUI more smooth and functional;
  - Camera follow active character on height;
  - Minor Bugs fixes;
