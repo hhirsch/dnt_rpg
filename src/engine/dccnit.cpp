@@ -10,7 +10,8 @@
 #include <SDL/SDL_image.h>
 #include "../etc/glm.h"
 
-#define REFRESH_RATE 100
+#define REFRESH_RATE 100.0
+#define ACTUALIZATION_RATE 20.0
 
 
 /*********************************************************************
@@ -419,7 +420,7 @@ int engine::OptionsScreen(GLuint* idTextura)
           (optionW != OPTIONSW_CONFIRM))
    {
       tempo = SDL_GetTicks();
-      if(tempo - tempoAnterior >= 20) 
+      if(tempo - tempoAnterior >= ACTUALIZATION_RATE) 
       {
          tempoAnterior = tempo;
          SDL_PumpEvents();
@@ -434,9 +435,9 @@ int engine::OptionsScreen(GLuint* idTextura)
          SDL_GL_SwapBuffers();
          optionW = option->Treat(object, eventInfo, interf);
       }
-      else if(19 - (tempo - tempoAnterior) > 0 ) 
+      else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
       {
-         SDL_Delay(19 - (tempo - tempoAnterior) );
+         SDL_Delay((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) );
       }
    }
 
@@ -467,6 +468,8 @@ int engine::CharacterScreen(GLuint* idTextura)
 
   
    /*TODO Other screens*/
+
+   /* TODO  put on character screen */
    
     skills* sk = new skills(language.SKILLS_DIR.c_str(),
                            "../data/skills/skills.skl"); 
@@ -480,7 +483,7 @@ int engine::CharacterScreen(GLuint* idTextura)
    while( (status != 2) )
    {
       tempo = SDL_GetTicks();
-      if(tempo - tempoAnterior >= 20) 
+      if(tempo - tempoAnterior >= ACTUALIZATION_RATE) 
       {
          tempoAnterior = tempo;
          SDL_PumpEvents();
@@ -529,9 +532,9 @@ int engine::CharacterScreen(GLuint* idTextura)
          }
          
       }
-      else if(19 - (tempo - tempoAnterior) > 0 ) 
+      else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
       {
-         SDL_Delay(19 - (tempo - tempoAnterior) );
+         SDL_Delay((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) );
       }
    }
    delete(sk);
@@ -852,7 +855,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    tempo = SDL_GetTicks();
    srand(tempo);
    varTempo = (tempo-lastRead);
-   if( ((varTempo)) >= 20)
+   if( ((varTempo)) >= ACTUALIZATION_RATE)
    {
       redesenha = true;
       passouTempo = true;
@@ -880,7 +883,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
 
       /* Calculate the real Modification on walk, rotate, turn, etc */
-      double vt = varTempo / 20.0;
+      double vt = varTempo / ACTUALIZATION_RATE;
       passo = (vt)*ANDAR;
       if(passo > 9)
         passo = 9;  /* To avoid phantom efects when LAGs occurs */
@@ -925,8 +928,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
       else
       { 
-      if( (tempo-lastMouse>=100 ) || 
-          ( (Mbotao & SDL_BUTTON(1)) && (tempo-lastMousePression>=100)) )
+      if( (tempo-lastMouse>=  REFRESH_RATE ) || 
+          ( (Mbotao & SDL_BUTTON(1)) && 
+	    (tempo-lastMousePression >= REFRESH_RATE)) )
       {
          cursors->SetActual(CURSOR_WALK);
          lastMouse = tempo;
@@ -1098,13 +1102,20 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
               {
                  if( engineMode == ENGINE_MODE_REAL_TIME )
                  {
-                    cursors->SetActual(CURSOR_TALK);
+                    if(pers->dead) 
+                    {
+                       cursors->SetActual(CURSOR_GET);
+                    }
+                    else
+                    {
+                       cursors->SetActual(CURSOR_TALK);
+                       //TODO Talk
+                    }
                     if(shortCutsWindow)
                     {
                        ObjTxt->texto = pers->nome; 
                        shortCutsWindow->Desenhar(mouseX, mouseY);
                     }
-                    //TODO Talk
                     pronto = 1;
                  }
                  else
@@ -1456,7 +1467,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    }
    else if(*forcaAtualizacao == 0)
    {
-      int tmp = (int) (19 - varTempo);
+      int tmp = (int) ((ACTUALIZATION_RATE-1) - varTempo);
       if(tmp > 0)
       SDL_Delay(tmp);
    }

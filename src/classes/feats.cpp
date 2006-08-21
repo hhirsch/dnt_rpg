@@ -185,7 +185,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       /*TODO apply resistances  */
 
-      if(diceValue - targetValue < 0)
+      if( (diceValue - targetValue < 0) || (criticalMiss) )
       {
          brief += language.FEAT_MISS;
          if( criticalMiss )

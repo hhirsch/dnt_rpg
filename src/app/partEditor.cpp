@@ -417,7 +417,7 @@ void Iniciar(SDL_Surface *screen)
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
    
    /* Habilita a iluminacao */
-   glEnable(GL_LIGHTING);
+   glDisable(GL_LIGHTING);
   
 }
 
@@ -1251,7 +1251,7 @@ int main(int argc, char **argv)
             
          //glPopMatrix();
 
-         glEnable(GL_LIGHTING);
+         //glEnable(GL_LIGHTING);
          glEnable(GL_DEPTH_TEST);
          glFlush();
          SDL_GL_SwapBuffers();
