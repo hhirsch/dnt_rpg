@@ -90,7 +90,7 @@ class Square
       Square();         /**< Constructor */
       ~Square();        /**< Destructor */
 
-      int x1,z1,x2,z2;                  /**< Coordinates */
+      GLfloat x1,z1,x2,z2;              /**< Coordinates */
       GLfloat h1,h2,h3,h4;              /**< Vertice's Height */
       int posX, posZ;                   /**< Map positions */
       int flags;                        /**< Condition flag */

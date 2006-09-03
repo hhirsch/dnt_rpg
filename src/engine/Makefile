@@ -23,9 +23,9 @@ OBJSSOUND = $(ENDSOUND)sound.o
 OBJSLANG = $(ENDLANG)lang.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
-OBJS = attwindow.o conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o skillwindow.o teste.o util.o
+OBJS = attwindow.o conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o skillwindow.o sun.o teste.o util.o
 BIN = ../../bin/
-SUPREDE = #-DREDE #comente para nao ter suporte a rede na bagaca
+SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
 
 all: teste
@@ -73,6 +73,11 @@ personagens.o: personagens.cpp personagens.h
 skillwindow.o: skillwindow.h skillwindow.cpp
 	@printf "Making skillwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) skillwindow.cpp -o skillwindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+sun.o: sun.h sun.cpp
+	@printf "Making sun.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) sun.cpp -o sun.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 teste.o: teste.cpp

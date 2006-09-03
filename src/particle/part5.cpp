@@ -29,7 +29,7 @@ void part5::Render(particle* part)
 
 void part5::InitRender()
 {
-  glDisable(GL_LIGHTING);
+   glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
    glDepthMask(GL_FALSE);

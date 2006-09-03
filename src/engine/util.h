@@ -38,6 +38,19 @@
 #define SCREEN_Y        600     /**< Screen Height */
 
 /********************************************************************
+ *                        Sun's constants                           *
+ ********************************************************************/
+#define SUN_HOUR_BORN   4.5     /**< Sun Hour to born */
+#define SUN_HOUR_DEATH 20.0     /**< Sun hour to die */
+
+/*! EQU = (y = bx + c) 
+ * x = hour 
+ * y = rotation (degrees) */
+#define SUN_EQU_B 180.0 / (SUN_HOUR_DEATH - SUN_HOUR_BORN)
+#define SUN_EQU_C -(SUN_HOUR_BORN * SUN_EQU_B) /**< same for EQU_B */
+
+
+/********************************************************************
  *                        Math's constants                          *
  ********************************************************************/
 #define TWOPI  2 * M_PI     /**< 2* PI definition */

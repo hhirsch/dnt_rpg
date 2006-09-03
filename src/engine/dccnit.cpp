@@ -11,7 +11,7 @@
 #include "../etc/glm.h"
 
 #define REFRESH_RATE 100.0
-#define ACTUALIZATION_RATE 20.0
+#define ACTUALIZATION_RATE 20
 
 
 /*********************************************************************
@@ -66,6 +66,9 @@ engine::engine()
    mouseY = 0;
 
    particleSystem = new partSystem();
+
+   hour = 9.0;
+   gameSun = new sun(hour , FARVIEW, FARVIEW);
 
    engineMode = ENGINE_MODE_REAL_TIME;
 
@@ -619,36 +622,37 @@ void engine::Init(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Light Definition */
-#if 0
-   GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
-   GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat light_position[] = { 1.0, 1.0, 0.0, 1.0 };
-   GLfloat light_position2[] = {240.0,30.0,25.0,1.0};
-   GLfloat light_direction[] = {1.0,-1.0,0.0};
+   
+   GLfloat light_diffuse[] = { 0.7, 0.7, 0.7, 1.0 };
+   GLfloat light_specular[] = { 0.7, 0.7, 0.7, 1.0 };
+   
+/*   GLfloat light_position2[] = {240.0,30.0,25.0,1.0};
+   GLfloat light_direction[] = {1.0,-1.0,0.0};*/
    
    /* Carrega a Luz */
-   glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-   glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+   //glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+   glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+   glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+   
+
 
    /* Luz1 */
-   glLightfv(GL_LIGHT1, GL_AMBIENT, light_specular);
+/*   glLightfv(GL_LIGHT1, GL_AMBIENT, light_specular);
    glLightfv(GL_LIGHT1, GL_POSITION, light_position2);
    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
    glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
    glLightf (GL_LIGHT1, GL_SPOT_EXPONENT, 2.5);
-#endif
+*/
 
-   GLfloat light_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
+   /*GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };*/
+   GLfloat light_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
 
    glEnable(GL_LIGHTING);
 
-   //glEnable(GL_LIGHT0);
+   glEnable(GL_LIGHT1);
    //glDisable(GL_LIGHT0);
    //glEnable(GL_LIGHT1);
   
@@ -834,6 +838,30 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
    }
 }
 
+void engine::hourToTxt()
+{
+   char htmp[15];
+   int ihour = (int)hour;
+   int imin = (int) (( hour - ihour ) * 60 );
+   if( (imin >= 10) && (ihour >= 10))
+   {
+      sprintf(&htmp[0],"%d:%d", ihour, imin);
+   }
+   else if(imin >= 10)
+   {
+      sprintf(&htmp[0],"0%d:%d", ihour, imin);
+   }
+   else if(ihour >= 10)
+   {
+      sprintf(&htmp[0],"%d:0%d", ihour, imin);
+   }
+   else
+   {
+      sprintf(&htmp[0],"0%d:0%d", ihour, imin);
+   }
+   hourTxt->texto = htmp;
+}
+
 /*********************************************************************
  *                   Threat Input/Output Events                      *
  *********************************************************************/
@@ -862,6 +890,13 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
       /* Actualize Characters Animations */
       seconds = varTempo / 1000.0;
+
+      hour = (hour + seconds / 100.0 );
+      if(hour > 23.99)
+      {
+         hour = 0.0;
+      }
+      hourToTxt();
       int aux;
       personagem *per = (personagem*) PCs->primeiro->proximo;
       for(aux=0;aux< PCs->total;aux++)
@@ -1557,11 +1592,22 @@ void engine::Draw()
    cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    gluLookAt(cameraX,cameraY,cameraZ, centerX,centerY,centerZ,0,1,0);
 
+   /* Sun Definition */
+   gameSun->actualizeHourOfDay(hour);
+   
+   /* Other Lights */
+   GLfloat light_position[] = { 183, 10.0, 327.5, 1.0 };
+   glLightfv(GL_LIGHT1, GL_POSITION, light_position);
+   glLightf(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.02);
+   glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.01);
+   glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.00088);
+
    /* Atualize to culling and to GUI */
    AtualizaFrustum(visibleMatrix,proj,modl);
 
    /* SKY */
    glPushMatrix();
+      //glDisable(GL_LIGHTING);
       glEnable(GL_TEXTURE_2D);
       glBindTexture(GL_TEXTURE_2D, sky);
       glTranslatef(actualMap->x*HALFSQUARESIZE, 0 , actualMap->z*HALFSQUARESIZE);
@@ -1571,6 +1617,7 @@ void engine::Draw()
       //gluSphere(atmosfera,HALFFARVIEW,5,5);
       glCallList(skyList);
       glDisable(GL_TEXTURE_2D);
+      //glEnable(GL_LIGHTING);
    glPopMatrix();
 
    glPushMatrix();
@@ -1632,6 +1679,7 @@ void engine::Draw()
    if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
        (fightStatus == FIGHT_PC_TURN))
    {
+       glDisable(GL_LIGHTING);
        /* Draw Movimentation Circles */
        glColor4f(1,1,1,1);
        glEnable(GL_BLEND);
@@ -1679,6 +1727,8 @@ void engine::Draw()
          glEnd();
          glDisable(GL_TEXTURE_2D);
       glPopMatrix();
+
+      glEnable(GL_LIGHTING);
 
       glDisable(GL_BLEND);
    }
@@ -2404,23 +2454,28 @@ void engine::OpenShortcutsWindow()
    ObjTxt = shortCutsWindow->objects->InserirQuadroTexto(151,20,249,35,2,
                                  language.OBJ_NOTHING.c_str());
 
-   shortCutsWindow->objects->InserirBotao(25,102,93,120,shortCutsWindow->Cores.corBot.R, 
+   shortCutsWindow->objects->InserirBotao(8,102,76,120,shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
                                  shortCutsWindow->Cores.corBot.B,
                                  language.INITIAL_SAVE.c_str(),
                                  0,NULL);
-   buttonMenu = shortCutsWindow->objects->InserirBotao(94,102,162,120,
+   buttonMenu = shortCutsWindow->objects->InserirBotao(77,102,140,120,
                                  shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
                                  shortCutsWindow->Cores.corBot.B,
                                  "Menu",
                                  0,NULL);
-   shortCutsWindow->objects->InserirBotao(163,102,231,120,
+   shortCutsWindow->objects->InserirBotao(141,102,209,120,
                                  shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
                                  shortCutsWindow->Cores.corBot.B,
                                  language.INITIAL_LOAD.c_str(),
                                  0,NULL);
+   hourTxt = shortCutsWindow->objects->InserirQuadroTexto(210,102,249,120,2,
+                                                          "00:00");
+   hourTxt->fonte = FMINI;
+   hourTxt->tamFonte = 1;
+   hourToTxt();
 
    tabButton* tb;
    tb = shortCutsWindow->objects->InserirTabButton(252,15,0,0,

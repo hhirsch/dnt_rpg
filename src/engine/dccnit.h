@@ -10,7 +10,7 @@
 #include "../map/map.h"
 #include "cursor.h"
 #include "personagens.h"
-#include "luta.h"
+#include "sun.h"
 #include "../ia/ai.h"
 #include "initial.h"
 #include "options.h"
@@ -204,6 +204,12 @@ class engine
        ***************************************************************/
       void gameOver();
 
+      /*!
+       ************************************************************** 
+       * Write actual Time on TXT box
+       ***************************************************************/
+      void hourToTxt();
+
       Map* actualMap;              /**< Actual Engine Map */
       cursor* cursors;             /**< Utilized mouse cursors */
  
@@ -219,6 +225,7 @@ class engine
       quadroTexto* FPS;            /**< Text that shows FPS */
       quadroTexto* ObjTxt;         /**< Text that shows actual pointed object */
       quadroTexto* briefTxt;       /**< Briefing Text */
+      quadroTexto* hourTxt;        /**< Text for Hour */
       janela* shortCutsWindow;     /**< ShortCuts Window */
       janela* miniMapWindow;       /**< MiniMap Window */
       botao* botPerMiniMap;        /**< Character MiniMap Button */
@@ -270,6 +277,9 @@ class engine
       bool canAttack;             /**< can attack in the round? */
       bool canMove;               /**< can move more in the round? */
       int attackFeat;             /**< attack feat to use. */
+
+      sun* gameSun;               /**< The internal sun reference */
+      GLfloat hour;               /**< Hour on day time */
 
 };
 

@@ -144,88 +144,146 @@ GLuint InserirTextura(Map* mapa, string arq, string nome,
    return(tex->indice);
 }
 
+void drawQuad(GLfloat x1, GLfloat z1,
+              GLfloat x2, GLfloat z2,
+              GLfloat h1, GLfloat h2, GLfloat h3, GLfloat h4,
+              GLfloat texCoordX1, GLfloat texCoordZ1, 
+              GLfloat texCoordX2, GLfloat texCoordZ2)
+{
+   glTexCoord2f(texCoordX1, texCoordZ1);
+   glNormal3i(0,1,0);
+   glVertex3f( x1 , h1, z1 );
+   glTexCoord2f(texCoordX1, texCoordZ2);
+   glNormal3i(0,1,0);
+   glVertex3f( x1 , h2, z2);
+   glTexCoord2f(texCoordX2, texCoordZ2);
+   glNormal3i(0,1,0);
+   glVertex3f( x2, h3, z2 );
+   glTexCoord2f(texCoordX2, texCoordZ1);
+   glNormal3i(0,1,0);
+   glVertex3f( x2, h4, z1 );
+}
+
 int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
               GLfloat matriz[6][4])
 {
-        int textura = -1;
-        int i, Xaux = 0, Zaux = 0;
-           textura = MapSquares[Xaux][Zaux]->textura;
-           glEnable(GL_TEXTURE_2D);
-           glBindTexture(GL_TEXTURE_2D, textura);
-        GLfloat mat_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
-        GLfloat mat_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-        GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
-        glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 16.0784313725);
+   int textura = -1;
+   int i, Xaux = 0, Zaux = 0;
+   
+   textura = MapSquares[Xaux][Zaux]->textura;
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, textura);
+   GLfloat mat_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat mat_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+   glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 16.0784313725);
 
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 
-        glBegin(GL_QUADS);
-        glNormal3i(0,1,0);
-        for(Xaux = 0; Xaux < x; Xaux++)
-        {
-           for(Zaux = 0; Zaux < z; Zaux++)
-           {
-             if((textura!= -1) && (MapSquares[Xaux][Zaux]->textura == -1))
-             {
-                 glDisable(GL_TEXTURE_2D); 
-                 textura = -1;
-             }
-             else if(textura != MapSquares[Xaux][Zaux]->textura)
-             {
-                glEnd();
-                textura = MapSquares[Xaux][Zaux]->textura;
-                glEnable(GL_TEXTURE_2D);
-                glBindTexture(GL_TEXTURE_2D, textura);
-                glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-                glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+   glBegin(GL_QUADS);
+   for(Xaux = 0; Xaux < x; Xaux++)
+   {
+      for(Zaux = 0; Zaux < z; Zaux++)
+      {
+         if((textura!= -1) && (MapSquares[Xaux][Zaux]->textura == -1))
+         {
+             glDisable(GL_TEXTURE_2D); 
+             textura = -1;
+         }
+         else if(textura != MapSquares[Xaux][Zaux]->textura)
+         {
+            glEnd();
+            textura = MapSquares[Xaux][Zaux]->textura;
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, textura);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+            glBegin(GL_QUADS);
+         }
+         if( (MapSquares[Xaux][Zaux]->visivel) || 
+             (quadradoVisivel(MapSquares[Xaux][Zaux]->x1,0,
+                              MapSquares[Xaux][Zaux]->z1,
+                              MapSquares[Xaux][Zaux]->x2,
+                              ALTURAMAXIMA,
+                              MapSquares[Xaux][Zaux]->z2, matriz)))
+         {
+            for(i=0;i<MAXOBJETOS;i++)
+            {
+               if(MapSquares[Xaux][Zaux]->quadObjetos[i] != NULL)
+               { 
+                  MapSquares[Xaux][Zaux]->quadObjetos[i]->visivel = 1;
+               }
+            }
+            MapSquares[Xaux][Zaux]->visivel = 1;
 
-                glBegin(GL_QUADS);
-             }
-             if( (MapSquares[Xaux][Zaux]->visivel) || 
-                 (quadradoVisivel(MapSquares[Xaux][Zaux]->x1,0,
-                                  MapSquares[Xaux][Zaux]->z1,
-                                  MapSquares[Xaux][Zaux]->x2,
-                                  ALTURAMAXIMA,
-                                  MapSquares[Xaux][Zaux]->z2, matriz)))
-             {
-                for(i=0;i<MAXOBJETOS;i++)
-                {
-                   if(MapSquares[Xaux][Zaux]->quadObjetos[i] != NULL)
-                   { 
-                     MapSquares[Xaux][Zaux]->quadObjetos[i]->visivel = 1;
-                   }
-                }
-                MapSquares[Xaux][Zaux]->visivel = 1;
-                glTexCoord2i(0,0);
-                glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
-                            MapSquares[Xaux][Zaux]->h1 , 
-                            MapSquares[Xaux][Zaux]->z1 );
-                glTexCoord2i(0,1);
-                glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
-                            MapSquares[Xaux][Zaux]->h2 , 
-                            MapSquares[Xaux][Zaux]->z2);
-                glTexCoord2i(1,1);
-                glVertex3f( MapSquares[Xaux][Zaux]->x2, 
-                            MapSquares[Xaux][Zaux]->h3 , 
-                            MapSquares[Xaux][Zaux]->z2 );
-                glTexCoord2i(1,0);
-                glVertex3f( MapSquares[Xaux][Zaux]->x2, 
-                            MapSquares[Xaux][Zaux]->h4, 
-                            MapSquares[Xaux][Zaux]->z1 );
-             }
-             else
-             {
-               MapSquares[Xaux][Zaux]->visivel = 0;
-             }
-           }
-        }
-        glEnd();
+            /*
+            //TODO FIX HEIGHTS!
+            
+            drawQuad(MapSquares[Xaux][Zaux]->x1, MapSquares[Xaux][Zaux]->z1,
+                     (MapSquares[Xaux][Zaux]->x1+MapSquares[Xaux][Zaux]->x2)/2, 
+                     (MapSquares[Xaux][Zaux]->z1+MapSquares[Xaux][Zaux]->z2)/2,
+                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2, 
+                     MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
+                     0, 0, 0.5, 0.5);
+            drawQuad((MapSquares[Xaux][Zaux]->x1+MapSquares[Xaux][Zaux]->x2)/2, 
+                     MapSquares[Xaux][Zaux]->z1,
+                     MapSquares[Xaux][Zaux]->x2, 
+                     (MapSquares[Xaux][Zaux]->z1+MapSquares[Xaux][Zaux]->z2)/2,
+                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2, 
+                     MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
+                     0.5, 0.0, 1.0, 0.5);
+            drawQuad((MapSquares[Xaux][Zaux]->x1+MapSquares[Xaux][Zaux]->x2)/2, 
+                     (MapSquares[Xaux][Zaux]->z1+MapSquares[Xaux][Zaux]->z2)/2,
+                     MapSquares[Xaux][Zaux]->x2, 
+                     MapSquares[Xaux][Zaux]->z2,
+                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2, 
+                     MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
+                     0.5, 0.5, 1.0, 1.0);
+
+            drawQuad(MapSquares[Xaux][Zaux]->x1, 
+                     (MapSquares[Xaux][Zaux]->z1+MapSquares[Xaux][Zaux]->z2)/2,
+                     (MapSquares[Xaux][Zaux]->x1+MapSquares[Xaux][Zaux]->x2)/2, 
+                     MapSquares[Xaux][Zaux]->z2,
+                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2, 
+                     MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
+                     0.0, 0.5, 0.5, 1.0);*/
+
+
+            glTexCoord2f(0.0,0.0);
+            glNormal3i(0,1,0);
+            glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
+                        MapSquares[Xaux][Zaux]->h1 , 
+                        MapSquares[Xaux][Zaux]->z1 );
+            glTexCoord2f(0.0,1.0);
+            glNormal3i(0,1,0);
+            glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
+                        MapSquares[Xaux][Zaux]->h2 , 
+                        MapSquares[Xaux][Zaux]->z2);
+            glTexCoord2f(1.0,1.0);
+            glNormal3i(0,1,0);
+            glVertex3f( MapSquares[Xaux][Zaux]->x2, 
+                        MapSquares[Xaux][Zaux]->h3 , 
+                        MapSquares[Xaux][Zaux]->z2 );
+            glTexCoord2f(1.0,0.0);
+            glNormal3i(0,1,0);
+            glVertex3f( MapSquares[Xaux][Zaux]->x2, 
+                        MapSquares[Xaux][Zaux]->h4, 
+                        MapSquares[Xaux][Zaux]->z1 );
+
+         }
+         else
+         {
+            MapSquares[Xaux][Zaux]->visivel = 0;
+         }
+      }
+   }
+   glEnd();
  
-        return(1);
+   return(1);
 }
 
 /********************************************************************
@@ -236,7 +294,14 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 {
         int textura = -1;
         int Xaux = 0, Zaux = 0;
-           
+
+        GLfloat materialColor[4] = {0.7, 0.7, 0.7, 1.0};
+        float shininess;
+        shininess = 50.0f;
+
+        glEnable(GL_COLOR_MATERIAL);
+
+
         drawFloor( cameraX, cameraY, cameraZ, matriz );
 
         textura = MapSquares[Xaux][Zaux]->textura;
@@ -246,6 +311,11 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         /* Faz o desenho dos muros e meios Fio*/
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+        glMaterialfv(GL_FRONT, GL_AMBIENT, materialColor);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, materialColor);
+        glMaterialfv(GL_FRONT, GL_SPECULAR, materialColor);
+        glMaterialfv(GL_FRONT, GL_SHININESS, &shininess);
+
 
         muro* maux = muros;
         int fezMeioFio = 0;
@@ -382,7 +452,10 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
            }
            MapSquares[Xaux][Zaux]->visivel = 0;
         }
-        return(0);
+
+      glDisable(GL_COLOR_MATERIAL);
+
+      return(0);
 }
 
 /********************************************************************
