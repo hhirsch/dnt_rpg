@@ -1,8 +1,8 @@
 [Project]
 FileName=DccNiTghtmare.dev
 Name=DccNiTghtmare
-UnitCount=108
-Type=1
+UnitCount=112
+Type=0
 Ver=1
 ObjFiles=
 Includes=
@@ -12,7 +12,7 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=
-Linker=-g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_mixer -lSDL_image_@@_C:/Dev-Cpp/lib/cal3d.a_@@_
+Linker=-g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_mixer -lSDL_image -lcal3d_@@__@@_
 IsCpp=1
 Icon=
 ExeOutput=bin\
@@ -1119,6 +1119,46 @@ BuildCmd=
 
 [Unit108]
 FileName=src\classes\actions.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit109]
+FileName=src\engine\sun.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit110]
+FileName=src\engine\sun.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit111]
+FileName=src\engine\attwindow.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit112]
+FileName=src\engine\attwindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
