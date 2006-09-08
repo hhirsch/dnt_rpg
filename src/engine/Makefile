@@ -2,7 +2,7 @@
 
 CC = g++
 CFLAGS = -g -c -Wall -O2
-EFLAGS = -g -Wall -O2 -lm -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image -lSDL_mixer -lcal3d
+EFLAGS = -g -Wall -O2 -lm -lGLU -lGL -lSDL -lSDL_image -lSDL_mixer -lcal3d
 PROGFLAGS = 
 ENDGUI = ../gui/
 ENDENGINE = ../engine/

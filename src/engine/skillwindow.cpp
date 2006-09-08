@@ -27,7 +27,7 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    }
    
    /* Create Skill Window */
-   window = inter->ljan->InserirJanela(316,186,571,441,
+   window = inter->ljan->InserirJanela(276,186,531,441,
                                        language.SKILL_TITLE.c_str(),
                                        1,1,NULL,NULL);
 
