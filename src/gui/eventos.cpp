@@ -51,7 +51,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     int aux;
     if(ljan->janelaAtiva == NULL)
     {
-       *eventInfo = 1;
+       *eventInfo = NADA;
        return(NULL);
     }
 
