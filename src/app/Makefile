@@ -16,7 +16,7 @@ OBJSPARTICLE = $(ENDPARTICLE)particle.o $(ENDPARTICLE)part1.o $(ENDPARTICLE)part
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-all: DlgEditor MapEditor fntEditor dlgCompiler partEditor
+all: DlgEditor fntEditor dlgCompiler partEditor MapEditor
 
 fntEditor.o: fntEditor.cpp
 	@printf "Making fntEditor.o... "
@@ -33,10 +33,12 @@ MapEditor.o: MapEditor.cpp
 	@$(CC) $(CFLAGS) MapEditor.cpp -o MapEditor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-MapEditor: $(OBJSGUI) $(OBJSMAPA) MapEditor.o
-	@printf "Linking MapEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) MapEditor.o -o $(BIN)MapEditor
-	@printf "\e[0;32mDone.\e[0;0m\n"
+MapEditor: 
+	@cd ./mapEditor; make all;
+#$(OBJSGUI) $(OBJSMAPA) MapEditor.o
+#	@printf "Linking MapEditor... "
+#	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) MapEditor.o -o $(BIN)MapEditor
+#	@printf "\e[0;32mDone.\e[0;0m\n"
 
 DlgEditor.o: DlgEditor.cpp
 	@printf "Making DlgEditor.o... "
@@ -73,3 +75,4 @@ clean:
 	@printf "Cleaning App Bin Files... "
 	@\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor $(BIN)fntEditor $(BIN)partEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
+	@cd ./mapEditor; make clean;

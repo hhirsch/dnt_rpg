@@ -1,10 +1,10 @@
 /* Editor de Mapas, em domínio público. Código mais zoneado impossível. */
 
 
-#include "../gui/farso.h"
-#include "../map/map.h"
-#include "../engine/culling.h"
-#include "../etc/glm.h"
+#include "../../gui/farso.h"
+#include "../../map/map.h"
+#include "../../engine/culling.h"
+#include "../../etc/glm.h"
 #include <SDL/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
