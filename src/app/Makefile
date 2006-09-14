@@ -75,4 +75,3 @@ clean:
 	@printf "Cleaning App Bin Files... "
 	@\rm -rf *.o *.e $(BIN)DlgEditor $(BIN)MapEditor $(BIN)fntEditor $(BIN)partEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
-	@cd ./mapEditor; make clean;

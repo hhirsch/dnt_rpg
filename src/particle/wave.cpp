@@ -1,10 +1,16 @@
 #include "wave.h"
 
+/**********************************************************************
+ *                             Constructor                            *
+ **********************************************************************/
 waves::waves(string waveFile)
 {
    actualWaves = NULL;
 }
 
+/**********************************************************************
+ *                              Destructor                            *
+ **********************************************************************/
 waves::~waves()
 {
    while(actualWaves)
@@ -13,6 +19,9 @@ waves::~waves()
    }
 }
 
+/**********************************************************************
+ *                            removeDeadWaves                         *
+ **********************************************************************/
 void waves::removeDeadWaves()
 {
    int i;
@@ -31,6 +40,9 @@ void waves::removeDeadWaves()
    }
 }
 
+/**********************************************************************
+ *                             insertWave                             *
+ **********************************************************************/
 void waves::insertWave(int initialX, int initialZ, int initialAmplitude,
                       int deltaAmplitude, int generationTime, int attrition)
 {
@@ -66,6 +78,9 @@ void waves::insertWave(int initialX, int initialZ, int initialAmplitude,
    totalWaves++;
 }
 
+/**********************************************************************
+ *                            removeWave                              *
+ **********************************************************************/
 void waves::removeWave(wave* remWave)
 {
    if(remWave)
@@ -88,6 +103,9 @@ void waves::removeWave(wave* remWave)
    }
 }
 
+/**********************************************************************
+ *                             getTotalWaves                          *
+ **********************************************************************/
 int waves::getTotalWaves()
 {
    return(totalWaves);

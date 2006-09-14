@@ -925,19 +925,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       rotacao = (vt)*GIRAR;
       varCamera = vt*DELTACAMERA;
       
-      actualFPS = (actualFPS + (1000.0 / varTempo)) / 2; 
-     
       SDL_PumpEvents();
-      if( (shortCutsWindow) && (tempo-lastFPS >= 500))
-      {
-         lastFPS = tempo;
-         char texto[15];
-         sprintf(texto,"FPS: %3.2f",1000.0 / (tempo-lastRead));
-         FPS->texto = texto;
-         sprintf(texto," Part: %d",particleSystem->numParticles());
-         FPS->texto += texto;
-         shortCutsWindow->Desenhar(mouseX, mouseY);
-      }
+
       lastRead = tempo;
 
         
@@ -1534,6 +1523,21 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       
       Draw();
       SDL_GL_SwapBuffers();
+
+
+      /* Actualiza FPS */
+      actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
+      if( (shortCutsWindow) && (tempo-lastFPS >= 500))
+      {
+         lastFPS = tempo;
+         char texto[15];
+         sprintf(texto,"FPS: %3.2f",actualFPS);
+         FPS->texto = texto;
+         sprintf(texto," Part: %d",particleSystem->numParticles());
+         FPS->texto += texto;
+         shortCutsWindow->Desenhar(mouseX, mouseY);
+      }
+      
 #ifdef VIDEO_MODE
       /* Save frame images to compose demonstration video */
       char name[50];
