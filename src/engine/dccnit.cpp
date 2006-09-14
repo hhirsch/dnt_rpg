@@ -918,7 +918,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
 
       /* Calculate the real Modification on walk, rotate, turn, etc */
-      double vt = varTempo / ACTUALIZATION_RATE;
+      double vt = 1;//varTempo / ACTUALIZATION_RATE;
       passo = (vt)*ANDAR;
       if(passo > 9)
         passo = 9;  /* To avoid phantom efects when LAGs occurs */
@@ -1525,7 +1525,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       SDL_GL_SwapBuffers();
 
 
-      /* Actualiza FPS */
+      /* Actualize FPS */
       actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
       if( (shortCutsWindow) && (tempo-lastFPS >= 500))
       {
