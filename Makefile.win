@@ -5,11 +5,11 @@ CPP  = g++.exe
 CC   = gcc.exe
 WINDRES = windres.exe
 RES  = 
-OBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/ia/ai.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o $(RES)
-LINKOBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/ia/ai.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o $(RES)
-LIBS =  -L"C:/Dev-Cpp/lib" -g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_mixer -lSDL_image C:/Dev-Cpp/lib/cal3d.a  
-INCS =  -I"C:/Dev-Cpp/include" 
-CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+OBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/ia/ai.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/particle/wave.o $(RES)
+LINKOBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/ia/ai.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/particle/wave.o $(RES)
+LIBS =  -L"C:/DevCpp/lib" -mwindows -g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_mixer -lSDL_image -lcal3d   
+INCS =  -I"C:/DevCpp/include" 
+CXXINCS =  -I"C:/DevCpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/DevCpp/include/c++/3.4.2/backward"  -I"C:/DevCpp/include/c++/3.4.2/mingw32"  -I"C:/DevCpp/include/c++/3.4.2"  -I"C:/DevCpp/include" 
 BIN  = bin/DccNiTghtmare.exe
 CXXFLAGS = $(CXXINCS)  
 CFLAGS = $(INCS)  
@@ -187,3 +187,12 @@ src/particle/partSystem.o: src/particle/partSystem.cpp
 
 src/classes/actions.o: src/classes/actions.cpp
 	$(CPP) -c src/classes/actions.cpp -o src/classes/actions.o $(CXXFLAGS)
+
+src/engine/sun.o: src/engine/sun.cpp
+	$(CPP) -c src/engine/sun.cpp -o src/engine/sun.o $(CXXFLAGS)
+
+src/engine/attwindow.o: src/engine/attwindow.cpp
+	$(CPP) -c src/engine/attwindow.cpp -o src/engine/attwindow.o $(CXXFLAGS)
+
+src/particle/wave.o: src/particle/wave.cpp
+	$(CPP) -c src/particle/wave.cpp -o src/particle/wave.o $(CXXFLAGS)

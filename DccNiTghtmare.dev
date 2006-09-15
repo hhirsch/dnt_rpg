@@ -1,7 +1,7 @@
 [Project]
 FileName=DccNiTghtmare.dev
 Name=DccNiTghtmare
-UnitCount=112
+UnitCount=114
 Type=0
 Ver=1
 ObjFiles=
@@ -1159,6 +1159,26 @@ BuildCmd=
 
 [Unit112]
 FileName=src\engine\attwindow.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit113]
+FileName=src\particle\wave.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit114]
+FileName=src\particle\wave.h
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
