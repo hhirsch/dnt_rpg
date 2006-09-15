@@ -56,119 +56,127 @@ attWindow::attWindow(skills* sk, interface* inter)
                                  "Clear",1,NULL);
 
    /* Strenght */
-   window->objects->InserirQuadroTexto(8,47,85,60,0,"Strenght");
-   attPoints[0] = window->objects->InserirQuadroTexto(98,45,117,62,1,"");
+   window->objects->InserirQuadroTexto(9,49,85,62,0,"Strenght");
+   attPoints[0] = window->objects->InserirQuadroTexto(98,47,117,64,1,"");
    attPoints[0]->fonte = FMINI;
-   attButtonPrev[0] = window->objects->InserirBotao(87,45,97,62,
+   attButtonPrev[0] = window->objects->InserirBotao(87,47,97,64,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     "<",0,NULL);
-   attButtonNext[0] = window->objects->InserirBotao(118,45,128,62,
+   attButtonNext[0] = window->objects->InserirBotao(118,47,128,64,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[0] = window->objects->InserirQuadroTexto(162,46,245,61,0,
-                                                    "T:  M: ");
-   window->objects->InserirFigura(130,38,0,0,"../data/skills/Img/forca.png");
+   attMods[0] = window->objects->InserirQuadroTexto(162,48,245,63,0,
+                                                    "T:   M: ");
+   window->objects->InserirFigura(130,40,0,0,"../data/skills/Img/forca.png");
 
    /* Dextery */
-   window->objects->InserirQuadroTexto(8,81,85,94,0,"Dextery");
-   attPoints[1] = window->objects->InserirQuadroTexto(98,79,117,96,1,"");
+   window->objects->InserirQuadroTexto(9,83,85,96,0,"Dextery");
+   attPoints[1] = window->objects->InserirQuadroTexto(98,81,117,98,1,"");
    attPoints[1]->fonte = FMINI;
-   attButtonPrev[1] = window->objects->InserirBotao(87,79,97,96,
+   attButtonPrev[1] = window->objects->InserirBotao(87,81,97,98,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     "<",0,NULL);
-   attButtonNext[1] = window->objects->InserirBotao(118,79,128,96,
+   attButtonNext[1] = window->objects->InserirBotao(118,81,128,98,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[1] = window->objects->InserirQuadroTexto(162,80,245,95,0,
+   attMods[1] = window->objects->InserirQuadroTexto(162,82,245,97,0,
                                                     "T:   M:  ");
-   window->objects->InserirFigura(130,72,0,0,"../data/skills/Img/destreza.png");
+   window->objects->InserirFigura(130,74,0,0,"../data/skills/Img/destreza.png");
 
    /* Constitution */
-   window->objects->InserirQuadroTexto(8,117,87,130,0,"Constitution");
-   attPoints[2] = window->objects->InserirQuadroTexto(98,115,117,132,1,"");
+   window->objects->InserirQuadroTexto(9,119,87,132,0,"Constitution");
+   attPoints[2] = window->objects->InserirQuadroTexto(98,117,117,134,1,"");
    attPoints[2]->fonte = FMINI;
-   attButtonPrev[2] = window->objects->InserirBotao(87,115,97,132,
+   attButtonPrev[2] = window->objects->InserirBotao(87,117,97,134,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     "<",0,NULL);
-   attButtonNext[2] = window->objects->InserirBotao(118,115,128,132,
+   attButtonNext[2] = window->objects->InserirBotao(118,117,128,134,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[2] = window->objects->InserirQuadroTexto(162,116,245,131,0,
+   attMods[2] = window->objects->InserirQuadroTexto(162,118,245,132,0,
                                                     "T:   M:  ");
-   window->objects->InserirFigura(130,106,0,0,
+   window->objects->InserirFigura(130,108,0,0,
                                          "../data/skills/Img/constituicao.png");
 
    /* Inteligency */
-   window->objects->InserirQuadroTexto(8,151,87,164,0,"Inteligency");
-   attPoints[3] = window->objects->InserirQuadroTexto(98,149,117,166,1,"");
+   window->objects->InserirQuadroTexto(9,153,87,166,0,"Inteligency");
+   attPoints[3] = window->objects->InserirQuadroTexto(98,151,117,168,1,"");
    attPoints[3]->fonte = FMINI;
-   attButtonPrev[3] = window->objects->InserirBotao(87,149,97,166,
+   attButtonPrev[3] = window->objects->InserirBotao(87,151,97,168,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     "<",0,NULL);
-   attButtonNext[3] = window->objects->InserirBotao(118,149,128,166,
+   attButtonNext[3] = window->objects->InserirBotao(118,151,128,168,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[3] = window->objects->InserirQuadroTexto(162,150,245,167,0,
+   attMods[3] = window->objects->InserirQuadroTexto(162,152,245,169,0,
                                                     "T:   M:  ");
-   window->objects->InserirFigura(130,140,0,0,
+   window->objects->InserirFigura(130,142,0,0,
                                          "../data/skills/Img/inteligencia.png");
 
    /* Wisdow */
-   window->objects->InserirQuadroTexto(8,185,87,198,0,"Wisdow");
-   attPoints[4] = window->objects->InserirQuadroTexto(98,183,117,200,1,"");
+   window->objects->InserirQuadroTexto(9,187,87,200,0,"Wisdow");
+   attPoints[4] = window->objects->InserirQuadroTexto(98,185,117,202,1,"");
    attPoints[4]->fonte = FMINI;
-   attButtonPrev[4] = window->objects->InserirBotao(87,183,97,200,
+   attButtonPrev[4] = window->objects->InserirBotao(87,185,97,202,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     "<",0,NULL);
-   attButtonNext[4] = window->objects->InserirBotao(118,183,128,200,
+   attButtonNext[4] = window->objects->InserirBotao(118,185,128,202,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[4] = window->objects->InserirQuadroTexto(162,184,245,199,0,
+   attMods[4] = window->objects->InserirQuadroTexto(162,186,245,201,0,
                                                     "T:   M:  ");
-   window->objects->InserirFigura(130,174,0,0,
+   window->objects->InserirFigura(130,176,0,0,
                                             "../data/skills/Img/sabedoria.png");
 
    /* Charism */
-   window->objects->InserirQuadroTexto(8,219,87,232,0,"Charism");
-   attPoints[5] = window->objects->InserirQuadroTexto(98,217,117,234,1,"");
+   window->objects->InserirQuadroTexto(9,221,87,234,0,"Charism");
+   attPoints[5] = window->objects->InserirQuadroTexto(98,219,117,236,1,"");
    attPoints[5]->fonte = FMINI;
-   attButtonPrev[5] = window->objects->InserirBotao(87,217,97,234,
+   attButtonPrev[5] = window->objects->InserirBotao(87,219,97,236,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     "<",0,NULL);
-   attButtonNext[5] = window->objects->InserirBotao(119,217,128,234,
+   attButtonNext[5] = window->objects->InserirBotao(119,219,128,236,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[5] = window->objects->InserirQuadroTexto(162,218,245,233,0,
+   attMods[5] = window->objects->InserirQuadroTexto(162,220,245,235,0,
                                                     "T:   M:  ");
-   window->objects->InserirFigura(130,208,0,0,"../data/skills/Img/carisma.png");
+   window->objects->InserirFigura(130,210,0,0,"../data/skills/Img/carisma.png");
                                               
 
    /* Contorns */
-   window->objects->InserirQuadroTexto(8,35,247,244,1,"");
+   window->objects->InserirQuadroTexto(10,39,245,72,1,"");
+   window->objects->InserirQuadroTexto(10,73,245,106,1,"");
+   window->objects->InserirQuadroTexto(10,107,245,140,1,"");
+   window->objects->InserirQuadroTexto(10,141,245,174,1,"");
+   window->objects->InserirQuadroTexto(10,175,245,208,1,"");
+   window->objects->InserirQuadroTexto(10,209,245,242,1,"");
+   window->objects->InserirQuadroTexto(8,37,247,244,1,"");
+
+   
 
    /* Confirm Button */
    buttonConfirm = window->objects->InserirBotao(181,248,251,265, 
@@ -311,7 +319,7 @@ void attWindow::clear()
       used[i] = false;
       attPointsIndex[i] = -1;
       attPoints[i]->texto = "";
-      attMods[i]->texto = "T:  M: ";
+      attMods[i]->texto = "T:   M: ";
       window->Desenhar(0,0);
    }
 }
