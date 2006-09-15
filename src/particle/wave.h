@@ -4,6 +4,12 @@
 #include <string>
 using namespace std;
 
+#define WAVE_DIRECTION_NONE      0
+#define WAVE_DIRECTION_UP        2
+#define WAVE_DIRECTION_DOWN      4
+#define WAVE_DIRECTION_LEFT      8
+#define WAVE_DIRECTION_RIGHT    16
+
 /*! A Liquid Surface Wave */
 class wave
 {
@@ -16,6 +22,8 @@ class wave
       int actualLifeTime;     /**< Actual Wave Life Time */
       int generationTime;     /**< Total Time on Generating the Wave */
       int attrition;          /**< The Surface Attrition */
+
+      int direction;          /**< The Wave Direction */
       
       int nearLoop;           /**< The first alive loop */
       int farLoop;            /**< The last alive loop */
