@@ -281,6 +281,10 @@ class engine
       sun* gameSun;               /**< The internal sun reference */
       GLfloat hour;               /**< Hour on day time */
 
+#ifdef VIDEO_MODE
+      bool startVideo;            /**< Used to start video making */
+#endif
+
 };
 
 #endif

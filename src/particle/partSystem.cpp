@@ -472,6 +472,17 @@ void partSystem::loadFromFile(string fileName)
 
    deleteAll();
 
+   /*Remove it*/
+   part1* particula;
+
+   particula = (part1*) addParticle(PART_WATERFALL,150,60,120,
+                                            "../data/particles/waterfall1.par");
+   particula->addPlane(148,59,118,152,59,123,-1,0,PLANE_NO_INCLINATION);
+   particula->addPlane(150,40,118,160,32,123,-1,0,PLANE_INCLINATION_X);
+   particula->addPlane(160,20,110,175,20,130,-1,0,PLANE_NO_INCLINATION);
+
+   /*Remove */
+
    if(!(file=fopen(fileName.c_str(),"r")))
    {
        printf("Error while opening Map particle file: %s\n",fileName.c_str());

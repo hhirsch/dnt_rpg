@@ -12,6 +12,7 @@
 
 #define REFRESH_RATE 100.0
 #define ACTUALIZATION_RATE 20
+#define WALK_ACTUALIZATION 0.02
 
 
 /*********************************************************************
@@ -92,6 +93,10 @@ engine::engine()
    particleSystem->addParticle(PART_SNOW,340,80,100,
                                                  "../data/particles/snow1.par");
    */
+
+#ifdef VIDEO_MODE
+   startVideo = false;
+#endif
 }
 
 /*********************************************************************
@@ -901,7 +906,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       personagem *per = (personagem*) PCs->primeiro->proximo;
       for(aux=0;aux< PCs->total;aux++)
       {
-         per->m_calModel->update(seconds); 
+         per->m_calModel->update(WALK_ACTUALIZATION/*seconds*/); 
          //per->CalculateBoundingBox(); 
          per = (personagem*) per->proximo;
       }
@@ -911,7 +916,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
         per = (personagem*) NPCs->primeiro->proximo;
         for(aux=0;aux < NPCs->total;aux++)
         {
-           per->m_calModel->update(seconds);   
+           per->m_calModel->update(WALK_ACTUALIZATION/*seconds*/);   
            per->CalculateBoundingBox();
            per = (personagem*) per->proximo;
         } 
@@ -1269,6 +1274,14 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
       }
 
+#ifdef VIDEO_MODE
+   if(keys[SDLK_v])
+   {
+      startVideo = true;
+      printf("Started Video\n");
+   }
+#endif
+
       if(keys[SDLK_n])
       {
           if(!shortCutsWindow)
@@ -1539,18 +1552,21 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
       
 #ifdef VIDEO_MODE
-      /* Save frame images to compose demonstration video */
-      char name[50];
-      if(imgNumber < 10)
-         sprintf(name,"img/teste000%d.tga",imgNumber);
-      else if(imgNumber < 100)
-         sprintf(name,"img/teste00%d.tga",imgNumber);
-      else if(imgNumber < 1000)
-         sprintf(name,"img/teste0%d.tga",imgNumber);
-      else
-         sprintf(name,"img/teste%d.tga",imgNumber);
-      ScreenDump(name,800,600);
-      imgNumber++;
+      if(startVideo)
+      {
+         /* Save frame images to compose demonstration video */
+         char name[50];
+         if(imgNumber < 10)
+            sprintf(name,"img/teste000%d.tga",imgNumber);
+         else if(imgNumber < 100)
+            sprintf(name,"img/teste00%d.tga",imgNumber);
+         else if(imgNumber < 1000)
+            sprintf(name,"img/teste0%d.tga",imgNumber);
+         else
+            sprintf(name,"img/teste%d.tga",imgNumber);
+         ScreenDump(name,800,600);
+         imgNumber++;
+      }
 #endif
       *forcaAtualizacao = 0;
    }
@@ -1655,6 +1671,7 @@ void engine::Draw()
       }
    glPopMatrix();
 
+   //TODO Bounding Box in View Frustum Check
    /* Draw the NPCs */
    if(NPCs)
    {
@@ -1737,6 +1754,7 @@ void engine::Draw()
       glDisable(GL_BLEND);
    }
 
+   //TODO Bounding Box in View Frustum Check
    /* Draw Particles */
    glPushMatrix();
       particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
@@ -1801,15 +1819,6 @@ void engine::Draw()
       glVertex3f(x3,y3,z3);
       glTexCoord2f(1,0);
       glVertex3f(x4,y4,z4);
-      /*glNormal3f( 0, 0, 1 );
-      glTexCoord2f(0,0);
-      glVertex2f(mouseX,Y);
-      glTexCoord2f(0,1);
-      glVertex2f(mouseX,Y-32);
-      glTexCoord2f(1,1);
-      glVertex2f(mouseX+32,Y-32);
-      glTexCoord2f(1,0);
-      glVertex2f(mouseX+32,Y);*/
    glEnd();
    glDisable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
