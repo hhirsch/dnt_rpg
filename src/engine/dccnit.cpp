@@ -1603,6 +1603,9 @@ void engine::Draw()
 {
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
+   GLfloat min[3],max[3];
+   GLfloat x[4],z[4];
+
    glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
    glLoadIdentity();
 
@@ -1671,27 +1674,45 @@ void engine::Draw()
       }
    glPopMatrix();
 
-   //TODO Bounding Box in View Frustum Check
    /* Draw the NPCs */
    if(NPCs)
    {
       per = (personagem*) NPCs->primeiro->proximo;
       for(aux=0;aux < NPCs->total;aux++)
       {
-         glPushMatrix();
-           glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
-           glRotatef(per->orientacao,0,1,0);
-           per->Render();
-           /*per->RenderBoundingBox();
-           glColor3f(0.6,0.1,0.1);
-           glBegin(GL_POLYGON);
-              glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
-              glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
-              glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
-              glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+         /* Verify Bounding Box */
+         x[0] = per->min[0];
+         z[0] = per->min[2];
+         x[1] = per->min[0];
+         z[1] = per->max[2]; 
+         x[2] = per->max[0];
+         z[2] = per->max[2];
+         x[3] = per->max[0];
+         z[3] = per->min[2];
+         rotTransBoundingBox(per->orientacao, x, z,per->posicaoLadoX, 
+                             per->min[1] + per->posicaoLadoY, 
+                             per->max[1] + per->posicaoLadoY,
+                             per->posicaoLadoZ, min, max );
 
-           glEnd();*/
-         glPopMatrix();
+         /* Only Draw Visible Characters */
+         if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
+                            visibleMatrix))
+         {
+            glPushMatrix();
+              glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
+              glRotatef(per->orientacao,0,1,0);
+              per->Render();
+              /*per->RenderBoundingBox();
+              glColor3f(0.6,0.1,0.1);
+              glBegin(GL_POLYGON);
+                 glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
+                 glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
+                 glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
+                 glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+   
+              glEnd();*/
+            glPopMatrix();
+         }
          per = (personagem*) per->proximo;
       }
    }
