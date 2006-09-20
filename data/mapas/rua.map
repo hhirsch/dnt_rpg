@@ -1,5 +1,6 @@
 T 7X7
 # Made by DccNiTghtmare's MapEditor, v0.0.3
+light ../data/mapas/rua.lgh
 npc ../data/mapas/rua.npc
 PS ../data/mapas/rua.par
 MUSICA ../data/music/musica7.ogg
