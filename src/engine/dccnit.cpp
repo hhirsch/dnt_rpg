@@ -631,25 +631,10 @@ void engine::Init(SDL_Surface *screen)
    GLfloat light_diffuse[] = { 0.7, 0.7, 0.7, 1.0 };
    GLfloat light_specular[] = { 0.7, 0.7, 0.7, 1.0 };
    
-/*   GLfloat light_position2[] = {240.0,30.0,25.0,1.0};
-   GLfloat light_direction[] = {1.0,-1.0,0.0};*/
-   
    /* Carrega a Luz */
-   //glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-   glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
-   glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+   //glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+   //glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
    
-
-
-   /* Luz1 */
-/*   glLightfv(GL_LIGHT1, GL_AMBIENT, light_specular);
-   glLightfv(GL_LIGHT1, GL_POSITION, light_position2);
-   glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
-   glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
-   glLightf (GL_LIGHT1, GL_SPOT_EXPONENT, 2.5);
-*/
-
-   /*GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };*/
    GLfloat light_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
@@ -657,8 +642,6 @@ void engine::Init(SDL_Surface *screen)
 
    glEnable(GL_LIGHTING);
 
-   glEnable(GL_LIGHT1);
-   //glDisable(GL_LIGHT0);
    //glEnable(GL_LIGHT1);
   
    /* Sky Creation */
@@ -1619,11 +1602,11 @@ void engine::Draw()
    gameSun->actualizeHourOfDay(hour);
    
    /* Other Lights */
-   GLfloat light_position[] = { 183, 10.0, 327.5, 1.0 };
+   /*GLfloat light_position[] = { 183, 10.0, 327.5, 1.0 };
    glLightfv(GL_LIGHT1, GL_POSITION, light_position);
    glLightf(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.02);
    glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.01);
-   glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.00088);
+   glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.00088);*/
 
    /* Atualize to culling and to GUI */
    AtualizaFrustum(visibleMatrix,proj,modl);

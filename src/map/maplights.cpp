@@ -3,6 +3,11 @@
 mapLight::mapLight()
 {
    enableLight = false;
+   enableDiffuse = false;  
+   enableSpecular = false;
+   enableAmbient = false; 
+   enableSpot = false;
+   enableAtenuation = false;
 }
 
 mapLight::~mapLight()
@@ -30,13 +35,33 @@ void mapLights::Load(string arq)
        return;
    }
 
-   while(fscanf(file,"%c %f %f %f %f",&tipo,&aux0,&aux1,&aux2,&aux3))
+   while(fscanf(file,"%c %f %f %f %f",&tipo,&aux0,&aux1,&aux2,&aux3) != EOF)
    {
       switch(tipo)
       {
-         case 'l':/* new light */
+         case 'L':/* new light */
             curLight++;
             light[curLight].enableLight = true;
+            /* Select Correct Light */
+            switch(curLight)
+            {
+               case 0: 
+                  light[curLight].Glight = GL_LIGHT1;
+               break;
+               case 1: 
+                  light[curLight].Glight = GL_LIGHT2;
+               break;
+               case 2: 
+                  light[curLight].Glight = GL_LIGHT3;
+               break;
+               case 3: 
+                  light[curLight].Glight = GL_LIGHT4;
+               break;
+               case 4: 
+                  light[curLight].Glight = GL_LIGHT5;
+               break;
+            }
+            glEnable(light[curLight].Glight);
          break;
          case 'a':/* ambient */
            light[curLight].light_ambient[0] = aux0;
@@ -69,12 +94,92 @@ void mapLights::Load(string arq)
            light[curLight].light_direction[0] = aux0;
            light[curLight].light_direction[1] = aux1;
            light[curLight].light_direction[2] = aux2;
-           light[curLight].light_direction[3] = aux3;
+           light[curLight].light_direction[3] = 1.0;
+           light[curLight].cutOff = aux3;
            light[curLight].enableSpot = true;
+         break;
+         case 'q':/* Atenuation */
+           light[curLight].constantAtenuation = aux0;
+           light[curLight].linearAtenuation = aux1;
+           light[curLight].quadricAtenuation = aux2;
+           light[curLight].enableAtenuation = true;
          break;
       }
    }
 
    fclose(file);
+
+   /* Disable All Unused Lights */
+   curLight++;
+   while(curLight < 5)
+   {
+      /* Select Correct Light */
+      switch(curLight)
+      {
+         case 0: 
+            light[curLight].Glight = GL_LIGHT1;
+         break;
+         case 1: 
+            light[curLight].Glight = GL_LIGHT2;
+         break;
+         case 2: 
+            light[curLight].Glight = GL_LIGHT3;
+         break;
+         case 3: 
+            light[curLight].Glight = GL_LIGHT4;
+         break;
+         case 4: 
+            light[curLight].Glight = GL_LIGHT5;
+         break;
+      }
+      glDisable(light[curLight].Glight);
+      curLight++;
+   }
+}
+
+
+void mapLights::actualize()
+{
+   int l;
+   for(l=0; l<5; l++)
+   {
+      if(light[l].enableLight)
+      {
+         /* Define Position */
+         glLightfv(light[l].Glight, GL_POSITION, light[l].light_position);
+         /* Ambient */
+         if(light[l].enableAmbient)
+         {
+            glLightfv(light[l].Glight, GL_AMBIENT, light[l].light_ambient);
+         }
+         /* Diffuse */
+         if(light[l].enableDiffuse)
+         {
+            glLightfv(light[l].Glight, GL_DIFFUSE, light[l].light_diffuse);
+         }
+         /* Specular */
+         if(light[l].enableSpecular)
+         {
+            glLightfv(light[l].Glight, GL_SPECULAR, light[l].light_specular);
+         }
+         /* Specular */
+         if(light[l].enableSpot)
+         {
+            glLightfv(light[l].Glight, GL_SPOT_DIRECTION,
+                      light[l].light_direction);
+            glLightf(light[l].Glight, GL_SPOT_CUTOFF, light[l].cutOff);
+         }
+         /* Atenuation */
+         if(light[l].enableAtenuation)
+         {
+            glLightf(light[l].Glight, GL_CONSTANT_ATTENUATION, 
+                     light[l].constantAtenuation);
+            glLightf(light[l].Glight, GL_LINEAR_ATTENUATION, 
+                     light[l].linearAtenuation);
+            glLightf(light[l].Glight, GL_QUADRATIC_ATTENUATION, 
+                     light[l].quadricAtenuation);
+         }
+      }
+   }
 }
 

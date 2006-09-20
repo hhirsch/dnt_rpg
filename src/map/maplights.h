@@ -14,12 +14,21 @@ class mapLight
       GLfloat light_specular[4];  /**< Specular Color Light */
       GLfloat light_position[4];  /**< Light position */
       GLfloat light_direction[4]; /**< Light Direction */
+
+      GLfloat linearAtenuation;   /**< Linear Atenuation */
+      GLfloat quadricAtenuation;  /**< Quadric Atenuation */
+      GLfloat constantAtenuation; /**< Constant Atenuation */
+
+      GLfloat cutOff;             /**< Spot CutOff */
+
+      GLuint Glight; /**< Internal OpenGL Light Number */
       
-      bool enableLight;   /**< Enable Light */
-      bool enableDiffuse; /**< Enable Diffuse Light */
-      bool enableSpecular;/**< Enable Specular Light */
-      bool enableAmbient; /**< Enable Ambient Light */
-      bool enableSpot;    /**< Enable Spot Light */
+      bool enableLight;      /**< Enable Light */
+      bool enableDiffuse;    /**< Enable Diffuse Light */
+      bool enableSpecular;   /**< Enable Specular Light */
+      bool enableAmbient;    /**< Enable Ambient Light */
+      bool enableSpot;       /**< Enable Spot Light */
+      bool enableAtenuation; /**< Enable Linear Atenuation */
 
       /*! Constructor */
       mapLight();
@@ -31,8 +40,6 @@ class mapLight
 class mapLights
 {
    public:
-      mapLight light[5];    /**< Total number of lights */
-
       /*! Constructor */
       mapLights(); 
       /*! Destructor */
@@ -40,6 +47,12 @@ class mapLights
       /*! Load Map Lights from file
        * \param arq -> filename of lights file */
       void Load(string arq);
+      /*! Actualize Map Lights Position */
+      void actualize();
+
+
+   private:
+      mapLight light[5];    /**< Total number of lights */
 };
 
 #endif

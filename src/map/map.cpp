@@ -299,6 +299,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         float shininess;
         shininess = 50.0f;
 
+        /* Actualize Lights */
+        lights.actualize();
+
         glEnable(GL_COLOR_MATERIAL);
 
 
