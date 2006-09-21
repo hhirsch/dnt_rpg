@@ -51,8 +51,9 @@ class partSystem
        * Actualize and Render all Active Systems
        * \param PCposX -> position X of the PC.
        * \param PCposZ -> position Z of the PC.
+       * \param matriz -> View Frustum Matrix.
        ***************************************************************/
-      void actualizeAll(float PCposX, float PCposZ);
+      void actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4] );
 
       /*!
        *************************************************************** 

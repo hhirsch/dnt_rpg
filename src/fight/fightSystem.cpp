@@ -171,7 +171,7 @@ int fightSystem::doTurn(string& brief)
           /* There's no more enemies, so no more battle */
           return(FIGHT_END);
        }
-       brief += pers->nome + language.FIGHT_TURN;
+       brief += pers->nome + " " + language.FIGHT_TURN;
        return(FIGHT_PC_TURN);
    }
    else

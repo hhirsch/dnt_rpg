@@ -118,7 +118,7 @@ void partSystem::deleteAll()
    }
 }
 
-void partSystem::actualizeAll(float PCposX, float PCposZ)
+void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4])
 {
    int i;
    
@@ -130,7 +130,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ)
          {
             waterfall[i]->definePosition(PCposX, PCposZ);
          }
-         waterfall[i]->NextStep(0.0);
+         waterfall[i]->NextStep(matriz);
       }
    }
 
@@ -142,7 +142,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ)
          {
             fire[i]->definePosition(PCposX, PCposZ);
          }
-         fire[i]->NextStep(0.0);
+         fire[i]->NextStep(matriz);
       }
    }
 
@@ -154,7 +154,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ)
          {
             waterSurface[i]->definePosition(PCposX, PCposZ);
          }
-         waterSurface[i]->NextStep(0.0);
+         waterSurface[i]->NextStep(matriz);
       }
    }
 
@@ -166,7 +166,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ)
          {
             smoke[i]->definePosition(PCposX, PCposZ);
          }
-         smoke[i]->NextStep(0.0);
+         smoke[i]->NextStep(matriz);
       }
    }
 
@@ -178,7 +178,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ)
          {
             blood[i]->definePosition(PCposX, PCposZ);
          }
-         blood[i]->NextStep(0.0);
+         blood[i]->NextStep(matriz);
       }
    }
 
@@ -190,7 +190,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ)
          {
             lightning[i]->definePosition(PCposX, PCposZ);
          }
-         lightning[i]->NextStep(0.0);
+         lightning[i]->NextStep(matriz);
       }
    }
 
@@ -202,7 +202,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ)
          {
             snow[i]->definePosition(PCposX, PCposZ);
          }
-         snow[i]->NextStep(0.0);
+         snow[i]->NextStep(matriz);
       }
    }
 }
@@ -408,9 +408,11 @@ void partSystem::removeParticle(int type, particleSystem* part)
 void partSystem::stabilizeAll()
 {
    int i;
+   GLfloat matriz[6][4];  //not needed to draw, so...
+   
    for(i=0; i< PART_STABILIZE_LOOP;i++)
    {
-      actualizeAll(0,0);
+      actualizeAll(0,0,matriz);
    }
 }
 

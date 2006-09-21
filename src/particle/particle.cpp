@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <GL/gl.h>
 
+#include "../engine/culling.h"
+
 #include <iostream>
 #include <fstream>
 
@@ -140,14 +142,29 @@ particleSystem::~particleSystem()
 }
 
 /***************************************************************
+ *             Reset the Particle System Bounding Box          *
+ ***************************************************************/
+void particleSystem::resetBoundingBox()
+{
+   boundX1 = -1;
+   boundX2 = -1;
+   boundY1 = -1;
+   boundY2 = -1;
+   boundZ1 = -1;
+   boundZ2 = -1;
+}
+
+/***************************************************************
  *                 Do a step to Particle System                *
  ***************************************************************/
-void particleSystem::DoStep()
+void particleSystem::DoStep(GLfloat matriz[6][4])
 {
    int n;
    int pendingCreate = needCreate();
    int alive = 0;
    int aliveColor = 0;
+
+   resetBoundingBox();
 
    InitRender();
 
@@ -182,6 +199,47 @@ void particleSystem::DoStep()
       /* Render "not dead" particles */
       if( particles[n].status != PARTICLE_STATUS_DEAD)
       {
+         
+         /* Actualize Bounding Box */
+         if( boundX1 == -1 )
+         {
+            /* First Particle top take */
+            boundX1 = particles[n].posX-5;
+            boundX2 = particles[n].posX+5;
+            boundY1 = particles[n].posY-5;
+            boundY2 = particles[n].posY+5;
+            boundZ1 = particles[n].posZ-5;
+            boundZ2 = particles[n].posZ+5;
+         }
+         else
+         {
+            /* Put New Values, if needed */
+            if( particles[n].posX-5 < boundX1)
+            {
+               boundX1 = particles[n].posX-5;
+            }
+            if( particles[n].posX+5 > boundX2)
+            {
+               boundX2 = particles[n].posX+5;
+            }
+            if( particles[n].posY-5 < boundY1)
+            {
+               boundY1 = particles[n].posY-5;
+            }
+            if( particles[n].posY+5 > boundY2)
+            {
+               boundY2 = particles[n].posY+5;
+            }
+            if( particles[n].posZ-5 < boundZ1)
+            {
+               boundZ1 = particles[n].posZ-5;
+            }
+            if( particles[n].posZ+5 > boundZ2)
+            {
+               boundZ2 = particles[n].posZ+5;
+            }
+         }
+         
          if(drawMode == PARTICLE_DRAW_GROUPS)
          {
             vertexArray[alive] = particles[n].posX;
@@ -203,7 +261,9 @@ void particleSystem::DoStep()
 
    }
 
-   if( (drawMode == PARTICLE_DRAW_GROUPS) && (aliveColor > 0) && (alive > 0) )
+   if( (drawMode == PARTICLE_DRAW_GROUPS) && (aliveColor > 0) && (alive > 0)  
+       && (quadradoVisivel(boundX1, boundY1, boundZ1, boundX2, boundY2, boundZ2,
+                           matriz)))
    {
       glEnableClientState(GL_COLOR_ARRAY);
       glColorPointer(3, GL_FLOAT, 0, colorArray);

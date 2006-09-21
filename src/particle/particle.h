@@ -110,8 +110,9 @@ class particleSystem
       /*!
        ***************************************************************
        * Actualize and render all particles  
+       * \param matriz -> viewFrustum Matrix
        ***************************************************************/
-      void DoStep(); 
+      void DoStep(GLfloat matriz[6][4]); 
       /*!
        ***************************************************************
        * Define XZ position
@@ -147,6 +148,13 @@ class particleSystem
             finalB;            /**< Final Blue Color */
       float alpha;             /**< Global Alpha Value */
 
+      float boundX1;           /**< Bounding Box */
+      float boundX2;           /**< Bounding Box */
+      float boundY1;           /**< Bounding Box */
+      float boundY2;           /**< Bounding Box */
+      float boundZ1;           /**< Bounding Box */
+      float boundZ2;           /**< Bounding Box */
+
       /* Probability Values */
  
       float dMultCenter[3];    /**< Multiply values to Center Position */
@@ -162,6 +170,13 @@ class particleSystem
       float dSumVel[3];        /**< Sum Values to Actual Velocity */
 
       particle* particles;     /**< Internal Particles Vector */
+
+
+      /*!
+       ***************************************************************
+       * Reset The Bounding Box
+       ***************************************************************/
+      void resetBoundingBox();
 
 };
 

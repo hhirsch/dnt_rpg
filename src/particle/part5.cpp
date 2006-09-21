@@ -152,10 +152,10 @@ void part5::createParticle(particle* part)
    part->prvB = part->B;
 }
 
-void part5::NextStep(float sec)
+void part5::NextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
-   DoStep();
+   DoStep(matriz);
 }
 
 int part5::numParticles()

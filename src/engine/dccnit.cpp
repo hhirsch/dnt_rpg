@@ -1762,7 +1762,8 @@ void engine::Draw()
    /* Draw Particles */
    glPushMatrix();
       particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
-                                   PCs->personagemAtivo->posicaoLadoZ);
+                                   PCs->personagemAtivo->posicaoLadoZ, 
+                                   visibleMatrix);
    glPopMatrix();
 
 

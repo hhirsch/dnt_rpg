@@ -594,37 +594,37 @@ void actualizeParticle(double segundos)
          {
            case 1:
                   { 
-                     p1->NextStep(segundos);
+                     p1->NextStep(matrizVisivel);
                      break;
                   }
            case 2:
                   {
-                     p2->NextStep(segundos);
+                     p2->NextStep(matrizVisivel);
                      break;
                   }
            case  3:
                   {
-                     p3->NextStep(segundos);
+                     p3->NextStep(matrizVisivel);
                      break;
                   }
            case 4:
                   {
-                     p4->NextStep(segundos);
+                     p4->NextStep(matrizVisivel);
                      break;
                   }
            case 5:
                   {
-                    p5->NextStep(segundos);
+                    p5->NextStep(matrizVisivel);
                     break;
                   }
            case 6:
                   {
-                    p6->NextStep(segundos);
+                    p6->NextStep(matrizVisivel);
                     break;
                   }
             case 7:
                   {
-                    p7->NextStep(segundos);
+                    p7->NextStep(matrizVisivel);
                     break;
                   }
          }

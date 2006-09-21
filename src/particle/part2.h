@@ -60,9 +60,9 @@ class part2: public particleSystem
       /*!
        ***************************************************************
        * Do Next Step on System, rendering and actualizing
-       * \param sec -> \b NOT \b USED \b ANYMORE
+       * \param matriz -> View Frustum Matrix
        ***************************************************************/
-      void NextStep(float sec);
+      void NextStep(GLfloat matriz[6][4]);
       /*!
        ***************************************************************
        * Gets total living particles.

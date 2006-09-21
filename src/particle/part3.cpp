@@ -166,10 +166,10 @@ void part3::createParticle(particle* part)
    }
 }
 
-void part3::NextStep(float sec)
+void part3::NextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
-   DoStep();
+   DoStep(matriz);
 }
 
 int part3::numParticles()

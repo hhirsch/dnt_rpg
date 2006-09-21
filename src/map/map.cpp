@@ -565,7 +565,7 @@ int Map::open(string arquivo)
    posX = -1;
    posZ = 0;
 
-   /* Vamos ler todo o arquivo */
+   /* Read All File */
    while(fscanf(arq, "%s", buffer) != EOF)
    {
       switch(buffer[0])

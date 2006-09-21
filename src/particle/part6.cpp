@@ -167,10 +167,10 @@ void part6::createParticle(particle* part)
    actualY+=(-1*dSumVel[1]);
 }
 
-void part6::NextStep(float sec)
+void part6::NextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
-   DoStep();
+   DoStep(matriz);
 }
 
 int part6::numParticles()
