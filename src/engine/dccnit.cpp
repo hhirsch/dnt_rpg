@@ -294,10 +294,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                  proj, modl, viewPort);
        per = PCs->InserirPersonagem("../data/characters/pcs/logan.pc",features);
        per->DefineMaxLifePoints(per->maxLifePoints);
-       /*atualizaCarga(img,&texturaTexto,texturaCarga,
+       atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading Character: Gushm",
                  proj, modl, viewPort);
-       PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
+       /*PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Gushm",
                        "../data/models/personagens/Gushm/modelo.cfg");*/
    }
@@ -627,14 +627,6 @@ void engine::Init(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Light Definition */
-   
-   GLfloat light_diffuse[] = { 0.7, 0.7, 0.7, 1.0 };
-   GLfloat light_specular[] = { 0.7, 0.7, 0.7, 1.0 };
-   
-   /* Carrega a Luz */
-   //glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
-   //glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
-   
    GLfloat light_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
@@ -642,8 +634,6 @@ void engine::Init(SDL_Surface *screen)
 
    glEnable(GL_LIGHTING);
 
-   //glEnable(GL_LIGHT1);
-  
    /* Sky Creation */
    drawSphereToList(80,80);
 
