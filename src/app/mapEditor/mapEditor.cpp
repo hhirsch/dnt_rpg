@@ -783,6 +783,7 @@ int main(int argc, char **argv)
    GLfloat portalX[2], portalZ[2];
    //Tobjeto* object = NULL;
    int eventInfo = NADA;
+   int tempo = 0;
 
    texturaAtual = mapa->Texturas->indice;
    objAtual = (mapObjeto*)mapa->Objetos->primeiro->proximo;
@@ -820,8 +821,9 @@ int main(int argc, char **argv)
         qz = mapa->z;
 
       gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,&eventInfo);
-      if(eventInfo == NADA)
+      if( (eventInfo == NADA) && (SDL_GetTicks() - tempo >= 20) )
       {
+         tempo = SDL_GetTicks();
          if (qx > mapa->x) qx = mapa->x;
          else if (qx < 0) qx = 0;
          if (qz > mapa->z) qz = mapa->z;
@@ -1370,8 +1372,8 @@ int main(int argc, char **argv)
          } 
          if(teclas[SDLK_UP] || teclas[SDLK_DOWN])
          {
-            varX = 2.0 * sin(deg2Rad(phi));
-            varZ = 2.0 * cos(deg2Rad(phi));
+            varX = 4.0 * sin(deg2Rad(phi));
+            varZ = 4.0 * cos(deg2Rad(phi));
             if(teclas[SDLK_UP]) 
             {
                  varX *= -1;
@@ -1382,8 +1384,8 @@ int main(int argc, char **argv)
          }
          if(teclas[SDLK_RIGHT] || teclas[SDLK_LEFT])
          {
-            varX = 2.0 * sin(deg2Rad(phi)+deg2Rad(90));
-            varZ = 2.0 * cos(deg2Rad(phi)+deg2Rad(90));
+            varX = 4.0 * sin(deg2Rad(phi)+deg2Rad(90));
+            varZ = 4.0 * cos(deg2Rad(phi)+deg2Rad(90));
             if(teclas[SDLK_LEFT])
             {
                 varX *= -1;
@@ -1459,6 +1461,25 @@ int main(int argc, char **argv)
             else
               maux->dZ++;
          }
+
+         if(centroX > ((mapa->x * SQUARESIZE)+20))
+         {
+            centroX = ((mapa->x * SQUARESIZE)+20);
+         }
+         else if(centroX < -20)
+         {
+            centroX = -20;
+         }
+
+         if(centroZ > ((mapa->z * SQUARESIZE)+20))
+         {
+            centroZ = ((mapa->z * SQUARESIZE)+20);
+         }
+         else if(centroZ < -20)
+         {
+            centroZ = -20;
+         }
+
 
 
       }

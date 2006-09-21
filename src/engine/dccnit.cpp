@@ -1758,7 +1758,6 @@ void engine::Draw()
       glDisable(GL_BLEND);
    }
 
-   //TODO Bounding Box in View Frustum Check
    /* Draw Particles */
    glPushMatrix();
       particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
