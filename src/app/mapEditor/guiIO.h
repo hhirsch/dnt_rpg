@@ -11,6 +11,7 @@
 #define GUI_IO_OPEN_MAP      4
 #define GUI_IO_SAVE_MAP      5
 #define GUI_IO_EXIT          6
+#define GUI_IO_OTHER         7
 
 /* State Constants */
 #define GUI_IO_STATE_INITIAL 0
@@ -65,6 +66,8 @@ class guiIO
       botao* exitButton;    /**< Exit Button */
       botao* newButton;     /**< New Button */
       barraTexto* fileText; /**< FileName Text */
+      void openFileWindow();
+
 
       /*********************Navigate*Window***************************/
       janela* navWindow;              /**< Navigate Window */
@@ -79,10 +82,11 @@ class guiIO
       oneTabButton* rotDownButton;    /**< Navigation Rotation Down Button */
       oneTabButton* rotLeftButton;    /**< Navigation Rotation Left Button */
       oneTabButton* rotRightButton;   /**< Navigation Rotation Right Button */
+      void openNavWindow();
 
       /*********************Main*Window*******************************/
       janela* mainWindow;   /**< Main Window */
-      botao* floorButton;   /**< Floor Edition Button */
+      botao* terrainButton; /**< Terrain Edition Button */
       botao* wallButton;    /**< Wall Edition Button */
       botao* portalButton;  /**< Portal Edition Button */
       botao* objectButton;  /**< Objects Edition Button */
@@ -92,18 +96,41 @@ class guiIO
       botao* fogButton;     /**< Fog Button */
       botao* destroyButton; /**< Destroy Button */
       botao* optionsButton; /**< Options Button */
+      void openMainWindow();
 
       /*********************Texture*Window*******************************/
       janela* textureWindow;
+      void openTextureWindow();
 
-      /*********************Floor*Window*******************************/
-      janela* floorWindow;  /**< Floor Window */
+      /*********************Terrain*Window*******************************/
+      janela* terrainWindow;               /**< Terrain Window */
+      tabButton* terrainTabButton;         /**< TErrain TabButton */
+      oneTabButton* terrainUpButton;       /**< Terrain Up Button */
+      oneTabButton* terrainDownButton;     /**< Terrain Down Button */
+      oneTabButton* terrainNivButton;      /**< Terrain Nivelation Button */
+      oneTabButton* terrainWalkableButton; /**< Terrain Walkable Button */
+      oneTabButton* terrainTextureButton;  /**< Terrain Texture Button */
+      void openTerrainWindow();
       /*********************Wall*Window*******************************/
-      janela* wallWindow;   /**< Wall Window */
+      janela* wallWindow;                 /**< Wall Window */
+      tabButton* wallTabButton;           /**< Wall Tab Button */
+      oneTabButton* wallXButton;          /**< X Wall Button */
+      oneTabButton* wallZButton;          /**< Z Wall Button */
+      oneTabButton* wallX2Button;         /**< X Meio Fio Button */
+      oneTabButton* wallZ2Button;         /**< Z Meio Fio Button */
+      oneTabButton* wallTextureButton;    /**< Wall Texture Button */
+      oneTabButton* wallLessVerTexture;   /**< Texture Vertical Less Button */
+      oneTabButton* wallMoreVerTexture;   /**< Texture Vertical More Button */
+      oneTabButton* wallLessHorTexture;   /**< Texture Horizontal Less Button */
+      oneTabButton* wallMoreHorTexture;   /**< Texture Horizontal More Button */
+      void openWallWindow();
       /*********************Portal*Window*******************************/
       janela* portalWindow; /**< Portal Window */
+      tabButton* portalTabButton;
+      void openPortalWindow();
       /*********************Object*Window*******************************/
       janela* objectWindow; /**< Object Window */
+      void openObjectWindow();
       
 
       

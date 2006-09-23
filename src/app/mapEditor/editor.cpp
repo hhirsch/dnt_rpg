@@ -236,7 +236,7 @@ void editor::draw()
    if(mapOpened)
    {
       glPushMatrix();
-      map->draw(gui->cameraX, gui->cameraY, gui->cameraZ, visibleMatrix);
+         map->draw(gui->cameraX, gui->cameraY, gui->cameraZ, visibleMatrix);
       glPopMatrix();
    }
          
@@ -271,17 +271,17 @@ void editor::draw()
             visibleMatrix))
          {
             glPushMatrix();
-            glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
-            glRotatef(per->orientacao,0,1,0);
-            per->Render();
-          /*per->RenderBoundingBox();
-            glColor3f(0.6,0.1,0.1);
-            glBegin(GL_POLYGON);
-                glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
-                glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
-                glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
-                glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-            glEnd();*/
+               glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
+               glRotatef(per->orientacao,0,1,0);
+               per->Render();
+             /*per->RenderBoundingBox();
+               glColor3f(0.6,0.1,0.1);
+               glBegin(GL_POLYGON);
+                   glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
+                   glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
+                   glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
+                   glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+               glEnd();*/
             glPopMatrix();
          }
          per = (personagem*) per->proximo;
@@ -290,12 +290,13 @@ void editor::draw()
 
    /* Draw Particles */
    glPushMatrix();
-      glDisable(GL_LIGHTING);
       particleSystem->actualizeAll(0,0,visibleMatrix);
-      glEnable(GL_LIGHTING);
    glPopMatrix();
 
-   gui->draw(proj, modl, viewPort);
+   glPushMatrix();
+      gui->draw(proj, modl, viewPort);
+   glPopMatrix();
+   
    glFlush();
    SDL_GL_SwapBuffers();
 }
@@ -355,6 +356,12 @@ void editor::run()
          }
          
          draw();
+      }
+      else
+      {
+         int t = SDL_GetTicks();
+         if(ACTUALIZATION_RATE - (t - time) > 5)
+            SDL_Delay(ACTUALIZATION_RATE - (t - time));
       }
    }
 

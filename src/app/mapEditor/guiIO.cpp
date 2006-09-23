@@ -10,9 +10,43 @@ guiIO::guiIO()
 
    state = GUI_IO_STATE_INITIAL;
 
-   /**********************
-    * Create File Window *
-    **********************/
+   /* Open Windows */
+   openFileWindow();
+   openNavWindow();
+   openMainWindow();
+   
+   /* Camera Things */
+   theta=25;
+   phi=0;
+   d=150;
+   centerX = centerZ = 0;
+   centerY = 30;
+   deltaY = 0;
+   cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+   cameraY = centerY + (float) d * sin(deg2Rad(theta));
+   cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+
+   terrainWindow = NULL;
+   portalWindow = NULL;
+   wallWindow = NULL;
+   objectWindow = NULL;
+   
+
+}
+
+/****************************************************************
+ *                          Destructor                          *
+ ****************************************************************/
+guiIO::~guiIO()
+{
+   delete(gui);
+}
+
+/****************************************************************
+ *                       Open File Window                       *
+ ****************************************************************/
+void guiIO::openFileWindow()
+{
    fileWindow = gui->ljan->InserirJanela(0,0,184,63,"File",1,1,NULL,NULL);
    newButton = fileWindow->objects->InserirBotao(10,37,50,55,
                                                   fileWindow->Cores.corBot.R,
@@ -36,13 +70,16 @@ guiIO::guiIO()
                                                   "Exit",1,NULL);
    fileText = fileWindow->objects->InserirBarraTexto(10,17,173,33,
                                                      "../data/mapas/",0,NULL);
-
    fileWindow->fechavel = 0;
+   fileWindow->ptrExterno = &fileWindow;
    fileWindow->Abrir(gui->ljan);
-   
-   /**************************
-    * Create Navigate Window *
-    **************************/
+}
+
+/****************************************************************
+ *                       Open Nav Window                        *
+ ****************************************************************/
+void guiIO::openNavWindow()
+{
    navWindow = gui->ljan->InserirJanela(799-67,599-74,799,599,"Nav",1,1,
                                         NULL,NULL);
    navTabButton = navWindow->objects->InserirTabButton(7,17,0,0,
@@ -58,28 +95,112 @@ guiIO::guiIO()
    rotLeftButton = navTabButton->insertButton(40,36,50,50); /* Rotation Left */
    rotRightButton = navTabButton->insertButton(0,36,10,50); /* Rotation Right */
    navWindow->fechavel = 0;
+   navWindow->ptrExterno = &navWindow;
    navWindow->Abrir(gui->ljan);
-
-   /* Camera Things */
-   theta=25;
-   phi=0;
-   d=150;
-   centerX = centerZ = 0;
-   centerY = 30;
-   deltaY = 0;
-   cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   cameraY = centerY + (float) d * sin(deg2Rad(theta));
-   cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-
 }
 
 /****************************************************************
- *                          Destructor                          *
+ *                       Open Main Window                       *
  ****************************************************************/
-guiIO::~guiIO()
+void guiIO::openMainWindow()
 {
-   delete(gui);
+   mainWindow = gui->ljan->InserirJanela(0,64,184,163,"Main",1,1,NULL,NULL);
+   terrainButton = mainWindow->objects->InserirBotao(5,17,59,35,
+                                                     mainWindow->Cores.corBot.R,
+                                                     mainWindow->Cores.corBot.G,
+                                                     mainWindow->Cores.corBot.B,
+                                                     "Terrain",0,NULL);
+   wallButton = mainWindow->objects->InserirBotao(60,17,123,35,
+                                                  mainWindow->Cores.corBot.R,
+                                                  mainWindow->Cores.corBot.G,
+                                                  mainWindow->Cores.corBot.B,
+                                                  "Wall",0,NULL);
+   portalButton = mainWindow->objects->InserirBotao(124,17,179,35,
+                                                    mainWindow->Cores.corBot.R,
+                                                    mainWindow->Cores.corBot.G,
+                                                    mainWindow->Cores.corBot.B,
+                                                    "Portal",0,NULL);
+   objectButton = mainWindow->objects->InserirBotao(5,36,59,54,
+                                                    mainWindow->Cores.corBot.R,
+                                                    mainWindow->Cores.corBot.G,
+                                                    mainWindow->Cores.corBot.B,
+                                                    "Object",0,NULL);
+   particleButton = mainWindow->objects->InserirBotao(60,36,123,54,
+                                                      mainWindow->Cores.corBot.R,
+                                                      mainWindow->Cores.corBot.G,
+                                                      mainWindow->Cores.corBot.B,
+                                                      "Particle",0,NULL);
+   npcButton = mainWindow->objects->InserirBotao(124,36,179,54,
+                                                 mainWindow->Cores.corBot.R,
+                                                 mainWindow->Cores.corBot.G,
+                                                 mainWindow->Cores.corBot.B,
+                                                 "NPC",0,NULL);
+   destroyButton = mainWindow->objects->InserirBotao(5,55,59,73,
+                                                     mainWindow->Cores.corBot.R,
+                                                     mainWindow->Cores.corBot.G,
+                                                     mainWindow->Cores.corBot.B,
+                                                     "Destroy",0,NULL);
+   lightButton = mainWindow->objects->InserirBotao(60,55,123,73,
+                                                   mainWindow->Cores.corBot.R,
+                                                   mainWindow->Cores.corBot.G,
+                                                   mainWindow->Cores.corBot.B,
+                                                   "Light",0,NULL);
+   fogButton = mainWindow->objects->InserirBotao(124,55,179,73,
+                                                 mainWindow->Cores.corBot.R,
+                                                 mainWindow->Cores.corBot.G,
+                                                 mainWindow->Cores.corBot.B,
+                                                 "Fog",0,NULL);
+   optionsButton = mainWindow->objects->InserirBotao(5,74,59,92,
+                                                     mainWindow->Cores.corBot.R,
+                                                     mainWindow->Cores.corBot.G,
+                                                     mainWindow->Cores.corBot.B,
+                                                     "Options",0,NULL);
+
+   mainWindow->fechavel = 0;
+   mainWindow->ptrExterno = &mainWindow;
+   mainWindow->Abrir(gui->ljan);
 }
+
+/****************************************************************
+ *                       Open Wall Window                       *
+ ****************************************************************/
+void guiIO::openWallWindow()
+{
+   wallWindow = gui->ljan->InserirJanela(0,599-123,112,599-62,"Wall",
+                                         1,1,NULL,NULL);
+   wallTabButton = wallWindow->objects->InserirTabButton(7,17,0,0,
+                                                   "../data/mapEditor/wall.png");
+   wallWindow->ptrExterno = &wallWindow;
+   wallWindow->Abrir(gui->ljan);
+}
+
+/****************************************************************
+ *                       Open Portal Window                     *
+ ****************************************************************/
+void guiIO::openPortalWindow()
+{
+   portalWindow = gui->ljan->InserirJanela(0,599-185,112,599-124,"Portal",
+                                           1,1,NULL,NULL);
+   portalTabButton = portalWindow->objects->InserirTabButton(7,17,0,0,
+                                                 "../data/mapEditor/portal.png");
+   portalWindow->ptrExterno = &portalWindow;
+   portalWindow->Abrir(gui->ljan);
+}
+
+
+/****************************************************************
+ *                       Open Terrain Window                    *
+ ****************************************************************/
+void guiIO::openTerrainWindow()
+{
+   terrainWindow = gui->ljan->InserirJanela(0,599-61,112,599,"Terrain",1,1,NULL,NULL);
+   terrainTabButton = terrainWindow->objects->InserirTabButton(7,17,0,0,
+                                                "../data/mapEditor/terrain.png");
+   terrainWindow->ptrExterno = &terrainWindow;
+   terrainWindow->Abrir(gui->ljan);
+}
+
+
 
 /****************************************************************
  *                           getState                           *
@@ -195,6 +316,30 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          else if(object == (Tobjeto*) saveButton)
          {
             return(GUI_IO_SAVE_MAP);
+         }
+         else if(object == (Tobjeto*) terrainButton)
+         {
+            if(!terrainWindow)
+            {
+               openTerrainWindow();
+            }
+            return(GUI_IO_OTHER);
+         }
+         else if(object == (Tobjeto*) wallButton)
+         {
+            if(!wallWindow)
+            {
+               openWallWindow();
+            }
+            return(GUI_IO_OTHER);
+         }
+         else if(object == (Tobjeto*) portalButton)
+         {
+            if(!portalWindow)
+            {
+               openPortalWindow();
+            }
+            return(GUI_IO_OTHER);
          }
          break;
       }
