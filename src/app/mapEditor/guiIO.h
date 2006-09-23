@@ -2,6 +2,7 @@
 #define _guiIO_H
 
 #include "../../gui/farso.h"
+#include "terrain.h"
 
 /* Return Constants */
 #define GUI_IO_NOTHING       0
@@ -13,8 +14,11 @@
 #define GUI_IO_EXIT          6
 #define GUI_IO_OTHER         7
 
+#define TOOL_NONE            0
+
 /* State Constants */
 #define GUI_IO_STATE_INITIAL 0
+#define GUI_IO_STATE_TERRAIN 1
 
 /**! The Super GUI IO Class, to control things on map Editor! */
 class guiIO
@@ -28,6 +32,11 @@ class guiIO
        * \return Internal State */
       int getState();
 
+      /*! Get Tool selected by GUI IO.
+       * \return actual selected Tool */
+      int getTool();
+
+
       /*! Do the GUI IO */
       int doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys);
 
@@ -40,22 +49,23 @@ class guiIO
       /*! Gets the FileName */
       string getFileName();
 
-      GLfloat cameraX; 
-      GLfloat cameraY;
-      GLfloat cameraZ;
+      GLfloat cameraX; /**< Camera X position */
+      GLfloat cameraY; /**< Camera Y position */
+      GLfloat cameraZ; /**< Camera Z position */
 
-      GLfloat theta;
-      GLfloat phi;
-      GLfloat d;
-      GLfloat deltaY;
+      GLfloat theta;   /**< Camera Theta */
+      GLfloat phi;     /**< Camera Phi */
+      GLfloat d;       /**< Camera Zoom */
+      GLfloat deltaY;  /**< Camera Delta Y */
 
-      GLfloat centerX;
-      GLfloat centerY;
-      GLfloat centerZ; 
+      GLfloat centerX; /**< Camera Center X Position */
+      GLfloat centerY; /**< Camera Center Y Position */
+      GLfloat centerZ; /**< Camera Center Z Position */
 
    private:
 
       int state;      /**< Internal State */
+      int tool;       /**< Selected Tool */
 
       interface* gui; /**< Internal GUI */
 
@@ -125,12 +135,18 @@ class guiIO
       oneTabButton* wallMoreHorTexture;   /**< Texture Horizontal More Button */
       void openWallWindow();
       /*********************Portal*Window*******************************/
-      janela* portalWindow; /**< Portal Window */
-      tabButton* portalTabButton;
+      janela* portalWindow;          /**< Portal Window */
+      tabButton* portalTabButton;    /**< Portal TbButton */
+      oneTabButton* portalAddButton; /**< Add Portal Button */
+      oneTabButton* portalTagButton; /**< Portal Tag Button */
       void openPortalWindow();
       /*********************Object*Window*******************************/
       janela* objectWindow; /**< Object Window */
       void openObjectWindow();
+      /*********************Particle*Window*******************************/
+      janela* particleWindow; /**< Object Window */
+      tabButton* particleTabButton;
+      void openParticleWindow();
       
 
       

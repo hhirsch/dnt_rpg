@@ -17,6 +17,8 @@ editor::editor()
    gui = new(guiIO);
    hour = 12.0;
    gameSun = new sun(hour , FARVIEW, FARVIEW);
+
+   terrainEditor = NULL;
 }
 
 /*********************************************************************
@@ -27,6 +29,7 @@ editor::~editor()
    if(mapOpened)
    {
       delete(map);
+      delete(terrainEditor);
    }
    delete(gameSun);
    if(particleSystem != NULL)
@@ -92,12 +95,16 @@ void editor::openMap()
    {
       //Close Actual Map
       delete(map);
+      delete(terrainEditor);
       mapOpened = false;
    }
    map = new(Map);
    if(map->open(gui->getFileName()))
    {
       mapOpened = true;
+      terrainEditor = new terrain(map);
+      actualTexture = map->Texturas->indice;
+
       /* Open NPCs */
       if(NPCs)
          delete(NPCs);
@@ -187,10 +194,20 @@ void editor::saveMap()
  *********************************************************************/
 void editor::newMap()
 {
+   if(mapOpened)
+   {
+      //Close Actual Map
+      delete(map);
+      delete(terrainEditor);
+      mapOpened = false;
+   }
+
    mapOpened = true;
    map = new(Map);
    //TODO Get Map Size!!!!
    map->newMap(8,8);
+   terrainEditor = new terrain(map);
+   actualTexture = map->Texturas->indice;
 }
 
 /*********************************************************************
@@ -237,6 +254,10 @@ void editor::draw()
    {
       glPushMatrix();
          map->draw(gui->cameraX, gui->cameraY, gui->cameraZ, visibleMatrix);
+         if(gui->getState() == GUI_IO_STATE_TERRAIN)
+         {
+            terrainEditor->drawTemporary();
+         }
       glPopMatrix();
    }
          
@@ -306,7 +327,20 @@ void editor::draw()
  *********************************************************************/
 void editor::doEditorIO()
 {
-   //TODO
+   GLdouble xReal,yReal,zReal;
+   GLfloat wx, wy, wz;
+
+   wx = mouseX; wy = 600-mouseY; 
+
+   glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
+   gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
+
+   
+   if( (gui->getState() == GUI_IO_STATE_TERRAIN) && (mapOpened))
+   {
+      terrainEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(), 
+                                  actualTexture);
+   }
 }
 
 /*********************************************************************

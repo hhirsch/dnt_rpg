@@ -2,6 +2,7 @@
 #define _editor_h
 
 #include "guiIO.h"
+#include "terrain.h"
 #include "../../engine/sun.h"
 #include "../../engine/personagens.h"
 #include "../../particle/partSystem.h"
@@ -63,6 +64,9 @@ class editor
       partSystem* particleSystem;    /**< Particles on Map */
       
       guiIO* gui;                    /**< The Editor's GUI */
+      terrain* terrainEditor;        /**< The terrain Editor Module */
+
+      GLuint actualTexture;          /**< Actual Texture */
 
       GLdouble proj[16];             /**< Projection Matrix */
       GLdouble modl[16];             /**< Model View Matrix */

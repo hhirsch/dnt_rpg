@@ -21,24 +21,29 @@ BIN = ../../../bin/
 
 all: mapEditor
 
-editor.o: editor.cpp
+editor.o: editor.cpp editor.h
 	@printf "Making editor.o... "
 	@$(CC) $(CFLAGS) editor.cpp -o editor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-guiIO.o: guiIO.cpp
+guiIO.o: guiIO.cpp guiIO.h
 	@printf "Making guiIO.o... "
 	@$(CC) $(CFLAGS) guiIO.cpp -o guiIO.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-mapEditor.o: mapEditor.cpp
+mapEditor.o: mapEditor.cpp mapEditor.h
 	@printf "Making mapEditor.o... "
 	@$(CC) $(CFLAGS) mapEditor.cpp -o mapEditor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-mapEditor: $(OBJSGUI) $(OBJSMAPA) editor.o guiIO.o mapEditor.o 
+terrain.o: terrain.cpp terrain.h
+	@printf "Making terrain.o... "
+	@$(CC) $(CFLAGS) terrain.cpp -o terrain.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+mapEditor: $(OBJSGUI) $(OBJSMAPA) editor.o guiIO.o mapEditor.o terrain.o
 	@printf "Linking mapEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPARTICLE) $(OBJSCLASSES) $(OBJSLANG) editor.o guiIO.o mapEditor.o -o $(BIN)mapEditor
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPARTICLE) $(OBJSCLASSES) $(OBJSLANG) editor.o guiIO.o mapEditor.o terrain.o -o $(BIN)mapEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:

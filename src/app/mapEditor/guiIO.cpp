@@ -9,6 +9,7 @@ guiIO::guiIO()
    gui = new interface(NULL);
 
    state = GUI_IO_STATE_INITIAL;
+   tool = TOOL_NONE;
 
    /* Open Windows */
    openFileWindow();
@@ -30,6 +31,7 @@ guiIO::guiIO()
    portalWindow = NULL;
    wallWindow = NULL;
    objectWindow = NULL;
+   particleWindow = NULL;
    
 
 }
@@ -170,6 +172,17 @@ void guiIO::openWallWindow()
                                          1,1,NULL,NULL);
    wallTabButton = wallWindow->objects->InserirTabButton(7,17,0,0,
                                                    "../data/mapEditor/wall.png");
+   wallXButton = wallTabButton->insertButton(0,0,19,19);          /* Wall X */
+   wallZButton = wallTabButton->insertButton(20,0,39,19);         /* Wall Z */
+   wallX2Button = wallTabButton->insertButton(40,0,59,19);        /* Wall X */
+   wallZ2Button = wallTabButton->insertButton(60,0,79,19);        /* Wall Z */
+   wallTextureButton = wallTabButton->insertButton(0,20,19,39);   /* Texture */
+   wallLessVerTexture = wallTabButton->insertButton(20,20,39,39); /* Less V */
+   wallMoreVerTexture = wallTabButton->insertButton(40,20,59,39); /* More V */
+   wallLessHorTexture = wallTabButton->insertButton(60,20,79,39); /* Less H */
+   wallMoreHorTexture = wallTabButton->insertButton(80,20,99,39); /* Less H */
+
+
    wallWindow->ptrExterno = &wallWindow;
    wallWindow->Abrir(gui->ljan);
 }
@@ -183,6 +196,8 @@ void guiIO::openPortalWindow()
                                            1,1,NULL,NULL);
    portalTabButton = portalWindow->objects->InserirTabButton(7,17,0,0,
                                                  "../data/mapEditor/portal.png");
+   portalAddButton = portalTabButton->insertButton(0,0,19,19); /* Add */
+   portalTagButton = portalTabButton->insertButton(20,0,39,19); /* Tag */
    portalWindow->ptrExterno = &portalWindow;
    portalWindow->Abrir(gui->ljan);
 }
@@ -193,11 +208,30 @@ void guiIO::openPortalWindow()
  ****************************************************************/
 void guiIO::openTerrainWindow()
 {
-   terrainWindow = gui->ljan->InserirJanela(0,599-61,112,599,"Terrain",1,1,NULL,NULL);
+   terrainWindow = gui->ljan->InserirJanela(0,599-61,112,599,"Terrain",
+                                            1,1,NULL,NULL);
    terrainTabButton = terrainWindow->objects->InserirTabButton(7,17,0,0,
                                                 "../data/mapEditor/terrain.png");
+   terrainUpButton = terrainTabButton->insertButton(0,0,19,19);    
+   terrainNivButton = terrainTabButton->insertButton(20,0,39,19);  
+   terrainDownButton = terrainTabButton->insertButton(40,0,59,19); 
+   terrainWalkableButton = terrainTabButton->insertButton(0,20,19,39);
+   terrainTextureButton = terrainTabButton->insertButton(20,20,39,39);
    terrainWindow->ptrExterno = &terrainWindow;
    terrainWindow->Abrir(gui->ljan);
+}
+
+/****************************************************************
+ *                       Open Particle Window                   *
+ ****************************************************************/
+void guiIO::openParticleWindow()
+{
+   particleWindow = gui->ljan->InserirJanela(0,599-247,112,599-186,"Particle",
+                                             1,1,NULL,NULL);
+   particleTabButton = particleWindow->objects->InserirTabButton(7,17,0,0,
+                                               "../data/mapEditor/particle.png");
+   particleWindow->ptrExterno = &particleWindow;
+   particleWindow->Abrir(gui->ljan);
 }
 
 
@@ -209,6 +243,15 @@ int guiIO::getState()
 {
    return(state);
 }
+
+/****************************************************************
+ *                           getTool                            *
+ ****************************************************************/
+int guiIO::getTool()
+{
+   return(tool);
+}
+
 
 /****************************************************************
  *                             Draw                             *
@@ -236,6 +279,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
    {
       case TABBOTAOPRESSIONADO:
       {
+         /*  Navigation Buttons  */
          if(object == (Tobjeto*) upButton)
          {
             centerX -= 4.0 * sin(deg2Rad(phi));
@@ -297,6 +341,33 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             return(GUI_IO_NEW_POSITION);
          }
 
+         /*  Terrain Buttons  */
+         else if(object == (Tobjeto*) terrainUpButton)
+         {
+            state = GUI_IO_STATE_TERRAIN;
+            tool = TOOL_TERRAIN_UP;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) terrainDownButton)
+         {
+            state = GUI_IO_STATE_TERRAIN;
+            tool = TOOL_TERRAIN_DOWN;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) terrainNivButton)
+         {
+            state = GUI_IO_STATE_TERRAIN;
+            tool = TOOL_TERRAIN_NIVELATE;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) terrainTextureButton)
+         {
+            state = GUI_IO_STATE_TERRAIN;
+            tool = TOOL_TERRAIN_TEXTURE;
+            return(GUI_IO_NEW_STATE);
+         }
+
+
          break;
       }
       case BOTAOPRESSIONADO:
@@ -341,10 +412,26 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             }
             return(GUI_IO_OTHER);
          }
+         else if(object == (Tobjeto*) particleButton)
+         {
+            if(!particleWindow)
+            {
+               openParticleWindow();
+            }
+            return(GUI_IO_OTHER);
+         }
+
          break;
       }
    }
-   return(GUI_IO_NOTHING);
+   if(eventInfo == NADA)
+   {
+      return(GUI_IO_NOTHING);
+   }
+   else
+   {
+      return(GUI_IO_OTHER);
+   }
 }
 
 /****************************************************************
