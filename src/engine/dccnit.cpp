@@ -132,6 +132,12 @@ engine::~engine()
    if(PCs)
       delete(PCs);
 
+   /* Clear Sun */
+   if(gameSun)
+   {
+      delete(gameSun);
+   }
+
    /* Clear GUI */
    if(gui)
       delete(gui);

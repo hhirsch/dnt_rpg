@@ -458,6 +458,8 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
       glDisable(GL_COLOR_MATERIAL);
 
+      glColor3f(1.0,1.0,1.0);
+
       return(0);
 }
 

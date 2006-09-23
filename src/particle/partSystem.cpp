@@ -205,6 +205,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4])
          snow[i]->NextStep(matriz);
       }
    }
+   glColor3f(1.0,1.0,1.0);
 }
 
 particleSystem* partSystem::addParticle(int type, GLfloat X, GLfloat Y, 

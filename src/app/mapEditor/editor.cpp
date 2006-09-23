@@ -243,23 +243,27 @@ void editor::draw()
 {
    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
    glLoadIdentity();
+   glClearColor(0.0,0.0,0.0,1.0);
+
 
    /* Redefine camera position */
    gui->camera();
    AtualizaFrustum( visibleMatrix, proj, modl);
    gameSun->actualizeHourOfDay(hour);
+
+   glPushMatrix();
    
    /* Draw Things */
    if(mapOpened)
    {
-      glPushMatrix();
          map->draw(gui->cameraX, gui->cameraY, gui->cameraZ, visibleMatrix);
          if(gui->getState() == GUI_IO_STATE_TERRAIN)
          {
             terrainEditor->drawTemporary();
          }
-      glPopMatrix();
    }
+
+   glColor3f(1.0,1.0,1.0);
          
    /* Draw the NPCs */
    if(NPCs)
@@ -314,8 +318,8 @@ void editor::draw()
       particleSystem->actualizeAll(0,0,visibleMatrix);
    glPopMatrix();
 
-   glPushMatrix();
-      gui->draw(proj, modl, viewPort);
+   gui->draw(proj, modl, viewPort);
+
    glPopMatrix();
    
    glFlush();

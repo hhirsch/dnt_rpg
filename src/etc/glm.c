@@ -933,6 +933,7 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
       /* Define o Material */
       //if (mode & GLM_MATERIAL) 
       //{
+#if 0
          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
 	   	   model->materials[T(group->triangles[i]).material].ambient);
          glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, 
@@ -941,6 +942,7 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
 		   model->materials[T(group->triangles[i]).material].specular);
          glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 
    		   model->materials[T(group->triangles[i]).material].shininess);
+#endif
       //}
       /* Define a Cor */
       //if (mode & GLM_COLOR) 
@@ -1065,6 +1067,7 @@ GLvoid glmDraw(GLMmodel* model)
       /* Define o Material */
       //if (mode & GLM_MATERIAL) 
       //{
+#if 0
          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
 	   	   model->materials[T(group->triangles[i]).material].ambient);
          glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, 
@@ -1073,6 +1076,7 @@ GLvoid glmDraw(GLMmodel* model)
 		   model->materials[T(group->triangles[i]).material].specular);
          glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 
    		   model->materials[T(group->triangles[i]).material].shininess);
+#endif
       //}
       /* Define a Cor */
       //if (mode & GLM_COLOR) 
