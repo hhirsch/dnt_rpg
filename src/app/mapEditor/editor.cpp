@@ -108,7 +108,7 @@ void editor::openMap()
       /* Open NPCs */
       if(NPCs)
          delete(NPCs);
-      NPCs = NULL;
+      NPCs = new (Lpersonagem);
       personagem* per;
       if(!map->npcFileName.empty())
       {
@@ -120,7 +120,6 @@ void editor::openMap()
          }
          else
          {
-            NPCs = new (Lpersonagem);
             int total;
             int npc;
             char nome[30];
@@ -199,6 +198,11 @@ void editor::newMap()
       //Close Actual Map
       delete(map);
       delete(terrainEditor);
+      particleSystem->deleteAll();
+      if(NPCs)
+      {
+         delete(NPCs);
+      }
       mapOpened = false;
    }
 
@@ -208,6 +212,7 @@ void editor::newMap()
    map->newMap(8,8);
    terrainEditor = new terrain(map);
    actualTexture = map->Texturas->indice;
+   NPCs = new (Lpersonagem);
 }
 
 /*********************************************************************
@@ -236,14 +241,67 @@ void editor::verifyPosition()
    }
 }
 
+/************************************************************************
+ *                         Previous Texture                             *
+ ************************************************************************/
+int editor::previousTexture()
+{
+   int aux=0;
+   texture* tex = map->Texturas;
+   while(aux < map->numtexturas-1)
+   {
+      if(tex->proximo->indice == actualTexture)
+      {
+         actualTexture = tex->indice;
+         return(tex->indice);
+      }
+      tex = tex->proximo;
+      aux++;
+   }
+   actualTexture = map->Texturas->indice;
+   return(map->Texturas->indice);
+}
+
+/************************************************************************
+ *                             Next Texture                             *
+ ************************************************************************/
+int editor::nextTexture()
+{
+   int aux=0;
+   texture* tex = map->Texturas;
+   while(aux < map->numtexturas)
+   {
+      if(tex->indice == actualTexture)
+      {
+         if(tex->proximo)
+         {
+           actualTexture = tex->proximo->indice;
+           return(tex->proximo->indice);
+         }
+         else
+         {
+            actualTexture = tex->indice;
+           return(tex->indice);
+         }
+      }
+      tex = tex->proximo;
+      aux++;
+   }
+   actualTexture = 0;
+   return(-1);
+}
+
 /*********************************************************************
  *                                Draw                               *
  *********************************************************************/
 void editor::draw()
 {
+
+   GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
+
    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
    glLoadIdentity();
-   glClearColor(0.0,0.0,0.0,1.0);
+   glClearColor(0.3,0.3,0.8,1.0);
 
 
    /* Redefine camera position */
@@ -318,7 +376,41 @@ void editor::draw()
       particleSystem->actualizeAll(0,0,visibleMatrix);
    glPopMatrix();
 
+   /* Draw GUI */
    gui->draw(proj, modl, viewPort);
+
+   /* Draw Active Texture */
+   if(mapOpened)
+   {
+      gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, 
+                   &x1, &y1, &z1);
+      gluUnProject(SCREEN_X,SCREEN_Y-50,0.01, modl, proj, viewPort, 
+                   &x2, &y2, &z2);
+      gluUnProject(SCREEN_X-50,SCREEN_Y-50,0.01,modl,proj,viewPort, 
+                   &x3, &y3, &z3);
+      gluUnProject(SCREEN_X-50,SCREEN_Y,0.01, modl, proj, viewPort,  
+                   &x4, &y4, &z4);
+
+      glDisable(GL_LIGHTING);
+      glDisable(GL_DEPTH_TEST);
+      glEnable(GL_TEXTURE_2D);
+      glBindTexture(GL_TEXTURE_2D, actualTexture );
+      glBegin(GL_QUADS);
+         glColor3f(1,1,1);
+         glTexCoord2f(1,0);
+         glVertex3f(x1,y1,z1);
+         glTexCoord2f(1,1);
+         glVertex3f(x2,y2,z2);
+         glTexCoord2f(0,1);
+         glVertex3f(x3,y3,z3);
+         glTexCoord2f(0,0);
+         glVertex3f(x4,y4,z4);
+      glEnd();
+      glDisable(GL_TEXTURE_2D);
+
+      glEnable(GL_LIGHTING);
+      glEnable(GL_DEPTH_TEST);
+   }
 
    glPopMatrix();
    
@@ -387,6 +479,16 @@ void editor::run()
          else if(guiEvent == GUI_IO_SAVE_MAP)
          {
             saveMap();            
+         }
+         else if(guiEvent == GUI_IO_TEXTURE_PREVIOUS)
+         {
+            if(mapOpened)
+               previousTexture();
+         }
+         else if(guiEvent == GUI_IO_TEXTURE_NEXT)
+         {
+            if(mapOpened)
+               nextTexture();
          }
          else if(guiEvent == GUI_IO_NOTHING)
          {

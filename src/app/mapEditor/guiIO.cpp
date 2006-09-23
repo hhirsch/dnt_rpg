@@ -15,6 +15,11 @@ guiIO::guiIO()
    openFileWindow();
    openNavWindow();
    openMainWindow();
+   openWallWindow();
+   openTerrainWindow();
+   openParticleWindow();
+   openPortalWindow();
+   openTextureWindow();
    
    /* Camera Things */
    theta=25;
@@ -26,13 +31,6 @@ guiIO::guiIO()
    cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centerY + (float) d * sin(deg2Rad(theta));
    cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-
-   terrainWindow = NULL;
-   portalWindow = NULL;
-   wallWindow = NULL;
-   objectWindow = NULL;
-   particleWindow = NULL;
-   
 
 }
 
@@ -75,6 +73,35 @@ void guiIO::openFileWindow()
    fileWindow->fechavel = 0;
    fileWindow->ptrExterno = &fileWindow;
    fileWindow->Abrir(gui->ljan);
+}
+
+/****************************************************************
+ *                       Open Texture Window                    *
+ ****************************************************************/
+void guiIO::openTextureWindow()
+{
+   textureWindow = gui->ljan->InserirJanela(0,164,184,244,"Texture",1,1,
+                                            NULL, NULL);
+   texturePreviousButton = textureWindow->objects->InserirBotao(7,56,74,74,
+                                                  textureWindow->Cores.corBot.R,
+                                                  textureWindow->Cores.corBot.G,
+                                                  textureWindow->Cores.corBot.B,
+                                                  "Previous",1,NULL);
+   textureNextButton = textureWindow->objects->InserirBotao(110,56,177,74,
+                                                  textureWindow->Cores.corBot.R,
+                                                  textureWindow->Cores.corBot.G,
+                                                  textureWindow->Cores.corBot.B,
+                                                  "Next",1,NULL);
+   textureInsertButton = textureWindow->objects->InserirBotao(20,35,153,53,
+                                                  textureWindow->Cores.corBot.R,
+                                                  textureWindow->Cores.corBot.G,
+                                                  textureWindow->Cores.corBot.B,
+                                                  "Insert",1,NULL);
+   textureText = textureWindow->objects->InserirBarraTexto(10,17,173,33,
+                                                     "../data/texturas/",0,NULL);
+   textureWindow->fechavel = 0;
+   textureWindow->ptrExterno = &textureWindow;
+   textureWindow->Abrir(gui->ljan);
 }
 
 /****************************************************************
@@ -419,6 +446,15 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
                openParticleWindow();
             }
             return(GUI_IO_OTHER);
+         }
+         /* Texture Window */
+         else if(object == (Tobjeto*) textureNextButton)
+         {
+            return(GUI_IO_TEXTURE_NEXT);
+         }
+         else if(object == (Tobjeto*) texturePreviousButton)
+         {
+            return(GUI_IO_TEXTURE_PREVIOUS);
          }
 
          break;

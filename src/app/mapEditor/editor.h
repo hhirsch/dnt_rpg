@@ -45,6 +45,10 @@ class editor
       void draw();
       /*! Verifies the IO on Editor */
       void doEditorIO();
+      /*! Gets Previous Texture on List */
+      int previousTexture();
+      /*! Gets Next Texture on Map List */
+      int nextTexture();
 
       SDL_Surface *screen;           /**< SDL Screen */
       Uint8* keys;                   /**< Keyboard State */

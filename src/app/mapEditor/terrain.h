@@ -38,6 +38,8 @@ class terrain
       int quadX;        /**< Mouse Mouse Square X Coordinate */
       int quadZ;        /**< Mouse Mouse Square Z Coordinate */
 
+      GLfloat mX, mY, mZ;
+
       void doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                     Uint8 mButton);
       void doNivelate(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 

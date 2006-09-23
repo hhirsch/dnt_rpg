@@ -5,14 +5,16 @@
 #include "terrain.h"
 
 /* Return Constants */
-#define GUI_IO_NOTHING       0
-#define GUI_IO_NEW_POSITION  1
-#define GUI_IO_NEW_STATE     2
-#define GUI_IO_NEW_MAP       3
-#define GUI_IO_OPEN_MAP      4
-#define GUI_IO_SAVE_MAP      5
-#define GUI_IO_EXIT          6
-#define GUI_IO_OTHER         7
+#define GUI_IO_NOTHING              0
+#define GUI_IO_NEW_POSITION         1
+#define GUI_IO_NEW_STATE            2
+#define GUI_IO_NEW_MAP              3
+#define GUI_IO_OPEN_MAP             4
+#define GUI_IO_SAVE_MAP             5
+#define GUI_IO_EXIT                 6
+#define GUI_IO_OTHER                7
+#define GUI_IO_TEXTURE_PREVIOUS     8
+#define GUI_IO_TEXTURE_NEXT         9
 
 #define TOOL_NONE            0
 
@@ -110,6 +112,10 @@ class guiIO
 
       /*********************Texture*Window*******************************/
       janela* textureWindow;
+      botao* texturePreviousButton;
+      botao* textureNextButton;
+      botao* textureInsertButton;
+      barraTexto* textureText;
       void openTextureWindow();
 
       /*********************Terrain*Window*******************************/

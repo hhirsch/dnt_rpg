@@ -29,6 +29,10 @@ void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    quadX = (int) (mouseX / SQUARESIZE);
    quadZ = (int) (mouseZ / SQUARESIZE);
 
+   mX = mouseX;
+   mY = mouseY;
+   mZ = mouseZ;
+
    actualTool = tool;
 
    if(tool == TOOL_TERRAIN_TEXTURE)
@@ -205,11 +209,26 @@ void terrain::drawTemporary()
       glEnd();
       glEnable(GL_LIGHTING);
    }
-   else if((actualTool == TOOL_TERRAIN_UP) || (actualTool == TOOL_TERRAIN_DOWN))
+   else if((quad) && 
+           (((actualTool == TOOL_TERRAIN_UP) || 
+             (actualTool == TOOL_TERRAIN_DOWN))))
    {
-      if(quad)
+      if(actualTool == TOOL_TERRAIN_UP)
       {
+         glColor3f(0.2,0.8,0.6);
       }
+      else
+      {
+         glColor3f(0.8,0.2,0.1);
+      }
+      glDisable(GL_LIGHTING);
+      glBegin(GL_POLYGON);
+        glVertex3f(mX-2,quad->h1+1,mZ-2);
+        glVertex3f(mX-2,quad->h2+1,mZ+2);
+        glVertex3f(mX+2,quad->h3+1,mZ+2);
+        glVertex3f(mX+2,quad->h4+1,mZ-2);
+      glEnd();
+      glEnable(GL_LIGHTING);
    }
    else if(actualTool == TOOL_TERRAIN_NIVELATE)
    {
@@ -234,4 +253,5 @@ void terrain::drawTemporary()
             
       }
    }
+   glColor3f(1.0,1.0,1.0);
 }
