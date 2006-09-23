@@ -96,6 +96,7 @@ void guiIO::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    glDisable(GL_LIGHTING);
    glDisable(GL_DEPTH_TEST);
+   glDisable(GL_BLEND);
    gui->draw(proj,modl,viewPort);
    glEnable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);

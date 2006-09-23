@@ -21,6 +21,11 @@ BIN = ../../../bin/
 
 all: mapEditor
 
+editor.o: editor.cpp
+	@printf "Making editor.o... "
+	@$(CC) $(CFLAGS) editor.cpp -o editor.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 guiIO.o: guiIO.cpp
 	@printf "Making guiIO.o... "
 	@$(CC) $(CFLAGS) guiIO.cpp -o guiIO.o
@@ -31,9 +36,9 @@ mapEditor.o: mapEditor.cpp
 	@$(CC) $(CFLAGS) mapEditor.cpp -o mapEditor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-mapEditor: $(OBJSGUI) $(OBJSMAPA) guiIO.o mapEditor.o 
+mapEditor: $(OBJSGUI) $(OBJSMAPA) editor.o guiIO.o mapEditor.o 
 	@printf "Linking mapEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPARTICLE) $(OBJSCLASSES) $(OBJSLANG) guiIO.o mapEditor.o -o $(BIN)mapEditor
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPARTICLE) $(OBJSCLASSES) $(OBJSLANG) editor.o guiIO.o mapEditor.o -o $(BIN)mapEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
