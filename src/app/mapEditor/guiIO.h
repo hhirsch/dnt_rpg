@@ -15,6 +15,7 @@
 #define GUI_IO_OTHER                7
 #define GUI_IO_TEXTURE_PREVIOUS     8
 #define GUI_IO_TEXTURE_NEXT         9
+#define GUI_IO_TEXTURE_INSERT      10
 
 #define TOOL_NONE            0
 
@@ -50,6 +51,8 @@ class guiIO
 
       /*! Gets the FileName */
       string getFileName();
+
+      string getTextureFileName();
 
       GLfloat cameraX; /**< Camera X position */
       GLfloat cameraY; /**< Camera Y position */

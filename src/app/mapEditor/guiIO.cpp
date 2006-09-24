@@ -456,6 +456,11 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             return(GUI_IO_TEXTURE_PREVIOUS);
          }
+         else if(object == (Tobjeto*) textureInsertButton)
+         {
+            return(GUI_IO_TEXTURE_INSERT);
+         }
+
 
          break;
       }
@@ -487,5 +492,13 @@ void guiIO::camera()
 string guiIO::getFileName()
 {
    return(fileText->texto);
+}
+
+/****************************************************************
+ *                   getTextureFileName                         *
+ ****************************************************************/
+string guiIO::getTextureFileName()
+{
+   return(textureText->texto);
 }
 

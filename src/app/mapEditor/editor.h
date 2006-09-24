@@ -49,6 +49,8 @@ class editor
       int previousTexture();
       /*! Gets Next Texture on Map List */
       int nextTexture();
+      /*! Insert Texture on Map List */
+      int insertTexture();
 
       SDL_Surface *screen;           /**< SDL Screen */
       Uint8* keys;                   /**< Keyboard State */

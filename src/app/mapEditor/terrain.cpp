@@ -173,6 +173,23 @@ void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 void terrain::doNivelate(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                          Uint8 mButton)
 {
+   if(state == STATE_TERRAIN_OTHER)
+   {
+      if(mButton & SDL_BUTTON(1))
+      {
+         quadInitX = quadX;
+         quadInitZ = quadZ;
+         state = STATE_TERRAIN_NIVELATE_STARTED;
+      }
+   }
+   else if(state == STATE_TERRAIN_NIVELATE_STARTED)
+   {
+      if(!(mButton & SDL_BUTTON(1)))
+      {
+         state = STATE_TERRAIN_OTHER;
+         //TODO do Nivelation
+      }
+   }
 }
 
 /********************************************************************
@@ -234,6 +251,23 @@ void terrain::drawTemporary()
    {
       if(state == STATE_TERRAIN_NIVELATE_STARTED)
       {
+         Square* oth = actualMap->quadradoRelativo(quadInitX, quadInitZ);
+         if( (oth) && (quad))
+         {
+            glDisable(GL_LIGHTING);
+            glColor3f(0.5,0.1,0.6);
+            glBegin(GL_POLYGON);
+              glVertex3f(oth->x1+HALFSQUARESIZE-2,oth->h1+1,
+                         oth->z1+HALFSQUARESIZE-2);
+              glVertex3f(oth->x1+HALFSQUARESIZE-2,oth->h2+1,
+                         quad->z1+HALFSQUARESIZE+2);
+              glVertex3f(quad->x1+HALFSQUARESIZE+2,quad->h3+1,
+                         quad->z1+HALFSQUARESIZE+2);
+              glVertex3f(quad->x1+HALFSQUARESIZE+2,quad->h4+1,
+                         oth->z1+HALFSQUARESIZE-2);
+            glEnd();
+            glEnable(GL_LIGHTING);
+         }
       }
       else if(quad)
       {

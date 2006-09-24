@@ -38,6 +38,9 @@ class terrain
       int quadX;        /**< Mouse Mouse Square X Coordinate */
       int quadZ;        /**< Mouse Mouse Square Z Coordinate */
 
+      int quadInitX;
+      int quadInitZ;
+
       GLfloat mX, mY, mZ;
 
       void doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 

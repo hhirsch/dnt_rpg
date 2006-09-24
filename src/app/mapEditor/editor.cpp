@@ -291,6 +291,65 @@ int editor::nextTexture()
    return(-1);
 }
 
+/************************************************************************
+ *             Insere Textura na Lista de Texturas                      *
+ ************************************************************************/
+int editor::insertTexture()
+{
+   texture* tex;
+
+   SDL_Surface* img = IMG_Load(gui->getTextureFileName().c_str());
+   if(!img)
+   {
+      printf("Error on open texture : %s\n",gui->getTextureFileName().c_str());
+      return(-1);
+   }
+
+   /* Insere realmente a textura */ 
+   tex = (texture*) new(texture);
+   if(map->numtexturas == 0)
+   {
+      map->Texturas = tex;
+      tex->proximo = NULL;
+   }
+   else
+   {
+      tex->proximo = map->Texturas;
+      map->Texturas = tex;
+   }
+
+   tex->arqNome = gui->getTextureFileName();
+   tex->nome = gui->getTextureFileName();
+
+   SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       img->w,img->h,32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   SDL_BlitSurface(img,NULL,imgPotencia,NULL);
+ 
+   Uint8 R,G,B;
+   
+   Uint32 pixel = pixel_Pegar(imgPotencia,15,15);
+   SDL_GetRGB(pixel,imgPotencia->format, &R, &G, &B);
+   tex->R = R;
+   tex->G = G;
+   tex->B = B;
+
+   glGenTextures(1, &(tex->indice));
+   glBindTexture(GL_TEXTURE_2D, tex->indice);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
+                0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   map->numtexturas++;
+
+   printf("Inserted Texture: %d %d\n",img->w,img->h);
+
+   /* Libera a memoria utilizada */
+   SDL_FreeSurface(img);
+   SDL_FreeSurface(imgPotencia);
+   return(tex->indice);
+}
+
 /*********************************************************************
  *                                Draw                               *
  *********************************************************************/
@@ -489,6 +548,13 @@ void editor::run()
          {
             if(mapOpened)
                nextTexture();
+         }
+         else if(guiEvent == GUI_IO_TEXTURE_INSERT)
+         {
+            if(mapOpened)
+            {
+               insertTexture();
+            }
          }
          else if(guiEvent == GUI_IO_NOTHING)
          {
