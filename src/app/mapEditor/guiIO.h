@@ -2,6 +2,7 @@
 #define _guiIO_H
 
 #include "../../gui/farso.h"
+#include "portal.h"
 #include "terrain.h"
 
 /* Return Constants */
@@ -22,6 +23,7 @@
 /* State Constants */
 #define GUI_IO_STATE_INITIAL 0
 #define GUI_IO_STATE_TERRAIN 1
+#define GUI_IO_STATE_PORTAL  3
 
 /**! The Super GUI IO Class, to control things on map Editor! */
 class guiIO

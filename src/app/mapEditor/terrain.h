@@ -12,7 +12,7 @@ class terrain
 {
    public:
       /*! Constructor
-       * \param map -> poiter to opened map */
+       * \param map -> pointer to opened map */
       terrain(Map* map);
       /*! Destructor */
       ~terrain();

@@ -74,6 +74,7 @@ class editor
       
       guiIO* gui;                    /**< The Editor's GUI */
       terrain* terrainEditor;        /**< The terrain Editor Module */
+      portal* portalEditor;          /**< The portal Editor Module */
 
       GLuint actualTexture;          /**< Actual Texture */
 

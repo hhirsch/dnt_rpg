@@ -36,14 +36,19 @@ mapEditor.o: mapEditor.cpp mapEditor.h
 	@$(CC) $(CFLAGS) mapEditor.cpp -o mapEditor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+portal.o: portal.cpp portal.h
+	@printf "Making portal.o... "
+	@$(CC) $(CFLAGS) portal.cpp -o portal.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 terrain.o: terrain.cpp terrain.h
 	@printf "Making terrain.o... "
 	@$(CC) $(CFLAGS) terrain.cpp -o terrain.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-mapEditor: $(OBJSGUI) $(OBJSMAPA) editor.o guiIO.o mapEditor.o terrain.o
+mapEditor: $(OBJSGUI) $(OBJSMAPA) editor.o guiIO.o mapEditor.o portal.o terrain.o
 	@printf "Linking mapEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPARTICLE) $(OBJSCLASSES) $(OBJSLANG) editor.o guiIO.o mapEditor.o terrain.o -o $(BIN)mapEditor
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPARTICLE) $(OBJSCLASSES) $(OBJSLANG) editor.o guiIO.o mapEditor.o portal.o terrain.o -o $(BIN)mapEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:

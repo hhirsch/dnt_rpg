@@ -420,6 +420,20 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             tool = TOOL_TERRAIN_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
+         /* Portal Buttons */
+         else if(object == (Tobjeto*) portalAddButton)
+         {
+            state = GUI_IO_STATE_PORTAL;
+            tool = TOOL_PORTAL_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) portalTagButton)
+         {
+            state = GUI_IO_STATE_PORTAL;
+            tool = TOOL_PORTAL_TAG;
+            return(GUI_IO_NEW_STATE);
+         }
+
 
 
          break;

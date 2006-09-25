@@ -19,6 +19,7 @@ editor::editor()
    gameSun = new sun(hour , FARVIEW, FARVIEW);
 
    terrainEditor = NULL;
+   portalEditor = NULL;
 }
 
 /*********************************************************************
@@ -30,6 +31,7 @@ editor::~editor()
    {
       delete(map);
       delete(terrainEditor);
+      delete(portalEditor);
    }
    delete(gameSun);
    if(particleSystem != NULL)
@@ -97,6 +99,7 @@ void editor::openMap()
       gui->showMessage("Closing actual Map...");
       delete(map);
       delete(terrainEditor);
+      delete(portalEditor);
       mapOpened = false;
    }
    gui->showMessage("Opening actual Map...");
@@ -106,6 +109,7 @@ void editor::openMap()
    {
       mapOpened = true;
       terrainEditor = new terrain(map);
+      portalEditor = new portal(map);
       actualTexture = map->Texturas->indice;
 
       /* Open NPCs */
@@ -190,7 +194,6 @@ void editor::saveMap()
    }
    else
    {
-      //TODO GUI MESSAGES!
       gui->showMessage("Map Not Opened! Only can save opened maps!\n");
    }
 }
@@ -205,6 +208,7 @@ void editor::newMap()
       //Close Actual Map
       delete(map);
       delete(terrainEditor);
+      delete(portalEditor);
       particleSystem->deleteAll();
       if(NPCs)
       {
@@ -218,6 +222,7 @@ void editor::newMap()
    //TODO Get Map Size!!!!
    map->newMap(8,8);
    terrainEditor = new terrain(map);
+   portalEditor = new portal(map);
    actualTexture = map->Texturas->indice;
    NPCs = new (Lpersonagem);
    gui->showMessage("Created New Game Map!");
@@ -389,6 +394,10 @@ void editor::draw()
          {
             terrainEditor->drawTemporary();
          }
+         else if(gui->getState() == GUI_IO_STATE_PORTAL)
+         {
+            portalEditor->drawTemporary();
+         }
    }
 
    glColor3f(1.0,1.0,1.0);
@@ -507,6 +516,11 @@ void editor::doEditorIO()
       terrainEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(), 
                                   actualTexture);
    }
+   else if( (gui->getState() == GUI_IO_STATE_PORTAL) && (mapOpened))
+   {
+      portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool() );
+   }
+
 }
 
 /*********************************************************************
