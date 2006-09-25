@@ -38,10 +38,15 @@ class terrain
       int quadX;        /**< Mouse Mouse Square X Coordinate */
       int quadZ;        /**< Mouse Mouse Square Z Coordinate */
 
-      int quadInitX;
-      int quadInitZ;
+      int quadInitX;    /**< X quad value at init of some state */
+      int quadInitZ;    /**< Y quad value at init of some state */
+
+      GLfloat height;      /**< Current Map Height On Mouse */
+      GLfloat nivelHeight; /**< Map Height at init of Nivelate */
 
       GLfloat mX, mY, mZ;
+
+      GLfloat initmX, initmY, initmZ;
 
       void doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                     Uint8 mButton);
@@ -49,6 +54,9 @@ class terrain
                       Uint8 mButton);
       void doTexture(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                      Uint8 mButton, GLuint actualTexture );
+
+      bool pointInSquare(GLfloat x, GLfloat y, 
+                            GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2);
 };
 
 

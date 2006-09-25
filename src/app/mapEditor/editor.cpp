@@ -94,10 +94,13 @@ void editor::openMap()
    if(mapOpened)
    {
       //Close Actual Map
+      gui->showMessage("Closing actual Map...");
       delete(map);
       delete(terrainEditor);
       mapOpened = false;
    }
+   gui->showMessage("Opening actual Map...");
+   draw();
    map = new(Map);
    if(map->open(gui->getFileName()))
    {
@@ -115,8 +118,7 @@ void editor::openMap()
          FILE* arq;
          if(!(arq = fopen(map->npcFileName.c_str(),"r")))
          {
-            printf("Ouch, can't load NPC's file: %s.\n",
-                   map->npcFileName.c_str());
+            gui->showMessage("Ouch, can't load NPC's file");
          }
          else
          {
@@ -164,10 +166,11 @@ void editor::openMap()
       {
          particleSystem->deleteAll();
       }
+      gui->showMessage("Map opened.");
    }
    else
    {
-      printf("Failed To open!\n");
+      gui->showMessage("Failed To open map!\n");
    }
 }
 
@@ -177,14 +180,18 @@ void editor::openMap()
  *********************************************************************/
 void editor::saveMap()
 {
+   string tmp;
    if(mapOpened)
    {
       map->save(gui->getFileName());
+      tmp = "Map Saved as:";
+      tmp += gui->getFileName();
+      gui->showMessage(tmp);
    }
    else
    {
       //TODO GUI MESSAGES!
-      printf("Map Not Opened\n");
+      gui->showMessage("Map Not Opened! Only can save opened maps!\n");
    }
 }
 
@@ -213,6 +220,7 @@ void editor::newMap()
    terrainEditor = new terrain(map);
    actualTexture = map->Texturas->indice;
    NPCs = new (Lpersonagem);
+   gui->showMessage("Created New Game Map!");
 }
 
 /*********************************************************************
@@ -301,7 +309,7 @@ int editor::insertTexture()
    SDL_Surface* img = IMG_Load(gui->getTextureFileName().c_str());
    if(!img)
    {
-      printf("Error on open texture : %s\n",gui->getTextureFileName().c_str());
+      gui->showMessage("Error on open texture");
       return(-1);
    }
 
@@ -342,7 +350,10 @@ int editor::insertTexture()
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
    map->numtexturas++;
 
-   printf("Inserted Texture: %d %d\n",img->w,img->h);
+   string tmp;
+   tmp = "Inserted Texture:";
+   tmp += gui->getTextureFileName();
+   gui->showMessage(tmp);
 
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
@@ -499,16 +510,64 @@ void editor::doEditorIO()
 }
 
 /*********************************************************************
+ *                              verifyIO                             *
+ *********************************************************************/
+void editor::verifyIO()
+{
+   int guiEvent;
+
+   SDL_PumpEvents();
+   keys = SDL_GetKeyState(NULL);
+   mButton = SDL_GetMouseState(&mouseX,&mouseY);
+
+   guiEvent = gui->doIO(mouseX, mouseY, mButton, keys);
+   if(guiEvent == GUI_IO_EXIT)
+   {
+      quit = true;
+   }
+   else if(guiEvent == GUI_IO_NEW_MAP)
+   {
+      newMap();
+   }
+   else if(guiEvent == GUI_IO_OPEN_MAP)
+   {
+      openMap();
+   }
+   else if(guiEvent == GUI_IO_SAVE_MAP)
+   {
+      saveMap();            
+   }
+   else if(guiEvent == GUI_IO_TEXTURE_PREVIOUS)
+   {
+     if(mapOpened)
+        previousTexture();
+   }
+   else if(guiEvent == GUI_IO_TEXTURE_NEXT)
+   {
+     if(mapOpened)
+        nextTexture();
+   }
+   else if(guiEvent == GUI_IO_TEXTURE_INSERT)
+   {
+      if(mapOpened)
+      {
+        insertTexture();
+      }
+   }
+   else if(guiEvent == GUI_IO_NOTHING)
+   {
+      doEditorIO();
+   }
+}
+
+/*********************************************************************
  *                                 Run                               *
  *********************************************************************/
 void editor::run()
 {
    
-   bool quit = false;
+   quit = false;
    int time = 0;
-   int guiEvent;
-
-   
    
    while(!quit)
    {
@@ -517,49 +576,7 @@ void editor::run()
          time = SDL_GetTicks();
 
          verifyPosition();
-
-         SDL_PumpEvents();
-         keys = SDL_GetKeyState(NULL);
-         mButton = SDL_GetMouseState(&mouseX,&mouseY);
-         guiEvent = gui->doIO(mouseX, mouseY, mButton, keys);
-
-         if(guiEvent == GUI_IO_EXIT)
-         {
-            quit = true;
-         }
-         else if(guiEvent == GUI_IO_NEW_MAP)
-         {
-            newMap();
-         }
-         else if(guiEvent == GUI_IO_OPEN_MAP)
-         {
-            openMap();
-         }
-         else if(guiEvent == GUI_IO_SAVE_MAP)
-         {
-            saveMap();            
-         }
-         else if(guiEvent == GUI_IO_TEXTURE_PREVIOUS)
-         {
-            if(mapOpened)
-               previousTexture();
-         }
-         else if(guiEvent == GUI_IO_TEXTURE_NEXT)
-         {
-            if(mapOpened)
-               nextTexture();
-         }
-         else if(guiEvent == GUI_IO_TEXTURE_INSERT)
-         {
-            if(mapOpened)
-            {
-               insertTexture();
-            }
-         }
-         else if(guiEvent == GUI_IO_NOTHING)
-         {
-            doEditorIO();
-         }
+         verifyIO();
          
          draw();
       }

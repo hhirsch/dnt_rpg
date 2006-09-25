@@ -52,7 +52,11 @@ class guiIO
       /*! Gets the FileName */
       string getFileName();
 
+      /*! Gets the Texture File Name */
       string getTextureFileName();
+
+      /*! Show Message on Message Window */
+      void showMessage(string msg);
 
       GLfloat cameraX; /**< Camera X position */
       GLfloat cameraY; /**< Camera Y position */
@@ -111,6 +115,8 @@ class guiIO
       botao* fogButton;     /**< Fog Button */
       botao* destroyButton; /**< Destroy Button */
       botao* optionsButton; /**< Options Button */
+      botao* musicButton;   /**< Music Button */
+      botao* sndFxButton;   /**< Sound Effects Button */
       void openMainWindow();
 
       /*********************Texture*Window*******************************/
@@ -123,7 +129,7 @@ class guiIO
 
       /*********************Terrain*Window*******************************/
       janela* terrainWindow;               /**< Terrain Window */
-      tabButton* terrainTabButton;         /**< TErrain TabButton */
+      tabButton* terrainTabButton;         /**< Terrain TabButton */
       oneTabButton* terrainUpButton;       /**< Terrain Up Button */
       oneTabButton* terrainDownButton;     /**< Terrain Down Button */
       oneTabButton* terrainNivButton;      /**< Terrain Nivelation Button */
@@ -144,18 +150,23 @@ class guiIO
       oneTabButton* wallMoreHorTexture;   /**< Texture Horizontal More Button */
       void openWallWindow();
       /*********************Portal*Window*******************************/
-      janela* portalWindow;          /**< Portal Window */
-      tabButton* portalTabButton;    /**< Portal TbButton */
-      oneTabButton* portalAddButton; /**< Add Portal Button */
-      oneTabButton* portalTagButton; /**< Portal Tag Button */
+      janela* portalWindow;               /**< Portal Window */
+      tabButton* portalTabButton;         /**< Portal TabButton */
+      oneTabButton* portalAddButton;      /**< Add Portal Button */
+      oneTabButton* portalTagButton;      /**< Portal Tag Button */
       void openPortalWindow();
       /*********************Object*Window*******************************/
-      janela* objectWindow; /**< Object Window */
-      void openObjectWindow();
+      janela* objectWindow;               /**< Object Window */
+      void openObjectWindow();      
       /*********************Particle*Window*******************************/
-      janela* particleWindow; /**< Object Window */
-      tabButton* particleTabButton;
+      janela* particleWindow;             /**< Particle Window */
+      tabButton* particleTabButton;       /**< Particles Tab Button */
       void openParticleWindow();
+      /*********************Message*Window*******************************/
+      janela* messageWindow;              /**< Message Window */
+      quadroTexto* messageText;           /**< Message Text */
+      void openMessageWindow();
+
       
 
       

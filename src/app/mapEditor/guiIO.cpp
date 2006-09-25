@@ -20,6 +20,7 @@ guiIO::guiIO()
    openParticleWindow();
    openPortalWindow();
    openTextureWindow();
+   openMessageWindow();
    
    /* Camera Things */
    theta=25;
@@ -129,6 +130,21 @@ void guiIO::openNavWindow()
 }
 
 /****************************************************************
+ *                       Open Message Window                    *
+ ****************************************************************/
+void guiIO::openMessageWindow()
+{
+   messageWindow = gui->ljan->InserirJanela(113,599-36,799-68,599,
+                                            "Messages",1,1,NULL,NULL);
+   messageText = messageWindow->objects->InserirQuadroTexto(7,16,610,31,0,
+                 "Welcome to DccNiTghtmare Map Editor!");
+   messageWindow->fechavel = 0;
+   messageWindow->ptrExterno = &messageWindow;
+   messageWindow->Abrir(gui->ljan);
+}
+
+
+/****************************************************************
  *                       Open Main Window                       *
  ****************************************************************/
 void guiIO::openMainWindow()
@@ -184,6 +200,17 @@ void guiIO::openMainWindow()
                                                      mainWindow->Cores.corBot.G,
                                                      mainWindow->Cores.corBot.B,
                                                      "Options",0,NULL);
+   musicButton = mainWindow->objects->InserirBotao(60,74,123,92,
+                                                   mainWindow->Cores.corBot.R,
+                                                   mainWindow->Cores.corBot.G,
+                                                   mainWindow->Cores.corBot.B,
+                                                   "Music",0,NULL);
+   sndFxButton = mainWindow->objects->InserirBotao(124,74,179,92,
+                                                 mainWindow->Cores.corBot.R,
+                                                 mainWindow->Cores.corBot.G,
+                                                 mainWindow->Cores.corBot.B,
+                                                 "SndFx",0,NULL);
+
 
    mainWindow->fechavel = 0;
    mainWindow->ptrExterno = &mainWindow;
@@ -500,5 +527,14 @@ string guiIO::getFileName()
 string guiIO::getTextureFileName()
 {
    return(textureText->texto);
+}
+
+/****************************************************************
+ *                        Show Message                          *
+ ****************************************************************/
+void guiIO::showMessage(string msg)
+{
+   messageText->texto = msg;
+   messageWindow->Desenhar(0,0);
 }
 

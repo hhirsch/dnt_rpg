@@ -43,7 +43,9 @@ class editor
       void verifyPosition();
       /*! Draw Editor Screen */
       void draw();
-      /*! Verifies the IO on Editor */
+      /*! Verifies The IO Events on Editor */
+      void verifyIO();
+      /*! Do the IO on Editor Map */
       void doEditorIO();
       /*! Gets Previous Texture on List */
       int previousTexture();
@@ -57,6 +59,7 @@ class editor
       Uint8 mButton;                 /**< Mouse Button State */
       int mouseX,                    /**< Mouse X position */
           mouseY;                    /**< Mouse Y position */
+      bool quit;                     /**< Quit Editor Flag */
 
       sun* gameSun;                  /**< The Sun on Game */
       GLfloat hour;                  /**< Current Sun Hour */
