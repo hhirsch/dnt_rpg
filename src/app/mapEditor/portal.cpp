@@ -1,4 +1,6 @@
 #include "portal.h"
+#include "../../gui/farso.h"
+
 
 #define PORTAL_STATE_OTHER     0
 #define PORTAL_STATE_ADD_INIT  1
@@ -42,7 +44,8 @@ portal::~portal()
  *                       VerifyAction                 *
  ******************************************************/
 void portal::verifyAction(GLfloat mouseX, GLfloat mouseY, 
-                          GLfloat mouseZ, Uint8 mButton, int tool)
+                          GLfloat mouseZ, Uint8 mButton, int tool,
+                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    actualTool = tool;
    mX = mouseX;
@@ -56,7 +59,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
    }
    else if (tool == TOOL_PORTAL_TAG)
    {
-      doTagPortal();
+      doTagPortal(proj,modl,viewPort);
    }
       
 }
@@ -160,8 +163,82 @@ void portal::doAddPortal()
 /******************************************************
  *                       doTagPortal                  *
  ******************************************************/
-void portal::doTagPortal()
+void portal::doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
+   //TODO, select PORTAL!!!
+
+   interface* gui = new interface(NULL);
+   janela* tagWindow;
+   botao* okButton;
+   botao* cancelButton;
+   barraTexto* tagText;
+   bool quit = !(mB & SDL_BUTTON(1));
+   Uint8 mButton;
+   Uint8* keys;
+   int mouseX, mouseY;
+
+   tagWindow = gui->ljan->InserirJanela(300,200,500,262,"Input Destiny",1,1,
+                                        NULL,NULL);
+   okButton = tagWindow->objects->InserirBotao(40,37,95,55,
+                                                 tagWindow->Cores.corBot.R,
+                                                 tagWindow->Cores.corBot.G,
+                                                 tagWindow->Cores.corBot.B,
+                                                 "Ok",1,NULL);
+   cancelButton = tagWindow->objects->InserirBotao(100,37,155,55,
+                                                     tagWindow->Cores.corBot.R,
+                                                     tagWindow->Cores.corBot.G,
+                                                     tagWindow->Cores.corBot.B,
+                                                     "Cancel",1,NULL);
+   tagText = tagWindow->objects->InserirBarraTexto(10,17,190,33,
+                                                     "../data/mapas/",0,NULL);
+   tagWindow->movivel = 0;
+   tagWindow->ptrExterno = &tagWindow;
+   tagWindow->Abrir(gui->ljan);
+
+   while(!quit)
+   {
+      int eventInfo;
+      SDL_PumpEvents();
+      keys = SDL_GetKeyState(NULL);
+      mButton = SDL_GetMouseState(&mouseX,&mouseY);
+
+      Tobjeto* object;
+      object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
+
+      if(eventInfo == BOTAOPRESSIONADO)
+      {
+         if(object == (Tobjeto*) okButton)
+         {
+            //TODO put Tag on Square
+            quit =true;
+         }
+         else if(object == (Tobjeto*) cancelButton)
+         {
+            quit = true;
+         }
+      }
+
+      if(tagWindow == NULL)
+      {
+         quit = true;
+      }
+
+      /* Draw */
+      glDisable(GL_LIGHTING);
+      glDisable(GL_DEPTH_TEST);
+      glDisable(GL_BLEND);
+      gui->draw(proj,modl,viewPort);
+      glEnable(GL_LIGHTING);
+      glEnable(GL_DEPTH_TEST);
+
+      glFlush();
+      SDL_GL_SwapBuffers();
+
+      SDL_Delay(20);
+
+   }
+
+   delete(gui);
 }
 
 

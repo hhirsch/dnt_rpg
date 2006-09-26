@@ -517,7 +517,8 @@ void editor::doEditorIO()
    }
    else if( (gui->getState() == GUI_IO_STATE_PORTAL) && (mapOpened))
    {
-      portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool() );
+      portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
+                                 proj, modl, viewPort);
    }
 
 }
