@@ -90,7 +90,6 @@ void areaList::addArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2,
  *********************************************************************/
 void areaList::drawAll()
 {
-   //TODO
    int aux;
    area* a = first;
    //Draw

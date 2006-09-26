@@ -573,6 +573,10 @@ void editor::verifyIO()
    {
       doEditorIO();
    }
+   else if(guiEvent == GUI_IO_NEW_STATE)
+   {
+      gui->showMessage(messageForTool(gui->getTool()));
+   }
 }
 
 /*********************************************************************

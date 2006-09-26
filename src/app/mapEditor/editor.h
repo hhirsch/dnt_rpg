@@ -3,6 +3,7 @@
 
 #include "guiIO.h"
 #include "terrain.h"
+#include "message.h"
 #include "../../engine/sun.h"
 #include "../../engine/personagens.h"
 #include "../../particle/partSystem.h"

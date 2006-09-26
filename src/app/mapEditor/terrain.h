@@ -2,11 +2,8 @@
 #define _terrain_h
 
 #include "../../map/map.h"
+#include "message.h"
 
-#define TOOL_TERRAIN_UP       11
-#define TOOL_TERRAIN_NIVELATE 12
-#define TOOL_TERRAIN_DOWN     13
-#define TOOL_TERRAIN_TEXTURE  14
 
 class terrain
 {
