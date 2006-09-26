@@ -2,6 +2,7 @@
 #define _portal_h
 
 #include "../../map/map.h"
+#include "area.h"
 
 #define TOOL_PORTAL_ADD  31
 #define TOOL_PORTAL_TAG  32
@@ -29,9 +30,23 @@ class portal
 
 
    private:
-      Map* actualMap;   /**< Actual Internal Map */
-      int actualTool;   /**< Actual Tool */
-      int state;        /**< Actual Internal State */
+      Map* actualMap;         /**< Actual Internal Map */
+      int actualTool;         /**< Actual Tool */
+      int state;              /**< Actual Internal State */
+
+      GLfloat mX, mY, mZ;     /**< Mouse Coordinates */
+
+      Uint8 mB;               /**< Mouse Buttons */
+
+      GLfloat initmX, initmZ; /**< Mouse Initial Positions on some States */
+
+      areaList* portalList;   /**< Portal List */
+
+      /*! Internal Add Portal */
+      void doAddPortal();
+      /*! Internal Tag Portal */
+      void doTagPortal();
+      
 
 };
 
