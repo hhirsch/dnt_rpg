@@ -23,8 +23,10 @@ class areaList
       /*! Destructor */
       ~areaList();
 
-      /*! Search and Return an Aread on the list */
+      /*! Search and Return an Area on the list */
       area* getArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2);
+      area* getArea(GLfloat x, GLfloat y);
+
       /*! Add an area to the list */
       void addArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, 
                    string whereToGo);

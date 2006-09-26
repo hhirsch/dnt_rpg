@@ -47,6 +47,9 @@ class portal
       void doAddPortal();
       /*! Internal Tag Portal */
       void doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+      /*! Add Portal To Map */
+      void addPortal(int qx, int qz, string where);
+
       
 
 };

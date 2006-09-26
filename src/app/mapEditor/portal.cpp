@@ -65,7 +65,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
 }
 
 /******************************************************
- *                       VerifyAction                 *
+ *                       drawTemporary                *
  ******************************************************/
 void portal::drawTemporary()
 {
@@ -90,6 +90,60 @@ void portal::drawTemporary()
 }
 
 /******************************************************
+ *                       addPortal                    *
+ ******************************************************/
+void portal::addPortal(int qx, int qz, string where)
+{
+   Square* s = actualMap->quadradoRelativo(qx,qz);
+   if(s)
+   {
+       if(initmX > mX)
+       {
+           GLfloat tmp = initmX;
+           initmX = mX;
+           mX = tmp;
+       }    
+       if(initmZ > mZ)
+       {
+           GLfloat tmp = initmZ;
+           initmZ = mZ;
+           mZ = tmp;
+       } 
+       s->mapConection.x1 = initmX;
+       s->mapConection.x2 = mX;
+       s->mapConection.z1 = initmZ;
+       s->mapConection.z2 = mZ;
+       s->mapConection.mapName = where; 
+       s->mapConection.active = true;
+       portalList->addArea(initmX, initmZ, mX, mZ, where);
+      
+       int minqx, minqz, maxqx, maxqz;
+       minqx = (int)(initmX) / SQUARESIZE;
+       minqz = (int)(initmZ) / SQUARESIZE;
+       maxqx = (int)(mX) / SQUARESIZE;
+       maxqz = (int)(mZ) / SQUARESIZE; 
+       int X1, Z1;
+       Square* q;
+       for(X1 = minqx; X1<=maxqx; X1++)
+       {
+          for(Z1 = minqz; Z1 <=maxqz; Z1++) 
+          {
+             q = actualMap->quadradoRelativo(X1,Z1);
+             if((q) && (q != s))
+             {
+                q->mapConection.x1 = initmX;
+                q->mapConection.x2 = mX;
+                q->mapConection.z1 = initmZ;
+                q->mapConection.z2 = mZ;
+                q->mapConection.mapName = where; 
+                q->mapConection.active = true;
+             }
+          }
+      }
+   }
+}
+
+/******************************************************
  *                      doAddPortal                   *
  ******************************************************/
 void portal::doAddPortal()
@@ -108,55 +162,7 @@ void portal::doAddPortal()
    {
       //Add Portal
       state = PORTAL_STATE_OTHER;
-      Square* s = actualMap->quadradoRelativo(qx,qz);
-      if(s)
-      {
-          if(initmX > mX)
-          {
-              GLfloat tmp = initmX;
-              initmX = mX;
-              mX = tmp;
-          }    
-          if(initmZ > mZ)
-          {
-              GLfloat tmp = initmZ;
-              initmZ = mZ;
-              mZ = tmp;
-          } 
-          s->mapConection.x1 = initmX;
-          s->mapConection.x2 = mX;
-          s->mapConection.z1 = initmZ;
-          s->mapConection.z2 = mZ;
-          s->mapConection.mapName = "TODO"; 
-          s->mapConection.active = true;
-
-          portalList->addArea(initmX, initmZ, mX, mZ, "TODO");
-
-      
-          int minqx, minqz, maxqx, maxqz;
-          minqx = (int)(initmX) / SQUARESIZE;
-          minqz = (int)(initmZ) / SQUARESIZE;
-          maxqx = (int)(mX) / SQUARESIZE;
-          maxqz = (int)(mZ) / SQUARESIZE; 
-          int X1, Z1;
-          Square* q;
-          for(X1 = minqx; X1<=maxqx; X1++)
-          {
-             for(Z1 = minqz; Z1 <=maxqz; Z1++) 
-             {
-                q = actualMap->quadradoRelativo(X1,Z1);
-                if((q) && (q != s))
-                {
-                    q->mapConection.x1 = initmX;
-                    q->mapConection.x2 = mX;
-                    q->mapConection.z1 = initmZ;
-                    q->mapConection.z2 = mZ;
-                    q->mapConection.mapName = "TODO"; 
-                    q->mapConection.active = true;
-                }
-             }
-          }
-      }
+      addPortal(qx,qz, "TODO");
    }
 }
 
@@ -165,14 +171,13 @@ void portal::doAddPortal()
  ******************************************************/
 void portal::doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   //TODO, select PORTAL!!!
-
+   area* ar = portalList->getArea(mX, mZ);
    interface* gui = new interface(NULL);
    janela* tagWindow;
    botao* okButton;
    botao* cancelButton;
-   barraTexto* tagText;
-   bool quit = !(mB & SDL_BUTTON(1));
+   barraTexto* tagText = NULL;
+   bool quit = ((!(mB & SDL_BUTTON(1))) || (ar == NULL));
    Uint8 mButton;
    Uint8* keys;
    int mouseX, mouseY;
@@ -189,8 +194,12 @@ void portal::doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                                                      tagWindow->Cores.corBot.G,
                                                      tagWindow->Cores.corBot.B,
                                                      "Cancel",1,NULL);
-   tagText = tagWindow->objects->InserirBarraTexto(10,17,190,33,
-                                                     "../data/mapas/",0,NULL);
+   if(ar != NULL)
+   {
+      tagText = tagWindow->objects->InserirBarraTexto(10,17,190,33,
+                                                      ar->whereToGo.c_str(),0,
+                                                      NULL);
+   }
    tagWindow->movivel = 0;
    tagWindow->ptrExterno = &tagWindow;
    tagWindow->Abrir(gui->ljan);
@@ -209,7 +218,15 @@ void portal::doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
       {
          if(object == (Tobjeto*) okButton)
          {
-            //TODO put Tag on Square
+            initmX = ar->x1;
+            mX = ar->x2;
+            initmZ = ar->y1;
+            mZ = ar->y2;
+
+            int qx = (int) (mX / SQUARESIZE);
+            int qz = (int) (mZ / SQUARESIZE);
+
+            addPortal(qx,qz, tagText->texto);
             quit =true;
          }
          else if(object == (Tobjeto*) cancelButton)

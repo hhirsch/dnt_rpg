@@ -44,6 +44,22 @@ area* areaList::getArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
    return(NULL);
 }
 
+area* areaList::getArea(GLfloat x, GLfloat y)
+{
+   int aux;
+   area* a = first;
+   for(aux = 0 ; aux < total; aux++)
+   {
+      if( (a->x1 <= x) && (a->y1 <= y) && (a->x2 >= x) && (a->y2 >= y) )
+      {
+         return(a);
+      }
+      a = a->next;
+   }
+   return(NULL);
+}
+
+
 /*********************************************************************
  *                             addArea                               *
  *********************************************************************/
@@ -62,6 +78,10 @@ void areaList::addArea(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2,
       a->next = first;
       first = a;
       total++;
+   }
+   else
+   {
+      getArea(x1, y1, x2, y2)->whereToGo = whereToGo;
    }
 }
 

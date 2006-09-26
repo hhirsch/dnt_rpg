@@ -390,13 +390,14 @@ void editor::draw()
    if(mapOpened)
    {
          map->draw(gui->cameraX, gui->cameraY, gui->cameraZ, visibleMatrix);
-         /* Sometimes draw terrain temporary */
          if(gui->getState() == GUI_IO_STATE_TERRAIN)
          {
             terrainEditor->drawTemporary();
          }
-         /* Always draw portal temporary */
-         portalEditor->drawTemporary();
+         else if(gui->getState() == GUI_IO_STATE_PORTAL)
+         {
+            portalEditor->drawTemporary();
+         }
    }
 
    glColor3f(1.0,1.0,1.0);
