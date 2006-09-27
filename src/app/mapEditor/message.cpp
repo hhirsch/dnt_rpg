@@ -26,16 +26,16 @@ string messageForTool(int tool)
          return("Select Portal to Define Destiny");
       break;
       case TOOL_WALL_ADD_X:
-         return("Draw The Wall on X Axis");
+         return("Draw The Wall on X Axis (press B tor Add only on Square Borders)");
       break;
       case TOOL_WALL_ADD_Z:
-         return("Draw The Wall on Z axis");
+         return("Draw The Wall on Z axis (press B to Add only on Square Borders)");
       break;
       case TOOL_WALL2_ADD_X:
-         return("Draw The little Wall on X Axis");
+         return("Draw The little Wall on X Axis (press B to Add only on Square Borders)");
       break;
       case TOOL_WALL2_ADD_Z:
-         return("Draw The little Wall on Z Axis");
+         return("Draw The little Wall on Z Axis (press B to Add only on Square Borders)");
       break;
       case TOOL_WALL_TEXTURE:
          return("Select a Wall to Change Texture");

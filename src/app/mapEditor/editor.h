@@ -3,6 +3,8 @@
 
 #include "guiIO.h"
 #include "terrain.h"
+#include "portal.h"
+#include "wall.h"
 #include "message.h"
 #include "../../engine/sun.h"
 #include "../../engine/personagens.h"
@@ -76,6 +78,7 @@ class editor
       guiIO* gui;                    /**< The Editor's GUI */
       terrain* terrainEditor;        /**< The terrain Editor Module */
       portal* portalEditor;          /**< The portal Editor Module */
+      wall* wallEditor;              /**< The wall Editor Module */
 
       GLuint actualTexture;          /**< Actual Texture */
 

@@ -31,6 +31,7 @@ class wall
       Map* actualMap;         /**< Actual Internal Map */
       int actualTool;         /**< Actual Tool */
       int state;              /**< Actual Internal State */
+      muro* actualWall;       /**< Actual Selected Wall */
 
       GLuint texture;         /**< Current Texture */
 
@@ -39,6 +40,14 @@ class wall
       Uint8 mB;               /**< Mouse Buttons */
 
       GLfloat initmX, initmZ; /**< Mouse Initial Positions on some States */
+
+      /*! Gets wall on actual Mouse Position */
+      muro* getWall();
+      /*! Do the modifications in Horizontal Vertical Texture repeat */
+      void doModifyVerHorTexture();
+      /*! Do the modification on texture */
+      void doTexture();
+
 };
 
 #endif

@@ -20,6 +20,7 @@ editor::editor()
 
    terrainEditor = NULL;
    portalEditor = NULL;
+   wallEditor = NULL;
 }
 
 /*********************************************************************
@@ -32,6 +33,7 @@ editor::~editor()
       delete(map);
       delete(terrainEditor);
       delete(portalEditor);
+      delete(wallEditor);
    }
    delete(gameSun);
    if(particleSystem != NULL)
@@ -100,6 +102,7 @@ void editor::openMap()
       delete(map);
       delete(terrainEditor);
       delete(portalEditor);
+      delete(wallEditor);
       mapOpened = false;
    }
    gui->showMessage("Opening actual Map...");
@@ -110,6 +113,7 @@ void editor::openMap()
       mapOpened = true;
       terrainEditor = new terrain(map);
       portalEditor = new portal(map);
+      wallEditor = new wall(map);
       actualTexture = map->Texturas->indice;
 
       /* Open NPCs */
@@ -209,6 +213,7 @@ void editor::newMap()
       delete(map);
       delete(terrainEditor);
       delete(portalEditor);
+      delete(wallEditor);
       particleSystem->deleteAll();
       if(NPCs)
       {
@@ -223,6 +228,7 @@ void editor::newMap()
    map->newMap(8,8);
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
+   wallEditor = new wall(map);
    actualTexture = map->Texturas->indice;
    NPCs = new (Lpersonagem);
    gui->showMessage("Created New Game Map!");
@@ -398,6 +404,10 @@ void editor::draw()
          {
             portalEditor->drawTemporary();
          }
+         else if(gui->getState() == GUI_IO_STATE_WALL)
+         {
+            wallEditor->drawTemporary();
+         }
    }
 
    glColor3f(1.0,1.0,1.0);
@@ -520,6 +530,11 @@ void editor::doEditorIO()
    {
       portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
                                  proj, modl, viewPort);
+   }
+   else if( (gui->getState() == GUI_IO_STATE_WALL) && (mapOpened))
+   {
+      wallEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
+                               actualTexture);
    }
 
 }
