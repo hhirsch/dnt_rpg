@@ -172,90 +172,20 @@ void portal::doAddPortal()
 void portal::doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    area* ar = portalList->getArea(mX, mZ);
-   interface* gui = new interface(NULL);
-   janela* tagWindow;
-   botao* okButton;
-   botao* cancelButton;
-   barraTexto* tagText = NULL;
-   bool quit = ((!(mB & SDL_BUTTON(1))) || (ar == NULL));
-   Uint8 mButton;
-   Uint8* keys;
-   int mouseX, mouseY;
 
-   tagWindow = gui->ljan->InserirJanela(300,200,500,262,"Input Destiny",1,1,
-                                        NULL,NULL);
-   okButton = tagWindow->objects->InserirBotao(40,37,95,55,
-                                                 tagWindow->Cores.corBot.R,
-                                                 tagWindow->Cores.corBot.G,
-                                                 tagWindow->Cores.corBot.B,
-                                                 "Ok",1,NULL);
-   cancelButton = tagWindow->objects->InserirBotao(100,37,155,55,
-                                                     tagWindow->Cores.corBot.R,
-                                                     tagWindow->Cores.corBot.G,
-                                                     tagWindow->Cores.corBot.B,
-                                                     "Cancel",1,NULL);
-   if(ar != NULL)
+   if( (ar != NULL) && (mB & SDL_BUTTON(1)) )
    {
-      tagText = tagWindow->objects->InserirBarraTexto(10,17,190,33,
-                                                      ar->whereToGo.c_str(),0,
-                                                      NULL);
+      initmX = ar->x1;
+      mX = ar->x2;
+      initmZ = ar->y1;
+      mZ = ar->y2;
+      
+      int qx = (int) (mX / SQUARESIZE);
+      int qz = (int) (mZ / SQUARESIZE);
+      
+      addPortal(qx, qz, getStringFromUser("Input Destiny", ar->whereToGo,
+                proj, modl, viewPort));
    }
-   tagWindow->movivel = 0;
-   tagWindow->ptrExterno = &tagWindow;
-   tagWindow->Abrir(gui->ljan);
-
-   while(!quit)
-   {
-      int eventInfo;
-      SDL_PumpEvents();
-      keys = SDL_GetKeyState(NULL);
-      mButton = SDL_GetMouseState(&mouseX,&mouseY);
-
-      Tobjeto* object;
-      object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
-
-      if(eventInfo == BOTAOPRESSIONADO)
-      {
-         if(object == (Tobjeto*) okButton)
-         {
-            initmX = ar->x1;
-            mX = ar->x2;
-            initmZ = ar->y1;
-            mZ = ar->y2;
-
-            int qx = (int) (mX / SQUARESIZE);
-            int qz = (int) (mZ / SQUARESIZE);
-
-            addPortal(qx,qz, tagText->texto);
-            quit =true;
-         }
-         else if(object == (Tobjeto*) cancelButton)
-         {
-            quit = true;
-         }
-      }
-
-      if(tagWindow == NULL)
-      {
-         quit = true;
-      }
-
-      /* Draw */
-      glDisable(GL_LIGHTING);
-      glDisable(GL_DEPTH_TEST);
-      glDisable(GL_BLEND);
-      gui->draw(proj,modl,viewPort);
-      glEnable(GL_LIGHTING);
-      glEnable(GL_DEPTH_TEST);
-
-      glFlush();
-      SDL_GL_SwapBuffers();
-
-      SDL_Delay(20);
-
-   }
-
-   delete(gui);
 }
 
 
