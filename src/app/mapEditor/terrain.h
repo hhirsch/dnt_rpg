@@ -41,17 +41,20 @@ class terrain
       GLfloat height;      /**< Current Map Height On Mouse */
       GLfloat nivelHeight; /**< Map Height at init of Nivelate */
 
-      GLfloat mX, mY, mZ;
+      GLfloat mX, mY, mZ;  /**< Mouse Positions */
+ 
+      GLfloat initmX, initmY, initmZ; /**< Mouse Positions On Init of State */
 
-      GLfloat initmX, initmY, initmZ;
-
+      /*! Do up Down on Terrain */
       void doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                     Uint8 mButton);
+      /*! Do Nivelate on Terrain */
       void doNivelate(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                       Uint8 mButton);
+      /*! Do Change Texture on Terrain */
       void doTexture(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                      Uint8 mButton, GLuint actualTexture );
-
+      /*! Verifies if point is in Square */
       bool pointInSquare(GLfloat x, GLfloat y, 
                             GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2);
 };

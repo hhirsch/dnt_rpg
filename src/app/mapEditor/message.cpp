@@ -1,6 +1,8 @@
 #include "message.h"
 
-
+/******************************************************************
+ *                        messageForTool                          *
+ ******************************************************************/
 string messageForTool(int tool)
 {
    switch(tool)
@@ -23,10 +25,40 @@ string messageForTool(int tool)
       case TOOL_PORTAL_TAG:
          return("Select Portal to Define Destiny");
       break;
+      case TOOL_WALL_ADD_X:
+         return("Draw The Wall on X Axis");
+      break;
+      case TOOL_WALL_ADD_Z:
+         return("Draw The Wall on Z axis");
+      break;
+      case TOOL_WALL2_ADD_X:
+         return("Draw The little Wall on X Axis");
+      break;
+      case TOOL_WALL2_ADD_Z:
+         return("Draw The little Wall on Z Axis");
+      break;
+      case TOOL_WALL_TEXTURE:
+         return("Select a Wall to Change Texture");
+      break;
+      case TOOL_WALL_LESS_VER_TEXTURE:
+         return("Select a Wall to Less Vertical Texture Repeat");
+      break;
+      case TOOL_WALL_MORE_VER_TEXTURE:
+         return("Select a Wall to More Vertical Texture Repeat");
+      break;
+      case TOOL_WALL_LESS_HOR_TEXTURE:
+         return("Select a Wall to Less Horizontal Texture Repeat");
+      break;
+      case TOOL_WALL_MORE_HOR_TEXTURE:
+         return("Select a Wall to More Horizontal Texture Repeat");
+      break;
    }
    return("DccNiTghtmare!");
 }
 
+/******************************************************************
+ *                        getStringForUser                        *
+ ******************************************************************/
 string getStringFromUser(string title, string previous,
                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {

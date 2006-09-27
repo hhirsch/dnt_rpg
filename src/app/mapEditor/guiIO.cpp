@@ -231,10 +231,10 @@ void guiIO::openWallWindow()
    wallX2Button = wallTabButton->insertButton(40,0,59,19);        /* Wall X */
    wallZ2Button = wallTabButton->insertButton(60,0,79,19);        /* Wall Z */
    wallTextureButton = wallTabButton->insertButton(0,20,19,39);   /* Texture */
-   wallLessVerTexture = wallTabButton->insertButton(20,20,39,39); /* Less V */
-   wallMoreVerTexture = wallTabButton->insertButton(40,20,59,39); /* More V */
-   wallLessHorTexture = wallTabButton->insertButton(60,20,79,39); /* Less H */
-   wallMoreHorTexture = wallTabButton->insertButton(80,20,99,39); /* Less H */
+   wallLessHorTexture = wallTabButton->insertButton(20,20,39,39); /* Less H */
+   wallMoreHorTexture = wallTabButton->insertButton(40,20,59,39); /* More H */
+   wallLessVerTexture = wallTabButton->insertButton(60,20,79,39); /* Less V */
+   wallMoreVerTexture = wallTabButton->insertButton(80,20,99,39); /* Less V */
 
 
    wallWindow->ptrExterno = &wallWindow;
@@ -433,9 +433,61 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             tool = TOOL_PORTAL_TAG;
             return(GUI_IO_NEW_STATE);
          }
-
-
-
+         /* Wall Buttons */
+         else if(object == (Tobjeto*) wallXButton)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_ADD_X;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) wallZButton)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_ADD_Z;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) wallX2Button)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL2_ADD_X;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) wallZ2Button)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL2_ADD_Z;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) wallTextureButton)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_TEXTURE;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) wallLessVerTexture)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_LESS_VER_TEXTURE;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) wallMoreVerTexture)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_MORE_VER_TEXTURE;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) wallLessHorTexture)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_LESS_HOR_TEXTURE;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (Tobjeto*) wallMoreHorTexture)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_MORE_HOR_TEXTURE;
+            return(GUI_IO_NEW_STATE);
+         }
          break;
       }
       case BOTAOPRESSIONADO:
