@@ -22,7 +22,8 @@ class wall
        * \param tool -> current Tool
        * \param actualTexture -> current Texture */
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                        Uint8 mButton, int tool, GLuint actualTexture);
+                        Uint8 mButton, Uint8* keys, int tool, 
+                        GLuint actualTexture);
 
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary();
@@ -32,6 +33,7 @@ class wall
       int actualTool;         /**< Actual Tool */
       int state;              /**< Actual Internal State */
       muro* actualWall;       /**< Actual Selected Wall */
+      bool limitSquare;       /**< Limit Wall to square's vertices*/
 
       GLuint texture;         /**< Current Texture */
 
@@ -47,6 +49,9 @@ class wall
       void doModifyVerHorTexture();
       /*! Do the modification on texture */
       void doTexture();
+      /*! Do The Wall Construction */
+      void doWall(bool X, bool Z, bool full);
+
 
 };
 

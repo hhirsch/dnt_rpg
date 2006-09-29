@@ -533,8 +533,8 @@ void editor::doEditorIO()
    }
    else if( (gui->getState() == GUI_IO_STATE_WALL) && (mapOpened))
    {
-      wallEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
-                               actualTexture);
+      wallEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
+                               gui->getTool(), actualTexture);
    }
 
 }
