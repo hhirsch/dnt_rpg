@@ -18,6 +18,8 @@ editor::editor()
    hour = 12.0;
    gameSun = new sun(hour , FARVIEW, FARVIEW);
 
+   simulationStarted = false;
+
 }
 
 /*********************************************************************
@@ -99,7 +101,10 @@ void editor::openMap()
    gui->showMessage("Opening actual Map...");
    draw();
    map = new(Map);
-   if(map->open(gui->getFileName()))
+
+   //TODO prompt for filename
+   //
+   if(map->open("../data/mapas/rua.map"))
    {
       mapOpened = true;
 
@@ -305,6 +310,12 @@ void editor::draw()
 
 #endif
 
+   if(simulationStarted)
+   {
+      agentsSimulation.draw();
+   }
+
+
    /* Draw GUI */
    gui->draw(proj, modl, viewPort);
 
@@ -326,6 +337,21 @@ void editor::doEditorIO()
 
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
    gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
+
+   if(keys[SDLK_s])
+   {
+      simulationStarted = !simulationStarted;
+      printf("%i \n", simulationStarted);
+      SDL_Delay(100);
+   }
+
+   if(keys[SDLK_a])
+   {
+      agentsSimulation.addAgent(AGENT_TYPE_POTENT, 20, 20, false, 
+                                5, 150, 150, 30, 180);
+      printf("Added Potential \n");
+      SDL_Delay(100);
+   }
 
 }
 
@@ -363,6 +389,8 @@ void editor::run()
    
    quit = false;
    int time = 0;
+
+   openMap();
    
    while(!quit)
    {
@@ -372,6 +400,11 @@ void editor::run()
 
          verifyPosition();
          verifyIO();
+
+         if(simulationStarted)
+         {
+            agentsSimulation.actualize();
+         }
          
          draw();
       }

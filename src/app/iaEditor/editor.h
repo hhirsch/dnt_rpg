@@ -3,6 +3,7 @@
 
 #include "guiIO.h"
 #include "message.h"
+#include "agents.h"
 #include "../../map/map.h"
 #include "../../engine/culling.h"
 #include "../../engine/util.h"
@@ -61,6 +62,8 @@ class editor
       Map* map;                      /**< The active Map */
       bool mapOpened;                /**< True if Active Map is Opened */
 
+      bool simulationStarted;        /**< True if simulation started */
+
       //Lpersonagem *NPCs;             /**< List of NPCs On Map */
       //featsList* features;           /**< NPCs Geral Features */
       
@@ -74,6 +77,8 @@ class editor
       GLdouble modl[16];             /**< Model View Matrix */
       GLint viewPort[4];             /**< View Port Vector */
       GLfloat visibleMatrix[6][4];   /**< Visible Matrix */
+
+      agents agentsSimulation;
       
 };
 
