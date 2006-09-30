@@ -3,10 +3,15 @@
 CPP = g++
 CFLAGS = -g -c -Wall -O2
 EFLAGS = -g -Wall -O2 -lm
-OBJS = ai.o
+OBJS = agent.o ai.o potentAgent.o
 
 
 all: $(OBJS)
+
+agent.o: agent.cpp agent.h
+	@printf "Making agent.o... "
+	@$(CPP) $(CFLAGS) agent.cpp -o agent.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 ai.o: ai.cpp ai.h
 	@printf "Making ai.o... "
@@ -17,6 +22,12 @@ teste: ai.cpp ai.h
 	@printf "Making & Linking TesteAi... "
 	@$(CPP) $(EFLAGS) -DTESTE ai.cpp -o testeai
 	@printf "\e[0;32mDone.\e[0;0m\n"
+
+potentAgent.o: potentAgent.cpp potentAgent.h
+	@printf "Making potentAgent.o... "
+	@$(CPP) $(CFLAGS) potentAgent.cpp -o potentAgent.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 
 clean:
 	@printf "Cleaning AI Bin Files... "
