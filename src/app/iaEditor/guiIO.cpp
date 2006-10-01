@@ -15,6 +15,7 @@ guiIO::guiIO()
    openFileWindow();
    openNavWindow();
    openMessageWindow();
+   openObjectsWindow();
    
    /* Camera Things */
    theta=25;
@@ -108,6 +109,19 @@ void guiIO::openMessageWindow()
    messageWindow->Abrir(gui->ljan);
 }
 
+/****************************************************************
+ *                       Open Objects Window                    *
+ ****************************************************************/
+void guiIO::openObjectsWindow()
+{
+   objectsWindow=gui->ljan->InserirJanela(0,599-61,112,599,"Objects",
+                                          1,1,NULL,NULL);
+   objectsTabButton = objectsWindow->objects->InserirTabButton(7,17,0,0,
+                                                 "../data/iaEditor/objects.png");
+   objectsWindow->fechavel = 0;
+   objectsWindow->ptrExterno = &objectsWindow;
+   objectsWindow->Abrir(gui->ljan);
+}
 
 /****************************************************************
  *                           getState                           *

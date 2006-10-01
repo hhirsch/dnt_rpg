@@ -1,5 +1,7 @@
 #include "agents.h"
+#include "../../etc/distance.h"
 #include <GL/glu.h>
+#include <math.h>
 
 #define AGENT_POTENT_HALF_X 5.0
 #define AGENT_POTENT_HALF_Z 7.0
@@ -62,7 +64,6 @@ void agents::draw()
       glTranslatef(x ,0.0, z);
       drawPotentAgent();
       glPopMatrix();
-      printf("Position: %.3f %.3f\n",x,z );
       potAg = potAg->next;
    }
 
@@ -108,7 +109,7 @@ void agents::drawPotentAgent()
 }
 
 /********************************************************************
- *                               draw                               *
+ *                             addAgent                             *
  ********************************************************************/
 void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented, 
                       GLfloat stepSize, GLfloat goalX, GLfloat goalZ, 
@@ -135,3 +136,63 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
    ag->defineStepSize(stepSize);
 }
 
+/********************************************************************
+ *                      addVisibleAgents                            *
+ ********************************************************************/
+void agents::addVisibleAgents(agent* ag)
+{
+   GLfloat dist;
+   int aux;
+   GLfloat x,z;
+   GLfloat agX, agZ, agSightDistance, agSightAngle;
+   potentAgent* potAg = potentAgents;
+
+   /* Take Current Agent Position */
+   ag->getPosition( agX, agZ );
+   ag->getSight(agSightDistance, agSightAngle);
+   ag->clearObstacles();
+   
+   /* Pontential Function Agents */
+   for(aux = 0; aux < totalPotentAgents; aux++)
+   {
+      potAg->getPosition(x,z);
+      /* Test All 4 Lines Equations of The Agent */
+      dist = distancePointLine(agX, agZ, 
+                              x - AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z,
+                              x + AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z);
+      //TODO Verify oriented agent and Angle!
+      if(fabs(dist) <= agSightDistance)
+      {
+         ag->addObstacle(x,z);
+      }
+      else
+      {
+
+         dist = distancePointLine(agX, agZ, 
+                              x - AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z,
+                              x - AGENT_POTENT_HALF_X, z + AGENT_POTENT_HALF_Z);
+         if(fabs(dist) <= agSightDistance)
+         {
+            ag->addObstacle(x,z);
+         }
+         else
+         {
+            dist = distancePointLine(agX, agZ, 
+                              x - AGENT_POTENT_HALF_X, z + AGENT_POTENT_HALF_Z,
+                              x + AGENT_POTENT_HALF_X, z + AGENT_POTENT_HALF_Z);
+            if(fabs(dist) <= agSightDistance)
+            {
+               ag->addObstacle(x,z);
+            }
+            else
+            {
+               dist = distancePointLine(agX, agZ, 
+                              x + AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z,
+                              x + AGENT_POTENT_HALF_X, z + AGENT_POTENT_HALF_Z);
+            }
+         }
+      }
+      potAg = potAg->next;
+   }
+   
+}

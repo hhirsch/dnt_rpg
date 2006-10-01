@@ -26,6 +26,7 @@ class agents
       int totalPotentAgents;
 
       void drawPotentAgent();
+      void addVisibleAgents(agent* ag);
 };
 
 #endif

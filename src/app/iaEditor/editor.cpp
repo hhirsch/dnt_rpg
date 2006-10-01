@@ -341,7 +341,6 @@ void editor::doEditorIO()
    if(keys[SDLK_s])
    {
       simulationStarted = !simulationStarted;
-      printf("%i \n", simulationStarted);
       SDL_Delay(100);
    }
 
@@ -349,7 +348,6 @@ void editor::doEditorIO()
    {
       agentsSimulation.addAgent(AGENT_TYPE_POTENT, 20, 20, false, 
                                 5, 150, 150, 30, 180);
-      printf("Added Potential \n");
       SDL_Delay(100);
    }
 

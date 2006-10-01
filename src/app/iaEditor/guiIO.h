@@ -100,6 +100,11 @@ class guiIO
       quadroTexto* messageText;           /**< Message Text */
       void openMessageWindow();
 
+      /*********************Objects*Window*******************************/
+      janela* objectsWindow;              /**< Message Window */
+      tabButton* objectsTabButton;        /**< Objects Tab Button */
+      void openObjectsWindow();
+
 };
 
 #endif
