@@ -67,7 +67,16 @@ void agent::getPosition(GLfloat& x, GLfloat& z)
 void agent::defineSight(GLfloat sightDist, GLfloat sightAng)
 {
    sightDistance = sightDist;
-   sightAngle = sightAngle;
+   sightAngle = sightAng;
+}
+
+/********************************************************************
+ *                           define Sight                           *
+ ********************************************************************/
+void agent::getSight(GLfloat& sightDist, GLfloat& sightAng)
+{
+   sightDist = sightDistance;
+   sightAng = sightAngle;
 }
 
 
@@ -82,5 +91,17 @@ void agent::actualize()
    defineNextPosition();
 }
 
+void agent::addObstacle(GLfloat x, GLfloat z)
+{
+   obstacles[knowObstacles].x = x;
+   obstacles[knowObstacles].z = z;
+
+   knowObstacles++;
+}
+
+void agent::clearObstacles()
+{
+   knowObstacles = 0;
+}
 
 

@@ -4,7 +4,12 @@ CPP = g++
 CC = gcc
 CFLAGS = -g -Wall -O2
 
-all: glm.o fifo.o texture.o
+all: distance.o glm.o fifo.o texture.o
+
+distance.o: distance.h distance.cpp
+	@printf "Making distance.o... "
+	@$(CPP) $(CFLAGS) -c distance.cpp -o distance.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 texture.o: texture.h texture.cpp
 	@printf "Making texture.o... "

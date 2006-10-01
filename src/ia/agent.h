@@ -50,6 +50,16 @@ class agent
        * \param sightAng -> sight Angle */
       void defineSight(GLfloat sightDist, GLfloat sightAng);
 
+      /*! Gets Character Sight 
+       * \param sightDist -> sight Distance 
+       * \param sightAng -> sight Angle */
+      void getSight(GLfloat& sightDist, GLfloat& sightAng);
+
+      void addObstacle(GLfloat x, GLfloat z);
+
+      void clearObstacles();
+
+
       /* Virtual Methods */
 
       /*! Defines Next Agent position. Virtual. 
