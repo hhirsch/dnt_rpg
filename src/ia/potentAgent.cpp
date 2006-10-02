@@ -43,7 +43,7 @@ bool potentAgent::defineNextPosition()
       force = -KR / dist;
       fX += force*cosA;
       fZ += force*senA;
-      printf("force: %.3f dist: %.3f\n",force, dist);
+      //printf("force: %.3f dist: %.3f\n",force, dist);
    }
 
    //Sum Goal
@@ -56,8 +56,8 @@ bool potentAgent::defineNextPosition()
    fX += force*cosA;
    fZ += force*senA;
 
-   printf("KA: force: %.3f dist: %.3f\n",force, dist);
-   printf("fx: %.3f fz:%.3f\n",fX, fZ);
+   //printf("KA: force: %.3f dist: %.3f\n",force, dist);
+   //printf("fx: %.3f fz:%.3f\n",fX, fZ);
 
    dX = 0;
    dZ = 0;
