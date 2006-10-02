@@ -12,6 +12,7 @@ agent::agent(bool orientation)
    actualX = -1;
    actualZ = -1;
    withOrientation = orientation;
+   knowObstacles = 0;
 }
 
 /********************************************************************
@@ -86,17 +87,19 @@ void agent::getSight(GLfloat& sightDist, GLfloat& sightAng)
 void agent::actualize()
 {
    //TODO get Obstacles in Range
-   knowObstacles = 0;
+   //knowObstacles = 0;
 
    defineNextPosition();
 }
 
 void agent::addObstacle(GLfloat x, GLfloat z)
 {
-   obstacles[knowObstacles].x = x;
-   obstacles[knowObstacles].z = z;
-
-   knowObstacles++;
+   if(knowObstacles < MAX_OBSTACLES)
+   {
+      obstacles[knowObstacles].x = x;
+      obstacles[knowObstacles].z = z;
+      knowObstacles++;
+   }
 }
 
 void agent::clearObstacles()

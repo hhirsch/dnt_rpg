@@ -1,8 +1,9 @@
 #include "potentAgent.h"
 #include <math.h>
+#include <stdio.h>
 
-#define KA 0.05
-#define KR 0.05
+#define KA 0.005
+#define KR 0.5
 
 /********************************************************************
  *                         Constructor                              *
@@ -28,18 +29,35 @@ bool potentAgent::defineNextPosition()
    GLfloat fZ = 0;
    GLfloat dX;
    GLfloat dZ;
+   GLfloat dist;
+   GLfloat cosA, senA;
+   GLfloat force;
    
    for(aux = 0; aux < knowObstacles; aux++)
    {
       dX = obstacles[aux].x - actualX;
       dZ = obstacles[aux].z - actualZ;
-      fX += KR / dX;
-      fZ += KR / dZ;
+      dist = sqrt( (dX*dX) + (dZ*dZ));
+      cosA = dX / dist;
+      senA = dZ / dist;
+      force = -KR / dist;
+      fX += force*cosA;
+      fZ += force*senA;
+      printf("force: %.3f dist: %.3f\n",force, dist);
    }
 
    //Sum Goal
-   fX += KA * (destinyX - actualX);
-   fZ += KA * (destinyZ - actualZ);
+   dX = (destinyX - actualX);
+   dZ = (destinyZ - actualZ);
+   dist = sqrt( (dX*dX) + (dZ*dZ));
+   cosA = dX / dist;
+   senA = dZ / dist;
+   force = KA * dist;
+   fX += force*cosA;
+   fZ += force*senA;
+
+   printf("KA: force: %.3f dist: %.3f\n",force, dist);
+   printf("fx: %.3f fz:%.3f\n",fX, fZ);
 
    dX = 0;
    dZ = 0;
@@ -48,11 +66,11 @@ bool potentAgent::defineNextPosition()
    {
       if(fX != 0)
       {
-         dX = 1 / fX;
+         dX = fX;
       }
       if(fZ != 0)
       {
-         dZ = 1 / fX;
+         dZ = fZ;
       }
 
       //TODO Rotation, if holonomic
@@ -74,6 +92,7 @@ bool potentAgent::defineNextPosition()
       {
          dZ = -stepSize;
       }
+
       actualX += dX;
       actualZ += dZ;
       
