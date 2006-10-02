@@ -1,5 +1,6 @@
 #include "guiIO.h"
 #include "../../engine/util.h"
+#include "message.h"
 
 /****************************************************************
  *                         Constructor                          *
@@ -16,6 +17,7 @@ guiIO::guiIO()
    openNavWindow();
    openMessageWindow();
    openObjectsWindow();
+   openPlayControlWindow();
    
    /* Camera Things */
    theta = 35;
@@ -125,6 +127,24 @@ void guiIO::openObjectsWindow()
 }
 
 /****************************************************************
+ *                     Open PlayControl Window                  *
+ ****************************************************************/
+void guiIO::openPlayControlWindow()
+{
+   playControlWindow=gui->ljan->InserirJanela(0,599-123,83,599-62,"Sim",
+                                          1,1,NULL,NULL);
+   playControlTabButton = playControlWindow->objects->InserirTabButton(7,17,0,0,
+                                             "../data/iaEditor/playControl.png");
+   playButton = playControlTabButton->insertButton(5,5,21,34);
+   pauseButton = playControlTabButton->insertButton(29,7,38,32);
+   stopButton = playControlTabButton->insertButton(46,9,65,30);
+   playControlWindow->fechavel = 0;
+   playControlWindow->ptrExterno = &playControlWindow;
+   playControlWindow->Abrir(gui->ljan);
+}
+
+
+/****************************************************************
  *                           getState                           *
  ****************************************************************/
 int guiIO::getState()
@@ -228,6 +248,24 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             if (d>300) d = 300;
             return(GUI_IO_NEW_POSITION);
          }
+         /* PlayControl Events */
+         else if (object == (Tobjeto*) playButton)
+         {
+            tool = TOOL_SIM_PLAY;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) pauseButton)
+         {
+            tool = TOOL_SIM_PAUSE;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) stopButton)
+         {
+            tool = TOOL_SIM_STOP;
+            return(GUI_IO_NEW_STATE);
+         }
+
+
 
       }
       case BOTAOPRESSIONADO:

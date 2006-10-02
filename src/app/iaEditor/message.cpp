@@ -5,10 +5,24 @@
  ******************************************************************/
 string messageForTool(int tool)
 {
-/*   switch(tool)
+   switch(tool)
    {
-      //
-   }*/
+      case TOOL_SIM_PLAY:
+      {
+         return("Simulation Started");
+         break;
+      }
+      case TOOL_SIM_PAUSE:
+      {
+         return("Simulation Paused");
+         break;
+      }
+      case TOOL_SIM_STOP:
+      {
+         return("Simulation Stoped");
+         break;
+      }
+   }
    return("DccNiTghtmare!");
 }
 

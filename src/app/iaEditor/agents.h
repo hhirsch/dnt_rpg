@@ -24,6 +24,7 @@ class agents
    private:
       potentAgent* potentAgents;
       int totalPotentAgents;
+      GLuint potentialTexture;
 
       void drawPotentAgent();
       void addVisibleAgents(agent* ag);

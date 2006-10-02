@@ -20,6 +20,8 @@ editor::editor()
 
    simulationStarted = false;
 
+   agentsSimulation = new(agents);
+
 }
 
 /*********************************************************************
@@ -32,6 +34,7 @@ editor::~editor()
       delete(map);
    }
    delete(gameSun);
+   delete(agentsSimulation);
    /*if(particleSystem != NULL)
    {
       delete(particleSystem);
@@ -249,7 +252,8 @@ void editor::draw()
    /* Draw Things */
    if(mapOpened)
    {
-         map->draw(gui->cameraX, gui->cameraY, gui->cameraZ, visibleMatrix);
+      map->draw(gui->cameraX, gui->cameraY, gui->cameraZ, visibleMatrix);
+      agentsSimulation->draw();
    }
 
    glColor3f(1.0,1.0,1.0);
@@ -310,12 +314,6 @@ void editor::draw()
 
 #endif
 
-   if(simulationStarted)
-   {
-      agentsSimulation.draw();
-   }
-
-
    /* Draw GUI */
    gui->draw(proj, modl, viewPort);
 
@@ -338,15 +336,29 @@ void editor::doEditorIO()
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
    gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
 
+   if( (gui->getTool() == TOOL_SIM_PLAY) && (!simulationStarted))
+   {
+      simulationStarted = true;
+   }
+   else if( (gui->getTool() == TOOL_SIM_PAUSE) && (simulationStarted))
+   {
+      simulationStarted = false;
+   }
+   else if( (gui->getTool() == TOOL_SIM_STOP) && (simulationStarted))
+   {
+      simulationStarted = false;
+      //TODO Restart State
+   }
+
+   
    if(keys[SDLK_s])
    {
-      simulationStarted = !simulationStarted;
-      SDL_Delay(100);
+            SDL_Delay(100);
    }
 
    if(keys[SDLK_a])
    {
-      agentsSimulation.addAgent(AGENT_TYPE_POTENT, 20, 20, false, 
+      agentsSimulation->addAgent(AGENT_TYPE_POTENT, 20, 20, false, 
                                 0.75, 150, 150, 30, 360);
       SDL_Delay(100);
    }
@@ -401,7 +413,7 @@ void editor::run()
 
          if(simulationStarted)
          {
-            agentsSimulation.actualize();
+            agentsSimulation->actualize();
          }
          
          draw();

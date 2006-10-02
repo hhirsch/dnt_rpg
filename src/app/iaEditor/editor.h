@@ -78,7 +78,7 @@ class editor
       GLint viewPort[4];             /**< View Port Vector */
       GLfloat visibleMatrix[6][4];   /**< Visible Matrix */
 
-      agents agentsSimulation;
+      agents* agentsSimulation;
       
 };
 

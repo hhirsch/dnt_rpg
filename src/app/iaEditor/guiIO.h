@@ -105,6 +105,14 @@ class guiIO
       tabButton* objectsTabButton;        /**< Objects Tab Button */
       void openObjectsWindow();
 
+      /*********************PlayControl*Window***************************/
+      janela* playControlWindow;              /**< Message Window */
+      tabButton* playControlTabButton;        /**< Objects Tab Button */
+      oneTabButton* playButton;               /**< Play Button */
+      oneTabButton* stopButton;               /**< Stop Button */
+      oneTabButton* pauseButton;              /**< Pause Button */
+      void openPlayControlWindow();
+
 };
 
 #endif

@@ -1,16 +1,26 @@
 #include "agents.h"
 #include "../../etc/distance.h"
+#include "../../gui/desenho.h"
 #include <GL/glu.h>
 #include <math.h>
-
+#include <SDL/SDL_image.h>
 
 /********************************************************************
  *                          Constructor                             *
  ********************************************************************/
 agents::agents()
 {
+   SDL_Surface* img = IMG_Load("../data/iaEditor/potentialTexture.png");
+   if(!img)
+   {
+      printf("Can't Open Texture!\n");
+   }
    totalPotentAgents = 0;
    potentAgents = NULL;
+
+   carregaTextura(img, &potentialTexture);
+      
+   SDL_FreeSurface(img);
 }
 
 /********************************************************************
@@ -26,6 +36,7 @@ agents::~agents()
       delete(ag);
       totalPotentAgents--;
    }
+   glDeleteTextures(1,&potentialTexture);
 }
 
 /********************************************************************
@@ -57,9 +68,10 @@ void agents::draw()
    for(aux = 0; aux < totalPotentAgents; aux++)
    {
       potAg->getPosition(x,z);
-      printf("Ag: %d Position: %.3f %.3f\n",aux, x, z);
+      //printf("Ag: %d Position: %.3f %.3f\n",aux, x, z);
       glPushMatrix();
-      //TODO rotate, based on orientation
+      //TODO Rotate, based on orientation
+      //glRotatef(an);
       glTranslatef(x ,0.0, z);
       drawPotentAgent();
       glPopMatrix();
@@ -73,38 +85,78 @@ void agents::draw()
  ********************************************************************/
 void agents::drawPotentAgent()
 {
+   GLfloat materialColor[4] = {0.7, 0.7, 0.7, 1.0};
+   float shininess;
+   shininess = 50.0f;
+
+   glEnable(GL_COLOR_MATERIAL);
+
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+   glMaterialfv(GL_FRONT, GL_AMBIENT, materialColor);
+   glMaterialfv(GL_FRONT, GL_DIFFUSE, materialColor);
+   glMaterialfv(GL_FRONT, GL_SPECULAR, materialColor);
+   glMaterialfv(GL_FRONT, GL_SHININESS, &shininess);
+
+        
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, potentialTexture);
+   
    glBegin(GL_QUADS);
       /* Face de frente */
       glNormal3i(0,0,1);
+      glTexCoord2d(0,1);
       glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
+      glTexCoord2d(1,1);
       glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
+      glTexCoord2d(1,0);
       glVertex3f(AGENT_POTENT_HALF_X,-1,-AGENT_POTENT_HALF_Z);
+      glTexCoord2d(0,0);
       glVertex3f(-AGENT_POTENT_HALF_X,-1,-AGENT_POTENT_HALF_Z);
       /* Face de tras */
       glNormal3i(0,0,-1);
+      glTexCoord2d(0,1);
       glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
+      glTexCoord2d(1,1);
       glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
+      glTexCoord2d(1,0);
       glVertex3f(AGENT_POTENT_HALF_X,-1,AGENT_POTENT_HALF_Z);
+      glTexCoord2d(0,0);
       glVertex3f(-AGENT_POTENT_HALF_X,-1,AGENT_POTENT_HALF_Z);
       /* Face de esquerda */
       glNormal3i(-1,0,0);
+      glTexCoord2d(1,0);
       glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
+      glTexCoord2d(1,1);
       glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
+      glTexCoord2d(0,1);
       glVertex3f(-AGENT_POTENT_HALF_X,-1,AGENT_POTENT_HALF_Z);
+      glTexCoord2d(0,0);
       glVertex3f(-AGENT_POTENT_HALF_X,-1,-AGENT_POTENT_HALF_Z);
       /* Face de direita */
       glNormal3i(1,0,0);
+      glTexCoord2d(1,0);
       glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
+      glTexCoord2d(1,1);
       glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
+      glTexCoord2d(0,1);
       glVertex3f(AGENT_POTENT_HALF_X,-1,AGENT_POTENT_HALF_Z);
+      glTexCoord2d(0,0);
       glVertex3f(AGENT_POTENT_HALF_X,-1,-AGENT_POTENT_HALF_Z);
       /* Face de cima */
       glNormal3i(0,1,0);
+      glTexCoord2d(0,0);
       glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
+      glTexCoord2d(1,0);
       glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
+      glTexCoord2d(1,1);
       glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
+      glTexCoord2d(0,1);
       glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
    glEnd();
+
+   glDisable(GL_COLOR_MATERIAL);
+   glDisable(GL_TEXTURE_2D);
 }
 
 /********************************************************************
@@ -151,8 +203,6 @@ void agents::addVisibleAgents(agent* ag)
    ag->getSight(agSightDistance, agSightAngle);
    ag->clearObstacles();
 
-   ag->addObstacle(28, 30);
-   
    /* Pontential Function Agents */
    for(aux = 0; aux < totalPotentAgents; aux++)
    {
@@ -163,7 +213,7 @@ void agents::addVisibleAgents(agent* ag)
                               x + AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z);
       if(ag == potAg)
       {
-         //does nothing if same 
+         //does nothing if is the same 
       }
       //TODO Verify oriented agent and Angle!
       else if(fabs(dist) <= agSightDistance)
