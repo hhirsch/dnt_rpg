@@ -18,10 +18,11 @@ guiIO::guiIO()
    openObjectsWindow();
    
    /* Camera Things */
-   theta=25;
-   phi=0;
-   d=150;
-   centerX = centerZ = 0;
+   theta = 35;
+   phi = 0;
+   d = 300;
+   centerX = 20;
+   centerZ = 80;
    centerY = 30;
    deltaY = 0;
    cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));

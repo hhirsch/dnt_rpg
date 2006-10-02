@@ -347,7 +347,7 @@ void editor::doEditorIO()
    if(keys[SDLK_a])
    {
       agentsSimulation.addAgent(AGENT_TYPE_POTENT, 20, 20, false, 
-                                5, 150, 150, 30, 180);
+                                0.75, 150, 150, 30, 360);
       SDL_Delay(100);
    }
 

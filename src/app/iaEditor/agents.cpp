@@ -3,9 +3,6 @@
 #include <GL/glu.h>
 #include <math.h>
 
-#define AGENT_POTENT_HALF_X 5.0
-#define AGENT_POTENT_HALF_Z 7.0
-#define AGENT_POTENT_HIGHT  6.0
 
 /********************************************************************
  *                          Constructor                             *
@@ -41,6 +38,7 @@ void agents::actualize()
    /* Pontential Function Agents */
    for(aux = 0; aux < totalPotentAgents; aux++)
    {
+      addVisibleAgents(potAg);
       potAg->actualize();
       potAg = potAg->next;
    }
@@ -59,6 +57,7 @@ void agents::draw()
    for(aux = 0; aux < totalPotentAgents; aux++)
    {
       potAg->getPosition(x,z);
+      printf("Ag: %d Position: %.3f %.3f\n",aux, x, z);
       glPushMatrix();
       //TODO rotate, based on orientation
       glTranslatef(x ,0.0, z);
@@ -151,6 +150,8 @@ void agents::addVisibleAgents(agent* ag)
    ag->getPosition( agX, agZ );
    ag->getSight(agSightDistance, agSightAngle);
    ag->clearObstacles();
+
+   ag->addObstacle(28, 30);
    
    /* Pontential Function Agents */
    for(aux = 0; aux < totalPotentAgents; aux++)
@@ -160,8 +161,12 @@ void agents::addVisibleAgents(agent* ag)
       dist = distancePointLine(agX, agZ, 
                               x - AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z,
                               x + AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z);
+      if(ag == potAg)
+      {
+         //does nothing if same 
+      }
       //TODO Verify oriented agent and Angle!
-      if(fabs(dist) <= agSightDistance)
+      else if(fabs(dist) <= agSightDistance)
       {
          ag->addObstacle(x,z);
       }
