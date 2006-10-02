@@ -2,12 +2,12 @@
 #define _agents_h
 
 #include "../../ia/potentAgent.h"
+#include "../../ia/pattAgent.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 
-#define MAX_AGENTS_POTENT 15
-
-#define AGENT_TYPE_POTENT 1
+#define AGENT_TYPE_POTENT  1
+#define AGENT_TYPE_PATTERN 2
 
 class agents
 {
@@ -26,7 +26,12 @@ class agents
       int totalPotentAgents;
       GLuint potentialTexture;
 
+      pattAgent* pattAgents;
+      int totalPattAgents;
+      GLuint pattTexture;
+
       void drawPotentAgent();
+      void drawPattAgent();
       void addVisibleAgents(agent* ag);
 };
 

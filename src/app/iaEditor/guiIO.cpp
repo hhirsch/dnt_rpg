@@ -22,7 +22,7 @@ guiIO::guiIO()
    /* Camera Things */
    theta = 35;
    phi = 0;
-   d = 300;
+   d = 280;
    centerX = 20;
    centerZ = 80;
    centerY = 30;

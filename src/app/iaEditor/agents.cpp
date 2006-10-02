@@ -15,12 +15,24 @@ agents::agents()
    {
       printf("Can't Open Texture!\n");
    }
+   carregaTextura(img, &potentialTexture);
+   SDL_FreeSurface(img);
+
    totalPotentAgents = 0;
    potentAgents = NULL;
 
-   carregaTextura(img, &potentialTexture);
-      
+   img = IMG_Load("../data/iaEditor/pattTexture.png");
+   if(!img)
+   {
+      printf("Can't Open Texture!\n");
+   }
+   carregaTextura(img, &pattTexture);
    SDL_FreeSurface(img);
+
+
+   totalPattAgents = 0;
+   pattAgents = NULL;
+
 }
 
 /********************************************************************
@@ -37,6 +49,7 @@ agents::~agents()
       totalPotentAgents--;
    }
    glDeleteTextures(1,&potentialTexture);
+   glDeleteTextures(1,&pattTexture);
 }
 
 /********************************************************************
@@ -52,6 +65,15 @@ void agents::actualize()
       addVisibleAgents(potAg);
       potAg->actualize();
       potAg = potAg->next;
+   }
+
+   pattAgent* patAg = pattAgents;
+   /* Pattern Agents */
+   for(aux = 0; aux < totalPattAgents; aux++)
+   {
+      //addVisibleAgents(patAg);
+      patAg->actualize();
+      patAg = patAg->next;
    }
 }
 
@@ -78,6 +100,21 @@ void agents::draw()
       potAg = potAg->next;
    }
 
+   pattAgent* patAg = pattAgents;
+   /* Pattern Agents */
+   for(aux = 0; aux < totalPattAgents; aux++)
+   {
+      patAg->getPosition(x,z);
+      glPushMatrix();
+      //TODO Rotate, based on orientation
+      //glRotatef(an);
+      glTranslatef(x ,0.0, z);
+      drawPattAgent();
+      glPopMatrix();
+      patAg = patAg->next;
+   }
+
+
 }
 
 /********************************************************************
@@ -85,20 +122,6 @@ void agents::draw()
  ********************************************************************/
 void agents::drawPotentAgent()
 {
-   GLfloat materialColor[4] = {0.7, 0.7, 0.7, 1.0};
-   float shininess;
-   shininess = 50.0f;
-
-   glEnable(GL_COLOR_MATERIAL);
-
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-   glMaterialfv(GL_FRONT, GL_AMBIENT, materialColor);
-   glMaterialfv(GL_FRONT, GL_DIFFUSE, materialColor);
-   glMaterialfv(GL_FRONT, GL_SPECULAR, materialColor);
-   glMaterialfv(GL_FRONT, GL_SHININESS, &shininess);
-
-        
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, potentialTexture);
    
@@ -160,6 +183,71 @@ void agents::drawPotentAgent()
 }
 
 /********************************************************************
+ *                          drawPattAgent                           *
+ ********************************************************************/
+void agents::drawPattAgent()
+{
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, pattTexture);
+   
+   glBegin(GL_QUADS);
+      /* Face de frente */
+      glNormal3i(0,0,1);
+      glTexCoord2d(0,1);
+      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
+      glTexCoord2d(1,1);
+      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
+      glTexCoord2d(1,0);
+      glVertex3f(AGENT_PATT_HALF_X,-1,-AGENT_PATT_HALF_Z);
+      glTexCoord2d(0,0);
+      glVertex3f(-AGENT_PATT_HALF_X,-1,-AGENT_PATT_HALF_Z);
+      /* Face de tras */
+      glNormal3i(0,0,-1);
+      glTexCoord2d(0,1);
+      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
+      glTexCoord2d(1,1);
+      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
+      glTexCoord2d(1,0);
+      glVertex3f(AGENT_PATT_HALF_X,-1,AGENT_PATT_HALF_Z);
+      glTexCoord2d(0,0);
+      glVertex3f(-AGENT_PATT_HALF_X,-1,AGENT_PATT_HALF_Z);
+      /* Face de esquerda */
+      glNormal3i(-1,0,0);
+      glTexCoord2d(1,0);
+      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
+      glTexCoord2d(1,1);
+      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
+      glTexCoord2d(0,1);
+      glVertex3f(-AGENT_PATT_HALF_X,-1,AGENT_PATT_HALF_Z);
+      glTexCoord2d(0,0);
+      glVertex3f(-AGENT_PATT_HALF_X,-1,-AGENT_PATT_HALF_Z);
+      /* Face de direita */
+      glNormal3i(1,0,0);
+      glTexCoord2d(1,0);
+      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
+      glTexCoord2d(1,1);
+      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
+      glTexCoord2d(0,1);
+      glVertex3f(AGENT_PATT_HALF_X,-1,AGENT_PATT_HALF_Z);
+      glTexCoord2d(0,0);
+      glVertex3f(AGENT_PATT_HALF_X,-1,-AGENT_PATT_HALF_Z);
+      /* Face de cima */
+      glNormal3i(0,1,0);
+      glTexCoord2d(0,0);
+      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
+      glTexCoord2d(1,0);
+      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
+      glTexCoord2d(1,1);
+      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
+      glTexCoord2d(0,1);
+      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
+   glEnd();
+
+   glDisable(GL_COLOR_MATERIAL);
+   glDisable(GL_TEXTURE_2D);
+}
+
+/********************************************************************
  *                             addAgent                             *
  ********************************************************************/
 void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented, 
@@ -175,6 +263,19 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       potentAgents = aux;
       ag = (agent*) potentAgents;
       totalPotentAgents++;
+   }
+   else if(type == AGENT_TYPE_PATTERN)
+   {
+      pattAgent* aux = new pattAgent(oriented);
+      aux -> next = pattAgents;
+      pattAgents = aux;
+      ag = (agent*) pattAgents;
+      totalPattAgents++;
+      //TODO Get Pattern!!!
+      aux->addWayPoint(x, z);
+      aux->addWayPoint(x+10, z);
+      aux->addWayPoint(x+10, z+10);
+      aux->addWayPoint(x, z+10);
    }
    else
    {

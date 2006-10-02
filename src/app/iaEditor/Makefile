@@ -17,7 +17,7 @@ OBJSMAPA = $(ENDETC)distance.o $(ENDETC)glm.o $(ENDMAPA)mapfog.o $(ENDMAPA)mapli
 OBJSPARTICLE = #$(ENDPARTICLE)particle.o $(ENDPARTICLE)part1.o $(ENDPARTICLE)part2.o $(ENDPARTICLE)part3.o $(ENDPARTICLE)part4.o $(ENDPARTICLE)part5.o $(ENDPARTICLE)part6.o $(ENDPARTICLE)part7.o $(ENDPARTICLE)partSystem.o
 OBJSCLASSES = #$(ENDCLASSES)skills.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o
 OBJSLANG = $(ENDLANG)lang.o
-OBJSIA = $(ENDIA)agent.o $(ENDIA)potentAgent.o
+OBJSIA = $(ENDIA)agent.o $(ENDIA)potentAgent.o $(ENDIA)pattAgent.o
 OBJS = agents.o editor.o guiIO.o iaEditor.o message.o
 
 BIN = ../../../bin/
