@@ -37,15 +37,14 @@ pattAgent::~pattAgent()
  ********************************************************************/
 bool pattAgent::defineNextPosition()
 {
-   //printf("x: %.3f z: %.3f x: %.3f z: %.3f \n",actualX, actualZ, actualWayPoint->x, actualWayPoint->z );
    if( (actualX == actualWayPoint->x) && (actualZ == actualWayPoint->z))
    {
       //Arrived at the actual Way Point, so change to next!
       changeToNextWayPoint();
-      printf("Changed!\n");
    }
 
-   
+  
+   /* Actualize position, making sure that goes exactly to the waypoint */
    if( ((xInc > 0) && (actualX + xInc > actualWayPoint->x)) ||
        ((xInc < 0) && (actualX + xInc < actualWayPoint->x)) )
    {
