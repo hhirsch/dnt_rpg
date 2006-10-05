@@ -2239,7 +2239,6 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          pers = (personagem*) pers->proximo;
       }
    }
-
       
    /* Testa Meio-fio */
    float altura_atual = PCs->personagemAtivo->posicaoLadoY;
@@ -2251,9 +2250,6 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    {
       PCs->personagemAtivo->posicaoLadoY = 0.0;
    }
-  
-   
-
    
    GLfloat nx = ((min[0] + max[0]) / 2);//(PCs->personagemAtivo->posicaoLadoX+varX);
    GLfloat nz = ((min[2] + max[2]) / 2);//(PCs->personagemAtivo->posicaoLadoZ+varZ);
@@ -2314,20 +2310,6 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 /* Monta Conjunto de campos do Quadrado */
 inline void engine::verificaQuad(Square* quad)
 {
-   if(quad)
-   {
-       if(quad->flags & PISAVEL)
-       {
-            if(quad->objects[0])
-            {
-               ia->campoInfluencia(quad->posX,quad->posZ,
-                                   TIPOOBSTACULO,30);
-            }
-        }
-        else
-           ia->campoInfluencia(quad->posX,quad->posZ,
-                               TIPOOBSTACULO,30);
-   }
 }
 
 /* Monta conjunto de Campos da linha */
@@ -2357,52 +2339,7 @@ inline void engine::verificaLinha(Square* center)
 /* Retorno !=0 se modificou posicao do personagem */
 int engine::TrataIA()
 {   
-
-   int posX, posZ;     //Posicao Auxiliar
-   double antX,antZ;
-   Square* saux;
-   personagem* per;    //Personagem Atual
-   per = (personagem*) NPCs->primeiro->proximo;
-
-   ia->iniciaListaCampos();
-
-   /* Coloca o Unico PC existente */
-   ia->campoInfluencia(PCs->personagemAtivo->posicaoLadoX,
-                       PCs->personagemAtivo->posicaoLadoZ,
-                       TIPOPC, 100);
-
-    /* Em tese seria para todos os NPCs, mas como a perseguicao
-       atual eh para so um NPC, entao roda so para ele.
-    */
-
-    /* Testa-se entao o campo de visao, montando os campos de influencia */
-    if(per->ocupaQuad)
-    {
-       verificaLinha(per->ocupaQuad);
-       saux = actualMap->quadradoRelativo(per->ocupaQuad->posX,
-                                     per->ocupaQuad->posZ-1);
-       if(saux)
-       {
-          verificaLinha(saux);
-          verificaLinha(saux);
-       }
-       saux = actualMap->quadradoRelativo(per->ocupaQuad->posX,
-                                     per->ocupaQuad->posZ+1);
-       verificaLinha(saux);
-    }
-    else
-      printf("What the HEll!! Square Map Out of bounds!\n");
-   
-    antX = per->posicaoLadoX;
-    antZ = per->posicaoLadoZ;
-    ia->destinoNpc(per);
-
-    /* Define-se A posicao do Personagem NPC */  
-    posX =(int)floor((per->posicaoLadoX) / (SQUARESIZE))+1;
-    posZ =(int)floor((per->posicaoLadoZ) / (SQUARESIZE))+1;
-    per->ocupaQuad = actualMap->quadradoRelativo(posX,posZ);
-
-    return( (antX!=per->posicaoLadoX) || (antZ!=per->posicaoLadoZ));
+    return( 0 );
 }
 
 /*********************************************************************
@@ -2573,9 +2510,6 @@ int engine::Run(SDL_Surface *surface)
    lastFPS = 0;
 
    
-   /* AI init FIXME not here, but in NPCs, etc */
-   ia = new(AI); 
-   
    #ifdef REDE
      /* if using network. FIXME abandoned code, almost for now. */
      netevent_p_t eventoRede;
@@ -2723,7 +2657,6 @@ int engine::Run(SDL_Surface *surface)
 
    }
 
-   delete(ia);
    return(1);
 }
 

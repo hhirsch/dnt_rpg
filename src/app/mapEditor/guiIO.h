@@ -157,6 +157,7 @@ class guiIO
       tabButton* portalTabButton;         /**< Portal TabButton */
       oneTabButton* portalAddButton;      /**< Add Portal Button */
       oneTabButton* portalTagButton;      /**< Portal Tag Button */
+      oneTabButton* portalDoorButton;     /**< Door Button */
       void openPortalWindow();
       /*********************Object*Window*******************************/
       janela* objectWindow;               /**< Object Window */

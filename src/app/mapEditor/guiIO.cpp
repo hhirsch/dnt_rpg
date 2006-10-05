@@ -252,6 +252,7 @@ void guiIO::openPortalWindow()
                                                  "../data/mapEditor/portal.png");
    portalAddButton = portalTabButton->insertButton(0,0,19,19); /* Add */
    portalTagButton = portalTabButton->insertButton(20,0,39,19); /* Tag */
+   portalDoorButton = portalTabButton->insertButton(40,0,59,19); /* Door */
    portalWindow->ptrExterno = &portalWindow;
    portalWindow->Abrir(gui->ljan);
 }
@@ -433,6 +434,13 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             tool = TOOL_PORTAL_TAG;
             return(GUI_IO_NEW_STATE);
          }
+         else if(object == (Tobjeto*) portalDoorButton)
+         {
+            state = GUI_IO_STATE_PORTAL;
+            tool = TOOL_PORTAL_DOOR;
+            return(GUI_IO_NEW_STATE);
+         }
+
          /* Wall Buttons */
          else if(object == (Tobjeto*) wallXButton)
          {

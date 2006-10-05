@@ -25,6 +25,9 @@ string messageForTool(int tool)
       case TOOL_PORTAL_TAG:
          return("Select Portal to Define Destiny");
       break;
+      case TOOL_PORTAL_DOOR:
+         return("Put Door on Wall");
+      break;
       case TOOL_WALL_ADD_X:
          return("Draw The Wall on X Axis (press B tor Add only on Square Borders)");
       break;

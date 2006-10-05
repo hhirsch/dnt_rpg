@@ -11,7 +11,6 @@
 #include "cursor.h"
 #include "personagens.h"
 #include "sun.h"
-#include "../ia/ai.h"
 #include "initial.h"
 #include "options.h"
 #include "skillwindow.h"
@@ -246,7 +245,6 @@ class engine
       Mix_Music* music;            /**< Actual playing music */
       options* option;             /**< Current Options */
 
-      AI* ia;                      /**< IA Module. TODO Not Here. */
       featsList* features;         /**< Feats descriptions */
 
       lang language;               /**< Language struct: internationalization */

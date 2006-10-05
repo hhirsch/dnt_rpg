@@ -26,6 +26,7 @@ using namespace std;
 
 #define TOOL_PORTAL_ADD             31
 #define TOOL_PORTAL_TAG             32
+#define TOOL_PORTAL_DOOR            33
 
 
 
