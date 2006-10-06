@@ -1,5 +1,11 @@
 #include "agent.h"
+#include <math.h>
+#include <stdio.h>
 
+#ifndef PID180
+   #define TWOPI  2 * M_PI
+   #define PID180 M_PI / 180.0
+#endif
 
 /********************************************************************
  *                         Constructor                              *
@@ -86,12 +92,12 @@ void agent::getSight(GLfloat& sightDist, GLfloat& sightAng)
  ********************************************************************/
 void agent::actualize()
 {
-   //TODO get Obstacles in Range
-   //knowObstacles = 0;
-
    defineNextPosition();
 }
 
+/********************************************************************
+ *                           addObstacle                            *
+ ********************************************************************/
 void agent::addObstacle(GLfloat x, GLfloat z)
 {
    if(knowObstacles < MAX_OBSTACLES)
@@ -102,9 +108,71 @@ void agent::addObstacle(GLfloat x, GLfloat z)
    }
 }
 
+/********************************************************************
+ *                            clearObstacle                         *
+ ********************************************************************/
 void agent::clearObstacles()
 {
    knowObstacles = 0;
 }
 
+/********************************************************************
+ *                             doAngle                              *
+ ********************************************************************/
+bool agent::doAngle()
+{
+   if(orientation != desiredAngle)
+   {
+      if(desiredAngle < 0)
+      {
+         desiredAngle += 360;
+      }
+      GLfloat d1;
+      GLfloat d2;
+      if(orientation > desiredAngle)
+      {
+         d1 = (orientation - desiredAngle);
+         d2 = (360 - orientation + desiredAngle);
+      }
+      else
+      {
+         d2 = (desiredAngle - orientation);
+         d1 = (360 - desiredAngle + orientation);
+      }
+
+      if(d1 < d2)
+      {
+         //Sub Value
+         if(d1 < MAX_ROTATION)
+         {
+            orientation = desiredAngle;
+         }
+         else
+         {
+            orientation -= MAX_ROTATION;
+         }
+      }
+      else
+      {
+         //Sum Value
+         if(d2 < MAX_ROTATION)
+         {
+            orientation = desiredAngle;
+         }
+         else
+         {
+            orientation += MAX_ROTATION;
+         }
+
+      }
+
+      if(orientation < 0)
+      {
+         orientation += 360;
+      }
+      
+      return(true);
+   }
+   return(false);
+}
 

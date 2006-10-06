@@ -92,6 +92,7 @@ void agents::draw()
 {
    
    int aux;
+   float color = 0.0;
    GLfloat x,z;
    potentAgent* potAg = potentAgents;
    /* Pontential Function Agents */
@@ -100,8 +101,10 @@ void agents::draw()
       potAg->getPosition(x,z);
       //printf("Ag: %d Position: %.3f %.3f\n",aux, x, z);
       glPushMatrix();
-      //TODO Rotate, based on orientation
-      //glRotatef(an);
+      if(potAg->oriented())
+      {
+         glRotatef(potAg->orientationValue(),0,1,0);
+      }
       glTranslatef(x ,0.0, z);
       drawPotentAgent();
       glPopMatrix();
@@ -112,17 +115,22 @@ void agents::draw()
    /* Pattern Agents */
    for(aux = 0; aux < totalPattAgents; aux++)
    {
+      glColor3f(color,0.5,0.5);
       patAg->getPosition(x,z);
       glPushMatrix();
-      //TODO Rotate, based on orientation
-      //glRotatef(an);
       glTranslatef(x ,0.0, z);
+      if(patAg->oriented())
+      {
+         glRotatef(patAg->orientationValue(),0,1,0);
+      }
       drawPattAgent();
       glPopMatrix();
       patAg->drawWayPoints();
       patAg = patAg->next;
+      color += 0.1;
    }
 
+   glColor3f(1.0,1.0,1.0);
 
 }
 
@@ -392,7 +400,7 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    {
       if(!actualAgent)
       {
-         addAgent(AGENT_TYPE_PATTERN, mouseX, mouseZ, false, 
+         addAgent(AGENT_TYPE_PATTERN, mouseX, mouseZ, true, 
                                      0.75, goalX, goalZ, 30, 360);
       }
       else if( mButton & SDL_BUTTON(1) )

@@ -42,10 +42,61 @@ bool pattAgent::defineNextPosition()
       return(false); //not defined yet the way points, so stay static.
    }
 
+   if(doAngle())
+   {
+      return(true);
+   }
+
    if( (actualX == actualWayPoint->x) && (actualZ == actualWayPoint->z))
    {
       //Arrived at the actual Way Point, so change to next!
       changeToNextWayPoint();
+      //calculate angle
+      if(withOrientation)
+      {
+         GLfloat ax;
+         GLfloat az;
+         ax = fabs(actualX - actualWayPoint->x);
+         az = fabs(actualZ - actualWayPoint->z);
+         GLfloat alpha;
+         if( (az != 0) )
+         {
+            alpha = (atan(fabs(az / ax)) / M_PI) * 180;
+            if( (actualX > actualWayPoint->x) && (actualZ < actualWayPoint->z) )
+            {
+               alpha += 180;
+            }
+            if( (actualX < actualWayPoint->x) && (actualZ < actualWayPoint->z) )
+            {
+               alpha = -alpha;
+            }
+            if( (actualX > actualWayPoint->x) && (actualZ > actualWayPoint->z) )
+            {
+               alpha = 180-alpha;
+            }
+            desiredAngle = alpha;
+            if(doAngle())
+            {
+               return(true);
+            }
+         }
+         else
+         {
+            //alpha = 0 or 180;
+            if(actualX < actualWayPoint->x)
+            {
+               desiredAngle = 0;
+            }
+            else
+            {
+               desiredAngle = 180;
+            }
+            if(doAngle())
+            {
+               return(true);
+            }
+         }
+      }
    }
 
   
@@ -70,7 +121,7 @@ bool pattAgent::defineNextPosition()
       actualZ += zInc;
    }
 
-   return(false);
+   return(true);
 }
 
 /********************************************************************
@@ -140,6 +191,9 @@ void pattAgent::changeToNextWayPoint()
    
 }
 
+/********************************************************************
+ *                            drawWayPoints                         *
+ ********************************************************************/
 void pattAgent::drawWayPoints()
 {
    wayPoint* tmp = wayPoints;

@@ -64,7 +64,6 @@ dlgCompiler: $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o
 	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o -o $(BIN)dlgCompiler
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-
 partEditor.o: partEditor.cpp
 	@printf "Making partEditor.o... "
 	@$(CC) $(CFLAGS) partEditor.cpp -o partEditor.o

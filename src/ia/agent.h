@@ -4,6 +4,7 @@
 #include <SDL/SDL_opengl.h>
 
 #define MAX_OBSTACLES 30
+#define MAX_ROTATION 2.5
 
 /*! Obstacle Percepted */
 class obstacle
@@ -59,6 +60,11 @@ class agent
 
       void clearObstacles();
 
+      bool oriented(){return(withOrientation);};
+      GLfloat orientationValue(){return(orientation);};
+
+      bool doAngle();
+
 
       /* Virtual Methods */
 
@@ -82,6 +88,9 @@ class agent
          /* ORIENTATION */
       bool withOrientation;  /**< If agent has orientation or not */
       GLfloat orientation;   /**< Agent orientation angle, if has */
+      GLfloat desiredAngle;  /**< The desired angle to the agent.
+                                  Only start walk after orientation 
+                                  is in this angle. */
 
          /* SIGHT */
       GLfloat sightDistance; /**< The distance that agent can percept */
