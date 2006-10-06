@@ -22,6 +22,26 @@ string messageForTool(int tool)
          return("Simulation Stoped");
          break;
       }
+      case TOOL_PATTERN_ADD:
+      {
+         return("Add Agent, select way points and press rigth mouse buttton");
+         break;
+      }
+      case TOOL_POTENTIAL_ADD:
+      {
+         return("Put potential Agent on initial Position");
+         break;
+      }
+      case TOOL_OBJECT_ADD:
+      {
+         return("Put object (obstacle) on position");
+         break;
+      }
+      case TOOL_GOAL_ADD:
+      {
+         return("Define Potential Agents Goal Position");
+         break;
+      }
    }
    return("DccNiTghtmare!");
 }

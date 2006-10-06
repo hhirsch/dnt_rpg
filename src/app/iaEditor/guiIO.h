@@ -103,6 +103,10 @@ class guiIO
       /*********************Objects*Window*******************************/
       janela* objectsWindow;              /**< Message Window */
       tabButton* objectsTabButton;        /**< Objects Tab Button */
+      oneTabButton* potentialButton;      /**< Potential Agent Button */
+      oneTabButton* patternButton;        /**< Pattern Agent Button */
+      oneTabButton* goalButton;           /**< Goal Button */
+      oneTabButton* objectButton;         /**< Objects Button */
       void openObjectsWindow();
 
       /*********************PlayControl*Window***************************/

@@ -349,21 +349,26 @@ void editor::doEditorIO()
       simulationStarted = false;
       //TODO Restart State
    }
+   else 
+   {
+      agentsSimulation->verifyAction(xReal, yReal, zReal, mButton, 
+                                     gui->getTool());
+   }
 
    
-   if(keys[SDLK_a])
+   /*if(keys[SDLK_a])
    {
       agentsSimulation->addAgent(AGENT_TYPE_POTENT, 20, 20, false, 
                                 0.75, 150, 150, 30, 360);
       SDL_Delay(100);
-   }
+   }*/
 
-   if(keys[SDLK_s])
+   /*if(keys[SDLK_s])
    {
       agentsSimulation->addAgent(AGENT_TYPE_PATTERN, 80, 80, false, 
                                 0.75, 150, 150, 30, 360);
       SDL_Delay(100);
-   }
+   }*/
 
 
 }

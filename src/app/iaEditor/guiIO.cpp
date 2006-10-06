@@ -121,6 +121,10 @@ void guiIO::openObjectsWindow()
                                           1,1,NULL,NULL);
    objectsTabButton = objectsWindow->objects->InserirTabButton(7,17,0,0,
                                                  "../data/iaEditor/objects.png");
+   potentialButton = objectsTabButton->insertButton(0,0,19,19);
+   patternButton = objectsTabButton->insertButton(20,0,39,19);
+   goalButton = objectsTabButton->insertButton(0,20,19,39);
+   objectButton = objectsTabButton->insertButton(20,20,39,39);
    objectsWindow->fechavel = 0;
    objectsWindow->ptrExterno = &objectsWindow;
    objectsWindow->Abrir(gui->ljan);
@@ -264,8 +268,28 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             tool = TOOL_SIM_STOP;
             return(GUI_IO_NEW_STATE);
          }
-
-
+         /* Objects Window Events */
+         else if (object == (Tobjeto*) potentialButton)
+         {
+            tool = TOOL_POTENTIAL_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) patternButton)
+         {
+            tool = TOOL_PATTERN_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) goalButton)
+         {
+            tool = TOOL_GOAL_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) objectButton)
+         {
+            tool = TOOL_OBJECT_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         
 
       }
       case BOTAOPRESSIONADO:

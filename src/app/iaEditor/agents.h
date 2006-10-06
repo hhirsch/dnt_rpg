@@ -20,6 +20,8 @@ class agents
       void addAgent(int type, GLfloat x, GLfloat z, bool oriented, 
                     GLfloat stepSize, GLfloat goalX, GLfloat goalZ, 
                     GLfloat sightDist, GLfloat sightAng);
+      void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+                        Uint8 mButton, int tool);
 
    private:
       potentAgent* potentAgents;
@@ -29,6 +31,12 @@ class agents
       pattAgent* pattAgents;
       int totalPattAgents;
       GLuint pattTexture;
+
+      agent* actualAgent;
+      int state;
+
+      GLfloat goalX;
+      GLfloat goalZ;
 
       void drawPotentAgent();
       void drawPattAgent();

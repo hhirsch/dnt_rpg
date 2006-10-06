@@ -1,9 +1,13 @@
 #include "agents.h"
+#include "message.h"
 #include "../../etc/distance.h"
 #include "../../gui/desenho.h"
 #include <GL/glu.h>
 #include <math.h>
 #include <SDL/SDL_image.h>
+
+#define AGENTS_STATE_NONE           0
+#define AGENTS_STATE_WAYPOINTS      1
 
 /********************************************************************
  *                          Constructor                             *
@@ -20,6 +24,10 @@ agents::agents()
 
    totalPotentAgents = 0;
    potentAgents = NULL;
+   actualAgent = NULL;
+   state = AGENTS_STATE_NONE;
+   goalX = 200;
+   goalZ = 200;
 
    img = IMG_Load("../data/iaEditor/pattTexture.png");
    if(!img)
@@ -111,6 +119,7 @@ void agents::draw()
       glTranslatef(x ,0.0, z);
       drawPattAgent();
       glPopMatrix();
+      patAg->drawWayPoints();
       patAg = patAg->next;
    }
 
@@ -271,11 +280,6 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       pattAgents = aux;
       ag = (agent*) pattAgents;
       totalPattAgents++;
-      //TODO Get Pattern!!!
-      aux->addWayPoint(x, z);
-      aux->addWayPoint(x+10, z);
-      aux->addWayPoint(x+10, z+10);
-      aux->addWayPoint(x, z+10);
    }
    else
    {
@@ -286,6 +290,7 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
    ag->defineSight(sightDist, sightAng);
    ag->defineDestiny(goalX, goalZ);
    ag->defineStepSize(stepSize);
+   actualAgent = ag;
 }
 
 /********************************************************************
@@ -350,5 +355,84 @@ void agents::addVisibleAgents(agent* ag)
       }
       potAg = potAg->next;
    }
-   
+}
+
+
+/******************************************************************
+ *                        Verify Action                           *
+ ******************************************************************/
+void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+                          Uint8 mButton, int tool)
+{
+   if(tool == TOOL_POTENTIAL_ADD)
+   {
+      if(!actualAgent)
+      {
+         addAgent(AGENT_TYPE_POTENT, mouseX, mouseZ, false, 
+                                     0.75, goalX, goalZ, 30, 360);
+      }
+      else if( mButton & SDL_BUTTON(1))
+      {
+         actualAgent = NULL;
+         state = AGENTS_STATE_NONE;
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+      }
+      else
+      {
+         actualAgent->definePosition(mouseX, mouseZ);
+      }
+   }
+   else if(tool == TOOL_PATTERN_ADD)
+   {
+      if(!actualAgent)
+      {
+         addAgent(AGENT_TYPE_PATTERN, mouseX, mouseZ, false, 
+                                     0.75, goalX, goalZ, 30, 360);
+      }
+      else if( mButton & SDL_BUTTON(1) )
+      {
+         if(state == AGENTS_STATE_NONE)
+         {
+            state = AGENTS_STATE_WAYPOINTS;
+            pattAgent* aux = (pattAgent*) actualAgent;
+            /* Define Initial Position */
+            aux->definePosition(mouseX, mouseZ);
+            aux->addWayPoint(mouseX, mouseZ);
+         }
+         else if(state == AGENTS_STATE_WAYPOINTS)
+         {
+            pattAgent* aux = (pattAgent*) actualAgent;
+            aux->addWayPoint(mouseX, mouseZ);
+         }
+         
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+
+      }
+      else if( (mButton & SDL_BUTTON(3)) && (state == AGENTS_STATE_WAYPOINTS))
+      {
+         state = AGENTS_STATE_NONE;
+         actualAgent = NULL;
+      }
+      else if(state == AGENTS_STATE_NONE)
+      {
+         actualAgent->definePosition(mouseX, mouseZ);
+      }
+   }
+   else
+   {
+      state = AGENTS_STATE_NONE;
+      actualAgent = NULL;
+   }
 }

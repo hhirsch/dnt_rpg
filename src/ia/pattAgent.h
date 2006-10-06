@@ -30,6 +30,9 @@ class pattAgent: public agent
       /*! Add WayPoint to be the "last" on the Agent */
       void addWayPoint(GLfloat x, GLfloat z);
 
+      /*! Draw Waypoints, conneting them */
+      void drawWayPoints();
+
       pattAgent* next;              /**< Next Agent on List */
       
    protected:

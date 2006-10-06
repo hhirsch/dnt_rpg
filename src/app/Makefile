@@ -12,12 +12,12 @@ OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o
 OBJSENGINE = $(ENDENGINE)conversa.o $(ENDENGINE)culling.o
 OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDENGINE)culling.o
 OBJSPARTICLE = $(ENDPARTICLE)particle.o $(ENDPARTICLE)part1.o $(ENDPARTICLE)part2.o $(ENDPARTICLE)part3.o $(ENDPARTICLE)part4.o $(ENDPARTICLE)part5.o $(ENDPARTICLE)part6.o $(ENDPARTICLE)part7.o
-SUBSYSTEMS = mapEditor/
+SUBSYSTEMS = iaEditor/ mapEditor/
 
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-all: DlgEditor fntEditor dlgCompiler partEditor MapEditor
+all: DlgEditor fntEditor dlgCompiler partEditor iaEditor MapEditor
 
 fntEditor.o: fntEditor.cpp
 	@printf "Making fntEditor.o... "
@@ -33,6 +33,9 @@ MapEditor.o: MapEditor.cpp
 	@printf "Making MapEditor.o... "
 	@$(CC) $(CFLAGS) MapEditor.cpp -o MapEditor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
+
+iaEditor: 
+	@cd ./iaEditor; make all;
 
 MapEditor: 
 	@cd ./mapEditor; make all;
@@ -74,5 +77,5 @@ partEditor: $(OBJSGUI) $(OBJSENGINE) partEditor.o
 
 clean:
 	@printf "Cleaning App Bin Files... "
-	@\rm -rf *.o *.e ./mapEditor/*.o $(BIN)DlgEditor $(BIN)mapEditor $(BIN)fntEditor $(BIN)partEditor
+	@\rm -rf *.o *.e ./mapEditor/*.o ./iaEditor/*.o $(BIN)DlgEditor $(BIN)mapEditor $(BIN)fntEditor $(BIN)partEditor $(BIN)iaEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"

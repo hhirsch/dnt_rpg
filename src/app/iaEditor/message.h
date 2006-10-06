@@ -7,9 +7,13 @@
 #include <string>
 using namespace std;
 
-#define TOOL_SIM_PLAY  1
-#define TOOL_SIM_PAUSE 2
-#define TOOL_SIM_STOP  3
+#define TOOL_SIM_PLAY          1
+#define TOOL_SIM_PAUSE         2
+#define TOOL_SIM_STOP          3
+#define TOOL_POTENTIAL_ADD    10
+#define TOOL_PATTERN_ADD      11
+#define TOOL_GOAL_ADD         12
+#define TOOL_OBJECT_ADD       13
 
 string messageForTool(int tool);
 

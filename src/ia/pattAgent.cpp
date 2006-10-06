@@ -37,6 +37,11 @@ pattAgent::~pattAgent()
  ********************************************************************/
 bool pattAgent::defineNextPosition()
 {
+   if(!actualWayPoint)
+   {
+      return(false); //not defined yet the way points, so stay static.
+   }
+
    if( (actualX == actualWayPoint->x) && (actualZ == actualWayPoint->z))
    {
       //Arrived at the actual Way Point, so change to next!
@@ -103,6 +108,10 @@ void pattAgent::addWayPoint(GLfloat x, GLfloat z)
  ********************************************************************/
 void pattAgent::changeToNextWayPoint()
 {
+   if(!actualWayPoint)
+   {
+      return; //not defined yet the way points, so stay static.
+   }
    actualWayPoint = actualWayPoint->next;
 
    if(actualWayPoint)
@@ -129,5 +138,26 @@ void pattAgent::changeToNextWayPoint()
       }
    }
    
+}
+
+void pattAgent::drawWayPoints()
+{
+   wayPoint* tmp = wayPoints;
+   int aux = 0;
+   if(tmp)
+   {
+      glDisable(GL_LIGHTING);
+      glLineWidth(3);
+      glBegin(GL_LINE_LOOP);
+      while(aux < totalWayPoints)
+      {
+         glVertex3f(tmp->x, 0.1, tmp->z);
+         aux++;
+         tmp = tmp->next;
+      }
+      glEnd();
+      glLineWidth(1);
+      glEnable(GL_LIGHTING);
+   }
 }
 
