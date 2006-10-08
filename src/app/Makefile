@@ -17,7 +17,7 @@ SUBSYSTEMS = iaEditor/ mapEditor/
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-all: DlgEditor fntEditor dlgCompiler partEditor iaEditor MapEditor
+all: DlgEditor fntEditor dlgCompiler partEditor parts
 
 fntEditor.o: fntEditor.cpp
 	@printf "Making fntEditor.o... "
@@ -29,10 +29,10 @@ fntEditor: $(OBJSGUI) $(OBJSENGINE) fntEditor.o
 	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) fntEditor.o -o $(BIN)fntEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-MapEditor.o: MapEditor.cpp
-	@printf "Making MapEditor.o... "
-	@$(CC) $(CFLAGS) MapEditor.cpp -o MapEditor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+parts:
+	@for dir in ${SUBSYSTEMS}; do \
+	   (echo "Making $$dir";echo " ";cd $$dir; ${MAKE} all;echo " "); \
+	done
 
 iaEditor: 
 	@cd ./iaEditor; make all;
