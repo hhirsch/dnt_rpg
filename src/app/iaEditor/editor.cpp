@@ -349,7 +349,7 @@ void editor::doEditorIO()
       simulationStarted = false;
       //TODO Restart State
    }
-   else 
+   else if(!simulationStarted)
    {
       agentsSimulation->verifyAction(xReal, yReal, zReal, mButton, 
                                      gui->getTool());

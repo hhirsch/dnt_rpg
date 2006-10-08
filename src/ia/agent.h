@@ -6,6 +6,8 @@
 #define MAX_OBSTACLES 30
 #define MAX_ROTATION 2.5
 
+
+
 /*! Obstacle Percepted */
 class obstacle
 {
@@ -64,6 +66,8 @@ class agent
       GLfloat orientationValue(){return(orientation);};
 
       bool doAngle();
+
+      bool addIfVisible(agent* testAg);
 
 
       /* Virtual Methods */

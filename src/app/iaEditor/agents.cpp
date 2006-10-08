@@ -2,12 +2,17 @@
 #include "message.h"
 #include "../../etc/distance.h"
 #include "../../gui/desenho.h"
+#include "../../engine/util.h"
 #include <GL/glu.h>
 #include <math.h>
 #include <SDL/SDL_image.h>
 
 #define AGENTS_STATE_NONE           0
-#define AGENTS_STATE_WAYPOINTS      1
+#define AGENTS_STATE_POTENTIAL      1
+#define AGENTS_STATE_PATTERN        2
+#define AGENTS_STATE_WAYPOINTS      3
+#define AGENTS_STATE_GOAL           4
+
 
 /********************************************************************
  *                          Constructor                             *
@@ -25,6 +30,7 @@ agents::agents()
    totalPotentAgents = 0;
    potentAgents = NULL;
    actualAgent = NULL;
+
    state = AGENTS_STATE_NONE;
    goalX = 200;
    goalZ = 200;
@@ -80,6 +86,7 @@ void agents::actualize()
    for(aux = 0; aux < totalPattAgents; aux++)
    {
       //addVisibleAgents(patAg);
+      removeColliders(patAg);
       patAg->actualize();
       patAg = patAg->next;
    }
@@ -301,70 +308,156 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
    actualAgent = ag;
 }
 
+
+
 /********************************************************************
  *                      addVisibleAgents                            *
  ********************************************************************/
 void agents::addVisibleAgents(agent* ag)
 {
-   GLfloat dist;
    int aux;
-   GLfloat x,z;
-   GLfloat agX, agZ, agSightDistance, agSightAngle;
+   
    potentAgent* potAg = potentAgents;
 
-   /* Take Current Agent Position */
-   ag->getPosition( agX, agZ );
-   ag->getSight(agSightDistance, agSightAngle);
    ag->clearObstacles();
-
+   
    /* Pontential Function Agents */
    for(aux = 0; aux < totalPotentAgents; aux++)
    {
-      potAg->getPosition(x,z);
-      /* Test All 4 Lines Equations of The Agent */
-      dist = distancePointLine(agX, agZ, 
-                              x - AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z,
-                              x + AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z);
-      if(ag == potAg)
+      if(potAg != ag)
       {
-         //does nothing if is the same 
-      }
-      //TODO Verify oriented agent and Angle!
-      else if(fabs(dist) <= agSightDistance)
-      {
-         ag->addObstacle(x,z);
-      }
-      else
-      {
-
-         dist = distancePointLine(agX, agZ, 
-                              x - AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z,
-                              x - AGENT_POTENT_HALF_X, z + AGENT_POTENT_HALF_Z);
-         if(fabs(dist) <= agSightDistance)
-         {
-            ag->addObstacle(x,z);
-         }
-         else
-         {
-            dist = distancePointLine(agX, agZ, 
-                              x - AGENT_POTENT_HALF_X, z + AGENT_POTENT_HALF_Z,
-                              x + AGENT_POTENT_HALF_X, z + AGENT_POTENT_HALF_Z);
-            if(fabs(dist) <= agSightDistance)
-            {
-               ag->addObstacle(x,z);
-            }
-            else
-            {
-               dist = distancePointLine(agX, agZ, 
-                              x + AGENT_POTENT_HALF_X, z - AGENT_POTENT_HALF_Z,
-                              x + AGENT_POTENT_HALF_X, z + AGENT_POTENT_HALF_Z);
-            }
-         }
+         ag->addIfVisible(potAg);
       }
       potAg = potAg->next;
    }
 }
 
+/******************************************************************
+ *                        remove Colliders                        *
+ ******************************************************************/
+void agents::removeColliders(pattAgent* patAg)
+{
+   int aux;
+   int initialTotalAgents = totalPotentAgents; //Total agents before remove
+   GLfloat agX, agZ;
+   
+   potentAgent* potAg = potentAgents;
+
+   patAg->clearObstacles();
+   patAg->getPosition(agX, agZ);
+
+   GLfloat min1[3]; GLfloat max1[3];
+   GLfloat min2[3]; GLfloat max2[3];
+
+   GLfloat x[4];
+   GLfloat z[4];
+
+   x[0] = -AGENT_PATT_HALF_X;
+   z[0] = -AGENT_PATT_HALF_Z;
+   x[1] = -AGENT_PATT_HALF_X;
+   z[1] = +AGENT_PATT_HALF_Z;
+   x[2] = +AGENT_PATT_HALF_X;
+   z[2] = +AGENT_PATT_HALF_Z;
+   x[3] = +AGENT_PATT_HALF_X;
+   z[3] = -AGENT_PATT_HALF_Z;
+
+   if(patAg->oriented())
+   {
+      rotTransBoundingBox(patAg->orientationValue(), x, z,
+                          agX, 0.0, 0.0, agZ,
+                          min1, max1);
+   }
+   else
+   {
+      rotTransBoundingBox(0.0, x, z,
+                          agX, 0.0, 0.0, agZ,
+                          min1, max1);
+   }
+   
+   
+   /* Pontential Function Agents */
+   for(aux = 0; aux < initialTotalAgents; aux++)
+   {
+      if((agent*)potAg != (agent*)patAg)
+      {
+         potAg->getPosition(agX, agZ);
+         x[0] = -AGENT_POTENT_HALF_X;
+         z[0] = -AGENT_POTENT_HALF_Z;
+         x[1] = -AGENT_POTENT_HALF_X;
+         z[1] = +AGENT_POTENT_HALF_Z;
+         x[2] = +AGENT_POTENT_HALF_X;
+         z[2] = +AGENT_POTENT_HALF_Z;
+         x[3] = +AGENT_POTENT_HALF_X;
+         z[3] = -AGENT_POTENT_HALF_Z;
+
+         if(potAg->oriented())
+         {
+            rotTransBoundingBox(potAg->orientationValue(), x, z,
+                                agX, 0.0, 0.0, agZ,
+                                min2, max2);
+         }
+         else
+         {  
+            rotTransBoundingBox(0.0, x, z,
+                                agX, 0.0, 0.0, agZ,
+                                min2, max2);
+         }
+         
+         if(estaDentro(min1, max1, min2, max2, 1))
+         {
+            //Remove the potential agents in range!
+            /*GLfloat x,z;
+            potAg->getPosition(x, z);
+            printf("Removed: %.3f %.3f\n",x,z);
+            patAg->getPosition(x, z);
+            printf("From: %.3f %.3f\n",x,z);*/
+            potAg = removePotentAgent(potAg);
+         }
+         else
+         {
+            potAg = potAg->next;
+         }
+      }
+      else if(potAg)
+      {
+         potAg = potAg->next;
+      }
+   }
+}
+
+/******************************************************************
+ *                         Remove Potent Agent                    *
+ ******************************************************************/
+potentAgent* agents::removePotentAgent(potentAgent* potAg)
+{
+   potentAgent* aux;
+
+   if(potAg == potentAgents)
+   {
+      potentAgents = potAg->next;
+      aux = potentAgents;
+   }
+   else
+   {
+      aux = potentAgents;
+      while(aux->next != potAg)
+      {
+         aux = aux->next;
+      }
+      aux->next = potAg->next;
+      aux = potAg->next;
+   }
+   
+   delete(potAg);
+   totalPotentAgents--;
+   
+   if(totalPotentAgents == 0)
+   {
+      potentAgents = NULL;
+   }
+
+   return(aux);
+}
 
 /******************************************************************
  *                        Verify Action                           *
@@ -374,10 +467,11 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 {
    if(tool == TOOL_POTENTIAL_ADD)
    {
-      if(!actualAgent)
+      if(state != AGENTS_STATE_POTENTIAL)
       {
          addAgent(AGENT_TYPE_POTENT, mouseX, mouseZ, false, 
                                      0.75, goalX, goalZ, 30, 360);
+         state = AGENTS_STATE_POTENTIAL;
       }
       else if( mButton & SDL_BUTTON(1))
       {
@@ -391,21 +485,22 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             mButton = SDL_GetMouseState(&x,&y);
          }
       }
-      else
+      else if(state == AGENTS_STATE_POTENTIAL)
       {
          actualAgent->definePosition(mouseX, mouseZ);
       }
    }
    else if(tool == TOOL_PATTERN_ADD)
    {
-      if(!actualAgent)
+      if( (state != AGENTS_STATE_PATTERN) && (state != AGENTS_STATE_WAYPOINTS) )
       {
          addAgent(AGENT_TYPE_PATTERN, mouseX, mouseZ, true, 
-                                     0.75, goalX, goalZ, 30, 360);
+                                     0.75, goalX, goalZ, 0.75, 360);
+         state = AGENTS_STATE_PATTERN;
       }
       else if( mButton & SDL_BUTTON(1) )
       {
-         if(state == AGENTS_STATE_NONE)
+         if(state == AGENTS_STATE_PATTERN)
          {
             state = AGENTS_STATE_WAYPOINTS;
             pattAgent* aux = (pattAgent*) actualAgent;
@@ -433,10 +528,14 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          state = AGENTS_STATE_NONE;
          actualAgent = NULL;
       }
-      else if(state == AGENTS_STATE_NONE)
+      else if(state == AGENTS_STATE_PATTERN)
       {
          actualAgent->definePosition(mouseX, mouseZ);
       }
+   }
+   else if(tool == TOOL_GOAL_ADD)
+   {
+      state = AGENTS_STATE_NONE;
    }
    else
    {

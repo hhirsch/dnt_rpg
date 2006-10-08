@@ -3,10 +3,6 @@
 
 #include "agent.h"
 
-#define AGENT_PATT_HALF_X 5.0
-#define AGENT_PATT_HALF_Z 5.0
-#define AGENT_PATT_HIGHT  6.0
-
 class wayPoint
 {
    public:

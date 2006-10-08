@@ -1,4 +1,5 @@
 #include "agent.h"
+#include "../etc/distance.h"
 #include <math.h>
 #include <stdio.h>
 
@@ -6,6 +7,7 @@
    #define TWOPI  2 * M_PI
    #define PID180 M_PI / 180.0
 #endif
+
 
 /********************************************************************
  *                         Constructor                              *
@@ -175,4 +177,31 @@ bool agent::doAngle()
    }
    return(false);
 }
+
+/********************************************************************
+ *                             addIfVisible                         *
+ ********************************************************************/
+bool agent::addIfVisible(agent* testAg)
+{
+   GLfloat x, z, dist;
+   GLfloat agX, agZ, agSightDistance, agSightAngle;
+
+   /* Take Current Agent Position */
+   getPosition( agX, agZ );
+   getSight(agSightDistance, agSightAngle);
+   
+
+   testAg->getPosition(x,z);
+
+   dist = sqrt( (agX-x)*(agX-x) + (agZ-z)*(agZ-z) );
+
+   if(fabs(dist) <= agSightDistance)
+   {
+      addObstacle(x,z);
+      return(true);
+   }
+
+   return(false);
+}
+
 
