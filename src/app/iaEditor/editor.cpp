@@ -355,22 +355,6 @@ void editor::doEditorIO()
                                      gui->getTool());
    }
 
-   
-   /*if(keys[SDLK_a])
-   {
-      agentsSimulation->addAgent(AGENT_TYPE_POTENT, 20, 20, false, 
-                                0.75, 150, 150, 30, 360);
-      SDL_Delay(100);
-   }*/
-
-   /*if(keys[SDLK_s])
-   {
-      agentsSimulation->addAgent(AGENT_TYPE_PATTERN, 80, 80, false, 
-                                0.75, 150, 150, 30, 360);
-      SDL_Delay(100);
-   }*/
-
-
 }
 
 /*********************************************************************
@@ -392,6 +376,20 @@ void editor::verifyIO()
    else if(guiEvent == GUI_IO_NOTHING)
    {
       doEditorIO();
+   }
+   else if(guiEvent == GUI_IO_SAVE_IAFILE)
+   {
+      gui->showMessage(agentsSimulation->saveState(gui->getFileName()));
+   }
+   else if(guiEvent == GUI_IO_OPEN_IAFILE)
+   {
+      gui->showMessage(agentsSimulation->loadState(gui->getFileName()));
+   }
+   else if(guiEvent == GUI_IO_NEW_IAFILE)
+   {
+      delete(agentsSimulation);
+      agentsSimulation = new(agents);
+      gui->showMessage("New IA Started!");
    }
    else if(guiEvent == GUI_IO_NEW_STATE)
    {

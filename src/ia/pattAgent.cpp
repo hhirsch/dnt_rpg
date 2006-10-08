@@ -159,6 +159,7 @@ void pattAgent::addWayPoint(GLfloat x, GLfloat z)
  ********************************************************************/
 void pattAgent::changeToNextWayPoint()
 {
+   int loops;
    if(!actualWayPoint)
    {
       return; //not defined yet the way points, so stay static.
@@ -171,8 +172,6 @@ void pattAgent::changeToNextWayPoint()
       GLfloat dz = actualWayPoint->z - actualZ;
       //GLfloat dist = sqrt((dx*dx) + (dz*dz));
 
-      actualLoop = 0;
-   
       if(fabs(dx) > fabs(dz))
       {
          loops = (int) (fabs(dx) / stepSize);

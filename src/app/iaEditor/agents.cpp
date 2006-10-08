@@ -6,6 +6,8 @@
 #include <GL/glu.h>
 #include <math.h>
 #include <SDL/SDL_image.h>
+#include <iostream>
+#include <fstream>
 
 #define AGENTS_STATE_NONE           0
 #define AGENTS_STATE_POTENTIAL      1
@@ -43,6 +45,14 @@ agents::agents()
    carregaTextura(img, &pattTexture);
    SDL_FreeSurface(img);
 
+   img = IMG_Load("../data/iaEditor/goal.png");
+   if(!img)
+   {
+      printf("Can't Open Texture!\n");
+   }
+   carregaTexturaRGBA(img, &goalTexture);
+   SDL_FreeSurface(img);
+
 
    totalPattAgents = 0;
    pattAgents = NULL;
@@ -50,9 +60,9 @@ agents::agents()
 }
 
 /********************************************************************
- *                           Destructor                             *
+ *                       Remove All Agents                          *
  ********************************************************************/
-agents::~agents()
+void agents::removeAllAgents()
 {
    potentAgent* ag;
    while(totalPotentAgents > 0)
@@ -62,8 +72,27 @@ agents::~agents()
       delete(ag);
       totalPotentAgents--;
    }
+
+   pattAgent* patt;
+   while(totalPattAgents > 0)
+   {
+      patt = pattAgents;
+      pattAgents = pattAgents->next;
+      delete(patt);
+      totalPattAgents--;
+   }
+}
+
+/********************************************************************
+ *                           Destructor                             *
+ ********************************************************************/
+agents::~agents()
+{
+   removeAllAgents();
+
    glDeleteTextures(1,&potentialTexture);
    glDeleteTextures(1,&pattTexture);
+   glDeleteTextures(1,&goalTexture);
 }
 
 /********************************************************************
@@ -138,6 +167,36 @@ void agents::draw()
    }
 
    glColor3f(1.0,1.0,1.0);
+
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+   
+   glEnable(GL_TEXTURE_2D);     
+   glBindTexture(GL_TEXTURE_2D, goalTexture);
+   glBegin(GL_QUADS);
+     glTexCoord2f(0.0,0.0);
+     glNormal3i(0,1,0);
+     glVertex3f( goalX-2 , 
+                 0.2 , 
+                 goalZ-2 );
+     glTexCoord2f(0.0,1.0);
+     glNormal3i(0,1,0);
+     glVertex3f( goalX-2 , 
+                 0.0 , 
+                 goalZ+2);
+     glTexCoord2f(1.0,1.0);
+     glNormal3i(0,1,0);
+     glVertex3f( goalX+2, 
+                 0.0 , 
+                 goalZ+2 );
+     glTexCoord2f(1.0,0.0);
+     glNormal3i(0,1,0);
+     glVertex3f( goalX+2, 
+                 0.0, 
+                 goalZ-2 );
+   glEnd();
+   glDisable(GL_TEXTURE_2D);
+   glDisable(GL_BLEND);
 
 }
 
@@ -405,12 +464,6 @@ void agents::removeColliders(pattAgent* patAg)
          
          if(estaDentro(min1, max1, min2, max2, 1))
          {
-            //Remove the potential agents in range!
-            /*GLfloat x,z;
-            potAg->getPosition(x, z);
-            printf("Removed: %.3f %.3f\n",x,z);
-            patAg->getPosition(x, z);
-            printf("From: %.3f %.3f\n",x,z);*/
             potAg = removePotentAgent(potAg);
          }
          else
@@ -457,6 +510,27 @@ potentAgent* agents::removePotentAgent(potentAgent* potAg)
    }
 
    return(aux);
+}
+
+/******************************************************************
+ *                        redefineGoal                            *
+ ******************************************************************/
+void agents::redefineGoal(GLfloat x, GLfloat z)
+{
+   goalX = x;
+   goalZ = z;
+
+   int aux;
+   
+   potentAgent* potAg = potentAgents;
+
+   /* Pontential Function Agents */
+   for(aux = 0; aux < totalPotentAgents; aux++)
+   {
+      potAg->defineDestiny(goalX, goalZ);
+      potAg = potAg->next;
+   }
+
 }
 
 /******************************************************************
@@ -536,6 +610,18 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    else if(tool == TOOL_GOAL_ADD)
    {
       state = AGENTS_STATE_NONE;
+      if(mButton & SDL_BUTTON(1))
+      {
+         redefineGoal(mouseX, mouseZ);
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+
+      }
    }
    else
    {
@@ -543,3 +629,163 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       actualAgent = NULL;
    }
 }
+
+
+/******************************************************************
+ *                            Save File                           *
+ ******************************************************************/
+string agents::saveState(string fileName)
+{
+   string ret = "";
+   int i;
+
+   std::ofstream file;
+   file.open(fileName.c_str(), ios::out | ios::binary);
+
+
+   if(!file)
+   {
+      ret = "Error while saving file: ";
+      ret += fileName;
+      return(ret);
+   }
+
+   /* Save Number of Total Agents */
+   file << "Agents: " << totalPotentAgents << " " << totalPattAgents << "\n";
+
+   /* Save Goal Position */
+   file << "Goal: " << goalX << " " << goalZ << "\n";
+
+   GLfloat x, z, sightDist, sightAngle;
+   int oriented;
+   potentAgent* ag = potentAgents;
+   
+   /* Save All Potential Agents */
+   for(i=0; i< totalPotentAgents; i++)
+   {
+      ag->getPosition(x,z);
+      ag->getSight(sightDist, sightAngle);
+      if(ag->oriented())
+      {
+         oriented = 1;
+      }
+      else
+      {
+         oriented = 0;
+      }
+      file << "Pot: " << x << " " << z << " " << oriented << " " <<
+            ag->getStepSize() << " " << sightDist << " " << sightAngle << "\n";
+      ag = ag->next;
+   }
+
+   /* Save All Pattern Agents */
+   pattAgent* a = pattAgents;
+   int w, numWayPoints;
+   for(i=0; i< totalPattAgents; i++)
+   {
+      a->getPosition(x,z);
+      a->getSight(sightDist, sightAngle);
+      if(a->oriented())
+      {
+         oriented = 1;
+      }
+      else
+      {
+         oriented = 0;
+      }
+      numWayPoints = a->getTotalWayPoints();
+
+      file << "Pat: " << x << " " << z << " " << oriented << " " << 
+              a->getStepSize() << " " << sightDist << " " << sightAngle <<
+              " " << numWayPoints << "\n";
+      
+      wayPoint* wp = a->getWayPoints();
+      for(w = 0; w < numWayPoints; w++)
+      {
+         file << "Way: " << wp->x << " " << wp->z << "\n";
+         wp = wp->next;
+      }
+   }
+
+
+   ret = "Saved File: ";
+   ret += fileName;
+   return(ret);
+}
+
+
+/******************************************************************
+ *                            Load File                           *
+ ******************************************************************/
+string agents::loadState(string fileName)
+{
+   string ret = "";
+   string aux = "";
+   int numPotAgents;
+   int numPatAgents;
+   int i;
+
+   GLfloat x,z, step;
+   GLfloat sightDist, sightAngle;
+   int oriented; 
+
+   std::ifstream file;
+   file.open(fileName.c_str(), ios::in | ios::binary);
+
+
+   if(!file)
+   {
+      ret = "Error while opening file: ";
+      ret += fileName;
+      return(ret);
+   }
+
+   /* Remove All Agents */
+   removeAllAgents();
+
+   /* Get Number of Total Agents */
+   getline(file, aux);
+   sscanf(aux.c_str(),"Agents: %d %d",&numPotAgents, &numPatAgents);
+
+   /* Get Goal Position */
+   getline(file, aux);
+   sscanf(aux.c_str(),"Goal: %f %f",&goalX, &goalZ);
+   
+   /* Gets All Potential Agents */
+   for(i=0; i< numPotAgents; i++)
+   {
+      getline(file, aux);
+      sscanf(aux.c_str(),"Pot: %f %f %d %f %f %f", &x, &z, &oriented, &step,
+                        &sightDist, &sightAngle);
+      addAgent(AGENT_TYPE_POTENT, x, z, oriented == 1, 
+               step, goalX, goalZ, sightDist, sightAngle);
+   }
+
+   /* Gets All Pattern Agents */
+   int w, numWayPoints;
+   for(i=0; i< numPatAgents; i++)
+   {
+      getline(file, aux);
+      sscanf(aux.c_str(),"Pat: %f %f %d %f %f %f %d", &x, &z, &oriented, &step,
+                        &sightDist, &sightAngle, &numWayPoints);
+      addAgent(AGENT_TYPE_PATTERN, x, z, oriented == 1, 
+               step, goalX, goalZ, sightDist, sightAngle);
+      
+      pattAgent* a = (pattAgent*) actualAgent;
+      for(w = 0; w < numWayPoints; w++)
+      {
+         getline(file, aux);
+         sscanf(aux.c_str(),"Way: %f %f", &x, &z);
+         a->addWayPoint(x, z);
+      }
+   }
+
+   
+   file.close();
+   ret = "Loaded file: ";
+   ret += fileName;
+   return(ret);
+}
+
+
+

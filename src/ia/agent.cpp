@@ -190,7 +190,6 @@ bool agent::addIfVisible(agent* testAg)
    getPosition( agX, agZ );
    getSight(agSightDistance, agSightAngle);
    
-
    testAg->getPosition(x,z);
 
    dist = sqrt( (agX-x)*(agX-x) + (agZ-z)*(agZ-z) );

@@ -64,6 +64,7 @@ class agent
 
       bool oriented(){return(withOrientation);};
       GLfloat orientationValue(){return(orientation);};
+      GLfloat getStepSize(){return(stepSize);};
 
       bool doAngle();
 

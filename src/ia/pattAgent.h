@@ -3,6 +3,7 @@
 
 #include "agent.h"
 
+/*! Way Point Definition */
 class wayPoint
 {
    public:
@@ -13,10 +14,13 @@ class wayPoint
       wayPoint* previous;  /**< Previous Way point on list */
 };
 
+/*! Pattern Agent */
 class pattAgent: public agent
 {
    public:
+      /*! Constructor */
       pattAgent(bool oriented);
+      /*! Destructor */
       ~pattAgent();
 
       /*! Defines Next Agent position. Virtual. 
@@ -29,6 +33,12 @@ class pattAgent: public agent
       /*! Draw Waypoints, conneting them */
       void drawWayPoints();
 
+      /*! Return the number of Way Points  */
+      int getTotalWayPoints(){return(totalWayPoints);};
+
+      /*! Get WayPoints List. Only for save on editor. */
+      wayPoint* getWayPoints(){return(wayPoints);};
+
       pattAgent* next;              /**< Next Agent on List */
       
    protected:
@@ -37,10 +47,8 @@ class pattAgent: public agent
 
       int totalWayPoints;           /**< Total WayPoints on List */
 
-      int loops;
-      int actualLoop;
-      GLfloat xInc;
-      GLfloat zInc;
+      GLfloat xInc;                 /**< How many units X coordinate uptade */
+      GLfloat zInc;                 /**< How many units Z coordinate update */
 
       /*! Define that the agent will go to next Way Point */
       void changeToNextWayPoint();    
