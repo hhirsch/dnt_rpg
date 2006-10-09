@@ -513,6 +513,41 @@ potentAgent* agents::removePotentAgent(potentAgent* potAg)
 }
 
 /******************************************************************
+ *                        Remove Pattern Agent                    *
+ ******************************************************************/
+pattAgent* agents::removePattAgent(pattAgent* patAg)
+{
+   pattAgent* aux;
+
+   if(patAg == pattAgents)
+   {
+      pattAgents = patAg->next;
+      aux = pattAgents;
+   }
+   else
+   {
+      aux = pattAgents;
+      while(aux->next != patAg)
+      {
+         aux = aux->next;
+      }
+      aux->next = patAg->next;
+      aux = patAg->next;
+   }
+   
+   delete(patAg);
+   totalPattAgents--;
+   
+   if(totalPattAgents == 0)
+   {
+      pattAgents = NULL;
+   }
+
+   return(aux);
+}
+
+
+/******************************************************************
  *                        redefineGoal                            *
  ******************************************************************/
 void agents::redefineGoal(GLfloat x, GLfloat z)
@@ -539,6 +574,25 @@ void agents::redefineGoal(GLfloat x, GLfloat z)
 void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                           Uint8 mButton, int tool)
 {
+   if( (state == AGENTS_STATE_POTENTIAL) && (tool != TOOL_POTENTIAL_ADD))
+   {
+      if(actualAgent != NULL)
+      {
+         removePotentAgent( (potentAgent*) actualAgent);
+         actualAgent = NULL;
+      }
+   }
+
+   if( (state == AGENTS_STATE_PATTERN) && (tool != TOOL_PATTERN_ADD))
+   {
+      if(actualAgent != NULL)
+      {
+         removePattAgent( (pattAgent*) actualAgent);
+         actualAgent = NULL;
+      }
+   }
+
+      
    if(tool == TOOL_POTENTIAL_ADD)
    {
       if(state != AGENTS_STATE_POTENTIAL)

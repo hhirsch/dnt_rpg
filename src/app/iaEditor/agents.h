@@ -79,6 +79,9 @@ class agents
       /*! Remove Potential Function Agents from potential agents list 
        * \param potAg -> potential Agent to be removed */
       potentAgent* removePotentAgent(potentAgent* potAg);
+      /*! Remove Pattern Agents from list 
+       * \param patAg -> pattern Agent to be removed */
+      pattAgent* removePattAgent(pattAgent* patAg);
       /*! Redefines potential agents goal position
        * \param x -> new x goal coordinate
        * \param z -> new z goal coordinate */
