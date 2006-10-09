@@ -3,6 +3,7 @@
 #include "../../etc/distance.h"
 #include "../../gui/desenho.h"
 #include "../../engine/util.h"
+#include "../../etc/glm.h"
 #include <GL/glu.h>
 #include <math.h>
 #include <SDL/SDL_image.h>
@@ -98,14 +99,14 @@ agents::~agents()
 /********************************************************************
  *                           actualize                              *
  ********************************************************************/
-void agents::actualize()
+void agents::actualize(Map* actualMap)
 {
    int aux;
    potentAgent* potAg = potentAgents;
    /* Pontential Function Agents */
    for(aux = 0; aux < totalPotentAgents; aux++)
    {
-      addVisibleAgents(potAg);
+      addVisibleAgents(potAg, actualMap);
       potAg->actualize();
       potAg = potAg->next;
    }
@@ -374,13 +375,99 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
 
 
 
+void agents::addSquareObstacles(agent* ag, Square* saux)
+{
+   GLfloat posX, posZ;
+   GLfloat min1[3];
+   GLfloat max1[3];
+   GLfloat min2[3];
+   GLfloat max2[3];
+   GLfloat sightD, sightA;
+   
+   if(!saux)
+   {
+      return;
+   }
+
+   ag->getPosition(posX, posZ);
+   ag->getSight(sightD, sightA);
+   
+   /* Define Position */
+   ag->getBoundingBox(min1[0],min1[2], max1[0], max1[2]);
+
+   min1[0] += posX-sightD; 
+   min1[1] = 0; 
+   min1[2] += posZ-sightD;
+   max1[0] += posX+sightD; 
+   max1[1] = 0; 
+   max1[2] += posZ+sightD;
+
+   /* Verify Walls */
+   int mur = 0;
+   while((mur < MAXMUROS ) && (saux->muros[mur] != NULL))
+   {
+      min2[0] = saux->muros[mur]->x1; 
+      min2[1] = 0; 
+      min2[2] = saux->muros[mur]->z1;
+      max2[0] = saux->muros[mur]->x2; 
+      max2[1] = MUROALTURA; 
+      max2[2] = saux->muros[mur]->z2;
+      if(estaDentro(min1,max1,min2,max2,1))
+      {
+         ag->addObstacle(((min2[0]+max2[0]) / 2), ((min2[2]+max2[2])/2), 
+                           saux->muros[mur]->x1, saux->muros[mur]->z1, 
+                           saux->muros[mur]->x2, saux->muros[mur]->z2);
+      }
+      mur++;
+   }
+
+   /* Verify Objects */
+   int ob = 0;
+   GLMmodel* modelo3d;
+   GLfloat X[4], Z[4];
+   while( (saux->objects[ob] != NULL)) 
+   {
+      modelo3d = (GLMmodel*)saux->objects[ob]->modelo3d;
+      X[0] = modelo3d->x1;
+      Z[0] = modelo3d->z1;
+      X[1] = modelo3d->x1;
+      Z[1] = modelo3d->z2;
+      X[2] = modelo3d->x2;
+      Z[2] = modelo3d->z2;
+      X[3] = modelo3d->x2;
+      Z[3] = modelo3d->z1;
+      rotTransBoundingBox(saux->objectsOrientation[ob], X, Z,
+                          saux->Xobjects[ob], modelo3d->y1, 
+                          modelo3d->y2, saux->Zobjects[ob], 
+                          min2, max2);
+           
+      if(estaDentro(min1,max1,min2,max2,1))
+      {
+         ag->addObstacle(saux->Xobjects[ob], saux->Zobjects[ob], 
+                         min2[0], min2[2], 
+                         max2[0], max2[2]);
+      }
+      ob++;
+   }
+}
+      
+
+
 /********************************************************************
  *                      addVisibleAgents                            *
  ********************************************************************/
-void agents::addVisibleAgents(agent* ag)
+void agents::addVisibleAgents(agent* ag, Map* actualMap)
 {
    int aux;
-   
+   GLfloat posX, posZ;
+
+   if(!ag)
+   {
+      return;
+   }
+
+   ag->getPosition(posX, posZ);
+
    potentAgent* potAg = potentAgents;
 
    ag->clearObstacles();
@@ -394,6 +481,64 @@ void agents::addVisibleAgents(agent* ag)
       }
       potAg = potAg->next;
    }
+
+   pattAgent* patAg = pattAgents;
+
+   /* Pattern Functions Agents */
+   for(aux = 0; aux < totalPattAgents; aux++)
+   {
+      if(patAg != ag)
+      {
+         ag->addIfVisible(patAg);
+      }
+      patAg = patAg->next;
+   }
+   
+   if(!actualMap)
+   {
+      return;
+   }
+   
+   /* Only Verify actual Occuped Square. */
+   ag->getPosition(posX, posZ);
+   Square* saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE),
+                                               (int)(posZ / SQUARESIZE));
+
+   addSquareObstacles(ag,saux);
+
+/*   saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)-1,
+                                       (int)(posZ / SQUARESIZE));
+   if(saux)
+   {
+      addSquareObstacles(ag, saux);
+      saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)-1,
+                                          (int)(posZ / SQUARESIZE)-1);
+      addSquareObstacles(ag, saux);
+      saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)-1,
+                                          (int)(posZ / SQUARESIZE)+1);
+      addSquareObstacles(ag, saux);
+   }
+
+   saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)+1,
+                                       (int)(posZ / SQUARESIZE));
+   addSquareObstacles(ag, saux);
+   if(saux)
+   {
+      saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)+1,
+                                       (int)(posZ / SQUARESIZE)+1);
+      addSquareObstacles(ag, saux);
+      saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)+1,
+                                          (int)(posZ / SQUARESIZE)-1);
+      addSquareObstacles(ag, saux);
+   }
+
+   saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE),
+                                       (int)(posZ / SQUARESIZE)+1);
+   addSquareObstacles(ag, saux);
+   saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE),
+                                       (int)(posZ / SQUARESIZE)-1);
+   addSquareObstacles(ag, saux);*/
+
 }
 
 /******************************************************************

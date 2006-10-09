@@ -13,6 +13,8 @@ editor::editor()
    Farso_Iniciar(&screen,"DccNiTghtmare IA Editor 0.1");
    init();
 
+//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+
    gui = new(guiIO);
    
    hour = 12.0;
@@ -336,6 +338,12 @@ void editor::doEditorIO()
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
    gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
 
+   if(!simulationStarted)
+   {
+      agentsSimulation->verifyAction(xReal, yReal, zReal, mButton, 
+                                     gui->getTool());
+   }
+
    if( (gui->getTool() == TOOL_SIM_PLAY) && (!simulationStarted))
    {
       simulationStarted = true;
@@ -349,11 +357,7 @@ void editor::doEditorIO()
       simulationStarted = false;
       //TODO Restart State
    }
-   else if(!simulationStarted)
-   {
-      agentsSimulation->verifyAction(xReal, yReal, zReal, mButton, 
-                                     gui->getTool());
-   }
+   
 
 }
 
@@ -419,7 +423,7 @@ void editor::run()
 
          if(simulationStarted)
          {
-            agentsSimulation->actualize();
+            agentsSimulation->actualize( map );
          }
          
          draw();

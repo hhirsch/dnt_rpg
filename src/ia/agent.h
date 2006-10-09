@@ -27,7 +27,7 @@ class agent
 {
    public:
       /*! Constructor */
-      agent(bool orientation);
+      agent(bool oriented);
       /*! Destructor */
       virtual ~agent();
 

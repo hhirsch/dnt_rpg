@@ -3,6 +3,7 @@
 
 #include "../../ia/potentAgent.h"
 #include "../../ia/pattAgent.h"
+#include "../../map/map.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
@@ -31,7 +32,7 @@ class agents
       ~agents();
 
       /*! Actualize the states of all Agents on Simulation */
-      void actualize();
+      void actualize(Map* actualMap);
       /*! Draw All Agents */
       void draw();
       /*! Add Agent to the Editor */
@@ -71,8 +72,10 @@ class agents
       /*! Draw One Pattern Agent on Origin */
       void drawPattAgent();
       /*! Add Visible Agents to agent obstacle
-       * \param ag -> active agent */
-      void addVisibleAgents(agent* ag);
+       * \param ag -> active agent
+       * \param actualMap -> opened Map */
+      void addVisibleAgents(agent* ag, Map* actualMap);
+      void addSquareObstacles(agent* ag, Square* saux);
       /*! Remove Potential Function Agents Colliding with pattern Agent 
        * \param patAg -> pattern Agent to be verified */
       void removeColliders(pattAgent* patAg);

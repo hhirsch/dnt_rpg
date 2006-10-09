@@ -1,9 +1,11 @@
 #include "potentAgent.h"
+#include "../engine/util.h"
 #include <math.h>
 #include <stdio.h>
 
 #define KA 0.005
 #define KR 0.5
+#define KC 100000
 
 /********************************************************************
  *                         Constructor                              *
@@ -25,6 +27,7 @@ potentAgent::~potentAgent()
 bool potentAgent::defineNextPosition()
 {
    int aux;
+   GLfloat min1[3], min2[3], max1[3], max2[3];
    GLfloat fX = 0;
    GLfloat fZ = 0;
    GLfloat dX;
@@ -32,15 +35,39 @@ bool potentAgent::defineNextPosition()
    GLfloat dist;
    GLfloat cosA, senA;
    GLfloat force;
-   
+
+   min1[0] = x1+actualX;
+   min1[1] = 0;
+   min1[2] = z1+actualZ;
+   max1[0] = x2+actualX;
+   max1[1] = 0;
+   max1[2] = z2+actualZ;
+
+   min2[1] = 0;
+   max2[1] = 0;
+
    for(aux = 0; aux < knowObstacles; aux++)
    {
+      min2[0] = obstacles[aux].x1;
+      min2[2] = obstacles[aux].z1;
+      max2[0] = obstacles[aux].x2;
+      max2[2] = obstacles[aux].z2;
+
       dX = obstacles[aux].x - actualX;
       dZ = obstacles[aux].z - actualZ;
+      
       dist = sqrt( (dX*dX) + (dZ*dZ));
       cosA = dX / dist;
       senA = dZ / dist;
-      force = -KR / dist;
+
+      if(estaDentro(min1, max1, min2, max2, 1))
+      {
+         force = -KC*dist;
+      }
+      else
+      {
+         force = -KR / dist;
+      }
       fX += force*cosA;
       fZ += force*senA;
       //printf("force: %.3f dist: %.3f\n",force, dist);
@@ -73,8 +100,6 @@ bool potentAgent::defineNextPosition()
          dZ = fZ;
       }
 
-      //TODO Rotation, if holonomic
-      
       //FIXME Correct Saturation
       if(dX > stepSize)
       {

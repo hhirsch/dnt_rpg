@@ -13,14 +13,15 @@
 /********************************************************************
  *                         Constructor                              *
  ********************************************************************/
-agent::agent(bool orientation)
+agent::agent(bool oriented)
 {
    stepSize = 0;
    destinyX = -1;
    destinyZ = -1;
    actualX = -1;
    actualZ = -1;
-   withOrientation = orientation;
+   withOrientation = oriented;
+   orientation = 0;
    knowObstacles = 0;
 }
 
