@@ -1,5 +1,6 @@
 #include "agent.h"
 #include "../etc/distance.h"
+#include "../engine/util.h"
 #include <math.h>
 #include <stdio.h>
 
@@ -100,12 +101,17 @@ void agent::actualize()
 /********************************************************************
  *                           addObstacle                            *
  ********************************************************************/
-void agent::addObstacle(GLfloat x, GLfloat z)
+void agent::addObstacle(GLfloat x, GLfloat z, GLfloat x1, GLfloat z1,
+                       GLfloat x2, GLfloat z2)
 {
    if(knowObstacles < MAX_OBSTACLES)
    {
       obstacles[knowObstacles].x = x;
       obstacles[knowObstacles].z = z;
+      obstacles[knowObstacles].x1 = x1;
+      obstacles[knowObstacles].z1 = z1;
+      obstacles[knowObstacles].x2 = x2;
+      obstacles[knowObstacles].z2 = z2;
       knowObstacles++;
    }
 }
@@ -183,24 +189,65 @@ bool agent::doAngle()
  ********************************************************************/
 bool agent::addIfVisible(agent* testAg)
 {
-   GLfloat x, z, dist;
-   GLfloat agX, agZ, agSightDistance, agSightAngle;
+   GLfloat posX, posZ;
+   GLfloat min1[3]; GLfloat max1[3];
+   GLfloat min2[3]; GLfloat max2[3];
 
-   /* Take Current Agent Position */
-   getPosition( agX, agZ );
-   getSight(agSightDistance, agSightAngle);
-   
-   testAg->getPosition(x,z);
+   GLfloat x[4];
+   GLfloat z[4];
 
-   dist = sqrt( (agX-x)*(agX-x) + (agZ-z)*(agZ-z) );
+   /* Put Bounding Box on Place with Sight Distance */
+   x[0] = x1 - sightDistance;
+   z[0] = z1 - sightDistance;
+   x[1] = x1 - sightDistance;
+   z[1] = z2 + sightDistance;
+   x[2] = x2 + sightDistance;
+   z[2] = z2 + sightDistance;
+   x[3] = x2 + sightDistance;
+   z[3] = z1 - sightDistance;
 
-   if(fabs(dist) <= agSightDistance)
+   rotTransBoundingBox(orientation, x,z, actualX,0.0,0.0,actualZ, min1, max1);
+
+   testAg->getPosition(posX, posZ);
+   testAg->getBoundingBox(x[0], z[0], x[2], z[2]);
+   x[1] = x[0];
+   z[1] = z[2];
+   x[3] = x[2];
+   z[3] = z[0];
+   rotTransBoundingBox(testAg->orientationValue(), x,z, posX, 0.0,0.0, posZ, 
+                       min2, max2);
+
+   //dist = sqrt( (agX-x)*(agX-x) + (agZ-z)*(agZ-z) );
+
+   /* If "colliding", is in sight, so add! */
+   if(estaDentro(min1, max1, min2, max2, 1))
    {
-      addObstacle(x,z);
+      addObstacle(posX,posZ, x[0], z[0], x[2], z[2]);
       return(true);
    }
 
    return(false);
 }
 
+/********************************************************************
+ *                        define Bounding Box                       *
+ ********************************************************************/
+void agent::defineBoundingBox(GLfloat xa, GLfloat za, GLfloat xb, GLfloat zb)
+{
+   x1 = xa;
+   z1 = za;
+   x2 = xb;
+   z2 = zb;
+}
+
+/********************************************************************
+ *                          get Bounding Box                        *
+ ********************************************************************/
+void agent::getBoundingBox(GLfloat &xa, GLfloat &za, GLfloat &xb, GLfloat &zb)
+{
+   xa = x1;
+   za = z1;
+   xb = x2;
+   zb = z2;
+}
 

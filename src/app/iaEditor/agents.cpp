@@ -344,6 +344,8 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       potentAgent* aux = new potentAgent(oriented);
       aux -> next = potentAgents;
       potentAgents = aux;
+      aux->defineBoundingBox(-AGENT_POTENT_HALF_X, -AGENT_POTENT_HALF_Z, 
+                              AGENT_POTENT_HALF_X,  AGENT_POTENT_HALF_Z);
       ag = (agent*) potentAgents;
       totalPotentAgents++;
    }
@@ -352,6 +354,9 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       pattAgent* aux = new pattAgent(oriented);
       aux -> next = pattAgents;
       pattAgents = aux;
+      aux->defineBoundingBox(-AGENT_PATT_HALF_X, -AGENT_PATT_HALF_Z, 
+                              AGENT_PATT_HALF_X,  AGENT_PATT_HALF_Z);
+
       ag = (agent*) pattAgents;
       totalPattAgents++;
    }

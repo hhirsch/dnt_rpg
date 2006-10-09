@@ -12,8 +12,13 @@
 class obstacle
 {
    public:
-      GLfloat x;       /**< x coordinate */
-      GLfloat z;       /**< z coordinate */
+      GLfloat x;       /**< x center coordinate */
+      GLfloat z;       /**< z center coordinate */
+
+      GLfloat x1,      /**< x1 bounding box coordinate */
+              z1,      /**< y1 bounding box coordinate */
+              x2,      /**< x2 bounding box coordinate */
+              z2;      /**< y2 bounding box coordinate */
 };
 
 
@@ -58,7 +63,8 @@ class agent
        * \param sightAng -> sight Angle */
       void getSight(GLfloat& sightDist, GLfloat& sightAng);
 
-      void addObstacle(GLfloat x, GLfloat z);
+      void addObstacle(GLfloat x, GLfloat z, GLfloat x1, GLfloat z1,
+                       GLfloat x2, GLfloat z2);
 
       void clearObstacles();
 
@@ -69,6 +75,9 @@ class agent
       bool doAngle();
 
       bool addIfVisible(agent* testAg);
+
+      void defineBoundingBox(GLfloat xa, GLfloat za, GLfloat xb, GLfloat zb);
+      void getBoundingBox(GLfloat &xa, GLfloat &za, GLfloat &xb, GLfloat &zb);
 
 
       /* Virtual Methods */
@@ -86,6 +95,12 @@ class agent
          /* POSITION */
       GLfloat actualX;       /**< Agent Actual X Coordinate */
       GLfloat actualZ;       /**< Agent Actual Z Coordinate */
+        
+         /* BOUNDING BOX */
+      GLfloat x1;            /**< X1 Bounding Box */
+      GLfloat z1;            /**< Z1 Bounding Box */
+      GLfloat x2;            /**< X2 Bounding Box */
+      GLfloat z2;            /**< Z2 Bounding Box */
 
          /* STEP */
       GLfloat stepSize;      /**< Agent Step Size per Actualization */
