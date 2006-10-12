@@ -865,6 +865,10 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             mButton = SDL_GetMouseState(&x,&y);
          }
       }
+      else if((mButton & SDL_BUTTON(2)) && (actualObstacle != NULL))
+      {
+         obstacleOrientation += 1;
+      }
       else if((mButton & SDL_BUTTON(3)) && (actualObstacle != NULL))
       {
          actualObstacle = (mapObjeto*)actualObstacle->proximo;

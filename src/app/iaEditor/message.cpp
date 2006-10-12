@@ -34,7 +34,7 @@ string messageForTool(int tool)
       }
       case TOOL_OBSTACLE_ADD:
       {
-         return("Put object (obstacle) on position ( Arrows to Rotate ) ");
+         return("Put obstacle on position. Right Mouse Button to Next Object, Middle to Rotate. ");
          break;
       }
       case TOOL_GOAL_ADD:
