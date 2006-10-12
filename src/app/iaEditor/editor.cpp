@@ -7,8 +7,13 @@ editor::editor()
 {
    mapOpened = false;
    map = NULL;
-   /*particleSystem = new partSystem();
-   features = new featsList("../data/feats/Ingles/",
+   actualObject = NULL;
+   
+   /* Particles */
+   enableParticles = true;
+   particleSystem = new partSystem();
+
+   /*features = new featsList("../data/feats/Ingles/",
                                        "../data/feats/feats.ftl");*/
    Farso_Iniciar(&screen,"DccNiTghtmare IA Editor 0.1");
    init();
@@ -37,11 +42,11 @@ editor::~editor()
    }
    delete(gameSun);
    delete(agentsSimulation);
-   /*if(particleSystem != NULL)
+   if(particleSystem != NULL)
    {
       delete(particleSystem);
    }
-   if(NPCs != NULL)
+   /*if(NPCs != NULL)
    {
       delete(NPCs);
    }
@@ -163,7 +168,7 @@ void editor::openMap()
          glDisable(GL_FOG);
       }
       /* Open Particles */
-      /*if(!map->particlesFileName.empty())
+      if(!map->particlesFileName.empty())
       {
           particleSystem->loadFromFile(map->particlesFileName);
           particleSystem->stabilizeAll();
@@ -171,7 +176,9 @@ void editor::openMap()
       else
       {
          particleSystem->deleteAll();
-      }*/
+      }
+
+      actualObject = (mapObjeto*) map->Objetos->primeiro->proximo;
       gui->showMessage("Map opened.");
    }
    else
@@ -309,12 +316,15 @@ void editor::draw()
       }
    }
 
-   /* Draw Particles */
-   glPushMatrix();
-      particleSystem->actualizeAll(0,0,visibleMatrix);
-   glPopMatrix();
-
 #endif
+
+   /* Draw Particles */
+   if(enableParticles)
+   {
+      glPushMatrix();
+         particleSystem->actualizeAll(0,0,visibleMatrix);
+      glPopMatrix();
+   }
 
    /* Draw GUI */
    gui->draw(proj, modl, viewPort);
@@ -341,7 +351,7 @@ void editor::doEditorIO()
    if(!simulationStarted)
    {
       agentsSimulation->verifyAction(xReal, yReal, zReal, mButton, 
-                                     gui->getTool());
+                                     gui->getTool(), map, &actualObject);
    }
 
    if( (gui->getTool() == TOOL_SIM_PLAY) && (!simulationStarted))

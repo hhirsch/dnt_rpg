@@ -9,6 +9,7 @@
 #include "../../engine/util.h"
 #include "../../engine/sun.h"
 #include "../../etc/glm.h"
+#include "../../particle/partSystem.h"
 #include <SDL/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,6 +61,7 @@ class editor
       GLfloat hour;                  /**< Current Sun Hour */
       
       Map* map;                      /**< The active Map */
+      mapObjeto* actualObject;       /**< The actual Map Object */
       bool mapOpened;                /**< True if Active Map is Opened */
 
       bool simulationStarted;        /**< True if simulation started */
@@ -67,7 +69,8 @@ class editor
       //Lpersonagem *NPCs;             /**< List of NPCs On Map */
       //featsList* features;           /**< NPCs Geral Features */
       
-      //partSystem* particleSystem;    /**< Particles on Map */
+      partSystem* particleSystem;    /**< Particles on Map */
+      bool enableParticles;          /**< Enable Particles on Editor */
       
       guiIO* gui;                    /**< The Editor's GUI */
 

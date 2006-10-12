@@ -41,7 +41,8 @@ class agents
                     GLfloat sightDist, GLfloat sightAng);
       /*! Verify Agents Editor Actions */
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                        Uint8 mButton, int tool);
+                        Uint8 mButton, int tool, Map* actualMap, 
+                        mapObjeto** actualObject );
 
       /*! Saves the current State to file
        * \param fileName -> name of the file to be saved */
@@ -60,6 +61,10 @@ class agents
       GLuint pattTexture;           /**< Texture Used by Pattern Agents */
 
       agent* actualAgent;           /**< Currenct on Edition Agent */
+      mapObjeto* actualObstacle;    /**< Current on Edition Obstacle */
+      int obstacleOrientation;      /**< Current Obstacle Orientation */
+      GLfloat obstacleX;            /**< Current Obstacle X position */
+      GLfloat obstacleZ;            /**< Current Obstacle Z position */
       
       int state;                    /**< Current Editor State */
 
@@ -92,6 +97,10 @@ class agents
 
       /*! remove all agents from all agents lists */
       void removeAllAgents();
+
+      /*! Insert Object on Map (why here?? cause of the TP2)  */
+      void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
+                        Map* map, mapObjeto* obj, int qx, int qz);
 };
 
 #endif

@@ -13,7 +13,7 @@ using namespace std;
 #define TOOL_POTENTIAL_ADD    10
 #define TOOL_PATTERN_ADD      11
 #define TOOL_GOAL_ADD         12
-#define TOOL_OBJECT_ADD       13
+#define TOOL_OBSTACLE_ADD     13
 
 string messageForTool(int tool);
 

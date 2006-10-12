@@ -46,28 +46,28 @@ guiIO::~guiIO()
  ****************************************************************/
 void guiIO::openFileWindow()
 {
-   fileWindow = gui->ljan->InserirJanela(0,0,184,63,"File",1,1,NULL,NULL);
-   newButton = fileWindow->objects->InserirBotao(10,37,50,55,
+   fileWindow = gui->ljan->InserirJanela(0,0,255,63,"File",1,1,NULL,NULL);
+   newButton = fileWindow->objects->InserirBotao(45,37,85,55,
                                                   fileWindow->Cores.corBot.R,
                                                   fileWindow->Cores.corBot.G,
                                                   fileWindow->Cores.corBot.B,
                                                   "New",1,NULL);
-   openButton = fileWindow->objects->InserirBotao(51,37,91,55,
+   openButton = fileWindow->objects->InserirBotao(86,37,126,55,
                                                   fileWindow->Cores.corBot.R,
                                                   fileWindow->Cores.corBot.G,
                                                   fileWindow->Cores.corBot.B,
                                                   "Open",1,NULL);
-   saveButton = fileWindow->objects->InserirBotao(92,37,132,55,
+   saveButton = fileWindow->objects->InserirBotao(127,37,167,55,
                                                   fileWindow->Cores.corBot.R,
                                                   fileWindow->Cores.corBot.G,
                                                   fileWindow->Cores.corBot.B,
                                                   "Save",1,NULL);
-   exitButton = fileWindow->objects->InserirBotao(133,37,173,55,
+   exitButton = fileWindow->objects->InserirBotao(168,37,208,55,
                                                   fileWindow->Cores.corBot.R,
                                                   fileWindow->Cores.corBot.G,
                                                   fileWindow->Cores.corBot.B,
                                                   "Exit",1,NULL);
-   fileText = fileWindow->objects->InserirBarraTexto(10,17,173,33,
+   fileText = fileWindow->objects->InserirBarraTexto(10,17,245,33,
                                                      "../data/ia/",0,NULL);
    fileWindow->fechavel = 0;
    fileWindow->ptrExterno = &fileWindow;
@@ -79,10 +79,10 @@ void guiIO::openFileWindow()
  ****************************************************************/
 void guiIO::openNavWindow()
 {
-   navWindow = gui->ljan->InserirJanela(799-67,599-74,799,599,"Nav",1,1,
+   navWindow = gui->ljan->InserirJanela(799-63,599-63,799,599,"Nav",1,1,
                                         NULL,NULL);
-   navTabButton = navWindow->objects->InserirTabButton(7,17,0,0,
-                                                    "../data/mapEditor/nav.png");
+   navTabButton = navWindow->objects->InserirTabButton(6,15,0,0,
+                                                    "../data/iaEditor/nav.png");
    moreZoomButton = navTabButton->insertButton(0,0,8,8);    /* More Zoom */
    lessZoomButton = navTabButton->insertButton(9,0,17,8);   /* Less Zoom */
    upButton = navTabButton->insertButton(19,0,31,17);       /* Up */
@@ -103,7 +103,7 @@ void guiIO::openNavWindow()
  ****************************************************************/
 void guiIO::openMessageWindow()
 {
-   messageWindow = gui->ljan->InserirJanela(113,599-36,799-68,599,
+   messageWindow = gui->ljan->InserirJanela(0,599-31,511,599,
                                             "Messages",1,1,NULL,NULL);
    messageText = messageWindow->objects->InserirQuadroTexto(7,16,610,31,0,
                  "Welcome to DccNiTghtmare IA Editor / Tester!");
@@ -117,7 +117,7 @@ void guiIO::openMessageWindow()
  ****************************************************************/
 void guiIO::openObjectsWindow()
 {
-   objectsWindow=gui->ljan->InserirJanela(0,599-61,112,599,"Objects",
+   objectsWindow=gui->ljan->InserirJanela(0,599-95,127,599-32,"Objects",
                                           1,1,NULL,NULL);
    objectsTabButton = objectsWindow->objects->InserirTabButton(7,17,0,0,
                                                  "../data/iaEditor/objects.png");
@@ -135,9 +135,9 @@ void guiIO::openObjectsWindow()
  ****************************************************************/
 void guiIO::openPlayControlWindow()
 {
-   playControlWindow=gui->ljan->InserirJanela(0,599-123,83,599-62,"Sim",
+   playControlWindow=gui->ljan->InserirJanela(0,599-159,127,599-96,"Sim",
                                           1,1,NULL,NULL);
-   playControlTabButton = playControlWindow->objects->InserirTabButton(7,17,0,0,
+   playControlTabButton = playControlWindow->objects->InserirTabButton(27,17,0,0,
                                              "../data/iaEditor/playControl.png");
    playButton = playControlTabButton->insertButton(5,5,21,34);
    pauseButton = playControlTabButton->insertButton(29,7,38,32);
@@ -286,11 +286,9 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          }
          else if (object == (Tobjeto*) objectButton)
          {
-            tool = TOOL_OBJECT_ADD;
+            tool = TOOL_OBSTACLE_ADD;
             return(GUI_IO_NEW_STATE);
          }
-         
-
       }
       case BOTAOPRESSIONADO:
       {

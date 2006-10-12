@@ -15,6 +15,7 @@
 #define AGENTS_STATE_PATTERN        2
 #define AGENTS_STATE_WAYPOINTS      3
 #define AGENTS_STATE_GOAL           4
+#define AGENTS_STATE_OBSTACLE        5
 
 
 /********************************************************************
@@ -57,6 +58,11 @@ agents::agents()
 
    totalPattAgents = 0;
    pattAgents = NULL;
+
+   obstacleOrientation = 0;
+   obstacleX = 0;
+   obstacleZ = 0;
+   actualObstacle = NULL;
 
 }
 
@@ -131,6 +137,15 @@ void agents::draw()
    int aux;
    float color = 0.0;
    GLfloat x,z;
+
+
+   /* Temporary Obstacles */
+   if( (state == AGENTS_STATE_OBSTACLE) && (actualObstacle != NULL))
+   {
+      actualObstacle->Desenhar(obstacleX, obstacleZ, 0, obstacleOrientation);
+   }
+
+   
    potentAgent* potAg = potentAgents;
    /* Pontential Function Agents */
    for(aux = 0; aux < totalPotentAgents; aux++)
@@ -374,7 +389,9 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
 }
 
 
-
+/********************************************************************
+ *                      addSquareObstacles                          *
+ ********************************************************************/
 void agents::addSquareObstacles(agent* ag, Square* saux)
 {
    GLfloat posX, posZ;
@@ -722,7 +739,8 @@ void agents::redefineGoal(GLfloat x, GLfloat z)
  *                        Verify Action                           *
  ******************************************************************/
 void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                          Uint8 mButton, int tool)
+                          Uint8 mButton, int tool, Map* actualMap, 
+                          mapObjeto** actualObject)
 {
    if( (state == AGENTS_STATE_POTENTIAL) && (tool != TOOL_POTENTIAL_ADD))
    {
@@ -825,6 +843,46 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             mButton = SDL_GetMouseState(&x,&y);
          }
 
+      }
+   }
+   else if(tool == TOOL_OBSTACLE_ADD)
+   {
+      state = AGENTS_STATE_OBSTACLE;
+      actualObstacle = *actualObject;
+      obstacleX = mouseX;
+      obstacleZ = mouseZ;
+      
+      if( (mButton & SDL_BUTTON(1)) && (actualObstacle != NULL) )
+      {
+         insertObject(mouseX, mouseZ, obstacleOrientation, actualMap, 
+                      actualObstacle, 
+                      (int)(mouseX / SQUARESIZE), (int)(mouseZ / SQUARESIZE));
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+      }
+      else if((mButton & SDL_BUTTON(3)) && (actualObstacle != NULL))
+      {
+         actualObstacle = (mapObjeto*)actualObstacle->proximo;
+         /* Verify Head Node */
+         if(actualObstacle == actualMap->Objetos->primeiro)
+         {
+            actualObstacle = (mapObjeto*)actualObstacle->proximo;
+         }
+
+         *actualObject = actualObstacle;
+
+         while(mButton & SDL_BUTTON(3))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
       }
    }
    else
@@ -991,5 +1049,99 @@ string agents::loadState(string fileName)
    return(ret);
 }
 
+/******************************************************************
+ *                          insertObject                          *
+ ******************************************************************/
+void agents::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
+                          Map* map, mapObjeto* obj, int qx, int qz)
+{
+   Square* saux = map->quadradoRelativo(qx,qz);
+   int ob=0;
+   if(saux)
+   {
+     while( (ob < MAXOBJETOS ) && (saux->objects[ob] != NULL))
+     {
+        ob++;
+     }
+     if(ob<MAXOBJETOS)
+     {
+        saux->objects[ob] = obj;
+        saux->Xobjects[ob] = xReal;
+        saux->Zobjects[ob] = zReal;
+        saux->objectsOrientation[ob] = orObj;
+        saux->objectsDesenha[ob] = 1;
+        //printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
+                  
+        GLMmodel* modelo = (GLMmodel*)obj->modelo3d; 
 
+        float X[2], Z[2];
+        X[0] = modelo->x1;
+        X[1] = modelo->x2;
+        Z[0] = modelo->z1;
+        Z[1] = modelo->z2;
+        if(orObj!=0)
+        {
+           GLfloat oldX, oldZ;
+           GLfloat cosseno = cos(deg2Rad(orObj));
+           GLfloat seno = sin(deg2Rad(orObj));
+           int aux;
+           for(aux = 0;aux<=1;aux++)
+           {
+              oldX = X[aux];
+              oldZ = Z[aux];
+              X[aux] = (oldZ*seno) + (oldX*cosseno);
+              Z[aux] = (oldZ*cosseno) - (oldX*seno);
+           }
+           if(X[0]>X[1])
+           {
+              oldX = X[0];
+              X[0] = X[1];
+              X[1] = oldX;
+           }
+           if(Z[0]>Z[1])
+           {
+              oldZ = Z[0];
+              Z[0] = Z[1];
+              Z[1] = oldZ;
+           }
+       }
+
+       int minqx, minqz, maxqx, maxqz;
+       minqx = (int)(X[0] + xReal) / SQUARESIZE;
+       minqz = (int)(Z[0] + zReal) / SQUARESIZE;
+       maxqx = (int)(X[1] + xReal) / SQUARESIZE;
+       maxqz = (int)(Z[1] + zReal) / SQUARESIZE; 
+       int X1, Z1;
+       Square* qaux;
+       for(X1 = minqx; X1<=maxqx; X1++)
+       {
+          for(Z1 = minqz; Z1 <=maxqz; Z1++) 
+          {
+             qaux = map->quadradoRelativo(X1,Z1);
+             if((qaux) && (qaux != saux))
+             {
+                ob =0;
+                while( (ob < MAXOBJETOS ) && 
+                       (qaux->objects[ob] != NULL))
+                {
+                   ob++;
+                }
+                if(ob < MAXOBJETOS)
+                {
+                   qaux->objects[ob] = obj;
+                   qaux->Xobjects[ob] = xReal;
+                   qaux->Zobjects[ob] = zReal;
+                   qaux->objectsDesenha[ob] = 0;
+                   //printf("%d° Object Inserted on %d %d\n",ob,X1+1,Z1+1);
+                }
+             }
+          }
+       }
+     }
+     else
+       printf("Objects Overflow on Square %d %d\n",qx+1,qz+1);
+   }
+   else
+     printf("Out of Map's Limits!\n");
+}
 

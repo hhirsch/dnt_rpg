@@ -32,9 +32,9 @@ string messageForTool(int tool)
          return("Put potential Agent on initial Position");
          break;
       }
-      case TOOL_OBJECT_ADD:
+      case TOOL_OBSTACLE_ADD:
       {
-         return("Put object (obstacle) on position");
+         return("Put object (obstacle) on position ( Arrows to Rotate ) ");
          break;
       }
       case TOOL_GOAL_ADD:
