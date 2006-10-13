@@ -24,7 +24,7 @@ string messageForTool(int tool)
       }
       case TOOL_PATTERN_ADD:
       {
-         return("Add Agent, select way points and press rigth mouse buttton");
+         return("Add Agent, select way points and press right mouse button");
          break;
       }
       case TOOL_POTENTIAL_ADD:

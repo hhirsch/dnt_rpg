@@ -971,6 +971,7 @@ string agents::saveState(string fileName)
          file << "Way: " << wp->x << " " << wp->z << "\n";
          wp = wp->next;
       }
+      a = a->next;
    }
 
 
