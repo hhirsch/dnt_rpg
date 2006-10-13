@@ -1051,6 +1051,9 @@ string agents::loadState(string fileName)
    file.close();
    ret = "Loaded file: ";
    ret += fileName;
+
+   actualAgent = NULL;
+   
    return(ret);
 }
 
