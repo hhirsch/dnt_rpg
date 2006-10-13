@@ -4,6 +4,7 @@
 #include "../../ia/potentAgent.h"
 #include "../../ia/pattAgent.h"
 #include "../../map/map.h"
+#include "../../etc/glm.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
@@ -13,12 +14,12 @@ using namespace std;
 #define AGENT_TYPE_POTENT  1
 #define AGENT_TYPE_PATTERN 2
 
-#define AGENT_POTENT_HALF_X 5.0
-#define AGENT_POTENT_HALF_Z 5.0
+/*#define AGENT_POTENT_HALF_X 5.0
+#define AGENT_POTENT_HALF_Z 5.0*/
 #define AGENT_POTENT_HIGHT  6.0
 
-#define AGENT_PATT_HALF_X 5.0
-#define AGENT_PATT_HALF_Z 5.0
+/*#define AGENT_PATT_HALF_X 5.0
+#define AGENT_PATT_HALF_Z 5.0*/
 #define AGENT_PATT_HIGHT  6.0
 
 
@@ -54,11 +55,11 @@ class agents
    private:
       potentAgent* potentAgents;    /**< List of Potential Functions Agents */
       int totalPotentAgents;        /**< Total Potential Functions Agents */
-      GLuint potentialTexture;      /**< Texture used by Potential Agents */
+      GLMmodel* modelPot;           /**< Model Used by Potential Agents */
 
       pattAgent* pattAgents;        /**< List of Pattern Agents */
       int totalPattAgents;          /**< Total Pattern Agents on List */
-      GLuint pattTexture;           /**< Texture Used by Pattern Agents */
+      GLMmodel* modelPatt;          /**< Model Used by Pattern Agents */
 
       agent* actualAgent;           /**< Currenct on Edition Agent */
       mapObjeto* actualObstacle;    /**< Current on Edition Obstacle */

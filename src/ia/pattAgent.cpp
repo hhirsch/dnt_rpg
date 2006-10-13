@@ -61,7 +61,7 @@ bool pattAgent::defineNextPosition()
          GLfloat alpha;
          if( (az != 0) )
          {
-            alpha = (atan(fabs(az / ax)) / M_PI) * 180;
+            alpha = ( (atan(fabs(az / ax)) / M_PI) * 180);
             if( (actualX > actualWayPoint->x) && (actualZ < actualWayPoint->z) )
             {
                alpha += 180;
@@ -74,7 +74,7 @@ bool pattAgent::defineNextPosition()
             {
                alpha = 180-alpha;
             }
-            desiredAngle = alpha;
+            desiredAngle = alpha-90; /* -90 to correct model orientation*/
             if(doAngle())
             {
                return(true);

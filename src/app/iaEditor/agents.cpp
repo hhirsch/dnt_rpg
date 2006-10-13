@@ -3,7 +3,6 @@
 #include "../../etc/distance.h"
 #include "../../gui/desenho.h"
 #include "../../engine/util.h"
-#include "../../etc/glm.h"
 #include <GL/glu.h>
 #include <math.h>
 #include <SDL/SDL_image.h>
@@ -15,7 +14,7 @@
 #define AGENTS_STATE_PATTERN        2
 #define AGENTS_STATE_WAYPOINTS      3
 #define AGENTS_STATE_GOAL           4
-#define AGENTS_STATE_OBSTACLE        5
+#define AGENTS_STATE_OBSTACLE       5
 
 
 /********************************************************************
@@ -23,14 +22,6 @@
  ********************************************************************/
 agents::agents()
 {
-   SDL_Surface* img = IMG_Load("../data/iaEditor/potentialTexture.png");
-   if(!img)
-   {
-      printf("Can't Open Texture!\n");
-   }
-   carregaTextura(img, &potentialTexture);
-   SDL_FreeSurface(img);
-
    totalPotentAgents = 0;
    potentAgents = NULL;
    actualAgent = NULL;
@@ -39,15 +30,7 @@ agents::agents()
    goalX = 200;
    goalZ = 200;
 
-   img = IMG_Load("../data/iaEditor/pattTexture.png");
-   if(!img)
-   {
-      printf("Can't Open Texture!\n");
-   }
-   carregaTextura(img, &pattTexture);
-   SDL_FreeSurface(img);
-
-   img = IMG_Load("../data/iaEditor/goal.png");
+   SDL_Surface* img = IMG_Load("../data/iaEditor/goal.png");
    if(!img)
    {
       printf("Can't Open Texture!\n");
@@ -63,6 +46,10 @@ agents::agents()
    obstacleX = 0;
    obstacleZ = 0;
    actualObstacle = NULL;
+
+   glColor3f(1.0,0.2,0.2);
+   modelPatt = glmReadOBJ("../data/models/objetos/carros/toon/toon.obj","",1);
+   modelPot = glmReadOBJ("../data/models/objetos/geral/et.obj","",1);
 
 }
 
@@ -88,6 +75,7 @@ void agents::removeAllAgents()
       delete(patt);
       totalPattAgents--;
    }
+
 }
 
 /********************************************************************
@@ -97,9 +85,11 @@ agents::~agents()
 {
    removeAllAgents();
 
-   glDeleteTextures(1,&potentialTexture);
-   glDeleteTextures(1,&pattTexture);
    glDeleteTextures(1,&goalTexture);
+
+   glmDelete(modelPatt);
+   glmDelete(modelPot);
+
 }
 
 /********************************************************************
@@ -167,7 +157,6 @@ void agents::draw()
    /* Pattern Agents */
    for(aux = 0; aux < totalPattAgents; aux++)
    {
-      glColor3f(color,0.5,0.5);
       patAg->getPosition(x,z);
       glPushMatrix();
       glTranslatef(x ,0.0, z);
@@ -177,6 +166,7 @@ void agents::draw()
       }
       drawPattAgent();
       glPopMatrix();
+      glColor3f(color,0.5,0.5);
       patAg->drawWayPoints();
       patAg = patAg->next;
       color += 0.1;
@@ -184,6 +174,7 @@ void agents::draw()
 
    glColor3f(1.0,1.0,1.0);
 
+   glDisable(GL_LIGHTING);
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    
@@ -213,6 +204,7 @@ void agents::draw()
    glEnd();
    glDisable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
+   glEnable(GL_LIGHTING);
 
 }
 
@@ -221,64 +213,9 @@ void agents::draw()
  ********************************************************************/
 void agents::drawPotentAgent()
 {
-   glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, potentialTexture);
-   
-   glBegin(GL_QUADS);
-      /* Face de frente */
-      glNormal3i(0,0,1);
-      glTexCoord2d(0,1);
-      glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
-      glTexCoord2d(1,0);
-      glVertex3f(AGENT_POTENT_HALF_X,-1,-AGENT_POTENT_HALF_Z);
-      glTexCoord2d(0,0);
-      glVertex3f(-AGENT_POTENT_HALF_X,-1,-AGENT_POTENT_HALF_Z);
-      /* Face de tras */
-      glNormal3i(0,0,-1);
-      glTexCoord2d(0,1);
-      glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
-      glTexCoord2d(1,0);
-      glVertex3f(AGENT_POTENT_HALF_X,-1,AGENT_POTENT_HALF_Z);
-      glTexCoord2d(0,0);
-      glVertex3f(-AGENT_POTENT_HALF_X,-1,AGENT_POTENT_HALF_Z);
-      /* Face de esquerda */
-      glNormal3i(-1,0,0);
-      glTexCoord2d(1,0);
-      glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
-      glTexCoord2d(0,1);
-      glVertex3f(-AGENT_POTENT_HALF_X,-1,AGENT_POTENT_HALF_Z);
-      glTexCoord2d(0,0);
-      glVertex3f(-AGENT_POTENT_HALF_X,-1,-AGENT_POTENT_HALF_Z);
-      /* Face de direita */
-      glNormal3i(1,0,0);
-      glTexCoord2d(1,0);
-      glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
-      glTexCoord2d(0,1);
-      glVertex3f(AGENT_POTENT_HALF_X,-1,AGENT_POTENT_HALF_Z);
-      glTexCoord2d(0,0);
-      glVertex3f(AGENT_POTENT_HALF_X,-1,-AGENT_POTENT_HALF_Z);
-      /* Face de cima */
-      glNormal3i(0,1,0);
-      glTexCoord2d(0,0);
-      glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
-      glTexCoord2d(1,0);
-      glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,-AGENT_POTENT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
-      glTexCoord2d(0,1);
-      glVertex3f(-AGENT_POTENT_HALF_X,AGENT_POTENT_HIGHT,AGENT_POTENT_HALF_Z);
-   glEnd();
-
+   glEnable(GL_COLOR_MATERIAL);
+   glmDrawLists(modelPot);
    glDisable(GL_COLOR_MATERIAL);
-   glDisable(GL_TEXTURE_2D);
 }
 
 /********************************************************************
@@ -286,64 +223,9 @@ void agents::drawPotentAgent()
  ********************************************************************/
 void agents::drawPattAgent()
 {
-   glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, pattTexture);
-   
-   glBegin(GL_QUADS);
-      /* Face de frente */
-      glNormal3i(0,0,1);
-      glTexCoord2d(0,1);
-      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
-      glTexCoord2d(1,0);
-      glVertex3f(AGENT_PATT_HALF_X,-1,-AGENT_PATT_HALF_Z);
-      glTexCoord2d(0,0);
-      glVertex3f(-AGENT_PATT_HALF_X,-1,-AGENT_PATT_HALF_Z);
-      /* Face de tras */
-      glNormal3i(0,0,-1);
-      glTexCoord2d(0,1);
-      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
-      glTexCoord2d(1,0);
-      glVertex3f(AGENT_PATT_HALF_X,-1,AGENT_PATT_HALF_Z);
-      glTexCoord2d(0,0);
-      glVertex3f(-AGENT_PATT_HALF_X,-1,AGENT_PATT_HALF_Z);
-      /* Face de esquerda */
-      glNormal3i(-1,0,0);
-      glTexCoord2d(1,0);
-      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
-      glTexCoord2d(0,1);
-      glVertex3f(-AGENT_PATT_HALF_X,-1,AGENT_PATT_HALF_Z);
-      glTexCoord2d(0,0);
-      glVertex3f(-AGENT_PATT_HALF_X,-1,-AGENT_PATT_HALF_Z);
-      /* Face de direita */
-      glNormal3i(1,0,0);
-      glTexCoord2d(1,0);
-      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
-      glTexCoord2d(0,1);
-      glVertex3f(AGENT_PATT_HALF_X,-1,AGENT_PATT_HALF_Z);
-      glTexCoord2d(0,0);
-      glVertex3f(AGENT_PATT_HALF_X,-1,-AGENT_PATT_HALF_Z);
-      /* Face de cima */
-      glNormal3i(0,1,0);
-      glTexCoord2d(0,0);
-      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
-      glTexCoord2d(1,0);
-      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,-AGENT_PATT_HALF_Z);
-      glTexCoord2d(1,1);
-      glVertex3f(AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
-      glTexCoord2d(0,1);
-      glVertex3f(-AGENT_PATT_HALF_X,AGENT_PATT_HIGHT,AGENT_PATT_HALF_Z);
-   glEnd();
-
+   glEnable(GL_COLOR_MATERIAL);
+   glmDrawLists(modelPatt);
    glDisable(GL_COLOR_MATERIAL);
-   glDisable(GL_TEXTURE_2D);
 }
 
 /********************************************************************
@@ -360,8 +242,8 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       potentAgent* aux = new potentAgent(oriented);
       aux -> next = potentAgents;
       potentAgents = aux;
-      aux->defineBoundingBox(-AGENT_POTENT_HALF_X, -AGENT_POTENT_HALF_Z, 
-                              AGENT_POTENT_HALF_X,  AGENT_POTENT_HALF_Z);
+      aux->defineBoundingBox(modelPot->x1, modelPot->z1, 
+                             modelPot->x2, modelPot->z2);
       ag = (agent*) potentAgents;
       totalPotentAgents++;
    }
@@ -370,8 +252,8 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       pattAgent* aux = new pattAgent(oriented);
       aux -> next = pattAgents;
       pattAgents = aux;
-      aux->defineBoundingBox(-AGENT_PATT_HALF_X, -AGENT_PATT_HALF_Z, 
-                              AGENT_PATT_HALF_X,  AGENT_PATT_HALF_Z);
+      aux->defineBoundingBox(modelPatt->x1, modelPatt->z1, 
+                             modelPatt->x2, modelPatt->z2);
 
       ag = (agent*) pattAgents;
       totalPattAgents++;
@@ -578,14 +460,14 @@ void agents::removeColliders(pattAgent* patAg)
    GLfloat x[4];
    GLfloat z[4];
 
-   x[0] = -AGENT_PATT_HALF_X;
-   z[0] = -AGENT_PATT_HALF_Z;
-   x[1] = -AGENT_PATT_HALF_X;
-   z[1] = +AGENT_PATT_HALF_Z;
-   x[2] = +AGENT_PATT_HALF_X;
-   z[2] = +AGENT_PATT_HALF_Z;
-   x[3] = +AGENT_PATT_HALF_X;
-   z[3] = -AGENT_PATT_HALF_Z;
+   x[0] = modelPatt->x1;
+   z[0] = modelPatt->z1;
+   x[1] = modelPatt->x1;
+   z[1] = modelPatt->z2;
+   x[2] = modelPatt->x2;
+   z[2] = modelPatt->z2;
+   x[3] = modelPatt->x2;
+   z[3] = modelPatt->z1;
 
    if(patAg->oriented())
    {
@@ -607,14 +489,14 @@ void agents::removeColliders(pattAgent* patAg)
       if((agent*)potAg != (agent*)patAg)
       {
          potAg->getPosition(agX, agZ);
-         x[0] = -AGENT_POTENT_HALF_X;
-         z[0] = -AGENT_POTENT_HALF_Z;
-         x[1] = -AGENT_POTENT_HALF_X;
-         z[1] = +AGENT_POTENT_HALF_Z;
-         x[2] = +AGENT_POTENT_HALF_X;
-         z[2] = +AGENT_POTENT_HALF_Z;
-         x[3] = +AGENT_POTENT_HALF_X;
-         z[3] = -AGENT_POTENT_HALF_Z;
+         x[0] = modelPot->x1;
+         z[0] = modelPot->z1;
+         x[1] = modelPot->x1;
+         z[1] = modelPot->z2;
+         x[2] = modelPot->x2;
+         z[2] = modelPot->z2;
+         x[3] = modelPot->x2;
+         z[3] = modelPot->z1;
 
          if(potAg->oriented())
          {

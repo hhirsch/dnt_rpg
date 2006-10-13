@@ -8,7 +8,6 @@
 #include "../../engine/culling.h"
 #include "../../engine/util.h"
 #include "../../engine/sun.h"
-#include "../../etc/glm.h"
 #include "../../particle/partSystem.h"
 #include <SDL/SDL_image.h>
 #include <stdio.h>
