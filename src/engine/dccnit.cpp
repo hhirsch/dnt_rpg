@@ -10,6 +10,8 @@
 #include <SDL/SDL_image.h>
 #include "../etc/glm.h"
 
+
+
 #define REFRESH_RATE 100.0
 #define ACTUALIZATION_RATE 20
 #define WALK_ACTUALIZATION 0.02
@@ -94,6 +96,8 @@ engine::engine()
                                                  "../data/particles/snow1.par");
    */
 
+   waveTest = new waves("", 300, 20, 300, 5, 20);
+
 #ifdef VIDEO_MODE
    startVideo = false;
 #endif
@@ -110,6 +114,9 @@ engine::~engine()
       snd->StopMusic(music);
    }
    delete(snd);
+
+   if(waveTest)
+      delete(waveTest);
 
    /* Delete particles */
    if(particleSystem != NULL)
@@ -1251,6 +1258,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         "../data/particles/lightning1.par");
          }
 
+         if(keys[SDLK_z])
+         {
+            waveTest->insertWave(2, 2, 2, 0.02, 200, 0, WAVE_DIRECTION_DOWN);
+         }
+
       }
 
 #ifdef VIDEO_MODE
@@ -1753,6 +1765,9 @@ void engine::Draw()
 
       glDisable(GL_BLEND);
    }
+
+   waveTest->doStep();
+   waveTest->draw();
 
    /* Draw Particles */
    glPushMatrix();

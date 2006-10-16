@@ -22,6 +22,8 @@
 #include "../particle/partSystem.h"
 #include "../fight/fightSystem.h"
 
+#include "../particle/wave.h"
+
 #ifdef REDE
   #include "../net/client.h"
 #endif
@@ -275,6 +277,8 @@ class engine
       bool canAttack;             /**< can attack in the round? */
       bool canMove;               /**< can move more in the round? */
       int attackFeat;             /**< attack feat to use. */
+
+      waves* waveTest;
 
       sun* gameSun;               /**< The internal sun reference */
       GLfloat hour;               /**< Hour on day time */

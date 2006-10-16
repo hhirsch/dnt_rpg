@@ -1,8 +1,10 @@
 #ifndef _wave_h
 #define _wave_h
 
+#include <SDL/SDL_opengl.h>
 #include <string>
 using namespace std;
+
 
 #define WAVE_DIRECTION_NONE      0
 #define WAVE_DIRECTION_UP        2
@@ -10,14 +12,22 @@ using namespace std;
 #define WAVE_DIRECTION_LEFT      8
 #define WAVE_DIRECTION_RIGHT    16
 
+
+class position
+{
+   public:
+      GLfloat x,  y,  z;
+      GLfloat px, py, pz;
+};
+
 /*! A Liquid Surface Wave */
 class wave
 {
    public:
       int initialX;           /**< The X particle position on surface */
       int initialZ;           /**< The Z particle position on surface */
-      int initialAmplitude;   /**< Initial wave amplitude */
-      int deltaAmplitude;     /**< Delta Amplitude (how much increase each 
+      GLfloat amplitude;      /**< Wave amplitude */
+      GLfloat deltaAmplitude; /**< Delta Amplitude (how much increase each 
                                    lifetime) */
       int actualLifeTime;     /**< Actual Wave Life Time */
       int generationTime;     /**< Total Time on Generating the Wave */
@@ -38,21 +48,36 @@ class wave
 class waves
 {
    public:
-      waves(string waveFile);
+      waves(string waveFile, GLfloat X, GLfloat Y, GLfloat Z, int nX, int nZ);
       ~waves();
 
       void removeDeadWaves();
       int getTotalWaves();
+      void doStep();
+      void insertWave(int initialX, int initialZ, 
+                      GLfloat amplitude, GLfloat deltaAmplitude, 
+                      int generationTime, int attrition,
+                      int direction);
+
+      void draw();
+
 
    private:
-      void insertWave(int initialX, int initialZ, int initialAmplitude,
-                      int deltaAmplitude, int generationTime, int attrition);
 
+      GLfloat initialX;           /**< The X particle position on surface */
+      GLfloat initialZ;           /**< The Z particle position on surface */
+      GLfloat initialY;           /**< The Y static position of surface */
+
+      
       void removeWave(wave* remWave);
 
       wave* actualWaves;
 
       int totalWaves;
+
+      position** surface;
+      int surfX;
+      int surfZ;
 
       
 };

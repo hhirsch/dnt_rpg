@@ -6,6 +6,7 @@
  *********************************************************************/
 void mapObjeto::Desenhar(float x, float z, GLfloat distancia, float orientacao)
 {
+   glEnable(GL_COLOR_MATERIAL);
    GLMmodel* modelo = (GLMmodel*) modelo3d; //modelo a ser desenhado
    /* Define qual modelo desenhar */
    if((distancia>deltaVariacao) && (distancia<2*deltaVariacao) &&
@@ -24,6 +25,7 @@ void mapObjeto::Desenhar(float x, float z, GLfloat distancia, float orientacao)
       //glmDraw(modelo);
       glmDrawLists(modelo);
   glPopMatrix();
+  glDisable(GL_COLOR_MATERIAL);
 }
 
 /*********************************************************************
