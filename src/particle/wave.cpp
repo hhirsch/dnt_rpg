@@ -260,6 +260,23 @@ void waves::doStep()
                   surface[vX][vZ].x += x;
                   surface[vX][vZ].y += y;
                   surface[vX][vZ].z += z;
+                  if( vX == 0)
+                  {
+                     surface[vX][vZ].x = 0;
+                  }
+                  else if( vX == surfX-1)
+                  {
+                     surface[vX][vZ].x = (surfX-1)*SURFACE_VX;
+                  }
+                  if( vZ == 0)
+                  {
+                     surface[vX][vZ].z = 0;
+                  }
+                  else if( vZ == surfZ-1)
+                  {
+                     surface[vX][vZ].z = (surfZ-1)*SURFACE_VZ;
+                  }
+
                }
                else
                {
