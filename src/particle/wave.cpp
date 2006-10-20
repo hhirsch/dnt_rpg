@@ -195,10 +195,18 @@ void waves::doStep()
          for(w = aux->nearLoop; w < aux->farLoop; w++)
          {
             int mod;
-            y = w*aux->deltaAmplitude + aux->actualLifeTime*aux->deltaAmplitude;
-            mod = (int(y / (2*aux->amplitude)) * 
+            int div;
+            y = w*aux->deltaAmplitude + aux->actualLifeTime*aux->deltaAmplitude
+                + aux->amplitude;
+            div = (int)(y / (2*aux->amplitude));
+            mod = (int) (div * 
                   (int)(2*aux->amplitude));
-            y = y - mod/* - w*aux->attrition*/;
+            y = y - mod;
+
+            if(div % 2 != 0)
+            {
+               y = 2*aux->amplitude - y;
+            }
 
             if(y >= 0)
             {
@@ -207,29 +215,29 @@ void waves::doStep()
                {
                   vX = aux->initialX;
                   vZ = aux->initialZ - w;
-                  z = sqrt((aux->amplitude*aux->amplitude)+(y*y));
-                  x = vX*SURFACE_VX;
+                  z = sqrt((aux->amplitude*aux->amplitude)-(y*y));
+                  x = 0;
                }
                else if(aux->direction == WAVE_DIRECTION_DOWN)
                {
                   vX = aux->initialX;
                   vZ = aux->initialZ + w;
-                  z = sqrt((aux->amplitude*aux->amplitude)+(y*y));
-                  x = vX*SURFACE_VZ;
+                  z = sqrt((aux->amplitude*aux->amplitude)-(y*y));
+                  x = 0;
                }
                else if(aux->direction == WAVE_DIRECTION_LEFT)
                {
                   vX = aux->initialX - w;
                   vZ = aux->initialZ;
-                  x = sqrt((aux->amplitude*aux->amplitude)+(y*y));
-                  z = vZ*SURFACE_VZ;
+                  x = sqrt((aux->amplitude*aux->amplitude)-(y*y));
+                  z = 0;
                }
                else if(aux->direction == WAVE_DIRECTION_RIGHT)
                {
                   vX = aux->initialX + w;
                   vZ = aux->initialZ;
-                  x = sqrt((aux->amplitude*aux->amplitude)+(y*y));
-                  z = vZ*SURFACE_VZ;
+                  x = sqrt((aux->amplitude*aux->amplitude)-(y*y));
+                  z = 0;
                }
 
                /* If Vertex Exists */
@@ -241,25 +249,14 @@ void waves::doStep()
                      if( (aux->direction == WAVE_DIRECTION_LEFT) ||
                          (aux->direction == WAVE_DIRECTION_RIGHT))
                      {
-                        x = -x + vX*SURFACE_VX;
+                        x = -x;
                      }
                      else
                      {
-                        z = -z + vZ*SURFACE_VZ;
+                        z = -z;
                      }
                   }
-                  else
-                  {
-                     if( (aux->direction == WAVE_DIRECTION_LEFT) ||
-                         (aux->direction == WAVE_DIRECTION_RIGHT))
-                     {
-                        x += vX*SURFACE_VX;
-                     }
-                     else
-                     {
-                        z += vZ*SURFACE_VZ;
-                     }
-                  }
+                  
                   surface[vX][vZ].x += x;
                   surface[vX][vZ].y += y;
                   surface[vX][vZ].z += z;
@@ -284,7 +281,22 @@ void waves::doStep()
 void waves::draw()
 {
    int x,z;
+   GLfloat ambient[] = { 0.29, 0.492, 0.82, 0.45 };
+   GLfloat diffuse[] = { 0.705, 0.907, 1.0, 0.45 };
+   GLfloat specular[] = { 0.714, 0.781, 0.886, 0.45 };
+   glPushMatrix();
+   /*glEnable(GL_COLOR_MATERIAL);
+   glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);*/
+
+   glEnable( GL_BLEND );
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   
    glBegin(GL_QUADS);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular );
+   //glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.5);
+
 
    for(x=0; x < (surfX-1); x++)
    {
@@ -306,5 +318,9 @@ void waves::draw()
    }
    
    glEnd();
+   glDisable( GL_BLEND );
+   glPopMatrix();
+   glEnable(GL_COLOR_MATERIAL);
+   glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 

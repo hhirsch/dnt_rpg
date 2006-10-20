@@ -1260,7 +1260,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
          if(keys[SDLK_z])
          {
-            waveTest->insertWave(2, 2, 2, 0.02, 200, 0, WAVE_DIRECTION_DOWN);
+            waveTest->insertWave(2, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
+            waveTest->insertWave(0, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
+            waveTest->insertWave(1, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
+            waveTest->insertWave(3, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
+            waveTest->insertWave(4, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
          }
 
       }
