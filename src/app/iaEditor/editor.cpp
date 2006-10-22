@@ -5,6 +5,9 @@
  *********************************************************************/
 editor::editor()
 {
+   wx = -1;
+   wy = -1;
+   wz = -1;
    mapOpened = false;
    map = NULL;
    actualObject = NULL;
@@ -340,13 +343,14 @@ void editor::draw()
  *********************************************************************/
 void editor::doEditorIO()
 {
-   GLdouble xReal,yReal,zReal;
-   GLfloat wx, wy, wz;
+   if( (wx != mouseX) || (wy != 600-mouseY))
+   {   
+      wx = mouseX; wy = 600-mouseY; 
+      glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
+      gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
+   }
+   
 
-   wx = mouseX; wy = 600-mouseY; 
-
-   glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
-   gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
 
    if(!simulationStarted)
    {

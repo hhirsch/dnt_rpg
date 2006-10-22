@@ -5,6 +5,8 @@
 #include "../../ia/pattAgent.h"
 #include "../../map/map.h"
 #include "../../etc/glm.h"
+#include "politic.h"
+#include "pf.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
@@ -102,6 +104,10 @@ class agents
       /*! Insert Object on Map (why here?? cause of the TP2)  */
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                         Map* map, mapObjeto* obj, int qx, int qz);
+
+      /* TP3 Things */
+      politic* politics;
+      pf* pfs;
 };
 
 #endif

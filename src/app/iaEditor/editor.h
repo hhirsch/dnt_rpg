@@ -54,6 +54,9 @@ class editor
       Uint8 mButton;                 /**< Mouse Button State */
       int mouseX,                    /**< Mouse X position */
           mouseY;                    /**< Mouse Y position */
+      GLfloat wx, wy, wz;           
+      GLdouble xReal, yReal, zReal;
+
       bool quit;                     /**< Quit Editor Flag */
 
       sun* gameSun;                  /**< The Sun on Game */
