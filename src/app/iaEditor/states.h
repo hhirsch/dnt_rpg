@@ -14,6 +14,7 @@
 #define STATE_PATROL          10
 #define STATE_CATCH           11
 #define STATE_SEND_PRISON     12
+#define STATE_GO_PATROL       13
 
 /*! The Mensalao State Machine */
 class stateMachine
