@@ -1,0 +1,49 @@
+#ifndef _states_h
+#define _states_h
+
+#define STATE_NONE            0
+
+#define STATE_LOOK_OBJECT     1
+#define STATE_GET_OBJECT      2
+#define STATE_BRING_OBJECT    3
+#define STATE_BUSTED          4
+#define STATE_INTERROGATION   5
+#define STATE_PRETEND         6
+#define STATE_WORK            7
+
+#define STATE_PATROL          10
+#define STATE_CATCH           11
+#define STATE_SEND_PRISON     12
+
+/*! The Mensalao State Machine */
+class stateMachine
+{
+   public:
+      /*! Constructor
+       * \param st -> initial State */
+      stateMachine(int st);
+      /*! Destructor */
+      ~stateMachine();
+
+      /*! Gets the Actual Machine Status 
+       * \return actual state */
+      int getActualState();
+      /*! Gets the Time when init the actual status
+       * \return time*/
+      int getTime();
+      /*! Set to Next State
+       * \param time -> current time */
+      void nextState(int time);
+      /*! Set State to specific state 
+       * \param st -> state
+       * \param time -> current time*/
+      void setState(int st, int time);
+      
+   protected:
+      int state;              /**< Current State */
+      int initialStateTime;   /**< Time on the State */
+};
+
+#endif
+
+

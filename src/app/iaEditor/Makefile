@@ -18,7 +18,7 @@ OBJSPARTICLE = $(ENDPARTICLE)particle.o $(ENDPARTICLE)part1.o $(ENDPARTICLE)part
 OBJSCLASSES = #$(ENDCLASSES)skills.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o
 OBJSLANG = $(ENDLANG)lang.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)potentAgent.o $(ENDIA)pattAgent.o
-OBJS = agents.o editor.o guiIO.o iaEditor.o message.o
+OBJS = agents.o editor.o guiIO.o iaEditor.o message.o states.o
 
 BIN = ../../../bin/
 
@@ -48,6 +48,12 @@ message.o: message.cpp message.h
 	@printf "Making message.o... "
 	@$(CC) $(CFLAGS) message.cpp -o message.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
+
+states.o: states.cpp states.h
+	@printf "Making states.o... "
+	@$(CC) $(CFLAGS) states.cpp -o states.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 
 iaEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJS)
 	@printf "Linking iaEditor... "
