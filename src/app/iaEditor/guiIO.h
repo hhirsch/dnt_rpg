@@ -117,6 +117,11 @@ class guiIO
       oneTabButton* pauseButton;              /**< Pause Button */
       void openPlayControlWindow();
 
+      /*********************TP3*Window*******************************/
+      janela* tp3Window;                  /**< TP3 Window */
+      tabButton* tp3TabButton;            /**< Objects Tab Button */
+      void openTp3Window();
+
 };
 
 #endif

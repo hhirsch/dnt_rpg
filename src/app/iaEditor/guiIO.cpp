@@ -18,6 +18,7 @@ guiIO::guiIO()
    openMessageWindow();
    openObjectsWindow();
    openPlayControlWindow();
+   openTp3Window();
    
    /* Camera Things */
    theta = 35;
@@ -128,6 +129,20 @@ void guiIO::openObjectsWindow()
    objectsWindow->fechavel = 0;
    objectsWindow->ptrExterno = &objectsWindow;
    objectsWindow->Abrir(gui->ljan);
+}
+
+/****************************************************************
+ *                       Open TP3 Window                        *
+ ****************************************************************/
+void guiIO::openTp3Window()
+{
+   tp3Window=gui->ljan->InserirJanela(0,599-222,127,599-158,"TP3",
+                                          1,1,NULL,NULL);
+   tp3TabButton = tp3Window->objects->InserirTabButton(7,17,0,0,
+                                                 "../data/iaEditor/tp3.png");
+   tp3Window->fechavel = 0;
+   tp3Window->ptrExterno = &objectsWindow;
+   tp3Window->Abrir(gui->ljan);
 }
 
 /****************************************************************
