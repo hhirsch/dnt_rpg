@@ -140,6 +140,14 @@ void guiIO::openTp3Window()
                                           1,1,NULL,NULL);
    tp3TabButton = tp3Window->objects->InserirTabButton(7,17,0,0,
                                                  "../data/iaEditor/tp3.png");
+   briefButton = tp3TabButton->insertButton(0,0,19,19);
+   policeButton = tp3TabButton->insertButton(20,0,39,19);
+   rogueButton = tp3TabButton->insertButton(40,0,59,19);
+   psdbButton = tp3TabButton->insertButton(0,20,19,39);
+   ptButton = tp3TabButton->insertButton(20,20,39,39);
+   pflButton = tp3TabButton->insertButton(40,20,59,39);
+   congressButton = tp3TabButton->insertButton(60,20,79,39);
+   federalButton = tp3TabButton->insertButton(80,20,99,39);
    tp3Window->fechavel = 0;
    tp3Window->ptrExterno = &objectsWindow;
    tp3Window->Abrir(gui->ljan);
@@ -302,6 +310,47 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          else if (object == (Tobjeto*) objectButton)
          {
             tool = TOOL_OBSTACLE_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         /* TP 3 Windows Events */
+         else if (object == (Tobjeto*) briefButton)
+         {
+            tool = TOOL_TP3_BRIEF_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) policeButton)
+         {
+            tool = TOOL_TP3_POLICE_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) rogueButton)
+         {
+            tool = TOOL_TP3_ROGUE_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) psdbButton)
+         {
+            tool = TOOL_TP3_PSDB_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) ptButton)
+         {
+            tool = TOOL_TP3_PT_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) pflButton)
+         {
+            tool = TOOL_TP3_PFL_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) congressButton)
+         {
+            tool = TOOL_TP3_CONGRESS_ADD;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if (object == (Tobjeto*) federalButton)
+         {
+            tool = TOOL_TP3_FEDERAL_ADD;
             return(GUI_IO_NEW_STATE);
          }
       }

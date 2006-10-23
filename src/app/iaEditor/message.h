@@ -15,6 +15,16 @@ using namespace std;
 #define TOOL_GOAL_ADD         12
 #define TOOL_OBSTACLE_ADD     13
 
+/* TP3 */
+#define TOOL_TP3_BRIEF_ADD    20
+#define TOOL_TP3_POLICE_ADD   21
+#define TOOL_TP3_ROGUE_ADD    22
+#define TOOL_TP3_PSDB_ADD     23
+#define TOOL_TP3_PT_ADD       24
+#define TOOL_TP3_PFL_ADD      25
+#define TOOL_TP3_CONGRESS_ADD 26
+#define TOOL_TP3_FEDERAL_ADD  27
+
 string messageForTool(int tool);
 
 string getStringFromUser(string title, string previous,

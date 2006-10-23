@@ -15,6 +15,7 @@
 #define AGENTS_STATE_WAYPOINTS      3
 #define AGENTS_STATE_GOAL           4
 #define AGENTS_STATE_OBSTACLE       5
+#define AGENTS_STATE_BRIEFCASE             6
 
 
 /********************************************************************
@@ -51,6 +52,10 @@ agents::agents()
    modelPatt = glmReadOBJ("../data/models/objetos/carros/toon/toon.obj","",1);
    modelPot = glmReadOBJ("../data/models/objetos/geral/et.obj","",1);
 
+   /* TP3 */
+   brief = new briefCases();
+   politicModel = glmReadOBJ("../data/models/objetos/geral/et.obj","",1);
+   pfModel = glmReadOBJ("../data/models/objetos/carros/toon/toon.obj","",1);
 }
 
 /********************************************************************
@@ -75,7 +80,6 @@ void agents::removeAllAgents()
       delete(patt);
       totalPattAgents--;
    }
-
 }
 
 /********************************************************************
@@ -89,6 +93,11 @@ agents::~agents()
 
    glmDelete(modelPatt);
    glmDelete(modelPot);
+
+   /* TP3 */
+   delete(brief);
+   glmDelete(politicModel);
+   glmDelete(pfModel);
 
 }
 
@@ -170,6 +179,12 @@ void agents::draw()
       patAg->drawWayPoints();
       patAg = patAg->next;
       color += 0.1;
+   }
+
+   brief->draw();
+   if(state = AGENTS_STATE_BRIEFCASE)
+   {
+      brief->drawAt(obstacleX, obstacleZ, obstacleOrientation);
    }
 
    glColor3f(1.0,1.0,1.0);
@@ -404,39 +419,6 @@ void agents::addVisibleAgents(agent* ag, Map* actualMap)
                                                (int)(posZ / SQUARESIZE));
 
    addSquareObstacles(ag,saux);
-
-/*   saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)-1,
-                                       (int)(posZ / SQUARESIZE));
-   if(saux)
-   {
-      addSquareObstacles(ag, saux);
-      saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)-1,
-                                          (int)(posZ / SQUARESIZE)-1);
-      addSquareObstacles(ag, saux);
-      saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)-1,
-                                          (int)(posZ / SQUARESIZE)+1);
-      addSquareObstacles(ag, saux);
-   }
-
-   saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)+1,
-                                       (int)(posZ / SQUARESIZE));
-   addSquareObstacles(ag, saux);
-   if(saux)
-   {
-      saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)+1,
-                                       (int)(posZ / SQUARESIZE)+1);
-      addSquareObstacles(ag, saux);
-      saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE)+1,
-                                          (int)(posZ / SQUARESIZE)-1);
-      addSquareObstacles(ag, saux);
-   }
-
-   saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE),
-                                       (int)(posZ / SQUARESIZE)+1);
-   addSquareObstacles(ag, saux);
-   saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE),
-                                       (int)(posZ / SQUARESIZE)-1);
-   addSquareObstacles(ag, saux);*/
 
 }
 
@@ -770,6 +752,30 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             mButton = SDL_GetMouseState(&x,&y);
          }
       }
+   }
+   else if(tool == TOOL_TP3_BRIEF_ADD)
+   {
+      state = AGENTS_STATE_BRIEFCASE;
+      obstacleX = mouseX;
+      obstacleZ = mouseZ;
+
+      if(mButton & SDL_BUTTON(1))
+      {
+         //TODO prompt for Value
+         brief->insertBriefCase(mouseX, mouseZ, obstacleOrientation, 100);
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+      }
+      else if(mButton & SDL_BUTTON(2))
+      {
+         obstacleOrientation += 1;
+      }
+
    }
    else
    {

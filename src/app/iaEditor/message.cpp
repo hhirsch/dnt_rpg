@@ -42,6 +42,46 @@ string messageForTool(int tool)
          return("Define Potential Agents Goal Position");
          break;
       }
+      case TOOL_TP3_BRIEF_ADD:
+      {
+         return("Put briefcase on position. Middle mouse button to Rotate.");
+         break;
+      }
+      case TOOL_TP3_POLICE_ADD:
+      {
+         return("Add Police Agent, select way points and press right mouse button");
+         break;
+      }
+      case TOOL_TP3_ROGUE_ADD:
+      {
+         return("Put Rogue Agent on initial Position");
+         break;
+      }
+      case TOOL_TP3_PSDB_ADD:
+      {
+         return("Define PSDB bandit's area");
+         break;
+      }
+      case TOOL_TP3_PT_ADD:
+      {
+         return("Define PT bandit's area");
+         break;
+      }
+      case TOOL_TP3_PFL_ADD:
+      {
+         return("Define PFL bandit's area");
+         break;
+      }
+      case TOOL_TP3_CONGRESS_ADD:
+      {
+         return("Define bandit's work area");
+         break;
+      }
+      case TOOL_TP3_FEDERAL_ADD:
+      {
+         return("Define Federal Police's area");
+         break;
+      }
    }
    return("DccNiTghtmare!");
 }

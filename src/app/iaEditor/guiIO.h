@@ -120,6 +120,14 @@ class guiIO
       /*********************TP3*Window*******************************/
       janela* tp3Window;                  /**< TP3 Window */
       tabButton* tp3TabButton;            /**< Objects Tab Button */
+      oneTabButton* briefButton;
+      oneTabButton* policeButton;
+      oneTabButton* rogueButton;
+      oneTabButton* psdbButton;
+      oneTabButton* ptButton;
+      oneTabButton* pflButton;
+      oneTabButton* congressButton;
+      oneTabButton* federalButton;
       void openTp3Window();
 
 };

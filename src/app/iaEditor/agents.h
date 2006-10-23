@@ -4,9 +4,9 @@
 #include "../../ia/potentAgent.h"
 #include "../../ia/pattAgent.h"
 #include "../../map/map.h"
-#include "../../etc/glm.h"
 #include "politic.h"
 #include "pf.h"
+#include "briefcase.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
@@ -108,6 +108,9 @@ class agents
       /* TP3 Things */
       politic* politics;
       pf* pfs;
+      GLMmodel* pfModel;
+      briefCases* brief;
+      GLMmodel* politicModel;
 };
 
 #endif

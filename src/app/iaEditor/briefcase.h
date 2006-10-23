@@ -29,9 +29,16 @@ class briefCases
       /*! Insert briefcase on list */
       void insertBriefCase(GLfloat x, GLfloat z, GLfloat angle, int value);
 
+      /*! Draw All BriefCases */
+      void draw();
+
+      /*! Draw a BriefCase on Position */
+      void drawAt(GLfloat x, GLfloat z, GLfloat orientation);
+
    private:
       briefCase cases[MAX_BRIEFCASES];
       int totalCases;
+      GLMmodel* briefModel;
 };
 
 #endif
