@@ -182,7 +182,7 @@ void agents::draw()
    }
 
    brief->draw();
-   if(state = AGENTS_STATE_BRIEFCASE)
+   if(state == AGENTS_STATE_BRIEFCASE)
    {
       brief->drawAt(obstacleX, obstacleZ, obstacleOrientation);
    }
