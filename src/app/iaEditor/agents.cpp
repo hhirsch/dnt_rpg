@@ -1112,7 +1112,7 @@ string agents::saveState(string fileName)
    }
 
    /* Save Number of Total Agents */
-   file << "Agents: " << totalPotentAgents << " " << totalPattAgents << "\n";
+   file << "Agents: " << totalPotentAgents << " " << totalPattAgents << " " << totalPolitics << " " << totalPfs << "\n";
 
    /* Save Goal Position */
    file << "Goal: " << goalX << " " << goalZ << "\n";
@@ -1169,6 +1169,62 @@ string agents::saveState(string fileName)
       a = a->next;
    }
 
+   /* Save All Politics Agents */
+   politic* polAg = politics;
+   for(i=0; i< totalPolitics; i++)
+   {
+      polAg->getPosition(x,z);
+      polAg->getSight(sightDist, sightAngle);
+      if(polAg->oriented())
+      {
+         oriented = 1;
+      }
+      else
+      {
+         oriented = 0;
+      }
+      file << "Politic: " << x << " " << z << " " << oriented << " " <<
+            ag->getStepSize() << " " << sightDist << " " << sightAngle << "\n";
+      polAg = (politic*) polAg->next;
+   }
+
+   /* Save All Pfs Agents */
+   pf* p = pfs;
+   
+   for(i=0; i< totalPfs; i++)
+   {
+      a = p->patAg;
+      a->getPosition(x,z);
+      a->getSight(sightDist, sightAngle);
+      if(a->oriented())
+      {
+         oriented = 1;
+      }
+      else
+      {
+         oriented = 0;
+      }
+      numWayPoints = a->getTotalWayPoints();
+
+      file << "Pf: " << x << " " << z << " " << oriented << " " << 
+              a->getStepSize() << " " << sightDist << " " << sightAngle <<
+              " " << numWayPoints << "\n";
+      
+      wayPoint* wp = a->getWayPoints();
+      for(w = 0; w < numWayPoints; w++)
+      {
+         file << "Way: " << wp->x << " " << wp->z << "\n";
+         wp = wp->next;
+      }
+      p = p->next;
+   }
+
+   for(i=0; i<5; i++)
+   {
+      file << "Base: " << tp3X[i] << " " << tp3Z[i] << "\n";
+   }
+
+   file.close();
 
    ret = "Saved File: ";
    ret += fileName;
@@ -1185,6 +1241,8 @@ string agents::loadState(string fileName)
    string aux = "";
    int numPotAgents;
    int numPatAgents;
+   int numPfs;
+   int numPolitics;
    int i;
 
    GLfloat x,z, step;
@@ -1207,7 +1265,8 @@ string agents::loadState(string fileName)
 
    /* Get Number of Total Agents */
    getline(file, aux);
-   sscanf(aux.c_str(),"Agents: %d %d",&numPotAgents, &numPatAgents);
+   sscanf(aux.c_str(),"Agents: %d %d %d %d",&numPotAgents, &numPatAgents, 
+          &numPolitics, &numPfs);
 
    /* Get Goal Position */
    getline(file, aux);
@@ -1242,6 +1301,40 @@ string agents::loadState(string fileName)
       }
    }
 
+   /* Gets All Politics Agents */
+   for(i=0; i< numPolitics; i++)
+   {
+      getline(file, aux);
+      sscanf(aux.c_str(),"Politic: %f %f %d %f %f %f", &x, &z, &oriented, &step,
+                        &sightDist, &sightAngle);
+      addAgent(AGENT_TYPE_ROGUE, x, z, oriented == 1, 
+               step, goalX, goalZ, sightDist, sightAngle);
+   }
+
+   /* Gets All Police PF Agents */
+   for(i=0; i< numPfs; i++)
+   {
+      getline(file, aux);
+      sscanf(aux.c_str(),"Pf: %f %f %d %f %f %f %d", &x, &z, &oriented, &step,
+                        &sightDist, &sightAngle, &numWayPoints);
+      addAgent(AGENT_TYPE_POLICE, x, z, oriented == 1, 
+               step, goalX, goalZ, sightDist, sightAngle);
+      
+      pattAgent* a = (pattAgent*) actualAgent;
+      for(w = 0; w < numWayPoints; w++)
+      {
+         getline(file, aux);
+         sscanf(aux.c_str(),"Way: %f %f", &x, &z);
+         a->addWayPoint(x, z);
+      }
+   }
+
+   /* Gets All Bases */
+   for(i=0; i<5; i++)
+   {
+      getline(file,aux);
+      sscanf(aux.c_str(), "Base: %f %f", &tp3X[i], &tp3Z[i]);
+   }
    
    file.close();
    ret = "Loaded file: ";
