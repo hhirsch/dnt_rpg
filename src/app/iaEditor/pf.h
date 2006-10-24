@@ -12,9 +12,9 @@ class pf
       ~pf();
 
       stateMachine* state;
-   private:
       pattAgent* patAg;
       potentAgent* potAg;
+      pf* next;
 };
 
 

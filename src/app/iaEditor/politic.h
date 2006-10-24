@@ -4,7 +4,7 @@
 #include "../../ia/potentAgent.h"
 #include "states.h"
 
-class politic: potentAgent
+class politic: public potentAgent
 {
    public:
      politic();

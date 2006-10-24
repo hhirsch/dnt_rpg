@@ -16,6 +16,10 @@ using namespace std;
 #define AGENT_TYPE_POTENT  1
 #define AGENT_TYPE_PATTERN 2
 
+/* TP3 Agents */
+#define AGENT_TYPE_ROGUE   3
+#define AGENT_TYPE_POLICE  4
+
 /*#define AGENT_POTENT_HALF_X 5.0
 #define AGENT_POTENT_HALF_Z 5.0*/
 #define AGENT_POTENT_HIGHT  6.0
@@ -110,9 +114,18 @@ class agents
       void drawTexture(GLuint texture, GLfloat posX, GLfloat posZ, 
                          GLfloat varX, GLfloat varZ);
 
+      politic* removePoliticAgent(politic* polAg);
+      pf* removePfAgent(pf* polAg);
+
+
+      void drawPolitic();
+      void drawPf();
+
       /* TP3 Things */
       politic* politics;
+      int totalPolitics;
       pf* pfs;
+      int totalPfs;
       GLMmodel* pfModel;
       briefCases* brief;
       GLMmodel* politicModel;

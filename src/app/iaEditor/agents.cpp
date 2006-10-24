@@ -9,13 +9,17 @@
 #include <iostream>
 #include <fstream>
 
-#define AGENTS_STATE_NONE           0
-#define AGENTS_STATE_POTENTIAL      1
-#define AGENTS_STATE_PATTERN        2
-#define AGENTS_STATE_WAYPOINTS      3
-#define AGENTS_STATE_GOAL           4
-#define AGENTS_STATE_OBSTACLE       5
-#define AGENTS_STATE_BRIEFCASE      6
+#define AGENTS_STATE_NONE                 0
+#define AGENTS_STATE_POTENTIAL            1
+#define AGENTS_STATE_PATTERN              2
+#define AGENTS_STATE_WAYPOINTS            3
+#define AGENTS_STATE_GOAL                 4
+#define AGENTS_STATE_OBSTACLE             5
+#define AGENTS_STATE_BRIEFCASE            6
+#define AGENTS_STATE_ROGUE                7
+#define AGENTS_STATE_POLICE               8
+#define AGENTS_STATE_POLICE_WAYPOINTS     9
+
 
 
 /********************************************************************
@@ -47,6 +51,12 @@ agents::agents()
 
    totalPattAgents = 0;
    pattAgents = NULL;
+
+   totalPolitics = 0;
+   politics = NULL;
+
+   totalPfs = 0;
+   pfs = 0;
 
    obstacleOrientation = 0;
    obstacleX = 0;
@@ -106,6 +116,26 @@ void agents::removeAllAgents()
       delete(patt);
       totalPattAgents--;
    }
+
+   politic* pol;
+   while(totalPolitics > 0)
+   {
+      pol = politics;
+      politics = (politic*)politics->next;
+      delete(pol);
+      totalPolitics--;
+   }
+
+   pf* pfAg;
+   while(totalPfs > 0)
+   {
+      pfAg = pfs;
+      pfs = (pf*)pfs->next;
+      delete(pfAg);
+      totalPfs--;
+   }
+
+
 }
 
 /********************************************************************
@@ -214,6 +244,36 @@ void agents::draw()
       brief->drawAt(obstacleX, obstacleZ, obstacleOrientation);
    }
 
+   politic* polAg = politics;
+   /* Politic Agents */
+   for(aux = 0; aux < totalPolitics; aux++)
+   {
+      polAg->getPosition(x,z);
+      glPushMatrix();
+      glTranslatef(x ,0.0, z);
+      if(polAg->oriented())
+      {
+         glRotatef(polAg->orientationValue(),0,1,0);
+      }
+      drawPolitic();
+      glPopMatrix();
+      polAg = (politic*)polAg->next;
+   }
+
+   pf* pfAg = pfs;
+   /* Pf Agents */
+   for(aux = 0; aux < totalPfs; aux++)
+   {
+      pfAg->patAg->getPosition(x,z);
+      glPushMatrix();
+      glTranslatef(x ,0.0, z);
+      glRotatef(pfAg->patAg->orientationValue(),0,1,0);
+      drawPf();
+      glPopMatrix();
+      pfAg->patAg->drawWayPoints();
+      pfAg = (pf*)pfAg->next;
+   }
+
    glColor3f(1.0,1.0,1.0);
 
    drawTexture(goalTexture, goalX, goalZ, 2, 2);
@@ -274,12 +334,32 @@ void agents::drawPotentAgent()
 }
 
 /********************************************************************
+ *                             drawPf                               *
+ ********************************************************************/
+void agents::drawPf()
+{
+   glEnable(GL_COLOR_MATERIAL);
+   glmDrawLists(pfModel);
+   glDisable(GL_COLOR_MATERIAL);
+}
+
+/********************************************************************
  *                          drawPattAgent                           *
  ********************************************************************/
 void agents::drawPattAgent()
 {
    glEnable(GL_COLOR_MATERIAL);
    glmDrawLists(modelPatt);
+   glDisable(GL_COLOR_MATERIAL);
+}
+
+/********************************************************************
+ *                           drawPolitic                            *
+ ********************************************************************/
+void agents::drawPolitic()
+{
+   glEnable(GL_COLOR_MATERIAL);
+   glmDrawLists(politicModel);
    glDisable(GL_COLOR_MATERIAL);
 }
 
@@ -312,6 +392,28 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
 
       ag = (agent*) pattAgents;
       totalPattAgents++;
+   }
+   else if(type == AGENT_TYPE_ROGUE)
+   {
+      politic* aux = new(politic);
+      aux->next = politics;
+      politics = aux;
+      aux->defineBoundingBox(politicModel->x1, politicModel->z1, 
+                             politicModel->x2, politicModel->z2);
+      ag = (agent*) politics;
+      totalPolitics++;
+   }
+   else if(type == AGENT_TYPE_POLICE)
+   {
+      pf* aux = new(pf);
+      aux->next = pfs;
+      pfs = aux;
+      aux->patAg->defineBoundingBox(pfModel->x1, pfModel->z1, 
+                                    pfModel->x2, pfModel->z2);
+      aux->potAg->defineBoundingBox(pfModel->x1, pfModel->z1, 
+                                    pfModel->x2, pfModel->z2);
+      ag = (agent*) pfs->patAg;
+      totalPfs++;
    }
    else
    {
@@ -584,6 +686,74 @@ potentAgent* agents::removePotentAgent(potentAgent* potAg)
 }
 
 /******************************************************************
+ *                         Remove Politic Agent                   *
+ ******************************************************************/
+politic* agents::removePoliticAgent(politic* polAg)
+{
+   politic* aux;
+
+   if(polAg == politics)
+   {
+      politics = (politic*)polAg->next;
+      aux = politics;
+   }
+   else
+   {
+      aux = politics;
+      while(aux->next != polAg)
+      {
+         aux = (politic*)aux->next;
+      }
+      aux->next = (politic*)polAg->next;
+      aux = (politic*)polAg->next;
+   }
+   
+   delete(polAg);
+   totalPolitics--;
+   
+   if(totalPolitics == 0)
+   {
+      politics = NULL;
+   }
+
+   return(aux);
+}
+
+/******************************************************************
+ *                            Remove Pf Agent                     *
+ ******************************************************************/
+pf* agents::removePfAgent(pf* polAg)
+{
+   pf* aux;
+
+   if(polAg == pfs)
+   {
+      pfs = (pf*)polAg->next;
+      aux = pfs;
+   }
+   else
+   {
+      aux = pfs;
+      while(aux->next != polAg)
+      {
+         aux = (pf*)aux->next;
+      }
+      aux->next = (pf*)polAg->next;
+      aux = (pf*)polAg->next;
+   }
+   
+   delete(polAg);
+   totalPfs--;
+   
+   if(totalPfs == 0)
+   {
+      pfs = NULL;
+   }
+
+   return(aux);
+}
+
+/******************************************************************
  *                        Remove Pattern Agent                    *
  ******************************************************************/
 pattAgent* agents::removePattAgent(pattAgent* patAg)
@@ -648,12 +818,22 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 {
    if( (state == AGENTS_STATE_POTENTIAL) && (tool != TOOL_POTENTIAL_ADD))
    {
-      if(actualAgent != NULL)
+      if( (actualAgent != NULL))
       {
          removePotentAgent( (potentAgent*) actualAgent);
          actualAgent = NULL;
       }
    }
+
+   if( (state == AGENTS_STATE_ROGUE) && (tool != TOOL_TP3_ROGUE_ADD))
+   {
+      if( (actualAgent != NULL))
+      {
+         removePoliticAgent( (politic*) actualAgent);
+         actualAgent = NULL;
+      }
+   }
+
 
    if( (state == AGENTS_STATE_PATTERN) && (tool != TOOL_PATTERN_ADD))
    {
@@ -665,7 +845,7 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    }
 
       
-   if(tool == TOOL_POTENTIAL_ADD)
+   if((tool == TOOL_POTENTIAL_ADD))
    {
       if(state != AGENTS_STATE_POTENTIAL)
       {
@@ -833,6 +1013,75 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             int x,y;
             mButton = SDL_GetMouseState(&x,&y);
          }
+      }
+   }
+   else if((tool == TOOL_TP3_ROGUE_ADD))
+   {
+      if(state != AGENTS_STATE_ROGUE)
+      {
+         addAgent(AGENT_TYPE_ROGUE, mouseX, mouseZ, false, 
+                                     0.75, goalX, goalZ, 30, 360);
+         state = AGENTS_STATE_ROGUE;
+      }
+      else if( mButton & SDL_BUTTON(1))
+      {
+         actualAgent = NULL;
+         state = AGENTS_STATE_NONE;
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+      }
+      else if(state == AGENTS_STATE_ROGUE)
+      {
+         actualAgent->definePosition(mouseX, mouseZ);
+      }
+   }
+   else if(tool == TOOL_TP3_POLICE_ADD)
+   {
+      if( (state != AGENTS_STATE_POLICE) && 
+          (state != AGENTS_STATE_POLICE_WAYPOINTS) )
+      {
+         addAgent(AGENT_TYPE_POLICE, mouseX, mouseZ, true, 
+                                     0.75, goalX, goalZ, 0.75, 360);
+         state = AGENTS_STATE_POLICE;
+      }
+      else if( mButton & SDL_BUTTON(1) )
+      {
+         if(state == AGENTS_STATE_POLICE)
+         {
+            state = AGENTS_STATE_POLICE_WAYPOINTS;
+            pattAgent* aux = (pattAgent*) actualAgent;
+            /* Define Initial Position */
+            aux->definePosition(mouseX, mouseZ);
+            aux->addWayPoint(mouseX, mouseZ);
+         }
+         else if(state == AGENTS_STATE_POLICE_WAYPOINTS)
+         {
+            pattAgent* aux = (pattAgent*) actualAgent;
+            aux->addWayPoint(mouseX, mouseZ);
+         }
+         
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+
+      }
+      else if( (mButton & SDL_BUTTON(3)) && (state == AGENTS_STATE_WAYPOINTS))
+      {
+         state = AGENTS_STATE_NONE;
+         actualAgent = NULL;
+      }
+      else if(state == AGENTS_STATE_POLICE)
+      {
+         actualAgent->definePosition(mouseX, mouseZ);
       }
    }
    else
