@@ -49,7 +49,7 @@ class agents
       /*! Verify Agents Editor Actions */
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                         Uint8 mButton, int tool, Map* actualMap, 
-                        mapObjeto** actualObject );
+                        mapObjeto** actualObject);
 
       /*! Saves the current State to file
        * \param fileName -> name of the file to be saved */
@@ -121,6 +121,7 @@ class agents
       void drawPolitic();
       void drawPf();
 
+
       /* TP3 Things */
       politic* politics;
       int totalPolitics;
@@ -133,6 +134,8 @@ class agents
       GLuint tp3Textures[5];
       GLfloat tp3X[5];
       GLfloat tp3Z[5];
+
+      
 };
 
 #endif

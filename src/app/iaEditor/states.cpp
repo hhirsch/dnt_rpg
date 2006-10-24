@@ -57,6 +57,9 @@ void stateMachine::nextState(GLuint time)
       case STATE_PRETEND:
          state = STATE_LOOK_OBJECT;
       break;
+      case STATE_GOING_WORK:
+         state = STATE_WORK;
+      break;
       case STATE_WORK:
          state = STATE_LOOK_OBJECT;
       break;

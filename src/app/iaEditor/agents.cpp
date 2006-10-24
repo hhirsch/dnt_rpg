@@ -416,6 +416,7 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
    }
    else if(type == AGENT_TYPE_ROGUE)
    {
+      int group;
       politic* aux = new(politic);
       aux->next = politics;
       politics = aux;
@@ -427,6 +428,10 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       ag->defineSight(sightDist, sightAng);
       ag->defineStepSize(stepSize-0.2);
       actualAgent = ag;
+      group = 0;
+      aux->setBaseArea(group, tp3X[group]-32, tp3Z[group]-32, 
+                              tp3X[group]+32, tp3Z[group]+32);
+      aux->setCongress(tp3X[3], tp3Z[3]);
       return;
    }
    else if(type == AGENT_TYPE_POLICE)
@@ -851,7 +856,7 @@ void agents::redefineGoal(GLfloat x, GLfloat z)
  ******************************************************************/
 void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                           Uint8 mButton, int tool, Map* actualMap, 
-                          mapObjeto** actualObject)
+                          mapObjeto** actualObject )
 {
    if( (state == AGENTS_STATE_POTENTIAL) && (tool != TOOL_POTENTIAL_ADD))
    {

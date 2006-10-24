@@ -12,6 +12,7 @@
 #define STATE_INTERROGATION   5
 #define STATE_PRETEND         6
 #define STATE_WORK            7
+#define STATE_GOING_WORK      8
 
 #define STATE_PATROL          10
 #define STATE_CATCH           11
