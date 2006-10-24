@@ -105,12 +105,21 @@ class agents
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                         Map* map, mapObjeto* obj, int qx, int qz);
 
+      void loadTexture(GLuint* texture, string name, bool alpha);
+
+      void drawTexture(GLuint texture, GLfloat posX, GLfloat posZ, 
+                         GLfloat varX, GLfloat varZ);
+
       /* TP3 Things */
       politic* politics;
       pf* pfs;
       GLMmodel* pfModel;
       briefCases* brief;
       GLMmodel* politicModel;
+
+      GLuint tp3Textures[5];
+      GLfloat tp3X[5];
+      GLfloat tp3Z[5];
 };
 
 #endif

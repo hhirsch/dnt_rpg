@@ -15,7 +15,7 @@
 #define AGENTS_STATE_WAYPOINTS      3
 #define AGENTS_STATE_GOAL           4
 #define AGENTS_STATE_OBSTACLE       5
-#define AGENTS_STATE_BRIEFCASE             6
+#define AGENTS_STATE_BRIEFCASE      6
 
 
 /********************************************************************
@@ -23,6 +23,7 @@
  ********************************************************************/
 agents::agents()
 {
+   int i;
    totalPotentAgents = 0;
    potentAgents = NULL;
    actualAgent = NULL;
@@ -31,14 +32,18 @@ agents::agents()
    goalX = 200;
    goalZ = 200;
 
-   SDL_Surface* img = IMG_Load("../data/iaEditor/goal.png");
-   if(!img)
-   {
-      printf("Can't Open Texture!\n");
-   }
-   carregaTexturaRGBA(img, &goalTexture);
-   SDL_FreeSurface(img);
+   loadTexture(&goalTexture,"../data/iaEditor/goal.png",true); 
+   loadTexture(&tp3Textures[4],"../data/iaEditor/federal.png",false);
+   loadTexture(&tp3Textures[3],"../data/iaEditor/congress.png",false);
+   loadTexture(&tp3Textures[1],"../data/iaEditor/pt.png",false);
+   loadTexture(&tp3Textures[0],"../data/iaEditor/psdb.png",false);
+   loadTexture(&tp3Textures[2],"../data/iaEditor/pfl.png",false);
 
+   for(i = 0; i<5; i++)
+   {
+      tp3X[i] = 80*(i+1);
+      tp3Z[i] = 80;//*(i+1);
+   }
 
    totalPattAgents = 0;
    pattAgents = NULL;
@@ -56,6 +61,27 @@ agents::agents()
    brief = new briefCases();
    politicModel = glmReadOBJ("../data/models/objetos/geral/et.obj","",1);
    pfModel = glmReadOBJ("../data/models/objetos/carros/toon/toon.obj","",1);
+}
+
+/********************************************************************
+ *                          loadTexture                             *
+ ********************************************************************/
+void agents::loadTexture(GLuint* texture, string name, bool alpha)
+{
+   SDL_Surface* img = IMG_Load(name.c_str());
+   if(!img)
+   {
+      printf("Can't Open Texture %s!\n", name.c_str());
+   }
+   if(alpha)
+   {
+      carregaTexturaRGBA(img, texture);
+   }
+   else
+   {
+      carregaTextura(img, texture);
+   }
+   SDL_FreeSurface(img);
 }
 
 /********************************************************************
@@ -90,6 +116,7 @@ agents::~agents()
    removeAllAgents();
 
    glDeleteTextures(1,&goalTexture);
+   glDeleteTextures(5,&tp3Textures[0]);
 
    glmDelete(modelPatt);
    glmDelete(modelPot);
@@ -189,38 +216,51 @@ void agents::draw()
 
    glColor3f(1.0,1.0,1.0);
 
+   drawTexture(goalTexture, goalX, goalZ, 2, 2);
+   for(aux=0; aux < 5; aux++)
+   {
+      drawTexture(tp3Textures[aux], tp3X[aux], tp3Z[aux], 32, 32);
+   }
+
+}
+
+/********************************************************************
+ *                          drawTexture                             *
+ ********************************************************************/
+void agents::drawTexture(GLuint texture, GLfloat posX, GLfloat posZ, 
+                         GLfloat varX, GLfloat varZ)
+{
    glDisable(GL_LIGHTING);
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    
    glEnable(GL_TEXTURE_2D);     
-   glBindTexture(GL_TEXTURE_2D, goalTexture);
+   glBindTexture(GL_TEXTURE_2D, texture);
    glBegin(GL_QUADS);
      glTexCoord2f(0.0,0.0);
      glNormal3i(0,1,0);
-     glVertex3f( goalX-2 , 
-                 0.2 , 
-                 goalZ-2 );
+     glVertex3f( posX-varX , 
+                 0.1 , 
+                 posZ-varZ );
      glTexCoord2f(0.0,1.0);
      glNormal3i(0,1,0);
-     glVertex3f( goalX-2 , 
-                 0.0 , 
-                 goalZ+2);
+     glVertex3f( posX-varX , 
+                 0.1 , 
+                 posZ+varZ);
      glTexCoord2f(1.0,1.0);
      glNormal3i(0,1,0);
-     glVertex3f( goalX+2, 
-                 0.0 , 
-                 goalZ+2 );
+     glVertex3f( posX+varX, 
+                 0.1 , 
+                 posZ+varZ );
      glTexCoord2f(1.0,0.0);
      glNormal3i(0,1,0);
-     glVertex3f( goalX+2, 
-                 0.0, 
-                 goalZ-2 );
+     glVertex3f( posX+varX, 
+                 0.1, 
+                 posZ-varZ );
    glEnd();
    glDisable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
    glEnable(GL_LIGHTING);
-
 }
 
 /********************************************************************
@@ -776,6 +816,24 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          obstacleOrientation += 1;
       }
 
+   }
+   else if( (tool == TOOL_TP3_FEDERAL_ADD) || (tool == TOOL_TP3_CONGRESS_ADD) ||
+            (tool == TOOL_TP3_PSDB_ADD) || (tool == TOOL_TP3_PT_ADD) ||
+            (tool == TOOL_TP3_PFL_ADD))
+   {
+      state = AGENTS_STATE_NONE;
+      if(mButton & SDL_BUTTON(1))
+      {
+         tp3X[tool-TOOL_TP3_PSDB_ADD] = mouseX;
+         tp3Z[tool-TOOL_TP3_PSDB_ADD] = mouseZ;
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+      }
    }
    else
    {

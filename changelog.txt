@@ -10,6 +10,7 @@
  - Rules System;
  - Character Navigation by Mouse;
  - Full Character Creation;
+ - Dynamic Lights & Fog per map;
  - Engine Optimization;
  - Better Sky;
  - New Animations;

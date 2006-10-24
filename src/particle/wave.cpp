@@ -302,8 +302,6 @@ void waves::draw()
    GLfloat diffuse[] = { 0.705, 0.907, 1.0, 0.45 };
    GLfloat specular[] = { 0.714, 0.781, 0.886, 0.45 };
    glPushMatrix();
-   /*glEnable(GL_COLOR_MATERIAL);
-   glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);*/
 
    glEnable( GL_BLEND );
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -312,8 +310,6 @@ void waves::draw()
    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular );
-   //glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.5);
-
 
    for(x=0; x < (surfX-1); x++)
    {
