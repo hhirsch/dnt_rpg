@@ -10,7 +10,7 @@ stateMachine::stateMachine(int st)
 stateMachine::~stateMachine()
 {
    state = STATE_NONE;
-   initialStateTime = -1;
+   initialStateTime = 0;
 }
 
 int stateMachine::getActualState()
@@ -18,18 +18,24 @@ int stateMachine::getActualState()
    return(state);
 }
 
-int stateMachine::getTime()
+GLuint stateMachine::getTime()
 {
    return(initialStateTime);
 }
 
-void stateMachine::setState(int st, int time)
+void stateMachine::setTime(GLuint time)
+{
+   initialStateTime = time;
+}
+
+
+void stateMachine::setState(int st, GLuint time)
 {
    state = st;
    initialStateTime = time;
 }
 
-void stateMachine::nextState(int time)
+void stateMachine::nextState(GLuint time)
 {
    switch(state)
    {

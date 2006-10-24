@@ -1,6 +1,8 @@
 #ifndef _states_h
 #define _states_h
 
+#include <SDL/SDL_opengl.h>
+
 #define STATE_NONE            0
 
 #define STATE_LOOK_OBJECT     1
@@ -31,18 +33,20 @@ class stateMachine
       int getActualState();
       /*! Gets the Time when init the actual status
        * \return time*/
-      int getTime();
+      GLuint getTime();
       /*! Set to Next State
        * \param time -> current time */
-      void nextState(int time);
+      void nextState(GLuint time);
       /*! Set State to specific state 
        * \param st -> state
        * \param time -> current time*/
-      void setState(int st, int time);
+      void setState(int st, GLuint time);
+      void setTime(GLuint time);
+
       
    protected:
-      int state;              /**< Current State */
-      int initialStateTime;   /**< Time on the State */
+      int state;                 /**< Current State */
+      GLuint initialStateTime;   /**< Time on the State */
 };
 
 #endif

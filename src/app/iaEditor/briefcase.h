@@ -14,6 +14,7 @@ class briefCase
       GLfloat z;
       GLfloat angle;
       int value;
+      bool owned;
 };
 
 class briefCases
@@ -34,6 +35,8 @@ class briefCases
 
       /*! Draw a BriefCase on Position */
       void drawAt(GLfloat x, GLfloat z, GLfloat orientation);
+
+      int geTotal(){return(totalCases);};
 
    private:
       briefCase cases[MAX_BRIEFCASES];

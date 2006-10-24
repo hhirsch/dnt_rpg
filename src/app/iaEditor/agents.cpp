@@ -69,8 +69,8 @@ agents::agents()
 
    /* TP3 */
    brief = new briefCases();
-   politicModel = glmReadOBJ("../data/models/objetos/geral/et.obj","",1);
-   pfModel = glmReadOBJ("../data/models/objetos/carros/toon/toon.obj","",1);
+   politicModel = glmReadOBJ("../data/models/objetos/geral/colarinho_e_oculos.obj","",1);
+   pfModel = glmReadOBJ("../data/models/objetos/geral/cap.obj","",1);
 }
 
 /********************************************************************
@@ -181,6 +181,27 @@ void agents::actualize(Map* actualMap)
       removeColliders(patAg);
       patAg->actualize();
       patAg = patAg->next;
+   }
+
+   politic* polAg = politics;
+   /* Politics Agents */
+   for(aux = 0; aux < totalPolitics; aux++)
+   {
+      if( (polAg->getState() == STATE_LOOK_OBJECT) && 
+          (polAg->currentBriefCase() == NULL))
+      {
+         GLfloat x,z, sightD, sightA;
+         polAg->getPosition(x, z);
+         polAg->getSight(sightD, sightA);
+         polAg->setBriefCase( brief->briefCaseInArea(x+politicModel->x1-sightD,
+                                                     z+politicModel->z1-sightD,
+                                                     x+politicModel->x2+sightD,
+                                                     z+politicModel->z2+sightD)
+                                                    );
+      }
+      addVisibleAgents(polAg, actualMap);
+      polAg->actualizeMachineAndPosition();
+      polAg = (politic*)polAg->next;
    }
 }
 
@@ -402,6 +423,11 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
                              politicModel->x2, politicModel->z2);
       ag = (agent*) politics;
       totalPolitics++;
+      ag->definePosition(x,z);
+      ag->defineSight(sightDist, sightAng);
+      ag->defineStepSize(stepSize-0.2);
+      actualAgent = ag;
+      return;
    }
    else if(type == AGENT_TYPE_POLICE)
    {
@@ -548,6 +574,17 @@ void agents::addVisibleAgents(agent* ag, Map* actualMap)
          ag->addIfVisible(patAg);
       }
       patAg = patAg->next;
+   }
+
+   /* Politics Agents */
+   potAg = politics;
+   for(aux = 0; aux < totalPolitics; aux++)
+   {
+      if(potAg != ag)
+      {
+         ag->addIfVisible(potAg);
+      }
+      potAg = potAg->next;
    }
    
    if(!actualMap)
@@ -1074,7 +1111,8 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          }
 
       }
-      else if( (mButton & SDL_BUTTON(3)) && (state == AGENTS_STATE_WAYPOINTS))
+      else if( (mButton & SDL_BUTTON(3)) && 
+               (state == AGENTS_STATE_POLICE_WAYPOINTS))
       {
          state = AGENTS_STATE_NONE;
          actualAgent = NULL;
