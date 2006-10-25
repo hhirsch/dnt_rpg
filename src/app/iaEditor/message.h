@@ -7,6 +7,7 @@
 #include <string>
 using namespace std;
 
+#define TOOL_SIM_NONE          0
 #define TOOL_SIM_PLAY          1
 #define TOOL_SIM_PAUSE         2
 #define TOOL_SIM_STOP          3

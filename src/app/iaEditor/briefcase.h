@@ -43,7 +43,11 @@ class briefCases
       void drawAt(GLfloat x, GLfloat z, GLfloat orientation);
 
       /* Returns the total number of briefcases in list */
-      int geTotal(){return(totalCases);};
+      int getTotal(){return(totalCases);};
+
+      void removeAll(){totalCases=0;};
+
+      briefCase* getBriefCase(int briefNumber);
 
    private:
       briefCase cases[MAX_BRIEFCASES];  /**< vector of briefCases */

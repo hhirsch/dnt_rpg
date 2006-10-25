@@ -401,10 +401,16 @@ void editor::verifyIO()
    }
    else if(guiEvent == GUI_IO_SAVE_IAFILE)
    {
+      agentsSimulation->verifyAction(xReal, yReal, zReal, mButton, 
+                                     TOOL_SIM_NONE, map, &actualObject);
+
       gui->showMessage(agentsSimulation->saveState(gui->getFileName()));
    }
    else if(guiEvent == GUI_IO_OPEN_IAFILE)
    {
+      agentsSimulation->verifyAction(xReal, yReal, zReal, mButton, 
+                                     TOOL_SIM_NONE, map, &actualObject);
+
       gui->showMessage(agentsSimulation->loadState(gui->getFileName()));
    }
    else if(guiEvent == GUI_IO_NEW_IAFILE)

@@ -28,6 +28,7 @@
 agents::agents()
 {
    int i;
+   groupAdd = 0;
    totalPotentAgents = 0;
    potentAgents = NULL;
    actualAgent = NULL;
@@ -137,7 +138,7 @@ void agents::removeAllAgents()
       delete(pfAg);
       totalPfs--;
    }
-
+   brief->removeAll();
 
 }
 
@@ -478,9 +479,8 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
    }
    else if(type == AGENT_TYPE_ROGUE)
    {
-      int group;
-      group = 0;
-      politic* aux = new politic(&scores[group]);
+      groupAdd = (groupAdd+1) % 3;
+      politic* aux = new politic(&scores[groupAdd]);
       aux->next = politics;
       politics = aux;
       aux->defineBoundingBox(politicModel->x1, politicModel->z1, 
@@ -491,8 +491,8 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       ag->defineSight(sightDist, sightAng);
       ag->defineStepSize(stepSize-0.2);
       actualAgent = ag;
-      aux->setBaseArea(group, tp3X[group]-32, tp3Z[group]-32, 
-                              tp3X[group]+32, tp3Z[group]+32);
+      aux->setBaseArea(groupAdd, tp3X[groupAdd]-32, tp3Z[groupAdd]-32, 
+                              tp3X[groupAdd]+32, tp3Z[groupAdd]+32);
       aux->setCongress(tp3X[3], tp3Z[3]);
       aux->setFederal(tp3X[4], tp3Z[4]);
       return;
@@ -834,27 +834,30 @@ politic* agents::removePoliticAgent(politic* polAg)
 /******************************************************************
  *                            Remove Pf Agent                     *
  ******************************************************************/
-pf* agents::removePfAgent(pf* polAg)
+pf* agents::removePfAgent(pattAgent* polAg)
 {
    pf* aux;
+   pf* del;
 
-   if(polAg == pfs)
+   if(polAg == pfs->patAg)
    {
-      pfs = (pf*)polAg->next;
+      del = pfs;
+      pfs = (pf*)pfs->next;
       aux = pfs;
    }
    else
    {
       aux = pfs;
-      while(aux->next != polAg)
+      while(aux->next->patAg != polAg)
       {
          aux = (pf*)aux->next;
       }
-      aux->next = (pf*)polAg->next;
-      aux = (pf*)polAg->next;
+      del = aux->next;
+      aux->next = (pf*)aux->next->next;
+      aux = (pf*)aux->next;
    }
    
-   delete(polAg);
+   delete(del);
    totalPfs--;
    
    if(totalPfs == 0)
@@ -922,6 +925,81 @@ void agents::redefineGoal(GLfloat x, GLfloat z)
 }
 
 /******************************************************************
+ *                        redefineFederal                         *
+ ******************************************************************/
+void agents::redefineFederal(GLfloat x, GLfloat z)
+{
+   tp3X[4] = x;
+   tp3Z[4] = z;
+
+   int aux;
+   
+   politic* polAg = politics;
+
+   /* Politics Agents */
+   for(aux = 0; aux < totalPolitics; aux++)
+   {
+      polAg->setFederal(tp3X[4], tp3Z[4]);
+      polAg = (politic*)polAg->next;
+   }
+
+   pf* pfAg = pfs;
+
+   /* Politics Agents */
+   for(aux = 0; aux < totalPfs; aux++)
+   {
+      pfAg->setFederal(tp3X[4], tp3Z[4]);
+      pfAg = pfAg->next;
+   }
+
+}
+
+/******************************************************************
+ *                        redefineCongress                        *
+ ******************************************************************/
+void agents::redefineCongress(GLfloat x, GLfloat z)
+{
+   tp3X[3] = x;
+   tp3Z[3] = z;
+
+   int aux;
+   
+   politic* polAg = politics;
+
+   /* Politics Agents */
+   for(aux = 0; aux < totalPolitics; aux++)
+   {
+      polAg->setCongress(tp3X[3], tp3Z[3]);
+      polAg = (politic*)polAg->next;
+   }
+}
+
+/******************************************************************
+ *                        redefineBase                            *
+ ******************************************************************/
+void agents::redefineBase(int groupNum, GLfloat x, GLfloat z)
+{
+   tp3X[groupNum] = x;
+   tp3Z[groupNum] = z;
+
+   int aux;
+   
+   politic* polAg = politics;
+
+   /* Politics Agents */
+   for(aux = 0; aux < totalPolitics; aux++)
+   {
+      if(polAg->getGroup() == groupNum)
+      {
+         polAg->setBaseArea(groupNum, tp3X[groupNum]-32, tp3Z[groupNum]-32,
+                            tp3X[groupNum]+32, tp3Z[groupNum]+32);
+      }
+      polAg = (politic*)polAg->next;
+   }
+}
+
+
+/******************************************************************
  *                        Verify Action                           *
  ******************************************************************/
 void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
@@ -942,6 +1020,15 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       if( (actualAgent != NULL))
       {
          removePoliticAgent( (politic*) actualAgent);
+         actualAgent = NULL;
+      }
+   }
+
+   if( (state == AGENTS_STATE_POLICE) && (tool != TOOL_TP3_POLICE_ADD))
+   {
+      if( (actualAgent != NULL))
+      {
+         removePfAgent( (pattAgent*)actualAgent);
          actualAgent = NULL;
       }
    }
@@ -1117,8 +1204,20 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       state = AGENTS_STATE_NONE;
       if(mButton & SDL_BUTTON(1))
       {
-         tp3X[tool-TOOL_TP3_PSDB_ADD] = mouseX;
-         tp3Z[tool-TOOL_TP3_PSDB_ADD] = mouseZ;
+         switch(tool)
+         {
+            case TOOL_TP3_PSDB_ADD:
+            case TOOL_TP3_PT_ADD:
+            case TOOL_TP3_PFL_ADD:
+               redefineBase(tool-TOOL_TP3_PSDB_ADD, mouseX, mouseZ);
+            break;
+            case TOOL_TP3_FEDERAL_ADD:
+               redefineFederal(mouseX, mouseZ);
+            break;
+            case TOOL_TP3_CONGRESS_ADD:
+               redefineCongress(mouseX, mouseZ);
+            break;
+         }
          while(mButton & SDL_BUTTON(1))
          {
             //Wait for Mouse Button Release
@@ -1133,7 +1232,7 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       if(state != AGENTS_STATE_ROGUE)
       {
          addAgent(AGENT_TYPE_ROGUE, mouseX, mouseZ, false, 
-                                     0.75, goalX, goalZ, 30, 360);
+                                     1.00, goalX, goalZ, 30, 360);
          state = AGENTS_STATE_ROGUE;
       }
       else if( mButton & SDL_BUTTON(1))
@@ -1226,7 +1325,9 @@ string agents::saveState(string fileName)
    }
 
    /* Save Number of Total Agents */
-   file << "Agents: " << totalPotentAgents << " " << totalPattAgents << " " << totalPolitics << " " << totalPfs << "\n";
+   file << "Agents: " << totalPotentAgents << " " << totalPattAgents << 
+           " " << totalPolitics << " " << totalPfs << 
+           " " << brief->getTotal() << "\n";
 
    /* Save Goal Position */
    file << "Goal: " << goalX << " " << goalZ << "\n";
@@ -1282,7 +1383,7 @@ string agents::saveState(string fileName)
       }
       a = a->next;
    }
-
+   
    /* Save All Politics Agents */
    politic* polAg = politics;
    for(i=0; i< totalPolitics; i++)
@@ -1297,8 +1398,9 @@ string agents::saveState(string fileName)
       {
          oriented = 0;
       }
-      file << "Politic: " << x << " " << z << " " << oriented << " " <<
-            ag->getStepSize() << " " << sightDist << " " << sightAngle << "\n";
+      file << "Politic: " << polAg->getGroup() << " " << x << " " << z << 
+              " " << oriented << " " << polAg->getStepSize() << " " 
+              << sightDist << " " << sightAngle << "\n";
       polAg = (politic*) polAg->next;
    }
 
@@ -1340,7 +1442,13 @@ string agents::saveState(string fileName)
    }
 
    /* Save All BriefCases */
-   //TODO
+   briefCase* tmp;
+   for(i=0; i<brief->getTotal(); i++)
+   {
+      tmp = brief->getBriefCase(i);
+      file << "BriefCase: " << tmp->x << " " << tmp->z << " " << " " <<
+              tmp->angle << " " << tmp->value << "\n";
+   }
 
    file.close();
 
@@ -1361,6 +1469,7 @@ string agents::loadState(string fileName)
    int numPatAgents;
    int numPfs;
    int numPolitics;
+   int numCases;
    int i;
 
    GLfloat x,z, step;
@@ -1383,8 +1492,8 @@ string agents::loadState(string fileName)
 
    /* Get Number of Total Agents */
    getline(file, aux);
-   sscanf(aux.c_str(),"Agents: %d %d %d %d",&numPotAgents, &numPatAgents, 
-          &numPolitics, &numPfs);
+   sscanf(aux.c_str(),"Agents: %d %d %d %d %d",&numPotAgents, &numPatAgents, 
+          &numPolitics, &numPfs, &numCases);
 
    /* Get Goal Position */
    getline(file, aux);
@@ -1422,9 +1531,11 @@ string agents::loadState(string fileName)
    /* Gets All Politics Agents */
    for(i=0; i< numPolitics; i++)
    {
+      int gr;
       getline(file, aux);
-      sscanf(aux.c_str(),"Politic: %f %f %d %f %f %f", &x, &z, &oriented, &step,
-                        &sightDist, &sightAngle);
+      sscanf(aux.c_str(),"Politic: %d %f %f %d %f %f %f", &gr, &x, &z, 
+             &oriented, &step, &sightDist, &sightAngle);
+      groupAdd = (gr - 1) % 4;
       addAgent(AGENT_TYPE_ROGUE, x, z, oriented == 1, 
                step, goalX, goalZ, sightDist, sightAngle);
    }
@@ -1447,11 +1558,33 @@ string agents::loadState(string fileName)
       }
    }
 
-   /* Gets All Bases */
+   /* Define All Bases */
    for(i=0; i<5; i++)
    {
       getline(file,aux);
       sscanf(aux.c_str(), "Base: %f %f", &tp3X[i], &tp3Z[i]);
+      if(i <= TOOL_TP3_PFL_ADD-TOOL_TP3_PSDB_ADD)
+      {
+         redefineBase(i, tp3X[i], tp3Z[i]);
+      }
+      else if( i == TOOL_TP3_CONGRESS_ADD - TOOL_TP3_PSDB_ADD)
+      {
+         redefineCongress(tp3X[i], tp3Z[i]);
+      }
+      else
+      {
+         redefineFederal(tp3X[i], tp3Z[i]);
+      }
+   }
+
+   /* Insert All BriefCases */
+   brief->removeAll();
+   int value;
+   for(i=0; i<numCases; i++)
+   {
+      getline(file,aux);
+      sscanf(aux.c_str(), "BriefCase: %f %f %f %d", &x, &z, &sightAngle, &value);
+      brief->insertBriefCase(x,z, sightAngle, value);
    }
    
    file.close();

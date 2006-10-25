@@ -51,6 +51,8 @@ class politic: public potentAgent
       * \param st -> state to be seted */
      void setState(int st);
 
+     int getGroup(){return(rogueGroup);};
+
      bool busted;             /**< If agent is busted or not */
      
    private:

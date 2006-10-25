@@ -90,6 +90,18 @@ void briefCases::drawAt(GLfloat x, GLfloat z, GLfloat orientation)
 }
 
 /*********************************************************************
+ *                           getBriefCase                            *
+ *********************************************************************/
+briefCase* briefCases::getBriefCase(int briefNumber)
+{
+   if(briefNumber < totalCases)
+   {
+      return(&cases[briefNumber]);
+   }
+   return(NULL);
+}
+
+/*********************************************************************
  *                         briefCaseInArea                           *
  *********************************************************************/
 briefCase* briefCases::briefCaseInArea(GLfloat x1, GLfloat z1,

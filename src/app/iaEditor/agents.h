@@ -117,7 +117,12 @@ class agents
       politic* removePoliticAgent(politic* polAg);
 
       /*! Remove a federal police agent from list */
-      pf* removePfAgent(pf* polAg);
+      pf* removePfAgent(pattAgent* polAg);
+
+      void redefineFederal(GLfloat x, GLfloat z);
+      void redefineBase(int groupNum, GLfloat x, GLfloat z);
+      void redefineCongress(GLfloat x, GLfloat z);
+
 
       /*! Draw a politic agent */
       void drawPolitic();
@@ -147,6 +152,8 @@ class agents
       GLuint tp3Textures[5];  /**< Groups Base Textures */
       GLfloat tp3X[5];        /**< Groups Base Coordinates */
       GLfloat tp3Z[5];        /**< Groups Base Coordinates */
+
+      int groupAdd;           /**< Last group of rogue added  to */
 
       
 };
