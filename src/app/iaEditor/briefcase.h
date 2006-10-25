@@ -15,6 +15,7 @@ class briefCase
       GLfloat angle;
       int value;
       bool owned;
+      bool delivered;
 };
 
 class briefCases

@@ -98,6 +98,7 @@ void politic::actualizeMachineAndPosition(bool workTime)
             (actualX >= baseX1) && (actualX <=baseX2) && 
             (actualZ >= baseZ1) && (actualZ <= baseZ2))
    {
+      brief->delivered = true;
       brief = NULL;
       srand(SDL_GetTicks());
       state->nextState(SDL_GetTicks());

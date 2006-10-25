@@ -1,6 +1,8 @@
 #include "briefcase.h"
 #include "../../engine/util.h"
 
+#include <stdlib.h>
+
 
 
 briefCases::briefCases()
@@ -24,6 +26,7 @@ void briefCases::insertBriefCase(GLfloat x, GLfloat z, GLfloat angle, int value)
       cases[totalCases].angle = angle;
       cases[totalCases].value = value;
       cases[totalCases].owned = false;
+      cases[totalCases].delivered = false;
       totalCases++;
    }
    else
@@ -39,6 +42,16 @@ void briefCases::draw()
    
    for(i=0; i<totalCases; i++)
    {
+      if(cases[i].delivered)
+      {
+         //if delivered, put the case random in the map
+         srand(SDL_GetTicks());
+         cases[i].x = drand48() *  384 + 74;
+         cases[i].z = drand48() *  448;
+         cases[i].value = (rand() % 100) +1;
+         cases[i].owned = false;
+         cases[i].delivered = false;
+      }
       glPushMatrix();
       glTranslatef(cases[i].x ,0.0, cases[i].z);
       glRotatef(cases[i].angle,0,1,0);
