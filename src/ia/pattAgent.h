@@ -39,6 +39,8 @@ class pattAgent: public agent
       /*! Get WayPoints List. Only for save on editor. */
       wayPoint* getWayPoints(){return(wayPoints);};
 
+      wayPoint* getActualWayPoint(){return(actualWayPoint);};
+
       pattAgent* next;              /**< Next Agent on List */
       
    protected:

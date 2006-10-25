@@ -3,15 +3,22 @@
 #include <math.h>
 #include <stdio.h>
 
-#define KA 0.005
-#define KR 0.5
-#define KC 100000
-
 /********************************************************************
  *                         Constructor                              *
  ********************************************************************/
 potentAgent::potentAgent(bool oriented):agent(oriented)
 {
+   defineConstants(0.005, 100000, 0.5);
+}
+
+/********************************************************************
+ *                         defineConstants                          *
+ ********************************************************************/
+void potentAgent::defineConstants(GLfloat a, GLfloat c, GLfloat r)
+{
+   ka = a;
+   kc = c;
+   kr = r;
 }
 
 /********************************************************************
@@ -62,11 +69,11 @@ bool potentAgent::defineNextPosition()
 
       if(estaDentro(min1, max1, min2, max2, 1))
       {
-         force = -KC*dist;
+         force = -kc*dist;
       }
       else
       {
-         force = -KR / dist;
+         force = -kr / dist;
       }
       fX += force*cosA;
       fZ += force*senA;
@@ -79,7 +86,7 @@ bool potentAgent::defineNextPosition()
    dist = sqrt( (dX*dX) + (dZ*dZ));
    cosA = dX / dist;
    senA = dZ / dist;
-   force = KA * dist;
+   force = ka * dist;
    fX += force*cosA;
    fZ += force*senA;
 

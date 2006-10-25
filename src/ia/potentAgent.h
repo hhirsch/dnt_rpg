@@ -14,6 +14,15 @@ class potentAgent: public agent
       bool defineNextPosition();
 
       potentAgent* next;
+
+      /*! Defines the agent Constants
+       * \param a -> Atraction constant
+       * \param c -> Collision constant
+       * \param r -> Repulsion constant */
+      void defineConstants(GLfloat a, GLfloat c, GLfloat r);
+      
+   private:
+      GLfloat ka, kc, kr;
 };
                    
 

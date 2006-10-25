@@ -10,6 +10,7 @@ pf::pf()
    potAg = new potentAgent(false);
    state = new stateMachine(STATE_PATROL);
    target = NULL;
+   potAg->defineConstants(0.5, 100000, 0.5);
 }
 
 /*****************************************************************
@@ -42,7 +43,7 @@ void pf::getPosition(GLfloat& x, GLfloat& z)
  *****************************************************************/
 void pf::defineStepSize(GLfloat size)
 {
-   potAg->defineStepSize(2*size);
+   potAg->defineStepSize(size);
    patAg->defineStepSize(size);
 }
 
@@ -116,8 +117,6 @@ void pf::actualizeMachineAndPosition()
       potAg->defineDestiny(x,z);
       potAg->actualize();
       potAg->getPosition(actualX, actualZ);
-      printf("step: %.3f x: %.3f z: %.3f\n", potAg->getStepSize(), actualX, actualZ);
-
       GLfloat dist = sqrt( (x - actualX)*(x - actualX) +
                            (z - actualZ)*(z - actualZ));
 
@@ -142,6 +141,8 @@ void pf::actualizeMachineAndPosition()
       potAg->actualize();
       potAg->getPosition(x,z);
       target->definePosition(x,z);
+      target->currentBriefCase()->x = x;
+      target->currentBriefCase()->z = z;
       if( (x >= federalX-32) && ( x <= federalX+32) &&
           (z >= federalZ-32) && ( z <= federalZ+32))
       {

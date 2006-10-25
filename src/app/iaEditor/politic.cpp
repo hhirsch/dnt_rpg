@@ -119,7 +119,7 @@ void politic::actualizeMachineAndPosition(bool workTime)
 
    /* INTERROGATION */
    else if( (state->getActualState() == STATE_INTERROGATION) &&
-            (SDL_GetTicks() - state->getTime() >= INTERROGATION_TIME))
+            ((SDL_GetTicks() - state->getTime()) >= INTERROGATION_TIME))
    {
       state->nextState(SDL_GetTicks());
       lastWork = SDL_GetTicks();

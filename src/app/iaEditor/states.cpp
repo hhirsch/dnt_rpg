@@ -37,6 +37,7 @@ void stateMachine::setState(int st, GLuint time)
 
 void stateMachine::nextState(GLuint time)
 {
+   initialStateTime = time;
    switch(state)
    {
       case STATE_LOOK_OBJECT:
