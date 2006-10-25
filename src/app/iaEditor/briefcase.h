@@ -5,23 +5,28 @@
 #include "../../etc/glm.h"
 
 
-#define MAX_BRIEFCASES 30
+#define MAX_BRIEFCASES 30  /**< Max number of briefcases in the list */
 
+/*! the briefCase class */
 class briefCase
 {
    public:
-      GLfloat x;
-      GLfloat z;
-      GLfloat angle;
-      int value;
-      bool owned;
-      bool delivered;
+      GLfloat x;        /**< x coordinate of the center of the briefcase */
+      GLfloat z;        /**< z coordinate of the center of the briefcase */
+      GLfloat angle;    /**< briefCase orientation angle */
+      int value;        /**< value of the briefCase */
+      bool owned;       /**< if someone owns the case */
+      bool delivered;   /**< if the case is already delived(to group or police)*/
 };
 
+
+/*! the list of briefCases Class */
 class briefCases
 {
    public:
+      /*! Constructor */
       briefCases();
+      /*! Destructor */
       ~briefCases();
 
       /*! Returns the most expensive briefcase in area
@@ -37,12 +42,13 @@ class briefCases
       /*! Draw a BriefCase on Position */
       void drawAt(GLfloat x, GLfloat z, GLfloat orientation);
 
+      /* Returns the total number of briefcases in list */
       int geTotal(){return(totalCases);};
 
    private:
-      briefCase cases[MAX_BRIEFCASES];
-      int totalCases;
-      GLMmodel* briefModel;
+      briefCase cases[MAX_BRIEFCASES];  /**< vector of briefCases */
+      int totalCases;                   /**< total number of briefcases */
+      GLMmodel* briefModel;             /**< briefCase 3D model */
 };
 
 #endif

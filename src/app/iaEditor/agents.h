@@ -20,12 +20,8 @@ using namespace std;
 #define AGENT_TYPE_ROGUE   3
 #define AGENT_TYPE_POLICE  4
 
-/*#define AGENT_POTENT_HALF_X 5.0
-#define AGENT_POTENT_HALF_Z 5.0*/
 #define AGENT_POTENT_HIGHT  6.0
 
-/*#define AGENT_PATT_HALF_X 5.0
-#define AGENT_PATT_HALF_Z 5.0*/
 #define AGENT_PATT_HIGHT  6.0
 
 
@@ -109,32 +105,43 @@ class agents
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                         Map* map, mapObjeto* obj, int qx, int qz);
 
+      /*! Load a texture */
       void loadTexture(GLuint* texture, string name, bool alpha);
 
+      /*! Draws some texture on "Floor" */
       void drawTexture(GLuint texture, GLfloat posX, GLfloat posZ, 
                          GLfloat varX, GLfloat varZ);
 
+      /*! Remove a politic agent from list */
       politic* removePoliticAgent(politic* polAg);
+
+      /*! Remove a federal police agent from list */
       pf* removePfAgent(pf* polAg);
 
-
+      /*! Draw a politic agent */
       void drawPolitic();
+
+      /*! Draw a Federal Police Agent */
       void drawPf();
 
 
       /* TP3 Things */
-      politic* politics;
-      int totalPolitics;
-      pf* pfs;
-      int totalPfs;
-      GLMmodel* pfModel;
-      briefCases* brief;
-      GLMmodel* politicModel;
-      int lastCongressTime;
+      
+      politic* politics;      /**< politics agents List */
+      int totalPolitics;      /**< total politics on list */
+      GLMmodel* politicModel; /**< politic 3D model */
+      
+      pf* pfs;                /**< federal Police Agents */
+      int totalPfs;           /**< total federal agents */
+      GLMmodel* pfModel;      /**< federal police 3D model */
+      
+      briefCases* brief;      /**< briefCases List */
+      
+      int lastCongressTime;   /**< Last Time Congress called all politics */
 
-      GLuint tp3Textures[5];
-      GLfloat tp3X[5];
-      GLfloat tp3Z[5];
+      GLuint tp3Textures[5];  /**< Groups Base Textures */
+      GLfloat tp3X[5];        /**< Groups Base Coordinates */
+      GLfloat tp3Z[5];        /**< Groups Base Coordinates */
 
       
 };

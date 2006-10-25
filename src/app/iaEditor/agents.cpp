@@ -442,6 +442,7 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       aux->setBaseArea(group, tp3X[group]-32, tp3Z[group]-32, 
                               tp3X[group]+32, tp3Z[group]+32);
       aux->setCongress(tp3X[3], tp3Z[3]);
+      aux->setFederal(tp3X[4], tp3Z[4]);
       return;
    }
    else if(type == AGENT_TYPE_POLICE)
@@ -1272,10 +1273,13 @@ string agents::saveState(string fileName)
       p = p->next;
    }
 
+   /* Save All Bases Positions */
    for(i=0; i<5; i++)
    {
       file << "Base: " << tp3X[i] << " " << tp3Z[i] << "\n";
    }
+
+   /* Save All BriefCases */
 
    file.close();
 

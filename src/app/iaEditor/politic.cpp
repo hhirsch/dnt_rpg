@@ -87,7 +87,7 @@ void politic::actualizeMachineAndPosition(bool workTime)
    
    /* GET_OBJECT */
    else if( (state->getActualState() == STATE_GET_OBJECT) &&
-            (dist < 30))
+            (dist < 15))
    {
       state->nextState(SDL_GetTicks());
       defineDestiny((baseX1+baseX2)/2.0, (baseZ1+baseZ2)/2.0);
@@ -107,8 +107,54 @@ void politic::actualizeMachineAndPosition(bool workTime)
       defineDestiny(x,z);
    }
 
-   /* Only Actualize position when not working */
-   if(state->getActualState() != STATE_WORK)
+   /* BUSTED */
+   else if( (state->getActualState() == STATE_BUSTED) &&
+            (actualX >= federalX-32) && (actualX <= federalX + 32) &&
+            (actualZ >= federalZ-32) && (actualZ <= federalZ + 32))
+   {
+      state->nextState(SDL_GetTicks());
+      brief->delivered = true;
+      brief = NULL;
+   }
+
+   /* INTERROGATION */
+   else if( (state->getActualState() == STATE_INTERROGATION) &&
+            (SDL_GetTicks() - state->getTime() >= INTERROGATION_TIME))
+   {
+      state->nextState(SDL_GetTicks());
+      lastWork = SDL_GetTicks();
+      srand(SDL_GetTicks());
+      x = drand48() *  384 + 74;
+      z = drand48() *  448;
+      defineDestiny(x,z);
+   }
+
+   /* PRETEND */
+   else if( (state->getActualState() == STATE_PRETEND) )
+   {
+      if(SDL_GetTicks()-state->getTime() >= PRETEND_TIME)
+      {
+         /* End of Pretend Time */
+         state->nextState(SDL_GetTicks());
+         srand(SDL_GetTicks());
+         x = drand48() *  384 + 74;
+         z = drand48() *  448;
+         defineDestiny(x,z);
+      }
+      else if((dist < 10) || (SDL_GetTicks()-lastWork >= 10000))
+      {
+         /* Change Pretend Destiny */
+         lastWork = SDL_GetTicks();
+         srand(SDL_GetTicks());
+         x = drand48() *  384 + 74;
+         z = drand48() *  448;
+         defineDestiny(x,z);
+      }
+   }
+
+   /* Only Actualize position when not working or interrogated */
+   if( (state->getActualState() != STATE_WORK) &&
+       (state->getActualState() != STATE_INTERROGATION))
    {
       actualize();
    }
@@ -170,6 +216,11 @@ int politic::getState()
    return(state->getActualState());
 }
 
-
-int politic::lastSession = 0;
-
+/**********************************************************************
+ *                           setFederal                               *
+ **********************************************************************/
+void politic::setFederal(GLfloat x, GLfloat z)
+{
+   federalX = x;
+   federalZ = z;
+}

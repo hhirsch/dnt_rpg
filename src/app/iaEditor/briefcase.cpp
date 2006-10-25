@@ -4,19 +4,27 @@
 #include <stdlib.h>
 
 
-
+/*********************************************************************
+ *                         Constructor                               *
+ *********************************************************************/
 briefCases::briefCases()
 {
    totalCases = 0;
    briefModel = glmReadOBJ("../data/models/objetos/geral/mala.obj","",1);
 }
 
+/*********************************************************************
+ *                          Destructor                               *
+ *********************************************************************/
 briefCases::~briefCases()
 {
    totalCases = -1;
    glmDelete(briefModel);
 }
 
+/*********************************************************************
+ *                         insertBriefCase                           *
+ *********************************************************************/
 void briefCases::insertBriefCase(GLfloat x, GLfloat z, GLfloat angle, int value)
 {
    if(totalCases < MAX_BRIEFCASES)
@@ -35,6 +43,9 @@ void briefCases::insertBriefCase(GLfloat x, GLfloat z, GLfloat angle, int value)
    }
 }
 
+/*********************************************************************
+ *                            Draw                                   *
+ *********************************************************************/
 void briefCases::draw()
 {
    int i;
@@ -62,6 +73,9 @@ void briefCases::draw()
    glDisable(GL_COLOR_MATERIAL);
 }
 
+/*********************************************************************
+ *                            DrawAt                                 *
+ *********************************************************************/
 void briefCases::drawAt(GLfloat x, GLfloat z, GLfloat orientation)
 {
    glEnable(GL_COLOR_MATERIAL);
@@ -75,7 +89,9 @@ void briefCases::drawAt(GLfloat x, GLfloat z, GLfloat orientation)
    glDisable(GL_COLOR_MATERIAL);
 }
 
-
+/*********************************************************************
+ *                         briefCaseInArea                           *
+ *********************************************************************/
 briefCase* briefCases::briefCaseInArea(GLfloat x1, GLfloat z1,
                                        GLfloat x2, GLfloat z2)
 {
