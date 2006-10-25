@@ -130,6 +130,7 @@ class agents
       GLMmodel* pfModel;
       briefCases* brief;
       GLMmodel* politicModel;
+      int lastCongressTime;
 
       GLuint tp3Textures[5];
       GLfloat tp3X[5];

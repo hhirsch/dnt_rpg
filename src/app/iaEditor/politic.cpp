@@ -29,7 +29,7 @@ politic::~politic()
 /**********************************************************************
  *                      ActualizeMachineAndPosition                   *
  **********************************************************************/
-void politic::actualizeMachineAndPosition()
+void politic::actualizeMachineAndPosition(bool workTime)
 {
    GLfloat dist;
    GLfloat x, z;
@@ -39,7 +39,8 @@ void politic::actualizeMachineAndPosition()
    /*WORK*/
    if((state->getActualState() != STATE_WORK) &&
       (state->getActualState() != STATE_GOING_WORK) &&
-      ((SDL_GetTicks() - lastWork) > WORK_INTERVAL) )
+      (workTime) && (state->getActualState() != STATE_BUSTED) &&
+      (state->getActualState() != STATE_INTERROGATION) )
    {
       state->setState(STATE_GOING_WORK, SDL_GetTicks());
       if(brief)

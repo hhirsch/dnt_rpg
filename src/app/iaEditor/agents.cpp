@@ -49,6 +49,8 @@ agents::agents()
       tp3Z[i] = 80;//*(i+1);
    }
 
+   lastCongressTime = 0;
+
    totalPattAgents = 0;
    pattAgents = NULL;
 
@@ -183,6 +185,14 @@ void agents::actualize(Map* actualMap)
       patAg = patAg->next;
    }
 
+   /* Verify Congress Time */
+   bool congressWork = false;
+   if(SDL_GetTicks()-lastCongressTime >= WORK_INTERVAL)
+   {
+      lastCongressTime = SDL_GetTicks();
+      congressWork = true;
+   }
+
    politic* polAg = politics;
    /* Politics Agents */
    for(aux = 0; aux < totalPolitics; aux++)
@@ -200,7 +210,7 @@ void agents::actualize(Map* actualMap)
                                                     );
       }
       addVisibleAgents(polAg, actualMap);
-      polAg->actualizeMachineAndPosition();
+      polAg->actualizeMachineAndPosition(congressWork);
       polAg = (politic*)polAg->next;
    }
 }

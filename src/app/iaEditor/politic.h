@@ -14,7 +14,7 @@ class politic: public potentAgent
      politic();
      ~politic();
 
-     void actualizeMachineAndPosition();
+     void actualizeMachineAndPosition(bool workTime);
 
      briefCase* currentBriefCase();
      void setBriefCase(briefCase* br);
