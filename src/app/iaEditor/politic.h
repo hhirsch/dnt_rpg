@@ -10,12 +10,15 @@
 #define INTERROGATION_TIME     2000 /**< Time Spent on Interrogation */
 #define PRETEND_TIME          40000 /**< Time Spent pretending */
 
+#define BUSTED_VALUE            500 /**< Value to spent when Busted! */
+
+
 /*! The politic Agent Class */
 class politic: public potentAgent
 {
    public:
      /*! Constructor */
-     politic();
+     politic(int* score);
      /*! Destructor */
      ~politic();
 
@@ -48,7 +51,7 @@ class politic: public potentAgent
       * \param st -> state to be seted */
      void setState(int st);
 
-     bool busted;
+     bool busted;             /**< If agent is busted or not */
      
    private:
      int rogueGroup;          /**< Number of the rogue group */
@@ -66,6 +69,9 @@ class politic: public potentAgent
      
      GLfloat federalX,        /**< Federal Police X center coordinate */
              federalZ;        /**< Federal Police Z center coordinate */
+
+   int* groupScore;         /**< Pointer to Group Score */
+
 
 };
 

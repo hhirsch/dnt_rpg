@@ -386,7 +386,11 @@ void editor::verifyIO()
    keys = SDL_GetKeyState(NULL);
    mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
-   guiEvent = gui->doIO(mouseX, mouseY, mButton, keys);
+   guiEvent = gui->doIO(mouseX, mouseY, mButton, keys, 
+                        agentsSimulation->scores[0], 
+                        agentsSimulation->scores[1], 
+                        agentsSimulation->scores[2]);
+
    if(guiEvent == GUI_IO_EXIT)
    {
       quit = true;

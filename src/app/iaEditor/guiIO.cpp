@@ -19,6 +19,7 @@ guiIO::guiIO()
    openObjectsWindow();
    openPlayControlWindow();
    openTp3Window();
+   openScoreWindow();
    
    /* Camera Things */
    theta = 35;
@@ -149,9 +150,25 @@ void guiIO::openTp3Window()
    congressButton = tp3TabButton->insertButton(60,20,79,39);
    federalButton = tp3TabButton->insertButton(80,20,99,39);
    tp3Window->fechavel = 0;
-   tp3Window->ptrExterno = &objectsWindow;
+   tp3Window->ptrExterno = &tp3Window;
    tp3Window->Abrir(gui->ljan);
 }
+
+/****************************************************************
+ *                       Open Score Window                        *
+ ****************************************************************/
+void guiIO::openScoreWindow()
+{
+   scoreWindow=gui->ljan->InserirJanela(0,599-287,127,599-223,"Score",
+                                          1,1,NULL,NULL);
+   textPSDB = scoreWindow->objects->InserirQuadroTexto(10,17,117,30,1,"PSDB: 0");
+   textPT = scoreWindow->objects->InserirQuadroTexto(10,31,117,44,1,"PT: 0");
+   textPFL = scoreWindow->objects->InserirQuadroTexto(10,45,117,58,1,"PFL: 0");
+   scoreWindow->fechavel = 0;
+   scoreWindow->ptrExterno = &scoreWindow;
+   scoreWindow->Abrir(gui->ljan);
+}
+
 
 /****************************************************************
  *                     Open PlayControl Window                  *
@@ -205,11 +222,23 @@ void guiIO::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 /****************************************************************
  *                             DoIO                             *
  ****************************************************************/
-int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
+int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
+                int scorePSDB, int scorePT, int scorePFL)
 {
+   char tmp[255];
    int eventInfo;
    Tobjeto* object;
    object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
+
+   sprintf(tmp, "PSDB: %d", scorePSDB);
+   textPSDB->texto = tmp;
+   sprintf(tmp, "PT: %d", scorePT);
+   textPT->texto = tmp;
+   sprintf(tmp, "PFL: %d", scorePFL);
+   textPFL->texto = tmp;
+
+   scoreWindow->Desenhar(0,0);
+   
    switch(eventInfo)
    {
       case TABBOTAOPRESSIONADO:

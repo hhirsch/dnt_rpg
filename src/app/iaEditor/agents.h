@@ -53,6 +53,8 @@ class agents
        * \param fileName -> name of the file to be loaded */
       string loadState(string fileName);
 
+      int scores[3];
+
    private:
       potentAgent* potentAgents;    /**< List of Potential Functions Agents */
       int totalPotentAgents;        /**< Total Potential Functions Agents */

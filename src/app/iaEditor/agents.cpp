@@ -47,6 +47,7 @@ agents::agents()
    {
       tp3X[i] = 80*(i+1);
       tp3Z[i] = 80;//*(i+1);
+      scores[i] = 0;
    }
 
    lastCongressTime = 0;
@@ -478,7 +479,8 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
    else if(type == AGENT_TYPE_ROGUE)
    {
       int group;
-      politic* aux = new(politic);
+      group = 0;
+      politic* aux = new politic(&scores[group]);
       aux->next = politics;
       politics = aux;
       aux->defineBoundingBox(politicModel->x1, politicModel->z1, 
@@ -489,7 +491,6 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
       ag->defineSight(sightDist, sightAng);
       ag->defineStepSize(stepSize-0.2);
       actualAgent = ag;
-      group = 0;
       aux->setBaseArea(group, tp3X[group]-32, tp3Z[group]-32, 
                               tp3X[group]+32, tp3Z[group]+32);
       aux->setCongress(tp3X[3], tp3Z[3]);
@@ -1092,8 +1093,9 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 
       if(mButton & SDL_BUTTON(1))
       {
-         //TODO prompt for Value
-         brief->insertBriefCase(mouseX, mouseZ, obstacleOrientation, 100);
+         srand(SDL_GetTicks());
+         brief->insertBriefCase(mouseX, mouseZ, obstacleOrientation, 
+                                (rand() % 1800 +200));
          while(mButton & SDL_BUTTON(1))
          {
             //Wait for Mouse Button Release

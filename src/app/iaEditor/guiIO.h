@@ -36,7 +36,8 @@ class guiIO
 
 
       /*! Do the GUI IO */
-      int doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys);
+      int doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
+               int scorePSDB, int scorePT, int scorePFL);
 
       /*! Draw The GUI */
       void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
@@ -129,6 +130,14 @@ class guiIO
       oneTabButton* congressButton;
       oneTabButton* federalButton;
       void openTp3Window();
+
+      /*********************Score*Window*******************************/
+      janela* scoreWindow;                /**< Score Window */
+      quadroTexto* textPSDB;
+      quadroTexto* textPT;
+      quadroTexto* textPFL;
+      void openScoreWindow();
+
 
 };
 

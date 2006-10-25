@@ -6,7 +6,7 @@
 /**********************************************************************
  *                           Constructor                              *
  **********************************************************************/
-politic::politic():potentAgent(false)
+politic::politic(int* score):potentAgent(false)
 {
    GLfloat x; GLfloat z;
    state = new stateMachine(STATE_LOOK_OBJECT);
@@ -17,6 +17,7 @@ politic::politic():potentAgent(false)
    brief = NULL;
    lastWork = 0;
    busted = false;
+   groupScore = score;
 }
 
 /**********************************************************************
@@ -100,6 +101,7 @@ void politic::actualizeMachineAndPosition(bool workTime)
             (actualZ >= baseZ1) && (actualZ <= baseZ2))
    {
       brief->delivered = true;
+      *groupScore += brief->value;
       brief = NULL;
       srand(SDL_GetTicks());
       state->nextState(SDL_GetTicks());
@@ -115,6 +117,7 @@ void politic::actualizeMachineAndPosition(bool workTime)
    {
       state->nextState(SDL_GetTicks());
       brief->delivered = true;
+      *groupScore -= BUSTED_VALUE;
       brief = NULL;
    }
 
@@ -234,4 +237,5 @@ void politic::setState(int st)
 {
    state->setState(st, SDL_GetTicks());
 }
+
 
