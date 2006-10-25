@@ -154,7 +154,8 @@ void politic::actualizeMachineAndPosition(bool workTime)
 
    /* Only Actualize position when not working or interrogated */
    if( (state->getActualState() != STATE_WORK) &&
-       (state->getActualState() != STATE_INTERROGATION))
+       (state->getActualState() != STATE_INTERROGATION) &&
+       (state->getActualState() != STATE_BUSTED))
    {
       actualize();
    }
@@ -224,3 +225,12 @@ void politic::setFederal(GLfloat x, GLfloat z)
    federalX = x;
    federalZ = z;
 }
+
+/**********************************************************************
+ *                            setState                                *
+ **********************************************************************/
+void politic::setState(int st)
+{
+   state->setState(st, SDL_GetTicks());
+}
+

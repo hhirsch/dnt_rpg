@@ -213,6 +213,57 @@ void agents::actualize(Map* actualMap)
       polAg->actualizeMachineAndPosition(congressWork);
       polAg = (politic*)polAg->next;
    }
+
+   pf* pfAg = pfs;
+   /* Pfs Agents */
+   for(aux = 0; aux < totalPfs; aux++)
+   {
+      if( (pfAg->getState() == STATE_PATROL) && 
+          (pfAg->getTarget() == NULL))
+      {
+         GLfloat x,z, sightD, sightA;
+         pfAg->getPosition(x, z);
+         pfAg->getSight(sightD, sightA);
+         pfAg->setTarget( getPoliticWithCaseInArea(x+pfModel->x1-sightD,
+                                                   z+pfModel->z1-sightD,
+                                                   x+pfModel->x2+sightD,
+                                                   z+pfModel->z2+sightD)
+                        );
+      }
+
+      //addVisibleAgents(pfAg->potAg, actualMap);
+      GLfloat posX, posZ;
+      pfAg->getPosition(posX, posZ);
+      Square* saux = actualMap->quadradoRelativo( (int)(posX / SQUARESIZE),
+                                               (int)(posZ / SQUARESIZE));
+      pfAg->potAg->clearObstacles();
+      addSquareObstacles(pfAg->potAg,saux);
+      pfAg->actualizeMachineAndPosition();
+      pfAg = pfAg->next;
+   }
+
+}
+
+/********************************************************************
+ *                      getPoliticwithCaseInArea                    *
+ ********************************************************************/
+politic* agents::getPoliticWithCaseInArea(GLfloat x1, GLfloat z1,
+                                          GLfloat x2, GLfloat z2)
+{
+   int aux;
+   politic* polAg = politics;
+   for(aux = 0; aux < totalPolitics; aux++)
+   {
+      GLfloat x,z;
+      polAg->getPosition(x, z);
+      if( (polAg->currentBriefCase() != NULL) && 
+          (x >= x1) && (x <= x2) && (z >= z1) && (z <= z2) )
+      {
+         return(polAg);
+      }
+      polAg = (politic*)polAg->next;
+   }
+   return(NULL);
 }
 
 /********************************************************************
@@ -295,7 +346,7 @@ void agents::draw()
    /* Pf Agents */
    for(aux = 0; aux < totalPfs; aux++)
    {
-      pfAg->patAg->getPosition(x,z);
+      pfAg->getPosition(x,z);
       glPushMatrix();
       glTranslatef(x ,0.0, z);
       glRotatef(pfAg->patAg->orientationValue(),0,1,0);
@@ -456,6 +507,13 @@ void agents::addAgent(int type, GLfloat x, GLfloat z, bool oriented,
                                     pfModel->x2, pfModel->z2);
       ag = (agent*) pfs->patAg;
       totalPfs++;
+      aux->definePosition(x,z);
+      aux->defineSight(sightDist, sightAng);
+      aux->defineDestiny(goalX, goalZ);
+      aux->defineStepSize(stepSize);
+      aux->setFederal(tp3X[4], tp3Z[4]);
+      actualAgent = ag;
+      return;
    }
    else
    {
@@ -1099,7 +1157,7 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
           (state != AGENTS_STATE_POLICE_WAYPOINTS) )
       {
          addAgent(AGENT_TYPE_POLICE, mouseX, mouseZ, true, 
-                                     0.75, goalX, goalZ, 0.75, 360);
+                                     1.0, goalX, goalZ, 30, 360);
          state = AGENTS_STATE_POLICE;
       }
       else if( mButton & SDL_BUTTON(1) )
@@ -1280,6 +1338,7 @@ string agents::saveState(string fileName)
    }
 
    /* Save All BriefCases */
+   //TODO
 
    file.close();
 

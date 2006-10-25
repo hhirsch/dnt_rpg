@@ -43,6 +43,10 @@ class politic: public potentAgent
      /*! Gets the actual State of the politic
       * \return state of the politic */
      int getState();
+
+     /*! Set The politic State
+      * \param st -> state to be seted */
+     void setState(int st);
      
    private:
      int rogueGroup;          /**< Number of the rogue group */

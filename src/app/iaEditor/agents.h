@@ -4,7 +4,6 @@
 #include "../../ia/potentAgent.h"
 #include "../../ia/pattAgent.h"
 #include "../../map/map.h"
-#include "politic.h"
 #include "pf.h"
 #include "briefcase.h"
 #include <SDL/SDL.h>
@@ -123,6 +122,10 @@ class agents
 
       /*! Draw a Federal Police Agent */
       void drawPf();
+
+      politic* getPoliticWithCaseInArea(GLfloat x1, GLfloat z1,
+                                        GLfloat x2, GLfloat z2);
+
 
 
       /* TP3 Things */

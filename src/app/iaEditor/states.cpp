@@ -65,7 +65,7 @@ void stateMachine::nextState(GLuint time)
       break;
 
       case STATE_PATROL:
-         state = STATE_PATROL;
+         state = STATE_CATCH;
       break;
       case STATE_CATCH:
          state = STATE_SEND_PRISON;

@@ -5,6 +5,7 @@
 
 #define STATE_NONE            0
 
+/* Politic States */
 #define STATE_LOOK_OBJECT     1
 #define STATE_GET_OBJECT      2
 #define STATE_BRING_OBJECT    3
@@ -14,6 +15,7 @@
 #define STATE_WORK            7
 #define STATE_GOING_WORK      8
 
+/* Federal Police States */
 #define STATE_PATROL          10
 #define STATE_CATCH           11
 #define STATE_SEND_PRISON     12
