@@ -256,7 +256,7 @@ politic* agents::getPoliticWithCaseInArea(GLfloat x1, GLfloat z1,
    {
       GLfloat x,z;
       polAg->getPosition(x, z);
-      if( (polAg->currentBriefCase() != NULL) && 
+      if( (polAg->currentBriefCase() != NULL) && (!polAg->busted) &&
           (x >= x1) && (x <= x2) && (z >= z1) && (z <= z2) )
       {
          return(polAg);

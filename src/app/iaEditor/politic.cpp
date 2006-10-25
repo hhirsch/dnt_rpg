@@ -16,6 +16,7 @@ politic::politic():potentAgent(false)
    defineDestiny(x,z);
    brief = NULL;
    lastWork = 0;
+   busted = false;
 }
 
 /**********************************************************************

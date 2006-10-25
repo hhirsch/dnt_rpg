@@ -147,6 +147,7 @@ void pf::actualizeMachineAndPosition()
           (z >= federalZ-32) && ( z <= federalZ+32))
       {
          state->nextState(SDL_GetTicks());
+         target->busted = false;
          target = NULL;
       }
    }
@@ -175,6 +176,10 @@ void pf::actualizeMachineAndPosition()
 void pf::setTarget(politic* tg)
 {
    target = tg;
+   if(target)
+   {
+      target->busted = true;
+   }
 }
 
 /*****************************************************************
