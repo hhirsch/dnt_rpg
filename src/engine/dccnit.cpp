@@ -33,7 +33,7 @@ engine::engine()
 
    /* Define Camera initial Position */
    theta=25;
-   phi=0;
+   phi=0.1;
    d=150;
    centerX = centerZ = 0;
    centerY = 30;

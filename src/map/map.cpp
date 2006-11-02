@@ -252,9 +252,8 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                      MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
                      0.0, 0.5, 0.5, 1.0);*/
 
-
             glTexCoord2f(0.0,0.0);
-            glNormal3i(0,1,0);
+            //glNormal3i(0,1,0);
             glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
                         MapSquares[Xaux][Zaux]->h1 , 
                         MapSquares[Xaux][Zaux]->z1 );

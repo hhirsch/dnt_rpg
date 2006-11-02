@@ -1,4 +1,5 @@
 #include "wave.h"
+#include "../engine/util.h"
 #include <math.h>
 
 #define SURFACE_VX 8
@@ -299,6 +300,9 @@ void waves::doStep()
 void waves::draw()
 {
    int x,z;
+
+   GLfloat nx=0, ny=0, nz=0;
+   
    GLfloat ambient[] = { 0.29, 0.492, 0.82, 0.45 };
    GLfloat diffuse[] = { 0.705, 0.907, 1.0, 0.45 };
    GLfloat specular[] = { 0.714, 0.781, 0.886, 0.45 };
@@ -316,6 +320,17 @@ void waves::draw()
    {
       for(z = 0; z < (surfZ-1); z++)
       {
+        normal(surface[x][z].x + initialX, 
+               surface[x][z].y + initialY,
+               surface[x][z].z + initialZ, 
+               surface[x+1][z].x + initialX,
+               surface[x+1][z].y + initialY,
+               surface[x+1][z].z + initialZ,
+               surface[x+1][z+1].x + initialX,
+               surface[x+1][z+1].y + initialY,
+               surface[x+1][z+1].z + initialZ,
+               nx, ny, nz);
+        glNormal3f(nx, ny, nz);
         glVertex3f(surface[x][z].x + initialX,
                    surface[x][z].y + initialY,
                    surface[x][z].z + initialZ);

@@ -175,3 +175,48 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
    }
 }
 
+
+void normalize (GLfloat& nx, GLfloat& ny, GLfloat& nz)
+{
+    // calculate the length of the vector
+    GLfloat len = (GLfloat)(sqrt((nx * nx) + (ny * ny) + (nz * nz)));
+
+    // avoid division by 0
+    if (len == 0.0f)
+        len = 1.0f;
+
+    // reduce to unit size
+    nx /= len;
+    ny /= len;
+    nz /= len;
+}
+
+/* Calculate Normal to the Poligon */
+void normal (GLfloat x1, GLfloat y1, GLfloat z1,
+             GLfloat x2, GLfloat y2, GLfloat z2,
+             GLfloat x3, GLfloat y3, GLfloat z3, 
+             GLfloat& nx, GLfloat &ny, GLfloat& nz)
+{
+    GLfloat ax, ay, az , bx, by, bz;
+
+    // calculate the vectors A and B
+    // note that v[3] is defined with counterclockwise winding in mind
+    // a
+    ax = x1 - x2;
+    ay = y1 - y2;
+    az = z1 - z2;
+    // b
+    bx = x2 - x3;
+    by = y2 - y3;
+    bz = z2 - z3;
+
+    // calculate the cross product and place the resulting vector
+    // into the address specified by vertex_t *normal
+    nx = (ay * bz) - (az * by);
+    ny = (az * bx) - (ax * bz);
+    nz = (ax * by) - (ay * bx);
+
+    // normalize
+    normalize(nx, ny, nz);
+}
+

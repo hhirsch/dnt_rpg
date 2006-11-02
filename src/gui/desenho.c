@@ -269,11 +269,11 @@ void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16],
        
 
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
-   gluUnProject(xa,(600-ya), profundidade, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject(xa,(600-yb-1),profundidade, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject(xb+1, (600-yb-1), profundidade, modl, proj, viewPort, 
+   gluUnProject(xa,(599-ya), profundidade, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject(xa,(599-yb-1),profundidade, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(xb+1, (599-yb-1), profundidade, modl, proj, viewPort, 
                 &x3, &y3, &z3);
-   gluUnProject(xb+1,(600-ya),profundidade, modl, proj, viewPort, &x4, &y4, &z4);
+   gluUnProject(xb+1,(599-ya),profundidade, modl, proj, viewPort, &x4, &y4, &z4);
 
 
    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -22,8 +22,8 @@ guiIO::guiIO()
    openScoreWindow();
    
    /* Camera Things */
-   theta = 35;
-   phi = 0;
+   theta = 15;
+   phi = 90;
    d = 280;
    centerX = 20;
    centerZ = 80;

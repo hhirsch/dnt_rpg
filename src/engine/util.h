@@ -102,6 +102,9 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
                          GLfloat varZ,
                          GLfloat min[3], GLfloat max[3]);
 
-
+void normal (GLfloat x1, GLfloat y1, GLfloat z1,
+             GLfloat x2, GLfloat y2, GLfloat z2,
+             GLfloat x3, GLfloat y3, GLfloat z3, 
+             GLfloat& nx, GLfloat &ny, GLfloat& nz);
 
 #endif
