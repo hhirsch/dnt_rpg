@@ -11,6 +11,7 @@ waves::waves(string waveFile, GLfloat X, GLfloat Y, GLfloat Z, int nX, int nZ)
 {
    int i,w;
    actualWaves = NULL;
+   totalWaves = 0;
    surfX = nX;
    surfZ = nZ;
    initialX = X;
