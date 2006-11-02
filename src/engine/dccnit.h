@@ -15,6 +15,7 @@
 #include "options.h"
 #include "skillwindow.h"
 #include "attwindow.h"
+#include "camera.h"
 #include "../classes/skills.h"
 #include "../classes/feats.h"
 #include "../sound/sound.h"
@@ -50,16 +51,7 @@ class engine
          clientdata_t clientData;      /**< Client Data \b NOTUSED */
       #endif
 
-      double theta;                    /**< Rotation Up*/
-      double phi;                      /**< Rotation to Sides*/
-      double d;                        /**< Zoom */
-      double centerX,                  /**< Camera Central X Position */
-      centerY,                         /**< Camera Central Y Position */
-      centerZ;                         /**< Camera Central Z Position */
-      double cameraX,                  /**< Camera X Position */
-             cameraY,                  /**< Camera Y Position */
-             cameraZ;                  /**< Camera Z Position */
-      double deltaY;                   /**< Camera DeltaY */
+      camera gameCamera;               /**< The Game Camera */
       interface* gui;                  /**< GUI used on Engine */
       GLdouble proj[16];               /**< Projection Matrix */
       GLdouble modl[16];               /**< ModelView Matrix  */

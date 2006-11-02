@@ -32,15 +32,15 @@ engine::engine()
    imgNumber = 0;
 
    /* Define Camera initial Position */
-   theta=25;
+   /*theta=25;
    phi=0.1;
    d=150;
-   centerX = centerZ = 0;
-   centerY = 30;
+   gameCamera.centerX = gameCamera.centerZ = 0;
+   gameCamera.centerY = 30;
    deltaY = 0;
-   cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   cameraY = centerY + (float) d * sin(deg2Rad(theta));
-   cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+   cameraX = gameCamera.centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+   cameraY = gameCamera.centerY + (float) d * sin(deg2Rad(theta));
+   cameraZ = gameCamera.centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));*/
 
    /* Initialize the Cursor */
    cursors = new(cursor);
@@ -278,7 +278,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
          int npc;
          char nome[30];
          char arquivo[255];
-         float posX, posZ;
+        GLfloat posX, posZ;
          fscanf(arq,"%d",&total);
          for(npc = 0; npc < total; npc++)
          {
@@ -373,8 +373,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    /* Put Active Party on Init Position */
    PCs->personagemAtivo->posicaoLadoX = actualMap->xInic;
    PCs->personagemAtivo->posicaoLadoZ = actualMap->zInic;
-   centerX = actualMap->xInic;
-   centerZ = actualMap->zInic;
+   gameCamera.centerX = actualMap->xInic;
+   gameCamera.centerZ = actualMap->zInic;
    PCs->personagemAtivo->ocupaQuad = actualMap->squareInic;
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
@@ -572,7 +572,6 @@ void engine::redmensionateWindow(SDL_Surface *screen)
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
    gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, FARVIEW);
-//   glFrustum(-1.0, 1.0, 1.0, 1.0, -1.0, FARVIEW);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -587,8 +586,8 @@ void engine::drawSphereToList(int lats, int longs)
    glNewList(skyList,GL_COMPILE);
 
    int i,j;
-   double theta1,theta2,theta3;
-   double ex,ey,ez;
+   GLfloat theta1,theta2,theta3;
+   GLfloat ex,ey,ez;
    int n = lats;
 
    for (j=0;j<n/2;j++) {
@@ -604,7 +603,7 @@ void engine::drawSphereToList(int lats, int longs)
          ez = cos(theta2) * sin(theta3);
 
          glNormal3f(ex,ey,ez);
-         glTexCoord2f(i/(double)n,2*(j+1)/(double)n);
+         glTexCoord2f(i/(GLfloat)n,2*(j+1)/(GLfloat)n);
          glVertex3f(ex,ey,ez);
 
          ex = cos(theta1) * cos(theta3);
@@ -612,7 +611,7 @@ void engine::drawSphereToList(int lats, int longs)
          ez = cos(theta1) * sin(theta3);
 
          glNormal3f(ex,ey,ez);
-         glTexCoord2f(i/(double)n,2*j/(double)n);
+         glTexCoord2f(i/(GLfloat)n,2*j/(GLfloat)n);
          glVertex3f(ex,ey,ez);
       }
       glEnd();
@@ -863,13 +862,13 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    bool andou = false;       // Character Walk ?
    bool passouTempo = false; // The time to actualize passes ?
    Uint32 tempo;             // Actual Time
-   double varX, varZ;        // to avoid double calculate
+   GLfloat varX, varZ;        // to avoid GLfloat calculate
 
-   double passo;     // How much the character walks, based on time
-   double rotacao;   // How much the character turns, based on time
-   double varCamera; // Camera Variation
-   double varTempo;  // Time Variation
-   float wx,wy,wz;
+   GLfloat passo;     // How much the character walks, based on time
+   GLfloat rotacao;   // How much the character turns, based on time
+   GLfloat varCamera; // Camera Variation
+   GLfloat varTempo;  // Time Variation
+   GLfloat wx,wy,wz;
 
    tempo = SDL_GetTicks();
    srand(tempo);
@@ -909,7 +908,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
 
       /* Calculate the real Modification on walk, rotate, turn, etc */
-      double vt = 1;//varTempo / ACTUALIZATION_RATE;
+      GLfloat vt = 1;//varTempo / ACTUALIZATION_RATE;
       passo = (vt)*ANDAR;
       if(passo > 9)
         passo = 9;  /* To avoid phantom efects when LAGs occurs */
@@ -1292,67 +1291,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          redesenha = true;
       }
 
-      /* Keys to Camera Moviments */
-      if(keys[SDLK_UP])  // Increases Zoom
-      {
-          if (d>ZOOMMAXIMO)
-          {
-             d-= varCamera;
-             redesenha = true;
-          }
-      }
-      if(keys[SDLK_DOWN]) // Decreases Zoom
-      {
-         if(d<ZOOMMINIMO)
-         {
-             d+= varCamera; 
-             redesenha = true;
-         }
-      }
-      if(keys[SDLK_RIGHT]) // Rotate Camera CounterClockWise
-      {
-          phi -= varCamera;  
-          redesenha = true;
-      }
-      if(keys[SDLK_LEFT]) // Rotate Camera ClockWise
-      {
-         phi += varCamera;
-         redesenha = true;
-      }
-      if(keys[SDLK_PAGEUP]) // Maximize Up Camera
-      {
-            theta += varCamera;
-            redesenha = true;
-            if(theta > 89) 
-               theta = 89;
-      }
-      if(keys[SDLK_PAGEDOWN]) // Minimize Up Camera
-      {
-         theta -= varCamera;
-         redesenha = true;
-         if(theta < 0)
-            theta = 0;
-      }
-      if (keys[SDLK_HOME]) // Maximize zoom
-      {
-         d = ZOOMMAXIMO;
-         redesenha = true;
-      }
-      if(keys[SDLK_END]) // Minimize zoom
-      {
-         d = ZOOMMINIMO;
-         redesenha = true;
-      }   
-      if(keys[SDLK_INSERT]) //Up view Max
-      {
-         theta = 89;
-         redesenha = true;
-      }
-      if(keys[SDLK_DELETE]) //Down view Max
-      {
-         theta = 0;
-         redesenha = true;
-      }
+      
 
       /* Keys to character's movimentation */
       if(keys[SDLK_q] || keys[SDLK_e])
@@ -1368,8 +1307,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
          if(canWalk(varX,varZ,0)) 
          {
-            centerX += varX;
-            centerZ += varZ;
+            gameCamera.centerX += varX;
+            gameCamera.centerZ += varZ;
             PCs->personagemAtivo->posicaoLadoX += varX;
             PCs->personagemAtivo->posicaoLadoZ += varZ;
             redesenha = true;
@@ -1380,7 +1319,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             if(varX < 0)
                passo *= -1;
-            centerX += passo;
+            gameCamera.centerX += passo;
             PCs->personagemAtivo->posicaoLadoX += passo;
             redesenha = true;
             andou = true;
@@ -1390,7 +1329,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             if(varZ < 0) 
                passo *= -1;
-            centerZ += passo;
+            gameCamera.centerZ += passo;
             PCs->personagemAtivo->posicaoLadoZ += passo;
             redesenha = true;
             andou = true;
@@ -1410,8 +1349,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
              PCs->personagemAtivo->posicaoLadoX += varX;
              PCs->personagemAtivo->posicaoLadoZ += varZ;
-             centerX += varX;
-             centerZ += varZ;
+             gameCamera.centerX += varX;
+             gameCamera.centerZ += varZ;
              redesenha = true;
              andou  = true;
          }
@@ -1422,7 +1361,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
               if(varX < 0 )
                  passo *= -1;
               PCs->personagemAtivo->posicaoLadoX += passo;
-              centerX += passo;
+              gameCamera.centerX += passo;
               redesenha = true;
               andou = true;
          }
@@ -1432,7 +1371,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
               if( varZ < 0 )
                  passo *= -1;
               PCs->personagemAtivo->posicaoLadoZ += passo;
-              centerZ += passo;
+              gameCamera.centerZ += passo;
               redesenha = true;
               andou = true;
          }
@@ -1476,26 +1415,21 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             if(PCs->personagemAtivo == PCs->primeiro)
                PCs->personagemAtivo = (personagem*)PCs->primeiro->proximo;
          }
-         centerX = PCs->personagemAtivo->posicaoLadoX;
-         centerZ = PCs->personagemAtivo->posicaoLadoZ;
+         gameCamera.centerX = PCs->personagemAtivo->posicaoLadoX;
+         gameCamera.centerZ = PCs->personagemAtivo->posicaoLadoZ;
          redesenha = true;
          SDL_Delay(100);
+      }
+
+      /* Camera Verification */
+      if(gameCamera.doIO(keys, Mbotao, x, y, varCamera ))
+      {
+         redesenha = true;
       }
       
       /* Mouse Verification */
 
-      /* Mouse to move Camera */
-      if(x == 0)  // Turn Clockwise
-      {
-         phi+=2; 
-         redesenha = true;  
       }
-      if(x == screen->w-1) // Turn CounterClockWise
-      {
-        phi-=2; 
-        redesenha = true;
-      }
-   }
    }
    else if(*forcaAtualizacao == 0)
    {
@@ -1605,10 +1539,7 @@ void engine::Draw()
    glLoadIdentity();
 
    /* Redefine camera position */
-   cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   cameraY = centerY + deltaY + (float) d * sin(deg2Rad(theta));
-   cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-   gluLookAt(cameraX,cameraY,cameraZ, centerX,centerY,centerZ,0,1,0);
+   gameCamera.lookAt();
 
    /* Sun Definition */
    gameSun->actualizeHourOfDay(hour);
@@ -1641,7 +1572,8 @@ void engine::Draw()
    glPushMatrix();
 
    /* Draws World, doing view frustum culling */
-   actualMap->draw(cameraX,cameraY,cameraZ,visibleMatrix);
+   actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
+                   gameCamera.getCameraZ(),visibleMatrix);
 
    /* Draw Playable Characters (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
@@ -2260,7 +2192,7 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
       
    /* Testa Meio-fio */
-   float altura_atual = PCs->personagemAtivo->posicaoLadoY;
+   GLfloat altura_atual = PCs->personagemAtivo->posicaoLadoY;
    if( ColisaoComMeioFio( min, max, actualMap->meiosFio) )
    {
       PCs->personagemAtivo->posicaoLadoY = MEIOFIOALTURA+0.1;
@@ -2301,7 +2233,7 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
  
    PCs->personagemAtivo->posicaoLadoY += res;
-   centerY = res+30;
+   gameCamera.centerY = res+30;
 
    if(result)
    {
