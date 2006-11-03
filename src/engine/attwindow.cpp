@@ -179,13 +179,13 @@ attWindow::attWindow(skills* sk, interface* inter)
    
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(181,248,251,265, 
+   buttonConfirm = window->objects->InserirBotao(181,248,251,267, 
                                 window->Cores.corBot.R,
                                 window->Cores.corBot.G,window->Cores.corBot.B,
                                 language.SKILL_CONFIRM.c_str(),1,NULL);
    
    /* Cancel Button */
-   buttonCancel = window->objects->InserirBotao(8,248,78,265, 
+   buttonCancel = window->objects->InserirBotao(8,248,78,267, 
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  language.SKILL_CANCEL.c_str(),1,NULL);

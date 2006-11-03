@@ -118,7 +118,7 @@ void criaMenus()
 
 void inserirObjsNPC()
 {
-   cxSelNPC = dialogos->objects->InserirCxSel(35,24,0);
+   cxSelNPC = dialogos->objects->insertCxSel(35,24,false);
    dialogos->objects->InserirQuadroTexto(47,23,77,36,0,"Se");
    botaoAttSeNPC = dialogos->objects->InserirBotao(67,21,137,37,Cores.corBot.R,
                              Cores.corBot.G,
@@ -172,7 +172,7 @@ void inserirObjsPC()
   dialogos->objects->InserirQuadroTexto(7,63,443,272,1,"PC:");
   for(i=0;i<5;i++)
   {
-   cxSelPC[5] = dialogos->objects->InserirCxSel(35,y+3,0);
+   cxSelPC[5] = dialogos->objects->insertCxSel(35, y+3, false);
    dialogos->objects->InserirQuadroTexto(47,y+2,77,y+15,0,"Se");
    botaoAttSePC[i] = dialogos->objects->InserirBotao(67,y,137,y+16,Cores.corBot.R,
                              Cores.corBot.G,

@@ -112,15 +112,15 @@ botao* Tlista::InserirBotao(int xa,int ya,int xb,int yb,int Ra,int Ga,
 }
 
 /* Insere uma nova cxSel na lista */
-cxSel* Tlista::InserirCxSel(int xa,int ya,int selecionada)
+cxSel* Tlista::insertCxSel(int xa,int ya, bool selected)
 {
    cxSel* novo;
    novo = new cxSel;
    novo->x = xa;
    novo->y = ya;
-   novo->selecionada = selecionada;
+   novo->selected = selected;
    novo->tipo = CXSEL;
-   novo->Cores.Iniciar();
+   novo->Colors.Iniciar();
    InserirObj(novo);
    return(novo);
 }

@@ -39,11 +39,11 @@ class Tlista{
                 int Ba,const char* text,int oval,
                 int (*proc)(void *jan,void *ljan,SDL_Surface *screen));
 
-      /* Insere uma nova cxSel  na lista
-       * xa,ya       -> coordenadas da caixa de selecao
-       * selecionada -> !=0 se selecionada
-       * lista       -> lista onde a cxSel sera inserida*/
-      cxSel* InserirCxSel(int xa,int ya,int selecionada);
+      /*! Insert a new cxSel on the List
+       * \param xa -> X coordinate
+       * \param ya -> Y coordinate
+       * \param selected -> if selected or not */
+      cxSel* insertCxSel(int xa, int ya, bool selecionada);
 
       /* Insere nova figura na lista de figuras
        * x,y     -> coordenada da figura

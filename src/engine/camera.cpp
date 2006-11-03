@@ -7,7 +7,7 @@
 camera::camera()
 {
    theta=25;
-   phi=0.1;
+   phi=0.05;
    d=150;
    centerX = centerZ = 0;
    centerY = 30;
@@ -104,12 +104,13 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
      modify = true;
    }
 
+   /* Middle Mouse Button Rotation Control */
    if(mBotao & SDL_BUTTON(2))
    {
       if(middleMouse)
       {
-         theta += (y - prevY);
-         phi += (prevX - x);
+         theta += (y - prevY) / 10.0;
+         phi += (prevX - x) / 10.0;  // X axis is inverted :~p
          modify = true;
       }
       else

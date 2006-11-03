@@ -163,7 +163,7 @@ void janela::Desenhar(int mouseX, int mouseY)
          }
          case CXSEL:{
               cxSel *cx = (cxSel*) obj;
-              cx->Desenhar(cara);
+              cx->draw(cara);
               break;
          }
          case SELTEXTO:{

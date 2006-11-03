@@ -327,8 +327,8 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if(foco == FOCO_CXSEL)
     {
        cxSel* cx = (cxSel*)objAtivo;
-       cx->selecionada = !cx->selecionada;
-       cx->Desenhar(ljan->janelaAtiva->cara);
+       cx->selected = !cx->selected;
+       cx->draw(ljan->janelaAtiva->cara);
        ljan->janelaAtiva->AtualizaCara();
        foco = FOCO_JOGO;
        *eventInfo = CXSELMODIFICADA;

@@ -10,20 +10,20 @@
 #include "objeto.h"
 #include "cores.h"
 
+/*! Selection Box Class */
 class cxSel: public Tobjeto
 {
    public:
-      int x,y;               /* Coordenadas na tela */
-      int selecionada;       /* != 0 se selecionada */
-      cores Cores;   
+      int x,                 /**< X Window Coordinate */
+          y;                 /**< Y Window Coordinate */
+      bool selected;         /**< True if selected, false otherwise  */
+      cores Colors;          /**< Colors of the object */
 
-      /* Desenha a CxSel na superficie
-       * cx -> cxSel a ser desenhada
-       * salvar -> != 0 se for para atualizar a superficie
-       * screen -> superficie na qual sera desenhada a cxSel*/
-      void Desenhar(SDL_Surface *screen);
+      /*! Draws the Selected Box
+       * \param screen -> surface */
+      void draw(SDL_Surface *screen);
 
-};                  /* CAIXA DE SELECAO */
+};
 
 #endif
 
