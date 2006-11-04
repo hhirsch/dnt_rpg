@@ -1676,6 +1676,11 @@ void engine::Draw()
       }
    }
 
+   if(walkStatus == ENGINE_WALK_MOUSE)
+   {
+      PCs->personagemAtivo->pathFind.drawPath();
+   }
+
    /* Draw Combat Mode Things */
    if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
        (fightStatus == FIGHT_PC_TURN))

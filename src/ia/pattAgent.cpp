@@ -260,3 +260,25 @@ void pattAgent::drawWayPoints()
    }
 }
 
+void pattAgent::drawWayPointsLinear()
+{
+   wayPoint* tmp = wayPoints;
+   int aux = 0;
+   if(tmp)
+   {
+      glDisable(GL_LIGHTING);
+      glLineWidth(3);
+      glBegin(GL_LINES);
+      while(aux < totalWayPoints)
+      {
+         glVertex3f(tmp->x, 0.1, tmp->z);
+         aux++;
+         tmp = tmp->next;
+      }
+      glEnd();
+      glLineWidth(1);
+      glEnable(GL_LIGHTING);
+   }
+}
+
+

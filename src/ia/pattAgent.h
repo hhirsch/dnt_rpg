@@ -36,6 +36,8 @@ class pattAgent: public agent
 
       /*! Draw Waypoints, conneting them */
       void drawWayPoints();
+      void drawWayPointsLinear();
+
 
       /*! Return the number of Way Points  */
       int getTotalWayPoints(){return(totalWayPoints);};

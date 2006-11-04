@@ -79,6 +79,8 @@ class aStar
 
       bool getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori);
 
+      void drawPath();
+
    private:
       Map* actualMap;         /**< Pointer to opened Map */
       GLfloat destinyX,       /**< Destiny X position */
