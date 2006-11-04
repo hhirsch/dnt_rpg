@@ -51,6 +51,7 @@ bool pattAgent::defineNextPosition()
    {
       //Arrived at the actual Way Point, so change to next!
       changeToNextWayPoint();
+      printf("Change to %.3f %.3f!\n", actualWayPoint->x, actualWayPoint->z);
       //calculate angle
       if(withOrientation)
       {
@@ -172,7 +173,7 @@ void pattAgent::addWayPointFirst(GLfloat x, GLfloat z)
    {
       newWay->previous = wayPoints->previous;
       newWay->previous->next = newWay;
-      newWay->next = wayPoints->next;
+      newWay->next = wayPoints;
       newWay->next->previous = newWay;
       wayPoints = newWay;
    }
@@ -204,15 +205,31 @@ void pattAgent::changeToNextWayPoint()
       if(fabs(dx) > fabs(dz))
       {
          loops = (int) (fabs(dx) / stepSize);
-         xInc = (float) (dx) / (float) (loops);
-         zInc = (float) (dz) / (float) (loops);
+         if(loops == 0)
+         {
+            xInc = 0;
+            zInc = 0;
+         }
+         else
+         {
+            xInc = (float) (dx) / (float) (loops);
+            zInc = (float) (dz) / (float) (loops);
+         }
          //sqrt( (dist*dist) - (xInc*xInc) );
       }
       else
       {
          loops = (int) (fabs(dz) / stepSize);
-         zInc = (float) (dz) / (float) (loops);
-         xInc = (float) (dx) / (float) (loops);
+         if(loops == 0)
+         {
+            xInc = 0;
+            zInc = 0;
+         }
+         else
+         {
+            zInc = (float) (dz) / (float) (loops);
+            xInc = (float) (dx) / (float) (loops);
+         }
          //sqrt( (dist*dist) - (zInc*zInc) );
       }
    }

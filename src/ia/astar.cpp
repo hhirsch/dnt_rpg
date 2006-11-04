@@ -1,16 +1,25 @@
 #include "astar.h"
+#include <math.h>
 
 /****************************************************************
  *                         Constructor                          *
  ****************************************************************/
-aStar::aStar(Map* map)
+aStar::aStar()
 {
-   actualMap = map;
+   actualMap = NULL;
    patt = new pattAgent(true);
    patt->defineDestiny(0, 0);
    patt->defineStepSize(0);
    patt->defineOrientation(0);
    patt->defineSight(0, 0);
+}
+
+/****************************************************************
+ *                         defineMap                            *
+ ****************************************************************/
+void aStar::defineMap(Map* map)
+{
+   actualMap = map;
 }
 
 /****************************************************************
@@ -29,6 +38,7 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
                      GLfloat stepSize, GLfloat orientation)
 {
    int aux, auz;
+   GLfloat posX, posZ;
    GLfloat newg;
    pointStar* node, *node2;
    listStar opened;
@@ -37,15 +47,15 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
    destinyZ = z;
 
    opened.insert(actualX, actualZ, 0, 
-                 (actualX-destinyX)*(actualX-destinyX) + 
-                 (actualZ-destinyZ)*(actualZ-destinyZ),
-                 NULL);
+                 sqrt((actualX-destinyX)*(actualX-destinyX) + 
+                 (actualZ-destinyZ)*(actualZ-destinyZ)), -1, -1);
 
    while(!opened.isEmpty())
    {
       node = opened.findLowest();
-      if( (node->x >= destinyX-1) && (node->x <= destinyX+1) && 
-          (node->z >= destinyZ-1) && (node->z <= destinyZ+1) )
+      
+      if( (node->x >= destinyX-stepSize) && (node->x <= destinyX+stepSize) && 
+          (node->z >= destinyZ-stepSize) && (node->z <= destinyZ+stepSize) )
       {
          delete(patt);
          patt = new pattAgent(true);
@@ -55,13 +65,17 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
          patt->defineSight(stepSize*2, 360);
 
          /* Make the Founded path */
+         printf("Found Path to %.3f %.3f!\n",destinyX, destinyZ);
          patt->addWayPointFirst(destinyX, destinyZ);
          
-         while(node->parent != NULL)
+         while( (node != NULL) )
          {
-            patt->addWayPointFirst(node->parent->x, node->parent->z);
-            node = node->parent;
+            patt->addWayPointFirst(node->x, node->z);
+            printf("Add: %.3f %.3f\n", node->x, node->z);
+            node = closed.find(node->parentX, node->parentZ);
          }
+         printf("definedPosition %.3f %.3f\n", actualX, actualZ);
+         patt->definePosition(actualX, actualZ);
          return(true);
       }
 
@@ -72,10 +86,13 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
          {
             if( (aux != 0) || (auz != 0))
             {
-               newg = node->gone + (aux*aux) + (auz*auz);
-               node2 = closed.find(node->x+aux, node->z+auz);
+               posX = node->x + (aux*stepSize);
+               posZ = node->z + (auz*stepSize);
+               newg = node->gone + sqrt(((aux*stepSize)*(aux*stepSize)) + 
+                                         (auz*stepSize)*(auz*stepSize));
+               node2 = closed.find(posX, posZ);
                
-               if( (opened.find(node->x+aux, node->z+auz)) ||
+               if( (opened.find(posX, posZ)) ||
                    (node2 != NULL) &&
                    (node->gone <= newg))
                {
@@ -87,20 +104,25 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
                   {
                      closed.remove(node2);
                   }
-                  opened.insert(node->x+aux, node->z+auz, newg, 
-                                (node->x+aux-destinyX)*(node->x+aux-destinyX) + 
-                                (node->z+auz-destinyZ)*(node->z+auz-destinyZ),
-                                node);
+                  if(!opened.find(posX, posZ))
+                  {
+                     opened.insert(posX, posZ, newg, 
+                                sqrt( (posX - destinyX) * (posX - destinyX) + 
+                                      (posZ - destinyZ) * (posZ - destinyZ)),
+                                   node->x, node->z);
+                  }
                }
                    
             }
          }
       }
 
-      closed.insert(node->x, node->z, node->gone, node->heuristic, node->parent);
+      closed.insert(node->x, node->z, node->gone, node->heuristic, 
+                    node->parentX, node->parentZ);
       opened.remove(node);
    }
    
+   printf("Not Found!\n");
    return(false);
 }
 
@@ -148,20 +170,21 @@ listStar::~listStar()
 /****************************************************************
  *                            insert                            *
  ****************************************************************/
-void listStar::insert(GLfloat x, GLfloat z, GLfloat gone, GLfloat heuristic,
-                      pointStar* parent)
+pointStar* listStar::insert(GLfloat x, GLfloat z, GLfloat gone, 
+                            GLfloat heuristic, GLfloat parentX, GLfloat parentZ)
 {
    if(find(x, z) != NULL)
    {
       //To no insert duplicate points
-      return;
+      return(NULL);
    }
    pointStar* newWay = new(pointStar);
    newWay->x = x;
    newWay->z = z;
    newWay->gone = gone;
    newWay->heuristic = heuristic;
-   newWay->parent = parent;
+   newWay->parentX = parentX;
+   newWay->parentZ = parentZ;
    if(first == NULL)
    {
       newWay->next = newWay;
@@ -177,6 +200,7 @@ void listStar::insert(GLfloat x, GLfloat z, GLfloat gone, GLfloat heuristic,
    }
 
    totalNodes++;
+   return(newWay);
 }
 
 /****************************************************************

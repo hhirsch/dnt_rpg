@@ -29,8 +29,11 @@
   #include "../net/client.h"
 #endif
 
-#define ENGINE_MODE_REAL_TIME 1    /**< Real Time Mode, not in battle */
+#define ENGINE_MODE_REAL_TIME   1  /**< Real Time Mode, not in battle */
 #define ENGINE_MODE_TURN_BATTLE 2  /**< Turn Mode, in battles */
+
+#define ENGINE_WALK_KEYS        1  /**< Engine Keyboard Walk Status */
+#define ENGINE_WALK_MOUSE       2  /**< Engine Mouse Walk Status */
 
 /*!
     The Engine Class is where all things are "merged" on game.
@@ -205,6 +208,8 @@ class engine
 
       Map* actualMap;              /**< Actual Engine Map */
       cursor* cursors;             /**< Utilized mouse cursors */
+
+      int walkStatus;              /**< Engine Walk Status */
  
       GLfloat visibleMatrix[6][4]; /**< Actual Frustum Matrix */
       GLuint skyList;              /**< Sky GL List */

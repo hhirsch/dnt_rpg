@@ -13,8 +13,7 @@
 #include "../gui/healthBar.h"
 #include "../classes/thing.h"
 #include "../classes/feats.h"
-//#include "habilidades.h"
-//#include "../etc/glm.h"
+#include "../ia/astar.h"
 #include <cal3d/cal3d.h>
 #include <string>
 using namespace std;
@@ -40,11 +39,11 @@ class personagem: public Tobjeto, public thing
 
       string nome;              /**< Character's name */
       string retratoConversa;   /**< Portrait talk file name */
-      float orientacao;         /**< Character's orientation (angle) */
-      float posicaoFrente;      /**< Character's front postion. FIXME Used?? */
-      float posicaoLadoX;       /**< Character's X Position */
-      float posicaoLadoY;       /**< Character's Y Position (UP) */
-      float posicaoLadoZ;       /**< Character's Z Position */
+      GLfloat orientacao;       /**< Character's orientation (angle) */
+      GLfloat posicaoFrente;    /**< Character's front postion. FIXME Used?? */
+      GLfloat posicaoLadoX;     /**< Character's X Position */
+      GLfloat posicaoLadoY;     /**< Character's Y Position (UP) */
+      GLfloat posicaoLadoZ;     /**< Character's Z Position */
 
       GLfloat min[3];           /**< Min points of static bounding box */
       GLfloat max[3];           /**< Max points of static bounding box */
@@ -59,6 +58,8 @@ class personagem: public Tobjeto, public thing
 
       GLuint portrait;          /**< Up screen portrait GL texture */
       healthBar* lifeBar;       /**< Character's Life Bar */
+
+      aStar pathFind;           /**< The A* pathFind to the character */
 
       // CAL3D related member variables
       CalCoreModel* m_calCoreModel;  /**< Cal3D Core Model of character */

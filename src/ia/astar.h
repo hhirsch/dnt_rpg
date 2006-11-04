@@ -13,7 +13,8 @@ class pointStar
               z;           /**< Way Point Z Coordinate */
       GLfloat heuristic;   /**< Calue of the heuristic to this point */
       GLfloat gone;        /**< How much percorred to this point */
-      pointStar* parent;   /**< Node parent to this one */
+      GLfloat parentX,     /**< Node parent X position */
+              parentZ;     /**< Node parent Z position */
       pointStar* next;     /**< Next Point */
       pointStar* previous; /**< Previous Point */
 };
@@ -31,10 +32,9 @@ class listStar
        * \param x -> x map position
        * \param z -> z map position
        * \param gone -> distance travelled
-       * \param heuristic -> heuristic to the goal 
-       * \param parent -> parent to the node */
-      void insert(GLfloat x, GLfloat z, GLfloat gone, GLfloat heuristic,
-                  pointStar* parent);
+       * \param heuristic -> heuristic to the goal */
+      pointStar*  insert(GLfloat x, GLfloat z, GLfloat gone, GLfloat heuristic,
+                         GLfloat parentX, GLfloat parentZ);
       /*! Remove Node from list 
        * \param node -> node to be removed */
       void remove(pointStar* node);
@@ -48,7 +48,7 @@ class listStar
       pointStar* findLowest();
       /*! Verify if the list is empty
        * \return true if empty, false otherwise */
-      bool isEmpty(){return(totalNodes > 0);};
+      bool isEmpty(){return(totalNodes <= 0);};
 
    private:
       pointStar* first;       /**< First Point in the list */
@@ -59,11 +59,14 @@ class listStar
 class aStar
 {
    public:
-      /*! Constructor
-       * \param map -> current opened map. */
-      aStar(Map* map);
+      /*! Constructor */
+      aStar();
       /*! Destructor */
       ~aStar();
+
+      /*! Define the actual opened map 
+       *  \param map -> current opened map. */
+      void defineMap(Map* map);
 
       /*! A* to find path
        * \param actualX -> current x position

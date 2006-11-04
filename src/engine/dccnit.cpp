@@ -31,6 +31,8 @@ engine::engine()
    shortCutsWindow = NULL;
    imgNumber = 0;
 
+   walkStatus = ENGINE_WALK_KEYS;
+
    /* Define Camera initial Position */
    /*theta=25;
    phi=0.1;
@@ -1296,6 +1298,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       /* Keys to character's movimentation */
       if(keys[SDLK_q] || keys[SDLK_e])
       {
+         walkStatus = ENGINE_WALK_KEYS;
           varX = passo * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
           varZ = passo * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
          // Left walk
@@ -1338,6 +1341,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
       else if(keys[SDLK_w] || keys[SDLK_s])
       { 
+         walkStatus = ENGINE_WALK_KEYS;
          varX = passo * sin(deg2Rad(PCs->personagemAtivo->orientacao));
          varZ = passo * cos(deg2Rad(PCs->personagemAtivo->orientacao));
          if(keys[SDLK_w]) 
@@ -1380,6 +1384,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
       if( (keys[SDLK_a]) || (keys[SDLK_d]))
       {
+         walkStatus = ENGINE_WALK_KEYS;
          // CounterClockWise Character turn
          if((keys[SDLK_a]) && (canWalk(0,0,rotacao)) )  
          {
@@ -1403,6 +1408,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
       if(keys[SDLK_TAB]) //Activate Character
       {
+         walkStatus = ENGINE_WALK_KEYS;
          if(keys[SDLK_LCTRL]) //Previous Character
          {
             PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->anterior;
@@ -1428,8 +1434,34 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
       
       /* Mouse Verification */
+      if(Mbotao & SDL_BUTTON(3))
+      {
+         walkStatus = ENGINE_WALK_MOUSE;
+         PCs->personagemAtivo->pathFind.defineMap(actualMap);
+         PCs->personagemAtivo->pathFind.findPath(
+                                              PCs->personagemAtivo->posicaoLadoX,
+                                              PCs->personagemAtivo->posicaoLadoZ,
+                                              xReal, zReal, ANDAR, 
+                                              PCs->personagemAtivo->orientacao);
+      }
+
+      if(walkStatus == ENGINE_WALK_MOUSE)
+      {
+            if(! PCs->personagemAtivo->pathFind.getNewPosition(
+                                              PCs->personagemAtivo->posicaoLadoX,
+                                              PCs->personagemAtivo->posicaoLadoZ,
+                                              PCs->personagemAtivo->orientacao))
+            {
+               walkStatus = ENGINE_WALK_KEYS;
+            }
+            gameCamera.centerX = PCs->personagemAtivo->posicaoLadoX;
+            gameCamera.centerZ = PCs->personagemAtivo->posicaoLadoZ;
+            redesenha = true;
+            andou = true;
+      }
 
       }
+
    }
    else if(*forcaAtualizacao == 0)
    {
