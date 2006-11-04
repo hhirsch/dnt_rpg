@@ -155,6 +155,35 @@ void pattAgent::addWayPoint(GLfloat x, GLfloat z)
 }
 
 /********************************************************************
+ *                        addWayPointFirst                          *
+ ********************************************************************/
+void pattAgent::addWayPointFirst(GLfloat x, GLfloat z)
+{
+   wayPoint* newWay = new(wayPoint);
+   newWay->x = x;
+   newWay->z = z;
+   if(wayPoints == NULL)
+   {
+      newWay->next = newWay;
+      newWay->previous = newWay;
+      wayPoints = newWay;
+   }
+   else
+   {
+      newWay->previous = wayPoints->previous;
+      newWay->previous->next = newWay;
+      newWay->next = wayPoints->next;
+      newWay->next->previous = newWay;
+      wayPoints = newWay;
+   }
+
+   totalWayPoints++;
+   
+   actualWayPoint = newWay;
+}
+
+
+/********************************************************************
  *                       changeTONextWayPoint                       *
  ********************************************************************/
 void pattAgent::changeToNextWayPoint()

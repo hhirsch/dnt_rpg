@@ -63,6 +63,8 @@ class agent
        * \param sightAng -> sight Angle */
       void getSight(GLfloat& sightDist, GLfloat& sightAng);
 
+      void defineOrientation(GLfloat ori){orientation = ori;};
+
       void addObstacle(GLfloat x, GLfloat z, GLfloat x1, GLfloat z1,
                        GLfloat x2, GLfloat z2);
 
