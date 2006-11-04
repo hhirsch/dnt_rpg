@@ -51,7 +51,7 @@ bool pattAgent::defineNextPosition()
    {
       //Arrived at the actual Way Point, so change to next!
       changeToNextWayPoint();
-      printf("Change to %.3f %.3f!\n", actualWayPoint->x, actualWayPoint->z);
+      
       //calculate angle
       if(withOrientation)
       {
@@ -60,7 +60,7 @@ bool pattAgent::defineNextPosition()
          ax = fabs(actualX - actualWayPoint->x);
          az = fabs(actualZ - actualWayPoint->z);
          GLfloat alpha;
-         if( (az != 0) )
+         if( (ax != 0) )
          {
             alpha = ( (atan(fabs(az / ax)) / M_PI) * 180);
             if( (actualX > actualWayPoint->x) && (actualZ < actualWayPoint->z) )
@@ -75,7 +75,22 @@ bool pattAgent::defineNextPosition()
             {
                alpha = 180-alpha;
             }
+
+            if(az == 0)
+            {
+               if(actualX < actualWayPoint->x)
+               {
+                  alpha = 0;
+               }
+               else
+               {
+                  alpha = 180;
+               }
+            }
+
+
             desiredAngle = alpha-90; /* -90 to correct model orientation*/
+            
             if(doAngle())
             {
                return(true);
@@ -84,13 +99,13 @@ bool pattAgent::defineNextPosition()
          else
          {
             //alpha = 0 or 180;
-            if(actualX < actualWayPoint->x)
+            if(actualZ < actualWayPoint->z)
             {
-               desiredAngle = 0;
+               desiredAngle = 180;
             }
             else
             {
-               desiredAngle = 180;
+               desiredAngle = 0;
             }
             if(doAngle())
             {
