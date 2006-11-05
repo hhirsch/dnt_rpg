@@ -39,7 +39,7 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
 {
    int i;
    GLfloat posX=0, posZ=0;
-   GLfloat newg;
+   GLfloat newg=0;
    pointStar* node, *node2;
    listStar opened;
    listStar closed;
@@ -59,14 +59,16 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
       {
          delete(patt);
          patt = new pattAgent(true);
-         patt->defineDestiny(destinyX, destinyZ);
+         patt->defineDestiny(node->x, node->z);
          patt->defineStepSize(stepSize);
          patt->defineOrientation(orientation);
          patt->defineSight(stepSize*5, 360);
+         destinyX = node->x;
+         destinyZ = node->z;
 
          /* Make the Founded path */
-         printf("Found Path to %.3f %.3f!\n",destinyX, destinyZ);
-         patt->addWayPointFirst(destinyX, destinyZ);
+         printf("Found Path to %.3f %.3f!\n",node->x, node->z);
+         //patt->addWayPointFirst(destinyX, destinyZ);
          
          while( (node != NULL) )
          {
@@ -86,52 +88,58 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
            case 1:
               posX = node->x;
               posZ = node->z - stepSize*5;
+              newg = node->gone + 10;
            break;
            case 2:
               posX = node->x + stepSize*5;
               posZ = node->z - stepSize*5;
+              newg = node->gone + 14;
            break;
            case 3:
               posX = node->x + stepSize*5;
               posZ = node->z;
+              newg = node->gone + 10;
            break;
            case 4:
               posX = node->x + stepSize*5;
               posZ = node->z + stepSize*5;
+              newg = node->gone + 14;
            break;
            case 5:
               posX = node->x;
               posZ = node->z + stepSize*5;
+              newg = node->gone + 10; 
            break;
            case 6:
               posX = node->x - stepSize*5;
               posZ = node->z + stepSize*5;
+              newg = node->gone + 14;
            break;
            case 7:
               posX = node->x - stepSize*5;
               posZ = node->z;
+              newg = node->gone + 10;
            break;
            case 8:
               posX = node->x - stepSize*5;
               posZ = node->z - stepSize*5;
+              newg = node->gone + 14;
            break;
         }
        
-        newg = node->gone + 1;
+        //newg = node->gone + 1;
+        
         node2 = closed.find(posX, posZ);
              
-        if( (opened.find(posX, posZ)) ||
+        /*if( (opened.find(posX, posZ)) ||
             (node2 != NULL) &&
-            (node->gone <= newg))
+            (node->gone <= newg))*/
+        if( (node2 != NULL) || (opened.find(posX, posZ)))
         {
            continue;
         }
         else
         {
-           if(node2)
-           {
-               closed.remove(node2);
-           }
            opened.insert(posX, posZ, newg, 
                          sqrt((posX - destinyX) * (posX - destinyX) + 
                          (posZ - destinyZ) * (posZ - destinyZ)),
