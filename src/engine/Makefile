@@ -23,7 +23,7 @@ OBJSSOUND = $(ENDSOUND)sound.o
 OBJSLANG = $(ENDLANG)lang.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
-OBJS = attwindow.o camera.o conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o skillwindow.o sun.o teste.o util.o
+OBJS = attwindow.o camera.o collision.o conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o skillwindow.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
@@ -44,6 +44,12 @@ conversa.o: conversa.cpp conversa.h
 	@printf "Making conversa.o... "
 	@$(CC) $(CFLAGS) conversa.cpp -o conversa.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
+
+collision.o: collision.cpp collision.h
+	@printf "Making collision.o... "
+	@$(CC) $(CFLAGS) collision.cpp -o collision.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 
 culling.o: culling.cpp culling.h
 	@printf "Making culling.o... "

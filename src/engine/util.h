@@ -15,6 +15,15 @@
 #include "../gui/farso.h"
 
 /********************************************************************
+ *                           Engine's Constants                     *
+ ********************************************************************/
+
+#define ENGINE_MODE_REAL_TIME   1  /**< Real Time Mode, not in battle */
+#define ENGINE_MODE_TURN_BATTLE 2  /**< Turn Mode, in battles */
+
+#define ENGINE_WALK_KEYS        1  /**< Engine Keyboard Walk Status */
+#define ENGINE_WALK_MOUSE       2  /**< Engine Mouse Walk Status */
+/********************************************************************
  *                Character's moviments constants                   *
  ********************************************************************/
 #define ANDAR  0.75    /**< The distance that normal character walks */

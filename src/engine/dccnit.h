@@ -16,6 +16,8 @@
 #include "skillwindow.h"
 #include "attwindow.h"
 #include "camera.h"
+#include "util.h"
+#include "collision.h"
 #include "../classes/skills.h"
 #include "../classes/feats.h"
 #include "../sound/sound.h"
@@ -28,12 +30,6 @@
 #ifdef REDE
   #include "../net/client.h"
 #endif
-
-#define ENGINE_MODE_REAL_TIME   1  /**< Real Time Mode, not in battle */
-#define ENGINE_MODE_TURN_BATTLE 2  /**< Turn Mode, in battles */
-
-#define ENGINE_WALK_KEYS        1  /**< Engine Keyboard Walk Status */
-#define ENGINE_WALK_MOUSE       2  /**< Engine Mouse Walk Status */
 
 /*!
     The Engine Class is where all things are "merged" on game.
@@ -176,9 +172,9 @@ class engine
        * \param varX -> Variation on X position
        * \param varZ -> Variation on Z position
        * \param varAlpha -> Variation on angle
-       * \return 1 if can walk to new position
+       * \return true if can walk to new position
        ***************************************************************/
-      int canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
+      bool canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
       /*!
        ************************************************************** 
@@ -210,6 +206,8 @@ class engine
       cursor* cursors;             /**< Utilized mouse cursors */
 
       int walkStatus;              /**< Engine Walk Status */
+
+      collision colisionDetect;    /**< The collision detect Module */
  
       GLfloat visibleMatrix[6][4]; /**< Actual Frustum Matrix */
       GLuint skyList;              /**< Sky GL List */

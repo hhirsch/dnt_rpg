@@ -1827,113 +1827,20 @@ void engine::Draw()
 /******************************************/
 
 /*********************************************************************
- *          Faz o teste se o Quadrado quad é factivel de ser         *
- *                    ocupado pelo personagem                        *
+ *                              canWalk                              *
  *********************************************************************/
-int testa(GLfloat min[3], GLfloat max[3],Square* quad)
+bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 {
-   int result = 0;
-   GLfloat min2[3];
-   GLfloat max2[3];
-
-   Square* proxima = quad;
-   if(proxima->flags & PISAVEL)
-   {
-     result = 1;
-   }
-   if(result) // Se possivel entrar, testa com Muros
-   {
-      int mur = 0;
-      while((mur < MAXMUROS ) && (proxima->muros[mur] != NULL))
-      {
-         min2[0] = proxima->muros[mur]->x1; 
-         min2[1] = 0; 
-         min2[2] = proxima->muros[mur]->z1;
-         max2[0] = proxima->muros[mur]->x2; 
-         max2[1] = MUROALTURA; 
-         max2[2] = proxima->muros[mur]->z2;
-         result &= !estaDentro(min,max,min2,max2,1);
-         if(!result)
-           return(0);
-         mur++;
-      }
-   }
-   if(result) // Se eh possivel entrar, testa com os objects
-   {
-      int ob = 0;
-      //GLfloat u1,u2,v1,v2;
-      GLMmodel* modelo3d;
-      GLfloat X[4], Z[4];
-      while( (proxima->objects[ob] != NULL)) 
-      {
-        if(!proxima->pisavelObj[ob])
-        {
-          modelo3d = (GLMmodel*)proxima->objects[ob]->modelo3d;
-          X[0] = modelo3d->x1;
-          Z[0] = modelo3d->z1;
-          X[1] = modelo3d->x1;
-          Z[1] = modelo3d->z2;
-          X[2] = modelo3d->x2;
-          Z[2] = modelo3d->z2;
-          X[3] = modelo3d->x2;
-          Z[3] = modelo3d->z1;
-/* TODO +Yobjects */
-          rotTransBoundingBox(proxima->objectsOrientation[ob], X, Z,
-                              proxima->Xobjects[ob], modelo3d->y1, 
-                              modelo3d->y2,proxima->Zobjects[ob], 
-                              min2, max2);
-
-          result &= !estaDentro(min,max,min2,max2,1);
-          if(!result) //se ja achou que nao pode, cai fora
-             return(0);
-        }
-        ob++;
-      }
-   }
-
-   return(result);
-}
-
-/*********************************************************************
- *                   Verifica Colisao com MeioFio                    *
- *********************************************************************/
-int ColisaoComMeioFio(GLfloat min[3],GLfloat max[3], muro* meiosFio)
-{
-    GLfloat min2[3];
-    GLfloat max2[3];
-    muro* maux = meiosFio;
-    while(maux)
-    {
-       min2[0] = maux->x1;
-       max2[0] = maux->x2;
-       min2[1] = 0;
-       max2[1] = MEIOFIOALTURA;
-       min2[2] = maux->z1;
-       max2[2] = maux->z2;
-       if( (estaDentro(min, max, min2, max2, 1)) )
-          return(1);
-       maux = maux->proximo;
-    }
-    return(0);
-}
-
-/*********************************************************************
- *                   Verifica se nao ha Colisao                      *
- *********************************************************************/
-int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
-{
-   int result = 1;
-   Square* saux;
+   bool result = true;
    GLfloat dist = 0;
-
-   GLfloat min[3],min2[3];
-   GLfloat max[3],max2[3];
-
+   GLfloat varHeight = 0;
+   GLfloat nx, nz;
+   
    if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
        (fightStatus != FIGHT_PC_TURN))
    {
        /* In turn mode, and not character's turn. */
-       return(0);
+       return(false);
    }
    else
    if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
@@ -1942,7 +1849,7 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       if(!canMove)
       {
          /* Already Moved */
-         return(0);
+         return(false);
       }
       //verify distance to the orign point
       dist = sqrt( (PCs->personagemAtivo->posicaoLadoX + varX - moveCircleX) *
@@ -1952,328 +1859,59 @@ int engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       if( ( (canAttack) && (dist > 2*WALK_PER_MOVE_ACTION)) || 
             (!canAttack) && (dist > WALK_PER_MOVE_ACTION))
       {
-         return(0);
+         return(false);
       }
    }
 
 
-   GLfloat x[4],z[4];
-
-   x[0] = PCs->personagemAtivo->min[0];
-   z[0] = PCs->personagemAtivo->min[2];
-
-   x[1] = PCs->personagemAtivo->min[0];
-   z[1] = PCs->personagemAtivo->max[2]; 
-
-   x[2] = PCs->personagemAtivo->max[0];
-   z[2] = PCs->personagemAtivo->max[2];
-
-   x[3] = PCs->personagemAtivo->max[0];
-   z[3] = PCs->personagemAtivo->min[2];
-
-   /* Rotaciona e translada o Bounding Box */
-   rotTransBoundingBox(PCs->personagemAtivo->orientacao+varAlpha, x, z,
-                       PCs->personagemAtivo->posicaoLadoX+varX, 
-                       PCs->personagemAtivo->min[1] + 
-                         PCs->personagemAtivo->posicaoLadoY, 
-                       PCs->personagemAtivo->max[1] + 
-                         PCs->personagemAtivo->posicaoLadoY,
-                       PCs->personagemAtivo->posicaoLadoZ+varZ,
-                       min, max );
-
-   /* Testa limites do Mapa */
-   if( (min[0]<2) || (min[2]<2) || 
-       (max[0]>actualMap->x*SQUARESIZE-2) || (max[2]>actualMap->z*SQUARESIZE-2))
-   {
-      return(0);
-   }
-
-   /* Testa Portas */
-   door* porta = actualMap->portas;
-   while( porta != NULL )
-   {
-      GLfloat minObj[3], maxObj[3];
-      GLMmodel* modeloPorta = (GLMmodel*) porta->object->modelo3d;
-      GLfloat XA[4]; GLfloat ZA[4];
-      XA[0] = modeloPorta->x1;
-      ZA[0] = modeloPorta->z1;
-
-      XA[1] = modeloPorta->x1;
-      ZA[1] = modeloPorta->z2; 
-
-      XA[2] = modeloPorta->x2;
-      ZA[2] = modeloPorta->z2;
-
-      XA[3] = modeloPorta->x2;
-      ZA[3] = modeloPorta->z1;
-      rotTransBoundingBox(porta->orientacao, XA, ZA,
-                          porta->x, 0.0,0.0,porta->z, 
-                          minObj, maxObj);
-      if(estaDentro( min, max, minObj, maxObj, 1))
-      {
-         return(0);
-      }
-      porta = porta->proximo;
-   }
-
-   /* Testa o Atual, ja que eh GRANDE! */
-   min2[0] = PCs->personagemAtivo->ocupaQuad->x1;
-   min2[1] = 0;
-   min2[2] = PCs->personagemAtivo->ocupaQuad->z1;
-   max2[0] = PCs->personagemAtivo->ocupaQuad->x2;
-   max2[1] = 400;
-   max2[2] = PCs->personagemAtivo->ocupaQuad->z2;
-   if(estaDentro(min,max,min2,max2,1))
-   {
-      result &= testa(min,max,PCs->personagemAtivo->ocupaQuad);
-      if(!result)
-      {
-         //printf("sai na atual\n"); 
-         return(0);
-      }
-   }
-
- 
-   /* Testa quadrados a direita */
-   saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
-                             PCs->personagemAtivo->ocupaQuad->posZ);
-   if(saux) 
-   { 
-      /* leste */
-      min2[0] = saux->x1;
-      min2[2] = saux->z1;
-      max2[0] = saux->x2;
-      max2[2] = saux->z2;
-      if(estaDentro(min,max,min2,max2,1) )
-      {
-         result &= testa(min,max,saux);
-         if(!result)
-         {
-            //printf("sai na direita\n"); 
-            return(0);
-         }
-      }
-      /* Nordeste */
-      saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
-                             PCs->personagemAtivo->ocupaQuad->posZ-1);
-      if( saux )
-      {
-         min2[0] = saux->x1;
-         min2[2] = saux->z1;
-         max2[0] = saux->x2;
-         max2[2] = saux->z2;
-         if(estaDentro(min,max,min2,max2,1) )
-         {
-            result &= testa(min,max,saux);
-            if(!result) 
-            {
-               //printf("sai na direita->cima\n"); 
-               return(0);
-            }
-         }
-      }
-      /* Sudeste */
-      saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX+1,
-                             PCs->personagemAtivo->ocupaQuad->posZ+1);
-      if( saux )
-      {
-         min2[0] = saux->x1;
-         min2[2] = saux->z1;
-         max2[0] = saux->x2;
-         max2[2] = saux->z2;
-         if(estaDentro(min,max,min2,max2,1))
-         {
-            result &= testa(min,max,saux);
-            if(!result) 
-            {
-               //printf("sai na direita->baixo\n"); 
-               return(0);
-            }
-         }
-      }
-   }
-
-   /* Testa quadrados a esquerda */
-   saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
-                             PCs->personagemAtivo->ocupaQuad->posZ);
-   if( saux ) 
-   { 
-      /* oeste */
-      min2[0] = saux->x1;
-      min2[2] = saux->z1;
-      max2[0] = saux->x2;
-      max2[2] = saux->z2;
-      if(estaDentro(min,max,min2,max2,1))
-      {
-         result &= testa(min,max,saux);
-         if(!result) 
-         {
-            //printf("sai na esquerda\n"); 
-            return(0);
-         }
-      }
-
-      /* Noroeste */
-      saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
-                             PCs->personagemAtivo->ocupaQuad->posZ-1);
-      if( saux )
-      {
-         min2[0] = saux->x1;
-         min2[2] = saux->z1;
-         max2[0] = saux->x2;
-         max2[2] = saux->z2;
-         if(estaDentro(min,max,min2,max2,1) )
-         {
-            result &= testa(min,max,saux);
-            if(!result) 
-            {
-               //printf("sai na esquerda->cima\n"); 
-               return(0);
-            }
-         }
-      }
-      /* Sudoeste */
-      saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX-1,
-                             PCs->personagemAtivo->ocupaQuad->posZ+1);
-      if( saux )
-      { 
-         min2[0] = saux->x1;
-         min2[2] = saux->z1;
-         max2[0] = saux->x2;
-         max2[2] = saux->z2;
-         if(estaDentro(min,max,min2,max2,1))
-         {
-            result &=testa(min,max,saux);
-            if(!result) 
-            {
-                //printf("sai na esquerda->baixo\n"); 
-               return(0);
-            }
-         }
-      }
-   }
-  
-   /* Testa quadrados abaixo */
-   saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX,
-                             PCs->personagemAtivo->ocupaQuad->posZ+1);
-   if( saux ) 
-   {   
-      min2[0] = saux->x1;
-      min2[2] = saux->z1;
-      max2[0] = saux->x2;
-      max2[2] = saux->z2;
-      if(estaDentro(min,max,min2,max2,1) )
-      { 
-         /* sul */
-         result &= testa(min,max,saux);
-         if(!result) 
-         {
-            //printf("sai no de baixo\n"); 
-            return(0);
-         }
-      }
-   }
-
-   /* Testa quadrados acima */
-   saux = actualMap->quadradoRelativo(PCs->personagemAtivo->ocupaQuad->posX,
-                             PCs->personagemAtivo->ocupaQuad->posZ-1);
-   if( saux )
-   {  
-      min2[0] = saux->x1;
-      min2[2] = saux->z1;
-      max2[0] = saux->x2;
-      max2[2] = saux->z2;
-      if(estaDentro(min,max,min2,max2,1) )
-      { 
-         /* norte */
-         result &= testa(min,max,saux);
-         if(!result) 
-         {
-            //printf("sai no de cima\n"); 
-            return(0);
-         }
-      }
-   }
-
-   /* Testa colisao com npcs */
-   if(NPCs)
-   {
-      personagem* pers = (personagem*) NPCs->primeiro->proximo;
-      while( (pers != NPCs->primeiro) )
-      {
-         x[0] = pers->min[0];
-         z[0] = pers->min[2];
-
-         x[1] = pers->min[0];
-         z[1] = pers->max[2]; 
-
-         x[2] = pers->max[0];
-         z[2] = pers->max[2];
- 
-         x[3] = pers->max[0];
-         z[3] = pers->min[2];
-
-         /* Rotaciona e translada o Bounding Box */
-         rotTransBoundingBox(pers->orientacao, x, z,
-                          pers->posicaoLadoX, 
-                          0.0, 0.0, 
-                          pers->posicaoLadoZ, min2, max2 );
-
-         if(estaDentro( min, max, min2, max2, 1))
-         {
-            return(0);
-         }
-    
-         pers = (personagem*) pers->proximo;
-      }
-   }
-      
-   /* Testa Meio-fio */
-   GLfloat altura_atual = PCs->personagemAtivo->posicaoLadoY;
-   if( ColisaoComMeioFio( min, max, actualMap->meiosFio) )
-   {
-      PCs->personagemAtivo->posicaoLadoY = MEIOFIOALTURA+0.1;
-   }
-   else
-   {
-      PCs->personagemAtivo->posicaoLadoY = 0.0;
-   }
-   
-   GLfloat nx = ((min[0] + max[0]) / 2);//(PCs->personagemAtivo->posicaoLadoX+varX);
-   GLfloat nz = ((min[2] + max[2]) / 2);//(PCs->personagemAtivo->posicaoLadoZ+varZ);
-
-   int posX =(int)floor( nx / (SQUARESIZE));
-
-   int posZ =(int)floor( nz / (SQUARESIZE));
-
-   PCs->personagemAtivo->ocupaQuad = actualMap->quadradoRelativo(posX,posZ);
-
-   saux = actualMap->quadradoRelativo( (int)(nx/SQUARESIZE),
-                                  (int)(nz/SQUARESIZE));
-
-   GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
-   GLfloat dz1 = fabs(nz - saux->z1) / SQUARESIZE;
-   GLfloat dx2 = fabs(nx - saux->x2) / SQUARESIZE;
-   GLfloat dz2 = fabs(nz - saux->z2) / SQUARESIZE;
-
-   GLfloat ha = (dx2 * PCs->personagemAtivo->ocupaQuad->h1) + 
-                (dx1 * PCs->personagemAtivo->ocupaQuad->h4);
-   GLfloat hb = (dx2 * PCs->personagemAtivo->ocupaQuad->h2) + 
-                (dx1 * PCs->personagemAtivo->ocupaQuad->h3);
-
-   GLfloat res = (ha * dz2) + (hb * dz1);
-
-   if( res - altura_atual > ANDAR)
-   {
-       PCs->personagemAtivo->posicaoLadoY = altura_atual;
-       return(0);
-   }
- 
-   PCs->personagemAtivo->posicaoLadoY += res;
-   gameCamera.centerY = res+30;
+   colisionDetect.defineMap(actualMap);
+   result = colisionDetect.canWalk(PCs->personagemAtivo->posicaoLadoX + varX,
+                          PCs->personagemAtivo->posicaoLadoY,
+                          PCs->personagemAtivo->posicaoLadoZ + varZ,
+                          PCs->personagemAtivo->min[0],
+                          PCs->personagemAtivo->min[1],
+                          PCs->personagemAtivo->min[2],
+                          PCs->personagemAtivo->max[0],
+                          PCs->personagemAtivo->max[1],
+                          PCs->personagemAtivo->max[2],
+                          PCs->personagemAtivo->orientacao + varAlpha, 
+                          PCs->personagemAtivo->ocupaQuad, NPCs, varHeight,
+                          nx, nz);
 
    if(result)
    {
+      GLfloat altura_atual = PCs->personagemAtivo->posicaoLadoY;
+
+      int posX =(int)floor( nx / (SQUARESIZE));
+   
+      int posZ =(int)floor( nz / (SQUARESIZE));
+
+      PCs->personagemAtivo->ocupaQuad = actualMap->quadradoRelativo(posX,posZ);
+
+      Square* saux = actualMap->quadradoRelativo( (int)(nx/SQUARESIZE),
+                                          (int)(nz/SQUARESIZE));
+
+      GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
+      GLfloat dz1 = fabs(nz - saux->z1) / SQUARESIZE;
+      GLfloat dx2 = fabs(nx - saux->x2) / SQUARESIZE;
+      GLfloat dz2 = fabs(nz - saux->z2) / SQUARESIZE;
+
+      GLfloat ha = (dx2 * PCs->personagemAtivo->ocupaQuad->h1) + 
+                   (dx1 * PCs->personagemAtivo->ocupaQuad->h4);
+      GLfloat hb = (dx2 * PCs->personagemAtivo->ocupaQuad->h2) + 
+                   (dx1 * PCs->personagemAtivo->ocupaQuad->h3);
+
+      GLfloat res = (ha * dz2) + (hb * dz1);
+
+      if( res - altura_atual > ANDAR)
+      {
+          PCs->personagemAtivo->posicaoLadoY = altura_atual;
+          return(false);
+      }
+ 
+      PCs->personagemAtivo->posicaoLadoY = res + varHeight;
+      gameCamera.centerY = res+30;
+
       if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
          (fightStatus == FIGHT_PC_TURN))
       {
