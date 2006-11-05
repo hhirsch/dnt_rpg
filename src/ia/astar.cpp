@@ -88,46 +88,46 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
            case 1:
               posX = node->x;
               posZ = node->z - stepSize*5;
-              newg = node->gone + 10;
+              //newg = node->gone + 10;
            break;
            case 2:
               posX = node->x + stepSize*5;
               posZ = node->z - stepSize*5;
-              newg = node->gone + 14;
+              //newg = node->gone + 14;
            break;
            case 3:
               posX = node->x + stepSize*5;
               posZ = node->z;
-              newg = node->gone + 10;
+              //newg = node->gone + 10;
            break;
            case 4:
               posX = node->x + stepSize*5;
               posZ = node->z + stepSize*5;
-              newg = node->gone + 14;
+              //newg = node->gone + 14;
            break;
            case 5:
               posX = node->x;
               posZ = node->z + stepSize*5;
-              newg = node->gone + 10; 
+              //newg = node->gone + 10; 
            break;
            case 6:
               posX = node->x - stepSize*5;
               posZ = node->z + stepSize*5;
-              newg = node->gone + 14;
+              //newg = node->gone + 14;
            break;
            case 7:
               posX = node->x - stepSize*5;
               posZ = node->z;
-              newg = node->gone + 10;
+              //newg = node->gone + 10;
            break;
            case 8:
               posX = node->x - stepSize*5;
               posZ = node->z - stepSize*5;
-              newg = node->gone + 14;
+              //newg = node->gone + 14;
            break;
         }
        
-        //newg = node->gone + 1;
+        newg = node->gone + 1;
         
         node2 = closed.find(posX, posZ);
              
