@@ -1,5 +1,8 @@
 #include "astar.h"
+#include "../engine/collision.h"
 #include <math.h>
+
+#define SEARCH_LIMIT 100
 
 /****************************************************************
  *                         Constructor                          *
@@ -35,9 +38,13 @@ aStar::~aStar()
  *                       defineDestiny                          *
  ****************************************************************/
 bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
-                     GLfloat stepSize, GLfloat orientation)
+                     GLfloat stepSize, GLfloat orientation,
+                     GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
+                     GLfloat perX2, GLfloat perY2, GLfloat perZ2)
 {
    int i;
+   GLfloat varHeight = 0, nx = 0, nz = 0;
+   Square* perQuad = NULL;
    GLfloat posX=0, posZ=0;
    GLfloat newg=0;
    pointStar* node, *node2;
@@ -45,14 +52,21 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
    listStar closed;
    destinyX = x;
    destinyZ = z;
+   collision collisionDetect;
+   collisionDetect.defineMap(actualMap);
 
    opened.insert(actualX, actualZ, 0, 
                  sqrt((actualX-destinyX)*(actualX-destinyX) + 
                  (actualZ-destinyZ)*(actualZ-destinyZ)), -1, -1);
 
-   while(!opened.isEmpty())
+   while((!opened.isEmpty()) && (closed.size() <= SEARCH_LIMIT))
    {
       node = opened.findLowest();
+
+      if(!node)
+      {
+         return(false);
+      }
       
       if( (node->x>=destinyX-(stepSize*5))&&(node->x<=destinyX+(stepSize*5)) && 
           (node->z>=destinyZ-(stepSize*5))&&(node->z<=destinyZ+(stepSize*5)) )
@@ -88,55 +102,59 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
            case 1:
               posX = node->x;
               posZ = node->z - stepSize*5;
-              //newg = node->gone + 10;
            break;
            case 2:
               posX = node->x + stepSize*5;
               posZ = node->z - stepSize*5;
-              //newg = node->gone + 14;
            break;
            case 3:
               posX = node->x + stepSize*5;
               posZ = node->z;
-              //newg = node->gone + 10;
            break;
            case 4:
               posX = node->x + stepSize*5;
               posZ = node->z + stepSize*5;
-              //newg = node->gone + 14;
            break;
            case 5:
               posX = node->x;
               posZ = node->z + stepSize*5;
-              //newg = node->gone + 10; 
            break;
            case 6:
               posX = node->x - stepSize*5;
               posZ = node->z + stepSize*5;
-              //newg = node->gone + 14;
            break;
            case 7:
               posX = node->x - stepSize*5;
               posZ = node->z;
-              //newg = node->gone + 10;
            break;
            case 8:
               posX = node->x - stepSize*5;
               posZ = node->z - stepSize*5;
-              //newg = node->gone + 14;
            break;
         }
        
         newg = node->gone + 1;
         
         node2 = closed.find(posX, posZ);
-             
+
+        perQuad = actualMap->quadradoRelativo( (int)floor( posX / (SQUARESIZE)),
+                                               (int)floor( posZ / (SQUARESIZE)));
+        //printf("%p\n",perQuad);
+              
         /*if( (opened.find(posX, posZ)) ||
             (node2 != NULL) &&
             (node->gone <= newg))*/
-        if( (node2 != NULL) || (opened.find(posX, posZ)))
+        if( (node2 != NULL) || (opened.find(posX, posZ)) || 
+            (perQuad == NULL) ||
+            /*(posX < 0) || (posZ < 0) || 
+            (posX > actualMap->x) || (posZ > actualMap->z) ||*/
+            (!collisionDetect.canWalk(posX, 0, posZ, 
+                                      perX1, perY1, perZ1, 
+                                      perX2, perY2, perZ2, 
+                                      orientation, perQuad,
+                                      NULL, varHeight, nx, nz)) )
         {
-           continue;
+           //continue;
         }
         else
         {
@@ -171,9 +189,12 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori)
    return(false);
 }
 
+/****************************************************************
+ *                          drawPath                            *
+ ****************************************************************/
 void aStar::drawPath()
 {
-   patt->drawWayPoints();
+   patt->drawWayPointsLinear();
 }
 
 /****************************************************************************/

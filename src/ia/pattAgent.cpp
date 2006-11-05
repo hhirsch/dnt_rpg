@@ -283,7 +283,7 @@ void pattAgent::drawWayPointsLinear()
    {
       glDisable(GL_LIGHTING);
       glLineWidth(3);
-      glBegin(GL_LINES);
+      glBegin(GL_LINE_STRIP);
       while(aux < totalWayPoints)
       {
          glVertex3f(tmp->x, 0.1, tmp->z);

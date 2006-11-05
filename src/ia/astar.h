@@ -50,6 +50,8 @@ class listStar
        * \return true if empty, false otherwise */
       bool isEmpty(){return(totalNodes <= 0);};
 
+      int size(){return(totalNodes);};
+
    private:
       pointStar* first;       /**< First Point in the list */
       int totalNodes;         /**< Total Nodes in the list */
@@ -75,7 +77,9 @@ class aStar
        * \param z -> desired z position
        * \return true if found path, false otherwise. */
       bool findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
-                    GLfloat stepSize, GLfloat orientation);
+                    GLfloat stepSize, GLfloat orientation,
+                    GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
+                    GLfloat perX2, GLfloat perY2, GLfloat perZ2);
 
       bool getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori);
 

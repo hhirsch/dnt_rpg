@@ -1436,21 +1436,35 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       /* Mouse Verification */
       if(Mbotao & SDL_BUTTON(3))
       {
-         walkStatus = ENGINE_WALK_MOUSE;
+         
          PCs->personagemAtivo->pathFind.defineMap(actualMap);
-         PCs->personagemAtivo->pathFind.findPath(
-                                              PCs->personagemAtivo->posicaoLadoX,
-                                              PCs->personagemAtivo->posicaoLadoZ,
-                                              xReal, zReal, ANDAR, 
-                                              PCs->personagemAtivo->orientacao);
+         if(PCs->personagemAtivo->pathFind.findPath(
+                                             PCs->personagemAtivo->posicaoLadoX,
+                                             PCs->personagemAtivo->posicaoLadoZ,
+                                             xReal, zReal, ANDAR, 
+                                             PCs->personagemAtivo->orientacao,
+                                             PCs->personagemAtivo->min[0],
+                                             PCs->personagemAtivo->min[1],
+                                             PCs->personagemAtivo->min[2],
+                                             PCs->personagemAtivo->max[0],
+                                             PCs->personagemAtivo->max[1],
+                                             PCs->personagemAtivo->max[2]))
+         {
+            //Found path to, so walk
+            walkStatus = ENGINE_WALK_MOUSE;
+         }
+         else
+         {
+            walkStatus = ENGINE_WALK_KEYS;
+         }
       }
 
       if(walkStatus == ENGINE_WALK_MOUSE)
       {
             if(! PCs->personagemAtivo->pathFind.getNewPosition(
-                                              PCs->personagemAtivo->posicaoLadoX,
-                                              PCs->personagemAtivo->posicaoLadoZ,
-                                              PCs->personagemAtivo->orientacao))
+                                             PCs->personagemAtivo->posicaoLadoX,
+                                             PCs->personagemAtivo->posicaoLadoZ,
+                                             PCs->personagemAtivo->orientacao))
             {
                walkStatus = ENGINE_WALK_KEYS;
             }
