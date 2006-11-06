@@ -49,7 +49,7 @@ class listStar
       /*! Verify if the list is empty
        * \return true if empty, false otherwise */
       bool isEmpty(){return(totalNodes <= 0);};
-
+      /*! return the size of the List */
       int size(){return(totalNodes);};
 
    private:
@@ -81,8 +81,10 @@ class aStar
                     GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
                     GLfloat perX2, GLfloat perY2, GLfloat perZ2);
 
+      /*! Get the New Character Position, based on Path Found previously */
       bool getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori);
 
+      /*! Draws the founded path */
       void drawPath();
 
    private:

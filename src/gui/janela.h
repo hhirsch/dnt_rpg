@@ -96,7 +96,7 @@ class Ljanela: public Tlista
                          void (*procPres)(janela* jan,int x, int y, 
                                SDL_Surface *screen));
 
-      void Ljanela::RetirarJanela(janela *jan);
+      void RetirarJanela(janela *jan);
 
 }; 
 
