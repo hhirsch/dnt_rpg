@@ -277,7 +277,7 @@ bool personagem::LoadModel(const string& strFilename)
       textureId = loadTexture(strPath + strFilename);
 
       // store the opengl texture id in the user data of the map
-      pCoreMaterial->setMapUserData(mapId, (Cal::UserData)textureId);
+      pCoreMaterial->setMapUserData(mapId, (Cal::UserData&)textureId);
     }
   }
 
@@ -475,7 +475,7 @@ void personagem::Render()
           glEnable(GL_COLOR_MATERIAL);
 
           // set the texture id we stored in the map user data
-          glBindTexture(GL_TEXTURE_2D, (GLuint)pCalRenderer->getMapUserData(0));
+          glBindTexture(GL_TEXTURE_2D, (unsigned long)pCalRenderer->getMapUserData(0));
 
           // set the texture coordinate buffer
           glTexCoordPointer(2, GL_FLOAT, 0, &meshTextureCoordinates[0][0]);
