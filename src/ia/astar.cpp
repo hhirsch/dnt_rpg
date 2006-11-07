@@ -81,16 +81,13 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
          destinyZ = node->z;
 
          /* Make the Founded path */
-         printf("Found Path to %.3f %.3f!\n",node->x, node->z);
          //patt->addWayPointFirst(destinyX, destinyZ);
          
          while( (node != NULL) )
          {
             patt->addWayPointFirst(node->x, node->z);
-            printf("Add: %.3f %.3f\n", node->x, node->z);
             node = closed.find(node->parentX, node->parentZ);
          }
-         printf("definedPosition %.3f %.3f\n", actualX, actualZ);
          patt->definePosition(actualX, actualZ);
          return(true);
       }
@@ -139,15 +136,8 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
 
         perQuad = actualMap->quadradoRelativo( (int)floor( posX / (SQUARESIZE)),
                                                (int)floor( posZ / (SQUARESIZE)));
-        //printf("%p\n",perQuad);
-              
-        /*if( (opened.find(posX, posZ)) ||
-            (node2 != NULL) &&
-            (node->gone <= newg))*/
         if( (node2 != NULL) || (opened.find(posX, posZ)) || 
             (perQuad == NULL) ||
-            /*(posX < 0) || (posZ < 0) || 
-            (posX > actualMap->x) || (posZ > actualMap->z) ||*/
             (!collisionDetect.canWalk(posX, 0, posZ, 
                                       perX1, perY1, perZ1, 
                                       perX2, perY2, perZ2, 
@@ -171,7 +161,6 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
       opened.remove(node);
    }
    
-   printf("Not Found!\n");
    return(false);
 }
 
