@@ -1835,11 +1835,6 @@ void engine::Draw()
    glFlush();
 }
 
-
-/******************************************/
-/*    PARTE DA DETECCAO DE COLISAO!!!!!!! */
-/******************************************/
-
 /*********************************************************************
  *                              canWalk                              *
  *********************************************************************/
@@ -1941,45 +1936,6 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
    
    return(result);
-}
-
-
-/*********************************************************************
- *                      Tratamento da IA dos NPCs                    *
- *********************************************************************/
-/* Monta Conjunto de campos do Quadrado */
-inline void engine::verificaQuad(Square* quad)
-{
-}
-
-/* Monta conjunto de Campos da linha */
-inline void engine::verificaLinha(Square* center)
-{
-   Square* saux;
-   if(center)
-   {
-       verificaQuad(center);
-       saux = actualMap->quadradoRelativo(center->posX-1,center->posZ);
-       if(saux)
-       {
-          verificaQuad(saux);
-          saux = actualMap->quadradoRelativo(center->posX-2,center->posZ);
-          verificaQuad(saux);
-       }
-       saux = actualMap->quadradoRelativo(center->posX+1,center->posZ);
-       if(saux)
-       {
-          verificaQuad(saux);
-          saux = actualMap->quadradoRelativo(center->posX+2,center->posZ);
-          verificaQuad(saux);
-       }
-   }   
-}
-
-/* Retorno !=0 se modificou posicao do personagem */
-int engine::TrataIA()
-{   
-    return( 0 );
 }
 
 /*********************************************************************

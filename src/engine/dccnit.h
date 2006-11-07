@@ -156,16 +156,6 @@ class engine
        **************************************************************/
       void threatGuiEvents(Tobjeto* object, int eventInfo);
 
-
-      /*! Verify Square on IA TODO oxi, out here.
-       * \param quad -> square to verify */
-      inline void verificaQuad(Square* quad);
-      /*! Verify Square Line on IA TODO oxi, out here.
-       * \param centro -> center square of line */
-      inline void verificaLinha(Square* centro);
-      /*! Threat NPCs IA TODO not here!*/
-      int TrataIA();
-
       /*!
        *************************************************************** 
        * Threat PC Colision (can walk?)
