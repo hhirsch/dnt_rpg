@@ -14,12 +14,14 @@
 #include "initial.h"
 #include "options.h"
 #include "skillwindow.h"
+#include "alignwindow.h"
 #include "attwindow.h"
 #include "camera.h"
 #include "util.h"
 #include "collision.h"
 #include "../classes/skills.h"
 #include "../classes/feats.h"
+#include "../classes/align.h"
 #include "../sound/sound.h"
 #include "../lang/lang.h"
 #include "../particle/partSystem.h"
@@ -233,6 +235,7 @@ class engine
       options* option;             /**< Current Options */
 
       featsList* features;         /**< Feats descriptions */
+      aligns* alignList;           /**< Alignments List */
 
       lang language;               /**< Language struct: internationalization */
 

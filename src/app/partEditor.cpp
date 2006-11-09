@@ -1239,6 +1239,7 @@ int main(int argc, char **argv)
            actualizeParticle(segundos);
          glPopMatrix();
 
+         glColor3f(1.0,1.0,1.0);
          glDisable(GL_LIGHTING);
          glDisable(GL_DEPTH_TEST);
          glDisable(GL_BLEND);

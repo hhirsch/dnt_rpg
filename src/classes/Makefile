@@ -9,7 +9,7 @@ ENDENGINE = ../engine/
 ENDFIGHT = ../fight/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o $(ENDENGINE)personagens.o $(OBJSGUI)
-objetos = skills.o feats.o defs.o actions.o thing.o
+objetos = align.o skills.o feats.o defs.o actions.o thing.o
 
 
 all: $(objetos)
@@ -22,6 +22,11 @@ classes.o: classes.cpp classes.h actions.h skills.h feats.h dices.h defs.h
 defs.o: defs.h defs.cpp
 	@printf "Making defs.o... "
 	@$(CPP) $(CFLAGS) defs.cpp -o defs.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+align.o: align.cpp align.h
+	@printf "Making align.o... "
+	@$(CC) $(CFLAGS) align.cpp -o align.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 skills.o: skills.cpp skills.h

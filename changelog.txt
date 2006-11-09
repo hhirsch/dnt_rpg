@@ -23,6 +23,7 @@
  - Inventory;
  - Ocult Realtime Surface Rendering;
  - GUI more smooth and functional;
+ - Camera Full Rotation with Mouse;
  - Camera follow active character on height;
  - Minor Bugs fixes;
  

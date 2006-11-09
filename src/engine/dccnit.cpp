@@ -63,6 +63,9 @@ engine::engine()
    /* Load Features List */
    features = new featsList(language.FEATS_DIR,"../data/feats/feats.ftl");
 
+   /* Load Alignments & Tendecies */
+   alignList = new aligns("../data/alignment/Portugues/", "../data/alignment/alignment.lst");
+
    /* Initialize readModes variables */
    lastRead = SDL_GetTicks();
    lastMouse = lastRead;
@@ -76,27 +79,6 @@ engine::engine()
    gameSun = new sun(hour , FARVIEW, FARVIEW);
 
    engineMode = ENGINE_MODE_REAL_TIME;
-
-   /*part1* particula;
-
-   particula = (part1*) particleSystem->addParticle(PART_WATERFALL,
-                                                    150,60,120,
-                                            "../data/particles/waterfall1.par");
-   particula->addPlane(148,59,118,152,59,123,-1,0,PLANE_NO_INCLINATION);
-   particula->addPlane(150,40,118,160,32,123,-1,0,PLANE_INCLINATION_X);
-   particula->addPlane(160,20,110,175,20,130,-1,0,PLANE_NO_INCLINATION);
-
-   particleSystem->addParticle(PART_FIRE,200,0,220,
-                                          "../data/particles/fire1.par");
-
-   particleSystem->addParticle(PART_FIRE,200,0,350,
-                                          "../data/particles/fire2.par");
-   particleSystem->addParticle(PART_WATER_SURFACE,300,20,300,"");
-   particleSystem->addParticle(PART_SMOKE,240,0,340,
-                                          "../data/particles/smoke1.par");
-   particleSystem->addParticle(PART_SNOW,340,80,100,
-                                                 "../data/particles/snow1.par");
-   */
 
    waveTest = new waves("", 300, 20, 300, 5, 20);
 
@@ -159,6 +141,10 @@ engine::~engine()
  
    /* Clear Cursors */
    delete(cursors);
+
+   delete(alignList);
+
+   delete(features);
 }
 
 /*********************************************************************
@@ -492,6 +478,8 @@ int engine::CharacterScreen(GLuint* idTextura)
 
    int status = 0;
 
+   align* selected; // TODO remove it from here
+
   
    /*TODO Other screens*/
 
@@ -501,12 +489,15 @@ int engine::CharacterScreen(GLuint* idTextura)
                            "../data/skills/skills.skl"); 
 
    /* Att Screen */
-   attWindow* atWindow = new attWindow(sk, gui);
+   attWindow* atWindow = NULL;//new attWindow(sk, gui);
 
    /* Skill Screen */
    skillWindow* skWindow = NULL;
 
-   while( (status != 2) )
+   /* Alignment Window */
+   alignWindow* alWindow = new alignWindow(alignList, gui);
+
+   while( (status != 3) )
    {
       tempo = SDL_GetTicks();
       if(tempo - tempoAnterior >= ACTUALIZATION_RATE) 
@@ -526,34 +517,50 @@ int engine::CharacterScreen(GLuint* idTextura)
 
          if(status == 0)
          {
+            charCreation = alWindow->treat(object, eventInfo, gui, &selected);
+            if(charCreation == ALIGNW_CONFIRM)
+            {
+               status = 1;
+               delete(alWindow);
+               atWindow = new attWindow(sk, gui);
+            }
+            else if(charCreation == ALIGNW_CANCEL)
+            {
+               status = 3;
+               delete(alWindow);
+               charCreation = CHAR_CANCEL;
+            }
+         }
+         else if(status == 1)
+         {
              charCreation = atWindow->treat(object, eventInfo, gui);
              if(charCreation == ATTW_CONFIRM)
              {
-                status = 1;
+                status = 2;
                 delete(atWindow);
                 skWindow = new skillWindow(sk, 20, gui);
              }
              else if(charCreation == ATTW_CANCEL)
              {
-                status = 2;
+                status = 0;
                 delete(atWindow);
-                charCreation = CHAR_CANCEL;
+                alWindow = new alignWindow(alignList, gui);
              }
          }
-         else if(status == 1)
+         else if(status == 2)
          {
             charCreation = skWindow->treat(object, eventInfo, gui); 
             if(charCreation == SKILLW_CONFIRM)
             {
-               status = 2;
+               status = 3;
                delete(skWindow);
                charCreation = CHAR_CONFIRM;
             }
             else if(charCreation == SKILLW_CANCEL)
             {
-               status = 2;
+               status = 1;
                delete(skWindow);
-               charCreation = CHAR_CANCEL;
+               atWindow = new attWindow(sk, gui);
             }
          }
          
@@ -563,6 +570,7 @@ int engine::CharacterScreen(GLuint* idTextura)
          SDL_Delay((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) );
       }
    }
+   
    delete(sk);
    return(charCreation);
 }
