@@ -35,26 +35,38 @@ void part7::InitRender()
    glDepthMask(GL_FALSE);
    glEnable(GL_CULL_FACE);
 
-   glEnable(GL_TEXTURE_2D);
-   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   glEnable(GL_BLEND);
-    
-   float MaxPointSize;
-   glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
+   float MaxPointSize = 0;
 
-   float quadratic[] =  { 0.01f, 0.01f, 0.0f };
-   //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
-   PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
+   if( (PointParameterf != NULL) && (PointParameterfv != NULL) )
+   {
+      glEnable(GL_TEXTURE_2D);
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      glEnable(GL_BLEND);
 
-   //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
-   PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
-   PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
+      glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
 
-   glPointSize(8);
+      float quadratic[] =  { 0.01f, 0.01f, 0.0f };
+      //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
+      PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
 
-   glBindTexture(GL_TEXTURE_2D, partTexture);
-   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
-   glEnable(GL_POINT_SPRITE_ARB);
+      //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
+      PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
+      PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
+
+      glPointSize(8);
+
+      glBindTexture(GL_TEXTURE_2D, partTexture);
+      glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
+      glEnable(GL_POINT_SPRITE_ARB);
+   }
+   else
+   {
+      glEnable(GL_COLOR);
+      glPointSize(2);
+
+      //glEnable(GL_POINT_SMOOTH);
+      //glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+   }
 }
 
 void part7::EndRender()
@@ -65,7 +77,15 @@ void part7::EndRender()
    glDepthMask(GL_TRUE);
    glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
    glDisable(GL_TEXTURE_2D);
-   glDisable(GL_POINT_SPRITE_ARB);
+   if( (PointParameterf != NULL) && (PointParameterfv != NULL) )
+   {
+      glDisable(GL_POINT_SPRITE_ARB);
+   }
+   else
+   {
+      glDisable(GL_COLOR);
+      glDisable(GL_POINT_SMOOTH);
+   }
    glEnable(GL_LIGHTING);
    glDisable( GL_BLEND );
 }

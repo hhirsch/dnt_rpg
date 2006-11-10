@@ -33,24 +33,35 @@ void part1::InitRender()
    glDepthMask(GL_FALSE);
    glEnable(GL_CULL_FACE);
 
-   glEnable(GL_TEXTURE_2D);
-   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   glEnable(GL_BLEND);
-    
-   float MaxPointSize;
-   glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
-
+       
+   float MaxPointSize = 0;
    float quadratic[] =  { 0.01f, 0.01f, 0.0f };
-   PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
 
-   PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
-   PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
+   if( (PointParameterf != NULL) && (PointParameterfv != NULL) )
+   {
+      glEnable(GL_TEXTURE_2D);
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      glEnable(GL_BLEND);
 
-   glPointSize(4);
+      glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
+      PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
 
-   glBindTexture(GL_TEXTURE_2D, partTexture);
-   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
-   glEnable(GL_POINT_SPRITE_ARB);
+      PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
+      PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
+   
+      glPointSize(4);
+
+      glBindTexture(GL_TEXTURE_2D, partTexture);
+      glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
+      glEnable(GL_POINT_SPRITE_ARB);
+   }
+   else
+   {
+      glEnable(GL_COLOR);
+      glPointSize(1);
+      /*glEnable(GL_POINT_SMOOTH);
+      glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);*/
+   }
 }
 
 void part1::EndRender()
@@ -61,29 +72,16 @@ void part1::EndRender()
    glDepthMask(GL_TRUE);
    glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
    glDisable(GL_TEXTURE_2D);
-   glDisable(GL_POINT_SPRITE_ARB);
+   if( (PointParameterf != NULL) && (PointParameterfv != NULL) )
+   {
+      glDisable(GL_POINT_SPRITE_ARB);
+   }
+   else
+   {
+      glDisable(GL_COLOR);
+      glDisable(GL_POINT_SMOOTH);
+   }
    glDisable( GL_BLEND );
-
-   /*int i;
-   for(i = 0; i < actualPlanes; i++)
-   {  
-      glBegin(GL_QUADS);
-      glColor3f(1.0f,0.1f,0.1f);
-      glVertex3f(intersections[i].x1,intersections[i].y1,intersections[i].z1);
-      switch(intersections[i].inclination)
-      {
-         case PLANE_NO_INCLINATION:
-              glVertex3f(intersections[i].x1,intersections[i].y1,intersections[i].z2);
-              glVertex3f(intersections[i].x2,intersections[i].y2,intersections[i].z2);
-              glVertex3f(intersections[i].x2,intersections[i].y1,intersections[i].z1);
-         break;
-         case PLANE_INCLINATION_X:
-         break;
-         case PLANE_INCLINATION_Z:
-         break;
-      }
-      glEnd();
-   }*/
 
    glEnable(GL_LIGHTING);
 }

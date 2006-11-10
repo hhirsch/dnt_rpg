@@ -42,29 +42,40 @@ void part6::InitRender()
    glDepthMask(GL_FALSE);
    glEnable(GL_CULL_FACE);
 
-   glEnable(GL_TEXTURE_2D);
-   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   glEnable(GL_BLEND);
-    
-   float MaxPointSize;
-   glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
+   float MaxPointSize = 0;
 
-   //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
-   //float quadratic[] =  { 0.01f, 0.01f, 0.0f };
-   //float quadratic[] =  { 1.0f, 0.0f, 0.0f };
-   //PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
+   if( (PointParameterf != NULL) && (PointParameterfv != NULL) )
+   {
+      glEnable(GL_TEXTURE_2D);
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      glEnable(GL_BLEND);
 
-   //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
-   PointParameterf( GL_POINT_SIZE_MIN_ARB, 5.0 );
-   PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
+      glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
 
-   glPointSize(16);
+      //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
+       //float quadratic[] =  { 0.01f, 0.01f, 0.0f };
+       //float quadratic[] =  { 1.0f, 0.0f, 0.0f };
+       //PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
+       //
+      glPointSize(16);
 
-   glBindTexture(GL_TEXTURE_2D, partTexture);
-   glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
-   glEnable(GL_POINT_SPRITE_ARB);
-   //glEnable(GL_POINT_SMOOTH);
-   //glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+
+      //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
+      PointParameterf( GL_POINT_SIZE_MIN_ARB, 5.0 );
+      PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
+
+      glBindTexture(GL_TEXTURE_2D, partTexture);
+      glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
+      glEnable(GL_POINT_SPRITE_ARB);
+   }
+   else
+   {
+      glEnable(GL_COLOR);
+      glPointSize(4);
+
+      //glEnable(GL_POINT_SMOOTH);
+      //glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+   }
 }
 
 void part6::EndRender()
@@ -75,7 +86,15 @@ void part6::EndRender()
    glDepthMask(GL_TRUE);
    glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
    glDisable(GL_TEXTURE_2D);
-   glDisable(GL_POINT_SPRITE_ARB);
+   if( (PointParameterf != NULL) && (PointParameterfv != NULL) )
+   {
+      glDisable(GL_POINT_SPRITE_ARB);
+   }
+   else
+   {
+      glDisable(GL_COLOR);
+      glDisable(GL_POINT_SMOOTH);
+   }
    glEnable(GL_LIGHTING);
    glDisable( GL_BLEND );
 }

@@ -104,6 +104,11 @@ void particleSystem::init(int total, int mode)
    PointParameterfv = (PFNGLPOINTPARAMETERFVARBPROC) 
                                  SDL_GL_GetProcAddress("glPointParameterfvARB");
 
+   if( (PointParameterfv == NULL) || (PointParameterf == NULL) )
+   {
+      printf("Warn-> Not found glPointParameterfARB: DNT will be in worse quality :^(\n");
+   }
+
    int n;
    for(n = 0; n < maxParticles; n++ )
    {
