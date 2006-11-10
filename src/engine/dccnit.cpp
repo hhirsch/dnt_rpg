@@ -739,6 +739,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
    int numEnemies = 0;
    personagem* ch;
    string briefInit;
+   string brief;
 
    //FIXME not here the dices!
    diceThing dc;
@@ -755,11 +756,14 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
            {
               if( engineMode != ENGINE_MODE_TURN_BATTLE )
               {
-                 briefTxt->texto = "";
+                 brief = "";
                  fight.empty();
                  if(!NPCs)
                  {
-                    briefTxt->texto = language.FIGHT_NO_NPCS;
+                    if(shortCutsWindow != NULL)
+                    {
+                       briefTxt->texto = language.FIGHT_NO_NPCS;
+                    }
                     return;
                  }
                  ch =(personagem*) NPCs->primeiro->proximo;
@@ -767,7 +771,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                  {
                     //TODO put enemies on groups, when enemy from enemy
                     fight.insertNPC(ch, 0, briefInit);
-                    briefTxt->texto += briefInit + "|";
+                    brief += briefInit + "|";
                     numEnemies++;
                     ch->actualFeats.defineMeleeWeapon(dc); //FIXME
                     ch = (personagem*) ch->proximo; 
@@ -788,7 +792,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                     while(ch != PCs->primeiro)
                     {
                        fight.insertPC(ch, 0, briefInit);
-                       briefTxt->texto += briefInit + "|";
+                       brief += briefInit + "|";
                        ch->actualFeats.defineMeleeWeapon(dc); //FIXME
                        ch = (personagem*) ch->proximo; 
                        SDL_Delay(1);
@@ -802,11 +806,15 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                     attackFeat = FEAT_MELEE_ATTACK;
                     canAttack = true;
 
-                    briefTxt->texto += language.FIGHT_SURPRISE_TURN;
+                    brief += language.FIGHT_SURPRISE_TURN;
                  }
                  else
                  {
-                    briefTxt->texto = language.FIGHT_NO_NPCS;
+                    brief = language.FIGHT_NO_NPCS;
+                 }
+                 if(shortCutsWindow != NULL)
+                 {
+                    briefTxt->texto = brief;
                  }
               }
            }
@@ -862,7 +870,10 @@ void engine::hourToTxt()
    {
       sprintf(&htmp[0],"0%d:0%d", ihour, imin);
    }
-   hourTxt->texto = htmp;
+   if(shortCutsWindow)
+   {
+      hourTxt->texto = htmp;
+   }
 }
 
 /*********************************************************************
@@ -1150,6 +1161,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                      (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
                  {
                      //TODO verify in-range distances
+                     string brief = "";
                      cursors->SetActual(CURSOR_ATTACK);
                      if(shortCutsWindow)
                      {
@@ -1158,24 +1170,28 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                      }
                      if(Mbotao & SDL_BUTTON(1))
                      {
-                        briefTxt->texto = PCs->personagemAtivo->nome + " " + 
-                                          language.FIGHT_ATTACKS + " " + 
-                                          pers->nome + "|";
+                        brief = PCs->personagemAtivo->nome + " " + 
+                                language.FIGHT_ATTACKS + " " + 
+                                pers->nome + "|";
                         canAttack = !PCs->personagemAtivo->actualFeats.
                                                         applyAttackAndBreakFeat(
                                                           *PCs->personagemAtivo,
                                                           attackFeat, *pers, 
-                                                          briefTxt->texto);
+                                                          brief);
                         if(pers->dead)
                         {
-                           briefTxt->texto += "|" + pers->nome + " " +  
-                                              language.FIGHT_DEAD;
+                           brief += "|" + pers->nome + " " +  
+                                    language.FIGHT_DEAD;
                         }
                         if( pers->psychoState != PSYCHO_HOSTILE)
                         {
                             pers->psychoState = PSYCHO_HOSTILE;
                         }
 
+                     }
+                     if(shortCutsWindow != NULL)
+                     {
+                        briefTxt->texto = brief;
                      }
                      pronto = 1;
                  }
@@ -2102,7 +2118,8 @@ void engine::gameOver()
  *********************************************************************/
 int engine::Run(SDL_Surface *surface)
 {
-
+   string brief;
+   
    if(!actualMap->music.empty())
    {
       snd->StopMusic(music);
@@ -2141,7 +2158,10 @@ int engine::Run(SDL_Surface *surface)
         if(fightStatus == FIGHT_END)
         {
            engineMode = ENGINE_MODE_REAL_TIME;
-           briefTxt->texto += "|" + language.FIGHT_EXIT;
+           if(shortCutsWindow)
+           {
+              briefTxt->texto += "|" + language.FIGHT_EXIT;
+           }
            /* Verify if any PC is alive. */
            personagem* pers = (personagem*) PCs->primeiro->proximo;
            bool alive = false;
@@ -2165,7 +2185,11 @@ int engine::Run(SDL_Surface *surface)
                  ((time - lastTurnTime) > 4000) ) 
         {
            lastTurnTime = time;
-           fightStatus = fight.doBattleCicle(briefTxt->texto);
+           fightStatus = fight.doBattleCicle(brief);
+           if(shortCutsWindow)
+           {
+              briefTxt->texto = brief;
+           }
            actualizeAllHealthBars();
 
            if(fightStatus == FIGHT_PC_TURN)
@@ -2213,7 +2237,7 @@ int engine::Run(SDL_Surface *surface)
                 per->posicaoLadoZ = eventoRede->y; 
                 per->orientacao = eventoRede->teta;
                 per->ID = eventoRede->obj;
-		forcaAtualizacao = 1;
+                forcaAtualizacao = 1;
                 break; 
              }
              case MT_MOV: /* character movimentation */
