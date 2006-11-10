@@ -84,6 +84,8 @@ class aStar
       /*! Get the New Character Position, based on Path Found previously */
       bool getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori);
 
+      void getDestiny(GLfloat& destX, GLfloat& destZ);
+
       /*! Draws the founded path */
       void drawPath();
 

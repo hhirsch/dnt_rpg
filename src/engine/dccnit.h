@@ -198,6 +198,7 @@ class engine
       cursor* cursors;             /**< Utilized mouse cursors */
 
       int walkStatus;              /**< Engine Walk Status */
+      GLuint destinyImage;         /**< Move Destiny Image */
 
       collision colisionDetect;    /**< The collision detect Module */
  

@@ -314,4 +314,9 @@ pointStar* listStar::findLowest()
    return(lowest);
 }
 
+void aStar::getDestiny(GLfloat& destX, GLfloat& destZ)
+{
+   destX = destinyX;
+   destZ = destinyZ;
+}
 

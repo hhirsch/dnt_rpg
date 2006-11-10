@@ -116,6 +116,7 @@ engine::~engine()
    /* Clear Other Textures */
    glDeleteTextures(1, &normalMoveCircle);
    glDeleteTextures(1, &fullMoveCircle);
+   glDeleteTextures(1, &destinyImage);
 
    /* Clear Characters */
    if(NPCs)
@@ -707,6 +708,24 @@ void engine::Init(SDL_Surface *screen)
    glGenTextures(1, &fullMoveCircle);
 
    glBindTexture(GL_TEXTURE_2D, fullMoveCircle);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+
+   /* Move Destiny */
+   img = IMG_Load("../data/texturas/walk/destino.png");
+   if(!img)
+   {
+      printf("Error: can't Load Texure: destino.png\n");
+   }
+
+   glGenTextures(1, &destinyImage);
+
+   glBindTexture(GL_TEXTURE_2D, destinyImage);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
                 0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
 
@@ -1719,7 +1738,32 @@ void engine::Draw()
 
    if(walkStatus == ENGINE_WALK_MOUSE)
    {
-      PCs->personagemAtivo->pathFind.drawPath();
+      GLfloat destX =0, destZ=0;
+      //PCs->personagemAtivo->pathFind.drawPath();
+      PCs->personagemAtivo->pathFind.getDestiny(destX, destZ);
+      
+      glDisable(GL_LIGHTING);
+       /* Draw Movimentation Destiny */
+       glColor4f(1,1,1,1);
+       glEnable(GL_BLEND);
+       glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+       glPushMatrix();
+         glEnable(GL_TEXTURE_2D);
+         glBindTexture(GL_TEXTURE_2D, destinyImage );
+         glBegin(GL_QUADS);
+            glTexCoord2f(0,0);
+            glVertex3f(destX-4, 0.1, destZ-4);
+            glTexCoord2f(0,1);
+            glVertex3f(destX-4, 0.1, destZ+4);
+            glTexCoord2f(1,1);
+            glVertex3f(destX+4, 0.1, destZ+4);
+            glTexCoord2f(1,0);
+            glVertex3f(destX+4, 0.1, destZ-4);
+         glEnd();
+         glDisable(GL_TEXTURE_2D);
+         glDisable(GL_BLEND);
+         glEnable(GL_LIGHTING);
+      glPopMatrix();
    }
 
    /* Draw Combat Mode Things */
