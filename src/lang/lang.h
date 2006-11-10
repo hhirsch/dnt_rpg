@@ -66,6 +66,20 @@ class lang
    static string SKILL_CONFIRM;
    static string SKILL_CANCEL;
 
+   /* attwindow.cpp */
+   static string ATTW_TITLE;
+   static string ATTW_ROLL;
+   static string ATTW_CLEAR;
+   static string ATTW_STRENGTH;
+   static string ATTW_DEXTERITY;
+   static string ATTW_CONSTITUTION;
+   static string ATTW_INTELLIGENCE;
+   static string ATTW_WISDOW;
+   static string ATTW_CHARISM;
+
+   /* alignwindow.cpp */
+   static string ALIGNW_TITLE;
+      
    /* figths */
    static string FIGHT_ROLLS_INITIATIVE;
    static string FIGHT_END_NOENEMIES;
@@ -90,6 +104,7 @@ class lang
    /* DIRECTORYS */
    static string SKILLS_DIR;
    static string FEATS_DIR;
+   static string ALIGN_DIR;
 
    /* Errors */
    static string ERROR_MAP_OUT;

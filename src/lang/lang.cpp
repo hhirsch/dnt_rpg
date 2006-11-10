@@ -98,6 +98,21 @@ void lang::ReloadFile(int lng)
    getline(file, SKILL_CONFIRM);
    getline(file, SKILL_CANCEL);
 
+   /* attwindow.cpp */
+   getline(file, ATTW_TITLE);
+   getline(file, ATTW_ROLL);
+   getline(file, ATTW_CLEAR);
+   getline(file, ATTW_STRENGTH);
+   getline(file, ATTW_DEXTERITY);
+   getline(file, ATTW_CONSTITUTION);
+   getline(file, ATTW_INTELLIGENCE);
+   getline(file, ATTW_WISDOW);
+   getline(file, ATTW_CHARISM);
+
+   /* alignwindow.cpp */
+   getline(file, ALIGNW_TITLE);
+
+
    /* fight */
    getline(file,FIGHT_ROLLS_INITIATIVE);
    getline(file,FIGHT_END_NOENEMIES);
@@ -122,6 +137,7 @@ void lang::ReloadFile(int lng)
    /* DIRECTORYS */
    getline(file, SKILLS_DIR);
    getline(file, FEATS_DIR);
+   getline(file, ALIGN_DIR);
 
    /* Errors */
    getline(file, ERROR_MAP_OUT);
@@ -134,7 +150,7 @@ void lang::ReloadFile(int lng)
 }
 
 
-string lang::VERSION;
+   string lang::VERSION;
    string lang::TEXTURE_INFORMATION;
 
    
@@ -167,12 +183,28 @@ string lang::VERSION;
    string lang::OPTIONS_LANGUAGE;
 
    
+   /* skillwindow.cpp */
    string lang::SKILL_TITLE;
    string lang::SKILL_FREE_POINTS;
    string lang::SKILL_POINTS;
    string lang::SKILL_COST;
    string lang::SKILL_CONFIRM;
    string lang::SKILL_CANCEL;
+
+   /* attwindow.cpp */
+   string lang::ATTW_TITLE;
+   string lang::ATTW_ROLL;
+   string lang::ATTW_CLEAR;
+   string lang::ATTW_STRENGTH;
+   string lang::ATTW_DEXTERITY;
+   string lang::ATTW_CONSTITUTION;
+   string lang::ATTW_INTELLIGENCE;
+   string lang::ATTW_WISDOW;
+   string lang::ATTW_CHARISM;
+
+   /* alignwindow.cpp */
+   string lang::ALIGNW_TITLE;
+
 
    /*fight */
    string lang::FIGHT_ROLLS_INITIATIVE;
@@ -198,6 +230,7 @@ string lang::VERSION;
    /* DIRECTORYS */
    string lang::SKILLS_DIR;
    string lang::FEATS_DIR;
+   string lang::ALIGN_DIR;
 
    /* Errors */
    string lang::ERROR_MAP_OUT;

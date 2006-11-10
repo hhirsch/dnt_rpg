@@ -31,7 +31,7 @@ attWindow::attWindow(skills* sk, interface* inter)
 
    /* create window */
    window = inter->ljan->InserirJanela(276,166,531,441,
-                                       "Attributes",
+                                       language.ATTW_TITLE.c_str(),
                                        1,1,NULL,NULL);
 
    /* roll and write all rolled dices to string */
@@ -45,18 +45,19 @@ attWindow::attWindow(skills* sk, interface* inter)
    rolledPoints = window->objects->InserirQuadroTexto(8,18,117,31,0,
                                                                   saux.c_str());
    /* reroll button */
-   rerollButton = window->objects->InserirBotao(119,16,170,33,
+   rerollButton = window->objects->InserirBotao(119,16,182,33,
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "Reroll",0,NULL);
+                                 language.ATTW_ROLL.c_str(),0,NULL);
    /* clear button */
-   clearButton = window->objects->InserirBotao(175,16,220,33,
+   clearButton = window->objects->InserirBotao(183,16,247,33,
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "Clear",0,NULL);
+                                 language.ATTW_CLEAR.c_str(),0,NULL);
 
    /* Strenght */
-   window->objects->InserirQuadroTexto(9,49,85,62,0,"Strenght");
+   window->objects->InserirQuadroTexto(9,49,85,62,0,
+                                       language.ATTW_STRENGTH.c_str());
    attPoints[0] = window->objects->InserirQuadroTexto(98,47,117,64,1,"");
    attPoints[0]->fonte = FMINI;
    attButtonPrev[0] = window->objects->InserirBotao(87,47,97,64,
@@ -77,7 +78,8 @@ attWindow::attWindow(skills* sk, interface* inter)
    window->objects->InserirFigura(130,40,0,0,"../data/skills/Img/forca.png");
 
    /* Dextery */
-   window->objects->InserirQuadroTexto(9,83,85,96,0,"Dextery");
+   window->objects->InserirQuadroTexto(9,83,85,96,0,
+                                       language.ATTW_DEXTERITY.c_str());
    attPoints[1] = window->objects->InserirQuadroTexto(98,81,117,98,1,"");
    attPoints[1]->fonte = FMINI;
    attButtonPrev[1] = window->objects->InserirBotao(87,81,97,98,
@@ -98,7 +100,8 @@ attWindow::attWindow(skills* sk, interface* inter)
    window->objects->InserirFigura(130,74,0,0,"../data/skills/Img/destreza.png");
 
    /* Constitution */
-   window->objects->InserirQuadroTexto(9,119,87,132,0,"Constitution");
+   window->objects->InserirQuadroTexto(9,119,87,132,0,
+                                       language.ATTW_CONSTITUTION.c_str());
    attPoints[2] = window->objects->InserirQuadroTexto(98,117,117,134,1,"");
    attPoints[2]->fonte = FMINI;
    attButtonPrev[2] = window->objects->InserirBotao(87,117,97,134,
@@ -120,7 +123,8 @@ attWindow::attWindow(skills* sk, interface* inter)
                                          "../data/skills/Img/constituicao.png");
 
    /* Inteligency */
-   window->objects->InserirQuadroTexto(9,153,87,166,0,"Inteligency");
+   window->objects->InserirQuadroTexto(9,153,87,166,0,
+                                       language.ATTW_INTELLIGENCE.c_str());
    attPoints[3] = window->objects->InserirQuadroTexto(98,151,117,168,1,"");
    attPoints[3]->fonte = FMINI;
    attButtonPrev[3] = window->objects->InserirBotao(87,151,97,168,
@@ -142,7 +146,8 @@ attWindow::attWindow(skills* sk, interface* inter)
                                          "../data/skills/Img/inteligencia.png");
 
    /* Wisdow */
-   window->objects->InserirQuadroTexto(9,187,87,200,0,"Wisdow");
+   window->objects->InserirQuadroTexto(9,187,87,200,0,
+                                       language.ATTW_WISDOW.c_str());
    attPoints[4] = window->objects->InserirQuadroTexto(98,185,117,202,1,"");
    attPoints[4]->fonte = FMINI;
    attButtonPrev[4] = window->objects->InserirBotao(87,185,97,202,
@@ -163,7 +168,8 @@ attWindow::attWindow(skills* sk, interface* inter)
                                             "../data/skills/Img/sabedoria.png");
 
    /* Charism */
-   window->objects->InserirQuadroTexto(9,221,87,234,0,"Charism");
+   window->objects->InserirQuadroTexto(9,221,87,234,0,
+                                       language.ATTW_CHARISM.c_str());
    attPoints[5] = window->objects->InserirQuadroTexto(98,219,117,236,1,"");
    attPoints[5]->fonte = FMINI;
    attButtonPrev[5] = window->objects->InserirBotao(87,219,97,236,

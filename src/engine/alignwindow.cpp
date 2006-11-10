@@ -11,7 +11,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter)
    
    /* create window */
    window = inter->ljan->InserirJanela(276,186,531,441,
-                                       "Alignment & Tendency",
+                                       language.ALIGNW_TITLE.c_str(),
                                        1,1,NULL,NULL);
    /* Align Image */
    alignImage = window->objects->InserirFigura(99,185,0,0,NULL);   

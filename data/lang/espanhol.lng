@@ -28,6 +28,16 @@ Puntos:
 Coste:
 Aceptar
 Cancelar
+Características
+Arrollar
+Limpiar
+Fuerza
+Destreza
+Constituición
+Inteligencia
+Sabiduría
+Carisma
+Alineamiento
 juega iniciativa:
 No más enemigos.
 Nuevo Round
@@ -47,5 +57,6 @@ puntos.
 Puntos no suficientes!
 ../data/skills/Ingles/
 ../data/feats/Ingles/
+../data/alignment/Ingles/
 Argh! Mapa fuera de los límites!\n
 Argh! No puedo iniciar SDL!\n

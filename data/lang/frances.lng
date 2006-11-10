@@ -28,6 +28,16 @@ Points:
 Coût:
 Confirmez
 Annuler
+Caractéristiques
+Rouler
+Éclaircir
+Force
+Dextérité
+Constitution
+Intelligence
+Sagesse
+Charisme
+Alignement
 roule l'initiative:
 Plus d'ennemis.
 Nouveau Rond
@@ -47,5 +57,6 @@ points.
 Pas de points à employer!
 ../data/skills/Ingles/
 ../data/feats/Ingles/
+../data/alignment/Ingles/
 Argh! Carte hors des limites!\n
 Mon Dieu! Ne peut pas init SDL\n

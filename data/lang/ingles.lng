@@ -28,6 +28,16 @@ Points:
 Cost:
 Confirm
 Cancel
+Attributes
+Roll
+Clear
+Strength
+Dexterity
+Constitution
+Intelligence
+Wisdow
+Charism
+Tendency & Alignment
 rolls initiative:
 No more enemies.
 New Round
@@ -47,5 +57,6 @@ points.
 Not Enough Points to Use!
 ../data/skills/Ingles/
 ../data/feats/Ingles/
+../data/alignment/Ingles/
 What the HEll!! Square Map Out of bounds!\n
 Argh! Can't init SDL!\n

@@ -28,6 +28,16 @@ Pontos:
 Custo:
 Confirmar
 Cancelar
+Atributos
+Rolar
+Limpar
+Força
+Destreza
+Constituição
+Inteligência
+Sabedoria
+Carisma
+Alinhamento & Tendência
 rola iniciativa:
 Sem inimigos.
 Novo Turno
@@ -47,5 +57,6 @@ pontos.
 Pontos insuficientes para utilizar!
 ../data/skills/Portugues/
 ../data/feats/Portugues/
+../data/alignment/Portugues/
 Argh! Mapa fora dos limites!\n
 Oxi! Não consegui iniciar o SDL!\n

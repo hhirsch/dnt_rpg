@@ -64,7 +64,7 @@ engine::engine()
    features = new featsList(language.FEATS_DIR,"../data/feats/feats.ftl");
 
    /* Load Alignments & Tendecies */
-   alignList = new aligns("../data/alignment/Portugues/", "../data/alignment/alignment.lst");
+   alignList = new aligns(language.ALIGN_DIR.c_str(), "../data/alignment/alignment.lst");
 
    /* Initialize readModes variables */
    lastRead = SDL_GetTicks();
@@ -455,6 +455,10 @@ int engine::OptionsScreen(GLuint* idTextura)
    }
 
    snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
+
+   delete(alignList);
+   alignList = new aligns(language.ALIGN_DIR.c_str(),
+                          "../data/alignment/alignment.lst");
 
    glEnable(GL_LIGHTING);
    SDL_ShowCursor(SDL_DISABLE);
