@@ -40,6 +40,7 @@ class attWindow
 
       quadroTexto* rolledPoints;
       quadroTexto* attPoints[6];
+      quadroTexto* attTotals[6];
       quadroTexto* attMods[6];
 
       botao* attButtonNext[6];

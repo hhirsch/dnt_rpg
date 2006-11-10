@@ -48,12 +48,12 @@ attWindow::attWindow(skills* sk, interface* inter)
    rerollButton = window->objects->InserirBotao(119,16,170,33,
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "Reroll",1,NULL);
+                                 "Reroll",0,NULL);
    /* clear button */
    clearButton = window->objects->InserirBotao(175,16,220,33,
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "Clear",1,NULL);
+                                 "Clear",0,NULL);
 
    /* Strenght */
    window->objects->InserirQuadroTexto(9,49,85,62,0,"Strenght");
@@ -69,8 +69,11 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[0] = window->objects->InserirQuadroTexto(162,48,245,63,0,
-                                                    "T:   M: ");
+   attTotals[0] = window->objects->InserirQuadroTexto(165,49,195,64,0,"");
+   attTotals[0]->fonte = FTIMES;
+   attTotals[0]->tamFonte = 3;
+   attMods[0] = window->objects->InserirQuadroTexto(196,49,226,64,0,
+                                                    "");
    window->objects->InserirFigura(130,40,0,0,"../data/skills/Img/forca.png");
 
    /* Dextery */
@@ -87,8 +90,11 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[1] = window->objects->InserirQuadroTexto(162,82,245,97,0,
-                                                    "T:   M:  ");
+   attTotals[1] = window->objects->InserirQuadroTexto(165,83,195,98,0,"");
+   attTotals[1]->fonte = FTIMES;
+   attTotals[1]->tamFonte = 3;
+   attMods[1] = window->objects->InserirQuadroTexto(196,82,226,98,0,
+                                                    "");
    window->objects->InserirFigura(130,74,0,0,"../data/skills/Img/destreza.png");
 
    /* Constitution */
@@ -105,8 +111,11 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[2] = window->objects->InserirQuadroTexto(162,118,245,132,0,
-                                                    "T:   M:  ");
+   attTotals[2] = window->objects->InserirQuadroTexto(165,119,195,134,0,"");
+   attTotals[2]->fonte = FTIMES;
+   attTotals[2]->tamFonte = 3;
+   attMods[2] = window->objects->InserirQuadroTexto(196,119,226,134,0,
+                                                    "");
    window->objects->InserirFigura(130,108,0,0,
                                          "../data/skills/Img/constituicao.png");
 
@@ -124,8 +133,11 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[3] = window->objects->InserirQuadroTexto(162,152,245,169,0,
-                                                    "T:   M:  ");
+   attTotals[3] = window->objects->InserirQuadroTexto(165,153,195,168,0,"");
+   attTotals[3]->fonte = FTIMES;
+   attTotals[3]->tamFonte = 3;
+   attMods[3] = window->objects->InserirQuadroTexto(196,153,226,168,0,
+                                                    "");
    window->objects->InserirFigura(130,142,0,0,
                                          "../data/skills/Img/inteligencia.png");
 
@@ -143,8 +155,10 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[4] = window->objects->InserirQuadroTexto(162,186,245,201,0,
-                                                    "T:   M:  ");
+   attTotals[4] = window->objects->InserirQuadroTexto(165,187,195,202,0,"");
+   attTotals[4]->fonte = FTIMES;
+   attTotals[4]->tamFonte = 3;
+   attMods[4] = window->objects->InserirQuadroTexto(196,187,226,202,0,"");
    window->objects->InserirFigura(130,176,0,0,
                                             "../data/skills/Img/sabedoria.png");
 
@@ -162,8 +176,10 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     ">",0,NULL);
-   attMods[5] = window->objects->InserirQuadroTexto(162,220,245,235,0,
-                                                    "T:   M:  ");
+   attTotals[5] = window->objects->InserirQuadroTexto(165,220,195,236,0,"");
+   attTotals[5]->fonte = FTIMES;
+   attTotals[5]->tamFonte = 3;
+   attMods[5] = window->objects->InserirQuadroTexto(196,221,226,236,0,"");
    window->objects->InserirFigura(130,210,0,0,"../data/skills/Img/carisma.png");
                                               
 
@@ -319,7 +335,8 @@ void attWindow::clear()
       used[i] = false;
       attPointsIndex[i] = -1;
       attPoints[i]->texto = "";
-      attMods[i]->texto = "T:   M: ";
+      attTotals[i]->texto = "";
+      attMods[i]->texto = "";
       window->Desenhar(0,0);
    }
 }
@@ -329,19 +346,25 @@ void attWindow::clear()
  **************************************************************/
 int attWindow::assignAttMod(int att)
 {
-   char tmp[15];
+   char tmpMod[10];
+   char tmpTotal[10];
    int attBonus = (int)floor((points[attPointsIndex[att]]-10) / 2.0);
 
    //TODO calculate race and class bonus
-   if(attBonus > 0)
+   
+   sprintf(tmpTotal,"%d",points[attPointsIndex[att]]);
+
+   if(attBonus >= 0)
    {
-      sprintf(tmp,"T:%d M:+%d",points[attPointsIndex[att]],attBonus);
+      sprintf(tmpMod,"+%d",attBonus);
    }
    else
    {
-      sprintf(tmp,"T:%d M:%d",points[attPointsIndex[att]],attBonus);
+      sprintf(tmpMod,"%d",attBonus);
    }
-   attMods[att]->texto = tmp;
+
+   attTotals[att]->texto = tmpTotal;
+   attMods[att]->texto = tmpMod;
 
    return(attBonus);
 }
