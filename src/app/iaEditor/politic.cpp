@@ -11,8 +11,8 @@ politic::politic(int* score):potentAgent(false)
    GLfloat x; GLfloat z;
    state = new stateMachine(STATE_LOOK_OBJECT);
    srand(SDL_GetTicks());
-   x = drand48() *  384 + 74;
-   z = drand48() *  448;
+   x = (rand()/(double)RAND_MAX) *  384 + 74;
+   z = (rand()/(double)RAND_MAX) *  448;
    defineDestiny(x,z);
    brief = NULL;
    lastWork = 0;
@@ -66,8 +66,8 @@ void politic::actualizeMachineAndPosition(bool workTime)
       lastWork = SDL_GetTicks();
       srand(SDL_GetTicks());
       state->nextState(SDL_GetTicks());
-      x = drand48() *  384 + 74;
-      z = drand48() *  448;
+      x = (rand()/(double)RAND_MAX) *  384 + 74;
+      z = (rand()/(double)RAND_MAX) *  448;
       defineDestiny(x,z);
    }
    /* LOOK_OBJECT */
@@ -82,8 +82,8 @@ void politic::actualizeMachineAndPosition(bool workTime)
    {
       state->setTime(SDL_GetTicks());
       srand(SDL_GetTicks());
-      x = drand48() *  384 + 74;
-      z = drand48() *  448;
+      x = (rand()/(double)RAND_MAX) *  384 + 74;
+      z = (rand()/(double)RAND_MAX) *  448;
       defineDestiny(x,z);
    }
    
@@ -105,8 +105,8 @@ void politic::actualizeMachineAndPosition(bool workTime)
       brief = NULL;
       srand(SDL_GetTicks());
       state->nextState(SDL_GetTicks());
-      x = drand48() *  384 + 74;
-      z = drand48() *  448;
+      x = (rand()/(double)RAND_MAX) *  384 + 74;
+      z = (rand()/(double)RAND_MAX) *  448;
       defineDestiny(x,z);
    }
 
@@ -128,8 +128,8 @@ void politic::actualizeMachineAndPosition(bool workTime)
       state->nextState(SDL_GetTicks());
       lastWork = SDL_GetTicks();
       srand(SDL_GetTicks());
-      x = drand48() *  384 + 74;
-      z = drand48() *  448;
+      x = (rand()/(double)RAND_MAX) *  384 + 74;
+      z = (rand()/(double)RAND_MAX) *  448;
       defineDestiny(x,z);
    }
 
@@ -141,8 +141,8 @@ void politic::actualizeMachineAndPosition(bool workTime)
          /* End of Pretend Time */
          state->nextState(SDL_GetTicks());
          srand(SDL_GetTicks());
-         x = drand48() *  384 + 74;
-         z = drand48() *  448;
+         x = (rand()/(double)RAND_MAX) *  384 + 74;
+         z = (rand()/(double)RAND_MAX) *  448;
          defineDestiny(x,z);
       }
       else if((dist < 10) || (SDL_GetTicks()-lastWork >= 10000))
@@ -150,8 +150,8 @@ void politic::actualizeMachineAndPosition(bool workTime)
          /* Change Pretend Destiny */
          lastWork = SDL_GetTicks();
          srand(SDL_GetTicks());
-         x = drand48() *  384 + 74;
-         z = drand48() *  448;
+         x = (rand()/(double)RAND_MAX) *  384 + 74;
+         z = (rand()/(double)RAND_MAX) *  448;
          defineDestiny(x,z);
       }
    }

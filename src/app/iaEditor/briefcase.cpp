@@ -57,8 +57,8 @@ void briefCases::draw()
       {
          //if delivered, put the case random in the map
          srand(SDL_GetTicks());
-         cases[i].x = drand48() *  384 + 74;
-         cases[i].z = drand48() *  448;
+         cases[i].x = (rand()/(double)RAND_MAX) *  384 + 74;
+         cases[i].z = (rand()/(double)RAND_MAX) *  448;
          cases[i].value = (rand() % 100) +1;
          cases[i].owned = false;
          cases[i].delivered = false;

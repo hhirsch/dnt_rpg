@@ -5,8 +5,8 @@ CPP  = g++.exe
 CC   = gcc.exe
 WINDRES = windres.exe
 RES  = 
-OBJ  = agents.o editor.o guiIO.o iaEditor.o message.o ../../gui/figura.o ../../gui/fonte.o ../../gui/healthBar.o ../../gui/janela.o ../../gui/lista.o ../../gui/menu.o ../../gui/mouse.o ../../gui/quadtexto.o ../../gui/seltexto.o ../../gui/tabbotao.o ../../gui/bartexto.o ../../gui/botao.o ../../gui/cores.o ../../gui/cxsel.o ../../gui/desenho.o ../../gui/erro.o ../../gui/eventos.o ../../gui/farso.o ../../particle/part1.o ../../particle/part2.o ../../particle/part3.o ../../particle/part4.o ../../particle/part5.o ../../particle/part6.o ../../particle/part7.o ../../particle/particle.o ../../particle/partSystem.o ../../particle/wave.o ../../map/map.o ../../map/mapfog.o ../../map/maplights.o ../../map/mapobjeto.o ../../engine/conversa.o ../../engine/culling.o ../../ia/agent.o ../../ia/pattAgent.o ../../ia/potentAgent.o ../../etc/distance.o ../../etc/glm.o ../../engine/util.o ../../engine/sun.o $(RES)
-LINKOBJ  = agents.o editor.o guiIO.o iaEditor.o message.o ../../gui/figura.o ../../gui/fonte.o ../../gui/healthBar.o ../../gui/janela.o ../../gui/lista.o ../../gui/menu.o ../../gui/mouse.o ../../gui/quadtexto.o ../../gui/seltexto.o ../../gui/tabbotao.o ../../gui/bartexto.o ../../gui/botao.o ../../gui/cores.o ../../gui/cxsel.o ../../gui/desenho.o ../../gui/erro.o ../../gui/eventos.o ../../gui/farso.o ../../particle/part1.o ../../particle/part2.o ../../particle/part3.o ../../particle/part4.o ../../particle/part5.o ../../particle/part6.o ../../particle/part7.o ../../particle/particle.o ../../particle/partSystem.o ../../particle/wave.o ../../map/map.o ../../map/mapfog.o ../../map/maplights.o ../../map/mapobjeto.o ../../engine/conversa.o ../../engine/culling.o ../../ia/agent.o ../../ia/pattAgent.o ../../ia/potentAgent.o ../../etc/distance.o ../../etc/glm.o ../../engine/util.o ../../engine/sun.o $(RES)
+OBJ  = agents.o editor.o guiIO.o iaEditor.o message.o ../../gui/figura.o ../../gui/fonte.o ../../gui/healthBar.o ../../gui/janela.o ../../gui/lista.o ../../gui/menu.o ../../gui/mouse.o ../../gui/quadtexto.o ../../gui/seltexto.o ../../gui/tabbotao.o ../../gui/bartexto.o ../../gui/botao.o ../../gui/cores.o ../../gui/cxsel.o ../../gui/desenho.o ../../gui/erro.o ../../gui/eventos.o ../../gui/farso.o ../../particle/part1.o ../../particle/part2.o ../../particle/part3.o ../../particle/part4.o ../../particle/part5.o ../../particle/part6.o ../../particle/part7.o ../../particle/particle.o ../../particle/partSystem.o ../../particle/wave.o ../../map/map.o ../../map/mapfog.o ../../map/maplights.o ../../map/mapobjeto.o ../../engine/conversa.o ../../engine/culling.o ../../ia/agent.o ../../ia/pattAgent.o ../../ia/potentAgent.o ../../etc/distance.o ../../etc/glm.o ../../engine/util.o ../../engine/sun.o pf.o politic.o states.o briefcase.o $(RES)
+LINKOBJ  = agents.o editor.o guiIO.o iaEditor.o message.o ../../gui/figura.o ../../gui/fonte.o ../../gui/healthBar.o ../../gui/janela.o ../../gui/lista.o ../../gui/menu.o ../../gui/mouse.o ../../gui/quadtexto.o ../../gui/seltexto.o ../../gui/tabbotao.o ../../gui/bartexto.o ../../gui/botao.o ../../gui/cores.o ../../gui/cxsel.o ../../gui/desenho.o ../../gui/erro.o ../../gui/eventos.o ../../gui/farso.o ../../particle/part1.o ../../particle/part2.o ../../particle/part3.o ../../particle/part4.o ../../particle/part5.o ../../particle/part6.o ../../particle/part7.o ../../particle/particle.o ../../particle/partSystem.o ../../particle/wave.o ../../map/map.o ../../map/mapfog.o ../../map/maplights.o ../../map/mapobjeto.o ../../engine/conversa.o ../../engine/culling.o ../../ia/agent.o ../../ia/pattAgent.o ../../ia/potentAgent.o ../../etc/distance.o ../../etc/glm.o ../../engine/util.o ../../engine/sun.o pf.o politic.o states.o briefcase.o $(RES)
 LIBS =  -L"C:/DevCpp/lib" -mwindows -g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_mixer -lSDL_image  
 INCS =  -I"C:/DevCpp/include" 
 CXXINCS =  -I"C:/DevCpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/DevCpp/include/c++/3.4.2/backward"  -I"C:/DevCpp/include/c++/3.4.2/mingw32"  -I"C:/DevCpp/include/c++/3.4.2"  -I"C:/DevCpp/include" 
@@ -163,3 +163,15 @@ message.o: message.cpp
 
 ../../engine/sun.o: ../../engine/sun.cpp
 	$(CPP) -c ../../engine/sun.cpp -o ../../engine/sun.o $(CXXFLAGS)
+
+pf.o: pf.cpp
+	$(CPP) -c pf.cpp -o pf.o $(CXXFLAGS)
+
+politic.o: politic.cpp
+	$(CPP) -c politic.cpp -o politic.o $(CXXFLAGS)
+
+states.o: states.cpp
+	$(CPP) -c states.cpp -o states.o $(CXXFLAGS)
+
+briefcase.o: briefcase.cpp
+	$(CPP) -c briefcase.cpp -o briefcase.o $(CXXFLAGS)
