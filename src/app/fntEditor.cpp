@@ -683,9 +683,9 @@ int main(int argc, char *argv[])
 
     delete(interf);
 
-    int d = 'ê';
+    int d = 'û';
     printf("%c %d\n",d,d);
-    d = 'é';
+    d = 'Û';
     printf("%c %d\n",d,d);    
 
     return(0);

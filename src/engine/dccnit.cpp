@@ -1742,45 +1742,6 @@ void engine::Draw()
       }
    }
 
-   if(walkStatus == ENGINE_WALK_MOUSE)
-   {
-      GLfloat destX =0, destZ=0;
-      //PCs->personagemAtivo->pathFind.drawPath();
-      PCs->personagemAtivo->pathFind.getDestiny(destX, destZ);
-      
-      glDisable(GL_LIGHTING);
-       /* Draw Movimentation Destiny */
-       if(destinyVariation >= 2.0)
-       {
-          destinyVariation = -2.0;
-       }
-       destinyVariation += 0.1;
-       glColor4f(1,1,1,1);
-       glEnable(GL_BLEND);
-       glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-       glPushMatrix();
-         glEnable(GL_TEXTURE_2D);
-         glBindTexture(GL_TEXTURE_2D, destinyImage );
-         glBegin(GL_QUADS);
-            glTexCoord2f(0,0);
-            glVertex3f(destX-(4+destinyVariation), 0.1, 
-                       destZ-(4+destinyVariation));
-            glTexCoord2f(0,1);
-            glVertex3f(destX-(4+destinyVariation), 0.1, 
-                       destZ+(4+destinyVariation));
-            glTexCoord2f(1,1);
-            glVertex3f(destX+(4+destinyVariation), 0.1, 
-                       destZ+(4+destinyVariation));
-            glTexCoord2f(1,0);
-            glVertex3f(destX+(4+destinyVariation), 0.1, 
-                       destZ-(4+destinyVariation));
-         glEnd();
-         glDisable(GL_TEXTURE_2D);
-         glDisable(GL_BLEND);
-         glEnable(GL_LIGHTING);
-      glPopMatrix();
-   }
-
    /* Draw Combat Mode Things */
    if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
        (fightStatus == FIGHT_PC_TURN))
@@ -1837,6 +1798,45 @@ void engine::Draw()
       glEnable(GL_LIGHTING);
 
       glDisable(GL_BLEND);
+   }
+
+   if(walkStatus == ENGINE_WALK_MOUSE)
+   {
+      GLfloat destX =0, destZ=0;
+      //PCs->personagemAtivo->pathFind.drawPath();
+      PCs->personagemAtivo->pathFind.getDestiny(destX, destZ);
+      
+      glDisable(GL_LIGHTING);
+       /* Draw Movimentation Destiny */
+       if(destinyVariation >= 2.0)
+       {
+          destinyVariation = -2.0;
+       }
+       destinyVariation += 0.1;
+       glColor4f(1,1,1,1);
+       glEnable(GL_BLEND);
+       glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+       glPushMatrix();
+         glEnable(GL_TEXTURE_2D);
+         glBindTexture(GL_TEXTURE_2D, destinyImage );
+         glBegin(GL_QUADS);
+            glTexCoord2f(0,0);
+            glVertex3f(destX-(4+destinyVariation), 0.25, 
+                       destZ-(4+destinyVariation));
+            glTexCoord2f(0,1);
+            glVertex3f(destX-(4+destinyVariation), 0.25, 
+                       destZ+(4+destinyVariation));
+            glTexCoord2f(1,1);
+            glVertex3f(destX+(4+destinyVariation), 0.25, 
+                       destZ+(4+destinyVariation));
+            glTexCoord2f(1,0);
+            glVertex3f(destX+(4+destinyVariation), 0.25, 
+                       destZ-(4+destinyVariation));
+         glEnd();
+         glDisable(GL_TEXTURE_2D);
+         glDisable(GL_BLEND);
+         glEnable(GL_LIGHTING);
+      glPopMatrix();
    }
 
    waveTest->doStep();
@@ -2081,6 +2081,7 @@ void engine::OpenShortcutsWindow()
                                   language.WINDOW_SHORTCUTS_FPS.c_str());
    briefTxt = shortCutsWindow->objects->InserirQuadroTexto(8,36,249,100,2,
                                   language.WINDOW_SHORTCUTS_HELP.c_str());
+   briefTxt->fonte = FMINI;
    /*ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
    ObjTxt->Cores.corCont[1].B = 255;*/
    ObjTxt = shortCutsWindow->objects->InserirQuadroTexto(151,20,249,35,2,
