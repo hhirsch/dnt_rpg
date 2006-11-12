@@ -262,6 +262,17 @@ void hexagono_Desenhar(SDL_Surface *screen, int x,int y, int lado, int salvar)
    linha_Desenhar(screen,x+aux,y+auy,x,y,0);
 }
 
+int smallestPowerOfTwo(int num)
+{
+   int i = 2;
+   while(i < num)
+   {
+      i *= 2;
+   }
+   return(i);
+}
+
+
 void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16], 
                     GLint viewPort[4],int xa, int ya, int xb, int yb, 
                     double profundidade)
@@ -269,6 +280,10 @@ void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16],
        
 
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
+
+   GLfloat xOverlay = (GLfloat) (xb-xa+1) / (GLfloat)smallestPowerOfTwo(xb-xa+1);
+   GLfloat yOverlay = (GLfloat) (yb-ya+1) / (GLfloat)smallestPowerOfTwo(yb-ya+1);
+   
    gluUnProject(xa,(599-ya), profundidade, modl, proj, viewPort, &x1, &y1, &z1);
    gluUnProject(xa,(599-yb-1),profundidade, modl, proj, viewPort, &x2, &y2, &z2);
    gluUnProject(xb+1, (599-yb-1), profundidade, modl, proj, viewPort, 
@@ -285,13 +300,13 @@ void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16],
       glTexCoord2f(0,0);
       glVertex3f(x1, y1, z1);
 	
-      glTexCoord2f(1,0);
+      glTexCoord2f(xOverlay,0);
       glVertex3f(x4, y4, z4);
 	
-      glTexCoord2f(1,1);
+      glTexCoord2f(xOverlay,yOverlay);
       glVertex3f(x3, y3, z3);
 	
-      glTexCoord2f(0,1);
+      glTexCoord2f(0,yOverlay);
       glVertex3f(x2, y2, z2);
    glEnd();
 
@@ -311,9 +326,28 @@ void carregaTextura(SDL_Surface* img, GLuint* textID)
 {
    glGenTextures(1,textID);
    glBindTexture(GL_TEXTURE_2D,*textID);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 
-                               0, GL_RGB, GL_UNSIGNED_BYTE, 
-                               img->pixels);
+
+   if( ( (img->w & (img->w - 1)) != 0 ) ||
+       ( (img->h & (img->h - 1)) != 0 )  )
+   {
+      /* Convert to Power of Two */
+      SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       smallestPowerOfTwo(img->w),
+                       smallestPowerOfTwo(img->h),32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+      
+      SDL_BlitSurface(img, NULL, tmp, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
+                                  0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                                  tmp->pixels);
+      SDL_FreeSurface(tmp);
+   }
+   else
+   {
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 
+                                  0, GL_RGB, GL_UNSIGNED_BYTE, 
+                                  img->pixels);
+   }
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
@@ -322,9 +356,28 @@ void carregaTexturaRGBA(SDL_Surface* img, GLuint* textID)
 {
    glGenTextures(1,textID);
    glBindTexture(GL_TEXTURE_2D,*textID);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
-                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
-                               img->pixels);
+
+   if( ( (img->w & (img->w - 1)) != 0 ) ||
+       ( (img->h & (img->h - 1)) != 0 )  )
+   {
+      /* Convert to Power of Two */
+      SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                       smallestPowerOfTwo(img->w),
+                       smallestPowerOfTwo(img->h),32,
+                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+      
+      SDL_BlitSurface(img, NULL, tmp, NULL);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
+                                  0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                                  tmp->pixels);
+      SDL_FreeSurface(tmp);
+   }
+   else
+   {
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
+                                  0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                                  img->pixels);
+   }
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }

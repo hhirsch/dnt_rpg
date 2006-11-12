@@ -45,7 +45,7 @@ class initialScreen
       lang language;   /**< language internationalization */
 
       int result;      /**< Result of the initial Screen */
-      int done;
+      bool done;
       
       botao* buttonNew;
       botao* buttonContinue;

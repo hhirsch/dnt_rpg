@@ -30,7 +30,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
 {
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
-   done = 0;
+   done = false;
    Tobjeto* object = NULL;
    int eventInfo = NADA;
    janela* jan = gui->ljan->InserirJanela(335,235,462,362,
@@ -89,7 +89,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    while (!done)
    {
       tempo = SDL_GetTicks();
-      if(tempo - tempoAnterior >= 20) 
+      if((tempo - tempoAnterior) >= 20) 
       {
          tempoAnterior = tempo;
          SDL_PumpEvents();
@@ -106,12 +106,12 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
                  if(object == (Tobjeto*) buttonNew)
                  {
                     result = NEW_GAME;
-                    done = 1;
+                    done = true;
                  }
                  else if(object == (Tobjeto*) buttonContinue)
                  {
                     result = CONTINUE_GAME;
-                    done = 1;
+                    done = true;
                  }
                  else if(object == (Tobjeto*) buttonLoad)
                  {
@@ -124,12 +124,12 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
                  else if(object == (Tobjeto*) buttonExit)
                  {
                     result = EXIT_GAME;
-                    done = 1;
+                    done = true;
                  }
                  else if(object == (Tobjeto*) buttonOptions)
                  {
                     result = OPTIONS;
-                    done = 1;
+                    done = true;
                  }
              }
          }
@@ -137,9 +137,9 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          glFlush();
          SDL_GL_SwapBuffers();
       }
-      else if(19 - (tempo - tempoAnterior) > 0 ) 
+      else if((19 - (int)(tempo - tempoAnterior)) > 0 ) 
       {
-         SDL_Delay(19 - (tempo - tempoAnterior) );
+         SDL_Delay((19 - (tempo - tempoAnterior)) );
       }
    }
 
@@ -147,3 +147,4 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    SDL_ShowCursor(SDL_DISABLE);
    return(result);
 }
+
