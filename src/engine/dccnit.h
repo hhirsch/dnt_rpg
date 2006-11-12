@@ -199,6 +199,7 @@ class engine
 
       int walkStatus;              /**< Engine Walk Status */
       GLuint destinyImage;         /**< Move Destiny Image */
+      GLfloat destinyVariation;    /**< Variation on Destiny Draw */
 
       collision colisionDetect;    /**< The collision detect Module */
  

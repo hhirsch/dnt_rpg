@@ -82,6 +82,8 @@ engine::engine()
 
    waveTest = new waves("", 300, 20, 300, 5, 20);
 
+   destinyVariation = -2.0;
+
 #ifdef VIDEO_MODE
    startVideo = false;
 #endif
@@ -1748,6 +1750,11 @@ void engine::Draw()
       
       glDisable(GL_LIGHTING);
        /* Draw Movimentation Destiny */
+       if(destinyVariation >= 2.0)
+       {
+          destinyVariation = -2.0;
+       }
+       destinyVariation += 0.1;
        glColor4f(1,1,1,1);
        glEnable(GL_BLEND);
        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
@@ -1756,13 +1763,17 @@ void engine::Draw()
          glBindTexture(GL_TEXTURE_2D, destinyImage );
          glBegin(GL_QUADS);
             glTexCoord2f(0,0);
-            glVertex3f(destX-4, 0.1, destZ-4);
+            glVertex3f(destX-(4+destinyVariation), 0.1, 
+                       destZ-(4+destinyVariation));
             glTexCoord2f(0,1);
-            glVertex3f(destX-4, 0.1, destZ+4);
+            glVertex3f(destX-(4+destinyVariation), 0.1, 
+                       destZ+(4+destinyVariation));
             glTexCoord2f(1,1);
-            glVertex3f(destX+4, 0.1, destZ+4);
+            glVertex3f(destX+(4+destinyVariation), 0.1, 
+                       destZ+(4+destinyVariation));
             glTexCoord2f(1,0);
-            glVertex3f(destX+4, 0.1, destZ-4);
+            glVertex3f(destX+(4+destinyVariation), 0.1, 
+                       destZ-(4+destinyVariation));
          glEnd();
          glDisable(GL_TEXTURE_2D);
          glDisable(GL_BLEND);
