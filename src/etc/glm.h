@@ -13,6 +13,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
+#ifndef _glm_h
+#define _glm_h
 
 /* includes */
 #include <SDL/SDL_opengl.h>
@@ -128,7 +130,7 @@ glmDelete(GLMmodel* model);
  * \param fazListas -> 1 if wanna computate the draw lists.
  */
 GLMmodel* 
-glmReadOBJ(char* filename, char* diretorioTex,int fazListas);
+glmReadOBJ(const char* filename,const char* diretorioTex,int fazListas);
 
 /*!
  * Renders the model to the current OpenGL context using the
@@ -158,4 +160,6 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode);
  * \param model -> model to draw
  */
 GLvoid glmDrawLists(GLMmodel* model);
+
+#endif
 

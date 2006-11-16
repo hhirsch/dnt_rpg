@@ -807,7 +807,7 @@ glmDelete(GLMmodel* model)
  * filename - name of the file containing the Wavefront .OBJ format data.  
  */
 GLMmodel* 
-glmReadOBJ(char* filename, char* diretorioTex, int fazListas)
+glmReadOBJ(const char* filename,const char* diretorioTex, int fazListas)
 {
   GLMmodel* model;
   FILE*     file;

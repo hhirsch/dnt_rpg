@@ -81,6 +81,8 @@ engine::engine()
    engineMode = ENGINE_MODE_REAL_TIME;
 
    waveTest = new waves("", 300, 20, 300, 5, 20);
+   grassTest = new grass(64, 0, 127, 63, 200, 
+                         "../data/models/natural/matos/mato.obj");
 
    destinyVariation = -2.0;
 
@@ -103,6 +105,9 @@ engine::~engine()
 
    if(waveTest)
       delete(waveTest);
+
+   if(grassTest)
+      delete(grassTest);
 
    /* Delete particles */
    if(particleSystem != NULL)
@@ -1311,13 +1316,20 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         "../data/particles/lightning1.par");
          }
 
+         int i;
          if(keys[SDLK_z])
          {
-            waveTest->insertWave(2, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
-            waveTest->insertWave(0, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
-            waveTest->insertWave(1, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
-            waveTest->insertWave(3, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
-            waveTest->insertWave(4, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
+            for(i=0; i<5;i++)
+            {
+               waveTest->insertWave(i, 0, 2, 0.2, 200, 0, WAVE_DIRECTION_DOWN);
+            }
+         }
+         if(keys[SDLK_x])
+         {
+            for(i=0; i<20;i++)
+            {
+               waveTest->insertWave(0, i, 2, 0.2, 200, 0, WAVE_DIRECTION_RIGHT);
+            }
          }
 
       }
@@ -1841,6 +1853,8 @@ void engine::Draw()
 
    waveTest->doStep();
    waveTest->draw();
+
+   grassTest->NextStep(visibleMatrix);
 
    /* Draw Particles */
    glPushMatrix();

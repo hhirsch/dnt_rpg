@@ -1,8 +1,13 @@
 CC = g++
 CFLAGS = -g -c -Wall -O2
-OBJS = particle.o part1.o part2.o part3.o part4.o part5.o part6.o part7.o partSystem.o wave.o
+OBJS = grass.o particle.o part1.o part2.o part3.o part4.o part5.o part6.o part7.o partSystem.o wave.o
 
 all: $(OBJS)
+
+grass.o: grass.cpp grass.h
+	@printf "Making grass.o... "
+	@$(CC) $(CFLAGS) grass.cpp -o grass.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 particle.o: particle.cpp particle.h
 	@printf "Making particle.o... "

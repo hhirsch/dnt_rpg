@@ -96,6 +96,7 @@ particleSystem::particleSystem(string fileName, int mode)
  ***************************************************************/
 void particleSystem::init(int total, int mode)
 {
+   actualParticles = 0;
    particles = (particle*) malloc(total*sizeof(particle));
    maxParticles = total;
 
