@@ -118,6 +118,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
    int i;
    bool criticalHit = false;
    bool criticalMiss = false;
+   bool miss = false;
    char texto[50];
 
    if( (featNumber < 0) || (featNumber >= totalFeats) )
@@ -161,6 +162,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       /* verify critical Miss */
       if( diceValue == 1)  
       {
+          miss = true;
           criticalRoll = (rand() % DICE_D20 +1);
           if( (criticalRoll + bonus - targetValue) <= 0 )
           {
@@ -185,7 +187,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       /*TODO apply resistances  */
 
-      if( (diceValue - targetValue < 0) || (criticalMiss) )
+      if( (diceValue - targetValue < 0) || (criticalMiss) || (miss) )
       {
          brief += language.FEAT_MISS;
          if( criticalMiss )

@@ -96,6 +96,18 @@ void grass::EndRender()
 
 void grass::actualize(particle* part)
 {
+   part->prvX += part->velX;
+
+   //printf("%.3f AND %.3f BY %.3f\n",part->prvX, part->prvR, part->velX);
+
+   if(part->prvX <= -45)
+   {
+      part->velX = 0.50;
+   }
+   else if(part->prvX >= part->prvR+10)
+   {
+      part->velX = -0.50;
+   }
 }
 
 bool grass::continueLive(particle* part)
@@ -121,18 +133,17 @@ void grass::createParticle(particle* part)
                 + centerZ2;
    
    part->prvX = 15*(rand() / ((double)RAND_MAX + 1));
-   part->prvY = 90*(rand() / ((double)RAND_MAX + 1));;
+   part->prvY = 90*(rand() / ((double)RAND_MAX + 1));
    part->prvZ = 15*(rand() / ((double)RAND_MAX + 1));
+   
+   part->velX = -0.5;
+   part->prvR = part->prvX;
+   //part->velZ = -1.0;
+   
    part->size = 1; 
-   part->velY = 0.0;
-   part->velX = 0.0;
-   part->velZ = 0.0;
    part->R = 0;
    part->G = 0;
    part->B = 0;
-   part->prvR = 0;
-   part->prvG = 0; 
-   part->prvB = 0;
 }
 
 void grass::NextStep(GLfloat matriz[6][4])
