@@ -42,12 +42,12 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    /* Skill Description */
    desc = window->objects->InserirQuadroTexto(8,38,251,170,1,
                            externalSkill->m_skills[curSkill].descricao.c_str());
-   desc->Cores.corTexto.R = 20;
-   desc->Cores.corTexto.G = 29;
-   desc->Cores.corTexto.B = 217;
-   desc->Cores.corBot.R = desc->Cores.corCont[2].R; 
-   desc->Cores.corBot.G = desc->Cores.corCont[2].G;
-   desc->Cores.corBot.B = desc->Cores.corCont[2].B;
+   desc->Cores.corTexto.R = 246;
+   desc->Cores.corTexto.G = 190;
+   desc->Cores.corTexto.B = 190;
+   desc->Cores.corBot.R = 155;
+   desc->Cores.corBot.G = 5;
+   desc->Cores.corBot.B = 5;
    desc->fonte = FMINI;
    desc->tamFonte = 1;
  

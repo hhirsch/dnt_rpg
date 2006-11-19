@@ -6,7 +6,8 @@
  *************************************************************************/
 
 #include "skills.h"
-#include "defs.h"
+#include "align.h"
+#include "modifier.h"
 
 #define PSYCHO_HOSTILE 0
 #define PSYCHO_NEUTRAL 1
@@ -46,24 +47,26 @@ class thing
       /*!
        **********************************************
        *  Get the skill bonus (modifier or not).
-       *  \param skillNumber -> number of the skill.
+       *  \param curSkill -> current Skill
        *  \return bonus.
        **********************************************/
-      int skillBonus(int skillNumber);
+      int skillBonus(skill* curSkill);
       /*!
        **********************************************
        *  Get the attribute bonus: modifier.
-       *  \param attNumber -> number of the attribute.
+       *  \param curAttibute -> current attribute.
        *  \return bonus.
        **********************************************/
-      int attBonus(int attNumber);
+      int attBonus(skill* curAttribute);
+      int attBonus(int curAttribute);
+
       /*!
        **********************************************
        *  Get the bonus Value (modifier or not).
        *  \param something -> number of the definition.
        *  \return bonus.
        **********************************************/
-      int getBonusValue(int something);
+      int getBonusValue(factor something);
 };
 
 #endif

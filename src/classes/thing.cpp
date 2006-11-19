@@ -30,49 +30,41 @@ thing::~thing()
 /******************************************************
  *                   skillBonus                       *
  ******************************************************/
-int thing::skillBonus(int skillNumber)
+int thing::skillBonus(skill* curSkill)
 {
    int att;
-   if( (skillNumber >= ATT_SKILL_FIRST) && (ATT_SKILL_LAST))
-   {
-      att = attBonus(sk.m_skills[skillNumber].habilidadeBase);
-      return(att + sk.m_skills[skillNumber].pontos);
-   }
-   else
-   {
-      return(0);
-   }
+   att = attBonus(curSkill->habilidadeBase);
+   return(att + curSkill->pontos);
 }
 
 /******************************************************
  *                     attBonus                       *
  ******************************************************/
-int thing::attBonus(int attNumber)
+int thing::attBonus(skill* curAttribute)
 {
-   if( (attNumber >= ATT_STRENGHT) || (attNumber <= ATT_CHARISM))
-   { 
-       return((int)floor((sk.m_skills[attNumber].pontos-10) / 2.0));
-   } 
-   else
-   {
-      return(0);
-   }
+   return((int)floor((curAttribute->pontos-10) / 2.0));
 }
+
+int thing::attBonus(int curAttribute)
+{
+   return(attBonus(&sk.m_skills[curAttribute]));
+}
+
 
 /******************************************************
  *                   getBonusValue                    *
  ******************************************************/
-int thing::getBonusValue(int something)
+int thing::getBonusValue(factor something)
 {
-   if(isSkill(something))
+   if(something.type == "ATTRIBUTE")
    {
-     return(skillBonus(something));
+      return(attBonus(sk.getSkillByString(something.id)));
    }
-   else
-   if(isAttribute(something))
+   else if(something.type == "SKILL")
    {
-     return(attBonus(something));
+      return(skillBonus(sk.getSkillByString(something.id)));
    }
+   
    return(0);
 }
 

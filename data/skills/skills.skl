@@ -1,47 +1,42 @@
-00 notused.ski ../data/skills/Img/na.png
-01 forca.ski   ../data/skills/Img/forca.png
-02 destreza.ski ../data/skills/Img/destreza.png
-03 constituicao.ski ../data/skills/Img/constituicao.png
-04 inteligencia.ski ../data/skills/Img/inteligencia.png
-05 sabedoria.ski ../data/skills/Img/sabedoria.png
-06 carisma.ski ../data/skills/Img/carisma.png
-07 acrobacias.ski ../data/skills/Img/acrobacias.png
-08 adestrarbichos.ski ../data/skills/Img/adestrar.png
-09 arrombar.ski ../data/skills/Img/arrombar.png
-10 artedoescape.ski ../data/skills/Img/artedoescape.png
-11 avaliar.ski ../data/skills/Img/avaliar.png
-12 blefar.ski ../data/skills/Img/blefar.png
-13 bovinice.ski ../data/skills/Img/bovinice.png
-14 cnhsofrimento.ski ../data/skills/Img/cnhsofrimento.png
-15 curar.ski ../data/skills/Img/curar.png
-16 diplomacia.ski ../data/skills/Img/diplomacia.png
-17 discursoprof.ski ../data/skills/Img/discursoprof.png
-18 disfarces.ski ../data/skills/Img/disfarces.png
-19 equilibrio.ski ../data/skills/Img/equilibrio.png
-20 escalar.ski ../data/skills/Img/escalar.png
-21 esconder.ski ../data/skills/Img/esconder.png
-22 falaridioma.ski ../data/skills/Img/falaridioma.png
-23 falsificar.ski ../data/skills/Img/falsificar.png
-24 furtividade.ski ../data/skills/Img/furtividade.png
-25 intimidar.ski ../data/skills/Img/intimidar.png
-26 montar.ski ../data/skills/Img/montar.png
-27 nadar.ski ../data/skills/Img/nadar.png
-28 observar.ski ../data/skills/Img/observar.png
-29 opobjele.ski ../data/skills/Img/opobjele.png
-30 opobjmec.ski ../data/skills/Img/opobjmec.png
-31 obterinf.ski ../data/skills/Img/obterinf.png
-32 ouvir.ski ../data/skills/Img/ouvir.png
-33 passelivre.ski ../data/skills/Img/passelivre.png
-34 penosaco.ski ../data/skills/Img/penosaco.png
-35 performar.ski ../data/skills/Img/performar.png
-36 prestidig.ski ../data/skills/Img/prestidig.png
-37 roupasbizarras.ski ../data/skills/Img/roupasbizarras.png
-38 semtempo.ski ../data/skills/Img/semtempo.png
-39 cnhtagmedicinal.ski ../data/skills/Img/tagarelice.png
-40 tocarinst.ski ../data/skills/Img/tocarinst.png
-41 notused.ski ../data/skills/Img/na.png
-42 notused.ski ../data/skills/Img/na.png
-43 notused.ski ../data/skills/Img/na.png
-44 notused.ski ../data/skills/Img/na.png
-45 notused.ski ../data/skills/Img/na.png
-46 notused.ski ../data/skills/Img/na.png
+41
+00 notused.ski ../data/skills/Img/na.png NOT_USED
+01 forca.ski   ../data/skills/Img/forca.png STRENGHT
+02 destreza.ski ../data/skills/Img/destreza.png DEXTERITY
+03 constituicao.ski ../data/skills/Img/constituicao.png CONSTITUTION
+04 inteligencia.ski ../data/skills/Img/inteligencia.png INTELLIGENCE
+05 sabedoria.ski ../data/skills/Img/sabedoria.png WISDOW
+06 carisma.ski ../data/skills/Img/carisma.png CHARISM
+07 acrobacias.ski ../data/skills/Img/acrobacias.png ACROBATICS
+08 adestrarbichos.ski ../data/skills/Img/adestrar.png TRAIN_ANIMALS
+09 arrombar.ski ../data/skills/Img/arrombar.png BURGLARIZE
+10 artedoescape.ski ../data/skills/Img/artedoescape.png ART_OF_THE_ESCAPE
+11 avaliar.ski ../data/skills/Img/avaliar.png APPRAIS
+12 blefar.ski ../data/skills/Img/blefar.png BLUFF
+13 bovinice.ski ../data/skills/Img/bovinice.png BOVINICE
+14 cnhsofrimento.ski ../data/skills/Img/cnhsofrimento.png KNOWLEDGE_SUFFER
+15 curar.ski ../data/skills/Img/curar.png HEAL
+16 diplomacia.ski ../data/skills/Img/diplomacia.png DIPLOMACY
+17 discursoprof.ski ../data/skills/Img/discursoprof.png PROFESSIONAL_SPEECH
+18 disfarces.ski ../data/skills/Img/disfarces.png DISGUISES
+19 equilibrio.ski ../data/skills/Img/equilibrio.png BALANCE
+20 escalar.ski ../data/skills/Img/escalar.png SCALE
+21 esconder.ski ../data/skills/Img/esconder.png HIDE
+22 falaridioma.ski ../data/skills/Img/falaridioma.png SPEAK_LANGUAGE
+23 falsificar.ski ../data/skills/Img/falsificar.png COUNTERFEIT
+24 furtividade.ski ../data/skills/Img/furtividade.png FURTIVE
+25 intimidar.ski ../data/skills/Img/intimidar.png INTIMIDATE
+26 montar.ski ../data/skills/Img/montar.png RIDE_ANIMALS
+27 nadar.ski ../data/skills/Img/nadar.png SWIM
+28 observar.ski ../data/skills/Img/observar.png OBSERVE
+29 opobjele.ski ../data/skills/Img/opobjele.png OPERATE_ELETRONIC_OBJECT
+30 opobjmec.ski ../data/skills/Img/opobjmec.png OPERATE_MECANIC_OBJECT
+31 obterinf.ski ../data/skills/Img/obterinf.png GET_INFORMATION
+32 ouvir.ski ../data/skills/Img/ouvir.png LISTEN
+33 passelivre.ski ../data/skills/Img/passelivre.png FREE_PASS
+34 penosaco.ski ../data/skills/Img/penosaco.png FOOT_ON_MANS_GENITALS
+35 performar.ski ../data/skills/Img/performar.png PERFORM
+36 prestidig.ski ../data/skills/Img/prestidig.png PRETIDIGITATION
+37 roupasbizarras.ski ../data/skills/Img/roupasbizarras.png BIZARRE_CLOTHES
+38 semtempo.ski ../data/skills/Img/semtempo.png OUT_OF_TIME
+39 cnhtagmedicinal.ski ../data/skills/Img/tagarelice.png MEDICAL_LOUD_MOUTH
+40 tocarinst.ski ../data/skills/Img/tocarinst.png PLAY_INSTRUMENT

@@ -11,10 +11,10 @@
 using namespace std;
 
 #include "thing.h"
+#include "modifier.h"
 #include "../lang/lang.h"
 
-#define NUMBER_OF_FEATS     4 /**< Total Number of Feats */
-#define MAX_FEATS          30 /**< Max Number of Know Feats for character */
+#define MAX_FEATS          30 /**< Max number of Feats per Character */
 #define MAX_DEP_FEATS       5 /**< Max number of cost this, cost that feats */
 
 #define FEAT_MELEE_ATTACK   0 /**< Melee Attack */
@@ -28,9 +28,9 @@ using namespace std;
  *************************************************************************/
 typedef struct _depfeat
 {
-   float  reason;      /**< Dependence Reason (1/1, 1/2, 1/3, 2/1, etc) */
-   string featName;    /**< Name of the Feat */
-   bool   used;        /**< Dependence used or not? */
+   float  reason;       /**< Dependence Reason (1/1, 1/2, 1/3, 2/1, etc) */
+   string featIDString; /**< ID String of the Feat */
+   bool   used;         /**< Dependence used or not? */
 }depFeat;
 
 /*!
@@ -44,18 +44,19 @@ typedef struct _featDesc
 {
    int internalListNumber;         /**< Number on List */
    int requeridedLevel;            /**< Requerided Character class level */
-   int requeridedClass;            /**< Requerided Character Class */
+   factor requeridedFactor;        /**< Requerided Factor (class, race, etc) */
    int quantityPerDay;             /**< Quantity avaible to use per day*/
    int aditionalQuantity;          /**< Quantity Added per AditionalLevel */
    int aditionalLevels;            /**< Number of Levels to AditionalQuantity */
    int costToUse;                  /**< Cost, in PP to use the feat */
    int actionType;                 /**< Action Type of the feat */
    int action;                     /**< Defined Action of the feat */
-   int conceptBonus;               /**< The concept that bonus the feat */
-   int conceptAgainst;             /**< Define the concept against the feat */
-   int conceptTarget;              /**< Define the valid target of feat */
+   factor conceptBonus;            /**< The concept that bonus the feat */
+   factor conceptAgainst;          /**< Define the concept against the feat */
+   factor conceptTarget;           /**< Define the valid target of feat */
    diceThing diceInfo;             /**< Defined Dice*/
    string name;                    /**< Feat Name */
+   string idString;                /**< Feat ID String */
    string description;             /**< Feat Description */
    depFeat depFeats[MAX_DEP_FEATS];/**< Feat Dependency */
    SDL_Surface* image;             /**< Feat Image */
@@ -77,12 +78,13 @@ typedef struct _feat
    int costToUse;                   /**< Cost, in PP to use */
    int actionType;                  /**< Action Type of the feat */
    int action;                      /**< Action of the feat */
-   int conceptBonus;                /**< Concept that bonus the feat */
-   int conceptAgainst;              /**< Define the concept against the feat */
-   int conceptTarget;               /**< Define the valid target of feat */
+   factor conceptBonus;             /**< Concept that bonus the feat */
+   factor conceptAgainst;           /**< Define the concept against the feat */
+   factor conceptTarget;            /**< Define the valid target of feat */
    float actualQuantity;            /**< Actual quantity to use */
    diceThing diceInfo;              /**< Defined Dice*/
    string name;                     /**< Feat Name */
+   string idString;                 /**< Feat ID String */
    depFeat depFeats[MAX_DEP_FEATS]; /**< Feat Dependency */
 }feat;                              /**< Feat Struct */
 
@@ -113,7 +115,7 @@ class feats
        * \param featName -> name of feat to return
        * \return return the feat struct that has the name.
        ***************************************************************/
-      feat* featByName(string featName);
+      feat* featByString(string featName);
       /*!
        **************************************************************** 
        * Insert a feat on Character's Feats.
@@ -167,7 +169,7 @@ class feats
       int applyInvocationFeat(int featNumber);*/
 
    private:
-      feat m_feats[MAX_FEATS]; /**< Internal Feats Struct */
+      feat m_feats[MAX_FEATS];           /**< Internal Feats Struct */
       int  totalFeats;         /**< Actual Number of Feats */
       lang language; /**< Language Internationalization */
 
@@ -199,11 +201,11 @@ class featsList
 
       /*!
        ************************************************************** 
-       * Return the featDescription with name featName
+       * Return the featDescription with idString featName
        * \param featName -> name of feat to return
        * \return the featDescription struct.
        ***************************************************************/
-      featDescription featByName(string featName);
+      featDescription featByString(string featName);
 
       /*!
        **************************************************************** 
@@ -214,7 +216,8 @@ class featsList
       featDescription featByNumber(int featNumber);
 
    private:
-      featDescription m_feats[NUMBER_OF_FEATS]; /**< Internal Desc Struct */
+      featDescription* m_feats; /**< Internal Desc Struct */
+      int totalFeats;           /**< Total Declared Feats */
 };
 
 #endif

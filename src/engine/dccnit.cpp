@@ -66,6 +66,10 @@ engine::engine()
    /* Load Alignments & Tendecies */
    alignList = new aligns(language.ALIGN_DIR.c_str(), "../data/alignment/alignment.lst");
 
+   /* Load Races */
+   raceList = new races("../data/races/Ingles/", "../data/races/races.lst");
+
+
    /* Initialize readModes variables */
    lastRead = SDL_GetTicks();
    lastMouse = lastRead;
@@ -153,6 +157,8 @@ engine::~engine()
    delete(alignList);
 
    delete(features);
+
+   delete(raceList);
 }
 
 /*********************************************************************
@@ -491,13 +497,14 @@ int engine::CharacterScreen(GLuint* idTextura)
    int status = 0;
 
    align* selected; // TODO remove it from here
+   race* sel; //TODO remove from here
 
   
    /*TODO Other screens*/
 
    /* TODO  put on character screen */
    
-    skills* sk = new skills(language.SKILLS_DIR.c_str(),
+   skills* sk = new skills(language.SKILLS_DIR.c_str(),
                            "../data/skills/skills.skl"); 
 
    /* Att Screen */
@@ -507,9 +514,12 @@ int engine::CharacterScreen(GLuint* idTextura)
    skillWindow* skWindow = NULL;
 
    /* Alignment Window */
-   alignWindow* alWindow = new alignWindow(alignList, gui);
+   alignWindow* alWindow = NULL;
 
-   while( (status != 3) )
+   /* Race Window */
+   raceWindow* rcWindow = new raceWindow(raceList, gui);
+
+   while( (status != 4) )
    {
       tempo = SDL_GetTicks();
       if(tempo - tempoAnterior >= ACTUALIZATION_RATE) 
@@ -529,48 +539,64 @@ int engine::CharacterScreen(GLuint* idTextura)
 
          if(status == 0)
          {
-            charCreation = alWindow->treat(object, eventInfo, gui, &selected);
-            if(charCreation == ALIGNW_CONFIRM)
+            charCreation = rcWindow->treat(object, eventInfo, gui, &sel);
+            if(charCreation == RACEW_CONFIRM)
             {
                status = 1;
-               delete(alWindow);
-               atWindow = new attWindow(sk, gui);
+               delete(rcWindow);
+               alWindow = new alignWindow(alignList, gui);
             }
-            else if(charCreation == ALIGNW_CANCEL)
+            else if(charCreation == RACEW_CANCEL)
             {
-               status = 3;
-               delete(alWindow);
+               status = 4;
+               delete(rcWindow);
                charCreation = CHAR_CANCEL;
             }
          }
          else if(status == 1)
          {
+            charCreation = alWindow->treat(object, eventInfo, gui, &selected);
+            if(charCreation == ALIGNW_CONFIRM)
+            {
+               status = 2;
+               delete(alWindow);
+               atWindow = new attWindow(sk, gui);
+            }
+            else if(charCreation == ALIGNW_CANCEL)
+            {
+               status = 0;
+               delete(alWindow);
+               rcWindow = new raceWindow(raceList, gui);
+            }
+         }
+         else if(status == 2)
+         {
              charCreation = atWindow->treat(object, eventInfo, gui);
              if(charCreation == ATTW_CONFIRM)
              {
-                status = 2;
+                status = 3;
                 delete(atWindow);
                 skWindow = new skillWindow(sk, 20, gui);
              }
              else if(charCreation == ATTW_CANCEL)
              {
-                status = 0;
+                status = 1;
                 delete(atWindow);
                 alWindow = new alignWindow(alignList, gui);
              }
          }
-         else if(status == 2)
+         else if(status == 3)
          {
             charCreation = skWindow->treat(object, eventInfo, gui); 
             if(charCreation == SKILLW_CONFIRM)
             {
-               status = 3;
+               status = 4;
                delete(skWindow);
                charCreation = CHAR_CONFIRM;
             }
             else if(charCreation == SKILLW_CANCEL)
             {
-               status = 1;
+               status = 2;
                delete(skWindow);
                atWindow = new attWindow(sk, gui);
             }

@@ -5,8 +5,6 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-#define MAX_SKILLS       46  /**< Max Number of Skills Avaible.*/
-
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
@@ -22,6 +20,7 @@ typedef struct _skill
    int mod;                /**< Needed points to add +1 on pontos */
    string nome;            /**< Skill Name */
    string descricao;       /**< Skill Description */
+   string idString;        /**< String Identificator of the Skill */
    int habilidadeBase;     /**< Base Attibute */
    SDL_Surface* imagem;    /**< Skill Image */
 }skill;
@@ -47,7 +46,13 @@ class skills
       /*! skills destructor. */
       ~skills();
 
-     skill m_skills[MAX_SKILLS]; /**< the internal skills */
+      /*! Return the wanted skill */
+      skill* getSkillByString(string idString);
+
+     skill* m_skills; /**< the internal skills */
+
+   private:
+     int totalSkills;
 };
 
 #endif

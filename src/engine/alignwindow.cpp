@@ -20,12 +20,12 @@ alignWindow::alignWindow(aligns* alg, interface* inter)
    /* Align Description */
    textDesc = window->objects->InserirQuadroTexto(5,42,250,180,1,
                                               actualAlign->description.c_str());
-   textDesc->Cores.corTexto.R = 20;
-   textDesc->Cores.corTexto.G = 29;
-   textDesc->Cores.corTexto.B = 217;
-   textDesc->Cores.corBot.R = textDesc->Cores.corCont[2].R; 
-   textDesc->Cores.corBot.G = textDesc->Cores.corCont[2].G;
-   textDesc->Cores.corBot.B = textDesc->Cores.corCont[2].B;
+   textDesc->Cores.corTexto.R = 246;
+   textDesc->Cores.corTexto.G = 190;
+   textDesc->Cores.corTexto.B = 190;
+   textDesc->Cores.corBot.R = 155;
+   textDesc->Cores.corBot.G = 5;
+   textDesc->Cores.corBot.B = 5;
    textDesc->fonte = FMINI;
    textDesc->tamFonte = 1;
 

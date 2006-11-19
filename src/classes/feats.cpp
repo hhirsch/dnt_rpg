@@ -1,5 +1,4 @@
 #include "feats.h" 
-#include "defs.h"
 #include "actions.h"
 #include <SDL/SDL_image.h>
 
@@ -38,12 +37,12 @@ feat* feats::featByNumber(int featNumber)
 /***************************************************************
  *                       featByName                            *
  ***************************************************************/
-feat* feats::featByName(string featName)
+feat* feats::featByString(string featName)
 {
    int i;
    for(i=0;i<totalFeats;i++)
    {
-      if(featName.compare(m_feats[i].name) == 0)
+      if(featName.compare(m_feats[i].idString) == 0)
       {
          return(&m_feats[i]);
       }
@@ -73,11 +72,12 @@ bool feats::insertFeat(featDescription featInsert)
       m_feats[totalFeats].conceptBonus = featInsert.conceptBonus;
       m_feats[totalFeats].conceptAgainst = featInsert.conceptAgainst;
       m_feats[totalFeats].conceptTarget = featInsert.conceptTarget;
+      m_feats[totalFeats].idString = featInsert.idString;
       for(i = 0; i < MAX_DEP_FEATS; i++)
       {
          m_feats[totalFeats].depFeats[i].reason = featInsert.depFeats[i].reason;
-         m_feats[totalFeats].depFeats[i].featName = 
-                                                featInsert.depFeats[i].featName;
+         m_feats[totalFeats].depFeats[i].featIDString = 
+                                             featInsert.depFeats[i].featIDString;
          m_feats[totalFeats].depFeats[i].used = featInsert.depFeats[i].used;
       }
       totalFeats++;
@@ -98,7 +98,7 @@ void feats::useFeat(int featNumber)
    {
        if(m_feats[featNumber].depFeats[i].used)
        {
-          ft = featByName(m_feats[featNumber].depFeats[i].featName);
+          ft = featByString(m_feats[featNumber].depFeats[i].featIDString);
           ft->actualQuantity -= 1.0 / m_feats[featNumber].depFeats[i].reason;
        }
    }
@@ -143,6 +143,8 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       //verify Bonus
       bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus) + 
               attacker.sizeModifier + attacker.baseAttackModifier;
+
+      printf("Bonus: %d = %d + %d + %d\n", bonus,attacker.getBonusValue(m_feats[featNumber].conceptBonus),attacker.sizeModifier,attacker.baseAttackModifier);
 
       diceValue = ((rand() % DICE_D20)+1); 
 
@@ -338,6 +340,7 @@ featsList::featsList(string dir, string arq)
    char buffer[1024];
    char buf2[128];
    char buf3[128];
+   char buf4[128];
    int num;
    int i;
    int aux;
@@ -349,15 +352,28 @@ featsList::featsList(string dir, string arq)
        printf("Error while opening feats list: %s\n",arq.c_str());
        return;
    }
-   
-   for(aux = 0; aux < NUMBER_OF_FEATS; aux++)
+
+   fgets(buffer, sizeof(buffer), file);
+   sscanf(buffer, "%d", &totalFeats);
+
+   if(totalFeats > 0)
    {
-      //fscanf(file,"%d %s",&num,&buffer[0]);
+      m_feats = new featDescription[totalFeats];
+   }
+   else
+   {
+      m_feats = NULL;
+   }
+
+   
+   for(aux = 0; aux < totalFeats; aux++)
+   {
       fgets(buffer, sizeof(buffer), file);
-      sscanf(buffer,"%d %s %s",&num,&buf2[0],&buf3[0]);
+      sscanf(buffer,"%d %s %s %s",&num,&buf2[0],&buf3[0], &buf4[0]);
       arqImagem = buf3;
       arqDescricao = buf2;
       arqDescricao = dir+arqDescricao;
+      m_feats[aux].idString = buf4;
 
       FILE* desc;
       if(! (desc = fopen(arqDescricao.c_str(), "r")))
@@ -371,14 +387,18 @@ featsList::featsList(string dir, string arq)
       fgets(buffer, sizeof(buffer), desc);
       m_feats[aux].description = buffer;
       fscanf(desc,"%d",&m_feats[aux].requeridedLevel);
-      fscanf(desc,"%s",&buffer[0]);
-      m_feats[aux].requeridedClass = numberConstant(buffer);
-      fscanf(desc,"%s",&buffer[0]);
-      m_feats[aux].conceptBonus = numberConstant(buffer);
-      fscanf(desc,"%s",&buffer[0]);
-      m_feats[aux].conceptAgainst = numberConstant(buffer);
-      fscanf(desc,"%s",&buffer[0]);
-      m_feats[aux].conceptTarget = numberConstant(buffer);
+      fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
+      m_feats[aux].requeridedFactor.type = buffer;
+      m_feats[aux].requeridedFactor.id = buf2;
+      fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
+      m_feats[aux].conceptBonus.type = buffer;
+      m_feats[aux].conceptBonus.id = buf2;
+      fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
+      m_feats[aux].conceptAgainst.type = buffer;
+      m_feats[aux].conceptAgainst.id = buf2;
+      fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
+      m_feats[aux].conceptTarget.type = buffer;
+      m_feats[aux].conceptTarget.id = buf2;
       fscanf(desc,"%d*d%d+%d",&m_feats[aux].diceInfo.baseDice.numberOfDices,
                               &m_feats[aux].diceInfo.baseDice.diceID,
                               &m_feats[aux].diceInfo.baseDice.sumNumber);
@@ -399,7 +419,7 @@ featsList::featsList(string dir, string arq)
          fscanf(desc,"%s %f,%d",&buf2[0],
                                 &m_feats[aux].depFeats[i].reason,
                                 &num);
-         m_feats[aux].depFeats[i].featName = buf2;
+         m_feats[aux].depFeats[i].featIDString = buf2;
          m_feats[aux].depFeats[i].used = num == 1;
       }
       m_feats[aux].image = IMG_Load(arqImagem.c_str());
@@ -414,17 +434,21 @@ featsList::featsList(string dir, string arq)
  ***************************************************************/
 featsList::~featsList()
 {
+   if(m_feats)
+   {
+      delete[] m_feats;
+   }
 }
 
 /***************************************************************
  *                        featByName                           *
  ***************************************************************/
-featDescription featsList::featByName(string featName)
+featDescription featsList::featByString(string featName)
 {
    int i;
-   for(i=0; i < NUMBER_OF_FEATS; i++)
+   for(i=0; i < totalFeats; i++)
    {
-      if(featName.compare(m_feats[i].name) == 0)
+      if(featName == m_feats[i].idString)
       {
          return(m_feats[i]);
       }
@@ -437,7 +461,7 @@ featDescription featsList::featByName(string featName)
  ***************************************************************/
 featDescription featsList::featByNumber(int featNumber)
 {
-   if( (featNumber > 0) && (featNumber < NUMBER_OF_FEATS) )
+   if( (featNumber > 0) && (featNumber < totalFeats) )
    {
       return(m_feats[featNumber]);
    }
