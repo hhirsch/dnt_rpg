@@ -1,10 +1,10 @@
 9
-00 autista.rca STRANGE_AUTISTIC
-01 boy.rca BOY_PATY
-02 gotico.rca GOTHIC
-03 hippie.rca HIPPIE
-04 humano.rca COMMON_HUMAN
-05 llama.rca HUMAN_LLAMA
-06 metaleiro.rca HEADBANGER
-07 skinhead.rca SKINHEAD_MANIAC
-08 mutante.rca MUTANT_HUMAN_CRICKET
+00 autista.rca ../data/races/Img/autista.png STRANGE_AUTISTIC
+01 boy.rca ../data/races/Img/boy.png BOY_PATY
+02 gotico.rca ../data/races/Img/gotico.png GOTHIC
+03 hippie.rca ../data/races/Img/hippie.png HIPPIE
+04 humano.rca ../data/races/Img/humano.png COMMON_HUMAN
+05 llama.rca ../data/races/Img/llama.png HUMAN_LLAMA
+06 metaleiro.rca ../data/races/Img/metaleiro.png HEADBANGER
+07 skinhead.rca ../data/races/Img/skin.png SKINHEAD_MANIAC
+08 mutante.rca ../data/races/Img/grilo.png MUTANT_HUMAN_CRICKET
