@@ -37,7 +37,17 @@ Constituição
 Inteligência
 Sabedoria
 Carisma
+Descrição do Atributo
 Alinhamento & Tendência
+Raçe
+Descrição da Raça
+Características da Raça
+Modificadores da Raça:
+Sem Modificadores.
+Perícias da Raça:
+Sem perícias.
+Habilidades da Raça:
+Sem Habilidades Especiais.
 rola iniciativa:
 Sem inimigos.
 Novo Turno
@@ -58,5 +68,6 @@ Pontos insuficientes para utilizar!
 ../data/skills/Portugues/
 ../data/feats/Portugues/
 ../data/alignment/Portugues/
+../data/races/Portugues/
 Argh! Mapa fora dos limites!\n
 Oxi! Não consegui iniciar o SDL!\n

@@ -22,7 +22,7 @@ Options
 Volume de Musique:
 Volume d'Effets:
 Langue:
-Qualifications
+Compétences
 Points Libres :
 Points:
 Coût:
@@ -37,7 +37,17 @@ Constitution
 Intelligence
 Sagesse
 Charisme
+Description de Caractéristique
 Alignement
+Race
+Description
+Caractéristiques
+Modificateurs Raciales:
+Aucuns Modificateurs.
+Compétences Raciales:
+Aucunes Compétences.
+Dons Raciales:
+Aucuns Dons.
 roule l'initiative:
 Plus d'ennemis.
 Nouveau Rond
@@ -58,5 +68,6 @@ Pas de points à employer!
 ../data/skills/Ingles/
 ../data/feats/Ingles/
 ../data/alignment/Ingles/
+../data/races/Ingles/
 Argh! Carte hors des limites!\n
 Mon Dieu! Ne peut pas init SDL\n

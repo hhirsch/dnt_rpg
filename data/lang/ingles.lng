@@ -37,7 +37,17 @@ Constitution
 Intelligence
 Wisdow
 Charism
+Attribute Description
 Tendency & Alignment
+Race
+Race Description
+Race Characteristics
+Race Modifiers:
+No Modifiers.
+Race Skills:
+No Skills.
+Race Feats:
+No Feats.
 rolls initiative:
 No more enemies.
 New Round
@@ -58,5 +68,6 @@ Not Enough Points to Use!
 ../data/skills/Ingles/
 ../data/feats/Ingles/
 ../data/alignment/Ingles/
+../data/races/Ingles/
 What the HEll!! Square Map Out of bounds!\n
 Argh! Can't init SDL!\n

@@ -67,7 +67,7 @@ engine::engine()
    alignList = new aligns(language.ALIGN_DIR.c_str(), "../data/alignment/alignment.lst");
 
    /* Load Races */
-   raceList = new races("../data/races/Ingles/", "../data/races/races.lst");
+   raceList = new races(language.RACE_DIR.c_str(), "../data/races/races.lst");
 
 
    /* Initialize readModes variables */

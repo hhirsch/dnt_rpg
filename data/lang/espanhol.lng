@@ -37,7 +37,17 @@ Constituición
 Inteligencia
 Sabiduría
 Carisma
+Descripción de la Característica
 Alineamiento
+Raza
+Descripción de la Raza
+Características de la Raza
+Modificadores de la Raza:
+Sin Modificadores.
+Habilidades de la Raza:
+Sin Habilidades.
+Dotes de Raza:
+Sin Dotes.
 juega iniciativa:
 No más enemigos.
 Nuevo Round
@@ -58,5 +68,6 @@ Puntos no suficientes!
 ../data/skills/Ingles/
 ../data/feats/Ingles/
 ../data/alignment/Ingles/
+../data/races/Ingles/
 Argh! Mapa fuera de los límites!\n
 Argh! No puedo iniciar SDL!\n

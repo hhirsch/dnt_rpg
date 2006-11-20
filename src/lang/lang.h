@@ -76,9 +76,22 @@ class lang
    static string ATTW_INTELLIGENCE;
    static string ATTW_WISDOW;
    static string ATTW_CHARISM;
+   static string ATTW_DESCRIPTION;
 
    /* alignwindow.cpp */
    static string ALIGNW_TITLE;
+   
+   /* racewindow.cpp */
+   static string RACEW_TITLE;
+   static string RACEW_DESCRIPTION;
+   static string RACEW_CHARACTERISTICS;
+   static string RACEW_MODIFIERS;
+   static string RACEW_NO_MODIFIERS;
+   static string RACEW_SKILLS;
+   static string RACEW_NO_SKILLS;
+   static string RACEW_FEATS;
+   static string RACEW_NO_FEATS;
+
       
    /* figths */
    static string FIGHT_ROLLS_INITIATIVE;
@@ -105,6 +118,7 @@ class lang
    static string SKILLS_DIR;
    static string FEATS_DIR;
    static string ALIGN_DIR;
+   static string RACE_DIR;
 
    /* Errors */
    static string ERROR_MAP_OUT;

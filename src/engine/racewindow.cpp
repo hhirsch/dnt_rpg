@@ -11,7 +11,7 @@ raceWindow::raceWindow(races* rc, interface* inter)
    
    /* create window */
    window = inter->ljan->InserirJanela(100,100,699,499,
-                                       "Race",
+                                       language.RACEW_TITLE.c_str(),
                                        1,1,NULL,NULL);
    /* Race Image */
    raceImage = window->objects->InserirFigura(8,20,0,0,NULL);   
@@ -19,7 +19,7 @@ raceWindow::raceWindow(races* rc, interface* inter)
 
    /* Race Description */
    textDescTitle = window->objects->InserirQuadroTexto(72,20,330,35,1,
-                                                       "Race Description");
+                                             language.RACEW_DESCRIPTION.c_str());
    textDescTitle->fonte = FHELVETICA;
    textDescTitle->tamFonte = 1;
    
@@ -36,7 +36,7 @@ raceWindow::raceWindow(races* rc, interface* inter)
 
    /* Race Characteristics */
    textCharacTitle = window->objects->InserirQuadroTexto(332,20,592,35,1,
-                                                       "Race Characteristics");
+                                         language.RACEW_CHARACTERISTICS.c_str());
    textCharacTitle->fonte = FHELVETICA;
    textCharacTitle->tamFonte = 1;
 
@@ -85,7 +85,7 @@ string raceWindow::getCharacteristics()
 {
    int i;
    //char mod[5];
-   string text = "Race Modifiers||";
+   string text = language.RACEW_MODIFIERS + "||";
    for(i=0; i<actualRace->totalModifiers; i++)
    {
       /*sprintf(mod, "%d", actualRace->raceModifiers[i].mod);
@@ -99,11 +99,11 @@ string raceWindow::getCharacteristics()
 
    if(actualRace->totalModifiers == 0)
    {
-      text += "No Modifiers||";
+      text += language.RACEW_NO_MODIFIERS + "||";
    }
 
    //TODO get race Name
-   text += "Race Feats||";
+   text += language.RACEW_FEATS + "||";
    for(i=0; i<actualRace->totalFeats; i++)
    {
       text += actualRace->raceFeats[i] + "|";
@@ -111,11 +111,11 @@ string raceWindow::getCharacteristics()
 
    if(actualRace->totalFeats == 0)
    {
-      text += "No Feats|";
+      text += language.RACEW_NO_FEATS + "|";
    }
 
    //TODO get Skill Name
-   text += "|Race Skills||";
+   text += "|" + language.RACEW_SKILLS + "||";
    for(i=0; i<actualRace->totalSkills; i++)
    {
       text += actualRace->raceSkills[i] + "|";
@@ -123,7 +123,7 @@ string raceWindow::getCharacteristics()
 
    if(actualRace->totalSkills == 0)
    {
-      text += "No Skills";
+      text += language.RACEW_NO_SKILLS;
    }
 
 

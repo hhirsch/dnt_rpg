@@ -108,10 +108,21 @@ void lang::ReloadFile(int lng)
    getline(file, ATTW_INTELLIGENCE);
    getline(file, ATTW_WISDOW);
    getline(file, ATTW_CHARISM);
+   getline(file, ATTW_DESCRIPTION);
 
    /* alignwindow.cpp */
    getline(file, ALIGNW_TITLE);
 
+   /* racewindow.cpp */
+   getline(file, RACEW_TITLE);
+   getline(file, RACEW_DESCRIPTION);
+   getline(file, RACEW_CHARACTERISTICS);
+   getline(file, RACEW_MODIFIERS);
+   getline(file, RACEW_NO_MODIFIERS);
+   getline(file, RACEW_SKILLS);
+   getline(file, RACEW_NO_SKILLS);
+   getline(file, RACEW_FEATS);
+   getline(file, RACEW_NO_FEATS);
 
    /* fight */
    getline(file,FIGHT_ROLLS_INITIATIVE);
@@ -138,6 +149,7 @@ void lang::ReloadFile(int lng)
    getline(file, SKILLS_DIR);
    getline(file, FEATS_DIR);
    getline(file, ALIGN_DIR);
+   getline(file, RACE_DIR);
 
    /* Errors */
    getline(file, ERROR_MAP_OUT);
@@ -201,9 +213,22 @@ void lang::ReloadFile(int lng)
    string lang::ATTW_INTELLIGENCE;
    string lang::ATTW_WISDOW;
    string lang::ATTW_CHARISM;
+   string lang::ATTW_DESCRIPTION;
 
    /* alignwindow.cpp */
    string lang::ALIGNW_TITLE;
+
+   /* racewindow.cpp */
+   string lang::RACEW_TITLE;
+   string lang::RACEW_DESCRIPTION;
+   string lang::RACEW_CHARACTERISTICS;
+   string lang::RACEW_MODIFIERS;
+   string lang::RACEW_NO_MODIFIERS;
+   string lang::RACEW_SKILLS;
+   string lang::RACEW_NO_SKILLS;
+   string lang::RACEW_FEATS;
+   string lang::RACEW_NO_FEATS;
+
 
 
    /*fight */
@@ -231,6 +256,7 @@ void lang::ReloadFile(int lng)
    string lang::SKILLS_DIR;
    string lang::FEATS_DIR;
    string lang::ALIGN_DIR;
+   string lang::RACE_DIR;
 
    /* Errors */
    string lang::ERROR_MAP_OUT;
