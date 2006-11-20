@@ -35,13 +35,14 @@ class attWindow
       bool used[6];               /**< Mark Used Rolled Points */
 
       skills*      externalSkill; /**< Pointer to the edited skillList */
-
       lang language;              /**< Language internationalization */
 
       quadroTexto* rolledPoints;
       quadroTexto* attPoints[6];
       quadroTexto* attTotals[6];
       quadroTexto* attMods[6];
+      quadroTexto* textDesc;
+      quadroTexto* textDescTitle;
 
       botao* attButtonNext[6];
       botao* attButtonPrev[6];

@@ -30,7 +30,7 @@ attWindow::attWindow(skills* sk, interface* inter)
    }
 
    /* create window */
-   window = inter->ljan->InserirJanela(276,166,531,441,
+   window = inter->ljan->InserirJanela(146,166,661,441,
                                        language.ATTW_TITLE.c_str(),
                                        1,1,NULL,NULL);
 
@@ -198,10 +198,23 @@ attWindow::attWindow(skills* sk, interface* inter)
    window->objects->InserirQuadroTexto(10,209,245,242,1,"");
    window->objects->InserirQuadroTexto(8,37,247,244,1,"");
 
+   /* Race Description */
+   textDescTitle = window->objects->InserirQuadroTexto(251,20,507,35,1,
+                                                       "Attribute Description");
+   textDescTitle->fonte = FHELVETICA;
+   textDescTitle->tamFonte = 1;
    
+   textDesc = window->objects->InserirQuadroTexto(251,36,507,244,1,
+                      (externalSkill->m_skills[1].nome + "||" +
+                       externalSkill->m_skills[1].descricao).c_str());
+
+   /*textDesc->Cores.corTexto.R = 246;
+   textDesc->Cores.corTexto.G = 190;
+   textDesc->Cores.corTexto.B = 190;*/
+   textDesc->fonte = FMINI;
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(181,248,251,267, 
+   buttonConfirm = window->objects->InserirBotao(437,248,507,267, 
                                 window->Cores.corBot.R,
                                 window->Cores.corBot.G,window->Cores.corBot.B,
                                 language.SKILL_CONFIRM.c_str(),1,NULL);
@@ -429,6 +442,8 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
                 sprintf(tmp,"%d", points[attPointsIndex[i]]);
                 attPoints[i]->texto = tmp;
                 assignAttMod(i);
+                textDesc->texto = (externalSkill->m_skills[i+1].nome + "||" +
+                                  externalSkill->m_skills[i+1].descricao);
                 window->Desenhar(0,0);
             }
             else if(object == (Tobjeto*) attButtonPrev[i])
@@ -437,6 +452,9 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
                 sprintf(tmp,"%d", points[attPointsIndex[i]]);
                 attPoints[i]->texto = tmp;
                 assignAttMod(i);
+                textDesc->texto = (externalSkill->m_skills[i+1].nome + "||" +
+                                  externalSkill->m_skills[i+1].descricao);
+
                 window->Desenhar(0,0);
             }
          }
