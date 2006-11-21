@@ -82,6 +82,7 @@ class editor
 
       GLuint actualTexture;          /**< Actual Texture */
 
+      
       GLdouble proj[16];             /**< Projection Matrix */
       GLdouble modl[16];             /**< Model View Matrix */
       GLint viewPort[4];             /**< View Port Vector */

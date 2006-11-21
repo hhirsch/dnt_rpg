@@ -16,9 +16,15 @@ class camera
       /*! Do the IO of the Camera */
       bool doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera);
 
-      GLfloat getCameraX(){return(cameraX);}
-      GLfloat getCameraY(){return(cameraY);}
-      GLfloat getCameraZ(){return(cameraZ);}
+      GLfloat getCameraX();
+      GLfloat getCameraY();
+      GLfloat getCameraZ();
+
+      void sumTheta(GLfloat f);
+      void sumPhi(GLfloat f);
+      void sumD(GLfloat f);
+
+      GLfloat getPhi();
 
 
       GLfloat centerX,                  /**< Camera Central X Position */

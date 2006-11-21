@@ -22,7 +22,7 @@ guiIO::guiIO()
    openTextureWindow();
    openMessageWindow();
    
-   /* Camera Things */
+   /* Camera Things 
    theta=25;
    phi=0;
    d=150;
@@ -31,7 +31,7 @@ guiIO::guiIO()
    deltaY = 0;
    cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centerY + (float) d * sin(deg2Rad(theta));
-   cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+   cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));*/
 
 }
 
@@ -329,6 +329,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 {
    int eventInfo;
    Tobjeto* object;
+   
+   /* Camera Verification */
+   gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTACAMERA );
+
    object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
    switch(eventInfo)
    {
@@ -337,62 +341,56 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          /*  Navigation Buttons  */
          if(object == (Tobjeto*) upButton)
          {
-            centerX -= 4.0 * sin(deg2Rad(phi));
-            centerZ -= 4.0 * cos(deg2Rad(phi));
+            gameCamera.centerX -= 4.0 * sin(deg2Rad(gameCamera.getPhi()));
+            gameCamera.centerZ -= 4.0 * cos(deg2Rad(gameCamera.getPhi()));
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) downButton)
          {
-            centerX += 4.0 * sin(deg2Rad(phi));
-            centerZ += 4.0 * cos(deg2Rad(phi));
+            gameCamera.centerX += 4.0 * sin(deg2Rad(gameCamera.getPhi()));
+            gameCamera.centerZ += 4.0 * cos(deg2Rad(gameCamera.getPhi()));
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) leftButton)
          {
-            centerX -= 4.0 * sin(deg2Rad(phi)+deg2Rad(90));
-            centerZ -= 4.0 * cos(deg2Rad(phi)+deg2Rad(90));
+            gameCamera.centerX -= 4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90));
+            gameCamera.centerZ -= 4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90));
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) rightButton)
          {
-            centerX += 4.0 * sin(deg2Rad(phi)+deg2Rad(90));
-            centerZ += 4.0 * cos(deg2Rad(phi)+deg2Rad(90));
+            gameCamera.centerX += 4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90));
+            gameCamera.centerZ += 4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90));
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) rotUpButton)
          {
-            theta += 1;
-            if(theta > 89) 
-               theta = 89;
+            gameCamera.sumTheta(1);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) rotDownButton)
          {
-            theta -= 1;
-            if(theta < 0)
-               theta = 0;
+            gameCamera.sumTheta(-1);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) rotLeftButton)
          {
-            phi += 1;
+            gameCamera.sumPhi(1);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) rotRightButton)
          {
-            phi -= 1;
+            gameCamera.sumPhi(-1);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) moreZoomButton)
          {
-            d -= 1;
-            if (d<1) d = 1;
+            gameCamera.sumD(-1);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) lessZoomButton)
          {
-            d += 1;
-            if (d>300) d = 300;
+            gameCamera.sumD(1);
             return(GUI_IO_NEW_POSITION);
          }
 
@@ -579,12 +577,13 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 /****************************************************************
  *                             camera                           *
  ****************************************************************/
-void guiIO::camera()
+void guiIO::cameraPos()
 {
-   cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+   /*cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centerY + deltaY + (float) d * sin(deg2Rad(theta));
    cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-   gluLookAt(cameraX,cameraY,cameraZ, centerX,centerY,centerZ,0,1,0);
+   gluLookAt(cameraX,cameraY,cameraZ, centerX,centerY,centerZ,0,1,0);*/
+   gameCamera.lookAt();
 }
 
 /****************************************************************

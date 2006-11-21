@@ -241,21 +241,21 @@ void editor::verifyPosition()
 {
    if(mapOpened)
    {
-       if(gui->centerX > ((map->x * SQUARESIZE)+20))
+       if(gui->gameCamera.centerX > ((map->x * SQUARESIZE)+20))
        {
-          gui->centerX = ((map->x * SQUARESIZE)+20);
+          gui->gameCamera.centerX = ((map->x * SQUARESIZE)+20);
        }
-       else if(gui->centerX < -20)
+       else if(gui->gameCamera.centerX < -20)
        {
-          gui->centerX = -20;
+          gui->gameCamera.centerX = -20;
        }
-       if(gui->centerZ > ((map->z * SQUARESIZE)+20))
+       if(gui->gameCamera.centerZ > ((map->z * SQUARESIZE)+20))
        {
-          gui->centerZ = ((map->z * SQUARESIZE)+20);
+          gui->gameCamera.centerZ = ((map->z * SQUARESIZE)+20);
        }
-       else if(gui->centerZ < -20)
+       else if(gui->gameCamera.centerZ < -20)
        {
-          gui->centerZ = -20;
+          gui->gameCamera.centerZ = -20;
        }
    }
 }
@@ -386,7 +386,7 @@ void editor::draw()
 
 
    /* Redefine camera position */
-   gui->camera();
+   gui->cameraPos();
    AtualizaFrustum( visibleMatrix, proj, modl);
    gameSun->actualizeHourOfDay(hour);
 
@@ -395,7 +395,8 @@ void editor::draw()
    /* Draw Things */
    if(mapOpened)
    {
-         map->draw(gui->cameraX, gui->cameraY, gui->cameraZ, visibleMatrix);
+         map->draw(gui->gameCamera.getCameraX(), gui->gameCamera.getCameraY(), 
+                   gui->gameCamera.getCameraZ(), visibleMatrix);
          if(gui->getState() == GUI_IO_STATE_TERRAIN)
          {
             terrainEditor->drawTemporary();

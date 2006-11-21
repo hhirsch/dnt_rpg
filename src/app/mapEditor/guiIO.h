@@ -2,6 +2,7 @@
 #define _guiIO_H
 
 #include "../../gui/farso.h"
+#include "../../engine/camera.h"
 #include "portal.h"
 #include "terrain.h"
 
@@ -27,7 +28,7 @@
 #define GUI_IO_STATE_PORTAL  3
 
 /**! The Super GUI IO Class, to control things on map Editor! */
-class guiIO
+class guiIO 
 {
    public:
 
@@ -50,7 +51,7 @@ class guiIO
       void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       /*! Redefine Camera Position */
-      void camera();
+      void cameraPos();
 
       /*! Gets the FileName */
       string getFileName();
@@ -61,6 +62,9 @@ class guiIO
       /*! Show Message on Message Window */
       void showMessage(string msg);
 
+      camera gameCamera;               /**< The Game Camera */
+
+#if 0 
       GLfloat cameraX; /**< Camera X position */
       GLfloat cameraY; /**< Camera Y position */
       GLfloat cameraZ; /**< Camera Z position */
@@ -73,6 +77,7 @@ class guiIO
       GLfloat centerX; /**< Camera Center X Position */
       GLfloat centerY; /**< Camera Center Y Position */
       GLfloat centerZ; /**< Camera Center Z Position */
+#endif
 
    private:
 

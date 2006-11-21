@@ -148,3 +148,44 @@ void camera::lookAt()
    gluLookAt(cameraX,cameraY,cameraZ, centerX, centerY, centerZ, 0,1,0);
 }
 
+
+GLfloat camera::getCameraX(){
+   return(cameraX);
+}
+
+GLfloat camera::getCameraY()
+{
+   return(cameraY);
+}
+
+GLfloat camera::getCameraZ()
+{
+   return(cameraZ);
+}
+
+void camera::sumTheta(GLfloat f)
+{
+   theta += f;
+   if(theta > 89) 
+      theta = 89;
+   else if(theta < 0)
+      theta = 0;
+}
+
+void camera::sumPhi(GLfloat f)
+{
+   phi += f;
+}
+
+void camera::sumD(GLfloat f)
+{
+   d += f;
+   if (d<1) d = 1;
+   else if (d>300) d = 300;
+}
+
+GLfloat camera::getPhi()
+{
+   return(phi);
+}
+
