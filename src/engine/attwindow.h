@@ -25,7 +25,8 @@ class attWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(Tobjeto* object, int eventInfo, interface* inter);
+      int treat(Tobjeto* object, int eventInfo, interface* inter,
+                GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       janela*      window;           /**< Pointer to the internal window */
 
@@ -70,6 +71,9 @@ class attWindow
        * \param att -> att-1 number
        * \return attribute bonus modifier */
       int assignAttMod(int att);
+      /*! Verifies if all attributes are assigned
+       * \return true if all are assigned, false otherwise*/
+      bool allAssigned();
 };
 
 #endif

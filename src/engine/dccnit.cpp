@@ -571,7 +571,8 @@ int engine::CharacterScreen(GLuint* idTextura)
          }
          else if(status == 2)
          {
-             charCreation = atWindow->treat(object, eventInfo, gui);
+             charCreation = atWindow->treat(object, eventInfo, gui,
+                                            proj, modl,viewPort);
              if(charCreation == ATTW_CONFIRM)
              {
                 status = 3;

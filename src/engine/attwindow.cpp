@@ -5,6 +5,7 @@
 #include "attwindow.h"
 #include "../classes/skills.h"
 #include "../classes/dices.h"
+#include "../gui/messages.h"
 
 /**************************************************************
  *                      Constructor                           *
@@ -361,6 +362,22 @@ void attWindow::clear()
 }
 
 /**************************************************************
+ *                        allAssigned                         *
+ **************************************************************/
+bool attWindow::allAssigned()
+{
+   int i;
+   for( i = 0; i < 6; i++)
+   {
+      if(!used[i])
+      {
+         return(false);
+      }
+   }
+   return(true);
+}
+
+/**************************************************************
  *                         assignAttMod                       *
  **************************************************************/
 int attWindow::assignAttMod(int att)
@@ -391,7 +408,8 @@ int attWindow::assignAttMod(int att)
 /**************************************************************
  *                            threat                          *
  **************************************************************/
-int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
+int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
+                     GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    char tmp[5];
    int i;
@@ -400,12 +418,22 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
    {
       if(object == (Tobjeto*) buttonConfirm)
       {
-         window->Fechar(inter->ljan);
-         window = NULL;
-         //TODO Save values
-         glEnable(GL_LIGHTING);
-         SDL_ShowCursor(SDL_DISABLE);
-         return(ATTW_CONFIRM);
+         if(allAssigned())
+         {
+            window->Fechar(inter->ljan);
+            window = NULL;
+            //TODO Save values
+            glEnable(GL_LIGHTING);
+            SDL_ShowCursor(SDL_DISABLE);
+            return(ATTW_CONFIRM);
+         }
+         else
+         {
+            showMessage("Warning", "You Need to Choose all Attributes.",
+                        proj, modl,viewPort);
+            glDisable(GL_LIGHTING);
+            return(ATTW_OTHER);
+         }
       }
       else if(object == (Tobjeto*) buttonCancel) 
       {
