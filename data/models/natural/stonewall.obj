@@ -1261,7 +1261,7 @@ vn 0.841571 0.087472 -0.533017
 vn 0.573003 0.460375 -0.678029
 vn 0.896323 -0.168313 -0.410214
 usemtl Material_stonewall.png
-usemat stonewall.png
+usemat stone2.jpg
 s off
 f 1/1/1 132/2/1 298/3/1 153/4/1
 f 1/1/2 153/4/2 277/5/2 113/6/2

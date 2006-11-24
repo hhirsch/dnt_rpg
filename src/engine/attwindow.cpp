@@ -429,7 +429,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
          }
          else
          {
-            showMessage("Warning", "You Need to Choose all Attributes.",
+            showMessage("Warning", "You Need to Assign All Attributes.",
                         proj, modl,viewPort);
             glDisable(GL_LIGHTING);
             return(ATTW_OTHER);

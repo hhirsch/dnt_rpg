@@ -472,6 +472,56 @@ void partSystem::loadFromFile(string fileName)
    FILE* file; 
    int type; GLfloat X,Y,Z;
    char buffer[150];
+   part1* particula;
+   int totalPlanes = 0;
+   float x1, y1, z1; 
+   float x2, y2, z2;
+   float dX, dZ; 
+   int inclination;
+
+   deleteAll();
+
+/*   particula = (part1*) addParticle(PART_WATERFALL,150,60,120,
+                                            "../data/particles/waterfall1.par");
+   particula->addPlane(148,59,118,152,59,123,-1,0,PLANE_NO_INCLINATION);
+   particula->addPlane(150,40,118,160,32,123,-1,0,PLANE_INCLINATION_X);
+   particula->addPlane(160,20,110,175,20,130,-1,0,PLANE_NO_INCLINATION);*/
+
+   if(!(file=fopen(fileName.c_str(),"r")))
+   {
+       printf("Error while opening Map particle file: %s\n",fileName.c_str());
+       return;
+   }
+   while(fscanf(file,"%d %f %f %f %s",&type,&X,&Y,&Z,&buffer[0]) != EOF)
+   {
+      if(type == PART_WATERFALL)
+      {
+         particula = (part1*) addParticle(type, X, Y, Z, buffer);
+         fscanf(file,"%d", &totalPlanes);
+         
+         /* read Planes */
+         while(totalPlanes > 0)
+         {
+            fscanf(file,"%f %f %f %f %f %f %f %f %d",
+                   &x1, &y1, &z1, &x2, &y2, &z2, &dX, &dZ, &inclination);
+            particula->addPlane(x1, y1, z1, x2, y2, z2, dX, dZ, inclination);
+            totalPlanes--;
+         }
+      }
+      else
+      {
+         addParticle(type, X, Y, Z, buffer);
+      }
+   }
+   fclose(file);
+}
+
+#if 0
+void partSystem::saveToFile(string fileName)
+{
+   FILE* file; 
+   int type; GLfloat X,Y,Z;
+   char buffer[150];
 
    deleteAll();
 
@@ -497,4 +547,5 @@ void partSystem::loadFromFile(string fileName)
    }
    fclose(file);
 }
+#endif
 
