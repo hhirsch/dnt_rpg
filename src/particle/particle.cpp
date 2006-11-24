@@ -14,6 +14,7 @@
 particleSystem::particleSystem(int total, int mode)
 {
    init(total, mode);
+   strFileName = "";
 }
 
 /***************************************************************
@@ -25,6 +26,7 @@ particleSystem::particleSystem(string fileName, int mode)
    string aux;
    char aux2[20];
 
+   strFileName = fileName;
    file.open(fileName.c_str(), ios::in | ios::binary);
 
 

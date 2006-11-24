@@ -98,6 +98,13 @@ class partSystem
 
       /*!
        *************************************************************** 
+       * Save Particles System To file.
+       * \param fileName -> name of the file to be saved.
+       ***************************************************************/
+      void saveToFile(string fileName);
+
+      /*!
+       *************************************************************** 
        * Remove all particle systens from the system
        ***************************************************************/
       void deleteAll();

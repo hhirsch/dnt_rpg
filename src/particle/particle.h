@@ -121,6 +121,9 @@ class particleSystem
        ***************************************************************/
       void definePosition(float cX, float cZ);
 
+      string getFileName(){return(strFileName);};
+      void getPosition(GLfloat& x, GLfloat &y, GLfloat& z){x=centerX;y=centerY;z=centerZ;};
+
       int actualParticles;   /**< Number of actual alive particles */
       int drawMode;          /**< DrawMode of the system */
       bool followPC;         /**< If the orign of System Follows PC */
@@ -132,6 +135,7 @@ class particleSystem
 
    protected:
 
+      string strFileName;      /**< Name of the File */
       int maxLive;             /**< Max live of a particle  */
       int maxParticles;        /**< Max number of particles */
       float* vertexArray;      /**< Vertex array to draw */

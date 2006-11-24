@@ -193,6 +193,15 @@ void editor::saveMap()
    string tmp;
    if(mapOpened)
    {
+      if(particleSystem->numParticles() > 0)
+      {
+         map->particlesFileName = gui->getFileName()+".par";
+         particleSystem->saveToFile(map->particlesFileName);
+      }
+      else
+      {
+         map->particlesFileName = "";
+      }
       map->save(gui->getFileName());
       tmp = "Map Saved as:";
       tmp += gui->getFileName();

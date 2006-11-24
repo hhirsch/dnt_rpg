@@ -125,6 +125,10 @@ class part1: public particleSystem
        ***************************************************************/
       bool intersectPlanes(particle* part, float* dX, float* dZ); 
 
+      int getTotalPlanes(){return(actualPlanes);};
+
+      interPlane* getPlane(int i){return(&intersections[i]);};
+
    private:
       float seconds;         /**< Actual Time on particle */
       GLuint partTexture;    /**< Current particle texture */

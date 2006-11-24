@@ -4,6 +4,9 @@
 
 #include "partSystem.h"
 
+/**********************************************************************
+ *                             Constructor                            *
+ **********************************************************************/
 partSystem::partSystem()
 {
    int i;
@@ -45,11 +48,17 @@ partSystem::partSystem()
 
 }
 
+/**********************************************************************
+ *                              Destructor                            *
+ **********************************************************************/
 partSystem::~partSystem()
 {
    deleteAll();
 }
 
+/**********************************************************************
+ *                              deleteAll                             *
+ **********************************************************************/
 void partSystem::deleteAll()
 {
    int i;
@@ -118,6 +127,9 @@ void partSystem::deleteAll()
    }
 }
 
+/**********************************************************************
+ *                             actualizeAll                           *
+ **********************************************************************/
 void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4])
 {
    int i;
@@ -208,6 +220,9 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4])
    glColor3f(1.0,1.0,1.0);
 }
 
+/**********************************************************************
+ *                            addParticle                             *
+ **********************************************************************/
 particleSystem* partSystem::addParticle(int type, GLfloat X, GLfloat Y, 
                                         GLfloat Z, string fileName )
 { 
@@ -318,6 +333,9 @@ particleSystem* partSystem::addParticle(int type, GLfloat X, GLfloat Y,
    return(NULL);
 }
 
+/**********************************************************************
+ *                             removeParticle                         *
+ **********************************************************************/
 void partSystem::removeParticle(int type, particleSystem* part)
 { 
    int i;
@@ -406,6 +424,9 @@ void partSystem::removeParticle(int type, particleSystem* part)
    return;
 }
 
+/**********************************************************************
+ *                             stabilizeAll                           *
+ **********************************************************************/
 void partSystem::stabilizeAll()
 {
    int i;
@@ -417,6 +438,9 @@ void partSystem::stabilizeAll()
    }
 }
 
+/**********************************************************************
+ *                             numParticles                           *
+ **********************************************************************/
 int partSystem::numParticles()
 {
    int i;
@@ -467,6 +491,9 @@ int partSystem::numParticles()
    return(total);
 }
 
+/**********************************************************************
+ *                             loadFromfile                           *
+ **********************************************************************/
 void partSystem::loadFromFile(string fileName)
 {
    FILE* file; 
@@ -480,12 +507,6 @@ void partSystem::loadFromFile(string fileName)
    int inclination;
 
    deleteAll();
-
-/*   particula = (part1*) addParticle(PART_WATERFALL,150,60,120,
-                                            "../data/particles/waterfall1.par");
-   particula->addPlane(148,59,118,152,59,123,-1,0,PLANE_NO_INCLINATION);
-   particula->addPlane(150,40,118,160,32,123,-1,0,PLANE_INCLINATION_X);
-   particula->addPlane(160,20,110,175,20,130,-1,0,PLANE_NO_INCLINATION);*/
 
    if(!(file=fopen(fileName.c_str(),"r")))
    {
@@ -516,36 +537,95 @@ void partSystem::loadFromFile(string fileName)
    fclose(file);
 }
 
-#if 0
+/**********************************************************************
+ *                             saveToFile                             *
+ **********************************************************************/
 void partSystem::saveToFile(string fileName)
 {
    FILE* file; 
-   int type; GLfloat X,Y,Z;
-   char buffer[150];
+   GLfloat X,Y,Z;
+   int i, p;
+   interPlane* plane;
 
-   deleteAll();
-
-   /*Remove it*/
-   part1* particula;
-
-   particula = (part1*) addParticle(PART_WATERFALL,150,60,120,
-                                            "../data/particles/waterfall1.par");
-   particula->addPlane(148,59,118,152,59,123,-1,0,PLANE_NO_INCLINATION);
-   particula->addPlane(150,40,118,160,32,123,-1,0,PLANE_INCLINATION_X);
-   particula->addPlane(160,20,110,175,20,130,-1,0,PLANE_NO_INCLINATION);
-
-   /*Remove */
-
-   if(!(file=fopen(fileName.c_str(),"r")))
+   if(!(file=fopen(fileName.c_str(),"w")))
    {
        printf("Error while opening Map particle file: %s\n",fileName.c_str());
        return;
    }
-   while(fscanf(file,"%d %f %f %f %s",&type,&X,&Y,&Z,&buffer[0]) != EOF)
+
+   for(i = 0; i < MAX_WATERFALL; i++)
    {
-      addParticle(type, X, Y, Z, buffer);
+      if( waterfall[i] != NULL)
+      {
+         waterfall[i]->getPosition(X, Y, Z);
+         fprintf(file,"%d %f %f %f %s\n",PART_WATERFALL, X, Y, Z,
+                                       waterfall[i]->getFileName().c_str());
+         if(waterfall[i]->getTotalPlanes() > 0)
+         {
+            fprintf(file,"%d\n",waterfall[i]->getTotalPlanes());
+         }
+         for(p = 0; p < waterfall[i]->getTotalPlanes(); p++)
+         {
+            plane = waterfall[i]->getPlane(p);
+            fprintf(file,"%f %f %f %f %f %f %f %f %d\n", plane->x1, plane->y1, 
+                    plane->z1, plane->x2, plane->y2, plane->z2, plane->dX, 
+                    plane->dZ, plane->inclination);
+         }
+      }
    }
+
+   for(i = 0; i < MAX_FIRE; i++)
+   {
+      if(fire[i] != NULL)
+      {
+         fire[i]->getPosition(X, Y, Z);
+         fprintf(file,"%d %f %f %f %s\n",PART_FIRE, X, Y, Z,
+                                       fire[i]->getFileName().c_str());
+      }
+   }
+
+   for(i = 0; i < MAX_WATER_SURFACE; i++)
+   {
+      if(waterSurface[i] != NULL)
+      {
+         waterSurface[i]->getPosition(X, Y, Z);
+         fprintf(file,"%d %f %f %f %s\n",PART_WATER_SURFACE, X, Y, Z,
+                                       waterSurface[i]->getFileName().c_str());
+      }
+   }
+
+   for(i = 0; i < MAX_SMOKE; i++)
+   {
+      if(smoke[i] != NULL)
+      {
+         smoke[i]->getPosition(X, Y, Z);
+         fprintf(file,"%d %f %f %f %s\n",PART_SMOKE, X, Y, Z,
+                                       smoke[i]->getFileName().c_str());
+      }
+   }
+
+   /* Don't Save Blood Particles */
+   /*for(i = 0; i < MAX_BLOOD; i++)
+   {
+      if(blood[i] != NULL)
+   }*/
+
+   /* Don't Save Lightning Particles */
+   /*for(i = 0; i < MAX_LIGHTNING; i++)
+   {
+      if(lightning[i] != NULL)
+   }*/
+
+   for(i = 0; i < MAX_SNOW; i++)
+   {
+      if(snow[i] != NULL)
+      {
+         snow[i]->getPosition(X, Y, Z);
+         fprintf(file,"%d %f %f %f %s\n",PART_SNOW, X, Y, Z,
+                                       snow[i]->getFileName().c_str());
+      }
+   }
+   
    fclose(file);
 }
-#endif
 
