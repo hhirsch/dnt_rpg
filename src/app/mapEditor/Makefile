@@ -18,7 +18,7 @@ OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)map
 OBJSPARTICLE = $(ENDPARTICLE)particle.o $(ENDPARTICLE)part1.o $(ENDPARTICLE)part2.o $(ENDPARTICLE)part3.o $(ENDPARTICLE)part4.o $(ENDPARTICLE)part5.o $(ENDPARTICLE)part6.o $(ENDPARTICLE)part7.o $(ENDPARTICLE)partSystem.o
 OBJSCLASSES = $(ENDCLASSES)skills.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o
 OBJSLANG = $(ENDLANG)lang.o
-OBJS = area.o editor.o guiIO.o mapEditor.o message.o portal.o terrain.o wall.o
+OBJS = area.o editor.o guiIO.o mapEditor.o message.o objects.o portal.o terrain.o wall.o
 
 BIN = ../../../bin/
 
@@ -52,6 +52,11 @@ message.o: message.cpp message.h
 portal.o: portal.cpp portal.h
 	@printf "Making portal.o... "
 	@$(CC) $(CFLAGS) portal.cpp -o portal.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+objects.o: objects.cpp objects.h
+	@printf "Making objects.o... "
+	@$(CC) $(CFLAGS) objects.cpp -o objects.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 terrain.o: terrain.cpp terrain.h

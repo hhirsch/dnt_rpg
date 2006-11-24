@@ -18,6 +18,7 @@
 #define GUI_IO_TEXTURE_PREVIOUS     8
 #define GUI_IO_TEXTURE_NEXT         9
 #define GUI_IO_TEXTURE_INSERT      10
+#define GUI_IO_OBJECT_INSERT       11
 
 #define TOOL_NONE            0
 
@@ -26,6 +27,7 @@
 #define GUI_IO_STATE_TERRAIN 1
 #define GUI_IO_STATE_WALL    2
 #define GUI_IO_STATE_PORTAL  3
+#define GUI_IO_STATE_OBJECTS 4
 
 /**! The Super GUI IO Class, to control things on map Editor! */
 class guiIO 
@@ -58,6 +60,9 @@ class guiIO
 
       /*! Gets the Texture File Name */
       string getTextureFileName();
+
+      /*! Gets Object File Name */
+      string getObjectFileName();
 
       /*! Show Message on Message Window */
       void showMessage(string msg);
@@ -166,6 +171,10 @@ class guiIO
       void openPortalWindow();
       /*********************Object*Window*******************************/
       janela* objectWindow;               /**< Object Window */
+      barraTexto* objectText;             /**< Object Text Bar */
+      botao* objectInsertButton;          /**< Object Insert Button */
+      tabButton* objectTabButton;         /**< Object TabButton */
+      oneTabButton* objectAddButton;      /**< Object Add Button */
       void openObjectWindow();      
       /*********************Particle*Window*******************************/
       janela* particleWindow;             /**< Particle Window */

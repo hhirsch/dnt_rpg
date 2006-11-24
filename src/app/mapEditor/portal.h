@@ -4,6 +4,10 @@
 #include "../../map/map.h"
 #include "area.h"
 #include "message.h"
+#include "../../etc/glm.h"
+#include "../../map/mapobjeto.h"
+#include "../../engine/util.h"
+
 
 class portal
 {
@@ -27,9 +31,23 @@ class portal
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary();
 
+      /*! Verify if Point is inner the Square */
+      bool inner(GLfloat ax, GLfloat az, GLfloat bx1, GLfloat bz1, 
+                                        GLfloat bx2, GLfloat bz2);
+
+      void defineDoor(mapObjeto* newDoor);
+
+      mapObjeto* getDoor();
+
 
    private:
       Map* actualMap;         /**< Actual Internal Map */
+      mapObjeto* actualDoor;  /**< Actual Door */
+      int doorMode;           /**< Actual Door Mode */
+      int doorOrientation;    /**< Actual Door Orientation */
+      GLfloat doorX;          /**< Actual Door X position */
+      GLfloat doorZ;          /**< Actual Door Z position */
+      muro* doorWall;         /**< Actual Door Wall */
       int actualTool;         /**< Actual Tool */
       int state;              /**< Actual Internal State */
 

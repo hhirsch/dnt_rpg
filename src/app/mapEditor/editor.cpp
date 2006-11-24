@@ -103,6 +103,7 @@ void editor::openMap()
       delete(terrainEditor);
       delete(portalEditor);
       delete(wallEditor);
+      delete(objectEditor);
       mapOpened = false;
    }
    gui->showMessage("Opening actual Map...");
@@ -114,6 +115,7 @@ void editor::openMap()
       terrainEditor = new terrain(map);
       portalEditor = new portal(map);
       wallEditor = new wall(map);
+      objectEditor = new objects(map);
       actualTexture = map->Texturas->indice;
 
       /* Open NPCs */
@@ -214,6 +216,7 @@ void editor::newMap()
       delete(terrainEditor);
       delete(portalEditor);
       delete(wallEditor);
+      delete(objectEditor);
       particleSystem->deleteAll();
       if(NPCs)
       {
@@ -229,6 +232,7 @@ void editor::newMap()
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wall(map);
+   objectEditor = new objects(map);
    actualTexture = map->Texturas->indice;
    NPCs = new (Lpersonagem);
    gui->showMessage("Created New Game Map!");
@@ -397,6 +401,17 @@ void editor::draw()
    {
          map->draw(gui->gameCamera.getCameraX(), gui->gameCamera.getCameraY(), 
                    gui->gameCamera.getCameraZ(), visibleMatrix);
+
+         glDisable(GL_LIGHTING);
+         glBegin(GL_QUADS);
+         glVertex3f(-10, -5, -10);
+         glVertex3f(-10, -5, map->z*SQUARESIZE+10);
+         glVertex3f(map->x*SQUARESIZE+10, -5,  map->z*SQUARESIZE+10);
+         glVertex3f(map->x*SQUARESIZE+10, -5, -10);
+//         glVertex3f(-10, -10, map->x*SQUARESIZE+10, map->z*SQUARESIZE+10);
+         glEnd();
+         glEnable(GL_LIGHTING);
+         
          if(gui->getState() == GUI_IO_STATE_TERRAIN)
          {
             terrainEditor->drawTemporary();
@@ -408,6 +423,10 @@ void editor::draw()
          else if(gui->getState() == GUI_IO_STATE_WALL)
          {
             wallEditor->drawTemporary();
+         }
+         else if(gui->getState() == GUI_IO_STATE_OBJECTS)
+         {
+            objectEditor->drawTemporary();
          }
    }
 
@@ -529,6 +548,16 @@ void editor::doEditorIO()
    }
    else if( (gui->getState() == GUI_IO_STATE_PORTAL) && (mapOpened))
    {
+      if(portalEditor->getDoor() == NULL)
+      {
+         mapObjeto* porta = (mapObjeto*) map->Objetos->primeiro->proximo;
+         while( (porta != map->Objetos->primeiro) && 
+                (strcmp(porta->nome,"Door") != 0) ) 
+         {
+            porta = (mapObjeto*) porta->proximo;
+         }
+         portalEditor->defineDoor(porta);
+      }
       portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
                                  proj, modl, viewPort);
    }
@@ -536,6 +565,11 @@ void editor::doEditorIO()
    {
       wallEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
                                gui->getTool(), actualTexture);
+   }
+   else if( (gui->getState() == GUI_IO_STATE_OBJECTS) && (mapOpened))
+   {
+      objectEditor->verifyAction(xReal, yReal, zReal, mButton, mouseX, mouseY,
+                                 gui->getTool(), proj, modl, viewPort);
    }
 
 }
@@ -583,6 +617,27 @@ void editor::verifyIO()
       if(mapOpened)
       {
         insertTexture();
+      }
+   }
+   else if(guiEvent == GUI_IO_OBJECT_INSERT)
+   {
+      if(mapOpened)
+      {
+         mapObjeto* obj=map->Objetos->InserirMapObjeto(
+                                              gui->getObjectFileName().c_str(),
+                                              gui->getObjectFileName().c_str());
+         if(obj != NULL)
+         {
+            gui->showMessage(gui->getObjectFileName()+" Inserted.");
+         }
+         else
+         {
+            gui->showMessage(gui->getObjectFileName()+" Failed to Insert!.");
+         }
+      }
+      else
+      {
+         gui->showMessage("Can't Insert while Map Not Opened!");
       }
    }
    else if(guiEvent == GUI_IO_NOTHING)

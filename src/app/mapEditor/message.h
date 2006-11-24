@@ -23,11 +23,11 @@ using namespace std;
 #define TOOL_WALL_LESS_HOR_TEXTURE  28
 #define TOOL_WALL_MORE_HOR_TEXTURE  29
 
-
 #define TOOL_PORTAL_ADD             31
 #define TOOL_PORTAL_TAG             32
 #define TOOL_PORTAL_DOOR            33
 
+#define TOOL_OBSTACLE_ADD           41
 
 
 string messageForTool(int tool);

@@ -21,6 +21,7 @@ guiIO::guiIO()
    openPortalWindow();
    openTextureWindow();
    openMessageWindow();
+   openObjectWindow();
    
    /* Camera Things 
    theta=25;
@@ -103,6 +104,28 @@ void guiIO::openTextureWindow()
    textureWindow->fechavel = 0;
    textureWindow->ptrExterno = &textureWindow;
    textureWindow->Abrir(gui->ljan);
+}
+
+/****************************************************************
+ *                       Open Object Window                     *
+ ****************************************************************/
+void guiIO::openObjectWindow()
+{
+   objectWindow = gui->ljan->InserirJanela(0,245,184,599-248,"Objects",1,1,
+                                            NULL, NULL);
+   objectInsertButton = objectWindow->objects->InserirBotao(20,35,153,53,
+                                                  textureWindow->Cores.corBot.R,
+                                                  textureWindow->Cores.corBot.G,
+                                                  textureWindow->Cores.corBot.B,
+                                                  "Insert",1,NULL);
+   objectText = objectWindow->objects->InserirBarraTexto(10,17,173,33,
+                                                     "../data/models/",0,NULL);
+
+   objectTabButton = objectWindow->objects->InserirTabButton(7,55,0,0,
+                                               "../data/mapEditor/objects.png");
+   objectAddButton = objectTabButton->insertButton(0,0,19,19);
+   objectWindow->ptrExterno = &objectWindow;
+   objectWindow->Abrir(gui->ljan);
 }
 
 /****************************************************************
@@ -494,6 +517,12 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             tool = TOOL_WALL_MORE_HOR_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
+         /* Objects Buttons */
+         else if(object == (Tobjeto*) objectAddButton)
+         {
+            state = GUI_IO_STATE_OBJECTS;
+            tool = TOOL_OBSTACLE_ADD;
+         }
          break;
       }
       case BOTAOPRESSIONADO:
@@ -546,6 +575,14 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             }
             return(GUI_IO_OTHER);
          }
+         else if(object == (Tobjeto*) objectButton)
+         {
+            if(!objectWindow)
+            {
+               openObjectWindow();
+            }
+            return(GUI_IO_OTHER);
+         }
          /* Texture Window */
          else if(object == (Tobjeto*) textureNextButton)
          {
@@ -558,6 +595,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          else if(object == (Tobjeto*) textureInsertButton)
          {
             return(GUI_IO_TEXTURE_INSERT);
+         }
+         else if(object == (Tobjeto*) objectInsertButton)
+         {
+            return(GUI_IO_OBJECT_INSERT);
          }
 
 
@@ -600,6 +641,14 @@ string guiIO::getFileName()
 string guiIO::getTextureFileName()
 {
    return(textureText->texto);
+}
+
+/****************************************************************
+ *                    getObjectFileName                         *
+ ****************************************************************/
+string guiIO::getObjectFileName()
+{
+   return(objectText->texto);
 }
 
 /****************************************************************

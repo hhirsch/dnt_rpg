@@ -29,6 +29,9 @@ portal::portal(Map* map)
          }
       }
    }
+   actualDoor = NULL;
+   doorWall = NULL;
+   doorMode = 0;
 }
 
 /******************************************************
@@ -39,6 +42,32 @@ portal::~portal()
    actualMap = NULL;
    delete(portalList);
 }
+
+/******************************************************
+ *                        inner                       *
+ ******************************************************/
+bool portal::inner(GLfloat ax, GLfloat az, GLfloat bx1, GLfloat bz1, 
+                                          GLfloat bx2, GLfloat bz2)
+{
+   return( (ax >= bx1 ) && (ax <= bx2) && (az >= bz1) && (az <=bz2) );
+}
+
+/******************************************************
+ *                     defineDoor                     *
+ ******************************************************/
+void portal::defineDoor(mapObjeto* newDoor)
+{
+   actualDoor = newDoor;
+}
+
+/******************************************************
+ *                       getDoor                      *
+ ******************************************************/
+mapObjeto* portal::getDoor()
+{
+   return(actualDoor);
+}
+
 
 /******************************************************
  *                       VerifyAction                 *
@@ -61,7 +90,149 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
    {
       doTagPortal(proj,modl,viewPort);
    }
+   else if( (tool == TOOL_PORTAL_DOOR) && (actualDoor))
+   {
+      //Pega Muro Mais Proximo
+      muro* m = actualMap->muros;
+      doorWall = m;
       
+      while( m != NULL )
+      {
+           if( inner(mX,mZ,m->x1,m->z1,m->x2,m->z2) ||
+               inner(mX-2,mZ,m->x1,m->z1,m->x2,m->z2) ||
+               inner(mX+2,mZ,m->x1,m->z1,m->x2,m->z2) ||
+               inner(mX,mZ-2,m->x1,m->z1,m->x2,m->z2) ||
+               inner(mX-2,mZ-2,m->x1,m->z1,m->x2,m->z2) ||
+               inner(mX+2,mZ-2,m->x1,m->z1,m->x2,m->z2) ||
+               inner(mX,mZ+2,m->x1,m->z1,m->x2,m->z2) ||
+               inner(mX-2,mZ+2,m->x1,m->z1,m->x2,m->z2) ||
+               inner(mX+2,mZ+2,m->x1,m->z1,m->x2,m->z2))
+           {
+              doorWall = m;
+           }
+
+           m = m->proximo;
+      }
+      //Coloca X ou Z da porta fixo nele
+      if( (doorWall->x2 - doorWall->x1) == 10)
+      {
+          if(doorMode)
+          {
+              doorX = doorWall->x2;
+          }
+          else
+          {
+              doorX = doorWall->x1;
+          }
+          doorOrientation = 90;  
+          if(mZ > doorWall->z2)
+          {
+              doorZ = doorWall->z2; 
+          }
+          else if(mZ < doorWall->z1)
+          {
+              doorZ = doorWall->z1;
+          } 
+          else
+          {
+              doorZ = mZ; 
+          }
+      }
+      else
+      {
+          if(doorMode)
+          {
+              doorZ = doorWall->z2;
+          }
+          else
+          {
+              doorZ = doorWall->z1;
+          }
+          doorOrientation = 0;
+          if(mX > doorWall->x2)
+          {
+              doorX = doorWall->x2; 
+          }
+          else if(mX < doorWall->x1)
+          {
+              doorX = doorWall->x1;
+          } 
+          else
+          {
+              doorX = mX; 
+          }
+      }
+   
+      if(mButton & SDL_BUTTON(1))
+      {
+         GLfloat mx1,mx2,mz1,mz2;
+         mx1 = doorWall->x1;
+         mx2 = doorWall->x2;
+         mz1 = doorWall->z1;
+         mz2 = doorWall->z2;
+         muro* novoMuro;
+         novoMuro = new(muro);
+         novoMuro->dX = doorWall->dX;
+         novoMuro->dY = doorWall->dY;
+         novoMuro->dZ = doorWall->dZ;
+         muro* maux;
+         GLMmodel* modelo = (GLMmodel*)actualDoor->modelo3d;
+         if( doorOrientation == 0 )
+         {
+            doorWall->x2 = doorX;
+            novoMuro->x1 = doorX + (modelo->x2 - modelo->x1);
+            novoMuro->x2 = mx2;
+            novoMuro->z1 = mz1;
+            novoMuro->z2 = mz2;
+         }
+         else
+         {
+            doorWall->z2 = doorZ - (modelo->x2 - modelo->x1);
+            novoMuro->z1 = doorZ;
+            novoMuro->x2 = mx2;
+            novoMuro->x1 = mx1;
+            novoMuro->z2 = mz2;
+         }
+         novoMuro->textura = doorWall->textura;
+         maux = actualMap->muros;
+         actualMap->muros = novoMuro;
+         novoMuro->proximo = maux;
+         
+         //Coloca a Porta no Mapa
+         /*inserirObjetoMapa(doorX, doorZ, doorOrientation, porta, 
+                            (int)(doorX / SQUARESIZE), 
+                            (int)(doorZ / SQUARESIZE) );*/
+         door* novaPorta = new(door);
+         novaPorta->x = doorX;
+         novaPorta->z = doorZ;
+         novaPorta->orientacao = doorOrientation;
+         novaPorta->object = actualDoor;
+         door* paux = actualMap->portas;
+         paux = actualMap->portas;
+         actualMap->portas = novaPorta;
+         novaPorta->proximo = paux;
+         printf("Added Door: %.3f %.3f\n",doorX,doorZ);
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+      }
+      
+      if(mButton & SDL_BUTTON(3))
+      {
+         doorMode = !doorMode;
+         while(mButton & SDL_BUTTON(3))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+      }
+   }
 }
 
 /******************************************************
@@ -69,6 +240,28 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
  ******************************************************/
 void portal::drawTemporary()
 {
+   glPushMatrix();
+   int delta = -2;
+   if( (actualTool == TOOL_PORTAL_DOOR) && (actualDoor))
+   {
+      if(doorMode) delta = 2;
+      if(doorOrientation)
+      {
+        actualDoor->Desenhar(doorX+delta, doorZ, 0, doorOrientation);
+      }
+      else
+      {
+        actualDoor->Desenhar(doorX, doorZ+delta, 0, doorOrientation);
+      }
+      glBegin(GL_QUADS);
+         glVertex3f(mX-2,1,mZ-2);
+         glVertex3f(mX-2,1,mZ+2);
+         glVertex3f(mX+2,1,mZ+2);
+         glVertex3f(mX+2,1,mZ-2);
+      glEnd();
+   }
+   glPopMatrix();
+
    glDisable(GL_LIGHTING);
    /* Draw In course Map Portal Add */
    if(state == PORTAL_STATE_ADD_INIT)
