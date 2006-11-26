@@ -32,6 +32,7 @@ particleSystem::particleSystem(string fileName, int mode)
 
    if(!file)
    {
+      init(maxParticles, mode);
       printf("Error while opening particle file: %s\n",fileName.c_str());
       return;
    }
@@ -337,5 +338,12 @@ void particleSystem::Save( string fileName)
 void particleSystem::definePosition(float cX, float cZ)
 {
    centerX = cX;
+   centerZ = cZ;
+}
+
+void particleSystem::definePosition(float cX, float cY, float cZ)
+{
+   centerX = cX;
+   centerY = cY;
    centerZ = cZ;
 }

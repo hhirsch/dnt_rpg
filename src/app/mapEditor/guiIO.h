@@ -23,11 +23,12 @@
 #define TOOL_NONE            0
 
 /* State Constants */
-#define GUI_IO_STATE_INITIAL 0
-#define GUI_IO_STATE_TERRAIN 1
-#define GUI_IO_STATE_WALL    2
-#define GUI_IO_STATE_PORTAL  3
-#define GUI_IO_STATE_OBJECTS 4
+#define GUI_IO_STATE_INITIAL   0
+#define GUI_IO_STATE_TERRAIN   1
+#define GUI_IO_STATE_WALL      2
+#define GUI_IO_STATE_PORTAL    3
+#define GUI_IO_STATE_OBJECTS   4
+#define GUI_IO_STATE_PARTICLES 5
 
 /**! The Super GUI IO Class, to control things on map Editor! */
 class guiIO 
@@ -179,6 +180,7 @@ class guiIO
       /*********************Particle*Window*******************************/
       janela* particleWindow;             /**< Particle Window */
       tabButton* particleTabButton;       /**< Particles Tab Button */
+      oneTabButton* fireButton;           /**< Particle Fire Button */
       void openParticleWindow();
       /*********************Message*Window*******************************/
       janela* messageWindow;              /**< Message Window */

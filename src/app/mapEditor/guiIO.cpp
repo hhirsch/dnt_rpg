@@ -308,6 +308,7 @@ void guiIO::openParticleWindow()
                                              1,1,NULL,NULL);
    particleTabButton = particleWindow->objects->InserirTabButton(7,17,0,0,
                                                "../data/mapEditor/particle.png");
+   fireButton = particleTabButton->insertButton(0,0,19,19); 
    particleWindow->ptrExterno = &particleWindow;
    particleWindow->Abrir(gui->ljan);
 }
@@ -522,6 +523,12 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             state = GUI_IO_STATE_OBJECTS;
             tool = TOOL_OBSTACLE_ADD;
+         }
+         /* Particles Buttons */
+         else if(object == (Tobjeto*) fireButton)
+         {
+            state = GUI_IO_STATE_PARTICLES;
+            tool = TOOL_PARTICLE_FIRE;
          }
          break;
       }

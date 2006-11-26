@@ -120,6 +120,7 @@ class particleSystem
        * \param cZ -> Z position
        ***************************************************************/
       void definePosition(float cX, float cZ);
+      void definePosition(float cX, float cY, float cZ);
 
       string getFileName(){return(strFileName);};
       void getPosition(GLfloat& x, GLfloat &y, GLfloat& z){x=centerX;y=centerY;z=centerZ;};

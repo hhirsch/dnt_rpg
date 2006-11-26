@@ -7,6 +7,7 @@
 #include "wall.h"
 #include "message.h"
 #include "objects.h"
+#include "particles.h"
 #include "../../engine/sun.h"
 #include "../../engine/personagens.h"
 #include "../../particle/partSystem.h"
@@ -81,6 +82,7 @@ class editor
       portal* portalEditor;          /**< The portal Editor Module */
       wall* wallEditor;              /**< The wall Editor Module */
       objects* objectEditor;         /**< The Object Editor Module */
+      particles* particleEditor;     /**< The Particle Editor Module */
 
       GLuint actualTexture;          /**< Actual Texture */
 

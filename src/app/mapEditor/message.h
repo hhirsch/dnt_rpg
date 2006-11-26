@@ -29,6 +29,11 @@ using namespace std;
 
 #define TOOL_OBSTACLE_ADD           41
 
+#define TOOL_PARTICLE_FIRE          51
+#define TOOL_PARTICLE_SMOKE         52
+#define TOOL_PARTICLE_WATERFALL     53
+#define TOOL_PARTICLE_WATER_SURFACE 54
+#define TOOL_PARTICLE_SNOW          55
 
 string messageForTool(int tool);
 

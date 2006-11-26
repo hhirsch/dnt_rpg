@@ -1061,6 +1061,10 @@ int Map::save(string arquivo)
      fprintf(arq,"MUSICA %s\n",music.c_str());
    }
 
+   /*if(!lights.empty())
+   {
+      fprintf(arq,"light %s\n",lights.c_str());
+   }*/
 
    /* Escreve os Objetos Utilizados */
    if(Objetos->total>0)

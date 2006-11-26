@@ -21,6 +21,7 @@ editor::editor()
    terrainEditor = NULL;
    portalEditor = NULL;
    wallEditor = NULL;
+   particleEditor = NULL;
 }
 
 /*********************************************************************
@@ -34,6 +35,7 @@ editor::~editor()
       delete(terrainEditor);
       delete(portalEditor);
       delete(wallEditor);
+      delete(particleEditor);
    }
    delete(gameSun);
    if(particleSystem != NULL)
@@ -104,6 +106,7 @@ void editor::openMap()
       delete(portalEditor);
       delete(wallEditor);
       delete(objectEditor);
+      delete(particleEditor);
       mapOpened = false;
    }
    gui->showMessage("Opening actual Map...");
@@ -116,6 +119,7 @@ void editor::openMap()
       portalEditor = new portal(map);
       wallEditor = new wall(map);
       objectEditor = new objects(map);
+      particleEditor = new particles(map);
       actualTexture = map->Texturas->indice;
 
       /* Open NPCs */
@@ -226,6 +230,7 @@ void editor::newMap()
       delete(portalEditor);
       delete(wallEditor);
       delete(objectEditor);
+      delete(particleEditor);
       particleSystem->deleteAll();
       if(NPCs)
       {
@@ -242,6 +247,7 @@ void editor::newMap()
    portalEditor = new portal(map);
    wallEditor = new wall(map);
    objectEditor = new objects(map);
+   particleEditor = new particles(map);
    actualTexture = map->Texturas->indice;
    NPCs = new (Lpersonagem);
    gui->showMessage("Created New Game Map!");
@@ -437,6 +443,10 @@ void editor::draw()
          {
             objectEditor->drawTemporary();
          }
+         else if(gui->getState() == GUI_IO_STATE_PARTICLES)
+         {
+            particleEditor->drawTemporary(visibleMatrix);
+         }
    }
 
    glColor3f(1.0,1.0,1.0);
@@ -579,6 +589,11 @@ void editor::doEditorIO()
    {
       objectEditor->verifyAction(xReal, yReal, zReal, mButton, mouseX, mouseY,
                                  gui->getTool(), proj, modl, viewPort);
+   }
+   else if( (gui->getState() == GUI_IO_STATE_PARTICLES) && (mapOpened))
+   {
+      particleEditor->verifyAction(xReal, yReal, zReal, mButton, keys,
+                                  gui->getTool(), proj, modl, viewPort);
    }
 
 }
