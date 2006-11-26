@@ -24,6 +24,12 @@ void particles::deleteParticle()
          delete(tmp);
          actualParticle = NULL;
       }
+      else if(state == TOOL_PARTICLE_SMOKE)
+      {
+         part4* tmp = (part4*) actualParticle;
+         delete(tmp);
+         actualParticle = NULL;
+      }
    }
 }
 
@@ -52,12 +58,37 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    {
       state = TOOL_PARTICLE_FIRE; 
       part2* tmpPart = NULL;
-      string fileToOpen = getStringFromUser("FileName Input","../data/particles/",
+      string fileToOpen = getStringFromUser("FileName Input",
+                                            "../data/particles/",
                                             proj, modl, viewPort);
       if(fileToOpen != "../data/particles/")
       {
          height = 0;
          tmpPart = new part2(mouseX, height, mouseZ, fileToOpen);
+         if(!tmpPart)
+         {
+            printf("Error opening: %s\n", fileToOpen.c_str());
+            actualParticle = NULL;
+            return;
+         }
+         actualParticle = (particleSystem*) tmpPart;
+      }
+      else
+      {
+         actualParticle = NULL;
+      }
+   }
+   else if( (tool == TOOL_PARTICLE_SMOKE) && (!actualParticle) )
+   {
+      state = TOOL_PARTICLE_SMOKE; 
+      part4* tmpPart = NULL;
+      string fileToOpen = getStringFromUser("FileName Input",
+                                            "../data/particles/",
+                                            proj, modl, viewPort);
+      if(fileToOpen != "../data/particles/")
+      {
+         height = 0;
+         tmpPart = new part4(mouseX, height, mouseZ, fileToOpen);
          if(!tmpPart)
          {
             printf("Error opening: %s\n", fileToOpen.c_str());
@@ -98,6 +129,14 @@ void particles::drawTemporary(GLfloat matriz[6][4])
             tmp->NextStep(matriz);
          glPopMatrix();
       }
+      else if(state == TOOL_PARTICLE_SMOKE)
+      {
+         glPushMatrix();
+            part4* tmp = (part4*) actualParticle;
+            tmp->NextStep(matriz);
+         glPopMatrix();
+      }
+
    }
 }
 

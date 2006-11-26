@@ -181,6 +181,7 @@ class guiIO
       janela* particleWindow;             /**< Particle Window */
       tabButton* particleTabButton;       /**< Particles Tab Button */
       oneTabButton* fireButton;           /**< Particle Fire Button */
+      oneTabButton* smokeButton;          /**< Particle Smoke Button */
       void openParticleWindow();
       /*********************Message*Window*******************************/
       janela* messageWindow;              /**< Message Window */
