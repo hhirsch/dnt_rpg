@@ -575,7 +575,10 @@ void editor::doEditorIO()
          {
             porta = (mapObjeto*) porta->proximo;
          }
-         portalEditor->defineDoor(porta);
+         if( (porta != map->Objetos->primeiro) )
+         {
+            portalEditor->defineDoor(porta);
+         }
       }
       portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
                                  proj, modl, viewPort);
@@ -592,8 +595,9 @@ void editor::doEditorIO()
    }
    else if( (gui->getState() == GUI_IO_STATE_PARTICLES) && (mapOpened))
    {
-      particleEditor->verifyAction(xReal, yReal, zReal, mButton, keys,
-                                  gui->getTool(), proj, modl, viewPort);
+      particleEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
+                                   gui->getTool(), particleSystem, proj, 
+                                   modl, viewPort);
    }
 
 }

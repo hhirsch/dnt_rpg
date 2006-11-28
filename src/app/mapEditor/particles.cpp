@@ -1,19 +1,34 @@
 #include "particles.h"
 
+#define STATE_PLANES 800
+
+/*****************************************************************
+ *                          Constructor                          *
+ *****************************************************************/
 particles::particles(Map* map)
 {
    actualMap = map;
    actualParticle = NULL;
    state = -1;
+   particleType = -1;
+   string particleFileName = "";
 }
 
+/*****************************************************************
+ *                           Destructor                          *
+ *****************************************************************/
 particles::~particles()
 {
    state = -1;
    actualMap = NULL;
+   particleType = -1;
+   string particleFileName = "";
    deleteParticle();
 }
 
+/*****************************************************************
+ *                          deleteParticle                       *
+ *****************************************************************/
 void particles::deleteParticle()
 {
    if(actualParticle)
@@ -33,12 +48,18 @@ void particles::deleteParticle()
    }
 }
 
+/*****************************************************************
+ *                          verifyAction                         *
+ *****************************************************************/
 void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                             Uint8 mButton, Uint8* keys, int tool,
-                             GLdouble proj[16],GLdouble modl[16],
-                             GLint viewPort[4])
+                             Uint8 mButton, Uint8* keys, int tool, 
+                             partSystem* pS, GLdouble proj[16],
+                             GLdouble modl[16], GLint viewPort[4])
 {
-   if(tool != state)
+   int i;
+
+
+   if( (tool != state) && (state != STATE_PLANES))
    {
       deleteParticle(); 
    }
@@ -57,6 +78,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    if( (tool == TOOL_PARTICLE_FIRE) && (!actualParticle) )
    {
       state = TOOL_PARTICLE_FIRE; 
+      particleType = PART_FIRE;
       part2* tmpPart = NULL;
       string fileToOpen = getStringFromUser("FileName Input",
                                             "../data/particles/",
@@ -81,6 +103,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    else if( (tool == TOOL_PARTICLE_SMOKE) && (!actualParticle) )
    {
       state = TOOL_PARTICLE_SMOKE; 
+      particleType = PART_SMOKE;
       part4* tmpPart = NULL;
       string fileToOpen = getStringFromUser("FileName Input",
                                             "../data/particles/",
@@ -89,6 +112,31 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       {
          height = 0;
          tmpPart = new part4(mouseX, height, mouseZ, fileToOpen);
+         if(!tmpPart)
+         {
+            printf("Error opening: %s\n", fileToOpen.c_str());
+            actualParticle = NULL;
+            return;
+         }
+         actualParticle = (particleSystem*) tmpPart;
+      }
+      else
+      {
+         actualParticle = NULL;
+      }
+   }
+   else if( (tool == TOOL_PARTICLE_WATERFALL) && (!actualParticle) )
+   {
+      particleType = PART_WATERFALL;
+      state = TOOL_PARTICLE_WATERFALL; 
+      part1* tmpPart = NULL;
+      string fileToOpen = getStringFromUser("FileName Input",
+                                            "../data/particles/",
+                                            proj, modl, viewPort);
+      if(fileToOpen != "../data/particles/")
+      {
+         height = 0;
+         tmpPart = new part1(mouseX, height, mouseZ, fileToOpen);
          if(!tmpPart)
          {
             printf("Error opening: %s\n", fileToOpen.c_str());
@@ -114,13 +162,247 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          height -= 1;
       }
 
-      actualParticle->definePosition(mouseX, height, mouseZ);
+      if(mButton & SDL_BUTTON(1))
+      {
+         if( state == STATE_PLANES )
+         {
+            part1* tmp;
+            tmp = (part1*) actualParticle;
+            i = tmp->addPlane(actualPlane->x1, height-1, actualPlane->z1, 
+                              actualPlane->x2, height-1, actualPlane->z2,
+                              actualPlane->dX, actualPlane->dZ, 
+                              PLANE_NO_INCLINATION);
+            actualPlane = tmp->getPlane(i);
+         }
+         else if(particleType == PART_WATERFALL)
+         {
+            part1* tmp;
+            tmp = (part1*) pS->addParticle(particleType, mouseX, height, mouseZ,
+                                           actualParticle->getFileName());
+            delete(actualParticle);
+            actualParticle = (particleSystem*) tmp;
+            state = STATE_PLANES;
+            i = tmp->addPlane(mouseX-2, height-1, mouseZ-2, 
+                              mouseX+2, height-1, mouseZ+2,
+                              1, 0, PLANE_NO_INCLINATION);
+            actualPlane = tmp->getPlane(i);
+         }
+         else
+         {
+            pS->addParticle(particleType, mouseX, height, mouseZ,
+                            actualParticle->getFileName());
+         }
+         while(mButton & SDL_BUTTON(1))
+         {
+            //Wait for Mouse Button Release
+            SDL_PumpEvents();
+            int x,y;
+            mButton = SDL_GetMouseState(&x,&y);
+         }
+      }
+
+      /* Verify Planes Keys */
+      if(state == STATE_PLANES)
+      {
+         /* Change Modes of Inclination */
+         if(keys[SDLK_1])
+         {
+            actualPlane->inclination = PLANE_NO_INCLINATION;
+         }
+         if(keys[SDLK_2])
+         {
+            actualPlane->inclination = PLANE_INCLINATION_X;
+         }
+         if(keys[SDLK_3])
+         {
+            actualPlane->inclination = PLANE_INCLINATION_Z;
+         }
+         /* Move Plane on X Axis */
+         if(keys[SDLK_a])
+         {
+            actualPlane->x1 -= 0.1;
+            actualPlane->x2 -= 0.1;
+         }
+         if(keys[SDLK_d])
+         {
+            actualPlane->x1 += 0.1;
+            actualPlane->x2 += 0.1;
+         }
+         /* Move Plane on Z axis */
+         if(keys[SDLK_w])
+         {
+            actualPlane->z1 -= 0.1;
+            actualPlane->z2 -= 0.1;
+         }
+         if(keys[SDLK_s])
+         {
+            actualPlane->z1 += 0.1;
+            actualPlane->z2 += 0.1;
+         }
+         /* Move Plane on Y Axis */
+         if(keys[SDLK_f])
+         {
+            actualPlane->y1 -= 0.1;
+            actualPlane->y2 -= 0.1;
+         }
+         if(keys[SDLK_r])
+         {
+            actualPlane->y1 += 0.1;
+            actualPlane->y2 += 0.1;
+         }
+         if(keys[SDLK_q])
+         {
+            if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]))
+            {
+               actualPlane->y1 += 0.1;
+            }
+            else
+            {
+               actualPlane->y1 -= 0.1;
+            }
+         }
+         if(keys[SDLK_e])
+         {
+            if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]))
+            {
+               actualPlane->y2 += 0.1;
+            }
+            else
+            {
+               actualPlane->y2 -= 0.1;
+            }
+
+         }
+         /* Scale Plane on Z axis */
+         if(keys[SDLK_z])
+         {
+            if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]))
+            {
+               actualPlane->z1 += 0.05;
+               actualPlane->z2 -= 0.05;
+            }
+            else
+            {
+               actualPlane->z1 -= 0.05;
+               actualPlane->z2 += 0.05;
+            }
+         }
+         /* Scale Plane on X axis */
+         if(keys[SDLK_x])
+         {
+            if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]))
+            {
+               actualPlane->x1 += 0.05;
+               actualPlane->x2 -= 0.05;
+            }
+            else
+            {
+               actualPlane->x1 -= 0.05;
+               actualPlane->x2 += 0.05;
+            }
+         }
+         /* Scale Plane on Y axis */
+         if(keys[SDLK_y])
+         {
+            if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]))
+            {
+               actualPlane->y1 += 0.05;
+               actualPlane->y2 -= 0.05;
+            }
+            else
+            {
+               actualPlane->y1 -= 0.05;
+               actualPlane->y2 += 0.05;
+            }
+         }
+         /* dX Modification */
+         if(keys[SDLK_n])
+         {
+            if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]))
+            {
+               actualPlane->dX = 0;
+            }
+            else if( (keys[SDLK_RCTRL]) || (keys[SDLK_LCTRL]))
+            {
+               actualPlane->dX = -1;
+            }
+            else
+            {
+               actualPlane->dX = 1;
+            }
+         }
+         /* dZ Modification */
+         if(keys[SDLK_m])
+         {
+            if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]))
+            {
+               actualPlane->dZ = 0;
+            }
+            else if( (keys[SDLK_RCTRL]) || (keys[SDLK_LCTRL]))
+            {
+               actualPlane->dZ = -1;
+            }
+            else
+            {
+               actualPlane->dZ = 1;
+            }
+         }
+
+
+
+         if(keys[SDLK_ESCAPE])
+         {
+            /* Exit Plane Add Mode */
+            state = TOOL_PARTICLE_WATERFALL;
+            part1* tmp;
+            tmp = (part1*) actualParticle;
+            tmp->removeLastPlane();
+            actualParticle = NULL;
+         }
+      }
+      else
+      {
+         actualParticle->definePosition(mouseX, height, mouseZ);
+      }
    }
 }
 
+/*****************************************************************
+ *                          drawTemporary                        *
+ *****************************************************************/
 void particles::drawTemporary(GLfloat matriz[6][4])
 {
-   if(actualParticle != NULL)
+   if( state == STATE_PLANES )
+   {
+      glDisable(GL_LIGHTING);
+      glColor3f(0,0,0);
+      glBegin(GL_QUADS);
+      if(actualPlane->inclination == PLANE_NO_INCLINATION)
+      {
+         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z1);
+         glVertex3f(actualPlane->x2, actualPlane->y1, actualPlane->z1);
+         glVertex3f(actualPlane->x2, actualPlane->y1, actualPlane->z2);
+         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z2);
+      }
+      else if(actualPlane->inclination == PLANE_INCLINATION_X)
+      {
+         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z1);
+         glVertex3f(actualPlane->x2, actualPlane->y2, actualPlane->z1);
+         glVertex3f(actualPlane->x2, actualPlane->y2, actualPlane->z2);
+         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z2);
+      }
+      else if(actualPlane->inclination == PLANE_INCLINATION_Z)
+      {
+         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z1);
+         glVertex3f(actualPlane->x2, actualPlane->y1, actualPlane->z1);
+         glVertex3f(actualPlane->x2, actualPlane->y2, actualPlane->z2);
+         glVertex3f(actualPlane->x1, actualPlane->y2, actualPlane->z2);
+      }
+
+      glEnd();
+      glEnable(GL_LIGHTING);
+   }
+   else if(actualParticle != NULL)
    {
       if(state == TOOL_PARTICLE_FIRE)
       {
@@ -133,6 +415,20 @@ void particles::drawTemporary(GLfloat matriz[6][4])
       {
          glPushMatrix();
             part4* tmp = (part4*) actualParticle;
+            tmp->NextStep(matriz);
+         glPopMatrix();
+      }
+      else if(state = TOOL_PARTICLE_WATERFALL)
+      {
+         glPushMatrix();
+            part1* tmp = (part1*) actualParticle;
+            tmp->NextStep(matriz);
+         glPopMatrix();
+      }
+      else if(state = TOOL_PARTICLE_SNOW)
+      {
+         glPushMatrix();
+            part6* tmp = (part6*) actualParticle;
             tmp->NextStep(matriz);
          glPopMatrix();
       }

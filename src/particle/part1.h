@@ -107,9 +107,9 @@ class part1: public particleSystem
        * \param dZ -> particle Z variation when plane contact
        * \param inclination -> plane inclination type
        ***************************************************************/
-      void addPlane(float x1, float y1, float z1, 
-                    float x2, float y2, float z2, 
-                    float dX, float dZ, int inclination);
+      int addPlane(float x1, float y1, float z1, 
+                   float x2, float y2, float z2, 
+                   float dX, float dZ, int inclination);
       /*!
        ***************************************************************
        * Removes The Character's Planes
@@ -128,6 +128,9 @@ class part1: public particleSystem
       int getTotalPlanes(){return(actualPlanes);};
 
       interPlane* getPlane(int i){return(&intersections[i]);};
+
+      void removeLastPlane();
+
 
    private:
       float seconds;         /**< Actual Time on particle */

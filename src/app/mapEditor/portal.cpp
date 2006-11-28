@@ -92,9 +92,15 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
    }
    else if( (tool == TOOL_PORTAL_DOOR) && (actualDoor))
    {
+      printf("%p\n",actualDoor);
       //Pega Muro Mais Proximo
       muro* m = actualMap->muros;
       doorWall = m;
+
+      if(!doorWall)
+      {
+         return;
+      }
       
       while( m != NULL )
       {
@@ -113,6 +119,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
 
            m = m->proximo;
       }
+
       //Coloca X ou Z da porta fixo nele
       if( (doorWall->x2 - doorWall->x1) == 10)
       {

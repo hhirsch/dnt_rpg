@@ -179,9 +179,9 @@ GLuint part1::LoadTexture(char* fileName)
    return(indice);
 }
 
-void part1::addPlane(float x1, float y1, float z1, 
-                     float x2, float y2, float z2,
-                     float dX, float dZ, int inclination)
+int part1::addPlane(float x1, float y1, float z1, 
+                    float x2, float y2, float z2,
+                    float dX, float dZ, int inclination)
 {
    if(actualPlanes < PART1_MAX_PLANES)
    {
@@ -195,7 +195,9 @@ void part1::addPlane(float x1, float y1, float z1,
       intersections[actualPlanes].dZ = dZ;
       intersections[actualPlanes].inclination = inclination;
       actualPlanes++;
+      return(actualPlanes-1);
    }
+   return(-1);
 }
 
 
@@ -260,5 +262,10 @@ bool part1::intersectPlanes(particle* part, float* dX, float* dZ)
 void part1::removeCharacterPlanes()
 {
    actualPlanes -= 4;
+}
+
+void part1::removeLastPlane()
+{
+   actualPlanes--;
 }
 

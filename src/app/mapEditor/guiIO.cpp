@@ -307,13 +307,15 @@ void guiIO::openParticleWindow()
    particleWindow = gui->ljan->InserirJanela(0,599-247,112,599-186,"Particle",
                                              1,1,NULL,NULL);
    particleTabButton = particleWindow->objects->InserirTabButton(7,17,0,0,
-                                               "../data/mapEditor/particle.png");
+                                              "../data/mapEditor/particle.png");
    fireButton = particleTabButton->insertButton(0,0,19,19);
    smokeButton = particleTabButton->insertButton(20,0,39,19); 
+   waterfallButton = particleTabButton->insertButton(40,0,59,19);
+   waterSurfaceButton = particleTabButton->insertButton(60,0,79,19);
+   snowButton = particleTabButton->insertButton(80,0,99,19);
    particleWindow->ptrExterno = &particleWindow;
    particleWindow->Abrir(gui->ljan);
 }
-
 
 
 /****************************************************************
@@ -535,6 +537,21 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             state = GUI_IO_STATE_PARTICLES;
             tool = TOOL_PARTICLE_SMOKE;
+         }
+         else if(object == (Tobjeto*) snowButton)
+         {
+            state = GUI_IO_STATE_PARTICLES;
+            tool = TOOL_PARTICLE_SNOW;
+         }
+         else if(object == (Tobjeto*) waterfallButton)
+         {
+            state = GUI_IO_STATE_PARTICLES;
+            tool = TOOL_PARTICLE_WATERFALL;
+         }
+         else if(object == (Tobjeto*) waterSurfaceButton)
+         {
+            state = GUI_IO_STATE_PARTICLES;
+            tool = TOOL_PARTICLE_WATER_SURFACE;
          }
          break;
       }

@@ -182,6 +182,9 @@ class guiIO
       tabButton* particleTabButton;       /**< Particles Tab Button */
       oneTabButton* fireButton;           /**< Particle Fire Button */
       oneTabButton* smokeButton;          /**< Particle Smoke Button */
+      oneTabButton* snowButton;           /**< Particle Snow Button */
+      oneTabButton* waterfallButton;      /**< Particle Waterfall Button */
+      oneTabButton* waterSurfaceButton;   /**< Particle WaterSurface Button */
       void openParticleWindow();
       /*********************Message*Window*******************************/
       janela* messageWindow;              /**< Message Window */

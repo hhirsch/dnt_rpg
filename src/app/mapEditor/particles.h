@@ -22,7 +22,7 @@ class particles
        * \param mButton -> mouse button state
        * \param tool -> current Tool*/
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                        Uint8 mButton, Uint8* keys, int tool,
+                        Uint8 mButton, Uint8* keys, int tool, partSystem* pS,
                         GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       /*! If have some temporary things to draw, draw it! */
@@ -34,7 +34,10 @@ class particles
       Map* actualMap;                  /**< actual Opened Map */
       particleSystem* actualParticle;  /**< actual Particle */
       int state;                       /**< actual State */
+      int particleType;                /**< actual Particle Type */
       GLfloat height;                  /**< actual Particle Height */
+
+      interPlane* actualPlane;         /**< actual Plane */
 };
 
 #endif
