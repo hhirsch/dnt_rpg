@@ -129,6 +129,8 @@ class particleSystem
       int drawMode;          /**< DrawMode of the system */
       bool followPC;         /**< If the orign of System Follows PC */
       bool windAffect;       /**< If Wind Affects the System */
+
+      int getMaxParticles(){return(maxParticles);};
       
 
    PFNGLPOINTPARAMETERFARBPROC PointParameterf; /**< OpenGL extended function*/  

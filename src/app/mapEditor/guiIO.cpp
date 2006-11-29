@@ -313,6 +313,7 @@ void guiIO::openParticleWindow()
    waterfallButton = particleTabButton->insertButton(40,0,59,19);
    waterSurfaceButton = particleTabButton->insertButton(60,0,79,19);
    snowButton = particleTabButton->insertButton(80,0,99,19);
+   grassButton = particleTabButton->insertButton(0,20,19,39);
    particleWindow->ptrExterno = &particleWindow;
    particleWindow->Abrir(gui->ljan);
 }
@@ -552,6 +553,11 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             state = GUI_IO_STATE_PARTICLES;
             tool = TOOL_PARTICLE_WATER_SURFACE;
+         }
+         else if(object == (Tobjeto*) grassButton)
+         {
+            state = GUI_IO_STATE_PARTICLES;
+            tool = TOOL_PARTICLE_GRASS;
          }
          break;
       }

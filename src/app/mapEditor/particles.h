@@ -37,6 +37,8 @@ class particles
       int particleType;                /**< actual Particle Type */
       GLfloat height;                  /**< actual Particle Height */
 
+      GLfloat x1,z1,x2,z2;
+
       interPlane* actualPlane;         /**< actual Plane */
 };
 

@@ -10,10 +10,12 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
    centerZ1 = cZ1;
    centerZ2 = cZ2;
    //grassModel = glmReadOBJ(fileName.c_str(),"",1);
-   img = IMG_Load("../data/models/natural/matos/grass.png");
+   strFileName = fileName;
+   img = IMG_Load(fileName.c_str());
    if(!img)
    {
-      printf("Error when loading grass! Maybe Crash Soon!\n");
+      printf("Error when loading grass! Maybe Crash Soon!\n File: %s\n",
+             fileName.c_str());
    }
    //carregaTexturaRGBA(img, &grassTexture);
    glGenTextures(1, &(grassTexture));
@@ -130,7 +132,7 @@ void grass::createParticle(particle* part)
                 + centerX1;
    part->posY = 0;
    part->posZ = ((centerZ2-centerZ1)*(rand() / ((double)RAND_MAX + 1)))
-                + centerZ2;
+                + centerZ1;
    
    part->prvX = 15*(rand() / ((double)RAND_MAX + 1));
    part->prvY = 90*(rand() / ((double)RAND_MAX + 1));
@@ -155,5 +157,13 @@ void grass::NextStep(GLfloat matriz[6][4])
 int grass::numParticles()
 {
    return(actualParticles);
+}
+
+void grass::getPosition(GLfloat& cX1, GLfloat& cZ1, GLfloat& cX2, GLfloat& cZ2 )
+{
+   cX1 = centerX1;
+   cX2 = centerX2;
+   cZ1 = centerZ1;
+   cZ2 = centerZ2;
 }
 

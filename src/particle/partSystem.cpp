@@ -46,6 +46,11 @@ partSystem::partSystem()
       snow[i] = NULL;
    }
 
+   for(i = 0; i < MAX_GRASS; i++)
+   {
+      grassParticles[i] = NULL;
+   }
+
 }
 
 /**********************************************************************
@@ -125,6 +130,16 @@ void partSystem::deleteAll()
          snow[i] = NULL;
       }
    }
+
+   for(i = 0; i < MAX_GRASS; i++)
+   {
+      if(grassParticles[i] != NULL)
+      {
+         delete(grassParticles[i]);
+         grassParticles[i] = NULL;
+      }
+   }
+
 }
 
 /**********************************************************************
@@ -217,7 +232,44 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4])
          snow[i]->NextStep(matriz);
       }
    }
+
+   for(i = 0; i < MAX_GRASS; i++)
+   {
+      if(grassParticles[i] != NULL)
+      {
+         grassParticles[i]->NextStep(matriz);
+      }
+   }
+
    glColor3f(1.0,1.0,1.0);
+}
+
+/**********************************************************************
+ *                            addParticle                             *
+ **********************************************************************/
+particleSystem* partSystem::addParticle(int type, GLfloat x1, GLfloat z1,
+                                        GLfloat x2, GLfloat z2, int total,
+                                        string fileName)
+{
+   int i;
+   switch(type)
+   {
+      case PART_GRASS:
+         for(i = 0; i < MAX_GRASS; i++)
+         {
+            if(grassParticles[i] == NULL)
+            {
+               grassParticles[i] = new grass(x1,z1,x2,z2,total, fileName);
+               return(grassParticles[i]);
+            }
+         }
+         if(i ==  MAX_GRASS)
+         {
+            printf("Warn: Too much Grass\n");
+         }
+       break;
+   }
+   return(NULL);
 }
 
 /**********************************************************************
@@ -419,6 +471,17 @@ void partSystem::removeParticle(int type, particleSystem* part)
              }
           }
        break;
+       case PART_GRASS:
+          for(i = 0; i < MAX_GRASS; i++)
+          {
+             if( (particleSystem*)grassParticles[i] == part)
+             {
+                delete(grassParticles[i]);
+                grassParticles[i] = NULL;
+                return;
+             }
+          }
+       break;
    }
 
    return;
@@ -488,6 +551,14 @@ int partSystem::numParticles()
         total += snow[i]->numParticles();
    }
 
+   for(i = 0; i < MAX_GRASS; i++)
+   {
+      if(grassParticles[i] != NULL)
+      {
+         total += grassParticles[i]->numParticles();
+      }
+   }
+
    return(total);
 }
 
@@ -528,6 +599,13 @@ void partSystem::loadFromFile(string fileName)
             particula->addPlane(x1, y1, z1, x2, y2, z2, dX, dZ, inclination);
             totalPlanes--;
          }
+      }
+      else if(type == PART_GRASS)
+      {
+         GLfloat x2, z2;
+         int total;
+         fscanf(file, "%f %f %d",&x2, &z2, &total);
+         addParticle(type, X, Z, x2, z2, total, buffer);
       }
       else
       {
@@ -625,6 +703,20 @@ void partSystem::saveToFile(string fileName)
                                        snow[i]->getFileName().c_str());
       }
    }
+
+   for(i = 0; i < MAX_GRASS; i++)
+   {
+      if(grassParticles[i] != NULL)
+      {
+         GLfloat x1,x2,z1,z2;
+         grassParticles[i]->getPosition(x1,z1,x2,z2);
+         fprintf(file,"%d %f %f %f %s\n",PART_GRASS, x1, 0, z1,
+                                      grassParticles[i]->getFileName().c_str());
+         fprintf(file,"%f %f %d\n", x2, z2, 
+                                    grassParticles[i]->getMaxParticles());
+      }
+   }
+
    
    fclose(file);
 }

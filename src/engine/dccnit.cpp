@@ -86,7 +86,7 @@ engine::engine()
 
    waveTest = new waves("", 300, 20, 300, 5, 20);
    grassTest = new grass(64, 0, 127, 63, 200, 
-                         "../data/models/natural/matos/mato.obj");
+                         "../data/models/natural/matos/grass.png");
 
    destinyVariation = -2.0;
 

@@ -79,6 +79,8 @@ public:
        ***************************************************************/
       int numParticles();
 
+      void getPosition(GLfloat& cX1, GLfloat& cZ1, GLfloat& cX2, GLfloat& cZ2 );
+
    private:
       float seconds;        /**< Seconds, not used anymore. */
       float centerX1, 

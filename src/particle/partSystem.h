@@ -13,6 +13,7 @@
 #include "part5.h"
 #include "part6.h"
 #include "part7.h"
+#include "grass.h"
 #include <string>
 using namespace std;
 
@@ -23,6 +24,7 @@ using namespace std;
 #define PART_BLOOD         5  /**< Blood ID */
 #define PART_LIGHTNING     6  /**< Lightnig ID */
 #define PART_SNOW          7  /**< Snow ID */
+#define PART_GRASS         8  /**< Grass ID */
 
 
 #define MAX_WATERFALL     2  /**< Max Number of Waterfalls per Map */
@@ -32,6 +34,7 @@ using namespace std;
 #define MAX_BLOOD         10 /**< Max number of blood per map */
 #define MAX_SNOW          1  /**< Max number of snow per map */
 #define MAX_LIGHTNING     3  /**< Max number of simultaniously lightinings */
+#define MAX_GRASS         20 /**< Max Number of Grass */
 
 /*! Number of actualizations to stabilize all systens */
 #define PART_STABILIZE_LOOP 600  
@@ -67,6 +70,9 @@ class partSystem
        ***************************************************************/
       particleSystem* addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
                                   string fileName );
+      particleSystem* addParticle(int type, GLfloat x1, GLfloat z1,
+                                  GLfloat x2, GLfloat z2, int total,
+                                  string fileName);
 
       /*!
        *************************************************************** 
@@ -118,6 +124,7 @@ class partSystem
       part5* blood[MAX_BLOOD];                /**< Blood Particles */
       part6* lightning[MAX_LIGHTNING];        /**< Lightning Particles */
       part7* snow[MAX_SNOW];                  /**< Snow Particles */
+      grass* grassParticles[MAX_GRASS];       /**< Grass Particles */
 
 };
 

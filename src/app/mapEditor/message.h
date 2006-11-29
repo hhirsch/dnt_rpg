@@ -34,6 +34,7 @@ using namespace std;
 #define TOOL_PARTICLE_WATERFALL     53
 #define TOOL_PARTICLE_WATER_SURFACE 54
 #define TOOL_PARTICLE_SNOW          55
+#define TOOL_PARTICLE_GRASS         56
 
 string messageForTool(int tool);
 

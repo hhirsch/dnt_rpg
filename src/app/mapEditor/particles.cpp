@@ -1,6 +1,7 @@
 #include "particles.h"
 
-#define STATE_PLANES 800
+#define STATE_PLANES     800
+#define STATE_GRASS_INIT 801
 
 /*****************************************************************
  *                          Constructor                          *
@@ -59,7 +60,8 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    int i;
 
 
-   if( (tool != state) && (state != STATE_PLANES))
+   if( (tool != state) && (state != STATE_PLANES) && 
+       (state != TOOL_PARTICLE_GRASS))
    {
       deleteParticle(); 
    }
@@ -74,8 +76,52 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    {
       posZ = 0;
    }
-   
-   if( (tool == TOOL_PARTICLE_FIRE) && (!actualParticle) )
+
+   if( tool == TOOL_PARTICLE_GRASS )
+   {
+      if(state == TOOL_PARTICLE_GRASS)
+      {
+         if(mButton & SDL_BUTTON(1))
+         {
+            x1 = mouseX;
+            z1 = mouseZ;
+            state = STATE_GRASS_INIT;
+         }
+      }
+      else if(state == STATE_GRASS_INIT)
+      {
+         if(!(mButton & SDL_BUTTON(1)))
+         {
+            GLfloat tmp;
+            if(x2 < x1)
+            {
+               tmp = x2;
+               x2 = x1;
+               x1 = tmp;
+            }
+            if(z2 < z1)
+            {
+               tmp = z2;
+               z2 = z1;
+               z1 = tmp;
+            }
+            //TODO Prompt for povoation!
+            int total = (int)floor((z2-z1)*(x2-x1) / 20.0);
+            pS->addParticle(PART_GRASS, x1, z1, x2, z2, total,
+                            "../data/models/natural/matos/grass.png"); 
+            state = TOOL_PARTICLE_GRASS;
+         }
+         x2 = mouseX;
+         z2 = mouseZ;
+      }
+      else
+      {
+         state = TOOL_PARTICLE_GRASS;
+         particleType = PART_GRASS;
+      }
+      
+   }
+   else if( (tool == TOOL_PARTICLE_FIRE) && (!actualParticle) )
    {
       state = TOOL_PARTICLE_FIRE; 
       particleType = PART_FIRE;
@@ -187,7 +233,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                               1, 0, PLANE_NO_INCLINATION);
             actualPlane = tmp->getPlane(i);
          }
-         else
+         else if(tool != TOOL_PARTICLE_GRASS)
          {
             pS->addParticle(particleType, mouseX, height, mouseZ,
                             actualParticle->getFileName());
@@ -421,6 +467,18 @@ void particles::drawTemporary(GLfloat matriz[6][4])
          glVertex3f(actualPlane->x1, actualPlane->y2, actualPlane->z2);
       }
 
+      glEnd();
+      glEnable(GL_LIGHTING);
+   }
+   else if(state == STATE_GRASS_INIT)
+   {
+      glDisable(GL_LIGHTING);
+      glColor3f(0.01,0.1,0.8);
+      glBegin(GL_QUADS);
+         glVertex3f(x1, 1, z1);
+         glVertex3f(x2, 1, z1);
+         glVertex3f(x2, 1, z2);
+         glVertex3f(x1, 1, z2);
       glEnd();
       glEnable(GL_LIGHTING);
    }
