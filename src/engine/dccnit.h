@@ -271,6 +271,7 @@ class engine
       int attackFeat;             /**< attack feat to use. */
 
       waves* waveTest;
+      part2* effect;
 
       sun* gameSun;               /**< The internal sun reference */
       GLfloat hour;               /**< Hour on day time */

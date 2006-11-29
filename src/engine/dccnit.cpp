@@ -22,6 +22,7 @@
  *********************************************************************/
 engine::engine()
 {
+   effect = NULL;
    /* Initialize internal lists */
    gui  = new interface(NULL);
    actualMap = NULL;
@@ -1310,6 +1311,25 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
          /* Temporariamente, para visualizar o efeito de sangue */
+         if(keys[SDLK_y])
+         {
+            if(!effect)
+            {
+               effect = (part2*)particleSystem->addParticle(PART_FIRE,
+                                          PCs->personagemAtivo->posicaoLadoX,0,
+                                          PCs->personagemAtivo->posicaoLadoZ,
+                                          "../data/particles/effect1.par");
+               if(effect)
+               {
+                  effect->followPC = true;
+               }
+            }
+            else
+            {
+               particleSystem->removeParticle(PART_FIRE, effect);
+               effect = NULL;
+            }
+         }
          if(keys[SDLK_p])
          {
             part5 *p;
