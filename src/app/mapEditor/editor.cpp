@@ -657,6 +657,7 @@ void editor::verifyIO()
          if(obj != NULL)
          {
             gui->showMessage(gui->getObjectFileName()+" Inserted.");
+            objectEditor->defineActualObject(obj);
          }
          else
          {

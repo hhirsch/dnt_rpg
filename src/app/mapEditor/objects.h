@@ -29,6 +29,8 @@ class objects
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary();
 
+      void defineActualObject(mapObjeto* obj){actualObstacle = obj;};
+
     private:
       Map* actualMap;             /**< Actual Internal Map */
       mapObjeto* actualObstacle;  /**< Actual Obstacle */

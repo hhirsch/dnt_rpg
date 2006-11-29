@@ -331,6 +331,17 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                actualPlane->dX = 1;
             }
          }
+         if(keys[SDLK_j])
+         {
+            if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]))
+            {
+               actualPlane->dX -= 0.1;
+            }
+            else
+            {
+               actualPlane->dX += 0.1;
+            }
+         }
          /* dZ Modification */
          if(keys[SDLK_m])
          {
@@ -345,6 +356,17 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             else
             {
                actualPlane->dZ = 1;
+            }
+         }
+         if(keys[SDLK_k])
+         {
+            if( (keys[SDLK_RSHIFT]) || (keys[SDLK_LSHIFT]))
+            {
+               actualPlane->dZ -= 0.1;
+            }
+            else
+            {
+               actualPlane->dZ += 0.1;
             }
          }
 
