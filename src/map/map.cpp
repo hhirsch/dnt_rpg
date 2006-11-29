@@ -4,6 +4,8 @@
 
 #include "map.h"
 #include "../engine/culling.h"
+#include "../etc/glm.h"
+#include "../engine/util.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -435,11 +437,13 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         GLfloat distancia;
         GLfloat deltaX, deltaZ;
         GLfloat deltaY2 = cameraY*cameraY;
+        GLfloat min[3], max[3];
+        GLfloat X[4], Z[4];
+        GLMmodel* modelo;
 
         for(Xaux = 0; Xaux < x; Xaux++)
         for(Zaux = 0; Zaux < z; Zaux++)
         {
-           if(MapSquares[Xaux][Zaux]->visivel){
            deltaX = (cameraX-MapSquares[Xaux][Zaux]->x1+HALFSQUARESIZE);
            deltaZ = (cameraZ-MapSquares[Xaux][Zaux]->z1+HALFSQUARESIZE);
            distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) 
@@ -447,15 +451,36 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
            for(o=0;o<MAXOBJETOS;o++)
            {
               if( (MapSquares[Xaux][Zaux]->objects[o] != NULL) && 
-                  (MapSquares[Xaux][Zaux]->objectsDesenha[o] == 1) )
+                  (MapSquares[Xaux][Zaux]->objectsDesenha[o] == 1))
               {
-                  MapSquares[Xaux][Zaux]->objects[o]->Desenhar(
-                          MapSquares[Xaux][Zaux]->Xobjects[o],
-                          MapSquares[Xaux][Zaux]->Zobjects[o],
-                          distancia,
-                          MapSquares[Xaux][Zaux]->objectsOrientation[o]);
+                 /* Do the Rotation of the Bounding Box */
+                 modelo=(GLMmodel*)MapSquares[Xaux][Zaux]->objects[o]->modelo3d;
+                  X[0] = modelo->x1;
+                  Z[0] = modelo->z1;
+                  X[1] = modelo->x1;
+                  Z[1] = modelo->z2; 
+                  X[2] = modelo->x2;
+                  Z[2] = modelo->z2;
+                  X[3] = modelo->x2;
+                  Z[3] = modelo->z1;
+                  rotTransBoundingBox(
+                                  MapSquares[Xaux][Zaux]->objectsOrientation[o],
+                                  X, Z, MapSquares[Xaux][Zaux]->Xobjects[o], 
+                                  modelo->y1, modelo->y2,
+                                  MapSquares[Xaux][Zaux]->Zobjects[o],
+                                  min, max );
+
+                  /* Verify ViewFrustum Culling */
+                  if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
+                                     matriz))
+                  {
+                     MapSquares[Xaux][Zaux]->objects[o]->Desenhar(
+                             MapSquares[Xaux][Zaux]->Xobjects[o],
+                             MapSquares[Xaux][Zaux]->Zobjects[o],
+                             distancia,
+                             MapSquares[Xaux][Zaux]->objectsOrientation[o]);
+                  }
               }
-           }
            }
            MapSquares[Xaux][Zaux]->visivel = 0;
         }
