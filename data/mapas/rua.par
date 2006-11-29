@@ -1,8 +1,0 @@
-2 183 0 327.5 ../data/particles/fire1.par
-4 340 15 436.4 ../data/particles/smoke1.par
-7 340 80 100 ../data/particles/snow1.par
-1 150 60 120 ../data/particles/waterfall1.par
-3
-148 59 118 152 59 123 -1 0 0
-150 40 118 160 32 123 -1 0 1
-160 20 110 175 20 130 -1 0 0
