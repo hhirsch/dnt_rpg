@@ -106,7 +106,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                z1 = tmp;
             }
             //TODO Prompt for povoation!
-            int total = (int)floor((z2-z1)*(x2-x1) / 200.0);
+            int total = (int)floor((z2-z1)*(x2-x1) / 20.0);
             pS->addParticle(PART_GRASS, x1, z1, x2, z2, total,
                             "../data/models/natural/matos/grass.png"); 
             state = TOOL_PARTICLE_GRASS;

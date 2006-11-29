@@ -148,6 +148,15 @@ void partSystem::deleteAll()
 void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4])
 {
    int i;
+
+   for(i = 0; i < MAX_GRASS; i++)
+   {
+      if(grassParticles[i] != NULL)
+      {
+         grassParticles[i]->NextStep(matriz);
+      }
+   }
+
    
    for(i = 0; i < MAX_WATERFALL; i++)
    {
@@ -230,14 +239,6 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4])
             snow[i]->definePosition(PCposX, PCposZ);
          }
          snow[i]->NextStep(matriz);
-      }
-   }
-
-   for(i = 0; i < MAX_GRASS; i++)
-   {
-      if(grassParticles[i] != NULL)
-      {
-         grassParticles[i]->NextStep(matriz);
       }
    }
 

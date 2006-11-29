@@ -1358,6 +1358,35 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         "../data/particles/lightning1.par");
          }
 
+         /* FIXME Presentation temporary slides */
+
+         if(keys[SDLK_1])
+         {
+            presentation("../data/presPoc2/titulo.png");
+         }
+         if(keys[SDLK_2])
+         {
+            presentation("../data/presPoc2/1.png");
+         }
+         if(keys[SDLK_3])
+         {
+            presentation("../data/presPoc2/3.png");
+         }
+         if(keys[SDLK_4])
+         {
+            presentation("../data/presPoc2/4.png");
+         }
+         if(keys[SDLK_5])
+         {
+            presentation("../data/presPoc2/2.png");
+         }
+
+         if(keys[SDLK_0])
+         {
+            hour += 1;
+         }
+
+
          int i;
          if(keys[SDLK_z])
          {
@@ -1893,15 +1922,16 @@ void engine::Draw()
       glPopMatrix();
    }
 
-   waveTest->doStep();
-   waveTest->draw();
-
    /* Draw Particles */
    glPushMatrix();
       particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
                                    PCs->personagemAtivo->posicaoLadoZ, 
                                    visibleMatrix);
    glPopMatrix();
+
+   waveTest->doStep();
+   waveTest->draw();
+
 
 
    /* Draw the GUI and others */
@@ -2224,6 +2254,34 @@ void engine::gameOver()
    glFlush();
    SDL_GL_SwapBuffers();
    SDL_Delay(4000);
+   glDeleteTextures(1,&id);
+}
+
+void engine::presentation(string fileName)
+{
+   GLuint id;
+   Uint8 mButton = 0;
+   SDL_Surface* img = IMG_Load(fileName.c_str()); 
+   /*cor_Definir(245,25,25);
+   selFonte(FPLATINA, CENTRALIZADO, 3);
+   escxy(img,256,426,"All Playable Characters Died.");*/
+   glDisable(GL_LIGHTING);
+   carregaTextura(img,&id);
+   SDL_FreeSurface(img);
+   AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
+   glFlush();
+   SDL_GL_SwapBuffers();
+
+   /* Wait until Mouse Button pressed */
+   while(!(mButton & SDL_BUTTON(1)))
+   {
+      //Wait for Mouse Button Release
+      SDL_PumpEvents();
+      int x,y;
+      mButton = SDL_GetMouseState(&x,&y);
+   }
+   
+   glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
 }
 

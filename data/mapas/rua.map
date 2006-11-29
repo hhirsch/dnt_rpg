@@ -4,47 +4,47 @@ light ../data/mapas/rua.lgh
 npc ../data/mapas/rua.npc
 PS ../data/mapas/rua.map.par
 MUSICA ../data/music/musica7.ogg
-o fire ../data/models/natural/fogueira.dcc
-o Door ../data/models/objetos/geral/porta.dcc
-o Barrel ../data/models/objetos/geral/barrel.dcc
-o Katana ../data/models/objetos/armas/dark_katana.dcc
-o Scimitar ../data/models/objetos/armas/scimitar.dcc
 o Axe ../data/models/objetos/armas/axe.dcc
-t ../data/texturas/chao_marble.jpg ../data/texturas/chao_marble.jpg 234 234 234
-t ../data/texturas/chao_asfalto_rhcont.jpg ../data/texturas/chao_asfalto_rhcont.jpg 85 85 85
-t ../data/texturas/chao_asfalto_rcont.jpg ../data/texturas/chao_asfalto_rcont.jpg 85 85 85
-t ../data/texturas/chao_asfalto.jpg ../data/texturas/chao_asfalto.jpg 85 85 85
-t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
-t ../data/texturas/chao_asfalto_curva_db.jpg ../data/texturas/chao_asfalto_curva_db.jpg 85 85 85
+o Scimitar ../data/models/objetos/armas/scimitar.dcc
+o Katana ../data/models/objetos/armas/dark_katana.dcc
+o Barrel ../data/models/objetos/geral/barrel.dcc
+o Door ../data/models/objetos/geral/porta.dcc
+o fire ../data/models/natural/fogueira.dcc
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 218 168 169
-d Door 64.000000,197.993622:90
-d Door 10.000000,363.298798:90
+t ../data/texturas/chao_asfalto_curva_db.jpg ../data/texturas/chao_asfalto_curva_db.jpg 85 85 85
+t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
+t ../data/texturas/chao_asfalto.jpg ../data/texturas/chao_asfalto.jpg 85 85 85
+t ../data/texturas/chao_asfalto_rcont.jpg ../data/texturas/chao_asfalto_rcont.jpg 85 85 85
+t ../data/texturas/chao_asfalto_rhcont.jpg ../data/texturas/chao_asfalto_rhcont.jpg 85 85 85
+t ../data/texturas/chao_marble.jpg ../data/texturas/chao_marble.jpg 234 234 234
 d Door 22.591179,10.000000:0
-muro 0.000000,0.000000,10.000000,341.460999:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,0.000000,22.591179,10.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,438.000000,54.000000,448.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 54.000000,0.000000,64.000000,176.155838:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 54.000000,197.993622,64.000000,448.000000:16,16,16
+d Door 10.000000,363.298798:90
+d Door 64.000000,197.993622:90
+muro 44.428974,0.000000,54.000000,10.000000:1065353216,1065353216,1132462080
 mt ../data/texturas/parede_rosa.jpg
 muro 0.000000,363.298798,10.000000,448.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-muro 44.428974,0.000000,54.000000,10.000000:1065353216,1065353216,1132462080
+muro 54.000000,197.993622,64.000000,448.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-meioFio 64.000000,253.500000,128.000000,256.000000
+muro 54.000000,0.000000,64.000000,176.155838:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-meioFio 64.000000,128.000000,128.000000,130.500000
+muro 10.000000,438.000000,54.000000,448.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-meioFio 320.000000,256.000000,448.000000,258.500000
+muro 10.000000,0.000000,22.591179,10.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-meioFio 320.000000,256.000000,322.500000,448.000000
+muro 0.000000,0.000000,10.000000,341.460999:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+meioFio 125.500000,64.000000,128.000000,448.000000
 mt ../data/texturas/parede_rosa.jpg
 meioFio 128.000000,64.000000,448.000000,66.500000
 mt ../data/texturas/parede_rosa.jpg
-meioFio 125.500000,64.000000,128.000000,448.000000
+meioFio 320.000000,256.000000,322.500000,448.000000
+mt ../data/texturas/parede_rosa.jpg
+meioFio 320.000000,256.000000,448.000000,258.500000
+mt ../data/texturas/parede_rosa.jpg
+meioFio 64.000000,128.000000,128.000000,130.500000
+mt ../data/texturas/parede_rosa.jpg
+meioFio 64.000000,253.500000,128.000000,256.000000
 mt ../data/texturas/parede_rosa.jpg
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000

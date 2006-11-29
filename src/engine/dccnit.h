@@ -189,6 +189,9 @@ class engine
        ***************************************************************/
       void gameOver();
 
+      void presentation(string fileName);
+
+
       /*!
        ************************************************************** 
        * Write actual Time on TXT box
