@@ -1,8 +1,34 @@
 T 8X8
 # Made by DccNiTghtmare's MapEditor, v0.0.3
 PS ../data/mapas/poc2.map.par
+o ../data/models/natural/arvores/tree4.dcc ../data/models/natural/arvores/tree4.dcc
+o ../data/models/natural/arvores/tree3.dcc ../data/models/natural/arvores/tree3.dcc
+o ../data/models/natural/arvores/tree2.dcc ../data/models/natural/arvores/tree2.dcc
+o ../data/models/objetos/geral/mala.dcc ../data/models/objetos/geral/mala.dcc
+o ../data/models/objetos/geral/guitarra.dcc ../data/models/objetos/geral/guitarra.dcc
+o ../data/models/objetos/geral/placa_pare.dcc ../data/models/objetos/geral/placa_pare.dcc
+o Door ../data/models/objetos/geral/porta2.dcc
 o ../data/models/natural/stonewall.dcc ../data/models/natural/stonewall.dcc
+o ../data/models/objetos/armas/kalashnikov.dcc ../data/models/objetos/armas/kalashnikov.dcc
+t ../data/texturas/parede_tijolos2.png ../data/texturas/parede_tijolos2.png 156 156 156
+t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 101 83 97
+t ../data/texturas/chao_asfalto_pe.jpg ../data/texturas/chao_asfalto_pe.jpg 85 85 85
+t ../data/texturas/chao_asfalto_pd.jpg ../data/texturas/chao_asfalto_pd.jpg 85 85 83
 t chao_grama2 ../data/texturas/chao_grama2.jpg 20 20 100
+d Door 384.000000,457.317627:90
+d Door 384.000000,140.990219:90
+muro 384.000000,457.317627,394.000000,512.000000:16,16,16
+mt ../data/texturas/parede_tijolos2.png
+muro 384.000000,140.990219,394.000000,435.479828:16,16,16
+mt ../data/texturas/parede_tijolos2.png
+muro 394.000000,0.000000,502.000000,10.000000:16,16,16
+mt ../data/texturas/parede_tijolos2.png
+muro 394.000000,502.000000,502.000000,512.000000:16,16,16
+mt ../data/texturas/parede_tijolos2.png
+muro 502.000000,0.000000,512.000000,512.000000:16,16,16
+mt ../data/texturas/parede_tijolos2.png
+muro 384.000000,0.000000,394.000000,119.152420:16,16,16
+mt ../data/texturas/parede_tijolos2.png
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -10,16 +36,19 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree4.dcc 0:3,2:180.413101,72.025711:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree4.dcc 0:3,2:180.413101,72.025711:-1431655770:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pe.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
+uo ../data/models/objetos/geral/mala.dcc 1:8,1:493.375488,48.820408:199:0
 #Z: 1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -27,16 +56,18 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree4.dcc 1:3,2:180.413101,72.025711:618:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree4.dcc 0:3,2:180.413101,72.025711:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pe.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 #Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -47,30 +78,37 @@ ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pe.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
+uo ../data/models/objetos/geral/guitarra.dcc 1:8,3:480.878754,190.966324:51:0
 #Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree2.dcc 0:2,4:93.320435,232.857422:-560556394:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree2.dcc 1:2,4:93.320435,232.857422:199:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree2.dcc 0:2,4:93.320435,232.857422:0:0
+uo ../data/models/natural/arvores/tree3.dcc 0:3,5:167.746185,293.252411:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree3.dcc 0:3,5:167.746185,293.252411:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pe.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
+uo ../data/models/objetos/geral/guitarra.dcc 0:8,3:480.878754,190.966324:151174153:0
 #Z: 4
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -81,16 +119,20 @@ uo ../data/models/natural/stonewall.dcc 0:2,6:95.819412,369.697327:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 uo ../data/models/natural/stonewall.dcc 0:2,6:95.819412,369.697327:0:0
+uo ../data/models/natural/arvores/tree3.dcc 1:3,5:167.746185,293.252411:543:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree3.dcc 0:3,5:167.746185,293.252411:-98952:0
+uo ../data/models/natural/arvores/tree4.dcc 0:4,6:234.036133,345.587646:-98952:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pe.jpg
+uo ../data/models/natural/arvores/tree4.dcc 0:4,6:234.036133,345.587646:1059913728:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 #Z: 5
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -103,14 +145,16 @@ ut chao_grama2
 uo ../data/models/natural/stonewall.dcc 0:2,6:95.819412,369.697327:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree4.dcc 1:4,6:234.036133,345.587646:543:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pe.jpg
+uo ../data/models/natural/arvores/tree4.dcc 0:4,6:234.036133,345.587646:1102056076:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 #Z: 6
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -123,14 +167,16 @@ ut chao_grama2
 uo ../data/models/natural/stonewall.dcc 0:2,6:95.819412,369.697327:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/natural/arvores/tree4.dcc 0:4,6:234.036133,345.587646:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pe.jpg
+uo ../data/models/natural/arvores/tree4.dcc 0:4,6:234.036133,345.587646:-1413749120:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pd.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
 #Z: 7
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -141,14 +187,23 @@ uo ../data/models/natural/stonewall.dcc 0:2,6:95.819412,369.697327:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 uo ../data/models/natural/stonewall.dcc 0:2,6:95.819412,369.697327:0:0
+uo ../data/models/natural/arvores/tree3.dcc 1:3,8:183.270569,489.281586:347:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uc 255.600235,477.559631,383.278320,511.226349:../data/mapas/rua.map
+uo ../data/models/objetos/geral/placa_pare.dcc 1:4,8:254.541153,509.408295:-1:0
+uo ../data/models/natural/arvores/tree3.dcc 0:3,8:183.270569,489.281586:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pe.jpg
+uc 255.600235,477.559631,383.278320,511.226349:../data/mapas/rua.map
+uo ../data/models/objetos/geral/placa_pare.dcc 0:4,8:254.541153,509.408295:-1091632639:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_asfalto_pd.jpg
+uc 255.600235,477.559631,383.278320,511.226349:../data/mapas/rua.map
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
+uo ../data/models/objetos/armas/kalashnikov.dcc 0:8,8:454.237610,467.832794:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut chao_grama2
+ut ../data/texturas/chao_ametista.png
+uo ../data/models/objetos/armas/kalashnikov.dcc 1:8,8:454.237610,467.832794:2038133340:0
 i 1,1

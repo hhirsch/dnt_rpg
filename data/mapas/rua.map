@@ -14,7 +14,6 @@ o tree ../data/models/natural/arvores/tree1.dcc
 o tree2 ../data/models/natural/arvores/tree2.dcc
 o tree3 ../data/models/natural/arvores/tree3.dcc
 o tree4 ../data/models/natural/arvores/tree4.dcc
-o waterfall ../data/models/natural/stonewall.dcc
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 218 168 169
 t ../data/texturas/chao_asfalto_curva_db.jpg ../data/texturas/chao_asfalto_curva_db.jpg 85 85 85
 t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15

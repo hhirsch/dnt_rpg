@@ -30,8 +30,6 @@
 #include "../fight/fightSystem.h"
 
 #include "../particle/wave.h"
-#include "../particle/grass.h"
-
 #ifdef REDE
   #include "../net/client.h"
 #endif
@@ -273,7 +271,6 @@ class engine
       int attackFeat;             /**< attack feat to use. */
 
       waves* waveTest;
-      grass* grassTest;
 
       sun* gameSun;               /**< The internal sun reference */
       GLfloat hour;               /**< Hour on day time */

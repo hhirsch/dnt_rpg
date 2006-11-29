@@ -45,7 +45,7 @@ int main(int argc, char **argv)
           charCreation = Engine->CharacterScreen(&tituloID);
           if( charCreation == CHAR_CONFIRM)
           {
-             Engine->LoadMap("../data/mapas/rua.map",1);
+             Engine->LoadMap("../data/mapas/poc2.map",1);
           }
        }
 
