@@ -81,6 +81,8 @@ public:
 
       void getPosition(GLfloat& cX1, GLfloat& cZ1, GLfloat& cX2, GLfloat& cZ2 );
 
+      string getGrassFileName();
+
    private:
       float seconds;        /**< Seconds, not used anymore. */
       float centerX1, 
@@ -88,6 +90,7 @@ public:
             centerZ1,
             centerZ2;
       GLMmodel* grassModel; /**< Grass to Load */
+      string grassFileName;
       GLuint grassTexture;
 };
 

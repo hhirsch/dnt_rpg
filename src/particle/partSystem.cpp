@@ -710,8 +710,9 @@ void partSystem::saveToFile(string fileName)
       {
          GLfloat x1,x2,z1,z2;
          grassParticles[i]->getPosition(x1,z1,x2,z2);
-         fprintf(file,"%d %f %f %f %s\n",PART_GRASS, x1, 0, z1,
-                                      grassParticles[i]->getFileName().c_str());
+         string name = grassParticles[i]->getGrassFileName();
+         fprintf(file,"%d %f %f %f %s\n",PART_GRASS, x1, 0.0, z1,
+                                  name.c_str());
          fprintf(file,"%f %f %d\n", x2, z2, 
                                     grassParticles[i]->getMaxParticles());
       }

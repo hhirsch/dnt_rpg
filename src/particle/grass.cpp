@@ -10,7 +10,7 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
    centerZ1 = cZ1;
    centerZ2 = cZ2;
    //grassModel = glmReadOBJ(fileName.c_str(),"",1);
-   strFileName = fileName;
+   grassFileName = fileName;
    img = IMG_Load(fileName.c_str());
    if(!img)
    {
@@ -165,5 +165,10 @@ void grass::getPosition(GLfloat& cX1, GLfloat& cZ1, GLfloat& cX2, GLfloat& cZ2 )
    cX2 = centerX2;
    cZ1 = centerZ1;
    cZ2 = centerZ2;
+}
+
+string grass::getGrassFileName()
+{
+   return(grassFileName);
 }
 
