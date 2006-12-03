@@ -25,7 +25,7 @@ hardware. São eles:
    OpenGL
    SDL       - Versão 1.2.11, www.libsdl.org
    SDLImage  - Versão 1.2.5, www.libsdl.org/projects/SDL_image/
-   SDLMixer  - Versão 1.2.7, http://www.libsdl.org/projects/SDL_mixer/
+   OpenAL    - Version 1.1, www.openal.org
 
    Hardware:
    Placa de Vídeo com aceleração 3D compatível  com  OpenGl no

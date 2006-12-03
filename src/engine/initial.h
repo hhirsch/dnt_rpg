@@ -7,6 +7,7 @@
 
 #include "../gui/farso.h"
 #include "../lang/lang.h"
+#include "../sound/sound.h"
 
 /* initialScreen Returns Values */
 #define EXIT_GAME     0   /**< Exit Game Return Value */
@@ -39,7 +40,7 @@ class initialScreen
       * \return initialScreen Return values correspondent to action made */
      int Execute(int Status, GLdouble proj[16],
                            GLdouble modl[16], GLint viewPort[4],
-                           GLuint* idTextura);
+                           GLuint* idTextura, sound* snd);
    private:
       interface* gui;  /**< GUI for Windows */
       lang language;   /**< language internationalization */

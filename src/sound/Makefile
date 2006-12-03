@@ -1,11 +1,21 @@
 CC = g++
 CFLAGS = -g -c -Wall -O2
 
-all: sound.o
+all: ogg_stream.o sound.o sndfx.o
+
+ogg_stream.o: ogg_stream.cpp ogg_stream.h
+	@printf "Making ogg_stream.o... "
+	@$(CC) $(CFLAGS) ogg_stream.cpp -o ogg_stream.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 sound.o: sound.cpp sound.h
 	@printf "Making sound.o... "
 	@$(CC) $(CFLAGS) sound.cpp -o sound.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+sndfx.o: sndfx.cpp sndfx.h
+	@printf "Making sndfx.o... "
+	@$(CC) $(CFLAGS) sndfx.cpp -o sndfx.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean: 

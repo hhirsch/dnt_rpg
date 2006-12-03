@@ -185,11 +185,9 @@ class engine
 
       /*!
        ************************************************************** 
-       * Calls the game over screen
+       * Show an Image to Screen and wait mouse Button.
        ***************************************************************/
-      void gameOver();
-
-      void presentation(string fileName);
+      void showImage(string fileName);
 
 
       /*!
@@ -237,7 +235,7 @@ class engine
       double actualFPS;            /**< Actual FPS */
 
       sound* snd;                  /**< Actual Sounds thing */
-      Mix_Music* music;            /**< Actual playing music */
+      sndfx* walkSound;            /**< Actual walking sound */
       options* option;             /**< Current Options */
 
       featsList* features;         /**< Feats descriptions */

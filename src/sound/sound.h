@@ -2,19 +2,15 @@
 #define _sound_h
 
 #include <SDL/SDL.h>
-#include <SDL/SDL_thread.h>
-#include <SDL/SDL_mixer.h>
-
+#include <AL/al.h>
+#include <AL/alc.h>
 #include <string>
 using namespace std;
 
-#define SOUND_NONE    0  /**< No sound */
-#define SOUND_WALK    1  /**< Walk Sound */
-#define SOUND_ACTION1 2  /**< Action 1 sound */
-#define SOUND_ACTION2 3  /**< Action 2 sound */
-#define SOUND_ACTION3 4  /**< Action 3 sound */
+#include "ogg_stream.h"
+#include "sndfx.h"
 
-/*! The sound definitions */
+/*! The sound Class definitions */
 class sound
 {
    public:
@@ -22,42 +18,50 @@ class sound
       sound();
       /*! Destructor */
       ~sound();
- 
-      /*! Load the music from file and start playing
-       * \param file -> file name of the music to load
-       * \return Mix_Music pointer to the music loaded. */
-      Mix_Music* LoadMusic(string file);
-      /*! Stop the music
-       * \param music -> Mix_Music pointer of the music to stop. */
-      void StopMusic(Mix_Music* music);
 
-      /*! Load Sample File to memory. 
-       * \param smp ->  sample reference ID. 
-       * \param file -> filename of sample to load */
-      void LoadSample(int smp, string file);
-      /*! Play Sample
-       * \param smp ->  sample reference ID.
-       */
-      void PlaySample(int smp, int cnt=0);
-      /*! Stop playing Sample
-       * \param smp ->  sample reference ID.
-       * */
-      void StopSample(int smp);
-     
-      /*!
-       * Change volume of the music and of the samples 
-       * \param music -> music volume
-       * \param sndfx -> samples volume */
-      void ChangeVolume(int music, int sndfx);
+      /*! Define the Listener 3D Position (usually the Camera Position)
+       *  \param centerX -> X position of the listener
+       *  \param centerY -> Y position of the listener 
+       *  \param centerZ -> Z position of the listener
+       *  \param angle -> Orientation Angle of the listener */
+      void setListenerPosition(ALfloat centerX, ALfloat centerY, 
+                               ALfloat centerZ, ALfloat angle);
+
+
+      /*! Flush All Buffers to the Sound Device, actualizing the played sounds
+       *  and music (usually called every frame, near GLflush() )*/
+      void flush();
+
+      /*! Load and Start to Play OGG music file.
+       * \param fileName -> name of the ogg file with the desired music. */
+      bool loadMusic(string fileName);
+   
+      /*! Add sound effect to the list
+       *  \param x -> X position
+       *  \param y -> Y position
+       *  \param z -> Z position
+       *  \param loop -> if sound will loop at end or not
+       *  \return pointer to the added sound */
+      sndfx* addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
+                            string fileName);
+
+      /*! Remove sound effect from list
+       *  \param snd -> pointer to sound effect to remove */
+      void removeSoundEffect(sndfx* snd);
+      
+
+      /*! \TODO Change Overall Volume.
+       *  \param musicVolume -> volume of the music
+       *  \param sndfxVolume -> sound effects volume */
+      void changeVolume(int musicVolume, int sndfxVolume); 
 
    private:
-     int         musicVolume; /**< Music Volume */
-     int         sndfxVolume; /**< Samples Volume */
-     Mix_Chunk*  walk;        /**< Walk Effect */
-     Mix_Chunk*  action1;     /**< Action 1 effect */
-     Mix_Chunk*  action2;     /**< Action 2 effect */
-     Mix_Chunk*  action3;     /**< Action 3 effect */
-     int channel[4];          /**< Channel Used By th Sound */
+      ALCdevice* device;            /**< Active AL device */
+      ALCcontext* context;          /**< Active AL context */
+      ogg_stream* backMusic;        /**< Active BackGround Music */
+
+      sndfx sndfxList;              /**< Head Node of sndFx List */
+      int totalSndfx;               /**< Total Sound Effects on List */
 };
 
 #endif

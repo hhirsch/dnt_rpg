@@ -26,7 +26,7 @@ initialScreen::~initialScreen()
 
 int initialScreen::Execute(int Status,GLdouble proj[16],
                            GLdouble modl[16], GLint viewPort[4],
-                           GLuint* tituloID)
+                           GLuint* tituloID, sound* snd)
 {
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
@@ -136,6 +136,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
+         snd->flush();
       }
       else if((19 - (int)(tempo - tempoAnterior)) > 0 ) 
       {

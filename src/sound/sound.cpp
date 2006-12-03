@@ -1,213 +1,184 @@
 #include "sound.h"
+#include <math.h>
 
-#define CHANNELS         2    /* Stereo Mode */
-#define SAMPLE_CHANNELS  4    /* Number of channels to mix */
-#define BUFFER           1024 /* Buffer size for sounds */
-
+/*************************************************************************
+ *                             Constructor                               *
+ *************************************************************************/
 sound::sound()
 {
-   if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,CHANNELS,BUFFER)<0)
+   // Initialize Open AL
+   device = alcOpenDevice(NULL); 
+   
+   if (device != NULL) 
    {
-      printf("Error while opening SDL_MIX\n");
-      return;
-   }
-   Mix_AllocateChannels(SAMPLE_CHANNELS);
-   walk = NULL;
-   action1 = NULL;
-   action2 = NULL;
-   action3 = NULL;
-   musicVolume = SDL_MIX_MAXVOLUME - 20;
-   sndfxVolume = SDL_MIX_MAXVOLUME;
+      context=alcCreateContext(device,NULL); 
+      if (context != NULL) 
+      {
+         alcMakeContextCurrent(context);
+      }
+      else
+      {
+         printf("Can't Create OpenAL Context\n");
+      }
 
-   int i;
-   for(i = 0; i<SAMPLE_CHANNELS;i++)
+   }
+   else
    {
-      channel[i] = -1;
+      printf("No OpenAL Device Avaible!\n");
    }
    
+   /* None current Opened Music */
+   backMusic = NULL;
+
+   /* Initialize the Sound Effects Double Linked List with head Node */
+   sndfxList.next = &sndfxList;
+   sndfxList.previous = &sndfxList;
+   totalSndfx = 0;
 }
 
+/*************************************************************************
+ *                              Destructor                               *
+ *************************************************************************/
 sound::~sound()
 {
-   Mix_CloseAudio();
-   if(walk)
+   sndfx* snd, *tmp;
+   /* Clear the Opened Music */
+   if(backMusic)
    {
-      Mix_FreeChunk(walk);
-      walk = NULL;
+      backMusic->release();
+      delete(backMusic);
+      backMusic = NULL;
    }
-   if(action1)
+
+   snd = sndfxList.next;
+   while(totalSndfx > 0)
    {
-      Mix_FreeChunk(action1);
-      action1 = NULL;
+      tmp = snd;
+      snd = snd->previous;
+      delete(snd);
+      snd= snd->next;
    }
-   if(action2)
-   {
-      Mix_FreeChunk(action2);
-      action2 = NULL;
-   }
-   if(action3)
-   {
-      Mix_FreeChunk(action3);
-      action1 = NULL;
-   }
+   
+   alcDestroyContext(context);
+   alcCloseDevice(device);
 }
 
-Mix_Music* sound::LoadMusic(string file)
+/*************************************************************************
+ *                          setListenerPosition                          *
+ *************************************************************************/
+void sound::setListenerPosition(ALfloat centerX, ALfloat centerY, 
+                                ALfloat centerZ, ALfloat angle)
 {
-   Mix_Music* music;
-   music = Mix_LoadMUS( file.c_str() );
-   if(!music)
-   {
-      printf("Error while opening music file: %s\n",file.c_str());
-   }
-   Mix_PlayMusic(music, -1);
-   Mix_VolumeMusic(musicVolume);
-   return(music);
+   ALfloat directionvect[6]; /* Direction Vector of Listener */
+   alListener3f(AL_POSITION, centerX, centerY, centerZ);
+
+   directionvect[0] = (float) sin(angle);
+   directionvect[1] = 0;
+   directionvect[2] = (float) cos(angle);
+   directionvect[3] = 0;
+   directionvect[4] = 1;
+   directionvect[5] = 0;
+   alListenerfv(AL_ORIENTATION, directionvect);
 }
 
-void sound::StopMusic(Mix_Music* music)
+/*************************************************************************
+ *                              loadMusic                                *
+ *************************************************************************/
+bool sound::loadMusic(string fileName)
 {
-   if(music) 
+   if(backMusic)
    {
-      Mix_HaltMusic();
-      Mix_FreeMusic(music);
+      /* Delete Active Music, if one is */
+      backMusic->release();
+      delete(backMusic);
+      backMusic = NULL;
    }
-   return;
+
+   /* Load The File and Set The active Music */
+   backMusic = new(ogg_stream);
+
+   backMusic->open(fileName);
+
+   if(!backMusic->playback())
+   {
+      printf("Can't Play Ogg File: %s\n", fileName.c_str());
+      delete(backMusic);
+      backMusic = NULL;
+      return(false);
+   }
+
+   backMusic->defineAsMusic();
+
+   return(true);
 }
 
-void sound::LoadSample(int smp, string file)
+/*************************************************************************
+ *                                flush                                  *
+ *************************************************************************/
+void sound::flush()
 {
-   switch(smp)
+   sndfx* snd;
+   
+   /* Music Update */
+   if(backMusic)
    {
-      case SOUND_WALK:
+      if(!backMusic->update()) 
       {
-         if(walk)
-         {
-             Mix_FreeChunk(walk);
-         }
-         walk = Mix_LoadWAV_RW(SDL_RWFromFile(file.c_str(),"rb"), 0);
-         break;
-      }
-      case SOUND_ACTION1:
-      {
-         if(action1)
-         {
-             Mix_FreeChunk(action1);
-         }
-         action1 = Mix_LoadWAV_RW(SDL_RWFromFile(file.c_str(),"rb"), 0);
-         break;
-      }
-      case SOUND_ACTION2:
-      {
-         if(action2)
-         {
-             Mix_FreeChunk(action2);
-         }
-         action2 = Mix_LoadWAV_RW(SDL_RWFromFile(file.c_str(),"rb"), 0);
-         break;
-      }
-      case SOUND_ACTION3:
-      {
-         if(action3)
-         {
-             Mix_FreeChunk(action3);
-         }
-         action3 = Mix_LoadWAV_RW(SDL_RWFromFile(file.c_str(),"rb"), 0);
-         break;
+         backMusic->rewind();
       }
    }
-}
 
-void sound::PlaySample(int smp, int cnt)
-{
-   switch(smp)
+   /* Sound Effects Update */
+   snd = sndfxList.next;
+   while(snd != &sndfxList)
    {
-      case SOUND_WALK:
+      if(!snd->update())
       {
-         if(walk)
-         {
-            if((channel[0] == -1) || (!Mix_Playing(channel[0])))
-            {
-               channel[0] = Mix_PlayChannel(-1, walk, cnt);
-            }
-         }
-         break;
+         sndfx* tmp = snd;
+         snd = snd->previous;
+         removeSoundEffect(tmp);
       }
-      case SOUND_ACTION1:
-      {
-         if(action1)
-         { 
-            if( (channel[1] == -1) || (!Mix_Playing(channel[1])))
-            {
-               channel[1] = Mix_PlayChannel(-1, action1, cnt);
-            }
-         }
-         break;
-      }
-      case SOUND_ACTION2:
-      {
-         if(action2)
-         {
-            if((channel[2] == -1) || (!Mix_Playing(channel[2])))
-            {
-               channel[2] = Mix_PlayChannel(-1, action2, cnt);
-            }
-         }
-         break;
-      }
-      case SOUND_ACTION3:
-      {
-         if(action3)
-         {
-            if((channel[3] ==-1) || (!Mix_Playing(channel[3])))
-            {
-               channel[3] = Mix_PlayChannel(-1, action3, cnt);
-            }
-         }
-         break;
-      }
+      snd = snd->next;
    }
 }
 
-void sound::StopSample(int smp)
+/*************************************************************************
+ *                            addSoundEffect                             *
+ *************************************************************************/
+sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
+                             string fileName)
 {
-   if(channel[smp-1] != -1)
+   sndfx* snd = new sndfx(x,y,z,loop, fileName);
+   snd->next = sndfxList.next;
+   snd->next->previous = snd;
+   snd->previous = &sndfxList;
+   sndfxList.next = snd;
+   totalSndfx++;
+   return(snd);
+}
+
+/*************************************************************************
+ *                          removeSoundEffect                            *
+ *************************************************************************/
+void sound::removeSoundEffect(sndfx* snd)
+{
+   if(snd)
    {
-      Mix_HaltChannel(channel[smp-1]);
-      channel[smp-1] = -1;
+      snd->previous->next = snd->next;
+      snd->next->previous = snd->previous;
+      delete(snd);
+      totalSndfx--;
    }
-  /* switch(smp)
-   {
-      case SOUND_WALK:
-      {
-         Mix_HaltChannel(channel[0]);
-         break;
-      }
-      case SOUND_ACTION1:
-      {
-         Mix_HaltChannel(2);
-         break;
-      }
-      case SOUND_ACTION2:
-      {
-         Mix_HaltChannel(3);
-         break;
-      }
-      case SOUND_ACTION3:
-      {
-         Mix_HaltChannel(4);
-         break;
-      }
-   }*/
 }
 
 
-void sound::ChangeVolume(int music, int sndfx)
+
+/*************************************************************************
+ *                              changeVolume                             *
+ *************************************************************************/
+void sound::changeVolume(int musicVolume, int sndfxVolume)
 {
-   musicVolume = music;
-   sndfxVolume = sndfx;
-
-   Mix_Volume(-1, sndfxVolume);
-   Mix_VolumeMusic(musicVolume);
+   //TODO
 }
+
 

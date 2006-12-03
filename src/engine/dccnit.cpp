@@ -50,7 +50,7 @@ engine::engine()
 
    /* Initialize sounds and musics */
    snd = new(sound);
-   music = NULL;
+   walkSound = NULL;
 
    /* Load Options */
    option = new options("dcc.opc");
@@ -59,7 +59,7 @@ engine::engine()
    language.ReloadFile(option->langNumber);
 
    /* Set sound and music volume, based on options */
-   snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
+   snd->changeVolume(option->musicVolume, option->sndfxVolume);
   
    /* Load Features List */
    features = new featsList(language.FEATS_DIR,"../data/feats/feats.ftl");
@@ -100,10 +100,6 @@ engine::engine()
 engine::~engine()
 {
    /* Stops and free music & sounds */
-   if(music)
-   {
-      snd->StopMusic(music);
-   }
    delete(snd);
 
    if(waveTest)
@@ -174,6 +170,7 @@ void engine::InformationScreen()
    glEnable(GL_LIGHTING);
    glFlush();
    SDL_GL_SwapBuffers();
+   snd->flush();
 
    SDL_Delay(100);
    SDL_PumpEvents();
@@ -185,6 +182,7 @@ void engine::InformationScreen()
        SDL_Delay(40);
        SDL_PumpEvents();
        keys = SDL_GetKeyState(NULL);
+       snd->flush();
    }
 
    glDeleteTextures(1,&texturaInfo);
@@ -231,6 +229,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    AtualizaTela2D(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
    glFlush();
    SDL_GL_SwapBuffers();
+   snd->flush();
 
    /* Loading Map */
    if(actualMap) 
@@ -390,8 +389,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    /* Change Music, if needed */
    if(!actualMap->music.empty())
    {
-      snd->StopMusic(music);
-      music = snd->LoadMusic(actualMap->music);
+      snd->loadMusic(actualMap->music);
    }
 
    return(1);
@@ -403,17 +401,16 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 int engine::InitialScreen(int Status, GLuint* idTextura, bool reloadMusic)
 {
    /* Reload Music, if needed */
-   if( (music) && (reloadMusic) )
-   {
-     snd->StopMusic(music);
-   }
    if(reloadMusic)
-      music = snd->LoadMusic("../data/music/musica1.ogg");
+   {
+      /*music =*/
+      snd->loadMusic("../data/music/musica1.ogg");
+   }
 
    /* Executes Initial Screen */
    AtualizaFrustum(visibleMatrix,proj,modl);
    initialScreen* inic = new(initialScreen);
-   int result = inic->Execute(Status, proj, modl, viewPort, idTextura);
+   int result = inic->Execute(Status, proj, modl, viewPort, idTextura, snd);
    delete(inic);
    return(result);
 }
@@ -455,6 +452,7 @@ int engine::OptionsScreen(GLuint* idTextura)
          interf->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
+         snd->flush();
          optionW = option->Treat(object, eventInfo, interf);
       }
       else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
@@ -463,7 +461,7 @@ int engine::OptionsScreen(GLuint* idTextura)
       }
    }
 
-   snd->ChangeVolume(option->musicVolume, option->sndfxVolume);
+   snd->changeVolume(option->musicVolume, option->sndfxVolume);
 
    delete(alignList);
    alignList = new aligns(language.ALIGN_DIR.c_str(),
@@ -532,6 +530,7 @@ int engine::CharacterScreen(GLuint* idTextura)
          gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
+         snd->flush();
 
          if(status == 0)
          {
@@ -833,8 +832,8 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                  
                  if(numEnemies > 0)
                  {
-                    snd->LoadSample(SOUND_ACTION3,"../data/sndfx/battleMode.ogg");
-                    snd->PlaySample(SOUND_ACTION3);
+                    /*snd->LoadSample(SOUND_ACTION3,"../data/sndfx/battleMode.ogg");
+                    snd->PlaySample(SOUND_ACTION3);*/
                     engineMode = ENGINE_MODE_TURN_BATTLE;
                     moveCircleX = PCs->personagemAtivo->posicaoLadoX;
                     moveCircleY = PCs->personagemAtivo->posicaoLadoY;
@@ -1358,29 +1357,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         "../data/particles/lightning1.par");
          }
 
-         /* FIXME Presentation temporary slides */
-
-         if(keys[SDLK_1])
-         {
-            presentation("../data/presPoc2/titulo.png");
-         }
-         if(keys[SDLK_2])
-         {
-            presentation("../data/presPoc2/1.png");
-         }
-         if(keys[SDLK_3])
-         {
-            presentation("../data/presPoc2/3.png");
-         }
-         if(keys[SDLK_4])
-         {
-            presentation("../data/presPoc2/4.png");
-         }
-         if(keys[SDLK_5])
-         {
-            presentation("../data/presPoc2/2.png");
-         }
-
          if(keys[SDLK_0])
          {
             hour += 1;
@@ -1683,7 +1659,16 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
  
    if(andou)
    {
-      snd->PlaySample(SOUND_WALK);
+      if(!walkSound)
+      {
+         printf("adding sndfx\n");
+         walkSound = snd->addSoundEffect(PCs->personagemAtivo->posicaoLadoX,0.0,
+                                         PCs->personagemAtivo->posicaoLadoZ,true,
+                                         "../data/sndfx/passos.ogg" );
+      }
+      walkSound->redefinePosition(PCs->personagemAtivo->posicaoLadoX, 0.0,
+                                  PCs->personagemAtivo->posicaoLadoZ);
+      //snd->PlaySample(SOUND_WALK);
       PCs->personagemAtivo->SetState(STATE_WALK);
       #ifdef REDE
         movchar(&clientData, PCs->personagemAtivo->ID, 
@@ -1700,7 +1685,13 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          canMove = false;
       }
       PCs->personagemAtivo->SetState(STATE_IDLE);
-      snd->StopSample(SOUND_WALK);
+      if(walkSound)
+      {
+         printf("removing sndfx\n");
+         snd->removeSoundEffect(walkSound);
+         walkSound = NULL;
+      }
+      //snd->StopSample(SOUND_WALK);
    }
  
    return(!exitEngine);
@@ -1721,6 +1712,9 @@ void engine::Draw()
 
    /* Redefine camera position */
    gameCamera.lookAt();
+
+   snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
+                            gameCamera.getCameraZ(), gameCamera.getPhi());
 
    /* Sun Definition */
    gameSun->actualizeHourOfDay(hour);
@@ -2003,6 +1997,7 @@ void engine::Draw()
    glEnable(GL_DEPTH_TEST);
  
    glFlush();
+   snd->flush();
 }
 
 /*********************************************************************
@@ -2240,36 +2235,20 @@ void engine::actualizeAllHealthBars()
    }
 }
 
-
-void engine::gameOver()
-{
-   GLuint id;
-   SDL_Surface* img = IMG_Load("../data/texturas/fightMode/death.png"); 
-   /*cor_Definir(245,25,25);
-   selFonte(FPLATINA, CENTRALIZADO, 3);
-   escxy(img,256,426,"All Playable Characters Died.");*/
-   carregaTextura(img,&id);
-   SDL_FreeSurface(img);
-   AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
-   glFlush();
-   SDL_GL_SwapBuffers();
-   SDL_Delay(4000);
-   glDeleteTextures(1,&id);
-}
-
-void engine::presentation(string fileName)
+/*********************************************************************
+ *                             showImage                             *
+ *********************************************************************/
+void engine::showImage(string fileName)
 {
    GLuint id;
    Uint8 mButton = 0;
    SDL_Surface* img = IMG_Load(fileName.c_str()); 
-   /*cor_Definir(245,25,25);
-   selFonte(FPLATINA, CENTRALIZADO, 3);
-   escxy(img,256,426,"All Playable Characters Died.");*/
    glDisable(GL_LIGHTING);
    carregaTextura(img,&id);
    SDL_FreeSurface(img);
    AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
    glFlush();
+   snd->flush();
    SDL_GL_SwapBuffers();
 
    /* Wait until Mouse Button pressed */
@@ -2279,6 +2258,7 @@ void engine::presentation(string fileName)
       SDL_PumpEvents();
       int x,y;
       mButton = SDL_GetMouseState(&x,&y);
+      snd->flush();
    }
    
    glEnable(GL_LIGHTING);
@@ -2294,11 +2274,10 @@ int engine::Run(SDL_Surface *surface)
    
    if(!actualMap->music.empty())
    {
-      snd->StopMusic(music);
-      music = snd->LoadMusic(actualMap->music);
+      snd->loadMusic(actualMap->music);
    }
 
-   snd->LoadSample(SOUND_WALK,"../data/sndfx/passos.ogg");
+   //snd->LoadSample(SOUND_WALK,"../data/sndfx/passos.ogg");
 
    int forcaAtualizacao = 0; //force screen atualization FIXME, no more used
    int time;
@@ -2348,7 +2327,7 @@ int engine::Run(SDL_Surface *surface)
            if(!alive)
            {
               //TODO call the game over screen
-              gameOver();
+              showImage("../data/texturas/fightMode/death.png");
               return(0);
            }
         }

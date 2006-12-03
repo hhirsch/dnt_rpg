@@ -2,7 +2,7 @@
 
 CC = g++
 CFLAGS = -g -c -Wall -O2
-EFLAGS = -g -Wall -O2 -lm -lGLU -lGL -lSDL -lSDL_image -lSDL_mixer -lcal3d
+EFLAGS = -g -Wall -O2 -lm -lGLU -lGL -lSDL -lSDL_image -lcal3d -logg -lvorbis -lvorbisfile -lopenal
 PROGFLAGS = 
 ENDGUI = ../gui/
 ENDENGINE = ../engine/
@@ -19,7 +19,7 @@ OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o $(ENDIA)astar.o
 OBJSCLASSES = $(ENDCLASSES)race.o $(ENDCLASSES)skills.o $(ENDCLASSES)align.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o
-OBJSSOUND = $(ENDSOUND)sound.o
+OBJSSOUND = $(ENDSOUND)ogg_stream.o  $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
 OBJSLANG = $(ENDLANG)lang.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o $(ENDPART)grass.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
