@@ -24,6 +24,11 @@ figura::figura(int x,int y,int w,int h,const char* arquivo)
    if(arquivo!=NULL)
    {
       SDL_Surface* img = IMG_Load(arquivo);
+      if(!img)
+      {
+         printf("Can't Open Image file: %s\n DNT should crash soon.\n",arquivo);
+         return;
+      }
       //fig = img;
       fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
