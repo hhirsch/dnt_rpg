@@ -1,5 +1,45 @@
 #include "sound.h"
 #include <math.h>
+#include <SDL/SDL.h>
+
+sound* actualSound;
+
+/*************************************************************************
+ *                          runParalelSound                              *
+ *************************************************************************/
+int runParalelSound(void* param)
+{
+   while(true)
+   {
+      actualSound->lock();
+      actualSound->flush();
+      actualSound->unLock();
+      SDL_Delay(100);
+   }
+   return(1);
+}
+
+/*************************************************************************
+ *                                 lock                                  *
+ *************************************************************************/
+void sound::lock()
+{
+   if(SDL_mutexP(soundMutex) != 0)
+   {
+      printf("Error while Sound Mutex Lock\n");
+   }
+}
+
+/*************************************************************************
+ *                                unLock                                 *
+ *************************************************************************/
+void sound::unLock()
+{
+   if(SDL_mutexV(soundMutex) != 0)
+   {
+      printf("Error while Sound Mutex UnLock\n");
+   }
+}
 
 /*************************************************************************
  *                             Constructor                               *
@@ -34,6 +74,10 @@ sound::sound()
    sndfxList.next = &sndfxList;
    sndfxList.previous = &sndfxList;
    totalSndfx = 0;
+
+   actualSound = this;
+   soundMutex = SDL_CreateMutex();
+   soundThread  = SDL_CreateThread((&runParalelSound), NULL);   
 }
 
 /*************************************************************************
@@ -59,6 +103,9 @@ sound::~sound()
       snd= snd->next;
    }
    
+   SDL_KillThread(soundThread);
+   SDL_DestroyMutex(soundMutex);
+   
    alcDestroyContext(context);
    alcCloseDevice(device);
 }
@@ -69,16 +116,18 @@ sound::~sound()
 void sound::setListenerPosition(ALfloat centerX, ALfloat centerY, 
                                 ALfloat centerZ, ALfloat angle)
 {
-   ALfloat directionvect[6]; /* Direction Vector of Listener */
-   alListener3f(AL_POSITION, centerX, centerY, centerZ);
+   lock();
+      ALfloat directionvect[6]; /* Direction Vector of Listener */
+      alListener3f(AL_POSITION, centerX, centerY, centerZ);
 
-   directionvect[0] = (float) sin(angle);
-   directionvect[1] = 0;
-   directionvect[2] = (float) cos(angle);
-   directionvect[3] = 0;
-   directionvect[4] = 1;
-   directionvect[5] = 0;
-   alListenerfv(AL_ORIENTATION, directionvect);
+      directionvect[0] = (float) sin(angle);
+      directionvect[1] = 0;
+      directionvect[2] = (float) cos(angle);
+      directionvect[3] = 0;
+      directionvect[4] = 1;
+      directionvect[5] = 0;
+      alListenerfv(AL_ORIENTATION, directionvect);
+   unLock();
 }
 
 /*************************************************************************
@@ -86,6 +135,7 @@ void sound::setListenerPosition(ALfloat centerX, ALfloat centerY,
  *************************************************************************/
 bool sound::loadMusic(string fileName)
 {
+   lock();
    if(backMusic)
    {
       /* Delete Active Music, if one is */
@@ -109,6 +159,7 @@ bool sound::loadMusic(string fileName)
 
    backMusic->defineAsMusic();
 
+   unLock();
    return(true);
 }
 
@@ -148,12 +199,14 @@ void sound::flush()
 sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
                              string fileName)
 {
-   sndfx* snd = new sndfx(x,y,z,loop, fileName);
-   snd->next = sndfxList.next;
-   snd->next->previous = snd;
-   snd->previous = &sndfxList;
-   sndfxList.next = snd;
-   totalSndfx++;
+   lock();
+      sndfx* snd = new sndfx(x,y,z,loop, fileName);
+      /*snd->next = sndfxList.next;
+      snd->next->previous = snd;
+      snd->previous = &sndfxList;
+      sndfxList.next = snd;
+      totalSndfx++;*/
+   unLock();
    return(snd);
 }
 
@@ -162,13 +215,15 @@ sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
  *************************************************************************/
 void sound::removeSoundEffect(sndfx* snd)
 {
-   if(snd)
-   {
-      snd->previous->next = snd->next;
-      snd->next->previous = snd->previous;
-      delete(snd);
-      totalSndfx--;
-   }
+   lock();
+      if(snd)
+      {
+         /*snd->previous->next = snd->next;
+         snd->next->previous = snd->previous;*/
+         delete(snd);
+         //totalSndfx--;
+      }
+   unLock();
 }
 
 

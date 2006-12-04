@@ -136,7 +136,6 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
-         snd->flush();
       }
       else if((19 - (int)(tempo - tempoAnterior)) > 0 ) 
       {

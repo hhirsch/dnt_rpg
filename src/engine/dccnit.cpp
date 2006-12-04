@@ -170,7 +170,6 @@ void engine::InformationScreen()
    glEnable(GL_LIGHTING);
    glFlush();
    SDL_GL_SwapBuffers();
-   snd->flush();
 
    SDL_Delay(100);
    SDL_PumpEvents();
@@ -182,7 +181,6 @@ void engine::InformationScreen()
        SDL_Delay(40);
        SDL_PumpEvents();
        keys = SDL_GetKeyState(NULL);
-       snd->flush();
    }
 
    glDeleteTextures(1,&texturaInfo);
@@ -229,7 +227,6 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    AtualizaTela2D(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
    glFlush();
    SDL_GL_SwapBuffers();
-   snd->flush();
 
    /* Loading Map */
    if(actualMap) 
@@ -452,7 +449,6 @@ int engine::OptionsScreen(GLuint* idTextura)
          interf->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
-         snd->flush();
          optionW = option->Treat(object, eventInfo, interf);
       }
       else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
@@ -530,7 +526,6 @@ int engine::CharacterScreen(GLuint* idTextura)
          gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
-         snd->flush();
 
          if(status == 0)
          {
@@ -1666,8 +1661,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                          PCs->personagemAtivo->posicaoLadoZ,true,
                                          "../data/sndfx/passos.ogg" );
       }
-      walkSound->redefinePosition(PCs->personagemAtivo->posicaoLadoX, 0.0,
-                                  PCs->personagemAtivo->posicaoLadoZ);
+      else
+      {
+         walkSound->redefinePosition(PCs->personagemAtivo->posicaoLadoX, 0.0,
+                                     PCs->personagemAtivo->posicaoLadoZ);
+      }
       //snd->PlaySample(SOUND_WALK);
       PCs->personagemAtivo->SetState(STATE_WALK);
       #ifdef REDE
@@ -1997,7 +1995,6 @@ void engine::Draw()
    glEnable(GL_DEPTH_TEST);
  
    glFlush();
-   snd->flush();
 }
 
 /*********************************************************************
@@ -2248,7 +2245,6 @@ void engine::showImage(string fileName)
    SDL_FreeSurface(img);
    AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
    glFlush();
-   snd->flush();
    SDL_GL_SwapBuffers();
 
    /* Wait until Mouse Button pressed */
@@ -2258,7 +2254,6 @@ void engine::showImage(string fileName)
       SDL_PumpEvents();
       int x,y;
       mButton = SDL_GetMouseState(&x,&y);
-      snd->flush();
    }
    
    glEnable(GL_LIGHTING);

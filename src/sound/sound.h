@@ -49,6 +49,9 @@ class sound
        *  \param snd -> pointer to sound effect to remove */
       void removeSoundEffect(sndfx* snd);
       
+      void lock();
+
+      void unLock();
 
       /*! \TODO Change Overall Volume.
        *  \param musicVolume -> volume of the music
@@ -59,6 +62,9 @@ class sound
       ALCdevice* device;            /**< Active AL device */
       ALCcontext* context;          /**< Active AL context */
       ogg_stream* backMusic;        /**< Active BackGround Music */
+
+      SDL_Thread* soundThread;      /**< The Sound Paralel Thread */
+      SDL_mutex* soundMutex;        /**< The Sound Mutex */
 
       sndfx sndfxList;              /**< Head Node of sndFx List */
       int totalSndfx;               /**< Total Sound Effects on List */
