@@ -48,6 +48,10 @@ class ogg_stream
        * \param volume -> volume value [0 - 128]*/
       void changeVolume(int volume);
 
+      /*! Set if will Loop at EOF or not
+       * \param lp -> loop at EOF if true */
+      void setLoop(bool lp);
+
  
    protected:
       /*! Reloads a buffer
@@ -71,6 +75,8 @@ class ogg_stream
         OggVorbis_File oggStream;      /**< stream handle */
         vorbis_info* vorbisInfo;       /**< some formatting data */
         vorbis_comment* vorbisComment; /**< user comments */
+
+        bool loop;                     /**< if loop the source at EOF */ 
 
         ALuint buffers[2]; /**< front and back buffers */
         ALuint source;     /**< audio source */
