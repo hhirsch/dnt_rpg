@@ -7,7 +7,6 @@ sndfx::sndfx()
    oggSndFx = NULL;
    next = NULL;
    previous = NULL;
-   loop = false;
 }
 
 /*************************************************************************
@@ -30,7 +29,7 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
    }
    
    oggName = fileName;
-   loop = lp;
+   setLoop(lp);
    next = NULL;
    previous = NULL;
 }
@@ -53,7 +52,7 @@ sndfx::sndfx(bool lp, string fileName)
    }
    
    oggName = fileName;
-   loop = lp;
+   setLoop(lp);
    next = NULL;
    previous = NULL;
 }
@@ -75,15 +74,10 @@ sndfx::~sndfx()
  *************************************************************************/
 void sndfx::setLoop(bool lp)
 {
-   loop = lp;
-}
-
-/*************************************************************************
- *                                getLoop                                *
- *************************************************************************/
-bool sndfx::getLoop()
-{
-   return(loop);
+   if(oggSndFx)
+   {
+      oggSndFx->setLoop(lp);
+   }
 }
 
 /*************************************************************************
@@ -153,12 +147,12 @@ bool sndfx::update()
       }
       else 
       {
-         
-         if(loop)
+         printf("End Play\n");
+         /*if(loop)
          {
             oggSndFx->rewind();
             return(true);
-         }
+         }*/
          return(false);
       }
    }

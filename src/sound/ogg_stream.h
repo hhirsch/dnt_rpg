@@ -34,9 +34,6 @@ class ogg_stream
        * \return false if stream is over */
       bool update();          
       
-      /*! Rewind the source stream */
-      void rewind();          
-
       /*! Define the stream as Music (No position and no atenuation) */
       void defineAsMusic();
 

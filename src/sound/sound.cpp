@@ -167,6 +167,7 @@ bool sound::loadMusic(string fileName)
       return(false);
    }
 
+   backMusic->setLoop(true);
    backMusic->defineAsMusic();
 
    unLock();
@@ -185,7 +186,8 @@ void sound::flush()
    {
       if(!backMusic->update()) 
       {
-         backMusic->rewind();
+         //backMusic->rewind();
+         printf("error while playing music\n");
       }
    }
 

@@ -44,10 +44,6 @@ class sndfx
        * \param lp -> true if is to looping the source */
       void setLoop(bool lp);
 
-      /*! Gets if the Source will Loop at end or not
-       * \return loop -> true if is to looping the source */
-      bool getLoop();
-
       /*! Set the Velocity of the Source (if have one)
        * \param velX -> X velocity value
        * \param velY -> Y velocity value
@@ -83,7 +79,6 @@ class sndfx
 
    private:
       ogg_stream* oggSndFx;   /**< The Ogg stream of the Sound */
-      bool loop;              /**< Loop at end or not loop */
       string oggName;         /**< File Name of the Ogg Used */
 };
 

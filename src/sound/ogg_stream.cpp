@@ -33,6 +33,8 @@ void ogg_stream::open(string path)
        format = AL_FORMAT_STEREO16;
    }
 
+   loop = false;
+
    alGenBuffers(2, buffers);
    check();
    alGenSources(1, &source);
@@ -138,8 +140,21 @@ bool ogg_stream::update()
  
         active = stream(buffer);
  
-        alSourceQueueBuffers(source, 1, &buffer);
-        check();
+        if(active)
+        {
+           /* Only Queue if stream is active */
+           alSourceQueueBuffers(source, 1, &buffer);
+           check();
+        }
+        else
+        {
+            int queued;
+            alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
+            printf("Inactive. Queue Size: %d\n",queued);
+            alSourceStop(source);
+            empty();
+            printf("After Empty: Queue Size: %d\n",queued);
+        }
     }
  
     return active;
@@ -150,18 +165,15 @@ bool ogg_stream::update()
  *************************************************************************/
 void ogg_stream::rewind()
 {
-    if(playing())
-    {
-       //If playing, stop!
-       alSourceStop(source);
-    }
+//   alSourceStop(source);
 
-   int result = ov_raw_seek(&oggStream,0);
+   /*int result = ov_raw_seek(&oggStream,0);
    if( result != 0)
    {
       printf("Ogg Rewind Error: %d\n",result);
-   }
-   playback();
+   }*/
+
+   //playback();
 }
 
 /*************************************************************************
@@ -187,10 +199,23 @@ bool ogg_stream::stream(ALuint buffer)
            printf("Ogg Buffer Error: %s\n", errorString(result).c_str());
            return(false);
         }
+        else
+        {
+           if(loop)
+           {
+              /* rewind file */
+              result = 1;
+              if(ov_raw_seek(&oggStream,0) != 0)
+              {
+                 printf("Ogg Rewind Error\n");
+              }
+           }
+        }
     }
     
     if(size == 0)
     {
+       /*empty();*/
        alSourceStop(source);
        return(false);
     }
@@ -278,5 +303,13 @@ string ogg_stream::errorString(int code)
 void ogg_stream::changeVolume(int volume)
 {
    alSourcef(source, AL_GAIN, (float)(volume / 128.0));
+}
+
+/*************************************************************************
+ *                               setLoop                                 *
+ *************************************************************************/
+void ogg_stream::setLoop(bool lp)
+{
+   loop = lp;
 }
 
