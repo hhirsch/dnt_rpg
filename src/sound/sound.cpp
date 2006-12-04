@@ -105,7 +105,7 @@ sound::~sound()
    {
       tmp = snd;
       snd = snd->previous;
-      delete(snd);
+      removeSoundEffect(tmp);
       snd= snd->next;
    }
    
