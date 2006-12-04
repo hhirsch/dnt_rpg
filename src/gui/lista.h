@@ -42,7 +42,7 @@ class Tlista{
       /*! Insert a new cxSel on the List
        * \param xa -> X coordinate
        * \param ya -> Y coordinate
-       * \param selected -> if selected or not */
+       * \param selecionada -> if selected or not */
       cxSel* insertCxSel(int xa, int ya, bool selecionada);
 
       /* Insere nova figura na lista de figuras

@@ -54,10 +54,16 @@ class thing
       /*!
        **********************************************
        *  Get the attribute bonus: modifier.
-       *  \param curAttibute -> current attribute.
+       *  \param curAttribute -> current attribute pointer.
        *  \return bonus.
        **********************************************/
       int attBonus(skill* curAttribute);
+      /*!
+       **********************************************
+       *  Get the attribute bonus: modifier.
+       *  \param curAttribute -> current attribute ID.
+       *  \return bonus.
+       **********************************************/
       int attBonus(int curAttribute);
 
       /*!

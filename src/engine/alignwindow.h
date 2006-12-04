@@ -17,13 +17,16 @@
 class alignWindow
 {
    public:
-      /*! Constructor */
+      /*! Constructor
+       * \param alg -> alignmnet list
+       * \param inter -> GUI interface to use */
       alignWindow(aligns* alg, interface* inter);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
+       * \param actual -> pointer to the actual alignent
        * \return 0 on close, 1 otherwise */
       int treat(Tobjeto* object, int eventInfo,interface* inter, align** actual);
 
@@ -33,16 +36,16 @@ class alignWindow
       aligns*      externalAligns;   /**< Pointer to the Aligns List */
       align*       actualAlign;      /**< Pointer to actual aligned */
 
-      botao* buttonConfirm;
-      botao* buttonCancel;
+      botao* buttonConfirm;          /**< Confirm Button */
+      botao* buttonCancel;           /**< Cancel Button */
 
-      botao* buttonPrevious;
-      botao* buttonNext;
+      botao* buttonPrevious;         /**< Previous Button */
+      botao* buttonNext;             /**< Next Button */
 
-      quadroTexto* textName;
-      quadroTexto* textDesc;
+      quadroTexto* textName;         /**< Text Name */
+      quadroTexto* textDesc;         /**< Text Description */
 
-      figura* alignImage;
+      figura* alignImage;            /**< Alignment Image */
 
       lang language;                 /**< Language internationalization */
 

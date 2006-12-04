@@ -24,6 +24,7 @@ class raceWindow
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
+       * \param actual -> pointer to current choosed race
        * \return 0 on close, 1 otherwise */
       int treat(Tobjeto* object, int eventInfo,interface* inter, race** actual);
 

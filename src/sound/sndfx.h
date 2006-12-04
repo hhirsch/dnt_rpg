@@ -19,7 +19,7 @@ class sndfx
       sndfx();
 
       /*! Constructor of Non positional Source 
-       * \param loop -> true if is to looping the source
+       * \param lp -> true if is to looping the source
        * \param fileName -> name of the Ogg File to Open */
       sndfx(bool lp, string fileName);
       
@@ -27,7 +27,7 @@ class sndfx
        * \param centerX -> X position of the source
        * \param centerY -> Y position of the source
        * \param centerZ -> Z position of the source
-       * \param loop -> true if is to looping the source
+       * \param lp -> true if is to looping the source
        * \param fileName -> name of the Ogg File to Open */
       sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
             string fileName);
@@ -41,7 +41,7 @@ class sndfx
       void redefinePosition(ALfloat centerX, ALfloat centerY, ALfloat centerZ);
 
       /*! Sets if the Source will Loop at end or not
-       * \param loop -> true if is to looping the source */
+       * \param lp -> true if is to looping the source */
       void setLoop(bool lp);
 
       /*! Gets if the Source will Loop at end or not

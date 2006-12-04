@@ -135,10 +135,9 @@ class Lpersonagem: public Tlista
 
       /*!
        * Insert one character on list
-       * \param retrato -> file name of the portrait
-       * \param nome -> Character's Name
-       * \param arqmodelo -> character's Cal3D file name
-       * \param ft -> featsList of all feats on game */
+       * \param file -> file name of the character to insert
+       * \param ft -> featsList of all feats on game 
+       * \return pointer to opened character*/
       personagem* InserirPersonagem(string file, featsList* ft);
                                     
       /*!

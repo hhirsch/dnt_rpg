@@ -19,6 +19,7 @@ public:
        * \param cZ1 -> center Z1 position
        * \param cX2 -> center X2 position
        * \param cZ2 -> center Z2 position
+       * \param total -> total number of particles
        * \param fileName -> file name of the file to load */
       grass(float cX1,float cZ1, float cX2, float cZ2, int total,
             string fileName);

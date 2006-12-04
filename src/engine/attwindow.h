@@ -17,13 +17,18 @@
 class attWindow
 {
    public:
-      /*! Constructor */
+      /*! Constructor 
+       * \param sk -> skill List
+       * \param inter -> GUI interface to be used */
       attWindow(skills* sk, interface* inter);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
+       * \param proj -> projection matrix
+       * \param modl -> Model Viewn matrix
+       * \param viewPort -> ViewPort Vector
        * \return 0 on close, 1 otherwise */
       int treat(Tobjeto* object, int eventInfo, interface* inter,
                 GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
@@ -38,19 +43,19 @@ class attWindow
       skills*      externalSkill; /**< Pointer to the edited skillList */
       lang language;              /**< Language internationalization */
 
-      quadroTexto* rolledPoints;
-      quadroTexto* attPoints[6];
-      quadroTexto* attTotals[6];
-      quadroTexto* attMods[6];
-      quadroTexto* textDesc;
-      quadroTexto* textDescTitle;
+      quadroTexto* rolledPoints;  /**< Rolled Points Text */
+      quadroTexto* attPoints[6];  /**< Attributes Points Texts */
+      quadroTexto* attTotals[6];  /**< Attributes Totals Texts */
+      quadroTexto* attMods[6];    /**< Attributes Totals Modifiers */
+      quadroTexto* textDesc;      /**< Description Text */
+      quadroTexto* textDescTitle; /**< Description Title Text */
 
-      botao* attButtonNext[6];
-      botao* attButtonPrev[6];
-      botao* rerollButton;
-      botao* clearButton;
-      botao* buttonConfirm;
-      botao* buttonCancel;
+      botao* attButtonNext[6];    /**< Next Buttons */
+      botao* attButtonPrev[6];    /**< Previous Buttons */
+      botao* rerollButton;        /**< ReRoll Button */
+      botao* clearButton;         /**< Clear Button */
+      botao* buttonConfirm;       /**< Confirm Button */
+      botao* buttonCancel;        /**< Cancel Button */
 
       /*! Roll one Att Dices */
       int rollDices();

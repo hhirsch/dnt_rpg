@@ -32,7 +32,9 @@ class listStar
        * \param x -> x map position
        * \param z -> z map position
        * \param gone -> distance travelled
-       * \param heuristic -> heuristic to the goal */
+       * \param heuristic -> heuristic to the goal 
+       * \param parentX -> X position of the parent
+       * \param parentZ -> Z position of the parent */
       pointStar*  insert(GLfloat x, GLfloat z, GLfloat gone, GLfloat heuristic,
                          GLfloat parentX, GLfloat parentZ);
       /*! Remove Node from list 
@@ -75,15 +77,30 @@ class aStar
        * \param actualZ -> current z position 
        * \param x -> destiny x position
        * \param z -> desired z position
+       * \param stepSize -> size of the Step
+       * \param orientation -> character orientation
+       * \param perX1 -> per X initial Bounding position
+       * \param perY1 -> per Y initial Bounding position
+       * \param perZ1 -> per Z initial Bounding position
+       * \param perX2 -> per X final Bounding position
+       * \param perY2 -> per Y final Bounding position
+       * \param perZ2 -> per Z final Bounding position
        * \return true if found path, false otherwise. */
       bool findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
                     GLfloat stepSize, GLfloat orientation,
                     GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
                     GLfloat perX2, GLfloat perY2, GLfloat perZ2);
 
-      /*! Get the New Character Position, based on Path Found previously */
+      /*! Get the New Character Position, based on Path Found previously 
+       * \param posX -> new X position
+       * \param posZ -> new Z position
+       * \param ori -> new orientation
+       * \return true if can actualize, false otherwise */
       bool getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori);
 
+      /*! Gets the Destiny of The Character
+       * \param destX -> X destiny Position
+       * \param destZ -> Z destiny Position */
       void getDestiny(GLfloat& destX, GLfloat& destZ);
 
       /*! Draws the founded path */

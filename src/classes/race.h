@@ -44,7 +44,8 @@ class races
    public:
       /*! Constructor
        * \param fileListName -> name of the file containing the list of all
-       *         aligments (usually ../data/race/race.lst)  */
+       *         aligments (usually ../data/race/race.lst)  
+       * \param directory -> directory of races descriptions */
       races(string directory, string fileListName);
       /*! Destructor */
       ~races();
@@ -63,7 +64,10 @@ class races
       race* first;                 /**< First Race on List */
 
       /*! Insert an race on List
-       * \param -> fileName of the race to insert */
+       * \param fileName -> file name of the race to insert 
+       * \param imgFile -> image file of the race
+       * \param idString -> String Identifier of the race
+       * \param idInt -> Integer Identifier of the race */
       void insertRace(string fileName,string imgFile,string idString,int idInt);
 };
 

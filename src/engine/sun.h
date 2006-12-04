@@ -9,7 +9,9 @@ class sun
 {
    public:
       /*! Constructor 
-       * \param hour -> current hour of day */
+       * \param hour -> current hour of day 
+       * \param farViewX -> far view X position
+       * \param farViewZ -> far view Z position */
       sun(float hour, int farViewX, int farViewZ);
       /*! Destructor*/
       ~sun();

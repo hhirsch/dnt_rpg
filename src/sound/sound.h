@@ -64,7 +64,7 @@ class sound
 
       void unLock();
 
-      /*! \TODO Change Overall Volume.
+      /*! \todo Change Overall Volume.
        *  \param musicVolume -> volume of the music
        *  \param sndfxVolume -> sound effects volume */
       void changeVolume(int musicVolume, int sndfxVolume); 

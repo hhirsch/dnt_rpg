@@ -27,7 +27,8 @@ class aligns
    public:
       /*! Constructor
        * \param fileListName -> name of the file containing the list of all
-       *         aligments (usually ../data/alignment/alignment.lst)  */
+       *         aligments (usually ../data/alignment/alignment.lst)  
+       * \param directory -> directory of the Descriptions to use. */
       aligns(string directory, string fileListName);
       /*! Destructor */
       ~aligns();
@@ -46,7 +47,9 @@ class aligns
       align* first;                 /**< First Alignment on List */
 
       /*! Insert an alignment on List
-       * \param -> fileName of the alignment to insert */
+       * \param fileName -> fileName of the alignment to insert 
+       * \param idString -> String Identificator of the alignment 
+       * \param idInt -> Integer Identificator of the the alignment */
       void insertAlign(string fileName, string idString, int idInt);
 };
 
