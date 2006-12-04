@@ -146,15 +146,6 @@ bool ogg_stream::update()
            alSourceQueueBuffers(source, 1, &buffer);
            check();
         }
-        else
-        {
-            int queued;
-            alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
-            printf("Inactive. Queue Size: %d\n",queued);
-            alSourceStop(source);
-            empty();
-            printf("After Empty: Queue Size: %d\n",queued);
-        }
     }
  
     return active;
@@ -165,7 +156,7 @@ bool ogg_stream::update()
  *************************************************************************/
 bool ogg_stream::stream(ALuint buffer)
 {
-    char data[BUFFER_SIZE];
+    char data[BUFFER_SIZE] = { 0 };
     int  size = 0;
     int  section;
     int  result = -1;
@@ -203,8 +194,7 @@ bool ogg_stream::stream(ALuint buffer)
        alSourceStop(source);
        return(false);
     }
- 
-    if(result != 0)
+    else
     {
        /*printf("bufferdata: Buffer: %d Format: %d size: %d\n", buffer, 
                                                  format, size);*/

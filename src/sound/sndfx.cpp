@@ -147,11 +147,6 @@ bool sndfx::update()
       }
       else 
       {
-         /*if(loop)
-         {
-            oggSndFx->rewind();
-            return(true);
-         }*/
          return(false);
       }
    }
