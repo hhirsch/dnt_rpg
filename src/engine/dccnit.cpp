@@ -827,8 +827,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                  
                  if(numEnemies > 0)
                  {
-                    /*snd->LoadSample(SOUND_ACTION3,"../data/sndfx/battleMode.ogg");
-                    snd->PlaySample(SOUND_ACTION3);*/
+                    snd->addSoundEffect(false,"../data/sndfx/battleMode.ogg");
                     engineMode = ENGINE_MODE_TURN_BATTLE;
                     moveCircleX = PCs->personagemAtivo->posicaoLadoX;
                     moveCircleY = PCs->personagemAtivo->posicaoLadoY;
@@ -2271,8 +2270,6 @@ int engine::Run(SDL_Surface *surface)
    {
       snd->loadMusic(actualMap->music);
    }
-
-   //snd->LoadSample(SOUND_WALK,"../data/sndfx/passos.ogg");
 
    int forcaAtualizacao = 0; //force screen atualization FIXME, no more used
    int time;

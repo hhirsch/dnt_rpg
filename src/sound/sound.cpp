@@ -216,6 +216,23 @@ sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
 }
 
 /*************************************************************************
+ *                            addSoundEffect                             *
+ *************************************************************************/
+sndfx* sound::addSoundEffect(bool loop, string fileName)
+{
+   lock();
+      sndfx* snd = new sndfx(loop, fileName);
+      snd->next = sndfxList.next;
+      snd->previous = &sndfxList;
+      snd->next->previous = snd;
+      snd->previous->next = snd;
+      totalSndfx++;
+   unLock();
+   return(snd);
+}
+
+
+/*************************************************************************
  *                          removeSoundEffect                            *
  *************************************************************************/
 void sound::removeSoundEffect(sndfx* snd)

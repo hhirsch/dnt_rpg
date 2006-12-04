@@ -17,6 +17,11 @@ class sndfx
    public:
       /*! Constructor of NULL class (for head node) */
       sndfx();
+
+      /*! Constructor of Non positional Source 
+       * \param loop -> true if is to looping the source
+       * \param fileName -> name of the Ogg File to Open */
+      sndfx(bool lp, string fileName);
       
       /*! Constructor of the Class.
        * \param centerX -> X position of the source

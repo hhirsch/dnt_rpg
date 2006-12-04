@@ -41,9 +41,16 @@ class sound
        *  \param y -> Y position
        *  \param z -> Z position
        *  \param loop -> if sound will loop at end or not
+       *  \param fileName -> name of the ogg file to open
        *  \return pointer to the added sound */
       sndfx* addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
                             string fileName);
+      
+      /*! Add sound effect without position to the list
+       *  \param loop -> if sound will loop at end or not
+       *  \param fileName -> name of the ogg file to open
+       *  \return pointer to the added sound */
+      sndfx* addSoundEffect(bool loop, string fileName);
 
       /*! Remove sound effect from list
        *  \param snd -> pointer to sound effect to remove */

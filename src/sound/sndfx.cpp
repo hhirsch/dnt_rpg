@@ -34,6 +34,26 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
    previous = NULL;
 }
 
+sndfx::sndfx(bool lp, string fileName)
+{
+   /* Create the Ogg Stream */ 
+   oggSndFx = new(ogg_stream);
+   oggSndFx->open(fileName);
+
+   /* Define Position */
+   oggSndFx->defineAsMusic();
+
+   if(!oggSndFx->playback())
+   {
+      printf("Can't Play Sound Effect: %s\n",fileName.c_str());
+   }
+   
+   oggName = fileName;
+   loop = lp;
+   next = NULL;
+   previous = NULL;
+}
+
 /*************************************************************************
  *                              Destructor                               *
  *************************************************************************/
