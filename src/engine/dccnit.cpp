@@ -2252,6 +2252,7 @@ void engine::showImage(string fileName)
       SDL_PumpEvents();
       int x,y;
       mButton = SDL_GetMouseState(&x,&y);
+      SDL_Delay(50);
    }
    
    glEnable(GL_LIGHTING);
