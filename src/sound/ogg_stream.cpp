@@ -150,12 +150,18 @@ bool ogg_stream::update()
  *************************************************************************/
 void ogg_stream::rewind()
 {
-   empty();
+    if(playing())
+    {
+       //If playing, stop!
+       alSourceStop(source);
+    }
+
    int result = ov_raw_seek(&oggStream,0);
    if( result != 0)
    {
       printf("Ogg Rewind Error: %d\n",result);
    }
+   playback();
 }
 
 /*************************************************************************
@@ -185,6 +191,7 @@ bool ogg_stream::stream(ALuint buffer)
     
     if(size == 0)
     {
+       alSourceStop(source);
        return(false);
     }
  

@@ -103,6 +103,8 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          {
              if(eventInfo == BOTAOPRESSIONADO)
              {
+                 //snd->addSoundEffect(false, "../data/sndfx/menu/click.ogg");
+
                  if(object == (Tobjeto*) buttonNew)
                  {
                     result = NEW_GAME;
