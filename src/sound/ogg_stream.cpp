@@ -161,22 +161,6 @@ bool ogg_stream::update()
 }
 
 /*************************************************************************
- *                                rewind                                 *
- *************************************************************************/
-void ogg_stream::rewind()
-{
-//   alSourceStop(source);
-
-   /*int result = ov_raw_seek(&oggStream,0);
-   if( result != 0)
-   {
-      printf("Ogg Rewind Error: %d\n",result);
-   }*/
-
-   //playback();
-}
-
-/*************************************************************************
  *                                stream                                 *
  *************************************************************************/
 bool ogg_stream::stream(ALuint buffer)
@@ -254,7 +238,7 @@ void ogg_stream::empty()
  *************************************************************************/
 void ogg_stream::check()
 {
-    /*int error = alGetError();
+    int error = alGetError();
  
     if(error != AL_NO_ERROR)
     {
@@ -272,7 +256,7 @@ void ogg_stream::check()
            case AL_OUT_OF_MEMORY: printf("Unable to allocate memory\n");
            break;
         }
-    }*/
+    }
 }
 
 /*************************************************************************
