@@ -86,6 +86,7 @@ sound::sound()
 sound::~sound()
 {
    sndfx* snd, *tmp;
+   
    /* Clear the Opened Music */
    if(backMusic)
    {
@@ -94,6 +95,7 @@ sound::~sound()
       backMusic = NULL;
    }
 
+   /* Clear all opened Sound Effects */
    snd = sndfxList.next;
    while(totalSndfx > 0)
    {
@@ -103,9 +105,11 @@ sound::~sound()
       snd= snd->next;
    }
    
+   /* Destroy Thread and Mutex */
    SDL_KillThread(soundThread);
    SDL_DestroyMutex(soundMutex);
    
+   /* Clear OpenAL Context and Device */
    alcDestroyContext(context);
    alcCloseDevice(device);
 }
@@ -185,6 +189,7 @@ void sound::flush()
    {
       if(!snd->update())
       {
+         /* Remove Sound */
          sndfx* tmp = snd;
          snd = snd->previous;
          removeSoundEffect(tmp);
@@ -201,11 +206,11 @@ sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
 {
    lock();
       sndfx* snd = new sndfx(x,y,z,loop, fileName);
-      /*snd->next = sndfxList.next;
-      snd->next->previous = snd;
+      snd->next = sndfxList.next;
       snd->previous = &sndfxList;
-      sndfxList.next = snd;
-      totalSndfx++;*/
+      snd->next->previous = snd;
+      snd->previous->next = snd;
+      totalSndfx++;
    unLock();
    return(snd);
 }
@@ -216,12 +221,12 @@ sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
 void sound::removeSoundEffect(sndfx* snd)
 {
    lock();
-      if(snd)
+      if( (snd) && (snd != &sndfxList))
       {
-         /*snd->previous->next = snd->next;
-         snd->next->previous = snd->previous;*/
+         snd->previous->next = snd->next;
+         snd->next->previous = snd->previous;
          delete(snd);
-         //totalSndfx--;
+         totalSndfx--;
       }
    unLock();
 }

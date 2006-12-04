@@ -13,7 +13,7 @@ sndfx::sndfx()
 /*************************************************************************
  *                             Constructor                               *
  *************************************************************************/
-sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool loop,
+sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
              string fileName)
 {
    /* Create the Ogg Stream */ 
@@ -28,7 +28,8 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool loop,
       printf("Can't Play Sound Effect: %s\n",fileName.c_str());
    }
    
-   loop = false;
+   oggName = fileName;
+   loop = lp;
    next = NULL;
    previous = NULL;
 }
@@ -51,6 +52,14 @@ sndfx::~sndfx()
 void sndfx::setLoop(bool lp)
 {
    loop = lp;
+}
+
+/*************************************************************************
+ *                                getLoop                                *
+ *************************************************************************/
+bool sndfx::getLoop()
+{
+   return(loop);
 }
 
 /*************************************************************************

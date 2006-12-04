@@ -150,6 +150,7 @@ bool ogg_stream::update()
  *************************************************************************/
 void ogg_stream::rewind()
 {
+   empty();
    int result = ov_raw_seek(&oggStream,0);
    if( result != 0)
    {

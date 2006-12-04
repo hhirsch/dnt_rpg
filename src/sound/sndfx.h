@@ -24,7 +24,7 @@ class sndfx
        * \param centerZ -> Z position of the source
        * \param loop -> true if is to looping the source
        * \param fileName -> name of the Ogg File to Open */
-      sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool loop,
+      sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
             string fileName);
       /*! Destructor */
       ~sndfx();
@@ -38,6 +38,10 @@ class sndfx
       /*! Sets if the Source will Loop at end or not
        * \param loop -> true if is to looping the source */
       void setLoop(bool lp);
+
+      /*! Gets if the Source will Loop at end or not
+       * \return loop -> true if is to looping the source */
+      bool getLoop();
 
       /*! Set the Velocity of the Source (if have one)
        * \param velX -> X velocity value
@@ -70,6 +74,7 @@ class sndfx
    private:
       ogg_stream* oggSndFx;   /**< The Ogg stream of the Sound */
       bool loop;              /**< Loop at end or not loop */
+      string oggName;         /**< File Name of the Ogg Used */
 };
 
 #endif
