@@ -147,7 +147,6 @@ bool sndfx::update()
       }
       else 
       {
-         printf("End Play\n");
          /*if(loop)
          {
             oggSndFx->rewind();
