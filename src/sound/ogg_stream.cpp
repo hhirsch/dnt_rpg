@@ -123,11 +123,11 @@ bool ogg_stream::update()
  
     alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
 
-    if(!playing())
+    /*if(!playing())
     {
        //If not playing, resume the play!
        alSourcePlay(source);
-    }
+    }*/
 
     while(processed--)
     {
@@ -270,5 +270,13 @@ string ogg_stream::errorString(int code)
         default:
             return string("Unknown Ogg error.");
     }
+}
+
+/*************************************************************************
+ *                            changeVolume                               *
+ *************************************************************************/
+void ogg_stream::changeVolume(int volume)
+{
+   alSourcef(source, AL_GAIN, (float)(volume / 128.0));
 }
 

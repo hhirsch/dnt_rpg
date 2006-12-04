@@ -73,6 +73,11 @@ class sndfx
        * \return false when execution is over */
       bool update();
 
+      /*! Change the stream overall volume 
+       * \param volume -> volume value [0 - 128]*/
+      void changeVolume(int volume);
+
+
       sndfx* next;            /**< Pointer to next element on list */
       sndfx* previous;        /**< Pointer to previous element on list */
 

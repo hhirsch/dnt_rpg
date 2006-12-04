@@ -76,6 +76,9 @@ sound::sound()
    sndfxList.previous = &sndfxList;
    totalSndfx = 0;
 
+   musicVolume = 128;
+   sndfxVolume = 128;
+
    actualSound = this;
    soundMutex = SDL_CreateMutex();
    soundThread  = SDL_CreateThread((&runParalelSound), NULL);   
@@ -154,6 +157,7 @@ bool sound::loadMusic(string fileName)
    backMusic = new(ogg_stream);
 
    backMusic->open(fileName);
+   backMusic->changeVolume(musicVolume);
 
    if(!backMusic->playback())
    {
@@ -208,6 +212,7 @@ sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
 {
    lock();
       sndfx* snd = new sndfx(x,y,z,loop, fileName);
+      snd->changeVolume(sndfxVolume);
       snd->next = sndfxList.next;
       snd->previous = &sndfxList;
       snd->next->previous = snd;
@@ -224,6 +229,7 @@ sndfx* sound::addSoundEffect(bool loop, string fileName)
 {
    lock();
       sndfx* snd = new sndfx(loop, fileName);
+      snd->changeVolume(sndfxVolume);
       snd->next = sndfxList.next;
       snd->previous = &sndfxList;
       snd->next->previous = snd;
@@ -255,9 +261,26 @@ void sound::removeSoundEffect(sndfx* snd)
 /*************************************************************************
  *                              changeVolume                             *
  *************************************************************************/
-void sound::changeVolume(int musicVolume, int sndfxVolume)
+void sound::changeVolume(int music, int sndV)
 {
-   //TODO
+   sndfx* snd;
+   
+   lock();
+      musicVolume = music;
+      sndfxVolume = sndV;
+      if(backMusic)
+      {
+         backMusic->changeVolume(musicVolume);
+      }
+
+      snd = sndfxList.next;
+      while(snd != &sndfxList)
+      {
+         snd->changeVolume(sndfxVolume);
+         snd = snd->next;
+      }
+
+   unLock();
 }
 
 

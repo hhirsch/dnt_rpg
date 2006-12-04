@@ -165,3 +165,15 @@ bool sndfx::update()
    return(false);
 }
 
+/*************************************************************************
+ *                            changeVolume                               *
+ *************************************************************************/
+void sndfx::changeVolume(int volume)
+{
+   if(oggSndFx)
+   {
+      oggSndFx->changeVolume(volume);
+   }
+}
+
+

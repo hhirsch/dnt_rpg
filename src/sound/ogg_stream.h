@@ -43,6 +43,11 @@ class ogg_stream
       /*! Get The Source
        * \return AL source of the ogg */
       ALuint getSource();
+
+      /*! Change the stream overall volume 
+       * \param volume -> volume value [0 - 128]*/
+      void changeVolume(int volume);
+
  
    protected:
       /*! Reloads a buffer

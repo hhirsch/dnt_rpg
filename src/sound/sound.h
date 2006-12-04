@@ -65,9 +65,9 @@ class sound
       void unLock();
 
       /*! \todo Change Overall Volume.
-       *  \param musicVolume -> volume of the music
-       *  \param sndfxVolume -> sound effects volume */
-      void changeVolume(int musicVolume, int sndfxVolume); 
+       *  \param music -> volume of the music
+       *  \param sndV -> sound effects volume */
+      void changeVolume(int music, int sndV); 
 
    private:
       ALCdevice* device;            /**< Active AL device */
@@ -79,6 +79,9 @@ class sound
 
       sndfx sndfxList;              /**< Head Node of sndFx List */
       int totalSndfx;               /**< Total Sound Effects on List */
+
+      int musicVolume;              /**< The Music volume */
+      int sndfxVolume;              /**< The SndFxVolume */
 };
 
 #endif
