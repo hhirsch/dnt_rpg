@@ -25,6 +25,10 @@ class camera
       void sumD(GLfloat f);
 
       GLfloat getPhi();
+      GLfloat getTheta();
+      GLfloat getDeltaY();
+      GLfloat getD();
+
 
 
       GLfloat centerX,                  /**< Camera Central X Position */

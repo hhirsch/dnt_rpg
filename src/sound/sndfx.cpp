@@ -22,6 +22,7 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
 
    /* Define Position */
    alSource3f(oggSndFx->getSource(), AL_POSITION, centerX, centerY, centerZ);
+   alSourcef(oggSndFx->getSource(), AL_REFERENCE_DISTANCE, 160);
 
    if(!oggSndFx->playback())
    {
@@ -34,6 +35,9 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
    previous = NULL;
 }
 
+/*************************************************************************
+ *                             Constructor                               *
+ *************************************************************************/
 sndfx::sndfx(bool lp, string fileName)
 {
    /* Create the Ogg Stream */ 

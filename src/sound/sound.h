@@ -23,9 +23,13 @@ class sound
        *  \param centerX -> X position of the listener
        *  \param centerY -> Y position of the listener 
        *  \param centerZ -> Z position of the listener
-       *  \param angle -> Orientation Angle of the listener */
+       *  \param theta -> Theta Orientation Angle of the listener 
+       *  \param phi -> Phi Orientation Angle of the listener 
+       *  \param d -> D Param of the Listener
+       *  \param deltaY -> Y Delta Variation of Listener */
       void setListenerPosition(ALfloat centerX, ALfloat centerY, 
-                               ALfloat centerZ, ALfloat angle);
+                               ALfloat centerZ, ALfloat theta, ALfloat phi,
+                               ALfloat d, ALfloat deltaY);
 
 
       /*! Flush All Buffers to the Sound Device, actualizing the played sounds

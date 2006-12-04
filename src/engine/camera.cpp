@@ -189,3 +189,18 @@ GLfloat camera::getPhi()
    return(phi);
 }
 
+GLfloat camera::getTheta()
+{
+   return(theta);
+}
+
+GLfloat camera::getD()
+{
+   return(d);
+}
+
+GLfloat camera::getDeltaY()
+{
+   return(deltaY);
+}
+

@@ -1655,10 +1655,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    {
       if(!walkSound)
       {
-         printf("adding sndfx\n");
          walkSound = snd->addSoundEffect(PCs->personagemAtivo->posicaoLadoX,0.0,
-                                         PCs->personagemAtivo->posicaoLadoZ,true,
-                                         "../data/sndfx/passos.ogg" );
+                                        PCs->personagemAtivo->posicaoLadoZ,true,
+                                        "../data/sndfx/passos.ogg" );
       }
       else
       {
@@ -1684,11 +1683,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       PCs->personagemAtivo->SetState(STATE_IDLE);
       if(walkSound)
       {
-         printf("removing sndfx\n");
          snd->removeSoundEffect(walkSound);
          walkSound = NULL;
       }
-      //snd->StopSample(SOUND_WALK);
    }
  
    return(!exitEngine);
@@ -1711,7 +1708,9 @@ void engine::Draw()
    gameCamera.lookAt();
 
    snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
-                            gameCamera.getCameraZ(), gameCamera.getPhi());
+                            gameCamera.getCameraZ(), gameCamera.getTheta(),
+                            gameCamera.getPhi(), gameCamera.getD(),
+                            gameCamera.getDeltaY());
 
    /* Sun Definition */
    gameSun->actualizeHourOfDay(hour);

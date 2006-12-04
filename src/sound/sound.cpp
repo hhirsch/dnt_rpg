@@ -1,6 +1,7 @@
 #include "sound.h"
 #include <math.h>
 #include <SDL/SDL.h>
+#include "../engine/util.h"
 
 sound* actualSound;
 
@@ -118,15 +119,16 @@ sound::~sound()
  *                          setListenerPosition                          *
  *************************************************************************/
 void sound::setListenerPosition(ALfloat centerX, ALfloat centerY, 
-                                ALfloat centerZ, ALfloat angle)
+                                ALfloat centerZ, ALfloat theta, ALfloat phi,
+                                ALfloat d, ALfloat deltaY)
 {
    lock();
       ALfloat directionvect[6]; /* Direction Vector of Listener */
       alListener3f(AL_POSITION, centerX, centerY, centerZ);
 
-      directionvect[0] = (float) sin(angle);
-      directionvect[1] = 0;
-      directionvect[2] = (float) cos(angle);
+      directionvect[0] = (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+      directionvect[1] = deltaY + (float) d * sin(deg2Rad(theta));
+      directionvect[2] = (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
       directionvect[3] = 0;
       directionvect[4] = 1;
       directionvect[5] = 0;
