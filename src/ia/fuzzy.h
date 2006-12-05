@@ -35,6 +35,11 @@ class fuzzy
         * \return -> pointer to the fuzzy rule created */
        fuzzyRule* addRule(int numberOfOperators);
 
+       /*! Evalute all actual CrispValues in all Functions,
+        *  putting the result in the respective variables, 
+        *  based on the rules. */
+       void evalute();
+
    private:
       fuzzyRule* rules;         /**< FuzzyRules List */
       int totalRules;           /**< Total Fuzzy Rules */

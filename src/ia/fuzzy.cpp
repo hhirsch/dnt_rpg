@@ -26,7 +26,7 @@ fuzzy::~fuzzy()
 {
    int i;
 
-   /* Clear All Rules */
+   /* Delete All Rules */
    fuzzyRule* fr = rules;
    fuzzyRule* tr;
    for(i=0; i < totalRules; i++)
@@ -36,7 +36,7 @@ fuzzy::~fuzzy()
       delete(tr);
    }
 
-   /* Clear All Variables */
+   /* Delete All Variables */
    fuzzyVariable* fv = variables;
    fuzzyVariable* tv;
    for(i=0; i < totalVariables; i++)
@@ -46,7 +46,7 @@ fuzzy::~fuzzy()
       delete(tv);
    }
 
-   /* Clear All Functions */
+   /* Delete All Functions */
    fuzzyFunction* ff = functions;
    fuzzyFunction* tf;
    for(i=0; i < totalFunctions; i++)
@@ -103,7 +103,7 @@ fuzzyRule* fuzzy::addRule(int numberOfOperators)
 }
 
 /***************************************************************
- *                           Constructor                       *
+ *                           addFunction                       *
  ***************************************************************/
 fuzzyFunction* fuzzy::addFunction(int functionType, 
                                   int xa, int xb, int xc, int xd)
@@ -123,6 +123,31 @@ fuzzyFunction* fuzzy::addFunction(int functionType,
    }
    totalFunctions++;
    return(ff);
+
+}
+
+/***************************************************************
+ *                             evalute                         *
+ ***************************************************************/
+void fuzzy::evalute()
+{
+   int i;
+
+   /* Clear All Variables */
+   fuzzyVariable* fv = variables;
+   for(i=0; i < totalVariables; i++)
+   {
+      fv->clearValue();
+      fv = fv->next;
+   }
+
+   /* Evalute all Rules */
+   fuzzyRule* fr = rules;
+   for(i=0; i < totalRules; i++)
+   {
+      fr->evalute();
+      fr = fr->next;
+   }
 
 }
 

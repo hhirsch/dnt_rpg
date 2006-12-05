@@ -24,13 +24,16 @@ fuzzyFunction::~fuzzyFunction()
    function = -1;
 }
 
+/***************************************************************
+ *                          setCrispValue                      *
+ ***************************************************************/
 void fuzzyFunction::setCrispValue(float crisp)
 {
    crispValue = crisp;
 }
 
 /***************************************************************
- *                           Constructor                       *
+ *                             evalute                         *
  ***************************************************************/
 float fuzzyFunction::evalute()
 {
