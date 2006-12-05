@@ -22,10 +22,14 @@ class fuzzyFunction
       /*! Destructor */
       ~fuzzyFunction();
 
+      /*! Set the Crisp Value of the Function. 
+       * Must be called before evalute.
+       * \param crispValue -> Crisp Value to be evaluted */
+      void setCrispValue(float crisp);
+
       /*! Evalute The Function
-       * \param crispValue -> Crisp Value to be evaluted
        * \return value of the function */
-      float evalute(float crispValue);
+      float evalute();
 
       fuzzyFunction* next;      /**< Next Fuzzy Rule on List */
       fuzzyFunction* previous;  /**< Previous Fuzzy on List */
@@ -36,6 +40,7 @@ class fuzzyFunction
             x2,             /**< Second Used Coordinate */
             x3,             /**< Third Used Coordinate */
             x4;             /**< Forth Used Coordinate */   
+      float crispValue;     /**< Actual Crisp Value */
 };
 
 

@@ -13,6 +13,7 @@ fuzzyFunction::fuzzyFunction(int func, int xa, int xb, int xc, int xd)
    x4 = xd;
    next = NULL;
    previous = NULL;
+   crispValue = -1;
 }
 
 /***************************************************************
@@ -23,10 +24,15 @@ fuzzyFunction::~fuzzyFunction()
    function = -1;
 }
 
+void fuzzyFunction::setCrispValue(float crisp)
+{
+   crispValue = crisp;
+}
+
 /***************************************************************
  *                           Constructor                       *
  ***************************************************************/
-float fuzzyFunction::evalute(float crispValue)
+float fuzzyFunction::evalute()
 {
    float ret = 0;
    switch(function)

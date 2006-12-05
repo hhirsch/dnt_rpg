@@ -5,7 +5,9 @@
 #include "fuzzyfunction.h"
 #include "fuzzyvariable.h"
 
-/*! The Fuzzy Logic Class */
+/*! The Fuzzy Logic Class 
+ *  In the fuzzy class, the functions are used as operator values to rules,
+ *  the variables are the return values of rules. */
 class fuzzy
 {
    public:

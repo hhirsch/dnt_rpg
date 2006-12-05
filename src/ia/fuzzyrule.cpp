@@ -81,7 +81,7 @@ float fuzzyRule::orValue(float op1, float op2)
 /***************************************************************
  *                            addVariable                      *
  ***************************************************************/
-void fuzzyRule::evalute(float crispValue)
+void fuzzyRule::evalute()
 {
    if(numberOfMembers < 1)
    {
@@ -89,7 +89,7 @@ void fuzzyRule::evalute(float crispValue)
    }
    
    int i;
-   float result = functions[0]->evalute(crispValue);
+   float result = functions[0]->evalute();
    
    for(i=1; i < numberOfMembers; i++)
    {
@@ -97,22 +97,22 @@ void fuzzyRule::evalute(float crispValue)
       {
          case FUZZY_OPERATOR_AND:
          {
-            result = andValue(result,functions[i]->evalute(crispValue));
+            result = andValue(result,functions[i]->evalute());
          }
          break;
          case FUZZY_OPERATOR_AND_NOT:
          {
-            result = andValue(result,!(functions[i]->evalute(crispValue)));
+            result = andValue(result,!(functions[i]->evalute()));
          }
          break;
          case FUZZY_OPERATOR_OR:
          {
-            result = orValue(result,functions[i]->evalute(crispValue));
+            result = orValue(result,functions[i]->evalute());
          }
          break;
          case FUZZY_OPERATOR_OR_NOT:
          {
-            result = orValue(result, !(functions[i]->evalute(crispValue)));
+            result = orValue(result, !(functions[i]->evalute()));
          }
          break;
       }

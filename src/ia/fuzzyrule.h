@@ -31,7 +31,7 @@ class fuzzyRule
 
       /*! Evalute The Rule, setting the return Variable
        * \param crispValue -> Crisp Value to be evaluted */
-      void evalute(float crispValue);
+      void evalute();
 
       fuzzyRule* next;
       fuzzyRule* previous;
