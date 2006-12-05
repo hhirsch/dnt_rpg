@@ -102,7 +102,7 @@ void fuzzyRule::evalute()
          break;
          case FUZZY_OPERATOR_AND_NOT:
          {
-            result = andValue(result,!(functions[i]->evalute()));
+            result = andValue(result,1-(functions[i]->evalute()));
          }
          break;
          case FUZZY_OPERATOR_OR:
@@ -112,7 +112,7 @@ void fuzzyRule::evalute()
          break;
          case FUZZY_OPERATOR_OR_NOT:
          {
-            result = orValue(result, !(functions[i]->evalute()));
+            result = orValue(result, 1-(functions[i]->evalute()));
          }
          break;
       }

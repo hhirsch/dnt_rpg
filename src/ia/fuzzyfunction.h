@@ -24,7 +24,7 @@ class fuzzyFunction
 
       /*! Set the Crisp Value of the Function. 
        * Must be called before evalute.
-       * \param crispValue -> Crisp Value to be evaluted */
+       * \param crisp -> Crisp Value to be evaluted */
       void setCrispValue(float crisp);
 
       /*! Evalute The Function

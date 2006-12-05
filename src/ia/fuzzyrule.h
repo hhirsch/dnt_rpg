@@ -29,8 +29,7 @@ class fuzzyRule
        * \param variable -> the result variable */
       void addVariable(fuzzyVariable* variable);
 
-      /*! Evalute The Rule, setting the return Variable
-       * \param crispValue -> Crisp Value to be evaluted */
+      /*! Evalute The Rule, setting the return Variable */
       void evalute();
 
       fuzzyRule* next;
