@@ -3,7 +3,7 @@
 CPP = g++
 CFLAGS = -g -c -Wall -O2
 EFLAGS = -g -Wall -O2 -lm
-OBJS = agent.o astar.o pattAgent.o potentAgent.o
+OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o pattAgent.o potentAgent.o
 
 
 all: $(OBJS)
@@ -18,9 +18,24 @@ astar.o: astar.cpp astar.h
 	@$(CPP) $(CFLAGS) astar.cpp -o astar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste: ai.cpp ai.h
-	@printf "Making & Linking TesteAi... "
-	@$(CPP) $(EFLAGS) -DTESTE ai.cpp -o testeai
+fuzzy.o: fuzzy.cpp fuzzy.h
+	@printf "Making fuzzy.o... "
+	@$(CPP) $(CFLAGS) fuzzy.cpp -o fuzzy.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+fuzzyfunction.o: fuzzyfunction.cpp fuzzyfunction.h
+	@printf "Making fuzzyfunction.o... "
+	@$(CPP) $(CFLAGS) fuzzyfunction.cpp -o fuzzyfunction.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+fuzzyrule.o: fuzzyrule.cpp fuzzyrule.h
+	@printf "Making fuzzyrule.o... "
+	@$(CPP) $(CFLAGS) fuzzyrule.cpp -o fuzzyrule.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+fuzzyvariable.o: fuzzyvariable.cpp fuzzyvariable.h
+	@printf "Making fuzzyvariable.o... "
+	@$(CPP) $(CFLAGS) fuzzyvariable.cpp -o fuzzyvariable.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 pattAgent.o: pattAgent.cpp pattAgent.h
