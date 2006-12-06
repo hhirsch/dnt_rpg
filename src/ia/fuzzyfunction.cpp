@@ -58,13 +58,13 @@ float fuzzyFunction::evalute()
          }
          else if( (crispValue > x1) && (crispValue < x2))
          {
-            float a = (1 / (x2 - x1));
+            float a = (upperValue / (x2 - x1));
             float b = a*x1;
             ret = (a * crispValue) + b;
          }
          else if(crispValue >= x2)
          {
-            ret = 1;
+            ret = upperValue;
          }
       }
       break;
@@ -76,13 +76,13 @@ float fuzzyFunction::evalute()
          }
          else if( (crispValue > x1) && (crispValue < x2))
          {
-            float a = (-1 / (x2 - x1));
+            float a = (-upperValue / (x2 - x1));
             float b = a*x2;
             ret = (a * crispValue) + b;
          }
          else if(crispValue >= x2)
          {
-            ret = 1;
+            ret = upperValue;
          }
       }
       break;
@@ -94,17 +94,17 @@ float fuzzyFunction::evalute()
          }
          else if( (crispValue > x1) && (crispValue < x2))
          {
-            float a = (1 / (x2 - x1));
+            float a = (upperValue / (x2 - x1));
             float b = a*x1;
             ret = (a * crispValue) + b;
          }
          else if(crispValue == x2)
          {
-            ret = 1;
+            ret = upperValue;
          }
          else if( (crispValue >= x2) && (crispValue < x3))
          {
-            float a = (-1 / (x3 - x2));
+            float a = (-upperValue / (x3 - x2));
             float b = a*x3;
             ret = (a * crispValue) + b;
          }
@@ -122,17 +122,17 @@ float fuzzyFunction::evalute()
          }
          else if( (crispValue > x1) && (crispValue < x2))
          {
-            float a = (1 / (x2 - x1));
+            float a = (upperValue / (x2 - x1));
             float b = a*x1;
             ret = (a * crispValue) + b;
          }
          else if( (crispValue >= x2) && (crispValue <= x3))
          {
-            ret = 1;
+            ret = upperValue;
          }
          else if( (crispValue > x3) && (crispValue < x4))
          {
-            float a = (-1 / (x4 - x3));
+            float a = (-upperValue / (x4 - x3));
             float b = a*x4;
             ret = (a * crispValue) + b;
          }
