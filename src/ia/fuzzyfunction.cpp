@@ -4,7 +4,7 @@
 /***************************************************************
  *                           Constructor                       *
  ***************************************************************/
-fuzzyFunction::fuzzyFunction(int func, int xa, int xb, int xc, int xd)
+fuzzyFunction::fuzzyFunction(int func, float xa, float xb, float xc, float xd)
 {
    function = func;
    x1 = xa;
@@ -72,7 +72,7 @@ float fuzzyFunction::evalute()
       {
          if(crispValue <= x1)
          {
-            ret = 0;
+            ret = upperValue;
          }
          else if( (crispValue > x1) && (crispValue < x2))
          {
@@ -82,7 +82,7 @@ float fuzzyFunction::evalute()
          }
          else if(crispValue >= x2)
          {
-            ret = upperValue;
+            ret = 0;
          }
       }
       break;

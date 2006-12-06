@@ -62,7 +62,7 @@ fuzzy::~fuzzy()
  *                           addVariable                       *
  ***************************************************************/
 fuzzyVariable* fuzzy::addVariable(int functionType, 
-                                  int xa, int xb, int xc, int xd)
+                                  float xa, float xb, float xc, float xd)
 {
    fuzzyVariable* fv = new fuzzyVariable(functionType, xa, xb, xc, xd);
    if(variables)
@@ -107,7 +107,7 @@ fuzzyRule* fuzzy::addRule(int numberOfOperators)
  *                           addFunction                       *
  ***************************************************************/
 fuzzyFunction* fuzzy::addFunction(int functionType, 
-                                  int xa, int xb, int xc, int xd)
+                                  float xa, float xb, float xc, float xd)
 {
    fuzzyFunction* ff = new fuzzyFunction(functionType, xa, xb, xc, xd);
    if(functions)

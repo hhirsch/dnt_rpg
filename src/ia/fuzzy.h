@@ -24,7 +24,7 @@ class fuzzy
         * \param xd -> forth used coordinate
         * \return -> pointer to the fuzzyFunctionCreated */
        fuzzyFunction* addFunction(int functionType, 
-                                  int xa, int xb, int xc, int xd);
+                                  float xa, float xb, float xc, float xd);
 
        /*! Add variable to the fuzzy class
         * \param func -> function type
@@ -34,7 +34,7 @@ class fuzzy
         * \param xd -> forth used coordinate
         * \return -> pointer to the variable created */
        fuzzyVariable* addVariable(int functionType, 
-                                  int xa, int xb, int xc, int xd);
+                                  float xa, float xb, float xc, float xd);
 
        /*! Add Rule to the fuzzy class 
         * \param numberOfOperators -> numer of Operators in the Rule

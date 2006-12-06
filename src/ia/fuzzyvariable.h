@@ -13,7 +13,7 @@ class fuzzyVariable
        * \param xb -> second used coordinate
        * \param xc -> third used coordinate
        * \param xd -> forth used coordinate */
-      fuzzyVariable(int func, int xa, int xb, int xc, int xd);
+      fuzzyVariable(int func, float xa, float xb, float xc, float xd);
       /*! Destructor */
       ~fuzzyVariable();
 

@@ -2,7 +2,7 @@
 #define _fuzzyfunction_h
 
 /*! Fuzzy Membership Functions */
-#define FUZZY_FUNCTION_STEP           1
+#define FUZZY_FUNCTION_STEP          1
 #define FUZZY_FUNCTION_INVERTED_STEP 2
 #define FUZZY_FUNCTION_TRIANGULAR    3
 #define FUZZY_FUNCTION_TRAPEZOIDAL   4
@@ -17,7 +17,7 @@ class fuzzyFunction
        * \param xb -> second used coordinate
        * \param xc -> third used coordinate
        * \param xd -> forth used coordinate*/
-      fuzzyFunction(int func, int xa, int xb, int xc, int xd);
+      fuzzyFunction(int func, float xa, float xb, float xc, float xd);
       
       /*! Destructor */
       ~fuzzyFunction();

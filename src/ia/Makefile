@@ -8,6 +8,11 @@ OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o pattA
 
 all: $(OBJS)
 
+teste: fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o teste.cpp
+	@printf "Making teste... "
+	@$(CPP) $(EFLAGS) fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o teste.cpp -o teste
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 agent.o: agent.cpp agent.h
 	@printf "Making agent.o... "
 	@$(CPP) $(CFLAGS) agent.cpp -o agent.o

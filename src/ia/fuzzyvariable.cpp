@@ -4,7 +4,7 @@
 /***************************************************************
  *                           Constructor                       *
  ***************************************************************/
-fuzzyVariable::fuzzyVariable(int func, int xa, int xb, int xc, int xd)
+fuzzyVariable::fuzzyVariable(int func, float xa, float xb, float xc, float xd)
 {
    clearValue();
    next = NULL;
