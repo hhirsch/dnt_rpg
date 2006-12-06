@@ -40,6 +40,9 @@ class fuzzy
         *  based on the rules. */
        void evalute();
 
+       /*! Do the Defuzzyfication of Value */
+       float defuzzyfication();
+
    private:
       fuzzyRule* rules;         /**< FuzzyRules List */
       int totalRules;           /**< Total Fuzzy Rules */

@@ -49,6 +49,8 @@ void fuzzyVariable::setValue(float val)
    {
       /* Already started, so calculate */
       value = ((value + val) / 2.0);
+      /* Or another Formula */
+      //value = (value+val) - (value*val);
    }
 }
 

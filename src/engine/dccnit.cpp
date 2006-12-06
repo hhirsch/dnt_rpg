@@ -463,6 +463,12 @@ int engine::OptionsScreen(GLuint* idTextura)
    alignList = new aligns(language.ALIGN_DIR.c_str(),
                           "../data/alignment/alignment.lst");
 
+   delete(features);
+   features = new featsList(language.FEATS_DIR,"../data/feats/feats.ftl");
+
+   delete(raceList);
+   raceList = new races(language.RACE_DIR.c_str(), "../data/races/races.lst");
+
    glEnable(GL_LIGHTING);
    SDL_ShowCursor(SDL_DISABLE);
 
