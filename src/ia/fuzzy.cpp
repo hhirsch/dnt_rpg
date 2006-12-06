@@ -158,20 +158,24 @@ void fuzzy::evalute()
 float fuzzy::defuzzyfication()
 {
    int i;
-   float value = 0;
+   float k;
+   float funcValue;
+   float a = 0;
+   float b = 0;
    
    /* Using the Centroid Method to Calculate Value */
-
    fuzzyVariable* fv = variables;
    for(i=0; i < totalVariables; i++)
    {
-      if(fv->getValue() > value)
+      for(k=0; k<=1; k+= 0.1)
       {
-         value = fv->getValue();
+         funcValue = fv->evaluteFunction(k);
+         a += k*funcValue;
+         b += funcValue;
       }
       fv = fv->next;
    }
 
-   return(value);
+   return(a / b);
 }
 

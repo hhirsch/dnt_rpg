@@ -58,3 +58,13 @@ void fuzzyVariable::setValue(float val)
    function->setLimit(1.0);
 }
 
+/***************************************************************
+ *                          evaluteFunction                    *
+ ***************************************************************/
+float fuzzyVariable::evaluteFunction(float x)
+{
+   function->setCrispValue(x);
+   return(function->evalute());
+}
+
+

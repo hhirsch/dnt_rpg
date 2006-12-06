@@ -26,6 +26,11 @@ class fuzzyVariable
       /*! Get value of the variable */
       float getValue();
 
+      /*! Evalute the Variable Function at Point X
+       * \param x -> point where will evalute the function 
+       * \return value of the function at point x */
+      float evaluteFunction(float x);
+
       fuzzyVariable* next;
       fuzzyVariable* previous;
       
