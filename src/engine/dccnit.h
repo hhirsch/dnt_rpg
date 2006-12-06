@@ -189,12 +189,15 @@ class engine
        ***************************************************************/
       void showImage(string fileName);
 
-
       /*!
        ************************************************************** 
        * Write actual Time on TXT box
        ***************************************************************/
       void hourToTxt();
+
+
+      void draw2DMode();
+      void draw3DMode();
 
       Map* actualMap;              /**< Actual Engine Map */
       cursor* cursors;             /**< Utilized mouse cursors */

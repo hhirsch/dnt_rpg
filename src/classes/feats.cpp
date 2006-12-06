@@ -144,8 +144,8 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus) + 
               attacker.sizeModifier + attacker.baseAttackModifier;
 
-      printf("Bonus: %d = %d + %d + %d\n", bonus,attacker.getBonusValue(m_feats[featNumber].conceptBonus),attacker.sizeModifier,attacker.baseAttackModifier);
-
+      /*printf("Bonus: %d = %d + %d + %d\n", bonus,attacker.getBonusValue(m_feats[featNumber].conceptBonus),attacker.sizeModifier,attacker.baseAttackModifier);
+*/
       diceValue = ((rand() % DICE_D20)+1); 
 
       //TODO apply reflexes bonus, esquive bonus, etc, to target 

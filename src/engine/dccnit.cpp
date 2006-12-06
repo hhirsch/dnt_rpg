@@ -392,6 +392,25 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    return(1);
 }
 
+
+void engine::draw2DMode()
+{
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   gluOrtho2D(0.0, (GLdouble) 800, 0.0, (GLdouble) 600);
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+}
+
+void engine::draw3DMode()
+{
+   glMatrixMode (GL_PROJECTION);
+   glLoadIdentity ();
+   gluPerspective(45.0, 800 / 600, 1.0, FARVIEW);
+   glMatrixMode (GL_MODELVIEW);
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+}
+
 /*********************************************************************
  *                       Call Initial Game Menu                      *
  *********************************************************************/
@@ -405,7 +424,7 @@ int engine::InitialScreen(int Status, GLuint* idTextura, bool reloadMusic)
    }
 
    /* Executes Initial Screen */
-   AtualizaFrustum(visibleMatrix,proj,modl);
+   AtualizaFrustum(visibleMatrix,proj,modl);   
    initialScreen* inic = new(initialScreen);
    int result = inic->Execute(Status, proj, modl, viewPort, idTextura, snd);
    delete(inic);
@@ -607,6 +626,7 @@ int engine::CharacterScreen(GLuint* idTextura)
    }
    
    delete(sk);
+
    return(charCreation);
 }
 
@@ -1942,17 +1962,20 @@ void engine::Draw()
    /* Player's Portrait */
    per = (personagem*) PCs->personagemAtivo;
    per->DrawMainPortrait(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4);
-
+ 
    gui->draw(proj,modl,viewPort);
 
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-  
+
+   
    /* Mouse Cursor */
    glPushMatrix();
-      cursors->draw(mouseX, mouseY);
+      draw2DMode();
+         cursors->draw(mouseX, mouseY);
+      draw3DMode();
    glPopMatrix();
-
+   
    //glDisable(GL_ALPHA_TEST);
 
    glEnable(GL_LIGHTING);

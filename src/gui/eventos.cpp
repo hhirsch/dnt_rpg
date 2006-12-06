@@ -415,6 +415,10 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    {
       if(jan != ljan->janelaAtiva)
       {
+         /*glRasterPos2f(jan->x1, 600-jan->y1);
+         glPixelZoom(1.0, -1.0);
+         glDrawPixels((jan->x2-jan->x1)+1, (jan->y2-jan->y1)+1, 
+                      GL_RGBA, GL_UNSIGNED_BYTE, jan->cara->pixels);*/
           AtualizaTela2D(jan->caraTextura,proj,modl,viewPort,jan->x1,jan->y1, 
                          jan->x2,jan->y2,profundidade);
           profundidade += 0.001;
@@ -423,6 +427,12 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    }
 
    /* Draw Active Window */
+   /*glRasterPos2f(ljan->janelaAtiva->x1, 600-ljan->janelaAtiva->y1);
+   glPixelZoom(1.0, -1.0);
+   glDrawPixels((ljan->janelaAtiva->x2 - ljan->janelaAtiva->x1)+1, 
+                (ljan->janelaAtiva->y2 - ljan->janelaAtiva->y1)+1, 
+                GL_RGBA, GL_UNSIGNED_BYTE, ljan->janelaAtiva->cara->pixels);*/
+
    AtualizaTela2D(ljan->janelaAtiva->caraTextura,proj,modl,viewPort,
                      ljan->janelaAtiva->x1,ljan->janelaAtiva->y1,
                      ljan->janelaAtiva->x2,ljan->janelaAtiva->y2, 0.011);
