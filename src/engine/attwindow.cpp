@@ -418,22 +418,22 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
    {
       if(object == (Tobjeto*) buttonConfirm)
       {
-         //if(allAssigned())
-         //{
+         if(allAssigned())
+         {
             window->Fechar(inter->ljan);
             window = NULL;
             //TODO Save values
             glEnable(GL_LIGHTING);
             SDL_ShowCursor(SDL_DISABLE);
             return(ATTW_CONFIRM);
-         /*}
+         }
          else
          {
             showMessage("Warning", "You Need to Assign All Attributes.",
                         proj, modl,viewPort);
             glDisable(GL_LIGHTING);
             return(ATTW_OTHER);
-         }*/
+         }
       }
       else if(object == (Tobjeto*) buttonCancel) 
       {
