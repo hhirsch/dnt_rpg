@@ -6,10 +6,10 @@
  ***************************************************************/
 fuzzyVariable::fuzzyVariable(int func, float xa, float xb, float xc, float xd)
 {
+   function = new fuzzyFunction(func, xa, xb, xc, xd);
    clearValue();
    next = NULL;
    previous = NULL;
-   function = new fuzzyFunction(func, xa, xb, xc, xd);
 }
 
 /***************************************************************

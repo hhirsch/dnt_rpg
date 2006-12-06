@@ -76,6 +76,7 @@ fuzzyVariable* fuzzy::addVariable(int functionType,
    {
       fv->next = fv;
       fv->previous = fv;
+      variables = fv;
    }
    totalVariables++;
    return(fv);
@@ -98,6 +99,7 @@ fuzzyRule* fuzzy::addRule(int numberOfOperators)
    {
       fr->next = fr;
       fr->previous = fr;
+      rules = fr;
    }
    totalRules++;
    return(fr);
@@ -121,6 +123,7 @@ fuzzyFunction* fuzzy::addFunction(int functionType,
    {
       ff->next = ff;
       ff->previous = ff;
+      functions = ff;
    }
    totalFunctions++;
    return(ff);
