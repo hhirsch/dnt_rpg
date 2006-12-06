@@ -36,7 +36,7 @@
 #define DELTACAMERA    1.5            /**<  The camera velocity */
 #define ZOOMMAXIMO     80             /**< Max value of Zoom */
 #define ZOOMMINIMO     280            /**< Min value of Zoom */
-#define FARVIEW        SQUARESIZE*500 /**< FarView constant */
+#define FARVIEW        32000          /**< FarView constant */
 
 #define HALFFARVIEW    FARVIEW / 2.0  /**< Half FarView Value */
 

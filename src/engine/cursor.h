@@ -22,20 +22,26 @@ class cursor
       /*! cursor Constructor */
       cursor();
       /*! cursor Destructor */
-      ~cursor();
-
-      int actualCursor;              /**< Actual Used Cursor */
+      ~cursor();  
 
       /*! Set actual mouse Cursor 
        * \param nCursor -> cursor Number to use.*/
-      void SetActual(int nCursor); 
-   private:
-      GLuint textura[CURSOR_TOTAL];      /**< internal GL texture of cursors */
+      void setActual(int nCursor); 
 
+      /*! Draw th Cursor to screen */
+      void draw(int mouseX, int mouseY);
+      
+   private:
+      SDL_Surface* textura[CURSOR_TOTAL];  /**< internal GL texture of cursors */
+      SDL_Surface* actualCursor;           /**< Actual Used Cursor */
+      
       /*! Load Cursor file to textures 
        * \param fileName -> file name of cursor
        * \return \c GLuint with the texture ID. */
-      GLuint LoadCursor(char* fileName); 
+      //GLuint loadCursor(char* fileName); 
+      SDL_Surface* loadCursor(char* fileName);
+
+      
 };
 
 #endif

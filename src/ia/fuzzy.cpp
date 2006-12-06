@@ -160,7 +160,7 @@ float fuzzy::defuzzyfication()
    int i;
    float value = 0;
    
-   /* Using the Largest of Max Method to Calculate Value */
+   /* Using the Centroid Method to Calculate Value */
 
    fuzzyVariable* fv = variables;
    for(i=0; i < totalVariables; i++)

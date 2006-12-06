@@ -1022,7 +1022,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
           ( (Mbotao & SDL_BUTTON(1)) && 
 	    (tempo-lastMousePression >= REFRESH_RATE)) )
       {
-         cursors->SetActual(CURSOR_WALK);
+         cursors->setActual(CURSOR_WALK);
          lastMouse = tempo;
          wx = mouseX; wy = SCREEN_Y - mouseY; 
             
@@ -1063,7 +1063,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                               minObj, maxObj);
                if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
                {
-                   cursors->SetActual(CURSOR_GET);
+                   cursors->setActual(CURSOR_GET);
                    if(shortCutsWindow)
                    {
                       ObjTxt->texto = quaux->objects[obj]->nome; 
@@ -1098,7 +1098,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                  minObj, maxObj);
              if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
              {
-                 cursors->SetActual(CURSOR_DOOR);
+                 cursors->setActual(CURSOR_DOOR);
                  if(shortCutsWindow)
                  {
                     ObjTxt->texto = language.OBJ_DOOR.c_str(); 
@@ -1151,7 +1151,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
             if(estaDentro( min, max, minMouse, maxMouse, 1))
             {
-                cursors->SetActual(CURSOR_INVENTORY);
+                cursors->setActual(CURSOR_INVENTORY);
                 if(shortCutsWindow)
                 {
                    ObjTxt->texto = pers->nome; 
@@ -1194,11 +1194,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                  {
                     if(pers->dead) 
                     {
-                       cursors->SetActual(CURSOR_GET);
+                       cursors->setActual(CURSOR_GET);
                     }
                     else
                     {
-                       cursors->SetActual(CURSOR_TALK);
+                       cursors->setActual(CURSOR_TALK);
                        //TODO Talk
                     }
                     if(shortCutsWindow)
@@ -1214,7 +1214,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                  {
                      //TODO verify in-range distances
                      string brief = "";
-                     cursors->SetActual(CURSOR_ATTACK);
+                     cursors->setActual(CURSOR_ATTACK);
                      if(shortCutsWindow)
                      {
                         ObjTxt->texto = pers->nome; 
@@ -1275,7 +1275,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                   ObjTxt->texto = quaux->mapConection.mapName; 
                   shortCutsWindow->Desenhar(mouseX, mouseY);
                }
-               cursors->SetActual(CURSOR_MAPTRAVEL);
+               cursors->setActual(CURSOR_MAPTRAVEL);
                pronto = 1;
                if(Mbotao & SDL_BUTTON(1))
                {
@@ -1975,7 +1975,7 @@ void engine::Draw()
    glPushMatrix();
 
    //FIXME BUG when mouse after screenY-32
-   glEnable(GL_TEXTURE_2D);
+   /*glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, cursors->actualCursor );
    glBegin(GL_QUADS);
       glColor4f(1,1,1,1);
@@ -1989,7 +1989,8 @@ void engine::Draw()
       glVertex3f(x4,y4,z4);
    glEnd();
    glDisable(GL_TEXTURE_2D);
-   glDisable(GL_BLEND);
+   glDisable(GL_BLEND);*/
+   cursors->draw(mouseX, mouseY);
 
    glPopMatrix();
 

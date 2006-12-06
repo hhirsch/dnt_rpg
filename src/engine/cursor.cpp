@@ -1,15 +1,16 @@
 #include "cursor.h"
+#include "util.h"
 
 cursor::cursor()
 {
-   textura[CURSOR_WALK] = LoadCursor("../data/cursors/Walk.png");
-   textura[CURSOR_ATTACK] = LoadCursor("../data/cursors/Attack.png");
-   textura[CURSOR_DEFEND] = LoadCursor("../data/cursors/Defend.png");
-   textura[CURSOR_MAPTRAVEL] = LoadCursor("../data/cursors/MapTravel.png");
-   textura[CURSOR_TALK] = LoadCursor("../data/cursors/talk.png");
-   textura[CURSOR_GET] = LoadCursor("../data/cursors/Get.png");
-   textura[CURSOR_INVENTORY] = LoadCursor("../data/cursors/Inventory.png");
-   textura[CURSOR_DOOR] = LoadCursor("../data/cursors/Door.png");
+   textura[CURSOR_WALK] = loadCursor("../data/cursors/Walk.png");
+   textura[CURSOR_ATTACK] = loadCursor("../data/cursors/Attack.png");
+   textura[CURSOR_DEFEND] = loadCursor("../data/cursors/Defend.png");
+   textura[CURSOR_MAPTRAVEL] = loadCursor("../data/cursors/MapTravel.png");
+   textura[CURSOR_TALK] = loadCursor("../data/cursors/talk.png");
+   textura[CURSOR_GET] = loadCursor("../data/cursors/Get.png");
+   textura[CURSOR_INVENTORY] = loadCursor("../data/cursors/Inventory.png");
+   textura[CURSOR_DOOR] = loadCursor("../data/cursors/Door.png");
    actualCursor = CURSOR_WALK;
 }
 
@@ -18,16 +19,16 @@ cursor::~cursor()
    int aux;
    for(aux = 0; aux < CURSOR_TOTAL;aux++)
    {
-      glDeleteTextures(1,&(textura[aux]));
+      ///glDeleteTextures(1,&(textura[aux]));
+      SDL_FreeSurface(textura[aux]);
    }
 }
 
-GLuint cursor::LoadCursor(char* fileName)
+SDL_Surface* cursor::loadCursor(char* fileName)
 {
-   GLuint indice;
    SDL_Surface* img = IMG_Load(fileName);
 
-   glGenTextures(1, &(indice));
+   /*glGenTextures(1, &(indice));
    glBindTexture(GL_TEXTURE_2D, indice);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
                 0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
@@ -36,11 +37,33 @@ GLuint cursor::LoadCursor(char* fileName)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
    SDL_FreeSurface(img);
-   return(indice);
+   return(indice);*/
+   return(img);
 }
 
-void cursor::SetActual(int nCursor)
+void cursor::setActual(int nCursor)
 {
    actualCursor = textura[nCursor];
+}
+
+void cursor::draw(int mouseX, int mouseY)
+{
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   gluOrtho2D(0.0, (GLdouble) 800, 0.0, (GLdouble) 600);
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+   
+   glRasterPos2f(mouseX, 600 - mouseY);
+   glPixelZoom(1.0, -1.0);
+   glDrawPixels(actualCursor->w, actualCursor->h, GL_RGBA, GL_UNSIGNED_BYTE, 
+                actualCursor->pixels);
+   
+   glMatrixMode (GL_PROJECTION);
+   glLoadIdentity ();
+   gluPerspective(45.0, 800 / 600, 1.0, FARVIEW);
+   glMatrixMode (GL_MODELVIEW);
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
 }
 
