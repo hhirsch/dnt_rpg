@@ -179,6 +179,6 @@ float fuzzy::defuzzyfication()
       fv = fv->next;
    }
 
-   return(a / b);
+   return((a / b));
 }
 

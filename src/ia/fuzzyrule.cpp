@@ -1,5 +1,6 @@
 #include "fuzzyrule.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /***************************************************************
  *                           Constructor                       *
@@ -42,9 +43,9 @@ bool fuzzyRule::addMember(int op, fuzzyFunction* function)
 /***************************************************************
  *                            addVariable                      *
  ***************************************************************/
-void fuzzyRule::addVariable(fuzzyVariable* returnVariable)
+void fuzzyRule::addVariable(fuzzyVariable* variable)
 {
-   returnVariable = returnVariable;
+   returnVariable = variable;
 }
 
 /***************************************************************
@@ -90,7 +91,7 @@ void fuzzyRule::evalute()
    
    int i;
    float result = functions[0]->evalute();
-   
+      
    for(i=1; i < numberOfMembers; i++)
    {
       switch(operators[i])
@@ -122,5 +123,7 @@ void fuzzyRule::evalute()
    {
       returnVariable->setValue(result);
    }
+
+   //printf("result of Rule: %.3f\n",result);
 }
 

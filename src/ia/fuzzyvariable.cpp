@@ -1,5 +1,6 @@
 #include "fuzzyvariable.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /***************************************************************
  *                           Constructor                       *
@@ -51,11 +52,12 @@ void fuzzyVariable::setValue(float val)
    else
    {
       /* Already started, so calculate */
-      value = ((value + val) / 2.0);
+      //value = ((value + val) / 2.0);
       /* Or another Formula */
-      //value = (value+val) - (value*val);
+      value = (value+val) - (value*val);
    }
-   function->setLimit(1.0);
+   //printf("value: %.3f\n",value);
+   function->setLimit(value);
 }
 
 /***************************************************************

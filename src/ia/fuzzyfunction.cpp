@@ -1,5 +1,6 @@
 #include "fuzzyfunction.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /***************************************************************
  *                           Constructor                       *
@@ -59,7 +60,7 @@ float fuzzyFunction::evalute()
          else if( (crispValue > x1) && (crispValue < x2))
          {
             float a = (upperValue / (x2 - x1));
-            float b = a*x1;
+            float b = -(a*x1);
             ret = (a * crispValue) + b;
          }
          else if(crispValue >= x2)
@@ -77,7 +78,7 @@ float fuzzyFunction::evalute()
          else if( (crispValue > x1) && (crispValue < x2))
          {
             float a = (-upperValue / (x2 - x1));
-            float b = a*x2;
+            float b = -a*x2;
             ret = (a * crispValue) + b;
          }
          else if(crispValue >= x2)
@@ -95,7 +96,7 @@ float fuzzyFunction::evalute()
          else if( (crispValue > x1) && (crispValue < x2))
          {
             float a = (upperValue / (x2 - x1));
-            float b = a*x1;
+            float b = -a*x1;
             ret = (a * crispValue) + b;
          }
          else if(crispValue == x2)
@@ -105,7 +106,7 @@ float fuzzyFunction::evalute()
          else if( (crispValue >= x2) && (crispValue < x3))
          {
             float a = (-upperValue / (x3 - x2));
-            float b = a*x3;
+            float b = -a*x3;
             ret = (a * crispValue) + b;
          }
          else if(crispValue >= x3)
@@ -123,7 +124,7 @@ float fuzzyFunction::evalute()
          else if( (crispValue > x1) && (crispValue < x2))
          {
             float a = (upperValue / (x2 - x1));
-            float b = a*x1;
+            float b = -a*x1;
             ret = (a * crispValue) + b;
          }
          else if( (crispValue >= x2) && (crispValue <= x3))
@@ -133,7 +134,7 @@ float fuzzyFunction::evalute()
          else if( (crispValue > x3) && (crispValue < x4))
          {
             float a = (-upperValue / (x4 - x3));
-            float b = a*x4;
+            float b = -a*x4;
             ret = (a * crispValue) + b;
          }
          else if(crispValue >= x4)
@@ -143,7 +144,7 @@ float fuzzyFunction::evalute()
       }
       break;
    }
-   
+   //printf("Function: %.3f\n",ret);
    return(ret);
 }
 
