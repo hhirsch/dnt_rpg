@@ -4,11 +4,12 @@
 /***************************************************************
  *                           Constructor                       *
  ***************************************************************/
-fuzzyVariable::fuzzyVariable()
+fuzzyVariable::fuzzyVariable(int func, int xa, int xb, int xc, int xd)
 {
    clearValue();
    next = NULL;
    previous = NULL;
+   function = new fuzzyFunction(func, xa, xb, xc, xd);
 }
 
 /***************************************************************
@@ -16,6 +17,7 @@ fuzzyVariable::fuzzyVariable()
  ***************************************************************/
 fuzzyVariable::~fuzzyVariable()
 {
+   delete(function);
    clearValue();
 }
 
@@ -25,6 +27,7 @@ fuzzyVariable::~fuzzyVariable()
 void fuzzyVariable::clearValue()
 {
    value = -1;
+   function->setLimit(1.0);
 }
 
 /***************************************************************
@@ -52,5 +55,6 @@ void fuzzyVariable::setValue(float val)
       /* Or another Formula */
       //value = (value+val) - (value*val);
    }
+   function->setLimit(1.0);
 }
 

@@ -1,12 +1,19 @@
 #ifndef _fuzzyvariable_h
 #define _fuzzyvariable_h
 
+#include "fuzzyfunction.h"
+
 /*! Fuzzy Variable (usually destiny one of a rule) */
 class fuzzyVariable
 {
    public:
-      /*! Constructor */
-      fuzzyVariable();
+      /*! Constructor 
+       * \param func -> fucntion type
+       * \param xa -> first used coordinate 
+       * \param xb -> second used coordinate
+       * \param xc -> third used coordinate
+       * \param xd -> forth used coordinate */
+      fuzzyVariable(int func, int xa, int xb, int xc, int xd);
       /*! Destructor */
       ~fuzzyVariable();
 
@@ -23,7 +30,8 @@ class fuzzyVariable
       fuzzyVariable* previous;
       
    private:
-      float value; /**< value of the variable */
+      float value;             /**< value of the variable */
+      fuzzyFunction* function; /**< function of the variable */
 };
 
 #endif

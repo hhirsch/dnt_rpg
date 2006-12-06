@@ -14,6 +14,7 @@ fuzzyFunction::fuzzyFunction(int func, int xa, int xb, int xc, int xd)
    next = NULL;
    previous = NULL;
    crispValue = -1;
+   upperValue = 1;
 }
 
 /***************************************************************
@@ -31,6 +32,15 @@ void fuzzyFunction::setCrispValue(float crisp)
 {
    crispValue = crisp;
 }
+
+/***************************************************************
+ *                             setLimit                        *
+ ***************************************************************/
+void fuzzyFunction::setLimit(float value)
+{
+   upperValue = value;
+}
+
 
 /***************************************************************
  *                             evalute                         *

@@ -27,8 +27,14 @@ class fuzzy
                                   int xa, int xb, int xc, int xd);
 
        /*! Add variable to the fuzzy class
+        * \param func -> function type
+        * \param xa -> first used coordinate 
+        * \param xb -> second used coordinate
+        * \param xc -> third used coordinate
+        * \param xd -> forth used coordinate
         * \return -> pointer to the variable created */
-       fuzzyVariable* addVariable();
+       fuzzyVariable* addVariable(int functionType, 
+                                  int xa, int xb, int xc, int xd);
 
        /*! Add Rule to the fuzzy class 
         * \param numberOfOperators -> numer of Operators in the Rule

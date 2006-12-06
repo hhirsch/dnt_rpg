@@ -31,6 +31,10 @@ class fuzzyFunction
        * \return value of the function */
       float evalute();
 
+      /*! Set the Upper Value of the function
+       * \param value -> limit value to set */
+      void setLimit(float value);
+
       fuzzyFunction* next;      /**< Next Fuzzy Rule on List */
       fuzzyFunction* previous;  /**< Previous Fuzzy on List */
 
@@ -41,6 +45,7 @@ class fuzzyFunction
             x3,             /**< Third Used Coordinate */
             x4;             /**< Forth Used Coordinate */   
       float crispValue;     /**< Actual Crisp Value */
+      float upperValue;     /**< Actual Upper Value */
 };
 
 

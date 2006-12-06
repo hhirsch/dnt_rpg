@@ -61,9 +61,10 @@ fuzzy::~fuzzy()
 /***************************************************************
  *                           addVariable                       *
  ***************************************************************/
-fuzzyVariable* fuzzy::addVariable()
+fuzzyVariable* fuzzy::addVariable(int functionType, 
+                                  int xa, int xb, int xc, int xd)
 {
-   fuzzyVariable* fv = new(fuzzyVariable);
+   fuzzyVariable* fv = new fuzzyVariable(functionType, xa, xb, xc, xd);
    if(variables)
    {
       fv->next = variables->next;
