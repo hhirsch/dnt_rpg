@@ -59,7 +59,7 @@ void briefCases::draw()
          srand(SDL_GetTicks());
          cases[i].x = (rand()/(double)RAND_MAX) *  384 + 74;
          cases[i].z = (rand()/(double)RAND_MAX) *  448;
-         cases[i].value = (rand() % 100) +1;
+         cases[i].value = (rand() % MAX_VALUE) + SUM_VALUE;
          cases[i].owned = false;
          cases[i].delivered = false;
       }

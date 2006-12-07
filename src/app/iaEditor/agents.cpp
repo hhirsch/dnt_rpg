@@ -1182,7 +1182,7 @@ void agents::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       {
          srand(SDL_GetTicks());
          brief->insertBriefCase(mouseX, mouseZ, obstacleOrientation, 
-                                (rand() % 1800 +200));
+                                (rand() % MAX_VALUE + SUM_VALUE));
          while(mButton & SDL_BUTTON(1))
          {
             //Wait for Mouse Button Release

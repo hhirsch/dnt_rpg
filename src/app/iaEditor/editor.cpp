@@ -321,13 +321,13 @@ void editor::draw()
 
 #endif
 
-   /* Draw Particles */
+   /* Draw Particles 
    if(enableParticles)
    {
       glPushMatrix();
          particleSystem->actualizeAll(0,0,visibleMatrix);
       glPopMatrix();
-   }
+   }*/
 
    /* Draw GUI */
    gui->draw(proj, modl, viewPort);

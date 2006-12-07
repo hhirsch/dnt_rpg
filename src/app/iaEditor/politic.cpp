@@ -3,6 +3,9 @@
 #include <SDL/SDL.h>
 #include <math.h>
 
+#define MAX_TIME_WITHOUT_STEAL 500000
+#define MAX_AVARICE            500
+
 /**********************************************************************
  *                           Constructor                              *
  **********************************************************************/
@@ -18,6 +21,112 @@ politic::politic(int* score):potentAgent(false)
    lastWork = 0;
    busted = false;
    groupScore = score;
+   lastSteal = SDL_GetTicks();
+   srand(SDL_GetTicks());
+   avarice = rand() % MAX_AVARICE;
+   fuzzyInit();
+}
+
+/**********************************************************************
+ *                            fuzzyInit                               *
+ **********************************************************************/
+void politic::fuzzyInit()
+{
+   fuzzyRule* tmpRule;
+   fuzzyVariable* take;
+   fuzzyVariable* maybeTake;
+   fuzzyVariable* notTake;
+   
+   fuzzyFunction *muchAvarice,
+                 *normalAvarice,
+                 *fewAvarice;
+
+   /* Add Variables */
+   notTake = fuzzyLogic.addVariable(FUZZY_FUNCTION_INVERTED_STEP,
+                                    0.2, 0.3, 0.0, 0.0);
+   maybeTake = fuzzyLogic.addVariable(FUZZY_FUNCTION_TRAPEZOIDAL,
+                                      0.2,0.3,0.7,0.8);
+   take = fuzzyLogic.addVariable(FUZZY_FUNCTION_STEP,0.7,0.8,0.0,0.0);
+   
+   /* Add Functions */
+   fewMoney = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
+                                     0.2,0.3,0.0,0.0);
+   normalMoney = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRAPEZOIDAL,
+                                        0.2,0.3,0.7,0.8);
+   muchMoney = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.7,0.8,0.0,0.0);
+   fewTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
+                                    0.2,0.4,0.0,0.0);
+   normalTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRIANGULAR,
+                                       0.2,0.4,0.6,0.0);
+   muchTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.6,0.8,0.0,0.0);
+   fewAvarice = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
+                                       0.3,0.5,0.0,0.0);
+   normalAvarice = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRAPEZOIDAL,
+                                        0.3,0.5,0.6,0.8);
+   muchAvarice = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.6,0.8,0.0,0.0);
+
+   /* Add Rules */
+
+    /* Much Time -> take */
+   tmpRule = fuzzyLogic.addRule(1);
+   tmpRule->addVariable(take);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, muchTime);
+
+    /* Much Money -> take */
+   tmpRule = fuzzyLogic.addRule(1);
+   tmpRule->addVariable(take);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, muchMoney);
+
+    /* Much Avarice AND few Money -> maybe take */
+   tmpRule = fuzzyLogic.addRule(2);
+   tmpRule->addVariable(maybeTake);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, muchAvarice);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, fewMoney);
+
+    /* Much Avarice AND  Not Few Money -> take*/
+   tmpRule = fuzzyLogic.addRule(2);
+   tmpRule->addVariable(take);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, muchAvarice);
+   tmpRule->addMember(FUZZY_OPERATOR_AND_NOT, fewMoney);
+
+    /* Normal Avarice AND Normal Time AND ! Few Money -> take*/
+   tmpRule = fuzzyLogic.addRule(3);
+   tmpRule->addVariable(take);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, normalAvarice);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, normalTime);
+   tmpRule->addMember(FUZZY_OPERATOR_AND_NOT, fewMoney);
+
+    /* Normal Avarice AND normal Time AND Few Money -> maybe take*/
+   tmpRule = fuzzyLogic.addRule(3);
+   tmpRule->addVariable(maybeTake);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, normalAvarice);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, normalTime);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, fewMoney);
+
+    /* Normal Avarice AND few time AND few MOney -> notTake */
+   tmpRule = fuzzyLogic.addRule(3);
+   tmpRule->addVariable(notTake);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, normalAvarice);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, fewTime);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, fewMoney);
+
+   /* Normal Avarice AND few time AND normal MOney -> maybeTake */
+   tmpRule = fuzzyLogic.addRule(3);
+   tmpRule->addVariable(maybeTake);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, normalAvarice);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, fewTime);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, normalMoney);
+
+    /* few Avarice AND ! much time -> notTake */
+   tmpRule = fuzzyLogic.addRule(2);
+   tmpRule->addVariable(notTake);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, fewAvarice);
+   tmpRule->addMember(FUZZY_OPERATOR_AND_NOT, muchTime);
+
+   /* Set Fixed Values of Fixed Functions */
+   muchAvarice->setCrispValue(avarice / (float)MAX_AVARICE);
+   normalAvarice->setCrispValue(avarice / (float)MAX_AVARICE);
+   fewAvarice->setCrispValue(avarice / (float)MAX_AVARICE);
 }
 
 /**********************************************************************
@@ -103,6 +212,7 @@ void politic::actualizeMachineAndPosition(bool workTime)
       brief->delivered = true;
       *groupScore += brief->value;
       brief = NULL;
+      lastSteal = SDL_GetTicks();
       srand(SDL_GetTicks());
       state->nextState(SDL_GetTicks());
       x = (rand()/(double)RAND_MAX) *  384 + 74;
@@ -184,10 +294,37 @@ briefCase* politic::currentBriefCase()
  **********************************************************************/
 void politic::setBriefCase(briefCase* br)
 {
-   brief = br;
-   if(brief)
+   if(br)
    {
-      brief->owned = true;
+      /* Verify if will take in Fuzzy Logic */
+      float percValue = (float) ((float)br->value / 
+                                 (float)(MAX_VALUE+SUM_VALUE));
+      muchMoney->setCrispValue(percValue); 
+      normalMoney->setCrispValue(percValue);
+      fewMoney->setCrispValue(percValue);
+      float percTime = (float) ((float)(SDL_GetTicks() - lastSteal)  / 
+                                (float)MAX_VALUE);
+      if(percTime > 1)
+      {
+         percTime = 1.0;
+      }
+      muchTime->setCrispValue(percTime);
+      normalTime->setCrispValue(percTime); 
+      fewTime->setCrispValue(percTime);
+      
+      fuzzyLogic.evalute();
+
+      float result = fuzzyLogic.defuzzyfication();
+
+      if(result >= 0.7)
+      {
+         brief = br;
+         brief->owned = true;
+      }
+      else
+      {
+         //TODO Do Any Animation to sknow this!
+      }
    }
 }
 

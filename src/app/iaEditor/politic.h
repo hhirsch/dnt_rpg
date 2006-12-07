@@ -2,6 +2,7 @@
 #define _politc_h
 
 #include "../../ia/potentAgent.h"
+#include "../../ia/fuzzy.h"
 #include "states.h"
 #include "briefcase.h"
 
@@ -35,7 +36,7 @@ class politic: public potentAgent
      void setBriefCase(briefCase* br);
 
      /*! Define Rogue Group Area (where delivers briefcases) */
-     void setBaseArea(int group, GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2);
+     void setBaseArea(int group, GLfloat x1,GLfloat z1, GLfloat x2, GLfloat z2);
 
      /*! Set Congress Center Point */
      void setCongress(GLfloat x, GLfloat z);
@@ -53,11 +54,15 @@ class politic: public potentAgent
 
      int getGroup(){return(rogueGroup);};
 
+     void fuzzyInit();
+
      bool busted;             /**< If agent is busted or not */
      
    private:
      int rogueGroup;          /**< Number of the rogue group */
      int lastWork;            /**< Aditional Timer */
+     int avarice;             /**< Avarice of the Politic */
+     GLuint lastSteal;        /**< Last Time when he steals something */
      stateMachine* state;     /**< State Machine */
      briefCase* brief;        /**< BriefCase owned */
 
@@ -72,7 +77,15 @@ class politic: public potentAgent
      GLfloat federalX,        /**< Federal Police X center coordinate */
              federalZ;        /**< Federal Police Z center coordinate */
 
-   int* groupScore;         /**< Pointer to Group Score */
+     fuzzy fuzzyLogic;          /**< Fuzzy Logic Controler */
+     fuzzyFunction* muchMoney;  /**< Much Money Function */
+     fuzzyFunction* normalMoney;/**< Normal Money Function */
+     fuzzyFunction* fewMoney;   /**< Few Money Function */
+     fuzzyFunction* muchTime;   /**< Much Time Function */
+     fuzzyFunction* normalTime; /**< Normal Time Function */
+     fuzzyFunction* fewTime;    /**< Few Time Function */
+
+     int* groupScore;         /**< Pointer to Group Score */
 
 
 };

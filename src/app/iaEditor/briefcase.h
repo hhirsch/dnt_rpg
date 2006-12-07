@@ -6,6 +6,8 @@
 
 
 #define MAX_BRIEFCASES 30  /**< Max number of briefcases in the list */
+#define MAX_VALUE 10000    /**< Max Value of briefCase */
+#define SUM_VALUE 200      /**< Sum Value */
 
 /*! the briefCase class */
 class briefCase
