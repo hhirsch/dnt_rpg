@@ -1,0 +1,73 @@
+0.1CVS
+../data/texturas/info.png
+Loading NPC: %s
+Loading Character: %s
+Loading Map: %s
+Puting Windows on Screen
+Loading Particles
+Done!
+Door
+Nothing
+Map
+ShortCuts
+Press F1 for Help
+FPS:
+New
+Continue
+Save
+Load
+Exit
+Options
+Options
+Music Volume:
+Effects Volume:
+Language:
+Skill
+Total Free Points:
+Points:
+Cost:
+Confirm
+Cancel
+Attributes
+Roll
+Clear
+Strength
+Dexterity
+Constitution
+Intelligence
+Wisdow
+Charism
+Attribute Description
+Tendency & Alignment
+Race
+Race Description
+Race Characteristics
+Race Modifiers:
+No Modifiers.
+Race Skills:
+No Skills.
+Race Feats:
+No Feats.
+rolls initiative:
+No more enemies.
+New Round
+Error: No Characters!
+attacks
+is dead!
+turn.
+Exit Battle Mode.
+Surprise Attack Turn.
+No NPCs in the area.
+Invalid Feat
+Hit for
+Critical Hit!
+Miss.
+Critical Miss!
+points.
+Not Enough Points to Use!
+../data/skills/Ingles/
+../data/feats/Ingles/
+../data/alignment/Ingles/
+../data/races/Ingles/
+What the HEll!! Square Map Out of bounds!\n
+Argh! Can't init SDL!\n

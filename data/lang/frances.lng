@@ -1,0 +1,73 @@
+0.1CVS
+../data/texturas/info.png
+Chargement NPC: %s
+Chargement Personage: %s
+Chargement Carte: %s
+Chargement Fenêtres
+Chargement Particules
+Fait!
+Porte
+Rien
+Carte
+Raccourcis
+Serrez F1 pour l'aide
+FPS:
+Nouveau
+Continue
+Registrer
+Charger
+Sortir
+Options
+Options
+Volume de Musique:
+Volume d'Effets:
+Langue:
+Compétences
+Points Libres :
+Points:
+Coût:
+Confirmez
+Annuler
+Caractéristiques
+Rouler
+Éclaircir
+Force
+Dextérité
+Constitution
+Intelligence
+Sagesse
+Charisme
+Description de Caractéristique
+Alignement
+Race
+Description
+Caractéristiques
+Modificateurs Raciales:
+Aucuns Modificateurs.
+Compétences Raciales:
+Aucunes Compétences.
+Dons Raciales:
+Aucuns Dons.
+roule l'initiative:
+Plus d'ennemis.
+Nouveau Rond
+Erreur: aucuns combattants!
+attaque
+est mort!
+tour.
+Sortir de le mode de bataille.
+Tour d'attaque surprise.
+Aucun NPCs dans le secteur.
+Inadmissible!
+Coup pour
+Coup Critique!
+Manque.
+Manque Critique!
+points.
+Pas de points à employer!
+../data/skills/Ingles/
+../data/feats/Ingles/
+../data/alignment/Ingles/
+../data/races/Ingles/
+Argh! Carte hors des limites!\n
+Mon Dieu! Ne peut pas init SDL\n

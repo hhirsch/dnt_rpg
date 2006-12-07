@@ -1,0 +1,73 @@
+0.1CVS
+../data/texturas/infoPort.png
+Cargando NPC: %s
+Cargando Personaje: %s
+Cargando Mapa: %s
+Cargando Ventanas
+Cargando Partículas
+Hecho!
+Puerta
+Nada
+Mapa
+Atajos
+Presione F1 para Ayuda
+FPS:
+Nuevo
+Volver
+Salvar
+Cargar
+Salir
+Opciones
+Opciones
+Volumen de Música:
+Volumen de Efectos:
+Lengua:
+Habilidad
+Puntos Libres:
+Puntos:
+Coste:
+Aceptar
+Cancelar
+Características
+Arrollar
+Limpiar
+Fuerza
+Destreza
+Constituición
+Inteligencia
+Sabiduría
+Carisma
+Descripción de la Característica
+Alineamiento
+Raza
+Descripción de la Raza
+Características de la Raza
+Modificadores de la Raza:
+Sin Modificadores.
+Habilidades de la Raza:
+Sin Habilidades.
+Dotes de Raza:
+Sin Dotes.
+juega iniciativa:
+No más enemigos.
+Nuevo Round
+Error: Ningún Personaje!
+ataca
+estás muerto!
+turno.
+Sale del modo de Batalla.
+Turno de golpe sorpresa.
+Sin NPCs en la área.
+Habilidad Inválida
+Golpea en
+Golpe Crítico!
+Falla.
+Falla Crítica!
+puntos.
+Puntos no suficientes!
+../data/skills/Ingles/
+../data/feats/Ingles/
+../data/alignment/Ingles/
+../data/races/Ingles/
+Argh! Mapa fuera de los límites!\n
+Argh! No puedo iniciar SDL!\n

@@ -1,0 +1,73 @@
+0.1CVS
+../data/texturas/infoPort.png
+Carregando NPC: %s
+Carregando Personagem: %s
+Carregando Mapa: %s
+Colocando Janelas na Tela
+Carregando Partículas
+Pronto!
+Porta
+Nada
+Mapa
+Atalhos
+Pressione F1 para Ajuda
+FPS:
+Novo
+Continuar
+Salvar
+Carregar
+Sair
+Opções
+Opções
+Volume da Música:
+Volume dos Efeitos:
+Língua:
+Perícias
+Pontos Livres:
+Pontos:
+Custo:
+Confirmar
+Cancelar
+Atributos
+Rolar
+Limpar
+Força
+Destreza
+Constituição
+Inteligência
+Sabedoria
+Carisma
+Descrição do Atributo
+Alinhamento & Tendência
+Raça
+Descrição da Raça
+Características da Raça
+Modificadores da Raça:
+Sem Modificadores.
+Perícias da Raça:
+Sem perícias.
+Habilidades da Raça:
+Sem Habilidades Especiais.
+rola iniciativa:
+Sem inimigos.
+Novo Turno
+Erro: Sem Personagens!
+ataca
+está morta!
+turno.
+Sai do Modo de Luta.
+Turno de ataque surpresa.
+Sem NPCs na área.
+Habilidade Inválida
+Acertou em
+Acerto Crítico!
+Falha.
+Falha Crítica!
+pontos.
+Pontos insuficientes para utilizar!
+../data/skills/Portugues/
+../data/feats/Portugues/
+../data/alignment/Portugues/
+../data/races/Portugues/
+Argh! Mapa fora dos limites!\n
+Oxi! Não consegui iniciar o SDL!\n
