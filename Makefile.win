@@ -5,9 +5,9 @@ CPP  = g++.exe
 CC   = gcc.exe
 WINDRES = windres.exe
 RES  = 
-OBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/ia/ai.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/particle/wave.o $(RES)
-LINKOBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/ia/ai.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/particle/wave.o $(RES)
-LIBS =  -L"C:/DevCpp/lib" -mwindows -g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_mixer -lSDL_image -lcal3d   
+OBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/classes/align.o src/engine/alignwindow.o src/engine/camera.o src/engine/collision.o src/ia/astar.o src/particle/wave.o src/ia/agent.o src/ia/pattAgent.o src/ia/potentAgent.o src/ia/fuzzy.o src/ia/fuzzyfunction.o src/ia/fuzzyrule.o src/ia/fuzzyvariable.o src/particle/grass.o src/classes/race.o src/engine/racewindow.o src/sound/ogg_stream.o src/sound/sndfx.o src/gui/messages.o $(RES)
+LINKOBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/classes/align.o src/engine/alignwindow.o src/engine/camera.o src/engine/collision.o src/ia/astar.o src/particle/wave.o src/ia/agent.o src/ia/pattAgent.o src/ia/potentAgent.o src/ia/fuzzy.o src/ia/fuzzyfunction.o src/ia/fuzzyrule.o src/ia/fuzzyvariable.o src/particle/grass.o src/classes/race.o src/engine/racewindow.o src/sound/ogg_stream.o src/sound/sndfx.o src/gui/messages.o $(RES)
+LIBS =  -L"C:/DevCpp/lib" -mwindows -g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_image -lcal3d -logg -lvorbis -lvorbisfile -lopenal32   
 INCS =  -I"C:/DevCpp/include" 
 CXXINCS =  -I"C:/DevCpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/DevCpp/include/c++/3.4.2/backward"  -I"C:/DevCpp/include/c++/3.4.2/mingw32"  -I"C:/DevCpp/include/c++/3.4.2"  -I"C:/DevCpp/include" 
 BIN  = bin/DccNiTghtmare.exe
@@ -94,9 +94,6 @@ src/gui/quadtexto.o: src/gui/quadtexto.cpp
 
 src/gui/seltexto.o: src/gui/seltexto.cpp
 	$(CPP) -c src/gui/seltexto.cpp -o src/gui/seltexto.o $(CXXFLAGS)
-
-src/ia/ai.o: src/ia/ai.cpp
-	$(CPP) -c src/ia/ai.cpp -o src/ia/ai.o $(CXXFLAGS)
 
 src/map/map.o: src/map/map.cpp
 	$(CPP) -c src/map/map.cpp -o src/map/map.o $(CXXFLAGS)
@@ -194,5 +191,59 @@ src/engine/sun.o: src/engine/sun.cpp
 src/engine/attwindow.o: src/engine/attwindow.cpp
 	$(CPP) -c src/engine/attwindow.cpp -o src/engine/attwindow.o $(CXXFLAGS)
 
+src/classes/align.o: src/classes/align.cpp
+	$(CPP) -c src/classes/align.cpp -o src/classes/align.o $(CXXFLAGS)
+
+src/engine/alignwindow.o: src/engine/alignwindow.cpp
+	$(CPP) -c src/engine/alignwindow.cpp -o src/engine/alignwindow.o $(CXXFLAGS)
+
+src/engine/camera.o: src/engine/camera.cpp
+	$(CPP) -c src/engine/camera.cpp -o src/engine/camera.o $(CXXFLAGS)
+
+src/engine/collision.o: src/engine/collision.cpp
+	$(CPP) -c src/engine/collision.cpp -o src/engine/collision.o $(CXXFLAGS)
+
+src/ia/astar.o: src/ia/astar.cpp
+	$(CPP) -c src/ia/astar.cpp -o src/ia/astar.o $(CXXFLAGS)
+
 src/particle/wave.o: src/particle/wave.cpp
 	$(CPP) -c src/particle/wave.cpp -o src/particle/wave.o $(CXXFLAGS)
+
+src/ia/agent.o: src/ia/agent.cpp
+	$(CPP) -c src/ia/agent.cpp -o src/ia/agent.o $(CXXFLAGS)
+
+src/ia/pattAgent.o: src/ia/pattAgent.cpp
+	$(CPP) -c src/ia/pattAgent.cpp -o src/ia/pattAgent.o $(CXXFLAGS)
+
+src/ia/potentAgent.o: src/ia/potentAgent.cpp
+	$(CPP) -c src/ia/potentAgent.cpp -o src/ia/potentAgent.o $(CXXFLAGS)
+
+src/ia/fuzzy.o: src/ia/fuzzy.cpp
+	$(CPP) -c src/ia/fuzzy.cpp -o src/ia/fuzzy.o $(CXXFLAGS)
+
+src/ia/fuzzyfunction.o: src/ia/fuzzyfunction.cpp
+	$(CPP) -c src/ia/fuzzyfunction.cpp -o src/ia/fuzzyfunction.o $(CXXFLAGS)
+
+src/ia/fuzzyrule.o: src/ia/fuzzyrule.cpp
+	$(CPP) -c src/ia/fuzzyrule.cpp -o src/ia/fuzzyrule.o $(CXXFLAGS)
+
+src/ia/fuzzyvariable.o: src/ia/fuzzyvariable.cpp
+	$(CPP) -c src/ia/fuzzyvariable.cpp -o src/ia/fuzzyvariable.o $(CXXFLAGS)
+
+src/particle/grass.o: src/particle/grass.cpp
+	$(CPP) -c src/particle/grass.cpp -o src/particle/grass.o $(CXXFLAGS)
+
+src/classes/race.o: src/classes/race.cpp
+	$(CPP) -c src/classes/race.cpp -o src/classes/race.o $(CXXFLAGS)
+
+src/engine/racewindow.o: src/engine/racewindow.cpp
+	$(CPP) -c src/engine/racewindow.cpp -o src/engine/racewindow.o $(CXXFLAGS)
+
+src/sound/ogg_stream.o: src/sound/ogg_stream.cpp
+	$(CPP) -c src/sound/ogg_stream.cpp -o src/sound/ogg_stream.o $(CXXFLAGS)
+
+src/sound/sndfx.o: src/sound/sndfx.cpp
+	$(CPP) -c src/sound/sndfx.cpp -o src/sound/sndfx.o $(CXXFLAGS)
+
+src/gui/messages.o: src/gui/messages.cpp
+	$(CPP) -c src/gui/messages.cpp -o src/gui/messages.o $(CXXFLAGS)
