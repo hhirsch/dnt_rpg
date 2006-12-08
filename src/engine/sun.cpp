@@ -43,11 +43,11 @@ void sun::colorOnHour()
    {
       if(rotation <= 90)
       {
-         color = (rotation / 90) * 0.8;
+         color = ((rotation / 90) * 0.5)+0.5;
       }
       else
       {
-         color = ((180 - rotation) / 90) * 0.8;
+         color = (((180 - rotation) / 90) * 0.5)+0.5;
       }
       actualColor[0] = color;
       actualColor[1] = color;
