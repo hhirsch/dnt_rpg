@@ -56,6 +56,9 @@ class politic: public potentAgent
 
      void fuzzyInit();
 
+     float getTimePercent();
+     float getAvaricePercent();
+
      bool busted;             /**< If agent is busted or not */
      
    private:

@@ -2,29 +2,31 @@
 |                Version 0.1                   |
 ================================================
  - Fight System;
- - Particle System;
+ - Particles System;
  - Particles (blood, fire, smoke, waterfall, 
               snow);
+ - Dynamic Grass;
+ - Fuzzy Logic;
  - Dialogs with NPCs;
  - Some AI;
  - Rules System;
  - Character Navigation by Mouse;
- - Full Character Creation;
+ - Full Implemented Rules for Character Creation;
  - Dynamic Lights & Fog per map;
  - Engine Optimization;
  - Better Sky;
+ - Uses OpenAL for Audio;
  - New Animations;
  - New Models;
  - New Musics and Sound Effects;
  - New Maps;
- - Initial Story on Game;
  - Use some itens;
  - Use some weapons;
  - Inventory;
- - Ocult Realtime Surface Rendering;
  - GUI more smooth and functional;
- - Camera Full Rotation with Mouse;
+ - Camera Full Control by Mouse;
  - Camera follow active character on height;
+ - Doxygen Documentation for Code;
  - Minor Bugs fixes;
  
 ================================================

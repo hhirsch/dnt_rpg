@@ -1,6 +1,7 @@
 T 8X8
 # Made by DccNiTghtmare's MapEditor, v0.0.3
 PS ../data/mapas/poc2.map.par
+MUSICA ../data/music/musica12.ogg
 o ../data/models/objetos/armas/kalashnikov.dcc ../data/models/objetos/armas/kalashnikov.dcc
 o ../data/models/natural/stonewall.dcc ../data/models/natural/stonewall.dcc
 o Door ../data/models/objetos/geral/porta2.dcc

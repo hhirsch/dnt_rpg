@@ -8,7 +8,7 @@
 #include <SDL/SDL_image.h>
 
 part2::part2(float cX,float cY,float cZ, string fileName):
-                               particleSystem(fileName, PARTICLE_DRAW_GROUPS)
+                                  particleSystem(fileName, PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
    centerY = cY; 
@@ -55,10 +55,10 @@ void part2::drawSphereToList(int lats, int longs)
 
 void part2::Render(particle* part)
 {
+   /*GLfloat emission[3] = {part->R, part->G, part->B};
+   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission );
    glColor3f(part->R,part->G,part->B);
-   glVertex3f(part->posX,part->posY,part->posZ);
-   glColor3f(part->prvR,part->prvG,part->prvB);
-   glVertex3f(part->prvX,part->prvY,part->prvZ);
+   glVertex3f(part->posX,part->posY,part->posZ);*/
 }
 
 void part2::InitRender()
@@ -104,6 +104,7 @@ void part2::InitRender()
 
 void part2::EndRender()
 {
+   glDisable(GL_COLOR_MATERIAL);
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);

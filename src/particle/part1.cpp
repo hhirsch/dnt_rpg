@@ -23,17 +23,21 @@ part1::~part1()
 
 void part1::Render(particle* part)
 {
+    
+   glColor3f(part->R, part->G, part->B);
+   glVertex3f(part->posX, part->posY, part->posZ);
 }
 
 void part1::InitRender()
 {
-   glDisable(GL_LIGHTING);
+  glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+  glEnable(GL_COLOR_MATERIAL);
+   //glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
    glDepthMask(GL_FALSE);
    glEnable(GL_CULL_FACE);
 
-       
    float MaxPointSize = 0;
    float quadratic[] =  { 0.01f, 0.01f, 0.0f };
 
@@ -49,7 +53,7 @@ void part1::InitRender()
       PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
       PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
    
-      glPointSize(4);
+      glPointSize(16);
 
       glBindTexture(GL_TEXTURE_2D, partTexture);
       glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
@@ -62,10 +66,13 @@ void part1::InitRender()
       /*glEnable(GL_POINT_SMOOTH);
       glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);*/
    }
+   //glBegin(GL_POINTS);
 }
 
 void part1::EndRender()
 {
+   //glEnd();
+   glDisable(GL_COLOR_MATERIAL);
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);

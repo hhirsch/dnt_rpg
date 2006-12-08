@@ -289,6 +289,24 @@ briefCase* politic::currentBriefCase()
    return(brief);
 }
 
+float politic::getTimePercent()
+{
+   float result = (float) ((float)(SDL_GetTicks() - lastSteal) 
+                          / (float)MAX_VALUE);
+
+   if(result > 1)
+   {
+      result = 1.0;
+   }
+   return(result);
+}
+
+float politic::getAvaricePercent()
+{
+   return(avarice / (float)MAX_AVARICE);
+}
+
+
 /**********************************************************************
  *                           setBriefCase                             *
  **********************************************************************/
@@ -302,8 +320,7 @@ void politic::setBriefCase(briefCase* br)
       muchMoney->setCrispValue(percValue); 
       normalMoney->setCrispValue(percValue);
       fewMoney->setCrispValue(percValue);
-      float percTime = (float) ((float)(SDL_GetTicks() - lastSteal)  / 
-                                (float)MAX_VALUE);
+      float percTime = getTimePercent();
       if(percTime > 1)
       {
          percTime = 1.0;

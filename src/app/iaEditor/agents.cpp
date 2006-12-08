@@ -329,7 +329,9 @@ void agents::draw()
    }
 
    politic* polAg = politics;
+   GLfloat emission[3] = {0.0,0.0,0.0};
    /* Politic Agents */
+   glEnable(GL_COLOR_MATERIAL);
    for(aux = 0; aux < totalPolitics; aux++)
    {
       polAg->getPosition(x,z);
@@ -339,10 +341,18 @@ void agents::draw()
       {
          glRotatef(polAg->orientationValue(),0,1,0);
       }
+      emission[0] = polAg->getTimePercent();
+      emission[2] = polAg->getAvaricePercent();
+      glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
       drawPolitic();
+      emission[0] = 0.0;
+      emission[1] = 0.0;
+      emission[2] = 0.0;
+      glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
       glPopMatrix();
       polAg = (politic*)polAg->next;
    }
+   glDisable(GL_COLOR_MATERIAL);
 
    pf* pfAg = pfs;
    /* Pf Agents */
@@ -442,9 +452,7 @@ void agents::drawPattAgent()
  ********************************************************************/
 void agents::drawPolitic()
 {
-   glEnable(GL_COLOR_MATERIAL);
    glmDrawLists(politicModel);
-   glDisable(GL_COLOR_MATERIAL);
 }
 
 /********************************************************************
