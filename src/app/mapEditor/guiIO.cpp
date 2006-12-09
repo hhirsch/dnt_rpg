@@ -369,26 +369,42 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          /*  Navigation Buttons  */
          if(object == (Tobjeto*) upButton)
          {
-            gameCamera.centerX -= 4.0 * sin(deg2Rad(gameCamera.getPhi()));
-            gameCamera.centerZ -= 4.0 * cos(deg2Rad(gameCamera.getPhi()));
+            gameCamera.actualizeCamera(gameCamera.getCenterX() -
+                                       4.0 * sin(deg2Rad(gameCamera.getPhi())),
+                                       gameCamera.getCenterY(),
+                                       gameCamera.getCenterZ() - 
+                                       4.0 * cos(deg2Rad(gameCamera.getPhi())), 
+                                       0.0);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) downButton)
          {
-            gameCamera.centerX += 4.0 * sin(deg2Rad(gameCamera.getPhi()));
-            gameCamera.centerZ += 4.0 * cos(deg2Rad(gameCamera.getPhi()));
+            gameCamera.actualizeCamera(gameCamera.getCenterX() +
+                                       4.0 * sin(deg2Rad(gameCamera.getPhi())),
+                                       gameCamera.getCenterY(),
+                                       gameCamera.getCenterZ() + 
+                                       4.0 * cos(deg2Rad(gameCamera.getPhi())), 
+                                       0.0);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) leftButton)
          {
-            gameCamera.centerX -= 4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90));
-            gameCamera.centerZ -= 4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90));
+            gameCamera.actualizeCamera(gameCamera.getCenterX() -
+                             4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                       gameCamera.getCenterY(),
+                                       gameCamera.getCenterZ() - 
+                             4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                       0.0);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) rightButton)
          {
-            gameCamera.centerX += 4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90));
-            gameCamera.centerZ += 4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90));
+            gameCamera.actualizeCamera(gameCamera.getCenterX() +
+                             4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                       gameCamera.getCenterY(),
+                                       gameCamera.getCenterZ() +
+                             4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                       0.0);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) rotUpButton)

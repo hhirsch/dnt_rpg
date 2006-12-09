@@ -260,21 +260,34 @@ void editor::verifyPosition()
 {
    if(mapOpened)
    {
-       if(gui->gameCamera.centerX > ((map->x * SQUARESIZE)+20))
+       if(gui->gameCamera.getCenterX() > ((map->x * SQUARESIZE)+20))
        {
-          gui->gameCamera.centerX = ((map->x * SQUARESIZE)+20);
+          gui->gameCamera.actualizeCamera( ((map->x * SQUARESIZE)+20),
+                                          gui->gameCamera.getCenterY(),
+                                          gui->gameCamera.getCenterZ(), 
+                                          0.0);
        }
-       else if(gui->gameCamera.centerX < -20)
+       else if(gui->gameCamera.getCenterX() < -20)
        {
-          gui->gameCamera.centerX = -20;
+          gui->gameCamera.actualizeCamera( -20 ,
+                                          gui->gameCamera.getCenterY(),
+                                          gui->gameCamera.getCenterZ(), 
+                                          0.0);
        }
-       if(gui->gameCamera.centerZ > ((map->z * SQUARESIZE)+20))
+       if(gui->gameCamera.getCenterZ() > ((map->z * SQUARESIZE)+20))
        {
-          gui->gameCamera.centerZ = ((map->z * SQUARESIZE)+20);
+          gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
+                                          gui->gameCamera.getCenterY(),
+                                          ((map->z * SQUARESIZE)+20), 
+                                          0.0);
        }
-       else if(gui->gameCamera.centerZ < -20)
+       else if(gui->gameCamera.getCenterZ() < -20)
        {
-          gui->gameCamera.centerZ = -20;
+          gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
+                                          gui->gameCamera.getCenterY(),
+                                          -20, 
+                                          0.0);
+
        }
    }
 }

@@ -274,7 +274,6 @@ class engine
       bool canMove;               /**< can move more in the round? */
       int attackFeat;             /**< attack feat to use. */
 
-      waves* waveTest;
       part2* effect;
 
       sun* gameSun;               /**< The internal sun reference */

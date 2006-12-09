@@ -28,14 +28,15 @@ class camera
       GLfloat getTheta();
       GLfloat getDeltaY();
       GLfloat getD();
-
-
-
-      GLfloat centerX,                  /**< Camera Central X Position */
-              centerY,                  /**< Camera Central Y Position */
-              centerZ;                  /**< Camera Central Z Position */
+      
+      GLfloat getCenterX();
+      GLfloat getCenterY();
+      GLfloat getCenterZ();
 
       void lookAt();
+
+      void actualizeCamera(GLfloat characterX, GLfloat characterY, 
+                           GLfloat characterZ, GLfloat characterOrientation);
 
 
    private:
@@ -43,9 +44,12 @@ class camera
       GLfloat phi;                      /**< Rotation to Sides*/
       GLfloat d;                        /**< Zoom */
       GLfloat cameraX,                  /**< Camera X Position */
-             cameraY,                   /**< Camera Y Position */
-             cameraZ;                   /**< Camera Z Position */
+              cameraY,                  /**< Camera Y Position */
+              cameraZ;                  /**< Camera Z Position */
       GLfloat deltaY;                   /**< Camera DeltaY */
+      GLfloat centerX,                  /**< Camera Central X Position */
+              centerY,                  /**< Camera Central Y Position */
+              centerZ;                  /**< Camera Central Z Position */
 
       bool middleMouse;                 /**< Middle Mouse Camera Control */  
       int prevX,                        /**< Previous Mouse X position */

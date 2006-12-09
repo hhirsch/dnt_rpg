@@ -204,3 +204,26 @@ GLfloat camera::getDeltaY()
    return(deltaY);
 }
 
+GLfloat camera::getCenterX()
+{
+   return(centerX);
+}
+
+GLfloat camera::getCenterY()
+{
+   return(centerY);
+}
+
+GLfloat camera::getCenterZ()
+{
+   return(centerZ);
+}
+
+
+void camera::actualizeCamera(GLfloat characterX, GLfloat characterY, 
+                             GLfloat characterZ, GLfloat characterOrientation)
+{
+   centerX = characterX;
+   centerZ = characterZ;
+   //centerY = characterY;
+}
