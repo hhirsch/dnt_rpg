@@ -1,6 +1,8 @@
 #include "pf.h"
 #include <math.h>
 
+#define MAX_CORRUPT 200
+
 /*****************************************************************
  *                        Constructor                            *
  *****************************************************************/
@@ -11,6 +13,10 @@ pf::pf()
    state = new stateMachine(STATE_PATROL);
    target = NULL;
    potAg->defineConstants(0.5, 100000, 0.5);
+   lastPrison = SDL_GetTicks();
+   srand(SDL_GetTicks());
+   corrupt = rand() % MAX_CORRUPT;
+   fuzzyInit();
 }
 
 /*****************************************************************
@@ -21,6 +27,87 @@ pf::~pf()
    delete(patAg);
    delete(potAg);
    delete(state);
+}
+
+/*****************************************************************
+ *                          fuzzyInit                            *
+ *****************************************************************/
+void pf::fuzzyInit()
+{
+   fuzzyRule* tmpRule;
+   fuzzyVariable* take;
+   fuzzyVariable* maybeTake;
+   fuzzyVariable* notTake;
+   
+   fuzzyFunction *muchCorrupt,
+                 *normalCorrupt,
+                 *fewCorrupt;
+
+   /* Add Variables */
+   notTake = fuzzyLogic.addVariable(FUZZY_FUNCTION_INVERTED_STEP,
+                                    0.2, 0.4, 0.0, 0.0);
+   maybeTake = fuzzyLogic.addVariable(FUZZY_FUNCTION_TRAPEZOIDAL,
+                                      0.2,0.4,0.6,0.8);
+   take = fuzzyLogic.addVariable(FUZZY_FUNCTION_STEP,0.6,0.8,0.0,0.0);
+   
+   /* Add Functions */
+   fewMoney = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
+                                     0.2,0.3,0.0,0.0);
+   normalMoney = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRAPEZOIDAL,
+                                        0.2,0.3,0.7,0.8);
+   muchMoney = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.7,0.8,0.0,0.0);
+   fewTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
+                                    0.1,0.4,0.0,0.0);
+   normalTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRIANGULAR,
+                                       0.1,0.35,0.6,0.0);
+   muchTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.6,0.9,0.0,0.0);
+   fewCorrupt = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
+                                       0.3,0.5,0.0,0.0);
+   normalCorrupt = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRAPEZOIDAL,
+                                        0.3,0.5,0.6,0.8);
+   muchCorrupt = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.6,0.8,0.0,0.0);
+
+   /* Add Rules */
+
+    /* Much Time -> take */
+   tmpRule = fuzzyLogic.addRule(1);
+   tmpRule->addVariable(take);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, muchTime);
+
+    /* Much Corrupt AND ! much time -> not take */
+   tmpRule = fuzzyLogic.addRule(2);
+   tmpRule->addVariable(notTake);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, muchCorrupt);
+   tmpRule->addMember(FUZZY_OPERATOR_AND_NOT, muchTime);
+
+    /* Corrupt AND Not few time -> maybe take*/
+   tmpRule = fuzzyLogic.addRule(2);
+   tmpRule->addVariable(maybeTake);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, normalCorrupt);
+   tmpRule->addMember(FUZZY_OPERATOR_AND_NOT, fewTime);
+
+    /* Normal Corrupt AND few Time -> not take*/
+   tmpRule = fuzzyLogic.addRule(2);
+   tmpRule->addVariable(notTake);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, normalCorrupt);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, fewTime);
+
+    /* Few Corrupt AND much Money -> maybe take*/
+   tmpRule = fuzzyLogic.addRule(2);
+   tmpRule->addVariable(maybeTake);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, fewCorrupt);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, muchMoney);
+
+    /* Few Corrupt AND NOT much Money -> take */
+   tmpRule = fuzzyLogic.addRule(2);
+   tmpRule->addVariable(take);
+   tmpRule->addMember(FUZZY_OPERATOR_AND, fewCorrupt);
+   tmpRule->addMember(FUZZY_OPERATOR_AND_NOT, muchMoney);
+
+   /* Set Fixed Values of Fixed Functions */
+   muchCorrupt->setCrispValue(corrupt / (float)MAX_CORRUPT);
+   normalCorrupt->setCrispValue(corrupt / (float)MAX_CORRUPT);
+   fewCorrupt->setCrispValue(corrupt / (float)MAX_CORRUPT);
 }
 
 /*****************************************************************
@@ -146,6 +233,7 @@ void pf::actualizeMachineAndPosition()
       if( (x >= federalX-32) && ( x <= federalX+32) &&
           (z >= federalZ-32) && ( z <= federalZ+32))
       {
+         lastPrison = SDL_GetTicks();
          state->nextState(SDL_GetTicks());
          target->busted = false;
          target = NULL;
@@ -171,14 +259,64 @@ void pf::actualizeMachineAndPosition()
 }
 
 /*****************************************************************
+ *                         getTimePercent                        *
+ *****************************************************************/
+float pf::getTimePercent()
+{
+   float result = (float) ((float)(SDL_GetTicks() - lastPrison) 
+                          / (float)MAX_VALUE);
+
+   if(result > 1)
+   {
+      result = 1.0;
+   }
+   return(result);
+}
+
+float pf::getCorruptPercent()
+{
+   return(corrupt / (float)MAX_CORRUPT);
+}
+
+
+/*****************************************************************
  *                            setTarget                          *
  *****************************************************************/
 void pf::setTarget(politic* tg)
 {
-   target = tg;
-   if(target)
+   
+   if(tg)
    {
-      target->busted = true;
+      /* Fuzzy Logic to verify if will take the target */
+            /* Verify if will take in Fuzzy Logic */
+      float percValue = (float) ((float)tg->currentBriefCase()->value / 
+                                 (float)(MAX_VALUE+SUM_VALUE));
+      muchMoney->setCrispValue(percValue); 
+      normalMoney->setCrispValue(percValue);
+      fewMoney->setCrispValue(percValue);
+      float percTime = getTimePercent();
+      if(percTime > 1)
+      {
+         percTime = 1.0;
+      }
+      muchTime->setCrispValue(percTime);
+      normalTime->setCrispValue(percTime); 
+      fewTime->setCrispValue(percTime);
+      
+      fuzzyLogic.evalute();
+
+      float result = fuzzyLogic.defuzzyfication();
+      
+      if(result >= 0.7)
+      {
+         /* Take the Target */
+         target = tg;
+         target->busted = true;
+      }
+      else
+      {
+         /* TODO Animation when not take! */
+      }
    }
 }
 

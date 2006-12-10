@@ -3,6 +3,7 @@
 
 #include "../../ia/potentAgent.h"
 #include "../../ia/pattAgent.h"
+#include "../../ia/fuzzy.h"
 #include "states.h"
 #include "politic.h"
 
@@ -62,6 +63,9 @@ class pf
        * \return state */
       int getState();
 
+      float getTimePercent();
+      float getCorruptPercent();
+
 
       pattAgent* patAg;       /**< Pattern Agent */
       potentAgent* potAg;     /**< Potential Agent */
@@ -74,6 +78,21 @@ class pf
 
       GLfloat federalX,       /**< Federal Base X center coordinate */
               federalZ;       /**< Federal Base Z center coordinate */
+
+      int corrupt;            /**< How Corrupt is the Agent */
+      int lastPrison;         /**< Last time the agent capture some rogue */
+
+      fuzzy fuzzyLogic;           /**< Fuzzy Logic Controler */
+      fuzzyFunction* muchMoney;   /**< Much Money Function */
+      fuzzyFunction* normalMoney; /**< Normal Money Function */
+      fuzzyFunction* fewMoney;    /**< Few Money Function */
+      fuzzyFunction* muchTime;    /**< Much Time Function */
+      fuzzyFunction* normalTime;  /**< Normal Time Function */
+      fuzzyFunction* fewTime;     /**< Few Time Function */
+
+      /*! Init Fuzzy Logic Functions */
+      void fuzzyInit();
+      
 
 };
 

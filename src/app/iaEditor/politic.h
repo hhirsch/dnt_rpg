@@ -11,7 +11,7 @@
 #define INTERROGATION_TIME     2000 /**< Time Spent on Interrogation */
 #define PRETEND_TIME          40000 /**< Time Spent pretending */
 
-#define BUSTED_VALUE            500 /**< Value to spent when Busted! */
+#define BUSTED_VALUE           5000 /**< Value to spent when Busted! */
 
 
 /*! The politic Agent Class */

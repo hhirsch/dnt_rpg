@@ -345,14 +345,9 @@ void agents::draw()
       emission[2] = polAg->getAvaricePercent();
       glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
       drawPolitic();
-      emission[0] = 0.0;
-      emission[1] = 0.0;
-      emission[2] = 0.0;
-      glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
       glPopMatrix();
       polAg = (politic*)polAg->next;
    }
-   glDisable(GL_COLOR_MATERIAL);
 
    pf* pfAg = pfs;
    /* Pf Agents */
@@ -362,12 +357,21 @@ void agents::draw()
       glPushMatrix();
       glTranslatef(x ,0.0, z);
       glRotatef(pfAg->patAg->orientationValue(),0,1,0);
+      emission[0] = pfAg->getTimePercent();
+      emission[2] = pfAg->getCorruptPercent();
+      glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
       drawPf();
       glPopMatrix();
       pfAg->patAg->drawWayPoints();
       pfAg = (pf*)pfAg->next;
    }
 
+   emission[0] = 0.0;
+   emission[1] = 0.0;
+   emission[2] = 0.0;
+   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
+
+   glDisable(GL_COLOR_MATERIAL);
    glColor3f(1.0,1.0,1.0);
 
    drawTexture(goalTexture, goalX, goalZ, 2, 2);
@@ -1546,6 +1550,7 @@ string agents::loadState(string fileName)
       groupAdd = (gr - 1) % 4;
       addAgent(AGENT_TYPE_ROGUE, x, z, oriented == 1, 
                step, goalX, goalZ, sightDist, sightAngle);
+      SDL_Delay(20);
    }
 
    /* Gets All Police PF Agents */
@@ -1564,6 +1569,7 @@ string agents::loadState(string fileName)
          sscanf(aux.c_str(),"Way: %f %f", &x, &z);
          a->addWayPoint(x, z);
       }
+      SDL_Delay(20);
    }
 
    /* Define All Bases */
