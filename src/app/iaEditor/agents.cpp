@@ -228,13 +228,13 @@ void agents::actualize(Map* actualMap)
           (pfAg->getTarget() == NULL))
       {
          GLfloat x,z, sightD, sightA;
-         pfAg->getPosition(x, z);
-         pfAg->getSight(sightD, sightA);
-         if(!pfAg->setTarget( getPoliticWithCaseInArea(x+pfModel->x1-sightD,
+         politic* tmp = getPoliticWithCaseInArea(x+pfModel->x1-sightD,
                                                        z+pfModel->z1-sightD,
                                                        x+pfModel->x2+sightD,
-                                                       z+pfModel->z2+sightD)
-                            ))
+                                                       z+pfModel->z2+sightD);
+         pfAg->getPosition(x, z);
+         pfAg->getSight(sightD, sightA);
+         if( (!pfAg->setTarget( tmp)) && (tmp))
          {
             excFunc.addExclamation( tp3X[4], tp3Z[4]);
          }
