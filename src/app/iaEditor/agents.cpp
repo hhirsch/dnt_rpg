@@ -203,13 +203,13 @@ void agents::actualize(Map* actualMap)
           (polAg->currentBriefCase() == NULL))
       {
          GLfloat x,z, sightD, sightA;
+         polAg->getPosition(x, z);
+         polAg->getSight(sightD, sightA);
          briefCase* tmp = brief->briefCaseInArea(x+politicModel->x1-sightD,
                                                  z+politicModel->z1-sightD,
                                                  x+politicModel->x2+sightD,
                                                  z+politicModel->z2+sightD);
                                                     
-         polAg->getPosition(x, z);
-         polAg->getSight(sightD, sightA);
          if((!polAg->setBriefCase( tmp )) && (tmp))
          {
             excFunc.addExclamation( tmp->x, tmp->z);
@@ -228,12 +228,12 @@ void agents::actualize(Map* actualMap)
           (pfAg->getTarget() == NULL))
       {
          GLfloat x,z, sightD, sightA;
+         pfAg->getPosition(x, z);
+         pfAg->getSight(sightD, sightA);
          politic* tmp = getPoliticWithCaseInArea(x+pfModel->x1-sightD,
                                                        z+pfModel->z1-sightD,
                                                        x+pfModel->x2+sightD,
                                                        z+pfModel->z2+sightD);
-         pfAg->getPosition(x, z);
-         pfAg->getSight(sightD, sightA);
          if( (!pfAg->setTarget( tmp)) && (tmp))
          {
             excFunc.addExclamation( tp3X[4], tp3Z[4]);
