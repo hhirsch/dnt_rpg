@@ -57,10 +57,10 @@ void pf::fuzzyInit()
                                         0.2,0.3,0.7,0.8);
    muchMoney = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.7,0.8,0.0,0.0);
    fewTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
-                                    0.1,0.4,0.0,0.0);
+                                    0.1,0.5,0.0,0.0);
    normalTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRIANGULAR,
-                                       0.1,0.35,0.6,0.0);
-   muchTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.6,0.9,0.0,0.0);
+                                       0.1,0.5,0.9,0.0);
+   muchTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.5,0.9,0.0,0.0);
    fewCorrupt = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
                                        0.3,0.5,0.0,0.0);
    normalCorrupt = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRAPEZOIDAL,
@@ -307,7 +307,7 @@ bool pf::setTarget(politic* tg)
 
       float result = fuzzyLogic.defuzzyfication();
       
-      if(result >= 0.7)
+      if(result >= 0.65)
       {
          /* Take the Target */
          target = tg;

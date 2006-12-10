@@ -55,10 +55,10 @@ void politic::fuzzyInit()
                                         0.2,0.3,0.7,0.8);
    muchMoney = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.7,0.8,0.0,0.0);
    fewTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
-                                    0.2,0.4,0.0,0.0);
+                                    0.2,0.5,0.0,0.0);
    normalTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRIANGULAR,
-                                       0.2,0.4,0.6,0.0);
-   muchTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.6,0.8,0.0,0.0);
+                                       0.2,0.5,0.8,0.0);
+   muchTime = fuzzyLogic.addFunction(FUZZY_FUNCTION_STEP,0.5,0.8,0.0,0.0);
    fewAvarice = fuzzyLogic.addFunction(FUZZY_FUNCTION_INVERTED_STEP,
                                        0.3,0.5,0.0,0.0);
    normalAvarice = fuzzyLogic.addFunction(FUZZY_FUNCTION_TRAPEZOIDAL,
