@@ -2,6 +2,7 @@
 #define _guiIO_H
 
 #include "../../gui/farso.h"
+#include "../../engine/camera.h"
 
 /* Return Constants */
 #define GUI_IO_NOTHING              0
@@ -43,7 +44,7 @@ class guiIO
       void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       /*! Redefine Camera Position */
-      void camera();
+      void cameraPos();
 
       /*! Gets the FileName */
       string getFileName();
@@ -51,6 +52,10 @@ class guiIO
       /*! Show Message on Message Window */
       void showMessage(string msg);
 
+
+      camera gameCamera;               /**< The Game Camera */
+      
+#if 0
       GLfloat cameraX; /**< Camera X position */
       GLfloat cameraY; /**< Camera Y position */
       GLfloat cameraZ; /**< Camera Z position */
@@ -63,6 +68,7 @@ class guiIO
       GLfloat centerX; /**< Camera Center X Position */
       GLfloat centerY; /**< Camera Center Y Position */
       GLfloat centerZ; /**< Camera Center Z Position */
+#endif
 
    private:
 

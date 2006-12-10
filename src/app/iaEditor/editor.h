@@ -8,7 +8,7 @@
 #include "../../engine/culling.h"
 #include "../../engine/util.h"
 #include "../../engine/sun.h"
-#include "../../particle/partSystem.h"
+//#include "../../particle/partSystem.h"
 #include <SDL/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -71,7 +71,7 @@ class editor
       //Lpersonagem *NPCs;             /**< List of NPCs On Map */
       //featsList* features;           /**< NPCs Geral Features */
       
-      partSystem* particleSystem;    /**< Particles on Map */
+      //partSystem* particleSystem;    /**< Particles on Map */
       bool enableParticles;          /**< Enable Particles on Editor */
       
       guiIO* gui;                    /**< The Editor's GUI */

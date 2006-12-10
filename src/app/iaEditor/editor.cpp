@@ -14,7 +14,7 @@ editor::editor()
    
    /* Particles */
    enableParticles = true;
-   particleSystem = new partSystem();
+   /*particleSystem = new partSystem();*/
 
    /*features = new featsList("../data/feats/Ingles/",
                                        "../data/feats/feats.ftl");*/
@@ -45,10 +45,10 @@ editor::~editor()
    }
    delete(gameSun);
    delete(agentsSimulation);
-   if(particleSystem != NULL)
+   /*if(particleSystem != NULL)
    {
       delete(particleSystem);
-   }
+   }*/
    /*if(NPCs != NULL)
    {
       delete(NPCs);
@@ -170,7 +170,7 @@ void editor::openMap()
       {
          glDisable(GL_FOG);
       }
-      /* Open Particles */
+      /* Open Particles 
       if(!map->particlesFileName.empty())
       {
           particleSystem->loadFromFile(map->particlesFileName);
@@ -179,7 +179,7 @@ void editor::openMap()
       else
       {
          particleSystem->deleteAll();
-      }
+      }*/
 
       actualObject = (mapObjeto*) map->Objetos->primeiro->proximo;
       gui->showMessage("Map opened.");
@@ -222,21 +222,33 @@ void editor::verifyPosition()
 {
    if(mapOpened)
    {
-       if(gui->centerX > ((map->x * SQUARESIZE)+20))
+       if(gui->gameCamera.getCenterX() > ((map->x * SQUARESIZE)+20))
        {
-          gui->centerX = ((map->x * SQUARESIZE)+20);
+         gui->gameCamera.actualizeCamera( ((map->x * SQUARESIZE)+20) ,
+                                          gui->gameCamera.getCenterY(),
+                                          gui->gameCamera.getCenterZ(), 
+                                          0.0);
        }
-       else if(gui->centerX < -20)
+       else if(gui->gameCamera.getCenterX() < -20)
        {
-          gui->centerX = -20;
+          gui->gameCamera.actualizeCamera( -20 ,
+                                          gui->gameCamera.getCenterY(),
+                                          gui->gameCamera.getCenterZ(), 
+                                          0.0);
        }
-       if(gui->centerZ > ((map->z * SQUARESIZE)+20))
+       if(gui->gameCamera.getCenterZ() > ((map->z * SQUARESIZE)+20))
        {
-          gui->centerZ = ((map->z * SQUARESIZE)+20);
+          gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
+                                          gui->gameCamera.getCenterY(),
+                                          ((map->z * SQUARESIZE)+20), 
+                                          0.0);
        }
-       else if(gui->centerZ < -20)
+       else if(gui->gameCamera.getCenterZ() < -20)
        {
-          gui->centerZ = -20;
+          gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
+                                          gui->gameCamera.getCenterY(),
+                                          -20, 
+                                          0.0);
        }
    }
 }
@@ -255,7 +267,7 @@ void editor::draw()
 
 
    /* Redefine camera position */
-   gui->camera();
+   gui->cameraPos();
    AtualizaFrustum( visibleMatrix, proj, modl);
    gameSun->actualizeHourOfDay(hour);
 
@@ -264,7 +276,8 @@ void editor::draw()
    /* Draw Things */
    if(mapOpened)
    {
-      map->draw(gui->cameraX, gui->cameraY, gui->cameraZ, visibleMatrix);
+      map->draw(gui->gameCamera.getCameraX(), gui->gameCamera.getCameraY(), 
+                   gui->gameCamera.getCameraZ(), visibleMatrix);
       agentsSimulation->draw();
    }
 
