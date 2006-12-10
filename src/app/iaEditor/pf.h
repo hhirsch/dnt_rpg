@@ -49,8 +49,9 @@ class pf
       void actualizeMachineAndPosition();
 
       /*! Set the target to the politic 
-       * \param tg -> politic to be the target of investigation */
-      void setTarget(politic* tg);
+       * \param tg -> politic to be the target of investigation 
+       * \return True if Fuzzy Logic accepted to take the target */
+      bool setTarget(politic* tg);
 
       /*! Gets the target of the police
        * \return current target: politic. */

@@ -203,13 +203,17 @@ void agents::actualize(Map* actualMap)
           (polAg->currentBriefCase() == NULL))
       {
          GLfloat x,z, sightD, sightA;
+         briefCase* tmp = brief->briefCaseInArea(x+politicModel->x1-sightD,
+                                                 z+politicModel->z1-sightD,
+                                                 x+politicModel->x2+sightD,
+                                                 z+politicModel->z2+sightD);
+                                                    
          polAg->getPosition(x, z);
          polAg->getSight(sightD, sightA);
-         polAg->setBriefCase( brief->briefCaseInArea(x+politicModel->x1-sightD,
-                                                     z+politicModel->z1-sightD,
-                                                     x+politicModel->x2+sightD,
-                                                     z+politicModel->z2+sightD)
-                                                    );
+         if((!polAg->setBriefCase( tmp )) && (tmp))
+         {
+            excFunc.addExclamation( tmp->x, tmp->z);
+         }
       }
       addVisibleAgents(polAg, actualMap);
       polAg->actualizeMachineAndPosition(congressWork);
@@ -226,11 +230,14 @@ void agents::actualize(Map* actualMap)
          GLfloat x,z, sightD, sightA;
          pfAg->getPosition(x, z);
          pfAg->getSight(sightD, sightA);
-         pfAg->setTarget( getPoliticWithCaseInArea(x+pfModel->x1-sightD,
-                                                   z+pfModel->z1-sightD,
-                                                   x+pfModel->x2+sightD,
-                                                   z+pfModel->z2+sightD)
-                        );
+         if(!pfAg->setTarget( getPoliticWithCaseInArea(x+pfModel->x1-sightD,
+                                                       z+pfModel->z1-sightD,
+                                                       x+pfModel->x2+sightD,
+                                                       z+pfModel->z2+sightD)
+                            ))
+         {
+            excFunc.addExclamation( tp3X[4], tp3Z[4]);
+         }
       }
 
       //addVisibleAgents(pfAg->potAg, actualMap);
@@ -379,6 +386,8 @@ void agents::draw()
    {
       drawTexture(tp3Textures[aux], tp3X[aux], tp3Z[aux], 32, 32);
    }
+
+   excFunc.doStep();
 
 }
 

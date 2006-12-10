@@ -310,7 +310,7 @@ float politic::getAvaricePercent()
 /**********************************************************************
  *                           setBriefCase                             *
  **********************************************************************/
-void politic::setBriefCase(briefCase* br)
+bool politic::setBriefCase(briefCase* br)
 {
    if(br)
    {
@@ -337,12 +337,14 @@ void politic::setBriefCase(briefCase* br)
       {
          brief = br;
          brief->owned = true;
+         return(true);
       }
       else
       {
-         //TODO Do Any Animation to sknow this!
+         return(false);
       }
    }
+   return(false);
 }
 
 /**********************************************************************

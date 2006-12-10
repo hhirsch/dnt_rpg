@@ -18,7 +18,7 @@ OBJSPARTICLE = #$(ENDPARTICLE)particle.o $(ENDPARTICLE)part1.o $(ENDPARTICLE)par
 OBJSCLASSES = #$(ENDCLASSES)skills.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o
 OBJSLANG = $(ENDLANG)lang.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)potentAgent.o $(ENDIA)pattAgent.o $(ENDIA)fuzzy.o $(ENDIA)fuzzyvariable.o $(ENDIA)fuzzyfunction.o $(ENDIA)fuzzyrule.o
-OBJS = agents.o briefcase.o editor.o guiIO.o iaEditor.o message.o pf.o politic.o states.o
+OBJS = agents.o briefcase.o editor.o exclamation.o guiIO.o iaEditor.o message.o pf.o politic.o states.o
 
 BIN = ../../../bin/
 
@@ -37,6 +37,11 @@ briefcase.o: briefcase.cpp briefcase.h
 editor.o: editor.cpp editor.h
 	@printf "Making editor.o... "
 	@$(CC) $(CFLAGS) editor.cpp -o editor.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+exclamation.o: exclamation.cpp exclamation.h
+	@printf "Making exclamation.o... "
+	@$(CC) $(CFLAGS) exclamation.cpp -o exclamation.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 guiIO.o: guiIO.cpp guiIO.h

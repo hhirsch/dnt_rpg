@@ -282,7 +282,7 @@ float pf::getCorruptPercent()
 /*****************************************************************
  *                            setTarget                          *
  *****************************************************************/
-void pf::setTarget(politic* tg)
+bool pf::setTarget(politic* tg)
 {
    
    if(tg)
@@ -312,12 +312,14 @@ void pf::setTarget(politic* tg)
          /* Take the Target */
          target = tg;
          target->busted = true;
+         return(true);
       }
       else
       {
-         /* TODO Animation when not take! */
+        return(false); 
       }
    }
+   return(false);
 }
 
 /*****************************************************************

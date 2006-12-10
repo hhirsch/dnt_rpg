@@ -6,6 +6,7 @@
 #include "../../map/map.h"
 #include "pf.h"
 #include "briefcase.h"
+#include "exclamation.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
@@ -154,6 +155,9 @@ class agents
       GLfloat tp3Z[5];        /**< Groups Base Coordinates */
 
       int groupAdd;           /**< Last group of rogue added  to */
+
+      /* TP4 others */
+      exclamation excFunc;    /**< Exclamations Functionallity */ 
 
       
 };

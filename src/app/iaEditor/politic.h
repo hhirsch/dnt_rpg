@@ -32,8 +32,9 @@ class politic: public potentAgent
      briefCase* currentBriefCase();
 
      /*! Set the actual owned briefCase
-      * \param br -> briefCase to be owned */
-     void setBriefCase(briefCase* br);
+      * \param br -> briefCase to be owned
+      * \return True if fuzzy logic accept to take the briefcase */
+     bool setBriefCase(briefCase* br);
 
      /*! Define Rogue Group Area (where delivers briefcases) */
      void setBaseArea(int group, GLfloat x1,GLfloat z1, GLfloat x2, GLfloat z2);
