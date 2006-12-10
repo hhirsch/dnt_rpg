@@ -50,7 +50,8 @@ void briefCases::draw()
 {
    int i;
    glEnable(GL_COLOR_MATERIAL);
-   
+   GLfloat emission[3] = {0.0,0.0,0.0};
+
    for(i=0; i<totalCases; i++)
    {
       if(cases[i].delivered)
@@ -66,10 +67,18 @@ void briefCases::draw()
       glPushMatrix();
       glTranslatef(cases[i].x ,0.0, cases[i].z);
       glRotatef(cases[i].angle,0,1,0);
+      emission[0] = (cases[i].value-SUM_VALUE) / (float)MAX_VALUE;
+      emission[1] = (cases[i].value-SUM_VALUE) / (float)MAX_VALUE;
+      glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
       glmDrawLists(briefModel);
       glPopMatrix();
    }
-   
+  
+   emission[0] = 0.0;
+   emission[1] = 0.0;
+   emission[2] = 0.0;
+   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
+
    glDisable(GL_COLOR_MATERIAL);
 }
 
