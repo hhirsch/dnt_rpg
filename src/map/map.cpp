@@ -192,6 +192,10 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 
    glBegin(GL_QUADS);
+   glVertex3f(-HALFFARVIEW,-1,-HALFFARVIEW);
+   glVertex3f(-HALFFARVIEW,-1,+HALFFARVIEW);
+   glVertex3f(+HALFFARVIEW,-1,+HALFFARVIEW);
+   glVertex3f(+HALFFARVIEW,-1,-HALFFARVIEW);
    for(Xaux = 0; Xaux < x; Xaux++)
    {
       for(Zaux = 0; Zaux < z; Zaux++)

@@ -74,6 +74,8 @@ class sound
       ALCcontext* context;          /**< Active AL context */
       ogg_stream* backMusic;        /**< Active BackGround Music */
 
+      bool enabled;                 /**< If Sound is Enabled or Not */
+
       SDL_Thread* soundThread;      /**< The Sound Paralel Thread */
       SDL_mutex* soundMutex;        /**< The Sound Mutex */
 

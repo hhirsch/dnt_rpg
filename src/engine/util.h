@@ -65,6 +65,8 @@
  *                        Math's constants                          *
  ********************************************************************/
 #define TWOPI  2 * M_PI     /**< 2* PI definition */
+#define PI     M_PI         /**< PI definition */
+#define PID4   M_PI / 4.0   /**< PI / 4 definition */ 
 #define PID2   M_PI / 2.0   /**< PI / 2 definition */
 #define PID180 M_PI / 180.0 /**< PI / 180 definition */
 

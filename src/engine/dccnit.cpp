@@ -237,7 +237,16 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    }
    else
    {
-      glDisable(GL_FOG);
+      glEnable(GL_FOG);
+      {
+        GLfloat color[3]={1.0,1.0,1.0};
+        glFogi(GL_FOG_MODE,GL_LINEAR);
+        glFogfv(GL_FOG_COLOR, color);
+        glFogf(GL_FOG_DENSITY, 1000.0);
+        glHint(GL_FOG_HINT, GL_DONT_CARE);
+        glFogf(GL_FOG_START, 200);
+        glFogf(GL_FOG_END,2000);
+      }
    }
 
    /* Loading NPCs */
@@ -645,12 +654,15 @@ void engine::drawSphereToList(int lats, int longs)
    int n = lats;
 
    for (j=0;j<n/2;j++) {
-      theta1 = j * TWOPI / n - PID2;
-      theta2 = (j + 1) * TWOPI / n - PID2;
+      /*theta1 = j * TWOPI / n - PID2;
+      theta2 = (j + 1) * TWOPI / n - PID2;*/
+      theta1 = j * PI / n - PID4;
+      theta2 = (j + 1) * PI / n - PID4;
 
       glBegin(GL_QUAD_STRIP);
       for (i=0;i<=n;i++) {
          theta3 = i * TWOPI / n;
+         //theta3 = i * PI / n;
 
          ex = cos(theta2) * cos(theta3);
          ey = sin(theta2);
@@ -1738,6 +1750,10 @@ void engine::Draw()
 
    /* SKY */
    glPushMatrix();
+      if(!actualMap->fog.enabled)
+      {
+         glDisable(GL_FOG);
+      }
       glEnable(GL_TEXTURE_2D);
       glBindTexture(GL_TEXTURE_2D, sky);
       glTranslatef(actualMap->x*HALFSQUARESIZE, 0 , actualMap->z*HALFSQUARESIZE);
@@ -1746,6 +1762,10 @@ void engine::Draw()
       glRotated(180,1,0,0);
       glCallList(skyList);
       glDisable(GL_TEXTURE_2D);
+      if(!actualMap->fog.enabled)
+      {
+         glEnable(GL_FOG);
+      }
    glPopMatrix();
 
    glPushMatrix();

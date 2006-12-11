@@ -49,6 +49,7 @@ sound::sound()
 {
    // Initialize Open AL
    device = alcOpenDevice(NULL); 
+   enabled = false;
    
    if (device != NULL) 
    {
@@ -56,6 +57,7 @@ sound::sound()
       if (context != NULL) 
       {
          alcMakeContextCurrent(context);
+         enabled = true;
       }
       else
       {
@@ -80,8 +82,11 @@ sound::sound()
    sndfxVolume = 128;
 
    actualSound = this;
-   soundMutex = SDL_CreateMutex();
-   soundThread  = SDL_CreateThread((&runParalelSound), NULL);   
+   if(enabled)
+   {
+      soundMutex = SDL_CreateMutex();
+      soundThread  = SDL_CreateThread((&runParalelSound), NULL);   
+   }
 }
 
 /*************************************************************************
@@ -91,31 +96,34 @@ sound::~sound()
 {
    sndfx* snd, *tmp;
    
-   /* Clear the Opened Music */
-   if(backMusic)
+   if(enabled)
    {
-      backMusic->release();
-      delete(backMusic);
-      backMusic = NULL;
-   }
+      /* Clear the Opened Music */
+      if(backMusic)
+      {
+         backMusic->release();
+         delete(backMusic);
+         backMusic = NULL;
+      }
 
-   /* Clear all opened Sound Effects */
-   snd = sndfxList.next;
-   while(totalSndfx > 0)
-   {
-      tmp = snd;
-      snd = snd->previous;
-      removeSoundEffect(tmp);
-      snd= snd->next;
+      /* Clear all opened Sound Effects */
+      snd = sndfxList.next;
+      while(totalSndfx > 0)
+      {
+         tmp = snd;
+         snd = snd->previous;
+         removeSoundEffect(tmp);
+         snd= snd->next;
+      }
+   
+      /* Destroy Thread and Mutex */
+      SDL_KillThread(soundThread);
+      SDL_DestroyMutex(soundMutex);
+   
+      /* Clear OpenAL Context and Device */
+      alcDestroyContext(context);
+      alcCloseDevice(device);
    }
-   
-   /* Destroy Thread and Mutex */
-   SDL_KillThread(soundThread);
-   SDL_DestroyMutex(soundMutex);
-   
-   /* Clear OpenAL Context and Device */
-   alcDestroyContext(context);
-   alcCloseDevice(device);
 }
 
 /*************************************************************************
@@ -125,18 +133,21 @@ void sound::setListenerPosition(ALfloat centerX, ALfloat centerY,
                                 ALfloat centerZ, ALfloat theta, ALfloat phi,
                                 ALfloat d, ALfloat deltaY)
 {
-   lock();
-      ALfloat directionvect[6]; /* Direction Vector of Listener */
-      alListener3f(AL_POSITION, centerX, centerY, centerZ);
-
-      directionvect[0] = (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-      directionvect[1] = deltaY + (float) d * sin(deg2Rad(theta));
-      directionvect[2] = (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-      directionvect[3] = 0;
-      directionvect[4] = 1;
-      directionvect[5] = 0;
-      alListenerfv(AL_ORIENTATION, directionvect);
-   unLock();
+   if(enabled)
+   {
+      lock();
+         ALfloat directionvect[6]; /* Direction Vector of Listener */
+         alListener3f(AL_POSITION, centerX, centerY, centerZ);
+   
+         directionvect[0] = (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
+         directionvect[1] = deltaY + (float) d * sin(deg2Rad(theta));
+         directionvect[2] = (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+         directionvect[3] = 0;
+         directionvect[4] = 1;
+         directionvect[5] = 0;
+         alListenerfv(AL_ORIENTATION, directionvect);
+      unLock();
+   }
 }
 
 /*************************************************************************
@@ -144,6 +155,11 @@ void sound::setListenerPosition(ALfloat centerX, ALfloat centerY,
  *************************************************************************/
 bool sound::loadMusic(string fileName)
 {
+   if(!enabled)
+   {
+      return(false);
+   }
+   
    lock();
    if(backMusic)
    {
@@ -180,6 +196,11 @@ bool sound::loadMusic(string fileName)
 void sound::flush()
 {
    sndfx* snd;
+
+   if(!enabled)
+   {
+      return;
+   }
    
    /* Music Update */
    if(backMusic)
@@ -212,7 +233,9 @@ void sound::flush()
 sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
                              string fileName)
 {
-   lock();
+   if(enabled)
+   {
+     lock();
       sndfx* snd = new sndfx(x,y,z,loop, fileName);
       snd->changeVolume(sndfxVolume);
       snd->next = sndfxList.next;
@@ -220,8 +243,10 @@ sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
       snd->next->previous = snd;
       snd->previous->next = snd;
       totalSndfx++;
-   unLock();
-   return(snd);
+     unLock();
+     return(snd);
+   }
+   return(NULL);
 }
 
 /*************************************************************************
@@ -229,7 +254,9 @@ sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
  *************************************************************************/
 sndfx* sound::addSoundEffect(bool loop, string fileName)
 {
-   lock();
+   if(enabled)
+   {
+    lock();
       sndfx* snd = new sndfx(loop, fileName);
       snd->changeVolume(sndfxVolume);
       snd->next = sndfxList.next;
@@ -237,8 +264,10 @@ sndfx* sound::addSoundEffect(bool loop, string fileName)
       snd->next->previous = snd;
       snd->previous->next = snd;
       totalSndfx++;
-   unLock();
-   return(snd);
+    unLock();
+    return(snd);
+   }
+   return(NULL);
 }
 
 
@@ -247,7 +276,9 @@ sndfx* sound::addSoundEffect(bool loop, string fileName)
  *************************************************************************/
 void sound::removeSoundEffect(sndfx* snd)
 {
-   lock();
+   if(enabled)
+   {
+    lock();
       if( (snd) && (snd != &sndfxList))
       {
          snd->previous->next = snd->next;
@@ -255,7 +286,8 @@ void sound::removeSoundEffect(sndfx* snd)
          delete(snd);
          totalSndfx--;
       }
-   unLock();
+    unLock();
+   }
 }
 
 
@@ -267,7 +299,9 @@ void sound::changeVolume(int music, int sndV)
 {
    sndfx* snd;
    
-   lock();
+   if(enabled)
+   {
+    lock();
       musicVolume = music;
       sndfxVolume = sndV;
       if(backMusic)
@@ -282,7 +316,8 @@ void sound::changeVolume(int music, int sndV)
          snd = snd->next;
       }
 
-   unLock();
+    unLock();
+   }
 }
 
 
