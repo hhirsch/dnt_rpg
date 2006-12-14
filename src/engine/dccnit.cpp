@@ -653,14 +653,14 @@ void engine::drawSphereToList(int lats, int longs)
    GLfloat ex,ey,ez;
    int n = lats;
 
-   for (j=0;j<n/2;j++) {
-      /*theta1 = j * TWOPI / n - PID2;
-      theta2 = (j + 1) * TWOPI / n - PID2;*/
-      theta1 = j * PI / n - PID4;
-      theta2 = (j + 1) * PI / n - PID4;
+   for (j=0;j<n/4;j++) {
+      theta1 = j * TWOPI / n - PID2;
+      theta2 = (j + 1) * TWOPI / n - PID2;
+      /*theta1 = j * PI / n - PID4;
+      theta2 = (j + 1) * PI / n - PID4;*/
 
       glBegin(GL_QUAD_STRIP);
-      for (i=0;i<=n;i++) {
+      for (i=0;i<= n;i++) {
          theta3 = i * TWOPI / n;
          //theta3 = i * PI / n;
 
