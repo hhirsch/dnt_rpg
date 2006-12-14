@@ -1,10 +1,9 @@
-/*
- *  DccNiTghtmare is public domain. Do whatever you want with this code.
- */
-
-
 #ifndef _conversa_h
 #define _conversa_h
+
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
 
 /*! \file conversa.h Define conversations options.*/
 

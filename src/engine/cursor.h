@@ -5,6 +5,10 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #define CURSOR_WALK      0 /**< Walk Mouse Cursor */
 #define CURSOR_ATTACK    1 /**< Attack Mouse Cursor */
 #define CURSOR_DEFEND    2 /**< Defend Mouse Cursor */
@@ -32,13 +36,12 @@ class cursor
       void draw(int mouseX, int mouseY);
       
    private:
-      SDL_Surface* textura[CURSOR_TOTAL];  /**< internal GL texture of cursors */
-      SDL_Surface* actualCursor;           /**< Actual Used Cursor */
+      SDL_Surface* textura[CURSOR_TOTAL]; /**< internal Surfaces of cursors */
+      SDL_Surface* actualCursor;          /**< Pointer to Actual Used Cursor */
       
       /*! Load Cursor file to textures 
        * \param fileName -> file name of cursor
-       * \return \c GLuint with the texture ID. */
-      //GLuint loadCursor(char* fileName); 
+       * \return pointer to SDL_Surface with the cursor image. */
       SDL_Surface* loadCursor(char* fileName);
 
       

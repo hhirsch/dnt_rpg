@@ -1,7 +1,6 @@
-/*
- *  DccNiTghtmare is public domain. Do whatever you want with this code.
- */
-
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
 
 #ifndef _personagens_h
 #define _personagens_h

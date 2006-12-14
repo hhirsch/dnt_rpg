@@ -6,6 +6,11 @@
 #include <string>
 using namespace std;
 
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
+
 
 #define OPTIONSW_CANCEL  0  /**< Cancel Return Value */
 #define OPTIONSW_CONFIRM 1  /**< Confirm Return Value */

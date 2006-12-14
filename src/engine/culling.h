@@ -1,6 +1,10 @@
 #ifndef _culling_h
 #define _culling_h
 
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include <SDL/SDL_opengl.h>
 #include <math.h>
 

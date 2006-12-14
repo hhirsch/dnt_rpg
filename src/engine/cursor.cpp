@@ -1,6 +1,9 @@
 #include "cursor.h"
 #include "util.h"
 
+/*****************************************************************
+ *                         Constructor                           *
+ *****************************************************************/
 cursor::cursor()
 {
    textura[CURSOR_WALK] = loadCursor("../data/cursors/Walk.png");
@@ -14,6 +17,9 @@ cursor::cursor()
    actualCursor = CURSOR_WALK;
 }
 
+/*****************************************************************
+ *                          Destructor                           *
+ *****************************************************************/
 cursor::~cursor()
 {
    int aux;
@@ -24,28 +30,26 @@ cursor::~cursor()
    }
 }
 
+/*****************************************************************
+ *                         Load Cursor                           *
+ *****************************************************************/
 SDL_Surface* cursor::loadCursor(char* fileName)
 {
    SDL_Surface* img = IMG_Load(fileName);
-
-   /*glGenTextures(1, &(indice));
-   glBindTexture(GL_TEXTURE_2D, indice);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
-
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-   SDL_FreeSurface(img);
-   return(indice);*/
    return(img);
 }
 
+/*****************************************************************
+ *                          set Actual                           *
+ *****************************************************************/
 void cursor::setActual(int nCursor)
 {
    actualCursor = textura[nCursor];
 }
 
+/*****************************************************************
+ *                             Draw                              *
+ *****************************************************************/
 void cursor::draw(int mouseX, int mouseY)
 {
    glRasterPos2f(mouseX, 600 - mouseY);

@@ -1,6 +1,9 @@
-/*  DccNiTghtmare is Public Domain, do anything with this code. */
 #ifndef _sun_h
 #define _sun_h
+
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
 
 #include <SDL/SDL_opengl.h>
 
