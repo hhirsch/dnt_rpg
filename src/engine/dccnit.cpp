@@ -32,6 +32,8 @@ engine::engine()
    shortCutsWindow = NULL;
    imgNumber = 0;
 
+   curConection = NULL;
+
    walkStatus = ENGINE_WALK_KEYS;
 
    /* Initialize the Cursor */
@@ -178,6 +180,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 {
    char texto[255];
    string arqVelho = "nada";
+   curConection = NULL;
    
    walkStatus = ENGINE_WALK_KEYS;
       
@@ -258,7 +261,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       FILE* arq;
       if(!(arq = fopen(actualMap->npcFileName.c_str(),"r")))
       {
-         printf("Ouch, can't load NPC's file: %s.\n",actualMap->npcFileName.c_str());
+         printf("Ouch, can't load NPC's file: %s.\n",
+                                                 actualMap->npcFileName.c_str());
       }
       else
       {
@@ -267,7 +271,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
          int npc;
          char nome[30];
          char arquivo[255];
-        GLfloat posX, posZ;
+         GLfloat posX, posZ;
          fscanf(arq,"%d",&total);
          for(npc = 0; npc < total; npc++)
          {
@@ -1229,6 +1233,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                   ObjTxt->texto = quaux->mapConection.mapName; 
                   shortCutsWindow->Desenhar(mouseX, mouseY);
                }
+               curConection = &quaux->mapConection;
                cursors->setActual(CURSOR_MAPTRAVEL);
                pronto = 1;
                if(Mbotao & SDL_BUTTON(1))
@@ -1237,6 +1242,10 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                   return(1);
                }
             }
+         }
+         else
+         {
+            curConection = NULL;
          }
 
          if( (shortCutsWindow) && (!pronto) )
@@ -1871,6 +1880,31 @@ void engine::Draw()
 
    gameSun->drawSun();
 
+   if(curConection)
+   {
+      GLfloat ambient[] = { 0.29, 0.492, 0.82, 0.45 };
+      GLfloat diffuse[] = { 0.705, 0.907, 1.0, 0.45 };
+      GLfloat specular[] = { 0.714, 0.781, 0.886, 0.45 };
+      glPushMatrix();
+      glEnable( GL_BLEND );
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   
+      glBegin(GL_QUADS);
+         glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+         glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+         glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
+         glNormal3f(0,1,0);
+         glVertex3f(curConection->x1, 0.5, curConection->z1);
+         glVertex3f(curConection->x1, 0.5, curConection->z2);
+         glVertex3f(curConection->x2, 0.5, curConection->z2);
+         glVertex3f(curConection->x2, 0.5, curConection->z1);
+      glEnd();
+
+      glDisable( GL_BLEND );
+      glEnable(GL_COLOR_MATERIAL);
+      glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+      glPopMatrix();
+   }
 
    /* Draw Particles */
    glPushMatrix();

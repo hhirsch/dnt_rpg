@@ -273,6 +273,8 @@ class engine
       bool canMove;               /**< can move more in the round? */
       int attackFeat;             /**< attack feat to use. */
 
+      conection* curConection;    /**< Current Mouse Conection */
+
       part2* effect;
 
       sky* gameSky;               /**< The internal sky reference */
