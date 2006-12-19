@@ -23,6 +23,8 @@
  - Use some itens;
  - Use some weapons;
  - Inventory;
+ - Time of the Day;
+ - Highlight Portals when mouse over them;
  - GUI more smooth and functional;
  - Camera Full Control by Mouse;
  - Camera follow active character on height;

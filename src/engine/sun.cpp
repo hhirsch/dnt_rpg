@@ -5,6 +5,9 @@
 #include "../gui/desenho.h"
 #include <stdio.h>
 
+/*********************************************************************
+ *                            Constructor                            *
+ *********************************************************************/
 sun::sun(float hour, float farViewX, float farViewZ)
 {
    curHour = hour;
@@ -31,16 +34,25 @@ sun::sun(float hour, float farViewX, float farViewZ)
    }
 }
 
+/*********************************************************************
+ *                             Destructor                            *
+ *********************************************************************/
 sun::~sun()
 {
    glDeleteTextures(1,&sunTexture);
 }
 
+/*********************************************************************
+ *                            visibleTime                            *
+ *********************************************************************/
 bool sun::visibleTime()
 {
    return((curHour >= SUN_HOUR_BORN) && (curHour <= SUN_HOUR_DEATH));
 }
 
+/*********************************************************************
+ *                           positionOnHour                          *
+ *********************************************************************/
 void sun::positionOnHour()
 {
    rotation = SUN_EQU_B * curHour + SUN_EQU_C;
@@ -53,6 +65,9 @@ void sun::positionOnHour()
    }
 }
 
+/*********************************************************************
+ *                            colorOnHour                            *
+ *********************************************************************/
 void sun::colorOnHour()
 {
    GLfloat color;
@@ -80,6 +95,9 @@ void sun::colorOnHour()
    }
 }
 
+/*********************************************************************
+ *                        actualizeHourOfDay                         *
+ *********************************************************************/
 void sun::actualizeHourOfDay(float hour)
 {
    curHour = hour;
@@ -96,7 +114,9 @@ void sun::actualizeHourOfDay(float hour)
    glEnable(GL_LIGHT0);
 }
 
-
+/*********************************************************************
+ *                              drawSun                              *
+ *********************************************************************/
 void sun::drawSun()
 {
    glDisable(GL_DEPTH_FUNC);
@@ -130,6 +150,9 @@ void sun::drawSun()
    glEnable(GL_DEPTH_FUNC);
 }
 
+/*********************************************************************
+ *                            getRotation                            *
+ *********************************************************************/
 GLfloat sun::getRotation()
 {
    return(rotation);

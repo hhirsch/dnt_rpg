@@ -80,11 +80,9 @@ void sky::drawDome(int lats, int longs)
 /*********************************************************************
  *                                 Draw                              *
  *********************************************************************/
-void sky::draw(Map* actualMap, GLfloat time)
+void sky::draw(Map* actualMap, GLfloat sunRot)
 {
-   //solarTime = time;
-   //
-   solarTime = (time * 24) / 360.0;
+   solarTime = (sunRot * 24) / 360.0;
 
    glDisable(GL_COLOR);
    glEnable(GL_COLOR_MATERIAL);

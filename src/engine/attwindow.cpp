@@ -178,7 +178,7 @@ attWindow::attWindow(skills* sk, interface* inter)
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,
                                                     "<",0,NULL);
-   attButtonNext[5] = window->objects->InserirBotao(119,219,128,236,
+   attButtonNext[5] = window->objects->InserirBotao(118,219,128,236,
                                                     window->Cores.corBot.R,
                                                     window->Cores.corBot.G,
                                                     window->Cores.corBot.B,

@@ -15,8 +15,8 @@ class sky
 
       /*! Draw Sky Dome 
        * \param actualMap -> pointer to the opened Map 
-       * \param time -> current time of day */
-      void draw(Map* actualMap, GLfloat time);
+       * \param sunRot -> current Sun Rotation */
+      void draw(Map* actualMap, GLfloat sunRot);
 
    private:
 
