@@ -2,25 +2,38 @@
 
 #include "sun.h"
 #include "util.h"
+#include "../gui/desenho.h"
 #include <stdio.h>
 
-sun::sun(float hour, int farViewX, int farViewZ)
+sun::sun(float hour, float farViewX, float farViewZ)
 {
    curHour = hour;
    constantAttenuation = 1.0;
    quadricAttenuation = 0.0;
    linearAttenuation = 0.0;
 
-   where[0] = farViewX;
+   where[0] = HALFFARVIEW-5000;
    where[1] = 0.0;
-   where[2] = farViewZ;
+   where[2] = HALFFARVIEW-5000;
    where[3] = 1.0;
    
    positionOnHour();
+
+   SDL_Surface* img = IMG_Load("../data/texturas/sky/sun.png");
+   if(!img)
+   {
+      printf("Failed to open Sun Texture!\n");
+   }
+   else
+   {
+      carregaTexturaRGBA(img,&sunTexture);
+      SDL_FreeSurface(img);
+   }
 }
 
 sun::~sun()
 {
+   glDeleteTextures(1,&sunTexture);
 }
 
 bool sun::visibleTime()
@@ -30,9 +43,13 @@ bool sun::visibleTime()
 
 void sun::positionOnHour()
 {
-   if( visibleTime() )
+   rotation = SUN_EQU_B * curHour + SUN_EQU_C;
+   where[1] = (sin(deg2Rad(rotation)))*(HALFFARVIEW-1);
+   if( ( (rotation > 90) && (where[0] > 0) ) ||
+       ( (rotation < 90) && (where[0] < 0) ) )
    {
-      rotation = SUN_EQU_B * curHour + SUN_EQU_C;
+      where[0] *= -1;
+      where[2] *= -1;
    }
 }
 
@@ -56,9 +73,9 @@ void sun::colorOnHour()
    }
    else
    {
-      actualColor[0] = 0.0;
-      actualColor[1] = 0.0;
-      actualColor[2] = 0.0;
+      actualColor[0] = 0.2;
+      actualColor[1] = 0.2;
+      actualColor[2] = 0.2;
       actualColor[3] = 1.0;
    }
 }
@@ -68,21 +85,53 @@ void sun::actualizeHourOfDay(float hour)
    curHour = hour;
    positionOnHour();
    colorOnHour();
-   if(visibleTime())
-   {
-      glLightfv(GL_LIGHT0, GL_AMBIENT, actualColor);
-      glLightfv(GL_LIGHT0, GL_DIFFUSE, actualColor);
-      glLightfv(GL_LIGHT0, GL_SPECULAR, actualColor);
-      glPushMatrix();
-         glRotatef (rotation, 0.0, 1.0, 0.0);
-         glLightfv (GL_LIGHT0, GL_POSITION, where);
-      glPopMatrix();
-      glEnable(GL_LIGHT0);
-   }
-   else
-   {
-      glDisable(GL_LIGHT0);
-   }
+   glLightfv(GL_LIGHT0, GL_AMBIENT, actualColor);
+   glLightfv(GL_LIGHT0, GL_DIFFUSE, actualColor);
+   glLightfv(GL_LIGHT0, GL_SPECULAR, actualColor);
+   glPushMatrix();
+      //glRotatef (rotation, 0.0, 1.0, 0.0);  
+      glLightfv (GL_LIGHT0, GL_POSITION, where);
+   glPopMatrix();
+   
+   glEnable(GL_LIGHT0);
 }
 
+
+void sun::drawSun()
+{
+   glDisable(GL_DEPTH_FUNC);
+   glColor4f(1,1,1,1);
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, sunTexture);
+   glEnable(GL_COLOR_MATERIAL);
+   GLfloat color[] = {0.9, 0.87, 0.2};
+   glColor3fv(color);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color);
+   glPushMatrix();
+      glBegin(GL_QUADS);
+      glTexCoord2f(0,0);
+      glVertex3f(where[0]-1500, where[1]+1500, where[2]);
+      glTexCoord2f(0,1);
+      glVertex3f(where[0]-1500, where[1]-1500, where[2]);
+      glTexCoord2f(1,1);
+      glVertex3f(where[0]+1500, where[1]-1500, where[2]);
+      glTexCoord2f(1,0);
+      glVertex3f(where[0]+1500, where[1]+1500, where[2]);
+      glEnd();
+   glPopMatrix();
+   glDisable(GL_COLOR_MATERIAL);
+   glDisable(GL_BLEND);
+   glDisable(GL_TEXTURE_2D);
+   glEnable(GL_DEPTH_FUNC);
+}
+
+GLfloat sun::getRotation()
+{
+   return(rotation);
+}
 

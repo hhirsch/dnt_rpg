@@ -11,6 +11,7 @@
 #include "cursor.h"
 #include "personagens.h"
 #include "sun.h"
+#include "sky.h"
 #include "initial.h"
 #include "options.h"
 #include "skillwindow.h"
@@ -209,8 +210,6 @@ class engine
       collision colisionDetect;    /**< The collision detect Module */
  
       GLfloat visibleMatrix[6][4]; /**< Actual Frustum Matrix */
-      GLuint skyList;              /**< Sky GL List */
-      GLuint sky;                  /**< Sky Texture */
       int mouseX,                  /**< Actual mouse X coordinates on screen */
           mouseY;                  /**< Actual mouse Y coordinates on screen */
       double xReal,                /**< Actual mouse X coordinates on World */
@@ -276,6 +275,7 @@ class engine
 
       part2* effect;
 
+      sky* gameSky;               /**< The internal sky reference */
       sun* gameSun;               /**< The internal sun reference */
       GLfloat hour;               /**< Hour on day time */
 

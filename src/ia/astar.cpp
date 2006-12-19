@@ -131,11 +131,13 @@ bool aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
         }
        
         newg = node->gone + 1;
+        /*newg = node->gone + sqrt((posX - node->x) * (posX - node->x) + 
+                                 (posZ - node->z) * (posZ - node->z));*/
         
         node2 = closed.find(posX, posZ);
 
-        perQuad = actualMap->quadradoRelativo( (int)floor( posX / (SQUARESIZE)),
-                                               (int)floor( posZ / (SQUARESIZE)));
+        perQuad = actualMap->quadradoRelativo((int)floor( posX / (SQUARESIZE)),
+                                              (int)floor( posZ / (SQUARESIZE)));
         if( (node2 != NULL) || (opened.find(posX, posZ)) || 
             (perQuad == NULL) ||
             (!collisionDetect.canWalk(posX, 0, posZ, 

@@ -70,7 +70,7 @@ engine::engine()
    particleSystem = new partSystem();
 
    hour = 9.0;
-   gameSun = new sun(hour , FARVIEW, FARVIEW);
+   gameSun = new sun(hour , HALFFARVIEW, HALFFARVIEW);
 
    engineMode = ENGINE_MODE_REAL_TIME;
 
@@ -97,8 +97,7 @@ engine::~engine()
    delete(option);
 
    /* Clear Sky */
-   glDeleteLists(skyList,1);
-   glDeleteTextures(1, &sky);
+   delete(gameSky);
 
    /* Clear Other Textures */
    glDeleteTextures(1, &normalMoveCircle);
@@ -242,10 +241,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
         GLfloat color[3]={1.0,1.0,1.0};
         glFogi(GL_FOG_MODE,GL_LINEAR);
         glFogfv(GL_FOG_COLOR, color);
-        glFogf(GL_FOG_DENSITY, 1000.0);
+        glFogf(GL_FOG_DENSITY, 0.000010);
         glHint(GL_FOG_HINT, GL_DONT_CARE);
         glFogf(GL_FOG_START, 200);
-        glFogf(GL_FOG_END,2000);
+        glFogf(GL_FOG_END,2*FARVIEW);
       }
    }
 
@@ -641,52 +640,6 @@ void engine::redmensionateWindow(SDL_Surface *screen)
 }
 
 /*********************************************************************
- *                  Draw a sphere Sky to SkyList                     *
- *********************************************************************/
-void engine::drawSphereToList(int lats, int longs) 
-{
-   skyList = glGenLists(1);
-   glNewList(skyList,GL_COMPILE);
-
-   int i,j;
-   GLfloat theta1,theta2,theta3;
-   GLfloat ex,ey,ez;
-   int n = lats;
-
-   for (j=0;j<n/4;j++) {
-      theta1 = j * TWOPI / n - PID2;
-      theta2 = (j + 1) * TWOPI / n - PID2;
-      /*theta1 = j * PI / n - PID4;
-      theta2 = (j + 1) * PI / n - PID4;*/
-
-      glBegin(GL_QUAD_STRIP);
-      for (i=0;i<= n;i++) {
-         theta3 = i * TWOPI / n;
-         //theta3 = i * PI / n;
-
-         ex = cos(theta2) * cos(theta3);
-         ey = sin(theta2);
-         ez = cos(theta2) * sin(theta3);
-
-         glNormal3f(ex,ey,ez);
-         glTexCoord2f(i/(GLfloat)n,2*(j+1)/(GLfloat)n);
-         glVertex3f(ex,ey,ez);
-
-         ex = cos(theta1) * cos(theta3);
-         ey = sin(theta1);
-         ez = cos(theta1) * sin(theta3);
-
-         glNormal3f(ex,ey,ez);
-         glTexCoord2f(i/(GLfloat)n,2*j/(GLfloat)n);
-         glVertex3f(ex,ey,ez);
-      }
-      glEnd();
-   }
-
-   glEndList();
-}
-
-/*********************************************************************
  *                       Init Engine Function                        *
  *********************************************************************/
 void engine::Init(SDL_Surface *screen)
@@ -713,26 +666,9 @@ void engine::Init(SDL_Surface *screen)
    glEnable(GL_LIGHTING);
 
    /* Sky Creation */
-   drawSphereToList(80,80);
+   gameSky = new(sky);
 
-   SDL_Surface* img = IMG_Load("../data/texturas/ceu.jpg");
-   glGenTextures(1, &sky);
-   glBindTexture(GL_TEXTURE_2D, sky);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 
-                0, GL_RGB, GL_UNSIGNED_BYTE, img->pixels);
-
-   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-   glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                   GL_LINEAR_MIPMAP_LINEAR );
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-
-   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->w,
-                     img->h, GL_RGB, GL_UNSIGNED_BYTE, 
-                     img->pixels );
-
-   SDL_FreeSurface(img);
+   SDL_Surface* img;
 
    /* Battle Circle Textures */
    img = IMG_Load("../data/texturas/fightMode/normalMovCircle.png");
@@ -1750,22 +1686,15 @@ void engine::Draw()
 
    /* SKY */
    glPushMatrix();
-      if(!actualMap->fog.enabled)
+      /*if(!actualMap->fog.enabled)
       {
          glDisable(GL_FOG);
-      }
-      glEnable(GL_TEXTURE_2D);
-      glBindTexture(GL_TEXTURE_2D, sky);
-      glTranslatef(actualMap->x*HALFSQUARESIZE, 0 , actualMap->z*HALFSQUARESIZE);
-      glScalef(HALFFARVIEW,HALFFARVIEW,HALFFARVIEW);
-      glRotated(90,0,1,0);
-      glRotated(180,1,0,0);
-      glCallList(skyList);
-      glDisable(GL_TEXTURE_2D);
-      if(!actualMap->fog.enabled)
+      }*/
+      gameSky->draw(actualMap,gameSun->getRotation());
+      /*if(!actualMap->fog.enabled)
       {
          glEnable(GL_FOG);
-      }
+      }*/
    glPopMatrix();
 
    glPushMatrix();
@@ -1896,9 +1825,9 @@ void engine::Draw()
          glDisable(GL_TEXTURE_2D);
       glPopMatrix();
 
+      glDisable(GL_BLEND);
       glEnable(GL_LIGHTING);
 
-      glDisable(GL_BLEND);
    }
 
    if(walkStatus == ENGINE_WALK_MOUSE)
@@ -1940,6 +1869,9 @@ void engine::Draw()
       glPopMatrix();
    }
 
+   gameSun->drawSun();
+
+
    /* Draw Particles */
    glPushMatrix();
       particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
@@ -1954,7 +1886,10 @@ void engine::Draw()
    gluUnProject(SCREEN_X-60,SCREEN_Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
 
    glDisable(GL_LIGHTING);
+   
+   
    glDisable(GL_DEPTH_TEST);
+
 
    /* Player's Portrait */
    per = (personagem*) PCs->personagemAtivo;

@@ -183,19 +183,24 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    GLfloat mat_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat mat_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat mat_emission[] = { 0.0, 0.0, 0.0, 1.0 };
    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 16.0784313725);
+   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, mat_emission);
+   //glColor3f(1.0,1.0,0.5);
+   glColor3fv(mat_ambient);
 
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 
    glBegin(GL_QUADS);
-   /*glVertex3f(-HALFFARVIEW,-1,-HALFFARVIEW);
-   glVertex3f(-HALFFARVIEW,-1,+HALFFARVIEW);
-   glVertex3f(+HALFFARVIEW,-1,+HALFFARVIEW);
-   glVertex3f(+HALFFARVIEW,-1,-HALFFARVIEW);*/
+      glNormal3f(0,1,0);
+      glVertex3f(-HALFFARVIEW,-1,-HALFFARVIEW);
+      glVertex3f(-HALFFARVIEW,-1,+HALFFARVIEW);
+      glVertex3f(+HALFFARVIEW,-1,+HALFFARVIEW);
+      glVertex3f(+HALFFARVIEW,-1,-HALFFARVIEW);
    for(Xaux = 0; Xaux < x; Xaux++)
    {
       for(Zaux = 0; Zaux < z; Zaux++)

@@ -15,13 +15,20 @@ class sun
        * \param hour -> current hour of day 
        * \param farViewX -> far view X position
        * \param farViewZ -> far view Z position */
-      sun(float hour, int farViewX, int farViewZ);
+      sun(float hour, float farViewX, float farViewZ);
       /*! Destructor*/
       ~sun();
 
       /*! Actualize Sun Itensity, based on hour of the day 
        * \param hour -> current hour of day */
       void actualizeHourOfDay(float hour);
+
+      /*! Draw the Sun to its position */
+      void drawSun();
+
+      /*! Get The Sun rotation
+       * \return sun rotation value */
+      GLfloat getRotation();
 
    private:
       GLfloat quadricAttenuation;   /**< Quadric Attenuation Light Value */
@@ -31,6 +38,8 @@ class sun
       GLfloat actualColor[4];       /**< Actual Sun Emiting Color */
       GLfloat where[4];             /**< Actual Sun Sky Position */
       GLfloat rotation;             /**< Actual Sun Spin to surface */
+
+      GLuint  sunTexture;           /**< Current Sun Texture */
 
       float curHour;                /**< Current Hour of Day to Sun */
 
