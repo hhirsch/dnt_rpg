@@ -64,7 +64,7 @@ void sky::drawDome(int lats, int longs)
          ez = cos(theta1) * sin(theta3);
 
          glNormal3f(ex,ey,ez);
-         glTexCoord2f((solarTime) / (24.0), (3*j / (GLfloat)n));
+         glTexCoord2f((solarTime) / (24.0), (3*(j) / (GLfloat)n));
          glVertex3f(ex,ey,ez);
 
       }

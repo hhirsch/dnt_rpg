@@ -23,9 +23,11 @@
 
 #define ENGINE_WALK_KEYS        1  /**< Engine Keyboard Walk Status */
 #define ENGINE_WALK_MOUSE       2  /**< Engine Mouse Walk Status */
+
 /********************************************************************
  *                Character's moviments constants                   *
  ********************************************************************/
+
 #define ANDAR  0.75    /**< The distance that normal character walks */
 #define GIRAR  2.5     /**< The turn velocity of normal character */
 #define WALK_PER_MOVE_ACTION 60 /**< Distance that can be walked per move */
@@ -33,6 +35,7 @@
 /********************************************************************
  *                      Camera's constants                          *
  ********************************************************************/
+
 #define DELTACAMERA    1.5            /**<  The camera velocity */
 #define ZOOMMAXIMO     80             /**< Max value of Zoom */
 #define ZOOMMINIMO     280            /**< Min value of Zoom */
@@ -43,32 +46,49 @@
 /********************************************************************
  *                      Screen's constants                          *
  ********************************************************************/
+
 #define SCREEN_X        800     /**< Screen Width */
 #define SCREEN_Y        600     /**< Screen Height */
 
 /********************************************************************
  *                        Sun's constants                           *
  ********************************************************************/
+
 #define SUN_HOUR_BORN   4.2        /**< Sun Hour to born */
-#define SUN_HOUR_DEATH 21.0        /**< Sun hour to die */
+#define SUN_HOUR_DEATH 20.0        /**< Sun hour to die */
 #define SUN_HOUR_INITIAL_TOTAL 8.5 /**< Initial hour of Total Light */
 #define SUN_HOUR_FINAL_TOTAL  16.5 /**< Final hour of Total Light */
 
-/*! EQU = (y = bx + c) 
+/*! Equations for the sun Position
+ * EQU = (y = bx + c) 
  * x = hour 
  * y = rotation (degrees) */
+
+/*! Day Equation */
 #define SUN_EQU_B 180.0 / (SUN_HOUR_DEATH - SUN_HOUR_BORN)
 #define SUN_EQU_C -(SUN_HOUR_BORN * SUN_EQU_B) /**< same for EQU_B */
+
+/*! Night Equation */
+#define SUN_EQN_B 180.0 / (SUN_HOUR_BORN + 24 - SUN_HOUR_DEATH)
+#define SUN_EQN_C (180.0 - (SUN_HOUR_DEATH * SUN_EQN_B)) /**< same for EQN_B */
+
 
 
 /********************************************************************
  *                        Math's constants                          *
  ********************************************************************/
+
 #define TWOPI  2 * M_PI     /**< 2* PI definition */
 #define PI     M_PI         /**< PI definition */
 #define PID4   M_PI / 4.0   /**< PI / 4 definition */ 
 #define PID2   M_PI / 2.0   /**< PI / 2 definition */
 #define PID180 M_PI / 180.0 /**< PI / 180 definition */
+
+
+/********************************************************************
+ *                            Functions                             *
+ ********************************************************************/
+
 
 /*! degree to radians converter.
  * \param x -> angle in degrees to convert.

@@ -55,13 +55,36 @@ bool sun::visibleTime()
  *********************************************************************/
 void sun::positionOnHour()
 {
-   rotation = SUN_EQU_B * curHour + SUN_EQU_C;
-   where[1] = (sin(deg2Rad(rotation)))*(HALFFARVIEW-1);
-   if( ( (rotation > 90) && (where[0] > 0) ) ||
-       ( (rotation < 90) && (where[0] < 0) ) )
+   if(visibleTime())
    {
-      where[0] *= -1;
-      where[2] *= -1;
+      rotation = SUN_EQU_B * curHour + SUN_EQU_C;
+      where[1] = (sin(deg2Rad(rotation)))*(HALFFARVIEW-1);
+      if( ( (rotation > 90) && (where[0] > 0) ) ||
+          ( (rotation < 90) && (where[0] < 0) ) )
+      {
+         where[0] *= -1;
+         where[2] *= -1;
+      }
+   }
+   else
+   {
+      if(curHour >= SUN_HOUR_DEATH)
+      {
+         rotation = SUN_EQN_B * curHour + SUN_EQN_C;
+      }
+      else
+      {
+         /* Past MidNight, equation consider hour as 24+curHour */
+         rotation = SUN_EQN_B * (curHour+24) + SUN_EQN_C;
+      }
+      where[1] = (sin(deg2Rad(rotation-180)))*(HALFFARVIEW-1);
+      if( ( ((rotation-180) > 90) && (where[0] > 0) ) ||
+          ( ((rotation-180) < 90) && (where[0] < 0) ) )
+      {
+         where[0] *= -1;
+         where[2] *= -1;
+      }
+
    }
 }
 
@@ -73,6 +96,7 @@ void sun::colorOnHour()
    GLfloat color;
    if(visibleTime())
    {
+      /* When Visible Time, is The Sun! */
       if(rotation <= 90)
       {
          color = ((rotation / 90) * 0.5)+0.5;
@@ -88,9 +112,18 @@ void sun::colorOnHour()
    }
    else
    {
-      actualColor[0] = 0.2;
-      actualColor[1] = 0.2;
-      actualColor[2] = 0.2;
+      if(rotation >= 270)
+      {
+         color = (0.0034)*rotation - 0.724;
+      }
+      else
+      {
+         color = (-0.0034)*rotation + 1.112;
+      }
+      /* When Not visible, is the Moon! */
+      actualColor[0] = color;
+      actualColor[1] = color;
+      actualColor[2] = color;
       actualColor[3] = 1.0;
    }
 }

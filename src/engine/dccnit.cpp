@@ -1322,7 +1322,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
          if(keys[SDLK_0])
          {
-            hour += 1;
+            hour += 0.1;
          }
 
       }
@@ -1883,8 +1883,8 @@ void engine::Draw()
    if(curConection)
    {
       GLfloat ambient[] = { 0.29, 0.492, 0.82, 0.45 };
-      GLfloat diffuse[] = { 0.705, 0.907, 1.0, 0.45 };
-      GLfloat specular[] = { 0.714, 0.781, 0.886, 0.45 };
+      GLfloat diffuse[] = { 0.405, 0.407, 1.0, 0.45 };
+      GLfloat specular[] = { 0.414, 0.481, 0.886, 0.45 };
       glPushMatrix();
       glEnable( GL_BLEND );
       glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
