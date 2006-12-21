@@ -58,7 +58,7 @@ void sun::positionOnHour()
    if(visibleTime())
    {
       rotation = SUN_EQU_B * curHour + SUN_EQU_C;
-      where[1] = (sin(deg2Rad(rotation)))*(HALFFARVIEW-1);
+      where[1] = (sin(deg2Rad(rotation / 4.0)))*(HALFFARVIEW-1);
       if( ( (rotation > 90) && (where[0] > 0) ) ||
           ( (rotation < 90) && (where[0] < 0) ) )
       {
@@ -77,7 +77,7 @@ void sun::positionOnHour()
          /* Past MidNight, equation consider hour as 24+curHour */
          rotation = SUN_EQN_B * (curHour+24) + SUN_EQN_C;
       }
-      where[1] = (sin(deg2Rad(rotation-180)))*(HALFFARVIEW-1);
+      where[1] = (sin(deg2Rad((rotation-180) / 4.0)))*(HALFFARVIEW-1);
       if( ( ((rotation-180) > 90) && (where[0] > 0) ) ||
           ( ((rotation-180) < 90) && (where[0] < 0) ) )
       {
@@ -152,9 +152,6 @@ void sun::actualizeHourOfDay(float hour)
  *********************************************************************/
 void sun::drawSun()
 {
-   glEnable(GL_DEPTH_TEST);
-   glDepthFunc(GL_LESS);
-   glDepthMask(GL_FALSE);
    //glEnable(GL_CULL_FACE);
    
    glColor4f(1,1,1,1);
@@ -170,15 +167,17 @@ void sun::drawSun()
    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color);
    glPushMatrix();
+      //glRotatef(rotation, 1,0,1);
+      glTranslatef(where[0]-4000, where[1], where[2]-4000);
       glBegin(GL_QUADS);
       glTexCoord2f(0,0);
-      glVertex3f(where[0]-1500, where[1]+1500, where[2]);
+      glVertex3f(-1500, 1500, 0);
       glTexCoord2f(0,1);
-      glVertex3f(where[0]-1500, where[1]-1500, where[2]);
+      glVertex3f(-1500, -1500, 0);
       glTexCoord2f(1,1);
-      glVertex3f(where[0]+1500, where[1]-1500, where[2]);
+      glVertex3f(+1500, -1500, 0);
       glTexCoord2f(1,0);
-      glVertex3f(where[0]+1500, where[1]+1500, where[2]);
+      glVertex3f(+1500, +1500, 0);
       glEnd();
    glPopMatrix();
    glDisable(GL_COLOR_MATERIAL);
