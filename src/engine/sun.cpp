@@ -17,7 +17,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
 
    where[0] = HALFFARVIEW-5000;
    where[1] = 0.0;
-   where[2] = HALFFARVIEW-5000;
+   where[2] = 0.0;//HALFFARVIEW-5000;
    where[3] = 1.0;
    
    positionOnHour();
@@ -152,43 +152,32 @@ void sun::actualizeHourOfDay(float hour)
  *********************************************************************/
 void sun::drawSun()
 {
-   //glEnable(GL_CULL_FACE);
-   
-   glColor4f(1,1,1,1);
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, sunTexture);
    glEnable(GL_COLOR_MATERIAL);
-   GLfloat color[] = {0.9, 0.87, 0.2};
-   glColor3fv(color);
-   glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
-   glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
-   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
-   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color);
+   glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+   glColor3f(0.9,0.87,0.2);
    glPushMatrix();
-      //glRotatef(rotation, 1,0,1);
-      glTranslatef(where[0]-4000, where[1], where[2]-4000);
+      glTranslatef(where[0]-4000, where[1], /*where[2]-4000*/0.0);
       glBegin(GL_QUADS);
       glTexCoord2f(0,0);
-      glVertex3f(-1500, 1500, 0);
+      glVertex3f(0, 1500, -1500);
       glTexCoord2f(0,1);
-      glVertex3f(-1500, -1500, 0);
+      glVertex3f(0, -1500, -1500);
       glTexCoord2f(1,1);
-      glVertex3f(+1500, -1500, 0);
+      glVertex3f(0, -1500, 1500);
       glTexCoord2f(1,0);
-      glVertex3f(+1500, +1500, 0);
+      glVertex3f(0, +1500, 1500);
       glEnd();
    glPopMatrix();
-   glDisable(GL_COLOR_MATERIAL);
    glDisable(GL_BLEND);
    glDisable(GL_TEXTURE_2D);
-
-   //glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
    glDepthMask(GL_TRUE);
-
+   glColor4f(1,1,1,1);
 }
 
 /*********************************************************************

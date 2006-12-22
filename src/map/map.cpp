@@ -180,20 +180,12 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    textura = MapSquares[Xaux][Zaux]->textura;
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, textura);
-   GLfloat mat_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat mat_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat mat_emission[] = { 0.0, 0.0, 0.0, 1.0 };
-   glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
-   glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
-   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
-   glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 16.0784313725);
-   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, mat_emission);
-   //glColor3f(1.0,1.0,0.5);
-   glColor3fv(mat_ambient);
+   glColor3f(1.0,1.0,1.0);
 
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 
    glBegin(GL_QUADS);
       glNormal3f(0,1,0);
@@ -216,8 +208,10 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
             textura = MapSquares[Xaux][Zaux]->textura;
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, textura);
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
             glBegin(GL_QUADS);
          }
          if( (MapSquares[Xaux][Zaux]->visivel) || 
@@ -310,10 +304,6 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         int textura = -1;
         int Xaux = 0, Zaux = 0;
 
-        GLfloat materialColor[4] = {0.7, 0.7, 0.7, 1.0};
-        float shininess;
-        shininess = 50.0f;
-
         /* Actualize Lights */
         lights.actualize();
 
@@ -329,10 +319,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         /* Faz o desenho dos muros e meios Fio*/
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-        glMaterialfv(GL_FRONT, GL_AMBIENT, materialColor);
-        glMaterialfv(GL_FRONT, GL_DIFFUSE, materialColor);
-        glMaterialfv(GL_FRONT, GL_SPECULAR, materialColor);
-        glMaterialfv(GL_FRONT, GL_SHININESS, &shininess);
+        glColor3f(1.0,1.0,1.0);
 
 
         muro* maux = muros;

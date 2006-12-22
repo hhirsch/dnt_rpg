@@ -1883,16 +1883,14 @@ void engine::Draw()
    if(curConection)
    {
       GLfloat ambient[] = { 0.29, 0.492, 0.82, 0.45 };
-      GLfloat diffuse[] = { 0.405, 0.407, 1.0, 0.45 };
-      GLfloat specular[] = { 0.414, 0.481, 0.886, 0.45 };
       glPushMatrix();
       glEnable( GL_BLEND );
       glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    
       glBegin(GL_QUADS);
          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
-         glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
-         glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
+         glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, ambient);
+         glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, ambient);
          glNormal3f(0,1,0);
          glVertex3f(curConection->x1, 0.5, curConection->z1);
          glVertex3f(curConection->x1, 0.5, curConection->z2);
@@ -1901,7 +1899,7 @@ void engine::Draw()
       glEnd();
 
       glDisable( GL_BLEND );
-      glEnable(GL_COLOR_MATERIAL);
+      glDisable(GL_COLOR_MATERIAL);
       glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
       glPopMatrix();
    }
