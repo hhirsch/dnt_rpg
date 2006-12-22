@@ -85,6 +85,7 @@ string NomeTextura(Map* mapa, GLuint ID)
    }
    return(NULL);
 }
+
 /********************************************************************
  *                         Insert texture                           *
  ********************************************************************/
@@ -112,9 +113,6 @@ GLuint InserirTextura(Map* mapa, string arq, string nome,
       tex->proximo = mapa->Texturas;
       mapa->Texturas = tex;
    }
-
-   //tex->nome = (char*) malloc((strlen(nome)+1)*sizeof(char));
-   //tex->arqNome = (char*) malloc((strlen(arq)+1)*sizeof(char));
 
    tex->arqNome = arq.c_str();
    tex->nome = nome.c_str();
@@ -151,6 +149,9 @@ GLuint InserirTextura(Map* mapa, string arq, string nome,
    return(tex->indice);
 }
 
+/********************************************************************
+ *                            drawQuad                              *
+ ********************************************************************/
 void drawQuad(GLfloat x1, GLfloat z1,
               GLfloat x2, GLfloat z2,
               GLfloat h1, GLfloat h2, GLfloat h3, GLfloat h4,
@@ -171,6 +172,9 @@ void drawQuad(GLfloat x1, GLfloat z1,
    glVertex3f( x2, h4, z1 );
 }
 
+/********************************************************************
+ *                            DrawFloor                             *
+ ********************************************************************/
 int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
               GLfloat matriz[6][4])
 {
@@ -316,12 +320,11 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
            glEnable(GL_TEXTURE_2D);
            glBindTexture(GL_TEXTURE_2D, textura);
 
-        /* Faz o desenho dos muros e meios Fio*/
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
         glColor3f(1.0,1.0,1.0);
 
-
+        /* Draw Walls */
         muro* maux = muros;
         int fezMeioFio = 0;
         GLfloat altura = MUROALTURA;
@@ -357,7 +360,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               double X = (maux->x2-maux->x1) / maux->dX;
               double Z = (maux->z2-maux->z1) / maux->dZ;
               double Y = (altura+1) / maux->dY;
-           /* Face de frente */
+           /* Front Face */
               glNormal3i(0,0,1);
               glTexCoord2f(0,Y);
               glVertex3f(maux->x1,altura,maux->z1);
@@ -367,7 +370,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               glVertex3f(maux->x2,-1,maux->z1);
               glTexCoord2f(0,0);
               glVertex3f(maux->x1,-1,maux->z1);
-           /* Face de tras */
+           /* Back Face */
               glNormal3i(0,0,-1);
               glTexCoord2f(0,Y);
               glVertex3f(maux->x1,altura,maux->z2);
@@ -377,7 +380,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               glVertex3f(maux->x2,-1,maux->z2);
               glTexCoord2f(0,0);
               glVertex3f(maux->x1,-1,maux->z2);
-           /* Face de esquerda */
+           /* Left Face */
               glNormal3i(-1,0,0);
               glTexCoord2f(Y,0);
               glVertex3f(maux->x1,altura,maux->z1);
@@ -387,7 +390,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               glVertex3f(maux->x1,-1,maux->z2);
               glTexCoord2f(0,0);
               glVertex3f(maux->x1,-1,maux->z1);
-           /* Face de direita */
+           /* Right Face */
               glNormal3i(1,0,0);
               glTexCoord2f(Y,0);
               glVertex3f(maux->x2,altura,maux->z1);
@@ -397,7 +400,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               glVertex3f(maux->x2,-1,maux->z2);
               glTexCoord2f(0,0);
               glVertex3f(maux->x2,-1,maux->z1);
-           /* Face de cima */
+           /* Upper Face */
               glNormal3i(0,1,0);
               glTexCoord2f(0,0);
               glVertex3f(maux->x1,altura,maux->z1);
@@ -419,7 +422,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         glEnd();
         glDisable(GL_TEXTURE_2D);
 
-        /* Faz o Desenho das Portas */
+        /* Draw Doors */
         door* porta = portas;
         while(porta != NULL)
         {
@@ -428,7 +431,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         }
 
 
-        /* Faz o desenho dos objects */
+        /* Draw objects */
         int o;
         GLfloat distancia;
         GLfloat deltaX, deltaZ;
@@ -489,7 +492,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 }
 
 /********************************************************************
- *                     Construtor dos Mapas                         *
+ *                          Map Constructor                         *
  ********************************************************************/
 Map::Map()
 {
@@ -504,7 +507,8 @@ Map::Map()
    music = "";
    npcFileName = "";
    particlesFileName = "";
-   /* Inicia Estruturas */
+   
+   /* Initialize Structs */
    Objetos = new(LmapObjeto);
    x = z = xInic = zInic = 0;
    SQUAREMINISIZE = 4;
@@ -527,12 +531,12 @@ Square* Map::quadradoRelativo(int xa, int za)
  ********************************************************************/
 int Map::open(string arquivo)
 {
-   FILE* arq;        // arquivo utilizado para o mapa
-   char buffer[128]; // buffer utilziado para ler
+   FILE* arq;        // file used for the map
+   char buffer[128]; // buffer used to read
    char nomeArq[128], nome[128];
    string arqVelho;
    int i;
-   int posX,posZ;    //posicao atual do quadrado anterior relativo
+   int posX,posZ;    //actual position of last active square
    int IDtexturaAtual = -1;
    int IDmuroTexturaAtual = -1;
    string nomeMuroTexturaAtual = "nada";
@@ -548,18 +552,18 @@ int Map::open(string arquivo)
 	return(0);
    }
 
-   /* Define o nome do mapa */
+   /* Define map file Name */
    arqVelho = name;
    name = arquivo;
 
    xInic = -1;
 
-   /* Faz a leitura do tamanho do mapa */   
+   /* Read size of the map */   
    fscanf(arq, "%s", buffer);
    if(buffer[0] == 'T')
    {
-      fgets(buffer, sizeof(buffer), arq); // lê até o final da linha 
-      sscanf(buffer,"%dX%d",&x,&z); // lê as dimensoes
+      fgets(buffer, sizeof(buffer), arq); 
+      sscanf(buffer,"%dX%d",&x,&z);
    }
    else
    {
@@ -625,7 +629,7 @@ int Map::open(string arquivo)
             npcFileName = nome;
             break;
          }
-         case 'd': /* Define Portas (Doors) */
+         case 'd': /* Define Doors */
          {
             porta = new(door);
             fgets(buffer, sizeof(buffer),arq);
@@ -637,18 +641,18 @@ int Map::open(string arquivo)
             portas = porta;
             break;
          }
-         case 'M': /* Define Musica */
+         case 'M': /* Define Music */
          {
             fgets(buffer,sizeof(buffer),arq);
             sscanf(buffer,"%s",nome);
             music = nome;
             break;
          }
-         case 'm': /* Define Muros (paredes) e Meios-Fio */
+         case 'm': /* Define Walls and Half Walls */
          {
             switch(buffer[1])
             {
-               case 'u': /* Define o muro */
+               case 'u': /* Define Wall */
                {
                   maux = new(muro);
                   fgets(buffer, sizeof(buffer),arq);
@@ -673,19 +677,16 @@ int Map::open(string arquivo)
                   muros = maux;
                   break;
                }
-               case 't': /* Define a textura do muro ou meio-Fio */
+               case 't': /* Define Wall texture */
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                  //if(nomeMuroTexturaAtual.compare(nomeArq) != 0 )
-                  //{
                      nomeMuroTexturaAtual = nome;
                      IDmuroTexturaAtual = IDTextura(this,nome,&R,&G,&B);
-                  //}
                   maux->textura = IDmuroTexturaAtual;
                   break;
                }
-               case 'e': /* Define MeioFio */
+               case 'e': /* Define Half Wall */
                {
                   maux = new(muro);
                   fgets(buffer, sizeof(buffer),arq);
@@ -713,9 +714,9 @@ int Map::open(string arquivo)
             }
             break;
          }
-         case 'i':/* Define a posição Inicial */
+         case 'i':/* Define initial Character Position */
          {
-            fgets(buffer, sizeof(buffer), arq); //até final da linha
+            fgets(buffer, sizeof(buffer), arq); 
             if(xInic == -1)
             {
                sscanf(buffer, "%d,%d",&xInic,&zInic);
@@ -725,33 +726,33 @@ int Map::open(string arquivo)
             }
             break;
          }
-         case 'o': /* Insere Objetos no Mapa */
+         case 'o': /* Insert Object */
          {
-             fgets(buffer, sizeof(buffer), arq); //até final da linha
+             fgets(buffer, sizeof(buffer), arq); 
              sscanf(buffer, "%s %s",nome,nomeArq);
              Objetos->InserirMapObjeto(nomeArq,nome);
              break;
          }
-         case 't': /* Insere Texturas no Mapa */
+         case 't': /* Insert Textures */
          {
-            fgets(buffer, sizeof(buffer), arq); //até final da linha
+            fgets(buffer, sizeof(buffer), arq);
             sscanf(buffer, "%s %s %d %d %d",nome,nomeArq,&R,&G,&B);  
             InserirTextura(this,nomeArq, nome,R,G,B);
             break;
          }
-         case 'p': /* Inserção de um novo quadrado */
+         case 'p': /* Insert new square */
          {
             numObjetosAtual = 0;
-            if(posX == (x-1)) //fim da linha de quadrados
+            if(posX == (x-1)) //end of the line of squares
             { 
                 posX = 0;
                 posZ++;
             }
-            else  //continua na mesma linha
+            else  //remains in the same line of squares
             {
                posX++;
             }
-            fgets(buffer, sizeof(buffer), arq); //até final da linha
+            fgets(buffer, sizeof(buffer), arq); 
             sscanf(buffer, "%d,%f,%f,%f,%f",&pisavel,
                                  &MapSquares[posX][posZ]->h1,
                                  &MapSquares[posX][posZ]->h2,
@@ -769,7 +770,7 @@ int Map::open(string arquivo)
             }
             break;
          }
-         case 'u':/* Utilização de Algo existente */
+         case 'u':/* Use something already declared */
          {
             switch(buffer[1])
             {
@@ -796,7 +797,7 @@ int Map::open(string arquivo)
 
                  break;
                }
-               case 't': /* Define a Textura do Quadrado */
+               case 't': /* Define Square's Textura */
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
@@ -807,7 +808,7 @@ int Map::open(string arquivo)
                   MapSquares[posX][posZ]->B = Batual;
                   break;
                }
-               case 'o': /* Insere Objeto no Quadrado */
+               case 'o': /* Insert Object on Square */
                {
                   if(numObjetosAtual >= MAXOBJETOS)
                   {
@@ -826,7 +827,9 @@ int Map::open(string arquivo)
                        &MapSquares[posX][posZ]->pisavelObj[numObjetosAtual]);
                      MapSquares[posX][posZ]->objects[numObjetosAtual] = 
                                                     Objetos->EndMapObjeto(nome);
-                     MapSquares[posX][posZ]->quadObjetos[i] = quadradoRelativo(MapSquares[posX][posZ]->quadXobjects[numObjetosAtual], MapSquares[posX][posZ]->quadZobjects[numObjetosAtual] );
+                     MapSquares[posX][posZ]->quadObjetos[i] = quadradoRelativo(
+                         MapSquares[posX][posZ]->quadXobjects[numObjetosAtual],
+                         MapSquares[posX][posZ]->quadZobjects[numObjetosAtual]);
                      numObjetosAtual++;
                   }
                   break;
@@ -837,20 +840,23 @@ int Map::open(string arquivo)
             }
             break; 
          }
-         case '#': //ignora o comentario
+         case '#': //ignore comentaires
          {
              fgets(buffer, sizeof(buffer), arq);
              break;
          }
-         default:
+         default: //something not defined!
+         {
                  printf("What is: %s on %s ?\n",buffer,arquivo.c_str());
                  break;
+         }
       }
    }
    fclose(arq);
 
    int ax,az;
-   /* Agora atualiza os ponteiros dos Muros */
+   
+   /* Now, actualize pointers to the walls */
    maux = muros;
    int inix,iniz,maxx,maxz;
    int indiceMuro;
@@ -951,7 +957,7 @@ void Map::newMap(int X, int Z)
  *******************************************************************/
 void Map::optimize()
 {
-    /* Verifica Sobreposicao de Muros */
+    /* Verify Wall Superposition */
     muro* maux = muros;
     while(maux != NULL)
     {
@@ -1036,6 +1042,7 @@ void Map::optimize()
 
    /* Verifica quadrados ocupados pelos Objetos */
 //TODO
+
 }
 
 
@@ -1053,17 +1060,17 @@ int Map::save(string arquivo)
 	return(0);
    }
    
-   /* Escreve Dimensões do Arquivo */
+   /* Write Dimensions */
    fprintf(arq,"T %dX%d\n",x,z);
    fprintf(arq,"# Made by DccNiTghtmare's MapEditor, v0.0.3\n");
 
-   /* Escreve o arquivo de neblina, se existente */
+   /* Write fog file name, if exists */
    if( !fog.fileName.empty())
    {
      fprintf(arq,"f %s\n",fog.fileName.c_str());
    }
   
-   /* Escreve o arquivo de npcs, se existente */
+   /* Write NPC file name, if exists */
    if( !npcFileName.empty())
    {
      fprintf(arq,"npc %s\n",npcFileName.c_str());
@@ -1076,18 +1083,19 @@ int Map::save(string arquivo)
    }
 
  
-   /* Escreve o arquivo de música, se existente */
+   /* Write music file name */
    if( !music.empty())
    {
      fprintf(arq,"MUSICA %s\n",music.c_str());
    }
 
+   /* Write Lights file name */
    /*if(!lights.empty())
    {
       fprintf(arq,"light %s\n",lights.c_str());
    }*/
 
-   /* Escreve os Objetos Utilizados */
+   /* Write used objects */
    if(Objetos->total>0)
    {
       mapObjeto* objAux = (mapObjeto*)Objetos->primeiro->proximo;
@@ -1098,35 +1106,37 @@ int Map::save(string arquivo)
       }
    }
 
-   /* Escreve as Texturas Utilizadas */
+   /* Write used Textures */
    texture* tex = (texture*)Texturas;
    while(tex)
    {
-      fprintf(arq,"t %s %s %d %d %d\n",tex->nome.c_str(),tex->arqNome.c_str(),tex->R,tex->G,tex->B);
+      fprintf(arq,"t %s %s %d %d %d\n",tex->nome.c_str(),tex->arqNome.c_str(),
+                                       tex->R,tex->G,tex->B);
       tex = (texture*)tex->proximo;
    }
 
-   /* Escreve Portas */
+   /* Write Doors */
    door* porta = (door*)portas;
    while(porta != NULL)
    {
       fprintf(arq,"d %s %f,%f:%d\n",porta->object->nome,porta->x,porta->z,
-                                     porta->orientacao);
+                                    porta->orientacao);
       porta = porta->proximo;
    }
    
-   /* Escreve os Muros */
+   /* Write Walls */
    muro* maux = (muro*)muros;
    int x1,z1,x2,z2;
    while(maux)
    {
       fprintf(arq,"muro %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
-              maux->z2,maux->dX,maux->dY,maux->dZ);
+                                                maux->z2,maux->dX,maux->dY,
+                                                maux->dZ);
       fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura).c_str());
       maux = (muro*)maux->proximo;
    }
 
-   /* Escreve Meios Fio */
+   /* Write Half Walls */
    maux = (muro*)meiosFio;
    while(maux)
    {
@@ -1136,7 +1146,7 @@ int Map::save(string arquivo)
    }
 
  
-   /* Escreve Quadrados, linha a linha */
+   /* Write Squares, line per line */
    for(z1=0;z1<z;z1++)
    {
       fprintf(arq,"#Z: %d\n",z1);
@@ -1179,7 +1189,7 @@ int Map::save(string arquivo)
       }
    }
 
-   /* Escreve Quadrado de Inicio */
+   /* Write Initial Character Position */
    x1 = xInic / SQUARESIZE;
    z1 = zInic / SQUARESIZE;
    fprintf(arq,"i %d,%d\n",x1,z1);
@@ -1193,7 +1203,7 @@ int Map::save(string arquivo)
  ********************************************************************/
 Map::~Map()
 {
-   /* Acabando com as texturas */
+   /* Delete All Textures */
    texture* tex = Texturas;
    texture* au;
    int i;
@@ -1205,7 +1215,7 @@ Map::~Map()
       delete(au);
    }
    
-   /* Acabando com os muros */
+   /* Delete all Walls */
    muro* m = muros;
    muro* am =NULL;
    while(m)
@@ -1215,8 +1225,7 @@ Map::~Map()
       free(am);
    }
 
-   /* Acabando com as Portas */
-   /* Acabando com os muros */
+   /* Deleting wall Doors */
    door* porta = portas;
    door* auxporta =NULL;
    while(porta)
@@ -1228,10 +1237,10 @@ Map::~Map()
 
 
 
-   /* Acabando com os objects */
+   /* Deleting all objects */
    delete(Objetos);
   
-   /* Acabando com os Quadrados */
+   /* Deleting all squares */
    int x1,z1;
    for(x1 = 0; x1<x; x1++)
    {
