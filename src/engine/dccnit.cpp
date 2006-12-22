@@ -244,10 +244,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
         GLfloat color[3]={1.0,1.0,1.0};
         glFogi(GL_FOG_MODE,GL_LINEAR);
         glFogfv(GL_FOG_COLOR, color);
-        glFogf(GL_FOG_DENSITY, 0.0010);
+        glFogf(GL_FOG_DENSITY, 0.10);
         glHint(GL_FOG_HINT, GL_DONT_CARE);
-        glFogf(GL_FOG_START, 200);
-        glFogf(GL_FOG_END,2*FARVIEW);
+        glFogf(GL_FOG_START, 100);
+        glFogf(GL_FOG_END,5000);
       }
    }
 
@@ -1695,15 +1695,7 @@ void engine::Draw()
 
    /* SKY */
    glPushMatrix();
-      /*if(!actualMap->fog.enabled)
-      {
-         glDisable(GL_FOG);
-      }*/
       gameSky->draw(actualMap,gameSun->getRotation());
-      /*if(!actualMap->fog.enabled)
-      {
-         glEnable(GL_FOG);
-      }*/
    glPopMatrix();
 
    glPushMatrix();

@@ -320,8 +320,8 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
            glEnable(GL_TEXTURE_2D);
            glBindTexture(GL_TEXTURE_2D, textura);
 
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
         glColor3f(1.0,1.0,1.0);
 
         /* Draw Walls */
@@ -349,8 +349,8 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               textura = maux->textura;
               glEnable(GL_TEXTURE_2D);
               glBindTexture(GL_TEXTURE_2D, textura);
-              glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-              glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+              glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+              glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 
               glBegin(GL_QUADS);
            }
