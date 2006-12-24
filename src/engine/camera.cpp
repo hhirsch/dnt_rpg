@@ -16,6 +16,7 @@ camera::camera()
    cameraY = centerY + (float) d * sin(deg2Rad(theta));
    cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    middleMouse = false;
+   type = CAMERA_TYPE_NORMAL;
 }
 
 /******************************************************************
@@ -128,9 +129,13 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    if(modify)
    {
       if(theta > 89) 
+      {
          theta = 89;
+      }
       else if(theta < 0)
+      {
          theta = 0;
+      }
       
    }
 
@@ -148,82 +153,168 @@ void camera::lookAt()
    gluLookAt(cameraX,cameraY,cameraZ, centerX, centerY, centerZ, 0,1,0);
 }
 
-
+/******************************************************************
+ *                          getCameraX                            *
+ ******************************************************************/
 GLfloat camera::getCameraX(){
    return(cameraX);
 }
 
+/******************************************************************
+ *                          getCameraY                            *
+ ******************************************************************/
 GLfloat camera::getCameraY()
 {
    return(cameraY);
 }
 
+/******************************************************************
+ *                          getCameraZ                            *
+ ******************************************************************/
 GLfloat camera::getCameraZ()
 {
    return(cameraZ);
 }
 
+/******************************************************************
+ *                           sumTheta                             *
+ ******************************************************************/
 void camera::sumTheta(GLfloat f)
 {
    theta += f;
    if(theta > 89) 
+   {
       theta = 89;
+   }
    else if(theta < 0)
+   {
       theta = 0;
+   }
 }
 
+/******************************************************************
+ *                            sumPhi                              *
+ ******************************************************************/
 void camera::sumPhi(GLfloat f)
 {
    phi += f;
 }
 
+/******************************************************************
+ *                             sumD                               *
+ ******************************************************************/
 void camera::sumD(GLfloat f)
 {
    d += f;
-   if (d<1) d = 1;
-   else if (d>300) d = 300;
+   if (d<1) 
+   {
+      d = 1;
+   }
+   else if (d>300)
+   {
+      d = 300;
+   }
 }
 
+/******************************************************************
+ *                             getPhi                             *
+ ******************************************************************/
 GLfloat camera::getPhi()
 {
    return(phi);
 }
 
+/******************************************************************
+ *                            getTheta                            *
+ ******************************************************************/
 GLfloat camera::getTheta()
 {
    return(theta);
 }
 
+
+/******************************************************************
+ *                              getD                              *
+ ******************************************************************/
 GLfloat camera::getD()
 {
    return(d);
 }
 
+
+/******************************************************************
+ *                           getDeltaY                            *
+ ******************************************************************/
 GLfloat camera::getDeltaY()
 {
    return(deltaY);
 }
 
+
+/******************************************************************
+ *                           getCenterX                           *
+ ******************************************************************/
 GLfloat camera::getCenterX()
 {
    return(centerX);
 }
 
+/******************************************************************
+ *                           getCenterY                           *
+ ******************************************************************/
 GLfloat camera::getCenterY()
 {
    return(centerY);
 }
 
+/******************************************************************
+ *                           getCenterZ                           *
+ ******************************************************************/
 GLfloat camera::getCenterZ()
 {
    return(centerZ);
 }
 
-
+/******************************************************************
+ *                        actualizeCamera                         *
+ ******************************************************************/
 void camera::actualizeCamera(GLfloat characterX, GLfloat characterY, 
                              GLfloat characterZ, GLfloat characterOrientation)
 {
    centerX = characterX;
    centerZ = characterZ;
    //centerY = characterY;
+   
+   if( (type == CAMERA_TYPE_DRIVE) && (characterOrientation != phi) )
+   {
+      GLfloat variation = fabs(characterOrientation - phi);
+      GLfloat othVariation = fabs(360-variation);
+      if( (variation <= DELTACAMERA) || (othVariation <= DELTACAMERA) )
+      {
+         phi = characterOrientation;
+      }
+      else if(phi > characterOrientation)
+      {
+         if(variation < othVariation)
+         {
+            phi -= DELTACAMERA;
+         }
+         else
+         {
+            phi += DELTACAMERA;
+         }
+      }
+      else
+      {
+         if(variation < othVariation)
+         {
+            phi += DELTACAMERA;
+         }
+         else
+         {
+            phi -= DELTACAMERA;
+         }
+      }
+   }
 }
+

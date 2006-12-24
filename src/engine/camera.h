@@ -8,6 +8,9 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 
+#define CAMERA_TYPE_NORMAL 1
+#define CAMERA_TYPE_DRIVE  2
+
 /*! The Camera Manipulation Class */
 class camera
 {
@@ -96,6 +99,8 @@ class camera
       bool middleMouse;                 /**< Middle Mouse Camera Control */  
       int prevX,                        /**< Previous Mouse X position */
           prevY;                        /**< Previous Mouse Z position */
+
+      int type;                         /**< Internal Camera Type */
 };
 
 #endif
