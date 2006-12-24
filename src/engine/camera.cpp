@@ -287,6 +287,7 @@ void camera::actualizeCamera(GLfloat characterX, GLfloat characterY,
    
    if( (type == CAMERA_TYPE_DRIVE) && (characterOrientation != phi) )
    {
+      /* Make the camera follow character rotations */
       GLfloat variation = fabs(characterOrientation - phi);
       GLfloat othVariation = fabs(360-variation);
       if( (variation <= DELTACAMERA) || (othVariation <= DELTACAMERA) )

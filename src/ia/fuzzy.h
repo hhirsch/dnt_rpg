@@ -27,7 +27,7 @@ class fuzzy
                                   float xa, float xb, float xc, float xd);
 
        /*! Add variable to the fuzzy class
-        * \param func -> function type
+        * \param functionType -> function type
         * \param xa -> first used coordinate 
         * \param xb -> second used coordinate
         * \param xc -> third used coordinate

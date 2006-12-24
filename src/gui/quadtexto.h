@@ -12,27 +12,30 @@
 #include <string>
 using namespace std;
 
+/*! Class of text bar (quadroTexto) representation. */
 class quadroTexto: public Tobjeto
 {
    public:
+      /*! Destructor */
       ~quadroTexto();
+      
       int x1,y1,x2,y2;     /* Coordenadas da Janela */
       int moldura;         /* 1, moldura e fundo, 2 so moldura */
-      string texto;         /* Texto Escrito */
+      string texto;        /* Texto Escrito */
       cores Cores;
       string fonte;
       int aliFonte;
       int tamFonte;
 
-      /* Desenha na superficie um qudroTexto
-       * Xjan, Yjan -> coordenadas da janela
-       * qt         -> quadroTexto a ser desenhado
-       * Salvar     -> !=0 para atualizar a superficie
-       * screen     -> superficie onde sera desenhado o quadroTexto */
+      /*! Draw in the Surface the text bar (quadroTexto)
+       * \param Xjan -> X window Coordinate
+       * \param Yjan -> Y Window Coordinate
+       * \param qt -> quadroTexto to be draw
+       * \param Salvar -> !=0 to actualize surface
+       * \param screen -> surface where quadroTexto will draw */
       void Desenhar(int Xjan,int Yjan, int Salvar, SDL_Surface *screen);
 
-};          /* Quadro de Texto */
-
+};
 
 
 #endif

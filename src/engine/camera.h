@@ -8,8 +8,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 
-#define CAMERA_TYPE_NORMAL 1
-#define CAMERA_TYPE_DRIVE  2
+#define CAMERA_TYPE_NORMAL 1  /**< Normal Camera Mode */
+#define CAMERA_TYPE_DRIVE  2  /**< Drive Camera Mode */
 
 /*! The Camera Manipulation Class */
 class camera
