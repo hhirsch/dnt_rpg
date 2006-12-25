@@ -118,7 +118,7 @@ cxSel* Tlista::insertCxSel(int xa,int ya, bool selected)
    novo = new cxSel;
    novo->x = xa;
    novo->y = ya;
-   novo->selected = selected;
+   novo->setSelection(selected);
    novo->tipo = CXSEL;
    novo->Colors.Iniciar();
    InserirObj(novo);

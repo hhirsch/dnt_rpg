@@ -57,6 +57,11 @@ class lang
    static string OPTIONS_MUSIC_VOLUME;
    static string OPTIONS_SNDFX_VOLUME;
    static string OPTIONS_LANGUAGE;
+   static string OPTIONS_CAMERA;
+   static string OPTIONS_CAMERA_NORMAL;
+   static string OPTIONS_CAMERA_DRIVE;
+   static string OPTIONS_GRASS;
+   static string OPTIONS_PARTICLES;
 
    /* skillwindow.cpp */
    static string SKILL_TITLE;

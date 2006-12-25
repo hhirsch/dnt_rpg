@@ -276,6 +276,14 @@ GLfloat camera::getCenterZ()
 }
 
 /******************************************************************
+ *                          defineCameraType                      *
+ ******************************************************************/
+void camera::defineCameraType(int value)
+{
+   type = value;
+}
+
+/******************************************************************
  *                        actualizeCamera                         *
  ******************************************************************/
 void camera::actualizeCamera(GLfloat characterX, GLfloat characterY, 

@@ -34,10 +34,13 @@ class options
       /*! Treat options Window Events */
       int Treat(Tobjeto* object, int eventInfo, interface* interf);
 
-      int     musicVolume; /**< Actual Music Volume */
-      int     sndfxVolume; /**< Actual Sound Effects Volume */
-      int     langNumber;  /**< Actual Language Number */
-      janela* window;      /**< Options Window Pointer */
+      int     musicVolume;     /**< Actual Music Volume */
+      int     sndfxVolume;     /**< Actual Sound Effects Volume */
+      int     langNumber;      /**< Actual Language Number */
+      int     cameraNumber;    /**< Actual Camera Mode */
+      bool    enableParticles; /**< Enable/Disable Particles */
+      bool    enableGrass;     /**< Enable/Disable Grass */
+      janela* window;          /**< Options Window Pointer */
 
 
    private:
@@ -45,6 +48,8 @@ class options
       quadroTexto* txtMusicVolume; /**< Music Volume Text on Window*/
       quadroTexto* txtSndfxVolume; /**< Sound Effects Volume Text on Window*/
       quadroTexto* txtLanguage;    /**< Language Text on Window */
+      quadroTexto* txtCamera;      /**< Camera Mode Text on Window */
+      int          prevCamera;     /**< Previous used Camera Mode */
       int          prevMusicVolume;/**< Previous used Music Volume */
       int          prevSndfxVolume;/**< Previous Used Sound Effects Volume */
       int          prevLanguage;   /**< Previous Used Language */
@@ -54,16 +59,29 @@ class options
 
       botao* buttonMusSum;
       botao* buttonMusDec;
+      
       botao* buttonSndSum;
       botao* buttonSndDec;
+      
       botao* buttonLangSum;
       botao* buttonLangDec;
+
+      botao* buttonCamSum;
+      botao* buttonCamDec;
+
+      cxSel* cxSelGrass;
+      cxSel* cxSelParticles;
+      
       botao* buttonConfirm;
       botao* buttonCancel;
 
       /*! Get the Actual Language Name
        * \return the name of the language. */
       string languageName();
+
+      /*! Get the Actual Camera Name
+       * \return the name of the camera. */
+      string cameraName();
 };
 
 

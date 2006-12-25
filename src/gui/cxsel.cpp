@@ -5,6 +5,13 @@
 
 #include "cxsel.h"
 
+
+cxSel::cxSel():Tobjeto()
+{
+   selected = false;
+   lastChangeTime = SDL_GetTicks();
+}
+
 void cxSel::draw(SDL_Surface *screen)
 {
    cor_Definir(Colors.corCont[0].R, Colors.corCont[0].G, Colors.corCont[0].B);
@@ -22,5 +29,25 @@ void cxSel::draw(SDL_Surface *screen)
       linha_Desenhar(screen, x+7, y+2, x+1, y+8, 0);
       linha_Desenhar(screen, x+9, y+2, x+3, y+8, 0);
    }
+}
+
+bool cxSel::isSelected()
+{
+   return(selected);
+}
+
+void cxSel::invertSelection()
+{
+   GLuint actualTime = SDL_GetTicks();
+   if((actualTime - lastChangeTime) >= 100)
+   {
+      selected = !selected;
+      lastChangeTime = actualTime;
+   }
+}
+
+void cxSel::setSelection(bool value)
+{
+   selected = value;
 }
 

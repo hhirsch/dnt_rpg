@@ -327,7 +327,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if(foco == FOCO_CXSEL)
     {
        cxSel* cx = (cxSel*)objAtivo;
-       cx->selected = !cx->selected;
+       cx->invertSelection();
        cx->draw(ljan->janelaAtiva->cara);
        ljan->janelaAtiva->AtualizaCara();
        foco = FOCO_JOGO;

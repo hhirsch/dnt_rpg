@@ -75,6 +75,10 @@ class camera
       /*! Do the camera Look At */
       void lookAt();
 
+      /*! Define new Camera Type
+       * \param value -> value of the new camera type */
+      void defineCameraType(int value);
+
       /*! Actualize Camera Position
        * \param characterX -> character X position 
        * \param characterY -> character Y position

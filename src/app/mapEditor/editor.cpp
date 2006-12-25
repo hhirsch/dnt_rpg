@@ -514,7 +514,7 @@ void editor::draw()
 
    /* Draw Particles */
    glPushMatrix();
-      particleSystem->actualizeAll(0,0,visibleMatrix);
+      particleSystem->actualizeAll(0,0,visibleMatrix, true);
    glPopMatrix();
 
    /* Draw GUI */

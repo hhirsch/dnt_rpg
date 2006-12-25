@@ -89,6 +89,12 @@ void lang::ReloadFile(int lng)
    getline(file, OPTIONS_MUSIC_VOLUME);
    getline(file, OPTIONS_SNDFX_VOLUME);
    getline(file, OPTIONS_LANGUAGE);
+   getline(file, OPTIONS_CAMERA);
+   getline(file, OPTIONS_CAMERA_NORMAL);
+   getline(file, OPTIONS_CAMERA_DRIVE);
+   getline(file, OPTIONS_GRASS);
+   getline(file, OPTIONS_PARTICLES);
+
 
    /* skillwindow.cpp */
    getline(file, SKILL_TITLE);
@@ -193,6 +199,12 @@ void lang::ReloadFile(int lng)
    string lang::OPTIONS_MUSIC_VOLUME;
    string lang::OPTIONS_SNDFX_VOLUME;
    string lang::OPTIONS_LANGUAGE;
+   string lang::OPTIONS_CAMERA;
+   string lang::OPTIONS_CAMERA_NORMAL;
+   string lang::OPTIONS_CAMERA_DRIVE;
+   string lang::OPTIONS_GRASS;
+   string lang::OPTIONS_PARTICLES;
+
 
    
    /* skillwindow.cpp */

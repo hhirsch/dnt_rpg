@@ -51,6 +51,9 @@ engine::engine()
 
    /* Set sound and music volume, based on options */
    snd->changeVolume(option->musicVolume, option->sndfxVolume);
+
+   /* Set Camera, based on options */
+   gameCamera.defineCameraType(option->cameraNumber);
   
    /* Load Features List */
    features = new featsList(language.FEATS_DIR,"../data/feats/feats.ftl");
@@ -352,7 +355,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    if(!actualMap->particlesFileName.empty())
    {
        particleSystem->loadFromFile(actualMap->particlesFileName);
-       particleSystem->stabilizeAll();
+       if(option->enableParticles)
+       {
+          particleSystem->stabilizeAll();
+       }
    }
    else
    {
@@ -473,8 +479,12 @@ int engine::OptionsScreen(GLuint* idTextura)
          SDL_Delay((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) );
       }
    }
-
-   snd->changeVolume(option->musicVolume, option->sndfxVolume);
+  
+   if(optionW == OPTIONSW_CONFIRM)
+   {
+      snd->changeVolume(option->musicVolume, option->sndfxVolume);
+      gameCamera.defineCameraType(option->cameraNumber);
+   }
 
    delete(alignList);
    alignList = new aligns(language.ALIGN_DIR.c_str(),
@@ -1897,11 +1907,14 @@ void engine::Draw()
    }
 
    /* Draw Particles */
-   glPushMatrix();
-      particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
-                                   PCs->personagemAtivo->posicaoLadoZ, 
-                                   visibleMatrix);
-   glPopMatrix();
+   if(option->enableParticles)
+   {
+      glPushMatrix();
+         particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
+                                      PCs->personagemAtivo->posicaoLadoZ, 
+                                      visibleMatrix, option->enableGrass);
+      glPopMatrix();
+   }
 
    /* Draw the GUI and others */
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
