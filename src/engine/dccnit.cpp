@@ -250,7 +250,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
         glFogf(GL_FOG_DENSITY, 0.10);
         glHint(GL_FOG_HINT, GL_DONT_CARE);
         glFogf(GL_FOG_START, 100);
-        glFogf(GL_FOG_END,5000);
+        glFogf(GL_FOG_END, HALFFARVIEW);
       }
    }
 
@@ -1880,7 +1880,18 @@ void engine::Draw()
       glPopMatrix();
    }
 
+   if(!actualMap->fog.enabled)
+   {
+      glDisable(GL_FOG);
+   }
    gameSun->drawSun();
+
+   if(!actualMap->fog.enabled)
+   {
+      glEnable(GL_FOG);
+   }
+
+   
 
    if(curConection)
    {

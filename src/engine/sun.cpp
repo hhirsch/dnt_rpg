@@ -163,13 +163,13 @@ void sun::drawSun()
       glTranslatef(where[0]-4000, where[1], /*where[2]-4000*/0.0);
       glBegin(GL_QUADS);
       glTexCoord2f(0,0);
-      glVertex3f(0, 1500, -1500);
+      glVertex3f(0, 250, -250);
       glTexCoord2f(0,1);
-      glVertex3f(0, -1500, -1500);
+      glVertex3f(0, -250, -250);
       glTexCoord2f(1,1);
-      glVertex3f(0, -1500, 1500);
+      glVertex3f(0, -250, 250);
       glTexCoord2f(1,0);
-      glVertex3f(0, +1500, 1500);
+      glVertex3f(0, +250, 250);
       glEnd();
    glPopMatrix();
    glDisable(GL_BLEND);
