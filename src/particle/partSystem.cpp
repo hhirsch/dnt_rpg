@@ -174,6 +174,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
       }
    }
 
+   glDisable(GL_FOG);
    for(i = 0; i < MAX_FIRE; i++)
    {
       if(fire[i] != NULL)
@@ -185,6 +186,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
          fire[i]->NextStep(matriz);
       }
    }
+   glEnable(GL_FOG);
 
    for(i = 0; i < MAX_WATER_SURFACE; i++)
    {
