@@ -242,7 +242,7 @@ void editor::newMap()
    mapOpened = true;
    map = new(Map);
    //TODO Get Map Size!!!!
-   map->newMap(8,8);
+   map->newMap(32,32);
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wall(map);

@@ -136,7 +136,14 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       {
          theta = 0;
       }
-      
+      if(phi < 0)
+      {
+         phi += 360;
+      }
+      else if(phi >= 360)
+      {
+         phi = phi - 360;
+      }
    }
 
    return(modify);
@@ -198,6 +205,14 @@ void camera::sumTheta(GLfloat f)
 void camera::sumPhi(GLfloat f)
 {
    phi += f;
+   if(phi < 0)
+   {
+      phi += 360;
+   }
+   else if(phi >= 360)
+   {
+      phi = phi - 360;
+   }
 }
 
 /******************************************************************
