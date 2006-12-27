@@ -59,7 +59,14 @@ class listStar
       int totalNodes;         /**< Total Nodes in the list */
 };
 
-/*! A* implementation */
+#define ASTAR_STATE_OTHER     0  /**< A* Other State */
+#define ASTAR_STATE_RUNNING   1  /**< A* Running State (searching for path) */
+#define ASTAR_STATE_FOUND     2  /**< A* Found Path State */   
+#define ASTAR_STATE_NOT_FOUND 3  /**< A* Not Found Path State */
+
+/*! A* implementation. The A* will be search in paralel when called with 
+ *  findPath. When running, state is RUNNING. When end running, state is
+ *  FOUND or NOT_FOUND, based on the result of the search. */
 class aStar
 {
    public:
@@ -72,7 +79,25 @@ class aStar
        *  \param map -> current opened map. */
       void defineMap(Map* map);
 
-      /*! A* to find path
+      /*! Calls A* thread to find path
+       * \param actualX -> current x position
+       * \param actualZ -> current z position 
+       * \param x -> destiny x position
+       * \param z -> desired z position
+       * \param stepSize -> size of the Step
+       * \param orientation -> character orientation
+       * \param perX1 -> per X initial Bounding position
+       * \param perY1 -> per Y initial Bounding position
+       * \param perZ1 -> per Z initial Bounding position
+       * \param perX2 -> per X final Bounding position
+       * \param perY2 -> per Y final Bounding position
+       * \param perZ2 -> per Z final Bounding position */
+      void findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
+                    GLfloat stepSize, GLfloat orientation,
+                    GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
+                    GLfloat perX2, GLfloat perY2, GLfloat perZ2);
+
+      /*! A* to find path INTERNAL
        * \param actualX -> current x position
        * \param actualZ -> current z position 
        * \param x -> destiny x position
@@ -86,10 +111,12 @@ class aStar
        * \param perY2 -> per Y final Bounding position
        * \param perZ2 -> per Z final Bounding position
        * \return true if found path, false otherwise. */
-      bool findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
-                    GLfloat stepSize, GLfloat orientation,
-                    GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
-                    GLfloat perX2, GLfloat perY2, GLfloat perZ2);
+      bool findPathInternal(GLfloat actualX, GLfloat actualZ, 
+                            GLfloat x, GLfloat z,
+                            GLfloat stepSize, GLfloat orientation,
+                            GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
+                            GLfloat perX2, GLfloat perY2, GLfloat perZ2);
+
 
       /*! Get the New Character Position, based on Path Found previously 
        * \param posX -> new X position
@@ -106,11 +133,27 @@ class aStar
       /*! Draws the founded path */
       void drawPath();
 
+      /*! Get Actual State of the aStar and put it on OTHER mode
+       * \return state value if the state is nor RUNNING. */
+      int getState();      
+
    private:
-      Map* actualMap;         /**< Pointer to opened Map */
-      GLfloat destinyX,       /**< Destiny X position */
-              destinyZ;       /**< Destiny Z position */
-      pattAgent* patt;        /**< The Pattern Agent to Follow created path */
+      Map* actualMap;           /**< Pointer to opened Map */
+      GLfloat destinyX,         /**< Destiny X position */
+              destinyZ;         /**< Destiny Z position */
+      pattAgent* patt;          /**< The Pattern Agent to Follow created path */
+      int state;                /**< Internal State of the aStar */
+      SDL_Thread* searchThread; /**< The Search Paralel Thread */
+      SDL_mutex* searchMutex;   /**< The Search Mutex */
+      GLuint lastCallTime;      /**< Last Time when Called Search */
+
+
+      /*! lock Mutex */
+      void lock();
+      /*! unLock Mutex */
+      void unLock();
+
+
 };
 
 

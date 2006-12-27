@@ -1521,9 +1521,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       /* Mouse Verification */
       if(Mbotao & SDL_BUTTON(3))
       {
-         
          PCs->personagemAtivo->pathFind.defineMap(actualMap);
-         if(PCs->personagemAtivo->pathFind.findPath(
+       
+         PCs->personagemAtivo->pathFind.findPath(
                                              PCs->personagemAtivo->posicaoLadoX,
                                              PCs->personagemAtivo->posicaoLadoZ,
                                              xReal, zReal, ANDAR, 
@@ -1533,15 +1533,14 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                              PCs->personagemAtivo->min[2],
                                              PCs->personagemAtivo->max[0],
                                              PCs->personagemAtivo->max[1],
-                                             PCs->personagemAtivo->max[2]))
-         {
-            //Found path to, so walk
-            walkStatus = ENGINE_WALK_MOUSE;
-         }
-         else
-         {
-            walkStatus = ENGINE_WALK_KEYS;
-         }
+                                             PCs->personagemAtivo->max[2]);
+      }
+
+      /* Verify if found path in aStar */
+      if(PCs->personagemAtivo->pathFind.getState() == ASTAR_STATE_FOUND)
+      {
+         //Found path to, so walk
+         walkStatus = ENGINE_WALK_MOUSE;
       }
 
       if(walkStatus == ENGINE_WALK_MOUSE)
@@ -1914,8 +1913,6 @@ void engine::Draw()
 
       glDisable( GL_BLEND );
       glColor3f(1.0,1.0,1.0);
-      //glDisable(GL_COLOR_MATERIAL);
-      //glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
       glPopMatrix();
    }
 
