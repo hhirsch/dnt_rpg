@@ -4,13 +4,14 @@
 #include "../engine/util.h"
 
 sound* actualSound;
+bool running = true;
 
 /*************************************************************************
  *                          runParalelSound                              *
  *************************************************************************/
 int runParalelSound(void* param)
 {
-   while(true)
+   while(running)
    {
       actualSound->lock();
       actualSound->flush();
@@ -116,8 +117,12 @@ sound::~sound()
          snd= snd->next;
       }
    
-      /* Destroy Thread and Mutex */
-      SDL_KillThread(soundThread);
+      /* End the Thread */
+      lock();
+      running = false;
+      unLock();
+
+      /* Destroy the Mutex */
       SDL_DestroyMutex(soundMutex);
    
       /* Clear OpenAL Context and Device */
