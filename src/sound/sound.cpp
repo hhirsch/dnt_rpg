@@ -15,7 +15,7 @@ int runParalelSound(void* param)
       actualSound->lock();
       actualSound->flush();
       actualSound->unLock();
-      SDL_Delay(100);
+      SDL_Delay(50);
    }
    return(1);
 }
