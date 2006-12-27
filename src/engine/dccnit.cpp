@@ -1895,7 +1895,7 @@ void engine::Draw()
 
    if(curConection)
    {
-      GLfloat ambient[] = { 0.29, 0.492, 0.82, 0.45 };
+      GLfloat ambient[] = { 0.94, 0.292, 0.22, 0.45 };
       glPushMatrix();
       glEnable( GL_BLEND );
       glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1904,6 +1904,7 @@ void engine::Draw()
          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
          glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, ambient);
          glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, ambient);
+         glColor4fv(ambient);
          glNormal3f(0,1,0);
          glVertex3f(curConection->x1, 0.5, curConection->z1);
          glVertex3f(curConection->x1, 0.5, curConection->z2);
@@ -1912,11 +1913,13 @@ void engine::Draw()
       glEnd();
 
       glDisable( GL_BLEND );
-      glDisable(GL_COLOR_MATERIAL);
-      glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+      glColor3f(1.0,1.0,1.0);
+      //glDisable(GL_COLOR_MATERIAL);
+      //glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
       glPopMatrix();
    }
 
+   
    /* Draw Particles */
    if(option->enableParticles)
    {

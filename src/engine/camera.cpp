@@ -128,6 +128,7 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
 
    if(modify)
    {
+      /* Verify Theta Limits */
       if(theta > 89) 
       {
          theta = 89;
@@ -136,6 +137,8 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       {
          theta = 0;
       }
+
+      /* Put Phi on [0-360) range */
       if(phi < 0)
       {
          phi += 360;
