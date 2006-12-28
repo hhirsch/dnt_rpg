@@ -160,7 +160,7 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
    GLfloat varHeight = 0, nx = 0, nz = 0;
    Square* perQuad = NULL;
    GLfloat posX=0, posZ=0;
-   GLfloat newg=0;
+   GLfloat newg=0, heuristic;
    pointStar* node, *node2, *node3;
    listStar opened;
    listStar closed;
@@ -262,6 +262,16 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
         node2 = closed.find(posX, posZ);
         node3 = opened.find(posX, posZ);
 
+        float DX = fabs(destinyX - posX);
+        float DY = fabs(destinyZ - posZ);
+        float Orthogonal = fabs(DX - DY);
+        float Diagonal = fabs(((DX + DY) - Orthogonal)/2);
+        
+        heuristic = Diagonal + Orthogonal + DX + DY;
+
+        /*heuristic = sqrt((posX - destinyX) * (posX - destinyX) + 
+                         (posZ - destinyZ) * (posZ - destinyZ)); */
+
         perQuad = actualMap->quadradoRelativo((int)floor( posX / (SQUARESIZE)),
                                               (int)floor( posZ / (SQUARESIZE)));
         if( (node2 != NULL) || (node3 != NULL) || 
@@ -275,27 +285,18 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
            if( (node2 != NULL) && (node2->gone > newg))
            {
               closed.remove(node2);
-              opened.insert(posX, posZ, newg, 
-                            sqrt((posX - destinyX) * (posX - destinyX) + 
-                            (posZ - destinyZ) * (posZ - destinyZ)),
-                            node->x, node->z);
+              opened.insert(posX, posZ, newg, heuristic, node->x, node->z);
            }
            
            if( (node3 != NULL) && (node3->gone > newg))
            {
               opened.remove(node3);
-              opened.insert(posX, posZ, newg, 
-                            sqrt((posX - destinyX) * (posX - destinyX) + 
-                            (posZ - destinyZ) * (posZ - destinyZ)),
-                            node->x, node->z);
+              opened.insert(posX, posZ, newg, heuristic, node->x, node->z);
            }
         }
         else
         {
-           opened.insert(posX, posZ, newg, 
-                         sqrt((posX - destinyX) * (posX - destinyX) + 
-                         (posZ - destinyZ) * (posZ - destinyZ)),
-                         node->x, node->z);
+           opened.insert(posX, posZ, newg, heuristic, node->x, node->z);
         }
       }
 
