@@ -161,7 +161,7 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
    Square* perQuad = NULL;
    GLfloat posX=0, posZ=0;
    GLfloat newg=0;
-   pointStar* node, *node2;
+   pointStar* node, *node2, *node3;
    listStar opened;
    listStar closed;
    destinyX = x;
@@ -191,7 +191,8 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
          unLock();
          return(false);
       }
-      
+     
+       /* Verify if arrived at destiny */
       if( (node->x>=destinyX-(stepSize*5))&&(node->x<=destinyX+(stepSize*5)) && 
           (node->z>=destinyZ-(stepSize*5))&&(node->z<=destinyZ+(stepSize*5)) )
       {
@@ -205,8 +206,6 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
          destinyZ = node->z;
 
          /* Make the Founded path */
-         //patt->addWayPointFirst(destinyX, destinyZ);
-         
          while( (node != NULL) )
          {
             patt->addWayPointFirst(node->x, node->z);
@@ -218,7 +217,7 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
          return(true);
       }
 
-      //Visit all Adjacents Positions
+      /* Visit all Adjacents Positions */
       for(i=0; i<9; i++)
       {
          switch(i) {
@@ -261,10 +260,11 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
                                  (posZ - node->z) * (posZ - node->z));*/
         
         node2 = closed.find(posX, posZ);
+        node3 = opened.find(posX, posZ);
 
         perQuad = actualMap->quadradoRelativo((int)floor( posX / (SQUARESIZE)),
                                               (int)floor( posZ / (SQUARESIZE)));
-        if( (node2 != NULL) || (opened.find(posX, posZ)) || 
+        if( (node2 != NULL) || (node3 != NULL) || 
             (perQuad == NULL) ||
             (!collisionDetect.canWalk(posX, 0, posZ, 
                                       perX1, perY1, perZ1, 
@@ -272,7 +272,23 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
                                       orientation, perQuad,
                                       NULL, varHeight, nx, nz)) )
         {
-           //continue;
+           if( (node2 != NULL) && (node2->gone > newg))
+           {
+              closed.remove(node2);
+              opened.insert(posX, posZ, newg, 
+                            sqrt((posX - destinyX) * (posX - destinyX) + 
+                            (posZ - destinyZ) * (posZ - destinyZ)),
+                            node->x, node->z);
+           }
+           
+           if( (node3 != NULL) && (node3->gone > newg))
+           {
+              opened.remove(node3);
+              opened.insert(posX, posZ, newg, 
+                            sqrt((posX - destinyX) * (posX - destinyX) + 
+                            (posZ - destinyZ) * (posZ - destinyZ)),
+                            node->x, node->z);
+           }
         }
         else
         {
@@ -281,7 +297,6 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
                          (posZ - destinyZ) * (posZ - destinyZ)),
                          node->x, node->z);
         }
-                   
       }
 
       closed.insert(node->x, node->z, node->gone, node->heuristic, 
