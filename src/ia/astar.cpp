@@ -160,7 +160,7 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
    GLfloat varHeight = 0, nx = 0, nz = 0;
    Square* perQuad = NULL;
    GLfloat posX=0, posZ=0;
-   GLfloat newg=0, heuristic;
+   GLfloat newg=0, heuristic, dX, dZ, diagonal, orthogonal;
    pointStar* node, *node2, *node3;
    listStar opened;
    listStar closed;
@@ -255,22 +255,18 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
            break;
         }
        
-        newg = node->gone + 1;
-        /*newg = node->gone + sqrt((posX - node->x) * (posX - node->x) + 
-                                 (posZ - node->z) * (posZ - node->z));*/
+        newg = node->gone + sqrt((posX - node->x) * (posX - node->x) + 
+                                 (posZ - node->z) * (posZ - node->z));
         
         node2 = closed.find(posX, posZ);
         node3 = opened.find(posX, posZ);
 
-        float DX = fabs(destinyX - posX);
-        float DY = fabs(destinyZ - posZ);
-        float Orthogonal = fabs(DX - DY);
-        float Diagonal = fabs(((DX + DY) - Orthogonal)/2);
+        dX = fabs(destinyX - posX);
+        dZ = fabs(destinyZ - posZ);
+        orthogonal = fabs(dX - dZ);
+        diagonal = fabs(((dX + dZ) - orthogonal)/2);
         
-        heuristic = Diagonal + Orthogonal + DX + DY;
-
-        /*heuristic = sqrt((posX - destinyX) * (posX - destinyX) + 
-                         (posZ - destinyZ) * (posZ - destinyZ)); */
+        heuristic = diagonal + orthogonal + dX + dZ;
 
         perQuad = actualMap->quadradoRelativo((int)floor( posX / (SQUARESIZE)),
                                               (int)floor( posZ / (SQUARESIZE)));
