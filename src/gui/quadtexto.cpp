@@ -24,8 +24,8 @@ void quadroTexto::Desenhar(int Xjan,int Yjan, int Salvar, SDL_Surface *screen)
    }
    cor_Definir(Cores.corTexto.R,Cores.corTexto.G,Cores.corTexto.B);
    selFonte(fonte.c_str(),aliFonte,tamFonte);
-   escxy_Area(screen, Xjan+x1+4, Yjan+y1, texto.c_str(), Xjan+x1+2,
-                      Yjan+y1, Xjan+x2-2, Yjan+y2);
+   escxy_Area(screen, Xjan+x1+5, Yjan+y1, texto.c_str(), Xjan+x1+5,
+                      Yjan+y1, Xjan+x2, Yjan+y2);
    if(Salvar)
    {
       //SDL_Flip(screen);

@@ -122,4 +122,50 @@ int fonte_incCP()
    return(Fonte.incCP+Tamanho-1);
 }
 
+int getTotalLines(string source)
+{
+   Uint32 i;
+   char c;
+   int line = 0;
+   for(i=0; (i < source.length()) ; i++)
+   {
+      c = source.at(i);
+      if(c == '|')
+      {
+         line++;
+      }
+   }
+   return(line);
+}
+
+string copyLines(string source, int firstLine, int lastLine)
+{
+   //char* text = source.c_str();
+   string result = "";
+   char c;
+   Uint32 i;
+   int line = 0;
+   /* Positionate the string to the first desired line */
+   for(i=0; ( (i < source.length()) && (line < firstLine)) ; i++)
+   {
+      c = source.at(i);
+      if(c == '|')
+      {
+         line++;
+      }
+   }
+   
+   /* Copy to the desired line (or end of the string, witch occurs first) */
+   for(; ( (i<source.length()) && (line <= lastLine)); i++)
+   {
+      c = source.at(i);
+      result += c;
+      if(c == '|')
+      {
+         line++;
+      }
+   }
+
+   return(result);
+}
 

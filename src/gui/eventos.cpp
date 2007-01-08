@@ -282,11 +282,29 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
               {
                   foco = FOCO_JOGO;
               }
+              
               *eventInfo = BOTAOPRESSIONADO;
               return(objAtivo);
            }
            else
            {
+              /* Verify RolBar */
+              Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
+              int aux;
+              for(aux=0; aux<ljan->janelaAtiva->objects->total; aux++)
+              {
+                 if(obj->tipo == ROLBAR)
+                 {
+                    rolBar* rb = (rolBar*)obj;
+                    if(rb->eventGot(BOTAOEMPRESSAO, objAtivo))
+                    {
+                       rb->redraw(ljan->janelaAtiva->cara);
+                       ljan->janelaAtiva->AtualizaCara();
+                    }
+                 }
+                 obj = obj->proximo;
+              }
+
               *eventInfo = BOTAOEMPRESSAO;
               return(objAtivo);
            }

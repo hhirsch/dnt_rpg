@@ -1712,7 +1712,7 @@ void engine::Draw()
    /* Draws World, doing view frustum culling */
    actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
                    gameCamera.getCameraZ(),visibleMatrix);
-
+   
    /* Draw Playable Characters (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;

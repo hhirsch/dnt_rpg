@@ -4,6 +4,10 @@
 #include <string>
 using namespace std;
 
+#define SIGNAL_DEC 0
+#define SIGNAL_SUM 1
+
+#define MAX_ATTACKS 6
 
 /**! Actuation Factor */
 class factor
@@ -22,6 +26,29 @@ class modifier
       factor target;      /**< Target when modifer is valid */
       string description; /**< Modifier Description */
 };
+
+/*! Number of Points, based on ATTRIBUTES 
+ * the formula is (sum SIGNAL ATTModifier)*mult */
+class points
+{
+   public:
+      int sum;          /**< Value of Sum */
+      int signal;       /**< Signal Used (- or +) */
+      string attID;     /**< ID of the Attribute to use modifier */
+      int mult;         /**< Value of Mult */
+};
+
+/*! Per Level Bonus and Saves */
+class bonusAndSaves
+{
+   public:
+      int level;                          /**< Class Level */
+      int baseAttackBonus[MAX_ATTACKS];   /**< Base Attack Bonus */
+      int fortSave;                       /**< Fortitude Save Bonus */
+      int refSave;                        /**< Reflex Save Bonus */
+      int willSave;                       /**< Will Save Bonus */
+};
+
 
 #endif
 

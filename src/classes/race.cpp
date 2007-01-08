@@ -255,7 +255,7 @@ race* races::getRaceByInteger(int id)
 }
 
 /******************************************************************
- *                            Constructor                         *
+ *                          getRaceByString                       *
  ******************************************************************/
 race* races::getRaceByString(string id)
 {

@@ -18,10 +18,10 @@ class race
 
       int intID;              /**< Integer Identifier of the race */
       string strID;           /**< String Identifier of the race */
-      SDL_Surface* image;     /**< Image of the Aligment */
+      SDL_Surface* image;     /**< Image of the Race */
       
-      string name;            /**< Name of the Aligment */
-      string description;     /**< Description of the Aligment */
+      string name;            /**< Name of the Race */
+      string description;     /**< Description of the Race */
       string citation;        /**< Race Citation */
 
       int totalModifiers;     /**< Total Modifiers on Class */
@@ -34,8 +34,8 @@ class race
       string* raceSkills;        /**< Race Skills */
       string* raceSkillsJustify; /**< Justify of the Skill */
       
-      race* previous;        /**< Previous Aligment on list */
-      race* next;            /**< Next Aligment on list */
+      race* previous;        /**< Previous Race on list */
+      race* next;            /**< Next Race on list */
 };
 
 /**! The List of Races Class */
@@ -44,7 +44,7 @@ class races
    public:
       /*! Constructor
        * \param fileListName -> name of the file containing the list of all
-       *         aligments (usually ../data/race/race.lst)  
+       *         races (usually ../data/race/race.lst)  
        * \param directory -> directory of races descriptions */
       races(string directory, string fileListName);
       /*! Destructor */
@@ -52,11 +52,11 @@ class races
 
       /*! Get an Race from list
        * \param id -> integer ID of the race
-       * \return aligment found, if found one. */
+       * \return race found, if found one. */
       race* getRaceByInteger(int id);
-      /*! Get an Aligment from list 
+      /*! Get an Race from list 
        * \param id -> string ID of the race
-       * \return aligment found, if found one. */
+       * \return race found, if found one. */
       race* getRaceByString(string id);
       
    private:

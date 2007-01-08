@@ -17,6 +17,7 @@ using namespace std;
 #include "quadtexto.h"
 #include "seltexto.h"
 #include "tabbotao.h"
+#include "rolbar.h"
 
 class Tlista{
    public:
@@ -78,6 +79,8 @@ class Tlista{
                             string text1,string text2,string text3, 
                             string text4,int (*proc)(SDL_Surface *screen, 
                             int texto));
+
+      rolBar* InsertRolBar(int xa,int ya,int xb,int yb,string txt);
 
 
    protected:

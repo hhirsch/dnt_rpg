@@ -42,8 +42,8 @@ class raceWindow
 
       quadroTexto* textName;
       quadroTexto* textDescTitle;
-      quadroTexto* textDesc;
-      quadroTexto* textCharac;
+      rolBar* textDesc;
+      rolBar* textCharac;
       quadroTexto* textCharacTitle;
       quadroTexto* textCitation;
 

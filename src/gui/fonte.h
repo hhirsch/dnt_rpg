@@ -8,6 +8,9 @@
 #include "desenho.h"
 #include <string.h>
 
+#include <string>
+using namespace std;
+
 /* Alinhamentos  da Fonte */
 #define ESQUERDA         0
 #define DIREITA          1
@@ -51,6 +54,11 @@ int fonte_incCP();
  * alinha -> alinhamento da fonte na tela
  * tam    -> tamanho da fonte na tela */
 int selFonte(const char* nome, int alinha, int tam);
+
+/* Copies N lines from source, counting | dividers */
+string copyLines(string source, int firstLine, int lastLine);
+
+int getTotalLines(string source);
 
 #endif
 

@@ -26,7 +26,7 @@ class healthBar
       void defineActualHealth(int health);
 
       /*! Draws the healthBar to Surface.
-       * \param surface -> health value to be the max */
+       * \param surface -> surface to draw to */
       void draw(SDL_Surface* surface);
 
    private:

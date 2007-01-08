@@ -220,6 +220,12 @@ selTexto* Tlista::InserirSelTexto(int xa,int ya,int xb,int yb,
    return(novo);
 } 
 
-
+rolBar* Tlista::InsertRolBar(int xa,int ya,int xb,int yb,string txt)
+{
+   rolBar* novo;
+   novo = new rolBar(xa,ya,xb,yb,txt, this);
+   InserirObj(novo);
+   return(novo);
+}
 
 

@@ -9,7 +9,7 @@ ENDENGINE = ../engine/
 ENDFIGHT = ../fight/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o $(ENDENGINE)personagens.o $(OBJSGUI)
-objetos = align.o skills.o feats.o race.o defs.o actions.o thing.o
+objetos = align.o skills.o feats.o race.o classes.o defs.o actions.o thing.o
 
 
 all: $(objetos)

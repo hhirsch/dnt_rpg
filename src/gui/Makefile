@@ -5,7 +5,7 @@ CPP = g++
 CFLAGS = -g -c -Wall -O2
 EFLAGS = -g -Wall -O2 -lm -lSDL -lSDL_image
 OBJS = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o menu.o messages.o mouse.o quadtexto.o seltexto.o 
-OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o lista.o menu.o messages.o mouse.o quadtexto.o seltexto.o tabbotao.o
+OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o lista.o menu.o messages.o mouse.o quadtexto.o rolbar.o seltexto.o tabbotao.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -100,6 +100,11 @@ mouse.o: mouse.h mouse.c
 quadtexto.o: quadtexto.h quadtexto.cpp
 	@printf "Making quadtexto.o... "
 	@$(CPP) $(CFLAGS) quadtexto.cpp -o quadtexto.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+rolbar.o: rolbar.h rolbar.cpp
+	@printf "Making rolbar.o... "
+	@$(CPP) $(CFLAGS) rolbar.cpp -o rolbar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 seltexto.o: seltexto.h seltexto.cpp

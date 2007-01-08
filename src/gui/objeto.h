@@ -14,9 +14,10 @@
 #define QUADROTEXTO   6
 #define MENUITEM      7
 #define TABBOTAO      8
-#define MAPOBJETO     99
-#define PERSONAGEM    100 
+#define ROLBAR        9
 
+#define MAPOBJETO    98
+#define PERSONAGEM   99
 
 class Tobjeto{
    public:

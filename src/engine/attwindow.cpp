@@ -200,12 +200,12 @@ attWindow::attWindow(skills* sk, interface* inter)
    window->objects->InserirQuadroTexto(8,37,247,244,1,"");
 
    /* Race Description */
-   textDescTitle = window->objects->InserirQuadroTexto(251,20,507,35,1,
+   textDescTitle = window->objects->InserirQuadroTexto(248,20,507,35,1,
                                               language.ATTW_DESCRIPTION.c_str());
    textDescTitle->fonte = FHELVETICA;
    textDescTitle->tamFonte = 1;
    
-   textDesc = window->objects->InserirQuadroTexto(251,36,507,244,1,
+   textDesc = window->objects->InserirQuadroTexto(248,36,507,244,1,
                       (externalSkill->m_skills[1].nome + "||" +
                        externalSkill->m_skills[1].descricao).c_str());
 
