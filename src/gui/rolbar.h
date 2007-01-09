@@ -31,8 +31,12 @@ class rolBar: public Tobjeto
        * \return -> true if event is related (and threated) by the rolBar */
       bool eventGot(int type, Tobjeto* object);
 
+      /*! Set The Text of the Bar, putting them on top
+       * \param txt -> desired text */
       void setText(string txt);
 
+      /*! Redraw the bar when scrolling text
+       * \param surface -> SDL_Surface where will draw */
       void redraw(SDL_Surface* surface);
 
    private:
@@ -44,14 +48,15 @@ class rolBar: public Tobjeto
       botao* down;            /**< Down Button */
       quadroTexto* text;      /**< Text of The Scroll */
       quadroTexto* contorn;   /**< Contorn of the Scroll */
+      quadroTexto* position;  /**< Contorn Text Position */
 
       string fullText;        /**< Full Text of the rolBar */
       Uint32 actualInit,      /**< Actual Initial Line of the Text */
              actualEnd;       /**< Actual End Line of The Text */
-      Uint32 lastActualized;  /**< Last Time when actualized */
-      int maxLines;           /**< Max Number of Text Lines */
+      Uint32 lastActualized,  /**< Last Time when actualized */
+             maxLines;        /**< Max Number of Text Lines */
       int charPerLine;        /**< Number of Characters per Line of Text */
-      Uint32 totalLines;      /**< Total Funn Text Lines */
+      Uint32 totalLines;      /**< Total Full Text Lines */
       void* intList;          /**< Internal GUI Objects List */
 };
 

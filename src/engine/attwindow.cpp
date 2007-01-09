@@ -201,7 +201,7 @@ attWindow::attWindow(skills* sk, interface* inter)
 
    /* Race Description */
    textDescTitle = window->objects->InserirQuadroTexto(248,20,507,35,1,
-                                              language.ATTW_DESCRIPTION.c_str());
+                                             language.ATTW_DESCRIPTION.c_str());
    textDescTitle->fonte = FHELVETICA;
    textDescTitle->tamFonte = 1;
    

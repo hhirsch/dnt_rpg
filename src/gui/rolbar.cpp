@@ -25,17 +25,18 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list)
    selFonte(FMINI, ESQUERDA, 1);
    tipo = ROLBAR;
    x1 = xa;
-   ya = ya;
-   xb = xb;
-   yb = yb;
+   y1 = ya;
+   x2 = xb;
+   y2 = yb;
    maxLines = ((yb-ya) / 11)-1;
    charPerLine = (xb-xa) / fonte_incCP();
    
    Tlista* l = (Tlista*)list;
 
    /* Contorno */
+   position = l->InserirQuadroTexto(xb-10, ya+2, xb-2, yb-26, 1, "");
    contorn = l->InserirQuadroTexto(xb-12, ya, xb, yb-24, 1, "");
-
+   
    /* Botoes */
    up = l->InserirBotao(xb-12,yb-23,xb,yb-12, contorn->Cores.corBot.R, 
                         contorn->Cores.corBot.G, contorn->Cores.corBot.B,
@@ -110,17 +111,44 @@ bool rolBar::eventGot(int type, Tobjeto* object)
    return(false);
 }
 
+/*********************************************************************
+ *                               redraw                              *
+ *********************************************************************/
 void rolBar::redraw(SDL_Surface* surface)
 {
+   contorn->Desenhar(0,0,0,surface);
+   if(maxLines <= totalLines)
+   {
+      position->y1 = (int) ((y1+2) + ((float)actualInit/(float)totalLines)*
+                            (y2-28-y1));
+      position->y2 = (int) ((y1+2) + ((float)(actualEnd-1)/(float)totalLines)*
+                            (y2-28-y1));
+   }
+   position->Desenhar(0,0,0,surface);   
    text->Desenhar(0,0,0,surface);
 }
 
+/*********************************************************************
+ *                              setText                              *
+ *********************************************************************/
 void rolBar::setText(string txt)
 {
    fullText = txt;
    totalLines = getTotalLines(fullText);
    actualInit = 0;
    actualEnd = maxLines - 1;
+   if(maxLines <= totalLines)
+   {
+      position->y1 = (int) ((y1+2) + ((float)actualInit/(float)totalLines)*
+                            (y2-28-y1));
+      position->y2 = (int) ((y1+2) + ((float)(actualEnd-1)/(float)totalLines)*
+                            (y2-28-y1));
+   }
+   else
+   {
+      position->y1 = y1+2;
+      position->y2 = y2-26;
+   }
    text->texto = copyLines(fullText, actualInit,actualEnd);
 }
 

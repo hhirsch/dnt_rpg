@@ -18,6 +18,7 @@
 #include "alignwindow.h"
 #include "racewindow.h"
 #include "attwindow.h"
+#include "classwindow.h"
 #include "camera.h"
 #include "util.h"
 #include "collision.h"
@@ -25,6 +26,7 @@
 #include "../classes/feats.h"
 #include "../classes/align.h"
 #include "../classes/race.h"
+#include "../classes/classes.h"
 #include "../sound/sound.h"
 #include "../lang/lang.h"
 #include "../particle/partSystem.h"
@@ -243,6 +245,7 @@ class engine
       featsList* features;         /**< Feats descriptions */
       aligns* alignList;           /**< Alignments List */
       races* raceList;             /**< Races List */
+      classes* classList;          /**< Classes List */
 
       lang language;               /**< Language struct: internationalization */
 

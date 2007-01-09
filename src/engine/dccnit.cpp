@@ -64,6 +64,9 @@ engine::engine()
    /* Load Races */
    raceList = new races(language.RACE_DIR.c_str(), "../data/races/races.lst");
 
+   /* Load Classes */
+   classList = new classes("../data/classes/Portugues/",
+                           "../data/classes/classes.lst");
 
    /* Initialize readModes variables */
    lastRead = SDL_GetTicks();
@@ -139,6 +142,8 @@ engine::~engine()
    delete(features);
 
    delete(raceList);
+
+   delete(classList);
 }
 
 /*********************************************************************
@@ -521,6 +526,7 @@ int engine::CharacterScreen(GLuint* idTextura)
 
    align* selected; // TODO remove it from here
    race* sel; //TODO remove from here
+   classe* selClass; //TODO remove from here TOO!
 
   
    /*TODO Other screens*/
@@ -539,10 +545,13 @@ int engine::CharacterScreen(GLuint* idTextura)
    /* Alignment Window */
    alignWindow* alWindow = NULL;
 
+   /* Class Window */
+   classWindow* clWindow = NULL;
+
    /* Race Window */
    raceWindow* rcWindow = new raceWindow(raceList, gui);
 
-   while( (status != 4) )
+   while( (status != 5) )
    {
       tempo = SDL_GetTicks();
       if(tempo - tempoAnterior >= ACTUALIZATION_RATE) 
@@ -567,60 +576,76 @@ int engine::CharacterScreen(GLuint* idTextura)
             {
                status = 1;
                delete(rcWindow);
-               alWindow = new alignWindow(alignList, gui);
+               clWindow = new classWindow(classList, gui);
             }
             else if(charCreation == RACEW_CANCEL)
             {
-               status = 4;
+               status = 5;
                delete(rcWindow);
                charCreation = CHAR_CANCEL;
             }
          }
          else if(status == 1)
          {
-            charCreation = alWindow->treat(object, eventInfo, gui, &selected);
+            charCreation = clWindow->treat(object, eventInfo, gui, &selClass);
             if(charCreation == ALIGNW_CONFIRM)
             {
                status = 2;
-               delete(alWindow);
-               atWindow = new attWindow(sk, gui);
+               delete(clWindow);
+               alWindow = new alignWindow(alignList, gui);
             }
             else if(charCreation == ALIGNW_CANCEL)
             {
                status = 0;
-               delete(alWindow);
+               delete(clWindow);
                rcWindow = new raceWindow(raceList, gui);
             }
          }
          else if(status == 2)
          {
+            charCreation = alWindow->treat(object, eventInfo, gui, &selected);
+            if(charCreation == ALIGNW_CONFIRM)
+            {
+               status = 3;
+               delete(alWindow);
+               atWindow = new attWindow(sk, gui);
+            }
+            else if(charCreation == ALIGNW_CANCEL)
+            {
+               status = 1;
+               delete(alWindow);
+               clWindow = new classWindow(classList, gui);
+            }
+         }
+         else if(status == 3)
+         {
              charCreation = atWindow->treat(object, eventInfo, gui,
                                             proj, modl,viewPort);
              if(charCreation == ATTW_CONFIRM)
              {
-                status = 3;
+                status = 4;
                 delete(atWindow);
                 skWindow = new skillWindow(sk, 20, gui);
              }
              else if(charCreation == ATTW_CANCEL)
              {
-                status = 1;
+                status = 2;
                 delete(atWindow);
                 alWindow = new alignWindow(alignList, gui);
              }
          }
-         else if(status == 3)
+         else if(status == 4)
          {
             charCreation = skWindow->treat(object, eventInfo, gui); 
             if(charCreation == SKILLW_CONFIRM)
             {
-               status = 4;
+               status = 5;
                delete(skWindow);
                charCreation = CHAR_CONFIRM;
             }
             else if(charCreation == SKILLW_CANCEL)
             {
-               status = 2;
+               status = 3;
                delete(skWindow);
                atWindow = new attWindow(sk, gui);
             }
