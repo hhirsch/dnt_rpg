@@ -10,41 +10,33 @@ alignWindow::alignWindow(aligns* alg, interface* inter)
    actualAlign = externalAligns->getAlignByInteger(0);
    
    /* create window */
-   window = inter->ljan->InserirJanela(276,186,531,441,
+   window = inter->ljan->InserirJanela(270,186,537,441,
                                        language.ALIGNW_TITLE.c_str(),
                                        1,1,NULL,NULL);
    /* Align Image */
-   alignImage = window->objects->InserirFigura(99,185,0,0,NULL);   
+   alignImage = window->objects->InserirFigura(111,185,0,0,NULL);   
    alignImage->fig = actualAlign->image;
 
    /* Align Description */
-   textDesc = window->objects->InserirQuadroTexto(5,42,250,180,1,
-                                              actualAlign->description.c_str());
-   textDesc->Cores.corTexto.R = 246;
-   textDesc->Cores.corTexto.G = 190;
-   textDesc->Cores.corTexto.B = 190;
-   textDesc->Cores.corBot.R = 155;
-   textDesc->Cores.corBot.G = 5;
-   textDesc->Cores.corBot.B = 5;
-   textDesc->fonte = FMINI;
-   textDesc->tamFonte = 1;
-
+   textDesc = window->objects->InsertRolBar(5,38,262,180, 
+                                            actualAlign->description.c_str());
+      
    /* Name and Selectors */
    buttonPrevious = window->objects->InserirBotao(5,19,19,37,
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  "<",0,NULL);
-   buttonNext = window->objects->InserirBotao(236,19,250,37,
+   buttonNext = window->objects->InserirBotao(248,19,262,37,
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  ">",0,NULL);
-   textName = window->objects->InserirQuadroTexto(20,19,235,37,1, 
+   textName = window->objects->InserirQuadroTexto(20,19,247,37,1, 
                                                   actualAlign->name.c_str());
    textName->fonte = FMINI;
    textName->tamFonte = 1;
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(181,225,251,244, 
+   buttonConfirm = window->objects->InserirBotao(203,225,263,244, 
                                 window->Cores.corBot.R,
                                 window->Cores.corBot.G,window->Cores.corBot.B,
                                 language.SKILL_CONFIRM.c_str(),1,NULL);
@@ -78,7 +70,7 @@ int alignWindow::treat(Tobjeto* object, int eventInfo,
             actualAlign = actualAlign->previous;
          }
          textName->texto = actualAlign->name;
-         textDesc->texto = actualAlign->description;
+         textDesc->setText(actualAlign->description);
          alignImage->fig = actualAlign->image;
          window->Desenhar(0,0);
       }

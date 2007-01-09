@@ -19,6 +19,7 @@
 #include "fonte.h"
 #include "healthBar.h"
 #include "quadtexto.h"
+#include "rolbar.h"
 #include "seltexto.h"
 #include "objeto.h"
 #include "lista.h"

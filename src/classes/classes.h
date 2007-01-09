@@ -36,7 +36,6 @@ class classe
 
       int totalSkills;           /**< Total Class Skills */
       string* classSkills;       /**< Class Skills */
-      string* classSkillsJustify;/**< Justify of the Skill */
 
       int lifeDiceID;            /**< Life Dice ID */
       points firstLevelSP;       /**< First Level Skill Points */

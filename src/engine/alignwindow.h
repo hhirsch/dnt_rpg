@@ -43,7 +43,7 @@ class alignWindow
       botao* buttonNext;             /**< Next Button */
 
       quadroTexto* textName;         /**< Text Name */
-      quadroTexto* textDesc;         /**< Text Description */
+      rolBar* textDesc;              /**< Text Description */
 
       figura* alignImage;            /**< Alignment Image */
 

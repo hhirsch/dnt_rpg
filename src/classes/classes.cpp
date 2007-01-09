@@ -16,7 +16,6 @@ classe::classe()
    classFeats = NULL;
    totalSkills = 0;
    classSkills = NULL;
-   classSkillsJustify = NULL;
    reqLevel = NULL;
    previous = NULL;
    next = NULL;
@@ -50,11 +49,6 @@ classe::~classe()
    {
       delete[] classSkills;
       classSkills = NULL;
-   }
-   if(classSkillsJustify)
-   {
-      delete[] classSkillsJustify;
-      classSkillsJustify = NULL;
    }
 }
 
@@ -215,18 +209,15 @@ void classes::insertClass(string fileName, string imgFile, string idString,
    if(ins->totalSkills > 0)
    {
       ins->classSkills = new string[ins->totalSkills];
-      ins->classSkillsJustify = new string[ins->totalSkills];
    }
    else
    {
       ins->classSkills = NULL;
-      ins->classSkillsJustify = NULL;
    }
 
    for(i=0; i < ins->totalSkills; i++)
    {
       getline(file, ins->classSkills[i]);
-      getline(file, ins->classSkillsJustify[i]);
    }
 
    /* Skill Points per Level */

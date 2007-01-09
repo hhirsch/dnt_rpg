@@ -13,7 +13,7 @@
  - Character Navigation by Mouse;
  - Full Implemented Rules for Character Creation;
  - Dynamic Lights & Fog per map;
- - Engine Optimization;
+ - Engine Optimizations;
  - Better Sky;
  - Uses OpenAL for Audio;
  - New Animations;
