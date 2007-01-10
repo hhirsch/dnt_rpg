@@ -26,7 +26,6 @@ using namespace std;
 #define FTIMES     "../data/fnt/times.fnt"
 
 /* Onde e definida a escrita de texto na superficie */
-
 typedef struct
 {
    unsigned short int letra[257][16]; /* Cada Letra em HexaDecimal */
@@ -55,9 +54,16 @@ int fonte_incCP();
  * tam    -> tamanho da fonte na tela */
 int selFonte(const char* nome, int alinha, int tam);
 
-/* Copies N lines from source, counting | dividers */
+/*! Copies lines from source, based on | dividers
+ * \param source -> Source String
+ * \param firstLine -> first line to be copied
+ * \param lastLine -> last line to be copied
+ * \return -> copied string */
 string copyLines(string source, int firstLine, int lastLine);
 
+/*! Count total lines of the source, based on | dividers
+ * \param source -> Source String
+ * \return total lines of the source string */
 int getTotalLines(string source);
 
 #endif

@@ -30,7 +30,6 @@ class quadroTexto: public Tobjeto
       /*! Draw in the Surface the text bar (quadroTexto)
        * \param Xjan -> X window Coordinate
        * \param Yjan -> Y Window Coordinate
-       * \param qt -> quadroTexto to be draw
        * \param Salvar -> !=0 to actualize surface
        * \param screen -> surface where quadroTexto will draw */
       void Desenhar(int Xjan,int Yjan, int Salvar, SDL_Surface *screen);

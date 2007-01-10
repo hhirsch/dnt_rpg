@@ -32,8 +32,7 @@ int selFonte(const char* nome, int alinha, int Tamanho)
 
 /* Procedimento interno e geral de escrita */
 int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
-              int fim,
-               int x1,int y1,int x2,int y2)
+              int fim, int x1,int y1,int x2,int y2)
 {
    if(texto[0]=='\0') return(-1);
    int k,aux,ax,aux1,aux2; 
@@ -83,12 +82,17 @@ int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
            y = k;
            x++;
         }
-     }
+        if (Tamanho<2) x = (ax+Fonte.incCP);
+        else if (Tamanho==2) x = (ax+Fonte.incCP)+1;
+        else x = (ax+Fonte.incCP) / 2;
+        if( (x > x2) )
+        {
+           x = x1;
+           k += 11;
+        }
 
-     if (Tamanho<2) x-=( x-ax-Fonte.incCP);
-     else if (Tamanho==2) x-= x-ax-Fonte.incCP-1;
-     else x-=(x-ax-Fonte.incCP) / 2;
-     if( (x+Fonte.incCP > x2) || (c == '|')  )
+     }
+     else
      {
         x = x1;
         k += 11;
