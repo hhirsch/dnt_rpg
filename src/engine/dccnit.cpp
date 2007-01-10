@@ -576,7 +576,7 @@ int engine::CharacterScreen(GLuint* idTextura)
             {
                status = 1;
                delete(rcWindow);
-               clWindow = new classWindow(classList, gui);
+               clWindow = new classWindow(classList, sk, gui);
             }
             else if(charCreation == RACEW_CANCEL)
             {
@@ -614,7 +614,7 @@ int engine::CharacterScreen(GLuint* idTextura)
             {
                status = 1;
                delete(alWindow);
-               clWindow = new classWindow(classList, gui);
+               clWindow = new classWindow(classList, sk, gui);
             }
          }
          else if(status == 3)
