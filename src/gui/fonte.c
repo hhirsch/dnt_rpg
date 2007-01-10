@@ -10,6 +10,9 @@ fnt Fonte;          //Fonte Ativa
 int Tamanho;        //Tamanho da Fonte Ativa 
 int Alinhamento;    //Alinhamento da Fonte Ativa
 
+/***********************************************************************
+ *                             selFonte                                *
+ ***********************************************************************/
 int selFonte(const char* nome, int alinha, int Tamanho)
 {
    Tamanho = Tamanho;
@@ -30,7 +33,9 @@ int selFonte(const char* nome, int alinha, int Tamanho)
    return(1);
 }
 
-/* Procedimento interno e geral de escrita */
+/***********************************************************************
+ *                             escxy_Int                               *
+ ***********************************************************************/
 int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
               int fim, int x1,int y1,int x2,int y2)
 {
@@ -48,10 +53,9 @@ int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
    for(aux=inic;(aux<=fim);aux++)
    {
      c=texto[aux];
-     if(c < 0) /* Corrige leitura de caracteres nao padrao */
+     while(c < 0) /* Corrige leitura de caracteres nao padrao */
      {
-        c = 256 + c;
-       
+        c = 256 + c;       
      }
      ax=x;
      
@@ -102,30 +106,43 @@ int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
    return(k);
 }
 
-
+/***********************************************************************
+ *                               escxy                                 *
+ ***********************************************************************/
 void escxy(SDL_Surface *screen,int x,int y,const char* texto)
 {
    escxy_Int(screen,x,y,texto,0,strlen(texto)-1,0,0,screen->w-1,screen->h-1);
 }
 
+/***********************************************************************
+ *                            escxy_Area                               *
+ ***********************************************************************/
 int escxy_Area(SDL_Surface *screen,int x, int y,const char* texto,int x1,int y1,
                 int x2,int y2)
 {
    return(escxy_Int(screen,x,y,texto,0,strlen(texto)-1,x1,y1,x2,y2));
 }
 
-
+/***********************************************************************
+ *                             escxy_Def                               *
+ ***********************************************************************/
 void escxy_Def(SDL_Surface *screen,int x,int y,const char* texto,
                int inic,int fim)
 {
    escxy_Int(screen,x,y,texto,inic,fim,0,0,screen->w-1,screen->h-1);
 }
 
+/***********************************************************************
+ *                           fonte_incCP                               *
+ ***********************************************************************/
 int fonte_incCP()
 {
    return(Fonte.incCP+Tamanho-1);
 }
 
+/***********************************************************************
+ *                           getTotalLines                             *
+ ***********************************************************************/
 int getTotalLines(string source)
 {
    Uint32 i;
@@ -142,9 +159,11 @@ int getTotalLines(string source)
    return(line);
 }
 
+/***********************************************************************
+ *                             copyLines                               *
+ ***********************************************************************/
 string copyLines(string source, int firstLine, int lastLine)
 {
-   //char* text = source.c_str();
    string result = "";
    char c;
    Uint32 i;
