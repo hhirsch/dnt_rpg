@@ -222,8 +222,9 @@ void classes::insertClass(string fileName, string imgFile, string idString,
 
    /* Skill Points per Level */
    getline(file, str);
-   sscanf(str.c_str(), "(%d %s %s)x%d", &ins->firstLevelSP.sum, &buf1[0], 
+   sscanf(str.c_str(), "( %d %s %s )x%d", &ins->firstLevelSP.sum, &buf1[0], 
                                         &buf2[0], &ins->firstLevelSP.mult);
+   ins->firstLevelSP.attID = buf2;
    if(buf1[0] == '-')
    {
       ins->firstLevelSP.signal = SIGNAL_DEC;
@@ -233,8 +234,9 @@ void classes::insertClass(string fileName, string imgFile, string idString,
       ins->firstLevelSP.signal = SIGNAL_SUM;
    }
    getline(file, str);
-   sscanf(str.c_str(), "(%d %s %s)x%d", &ins->otherLevelsSP.sum, &buf1[0], 
+   sscanf(str.c_str(), "( %d %s %s )x%d", &ins->otherLevelsSP.sum, &buf1[0], 
                                         &buf2[0], &ins->otherLevelsSP.mult);
+   ins->otherLevelsSP.attID = buf2;
    if(buf1[0] == '-')
    {
       ins->otherLevelsSP.signal = SIGNAL_DEC;

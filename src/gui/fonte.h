@@ -46,6 +46,9 @@ void escxy_Def(SDL_Surface *screen,int x,int y, const char* texto,int inic,int f
 int escxy_Area(SDL_Surface *screen,int x, int y, const char* texto,int x1,int y1,
                 int x2,int y2);
 
+/*! Gets the incCP of the current font (incCP is how much the X axis
+ *  is incremented each wrote character. 
+ *  \return the current font incCP*/
 int fonte_incCP();
 
 /* Define a Fonte Ativa, retorna 0 caso nao encontre o arquivo
