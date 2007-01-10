@@ -549,7 +549,7 @@ int engine::CharacterScreen(GLuint* idTextura)
    classWindow* clWindow = NULL;
 
    /* Race Window */
-   raceWindow* rcWindow = new raceWindow(raceList, gui);
+   raceWindow* rcWindow = new raceWindow(raceList, sk, gui);
 
    while( (status != 5) )
    {
@@ -598,7 +598,7 @@ int engine::CharacterScreen(GLuint* idTextura)
             {
                status = 0;
                delete(clWindow);
-               rcWindow = new raceWindow(raceList, gui);
+               rcWindow = new raceWindow(raceList, sk, gui);
             }
          }
          else if(status == 2)

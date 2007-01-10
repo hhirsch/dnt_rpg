@@ -18,7 +18,7 @@ class raceWindow
 {
    public:
       /*! Constructor */
-      raceWindow(races* rc, interface* inter);
+      raceWindow(races* rc, skills* sk, interface* inter);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
@@ -33,6 +33,7 @@ class raceWindow
    private:
       races*      externalRaces;   /**< Pointer to the Aligns List */
       race*       actualRace;      /**< Pointer to actual aligned */
+      skills*     externalSkills;  /**< Pointer to External Skills List */
 
       botao* buttonConfirm;
       botao* buttonCancel;

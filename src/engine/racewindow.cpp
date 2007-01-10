@@ -1,10 +1,14 @@
 #include "racewindow.h"
 
-
-raceWindow::raceWindow(races* rc, interface* inter)
+/********************************************************************
+ *                           Constructor                            *
+ ********************************************************************/
+raceWindow::raceWindow(races* rc, skills* sk, interface* inter)
 {
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
+
+   externalSkills = sk;
    
    externalRaces = rc;
    actualRace = externalRaces->getRaceByInteger(0);
@@ -67,6 +71,9 @@ raceWindow::raceWindow(races* rc, interface* inter)
    window->Abrir(inter->ljan);
 }
 
+/********************************************************************
+ *                       getCharacteristics                         *
+ ********************************************************************/
 string raceWindow::getCharacteristics()
 {
    int i;
@@ -94,11 +101,20 @@ string raceWindow::getCharacteristics()
       text += language.RACEW_NO_FEATS + "|";
    }
 
-   //TODO get Skill Name
+   /* Race Skills */
+   skill* skTmp;
    text += "|" + language.RACEW_SKILLS + "||";
    for(i=0; i<actualRace->totalSkills; i++)
    {
-      text += actualRace->raceSkills[i] + "|";
+      skTmp = externalSkills->getSkillByString(actualRace->raceSkills[i]);
+      if(skTmp)
+      {
+         text += skTmp->nome + "|";
+      }
+      else
+      {
+         text += actualRace->raceSkills[i] + "|";
+      }
    }
 
    if(actualRace->totalSkills == 0)
@@ -106,10 +122,12 @@ string raceWindow::getCharacteristics()
       text += language.RACEW_NO_SKILLS;
    }
 
-
    return(text);
 }
 
+/********************************************************************
+ *                              treat                               *
+ ********************************************************************/
 int raceWindow::treat(Tobjeto* object, int eventInfo, 
                        interface* inter, race** actual)
 {
@@ -144,7 +162,7 @@ int raceWindow::treat(Tobjeto* object, int eventInfo,
       }
       else if(object == (Tobjeto*) buttonCancel) 
       {
-         raceImage->fig = NULL; //to not delete skill images
+         raceImage->fig = NULL; //to not delete race images
          window->Fechar(inter->ljan);
          *actual = NULL;
          window = NULL;
