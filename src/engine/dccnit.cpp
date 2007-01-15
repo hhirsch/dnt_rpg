@@ -309,7 +309,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
        per = PCs->InserirPersonagem("../data/characters/pcs/logan.pc",features);
        per->DefineMaxLifePoints(per->maxLifePoints);
        atualizaCarga(img,&texturaTexto,texturaCarga,
-                 "Loading Character: Gushm",
+                 "Loading Character: Logan",
                  proj, modl, viewPort);
        /*PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Gushm",
@@ -446,10 +446,6 @@ int engine::InitialScreen(int Status, GLuint* idTextura, bool reloadMusic)
 int engine::OptionsScreen(GLuint* idTextura)
 {
    interface* interf = new interface(NULL);
-
-   glDisable(GL_LIGHTING);
-   SDL_ShowCursor(SDL_ENABLE);
-
    int optionW = OPTIONSW_OTHER;
    int tempo = SDL_GetTicks();
    int tempoAnterior = 0;
@@ -457,6 +453,9 @@ int engine::OptionsScreen(GLuint* idTextura)
    int x,y;
    Tobjeto* object = NULL;
    int eventInfo = NADA;
+
+   glDisable(GL_LIGHTING);
+   SDL_ShowCursor(SDL_ENABLE);
 
    option->DisplayOptionsScreen(interf);
 
@@ -529,10 +528,7 @@ int engine::CharacterScreen(GLuint* idTextura)
    classe* selClass; //TODO remove from here TOO!
 
   
-   /*TODO Other screens*/
-
    /* TODO  put on character screen */
-   
    skills* sk = new skills(language.SKILLS_DIR.c_str(),
                            "../data/skills/skills.skl"); 
 

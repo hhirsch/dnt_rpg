@@ -30,15 +30,11 @@ class thing
       int will;               /**< Thing's Will */
       int armatureClass;      /**< Thing's Armature Class (AC) */
       int displacement;       /**< Thing's Displacement (in meters) */
-      int level;              /**< Thing's Level */
+      //int level;              /**< Thing's Level */
       int baseAttackModifier; /**< Thing's Base Attack Modifier */
       int sizeModifier;       /**< Thing's Size Modifier */
       int psychoState;        /**< Thing's Psycho State */
-      int lifeDice;           /**< Thing's life Dice */
-
-      int race;               /**< Thing's Race */
-      int cclass;             /**< Thing's Class */
-      int tendency;           /**< Thing's Tendency */
+      //int lifeDice;           /**< Thing's life Dice */
 
       bool dead;             /**< Dead state or not.(if dead is only a corpse)*/
 

@@ -11,6 +11,7 @@
  *********************************************************************/
 personagem::personagem(featsList* ft)
 {
+   int i;
 
   /* Animation details */
   m_calCoreModel = new CalCoreModel("");
@@ -23,6 +24,15 @@ personagem::personagem(featsList* ft)
   m_renderScale = 1.0f;
   m_lodLevel = 1.0f;
   lifeBar = new healthBar(10,103,117,123);
+
+  for(i=0; i<MAX_DISTINCT_CLASSES; i++)
+  {
+
+      actualClass[i] = NULL;
+      classLevels[i] = 1;
+  }
+  actualRace = NULL;
+  actualAlign = NULL;
 
   /* Feat Details */
   actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
@@ -613,7 +623,7 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
 {
    FILE* arq;
    char buffer[128];
-   char buf2[128];
+   //char buf2[128];
    string buf;
    string arqModelo;
    personagem* novo;
@@ -669,7 +679,7 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
          fgets(buffer, sizeof(buffer),arq);
          sscanf(buffer, "%d", &novo->sizeModifier);
       }
-      else if (buf == "lifeDice")
+      /*else if (buf == "lifeDice")
       {
          fgets(buffer, sizeof(buffer),arq);
          sscanf(buffer, "d%d", &novo->lifeDice);
@@ -691,7 +701,7 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
          fgets(buffer, sizeof(buffer),arq);
          sscanf(buffer, "%s", &buf2[0]);
          novo->tendency = numberConstant(buf2);
-      }
+      }*/
       else if (buf == "psychoState")
       {
          fgets(buffer, sizeof(buffer),arq);

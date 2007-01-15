@@ -1,0 +1,57 @@
+# Blender3D MTL File: house2.blend
+# Material Count: 5
+newmtl Telhado_house1.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd house1.png
+
+
+newmtl Paredes_house1.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd house1.png
+
+
+newmtl Beiras_house1.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd house1.png
+
+
+newmtl Janelas_house1.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.218716 0.064148 0.567320
+Ks 0.107904 0.059638 0.380719
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd house1.png
+
+
+newmtl Porta_house1.png
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.379085 0.287235 0.118846
+Ks 0.211262 0.154769 0.066892
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd house1.png
+
+

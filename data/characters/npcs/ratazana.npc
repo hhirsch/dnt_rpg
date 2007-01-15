@@ -5,17 +5,12 @@ maxLifePoints               42
 baseModifier                12/12/12
 attackModifier              8/3/0/0/0/0
 sizeModifier                2
-lifeDice                    d6
-ATT_LEVEL                   6
 ATT_STRENGHT                10
 ATT_DEXTERY                 18
 ATT_CONSTITUTION            20
 ATT_INTELIGENCY             14
 ATT_WISDOW                  6
 ATT_CHARISM                 2
-race                        RACE_RATAZANA
-class                       EDCC
-tendency                    TEND_SL_LIBERTARIO
 psychoState                 1
 SKILL_ADESTRAR_BICHOS       20
 SKILL_INTIMIDAR             30

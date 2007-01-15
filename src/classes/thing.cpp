@@ -16,7 +16,6 @@ thing::thing()
    will = 0;
    armatureClass = 0;
    displacement = 0;
-   level = 0;
    psychoState = PSYCHO_NEUTRAL;
 }
 

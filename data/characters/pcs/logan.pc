@@ -5,17 +5,12 @@ maxLifePoints               87
 baseModifier                14/11/12
 attackModifier              12/7/2/0/0/0
 sizeModifier                0
-lifeDice                    d8
-ATT_LEVEL                   15
 ATT_STRENGHT                14
 ATT_DEXTERY                 10
 ATT_CONSTITUTION            16
 ATT_INTELIGENCY             14
 ATT_WISDOW                  13
 ATT_CHARISM                 15
-race                        RACE_MUTANTE
-class                       EDCC
-tendency                    TEND_SL_CENTRISTA
 psychoState                 2
 SKILL_SALTAR                28
 SKILL_ADESTRAR_BICHOS       10

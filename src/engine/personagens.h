@@ -12,6 +12,8 @@
 #include "../gui/healthBar.h"
 #include "../classes/thing.h"
 #include "../classes/feats.h"
+#include "../classes/classes.h"
+#include "../classes/race.h"
 #include "../ia/astar.h"
 #include <cal3d/cal3d.h>
 #include <string>
@@ -24,6 +26,9 @@ using namespace std;
 #define STATE_IDLE  0 /**< Character Animation State Idle */
 #define STATE_WALK  1 /**< Character Animation State Walking */
 
+#define MAX_DISTINCT_CLASSES 3 /**< Max Different Classes for MultiClass */
+
+
 
 /*! Character Class */
 class personagem: public Tobjeto, public thing
@@ -35,6 +40,12 @@ class personagem: public Tobjeto, public thing
       Tlista *portraits;        /**< All character's portraits */
       Tlista *objects;          /**< Actual character objects */
       Tobjeto *actualWeapon;    /**< Actual weapon */
+
+      
+      classe* actualClass[MAX_DISTINCT_CLASSES]; /**< Pointer to each class */
+      int classLevels[MAX_DISTINCT_CLASSES]; /**< Current level of each class */
+      race* actualRace;         /**< Pointer to Race */
+      align* actualAlign;       /**< Pointer to Align */
 
       string nome;              /**< Character's name */
       string retratoConversa;   /**< Portrait talk file name */
@@ -106,18 +117,18 @@ class personagem: public Tobjeto, public thing
       void DefineMaxLifePoints(int maxPoints);
 
 
-protected:
+   protected:
   
-  int m_animationId[16]; /**< Cal3D animation ID */
-  int m_animationCount;  /**< Cal3D number of animations */
-  int m_meshId[32];      /**< Cal3D meshes ID */
-  int m_meshCount;       /**< Cal3D meshes count */
-  GLuint m_textureId[32];/**< Cal3D texture ID */
-  int m_textureCount;    /**< Cal3D texture Count */
-  float m_motionBlend[3];/**< Cal3D motion blend */
-  float m_renderScale;   /**< Cal3D scale on render */
-  float m_lodLevel;      /**< Cal3D Level of Detail to render */
-  std::string m_path;    /**< Path to cal3D model */
+     int m_animationId[16]; /**< Cal3D animation ID */
+     int m_animationCount;  /**< Cal3D number of animations */
+     int m_meshId[32];      /**< Cal3D meshes ID */
+     int m_meshCount;       /**< Cal3D meshes count */
+     GLuint m_textureId[32];/**< Cal3D texture ID */
+     int m_textureCount;    /**< Cal3D texture Count */
+     float m_motionBlend[3];/**< Cal3D motion blend */
+     float m_renderScale;   /**< Cal3D scale on render */
+     float m_lodLevel;      /**< Cal3D Level of Detail to render */
+     string m_path;         /**< Path to cal3D model */
 };
 
 

@@ -9,6 +9,7 @@
 #include "objects.h"
 #include "particles.h"
 #include "../../engine/sun.h"
+#include "../../engine/sky.h"
 #include "../../engine/personagens.h"
 #include "../../particle/partSystem.h"
 #include "../../map/map.h"
@@ -67,6 +68,7 @@ class editor
       bool quit;                     /**< Quit Editor Flag */
 
       sun* gameSun;                  /**< The Sun on Game */
+      sky* gameSky;                  /**< The Sky on Game */
       GLfloat hour;                  /**< Current Sun Hour */
       
       Map* map;                      /**< The active Map */

@@ -224,13 +224,13 @@ void camera::sumPhi(GLfloat f)
 void camera::sumD(GLfloat f)
 {
    d += f;
-   if (d<1) 
+   if (d < ZOOMMAXIMO) 
    {
-      d = 1;
+      d = ZOOMMAXIMO;
    }
-   else if (d>300)
+   else if (d > ZOOMMINIMO)
    {
-      d = 300;
+      d = ZOOMMINIMO;
    }
 }
 

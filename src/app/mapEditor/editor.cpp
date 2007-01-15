@@ -17,6 +17,7 @@ editor::editor()
    gui = new(guiIO);
    hour = 12.0;
    gameSun = new sun(hour , FARVIEW, FARVIEW);
+   gameSky = new(sky);
 
    terrainEditor = NULL;
    portalEditor = NULL;
@@ -38,6 +39,7 @@ editor::~editor()
       delete(particleEditor);
    }
    delete(gameSun);
+   delete(gameSky);
    if(particleSystem != NULL)
    {
       delete(particleSystem);
@@ -168,7 +170,16 @@ void editor::openMap()
       }
       else
       {
-         glDisable(GL_FOG);
+         glEnable(GL_FOG);
+         {
+            GLfloat color[3]={1.0,1.0,1.0};
+            glFogi(GL_FOG_MODE,GL_LINEAR);
+            glFogfv(GL_FOG_COLOR, color);
+            glFogf(GL_FOG_DENSITY, 0.10);
+            glHint(GL_FOG_HINT, GL_DONT_CARE);
+            glFogf(GL_FOG_START, 100);
+            glFogf(GL_FOG_END, HALFFARVIEW);
+         }
       }
       /* Open Particles */
       if(!map->particlesFileName.empty())
@@ -242,7 +253,7 @@ void editor::newMap()
    mapOpened = true;
    map = new(Map);
    //TODO Get Map Size!!!!
-   map->newMap(32,32);
+   map->newMap(16,16);
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wall(map);
@@ -251,6 +262,16 @@ void editor::newMap()
    actualTexture = map->Texturas->indice;
    NPCs = new (Lpersonagem);
    gui->showMessage("Created New Game Map!");
+   glEnable(GL_FOG);
+   {
+      GLfloat color[3]={1.0,1.0,1.0};
+      glFogi(GL_FOG_MODE,GL_LINEAR);
+      glFogfv(GL_FOG_COLOR, color);
+      glFogf(GL_FOG_DENSITY, 0.10);
+      glHint(GL_FOG_HINT, GL_DONT_CARE);
+      glFogf(GL_FOG_START, 100);
+      glFogf(GL_FOG_END, HALFFARVIEW);
+   }
 }
 
 /*********************************************************************
@@ -412,7 +433,7 @@ void editor::draw()
 
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
-   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
    glLoadIdentity();
    glClearColor(0.3,0.3,0.8,1.0);
 
@@ -421,14 +442,19 @@ void editor::draw()
    gui->cameraPos();
    AtualizaFrustum( visibleMatrix, proj, modl);
    gameSun->actualizeHourOfDay(hour);
-
-   glPushMatrix();
-   
    /* Draw Things */
    if(mapOpened)
    {
+      /* SKY */
+      glPushMatrix();
+         gameSky->draw(map,gameSun->getRotation());
+      glPopMatrix();
+      glColor3f(1.0,1.0,1.0);
+
+      glPushMatrix();
          map->draw(gui->gameCamera.getCameraX(), gui->gameCamera.getCameraY(), 
                    gui->gameCamera.getCameraZ(), visibleMatrix);
+      glPopMatrix();
 
          glDisable(GL_LIGHTING);
          glBegin(GL_QUADS);
@@ -463,7 +489,7 @@ void editor::draw()
    }
 
    glColor3f(1.0,1.0,1.0);
-         
+
    /* Draw the NPCs */
    if(NPCs)
    {
@@ -514,11 +540,23 @@ void editor::draw()
 
    /* Draw Particles */
    glPushMatrix();
-      particleSystem->actualizeAll(0,0,visibleMatrix, true);
+     particleSystem->actualizeAll(0,0,visibleMatrix, true);
    glPopMatrix();
+   glDisable(GL_FOG);
 
+   //gameSun->drawSun();
+
+   glColor3f(1.0,1.0,1.0);
+
+   glDisable(GL_LIGHTING);
+   glDisable(GL_DEPTH_TEST);
    /* Draw GUI */
-   gui->draw(proj, modl, viewPort);
+   glPushMatrix();
+      gui->draw(proj, modl, viewPort);
+   glPopMatrix();
+   glEnable(GL_LIGHTING);
+   glEnable(GL_DEPTH_TEST);
+
 
    /* Draw Active Texture */
    if(mapOpened)
@@ -552,9 +590,6 @@ void editor::draw()
       glEnable(GL_LIGHTING);
       glEnable(GL_DEPTH_TEST);
    }
-
-   glPopMatrix();
-   
    glFlush();
    SDL_GL_SwapBuffers();
 }
