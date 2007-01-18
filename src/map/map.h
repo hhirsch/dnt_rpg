@@ -8,6 +8,7 @@
 #include "mapobjeto.h"
 #include "mapfog.h"
 #include "maplights.h"
+#include "maproad.h"
 #include <string>
 using namespace std;
 
@@ -17,6 +18,7 @@ using namespace std;
 /* Constraints */
 #define SQUARESIZE             64 /**< Size of the Square */
 #define HALFSQUARESIZE         32 /**< Half size of the square */
+#define QUARTERSQUARESIZE      16 /**< Quarter size of the square */
 #define SQUAREDIAGONALSIZE     90.509668 /**< Diagonal size of the square */
 #define MAXOBJETOS             10 /**< Max number of objects per square */
 #define MAXMUROS                8 /**< Max number of walls per square */
@@ -72,7 +74,7 @@ typedef struct _texture
  ****************************************************/
 typedef struct _door
 {
-  mapObjeto* object;       /**< pointer to door map object */
+  mapObject* object;       /**< pointer to door map object */
   GLfloat x,z;             /**< position on map */
   GLint status;            /**< actual status (opened, closed) */
   GLint orientacao;        /**< orientation */
@@ -96,7 +98,7 @@ class Square
       int flags;                        /**< Condition flag */
       int visivel;                      /**< Visible on active frame ? */
       int textura;                      /**< Actual Texture */
-      mapObjeto *objects[MAXOBJETOS];   /**< Objects on Square */
+      mapObject *objects[MAXOBJETOS];   /**< Objects on Square */
       int objectsDesenha[MAXOBJETOS];   /**< Draw object on active frame ? */
       int quadXobjects[MAXOBJETOS];     /**< Object Square X coordinate */ 
       int quadZobjects[MAXOBJETOS];     /**< Object Square Z coordinate */
@@ -159,9 +161,10 @@ class Map
        *************************************************************** 
        * Opens map from file
        * \param arquivo ->  Name of file to be opened
+       * \param mdlList -> Game models list
        * \return 1 on success.
        ***************************************************************/
-      int open( string arquivo ); 
+      int open( string arquivo, modelList& mdlList ); 
       /*!
        *************************************************************** 
        * Gets coordinate relative square
@@ -183,9 +186,10 @@ class Map
        ***************************************************************/
       void optimize();
 
-      LmapObjeto* Objetos;  /**< Map's objects list */
+      lMapObject* objects;  /**< Map's objects list */
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
+      mapRoad* roads;       /**< Map's Roads */
       int numtexturas;      /**< Number of distint Textures on Map */
       texture* Texturas;    /**< List of textures on Map */
       int xInic,            /**< X coordinate where PCs starts */

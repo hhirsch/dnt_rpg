@@ -2,9 +2,9 @@
 
 CPP = g++
 CC = gcc
-CFLAGS = -g -Wall -O2
+CFLAGS = -g -Wall -O0
 
-all: distance.o glm.o fifo.o texture.o
+all: distance.o glm.o fifo.o modellist.o texture.o
 
 distance.o: distance.h distance.cpp
 	@printf "Making distance.o... "
@@ -28,6 +28,11 @@ fifo.o: fifo.c fifo.h
 
 fifo: fifo.c fifo.h
 	$(CPP) $(CFLAGS) -DFIFO_TEST fifo.c -o fifo
+
+modellist.o: modellist.h modellist.cpp
+	@printf "Making modellist.o... "
+	@$(CPP) $(CFLAGS) -c modellist.cpp -o modellist.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
 	@printf "Cleaning Etc Bin Files... "

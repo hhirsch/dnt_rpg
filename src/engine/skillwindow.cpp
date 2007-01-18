@@ -6,6 +6,9 @@
 #include "../lang/lang.h"
 #include "../classes/defs.h"
 
+/**************************************************************
+ *                          Constructor                       *
+ **************************************************************/
 skillWindow::skillWindow(skills* sk, int points, interface* inter)
 {
    char tmp[5];
@@ -116,6 +119,9 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
  
 }
 
+/**************************************************************
+ *                             treat                          *
+ **************************************************************/
 int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)

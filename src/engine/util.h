@@ -39,7 +39,7 @@
 #define DELTACAMERA    1.5            /**<  The camera velocity */
 #define ZOOMMAXIMO     80             /**< Max value of Zoom */
 #define ZOOMMINIMO     500            /**< Min value of Zoom */
-#define FARVIEW        3200           /**< FarView constant */
+#define FARVIEW        4096           /**< FarView constant */
 
 #define HALFFARVIEW    FARVIEW / 2.0  /**< Half FarView Value */
 
@@ -84,6 +84,10 @@
 #define PID2   M_PI / 2.0   /**< PI / 2 definition */
 #define PID180 M_PI / 180.0 /**< PI / 180 definition */
 
+/********************************************************************
+ *                       Inventory Constants                        *
+ ********************************************************************/
+#define INVENTORY_PER_CHARACTER 4  /**< Number of Inventories per Character */
 
 /********************************************************************
  *                            Functions                             *

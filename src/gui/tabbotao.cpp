@@ -7,6 +7,11 @@ tabButton::tabButton(int x,int y,const char* arquivo):figura(x,y,0,0,arquivo)
    numButtons = 0;
 }
 
+tabButton::tabButton(int x, int y, int w, int h):figura(x,y,w,h, NULL)
+{
+   numButtons = 0;
+}
+
 oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
 {
    if(numButtons < MAX_TABBUTTONS)

@@ -9,7 +9,7 @@ ENDENGINE = ../engine/
 ENDFIGHT = ../fight/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o $(ENDENGINE)personagens.o $(OBJSGUI)
-objetos = align.o skills.o feats.o race.o classes.o defs.o actions.o thing.o
+objetos = actions.o align.o classes.o defs.o feats.o inventory.o object.o race.o skills.o thing.o
 
 
 all: $(objetos)
@@ -53,6 +53,17 @@ thing.o: thing.cpp thing.h
 	@printf "Making thing.o... "
 	@$(CC) $(CFLAGS) thing.cpp -o thing.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
+
+object.o: object.cpp object.h
+	@printf "Making object.o... "
+	@$(CC) $(CFLAGS) object.cpp -o object.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+inventory.o: inventory.cpp inventory.h
+	@printf "Making inventory.o... "
+	@$(CC) $(CFLAGS) inventory.cpp -o inventory.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 
 teste: $(objetos) $(OBJSFIGHT) teste.cpp
 	g++ -g -Wall $(CLIBS) teste.cpp $(objetos) $(OBJSFIGHT) ../gui/healthBar.o ../lang/lang.o -o teste

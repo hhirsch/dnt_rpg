@@ -253,7 +253,7 @@ void editor::newMap()
    mapOpened = true;
    map = new(Map);
    //TODO Get Map Size!!!!
-   map->newMap(16,16);
+   map->newMap(32,32);
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wall(map);
@@ -610,6 +610,7 @@ void editor::doEditorIO()
    
    if( (gui->getState() == GUI_IO_STATE_TERRAIN) && (mapOpened))
    {
+      printf("doEditorIO: texture: %d\n",actualTexture);
       terrainEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(), 
                                   actualTexture);
    }

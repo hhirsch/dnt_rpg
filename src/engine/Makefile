@@ -14,16 +14,18 @@ ENDSOUND = ../sound/
 ENDLANG = ../lang/
 ENDPART = ../particle/
 ENDFIGHT = ../fight/
-OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o
+ENDETC = ../etc/
+OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)maproad.o
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)messages.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)healthBar.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)rolbar.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o $(ENDIA)astar.o $(ENDIA)fuzzy.o $(ENDIA)fuzzyvariable.o $(ENDIA)fuzzyfunction.o $(ENDIA)fuzzyrule.o
-OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o $(ENDCLASSES)skills.o $(ENDCLASSES)align.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o
+OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o $(ENDCLASSES)skills.o $(ENDCLASSES)align.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o $(ENDCLASSES)object.o $(ENDCLASSES)inventory.o
 OBJSSOUND = $(ENDSOUND)ogg_stream.o  $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
 OBJSLANG = $(ENDLANG)lang.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o $(ENDPART)grass.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
-OBJS = alignwindow.o attwindow.o camera.o classwindow.o collision.o conversa.o culling.o cursor.o dccnit.o ../etc/glm.o initial.o options.o ../etc/texture.o personagens.o racewindow.o skillwindow.o sky.o sun.o teste.o util.o
+OBJSETC = $(ENDETC)glm.o $(ENDETC)texture.o $(ENDETC)modellist.o
+OBJS = alignwindow.o attwindow.o camera.o classwindow.o collision.o conversa.o culling.o cursor.o dccnit.o initial.o inventwindow.o options.o personagens.o racewindow.o skillwindow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
@@ -81,6 +83,11 @@ initial.o: initial.h initial.cpp
 	@$(CC) $(CFLAGS) $(SUPREDE) initial.cpp -o initial.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+inventwindow.o: inventwindow.h inventwindow.cpp
+	@printf "Making inventwindow.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) inventwindow.cpp -o inventwindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 options.o: options.h options.cpp
 	@printf "Making options.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) options.cpp -o options.o
@@ -123,7 +130,7 @@ util.o: util.cpp util.h
 
 teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) 
 	@printf "Linking dccnitghtmare... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSETC) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:

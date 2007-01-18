@@ -11,12 +11,16 @@
 thing::thing()
 {
    lifePoints = 0;
+   maxLifePoints = 0;
    fortitude = 0;
    reflexes = 0;
    will = 0;
    armatureClass = 0;
    displacement = 0;
+   baseAttackModifier = 0;
+   sizeModifier = 0;
    psychoState = PSYCHO_NEUTRAL;
+   dead = false;
 }
 
 /******************************************************
@@ -24,6 +28,7 @@ thing::thing()
  ******************************************************/
 thing::~thing()
 {
+   dead = true;
 }
 
 /******************************************************

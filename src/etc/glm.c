@@ -336,6 +336,7 @@ void InsereTextura(GLMmodel* modelo, char* textura)
    if(!img)
    {
       printf("Erro ao abrir textura: %s\n",arq);
+      printf("File: %s\nDirectory: %s\n",textura, modelo->diretorioTexturas);
       free(arq);
       return;
    }

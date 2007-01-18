@@ -1,130 +1,91 @@
+/*************************************************************************
+ * DccNiTghtmare is Public Domain - Do whatever you want with this code. *
+ *************************************************************************/
+
 #include "mapobjeto.h"
 #include "../etc/glm.h"
 
 /*********************************************************************
- *                   Desenha o objeto de Mapa                        *
+ *                             Constructor                           *
  *********************************************************************/
-void mapObjeto::Desenhar(float x, float z, GLfloat distancia, float orientacao)
+lMapObject::lMapObject()
 {
-   glEnable(GL_COLOR_MATERIAL);
-   GLMmodel* modelo = (GLMmodel*) modelo3d; //modelo a ser desenhado
-   /* Define qual modelo desenhar */
-   if((distancia>deltaVariacao) && (distancia<2*deltaVariacao) &&
-      (modeloMedio != NULL))
-      modelo = (GLMmodel*) modeloMedio;
-   else if((distancia>2*deltaVariacao) && (modeloMinimo!=NULL))
-      modelo = (GLMmodel*) modeloMinimo;
-
-   /*modelo->position[0] = x;
-   modelo->position[1] = 0;
-   modelo->position[2] = z;*/
-   //modelo->orientacao = orientacao;
-   glPushMatrix();
-      glTranslatef(x, 0 ,z);
-      glRotatef(orientacao,0,1,0);
-      //glmDraw(modelo);
-      glmDrawLists(modelo);
-  glPopMatrix();
-  glDisable(GL_COLOR_MATERIAL);
+   first = NULL;
+   total = 0;
 }
 
 /*********************************************************************
- *                        Destruidor da Lista                        *
+ *                              Destructor                           *
  *********************************************************************/
-LmapObjeto::~LmapObjeto()
+lMapObject::~lMapObject()
 {
-   mapObjeto* obj = (mapObjeto*) primeiro->proximo;
-   int aux;
-   for(aux=0; aux<total; aux++)
+   mapObject* obj = first;
+   mapObject* tmp;
+   while(total > 0)
    {
-      RetirarMapObjeto(obj,0);
-      obj = (mapObjeto*) obj->proximo;
+      tmp = obj;
+      obj = obj->next;
+      delete(tmp);
+      total--;
    }
 }
 
 /*********************************************************************
- *                 Insere objeto de mapa na Lista                    *
+ *                           insertMapObject                         *
  *********************************************************************/
-mapObjeto* LmapObjeto::InserirMapObjeto(const char* arquivo, const  char* nome)
+mapObject* lMapObject::insertMapObject(string arquivo, string nome,
+                                       modelList& mdlList)
 {
-   FILE* arq;
-   mapObjeto* novo;
-   char arqModelo[128], dirTexturas[128];
-
-   if(!(arq=fopen(arquivo,"r")))
+   mapObject* novo;
+   novo = new mapObject(arquivo, nome, mdlList);
+   if(first == NULL)
    {
-       printf("Error on open object %s\n",arquivo);
-       return(NULL);
+      first = novo;
+      novo->next = first;
+      novo->previous = first;
    }
- 
-   novo = new(mapObjeto);
-   novo->tipo = MAPOBJETO;
-   novo->nome = (char*)malloc((strlen(nome)+1)*sizeof(char));
-   novo->nomeArq = (char*)malloc((strlen(arquivo)+1)*sizeof(char));
-   strcpy(novo->nome,nome);
-   strcpy(novo->nomeArq,arquivo);
-
-   /* Le a variacao entre Modelos */
-   fscanf(arq,"%d",&novo->deltaVariacao);
-   fscanf(arq,"%s",arqModelo);
-   fscanf(arq,"%s",dirTexturas); 
-   novo->modelo3d = glmReadOBJ(arqModelo,dirTexturas,1);
-
-   if(novo->deltaVariacao !=0) //S'existe variacao, le os outros modelos
+   else
    {
-      fscanf(arq,"%s",arqModelo);
-      fscanf(arq,"%s",dirTexturas);
-      novo->modeloMedio = glmReadOBJ(arqModelo,dirTexturas,0);
-      fscanf(arq,"%s",arqModelo);
-      fscanf(arq,"%s",dirTexturas);
-      novo->modeloMinimo = glmReadOBJ(arqModelo,dirTexturas,0);
+      novo->next = first;
+      novo->previous = first->previous;
+      novo->previous->next = novo;
+      novo->next->previous = novo;
+      first = novo;
    }
-   else //Senao, os ignora.
-   {
-      novo->modeloMedio = NULL;
-      novo->modeloMinimo = NULL;
-   }
-
-   fclose(arq);
-   InserirObj(novo);
+   
+   total++;
    return(novo);
 }
 
 /*********************************************************************
- *                 Retira Objeto de Mapa da Lista                    *
+ *                           removeMapObject                         *
  *********************************************************************/
-void LmapObjeto::RetirarMapObjeto(mapObjeto* obj, int tiraMemoria)
+void lMapObject::removeMapObject(mapObject* obj)
 {
-   glmDelete((GLMmodel*)obj->modelo3d);
-   if(obj->modeloMedio)
+   obj->previous->next = obj->next;
+   obj->next->previous = obj->previous;
+   delete(obj);
+   total--;
+   if(total == 0)
    {
-     glmDelete((GLMmodel*)obj->modeloMedio);
+      first = NULL;
    }
-   if(obj->modeloMinimo)
-   {
-     glmDelete((GLMmodel*)obj->modeloMinimo); 
-   }
-   if(tiraMemoria)
-   {
-     Retirar(obj);
-   }
-   free(obj->nome);
 }
 
 /*********************************************************************
- *                 Retorna Objeto de nome nome                       *
+ *                           getMapObject                            *
  *********************************************************************/
-mapObjeto* LmapObjeto::EndMapObjeto(const char* nome)
+mapObject* lMapObject::getMapObject(string name)
 {
    int aux;
-   mapObjeto* obj = (mapObjeto*) primeiro->proximo;
+   mapObject* obj = first;
    for(aux=0;aux<total;aux++)
    {
-      if(!strcmp(obj->nome,nome))
+      if(obj->getName() == name)
       {
          return(obj);
       }
-      obj = (mapObjeto*) obj->proximo;
+      obj = obj->next;
    }
    return(NULL);
 }

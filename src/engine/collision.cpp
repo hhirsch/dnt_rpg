@@ -65,25 +65,25 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
    {
       int ob = 0;
       //GLfloat u1,u2,v1,v2;
-      GLMmodel* modelo3d;
+      boundingBox bounding;
       GLfloat X[4], Z[4];
       while( (proxima->objects[ob] != NULL)) 
       {
         if(!proxima->pisavelObj[ob])
         {
-          modelo3d = (GLMmodel*)proxima->objects[ob]->modelo3d;
-          X[0] = modelo3d->x1;
-          Z[0] = modelo3d->z1;
-          X[1] = modelo3d->x1;
-          Z[1] = modelo3d->z2;
-          X[2] = modelo3d->x2;
-          Z[2] = modelo3d->z2;
-          X[3] = modelo3d->x2;
-          Z[3] = modelo3d->z1;
+          bounding = proxima->objects[ob]->getBoundingBox();
+          X[0] = bounding.x1;
+          Z[0] = bounding.z1;
+          X[1] = bounding.x1;
+          Z[1] = bounding.z2;
+          X[2] = bounding.x2;
+          Z[2] = bounding.z2;
+          X[3] = bounding.x2;
+          Z[3] = bounding.z1;
 /* TODO +Yobjects */
           rotTransBoundingBox(proxima->objectsOrientation[ob], X, Z,
-                              proxima->Xobjects[ob], modelo3d->y1, 
-                              modelo3d->y2,proxima->Zobjects[ob], 
+                              proxima->Xobjects[ob], bounding.y1, 
+                              bounding.y2, proxima->Zobjects[ob], 
                               min2, max2);
 
           result &= !estaDentro(min,max,min2,max2,1);
@@ -175,19 +175,19 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    while( porta != NULL )
    {
       GLfloat minObj[3], maxObj[3];
-      GLMmodel* modeloPorta = (GLMmodel*) porta->object->modelo3d;
+      boundingBox boundPorta = porta->object->getBoundingBox();
       GLfloat XA[4]; GLfloat ZA[4];
-      XA[0] = modeloPorta->x1;
-      ZA[0] = modeloPorta->z1;
+      XA[0] = boundPorta.x1;
+      ZA[0] = boundPorta.z1;
 
-      XA[1] = modeloPorta->x1;
-      ZA[1] = modeloPorta->z2; 
+      XA[1] = boundPorta.x1;
+      ZA[1] = boundPorta.z2; 
 
-      XA[2] = modeloPorta->x2;
-      ZA[2] = modeloPorta->z2;
+      XA[2] = boundPorta.x2;
+      ZA[2] = boundPorta.z2;
 
-      XA[3] = modeloPorta->x2;
-      ZA[3] = modeloPorta->z1;
+      XA[3] = boundPorta.x2;
+      ZA[3] = boundPorta.z1;
       rotTransBoundingBox(porta->orientacao, XA, ZA,
                           porta->x, 0.0,0.0,porta->z, 
                           minObj, maxObj);

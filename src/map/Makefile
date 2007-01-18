@@ -30,8 +30,13 @@ mapobjeto.o: mapobjeto.cpp mapobjeto.h
 	@printf "Making mapobjeto.o... "
 	@$(CC) $(CFLAGS) mapobjeto.cpp -o mapobjeto.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
+	
+maproad.o: maproad.cpp maproad.h
+	@printf "Making maproad.o... "
+	@$(CC) $(CFLAGS) maproad.cpp -o maproad.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
-objetos: map.o mapfog.o maplights.o mapobjeto.o 
+objetos: map.o mapfog.o maplights.o mapobjeto.o maproad.o 
 
 clean: 
 	@printf  "Cleaning Map Bin Files... "

@@ -30,6 +30,7 @@ engine::engine()
    NPCs = NULL;
    miniMapWindow = NULL;
    shortCutsWindow = NULL;
+   inventoryWindow = NULL;
    imgNumber = 0;
 
    curConection = NULL;
@@ -67,6 +68,9 @@ engine::engine()
    /* Load Classes */
    classList = new classes("../data/classes/Portugues/",
                            "../data/classes/classes.lst");
+
+   /* Create 3D Models List */
+   models = new modelList();
 
    /* Initialize readModes variables */
    lastRead = SDL_GetTicks();
@@ -137,12 +141,13 @@ engine::~engine()
    /* Clear Cursors */
    delete(cursors);
 
+   /* Clear 3D Models List */
+   delete(models);
+   
+   /* Clear Characters Lists */
    delete(alignList);
-
    delete(features);
-
    delete(raceList);
-
    delete(classList);
 }
 
@@ -155,7 +160,7 @@ void engine::InformationScreen()
    SDL_Surface* img = IMG_Load(language.TEXTURE_INFORMATION.c_str());
 
    GLuint texturaInfo;
-   carregaTextura(img,&texturaInfo);
+   carregaTexturaRGBA(img,&texturaInfo);
 
    glDisable(GL_LIGHTING);
    AtualizaFrustum(visibleMatrix,proj,modl);
@@ -227,10 +232,12 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    {
      arqVelho = actualMap->name;
      delete(actualMap);
+     /* Remove All Unused 3D Models */
+     models->removeUnusedModels();
    }
    actualMap = new(Map);
    actualMap->name = arqVelho;
-   actualMap->open(arqMapa);
+   actualMap->open(arqMapa,*models);
 
    /* Enable, if needed, the FOG */
    if(actualMap->fog.enabled)
@@ -790,6 +797,16 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
    dc.baseDice.sumNumber = 4;
    dc.initialLevel = 1;
 
+   /* Verify if Inventory Window is opened */
+   if(inventoryWindow)
+   {
+      if(!inventoryWindow->isOpen())
+      {
+         /* window is no more opened, so free structs */
+         OpenCloseInventoryWindow();
+      }  
+   }
+
    switch(eventInfo)
    {
        case TABBOTAOPRESSIONADO:
@@ -875,6 +892,13 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                   ((SDL_GetTicks() - lastTurnTime) > 200) )
               {
                  fightStatus = FIGHT_CONTINUE;
+              }
+           }
+           else if(object == (Tobjeto*) buttonInventory)
+           {
+              if(!inventoryWindow)
+              {
+                 OpenCloseInventoryWindow();
               }
            }
            break;
@@ -1036,16 +1060,16 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             if(quaux->objects[obj])
             {
-               GLMmodel* modelo3d = (GLMmodel*) quaux->objects[obj]->modelo3d;
+               boundingBox bound = quaux->objects[obj]->getBoundingBox();
                GLfloat X[4]; GLfloat Z[4];
-               X[0] = modelo3d->x1;
-               Z[0] = modelo3d->z1;
-               X[1] = modelo3d->x1;
-               Z[1] = modelo3d->z2; 
-               X[2] = modelo3d->x2;
-               Z[2] = modelo3d->z2;
-               X[3] = modelo3d->x2;
-               Z[3] = modelo3d->z1;
+               X[0] = bound.x1;
+               Z[0] = bound.z1;
+               X[1] = bound.x1;
+               Z[1] = bound.z2; 
+               X[2] = bound.x2;
+               Z[2] = bound.z2;
+               X[3] = bound.x2;
+               Z[3] = bound.z1;
                rotTransBoundingBox(quaux->objectsOrientation[obj], X, Z,
                               quaux->Xobjects[obj], 0.0, 
                               0.0,quaux->Zobjects[obj], 
@@ -1055,7 +1079,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                    cursors->setActual(CURSOR_GET);
                    if(shortCutsWindow)
                    {
-                      ObjTxt->texto = quaux->objects[obj]->nome; 
+                      ObjTxt->texto = quaux->objects[obj]->getName(); 
                       shortCutsWindow->Desenhar(mouseX,mouseY);
                    }
                    if(Mbotao & SDL_BUTTON(1))
@@ -1071,16 +1095,16 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          door* porta = actualMap->portas;
          while( (porta != NULL) && (!pronto) )
          {
-             GLMmodel* modelo3d = (GLMmodel*) porta->object->modelo3d;
+             boundingBox bound = porta->object->getBoundingBox();
              GLfloat X[4]; GLfloat Z[4];
-             X[0] = modelo3d->x1;
-             Z[0] = modelo3d->z1;
-             X[1] = modelo3d->x1;
-             Z[1] = modelo3d->z2; 
-             X[2] = modelo3d->x2;
-             Z[2] = modelo3d->z2;
-             X[3] = modelo3d->x2;
-             Z[3] = modelo3d->z1;
+             X[0] = bound.x1;
+             Z[0] = bound.z1;
+             X[1] = bound.x1;
+             Z[1] = bound.z2; 
+             X[2] = bound.x2;
+             Z[2] = bound.z2;
+             X[3] = bound.x2;
+             Z[3] = bound.z1;
              rotTransBoundingBox(porta->orientacao, X, Z,
                                  porta->x, 0.0, 
                                  0.0,porta->z, 
@@ -1114,7 +1138,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
 
-         /* TODO Inventory Verification */
+         /* Inventory Verification */
          personagem* pers = (personagem*) PCs->primeiro->proximo;
          while( (pers != PCs->primeiro) && (!pronto) )
          {
@@ -1145,6 +1169,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                 {
                    ObjTxt->texto = pers->nome; 
                    shortCutsWindow->Desenhar(mouseX, mouseY);
+                }
+
+                /* Open Inventory when button pressed */
+                if( (Mbotao & SDL_BUTTON(1)) && (!inventoryWindow))
+                {
+                   OpenCloseInventoryWindow();
                 }
                 pronto = 1;
             }
@@ -1291,10 +1321,15 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       {
          lastKeyb = tempo;
          /* Keyboard Verification */
-         if ( keys[SDLK_ESCAPE] ) // Exit Engine
-            return(0);
 
-         if(keys[SDLK_m]) //Open Minimap
+         /* Exit Engine */
+         if ( keys[SDLK_ESCAPE] )
+         {
+            return(0);
+         }
+
+         /* Open Minimap */
+         if(keys[SDLK_m]) 
          {
              if(!miniMapWindow)
              {
@@ -1302,6 +1337,28 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                redesenha = true;
              }
          }
+
+         /* Open ShortCuts */
+         if(keys[SDLK_n])
+         {
+             if(!shortCutsWindow)
+             {
+                 OpenShortcutsWindow();
+                 redesenha = true;
+             }
+         }
+
+         /* Open Inventory */
+         if(keys[SDLK_i])
+         {
+            OpenCloseInventoryWindow(); 
+         }
+
+      if(keys[SDLK_F1]) //Call Information Screen
+      {
+         InformationScreen();
+         redesenha = true;
+      }
 
          /* Temporariamente, para visualizar o efeito de sangue */
          if(keys[SDLK_y])
@@ -1351,6 +1408,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         "../data/particles/lightning1.par");
          }
 
+         
+
          if(keys[SDLK_0])
          {
             hour += 0.1;
@@ -1364,24 +1423,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       startVideo = true;
       printf("Started Video\n");
    }
-#endif
-
-      if(keys[SDLK_n])
-      {
-          if(!shortCutsWindow)
-          {
-              OpenShortcutsWindow();
-              redesenha = true;
-          }
-      }
-
-      if(keys[SDLK_F1]) //Call Information Screen
-      {
-         InformationScreen();
-         redesenha = true;
-      }
-
-      
+#endif 
 
       /* Keys to character's movimentation */
       if(keys[SDLK_q] || keys[SDLK_e])
@@ -2182,7 +2224,7 @@ void engine::OpenShortcutsWindow()
    tb->insertButton(53,40,89,72);/* Attack 2 */
    tb->insertButton(53,75,89,107);/* Attack 8 */
 
-   tb->insertButton(99,4,135,36);/* Inventory */
+   buttonInventory = tb->insertButton(99,4,135,36);/* Inventory */
    tb->insertButton(99,40,135,72);/* Attack 3 */
    tb->insertButton(99,75,135,107);/* Attack 9 */
 
@@ -2202,6 +2244,29 @@ void engine::OpenShortcutsWindow()
    
    shortCutsWindow->ptrExterno = &shortCutsWindow;
    shortCutsWindow->Abrir(gui->ljan);
+}
+
+/*********************************************************************
+ *                      OpenCloseInventoryWindow                     *
+ *********************************************************************/
+void engine::OpenCloseInventoryWindow()
+{
+   if(!inventoryWindow)
+   {
+      /* TODO get the right inventories!!! */
+      inventory* inventories[INVENTORY_PER_CHARACTER];
+      int lk;
+      for(lk = 0; lk < INVENTORY_PER_CHARACTER; lk++)
+      {
+         inventories[lk] = NULL;
+      }
+      inventoryWindow = new inventWindow(inventories,gui); 
+   }
+   else
+   {
+      delete(inventoryWindow);
+      inventoryWindow = NULL;
+   }
 }
 
 /*********************************************************************
@@ -2226,7 +2291,7 @@ void engine::showImage(string fileName)
    Uint8 mButton = 0;
    SDL_Surface* img = IMG_Load(fileName.c_str()); 
    glDisable(GL_LIGHTING);
-   carregaTextura(img,&id);
+   carregaTexturaRGBA(img,&id);
    SDL_FreeSurface(img);
    AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
    glFlush();

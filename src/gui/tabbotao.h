@@ -26,6 +26,12 @@ class tabButton: public figura
        * \param y -> y position of the tab button
        * \param arquivo -> fileName of the image to Load */
       tabButton(int x,int y,const char* arquivo);
+      /*! Constructor without Image
+       * \param x -> x position of the tab button
+       * \param y -> y position of the tab button
+       * \param w -> width of the tab button
+       * \param h -> heigh of the tab button */
+      tabButton(int x, int y, int w, int h);
       /*! Destructor */
       ~tabButton(){};
       /*! insert Button in the table of buttons

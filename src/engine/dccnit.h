@@ -19,6 +19,7 @@
 #include "racewindow.h"
 #include "attwindow.h"
 #include "classwindow.h"
+#include "inventwindow.h"
 #include "camera.h"
 #include "util.h"
 #include "collision.h"
@@ -127,7 +128,7 @@ class engine
 
       /*!
        *************************************************************** 
-       * Reason: Load MiniMap Window
+       * Load MiniMap Window
        ***************************************************************/
       void OpenMiniMapWindow();
 
@@ -136,6 +137,13 @@ class engine
        * Load ShortCuts Window
        ***************************************************************/
       void OpenShortcutsWindow();
+
+      /*!
+       *************************************************************** 
+       * Load/UnLoad Inventory Window
+       ***************************************************************/
+      void OpenCloseInventoryWindow();
+
 
    private:
 
@@ -229,7 +237,10 @@ class engine
       botao* buttonMenu;           /**< Butto to call Menu */
       oneTabButton* buttonAttackMode;/**< Button to Enter on Attack Mode */
       oneTabButton* buttonMap;     /**< Call MiniMap Button */
+      oneTabButton* buttonInventory; /**< Call Inventory Button */
       oneTabButton* buttonEndTurn; /**< End Turn Button */
+
+      inventWindow* inventoryWindow; /**< Inventory Window */
    
       Uint32 lastRead;             /**< Last Verification of I/O */
       Uint32 lastMouse;            /**< Last read from mouse */
@@ -242,6 +253,8 @@ class engine
       sndfx* walkSound;            /**< Actual walking sound */
       options* option;             /**< Current Options */
 
+      modelList* models;           /**< Current Models List */
+      
       featsList* features;         /**< Feats descriptions */
       aligns* alignList;           /**< Alignments List */
       races* raceList;             /**< Races List */

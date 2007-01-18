@@ -433,11 +433,18 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         glEnd();
         glDisable(GL_TEXTURE_2D);
 
+        /* Draw Roads */
+        if(roads)
+        {
+           roads->draw();
+        }
+
+
         /* Draw Doors */
         door* porta = portas;
         while(porta != NULL)
         {
-           porta->object->Desenhar(porta->x,porta->z,0,porta->orientacao);
+           porta->object->draw(porta->x,porta->z,0,porta->orientacao);
            porta = porta->proximo;
         }
 
@@ -449,7 +456,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         GLfloat deltaY2 = cameraY*cameraY;
         GLfloat min[3], max[3];
         GLfloat X[4], Z[4];
-        GLMmodel* modelo;
+        boundingBox bound;
 
         for(Xaux = 0; Xaux < x; Xaux++)
         for(Zaux = 0; Zaux < z; Zaux++)
@@ -464,19 +471,20 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                   (MapSquares[Xaux][Zaux]->objectsDesenha[o] == 1))
               {
                  /* Do the Rotation of the Bounding Box */
-                 modelo=(GLMmodel*)MapSquares[Xaux][Zaux]->objects[o]->modelo3d;
-                  X[0] = modelo->x1;
-                  Z[0] = modelo->z1;
-                  X[1] = modelo->x1;
-                  Z[1] = modelo->z2; 
-                  X[2] = modelo->x2;
-                  Z[2] = modelo->z2;
-                  X[3] = modelo->x2;
-                  Z[3] = modelo->z1;
+                 bound = 
+                 MapSquares[Xaux][Zaux]->objects[o]->getBoundingBox();
+                  X[0] = bound.x1;
+                  Z[0] = bound.z1;
+                  X[1] = bound.x1;
+                  Z[1] = bound.z2; 
+                  X[2] = bound.x2;
+                  Z[2] = bound.z2;
+                  X[3] = bound.x2;
+                  Z[3] = bound.z1;
                   rotTransBoundingBox(
                                   MapSquares[Xaux][Zaux]->objectsOrientation[o],
                                   X, Z, MapSquares[Xaux][Zaux]->Xobjects[o], 
-                                  modelo->y1, modelo->y2,
+                                  bound.y1, bound.y2,
                                   MapSquares[Xaux][Zaux]->Zobjects[o],
                                   min, max );
 
@@ -484,7 +492,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                   if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
                                      matriz))
                   {
-                     MapSquares[Xaux][Zaux]->objects[o]->Desenhar(
+                     MapSquares[Xaux][Zaux]->objects[o]->draw(
                              MapSquares[Xaux][Zaux]->Xobjects[o],
                              MapSquares[Xaux][Zaux]->Zobjects[o],
                              distancia,
@@ -496,8 +504,8 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         }
 
       glDisable(GL_COLOR_MATERIAL);
-
       glColor3f(1.0,1.0,1.0);
+
 
       return(0);
 }
@@ -515,12 +523,13 @@ Map::Map()
    meiosFio = NULL; 
    MapSquares = NULL;
    portas = NULL;
+   roads = NULL;
    music = "";
    npcFileName = "";
    particlesFileName = "";
    
    /* Initialize Structs */
-   Objetos = new(LmapObjeto);
+   objects = new(lMapObject);
    x = z = xInic = zInic = 0;
    SQUAREMINISIZE = 4;
    SQUAREMINIDIV = (SQUARESIZE / SQUAREMINISIZE);
@@ -540,7 +549,7 @@ Square* Map::quadradoRelativo(int xa, int za)
 /********************************************************************
  *                       Open Map File                              *
  ********************************************************************/
-int Map::open(string arquivo)
+int Map::open(string arquivo, modelList& mdlList)
 {
    FILE* arq;        // file used for the map
    char buffer[128]; // buffer used to read
@@ -600,6 +609,9 @@ int Map::open(string arquivo)
       }
    }
 
+   /* Alloc Roads Struct */
+   roads = new mapRoad(x, z);
+
    
    muro* maux = NULL;
    door* porta = NULL;
@@ -646,7 +658,7 @@ int Map::open(string arquivo)
             fgets(buffer, sizeof(buffer),arq);
             sscanf(buffer,"%s %f,%f:%d",nome,&porta->x,&porta->z,
                                         &porta->orientacao);
-            porta->object = Objetos->EndMapObjeto(nome);
+            porta->object = objects->getMapObject(nome);
             porta->status = 0;
             porta->proximo = portas;
             portas = porta;
@@ -741,7 +753,7 @@ int Map::open(string arquivo)
          {
              fgets(buffer, sizeof(buffer), arq); 
              sscanf(buffer, "%s %s",nome,nomeArq);
-             Objetos->InserirMapObjeto(nomeArq,nome);
+             objects->insertMapObject(nomeArq,nome, mdlList);
              break;
          }
          case 't': /* Insert Textures */
@@ -837,7 +849,7 @@ int Map::open(string arquivo)
                        &MapSquares[posX][posZ]->objectsOrientation[numObjetosAtual],
                        &MapSquares[posX][posZ]->pisavelObj[numObjetosAtual]);
                      MapSquares[posX][posZ]->objects[numObjetosAtual] = 
-                                                    Objetos->EndMapObjeto(nome);
+                                                    objects->getMapObject(nome);
                      MapSquares[posX][posZ]->quadObjetos[i] = quadradoRelativo(
                          MapSquares[posX][posZ]->quadXobjects[numObjetosAtual],
                          MapSquares[posX][posZ]->quadZobjects[numObjetosAtual]);
@@ -930,6 +942,9 @@ void Map::newMap(int X, int Z)
          MapSquares[auxX][auxZ] = new(Square);
       }
    }
+
+   roads = new mapRoad(X, Z);
+
    
    Square* saux;
    x = X;
@@ -1107,13 +1122,15 @@ int Map::save(string arquivo)
    }*/
 
    /* Write used objects */
-   if(Objetos->total>0)
+   int i;
+   if(objects->total>0)
    {
-      mapObjeto* objAux = (mapObjeto*)Objetos->primeiro->proximo;
-      while(objAux != Objetos->primeiro)
+      mapObject* objAux = objects->first;
+      for(i = 0; i < objects->total; i++)
       {
-         fprintf(arq,"o %s %s\n",objAux->nome,objAux->nomeArq);
-         objAux = (mapObjeto*)objAux->proximo;
+         fprintf(arq,"o %s %s\n",objAux->getName().c_str(),
+                                 objAux->getFileName().c_str());
+         objAux = objAux->next;
       }
    }
 
@@ -1130,7 +1147,8 @@ int Map::save(string arquivo)
    door* porta = (door*)portas;
    while(porta != NULL)
    {
-      fprintf(arq,"d %s %f,%f:%d\n",porta->object->nome,porta->x,porta->z,
+      fprintf(arq,"d %s %f,%f:%d\n",porta->object->getName().c_str(),
+                                    porta->x,porta->z,
                                     porta->orientacao);
       porta = porta->proximo;
    }
@@ -1188,7 +1206,7 @@ int Map::save(string arquivo)
                x2 = (int)MapSquares[x1][z1]->Xobjects[aux] / SQUARESIZE;
                z2 = (int)MapSquares[x1][z1]->Zobjects[aux] / SQUARESIZE;
                fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d:%d\n",
-                       MapSquares[x1][z1]->objects[aux]->nome,
+                       MapSquares[x1][z1]->objects[aux]->getName().c_str(),
                        MapSquares[x1][z1]->objectsDesenha[aux],
                        x2+1,z2+1,
                        MapSquares[x1][z1]->Xobjects[aux],
@@ -1249,7 +1267,7 @@ Map::~Map()
 
 
    /* Deleting all objects */
-   delete(Objetos);
+   delete(objects);
   
    /* Deleting all squares */
    int x1,z1;
@@ -1265,6 +1283,12 @@ Map::~Map()
       free(MapSquares[x1]);
    }
    free(MapSquares);
+
+   /* Deleting Roads */
+   if(roads)
+   {
+      delete(roads);
+   }
 }
 
 

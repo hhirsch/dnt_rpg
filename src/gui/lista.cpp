@@ -141,7 +141,15 @@ figura* Tlista::InserirFigura(int x,int y,int w,int h,const char* arquivo)
 tabButton* Tlista::InserirTabButton(int x,int y,int w,int h,const char* arquivo)
 {
    tabButton* novo;
-   novo = new tabButton(x,y,arquivo);
+
+   if(arquivo)
+   {
+      novo = new tabButton(x,y,arquivo);
+   }
+   else
+   {
+      novo = new tabButton(x,y,w,h);
+   }
    
 
    novo->tipo = TABBOTAO;
