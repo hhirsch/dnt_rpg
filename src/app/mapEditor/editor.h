@@ -15,6 +15,7 @@
 #include "../../map/map.h"
 #include "../../engine/culling.h"
 #include "../../engine/util.h"
+#include "../../etc/modellist.h"
 #include "../../etc/glm.h"
 #include <SDL/SDL_image.h>
 #include <stdio.h>
@@ -85,6 +86,7 @@ class editor
       wall* wallEditor;              /**< The wall Editor Module */
       objects* objectEditor;         /**< The Object Editor Module */
       particles* particleEditor;     /**< The Particle Editor Module */
+      modelList* models;             /**< The Objects Model List */
 
       GLuint actualTexture;          /**< Actual Texture */
 

@@ -24,8 +24,7 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
    }
    
    /* Add Window */
-   window = inter->ljan->InserirJanela(0,0,263,402,"Inventory",
-                                       1,1,NULL,NULL);
+   window = inter->insertWindow(0,0,263,402,"Inventory",1,1);
 
    /* Add Character (equip) Tab Button */
    characterTabButton = window->objects->InserirTabButton(4,15,256,256,
@@ -50,7 +49,7 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
 
    /* Open Window */
    window->ptrExterno = &window;
-   window->Abrir(inter->ljan);
+   inter->openWindow(window);
 }
 
 /**************************************************************
@@ -60,7 +59,7 @@ inventWindow::~inventWindow()
 {
    if(window)
    {
-      window->Fechar(interf->ljan);
+      interf->closeWindow(window);
    }
 }
 

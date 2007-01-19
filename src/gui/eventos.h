@@ -47,18 +47,27 @@
 class interface
 {
    public:
-      Ljanela* ljan;
-      Tlista* objects;
-      SDL_Surface* fundo;
       Tobjeto* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                 int* eventInfo);
       void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
       interface(char* arqFundo);
       ~interface();
+
+      void clearActiveObject();
+
+      void closeWindow(janela *jan);
+
+      janela* insertWindow(int xa,int ya,int xb,int yb,const char *text,
+                           int maximiz,int redmens);
+
+      void openWindow(janela* jan);
       
       int foco;
 
    private:
+      SDL_Surface* fundo;
+      Tlista* objects;
+      Ljanela* ljan;
       Tobjeto* objAtivo;
       Tobjeto* chamador;
 

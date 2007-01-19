@@ -31,9 +31,7 @@ attWindow::attWindow(skills* sk, interface* inter)
    }
 
    /* create window */
-   window = inter->ljan->InserirJanela(146,166,661,441,
-                                       language.ATTW_TITLE.c_str(),
-                                       1,1,NULL,NULL);
+   window = inter->insertWindow(146,166,661,441,language.ATTW_TITLE.c_str(),1,1);
 
    /* roll and write all rolled dices to string */
    rollAllDices();
@@ -229,7 +227,7 @@ attWindow::attWindow(skills* sk, interface* inter)
    /* Open Skill Window */
    window->ptrExterno = &window;
    window->fechavel = false;
-   window->Abrir(inter->ljan);
+   inter->openWindow(window);
 }
 
 /**************************************************************
@@ -420,7 +418,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
       {
          if(allAssigned())
          {
-            window->Fechar(inter->ljan);
+            inter->closeWindow(window);
             window = NULL;
             //TODO Save values
             glEnable(GL_LIGHTING);
@@ -437,7 +435,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
       }
       else if(object == (Tobjeto*) buttonCancel) 
       {
-          window->Fechar(inter->ljan);
+          inter->closeWindow(window);
           window = NULL;
           glEnable(GL_LIGHTING);
           SDL_ShowCursor(SDL_DISABLE);

@@ -49,6 +49,12 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                      int* eventInfo)
 {
     int aux;
+
+    if(!objAtivo)
+    {
+       foco = FOCO_JOGO;
+    }
+    
     if(ljan->janelaAtiva == NULL)
     {
        *eventInfo = NADA;
@@ -485,4 +491,25 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                      ljan->janelaAtiva->x2,ljan->janelaAtiva->y2, 0.011);
 }
 
+void interface::clearActiveObject()
+{
+   objAtivo = NULL;
+}
+
+void interface::closeWindow(janela *jan)
+{
+   clearActiveObject();
+   ljan->RetirarJanela(jan);
+}
+
+janela* interface::insertWindow(int xa,int ya,int xb,int yb,const char *text,
+                            int maximiz,int redmens)
+{
+   return(ljan->InserirJanela(xa,ya,xb,yb,text,maximiz,redmens, NULL, NULL));
+}
+
+void interface::openWindow(janela* jan)
+{
+   jan->Abrir(ljan);
+}
 

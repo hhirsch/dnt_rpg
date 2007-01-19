@@ -29,11 +29,11 @@ class objects
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary();
 
-      void defineActualObject(mapObjeto* obj){actualObstacle = obj;};
+      void defineActualObject(mapObject* obj){actualObstacle = obj;};
 
     private:
       Map* actualMap;             /**< Actual Internal Map */
-      mapObjeto* actualObstacle;  /**< Actual Obstacle */
+      mapObject* actualObstacle;  /**< Actual Obstacle */
       int actualTool;             /**< Actual Tool */
       int state;                  /**< Actual Internal State */
 
@@ -46,7 +46,7 @@ class objects
       GLint obstacleOrientation;  /**< Orientation of the Obstacle */
 
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                        Map* map, mapObjeto* obj, int qx, int qz);
+                        Map* map, mapObject* obj, int qx, int qz);
 
 };
 

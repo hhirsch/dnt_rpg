@@ -33,9 +33,8 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    done = false;
    Tobjeto* object = NULL;
    int eventInfo = NADA;
-   janela* jan = gui->ljan->InserirJanela(335,235,462,362,
-                                          language.VERSION.c_str(),1,1,
-                                          NULL,NULL);  
+   janela* jan = gui->insertWindow(335,235,462,362,
+                                   language.VERSION.c_str(),1,1);  
    jan->fechavel = 0;
    //jan->movivel = 0;
    if(Status == ON_INIT)
@@ -68,9 +67,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
                                  jan->Cores.corBot.G,jan->Cores.corBot.B,
                                  language.INITIAL_EXIT.c_str(),
                                  1,NULL);
- 
-   jan->Abrir(gui->ljan);
-
+   gui->openWindow(jan);
 
    glDisable(GL_LIGHTING);
    glClearColor(0,0,0,1);

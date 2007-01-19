@@ -18,6 +18,7 @@ editor::editor()
    hour = 12.0;
    gameSun = new sun(hour , FARVIEW, FARVIEW);
    gameSky = new(sky);
+   models = new modelList();
 
    terrainEditor = NULL;
    portalEditor = NULL;
@@ -53,6 +54,7 @@ editor::~editor()
       delete(features);
    }
    delete(gui);
+   delete(models);
 }
 
 /*********************************************************************
@@ -114,7 +116,7 @@ void editor::openMap()
    gui->showMessage("Opening actual Map...");
    draw();
    map = new(Map);
-   if(map->open(gui->getFileName()))
+   if(map->open(gui->getFileName(),*models))
    {
       mapOpened = true;
       terrainEditor = new terrain(map);
@@ -618,7 +620,8 @@ void editor::doEditorIO()
    {
       if(portalEditor->getDoor() == NULL)
       {
-         mapObjeto* porta = (mapObjeto*) map->Objetos->primeiro->proximo;
+         //FIXME take a door object!
+         /*mapObjeto* porta = (mapObjeto*) map->Objetos->primeiro->proximo;
          while( (porta != map->Objetos->primeiro) && 
                 (strcmp(porta->nome,"Door") != 0) ) 
          {
@@ -627,7 +630,7 @@ void editor::doEditorIO()
          if( (porta != map->Objetos->primeiro) )
          {
             portalEditor->defineDoor(porta);
-         }
+         }*/
       }
       portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
                                  proj, modl, viewPort);
@@ -700,9 +703,10 @@ void editor::verifyIO()
    {
       if(mapOpened)
       {
-         mapObjeto* obj=map->Objetos->InserirMapObjeto(
+         mapObject* obj=map->objects->insertMapObject(
                                               gui->getObjectFileName().c_str(),
-                                              gui->getObjectFileName().c_str());
+                                              gui->getObjectFileName().c_str(),
+                                              *models);
          if(obj != NULL)
          {
             gui->showMessage(gui->getObjectFileName()+" Inserted.");

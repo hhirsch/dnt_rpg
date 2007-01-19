@@ -186,9 +186,8 @@ void options::DisplayOptionsScreen(interface* interf)
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
-   window = interf->ljan->InserirJanela(276,174,531,429,
-                                       language.OPTIONS_TITLE.c_str(),
-                                       1,1,NULL,NULL);
+   window = interf->insertWindow(276,174,531,429,language.OPTIONS_TITLE.c_str(),
+                                 1,1);
 
    /* Music Things */
    sprintf(tmp,"%d",musicVolume);
@@ -313,7 +312,7 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Open Skill Window */
    window->ptrExterno = &window;
    window->fechavel = false;
-   window->Abrir(interf->ljan);
+   interf->openWindow(window);
 }
 
 /****************************************************************
@@ -392,7 +391,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
          Save();
-         window->Fechar(interf->ljan);
+         interf->closeWindow(window);
          return(OPTIONSW_CONFIRM);
       }
       if( (object == (Tobjeto*) buttonCancel) )
@@ -401,7 +400,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          sndfxVolume = prevSndfxVolume;
          langNumber  = prevLanguage;
          cameraNumber = prevCamera;
-         window->Fechar(interf->ljan);
+         interf->closeWindow(window);
          return(OPTIONSW_CANCEL);
       }
    }

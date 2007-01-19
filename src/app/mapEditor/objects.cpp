@@ -10,7 +10,7 @@ objects::objects(Map* map)
 {
    actualMap = map;
    state = OBJECTS_STATE_NONE;
-   actualObstacle = (mapObjeto*)actualMap->Objetos->primeiro->proximo;
+   actualObstacle = (mapObject*)actualMap->objetcs->primeiro->proximo;
 }
 
 /******************************************************

@@ -137,14 +137,14 @@ void conversa::abrirDialogo(int numDialogo, interface* gui,
       Opcoes[aux] = dlg->Opcoes[aux].Se; 
    }
  
-   janela* jan = gui->ljan->InserirJanela(330,100,585,355,"Dialog",1,1,NULL,NULL);
+   janela* jan = gui->insertWindow(330,100,585,355,"Dialog",1,1);
    jan->objects->InserirFigura(8,20,0,0,pers->retratoConversa.c_str());
    jan->objects->InserirQuadroTexto(90,20,160,95,1,NPC.c_str());
    jan->objects->InserirSelTexto(8,100,160,252,Opcoes[0],
                       Opcoes[1], Opcoes[2],
                       Opcoes[3], Opcoes[4], procPres);
    jan->ptrExterno = &jan;
-   jan->Abrir(gui->ljan);
+   gui->openWindow(jan);
 }
 
 int conversa::ProcessaAcao(int numDialogo, int opcao,interface* gui,
@@ -173,7 +173,7 @@ int conversa::ProcessaAcao(int numDialogo, int opcao,interface* gui,
          //NPC->amigavel = false; //brigar
       break;
       case TALK_ACTION_CLOSE:
-         jan->Fechar(gui->ljan);
+         gui->closeWindow(jan);
       break;
       case TALK_ACTION_MODPC:
       break;

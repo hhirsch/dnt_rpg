@@ -10,9 +10,8 @@ alignWindow::alignWindow(aligns* alg, interface* inter)
    actualAlign = externalAligns->getAlignByInteger(0);
    
    /* create window */
-   window = inter->ljan->InserirJanela(270,186,537,441,
-                                       language.ALIGNW_TITLE.c_str(),
-                                       1,1,NULL,NULL);
+   window = inter->insertWindow(270,186,537,441,language.ALIGNW_TITLE.c_str(),
+                                1,1);
    /* Align Image */
    alignImage = window->objects->InserirFigura(111,185,0,0,NULL);   
    alignImage->fig = actualAlign->image;
@@ -50,7 +49,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter)
    /* Open Skill Window */
    window->ptrExterno = &window;
    window->fechavel = false;
-   window->Abrir(inter->ljan);
+   inter->openWindow(window);
 }
 
 int alignWindow::treat(Tobjeto* object, int eventInfo, 
@@ -78,7 +77,7 @@ int alignWindow::treat(Tobjeto* object, int eventInfo,
       {
          alignImage->fig = NULL;
          *actual = actualAlign;
-         window->Fechar(inter->ljan);
+         inter->closeWindow(window);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(ALIGNW_CONFIRM);
@@ -86,7 +85,7 @@ int alignWindow::treat(Tobjeto* object, int eventInfo,
       else if(object == (Tobjeto*) buttonCancel) 
       {
          alignImage->fig = NULL; //to not delete skill images
-         window->Fechar(inter->ljan);
+         inter->closeWindow(window);
          *actual = NULL;
          window = NULL;
          glEnable(GL_LIGHTING);

@@ -30,9 +30,8 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    }
    
    /* Create Skill Window */
-   window = inter->ljan->InserirJanela(276,186,531,441,
-                                       language.SKILL_TITLE.c_str(),
-                                       1,1,NULL,NULL);
+   window = inter->insertWindow(276,186,531,441,
+                                language.SKILL_TITLE.c_str(),1,1);
 
    /* Free Points */
    sprintf(tmp,"%d",avaiblePoints);
@@ -115,8 +114,7 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    /* Open Skill Window */
    window->ptrExterno = &window;
    window->fechavel = false;
-   window->Abrir(inter->ljan);
- 
+   inter->openWindow(window);
 }
 
 /**************************************************************
@@ -211,7 +209,7 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
       else if(object == (Tobjeto*) buttonConfirm)
       {
          skFig->fig = NULL; //to not delete skill images
-         window->Fechar(inter->ljan);
+         inter->closeWindow(window);
          window = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
@@ -227,7 +225,7 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
                                         externalSkill->m_skills[aux].antPontos;
           }
           skFig->fig = NULL; //to not delete skill images
-          window->Fechar(inter->ljan);
+          inter->closeWindow(window);
           window = NULL;
           glEnable(GL_LIGHTING);
           SDL_ShowCursor(SDL_DISABLE);

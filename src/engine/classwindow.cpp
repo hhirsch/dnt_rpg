@@ -14,9 +14,8 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter)
    actualClass = externalClasses->getClassByInteger(0);
    
    /* create window */
-   window = inter->ljan->InserirJanela(90,100,710,499, "Class"
-                                       /*language.CLASSW_TITLE.c_str()*/,
-                                       1,1,NULL,NULL);
+   window = inter->insertWindow(90,100,710,499, "Class"
+                                /*language.CLASSW_TITLE.c_str()*/,1,1);
    /* Class Image */
    classImage = window->objects->InserirFigura(7,20,0,0,NULL);   
    classImage->fig = actualClass->image;
@@ -68,7 +67,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter)
    /* Open Skill Window */
    window->ptrExterno = &window;
    window->fechavel = false;
-   window->Abrir(inter->ljan);
+   inter->openWindow(window);
 }
 
 /********************************************************************
@@ -207,7 +206,7 @@ int classWindow::treat(Tobjeto* object, int eventInfo,
       {
          classImage->fig = NULL;
          *actual = actualClass;
-         window->Fechar(inter->ljan);
+         inter->closeWindow(window);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(CLASSW_CONFIRM);
@@ -215,7 +214,7 @@ int classWindow::treat(Tobjeto* object, int eventInfo,
       else if(object == (Tobjeto*) buttonCancel) 
       {
          classImage->fig = NULL; //to not delete classes images
-         window->Fechar(inter->ljan);
+         inter->closeWindow(window);
          *actual = NULL;
          window = NULL;
          glEnable(GL_LIGHTING);

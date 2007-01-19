@@ -329,9 +329,13 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                  proj, modl, viewPort);
 
    if(miniMapWindow)
-     miniMapWindow->Fechar(gui->ljan);
+   {
+     gui->closeWindow(miniMapWindow);
+   }
    if(shortCutsWindow)
-     shortCutsWindow->Fechar(gui->ljan);
+   {
+     gui->closeWindow(shortCutsWindow);
+   }
    OpenMiniMapWindow();
    OpenShortcutsWindow();
 
@@ -2144,9 +2148,8 @@ void engine::OpenMiniMapWindow()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   miniMapWindow = gui->ljan->InserirJanela(512,472,799,599,//0,344,255,471,
-                                          language.WINDOW_MAP.c_str(),1,1,
-                                          NULL,NULL);
+   miniMapWindow = gui->insertWindow(512,472,799,599,//0,344,255,471,
+                                     language.WINDOW_MAP.c_str(),1,1);
 
    botPerMiniMap = miniMapWindow->objects->InserirBotao(x,z,x+2,z+2,255,255,128,
                                                       "",0,NULL);
@@ -2169,7 +2172,7 @@ void engine::OpenMiniMapWindow()
    
                    
    miniMapWindow->ptrExterno = &miniMapWindow;
-   miniMapWindow->Abrir(gui->ljan);
+   gui->openWindow(miniMapWindow);
 }
 
 /*********************************************************************
@@ -2177,9 +2180,8 @@ void engine::OpenMiniMapWindow()
  *********************************************************************/
 void engine::OpenShortcutsWindow()
 {
-   shortCutsWindow=gui->ljan->InserirJanela(0,472,511,599,
-                                  language.WINDOW_SHORTCUTS.c_str(),1,1,
-                                       NULL,NULL);
+   shortCutsWindow = gui->insertWindow(0,472,511,599,
+                                     language.WINDOW_SHORTCUTS.c_str(),1,1);
    FPS = shortCutsWindow->objects->InserirQuadroTexto(8,20,150/*100*/,35,2,
                                   language.WINDOW_SHORTCUTS_FPS.c_str());
    briefTxt = shortCutsWindow->objects->InserirQuadroTexto(8,36,249,100,2,
@@ -2243,7 +2245,7 @@ void engine::OpenShortcutsWindow()
    shortCutsWindow->objects->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
    
    shortCutsWindow->ptrExterno = &shortCutsWindow;
-   shortCutsWindow->Abrir(gui->ljan);
+   gui->openWindow(shortCutsWindow);
 }
 
 /*********************************************************************

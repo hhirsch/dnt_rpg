@@ -14,9 +14,8 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter)
    actualRace = externalRaces->getRaceByInteger(0);
    
    /* create window */
-   window = inter->ljan->InserirJanela(90,100,710,499,
-                                       language.RACEW_TITLE.c_str(),
-                                       1,1,NULL,NULL);
+   window = inter->insertWindow(90,100,710,499,
+                                language.RACEW_TITLE.c_str(),1,1);
    /* Race Image */
    raceImage = window->objects->InserirFigura(7,20,0,0,NULL);   
    raceImage->fig = actualRace->image;
@@ -68,7 +67,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter)
    /* Open Skill Window */
    window->ptrExterno = &window;
    window->fechavel = false;
-   window->Abrir(inter->ljan);
+   inter->openWindow(window);
 }
 
 /********************************************************************
@@ -155,7 +154,7 @@ int raceWindow::treat(Tobjeto* object, int eventInfo,
       {
          raceImage->fig = NULL;
          *actual = actualRace;
-         window->Fechar(inter->ljan);
+         inter->closeWindow(window);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(RACEW_CONFIRM);
@@ -163,7 +162,7 @@ int raceWindow::treat(Tobjeto* object, int eventInfo,
       else if(object == (Tobjeto*) buttonCancel) 
       {
          raceImage->fig = NULL; //to not delete race images
-         window->Fechar(inter->ljan);
+         inter->closeWindow(window);
          *actual = NULL;
          window = NULL;
          glEnable(GL_LIGHTING);
