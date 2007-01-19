@@ -31,7 +31,7 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
    characterTabButton = window->objects->InserirTabButton(4,15,256,256,
                                          "../data/texturas/inventory/equip.png");
    headButton = characterTabButton->insertButton(109,3,147,41);
-   footButton = characterTabButton->insertButton(109,214,157,252);
+   footButton = characterTabButton->insertButton(109,214,147,252);
    bodyButton = characterTabButton->insertButton(99,100,156,176);
    rightHandButton = characterTabButton->insertButton(58,112,96,188);
    leftHandButton = characterTabButton->insertButton(159,112,197,188);

@@ -27,7 +27,7 @@ oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
 }
 
 void tabButton::draw(int mouseX, int mouseY, 
-                        int Xjan,int Yjan,SDL_Surface *screen)
+                     int Xjan,int Yjan,SDL_Surface *screen)
 { 
    int i;
    figura* fig;
@@ -48,9 +48,10 @@ void tabButton::draw(int mouseX, int mouseY,
 }
 
 Tobjeto* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
-                               int Xjan, int Yjan)
+                               int Xjan, int Yjan, SDL_Surface *screen)
 {
    int i;
+   draw(mouseX, mouseY, Xjan, Yjan, screen);
    for(i=0;i<numButtons;i++)
    {
       if(mouse_NaArea(Xjan + x1 + Buttons[i].x1, Yjan + y1 + Buttons[i].y1,

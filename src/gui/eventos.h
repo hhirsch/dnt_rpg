@@ -40,6 +40,7 @@
 #define FOCO_SELTEXTO     6
 #define FOCO_JANELAMOVER  7
 #define FOCO_MENUJANELA   8
+#define FOCO_TABBUTTON    9
 #define FOCO_JOGO         100
 
 

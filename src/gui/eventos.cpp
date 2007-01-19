@@ -69,8 +69,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     {
         mouseX = x;
         mouseY = y;
-
-        /* Test selTexto */
+        
         if ((ljan->janelaAtiva != NULL) &&
              mouse_NaArea(ljan->janelaAtiva->x1,
                           ljan->janelaAtiva->y1,
@@ -81,7 +80,8 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
             for(aux=0;aux<ljan->janelaAtiva->objects->total;aux++)
             {
-               if(obj->tipo == SELTEXTO)
+               /* Test selTexto */
+               if(obj->tipo == SELTEXTO) 
                {
                   selTexto *st = (selTexto*) obj;
                   if(mouse_NaArea(ljan->janelaAtiva->x1+st->x1,
@@ -91,6 +91,19 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   {
                       objAtivo = st;
                       foco = FOCO_SELTEXTO;
+                  }
+               }
+               /* Verify Button Table */
+               else if(obj->tipo == TABBOTAO)
+               {
+                  tabButton *tb = (tabButton*) obj;
+                  if(mouse_NaArea(ljan->janelaAtiva->x1+tb->x1,
+                                  ljan->janelaAtiva->y1+tb->y1,
+                                  ljan->janelaAtiva->x1+tb->x2, 
+                                  ljan->janelaAtiva->y1+tb->y2,x,y))
+                  {
+                     objAtivo = tb;
+                     foco = FOCO_TABBUTTON;
                   }
                }
                obj = obj->proximo;
@@ -181,20 +194,6 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                         st->procPres(NULL, 
                             st->Selecionada(y,ljan->janelaAtiva->y1));
                      foco = FOCO_SELTEXTO;
-                  }
-               }
-               /* Verify Button Table */
-               else if(obj->tipo == TABBOTAO)
-               {
-                  tabButton* tb = (tabButton*) obj;
-                  Tobjeto* object = tb->verifyPosition(x,y,Mbotao,
-                                                       ljan->janelaAtiva->x1,
-                                                       ljan->janelaAtiva->y1);
-                  if( object != NULL )
-                  {
-                    //selectObject = &object;
-                    *eventInfo = TABBOTAOPRESSIONADO;
-                    return(object);
                   }
                }
                obj = obj->proximo;
@@ -410,6 +409,36 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
         *eventInfo = SELTEXTOMODIFICADA;
         return(objAtivo);
     }
+
+    /* FOCUS ON TABBUTTON */
+    else
+    if ((foco == FOCO_TABBUTTON))
+    {
+       tabButton* tb = (tabButton*) objAtivo;
+       Tobjeto* object = tb->verifyPosition(x,y,Mbotao,
+                                            ljan->janelaAtiva->x1,
+                                            ljan->janelaAtiva->y1,
+                                            ljan->janelaAtiva->cara);
+       ljan->janelaAtiva->AtualizaCara();
+       if( object != NULL )
+       {
+            //selectObject = &object;
+            foco = FOCO_JOGO;
+            *eventInfo = TABBOTAOPRESSIONADO;
+            return(object);
+       }
+       else
+       {
+            if(!mouse_NaArea(ljan->janelaAtiva->x1+tb->x1,
+                             ljan->janelaAtiva->y1+tb->y1,
+                             ljan->janelaAtiva->x1+tb->x2, 
+                             ljan->janelaAtiva->y1+tb->y2,x,y))
+            {
+               foco = FOCO_JOGO;
+            }
+       }
+    }
+         
 
     /* If here, no actions were made on GUI */
     *eventInfo = NADA;

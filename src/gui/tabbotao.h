@@ -58,7 +58,7 @@ class tabButton: public figura
        * \param Yjan -> window Y coordinate
        * \return Pointer to the button pressed.*/
       Tobjeto* verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
-                          int Xjan, int Yjan);
+                              int Xjan, int Yjan, SDL_Surface *screen);
 
    private:
       int numButtons;                       /**< Number of active buttons */
