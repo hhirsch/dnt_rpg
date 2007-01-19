@@ -228,7 +228,7 @@ class engine
 
       quadroTexto* FPS;            /**< Text that shows FPS */
       quadroTexto* ObjTxt;         /**< Text that shows actual pointed object */
-      quadroTexto* briefTxt;       /**< Briefing Text */
+      rolBar* briefTxt;            /**< Briefing Text */
       quadroTexto* hourTxt;        /**< Text for Hour */
       janela* shortCutsWindow;     /**< ShortCuts Window */
       janela* miniMapWindow;       /**< MiniMap Window */

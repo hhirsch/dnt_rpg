@@ -95,7 +95,7 @@ mapRoad::mapRoad(int numX, int numZ)
 mapRoad::~mapRoad()
 {
    int i;
-   for(i=0; i < maxZ; i++)
+   for(i=0; i < maxX; i++)
    {
       free(typeOfRoad[i]);
    }

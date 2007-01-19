@@ -152,4 +152,12 @@ void rolBar::setText(string txt)
    text->texto = copyLines(fullText, actualInit,actualEnd);
 }
 
+/*********************************************************************
+ *                              addText                              *
+ *********************************************************************/
+void rolBar::addText(string txt)
+{
+   fullText += txt;
+   setText(fullText);
+}
 

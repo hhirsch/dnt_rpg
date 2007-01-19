@@ -825,7 +825,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                  {
                     if(shortCutsWindow != NULL)
                     {
-                       briefTxt->texto = language.FIGHT_NO_NPCS;
+                       briefTxt->setText(language.FIGHT_NO_NPCS);
                     }
                     return;
                  }
@@ -876,7 +876,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                  }
                  if(shortCutsWindow != NULL)
                  {
-                    briefTxt->texto = brief;
+                    briefTxt->setText(brief);
                  }
               }
            }
@@ -1266,7 +1266,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                      }
                      if(shortCutsWindow != NULL)
                      {
-                        briefTxt->texto = brief;
+                        briefTxt->setText(brief);
                      }
                      pronto = 1;
                  }
@@ -2184,9 +2184,9 @@ void engine::OpenShortcutsWindow()
                                      language.WINDOW_SHORTCUTS.c_str(),1,1);
    FPS = shortCutsWindow->objects->InserirQuadroTexto(8,20,150/*100*/,35,2,
                                   language.WINDOW_SHORTCUTS_FPS.c_str());
-   briefTxt = shortCutsWindow->objects->InserirQuadroTexto(8,36,249,100,2,
+   briefTxt = shortCutsWindow->objects->InsertRolBar(8,36,249,100,
                                   language.WINDOW_SHORTCUTS_HELP.c_str());
-   briefTxt->fonte = FMINI;
+   //briefTxt->fonte = FMINI;
    /*ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
    ObjTxt->Cores.corCont[1].B = 255;*/
    ObjTxt = shortCutsWindow->objects->InserirQuadroTexto(151,20,249,35,2,
@@ -2357,7 +2357,7 @@ int engine::Run(SDL_Surface *surface)
            engineMode = ENGINE_MODE_REAL_TIME;
            if(shortCutsWindow)
            {
-              briefTxt->texto += "|" + language.FIGHT_EXIT;
+              briefTxt->setText("|" + language.FIGHT_EXIT);
            }
            /* Verify if any PC is alive. */
            personagem* pers = (personagem*) PCs->primeiro->proximo;
@@ -2385,7 +2385,7 @@ int engine::Run(SDL_Surface *surface)
            fightStatus = fight.doBattleCicle(brief);
            if(shortCutsWindow)
            {
-              briefTxt->texto = brief;
+              briefTxt->setText(brief);
            }
            actualizeAllHealthBars();
 
