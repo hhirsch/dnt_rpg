@@ -1062,7 +1062,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          GLfloat minObj[3], maxObj[3];
          for(pronto = 0; ( (obj<MAXOBJETOS) && (!pronto) );obj++)
          {
-            if(quaux->objects[obj])
+            if( (quaux->objects[obj]) && (quaux->objects[obj]->canGet()) )
             {
                boundingBox bound = quaux->objects[obj]->getBoundingBox();
                GLfloat X[4]; GLfloat Z[4];

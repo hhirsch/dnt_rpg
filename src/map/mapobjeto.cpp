@@ -90,4 +90,13 @@ mapObject* lMapObject::getMapObject(string name)
    return(NULL);
 }
 
+/*********************************************************************
+ *                              canGet                               *
+ *********************************************************************/
+bool mapObject::canGet()
+{
+   int x, y;
+   getInventorySize(x,y);
+   return( (x != 0) && (y != 0));
+}
 

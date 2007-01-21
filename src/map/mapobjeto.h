@@ -27,6 +27,10 @@ class mapObject: public object
       mapObject(string path, string objName, modelList& mdlList):
          object(path, objName, mdlList){};
 
+      /*! Verify if Map object can be got
+       * \return true if the object is pickable */
+      bool canGet();
+
       mapObject* next;        /**< Next Object on List */
       mapObject* previous;    /**< Previous Object on List */
 };
