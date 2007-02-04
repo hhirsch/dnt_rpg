@@ -14,6 +14,7 @@
 #include "../classes/feats.h"
 #include "../classes/classes.h"
 #include "../classes/race.h"
+#include "../classes/inventory.h"
 #include "../ia/astar.h"
 #include <cal3d/cal3d.h>
 #include <string>
@@ -70,6 +71,8 @@ class personagem: public Tobjeto, public thing
       healthBar* lifeBar;       /**< Character's Life Bar */
 
       aStar pathFind;           /**< The A* pathFind to the character */
+
+      inventory* inventories[INVENTORY_PER_CHARACTER]; /**< Inventory */
 
       // CAL3D related member variables
       CalCoreModel* m_calCoreModel;  /**< Cal3D Core Model of character */

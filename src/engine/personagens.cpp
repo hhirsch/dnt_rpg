@@ -33,6 +33,11 @@ personagem::personagem(featsList* ft)
   }
   actualRace = NULL;
   actualAlign = NULL;
+  
+  for(i = 0; i < INVENTORY_PER_CHARACTER; i++)
+  {
+    inventories[i] = new inventory;
+  }
 
   /* Feat Details */
   actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
@@ -44,7 +49,15 @@ personagem::personagem(featsList* ft)
  *********************************************************************/
 personagem::~personagem()
 {
+   int i;
    delete(lifeBar);
+   for(i = 0; i < INVENTORY_PER_CHARACTER; i++)
+   {
+      if(inventories[i])
+      {
+         delete(inventories[i]);
+      }
+   }
 }
 
 /*********************************************************************

@@ -38,6 +38,11 @@ class inventory
        * \return -> true if added to inventory, false if can't add. */
       bool addObject(object* obj, int x, int y);
 
+      /*! Add object to first free inventory space
+       * \param obj -> pointer to object to be added
+       * \return -> true if added to inventory, false if can't add. */
+      bool addObject(object* obj);
+
       /*! Get object from iventory position
        * \param x -> x space position on inventory
        * \param y -> y space position on inventory

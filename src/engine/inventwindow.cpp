@@ -50,6 +50,9 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
    /* Open Window */
    window->ptrExterno = &window;
    inter->openWindow(window);
+
+   inventories[0]->draw(0,0, inventoryTabButton->fig);
+   window->Desenhar(0,0);
 }
 
 /**************************************************************
@@ -69,5 +72,17 @@ inventWindow::~inventWindow()
 bool inventWindow::isOpen()
 {
    return(window != NULL);
+}
+
+/**************************************************************
+ *                            reDraw                          *
+ **************************************************************/
+void inventWindow::reDraw()
+{
+   if(isOpen())
+   {
+      inventories[0]->draw(0,0, inventoryTabButton->fig);
+      window->Desenhar(0,0);
+   }
 }
 

@@ -11,6 +11,8 @@
 inventory::inventory()
 {
    int x,y;
+   inventoryImage = NULL;
+
    for(x=0; x < INVENTORY_SIZE_X; x++)
    {
       for(y=0; y < INVENTORY_SIZE_Y; y++)
@@ -86,6 +88,26 @@ bool inventory::addObject(object* obj, int x, int y)
 }
 
 /**************************************************************
+ *                           addObject                        *
+ **************************************************************/
+bool inventory::addObject(object* obj)
+{
+   int x,y;
+
+   for(x=0; x < INVENTORY_SIZE_X; x++)
+   {
+      for(y=0; y < INVENTORY_SIZE_Y; y++)
+      {
+         if(addObject(obj, x, y))
+         {
+            return(true);
+         }
+      }
+   }
+   return(false);
+}
+
+/**************************************************************
  *                            canAdd                          *
  **************************************************************/
 bool inventory::canAdd(object* obj, int x, int y)
@@ -94,7 +116,7 @@ bool inventory::canAdd(object* obj, int x, int y)
    int j,k;
    obj->getInventorySize(sizeX, sizeY);
    if( (x<0) || (y<0) || (x+sizeX > INVENTORY_SIZE_X) ||
-       (y+sizeY > INVENTORY_SIZE_Y+y))
+       (y+sizeY > INVENTORY_SIZE_Y))
    {
       return(false);
    }
@@ -210,7 +232,7 @@ void inventory::draw(int x, int y, SDL_Surface* surface)
          if( (spaces[j][k].obj != NULL) && (spaces[j][k].origX == j) &&
              (spaces[j][k].origY == k))
          {
-            spaces[j][k].obj->draw2D((x + (j*20)), (y + (k*20)), surface);
+            spaces[j][k].obj->draw2D((x+4 + (j*20)), (y+13 + (k*20)), surface);
          }
       }
    }

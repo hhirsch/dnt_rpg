@@ -30,6 +30,9 @@ class inventWindow
        * \return true if window is openned, false otherwise */
       bool isOpen();
 
+      /*! Redraw the Inventory Window, to actualize things on it. */
+      void reDraw();
+
    private:
       inventory *inventories[INVENTORY_PER_CHARACTER]; /**< Extern Inventories*/
 

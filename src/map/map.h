@@ -186,6 +186,15 @@ class Map
        ***************************************************************/
       void optimize();
 
+      /*!
+       ***************************************************************
+       *  Remove Object from Map
+       *  \param xObj -> x Object Coordinate
+       *  \param zObj -> z Object Coordinate
+       *  \param obj -> pointer to map Object
+       ***************************************************************/
+      void removeObject(GLfloat xObj, GLfloat zObj, object* obj);
+
       lMapObject* objects;  /**< Map's objects list */
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */

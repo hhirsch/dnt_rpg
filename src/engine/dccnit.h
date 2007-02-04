@@ -241,6 +241,7 @@ class engine
       oneTabButton* buttonEndTurn; /**< End Turn Button */
 
       inventWindow* inventoryWindow; /**< Inventory Window */
+      object* actualSelectedObject;  /**< Actual Selected object */
    
       Uint32 lastRead;             /**< Last Verification of I/O */
       Uint32 lastMouse;            /**< Last read from mouse */

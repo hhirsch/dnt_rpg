@@ -31,6 +31,7 @@ engine::engine()
    miniMapWindow = NULL;
    shortCutsWindow = NULL;
    inventoryWindow = NULL;
+   actualSelectedObject = NULL;
    imgNumber = 0;
 
    curConection = NULL;
@@ -1060,6 +1061,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          int pronto;
          int obj = 0;
          GLfloat minObj[3], maxObj[3];
+
+         /* Objects Verification */
          for(pronto = 0; ( (obj<MAXOBJETOS) && (!pronto) );obj++)
          {
             if( (quaux->objects[obj]) && (quaux->objects[obj]->canGet()) )
@@ -1088,7 +1091,39 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                    }
                    if(Mbotao & SDL_BUTTON(1))
                    {
+                      /* Get Object */
                       lastMousePression = tempo;
+                      actualSelectedObject = quaux->objects[obj];
+
+                      briefTxt->addText("|");
+
+                      if(PCs->personagemAtivo->inventories[0]->addObject(
+                                                       quaux->objects[obj]))
+                      {
+                         briefTxt->addText(quaux->objects[obj]->getName()+ 
+                                           "taken."); 
+                         shortCutsWindow->Desenhar(mouseX,mouseY);
+                         /* Remove object from Map */
+                         actualMap->removeObject(quaux->Xobjects[obj],
+                                                 quaux->Zobjects[obj],
+                                                 quaux->objects[obj]);
+                         if(inventoryWindow)
+                         {
+                            inventoryWindow->reDraw();
+                         }
+                      }
+                      else
+                      {
+                         if(shortCutsWindow)
+                         {
+                            briefTxt->addText("Inventory Full!"); 
+                            shortCutsWindow->Desenhar(mouseX,mouseY);
+                         }
+                      }
+                   }
+                   if(Mbotao & SDL_BUTTON(2))
+                   {
+                      /* TODO Open Menu of choices */
                    }
                    pronto = 1;
                }
@@ -2256,13 +2291,8 @@ void engine::OpenCloseInventoryWindow()
    if(!inventoryWindow)
    {
       /* TODO get the right inventories!!! */
-      inventory* inventories[INVENTORY_PER_CHARACTER];
-      int lk;
-      for(lk = 0; lk < INVENTORY_PER_CHARACTER; lk++)
-      {
-         inventories[lk] = NULL;
-      }
-      inventoryWindow = new inventWindow(inventories,gui); 
+      inventoryWindow = new inventWindow(PCs->personagemAtivo->inventories,
+                                         gui); 
    }
    else
    {
