@@ -1267,6 +1267,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                     pronto = 1;
                  }
                  else
+                  /* Verify Attacks! */
                  if( (engineMode == ENGINE_MODE_TURN_BATTLE) && (canAttack) &&
                      (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
                  {

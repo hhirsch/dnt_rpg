@@ -50,6 +50,7 @@ class rolBar: public Tobjeto
           y2;                 /**< Y2 Coordinate */
       botao* up;              /**< Up Button */
       botao* down;            /**< Down Button */
+      botao* actualPressed;   /**< Actual Pressed Button */
       quadroTexto* text;      /**< Text of The Scroll */
       quadroTexto* contorn;   /**< Contorn of the Scroll */
       quadroTexto* position;  /**< Contorn Text Position */

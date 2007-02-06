@@ -303,6 +303,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                     rolBar* rb = (rolBar*)obj;
                     if(rb->eventGot(BOTAOEMPRESSAO, objAtivo))
                     {
+                       ljan->janelaAtiva->Desenhar(0,0);
                        rb->redraw(ljan->janelaAtiva->cara);
                        ljan->janelaAtiva->AtualizaCara();
                     }

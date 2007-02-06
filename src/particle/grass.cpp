@@ -53,13 +53,13 @@ void grass::Render(particle* part)
       //glNormal3f(0.0,0.0,1.0);
       glBegin(GL_QUADS);
          glTexCoord2f(0.0,0.0);
-         glVertex3f(-5.0,10.0,0.0);
+         glVertex3f(-8.0,10.0,0.0);
          glTexCoord2f(1.0,0.0);
-         glVertex3f(5.0,10.0,0.0);
+         glVertex3f(8.0,10.0,0.0);
          glTexCoord2f(1.0,1.0);
-         glVertex3f(5.0,0.0,0.0);
+         glVertex3f(8.0,0.0,0.0);
          glTexCoord2f(0.0,1.0);
-         glVertex3f(-5.0,0.0,0.0);
+         glVertex3f(-8.0,0.0,0.0);
       glEnd();
          
       //glmDraw(modelo);

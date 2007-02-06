@@ -46,12 +46,14 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list)
                           "\37",0, NULL);
 
    /* Texto */
-   text = l->InserirQuadroTexto(xa,ya,xb-13,yb,1,""); 
+   text = l->InserirQuadroTexto(xa,ya,xb-13,yb,2,""); 
    text->Cores.corTexto.R = 246;
    text->Cores.corTexto.G = 190;
    text->Cores.corTexto.B = 190;
    text->fonte = FMINI;
    text->tamFonte = 1;
+
+   actualPressed = NULL;
 
    setText(txt);
 
@@ -89,6 +91,7 @@ bool rolBar::eventGot(int type, Tobjeto* object)
             }
             
             text->texto = copyLines(fullText, actualInit,actualEnd);
+            actualPressed = up;
             return(true);
          }
          else if(object == (Tobjeto*)down)
@@ -104,7 +107,12 @@ bool rolBar::eventGot(int type, Tobjeto* object)
             }
 
             text->texto = copyLines(fullText, actualInit,actualEnd);
+            actualPressed = down;
             return(true);
+         }
+         else
+         {
+            actualPressed = NULL;
          }
       }
    }
@@ -126,6 +134,12 @@ void rolBar::redraw(SDL_Surface* surface)
    }
    position->Desenhar(0,0,0,surface);   
    text->Desenhar(0,0,0,surface);
+
+   /* Mantain the draw of button pressed */
+   if(actualPressed)
+   {
+      actualPressed->Desenhar(1, surface);
+   }
 }
 
 /*********************************************************************
