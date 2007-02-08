@@ -82,9 +82,14 @@ class Tlista{
 
       rolBar* InsertRolBar(int xa,int ya,int xb,int yb,string txt);
 
+      Tobjeto* addMenu();
+      Tobjeto* getMenu();
+      void removeMenu();
 
    protected:
       void InserirObj(Tobjeto* obj);
+
+      Tobjeto* intMenu;
 
 };
 

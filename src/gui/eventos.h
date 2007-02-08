@@ -30,6 +30,7 @@
 #define JANELACLICADA       10
 #define TABBOTAOPRESSIONADO 11
 #define BOTAOEMPRESSAO      12
+#define MENUMODIFICADO      13
 
 /* Constantes de Foco */
 #define FOCO_JANELA       1

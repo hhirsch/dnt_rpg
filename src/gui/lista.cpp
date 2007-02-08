@@ -3,6 +3,7 @@
  */
 
 #include "lista.h"
+#include "menu.h"
 #include <stdio.h>
 #include <SDL/SDL_image.h>
 
@@ -14,6 +15,7 @@ Tlista::Tlista()
    primeiro->tipo = -1;
    primeiro->proximo = primeiro;
    primeiro->anterior = primeiro;
+   intMenu = NULL;
 }
 
 
@@ -26,6 +28,10 @@ Tlista::~Tlista()
       Retirar(primeiro->proximo);
    }
    if (primeiro!= NULL)   delete primeiro;
+   if(intMenu)
+   {
+      removeMenu();
+   }
 }
 
 void Tlista::Retirar(Tobjeto *obj)
@@ -234,6 +240,31 @@ rolBar* Tlista::InsertRolBar(int xa,int ya,int xb,int yb,string txt)
    novo = new rolBar(xa,ya,xb,yb,txt, this);
    InserirObj(novo);
    return(novo);
+}
+
+Tobjeto* Tlista::addMenu()
+{
+   if(intMenu)
+   {
+      removeMenu();
+   }
+   intMenu = (Tobjeto*)new menu();
+   return(intMenu);
+}
+
+Tobjeto* Tlista::getMenu()
+{
+   return(intMenu);
+}
+
+void Tlista::removeMenu()
+{
+   if(intMenu)
+   {
+      menu* men = (menu*)intMenu;
+      delete(men);
+   }
+   intMenu = NULL;
 }
 
 

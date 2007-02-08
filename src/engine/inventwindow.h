@@ -23,8 +23,9 @@ class inventWindow
       /*! Treat Events on Window. 
        * \param activeObject -> pointer to the active object pointer
        * \param guiObject -> last GUI object
-       * \param eventInfo -> last GUI Event */
-      void treat(object** activeObject, Tobjeto* guiObject, int eventInfo);
+       * \param eventInfo -> last GUI Event 
+       * \return true if event is threated, false otherwise. */
+      bool treat(object** activeObject, Tobjeto* guiObject, int eventInfo);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */
@@ -39,21 +40,25 @@ class inventWindow
       interface* interf;              /**< Pointer to Interface */
       janela* window;                 /**< Internal Window */
       tabButton* inventoryTabButton;  /**< Inventory Tab Button */
-      oneTabButton* inventoryButton;
-      oneTabButton* inv1Button;
-      oneTabButton* inv2Button;
-      oneTabButton* inv3Button;
-      oneTabButton* inv4Button;
+      oneTabButton* inventoryButton;  /**< Inventory Spaces Button */
+      oneTabButton* inv1Button;       /**< First Inventory Button */
+      oneTabButton* inv2Button;       /**< Second Inventory Button */
+      oneTabButton* inv3Button;       /**< Third Inventory Button */
+      oneTabButton* inv4Button;       /**< Forth Inventory Button */
       
       tabButton* characterTabButton;  /**< Character Tab Button */
-      oneTabButton* headButton;
-      oneTabButton* leftHandButton;
-      oneTabButton* rightHandButton;
-      oneTabButton* leftFingerButton;
-      oneTabButton* rightFingerButton;
-      oneTabButton* neckButton;
-      oneTabButton* footButton;
-      oneTabButton* bodyButton;
+      oneTabButton* headButton;       /**< Head Button */
+      oneTabButton* leftHandButton;   /**< Left Hand Button */
+      oneTabButton* rightHandButton;  /**< Right Hand Button */
+      oneTabButton* leftFingerButton; /**< Left Finger Button */
+      oneTabButton* rightFingerButton;/**< Right Finger Button */
+      oneTabButton* neckButton;       /**< Neck Button */
+      oneTabButton* footButton;       /**< Foot Button */
+      oneTabButton* bodyButton;       /**< Body (Torso) Button */
+
+      int state;                    /**< Internal State of the Window */
+      int currentInventory;         /**< Current Opened Inventory */
+      menu* objectMenu;             /**< Pointer to Object Actions Menu */
       
 };
 

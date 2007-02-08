@@ -54,7 +54,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     {
        foco = FOCO_JOGO;
     }
-    
+
     if(ljan->janelaAtiva == NULL)
     {
        *eventInfo = NADA;
@@ -67,6 +67,23 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
        foco = FOCO_JOGO;
        *eventInfo = SAIR;
        return(NULL);
+    }
+
+    /* Verify Main Super Menu */
+    if(ljan->getMenu())
+    {
+       objAtivo = (Tobjeto*) ljan->getMenu();
+       menu* men = (menu*)objAtivo;
+       men->itemAtual = 1;
+       foco = FOCO_MENU;
+    }
+    else /* Verify Window Super Menu */
+    if(ljan->janelaAtiva->objects->getMenu())
+    {
+       objAtivo = (Tobjeto*) ljan->janelaAtiva->objects->getMenu();
+       menu* men = (menu*)objAtivo;
+       men->itemAtual = 1;
+       foco = FOCO_MENU;
     }
 
     /* Mouse move to change focus */
@@ -83,6 +100,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                           ljan->janelaAtiva->y2,
                           x, y))
         {
+            /* Verify All objects */
             Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
             for(aux=0;aux<ljan->janelaAtiva->objects->total;aux++)
             {
@@ -372,6 +390,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                             ljan->janelaAtiva->y1);
 
        ljan->janelaAtiva->AtualizaCara();
+       *eventInfo = MENUMODIFICADO;
 
         
        if((foco == FOCO_MENUJANELA) && (res==4) && (pronto))
@@ -384,19 +403,24 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
            *eventInfo = JANELAFECHADA;
            return(NULL);
        }
-       else if((res) && (men->procSelecionado) &&(pronto)) 
+       else if((res) && (pronto)) 
        {
-           men->procSelecionado(ljan->janelaAtiva,
-                                chamador,men->Item(res),
-                                NULL);
-           foco = FOCO_JOGO;
+          if(men->procSelecionado)
+          {
+            men->procSelecionado(ljan->janelaAtiva,
+                                 chamador,men->Item(res),
+                                 NULL);
+          }
+          ljan->janelaAtiva->Desenhar(x,y);
+          *eventInfo = MENUSELECIONADO;
+          foco = FOCO_JOGO;
        }
        else if(pronto)
        {
           ljan->janelaAtiva->Desenhar(x,y);
           foco = FOCO_JOGO;
+          *eventInfo = MENUSELECIONADO;
        }
-       *eventInfo = MENUSELECIONADO;
        return(objAtivo);
     }
 

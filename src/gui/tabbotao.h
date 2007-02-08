@@ -63,6 +63,7 @@ class tabButton: public figura
    private:
       int numButtons;                       /**< Number of active buttons */
       oneTabButton Buttons[MAX_TABBUTTONS]; /**< Buttons Vector */
+      bool pressed;                         /**< Internal Verifier on Treat */
 };
 
 

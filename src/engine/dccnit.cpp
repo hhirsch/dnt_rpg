@@ -1029,6 +1029,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       /* GUI Events */
       Tobjeto* object;
       object = gui->manipulateEvents(x,y,Mbotao,keys, &guiEvent);
+      if( (inventoryWindow) && 
+          (inventoryWindow->treat(&actualSelectedObject, object, guiEvent)) )
+      {
+         /* Done Events by Inventory! */
+         redesenha = true;
+      }
       if(guiEvent != NADA)
       {
          threatGuiEvents(object, guiEvent);

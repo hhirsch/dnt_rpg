@@ -2,9 +2,11 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-
 #include "inventwindow.h"
 
+#define INVENTORY_STATE_NONE   0
+#define INVENTORY_STATE_OBJECT 1
+#define INVENTORY_STATE_MENU   2
 
 /**************************************************************
  *                          Constructor                       *
@@ -28,7 +30,7 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
 
    /* Add Character (equip) Tab Button */
    characterTabButton = window->objects->InserirTabButton(4,15,256,256,
-                                         "../data/texturas/inventory/equip.png");
+                                        "../data/texturas/inventory/equip.png");
    headButton = characterTabButton->insertButton(109,3,147,41);
    footButton = characterTabButton->insertButton(109,214,147,252);
    bodyButton = characterTabButton->insertButton(99,100,156,176);
@@ -51,8 +53,11 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
    window->ptrExterno = &window;
    inter->openWindow(window);
 
-   inventories[0]->draw(0,0, inventoryTabButton->fig);
+   currentInventory = 0;
+   inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
    window->Desenhar(0,0);
+
+   state = INVENTORY_STATE_NONE;
 }
 
 /**************************************************************
@@ -85,4 +90,132 @@ void inventWindow::reDraw()
       window->Desenhar(0,0);
    }
 }
+
+/**************************************************************
+ *                             treat                          *
+ **************************************************************/
+bool inventWindow::treat(object** activeObject, Tobjeto* guiObject, 
+                         int eventInfo)
+{
+   int x,y;
+   Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+   switch(eventInfo)
+   {
+      case TABBOTAOPRESSIONADO:
+      {
+         /* Inventory Spaces Selected */
+         if(guiObject == (Tobjeto*) inventoryButton)
+         {
+            if(state == INVENTORY_STATE_NONE)
+            {
+               /* Open Menu For Object if one is avaible */
+               int posX = (int) floor((x - (8 + window->x1)) / (20.0));
+               int posY = (int) floor((y - (284 + window->y1)) / (20.0));
+               if(inventories[currentInventory]->getFromPosition(posX, posY))
+               {
+                  *activeObject = inventories[currentInventory]->
+                                   getFromPosition(posX, posY);
+                  objectMenu = (menu*) window->objects->addMenu();
+                  objectMenu->InserirMenuItem("Drop",1);
+                  objectMenu->InserirMenuItem("-",0);
+                  objectMenu->InserirMenuItem("Sell    ",0);
+                  objectMenu->InserirMenuItem("Use",0);
+                  objectMenu->InserirMenuItem("-",0);
+                  objectMenu->InserirMenuItem("Get",1);
+                  objectMenu->Coordenada(x,y);
+                  state = INVENTORY_STATE_MENU;
+               }
+               return(true);
+            }
+            else if(state == INVENTORY_STATE_OBJECT)
+            {
+               /* TODO Put Object on  */
+               return(true);
+            }
+         }
+         /* Change to Inventory 1 */
+         else if(guiObject == (Tobjeto*) inv1Button)
+         {
+            currentInventory = 0;
+            inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
+            window->Desenhar(0,0);
+            return(true);
+         }
+         /* Change to Inventory 2 */
+         else if(guiObject == (Tobjeto*) inv2Button)
+         {
+            currentInventory = 1;
+            inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
+            window->Desenhar(0,0);
+            return(true);
+         }
+         /* Change to Inventory 3 */
+         else if(guiObject == (Tobjeto*) inv3Button)
+         {
+            currentInventory = 2;
+            inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
+            window->Desenhar(0,0);
+            return(true);
+         }
+         /* Change to Inventory 4 */
+         else if(guiObject == (Tobjeto*) inv4Button)
+         {
+            currentInventory = 3;
+            inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
+            window->Desenhar(0,0);
+            return(true);
+         } 
+
+         /* Verify Character's Buttons */
+         if(state == INVENTORY_STATE_OBJECT)
+         {
+            if(guiObject == (Tobjeto*) headButton)
+            {
+               return(true);
+            }
+            else if(guiObject == (Tobjeto*) leftHandButton)
+            {
+               return(true);
+            }
+            else if(guiObject == (Tobjeto*) rightHandButton)
+            {
+               return(true);
+            }
+            else if(guiObject == (Tobjeto*) leftFingerButton)
+            {
+               return(true);
+            }
+            else if(guiObject == (Tobjeto*) rightFingerButton)
+            {
+               return(true);
+            }
+            else if(guiObject == (Tobjeto*) neckButton)
+            {
+               return(true);
+            }
+            else if(guiObject == (Tobjeto*) footButton)
+            {
+               return(true);
+            }
+            else if(guiObject == (Tobjeto*) bodyButton)
+            {
+               return(true);
+            }
+         }
+      }
+      break;
+      
+      case MENUSELECIONADO:
+      {
+         objectMenu = NULL;
+         //TODO get return of menu
+         state = INVENTORY_STATE_NONE;
+         window->objects->removeMenu();         
+         return(true);
+      }
+      break;
+   }
+   return(false);
+}
+
 

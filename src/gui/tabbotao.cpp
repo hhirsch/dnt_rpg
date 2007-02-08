@@ -5,6 +5,7 @@
 tabButton::tabButton(int x,int y,const char* arquivo):figura(x,y,0,0,arquivo)
 {
    numButtons = 0;
+   pressed = false;
 }
 
 tabButton::tabButton(int x, int y, int w, int h):figura(x,y,w,h, NULL)
@@ -60,11 +61,20 @@ Tobjeto* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
       {
          if(Mbuttons & SDL_BUTTON(1))
          {
-            return((Tobjeto*) &Buttons[i]);
+            /* Only return when released the mouse button! */
+            pressed = true;  
          }
          else
          {
-            return(NULL);
+            if(pressed)
+            {
+               pressed = false;
+               return((Tobjeto*) &Buttons[i]);
+            }
+            else
+            {
+               return(NULL);
+            }
          }
       }
    }
