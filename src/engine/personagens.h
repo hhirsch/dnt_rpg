@@ -16,7 +16,7 @@
 #include "../classes/race.h"
 #include "../classes/inventory.h"
 #include "../ia/astar.h"
-#include <cal3d/cal3d.h>
+#include "../etc/animodel.h"
 #include <string>
 using namespace std;
 #include "../map/map.h"
@@ -24,7 +24,6 @@ using namespace std;
 #define POSRETX 8   /**< X screen portrait position */
 #define POSRETY 20  /**< Y screen portrait position */
 
-#define STATE_IDLE  0 /**< Character Animation State Idle */
 #define STATE_WALK  1 /**< Character Animation State Walking */
 
 #define MAX_DISTINCT_CLASSES 3 /**< Max Different Classes for MultiClass */
@@ -32,12 +31,9 @@ using namespace std;
 
 
 /*! Character Class */
-class personagem: public Tobjeto, public thing
+class personagem: public Tobjeto, public thing, public aniModel
 {
    public:
-
-      int m_state;              /**< current animation state */
-
       Tlista *portraits;        /**< All character's portraits */
       Tlista *objects;          /**< Actual character objects */
       Tobjeto *actualWeapon;    /**< Actual weapon */
@@ -56,9 +52,6 @@ class personagem: public Tobjeto, public thing
       GLfloat posicaoLadoY;     /**< Character's Y Position (UP) */
       GLfloat posicaoLadoZ;     /**< Character's Z Position */
 
-      GLfloat min[3];           /**< Min points of static bounding box */
-      GLfloat max[3];           /**< Max points of static bounding box */
-
       Square* ocupaQuad;        /**< Square occuped by character */
       int ID;                   /**< Character's ID FIXME used?? */
 
@@ -74,43 +67,11 @@ class personagem: public Tobjeto, public thing
 
       inventory* inventories[INVENTORY_PER_CHARACTER]; /**< Inventory */
 
-      // CAL3D related member variables
-      CalCoreModel* m_calCoreModel;  /**< Cal3D Core Model of character */
-      CalModel* m_calModel;          /**< Cal3D Model of character */
-
-
       /*! Constructor
        * \param ft -> pointer to all feats list */
       personagem(featsList* ft);
       /*! Destructor */
       ~personagem();
-
-      /*! Load the cal3D model to be this character's body and animations.
-       * \param strFilename -> \c string with the cal3d file name.
-       * \return true if success on load. */
-      bool LoadModel(const string& strFilename);
-
-      /*! Load the a texture to the model.
-       * \param strFilename -> \c string with the texture file name.
-       * \return the \c GLuint with the GL texture ID. */
-      GLuint loadTexture(const string& strFilename);
-
-      /*! Set the animation state of the model.
-       * \param state -> state ID to be defined. */
-      void SetState(int state);
-
-      /*! Gets the animation state of the model.
-       * \return state ID of the current animation */
-      int GetState();
-
-      /*! Render the model to the current frame state on screen. */
-      void Render();
-
-      /*! Calculate the model static bounding box */
-      void CalculateBoundingBox();
-
-      /*! Render the model bounding box. Only used on debugging */
-      void RenderBoundingBox();
 
       void DrawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
                                   GLdouble x2, GLdouble y2, GLdouble z2,
@@ -122,16 +83,7 @@ class personagem: public Tobjeto, public thing
 
    protected:
   
-     int m_animationId[16]; /**< Cal3D animation ID */
-     int m_animationCount;  /**< Cal3D number of animations */
-     int m_meshId[32];      /**< Cal3D meshes ID */
-     int m_meshCount;       /**< Cal3D meshes count */
-     GLuint m_textureId[32];/**< Cal3D texture ID */
-     int m_textureCount;    /**< Cal3D texture Count */
-     float m_motionBlend[3];/**< Cal3D motion blend */
-     float m_renderScale;   /**< Cal3D scale on render */
-     float m_lodLevel;      /**< Cal3D Level of Detail to render */
-     string m_path;         /**< Path to cal3D model */
+     
 };
 
 

@@ -345,8 +345,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    per = (personagem*) PCs->primeiro->proximo;
    for(aux=0;aux < PCs->total;aux++)
    {
-      per->m_calModel->update(0); 
-      per->CalculateBoundingBox();  
+      per->update(0); 
+      per->calculateBoundingBox();  
       //FIXME gambiarra to make logan bounding ok when arms down.
         per->max[0] /= 2.0;
         per->min[0] /= 2.0;
@@ -359,8 +359,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       per = (personagem*) NPCs->primeiro->proximo;
       for(aux=0; aux < NPCs->total;aux++)
       {
-         per->m_calModel->update(0); 
-         per->CalculateBoundingBox();  
+         per->update(0); 
+         per->calculateBoundingBox();  
          per = (personagem*) per->proximo;
       }
    }
@@ -985,7 +985,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       personagem *per = (personagem*) PCs->primeiro->proximo;
       for(aux=0;aux< PCs->total;aux++)
       {
-         per->m_calModel->update(WALK_ACTUALIZATION/*seconds*/); 
+         per->update(WALK_ACTUALIZATION/*seconds*/); 
          //per->CalculateBoundingBox(); 
          per = (personagem*) per->proximo;
       }
@@ -995,8 +995,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
         per = (personagem*) NPCs->primeiro->proximo;
         for(aux=0;aux < NPCs->total;aux++)
         {
-           per->m_calModel->update(WALK_ACTUALIZATION/*seconds*/);   
-           per->CalculateBoundingBox();
+           per->update(WALK_ACTUALIZATION/*seconds*/);   
+           per->calculateBoundingBox();
            per = (personagem*) per->proximo;
         } 
       }
@@ -1758,7 +1758,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          walkSound->redefinePosition(PCs->personagemAtivo->posicaoLadoX, 0.0,
                                      PCs->personagemAtivo->posicaoLadoZ);
       }
-      PCs->personagemAtivo->SetState(STATE_WALK);
+      PCs->personagemAtivo->setState(STATE_WALK);
       #ifdef REDE
         movchar(&clientData, PCs->personagemAtivo->ID, 
           PCs->personagemAtivo->posicaoLadoX,PCs->personagemAtivo->posicaoLadoZ,
@@ -1767,13 +1767,13 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    }
    else if(passouTempo)
    { 
-      if( (PCs->personagemAtivo->GetState() == STATE_WALK) &&
+      if( (PCs->personagemAtivo->getState() == STATE_WALK) &&
           (engineMode == ENGINE_MODE_TURN_BATTLE) && 
           (fightStatus == FIGHT_PC_TURN) )
       {
          canMove = false;
       }
-      PCs->personagemAtivo->SetState(STATE_IDLE);
+      PCs->personagemAtivo->setState(STATE_IDLE);
       if(walkSound)
       {
          snd->removeSoundEffect(walkSound);
@@ -1832,7 +1832,7 @@ void engine::Draw()
            glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
                         per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
-           per->Render();
+           per->render();
            /*per->RenderBoundingBox();
            glColor3f(0.6,0.1,0.1);
            glBegin(GL_POLYGON);
@@ -1875,7 +1875,7 @@ void engine::Draw()
             glPushMatrix();
               glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
               glRotatef(per->orientacao,0,1,0);
-              per->Render();
+              per->render();
               /*per->RenderBoundingBox();
               glColor3f(0.6,0.1,0.1);
               glBegin(GL_POLYGON);
