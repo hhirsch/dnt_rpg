@@ -28,9 +28,8 @@ software and hardware. They are:
    Hardware:
    Video Card with 3D aceleration, OpenGl compatible.
 
-   We not recommend to use it on Window$, because on it the 
-   render is slower and the quality is worst (to  only  say
-   tecnology's arguments). 
+     We don't recommend to use it on Window$:  the  render is 
+   slower and the quality is worst. 
 
 ==============================================================
 |                      II - Instalation                      |
@@ -51,8 +50,8 @@ go to the directory dccnitghtmare and run "make".
 
    To  compile  dccnitghtmare  on  windows,  you'll  need  the 
 dev-c++  compiler  (a.k.a. gcc port and ide to Windows).  Open
-the project DccNiTghtmare.dev on it and compile. BUG:Music may
-be distorted on window$. Don't blame us. Blame Microsoft!
+the project DccNiTghtmare.dev on it and compile.
+   Don't blame us. Blame Microsoft!
 
 ==============================================================
 |                       III - Execution                       |

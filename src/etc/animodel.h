@@ -12,8 +12,7 @@ using namespace std;
 class aniModel
 {
    public:
-      /*! Constructor
-       * \param strFilename -> name of the cal3d file */
+      /*! Constructor */
       aniModel();
       /*! Destructor */
       ~aniModel();
