@@ -130,6 +130,18 @@ void lang::ReloadFile(int lng)
    getline(file, RACEW_FEATS);
    getline(file, RACEW_NO_FEATS);
 
+   /* classwindow.cpp */
+   getline(file, CLASSW_TITLE);
+   getline(file, CLASSW_DESCRIPTION);
+   getline(file, CLASSW_CHARACTERISTICS);
+   getline(file, CLASSW_LIFE_DICE);
+   getline(file, CLASSW_SKILL_POINTS);
+   getline(file, CLASSW_FIRST_LEVEL);
+   getline(file, CLASSW_OTHER_LEVELS);
+   getline(file, CLASSW_MODIFIERS);
+   getline(file, CLASSW_FEATS);
+   getline(file, CLASSW_SKILLS);
+
    /* fight */
    getline(file,FIGHT_ROLLS_INITIATIVE);
    getline(file,FIGHT_END_NOENEMIES);
@@ -241,7 +253,17 @@ void lang::ReloadFile(int lng)
    string lang::RACEW_FEATS;
    string lang::RACEW_NO_FEATS;
 
-
+   /* classwindow.cpp */
+   string lang::CLASSW_TITLE;
+   string lang::CLASSW_DESCRIPTION;
+   string lang::CLASSW_CHARACTERISTICS;
+   string lang::CLASSW_LIFE_DICE;
+   string lang::CLASSW_SKILL_POINTS;
+   string lang::CLASSW_FIRST_LEVEL;
+   string lang::CLASSW_OTHER_LEVELS;
+   string lang::CLASSW_MODIFIERS;
+   string lang::CLASSW_FEATS;
+   string lang::CLASSW_SKILLS;
 
    /*fight */
    string lang::FIGHT_ROLLS_INITIATIVE;

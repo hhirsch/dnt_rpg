@@ -14,15 +14,15 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter)
    actualClass = externalClasses->getClassByInteger(0);
    
    /* create window */
-   window = inter->insertWindow(90,100,710,499, "Class"
-                                /*language.CLASSW_TITLE.c_str()*/,1,1);
+   window = inter->insertWindow(90,100,710,499,
+                                language.CLASSW_TITLE.c_str(),1,1);
    /* Class Image */
    classImage = window->objects->InserirFigura(7,20,0,0,NULL);   
    classImage->fig = actualClass->image;
 
    /* Class Description */
    textDescTitle = window->objects->InserirQuadroTexto(71,20,342,35,1,
-                                          "Class Description");
+                                            language.CLASSW_DESCRIPTION.c_str());
    textDescTitle->fonte = FHELVETICA;
    textDescTitle->tamFonte = 1;
    
@@ -31,7 +31,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter)
 
    /* Race Characteristics */
    textCharacTitle = window->objects->InserirQuadroTexto(343,20,613,35,1,
-                                       "Class Characteristics");
+                                        language.CLASSW_CHARACTERISTICS.c_str());
    textCharacTitle->fonte = FHELVETICA;
    textCharacTitle->tamFonte = 1;
 
@@ -79,10 +79,10 @@ string classWindow::getCharacteristics()
    char tmp[50];
    char c;
    skill* skTmp;
-   sprintf(tmp,"Life Dice: d%d||",actualClass->lifeDiceID);
-   string text = tmp;
+   sprintf(tmp,": d%d||",actualClass->lifeDiceID);
+   string text = language.CLASSW_LIFE_DICE + tmp;
 
-   text += "Skill Points|";
+   text += language.CLASSW_SKILL_POINTS + "|";
 
    if(actualClass->firstLevelSP.signal == SIGNAL_DEC)
    {
@@ -95,17 +95,17 @@ string classWindow::getCharacteristics()
    skTmp = externalSkills->getSkillByString(actualClass->firstLevelSP.attID);
    if(skTmp)
    {
-      sprintf(tmp,"1st Level: ( %d %c %s)x%d|",actualClass->firstLevelSP.sum, 
+      sprintf(tmp,": ( %d %c %s)x%d|",actualClass->firstLevelSP.sum, 
               c, skTmp->nome.c_str(), 
               actualClass->firstLevelSP.mult);
    }
    else
    {
-      sprintf(tmp,"1st Level: ( %d %c %s)x%d|",actualClass->firstLevelSP.sum, 
+      sprintf(tmp,": ( %d %c %s)x%d|",actualClass->firstLevelSP.sum, 
               c, actualClass->firstLevelSP.attID.c_str(), 
               actualClass->firstLevelSP.mult);
    }
-   text += tmp;
+   text += language.CLASSW_FIRST_LEVEL + tmp;
    if(actualClass->otherLevelsSP.signal == SIGNAL_DEC)
    {
       c = '-';
@@ -117,20 +117,20 @@ string classWindow::getCharacteristics()
    skTmp = externalSkills->getSkillByString(actualClass->otherLevelsSP.attID);
    if(skTmp)
    {
-      sprintf(tmp,"Other Levels: ( %d %c %s)x%d||",
+      sprintf(tmp,": ( %d %c %s)x%d||",
               actualClass->otherLevelsSP.sum,
               c, skTmp->nome.c_str(), 
               actualClass->otherLevelsSP.mult);
    }
    else
    {
-      sprintf(tmp,"Other Levels: ( %d %c %s)x%d||",
+      sprintf(tmp,": ( %d %c %s)x%d||",
               actualClass->otherLevelsSP.sum,
               c, actualClass->otherLevelsSP.attID.c_str(), 
               actualClass->otherLevelsSP.mult);
    }
-   text += tmp;
-   text += "Class Modifiers||";
+   text += language.CLASSW_OTHER_LEVELS + tmp;
+   text += language.CLASSW_MODIFIERS + "||";
    for(i=0; i<actualClass->totalModifiers; i++)
    {
       text += actualClass->classModifiers[i].description + "||";
@@ -142,7 +142,7 @@ string classWindow::getCharacteristics()
    }
 
    //TODO get Feat Name
-   text += "Class Feats||";
+   text += language.CLASSW_FEATS + "||";
    for(i=0; i<actualClass->totalFeats; i++)
    {
       text += actualClass->classFeats[i] + "|";
@@ -154,7 +154,7 @@ string classWindow::getCharacteristics()
    }
 
    //Print Skills
-   text += "|Class Skills||";
+   text += language.CLASSW_SKILLS + "||";
    for(i=0; i<actualClass->totalSkills; i++)
    {
       skTmp = externalSkills->getSkillByString(actualClass->classSkills[i]);

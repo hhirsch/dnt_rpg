@@ -47,12 +47,22 @@ Tendency & Alignment
 Race
 Race Description
 Race Characteristics
-Race Modifiers:
+Race Modifiers
 No Modifiers.
-Race Skills:
+Race Skills
 No Skills.
-Race Feats:
+Race Feats
 No Feats.
+Class
+Class Description
+Class Characteristics
+Life Dice
+Skill Points
+1st Level
+Other Levels
+Class Modifiers
+Class Feats
+Class Skills
 rolls initiative:
 No more enemies.
 New Round
@@ -74,5 +84,5 @@ Not Enough Points to Use!
 ../data/feats/Ingles/
 ../data/alignment/Ingles/
 ../data/races/Ingles/
-What the HEll!! Square Map Out of bounds!\n
+What the Hell!! Square Map Out of bounds!\n
 Argh! Can't init SDL!\n

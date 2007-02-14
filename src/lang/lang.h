@@ -97,6 +97,17 @@ class lang
    static string RACEW_FEATS;
    static string RACEW_NO_FEATS;
 
+   /* classwindow.cpp */
+   static string CLASSW_TITLE;
+   static string CLASSW_DESCRIPTION;
+   static string CLASSW_CHARACTERISTICS;
+   static string CLASSW_LIFE_DICE;
+   static string CLASSW_SKILL_POINTS;
+   static string CLASSW_FIRST_LEVEL;
+   static string CLASSW_OTHER_LEVELS;
+   static string CLASSW_MODIFIERS;
+   static string CLASSW_FEATS;
+   static string CLASSW_SKILLS;
       
    /* figths */
    static string FIGHT_ROLLS_INITIATIVE;
