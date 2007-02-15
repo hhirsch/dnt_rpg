@@ -6,6 +6,7 @@
  *************************************************************************/
 
 #include "../classes/inventory.h"
+#include "../lang/lang.h"
 #include "util.h"
 
 /*! Inventory Window Class */
@@ -21,11 +22,10 @@ class inventWindow
       ~inventWindow();
 
       /*! Treat Events on Window. 
-       * \param activeObject -> pointer to the active object pointer
        * \param guiObject -> last GUI object
        * \param eventInfo -> last GUI Event 
        * \return true if event is threated, false otherwise. */
-      bool treat(object** activeObject, Tobjeto* guiObject, int eventInfo);
+      bool treat(Tobjeto* guiObject, int eventInfo);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */
@@ -56,9 +56,16 @@ class inventWindow
       oneTabButton* footButton;       /**< Foot Button */
       oneTabButton* bodyButton;       /**< Body (Torso) Button */
 
-      int state;                    /**< Internal State of the Window */
-      int currentInventory;         /**< Current Opened Inventory */
-      menu* objectMenu;             /**< Pointer to Object Actions Menu */
+      int state;                      /**< Internal State of the Window */
+      int currentInventory;           /**< Current Opened Inventory */
+      menu* objectMenu;               /**< Pointer to Object Actions Menu */
+      int objWhere;                   /**< Where The Object is on Inventory */
+      int objX;                       /**< X of the object in inventory */
+      int objY;                       /**< Y of the object in inventory */
+
+      object* activeObject;           /**< Active Object */
+
+      lang language;                  /**< Language internationalization */
       
 };
 

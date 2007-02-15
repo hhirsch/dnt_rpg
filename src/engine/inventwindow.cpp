@@ -26,7 +26,7 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
    }
    
    /* Add Window */
-   window = inter->insertWindow(0,0,263,402,"Inventory",1,1);
+   window = inter->insertWindow(0,0,263,402,language.INVENTW_TITLE.c_str(),1,1);
 
    /* Add Character (equip) Tab Button */
    characterTabButton = window->objects->InserirTabButton(4,15,256,256,
@@ -42,7 +42,7 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
 
    /* Add Inventory Tab Button */
    inventoryTabButton = window->objects->InserirTabButton(4,271,256,128,
-                                     "../data/texturas/inventory/inventory.png");
+                                   "../data/texturas/inventory/inventory.png");
    inventoryButton = inventoryTabButton->insertButton(4,13,251,127);
    inv1Button = inventoryTabButton->insertButton(4,0,64,13);
    inv2Button = inventoryTabButton->insertButton(64,0,127,13);
@@ -54,8 +54,7 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
    inter->openWindow(window);
 
    currentInventory = 0;
-   inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
-   window->Desenhar(0,0);
+   reDraw();
 
    state = INVENTORY_STATE_NONE;
 }
@@ -65,6 +64,25 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
  **************************************************************/
 inventWindow::~inventWindow()
 {
+   if(activeObject)
+   {
+      if(state == INVENTORY_STATE_OBJECT)
+      {
+         /* Reput the object to the inventory */
+         int inv = 0;
+         while( (!inventories[inv]->addObject(activeObject) && 
+                (inv < INVENTORY_PER_CHARACTER)))
+         {
+            inv++;
+         }
+                            
+         if(inv < INVENTORY_PER_CHARACTER)
+         {
+            activeObject = NULL;
+            state = INVENTORY_STATE_NONE;
+         }
+      }
+   }
    if(window)
    {
       interf->closeWindow(window);
@@ -86,7 +104,7 @@ void inventWindow::reDraw()
 {
    if(isOpen())
    {
-      inventories[0]->draw(0,0, inventoryTabButton->fig);
+      inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
       window->Desenhar(0,0);
    }
 }
@@ -94,11 +112,36 @@ void inventWindow::reDraw()
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-bool inventWindow::treat(object** activeObject, Tobjeto* guiObject, 
-                         int eventInfo)
+bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
 {
    int x,y;
    Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+
+   int posX = (int) floor((x - (8 + window->x1)) / (20.0));
+   int posY = (int) floor((y - (284 + window->y1)) / (20.0));
+
+   if(Mbotao & SDL_BUTTON(3))
+   {
+      if( (state == INVENTORY_STATE_OBJECT) && (activeObject) )
+      {
+         /* Reput the object to the inventory */
+         int inv = 0;
+         while( (!inventories[inv]->addObject(activeObject) && 
+                (inv < INVENTORY_PER_CHARACTER)))
+         {
+            inv++;
+         }
+                            
+         if(inv < INVENTORY_PER_CHARACTER)
+         {
+            activeObject = NULL;
+            state = INVENTORY_STATE_NONE;
+            reDraw();
+            return(true);
+         }
+      }
+   }
+   
    switch(eventInfo)
    {
       case TABBOTAOPRESSIONADO:
@@ -109,108 +152,253 @@ bool inventWindow::treat(object** activeObject, Tobjeto* guiObject,
             if(state == INVENTORY_STATE_NONE)
             {
                /* Open Menu For Object if one is avaible */
-               int posX = (int) floor((x - (8 + window->x1)) / (20.0));
-               int posY = (int) floor((y - (284 + window->y1)) / (20.0));
                if(inventories[currentInventory]->getFromPosition(posX, posY))
                {
-                  *activeObject = inventories[currentInventory]->
+                  activeObject = inventories[currentInventory]->
                                    getFromPosition(posX, posY);
+                  objX = posX;
+                  objY = posY;
+                  objWhere = INVENTORY_INVENTORY;
                   objectMenu = (menu*) window->objects->addMenu();
-                  objectMenu->InserirMenuItem("Drop",1);
+                  objectMenu->InserirMenuItem(language.INVENTW_DROP,1);
                   objectMenu->InserirMenuItem("-",0);
-                  objectMenu->InserirMenuItem("Sell    ",0);
-                  objectMenu->InserirMenuItem("Use",0);
+                  objectMenu->InserirMenuItem(language.INVENTW_SELL,0);
+                  objectMenu->InserirMenuItem(language.INVENTW_USE,0);
                   objectMenu->InserirMenuItem("-",0);
-                  objectMenu->InserirMenuItem("Get",1);
-                  objectMenu->Coordenada(x,y);
+                  objectMenu->InserirMenuItem(language.INVENTW_GET,1);
+
+                  /* Make Sure all Menu is in Window */
+                  if(y+70 < window->y2)
+                  {
+                     objectMenu->Coordenada(x,y);
+                  }
+                  else
+                  {
+                     objectMenu->Coordenada(x,window->y2-70);
+                  }
                   state = INVENTORY_STATE_MENU;
                }
                return(true);
             }
             else if(state == INVENTORY_STATE_OBJECT)
             {
-               /* TODO Put Object on  */
+               /* Put Object on  */
+               if(inventories[currentInventory]->addObject(activeObject,
+                                                           posX, posY))
+               {
+                  delete(activeObject);
+                  activeObject = NULL;
+                  state = INVENTORY_STATE_NONE;
+                  reDraw();
+               }
                return(true);
             }
          }
+         
          /* Change to Inventory 1 */
          else if(guiObject == (Tobjeto*) inv1Button)
          {
             currentInventory = 0;
-            inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
-            window->Desenhar(0,0);
+            reDraw();
             return(true);
          }
          /* Change to Inventory 2 */
          else if(guiObject == (Tobjeto*) inv2Button)
          {
             currentInventory = 1;
-            inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
-            window->Desenhar(0,0);
+            reDraw();
             return(true);
          }
          /* Change to Inventory 3 */
          else if(guiObject == (Tobjeto*) inv3Button)
          {
             currentInventory = 2;
-            inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
-            window->Desenhar(0,0);
+            reDraw();
             return(true);
          }
          /* Change to Inventory 4 */
          else if(guiObject == (Tobjeto*) inv4Button)
          {
             currentInventory = 3;
-            inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
-            window->Desenhar(0,0);
+            reDraw();
             return(true);
          } 
-
-         /* Verify Character's Buttons */
-         if(state == INVENTORY_STATE_OBJECT)
+         
+         if(state == INVENTORY_STATE_NONE)
          {
+            object* aObject = NULL;
             if(guiObject == (Tobjeto*) headButton)
             {
-               return(true);
+               aObject = inventories[0]->getFromPlace(INVENTORY_HEAD);
+               objWhere = INVENTORY_HEAD;
             }
             else if(guiObject == (Tobjeto*) leftHandButton)
             {
-               return(true);
+               aObject = inventories[0]->getFromPlace(INVENTORY_LEFT_HAND);
+               objWhere = INVENTORY_LEFT_HAND;
             }
             else if(guiObject == (Tobjeto*) rightHandButton)
             {
-               return(true);
+               aObject = inventories[0]->getFromPlace(INVENTORY_RIGHT_HAND);
+               objWhere = INVENTORY_RIGHT_HAND;
             }
             else if(guiObject == (Tobjeto*) leftFingerButton)
             {
-               return(true);
+               aObject = inventories[0]->getFromPlace(INVENTORY_LEFT_FINGER);
+               objWhere = INVENTORY_LEFT_FINGER;
             }
             else if(guiObject == (Tobjeto*) rightFingerButton)
             {
-               return(true);
+               aObject = inventories[0]->getFromPlace(INVENTORY_RIGHT_FINGER);
+               objWhere = INVENTORY_RIGHT_FINGER;
             }
             else if(guiObject == (Tobjeto*) neckButton)
             {
-               return(true);
+               aObject = inventories[0]->getFromPlace(INVENTORY_NECK);
+               objWhere = INVENTORY_NECK;
             }
             else if(guiObject == (Tobjeto*) footButton)
             {
-               return(true);
+               aObject = inventories[0]->getFromPlace(INVENTORY_FOOT);
+               objWhere = INVENTORY_FOOT;
             }
             else if(guiObject == (Tobjeto*) bodyButton)
             {
+               aObject = inventories[0]->getFromPlace(INVENTORY_BODY);
+               objWhere = INVENTORY_BODY;
+            }
+
+            if(aObject)
+            {
+               activeObject = aObject;
+               objectMenu = (menu*) window->objects->addMenu();
+               objectMenu->InserirMenuItem(language.INVENTW_DROP,1);
+               objectMenu->InserirMenuItem("-",0);
+               objectMenu->InserirMenuItem(language.INVENTW_SELL,0);
+               objectMenu->InserirMenuItem(language.INVENTW_USE,0);
+               objectMenu->InserirMenuItem("-",0);
+               objectMenu->InserirMenuItem(language.INVENTW_GET,1);
+               /* Make Sure all Menu is in Window */
+               if(y+70 < window->y2)
+               {
+                  objectMenu->Coordenada(x,y);
+               }
+               else
+               {
+                  objectMenu->Coordenada(x,window->y2-70);
+               }
+               state = INVENTORY_STATE_MENU;
                return(true);
             }
+         }
+         /* State Object */
+         else if(state == INVENTORY_STATE_OBJECT)
+         {
+            if(guiObject == (Tobjeto*) headButton)
+            {
+               if(inventories[0]->equipObject(activeObject, INVENTORY_HEAD))
+               {
+                  delete(activeObject);
+                  activeObject = NULL;
+               }
+            }
+            else if(guiObject == (Tobjeto*) leftHandButton)
+            {
+               if(inventories[0]->equipObject(activeObject, 
+                                              INVENTORY_LEFT_HAND))
+               {
+                  delete(activeObject);
+                  activeObject = NULL;
+               }
+
+            }
+            else if(guiObject == (Tobjeto*) rightHandButton)
+            {
+               if(inventories[0]->equipObject(activeObject, 
+                                              INVENTORY_RIGHT_HAND))
+               {
+                  delete(activeObject);
+                  activeObject = NULL;
+               }
+            }
+            else if(guiObject == (Tobjeto*) leftFingerButton)
+            {
+               if(inventories[0]->equipObject(activeObject,
+                                              INVENTORY_LEFT_FINGER))
+               {
+                  delete(activeObject);
+                  activeObject = NULL;
+               }
+            }
+            else if(guiObject == (Tobjeto*) rightFingerButton)
+            {
+               if(inventories[0]->equipObject(activeObject,
+                                              INVENTORY_RIGHT_FINGER))
+               {
+                  delete(activeObject);
+                  activeObject = NULL;
+               }
+            }
+            else if(guiObject == (Tobjeto*) neckButton)
+            {
+               if(inventories[0]->equipObject(activeObject, INVENTORY_NECK))
+               {
+                  delete(activeObject);
+                  activeObject = NULL;
+               }
+            }
+            else if(guiObject == (Tobjeto*) footButton)
+            {
+               if(inventories[0]->equipObject(activeObject, INVENTORY_FOOT))
+               {
+                  delete(activeObject);
+                  activeObject = NULL;
+               }
+            }
+            else if(guiObject == (Tobjeto*) bodyButton)
+            {
+               if(inventories[0]->equipObject(activeObject, INVENTORY_BODY))
+               {
+                  delete(activeObject);
+                  activeObject = NULL;
+               }
+            }
+
+            /* if no more object, done */
+            if(!activeObject)
+            {
+               state = INVENTORY_STATE_NONE;
+               return(true);
+            }
+            
          }
       }
       break;
       
       case MENUSELECIONADO:
       {
-         objectMenu = NULL;
          //TODO get return of menu
          state = INVENTORY_STATE_NONE;
-         window->objects->removeMenu();         
+         switch(objectMenu->itemAtual)
+         {
+            case 1: /* Get */
+               if(objWhere == INVENTORY_INVENTORY)
+               {
+                 /* Recreate the object, since it will be deleted when removed
+                  * from Inventory. */
+                 activeObject = new object(activeObject);
+                 inventories[currentInventory]->removeFromInventory(objX, objY);
+                 reDraw();
+               }
+               else
+               {
+                  inventories[0]->removeFromPlace(objWhere);
+               }
+               state = INVENTORY_STATE_OBJECT;
+            break;
+         }
+         window->objects->removeMenu();
+         objectMenu = NULL;
          return(true);
       }
       break;

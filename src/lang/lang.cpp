@@ -142,6 +142,13 @@ void lang::ReloadFile(int lng)
    getline(file, CLASSW_FEATS);
    getline(file, CLASSW_SKILLS);
 
+   /* inventwindow.cpp */
+   getline(file, INVENTW_TITLE);
+   getline(file, INVENTW_DROP);
+   getline(file, INVENTW_SELL);
+   getline(file, INVENTW_USE);
+   getline(file, INVENTW_GET);
+
    /* fight */
    getline(file,FIGHT_ROLLS_INITIATIVE);
    getline(file,FIGHT_END_NOENEMIES);
@@ -264,6 +271,13 @@ void lang::ReloadFile(int lng)
    string lang::CLASSW_MODIFIERS;
    string lang::CLASSW_FEATS;
    string lang::CLASSW_SKILLS;
+
+   /* inventwindow.cpp */
+   string lang::INVENTW_TITLE;
+   string lang::INVENTW_DROP;
+   string lang::INVENTW_SELL;
+   string lang::INVENTW_USE;
+   string lang::INVENTW_GET;
 
    /*fight */
    string lang::FIGHT_ROLLS_INITIATIVE;

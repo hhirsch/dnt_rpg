@@ -81,6 +81,8 @@ object::object(string path, string objName, modelList& mdlList): thing()
  **************************************************************/
 object::object(object* obj): thing()
 {
+   inventSizeX = obj->inventSizeX;
+   inventSizeY = obj->inventSizeY;
    name = obj->name;
    fileName = obj->fileName;
    model2dName = obj->model2dName;

@@ -108,6 +108,13 @@ class lang
    static string CLASSW_MODIFIERS;
    static string CLASSW_FEATS;
    static string CLASSW_SKILLS;
+
+   /* inventwindow.cpp */
+   static string INVENTW_TITLE;
+   static string INVENTW_DROP;
+   static string INVENTW_SELL;
+   static string INVENTW_USE;
+   static string INVENTW_GET;
       
    /* figths */
    static string FIGHT_ROLLS_INITIATIVE;

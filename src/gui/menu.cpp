@@ -10,14 +10,14 @@ menu::~menu()
 }
 
 /* Insere um novo botao na lista */
-void menu::InserirMenuItem(char *text, int dispon)
+void menu::InserirMenuItem(string text, int dispon)
 {
    menuItem* novo;
    novo = new menuItem;
    novo->texto = text;
    novo->disponivel = dispon;
-   if(strlen(text) > maxCarac)
-      maxCarac = strlen(text);
+   if(text.length() > maxCarac)
+      maxCarac = text.length();
    novo->tipo = MENUITEM;
    InserirObj(novo);
 } 
@@ -89,17 +89,17 @@ void menu::Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen)
    for (k=0;k<total;k++)
    {
       cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
-      if (strcmp(item->texto,"-"))
+      if (item->texto.compare("-"))
       {
-          if (item->disponivel) escxy(screen,x1+4,ya-3,item->texto);
+          if (item->disponivel) escxy(screen,x1+4,ya-3,item->texto.c_str());
           else
           {
               cor_Definir(Cores.corCont[2].R,Cores.corCont[2].G,
                           Cores.corCont[2].B);
-              escxy(screen,x1+5,ya-2,item->texto);
+              escxy(screen,x1+5,ya-2,item->texto.c_str());
               cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,
                           Cores.corCont[1].B);
-              escxy(screen,x1+4,ya-3,item->texto);
+              escxy(screen,x1+4,ya-3,item->texto.c_str());
           }
       } 
       else 
@@ -142,8 +142,15 @@ int menu::Rodar(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
       /* Verifica Botao do Mouse Pressionado */
       if(Mbotao & SDL_BUTTON(1))
       {
-         *pronto = 1;
+         pressed = true; 
       }
+      else if(pressed)
+      {
+         /* Got the release event! */
+         *pronto = 1;
+         pressed = false;
+      }
+
       /* Faz a verificacao do Teclado */
       if(teclado[SDLK_UP] && (itemAtual-1 > 0))
       {

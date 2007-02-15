@@ -12,6 +12,18 @@
 #define INVENTORY_SIZE_X 13 /**< Number of Spaces on X axis */
 #define INVENTORY_SIZE_Y 6  /**< Number of Spaces on Y axis */
 
+#define INVENTORY_TOTAL_PLACES  8  /**< Total Eqquiped Places */
+#define INVENTORY_HEAD          0  /**< Head Place */
+#define INVENTORY_LEFT_HAND     1  /**< Left Hand Place */
+#define INVENTORY_RIGHT_HAND    2  /**< Right Hand Place */
+#define INVENTORY_LEFT_FINGER   3  /**< Left Finger Place */
+#define INVENTORY_RIGHT_FINGER  4  /**< Right Finger Place */
+#define INVENTORY_NECK          5  /**< Neck Place */
+#define INVENTORY_FOOT          6  /**< Foot Place */
+#define INVENTORY_BODY          7  /**< Body Place (Torso) */
+
+#define INVENTORY_INVENTORY     8  /**< is in inventory */
+
 /*! Definition of each inventory space */
 class space
 {
@@ -43,11 +55,22 @@ class inventory
        * \return -> true if added to inventory, false if can't add. */
       bool addObject(object* obj);
 
+      /*! Equip Object to the Place defined.
+       * \param obj -> pointer to object to be equipped
+       * \param where -> ID of the place to equip
+       * \return -> true if equipped, false, if can't equip */
+      bool equipObject(object* obj, int where);
+
       /*! Get object from iventory position
        * \param x -> x space position on inventory
        * \param y -> y space position on inventory
        * \return -> pointer to object on position */
       object* getFromPosition(int x, int y);
+
+      /*! Get object from iventory place
+       * \param where -> place ID on inventory
+       * \return -> pointer to object on position */
+      object* getFromPlace(int where);
 
       /*! Remove object from inventory
        * \param obj -> pointer to object to be removed */
@@ -57,6 +80,10 @@ class inventory
        * \param x -> x space position on inventory
        * \param y -> y space position on inventory */
       void removeFromInventory(int x, int y);
+
+      /*! Remove Object from Equipped Place
+       * \param where -> equipped place ID */
+      void removeFromPlace(int where);
 
       /*! Verify if can Add object to inventory position
        * \param obj -> pointer to object to be added
@@ -74,7 +101,9 @@ class inventory
 
    private:
       space spaces[INVENTORY_SIZE_X][INVENTORY_SIZE_Y];/**< The inventory */
-      SDL_Surface* inventoryImage;                   /**< The Inventory Image */
+      object* equippedObject[INVENTORY_TOTAL_PLACES];  /**< Equipped Current 
+                                                            Objects */
+      SDL_Surface* inventoryImage;      /**< The Inventory Image */
 
 };
 

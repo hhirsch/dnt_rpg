@@ -168,6 +168,15 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
    destinyZ = z;
    collision collisionDetect;
    collisionDetect.defineMap(actualMap);
+
+   if( (destinyX < 0) || (destinyZ < 0) || 
+       (destinyX >= actualMap->x*SQUARESIZE) ||
+       (destinyZ >= actualMap->z*SQUARESIZE) )
+   {
+      state = ASTAR_STATE_NOT_FOUND;
+      unLock();
+      return(false);
+   }
    
    opened.insert(actualX, actualZ, 0, 
                  sqrt((actualX-destinyX)*(actualX-destinyX) + 

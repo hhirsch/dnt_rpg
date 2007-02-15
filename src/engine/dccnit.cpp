@@ -31,7 +31,6 @@ engine::engine()
    miniMapWindow = NULL;
    shortCutsWindow = NULL;
    inventoryWindow = NULL;
-   actualSelectedObject = NULL;
    imgNumber = 0;
 
    curConection = NULL;
@@ -1032,7 +1031,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       Tobjeto* object;
       object = gui->manipulateEvents(x,y,Mbotao,keys, &guiEvent);
       if( (inventoryWindow) && 
-          (inventoryWindow->treat(&actualSelectedObject, object, guiEvent)) )
+          (inventoryWindow->treat(object, guiEvent)) )
       {
          /* Done Events by Inventory! */
          redesenha = true;
@@ -1101,12 +1100,19 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                    {
                       /* Get Object */
                       lastMousePression = tempo;
-                      actualSelectedObject = quaux->objects[obj];
-
                       briefTxt->addText("|");
 
-                      if(PCs->personagemAtivo->inventories[0]->addObject(
-                                                       quaux->objects[obj]))
+                      int inv = 0;
+
+                      while((!PCs->personagemAtivo->inventories[inv]->addObject(
+                             quaux->objects[obj]) && 
+                            (inv < INVENTORY_PER_CHARACTER)))
+                      {
+                         inv++;
+                      }
+                            
+
+                      if(inv < INVENTORY_PER_CHARACTER)
                       {
                          briefTxt->addText(quaux->objects[obj]->getName()+ 
                                            "taken."); 
@@ -1629,7 +1635,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          redesenha = true;
       }
       
-      /* Mouse Verification */
+      /* Path Verification */
       if(Mbotao & SDL_BUTTON(3))
       {
          PCs->personagemAtivo->pathFind.defineMap(actualMap);

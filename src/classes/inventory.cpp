@@ -3,6 +3,7 @@
  *************************************************************************/
 
 #include "inventory.h"
+#include "object.h"
 
 
 /**************************************************************
@@ -26,6 +27,12 @@ inventory::inventory()
    if(!inventoryImage)
    {
       printf("Can't Load Inventory Image!\n");
+   }
+
+   /* Nullify equiped pointers */
+   for(x = 0; x < INVENTORY_TOTAL_PLACES; x++)
+   {
+      equippedObject[x] = NULL;
    }
 }
 
@@ -60,6 +67,10 @@ inventory::~inventory()
  **************************************************************/
 bool inventory::addObject(object* obj, int x, int y)
 {
+   if(!obj)
+   {
+      return(false);
+   }
    int sizeX, sizeY;
    int j,k;
    obj->getInventorySize(sizeX, sizeY);
@@ -83,8 +94,23 @@ bool inventory::addObject(object* obj, int x, int y)
       }
       return(true);
    }
-      
    return(false); 
+}
+
+/**************************************************************
+ *                          equipObject                       *
+ **************************************************************/
+bool inventory::equipObject(object* obj, int where)
+{
+   if( (obj) && (where > 0) && (where < INVENTORY_TOTAL_PLACES) )
+   {
+      if(equippedObject[where] == NULL)
+      {
+         //TODO verify if object Use Type is compatible with the place
+         equippedObject[where] = obj;
+      }
+   }
+   return(false);
 }
 
 /**************************************************************
@@ -93,6 +119,11 @@ bool inventory::addObject(object* obj, int x, int y)
 bool inventory::addObject(object* obj)
 {
    int x,y;
+
+   if(!obj)
+   {
+      return(false);
+   }
 
    for(x=0; x < INVENTORY_SIZE_X; x++)
    {
@@ -116,7 +147,7 @@ bool inventory::canAdd(object* obj, int x, int y)
    int j,k;
    obj->getInventorySize(sizeX, sizeY);
    if( (x<0) || (y<0) || (x+sizeX > INVENTORY_SIZE_X) ||
-       (y+sizeY > INVENTORY_SIZE_Y))
+       (y+sizeY > INVENTORY_SIZE_Y) || (obj == NULL))
    {
       return(false);
    }
@@ -136,6 +167,18 @@ bool inventory::canAdd(object* obj, int x, int y)
 }
 
 /**************************************************************
+ *                         getFromPlace                       *
+ **************************************************************/
+object* inventory::getFromPlace(int where)
+{
+   if( (where > 0) && (where < INVENTORY_TOTAL_PLACES) )
+   {
+      return(equippedObject[where]);
+   }
+   return(NULL);
+}
+
+/**************************************************************
  *                       getFromPosition                      *
  **************************************************************/
 object* inventory::getFromPosition(int x, int y)
@@ -149,15 +192,28 @@ object* inventory::getFromPosition(int x, int y)
 }
 
 /**************************************************************
+ *                       removeFromPlace                      *
+ **************************************************************/
+void inventory::removeFromPlace(int where)
+{
+   if( (where > 0) && (where < INVENTORY_TOTAL_PLACES) )
+   {
+      equippedObject[where] = NULL;
+   }
+}
+
+/**************************************************************
  *                     removeFromInventory                    *
  **************************************************************/
 void inventory::removeFromInventory(object* obj)
 {
    int x,y;
+   
    if(obj == NULL)
    {
       return;
    }
+   
    for(x=0; x < INVENTORY_SIZE_X; x++)
    {
       for(y=0; y < INVENTORY_SIZE_Y; y++)
@@ -186,7 +242,8 @@ void inventory::removeFromInventory(int x, int y)
 {
    object* obj;
    int j,k, sizeX, sizeY;
-   if( (x >= 0) && (y >=0) && (x < INVENTORY_SIZE_X) &&
+
+   if( (x >= 0) && (y >= 0) && (x < INVENTORY_SIZE_X) &&
        (y < INVENTORY_SIZE_Y))
    {
       obj = spaces[x][y].obj;

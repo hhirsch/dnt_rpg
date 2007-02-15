@@ -8,6 +8,8 @@
 /* Onde sao definidos os menus, os itens de menus, submenus, etc */
 
 #include <stdlib.h>
+#include <string>
+using namespace std;
 #include "cores.h"
 #include "desenho.h"
 #include "fonte.h"
@@ -19,7 +21,7 @@
 class menuItem: public Tobjeto
 {
    public:
-      char* texto;        /* Texto do item */
+      string texto;        /* Texto do item */
       int disponivel;     /* !=0 se disponivel */
 };             /* Estrutura de um item do Menu */
 
@@ -34,14 +36,15 @@ class menu: public Tlista
       int itemAtual;
    
       menu(): Tlista()
-           {itemAtual = 1;procSelecionado=NULL;maxCarac=0;Cores.Iniciar();};
+           {itemAtual = 1;procSelecionado=NULL;maxCarac=0;Cores.Iniciar();
+            pressed = false;};
       ~menu();
 
       /* Insere um novo menuItem no menu
        * texto      -> texto do menuItem
        * disponivel ->  != 0 se o item estiver disponivel
        * men        -> menu no qual sera inserido o item */
-      void InserirMenuItem(char *text, int dispon);
+      void InserirMenuItem(string text, int dispon);
 
       /* Redefine a coordenada de um menu - Util p/ menus relativos ao mouse
        * x,y -> coordenada */
@@ -60,6 +63,8 @@ class menu: public Tlista
       /* Verifica se o item esta disponivel */
       int ItemDisponivel(int item);
       void Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen);
+
+      bool pressed;   /**< Control to take the release button press */
 
 };                 /* O menu em si */
 
