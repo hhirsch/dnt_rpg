@@ -115,6 +115,8 @@ void lang::ReloadFile(int lng)
    getline(file, ATTW_WISDOW);
    getline(file, ATTW_CHARISM);
    getline(file, ATTW_DESCRIPTION);
+   getline(file, ATTW_WARN_TITLE);
+   getline(file, ATTW_WARN_MESSAGE);
 
    /* alignwindow.cpp */
    getline(file, ALIGNW_TITLE);
@@ -245,6 +247,8 @@ void lang::ReloadFile(int lng)
    string lang::ATTW_WISDOW;
    string lang::ATTW_CHARISM;
    string lang::ATTW_DESCRIPTION;
+   string lang::ATTW_WARN_TITLE;
+   string lang::ATTW_WARN_MESSAGE;
 
    /* alignwindow.cpp */
    string lang::ALIGNW_TITLE;

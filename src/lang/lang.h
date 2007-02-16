@@ -82,6 +82,8 @@ class lang
    static string ATTW_WISDOW;
    static string ATTW_CHARISM;
    static string ATTW_DESCRIPTION;
+   static string ATTW_WARN_TITLE;
+   static string ATTW_WARN_MESSAGE;
 
    /* alignwindow.cpp */
    static string ALIGNW_TITLE;

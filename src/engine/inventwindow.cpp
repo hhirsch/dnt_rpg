@@ -110,6 +110,40 @@ void inventWindow::reDraw()
 }
 
 /**************************************************************
+ *                          openMenu                          *
+ **************************************************************/
+void inventWindow::openMenu(int x, int y)
+{
+   int xSize;
+   objectMenu = (menu*) window->objects->addMenu();
+   objectMenu->InserirMenuItem(language.INVENTW_DROP,1);
+   objectMenu->InserirMenuItem("-",0);
+   objectMenu->InserirMenuItem(language.INVENTW_SELL,0);
+   objectMenu->InserirMenuItem(language.INVENTW_USE,0);
+   objectMenu->InserirMenuItem("-",0);
+   objectMenu->InserirMenuItem(language.INVENTW_GET,1);
+
+   selFonte(FFARSO,ESQUERDA,1);
+
+   xSize = objectMenu->maxCarac*(fonte_incCP()+1)+6;
+
+   /* Make Sure all Menu is in Window */
+   if(y+70 >= window->y2)
+   {
+       y = window->y2-70;
+   }
+
+   if(x+xSize >= window->x2)
+   {
+      x = window->x2 - xSize;
+   }
+   
+   objectMenu->Coordenada(x,y);
+   
+   state = INVENTORY_STATE_MENU;
+}
+
+/**************************************************************
  *                             treat                          *
  **************************************************************/
 bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
@@ -159,24 +193,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   objX = posX;
                   objY = posY;
                   objWhere = INVENTORY_INVENTORY;
-                  objectMenu = (menu*) window->objects->addMenu();
-                  objectMenu->InserirMenuItem(language.INVENTW_DROP,1);
-                  objectMenu->InserirMenuItem("-",0);
-                  objectMenu->InserirMenuItem(language.INVENTW_SELL,0);
-                  objectMenu->InserirMenuItem(language.INVENTW_USE,0);
-                  objectMenu->InserirMenuItem("-",0);
-                  objectMenu->InserirMenuItem(language.INVENTW_GET,1);
-
-                  /* Make Sure all Menu is in Window */
-                  if(y+70 < window->y2)
-                  {
-                     objectMenu->Coordenada(x,y);
-                  }
-                  else
-                  {
-                     objectMenu->Coordenada(x,window->y2-70);
-                  }
-                  state = INVENTORY_STATE_MENU;
+                  openMenu(x,y); 
                }
                return(true);
             }
@@ -271,22 +288,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             if(aObject)
             {
                activeObject = aObject;
-               objectMenu = (menu*) window->objects->addMenu();
-               objectMenu->InserirMenuItem(language.INVENTW_DROP,1);
-               objectMenu->InserirMenuItem("-",0);
-               objectMenu->InserirMenuItem(language.INVENTW_SELL,0);
-               objectMenu->InserirMenuItem(language.INVENTW_USE,0);
-               objectMenu->InserirMenuItem("-",0);
-               objectMenu->InserirMenuItem(language.INVENTW_GET,1);
-               /* Make Sure all Menu is in Window */
-               if(y+70 < window->y2)
-               {
-                  objectMenu->Coordenada(x,y);
-               }
-               else
-               {
-                  objectMenu->Coordenada(x,window->y2-70);
-               }
+               openMenu(x,y);
                state = INVENTORY_STATE_MENU;
                return(true);
             }

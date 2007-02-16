@@ -35,6 +35,10 @@ class inventWindow
       void reDraw();
 
    private:
+
+      /*! Open the Inventory Object Menu  */
+      void openMenu(int x, int y);
+
       inventory *inventories[INVENTORY_PER_CHARACTER]; /**< Extern Inventories*/
 
       interface* interf;              /**< Pointer to Interface */

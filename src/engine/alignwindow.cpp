@@ -35,7 +35,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter)
    textName->tamFonte = 1;
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(203,225,263,244, 
+   buttonConfirm = window->objects->InserirBotao(193,225,263,244, 
                                 window->Cores.corBot.R,
                                 window->Cores.corBot.G,window->Cores.corBot.B,
                                 language.SKILL_CONFIRM.c_str(),1,NULL);
