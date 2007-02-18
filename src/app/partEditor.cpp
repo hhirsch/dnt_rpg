@@ -959,7 +959,7 @@ int main(int argc, char **argv)
 
    char aux[10];
 
-   janSalvar = gui->ljan->InserirJanela(0,0,127,63,"Actions",1,1,NULL,NULL);
+   janSalvar = gui->insertWindow(0,0,127,63,"Actions",1,1);
    janSalvar->objects->InserirBotao(10,37,50,55,janSalvar->Cores.corBot.R,
                                                 janSalvar->Cores.corBot.G,
                                                 janSalvar->Cores.corBot.B,
@@ -973,9 +973,9 @@ int main(int argc, char **argv)
                                          0,NULL);
 
    janSalvar->fechavel = 0;
-   janSalvar->Abrir(gui->ljan);
+   gui->openWindow(janSalvar);
 
-   janEditar = gui->ljan->InserirJanela(0,64,127,575,"Edit",1,1,NULL,NULL);
+   janEditar = gui->insertWindow(0,64,127,575,"Edit",1,1);
    
    janEditar->objects->InserirQuadroTexto(3,17,60,33,0,"MaxLive");
    sprintf(aux, "%d", p->getMaxLive());
@@ -1070,10 +1070,9 @@ int main(int argc, char **argv)
    janEditar->objects->InserirBarraTexto(60,491,123,505,aux,0,&editedDSumPosZ);
 
    janEditar->fechavel = 0;
-   janEditar->Abrir(gui->ljan);
+   gui->openWindow(janEditar);
 
-
-   janEditar = gui->ljan->InserirJanela(672,64,799,575,"Edit-2",1,1,NULL,NULL);
+   janEditar = gui->insertWindow(672,64,799,575,"Edit-2",1,1);
 
    janEditar->objects->InserirQuadroTexto(3,17,60,33,0,"DMColorR");
    sprintf(aux, "%d", p->getMaxLive());
@@ -1124,7 +1123,7 @@ int main(int argc, char **argv)
    janEditar->objects->InserirBarraTexto(60,237,123,253,aux,0,&editedDSumVelZ);
 
    janEditar->fechavel = 0;
-   janEditar->Abrir(gui->ljan);
+   gui->openWindow(janEditar);
 
    float wx,wy;
    double varX, varZ;

@@ -264,7 +264,7 @@ int main(int argc, char *argv[])
 
    interface* interf = new interface(NULL);
    
-   principal=interf->ljan->InserirJanela(0,0,255,63,"Principal",1,1,NULL,NULL);
+   principal = interf->insertWindow(0,0,255,63,"Principal",1,1);
    barraAbrir = principal->objects->InserirBarraTexto(10,23,173,36,"Arquivo",
                                                       0,NULL);
    botaoAbrirArquivo = principal->objects->InserirBotao(15,40,65,56,
@@ -277,9 +277,9 @@ int main(int argc, char *argv[])
                               Cores.corBot.G,
                               Cores.corBot.B,"Sair",1,&ProcedimentoSair);
    principal->fechavel = 0;
-   principal->Abrir(interf->ljan);
+   interf->openWindow(principal);
 
-   dialogos=interf->ljan->InserirJanela(0,70,511,581,"Dialogo",1,1,NULL,NULL);
+   dialogos=interf->insertWindow(0,70,511,581,"Dialogo",1,1);
    dialogos->objects->InserirQuadroTexto(7,15,443,62,1,"NPC:");
    
    criaMenus();
@@ -289,7 +289,7 @@ int main(int argc, char *argv[])
    dialogos->objects->InserirFigura(10,285,0,0,"../data/pics/dcc.bmp");
 
    dialogos->fechavel = 0;
-   dialogos->Abrir(interf->ljan);
+   interf->openWindow(dialogos);
 
    sair = -2;
 

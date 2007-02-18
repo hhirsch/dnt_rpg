@@ -502,8 +502,8 @@ void editor::draw()
       for(aux=0;aux < NPCs->total;aux++)
       {
          /* Actualize NPCs */
-         per->m_calModel->update(WALK_ACTUALIZATION/*seconds*/);   
-         per->CalculateBoundingBox();
+         per->update(WALK_ACTUALIZATION/*seconds*/);   
+         per->calculateBoundingBox();
          /* Verify Bounding Box */
          x[0] = per->min[0];
          z[0] = per->min[2];
@@ -525,7 +525,7 @@ void editor::draw()
             glPushMatrix();
                glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
                glRotatef(per->orientacao,0,1,0);
-               per->Render();
+               per->render();
              /*per->RenderBoundingBox();
                glColor3f(0.6,0.1,0.1);
                glBegin(GL_POLYGON);

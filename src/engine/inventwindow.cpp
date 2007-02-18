@@ -102,10 +102,29 @@ bool inventWindow::isOpen()
  **************************************************************/
 void inventWindow::reDraw()
 {
+   /*int x1 = 0, 
+       x2 = 0;*/
    if(isOpen())
    {
       inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
       window->Desenhar(0,0);
+
+      //TODO Mark on actual Inventory!
+      /*switch(currentInventory)
+      {
+         case 0: 
+            x1 = 4; x2 = 64;
+         break;
+         case 1:
+            x1 = 64; x2 = 127;
+         break;
+         case 2:
+            x1 = 127; x2 = 191;
+         break;
+         case 3:
+            x1 = 191; x2 = 251;
+         break;
+      }*/
    }
 }
 
@@ -151,8 +170,8 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
    int x,y;
    Uint8 Mbotao = SDL_GetMouseState(&x,&y);
 
-   int posX = (int) floor((x - (8 + window->x1)) / (20.0));
-   int posY = (int) floor((y - (284 + window->y1)) / (20.0));
+   int posX = (int) floor((x - (8 + window->x1)) / (19.0));
+   int posY = (int) floor((y - (284 + window->y1)) / (19.0));
 
    if(Mbotao & SDL_BUTTON(3))
    {

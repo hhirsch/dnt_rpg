@@ -49,7 +49,7 @@ guiIO::~guiIO()
  ****************************************************************/
 void guiIO::openFileWindow()
 {
-   fileWindow = gui->ljan->InserirJanela(0,0,184,63,"File",1,1,NULL,NULL);
+   fileWindow = gui->insertWindow(0,0,184,63,"File",1,1);
    newButton = fileWindow->objects->InserirBotao(10,37,50,55,
                                                   fileWindow->Cores.corBot.R,
                                                   fileWindow->Cores.corBot.G,
@@ -74,7 +74,7 @@ void guiIO::openFileWindow()
                                                      "../data/mapas/",0,NULL);
    fileWindow->fechavel = 0;
    fileWindow->ptrExterno = &fileWindow;
-   fileWindow->Abrir(gui->ljan);
+   gui->openWindow(fileWindow);
 }
 
 /****************************************************************
@@ -82,8 +82,7 @@ void guiIO::openFileWindow()
  ****************************************************************/
 void guiIO::openTextureWindow()
 {
-   textureWindow = gui->ljan->InserirJanela(0,164,184,244,"Texture",1,1,
-                                            NULL, NULL);
+   textureWindow = gui->insertWindow(0,164,184,244,"Texture",1,1);
    texturePreviousButton = textureWindow->objects->InserirBotao(7,56,74,74,
                                                   textureWindow->Cores.corBot.R,
                                                   textureWindow->Cores.corBot.G,
@@ -103,7 +102,7 @@ void guiIO::openTextureWindow()
                                                      "../data/texturas/",0,NULL);
    textureWindow->fechavel = 0;
    textureWindow->ptrExterno = &textureWindow;
-   textureWindow->Abrir(gui->ljan);
+   gui->openWindow(textureWindow);
 }
 
 /****************************************************************
@@ -111,8 +110,7 @@ void guiIO::openTextureWindow()
  ****************************************************************/
 void guiIO::openObjectWindow()
 {
-   objectWindow = gui->ljan->InserirJanela(0,245,184,599-248,"Objects",1,1,
-                                            NULL, NULL);
+   objectWindow = gui->insertWindow(0,245,184,599-248,"Objects",1,1);
    objectInsertButton = objectWindow->objects->InserirBotao(20,35,153,53,
                                                   textureWindow->Cores.corBot.R,
                                                   textureWindow->Cores.corBot.G,
@@ -125,7 +123,7 @@ void guiIO::openObjectWindow()
                                                "../data/mapEditor/objects.png");
    objectAddButton = objectTabButton->insertButton(0,0,19,19);
    objectWindow->ptrExterno = &objectWindow;
-   objectWindow->Abrir(gui->ljan);
+   gui->openWindow(objectWindow);
 }
 
 /****************************************************************
@@ -133,10 +131,9 @@ void guiIO::openObjectWindow()
  ****************************************************************/
 void guiIO::openNavWindow()
 {
-   navWindow = gui->ljan->InserirJanela(799-67,599-74,799,599,"Nav",1,1,
-                                        NULL,NULL);
+   navWindow = gui->insertWindow(799-67,599-74,799,599,"Nav",1,1);
    navTabButton = navWindow->objects->InserirTabButton(7,17,0,0,
-                                                    "../data/mapEditor/nav.png");
+                                                   "../data/mapEditor/nav.png");
    moreZoomButton = navTabButton->insertButton(0,0,8,8);    /* More Zoom */
    lessZoomButton = navTabButton->insertButton(9,0,17,8);   /* Less Zoom */
    upButton = navTabButton->insertButton(19,0,31,17);       /* Up */
@@ -149,7 +146,7 @@ void guiIO::openNavWindow()
    rotRightButton = navTabButton->insertButton(0,36,10,50); /* Rotation Right */
    navWindow->fechavel = 0;
    navWindow->ptrExterno = &navWindow;
-   navWindow->Abrir(gui->ljan);
+   gui->openWindow(navWindow);
 }
 
 /****************************************************************
@@ -157,13 +154,12 @@ void guiIO::openNavWindow()
  ****************************************************************/
 void guiIO::openMessageWindow()
 {
-   messageWindow = gui->ljan->InserirJanela(113,599-36,799-68,599,
-                                            "Messages",1,1,NULL,NULL);
+   messageWindow = gui->insertWindow(113,599-36,799-68,599,"Messages",1,1);
    messageText = messageWindow->objects->InserirQuadroTexto(7,16,610,31,0,
                  "Welcome to DccNiTghtmare Map Editor!");
    messageWindow->fechavel = 0;
    messageWindow->ptrExterno = &messageWindow;
-   messageWindow->Abrir(gui->ljan);
+   gui->openWindow(messageWindow);
 }
 
 
@@ -172,7 +168,7 @@ void guiIO::openMessageWindow()
  ****************************************************************/
 void guiIO::openMainWindow()
 {
-   mainWindow = gui->ljan->InserirJanela(0,64,184,163,"Main",1,1,NULL,NULL);
+   mainWindow = gui->insertWindow(0,64,184,163,"Main",1,1);
    terrainButton = mainWindow->objects->InserirBotao(5,17,59,35,
                                                      mainWindow->Cores.corBot.R,
                                                      mainWindow->Cores.corBot.G,
@@ -194,10 +190,10 @@ void guiIO::openMainWindow()
                                                     mainWindow->Cores.corBot.B,
                                                     "Object",0,NULL);
    particleButton = mainWindow->objects->InserirBotao(60,36,123,54,
-                                                      mainWindow->Cores.corBot.R,
-                                                      mainWindow->Cores.corBot.G,
-                                                      mainWindow->Cores.corBot.B,
-                                                      "Particle",0,NULL);
+                                                    mainWindow->Cores.corBot.R,
+                                                    mainWindow->Cores.corBot.G,
+                                                    mainWindow->Cores.corBot.B,
+                                                    "Particle",0,NULL);
    npcButton = mainWindow->objects->InserirBotao(124,36,179,54,
                                                  mainWindow->Cores.corBot.R,
                                                  mainWindow->Cores.corBot.G,
@@ -237,7 +233,7 @@ void guiIO::openMainWindow()
 
    mainWindow->fechavel = 0;
    mainWindow->ptrExterno = &mainWindow;
-   mainWindow->Abrir(gui->ljan);
+   gui->openWindow(mainWindow);
 }
 
 /****************************************************************
@@ -245,10 +241,9 @@ void guiIO::openMainWindow()
  ****************************************************************/
 void guiIO::openWallWindow()
 {
-   wallWindow = gui->ljan->InserirJanela(0,599-123,112,599-62,"Wall",
-                                         1,1,NULL,NULL);
+   wallWindow = gui->insertWindow(0,599-123,112,599-62,"Wall",1,1);
    wallTabButton = wallWindow->objects->InserirTabButton(7,17,0,0,
-                                                   "../data/mapEditor/wall.png");
+                                                  "../data/mapEditor/wall.png");
    wallXButton = wallTabButton->insertButton(0,0,19,19);          /* Wall X */
    wallZButton = wallTabButton->insertButton(20,0,39,19);         /* Wall Z */
    wallX2Button = wallTabButton->insertButton(40,0,59,19);        /* Wall X */
@@ -259,9 +254,8 @@ void guiIO::openWallWindow()
    wallLessVerTexture = wallTabButton->insertButton(60,20,79,39); /* Less V */
    wallMoreVerTexture = wallTabButton->insertButton(80,20,99,39); /* Less V */
 
-
    wallWindow->ptrExterno = &wallWindow;
-   wallWindow->Abrir(gui->ljan);
+   gui->openWindow(wallWindow);
 }
 
 /****************************************************************
@@ -269,15 +263,14 @@ void guiIO::openWallWindow()
  ****************************************************************/
 void guiIO::openPortalWindow()
 {
-   portalWindow = gui->ljan->InserirJanela(0,599-185,112,599-124,"Portal",
-                                           1,1,NULL,NULL);
+   portalWindow = gui->insertWindow(0,599-185,112,599-124,"Portal",1,1);
    portalTabButton = portalWindow->objects->InserirTabButton(7,17,0,0,
-                                                 "../data/mapEditor/portal.png");
+                                                "../data/mapEditor/portal.png");
    portalAddButton = portalTabButton->insertButton(0,0,19,19); /* Add */
    portalTagButton = portalTabButton->insertButton(20,0,39,19); /* Tag */
    portalDoorButton = portalTabButton->insertButton(40,0,59,19); /* Door */
    portalWindow->ptrExterno = &portalWindow;
-   portalWindow->Abrir(gui->ljan);
+   gui->openWindow(portalWindow);
 }
 
 
@@ -286,17 +279,16 @@ void guiIO::openPortalWindow()
  ****************************************************************/
 void guiIO::openTerrainWindow()
 {
-   terrainWindow = gui->ljan->InserirJanela(0,599-61,112,599,"Terrain",
-                                            1,1,NULL,NULL);
+   terrainWindow = gui->insertWindow(0,599-61,112,599,"Terrain",1,1);
    terrainTabButton = terrainWindow->objects->InserirTabButton(7,17,0,0,
-                                                "../data/mapEditor/terrain.png");
+                                               "../data/mapEditor/terrain.png");
    terrainUpButton = terrainTabButton->insertButton(0,0,19,19);    
    terrainNivButton = terrainTabButton->insertButton(20,0,39,19);  
    terrainDownButton = terrainTabButton->insertButton(40,0,59,19); 
    terrainWalkableButton = terrainTabButton->insertButton(0,20,19,39);
    terrainTextureButton = terrainTabButton->insertButton(20,20,39,39);
    terrainWindow->ptrExterno = &terrainWindow;
-   terrainWindow->Abrir(gui->ljan);
+   gui->openWindow(terrainWindow);
 }
 
 /****************************************************************
@@ -304,8 +296,7 @@ void guiIO::openTerrainWindow()
  ****************************************************************/
 void guiIO::openParticleWindow()
 {
-   particleWindow = gui->ljan->InserirJanela(0,599-247,112,599-186,"Particle",
-                                             1,1,NULL,NULL);
+   particleWindow = gui->insertWindow(0,599-247,112,599-186,"Particle",1,1);
    particleTabButton = particleWindow->objects->InserirTabButton(7,17,0,0,
                                               "../data/mapEditor/particle.png");
    fireButton = particleTabButton->insertButton(0,0,19,19);
@@ -315,7 +306,7 @@ void guiIO::openParticleWindow()
    snowButton = particleTabButton->insertButton(80,0,99,19);
    grassButton = particleTabButton->insertButton(0,20,19,39);
    particleWindow->ptrExterno = &particleWindow;
-   particleWindow->Abrir(gui->ljan);
+   gui->openWindow(particleWindow);
 }
 
 

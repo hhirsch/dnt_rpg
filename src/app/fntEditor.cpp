@@ -602,7 +602,7 @@ int main(int argc, char *argv[])
     //Ljanela j;
     interface* interf = new interface(NULL);
     
-    jan = interf->ljan->InserirJanela(0,0,255,255,"fntEditor",1,1,NULL,NULL);
+    jan = interf->insertWindow(0,0,255,255,"fntEditor",1,1);
     jan->fechavel = 0;
     arquivo = jan->objects->InserirBarraTexto(24,20,176,34,txt.c_str(),0,NULL);
     jan->objects->InserirBotao(24,42,74,60,Cores.corBot.R,Cores.corBot.G,
@@ -624,17 +624,16 @@ int main(int argc, char *argv[])
     jan->objects->InserirBotao(90,110,155,128,Cores.corBot.R,Cores.corBot.G,
                                Cores.corBot.B,"VaiPara",1,&botao_VaiPara);
 
-    jan->Abrir(interf->ljan);
+    interf->openWindow(jan);
 
-    janelaEdicao = interf->ljan->InserirJanela(10,210,265,465,
-                                  "Caractere",1,1,NULL,&colocaCor);
+    janelaEdicao = interf->insertWindow(10,210,265,465, "Caractere",1,1);
     janelaEdicao->fechavel = 0;
     grid = janelaEdicao->objects->InserirFigura(8,18,256,256,NULL);
     grade();
     zera();
-    janelaEdicao->Abrir(interf->ljan);
+    interf->openWindow(janelaEdicao);
+   
 
-    
     int pronto = 0;
     char c[1];
     char ultimaLetra = 0;

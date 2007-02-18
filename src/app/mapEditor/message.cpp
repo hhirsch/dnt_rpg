@@ -76,8 +76,7 @@ string getStringFromUser(string title, string previous,
    Uint8* keys;
    int mouseX, mouseY;
 
-   getWindow = gui->ljan->InserirJanela(300,200,500,262,title.c_str(),1,1,
-                                        NULL,NULL);
+   getWindow = gui->insertWindow(300,200,500,262,title.c_str(),1,1);
    okButton = getWindow->objects->InserirBotao(40,37,95,55,
                                                getWindow->Cores.corBot.R,
                                                getWindow->Cores.corBot.G,
@@ -93,7 +92,7 @@ string getStringFromUser(string title, string previous,
                                                    NULL);
    getWindow->movivel = 0;
    getWindow->ptrExterno = &getWindow;
-   getWindow->Abrir(gui->ljan);
+   gui->openWindow(getWindow);
 
    while(!quit)
    {

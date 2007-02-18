@@ -289,7 +289,7 @@ void inventory::draw(int x, int y, SDL_Surface* surface)
          if( (spaces[j][k].obj != NULL) && (spaces[j][k].origX == j) &&
              (spaces[j][k].origY == k))
          {
-            spaces[j][k].obj->draw2D((x+4 + (j*20)), (y+13 + (k*20)), surface);
+            spaces[j][k].obj->draw2D((x+4 + (j*19)), (y+13 + (k*19)), surface);
          }
       }
    }
