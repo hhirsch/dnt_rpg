@@ -66,7 +66,7 @@ engine::engine()
    raceList = new races(language.RACE_DIR.c_str(), "../data/races/races.lst");
 
    /* Load Classes */
-   classList = new classes("../data/classes/Portugues/",
+   classList = new classes(language.CLASS_DIR.c_str(),
                            "../data/classes/classes.lst");
 
    /* Create 3D Models List */

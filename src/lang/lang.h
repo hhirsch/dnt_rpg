@@ -144,6 +144,7 @@ class lang
    static string FEATS_DIR;
    static string ALIGN_DIR;
    static string RACE_DIR;
+   static string CLASS_DIR;
 
    /* Errors */
    static string ERROR_MAP_OUT;

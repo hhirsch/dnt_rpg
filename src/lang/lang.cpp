@@ -177,6 +177,7 @@ void lang::ReloadFile(int lng)
    getline(file, FEATS_DIR);
    getline(file, ALIGN_DIR);
    getline(file, RACE_DIR);
+   getline(file, CLASS_DIR);
 
    /* Errors */
    getline(file, ERROR_MAP_OUT);
@@ -309,6 +310,7 @@ void lang::ReloadFile(int lng)
    string lang::FEATS_DIR;
    string lang::ALIGN_DIR;
    string lang::RACE_DIR;
+   string lang::CLASS_DIR;
 
    /* Errors */
    string lang::ERROR_MAP_OUT;
