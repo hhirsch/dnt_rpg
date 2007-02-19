@@ -6,11 +6,12 @@
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-objects::objects(Map* map)
+objects::objects(Map* map, modelList* usedModels)
 {
    actualMap = map;
    state = OBJECTS_STATE_NONE;
-   actualObstacle = (mapObject*)actualMap->objetcs->primeiro->proximo;
+   models = usedModels;
+   actualObstacle = (mapObject*) models->getFirst();
 }
 
 /******************************************************
@@ -60,11 +61,11 @@ void objects::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       }
       else if((mButton & SDL_BUTTON(3)) && (actualObstacle != NULL))
       {
-         actualObstacle = (mapObjeto*)actualObstacle->proximo;
+         actualObstacle = (mapObject*)actualObstacle->next;
          /* Verify Head Node */
-         if(actualObstacle == actualMap->Objetos->primeiro)
+         if(actualObstacle == (mapObject*)models->getFirst())
          {
-            actualObstacle = (mapObjeto*)actualObstacle->proximo;
+            actualObstacle = (mapObject*)actualObstacle->next;
          }
 
          while(mButton & SDL_BUTTON(3))
@@ -90,7 +91,7 @@ void objects::drawTemporary()
 {
    if( (state == OBJECTS_STATE_ADD) && (actualObstacle != NULL))
    {
-      actualObstacle->Desenhar(obstacleX, obstacleZ, 0, obstacleOrientation);
+      actualObstacle->draw(obstacleX, obstacleZ, 0, obstacleOrientation);
    }
 }
 
@@ -98,7 +99,7 @@ void objects::drawTemporary()
  *                          insertObject                          *
  ******************************************************************/
 void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                          Map* map, mapObjeto* obj, int qx, int qz)
+                          Map* map, mapObject* obj, int qx, int qz)
 {
    Square* saux = map->quadradoRelativo(qx,qz);
    int ob=0;
@@ -117,13 +118,15 @@ void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
         saux->objectsDesenha[ob] = 1;
         //printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
                   
-        GLMmodel* modelo = (GLMmodel*)obj->modelo3d; 
+        //GLMmodel* modelo = (GLMmodel*)obj->modelo3d; 
+        //
+        boundingBox  bounds = obj->getBoundingBox();
 
         float X[2], Z[2];
-        X[0] = modelo->x1;
-        X[1] = modelo->x2;
-        Z[0] = modelo->z1;
-        Z[1] = modelo->z2;
+        X[0] = bounds.x1;
+        X[1] = bounds.x2;
+        Z[0] = bounds.z1;
+        Z[1] = bounds.z2;
         if(orObj!=0)
         {
            GLfloat oldX, oldZ;

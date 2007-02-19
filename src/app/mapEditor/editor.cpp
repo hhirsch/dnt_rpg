@@ -122,7 +122,7 @@ void editor::openMap()
       terrainEditor = new terrain(map);
       portalEditor = new portal(map);
       wallEditor = new wall(map);
-      objectEditor = new objects(map);
+      objectEditor = new objects(map, models);
       particleEditor = new particles(map);
       actualTexture = map->Texturas->indice;
 
@@ -259,7 +259,7 @@ void editor::newMap()
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wall(map);
-   objectEditor = new objects(map);
+   objectEditor = new objects(map, models);
    particleEditor = new particles(map);
    actualTexture = map->Texturas->indice;
    NPCs = new (Lpersonagem);

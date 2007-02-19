@@ -4,6 +4,7 @@
 #include "../../map/map.h"
 #include "../../map/mapobjeto.h"
 #include "../../etc/glm.h"
+#include "../../etc/modellist.h"
 #include "../../engine/util.h"
 #include "message.h"
 
@@ -12,7 +13,7 @@ class objects
    public:
       /*! Constructor
        * \param map -> poiter to opened map*/
-      objects(Map* map);
+      objects(Map* map, modelList* usedModels);
       /*! Destructor */
       ~objects();
 
@@ -32,6 +33,7 @@ class objects
       void defineActualObject(mapObject* obj){actualObstacle = obj;};
 
     private:
+      modelList* models;          /**< Used Model List */
       Map* actualMap;             /**< Actual Internal Map */
       mapObject* actualObstacle;  /**< Actual Obstacle */
       int actualTool;             /**< Actual Tool */

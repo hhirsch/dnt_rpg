@@ -498,14 +498,14 @@ void particles::drawTemporary(GLfloat matriz[6][4])
             tmp->NextStep(matriz);
          glPopMatrix();
       }
-      else if(state = TOOL_PARTICLE_WATERFALL)
+      else if(state == TOOL_PARTICLE_WATERFALL)
       {
          glPushMatrix();
             part1* tmp = (part1*) actualParticle;
             tmp->NextStep(matriz);
          glPopMatrix();
       }
-      else if(state = TOOL_PARTICLE_SNOW)
+      else if(state == TOOL_PARTICLE_SNOW)
       {
          glPushMatrix();
             part6* tmp = (part6*) actualParticle;
