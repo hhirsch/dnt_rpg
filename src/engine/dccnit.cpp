@@ -313,8 +313,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
        atualizaCarga(img,&texturaTexto,texturaCarga,
                  texto,
                  proj, modl, viewPort);
-       per = PCs->InserirPersonagem(/*"../data/characters/pcs/logan.pc",*/
-                                    "../data/characters/npcs/ratazana.npc",
+       per = PCs->InserirPersonagem("../data/characters/pcs/logan.pc",
+                                    /*"../data/characters/npcs/ratazana.npc",*/
                                     features);
        per->DefineMaxLifePoints(per->maxLifePoints);
        atualizaCarga(img,&texturaTexto,texturaCarga,

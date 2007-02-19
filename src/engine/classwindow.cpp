@@ -154,6 +154,7 @@ string classWindow::getCharacteristics()
    }
 
    //Print Skills
+   text += "|";
    text += language.CLASSW_SKILLS + "||";
    for(i=0; i<actualClass->totalSkills; i++)
    {

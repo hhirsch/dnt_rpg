@@ -174,6 +174,14 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
        (destinyZ >= actualMap->z*SQUARESIZE) )
    {
       state = ASTAR_STATE_NOT_FOUND;
+
+      /* To avoid previous path, delete the existed one! */
+      delete(patt);
+      patt = new pattAgent(true);
+      patt->defineDestiny(0, 0);
+      patt->defineStepSize(0);
+      patt->defineOrientation(0);
+      patt->defineSight(0, 0);
       unLock();
       return(false);
    }

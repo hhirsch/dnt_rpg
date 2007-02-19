@@ -167,6 +167,11 @@ void inventWindow::openMenu(int x, int y)
  **************************************************************/
 bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
 {
+   if(!isOpen())
+   {
+      /* Window is no more opened */
+      return(false);
+   }
    int x,y;
    Uint8 Mbotao = SDL_GetMouseState(&x,&y);
 
