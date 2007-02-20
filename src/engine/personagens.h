@@ -46,11 +46,6 @@ class personagem: public Tobjeto, public thing, public aniModel
 
       string nome;              /**< Character's name */
       string retratoConversa;   /**< Portrait talk file name */
-      GLfloat orientacao;       /**< Character's orientation (angle) */
-      GLfloat posicaoFrente;    /**< Character's front postion. FIXME Used?? */
-      GLfloat posicaoLadoX;     /**< Character's X Position */
-      GLfloat posicaoLadoY;     /**< Character's Y Position (UP) */
-      GLfloat posicaoLadoZ;     /**< Character's Z Position */
 
       Square* ocupaQuad;        /**< Square occuped by character */
       int ID;                   /**< Character's ID FIXME used?? */

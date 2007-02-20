@@ -1,5 +1,6 @@
 #include "feats.h" 
 #include "actions.h"
+#include "../engine/util.h"
 #include <SDL/SDL_image.h>
 
 /**************************************************************************
@@ -124,6 +125,14 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
    if( (featNumber < 0) || (featNumber >= totalFeats) )
    {
       brief += language.FEAT_INVALID;
+      return(false);
+   }
+
+   if(!actionInRange(attacker.posicaoLadoX, attacker.posicaoLadoZ, 
+                     target.posicaoLadoX, target.posicaoLadoZ,
+                     WALK_PER_MOVE_ACTION))
+   {
+      brief += language.MSG_FAR_AWAY;
       return(false);
    }
 

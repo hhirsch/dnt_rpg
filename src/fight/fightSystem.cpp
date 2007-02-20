@@ -204,6 +204,12 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
 {
    int attackFeat;
 
+   /* Determine the target of the character */
+   if( (pers->actualEnemy == NULL) || (pers->actualEnemy->dead))
+   {
+      pers->actualEnemy =  getNPCEnemy(pers);
+   }
+   
    //doMovimentation, if wanted, before
    doNPCMovimentation(pers, FIGHT_MOVIMENTATION_BEFORE);
 
@@ -212,26 +218,21 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
    //TODO else some sing or enchantment
 
    //else, do an basic attack
-      if( (pers->actualEnemy == NULL) || (pers->actualEnemy->dead))
-      {
-         pers->actualEnemy =  getNPCEnemy(pers);
-      }
+   attackFeat = getNPCAttackFeat(pers,pers->actualEnemy);
 
-      attackFeat = getNPCAttackFeat(pers,pers->actualEnemy);
-
-      if( (pers->actualEnemy != NULL) && (attackFeat != -1))
-      {
-         brief += pers->nome + " " + language.FIGHT_ATTACKS + " " + 
-                  pers->actualEnemy->nome + "|";
-         pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
-                                                   *pers->actualEnemy, brief);
+   if( (pers->actualEnemy != NULL) && (attackFeat != -1))
+   {
+      brief += pers->nome + " " + language.FIGHT_ATTACKS + " " + 
+               pers->actualEnemy->nome + "|";
+      pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
+                                                *pers->actualEnemy, brief);
          
-         if(pers->actualEnemy->dead)
-         {
-            brief += "|" + pers->actualEnemy->nome +" "+ language.FIGHT_DEAD;
-         }
-        
+      if(pers->actualEnemy->dead)
+      {
+         brief += "|" + pers->actualEnemy->nome +" "+ language.FIGHT_DEAD;
       }
+      
+   }
 
    //TODO call the animations and sound effects.
    doNPCMovimentation(pers,FIGHT_MOVIMENTATION_AFTER);
