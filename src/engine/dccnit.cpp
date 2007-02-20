@@ -772,6 +772,9 @@ void engine::Init(SDL_Surface *screen)
 
 }
 
+/*********************************************************************
+ *                              ScreenDump                           *
+ *********************************************************************/
 #ifdef VIDEO_MODE
 void ScreenDump(char *destFile, short W, short H) 
 {
@@ -787,22 +790,99 @@ void ScreenDump(char *destFile, short W, short H)
 #endif
 
 /*********************************************************************
+ *                          enterBattleMode                          *
+ *********************************************************************/
+void engine::enterBattleMode()
+{
+  int numEnemies = 0;
+  personagem* ch;
+  string brief = "";
+  string briefInit = "";
+  //FIXME not here the dices!
+  diceThing dc;
+  dc.baseDice.diceID = DICE_D8;
+  dc.baseDice.numberOfDices = 2;
+  dc.baseDice.sumNumber = 4;
+  dc.initialLevel = 1;
+  
+  fight.empty();
+  if(!NPCs)
+  {
+     if(shortCutsWindow != NULL)
+     {
+        briefTxt->setText(language.FIGHT_NO_NPCS);
+     }
+     return;
+  }
+  ch =(personagem*) NPCs->primeiro->proximo;
+  while(ch != NPCs->primeiro)
+  {
+      //TODO put enemies on groups, when enemy from enemy
+      fight.insertNPC(ch, 0, briefInit);
+      brief += briefInit + "|";
+      numEnemies++;
+      ch->actualFeats.defineMeleeWeapon(dc); //FIXME
+      ch = (personagem*) ch->proximo; 
+      SDL_Delay(1);
+  }
+                 
+  if(numEnemies > 0)
+  {
+      snd->addSoundEffect(false,"../data/sndfx/battleMode.ogg");
+      engineMode = ENGINE_MODE_TURN_BATTLE;
+      moveCircleX = PCs->personagemAtivo->posicaoLadoX;
+      moveCircleY = PCs->personagemAtivo->posicaoLadoY;
+      moveCircleZ = PCs->personagemAtivo->posicaoLadoZ;
+
+      /* Put the PCs on group */
+      ch =(personagem*) PCs->primeiro->proximo;
+      while(ch != PCs->primeiro)
+      {
+         fight.insertPC(ch, 0, briefInit);
+         brief += briefInit + "|";
+         ch->actualFeats.defineMeleeWeapon(dc); //FIXME
+         ch = (personagem*) ch->proximo; 
+         SDL_Delay(1);
+      }
+                   
+      /* Define PC turn, cause the round of surprise attack! */
+      fightStatus = FIGHT_PC_TURN;
+      fullMovePCAction = false;
+      canMove = true;
+      //TODO Verify if weapon is ranged before do this
+      attackFeat = FEAT_MELEE_ATTACK;
+      canAttack = true;
+      
+      brief += language.FIGHT_SURPRISE_TURN;
+   }
+   else
+   {
+      brief = language.FIGHT_NO_NPCS;
+   }
+   if(shortCutsWindow != NULL)
+   {
+      briefTxt->setText(brief);
+   }
+}
+
+/*********************************************************************
+ *                              endTurn                              *
+ *********************************************************************/
+void engine::endTurn()
+{
+   if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
+       (fightStatus == FIGHT_PC_TURN)  && 
+       ((SDL_GetTicks() - lastTurnTime) > 200) )
+   {
+      fightStatus = FIGHT_CONTINUE;
+   }
+}
+
+/*********************************************************************
  *                         Threat GUI Events                         *
  *********************************************************************/
 void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
 {
-   int numEnemies = 0;
-   personagem* ch;
-   string briefInit;
-   string brief;
-
-   //FIXME not here the dices!
-   diceThing dc;
-   dc.baseDice.diceID = DICE_D8;
-   dc.baseDice.numberOfDices = 2;
-   dc.baseDice.sumNumber = 4;
-   dc.initialLevel = 1;
-
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
    {
@@ -821,65 +901,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
            {
               if( engineMode != ENGINE_MODE_TURN_BATTLE )
               {
-                 brief = "";
-                 fight.empty();
-                 if(!NPCs)
-                 {
-                    if(shortCutsWindow != NULL)
-                    {
-                       briefTxt->setText(language.FIGHT_NO_NPCS);
-                    }
-                    return;
-                 }
-                 ch =(personagem*) NPCs->primeiro->proximo;
-                 while(ch != NPCs->primeiro)
-                 {
-                    //TODO put enemies on groups, when enemy from enemy
-                    fight.insertNPC(ch, 0, briefInit);
-                    brief += briefInit + "|";
-                    numEnemies++;
-                    ch->actualFeats.defineMeleeWeapon(dc); //FIXME
-                    ch = (personagem*) ch->proximo; 
-                    SDL_Delay(1);
-                 }
-                 
-                 if(numEnemies > 0)
-                 {
-                    snd->addSoundEffect(false,"../data/sndfx/battleMode.ogg");
-                    engineMode = ENGINE_MODE_TURN_BATTLE;
-                    moveCircleX = PCs->personagemAtivo->posicaoLadoX;
-                    moveCircleY = PCs->personagemAtivo->posicaoLadoY;
-                    moveCircleZ = PCs->personagemAtivo->posicaoLadoZ;
-
-                    /* Put the PCs on group */
-                    ch =(personagem*) PCs->primeiro->proximo;
-                    while(ch != PCs->primeiro)
-                    {
-                       fight.insertPC(ch, 0, briefInit);
-                       brief += briefInit + "|";
-                       ch->actualFeats.defineMeleeWeapon(dc); //FIXME
-                       ch = (personagem*) ch->proximo; 
-                       SDL_Delay(1);
-                    }
-                    
-                    /* Define PC turn, cause the round of surprise attack! */
-                    fightStatus = FIGHT_PC_TURN;
-                    fullMovePCAction = false;
-                    canMove = true;
-                    //TODO Verify if weapon is ranged before do this
-                    attackFeat = FEAT_MELEE_ATTACK;
-                    canAttack = true;
-
-                    brief += language.FIGHT_SURPRISE_TURN;
-                 }
-                 else
-                 {
-                    brief = language.FIGHT_NO_NPCS;
-                 }
-                 if(shortCutsWindow != NULL)
-                 {
-                    briefTxt->setText(brief);
-                 }
+                 enterBattleMode();
               }
            }
            else if( object == (Tobjeto*) buttonMap)
@@ -892,13 +914,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
            } 
            else if(object == (Tobjeto*) buttonEndTurn)
            {
-              /* END TURN */
-              if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
-                  (fightStatus == FIGHT_PC_TURN)  && 
-                  ((SDL_GetTicks() - lastTurnTime) > 200) )
-              {
-                 fightStatus = FIGHT_CONTINUE;
-              }
+              endTurn(); 
            }
            else if(object == (Tobjeto*) buttonInventory)
            {
@@ -1382,6 +1398,19 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             return(0);
          }
 
+         /* Enter Attack Mode or End Turn */
+         if(keys[SDLK_SPACE])
+         {
+            if(engineMode != ENGINE_MODE_TURN_BATTLE)
+            {
+               enterBattleMode();
+            }
+            else
+            {
+               endTurn();
+            }
+         }
+
          /* Open Minimap */
          if(keys[SDLK_m]) 
          {
@@ -1681,9 +1710,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                walkStatus = ENGINE_WALK_KEYS;
             }
 
-            //TODO Verify if new Position is valid!
-            //if(!canWalk())
-            
             gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
                                        PCs->personagemAtivo->posicaoLadoY,
                                        PCs->personagemAtivo->posicaoLadoZ,
