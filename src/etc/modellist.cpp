@@ -195,6 +195,14 @@ void modelList::removeModel(model3d* mdl)
 }
 
 /********************************************************
+ *                       getFirst                       *
+ ********************************************************/
+model3d* modelList::getFirst()
+{
+   return(first);
+}
+
+/********************************************************
  *                  removeUnusedModels                  *
  ********************************************************/
 void modelList::removeUnusedModels()

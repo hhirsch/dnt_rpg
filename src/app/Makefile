@@ -12,7 +12,7 @@ OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o
 OBJSENGINE = $(ENDENGINE)conversa.o $(ENDENGINE)culling.o
 OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDENGINE)culling.o $(ENDMAPA)maproad.o
 OBJSPARTICLE = $(ENDPARTICLE)particle.o $(ENDPARTICLE)part1.o $(ENDPARTICLE)part2.o $(ENDPARTICLE)part3.o $(ENDPARTICLE)part4.o $(ENDPARTICLE)part5.o $(ENDPARTICLE)part6.o $(ENDPARTICLE)part7.o $(ENDPARTICLE)grass.o
-SUBSYSTEMS = iaEditor/ mapEditor/
+SUBSYSTEMS = mapEditor/ #iaEditor/
 
 OBJS = DlgEditor.o
 BIN = ../../bin/

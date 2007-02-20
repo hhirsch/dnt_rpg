@@ -99,6 +99,9 @@ class modelList
       /*! Remove All Unused Models */
       void removeUnusedModels();
 
+      /*! Get First MOdel on List (usually used on map editor application) */
+      model3d* getFirst();
+
    protected:
       model3d* first;      /**< First Model on List */
       int totalModels;     /**< Number of Models on List */

@@ -1638,9 +1638,19 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       /* Path Verification */
       if(Mbotao & SDL_BUTTON(3))
       {
-         PCs->personagemAtivo->pathFind.defineMap(actualMap);
+         GLfloat dist;
+         dist = sqrt( (xReal - moveCircleX) *
+                      (xReal - moveCircleX) +
+                      (zReal - moveCircleZ) *
+                      (zReal - moveCircleZ) );
+
+         /* Only Find Path if move is avaible */
+         if( (engineMode != ENGINE_MODE_TURN_BATTLE) || 
+             ( (canMove) && (dist <= 2*WALK_PER_MOVE_ACTION )) )
+         {
+            PCs->personagemAtivo->pathFind.defineMap(actualMap);
        
-         PCs->personagemAtivo->pathFind.findPath(
+            PCs->personagemAtivo->pathFind.findPath(
                                              PCs->personagemAtivo->posicaoLadoX,
                                              PCs->personagemAtivo->posicaoLadoZ,
                                              xReal, zReal, ANDAR, 
@@ -1651,6 +1661,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                              PCs->personagemAtivo->max[0],
                                              PCs->personagemAtivo->max[1],
                                              PCs->personagemAtivo->max[2]);
+         }
       }
 
       /* Verify if found path in aStar */
