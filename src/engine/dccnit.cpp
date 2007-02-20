@@ -1330,7 +1330,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                  if( (engineMode == ENGINE_MODE_TURN_BATTLE) && (canAttack) &&
                      (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
                  {
-                     //TODO verify in-range distances
                      string brief = "";
                      cursors->setActual(CURSOR_ATTACK);
                      if(shortCutsWindow)
@@ -1338,7 +1337,13 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                         ObjTxt->texto = pers->nome; 
                         shortCutsWindow->Desenhar(mouseX, mouseY);
                      }
-                     if(Mbotao & SDL_BUTTON(1))
+
+                     //TODO -> verify if weapon is ranged, so distance is other
+                     if( (Mbotao & SDL_BUTTON(1)) &&
+                         (rangeAction(PCs->personagemAtivo->posicaoLadoX, 
+                                      PCs->personagemAtivo->posicaoLadoZ,
+                                      pers->posicaoLadoX, pers->posicaoLadoZ,
+                                      WALK_PER_MOVE_ACTION) ) )
                      {
                         brief = PCs->personagemAtivo->nome + " " + 
                                 language.FIGHT_ATTACKS + " " + 
@@ -1357,11 +1362,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                         {
                             pers->psychoState = PSYCHO_HOSTILE;
                         }
+                        if(shortCutsWindow != NULL)
+                        {
+                           briefTxt->setText(brief);
+                        }
 
-                     }
-                     if(shortCutsWindow != NULL)
-                     {
-                        briefTxt->setText(brief);
                      }
                      pronto = 1;
                  }
