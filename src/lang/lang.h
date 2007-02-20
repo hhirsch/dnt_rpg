@@ -146,6 +146,9 @@ class lang
    static string RACE_DIR;
    static string CLASS_DIR;
 
+   /* Messages */
+   static string MSG_FAR_AWAY;
+
    /* Errors */
    static string ERROR_MAP_OUT;
    static string ERROR_INIT_SDL;

@@ -790,6 +790,26 @@ void ScreenDump(char *destFile, short W, short H)
 #endif
 
 /*********************************************************************
+ *                             rangeAction                           *
+ *********************************************************************/
+bool engine::rangeAction(GLfloat posX, GLfloat posZ, 
+                         GLfloat targX, GLfloat targZ,
+                         GLfloat range)
+{
+   if(! actionInRange(posX, posZ, targX, targZ, range) )
+   {
+      if(shortCutsWindow != NULL)
+      {
+         string txt = "|" + language.MSG_FAR_AWAY;
+         briefTxt->addText(txt);
+      }
+      return(false);
+   }
+   return(true);
+}
+
+
+/*********************************************************************
  *                          enterBattleMode                          *
  *********************************************************************/
 void engine::enterBattleMode()
@@ -1112,7 +1132,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                       ObjTxt->texto = quaux->objects[obj]->getName(); 
                       shortCutsWindow->Desenhar(mouseX,mouseY);
                    }
-                   if(Mbotao & SDL_BUTTON(1))
+                   if( (Mbotao & SDL_BUTTON(1)) && 
+                       (rangeAction(PCs->personagemAtivo->posicaoLadoX, 
+                                    PCs->personagemAtivo->posicaoLadoZ,
+                                    quaux->Xobjects[obj],
+                                    quaux->Zobjects[obj],
+                                    WALK_PER_MOVE_ACTION) ) )
                    {
                       /* Get Object */
                       lastMousePression = tempo;
@@ -1186,7 +1211,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                     ObjTxt->texto = language.OBJ_DOOR.c_str(); 
                     shortCutsWindow->Desenhar(mouseX, mouseY);
                  }
-                 if(Mbotao & SDL_BUTTON(1))
+                 if( (Mbotao & SDL_BUTTON(1)) && 
+                     (rangeAction(PCs->personagemAtivo->posicaoLadoX, 
+                                  PCs->personagemAtivo->posicaoLadoZ,
+                                  porta->x, porta->z,
+                                  WALK_PER_MOVE_ACTION) ) )
                  {
                     lastMousePression = tempo;
                     if(porta->status)
@@ -1367,7 +1396,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                curConection = &quaux->mapConection;
                cursors->setActual(CURSOR_MAPTRAVEL);
                pronto = 1;
-               if(Mbotao & SDL_BUTTON(1))
+               if( (Mbotao & SDL_BUTTON(1)) && 
+                   (rangeAction(PCs->personagemAtivo->posicaoLadoX, 
+                                PCs->personagemAtivo->posicaoLadoZ,
+                                xReal, zReal,
+                                WALK_PER_MOVE_ACTION) ) )
                {
                   LoadMap(quaux->mapConection.mapName, 0);
                   return(1);
@@ -1437,11 +1470,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             OpenCloseInventoryWindow(); 
          }
 
-      if(keys[SDLK_F1]) //Call Information Screen
-      {
-         InformationScreen();
-         redesenha = true;
-      }
+         if(keys[SDLK_F1]) //Call Information Screen
+         {
+            InformationScreen();
+            redesenha = true;
+         }
 
          /* Temporariamente, para visualizar o efeito de sangue */
          if(keys[SDLK_y])

@@ -83,6 +83,7 @@ delete                =  put camera on the floor
               | Character Movimentation |
               ===========================
 
+mouse right click = move character to position
 a          =  turn left                       (0-360°)
 d          =  turn right                      (0-360°)
 w          =  forward                         (0-?)
@@ -96,8 +97,10 @@ lctrl+tab  =  make active previous character
                     | Auxiliars Windows |
                     =====================
 
+F1     =  Display Informations
 m      =  Open MiniMap window
 n      =  Open ShortCut window
+i      =  Open Inventory window
 
    To  end  the  game,  simple  press  ESC key,  and  click on 
 button exit.

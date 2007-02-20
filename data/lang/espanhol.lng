@@ -59,7 +59,7 @@ Clase
 Descripción de la Clase
 Características de la Clase
 Dado de Vida
-Punntos de Habilidad
+Puntos de Habilidad
 1o Nível
 Otros Níveles
 Modificadores de la Clase
@@ -87,6 +87,7 @@ Falla.
 Falla Crítica!
 puntos.
 Puntos no suficientes!
+Demasiado lejos para la acción!
 ../data/skills/Ingles/
 ../data/feats/Ingles/
 ../data/alignment/Ingles/

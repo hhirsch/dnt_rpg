@@ -218,6 +218,14 @@ class engine
        ***************************************************************/
       void endTurn();
 
+      /*! 
+       **************************************************************
+       * Verify if the action is in range 
+       ***************************************************************/
+      bool rangeAction(GLfloat posX, GLfloat posZ, 
+                       GLfloat targX, GLfloat targZ,
+                       GLfloat range);
+
 
 
       void draw2DMode();

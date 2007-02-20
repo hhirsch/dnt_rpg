@@ -145,4 +145,14 @@ void normal (GLfloat x1, GLfloat y1, GLfloat z1,
              GLfloat x3, GLfloat y3, GLfloat z3, 
              GLfloat& nx, GLfloat &ny, GLfloat& nz);
 
+/*! Verify if the target position is in range for the action
+ * \param posX -> actor position X
+ * \param posZ -> actor position Z
+ * \param targX -> target position X
+ * \param targZ -> target position Z
+ * \param range -> range for the action */
+bool actionInRange(GLfloat posX, GLfloat posZ, 
+                   GLfloat targX, GLfloat targZ,
+                   GLfloat range);
+
 #endif

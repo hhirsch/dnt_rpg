@@ -27,10 +27,6 @@ mapRoad::mapRoad(int numX, int numZ)
       }
    }
 
-   typeOfRoad[5][5] = MAPROAD_DOWN_UP;
-   typeOfRoad[5][6] = MAPROAD_CURVE_DOWN_LEFT;
-   typeOfRoad[4][6] = MAPROAD_LEFT_RIGHT;
-   
    img = IMG_Load("../data/texturas/roads/dirt2.png");
    glGenTextures(1,&roadTexture);
    glBindTexture(GL_TEXTURE_2D, roadTexture);

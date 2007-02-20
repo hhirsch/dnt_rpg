@@ -120,6 +120,19 @@ int estaDentro(GLfloat min1[3], GLfloat max1[3],
 }
 
 /*********************************************************************
+ *                            actionInRange                          *
+ *********************************************************************/
+bool actionInRange(GLfloat posX, GLfloat posZ, 
+                   GLfloat targX, GLfloat targZ,
+                   GLfloat range)
+{
+   GLfloat dist = sqrt( (targX - posX) * (targX - posX) +
+                        (targZ - posZ) * (targZ - posZ) );
+   return( dist <= range);
+}
+
+
+/*********************************************************************
  *                Rotate and Translate a Bounding Box                *
  *********************************************************************/
 void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],

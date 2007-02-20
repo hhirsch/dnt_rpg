@@ -172,6 +172,9 @@ void lang::ReloadFile(int lng)
    getline(file,FEAT_POINTS);
    getline(file,FEAT_NO_MORE_POINTS);
 
+   /* Messages */
+   getline(file,MSG_FAR_AWAY);
+
    /* DIRECTORYS */
    getline(file, SKILLS_DIR);
    getline(file, FEATS_DIR);
@@ -304,6 +307,9 @@ void lang::ReloadFile(int lng)
    string lang::FEAT_CRITICAL_MISS;
    string lang::FEAT_POINTS;
    string lang::FEAT_NO_MORE_POINTS;
+
+   /* Message */
+   string lang::MSG_FAR_AWAY;
 
    /* DIRECTORYS */
    string lang::SKILLS_DIR;
