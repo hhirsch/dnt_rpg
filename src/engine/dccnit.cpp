@@ -2316,7 +2316,8 @@ void engine::OpenShortcutsWindow()
    FPS = shortCutsWindow->objects->InserirQuadroTexto(8,20,150/*100*/,35,2,
                                   language.WINDOW_SHORTCUTS_FPS.c_str());
    briefTxt = shortCutsWindow->objects->InsertRolBar(8,36,249,100,
-                                  language.WINDOW_SHORTCUTS_HELP.c_str());
+                                  language.WINDOW_SHORTCUTS_HELP.c_str(),
+                                  shortCutsWindow->cara);
    //briefTxt->fonte = FMINI;
    /*ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
    ObjTxt->Cores.corCont[1].B = 255;*/

@@ -80,7 +80,8 @@ class Tlista{
                             string text4,int (*proc)(SDL_Surface *screen, 
                             int texto));
 
-      rolBar* InsertRolBar(int xa,int ya,int xb,int yb,string txt);
+      rolBar* InsertRolBar(int xa,int ya,int xb,int yb,string txt,
+                           SDL_Surface* surface);
 
       Tobjeto* addMenu();
       Tobjeto* getMenu();

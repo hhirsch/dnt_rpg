@@ -18,7 +18,8 @@ alignWindow::alignWindow(aligns* alg, interface* inter)
 
    /* Align Description */
    textDesc = window->objects->InsertRolBar(5,38,262,180, 
-                                            actualAlign->description.c_str());
+                                            actualAlign->description.c_str(),
+                                            window->cara);
       
    /* Name and Selectors */
    buttonPrevious = window->objects->InserirBotao(5,19,19,37,

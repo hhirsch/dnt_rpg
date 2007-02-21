@@ -27,7 +27,8 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter)
    textDescTitle->tamFonte = 1;
    
    textDesc = window->objects->InsertRolBar(71,36,342,345,
-             (actualClass->citation + "||" + actualClass->description).c_str());
+             (actualClass->citation + "||" + actualClass->description).c_str(),
+             window->cara);
 
    /* Race Characteristics */
    textCharacTitle = window->objects->InserirQuadroTexto(343,20,613,35,1,
@@ -36,7 +37,8 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter)
    textCharacTitle->tamFonte = 1;
 
    textCharac = window->objects->InsertRolBar(343,36,613,345,
-                                              getCharacteristics().c_str());
+                                              getCharacteristics().c_str(),
+                                              window->cara);
 
    /* Name and Selectors */
    buttonPrevious = window->objects->InserirBotao(71,346,86,364,

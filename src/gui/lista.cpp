@@ -234,10 +234,11 @@ selTexto* Tlista::InserirSelTexto(int xa,int ya,int xb,int yb,
    return(novo);
 } 
 
-rolBar* Tlista::InsertRolBar(int xa,int ya,int xb,int yb,string txt)
+rolBar* Tlista::InsertRolBar(int xa,int ya,int xb,int yb,string txt,
+                             SDL_Surface* surface)
 {
    rolBar* novo;
-   novo = new rolBar(xa,ya,xb,yb,txt, this);
+   novo = new rolBar(xa,ya,xb,yb,txt, this, surface);
    InserirObj(novo);
    return(novo);
 }

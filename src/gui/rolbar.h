@@ -21,7 +21,8 @@ class rolBar: public Tobjeto
 {
    public:
       /*! Constructor */
-      rolBar(int xa, int ya, int xb, int yb, string txt, void* list);
+      rolBar(int xa, int ya, int xb, int yb, string txt, void* list, 
+             SDL_Surface* surface);
       /*! Destructor */
       ~rolBar();
 
@@ -41,9 +42,10 @@ class rolBar: public Tobjeto
 
       /*! Redraw the bar when scrolling text
        * \param surface -> SDL_Surface where will draw */
-      void redraw(SDL_Surface* surface);
+      void redraw();
 
    private:
+      SDL_Surface* wSurface;  /**< Window Surface */
       int x1,                 /**< X1 Coordinate */
           x2,                 /**< X2 Coordinate */
           y1,                 /**< Y1 Coordinate */

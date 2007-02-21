@@ -12,8 +12,10 @@
 /*********************************************************************
  *                            Constructor                            *
  *********************************************************************/
-rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list)
+rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
+               SDL_Surface* surface)
 {
+   wSurface = surface;
    lastActualized = SDL_GetTicks();
    if(!list)
    {
@@ -122,9 +124,9 @@ bool rolBar::eventGot(int type, Tobjeto* object)
 /*********************************************************************
  *                               redraw                              *
  *********************************************************************/
-void rolBar::redraw(SDL_Surface* surface)
+void rolBar::redraw()
 {
-   contorn->Desenhar(0,0,0,surface);
+   contorn->Desenhar(0,0,0,wSurface);
    if(maxLines <= totalLines)
    {
       position->y1 = (int) ((y1+2) + ((float)actualInit/(float)totalLines)*
@@ -132,13 +134,13 @@ void rolBar::redraw(SDL_Surface* surface)
       position->y2 = (int) ((y1+2) + ((float)(actualEnd-1)/(float)totalLines)*
                             (y2-28-y1));
    }
-   position->Desenhar(0,0,0,surface);   
-   text->Desenhar(0,0,0,surface);
+   position->Desenhar(0,0,0,wSurface);   
+   text->Desenhar(0,0,0,wSurface);
 
    /* Mantain the draw of button pressed */
    if(actualPressed)
    {
-      actualPressed->Desenhar(1, surface);
+      actualPressed->Desenhar(1, wSurface);
    }
 }
 
@@ -171,7 +173,18 @@ void rolBar::setText(string txt)
  *********************************************************************/
 void rolBar::addText(string txt)
 {
+   /* Add Text */
    fullText += txt;
+   /* Set the new text */
    setText(fullText);
+   /* Put the rolling bar to the end */
+   actualEnd = totalLines;
+   actualInit = (actualEnd - maxLines) +1;
+   if(actualInit < 0)
+   {
+      actualInit = 0;
+   }
+   text->texto = copyLines(fullText, actualInit,actualEnd);
+   redraw();
 }
 
