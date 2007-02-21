@@ -1713,8 +1713,14 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
          /* Only Find Path if move is avaible */
          if( (engineMode != ENGINE_MODE_TURN_BATTLE) || 
-             ( (canMove) && (dist <= 2*WALK_PER_MOVE_ACTION )) )
+             ( (canMove) && (dist <= WALK_PER_MOVE_ACTION)) ||
+             ( (canMove) && (canAttack) && (dist <= 2*WALK_PER_MOVE_ACTION )) )
          {
+            if(dist > WALK_PER_MOVE_ACTION)
+            {
+               /* Disable attack move on round if move more than one move act */
+               canAttack = false;
+            }
             PCs->personagemAtivo->pathFind.defineMap(actualMap);
        
             PCs->personagemAtivo->pathFind.findPath(
