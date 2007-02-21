@@ -292,6 +292,8 @@ class engine
 
       int engineMode;              /**< Current Mode of the Engine */
 
+      bool showRange;              /**< If show range or not (CTRL to enable) */
+
       GLfloat moveCircleX,         /**< The Battle Move Circle X Coordinate */ 
               moveCircleY,         /**< The Battle Move Circle Y Coordinate */
               moveCircleZ;         /**< The Battle Move Circle Z Coordinate */
@@ -299,7 +301,8 @@ class engine
 
       /* Combat Things */
       GLuint  normalMoveCircle,    /**< One Movimentation Circle */
-              fullMoveCircle;      /**< Full Round Movimentation Circle */
+              fullMoveCircle,      /**< Full Round Movimentation Circle */
+              rangeCircle;         /**< Range Circle */
 
       fightSystem fight;           /**< The Engine fight System */
 

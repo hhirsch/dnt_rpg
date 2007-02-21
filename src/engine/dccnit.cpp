@@ -79,6 +79,8 @@ engine::engine()
    mouseX = 0;
    mouseY = 0;
 
+   showRange = false;
+
    particleSystem = new partSystem();
 
    hour = 9.0;
@@ -115,6 +117,7 @@ engine::~engine()
    glDeleteTextures(1, &normalMoveCircle);
    glDeleteTextures(1, &fullMoveCircle);
    glDeleteTextures(1, &destinyImage);
+   glDeleteTextures(1, &rangeCircle);
 
    /* Clear Characters */
    if(NPCs)
@@ -751,6 +754,25 @@ void engine::Init(SDL_Surface *screen)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
    SDL_FreeSurface(img);
+
+   /* range circle */
+   img = IMG_Load("../data/texturas/walk/range.png");
+   if(!img)
+   {
+      printf("Error: can't Load Texure: walk/range.png\n");
+   }
+
+   glGenTextures(1, &rangeCircle);
+
+   glBindTexture(GL_TEXTURE_2D, rangeCircle);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+
 
    /* Move Destiny */
    img = IMG_Load("../data/texturas/walk/destino.png");
@@ -1449,6 +1471,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             }
          }
 
+         /* Enable / Disable The Range Draw */
+         if(keys[SDLK_r])
+         {
+            showRange = !showRange;
+         }
+
          /* Open Minimap */
          if(keys[SDLK_m]) 
          {
@@ -1978,6 +2006,42 @@ void engine::Draw()
          }
          per = (personagem*) per->proximo;
       }
+   }
+
+   if( showRange)
+   {
+       GLfloat lx = PCs->personagemAtivo->posicaoLadoX;
+       GLfloat lz = PCs->personagemAtivo->posicaoLadoZ;
+       glDisable(GL_LIGHTING);
+       /* Draw Movimentation Circles */
+       glColor4f(1,1,1,1);
+       glEnable(GL_BLEND);
+       glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+       /* Range Circle */
+       glPushMatrix();
+         glEnable(GL_TEXTURE_2D);
+         glBindTexture(GL_TEXTURE_2D, rangeCircle );
+         glBegin(GL_QUADS);
+            glTexCoord2f(0,0);
+            glVertex3f(lx-WALK_PER_MOVE_ACTION, 0.08, 
+                       lz-WALK_PER_MOVE_ACTION);
+            glTexCoord2f(0,1);
+            glVertex3f(lx-WALK_PER_MOVE_ACTION, 0.08, 
+                       lz+WALK_PER_MOVE_ACTION);
+            glTexCoord2f(1,1);
+            glVertex3f(lx+WALK_PER_MOVE_ACTION, 0.08, 
+                       lz+WALK_PER_MOVE_ACTION);
+            glTexCoord2f(1,0);
+            glVertex3f(lx+WALK_PER_MOVE_ACTION, 0.08, 
+                       lz-WALK_PER_MOVE_ACTION);
+         glEnd();
+         glDisable(GL_TEXTURE_2D);
+      glPopMatrix();
+
+      glDisable(GL_BLEND);
+      glEnable(GL_LIGHTING);
+
    }
 
    /* Draw Combat Mode Things */
