@@ -173,6 +173,32 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, object* obj)
 }
 
 /********************************************************************
+ *                          removeObject                            *
+ ********************************************************************/
+void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
+{
+   int Xaux, Zaux, o;
+   for(Xaux = 0; Xaux < x; Xaux++)
+   {
+     for(Zaux = 0; Zaux < z; Zaux++)
+     {
+        for(o=0;o<MAXOBJETOS;o++)
+        {
+           if( (MapSquares[Xaux][Zaux]->objects[o] != NULL) && 
+               (MapSquares[Xaux][Zaux]->Xobjects[o] == xObj) &&
+               (MapSquares[Xaux][Zaux]->Zobjects[o] == zObj) )
+           {
+              if(MapSquares[Xaux][Zaux]->objects[o]->getName() == fileName)
+              {
+                 MapSquares[Xaux][Zaux]->objects[o] = NULL;
+              }
+           }
+        }
+     }
+   }
+}
+
+/********************************************************************
  *                            drawQuad                              *
  ********************************************************************/
 void drawQuad(GLfloat x1, GLfloat z1,

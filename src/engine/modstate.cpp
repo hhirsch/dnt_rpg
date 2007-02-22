@@ -7,7 +7,7 @@
 /************************************************************
  *                       Constructor                        *
  ************************************************************/
-mapObjectModAction::mapObjectModAction(int act, mapObject* obj, string mapFile,
+mapObjectModAction::mapObjectModAction(int act, string obj, string mapFile,
                                        GLfloat xPos, GLfloat zPos)
 {
    next = NULL;
@@ -29,7 +29,7 @@ mapObjectModAction::~mapObjectModAction()
 /************************************************************
  *                         getTarget                        *
  ************************************************************/
-mapObject* mapObjectModAction::getTarget()
+string mapObjectModAction::getTarget()
 {
    return(target);
 }
@@ -145,7 +145,7 @@ bool modState::saveState(string file)
       tmpMobj->getPosition(x,z);
       printf("Map: %s, Action: %d\n\tobject: %s\n\tx:%.3f z:%.3f\n",
              tmpMobj->getMapFileName().c_str(), tmpMobj->getAction(),
-             tmpMobj->getTarget()->getName().c_str(), x, z);
+             tmpMobj->getTarget().c_str(), x, z);
       tmpMobj = tmpMobj->getNext();
    }
 
@@ -155,7 +155,7 @@ bool modState::saveState(string file)
 /************************************************************
  *                    mapObjectAddAction                    *
  ************************************************************/
-void modState::mapObjectAddAction(int action, mapObject* target, 
+void modState::mapObjectAddAction(int action, string target, 
                                   string mapFileName, 
                                   GLfloat xPos, GLfloat zPos)
 {
@@ -191,7 +191,7 @@ void modState::mapObjectAddAction(int action, mapObject* target,
 /************************************************************
  *                    mapObjectAddAction                    *
  ************************************************************/
-bool modState::removeInverseObjectAction(int action, mapObject* target, 
+bool modState::removeInverseObjectAction(int action, string target, 
                                          string mapFileName, 
                                          GLfloat xPos, GLfloat zPos)
 {
@@ -228,4 +228,39 @@ bool modState::removeInverseObjectAction(int action, mapObject* target,
    }
    return(false);
 }
+
+/************************************************************
+ *                    doMapModifications                    *
+ ************************************************************/
+void modState::doMapModifications(Map* actualMap)
+{
+   int i;
+   GLfloat x=0, z=0;
+   mapObjectModAction* tmpMobj = mapObjectsList;
+   for(i = 0; i < totalMapObjects; i++)
+   {
+      /* If the information is from the loaded map, apply it! */
+      if(tmpMobj->getMapFileName() == actualMap->name)
+      {
+         tmpMobj->getPosition(x,z);
+         if(tmpMobj->getAction() == MODSTATE_ACTION_MAP_REMOVE)
+         {
+            actualMap->removeObject(x, z, tmpMobj->getTarget());
+         }
+         else if(tmpMobj->getAction() == MODSTATE_ACTION_MAP_ADD)
+         {
+            //TODO
+         }
+         else
+         {
+            printf("Unknow saved action: %d, at %d element!\n", 
+                   tmpMobj->getAction(), i);
+         }
+      }
+      
+      tmpMobj = tmpMobj->getNext();
+   }
+
+}
+
 

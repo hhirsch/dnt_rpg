@@ -194,6 +194,14 @@ class Map
        *  \param obj -> pointer to map Object
        ***************************************************************/
       void removeObject(GLfloat xObj, GLfloat zObj, object* obj);
+      /*!
+       ***************************************************************
+       *  Remove Object from Map
+       *  \param xObj -> x Object Coordinate
+       *  \param zObj -> z Object Coordinate
+       *  \param fileName -> fileName of the object to remove
+       ***************************************************************/
+      void removeObject(GLfloat xObj, GLfloat zObj, string fileName);
 
       lMapObject* objects;  /**< Map's objects list */
       mapFog fog;           /**< Map's Fog */

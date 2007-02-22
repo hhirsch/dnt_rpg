@@ -6,7 +6,7 @@
  *************************************************************************/
 
 #include "../classes/inventory.h"
-#include "../map/mapobjeto.h"
+#include "../map/map.h"
 
 #define MODSTATE_ACTION_MAP_REMOVE  0  /**< Removed object from map */
 #define MODSTATE_ACTION_MAP_ADD     1  /**< Added object to the map */
@@ -21,14 +21,14 @@ class mapObjectModAction
        * \param mapFile - name of the map file where action occurs 
        * \param xPos -> x position
        * \param zPos -> z position */
-      mapObjectModAction(int act, mapObject* obj, string mapFile,
+      mapObjectModAction(int act, string obj, string mapFile,
                          GLfloat xPos, GLfloat zPos);
       /*! Destructor */
       ~mapObjectModAction();
 
       /*! Get the target of the action
        * \return pointer to object of the action */
-      mapObject* getTarget();
+      string getTarget();
       /*! Get the action type
        * \return number of the action type*/
       int getAction();
@@ -60,7 +60,7 @@ class mapObjectModAction
       int action;               /**< type of the action */
       GLfloat x;                /**< X position on map */
       GLfloat z;                /**< Z position on map */
-      mapObject* target;           /**< object target of the action */
+      string target;           /**< object target of the action */
       mapObjectModAction* next;     /**< next action on list */
       mapObjectModAction* previous; /**< previous action on list */
 };
@@ -89,8 +89,14 @@ class modState
        * \param mapFileName - name of the map file where action occurs
        * \param xPos -> x position
        * \param zPos -> z position*/
-      void mapObjectAddAction(int action, mapObject* target, string mapFileName,
+      void mapObjectAddAction(int action, string target, string mapFileName,
                               GLfloat xPos, GLfloat zPos);
+
+      /*! Do All saved modifications to the map (those that are for them,
+       * usually when you return to the map and want it to appears exactly 
+       * like when you left it). 
+       * \param actualMap -> pointer to actual opened map */
+      void doMapModifications(Map* actualMap);
 
    protected:
       /*! remove inverse action, if it exists in list. 
@@ -100,7 +106,7 @@ class modState
        * \param xPos -> x position
        * \param zPos -> z position
        * \return true if the inverse action is found and removed. */
-      bool removeInverseObjectAction(int action, mapObject* target, 
+      bool removeInverseObjectAction(int action, string target, 
                                      string mapFileName, GLfloat xPos, 
                                      GLfloat zPos);
       

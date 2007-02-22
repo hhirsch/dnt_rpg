@@ -418,19 +418,29 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    PCs->personagemAtivo->ocupaQuad = actualMap->squareInic;
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
-                 language.LOAD_DONE.c_str(),
+                 "Loading Changes...",
                  proj, modl, viewPort);
 
-   /* Free Loading Textures */
-   SDL_FreeSurface(img);
-   glDeleteTextures(1,&texturaCarga);
-   glDeleteTextures(1,&texturaTexto);
+   /* Do Modifications */
+   modifState.doMapModifications(actualMap);
 
    /* Change Music, if needed */
    if(!actualMap->music.empty())
    {
       snd->loadMusic(actualMap->music);
    }
+
+   /* Done */
+   atualizaCarga(img,&texturaTexto,texturaCarga,
+                 language.LOAD_DONE.c_str(),
+                 proj, modl, viewPort);
+
+
+   /* Free Loading Textures */
+   SDL_FreeSurface(img);
+   glDeleteTextures(1,&texturaCarga);
+   glDeleteTextures(1,&texturaTexto);
+
 
    return(1);
 }
@@ -1210,7 +1220,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                          /* Log State to the modState */
                          modifState.mapObjectAddAction(
                                                  MODSTATE_ACTION_MAP_REMOVE,
-                                                 quaux->objects[obj],
+                                                 quaux->objects[obj]->getName(),
                                                  actualMap->name,
                                                  quaux->Xobjects[obj],
                                                  quaux->Zobjects[obj]);
