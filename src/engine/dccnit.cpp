@@ -1523,6 +1523,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             showRange = !showRange;
          }
 
+         /* Print All Models on List */
+         if(keys[SDLK_F2])
+         {
+            models->printAll();
+         }
+
          /* Open Minimap */
          if(keys[SDLK_m]) 
          {

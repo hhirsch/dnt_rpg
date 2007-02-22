@@ -102,6 +102,9 @@ class modelList
       /*! Get First MOdel on List (usually used on map editor application) */
       model3d* getFirst();
 
+      /*! Print all Models with printf for debug! */
+      void printAll();
+
    protected:
       model3d* first;      /**< First Model on List */
       int totalModels;     /**< Number of Models on List */

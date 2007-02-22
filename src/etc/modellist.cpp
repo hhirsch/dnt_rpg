@@ -209,23 +209,44 @@ void modelList::removeUnusedModels()
 {
    model3d* mdl = first;
    model3d* oth;
-   while( (mdl->next != first) )
-   {
-      oth = mdl;
-      mdl = mdl->next;
-      if(oth->getUsedFlag() <= 0)
-      {
-         removeModel(oth);
-      }
-   }
-   /*! verify first, since it will not be verified before when
-    *  size of the list is 1 */
+
    if(first)
    {
+      while( (mdl->next != first) )
+      {
+         oth = mdl;
+         mdl = mdl->next;
+         if(oth->getUsedFlag() <= 0)
+         {
+            removeModel(oth);
+         }
+      }
       if(first->getUsedFlag() <= 0)
       {
          removeModel(first);
       }
    }
+}
+
+/********************************************************
+ *                       printAll                       *
+ ********************************************************/
+void modelList::printAll()
+{
+   model3d* mdl = first;
+   printf("*****************************************************\n");
+   printf("*              Current Models on List               *\n");
+   if(first)
+   {
+      printf("* Obj: %s\n*\tUsed for: %d\n", first->getFileName().c_str(), 
+                                          first->getUsedFlag());
+      while( (mdl->next != first) )
+      {
+         printf("* Obj: %s\n*\tUsed for: %d\n", mdl->getFileName().c_str(),
+                                             mdl->getUsedFlag());
+         mdl = mdl->next;
+      }
+   }
+   printf("*****************************************************\n\n");
 }
 
