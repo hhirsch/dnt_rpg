@@ -25,7 +25,7 @@ OBJSLANG = $(ENDLANG)lang.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o $(ENDPART)grass.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)glm.o $(ENDETC)texture.o $(ENDETC)modellist.o
-OBJS = alignwindow.o attwindow.o camera.o classwindow.o collision.o conversa.o culling.o cursor.o dccnit.o initial.o inventwindow.o options.o personagens.o racewindow.o skillwindow.o sky.o sun.o teste.o util.o
+OBJS = alignwindow.o attwindow.o camera.o classwindow.o collision.o conversa.o culling.o cursor.o dccnit.o initial.o inventwindow.o modstate.o options.o personagens.o racewindow.o skillwindow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
@@ -86,6 +86,11 @@ initial.o: initial.h initial.cpp
 inventwindow.o: inventwindow.h inventwindow.cpp
 	@printf "Making inventwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) inventwindow.cpp -o inventwindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+modstate.o: modstate.h modstate.cpp
+	@printf "Making modstate.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) modstate.cpp -o modstate.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 options.o: options.h options.cpp

@@ -6,34 +6,36 @@
 #ifndef _dccnit_h
 #define _dccnit_h
 
-#include "../gui/farso.h"
-#include "../map/map.h"
-#include "cursor.h"
-#include "personagens.h"
-#include "sun.h"
-#include "sky.h"
-#include "initial.h"
-#include "options.h"
-#include "skillwindow.h"
-#include "alignwindow.h"
-#include "racewindow.h"
-#include "attwindow.h"
-#include "classwindow.h"
-#include "inventwindow.h"
-#include "camera.h"
-#include "util.h"
-#include "collision.h"
 #include "../classes/skills.h"
 #include "../classes/feats.h"
 #include "../classes/align.h"
 #include "../classes/race.h"
 #include "../classes/classes.h"
-#include "../sound/sound.h"
-#include "../lang/lang.h"
-#include "../particle/partSystem.h"
 #include "../fight/fightSystem.h"
-
+#include "../gui/farso.h"
+#include "../lang/lang.h"
+#include "../map/map.h"
+#include "../particle/partSystem.h"
 #include "../particle/wave.h"
+#include "../sound/sound.h"
+
+#include "alignwindow.h"
+#include "attwindow.h"
+#include "camera.h"
+#include "classwindow.h"
+#include "collision.h"
+#include "cursor.h"
+#include "initial.h"
+#include "inventwindow.h"
+#include "modstate.h"
+#include "options.h"
+#include "personagens.h"
+#include "racewindow.h"
+#include "skillwindow.h"
+#include "sun.h"
+#include "sky.h"
+#include "util.h"
+
 #ifdef REDE
   #include "../net/client.h"
 #endif
@@ -143,6 +145,18 @@ class engine
        * Load/UnLoad Inventory Window
        ***************************************************************/
       void OpenCloseInventoryWindow();
+      
+      /*!
+       *************************************************************** 
+       * Load Function (and window)
+       ***************************************************************/
+      void load();
+      
+      /*!
+       *************************************************************** 
+       * Save Function (and window)
+       ***************************************************************/
+      void save();
 
 
    private:
@@ -234,6 +248,8 @@ class engine
       Map* actualMap;              /**< Actual Engine Map */
       cursor* cursors;             /**< Utilized mouse cursors */
 
+      modState modifState;         /**< Current modification state */
+
       int walkStatus;              /**< Engine Walk Status */
       GLuint destinyImage;         /**< Move Destiny Image */
       GLfloat destinyVariation;    /**< Variation on Destiny Draw */
@@ -255,7 +271,9 @@ class engine
       janela* miniMapWindow;       /**< MiniMap Window */
       botao* botPerMiniMap;        /**< Character MiniMap Button */
 
-      botao* buttonMenu;           /**< Butto to call Menu */
+      botao* buttonMenu;           /**< Button to call Menu */
+      botao* buttonSave;           /**< Button to call Save Function */
+      botao* buttonLoad;           /**< Button to call Load Function */
       oneTabButton* buttonAttackMode;/**< Button to Enter on Attack Mode */
       oneTabButton* buttonMap;     /**< Call MiniMap Button */
       oneTabButton* buttonInventory; /**< Call Inventory Button */

@@ -190,6 +190,24 @@ void engine::InformationScreen()
 }
 
 /*********************************************************************
+ *                                 load                              *
+ *********************************************************************/
+void engine::load()
+{
+   //TODO
+   modifState.loadState("");
+}
+
+/*********************************************************************
+ *                                 save                              *
+ *********************************************************************/
+void engine::save()
+{
+   //TODO
+   modifState.saveState("");
+}
+
+/*********************************************************************
  *                         Load Map to Engine                        *
  *********************************************************************/
 int engine::LoadMap(string arqMapa, int RecarregaPCs)
@@ -973,6 +991,14 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
          {
             exitEngine = 1;
          }
+         else if(object == (Tobjeto*) buttonSave)
+         {
+            save();
+         }
+         else if(object == (Tobjeto*) buttonLoad)
+         {
+            load();
+         }
          break;
        }
    }
@@ -1180,10 +1206,20 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                          briefTxt->addText(quaux->objects[obj]->getName()+ 
                                            "taken."); 
                          shortCutsWindow->Desenhar(mouseX,mouseY);
+
+                         /* Log State to the modState */
+                         modifState.mapObjectAddAction(
+                                                 MODSTATE_ACTION_MAP_REMOVE,
+                                                 quaux->objects[obj],
+                                                 actualMap->name,
+                                                 quaux->Xobjects[obj],
+                                                 quaux->Zobjects[obj]);
+                         
                          /* Remove object from Map */
                          actualMap->removeObject(quaux->Xobjects[obj],
                                                  quaux->Zobjects[obj],
                                                  quaux->objects[obj]);
+                         
                          if(inventoryWindow)
                          {
                             inventoryWindow->reDraw();
@@ -2388,7 +2424,8 @@ void engine::OpenShortcutsWindow()
    ObjTxt = shortCutsWindow->objects->InserirQuadroTexto(151,20,249,35,2,
                                  language.OBJ_NOTHING.c_str());
 
-   shortCutsWindow->objects->InserirBotao(8,102,76,120,shortCutsWindow->Cores.corBot.R, 
+   buttonSave = shortCutsWindow->objects->InserirBotao(8,102,76,120,
+                                 shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
                                  shortCutsWindow->Cores.corBot.B,
                                  language.INITIAL_SAVE.c_str(),
@@ -2399,7 +2436,7 @@ void engine::OpenShortcutsWindow()
                                  shortCutsWindow->Cores.corBot.B,
                                  "Menu",
                                  0,NULL);
-   shortCutsWindow->objects->InserirBotao(141,102,209,120,
+   buttonLoad = shortCutsWindow->objects->InserirBotao(141,102,209,120,
                                  shortCutsWindow->Cores.corBot.R, 
                                  shortCutsWindow->Cores.corBot.G,
                                  shortCutsWindow->Cores.corBot.B,
