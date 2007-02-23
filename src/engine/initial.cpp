@@ -115,10 +115,12 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
                  else if(object == (Tobjeto*) buttonLoad)
                  {
                     result = LOAD_GAME;
+                    done = true;
                  }
                  else if(object == (Tobjeto*) buttonSave)
                  {
                     result = SAVE_GAME;
+                    done = true;
                  }
                  else if(object == (Tobjeto*) buttonExit)
                  {

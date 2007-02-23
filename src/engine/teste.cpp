@@ -48,7 +48,17 @@ int main(int argc, char **argv)
              Engine->LoadMap("../data/mapas/poc2.map",1);
           }
        }
+       
+       if( (result == SAVE_GAME) && (estado == IN_GAME))
+       {
+          Engine->save();
+       }
 
+       if(result == LOAD_GAME)
+       {
+          Engine->load();
+       }
+       
        if(result == OPTIONS)
        {
           Engine->OptionsScreen(&tituloID);
