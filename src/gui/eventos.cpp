@@ -445,18 +445,28 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     else
     if ((foco == FOCO_TABBUTTON))
     {
+       int actType = 0;
        tabButton* tb = (tabButton*) objAtivo;
        Tobjeto* object = tb->verifyPosition(x,y,Mbotao,
                                             ljan->janelaAtiva->x1,
                                             ljan->janelaAtiva->y1,
-                                            ljan->janelaAtiva->cara);
+                                            ljan->janelaAtiva->cara,
+                                            actType);
        ljan->janelaAtiva->AtualizaCara();
        if( object != NULL )
        {
             //selectObject = &object;
-            foco = FOCO_JOGO;
-            *eventInfo = TABBOTAOPRESSIONADO;
-            return(object);
+            if(actType == TABBUTTON_PRESSED)
+            {
+               foco = FOCO_JOGO;
+               *eventInfo = TABBOTAOPRESSIONADO;
+               return(object);
+            }
+            else if(actType == TABBUTTON_ON_PRESS)
+            {
+               *eventInfo = TABBOTAOEMPRESSAO;
+               return(object);
+            }  
        }
        else
        {

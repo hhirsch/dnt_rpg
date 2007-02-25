@@ -355,7 +355,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
    object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
    switch(eventInfo)
    {
-      case TABBOTAOPRESSIONADO:
+      case TABBOTAOEMPRESSAO:
       {
          /*  Navigation Buttons  */
          if(object == (Tobjeto*) upButton)
@@ -428,9 +428,12 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             gameCamera.sumD(1);
             return(GUI_IO_NEW_POSITION);
          }
-
+      break;
+      
+      case TABBOTAOPRESSIONADO:
+      
          /*  Terrain Buttons  */
-         else if(object == (Tobjeto*) terrainUpButton)
+         if(object == (Tobjeto*) terrainUpButton)
          {
             state = GUI_IO_STATE_TERRAIN;
             tool = TOOL_TERRAIN_UP;

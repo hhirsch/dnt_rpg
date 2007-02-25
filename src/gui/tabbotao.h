@@ -4,7 +4,10 @@
 #include "figura.h"
 #include "cores.h"
 
-#define MAX_TABBUTTONS 20 /**< Max Buttons per table of buttons */
+#define MAX_TABBUTTONS      20 /**< Max Buttons per table of buttons */
+#define TABBUTTON_NONE       0 /**< No Action */
+#define TABBUTTON_ON_PRESS  40 /**< Some button pressing */
+#define TABBUTTON_PRESSED   41 /**< Some Button pressed */
 
 /*! oneTabButton is a class to define what is a button on a table of buttons */
 class oneTabButton :Tobjeto
@@ -57,9 +60,11 @@ class tabButton: public figura
        * \param Xjan -> window X coordinate
        * \param Yjan -> window Y coordinate
        * \param screen -> surface where will draw
+       * \param actionType -> ID of action done
        * \return Pointer to the button pressed.*/
       Tobjeto* verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
-                              int Xjan, int Yjan, SDL_Surface *screen);
+                              int Xjan, int Yjan, SDL_Surface *screen,
+                              int& actionType);
 
    private:
       int numButtons;                       /**< Number of active buttons */

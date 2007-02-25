@@ -49,9 +49,11 @@ void tabButton::draw(int mouseX, int mouseY,
 }
 
 Tobjeto* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
-                               int Xjan, int Yjan, SDL_Surface *screen)
+                                   int Xjan, int Yjan, SDL_Surface *screen,
+                                   int &actionType)
 {
    int i;
+   actionType = TABBUTTON_NONE;
    draw(mouseX, mouseY, Xjan, Yjan, screen);
    for(i=0;i<numButtons;i++)
    {
@@ -62,12 +64,15 @@ Tobjeto* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
          if(Mbuttons & SDL_BUTTON(1))
          {
             /* Only return when released the mouse button! */
+            actionType = TABBUTTON_ON_PRESS;
             pressed = true;  
+            return((Tobjeto*) &Buttons[i]);
          }
          else
          {
             if(pressed)
             {
+               actionType = TABBUTTON_PRESSED;
                pressed = false;
                return((Tobjeto*) &Buttons[i]);
             }
