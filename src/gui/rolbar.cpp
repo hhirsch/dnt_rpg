@@ -178,7 +178,7 @@ void rolBar::addText(string txt)
    /* Set the new text */
    setText(fullText);
    /* Put the rolling bar to the end */
-   actualEnd = totalLines;
+   actualEnd = totalLines+1;
    actualInit = (actualEnd - maxLines) +1;
    if(actualInit < 0)
    {
