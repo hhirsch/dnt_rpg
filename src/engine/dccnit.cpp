@@ -465,6 +465,45 @@ void engine::draw3DMode()
 }
 
 /*********************************************************************
+ *                             SplashScreen                          *
+ *********************************************************************/
+void engine::SplashScreen()
+{
+   GLuint id;
+   Uint32 mButton = 0;
+   int x,y;
+   Uint32 time = SDL_GetTicks();
+   AtualizaFrustum(visibleMatrix,proj,modl);
+   SDL_Surface* img = IMG_Load("../data/texturas/inicio1.png"); 
+   glDisable(GL_LIGHTING);
+   carregaTexturaRGBA(img,&id);
+   SDL_FreeSurface(img);
+   AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
+   glFlush();
+   SDL_GL_SwapBuffers();
+
+   /* Wait until Mouse Button pressed or time passed */
+   while( (!(mButton & SDL_BUTTON(1))) && 
+          ( (SDL_GetTicks() - time) <= 5000) )
+   {
+      SDL_PumpEvents();
+      mButton = SDL_GetMouseState(&x,&y);
+      SDL_Delay(50);
+   }
+
+   /* Wait Mouse Button release */
+   while(mButton & SDL_BUTTON(1))
+   {
+      SDL_PumpEvents();
+      mButton = SDL_GetMouseState(&x,&y);
+      SDL_Delay(50);
+   }
+
+   glEnable(GL_LIGHTING);
+   glDeleteTextures(1,&id);
+}
+
+/*********************************************************************
  *                       Call Initial Game Menu                      *
  *********************************************************************/
 int engine::InitialScreen(int Status, GLuint* idTextura, bool reloadMusic)

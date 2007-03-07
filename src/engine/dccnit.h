@@ -97,6 +97,12 @@ class engine
       int LoadMap(string arqMapa, int RecarregaPCs);
 
       /*!
+       ****************************************************************
+       * Load Splash Screen
+       ****************************************************************/
+       void SplashScreen();
+
+      /*!
        **************************************************************** 
        * Load Initial Menu
        * \param Status -> ON_INIT or IN_GAME

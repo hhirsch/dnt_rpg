@@ -32,6 +32,10 @@ int main(int argc, char **argv)
    Engine->Init(screen);
  
    GLuint tituloID;
+   /* Call Splash Screen  */
+   Engine->SplashScreen();
+
+   /* Call Initial Screen */
    int result = Engine->InitialScreen(ON_INIT,&tituloID,true);
    int estado = ON_INIT;
    int charCreation = 0;
