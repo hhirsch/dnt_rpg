@@ -390,7 +390,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                }
             }
 
-            /* if no more object, done */
+            /* if no more objects, done */
             if(!activeObject)
             {
                state = INVENTORY_STATE_NONE;
@@ -403,7 +403,6 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
       
       case MENUSELECIONADO:
       {
-         //TODO get return of menu
          state = INVENTORY_STATE_NONE;
          switch(objectMenu->itemAtual)
          {
@@ -421,6 +420,15 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   inventories[0]->removeFromPlace(objWhere);
                }
                state = INVENTORY_STATE_OBJECT;
+            break;
+            case 3: /* Use */
+               //TODO
+            break;
+            case 4: /* Sell */
+               //TODO
+            break;
+            case 5: /* Drop */
+               //TODO
             break;
          }
          window->objects->removeMenu();

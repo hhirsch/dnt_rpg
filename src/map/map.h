@@ -203,6 +203,14 @@ class Map
        ***************************************************************/
       void removeObject(GLfloat xObj, GLfloat zObj, string fileName);
 
+      /*! 
+       **************************************************************
+       *   Insert Object on Map
+       **************************************************************/
+      void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
+                   mapObject* obj, int qx, int qz);
+
+
       lMapObject* objects;  /**< Map's objects list */
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */

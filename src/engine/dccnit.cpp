@@ -298,7 +298,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       if(!(arq = fopen(actualMap->npcFileName.c_str(),"r")))
       {
          printf("Ouch, can't load NPC's file: %s.\n",
-                                                 actualMap->npcFileName.c_str());
+                                              actualMap->npcFileName.c_str());
       }
       else
       {
@@ -1014,6 +1014,9 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
    }
 }
 
+/*********************************************************************
+ *                              hourToTxt                            *
+ *********************************************************************/
 void engine::hourToTxt()
 {
    char htmp[15];
