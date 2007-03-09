@@ -562,8 +562,6 @@ int engine::InitialScreen(int Status, GLuint idTextura, bool reloadMusic)
    /* Executes Initial Screen */
    AtualizaFrustum(visibleMatrix,proj,modl);
    initialScreen* inic = new(initialScreen);
-   glDisable(GL_LIGHTING);
-   fadeInTexture(idTextura);
    int result = inic->Execute(Status, proj, modl, viewPort, idTextura, snd);
    delete(inic);
    return(result);

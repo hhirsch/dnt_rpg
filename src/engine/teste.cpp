@@ -41,6 +41,8 @@ int main(int argc, char **argv)
    SDL_FreeSurface(img);
 
    /* Call Initial Screen */
+   glDisable(GL_LIGHTING);
+   Engine->fadeInTexture(tituloID);
    int result = Engine->InitialScreen(ON_INIT,tituloID,true);
    int estado = ON_INIT;
    int charCreation = 0;
@@ -54,6 +56,8 @@ int main(int argc, char **argv)
           charCreation = Engine->CharacterScreen(tituloID);
           if( charCreation == CHAR_CONFIRM)
           {
+             glDisable(GL_LIGHTING);
+             Engine->fadeOutTexture(tituloID);
              Engine->LoadMap("../data/mapas/poc2.map",1);
           }
        }
@@ -80,6 +84,11 @@ int main(int argc, char **argv)
       if( (result == CONTINUE_GAME) || 
           ( ((result == NEW_GAME)) && (charCreation == CHAR_CONFIRM) ) ) 
       {
+         if(result == CONTINUE_GAME)
+         {
+            glDisable(GL_LIGHTING);
+            Engine->fadeOutTexture(tituloID);
+         }
          if(Engine->Run(screen) == 1)
          {
             estado = IN_GAME;
@@ -89,6 +98,8 @@ int main(int argc, char **argv)
             estado = ON_INIT;
          }
          reloadMusic = true;
+         glDisable(GL_LIGHTING);
+         Engine->fadeInTexture(tituloID);
          result = Engine->InitialScreen(estado,tituloID,reloadMusic);
       }
       else
