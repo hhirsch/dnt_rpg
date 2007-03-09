@@ -405,9 +405,6 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    }
    
 
-   glEnable(GL_LIGHTING);
-
-
    /* Put Active Party on Init Position */
    PCs->personagemAtivo->posicaoLadoX = actualMap->xInic;
    PCs->personagemAtivo->posicaoLadoZ = actualMap->zInic;
@@ -435,13 +432,15 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                  language.LOAD_DONE.c_str(),
                  proj, modl, viewPort);
 
+   glDisable(GL_LIGHTING);
+   fadeOutTexture(texturaCarga, 272,236,527,363);
 
    /* Free Loading Textures */
    SDL_FreeSurface(img);
-
    glDeleteTextures(1,&texturaCarga);
    glDeleteTextures(1,&texturaTexto);
 
+   glEnable(GL_LIGHTING);
 
    return(1);
 }
@@ -468,7 +467,7 @@ void engine::draw3DMode()
 /*********************************************************************
  *                            fadeInTexture                          *
  *********************************************************************/
-void engine::fadeInTexture(GLuint id)
+void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2)
 {
    int i;
    for(i=0; i < 50; i++)
@@ -477,7 +476,7 @@ void engine::fadeInTexture(GLuint id)
               | GL_STENCIL_BUFFER_BIT);
       AtualizaFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
-      AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
+      AtualizaTela2D(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -488,7 +487,7 @@ void engine::fadeInTexture(GLuint id)
 /*********************************************************************
  *                            fadeOutTexture                         *
  *********************************************************************/
-void engine::fadeOutTexture(GLuint id)
+void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2)
 {
    int i;
    for(i=49; i >= 0; i--)
@@ -497,7 +496,7 @@ void engine::fadeOutTexture(GLuint id)
               | GL_STENCIL_BUFFER_BIT);
       AtualizaFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
-      AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
+      AtualizaTela2D(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -523,7 +522,7 @@ void engine::SplashScreen()
    SDL_FreeSurface(img);
 
    /* Fade In Screen */
-   fadeInTexture(id);
+   fadeInTexture(id,0,0,799,599);
 
    /* Wait until Mouse Button pressed or time passed */
    while( (!(mButton & SDL_BUTTON(1))) && 
@@ -542,7 +541,7 @@ void engine::SplashScreen()
       SDL_Delay(50);
    }
 
-   fadeOutTexture(id);
+   fadeOutTexture(id,0,0,799,599);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
@@ -2627,7 +2626,7 @@ void engine::showImage(string fileName)
    carregaTexturaRGBA(img,&id);
    SDL_FreeSurface(img);
 
-   fadeInTexture(id);
+   fadeInTexture(id,0,0,799,599);
 
    /* Wait until Mouse Button pressed */
    while(!(mButton & SDL_BUTTON(1)))
@@ -2639,7 +2638,7 @@ void engine::showImage(string fileName)
       SDL_Delay(50);
    }
 
-   fadeOutTexture(id);
+   fadeOutTexture(id,0,0,799,599);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
