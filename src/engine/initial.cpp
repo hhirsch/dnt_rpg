@@ -26,7 +26,7 @@ initialScreen::~initialScreen()
 
 int initialScreen::Execute(int Status,GLdouble proj[16],
                            GLdouble modl[16], GLint viewPort[4],
-                           GLuint* tituloID, sound* snd)
+                           GLuint tituloID, sound* snd)
 {
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
@@ -73,12 +73,6 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
-   /* Load backImage */
-   SDL_Surface* img = IMG_Load("../data/texturas/inicio.png");
-   //GLuint tituloID;
-   carregaTextura(img,tituloID);
-   SDL_FreeSurface(img);
-
    Uint8 *keys;
    int x,y;
 
@@ -94,7 +88,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          glClearColor(0,0,0,1);
          glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         AtualizaTela2D(*tituloID,proj,modl,viewPort,0,0,799,599,0.012);
+         AtualizaTela2D(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
          object = gui->manipulateEvents(x,y,Mbotao,keys, &eventInfo);
          if(eventInfo != NADA)
          {

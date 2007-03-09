@@ -35,8 +35,13 @@ int main(int argc, char **argv)
    /* Call Splash Screen  */
    Engine->SplashScreen();
 
+   /* Load backImage */
+   SDL_Surface* img = IMG_Load("../data/texturas/inicio.png");
+   carregaTextura(img,&tituloID);
+   SDL_FreeSurface(img);
+
    /* Call Initial Screen */
-   int result = Engine->InitialScreen(ON_INIT,&tituloID,true);
+   int result = Engine->InitialScreen(ON_INIT,tituloID,true);
    int estado = ON_INIT;
    int charCreation = 0;
    bool reloadMusic;
@@ -46,7 +51,7 @@ int main(int argc, char **argv)
        reloadMusic = false;
        if(result == NEW_GAME)
        {
-          charCreation = Engine->CharacterScreen(&tituloID);
+          charCreation = Engine->CharacterScreen(tituloID);
           if( charCreation == CHAR_CONFIRM)
           {
              Engine->LoadMap("../data/mapas/poc2.map",1);
@@ -65,13 +70,12 @@ int main(int argc, char **argv)
        
        if(result == OPTIONS)
        {
-          Engine->OptionsScreen(&tituloID);
+          Engine->OptionsScreen(tituloID);
        }
        #ifdef REDE
           Engine->server = server;
        #endif
       //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-      glDeleteTextures(1,&tituloID);
 
       if( (result == CONTINUE_GAME) || 
           ( ((result == NEW_GAME)) && (charCreation == CHAR_CONFIRM) ) ) 
@@ -85,11 +89,11 @@ int main(int argc, char **argv)
             estado = ON_INIT;
          }
          reloadMusic = true;
-         result = Engine->InitialScreen(estado,&tituloID,reloadMusic);
+         result = Engine->InitialScreen(estado,tituloID,reloadMusic);
       }
       else
       {
-         result = Engine->InitialScreen(estado,&tituloID,reloadMusic);
+         result = Engine->InitialScreen(estado,tituloID,reloadMusic);
       }
       charCreation = CHAR_OTHER;
        
@@ -97,6 +101,9 @@ int main(int argc, char **argv)
           free(Engine->server); 
        #endif
    }
+
+   glDisable(GL_LIGHTING);
+   Engine->fadeOutTexture(tituloID);
 
    glDeleteTextures(1,&tituloID); 
        

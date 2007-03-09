@@ -102,31 +102,37 @@ class engine
        ****************************************************************/
        void SplashScreen();
 
+       /*! Fade in Some Texture on screen */
+       void fadeInTexture(GLuint id);
+
+       /*! Fade Out Some texture on screen */
+       void fadeOutTexture(GLuint id);
+
       /*!
        **************************************************************** 
        * Load Initial Menu
        * \param Status -> ON_INIT or IN_GAME
-       * \param idTextura -> pointer to initial screen texture
+       * \param idTextura -> loaded initial screen texture
        * \param reloadMusic -> true to reload the music
        * \return initialScreen return Values
        ***************************************************************/
-      int InitialScreen(int Status, GLuint* idTextura, bool reloadMusic);
+      int InitialScreen(int Status, GLuint idTextura, bool reloadMusic);
 
       /*!
        **************************************************************** 
        * Load Character's Screens
-       * \param idTextura -> pointer to initial screen texture
+       * \param idTextura -> loaded initial screen texture
        * \return CharacterScreens return values
        ***************************************************************/
-      int CharacterScreen(GLuint* idTextura);
+      int CharacterScreen(GLuint idTextura);
 
       /*!
        *************************************************************** 
        * Load Options Screen
-       * \param idTextura -> pointer to initial screen texture
+       * \param idTextura -> loaded initial screen texture
        * \return Options Screen Return Value.
        ***************************************************************/
-      int OptionsScreen(GLuint* idTextura);
+      int OptionsScreen(GLuint idTextura);
 
       /*!
        *************************************************************** 

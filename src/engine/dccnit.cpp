@@ -465,6 +465,47 @@ void engine::draw3DMode()
 }
 
 /*********************************************************************
+ *                            fadeInTexture                          *
+ *********************************************************************/
+void engine::fadeInTexture(GLuint id)
+{
+   int i;
+   for(i=0; i < 50; i++)
+   {
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
+              | GL_STENCIL_BUFFER_BIT);
+      AtualizaFrustum(visibleMatrix,proj,modl);
+      glColor3f(i/50.0, i/50.0, i/50.0);
+      AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
+      glFlush();
+      SDL_GL_SwapBuffers();
+      SDL_Delay(10);
+   }
+   glColor3f(1.0,1.0,1.0);
+}
+
+/*********************************************************************
+ *                            fadeOutTexture                         *
+ *********************************************************************/
+void engine::fadeOutTexture(GLuint id)
+{
+   int i;
+   for(i=49; i >= 0; i--)
+   {
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
+              | GL_STENCIL_BUFFER_BIT);
+      AtualizaFrustum(visibleMatrix,proj,modl);
+      glColor3f(i/50.0, i/50.0, i/50.0);
+      AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
+      glFlush();
+      SDL_GL_SwapBuffers();
+      SDL_Delay(10);
+   }
+   glColor3f(1.0, 1.0, 1.0);
+}
+
+
+/*********************************************************************
  *                             SplashScreen                          *
  *********************************************************************/
 void engine::SplashScreen()
@@ -473,14 +514,15 @@ void engine::SplashScreen()
    Uint32 mButton = 0;
    int x,y;
    Uint32 time = SDL_GetTicks();
+   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
    AtualizaFrustum(visibleMatrix,proj,modl);
    SDL_Surface* img = IMG_Load("../data/texturas/inicio1.png"); 
    glDisable(GL_LIGHTING);
    carregaTexturaRGBA(img,&id);
    SDL_FreeSurface(img);
-   AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
-   glFlush();
-   SDL_GL_SwapBuffers();
+
+   /* Fade In Screen */
+   fadeInTexture(id);
 
    /* Wait until Mouse Button pressed or time passed */
    while( (!(mButton & SDL_BUTTON(1))) && 
@@ -499,6 +541,8 @@ void engine::SplashScreen()
       SDL_Delay(50);
    }
 
+   fadeOutTexture(id);
+   
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
 }
@@ -506,7 +550,7 @@ void engine::SplashScreen()
 /*********************************************************************
  *                       Call Initial Game Menu                      *
  *********************************************************************/
-int engine::InitialScreen(int Status, GLuint* idTextura, bool reloadMusic)
+int engine::InitialScreen(int Status, GLuint idTextura, bool reloadMusic)
 {
    /* Reload Music, if needed */
    if(reloadMusic)
@@ -516,8 +560,10 @@ int engine::InitialScreen(int Status, GLuint* idTextura, bool reloadMusic)
    }
 
    /* Executes Initial Screen */
-   AtualizaFrustum(visibleMatrix,proj,modl);   
+   AtualizaFrustum(visibleMatrix,proj,modl);
    initialScreen* inic = new(initialScreen);
+   glDisable(GL_LIGHTING);
+   fadeInTexture(idTextura);
    int result = inic->Execute(Status, proj, modl, viewPort, idTextura, snd);
    delete(inic);
    return(result);
@@ -526,7 +572,7 @@ int engine::InitialScreen(int Status, GLuint* idTextura, bool reloadMusic)
 /*********************************************************************
  *                       Call Options Game Screen                    *
  *********************************************************************/
-int engine::OptionsScreen(GLuint* idTextura)
+int engine::OptionsScreen(GLuint idTextura)
 {
    interface* interf = new interface(NULL);
    int optionW = OPTIONSW_OTHER;
@@ -555,7 +601,7 @@ int engine::OptionsScreen(GLuint* idTextura)
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          object = interf->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
-         AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
+         AtualizaTela2D(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          interf->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();
@@ -594,7 +640,7 @@ int engine::OptionsScreen(GLuint* idTextura)
 /*********************************************************************
  *              Call Screens to Create, Evolute Character            *
  *********************************************************************/
-int engine::CharacterScreen(GLuint* idTextura)
+int engine::CharacterScreen(GLuint idTextura)
 {
    int charCreation = CHAR_OTHER;
    int tempo = SDL_GetTicks();
@@ -643,7 +689,7 @@ int engine::CharacterScreen(GLuint* idTextura)
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          object = gui->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
 
-         AtualizaTela2D(*idTextura,proj,modl,viewPort,0,0,799,599,0.012);
+         AtualizaTela2D(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          gui->draw(proj,modl,viewPort);
          glFlush();
          SDL_GL_SwapBuffers();

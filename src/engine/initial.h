@@ -36,12 +36,12 @@ class initialScreen
       * \param proj -> projection Matrix
       * \param modl -> modelView matrix
       * \param viewPort -> current view Port
-      * \param idTextura -> initial screen texture id (will be loaded).
+      * \param idTextura -> loaded initial screen texture id.
       * \param snd -> sound engine to use
       * \return initialScreen Return values correspondent to action made */
      int Execute(int Status, GLdouble proj[16],
                            GLdouble modl[16], GLint viewPort[4],
-                           GLuint* idTextura, sound* snd);
+                           GLuint idTextura, sound* snd);
    private:
       interface* gui;  /**< GUI for Windows */
       lang language;   /**< language internationalization */
