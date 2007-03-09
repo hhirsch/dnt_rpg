@@ -40,8 +40,7 @@ class rolBar: public Tobjeto
        * \param txt -> text to add*/
       void addText(string txt);
 
-      /*! Redraw the bar when scrolling text
-       * \param surface -> SDL_Surface where will draw */
+      /*! Redraw the bar when scrolling text */
       void redraw();
 
    private:

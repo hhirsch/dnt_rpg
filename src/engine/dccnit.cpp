@@ -438,6 +438,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Free Loading Textures */
    SDL_FreeSurface(img);
+
    glDeleteTextures(1,&texturaCarga);
    glDeleteTextures(1,&texturaTexto);
 
@@ -2625,9 +2626,8 @@ void engine::showImage(string fileName)
    glDisable(GL_LIGHTING);
    carregaTexturaRGBA(img,&id);
    SDL_FreeSurface(img);
-   AtualizaTela2D(id,proj,modl,viewPort,0,0,799,599,0.012);
-   glFlush();
-   SDL_GL_SwapBuffers();
+
+   fadeInTexture(id);
 
    /* Wait until Mouse Button pressed */
    while(!(mButton & SDL_BUTTON(1)))
@@ -2638,6 +2638,8 @@ void engine::showImage(string fileName)
       mButton = SDL_GetMouseState(&x,&y);
       SDL_Delay(50);
    }
+
+   fadeOutTexture(id);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
