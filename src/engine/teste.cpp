@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 
    /* Call Initial Screen */
    glDisable(GL_LIGHTING);
-   Engine->fadeInTexture(tituloID);
+   Engine->fadeInTexture(tituloID,0,0,799,599);
    int result = Engine->InitialScreen(ON_INIT,tituloID,true);
    int estado = ON_INIT;
    int charCreation = 0;
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
           if( charCreation == CHAR_CONFIRM)
           {
              glDisable(GL_LIGHTING);
-             Engine->fadeOutTexture(tituloID);
+             Engine->fadeOutTexture(tituloID,0,0,799,599);
              Engine->LoadMap("../data/mapas/poc2.map",1);
           }
        }
@@ -87,7 +87,7 @@ int main(int argc, char **argv)
          if(result == CONTINUE_GAME)
          {
             glDisable(GL_LIGHTING);
-            Engine->fadeOutTexture(tituloID);
+            Engine->fadeOutTexture(tituloID,0,0,799,599);
          }
          if(Engine->Run(screen) == 1)
          {
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
          }
          reloadMusic = true;
          glDisable(GL_LIGHTING);
-         Engine->fadeInTexture(tituloID);
+         Engine->fadeInTexture(tituloID,0,0,799,599);
          result = Engine->InitialScreen(estado,tituloID,reloadMusic);
       }
       else
@@ -114,7 +114,7 @@ int main(int argc, char **argv)
    }
 
    glDisable(GL_LIGHTING);
-   Engine->fadeOutTexture(tituloID);
+   Engine->fadeOutTexture(tituloID,0,0,799,599);
 
    glDeleteTextures(1,&tituloID); 
        

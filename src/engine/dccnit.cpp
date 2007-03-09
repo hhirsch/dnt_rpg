@@ -241,6 +241,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    escxy(img,128,0,texto);
    GLuint texturaTexto;
    carregaTexturaRGBA(img,&texturaTexto);
+   fadeInTexture(texturaCarga, 272,236,527,363);
 
    AtualizaFrustum(visibleMatrix,proj,modl);
    AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);

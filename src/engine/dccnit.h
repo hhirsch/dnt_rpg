@@ -103,10 +103,10 @@ class engine
        void SplashScreen();
 
        /*! Fade in Some Texture on screen */
-       void fadeInTexture(GLuint id);
+       void fadeInTexture(GLuint id, int x1, int y1, int x2, int y2);
 
        /*! Fade Out Some texture on screen */
-       void fadeOutTexture(GLuint id);
+       void fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2);
 
       /*!
        **************************************************************** 
