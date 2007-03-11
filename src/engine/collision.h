@@ -50,8 +50,8 @@ class collision
        *  \param perQuad -> square occupied by character 
        *  \param NPCs -> list of NPCs
        *  \param varHeight -> value of the new height of the character 
-       *  \param nx -> value (in squares) of the new X 
-       *  \param nz -> value (in squares) of the new Z
+       *  \param nx -> value of the center new X Character
+       *  \param nz -> value of the center new Z Character
        *  \return true if the character can occupy the position, 
        *          false otherwise.*/
       bool canWalk(GLfloat perX, GLfloat perY, GLfloat perZ, 

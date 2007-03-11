@@ -828,6 +828,10 @@ void engine::Init(SDL_Surface *screen)
 
    glEnable(GL_LIGHTING);
 
+   /* Culling */
+   /*glCullFace(GL_BACK);
+   glEnable(GL_CULL_FACE);*/
+
    /* Sky Creation */
    gameSky = new(sky);
 
@@ -1920,6 +1924,19 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             {
                walkStatus = ENGINE_WALK_KEYS;
             }
+            else
+            {
+               /* Define New Occuped Square */
+               int posX =(int)floor(PCs->personagemAtivo->posicaoLadoX /
+                                    SQUARESIZE);
+               int posZ =(int)floor(PCs->personagemAtivo->posicaoLadoZ / 
+                                    SQUARESIZE);
+               PCs->personagemAtivo->ocupaQuad = 
+                                         actualMap->quadradoRelativo(posX,posZ);
+               /* Define New Height */
+               defineActiveCharacterHeight(PCs->personagemAtivo->posicaoLadoX,
+                                           PCs->personagemAtivo->posicaoLadoZ);
+            }
 
             gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
                                        PCs->personagemAtivo->posicaoLadoY,
@@ -2417,37 +2434,23 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
    if(result)
    {
-      GLfloat altura_atual = PCs->personagemAtivo->posicaoLadoY;
-
+      /* Define New Occuped Square */
       int posX =(int)floor( nx / (SQUARESIZE));
-   
       int posZ =(int)floor( nz / (SQUARESIZE));
-
       PCs->personagemAtivo->ocupaQuad = actualMap->quadradoRelativo(posX,posZ);
 
-      Square* saux = actualMap->quadradoRelativo( (int)(nx/SQUARESIZE),
-                                          (int)(nz/SQUARESIZE));
-
-      GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
-      GLfloat dz1 = fabs(nz - saux->z1) / SQUARESIZE;
-      GLfloat dx2 = fabs(nx - saux->x2) / SQUARESIZE;
-      GLfloat dz2 = fabs(nz - saux->z2) / SQUARESIZE;
-
-      GLfloat ha = (dx2 * PCs->personagemAtivo->ocupaQuad->h1) + 
-                   (dx1 * PCs->personagemAtivo->ocupaQuad->h4);
-      GLfloat hb = (dx2 * PCs->personagemAtivo->ocupaQuad->h2) + 
-                   (dx1 * PCs->personagemAtivo->ocupaQuad->h3);
-
-      GLfloat res = (ha * dz2) + (hb * dz1);
-
-      if( res - altura_atual > ANDAR)
+      /* Define New Heigh */
+      if(!defineActiveCharacterHeight(nx, nz))
       {
-          PCs->personagemAtivo->posicaoLadoY = altura_atual;
-          return(false);
+         /* Can't define new height or too much
+          * to up or down, so can't move */
+         return(false);
       }
- 
-      PCs->personagemAtivo->posicaoLadoY = res + varHeight;
 
+      /* Apply VarHeight */
+      PCs->personagemAtivo->posicaoLadoY += varHeight;
+      
+      /* Verify Turn Based Mode Action */
       if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
          (fightStatus == FIGHT_PC_TURN))
       {
@@ -2463,6 +2466,43 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
    
    return(result);
+}
+
+/*********************************************************************
+ *                      defineActiveCharacterHeight                  *
+ *********************************************************************/
+bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
+{
+   GLfloat altura_atual = PCs->personagemAtivo->posicaoLadoY;
+
+   Square* saux = PCs->personagemAtivo->ocupaQuad;
+
+   if(!saux)
+   {
+      printf("Error: Character Not occuping any Square!\n");
+      return(false);
+   }
+
+   GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
+   GLfloat dz1 = fabs(nz - saux->z1) / SQUARESIZE;
+   GLfloat dx2 = fabs(nx - saux->x2) / SQUARESIZE;
+   GLfloat dz2 = fabs(nz - saux->z2) / SQUARESIZE;
+
+   GLfloat ha = (dx2 * PCs->personagemAtivo->ocupaQuad->h1) + 
+                (dx1 * PCs->personagemAtivo->ocupaQuad->h4);
+   GLfloat hb = (dx2 * PCs->personagemAtivo->ocupaQuad->h2) + 
+                (dx1 * PCs->personagemAtivo->ocupaQuad->h3);
+
+   GLfloat res = (ha * dz2) + (hb * dz1);
+
+   if( res - altura_atual > ANDAR)
+   {
+       PCs->personagemAtivo->posicaoLadoY = altura_atual;
+       return(false);
+   }
+
+   PCs->personagemAtivo->posicaoLadoY = res;
+   return(true);
 }
 
 /*********************************************************************

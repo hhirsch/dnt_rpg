@@ -207,6 +207,15 @@ class engine
       bool canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
       /*!
+       ***************************************************************
+       * Define New Character Height, based on character position
+       * \param nx -> character new X position
+       * \param nz -> character new Z position
+       * \return -> true if can define new heigh, false if can't move.
+       ***************************************************************/
+      bool defineActiveCharacterHeight(GLfloat nx, GLfloat nz);
+
+      /*!
        ************************************************************** 
        * Draws the sky sphere to the list
        * \param lats -> How many latitudes
