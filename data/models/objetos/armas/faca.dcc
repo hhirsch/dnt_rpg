@@ -1,7 +1,7 @@
 0
 ../data/models/objetos/armas/faca.obj
 ../data/models/objetos/armas/
-0 0
-../data/texturas/na.png
+1 2
+../data/models/objetos/armas/faca_inv.png
 5000
 40 40 -1
