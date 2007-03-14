@@ -10,7 +10,7 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
 
     
     //Comeca a abrir a tela
-    if ( SDL_Init(/*SDL_INIT_AUDIO |*/ SDL_INIT_VIDEO) < 0 ) 
+    if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
     {
         erro_Mensagem("Argh! Can't init SDL!\n",1);
     }

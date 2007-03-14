@@ -280,7 +280,6 @@ void inventory::removeFromInventory(int x, int y)
                spaces[j][k].obj = NULL;
                spaces[j][k].origX = j;
                spaces[j][k].origY = k;
-               printf("Sumido com: %d,%d\n",j,k);
             }
          }
          /* Free obj from use here */
