@@ -336,7 +336,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                  texto,
                  proj, modl, viewPort);
        per = PCs->InserirPersonagem("../data/characters/pcs/logan.pc",
-                                    /*"../data/characters/npcs/ratazana.npc",*/
+                                    /*"../data/characters/npcs/ameiva.npc",*/
                                     features);
        per->DefineMaxLifePoints(per->maxLifePoints);
        atualizaCarga(img,&texturaTexto,texturaCarga,
@@ -1184,7 +1184,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
            per->update(WALK_ACTUALIZATION/*seconds*/);   
            per->calculateBoundingBox();
            per = (personagem*) per->proximo;
-        } 
+        }
       }
 
       /* Calculate the real Modification on walk, rotate, turn, etc */
@@ -2164,98 +2164,40 @@ void engine::Draw()
       }
    }
 
-   if( showRange)
+   if( showRange )
    {
-       GLfloat lx = PCs->personagemAtivo->posicaoLadoX;
-       GLfloat lz = PCs->personagemAtivo->posicaoLadoZ;
-       glDisable(GL_LIGHTING);
-       /* Draw Movimentation Circles */
-       glColor4f(1,1,1,1);
-       glEnable(GL_BLEND);
-       glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
        /* Range Circle */
-       glPushMatrix();
-         glEnable(GL_TEXTURE_2D);
-         glBindTexture(GL_TEXTURE_2D, rangeCircle );
-         glBegin(GL_QUADS);
-            glTexCoord2f(0,0);
-            glVertex3f(lx-WALK_PER_MOVE_ACTION, 0.08, 
-                       lz-WALK_PER_MOVE_ACTION);
-            glTexCoord2f(0,1);
-            glVertex3f(lx-WALK_PER_MOVE_ACTION, 0.08, 
-                       lz+WALK_PER_MOVE_ACTION);
-            glTexCoord2f(1,1);
-            glVertex3f(lx+WALK_PER_MOVE_ACTION, 0.08, 
-                       lz+WALK_PER_MOVE_ACTION);
-            glTexCoord2f(1,0);
-            glVertex3f(lx+WALK_PER_MOVE_ACTION, 0.08, 
-                       lz-WALK_PER_MOVE_ACTION);
-         glEnd();
-         glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-
-      glDisable(GL_BLEND);
-      glEnable(GL_LIGHTING);
-
+       actualMap->drawSurfaceOnMap(rangeCircle,
+                                   PCs->personagemAtivo->posicaoLadoX - 
+                                                           WALK_PER_MOVE_ACTION,
+                                   PCs->personagemAtivo->posicaoLadoZ - 
+                                                           WALK_PER_MOVE_ACTION,
+                                   PCs->personagemAtivo->posicaoLadoX + 
+                                                           WALK_PER_MOVE_ACTION,
+                                   PCs->personagemAtivo->posicaoLadoZ + 
+                                                           WALK_PER_MOVE_ACTION,
+                                   0.05);
    }
 
    /* Draw Combat Mode Things */
    if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
        (fightStatus == FIGHT_PC_TURN))
    {
-       glDisable(GL_LIGHTING);
        /* Draw Movimentation Circles */
-       glColor4f(1,1,1,1);
-       glEnable(GL_BLEND);
-       glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
-       /* Full Circle */
-       glPushMatrix();
-         glEnable(GL_TEXTURE_2D);
-         glBindTexture(GL_TEXTURE_2D, fullMoveCircle );
-         glBegin(GL_QUADS);
-            glTexCoord2f(0,0);
-            glVertex3f(moveCircleX-2*WALK_PER_MOVE_ACTION, 0.1, 
-                       moveCircleZ-2*WALK_PER_MOVE_ACTION);
-            glTexCoord2f(0,1);
-            glVertex3f(moveCircleX-2*WALK_PER_MOVE_ACTION, 0.1, 
-                       moveCircleZ+2*WALK_PER_MOVE_ACTION);
-            glTexCoord2f(1,1);
-            glVertex3f(moveCircleX+2*WALK_PER_MOVE_ACTION, 0.1, 
-                       moveCircleZ+2*WALK_PER_MOVE_ACTION);
-            glTexCoord2f(1,0);
-            glVertex3f(moveCircleX+2*WALK_PER_MOVE_ACTION, 0.1, 
-                       moveCircleZ-2*WALK_PER_MOVE_ACTION);
-         glEnd();
-         glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-
-
-       /* Normal Circle */
-       glPushMatrix();
-         glEnable(GL_TEXTURE_2D);
-         glBindTexture(GL_TEXTURE_2D, normalMoveCircle );
-         glBegin(GL_QUADS);
-            glTexCoord2f(0,0);
-            glVertex3f(moveCircleX-WALK_PER_MOVE_ACTION, 0.2, 
-                       moveCircleZ-WALK_PER_MOVE_ACTION);
-            glTexCoord2f(0,1);
-            glVertex3f(moveCircleX-WALK_PER_MOVE_ACTION, 0.2, 
-                       moveCircleZ+WALK_PER_MOVE_ACTION);
-            glTexCoord2f(1,1);
-            glVertex3f(moveCircleX+WALK_PER_MOVE_ACTION, 0.2, 
-                       moveCircleZ+WALK_PER_MOVE_ACTION);
-            glTexCoord2f(1,0);
-            glVertex3f(moveCircleX+WALK_PER_MOVE_ACTION, 0.2, 
-                       moveCircleZ-WALK_PER_MOVE_ACTION);
-         glEnd();
-         glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-
-      glDisable(GL_BLEND);
-      glEnable(GL_LIGHTING);
-
+          /* Full Circle */
+          actualMap->drawSurfaceOnMap(fullMoveCircle,
+                                      moveCircleX-2*WALK_PER_MOVE_ACTION,
+                                      moveCircleZ-2*WALK_PER_MOVE_ACTION,
+                                      moveCircleX+2*WALK_PER_MOVE_ACTION, 
+                                      moveCircleZ+2*WALK_PER_MOVE_ACTION,
+                                      0.1);
+          /* Normal Circle */
+          actualMap->drawSurfaceOnMap(normalMoveCircle,
+                                      moveCircleX-WALK_PER_MOVE_ACTION,
+                                      moveCircleZ-WALK_PER_MOVE_ACTION,
+                                      moveCircleX+WALK_PER_MOVE_ACTION, 
+                                      moveCircleZ+WALK_PER_MOVE_ACTION,
+                                      0.2);
    }
 
    if(walkStatus == ENGINE_WALK_MOUSE)
@@ -2264,37 +2206,19 @@ void engine::Draw()
       //PCs->personagemAtivo->pathFind.drawPath();
       PCs->personagemAtivo->pathFind.getDestiny(destX, destZ);
       
-      glDisable(GL_LIGHTING);
        /* Draw Movimentation Destiny */
        if(destinyVariation >= 2.0)
        {
           destinyVariation = -2.0;
        }
        destinyVariation += 0.1;
-       glColor4f(1,1,1,1);
-       glEnable(GL_BLEND);
-       glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-       glPushMatrix();
-         glEnable(GL_TEXTURE_2D);
-         glBindTexture(GL_TEXTURE_2D, destinyImage );
-         glBegin(GL_QUADS);
-            glTexCoord2f(0,0);
-            glVertex3f(destX-(4+destinyVariation), 0.25, 
-                       destZ-(4+destinyVariation));
-            glTexCoord2f(0,1);
-            glVertex3f(destX-(4+destinyVariation), 0.25, 
-                       destZ+(4+destinyVariation));
-            glTexCoord2f(1,1);
-            glVertex3f(destX+(4+destinyVariation), 0.25, 
-                       destZ+(4+destinyVariation));
-            glTexCoord2f(1,0);
-            glVertex3f(destX+(4+destinyVariation), 0.25, 
-                       destZ-(4+destinyVariation));
-         glEnd();
-         glDisable(GL_TEXTURE_2D);
-         glDisable(GL_BLEND);
-         glEnable(GL_LIGHTING);
-      glPopMatrix();
+
+       actualMap->drawSurfaceOnMap(destinyImage,
+                                   destX - (4 + destinyVariation), 
+                                   destZ - (4 + destinyVariation),
+                                   destX + (4 + destinyVariation),
+                                   destZ + (4 + destinyVariation),
+                                   0.25);
    }
 
    if(!actualMap->fog.enabled)
@@ -2475,25 +2399,7 @@ bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
 {
    GLfloat altura_atual = PCs->personagemAtivo->posicaoLadoY;
 
-   Square* saux = PCs->personagemAtivo->ocupaQuad;
-
-   if(!saux)
-   {
-      printf("Error: Character Not occuping any Square!\n");
-      return(false);
-   }
-
-   GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
-   GLfloat dz1 = fabs(nz - saux->z1) / SQUARESIZE;
-   GLfloat dx2 = fabs(nx - saux->x2) / SQUARESIZE;
-   GLfloat dz2 = fabs(nz - saux->z2) / SQUARESIZE;
-
-   GLfloat ha = (dx2 * PCs->personagemAtivo->ocupaQuad->h1) + 
-                (dx1 * PCs->personagemAtivo->ocupaQuad->h4);
-   GLfloat hb = (dx2 * PCs->personagemAtivo->ocupaQuad->h2) + 
-                (dx1 * PCs->personagemAtivo->ocupaQuad->h3);
-
-   GLfloat res = (ha * dz2) + (hb * dz1);
+   GLfloat res = actualMap->getHeight(nx, nz);
 
    if( res - altura_atual > ANDAR)
    {

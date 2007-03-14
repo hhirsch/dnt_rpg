@@ -100,6 +100,8 @@ class inventory
 
 
    private:
+      void print();
+
       space spaces[INVENTORY_SIZE_X][INVENTORY_SIZE_Y];/**< The inventory */
       object* equippedObject[INVENTORY_TOTAL_PLACES];  /**< Equipped Current 
                                                             Objects */

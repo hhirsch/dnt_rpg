@@ -338,8 +338,8 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    /* Testa quadrados abaixo */
    saux = actualMap->quadradoRelativo(perQuad->posX,
                              perQuad->posZ+1);
-   if( saux ) 
-   {   
+   if( saux )
+   {
       min2[0] = saux->x1;
       min2[2] = saux->z1;
       max2[0] = saux->x2;

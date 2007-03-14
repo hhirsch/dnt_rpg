@@ -232,6 +232,26 @@ void inventory::removeFromInventory(object* obj)
          }
       }
    }
+
+   print();
+}
+
+/**************************************************************
+ *                             print                          *
+ **************************************************************/
+void inventory::print()
+{
+   /* Printf, for debug, when needed, uncomment */
+   /*int x,y;
+   printf("\n****************************************\n");
+   for(y=0; y < INVENTORY_SIZE_Y; y++)
+   {
+      for(x=0; x < INVENTORY_SIZE_X; x++)
+      {
+         printf("%p\t", spaces[x][y].obj);
+      }
+      printf("\n");
+   }*/
 }
 
 
@@ -241,7 +261,7 @@ void inventory::removeFromInventory(object* obj)
 void inventory::removeFromInventory(int x, int y)
 {
    object* obj;
-   int j,k, sizeX, sizeY;
+   int j,k, sizeX, sizeY, oX, oY;
 
    if( (x >= 0) && (y >= 0) && (x < INVENTORY_SIZE_X) &&
        (y < INVENTORY_SIZE_Y))
@@ -250,20 +270,25 @@ void inventory::removeFromInventory(int x, int y)
       if(obj)
       {
          obj->getInventorySize(sizeX, sizeY);
+         oX = spaces[x][y].origX;
+         oY = spaces[x][y].origY;
          /* Empty all occupied spaces */
-         for(j= spaces[x][y].origX; j < spaces[x][y].origX + sizeX; j++)
+         for(j= oX; j < oX + sizeX; j++)
          {
-            for(k = spaces[x][y].origY; k < spaces[x][y].origY+ sizeY; k++)
+            for(k = oY; k < oY + sizeY; k++)
             {
                spaces[j][k].obj = NULL;
                spaces[j][k].origX = j;
                spaces[j][k].origY = k;
+               printf("Sumido com: %d,%d\n",j,k);
             }
          }
          /* Free obj from use here */
          delete(obj);
       }
    }
+
+   print();
 }
 
 /**************************************************************

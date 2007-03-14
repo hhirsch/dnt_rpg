@@ -694,6 +694,64 @@ Square* Map::quadradoRelativo(int xa, int za)
 }
 
 /********************************************************************
+ *                            getHeight                             *
+ ********************************************************************/
+GLfloat Map::getHeight(GLfloat nx, GLfloat nz)
+{
+   int posX =(int)floor( nx / (SQUARESIZE));
+   int posZ =(int)floor( nz / (SQUARESIZE)); 
+
+   Square* saux = quadradoRelativo(posX, posZ);
+
+   if(!saux)
+   {
+      /* No positon on map, so no height! */
+      return(0.0);
+   }
+
+   /* Do Interpolation to define the Height on position */
+   GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
+   GLfloat dz1 = fabs(nz - saux->z1) / SQUARESIZE;
+   GLfloat dx2 = fabs(saux->x2 - nx) / SQUARESIZE;
+   GLfloat dz2 = fabs(saux->z2 - nz) / SQUARESIZE;
+
+   GLfloat ha = (dx2 * saux->h1) + (dx1 * saux->h4);
+   GLfloat hb = (dx2 * saux->h2) + (dx1 * saux->h3);
+
+   return((ha * dz2) + (hb * dz1));
+}
+
+/********************************************************************
+ *                        drawSurfaceOnMap                          *
+ ********************************************************************/
+void Map::drawSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za, 
+                           GLfloat xb, GLfloat zb, GLfloat sumY)
+{
+    glColor4f(1,1,1,1);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+    glPushMatrix();
+      glDisable(GL_LIGHTING);
+      glEnable(GL_TEXTURE_2D);
+      glBindTexture(GL_TEXTURE_2D, image );
+      glBegin(GL_QUADS);
+         glTexCoord2f(0,0);
+         glVertex3f(xa, getHeight(xa,za) + sumY, za);
+         glTexCoord2f(0,1);
+         glVertex3f(xa, getHeight(xa,zb) + sumY, zb);
+         glTexCoord2f(1,1);
+         glVertex3f(xb, getHeight(xb,zb) + sumY, zb);
+         glTexCoord2f(1,0);
+         glVertex3f(xb, getHeight(xb,za) + sumY, za);
+      glEnd();
+      glDisable(GL_TEXTURE_2D);
+      glDisable(GL_BLEND);
+      glEnable(GL_LIGHTING);
+    glPopMatrix();
+}
+
+
+/********************************************************************
  *                       Open Map File                              *
  ********************************************************************/
 int Map::open(string arquivo, modelList& mdlList)

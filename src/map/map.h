@@ -188,6 +188,28 @@ class Map
 
       /*!
        ***************************************************************
+       * Get Height Value for Map position
+       * \param nx -> map X position
+       * \param nz -> map Z position
+       * \return height of the map on nx,nz position
+       ***************************************************************/
+       GLfloat getHeight(GLfloat nx, GLfloat nz);
+
+       /*!
+        *************************************************************
+        * Draw an texture (surface) on map
+        * \param image -> openGL texture ID
+        * \param xa -> first x position
+        * \param za -> first z position
+        * \param xb -> last x position
+        * \param zb -> last z position
+        * \param sumY -> value to sum at Y height of the map
+        *************************************************************/
+       void drawSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za, 
+                             GLfloat xb, GLfloat zb, GLfloat sumY);
+
+      /*!
+       ***************************************************************
        *  Remove Object from Map
        *  \param xObj -> x Object Coordinate
        *  \param zObj -> z Object Coordinate
