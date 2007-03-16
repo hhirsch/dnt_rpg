@@ -252,13 +252,13 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    /* Loading Map */
    if(actualMap) 
    {
-     arqVelho = actualMap->name;
+     arqVelho = actualMap->getFileName();
      delete(actualMap);
      /* Remove All Unused 3D Models */
      models->removeUnusedModels();
    }
    actualMap = new(Map);
-   actualMap->name = arqVelho;
+   actualMap->setFileName(arqVelho);
    actualMap->open(arqMapa,*models);
 
    /* Enable, if needed, the FOG */
@@ -293,13 +293,13 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
      delete(NPCs);
    NPCs = NULL;
    personagem* per;
-   if(!actualMap->npcFileName.empty())
+   if(!actualMap->getNpcFileName().empty())
    {
       FILE* arq;
-      if(!(arq = fopen(actualMap->npcFileName.c_str(),"r")))
+      if(!(arq = fopen(actualMap->getNpcFileName().c_str(),"r")))
       {
          printf("Ouch, can't load NPC's file: %s.\n",
-                                              actualMap->npcFileName.c_str());
+                                           actualMap->getNpcFileName().c_str());
       }
       else
       {
@@ -392,9 +392,9 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  language.LOAD_PARTICLE.c_str(),
                  proj, modl, viewPort);
-   if(!actualMap->particlesFileName.empty())
+   if(!actualMap->getParticlesFileName().empty())
    {
-       particleSystem->loadFromFile(actualMap->particlesFileName);
+       particleSystem->loadFromFile(actualMap->getParticlesFileName());
        if(option->enableParticles)
        {
           particleSystem->stabilizeAll();
@@ -423,9 +423,9 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    modifState.doMapModifications(actualMap);
 
    /* Change Music, if needed */
-   if(!actualMap->music.empty())
+   if(!actualMap->getMusicFileName().empty())
    {
-      snd->loadMusic(actualMap->music);
+      snd->loadMusic(actualMap->getMusicFileName());
    }
 
    /* Done */
@@ -1312,7 +1312,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                          modifState.mapObjectAddAction(
                                                  MODSTATE_ACTION_MAP_REMOVE,
                                                  quaux->objects[obj]->getName(),
-                                                 actualMap->name,
+                                                 actualMap->getFileName(),
                                                  quaux->Xobjects[obj],
                                                  quaux->Zobjects[obj]);
                          
@@ -2598,9 +2598,9 @@ int engine::Run(SDL_Surface *surface)
 {
    string brief;
    
-   if(!actualMap->music.empty())
+   if(!actualMap->getMusicFileName().empty())
    {
-      snd->loadMusic(actualMap->music);
+      snd->loadMusic(actualMap->getMusicFileName());
    }
 
    int forcaAtualizacao = 0; //force screen atualization FIXME, no more used

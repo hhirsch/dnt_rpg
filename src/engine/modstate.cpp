@@ -240,7 +240,7 @@ void modState::doMapModifications(Map* actualMap)
    for(i = 0; i < totalMapObjects; i++)
    {
       /* If the information is from the loaded map, apply it! */
-      if(tmpMobj->getMapFileName() == actualMap->name)
+      if(tmpMobj->getMapFileName() == actualMap->getFileName())
       {
          tmpMobj->getPosition(x,z);
          if(tmpMobj->getAction() == MODSTATE_ACTION_MAP_REMOVE)

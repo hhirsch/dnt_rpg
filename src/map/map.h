@@ -232,8 +232,27 @@ class Map
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                    mapObject* obj, int qx, int qz);
 
+      /*!
+       ************************************************************* 
+       * Insert object on map list
+       * \param arquivo -> filename to load
+       * \param nome -> object name 
+       * \param mdlList -> modelList
+       * \return pointer to the map Object created 
+       *************************************************************/
+      mapObject* insertMapObject(string arquivo, string nome, 
+                                  modelList& mdlList);
 
-      lMapObject* objects;  /**< Map's objects list */
+      string getFileName();
+      void setFileName(string fileName);
+      string getNpcFileName();
+      void setNpcFileName(string fileName);
+      string getMusicFileName();
+      void setMusicFileName(string fileName);
+      string getParticlesFileName();
+      void setParticlesFileName(string fileName);
+
+
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
       mapRoad* roads;       /**< Map's Roads */
@@ -247,17 +266,18 @@ class Map
       muro* muros;          /**< Map Walls */
       muro* meiosFio;       /**< Map Meio Fios (how translate this?) */
       door* portas;         /**< Map Doors */
-      string music;         /**< Map Music */
-      string name;          /**< File name of loaded map */
-      string particlesFileName; /**< File Name of Map Particles Systens */
-      string npcFileName;   /**< Static NPC's on map filename */
 
       int SQUAREMINISIZE;   /**< Minimap square size */
       int SQUAREMINIDIV;    /**< MiniMap square division relation */
 
-
-      private:
+      protected:
          Square*** MapSquares; /**< Internal Map squares */
+         lMapObject* objects;  /**< Map's objects list */
+         string music;         /**< Map Music */
+         string name;          /**< File name of loaded map */
+         string particlesFileName; /**< File Name of Map Particles Systens */
+         string npcFileName;   /**< Static NPC's on map filename */
+
 };
 
 #endif

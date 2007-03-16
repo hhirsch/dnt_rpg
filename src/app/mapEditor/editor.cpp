@@ -131,10 +131,10 @@ void editor::openMap()
          delete(NPCs);
       NPCs = new (Lpersonagem);
       personagem* per;
-      if(!map->npcFileName.empty())
+      if(!map->getNpcFileName().empty())
       {
          FILE* arq;
-         if(!(arq = fopen(map->npcFileName.c_str(),"r")))
+         if(!(arq = fopen(map->getNpcFileName().c_str(),"r")))
          {
             gui->showMessage("Ouch, can't load NPC's file");
          }
@@ -184,9 +184,9 @@ void editor::openMap()
          }
       }
       /* Open Particles */
-      if(!map->particlesFileName.empty())
+      if(!map->getParticlesFileName().empty())
       {
-          particleSystem->loadFromFile(map->particlesFileName);
+          particleSystem->loadFromFile(map->getParticlesFileName());
           particleSystem->stabilizeAll();
       }
       else
@@ -212,12 +212,12 @@ void editor::saveMap()
    {
       if(particleSystem->numParticles() > 0)
       {
-         map->particlesFileName = gui->getFileName()+".par";
-         particleSystem->saveToFile(map->particlesFileName);
+         map->setParticlesFileName(gui->getFileName()+".par");
+         particleSystem->saveToFile(map->getParticlesFileName());
       }
       else
       {
-         map->particlesFileName = "";
+         map->setParticlesFileName("");
       }
       map->save(gui->getFileName());
       tmp = "Map Saved as:";
@@ -703,10 +703,9 @@ void editor::verifyIO()
    {
       if(mapOpened)
       {
-         mapObject* obj=map->objects->insertMapObject(
-                                              gui->getObjectFileName().c_str(),
-                                              gui->getObjectFileName().c_str(),
-                                              *models);
+         mapObject* obj=map->insertMapObject(gui->getObjectFileName().c_str(),
+                                             gui->getObjectFileName().c_str(),
+                                             *models);
          if(obj != NULL)
          {
             gui->showMessage(gui->getObjectFileName()+" Inserted.");

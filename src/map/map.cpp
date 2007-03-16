@@ -750,6 +750,79 @@ void Map::drawSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za,
     glPopMatrix();
 }
 
+/********************************************************************
+ *                          getFileName                             *
+ ********************************************************************/
+string Map::getFileName()
+{
+   return(name);
+}
+
+/********************************************************************
+ *                          setFileName                             *
+ ********************************************************************/
+void Map::setFileName(string fileName)
+{
+   name = fileName;
+}
+
+/********************************************************************
+ *                        getNpcFileName                            *
+ ********************************************************************/
+string Map::getNpcFileName()
+{
+   return(npcFileName);
+}
+
+/********************************************************************
+ *                        setNpcFileName                            *
+ ********************************************************************/
+void Map::setNpcFileName(string fileName)
+{
+   npcFileName = fileName;
+}
+
+/********************************************************************
+ *                        getMusicFileName                          *
+ ********************************************************************/
+string Map::getMusicFileName()
+{
+   return(music);
+}
+
+/********************************************************************
+ *                        setMusicFileName                          *
+ ********************************************************************/
+void Map::setMusicFileName(string fileName)
+{
+   music = fileName;
+}
+
+/********************************************************************
+ *                      getParticlesFileName                        *
+ ********************************************************************/
+string Map::getParticlesFileName()
+{
+   return(particlesFileName);
+}
+
+/********************************************************************
+ *                      setParticlesFileName                        *
+ ********************************************************************/
+void Map::setParticlesFileName(string fileName)
+{
+   particlesFileName = fileName;
+}
+
+
+/********************************************************************
+ *                       insertMapObject                            *
+ ********************************************************************/
+mapObject* Map::insertMapObject(string arquivo, string nome, 
+                                modelList& mdlList)
+{
+   return(objects->insertMapObject(arquivo, nome, mdlList));
+}
 
 /********************************************************************
  *                       Open Map File                              *
