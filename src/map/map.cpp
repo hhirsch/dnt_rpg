@@ -204,7 +204,7 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
 void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                        mapObject* obj, int qx, int qz)
 {
-   Square* saux = quadradoRelativo(qx,qz);
+   Square* saux = relativeSquare(qx,qz);
    int ob=0;
    if(saux)
    {
@@ -268,7 +268,7 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
        {
           for(Z1 = minqz; Z1 <=maxqz; Z1++) 
           {
-             qaux = quadradoRelativo(X1,Z1);
+             qaux = relativeSquare(X1,Z1);
              if((qaux) && (qaux != saux))
              {
                 ob =0;
@@ -685,7 +685,7 @@ Map::Map()
 /********************************************************************
  *               Returns Square Relative to coordinate              *
  ********************************************************************/
-Square* Map::quadradoRelativo(int xa, int za)
+Square* Map::relativeSquare(int xa, int za)
 {
    if( (z <= za) || (x <= xa) || ( xa < 0) || (za < 0)) 
       return(NULL);
@@ -701,7 +701,7 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz)
    int posX =(int)floor( nx / (SQUARESIZE));
    int posZ =(int)floor( nz / (SQUARESIZE)); 
 
-   Square* saux = quadradoRelativo(posX, posZ);
+   Square* saux = relativeSquare(posX, posZ);
 
    if(!saux)
    {
@@ -1055,7 +1055,7 @@ int Map::open(string arquivo, modelList& mdlList)
                        &MapSquares[posX][posZ]->pisavelObj[numObjetosAtual]);
                      MapSquares[posX][posZ]->objects[numObjetosAtual] = 
                                                     objects->getMapObject(nome);
-                     MapSquares[posX][posZ]->quadObjetos[i] = quadradoRelativo(
+                     MapSquares[posX][posZ]->quadObjetos[i] = relativeSquare(
                          MapSquares[posX][posZ]->quadXobjects[numObjetosAtual],
                          MapSquares[posX][posZ]->quadZobjects[numObjetosAtual]);
                      numObjetosAtual++;
@@ -1101,7 +1101,7 @@ int Map::open(string arquivo, modelList& mdlList)
           for(az = iniz;az<=maxz;az++)
           {
               indiceMuro = 0;
-              aux = quadradoRelativo(ax,az);
+              aux = relativeSquare(ax,az);
               while((aux!=NULL) && (indiceMuro < MAXMUROS) && 
                     (aux->muros[indiceMuro] != NULL))
               {
@@ -1162,7 +1162,7 @@ void Map::newMap(int X, int Z)
    {
       for(auxX = 0; auxX < x; auxX++)
       {
-          saux = quadradoRelativo(auxX,auxZ);
+          saux = relativeSquare(auxX,auxZ);
           saux->x1 = (auxX)*SQUARESIZE;
           saux->x2 = saux->x1+SQUARESIZE;
           saux->z1 = (auxZ)*SQUARESIZE;
@@ -1179,7 +1179,7 @@ void Map::newMap(int X, int Z)
 
    xInic = 1*SQUARESIZE;
    zInic = 1*SQUARESIZE;
-   squareInic = quadradoRelativo(0,0);
+   squareInic = relativeSquare(0,0);
 }
 
 
@@ -1271,7 +1271,7 @@ void Map::optimize()
         maux = maux->proximo;
     }
 
-   /* Verifica quadrados ocupados pelos Objetos */
+   /* Verify Object Occupied Squares */
 //TODO
 
 }

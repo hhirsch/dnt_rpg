@@ -34,7 +34,7 @@ void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
    mZ = mouseZ;
 
    Square* saux;
-   saux = actualMap->quadradoRelativo(quadX, quadZ);
+   saux = actualMap->relativeSquare(quadX, quadZ);
 
    if(saux)
    {
@@ -76,7 +76,7 @@ void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                        Uint8 mButton)
 {
-   Square* saux = actualMap->quadradoRelativo(quadX,quadZ);
+   Square* saux = actualMap->relativeSquare(quadX,quadZ);
    int mod;
 
    if(actualTool == TOOL_TERRAIN_UP)
@@ -110,16 +110,16 @@ void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
        if( (d1<=d2) && (d1<=d3) && (d1<=d4) )
        {
            saux->h1 += mod;
-           saux = actualMap->quadradoRelativo(quadX-1,quadZ);
+           saux = actualMap->relativeSquare(quadX-1,quadZ);
            if(saux)
            {
               saux->h4 += mod;
            }
-           saux = actualMap->quadradoRelativo(quadX,quadZ-1);
+           saux = actualMap->relativeSquare(quadX,quadZ-1);
            if(saux)
            {
                saux->h2 += mod;
-               saux = actualMap->quadradoRelativo(quadX-1,quadZ-1);
+               saux = actualMap->relativeSquare(quadX-1,quadZ-1);
                if(saux)
                {
                   saux->h3 += mod;
@@ -129,16 +129,16 @@ void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
        else if( (d2<=d1) && (d2<=d3) && (d2<=d4) )
        {
            saux->h2 += mod;
-           saux = actualMap->quadradoRelativo(quadX-1,quadZ);
+           saux = actualMap->relativeSquare(quadX-1,quadZ);
            if(saux)
            {
               saux->h3 += mod;
            }
-           saux = actualMap->quadradoRelativo(quadX,quadZ+1);
+           saux = actualMap->relativeSquare(quadX,quadZ+1);
            if(saux)
            { 
               saux->h1 += mod;
-              saux = actualMap->quadradoRelativo(quadX-1,quadZ+1);
+              saux = actualMap->relativeSquare(quadX-1,quadZ+1);
               if(saux)
               {
                  saux->h4 += mod;
@@ -148,16 +148,16 @@ void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
        else if( (d3<=d1) && (d3<=d2) && (d1<=d4) )
        {
           saux->h3 += mod;
-          saux = actualMap->quadradoRelativo(quadX+1,quadZ);
+          saux = actualMap->relativeSquare(quadX+1,quadZ);
           if(saux)
           {
              saux->h2 += mod;
           }
-          saux = actualMap->quadradoRelativo(quadX,quadZ+1);
+          saux = actualMap->relativeSquare(quadX,quadZ+1);
           if(saux)
           {
              saux->h4 += mod;
-             saux = actualMap->quadradoRelativo(quadX+1,quadZ+1);
+             saux = actualMap->relativeSquare(quadX+1,quadZ+1);
              if(saux)
              {
                 saux->h1 += mod;
@@ -167,16 +167,16 @@ void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
        else if( (d4<=d1) && (d4<=d2) && (d4<=d3) )
        {
           saux->h4 += mod;
-          saux = actualMap->quadradoRelativo(quadX+1,quadZ);
+          saux = actualMap->relativeSquare(quadX+1,quadZ);
           if(saux)
           {
              saux->h1 += mod;
           }
-          saux = actualMap->quadradoRelativo(quadX,quadZ-1);
+          saux = actualMap->relativeSquare(quadX,quadZ-1);
           if(saux)
           {
              saux->h3 += mod;
-             saux = actualMap->quadradoRelativo(quadX+1,quadZ-1);
+             saux = actualMap->relativeSquare(quadX+1,quadZ-1);
              if(saux)
              {
                 saux->h2 += mod;
@@ -267,7 +267,7 @@ void terrain::doNivelate(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          {
             for(z = quadInitZ; z <= quadZ; z++)
             {
-               saux = actualMap->quadradoRelativo(x,z);
+               saux = actualMap->relativeSquare(x,z);
                if(saux)
                {
                   if(pointInSquare(saux->x1, saux->z1,initmX, initmZ, mX, mZ))
@@ -301,7 +301,7 @@ void terrain::doTexture(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 {
    if(mButton & SDL_BUTTON(1))
    {
-      Square* quad = actualMap->quadradoRelativo(quadX, quadZ);
+      Square* quad = actualMap->relativeSquare(quadX, quadZ);
       if(quad)
       {
          quad->textura = actualTexture;
@@ -314,7 +314,7 @@ void terrain::doTexture(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
  ********************************************************************/
 void terrain::drawTemporary()
 {
-   Square* quad = actualMap->quadradoRelativo(quadX, quadZ); 
+   Square* quad = actualMap->relativeSquare(quadX, quadZ); 
 
    /************************
     *    Texture Stuff     *
@@ -362,7 +362,7 @@ void terrain::drawTemporary()
    {
       if(state == STATE_TERRAIN_NIVELATE_STARTED)
       {
-         Square* oth = actualMap->quadradoRelativo(quadInitX, quadInitZ);
+         Square* oth = actualMap->relativeSquare(quadInitX, quadInitZ);
          if( (oth) && (quad))
          {
             glDisable(GL_LIGHTING);

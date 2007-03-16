@@ -1247,7 +1247,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          int qx, qz;
          qx = (int)xReal / SQUARESIZE;
          qz = (int)zReal / SQUARESIZE;
-         Square* quaux = actualMap->quadradoRelativo(qx,qz);
+         Square* quaux = actualMap->relativeSquare(qx,qz);
        if(quaux != NULL)
        {
          int pronto;
@@ -1932,7 +1932,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                int posZ =(int)floor(PCs->personagemAtivo->posicaoLadoZ / 
                                     SQUARESIZE);
                PCs->personagemAtivo->ocupaQuad = 
-                                         actualMap->quadradoRelativo(posX,posZ);
+                                         actualMap->relativeSquare(posX,posZ);
                /* Define New Height */
                defineActiveCharacterHeight(PCs->personagemAtivo->posicaoLadoX,
                                            PCs->personagemAtivo->posicaoLadoZ);
@@ -2361,7 +2361,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       /* Define New Occuped Square */
       int posX =(int)floor( nx / (SQUARESIZE));
       int posZ =(int)floor( nz / (SQUARESIZE));
-      PCs->personagemAtivo->ocupaQuad = actualMap->quadradoRelativo(posX,posZ);
+      PCs->personagemAtivo->ocupaQuad = actualMap->relativeSquare(posX,posZ);
 
       /* Define New Heigh */
       if(!defineActiveCharacterHeight(nx, nz))

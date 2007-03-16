@@ -172,7 +172,7 @@ class Map
        * \param za -> z coordinate of square
        * \return the coordinate relative square.
        ***************************************************************/
-      Square* quadradoRelativo(int xa, int za);
+      Square* relativeSquare(int xa, int za);
       /*!
        *************************************************************** 
        * Save map to file

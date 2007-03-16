@@ -285,7 +285,7 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
         
         heuristic = diagonal + orthogonal + dX + dZ;
 
-        perQuad = actualMap->quadradoRelativo((int)floor( posX / (SQUARESIZE)),
+        perQuad = actualMap->relativeSquare((int)floor( posX / (SQUARESIZE)),
                                               (int)floor( posZ / (SQUARESIZE)));
         if( (node2 != NULL) || (node3 != NULL) || 
             (perQuad == NULL) ||

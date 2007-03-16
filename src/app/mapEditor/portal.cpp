@@ -20,7 +20,7 @@ portal::portal(Map* map)
    {
       for(z=0; z<actualMap->z;z++)
       {
-         s = actualMap->quadradoRelativo(x,z);
+         s = actualMap->relativeSquare(x,z);
          if(s->mapConection.active)
          {
             portalList->addArea(s->mapConection.x1, s->mapConection.z1,
@@ -295,7 +295,7 @@ void portal::drawTemporary()
  ******************************************************/
 void portal::addPortal(int qx, int qz, string where)
 {
-   Square* s = actualMap->quadradoRelativo(qx,qz);
+   Square* s = actualMap->relativeSquare(qx,qz);
    if(s)
    {
        if(initmX > mX)
@@ -329,7 +329,7 @@ void portal::addPortal(int qx, int qz, string where)
        {
           for(Z1 = minqz; Z1 <=maxqz; Z1++) 
           {
-             q = actualMap->quadradoRelativo(X1,Z1);
+             q = actualMap->relativeSquare(X1,Z1);
              if((q) && (q != s))
              {
                 q->mapConection.x1 = initmX;

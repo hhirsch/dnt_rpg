@@ -217,8 +217,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
 
  
    /* Testa quadrados a direita */
-   saux = actualMap->quadradoRelativo(perQuad->posX+1,
-                             perQuad->posZ);
+   saux = actualMap->relativeSquare(perQuad->posX+1, perQuad->posZ);
    if(saux) 
    { 
       /* leste */
@@ -236,8 +235,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          }
       }
       /* Nordeste */
-      saux = actualMap->quadradoRelativo(perQuad->posX+1,
-                             perQuad->posZ-1);
+      saux = actualMap->relativeSquare(perQuad->posX+1, perQuad->posZ-1);
       if( saux )
       {
          min2[0] = saux->x1;
@@ -255,8 +253,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          }
       }
       /* Sudeste */
-      saux = actualMap->quadradoRelativo(perQuad->posX+1,
-                             perQuad->posZ+1);
+      saux = actualMap->relativeSquare(perQuad->posX+1, perQuad->posZ+1);
       if( saux )
       {
          min2[0] = saux->x1;
@@ -276,8 +273,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    }
 
    /* Testa quadrados a esquerda */
-   saux = actualMap->quadradoRelativo(perQuad->posX-1,
-                             perQuad->posZ);
+   saux = actualMap->relativeSquare(perQuad->posX-1, perQuad->posZ);
    if( saux ) 
    { 
       /* oeste */
@@ -296,8 +292,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       }
 
       /* Noroeste */
-      saux = actualMap->quadradoRelativo(perQuad->posX-1,
-                             perQuad->posZ-1);
+      saux = actualMap->relativeSquare(perQuad->posX-1, perQuad->posZ-1);
       if( saux )
       {
          min2[0] = saux->x1;
@@ -315,8 +310,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          }
       }
       /* Sudoeste */
-      saux = actualMap->quadradoRelativo(perQuad->posX-1,
-                             perQuad->posZ+1);
+      saux = actualMap->relativeSquare(perQuad->posX-1, perQuad->posZ+1);
       if( saux )
       { 
          min2[0] = saux->x1;
@@ -336,8 +330,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    }
   
    /* Testa quadrados abaixo */
-   saux = actualMap->quadradoRelativo(perQuad->posX,
-                             perQuad->posZ+1);
+   saux = actualMap->relativeSquare(perQuad->posX, perQuad->posZ+1);
    if( saux )
    {
       min2[0] = saux->x1;
@@ -357,8 +350,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    }
 
    /* Testa quadrados acima */
-   saux = actualMap->quadradoRelativo(perQuad->posX,
-                             perQuad->posZ-1);
+   saux = actualMap->relativeSquare(perQuad->posX, perQuad->posZ-1);
    if( saux )
    {  
       min2[0] = saux->x1;
