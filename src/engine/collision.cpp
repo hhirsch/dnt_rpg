@@ -165,7 +165,8 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
 
    /* Testa limites do Mapa */
    if( (min[0]<2) || (min[2]<2) || 
-       (max[0]>actualMap->x*SQUARESIZE-2) || (max[2]>actualMap->z*SQUARESIZE-2))
+       (max[0]>actualMap->getSizeX()*SQUARESIZE-2) || 
+       (max[2]>actualMap->getSizeZ()*SQUARESIZE-2))
    {
       return(false);
    }

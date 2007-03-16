@@ -227,7 +227,13 @@ class Map
 
       /*! 
        **************************************************************
-       *   Insert Object on Map
+       * Insert Object on Map
+       * \param xReal -> xPosition to insert
+       * \param zReal -> zPosition to insert
+       * \param orObj -> object orientation value
+       * \param obj -> pointer to mapObject
+       * \param qx -> square internal X (in Squares)
+       * \param qz -> square internal Z (in squares)
        **************************************************************/
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                    mapObject* obj, int qx, int qz);
@@ -243,26 +249,101 @@ class Map
       mapObject* insertMapObject(string arquivo, string nome, 
                                   modelList& mdlList);
 
+      /*! 
+       **************************************************************
+       * Get Map File Name
+       * \return map fileName
+       **************************************************************/
       string getFileName();
+
+      /*! 
+       **************************************************************
+       * Set Map File Name
+       * \param fileName -> New fileName
+       **************************************************************/
       void setFileName(string fileName);
+
+      /*! 
+       **************************************************************
+       * Set NPC File Name
+       * \return NPC fileName
+       **************************************************************/
       string getNpcFileName();
+
+      /*! 
+       **************************************************************
+       * Set NPC File Name
+       * \param fileName -> New fileName
+       **************************************************************/
       void setNpcFileName(string fileName);
+
+      /*! 
+       **************************************************************
+       * Get Music File Name
+       * \return music fileName
+       **************************************************************/
       string getMusicFileName();
+
+      /*! 
+       **************************************************************
+       * Set Music File Name
+       * \param fileName -> New fileName
+       **************************************************************/
       void setMusicFileName(string fileName);
+
+      /*! 
+       **************************************************************
+       * Get Particles File Name
+       * \return particles fileName
+       **************************************************************/
       string getParticlesFileName();
+
+      /*! 
+       **************************************************************
+       * Set Particles File Name
+       * \param fileName -> New fileName
+       **************************************************************/
       void setParticlesFileName(string fileName);
+
+      /*! 
+       **************************************************************
+       * Get Map Size X
+       * \return Map X size on squares
+       ***************************************************************/
+      int getSizeX();
+      /*! 
+       **************************************************************
+       * Set Map Size X
+       * \param sizeX -> Map X size on squares
+       ***************************************************************/
+      void setSizeX(int sizeX);
+      /*! 
+       **************************************************************
+       * Get Map Size X
+       * \return Map X size on squares
+       ***************************************************************/
+      int getSizeZ();
+      /*! 
+       **************************************************************
+       * Set Map Size Z
+       * \param sizeZ -> Map Z size on squares
+       ***************************************************************/
+      void setSizeZ(int sizeZ);
+      /*! 
+       **************************************************************
+       * get Initial Position
+       * \param iX -> initial X position
+       * \param iZ -> initial Z position
+       ***************************************************************/
+      void getInitialPosition(float& iX, float& iZ);
 
 
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
       mapRoad* roads;       /**< Map's Roads */
-      int numtexturas;      /**< Number of distint Textures on Map */
+      int numtexturas;      /**< Number of distinct Textures on Map */
       texture* Texturas;    /**< List of textures on Map */
-      int xInic,            /**< X coordinate where PCs starts */
-          zInic;            /**< Z Coordinate where PCs starts */
       Square* squareInic;   /**< Square where PCs starts */
-      int x,                /**< Map X dimension */
-          z;                /**< Map Z Dimension */
       muro* muros;          /**< Map Walls */
       muro* meiosFio;       /**< Map Meio Fios (how translate this?) */
       door* portas;         /**< Map Doors */
@@ -271,13 +352,16 @@ class Map
       int SQUAREMINIDIV;    /**< MiniMap square division relation */
 
       protected:
+         int x,                /**< Map X dimension (in squares) */
+             z;                /**< Map Z Dimension (in squares) */
          Square*** MapSquares; /**< Internal Map squares */
          lMapObject* objects;  /**< Map's objects list */
          string music;         /**< Map Music */
          string name;          /**< File name of loaded map */
          string particlesFileName; /**< File Name of Map Particles Systens */
          string npcFileName;   /**< Static NPC's on map filename */
-
+         int xInic,            /**< X coordinate where PCs starts */
+             zInic;            /**< Z Coordinate where PCs starts */
 };
 
 #endif

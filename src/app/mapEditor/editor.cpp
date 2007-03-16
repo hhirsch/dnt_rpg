@@ -283,9 +283,9 @@ void editor::verifyPosition()
 {
    if(mapOpened)
    {
-       if(gui->gameCamera.getCenterX() > ((map->x * SQUARESIZE)+20))
+       if(gui->gameCamera.getCenterX() > ((map->getSizeX() * SQUARESIZE)+20))
        {
-          gui->gameCamera.actualizeCamera( ((map->x * SQUARESIZE)+20),
+          gui->gameCamera.actualizeCamera( ((map->getSizeX() * SQUARESIZE)+20),
                                           gui->gameCamera.getCenterY(),
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
@@ -297,11 +297,11 @@ void editor::verifyPosition()
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
        }
-       if(gui->gameCamera.getCenterZ() > ((map->z * SQUARESIZE)+20))
+       if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * SQUARESIZE)+20))
        {
           gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
                                           gui->gameCamera.getCenterY(),
-                                          ((map->z * SQUARESIZE)+20), 
+                                          ((map->getSizeZ() * SQUARESIZE)+20), 
                                           0.0);
        }
        else if(gui->gameCamera.getCenterZ() < -20)
@@ -461,9 +461,10 @@ void editor::draw()
          glDisable(GL_LIGHTING);
          glBegin(GL_QUADS);
          glVertex3f(-10, -5, -10);
-         glVertex3f(-10, -5, map->z*SQUARESIZE+10);
-         glVertex3f(map->x*SQUARESIZE+10, -5,  map->z*SQUARESIZE+10);
-         glVertex3f(map->x*SQUARESIZE+10, -5, -10);
+         glVertex3f(-10, -5, map->getSizeZ()*SQUARESIZE+10);
+         glVertex3f(map->getSizeX()*SQUARESIZE+10, -5,
+                    map->getSizeZ()*SQUARESIZE+10);
+         glVertex3f(map->getSizeX()*SQUARESIZE+10, -5, -10);
 //         glVertex3f(-10, -10, map->x*SQUARESIZE+10, map->z*SQUARESIZE+10);
          glEnd();
          glEnable(GL_LIGHTING);

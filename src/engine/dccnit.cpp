@@ -407,8 +407,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    
 
    /* Put Active Party on Init Position */
-   PCs->personagemAtivo->posicaoLadoX = actualMap->xInic;
-   PCs->personagemAtivo->posicaoLadoZ = actualMap->zInic;
+   actualMap->getInitialPosition(PCs->personagemAtivo->posicaoLadoX,
+                                 PCs->personagemAtivo->posicaoLadoZ);
    gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
                               PCs->personagemAtivo->posicaoLadoY,
                               PCs->personagemAtivo->posicaoLadoZ,
@@ -1961,14 +1961,14 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       if(miniMapWindow)
       {
          GLint x = (int)(((PCs->personagemAtivo->posicaoLadoX) / (SQUARESIZE)));
-         if(x > actualMap->x-1)
+         if(x > actualMap->getSizeX()-1)
          {
-            x = actualMap->x-1;
+            x = actualMap->getSizeX()-1;
          }
          GLint z = (int)(((PCs->personagemAtivo->posicaoLadoZ) / (SQUARESIZE)));
-         if( z > actualMap->z-1)
+         if( z > actualMap->getSizeZ()-1)
          {
-            z = actualMap->z-1;
+            z = actualMap->getSizeZ()-1;
          }
          x = 8 + (x*4);
          z = 20 + (z*4);
@@ -2417,14 +2417,14 @@ bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
 void engine::OpenMiniMapWindow()
 {
    GLint x = (int)(((PCs->personagemAtivo->posicaoLadoX) / (SQUARESIZE)));
-   if(x > actualMap->x-1)
+   if(x > actualMap->getSizeX()-1)
    {
-      x = actualMap->x-1;
+      x = actualMap->getSizeX()-1;
    }
    GLint z = (int)(((PCs->personagemAtivo->posicaoLadoZ) / (SQUARESIZE)));
-   if( z > actualMap->z-1)
+   if( z > actualMap->getSizeZ()-1)
    {
-      z = actualMap->z-1;
+      z = actualMap->getSizeZ()-1;
    }
    x = 8 + (x*3);
    z = 20 + (z*3);

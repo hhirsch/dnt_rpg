@@ -170,8 +170,8 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
    collisionDetect.defineMap(actualMap);
 
    if( (destinyX < 0) || (destinyZ < 0) || 
-       (destinyX >= actualMap->x*SQUARESIZE) ||
-       (destinyZ >= actualMap->z*SQUARESIZE) )
+       (destinyX >= actualMap->getSizeX()*SQUARESIZE) ||
+       (destinyZ >= actualMap->getSizeZ()*SQUARESIZE) )
    {
       state = ASTAR_STATE_NOT_FOUND;
 

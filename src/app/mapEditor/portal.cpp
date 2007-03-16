@@ -16,9 +16,9 @@ portal::portal(Map* map)
    /* Start the portal List */
    Square* s;
    int x, z;
-   for(x=0; x<actualMap->x; x++)
+   for(x=0; x<actualMap->getSizeX(); x++)
    {
-      for(z=0; z<actualMap->z;z++)
+      for(z=0; z<actualMap->getSizeZ();z++)
       {
          s = actualMap->relativeSquare(x,z);
          if(s->mapConection.active)

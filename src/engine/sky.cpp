@@ -95,7 +95,8 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
       glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
       glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
       glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
-      glTranslatef(actualMap->x*HALFSQUARESIZE, 0 , actualMap->z*HALFSQUARESIZE);
+      glTranslatef(actualMap->getSizeX()*HALFSQUARESIZE, 0 , 
+                   actualMap->getSizeZ()*HALFSQUARESIZE);
       glScalef(HALFFARVIEW,HALFFARVIEW,HALFFARVIEW);
       drawDome(20,20);
    glPopMatrix();
