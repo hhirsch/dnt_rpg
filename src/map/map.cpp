@@ -852,7 +852,7 @@ void Map::setSizeZ(int sizeZ)
 void Map::getInitialPosition(float& iX, float& iZ)
 {
    iX = xInic;
-   iZ = xInic;
+   iZ = zInic;
 }
 
 
