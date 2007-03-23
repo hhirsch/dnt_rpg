@@ -1,6 +1,10 @@
 #include "grass.h"
 #include "../gui/desenho.h"
+#include "../map/map.h"
 
+/**************************************************************************
+ *                             Constructor                                *
+ **************************************************************************/
 grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total, 
              string fileName):particleSystem(total,PARTICLE_DRAW_INDIVIDUAL)
 {
@@ -9,7 +13,7 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
    centerX2 = cX2;
    centerZ1 = cZ1;
    centerZ2 = cZ2;
-   //grassModel = glmReadOBJ(fileName.c_str(),"",1);
+   usedMap = NULL;
    grassFileName = fileName;
    img = IMG_Load(fileName.c_str());
    if(!img)
@@ -17,7 +21,6 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
       printf("Error when loading grass! Maybe Crash Soon!\n File: %s\n",
              fileName.c_str());
    }
-   //carregaTexturaRGBA(img, &grassTexture);
    glGenTextures(1, &(grassTexture));
    glBindTexture(GL_TEXTURE_2D, grassTexture);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
@@ -35,54 +38,55 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
    SDL_FreeSurface(img);
 }
 
+/**************************************************************************
+ *                              Destructor                                *
+ **************************************************************************/
 grass::~grass()
 {
    glDeleteTextures(1, &grassTexture);
-   //glmDelete(grassModel);
+   usedMap = NULL;
 }
 
-
+/**************************************************************************
+ *                                Render                                  *
+ **************************************************************************/
 void grass::Render(particle* part)
 {
-   //printf("%f %f %f %f\n",part->posX, part->posZ,part->prvX,part->prvZ  );
    glPushMatrix();
       glTranslatef(part->posX, 0 ,part->posZ);
-      glRotatef(part->prvY,0,1,0);
-      glRotatef(part->prvX,1,0,0);
-      glRotatef(part->prvZ,0,0,1);
-      //glNormal3f(0.0,0.0,1.0);
+      glRotatef(part->G,0,1,0);
+      glRotatef(part->R,1,0,0);
+      glRotatef(part->B,0,0,1);
       glBegin(GL_QUADS);
          glTexCoord2f(0.0,0.0);
-         glVertex3f(-8.0,10.0,0.0);
+         glVertex3f(-8.0,part->posY,0.0);
          glTexCoord2f(1.0,0.0);
-         glVertex3f(8.0,10.0,0.0);
+         glVertex3f(8.0,part->prvX,0.0);
          glTexCoord2f(1.0,1.0);
-         glVertex3f(8.0,0.0,0.0);
+         glVertex3f(8.0,part->prvY,0.0);
          glTexCoord2f(0.0,1.0);
-         glVertex3f(-8.0,0.0,0.0);
+         glVertex3f(-8.0,part->prvZ,0.0);
       glEnd();
-         
-      //glmDraw(modelo);
-      //glmDrawLists(grassModel);
   glPopMatrix();
 }
 
+/**************************************************************************
+ *                              InitRender                                *
+ **************************************************************************/
 void grass::InitRender()
 {
-   //glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
    glDepthMask(GL_FALSE);
-   //glEnable(GL_CULL_FACE);
-   //glEnable(GL_COLOR_MATERIAL);
-   
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, grassTexture);
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
 }
 
+/**************************************************************************
+ *                              EndRender                                 *
+ **************************************************************************/
 void grass::EndRender()
 {
    glDisable(GL_CULL_FACE);
@@ -90,33 +94,39 @@ void grass::EndRender()
    glDepthFunc(GL_LESS);
    glDepthMask(GL_TRUE);
    glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
-   //glDisable(GL_COLOR_MATERIAL);
    glDisable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
    glEnable(GL_LIGHTING);
 }
 
+/**************************************************************************
+ *                              actualize                                 *
+ **************************************************************************/
 void grass::actualize(particle* part)
 {
-   part->prvX += part->velX;
+   part->R += part->velX;
 
-   //printf("%.3f AND %.3f BY %.3f\n",part->prvX, part->prvR, part->velX);
-
-   if(part->prvX <= -45)
+   if(part->R <= -45)
    {
       part->velX = 0.50;
    }
-   else if(part->prvX >= part->prvR+10)
+   else if(part->R >= part->prvR+10)
    {
       part->velX = -0.50;
    }
 }
 
+/**************************************************************************
+ *                            continueLive                                *
+ **************************************************************************/
 bool grass::continueLive(particle* part)
 {
    return( true );
 }
 
+/**************************************************************************
+ *                             needCreate                                 *
+ **************************************************************************/
 int grass::needCreate()
 {
    if(actualParticles == 0)
@@ -126,39 +136,69 @@ int grass::needCreate()
    return(0);
 }
 
+/**************************************************************************
+ *                           createParticle                               *
+ **************************************************************************/
 void grass::createParticle(particle* part)
 {
+   /* Define Position X on Map */
    part->posX = ((centerX2-centerX1)*(rand() / ((double)RAND_MAX + 1)))
                 + centerX1;
-   part->posY = 0;
+   /* Define Position Z on Map */
    part->posZ = ((centerZ2-centerZ1)*(rand() / ((double)RAND_MAX + 1)))
                 + centerZ1;
+
+   if(usedMap)
+   {
+      Map* map = (Map*) usedMap;
+      part->posY = map->getHeight(part->posX - 8.0, part->posZ) + 10;
+      part->prvX = map->getHeight(part->posX + 8.0, part->posZ) + 10;
+      part->prvY = map->getHeight(part->posX + 8.0, part->posZ);
+      part->prvZ = map->getHeight(part->posX - 8.0, part->posZ);
+   }
+   else
+   {
+      part->posY = 10; /* Used as Height on First Vertex */
+      part->prvX = 10; /* Used as Height on Second Vertex */
+      part->prvY = 0; /* Used as Height on Third Vertex */
+      part->prvZ = 0; /* Used as Height on Forth Vertex */
+   }
    
-   part->prvX = 15*(rand() / ((double)RAND_MAX + 1));
-   part->prvY = 90*(rand() / ((double)RAND_MAX + 1));
-   part->prvZ = 15*(rand() / ((double)RAND_MAX + 1));
+   /* Define all Rotations */
+   part->R = 15*(rand() / ((double)RAND_MAX + 1));
+   part->G = 90*(rand() / ((double)RAND_MAX + 1));
+   part->B = 15*(rand() / ((double)RAND_MAX + 1));
    
+   /* Define Velocity */
    part->velX = -0.5;
-   part->prvR = part->prvX;
-   //part->velZ = -1.0;
+
+   /* Define previous value of actualized rotation */
+   part->prvR = part->R;
    
+   /* Define Particle Size -> not Used! */
    part->size = 1; 
-   part->R = 0;
-   part->G = 0;
-   part->B = 0;
 }
 
+/**************************************************************************
+ *                               NextStep                                 *
+ **************************************************************************/
 void grass::NextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
    DoStep(matriz);
 }
 
+/**************************************************************************
+ *                             numParticles                               *
+ **************************************************************************/
 int grass::numParticles()
 {
    return(actualParticles);
 }
 
+/**************************************************************************
+ *                             getPosition                                *
+ **************************************************************************/
 void grass::getPosition(GLfloat& cX1, GLfloat& cZ1, GLfloat& cX2, GLfloat& cZ2 )
 {
    cX1 = centerX1;
@@ -167,8 +207,20 @@ void grass::getPosition(GLfloat& cX1, GLfloat& cZ1, GLfloat& cX2, GLfloat& cZ2 )
    cZ2 = centerZ2;
 }
 
+/**************************************************************************
+ *                           getGrassFileName                             *
+ **************************************************************************/
 string grass::getGrassFileName()
 {
    return(grassFileName);
 }
+
+/**************************************************************************
+ *                              defineMap                                 *
+ **************************************************************************/
+void grass::defineMap(void* map)
+{
+   usedMap = map;
+}
+
 

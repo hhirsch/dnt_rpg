@@ -79,20 +79,39 @@ public:
        * \return number of living particles
        ***************************************************************/
       int numParticles();
+      /*!
+       ***************************************************************
+       * Define the opened map
+       * \param map -> pointer to the opened map
+       ***************************************************************/
+      void defineMap(void* map);
 
+      /*!
+       ***************************************************************
+       * Get The Area of the grass
+       * \param cX1 -> x1 coordinate
+       * \param cZ1 -> z1 coordinate
+       * \param cX2 -> x2 coordinate
+       * \param cZ2 -> z2 coordinate
+       ***************************************************************/
       void getPosition(GLfloat& cX1, GLfloat& cZ1, GLfloat& cX2, GLfloat& cZ2 );
 
+      /*!
+       ***************************************************************
+       * Get the filename of the Grass texture used
+       * \return name of the grass texture file
+       ***************************************************************/
       string getGrassFileName();
 
    private:
       float seconds;        /**< Seconds, not used anymore. */
-      float centerX1, 
-            centerX2,
-            centerZ1,
-            centerZ2;
-      GLMmodel* grassModel; /**< Grass to Load */
-      string grassFileName;
-      GLuint grassTexture;
+      float centerX1,       /**< Grass Area X1 */
+            centerX2,       /**< Grass Area X2 */
+            centerZ1,       /**< Grass Area Z1 */
+            centerZ2;       /**< Grass Area Z2 */
+      string grassFileName; /**< Name of the grass file texture */
+      GLuint grassTexture;  /**< Load Texture used to grass */
+      void* usedMap;        /**< Actual Openned Map */
 };
 
 

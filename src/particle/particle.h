@@ -120,6 +120,13 @@ class particleSystem
        * \param cZ -> Z position
        ***************************************************************/
       void definePosition(float cX, float cZ);
+      /*!
+       ***************************************************************
+       * Define XZ position
+       * \param cX -> X position
+       * \param cY -> Y position
+       * \param cZ -> Z position
+       ***************************************************************/
       void definePosition(float cX, float cY, float cZ);
 
       string getFileName(){return(strFileName);};

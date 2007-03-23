@@ -117,6 +117,13 @@ class partSystem
        ***************************************************************/
       void deleteAll();
 
+      /*!
+       ***************************************************************
+       * Define the opened map
+       * \param map -> pointer to the opened map
+       ***************************************************************/
+      void setActualMap(void* map);
+
 
    private:
       part1* waterfall[MAX_WATERFALL];        /**< Waterfall Particles */

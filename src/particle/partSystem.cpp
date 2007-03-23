@@ -510,6 +510,22 @@ void partSystem::stabilizeAll()
 }
 
 /**********************************************************************
+ *                                setMap                              *
+ **********************************************************************/
+void partSystem::setActualMap(void* map)
+{
+   int i;
+
+   for(i = 0; i < MAX_GRASS; i++)
+   {
+      if(grassParticles[i] != NULL)
+      {
+         grassParticles[i]->defineMap(map);
+      }
+   }
+}
+
+/**********************************************************************
  *                             numParticles                           *
  **********************************************************************/
 int partSystem::numParticles()

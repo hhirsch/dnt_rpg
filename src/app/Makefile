@@ -8,16 +8,18 @@ ENDENGINE = ../engine/
 ENDMAPA = ../map/
 ENDETC = ../etc/
 ENDPARTICLE = ../particle/
+ENDCLASSES = ../classes/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)rolbar.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSENGINE = $(ENDENGINE)conversa.o $(ENDENGINE)culling.o
-OBJSMAPA = $(ENDETC)glm.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDENGINE)culling.o $(ENDMAPA)maproad.o
+OBJSCLASSES = $(ENDCLASSES)inventory.o $(ENDCLASSES)skills.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o $(ENDCLASSES)object.o
+OBJSMAPA = $(ENDETC)animodel.o $(ENDETC)glm.o $(ENDETC)modellist.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)map.o $(ENDMAPA)maproad.o $(OBJSCLASSES)
 OBJSPARTICLE = $(ENDPARTICLE)particle.o $(ENDPARTICLE)part1.o $(ENDPARTICLE)part2.o $(ENDPARTICLE)part3.o $(ENDPARTICLE)part4.o $(ENDPARTICLE)part5.o $(ENDPARTICLE)part6.o $(ENDPARTICLE)part7.o $(ENDPARTICLE)grass.o
 SUBSYSTEMS = mapEditor/ #iaEditor/
 
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-all: DlgEditor fntEditor dlgCompiler partEditor parts
+all: DlgEditor fntEditor dlgCompiler #partEditor parts
 
 fntEditor.o: fntEditor.cpp
 	@printf "Making fntEditor.o... "
@@ -69,9 +71,9 @@ partEditor.o: partEditor.cpp
 	@$(CC) $(CFLAGS) partEditor.cpp -o partEditor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-partEditor: $(OBJSGUI) $(OBJSENGINE) partEditor.o
+partEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJSMAPA) partEditor.o
 	@printf "Linking partEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) $(OBJSPARTICLE) partEditor.o -o $(BIN)partEditor
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) $(OBJSMAPA) $(OBJSPARTICLE) partEditor.o -o $(BIN)partEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
