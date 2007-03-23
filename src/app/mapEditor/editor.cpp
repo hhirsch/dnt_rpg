@@ -616,6 +616,7 @@ void editor::doEditorIO()
       printf("doEditorIO: texture: %d\n",actualTexture);
       terrainEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(), 
                                   actualTexture);
+      particleSystem->setActualMap(map);
    }
    else if( (gui->getState() == GUI_IO_STATE_PORTAL) && (mapOpened))
    {

@@ -55,6 +55,7 @@ void grass::Render(particle* part)
    glPushMatrix();
       glTranslatef(part->posX, 0 ,part->posZ);
       glRotatef(part->G,0,1,0);
+      //FIXME the X rotation when grass is on different height!
       glRotatef(part->R,1,0,0);
       glRotatef(part->B,0,0,1);
       glBegin(GL_QUADS);
@@ -220,7 +221,13 @@ string grass::getGrassFileName()
  **************************************************************************/
 void grass::defineMap(void* map)
 {
+   int i;
    usedMap = map;
+   for(i = 0; i < maxParticles; i++)
+   {
+      particles[i].status = PARTICLE_STATUS_DEAD;
+   }
+   actualParticles = 0;
 }
 
 
