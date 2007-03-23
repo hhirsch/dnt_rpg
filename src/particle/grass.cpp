@@ -223,11 +223,21 @@ void grass::defineMap(void* map)
 {
    int i;
    usedMap = map;
+   Map* mapa = (Map*)map;
    for(i = 0; i < maxParticles; i++)
    {
-      particles[i].status = PARTICLE_STATUS_DEAD;
+      if(particles[i].status != PARTICLE_STATUS_DEAD)
+      {
+         particles[i].posY = mapa->getHeight(particles[i].posX - 8.0, 
+                                             particles[i].posZ) + 10;
+         particles[i].prvX = mapa->getHeight(particles[i].posX + 8.0, 
+                                             particles[i].posZ) + 10;
+         particles[i].prvY = mapa->getHeight(particles[i].posX + 8.0, 
+                                             particles[i].posZ);
+         particles[i].prvZ = mapa->getHeight(particles[i].posX - 8.0, 
+                                             particles[i].posZ);
+      }
    }
-   actualParticles = 0;
 }
 
 
