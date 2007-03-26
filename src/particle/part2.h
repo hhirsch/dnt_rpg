@@ -78,14 +78,7 @@ class part2: public particleSystem
 
    private:
       float seconds;     /**< Seconds, not used anymore */
-      GLuint sphereList; /**< sphereList, not used anymore */
       GLuint partTexture;/**< GL Particle Texture */
-
-      /*! Not Used Anymore. Draws a sphere to list
-       * \param lats -> latitudes
-       * \param longs -> longitudes. */
-      void drawSphereToList(int lats, int longs);
-
 };
 
 

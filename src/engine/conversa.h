@@ -18,10 +18,14 @@
 #define TALK_OPER_GREATEREQUAL 2 /**< Operation Greater or Equal */
 #define TALK_OPER_LESSER       3 /**< Operation Lesser */
 #define TALK_OPER_LESSEREQUAL  4 /**< Operation Lesser or Equal */
+#define TALK_OPER_TRUE         5 /**< Operation True (always accepts) */
+#define TALK_OPER_FALSE        6 /**< Operation False (always rejects) */
 
 #define TALK_OPER_ZERO  0  /**< Operator Zero */
 #define TALK_OPER_MINUS 1  /**< Operator Minus */
 #define TALK_OPER_PLUS  2  /**< Operator Plus */
+
+#define MAX_OPTIONS 5 /**< Max number of options per dialog */
 
 #include "../gui/farso.h"
 #include "personagens.h"
@@ -29,94 +33,103 @@
 using namespace std;
 
 /*! talkAction Struct */
-typedef struct 
+class talkAction
 {
+  public:
    int id;   /**< Talk Action Identificator */
    int oper; /**< Operator used */
    int qty;  /**< Quantity */
    int att;  /**< Attribute to modify */
-}talkAction;
+};
 
 /*! If else struct on conversations */
-typedef struct
+class ifElse
 {
-   string Se;    /**< If */
-   int Atributo; /**< Attribute */
-   int Operador; /**< Operator */
-   int Limite;   /**< Limit */
+  public:
+   string ifText;         /**< If */
+   int attribute;         /**< Attribute */
+   int operation;         /**< Operator */
+   int limit;             /**< Limit */
    
-   string Senao; /**< Else */ 
+   string elseText;       /**< Else */ 
 
-   talkAction SeAcao;   /**< If action */
-   talkAction SenaoAcao; /**< Else Action */
+   talkAction ifAction;   /**< If action */
+   talkAction elseAction; /**< Else Action */
     
-}seSenao;
+};
 
 /*! Dialog Struct */
-typedef struct dl
+class dialog
 {
-   seSenao NPC;        /**< NPC ifElse */
-   seSenao Opcoes[5];  /**< PC options to talk */
-   int id;             /**< Identificator */
-   struct dl* proximo; /**< Next dialog on list */
-   struct dl* anterior;/**< Previous Dialog on struct */
-}dialogo;
+  public:
+   ifElse npc;        /**< NPC ifElse */
+   ifElse options[MAX_OPTIONS]; /**< PC options to talk */
+   int id;            /**< Identificator */
+   dialog* next;      /**< Next dialog on list */
+   dialog* previous;  /**< Previous Dialog on struct */
+};
 
 /*! Conversation Class  */
-class conversa
+class conversation
 {
    public:
-      dialogo* primeiro;                /**< Head Node */
-      int total;                        /**< Total Dialogs */
-      int atual;                        /**< Actual active Dialog */
-      janela* jan;                      /**< Pointer to window used to show */
- 
       /*! conversation Constructor */
-      conversa();
+      conversation();
       /*! conversation destructor */
-      ~conversa();
+      ~conversation();
 
       /*!
        * Load file that contents the dialog.
-       * \param nome -> file name to load
+       * \param name -> file name to load
        * \return 1 if succed. */
-      int carregarArquivo(char* nome);  
+      int loadFile(string name);  
 
       /*!
        * Save dialog file
-       * \param nome -> file name to save
+       * \param name -> file name to save
        * \return 1 if succed. */
-      int salvarArquivo(char* nome);    
+      int saveFile(string name);    
 
       /*!
        * Insert dialog on conversation
        * \return pointer to dialog */
-      dialogo* inserirDialogo();        
+      dialog* insertDialog();        
 
       /*!
        * Delete dialog from conversation
-       * \param num -> numero do dialogo a ser retirado */
-      void retirarDialogo(int num);     
+       * \param num -> number of the dialog to be removed */
+      void removeDialog(int num);     
 
       /*!
        * Opens the conversation on window
-       * \param numDialogo -> dialog number to open 
+       * \param numDialog -> dialog number to open 
        * \param gui -> window interface used
        * \param pers -> character to talk to
        * \param procPres -> procedure to invoke after press */
-      void abrirDialogo(int numDialogo, interface* gui, personagem* pers,
-                        int (*procPres)(SDL_Surface *screen, int texto));
+      void openDialog(int numDialog, interface* gui, personagem* pers,
+                      int (*procPres)(SDL_Surface *screen, int texto));
 
       /*!
        * Computates the action on dialog, based on selected option.
-       * \param numDialogo -> dialog number 
+       * \param numDialog -> dialog number 
        * \param opcao -> option selected
        * \param gui -> window interface used
        * \param PC -> player's character
        * \param NPC -> non player character 
        * \return next dialog number .*/
-      int ProcessaAcao(int numDialogo, int opcao,interface* gui,
-                           personagem* PC, personagem* NPC);
+      int proccessAction(int numDialog, int opcao,interface* gui,
+                         personagem* PC, personagem* NPC);
+
+      protected:
+         janela* jan;  /**< Pointer to window used to show */
+         dialog* first;                /**< Head Node */
+         int total;                    /**< Total Dialogs */
+         int actual;                   /**< Actual active Dialog */
+
+         string getString(int& initialPosition, char* buffer,
+                          char& separator);
+         int getActionID(string token, string fileName, int line);
+         void printError(string fileName, string error, int lineNumber);
 };
 
 

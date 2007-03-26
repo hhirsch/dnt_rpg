@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <SDL/SDL_image.h>
 
+/****************************************************************************
+ *                              Constructor                                 *
+ ****************************************************************************/
 part3::part3(float cX,float cY,float cZ):
                                     particleSystem(150,PARTICLE_DRAW_INDIVIDUAL)
 {
@@ -18,64 +21,41 @@ part3::part3(float cX,float cY,float cZ):
    time = -1;
    xCoord = 0;
    yCoord = 0;
-   //partTexture = LoadTexture("../data/particles/watersurf.png"); 
-   //partTexture = LoadTexture("../data/particles/part2.png");
 }
 
+/****************************************************************************
+ *                                Destuctor                                 *
+ ****************************************************************************/
 part3::~part3()
 {
-   //glDeleteTextures(1,&partTexture);
 }
 
+/****************************************************************************
+ *                                 Render                                   *
+ ****************************************************************************/
 void part3::Render(particle* part)
 {
    glColor4f(part->R,part->G,part->B,alpha);
    glVertex3f(part->posX,
               part->posY,
               part->posZ);
-   //glTexCoord2i(xCoord,yCoord);
    glNormal3f(0,1,0);
-
-   /* From 0,0 to 0,1 to 1,0 to 1,1 */
-   /*if(xCoord == 0)
-   {
-      if(yCoord == 0)
-      {
-          yCoord = 1;  
-      }
-      else
-      {
-          xCoord = 1;
-          yCoord = 0;
-      }
-   } 
-   else 
-   {
-      if(yCoord == 0)
-      {
-          yCoord = 1;  
-      }
-      else
-      {
-          xCoord = 0;
-          yCoord = 0;
-      }
-
-   }*/
 }
 
+/****************************************************************************
+ *                               InitRender                                 *
+ ****************************************************************************/
 void part3::InitRender()
 {
    glDisable(GL_LIGHTING);
-   //glEnable(GL_TEXTURE_2D);
    glEnable( GL_BLEND );
-   /*glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-   glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA );*/
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   //glBindTexture(GL_TEXTURE_2D, partTexture);
    glBegin(GL_QUAD_STRIP);
 }
 
+/****************************************************************************
+ *                               EndRender                                  *
+ ****************************************************************************/
 void part3::EndRender()
 {
    glEnd();
@@ -84,10 +64,11 @@ void part3::EndRender()
    glDisable( GL_BLEND );
 }
 
+/****************************************************************************
+ *                                actualize                                 *
+ ****************************************************************************/
 void part3::actualize(particle* part)
 {
-   /*float aux = part->prvY;
-   part->prvY = part->posY;*/
    int next = part->internalNumber+2 ;
    if(part->internalNumber == 0)
    {
@@ -117,11 +98,17 @@ void part3::actualize(particle* part)
    }
 }
 
+/****************************************************************************
+ *                              continueLive                                *
+ ****************************************************************************/
 bool part3::continueLive(particle* part)
 {
    return( true );
 }
 
+/****************************************************************************
+ *                               needCreate                                 *
+ ****************************************************************************/
 int part3::needCreate()
 {
    if(actualParticles == 0)
@@ -130,6 +117,9 @@ int part3::needCreate()
       return(0);
 }
 
+/****************************************************************************
+ *                             createParticle                               *
+ ****************************************************************************/
 void part3::createParticle(particle* part)
 {
    part->posX = centerX;
@@ -148,17 +138,6 @@ void part3::createParticle(particle* part)
    {
       centerZ -= 10;
       centerX += 10;
-      
-      /*if( (actualParticles % 4 == 0))
-      {
-        centerY -= 5;
-        otherY += 5;
-      }
-      else
-      {
-        centerY += 5;
-        otherY -= 5;
-      }*/
    }
    else
    {
@@ -166,18 +145,26 @@ void part3::createParticle(particle* part)
    }
 }
 
+/****************************************************************************
+ *                                NextStep                                  *
+ ****************************************************************************/
 void part3::NextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
    DoStep(matriz);
 }
 
+/****************************************************************************
+ *                              numParticles                                *
+ ****************************************************************************/
 int part3::numParticles()
 {
    return(actualParticles);
 }
 
-
+/****************************************************************************
+ *                               LoadTexture                                *
+ ****************************************************************************/
 GLuint part3::LoadTexture(char* fileName)
 {
    GLuint indice;
@@ -194,3 +181,4 @@ GLuint part3::LoadTexture(char* fileName)
    SDL_FreeSurface(img);
    return(indice);
 }
+

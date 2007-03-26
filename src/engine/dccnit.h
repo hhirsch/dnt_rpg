@@ -23,6 +23,7 @@
 #include "attwindow.h"
 #include "camera.h"
 #include "classwindow.h"
+#include "conversa.h"
 #include "collision.h"
 #include "cursor.h"
 #include "initial.h"

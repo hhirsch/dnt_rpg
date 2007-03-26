@@ -19,7 +19,7 @@ SUBSYSTEMS = mapEditor/ #iaEditor/
 OBJS = DlgEditor.o
 BIN = ../../bin/
 
-all: DlgEditor fntEditor dlgCompiler parts #partEditor
+all: fntEditor parts #partEditor DlgEditor dlgCompiler
 
 fntEditor.o: fntEditor.cpp
 	@printf "Making fntEditor.o... "

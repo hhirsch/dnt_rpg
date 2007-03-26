@@ -93,6 +93,9 @@ engine::engine()
 #ifdef VIDEO_MODE
    startVideo = false;
 #endif
+
+   conversation cv;
+   cv.loadFile("../data/dialogs/portugues/initial.dlg");
 }
 
 /*********************************************************************

@@ -6,6 +6,9 @@
 #include <math.h>
 #include <SDL/SDL_image.h>
 
+/****************************************************************************
+ *                             Constructor                                  *
+ ****************************************************************************/
 part5::part5(float cX,float cY,float cZ, string fileName):
                                particleSystem(fileName,PARTICLE_DRAW_GROUPS)
 {
@@ -14,19 +17,27 @@ part5::part5(float cX,float cY,float cZ, string fileName):
    centerZ=cZ;
    actualParticles = 0;
    partTexture = LoadTexture("../data/particles/part2.png");
-   //partTexture = LoadTexture("../data/particles/part3.png");
-   //partTexture = LoadTexture("../data/particles/smoke5.png");
 }
 
+/****************************************************************************
+ *                              Destructor                                  *
+ ****************************************************************************/
 part5::~part5()
 {
    glDeleteTextures(1,&partTexture);
 }
 
+/****************************************************************************
+ *                                Render                                    *
+ ****************************************************************************/
 void part5::Render(particle* part)
 {
+   //Not Used
 }
 
+/****************************************************************************
+ *                              InitRender                                  *
+ ****************************************************************************/
 void part5::InitRender()
 {
    glDisable(GL_LIGHTING);
@@ -38,7 +49,6 @@ void part5::InitRender()
    float MaxPointSize = 0;
    
    float quadratic[] =  { 0.01f, 0.01f, 0.0f };
-   //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
    if( (PointParameterf != NULL) && (PointParameterfv != NULL) )
    {
       glEnable(GL_TEXTURE_2D);
@@ -46,12 +56,8 @@ void part5::InitRender()
       glEnable(GL_BLEND);
 
       glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
-
       PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
-
       glPointSize(8);
-      
-      //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
       PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
       PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
 
@@ -63,11 +69,12 @@ void part5::InitRender()
    {
       glEnable(GL_COLOR);
       glPointSize(2);
-      //glEnable(GL_POINT_SMOOTH);
-      //glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
    }
 }
 
+/****************************************************************************
+ *                             EndRenderer                                  *
+ ****************************************************************************/
 void part5::EndRender()
 {
    glDisable(GL_CULL_FACE);
@@ -90,6 +97,9 @@ void part5::EndRender()
    glDisable( GL_BLEND );
 }
 
+/****************************************************************************
+ *                              actualize                                   *
+ ****************************************************************************/
 void part5::actualize(particle* part)
 {
    if(part->posY <= 0 )
@@ -120,16 +130,8 @@ void part5::actualize(particle* part)
    
 
       part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
-
-      /*if(part->posY >= 5)
-      {
-        part->velX += seconds*(gravity/2.0)*(((rand() / ((double)RAND_MAX + 1))));
-      }
-      else
-      {*/
-        part->velX += seconds*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
+      part->velX += seconds*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
                       + dSumVel[0]);
-      //}
       part->velZ += seconds*(dMultVel[2]*((rand() / ((double)RAND_MAX + 1))) 
                       + dSumVel[2]);
 
@@ -139,16 +141,25 @@ void part5::actualize(particle* part)
    }
 }
 
+/****************************************************************************
+ *                             continueLive                                 *
+ ****************************************************************************/
 bool part5::continueLive(particle* part)
 {
    return( true );
 }
 
+/****************************************************************************
+ *                             needCreate                                   *
+ ****************************************************************************/
 int part5::needCreate()
 {
    return(rand() % 30);
 }
 
+/****************************************************************************
+ *                           createParticle                                 *
+ ****************************************************************************/
 void part5::createParticle(particle* part)
 {
    part->posX = (dMultCenter[0]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[0])
@@ -172,17 +183,26 @@ void part5::createParticle(particle* part)
    part->prvB = part->B;
 }
 
+/****************************************************************************
+ *                               NextStep                                   *
+ ****************************************************************************/
 void part5::NextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
    DoStep(matriz);
 }
 
+/****************************************************************************
+ *                             numParticles                                 *
+ ****************************************************************************/
 int part5::numParticles()
 {
    return(actualParticles);
 }
 
+/****************************************************************************
+ *                             LoadTexture                                  *
+ ****************************************************************************/
 GLuint part5::LoadTexture(char* fileName)
 {
    GLuint indice;

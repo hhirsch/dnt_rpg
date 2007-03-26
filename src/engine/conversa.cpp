@@ -5,172 +5,435 @@
 
 #include "conversa.h"
 
-conversa::conversa()
+#define BUFFER_SIZE 512
+
+/* Geral Tokens */
+#define TK_TRUE "true"
+#define TK_FALSE "false"
+#define TK_DIALOG "dialog"
+#define TK_END_DIALOG "end_dialog"
+#define TK_NPC_BEGIN "npc_begin"
+#define TK_NPC_END "npc_end"
+#define TK_PC_BEGIN "pc_begin"
+#define TK_PC_END "pc_end"
+#define TK_TEXT "text"
+#define TK_ACTION "action"
+#define TK_OPTION "option"
+
+/* Action Tokens */
+#define TK_ACTION_GO_TO_DIALOG "go_to_dialog"
+#define TK_ACTION_INIT_FIGHT "init_fight"
+#define TK_ACTION_FINISH_DIALOG "finish_dialog"
+
+//TODO If-else tokens
+#define TK_IF_CONDITION "if_condition"
+#define TK_ELSE_CONDITION "else_condition"
+
+/*************************************************************************
+ *                              Constructor                              *
+ *************************************************************************/
+conversation::conversation()
 {
-   primeiro = new(dialogo);
-   primeiro->proximo = primeiro;
-   primeiro->anterior = primeiro;
-   primeiro->id = 0;
+   first = new(dialog);
+   first->next = first;
+   first->previous = first;
+   first->id = 0;
    total = 0;
 }
 
-conversa::~conversa()
+/*************************************************************************
+ *                               Destructor                              *
+ *************************************************************************/
+conversation::~conversation()
 {
-   dialogo* dlg;
+   dialog* dlg;
    while(total>0)
    {
-       dlg = primeiro->proximo;
-       retirarDialogo(dlg->id);
+       dlg = first->next;
+       removeDialog(dlg->id);
    }
-   delete(primeiro);
+   delete(first);
    total = -1;
 }
 
-int conversa::carregarArquivo(char* nome)
+/*************************************************************************
+ *                              getString                                *
+ *************************************************************************/
+string conversation::getString(int& initialPosition, char* buffer,
+                               char& separator)
 {
-  dialogo* dlg = NULL;
-  int aux;
+   int i = initialPosition;
+   string ret = "";
+   bool endGet = false;
+   bool considerSpace = false;
+   while(!endGet)
+   {
+      if( (i >= BUFFER_SIZE-1) )
+      {
+         endGet = true;
+         separator = '\0';
+      }
+      if( (buffer[i] == '\0') || (buffer[i] == '\n') || 
+          (buffer[i] == '(') || (buffer[i] == ')') || 
+          (buffer[i] == ',') || (buffer[i] == '=') )
+      {
+         separator = buffer[i];
+         endGet = true;
+      }
+      else if(buffer[i] == '"')
+      {
+         considerSpace = true;
+      }
+      else if( ( ( buffer[i] != ' ') || considerSpace) && (buffer[i] != '"') )
+      {
+         ret += buffer[i];
+      }
+      i++;
+   }
+   initialPosition = (i);
 
-  FILE* arq= fopen(nome,"r");
+   return(ret);
+}
+
+/*************************************************************************
+ *                             printError                                *
+ *************************************************************************/
+void conversation::printError(string fileName, string error, int lineNumber)
+{
+   printf("Conversation: %s Error on line: %d\n", fileName.c_str(), lineNumber);
+   printf("\t%s\n",error.c_str());
+}
+
+/*************************************************************************
+ *                             getActionID                               *
+ *************************************************************************/
+int conversation::getActionID(string token, string fileName, int line)
+{
+   if(token == TK_ACTION_GO_TO_DIALOG)
+   {
+     return(TALK_ACTION_GOTO);
+   }
+   else if(token == TK_ACTION_INIT_FIGHT)
+   {
+      return(TALK_ACTION_FIGHT);
+   }
+   else if(token == TK_ACTION_FINISH_DIALOG)
+   {
+      return(TALK_ACTION_CLOSE);
+   }
+   printError(fileName, "Unknow action!", line);
+   return(-1);
+}
+
+/*************************************************************************
+ *                               loadFile                                *
+ *************************************************************************/
+int conversation::loadFile(string name)
+{
+  char buffer[BUFFER_SIZE]; // buffer used to read
+  dialog* dlg = NULL;
+  int position = 0;
+  string token;
+  char separator;
+  bool endDialog = true;
+  int line = 0;
+  int option = -1;
+
+  bool npcBegin = false;
+  bool pcBegin = false;
+
+  FILE* arq= fopen(name.c_str(),"r");
   if(!arq) return(0);
-  fread(&total,sizeof(int),1,arq);
-  for(aux=0;aux<total;aux++)
+
+  while(fgets(buffer, sizeof(buffer),arq) != NULL)
   {
-     fread(dlg,sizeof(dialogo),1,arq);
-     dlg->proximo = primeiro->proximo;
-     dlg->anterior = primeiro;
-     dlg->proximo->anterior = dlg;
-     primeiro->proximo = dlg;
+    line++;
+    position = 0;
+    separator = '\0';
+
+    /* Ignore comentaries */
+    if(buffer[0] != '#')
+    {
+      token = getString(position, buffer, separator);
+
+      
+      /* Create New Dialog */
+      if(token == TK_DIALOG)
+      {
+         if(!endDialog)
+         {
+            printError(name, "Try to define dialog before end last one!", line);
+         }
+         else
+         {
+            endDialog = false;
+            dlg = insertDialog();
+            token = getString(position, buffer, separator);
+            dlg->id = atoi(token.c_str());
+         }
+      }
+      /* End defined Dialog */
+      else if(token == TK_END_DIALOG)
+      {
+         if( (endDialog) || (dlg == NULL))
+         {
+            printError(name, "Try to end an undefined dialog!", line);
+         }
+
+         endDialog = true;
+         dlg = NULL;
+      }
+      /* npc */
+      else if(token == TK_NPC_BEGIN)
+      {
+         if(npcBegin || pcBegin)
+         {
+            printError(name, "Try to begin NPC before end something!", line);
+         }
+         npcBegin = true;
+      }
+      else if(token == TK_NPC_END)
+      {
+         if(!npcBegin)
+         {
+            printError(name, "Try to end NPC before begin it!", line);
+         }
+         npcBegin = false;
+      }
+      /* pc */
+      else if(token == TK_PC_BEGIN)
+      {
+         if(npcBegin || pcBegin)
+         {
+            printError(name, "Try to begin PC before end something!", line);
+         }
+         pcBegin = true;
+         option = -1;
+      }
+      else if(token == TK_PC_END)
+      {
+         if(!pcBegin)
+         {
+            printError(name, "Try to end PC before begin it!", line);
+         }
+         pcBegin = false;
+      }
+      /* Text */
+      else if(token == TK_TEXT)
+      {
+         if(npcBegin)
+         {
+            dlg->npc.ifText = getString(position, buffer, separator);
+         }
+         else if(pcBegin)
+         {
+            if( (option >= 0) && (option < MAX_OPTIONS))
+            {
+               dlg->options[option].ifText = getString(position, buffer, 
+                                                       separator);
+            }
+            else
+            {
+               if(option < 0)
+               {
+                  printError(name, "Option Text without option!", line);
+               }
+               else
+               {
+                  printError(name, "Options overflow!", line);
+               }
+            }
+         }
+         else
+         {
+            printError(name, "Text without any relation!", line);
+         }
+      }
+      /* Option */
+      else if(token == TK_OPTION)
+      {
+         if(pcBegin)
+         {
+            option++;
+         }
+         else
+         {
+            printError(name, "Option without begin PC!", line);
+         }
+      }
+      /* Action */
+      else if(token == TK_ACTION)
+      {
+         if(npcBegin)
+         {
+            printError(name, "Action isn't yet defined to NPC!", line);
+         }
+         else if(pcBegin)
+         {
+            if( (option >= 0) && (option < MAX_OPTIONS))
+            {
+               token = getString(position, buffer, separator);
+               dlg->options[option].ifAction.id = getActionID(token,name,line);
+            }
+            else
+            {
+               if(option < 0)
+               {
+                  printError(name, "Option Action without option!", line);
+               }
+               else
+               {
+                  printError(name, "Options overflow!", line);
+               }
+            }
+         }
+         else
+         {
+            printError(name, "Action without any relation!\n", line);
+         }
+      }
+      /* Unkown! */
+      else
+      {
+         printError(name, "Unknow Token!", line);
+      }
+    }
   }
+
   fclose(arq);
   return(1);
 }
 
-
-int conversa::salvarArquivo(char* nome)
+/*************************************************************************
+ *                                saveFile                               *
+ *************************************************************************/
+int conversation::saveFile(string name)
 {
-  int aux;
-  dialogo* dlg= primeiro->proximo;
-
-  FILE *arq = fopen(nome,"w");
-  if(!arq) return(0);
-  fwrite(&total,sizeof(int),1,arq); //Escreve o Total de Dialogos
-  for(aux=0;aux<total;aux++)
-  {
-     fwrite(dlg,sizeof(dialogo),1,arq);
-     dlg = dlg->proximo;
-  }
-  fclose(arq);
-  return(1);
+   //TODO or not used.
+   return(1);
 }
 
-dialogo* conversa::inserirDialogo()
+/*************************************************************************
+ *                             insertDialog                              *
+ *************************************************************************/
+dialog* conversation::insertDialog()
 {
-   dialogo* dlg = new (dialogo);
-   dlg->proximo = primeiro->proximo;
-   dlg->anterior = primeiro;
-   dlg->proximo->anterior = dlg;
-   dlg->id = dlg->proximo->id+1;
-   primeiro->proximo = dlg;
+   dialog* dlg = new (dialog);
+   dlg->next = first->next;
+   dlg->previous = first;
+   dlg->next->previous = dlg;
+   dlg->id = dlg->next->id+1;
+   first->next = dlg;
 
-   dlg->NPC.Se = "";
-   dlg->NPC.Atributo = -1;
-   dlg->NPC.Senao = "";
-   dlg->NPC.Operador = -1;
-   dlg->NPC.SeAcao.id = -1;
-   dlg->NPC.SenaoAcao.id = -1;
+   dlg->npc.ifText = "";
+   dlg->npc.attribute = -1;
+   dlg->npc.elseText = "";
+   dlg->npc.operation = -1;
+   dlg->npc.ifAction.id = -1;
+   dlg->npc.elseAction.id = -1;
 
    int aux;
    for(aux = 0; aux< 5; aux++)
    {
-      dlg->Opcoes[aux].Se = "";
-      dlg->Opcoes[aux].Atributo = -1;
-      dlg->Opcoes[aux].Senao = "";
-      dlg->Opcoes[aux].Operador = -1;
-      dlg->Opcoes[aux].SeAcao.id = -1;
-      dlg->Opcoes[aux].SenaoAcao.id = -1;
+      dlg->options[aux].ifText = "";
+      dlg->options[aux].attribute = -1;
+      dlg->options[aux].elseText = "";
+      dlg->options[aux].operation = -1;
+      dlg->options[aux].ifAction.id = -1;
+      dlg->options[aux].elseAction.id = -1;
    }
 
    total++;
    return(dlg);
 }
 
-void conversa::retirarDialogo(int num)
+/*************************************************************************
+ *                             removeDialog                              *
+ *************************************************************************/
+void conversation::removeDialog(int num)
 {
-   dialogo *dlg = primeiro->proximo;
-   while((dlg != primeiro) && (dlg->id != num))
+   dialog *dlg = first->next;
+   while((dlg != first) && (dlg->id != num))
    {
-       dlg = dlg->proximo;
+       dlg = dlg->next;
    }
-   if(dlg == primeiro)
+   if(dlg == first)
+   {
       printf("Not found on dialog %d\n",num);
+   }
    else
    {
-      dlg->proximo->anterior = dlg->anterior;
-      dlg->anterior->proximo = dlg->proximo;
+      dlg->next->previous = dlg->previous;
+      dlg->previous->next = dlg->next;
       total--;
       delete(dlg);
    }
 }
 
-void conversa::abrirDialogo(int numDialogo, interface* gui,
-                               personagem* pers, 
-                               int (*procPres)(SDL_Surface *screen, int texto))
+/*************************************************************************
+ *                              openDialog                               *
+ *************************************************************************/
+void conversation::openDialog(int numDialog, interface* gui,
+                              personagem* pers, 
+                              int (*procPres)(SDL_Surface *screen, int texto))
 {
-   dialogo* dlg = primeiro->proximo;
-   while( (dlg != primeiro) && (dlg->id != numDialogo))
+   dialog* dlg = first->next;
+   while( (dlg != first) && (dlg->id != numDialog))
    {
-      dlg = dlg->proximo;
+      dlg = dlg->next;
    }
-   if(dlg == primeiro)
+   if(dlg == first)
    {
       return;
    }
 
-   string NPC;
-   string Opcoes[5];
+   string npc;
+   string options[5];
    int aux;
 //TODO verificar atributos do se senao
-   NPC = dlg->NPC.Se;
+   npc = dlg->npc.ifText;
    for(aux = 0; aux<5; aux++)
    {
-      Opcoes[aux] = dlg->Opcoes[aux].Se; 
+      options[aux] = dlg->options[aux].ifText; 
    }
  
    janela* jan = gui->insertWindow(330,100,585,355,"Dialog",1,1);
    jan->objects->InserirFigura(8,20,0,0,pers->retratoConversa.c_str());
-   jan->objects->InserirQuadroTexto(90,20,160,95,1,NPC.c_str());
-   jan->objects->InserirSelTexto(8,100,160,252,Opcoes[0],
-                      Opcoes[1], Opcoes[2],
-                      Opcoes[3], Opcoes[4], procPres);
+   jan->objects->InserirQuadroTexto(90,20,160,95,1,npc.c_str());
+   jan->objects->InserirSelTexto(8,100,160,252,options[0],
+                      options[1], options[2],
+                      options[3], options[4], procPres);
    jan->ptrExterno = &jan;
    gui->openWindow(jan);
 }
 
-int conversa::ProcessaAcao(int numDialogo, int opcao,interface* gui,
-                           personagem* PC, personagem* NPC)
+/*************************************************************************
+ *                            proccessAction                             *
+ *************************************************************************/
+int conversation::proccessAction(int numDialog, int opcao,interface* gui,
+                                 personagem* PC, personagem* npc)
 {
 
-   dialogo* dlg = primeiro->proximo;
-   while( (dlg != primeiro) && (dlg->id != numDialogo))
+   dialog* dlg = first->next;
+   while( (dlg != first) && (dlg->id != numDialog))
    {
-      dlg = dlg->proximo;
+      dlg = dlg->next;
    }
-   if(dlg == primeiro)
+   if(dlg == first)
    {
       return(-1);
    }
 
 
-   int action  = dlg->Opcoes[numDialogo].SeAcao.id;
+   int action  = dlg->options[numDialog].ifAction.id;
 //TODO verificar atributos se senao   
    switch(action)
    {
       case TALK_ACTION_GOTO:
-         return(numDialogo);
+         return(numDialog);
       break;
       case TALK_ACTION_FIGHT:
-         //NPC->amigavel = false; //brigar
+         //npc->amigavel = false; //brigar
       break;
       case TALK_ACTION_CLOSE:
          gui->closeWindow(jan);

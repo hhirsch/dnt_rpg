@@ -7,6 +7,9 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+/****************************************************************************
+ *                               Constuctor                                 *
+ ****************************************************************************/
 part2::part2(float cX,float cY,float cZ, string fileName):
                                   particleSystem(fileName, PARTICLE_DRAW_GROUPS)
 {
@@ -17,50 +20,25 @@ part2::part2(float cX,float cY,float cZ, string fileName):
    partTexture = LoadTexture("../data/particles/part2.png");
 }
 
+/****************************************************************************
+ *                                Destuctor                                 *
+ ****************************************************************************/
 part2::~part2()
 {
    glDeleteTextures(1,&partTexture);
 }
 
-void part2::drawSphereToList(int lats, int longs) 
-{
-   sphereList = glGenLists(1);
-   glNewList(sphereList,GL_COMPILE);
-   int i, j;
-   for(i = 0; i <= lats; i++) {
-      double lat0 = M_PI * (-0.5 + (double) (i - 1) / lats);
-      double z0  = sin(lat0);
-      double zr0 =  cos(lat0);
-    
-      double lat1 = M_PI * (-0.5 + (double) i / lats);
-      double z1 = sin(lat1);
-      double zr1 = cos(lat1);
- 
-      glBegin(GL_QUAD_STRIP);
-      for(j = 0; j <= longs; j++) 
-      {
-         double lng = 2 * M_PI * (double) (j - 1) / longs;
-         double x = cos(lng);
-         double y = sin(lng);
- 
-         glNormal3f(x * zr0, y * zr0, z0);
-         glVertex3f(x * zr0, y * zr0, z0);
-         glNormal3f(x * zr1, y * zr1, z1);
-         glVertex3f(x * zr1, y * zr1, z1);
-      }
-      glEnd();
-   }
-   glEndList();
-}
-
+/****************************************************************************
+ *                                 Render                                   *
+ ****************************************************************************/
 void part2::Render(particle* part)
 {
-   /*GLfloat emission[3] = {part->R, part->G, part->B};
-   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission );
-   glColor3f(part->R,part->G,part->B);
-   glVertex3f(part->posX,part->posY,part->posZ);*/
+   //Not Used
 }
 
+/****************************************************************************
+ *                               InitRender                                 *
+ ****************************************************************************/
 void part2::InitRender()
 {
    glDisable(GL_LIGHTING);
@@ -97,11 +75,12 @@ void part2::InitRender()
    {
       glEnable(GL_COLOR);
       glPointSize(8);
-      /*glEnable(GL_POINT_SMOOTH);
-      glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);*/
    }
 }
 
+/****************************************************************************
+ *                               EndRenderer                                *
+ ****************************************************************************/
 void part2::EndRender()
 {
    glDisable(GL_COLOR_MATERIAL);
@@ -123,7 +102,10 @@ void part2::EndRender()
    glEnable(GL_LIGHTING);
    glDisable( GL_BLEND );
 }
- 
+
+/****************************************************************************
+ *                                actualize                                 *
+ ****************************************************************************/
 void part2::actualize(particle* part)
 {
    float percent = (float) part->age / (float) (maxLive-1);
@@ -159,17 +141,26 @@ void part2::actualize(particle* part)
    part->posZ += part->velZ*seconds;
 }
 
+/****************************************************************************
+ *                              continueLive                                *
+ ****************************************************************************/
 bool part2::continueLive(particle* part)
 {
    return( (part->age < maxLive) &&
            ((rand() % 200) != 5) );
 }
 
+/****************************************************************************
+ *                               needCreate                                 *
+ ****************************************************************************/
 int part2::needCreate()
 {
    return(rand() % 80);
 }
 
+/****************************************************************************
+ *                             createParticle                               *
+ ****************************************************************************/
 void part2::createParticle(particle* part)
 {
    part->posX = (dMultCenter[0]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[0])
@@ -193,17 +184,26 @@ void part2::createParticle(particle* part)
    part->prvB = part->B;
 }
 
+/****************************************************************************
+ *                                NextStep                                  *
+ ****************************************************************************/
 void part2::NextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
    DoStep(matriz);
 }
 
+/****************************************************************************
+ *                              numParticles                                *
+ ****************************************************************************/
 int part2::numParticles()
 {
    return(actualParticles);
 }
 
+/****************************************************************************
+ *                               LoadTexture                                *
+ ****************************************************************************/
 GLuint part2::LoadTexture(char* fileName)
 {
    GLuint indice;

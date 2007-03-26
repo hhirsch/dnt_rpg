@@ -6,6 +6,9 @@
 #include <math.h>
 #include <SDL/SDL_image.h>
 
+/****************************************************************************
+ *                             Constructor                                  *
+ ****************************************************************************/
 part7::part7(float cX,float cY,float cZ, string fileName):
                                particleSystem(fileName,PARTICLE_DRAW_GROUPS)
 {
@@ -13,20 +16,28 @@ part7::part7(float cX,float cY,float cZ, string fileName):
    centerY=cY; 
    centerZ=cZ;
    actualParticles = 0;
-   //partTexture = LoadTexture("../data/particles/part2.png");
    partTexture = LoadTexture("../data/particles/snow.png");
-   //partTexture = LoadTexture("../data/particles/smoke5.png");
 }
 
+/****************************************************************************
+ *                              Destructor                                  *
+ ****************************************************************************/
 part7::~part7()
 {
    glDeleteTextures(1,&partTexture);
 }
 
+/****************************************************************************
+ *                                Render                                    *
+ ****************************************************************************/
 void part7::Render(particle* part)
 {
+   //Not Used!
 }
 
+/****************************************************************************
+ *                             InitRender                                   *
+ ****************************************************************************/
 void part7::InitRender()
 {
   glDisable(GL_LIGHTING);
@@ -42,19 +53,12 @@ void part7::InitRender()
       glEnable(GL_TEXTURE_2D);
       glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
       glEnable(GL_BLEND);
-
       glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
-
       float quadratic[] =  { 0.01f, 0.01f, 0.0f };
-      //float quadratic[] =  { 0.0f, 0.0f, 0.011831263f };
       PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
-
-      //PointParameterf( GL_POINT_FADE_THRESHOLD_SIZE_ARB, 60.0f );
       PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
       PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
-
       glPointSize(8);
-
       glBindTexture(GL_TEXTURE_2D, partTexture);
       glTexEnvf(GL_POINT_SPRITE_ARB, GL_COORD_REPLACE_ARB, GL_TRUE);
       glEnable(GL_POINT_SPRITE_ARB);
@@ -63,12 +67,12 @@ void part7::InitRender()
    {
       glEnable(GL_COLOR);
       glPointSize(2);
-
-      //glEnable(GL_POINT_SMOOTH);
-      //glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
    }
 }
 
+/****************************************************************************
+ *                              EndRender                                   *
+ ****************************************************************************/
 void part7::EndRender()
 {
    glDisable(GL_CULL_FACE);
@@ -90,6 +94,9 @@ void part7::EndRender()
    glDisable( GL_BLEND );
 }
 
+/****************************************************************************
+ *                              actualize                                   *
+ ****************************************************************************/
 void part7::actualize(particle* part)
 {
    if(part->posY <= 0 )
@@ -131,16 +138,25 @@ void part7::actualize(particle* part)
    }
 }
 
+/****************************************************************************
+ *                             continueLive                                 *
+ ****************************************************************************/
 bool part7::continueLive(particle* part)
 {
    return( part->age < maxLive );
 }
 
+/****************************************************************************
+ *                             needCreate                                   *
+ ****************************************************************************/
 int part7::needCreate()
 {
    return(rand() % (int)alpha);
 }
 
+/****************************************************************************
+ *                            createParticle                                *
+ ****************************************************************************/
 void part7::createParticle(particle* part)
 {
    part->posX = (dMultCenter[0]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[0])
@@ -164,17 +180,26 @@ void part7::createParticle(particle* part)
    part->prvB = part->B;
 }
 
+/****************************************************************************
+ *                               NextStep                                   *
+ ****************************************************************************/
 void part7::NextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
    DoStep(matriz);
 }
 
+/****************************************************************************
+ *                             numParticles                                 *
+ ****************************************************************************/
 int part7::numParticles()
 {
    return(actualParticles);
 }
 
+/****************************************************************************
+ *                             LoadTexture                                  *
+ ****************************************************************************/
 GLuint part7::LoadTexture(char* fileName)
 {
    GLuint indice;
