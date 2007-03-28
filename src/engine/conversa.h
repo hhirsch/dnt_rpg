@@ -104,10 +104,8 @@ class conversation
        * Opens the conversation on window
        * \param numDialog -> dialog number to open 
        * \param gui -> window interface used
-       * \param pers -> character to talk to
-       * \param procPres -> procedure to invoke after press */
-      void openDialog(int numDialog, interface* gui, personagem* pers,
-                      int (*procPres)(SDL_Surface *screen, int texto));
+       * \param pers -> character to talk to */
+      void openDialog(int numDialog, interface* gui, personagem* pers);
 
       /*!
        * Computates the action on dialog, based on selected option.

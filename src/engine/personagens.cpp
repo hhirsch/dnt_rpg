@@ -13,7 +13,7 @@ personagem::personagem(featsList* ft)
 {
    int i;
 
-  lifeBar = new healthBar(10,103,117,123);
+  lifeBar = new healthBar(5,52,59,62);
 
   for(i=0; i<MAX_DISTINCT_CLASSES; i++)
   {

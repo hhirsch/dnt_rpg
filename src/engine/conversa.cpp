@@ -229,7 +229,10 @@ int conversation::loadFile(string name)
          {
             if( (option >= 0) && (option < MAX_OPTIONS))
             {
-               dlg->options[option].ifText = getString(position, buffer, 
+               char str[10];
+               sprintf(str, "%d - ", option+1);
+               dlg->options[option].ifText = str;
+               dlg->options[option].ifText += getString(position, buffer, 
                                                        separator);
             }
             else
@@ -373,9 +376,7 @@ void conversation::removeDialog(int num)
 /*************************************************************************
  *                              openDialog                               *
  *************************************************************************/
-void conversation::openDialog(int numDialog, interface* gui,
-                              personagem* pers, 
-                              int (*procPres)(SDL_Surface *screen, int texto))
+void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
 {
    dialog* dlg = first->next;
    while( (dlg != first) && (dlg->id != numDialog))
@@ -398,11 +399,12 @@ void conversation::openDialog(int numDialog, interface* gui,
    }
  
    janela* jan = gui->insertWindow(330,100,585,355,"Dialog",1,1);
-   jan->objects->InserirFigura(8,20,0,0,pers->retratoConversa.c_str());
-   jan->objects->InserirQuadroTexto(90,20,160,95,1,npc.c_str());
-   jan->objects->InserirSelTexto(8,100,160,252,options[0],
-                      options[1], options[2],
-                      options[3], options[4], procPres);
+   jan->objects->InserirFigura(8,25,0,0,pers->retratoConversa.c_str());
+   jan->objects->InserirQuadroTexto(74,20,247,95,2,npc.c_str());
+   jan->objects->InserirSelTexto(8,96,247,250,options[0],
+                                 options[1], options[2],
+                                 options[3], options[4], NULL);
+   jan->objects->InserirFigura(3,15,0,0,"../data/texturas/dialog.png");
    jan->ptrExterno = &jan;
    gui->openWindow(jan);
 }

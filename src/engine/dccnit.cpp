@@ -90,12 +90,12 @@ engine::engine()
 
    destinyVariation = -2.0;
 
+   cv = NULL;
+
 #ifdef VIDEO_MODE
    startVideo = false;
 #endif
 
-   conversation cv;
-   cv.loadFile("../data/dialogs/portugues/initial.dlg");
 }
 
 /*********************************************************************
@@ -103,6 +103,10 @@ engine::engine()
  *********************************************************************/
 engine::~engine()
 {
+   if(cv)
+   {
+      delete(cv);
+   }
    /* Stops and free music & sounds */
    delete(snd);
 
@@ -1703,7 +1707,17 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         "../data/particles/lightning1.par");
          }
 
-         
+         if(keys[SDLK_j])
+         {
+            if(cv)
+            {
+               delete(cv);
+            }
+            cv = new(conversation);
+            cv->loadFile("../data/dialogs/portugues/initial.dlg");
+            cv->openDialog(0, gui, PCs->personagemAtivo);
+         }
+
 
          if(keys[SDLK_0])
          {

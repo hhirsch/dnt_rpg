@@ -361,6 +361,10 @@ class engine
       sun* gameSun;               /**< The internal sun reference */
       GLfloat hour;               /**< Hour on day time */
 
+      //FIXME remove from here!
+      //
+      conversation* cv;
+
 #ifdef VIDEO_MODE
       bool startVideo;            /**< Used to start video making */
 #endif
