@@ -21,9 +21,9 @@ void selTexto::Desenhar(int Xjan,int Yjan,int selecionado,int salvar,
                         Cores.corTextoSel.B);
          ya = escxy_Area(screen,Xjan+4+x1,ya,texto[aux].c_str(),
                     Xjan+x1+1,Yjan+y1+1,Xjan+x2-1,Yjan+y2-1);
-         y[aux] = ya-Yjan;
-         ya += 11;
      }
+     y[aux] = ya-Yjan;
+     ya += 11;
    }
    cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
    retangulo_2Cores(screen,x1+Xjan,y1+Yjan,x2+Xjan,y2+Yjan/*ya+2*/,
