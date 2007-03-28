@@ -17,7 +17,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter)
    alignImage->fig = actualAlign->image;
 
    /* Align Description */
-   textDesc = window->objects->InsertRolBar(5,38,262,180, 
+   textDesc = window->objects->insertRolBar(5,38,262,180, 
                                             actualAlign->description.c_str(),
                                             window->cara);
       

@@ -75,12 +75,11 @@ class Tlista{
        * textX       -> texto de escolha de numero X
        * proc        -> procedimento a rodar qdo ocorrer escolha
        * lista       -> lista na qual a selTexto vai ser inserida*/
-      selTexto* InserirSelTexto(int xa,int ya,int xb,int yb,string text0,
+      selTexto* insertSelTexto(int xa,int ya,int xb,int yb,string text0,
                             string text1,string text2,string text3, 
-                            string text4,int (*proc)(SDL_Surface *screen, 
-                            int texto));
+                            string text4);
 
-      rolBar* InsertRolBar(int xa,int ya,int xb,int yb,string txt,
+      rolBar* insertRolBar(int xa,int ya,int xb,int yb,string txt,
                            SDL_Surface* surface);
 
       Tobjeto* addMenu();

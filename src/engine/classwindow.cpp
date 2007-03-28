@@ -26,7 +26,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter)
    textDescTitle->fonte = FHELVETICA;
    textDescTitle->tamFonte = 1;
    
-   textDesc = window->objects->InsertRolBar(71,36,342,345,
+   textDesc = window->objects->insertRolBar(71,36,342,345,
              (actualClass->citation + "||" + actualClass->description).c_str(),
              window->cara);
 
@@ -36,7 +36,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter)
    textCharacTitle->fonte = FHELVETICA;
    textCharacTitle->tamFonte = 1;
 
-   textCharac = window->objects->InsertRolBar(343,36,613,345,
+   textCharac = window->objects->insertRolBar(343,36,613,345,
                                               getCharacteristics().c_str(),
                                               window->cara);
 

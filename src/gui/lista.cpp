@@ -209,32 +209,25 @@ quadroTexto* Tlista::InserirQuadroTexto(int xa,int ya,int xb,int yb,
 } 
 
 /* Insere um novo selTexto na lista */
-selTexto* Tlista::InserirSelTexto(int xa,int ya,int xb,int yb,
+selTexto* Tlista::insertSelTexto(int xa,int ya,int xb,int yb,
                                   string text0, string text1,
                                   string text2, string text3, 
-                                  string text4,
-                             int (*proc)(SDL_Surface *screen,int texto))
+                                  string text4)
 {
    selTexto* novo;
    novo = new selTexto;
-   novo->x1 = xa;
-   novo->x2 = xb;
-   novo->y1 = ya;
-   novo->y2 = yb;
-   novo->procPres = proc;
-   novo->texto[0] = text0;
-   novo->texto[1] = text1;
-   novo->texto[2] = text2;
-   novo->texto[3] = text3;
-   novo->texto[4] = text4;
-   novo->selec = -1;
+   novo->setCoordinate(xa,ya,xb,yb);
+   novo->text[0] = text0;
+   novo->text[1] = text1;
+   novo->text[2] = text2;
+   novo->text[3] = text3;
+   novo->text[4] = text4;
    novo->tipo = SELTEXTO;
-   novo->Cores.Iniciar();
    InserirObj(novo);
    return(novo);
 } 
 
-rolBar* Tlista::InsertRolBar(int xa,int ya,int xb,int yb,string txt,
+rolBar* Tlista::insertRolBar(int xa,int ya,int xb,int yb,string txt,
                              SDL_Surface* surface)
 {
    rolBar* novo;

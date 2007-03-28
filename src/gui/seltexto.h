@@ -14,38 +14,60 @@ using namespace std;
 #include "mouse.h"
 #include "objeto.h"
 
+#define MAX_OPTIONS 5
+
+/*! Select Text Class */
 class selTexto: public Tobjeto
 {
    public:
-      string texto[5];     /* 5 Opcoes de Texto a selecionar */
-      int y[5];            /* 5 y de cada um - preenchido depois de desenhado */
-      int selec;           /* Ultimo Item a ser selecionado no texto */
-                           /* Procedimento de qdo seleciona item */
-      int (*procPres)(SDL_Surface *screen, int texto);
-      int x1,y1,x2,y2;     /* Coordenadas do selTexto */
-      cores Cores;
+      string text[MAX_OPTIONS];   /**< Text Options */
+      
+      /*! Set the SelTexto coordinates
+       * \param xa -> x1 coordinate
+       * \param xb -> x2 coordinate
+       * \param ya -> y1 coordinate
+       * \param yb -> y2 coordinate */
+      void setCoordinate(int xa,int ya,int xb,int yb);
 
-      /* Desenha uma selTexto na superficie
-       * Xjan, Yjan  -> coordenadas superiores da janela em que esta a seltexto
-       * selecionado -> qual texto esta selecionado
-       * salvar      -> !=0 atualiza a superficie
-       * screen      -> superficie na qual sera desenhada  */
-      void Desenhar(int Xjan,int Yjan,int selecionado,int salvar,
-                    SDL_Surface *screen);
+      /*! Get the SelTexto coordinates
+       * \param xa -> x1 coordinate
+       * \param xb -> x2 coordinate
+       * \param ya -> y1 coordinate
+       * \param yb -> y2 coordinate */
+      void getCoordinate(int& xa, int& ya, int& xb, int& yb);
 
-      /* Enquanto o mouse estiver sobre a seltexto faz o tratamento da mesma
-       * Xjan, Yjan -> coordenadas da janela
-       * screen     -> superficie na qual se encontra a selTexto */
-      int Tratar(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen,
-                 int Xjan, int Yjan);
 
-      int Selecionada(int ya, int Yjan);
+      /*! Draw the seltext on a surface
+       * \param selectItem -> number of the selected text
+       * \param screen -> surface to draw */
+      void draw(int selectedItem, SDL_Surface *screen);
 
+      /*! Threat the selTexto
+       * \param screen  -> surface where the selTexto is
+       * \param xa -> mouse X coordinate
+       * \param ya -> mouse Y coordinate
+       * \param Mbotao -> mouse button state*/
+      int threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen);
 
    private:
-   
-      void EscreveSelecionado(int Xjan,int Yjan,int selecionado,
-                              SDL_Surface *screen);
+      /*! Write to the surface the selected item on differente color.
+       * \param selectItem -> number of the selected text
+       * \param screen -> surface to draw */
+      void writeSelected(int selectItem, SDL_Surface *screen);
+
+      /*! based on y, get the seleted item
+       * \param ya -> mouse y coordinate
+       * \return -1 if no item selected */
+      int getSelectedItem(int ya);
+
+   protected:
+      int y[MAX_OPTIONS];  /**< Final Y of each option */
+      int selec;           /**< last item selected */
+      int x1,     /**< x1 coordinate */
+          y1,     /**< y1 coordinate */
+          x2,     /**< x2 coordinate */
+          y2;     /**< y2 coordinate */
+      cores Cores; /**< colors */
 
 
 };                /* Tipo de selecao de 1 entre 5 textos */

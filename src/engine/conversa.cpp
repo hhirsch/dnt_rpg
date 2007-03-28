@@ -401,9 +401,9 @@ void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
    janela* jan = gui->insertWindow(330,100,585,355,"Dialog",1,1);
    jan->objects->InserirFigura(8,25,0,0,pers->retratoConversa.c_str());
    jan->objects->InserirQuadroTexto(74,20,247,95,2,npc.c_str());
-   jan->objects->InserirSelTexto(8,96,247,250,options[0],
+   jan->objects->insertSelTexto(8,96,247,250,options[0],
                                  options[1], options[2],
-                                 options[3], options[4], NULL);
+                                 options[3], options[4]);
    jan->objects->InserirFigura(3,15,0,0,"../data/texturas/dialog.png");
    jan->ptrExterno = &jan;
    gui->openWindow(jan);

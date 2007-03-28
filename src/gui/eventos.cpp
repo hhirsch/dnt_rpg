@@ -108,10 +108,12 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                if(obj->tipo == SELTEXTO) 
                {
                   selTexto *st = (selTexto*) obj;
-                  if(mouse_NaArea(ljan->janelaAtiva->x1+st->x1,
-                                  ljan->janelaAtiva->y1+st->y1,
-                                  ljan->janelaAtiva->x1+st->x2, 
-                                  ljan->janelaAtiva->y1+st->y2,x,y))
+                  int xa,ya,xb,yb;
+                  st->getCoordinate(xa,ya,xb,yb);
+                  if(mouse_NaArea(ljan->janelaAtiva->x1+xa,
+                                  ljan->janelaAtiva->y1+ya,
+                                  ljan->janelaAtiva->x1+xb, 
+                                  ljan->janelaAtiva->y1+yb,x,y))
                   {
                       objAtivo = st;
                       foco = FOCO_SELTEXTO;
@@ -208,15 +210,14 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                else if(obj->tipo == SELTEXTO)
                {
                   selTexto* st = (selTexto*) obj;
-                  if(mouse_NaArea(st->x1+ljan->janelaAtiva->x1,
-                                  st->y1+ljan->janelaAtiva->y1,
-                                  st->x2+ljan->janelaAtiva->x1,
-                                  st->y2+ljan->janelaAtiva->y1,x,y))
+                  int xa,ya,xb,yb;
+                  st->getCoordinate(xa,ya,xb,yb);
+                  if(mouse_NaArea(xa+ljan->janelaAtiva->x1,
+                                  ya+ljan->janelaAtiva->y1,
+                                  xb+ljan->janelaAtiva->x1,
+                                  yb+ljan->janelaAtiva->y1,x,y))
                   {
                      objAtivo = st;
-                     if(st->procPres != NULL)
-                        st->procPres(NULL, 
-                            st->Selecionada(y,ljan->janelaAtiva->y1));
                      foco = FOCO_SELTEXTO;
                   }
                }
@@ -431,9 +432,10 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
         mouseX = x;
         mouseY = y;
         selTexto *st = (selTexto*)objAtivo;
-        if(!st->Tratar(x,y,Mbotao,ljan->janelaAtiva->cara,
-                       ljan->janelaAtiva->x1, ljan->janelaAtiva->y1))
+        if(!st->threat(x,y,Mbotao,ljan->janelaAtiva->cara))
+        {
             foco = FOCO_JOGO;
+        }
 
         ljan->janelaAtiva->AtualizaCara();
 

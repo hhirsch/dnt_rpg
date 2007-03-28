@@ -169,7 +169,7 @@ void janela::Desenhar(int mouseX, int mouseY)
          }
          case SELTEXTO:{
               selTexto *st = (selTexto*) obj;
-              st->Desenhar(0,0,-1,0,cara);
+              st->draw(-1,cara);
               break;
          }
          case FIGURA:{
