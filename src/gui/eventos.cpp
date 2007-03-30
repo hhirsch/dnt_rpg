@@ -432,7 +432,8 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
         mouseX = x;
         mouseY = y;
         selTexto *st = (selTexto*)objAtivo;
-        if(!st->threat(x,y,Mbotao,ljan->janelaAtiva->cara))
+        if(!st->threat(x-ljan->janelaAtiva->x1,y-ljan->janelaAtiva->y1,
+                       Mbotao,ljan->janelaAtiva->cara))
         {
             foco = FOCO_JOGO;
         }
