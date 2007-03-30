@@ -147,7 +147,7 @@ int getTotalLines(string source)
 {
    Uint32 i;
    char c;
-   int line = 0;
+   int line = -1;
    for(i=0; (i < source.length()) ; i++)
    {
       c = source.at(i);
@@ -155,6 +155,10 @@ int getTotalLines(string source)
       {
          line++;
       }
+   }
+   if(line == -1)
+   {
+      return(0);
    }
    return(line);
 }
