@@ -217,7 +217,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   objX = posX;
                   objY = posY;
                   objWhere = INVENTORY_INVENTORY;
-                  openMenu(x,y); 
+                  openMenu((x-window->x1),(y-window->y1)); 
                }
                return(true);
             }
@@ -312,7 +312,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             if(aObject)
             {
                activeObject = aObject;
-               openMenu(x,y);
+               openMenu((x-window->x1),(y-window->y1));
                state = INVENTORY_STATE_MENU;
                return(true);
             }

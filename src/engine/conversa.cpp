@@ -4,6 +4,7 @@
 
 
 #include "conversa.h"
+#include <fstream>
 
 #define BUFFER_SIZE 512
 
@@ -135,6 +136,7 @@ int conversation::getActionID(string token, string fileName, int line)
 int conversation::loadFile(string name)
 {
   char buffer[BUFFER_SIZE]; // buffer used to read
+  string stmp;
   dialog* dlg = NULL;
   int position = 0;
   string token;
@@ -149,7 +151,8 @@ int conversation::loadFile(string name)
   FILE* arq= fopen(name.c_str(),"r");
   if(!arq) return(0);
 
-  while(fgets(buffer, sizeof(buffer),arq) != NULL)
+
+  while(fgets(buffer, sizeof(buffer), arq) != NULL)
   {
     line++;
     position = 0;
@@ -166,7 +169,7 @@ int conversation::loadFile(string name)
       {
          if(!endDialog)
          {
-            printError(name, "Try to define dialog before end last one!", line);
+            printError(name, "Tried to define dialog before end last one!", line);
          }
          else
          {
@@ -181,7 +184,7 @@ int conversation::loadFile(string name)
       {
          if( (endDialog) || (dlg == NULL))
          {
-            printError(name, "Try to end an undefined dialog!", line);
+            printError(name, "Tried to end an undefined dialog!", line);
          }
 
          endDialog = true;
@@ -192,7 +195,7 @@ int conversation::loadFile(string name)
       {
          if(npcBegin || pcBegin)
          {
-            printError(name, "Try to begin NPC before end something!", line);
+            printError(name, "Tried to begin NPC before end something!", line);
          }
          npcBegin = true;
       }
@@ -200,7 +203,7 @@ int conversation::loadFile(string name)
       {
          if(!npcBegin)
          {
-            printError(name, "Try to end NPC before begin it!", line);
+            printError(name, "Tried to end NPC before begin it!", line);
          }
          npcBegin = false;
       }
@@ -209,7 +212,7 @@ int conversation::loadFile(string name)
       {
          if(npcBegin || pcBegin)
          {
-            printError(name, "Try to begin PC before end something!", line);
+            printError(name, "Tried to begin PC before end something!", line);
          }
          pcBegin = true;
          option = -1;
@@ -218,7 +221,7 @@ int conversation::loadFile(string name)
       {
          if(!pcBegin)
          {
-            printError(name, "Try to end PC before begin it!", line);
+            printError(name, "Tried to end PC before begin it!", line);
          }
          pcBegin = false;
       }
@@ -391,8 +394,9 @@ void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
    actual = -1;
    jan = gui->insertWindow(330,100,585,355,"Dialog",1,1);
    jan->objects->InserirFigura(8,25,0,0,pers->retratoConversa.c_str());
-   npcText = jan->objects->InserirQuadroTexto(74,20,247,95,2,"");
-   pcSelText = jan->objects->insertSelTexto(8,96,247,250,"","", "","", "");
+   npcText = jan->objects->InserirQuadroTexto(74,20,247,115,2,"");
+   npcText->fonte = FMINI;
+   pcSelText = jan->objects->insertSelTexto(8,116,247,250,"","","","","");
    jan->objects->InserirFigura(3,15,0,0,"../data/texturas/dialog.png");
    jan->ptrExterno = &jan;
    gui->openWindow(jan);
