@@ -107,22 +107,39 @@ class conversation
        * \param pers -> character to talk to */
       void openDialog(int numDialog, interface* gui, personagem* pers);
 
-      /*!
-       * Computates the action on dialog, based on selected option.
-       * \param numDialog -> dialog number 
-       * \param opcao -> option selected
+      /*! Treat Events on Window. 
+       * \param guiObject -> active GUI object
+       * \param eventInfo -> last GUI Event 
        * \param gui -> window interface used
-       * \param PC -> player's character
-       * \param NPC -> non player character 
-       * \return next dialog number .*/
-      int proccessAction(int numDialog, int opcao,interface* gui,
-                         personagem* PC, personagem* NPC);
+       * \return true if event is threated, false otherwise. */
+      bool treat(Tobjeto* guiObject, int eventInfo, interface* gui);
+
+      /*! Verify if the dialog is open or not 
+       * \return true if the window is opened */
+      bool windowOpened();
 
       protected:
-         janela* jan;  /**< Pointer to window used to show */
-         dialog* first;                /**< Head Node */
-         int total;                    /**< Total Dialogs */
-         int actual;                   /**< Actual active Dialog */
+         janela* jan;    /**< Pointer to window used to show */
+         dialog* first;  /**< Head Node */
+         int total;      /**< Total Dialogs */
+         int actual;     /**< Actual active Dialog */
+         quadroTexto* npcText; /**< The NPC text quad */
+         selTexto* pcSelText; /**< The PC selection text */
+
+         /*!
+          * Computates the action on dialog, based on selected option.
+          * \param numDialog -> dialog number 
+          * \param opcao -> option selected
+          * \param gui -> window interface used
+          * \param PC -> player's character
+          * \param NPC -> non player character */
+         void proccessAction(int numDialog, int opcao,interface* gui,
+                            personagem* PC, personagem* NPC);
+
+         /*! 
+          * Change dialog
+          * \param numDialog -> number of the new dialog to use */
+         void changeDialog(int numDialog);
 
          string getString(int& initialPosition, char* buffer,
                           char& separator);

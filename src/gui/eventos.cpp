@@ -432,15 +432,24 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
         mouseX = x;
         mouseY = y;
         selTexto *st = (selTexto*)objAtivo;
-        if(!st->threat(x-ljan->janelaAtiva->x1,y-ljan->janelaAtiva->y1,
-                       Mbotao,ljan->janelaAtiva->cara))
+        int res = st->threat(x-ljan->janelaAtiva->x1,y-ljan->janelaAtiva->y1,
+                       Mbotao,ljan->janelaAtiva->cara);
+        if(res == -1)
         {
             foco = FOCO_JOGO;
+            *eventInfo = NADA; 
+        }
+        else if(res < 0)
+        {
+          *eventInfo = SELTEXTOMODIFICADA;
+        }
+        else
+        {
+          *eventInfo = SELTEXTOSELECIONADA;
         }
 
         ljan->janelaAtiva->AtualizaCara();
-
-        *eventInfo = SELTEXTOMODIFICADA;
+        
         return(objAtivo);
     }
 

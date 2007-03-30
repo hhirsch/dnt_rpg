@@ -1228,6 +1228,14 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          /* Done Events by Inventory! */
          redesenha = true;
       }
+
+      /* FIXME ->  do for all NPC dialogs! */
+      if( (cv) && (cv->windowOpened()) && (cv->treat(object, guiEvent, gui)))
+      {
+         /* Treated on Dialog Window */
+         redesenha = true;
+      }
+
       if(guiEvent != NADA)
       {
          threatGuiEvents(object, guiEvent);

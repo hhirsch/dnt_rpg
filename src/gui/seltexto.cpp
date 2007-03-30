@@ -15,6 +15,7 @@ void selTexto::setCoordinate(int xa,int ya,int xb,int yb)
    y2 = yb;
    selec = -1;
    Cores.Iniciar();
+   pressed = false;
 }
 
 /***************************************************************************
@@ -132,7 +133,7 @@ int selTexto::threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
 
     if(!mouse_NaArea(x1,y1,x2,y2,xa,ya))
     {
-       return(0);
+       return(-1);
     }
 
     /* Trata o caso do mouse encima do text */
@@ -144,9 +145,22 @@ int selTexto::threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
     /* Testa pressionamento do text */
     if( Mbotao & SDL_BUTTON(1) )
     {
-      //return(selaux);
+       pressed = true;
     }
-    return(1);
+    else if(pressed)
+    {
+      pressed = false;
+      return(selaux);
+    }
+    return(-2);
+}
+
+/***************************************************************************
+ *                          getLastSelectedItem                            *
+ ***************************************************************************/
+int selTexto::getLastSelectedItem()
+{
+   return(selec);
 }
 
 

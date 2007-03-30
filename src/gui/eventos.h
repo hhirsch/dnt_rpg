@@ -32,6 +32,7 @@
 #define TABBOTAOEMPRESSAO   12
 #define BOTAOEMPRESSAO      13
 #define MENUMODIFICADO      14
+#define SELTEXTOSELECIONADA 15
 
 /* Constantes de Foco */
 #define FOCO_JANELA       1

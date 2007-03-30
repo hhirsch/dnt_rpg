@@ -39,6 +39,9 @@ conversation::conversation()
    first->previous = first;
    first->id = 0;
    total = 0;
+   npcText = NULL;
+   pcSelText = NULL;
+   jan = NULL;
 }
 
 /*************************************************************************
@@ -109,6 +112,7 @@ void conversation::printError(string fileName, string error, int lineNumber)
  *************************************************************************/
 int conversation::getActionID(string token, string fileName, int line)
 {
+   
    if(token == TK_ACTION_GO_TO_DIALOG)
    {
      return(TALK_ACTION_GOTO);
@@ -277,6 +281,12 @@ int conversation::loadFile(string name)
             {
                token = getString(position, buffer, separator);
                dlg->options[option].ifAction.id = getActionID(token,name,line);
+               if(dlg->options[option].ifAction.id == TALK_ACTION_GOTO)
+               {
+                  //get dialog number
+                  token = getString(position, buffer, separator);
+                  dlg->options[option].ifAction.att = atoi(token.c_str());
+               }
             }
             else
             {
@@ -378,6 +388,25 @@ void conversation::removeDialog(int num)
  *************************************************************************/
 void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
 {
+   actual = -1;
+   jan = gui->insertWindow(330,100,585,355,"Dialog",1,1);
+   jan->objects->InserirFigura(8,25,0,0,pers->retratoConversa.c_str());
+   npcText = jan->objects->InserirQuadroTexto(74,20,247,95,2,"");
+   pcSelText = jan->objects->insertSelTexto(8,96,247,250,"","", "","", "");
+   jan->objects->InserirFigura(3,15,0,0,"../data/texturas/dialog.png");
+   jan->ptrExterno = &jan;
+   gui->openWindow(jan);
+
+   changeDialog(numDialog);
+}
+
+/*************************************************************************
+ *                            proccessAction                             *
+ *************************************************************************/
+void conversation::proccessAction(int numDialog, int opcao, interface* gui,
+                                  personagem* PC, personagem* npc)
+{
+
    dialog* dlg = first->next;
    while( (dlg != first) && (dlg->id != numDialog))
    {
@@ -388,54 +417,16 @@ void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
       return;
    }
 
-   string npc;
-   string options[5];
-   int aux;
-//TODO verificar atributos do se senao
-   npc = dlg->npc.ifText;
-   for(aux = 0; aux<5; aux++)
-   {
-      options[aux] = dlg->options[aux].ifText; 
-   }
- 
-   janela* jan = gui->insertWindow(330,100,585,355,"Dialog",1,1);
-   jan->objects->InserirFigura(8,25,0,0,pers->retratoConversa.c_str());
-   jan->objects->InserirQuadroTexto(74,20,247,95,2,npc.c_str());
-   jan->objects->insertSelTexto(8,96,247,250,options[0],
-                                 options[1], options[2],
-                                 options[3], options[4]);
-   jan->objects->InserirFigura(3,15,0,0,"../data/texturas/dialog.png");
-   jan->ptrExterno = &jan;
-   gui->openWindow(jan);
-}
+   //FIXME else too
+   int action  = dlg->options[opcao].ifAction.id;
 
-/*************************************************************************
- *                            proccessAction                             *
- *************************************************************************/
-int conversation::proccessAction(int numDialog, int opcao,interface* gui,
-                                 personagem* PC, personagem* npc)
-{
-
-   dialog* dlg = first->next;
-   while( (dlg != first) && (dlg->id != numDialog))
-   {
-      dlg = dlg->next;
-   }
-   if(dlg == first)
-   {
-      return(-1);
-   }
-
-
-   int action  = dlg->options[numDialog].ifAction.id;
-//TODO verificar atributos se senao   
    switch(action)
    {
       case TALK_ACTION_GOTO:
-         return(numDialog);
+         /* change dialog */
+         changeDialog(dlg->options[opcao].ifAction.att);
       break;
       case TALK_ACTION_FIGHT:
-         //npc->amigavel = false; //brigar
       break;
       case TALK_ACTION_CLOSE:
          gui->closeWindow(jan);
@@ -445,6 +436,80 @@ int conversation::proccessAction(int numDialog, int opcao,interface* gui,
       case TALK_ACTION_MODNPC:
       break;
    }
-   return(-1);
+}
+
+/*************************************************************************
+ *                            changeDialog                               *
+ *************************************************************************/
+void conversation::changeDialog(int numDialog)
+{
+   int i;
+
+   if(numDialog == actual)
+   {
+      /* No change at the same dialog! */
+      return;
+   }
+
+   dialog* dlg = first->next;
+   while( (dlg != first) && (dlg->id != numDialog))
+   {
+      dlg = dlg->next;
+   }
+   if(dlg == first)
+   {
+      return;
+   }
+
+   actual = numDialog;
+
+   string npc;
+   string options[5];
+   int aux;
+
+//TODO verify if/else 
+
+   npc = dlg->npc.ifText;
+   for(aux = 0; aux<5; aux++)
+   {
+      options[aux] = dlg->options[aux].ifText; 
+   }
+ 
+   npcText->texto = npc;
+   for(i = 0; i < MAX_OPTIONS; i++)
+   {
+      pcSelText->text[i] = options[i];
+   }
+
+   if(windowOpened())
+   {
+      jan->Desenhar(0,0);
+   }
+}
+
+/*************************************************************************
+ *                                treat                                  *
+ *************************************************************************/
+bool conversation::treat(Tobjeto* guiObject, int eventInfo, interface* gui)
+{
+   if(eventInfo == SELTEXTOSELECIONADA)
+   {
+      if(guiObject == (Tobjeto*)pcSelText)
+      {
+         proccessAction(actual, pcSelText->getLastSelectedItem(), gui,
+                        //FIXME -> get the pointers!
+                        NULL, NULL);
+         return(true);
+      }
+   }
+   return(false);
+}
+
+/*************************************************************************
+ *                            windowOpened                               *
+ *************************************************************************/
+bool conversation::windowOpened()
+{
+   return(jan != NULL);
 }
 

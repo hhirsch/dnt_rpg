@@ -49,6 +49,10 @@ class selTexto: public Tobjeto
        * \param Mbotao -> mouse button state*/
       int threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen);
 
+      /*! Get the last selected item 
+       * \param return -> last selected item */
+      int getLastSelectedItem();
+
    private:
       /*! Write to the surface the selected item on differente color.
        * \param selectItem -> number of the selected text
@@ -68,6 +72,7 @@ class selTexto: public Tobjeto
           x2,     /**< x2 coordinate */
           y2;     /**< y2 coordinate */
       cores Cores; /**< colors */
+      bool pressed; /**< while pressed == true */
 
 
 };                /* Tipo de selecao de 1 entre 5 textos */
