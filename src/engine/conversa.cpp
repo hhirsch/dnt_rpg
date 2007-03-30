@@ -4,7 +4,6 @@
 
 
 #include "conversa.h"
-#include <fstream>
 
 #define BUFFER_SIZE 512
 
@@ -169,7 +168,7 @@ int conversation::loadFile(string name)
       {
          if(!endDialog)
          {
-            printError(name, "Tried to define dialog before end last one!", line);
+            printError(name,"Tried to define dialog before end last one!",line);
          }
          else
          {
