@@ -117,6 +117,12 @@ class lang
    static string INVENTW_SELL;
    static string INVENTW_USE;
    static string INVENTW_GET;
+
+   /* conversa.cpp */
+   static string DIALOGW_TITLE;
+
+   /* actions */
+   static string ACTION_TAKEN;
       
    /* figths */
    static string FIGHT_ROLLS_INITIATIVE;

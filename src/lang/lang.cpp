@@ -151,6 +151,12 @@ void lang::ReloadFile(int lng)
    getline(file, INVENTW_USE);
    getline(file, INVENTW_GET);
 
+   /* conversa.cpp */
+   getline(file, DIALOGW_TITLE);
+
+   /* actions */
+   getline(file, ACTION_TAKEN);
+
    /* fight */
    getline(file,FIGHT_ROLLS_INITIATIVE);
    getline(file,FIGHT_END_NOENEMIES);
@@ -286,6 +292,13 @@ void lang::ReloadFile(int lng)
    string lang::INVENTW_SELL;
    string lang::INVENTW_USE;
    string lang::INVENTW_GET;
+
+   /* conversa.cpp */
+   string lang::DIALOGW_TITLE;
+
+   /* actions */
+   string lang::ACTION_TAKEN;
+
 
    /*fight */
    string lang::FIGHT_ROLLS_INITIATIVE;

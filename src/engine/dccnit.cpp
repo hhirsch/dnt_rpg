@@ -1319,8 +1319,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
                       if(inv < INVENTORY_PER_CHARACTER)
                       {
-                         briefTxt->addText(quaux->objects[obj]->getName()+ 
-                                           "taken."); 
+                         briefTxt->addText(quaux->objects[obj]->getName() + " "                                            + language.ACTION_TAKEN); 
                          shortCutsWindow->Desenhar(mouseX,mouseY);
 
                          /* Log State to the modState */

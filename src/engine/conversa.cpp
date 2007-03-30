@@ -391,8 +391,9 @@ void conversation::removeDialog(int num)
  *************************************************************************/
 void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
 {
+   lang language;
    actual = -1;
-   jan = gui->insertWindow(330,100,585,355,"Dialog",1,1);
+   jan = gui->insertWindow(330,100,585,355,language.DIALOGW_TITLE.c_str(),1,1);
    jan->objects->InserirFigura(5,25,0,0,pers->retratoConversa.c_str());
    npcText = jan->objects->insertRolBar(71,20,250,115,"",jan->cara);
    //npcText->fonte = FMINI;
