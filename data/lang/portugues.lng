@@ -44,7 +44,7 @@ Sabedoria
 Carisma
 Descrição do Atributo
 Aviso
-Você tem de definir todos atributos.
+Você deve definir todos atributos.
 Alinhamento & Tendência
 Raça
 Descrição da Raça
@@ -94,4 +94,4 @@ Muito distante para realizar a ação!
 ../data/races/Portugues/
 ../data/classes/Portugues/
 Argh! Mapa fora dos limites!\n
-Oxi! Não consegui iniciar o SDL!\n
+Oxi! Não consegui iniciar SDL!\n

@@ -76,9 +76,10 @@ string conversation::getString(int& initialPosition, char* buffer,
          endGet = true;
          separator = '\0';
       }
-      if( (buffer[i] == '\0') || (buffer[i] == '\n') || 
-          (buffer[i] == '(') || (buffer[i] == ')') || 
-          (buffer[i] == ',') || (buffer[i] == '=') )
+      if( (!considerSpace) && 
+          ( (buffer[i] == '\0') || (buffer[i] == '\n') || 
+            (buffer[i] == '(') || (buffer[i] == ')') || 
+            (buffer[i] == ',') || (buffer[i] == '=') ) )
       {
          separator = buffer[i];
          endGet = true;
@@ -392,10 +393,10 @@ void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
 {
    actual = -1;
    jan = gui->insertWindow(330,100,585,355,"Dialog",1,1);
-   jan->objects->InserirFigura(8,25,0,0,pers->retratoConversa.c_str());
-   npcText = jan->objects->InserirQuadroTexto(74,20,247,115,2,"");
-   npcText->fonte = FMINI;
-   pcSelText = jan->objects->insertSelTexto(8,116,247,250,"","","","","");
+   jan->objects->InserirFigura(5,25,0,0,pers->retratoConversa.c_str());
+   npcText = jan->objects->insertRolBar(71,20,250,115,"",jan->cara);
+   //npcText->fonte = FMINI;
+   pcSelText = jan->objects->insertSelTexto(5,116,250,250,"","","","","");
    jan->objects->InserirFigura(3,15,0,0,"../data/texturas/dialog.png");
    jan->ptrExterno = &jan;
    gui->openWindow(jan);
@@ -478,7 +479,7 @@ void conversation::changeDialog(int numDialog)
       options[aux] = dlg->options[aux].ifText; 
    }
  
-   npcText->texto = npc;
+   npcText->setText(npc);
    for(i = 0; i < MAX_OPTIONS; i++)
    {
       pcSelText->text[i] = options[i];

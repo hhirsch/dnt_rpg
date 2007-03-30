@@ -123,7 +123,7 @@ class conversation
          dialog* first;  /**< Head Node */
          int total;      /**< Total Dialogs */
          int actual;     /**< Actual active Dialog */
-         quadroTexto* npcText; /**< The NPC text quad */
+         rolBar* npcText; /**< The NPC text quad */
          selTexto* pcSelText; /**< The PC selection text */
 
          /*!
