@@ -33,11 +33,10 @@ lMapObject::~lMapObject()
 /*********************************************************************
  *                           insertMapObject                         *
  *********************************************************************/
-mapObject* lMapObject::insertMapObject(string arquivo, string nome,
-                                       modelList& mdlList)
+mapObject* lMapObject::insertMapObject(string arquivo, modelList& mdlList)
 {
    mapObject* novo;
-   novo = new mapObject(arquivo, nome, mdlList);
+   novo = new mapObject(arquivo, mdlList);
    if(first == NULL)
    {
       first = novo;
@@ -75,13 +74,13 @@ void lMapObject::removeMapObject(mapObject* obj)
 /*********************************************************************
  *                           getMapObject                            *
  *********************************************************************/
-mapObject* lMapObject::getMapObject(string name)
+mapObject* lMapObject::getMapObject(string fileName)
 {
    int aux;
    mapObject* obj = first;
    for(aux=0;aux<total;aux++)
    {
-      if(obj->getName() == name)
+      if(obj->getFileName() == fileName)
       {
          return(obj);
       }

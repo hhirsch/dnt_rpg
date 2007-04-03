@@ -3,11 +3,11 @@ T 7X12
 f ../data/mapas/dois.fog
 npc ../data/mapas/dois.npc
 MUSICA ../data/music/musica2.ogg
-o Kalashnikov ../data/models/objetos/armas/kalashnikov.dcc
-o Door2 ../data/models/objetos/geral/porta2.dcc
-o Door ../data/models/objetos/geral/porta.dcc
-o Stop_Sign ../data/models/objetos/geral/placa_pare.dcc
-o Farrer's_Guitar ../data/models/objetos/geral/guitarra.dcc
+o ../data/models/objetos/armas/kalashnikov.dcc
+o ../data/models/objetos/geral/porta2.dcc
+o ../data/models/objetos/geral/porta.dcc
+o ../data/models/objetos/geral/placa_pare.dcc
+o ../data/models/objetos/geral/guitarra.dcc
 t ../data/texturas/tijolos.png ../data/texturas/tijolos.png 146 121 105
 t chao_grama_lama ../data/texturas/chao_grama_lama.png 69 93 15
 t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
@@ -15,10 +15,10 @@ t ../data/texturas/chao_marble.jpg ../data/texturas/chao_marble.jpg 234 234 234
 t ../data/texturas/chao_lama.png ../data/texturas/chao_lama.png 148 106 66
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 218 168 169
 t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 99 83 97
-d Door2 320.000000,690.435059:90
-d Door2 344.082092,726.475403:0
-d Door 128.000000,165.083481:90
-d Door 189.583511,54.000000:0
+d ../data/models/objetos/geral/porta2.dcc 320.000000,690.435059:90
+d ../data/models/objetos/geral/porta2.dcc 344.082092,726.475403:0
+d ../data/models/objetos/geral/porta.dcc 128.000000,165.083481:90
+d ../data/models/objetos/geral/porta.dcc 189.583511,54.000000:0
 muro 128.000000,54.000000,189.583511,64.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
 muro 246.000000,64.000000,256.000000,256.000000:16,16,16
@@ -107,7 +107,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_ametista.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_ametista.png
-uo Farrer's_Guitar 1:4,4:228.714355,227.441925:55:0
+uo ../data/models/objetos/geral/guitarra.dcc 1:4,4:228.714355,227.441925:55:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,10.000000,17.000000
@@ -216,12 +216,12 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_lama.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_lama.png
-uo Stop_Sign 1:5,11:292.576996,657.177795:-93:0
+uo ../data/models/objetos/geral/placa_pare.dcc 1:5,11:292.576996,657.177795:-93:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_lama.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_lama.png
-uo Kalashnikov 1:7,11:436.234436,690.274719:126:0
+uo ../data/models/objetos/armas/kalashnikov.dcc 1:7,11:436.234436,690.274719:126:0
 #Z: 11
 p 1,18.000000,19.000000,16.000000,23.000000
 ut ../data/texturas/chao_lama.png
@@ -233,10 +233,10 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_lama.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_lama.png
-uo Stop_Sign 1:5,12:308.498901,709.183899:-133:0
+uo ../data/models/objetos/geral/placa_pare.dcc 1:5,12:308.498901,709.183899:-133:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_lama.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_lama.png
-uo Kalashnikov 0:7,11:436.234436,690.274719:0:0
+uo ../data/models/objetos/armas/kalashnikov.dcc 0:7,11:436.234436,690.274719:0:0
 i 1,1

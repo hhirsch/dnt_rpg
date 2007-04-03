@@ -4,12 +4,12 @@ light ../data/mapas/rua.lgh
 npc ../data/mapas/rua.npc
 PS ../data/mapas/rua.map.par
 MUSICA ../data/music/musica7.ogg
-o Axe ../data/models/objetos/armas/axe.dcc
-o Scimitar ../data/models/objetos/armas/scimitar.dcc
-o Katana ../data/models/objetos/armas/dark_katana.dcc
-o Barrel ../data/models/objetos/geral/barrel.dcc
-o Door ../data/models/objetos/geral/porta.dcc
-o fire ../data/models/natural/fogueira.dcc
+o ../data/models/objetos/armas/axe.dcc
+o ../data/models/objetos/armas/scimitar.dcc
+o ../data/models/objetos/armas/dark_katana.dcc
+o ../data/models/objetos/geral/barrel.dcc
+o ../data/models/objetos/geral/porta.dcc
+o ../data/models/natural/fogueira.dcc
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 218 168 169
 t ../data/texturas/chao_asfalto_curva_db.jpg ../data/texturas/chao_asfalto_curva_db.jpg 85 85 85
 t chao_grama2 ../data/texturas/chao_grama2.jpg 69 93 15
@@ -17,9 +17,9 @@ t ../data/texturas/chao_asfalto.jpg ../data/texturas/chao_asfalto.jpg 85 85 85
 t ../data/texturas/chao_asfalto_rcont.jpg ../data/texturas/chao_asfalto_rcont.jpg 85 85 85
 t ../data/texturas/chao_asfalto_rhcont.jpg ../data/texturas/chao_asfalto_rhcont.jpg 85 85 85
 t ../data/texturas/chao_marble.jpg ../data/texturas/chao_marble.jpg 234 234 234
-d Door 22.591179,10.000000:0
-d Door 10.000000,363.298798:90
-d Door 64.000000,197.993622:90
+d ../data/models/objetos/geral/porta.dcc 22.591179,10.000000:0
+d ../data/models/objetos/geral/porta.dcc 10.000000,363.298798:90
+d ../data/models/objetos/geral/porta.dcc 64.000000,197.993622:90
 muro 44.428974,0.000000,54.000000,10.000000:1065353216,1065353216,1132462080
 mt ../data/texturas/parede_rosa.jpg
 muro 0.000000,363.298798,10.000000,448.000000:16,16,16
@@ -82,8 +82,8 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
-uo Scimitar 1:2,3:85.925293,146.626083:0:1
-uo Katana 1:2,3:82.678871,154.534668:0:1
+uo ../data/models/objetos/armas/scimitar.dcc 1:2,3:85.925293,146.626083:0:1
+uo ../data/models/objetos/armas/dark_katana.dcc 1:2,3:82.678871,154.534668:0:1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -100,7 +100,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_marble.jpg
-uo Axe 1:2,4:94.553146,239.602249:0:1
+uo ../data/models/objetos/armas/axe.dcc 1:2,4:94.553146,239.602249:0:1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -135,7 +135,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto.jpg
-uo fire 1:3,6:183.000000,328.000000:0:0
+uo ../data/models/natural/fogueira.dcc 1:3,6:183.000000,328.000000:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_asfalto_rcont.jpg
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -160,7 +160,7 @@ ut ../data/texturas/chao_asfalto.jpg
 uc 132.610291,423.932159,316.301086,446.254700:../data/mapas/poc2.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo Barrel 1:6,7:339.646057,436.001343:0:0
+uo ./data/models/objetos/geral/barrel.dcc 1:6,7:339.646057,436.001343:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 i 1,1

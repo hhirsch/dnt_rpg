@@ -706,7 +706,6 @@ void editor::verifyIO()
       if(mapOpened)
       {
          mapObject* obj=map->insertMapObject(gui->getObjectFileName().c_str(),
-                                             gui->getObjectFileName().c_str(),
                                              *models);
          if(obj != NULL)
          {

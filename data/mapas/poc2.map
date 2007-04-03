@@ -2,15 +2,15 @@ T 8X8
 # Made by DccNiTghtmare's MapEditor, v0.0.3
 PS ../data/mapas/poc2.map.par
 MUSICA ../data/music/musica12.ogg
-o ../data/models/natural/arvores/tree4.dcc ../data/models/natural/arvores/tree4.dcc
-o ../data/models/natural/arvores/tree3.dcc ../data/models/natural/arvores/tree3.dcc
-o ../data/models/natural/arvores/tree2.dcc ../data/models/natural/arvores/tree2.dcc
-o ../data/models/objetos/geral/mala.dcc ../data/models/objetos/geral/mala.dcc
-o ../data/models/objetos/geral/guitarra.dcc ../data/models/objetos/geral/guitarra.dcc
-o ../data/models/objetos/geral/placa_pare.dcc ../data/models/objetos/geral/placa_pare.dcc
-o Door ../data/models/objetos/geral/porta2.dcc
-o ../data/models/natural/stonewall.dcc ../data/models/natural/stonewall.dcc
-o ../data/models/objetos/armas/kalashnikov.dcc ../data/models/objetos/armas/kalashnikov.dcc
+o ../data/models/natural/arvores/tree4.dcc
+o ../data/models/natural/arvores/tree3.dcc
+o ../data/models/natural/arvores/tree2.dcc
+o ../data/models/objetos/geral/mala.dcc
+o ../data/models/objetos/geral/guitarra.dcc
+o ../data/models/objetos/geral/placa_pare.dcc
+o ../data/models/objetos/geral/porta2.dcc
+o ../data/models/natural/stonewall.dcc
+o ../data/models/objetos/armas/kalashnikov.dcc
 t ../data/texturas/parede_tijolos2.png ../data/texturas/parede_tijolos2.png 156 156 156
 t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 101 83 97
 t ../data/texturas/chao_asfalto_pe.jpg ../data/texturas/chao_asfalto_pe.jpg 85 85 85

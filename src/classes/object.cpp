@@ -9,10 +9,10 @@
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
-object::object(string path, string objName, modelList& mdlList): thing()
+object::object(string path, modelList& mdlList): thing()
 {
    FILE* arq;
-   char arqModelo[128], dirTexturas[128];
+   char arqModelo[128], dirTexturas[128], nome[128];
 
    if(!(arq=fopen(path.c_str(),"r")))
    {
@@ -20,7 +20,8 @@ object::object(string path, string objName, modelList& mdlList): thing()
        return;
    }
 
-   name = objName;
+   fscanf(arq, "%s", &nome[0]);
+   name = nome;
    fileName = path;
 
    /* Read Models Variations */

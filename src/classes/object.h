@@ -19,9 +19,8 @@ class object: public thing
    public:
       /*! Constructor 
        * \param path -> path to the object file
-       * \param objName -> name of the object
        * \param mdlList -> list of openned models */
-      object(string path, string objName, modelList& mdlList);
+      object(string path, modelList& mdlList);
       /*! Constructor
        * \param obj -> some object to be the source of actual */
       object(object* obj);

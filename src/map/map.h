@@ -242,12 +242,10 @@ class Map
        ************************************************************* 
        * Insert object on map list
        * \param arquivo -> filename to load
-       * \param nome -> object name 
        * \param mdlList -> modelList
        * \return pointer to the map Object created 
        *************************************************************/
-      mapObject* insertMapObject(string arquivo, string nome, 
-                                  modelList& mdlList);
+      mapObject* insertMapObject(string arquivo, modelList& mdlList);
 
       /*! 
        **************************************************************

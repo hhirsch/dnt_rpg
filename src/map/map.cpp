@@ -859,10 +859,9 @@ void Map::getInitialPosition(float& iX, float& iZ)
 /********************************************************************
  *                       insertMapObject                            *
  ********************************************************************/
-mapObject* Map::insertMapObject(string arquivo, string nome, 
-                                modelList& mdlList)
+mapObject* Map::insertMapObject(string arquivo, modelList& mdlList)
 {
-   return(objects->insertMapObject(arquivo, nome, mdlList));
+   return(objects->insertMapObject(arquivo, mdlList));
 }
 
 /********************************************************************
@@ -1071,8 +1070,8 @@ int Map::open(string arquivo, modelList& mdlList)
          case 'o': /* Insert Object */
          {
              fgets(buffer, sizeof(buffer), arq); 
-             sscanf(buffer, "%s %s",nome,nomeArq);
-             objects->insertMapObject(nomeArq,nome, mdlList);
+             sscanf(buffer, "%s",nomeArq);
+             objects->insertMapObject(nomeArq, mdlList);
              break;
          }
          case 't': /* Insert Textures */
@@ -1168,7 +1167,7 @@ int Map::open(string arquivo, modelList& mdlList)
                        &MapSquares[posX][posZ]->objectsOrientation[numObjetosAtual],
                        &MapSquares[posX][posZ]->pisavelObj[numObjetosAtual]);
                      MapSquares[posX][posZ]->objects[numObjetosAtual] = 
-                                                    objects->getMapObject(nome);
+                                                   objects->getMapObject(nome);
                      MapSquares[posX][posZ]->quadObjetos[i] = relativeSquare(
                          MapSquares[posX][posZ]->quadXobjects[numObjetosAtual],
                          MapSquares[posX][posZ]->quadZobjects[numObjetosAtual]);
@@ -1447,8 +1446,7 @@ int Map::save(string arquivo)
       mapObject* objAux = objects->first;
       for(i = 0; i < objects->total; i++)
       {
-         fprintf(arq,"o %s %s\n",objAux->getName().c_str(),
-                                 objAux->getFileName().c_str());
+         fprintf(arq,"o %s\n",objAux->getFileName().c_str());
          objAux = objAux->next;
       }
    }
@@ -1525,7 +1523,7 @@ int Map::save(string arquivo)
                x2 = (int)MapSquares[x1][z1]->Xobjects[aux] / SQUARESIZE;
                z2 = (int)MapSquares[x1][z1]->Zobjects[aux] / SQUARESIZE;
                fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d:%d\n",
-                       MapSquares[x1][z1]->objects[aux]->getName().c_str(),
+                       MapSquares[x1][z1]->objects[aux]->getFileName().c_str(),
                        MapSquares[x1][z1]->objectsDesenha[aux],
                        x2+1,z2+1,
                        MapSquares[x1][z1]->Xobjects[aux],
