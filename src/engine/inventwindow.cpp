@@ -420,6 +420,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                else
                {
                   inventories[0]->removeFromPlace(objWhere);
+                  reDraw();
                }
                state = INVENTORY_STATE_OBJECT;
             break;
