@@ -92,12 +92,17 @@ class inventory
        * \return -> true if can add, false otherwise */
       bool canAdd(object* obj, int x, int y);
 
-      /*! Draw Iventory to Surface
+      /*! Draw Inventory to Surface
        * \param surface -> SDL_Surface to draw the iventory 
        * \param x -> x coordinate on surface
        * \param y -> y coordinate on surface */
       void draw(int x, int y, SDL_Surface* surface);
 
+      /*! Draw Equiped Itens to Surface
+       * \param surface -> SDL_Surface to draw the iventory 
+       * \param x -> x coordinate on surface
+       * \param y -> y coordinate on surface */
+      void drawEquiped(int x, int y, SDL_Surface* surface);
 
    private:
       void print();

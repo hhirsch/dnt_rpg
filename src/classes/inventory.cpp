@@ -319,3 +319,43 @@ void inventory::draw(int x, int y, SDL_Surface* surface)
    }
 }
 
+/**************************************************************
+ *                        drawEquiped                         *
+ **************************************************************/
+void inventory::drawEquiped(int x, int y, SDL_Surface* surface)
+{
+   if(equippedObject[INVENTORY_HEAD])
+   {
+      equippedObject[INVENTORY_HEAD]->draw2D(x+109,y+3, surface);
+   }
+   else if(equippedObject[INVENTORY_LEFT_HAND])
+   {
+      equippedObject[INVENTORY_LEFT_HAND]->draw2D(x+159,y+112, surface);
+   }
+   else if(equippedObject[INVENTORY_RIGHT_HAND])
+   {
+      equippedObject[INVENTORY_RIGHT_HAND]->draw2D(x+58,y+112, surface);
+   }
+   else if(equippedObject[INVENTORY_LEFT_FINGER])
+   {
+      equippedObject[INVENTORY_LEFT_FINGER]->draw2D(x+200,y+169, surface);
+   }
+   else if(equippedObject[INVENTORY_RIGHT_FINGER])
+   {
+      equippedObject[INVENTORY_RIGHT_FINGER]->draw2D(x+36,y+169, surface);
+   }
+   else if(equippedObject[INVENTORY_NECK])
+   {
+      equippedObject[INVENTORY_NECK]->draw2D(x+159,y+77, surface);
+   }
+   else if(equippedObject[INVENTORY_FOOT])
+   {
+      equippedObject[INVENTORY_FOOT]->draw2D(x+109,y+214, surface);
+   }
+   else if(equippedObject[INVENTORY_BODY])
+   {
+      equippedObject[INVENTORY_BODY]->draw2D(x+99,y+100, surface);
+   }
+}
+
+
