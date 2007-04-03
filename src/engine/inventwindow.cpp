@@ -136,7 +136,7 @@ void inventWindow::openMenu(int x, int y)
 {
    int xSize;
    objectMenu = (menu*) window->objects->addMenu();
-   objectMenu->InserirMenuItem(language.INVENTW_DROP,1);
+   objectMenu->InserirMenuItem(language.INVENTW_DROP,0);
    objectMenu->InserirMenuItem("-",0);
    objectMenu->InserirMenuItem(language.INVENTW_SELL,0);
    objectMenu->InserirMenuItem(language.INVENTW_USE,0);
