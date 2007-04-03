@@ -105,12 +105,14 @@ class inventory
       void drawEquiped(int x, int y, SDL_Surface* surface);
 
    private:
+      /*! For debug: print all names of inventory itens on terminal */
       void print();
 
       space spaces[INVENTORY_SIZE_X][INVENTORY_SIZE_Y];/**< The inventory */
       object* equippedObject[INVENTORY_TOTAL_PLACES];  /**< Equipped Current 
                                                             Objects */
-      SDL_Surface* inventoryImage;      /**< The Inventory Image */
+      SDL_Surface* inventoryImage; /**< The Inventory Image */
+      SDL_Surface* equipedImage;   /**< The Equiped Inventory Image */
 
 };
 

@@ -107,7 +107,7 @@ void inventWindow::reDraw()
    if(isOpen())
    {
       inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
-      inventories[0]->drawEquiped(0,0,inventoryTabButton->fig);
+      inventories[0]->drawEquiped(0,0,characterTabButton->fig);
       window->Desenhar(0,0);
 
       //TODO Mark on actual Inventory!
@@ -193,6 +193,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                             
          if(inv < INVENTORY_PER_CHARACTER)
          {
+            delete(activeObject);
             activeObject = NULL;
             state = INVENTORY_STATE_NONE;
             reDraw();
@@ -395,9 +396,9 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             if(!activeObject)
             {
                state = INVENTORY_STATE_NONE;
+               reDraw();
                return(true);
             }
-            
          }
       }
       break;

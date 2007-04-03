@@ -28,6 +28,11 @@ inventory::inventory()
    {
       printf("Can't Load Inventory Image!\n");
    }
+   equipedImage = IMG_Load("../data/texturas/inventory/equip.png");
+   if(!inventoryImage)
+   {
+      printf("Can't Load Equiped Inventory Image!\n");
+   }
 
    /* Nullify equiped pointers */
    for(x = 0; x < INVENTORY_TOTAL_PLACES; x++)
@@ -59,6 +64,10 @@ inventory::~inventory()
    if(inventoryImage)
    {
       SDL_FreeSurface(inventoryImage);
+   }
+   if(equipedImage)
+   {
+      SDL_FreeSurface(equipedImage);
    }
 }
 
@@ -107,7 +116,10 @@ bool inventory::equipObject(object* obj, int where)
       if(equippedObject[where] == NULL)
       {
          //TODO verify if object Use Type is compatible with the place
-         equippedObject[where] = obj;
+         /* Alloc Intern Object */
+         object* nObj = new object(obj);
+         equippedObject[where] = nObj;
+         return(true);
       }
    }
    return(false);
@@ -324,35 +336,44 @@ void inventory::draw(int x, int y, SDL_Surface* surface)
  **************************************************************/
 void inventory::drawEquiped(int x, int y, SDL_Surface* surface)
 {
+   SDL_Rect ret;
+
+   /* First, blit the inventory image with the surface at desired position */
+   ret.x = x;
+   ret.y = y;
+   ret.w = inventoryImage->w;
+   ret.h = inventoryImage->h;
+   SDL_BlitSurface(equipedImage, NULL, surface, &ret);
+
    if(equippedObject[INVENTORY_HEAD])
    {
       equippedObject[INVENTORY_HEAD]->draw2D(x+109,y+3, surface);
    }
-   else if(equippedObject[INVENTORY_LEFT_HAND])
+   if(equippedObject[INVENTORY_LEFT_HAND])
    {
       equippedObject[INVENTORY_LEFT_HAND]->draw2D(x+159,y+112, surface);
    }
-   else if(equippedObject[INVENTORY_RIGHT_HAND])
+   if(equippedObject[INVENTORY_RIGHT_HAND])
    {
       equippedObject[INVENTORY_RIGHT_HAND]->draw2D(x+58,y+112, surface);
    }
-   else if(equippedObject[INVENTORY_LEFT_FINGER])
+   if(equippedObject[INVENTORY_LEFT_FINGER])
    {
       equippedObject[INVENTORY_LEFT_FINGER]->draw2D(x+200,y+169, surface);
    }
-   else if(equippedObject[INVENTORY_RIGHT_FINGER])
+   if(equippedObject[INVENTORY_RIGHT_FINGER])
    {
       equippedObject[INVENTORY_RIGHT_FINGER]->draw2D(x+36,y+169, surface);
    }
-   else if(equippedObject[INVENTORY_NECK])
+   if(equippedObject[INVENTORY_NECK])
    {
       equippedObject[INVENTORY_NECK]->draw2D(x+159,y+77, surface);
    }
-   else if(equippedObject[INVENTORY_FOOT])
+   if(equippedObject[INVENTORY_FOOT])
    {
       equippedObject[INVENTORY_FOOT]->draw2D(x+109,y+214, surface);
    }
-   else if(equippedObject[INVENTORY_BODY])
+   if(equippedObject[INVENTORY_BODY])
    {
       equippedObject[INVENTORY_BODY]->draw2D(x+99,y+100, surface);
    }
