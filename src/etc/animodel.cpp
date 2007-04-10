@@ -13,6 +13,7 @@
 aniModel::aniModel()
 {
    m_calCoreModel = new CalCoreModel("");
+   m_calModel = NULL;
    m_state = STATE_IDLE;
    m_motionBlend[0] = 1.0f;
    m_motionBlend[1] = 1.0f;
