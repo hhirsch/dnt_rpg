@@ -20,6 +20,7 @@
 #include "../sound/sound.h"
 
 #include "alignwindow.h"
+#include "aspectwindow.h"
 #include "attwindow.h"
 #include "camera.h"
 #include "classwindow.h"

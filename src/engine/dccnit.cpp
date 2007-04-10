@@ -661,8 +661,7 @@ int engine::CharacterScreen(GLuint idTextura)
    align* selected; // TODO remove it from here
    race* sel; //TODO remove from here
    classe* selClass; //TODO remove from here TOO!
-
-  
+   personagem charac(features); //TODO remove it from here TOO!
    /* TODO  put on character screen */
    skills* sk = new skills(language.SKILLS_DIR.c_str(),
                            "../data/skills/skills.skl"); 
@@ -679,10 +678,13 @@ int engine::CharacterScreen(GLuint idTextura)
    /* Class Window */
    classWindow* clWindow = NULL;
 
+   /* Aspect Window */
+   aspectWindow* aspWindow = NULL;
+
    /* Race Window */
    raceWindow* rcWindow = new raceWindow(raceList, sk, gui);
 
-   while( (status != 5) )
+   while( (status != 6) )
    {
       tempo = SDL_GetTicks();
       if(tempo - tempoAnterior >= ACTUALIZATION_RATE) 
@@ -711,7 +713,7 @@ int engine::CharacterScreen(GLuint idTextura)
             }
             else if(charCreation == RACEW_CANCEL)
             {
-               status = 5;
+               status = 6;
                delete(rcWindow);
                charCreation = CHAR_CANCEL;
             }
@@ -772,7 +774,7 @@ int engine::CharacterScreen(GLuint idTextura)
             {
                status = 5;
                delete(skWindow);
-               charCreation = CHAR_CONFIRM;
+               aspWindow = new aspectWindow(&charac, gui);
             }
             else if(charCreation == SKILLW_CANCEL)
             {
@@ -781,7 +783,22 @@ int engine::CharacterScreen(GLuint idTextura)
                atWindow = new attWindow(sk, gui);
             }
          }
-         
+         else if(status == 5)
+         {
+            charCreation = aspWindow->treat(object, eventInfo, gui);
+            if(charCreation == ASPECTW_CONFIRM)
+            {
+               status = 6;
+               delete(aspWindow);
+               charCreation = CHAR_CONFIRM;
+            }
+            else if(charCreation == ASPECTW_CANCEL)
+            {
+               status = 4;
+               delete(aspWindow);
+               skWindow = new skillWindow(sk, 20, gui);
+            }
+         }         
       }
       else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
       {
