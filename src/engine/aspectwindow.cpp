@@ -12,12 +12,17 @@ aspectWindow::aspectWindow(personagem* character, interface* inter)
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
 
+   curImage = 0;
+   images = NULL;
+   loadImages();
+
    usedCharacter = character;
    window = inter->insertWindow(276,206,531,320,"Aspect"
                                 /*language.ASPECTW_TITLE.c_str()*/,1,1);
 
    /* Portrait Figure */
-   figurePortrait = window->objects->InserirFigura(5,25,68,88,NULL);
+   figurePortrait = window->objects->InserirFigura(5,25,0,0,NULL);
+   figurePortrait->fig = images[curImage].image;
 
    /* Previous Image Button */
    buttonPreviousImage = window->objects->InserirBotao(5,90,19,108,
@@ -26,17 +31,17 @@ aspectWindow::aspectWindow(personagem* character, interface* inter)
                                                    window->Cores.corBot.B,
                                                    "<",0, NULL);
    /* Next Image Button */
-   buttonNextImage = window->objects->InserirBotao(54,90,68,108,
+   buttonNextImage = window->objects->InserirBotao(55,90,69,108,
                                                    window->Cores.corBot.R,
                                                    window->Cores.corBot.G,
                                                    window->Cores.corBot.B,
                                                    ">",0, NULL);
    /* Contorn to the previous and next buttons */
-   window->objects->InserirQuadroTexto(20,90,53,108,1,"");
+   window->objects->InserirQuadroTexto(20,90,54,108,1,"");
 
    /* Name Text */
    window->objects->InserirQuadroTexto(72,25,112,39,1,"Name:");
-   textName = window->objects->InserirBarraTexto(113,25,251,39,"Jose",0,NULL);
+   textName = window->objects->InserirBarraTexto(113,25,251,39,"Bruno",0,NULL);
 
    /* Age Text */
    window->objects->InserirQuadroTexto(72,40,112,54,1,"Age:");
@@ -44,10 +49,10 @@ aspectWindow::aspectWindow(personagem* character, interface* inter)
 
    /* Sex Selectors */
    window->objects->InserirQuadroTexto(72,55,112,69,1,"Sex:");
-   cxSelSexF = window->objects->insertCxSel(113, 57, true);
+   cxSelSexF = window->objects->insertCxSel(113, 57, false);
    window->objects->InserirFigura(125,55,0,0,
                                   "../data/texturas/aspectw/sex_f.png");
-   cxSelSexM = window->objects->insertCxSel(143, 57, false);
+   cxSelSexM = window->objects->insertCxSel(143, 57, true);
    window->objects->InserirFigura(155,55,0,0,
                                   "../data/texturas/aspectw/sex_m.png");
    cxSelSexO = window->objects->insertCxSel(173, 57, false);
@@ -76,6 +81,39 @@ aspectWindow::aspectWindow(personagem* character, interface* inter)
  **************************************************************/
 aspectWindow::~aspectWindow()
 {
+   /* Delete all images */
+   if(images)
+   {
+      delete[] images;
+   }
+}
+
+/**************************************************************
+ *                          loadImages                        *
+ **************************************************************/
+void aspectWindow::loadImages()
+{
+   FILE* f;
+   int i;
+   char buffer[256];
+
+   totalImages = 0;
+
+   if( !(f = fopen("../data/characters/portraits/portraits.lst", "r")) )
+   {
+      printf("Can't open the list with portraits: portraits.lst!\n");
+      return;
+   }
+
+   fscanf(f,"%d", &totalImages);
+   images = new portraitImage[totalImages];
+
+   for(i = 0; i < totalImages; i++)
+   {
+      fscanf(f,"%s", &buffer[0]);
+      images[i].imageFile = buffer;
+      images[i].image = IMG_Load(images[i].imageFile.c_str());
+   }
 }
 
 /**************************************************************
@@ -85,21 +123,45 @@ int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)
    {
+      /* Confirm */
       if(object == (Tobjeto*) buttonConfirm)
       {
+         figurePortrait->fig = NULL;
          inter->closeWindow(window);
          window = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(ASPECTW_CONFIRM);
       }
+      /* Cancel */
       else if(object == (Tobjeto*) buttonCancel) 
       {
-          inter->closeWindow(window);
-          window = NULL;
-          glEnable(GL_LIGHTING);
-          SDL_ShowCursor(SDL_DISABLE);
+         figurePortrait->fig = NULL;
+         inter->closeWindow(window);
+         window = NULL;
+         glEnable(GL_LIGHTING);
+         SDL_ShowCursor(SDL_DISABLE);
          return(ASPECTW_CANCEL);
+      }
+      /* Previous Image */
+      else if(object == (Tobjeto*) buttonPreviousImage)
+      {
+         curImage--;
+         if(curImage < 0)
+         {
+            curImage = totalImages-1;
+         }
+         figurePortrait->fig = images[curImage].image;
+      }
+      /* Next Image */
+      else if(object == (Tobjeto*) buttonNextImage)
+      {
+         curImage++;
+         if(curImage >= totalImages)
+         {
+            curImage = 0;
+         }
+         figurePortrait->fig = images[curImage].image;
       }
    }
    else if(eventInfo == CXSELMODIFICADA)

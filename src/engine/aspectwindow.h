@@ -13,7 +13,17 @@
 #define ASPECTW_CONFIRM 1 /**< Confirm return from Aspect window */
 #define ASPECTW_OTHER   2 /**< Other return from Aspect Window */
 
-/*! Teh Aspect Window Class */
+/*! Image to portrait */
+class portraitImage
+{
+   public:
+      portraitImage(){image = NULL;};
+      ~portraitImage(){if(image){SDL_FreeSurface(image);}};
+      SDL_Surface* image;         /**< Image to portrait */
+      string imageFile;           /**< FileName of the Image */
+};
+
+/*! The Aspect Window Class */
 class aspectWindow
 {
    public:
@@ -32,7 +42,10 @@ class aspectWindow
       int treat(Tobjeto* object, int eventInfo, interface* inter);
 
    private:
-      personagem* usedCharacter;  /**< Pointer to the used character */
+      /*! Load All Portrait Images */
+      void loadImages();
+
+      personagem* usedCharacter;    /**< Pointer to the used character */
 
       botao* buttonConfirm;         /**< Confirm Button */
       botao* buttonCancel;          /**< Cancel Button */
@@ -48,6 +61,9 @@ class aspectWindow
 
       lang language;                /**< Language internationalized */
 
+      int totalImages;              /**< Number of total images */
+      int curImage;                 /**< Nuber of the Current Image */
+      portraitImage* images;        /**< All Portrait Images */
 };
 
 #endif

@@ -59,6 +59,10 @@ figura::figura(int x,int y,int w,int h,const char* arquivo)
 
 void figura::Desenhar(int Xjan,int Yjan,int salvar,SDL_Surface *screen)
 {
+   if(fig == NULL)
+   {
+      return;
+   }
    SDL_Rect Ret;
    Ret.x = x1+Xjan;
    Ret.y = y1+Yjan;
