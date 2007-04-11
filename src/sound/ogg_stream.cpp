@@ -1,6 +1,6 @@
 #include "ogg_stream.h"
 
-#define BUFFER_SIZE (4096 * 8) /**< Size of the Ogg Buffer */
+#define BUFFER_SIZE (4096 * 16) /**< Size of the Ogg Buffer */
 
 /*************************************************************************
  *                                 open                                  *
