@@ -16,6 +16,8 @@ inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
 {
    int i;
 
+   objectMenu = NULL;
+
    /* Copy Interface Pointer */
    interf = inter;
 
@@ -405,38 +407,42 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
       
       case MENUSELECIONADO:
       {
-         state = INVENTORY_STATE_NONE;
-         switch(objectMenu->itemAtual)
+         if(objectMenu)
          {
-            case 1: /* Get */
-               if(objWhere == INVENTORY_INVENTORY)
-               {
-                 /* Recreate the object, since it will be deleted when removed
-                  * from Inventory. */
-                 activeObject = new object(activeObject);
-                 inventories[currentInventory]->removeFromInventory(objX, objY);
-                 reDraw();
-               }
-               else
-               {
-                  inventories[0]->removeFromPlace(objWhere);
-                  reDraw();
-               }
-               state = INVENTORY_STATE_OBJECT;
-            break;
-            case 3: /* Use */
-               //TODO
-            break;
-            case 4: /* Sell */
-               //TODO
-            break;
-            case 5: /* Drop */
-               //TODO
-            break;
+            state = INVENTORY_STATE_NONE;
+            switch(objectMenu->itemAtual)
+            {
+               case 1: /* Get */
+                  if(objWhere == INVENTORY_INVENTORY)
+                  {
+                    /* Recreate the object, since it will be deleted when
+                     * removed from Inventory. */
+                    activeObject = new object(activeObject);
+                    inventories[currentInventory]->removeFromInventory(objX,
+                                                                       objY);
+                    reDraw();
+                  }
+                  else
+                  {
+                     inventories[0]->removeFromPlace(objWhere);
+                     reDraw();
+                  }
+                  state = INVENTORY_STATE_OBJECT;
+               break;
+               case 3: /* Use */
+                  //TODO
+               break;
+               case 4: /* Sell */
+                  //TODO
+               break;
+               case 5: /* Drop */
+                  //TODO
+               break;
+            }
+            window->objects->removeMenu();
+            objectMenu = NULL;
+            return(true);
          }
-         window->objects->removeMenu();
-         objectMenu = NULL;
-         return(true);
       }
       break;
    }

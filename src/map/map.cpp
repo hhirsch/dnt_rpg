@@ -595,7 +595,6 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
            porta = porta->proximo;
         }
 
-
         /* Draw objects */
         int o;
         GLfloat distancia;
@@ -649,7 +648,6 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
            }
            MapSquares[Xaux][Zaux]->visivel = 0;
         }
-
       glDisable(GL_COLOR_MATERIAL);
       glColor3f(1.0,1.0,1.0);
 
