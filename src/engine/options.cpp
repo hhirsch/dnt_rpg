@@ -325,6 +325,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
    {
       timeLastOperation = SDL_GetTicks();
 
+      /* Music */
       if(object == (Tobjeto*) buttonMusSum)
       {
          if(musicVolume < SDL_MIX_MAXVOLUME)
@@ -339,6 +340,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
              musicVolume--;
          }
       }
+      /* Sound Effects */
       if(object == (Tobjeto*) buttonSndSum) 
       {
          if(sndfxVolume < SDL_MIX_MAXVOLUME)
@@ -353,6 +355,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
              sndfxVolume--;
          }
       }
+      /* Language */
       if(object == (Tobjeto*) buttonLangSum)
       {
          if(langNumber < LANG_LAST)
@@ -367,7 +370,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
             langNumber--;
          }
       }
-      
+      /* Camera */
       if(object == (Tobjeto*) buttonCamSum)
       {
          if(cameraNumber < CAMERA_TYPE_DRIVE)
@@ -382,10 +385,10 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
             cameraNumber--;
          }
       }
-
    }
    else if(eventInfo == BOTAOPRESSIONADO) 
    {
+      /* Confirm */
       if( (object == (Tobjeto*) buttonConfirm) )
       {
          enableParticles = cxSelParticles->isSelected();
@@ -394,6 +397,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          interf->closeWindow(window);
          return(OPTIONSW_CONFIRM);
       }
+      /* Cancel */
       if( (object == (Tobjeto*) buttonCancel) )
       {
          musicVolume = prevMusicVolume;
@@ -402,6 +406,19 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          cameraNumber = prevCamera;
          interf->closeWindow(window);
          return(OPTIONSW_CANCEL);
+      }
+   }
+   else if(eventInfo == CXSELMODIFICADA)
+   {
+      /* cxSelParticles */
+      if( (object == (Tobjeto*) cxSelParticles) || 
+          (object == (Tobjeto*) cxSelGrass))
+      {
+         /* When disable particles, disable the grass */
+         if(!cxSelParticles->isSelected())
+         {
+            cxSelGrass->setSelection(false);
+         }
       }
    }
 
