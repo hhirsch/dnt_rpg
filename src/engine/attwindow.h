@@ -54,6 +54,7 @@ class attWindow
       botao* attButtonPrev[6];    /**< Previous Buttons */
       botao* rerollButton;        /**< ReRoll Button */
       botao* clearButton;         /**< Clear Button */
+      botao* autoButton;          /**< Auto Assign Button */
       botao* buttonConfirm;       /**< Confirm Button */
       botao* buttonCancel;        /**< Cancel Button */
 
@@ -79,6 +80,8 @@ class attWindow
       /*! Verifies if all attributes are assigned
        * \return true if all are assigned, false otherwise*/
       bool allAssigned();
+      /*! Auto Assign all values to Attributes */
+      void autoAssign();
 };
 
 #endif

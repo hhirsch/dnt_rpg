@@ -54,6 +54,12 @@ attWindow::attWindow(skills* sk, interface* inter)
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  language.ATTW_CLEAR.c_str(),0,NULL);
 
+   /* auto button */
+   autoButton = window->objects->InserirBotao(248,16,312,33,
+                                 window->Cores.corBot.R,
+                                 window->Cores.corBot.G,window->Cores.corBot.B,
+                                 "Auto",0,NULL);
+
    /* Strenght */
    window->objects->InserirQuadroTexto(9,49,85,62,0,
                                        language.ATTW_STRENGTH.c_str());
@@ -258,6 +264,23 @@ int attWindow::rollDices()
 }
 
 /**************************************************************
+ *                        autoAssign                          *
+ **************************************************************/
+void attWindow::autoAssign()
+{
+   int i;
+   char tmp[10];
+   for(i = 0; i < 6; i++)
+   {
+      nextAvaiblePoints(i);
+      sprintf(tmp,"%d", points[attPointsIndex[i]]);
+      attPoints[i]->texto = tmp;
+      assignAttMod(i);
+   }
+   window->Desenhar(0,0);
+}
+
+/**************************************************************
  *                      rollAllDices                          *
  **************************************************************/
 void attWindow::rollAllDices()
@@ -414,6 +437,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
 
    if(eventInfo == BOTAOPRESSIONADO)
    {
+      /* Confirm */
       if(object == (Tobjeto*) buttonConfirm)
       {
          if(allAssigned())
@@ -433,6 +457,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
             return(ATTW_OTHER);
          }
       }
+      /* Cancel */
       else if(object == (Tobjeto*) buttonCancel) 
       {
           inter->closeWindow(window);
@@ -441,6 +466,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
           SDL_ShowCursor(SDL_DISABLE);
          return(ATTW_CANCEL);
       }
+      /* Reroll */
       else if(object == (Tobjeto*) rerollButton)
       {
           clear();
@@ -454,10 +480,17 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
           }
           window->Desenhar(0,0);
       }
+      /* Clear */
       else if(object == (Tobjeto*) clearButton)
       {
          clear();
       }
+      /* Auto */
+      else if(object == (Tobjeto*) autoButton)
+      {
+         autoAssign();
+      }
+      /* Assign Buttons */
       else
       {
          for(i=0; i<6; i++) 
