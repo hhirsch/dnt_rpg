@@ -30,6 +30,7 @@
  - Camera Follow Active Character on Height;
  - Camera Modes (Normal, Drive)
  - Doxygen Documentation for Code;
+ - Using Autoconf;
  - Minor Bugs fixes;
  
 ================================================

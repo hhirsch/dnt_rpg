@@ -1,0 +1,54 @@
+#AutoConf for DccNiTghtmare
+
+AC_PREREQ(2.61)
+AC_INIT("DccNiTghmare", "0.1", "http://dccnitghtmare.sf.net")
+AC_CONFIG_SRCDIR([src/])
+AC_CONFIG_HEADER([config.h])
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_CC
+AC_PROG_MAKE_SET
+AC_PROG_CPP
+
+# Checks for libraries.
+AC_CHECK_LIB([GL], [main])
+AC_CHECK_LIB([GLU], [main])
+AC_CHECK_LIB([SDL], [main])
+AC_CHECK_LIB([SDL_image], [main])
+AC_CHECK_LIB([cal3d], [main])
+AC_CHECK_LIB([m], [main])
+AC_CHECK_LIB([ogg], [main])
+AC_CHECK_LIB([openal], [main])
+AC_CHECK_LIB([vorbis], [main])
+AC_CHECK_LIB([vorbisfile], [main])
+
+# Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS([stdlib.h string.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
+AC_C_CONST
+AC_C_INLINE
+AC_TYPE_SIZE_T
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+AC_CHECK_FUNCS([atexit floor sqrt strrchr strstr])
+
+AC_CONFIG_FILES([Makefile
+                 src/Makefile
+                 src/app/Makefile
+                 src/app/mapEditor/Makefile
+                 src/classes/Makefile
+                 src/engine/Makefile
+                 src/etc/Makefile
+                 src/fight/Makefile
+                 src/gui/Makefile
+                 src/ia/Makefile
+                 src/lang/Makefile
+                 src/map/Makefile
+                 src/particle/Makefile
+                 src/sound/Makefile])
+AC_OUTPUT
