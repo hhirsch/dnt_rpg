@@ -16,7 +16,6 @@
  *********************************************************************/
 engine::engine()
 {
-   printf("ACRATE: %d, WALKACT: %.3f, ANDAR: %.3f, GIRAR: %.3f\n", ACTUALIZATION_RATE, WALK_ACTUALIZATION, ANDAR, GIRAR);
    effect = NULL;
    /* Initialize internal lists */
    gui  = new interface(NULL);
