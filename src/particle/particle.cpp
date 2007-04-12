@@ -102,15 +102,26 @@ void particleSystem::init(int total, int mode)
    actualParticles = 0;
    particles = (particle*) malloc(total*sizeof(particle));
    maxParticles = total;
+   PointParameterf = NULL;
+   PointParameterfv = NULL;
 
-   PointParameterf = (PFNGLPOINTPARAMETERFARBPROC)
-                                  SDL_GL_GetProcAddress("glPointParameterfARB");
-   PointParameterfv = (PFNGLPOINTPARAMETERFVARBPROC) 
-                                 SDL_GL_GetProcAddress("glPointParameterfvARB");
+   char *ext = (char*)glGetString( GL_EXTENSIONS );
 
-   if( (PointParameterfv == NULL) || (PointParameterf == NULL) )
+   if(strstr( ext, "GL_ARB_point_sprite" ) != NULL)
    {
-      printf("Warn-> Not found glPointParameterfARB: DNT will be in worse quality :^(\n");
+      PointParameterf = (PFNGLPOINTPARAMETERFARBPROC)
+                                     SDL_GL_GetProcAddress("glPointParameterfARB");
+      PointParameterfv = (PFNGLPOINTPARAMETERFVARBPROC) 
+                                    SDL_GL_GetProcAddress("glPointParameterfvARB");
+
+      if( (PointParameterfv == NULL) || (PointParameterf == NULL) )
+      {
+         printf("Not found glPointParameterfARB: DNT will be in worse quality :^(\n");
+      }
+   }
+   else
+   {
+      printf("Not Found GL_ARB_point_sprite extension. DNT will be in worse quality\n");
    }
 
    int n;
