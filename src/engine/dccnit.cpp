@@ -11,17 +11,12 @@
 #include "../etc/glm.h"
 
 
-
-#define REFRESH_RATE 100.0
-#define ACTUALIZATION_RATE 20
-#define WALK_ACTUALIZATION 0.02
-
-
 /*********************************************************************
  *                       Engine's Constructor                        *
  *********************************************************************/
 engine::engine()
 {
+   printf("ACRATE: %d, WALKACT: %.3f, ANDAR: %.3f, GIRAR: %.3f\n", ACTUALIZATION_RATE, WALK_ACTUALIZATION, ANDAR, GIRAR);
    effect = NULL;
    /* Initialize internal lists */
    gui  = new interface(NULL);

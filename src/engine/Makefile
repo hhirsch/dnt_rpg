@@ -78,7 +78,7 @@ cursor.o: cursor.cpp cursor.h
 	@$(CC) $(CFLAGS) cursor.cpp -o cursor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-dccnit.o: dccnit.h dccnit.cpp
+dccnit.o: dccnit.h dccnit.cpp util.h
 	@printf "Making dccnit.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

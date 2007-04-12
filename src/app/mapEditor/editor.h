@@ -22,9 +22,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define ACTUALIZATION_RATE 20
-#define WALK_ACTUALIZATION 0.02
-
 /*! The Editor Class */
 class editor
 {
