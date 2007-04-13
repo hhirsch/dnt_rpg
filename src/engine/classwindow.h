@@ -17,23 +17,27 @@
 class classWindow
 {
    public:
-      /*! Constructor */
-      classWindow(classes* cls, skills* sk, interface* inter);
+      /*! Constructor 
+       * \param cls -> list of classes
+       * \param sk -> list of skills 
+       * \param inter -> pointer to the GUI
+       * \param retClass -> pointer to the choosed class */
+      classWindow(classes* cls, skills* sk, interface* inter, 
+                  classe** retClass);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
-       * \param actual -> pointer to current choosed class
        * \return 0 on close, 1 otherwise */
-      int treat(Tobjeto* object, int eventInfo,interface* inter, 
-                classe** actual);
+      int treat(Tobjeto* object, int eventInfo,interface* inter); 
 
       janela*      window;           /**< Pointer to the internal window */
 
    private:
       classes*      externalClasses;  /**< Pointer to the Classes List */
       classe*       actualClass;      /**< Pointer to actual Class */
+      classe**      choosedClass;     /**< Pointer to choosed pointer class */
       skills*       externalSkills;   /**< Pointer to actual Skill List */
 
       botao* buttonConfirm;

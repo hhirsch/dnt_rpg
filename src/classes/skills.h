@@ -49,10 +49,23 @@ class skills
       /*! Return the wanted skill */
       skill* getSkillByString(string idString);
 
+      /*! set avaible points
+       * \param points -> avaiblePoints */
+      void setAvaiblePoints(int points);
+
+      /*! get avaible points
+       * \return avaiblePoints */
+      int getAvaiblePoints();
+
+      /*! clear all skills points */
+      void clear();
+
+
      skill* m_skills; /**< the internal skills */
 
    private:
-     int totalSkills;
+     int totalSkills;         /**< Total Number of Skills on List */
+     int avaiblePoints;       /**< Total Avaible Points on List */
 };
 
 #endif

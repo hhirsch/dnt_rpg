@@ -49,6 +49,10 @@ engine::engine()
 
    /* Set Camera, based on options */
    gameCamera.defineCameraType(option->cameraNumber);
+
+   /* Load Skills List */
+   skillsList = new skills(language.SKILLS_DIR.c_str(),
+                           "../data/skills/skills.skl");
   
    /* Load Features List */
    features = new featsList(language.FEATS_DIR,"../data/feats/feats.ftl");
@@ -153,6 +157,7 @@ engine::~engine()
    delete(features);
    delete(raceList);
    delete(classList);
+   delete(skillsList);
 }
 
 /*********************************************************************
@@ -206,6 +211,21 @@ void engine::save()
 {
    //TODO
    modifState.saveState("");
+}
+
+/*********************************************************************
+ *                                loadPCs                            *
+ *********************************************************************/
+void engine::loadPCs()
+{
+   personagem* per;
+   if(PCs)
+   {
+      delete(PCs);
+   }
+   PCs  = new (Lpersonagem);
+   per = PCs->InserirPersonagem("../data/characters/pcs/logan.pc",
+                                features);
 }
 
 /*********************************************************************
@@ -329,17 +349,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    /* Loading PCs */
    if(RecarregaPCs)
    {
-       if(PCs)
-          delete(PCs);
-       PCs  = new (Lpersonagem);
-       sprintf(texto, language.LOAD_PC.c_str(), "Logan");
-       atualizaCarga(img,&texturaTexto,texturaCarga,
-                 texto,
-                 proj, modl, viewPort);
-       per = PCs->InserirPersonagem("../data/characters/pcs/logan.pc",
-                                    /*"../data/characters/npcs/ameiva.npc",*/
-                                    features);
-       per->DefineMaxLifePoints(per->maxLifePoints);
+       loadPCs(); 
        atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading Character: Logan",
                  proj, modl, viewPort);
@@ -652,13 +662,8 @@ int engine::CharacterScreen(GLuint idTextura)
 
    int status = 0;
 
-   align* selected; // TODO remove it from here
-   race* sel; //TODO remove from here
-   classe* selClass; //TODO remove from here TOO!
-   personagem charac(features); //TODO remove it from here TOO!
-   /* TODO  put on character screen */
-   skills* sk = new skills(language.SKILLS_DIR.c_str(),
-                           "../data/skills/skills.skl"); 
+   /* Load PCs */
+   loadPCs();
 
    /* Att Screen */
    attWindow* atWindow = NULL;//new attWindow(sk, gui);
@@ -676,7 +681,10 @@ int engine::CharacterScreen(GLuint idTextura)
    aspectWindow* aspWindow = NULL;
 
    /* Race Window */
-   raceWindow* rcWindow = new raceWindow(raceList, sk, gui);
+   raceWindow* rcWindow = new raceWindow(raceList,&PCs->personagemAtivo->sk,gui,
+                                         &PCs->personagemAtivo->actualRace);
+
+   //TODO Apply skills cost points modifiers                              
 
    while( (status != 6) )
    {
@@ -696,14 +704,17 @@ int engine::CharacterScreen(GLuint idTextura)
          glFlush();
          SDL_GL_SwapBuffers();
 
+         /* Race Window Opened */
          if(status == 0)
          {
-            charCreation = rcWindow->treat(object, eventInfo, gui, &sel);
+            charCreation = rcWindow->treat(object, eventInfo, gui);
             if(charCreation == RACEW_CONFIRM)
             {
                status = 1;
                delete(rcWindow);
-               clWindow = new classWindow(classList, sk, gui);
+               clWindow = new classWindow(classList, &PCs->personagemAtivo->sk,
+                                         gui,
+                                         &PCs->personagemAtivo->actualClass[0]);
             }
             else if(charCreation == RACEW_CANCEL)
             {
@@ -712,55 +723,68 @@ int engine::CharacterScreen(GLuint idTextura)
                charCreation = CHAR_CANCEL;
             }
          }
+         /* Class Window Opened */
          else if(status == 1)
          {
-            charCreation = clWindow->treat(object, eventInfo, gui, &selClass);
+            charCreation = clWindow->treat(object, eventInfo, gui);
             if(charCreation == ALIGNW_CONFIRM)
             {
                status = 2;
                delete(clWindow);
-               alWindow = new alignWindow(alignList, gui);
+               alWindow = new alignWindow(alignList, gui, 
+                                          &PCs->personagemAtivo->actualAlign);
             }
             else if(charCreation == ALIGNW_CANCEL)
             {
                status = 0;
                delete(clWindow);
-               rcWindow = new raceWindow(raceList, sk, gui);
+               rcWindow = new raceWindow(raceList, &PCs->personagemAtivo->sk, 
+                                         gui,
+                                         &PCs->personagemAtivo->actualRace);
             }
          }
+         /* Aligment Window Opened */
          else if(status == 2)
          {
-            charCreation = alWindow->treat(object, eventInfo, gui, &selected);
+            charCreation = alWindow->treat(object, eventInfo, gui);
             if(charCreation == ALIGNW_CONFIRM)
             {
                status = 3;
                delete(alWindow);
-               atWindow = new attWindow(sk, gui);
+               atWindow = new attWindow(skillsList, &PCs->personagemAtivo->sk,
+                                        gui, false);
             }
             else if(charCreation == ALIGNW_CANCEL)
             {
                status = 1;
                delete(alWindow);
-               clWindow = new classWindow(classList, sk, gui);
+               clWindow = new classWindow(classList, &PCs->personagemAtivo->sk,
+                                         gui,
+                                         &PCs->personagemAtivo->actualClass[0]);
             }
          }
+         /* Attribute Window Opened */
          else if(status == 3)
          {
              charCreation = atWindow->treat(object, eventInfo, gui,
                                             proj, modl,viewPort);
              if(charCreation == ATTW_CONFIRM)
              {
-                status = 4;
-                delete(atWindow);
-                skWindow = new skillWindow(sk, 20, gui);
+               status = 4;
+               delete(atWindow);
+               PCs->personagemAtivo->clearSkills();
+               skWindow = new skillWindow(skillsList,&PCs->personagemAtivo->sk,
+                                          gui);
              }
              else if(charCreation == ATTW_CANCEL)
              {
                 status = 2;
                 delete(atWindow);
-                alWindow = new alignWindow(alignList, gui);
+                alWindow = new alignWindow(alignList, gui,
+                                           &PCs->personagemAtivo->actualAlign);
              }
          }
+         /* Skills Window Opened */
          else if(status == 4)
          {
             charCreation = skWindow->treat(object, eventInfo, gui); 
@@ -768,15 +792,17 @@ int engine::CharacterScreen(GLuint idTextura)
             {
                status = 5;
                delete(skWindow);
-               aspWindow = new aspectWindow(&charac, gui);
+               aspWindow = new aspectWindow(PCs->personagemAtivo, gui);
             }
             else if(charCreation == SKILLW_CANCEL)
             {
                status = 3;
                delete(skWindow);
-               atWindow = new attWindow(sk, gui);
+               atWindow = new attWindow(skillsList, &PCs->personagemAtivo->sk,
+                                        gui, true);
             }
          }
+         /* Aspect Window Opened */
          else if(status == 5)
          {
             charCreation = aspWindow->treat(object, eventInfo, gui);
@@ -790,7 +816,8 @@ int engine::CharacterScreen(GLuint idTextura)
             {
                status = 4;
                delete(aspWindow);
-               skWindow = new skillWindow(sk, 20, gui);
+               skWindow = new skillWindow(skillsList,&PCs->personagemAtivo->sk,
+                                          gui);
             }
          }         
       }
@@ -799,9 +826,15 @@ int engine::CharacterScreen(GLuint idTextura)
          SDL_Delay((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) );
       }
    }
-   
-   delete(sk);
 
+
+   /* Actualize and calculate things related to the character */
+   if(charCreation == CHAR_CONFIRM)
+   {
+      /* Calculate Life Points */
+      PCs->personagemAtivo->defineInitialLifePoints();
+   }
+   
    return(charCreation);
 }
 
@@ -1252,8 +1285,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          threatGuiEvents(object, guiEvent);
          redesenha = true;
       }
-      else
-      { 
+
       if( (tempo-lastMouse>=  REFRESH_RATE ) || 
           ( (Mbotao & SDL_BUTTON(1)) && 
 	    (tempo-lastMousePression >= REFRESH_RATE)) )
@@ -1981,8 +2013,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             andou = true;
       }
 
-      }
-
    }
    else if(*forcaAtualizacao == 0)
    {
@@ -2305,10 +2335,12 @@ void engine::Draw()
    }
 
    /* Draw the GUI and others */
+
+   /* Get Portrait position */
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject(SCREEN_X,SCREEN_Y-80,0.01, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject(SCREEN_X-60,SCREEN_Y-80,0.01,modl,proj,viewPort, &x3, &y3, &z3);
-   gluUnProject(SCREEN_X-60,SCREEN_Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
+   gluUnProject(SCREEN_X,SCREEN_Y-64,0.01, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(SCREEN_X-64,SCREEN_Y-64,0.01,modl,proj,viewPort, &x3, &y3, &z3);
+   gluUnProject(SCREEN_X-64,SCREEN_Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
 
    glDisable(GL_LIGHTING);
    
@@ -2318,7 +2350,7 @@ void engine::Draw()
 
    /* Player's Portrait */
    per = (personagem*) PCs->personagemAtivo;
-   per->DrawMainPortrait(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4);
+   per->drawMainPortrait(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4);
  
    gui->draw(proj,modl,viewPort);
 
@@ -2591,7 +2623,7 @@ void engine::actualizeAllHealthBars()
    personagem* pers = (personagem*) PCs->primeiro->proximo;
    while(pers != PCs->primeiro)
    {
-      pers->DefineActualLifePoints(pers->lifePoints);
+      pers->defineActualLifePoints(pers->lifePoints);
       pers = (personagem*) pers->proximo;
    }
 }

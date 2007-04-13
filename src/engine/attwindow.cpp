@@ -10,13 +10,15 @@
 /**************************************************************
  *                      Constructor                           *
  **************************************************************/
-attWindow::attWindow(skills* sk, interface* inter)
+attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
+                     bool usePreviousValues)
 {
    int i;
    string saux;
    char tmp[5];
 
    externalSkill = sk;
+   saveSkill = savSkill;
 
    /* Disable lighting */
    glDisable(GL_LIGHTING);
@@ -31,10 +33,18 @@ attWindow::attWindow(skills* sk, interface* inter)
    }
 
    /* create window */
-   window = inter->insertWindow(146,166,661,441,language.ATTW_TITLE.c_str(),1,1);
+   window = inter->insertWindow(146,166,661,441,language.ATTW_TITLE.c_str(),
+                                1,1);
 
    /* roll and write all rolled dices to string */
-   rollAllDices();
+   if(!usePreviousValues)
+   {
+      rollAllDices();
+   }
+   else
+   {
+      assignPreviousToDices();
+   }
    saux = "";
    for(i = 0; i < 6; i++)
    {
@@ -229,6 +239,12 @@ attWindow::attWindow(skills* sk, interface* inter)
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  language.SKILL_CANCEL.c_str(),1,NULL);
+
+   /* Define Previous Values, if needed */
+   if(usePreviousValues)
+   {
+      assignPreviousValues();
+   }
    
    /* Open Skill Window */
    window->ptrExterno = &window;
@@ -261,6 +277,35 @@ int attWindow::rollDices()
       }
    }
    return(ret);
+}
+
+/**************************************************************
+ *                   assignPreviousToDices                    *
+ **************************************************************/
+void attWindow::assignPreviousToDices()
+{
+   int i;
+   for(i = 0; i < 6; i++)
+   {
+      points[i] = saveSkill->m_skills[i+1].pontos;
+      used[i] = true;
+   }
+}
+
+/**************************************************************
+ *                    assignPreviousValues                    *
+ **************************************************************/
+void attWindow::assignPreviousValues()
+{
+   int i;
+   char tmp[10];
+   for(i = 0; i < 6; i++)
+   {
+      sprintf(tmp,"%d", saveSkill->m_skills[i+1].pontos);
+      attPoints[i]->texto = tmp;
+      attPointsIndex[i] = i;
+      assignAttMod(i);
+   }
 }
 
 /**************************************************************
@@ -407,6 +452,8 @@ int attWindow::assignAttMod(int att)
    char tmpTotal[10];
    int attBonus = (int)floor((points[attPointsIndex[att]]-10) / 2.0);
 
+   saveSkill->m_skills[att+1].pontos = points[attPointsIndex[att]];
+
    //TODO calculate race and class bonus
    
    sprintf(tmpTotal,"%d",points[attPointsIndex[att]]);
@@ -444,7 +491,6 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
          {
             inter->closeWindow(window);
             window = NULL;
-            //TODO Save values
             glEnable(GL_LIGHTING);
             SDL_ShowCursor(SDL_DISABLE);
             return(ATTW_CONFIRM);

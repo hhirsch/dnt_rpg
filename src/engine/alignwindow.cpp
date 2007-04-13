@@ -1,13 +1,27 @@
+/*************************************************************************
+ *  DccNiTghtmare is public domain. Do whatever you want with this code. *
+ *************************************************************************/
+
 #include "alignwindow.h"
 
-
-alignWindow::alignWindow(aligns* alg, interface* inter)
+/************************************************************************
+ *                           Constructor                                *
+ ************************************************************************/
+alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
 {
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
    
    externalAligns = alg;
-   actualAlign = externalAligns->getAlignByInteger(0);
+   choosedAlign = actual;
+   if(*choosedAlign != NULL)
+   {
+      actualAlign = *choosedAlign;
+   }
+   else
+   {
+      actualAlign = externalAligns->getAlignByInteger(0);
+   }
    
    /* create window */
    window = inter->insertWindow(270,186,537,441,language.ALIGNW_TITLE.c_str(),
@@ -53,8 +67,10 @@ alignWindow::alignWindow(aligns* alg, interface* inter)
    inter->openWindow(window);
 }
 
-int alignWindow::treat(Tobjeto* object, int eventInfo, 
-                       interface* inter, align** actual)
+/************************************************************************
+ *                              treat                                   *
+ ************************************************************************/
+int alignWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)
    {
@@ -77,7 +93,7 @@ int alignWindow::treat(Tobjeto* object, int eventInfo,
       else if(object == (Tobjeto*) buttonConfirm)
       {
          alignImage->fig = NULL;
-         *actual = actualAlign;
+         *choosedAlign = actualAlign;
          inter->closeWindow(window);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
@@ -87,7 +103,7 @@ int alignWindow::treat(Tobjeto* object, int eventInfo,
       {
          alignImage->fig = NULL; //to not delete skill images
          inter->closeWindow(window);
-         *actual = NULL;
+         *choosedAlign = NULL;
          window = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);

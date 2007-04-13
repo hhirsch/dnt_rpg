@@ -126,6 +126,27 @@ int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
       /* Confirm */
       if(object == (Tobjeto*) buttonConfirm)
       {
+         /* Save Things to the character */
+         usedCharacter->definePortrait(images[curImage].imageFile);
+         /* Define Sex */
+         if(cxSelSexF->isSelected())
+         {
+            usedCharacter->sexType = SEX_FEMALE;
+         }
+         else if(cxSelSexM->isSelected())
+         {
+            usedCharacter->sexType = SEX_MALE;
+         }
+         else
+         {
+            usedCharacter->sexType = SEX_OTHER;
+         }
+         /* Define Name */
+         usedCharacter->nome = textName->texto;
+         /* Define Age */
+         sscanf(textAge->texto.c_str(),"%d", &usedCharacter->age);
+
+         /* Close Window */
          figurePortrait->fig = NULL;
          inter->closeWindow(window);
          window = NULL;

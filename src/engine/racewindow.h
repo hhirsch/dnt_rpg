@@ -17,22 +17,25 @@
 class raceWindow
 {
    public:
-      /*! Constructor */
-      raceWindow(races* rc, skills* sk, interface* inter);
+      /*! Constructor
+       * \param rc -> races list
+       * \param inter -> GUI interface
+       * \param retRace -> pointer where will be the choosed race */
+      raceWindow(races* rc, skills* sk, interface* inter, race** retRace);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
-       * \param actual -> pointer to current choosed race
        * \return 0 on close, 1 otherwise */
-      int treat(Tobjeto* object, int eventInfo,interface* inter, race** actual);
+      int treat(Tobjeto* object, int eventInfo,interface* inter);
 
       janela*      window;           /**< Pointer to the internal window */
 
    private:
       races*      externalRaces;   /**< Pointer to the Aligns List */
       race*       actualRace;      /**< Pointer to actual aligned */
+      race**      choosedRace;     /**< Pointer to the choosed pointer race */
       skills*     externalSkills;  /**< Pointer to External Skills List */
 
       botao* buttonConfirm;

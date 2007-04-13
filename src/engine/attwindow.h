@@ -18,9 +18,12 @@ class attWindow
 {
    public:
       /*! Constructor 
-       * \param sk -> skill List
-       * \param inter -> GUI interface to be used */
-      attWindow(skills* sk, interface* inter);
+       * \param sk -> skill List Descriptions
+       * \param savSkill -> skill to be edited
+       * \param inter -> GUI interface to be used
+       * \param usePreviousValues -> if will use previous values or new ones */
+      attWindow(skills* sk, skills* savSkill, interface* inter, 
+                bool usePreviousValues);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
@@ -40,7 +43,8 @@ class attWindow
       int attPointsIndex[6];      /**< Index of the selected points for att */
       bool used[6];               /**< Mark Used Rolled Points */
 
-      skills*      externalSkill; /**< Pointer to the edited skillList */
+      skills* externalSkill;      /**< Pointer to skill List with description */
+      skills* saveSkill;          /**< Pointer to thje edited skill List */
       lang language;              /**< Language internationalization */
 
       quadroTexto* rolledPoints;  /**< Rolled Points Text */
@@ -82,6 +86,11 @@ class attWindow
       bool allAssigned();
       /*! Auto Assign all values to Attributes */
       void autoAssign();
+      /*! Assign Previous values to the dices */
+      void assignPreviousToDices();
+      /*! Assign Previous values to the attributes */
+      void assignPreviousValues();
+
 };
 
 #endif

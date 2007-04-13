@@ -1,4 +1,5 @@
 #include "thing.h"
+#include "defs.h"
 #include <math.h>
 
 /*************************************************************************
@@ -10,6 +11,8 @@
  ******************************************************/
 thing::thing()
 {
+   age = 0;
+   sexType = SEX_MALE;
    lifePoints = 0;
    maxLifePoints = 0;
    fortitude = 0;

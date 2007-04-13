@@ -198,6 +198,14 @@ using namespace std;
 #define NONE                   10001
 #define STR_NONE               "NONE" 
 
+/******************************************************************
+ *                            SEX CONSTANTS                       *
+ ******************************************************************/
+#define SEX_MALE        0
+#define SEX_FEMALE      1
+#define SEX_OTHER       2
+
+
 /*!
  **************************************************************** 
  * Convert the concept with name buffer to its internal number  

@@ -58,7 +58,7 @@ int main(int argc, char **argv)
           {
              glDisable(GL_LIGHTING);
              Engine->fadeOutTexture(tituloID,0,0,799,599);
-             Engine->LoadMap("../data/mapas/poc2.map",1);
+             Engine->LoadMap("../data/mapas/poc2.map",0);
           }
        }
        

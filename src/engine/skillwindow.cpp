@@ -9,7 +9,7 @@
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-skillWindow::skillWindow(skills* sk, int points, interface* inter)
+skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
 {
    char tmp[5];
    string saux;
@@ -17,7 +17,8 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
 
    curSkill = ATT_SKILL_FIRST; //Set to first skill after attributes
    externalSkill = sk;
-   avaiblePoints = points;
+   saveSkill = savSkill;
+   avaiblePoints = saveSkill->getAvaiblePoints();
 
 
    glDisable(GL_LIGHTING);
@@ -26,7 +27,7 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    /* Define previous points, for undo */
    for(aux = curSkill; aux < ATT_SKILL_LAST; aux++)
    { 
-     externalSkill->m_skills[aux].antPontos=externalSkill->m_skills[aux].pontos;
+     saveSkill->m_skills[aux].antPontos = saveSkill->m_skills[aux].pontos;
    }
    
    /* Create Skill Window */
@@ -73,7 +74,7 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    /* Skill Points */
    window->objects->InserirQuadroTexto(52,200,101,214,0,
                                        language.SKILL_POINTS.c_str());
-   sprintf(tmp,"%d",externalSkill->m_skills[curSkill].pontos);
+   sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
    saux = tmp;
    txtPoints = window->objects->InserirQuadroTexto(113,198,135,216,1,
                                                    saux.c_str());
@@ -90,7 +91,7 @@ skillWindow::skillWindow(skills* sk, int points, interface* inter)
    /* Skill Costs */
    window->objects->InserirQuadroTexto(160,200,215,214,0,
                                        language.SKILL_COST.c_str());
-   sprintf(tmp,"%d",externalSkill->m_skills[curSkill].mod);
+   sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
    saux = tmp;
    txtCosts = window->objects->InserirQuadroTexto(216,200,251,214,0,
                                                   saux.c_str());
@@ -126,17 +127,17 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
    {
       if(object == (Tobjeto*) buttonSum)
       {
-         if( avaiblePoints - externalSkill->m_skills[curSkill].mod >=0 )
+         if( avaiblePoints - saveSkill->m_skills[curSkill].mod >=0 )
          {
-             externalSkill->m_skills[curSkill].pontos++;
-             avaiblePoints -= externalSkill->m_skills[curSkill].mod;
+             saveSkill->m_skills[curSkill].pontos++;
+             avaiblePoints -= saveSkill->m_skills[curSkill].mod;
              
              char tmp[5];
              sprintf(tmp,"%d",avaiblePoints);
              string saux = tmp;
              txtAvaiblePoints->texto = saux;
         
-             sprintf(tmp,"%d",externalSkill->m_skills[curSkill].pontos);
+             sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
              saux = tmp;
              txtPoints->texto = saux;
 
@@ -144,18 +145,18 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
       }
       else if(object == (Tobjeto*) buttonDec)
       {
-         if(externalSkill->m_skills[curSkill].pontos - 1 >= 
-            externalSkill->m_skills[curSkill].antPontos)
+         if(saveSkill->m_skills[curSkill].pontos - 1 >= 
+            saveSkill->m_skills[curSkill].antPontos)
          {
-            externalSkill->m_skills[curSkill].pontos--;
-            avaiblePoints += externalSkill->m_skills[curSkill].mod;
+            saveSkill->m_skills[curSkill].pontos--;
+            avaiblePoints += saveSkill->m_skills[curSkill].mod;
 
             char tmp[5];
             sprintf(tmp,"%d",avaiblePoints);
             string saux = tmp;
             txtAvaiblePoints->texto = saux;
 
-            sprintf(tmp,"%d",externalSkill->m_skills[curSkill].pontos);
+            sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
             saux = tmp;
             txtPoints->texto = saux;
          }
@@ -175,10 +176,10 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          skFig->fig = externalSkill->m_skills[curSkill].imagem;
           
          char tmp[5];
-         sprintf(tmp,"%d",externalSkill->m_skills[curSkill].pontos);
+         sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
          string saux = tmp;
          txtPoints->texto = saux;
-         sprintf(tmp,"%d",externalSkill->m_skills[curSkill].mod);
+         sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
          saux = tmp;
          txtCosts->texto = saux;
 
@@ -198,10 +199,10 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          skFig->fig = externalSkill->m_skills[curSkill].imagem;
 
          char tmp[5];
-         sprintf(tmp,"%d",externalSkill->m_skills[curSkill].pontos);
+         sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
          string saux = tmp;
          txtPoints->texto = saux;
-         sprintf(tmp,"%d",externalSkill->m_skills[curSkill].mod);
+         sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
          saux = tmp;
          txtCosts->texto = saux;
 
@@ -211,6 +212,7 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          skFig->fig = NULL; //to not delete skill images
          inter->closeWindow(window);
          window = NULL;
+         saveSkill->setAvaiblePoints(avaiblePoints);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(SKILLW_CONFIRM);
@@ -221,8 +223,7 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          int aux;
          for(aux = curSkill; aux < VAR_AUX1; aux++)
          { 
-            externalSkill->m_skills[aux].pontos = 
-                                        externalSkill->m_skills[aux].antPontos;
+            saveSkill->m_skills[aux].pontos = saveSkill->m_skills[aux].antPontos;
           }
           skFig->fig = NULL; //to not delete skill images
           inter->closeWindow(window);
@@ -233,8 +234,8 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
       }
    }
 
-   if( externalSkill->m_skills[curSkill].pontos > 
-       externalSkill->m_skills[curSkill].antPontos )
+   if( saveSkill->m_skills[curSkill].pontos > 
+       saveSkill->m_skills[curSkill].antPontos )
    {
       txtPoints->Cores.corTexto.R = 13;
       txtPoints->Cores.corTexto.G = 250;

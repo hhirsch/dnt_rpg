@@ -7,11 +7,11 @@
 #include <SDL/SDL_image.h>
 
 /*********************************************************************
- *                    Construtor do Personagem                       *
+ *                             constructor                           *
  *********************************************************************/
 personagem::personagem(featsList* ft)
 {
-   int i;
+  int i;
 
   lifeBar = new healthBar(5,52,59,62);
 
@@ -23,6 +23,7 @@ personagem::personagem(featsList* ft)
   }
   actualRace = NULL;
   actualAlign = NULL;
+  portraitImage = NULL;
   
   for(i = 0; i < INVENTORY_PER_CHARACTER; i++)
   {
@@ -35,12 +36,17 @@ personagem::personagem(featsList* ft)
 }
 
 /*********************************************************************
- *                    Destruidor do Personagem                       *
+ *                             destructor                            *
  *********************************************************************/
 personagem::~personagem()
 {
    int i;
    delete(lifeBar);
+   if(portraitImage)
+   {
+     SDL_FreeSurface(portraitImage);
+     glDeleteTextures(1,&portrait);
+   }
    for(i = 0; i < INVENTORY_PER_CHARACTER; i++)
    {
       if(inventories[i])
@@ -48,34 +54,85 @@ personagem::~personagem()
          delete(inventories[i]);
       }
    }
-} 
+}
 
+/*********************************************************************
+ *                           definePortrait                          *
+ *********************************************************************/
+void personagem::definePortrait(string portraitFile)
+{
+   if(portraitImage != NULL)
+   {
+      SDL_FreeSurface(portraitImage);
+      glDeleteTextures(1, &portrait);
+   }
 
-void personagem::DefineMaxLifePoints(int maxPoints)
+   SDL_Surface* img = IMG_Load(portraitFile.c_str());
+   if(!img)
+   {
+      printf("Can't Load Portrait File: %s\n", portraitFile.c_str());
+   }
+   /* Convert to used style */
+   portraitImage = SDL_CreateRGBSurface(SDL_HWSURFACE,img->w,img->h,32,
+                                        0x000000FF,0x0000FF00,
+                                        0x00FF0000,0xFF000000);
+   SDL_BlitSurface(img,NULL,portraitImage,NULL);
+   SDL_FreeSurface(img);
+
+   /* Define fileName */
+   retratoConversa = portraitFile;
+
+   /* Load as Texture */
+   glGenTextures(1, &portrait);
+   glBindTexture(GL_TEXTURE_2D, portrait);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, portraitImage->w, 
+                portraitImage->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                portraitImage->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
+
+/*********************************************************************
+ *                        getPortraitFileName                        *
+ *********************************************************************/
+string personagem::getPortraitFileName()
+{
+   return(retratoConversa);
+}
+
+/*********************************************************************
+ *                       defineMaxLifePoints                         *
+ *********************************************************************/
+void personagem::defineMaxLifePoints(int maxPoints)
 {
   maxLifePoints = maxPoints;
   lifeBar->defineMaxHealth(maxPoints);
-  DefineActualLifePoints(maxPoints);
+  defineActualLifePoints(maxPoints);
 }
 
-void personagem::DefineActualLifePoints(int newLife)
+/*********************************************************************
+ *                      defineActualLifePoints                       *
+ *********************************************************************/
+void personagem::defineActualLifePoints(int newLife)
 {
    lifePoints = newLife;
    lifeBar->defineActualHealth(newLife);
-   figura* fig = (figura*) portraits->primeiro->proximo;
+   lifeBar->draw(portraitImage);
 
-   lifeBar->draw(fig->fig);
-
+   glDeleteTextures(1, &portrait);
    glGenTextures(1, &portrait);
-      glBindTexture(GL_TEXTURE_2D, portrait);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fig->fig->w, fig->fig->h, 
-                   0, GL_RGBA, GL_UNSIGNED_BYTE, fig->fig->pixels);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glBindTexture(GL_TEXTURE_2D, portrait);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, portraitImage->w, 
+                portraitImage->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 
+                portraitImage->pixels);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
-
-void personagem::DrawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
+/*********************************************************************
+ *                         drawMainPortrait                          *
+ *********************************************************************/
+void personagem::drawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
                                   GLdouble x2, GLdouble y2, GLdouble z2,
                                   GLdouble x3, GLdouble y3, GLdouble z3,
                                   GLdouble x4, GLdouble y4, GLdouble z4)
@@ -96,9 +153,80 @@ void personagem::DrawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
    glDisable(GL_TEXTURE_2D);
 }
 
+/******************************************************************
+ *                             getPoints                          *
+ ******************************************************************/
+int personagem::getPoints(points pt)
+{
+   int total = 0;
+   skill* att;
+   att = sk.getSkillByString(pt.attID);
+   int aMod = attBonus(att);
+   if(pt.signal == SIGNAL_DEC)
+   {
+      total = (pt.sum - aMod) * pt.mult;
+   }
+   else
+   {
+      total = (pt.sum + aMod) * pt.mult;
+   }
+   if(total < 0)
+   {
+      total = 0;
+   }
+   return(total);
+}
+
+/******************************************************************
+ *                            clearSkills                         *
+ ******************************************************************/
+void personagem::clearSkills()
+{
+   sk.clear();
+   sk.setAvaiblePoints(getFirstLevelSkillPoints(0));
+}
+
+/******************************************************************
+ *                   getFirstLevelSkillPoints                     *
+ ******************************************************************/
+int personagem::getFirstLevelSkillPoints(int multiClassNumber)
+{
+   /* Verify if the class exists */
+   if( (multiClassNumber < 0) || (multiClassNumber >= MAX_DISTINCT_CLASSES) ||
+       (!actualClass[multiClassNumber]) )
+   {
+      return(0);
+   }
+   return(getPoints(actualClass[multiClassNumber]->firstLevelSP));
+}
+
+/******************************************************************
+ *                   getOtherLevelSkillPoints                     *
+ ******************************************************************/
+int personagem::getOtherLevelSkillPoints(int multiClassNumber)
+{
+   /* Verify if the class exists */
+   if( (multiClassNumber < 0) || (multiClassNumber >= MAX_DISTINCT_CLASSES) ||
+       (!actualClass[multiClassNumber]) )
+   {
+      return(0);
+   }
+   return(getPoints(actualClass[multiClassNumber]->otherLevelsSP));
+}
+
+/******************************************************************
+ *                   defineInitialLifePoints                      *
+ ******************************************************************/
+void personagem::defineInitialLifePoints()
+{
+   /* At First Level, the hit points is equal to the Max dice value 
+    * plus  constitution bonus */
+   defineMaxLifePoints(actualClass[0]->lifeDiceID + attBonus(ATT_CONSTITUTION));
+}
+
 
 /*********************************************************************
- *                      Destruidor da Lista                          *
+ *                         list Destructor                           *
  *********************************************************************/
 Lpersonagem::~Lpersonagem()
 {
@@ -112,7 +240,7 @@ Lpersonagem::~Lpersonagem()
 } 
  
 /*********************************************************************
- *                    Insere Personagem na Lista                     *
+ *                          InserirPersonagem                        *
  *********************************************************************/
 personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
 
@@ -124,12 +252,10 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
    string arqModelo;
    personagem* novo;
    novo = new personagem(ft);
-   novo->portraits = new(Tlista);
    novo->objects = new(Tlista);
    novo->tipo = PERSONAGEM;
    novo->actualWeapon = NULL;
    novo->orientacao = 0.0;
-   novo->posicaoFrente = 0.0;
    novo->posicaoLadoX = 0.0;
    novo->posicaoLadoZ = 0.0;
    novo->posicaoLadoY = 0.0;
@@ -147,7 +273,9 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
    fscanf(arq, "%s", buffer);
    arqModelo = buffer;
    fscanf(arq, "%s", buffer);
-   novo->retratoConversa = buffer;
+
+   /* Define the Portrait */
+   novo->definePortrait(buffer);
 
    while(fscanf(arq, "%s", buffer) != EOF)
    {
@@ -175,6 +303,8 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
          fgets(buffer, sizeof(buffer),arq);
          sscanf(buffer, "%d", &novo->sizeModifier);
       }
+
+      //TODO
       /*else if (buf == "lifeDice")
       {
          fgets(buffer, sizeof(buffer),arq);
@@ -230,9 +360,7 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
    /* Define CA TODO others values to sum here*/ 
    novo->armatureClass = 10 + novo->sizeModifier + novo->attBonus(ATT_DEXTERY);
    
-   /* Define os Retratos */
-   novo->portraits->InserirFigura(POSRETX,POSRETY,0,0,
-                                         novo->retratoConversa.c_str());
+   /* Load The 3D Model */ 
    novo->loadModel(arqModelo);
 
    
@@ -243,19 +371,19 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
 } 
 
 /*********************************************************************
- *                   Retira Personagem da Lista                      *
+ *                          RetiraPersonagem                         *
  *********************************************************************/
 void Lpersonagem::RetirarPersonagem(personagem* persona, int tiraMemoria)
 {
-   glDeleteTextures(1,&persona->portrait);
-   delete(persona->portraits);
    delete(persona->objects);
    if(tiraMemoria)
+   {
      Retirar(persona);
+   }
 }
 
 /*********************************************************************
- *                   Get Next Avaible Hostile Character              *
+ *                            getEnemyCharacter                      *
  *********************************************************************/
 personagem* Lpersonagem::getEnemyCharacter(personagem* last)
 {

@@ -3,15 +3,25 @@
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-raceWindow::raceWindow(races* rc, skills* sk, interface* inter)
+raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
+                       race** retRace)
 {
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
 
    externalSkills = sk;
+
+   choosedRace = retRace;
    
    externalRaces = rc;
-   actualRace = externalRaces->getRaceByInteger(0);
+   if(*choosedRace != NULL)
+   {
+      actualRace = *choosedRace;
+   }
+   else
+   {
+      actualRace = externalRaces->getRaceByInteger(0);
+   }
    
    /* create window */
    window = inter->insertWindow(90,100,710,499,
@@ -22,7 +32,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter)
 
    /* Race Description */
    textDescTitle = window->objects->InserirQuadroTexto(71,20,342,35,1,
-                                             language.RACEW_DESCRIPTION.c_str());
+                                            language.RACEW_DESCRIPTION.c_str());
    textDescTitle->fonte = FHELVETICA;
    textDescTitle->tamFonte = 1;
    
@@ -130,7 +140,7 @@ string raceWindow::getCharacteristics()
  *                              treat                               *
  ********************************************************************/
 int raceWindow::treat(Tobjeto* object, int eventInfo, 
-                       interface* inter, race** actual)
+                      interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)
    {
@@ -155,7 +165,7 @@ int raceWindow::treat(Tobjeto* object, int eventInfo,
       else if(object == (Tobjeto*) buttonConfirm)
       {
          raceImage->fig = NULL;
-         *actual = actualRace;
+         *choosedRace = actualRace;
          inter->closeWindow(window);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
@@ -165,7 +175,7 @@ int raceWindow::treat(Tobjeto* object, int eventInfo,
       {
          raceImage->fig = NULL; //to not delete race images
          inter->closeWindow(window);
-         *actual = NULL;
+         *choosedRace = NULL;
          window = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);

@@ -34,51 +34,91 @@ using namespace std;
 class personagem: public Tobjeto, public thing, public aniModel
 {
    public:
-      Tlista *portraits;        /**< All character's portraits */
-      Tlista *objects;          /**< Actual character objects */
-      Tobjeto *actualWeapon;    /**< Actual weapon */
-
-      
-      classe* actualClass[MAX_DISTINCT_CLASSES]; /**< Pointer to each class */
-      int classLevels[MAX_DISTINCT_CLASSES]; /**< Current level of each class */
-      race* actualRace;         /**< Pointer to Race */
-      align* actualAlign;       /**< Pointer to Align */
-
-      string nome;              /**< Character's name */
-      string retratoConversa;   /**< Portrait talk file name */
-
-      Square* ocupaQuad;        /**< Square occuped by character */
-      int ID;                   /**< Character's ID FIXME used?? */
-
-      feats actualFeats;        /**< Feats owned by character */
-
-      int actualFightGroup;     /**< fightGroup of character, used on battles*/
-      personagem* actualEnemy;  /**< Pointer to actual fight enemy (target) */
-
-      GLuint portrait;          /**< Up screen portrait GL texture */
-      healthBar* lifeBar;       /**< Character's Life Bar */
-
-      aStar pathFind;           /**< The A* pathFind to the character */
-
-      inventory* inventories[INVENTORY_PER_CHARACTER]; /**< Inventory */
-
       /*! Constructor
        * \param ft -> pointer to all feats list */
       personagem(featsList* ft);
       /*! Destructor */
       ~personagem();
 
-      void DrawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
+      /*! Define the image used as portrait
+       * \param portraitFile -> file name of the image to use*/
+      void definePortrait(string portraitFile);
+
+      /*! Gets the filename of the image used as portrait
+       * \return -> file name of the image used */
+      string getPortraitFileName();
+
+      /*! Draw the Portrait at the world position
+       * \param x1 -> x1 position 
+       * \param y1 -> y1 position
+       * \param z1 -> z1 position
+       * \param x2 -> x2 position 
+       * \param y2 -> y2 position
+       * \param z2 -> z2 position
+       * \param x3 -> x3 position 
+       * \param y3 -> y3 position
+       * \param z3 -> z3 position
+       * \param x4 -> x4 position 
+       * \param y4 -> y4 position
+       * \param z4 -> z4 position*/
+      void drawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
                                   GLdouble x2, GLdouble y2, GLdouble z2,
                                   GLdouble x3, GLdouble y3, GLdouble z3,
                                   GLdouble x4, GLdouble y4, GLdouble z4);
-      void DefineActualLifePoints(int newLife);
-      void DefineMaxLifePoints(int maxPoints);
 
+      /*! Define actual life points value
+       * \param newLife -> new value to the lifepoints*/
+      void defineActualLifePoints(int newLife);
+
+      /*! Get First Level Skill Points
+       * \param multiClassNumber -> number of the class in the multiclass
+       * \return -> total points at first level */
+      int getFirstLevelSkillPoints(int multiClassNumber);
+
+      /*! Get Other Levels Skill Points
+       * \param multiClassNumber -> number of the class in the multiclass
+       * \return -> total points at first level */
+      int getOtherLevelSkillPoints(int multiClassNumber);
+
+      /*! Define Character initial life points, based on its class */
+      void defineInitialLifePoints();
+
+      /*! Clear Skills */
+      void clearSkills();
+
+      Tlista *objects;          /**< Actual character objects */
+      Tobjeto *actualWeapon;    /**< Actual weapon */
+
+      classe* actualClass[MAX_DISTINCT_CLASSES]; /**< Pointer to each class */
+      int classLevels[MAX_DISTINCT_CLASSES]; /**< Current level of each class */
+      race* actualRace;         /**< Pointer to Race */
+      align* actualAlign;       /**< Pointer to Align */
+      feats actualFeats;        /**< Feats owned by character */
+
+      string nome;              /**< Character's name */
+
+      int actualFightGroup;     /**< fightGroup of character, used on battles*/
+      personagem* actualEnemy;  /**< Pointer to actual fight enemy (target) */
+      healthBar* lifeBar;       /**< Character's Life Bar */
+
+      aStar pathFind;           /**< The A* pathFind to the character */
+      Square* ocupaQuad;        /**< Square occuped by character */
+
+      inventory* inventories[INVENTORY_PER_CHARACTER]; /**< Inventory */
 
    protected:
-  
-     
+       /*! Define max value of the lifePoints
+       * \param maxPoints -> new max points to life points */
+      void defineMaxLifePoints(int maxPoints);
+
+      /*! Get points based on calculation
+       * \param pt -> calculation info
+       * \return points */
+      int getPoints(points pt);
+
+      string retratoConversa;     /**< Portrait talk file name */
+      SDL_Surface* portraitImage; /**< Character's portrait image */
+      GLuint portrait;            /**< Up screen portrait GL texture */
 };
 
 

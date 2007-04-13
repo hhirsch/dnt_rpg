@@ -263,7 +263,11 @@ class engine
                        GLfloat targX, GLfloat targZ,
                        GLfloat range);
 
-
+      /*! 
+       **************************************************************
+       * Load All PCs
+       ***************************************************************/  
+      void loadPCs();
 
       void draw2DMode();
       void draw3DMode();
@@ -321,6 +325,7 @@ class engine
       aligns* alignList;           /**< Alignments List */
       races* raceList;             /**< Races List */
       classes* classList;          /**< Classes List */
+      skills* skillsList;          /**< List of Skills */
 
       lang language;               /**< Language struct: internationalization */
 

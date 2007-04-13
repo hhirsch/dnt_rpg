@@ -3,7 +3,11 @@
  *************************************************************************/
 
 #include "skills.h"
+#include "defs.h"
 
+/*************************************************************
+ *                      Constructor                          *
+ *************************************************************/
 skills::skills(string dir, string arq)
 {
    FILE* file;
@@ -63,8 +67,12 @@ skills::skills(string dir, string arq)
 
    fclose(file);
 
+   avaiblePoints = 0;
 }
 
+/*************************************************************
+ *                      Constructor                          *
+ *************************************************************/
 /* Load from previous skill, but don't load images and descriptions */
 skills::skills(skills* sk)
 {
@@ -91,8 +99,13 @@ skills::skills(skills* sk)
       m_skills[aux].imagem = NULL;
       m_skills[aux].idString = sk->m_skills[aux].idString;
    }
+
+   avaiblePoints = 0;
 }
 
+/*************************************************************
+ *                       Destructor                          *
+ *************************************************************/
 skills::skills()
 {
    FILE* file;
@@ -155,6 +168,9 @@ skills::skills()
 
 }
 
+/*************************************************************
+ *                       Destructor                          *
+ *************************************************************/
 skills::~skills()
 {
   int aux;
@@ -172,7 +188,9 @@ skills::~skills()
 }
 
 
-
+/*************************************************************
+ *                    getSkillByString                       *
+ *************************************************************/
 skill* skills::getSkillByString(string idString)
 {
    int i;
@@ -186,5 +204,35 @@ skill* skills::getSkillByString(string idString)
 
    return(NULL);
    
+}
+
+/*************************************************************
+ *                   setAvaiblePoints                        *
+ *************************************************************/
+void skills::setAvaiblePoints(int points)
+{
+   avaiblePoints = points;
+}
+
+/*************************************************************
+ *                   getAvaiblePoints                        *
+ *************************************************************/
+int skills::getAvaiblePoints()
+{
+   return(avaiblePoints);
+}
+
+/*************************************************************
+ *                      clearSkills                          *
+ *************************************************************/
+void skills::clear()
+{
+   int aux;
+   /* Clear only skills */
+   for(aux = ATT_SKILL_FIRST; aux < totalSkills; aux++)
+   {
+      m_skills[aux].pontos = 0;
+      m_skills[aux].antPontos = 0;
+   }
 }
 

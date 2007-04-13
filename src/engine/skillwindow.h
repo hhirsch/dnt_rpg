@@ -22,7 +22,7 @@ class skillWindow
 {
    public:
       /*! Skill Window constructor */
-      skillWindow(skills* sk, int points, interface* inter);
+      skillWindow(skills* sk, skills* savSkill, interface* inter);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
@@ -34,7 +34,8 @@ class skillWindow
       janela*      window;           /**< Pointer to the internal window */
 
    private:
-      skills*      externalSkill;    /**< Pointer to the edited skillList */
+      skills*      externalSkill;    /**< Pointer to the skillList with descriptions */
+      skills*      saveSkill;        /**< Pointer to the edited skill list */
       int          avaiblePoints;    /**< Avaible points to distribute */
       int          curSkill;         /**< Actual Skill */
       quadroTexto* desc;             /**< Description Text */

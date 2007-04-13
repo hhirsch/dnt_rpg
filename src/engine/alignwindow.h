@@ -19,22 +19,23 @@ class alignWindow
    public:
       /*! Constructor
        * \param alg -> alignmnet list
-       * \param inter -> GUI interface to use */
-      alignWindow(aligns* alg, interface* inter);
+       * \param inter -> GUI interface to use
+       * \param actual -> pointer to the actual alignent */
+      alignWindow(aligns* alg, interface* inter, align** actual);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
-       * \param actual -> pointer to the actual alignent
        * \return 0 on close, 1 otherwise */
-      int treat(Tobjeto* object, int eventInfo,interface* inter, align** actual);
+      int treat(Tobjeto* object, int eventInfo,interface* inter );
 
       janela*      window;           /**< Pointer to the internal window */
 
    private:
       aligns*      externalAligns;   /**< Pointer to the Aligns List */
       align*       actualAlign;      /**< Pointer to actual aligned */
+      align**      choosedAlign;     /**< Pointer to the pointer of choosed */
 
       botao* buttonConfirm;          /**< Confirm Button */
       botao* buttonCancel;           /**< Cancel Button */

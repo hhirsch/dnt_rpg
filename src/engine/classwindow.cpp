@@ -3,7 +3,8 @@
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-classWindow::classWindow(classes* cls, skills* sk, interface* inter)
+classWindow::classWindow(classes* cls, skills* sk, interface* inter, 
+                         classe** retClass)
 {
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
@@ -11,7 +12,16 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter)
    externalSkills = sk;
    
    externalClasses = cls;
-   actualClass = externalClasses->getClassByInteger(0);
+   choosedClass = retClass;
+
+   if(*choosedClass != NULL)
+   {
+      actualClass = *choosedClass;
+   }
+   else
+   {
+      actualClass = externalClasses->getClassByInteger(0);
+   }
    
    /* create window */
    window = inter->insertWindow(90,100,710,499,
@@ -182,8 +192,7 @@ string classWindow::getCharacteristics()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int classWindow::treat(Tobjeto* object, int eventInfo, 
-                       interface* inter, classe** actual)
+int classWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)
    {
@@ -208,7 +217,7 @@ int classWindow::treat(Tobjeto* object, int eventInfo,
       else if(object == (Tobjeto*) buttonConfirm)
       {
          classImage->fig = NULL;
-         *actual = actualClass;
+         *choosedClass = actualClass;
          inter->closeWindow(window);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
@@ -218,7 +227,7 @@ int classWindow::treat(Tobjeto* object, int eventInfo,
       {
          classImage->fig = NULL; //to not delete classes images
          inter->closeWindow(window);
-         *actual = NULL;
+         *choosedClass = NULL;
          window = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
