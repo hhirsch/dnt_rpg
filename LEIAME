@@ -41,15 +41,11 @@ hardware. São eles:
 
    Para  se "instalar"  dccnitghtmare,  basta  descompactar  o 
 tar.bz2 disponível,  adentrar-se no  diretório  dccnitghtmare,
-realizar  uma  pequena  alteração  para  obter  os  textos  em 
-Português e rodar o comando "make".
+rodar o script ./configure e rodar o comando "make".
    Exemplo:
    farrer@anamabeka:~/$ tar -xvjf dccnitghtmare.tar.bz2
    farrer@anamabeka:~/$ cd dccnitghtmare
-   farrer@anamabeka:~/dccnitghtmare/$ gvim src/lang/lang.h
-   Comentar a linha: #include "../lang/ingles.h" e
-   descomentar a linha: #include "../lang/portugues.h";
-   Salvar;
+   farrer@anamabeka:~/dccnitghtmare/$ ./configure
    farrer@anamabeka:~/dccnitghtmare/$ make
 
 ==============================================================

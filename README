@@ -40,10 +40,12 @@ software and hardware. They are:
    a) LINUX   
 
    To   "install"   dccnitghtmare,   decompact   the  tar.bz2,  
-go to the directory dccnitghtmare and run "make".
-   Exemple:
+go to the directory dccnitghtmare, run ./configure and run
+"make".
+   Example:
    farrer@anamabeka:~/$ tar -xvjf dccnitghtmare.tar.bz2
    farrer@anamabeka:~/$ cd dccnitghtmare
+   farrer@snamabeka:~/dccnitghtmare/$ ./configure
    farrer@anamabeka:~/dccnitghtmare/$ make
 
    b) WINDOWS (We hope you're not using it on Ruindow$).
