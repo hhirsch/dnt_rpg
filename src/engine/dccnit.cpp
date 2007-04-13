@@ -557,6 +557,8 @@ void engine::SplashScreen()
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
+   /* Load PCs */
+   loadPCs();
 }
 
 /*********************************************************************
@@ -661,9 +663,6 @@ int engine::CharacterScreen(GLuint idTextura)
    int eventInfo = NADA;
 
    int status = 0;
-
-   /* Load PCs */
-   loadPCs();
 
    /* Att Screen */
    attWindow* atWindow = NULL;//new attWindow(sk, gui);
