@@ -120,6 +120,7 @@ class conversation
 
       protected:
          janela* jan;    /**< Pointer to window used to show */
+         interface* usedGui; /**< Pointer to the used interface */
          dialog* first;  /**< Head Node */
          int total;      /**< Total Dialogs */
          int actual;     /**< Actual active Dialog */

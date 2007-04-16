@@ -42,6 +42,7 @@ conversation::conversation()
    npcText = NULL;
    pcSelText = NULL;
    jan = NULL;
+   usedGui = NULL;
 }
 
 /*************************************************************************
@@ -49,6 +50,10 @@ conversation::conversation()
  *************************************************************************/
 conversation::~conversation()
 {
+   if( (jan) && (usedGui) )
+   {
+      usedGui->closeWindow(jan);
+   }
    dialog* dlg;
    while(total>0)
    {
@@ -392,6 +397,7 @@ void conversation::removeDialog(int num)
 void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
 {
    lang language;
+   usedGui = gui;
    actual = -1;
    jan = gui->insertWindow(330,100,585,355,language.DIALOGW_TITLE.c_str(),1,1);
    jan->objects->InserirFigura(5,25,0,0,pers->getPortraitFileName().c_str());
@@ -435,6 +441,8 @@ void conversation::proccessAction(int numDialog, int opcao, interface* gui,
       break;
       case TALK_ACTION_CLOSE:
          gui->closeWindow(jan);
+         jan = NULL;
+         usedGui = NULL;
       break;
       case TALK_ACTION_MODPC:
       break;
