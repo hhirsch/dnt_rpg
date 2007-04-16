@@ -58,6 +58,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if(ljan->janelaAtiva == NULL)
     {
        *eventInfo = NADA;
+       foco = FOCO_JOGO;
        return(NULL);
     }
 
@@ -149,6 +150,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             /* Active Window Moves */
             ljan->janelaAtiva->difx = x - ljan->janelaAtiva->x1;
             ljan->janelaAtiva->dify = y - ljan->janelaAtiva->y1;
+            objAtivo = (Tobjeto*) ljan->janelaAtiva;
             foco = FOCO_JANELAMOVER;
         }
         else if ( (ljan->janelaAtiva != NULL) &&
@@ -231,7 +233,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             *eventInfo = JANELACLICADA;
             return((Tobjeto*) ljan->janelaAtiva);
         }
-        else if ( (ljan->janelaAtiva != NULL))
+        else /*if( (ljan->janelaAtiva != NULL))*/
         {
            /* Test Other Windows Activation */
            int aux; 
@@ -255,7 +257,9 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if (foco == FOCO_JANELAMOVER)
     {
         if(!(ljan->janelaAtiva->Mover(ljan,NULL,fundo,x,y,Mbotao)))
+        {
            foco = FOCO_JOGO;
+        }
         *eventInfo = JANELAMOVIMENTADA;
         return(objAtivo);
     }

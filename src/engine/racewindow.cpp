@@ -167,6 +167,7 @@ int raceWindow::treat(Tobjeto* object, int eventInfo,
          raceImage->fig = NULL;
          *choosedRace = actualRace;
          inter->closeWindow(window);
+         window = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(RACEW_CONFIRM);

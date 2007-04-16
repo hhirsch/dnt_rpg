@@ -138,6 +138,8 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
       }
    }
 
+   gui->closeWindow(jan);
+
    glEnable(GL_LIGHTING);
    SDL_ShowCursor(SDL_DISABLE);
    return(result);
