@@ -45,6 +45,12 @@ personagem::~personagem()
 {
    int i;
    delete(lifeBar);
+   if(conv != NULL)
+   {
+      conversation* cs = (conversation*)conv;
+      delete(cs);
+      conv = NULL;
+   }
    if(portraitImage)
    {
      SDL_FreeSurface(portraitImage);

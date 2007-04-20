@@ -1526,7 +1526,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                     else if(pers->getConversationFile() != "")
                     {
                        cursors->setActual(CURSOR_TALK);
-                       pers->openConversationDialog(gui, PCs->personagemAtivo);
+                       if(Mbotao & SDL_BUTTON(1))
+                       {
+                          pers->openConversationDialog(gui,
+                                                       PCs->personagemAtivo);
+                       }
                     }
                     if(shortCutsWindow)
                     {

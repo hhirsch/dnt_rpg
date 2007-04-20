@@ -150,7 +150,7 @@ void editor::openMap()
             {
                 fscanf(arq,"%s %s %f %f",&nome[0],&arquivo[0],
                        &posX,&posZ);
-                per = NPCs->InserirPersonagem(arquivo,features);
+                per = NPCs->InserirPersonagem(arquivo,features, NULL);
                 per->posicaoLadoX = posX;
                 per->posicaoLadoZ = posZ;
             }

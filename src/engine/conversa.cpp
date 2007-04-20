@@ -46,6 +46,7 @@ conversation::conversation(void* pEngine)
    usedGui = NULL;
    actualPC = NULL;
    actualNPC = NULL;
+   actual = -1;
    actualEngine = pEngine;
 }
 
@@ -158,7 +159,11 @@ int conversation::loadFile(string name)
   bool pcBegin = false;
 
   FILE* arq= fopen(name.c_str(),"r");
-  if(!arq) return(0);
+  if(!arq)
+  {
+     printError(name, "Cannot open File!\n", 0);
+     return(0);
+  }
 
 
   while(fgets(buffer, sizeof(buffer), arq) != NULL)
@@ -447,6 +452,9 @@ void conversation::proccessAction(int numDialog, int opcao, interface* gui)
          engine* eng = (engine*)actualEngine;
          actualNPC->setAsEnemy();
          eng->enterBattleMode();
+         gui->closeWindow(jan);
+         jan = NULL;
+         usedGui = NULL;
       }
       break;
       case TALK_ACTION_CLOSE:
