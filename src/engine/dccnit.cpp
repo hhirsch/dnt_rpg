@@ -218,8 +218,8 @@ void engine::loadPCs()
       delete(PCs);
    }
    PCs  = new (Lpersonagem);
-   per = PCs->InserirPersonagem("../data/characters/pcs/logan.pc",
-                                features, this);
+   per = PCs->insertCharacter("../data/characters/pcs/logan.pc",
+                              features, this);
 }
 
 /*********************************************************************
@@ -332,7 +332,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
            atualizaCarga(img,&texturaTexto,texturaCarga,
                          texto,
                          proj, modl, viewPort);
-           per = NPCs->InserirPersonagem(arquivo,features, this);
+           per = NPCs->insertCharacter(arquivo,features, this);
            per->posicaoLadoX = posX;
            per->posicaoLadoZ = posZ;
          }
@@ -371,7 +371,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    /* Updating the BoundingBoxes for PCs */
    int aux;
    per = (personagem*) PCs->primeiro->proximo;
-   for(aux=0;aux < PCs->total;aux++)
+   for(aux=0;aux < PCs->getTotal();aux++)
    {
       per->update(0); 
       per->calculateBoundingBox();  
@@ -385,7 +385,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    if(NPCs)
    { 
       per = (personagem*) NPCs->primeiro->proximo;
-      for(aux=0; aux < NPCs->total;aux++)
+      for(aux=0; aux < NPCs->getTotal();aux++)
       {
          per->update(0); 
          per->calculateBoundingBox();  
@@ -412,13 +412,14 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    
 
    /* Put Active Party on Init Position */
-   actualMap->getInitialPosition(PCs->personagemAtivo->posicaoLadoX,
-                                 PCs->personagemAtivo->posicaoLadoZ);
-   gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
-                              PCs->personagemAtivo->posicaoLadoY,
-                              PCs->personagemAtivo->posicaoLadoZ,
-                              PCs->personagemAtivo->orientacao);
-   PCs->personagemAtivo->ocupaQuad = actualMap->squareInic;
+   personagem* activeCharacter = PCs->getActiveCharacter();
+   actualMap->getInitialPosition(activeCharacter->posicaoLadoX,
+                                 activeCharacter->posicaoLadoZ);
+   gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
+                              activeCharacter->posicaoLadoY,
+                              activeCharacter->posicaoLadoZ,
+                              activeCharacter->orientacao);
+   activeCharacter->ocupaQuad = actualMap->squareInic;
 
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  "Loading Changes...",
@@ -674,8 +675,9 @@ int engine::CharacterScreen(GLuint idTextura)
    aspectWindow* aspWindow = NULL;
 
    /* Race Window */
-   raceWindow* rcWindow = new raceWindow(raceList,&PCs->personagemAtivo->sk,gui,
-                                         &PCs->personagemAtivo->actualRace);
+   personagem* activeCharacter = PCs->getActiveCharacter();
+   raceWindow* rcWindow = new raceWindow(raceList,&activeCharacter->sk,gui,
+                                         &activeCharacter->actualRace);
 
    //TODO Apply skills cost points modifiers                              
 
@@ -705,9 +707,9 @@ int engine::CharacterScreen(GLuint idTextura)
             {
                status = 1;
                delete(rcWindow);
-               clWindow = new classWindow(classList, &PCs->personagemAtivo->sk,
+               clWindow = new classWindow(classList, &activeCharacter->sk,
                                          gui,
-                                         &PCs->personagemAtivo->actualClass[0]);
+                                         &activeCharacter->actualClass[0]);
             }
             else if(charCreation == RACEW_CANCEL)
             {
@@ -725,15 +727,15 @@ int engine::CharacterScreen(GLuint idTextura)
                status = 2;
                delete(clWindow);
                alWindow = new alignWindow(alignList, gui, 
-                                          &PCs->personagemAtivo->actualAlign);
+                                          &activeCharacter->actualAlign);
             }
             else if(charCreation == ALIGNW_CANCEL)
             {
                status = 0;
                delete(clWindow);
-               rcWindow = new raceWindow(raceList, &PCs->personagemAtivo->sk, 
+               rcWindow = new raceWindow(raceList, &activeCharacter->sk, 
                                          gui,
-                                         &PCs->personagemAtivo->actualRace);
+                                         &activeCharacter->actualRace);
             }
          }
          /* Aligment Window Opened */
@@ -744,16 +746,16 @@ int engine::CharacterScreen(GLuint idTextura)
             {
                status = 3;
                delete(alWindow);
-               atWindow = new attWindow(skillsList, &PCs->personagemAtivo->sk,
+               atWindow = new attWindow(skillsList, &activeCharacter->sk,
                                         gui, false);
             }
             else if(charCreation == ALIGNW_CANCEL)
             {
                status = 1;
                delete(alWindow);
-               clWindow = new classWindow(classList, &PCs->personagemAtivo->sk,
+               clWindow = new classWindow(classList, &activeCharacter->sk,
                                          gui,
-                                         &PCs->personagemAtivo->actualClass[0]);
+                                         &activeCharacter->actualClass[0]);
             }
          }
          /* Attribute Window Opened */
@@ -765,8 +767,8 @@ int engine::CharacterScreen(GLuint idTextura)
              {
                status = 4;
                delete(atWindow);
-               PCs->personagemAtivo->clearSkills();
-               skWindow = new skillWindow(skillsList,&PCs->personagemAtivo->sk,
+               activeCharacter->clearSkills();
+               skWindow = new skillWindow(skillsList,&activeCharacter->sk,
                                           gui);
              }
              else if(charCreation == ATTW_CANCEL)
@@ -774,7 +776,7 @@ int engine::CharacterScreen(GLuint idTextura)
                 status = 2;
                 delete(atWindow);
                 alWindow = new alignWindow(alignList, gui,
-                                           &PCs->personagemAtivo->actualAlign);
+                                           &activeCharacter->actualAlign);
              }
          }
          /* Skills Window Opened */
@@ -785,13 +787,13 @@ int engine::CharacterScreen(GLuint idTextura)
             {
                status = 5;
                delete(skWindow);
-               aspWindow = new aspectWindow(PCs->personagemAtivo, gui);
+               aspWindow = new aspectWindow(activeCharacter, gui);
             }
             else if(charCreation == SKILLW_CANCEL)
             {
                status = 3;
                delete(skWindow);
-               atWindow = new attWindow(skillsList, &PCs->personagemAtivo->sk,
+               atWindow = new attWindow(skillsList, &activeCharacter->sk,
                                         gui, true);
             }
          }
@@ -809,7 +811,7 @@ int engine::CharacterScreen(GLuint idTextura)
             {
                status = 4;
                delete(aspWindow);
-               skWindow = new skillWindow(skillsList,&PCs->personagemAtivo->sk,
+               skWindow = new skillWindow(skillsList,&activeCharacter->sk,
                                           gui);
             }
          }         
@@ -825,7 +827,7 @@ int engine::CharacterScreen(GLuint idTextura)
    if(charCreation == CHAR_CONFIRM)
    {
       /* Calculate Life Points */
-      PCs->personagemAtivo->defineInitialLifePoints();
+      activeCharacter->defineInitialLifePoints();
    }
    
    return(charCreation);
@@ -1006,6 +1008,7 @@ void engine::enterBattleMode()
   dc.baseDice.numberOfDices = 2;
   dc.baseDice.sumNumber = 4;
   dc.initialLevel = 1;
+  personagem* activeCharacter = PCs->getActiveCharacter();
   
   fight.empty();
   if(!NPCs)
@@ -1032,9 +1035,9 @@ void engine::enterBattleMode()
   {
       snd->addSoundEffect(false,"../data/sndfx/battleMode.ogg");
       engineMode = ENGINE_MODE_TURN_BATTLE;
-      moveCircleX = PCs->personagemAtivo->posicaoLadoX;
-      moveCircleY = PCs->personagemAtivo->posicaoLadoY;
-      moveCircleZ = PCs->personagemAtivo->posicaoLadoZ;
+      moveCircleX = activeCharacter->posicaoLadoX;
+      moveCircleY = activeCharacter->posicaoLadoY;
+      moveCircleZ = activeCharacter->posicaoLadoZ;
 
       /* Put the PCs on group */
       ch =(personagem*) PCs->primeiro->proximo;
@@ -1096,11 +1099,14 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
    }
 
    /* Verify Dialog Windows */
-   personagem* ch =(personagem*) NPCs->primeiro->proximo;
-   while(ch != NPCs->primeiro)
+   if(NPCs != NULL)
    {
-      ch->treatConversation(object, eventInfo, gui);
-      ch = (personagem*) ch->proximo;
+      personagem* ch =(personagem*) NPCs->primeiro->proximo;
+      while(ch != NPCs->primeiro)
+      {
+         ch->treatConversation(object, eventInfo, gui);
+         ch = (personagem*) ch->proximo;
+      }
    }
 
    switch(eventInfo)
@@ -1195,6 +1201,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    bool passouTempo = false; // The time to actualize passes ?
    Uint32 tempo;             // Actual Time
    GLfloat varX, varZ;        // to avoid GLfloat calculate
+   personagem* activeCharacter = PCs->getActiveCharacter();
 
    GLfloat passo;     // How much the character walks, based on time
    GLfloat rotacao;   // How much the character turns, based on time
@@ -1221,7 +1228,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       hourToTxt();
       int aux;
       personagem *per = (personagem*) PCs->primeiro->proximo;
-      for(aux=0;aux< PCs->total;aux++)
+      for(aux=0;aux< PCs->getTotal();aux++)
       {
          per->update(WALK_ACTUALIZATION/*seconds*/); 
          //per->CalculateBoundingBox(); 
@@ -1231,7 +1238,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       if(NPCs)
       {
         per = (personagem*) NPCs->primeiro->proximo;
-        for(aux=0;aux < NPCs->total;aux++)
+        for(aux=0;aux < NPCs->getTotal();aux++)
         {
            per->update(WALK_ACTUALIZATION/*seconds*/);   
            per->calculateBoundingBox();
@@ -1334,8 +1341,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                       shortCutsWindow->Desenhar(mouseX,mouseY);
                    }
                    if( (Mbotao & SDL_BUTTON(1)) && 
-                       (rangeAction(PCs->personagemAtivo->posicaoLadoX, 
-                                    PCs->personagemAtivo->posicaoLadoZ,
+                       (rangeAction(activeCharacter->posicaoLadoX, 
+                                    activeCharacter->posicaoLadoZ,
                                     quaux->Xobjects[obj],
                                     quaux->Zobjects[obj],
                                     WALK_PER_MOVE_ACTION) ) )
@@ -1346,7 +1353,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
                       int inv = 0;
 
-                      while((!PCs->personagemAtivo->inventories[inv]->addObject(
+                      while((!activeCharacter->inventories[inv]->addObject(
                              quaux->objects[obj]) && 
                             (inv < INVENTORY_PER_CHARACTER)))
                       {
@@ -1422,8 +1429,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                     shortCutsWindow->Desenhar(mouseX, mouseY);
                  }
                  if( (Mbotao & SDL_BUTTON(1)) && 
-                     (rangeAction(PCs->personagemAtivo->posicaoLadoX, 
-                                  PCs->personagemAtivo->posicaoLadoZ,
+                     (rangeAction(activeCharacter->posicaoLadoX, 
+                                  activeCharacter->posicaoLadoZ,
                                   porta->x, porta->z,
                                   WALK_PER_MOVE_ACTION) ) )
                  {
@@ -1529,7 +1536,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                        if(Mbotao & SDL_BUTTON(1))
                        {
                           pers->openConversationDialog(gui,
-                                                       PCs->personagemAtivo);
+                                                       activeCharacter);
                        }
                     }
                     if(shortCutsWindow)
@@ -1554,17 +1561,17 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
                      //TODO -> verify if weapon is ranged, so distance is other
                      if( (Mbotao & SDL_BUTTON(1)) &&
-                         (rangeAction(PCs->personagemAtivo->posicaoLadoX, 
-                                      PCs->personagemAtivo->posicaoLadoZ,
+                         (rangeAction(activeCharacter->posicaoLadoX, 
+                                      activeCharacter->posicaoLadoZ,
                                       pers->posicaoLadoX, pers->posicaoLadoZ,
                                       WALK_PER_MOVE_ACTION) ) )
                      {
-                        brief = PCs->personagemAtivo->nome + " " + 
+                        brief = activeCharacter->nome + " " + 
                                 language.FIGHT_ATTACKS + " " + 
                                 pers->nome + "|";
-                        canAttack = !PCs->personagemAtivo->actualFeats.
+                        canAttack = !activeCharacter->actualFeats.
                                                         applyAttackAndBreakFeat(
-                                                          *PCs->personagemAtivo,
+                                                          *activeCharacter,
                                                           attackFeat, *pers, 
                                                           brief);
                         if(pers->dead)
@@ -1616,8 +1623,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                cursors->setActual(CURSOR_MAPTRAVEL);
                pronto = 1;
                if( (Mbotao & SDL_BUTTON(1)) && 
-                   (rangeAction(PCs->personagemAtivo->posicaoLadoX, 
-                                PCs->personagemAtivo->posicaoLadoZ,
+                   (rangeAction(activeCharacter->posicaoLadoX, 
+                                activeCharacter->posicaoLadoZ,
                                 xReal, zReal,
                                 WALK_PER_MOVE_ACTION) ) )
                {
@@ -1713,8 +1720,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             if(!effect)
             {
                effect = (part2*)particleSystem->addParticle(PART_FIRE,
-                                          PCs->personagemAtivo->posicaoLadoX,0,
-                                          PCs->personagemAtivo->posicaoLadoZ,
+                                          activeCharacter->posicaoLadoX,0,
+                                          activeCharacter->posicaoLadoZ,
                                           "../data/particles/effect1.par");
                if(effect)
                {
@@ -1731,8 +1738,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             part5 *p;
             p =  (part5*)particleSystem->addParticle(PART_BLOOD,
-                                    PCs->personagemAtivo->posicaoLadoX,28,
-                                    PCs->personagemAtivo->posicaoLadoZ, 
+                                    activeCharacter->posicaoLadoX,28,
+                                    activeCharacter->posicaoLadoZ, 
                                     "../data/particles/blood1.par");
             if(p)
                p->followPC = true;
@@ -1741,8 +1748,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
              part5 *p;
              p = (part5*) particleSystem->addParticle(PART_BLOOD,
-                                         PCs->personagemAtivo->posicaoLadoX,28,
-                                         PCs->personagemAtivo->posicaoLadoZ, 
+                                         activeCharacter->posicaoLadoX,28,
+                                         activeCharacter->posicaoLadoZ, 
                                          "../data/particles/blood2.par");
              if(p) 
                p->followPC = true;
@@ -1750,8 +1757,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          if(keys[SDLK_l])
          {
             particleSystem->addParticle(PART_LIGHTNING,
-                                        PCs->personagemAtivo->posicaoLadoX,250,
-                                        PCs->personagemAtivo->posicaoLadoZ,
+                                        activeCharacter->posicaoLadoX,250,
+                                        activeCharacter->posicaoLadoZ,
                                         "../data/particles/lightning1.par");
          }
 
@@ -1774,8 +1781,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       if(keys[SDLK_q] || keys[SDLK_e])
       {
          walkStatus = ENGINE_WALK_KEYS;
-          varX = passo * sin(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
-          varZ = passo * cos(deg2Rad(PCs->personagemAtivo->orientacao+90.0));
+          varX = passo * sin(deg2Rad(activeCharacter->orientacao+90.0));
+          varZ = passo * cos(deg2Rad(activeCharacter->orientacao+90.0));
          // Left walk
          if(keys[SDLK_q]) 
          {
@@ -1785,12 +1792,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
          if(canWalk(varX,varZ,0)) 
          {
-            PCs->personagemAtivo->posicaoLadoX += varX;
-            PCs->personagemAtivo->posicaoLadoZ += varZ;
-            gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
-                                       PCs->personagemAtivo->posicaoLadoY,
-                                       PCs->personagemAtivo->posicaoLadoZ,
-                                       PCs->personagemAtivo->orientacao);
+            activeCharacter->posicaoLadoX += varX;
+            activeCharacter->posicaoLadoZ += varZ;
+            gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
+                                       activeCharacter->posicaoLadoY,
+                                       activeCharacter->posicaoLadoZ,
+                                       activeCharacter->orientacao);
             redesenha = true;
             andou = true;
          }
@@ -1799,11 +1806,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             if(varX < 0)
                passo *= -1;
-            PCs->personagemAtivo->posicaoLadoX += passo;
-            gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
-                                       PCs->personagemAtivo->posicaoLadoY,
-                                       PCs->personagemAtivo->posicaoLadoZ,
-                                       PCs->personagemAtivo->orientacao);
+            activeCharacter->posicaoLadoX += passo;
+            gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
+                                       activeCharacter->posicaoLadoY,
+                                       activeCharacter->posicaoLadoZ,
+                                       activeCharacter->orientacao);
             redesenha = true;
             andou = true;
          }
@@ -1812,11 +1819,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             if(varZ < 0) 
                passo *= -1;
-            PCs->personagemAtivo->posicaoLadoZ += passo;
-            gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
-                                       PCs->personagemAtivo->posicaoLadoY,
-                                       PCs->personagemAtivo->posicaoLadoZ,
-                                       PCs->personagemAtivo->orientacao);
+            activeCharacter->posicaoLadoZ += passo;
+            gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
+                                       activeCharacter->posicaoLadoY,
+                                       activeCharacter->posicaoLadoZ,
+                                       activeCharacter->orientacao);
             redesenha = true;
             andou = true;
          }
@@ -1825,8 +1832,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       else if(keys[SDLK_w] || keys[SDLK_s])
       { 
          walkStatus = ENGINE_WALK_KEYS;
-         varX = passo * sin(deg2Rad(PCs->personagemAtivo->orientacao));
-         varZ = passo * cos(deg2Rad(PCs->personagemAtivo->orientacao));
+         varX = passo * sin(deg2Rad(activeCharacter->orientacao));
+         varZ = passo * cos(deg2Rad(activeCharacter->orientacao));
          if(keys[SDLK_w]) 
          {
               varX *= -1;
@@ -1834,12 +1841,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          }
          if((canWalk(varX,varZ,0)) ) 
          {
-             PCs->personagemAtivo->posicaoLadoX += varX;
-             PCs->personagemAtivo->posicaoLadoZ += varZ;
-             gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
-                                        PCs->personagemAtivo->posicaoLadoY,
-                                        PCs->personagemAtivo->posicaoLadoZ,
-                                        PCs->personagemAtivo->orientacao);
+             activeCharacter->posicaoLadoX += varX;
+             activeCharacter->posicaoLadoZ += varZ;
+             gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
+                                        activeCharacter->posicaoLadoY,
+                                        activeCharacter->posicaoLadoZ,
+                                        activeCharacter->orientacao);
              redesenha = true;
              andou  = true;
          }
@@ -1849,11 +1856,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
               if(varX < 0 )
                  passo *= -1;
-              PCs->personagemAtivo->posicaoLadoX += passo;
-              gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
-                              PCs->personagemAtivo->posicaoLadoY,
-                              PCs->personagemAtivo->posicaoLadoZ,
-                              PCs->personagemAtivo->orientacao);
+              activeCharacter->posicaoLadoX += passo;
+              gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
+                              activeCharacter->posicaoLadoY,
+                              activeCharacter->posicaoLadoZ,
+                              activeCharacter->orientacao);
               redesenha = true;
               andou = true;
          }
@@ -1862,11 +1869,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
               if( varZ < 0 )
                  passo *= -1;
-              PCs->personagemAtivo->posicaoLadoZ += passo;
-              gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
-                              PCs->personagemAtivo->posicaoLadoY,
-                              PCs->personagemAtivo->posicaoLadoZ,
-                              PCs->personagemAtivo->orientacao);
+              activeCharacter->posicaoLadoZ += passo;
+              gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
+                              activeCharacter->posicaoLadoY,
+                              activeCharacter->posicaoLadoZ,
+                              activeCharacter->orientacao);
               redesenha = true;
               andou = true;
          }
@@ -1879,20 +1886,20 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          // CounterClockWise Character turn
          if((keys[SDLK_a]) && (canWalk(0,0,rotacao)) )  
          {
-            PCs->personagemAtivo->orientacao += rotacao;
-            if(PCs->personagemAtivo->orientacao > 360.0)
-               PCs->personagemAtivo->orientacao = 
-                               PCs->personagemAtivo->orientacao  - 360.0;
+            activeCharacter->orientacao += rotacao;
+            if(activeCharacter->orientacao > 360.0)
+               activeCharacter->orientacao = 
+                               activeCharacter->orientacao  - 360.0;
             redesenha = true;
             andou = true;
          }
          // Clockwise Character Turn
          if((keys[SDLK_d]) && (canWalk(0,0,-rotacao)) )
          {
-            PCs->personagemAtivo->orientacao -= rotacao;
-            if(PCs->personagemAtivo->orientacao < 0.0)
-               PCs->personagemAtivo->orientacao = 360.0 + 
-                                        PCs->personagemAtivo->orientacao ;
+            activeCharacter->orientacao -= rotacao;
+            if(activeCharacter->orientacao < 0.0)
+               activeCharacter->orientacao = 360.0 + 
+                                        activeCharacter->orientacao ;
          }
          redesenha = true;
          andou = true;
@@ -1902,20 +1909,17 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          walkStatus = ENGINE_WALK_KEYS;
          if(keys[SDLK_LCTRL]) //Previous Character
          {
-            PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->anterior;
-            if(PCs->personagemAtivo == PCs->primeiro)
-               PCs->personagemAtivo = (personagem*)PCs->primeiro->anterior;
+            PCs->setActiveCharacter((personagem*)activeCharacter->anterior);
          }
          else //Next Character
          {
-            PCs->personagemAtivo = (personagem*)PCs->personagemAtivo->proximo;
-            if(PCs->personagemAtivo == PCs->primeiro)
-               PCs->personagemAtivo = (personagem*)PCs->primeiro->proximo;
+            PCs->setActiveCharacter((personagem*)activeCharacter->proximo);
          }
-         gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
-                                    PCs->personagemAtivo->posicaoLadoY,
-                                    PCs->personagemAtivo->posicaoLadoZ,
-                                    PCs->personagemAtivo->orientacao);
+         activeCharacter = PCs->getActiveCharacter();
+         gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
+                                    activeCharacter->posicaoLadoY,
+                                    activeCharacter->posicaoLadoZ,
+                                    activeCharacter->orientacao);
          redesenha = true;
          SDL_Delay(100);
       }
@@ -1945,24 +1949,24 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                /* Disable attack move on round if move more than one move act */
                canAttack = false;
             }
-            PCs->personagemAtivo->pathFind.defineMap(actualMap);
+            activeCharacter->pathFind.defineMap(actualMap);
        
-            PCs->personagemAtivo->pathFind.findPath(
-                                             PCs->personagemAtivo->posicaoLadoX,
-                                             PCs->personagemAtivo->posicaoLadoZ,
+            activeCharacter->pathFind.findPath(
+                                             activeCharacter->posicaoLadoX,
+                                             activeCharacter->posicaoLadoZ,
                                              xReal, zReal, ANDAR, 
-                                             PCs->personagemAtivo->orientacao,
-                                             PCs->personagemAtivo->min[0],
-                                             PCs->personagemAtivo->min[1],
-                                             PCs->personagemAtivo->min[2],
-                                             PCs->personagemAtivo->max[0],
-                                             PCs->personagemAtivo->max[1],
-                                             PCs->personagemAtivo->max[2]);
+                                             activeCharacter->orientacao,
+                                             activeCharacter->min[0],
+                                             activeCharacter->min[1],
+                                             activeCharacter->min[2],
+                                             activeCharacter->max[0],
+                                             activeCharacter->max[1],
+                                             activeCharacter->max[2]);
          }
       }
 
       /* Verify if found path in aStar */
-      if(PCs->personagemAtivo->pathFind.getState() == ASTAR_STATE_FOUND)
+      if(activeCharacter->pathFind.getState() == ASTAR_STATE_FOUND)
       {
          //Found path to, so walk
          walkStatus = ENGINE_WALK_MOUSE;
@@ -1970,31 +1974,31 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
       if(walkStatus == ENGINE_WALK_MOUSE)
       {
-            if(! PCs->personagemAtivo->pathFind.getNewPosition(
-                                             PCs->personagemAtivo->posicaoLadoX,
-                                             PCs->personagemAtivo->posicaoLadoZ,
-                                             PCs->personagemAtivo->orientacao))
+            if(! activeCharacter->pathFind.getNewPosition(
+                                             activeCharacter->posicaoLadoX,
+                                             activeCharacter->posicaoLadoZ,
+                                             activeCharacter->orientacao))
             {
                walkStatus = ENGINE_WALK_KEYS;
             }
             else
             {
                /* Define New Occuped Square */
-               int posX =(int)floor(PCs->personagemAtivo->posicaoLadoX /
+               int posX =(int)floor(activeCharacter->posicaoLadoX /
                                     SQUARESIZE);
-               int posZ =(int)floor(PCs->personagemAtivo->posicaoLadoZ / 
+               int posZ =(int)floor(activeCharacter->posicaoLadoZ / 
                                     SQUARESIZE);
-               PCs->personagemAtivo->ocupaQuad = 
+               activeCharacter->ocupaQuad = 
                                          actualMap->relativeSquare(posX,posZ);
                /* Define New Height */
-               defineActiveCharacterHeight(PCs->personagemAtivo->posicaoLadoX,
-                                           PCs->personagemAtivo->posicaoLadoZ);
+               defineActiveCharacterHeight(activeCharacter->posicaoLadoX,
+                                           activeCharacter->posicaoLadoZ);
             }
 
-            gameCamera.actualizeCamera(PCs->personagemAtivo->posicaoLadoX,
-                                       PCs->personagemAtivo->posicaoLadoY,
-                                       PCs->personagemAtivo->posicaoLadoZ,
-                                       PCs->personagemAtivo->orientacao);
+            gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
+                                       activeCharacter->posicaoLadoY,
+                                       activeCharacter->posicaoLadoZ,
+                                       activeCharacter->orientacao);
             redesenha = true;
             andou = true;
       }
@@ -2011,12 +2015,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    {
       if(miniMapWindow)
       {
-         GLint x = (int)(((PCs->personagemAtivo->posicaoLadoX) / (SQUARESIZE)));
+         GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARESIZE)));
          if(x > actualMap->getSizeX()-1)
          {
             x = actualMap->getSizeX()-1;
          }
-         GLint z = (int)(((PCs->personagemAtivo->posicaoLadoZ) / (SQUARESIZE)));
+         GLint z = (int)(((activeCharacter->posicaoLadoZ) / (SQUARESIZE)));
          if( z > actualMap->getSizeZ()-1)
          {
             z = actualMap->getSizeZ()-1;
@@ -2073,31 +2077,31 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    {
       if(!walkSound)
       {
-         walkSound = snd->addSoundEffect(PCs->personagemAtivo->posicaoLadoX,0.0,
-                                        PCs->personagemAtivo->posicaoLadoZ,true,
+         walkSound = snd->addSoundEffect(activeCharacter->posicaoLadoX,0.0,
+                                        activeCharacter->posicaoLadoZ,true,
                                         "../data/sndfx/passos.ogg" );
       }
       else
       {
-         walkSound->redefinePosition(PCs->personagemAtivo->posicaoLadoX, 0.0,
-                                     PCs->personagemAtivo->posicaoLadoZ);
+         walkSound->redefinePosition(activeCharacter->posicaoLadoX, 0.0,
+                                     activeCharacter->posicaoLadoZ);
       }
-      PCs->personagemAtivo->setState(STATE_WALK);
+      activeCharacter->setState(STATE_WALK);
       #ifdef REDE
-        movchar(&clientData, PCs->personagemAtivo->ID, 
-          PCs->personagemAtivo->posicaoLadoX,PCs->personagemAtivo->posicaoLadoZ,
-          PCs->personagemAtivo->orientacao );
+        movchar(&clientData, activeCharacter->ID, 
+          activeCharacter->posicaoLadoX,activeCharacter->posicaoLadoZ,
+          activeCharacter->orientacao );
       #endif
    }
    else if(passouTempo)
    { 
-      if( (PCs->personagemAtivo->getState() == STATE_WALK) &&
+      if( (activeCharacter->getState() == STATE_WALK) &&
           (engineMode == ENGINE_MODE_TURN_BATTLE) && 
           (fightStatus == FIGHT_PC_TURN) )
       {
          canMove = false;
       }
-      PCs->personagemAtivo->setState(STATE_IDLE);
+      activeCharacter->setState(STATE_IDLE);
       if(walkSound)
       {
          snd->removeSoundEffect(walkSound);
@@ -2113,6 +2117,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
  *********************************************************************/
 void engine::Draw()
 {
+   personagem* activeCharacter = PCs->getActiveCharacter();
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
    GLfloat min[3],max[3];
@@ -2149,7 +2154,7 @@ void engine::Draw()
    /* Draw Playable Characters (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
-      for(aux=0;aux < PCs->total;aux++)
+      for(aux=0;aux < PCs->getTotal();aux++)
       {
          /* Draw Character */
          glPushMatrix();
@@ -2176,7 +2181,7 @@ void engine::Draw()
    if(NPCs)
    {
       per = (personagem*) NPCs->primeiro->proximo;
-      for(aux=0;aux < NPCs->total;aux++)
+      for(aux=0;aux < NPCs->getTotal();aux++)
       {
          /* Verify Bounding Box */
          x[0] = per->min[0];
@@ -2219,13 +2224,13 @@ void engine::Draw()
    {
        /* Range Circle */
        actualMap->drawSurfaceOnMap(rangeCircle,
-                                   PCs->personagemAtivo->posicaoLadoX - 
+                                   activeCharacter->posicaoLadoX - 
                                                            WALK_PER_MOVE_ACTION,
-                                   PCs->personagemAtivo->posicaoLadoZ - 
+                                   activeCharacter->posicaoLadoZ - 
                                                            WALK_PER_MOVE_ACTION,
-                                   PCs->personagemAtivo->posicaoLadoX + 
+                                   activeCharacter->posicaoLadoX + 
                                                            WALK_PER_MOVE_ACTION,
-                                   PCs->personagemAtivo->posicaoLadoZ + 
+                                   activeCharacter->posicaoLadoZ + 
                                                            WALK_PER_MOVE_ACTION,
                                    0.05);
    }
@@ -2254,8 +2259,8 @@ void engine::Draw()
    if(walkStatus == ENGINE_WALK_MOUSE)
    {
       GLfloat destX =0, destZ=0;
-      //PCs->personagemAtivo->pathFind.drawPath();
-      PCs->personagemAtivo->pathFind.getDestiny(destX, destZ);
+      //activeCharacter->pathFind.drawPath();
+      activeCharacter->pathFind.getDestiny(destX, destZ);
       
        /* Draw Movimentation Destiny */
        if(destinyVariation >= 2.0)
@@ -2314,8 +2319,8 @@ void engine::Draw()
    if(option->enableParticles)
    {
       glPushMatrix();
-         particleSystem->actualizeAll(PCs->personagemAtivo->posicaoLadoX,
-                                      PCs->personagemAtivo->posicaoLadoZ, 
+         particleSystem->actualizeAll(activeCharacter->posicaoLadoX,
+                                      activeCharacter->posicaoLadoZ, 
                                       visibleMatrix, option->enableGrass);
       glPopMatrix();
    }
@@ -2335,7 +2340,7 @@ void engine::Draw()
 
 
    /* Player's Portrait */
-   per = (personagem*) PCs->personagemAtivo;
+   per = (personagem*) activeCharacter;
    per->drawMainPortrait(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4);
  
    gui->draw(proj,modl,viewPort);
@@ -2366,6 +2371,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    GLfloat dist = 0;
    GLfloat varHeight = 0;
    GLfloat nx, nz;
+   personagem* activeCharacter = PCs->getActiveCharacter();
    
    if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
        (fightStatus != FIGHT_PC_TURN))
@@ -2383,10 +2389,10 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          return(false);
       }
       //verify distance to the orign point
-      dist = sqrt( (PCs->personagemAtivo->posicaoLadoX + varX - moveCircleX) *
-                   (PCs->personagemAtivo->posicaoLadoX + varX - moveCircleX) +
-                   (PCs->personagemAtivo->posicaoLadoZ + varZ - moveCircleZ) *
-                   (PCs->personagemAtivo->posicaoLadoZ + varZ - moveCircleZ) );
+      dist = sqrt( (activeCharacter->posicaoLadoX + varX - moveCircleX) *
+                   (activeCharacter->posicaoLadoX + varX - moveCircleX) +
+                   (activeCharacter->posicaoLadoZ + varZ - moveCircleZ) *
+                   (activeCharacter->posicaoLadoZ + varZ - moveCircleZ) );
       if( ( (canAttack) && (dist > 2*WALK_PER_MOVE_ACTION)) || 
             (!canAttack) && (dist > WALK_PER_MOVE_ACTION))
       {
@@ -2396,25 +2402,25 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
 
    colisionDetect.defineMap(actualMap);
-   result = colisionDetect.canWalk(PCs->personagemAtivo->posicaoLadoX + varX,
-                          PCs->personagemAtivo->posicaoLadoY,
-                          PCs->personagemAtivo->posicaoLadoZ + varZ,
-                          PCs->personagemAtivo->min[0],
-                          PCs->personagemAtivo->min[1],
-                          PCs->personagemAtivo->min[2],
-                          PCs->personagemAtivo->max[0],
-                          PCs->personagemAtivo->max[1],
-                          PCs->personagemAtivo->max[2],
-                          PCs->personagemAtivo->orientacao + varAlpha, 
-                          PCs->personagemAtivo->ocupaQuad, NPCs, varHeight,
-                          nx, nz);
+   result = colisionDetect.canWalk(activeCharacter->posicaoLadoX + varX,
+                                   activeCharacter->posicaoLadoY,
+                                   activeCharacter->posicaoLadoZ + varZ,
+                                   activeCharacter->min[0],
+                                   activeCharacter->min[1],
+                                   activeCharacter->min[2],
+                                   activeCharacter->max[0],
+                                   activeCharacter->max[1],
+                                   activeCharacter->max[2],
+                                   activeCharacter->orientacao + varAlpha, 
+                                   activeCharacter->ocupaQuad, NPCs, varHeight,
+                                   nx, nz);
 
    if(result)
    {
       /* Define New Occuped Square */
       int posX =(int)floor( nx / (SQUARESIZE));
       int posZ =(int)floor( nz / (SQUARESIZE));
-      PCs->personagemAtivo->ocupaQuad = actualMap->relativeSquare(posX,posZ);
+      activeCharacter->ocupaQuad = actualMap->relativeSquare(posX,posZ);
 
       /* Define New Heigh */
       if(!defineActiveCharacterHeight(nx, nz))
@@ -2425,7 +2431,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
 
       /* Apply VarHeight */
-      PCs->personagemAtivo->posicaoLadoY += varHeight;
+      activeCharacter->posicaoLadoY += varHeight;
       
       /* Verify Turn Based Mode Action */
       if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
@@ -2450,17 +2456,18 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
  *********************************************************************/
 bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
 {
-   GLfloat altura_atual = PCs->personagemAtivo->posicaoLadoY;
+   personagem* activeCharacter = PCs->getActiveCharacter();
+   GLfloat altura_atual = activeCharacter->posicaoLadoY;
 
    GLfloat res = actualMap->getHeight(nx, nz);
 
    if( res - altura_atual > ANDAR)
    {
-       PCs->personagemAtivo->posicaoLadoY = altura_atual;
+       activeCharacter->posicaoLadoY = altura_atual;
        return(false);
    }
 
-   PCs->personagemAtivo->posicaoLadoY = res;
+   activeCharacter->posicaoLadoY = res;
    return(true);
 }
 
@@ -2469,12 +2476,13 @@ bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
  *********************************************************************/
 void engine::OpenMiniMapWindow()
 {
-   GLint x = (int)(((PCs->personagemAtivo->posicaoLadoX) / (SQUARESIZE)));
+   personagem* activeCharacter = PCs->getActiveCharacter();
+   GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARESIZE)));
    if(x > actualMap->getSizeX()-1)
    {
       x = actualMap->getSizeX()-1;
    }
-   GLint z = (int)(((PCs->personagemAtivo->posicaoLadoZ) / (SQUARESIZE)));
+   GLint z = (int)(((activeCharacter->posicaoLadoZ) / (SQUARESIZE)));
    if( z > actualMap->getSizeZ()-1)
    {
       z = actualMap->getSizeZ()-1;
@@ -2591,7 +2599,7 @@ void engine::OpenCloseInventoryWindow()
    if(!inventoryWindow)
    {
       /* TODO get the right inventories!!! */
-      inventoryWindow = new inventWindow(PCs->personagemAtivo->inventories,
+      inventoryWindow = new inventWindow(PCs->getActiveCharacter()->inventories,
                                          gui); 
    }
    else
@@ -2724,16 +2732,17 @@ int engine::Run(SDL_Surface *surface)
            {
                if(fight.actualCharacterTurn()) 
                {
-                  PCs->personagemAtivo = fight.actualCharacterTurn();
+                  personagem* activeCharacter = PCs->getActiveCharacter();
+                  PCs->setActiveCharacter(fight.actualCharacterTurn());
                   fullMovePCAction = false;
                   canMove = true;
                   //TODO Verify if weapon is ranged before do this
                   attackFeat = FEAT_MELEE_ATTACK;
                   canAttack = true;
 
-                  moveCircleX = PCs->personagemAtivo->posicaoLadoX;
-                  moveCircleY = PCs->personagemAtivo->posicaoLadoY;
-                  moveCircleZ = PCs->personagemAtivo->posicaoLadoZ;
+                  moveCircleX = activeCharacter->posicaoLadoX;
+                  moveCircleY = activeCharacter->posicaoLadoY;
+                  moveCircleZ = activeCharacter->posicaoLadoZ;
                }
                else
                { //FIXME
@@ -2794,15 +2803,16 @@ int engine::Run(SDL_Surface *surface)
              }
              case MT_ENDSYNC:
              {
-                 PCs->personagemAtivo->ID = createchar( &clientData, 
-                   PCs->personagemAtivo->posicaoLadoX, 
-                   PCs->personagemAtivo->posicaoLadoZ, 
-                   PCs->personagemAtivo->orientacao );
-                 if( PCs->personagemAtivo->ID == -2 )
+                 personagem* activeCharacter = PCs->getActiveCharacter();
+                 activeCharacter->ID = createchar( &clientData, 
+                 activeCharacter->posicaoLadoX, 
+                 activeCharacter->posicaoLadoZ, 
+                 activeCharacter->orientacao );
+                 if( activeCharacter->ID == -2 )
                  {
                      entergame( &clientData );
                  }
-                 else if ( PCs->personagemAtivo->ID == -1 )
+                 else if ( activeCharacter->ID == -1 )
                  {
                      printf("Server Full\n");
                      return(1);

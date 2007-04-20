@@ -95,7 +95,6 @@ class personagem: public Tobjeto, public thing, public aniModel
       /*! Clear Skills */
       void clearSkills();
 
-      Tlista *objects;          /**< Actual character objects */
       Tobjeto *actualWeapon;    /**< Actual weapon */
 
       classe* actualClass[MAX_DISTINCT_CLASSES]; /**< Pointer to each class */
@@ -151,13 +150,11 @@ class personagem: public Tobjeto, public thing, public aniModel
 
 
 /*! Character's List */
-class Lpersonagem: public Tlista
+class Lpersonagem
 {
    public:
-      personagem* personagemAtivo;  /**< Active Character's on list */
-
       /*! List Constructor */
-      Lpersonagem():Tlista(){personagemAtivo=NULL;};
+      Lpersonagem();
       /*! List Destructor */
       ~Lpersonagem();
 
@@ -167,14 +164,12 @@ class Lpersonagem: public Tlista
        * \param ft -> featsList of all feats on game 
        * \param pEngine -> pointer to current engine
        * \return pointer to opened character*/
-      personagem* InserirPersonagem(string file, featsList* ft, void* pEngine);
+      personagem* insertCharacter(string file, featsList* ft, void* pEngine);
                                     
       /*!
        * Remove one character from list
-       * \param persona -> character pointer to remove
-       * \param tiraMemoria -> != 0 if remove character from memory list, 
-                             0 in the case the destructor calls the function. */
-      void RetirarPersonagem(personagem* persona, int tiraMemoria);
+       * \param persona -> character pointer to remove */
+      void removeCharacter(personagem* persona);
 
       /*!
        * Gets hostile characters from the list
@@ -183,6 +178,21 @@ class Lpersonagem: public Tlista
        */
       personagem* getEnemyCharacter(personagem* last);
 
+      /*! Get the active character
+       * \return pointer to the active character */
+      personagem* getActiveCharacter();
+
+      /*! Set the active character
+       * \param character -> pointer to the new active character */
+      void setActiveCharacter(personagem* character);
+
+      int getTotal(){return(total);};
+
+      personagem* primeiro;         /**< List Node Pointer */
+
+   protected:
+      personagem* activeCharacter;  /**< Active Character's on list */
+      int total;                    /**< Total Elements on List */
 };
 
 #endif

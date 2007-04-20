@@ -34,8 +34,11 @@ personagem::personagem(featsList* ft)
   }
 
   /* Feat Details */
-  actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
-  actualFeats.insertFeat(ft->featByNumber(FEAT_RANGED_ATTACK));
+  if(ft != NULL)
+  {
+     actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
+     actualFeats.insertFeat(ft->featByNumber(FEAT_RANGED_ATTACK));
+  }
 }
 
 /*********************************************************************
@@ -290,24 +293,45 @@ void personagem::defineInitialLifePoints()
 }
 
 
+/***************************************************************************
+ ***************************************************************************
+ *                             LPersonagem                                 *
+ ***************************************************************************
+ ***************************************************************************/
+
+
 /*********************************************************************
- *                         list Destructor                           *
+ *                         listConstructor                           *
+ *********************************************************************/
+Lpersonagem::Lpersonagem()
+{
+   total = 0;
+   primeiro = new personagem(NULL);
+   primeiro->tipo = -1;
+   primeiro->proximo = primeiro;
+   primeiro->anterior = primeiro;
+}
+
+/*********************************************************************
+ *                          listDestructor                           *
  *********************************************************************/
 Lpersonagem::~Lpersonagem()
 {
    personagem* per = (personagem*) primeiro->proximo;
-   int aux;
-   for(aux=0;aux<total;aux++)
+   personagem* ap;
+   while(per != primeiro)
    {
-      RetirarPersonagem(per,0);
+      ap = per;
       per = (personagem*) per->proximo;
+      delete(ap);
    }
+   delete(primeiro);
 } 
  
 /*********************************************************************
- *                          InserirPersonagem                        *
+ *                           insertCharacter                         *
  *********************************************************************/
-personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft,
+personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
                                            void* pEngine)
 
 {
@@ -318,7 +342,6 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft,
    string arqModelo;
    personagem* novo;
    novo = new personagem(ft);
-   novo->objects = new(Tlista);
    novo->tipo = PERSONAGEM;
    novo->actualWeapon = NULL;
    novo->orientacao = 0.0;
@@ -437,8 +460,12 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft,
    novo->loadModel(arqModelo);
 
    
-   InserirObj(novo);
-   personagemAtivo = novo;
+   novo->proximo = primeiro->proximo;
+   novo->anterior = primeiro;
+   primeiro->proximo = novo;
+   novo->proximo->anterior = novo;
+   total++;
+   activeCharacter = novo;
 
    return(novo);
 } 
@@ -446,13 +473,12 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft,
 /*********************************************************************
  *                          RetiraPersonagem                         *
  *********************************************************************/
-void Lpersonagem::RetirarPersonagem(personagem* persona, int tiraMemoria)
+void Lpersonagem::removeCharacter(personagem* persona)
 {
-   delete(persona->objects);
-   if(tiraMemoria)
-   {
-     Retirar(persona);
-   }
+   persona->anterior->proximo = persona->proximo;
+   persona->proximo->anterior = persona->anterior;
+   total--;
+   delete(persona);
 }
 
 /*********************************************************************
@@ -470,4 +496,28 @@ personagem* Lpersonagem::getEnemyCharacter(personagem* last)
    }
    return(NULL);
 }
+
+/*********************************************************************
+ *                           getActiveCharacter                      *
+ *********************************************************************/
+personagem* Lpersonagem::getActiveCharacter()
+{
+   return(activeCharacter);
+}
+
+/*********************************************************************
+ *                           setActiveCharacter                      *
+ *********************************************************************/
+void Lpersonagem::setActiveCharacter(personagem* character)
+{
+   if(character != primeiro)
+   {
+      activeCharacter = character;
+   }
+   else
+   {
+      activeCharacter = (personagem*) character->proximo;
+   }
+}
+
 
