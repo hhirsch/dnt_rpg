@@ -1051,14 +1051,25 @@ void engine::enterBattleMode(bool surprisePC)
       }
                    
       /* Define PC turn, cause the round of surprise attack! */
-      fightStatus = FIGHT_PC_TURN;
-      fullMovePCAction = false;
-      canMove = true;
+      if(surprisePC)
+      {
+         fightStatus = FIGHT_PC_TURN;
+         fullMovePCAction = false;
+         canMove = true;
+         canAttack = true;
+         brief += language.FIGHT_SURPRISE_TURN;
+      }
+      else
+      {
+         fightStatus = FIGHT_CONTINUE;
+         fullMovePCAction = false;
+         canMove = false;
+         canAttack = false;
+      }
       //TODO Verify if weapon is ranged before do this
       attackFeat = FEAT_MELEE_ATTACK;
-      canAttack = true;
       
-      brief += language.FIGHT_SURPRISE_TURN;
+      
    }
    else
    {
