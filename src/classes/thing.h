@@ -73,6 +73,12 @@ class thing
        *  \return bonus.
        **********************************************/
       int getBonusValue(factor something);
+
+      /*!
+       **********************************************
+       *  Set the thing as enemy to PC
+       **********************************************/
+      void setAsEnemy();
 };
 
 #endif

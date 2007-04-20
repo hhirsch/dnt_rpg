@@ -88,8 +88,6 @@ engine::engine()
 
    destinyVariation = -2.0;
 
-   cv = NULL;
-
 #ifdef VIDEO_MODE
    startVideo = false;
 #endif
@@ -101,10 +99,6 @@ engine::engine()
  *********************************************************************/
 engine::~engine()
 {
-   if(cv)
-   {
-      delete(cv);
-   }
    /* Stops and free music & sounds */
    delete(snd);
 
@@ -225,7 +219,7 @@ void engine::loadPCs()
    }
    PCs  = new (Lpersonagem);
    per = PCs->InserirPersonagem("../data/characters/pcs/logan.pc",
-                                features);
+                                features, this);
 }
 
 /*********************************************************************
@@ -338,7 +332,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
            atualizaCarga(img,&texturaTexto,texturaCarga,
                          texto,
                          proj, modl, viewPort);
-           per = NPCs->InserirPersonagem(arquivo,features);
+           per = NPCs->InserirPersonagem(arquivo,features, this);
            per->posicaoLadoX = posX;
            per->posicaoLadoZ = posZ;
          }
@@ -1101,6 +1095,14 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
       }  
    }
 
+   /* Verify Dialog Windows */
+   personagem* ch =(personagem*) NPCs->primeiro->proximo;
+   while(ch != NPCs->primeiro)
+   {
+      ch->treatConversation(object, eventInfo, gui);
+      ch = (personagem*) ch->proximo;
+   }
+
    switch(eventInfo)
    {
        case TABBOTAOPRESSIONADO:
@@ -1269,13 +1271,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
           (inventoryWindow->treat(object, guiEvent)) )
       {
          /* Done Events by Inventory! */
-         redesenha = true;
-      }
-
-      /* FIXME ->  do for all NPC dialogs! */
-      if( (cv) && (cv->windowOpened()) && (cv->treat(object, guiEvent, gui)))
-      {
-         /* Treated on Dialog Window */
          redesenha = true;
       }
 
@@ -1528,10 +1523,10 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                     {
                        cursors->setActual(CURSOR_GET);
                     }
-                    else
+                    else if(pers->getConversationFile() != "")
                     {
                        cursors->setActual(CURSOR_TALK);
-                       //TODO Talk
+                       pers->openConversationDialog(gui, PCs->personagemAtivo);
                     }
                     if(shortCutsWindow)
                     {
@@ -1755,18 +1750,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         PCs->personagemAtivo->posicaoLadoZ,
                                         "../data/particles/lightning1.par");
          }
-
-         if(keys[SDLK_j])
-         {
-            if(cv)
-            {
-               delete(cv);
-            }
-            cv = new(conversation);
-            cv->loadFile("../data/dialogs/portugues/initial.dlg");
-            cv->openDialog(0, gui, PCs->personagemAtivo);
-         }
-
 
          if(keys[SDLK_0])
          {

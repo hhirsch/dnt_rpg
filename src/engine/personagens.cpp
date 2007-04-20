@@ -4,6 +4,7 @@
 
 
 #include "personagens.h"
+#include "conversa.h"
 #include <SDL/SDL_image.h>
 
 /*********************************************************************
@@ -24,6 +25,8 @@ personagem::personagem(featsList* ft)
   actualRace = NULL;
   actualAlign = NULL;
   portraitImage = NULL;
+  conversationFile = "";
+  conv = NULL;
   
   for(i = 0; i < INVENTORY_PER_CHARACTER; i++)
   {
@@ -54,6 +57,62 @@ personagem::~personagem()
          delete(inventories[i]);
       }
    }
+}
+
+/*********************************************************************
+ *                        setConversationFile                        *
+ *********************************************************************/
+void personagem::setConversationFile(string file)
+{
+   conversationFile = file;
+}
+
+/*********************************************************************
+ *                        getConversationFile                        *
+ *********************************************************************/
+string personagem::getConversationFile()
+{
+   return(conversationFile);
+}
+
+/*********************************************************************
+ *                        createConversation                         *
+ *********************************************************************/
+void personagem::createConversation(void* pEngine)
+{
+   if(conversationFile != "")
+   {
+      conv = (void*) new conversation(pEngine);
+      conversation* cs = (conversation*)conv;
+      cs->loadFile(conversationFile);
+   }
+}
+
+/*********************************************************************
+ *                      openConversationDialog                       *
+ *********************************************************************/
+void personagem::openConversationDialog(interface* gui, personagem * PC)
+{
+   conversation* cs = (conversation*) conv;
+   if( (cs != NULL) && (!cs->windowOpened()) )
+   {
+      //TODO get number of dialog if it is != 0
+      cs->openDialog(0, gui, this, PC);
+   }
+}
+
+/*********************************************************************
+ *                         treatConversation                         *
+ *********************************************************************/
+bool personagem::treatConversation(Tobjeto* guiObject, int eventInfo, 
+                                   interface* gui)
+{
+   conversation* cs = (conversation*) conv;
+   if( (cs != NULL) && (cs->windowOpened()) )
+   {
+      return(cs->treat(guiObject, eventInfo, gui));
+   }
+   return(false);
 }
 
 /*********************************************************************
@@ -242,12 +301,13 @@ Lpersonagem::~Lpersonagem()
 /*********************************************************************
  *                          InserirPersonagem                        *
  *********************************************************************/
-personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
+personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft,
+                                           void* pEngine)
 
 {
    FILE* arq;
    char buffer[128];
-   //char buf2[128];
+   char buf2[128];
    string buf;
    string arqModelo;
    personagem* novo;
@@ -302,6 +362,13 @@ personagem* Lpersonagem::InserirPersonagem(string file, featsList* ft)
       {
          fgets(buffer, sizeof(buffer),arq);
          sscanf(buffer, "%d", &novo->sizeModifier);
+      }
+      else if (buf == "conversationFile")
+      {
+         fgets(buffer, sizeof(buffer), arq);
+         sscanf(buffer, "%s", &buf2[0]);
+         novo->setConversationFile(buf2);
+         novo->createConversation(pEngine);
       }
 
       //TODO

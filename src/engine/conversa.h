@@ -73,8 +73,9 @@ class dialog
 class conversation
 {
    public:
-      /*! conversation Constructor */
-      conversation();
+      /*! conversation Constructor
+       * \param pEngine -> pointer to current engine*/
+      conversation(void* pEngine);
       /*! conversation destructor */
       ~conversation();
 
@@ -104,8 +105,10 @@ class conversation
        * Opens the conversation on window
        * \param numDialog -> dialog number to open 
        * \param gui -> window interface used
-       * \param pers -> character to talk to */
-      void openDialog(int numDialog, interface* gui, personagem* pers);
+       * \param pers -> character to talk to
+       * \param PC -> player's character */
+      void openDialog(int numDialog, interface* gui, personagem* pers,
+                      personagem* PC);
 
       /*! Treat Events on Window. 
        * \param guiObject -> active GUI object
@@ -119,23 +122,23 @@ class conversation
       bool windowOpened();
 
       protected:
-         janela* jan;    /**< Pointer to window used to show */
-         interface* usedGui; /**< Pointer to the used interface */
-         dialog* first;  /**< Head Node */
-         int total;      /**< Total Dialogs */
-         int actual;     /**< Actual active Dialog */
-         rolBar* npcText; /**< The NPC text quad */
-         selTexto* pcSelText; /**< The PC selection text */
+         janela* jan;          /**< Pointer to window used to show */
+         interface* usedGui;   /**< Pointer to the used interface */
+         dialog* first;        /**< Head Node */
+         int total;            /**< Total Dialogs */
+         int actual;           /**< Actual active Dialog */
+         rolBar* npcText;      /**< The NPC text quad */
+         selTexto* pcSelText;  /**< The PC selection text */
+         personagem* actualPC; /**< The Actual PC */
+         personagem* actualNPC;/**< The actual NPC */
+         void* actualEngine;   /**< The actual Engine */
 
          /*!
           * Computates the action on dialog, based on selected option.
           * \param numDialog -> dialog number 
           * \param opcao -> option selected
-          * \param gui -> window interface used
-          * \param PC -> player's character
-          * \param NPC -> non player character */
-         void proccessAction(int numDialog, int opcao,interface* gui,
-                            personagem* PC, personagem* NPC);
+          * \param gui -> window interface used */
+         void proccessAction(int numDialog, int opcao,interface* gui);
 
          /*! 
           * Change dialog

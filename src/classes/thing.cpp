@@ -75,3 +75,11 @@ int thing::getBonusValue(factor something)
    return(0);
 }
 
+/******************************************************
+ *                     setAsEnemy                     *
+ ******************************************************/
+void thing::setAsEnemy()
+{
+   psychoState = PSYCHO_HOSTILE;
+}
+

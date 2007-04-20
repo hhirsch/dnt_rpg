@@ -5,6 +5,9 @@
 #ifndef _personagens_h
 #define _personagens_h
 
+#include <string>
+using namespace std;
+
 #include "../gui/desenho.h"
 #include "../gui/figura.h"
 #include "../gui/objeto.h"
@@ -17,8 +20,6 @@
 #include "../classes/inventory.h"
 #include "../ia/astar.h"
 #include "../etc/animodel.h"
-#include <string>
-using namespace std;
 #include "../map/map.h"
 
 #define POSRETX 8   /**< X screen portrait position */
@@ -80,6 +81,14 @@ class personagem: public Tobjeto, public thing, public aniModel
        * \return -> total points at first level */
       int getOtherLevelSkillPoints(int multiClassNumber);
 
+      /*! Set the conversation file
+       * \param file -> name of the conversation file*/
+      void setConversationFile(string file);
+      
+      /*! Get the conversation file
+       * \return -> conversation fileName */
+      string getConversationFile();
+
       /*! Define Character initial life points, based on its class */
       void defineInitialLifePoints();
 
@@ -106,6 +115,23 @@ class personagem: public Tobjeto, public thing, public aniModel
 
       inventory* inventories[INVENTORY_PER_CHARACTER]; /**< Inventory */
 
+      /*! Open, if exists and not opened, the conversation dialog */
+      void openConversationDialog(interface* gui, personagem * PC);
+
+      /*! Create the conversation (load all things, but not open the dialog)
+       * \param pEngine -> pointer to current engine */
+      void createConversation(void* pEngine);
+
+      /*! Treat Events on Conversation Window. 
+       * \param guiObject -> active GUI object
+       * \param eventInfo -> last GUI Event 
+       * \param gui -> window interface used
+       * \return true if event is threated, false otherwise. */
+      bool treatConversation(Tobjeto* guiObject, int eventInfo, interface* gui);
+
+
+      
+
    protected:
        /*! Define max value of the lifePoints
        * \param maxPoints -> new max points to life points */
@@ -119,6 +145,8 @@ class personagem: public Tobjeto, public thing, public aniModel
       string retratoConversa;     /**< Portrait talk file name */
       SDL_Surface* portraitImage; /**< Character's portrait image */
       GLuint portrait;            /**< Up screen portrait GL texture */
+      string conversationFile;    /**< Name of the Conversation File */
+      void* conv;                 /**< Pointer to the conversation */
 };
 
 
@@ -137,8 +165,9 @@ class Lpersonagem: public Tlista
        * Insert one character on list
        * \param file -> file name of the character to insert
        * \param ft -> featsList of all feats on game 
+       * \param pEngine -> pointer to current engine
        * \return pointer to opened character*/
-      personagem* InserirPersonagem(string file, featsList* ft);
+      personagem* InserirPersonagem(string file, featsList* ft, void* pEngine);
                                     
       /*!
        * Remove one character from list

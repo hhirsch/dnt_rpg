@@ -4,6 +4,7 @@
 
 
 #include "conversa.h"
+#include "dccnit.h"
 
 #define BUFFER_SIZE 512
 
@@ -32,7 +33,7 @@
 /*************************************************************************
  *                              Constructor                              *
  *************************************************************************/
-conversation::conversation()
+conversation::conversation(void* pEngine)
 {
    first = new(dialog);
    first->next = first;
@@ -43,6 +44,9 @@ conversation::conversation()
    pcSelText = NULL;
    jan = NULL;
    usedGui = NULL;
+   actualPC = NULL;
+   actualNPC = NULL;
+   actualEngine = pEngine;
 }
 
 /*************************************************************************
@@ -394,10 +398,13 @@ void conversation::removeDialog(int num)
 /*************************************************************************
  *                              openDialog                               *
  *************************************************************************/
-void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
+void conversation::openDialog(int numDialog, interface* gui, personagem* pers,
+                              personagem* PC)
 {
    lang language;
    usedGui = gui;
+   actualNPC = pers;
+   actualPC = PC;
    actual = -1;
    jan = gui->insertWindow(330,100,585,355,language.DIALOGW_TITLE.c_str(),1,1);
    jan->objects->InserirFigura(5,25,0,0,pers->getPortraitFileName().c_str());
@@ -414,10 +421,8 @@ void conversation::openDialog(int numDialog, interface* gui, personagem* pers)
 /*************************************************************************
  *                            proccessAction                             *
  *************************************************************************/
-void conversation::proccessAction(int numDialog, int opcao, interface* gui,
-                                  personagem* PC, personagem* npc)
+void conversation::proccessAction(int numDialog, int opcao, interface* gui)
 {
-
    dialog* dlg = first->next;
    while( (dlg != first) && (dlg->id != numDialog))
    {
@@ -438,6 +443,11 @@ void conversation::proccessAction(int numDialog, int opcao, interface* gui,
          changeDialog(dlg->options[opcao].ifAction.att);
       break;
       case TALK_ACTION_FIGHT:
+      {
+         engine* eng = (engine*)actualEngine;
+         actualNPC->setAsEnemy();
+         eng->enterBattleMode();
+      }
       break;
       case TALK_ACTION_CLOSE:
          gui->closeWindow(jan);
@@ -445,8 +455,10 @@ void conversation::proccessAction(int numDialog, int opcao, interface* gui,
          usedGui = NULL;
       break;
       case TALK_ACTION_MODPC:
+         //TODO
       break;
       case TALK_ACTION_MODNPC:
+         //TODO
       break;
    }
 }
@@ -509,9 +521,7 @@ bool conversation::treat(Tobjeto* guiObject, int eventInfo, interface* gui)
    {
       if(guiObject == (Tobjeto*)pcSelText)
       {
-         proccessAction(actual, pcSelText->getLastSelectedItem(), gui,
-                        //FIXME -> get the pointers!
-                        NULL, NULL);
+         proccessAction(actual, pcSelText->getLastSelectedItem(), gui);
          return(true);
       }
    }

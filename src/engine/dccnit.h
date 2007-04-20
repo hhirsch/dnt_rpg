@@ -172,6 +172,12 @@ class engine
        ***************************************************************/
       void save();
 
+      /*!
+       **************************************************************
+       * Put Engine in Turn Battle Mode
+       ***************************************************************/
+      void enterBattleMode();
+
 
    private:
 
@@ -242,12 +248,6 @@ class engine
        * Write actual Time on TXT box
        ***************************************************************/
       void hourToTxt();
-
-      /*!
-       **************************************************************
-       * Put Engine in Turn Battle Mode
-       ***************************************************************/
-      void enterBattleMode();
 
       /*!
        **************************************************************
@@ -366,10 +366,6 @@ class engine
       sky* gameSky;               /**< The internal sky reference */
       sun* gameSun;               /**< The internal sun reference */
       GLfloat hour;               /**< Hour on day time */
-
-      //FIXME remove from here!
-      //
-      conversation* cv;
 
 #ifdef VIDEO_MODE
       bool startVideo;            /**< Used to start video making */
