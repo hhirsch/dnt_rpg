@@ -175,8 +175,9 @@ class engine
       /*!
        **************************************************************
        * Put Engine in Turn Battle Mode
+       * \param surprisePC -> true if surprise atack for PC
        ***************************************************************/
-      void enterBattleMode();
+      void enterBattleMode(bool surprisePC);
 
 
    private:

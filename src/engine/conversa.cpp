@@ -451,7 +451,7 @@ void conversation::proccessAction(int numDialog, int opcao, interface* gui)
       {
          engine* eng = (engine*)actualEngine;
          actualNPC->setAsEnemy();
-         eng->enterBattleMode();
+         eng->enterBattleMode(false);
          gui->closeWindow(jan);
          jan = NULL;
          usedGui = NULL;

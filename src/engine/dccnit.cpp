@@ -996,7 +996,7 @@ bool engine::rangeAction(GLfloat posX, GLfloat posZ,
 /*********************************************************************
  *                          enterBattleMode                          *
  *********************************************************************/
-void engine::enterBattleMode()
+void engine::enterBattleMode(bool surprisePC)
 {
   int numEnemies = 0;
   personagem* ch;
@@ -1124,7 +1124,7 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
            {
               if( engineMode != ENGINE_MODE_TURN_BATTLE )
               {
-                 enterBattleMode();
+                 enterBattleMode(true);
               }
            }
            else if( object == (Tobjeto*) buttonMap)
@@ -1524,7 +1524,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                     else if(pers->getConversationFile() != "")
                     {
                        cursors->setActual(CURSOR_TALK);
-                       if(Mbotao & SDL_BUTTON(1))
+                       if( (Mbotao & SDL_BUTTON(1)) && 
+                           (rangeAction(activeCharacter->posicaoLadoX, 
+                                        activeCharacter->posicaoLadoZ,
+                                        pers->posicaoLadoX, pers->posicaoLadoZ,
+                                        WALK_PER_MOVE_ACTION)) )
                        {
                           pers->openConversationDialog(gui,
                                                        activeCharacter);
@@ -1653,7 +1657,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             if(engineMode != ENGINE_MODE_TURN_BATTLE)
             {
-               enterBattleMode();
+               enterBattleMode(true);
             }
             else
             {
