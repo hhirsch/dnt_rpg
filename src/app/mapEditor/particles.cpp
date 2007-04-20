@@ -1,4 +1,5 @@
 #include "particles.h"
+#include "../../gui/messages.h"
 
 #define STATE_PLANES     800
 #define STATE_GRASS_INIT 801

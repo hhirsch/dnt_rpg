@@ -59,6 +59,7 @@ string messageForTool(int tool)
    return("DccNiTghtmare!");
 }
 
+#if 0
 /******************************************************************
  *                        getStringForUser                        *
  ******************************************************************/
@@ -143,4 +144,6 @@ string getStringFromUser(string title, string previous,
    return(returnStr);
 
 }
+
+#endif
 

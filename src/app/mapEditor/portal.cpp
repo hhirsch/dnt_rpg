@@ -1,6 +1,6 @@
 #include "portal.h"
 #include "../../gui/farso.h"
-
+#include "../../gui/messages.h"
 
 #define PORTAL_STATE_OTHER     0
 #define PORTAL_STATE_ADD_INIT  1

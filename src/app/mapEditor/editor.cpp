@@ -150,7 +150,7 @@ void editor::openMap()
             {
                 fscanf(arq,"%s %s %f %f",&nome[0],&arquivo[0],
                        &posX,&posZ);
-                per = NPCs->InserirPersonagem(arquivo,features, NULL);
+                per = NPCs->insertCharacter(arquivo,features, NULL);
                 per->posicaoLadoX = posX;
                 per->posicaoLadoZ = posZ;
             }
@@ -500,7 +500,7 @@ void editor::draw()
       int aux;
       GLfloat x[4]; GLfloat z[4];
       GLfloat min[3],max[3];
-      for(aux=0;aux < NPCs->total;aux++)
+      for(aux=0;aux < NPCs->getTotal();aux++)
       {
          /* Actualize NPCs */
          per->update(WALK_ACTUALIZATION/*seconds*/);   
