@@ -1109,6 +1109,13 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
       }
    }
 
+   /* Verify Inventory Window */
+   if( (inventoryWindow) )
+   {
+      inventoryWindow->treat(object, eventInfo);
+   }
+
+   /* Verify ShortCutsWindow */
    switch(eventInfo)
    {
        case TABBOTAOPRESSIONADO:
@@ -1270,23 +1277,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       Uint8 Mbotao = SDL_GetMouseState(&x,&y);
       mouseX = x;
       mouseY = y;
-
-      /* GUI Events */
-      Tobjeto* object;
-      object = gui->manipulateEvents(x,y,Mbotao,keys, &guiEvent);
-      if( (inventoryWindow) && 
-          (inventoryWindow->treat(object, guiEvent)) )
-      {
-         /* Done Events by Inventory! */
-         redesenha = true;
-      }
-
-      if(guiEvent != NADA)
-      {
-         threatGuiEvents(object, guiEvent);
-         redesenha = true;
-      }
-
+      
       if( (tempo-lastMouse>=  REFRESH_RATE ) || 
           ( (Mbotao & SDL_BUTTON(1)) && 
 	    (tempo-lastMousePression >= REFRESH_RATE)) )
@@ -2003,16 +1994,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             andou = true;
       }
 
-   }
-   else if(*forcaAtualizacao == 0)
-   {
-      int tmp = (int) ((ACTUALIZATION_RATE-1) - varTempo);
-      if(tmp > 0)
-      SDL_Delay(tmp);
-   }
-   
-   if( (redesenha) || ( (*forcaAtualizacao != 0)))
-   {
+      /* GUI Events */
+
+      /* Redraw the needed GUI */
       if(miniMapWindow)
       {
          GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARESIZE)));
@@ -2035,7 +2019,29 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
          miniMapWindow->Desenhar(mouseX, mouseY);
       }
-      
+      if(shortCutsWindow)
+      {
+         shortCutsWindow->Desenhar(mouseX, mouseY);
+      }
+      Tobjeto* object;
+      object = gui->manipulateEvents(x,y,Mbotao,keys, &guiEvent);
+      /* Threat the GUI */
+      if(guiEvent != NADA)
+      {
+         threatGuiEvents(object, guiEvent);
+         redesenha = true;
+      }
+
+   }
+   else if(*forcaAtualizacao == 0)
+   {
+      int tmp = (int) ((ACTUALIZATION_RATE-1) - varTempo);
+      if(tmp > 0)
+      SDL_Delay(tmp);
+   }
+   
+   if( (redesenha) || ( (*forcaAtualizacao != 0)))
+   {      
       Draw();
       SDL_GL_SwapBuffers();
 
@@ -2050,7 +2056,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          FPS->texto = texto;
          sprintf(texto," Part: %d",particleSystem->numParticles());
          FPS->texto += texto;
-         shortCutsWindow->Desenhar(mouseX, mouseY);
       }
       
 #ifdef VIDEO_MODE
