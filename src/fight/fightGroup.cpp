@@ -84,7 +84,7 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
    {
       srand(SDL_GetTicks());
       int ch = ((rand() % actualCharacters));
-      if( (!characters[ch]->dead) && (characters[ch] != pers) )
+      if( (characters[ch]->isAlive()) && (characters[ch] != pers) )
       {
          return(characters[ch]);
       }
@@ -92,7 +92,7 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
       {
          for(ch=0;ch<actualCharacters;ch++)
          {
-            if( (!characters[ch]->dead) && (characters[ch] != pers))
+            if( (characters[ch]->isAlive()) && (characters[ch] != pers))
             {
                return(characters[ch]);
             }
@@ -102,7 +102,7 @@ personagem* fightGroup::getNPCEnemy(personagem* pers)
    }
    else if(actualCharacters == 1)
    {
-      if( (!characters[0]->dead) && (characters[0] != pers))
+      if( (characters[0]->isAlive()) && (characters[0] != pers))
       {
          return(characters[0]);
       }
@@ -126,7 +126,7 @@ bool fightGroup::anyoneIsAliveAndInRange(bool onlyHostile)
    int i;
    for(i=0;i<actualCharacters;i++)
    {
-      if( (!characters[i]->dead) && 
+      if( (characters[i]->isAlive()) && 
           ( (!onlyHostile) || (characters[i]->psychoState == PSYCHO_HOSTILE)) )
       {
          return(true);

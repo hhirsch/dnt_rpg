@@ -32,6 +32,9 @@ class mapObject: public object
 
       mapObject* next;        /**< Next Object on List */
       mapObject* previous;    /**< Previous Object on List */
+
+   protected:
+      void callDeadAnimation();
 };
 
 /*! Map Objects list */
@@ -62,6 +65,7 @@ class lMapObject
 
        mapObject* first;
        int total;
+
 }; 
 
 #endif

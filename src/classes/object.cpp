@@ -197,4 +197,13 @@ void object::getInventorySize(int &x, int &y)
    y = inventSizeY;
 }
 
-   
+/*********************************************************************
+ *                           callDeadAnimation                       *
+ *********************************************************************/
+void object::callDeadAnimation()
+{
+   //TODO
+   //setState(STATE_DIE);
+}
+
+

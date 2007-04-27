@@ -141,6 +141,9 @@ class personagem: public Tobjeto, public thing, public aniModel
        * \return points */
       int getPoints(points pt);
 
+      /*! Call the thing dead animation */
+      void callDeadAnimation();
+
       string retratoConversa;     /**< Portrait talk file name */
       SDL_Surface* portraitImage; /**< Character's portrait image */
       GLuint portrait;            /**< Up screen portrait GL texture */
@@ -193,6 +196,7 @@ class Lpersonagem
    protected:
       personagem* activeCharacter;  /**< Active Character's on list */
       int total;                    /**< Total Elements on List */
+
 };
 
 #endif

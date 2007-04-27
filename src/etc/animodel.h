@@ -7,6 +7,9 @@
 using namespace std;
 
 #define STATE_IDLE  0 /**< Character Animation State Idle */
+#define STATE_WALK  1 /**< Character Animation State Walk */
+#define STATE_DIE   2 /**< Character Animation State Die */
+#define STATE_DEAD  3 /**< Character Animation State Dead */
 
 /*! Animated Model Definition (using cal3d) */
 class aniModel

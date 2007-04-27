@@ -20,8 +20,10 @@ class thing
    public:
       /*! thing Constructor */
       thing();
-      /*! thing Destructor */
-      ~thing();
+      /*! thing virtual Destructor */
+      virtual ~thing();
+
+      skills sk;             /**< skills without images and description */
 
       int lifePoints;         /**< Thing's Life points */
       int maxLifePoints;      /**< Thing's Max Life Points */
@@ -39,10 +41,6 @@ class thing
       float posicaoLadoZ;     /**< Character's Z Position */
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
-
-      bool dead;             /**< Dead state or not.(if dead is only a corpse)*/
-
-      skills sk;             /**< skills without images and description */
 
       /*!
        **********************************************
@@ -79,6 +77,30 @@ class thing
        *  Set the thing as enemy to PC
        **********************************************/
       void setAsEnemy();
+
+      /*!
+       **********************************************
+       *  Set thing as dead (AKA: call die animation
+       *  and then put on state dead)
+       **********************************************/
+       void kill();
+
+       /*!
+       **********************************************
+       *  Verify if the thing is alive
+       *  \return -> true if continue live
+       **********************************************/
+       bool isAlive();
+
+
+   protected:
+      bool dead;           /**< Dead state or not (if dead is only a corpse) */
+
+      /*!
+       **********************************************
+       *   Virtual method to call dead animation
+       **********************************************/
+       virtual void callDeadAnimation()=0;
 };
 
 #endif

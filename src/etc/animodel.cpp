@@ -135,7 +135,8 @@ bool aniModel::loadModel(const string& strFilename)
   file.open(strFilename.c_str(), std::ios::in | std::ios::binary);
   if(!file)
   {
-    std::cerr << "Failed to open model configuration file '" << strFilename << "'." << std::endl;
+    std::cerr << "Failed to open model configuration file '" << 
+                  strFilename << "'." << std::endl;
     return false;
   }
 
@@ -531,9 +532,17 @@ void aniModel::setState(int state)
    if(state != m_state)
    {
        m_calModel->getMixer()->clearCycle(m_animationId[m_state],0.1f);
-       m_calModel->getMixer()->blendCycle(m_animationId[state],
-                                          1.0f,0.1f);
-       m_state = state;
+       if(state == STATE_DIE)
+       {
+         m_calModel->getMixer()->executeAction(m_animationId[state], 0.3f, 0.3f);
+         m_state = STATE_DIE;
+       }
+       else
+       {
+          m_calModel->getMixer()->blendCycle(m_animationId[state],
+                                             1.0f,0.1f);
+          m_state = state;
+       }
    }
 }
 

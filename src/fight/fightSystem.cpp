@@ -145,7 +145,7 @@ int fightSystem::doTurn(string& brief)
    }
 
    /* don't play with dead characters or not Hostile Ones */
-   while( (pers->dead) || 
+   while( (!pers->isAlive()) || 
           ( (!isPC(pers)) && (pers->psychoState != PSYCHO_HOSTILE)) )
    {
       pers = charsInitiatives.nextCharacter();
@@ -205,7 +205,7 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
    int attackFeat;
 
    /* Determine the target of the character */
-   if( (pers->actualEnemy == NULL) || (pers->actualEnemy->dead))
+   if( (pers->actualEnemy == NULL) || (!pers->actualEnemy->isAlive()))
    {
       pers->actualEnemy =  getNPCEnemy(pers);
    }
@@ -227,7 +227,7 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
       pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
                                                 *pers->actualEnemy, brief);
          
-      if(pers->actualEnemy->dead)
+      if(!pers->actualEnemy->isAlive())
       {
          brief += "|" + pers->actualEnemy->nome +" "+ language.FIGHT_DEAD;
       }

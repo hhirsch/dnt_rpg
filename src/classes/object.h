@@ -59,6 +59,9 @@ class object: public thing
       void getInventorySize(int &x, int &y);
       
    protected:
+      /*! Call the dead animation of the model */
+      void callDeadAnimation();
+
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
 

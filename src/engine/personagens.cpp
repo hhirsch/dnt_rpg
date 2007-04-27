@@ -292,6 +292,14 @@ void personagem::defineInitialLifePoints()
    defineMaxLifePoints(actualClass[0]->lifeDiceID + attBonus(ATT_CONSTITUTION));
 }
 
+/*********************************************************************
+ *                           callDeadAnimation                       *
+ *********************************************************************/
+void personagem::callDeadAnimation()
+{
+   setState(STATE_DIE);
+}
+
 
 /***************************************************************************
  ***************************************************************************
@@ -348,7 +356,6 @@ personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
    novo->posicaoLadoX = 0.0;
    novo->posicaoLadoZ = 0.0;
    novo->posicaoLadoY = 0.0;
-   novo->dead = false;
 
    if(!(arq = fopen(file.c_str(),"r")))
    {

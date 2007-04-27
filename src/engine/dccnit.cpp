@@ -1528,7 +1528,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
               {
                  if( engineMode == ENGINE_MODE_REAL_TIME )
                  {
-                    if(pers->dead) 
+                    if(!pers->isAlive())
                     {
                        cursors->setActual(CURSOR_GET);
                     }
@@ -1580,7 +1580,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                                           *activeCharacter,
                                                           attackFeat, *pers, 
                                                           brief);
-                        if(pers->dead)
+                        if(!pers->isAlive())
                         {
                            brief += "|" + pers->nome + " " +  
                                     language.FIGHT_DEAD;
@@ -2723,7 +2723,7 @@ int engine::Run(SDL_Surface *surface)
            bool alive = false;
            while((!alive) && (pers != PCs->primeiro))
            {
-              if(!pers->dead)
+              if(pers->isAlive())
               {
                  alive = true;
               }
@@ -2731,7 +2731,7 @@ int engine::Run(SDL_Surface *surface)
            }
            if(!alive)
            {
-              //TODO call the game over screen
+              //TODO wait for animation end!
               showImage("../data/texturas/fightMode/death.png");
               return(0);
            }
