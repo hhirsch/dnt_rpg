@@ -2113,7 +2113,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
           activeCharacter->orientacao );
       #endif
    }
-   else if(passouTempo)
+   else if( (passouTempo) && (engineMode != ENGINE_MODE_DEAD))
    { 
       if( (activeCharacter->getState() == STATE_WALK) &&
           (engineMode == ENGINE_MODE_TURN_BATTLE) && 
@@ -2707,8 +2707,18 @@ int engine::Run(SDL_Surface *surface)
    while(threatIO(surface,&forcaAtualizacao))
    {
 
+     /* Verify Dead events */ 
+     if(engineMode == ENGINE_MODE_DEAD)
+     {
+        if(SDL_GetTicks() - lastTurnTime >= ENGINE_ANIMATION_DELAY)
+        {
+           /* The Animation Delay is Ended, so Call Death Screen */
+           showImage("../data/texturas/fightMode/death.png");
+           return(0);
+        }
+     }
      /* Verify battle events */
-     if(engineMode == ENGINE_MODE_TURN_BATTLE) 
+     else if(engineMode == ENGINE_MODE_TURN_BATTLE) 
      {
         time = SDL_GetTicks();
         if(fightStatus == FIGHT_END)
@@ -2731,14 +2741,14 @@ int engine::Run(SDL_Surface *surface)
            }
            if(!alive)
            {
-              //TODO wait for animation end!
-              showImage("../data/texturas/fightMode/death.png");
-              return(0);
+              /* All Pcs are Dead, so Dead Mode! */
+              engineMode = ENGINE_MODE_DEAD;
+              lastTurnTime = time;
            }
         }
-        //FIXME define max time by animations "called". call animations. jeje
+        /* Wait for animations before change the turn */
         else if( (fightStatus == FIGHT_CONTINUE) &&
-                 ((time - lastTurnTime) > 4000) ) 
+                 ((time - lastTurnTime) > ENGINE_ANIMATION_DELAY) ) 
         {
            lastTurnTime = time;
            fightStatus = fight.doBattleCicle(brief);

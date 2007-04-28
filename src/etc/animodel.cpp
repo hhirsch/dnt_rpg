@@ -535,6 +535,7 @@ void aniModel::setState(int state)
        if(state == STATE_DIE)
        {
          m_calModel->getMixer()->executeAction(m_animationId[state], 0.3f, 0.3f);
+         m_calModel->getMixer()->blendCycle(m_animationId[STATE_DEAD], 1.0f, 0.1f);
          m_state = STATE_DIE;
        }
        else
