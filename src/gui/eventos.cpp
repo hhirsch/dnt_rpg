@@ -554,6 +554,19 @@ void interface::closeWindow(janela *jan)
    ljan->RetirarJanela(jan);
 }
 
+void interface::closeAllWindows()
+{
+   janela* j = (janela*)ljan->primeiro->proximo;
+   janela* tmp;
+   while(j != (janela*)ljan->primeiro)
+   {
+      tmp = j;
+      j = (janela*)j->proximo;
+      closeWindow(tmp);
+   }
+   clearActiveObject();
+}
+
 janela* interface::insertWindow(int xa,int ya,int xb,int yb,const char *text,
                             int maximiz,int redmens)
 {

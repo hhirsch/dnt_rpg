@@ -60,6 +60,8 @@ class interface
 
       void closeWindow(janela *jan);
 
+      void closeAllWindows();
+
       janela* insertWindow(int xa,int ya,int xb,int yb,const char *text,
                            int maximiz,int redmens);
 

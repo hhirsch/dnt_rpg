@@ -109,7 +109,11 @@ void Ljanela::RetirarJanela(janela *jan)
          janela* j = (janela*)primeiro->proximo;
          j->Ativar(this);
       }
-   } 
+   }
+   if(jan->ptrExterno != NULL)
+   {
+      *jan->ptrExterno = NULL;
+   }
    delete(jan->objects);
    delete(jan);
    jan = NULL;

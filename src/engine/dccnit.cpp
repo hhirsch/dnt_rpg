@@ -552,8 +552,6 @@ void engine::SplashScreen()
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
-   /* Load PCs */
-   loadPCs();
 }
 
 /*********************************************************************
@@ -658,6 +656,9 @@ int engine::CharacterScreen(GLuint idTextura)
    int eventInfo = NADA;
 
    int status = 0;
+
+   /* First Load PCs */
+   loadPCs();
 
    /* Att Screen */
    attWindow* atWindow = NULL;//new attWindow(sk, gui);
@@ -2722,6 +2723,9 @@ int engine::Run(SDL_Surface *surface)
            /* The Animation Delay is Ended, so Call Death Screen */
            showImage("../data/texturas/fightMode/death.png");
            engineMode = ENGINE_MODE_REAL_TIME;
+           gui->closeAllWindows();
+           /* Put the animation state on normal */
+           PCs->getActiveCharacter()->setState(STATE_IDLE);
            return(0);
         }
      }
