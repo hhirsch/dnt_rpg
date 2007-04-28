@@ -5,6 +5,7 @@ maxLifePoints               187
 baseModifier                18/3/18
 attackModifier              12/7/2/0/0/0
 sizeModifier                -1
+conversationFile            ../data/dialogs/portugues/initial.dlg
 ATT_LEVEL                   14
 ATT_STRENGHT                18
 ATT_DEXTERY                 6
