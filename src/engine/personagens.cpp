@@ -14,7 +14,7 @@ personagem::personagem(featsList* ft)
 {
   int i;
 
-  lifeBar = new healthBar(5,52,59,62);
+  lifeBar = new healthBar(5,64,59,74);
 
   for(i=0; i<MAX_DISTINCT_CLASSES; i++)
   {
@@ -141,7 +141,7 @@ void personagem::definePortrait(string portraitFile)
       printf("Can't Load Portrait File: %s\n", portraitFile.c_str());
    }
    /* Convert to used style */
-   portraitImage = SDL_CreateRGBSurface(SDL_HWSURFACE,img->w,img->h,32,
+   portraitImage = SDL_CreateRGBSurface(SDL_HWSURFACE,img->w,img->h+10,32,
                                         0x000000FF,0x0000FF00,
                                         0x00FF0000,0xFF000000);
    SDL_BlitSurface(img,NULL,portraitImage,NULL);

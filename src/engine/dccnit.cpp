@@ -1772,6 +1772,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             lastTurnTime = SDL_GetTicks();
             PCs->getActiveCharacter()->setState(STATE_DIE);
+            PCs->getActiveCharacter()->defineActualLifePoints(0);
             engineMode = ENGINE_MODE_DEAD;
          }
 
