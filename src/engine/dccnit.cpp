@@ -2357,8 +2357,8 @@ void engine::Draw()
 
    /* Get Portrait position */
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject(SCREEN_X,SCREEN_Y-64,0.01, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject(SCREEN_X-64,SCREEN_Y-64,0.01,modl,proj,viewPort, &x3, &y3, &z3);
+   gluUnProject(SCREEN_X,SCREEN_Y-74,0.01, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(SCREEN_X-64,SCREEN_Y-74,0.01,modl,proj,viewPort, &x3, &y3, &z3);
    gluUnProject(SCREEN_X-64,SCREEN_Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
 
    glDisable(GL_LIGHTING);
