@@ -6,7 +6,7 @@
  - Particles (blood, fire, smoke, waterfall, 
               snow);
  - Dynamic Grass;
- - Fuzzy Logic;
+ - Inventory;
  - Dialogs with NPCs;
  - Some AI;
  - Rules System;
@@ -15,6 +15,8 @@
  - Dynamic Lights & Fog per map;
  - Engine Optimizations;
  - Better Sky;
+ - Some possible actions;
+ - Max Range of Action;
  - Uses OpenAL for Audio;
  - New Animations;
  - New Models;
@@ -22,7 +24,10 @@
  - New Maps;
  - Use some itens;
  - Use some weapons;
- - Inventory;
+ - More Options;
+ - Roads;
+ - Fuzzy Logic;
+ - Take itens;
  - Time of the Day;
  - Highlight Portals when mouse over them;
  - GUI more Smooth and Functional;
