@@ -2100,7 +2100,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       *forcaAtualizacao = 0;
    }
  
-   if(andou)
+   if( (andou) && (engineMode != ENGINE_MODE_DEAD) )
    {
       if(!walkSound)
       {
@@ -2399,8 +2399,13 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    GLfloat varHeight = 0;
    GLfloat nx, nz;
    personagem* activeCharacter = PCs->getActiveCharacter();
-   
-   if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
+  
+   if(engineMode == ENGINE_MODE_DEAD)
+   {
+      /* Dead Characters can't walk too! */
+      return(false);
+   }
+   else if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
        (fightStatus != FIGHT_PC_TURN))
    {
        /* In turn mode, and not character's turn. */
