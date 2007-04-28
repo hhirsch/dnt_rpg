@@ -1767,6 +1767,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         activeCharacter->posicaoLadoZ,
                                         "../data/particles/lightning1.par");
          }
+         if(keys[SDLK_k])
+         {
+            lastTurnTime = SDL_GetTicks();
+            PCs->getActiveCharacter()->setState(STATE_DIE);
+            engineMode = ENGINE_MODE_DEAD;
+         }
 
          if(keys[SDLK_0])
          {
@@ -2618,7 +2624,8 @@ void engine::OpenCloseInventoryWindow()
 {
    if(!inventoryWindow)
    {
-      /* TODO get the right inventories!!! */
+      /* TODO get the right inventories!!! (when openning inventory from 
+       * another person) */
       inventoryWindow = new inventWindow(PCs->getActiveCharacter()->inventories,
                                          gui); 
    }
@@ -2714,6 +2721,7 @@ int engine::Run(SDL_Surface *surface)
         {
            /* The Animation Delay is Ended, so Call Death Screen */
            showImage("../data/texturas/fightMode/death.png");
+           engineMode = ENGINE_MODE_REAL_TIME;
            return(0);
         }
      }
