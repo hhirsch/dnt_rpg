@@ -206,6 +206,14 @@ class engine
       void threatGuiEvents(Tobjeto* object, int eventInfo);
 
       /*!
+       ***********************************************************************
+       * Verify and treat the actions made by mouse on the game (not on gui!)
+       * \param Mbotao -> mouse Button State
+       * \return 1 if the map was changed, 0 otherwise
+       ***********************************************************************/
+      int verifyMouseActions(Uint8 Mbotao);
+
+      /*!
        *************************************************************** 
        * Threat PC Colision (can walk?)
        * \param varX -> Variation on X position

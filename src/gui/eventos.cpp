@@ -578,3 +578,18 @@ void interface::openWindow(janela* jan)
    jan->Abrir(ljan);
 }
 
+bool interface::mouseOnGui(int mouseX, int mouseY)
+{
+   int aux; 
+   janela *jaux=(janela*)ljan->primeiro->proximo;
+   for(aux=0;aux<ljan->total;aux++)
+   {
+      if(mouse_NaArea(jaux->x1,jaux->y1,jaux->x2,jaux->y2,mouseX,mouseY))
+      {
+         return(true);
+      }
+      jaux = (janela*) jaux->proximo;
+   }
+   return(false);
+}
+

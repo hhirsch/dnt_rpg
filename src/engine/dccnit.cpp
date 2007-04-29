@@ -1210,6 +1210,354 @@ void engine::hourToTxt()
 }
 
 /*********************************************************************
+ *                         verifyMouseActions                        *
+ *********************************************************************/
+int engine::verifyMouseActions(Uint8 Mbotao)
+{
+   GLfloat wx,wy,wz;
+   Uint32 tempo = SDL_GetTicks();
+   personagem* activeCharacter = PCs->getActiveCharacter();
+
+   wx = mouseX; wy = SCREEN_Y - mouseY; 
+            
+   glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
+   gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal); 
+
+   GLfloat minMouse[3], maxMouse[3];
+   minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
+   minMouse[1] = 0.0;      maxMouse[1] = 0.0;
+   minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
+
+   int qx, qz;
+   qx = (int)xReal / SQUARESIZE;
+   qz = (int)zReal / SQUARESIZE;
+   Square* quaux = actualMap->relativeSquare(qx,qz);
+   if(quaux != NULL)
+   {
+      int pronto;
+      int obj = 0;
+      GLfloat minObj[3], maxObj[3];
+
+      /* Objects Verification */
+      for(pronto = 0; ( (obj<MAXOBJETOS) && (!pronto) );obj++)
+      {
+         if( (quaux->objects[obj]) && (quaux->objects[obj]->canGet()) )
+         {
+            boundingBox bound = quaux->objects[obj]->getBoundingBox();
+            GLfloat X[4]; GLfloat Z[4];
+            X[0] = bound.x1;
+            Z[0] = bound.z1;
+            X[1] = bound.x1;
+            Z[1] = bound.z2; 
+            X[2] = bound.x2;
+            Z[2] = bound.z2;
+            X[3] = bound.x2;
+            Z[3] = bound.z1;
+            rotTransBoundingBox(quaux->objectsOrientation[obj], X, Z,
+                                quaux->Xobjects[obj], 0.0, 
+                                0.0,quaux->Zobjects[obj], 
+                                minObj, maxObj);
+            if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
+            {
+                cursors->setActual(CURSOR_GET);
+                if(shortCutsWindow)
+                {
+                   ObjTxt->texto = quaux->objects[obj]->getName(); 
+                   shortCutsWindow->Desenhar(mouseX,mouseY);
+                }
+                if( (Mbotao & SDL_BUTTON(1)) && 
+                    (rangeAction(activeCharacter->posicaoLadoX, 
+                                 activeCharacter->posicaoLadoZ,
+                                 quaux->Xobjects[obj],
+                                 quaux->Zobjects[obj],
+                                 WALK_PER_MOVE_ACTION) ) )
+                {
+                   /* Get Object */
+                   lastMousePression = tempo;
+                   briefTxt->addText("|");
+                   int inv = 0;
+                   while((!activeCharacter->inventories[inv]->addObject(
+                          quaux->objects[obj]) && 
+                         (inv < INVENTORY_PER_CHARACTER)))
+                   {
+                      inv++;
+                   }
+                         
+                   if(inv < INVENTORY_PER_CHARACTER)
+                   {
+                      briefTxt->addText(quaux->objects[obj]->getName() + " " +
+                                        language.ACTION_TAKEN); 
+                      shortCutsWindow->Desenhar(mouseX,mouseY);
+
+                      /* Log State to the modState */
+                      modifState.mapObjectAddAction(MODSTATE_ACTION_MAP_REMOVE,
+                                                    quaux->objects[obj]->getName(),
+                                                    actualMap->getFileName(),
+                                                    quaux->Xobjects[obj],
+                                                    quaux->Zobjects[obj]);
+                         
+                      /* Remove object from Map */
+                      actualMap->removeObject(quaux->Xobjects[obj],
+                                              quaux->Zobjects[obj],
+                                              quaux->objects[obj]);
+                         
+                      if(inventoryWindow)
+                      {
+                         inventoryWindow->reDraw();
+                      }
+                   }
+                   else
+                   {
+                      if(shortCutsWindow)
+                      {
+                         briefTxt->addText("Inventory Full!"); 
+                         shortCutsWindow->Desenhar(mouseX,mouseY);
+                      }
+                   }
+                }
+                if(Mbotao & SDL_BUTTON(2))
+                {
+                   /* TODO Open Menu of choices */
+                }
+                pronto = 1;
+            }
+         }
+      }
+
+      /* Doors Verification */
+      door* porta = actualMap->portas;
+      while( (porta != NULL) && (!pronto) )
+      {
+         boundingBox bound = porta->object->getBoundingBox();
+         GLfloat X[4]; GLfloat Z[4];
+         X[0] = bound.x1;
+         Z[0] = bound.z1;
+         X[1] = bound.x1;
+         Z[1] = bound.z2; 
+         X[2] = bound.x2;
+         Z[2] = bound.z2;
+         X[3] = bound.x2;
+         Z[3] = bound.z1;
+         rotTransBoundingBox(porta->orientacao, X, Z,porta->x, 0.0,0.0,porta->z, 
+                             minObj, maxObj);
+         if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
+         {
+            cursors->setActual(CURSOR_DOOR);
+            if(shortCutsWindow)
+            {
+               ObjTxt->texto = language.OBJ_DOOR.c_str(); 
+               shortCutsWindow->Desenhar(mouseX, mouseY);
+            }
+            if( (Mbotao & SDL_BUTTON(1)) && 
+                (rangeAction(activeCharacter->posicaoLadoX, 
+                             activeCharacter->posicaoLadoZ,
+                             porta->x, porta->z,
+                             WALK_PER_MOVE_ACTION) ) )
+            {
+               lastMousePression = tempo;
+               if(porta->status)
+               {
+                  porta->orientacao -= 90;
+                  porta->status = 0;
+               }
+               else
+               {
+                  porta->orientacao += 90;
+                  porta->status = 1;
+               }
+            }
+            pronto = 1;
+         }
+         porta = porta->proximo;
+      }
+
+      /* Inventory Verification */
+      personagem* pers = (personagem*) PCs->primeiro->proximo;
+      while( (pers != PCs->primeiro) && (!pronto) )
+      {
+         GLfloat x[4],z[4];
+         GLfloat min[3], max[3];
+         x[0] = pers->min[0];
+         z[0] = pers->min[2];
+         x[1] = pers->min[0];
+         z[1] = pers->max[2]; 
+         x[2] = pers->max[0];
+         z[2] = pers->max[2];
+         x[3] = pers->max[0];
+         z[3] = pers->min[2];
+
+         rotTransBoundingBox(pers->orientacao, x, z,pers->posicaoLadoX,0.0, 0.0, 
+                                pers->posicaoLadoZ, min, max );
+
+         if(estaDentro( min, max, minMouse, maxMouse, 1))
+         {
+            cursors->setActual(CURSOR_INVENTORY);
+            if(shortCutsWindow)
+            {
+               ObjTxt->texto = pers->nome; 
+               shortCutsWindow->Desenhar(mouseX, mouseY);
+            }
+
+            /* Open Inventory when button pressed */
+            if( (Mbotao & SDL_BUTTON(1)) && (!inventoryWindow))
+            {
+               OpenCloseInventoryWindow();
+            }
+            pronto = 1;
+         }
+         pers = (personagem*) pers->proximo;
+      }
+
+      /* Talk And Attack Events Verification */
+      if(NPCs)
+      {
+         pers = (personagem*) NPCs->primeiro->proximo;
+         while( (pers != NPCs->primeiro) && (!pronto) )
+         {
+            GLfloat x[4],z[4];
+            GLfloat min[3], max[3];
+
+            x[0] = pers->min[0];
+            z[0] = pers->min[2];
+            x[1] = pers->min[0];
+            z[1] = pers->max[2]; 
+            x[2] = pers->max[0];
+            z[2] = pers->max[2];
+            x[3] = pers->max[0];
+            z[3] = pers->min[2];
+
+            rotTransBoundingBox(pers->orientacao, x, z, pers->posicaoLadoX, 0.0, 0.0, 
+                                pers->posicaoLadoZ, min, max );
+
+            if(estaDentro( min, max, minMouse, maxMouse, 1))
+            {
+               if( engineMode == ENGINE_MODE_REAL_TIME )
+               {
+                  if(!pers->isAlive())
+                  {
+                     cursors->setActual(CURSOR_GET);
+                  }
+                  else if(pers->getConversationFile() != "")
+                  {
+                     cursors->setActual(CURSOR_TALK);
+                     if( (Mbotao & SDL_BUTTON(1)) && 
+                         (rangeAction(activeCharacter->posicaoLadoX, 
+                                      activeCharacter->posicaoLadoZ,
+                                      pers->posicaoLadoX, pers->posicaoLadoZ,
+                                      WALK_PER_MOVE_ACTION)) )
+                     {
+                        pers->openConversationDialog(gui,activeCharacter);
+                     }
+                  }
+                  if(shortCutsWindow)
+                  {
+                     ObjTxt->texto = pers->nome; 
+                     shortCutsWindow->Desenhar(mouseX, mouseY);
+                  }
+                  pronto = 1;
+               }
+               else
+               /* Verify Attacks! */
+               if( (engineMode == ENGINE_MODE_TURN_BATTLE) && (canAttack) &&
+                   (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
+               {
+                  string brief = "";
+                  cursors->setActual(CURSOR_ATTACK);
+                  if(shortCutsWindow)
+                  {
+                     ObjTxt->texto = pers->nome; 
+                     shortCutsWindow->Desenhar(mouseX, mouseY);
+                  }
+
+                  //TODO -> verify if weapon is ranged, so distance is other
+                  if( (Mbotao & SDL_BUTTON(1)) &&
+                      (rangeAction(activeCharacter->posicaoLadoX, 
+                                   activeCharacter->posicaoLadoZ,
+                                   pers->posicaoLadoX, pers->posicaoLadoZ,
+                                   WALK_PER_MOVE_ACTION) ) )
+                  {
+                     brief = activeCharacter->nome + " " + 
+                             language.FIGHT_ATTACKS + " " + 
+                             pers->nome + "|";
+                     canAttack = !activeCharacter->actualFeats.applyAttackAndBreakFeat(
+                                                          *activeCharacter,
+                                                          attackFeat, *pers, 
+                                                          brief);
+                     if(!pers->isAlive())
+                     {
+                        brief += "|" + pers->nome + " " +  language.FIGHT_DEAD;
+                     }
+                     if( pers->psychoState != PSYCHO_HOSTILE)
+                     {
+                        pers->psychoState = PSYCHO_HOSTILE;
+                     }
+                     if(shortCutsWindow != NULL)
+                     {
+                        briefTxt->setText(brief);
+                     }
+
+                  }
+                  pronto = 1;
+               }
+            }
+            pers = (personagem*) pers->proximo;
+         }
+      }
+
+      /* Map Connections Verification */
+      if( ( quaux->mapConection.active ) && (!pronto) && 
+          (engineMode == ENGINE_MODE_REAL_TIME) ) 
+      {
+         /* Don't travel on battle mode */
+         GLfloat minCon[3], maxCon[3];
+         minCon[0] = quaux->mapConection.x1;
+         minCon[1] = 0.0;
+         minCon[2] = quaux->mapConection.z1;
+         maxCon[0] = quaux->mapConection.x2;
+         maxCon[1] = 0.0;
+         maxCon[2] = quaux->mapConection.z2;
+         GLfloat minMouse[3], maxMouse[3];
+         minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
+         minMouse[1] = 0.0;      maxMouse[1] = 0.0;
+         minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
+         if( estaDentro( minCon, maxCon, minMouse, maxMouse, 1 ) )
+         {
+            if(shortCutsWindow)
+            {
+               ObjTxt->texto = quaux->mapConection.mapName; 
+               shortCutsWindow->Desenhar(mouseX, mouseY);
+            }
+            curConection = &quaux->mapConection;
+            cursors->setActual(CURSOR_MAPTRAVEL);
+            pronto = 1;
+            if( (Mbotao & SDL_BUTTON(1)) && 
+                (rangeAction(activeCharacter->posicaoLadoX, 
+                             activeCharacter->posicaoLadoZ,
+                             xReal, zReal,
+                             WALK_PER_MOVE_ACTION) ) )
+            {
+               LoadMap(quaux->mapConection.mapName, 0);
+               return(1);
+            }
+         }
+      }
+      else
+      {
+         curConection = NULL;
+      }
+
+      if( (shortCutsWindow) && (!pronto) )
+      {
+         ObjTxt->texto = language.OBJ_NOTHING.c_str(); 
+         shortCutsWindow->Desenhar(mouseX, mouseY);
+      }
+   }
+   return(0);
+}
+
+
+
+/*********************************************************************
  *                   Threat Input/Output Events                      *
  *********************************************************************/
 int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
@@ -1226,8 +1574,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    GLfloat rotacao;   // How much the character turns, based on time
    GLfloat varCamera; // Camera Variation
    GLfloat varTempo;  // Time Variation
-   GLfloat wx,wy,wz;
-
+   
    tempo = SDL_GetTicks();
    srand(tempo);
    varTempo = (tempo-lastRead);
@@ -1296,361 +1643,15 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       {
          cursors->setActual(CURSOR_WALK);
          lastMouse = tempo;
-         wx = mouseX; wy = SCREEN_Y - mouseY; 
-            
-         glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
-         gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal); 
 
-         GLfloat minMouse[3], maxMouse[3];
-         minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
-         minMouse[1] = 0.0;      maxMouse[1] = 0.0;
-         minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
-
-         int qx, qz;
-         qx = (int)xReal / SQUARESIZE;
-         qz = (int)zReal / SQUARESIZE;
-         Square* quaux = actualMap->relativeSquare(qx,qz);
-       if(quaux != NULL)
-       {
-         int pronto;
-         int obj = 0;
-         GLfloat minObj[3], maxObj[3];
-
-         /* Objects Verification */
-         for(pronto = 0; ( (obj<MAXOBJETOS) && (!pronto) );obj++)
+         if(!gui->mouseOnGui(mouseX, mouseY))
          {
-            if( (quaux->objects[obj]) && (quaux->objects[obj]->canGet()) )
+            if(verifyMouseActions(Mbotao) == 1)
             {
-               boundingBox bound = quaux->objects[obj]->getBoundingBox();
-               GLfloat X[4]; GLfloat Z[4];
-               X[0] = bound.x1;
-               Z[0] = bound.z1;
-               X[1] = bound.x1;
-               Z[1] = bound.z2; 
-               X[2] = bound.x2;
-               Z[2] = bound.z2;
-               X[3] = bound.x2;
-               Z[3] = bound.z1;
-               rotTransBoundingBox(quaux->objectsOrientation[obj], X, Z,
-                              quaux->Xobjects[obj], 0.0, 
-                              0.0,quaux->Zobjects[obj], 
-                              minObj, maxObj);
-               if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
-               {
-                   cursors->setActual(CURSOR_GET);
-                   if(shortCutsWindow)
-                   {
-                      ObjTxt->texto = quaux->objects[obj]->getName(); 
-                      shortCutsWindow->Desenhar(mouseX,mouseY);
-                   }
-                   if( (Mbotao & SDL_BUTTON(1)) && 
-                       (rangeAction(activeCharacter->posicaoLadoX, 
-                                    activeCharacter->posicaoLadoZ,
-                                    quaux->Xobjects[obj],
-                                    quaux->Zobjects[obj],
-                                    WALK_PER_MOVE_ACTION) ) )
-                   {
-                      /* Get Object */
-                      lastMousePression = tempo;
-                      briefTxt->addText("|");
-
-                      int inv = 0;
-
-                      while((!activeCharacter->inventories[inv]->addObject(
-                             quaux->objects[obj]) && 
-                            (inv < INVENTORY_PER_CHARACTER)))
-                      {
-                         inv++;
-                      }
-                            
-
-                      if(inv < INVENTORY_PER_CHARACTER)
-                      {
-                         briefTxt->addText(quaux->objects[obj]->getName() + " "                                            + language.ACTION_TAKEN); 
-                         shortCutsWindow->Desenhar(mouseX,mouseY);
-
-                         /* Log State to the modState */
-                         modifState.mapObjectAddAction(
-                                                 MODSTATE_ACTION_MAP_REMOVE,
-                                                 quaux->objects[obj]->getName(),
-                                                 actualMap->getFileName(),
-                                                 quaux->Xobjects[obj],
-                                                 quaux->Zobjects[obj]);
-                         
-                         /* Remove object from Map */
-                         actualMap->removeObject(quaux->Xobjects[obj],
-                                                 quaux->Zobjects[obj],
-                                                 quaux->objects[obj]);
-                         
-                         if(inventoryWindow)
-                         {
-                            inventoryWindow->reDraw();
-                         }
-                      }
-                      else
-                      {
-                         if(shortCutsWindow)
-                         {
-                            briefTxt->addText("Inventory Full!"); 
-                            shortCutsWindow->Desenhar(mouseX,mouseY);
-                         }
-                      }
-                   }
-                   if(Mbotao & SDL_BUTTON(2))
-                   {
-                      /* TODO Open Menu of choices */
-                   }
-                   pronto = 1;
-               }
+               /* Changed Map, so */
+               return(1);
             }
          }
-
-         /* Doors Verification */
-         door* porta = actualMap->portas;
-         while( (porta != NULL) && (!pronto) )
-         {
-             boundingBox bound = porta->object->getBoundingBox();
-             GLfloat X[4]; GLfloat Z[4];
-             X[0] = bound.x1;
-             Z[0] = bound.z1;
-             X[1] = bound.x1;
-             Z[1] = bound.z2; 
-             X[2] = bound.x2;
-             Z[2] = bound.z2;
-             X[3] = bound.x2;
-             Z[3] = bound.z1;
-             rotTransBoundingBox(porta->orientacao, X, Z,
-                                 porta->x, 0.0, 
-                                 0.0,porta->z, 
-                                 minObj, maxObj);
-             if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
-             {
-                 cursors->setActual(CURSOR_DOOR);
-                 if(shortCutsWindow)
-                 {
-                    ObjTxt->texto = language.OBJ_DOOR.c_str(); 
-                    shortCutsWindow->Desenhar(mouseX, mouseY);
-                 }
-                 if( (Mbotao & SDL_BUTTON(1)) && 
-                     (rangeAction(activeCharacter->posicaoLadoX, 
-                                  activeCharacter->posicaoLadoZ,
-                                  porta->x, porta->z,
-                                  WALK_PER_MOVE_ACTION) ) )
-                 {
-                    lastMousePression = tempo;
-                    if(porta->status)
-                    {
-                       porta->orientacao -= 90;
-                       porta->status = 0;
-                    }
-                    else
-                    {
-                       porta->orientacao += 90;
-                       porta->status = 1;
-                    }
-                    redesenha = 1; 
-                 }
-                 pronto = 1;
-             }
-           porta = porta->proximo;
-         }
-
-
-         /* Inventory Verification */
-         personagem* pers = (personagem*) PCs->primeiro->proximo;
-         while( (pers != PCs->primeiro) && (!pronto) )
-         {
-            GLfloat x[4],z[4];
-            GLfloat min[3], max[3];
-
-            x[0] = pers->min[0];
-            z[0] = pers->min[2];
-
-            x[1] = pers->min[0];
-            z[1] = pers->max[2]; 
-
-            x[2] = pers->max[0];
-            z[2] = pers->max[2];
-
-            x[3] = pers->max[0];
-            z[3] = pers->min[2];
-
-            rotTransBoundingBox(pers->orientacao, x, z,
-                                pers->posicaoLadoX, 
-                                0.0, 0.0, 
-                                pers->posicaoLadoZ, min, max );
-
-            if(estaDentro( min, max, minMouse, maxMouse, 1))
-            {
-                cursors->setActual(CURSOR_INVENTORY);
-                if(shortCutsWindow)
-                {
-                   ObjTxt->texto = pers->nome; 
-                   shortCutsWindow->Desenhar(mouseX, mouseY);
-                }
-
-                /* Open Inventory when button pressed */
-                if( (Mbotao & SDL_BUTTON(1)) && (!inventoryWindow))
-                {
-                   OpenCloseInventoryWindow();
-                }
-                pronto = 1;
-            }
-            pers = (personagem*) pers->proximo;
-         }
-
-         /* Talk And Attack Events Verification */
-         if(NPCs)
-         {
-            pers = (personagem*) NPCs->primeiro->proximo;
-            while( (pers != NPCs->primeiro) && (!pronto) )
-            {
-               GLfloat x[4],z[4];
-               GLfloat min[3], max[3];
-
-               x[0] = pers->min[0];
-               z[0] = pers->min[2];
-
-               x[1] = pers->min[0];
-               z[1] = pers->max[2]; 
-
-               x[2] = pers->max[0];
-               z[2] = pers->max[2];
-
-               x[3] = pers->max[0];
-               z[3] = pers->min[2];
-
-               rotTransBoundingBox(pers->orientacao, x, z,
-                                pers->posicaoLadoX, 
-                                0.0, 0.0, 
-                                pers->posicaoLadoZ, min, max );
-
-              if(estaDentro( min, max, minMouse, maxMouse, 1))
-              {
-                 if( engineMode == ENGINE_MODE_REAL_TIME )
-                 {
-                    if(!pers->isAlive())
-                    {
-                       cursors->setActual(CURSOR_GET);
-                    }
-                    else if(pers->getConversationFile() != "")
-                    {
-                       cursors->setActual(CURSOR_TALK);
-                       if( (Mbotao & SDL_BUTTON(1)) && 
-                           (rangeAction(activeCharacter->posicaoLadoX, 
-                                        activeCharacter->posicaoLadoZ,
-                                        pers->posicaoLadoX, pers->posicaoLadoZ,
-                                        WALK_PER_MOVE_ACTION)) )
-                       {
-                          pers->openConversationDialog(gui,
-                                                       activeCharacter);
-                       }
-                    }
-                    if(shortCutsWindow)
-                    {
-                       ObjTxt->texto = pers->nome; 
-                       shortCutsWindow->Desenhar(mouseX, mouseY);
-                    }
-                    pronto = 1;
-                 }
-                 else
-                  /* Verify Attacks! */
-                 if( (engineMode == ENGINE_MODE_TURN_BATTLE) && (canAttack) &&
-                     (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
-                 {
-                     string brief = "";
-                     cursors->setActual(CURSOR_ATTACK);
-                     if(shortCutsWindow)
-                     {
-                        ObjTxt->texto = pers->nome; 
-                        shortCutsWindow->Desenhar(mouseX, mouseY);
-                     }
-
-                     //TODO -> verify if weapon is ranged, so distance is other
-                     if( (Mbotao & SDL_BUTTON(1)) &&
-                         (rangeAction(activeCharacter->posicaoLadoX, 
-                                      activeCharacter->posicaoLadoZ,
-                                      pers->posicaoLadoX, pers->posicaoLadoZ,
-                                      WALK_PER_MOVE_ACTION) ) )
-                     {
-                        brief = activeCharacter->nome + " " + 
-                                language.FIGHT_ATTACKS + " " + 
-                                pers->nome + "|";
-                        canAttack = !activeCharacter->actualFeats.
-                                                        applyAttackAndBreakFeat(
-                                                          *activeCharacter,
-                                                          attackFeat, *pers, 
-                                                          brief);
-                        if(!pers->isAlive())
-                        {
-                           brief += "|" + pers->nome + " " +  
-                                    language.FIGHT_DEAD;
-                        }
-                        if( pers->psychoState != PSYCHO_HOSTILE)
-                        {
-                            pers->psychoState = PSYCHO_HOSTILE;
-                        }
-                        if(shortCutsWindow != NULL)
-                        {
-                           briefTxt->setText(brief);
-                        }
-
-                     }
-                     pronto = 1;
-                 }
-              }
-              pers = (personagem*) pers->proximo;
-            }
-         }
-
-         /* Map Connections Verification */
-         if( ( quaux->mapConection.active ) && (!pronto) && 
-             (engineMode == ENGINE_MODE_REAL_TIME) ) 
-             /* Don't travel on battle mode */
-         {
-            GLfloat minCon[3], maxCon[3];
-            minCon[0] = quaux->mapConection.x1;
-            minCon[1] = 0.0;
-            minCon[2] = quaux->mapConection.z1;
-            maxCon[0] = quaux->mapConection.x2;
-            maxCon[1] = 0.0;
-            maxCon[2] = quaux->mapConection.z2;
-            GLfloat minMouse[3], maxMouse[3];
-            minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
-            minMouse[1] = 0.0;      maxMouse[1] = 0.0;
-            minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
-            if( estaDentro( minCon, maxCon, minMouse, maxMouse, 1 ) )
-            {
-               if(shortCutsWindow)
-               {
-                  ObjTxt->texto = quaux->mapConection.mapName; 
-                  shortCutsWindow->Desenhar(mouseX, mouseY);
-               }
-               curConection = &quaux->mapConection;
-               cursors->setActual(CURSOR_MAPTRAVEL);
-               pronto = 1;
-               if( (Mbotao & SDL_BUTTON(1)) && 
-                   (rangeAction(activeCharacter->posicaoLadoX, 
-                                activeCharacter->posicaoLadoZ,
-                                xReal, zReal,
-                                WALK_PER_MOVE_ACTION) ) )
-               {
-                  LoadMap(quaux->mapConection.mapName, 0);
-                  return(1);
-               }
-            }
-         }
-         else
-         {
-            curConection = NULL;
-         }
-
-         if( (shortCutsWindow) && (!pronto) )
-         {
-            ObjTxt->texto = language.OBJ_NOTHING.c_str(); 
-            shortCutsWindow->Desenhar(mouseX, mouseY);
-         }
-        }
       }
 
       if(tempo-lastKeyb >= REFRESH_RATE)

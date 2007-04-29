@@ -62,6 +62,8 @@ class interface
 
       void closeAllWindows();
 
+      bool mouseOnGui(int mouseX, int mouseY);
+
       janela* insertWindow(int xa,int ya,int xb,int yb,const char *text,
                            int maximiz,int redmens);
 
