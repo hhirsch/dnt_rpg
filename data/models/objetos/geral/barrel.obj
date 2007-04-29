@@ -105,7 +105,7 @@ vn -0.167585 -0.000000 -0.985858
 vn 0.167589 -0.000000 -0.985857
 vn 0.495877 -0.000000 -0.868393
 vn 0.000000 1.000000 0.000000
-usemtl Material.001_barrel.png
+usemtl material
 usemat barrel.png
 s off
 f 33/1/1 1/2/1 2/3/1
