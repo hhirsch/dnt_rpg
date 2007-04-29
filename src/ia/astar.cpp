@@ -324,6 +324,16 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
 }
 
 /****************************************************************
+ *                       setOrientation                         *
+ ****************************************************************/
+void aStar::setOrientation(GLfloat ori)
+{
+   lock();
+      patt->defineOrientation(ori);
+   unLock();
+}
+
+/****************************************************************
  *                       getNewPosition                         *
  ****************************************************************/
 bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori)

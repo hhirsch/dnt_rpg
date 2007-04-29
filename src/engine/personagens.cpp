@@ -300,6 +300,15 @@ void personagem::callDeadAnimation()
    setState(STATE_DIE);
 }
 
+/*********************************************************************
+ *                            setOrientation                         *
+ *********************************************************************/
+void personagem::setOrientation(GLfloat ori)
+{
+   orientacao = ori;
+   pathFind.setOrientation(ori);
+}
+
 
 /***************************************************************************
  ***************************************************************************
@@ -526,5 +535,6 @@ void Lpersonagem::setActiveCharacter(personagem* character)
       activeCharacter = (personagem*) character->proximo;
    }
 }
+
 
 

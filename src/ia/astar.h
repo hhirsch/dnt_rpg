@@ -135,7 +135,11 @@ class aStar
 
       /*! Get Actual State of the aStar and put it on OTHER mode
        * \return state value if the state is nor RUNNING. */
-      int getState();      
+      int getState();
+
+      /*! Set character orientation value
+       * \param ori -> new orientation value */
+      void setOrientation(GLfloat ori);
 
    private:
       Map* actualMap;           /**< Pointer to opened Map */

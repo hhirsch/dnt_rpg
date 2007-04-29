@@ -1897,24 +1897,29 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
       if( (keys[SDLK_a]) || (keys[SDLK_d]))
       {
+         GLfloat ori = activeCharacter->orientacao;
          walkStatus = ENGINE_WALK_KEYS;
          // CounterClockWise Character turn
          if((keys[SDLK_a]) && (canWalk(0,0,rotacao)) )  
          {
-            activeCharacter->orientacao += rotacao;
-            if(activeCharacter->orientacao > 360.0)
-               activeCharacter->orientacao = 
-                               activeCharacter->orientacao  - 360.0;
+            ori += rotacao;
+            if(ori > 360.0)
+            { 
+               ori -= 360.0;
+            }
+            activeCharacter->setOrientation(ori);
             redesenha = true;
             andou = true;
          }
          // Clockwise Character Turn
          if((keys[SDLK_d]) && (canWalk(0,0,-rotacao)) )
          {
-            activeCharacter->orientacao -= rotacao;
-            if(activeCharacter->orientacao < 0.0)
-               activeCharacter->orientacao = 360.0 + 
-                                        activeCharacter->orientacao ;
+            ori -= rotacao;
+            if(ori < 0.0)
+            {
+               ori += 360.0;
+            }
+            activeCharacter->setOrientation(ori);
          }
          redesenha = true;
          andou = true;

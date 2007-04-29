@@ -42,11 +42,6 @@ bool pattAgent::defineNextPosition()
       return(false); //not defined yet the way points, so stay static.
    }
 
-   if(doAngle())
-   {
-      return(true);
-   }
-
    if( (actualX == actualWayPoint->x) && (actualZ == actualWayPoint->z))
    {
       //Arrived at the actual Way Point, so change to next!
@@ -90,7 +85,7 @@ bool pattAgent::defineNextPosition()
 
 
             desiredAngle = alpha-90; /* -90 to correct model orientation*/
-            
+
             if(doAngle())
             {
                return(true);
@@ -98,7 +93,7 @@ bool pattAgent::defineNextPosition()
          }
          else
          {
-            //alpha = 0 or 180;
+            //alpha == 0 or 180 or no one!;
             if(actualZ < actualWayPoint->z)
             {
                desiredAngle = 180;
@@ -113,6 +108,10 @@ bool pattAgent::defineNextPosition()
             }
          }
       }
+   }
+   else if(doAngle())
+   {
+      return(true);
    }
 
   
@@ -204,6 +203,7 @@ void pattAgent::addWayPointFirst(GLfloat x, GLfloat z)
  ********************************************************************/
 void pattAgent::changeToNextWayPoint()
 {
+   //FIXME -> diagonal Moves are > stepSize per time.
    int loops;
    if(!actualWayPoint)
    {

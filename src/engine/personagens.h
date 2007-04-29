@@ -114,6 +114,10 @@ class personagem: public Tobjeto, public thing, public aniModel
 
       inventory* inventories[INVENTORY_PER_CHARACTER]; /**< Inventory */
 
+      /*! Set character orientation value
+       * \param ori -> new orientation value */
+      void setOrientation(GLfloat ori);
+
       /*! Open, if exists and not opened, the conversation dialog */
       void openConversationDialog(interface* gui, personagem * PC);
 
