@@ -206,4 +206,12 @@ void object::callDeadAnimation()
    //setState(STATE_DIE);
 }
 
+/*********************************************************************
+ *                          callAttackAnimation                      *
+ *********************************************************************/
+void object::callAttackAnimation()
+{
+   //TODO
+   //setState(STATE_ATTACK_MEELE);
+}
 

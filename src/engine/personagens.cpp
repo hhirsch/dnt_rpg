@@ -301,6 +301,14 @@ void personagem::callDeadAnimation()
 }
 
 /*********************************************************************
+ *                          callAttackAnimation                      *
+ *********************************************************************/
+void personagem::callAttackAnimation()
+{
+   setState(STATE_ATTACK_MEELE);
+}
+
+/*********************************************************************
  *                            setOrientation                         *
  *********************************************************************/
 void personagem::setOrientation(GLfloat ori)

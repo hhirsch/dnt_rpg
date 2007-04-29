@@ -132,8 +132,11 @@ class personagem: public Tobjeto, public thing, public aniModel
        * \return true if event is threated, false otherwise. */
       bool treatConversation(Tobjeto* guiObject, int eventInfo, interface* gui);
 
+      /*! Call the thing dead animation */
+      void callDeadAnimation();
 
-      
+      /*! Call the thing attack animation */
+       void callAttackAnimation();
 
    protected:
        /*! Define max value of the lifePoints
@@ -144,9 +147,6 @@ class personagem: public Tobjeto, public thing, public aniModel
        * \param pt -> calculation info
        * \return points */
       int getPoints(points pt);
-
-      /*! Call the thing dead animation */
-      void callDeadAnimation();
 
       string retratoConversa;     /**< Portrait talk file name */
       SDL_Surface* portraitImage; /**< Character's portrait image */

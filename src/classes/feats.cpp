@@ -147,6 +147,10 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       /* apply Costs */
       useFeat(featNumber);
 
+      /* Call the animation */
+      //TODO call other animation, if is defined
+      attacker.callAttackAnimation();
+
       //TODO verify if can use or not based on target thing and range
 
       //verify Bonus

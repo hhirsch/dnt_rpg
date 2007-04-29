@@ -92,15 +92,22 @@ class thing
        **********************************************/
        bool isAlive();
 
-
-   protected:
-      bool dead;           /**< Dead state or not (if dead is only a corpse) */
-
-      /*!
+       /*!
        **********************************************
        *   Virtual method to call dead animation
        **********************************************/
        virtual void callDeadAnimation()=0;
+
+      /*!
+       **********************************************
+       *   Virtual method to call attack animation
+       **********************************************/
+       virtual void callAttackAnimation()=0;
+
+
+   protected:
+      bool dead;           /**< Dead state or not (if dead is only a corpse) */
+
 };
 
 #endif

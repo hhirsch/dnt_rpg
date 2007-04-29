@@ -57,11 +57,14 @@ class object: public thing
        * \param x -> x inventory size
        * \param y -> y inventory size */
       void getInventorySize(int &x, int &y);
-      
-   protected:
+
       /*! Call the dead animation of the model */
       void callDeadAnimation();
 
+      /*! Call the attack animation of the model */
+      void callAttackAnimation();
+      
+   protected:
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
 
