@@ -46,37 +46,69 @@
 #define FOCO_TABBUTTON    9
 #define FOCO_JOGO         100
 
-
+/*! Interface is the GUI upper level class. Is from it that all GUI events
+ * are treated, and all actions maybe be takken. */
 class interface
 {
    public:
-      Tobjeto* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
-                                int* eventInfo);
-      void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+      /*! Constructor
+       * \param arqfundo -> name of a image file to be the background. 
+       *                    NULL if no background is used*/
       interface(char* arqFundo);
+      /*! Destructor  */
       ~interface();
 
+      /*! Manipulate Events on Gui.
+       * \param x -> mouseX position
+       * \param y -> mouseY position
+       * \param Mbotao -> mous button state
+       * \param tecla -> keyboard state
+       * \param eventInfo -> variable that will receive the information 
+       *                     on the event that occurs
+       * \return -> pointer to the active objet of the action */
+      Tobjeto* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+                                int* eventInfo);
+      /*! Draw all the interface (all windows and objects)
+       * \param proj -> project view matrix
+       * \param modl -> model view matrix
+       * \param viewPort -> the viewport vector*/
+      void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+      /*! Clear the internal pointer to the actived object. 
+       *  Use it when close by force some window */
       void clearActiveObject();
-
+      /*! Close a window
+       * \param jan -> pointer to the window */
       void closeWindow(janela *jan);
-
+      /*! Close all interface openned windows */
       void closeAllWindows();
-
+      /*! Verify if the mouse is on some window or not
+       * \param mouseX -> mouse x position
+       * \param mouseZ -> mouse z position
+       * \return true if mouse is in some window, false otherwise. */
       bool mouseOnGui(int mouseX, int mouseY);
-
+      /*! Insert a window on the interface
+       * \param xa -> x1 window position
+       * \param ya -> y1 window position
+       * \param xb -> x2 window posiiton 
+       * \param yb -> y2 window position
+       * \param text -> title of the window 
+       * \param maximiz -> if can be maximized
+       * \param redmens -> if can redmensionate (not used anymore)
+       * \return -> pointer to the inserted window */
       janela* insertWindow(int xa,int ya,int xb,int yb,const char *text,
                            int maximiz,int redmens);
-
+      /*! Open a Window
+       * \param jan -> pointer to the window opened */
       void openWindow(janela* jan);
       
-      int foco;
+      int foco;    /**< Current GUI focus (on some element of on GAME) */
 
    private:
-      SDL_Surface* fundo;
-      Tlista* objects;
-      Ljanela* ljan;
-      Tobjeto* objAtivo;
-      Tobjeto* chamador;
+      SDL_Surface* fundo;     /**< background surface, if has one */
+      Tlista* objects;        /**< some no window objects */
+      Ljanela* ljan;          /**< windows list */
+      Tobjeto* objAtivo;      /**< pointer to the actived object */
+      Tobjeto* chamador;      /**< pointer to the caller object */
 
 };
 

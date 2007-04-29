@@ -542,18 +542,27 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                      ljan->janelaAtiva->x2,ljan->janelaAtiva->y2, 0.011);
 }
 
+/*********************************************************************
+ *                          clearActiveObject                        *
+ *********************************************************************/
 void interface::clearActiveObject()
 {
    foco = FOCO_JOGO;
    objAtivo = NULL;
 }
 
+/*********************************************************************
+ *                             closeWindow                           *
+ *********************************************************************/
 void interface::closeWindow(janela *jan)
 {
    clearActiveObject();
    ljan->RetirarJanela(jan);
 }
 
+/*********************************************************************
+ *                           closeAllWindows                         *
+ *********************************************************************/
 void interface::closeAllWindows()
 {
    janela* j = (janela*)ljan->primeiro->proximo;
@@ -567,17 +576,26 @@ void interface::closeAllWindows()
    clearActiveObject();
 }
 
+/*********************************************************************
+ *                            insertWindow                           *
+ *********************************************************************/
 janela* interface::insertWindow(int xa,int ya,int xb,int yb,const char *text,
                             int maximiz,int redmens)
 {
    return(ljan->InserirJanela(xa,ya,xb,yb,text,maximiz,redmens, NULL, NULL));
 }
 
+/*********************************************************************
+ *                              openWindow                           *
+ *********************************************************************/
 void interface::openWindow(janela* jan)
 {
    jan->Abrir(ljan);
 }
 
+/*********************************************************************
+ *                              mouseOnGui                           *
+ *********************************************************************/
 bool interface::mouseOnGui(int mouseX, int mouseY)
 {
    int aux; 
