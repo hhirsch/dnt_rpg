@@ -1,7 +1,7 @@
 [Project]
 FileName=DccNiTghtmare.dev
 Name=DccNiTghtmare
-UnitCount=169
+UnitCount=171
 Type=0
 Ver=1
 ObjFiles=
@@ -1729,6 +1729,26 @@ BuildCmd=
 
 [Unit169]
 FileName=src\engine\modstate.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit170]
+FileName=src\engine\aspectwindow.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit171]
+FileName=src\engine\aspectwindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
