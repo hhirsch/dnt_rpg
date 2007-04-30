@@ -254,8 +254,36 @@ void editor::newMap()
 
    mapOpened = true;
    map = new(Map);
-   //TODO Get Map Size!!!!
-   map->newMap(32,32);
+
+   int sizeX = -1, sizeZ = -1;
+   string s;
+
+
+   /* Get map X size */
+   while( (sizeX <= 0) || (sizeX > 30))
+   {
+      s = getStringFromUser("Map X Size", "8", proj, modl, viewPort);
+      sscanf(s.c_str(),"%d", &sizeX);
+      if( (sizeX <= 0) || (sizeX > 30) )
+      {
+         showMessage("Error!", "Size must be in range (0,30]", proj, modl,
+                     viewPort);
+      }
+   }
+
+   /* Get map Z size */
+   while( (sizeZ <= 0) || (sizeZ > 30))
+   {
+      s = getStringFromUser("Map Z Size", "8", proj, modl, viewPort);
+      sscanf(s.c_str(),"%d", &sizeZ);
+      if( (sizeZ <= 0) || (sizeZ > 30) )
+      {
+         showMessage("Error!", "Size must be in range (0,30]", proj, modl, 
+                     viewPort);
+      }
+   }
+
+   map->newMap(sizeX,sizeZ);
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wall(map);
@@ -613,7 +641,6 @@ void editor::doEditorIO()
    
    if( (gui->getState() == GUI_IO_STATE_TERRAIN) && (mapOpened))
    {
-      printf("doEditorIO: texture: %d\n",actualTexture);
       terrainEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(), 
                                   actualTexture);
       particleSystem->setActualMap(map);
