@@ -186,6 +186,8 @@ void particleSystem::DoStep(GLfloat matriz[6][4])
 
    resetBoundingBox();
 
+   InitRender();
+
    for(n = 0; n < maxParticles; n++)
    { 
       /* Recreate new ones on dead bodies (or on things that is about to die) */
@@ -269,22 +271,20 @@ void particleSystem::DoStep(GLfloat matriz[6][4])
             colorArray[aliveColor+2] = particles[n].B;
             //colorArray[aliveColor+3] = 1.0;
          }
+         else if(quadradoVisivel(boundX1, boundY1, boundZ1, boundX2, 
+                                 boundY2, boundZ2,matriz))
+         {
+            Render(&particles[n]);
+         }
          alive += 3;
          aliveColor += 3;
       }
 
    }
 
-   if(!quadradoVisivel(boundX1, boundY1, boundZ1, boundX2, boundY2, boundZ2,
-                           matriz))
-   {
-      /* No need to render not visible systens */
-      return;
-   }
-
-   InitRender();
-
-   if( (drawMode == PARTICLE_DRAW_GROUPS) && (aliveColor > 0) && (alive > 0) )
+   if( (drawMode == PARTICLE_DRAW_GROUPS) && (aliveColor > 0) && (alive > 0) &&
+       (quadradoVisivel(boundX1, boundY1, boundZ1, boundX2, boundY2, boundZ2,
+                           matriz)))
    {
       glEnableClientState(GL_COLOR_ARRAY);
       glColorPointer(3, GL_FLOAT, 0, colorArray);
@@ -293,16 +293,6 @@ void particleSystem::DoStep(GLfloat matriz[6][4])
       glDrawArrays(GL_POINTS, 0, (int)alive / (int)3);
       glDisableClientState(GL_VERTEX_ARRAY);
       glDisableClientState(GL_COLOR_ARRAY);
-   }
-   else if(drawMode == PARTICLE_DRAW_INDIVIDUAL)
-   {
-      for(n = 0; n < maxParticles; n++)
-      {
-         if( particles[n].status != PARTICLE_STATUS_DEAD)
-         {
-            Render(&particles[n]);
-         }
-      }
    }
 
    EndRender();
