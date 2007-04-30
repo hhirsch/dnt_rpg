@@ -1,6 +1,7 @@
 #include "grass.h"
 #include "../gui/desenho.h"
 #include "../map/map.h"
+#include "../engine/util.h"
 
 /**************************************************************************
  *                             Constructor                                *
@@ -53,21 +54,29 @@ grass::~grass()
 void grass::Render(particle* part)
 {
    glPushMatrix();
-      glTranslatef(part->posX, 0 ,part->posZ);
+      /*glTranslatef(part->posX, 0 ,part->posZ);
       glRotatef(part->G,0,1,0);
       //FIXME the X rotation when grass is on different height!
       glRotatef(part->R,1,0,0);
-      glRotatef(part->B,0,0,1);
-      glBegin(GL_QUADS);
+      glRotatef(part->B,0,0,1);*/
+      
          glTexCoord2f(0.0,0.0);
-         glVertex3f(-8.0,part->posY,0.0);
+         glVertex3f(part->posX - part->velX,
+                    part->posY,
+                    part->posZ + (part->velZ  * part->velY));
          glTexCoord2f(1.0,0.0);
-         glVertex3f(8.0,part->prvX,0.0);
+         glVertex3f(part->posX + part->velX,
+                    part->prvX,
+                    part->posZ - (part->velZ * part->velY));
          glTexCoord2f(1.0,1.0);
-         glVertex3f(8.0,part->prvY,0.0);
+         glVertex3f(part->posX + part->velX,
+                    part->prvY,
+                    (part->posZ - part->velZ));
          glTexCoord2f(0.0,1.0);
-         glVertex3f(-8.0,part->prvZ,0.0);
-      glEnd();
+         glVertex3f(part->posX - part->velX,
+                    part->prvZ,
+                    (part->posZ + part->velZ));
+      
   glPopMatrix();
 }
 
@@ -83,6 +92,7 @@ void grass::InitRender()
    glBindTexture(GL_TEXTURE_2D, grassTexture);
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+   glBegin(GL_QUADS);
 }
 
 /**************************************************************************
@@ -90,6 +100,7 @@ void grass::InitRender()
  **************************************************************************/
 void grass::EndRender()
 {
+   glEnd();
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
@@ -105,15 +116,17 @@ void grass::EndRender()
  **************************************************************************/
 void grass::actualize(particle* part)
 {
-   part->R += part->velX;
+   part->R += part->size;
+   part->velY = sin(deg2Rad(part->R));
 
-   if(part->R <= -45)
+
+   if(part->R <= part->prvR-40)
    {
-      part->velX = 0.50;
+      part->size = 0.75;
    }
-   else if(part->R >= part->prvR+10)
+   else if(part->R >= part->prvR+40)
    {
-      part->velX = -0.50;
+      part->size = -0.75;
    }
 }
 
@@ -166,12 +179,25 @@ void grass::createParticle(particle* part)
    }
    
    /* Define all Rotations */
-   part->R = 15*(rand() / ((double)RAND_MAX + 1));
+   part->R = 75*(rand() / ((double)RAND_MAX + 1));
    part->G = 90*(rand() / ((double)RAND_MAX + 1));
    part->B = 15*(rand() / ((double)RAND_MAX + 1));
+
+   /* Define fixed Rotations */
+     /* Around Y axis */
+   part->velZ = 8*cos(deg2Rad(part->G));
+   part->velX = 8*sin(deg2Rad(part->G));
+   part->velY = sin(deg2Rad(part->R));
    
-   /* Define Velocity */
-   part->velX = -0.5;
+   /* Define Rotation variation */
+   if(rand() > 0.5)
+   {
+      part->size = -0.75;
+   }
+   else
+   {
+      part->size = 0.75;
+   }
 
    /* Define previous value of actualized rotation */
    part->prvR = part->R;

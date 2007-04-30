@@ -14,18 +14,19 @@ using namespace std;
 #define PARTICLE_DRAW_INDIVIDUAL 1 /**< Draw each particle individually */
 
 /*! A Particle Alone */
-typedef struct part_
+class particle
 {
-   float posX, posY, posZ;    /**< Position */
-   float prvX, prvY, prvZ;    /**< Previous Position */
-   float velX, velY, velZ;    /**< Velocity */
-   float size;                /**< Size */
-   float R,G,B;               /**< Color */
-   float prvR, prvG, prvB;    /**< Previous Color */
-   int age;                   /**< Age */
-   int status;                /**< Actual Status */
-   int internalNumber;        /**< Internal Number */
-}particle;
+   public:
+      float posX, posY, posZ;    /**< Position */
+      float prvX, prvY, prvZ;    /**< Previous Position */
+      float velX, velY, velZ;    /**< Velocity */
+      float size;                /**< Size */
+      float R,G,B;               /**< Color */
+      float prvR, prvG, prvB;    /**< Previous Color */
+      int age;                   /**< Age */
+      int status;                /**< Actual Status */
+      int internalNumber;        /**< Internal Number */
+};
 
 /*! The Particle System */
 class particleSystem
