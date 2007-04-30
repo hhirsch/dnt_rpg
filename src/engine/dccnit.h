@@ -361,7 +361,7 @@ class engine
 
       fightSystem fight;           /**< The Engine fight System */
 
-      GLuint lastTurnTime;        /**< Time when last calls for turn */
+      Uint32 lastTurnTime;        /**< Time when last calls for turn */
       int fightStatus;            /**< Current Fight Status */
       bool fullMovePCAction;      /**< Taked Full Move Action on round? */
       bool canAttack;             /**< can attack in the round? */

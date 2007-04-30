@@ -253,11 +253,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
           brief += "|"+ language.FEAT_CRITICAL_HIT ;
       }
 
-      if(target.lifePoints <= 0)
-      {
-         //FIXME Other states, like partial death to be implemented
-         target.kill();
-      }
+      
 
       return(true);
    }

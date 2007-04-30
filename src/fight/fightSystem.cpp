@@ -9,6 +9,9 @@
  ***************************************************************/
 fightSystem::fightSystem()
 {
+   lastTime = 0;
+   actualActor = NULL;
+   pendingAnimation = true;
 }
 
 /***************************************************************
@@ -126,64 +129,90 @@ bool fightSystem::hasEnemies(personagem* pers, string& brief)
 int fightSystem::doTurn(string& brief)
 {
    string tmp;
-   personagem* pers;
+   Uint32 time = SDL_GetTicks();
    brief = "";
- 
-   pers = charsInitiatives.nextCharacter();
 
-   if(pers == NULL)
+   if(time - lastTime >= FIGHT_ANIMATION_DELAY)
    {
-      /* Begin new Round */
-      brief += language.FIGHT_ROUND_NEW  + "|";
-      charsInitiatives.newRound(); 
-      pers = charsInitiatives.nextCharacter();
-      if(pers == NULL)
-      {
-         brief += language.FIGHT_ERROR_NO_CHARACTERS;
-         return(FIGHT_END);
-      }
-   }
+      lastTime = time;
 
-   /* don't play with dead characters or not Hostile Ones */
-   while( (!pers->isAlive()) || 
-          ( (!isPC(pers)) && (pers->psychoState != PSYCHO_HOSTILE)) )
-   {
-      pers = charsInitiatives.nextCharacter();
-      if(pers == NULL)
+      if( (actualActor != NULL) && (actualActor->actualEnemy != NULL) && 
+          (pendingAnimation))
       {
-         /* Begin new Round */
-         brief += language.FIGHT_ROUND_NEW  + "|";;
-         charsInitiatives.newRound(); 
-         pers = charsInitiatives.nextCharacter();
-         if(pers == NULL)
+         pendingAnimation = false;
+         if(actualActor->actualEnemy->lifePoints <= 0)
          {
-            brief += language.FIGHT_ERROR_NO_CHARACTERS;
+            //FIXME Other states, like partial death to be implemented
+            actualActor->actualEnemy->kill();
+         }
+         else
+         {
+            //TODO call defend or receive animation
+         }
+      }
+      else
+      {
+ 
+         actualActor = charsInitiatives.nextCharacter();
+
+         if(actualActor == NULL)
+         {
+            /* Begin new Round */
+            brief += language.FIGHT_ROUND_NEW  + "|";
+            charsInitiatives.newRound(); 
+            actualActor = charsInitiatives.nextCharacter();
+            if(actualActor == NULL)
+            {
+               brief += language.FIGHT_ERROR_NO_CHARACTERS;
+               return(FIGHT_END);
+            }
+         }
+
+         /* don't play with dead characters or not Hostile Ones */
+         while( (!actualActor->isAlive()) || 
+                ( (!isPC(actualActor)) && 
+                  (actualActor->psychoState != PSYCHO_HOSTILE)) )
+         {
+            actualActor = charsInitiatives.nextCharacter();
+            if(actualActor == NULL)
+            {
+               /* Begin new Round */
+               brief += language.FIGHT_ROUND_NEW  + "|";;
+               charsInitiatives.newRound(); 
+               actualActor = charsInitiatives.nextCharacter();
+               if(actualActor == NULL)
+               {
+                  brief += language.FIGHT_ERROR_NO_CHARACTERS;
+                  return(FIGHT_END);
+               }
+            } 
+         }
+
+         tmp = "";
+         if(isPC(actualActor))
+         {
+             if(!hasEnemies(actualActor, brief))
+             {
+                /* There's no more enemies, so no more battle */
+                return(FIGHT_END);
+             }
+             brief += actualActor->nome + " " + language.FIGHT_TURN;
+             return(FIGHT_PC_TURN);
+         }
+         else
+         { 
+            doNPCAction(actualActor,tmp);
+            pendingAnimation = true;
+            brief += "|" + tmp;
+         }
+
+         if(!hasEnemies(actualActor, brief))
+         {
+            /* There's no more enemies, so no more battle */
             return(FIGHT_END);
          }
-      } 
-   }
-
-   tmp = "";
-   if(isPC(pers))
-   {
-       if(!hasEnemies(pers, brief))
-       {
-          /* There's no more enemies, so no more battle */
-          return(FIGHT_END);
-       }
-       brief += pers->nome + " " + language.FIGHT_TURN;
-       return(FIGHT_PC_TURN);
-   }
-   else
-   { 
-      doNPCAction(pers,tmp);
-      brief += "|" + tmp;
-   }
-
-   if(!hasEnemies(pers, brief))
-   {
-      /* There's no more enemies, so no more battle */
-      return(FIGHT_END);
+         
+      }
    }
 
    return(FIGHT_CONTINUE);

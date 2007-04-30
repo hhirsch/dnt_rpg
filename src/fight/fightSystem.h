@@ -8,6 +8,7 @@
 #include "fightGroup.h"
 #include "initiative.h"
 #include "../lang/lang.h"
+#include <SDL/SDL.h>
 
 
 #define FIGHT_MAX_NPC_GROUPS 5 /**< Max groups of NPCs characters */
@@ -19,6 +20,8 @@
 #define FIGHT_END 0
 #define FIGHT_PC_TURN 1
 #define FIGHT_CONTINUE 2
+
+#define FIGHT_ANIMATION_DELAY  2000  /**< Delay for animations */
 
 /*! The fight System Implementation */
 class fightSystem
@@ -73,10 +76,13 @@ class fightSystem
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
      fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /**< NPCs groups */
      initiative charsInitiatives;     /**< Character's Initiative */
-     lang language;              /* Language Internationalization */
+     lang language;            /**< Language Internationalization */
+     Uint32 lastTime;            /**< Last time of some animation */
+     personagem* actualActor;        /**< Actual Character Acting */
+     bool pendingAnimation;     /**< If some animation is pending */
 
      /*!
-     *************************************************************** 
+     ***************************************************************
      * Verify if character is PC (and is on pcList).  
      * \param pers -> Pointer to Character
      * \return true if character is a PC.

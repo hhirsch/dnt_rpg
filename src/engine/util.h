@@ -20,14 +20,11 @@
 
 #define ENGINE_MODE_REAL_TIME   1  /**< Real Time Mode, not in battle */
 #define ENGINE_MODE_TURN_BATTLE 2  /**< Turn Mode, in battles */
-#define ENGINE_MODE_DEAD        3  /**< Dead Mode, to wait for the dead
-                                     * animation and later call the dead 
-                                     * screen*/
 
 #define ENGINE_WALK_KEYS        1  /**< Engine Keyboard Walk Status */
 #define ENGINE_WALK_MOUSE       2  /**< Engine Mouse Walk Status */
 
-#define ENGINE_ANIMATION_DELAY 4000 /**< Value to delay for end animation */
+//#define ENGINE_ANIMATION_DELAY 4000 /**< Value to delay for end animation */
 
 
 /********************************************************************

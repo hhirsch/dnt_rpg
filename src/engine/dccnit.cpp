@@ -1771,13 +1771,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         activeCharacter->posicaoLadoZ,
                                         "../data/particles/lightning1.par");
          }
-         if(keys[SDLK_k])
-         {
-            lastTurnTime = SDL_GetTicks();
-            PCs->getActiveCharacter()->setState(STATE_DIE);
-            PCs->getActiveCharacter()->defineActualLifePoints(0);
-            engineMode = ENGINE_MODE_DEAD;
-         }
 
          if(keys[SDLK_0])
          {
@@ -2109,7 +2102,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       *forcaAtualizacao = 0;
    }
  
-   if( (andou) && (engineMode != ENGINE_MODE_DEAD) )
+   if( (andou) && (activeCharacter->isAlive()) )
    {
       if(!walkSound)
       {
@@ -2129,7 +2122,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
           activeCharacter->orientacao );
       #endif
    }
-   else if( (passouTempo) && (engineMode != ENGINE_MODE_DEAD))
+   else if( (passouTempo) && (activeCharacter->isAlive()))
    { 
       if( (activeCharacter->getState() == STATE_WALK) &&
           (engineMode == ENGINE_MODE_TURN_BATTLE) && 
@@ -2409,7 +2402,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    GLfloat nx, nz;
    personagem* activeCharacter = PCs->getActiveCharacter();
   
-   if(engineMode == ENGINE_MODE_DEAD)
+   if(!activeCharacter->isAlive())
    {
       /* Dead Characters can't walk too! */
       return(false);
@@ -2729,22 +2722,8 @@ int engine::Run(SDL_Surface *surface)
    while(threatIO(surface,&forcaAtualizacao))
    {
 
-     /* Verify Dead events */ 
-     if(engineMode == ENGINE_MODE_DEAD)
-     {
-        if(SDL_GetTicks() - lastTurnTime >= ENGINE_ANIMATION_DELAY)
-        {
-           /* The Animation Delay is Ended, so Call Death Screen */
-           showImage("../data/texturas/fightMode/death.png");
-           engineMode = ENGINE_MODE_REAL_TIME;
-           gui->closeAllWindows();
-           /* Put the animation state on normal */
-           PCs->getActiveCharacter()->setState(STATE_IDLE);
-           return(0);
-        }
-     }
      /* Verify battle events */
-     else if(engineMode == ENGINE_MODE_TURN_BATTLE) 
+     if(engineMode == ENGINE_MODE_TURN_BATTLE) 
      {
         time = SDL_GetTicks();
         if(fightStatus == FIGHT_END)
@@ -2767,14 +2746,17 @@ int engine::Run(SDL_Surface *surface)
            }
            if(!alive)
            {
-              /* All Pcs are Dead, so Dead Mode! */
-              engineMode = ENGINE_MODE_DEAD;
-              lastTurnTime = time;
+              /* All Pcs are Dead, so Death Screen! */
+              showImage("../data/texturas/fightMode/death.png");
+              engineMode = ENGINE_MODE_REAL_TIME;
+              gui->closeAllWindows();
+              /* Put the animation state on normal */
+              PCs->getActiveCharacter()->setState(STATE_IDLE);
+              return(0);
            }
         }
-        /* Wait for animations before change the turn */
-        else if( (fightStatus == FIGHT_CONTINUE) &&
-                 ((time - lastTurnTime) > ENGINE_ANIMATION_DELAY) ) 
+        /* Continue the fight */
+        else if( (fightStatus == FIGHT_CONTINUE) ) 
         {
            lastTurnTime = time;
            fightStatus = fight.doBattleCicle(brief);
