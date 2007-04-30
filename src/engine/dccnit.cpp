@@ -1291,10 +1291,10 @@ int engine::verifyMouseActions(Uint8 Mbotao)
 
                       /* Log State to the modState */
                       modifState.mapObjectAddAction(MODSTATE_ACTION_MAP_REMOVE,
-                                                    quaux->objects[obj]->getName(),
-                                                    actualMap->getFileName(),
-                                                    quaux->Xobjects[obj],
-                                                    quaux->Zobjects[obj]);
+                                                 quaux->objects[obj]->getName(),
+                                                 actualMap->getFileName(),
+                                                 quaux->Xobjects[obj],
+                                                 quaux->Zobjects[obj]);
                          
                       /* Remove object from Map */
                       actualMap->removeObject(quaux->Xobjects[obj],
@@ -1426,7 +1426,8 @@ int engine::verifyMouseActions(Uint8 Mbotao)
             x[3] = pers->max[0];
             z[3] = pers->min[2];
 
-            rotTransBoundingBox(pers->orientacao, x, z, pers->posicaoLadoX, 0.0, 0.0, 
+            rotTransBoundingBox(pers->orientacao, x, z, 
+                                pers->posicaoLadoX, 0.0, 0.0, 
                                 pers->posicaoLadoZ, min, max );
 
             if(estaDentro( min, max, minMouse, maxMouse, 1))
@@ -1479,7 +1480,8 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                      brief = activeCharacter->nome + " " + 
                              language.FIGHT_ATTACKS + " " + 
                              pers->nome + "|";
-                     canAttack = !activeCharacter->actualFeats.applyAttackAndBreakFeat(
+                     canAttack = !activeCharacter->actualFeats.
+                                                        applyAttackAndBreakFeat(
                                                           *activeCharacter,
                                                           attackFeat, *pers, 
                                                           brief);

@@ -107,6 +107,7 @@ void personagem::openConversationDialog(interface* gui, personagem * PC)
    {
       //TODO get number of dialog if it is != 0
       cs->openDialog(0, gui, this, PC);
+      convPressed = true;
    }
 }
 
@@ -116,10 +117,19 @@ void personagem::openConversationDialog(interface* gui, personagem * PC)
 bool personagem::treatConversation(Tobjeto* guiObject, int eventInfo, 
                                    interface* gui)
 {
-   conversation* cs = (conversation*) conv;
-   if( (cs != NULL) && (cs->windowOpened()) )
+   if(convPressed)
    {
-      return(cs->treat(guiObject, eventInfo, gui));
+      int x, y;
+      Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+      convPressed = (Mbotao & SDL_BUTTON(1));
+   }
+   else
+   {
+      conversation* cs = (conversation*) conv;
+      if( (cs != NULL) && (cs->windowOpened()) )
+      {
+         return(cs->treat(guiObject, eventInfo, gui));
+      }
    }
    return(false);
 }

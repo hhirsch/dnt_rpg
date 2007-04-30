@@ -153,6 +153,8 @@ class personagem: public Tobjeto, public thing, public aniModel
       GLuint portrait;            /**< Up screen portrait GL texture */
       string conversationFile;    /**< Name of the Conversation File */
       void* conv;                 /**< Pointer to the conversation */
+      bool convPressed;           /**< To avoid do some conversation action
+                                       before releases the left mouse button */
 };
 
 
