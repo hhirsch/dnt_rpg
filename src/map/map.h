@@ -338,6 +338,20 @@ class Map
        ***************************************************************/
       void getInitialPosition(float& iX, float& iZ);
 
+      /*!
+       ***************************************************************
+       * Verify if the map is outdoor
+       * \return -> true if the map is outdoor
+       ***************************************************************/
+      bool isOutdoor();
+
+      /*!
+       ***************************************************************
+       * Set if the map is outdoor or not  
+       * \param value -> true if is outdoor, false if indoor
+       ***************************************************************/
+      void setOutdoor(bool val); 
+
 
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
@@ -355,6 +369,7 @@ class Map
       protected:
          int x,                /**< Map X dimension (in squares) */
              z;                /**< Map Z Dimension (in squares) */
+         bool outdoor;         /**< If it's an outdoor or indoor map */
          Square*** MapSquares; /**< Internal Map squares */
          lMapObject* objects;  /**< Map's objects list */
          string music;         /**< Map Music */

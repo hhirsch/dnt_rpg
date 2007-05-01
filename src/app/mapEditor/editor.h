@@ -71,6 +71,8 @@ class editor
       
       Map* map;                      /**< The active Map */
       bool mapOpened;                /**< True if Active Map is Opened */
+      int sizeX,                     /**< Real X size of the map */
+          sizeZ;                     /**< Real Z size of the map */
 
       Lpersonagem *NPCs;             /**< List of NPCs On Map */
       featsList* features;           /**< NPCs Geral Features */

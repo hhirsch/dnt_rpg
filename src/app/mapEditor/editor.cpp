@@ -255,9 +255,19 @@ void editor::newMap()
    mapOpened = true;
    map = new(Map);
 
-   int sizeX = -1, sizeZ = -1;
+   sizeX = -1, sizeZ = -1;
    string s;
+   int type = -1;
 
+   /* Get map type */
+   while( type == -1 )
+   {
+      type = getOptionFromUser("Map Type", "Select the map type:",
+                               "Indoor", "Outdoor", proj, modl, viewPort);
+   }
+
+   /* Set the type */
+   map->setOutdoor(type == 2);
 
    /* Get map X size */
    while( (sizeX <= 0) || (sizeX > 30))
@@ -283,7 +293,32 @@ void editor::newMap()
       }
    }
 
-   map->newMap(sizeX,sizeZ);
+   /* If is outdoor, the size is bigger, and can't walk to the created
+    * squares to the horizon! */
+   if(map->isOutdoor())
+   {
+      map->newMap(sizeX+12, sizeZ+12);
+      int k, l;
+      Square* saux;
+      for(k = 0; k < sizeX+12; k++)
+      {
+         for(l=0; l < sizeZ+12; l++)
+         {
+            saux = map->relativeSquare(k,l);
+            if( (sizeX < 6) || (sizeZ < 6) || (sizeX >= sizeX+6) ||
+                (sizeZ >= sizeZ+6))
+            {
+               saux->flags &= !PISAVEL;
+            }
+         }
+      }
+      gui->gameCamera.actualizeCamera(((sizeX+12)*SQUARESIZE / 2.0), 0.0, 
+                                      ((sizeZ+12)*SQUARESIZE / 2.0), 0.0);
+   }
+   else
+   {
+      map->newMap(sizeX,sizeZ);
+   }
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wall(map);
@@ -465,7 +500,7 @@ void editor::draw()
 
    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
    glLoadIdentity();
-   glClearColor(0.3,0.3,0.8,1.0);
+   glClearColor(0.0,0.0,0.0,1.0);
 
 
    /* Redefine camera position */
@@ -476,9 +511,49 @@ void editor::draw()
    if(mapOpened)
    {
       /* SKY */
-      glPushMatrix();
-         gameSky->draw(map,gameSun->getRotation());
-      glPopMatrix();
+
+      if(map->isOutdoor())
+      {
+         /* Sky */
+         glPushMatrix();
+            gameSky->draw(map,gameSun->getRotation());
+         glPopMatrix();
+
+         /* Real Map Limits */
+         glPushMatrix();
+            GLfloat ambient[] = { 0.94, 0.192, 0.12, 0.45 };
+            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+            glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, ambient);
+            glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, ambient);
+            glColor4fv(ambient);
+            glBegin(GL_QUADS);
+               glNormal3f(0,1,0);
+               glVertex3f(6*SQUARESIZE-5, 0.5, 6*SQUARESIZE);
+               glVertex3f(6*SQUARESIZE-5, 0.5, (sizeZ+6)*SQUARESIZE);
+               glVertex3f(6*SQUARESIZE+5, 0.5, (sizeZ+6)*SQUARESIZE);
+               glVertex3f(6*SQUARESIZE+5, 0.5, 6*SQUARESIZE);
+
+               glNormal3f(0,1,0);
+               glVertex3f((sizeX+6)*SQUARESIZE-5, 0.5, 6*SQUARESIZE);
+               glVertex3f((sizeX+6)*SQUARESIZE-5, 0.5, (sizeZ+6)*SQUARESIZE);
+               glVertex3f((sizeX+6)*SQUARESIZE+5, 0.5, (sizeZ+6)*SQUARESIZE);
+               glVertex3f((sizeZ+6)*SQUARESIZE+5, 0.5, 6*SQUARESIZE);
+
+               glNormal3f(0,1,0);
+               glVertex3f(6*SQUARESIZE, 0.5, 6*SQUARESIZE-5);
+               glVertex3f((sizeX+6)*SQUARESIZE, 0.5, 6*SQUARESIZE-5);
+               glVertex3f((sizeX+6)*SQUARESIZE, 0.5, 6*SQUARESIZE+5);
+               glVertex3f(6*SQUARESIZE, 0.5, 6*SQUARESIZE+5);
+
+               glNormal3f(0,1,0);
+               glVertex3f(6*SQUARESIZE, 0.5, (sizeZ+6)*SQUARESIZE-5);
+               glVertex3f((sizeX+6)*SQUARESIZE, 0.5, (sizeZ+6)*SQUARESIZE-5);
+               glVertex3f((sizeX+6)*SQUARESIZE, 0.5, (sizeZ+6)*SQUARESIZE+5);
+               glVertex3f(6*SQUARESIZE, 0.5, (sizeZ+6)*SQUARESIZE+5);
+
+            glEnd();
+         glPopMatrix();
+      }
       glColor3f(1.0,1.0,1.0);
 
       glPushMatrix();

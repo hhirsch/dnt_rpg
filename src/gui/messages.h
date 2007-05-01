@@ -10,6 +10,9 @@ using namespace std;
 string getStringFromUser(string title, string previous,
                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
+int getOptionFromUser(string title, string message, string opt1, string opt2,
+                      GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+
 void showMessage(string title, string message,
                  GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 

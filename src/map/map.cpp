@@ -334,11 +334,13 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    GLfloat pX1, pX2, pZ1, pZ2, incPos, incTex;
    incTex = (1.0 / SQUARE_DIVISIONS);
    incPos = (GLfloat) SQUARESIZE / (GLfloat)SQUARE_DIVISIONS;
-   
+
+   glColor3f(1.0,1.0,1.0);
+
    textura = MapSquares[Xaux][Zaux]->textura;
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, textura);
-   glColor3f(1.0,1.0,1.0);
+   
 
    /*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -352,11 +354,12 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);*/
 
    glBegin(GL_QUADS);
-      glNormal3f(0,1,0);
-      glVertex3f(-FARVIEW,-1,-FARVIEW);
-      glVertex3f(-FARVIEW,-1,+FARVIEW);
-      glVertex3f(+FARVIEW,-1,+FARVIEW);
-      glVertex3f(+FARVIEW,-1,-FARVIEW);
+     /* Draw at horizon */
+     glNormal3f(0,1,0);
+     glVertex3f(-FARVIEW,-1,-FARVIEW);
+     glVertex3f(-FARVIEW,-1,+FARVIEW);
+     glVertex3f(+FARVIEW,-1,+FARVIEW);
+     glVertex3f(+FARVIEW,-1,-FARVIEW);
    for(Xaux = 0; Xaux < x; Xaux++)
    {
       for(Zaux = 0; Zaux < z; Zaux++)
@@ -653,6 +656,7 @@ Map::Map()
    music = "";
    npcFileName = "";
    particlesFileName = "";
+   outdoor = false;
    
    /* Initialize Structs */
    objects = new(lMapObject);
@@ -839,6 +843,21 @@ void Map::getInitialPosition(float& iX, float& iZ)
    iZ = zInic;
 }
 
+/********************************************************************
+ *                             isOutDoor                            *
+ ********************************************************************/
+bool Map::isOutdoor()
+{
+   return(outdoor);
+}
+
+/********************************************************************
+ *                            setOutDoor                            *
+ ********************************************************************/
+void Map::setOutdoor(bool val)
+{
+   outdoor = val;
+}
 
 /********************************************************************
  *                       insertMapObject                            *
