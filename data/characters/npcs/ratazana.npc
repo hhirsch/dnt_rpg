@@ -1,6 +1,6 @@
 Ratazana
 ../data/models/personagens/Ratazana/modelo.cfg
-../data/pics/logan/portrait.jpg
+../data/characters/portraits/ratazana.png
 maxLifePoints               42
 baseModifier                12/12/12
 attackModifier              8/3/0/0/0/0

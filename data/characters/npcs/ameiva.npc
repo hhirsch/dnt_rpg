@@ -1,6 +1,6 @@
 Ameiva
 ../data/models/personagens/Ameiva/modelo.cfg
-../data/pics/logan/portrait.jpg
+../data/characters/portraits/ameiva.png
 maxLifePoints               53
 baseModifier                12/25/17
 attackModifier              13/8/3/0/0/0

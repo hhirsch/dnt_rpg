@@ -1,6 +1,6 @@
 Ente
 ../data/models/personagens/Jacaranda/modelo.cfg
-../data/pics/logan/portrait.jpg
+../data/characters/portraits/ente.png
 maxLifePoints               187
 baseModifier                18/3/18
 attackModifier              12/7/2/0/0/0

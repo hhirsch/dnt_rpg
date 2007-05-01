@@ -1,6 +1,6 @@
 Logan
 ../data/models/personagens/Logan/modelo.cfg
-../data/pics/logan/portrait.jpg
+../data/characters/portraits/logan.png
 maxLifePoints               87
 baseModifier                14/11/12
 attackModifier              12/7/2/0/0/0
