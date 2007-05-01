@@ -340,9 +340,9 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
                    GL_NEAREST_MIPMAP_LINEAR );
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+   /*glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);*/
 
    glBegin(GL_QUADS);
       glNormal3f(0,1,0);
@@ -371,9 +371,9 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );*/
             glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
                             GL_NEAREST_MIPMAP_LINEAR );
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+            /*glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);*/
             glBegin(GL_QUADS);
          }
          if( (MapSquares[Xaux][Zaux]->visivel) || 
@@ -425,7 +425,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                      0.0, 0.5, 0.5, 1.0);*/
 
             glTexCoord2f(0.0,0.0);
-            //glNormal3i(0,1,0);
+            glNormal3i(0,1,0);
             glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
                         MapSquares[Xaux][Zaux]->h1 , 
                         MapSquares[Xaux][Zaux]->z1 );
