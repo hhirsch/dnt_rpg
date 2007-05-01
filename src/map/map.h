@@ -26,6 +26,8 @@ using namespace std;
 #define MEIOFIOALTURA           2 /**< Meio-fios height */
 #define ALTURAMAXIMA          100 /**< Max square height */
 
+#define SQUARE_DIVISIONS        8
+
 /*!
  ****************************************************
  *               Map's Connections                  *
@@ -194,6 +196,7 @@ class Map
        * \return height of the map on nx,nz position
        ***************************************************************/
        GLfloat getHeight(GLfloat nx, GLfloat nz);
+       GLfloat getHeight(GLfloat nx, GLfloat nz, Square* saux);
 
        /*!
         *************************************************************

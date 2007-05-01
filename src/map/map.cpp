@@ -327,6 +327,13 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 {
    int textura = -1;
    int i, Xaux = 0, Zaux = 0;
+
+   /* For each square (a square is squarizeble!) */
+   int k,l;
+   GLfloat texX, texZ;
+   GLfloat pX1, pX2, pZ1, pZ2, incPos, incTex;
+   incTex = (1.0 / SQUARE_DIVISIONS);
+   incPos = (GLfloat) SQUARESIZE / (GLfloat)SQUARE_DIVISIONS;
    
    textura = MapSquares[Xaux][Zaux]->textura;
    glEnable(GL_TEXTURE_2D);
@@ -392,58 +399,32 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
             }
             MapSquares[Xaux][Zaux]->visivel = 1;
 
-            /*
-            //TODO FIX HEIGHTS!
-            
-            drawQuad(MapSquares[Xaux][Zaux]->x1, MapSquares[Xaux][Zaux]->z1,
-                     (MapSquares[Xaux][Zaux]->x1+MapSquares[Xaux][Zaux]->x2)/2, 
-                     (MapSquares[Xaux][Zaux]->z1+MapSquares[Xaux][Zaux]->z2)/2,
-                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2, 
-                     MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
-                     0, 0, 0.5, 0.5);
-            drawQuad((MapSquares[Xaux][Zaux]->x1+MapSquares[Xaux][Zaux]->x2)/2, 
-                     MapSquares[Xaux][Zaux]->z1,
-                     MapSquares[Xaux][Zaux]->x2, 
-                     (MapSquares[Xaux][Zaux]->z1+MapSquares[Xaux][Zaux]->z2)/2,
-                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2, 
-                     MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
-                     0.5, 0.0, 1.0, 0.5);
-            drawQuad((MapSquares[Xaux][Zaux]->x1+MapSquares[Xaux][Zaux]->x2)/2, 
-                     (MapSquares[Xaux][Zaux]->z1+MapSquares[Xaux][Zaux]->z2)/2,
-                     MapSquares[Xaux][Zaux]->x2, 
-                     MapSquares[Xaux][Zaux]->z2,
-                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2, 
-                     MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
-                     0.5, 0.5, 1.0, 1.0);
+            /* Draw the Square as some squares */ 
+            for(k = 0; k < SQUARE_DIVISIONS; k++)
+            {
+               texX = k*incTex;
+               pX1 = (k*incPos) + MapSquares[Xaux][Zaux]->x1;
+               pX2 = (incPos) + pX1;
+               for(l = 0; l < SQUARE_DIVISIONS; l++)
+               {
+                  texZ = l*incTex;
+                  pZ1 = (l*incPos) + MapSquares[Xaux][Zaux]->z1;
+                  pZ2 = (incPos) + pZ1;
+                  drawQuad(pX1, pZ1, pX2, pZ2,
+                           getHeight(pX1, pZ1, MapSquares[Xaux][Zaux]),
+                           getHeight(pX1, pZ2, MapSquares[Xaux][Zaux]),
+                           getHeight(pX2, pZ2, MapSquares[Xaux][Zaux]),
+                           getHeight(pX2, pZ1, MapSquares[Xaux][Zaux]),
+                           texX, texZ, texX + incTex, texZ + incTex);
+               }
+            }
 
-            drawQuad(MapSquares[Xaux][Zaux]->x1, 
-                     (MapSquares[Xaux][Zaux]->z1+MapSquares[Xaux][Zaux]->z2)/2,
-                     (MapSquares[Xaux][Zaux]->x1+MapSquares[Xaux][Zaux]->x2)/2, 
-                     MapSquares[Xaux][Zaux]->z2,
-                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2, 
+            /* //Old Draw, as only one square
+             * drawQuad(MapSquares[Xaux][Zaux]->x1, MapSquares[Xaux][Zaux]->z1,
+                     MapSquares[Xaux][Zaux]->x2, MapSquares[Xaux][Zaux]->z2,
+                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2,
                      MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
-                     0.0, 0.5, 0.5, 1.0);*/
-
-            glTexCoord2f(0.0,0.0);
-            glNormal3i(0,1,0);
-            glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
-                        MapSquares[Xaux][Zaux]->h1 , 
-                        MapSquares[Xaux][Zaux]->z1 );
-            glTexCoord2f(0.0,1.0);
-            glNormal3i(0,1,0);
-            glVertex3f( MapSquares[Xaux][Zaux]->x1 , 
-                        MapSquares[Xaux][Zaux]->h2 , 
-                        MapSquares[Xaux][Zaux]->z2);
-            glTexCoord2f(1.0,1.0);
-            glNormal3i(0,1,0);
-            glVertex3f( MapSquares[Xaux][Zaux]->x2, 
-                        MapSquares[Xaux][Zaux]->h3 , 
-                        MapSquares[Xaux][Zaux]->z2 );
-            glTexCoord2f(1.0,0.0);
-            glNormal3i(0,1,0);
-            glVertex3f( MapSquares[Xaux][Zaux]->x2, 
-                        MapSquares[Xaux][Zaux]->h4, 
-                        MapSquares[Xaux][Zaux]->z1 );
+                     0.0, 0.0, 1.0, 1.0);*/
 
          }
          else
@@ -701,6 +682,11 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz)
 
    Square* saux = relativeSquare(posX, posZ);
 
+   return(getHeight(nx, nz, saux));
+}
+
+GLfloat Map::getHeight(GLfloat nx, GLfloat nz, Square* saux)
+{
    if(!saux)
    {
       /* No positon on map, so no height! */
