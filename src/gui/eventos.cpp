@@ -474,9 +474,35 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             //selectObject = &object;
             if(actType == TABBUTTON_PRESSED)
             {
-               foco = FOCO_JOGO;
-               *eventInfo = TABBOTAOPRESSIONADO;
-               return(object);
+               bool verified = false;
+               /* Verify List Text */
+               Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
+               int aux;
+               for(aux=0; aux<ljan->janelaAtiva->objects->total; aux++)
+               {
+                  if(obj->tipo == LISTTEXT)
+                  {
+                     listText* lt = (listText*)obj;
+                     if(lt->eventGot(BOTAOEMPRESSAO, objAtivo))
+                     {
+                        ljan->janelaAtiva->Desenhar(0,0);
+                        ljan->janelaAtiva->AtualizaCara();
+                        verified = true;
+                        *eventInfo = LISTTEXT_SELECTED;
+                        foco = FOCO_JOGO;
+                        return(lt);
+                     }
+                  }
+                  obj = obj->proximo;
+               }
+               
+               /* Is not a list text pressed, so return calling for treat the event! */
+               if(!verified)
+               {
+                  foco = FOCO_JOGO;
+                  *eventInfo = TABBOTAOPRESSIONADO;
+                  return(object);
+               }
             }
             else if(actType == TABBUTTON_ON_PRESS)
             {

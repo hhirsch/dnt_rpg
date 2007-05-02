@@ -355,11 +355,14 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
    glBegin(GL_QUADS);
      /* Draw at horizon */
-     glNormal3f(0,1,0);
-     glVertex3f(-FARVIEW,-1,-FARVIEW);
-     glVertex3f(-FARVIEW,-1,+FARVIEW);
-     glVertex3f(+FARVIEW,-1,+FARVIEW);
-     glVertex3f(+FARVIEW,-1,-FARVIEW);
+     if(outdoor)
+     {
+        glNormal3f(0,1,0);
+        glVertex3f(-FARVIEW,-1,-FARVIEW);
+        glVertex3f(-FARVIEW,-1,+FARVIEW);
+        glVertex3f(+FARVIEW,-1,+FARVIEW);
+        glVertex3f(+FARVIEW,-1,-FARVIEW);
+      }
    for(Xaux = 0; Xaux < x; Xaux++)
    {
       for(Zaux = 0; Zaux < z; Zaux++)

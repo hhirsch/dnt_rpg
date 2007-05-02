@@ -43,6 +43,10 @@ class rolBar: public Tobjeto
       /*! Redraw the bar when scrolling text */
       void redraw();
 
+      /*! Get the actual init of text displayed
+       * \return actualInit */
+      Uint32 getActualInit(){return(actualInit);};
+
    private:
       SDL_Surface* wSurface;  /**< Window Surface */
       int x1,                 /**< X1 Coordinate */

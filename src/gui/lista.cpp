@@ -76,6 +76,24 @@ void Tlista::Retirar(Tobjeto *obj)
          delete(q);
          break;
       }
+      case TABBOTAO:
+      {
+         tabButton* tb = (tabButton*) obj;
+         delete(tb);
+         break;
+      }
+      case ROLBAR:
+      {
+         rolBar* b = (rolBar*) obj;
+         delete(b);
+         break;
+      }
+      case LISTTEXT:
+      {
+         listText* lt = (listText*) obj;
+         delete(lt);
+         break;
+      }
       default: 
       {
         delete(obj);
@@ -232,6 +250,15 @@ rolBar* Tlista::insertRolBar(int xa,int ya,int xb,int yb,string txt,
 {
    rolBar* novo;
    novo = new rolBar(xa,ya,xb,yb,txt, this, surface);
+   InserirObj(novo);
+   return(novo);
+}
+
+listText* Tlista::insertListText(int xa,int ya,int xb,int yb,
+                                 SDL_Surface* surface)
+{
+   listText* novo;
+   novo = new listText(xa,ya,xb,yb, surface, this);
    InserirObj(novo);
    return(novo);
 }

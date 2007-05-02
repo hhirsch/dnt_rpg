@@ -33,6 +33,7 @@
 #define BOTAOEMPRESSAO      13
 #define MENUMODIFICADO      14
 #define SELTEXTOSELECIONADA 15
+#define LISTTEXT_SELECTED   16
 
 /* Constantes de Foco */
 #define FOCO_JANELA       1

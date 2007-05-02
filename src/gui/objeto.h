@@ -15,6 +15,7 @@
 #define MENUITEM      7
 #define TABBOTAO      8
 #define ROLBAR        9
+#define LISTTEXT     10
 
 #define MAPOBJETO    98
 #define PERSONAGEM   99

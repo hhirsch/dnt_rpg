@@ -18,6 +18,7 @@ using namespace std;
 #include "seltexto.h"
 #include "tabbotao.h"
 #include "rolbar.h"
+#include "listtext.h"
 
 class Tlista{
    public:
@@ -81,6 +82,9 @@ class Tlista{
 
       rolBar* insertRolBar(int xa,int ya,int xb,int yb,string txt,
                            SDL_Surface* surface);
+
+      listText* insertListText(int xa,int ya,int xb,int yb,
+                               SDL_Surface* surface);
 
       Tobjeto* addMenu();
       Tobjeto* getMenu();
