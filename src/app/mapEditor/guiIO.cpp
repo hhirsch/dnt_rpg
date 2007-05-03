@@ -356,6 +356,12 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
    gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTACAMERA );
 
    object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
+
+   if(ltWindow->eventGot(eventInfo, object))
+   {
+      //return();
+   }
+
    switch(eventInfo)
    {
       case TABBOTAOEMPRESSAO:
@@ -384,10 +390,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          else if (object == (Tobjeto*) leftButton)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() -
-                             4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
-                                       gameCamera.getCenterY(),
-                                       gameCamera.getCenterZ() - 
-                             4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                            4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                      gameCamera.getCenterY(),
+                                      gameCamera.getCenterZ() - 
+                            4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }

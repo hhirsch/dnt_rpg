@@ -45,7 +45,7 @@ class rolBar: public Tobjeto
 
       /*! Get the actual init of text displayed
        * \return actualInit */
-      Uint32 getActualInit(){return(actualInit);};
+      int getActualInit(){return(actualInit);};
 
    private:
       SDL_Surface* wSurface;  /**< Window Surface */
@@ -61,12 +61,12 @@ class rolBar: public Tobjeto
       quadroTexto* position;  /**< Contorn Text Position */
 
       string fullText;        /**< Full Text of the rolBar */
-      Uint32 actualInit,      /**< Actual Initial Line of the Text */
+      int    actualInit,      /**< Actual Initial Line of the Text */
              actualEnd;       /**< Actual End Line of The Text */
-      Uint32 lastActualized,  /**< Last Time when actualized */
-             maxLines;        /**< Max Number of Text Lines */
+      Uint32 lastActualized;  /**< Last Time when actualized */
+      int maxLines;           /**< Max Number of Text Lines */
       int charPerLine;        /**< Number of Characters per Line of Text */
-      Uint32 totalLines;      /**< Total Full Text Lines */
+      int totalLines;         /**< Total Full Text Lines */
       void* intList;          /**< Internal GUI Objects List */
 };
 

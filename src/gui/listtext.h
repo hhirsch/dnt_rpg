@@ -49,7 +49,7 @@ class listText: public Tobjeto
       /*! Verify if some event is related to the listText
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
-       * \return -> true if event is related (and threated) by the rolBar */
+       * \return -> true if event is related (and treated) by the listText */
       bool eventGot(int type, Tobjeto* object);
 
       /*! Get the selected text

@@ -167,10 +167,10 @@ bool listText::eventGot(int type, Tobjeto* object)
    {
       for(i = 0; i<maxButtons; i++)
       {
-         if((Tobjeto*)listButtons[i] == object)
+         if(object == (Tobjeto*)listButtons[i])
          {
             int pos = roll->getActualInit() + i;
-            if(pos <= totalElements)
+            if(pos < totalElements)
             {
                int k;
                textElement* tel = first;

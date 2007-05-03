@@ -483,7 +483,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   if(obj->tipo == LISTTEXT)
                   {
                      listText* lt = (listText*)obj;
-                     if(lt->eventGot(BOTAOEMPRESSAO, objAtivo))
+                     if(lt->eventGot(TABBOTAOPRESSIONADO, object))
                      {
                         ljan->janelaAtiva->Desenhar(0,0);
                         ljan->janelaAtiva->AtualizaCara();
@@ -496,7 +496,8 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   obj = obj->proximo;
                }
                
-               /* Is not a list text pressed, so return calling for treat the event! */
+               /* Is not a list text pressed, so return calling for treat 
+                * the event! */
                if(!verified)
                {
                   foco = FOCO_JOGO;

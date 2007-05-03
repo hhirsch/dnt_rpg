@@ -36,6 +36,12 @@ class listWindow
        * \param st -> state value */
       void setState(int st);
 
+      /*! Verify if some event is related to the window
+       * \param type -> Type of the occurred event
+       * \param object -> object of the event 
+       * \return -> true if event is related (and treated) by the window */
+      bool eventGot(int type, Tobjeto* object);
+
    private:
       /*! Open the window */
       void open();

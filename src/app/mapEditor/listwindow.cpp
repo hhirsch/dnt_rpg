@@ -144,3 +144,19 @@ void listWindow::loadFromFile(string fileName)
    fclose(arq);
 }
 
+/********************************************************************
+ *                             eventGot                             *
+ ********************************************************************/
+bool listWindow::eventGot(int type, Tobjeto* object)
+{
+   if(type == LISTTEXT_SELECTED)
+   {
+      if(object == list)
+      {
+         printf("Selected: %s\n", list->getSelectedText().c_str());
+         return(true);
+      }
+   }
+   return(false);
+}
+
