@@ -70,10 +70,12 @@ class janela: public Tobjeto
       /* Atualiza textura da janela */
       void AtualizaCara();
 
-   private:
       void BarraInativa();
       void BarraAtiva();
 
+
+   private:
+      
 };                     /* Janela */
 
 

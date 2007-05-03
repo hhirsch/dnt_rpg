@@ -111,6 +111,8 @@ void listWindow::setState(int st)
          loadFromFile(fileName);
       }
       intWindow->Desenhar(0,0);
+      intWindow->BarraInativa();
+      intWindow->AtualizaCara();
    }
 }
 

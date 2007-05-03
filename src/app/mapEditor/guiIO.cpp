@@ -373,6 +373,29 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
                state = GUI_IO_STATE_PARTICLES;
                tool = TOOL_PARTICLE_WATERFALL;
             break;
+
+            /* Doors */
+            case STATE_DOORS:
+               state = GUI_IO_STATE_PORTAL;
+               tool = TOOL_PORTAL_DOOR;
+            break;
+
+            /* Objects */
+            case STATE_BUILDING:
+            case STATE_CARS:
+            case STATE_COMMON:
+            case STATE_GUNS:
+            case STATE_ICEX:
+            case STATE_NATURE:
+               state = GUI_IO_STATE_OBJECTS;
+               tool = TOOL_OBSTACLE_ADD;
+            break;
+
+            /* Characters */
+            case STATE_CHARACTERS:
+               //TODO FIXME implement it!
+               state = GUI_IO_STATE_INITIAL;
+            break;
          }
          return(GUI_IO_NEW_STATE);
       }
@@ -497,9 +520,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          }
          else if(object == (Tobjeto*) portalDoorButton)
          {
-            state = GUI_IO_STATE_PORTAL;
-            tool = TOOL_PORTAL_DOOR;
-            return(GUI_IO_NEW_STATE);
+            ltWindow->setState(STATE_DOORS);
          }
 
          /* Wall Buttons */
@@ -674,6 +695,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
                openObjectWindow();
             }
             return(GUI_IO_OTHER);
+         }
+         else if(object == (Tobjeto*) npcButton)
+         {
+            ltWindow->setState(STATE_CHARACTERS);
          }
          /* Texture Window */
          else if(object == (Tobjeto*) textureNextButton)

@@ -30,12 +30,15 @@ class objects
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary();
 
-      void defineActualObject(mapObject* obj){actualObstacle = obj;};
+      void defineActualObject(mapObject* obj, string fileName);
+
+      string getObjectFileName();
 
     private:
       modelList* models;          /**< Used Model List */
       Map* actualMap;             /**< Actual Internal Map */
       mapObject* actualObstacle;  /**< Actual Obstacle */
+      string objectFile;          /**< Actual Obstacle Filename */
       int actualTool;             /**< Actual Tool */
       int state;                  /**< Actual Internal State */
 

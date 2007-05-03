@@ -35,14 +35,17 @@ class portal
       bool inner(GLfloat ax, GLfloat az, GLfloat bx1, GLfloat bz1, 
                                         GLfloat bx2, GLfloat bz2);
 
-      void defineDoor(mapObject* newDoor);
+      void defineDoor(mapObject* newDoor, string fileName);
 
       mapObject* getDoor();
+
+      string getDoorFileName();
 
 
    private:
       Map* actualMap;         /**< Actual Internal Map */
       mapObject* actualDoor;  /**< Actual Door */
+      string fileDoor;        /**< Actual Door File */
       int doorMode;           /**< Actual Door Mode */
       int doorOrientation;    /**< Actual Door Orientation */
       GLfloat doorX;          /**< Actual Door X position */

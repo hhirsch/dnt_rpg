@@ -11,7 +11,8 @@ objects::objects(Map* map, modelList* usedModels)
    actualMap = map;
    state = OBJECTS_STATE_NONE;
    models = usedModels;
-   actualObstacle = (mapObject*) models->getFirst();
+   actualObstacle = NULL;
+   objectFile = "";
 }
 
 /******************************************************
@@ -61,6 +62,9 @@ void objects::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       }
       else if((mButton & SDL_BUTTON(3)) && (actualObstacle != NULL))
       {
+         obstacleOrientation -= 1;
+
+#if 0      
          actualObstacle = (mapObject*)actualObstacle->next;
          /* Verify Head Node */
          if(actualObstacle == (mapObject*)models->getFirst())
@@ -75,6 +79,7 @@ void objects::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             int x,y;
             mButton = SDL_GetMouseState(&x,&y);
          }
+#endif         
       }
    }
    else
@@ -102,5 +107,25 @@ void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                           Map* map, mapObject* obj, int qx, int qz)
 {
    map->insertObject(xReal, zReal, orObj, obj, qx, qz); 
+}
+
+/******************************************************************
+ *                       defineActualObject                       *
+ ******************************************************************/
+void objects::defineActualObject(mapObject* obj, string fileName)
+{
+   if(obj)
+   {
+      actualObstacle = obj;
+      objectFile = fileName;
+   }
+}
+
+/******************************************************************
+ *                       getObjectFileName                        *
+ ******************************************************************/
+string objects::getObjectFileName()
+{
+   return(objectFile);
 }
 

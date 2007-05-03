@@ -722,19 +722,13 @@ void editor::doEditorIO()
    }
    else if( (gui->getState() == GUI_IO_STATE_PORTAL) && (mapOpened))
    {
-      if(portalEditor->getDoor() == NULL)
+      string doorFile = gui->getSelectedText();
+      if( (portalEditor->getDoor() == NULL) || 
+          ( (!doorFile.empty()) && (doorFile != portalEditor->getDoorFileName())
+          ) )
       {
-         //FIXME take a door object!
-         /*mapObjeto* porta = (mapObjeto*) map->Objetos->primeiro->proximo;
-         while( (porta != map->Objetos->primeiro) && 
-                (strcmp(porta->nome,"Door") != 0) ) 
-         {
-            porta = (mapObjeto*) porta->proximo;
-         }
-         if( (porta != map->Objetos->primeiro) )
-         {
-            portalEditor->defineDoor(porta);
-         }*/
+         mapObject* obj = map->insertMapObject(doorFile, *models);
+         portalEditor->defineDoor(obj, gui->getSelectedText());
       }
       portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
                                  proj, modl, viewPort);
@@ -746,6 +740,12 @@ void editor::doEditorIO()
    }
    else if( (gui->getState() == GUI_IO_STATE_OBJECTS) && (mapOpened))
    {
+      string objFile = gui->getSelectedText();
+      if( (!objFile.empty()) && (objFile != objectEditor->getObjectFileName()))
+      {
+         mapObject* obj = map->insertMapObject(objFile, *models);
+         objectEditor->defineActualObject(obj, objFile);
+      }
       objectEditor->verifyAction(xReal, yReal, zReal, mButton, mouseX, mouseY,
                                  gui->getTool(), proj, modl, viewPort);
    }
@@ -801,27 +801,6 @@ void editor::verifyIO()
       if(mapOpened)
       {
         insertTexture();
-      }
-   }
-   else if(guiEvent == GUI_IO_OBJECT_INSERT)
-   {
-      if(mapOpened)
-      {
-         mapObject* obj=map->insertMapObject(gui->getObjectFileName().c_str(),
-                                             *models);
-         if(obj != NULL)
-         {
-            gui->showMessage(gui->getObjectFileName()+" Inserted.");
-            objectEditor->defineActualObject(obj);
-         }
-         else
-         {
-            gui->showMessage(gui->getObjectFileName()+" Failed to Insert!.");
-         }
-      }
-      else
-      {
-         gui->showMessage("Can't Insert while Map Not Opened!");
       }
    }
    else if(guiEvent == GUI_IO_NOTHING)

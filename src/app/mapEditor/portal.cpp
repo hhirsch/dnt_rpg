@@ -12,6 +12,7 @@ portal::portal(Map* map)
 {
    actualMap = map;
    state = PORTAL_STATE_OTHER;
+   fileDoor = "";
    portalList = new(areaList);
    /* Start the portal List */
    Square* s;
@@ -55,9 +56,13 @@ bool portal::inner(GLfloat ax, GLfloat az, GLfloat bx1, GLfloat bz1,
 /******************************************************
  *                     defineDoor                     *
  ******************************************************/
-void portal::defineDoor(mapObject* newDoor)
+void portal::defineDoor(mapObject* newDoor, string fileName)
 {
-   actualDoor = newDoor;
+   if(newDoor != NULL)
+   {
+      actualDoor = newDoor;
+      fileDoor = fileName;
+   }
 }
 
 /******************************************************
@@ -66,6 +71,14 @@ void portal::defineDoor(mapObject* newDoor)
 mapObject* portal::getDoor()
 {
    return(actualDoor);
+}
+
+/******************************************************
+ *                       getDoor                      *
+ ******************************************************/
+string portal::getDoorFileName()
+{
+   return(fileDoor);
 }
 
 
@@ -92,7 +105,6 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
    }
    else if( (tool == TOOL_PORTAL_DOOR) && (actualDoor))
    {
-      printf("%p\n",actualDoor);
       //Pega Muro Mais Proximo
       muro* m = actualMap->muros;
       doorWall = m;
