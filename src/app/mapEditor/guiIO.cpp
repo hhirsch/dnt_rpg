@@ -359,6 +359,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 
    if(ltWindow->eventGot(eventInfo, object))
    {
+      //TODO
       //return();
    }
 

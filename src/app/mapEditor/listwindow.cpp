@@ -111,7 +111,7 @@ void listWindow::setState(int st)
  ********************************************************************/
 void listWindow::open()
 {
-   intWindow = intGui->insertWindow(50,50,300,250,"Select",1,1);
+   intWindow = intGui->insertWindow(113,599-247,363,599-37,"Select",1,1);
    list = intWindow->objects->insertListText(5,15,245,190,intWindow->cara);
    intWindow->ptrExterno = &intWindow;
    intGui->openWindow(intWindow);
