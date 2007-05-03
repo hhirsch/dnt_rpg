@@ -753,7 +753,7 @@ void editor::doEditorIO()
    {
       particleEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
                                    gui->getTool(), particleSystem, proj, 
-                                   modl, viewPort);
+                                   modl, viewPort, gui->getSelectedText());
    }
 
 }

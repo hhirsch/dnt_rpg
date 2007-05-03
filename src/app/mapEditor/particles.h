@@ -23,7 +23,8 @@ class particles
        * \param tool -> current Tool*/
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                         Uint8 mButton, Uint8* keys, int tool, partSystem* pS,
-                        GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
+                        GLdouble proj[16],GLdouble modl[16],GLint viewPort[4],
+                        string selectedText);
 
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary(GLfloat matriz[6][4]);
@@ -36,6 +37,8 @@ class particles
       int state;                       /**< actual State */
       int particleType;                /**< actual Particle Type */
       GLfloat height;                  /**< actual Particle Height */
+
+      string previousText;             /**< Previous selectedText */
 
       GLfloat x1,z1,x2,z2;
 

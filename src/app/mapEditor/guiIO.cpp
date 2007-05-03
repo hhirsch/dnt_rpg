@@ -11,9 +11,11 @@ guiIO::guiIO()
    state = GUI_IO_STATE_INITIAL;
    tool = TOOL_NONE;
 
+   selectedText = "";
+
    /* Open Windows */
    ltWindow = new listWindow(gui);
-   ltWindow->setState(STATE_COMMON);
+   ltWindow->setState(0);
    openFileWindow();
    openNavWindow();
    openMainWindow();
@@ -24,18 +26,6 @@ guiIO::guiIO()
    openTextureWindow();
    openMessageWindow();
    openObjectWindow();
-   
-   /* Camera Things 
-   theta=25;
-   phi=0;
-   d=150;
-   centerX = centerZ = 0;
-   centerY = 30;
-   deltaY = 0;
-   cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-   cameraY = centerY + (float) d * sin(deg2Rad(theta));
-   cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));*/
-
 }
 
 /****************************************************************
@@ -114,17 +104,15 @@ void guiIO::openTextureWindow()
 void guiIO::openObjectWindow()
 {
    objectWindow = gui->insertWindow(0,245,184,599-248,"Objects",1,1);
-   objectInsertButton = objectWindow->objects->InserirBotao(20,35,153,53,
-                                                  textureWindow->Cores.corBot.R,
-                                                  textureWindow->Cores.corBot.G,
-                                                  textureWindow->Cores.corBot.B,
-                                                  "Insert",1,NULL);
-   objectText = objectWindow->objects->InserirBarraTexto(10,17,173,33,
-                                                     "../data/models/",0,NULL);
-
-   objectTabButton = objectWindow->objects->InserirTabButton(7,55,0,0,
+   objectTabButton = objectWindow->objects->InserirTabButton(7,17,0,0,
                                                "../data/mapEditor/objects.png");
-   objectAddButton = objectTabButton->insertButton(0,0,19,19);
+   objectCommonButton = objectTabButton->insertButton(0,0,24,19);
+   objectGunsButton = objectTabButton->insertButton(25,0,44,19);
+   objectBuildButton = objectTabButton->insertButton(49,0,71,19);
+   objectCarsButton = objectTabButton->insertButton(74,0,96,19);
+   objectIcexButton = objectTabButton->insertButton(99,0,120,19);
+   objectNaturalButton = objectTabButton->insertButton(125,0,145,19);
+   objectCharButton = objectTabButton->insertButton(147,0,170,19);
    objectWindow->ptrExterno = &objectWindow;
    gui->openWindow(objectWindow);
 }
@@ -351,7 +339,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 {
    int eventInfo;
    Tobjeto* object;
-   
+
    /* Camera Verification */
    gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTACAMERA );
 
@@ -359,8 +347,35 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 
    if(ltWindow->eventGot(eventInfo, object))
    {
-      //TODO
-      //return();
+      selectedText = ltWindow->getFileName();
+      if(!selectedText.empty())
+      {
+         switch(ltWindow->getState())
+         {
+            /* Particles */
+            case STATE_FIRE:
+               state = GUI_IO_STATE_PARTICLES;
+               tool = TOOL_PARTICLE_FIRE;
+            break;
+            case STATE_GRASS:
+               state = GUI_IO_STATE_PARTICLES;
+               tool = TOOL_PARTICLE_GRASS;
+            break;
+            case STATE_SMOKE:
+               state = GUI_IO_STATE_PARTICLES;
+               tool = TOOL_PARTICLE_SMOKE;
+            break;
+            case STATE_SNOW:
+               state = GUI_IO_STATE_PARTICLES;
+               tool = TOOL_PARTICLE_SNOW;
+            break;
+            case STATE_WATERFALL:
+               state = GUI_IO_STATE_PARTICLES;
+               tool = TOOL_PARTICLE_WATERFALL;
+            break;
+         }
+         return(GUI_IO_NEW_STATE);
+      }
    }
 
    switch(eventInfo)
@@ -401,11 +416,11 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          else if (object == (Tobjeto*) rightButton)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() +
-                             4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
-                                       gameCamera.getCenterY(),
-                                       gameCamera.getCenterZ() +
-                             4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
-                                       0.0);
+                           4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                     gameCamera.getCenterY(),
+                                     gameCamera.getCenterZ() +
+                           4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                     0.0);
             return(GUI_IO_NEW_POSITION);
          }
          else if (object == (Tobjeto*) rotUpButton)
@@ -543,41 +558,60 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             return(GUI_IO_NEW_STATE);
          }
          /* Objects Buttons */
-         else if(object == (Tobjeto*) objectAddButton)
+         else if(object == (Tobjeto*) objectCommonButton)
          {
-            state = GUI_IO_STATE_OBJECTS;
-            tool = TOOL_OBSTACLE_ADD;
+            ltWindow->setState(STATE_COMMON);
+         }
+         else if(object == (Tobjeto*) objectGunsButton)
+         {
+            ltWindow->setState(STATE_GUNS);
+         }
+         else if(object == (Tobjeto*) objectBuildButton)
+         {
+            ltWindow->setState(STATE_BUILDING);
+         }
+         else if(object == (Tobjeto*) objectCarsButton)
+         {
+            ltWindow->setState(STATE_CARS);
+         }
+         else if(object == (Tobjeto*) objectIcexButton)
+         {
+            ltWindow->setState(STATE_ICEX);
+         }
+         else if(object == (Tobjeto*) objectNaturalButton)
+         {
+            ltWindow->setState(STATE_NATURE);
+         }
+         else if(object == (Tobjeto*) objectCharButton)
+         {
+            ltWindow->setState(STATE_CHARACTERS);
          }
          /* Particles Buttons */
          else if(object == (Tobjeto*) fireButton)
          {
-            state = GUI_IO_STATE_PARTICLES;
-            tool = TOOL_PARTICLE_FIRE;
+            ltWindow->setState(STATE_FIRE);
          }
          else if(object == (Tobjeto*) smokeButton)
          {
-            state = GUI_IO_STATE_PARTICLES;
-            tool = TOOL_PARTICLE_SMOKE;
+            ltWindow->setState(STATE_SMOKE);
          }
          else if(object == (Tobjeto*) snowButton)
          {
-            state = GUI_IO_STATE_PARTICLES;
-            tool = TOOL_PARTICLE_SNOW;
+            ltWindow->setState(STATE_SNOW);
          }
          else if(object == (Tobjeto*) waterfallButton)
          {
-            state = GUI_IO_STATE_PARTICLES;
-            tool = TOOL_PARTICLE_WATERFALL;
+            ltWindow->setState(STATE_WATERFALL);
          }
          else if(object == (Tobjeto*) waterSurfaceButton)
          {
+            //TODO
             state = GUI_IO_STATE_PARTICLES;
             tool = TOOL_PARTICLE_WATER_SURFACE;
          }
          else if(object == (Tobjeto*) grassButton)
          {
-            state = GUI_IO_STATE_PARTICLES;
-            tool = TOOL_PARTICLE_GRASS;
+            ltWindow->setState(STATE_GRASS);
          }
          break;
       }
@@ -654,11 +688,6 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             return(GUI_IO_TEXTURE_INSERT);
          }
-         else if(object == (Tobjeto*) objectInsertButton)
-         {
-            return(GUI_IO_OBJECT_INSERT);
-         }
-
 
          break;
       }
@@ -686,6 +715,15 @@ void guiIO::cameraPos()
 }
 
 /****************************************************************
+ *                      getSelectedText                         *
+ ****************************************************************/
+string guiIO::getSelectedText()
+{
+   return(selectedText);
+}
+
+
+/****************************************************************
  *                        getFileName                           *
  ****************************************************************/
 string guiIO::getFileName()
@@ -706,7 +744,8 @@ string guiIO::getTextureFileName()
  ****************************************************************/
 string guiIO::getObjectFileName()
 {
-   return(objectText->texto);
+   //FIXME
+   return(""/*objectText->texto*/);
 }
 
 /****************************************************************

@@ -40,6 +40,13 @@ listWindow::~listWindow()
       intGui->closeWindow(intWindow);
    }
 }
+/********************************************************************
+ *                              getState                            *
+ ********************************************************************/
+int listWindow::getState()
+{
+   return(state);
+}
 
 /********************************************************************
  *                              setState                            *
@@ -103,6 +110,7 @@ void listWindow::setState(int st)
       {
          loadFromFile(fileName);
       }
+      intWindow->Desenhar(0,0);
    }
 }
 
@@ -158,6 +166,14 @@ void listWindow::loadFromFile(string fileName)
       listElements[i].fileName = buf3;
    }
    fclose(arq);
+}
+
+/********************************************************************
+ *                           getFileName                            *
+ ********************************************************************/
+string listWindow::getFileName()
+{
+   return(selFileName);
 }
 
 /********************************************************************

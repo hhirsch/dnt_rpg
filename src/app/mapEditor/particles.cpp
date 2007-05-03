@@ -13,7 +13,7 @@ particles::particles(Map* map)
    actualParticle = NULL;
    state = -1;
    particleType = -1;
-   string particleFileName = "";
+   previousText = "";
 }
 
 /*****************************************************************
@@ -56,16 +56,19 @@ void particles::deleteParticle()
 void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                              Uint8 mButton, Uint8* keys, int tool, 
                              partSystem* pS, GLdouble proj[16],
-                             GLdouble modl[16], GLint viewPort[4])
+                             GLdouble modl[16], GLint viewPort[4],
+                             string selectedText)
 {
    int i;
 
 
-   if( (tool != state) && (state != STATE_PLANES) && 
-       (state != TOOL_PARTICLE_GRASS))
+   if( ( (tool != state) || (selectedText != previousText) ) && 
+       (state != STATE_PLANES) && (state != TOOL_PARTICLE_GRASS))
    {
       deleteParticle(); 
    }
+
+   previousText = selectedText;
 
    GLfloat posX = mouseX;
    GLfloat posZ = mouseZ;
@@ -108,8 +111,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             }
             //TODO Prompt for povoation!
             int total = (int)floor((z2-z1)*(x2-x1) / 20.0);
-            pS->addParticle(PART_GRASS, x1, z1, x2, z2, total,
-                            "../data/models/natural/matos/grass.png"); 
+            pS->addParticle(PART_GRASS, x1, z1, x2, z2, total,selectedText); 
             state = TOOL_PARTICLE_GRASS;
          }
          x2 = mouseX;
@@ -127,9 +129,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       state = TOOL_PARTICLE_FIRE; 
       particleType = PART_FIRE;
       part2* tmpPart = NULL;
-      string fileToOpen = getStringFromUser("FileName Input",
-                                            "../data/particles/",
-                                            proj, modl, viewPort);
+      string fileToOpen = selectedText;
       if(fileToOpen != "../data/particles/")
       {
          height = 0;
@@ -152,9 +152,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       state = TOOL_PARTICLE_SMOKE; 
       particleType = PART_SMOKE;
       part4* tmpPart = NULL;
-      string fileToOpen = getStringFromUser("FileName Input",
-                                            "../data/particles/",
-                                            proj, modl, viewPort);
+      string fileToOpen = selectedText;
       if(fileToOpen != "../data/particles/")
       {
          height = 0;
@@ -177,9 +175,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       particleType = PART_WATERFALL;
       state = TOOL_PARTICLE_WATERFALL; 
       part1* tmpPart = NULL;
-      string fileToOpen = getStringFromUser("FileName Input",
-                                            "../data/particles/",
-                                            proj, modl, viewPort);
+      string fileToOpen = selectedText;
       if(fileToOpen != "../data/particles/")
       {
          height = 0;

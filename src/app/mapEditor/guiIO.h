@@ -60,6 +60,9 @@ class guiIO
       /*! Gets the FileName */
       string getFileName();
 
+      /*! Gets the Selected Text */
+      string getSelectedText();
+
       /*! Gets the Texture File Name */
       string getTextureFileName();
 
@@ -75,8 +78,9 @@ class guiIO
 
       listWindow* ltWindow;            /**< The List Window */
 
-      int state;      /**< Internal State */
-      int tool;       /**< Selected Tool */
+      int state;           /**< Internal State */
+      int tool;            /**< Selected Tool */
+      string selectedText; /**< Last selected text with list window */
 
       interface* gui; /**< Internal GUI */
 
@@ -160,10 +164,14 @@ class guiIO
       void openPortalWindow();
       /*********************Object*Window*******************************/
       janela* objectWindow;               /**< Object Window */
-      barraTexto* objectText;             /**< Object Text Bar */
-      botao* objectInsertButton;          /**< Object Insert Button */
       tabButton* objectTabButton;         /**< Object TabButton */
-      oneTabButton* objectAddButton;      /**< Object Add Button */
+      oneTabButton* objectCommonButton;   /**< Object Common Button */
+      oneTabButton* objectGunsButton;     /**< Object Guns Button */
+      oneTabButton* objectBuildButton;    /**< Object Building Button */
+      oneTabButton* objectCarsButton;     /**< Object Cars Button */
+      oneTabButton* objectIcexButton;     /**< Object Icex Button */
+      oneTabButton* objectNaturalButton;  /**< Object Natural Button */
+      oneTabButton* objectCharButton;     /**< Object Character Button */
       void openObjectWindow();      
       /*********************Particle*Window*******************************/
       janela* particleWindow;             /**< Particle Window */

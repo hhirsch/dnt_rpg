@@ -44,6 +44,15 @@ class listWindow
        * \param st -> state value */
       void setState(int st);
 
+      /*! Get State
+       * \return -> state value */
+      int getState();
+
+      /*! Get the current selected fileName
+       * \return file name */
+      string getFileName();
+
+
       /*! Verify if some event is related to the window
        * \param type -> Type of the occurred event
        * \param object -> object of the event 

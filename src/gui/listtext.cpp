@@ -110,10 +110,10 @@ void listText::insertText(string text)
    }
    else
    {
-      tel->next = first->next;
-      tel->previous = first;
-      first->next = tel;
-      tel->next->previous = tel;
+      tel->next = first;
+      tel->previous = first->previous;
+      first->previous = tel;
+      tel->previous->next = tel;
    }
    roll->addText(text+"|");
    totalElements++;
