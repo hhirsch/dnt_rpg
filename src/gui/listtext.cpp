@@ -67,6 +67,7 @@ listText::~listText()
       tel = tel->next;
       delete(aux);
    }
+   totalElements = 0;
 
    /* Remove GUI elements */
    /*Tlista* l = (Tlista*)intList;
@@ -80,8 +81,9 @@ void listText::clear()
 {
    int i;
    textElement* tel = first;
-   textElement* aux;
+   textElement* aux = NULL;
 
+   
    /* Delete All elements */
    for(i=0; i<totalElements; i++)
    {

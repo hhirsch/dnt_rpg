@@ -27,6 +27,8 @@ listWindow::listWindow(interface* gui)
 {
    intGui = gui;
    state = -1;
+   list = NULL;
+   intWindow = NULL;
    listElements = NULL;
 }
 
