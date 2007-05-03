@@ -22,6 +22,14 @@
 #define STATE_SNOW        33
 #define STATE_WATERFALL   34
 
+/*! Element on the list */
+class listElement
+{
+   public:
+      string title;            /**< The Title of the element */
+      string fileName;         /**< The name of the file of the element */
+};
+
 /*! The list Window, for selecting objects */
 class listWindow
 {
@@ -46,13 +54,22 @@ class listWindow
       /*! Open the window */
       void open();
 
-      /*! Load list from file */
+      /*! Load list from a file
+       * \param filename -> full filename of the list to load */
       void loadFromFile(string fileName);
 
-      int state;              /**< Internal State */
-      janela* intWindow;      /**< Pointer to the window */
-      interface* intGui;      /**< Pointer to the interface */
-      listText* list;         /**< Pointer to the listText */
+      /*! Get the filename with title title
+       * \param title -> title of the filename 
+       * \return -> the fielename */
+      string getFileNameWithTitle(string title);
+
+      int state;                 /**< Internal State */
+      janela* intWindow;         /**< Pointer to the window */
+      interface* intGui;         /**< Pointer to the interface */
+      listText* list;            /**< Pointer to the listText */
+      listElement* listElements; /**< Elements on the list */
+      int total;                 /**< Total elements on list */
+      string selFileName;        /**< Last Selected fileName */
 
 };
 

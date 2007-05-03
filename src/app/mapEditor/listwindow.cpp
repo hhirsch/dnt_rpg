@@ -27,6 +27,7 @@ listWindow::listWindow(interface* gui)
 {
    intGui = gui;
    state = -1;
+   listElements = NULL;
 }
 
 /********************************************************************
@@ -124,8 +125,16 @@ void listWindow::loadFromFile(string fileName)
    FILE* arq;
    char buffer[1024];
    char buf2[1024];
-   int total = 0;
+   char buf3[1024];
+   total = 0;
    int i;
+
+   if(listElements != NULL)
+   {
+      delete [] listElements;
+      listElements = NULL;
+   }
+
    if(!(arq=fopen(fileName.c_str(), "r")))
    {
       printf("Can't open List file: %s\n", fileName.c_str());
@@ -135,13 +144,36 @@ void listWindow::loadFromFile(string fileName)
    fgets(buffer, sizeof(buffer), arq);
    sscanf(buffer, "%d", &total);
 
+   if(total > 0)
+   {
+      listElements = new listElement[total];
+   }
+
    for(i = 0; i < total; i++)
    {
       fgets(buffer, sizeof(buffer), arq);
-      sscanf(buffer, "%s", buf2);
+      sscanf(buffer, "%s %s", buf2, buf3);
       list->insertText(buf2);
+      listElements[i].title = buf2;
+      listElements[i].fileName = buf3;
    }
    fclose(arq);
+}
+
+/********************************************************************
+ *                       getFileNameWithTitle                       *
+ ********************************************************************/
+string listWindow::getFileNameWithTitle(string title)
+{
+   int i;
+   for(i = 0; i < total; i++)
+   {
+      if(listElements[i].title == title)
+      {
+         return(listElements[i].fileName);
+      }
+   }
+   return("");
 }
 
 /********************************************************************
@@ -149,12 +181,13 @@ void listWindow::loadFromFile(string fileName)
  ********************************************************************/
 bool listWindow::eventGot(int type, Tobjeto* object)
 {
+   selFileName = "";
    if(type == LISTTEXT_SELECTED)
    {
       if(object == list)
       {
-         printf("Selected: %s\n", list->getSelectedText().c_str());
-         return(true);
+         selFileName = getFileNameWithTitle(list->getSelectedText());
+         return(!selFileName.empty());
       }
    }
    return(false);
