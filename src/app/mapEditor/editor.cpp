@@ -210,6 +210,10 @@ void editor::saveMap()
    string tmp;
    if(mapOpened)
    {
+      /* Remove the models that aren't used */
+      models->removeUnusedModels();
+
+      /* Save the particles File */
       if(particleSystem->numParticles() > 0)
       {
          map->setParticlesFileName(gui->getFileName()+".par");
@@ -219,6 +223,8 @@ void editor::saveMap()
       {
          map->setParticlesFileName("");
       }
+
+      /* Save the Map File */
       map->save(gui->getFileName());
       tmp = "Map Saved as:";
       tmp += gui->getFileName();

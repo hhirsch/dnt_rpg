@@ -2261,7 +2261,7 @@ void engine::Draw()
                                                            WALK_PER_MOVE_ACTION,
                                    activeCharacter->posicaoLadoZ + 
                                                            WALK_PER_MOVE_ACTION,
-                                   0.05);
+                                   0.05, 20);
    }
 
    /* Draw Combat Mode Things */
@@ -2275,14 +2275,14 @@ void engine::Draw()
                                       moveCircleZ-2*WALK_PER_MOVE_ACTION,
                                       moveCircleX+2*WALK_PER_MOVE_ACTION, 
                                       moveCircleZ+2*WALK_PER_MOVE_ACTION,
-                                      0.1);
+                                      0.1,12);
           /* Normal Circle */
           actualMap->drawSurfaceOnMap(normalMoveCircle,
                                       moveCircleX-WALK_PER_MOVE_ACTION,
                                       moveCircleZ-WALK_PER_MOVE_ACTION,
                                       moveCircleX+WALK_PER_MOVE_ACTION, 
                                       moveCircleZ+WALK_PER_MOVE_ACTION,
-                                      0.2);
+                                      0.2,20);
    }
 
    if(walkStatus == ENGINE_WALK_MOUSE)
@@ -2303,7 +2303,7 @@ void engine::Draw()
                                    destZ - (4 + destinyVariation),
                                    destX + (4 + destinyVariation),
                                    destZ + (4 + destinyVariation),
-                                   0.25);
+                                   0.25,4);
    }
 
    if(!actualMap->fog.enabled)

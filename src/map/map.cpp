@@ -716,29 +716,64 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz, Square* saux)
  *                        drawSurfaceOnMap                          *
  ********************************************************************/
 void Map::drawSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za, 
-                           GLfloat xb, GLfloat zb, GLfloat sumY)
+                           GLfloat xb, GLfloat zb, GLfloat sumY,
+                           int divisions)
 {
-    glColor4f(1,1,1,1);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-    glPushMatrix();
-      glDisable(GL_LIGHTING);
-      glEnable(GL_TEXTURE_2D);
-      glBindTexture(GL_TEXTURE_2D, image );
-      glBegin(GL_QUADS);
-         glTexCoord2f(0,0);
+   GLfloat incTex, incPosX, incPosZ;
+   GLfloat texX, texZ;
+   GLfloat pX1, pX2, pZ1, pZ2;
+   int k, l;
+
+   incTex = (1.0 / divisions);
+   incPosX = (GLfloat) (xb - xa) / (GLfloat) divisions;
+   incPosZ = (GLfloat) (zb - za) / (GLfloat) divisions;
+
+   glColor4f(1,1,1,1);
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+   glPushMatrix();
+     glDisable(GL_LIGHTING);
+     glEnable(GL_TEXTURE_2D);
+     glBindTexture(GL_TEXTURE_2D, image );
+     glBegin(GL_QUADS);
+     for(k=0; k < divisions; k++)
+     {
+        texX = k*incTex;
+        pX1 = (k*incPosX) + xa;
+        pX2 = (incPosX) + pX1;
+        for(l=0; l < divisions; l++)
+        {
+           texZ = l*incTex;
+           pZ1 = (l*incPosZ) + za;
+           pZ2 = (incPosZ) + pZ1;
+           glTexCoord2f(texX, texZ);
+           glNormal3i(0,1,0);
+           glVertex3f( pX1 , getHeight(pX1, pZ1)+sumY, pZ1 );
+           glTexCoord2f(texX, texZ + incTex);
+           glNormal3i(0,1,0);
+           glVertex3f( pX1 , getHeight(pX1, pZ2)+sumY, pZ2);
+           glTexCoord2f(texX + incTex, texZ + incTex);
+           glNormal3i(0,1,0);
+           glVertex3f( pX2, getHeight(pX2, pZ2)+sumY, pZ2 );
+           glTexCoord2f(texX + incTex, texZ);
+           glNormal3i(0,1,0);
+           glVertex3f( pX2, getHeight(pX2, pZ1)+sumY, pZ1 );
+        }
+     }
+
+         /*glTexCoord2f(0,0);
          glVertex3f(xa, getHeight(xa,za) + sumY, za);
          glTexCoord2f(0,1);
          glVertex3f(xa, getHeight(xa,zb) + sumY, zb);
          glTexCoord2f(1,1);
          glVertex3f(xb, getHeight(xb,zb) + sumY, zb);
          glTexCoord2f(1,0);
-         glVertex3f(xb, getHeight(xb,za) + sumY, za);
-      glEnd();
-      glDisable(GL_TEXTURE_2D);
-      glDisable(GL_BLEND);
-      glEnable(GL_LIGHTING);
-    glPopMatrix();
+         glVertex3f(xb, getHeight(xb,za) + sumY, za);*/
+     glEnd();
+     glDisable(GL_TEXTURE_2D);
+     glDisable(GL_BLEND);
+     glEnable(GL_LIGHTING);
+   glPopMatrix();
 }
 
 /********************************************************************

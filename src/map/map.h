@@ -207,9 +207,11 @@ class Map
         * \param xb -> last x position
         * \param zb -> last z position
         * \param sumY -> value to sum at Y height of the map
+        * \param divisions -> how many divisions
         *************************************************************/
        void drawSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za, 
-                             GLfloat xb, GLfloat zb, GLfloat sumY);
+                             GLfloat xb, GLfloat zb, GLfloat sumY,
+                             int divisions);
 
       /*!
        ***************************************************************
