@@ -1,6 +1,6 @@
 5
-Effect ../data/particles/effect.par
+Effect_1 ../data/particles/effect1.par
 Fire_1 ../data/particles/fire1.par
 Fire_2 ../data/particles/fire2.par
 Fire_3 ../data/particles/fire3.par
-Fire_Scimitar ../data/particles/fire_scimitar.par
+Fire_Scimitar ../data/particles/firescimitar.par
