@@ -4,6 +4,7 @@ light ../data/mapas/rua.lgh
 npc ../data/mapas/rua.npc
 PS ../data/mapas/rua.map.par
 MUSICA ../data/music/musica7.ogg
+Outdoor 1
 o ../data/models/objetos/armas/axe.dcc
 o ../data/models/objetos/armas/scimitar.dcc
 o ../data/models/objetos/armas/dark_katana.dcc

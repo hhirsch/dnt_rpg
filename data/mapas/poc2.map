@@ -2,6 +2,7 @@ T 8X8
 # Made by DccNiTghtmare's MapEditor, v0.0.3
 PS ../data/mapas/poc2.map.par
 MUSICA ../data/music/musica12.ogg
+Outdoor 1
 o ../data/models/natural/arvores/tree4.dcc
 o ../data/models/natural/arvores/tree3.dcc
 o ../data/models/natural/arvores/tree2.dcc

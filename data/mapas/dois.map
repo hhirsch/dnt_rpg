@@ -3,6 +3,7 @@ T 7X12
 f ../data/mapas/dois.fog
 npc ../data/mapas/dois.npc
 MUSICA ../data/music/musica2.ogg
+Outdoor 1
 o ../data/models/objetos/armas/kalashnikov.dcc
 o ../data/models/objetos/geral/porta2.dcc
 o ../data/models/objetos/geral/porta.dcc
