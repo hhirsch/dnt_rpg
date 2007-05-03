@@ -24,7 +24,7 @@ using namespace std;
 #define MAXMUROS                8 /**< Max number of walls per square */
 #define MUROALTURA             50 /**< Walls height */
 #define MEIOFIOALTURA           2 /**< Meio-fios height */
-#define ALTURAMAXIMA          100 /**< Max square height */
+#define ALTURAMAXIMA          150 /**< Max square height */
 
 #define SQUARE_DIVISIONS        8
 
