@@ -66,12 +66,12 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
  *********************************************************************/
 rolBar::~rolBar()
 {
-   Tlista* l = (Tlista*)intList;
+   //Tlista* l = (Tlista*)intList;
    /* Remove from List all objects used by the rolBar */
-   l->Retirar(contorn);
+   /*l->Retirar(contorn);
    l->Retirar(up);
    l->Retirar(down);
-   l->Retirar(text);
+   l->Retirar(text);*/
 }
 
 /*********************************************************************
