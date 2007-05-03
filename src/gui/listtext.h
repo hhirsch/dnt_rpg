@@ -32,6 +32,9 @@ class listText: public Tobjeto
       /*! Destructor */
       ~listText();
 
+      /*! Clear the text list */
+      void clear();
+
       /*! Insert Text Element on the list
        * \param text -> string to insert */
       void insertText(string text);

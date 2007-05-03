@@ -4,13 +4,20 @@
 
 tabButton::tabButton(int x,int y,const char* arquivo):figura(x,y,0,0,arquivo)
 {
+   cor.Iniciar();
    numButtons = 0;
    pressed = false;
 }
 
-tabButton::tabButton(int x, int y, int w, int h):figura(x,y,w,h, NULL)
+tabButton::tabButton(int x, int y, int w, int h):figura(x,y,0,0, NULL)
 {
+   cor.Iniciar();
    numButtons = 0;
+   x1 = x;
+   y1 = y;
+   x2 = x+w;
+   y2 = y+h;
+   pressed = false;
 }
 
 oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
@@ -40,10 +47,16 @@ void tabButton::draw(int mouseX, int mouseY,
                       Xjan + x1 + Buttons[i].x2, Yjan + y1 + Buttons[i].y2,
                       mouseX, mouseY))
       {
-          cor_Definir(248,2,11);
+          cor_Definir(cor.corCont[0].R,cor.corCont[0].G,cor.corCont[0].B);
           retangulo_2Cores(screen,x1+Buttons[i].x1,y1+Buttons[i].y1,
                            x1+Buttons[i].x2,y1+Buttons[i].y2,
-                           86,1,4,0);
+                           cor.corCont[1].R,cor.corCont[1].G,cor.corCont[1].B,0);
+      }
+      else if(fig->fig == NULL)
+      {
+         cor_Definir(cor.corJan.R, cor.corJan.G, cor.corJan.B);
+         retangulo_Desenhar(screen, x1+Buttons[i].x1,y1+Buttons[i].y1,
+                   x1+Buttons[i].x2,y1+Buttons[i].y2, 0);
       }
    }
 }

@@ -28,7 +28,7 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    windowSurface = surface;
 
    /* Alloc tabButtons pointers */
-   maxButtons = ((yb-ya) / 11)-1;
+   maxButtons = ((yb-ya) / 11);
    listButtons = new oneTabButton*[maxButtons];
 
 
@@ -43,7 +43,7 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    table = l->InserirTabButton(x1, y1, x2-x1, y2-y1, NULL);
    for(i = 0; i<maxButtons; i++)
    {
-      listButtons[i] = table->insertButton(x1, i*11,  x2-10, (i+1)*11);
+      listButtons[i] = table->insertButton(1, (i*11)+4,  (x2-x1)-14, ((i+1)*11)+3);
    }
 
 }
@@ -69,9 +69,30 @@ listText::~listText()
    }
 
    /* Remove GUI elements */
-   Tlista* l = (Tlista*)intList;
+   /*Tlista* l = (Tlista*)intList;
    l->Retirar(roll);
-   l->Retirar(table);
+   l->Retirar(table);*/
+}
+/**************************************************************
+ *                           clear                            *
+ **************************************************************/
+void listText::clear()
+{
+   int i;
+   textElement* tel = first;
+   textElement* aux;
+
+   /* Delete All elements */
+   for(i=0; i<totalElements; i++)
+   {
+      aux = tel;
+      tel = tel->next;
+      delete(aux);
+   }
+   totalElements = 0;
+   first = NULL;
+   roll->setText("");
+
 }
 
 /**************************************************************
@@ -94,6 +115,7 @@ void listText::insertText(string text)
       first->next = tel;
       tel->next->previous = tel;
    }
+   roll->addText(text+"|");
    totalElements++;
 }
 

@@ -5,6 +5,7 @@
 #include "../../engine/camera.h"
 #include "portal.h"
 #include "terrain.h"
+#include "listwindow.h"
 
 /* Return Constants */
 #define GUI_IO_NOTHING              0
@@ -70,22 +71,9 @@ class guiIO
 
       camera gameCamera;               /**< The Game Camera */
 
-#if 0 
-      GLfloat cameraX; /**< Camera X position */
-      GLfloat cameraY; /**< Camera Y position */
-      GLfloat cameraZ; /**< Camera Z position */
-
-      GLfloat theta;   /**< Camera Theta */
-      GLfloat phi;     /**< Camera Phi */
-      GLfloat d;       /**< Camera Zoom */
-      GLfloat deltaY;  /**< Camera Delta Y */
-
-      GLfloat centerX; /**< Camera Center X Position */
-      GLfloat centerY; /**< Camera Center Y Position */
-      GLfloat centerZ; /**< Camera Center Z Position */
-#endif
-
    private:
+
+      listWindow* ltWindow;            /**< The List Window */
 
       int state;      /**< Internal State */
       int tool;       /**< Selected Tool */

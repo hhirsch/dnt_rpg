@@ -12,6 +12,8 @@ guiIO::guiIO()
    tool = TOOL_NONE;
 
    /* Open Windows */
+   ltWindow = new listWindow(gui);
+   ltWindow->setState(STATE_COMMON);
    openFileWindow();
    openNavWindow();
    openMainWindow();
@@ -41,6 +43,7 @@ guiIO::guiIO()
  ****************************************************************/
 guiIO::~guiIO()
 {
+   delete(ltWindow);
    delete(gui);
 }
 

@@ -41,7 +41,6 @@ void Tlista::Retirar(Tobjeto *obj)
 {
    obj->anterior->proximo = obj->proximo;
    obj->proximo->anterior = obj->anterior;
-   printf("obj->tipo: %d\n", obj->tipo);
    switch (obj->tipo) 
    {
       case BOTAO:
