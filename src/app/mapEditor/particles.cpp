@@ -109,8 +109,16 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                z2 = z1;
                z1 = tmp;
             }
-            //TODO Prompt for povoation!
-            int total = (int)floor((z2-z1)*(x2-x1) / 20.0);
+
+            string pov = getStringFromUser("Povoation Value", "20.0",
+                                           proj, modl, viewPort);
+            GLfloat povValue = 20.0;
+            sscanf(pov.c_str(),"%f", &povValue);
+            if(povValue <= 0)
+            {
+               povValue = 20.0;
+            }
+            int total = (int)floor((z2-z1)*(x2-x1) / povValue);
             pS->addParticle(PART_GRASS, x1, z1, x2, z2, total,selectedText); 
             state = TOOL_PARTICLE_GRASS;
          }
