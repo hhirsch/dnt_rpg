@@ -1111,6 +1111,7 @@ int Map::open(string arquivo, modelList& mdlList)
             int a;
             sscanf(buffer, "%d", &a);
             outdoor = a;
+            break;
          }
          case 't': /* Insert Textures */
          {
