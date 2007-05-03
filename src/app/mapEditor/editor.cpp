@@ -543,7 +543,7 @@ void editor::draw()
                glVertex3f((sizeX+6)*SQUARESIZE-5, 0.5, 6*SQUARESIZE);
                glVertex3f((sizeX+6)*SQUARESIZE-5, 0.5, (sizeZ+6)*SQUARESIZE);
                glVertex3f((sizeX+6)*SQUARESIZE+5, 0.5, (sizeZ+6)*SQUARESIZE);
-               glVertex3f((sizeZ+6)*SQUARESIZE+5, 0.5, 6*SQUARESIZE);
+               glVertex3f((sizeX+6)*SQUARESIZE+5, 0.5, 6*SQUARESIZE);
 
                glNormal3f(0,1,0);
                glVertex3f(6*SQUARESIZE, 0.5, 6*SQUARESIZE-5);
