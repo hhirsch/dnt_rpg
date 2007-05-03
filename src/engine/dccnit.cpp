@@ -2170,9 +2170,12 @@ void engine::Draw()
    AtualizaFrustum(visibleMatrix,proj,modl);
 
    /* SKY */
-   glPushMatrix();
-      gameSky->draw(actualMap,gameSun->getRotation());
-   glPopMatrix();
+   if(actualMap->isOutdoor())
+   {
+      glPushMatrix();
+         gameSky->draw(actualMap,gameSun->getRotation());
+      glPopMatrix();
+   }
 
    glPushMatrix();
 
@@ -2306,18 +2309,18 @@ void engine::Draw()
                                    0.25,4);
    }
 
-   if(!actualMap->fog.enabled)
+   if(actualMap->isOutdoor())
    {
-      glDisable(GL_FOG);
-   }
-   gameSun->drawSun();
-
-   if(!actualMap->fog.enabled)
-   {
-      glEnable(GL_FOG);
-   }
-
-   
+      if(!actualMap->fog.enabled)
+      {
+         glDisable(GL_FOG);
+      }
+      gameSun->drawSun();
+      if(!actualMap->fog.enabled)
+      {
+         glEnable(GL_FOG);
+      }
+   }   
 
    if(curConection)
    {

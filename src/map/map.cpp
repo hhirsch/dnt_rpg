@@ -760,15 +760,6 @@ void Map::drawSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za,
            glVertex3f( pX2, getHeight(pX2, pZ1)+sumY, pZ1 );
         }
      }
-
-         /*glTexCoord2f(0,0);
-         glVertex3f(xa, getHeight(xa,za) + sumY, za);
-         glTexCoord2f(0,1);
-         glVertex3f(xa, getHeight(xa,zb) + sumY, zb);
-         glTexCoord2f(1,1);
-         glVertex3f(xb, getHeight(xb,zb) + sumY, zb);
-         glTexCoord2f(1,0);
-         glVertex3f(xb, getHeight(xb,za) + sumY, za);*/
      glEnd();
      glDisable(GL_TEXTURE_2D);
      glDisable(GL_BLEND);
@@ -1114,6 +1105,12 @@ int Map::open(string arquivo, modelList& mdlList)
              sscanf(buffer, "%s",nomeArq);
              objects->insertMapObject(nomeArq, mdlList);
              break;
+         }
+         case 'O': /* Define OutDoor */
+         {
+            int a;
+            sscanf(buffer, "%d", &a);
+            outdoor = a;
          }
          case 't': /* Insert Textures */
          {
@@ -1479,6 +1476,9 @@ int Map::save(string arquivo)
    {
       fprintf(arq,"light %s\n",lights.c_str());
    }*/
+
+   /* Write if is outdoor or not */
+   fprintf(arq,"Outdoor: %d\n", outdoor);
 
    /* Write used objects */
    int i;
