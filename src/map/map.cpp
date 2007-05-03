@@ -1109,6 +1109,7 @@ int Map::open(string arquivo, modelList& mdlList)
          case 'O': /* Define OutDoor */
          {
             int a;
+            fgets(buffer, sizeof(buffer), arq);
             sscanf(buffer, "%d", &a);
             outdoor = a;
             break;
