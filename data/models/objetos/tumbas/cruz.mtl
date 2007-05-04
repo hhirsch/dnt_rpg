@@ -1,12 +1,11 @@
 # Blender3D MTL File: cruz.blend
 # Material Count: 1
-newmtl Material
+newmtl Material_marble1.png
 Ns 96.078431
-Ka 0.000000 0.000000 0.000000
+Ka 0.609871 0.680172 0.629957
 Kd 0.609871 0.680172 0.629957
-Ks 0.500000 0.500000 0.500000
+Ks 0.609871 0.680172 0.629957
 Ni 1.000000
 d 1.000000
 illum 2
-
 
