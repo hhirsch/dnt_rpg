@@ -95,7 +95,7 @@ void guiIO::openTextureWindow()
                                                   textureWindow->Cores.corBot.B,
                                                   "Insert",1,NULL);
    textureText = textureWindow->objects->InserirBarraTexto(10,17,173,33,
-                                                     "../data/texturas/",0,NULL);
+                                                    "../data/texturas/",0,NULL);
    textureWindow->fechavel = 0;
    textureWindow->ptrExterno = &textureWindow;
    gui->openWindow(textureWindow);
@@ -337,11 +337,11 @@ void guiIO::openFogWindow()
    fogWindow->objects->InserirQuadroTexto(5,115,45,128,0,"Enable");
    fogEnabled = fogWindow->objects->insertCxSel(48,117,actualFog->enabled);
 
-   fogApply = fogWindow->objects->InserirBotao(24,130,79,148,
-                                               fogWindow->Cores.corBot.R,
-                                               fogWindow->Cores.corBot.G,
-                                               fogWindow->Cores.corBot.B,
-                                               "Apply",1,NULL);
+   fogApplyButton = fogWindow->objects->InserirBotao(24,130,79,148,
+                                                     fogWindow->Cores.corBot.R,
+                                                     fogWindow->Cores.corBot.G,
+                                                     fogWindow->Cores.corBot.B,
+                                                     "Apply",1,NULL);
    fogWindow->ptrExterno = &fogWindow;
    gui->openWindow(fogWindow);
  }
@@ -355,7 +355,6 @@ void guiIO::setFog(mapFog* fog)
    actualFog = fog;
    if(fogWindow)
    {
-      //TODO actualize values
       char buf[10];
       int i;
       for(i=0; i < 4; i++)
@@ -373,6 +372,51 @@ void guiIO::setFog(mapFog* fog)
       fogWindow->Desenhar(0,0);
    }
 }
+
+/****************************************************************
+ *                          applyFog                            *
+ ****************************************************************/
+void guiIO::applyFog()
+{
+   if(actualFog)
+   {
+      int i;
+      for(i=0; i < 4; i++)
+      {
+         sscanf(fogColor[i]->texto.c_str(),"%f",&actualFog->color[i]);
+      }
+      sscanf(fogDensity->texto.c_str(),"%f",&actualFog->density);
+      sscanf(fogStart->texto.c_str(),"%f",&actualFog->start);
+      sscanf(fogEnd->texto.c_str(),"%f",&actualFog->end);
+      actualFog->enabled = fogEnabled->isSelected();
+      if(actualFog->enabled)
+      {
+         glEnable(GL_FOG);
+         {
+            glFogi(GL_FOG_MODE,GL_LINEAR);
+            glFogfv(GL_FOG_COLOR,actualFog->color);
+            glFogf(GL_FOG_DENSITY,actualFog->density);
+            glHint(GL_FOG_HINT,GL_DONT_CARE);
+            glFogf(GL_FOG_START,actualFog->start);
+            glFogf(GL_FOG_END,actualFog->end);
+         }
+      }
+      else
+      {
+         glEnable(GL_FOG);
+         {
+            GLfloat color[3]={1.0,1.0,1.0};
+            glFogi(GL_FOG_MODE,GL_LINEAR);
+            glFogfv(GL_FOG_COLOR, color);
+            glFogf(GL_FOG_DENSITY, 0.10);
+            glHint(GL_FOG_HINT, GL_DONT_CARE);
+            glFogf(GL_FOG_START, 100);
+            glFogf(GL_FOG_END, HALFFARVIEW);
+         }
+      }
+   }
+}
+
 
 /****************************************************************
  *                           getState                           *
@@ -809,7 +853,12 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             return(GUI_IO_TEXTURE_INSERT);
          }
-
+         /*Fog Buttons */
+         else if(object == (Tobjeto*) fogApplyButton)
+         {
+            applyFog();
+            return(GUI_IO_NOTHING);
+         }
          break;
       }
    }

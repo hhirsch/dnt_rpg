@@ -76,6 +76,9 @@ class guiIO
       /*! Set the map fog */
       void setFog(mapFog* fog);
 
+      /*! Apply the fog! */
+      void applyFog();
+
       camera gameCamera;               /**< The Game Camera */
 
    private:
@@ -201,7 +204,7 @@ class guiIO
       barraTexto* fogDensity;             /**< Fog Density Text */
       barraTexto* fogStart;               /**< Fog Start Text */
       barraTexto* fogEnd;                 /**< Fog End Text */
-      botao* fogApply;                    /**< Fog Apply Button */
+      botao* fogApplyButton;              /**< Fog Apply Button */
       void openFogWindow();               /**< Open Fog Window */
       
 };

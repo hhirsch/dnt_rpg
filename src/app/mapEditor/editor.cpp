@@ -739,7 +739,11 @@ void editor::draw()
 
       glEnable(GL_LIGHTING);
       glEnable(GL_DEPTH_TEST);
+
+
    }
+
+   glEnable(GL_FOG);
    glFlush();
    SDL_GL_SwapBuffers();
 }
