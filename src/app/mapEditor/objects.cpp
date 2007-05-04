@@ -79,6 +79,7 @@ void objects::drawTemporary()
 {
    if( (state == OBJECTS_STATE_ADD) && (actualObstacle != NULL))
    {
+      glTranslatef(0.0, actualMap->getHeight(obstacleX, obstacleZ), 0.0);
       actualObstacle->draw(obstacleX, obstacleZ, 0, obstacleOrientation);
    }
 }

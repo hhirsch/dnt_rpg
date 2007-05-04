@@ -625,11 +625,18 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                   if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
                                      matriz))
                   {
+                     glPushMatrix();
+                     glTranslatef(0.0, 
+                            getHeight(MapSquares[Xaux][Zaux]->Xobjects[o],
+                                      MapSquares[Xaux][Zaux]->Zobjects[o]) +
+                               MapSquares[Xaux][Zaux]->objects[o]->posicaoLadoY,
+                                  0.0);
                      MapSquares[Xaux][Zaux]->objects[o]->draw(
                              MapSquares[Xaux][Zaux]->Xobjects[o],
                              MapSquares[Xaux][Zaux]->Zobjects[o],
                              distancia,
                              MapSquares[Xaux][Zaux]->objectsOrientation[o]);
+                     glPopMatrix();
                   }
               }
            }
