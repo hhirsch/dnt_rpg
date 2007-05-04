@@ -666,6 +666,10 @@ void editor::draw()
                glEnd();*/
             glPopMatrix();
          }
+         else
+         {
+            //printf("Not Visible!\n");
+         }
          per = (personagem*) per->proximo;
       }
    }
