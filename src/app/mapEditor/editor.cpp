@@ -590,7 +590,6 @@ void editor::draw()
          glVertex3f(map->getSizeX()*SQUARESIZE+10, -5,
                     map->getSizeZ()*SQUARESIZE+10);
          glVertex3f(map->getSizeX()*SQUARESIZE+10, -5, -10);
-//         glVertex3f(-10, -10, map->x*SQUARESIZE+10, map->z*SQUARESIZE+10);
          glEnd();
          glEnable(GL_LIGHTING);
          
@@ -794,6 +793,17 @@ void editor::doEditorIO()
       }
       npcController->verifyAction(xReal, yReal, zReal, mButton, mouseX, mouseY,
                                   gui->getTool(), proj, modl, viewPort);
+   }
+   else if( (gui->getState() == GUI_IO_STATE_MUSIC) && (mapOpened))
+   {
+      string musicFile = gui->getSelectedText();
+      if( (!musicFile.empty()) && (map->getMusicFileName() != musicFile))
+      {
+         char msg[1024];
+         map->setMusicFileName(musicFile);
+         sprintf(msg,"Defined Music as: %s", musicFile.c_str());
+         gui->showMessage(msg);
+      }
    }
 
 }

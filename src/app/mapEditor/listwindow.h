@@ -23,6 +23,9 @@
 #define STATE_SNOW        33
 #define STATE_WATERFALL   34
 
+/* Music */
+#define STATE_MUSIC       40
+
 /*! Element on the list */
 class listElement
 {

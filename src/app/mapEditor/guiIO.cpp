@@ -398,6 +398,12 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
                state = GUI_IO_STATE_NPCS;
                tool = TOOL_NPC_ADD;
             break;
+
+            /* Music */
+            case STATE_MUSIC:
+               state = GUI_IO_STATE_MUSIC;
+               tool = TOOL_NONE;
+            break;
          }
          return(GUI_IO_NEW_STATE);
       }
@@ -705,6 +711,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          else if(object == (Tobjeto*) npcButton)
          {
             ltWindow->setState(STATE_CHARACTERS);
+         }
+         else if(object == (Tobjeto*) musicButton)
+         {
+            ltWindow->setState(STATE_MUSIC);
          }
          /* Texture Window */
          else if(object == (Tobjeto*) textureNextButton)

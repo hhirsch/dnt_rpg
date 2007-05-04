@@ -55,6 +55,12 @@ string messageForTool(int tool)
       case TOOL_WALL_MORE_HOR_TEXTURE:
          return("Select a Wall to More Horizontal Texture Repeat");
       break;
+      case TOOL_OBSTACLE_ADD:
+         return("Put Object on Map with Left Mouse Button. Right and Middle Buttons rotate");
+      break;
+      case TOOL_NPC_ADD:
+         return("Put NPC on Map with left mouse Button.");
+      break;
    }
    return("DccNiTghtmare!");
 }

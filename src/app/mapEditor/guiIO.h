@@ -30,6 +30,7 @@
 #define GUI_IO_STATE_OBJECTS   4
 #define GUI_IO_STATE_PARTICLES 5
 #define GUI_IO_STATE_NPCS      6
+#define GUI_IO_STATE_MUSIC     7
 
 /**! The Super GUI IO Class, to control things on map Editor! */
 class guiIO 

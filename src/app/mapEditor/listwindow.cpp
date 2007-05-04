@@ -20,6 +20,8 @@
 #define FILE_SNOW       "../data/mapEditor/lists/snow.lst"
 #define FILE_WATERFALL  "../data/mapEditor/lists/waterfall.lst"
 
+/* Musics */
+#define FILE_MUSIC      "../data/mapEditor/lists/music.lst"
 
 /********************************************************************
  *                             Constructor                          *
@@ -109,6 +111,9 @@ void listWindow::setState(int st)
          break;
          case STATE_WATERFALL:
             fileName = FILE_WATERFALL;
+         break;
+         case STATE_MUSIC:
+            fileName = FILE_MUSIC;
          break;
       }
       /* Load file */
