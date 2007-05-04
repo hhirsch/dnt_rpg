@@ -137,11 +137,11 @@ bool npcs::saveFile(string fileName)
    else
    {
       int npc;
-      fprintf(arq,"%d",NPCs->getTotal());
+      fprintf(arq,"%d\n",NPCs->getTotal());
       personagem* per = (personagem*) NPCs->primeiro->proximo;
       for(npc = 0; npc < NPCs->getTotal(); npc++)
       {
-         fprintf(arq,"%s %s %f %f",per->nome.c_str(),
+         fprintf(arq,"%s %s %f %f\n",per->nome.c_str(),
                  per->getCharacterFile().c_str(),
                  per->posicaoLadoX,per->posicaoLadoZ);
          per = (personagem*) per->proximo;

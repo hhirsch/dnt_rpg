@@ -13,6 +13,9 @@ guiIO::guiIO()
 
    selectedText = "";
 
+   fogWindow = NULL;
+   actualFog = NULL;
+
    /* Open Windows */
    ltWindow = new listWindow(gui);
    ltWindow->setState(0);
@@ -301,6 +304,75 @@ void guiIO::openParticleWindow()
    gui->openWindow(particleWindow);
 }
 
+/****************************************************************
+ *                          Open Fog Window                     *
+ ****************************************************************/
+void guiIO::openFogWindow()
+{
+ if(actualFog != NULL)
+ {
+   char buf[10];
+   fogWindow = gui->insertWindow(185,100,288,255,"Fog",1,1);
+   fogWindow->objects->InserirQuadroTexto(5,17,45,30,0,"Red");
+   sprintf(buf,"%.4f",actualFog->color[0]);
+   fogColor[0] = fogWindow->objects->InserirBarraTexto(48,17,98,30,buf,1,NULL);
+   fogWindow->objects->InserirQuadroTexto(5,31,45,44,0,"Green");
+   sprintf(buf,"%.4f",actualFog->color[1]);
+   fogColor[1] = fogWindow->objects->InserirBarraTexto(48,31,98,44,buf,1,NULL);
+   fogWindow->objects->InserirQuadroTexto(5,45,45,58,0,"Blue");
+   sprintf(buf,"%.4f",actualFog->color[2]);
+   fogColor[2] = fogWindow->objects->InserirBarraTexto(48,45,98,58,buf,1,NULL);
+   fogWindow->objects->InserirQuadroTexto(5,59,45,72,0,"Alpha");
+   sprintf(buf,"%.4f",actualFog->color[3]);
+   fogColor[3] = fogWindow->objects->InserirBarraTexto(48,59,98,72,buf,1,NULL);
+   fogWindow->objects->InserirQuadroTexto(5,73,45,86,0,"Dense");
+   sprintf(buf,"%.4f",actualFog->density);
+   fogDensity = fogWindow->objects->InserirBarraTexto(48,73,98,86,buf,1,NULL);
+   fogWindow->objects->InserirQuadroTexto(5,87,45,100,0,"Start");
+   sprintf(buf,"%.4f",actualFog->start);
+   fogStart = fogWindow->objects->InserirBarraTexto(48,87,98,100,buf,1,NULL);
+   fogWindow->objects->InserirQuadroTexto(5,101,45,114,0,"End");
+   sprintf(buf,"%.4f",actualFog->end);
+   fogEnd = fogWindow->objects->InserirBarraTexto(48,101,98,114,buf,1,NULL);
+   fogWindow->objects->InserirQuadroTexto(5,115,45,128,0,"Enable");
+   fogEnabled = fogWindow->objects->insertCxSel(48,117,actualFog->enabled);
+
+   fogApply = fogWindow->objects->InserirBotao(24,130,79,148,
+                                               fogWindow->Cores.corBot.R,
+                                               fogWindow->Cores.corBot.G,
+                                               fogWindow->Cores.corBot.B,
+                                               "Apply",1,NULL);
+   fogWindow->ptrExterno = &fogWindow;
+   gui->openWindow(fogWindow);
+ }
+}
+
+/****************************************************************
+ *                            setFog                            *
+ ****************************************************************/
+void guiIO::setFog(mapFog* fog)
+{
+   actualFog = fog;
+   if(fogWindow)
+   {
+      //TODO actualize values
+      char buf[10];
+      int i;
+      for(i=0; i < 4; i++)
+      {
+         sprintf(buf,"%.4f",actualFog->color[i]);
+         fogColor[i]->texto = buf;
+      }
+      sprintf(buf,"%.4f",actualFog->density);
+      fogDensity->texto = buf;
+      sprintf(buf,"%.4f",actualFog->start);
+      fogStart->texto = buf;
+      sprintf(buf,"%.4f",actualFog->end);
+      fogEnd->texto = buf;
+      fogEnabled->setSelection(actualFog->enabled);
+      fogWindow->Desenhar(0,0);
+   }
+}
 
 /****************************************************************
  *                           getState                           *
@@ -705,6 +777,14 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             if(!objectWindow)
             {
                openObjectWindow();
+            }
+            return(GUI_IO_OTHER);
+         }
+         else if(object == (Tobjeto*) fogButton)
+         {
+            if(!fogWindow)
+            {
+               openFogWindow();
             }
             return(GUI_IO_OTHER);
          }

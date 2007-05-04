@@ -186,6 +186,7 @@ void editor::openMap()
             glFogf(GL_FOG_END, HALFFARVIEW);
          }
       }
+      gui->setFog(&map->fog);
       /* Open Particles */
       if(!map->getParticlesFileName().empty())
       {
@@ -236,6 +237,17 @@ void editor::saveMap()
       else
       {
          map->setNpcFileName("");
+      }
+
+      /* Save the Fog File */
+      if(map->fog.enabled)
+      {
+         if(map->fog.fileName.empty())
+         {
+            map->fog.fileName = (gui->getFileName()+".fog");
+         }
+         /* Save the fog file */
+         map->fog.save();
       }
 
       /* Save the Map File */
@@ -359,6 +371,7 @@ void editor::newMap()
       glFogf(GL_FOG_START, 100);
       glFogf(GL_FOG_END, HALFFARVIEW);
    }
+   gui->setFog(&map->fog);
 }
 
 /*********************************************************************

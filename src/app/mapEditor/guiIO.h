@@ -73,15 +73,20 @@ class guiIO
       /*! Show Message on Message Window */
       void showMessage(string msg);
 
+      /*! Set the map fog */
+      void setFog(mapFog* fog);
+
       camera gameCamera;               /**< The Game Camera */
 
    private:
 
-      listWindow* ltWindow;            /**< The List Window */
+      listWindow* ltWindow; /**< The List Window */
 
-      int state;           /**< Internal State */
-      int tool;            /**< Selected Tool */
-      string selectedText; /**< Last selected text with list window */
+      mapFog* actualFog;    /**< The actual fog */
+
+      int state;            /**< Internal State */
+      int tool;             /**< Selected Tool */
+      string selectedText;  /**< Last selected text with list window */
 
       interface* gui; /**< Internal GUI */
 
@@ -189,9 +194,15 @@ class guiIO
       janela* messageWindow;              /**< Message Window */
       quadroTexto* messageText;           /**< Message Text */
       void openMessageWindow();
-
-      
-
+      /**************************Fog*Window******************************/
+      janela* fogWindow;                  /**< Fog Window */
+      cxSel* fogEnabled;                  /**< Fog enabled CxSel */
+      barraTexto* fogColor[4];            /**< Fog Color Texts */
+      barraTexto* fogDensity;             /**< Fog Density Text */
+      barraTexto* fogStart;               /**< Fog Start Text */
+      barraTexto* fogEnd;                 /**< Fog End Text */
+      botao* fogApply;                    /**< Fog Apply Button */
+      void openFogWindow();               /**< Open Fog Window */
       
 };
 

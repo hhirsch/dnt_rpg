@@ -23,6 +23,8 @@ class mapFog
       /*! Load Fog from File
        * \param arq -> fog filename */
       void Load(string arq);
+      /*! Save fog to file */
+      bool save();
      
 };
 
