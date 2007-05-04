@@ -583,6 +583,7 @@ void editor::draw()
                    gui->gameCamera.getCameraZ(), visibleMatrix);
       glPopMatrix();
 
+      glPushMatrix();
          glDisable(GL_LIGHTING);
          glBegin(GL_QUADS);
          glVertex3f(-10, -5, -10);
@@ -592,7 +593,10 @@ void editor::draw()
          glVertex3f(map->getSizeX()*SQUARESIZE+10, -5, -10);
          glEnd();
          glEnable(GL_LIGHTING);
-         
+      glPopMatrix();
+
+
+      glPushMatrix();   
          if(gui->getState() == GUI_IO_STATE_TERRAIN)
          {
             terrainEditor->drawTemporary();
@@ -617,6 +621,7 @@ void editor::draw()
          {
             npcController->drawTemporary();
          }
+      glPopMatrix();
    }
 
    glColor3f(1.0,1.0,1.0);
@@ -648,8 +653,8 @@ void editor::draw()
                              per->posicaoLadoZ, min, max );
 
          /* Only Draw Visible Characters */
-         if(true/*quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
-            visibleMatrix)*/)
+         if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
+            visibleMatrix))
          {
             glPushMatrix();
                glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
