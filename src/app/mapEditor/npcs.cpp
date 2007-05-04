@@ -80,7 +80,9 @@ void npcs::drawTemporary()
       actualNpc->update(WALK_ACTUALIZATION/*seconds*/);   
       actualNpc->calculateBoundingBox();
       glPushMatrix();
-         glTranslatef(actualNpc->posicaoLadoX, 0 ,actualNpc->posicaoLadoZ);
+         glTranslatef(actualNpc->posicaoLadoX, 
+                      actualNpc->posicaoLadoY,
+                      actualNpc->posicaoLadoZ);
          glRotatef(actualNpc->orientacao,0,1,0);
          actualNpc->render();
       glPopMatrix();

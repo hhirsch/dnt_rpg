@@ -2235,7 +2235,8 @@ void engine::Draw()
                             visibleMatrix))
          {
             glPushMatrix();
-              glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
+              glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
+                           per->posicaoLadoZ);
               glRotatef(per->orientacao,0,1,0);
               per->render();
               /*per->RenderBoundingBox();

@@ -648,11 +648,12 @@ void editor::draw()
                              per->posicaoLadoZ, min, max );
 
          /* Only Draw Visible Characters */
-         if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
-            visibleMatrix))
+         if(true/*quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
+            visibleMatrix)*/)
          {
             glPushMatrix();
-               glTranslatef(per->posicaoLadoX, 0 ,per->posicaoLadoZ);
+               glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
+                            per->posicaoLadoZ);
                glRotatef(per->orientacao,0,1,0);
                per->render();
              /*per->RenderBoundingBox();
@@ -664,10 +665,6 @@ void editor::draw()
                    glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
                glEnd();*/
             glPopMatrix();
-         }
-         else
-         {
-            //printf("Not Visible!\n");
          }
          per = (personagem*) per->proximo;
       }
