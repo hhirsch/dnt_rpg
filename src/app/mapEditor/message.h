@@ -36,6 +36,8 @@ using namespace std;
 #define TOOL_PARTICLE_SNOW          55
 #define TOOL_PARTICLE_GRASS         56
 
+#define TOOL_NPC_ADD                61
+
 string messageForTool(int tool);
 
 /*string getStringFromUser(string title, string previous,

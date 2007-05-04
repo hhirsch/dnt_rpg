@@ -8,6 +8,7 @@
 #include "../../engine/util.h"
 #include "message.h"
 
+/*! The objects Map Controller Class */
 class objects
 {
    public:

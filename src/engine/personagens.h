@@ -138,6 +138,10 @@ class personagem: public Tobjeto, public thing, public aniModel
       /*! Call the thing attack animation */
        void callAttackAnimation();
 
+       string getCharacterFile(){return(characterFile);};
+
+       void setCharacterFile(string fileName){characterFile = fileName;}
+
    protected:
        /*! Define max value of the lifePoints
        * \param maxPoints -> new max points to life points */
@@ -149,6 +153,7 @@ class personagem: public Tobjeto, public thing, public aniModel
       int getPoints(points pt);
 
       string retratoConversa;     /**< Portrait talk file name */
+      string characterFile;       /**< Name of the character file */
       SDL_Surface* portraitImage; /**< Character's portrait image */
       GLuint portrait;            /**< Up screen portrait GL texture */
       string conversationFile;    /**< Name of the Conversation File */

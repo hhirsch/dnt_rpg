@@ -38,6 +38,7 @@ editor::~editor()
       delete(portalEditor);
       delete(wallEditor);
       delete(particleEditor);
+      delete(npcController);
    }
    delete(gameSun);
    delete(gameSky);
@@ -111,6 +112,7 @@ void editor::openMap()
       delete(wallEditor);
       delete(objectEditor);
       delete(particleEditor);
+      delete(npcController);
       mapOpened = false;
    }
    gui->showMessage("Opening actual Map...");
@@ -130,6 +132,7 @@ void editor::openMap()
       if(NPCs)
          delete(NPCs);
       NPCs = new (Lpersonagem);
+      npcController = new npcs(map, NPCs, features);
       personagem* per;
       if(!map->getNpcFileName().empty())
       {
@@ -224,6 +227,17 @@ void editor::saveMap()
          map->setParticlesFileName("");
       }
 
+      /* Save the NPCs file */
+      if(NPCs->getTotal() > 0)
+      {
+         map->setNpcFileName(gui->getFileName()+".npc");
+         npcController->saveFile(map->getNpcFileName());
+      }
+      else
+      {
+         map->setNpcFileName("");
+      }
+
       /* Save the Map File */
       map->save(gui->getFileName());
       tmp = "Map Saved as:";
@@ -250,6 +264,7 @@ void editor::newMap()
       delete(wallEditor);
       delete(objectEditor);
       delete(particleEditor);
+      delete(npcController);
       particleSystem->deleteAll();
       if(NPCs)
       {
@@ -332,6 +347,7 @@ void editor::newMap()
    particleEditor = new particles(map);
    actualTexture = map->Texturas->indice;
    NPCs = new (Lpersonagem);
+   npcController = new npcs(map, NPCs, features);
    gui->showMessage("Created New Game Map!");
    glEnable(GL_FOG);
    {
@@ -598,6 +614,10 @@ void editor::draw()
          {
             particleEditor->drawTemporary(visibleMatrix);
          }
+         else if(gui->getState() == GUI_IO_STATE_NPCS)
+         {
+            npcController->drawTemporary();
+         }
    }
 
    glColor3f(1.0,1.0,1.0);
@@ -760,6 +780,16 @@ void editor::doEditorIO()
       particleEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
                                    gui->getTool(), particleSystem, proj, 
                                    modl, viewPort, gui->getSelectedText());
+   }
+   else if( (gui->getState() == GUI_IO_STATE_NPCS) && (mapOpened))
+   {
+      string npcFile = gui->getSelectedText();
+      if( (!npcFile.empty()) && (npcFile != npcController->getNpcFileName()))
+      {
+         npcController->defineActualNpc(npcFile);
+      }
+      npcController->verifyAction(xReal, yReal, zReal, mButton, mouseX, mouseY,
+                                  gui->getTool(), proj, modl, viewPort);
    }
 
 }

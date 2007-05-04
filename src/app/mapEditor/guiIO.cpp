@@ -395,8 +395,8 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 
             /* Characters */
             case STATE_CHARACTERS:
-               //TODO FIXME implement it!
-               state = GUI_IO_STATE_INITIAL;
+               state = GUI_IO_STATE_NPCS;
+               tool = TOOL_NPC_ADD;
             break;
          }
          return(GUI_IO_NEW_STATE);

@@ -63,23 +63,6 @@ void objects::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       else if((mButton & SDL_BUTTON(3)) && (actualObstacle != NULL))
       {
          obstacleOrientation -= 1;
-
-#if 0      
-         actualObstacle = (mapObject*)actualObstacle->next;
-         /* Verify Head Node */
-         if(actualObstacle == (mapObject*)models->getFirst())
-         {
-            actualObstacle = (mapObject*)actualObstacle->next;
-         }
-
-         while(mButton & SDL_BUTTON(3))
-         {
-            //Wait for Mouse Button Release
-            SDL_PumpEvents();
-            int x,y;
-            mButton = SDL_GetMouseState(&x,&y);
-         }
-#endif         
       }
    }
    else

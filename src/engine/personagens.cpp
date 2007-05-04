@@ -374,7 +374,7 @@ personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
    FILE* arq;
    char buffer[128];
    char buf2[128];
-   string buf;
+   string buf; 
    string arqModelo;
    personagem* novo;
    novo = new personagem(ft);
@@ -394,11 +394,14 @@ personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
    /* Character Name */
    fscanf(arq, "%s", buffer);
    novo->nome = buffer;
+
+   /* Character FileName */
    fscanf(arq, "%s", buffer);
+   novo->setCharacterFile(buffer);
    arqModelo = buffer;
-   fscanf(arq, "%s", buffer);
 
    /* Define the Portrait */
+   fscanf(arq, "%s", buffer);
    novo->definePortrait(buffer);
 
    while(fscanf(arq, "%s", buffer) != EOF)
@@ -432,7 +435,10 @@ personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
          fgets(buffer, sizeof(buffer), arq);
          sscanf(buffer, "%s", &buf2[0]);
          novo->setConversationFile(buf2);
-         novo->createConversation(pEngine);
+         if(pEngine != NULL)
+         {
+            novo->createConversation(pEngine);
+         }
       }
 
       //TODO

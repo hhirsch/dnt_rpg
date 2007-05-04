@@ -24,7 +24,7 @@ OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)glm.o $(ENDETC)texture.o $(ENDETC)modellist.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)camera.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)conversa.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)personagens.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
-OBJS = area.o editor.o guiIO.o listWindow.o mapEditor.o message.o objects.o particles.o portal.o terrain.o wall.o
+OBJS = area.o editor.o guiIO.o listWindow.o mapEditor.o message.o npcs.o objects.o particles.o portal.o terrain.o wall.o
 
 BIN = ../../../bin/
 
@@ -68,6 +68,11 @@ particles.o: particles.cpp particles.h
 portal.o: portal.cpp portal.h
 	@printf "Making portal.o... "
 	@$(CC) $(CFLAGS) portal.cpp -o portal.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+npcs.o: npcs.cpp npcs.h
+	@printf "Making npcs.o... "
+	@$(CC) $(CFLAGS) npcs.cpp -o npcs.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 objects.o: objects.cpp objects.h

@@ -335,6 +335,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
            per = NPCs->insertCharacter(arquivo,features, this);
            per->posicaoLadoX = posX;
            per->posicaoLadoZ = posZ;
+           per->posicaoLadoY = actualMap->getHeight(posX, posZ);
          }
          fclose(arq);
       }  

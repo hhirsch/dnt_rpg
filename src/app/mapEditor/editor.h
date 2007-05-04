@@ -8,6 +8,7 @@
 #include "message.h"
 #include "objects.h"
 #include "particles.h"
+#include "npcs.h"
 #include "../../engine/sun.h"
 #include "../../engine/sky.h"
 #include "../../engine/personagens.h"
@@ -86,6 +87,7 @@ class editor
       objects* objectEditor;         /**< The Object Editor Module */
       particles* particleEditor;     /**< The Particle Editor Module */
       modelList* models;             /**< The Objects Model List */
+      npcs* npcController;           /**< The Npcs Controller */
 
       GLuint actualTexture;          /**< Actual Texture */
 
