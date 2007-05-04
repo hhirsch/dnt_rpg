@@ -113,6 +113,7 @@ void guiIO::openObjectWindow()
    objectIcexButton = objectTabButton->insertButton(99,0,120,19);
    objectNaturalButton = objectTabButton->insertButton(125,0,145,19);
    objectCharButton = objectTabButton->insertButton(147,0,170,19);
+   objectMacabreButton = objectTabButton->insertButton(0,25,24,45);
    objectWindow->ptrExterno = &objectWindow;
    gui->openWindow(objectWindow);
 }
@@ -387,6 +388,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             case STATE_GUNS:
             case STATE_ICEX:
             case STATE_NATURE:
+            case STATE_MACABRE:
                state = GUI_IO_STATE_OBJECTS;
                tool = TOOL_OBSTACLE_ADD;
             break;
@@ -606,6 +608,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          else if(object == (Tobjeto*) objectCharButton)
          {
             ltWindow->setState(STATE_CHARACTERS);
+         }
+         else if(object == (Tobjeto*) objectMacabreButton)
+         {
+            ltWindow->setState(STATE_MACABRE);
          }
          /* Particles Buttons */
          else if(object == (Tobjeto*) fireButton)

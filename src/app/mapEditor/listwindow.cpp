@@ -11,6 +11,7 @@
 #define FILE_GUNS       "../data/mapEditor/lists/guns.lst"
 #define FILE_ICEX       "../data/mapEditor/lists/icex.lst"
 #define FILE_NATURE     "../data/mapEditor/lists/nature.lst"
+#define FILE_MACABRE    "../data/mapEditor/lists/macabre.lst"
 
 /* Particles */
 #define FILE_FIRE       "../data/mapEditor/lists/fire.lst"
@@ -90,6 +91,9 @@ void listWindow::setState(int st)
          break;
          case STATE_NATURE:
             fileName = FILE_NATURE;
+         break;
+         case STATE_MACABRE:
+            fileName = FILE_MACABRE;
          break;
          case STATE_FIRE:
             fileName = FILE_FIRE;

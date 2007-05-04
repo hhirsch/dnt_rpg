@@ -172,6 +172,7 @@ class guiIO
       oneTabButton* objectIcexButton;     /**< Object Icex Button */
       oneTabButton* objectNaturalButton;  /**< Object Natural Button */
       oneTabButton* objectCharButton;     /**< Object Character Button */
+      oneTabButton* objectMacabreButton;  /**< Object Macabre Button */
       void openObjectWindow();      
       /*********************Particle*Window*******************************/
       janela* particleWindow;             /**< Particle Window */

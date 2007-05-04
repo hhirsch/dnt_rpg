@@ -14,6 +14,7 @@
 #define STATE_GUNS        14
 #define STATE_ICEX        15
 #define STATE_NATURE      16
+#define STATE_MACABRE     17
 
 /* Particles */
 #define STATE_FIRE        30
