@@ -1,7 +1,8 @@
-6
+7
 Barrel ../data/models/objetos/geral/barrel.dcc
 Briefcase ../data/models/objetos/geral/mala.dcc
 Computer ../data/models/objetos/geral/computador.dcc
+Cross ../data/models/objetos/tumbas/cruz.dcc
 Exclamation ../data/models/objetos/geral/exclamacao.dcc
 Guitar ../data/models/objetos/geral/guitarra.dcc
 Stop_Sign ../data/models/objetos/geral/placa_pare.dcc
