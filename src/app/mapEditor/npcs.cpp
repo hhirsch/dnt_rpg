@@ -100,6 +100,8 @@ void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
    per->posicaoLadoX = xReal;
    per->posicaoLadoZ = zReal;
    per->posicaoLadoY = actualMap->getHeight(xReal, zReal);
+   per->update(0); 
+   per->calculateBoundingBox();
 }
 
 /******************************************************************
@@ -112,6 +114,8 @@ void npcs::defineActualNpc(string fileName)
       delete(intList);
       intList = new(Lpersonagem);
       actualNpc = intList->insertCharacter(fileName, features, NULL);
+      actualNpc->update(0); 
+      actualNpc->calculateBoundingBox();
       npcFile = fileName;
    }
 }

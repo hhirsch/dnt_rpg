@@ -156,6 +156,8 @@ void editor::openMap()
                 per = NPCs->insertCharacter(arquivo,features, NULL);
                 per->posicaoLadoX = posX;
                 per->posicaoLadoZ = posZ;
+                per->update(0); 
+                per->calculateBoundingBox();
             }
             fclose(arq);
          }  
