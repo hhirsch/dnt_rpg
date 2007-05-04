@@ -1,4 +1,4 @@
-8
+9
 Barrel ../data/models/objetos/geral/barrel.dcc
 Briefcase ../data/models/objetos/geral/mala.dcc
 Computer ../data/models/objetos/geral/computador.dcc
@@ -7,3 +7,4 @@ Exclamation ../data/models/objetos/geral/exclamacao.dcc
 Guitar ../data/models/objetos/geral/guitarra.dcc
 Stop_Sign ../data/models/objetos/geral/placa_pare.dcc
 Tomb_1 ../data/models/objetos/tumbas/tomb1.dcc
+Tomb_Collumn ../data/models/objetos/tumbas/tomb_column.dcc
