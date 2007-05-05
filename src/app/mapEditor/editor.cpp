@@ -353,6 +353,43 @@ void editor::newMap()
    else
    {
       map->newMap(sizeX,sizeZ);
+      /* Insert walls */
+      muro* actualWall = new(muro);
+      actualWall->proximo = map->muros;
+      map->muros = actualWall;
+      actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
+      actualWall->textura = map->Texturas->indice;
+      actualWall->x1 = 0;
+      actualWall->z1 = 0;
+      actualWall->x2 = (sizeX)*SQUARESIZE;
+      actualWall->z2 = 10;
+      actualWall = new(muro);
+      actualWall->proximo = map->muros;
+      map->muros = actualWall;
+      actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
+      actualWall->textura = map->Texturas->indice;
+      actualWall->x1 = 0;
+      actualWall->z1 = 0;
+      actualWall->x2 = 10;
+      actualWall->z2 = (sizeZ)*SQUARESIZE;
+      actualWall = new(muro);
+      actualWall->proximo = map->muros;
+      map->muros = actualWall;
+      actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
+      actualWall->textura = map->Texturas->indice;
+      actualWall->x1 = (sizeX)*SQUARESIZE-10;
+      actualWall->z1 = 0;
+      actualWall->x2 = ((sizeX)*SQUARESIZE);
+      actualWall->z2 = (sizeZ)*SQUARESIZE;
+      actualWall = new(muro);
+      actualWall->proximo = map->muros;
+      map->muros = actualWall;
+      actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
+      actualWall->textura = map->Texturas->indice;
+      actualWall->x1 = 0;
+      actualWall->z1 = (sizeZ)*SQUARESIZE-10;
+      actualWall->x2 = (sizeX)*SQUARESIZE;
+      actualWall->z2 = (sizeZ)*SQUARESIZE;
    }
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
