@@ -539,11 +539,25 @@ int editor::insertTexture()
  
    Uint8 R,G,B;
    
-   Uint32 pixel = pixel_Pegar(imgPotencia,15,15);
+   Uint32 pixel = pixel_Pegar(imgPotencia,0,0);
    SDL_GetRGB(pixel,imgPotencia->format, &R, &G, &B);
    tex->R = R;
    tex->G = G;
    tex->B = B;
+
+   int x, y;
+   /* Get the Medium Color Value of the texture */
+   for(x=0;x < imgPotencia->w; x++)
+   {
+      for(y=0; y < imgPotencia->h; y++)
+      {
+         pixel = pixel_Pegar(imgPotencia,x,y);
+         SDL_GetRGB(pixel,imgPotencia->format, &R, &G, &B);
+         tex->R = (tex->R+R) / 2;
+         tex->G = (tex->G+G) / 2;
+         tex->B = (tex->B+B) / 2;
+      }
+   }
 
    glGenTextures(1, &(tex->indice));
    glBindTexture(GL_TEXTURE_2D, tex->indice);

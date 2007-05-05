@@ -151,6 +151,7 @@ class lang
    static string ALIGN_DIR;
    static string RACE_DIR;
    static string CLASS_DIR;
+   static string DIALOG_DIR;
 
    /* Messages */
    static string MSG_FAR_AWAY;

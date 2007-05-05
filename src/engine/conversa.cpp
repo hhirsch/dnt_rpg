@@ -145,6 +145,7 @@ int conversation::getActionID(string token, string fileName, int line)
  *************************************************************************/
 int conversation::loadFile(string name)
 {
+  lang language;
   char buffer[BUFFER_SIZE]; // buffer used to read
   string stmp;
   dialog* dlg = NULL;
@@ -157,6 +158,8 @@ int conversation::loadFile(string name)
 
   bool npcBegin = false;
   bool pcBegin = false;
+
+  name = language.DIALOG_DIR + name;
 
   FILE* arq= fopen(name.c_str(),"r");
   if(!arq)

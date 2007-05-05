@@ -902,7 +902,7 @@ void editedDSumColorB(barraTexto* bart,SDL_Surface *screen)
  ************************************************************************/
 int main(int argc, char **argv)
 {
-   printf(" DccNitghtmare - Particle Editor\n");
+   printf(" DccNitghtmare - Particle Editor 0.1\n");
    /* Inicia ou abre mapa Existente */
    char* entrada = ""; /*Arquivo de entrada*/
    int chamadaCorreta=0;
