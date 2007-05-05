@@ -32,6 +32,18 @@ sun::sun(float hour, float farViewX, float farViewZ)
       carregaTexturaRGBA(img,&sunTexture);
       SDL_FreeSurface(img);
    }
+
+   img = IMG_Load("../data/texturas/sky/moon.png");
+   if(!img)
+   {
+      printf("Failed to open Moon Texture!\n");
+   }
+   else
+   {
+      carregaTexturaRGBA(img,&moonTexture);
+      SDL_FreeSurface(img);
+   }
+
 }
 
 /*********************************************************************
@@ -40,6 +52,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
 sun::~sun()
 {
    glDeleteTextures(1,&sunTexture);
+   glDeleteTextures(1, &moonTexture);
 }
 
 /*********************************************************************
@@ -152,24 +165,35 @@ void sun::actualizeHourOfDay(float hour)
  *********************************************************************/
 void sun::drawSun()
 {
+   GLfloat size;
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, sunTexture);
    glEnable(GL_COLOR_MATERIAL);
    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-   glColor3f(0.9,0.87,0.2);
+   if(visibleTime())
+   {
+      glColor3f(0.9,0.87,0.2);
+      glBindTexture(GL_TEXTURE_2D, sunTexture);
+      size = 80;
+   }
+   else
+   {
+      glColor3f(1.0,1.0,1.0);
+      glBindTexture(GL_TEXTURE_2D, moonTexture);
+      size = 50;
+   }
    glPushMatrix();
       glTranslatef(where[0]-4000, where[1], /*where[2]-4000*/0.0);
       glBegin(GL_QUADS);
       glTexCoord2f(0,0);
-      glVertex3f(0, 250, -250);
+      glVertex3f(0, size, -size);
       glTexCoord2f(0,1);
-      glVertex3f(0, -250, -250);
+      glVertex3f(0, -size, -size);
       glTexCoord2f(1,1);
-      glVertex3f(0, -250, 250);
+      glVertex3f(0, -size, size);
       glTexCoord2f(1,0);
-      glVertex3f(0, +250, 250);
+      glVertex3f(0, +size, size);
       glEnd();
    glPopMatrix();
    glDisable(GL_BLEND);

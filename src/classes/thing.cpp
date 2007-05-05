@@ -23,6 +23,9 @@ thing::thing()
    baseAttackModifier = 0;
    sizeModifier = 0;
    psychoState = PSYCHO_NEUTRAL;
+   posicaoLadoX = 0;
+   posicaoLadoY = 0;
+   posicaoLadoZ = 0;
    dead = false;
 }
 

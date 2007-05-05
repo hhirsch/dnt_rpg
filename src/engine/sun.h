@@ -40,6 +40,7 @@ class sun
       GLfloat rotation;             /**< Actual Sun Spin to surface */
 
       GLuint  sunTexture;           /**< Current Sun Texture */
+      GLuint  moonTexture;          /**< Current Moon Texture */
 
       float curHour;                /**< Current Hour of Day to Sun */
 
