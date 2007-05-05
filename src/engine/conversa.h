@@ -145,7 +145,7 @@ class conversation
           * \param numDialog -> number of the new dialog to use */
          void changeDialog(int numDialog);
 
-         string getString(int& initialPosition, char* buffer,
+         string getString(int& initialPosition, string buffer,
                           char& separator);
          int getActionID(string token, string fileName, int line);
          void printError(string fileName, string error, int lineNumber);

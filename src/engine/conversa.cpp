@@ -72,7 +72,7 @@ conversation::~conversation()
 /*************************************************************************
  *                              getString                                *
  *************************************************************************/
-string conversation::getString(int& initialPosition, char* buffer,
+string conversation::getString(int& initialPosition, string buffer,
                                char& separator)
 {
    int i = initialPosition;
@@ -81,7 +81,7 @@ string conversation::getString(int& initialPosition, char* buffer,
    bool considerSpace = false;
    while(!endGet)
    {
-      if( (i >= BUFFER_SIZE-1) )
+      if( (i >= (int)buffer.length()-1) )
       {
          endGet = true;
          separator = '\0';
@@ -146,7 +146,7 @@ int conversation::getActionID(string token, string fileName, int line)
 int conversation::loadFile(string name)
 {
   lang language;
-  char buffer[BUFFER_SIZE]; // buffer used to read
+  string buffer;
   string stmp;
   dialog* dlg = NULL;
   int position = 0;
@@ -161,15 +161,17 @@ int conversation::loadFile(string name)
 
   name = language.DIALOG_DIR + name;
 
-  FILE* arq= fopen(name.c_str(),"r");
-  if(!arq)
+  std::ifstream file;
+  
+  file.open(name.c_str(), ios::in | ios::binary);
+  if(!file)
   {
      printError(name, "Cannot open File!\n", 0);
      return(0);
   }
 
 
-  while(fgets(buffer, sizeof(buffer), arq) != NULL)
+  while(getline(file, buffer) != NULL)
   {
     line++;
     position = 0;
@@ -333,7 +335,7 @@ int conversation::loadFile(string name)
     }
   }
 
-  fclose(arq);
+  file.close();
   return(1);
 }
 

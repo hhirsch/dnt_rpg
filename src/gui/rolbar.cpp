@@ -98,7 +98,7 @@ bool rolBar::eventGot(int type, Tobjeto* object)
          }
          else if(object == (Tobjeto*)down)
          {
-            if(actualEnd <= totalLines)
+            if(actualEnd < totalLines)
             {
                actualEnd += 1;
                actualInit = (actualEnd - maxLines) +1;
@@ -131,7 +131,7 @@ void rolBar::redraw()
    {
       position->y1 = (int) ((y1+2) + ((float)actualInit/(float)totalLines)*
                             (y2-28-y1));
-      position->y2 = (int) ((y1+2) + ((float)(actualEnd-1)/(float)totalLines)*
+      position->y2 = (int) ((y1+2) + ((float)(actualEnd)/(float)totalLines)*
                             (y2-28-y1));
    }
    position->Desenhar(0,0,0,wSurface);   
@@ -157,7 +157,7 @@ void rolBar::setText(string txt)
    {
       position->y1 = (int) ((y1+2) + ((float)actualInit/(float)totalLines)*
                             (y2-28-y1));
-      position->y2 = (int) ((y1+2) + ((float)(actualEnd-1)/(float)totalLines)*
+      position->y2 = (int) ((y1+2) + ((float)(actualEnd)/(float)totalLines)*
                             (y2-28-y1));
    }
    else

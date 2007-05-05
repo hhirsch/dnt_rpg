@@ -145,10 +145,10 @@ int fonte_incCP()
  ***********************************************************************/
 int getTotalLines(string source)
 {
-   Uint32 i;
-   char c;
+   int i;
+   char c = 0;
    int line = -1;
-   for(i=0; (i < source.length()) ; i++)
+   for(i=0; (i < (int)source.length()) ; i++)
    {
       c = source.at(i);
       if(c == '|')
@@ -156,9 +156,10 @@ int getTotalLines(string source)
          line++;
       }
    }
-   if(line == -1)
+   /* If last character is different of |, theres a remanescent line */
+   if(c != '|')
    {
-      return(0);
+      line++;
    }
    return(line);
 }
