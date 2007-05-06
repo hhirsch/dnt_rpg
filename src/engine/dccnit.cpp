@@ -1077,7 +1077,7 @@ void engine::enterBattleMode(bool surprisePC)
    {
       brief = language.FIGHT_NO_NPCS;
    }
-   if(shortCutsWindow != NULL)
+   if( (shortCutsWindow != NULL) && (!brief.empty()))
    {
       briefTxt->setText(brief);
    }
@@ -1494,7 +1494,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                      {
                         pers->psychoState = PSYCHO_HOSTILE;
                      }
-                     if(shortCutsWindow != NULL)
+                     if( (shortCutsWindow != NULL) && (!brief.empty()))
                      {
                         briefTxt->setText(brief);
                      }
@@ -2034,6 +2034,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             z = actualMap->getSizeZ()-1;
          }
+
+         if(actualMap->isOutdoor())
+         {
+            x -= 7;
+            z -= 7;
+         }
          x = 8 + (x*4);
          z = 20 + (z*4);
 
@@ -2354,6 +2360,7 @@ void engine::Draw()
    {
       glPushMatrix();
          particleSystem->actualizeAll(activeCharacter->posicaoLadoX,
+                                      activeCharacter->posicaoLadoY,
                                       activeCharacter->posicaoLadoZ, 
                                       visibleMatrix, option->enableGrass);
       glPopMatrix();
@@ -2765,7 +2772,7 @@ int engine::Run(SDL_Surface *surface)
         {
            lastTurnTime = time;
            fightStatus = fight.doBattleCicle(brief);
-           if(shortCutsWindow)
+           if( (shortCutsWindow) && (!brief.empty()))
            {
               briefTxt->setText(brief);
            }

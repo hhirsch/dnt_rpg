@@ -578,7 +578,10 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         door* porta = portas;
         while(porta != NULL)
         {
-           porta->object->draw(porta->x,porta->z,0,porta->orientacao);
+           if(porta->object != NULL)
+           {
+              porta->object->draw(porta->x,porta->z,0,porta->orientacao);
+           }
            porta = porta->proximo;
         }
 
@@ -670,7 +673,8 @@ Map::Map()
    
    /* Initialize Structs */
    objects = new(lMapObject);
-   x = z = xInic = zInic = 0;
+   x = z = 0;
+   xInic = zInic = 0;
    SQUAREMINISIZE = 4;
    SQUAREMINIDIV = (SQUARESIZE / SQUAREMINISIZE);
 }
@@ -880,6 +884,15 @@ void Map::getInitialPosition(float& iX, float& iZ)
 }
 
 /********************************************************************
+ *                        setInitialPosition                        *
+ ********************************************************************/
+void Map::setInitialPosition(GLfloat iX, GLfloat iZ)
+{
+   xInic = iX;
+   zInic = iZ;
+}
+
+/********************************************************************
  *                             isOutDoor                            *
  ********************************************************************/
 bool Map::isOutdoor()
@@ -1016,9 +1029,16 @@ int Map::open(string arquivo, modelList& mdlList)
             sscanf(buffer,"%s %f,%f:%d",nome,&porta->x,&porta->z,
                                         &porta->orientacao);
             porta->object = objects->getMapObject(nome);
-            porta->status = 0;
-            porta->proximo = portas;
-            portas = porta;
+            if(porta->object == NULL)
+            {
+               printf("Can't Locate Door File: %s\n",nome);
+            }
+            else
+            {
+               porta->status = 0;
+               porta->proximo = portas;
+               portas = porta;
+            }
             break;
          }
          case 'M': /* Define Music */
@@ -1099,10 +1119,10 @@ int Map::open(string arquivo, modelList& mdlList)
             fgets(buffer, sizeof(buffer), arq); 
             if(xInic == -1)
             {
-               sscanf(buffer, "%d,%d",&xInic,&zInic);
-               squareInic = MapSquares[xInic][zInic];
-               xInic = (xInic)*SQUARESIZE + HALFSQUARESIZE;
-               zInic = (zInic)*SQUARESIZE + HALFSQUARESIZE; 
+               sscanf(buffer, "%f,%f",&xInic,&zInic);
+               int posX =(int)floor( xInic / (SQUARESIZE));
+               int posZ =(int)floor( zInic / (SQUARESIZE));
+               squareInic = relativeSquare(posX,posZ);
             }
             break;
          }
@@ -1154,7 +1174,7 @@ int Map::open(string arquivo, modelList& mdlList)
             MapSquares[posX][posZ]->posZ = posZ;
             if(pisavel) 
             {
-               MapSquares[posX][posZ]->flags |= PISAVEL;
+               MapSquares[posX][posZ]->flags = PISAVEL;
             }
             break;
          }
@@ -1176,9 +1196,7 @@ int Map::open(string arquivo, modelList& mdlList)
 
                  if(arqVelho.compare(nome) == 0)
                  {
-                     xInic = posX;
-                     zInic = posZ;
-                     squareInic = MapSquares[xInic][zInic];
+                     squareInic = MapSquares[posX][posZ];
                      xInic = (xInic)*SQUARESIZE + HALFSQUARESIZE;
                      zInic = (zInic)*SQUARESIZE + HALFSQUARESIZE;
                  }
@@ -1316,7 +1334,7 @@ void Map::newMap(int X, int Z)
    z = Z;
    int IDtextura = InserirTextura(this,
                                   "../data/texturas/chao_grama2.jpg", 
-                                  "chao_grama2",20,20,100);
+                                  "chao_grama2",54,102,49);
 
    for(auxZ = 0; auxZ < z; auxZ++)
    {
@@ -1329,7 +1347,7 @@ void Map::newMap(int X, int Z)
           saux->z2 = saux->z1+SQUARESIZE; 
           saux->posX = auxX;
           saux->posZ = auxZ;
-          saux->flags |= PISAVEL;
+          saux->flags = PISAVEL;
           saux->textura = IDtextura;
           saux->R = 130;
           saux->G = 148;
@@ -1514,7 +1532,7 @@ int Map::save(string arquivo)
    door* porta = (door*)portas;
    while(porta != NULL)
    {
-      fprintf(arq,"d %s %f,%f:%d\n",porta->object->getName().c_str(),
+      fprintf(arq,"d %s %f,%f:%d\n",porta->object->getFileName().c_str(),
                                     porta->x,porta->z,
                                     porta->orientacao);
       porta = porta->proximo;
@@ -1549,7 +1567,7 @@ int Map::save(string arquivo)
       for(x1=0;x1<x;x1++)
       {
           fprintf(arq,"p %d,%f,%f,%f,%f\n",
-                  MapSquares[x1][z1]->flags & PISAVEL,
+                  MapSquares[x1][z1]->flags,
                   MapSquares[x1][z1]->h1,
                   MapSquares[x1][z1]->h2,
                   MapSquares[x1][z1]->h3,
@@ -1586,9 +1604,7 @@ int Map::save(string arquivo)
    }
 
    /* Write Initial Character Position */
-   x1 = xInic / SQUARESIZE;
-   z1 = zInic / SQUARESIZE;
-   fprintf(arq,"i %d,%d\n",x1,z1);
+   fprintf(arq,"i %f,%f\n",xInic,zInic);
 
    fclose(arq);
    return(1);
@@ -1666,10 +1682,31 @@ void Map::drawMinimap(SDL_Surface* img)
 {
    int x1,y1,x2,y2, X, Z;
 
-   x1 = 0; y1 = 0;
-   for(Z = 0; Z < z; Z++)
+   int limX=0, limZ=0, iX=0, iZ=0, sX = 0, sZ = 0;
+
+   if(isOutdoor())
    {
-      for(X = 0; X < x; X++)
+      limX = x-7;
+      limZ = z-7;
+      iX = 7;
+      iZ = 7;
+      sX = x-14;
+      sZ = z - 14;
+   }
+   else
+   {
+      limX = x;
+      limZ = z;
+      iX = 0;
+      iZ = 0;
+      sX = x;
+      sZ = z;
+   }
+
+   x1 = 0; y1 = 0;
+   for(Z = iZ; Z < limZ; Z++)
+   {
+      for(X = iX; X < limX; X++)
       {
           cor_Definir(MapSquares[X][Z]->R,
                       MapSquares[X][Z]->G,
@@ -1683,11 +1720,12 @@ void Map::drawMinimap(SDL_Surface* img)
    }
 
    cor_Definir(1, 1, 1);
-   retangulo_2Cores(img,0,0,x*SQUAREMINISIZE-1,z*SQUAREMINISIZE-1,0,0,0,0);
+   retangulo_2Cores(img,0,0,sX*SQUAREMINISIZE-1,sZ*SQUAREMINISIZE-1,0,0,0,0);
    
    muro* maux = muros;
    while(maux!=NULL)
    {
+      //FIXME walls values when outdoor!
        x1 = (int) ( ((float)maux->x1 / (float)SQUAREMINIDIV ));
        x2 = (int) ( (((float)maux->x2 / (float)SQUAREMINIDIV))-1 );
        y1 = (int) ( ((float)maux->z1 / (float)SQUAREMINIDIV ));

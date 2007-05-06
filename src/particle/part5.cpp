@@ -13,7 +13,7 @@ part5::part5(float cX,float cY,float cZ, string fileName):
                                particleSystem(fileName,PARTICLE_DRAW_GROUPS)
 {
    centerX = cX; 
-   centerY=cY; 
+   alpha=cY; 
    centerZ=cZ;
    actualParticles = 0;
    partTexture = LoadTexture("../data/particles/part2.png");
@@ -104,6 +104,7 @@ void part5::actualize(particle* part)
 {
    if(part->posY <= 0 )
    {
+     /* FIXME do it based on map Height, not 0! */
      part->status =  PARTICLE_STATUS_STATIC;
      part->posY = 0;
    }
@@ -165,7 +166,7 @@ void part5::createParticle(particle* part)
    part->posX = (dMultCenter[0]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[0])
                 + centerX;
    part->posY = (dMultCenter[1]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[1])
-                + centerY;
+                + alpha + centerY;
    part->posZ = (dMultCenter[2]*(rand() / ((double)RAND_MAX + 1))+dSumCenter[2])
                 + centerZ;
    part->prvX = part->posX;

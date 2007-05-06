@@ -397,7 +397,7 @@ personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
 
    /* Character FileName */
    fscanf(arq, "%s", buffer);
-   novo->setCharacterFile(buffer);
+   novo->setCharacterFile(file);
    arqModelo = buffer;
 
    /* Define the Portrait */

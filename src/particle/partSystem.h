@@ -53,12 +53,13 @@ class partSystem
        *************************************************************** 
        * Actualize and Render all Active Systems
        * \param PCposX -> position X of the PC.
+       * \param PCposY -> position Y of the PC
        * \param PCposZ -> position Z of the PC.
        * \param matriz -> View Frustum Matrix.
        * \param enableGrass -> true if grass is enable.
        ***************************************************************/
-      void actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
-                        bool enableGrass);
+      void actualizeAll(float PCposX, float PCposY, float PCposZ, 
+                        GLfloat matriz[6][4], bool enableGrass);
 
       /*!
        *************************************************************** 

@@ -39,7 +39,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
    GLfloat max2[3];
 
    Square* proxima = quad;
-   if(proxima->flags & PISAVEL)
+   if(proxima->flags == PISAVEL)
    {
      result = true;
    }

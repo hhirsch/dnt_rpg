@@ -199,6 +199,17 @@ void editor::openMap()
       {
          particleSystem->deleteAll();
       }
+      /* Real Size when outDoor */
+      if(map->isOutdoor())
+      {
+         sizeX = map->getSizeX() - 14;
+         sizeZ = map->getSizeZ() - 14;
+      }
+      else
+      {
+         sizeX = map->getSizeX();
+         sizeZ = map->getSizeZ();
+      }
       gui->showMessage("Map opened.");
    }
    else
@@ -332,23 +343,24 @@ void editor::newMap()
     * squares to the horizon! */
    if(map->isOutdoor())
    {
-      map->newMap(sizeX+12, sizeZ+12);
+      map->newMap(sizeX+14, sizeZ+14);
       int k, l;
       Square* saux;
-      for(k = 0; k < sizeX+12; k++)
+      for(k = 0; k < sizeX+14; k++)
       {
-         for(l=0; l < sizeZ+12; l++)
+         for(l=0; l < sizeZ+14; l++)
          {
             saux = map->relativeSquare(k,l);
-            if( (sizeX < 6) || (sizeZ < 6) || (sizeX >= sizeX+6) ||
-                (sizeZ >= sizeZ+6))
+            if( (k < 7) || (l < 7) || (k >= sizeX+7) || (l >= sizeZ+7) )
             {
-               saux->flags &= !PISAVEL;
+               saux->flags = 0;
             }
          }
       }
-      gui->gameCamera.actualizeCamera(((sizeX+12)*SQUARESIZE / 2.0), 0.0, 
-                                      ((sizeZ+12)*SQUARESIZE / 2.0), 0.0);
+      map->setInitialPosition( ((sizeX+12)*SQUARESIZE / 2.0),
+                            ((sizeZ+12)*SQUARESIZE / 2.0));
+      gui->gameCamera.actualizeCamera(((sizeX+14)*SQUARESIZE / 2.0), 0.0, 
+                                      ((sizeZ+14)*SQUARESIZE / 2.0), 0.0);
    }
    else
    {
@@ -390,6 +402,9 @@ void editor::newMap()
       actualWall->z1 = (sizeZ)*SQUARESIZE-10;
       actualWall->x2 = (sizeX)*SQUARESIZE;
       actualWall->z2 = (sizeZ)*SQUARESIZE;
+      /* Define Position */
+      map->setInitialPosition( ((sizeX)*SQUARESIZE / 2.0),
+                            ((sizeZ)*SQUARESIZE / 2.0));
    }
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
@@ -410,7 +425,7 @@ void editor::newMap()
       glFogf(GL_FOG_START, 100);
       glFogf(GL_FOG_END, HALFFARVIEW);
    }
-   gui->setFog(&map->fog);
+   gui->setFog(&map->fog); 
 }
 
 /*********************************************************************
@@ -616,50 +631,53 @@ void editor::draw()
             glColor4fv(ambient);
             glBegin(GL_QUADS);
                glNormal3f(0,1,0);
-               glVertex3f(6*SQUARESIZE-5, 0.5, 6*SQUARESIZE);
-               glVertex3f(6*SQUARESIZE-5, 0.5, (sizeZ+6)*SQUARESIZE);
-               glVertex3f(6*SQUARESIZE+5, 0.5, (sizeZ+6)*SQUARESIZE);
-               glVertex3f(6*SQUARESIZE+5, 0.5, 6*SQUARESIZE);
+               glVertex3f(7*SQUARESIZE-5, 0.5, 7*SQUARESIZE);
+               glVertex3f(7*SQUARESIZE-5, 0.5, (sizeZ+7)*SQUARESIZE);
+               glVertex3f(7*SQUARESIZE+5, 0.5, (sizeZ+7)*SQUARESIZE);
+               glVertex3f(7*SQUARESIZE+5, 0.5, 7*SQUARESIZE);
 
                glNormal3f(0,1,0);
-               glVertex3f((sizeX+6)*SQUARESIZE-5, 0.5, 6*SQUARESIZE);
-               glVertex3f((sizeX+6)*SQUARESIZE-5, 0.5, (sizeZ+6)*SQUARESIZE);
-               glVertex3f((sizeX+6)*SQUARESIZE+5, 0.5, (sizeZ+6)*SQUARESIZE);
-               glVertex3f((sizeX+6)*SQUARESIZE+5, 0.5, 6*SQUARESIZE);
+               glVertex3f((sizeX+7)*SQUARESIZE-5, 0.5, 7*SQUARESIZE);
+               glVertex3f((sizeX+7)*SQUARESIZE-5, 0.5, (sizeZ+7)*SQUARESIZE);
+               glVertex3f((sizeX+7)*SQUARESIZE+5, 0.5, (sizeZ+7)*SQUARESIZE);
+               glVertex3f((sizeX+7)*SQUARESIZE+5, 0.5, 7*SQUARESIZE);
 
                glNormal3f(0,1,0);
-               glVertex3f(6*SQUARESIZE, 0.5, 6*SQUARESIZE-5);
-               glVertex3f((sizeX+6)*SQUARESIZE, 0.5, 6*SQUARESIZE-5);
-               glVertex3f((sizeX+6)*SQUARESIZE, 0.5, 6*SQUARESIZE+5);
-               glVertex3f(6*SQUARESIZE, 0.5, 6*SQUARESIZE+5);
+               glVertex3f(7*SQUARESIZE, 0.5, 7*SQUARESIZE-5);
+               glVertex3f((sizeX+7)*SQUARESIZE, 0.5, 7*SQUARESIZE-5);
+               glVertex3f((sizeX+7)*SQUARESIZE, 0.5, 7*SQUARESIZE+5);
+               glVertex3f(7*SQUARESIZE, 0.5, 7*SQUARESIZE+5);
 
                glNormal3f(0,1,0);
-               glVertex3f(6*SQUARESIZE, 0.5, (sizeZ+6)*SQUARESIZE-5);
-               glVertex3f((sizeX+6)*SQUARESIZE, 0.5, (sizeZ+6)*SQUARESIZE-5);
-               glVertex3f((sizeX+6)*SQUARESIZE, 0.5, (sizeZ+6)*SQUARESIZE+5);
-               glVertex3f(6*SQUARESIZE, 0.5, (sizeZ+6)*SQUARESIZE+5);
+               glVertex3f(7*SQUARESIZE, 0.5, (sizeZ+7)*SQUARESIZE-5);
+               glVertex3f((sizeX+7)*SQUARESIZE, 0.5, (sizeZ+7)*SQUARESIZE-5);
+               glVertex3f((sizeX+7)*SQUARESIZE, 0.5, (sizeZ+7)*SQUARESIZE+5);
+               glVertex3f(7*SQUARESIZE, 0.5, (sizeZ+7)*SQUARESIZE+5);
 
             glEnd();
          glPopMatrix();
       }
-      glColor3f(1.0,1.0,1.0);
+      glColor4f(1.0,1.0,1.0,1.0);
 
       glPushMatrix();
          map->draw(gui->gameCamera.getCameraX(), gui->gameCamera.getCameraY(), 
                    gui->gameCamera.getCameraZ(), visibleMatrix);
       glPopMatrix();
 
-      glPushMatrix();
-         glDisable(GL_LIGHTING);
-         glBegin(GL_QUADS);
-         glVertex3f(-10, -5, -10);
-         glVertex3f(-10, -5, map->getSizeZ()*SQUARESIZE+10);
-         glVertex3f(map->getSizeX()*SQUARESIZE+10, -5,
-                    map->getSizeZ()*SQUARESIZE+10);
-         glVertex3f(map->getSizeX()*SQUARESIZE+10, -5, -10);
-         glEnd();
-         glEnable(GL_LIGHTING);
-      glPopMatrix();
+      if(!map->isOutdoor())
+      {
+         glPushMatrix();
+            glDisable(GL_LIGHTING);
+            glBegin(GL_QUADS);
+            glVertex3f(-10, -5, -10);
+            glVertex3f(-10, -5, map->getSizeZ()*SQUARESIZE+10);
+            glVertex3f(map->getSizeX()*SQUARESIZE+10, -5,
+                       map->getSizeZ()*SQUARESIZE+10);
+            glVertex3f(map->getSizeX()*SQUARESIZE+10, -5, -10);
+            glEnd();
+            glEnable(GL_LIGHTING);
+         glPopMatrix();
+      }
 
 
       glPushMatrix();   
@@ -690,7 +708,7 @@ void editor::draw()
       glPopMatrix();
    }
 
-   glColor3f(1.0,1.0,1.0);
+   glColor4f(1.0,1.0,1.0,1.0);
 
    /* Draw the NPCs */
    if(NPCs)
@@ -740,16 +758,17 @@ void editor::draw()
          per = (personagem*) per->proximo;
       }
    }
+   glColor4f(1.0,1.0,1.0,1.0);
 
    /* Draw Particles */
    glPushMatrix();
-     particleSystem->actualizeAll(0,0,visibleMatrix, true);
+     particleSystem->actualizeAll(0,0,0,visibleMatrix, true);
    glPopMatrix();
    glDisable(GL_FOG);
 
    //gameSun->drawSun();
 
-   glColor3f(1.0,1.0,1.0);
+   glColor4f(1.0,1.0,1.0,1.0);
 
    glDisable(GL_LIGHTING);
    glDisable(GL_DEPTH_TEST);
@@ -760,6 +779,7 @@ void editor::draw()
    glEnable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
 
+   glColor4f(1.0,1.0,1.0,1.0);
 
    /* Draw Active Texture */
    if(mapOpened)

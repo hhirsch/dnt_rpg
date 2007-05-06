@@ -1,4 +1,5 @@
-4
+5
+Black_Board ../data/models/objetos/icex/quadro.dcc
 Chair ../data/models/objetos/icex/cadeira.dcc
 Chair_Table ../data/models/objetos/icex/mesa_braco.dcc
 Icex_Table ../data/models/objetos/icex/mesa_redonda.dcc

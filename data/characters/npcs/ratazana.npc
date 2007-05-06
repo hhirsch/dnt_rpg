@@ -1,13 +1,14 @@
 Ratazana
 ../data/models/personagens/Ratazana/modelo.cfg
 ../data/characters/portraits/ratazana.png
-maxLifePoints               42
-baseModifier                12/12/12
+maxLifePoints               22
+baseModifier                2/2/2
 attackModifier              8/3/0/0/0/0
 sizeModifier                2
+conversationFile            ratazana1.dlg
 ATT_STRENGHT                10
 ATT_DEXTERY                 18
-ATT_CONSTITUTION            20
+ATT_CONSTITUTION            12
 ATT_INTELIGENCY             14
 ATT_WISDOW                  6
 ATT_CHARISM                 2

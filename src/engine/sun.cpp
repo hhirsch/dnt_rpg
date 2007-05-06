@@ -184,7 +184,7 @@ void sun::drawSun()
       size = 50;
    }
    glPushMatrix();
-      glTranslatef(where[0]-4000, where[1], /*where[2]-4000*/0.0);
+      glTranslatef(where[0]-3000, where[1], /*where[2]-4000*/0.0);
       glBegin(GL_QUADS);
       glTexCoord2f(0,0);
       glVertex3f(0, size, -size);

@@ -339,6 +339,7 @@ class Map
        * \param iZ -> initial Z position
        ***************************************************************/
       void getInitialPosition(float& iX, float& iZ);
+      void setInitialPosition(GLfloat iX, GLfloat iZ);
 
       /*!
        ***************************************************************
@@ -378,8 +379,8 @@ class Map
          string name;          /**< File name of loaded map */
          string particlesFileName; /**< File Name of Map Particles Systens */
          string npcFileName;   /**< Static NPC's on map filename */
-         int xInic,            /**< X coordinate where PCs starts */
-             zInic;            /**< Z Coordinate where PCs starts */
+         float xInic,            /**< X coordinate where PCs starts */
+               zInic;            /**< Z Coordinate where PCs starts */
 };
 
 #endif

@@ -145,8 +145,8 @@ void partSystem::deleteAll()
 /**********************************************************************
  *                             actualizeAll                           *
  **********************************************************************/
-void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
-                              bool enableGrass)
+void partSystem::actualizeAll(float PCposX, float PCposY, float PCposZ, 
+                              GLfloat matriz[6][4], bool enableGrass)
 {
    int i;
 
@@ -168,7 +168,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
       {
          if(waterfall[i]->followPC)
          {
-            waterfall[i]->definePosition(PCposX, PCposZ);
+            waterfall[i]->definePosition(PCposX, PCposY, PCposZ);
          }
          waterfall[i]->NextStep(matriz);
       }
@@ -181,7 +181,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
       {
          if(fire[i]->followPC)
          {
-            fire[i]->definePosition(PCposX, PCposZ);
+            fire[i]->definePosition(PCposX, PCposY, PCposZ);
          }
          fire[i]->NextStep(matriz);
       }
@@ -194,7 +194,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
       {
          if(waterSurface[i]->followPC)
          {
-            waterSurface[i]->definePosition(PCposX, PCposZ);
+            waterSurface[i]->definePosition(PCposX, PCposY, PCposZ);
          }
          waterSurface[i]->NextStep(matriz);
       }
@@ -206,7 +206,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
       {
          if(smoke[i]->followPC)
          {
-            smoke[i]->definePosition(PCposX, PCposZ);
+            smoke[i]->definePosition(PCposX, PCposY, PCposZ);
          }
          smoke[i]->NextStep(matriz);
       }
@@ -218,7 +218,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
       {
          if(blood[i]->followPC)
          {
-            blood[i]->definePosition(PCposX, PCposZ);
+            blood[i]->definePosition(PCposX, PCposY, PCposZ);
          }
          blood[i]->NextStep(matriz);
       }
@@ -230,7 +230,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
       {
          if(lightning[i]->followPC)
          {
-            lightning[i]->definePosition(PCposX, PCposZ);
+            lightning[i]->definePosition(PCposX, PCposY, PCposZ);
          }
          lightning[i]->NextStep(matriz);
       }
@@ -242,7 +242,7 @@ void partSystem::actualizeAll(float PCposX, float PCposZ, GLfloat matriz[6][4],
       {
          if(snow[i]->followPC)
          {
-            snow[i]->definePosition(PCposX, PCposZ);
+            snow[i]->definePosition(PCposX, PCposY, PCposZ);
          }
          snow[i]->NextStep(matriz);
       }
@@ -505,7 +505,7 @@ void partSystem::stabilizeAll()
    for(i=0; i< PART_STABILIZE_LOOP;i++)
    {
       /* Actualize All, except the grass, whose isn't need to stabilize */
-      actualizeAll(0,0,matriz, false);
+      actualizeAll(0,0,0,matriz, false);
    }
 }
 
