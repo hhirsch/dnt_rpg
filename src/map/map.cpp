@@ -1511,7 +1511,6 @@ int Map::save(string arquivo)
 
    /* Write used objects */
    int i;
-   printf("Total: %d\n", objects->total);
    if(objects->total>0)
    {
       mapObject* objAux = objects->first;
