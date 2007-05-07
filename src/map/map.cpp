@@ -326,7 +326,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               GLfloat matriz[6][4])
 {
    int textura = -1;
-   int i, Xaux = 0, Zaux = 0;
+   int Xaux = 0, Zaux = 0;
 
    /* For each square (a square is squarizeble!) */
    int k,l;
@@ -349,9 +349,9 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
                    GL_NEAREST_MIPMAP_LINEAR );
-   /*glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);*/
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
    glBegin(GL_QUADS);
      /* Draw at horizon */
@@ -396,13 +396,13 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                               ALTURAMAXIMA,
                               MapSquares[Xaux][Zaux]->z2, matriz)))
          {
-            for(i=0;i<MAXOBJETOS;i++)
+            /*for(i=0;i<MAXOBJETOS;i++)
             {
                if(MapSquares[Xaux][Zaux]->quadObjetos[i] != NULL)
                { 
                   MapSquares[Xaux][Zaux]->quadObjetos[i]->visivel = 1;
                }
-            }
+            }*/
             MapSquares[Xaux][Zaux]->visivel = 1;
 
             /* Draw the Square as some squares */ 
@@ -1194,11 +1194,13 @@ int Map::open(string arquivo, modelList& mdlList)
                  MapSquares[posX][posZ]->mapConection.mapName = nome;
                  MapSquares[posX][posZ]->mapConection.active = true;
 
-                 if(arqVelho.compare(nome) == 0)
+                 if(arqVelho == (MapSquares[posX][posZ]->mapConection.mapName))
                  {
                      squareInic = MapSquares[posX][posZ];
-                     xInic = (xInic)*SQUARESIZE + HALFSQUARESIZE;
-                     zInic = (zInic)*SQUARESIZE + HALFSQUARESIZE;
+                     xInic = (MapSquares[posX][posZ]->mapConection.x1 + 
+                              MapSquares[posX][posZ]->mapConection.x2) / 2.0;
+                     zInic = (MapSquares[posX][posZ]->mapConection.z1 + 
+                              MapSquares[posX][posZ]->mapConection.z2) / 2.0;
                  }
 
                  break;
@@ -1509,12 +1511,20 @@ int Map::save(string arquivo)
 
    /* Write used objects */
    int i;
+   printf("Total: %d\n", objects->total);
    if(objects->total>0)
    {
       mapObject* objAux = objects->first;
       for(i = 0; i < objects->total; i++)
       {
-         fprintf(arq,"o %s\n",objAux->getFileName().c_str());
+         if(!objAux->getFileName().empty())
+         {
+            fprintf(arq,"o %s\n",objAux->getFileName().c_str());
+         }
+         else
+         {
+            printf("Object FileName is Empty!!!\n");
+         }
          objAux = objAux->next;
       }
    }

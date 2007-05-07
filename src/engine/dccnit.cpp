@@ -2192,7 +2192,7 @@ void engine::Draw()
    if(actualMap->isOutdoor())
    {
       glPushMatrix();
-         gameSky->draw(actualMap,gameSun->getRotation());
+         gameSky->draw(actualMap, gameSun->getRotation());
       glPopMatrix();
    }
 

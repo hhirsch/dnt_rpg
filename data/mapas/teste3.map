@@ -4,14 +4,11 @@ npc ../data/mapas/teste3.map.npc
 MUSICA ../data/music/musica13.ogg
 Outdoor: 0
 o ../data/models/objetos/icex/lixo.dcc
-o ../data/models/objetos/icex/quadro.dcc
-o ../data/models/objetos/geral/porta3.dcc
 o ../data/models/objetos/icex/cadeira.dcc
 o ../data/models/objetos/icex/mesa.dcc
 o ../data/models/objetos/icex/cadeira.dcc
 o ../data/models/objetos/geral/porta3.dcc
 o ../data/models/objetos/icex/mesa_braco.dcc
-o ../data/models/objetos/icex/quadro.dcc
 o ../data/models/objetos/icex/quadro.dcc
 t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 129 118 131
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 220 170 171
@@ -120,6 +117,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uc 157.559540,308.741302,178.787354,318.985077:../data/mapas/teste2.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000

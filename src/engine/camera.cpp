@@ -6,9 +6,9 @@
  ******************************************************************/
 camera::camera()
 {
-   theta=25;
-   phi=0.05;
-   d=150;
+   theta=45;
+   phi=75;
+   d=320;
    centerX = centerZ = 0;
    centerY = 30;
    deltaY = 0;
