@@ -87,7 +87,7 @@ uo ../data/models/objetos/icex/mesa_braco.dcc 1:4,2:233.707947,93.118423:-67:0
 uo ../data/models/objetos/icex/mesa_braco.dcc 1:4,2:236.584656,108.546463:-49:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
-uo ../data/models/objetos/icex/quadro.dcc 1:5,2:310.008148,64.805870:6390:0
+uo ../data/models/objetos/icex/quadro.dcc 1:5,2:310.008148,64.805870:-90:0
 uo ../data/models/objetos/icex/mesa_braco.dcc 1:5,2:259.112701,101.012886:-44:0
 uo ../data/models/objetos/icex/lixo.dcc 1:5,2:304.634857,107.497780:0:0
 #Z: 2

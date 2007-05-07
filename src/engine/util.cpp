@@ -154,8 +154,8 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
 
    
    /* translada o bounding box para o local correto*/
-   min[1] += varMinY;
-   max[1] += varMaxY;
+   min[1] = varMinY;
+   max[1] = varMaxY;
    for(aux=0;aux<4;aux++)
    {
      x[aux] += varX;
