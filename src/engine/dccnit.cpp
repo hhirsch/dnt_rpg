@@ -2070,6 +2070,18 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       if(tmp > 0)
       SDL_Delay(tmp);
    }
+
+   /* Verify Mouse Cursor Forbidden (when can't go to position) */
+   if(!gui->mouseOnGui(mouseX, mouseY))
+   {
+      int posX = (int) floor(xReal / SQUARESIZE);
+      int posZ = (int) floor(zReal / SQUARESIZE);
+      Square* sq = actualMap->relativeSquare(posX, posZ);
+      if( (sq == NULL) || (sq->flags == 0))
+      {
+         cursors->setActual(CURSOR_FORBIDDEN);
+      }
+   }
    
    if( (redesenha) || ( (*forcaAtualizacao != 0)))
    {      

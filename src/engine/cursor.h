@@ -17,7 +17,8 @@
 #define CURSOR_GET       5 /**< Get Mouse Cursor */
 #define CURSOR_INVENTORY 6 /**< Inventory Mouse Cursor */
 #define CURSOR_DOOR      7 /**< Door Mouse Cursor */
-#define CURSOR_TOTAL     8 /**< Total number of mouse cursors */
+#define CURSOR_FORBIDDEN 8 /**< Forbidden Mouse Cursor */
+#define CURSOR_TOTAL     9 /**< Total number of mouse cursors */
 
 /*! A mouse cursor class.*/
 class cursor

@@ -14,6 +14,7 @@ cursor::cursor()
    textura[CURSOR_GET] = loadCursor("../data/cursors/Get.png");
    textura[CURSOR_INVENTORY] = loadCursor("../data/cursors/Inventory.png");
    textura[CURSOR_DOOR] = loadCursor("../data/cursors/Door.png");
+   textura[CURSOR_FORBIDDEN] = loadCursor("../data/cursors/forbidden.png");
    actualCursor = CURSOR_WALK;
 }
 

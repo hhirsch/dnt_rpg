@@ -3,38 +3,39 @@ T 5X5
 npc ../data/mapas/teste3.map.npc
 MUSICA ../data/music/musica13.ogg
 Outdoor: 0
+o ../data/models/objetos/icex/lixo.dcc
 o ../data/models/objetos/icex/quadro.dcc
-o ../data/models/objetos/icex/quadro.dcc
-o ../data/models/objetos/icex/mesa_braco.dcc
 o ../data/models/objetos/geral/porta3.dcc
 o ../data/models/objetos/icex/cadeira.dcc
 o ../data/models/objetos/icex/mesa.dcc
 o ../data/models/objetos/icex/cadeira.dcc
 o ../data/models/objetos/geral/porta3.dcc
+o ../data/models/objetos/icex/mesa_braco.dcc
 o ../data/models/objetos/icex/quadro.dcc
-t ../data/texturas/chao_madeira3.png ../data/texturas/chao_madeira3.png 102 57 29
-t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 220 170 171
+o ../data/models/objetos/icex/quadro.dcc
 t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 129 118 131
-d ../data/models/objetos/geral/porta3.dcc 162.878220,128.000000:0
-d ../data/models/objetos/geral/porta3.dcc 26.435873,128.000000:0
+t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 220 170 171
+t ../data/texturas/chao_madeira3.png ../data/texturas/chao_madeira3.png 102 57 29
 d ../data/models/objetos/geral/porta3.dcc 157.107285,320.000000:0
-muro 10.000000,0.000000,310.000000,10.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 0.000000,0.000000,10.000000,320.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 310.000000,0.000000,320.000000,320.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,310.000000,157.107285,320.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,118.000000,26.435873,128.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 128.000000,10.000000,138.000000,118.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 184.716019,118.000000,310.000000,128.000000:16,16,16
+d ../data/models/objetos/geral/porta3.dcc 26.435873,128.000000:0
+d ../data/models/objetos/geral/porta3.dcc 162.878220,128.000000:0
+muro 178.945084,310.000000,310.000000,320.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
 muro 48.273666,118.000000,162.878220,128.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-muro 178.945084,310.000000,310.000000,320.000000:16,16,16
+muro 184.716019,118.000000,310.000000,128.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 128.000000,10.000000,138.000000,118.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,118.000000,26.435873,128.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,310.000000,157.107285,320.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 310.000000,0.000000,320.000000,320.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 0.000000,0.000000,10.000000,320.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,0.000000,310.000000,10.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -42,6 +43,7 @@ ut ../data/texturas/chao_ametista.png
 uo ../data/models/objetos/icex/quadro.dcc 1:1,1:10.276112,60.425045:88:0
 uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:57.922062,33.189194:90:0
 uo ../data/models/objetos/icex/mesa.dcc 1:1,1:48.923279,34.159252:90:0
+uo ../data/models/objetos/icex/lixo.dcc 1:1,1:17.146715,15.038249:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_ametista.png
 uo ../data/models/objetos/icex/cadeira.dcc 1:2,1:83.614151,33.310837:90:0
@@ -87,6 +89,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 uo ../data/models/objetos/icex/quadro.dcc 1:5,2:310.008148,64.805870:6390:0
 uo ../data/models/objetos/icex/mesa_braco.dcc 1:5,2:259.112701,101.012886:-44:0
+uo ../data/models/objetos/icex/lixo.dcc 1:5,2:304.634857,107.497780:0:0
 #Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
