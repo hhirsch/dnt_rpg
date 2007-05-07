@@ -845,11 +845,14 @@ void editor::doEditorIO()
    {
       string doorFile = gui->getSelectedText();
       if( (portalEditor->getDoor() == NULL) || 
-          ( (!doorFile.empty()) && (doorFile != portalEditor->getDoorFileName())
-          ) )
+          (doorFile != portalEditor->getDoorFileName())
+        )
       {
-         mapObject* obj = map->insertMapObject(doorFile, *models);
-         portalEditor->defineDoor(obj, gui->getSelectedText());
+         if(!doorFile.empty())
+         {
+            mapObject* obj = map->insertMapObject(doorFile, *models);
+            portalEditor->defineDoor(obj, gui->getSelectedText());
+         }
       }
       portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
                                  proj, modl, viewPort);

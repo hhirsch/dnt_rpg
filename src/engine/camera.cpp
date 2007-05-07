@@ -7,7 +7,7 @@
 camera::camera()
 {
    theta=45;
-   phi=75;
+   phi=75.75;
    d=320;
    centerX = centerZ = 0;
    centerY = 30;
