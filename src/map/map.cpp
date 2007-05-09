@@ -358,11 +358,17 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
      if(outdoor)
      {
         glNormal3f(0,1,0);
+        glTexCoord2f(0.0,0.0);
         glVertex3f(-FARVIEW,-1,-FARVIEW);
+        glTexCoord2f(0.0,1.0);
         glVertex3f(-FARVIEW,-1,+FARVIEW);
+        glTexCoord2f(1.0,1.0);
         glVertex3f(+FARVIEW,-1,+FARVIEW);
+        glTexCoord2f(1.0,0.0);
         glVertex3f(+FARVIEW,-1,-FARVIEW);
-      }
+        glColor3f(1.0,1.0,1.0);
+     }
+
    for(Xaux = 0; Xaux < x; Xaux++)
    {
       for(Zaux = 0; Zaux < z; Zaux++)
@@ -457,8 +463,6 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         lights.actualize();
 
         glEnable(GL_COLOR_MATERIAL);
-
-
         drawFloor( cameraX, cameraY, cameraZ, matriz );
 
         textura = MapSquares[Xaux][Zaux]->textura;
