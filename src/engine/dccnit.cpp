@@ -2771,6 +2771,7 @@ int engine::Run(SDL_Surface *surface)
            if(!alive)
            {
               /* All Pcs are Dead, so Death Screen! */
+              snd->loadMusic("../data/music/musica8.ogg");
               showImage("../data/texturas/fightMode/death.png");
               engineMode = ENGINE_MODE_REAL_TIME;
               gui->closeAllWindows();
