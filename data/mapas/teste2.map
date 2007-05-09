@@ -2,26 +2,27 @@ T 26X28
 # Made by DccNiTghtmare's MapEditor, v0.0.3
 npc ../data/mapas/teste2.map.npc
 PS ../data/mapas/teste2.map.par
+MUSICA ../data/music/musica5.ogg
 Outdoor: 1
-o ../data/models/objetos/armas/kalashnikov.dcc
-o ../data/models/objetos/armas/kalashnikov.dcc
-o ../data/models/objetos/armas/beretta92.dcc
-o ../data/models/objetos/geral/barrel.dcc
 o ../data/models/building/house2.dcc
-t ../data/texturas/chao_pedra_grama4.png ../data/texturas/chao_pedra_grama4.png 66 93 24
-t ../data/texturas/chao_pedra_grama3.png ../data/texturas/chao_pedra_grama3.png 106 112 106
-t ../data/texturas/chao_pedra_grama2.png ../data/texturas/chao_pedra_grama2.png 106 112 106
-t ../data/texturas/chao_pedra_grama.png ../data/texturas/chao_pedra_grama.png 66 93 24
-t ../data/texturas/chao_pedras.png ../data/texturas/chao_pedras.png 106 112 106
-t ../data/texturas/chao_lama.png ../data/texturas/chao_lama.png 190 148 107
-t chao_grama2 ../data/texturas/chao_grama2.jpg 54 102 49
-t ../data/texturas/chao_grama_lama.png ../data/texturas/chao_grama_lama.png 66 93 24
-t ../data/texturas/chao_grama_lama2.png ../data/texturas/chao_grama_lama2.png 190 148 107
-t ../data/texturas/chao_rocha3_grama2.png ../data/texturas/chao_rocha3_grama2.png 126 129 134
+o ../data/models/objetos/geral/barrel.dcc
+o ../data/models/objetos/armas/beretta92.dcc
+o ../data/models/objetos/armas/kalashnikov.dcc
+o ../data/models/objetos/armas/kalashnikov.dcc
 t ../data/texturas/chao_rocha3.png ../data/texturas/chao_rocha3.png 128 130 136
-meioFio 668.271057,1021.795532,893.948303,1024.295532
-mt ../data/texturas/chao_rocha3.png
+t ../data/texturas/chao_rocha3_grama2.png ../data/texturas/chao_rocha3_grama2.png 126 129 134
+t ../data/texturas/chao_grama_lama2.png ../data/texturas/chao_grama_lama2.png 190 148 107
+t ../data/texturas/chao_grama_lama.png ../data/texturas/chao_grama_lama.png 66 93 24
+t chao_grama2 ../data/texturas/chao_grama2.jpg 54 102 49
+t ../data/texturas/chao_lama.png ../data/texturas/chao_lama.png 190 148 107
+t ../data/texturas/chao_pedras.png ../data/texturas/chao_pedras.png 106 112 106
+t ../data/texturas/chao_pedra_grama.png ../data/texturas/chao_pedra_grama.png 66 93 24
+t ../data/texturas/chao_pedra_grama2.png ../data/texturas/chao_pedra_grama2.png 106 112 106
+t ../data/texturas/chao_pedra_grama3.png ../data/texturas/chao_pedra_grama3.png 106 112 106
+t ../data/texturas/chao_pedra_grama4.png ../data/texturas/chao_pedra_grama4.png 66 93 24
 meioFio 704.000000,832.000000,896.000000,834.500000
+mt ../data/texturas/chao_rocha3.png
+meioFio 668.271057,1021.795532,893.948303,1024.295532
 mt ../data/texturas/chao_rocha3.png
 #Z: 0
 p 0,0.000000,0.000000,0.000000,0.000000
