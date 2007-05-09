@@ -5,6 +5,7 @@
 
 #include "personagens.h"
 #include "conversa.h"
+#include "../gui/desenho.h"
 #include <SDL/SDL_image.h>
 
 /*********************************************************************
@@ -162,13 +163,12 @@ void personagem::definePortrait(string portraitFile)
    retratoConversa = portraitFile;
 
    /* Load as Texture */
-   glGenTextures(1, &portrait);
-   glBindTexture(GL_TEXTURE_2D, portrait);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, portraitImage->w, 
-                portraitImage->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 
-                portraitImage->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   carregaTexturaRGBA(portraitImage, &portrait);
+
+   portraitX = (GLfloat)portraitImage->w / 
+               (GLfloat)smallestPowerOfTwo(portraitImage->w);
+   portraitY = (GLfloat)portraitImage->h / 
+               (GLfloat)smallestPowerOfTwo(portraitImage->h);
 }
 
 /*********************************************************************
@@ -199,13 +199,7 @@ void personagem::defineActualLifePoints(int newLife)
    lifeBar->draw(portraitImage);
 
    glDeleteTextures(1, &portrait);
-   glGenTextures(1, &portrait);
-   glBindTexture(GL_TEXTURE_2D, portrait);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, portraitImage->w, 
-                portraitImage->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 
-                portraitImage->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   carregaTexturaRGBA(portraitImage, &portrait);
 }
 
 /*********************************************************************
@@ -220,11 +214,11 @@ void personagem::drawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
    glBindTexture(GL_TEXTURE_2D, portrait );
    glBegin(GL_QUADS);
       glColor3f(1,1,1);
-      glTexCoord2f(1,0);
+      glTexCoord2f(portraitX,0);
       glVertex3f(x1,y1,z1);
-      glTexCoord2f(1,1);
+      glTexCoord2f(portraitX,portraitY);
       glVertex3f(x2,y2,z2);
-      glTexCoord2f(0,1);
+      glTexCoord2f(0,portraitY);
       glVertex3f(x3,y3,z3);
       glTexCoord2f(0,0);
       glVertex3f(x4,y4,z4);

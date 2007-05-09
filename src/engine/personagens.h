@@ -155,11 +155,14 @@ class personagem: public Tobjeto, public thing, public aniModel
       string retratoConversa;     /**< Portrait talk file name */
       string characterFile;       /**< Name of the character file */
       SDL_Surface* portraitImage; /**< Character's portrait image */
+      GLfloat portraitX,          /**< Portrait X Max coordinate */
+              portraitY;          /**< Portrait Y Max Coordinate */
       GLuint portrait;            /**< Up screen portrait GL texture */
       string conversationFile;    /**< Name of the Conversation File */
       void* conv;                 /**< Pointer to the conversation */
       bool convPressed;           /**< To avoid do some conversation action
                                        before releases the left mouse button */
+
 };
 
 
