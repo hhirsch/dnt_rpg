@@ -4,6 +4,8 @@ npc ../data/mapas/teste1.map.npc
 PS ../data/mapas/teste1.map.par
 MUSICA ../data/music/musica12.ogg
 Outdoor: 1
+o ../data/models/objetos/armas/sw39.dcc
+o ../data/models/objetos/armas/dark_katana.dcc
 o ../data/models/natural/arvores/tree4.dcc
 o ../data/models/natural/arvores/tree3.dcc
 o ../data/models/natural/fogueira.dcc
@@ -447,6 +449,7 @@ p 0,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_grama_trilha2.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_grama_trilha2.png
+uc 455.943848,581.222961,490.719574,633.565735:../data/mapas/teste2.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_grama_trilha2.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -587,6 +590,8 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
+uo ../data/models/objetos/armas/dark_katana.dcc 1:9,13:526.440002,814.852112:-84:0
+uo ../data/models/objetos/armas/sw39.dcc 1:9,13:519.516052,815.248779:-28:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000

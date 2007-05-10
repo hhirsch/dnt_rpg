@@ -3,6 +3,7 @@ T 5X5
 npc ../data/mapas/teste3.map.npc
 MUSICA ../data/music/musica13.ogg
 Outdoor: 0
+o ../data/models/objetos/geral/guitarra.dcc
 o ../data/models/objetos/icex/lixo.dcc
 o ../data/models/objetos/icex/cadeira.dcc
 o ../data/models/objetos/icex/mesa.dcc
@@ -10,6 +11,9 @@ o ../data/models/objetos/icex/cadeira.dcc
 o ../data/models/objetos/geral/porta3.dcc
 o ../data/models/objetos/icex/mesa_braco.dcc
 o ../data/models/objetos/icex/quadro.dcc
+o ../data/models/objetos/armas/axe.dcc
+o ../data/models/objetos/armas/adaga.dcc
+o ../data/models/objetos/armas/kalashnikov_pequena.dcc
 t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 129 118 131
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 220 170 171
 t ../data/texturas/chao_madeira3.png ../data/texturas/chao_madeira3.png 102 57 29
@@ -63,6 +67,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 uo ../data/models/objetos/icex/quadro.dcc 0:5,2:310.008148,64.805870:0:0
 uo ../data/models/objetos/icex/mesa_braco.dcc 1:5,1:259.969910,25.772120:-128:0
+uo ../data/models/objetos/armas/adaga.dcc 1:5,1:300.948700,14.265484:-5:0
 #Z: 1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_ametista.png
@@ -76,6 +81,7 @@ uo ../data/models/objetos/icex/mesa.dcc 1:2,2:79.978523,70.394524:90:0
 uo ../data/models/objetos/icex/mesa.dcc 1:2,2:108.193802,98.960487:40:0
 uo ../data/models/objetos/icex/cadeira.dcc 1:2,2:114.107025,105.580933:40:0
 uo ../data/models/objetos/icex/quadro.dcc 1:2,2:106.449181,127.351013:0:0
+uo ../data/models/objetos/armas/kalashnikov_pequena.dcc 1:2,2:122.658463,75.059158:87:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -99,6 +105,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/armas/axe.dcc 1:5,3:305.250122,174.728317:90:0
 #Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
@@ -110,9 +117,11 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/armas/axe.dcc 0:5,3:305.250122,174.728317:0:0
 #Z: 4
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/geral/guitarra.dcc 1:1,5:16.309856,301.404846:-49:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
