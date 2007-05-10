@@ -98,6 +98,9 @@ class modState
        * \param actualMap -> pointer to actual opened map */
       void doMapModifications(Map* actualMap);
 
+      /*! Clear All the modifications states (usually called after death) */
+      void clear();
+
    protected:
       /*! remove inverse action, if it exists in list. 
        * \param action -> action type

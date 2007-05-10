@@ -2773,6 +2773,9 @@ int engine::Run(SDL_Surface *surface)
               /* All Pcs are Dead, so Death Screen! */
               snd->loadMusic("../data/music/musica8.ogg");
               showImage("../data/texturas/fightMode/death.png");
+
+              /* Clear Modifications */
+              modifState.clear();
               engineMode = ENGINE_MODE_REAL_TIME;
               gui->closeAllWindows();
               /* Put the animation state on normal */

@@ -107,18 +107,7 @@ modState::modState()
  ************************************************************/
 modState::~modState()
 {
-   int i;
-
-   /* Free all map objects from list */
-   mapObjectModAction* tmpMobj;
-   for(i = 0; i < totalMapObjects; i++)
-   {
-      tmpMobj = mapObjectsList;
-      mapObjectsList = mapObjectsList->getNext();
-      delete(tmpMobj);
-   }
-   mapObjectsList = NULL;
-   totalMapObjects = 0;
+   clear();
 }
 
 /************************************************************
@@ -263,4 +252,22 @@ void modState::doMapModifications(Map* actualMap)
 
 }
 
+/************************************************************
+ *                           clear                          *
+ ************************************************************/
+void modState::clear()
+{
+   int i;
+
+   /* Free all map objects from list */
+   mapObjectModAction* tmpMobj;
+   for(i = 0; i < totalMapObjects; i++)
+   {
+      tmpMobj = mapObjectsList;
+      mapObjectsList = mapObjectsList->getNext();
+      delete(tmpMobj);
+   }
+   mapObjectsList = NULL;
+   totalMapObjects = 0;
+}
 
