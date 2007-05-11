@@ -5,23 +5,24 @@ npc ../data/mapas/teste2.map.npc
 PS ../data/mapas/teste2.map.par
 MUSICA ../data/music/musica5.ogg
 Outdoor: 1
-o ../data/models/objetos/geral/placa_pare.dcc
-o ../data/models/objetos/armas/uzi.dcc
-o ../data/models/objetos/armas/scimitar.dcc
-o ../data/models/objetos/tumbas/cruz.dcc
-o ../data/models/objetos/tumbas/lapide.dcc
-o ../data/models/objetos/tumbas/tomb_column.dcc
-o ../data/models/objetos/tumbas/tomb1.dcc
-o ../data/models/objetos/tumbas/cruz.dcc
-o ../data/models/building/house3.dcc
-o ../data/models/objetos/geral/barrel.dcc
-o ../data/models/objetos/armas/beretta92.dcc
+o ../data/models/building/house4.dcc
 o ../data/models/objetos/armas/kalashnikov.dcc
-t ../data/texturas/chao_rocha3.png ../data/texturas/chao_rocha3.png 128 130 136
-t ../data/texturas/chao_rocha3_grama2.png ../data/texturas/chao_rocha3_grama2.png 126 129 134
-t chao_grama2 ../data/texturas/chao_grama2.jpg 54 102 49
-t ../data/texturas/chao_grama_trilha.png ../data/texturas/chao_grama_trilha.png 71 95 24
+o ../data/models/objetos/armas/beretta92.dcc
+o ../data/models/objetos/geral/barrel.dcc
+o ../data/models/building/house3.dcc
+o ../data/models/objetos/tumbas/cruz.dcc
+o ../data/models/objetos/tumbas/tomb1.dcc
+o ../data/models/objetos/tumbas/tomb_column.dcc
+o ../data/models/objetos/tumbas/lapide.dcc
+o ../data/models/objetos/tumbas/cruz.dcc
+o ../data/models/objetos/armas/scimitar.dcc
+o ../data/models/objetos/armas/uzi.dcc
+o ../data/models/objetos/geral/placa_pare.dcc
 t ../data/texturas/chao_grama_trilha2.png ../data/texturas/chao_grama_trilha2.png 67 94 24
+t ../data/texturas/chao_grama_trilha.png ../data/texturas/chao_grama_trilha.png 71 95 24
+t chao_grama2 ../data/texturas/chao_grama2.jpg 54 102 49
+t ../data/texturas/chao_rocha3_grama2.png ../data/texturas/chao_rocha3_grama2.png 126 129 134
+t ../data/texturas/chao_rocha3.png ../data/texturas/chao_rocha3.png 128 130 136
 #Z: 0
 p 0,1.000000,0.000000,0.000000,0.000000
 ut chao_grama2
@@ -316,10 +317,13 @@ p 0,0.000000,1.000000,1.000000,0.000000
 ut chao_grama2
 p 0,0.000000,1.000000,4.000000,0.000000
 ut chao_grama2
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
 p 0,0.000000,4.000000,1.000000,2.000000
 ut chao_grama2
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
 p 0,2.000000,1.000000,0.000000,5.000000
 ut chao_grama2
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
 p 0,5.000000,0.000000,0.000000,4.000000
 ut chao_grama2
 p 0,4.000000,0.000000,0.000000,8.000000
@@ -369,10 +373,13 @@ p 0,1.000000,0.000000,1.000000,1.000000
 ut chao_grama2
 p 0,1.000000,1.000000,0.000000,4.000000
 ut chao_grama2
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
 p 0,4.000000,0.000000,0.000000,1.000000
 ut chao_grama2
+uo ../data/models/building/house4.dcc 1:15,7:946.829041,402.284363:-270:0
 p 0,1.000000,0.000000,1.000000,0.000000
 ut chao_grama2
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
 p 0,0.000000,1.000000,1.000000,0.000000
 ut chao_grama2
 p 0,0.000000,1.000000,0.000000,0.000000
@@ -422,10 +429,13 @@ p 1,0.000000,3.000000,0.000000,1.000000
 ut chao_grama2
 p 1,1.000000,0.000000,1.000000,0.000000
 ut chao_grama2
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
 p 1,0.000000,1.000000,2.000000,0.000000
 ut chao_grama2
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
 p 1,0.000000,2.000000,0.000000,1.000000
 ut chao_grama2
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
 p 1,1.000000,0.000000,0.000000,1.000000
 ut chao_grama2
 p 1,1.000000,0.000000,0.000000,0.000000
