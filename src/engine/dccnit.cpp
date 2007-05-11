@@ -293,13 +293,13 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    {
       glEnable(GL_FOG);
       {
-        GLfloat color[3]={1.0,1.0,1.0};
+        GLfloat color[3]={0.8,0.8,0.8};
         glFogi(GL_FOG_MODE,GL_LINEAR);
         glFogfv(GL_FOG_COLOR, color);
-        glFogf(GL_FOG_DENSITY, 0.01);
+        glFogf(GL_FOG_DENSITY, 0.001);
         glHint(GL_FOG_HINT, GL_DONT_CARE);
-        glFogf(GL_FOG_START, 100);
-        glFogf(GL_FOG_END, HALFFARVIEW);
+        glFogf(GL_FOG_START, 200);
+        glFogf(GL_FOG_END, HALFFARVIEW+200);
       }
    }
 
