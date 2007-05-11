@@ -1,4 +1,4 @@
-11
+12
 00 administracao.cls ../data/classes/Img/administracao.png ADM
 01 biologia.cls ../data/classes/Img/biologia.png BIO
 02 computacao.cls ../data/classes/Img/dcc.png  COM
@@ -7,6 +7,7 @@
 05 engmecanica.cls ../data/classes/Img/engmecanica.png MEC
 06 filosofia.cls ../data/classes/Img/filosofia.png  FIL
 07 fisioterapia.cls ../data/classes/Img/fisioterapia.png FSO
+09 jornalismo.cls ../data/classes/Img/jornalismo.png JOR
 08 medicina.cls ../data/classes/Img/medicina.png MED
 09 musica.cls ../data/classes/Img/musica.png MUS
 10 to.cls ../data/classes/Img/to.png TO
