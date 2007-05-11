@@ -4,6 +4,7 @@
 
 #include "skills.h"
 #include "defs.h"
+#include "../lang/lang.h"
 
 /*************************************************************
  *                      Constructor                          *
@@ -116,6 +117,8 @@ skills::skills()
    char buf3[128];
    char buf4[128];
    int num;
+   lang language;
+   string fName = "";
    if(!(file=fopen("../data/skills/skills.skl","r")))
    {
        printf("Error while opening skills list: ../data/skills/skills.skl\n");
@@ -143,7 +146,7 @@ skills::skills()
       sscanf(buffer,"%d %s %s %s",&num, &buf2[0],&buf3[0], &buf4[0]);
       arqImagem = buf3;
       arqDescricao = buf2;
-      arqDescricao = "../data/skills/Portugues/"+arqDescricao;
+      arqDescricao = language.SKILLS_DIR + arqDescricao;
       m_skills[aux].idString = buf4;
 
       FILE* desc;
