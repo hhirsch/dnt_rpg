@@ -283,6 +283,7 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                    qaux->Xobjects[ob] = xReal;
                    qaux->Zobjects[ob] = zReal;
                    qaux->objectsDesenha[ob] = 0;
+                   qaux->objectsOrientation[ob] = orObj;
                    //printf("%d° Object Inserted on %d %d\n",ob,X1+1,Z1+1);
                 }
              }
