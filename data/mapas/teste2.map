@@ -17,7 +17,6 @@ o ../data/models/building/house3.dcc
 o ../data/models/objetos/geral/barrel.dcc
 o ../data/models/objetos/armas/beretta92.dcc
 o ../data/models/objetos/armas/kalashnikov.dcc
-o ../data/models/objetos/armas/kalashnikov.dcc
 t ../data/texturas/chao_rocha3.png ../data/texturas/chao_rocha3.png 128 130 136
 t ../data/texturas/chao_rocha3_grama2.png ../data/texturas/chao_rocha3_grama2.png 126 129 134
 t chao_grama2 ../data/texturas/chao_grama2.jpg 54 102 49

@@ -15,7 +15,7 @@
 model3d::model3d(string path, string texturePath)
 {
    fileName = path;
-   model = glmReadOBJ(path.c_str(), texturePath.c_str(), 0);
+   model = glmReadOBJ(path.c_str(), texturePath.c_str(), 1);
    if(!model)
    {
       model = NULL;
@@ -47,7 +47,7 @@ void model3d::draw()
 {
    if(model)
    {
-      glmDraw(model);
+      glmDrawLists(model);
    }
 }
 
@@ -233,7 +233,6 @@ void modelList::removeUnusedModels()
          mdl = mdl->next;
          if(oth->getUsedFlag() <= 0)
          {
-            printf("Will remove: %s\n", oth->getFileName().c_str());
             removeModel(oth);
          }
       }
