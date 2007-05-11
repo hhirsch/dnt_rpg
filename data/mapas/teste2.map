@@ -317,13 +317,13 @@ p 0,0.000000,1.000000,1.000000,0.000000
 ut chao_grama2
 p 0,0.000000,1.000000,4.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:-270:0
 p 0,0.000000,4.000000,1.000000,2.000000
 ut chao_grama2
-uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:-270:0
 p 0,2.000000,1.000000,0.000000,5.000000
 ut chao_grama2
-uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:-270:0
 p 0,5.000000,0.000000,0.000000,4.000000
 ut chao_grama2
 p 0,4.000000,0.000000,0.000000,8.000000
@@ -373,13 +373,13 @@ p 0,1.000000,0.000000,1.000000,1.000000
 ut chao_grama2
 p 0,1.000000,1.000000,0.000000,4.000000
 ut chao_grama2
-uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:-270:0
 p 0,4.000000,0.000000,0.000000,1.000000
 ut chao_grama2
 uo ../data/models/building/house4.dcc 1:15,7:946.829041,402.284363:-270:0
 p 0,1.000000,0.000000,1.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:-270:0
 p 0,0.000000,1.000000,1.000000,0.000000
 ut chao_grama2
 p 0,0.000000,1.000000,0.000000,0.000000
@@ -429,13 +429,13 @@ p 1,0.000000,3.000000,0.000000,1.000000
 ut chao_grama2
 p 1,1.000000,0.000000,1.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:-270:0
 p 1,0.000000,1.000000,2.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:-270:0
 p 1,0.000000,2.000000,0.000000,1.000000
 ut chao_grama2
-uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:0:0
+uo ../data/models/building/house4.dcc 0:15,7:946.829041,402.284363:-270:0
 p 1,1.000000,0.000000,0.000000,1.000000
 ut chao_grama2
 p 1,1.000000,0.000000,0.000000,0.000000
@@ -753,16 +753,16 @@ ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 uc 775.551697,877.953430,802.341003,916.406738:../data/mapas/teste3.map
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,1.000000,0.000000
@@ -813,16 +813,16 @@ ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 uc 775.551697,877.953430,802.341003,916.406738:../data/mapas/teste3.map
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 1:15,15:913.164062,917.026672:92:0
+uo ../data/models/building/house3.dcc 1:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,7.000000,1.000000
@@ -870,16 +870,16 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut chao_grama2
-uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:0:0
+uo ../data/models/building/house3.dcc 0:15,15:913.164062,917.026672:90:0
 p 1,0.000000,0.000000,3.000000,0.000000
 ut chao_grama2
 p 1,0.000000,3.000000,4.000000,7.000000
