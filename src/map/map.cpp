@@ -161,11 +161,11 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, object* obj)
      {
         for(o=0;o<MAXOBJETOS;o++)
         {
-           if( (MapSquares[Xaux][Zaux]->objects[o] == obj) && 
-               (MapSquares[Xaux][Zaux]->Xobjects[o] == xObj) &&
-               (MapSquares[Xaux][Zaux]->Zobjects[o] == zObj) )
+           if( (MapSquares[Xaux][Zaux].objects[o] == obj) && 
+               (MapSquares[Xaux][Zaux].Xobjects[o] == xObj) &&
+               (MapSquares[Xaux][Zaux].Zobjects[o] == zObj) )
            {
-              MapSquares[Xaux][Zaux]->objects[o] = NULL;
+              MapSquares[Xaux][Zaux].objects[o] = NULL;
            }
         }
      }
@@ -184,13 +184,13 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
      {
         for(o=0;o<MAXOBJETOS;o++)
         {
-           if( (MapSquares[Xaux][Zaux]->objects[o] != NULL) && 
-               (MapSquares[Xaux][Zaux]->Xobjects[o] == xObj) &&
-               (MapSquares[Xaux][Zaux]->Zobjects[o] == zObj) )
+           if( (MapSquares[Xaux][Zaux].objects[o] != NULL) && 
+               (MapSquares[Xaux][Zaux].Xobjects[o] == xObj) &&
+               (MapSquares[Xaux][Zaux].Zobjects[o] == zObj) )
            {
-              if(MapSquares[Xaux][Zaux]->objects[o]->getName() == fileName)
+              if(MapSquares[Xaux][Zaux].objects[o]->getName() == fileName)
               {
-                 MapSquares[Xaux][Zaux]->objects[o] = NULL;
+                 MapSquares[Xaux][Zaux].objects[o] = NULL;
               }
            }
         }
@@ -337,7 +337,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
    glColor3f(1.0,1.0,1.0);
 
-   textura = MapSquares[Xaux][Zaux]->textura;
+   textura = MapSquares[Xaux][Zaux].textura;
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, textura);
    
@@ -373,15 +373,15 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    {
       for(Zaux = 0; Zaux < z; Zaux++)
       {
-         if((textura!= -1) && (MapSquares[Xaux][Zaux]->textura == -1))
+         if((textura!= -1) && (MapSquares[Xaux][Zaux].textura == -1))
          {
              glDisable(GL_TEXTURE_2D); 
              textura = -1;
          }
-         else if(textura != MapSquares[Xaux][Zaux]->textura)
+         else if(textura != MapSquares[Xaux][Zaux].textura)
          {
             glEnd();
-            textura = MapSquares[Xaux][Zaux]->textura;
+            textura = MapSquares[Xaux][Zaux].textura;
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, textura);
             /*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -395,53 +395,53 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);*/
             glBegin(GL_QUADS);
          }
-         if( (MapSquares[Xaux][Zaux]->visivel) || 
-             (quadradoVisivel(MapSquares[Xaux][Zaux]->x1,0,
-                              MapSquares[Xaux][Zaux]->z1,
-                              MapSquares[Xaux][Zaux]->x2,
+         if( (MapSquares[Xaux][Zaux].visivel) || 
+             (quadradoVisivel(MapSquares[Xaux][Zaux].x1,0,
+                              MapSquares[Xaux][Zaux].z1,
+                              MapSquares[Xaux][Zaux].x2,
                               ALTURAMAXIMA,
-                              MapSquares[Xaux][Zaux]->z2, matriz)))
+                              MapSquares[Xaux][Zaux].z2, matriz)))
          {
             /*for(i=0;i<MAXOBJETOS;i++)
             {
-               if(MapSquares[Xaux][Zaux]->quadObjetos[i] != NULL)
+               if(MapSquares[Xaux][Zaux].quadObjetos[i] != NULL)
                { 
-                  MapSquares[Xaux][Zaux]->quadObjetos[i]->visivel = 1;
+                  MapSquares[Xaux][Zaux].quadObjetos[i]->visivel = 1;
                }
             }*/
-            MapSquares[Xaux][Zaux]->visivel = 1;
+            MapSquares[Xaux][Zaux].visivel = 1;
 
             /* Draw the Square as some squares */ 
             for(k = 0; k < SQUARE_DIVISIONS; k++)
             {
                texX = k*incTex;
-               pX1 = (k*incPos) + MapSquares[Xaux][Zaux]->x1;
+               pX1 = (k*incPos) + MapSquares[Xaux][Zaux].x1;
                pX2 = (incPos) + pX1;
                for(l = 0; l < SQUARE_DIVISIONS; l++)
                {
                   texZ = l*incTex;
-                  pZ1 = (l*incPos) + MapSquares[Xaux][Zaux]->z1;
+                  pZ1 = (l*incPos) + MapSquares[Xaux][Zaux].z1;
                   pZ2 = (incPos) + pZ1;
                   drawQuad(pX1, pZ1, pX2, pZ2,
-                           getHeight(pX1, pZ1, MapSquares[Xaux][Zaux]),
-                           getHeight(pX1, pZ2, MapSquares[Xaux][Zaux]),
-                           getHeight(pX2, pZ2, MapSquares[Xaux][Zaux]),
-                           getHeight(pX2, pZ1, MapSquares[Xaux][Zaux]),
+                           getHeight(pX1, pZ1, &MapSquares[Xaux][Zaux]),
+                           getHeight(pX1, pZ2, &MapSquares[Xaux][Zaux]),
+                           getHeight(pX2, pZ2, &MapSquares[Xaux][Zaux]),
+                           getHeight(pX2, pZ1, &MapSquares[Xaux][Zaux]),
                            texX, texZ, texX + incTex, texZ + incTex);
                }
             }
 
             /* //Old Draw, as only one square
-             * drawQuad(MapSquares[Xaux][Zaux]->x1, MapSquares[Xaux][Zaux]->z1,
-                     MapSquares[Xaux][Zaux]->x2, MapSquares[Xaux][Zaux]->z2,
-                     MapSquares[Xaux][Zaux]->h1, MapSquares[Xaux][Zaux]->h2,
-                     MapSquares[Xaux][Zaux]->h3, MapSquares[Xaux][Zaux]->h4,
+             * drawQuad(MapSquares[Xaux][Zaux].x1, MapSquares[Xaux][Zaux].z1,
+                     MapSquares[Xaux][Zaux].x2, MapSquares[Xaux][Zaux].z2,
+                     MapSquares[Xaux][Zaux].h1, MapSquares[Xaux][Zaux].h2,
+                     MapSquares[Xaux][Zaux].h3, MapSquares[Xaux][Zaux].h4,
                      0.0, 0.0, 1.0, 1.0);*/
 
          }
          else
          {
-            MapSquares[Xaux][Zaux]->visivel = 0;
+            MapSquares[Xaux][Zaux].visivel = 0;
          }
       }
    }
@@ -465,7 +465,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         glEnable(GL_COLOR_MATERIAL);
         drawFloor( cameraX, cameraY, cameraZ, matriz );
 
-        textura = MapSquares[Xaux][Zaux]->textura;
+        textura = MapSquares[Xaux][Zaux].textura;
            glEnable(GL_TEXTURE_2D);
            glBindTexture(GL_TEXTURE_2D, textura);
 
@@ -572,10 +572,10 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         glDisable(GL_TEXTURE_2D);
 
         /* Draw Roads */
-        if(roads)
+        /*if(roads)
         {
            roads->draw();
-        }
+        }*/
 
 
         /* Draw Doors */
@@ -601,18 +601,18 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         for(Xaux = 0; Xaux < x; Xaux++)
         for(Zaux = 0; Zaux < z; Zaux++)
         {
-           deltaX = (cameraX-MapSquares[Xaux][Zaux]->x1+HALFSQUARESIZE);
-           deltaZ = (cameraZ-MapSquares[Xaux][Zaux]->z1+HALFSQUARESIZE);
+           deltaX = (cameraX-MapSquares[Xaux][Zaux].x1+HALFSQUARESIZE);
+           deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+HALFSQUARESIZE);
            distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) 
                                                           / SQUARESIZE;
            for(o=0;o<MAXOBJETOS;o++)
            {
-              if( (MapSquares[Xaux][Zaux]->objects[o] != NULL) && 
-                  (MapSquares[Xaux][Zaux]->objectsDesenha[o] == 1))
+              if( (MapSquares[Xaux][Zaux].objects[o] != NULL) && 
+                  (MapSquares[Xaux][Zaux].objectsDesenha[o] == 1))
               {
                  /* Do the Rotation of the Bounding Box */
                  bound = 
-                 MapSquares[Xaux][Zaux]->objects[o]->getBoundingBox();
+                 MapSquares[Xaux][Zaux].objects[o]->getBoundingBox();
                   X[0] = bound.x1;
                   Z[0] = bound.z1;
                   X[1] = bound.x1;
@@ -622,10 +622,10 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                   X[3] = bound.x2;
                   Z[3] = bound.z1;
                   rotTransBoundingBox(
-                                  MapSquares[Xaux][Zaux]->objectsOrientation[o],
-                                  X, Z, MapSquares[Xaux][Zaux]->Xobjects[o], 
+                                  MapSquares[Xaux][Zaux].objectsOrientation[o],
+                                  X, Z, MapSquares[Xaux][Zaux].Xobjects[o], 
                                   bound.y1, bound.y2,
-                                  MapSquares[Xaux][Zaux]->Zobjects[o],
+                                  MapSquares[Xaux][Zaux].Zobjects[o],
                                   min, max );
 
                   /* Verify ViewFrustum Culling */
@@ -634,20 +634,20 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                   {
                      glPushMatrix();
                      glTranslatef(0.0, 
-                            getHeight(MapSquares[Xaux][Zaux]->Xobjects[o],
-                                      MapSquares[Xaux][Zaux]->Zobjects[o]) +
-                               MapSquares[Xaux][Zaux]->objects[o]->posicaoLadoY,
+                            getHeight(MapSquares[Xaux][Zaux].Xobjects[o],
+                                      MapSquares[Xaux][Zaux].Zobjects[o]) +
+                               MapSquares[Xaux][Zaux].objects[o]->posicaoLadoY,
                                   0.0);
-                     MapSquares[Xaux][Zaux]->objects[o]->draw(
-                             MapSquares[Xaux][Zaux]->Xobjects[o],
-                             MapSquares[Xaux][Zaux]->Zobjects[o],
+                     MapSquares[Xaux][Zaux].objects[o]->draw(
+                             MapSquares[Xaux][Zaux].Xobjects[o],
+                             MapSquares[Xaux][Zaux].Zobjects[o],
                              distancia,
-                             MapSquares[Xaux][Zaux]->objectsOrientation[o]);
+                             MapSquares[Xaux][Zaux].objectsOrientation[o]);
                      glPopMatrix();
                   }
               }
            }
-           MapSquares[Xaux][Zaux]->visivel = 0;
+           MapSquares[Xaux][Zaux].visivel = 0;
         }
       glDisable(GL_COLOR_MATERIAL);
       glColor3f(1.0,1.0,1.0);
@@ -669,11 +669,11 @@ Map::Map()
    meiosFio = NULL; 
    MapSquares = NULL;
    portas = NULL;
-   roads = NULL;
    music = "";
    npcFileName = "";
    particlesFileName = "";
    outdoor = false;
+   MapSquares = NULL;
    
    /* Initialize Structs */
    objects = new(lMapObject);
@@ -691,7 +691,7 @@ Square* Map::relativeSquare(int xa, int za)
    if( (z <= za) || (x <= xa) || ( xa < 0) || (za < 0)) 
       return(NULL);
 
-   return(MapSquares[xa][za]);
+   return(&MapSquares[xa][za]);
 }
 
 /********************************************************************
@@ -969,22 +969,22 @@ int Map::open(string arquivo, modelList& mdlList)
 
 
    /* Alloc MapSquares */
-   MapSquares = (Square***) malloc(x*sizeof(Square*));
+   MapSquares = new Square*[x];//(Square***) malloc(x*sizeof(Square**));
    for(i = 0; i < x; i++)
    {
-      MapSquares[i] = (Square**) malloc(z*sizeof(Square));
+      MapSquares[i] = new Square[z];//(Square**) malloc(z*sizeof(Square*));
    } 
 
-   for(posX = 0; posX < x; posX++)
+   /*for(posX = 0; posX < x; posX++)
    {
       for(posZ = 0; posZ < z; posZ++)
       {
          MapSquares[posX][posZ] = new(Square);
       }
-   }
+   }*/
 
    /* Alloc Roads Struct */
-   roads = new mapRoad(x, z);
+   //roads = new mapRoad(x, z);
 
    
    muro* maux = NULL;
@@ -1166,19 +1166,19 @@ int Map::open(string arquivo, modelList& mdlList)
             }
             fgets(buffer, sizeof(buffer), arq); 
             sscanf(buffer, "%d,%f,%f,%f,%f",&pisavel,
-                                 &MapSquares[posX][posZ]->h1,
-                                 &MapSquares[posX][posZ]->h2,
-                                 &MapSquares[posX][posZ]->h3,
-                                 &MapSquares[posX][posZ]->h4);
-            MapSquares[posX][posZ]->x1 = (posX) * SQUARESIZE;
-            MapSquares[posX][posZ]->x2 = MapSquares[posX][posZ]->x1+SQUARESIZE;
-            MapSquares[posX][posZ]->z1 = (posZ) * SQUARESIZE;
-            MapSquares[posX][posZ]->z2 = MapSquares[posX][posZ]->z1+SQUARESIZE; 
-            MapSquares[posX][posZ]->posX = posX;
-            MapSquares[posX][posZ]->posZ = posZ;
+                                 &MapSquares[posX][posZ].h1,
+                                 &MapSquares[posX][posZ].h2,
+                                 &MapSquares[posX][posZ].h3,
+                                 &MapSquares[posX][posZ].h4);
+            MapSquares[posX][posZ].x1 = (posX) * SQUARESIZE;
+            MapSquares[posX][posZ].x2 = MapSquares[posX][posZ].x1+SQUARESIZE;
+            MapSquares[posX][posZ].z1 = (posZ) * SQUARESIZE;
+            MapSquares[posX][posZ].z2 = MapSquares[posX][posZ].z1+SQUARESIZE; 
+            MapSquares[posX][posZ].posX = posX;
+            MapSquares[posX][posZ].posZ = posZ;
             if(pisavel) 
             {
-               MapSquares[posX][posZ]->flags = PISAVEL;
+               MapSquares[posX][posZ].flags = PISAVEL;
             }
             break;
          }
@@ -1190,21 +1190,21 @@ int Map::open(string arquivo, modelList& mdlList)
                {
                  fgets(buffer, sizeof(buffer), arq);
                  sscanf(buffer,"%f,%f,%f,%f:%s",
-                        &MapSquares[posX][posZ]->mapConection.x1,
-                        &MapSquares[posX][posZ]->mapConection.z1,
-                        &MapSquares[posX][posZ]->mapConection.x2,
-                        &MapSquares[posX][posZ]->mapConection.z2,
+                        &MapSquares[posX][posZ].mapConection.x1,
+                        &MapSquares[posX][posZ].mapConection.z1,
+                        &MapSquares[posX][posZ].mapConection.x2,
+                        &MapSquares[posX][posZ].mapConection.z2,
                         nome );
-                 MapSquares[posX][posZ]->mapConection.mapName = nome;
-                 MapSquares[posX][posZ]->mapConection.active = true;
+                 MapSquares[posX][posZ].mapConection.mapName = nome;
+                 MapSquares[posX][posZ].mapConection.active = true;
 
-                 if(arqVelho == (MapSquares[posX][posZ]->mapConection.mapName))
+                 if(arqVelho == (MapSquares[posX][posZ].mapConection.mapName))
                  {
-                     squareInic = MapSquares[posX][posZ];
-                     xInic = (MapSquares[posX][posZ]->mapConection.x1 + 
-                              MapSquares[posX][posZ]->mapConection.x2) / 2.0;
-                     zInic = (MapSquares[posX][posZ]->mapConection.z1 + 
-                              MapSquares[posX][posZ]->mapConection.z2) / 2.0;
+                     squareInic = &MapSquares[posX][posZ];
+                     xInic = (MapSquares[posX][posZ].mapConection.x1 + 
+                              MapSquares[posX][posZ].mapConection.x2) / 2.0;
+                     zInic = (MapSquares[posX][posZ].mapConection.z1 + 
+                              MapSquares[posX][posZ].mapConection.z2) / 2.0;
                  }
 
                  break;
@@ -1214,10 +1214,10 @@ int Map::open(string arquivo, modelList& mdlList)
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
                   IDtexturaAtual = IDTextura(this,nome,&Ratual,&Gatual,&Batual);
-                  MapSquares[posX][posZ]->textura = IDtexturaAtual;
-                  MapSquares[posX][posZ]->R = Ratual;
-                  MapSquares[posX][posZ]->G = Gatual;
-                  MapSquares[posX][posZ]->B = Batual;
+                  MapSquares[posX][posZ].textura = IDtexturaAtual;
+                  MapSquares[posX][posZ].R = Ratual;
+                  MapSquares[posX][posZ].G = Gatual;
+                  MapSquares[posX][posZ].B = Batual;
                   break;
                }
                case 'o': /* Insert Object on Square */
@@ -1230,18 +1230,18 @@ int Map::open(string arquivo, modelList& mdlList)
                   {
                      fgets(buffer, sizeof(buffer), arq);
                      sscanf(buffer,"%s %d:%d,%d:%f,%f:%d:%d",nome,
-                       &MapSquares[posX][posZ]->objectsDesenha[numObjetosAtual],
-                       &MapSquares[posX][posZ]->quadXobjects[numObjetosAtual],
-                       &MapSquares[posX][posZ]->quadZobjects[numObjetosAtual],
-                       &MapSquares[posX][posZ]->Xobjects[numObjetosAtual],
-                       &MapSquares[posX][posZ]->Zobjects[numObjetosAtual],
-                       &MapSquares[posX][posZ]->objectsOrientation[numObjetosAtual],
-                       &MapSquares[posX][posZ]->pisavelObj[numObjetosAtual]);
-                     MapSquares[posX][posZ]->objects[numObjetosAtual] = 
+                       &MapSquares[posX][posZ].objectsDesenha[numObjetosAtual],
+                       &MapSquares[posX][posZ].quadXobjects[numObjetosAtual],
+                       &MapSquares[posX][posZ].quadZobjects[numObjetosAtual],
+                       &MapSquares[posX][posZ].Xobjects[numObjetosAtual],
+                       &MapSquares[posX][posZ].Zobjects[numObjetosAtual],
+                       &MapSquares[posX][posZ].objectsOrientation[numObjetosAtual],
+                       &MapSquares[posX][posZ].pisavelObj[numObjetosAtual]);
+                     MapSquares[posX][posZ].objects[numObjetosAtual] = 
                                                    objects->getMapObject(nome);
-                     MapSquares[posX][posZ]->quadObjetos[i] = relativeSquare(
-                         MapSquares[posX][posZ]->quadXobjects[numObjetosAtual],
-                         MapSquares[posX][posZ]->quadZobjects[numObjetosAtual]);
+                     MapSquares[posX][posZ].quadObjetos[i] = relativeSquare(
+                         MapSquares[posX][posZ].quadXobjects[numObjetosAtual],
+                         MapSquares[posX][posZ].quadZobjects[numObjetosAtual]);
                      numObjetosAtual++;
                   }
                   break;
@@ -1318,21 +1318,21 @@ void Map::newMap(int X, int Z)
    printf("Beginning a new Map: %d,%d\n",X,Z);
 
    /* Alloc MapSquares */
-   MapSquares = (Square***) malloc(X*sizeof(Square*));
+   MapSquares = new Square*[X];//(Square***) malloc(X*sizeof(Square**));
    for(i = 0; i < X; i++)
    {
-      MapSquares[i] = (Square**) malloc(Z*sizeof(Square));
+      MapSquares[i] = new Square[Z];//(Square**) malloc(Z*sizeof(Square*));
    } 
 
-   for(auxX = 0; auxX < X; auxX++)
+   /*for(auxX = 0; auxX < X; auxX++)
    {
       for(auxZ = 0; auxZ < Z; auxZ++)
       {
          MapSquares[auxX][auxZ] = new(Square);
       }
-   }
+   }*/
 
-   roads = new mapRoad(X, Z);
+   //roads = new mapRoad(X, Z);
 
    
    Square* saux;
@@ -1580,37 +1580,37 @@ int Map::save(string arquivo)
       for(x1=0;x1<x;x1++)
       {
           fprintf(arq,"p %d,%f,%f,%f,%f\n",
-                  MapSquares[x1][z1]->flags,
-                  MapSquares[x1][z1]->h1,
-                  MapSquares[x1][z1]->h2,
-                  MapSquares[x1][z1]->h3,
-                  MapSquares[x1][z1]->h4);
+                  MapSquares[x1][z1].flags,
+                  MapSquares[x1][z1].h1,
+                  MapSquares[x1][z1].h2,
+                  MapSquares[x1][z1].h3,
+                  MapSquares[x1][z1].h4);
           fprintf(arq,"ut %s\n",NomeTextura(this, 
-                      MapSquares[x1][z1]->textura).c_str());
-          if( MapSquares[x1][z1]->mapConection.active )
+                      MapSquares[x1][z1].textura).c_str());
+          if( MapSquares[x1][z1].mapConection.active )
           {
               fprintf(arq,"uc %f,%f,%f,%f:%s\n",
-                      MapSquares[x1][z1]->mapConection.x1,
-                      MapSquares[x1][z1]->mapConection.z1,
-                      MapSquares[x1][z1]->mapConection.x2,
-                      MapSquares[x1][z1]->mapConection.z2,
-                      MapSquares[x1][z1]->mapConection.mapName.c_str());
+                      MapSquares[x1][z1].mapConection.x1,
+                      MapSquares[x1][z1].mapConection.z1,
+                      MapSquares[x1][z1].mapConection.x2,
+                      MapSquares[x1][z1].mapConection.z2,
+                      MapSquares[x1][z1].mapConection.mapName.c_str());
           }
           int aux;
           for(aux=0;aux<MAXOBJETOS;aux++)
           {
-            if(MapSquares[x1][z1]->objects[aux])
+            if(MapSquares[x1][z1].objects[aux])
             {
-               x2 = (int)MapSquares[x1][z1]->Xobjects[aux] / SQUARESIZE;
-               z2 = (int)MapSquares[x1][z1]->Zobjects[aux] / SQUARESIZE;
+               x2 = (int)MapSquares[x1][z1].Xobjects[aux] / SQUARESIZE;
+               z2 = (int)MapSquares[x1][z1].Zobjects[aux] / SQUARESIZE;
                fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d:%d\n",
-                       MapSquares[x1][z1]->objects[aux]->getFileName().c_str(),
-                       MapSquares[x1][z1]->objectsDesenha[aux],
+                       MapSquares[x1][z1].objects[aux]->getFileName().c_str(),
+                       MapSquares[x1][z1].objectsDesenha[aux],
                        x2+1,z2+1,
-                       MapSquares[x1][z1]->Xobjects[aux],
-                       MapSquares[x1][z1]->Zobjects[aux],
-                       MapSquares[x1][z1]->objectsOrientation[aux],
-                       MapSquares[x1][z1]->pisavelObj[aux]);
+                       MapSquares[x1][z1].Xobjects[aux],
+                       MapSquares[x1][z1].Zobjects[aux],
+                       MapSquares[x1][z1].objectsOrientation[aux],
+                       MapSquares[x1][z1].pisavelObj[aux]);
             }
           }
       }
@@ -1647,7 +1647,7 @@ Map::~Map()
    {
       am = m;
       m = m->proximo;
-      free(am);
+      delete(am);
    }
 
    /* Deleting wall Doors */
@@ -1657,7 +1657,7 @@ Map::~Map()
    {
       auxporta = porta;
       porta = porta->proximo;
-      free(auxporta);
+      delete(auxporta);
    }
 
 
@@ -1666,25 +1666,26 @@ Map::~Map()
    delete(objects);
   
    /* Deleting all squares */
-   int x1,z1;
-   for(x1 = 0; x1<x; x1++)
+   //int x1,z1;
+   /*for(x1 = 0; x1<x; x1++)
    {
       for(z1 = 0; z1<z;z1++)
       {
-         delete(MapSquares[x1][z1]);
+         delete (MapSquares[x1][z1]);
       }
-   }
+   }*/
+   int x1;
    for(x1 = 0; x1<x;x1++)
    {
-      free(MapSquares[x1]);
+      delete[](MapSquares[x1]);
    }
-   free(MapSquares);
+   delete[] (MapSquares);
 
    /* Deleting Roads */
-   if(roads)
+   /*if(roads)
    {
       delete(roads);
-   }
+   }*/
 }
 
 
@@ -1721,9 +1722,9 @@ void Map::drawMinimap(SDL_Surface* img)
    {
       for(X = iX; X < limX; X++)
       {
-          cor_Definir(MapSquares[X][Z]->R,
-                      MapSquares[X][Z]->G,
-                      MapSquares[X][Z]->B);
+          cor_Definir(MapSquares[X][Z].R,
+                      MapSquares[X][Z].G,
+                      MapSquares[X][Z].B);
           retangulo_Colorir(img, x1, y1, 
                             x1+SQUAREMINISIZE-1, y1+SQUAREMINISIZE-1, 0);
           x1+=SQUAREMINISIZE;

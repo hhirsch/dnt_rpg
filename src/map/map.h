@@ -358,7 +358,7 @@ class Map
 
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
-      mapRoad* roads;       /**< Map's Roads */
+      //mapRoad* roads;       /**< Map's Roads */
       int numtexturas;      /**< Number of distinct Textures on Map */
       texture* Texturas;    /**< List of textures on Map */
       Square* squareInic;   /**< Square where PCs starts */
@@ -373,7 +373,7 @@ class Map
          int x,                /**< Map X dimension (in squares) */
              z;                /**< Map Z Dimension (in squares) */
          bool outdoor;         /**< If it's an outdoor or indoor map */
-         Square*** MapSquares; /**< Internal Map squares */
+         Square** MapSquares;  /**< Internal Map squares */
          lMapObject* objects;  /**< Map's objects list */
          string music;         /**< Map Music */
          string name;          /**< File name of loaded map */
