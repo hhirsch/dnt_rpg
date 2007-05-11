@@ -580,7 +580,7 @@ p 0,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_grama_trilha2.png
 p 1,0.000000,0.000000,0.000000,1.000000
 ut ../data/texturas/chao_grama_trilha2.png
-uo ../data/models/objetos/geral/placa_pare.dcc 0:8,10:465.682587,637.657288:0:0
+uo ../data/models/objetos/geral/placa_pare.dcc 0:8,10:465.682587,637.657288:-112:0
 p 1,1.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_grama_trilha2.png
 p 1,0.000000,0.000000,0.000000,0.000000
