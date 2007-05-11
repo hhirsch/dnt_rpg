@@ -121,7 +121,10 @@ object::~object()
    {
      modelMin->decUsed(); 
    }
-   SDL_FreeSurface(model2d);
+   if(model2d)
+   {
+      SDL_FreeSurface(model2d);
+   }
 }
 
 /**************************************************************

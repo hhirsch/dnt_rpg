@@ -339,6 +339,9 @@ void fightSystem::empty()
    }
 
    charsInitiatives.clear();
+   lastTime = 0;
+   actualActor = NULL;
+   pendingAnimation = true;
 }
 
 /***************************************************************

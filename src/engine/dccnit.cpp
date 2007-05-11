@@ -1006,9 +1006,9 @@ void engine::enterBattleMode(bool surprisePC)
   string briefInit = "";
   //FIXME not here the dices!
   diceThing dc;
-  dc.baseDice.diceID = DICE_D8;
-  dc.baseDice.numberOfDices = 2;
-  dc.baseDice.sumNumber = 4;
+  dc.baseDice.diceID = DICE_D4;
+  dc.baseDice.numberOfDices = 1;
+  dc.baseDice.sumNumber = 2;
   dc.initialLevel = 1;
   personagem* activeCharacter = PCs->getActiveCharacter();
   
@@ -1486,6 +1486,11 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                                                           *activeCharacter,
                                                           attackFeat, *pers, 
                                                           brief);
+                     if(pers->lifePoints <= 0)
+                     {
+                        pers->kill();
+                     }
+
                      if(!pers->isAlive())
                      {
                         brief += "|" + pers->nome + " " +  language.FIGHT_DEAD;
@@ -2778,6 +2783,16 @@ int engine::Run(SDL_Surface *surface)
               modifState.clear();
               engineMode = ENGINE_MODE_REAL_TIME;
               gui->closeAllWindows();
+              if(actualMap)
+              {
+                 delete(actualMap);
+                 actualMap = NULL;
+              }
+              if(models)
+              {
+                 delete(models);
+                 models = new modelList();
+              }
               /* Put the animation state on normal */
               PCs->getActiveCharacter()->setState(STATE_IDLE);
               return(0);

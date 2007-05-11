@@ -15,9 +15,10 @@
 model3d::model3d(string path, string texturePath)
 {
    fileName = path;
-   model = glmReadOBJ(path.c_str(), texturePath.c_str(),1);
+   model = glmReadOBJ(path.c_str(), texturePath.c_str(), 0);
    if(!model)
    {
+      model = NULL;
       printf("Error on Openning Model: %s\n", path.c_str());
       printf("Maybe will crash soon!\n");
    }
@@ -29,7 +30,14 @@ model3d::model3d(string path, string texturePath)
  ********************************************************/
 model3d::~model3d()
 {
-   glmDelete(model);
+   if(model)
+   {
+      glmDelete(model);
+   }
+   else
+   {
+      printf("Model: %s can't remove Model!\n", fileName.c_str());
+   }
 }
 
 /********************************************************
@@ -37,7 +45,10 @@ model3d::~model3d()
  ********************************************************/
 void model3d::draw()
 {
-   glmDrawLists(model);
+   if(model)
+   {
+      glmDraw(model);
+   }
 }
 
 /********************************************************
@@ -180,17 +191,21 @@ model3d* modelList::addModel(string path, string texturePath)
  ********************************************************/
 void modelList::removeModel(model3d* mdl)
 {
-   if(mdl == first)
+   if(mdl != NULL)
    {
-      first = mdl->next;
-   }
-   mdl->next->previous = mdl->previous;
-   mdl->previous->next = mdl->next;
-   delete(mdl);
-   totalModels--;
-   if(totalModels == 0)
-   {
-      first = NULL;void removeUnusedModels();
+
+      if(mdl == first)
+      {
+         first = mdl->next;
+      }
+      mdl->next->previous = mdl->previous;
+      mdl->previous->next = mdl->next;
+      delete(mdl);
+      totalModels--;
+      if(totalModels == 0)
+      {
+         first = NULL;
+      }
    }
 }
 
@@ -212,16 +227,17 @@ void modelList::removeUnusedModels()
 
    if(first)
    {
-      while( (mdl->next != first) )
+      while( (first != NULL) && (mdl->next != first) )
       {
          oth = mdl;
          mdl = mdl->next;
          if(oth->getUsedFlag() <= 0)
          {
+            printf("Will remove: %s\n", oth->getFileName().c_str());
             removeModel(oth);
          }
       }
-      if(first->getUsedFlag() <= 0)
+      if((first != NULL) && (first->getUsedFlag() <= 0))
       {
          removeModel(first);
       }
@@ -233,19 +249,15 @@ void modelList::removeUnusedModels()
  ********************************************************/
 void modelList::printAll()
 {
+   int i;
    model3d* mdl = first;
    printf("*****************************************************\n");
    printf("*              Current Models on List               *\n");
-   if(first)
+   for(i = 0; i < totalModels; i++)
    {
-      printf("* Obj: %s\n*\tUsed for: %d\n", first->getFileName().c_str(), 
-                                          first->getUsedFlag());
-      while( (mdl->next != first) )
-      {
-         printf("* Obj: %s\n*\tUsed for: %d\n", mdl->getFileName().c_str(),
+      printf("* Obj: %s\n*\tUsed for: %d\n", mdl->getFileName().c_str(), 
                                              mdl->getUsedFlag());
-         mdl = mdl->next;
-      }
+      mdl = mdl->next;
    }
    printf("*****************************************************\n\n");
 }

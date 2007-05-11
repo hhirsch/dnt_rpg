@@ -19,63 +19,76 @@
 /* includes */
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL_image.h>
+#include <string>
+using namespace std;
 
 
 /* structs */
 
 /*! GLMmaterial: Structure that defines a material in a model. 
  */
-typedef struct _GLMmaterial
+class GLMmaterial
 {
-  char* name;				/**< name of material */
-  GLfloat diffuse[4];			/**< diffuse component */
-  GLfloat ambient[4];			/**< ambient component */
-  GLfloat specular[4];			/**< specular component */
-  GLfloat emmissive[4];			/**< emmissive component */
-  GLfloat shininess;			/**< specular exponent */
-} GLMmaterial;
+   public:
+     string name;				/**< name of material */
+     GLfloat diffuse[4];			/**< diffuse component */
+     GLfloat ambient[4];			/**< ambient component */
+     GLfloat specular[4];			/**< specular component */
+     GLfloat emmissive[4];			/**< emmissive component */
+     GLfloat shininess;			/**< specular exponent */
+};
 
 /*! GLMtriangle: Structure that defines a triangle in a model.
  */
-typedef struct {
-  GLuint vindices[3];		/**< array of triangle vertex indices */
-  GLuint nindices[3];		/**< array of triangle normal indices */
-  GLuint tindices[3];		/**< array of triangle texcoord indices*/
-  GLuint findex;		/**< index of triangle facet normal */
-  int texture;                  /**< pointer to texture index */
-  GLuint material;              /**< face used material */
-} GLMtriangle;
+class GLMtriangle {
+   public:
+     GLuint vindices[3];		/**< array of triangle vertex indices */
+     GLuint nindices[3];		/**< array of triangle normal indices */
+     GLuint tindices[3];		/**< array of triangle texcoord indices*/
+     GLuint findex;                 /**< index of triangle facet normal */
+     int texture;                   /**< pointer to texture index */
+     GLuint material;               /**< face used material */
+};
 
 /*! GLMgroup: Structure that defines a group in a model.
  */
-typedef struct _GLMgroup {
-  char*   name;		      /**< name of this group */
-  GLuint  numtriangles;	      /**< number of triangles in this group */
-  GLuint* triangles;          /**< array of triangle indices */
-  //GLuint  material;         /* index to material for group */
-  GLfloat rotacao[3];         /**< rotation vector */
-  GLfloat translacao[3];      /**< translation vector */
-  GLfloat escala[3];          /**< scale vector */
-  GLuint listaDesenhar;       /**< list to draw th group */
-  struct _GLMgroup* next;     /**< pointer to next group in model */
-} GLMgroup;
+class GLMgroup {
+   public:
+     string   name;		      /**< name of this group */
+     GLuint  numtriangles;	      /**< number of triangles in this group */
+     GLuint* triangles;          /**< array of triangle indices */
+     //GLuint  material;         /* index to material for group */
+     GLfloat rotacao[3];         /**< rotation vector */
+     GLfloat translacao[3];      /**< translation vector */
+     GLfloat escala[3];          /**< scale vector */
+     GLuint listaDesenhar;       /**< list to draw th group */
+     struct GLMgroup* next;     /**< pointer to next group in model */
+};
 
 /*! GLMtexture: Struct that defines model's textures 
  */
-typedef struct _GLMtexture {
-   char* nome;                 /**< Texture file name */
-   GLuint indice;              /**< Indice da Textura internamente */
-   GLuint w,                   /**< Texture width */
-   h;                          /**< Texture height */
-   struct _GLMtexture* proximo;/**< Next Texture on list */
-}GLMtexture;
+class GLMtexture {
+   public:
+      GLMtexture()
+      {
+         nome = "";
+         indice = -1;
+         proximo = NULL;
+      }
+      string nome;                 /**< Texture file name */
+      GLuint indice;              /**< Indice da Textura internamente */
+      GLuint w,                   /**< Texture width */
+      h;                          /**< Texture height */
+      struct GLMtexture* proximo;/**< Next Texture on list */
+};
 
 /*! GLMmodel: Structure that defines a model.
  */
-typedef struct {
-  char*    pathname;			/**< path to this model */
-  char*    mtllibname;			/**< name of the material library */
-  char*    diretorioTexturas;           /**< texture directory */
+class GLMmodel {
+   public:
+  string    pathname;			/**< path to this model */
+  string    mtllibname;			/**< name of the material library */
+  string    diretorioTexturas;           /**< texture directory */
 
   GLuint   numvertices;			/**< number of vertices in model */
   GLfloat* vertices;			/**< array of vertices  */
@@ -107,7 +120,7 @@ typedef struct {
 
   GLuint boundingDefinido;              /**< 1 if defined bounding box */
 
-} GLMmodel;
+};
 
 
 /* public functions */
@@ -130,7 +143,7 @@ glmDelete(GLMmodel* model);
  * \param fazListas -> 1 if wanna computate the draw lists.
  */
 GLMmodel* 
-glmReadOBJ(const char* filename,const char* diretorioTex,int fazListas);
+glmReadOBJ(const string filename,const string diretorioTex,int fazListas);
 
 /*!
  * Renders the model to the current OpenGL context using the
@@ -147,7 +160,7 @@ glmDraw(GLMmodel* model);
  * \param name -> model name
  */
 GLMgroup*
-_glmFindGroup(GLMmodel* model, char* name);
+_glmFindGroup(GLMmodel* model, string name);
 
 /*!
  * Prepocess the drawning lists.

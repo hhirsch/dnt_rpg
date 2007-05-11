@@ -51,35 +51,19 @@ typedef struct _GLMnode {
   struct _GLMnode* next;
 } GLMnode;
 
-/* strdup is actually not a standard ANSI C or POSIX routine
-   so implement a private one.  OpenVMS does not have a strdup; Linux's
-   standard libc doesn't declare strdup by default (unless BSD or SVID
-   interfaces are requested). */
-static char *
-stralloc(const char *string)
-{
-  char *copy;
-
-  copy = (char*) malloc(strlen(string) + 1);
-  if (copy == NULL)
-    return NULL;
-  strcpy(copy, string);
-  return copy;
-}
-
-
-
 /* _glmFindGroup: Find a group in the model
  */
 GLMgroup*
-_glmFindGroup(GLMmodel* model, char* name)
+_glmFindGroup(GLMmodel* model, string name)
 {
   GLMgroup* group;
 
   group = model->groups;
   while(group) {
-    if (!strcmp(name, group->name))
+    if (name == group->name)
+    {
       break;
+   }
     group = group->next;
   }
 
@@ -89,14 +73,14 @@ _glmFindGroup(GLMmodel* model, char* name)
 /* _glmAddGroup: Add a group to the model
  */
 GLMgroup*
-_glmAddGroup(GLMmodel* model, char* name)
+_glmAddGroup(GLMmodel* model, string name)
 {
   GLMgroup* group;
 
   group = _glmFindGroup(model, name);
   if (!group) {
-    group = (GLMgroup*)malloc(sizeof(GLMgroup));
-    group->name = stralloc(name);
+    group = (GLMgroup*)new(GLMgroup);
+    group->name = name;
     group->numtriangles = 0;
     int aux;
     for(aux=0;aux<3;aux++)
@@ -117,17 +101,17 @@ _glmAddGroup(GLMmodel* model, char* name)
 /* _glmFindGroup: Find a material in the model
  */
 GLuint
-_glmFindMaterial(GLMmodel* model, char* name)
+_glmFindMaterial(GLMmodel* model, string name)
 {
   GLuint i;
 
   for (i = 0; i < model->nummaterials; i++) {
-    if (!strcmp(model->materials[i].name, name))
+    if (model->materials[i].name == name)
       goto found;
   }
 
   /* didn't find the name, so set it as the default material */
-  printf("_glmFindMaterial(): Nao achei material  \"%s\".\n", name);
+  printf("_glmFindMaterial(): Nao achei material  \"%s\".\n", name.c_str());
   i = 0;
 
 found:
@@ -141,19 +125,20 @@ found:
  *
  * The return value should be free'd.
  */
-char*
-_glmDirName(char* path)
+string
+_glmDirName(string path)
 {
-  char* dir;
-  char* s;
+  string dir;
+  string s;
 
-  dir = stralloc(path);
+  s = path;
 
-  s = strrchr(dir, '/');
-  if (s)
-    s[1] = '\0';
-  else
-    dir[0] = '\0';
+  while(s[s.length()-1] != '/')
+  {
+     s.erase(s.length()-1, 1);
+  }
+
+  dir = s;
 
   return dir;
 }
@@ -165,28 +150,25 @@ _glmDirName(char* path)
  * name  - name of the material library
  */
 GLvoid
-_glmReadMTL(GLMmodel* model, char* name)
+_glmReadMTL(GLMmodel* model, string name)
 {
   FILE* file;
-  char* dir;
-  char* filename;
+  string dir;
+  string filename;
   char  buf[128];
   GLuint nummaterials, i;
 
   dir = _glmDirName(model->pathname);
-  filename = (char*)malloc(sizeof(char) * (strlen(dir) + strlen(name) + 1));
-  strcpy(filename, dir);
-  strcat(filename, name);
-  free(dir);
+  filename = "";
+  filename = dir + name;
 
   /* open the file */
-  file = fopen(filename, "r");
+  file = fopen(filename.c_str(), "r");
   if (!file) {
     fprintf(stderr, "_glmReadMTL() falhou: nao abri arquivo de material\"%s\".\n",
-	    filename);
+	    filename.c_str());
     exit(1);
   }
-  free(filename);
 
   /* count the number of materials in the file */
   nummaterials = 1;
@@ -211,12 +193,12 @@ _glmReadMTL(GLMmodel* model, char* name)
   rewind(file);
 
   /* allocate memory for the materials */
-  model->materials = (GLMmaterial*)malloc(sizeof(GLMmaterial) * nummaterials);
+  model->materials = (GLMmaterial*) new GLMmaterial[nummaterials];
   model->nummaterials = nummaterials;
 
   /* set the default material */
   for (i = 0; i < nummaterials; i++) {
-    model->materials[i].name = NULL;
+    model->materials[i].name = "";
     model->materials[i].shininess = 0;
     model->materials[i].diffuse[0] = 0.8;
     model->materials[i].diffuse[1] = 0.8;
@@ -231,7 +213,7 @@ _glmReadMTL(GLMmodel* model, char* name)
     model->materials[i].specular[2] = 0.0;
     model->materials[i].specular[3] = 1.0;
   }
-  model->materials[0].name = stralloc("default");
+  model->materials[0].name = "default";
 
   /* now, read in the data */
   nummaterials = 0;
@@ -245,7 +227,7 @@ _glmReadMTL(GLMmodel* model, char* name)
       fgets(buf, sizeof(buf), file);
       sscanf(buf, "%s %s", buf, buf);
       nummaterials++;
-      model->materials[nummaterials].name = stralloc(buf);
+      model->materials[nummaterials].name = buf;
       break;
     case 'N':
       fscanf(file, "%f", &model->materials[nummaterials].shininess);
@@ -288,14 +270,14 @@ _glmReadMTL(GLMmodel* model, char* name)
 }
 
 
-int IDTextura(GLMmodel* modelo, char* textura, GLuint *largura, GLuint *altura)
+int IDTextura(GLMmodel* modelo, string textura, GLuint *largura, GLuint *altura)
 {
    /* procura pela textura */
    GLuint aux=0;
    GLMtexture* tex = modelo->texturas;
    while(aux<modelo->numtexturas)
    {
-      if(!strcmp(tex->nome, textura))
+      if(tex->nome == textura)
       {
         *largura = tex->w;
         *altura = tex->h;
@@ -308,11 +290,13 @@ int IDTextura(GLMmodel* modelo, char* textura, GLuint *largura, GLuint *altura)
 }
 
 /* Insere a textura dentre as utilizadas pelo objeto */
-void InsereTextura(GLMmodel* modelo, char* textura)
+void InsereTextura(GLMmodel* modelo, string textura)
 {
    /* Ignora os nulos */
-   if(!strcmp(textura,"(null)")) 
+   if(textura == "(null)") 
+   {
      return;
+   }
 
    /* procura pela textura */
    GLuint aux=0;
@@ -320,29 +304,27 @@ void InsereTextura(GLMmodel* modelo, char* textura)
    GLMtexture* ant = NULL;
    while(aux < modelo->numtexturas)
    {
-      if(!strcmp(tex->nome, textura))
+      if(tex->nome == textura)
+      {
          return; //a textura ja esta presente 
+      }
       ant = tex;
       tex = tex->proximo;
       aux++;
    }
 
    /* carrega a textura do arquivo */
-   char* arq = (char*)malloc(sizeof(char) * 
-           (strlen(modelo->diretorioTexturas) + strlen(textura) + 1));
-   strcpy(arq, modelo->diretorioTexturas);
-   strcat(arq, textura);
-   SDL_Surface* img = IMG_Load(arq);
+   string arq = modelo->diretorioTexturas + textura;
+   SDL_Surface* img = IMG_Load(arq.c_str());
    if(!img)
    {
-      printf("Erro ao abrir textura: %s\n",arq);
-      printf("File: %s\nDirectory: %s\n",textura, modelo->diretorioTexturas);
-      free(arq);
+      printf("Erro ao abrir textura: %s\n",arq.c_str());
+      printf("File: %s\nDirectory: %s\n",textura.c_str(), modelo->diretorioTexturas.c_str());
       return;
    }
 
    /* Insere realmente a textura */ 
-   tex = (GLMtexture*) malloc(sizeof(GLMtexture));
+   tex = (GLMtexture*) new(GLMtexture);
    tex->proximo = NULL;
    if(modelo->numtexturas == 0)
    {
@@ -353,7 +335,7 @@ void InsereTextura(GLMmodel* modelo, char* textura)
      ant->proximo = tex;
    }
 
-   tex->nome = stralloc(textura);
+   tex->nome = textura;
    glGenTextures(1, &(tex->indice));
    glBindTexture(GL_TEXTURE_2D, tex->indice);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h, 
@@ -366,7 +348,6 @@ void InsereTextura(GLMmodel* modelo, char* textura)
    modelo->numtexturas++;
 
    /* Libera a memoria utilizada */
-   free(arq);
    SDL_FreeSurface(img);
 }
 
@@ -423,7 +404,7 @@ _glmFirstPass(GLMmodel* model, FILE* file)
     case 'm':
       fgets(buf, sizeof(buf), file);
       sscanf(buf, "%s %s", buf, buf);
-      model->mtllibname = stralloc(buf);
+      model->mtllibname = buf;
       _glmReadMTL(model, buf);
       break;
     case 'u':
@@ -635,6 +616,7 @@ _glmSecondPass(GLMmodel* model, FILE* file)
       fgets(buf, sizeof(buf), file);
       sscanf(buf, "%s", buf);
       group = _glmFindGroup(model, buf);
+      group->listaDesenhar = 0;
       //group->material = material;
       break;
     case 'f':				/* face */
@@ -765,28 +747,29 @@ _glmSecondPass(GLMmodel* model, FILE* file)
 GLvoid
 glmDelete(GLMmodel* model)
 {
+  if(!model)
+  {
+     printf("Trying to remove a NULL Model!\n");
+     return;
+  }
   GLMgroup* group;
   GLuint i;
 
-  if (model->pathname)   free(model->pathname);
-  if (model->mtllibname) free(model->mtllibname);
   if (model->vertices)   free(model->vertices);
   if (model->normals)    free(model->normals);
   if (model->texcoords)  free(model->texcoords);
   if (model->facetnorms) free(model->facetnorms);
   if (model->triangles)  free(model->triangles);
-  if (model->materials) {
-    for (i = 0; i < model->nummaterials; i++)
-      free(model->materials[i].name);
-  }
-  free(model->materials);
+  delete[] (model->materials);
   while(model->groups) {
     group = model->groups;
     model->groups = model->groups->next;
-    glDeleteLists(group->listaDesenhar,1);
-    free(group->name);
-    free(group->triangles);
-    free(group);
+    if(group->listaDesenhar != 0)
+    { 
+      glDeleteLists(group->listaDesenhar,1);
+    }
+    delete [] (group->triangles);
+    delete(group);
   }
   GLMtexture* tex = model->texturas;
   GLMtexture* au;
@@ -794,11 +777,13 @@ glmDelete(GLMmodel* model)
   {
      au = tex;
      tex = tex->proximo;
-     free(au->nome);
-     glDeleteTextures(1,&(au->indice));
-     free(au);
+     if(au->indice > 0)
+     {
+        glDeleteTextures(1,&(au->indice));
+     }
+     delete(au);
   }
-  free(model);
+  delete(model);
 }
 
 /* glmReadOBJ: Reads a model description from a Wavefront .OBJ file.
@@ -808,16 +793,16 @@ glmDelete(GLMmodel* model)
  * filename - name of the file containing the Wavefront .OBJ format data.  
  */
 GLMmodel* 
-glmReadOBJ(const char* filename,const char* diretorioTex, int fazListas)
+glmReadOBJ(string filename, string diretorioTex, int fazListas)
 {
   GLMmodel* model;
   FILE*     file;
 
   /* open the file */
-  file = fopen(filename, "r");
+  file = fopen(filename.c_str(), "r");
   if (!file) {
     fprintf(stderr, "glmReadOBJ() falhou: nao consegui abrir arquivo de dados \"%s\".\n",
-	    filename);
+	    filename.c_str());
     exit(1);
   }
 
@@ -827,10 +812,10 @@ glmReadOBJ(const char* filename,const char* diretorioTex, int fazListas)
 #endif
 
   /* allocate a new model */
-  model = (GLMmodel*)malloc(sizeof(GLMmodel));
-  model->pathname      = stralloc(filename);
-  model->diretorioTexturas = stralloc(diretorioTex);
-  model->mtllibname    = NULL;
+  model = (GLMmodel*) new GLMmodel();
+  model->pathname      = filename;
+  model->diretorioTexturas = (diretorioTex);
+  model->mtllibname    = "";
   model->numvertices   = 0;
   model->vertices      = NULL;
   model->numnormals    = 0;
@@ -860,8 +845,7 @@ glmReadOBJ(const char* filename,const char* diretorioTex, int fazListas)
   /* allocate memory */
   model->vertices = (GLfloat*)malloc(sizeof(GLfloat) *
 				     3 * (model->numvertices + 1));
-  model->triangles = (GLMtriangle*)malloc(sizeof(GLMtriangle) *
-					  model->numtriangles);
+  model->triangles = (GLMtriangle*)new GLMtriangle[model->numtriangles];
   if (model->numnormals) {
     model->normals = (GLfloat*)malloc(sizeof(GLfloat) *
 				      3 * (model->numnormals + 1));
@@ -880,7 +864,9 @@ glmReadOBJ(const char* filename,const char* diretorioTex, int fazListas)
   fclose(file);
 
   if(fazListas)
+  {
     glmPrecomputaListas(model, GLM_NONE | GLM_COLOR | GLM_SMOOTH | GLM_TEXTURE);
+  }
 
   /* //"Normaliza" NAO USADO!!!
   model->x2 -= model->x1;
@@ -909,6 +895,11 @@ void glmPrecomputaListas(GLMmodel* model, GLuint mode)
     }*/
     texturaAtual = -1;
     group->listaDesenhar = glGenLists(1);
+    if(!group->listaDesenhar)
+    {
+      printf("Can't alloc new glList with glGenList!\n");
+      return;
+    }
     glNewList(group->listaDesenhar,GL_COMPILE);
 
     glBegin(GL_TRIANGLES); 
@@ -1031,19 +1022,13 @@ GLvoid glmDraw(GLMmodel* model)
   glTranslatef(model->position[0], model->position[1], model->position[2]);
 
   group = model->groups;
+  texturaAtual = -1;
   
-
+  glBegin(GL_TRIANGLES);
   while (group) {
     
-    glPushMatrix();
-    glScalef(group->escala[0],group->escala[1],group->escala[2]);
-    glTranslatef(group->translacao[0],group->translacao[1],group->translacao[2]);
-    glRotatef(group->rotacao[0],1,0,0);
-    glRotatef(group->rotacao[1],0,1,0);
-    glRotatef(group->rotacao[2],0,0,1);
-
-    texturaAtual = -1;
-    glBegin(GL_TRIANGLES); 
+    
+     
   
     for (i = 0; i < group->numtriangles; i++) {
  
@@ -1084,34 +1069,30 @@ GLvoid glmDraw(GLMmodel* model)
       
       //if (mode & GLM_SMOOTH)
 	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[0]]);
-      //if (mode & GLM_TEXTURE)
+      if (T(group->triangles[i]).texture!=-1)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[0]]);
       
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[0]]);
       
       //if (mode & GLM_SMOOTH)
 	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[1]]);
-      //if (mode & GLM_TEXTURE)
+      if (T(group->triangles[i]).texture!=-1)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[1]]);
       
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[1]]);
       
       //if (mode & GLM_SMOOTH)
 	glNormal3fv(&model->normals[3 * T(group->triangles[i]).nindices[2]]);
-      //if (mode & GLM_TEXTURE)
+      if(T(group->triangles[i]).texture!=-1)
 	glTexCoord2fv(&model->texcoords[2*T(group->triangles[i]).tindices[2]]);
 
       glVertex3fv(&model->vertices[3 * T(group->triangles[i]).vindices[2]]);
 
     }
-    glEnd();
-    glDisable(GL_TEXTURE_2D);
-
-
-
-    glPopMatrix();
     group = group->next;
   }
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
   glPopMatrix();
   return;
 }
