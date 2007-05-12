@@ -18,7 +18,7 @@ IV  - Contacts
 software and hardware. They are:
 
    Software:
-   Cal3D     - Version 0.11, http://cal3d.sf.net
+   Cal3D     - Version 0.11, http://home.gna.org/cal3d/
    LibVorbis - http://www.vorbis.com/
    OpenGL    
    SDL       - Version 1.2.11, www.libsdl.org
@@ -26,7 +26,8 @@ software and hardware. They are:
    OpenAL    - Version 1.1, www.openal.org
    
    Hardware:
-   Video Card with 3D aceleration, OpenGl compatible.
+   Video Card with 3D aceleration, OpenGl compatible (minimun 
+   of a NVidia 6200 - Recommended: Nvidia 6800 GS).
 
      We don't recommend to use it on Window$:  the  render is 
    slower and the quality is worst. 
@@ -80,12 +81,14 @@ pageup                =  camera up                    (0-89°)
 pagedown              =  camera down                  (0-89°)
 insert                =  put camera on the top
 delete                =  put camera on the floor
+middle mouse button   =  free move the camera
 
               ===========================
               | Character Movimentation |
               ===========================
 
-mouse right click = move character to position
+mouse right button = move character to position
+mouse left button  = do some action
 a          =  turn left                       (0-360°)
 d          =  turn right                      (0-360°)
 w          =  forward                         (0-?)
@@ -94,6 +97,10 @@ q          =  move left                       (0-?)
 e          =  move right                      (0-?)
 tab        =  make active next character 
 lctrl+tab  =  make active previous character
+o, p       =  blood effect
+y          =  protect effect
+space      =  enter battle mode
+r          =  show range of action
  
                     =====================
                     | Auxiliars Windows |

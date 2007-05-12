@@ -20,7 +20,7 @@ existência   de  alguns  quesitos  de  software  e  outros  de
 hardware. São eles:
 
    Software:
-   Cal3D     - Versão 0.11, http://cal3d.sf.net
+   Cal3D     - Versão 0.11, http://home.gna.org/cal3d/
    LibVorbis - http://www.vorbis.com/
    OpenGL
    SDL       - Versão 1.2.11, www.libsdl.org
@@ -30,7 +30,8 @@ hardware. São eles:
    Hardware:
    Placa de Vídeo com aceleração 3D compatível  com  OpenGl no
    linux, através  de módulos  acelerados  (caso  contrário, a 
-   renderização é extremamente lenta).
+   renderização é extremamente lenta).  O  mínimo  seria   uma 
+   placa NVidia 6200. O recomendável uma NVidia 6800 GS.
    Não se recomenda a utilização de Windows, uma vez que a ren-
    derização no mesmo é mais lenta e de pior qualidade  do que
    no Linux (e isso para ficar só no argumento técnico).
@@ -61,23 +62,26 @@ navegação a seguinte:
                  | Movimentação da Camera |
                  ==========================
 
-mouse canto esquerdo  =  gira camera horariamente   (0-360°)
-seta para esquerda    =  gira para esquerda a camera  (0-360°)
-mouse canto direito   =  gira camera antihorariamente (0-360°)
-seta para direita     =  gira para direita a camera   (0-360°)
-seta para cima        =  aumenta o zoom da camera     (X-Ym)
-seta para baixo       =  diminui o zoom da camera     (X-Ym)
-home                  =  coloca o zoom no máximo
-end                   =  coloca zoom no mínimo
-pageup                =  sobe seguindo circuferencia  (0-89°)
-pagedown              =  desce seguindo circuferencia (0-89°)
-insert                =  coloca a câmera no topo
-delete                =  coloca a câmera no chão
+mouse canto esquerdo   =  gira camera horariamente   (0-360°)
+seta para esquerda     =  gira para esquerda a camera  (0-360°)
+mouse canto direito    =  gira camera antihorariamente (0-360°)
+seta para direita      =  gira para direita a camera   (0-360°)
+seta para cima         =  aumenta o zoom da camera     (X-Ym)
+seta para baixo        =  diminui o zoom da camera     (X-Ym)
+home                   =  coloca o zoom no máximo
+end                    =  coloca zoom no mínimo
+pageup                 =  sobe seguindo circuferencia  (0-89°)
+pagedown               =  desce seguindo circuferencia (0-89°)
+insert                 =  coloca a câmera no topo
+delete                 =  coloca a câmera no chão
+botão do meio do mouse =  gira livremente a camera
 
               ==============================
               | Movimentação do Personagem |
               ==============================
 
+botao direito do mouse = move o personagem ao ponto
+botao esquerdo do mouse = realiza ação para o personagem
 a          =  gira o personagem para esquerda (0-360°)
 d          =  gira o personagem para direita (0-360°)
 w          =  move personagem para frente (0-?)
@@ -86,6 +90,10 @@ q          =  move personagem para esquerda (0-?)
 e          =  move personagem para direita (0-?)
 tab        =  ativa o próximo personagem do grupo
 lctrl+tab  =  ativa o personagem anterior do grupo
+o, p       =  efeito de sange
+y          =  efeito de proteção
+r          =  mostra raio de ação
+barra de espaço = entra modo de combate
  
                  ======================
                  | Janelas Auxiliares |
@@ -93,6 +101,7 @@ lctrl+tab  =  ativa o personagem anterior do grupo
 
 m = Abre Janela de Mapas, se já não estiver aberta
 n = Abre Janela de Atalhos, se já não estiver aberta 
+i = Janela de Inventário
 
 Para sair do jogo, pressione a tecla ESC.
 
