@@ -21,8 +21,8 @@ class collision
       ~collision();
 
       /*! Define Current Map
-       * \param map -> pointer to current Map*/
-      void defineMap(Map* map);
+       * \param usedMap -> pointer to current Map*/
+      void defineMap(Map* usedMap);
 
       /*! Verify if character can occupy position on Square
        * \param min -> min positions of Bounding Box (translated & rotated)

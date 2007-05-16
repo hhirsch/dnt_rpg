@@ -24,9 +24,9 @@ collision::~collision()
 /*********************************************************************
  *                             defineMap                             *
  *********************************************************************/
-void collision::defineMap(Map* map)
+void collision::defineMap(Map* usedMap)
 {
-   actualMap = map;
+   actualMap = usedMap;
 }
 
 /*********************************************************************
