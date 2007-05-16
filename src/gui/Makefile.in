@@ -97,9 +97,9 @@ messages.o: messages.h messages.cpp
 	@$(CPP) $(CFLAGS) messages.cpp -o messages.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-mouse.o: mouse.h mouse.c
+mouse.o: mouse.h mouse.cpp
 	@printf "Making mouse.o... "
-	@$(CPP) $(CFLAGS) mouse.c -o mouse.o
+	@$(CPP) $(CFLAGS) mouse.cpp -o mouse.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 quadtexto.o: quadtexto.h quadtexto.cpp
