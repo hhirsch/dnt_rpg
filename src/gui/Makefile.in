@@ -37,14 +37,14 @@ cxsel.o: cxsel.h cxsel.cpp
 	@$(CPP) $(CFLAGS) cxsel.cpp -o cxsel.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-desenho.o: desenho.h desenho.c
+desenho.o: desenho.h desenho.cpp
 	@printf "Making desenho.o... "
-	@$(CPP) $(CFLAGS) desenho.c -o desenho.o
+	@$(CPP) $(CFLAGS) desenho.cpp -o desenho.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-erro.o: erro.c erro.h
+erro.o: erro.cpp erro.h
 	@printf "Making erro.o... "
-	@$(CPP) $(CFLAGS) erro.c -o erro.o
+	@$(CPP) $(CFLAGS) erro.cpp -o erro.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 eventos.o: eventos.h eventos.cpp
@@ -52,9 +52,9 @@ eventos.o: eventos.h eventos.cpp
 	@$(CPP) $(CFLAGS) eventos.cpp -o eventos.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-farso.o: farso.h farso.c
+farso.o: farso.h farso.cpp
 	@printf "Making farso.o... "
-	@$(CPP) $(CFLAGS) farso.c -o farso.o
+	@$(CPP) $(CFLAGS) farso.cpp -o farso.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 figura.o: figura.h figura.cpp
@@ -62,9 +62,9 @@ figura.o: figura.h figura.cpp
 	@$(CPP) $(CFLAGS) figura.cpp -o figura.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-fonte.o: fonte.h fonte.c
+fonte.o: fonte.h fonte.cpp
 	@printf "Making fonte.o... "
-	@$(CPP) $(CFLAGS) fonte.c -o fonte.o
+	@$(CPP) $(CFLAGS) fonte.cpp -o fonte.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 healthBar.o: healthBar.h healthBar.cpp
