@@ -62,7 +62,7 @@ class GLMgroup {
      GLfloat translacao[3];      /**< translation vector */
      GLfloat escala[3];          /**< scale vector */
      GLuint listaDesenhar;       /**< list to draw th group */
-     struct GLMgroup* next;     /**< pointer to next group in model */
+     GLMgroup* next;     /**< pointer to next group in model */
 };
 
 /*! GLMtexture: Struct that defines model's textures 
@@ -75,11 +75,11 @@ class GLMtexture {
          indice = -1;
          proximo = NULL;
       }
-      string nome;                 /**< Texture file name */
+      string nome;                /**< Texture file name */
       GLuint indice;              /**< Indice da Textura internamente */
       GLuint w,                   /**< Texture width */
-      h;                          /**< Texture height */
-      struct GLMtexture* proximo;/**< Next Texture on list */
+             h;                   /**< Texture height */
+      GLMtexture* proximo;/**< Next Texture on list */
 };
 
 /*! GLMmodel: Structure that defines a model.
