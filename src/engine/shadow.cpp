@@ -25,8 +25,6 @@ shadow::shadow()
       avaible = false;
    }
 
-   enable = avaible;
-
    biasMatrix[0] = 0.5f;
    biasMatrix[1] = 0.0f;
    biasMatrix[2] = 0.0f;
@@ -49,6 +47,7 @@ shadow::shadow()
 
    //FIXME -> the shadow is too slow and not working at all
    avaible = false;
+   enable = avaible;
 
 }
 
