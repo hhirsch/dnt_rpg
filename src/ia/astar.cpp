@@ -234,41 +234,44 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
          return(true);
       }
 
+      GLfloat pass = stepSize*5;
+      GLfloat passMid = ((stepSize*5) / sqrt(2.0));
       /* Visit all Adjacents Positions */
       for(i=0; i<9; i++)
       {
+         
          switch(i) {
            case 1:
               posX = node->x;
-              posZ = node->z - stepSize*5;
+              posZ = node->z - pass;
            break;
            case 2:
-              posX = node->x + stepSize*5;
-              posZ = node->z - stepSize*5;
+              posX = node->x + passMid;
+              posZ = node->z - passMid;
            break;
            case 3:
-              posX = node->x + stepSize*5;
+              posX = node->x + pass;
               posZ = node->z;
            break;
            case 4:
-              posX = node->x + stepSize*5;
-              posZ = node->z + stepSize*5;
+              posX = node->x + passMid;
+              posZ = node->z + passMid;
            break;
            case 5:
               posX = node->x;
-              posZ = node->z + stepSize*5;
+              posZ = node->z + pass;
            break;
            case 6:
-              posX = node->x - stepSize*5;
-              posZ = node->z + stepSize*5;
+              posX = node->x - passMid;
+              posZ = node->z + passMid;
            break;
            case 7:
-              posX = node->x - stepSize*5;
+              posX = node->x - pass;
               posZ = node->z;
            break;
            case 8:
-              posX = node->x - stepSize*5;
-              posZ = node->z - stepSize*5;
+              posX = node->x - passMid;
+              posZ = node->z - passMid;
            break;
         }
        

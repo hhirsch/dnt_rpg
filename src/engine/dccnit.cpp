@@ -2289,6 +2289,13 @@ void engine::renderNoShadowThings()
       glPopMatrix();
    }
 
+   /* Draw Path */
+   if(walkStatus == ENGINE_WALK_MOUSE)
+   {
+      activeCharacter->pathFind.drawPath();
+   }
+
+
    if( showRange )
    {
        /* Range Circle */
@@ -2396,6 +2403,7 @@ void engine::renderNoShadowThings()
                                       visibleMatrix, option->enableGrass);
       glPopMatrix();
    }
+
 }
 
 /********************************************************************

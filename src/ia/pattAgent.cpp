@@ -204,7 +204,7 @@ void pattAgent::addWayPointFirst(GLfloat x, GLfloat z)
 void pattAgent::changeToNextWayPoint()
 {
    //FIXME -> diagonal Moves are > stepSize per time.
-   int loops;
+   float loops;
    if(!actualWayPoint)
    {
       return; //not defined yet the way points, so stay static.
@@ -217,7 +217,7 @@ void pattAgent::changeToNextWayPoint()
       GLfloat dz = actualWayPoint->z - actualZ;
       //GLfloat dist = sqrt((dx*dx) + (dz*dz));
 
-      loops = (int) (sqrt((dx*dx)+(dz*dz)) / stepSize);
+      loops = (sqrt((dx*dx)+(dz*dz)) / stepSize);
       if(loops == 0)
       {
          xInc = 0;
@@ -225,8 +225,8 @@ void pattAgent::changeToNextWayPoint()
       }
       else
       {
-         xInc = (float) (dx) / (float(loops));
-         zInc = (float) (dz) / (float(loops));
+         xInc = (float) (dx) / (loops);
+         zInc = (float) (dz) / (loops);
       }
    }
    
