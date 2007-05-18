@@ -4,10 +4,8 @@
  * e posicionado no plano XZ, com Y=0, ignora-se o eixo Y. */ 
 void AtualizaFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16])
 {
-        GLfloat	clip[16];
-	/*GLfloat	proj[16];
-	GLfloat	modl[16];*/
-	GLfloat	t;
+      GLfloat clip[16];
+	GLfloat t;
 
 	// Get The Current PROJECTION Matrix From OpenGL
 	glGetDoublev( GL_PROJECTION_MATRIX, proj );

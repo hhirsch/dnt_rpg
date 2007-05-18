@@ -32,7 +32,7 @@ using namespace std;
 
 
 /*! Character Class */
-class personagem: public Tobjeto, public thing, public aniModel
+class personagem: public Tobjeto, public aniModel
 {
    public:
       /*! Constructor

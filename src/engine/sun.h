@@ -30,6 +30,13 @@ class sun
        * \return sun rotation value */
       GLfloat getRotation();
 
+      /*! Get The Sun Position
+       * \param pos -> variable to get the sun position */
+      void getPosition(GLfloat pos[4]);
+
+      /*! Set the sun light to the current state */
+      void setLight();
+
    private:
       GLfloat quadricAttenuation;   /**< Quadric Attenuation Light Value */
       GLfloat constantAttenuation;  /**< Constant Attenuation Light Value */

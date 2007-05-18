@@ -88,6 +88,16 @@ engine::engine()
 
    destinyVariation = -2.0;
 
+   /* Colors */
+   int i;
+   for(i = 0; i < 3; i++)
+   {
+      defaultColor[i] = 0.2;
+      blackColor[i] = 0.0;
+   }
+   defaultColor[3] = 1.0;
+   blackColor[3] = 1.0;
+
 #ifdef VIDEO_MODE
    startVideo = false;
 #endif
@@ -846,6 +856,7 @@ void engine::redmensionateWindow(SDL_Surface *screen)
    glLoadIdentity ();
    gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, FARVIEW);
    glGetIntegerv(GL_VIEWPORT, viewPort);
+   glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
    glMatrixMode (GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }
@@ -863,6 +874,9 @@ void engine::Init(SDL_Surface *screen)
    glClearDepth(1.0);
    glClearStencil(0);
 
+   /* ShadowMap */
+   shadowMap.init();
+
    /* Details Definition */
    glDepthFunc(GL_LEQUAL);
    glEnable(GL_DEPTH_TEST);
@@ -875,6 +889,7 @@ void engine::Init(SDL_Surface *screen)
    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
 
    glEnable(GL_LIGHTING);
+   glEnable(GL_NORMALIZE);
 
    /* Culling */
    /*glCullFace(GL_BACK);
@@ -2089,8 +2104,15 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    }
    
    if( (redesenha) || ( (*forcaAtualizacao != 0)))
-   {      
-      Draw();
+   {
+      if(shadowMap.isEnable())
+      {
+         drawWithShadows();
+      }
+      else
+      {
+         drawWithoutShadows();
+      }
       SDL_GL_SwapBuffers();
 
 
@@ -2165,41 +2187,13 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    return(!exitEngine);
 }
 
-/*********************************************************************
- *                       Draw Scene Function                         *
- *********************************************************************/
-void engine::Draw()
+/********************************************************************
+ *                            RenderScene                           *
+ ********************************************************************/
+void engine::renderScene()
 {
-   personagem* activeCharacter = PCs->getActiveCharacter();
-   GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
-
    GLfloat min[3],max[3];
    GLfloat x[4],z[4];
-
-   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-   glLoadIdentity();
-
-   /* Redefine camera position */
-   gameCamera.lookAt();
-
-   snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
-                            gameCamera.getCameraZ(), gameCamera.getTheta(),
-                            gameCamera.getPhi(), gameCamera.getD(),
-                            gameCamera.getDeltaY());
-
-   /* Sun Definition */
-   gameSun->actualizeHourOfDay(hour);
-   
-   /* Atualize to culling and to GUI */
-   AtualizaFrustum(visibleMatrix,proj,modl);
-
-   /* SKY */
-   if(actualMap->isOutdoor())
-   {
-      glPushMatrix();
-         gameSky->draw(actualMap, gameSun->getRotation());
-      glPopMatrix();
-   }
 
    glPushMatrix();
 
@@ -2276,6 +2270,21 @@ void engine::Draw()
          per = (personagem*) per->proximo;
       }
    }
+}
+
+/********************************************************************
+ *                       RenderNoShadowThings                       *
+ ********************************************************************/
+void engine::renderNoShadowThings()
+{
+   personagem* activeCharacter = PCs->getActiveCharacter(); 
+   /* SKY */
+   if(actualMap->isOutdoor())
+   {
+      glPushMatrix();
+         gameSky->draw(actualMap, gameSun->getRotation());
+      glPopMatrix();
+   }
 
    if( showRange )
    {
@@ -2334,6 +2343,7 @@ void engine::Draw()
                                    0.25,4);
    }
 
+   /* The SUN or MOON */
    if(actualMap->isOutdoor())
    {
       if(!actualMap->fog.enabled)
@@ -2345,8 +2355,9 @@ void engine::Draw()
       {
          glEnable(GL_FOG);
       }
-   }   
+   }
 
+   /* The Current Connection */
    if(curConection)
    {
       GLfloat ambient[] = { 0.94, 0.292, 0.22, 0.45 };
@@ -2382,11 +2393,16 @@ void engine::Draw()
                                       visibleMatrix, option->enableGrass);
       glPopMatrix();
    }
+}
 
+/********************************************************************
+ *                             RenderGUI                            *
+ ********************************************************************/
+void engine::renderGUI()
+{
    /* Draw the GUI and others */
-
+   GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
    
-
    /* Get Portrait position */
    gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
    gluUnProject(SCREEN_X,SCREEN_Y-74,0.01, modl, proj, viewPort, &x2, &y2, &z2);
@@ -2399,7 +2415,7 @@ void engine::Draw()
    glDisable(GL_BLEND);
 
    /* Player's Portrait */
-   per = (personagem*) activeCharacter;
+   personagem* per = (personagem*) PCs->getActiveCharacter();
    per->drawMainPortrait(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4);
  
    gui->draw(proj,modl,viewPort);
@@ -2417,7 +2433,109 @@ void engine::Draw()
    
    glEnable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
- 
+}
+
+/*********************************************************************
+ *                         drawWithShadow                            *
+ *********************************************************************/
+void engine::drawWithShadows()
+{
+   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+   /* Sun Actualization */
+   gameSun->actualizeHourOfDay(hour);
+   glLoadIdentity();
+   gameCamera.lookAt();
+   /* Atualize to culling and to GUI */
+   AtualizaFrustum(visibleMatrix,proj,modl);
+
+   
+
+   /* First Pass, render at the light View */
+      glDisable(GL_LIGHTING);
+      GLfloat lightPos[4];
+      gameSun->getPosition(lightPos);
+      shadowMap.defineLightView(lightPos[0], lightPos[1], lightPos[2]);
+      /* Only Back Faces on Shadow Map */
+      glEnable(GL_CULL_FACE);
+      glCullFace(GL_FRONT);
+      /* Without Color, and with Flat Mode */
+      glShadeModel(GL_FLAT);
+      glColorMask(0, 0, 0, 0);
+      renderScene();
+      /* Read the depth buffer into the shadow map texture */
+	shadowMap.saveShadowMap();
+
+   /* Second Pass */
+      glCullFace(GL_BACK);
+      glDisable(GL_CULL_FACE);
+      glShadeModel(GL_SMOOTH);
+      glColorMask(1, 1, 1, 1);
+      /* Set to the camera View */
+      glClear(GL_DEPTH_BUFFER_BIT);
+      glMatrixMode(GL_PROJECTION);
+      glLoadMatrixd(proj);
+      glMatrixMode(GL_MODELVIEW);
+      glLoadMatrixd(modl);
+      glViewport(0, 0, SCREEN_X, SCREEN_Y);
+      glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+      glLightfv(GL_LIGHT0, GL_AMBIENT, defaultColor);
+      glLightfv(GL_LIGHT0, GL_DIFFUSE, defaultColor);
+      glLightfv(GL_LIGHT0, GL_SPECULAR, blackColor);
+      glEnable(GL_LIGHT0);
+      glEnable(GL_LIGHTING);
+      renderScene();
+
+   /* Third Pass. draw with normal Light */
+      gameSun->setLight();
+      shadowMap.beginShadowMap();
+      renderScene();
+      shadowMap.endShadowMap();
+
+
+   /* Draw the things without shadows */
+   renderNoShadowThings();
+   renderGUI();
+  
+   /* Actualize Listener Position */
+   snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
+                            gameCamera.getCameraZ(), gameCamera.getTheta(),
+                            gameCamera.getPhi(), gameCamera.getD(),
+                            gameCamera.getDeltaY());
+
+   /* Flush */
+   glFlush();
+}
+
+/*********************************************************************
+ *                       Draw Scene Function                         *
+ *********************************************************************/
+void engine::drawWithoutShadows()
+{
+   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   glLoadIdentity();
+
+   /* Redefine camera position */
+   gameCamera.lookAt();
+
+   snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
+                            gameCamera.getCameraZ(), gameCamera.getTheta(),
+                            gameCamera.getPhi(), gameCamera.getD(),
+                            gameCamera.getDeltaY());
+
+   /* Sun Definition */
+   gameSun->actualizeHourOfDay(hour);
+   gameSun->setLight();
+   
+   /* Atualize to culling and to GUI */
+   AtualizaFrustum(visibleMatrix,proj,modl);
+
+   /* Render all things */
+   renderScene();
+   renderNoShadowThings();
+   renderGUI();
+   
+   /* Flush */
    glFlush();
 }
 

@@ -6,6 +6,8 @@
 #include <string>
 using namespace std;
 
+#include "../classes/thing.h"
+
 #define STATE_IDLE         0 /**< Character Animation State Idle */
 #define STATE_WALK         1 /**< Character Animation State Walk */
 #define STATE_DIE          2 /**< Character Animation State Die */
@@ -13,7 +15,7 @@ using namespace std;
 #define STATE_ATTACK_MEELE 4 /**< Character Animation State Meele Attack */
 
 /*! Animated Model Definition (using cal3d) */
-class aniModel
+class aniModel:public thing
 {
    public:
       /*! Constructor */
@@ -40,6 +42,9 @@ class aniModel
 
       /*! Render the model to the current frame state on screen. */
       void render();
+
+      /*! Render the shadow (need to set the stencil before call this) */
+      void renderShadow();
 
       /*! Calculate the model static bounding box */
       void calculateBoundingBox();

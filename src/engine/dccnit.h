@@ -33,6 +33,7 @@
 #include "options.h"
 #include "personagens.h"
 #include "racewindow.h"
+#include "shadow.h"
 #include "skillwindow.h"
 #include "sun.h"
 #include "sky.h"
@@ -65,6 +66,7 @@ class engine
       interface* gui;                  /**< GUI used on Engine */
       GLdouble proj[16];               /**< Projection Matrix */
       GLdouble modl[16];               /**< ModelView Matrix  */
+      GLfloat camProj[16];             /**< Camera Projection */
       GLint viewPort[4];               /**< ViewPort Matrix */
 
       /*!
@@ -84,10 +86,36 @@ class engine
 
       /*!
        **************************************************************** 
-       * Draws the Engine  
+       * Draws the Engine without Shadow
        * \note Need to run \b SDL_GL_SwapBuffers() after;
        ***************************************************************/
-      void Draw();
+      void drawWithoutShadows();
+
+      /*!
+       **************************************************************** 
+       * Draws the Engine with all Shadows  
+       * \note Need to run \b SDL_GL_SwapBuffers() after;
+       ***************************************************************/
+      void drawWithShadows();
+
+      /*!
+       **************************************************************** 
+       * Render all the "Shadownable" things 
+       ****************************************************************/
+      void renderScene();
+
+      /*!
+       ****************************************************************
+       * Render no "shadownable" things, like walk circles, 
+       * particles, etc. 
+       *****************************************************************/
+      void renderNoShadowThings();
+
+      /*!
+       *****************************************************************
+       * Render th GUI related Things
+       *****************************************************************/
+      void renderGUI();
 
       /*!
        **************************************************************** 
@@ -375,6 +403,10 @@ class engine
       sky* gameSky;               /**< The internal sky reference */
       sun* gameSun;               /**< The internal sun reference */
       GLfloat hour;               /**< Hour on day time */
+
+      shadow shadowMap;           /**< The shadowMap Module */
+      GLfloat defaultColor[4];
+      GLfloat blackColor[4];
 
 #ifdef VIDEO_MODE
       bool startVideo;            /**< Used to start video making */

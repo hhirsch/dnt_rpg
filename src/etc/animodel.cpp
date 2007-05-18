@@ -10,7 +10,7 @@
 /**********************************************************************
  *                            Constructor                             *
  **********************************************************************/
-aniModel::aniModel()
+aniModel::aniModel():thing()
 {
    m_calCoreModel = new CalCoreModel("");
    m_calModel = NULL;
@@ -521,7 +521,20 @@ void aniModel::render()
 
   pCalRenderer->endRendering();
 
+}
 
+/*********************************************************************
+ *                             RenderShadow                          *
+ *********************************************************************/
+void aniModel::renderShadow()
+{
+   //TODO disable the texture
+   glPushMatrix();
+      //glMultMatrixf(fShadowMatrix);
+      glTranslatef(posicaoLadoX, posicaoLadoY, posicaoLadoZ);
+      glRotatef(orientacao,0,1,0);
+      render();
+   glPopMatrix();
 }
 
 /*********************************************************************
