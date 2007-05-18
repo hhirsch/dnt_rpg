@@ -217,7 +217,7 @@ void pattAgent::changeToNextWayPoint()
       GLfloat dz = actualWayPoint->z - actualZ;
       //GLfloat dist = sqrt((dx*dx) + (dz*dz));
 
-      loops = (int) sqrt((dx*dx)+(dz*dz) / stepSize);
+      loops = (int) (sqrt((dx*dx)+(dz*dz)) / stepSize);
       if(loops == 0)
       {
          xInc = 0;
@@ -228,36 +228,6 @@ void pattAgent::changeToNextWayPoint()
          xInc = (float) (dx) / (float(loops));
          zInc = (float) (dz) / (float(loops));
       }
-      /*if(fabs(dx) > fabs(dz))
-      {
-         loops = (int) (fabs(dx) / stepSize);
-         if(loops == 0)
-         {
-            xInc = 0;
-            zInc = 0;
-         }
-         else
-         {
-            xInc = (float) (dx) / (float) (loops);
-            zInc = (float) (dz) / (float) (loops);
-         }
-         //sqrt( (dist*dist) - (xInc*xInc) );
-      }
-      else
-      {
-         loops = (int) (fabs(dz) / stepSize);
-         if(loops == 0)
-         {
-            xInc = 0;
-            zInc = 0;
-         }
-         else
-         {
-            zInc = (float) (dz) / (float) (loops);
-            xInc = (float) (dx) / (float) (loops);
-         }
-         //sqrt( (dist*dist) - (zInc*zInc) );
-      }*/
    }
    
 }
