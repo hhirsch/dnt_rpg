@@ -2,9 +2,10 @@
 #define _agent_h
 
 #include <SDL/SDL_opengl.h>
+#include "../engine/util.h"
 
 #define MAX_OBSTACLES 30
-#define MAX_ROTATION 2.5
+#define MAX_ROTATION GIRAR
 
 
 
