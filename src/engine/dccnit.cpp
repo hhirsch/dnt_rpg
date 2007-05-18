@@ -2201,6 +2201,8 @@ void engine::renderScene()
    actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
                    gameCamera.getCameraZ(),visibleMatrix);
    
+   glCullFace(GL_BACK);
+   glEnable(GL_CULL_FACE);
    /* Draw Playable Characters (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
@@ -2270,6 +2272,7 @@ void engine::renderScene()
          per = (personagem*) per->proximo;
       }
    }
+   glDisable(GL_CULL_FACE);
 }
 
 /********************************************************************

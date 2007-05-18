@@ -31,7 +31,7 @@
  *                     Actualization constants                      *
  ********************************************************************/
 #define REFRESH_RATE 100.0  /**< Keyboard Refresh Rate for the Engine */
-#define NORMAL_FPS 40       /**< Minimun FPS to the engine runs smooth */
+#define NORMAL_FPS 35       /**< Minimun FPS to the engine runs smooth */
 #define ACTUALIZATION_RATE (1000/NORMAL_FPS)  /**< Actualization Rate in ms */
 #define WALK_ACTUALIZATION (1.0/NORMAL_FPS) /**< Walk Actualization */ //0.021
 
