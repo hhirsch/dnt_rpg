@@ -31,23 +31,23 @@
  *                     Actualization constants                      *
  ********************************************************************/
 #define REFRESH_RATE 100.0  /**< Keyboard Refresh Rate for the Engine */
-#define NORMAL_FPS 50       /**< Minimun FPS to the engine runs smooth */
+#define NORMAL_FPS 40       /**< Minimun FPS to the engine runs smooth */
 #define ACTUALIZATION_RATE (1000/NORMAL_FPS)  /**< Actualization Rate in ms */
-#define WALK_ACTUALIZATION 0.021//(ACTUALIZATION_RATE / 1000.0)//0.021
+#define WALK_ACTUALIZATION (1.0/NORMAL_FPS) /**< Walk Actualization */ //0.021
 
 /********************************************************************
  *                Character's moviments constants                   *
  ********************************************************************/
 
-#define ANDAR  0.75//(ACTUALIZATION_RATE*0.0375) //0.75    /**< The distance that normal character walks */
-#define GIRAR  2.5//(ACTUALIZATION_RATE*0.125) //2.5     /**< The turn velocity of normal character */
+#define ANDAR  WALK_ACTUALIZATION * 37.5 //0.75 /**< The distance that normal character walks */
+#define GIRAR  WALK_ACTUALIZATION * 125.0 //2.5 /**< The turn velocity of normal character */
 #define WALK_PER_MOVE_ACTION 60 /**< Distance that can be walked per move */
 
 /********************************************************************
  *                      Camera's constants                          *
  ********************************************************************/
 
-#define DELTACAMERA    1.5            /**<  The camera velocity */
+#define DELTACAMERA  WALK_ACTUALIZATION * 75 /**<  The camera velocity */ //1.5
 #define ZOOMMAXIMO     80             /**< Max value of Zoom */
 #define ZOOMMINIMO     500            /**< Min value of Zoom */
 #define FARVIEW        4096           /**< FarView constant */
