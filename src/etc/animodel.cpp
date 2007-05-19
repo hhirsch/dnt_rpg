@@ -280,7 +280,7 @@ bool aniModel::loadModel(const string& strFilename)
       textureId = loadTexture(strPath + strFilename);
 
       // store the opengl texture id in the user data of the map
-      pCoreMaterial->setMapUserData(mapId, (Cal::UserData&)textureId);
+      pCoreMaterial->setMapUserData(mapId, (Cal::UserData*)textureId);
     }
   }
 
