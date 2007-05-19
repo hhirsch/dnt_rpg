@@ -424,6 +424,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   }
                   else
                   {
+                     activeObject = new object(activeObject);
                      inventories[0]->removeFromPlace(objWhere);
                      reDraw();
                   }

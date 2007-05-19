@@ -6,11 +6,15 @@
  *************************************************************************/
 
 #include "object.h"
+#include "itemslot.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
 #define INVENTORY_SIZE_X 13 /**< Number of Spaces on X axis */
 #define INVENTORY_SIZE_Y 6  /**< Number of Spaces on Y axis */
+
+#define TRADE_SIZE_X     6  /**< Number of Spaces on X axis for Trades */
+#define TRADE_SIZE_Y    10  /**< Number of Spaces on Y axis for Trades */
 
 #define INVENTORY_TOTAL_PLACES  8  /**< Total Eqquiped Places */
 #define INVENTORY_HEAD          0  /**< Head Place */
@@ -23,16 +27,6 @@
 #define INVENTORY_BODY          7  /**< Body Place (Torso) */
 
 #define INVENTORY_INVENTORY     8  /**< is in inventory */
-
-/*! Definition of each inventory space */
-class space
-{
-   public:
-      object* obj;    /**< Occupied Object */
-      int origX,      /**< X Orign of the Object on Inventory (space) */
-          origY;      /**< Y Orign of the Object on Inventory (space) */
-      
-};
 
 /*! Character Inventory Definition */
 class inventory
@@ -108,9 +102,9 @@ class inventory
       /*! For debug: print all names of inventory itens on terminal */
       void print();
 
-      space spaces[INVENTORY_SIZE_X][INVENTORY_SIZE_Y];/**< The inventory */
-      object* equippedObject[INVENTORY_TOTAL_PLACES];  /**< Equipped Current 
-                                                            Objects */
+      itemSlot* slots;  /**< The Inventory */
+      itemSlot** equippedSlots; /**< The Equipped Slots */
+
       SDL_Surface* inventoryImage; /**< The Inventory Image */
       SDL_Surface* equipedImage;   /**< The Equiped Inventory Image */
 

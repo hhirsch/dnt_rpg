@@ -11,18 +11,23 @@
  **************************************************************/
 inventory::inventory()
 {
-   int x,y;
    inventoryImage = NULL;
 
-   for(x=0; x < INVENTORY_SIZE_X; x++)
-   {
-      for(y=0; y < INVENTORY_SIZE_Y; y++)
-      {
-         spaces[x][y].obj = NULL;
-         spaces[x][y].origX = x;
-         spaces[x][y].origY = y;
-      }
-   }
+   /* Create Slots */
+   slots = new itemSlot(INVENTORY_SIZE_X, INVENTORY_SIZE_Y);
+
+   /* Create Equipped */
+   equippedSlots = new itemSlot*[INVENTORY_TOTAL_PLACES];
+   equippedSlots[INVENTORY_HEAD] = new itemSlot(2,2);
+   equippedSlots[INVENTORY_LEFT_HAND] = new itemSlot(2,4);
+   equippedSlots[INVENTORY_RIGHT_HAND] = new itemSlot(2,4);
+   equippedSlots[INVENTORY_LEFT_FINGER] = new itemSlot(1,1);
+   equippedSlots[INVENTORY_RIGHT_FINGER] = new itemSlot(1,1);
+   equippedSlots[INVENTORY_NECK] = new itemSlot(2,1);
+   equippedSlots[INVENTORY_FOOT] = new itemSlot(2,2);
+   equippedSlots[INVENTORY_BODY] = new itemSlot(3,4);
+
+   /* Load Images */
    inventoryImage = IMG_Load("../data/texturas/inventory/inventory.png");
    if(!inventoryImage)
    {
@@ -33,12 +38,6 @@ inventory::inventory()
    {
       printf("Can't Load Equiped Inventory Image!\n");
    }
-
-   /* Nullify equiped pointers */
-   for(x = 0; x < INVENTORY_TOTAL_PLACES; x++)
-   {
-      equippedObject[x] = NULL;
-   }
 }
 
 /**************************************************************
@@ -46,21 +45,17 @@ inventory::inventory()
  **************************************************************/
 inventory::~inventory()
 {
-   int x,y;
-   for(x=0; x < INVENTORY_SIZE_X; x++)
-   {
-      for(y=0; y < INVENTORY_SIZE_Y; y++)
-      {
-         if( (spaces[x][y].obj != NULL) &&
-             (spaces[x][y].origX == x) &&
-             (spaces[x][y].origY == y))
-         {
-            delete(spaces[x][y].obj);
-         }
-         spaces[x][y].obj = NULL;
-      }
-   }
+   int i;
+   /* Free Slots */
+   delete(slots);
 
+   for(i = 0; i<INVENTORY_TOTAL_PLACES; i++)
+   {
+      delete equippedSlots[i];
+   }
+   delete[] equippedSlots;
+
+   /* Free Images */
    if(inventoryImage)
    {
       SDL_FreeSurface(inventoryImage);
@@ -76,34 +71,7 @@ inventory::~inventory()
  **************************************************************/
 bool inventory::addObject(object* obj, int x, int y)
 {
-   if(!obj)
-   {
-      return(false);
-   }
-   int sizeX, sizeY;
-   int j,k;
-   obj->getInventorySize(sizeX, sizeY);
-
-   object* nObj;
-
-   if(canAdd(obj, x, y))
-   {
-      /* Alloc Intern Object */
-      nObj = new object(obj);
-      
-      /* Occup all needed spaces */
-      for(j=x; j<x+sizeX; j++)
-      {
-         for(k=y; k<y+sizeY; k++)
-         {
-            spaces[j][k].obj = nObj;
-            spaces[j][k].origX = x;
-            spaces[j][k].origY = y;
-         }
-      }
-      return(true);
-   }
-   return(false); 
+   return(slots->addObject(obj, x, y));
 }
 
 /**************************************************************
@@ -111,16 +79,10 @@ bool inventory::addObject(object* obj, int x, int y)
  **************************************************************/
 bool inventory::equipObject(object* obj, int where)
 {
-   if( (obj) && (where > 0) && (where < INVENTORY_TOTAL_PLACES) )
+   if( (obj) && (where >= 0) && (where < INVENTORY_TOTAL_PLACES) )
    {
-      if(equippedObject[where] == NULL)
-      {
-         //TODO verify if object Use Type is compatible with the place
-         /* Alloc Intern Object */
-         object* nObj = new object(obj);
-         equippedObject[where] = nObj;
-         return(true);
-      }
+      //TODO verify if object Use Type is compatible with the place
+      return(equippedSlots[where]->addObject(obj,0,0));
    }
    return(false);
 }
@@ -130,24 +92,7 @@ bool inventory::equipObject(object* obj, int where)
  **************************************************************/
 bool inventory::addObject(object* obj)
 {
-   int x,y;
-
-   if(!obj)
-   {
-      return(false);
-   }
-
-   for(x=0; x < INVENTORY_SIZE_X; x++)
-   {
-      for(y=0; y < INVENTORY_SIZE_Y; y++)
-      {
-         if(addObject(obj, x, y))
-         {
-            return(true);
-         }
-      }
-   }
-   return(false);
+   return(slots->addObject(obj));
 }
 
 /**************************************************************
@@ -155,27 +100,7 @@ bool inventory::addObject(object* obj)
  **************************************************************/
 bool inventory::canAdd(object* obj, int x, int y)
 {
-   int sizeX, sizeY;
-   int j,k;
-   obj->getInventorySize(sizeX, sizeY);
-   if( (x<0) || (y<0) || (x+sizeX > INVENTORY_SIZE_X) ||
-       (y+sizeY > INVENTORY_SIZE_Y) || (obj == NULL))
-   {
-      return(false);
-   }
-
-   for(j=x; j<x+sizeX; j++)
-   {
-      for(k=y; k<y+sizeY; k++)
-      {
-         if(spaces[j][k].obj != NULL)
-         {
-            return(false);
-         }
-      }
-   }
-
-   return(true);
+   return(slots->canAdd(obj, x, y));
 }
 
 /**************************************************************
@@ -183,9 +108,9 @@ bool inventory::canAdd(object* obj, int x, int y)
  **************************************************************/
 object* inventory::getFromPlace(int where)
 {
-   if( (where > 0) && (where < INVENTORY_TOTAL_PLACES) )
+   if( (where >= 0) && (where < INVENTORY_TOTAL_PLACES) )
    {
-      return(equippedObject[where]);
+      return(equippedSlots[where]->getFromPosition(0,0));
    }
    return(NULL);
 }
@@ -198,7 +123,7 @@ object* inventory::getFromPosition(int x, int y)
    if( (x >= 0) && (y >=0) && (x < INVENTORY_SIZE_X) &&
        (y < INVENTORY_SIZE_Y))
    {
-      return(spaces[x][y].obj);
+      return(slots->getFromPosition(x,y));
    }
    return(NULL);
 }
@@ -208,9 +133,9 @@ object* inventory::getFromPosition(int x, int y)
  **************************************************************/
 void inventory::removeFromPlace(int where)
 {
-   if( (where > 0) && (where < INVENTORY_TOTAL_PLACES) )
+   if( (where >= 0) && (where < INVENTORY_TOTAL_PLACES) )
    {
-      equippedObject[where] = NULL;
+      equippedSlots[where]->removeObject(0,0);
    }
 }
 
@@ -219,33 +144,7 @@ void inventory::removeFromPlace(int where)
  **************************************************************/
 void inventory::removeFromInventory(object* obj)
 {
-   int x,y;
-   
-   if(obj == NULL)
-   {
-      return;
-   }
-   
-   for(x=0; x < INVENTORY_SIZE_X; x++)
-   {
-      for(y=0; y < INVENTORY_SIZE_Y; y++)
-      {
-         if(spaces[x][y].obj == obj)
-         {
-            if( (spaces[x][y].origX == x) && 
-                (spaces[x][y].origY == y))
-            {
-               /* Free use of the Object */
-               delete(spaces[x][y].obj);
-            }
-            spaces[x][y].obj = NULL;
-            spaces[x][y].origX = x;
-            spaces[x][y].origY = y;
-         }
-      }
-   }
-
-   print();
+   slots->removeObject(obj);
 }
 
 /**************************************************************
@@ -272,34 +171,7 @@ void inventory::print()
  **************************************************************/
 void inventory::removeFromInventory(int x, int y)
 {
-   object* obj;
-   int j,k, sizeX, sizeY, oX, oY;
-
-   if( (x >= 0) && (y >= 0) && (x < INVENTORY_SIZE_X) &&
-       (y < INVENTORY_SIZE_Y))
-   {
-      obj = spaces[x][y].obj;
-      if(obj)
-      {
-         obj->getInventorySize(sizeX, sizeY);
-         oX = spaces[x][y].origX;
-         oY = spaces[x][y].origY;
-         /* Empty all occupied spaces */
-         for(j= oX; j < oX + sizeX; j++)
-         {
-            for(k = oY; k < oY + sizeY; k++)
-            {
-               spaces[j][k].obj = NULL;
-               spaces[j][k].origX = j;
-               spaces[j][k].origY = k;
-            }
-         }
-         /* Free obj from use here */
-         delete(obj);
-      }
-   }
-
-   print();
+   slots->removeObject(x,y);
 }
 
 /**************************************************************
@@ -317,18 +189,7 @@ void inventory::draw(int x, int y, SDL_Surface* surface)
    SDL_BlitSurface(inventoryImage, NULL, surface, &ret);
 
    /* Next, Blit all inventory objects image on surface */
-   int j,k;
-   for(j=0; j < INVENTORY_SIZE_X; j++)
-   {
-      for(k=0; k < INVENTORY_SIZE_Y; k++)
-      {
-         if( (spaces[j][k].obj != NULL) && (spaces[j][k].origX == j) &&
-             (spaces[j][k].origY == k))
-         {
-            spaces[j][k].obj->draw2D((x+4 + (j*19)), (y+13 + (k*19)), surface);
-         }
-      }
-   }
+   slots->draw(x,y,surface);
 }
 
 /**************************************************************
@@ -345,38 +206,14 @@ void inventory::drawEquiped(int x, int y, SDL_Surface* surface)
    ret.h = inventoryImage->h;
    SDL_BlitSurface(equipedImage, NULL, surface, &ret);
 
-   if(equippedObject[INVENTORY_HEAD])
-   {
-      equippedObject[INVENTORY_HEAD]->draw2D(x+109,y+3, surface);
-   }
-   if(equippedObject[INVENTORY_LEFT_HAND])
-   {
-      equippedObject[INVENTORY_LEFT_HAND]->draw2D(x+159,y+112, surface);
-   }
-   if(equippedObject[INVENTORY_RIGHT_HAND])
-   {
-      equippedObject[INVENTORY_RIGHT_HAND]->draw2D(x+58,y+112, surface);
-   }
-   if(equippedObject[INVENTORY_LEFT_FINGER])
-   {
-      equippedObject[INVENTORY_LEFT_FINGER]->draw2D(x+200,y+169, surface);
-   }
-   if(equippedObject[INVENTORY_RIGHT_FINGER])
-   {
-      equippedObject[INVENTORY_RIGHT_FINGER]->draw2D(x+36,y+169, surface);
-   }
-   if(equippedObject[INVENTORY_NECK])
-   {
-      equippedObject[INVENTORY_NECK]->draw2D(x+159,y+77, surface);
-   }
-   if(equippedObject[INVENTORY_FOOT])
-   {
-      equippedObject[INVENTORY_FOOT]->draw2D(x+109,y+214, surface);
-   }
-   if(equippedObject[INVENTORY_BODY])
-   {
-      equippedObject[INVENTORY_BODY]->draw2D(x+99,y+100, surface);
-   }
+   equippedSlots[INVENTORY_HEAD]->draw(x+105,y-10, surface);
+   equippedSlots[INVENTORY_LEFT_HAND]->draw(x+155,y+99, surface);
+   equippedSlots[INVENTORY_RIGHT_HAND]->draw(x+54,y+99, surface);
+   equippedSlots[INVENTORY_LEFT_FINGER]->draw(x+196,y+156, surface);
+   equippedSlots[INVENTORY_RIGHT_FINGER]->draw(x+33,y+156, surface);
+   equippedSlots[INVENTORY_NECK]->draw(x+155,y+64, surface);
+   equippedSlots[INVENTORY_FOOT]->draw(x+105,y+201, surface);
+   equippedSlots[INVENTORY_BODY]->draw(x+95,y+87, surface);
 }
 
 

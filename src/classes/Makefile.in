@@ -9,7 +9,7 @@ ENDENGINE = ../engine/
 ENDFIGHT = ../fight/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o $(ENDENGINE)personagens.o $(OBJSGUI)
-objetos = actions.o align.o classes.o defs.o feats.o inventory.o object.o race.o skills.o thing.o
+objetos = actions.o align.o classes.o defs.o feats.o inventory.o itemslot.o object.o race.o skills.o thing.o
 
 
 all: $(objetos)
@@ -64,6 +64,10 @@ inventory.o: inventory.cpp inventory.h
 	@$(CC) $(CFLAGS) inventory.cpp -o inventory.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+itemslot.o: itemslot.cpp itemslot.h
+	@printf "Making itemslot.o... "
+	@$(CC) $(CFLAGS) itemslot.cpp -o itemslot.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 teste: $(objetos) $(OBJSFIGHT) teste.cpp
 	g++ -g -Wall $(CLIBS) teste.cpp $(objetos) $(OBJSFIGHT) ../gui/healthBar.o ../lang/lang.o -o teste
