@@ -22,6 +22,7 @@ itemSlot::itemSlot(int xSize, int ySize)
    /* Set initial values */
    sizeX = xSize;
    sizeY = ySize;
+   oneItemPerTime = false;
 
    /* Alloc Spaces */
    spaces = new space*[sizeX];
@@ -135,6 +136,11 @@ bool itemSlot::canAdd(object* obj, int x, int y)
       return(false);
    }
 
+   if( (oneItemPerTime) && (spaces[0][0].obj != NULL))
+   {
+      return(false);
+   }
+
    for(j=x; j<x+sX; j++)
    {
       for(k=y; k<y+sY; k++)
@@ -243,5 +249,13 @@ void itemSlot::draw(int x, int y, SDL_Surface* surface)
          }
       }
    }
+}
+
+/**************************************************************
+ *                     setAsOneItemPerTime                    *
+ **************************************************************/
+void itemSlot::setAsOneItemPerTime()
+{
+   oneItemPerTime = true;
 }
 

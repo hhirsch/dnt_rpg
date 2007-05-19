@@ -24,13 +24,21 @@ inventory::inventory()
    /* Create Equipped */
    equippedSlots = new itemSlot*[INVENTORY_TOTAL_PLACES];
    equippedSlots[INVENTORY_HEAD] = new itemSlot(2,2);
+   equippedSlots[INVENTORY_HEAD]->setAsOneItemPerTime();
    equippedSlots[INVENTORY_LEFT_HAND] = new itemSlot(2,4);
+   equippedSlots[INVENTORY_LEFT_HAND]->setAsOneItemPerTime();
    equippedSlots[INVENTORY_RIGHT_HAND] = new itemSlot(2,4);
+   equippedSlots[INVENTORY_RIGHT_HAND]->setAsOneItemPerTime();
    equippedSlots[INVENTORY_LEFT_FINGER] = new itemSlot(1,1);
+   equippedSlots[INVENTORY_LEFT_FINGER]->setAsOneItemPerTime();
    equippedSlots[INVENTORY_RIGHT_FINGER] = new itemSlot(1,1);
+   equippedSlots[INVENTORY_RIGHT_FINGER]->setAsOneItemPerTime();
    equippedSlots[INVENTORY_NECK] = new itemSlot(2,1);
+   equippedSlots[INVENTORY_NECK]->setAsOneItemPerTime();
    equippedSlots[INVENTORY_FOOT] = new itemSlot(2,2);
+   equippedSlots[INVENTORY_FOOT]->setAsOneItemPerTime();
    equippedSlots[INVENTORY_BODY] = new itemSlot(3,4);
+   equippedSlots[INVENTORY_BODY]->setAsOneItemPerTime();
 
    /* Load Images */
    inventoryImage = IMG_Load("../data/texturas/inventory/inventory.png");

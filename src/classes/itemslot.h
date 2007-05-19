@@ -69,13 +69,19 @@ class itemSlot
        *  \param x -> initial surface x coordinate
        *  \param y -> initial surface y coordinate*/
       void draw(int x, int y, SDL_Surface* surface);
+
+      /*! Set the slot to only accepts one item on it per time. Usefully fot
+       *  equipped objects slots. */
+      void setAsOneItemPerTime();
    private:
       int sizeX,  /**< Size X of the slot */
           sizeY;  /**< Size Y of the slot */
 
       space** spaces;  /**< Each Space of the Slot */
       bool oneItemPerTime; /**< If only accepts one item at the slot per time,
-                                usually used at the equipped objects slots. */
+                                usually used at the equipped objects slots.
+                                When only one item per time, it will ALWAYS
+                                at the 0,0 position of the slot. */
 
 };
 
