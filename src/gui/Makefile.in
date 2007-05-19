@@ -1,9 +1,11 @@
 #  DccNiTghtmare is public domain. Do whatever you want with this code.
 
-CC = gcc
-CPP = g++
 CFLAGS = -g -c -Wall -O2
-EFLAGS = -g -Wall -O2 -lm -lSDL -lSDL_image
+CC = @CC@
+LDFLAGS = @LDFLAGS@
+LIBS= @LIBS@
+EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
+
 OBJS = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o menu.o messages.o mouse.o quadtexto.o seltexto.o 
 OBJSPP = bartexto.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o lista.o listtext.o menu.o messages.o mouse.o quadtexto.o rolbar.o seltexto.o tabbotao.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
@@ -19,107 +21,107 @@ all: objeto
 
 bartexto.o: bartexto.h bartexto.cpp
 	@printf "Making bartexto.o... "
-	@$(CPP) $(CFLAGS) bartexto.cpp -o bartexto.o
+	@$(CC) $(CFLAGS) bartexto.cpp -o bartexto.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 botao.o: botao.h botao.cpp
 	@printf "Making botao.o... "
-	@$(CPP) $(CFLAGS) botao.cpp -o botao.o
+	@$(CC) $(CFLAGS) botao.cpp -o botao.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 cores.o: cores.h cores.cpp
 	@printf "Making cores.o... "
-	@$(CPP) $(CFLAGS) cores.cpp -o cores.o
+	@$(CC) $(CFLAGS) cores.cpp -o cores.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 cxsel.o: cxsel.h cxsel.cpp
 	@printf "Making cxsel.o... "
-	@$(CPP) $(CFLAGS) cxsel.cpp -o cxsel.o
+	@$(CC) $(CFLAGS) cxsel.cpp -o cxsel.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 desenho.o: desenho.h desenho.cpp
 	@printf "Making desenho.o... "
-	@$(CPP) $(CFLAGS) desenho.cpp -o desenho.o
+	@$(CC) $(CFLAGS) desenho.cpp -o desenho.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 erro.o: erro.cpp erro.h
 	@printf "Making erro.o... "
-	@$(CPP) $(CFLAGS) erro.cpp -o erro.o
+	@$(CC) $(CFLAGS) erro.cpp -o erro.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 eventos.o: eventos.h eventos.cpp
 	@printf "Making eventos.o... "
-	@$(CPP) $(CFLAGS) eventos.cpp -o eventos.o
+	@$(CC) $(CFLAGS) eventos.cpp -o eventos.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 farso.o: farso.h farso.cpp
 	@printf "Making farso.o... "
-	@$(CPP) $(CFLAGS) farso.cpp -o farso.o
+	@$(CC) $(CFLAGS) farso.cpp -o farso.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 figura.o: figura.h figura.cpp
 	@printf "Making figura.o... "
-	@$(CPP) $(CFLAGS) figura.cpp -o figura.o
+	@$(CC) $(CFLAGS) figura.cpp -o figura.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 fonte.o: fonte.h fonte.cpp
 	@printf "Making fonte.o... "
-	@$(CPP) $(CFLAGS) fonte.cpp -o fonte.o
+	@$(CC) $(CFLAGS) fonte.cpp -o fonte.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 healthBar.o: healthBar.h healthBar.cpp
 	@printf "Making healthBar.o... "
-	@$(CPP) $(CFLAGS) healthBar.cpp -o healthBar.o
+	@$(CC) $(CFLAGS) healthBar.cpp -o healthBar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 janela.o: janela.h janela.cpp
 	@printf "Making janela.o... "
-	@$(CPP) $(CFLAGS) $(MOVOPACO) janela.cpp -o janela.o
+	@$(CC) $(CFLAGS) $(MOVOPACO) janela.cpp -o janela.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 lista.o: lista.h lista.cpp objeto.h
 	@printf "Making lista.o... "
-	@$(CPP) $(CFLAGS) lista.cpp -o lista.o
+	@$(CC) $(CFLAGS) lista.cpp -o lista.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 listtext.o: listtext.h listtext.cpp
 	@printf "Making listtext.o... "
-	@$(CPP) $(CFLAGS) listtext.cpp -o listtext.o
+	@$(CC) $(CFLAGS) listtext.cpp -o listtext.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 menu.o: menu.h menu.cpp
 	@printf "Making menu.o... "
-	@$(CPP) $(CFLAGS) menu.cpp -o menu.o
+	@$(CC) $(CFLAGS) menu.cpp -o menu.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 messages.o: messages.h messages.cpp
 	@printf "Making messages.o... "
-	@$(CPP) $(CFLAGS) messages.cpp -o messages.o
+	@$(CC) $(CFLAGS) messages.cpp -o messages.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 mouse.o: mouse.h mouse.cpp
 	@printf "Making mouse.o... "
-	@$(CPP) $(CFLAGS) mouse.cpp -o mouse.o
+	@$(CC) $(CFLAGS) mouse.cpp -o mouse.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 quadtexto.o: quadtexto.h quadtexto.cpp
 	@printf "Making quadtexto.o... "
-	@$(CPP) $(CFLAGS) quadtexto.cpp -o quadtexto.o
+	@$(CC) $(CFLAGS) quadtexto.cpp -o quadtexto.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 rolbar.o: rolbar.h rolbar.cpp
 	@printf "Making rolbar.o... "
-	@$(CPP) $(CFLAGS) rolbar.cpp -o rolbar.o
+	@$(CC) $(CFLAGS) rolbar.cpp -o rolbar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 seltexto.o: seltexto.h seltexto.cpp
 	@printf "Making seltexto.o... "
-	@$(CPP) $(CFLAGS) seltexto.cpp -o seltexto.o
+	@$(CC) $(CFLAGS) seltexto.cpp -o seltexto.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 tabbotao.o: tabbotao.h tabbotao.cpp
 	@printf "Making tabbotao.o... "
-	@$(CPP) $(CFLAGS) tabbotao.cpp -o tabbotao.o
+	@$(CC) $(CFLAGS) tabbotao.cpp -o tabbotao.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 

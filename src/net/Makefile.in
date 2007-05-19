@@ -1,9 +1,9 @@
-CC=gcc
-CPP=g++
-CLIBS=
-CLIBSDIR=
-INCLUDESDIR=-I../etc
-CFLAGS= -Wall -g ${INCLUDESDIR} ${CLIBS} ${CLIBSDIR}
+CFLAGS = -g -c -Wall -O2
+CC = @CC@
+LDFLAGS = @LDFLAGS@
+LIBS= @LIBS@
+EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
+
 BINDIR=../../bin
 
 all: server client.o

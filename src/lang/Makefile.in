@@ -1,5 +1,9 @@
-CC = g++
 CFLAGS = -g -c -Wall -O2
+CC = @CC@
+LDFLAGS = @LDFLAGS@
+LIBS= @LIBS@
+EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
+
 OBJS = lang.o
 
 all: $(OBJS)

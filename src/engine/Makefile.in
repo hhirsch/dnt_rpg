@@ -1,9 +1,10 @@
 # DccNiTghtmare is public domain. Do whatever you want with this code.
 
-CC = g++
 CFLAGS = -g -c -Wall -O2
-EFLAGS = -g -Wall -O2 -lm -lGLU -lGL -lSDL -lSDL_image -lcal3d -logg -lvorbis -lvorbisfile -lopenal
-PROGFLAGS = 
+CC = @CC@
+EFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS= @LIBS@
 ENDGUI = ../gui/
 ENDENGINE = ../engine/
 ENDMAPA = ../map/
@@ -145,7 +146,7 @@ util.o: util.cpp util.h
 
 teste: $(OBJSGUI) $(OBJSMAPA) $(OBJSNET) $(OBJSETC) $(OBJSCLASSES) $(OBJSLANG) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) 
 	@printf "Linking dccnitghtmare... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSETC) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
+	@$(CC) $(LDFLAGS) $(LIBS) $(EFLAGS) $(OBJSGUI) $(OBJSCLASSES) $(OBJSLANG) $(OBJSNET) $(OBJSETC) $(OBJSIA) $(FIFO) $(OBJSMAPA) $(OBJSSOUND) $(OBJSPART) $(OBJSFIGHT) $(OBJS) $(SUPREDE) -o $(BIN)dccnitghtmare
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:

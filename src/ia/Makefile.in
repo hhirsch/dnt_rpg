@@ -1,10 +1,10 @@
 # DccNiTghtmare is public domain. Do whatever you want with this code.
 
-CPP = g++
 CFLAGS = -g -c -Wall -O2
-EFLAGS = -g -Wall -O2 -lm
-OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o pattAgent.o potentAgent.o
-
+CC = @CC@
+LDFLAGS = @LDFLAGS@
+LIBS= @LIBS@
+EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
 all: $(OBJS)
 
