@@ -11,10 +11,15 @@
  **************************************************************/
 inventory::inventory()
 {
+   int i;
    inventoryImage = NULL;
 
    /* Create Slots */
-   slots = new itemSlot(INVENTORY_SIZE_X, INVENTORY_SIZE_Y);
+   slots = new itemSlot*[INVENTORY_PER_CHARACTER];
+   for(i = 0; i<INVENTORY_PER_CHARACTER; i++)
+   {
+      slots[i] = new itemSlot(INVENTORY_SIZE_X, INVENTORY_SIZE_Y);
+   }
 
    /* Create Equipped */
    equippedSlots = new itemSlot*[INVENTORY_TOTAL_PLACES];
@@ -47,7 +52,11 @@ inventory::~inventory()
 {
    int i;
    /* Free Slots */
-   delete(slots);
+   for(i=0; i<INVENTORY_PER_CHARACTER;i++)
+   {
+      delete slots[i];
+   }
+   delete[] slots;
 
    for(i = 0; i<INVENTORY_TOTAL_PLACES; i++)
    {
@@ -69,9 +78,9 @@ inventory::~inventory()
 /**************************************************************
  *                           addObject                        *
  **************************************************************/
-bool inventory::addObject(object* obj, int x, int y)
+bool inventory::addObject(object* obj, int x, int y, int curInv)
 {
-   return(slots->addObject(obj, x, y));
+   return(slots[curInv]->addObject(obj, x, y));
 }
 
 /**************************************************************
@@ -92,15 +101,20 @@ bool inventory::equipObject(object* obj, int where)
  **************************************************************/
 bool inventory::addObject(object* obj)
 {
-   return(slots->addObject(obj));
+   int inv = 0;
+   while( (!slots[inv]->addObject(obj) && (inv < INVENTORY_PER_CHARACTER)))
+   {
+      inv++;
+   }
+   return(inv < INVENTORY_PER_CHARACTER);
 }
 
 /**************************************************************
  *                            canAdd                          *
  **************************************************************/
-bool inventory::canAdd(object* obj, int x, int y)
+bool inventory::canAdd(object* obj, int x, int y, int curInv)
 {
-   return(slots->canAdd(obj, x, y));
+   return(slots[curInv]->canAdd(obj, x, y));
 }
 
 /**************************************************************
@@ -118,12 +132,12 @@ object* inventory::getFromPlace(int where)
 /**************************************************************
  *                       getFromPosition                      *
  **************************************************************/
-object* inventory::getFromPosition(int x, int y)
+object* inventory::getFromPosition(int x, int y, int curInv)
 {
    if( (x >= 0) && (y >=0) && (x < INVENTORY_SIZE_X) &&
        (y < INVENTORY_SIZE_Y))
    {
-      return(slots->getFromPosition(x,y));
+      return(slots[curInv]->getFromPosition(x,y));
    }
    return(NULL);
 }
@@ -144,7 +158,11 @@ void inventory::removeFromPlace(int where)
  **************************************************************/
 void inventory::removeFromInventory(object* obj)
 {
-   slots->removeObject(obj);
+   int i;
+   for(i=0; i<INVENTORY_PER_CHARACTER; i++)
+   {
+      slots[i]->removeObject(obj);
+   }
 }
 
 /**************************************************************
@@ -169,15 +187,15 @@ void inventory::print()
 /**************************************************************
  *                     removeFromInventory                    *
  **************************************************************/
-void inventory::removeFromInventory(int x, int y)
+void inventory::removeFromInventory(int x, int y, int curInv)
 {
-   slots->removeObject(x,y);
+   slots[curInv]->removeObject(x,y);
 }
 
 /**************************************************************
  *                             draw                           *
  **************************************************************/
-void inventory::draw(int x, int y, SDL_Surface* surface)
+void inventory::draw(int x, int y, SDL_Surface* surface, int curInv)
 {
    SDL_Rect ret;
 
@@ -189,7 +207,7 @@ void inventory::draw(int x, int y, SDL_Surface* surface)
    SDL_BlitSurface(inventoryImage, NULL, surface, &ret);
 
    /* Next, Blit all inventory objects image on surface */
-   slots->draw(x,y,surface);
+   slots[curInv]->draw(x,y,surface);
 }
 
 /**************************************************************

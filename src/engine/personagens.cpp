@@ -30,10 +30,7 @@ personagem::personagem(featsList* ft)
   conversationFile = "";
   conv = NULL;
   
-  for(i = 0; i < INVENTORY_PER_CHARACTER; i++)
-  {
-    inventories[i] = new inventory;
-  }
+  inventories = new inventory;
 
   /* Feat Details */
   if(ft != NULL)
@@ -48,7 +45,6 @@ personagem::personagem(featsList* ft)
  *********************************************************************/
 personagem::~personagem()
 {
-   int i;
    delete(lifeBar);
    if(conv != NULL)
    {
@@ -61,12 +57,9 @@ personagem::~personagem()
      SDL_FreeSurface(portraitImage);
      glDeleteTextures(1,&portrait);
    }
-   for(i = 0; i < INVENTORY_PER_CHARACTER; i++)
+   if(inventories)
    {
-      if(inventories[i])
-      {
-         delete(inventories[i]);
-      }
+      delete(inventories);
    }
 }
 

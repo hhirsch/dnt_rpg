@@ -112,7 +112,7 @@ class personagem: public Tobjeto, public aniModel
       aStar pathFind;           /**< The A* pathFind to the character */
       Square* ocupaQuad;        /**< Square occuped by character */
 
-      inventory* inventories[INVENTORY_PER_CHARACTER]; /**< Inventory */
+      inventory* inventories;   /**< Inventory */
 
       /*! Set character orientation value
        * \param ori -> new orientation value */

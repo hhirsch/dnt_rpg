@@ -28,6 +28,8 @@
 
 #define INVENTORY_INVENTORY     8  /**< is in inventory */
 
+#define INVENTORY_PER_CHARACTER 4  /**< Number of Inventories per Character */
+
 /*! Character Inventory Definition */
 class inventory
 {
@@ -41,8 +43,9 @@ class inventory
        * \param obj -> pointer to object to be added
        * \param x -> x space position to be the orign on inventory
        * \param y -> y space position to be the orign on inventory
+       * \param curInv -> current Inventory
        * \return -> true if added to inventory, false if can't add. */
-      bool addObject(object* obj, int x, int y);
+      bool addObject(object* obj, int x, int y, int curInv);
 
       /*! Add object to first free inventory space
        * \param obj -> pointer to object to be added
@@ -58,8 +61,9 @@ class inventory
       /*! Get object from iventory position
        * \param x -> x space position on inventory
        * \param y -> y space position on inventory
+       * \param curInv -> current Inventory
        * \return -> pointer to object on position */
-      object* getFromPosition(int x, int y);
+      object* getFromPosition(int x, int y, int curInv);
 
       /*! Get object from iventory place
        * \param where -> place ID on inventory
@@ -72,8 +76,9 @@ class inventory
 
       /*! Remove object from inventory
        * \param x -> x space position on inventory
-       * \param y -> y space position on inventory */
-      void removeFromInventory(int x, int y);
+       * \param y -> y space position on inventory 
+       * \param curInv -> current Inventory */
+      void removeFromInventory(int x, int y, int curInv);
 
       /*! Remove Object from Equipped Place
        * \param where -> equipped place ID */
@@ -83,14 +88,16 @@ class inventory
        * \param obj -> pointer to object to be added
        * \param x -> x inventory position
        * \param y -> y inventory position
+       * \param curInv -> current Inventory
        * \return -> true if can add, false otherwise */
-      bool canAdd(object* obj, int x, int y);
+      bool canAdd(object* obj, int x, int y, int curInv);
 
       /*! Draw Inventory to Surface
        * \param surface -> SDL_Surface to draw the iventory 
        * \param x -> x coordinate on surface
-       * \param y -> y coordinate on surface */
-      void draw(int x, int y, SDL_Surface* surface);
+       * \param y -> y coordinate on surface
+       * \param curInv -> current Inventory */
+      void draw(int x, int y, SDL_Surface* surface, int curInv);
 
       /*! Draw Equiped Itens to Surface
        * \param surface -> SDL_Surface to draw the iventory 
@@ -102,7 +109,7 @@ class inventory
       /*! For debug: print all names of inventory itens on terminal */
       void print();
 
-      itemSlot* slots;  /**< The Inventory */
+      itemSlot** slots;  /**< The Inventory */
       itemSlot** equippedSlots; /**< The Equipped Slots */
 
       SDL_Surface* inventoryImage; /**< The Inventory Image */

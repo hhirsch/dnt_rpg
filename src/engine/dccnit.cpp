@@ -1291,15 +1291,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                    /* Get Object */
                    lastMousePression = tempo;
                    briefTxt->addText("|");
-                   int inv = 0;
-                   while((!activeCharacter->inventories[inv]->addObject(
-                          quaux->objects[obj]) && 
-                         (inv < INVENTORY_PER_CHARACTER)))
-                   {
-                      inv++;
-                   }
-                         
-                   if(inv < INVENTORY_PER_CHARACTER)
+                   if(activeCharacter->inventories->addObject(quaux->objects[obj]))
                    {
                       briefTxt->addText(quaux->objects[obj]->getName() + " " +
                                         language.ACTION_TAKEN); 

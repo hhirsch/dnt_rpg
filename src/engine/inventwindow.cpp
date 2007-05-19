@@ -11,22 +11,16 @@
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-inventWindow::inventWindow(inventory *invent[INVENTORY_PER_CHARACTER],
-                           interface* inter)
+inventWindow::inventWindow(inventory *invent, interface* inter)
 {
-   int i;
-
    objectMenu = NULL;
 
    /* Copy Interface Pointer */
    interf = inter;
 
    /* Copy Inventories Pointers */
-   for(i=0; i < INVENTORY_PER_CHARACTER; i++)
-   {
-      inventories[i] = invent[i];
-   }
-   
+   inventories = invent;
+
    /* Add Window */
    window = inter->insertWindow(0,0,263,402,language.INVENTW_TITLE.c_str(),1,1);
 
@@ -71,14 +65,7 @@ inventWindow::~inventWindow()
       if(state == INVENTORY_STATE_OBJECT)
       {
          /* Reput the object to the inventory */
-         int inv = 0;
-         while( (!inventories[inv]->addObject(activeObject) && 
-                (inv < INVENTORY_PER_CHARACTER)))
-         {
-            inv++;
-         }
-                            
-         if(inv < INVENTORY_PER_CHARACTER)
+         if(!inventories->addObject(activeObject))
          {
             activeObject = NULL;
             state = INVENTORY_STATE_NONE;
@@ -104,30 +91,13 @@ bool inventWindow::isOpen()
  **************************************************************/
 void inventWindow::reDraw()
 {
-   /*int x1 = 0, 
-       x2 = 0;*/
    if(isOpen())
    {
-      inventories[currentInventory]->draw(0,0, inventoryTabButton->fig);
-      inventories[0]->drawEquiped(0,0,characterTabButton->fig);
+      inventories->draw(0,0, inventoryTabButton->fig, currentInventory);
+      inventories->drawEquiped(0,0,characterTabButton->fig);
       window->Desenhar(0,0);
 
       //TODO Mark on actual Inventory!
-      /*switch(currentInventory)
-      {
-         case 0: 
-            x1 = 4; x2 = 64;
-         break;
-         case 1:
-            x1 = 64; x2 = 127;
-         break;
-         case 2:
-            x1 = 127; x2 = 191;
-         break;
-         case 3:
-            x1 = 191; x2 = 251;
-         break;
-      }*/
    }
 }
 
@@ -186,14 +156,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
       if( (state == INVENTORY_STATE_OBJECT) && (activeObject) )
       {
          /* Reput the object to the inventory */
-         int inv = 0;
-         while( (!inventories[inv]->addObject(activeObject) && 
-                (inv < INVENTORY_PER_CHARACTER)))
-         {
-            inv++;
-         }
-                            
-         if(inv < INVENTORY_PER_CHARACTER)
+         if(inventories->addObject(activeObject)) 
          {
             delete(activeObject);
             activeObject = NULL;
@@ -214,10 +177,10 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             if(state == INVENTORY_STATE_NONE)
             {
                /* Open Menu For Object if one is avaible */
-               if(inventories[currentInventory]->getFromPosition(posX, posY))
+               if(inventories->getFromPosition(posX, posY,currentInventory))
                {
-                  activeObject = inventories[currentInventory]->
-                                   getFromPosition(posX, posY);
+                  activeObject = inventories->getFromPosition(posX, posY,
+                                                              currentInventory);
                   objX = posX;
                   objY = posY;
                   objWhere = INVENTORY_INVENTORY;
@@ -228,8 +191,8 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             else if(state == INVENTORY_STATE_OBJECT)
             {
                /* Put Object on  */
-               if(inventories[currentInventory]->addObject(activeObject,
-                                                           posX, posY))
+               if(inventories->addObject(activeObject, posX, posY, 
+                                         currentInventory))
                {
                   delete(activeObject);
                   activeObject = NULL;
@@ -274,42 +237,42 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             object* aObject = NULL;
             if(guiObject == (Tobjeto*) headButton)
             {
-               aObject = inventories[0]->getFromPlace(INVENTORY_HEAD);
+               aObject = inventories->getFromPlace(INVENTORY_HEAD);
                objWhere = INVENTORY_HEAD;
             }
             else if(guiObject == (Tobjeto*) leftHandButton)
             {
-               aObject = inventories[0]->getFromPlace(INVENTORY_LEFT_HAND);
+               aObject = inventories->getFromPlace(INVENTORY_LEFT_HAND);
                objWhere = INVENTORY_LEFT_HAND;
             }
             else if(guiObject == (Tobjeto*) rightHandButton)
             {
-               aObject = inventories[0]->getFromPlace(INVENTORY_RIGHT_HAND);
+               aObject = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
                objWhere = INVENTORY_RIGHT_HAND;
             }
             else if(guiObject == (Tobjeto*) leftFingerButton)
             {
-               aObject = inventories[0]->getFromPlace(INVENTORY_LEFT_FINGER);
+               aObject = inventories->getFromPlace(INVENTORY_LEFT_FINGER);
                objWhere = INVENTORY_LEFT_FINGER;
             }
             else if(guiObject == (Tobjeto*) rightFingerButton)
             {
-               aObject = inventories[0]->getFromPlace(INVENTORY_RIGHT_FINGER);
+               aObject = inventories->getFromPlace(INVENTORY_RIGHT_FINGER);
                objWhere = INVENTORY_RIGHT_FINGER;
             }
             else if(guiObject == (Tobjeto*) neckButton)
             {
-               aObject = inventories[0]->getFromPlace(INVENTORY_NECK);
+               aObject = inventories->getFromPlace(INVENTORY_NECK);
                objWhere = INVENTORY_NECK;
             }
             else if(guiObject == (Tobjeto*) footButton)
             {
-               aObject = inventories[0]->getFromPlace(INVENTORY_FOOT);
+               aObject = inventories->getFromPlace(INVENTORY_FOOT);
                objWhere = INVENTORY_FOOT;
             }
             else if(guiObject == (Tobjeto*) bodyButton)
             {
-               aObject = inventories[0]->getFromPlace(INVENTORY_BODY);
+               aObject = inventories->getFromPlace(INVENTORY_BODY);
                objWhere = INVENTORY_BODY;
             }
 
@@ -326,7 +289,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
          {
             if(guiObject == (Tobjeto*) headButton)
             {
-               if(inventories[0]->equipObject(activeObject, INVENTORY_HEAD))
+               if(inventories->equipObject(activeObject, INVENTORY_HEAD))
                {
                   delete(activeObject);
                   activeObject = NULL;
@@ -334,8 +297,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             }
             else if(guiObject == (Tobjeto*) leftHandButton)
             {
-               if(inventories[0]->equipObject(activeObject, 
-                                              INVENTORY_LEFT_HAND))
+               if(inventories->equipObject(activeObject,INVENTORY_LEFT_HAND))
                {
                   delete(activeObject);
                   activeObject = NULL;
@@ -344,8 +306,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             }
             else if(guiObject == (Tobjeto*) rightHandButton)
             {
-               if(inventories[0]->equipObject(activeObject, 
-                                              INVENTORY_RIGHT_HAND))
+               if(inventories->equipObject(activeObject,INVENTORY_RIGHT_HAND))
                {
                   delete(activeObject);
                   activeObject = NULL;
@@ -353,8 +314,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             }
             else if(guiObject == (Tobjeto*) leftFingerButton)
             {
-               if(inventories[0]->equipObject(activeObject,
-                                              INVENTORY_LEFT_FINGER))
+               if(inventories->equipObject(activeObject,INVENTORY_LEFT_FINGER))
                {
                   delete(activeObject);
                   activeObject = NULL;
@@ -362,8 +322,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             }
             else if(guiObject == (Tobjeto*) rightFingerButton)
             {
-               if(inventories[0]->equipObject(activeObject,
-                                              INVENTORY_RIGHT_FINGER))
+               if(inventories->equipObject(activeObject,INVENTORY_RIGHT_FINGER))
                {
                   delete(activeObject);
                   activeObject = NULL;
@@ -371,7 +330,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             }
             else if(guiObject == (Tobjeto*) neckButton)
             {
-               if(inventories[0]->equipObject(activeObject, INVENTORY_NECK))
+               if(inventories->equipObject(activeObject, INVENTORY_NECK))
                {
                   delete(activeObject);
                   activeObject = NULL;
@@ -379,7 +338,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             }
             else if(guiObject == (Tobjeto*) footButton)
             {
-               if(inventories[0]->equipObject(activeObject, INVENTORY_FOOT))
+               if(inventories->equipObject(activeObject, INVENTORY_FOOT))
                {
                   delete(activeObject);
                   activeObject = NULL;
@@ -387,7 +346,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
             }
             else if(guiObject == (Tobjeto*) bodyButton)
             {
-               if(inventories[0]->equipObject(activeObject, INVENTORY_BODY))
+               if(inventories->equipObject(activeObject, INVENTORY_BODY))
                {
                   delete(activeObject);
                   activeObject = NULL;
@@ -418,14 +377,14 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                     /* Recreate the object, since it will be deleted when
                      * removed from Inventory. */
                     activeObject = new object(activeObject);
-                    inventories[currentInventory]->removeFromInventory(objX,
-                                                                       objY);
+                    inventories->removeFromInventory(objX,objY, 
+                                                     currentInventory);
                     reDraw();
                   }
                   else
                   {
                      activeObject = new object(activeObject);
-                     inventories[0]->removeFromPlace(objWhere);
+                     inventories->removeFromPlace(objWhere);
                      reDraw();
                   }
                   state = INVENTORY_STATE_OBJECT;
