@@ -6,6 +6,7 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
+OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o pattagent.o potentagent.o 
 all: $(OBJS)
 
 teste: fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o teste.cpp
@@ -56,5 +57,5 @@ potentAgent.o: potentAgent.cpp potentAgent.h
 
 clean:
 	@printf "Cleaning AI Bin Files... "
-	@\rm -rf $(OBJS) ./testeai
+	@\rm -rf *.o ./testeai
 	@printf "\e[0;32mDone.\e[0;0m\n"
