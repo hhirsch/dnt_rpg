@@ -3,40 +3,40 @@ T 5X5
 npc ../data/mapas/teste3.map.npc
 MUSICA ../data/music/musica13.ogg
 Outdoor: 0
-o ../data/models/objetos/geral/guitarra.dcc
-o ../data/models/objetos/icex/lixo.dcc
+o ../data/models/objetos/armas/kalashnikov_pequena.dcc
+o ../data/models/objetos/armas/adaga.dcc
+o ../data/models/objetos/armas/axe.dcc
+o ../data/models/objetos/icex/quadro.dcc
+o ../data/models/objetos/icex/mesa_braco.dcc
+o ../data/models/objetos/geral/porta3.dcc
 o ../data/models/objetos/icex/cadeira.dcc
 o ../data/models/objetos/icex/mesa.dcc
 o ../data/models/objetos/icex/cadeira.dcc
-o ../data/models/objetos/geral/porta3.dcc
-o ../data/models/objetos/icex/mesa_braco.dcc
-o ../data/models/objetos/icex/quadro.dcc
-o ../data/models/objetos/armas/axe.dcc
-o ../data/models/objetos/armas/adaga.dcc
-o ../data/models/objetos/armas/kalashnikov_pequena.dcc
-t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 129 118 131
-t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 220 170 171
+o ../data/models/objetos/icex/lixo.dcc
+o ../data/models/objetos/geral/guitarra.dcc
 t ../data/texturas/chao_madeira3.png ../data/texturas/chao_madeira3.png 102 57 29
-d ../data/models/objetos/geral/porta3.dcc 157.107285,320.000000:0
-d ../data/models/objetos/geral/porta3.dcc 26.435873,128.000000:0
+t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 220 170 171
+t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 129 118 131
 d ../data/models/objetos/geral/porta3.dcc 162.878220,128.000000:0
-muro 178.945084,310.000000,310.000000,320.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 48.273666,118.000000,162.878220,128.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 184.716019,118.000000,310.000000,128.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 128.000000,10.000000,138.000000,118.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,118.000000,26.435873,128.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,310.000000,157.107285,320.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 310.000000,0.000000,320.000000,320.000000:16,16,16
+d ../data/models/objetos/geral/porta3.dcc 26.435873,128.000000:0
+d ../data/models/objetos/geral/porta3.dcc 157.107285,320.000000:0
+muro 10.000000,0.000000,310.000000,10.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
 muro 0.000000,0.000000,10.000000,320.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,0.000000,310.000000,10.000000:16,16,16
+muro 310.000000,0.000000,320.000000,320.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,310.000000,157.107285,320.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,118.000000,26.435873,128.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 128.000000,10.000000,138.000000,118.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 184.716019,118.000000,310.000000,128.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 48.273666,118.000000,162.878220,128.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 178.945084,310.000000,310.000000,320.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -71,7 +71,7 @@ uo ../data/models/objetos/armas/adaga.dcc 1:5,1:300.948700,14.265484:-5:0
 #Z: 1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_ametista.png
-uo ../data/models/objetos/icex/quadro.dcc 0:1,1:10.276112,60.425045:0:0
+uo ../data/models/objetos/icex/quadro.dcc 0:1,1:10.276112,60.425045:88:0
 uo ../data/models/objetos/icex/cadeira.dcc 1:1,2:57.009987,70.564262:90:0
 uo ../data/models/objetos/icex/mesa.dcc 1:1,2:52.508560,71.040833:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -98,7 +98,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
-uo ../data/models/objetos/icex/quadro.dcc 0:2,2:106.449181,127.351013:-1261771082:0
+uo ../data/models/objetos/icex/quadro.dcc 0:2,2:106.449181,127.351013:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
