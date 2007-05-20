@@ -1,6 +1,16 @@
 ================================================
-|                Version 0.2                   |
+|               Version 0.1.1                  |
 ================================================
+ - Fixed Bug on Makefiles (they aren't using
+   things defined at the autoconf);
+ - Fixed Bug on A*: request a new path when
+   not finished the movement to one maybe
+   result in a crash or allow the character to
+   move on a forbidden area;
+ - Fixed Bug on .obj models definitions;
+ - Fixed Bug on the inventory HEAD;
+ - Defined 35 FPS as the minimum one, instead of 
+   50 FPS;
 
 ================================================
 |                Version 0.1                   |

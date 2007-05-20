@@ -1,6 +1,6 @@
 #  DccNiTghtmare is public domain. Do whatever you want with this code.
 CFLAGS = -g -c -Wall -O2
-CC = @CC@
+CC = @CXX@
 EFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
