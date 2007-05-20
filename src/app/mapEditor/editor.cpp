@@ -1,4 +1,5 @@
 #include "editor.h"
+#include "../../lang/lang.h"
 
 /*********************************************************************
  *                            Constructor                             *
@@ -13,6 +14,10 @@ editor::editor()
                                        "../data/feats/feats.ftl");
    Farso_Iniciar(&screen,"DccNiTghtmare Map Editor 0.1");
    init();
+
+   /* Load Language's files */
+   lang language;
+   language.ReloadFile(1);
 
    gui = new(guiIO);
    hour = 12.0;
@@ -610,6 +615,7 @@ void editor::draw()
    gui->cameraPos();
    AtualizaFrustum( visibleMatrix, proj, modl);
    gameSun->actualizeHourOfDay(hour);
+   gameSun->setLight();
    /* Draw Things */
    if(mapOpened)
    {
