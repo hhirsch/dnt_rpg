@@ -259,3 +259,26 @@ void itemSlot::setAsOneItemPerTime()
    oneItemPerTime = true;
 }
 
+/**************************************************************
+ *                         getFirstItem                       *
+ **************************************************************/
+object* itemSlot::getFirstItem(int& x, int& y)
+{
+   int j,k;
+   x = -1;
+   y = -1;
+   for(j=0; j < sizeX; j++)
+   {
+      for(k=0; k < sizeY; k++)
+      {
+         if(spaces[j][k].obj != NULL)
+         {
+            x = j;
+            y = k;
+            return(spaces[j][k].obj);
+         }
+      }
+   }
+   return(NULL);
+}
+

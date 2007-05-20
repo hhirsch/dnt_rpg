@@ -56,6 +56,13 @@ class itemSlot
        * \return -> pointer to the item, or NULL. */
       object* getFromPosition(int x, int y);
 
+      /*! Get the first item founded on the slot. Usefull when removing all
+       * itens from the slot, like case of death or cancelled barter.
+       * \param x -> x position of the item got
+       * \param y -> y position of the item got
+       * \return -> pointer to the first founded item, or NULL. */
+      object* getFirstItem(int& x, int& y);
+
       /*! Remove All references to the object from the itemSlot
        * \param obj -> pointer to object to remove */
       void removeObject(object* obj);
