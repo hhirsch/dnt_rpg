@@ -1,4 +1,10 @@
 ================================================
+|                Version 0.2                   |
+================================================
+ - Fixed Bug on Remove no more used Models (the 
+   last oe aren't removed);
+
+================================================
 |               Version 0.1.1                  |
 ================================================
  - Fixed Bug on Makefiles (they aren't using

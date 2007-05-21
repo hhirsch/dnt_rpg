@@ -14,10 +14,30 @@
  *******************************************************************/
 barter::barter(inventory* seller, inventory* buyer)
 {
+   int i;
+
+   /* Define the Inventories */
    sellerInventory = seller;
    buyerInventory = buyer;
-   buySlot = new itemSlot(BUY_SIZE_X, BUY_SIZE_Y);
-   sellSlot = new itemSlot(SELL_SIZE_X, SELL_SIZE_Y);
+
+   /* Create Buy Slots */
+   for(i=0; i < BARTER_BUY_SLOTS; i++)
+   {
+      buySlot[i] = new itemSlot(BUY_SIZE_X, BUY_SIZE_Y);
+   }
+
+   /* Create Sell Slots */
+   for(i=0; i < BARTER_SELL_SLOTS; i++)
+   {
+      sellSlot[i] = new itemSlot(SELL_SIZE_X, SELL_SIZE_Y);
+   }
+
+   /* Load Images */
+   barterImage = IMG_Load("../data/texturas/inventory/trade.png");
+   if(!barterImage)
+   {
+      printf("Can't Load Barter Image!\n");
+   }
 }
 
 /*******************************************************************
@@ -25,15 +45,26 @@ barter::barter(inventory* seller, inventory* buyer)
  *******************************************************************/
 barter::~barter()
 {
+   int i;
    /* Cancel the barter of all itens actually on slots */
    cancelBarter();
-   if(buySlot)
+
+   /* Remove Buy Slots */
+   for(i=0; i < BARTER_BUY_SLOTS; i++)
    {
-      delete(buySlot);
+      if(buySlot[i])
+      {
+         delete(buySlot[i]);
+      }
    }
-   if(sellSlot)
+
+   /* Remove Sell Slots */
+   for(i=0; i < BARTER_SELL_SLOTS; i++)
    {
-      delete(sellSlot);
+      if(sellSlot[i])
+      {
+         delete(sellSlot[i]);
+      }
    }
    sellerInventory = NULL;
    buyerInventory = NULL;
@@ -44,25 +75,32 @@ barter::~barter()
  *******************************************************************/
 void barter::cancelBarter()
 {
+   int i;
    object* obj;
    int oX = 0, 
        oY = 0;
    /* First, reput all buy items to the seller */
-   obj=buySlot->getFirstItem(oX, oY);
-   while(obj != NULL)
+   for(i=0; i < BARTER_BUY_SLOTS; i++)
    {
-      sellerInventory->addObject(obj);
-      buySlot->removeObject(oX, oY);
-      obj=buySlot->getFirstItem(oX, oY);
+      obj=buySlot[i]->getFirstItem(oX, oY);
+      while(obj != NULL)
+      {
+         sellerInventory->addObject(obj);
+         buySlot[i]->removeObject(oX, oY);
+         obj=buySlot[i]->getFirstItem(oX, oY);
+      }
    }
 
    /* Next, reput all sell items to the buyer */
-   obj = sellSlot->getFirstItem(oX, oY);
-   while(obj != NULL)
+   for(i=0; i < BARTER_SELL_SLOTS; i++)
    {
-      buyerInventory->addObject(obj);
-      buySlot->removeObject(oX, oY);
-      obj = sellSlot->getFirstItem(oX, oY);
+      obj = sellSlot[i]->getFirstItem(oX, oY);
+      while(obj != NULL)
+      {
+         buyerInventory->addObject(obj);
+         sellSlot[i]->removeObject(oX, oY);
+         obj = sellSlot[i]->getFirstItem(oX, oY);
+      }
    }
 }
 
@@ -71,6 +109,7 @@ void barter::cancelBarter()
  *******************************************************************/
 bool barter::doBarter()
 {
+   int i;
    object* obj;
    int oX = 0, 
        oY = 0;
@@ -78,21 +117,27 @@ bool barter::doBarter()
    //TODO verify if the transaction is good for the seller
    
    /* First, put all buy items to the buyer */
-   obj=buySlot->getFirstItem(oX, oY);
-   while(obj != NULL)
+   for(i=0; i<BARTER_BUY_SLOTS; i++)
    {
-      buyerInventory->addObject(obj);
-      buySlot->removeObject(oX, oY);
-      obj=buySlot->getFirstItem(oX, oY);
+      obj=buySlot[i]->getFirstItem(oX, oY);
+      while(obj != NULL)
+      {
+         buyerInventory->addObject(obj);
+         buySlot[i]->removeObject(oX, oY);
+         obj=buySlot[i]->getFirstItem(oX, oY);
+      }
    }
 
    /* Next, put all sell items to the seller */
-   obj = sellSlot->getFirstItem(oX, oY);
-   while(obj != NULL)
+   for(i=0; i<BARTER_SELL_SLOTS; i++)
    {
-      sellerInventory->addObject(obj);
-      buySlot->removeObject(oX, oY);
-      obj = sellSlot->getFirstItem(oX, oY);
+      obj = sellSlot[i]->getFirstItem(oX, oY);
+      while(obj != NULL)
+      {
+         sellerInventory->addObject(obj);
+         sellSlot[i]->removeObject(oX, oY);
+         obj = sellSlot[i]->getFirstItem(oX, oY);
+      }
    }
 
    return(true);
@@ -104,6 +149,24 @@ bool barter::doBarter()
 bool barter::imposeBarter()
 {
    //TODO, verify if the seller will accept the imposition
+   //if(accept)
+   //{
+   //   doBarter();
+   //   return(true);
+   //}
    return(false);
+}
+
+/*******************************************************************
+ *                               draw                              *
+ *******************************************************************/
+void barter::draw(int x, int y, SDL_Surface* surface)
+{
+   /* Blit the Barter Image */
+   //TODO
+   /* Draw the SellSlot */
+
+   /* Draw the BuySlot */
+
 }
 

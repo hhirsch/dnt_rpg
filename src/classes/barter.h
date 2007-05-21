@@ -10,6 +10,9 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+#define BARTER_BUY_SLOTS   3  /**< Number of Buy Slots */
+#define BARTER_SELL_SLOTS  3  /**< Number of Sell Slots */
+
 /*! The barter class. It will use the appraise skill to 
  * define the item value, for each one bartering. */
 class barter
@@ -34,12 +37,20 @@ class barter
        * \return -> true if the barter was accept, false otherwise. */
       bool doBarter();
 
+      /*! Draw the actual buySlot and SellSlot
+       * \param x -> beginning x coordinate 
+       * \param y -> beginning y coordinate
+       * \param surface -> surface where will draw */
+      void draw(int x, int y, SDL_Surface* surface);
+
    private:
       inventory* sellerInventory;   /**< Pointer to the Seller Inventory */
       inventory* buyerInventory;    /**< Pointer to the Buyer Inventory */
 
-      itemSlot* buySlot;            /**< The itemSlot of Buy things */
-      itemSlot* sellSlot;           /**< The itemSlot of Sell things */
+      itemSlot* buySlot[BARTER_BUY_SLOTS];  /**< The itemSlot of Buy things */
+      itemSlot* sellSlot[BARTER_SELL_SLOTS];/**< The itemSlot of Sell things */
+
+      SDL_Surface* barterImage;     /**< The Barter Image */
 };
 
 #endif
