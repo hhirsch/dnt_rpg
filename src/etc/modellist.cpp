@@ -222,12 +222,13 @@ model3d* modelList::getFirst()
  ********************************************************/
 void modelList::removeUnusedModels()
 {
-   model3d* mdl = first;
+   model3d* mdl;
    model3d* oth;
 
    if(first)
    {
-      while( (first != NULL) && (mdl->next != first) )
+      mdl = first->next;
+      while( (first != NULL) && (mdl != first) )
       {
          oth = mdl;
          mdl = mdl->next;
