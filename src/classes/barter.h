@@ -40,8 +40,25 @@ class barter
       /*! Draw the actual buySlot and SellSlot
        * \param x -> beginning x coordinate 
        * \param y -> beginning y coordinate
-       * \param surface -> surface where will draw */
-      void draw(int x, int y, SDL_Surface* surface);
+       * \param surface -> surface where will draw
+       * \param curSellSlot -> current sell slot
+       * \param curBuySlot -> current buy slot */
+      void draw(int x, int y, SDL_Surface* surface,
+                 int curSellSlot, int curBuySlot);
+
+      /*! Add Item for Sell
+       * \note You need to remove the item from where it comes from
+       *       after call this function.
+       * \param obj -> pointer to the item to include 
+       * \return true fi can add for sell, false otherwise */
+      bool addSellItem(object* obj);
+
+      /*! Add Item for Buy
+       * \note You need to remove the item from where it comes from
+       *       after call this function.
+       * \param obj -> pointer to the item to include 
+       * \return true fi can add for buy, false otherwise */
+      bool addBuyItem(object* obj);
 
    private:
       inventory* sellerInventory;   /**< Pointer to the Seller Inventory */

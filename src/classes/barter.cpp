@@ -160,13 +160,57 @@ bool barter::imposeBarter()
 /*******************************************************************
  *                               draw                              *
  *******************************************************************/
-void barter::draw(int x, int y, SDL_Surface* surface)
+void barter::draw(int x, int y, SDL_Surface* surface,
+                  int curSellSlot, int curBuySlot)
 {
+   SDL_Rect ret;
    /* Blit the Barter Image */
-   //TODO
+   ret.x = x;
+   ret.y = y;
+   ret.w = barterImage->w;
+   ret.h = barterImage->h;
+   SDL_BlitSurface(barterImage, NULL, surface, &ret);
+
+   //FIXME draw at correct positions
+
    /* Draw the SellSlot */
+   sellSlot[curSellSlot]->draw(x,y, surface);
 
    /* Draw the BuySlot */
+   buySlot[curBuySlot]->draw(x,y,surface);
 
 }
+
+/*******************************************************************
+ *                          addSellItem                            *
+ *******************************************************************/
+bool barter::addSellItem(object* obj)
+{
+   int i;
+   for(i=0; i < BARTER_SELL_SLOTS; i++)
+   {
+      if(sellSlot[i]->addObject(obj))
+      {
+         return(true);
+      }
+   }
+   return(false);
+}
+
+/*******************************************************************
+ *                           addBuyItem                            *
+ *******************************************************************/
+bool barter::addBuyItem(object* obj)
+{
+   int i;
+   for(i=0; i < BARTER_BUY_SLOTS; i++)
+   {
+      if(buySlot[i]->addObject(obj))
+      {
+         return(true);
+      }
+   }
+   return(false);
+}
+
 

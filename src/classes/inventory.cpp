@@ -225,13 +225,14 @@ void inventory::drawEquiped(int x, int y, SDL_Surface* surface)
 {
    SDL_Rect ret;
 
-   /* First, blit the inventory image with the surface at desired position */
+   /* First, blit the equipped image with the surface at desired position */
    ret.x = x;
    ret.y = y;
    ret.w = inventoryImage->w;
    ret.h = inventoryImage->h;
    SDL_BlitSurface(equipedImage, NULL, surface, &ret);
 
+   /* Next, draw all the slots */
    equippedSlots[INVENTORY_HEAD]->draw(x+105,y-10, surface);
    equippedSlots[INVENTORY_LEFT_HAND]->draw(x+155,y+99, surface);
    equippedSlots[INVENTORY_RIGHT_HAND]->draw(x+54,y+99, surface);
