@@ -3,6 +3,10 @@
 
 #include "particle.h"
 
+#define MAX_BLOOD_LIVING  1200 /**< Max Iterations that the blood continues */
+#define BLOOD_REMOVING     200 /**< Time for removing blood particles */
+#define MAX_BLOOD_REMOVING (MAX_BLOOD_LIVING - BLOOD_REMOVING)
+
 /*! Blood Particle */
 class part5: public particleSystem
 {
@@ -76,10 +80,13 @@ class part5: public particleSystem
        ***************************************************************/
       GLuint LoadTexture(char* fileName);
 
+      GLuint getLivingTime();
 
    private:
-      float seconds;     /**< Seconds, not used anymore. */
-      GLuint partTexture;/**< Particle Texture */
+      float seconds;      /**< Seconds, not used anymore. */
+      GLuint partTexture; /**< Particle Texture */
+      GLuint livingTime;  /**< Living Time */
+      bool doneCreation;  /**< Mark when finished the creation period */
 };
 
 

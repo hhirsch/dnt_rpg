@@ -221,6 +221,10 @@ void partSystem::actualizeAll(float PCposX, float PCposY, float PCposZ,
             blood[i]->definePosition(PCposX, PCposY, PCposZ);
          }
          blood[i]->NextStep(matriz);
+         if(blood[i]->getLivingTime() >= MAX_BLOOD_LIVING)
+         {
+            removeParticle(PART_BLOOD, blood[i]);
+         }
       }
    }
 

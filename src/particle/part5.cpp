@@ -17,6 +17,8 @@ part5::part5(float cX,float cY,float cZ, string fileName):
    centerZ=cZ;
    actualParticles = 0;
    partTexture = LoadTexture("../data/particles/part2.png");
+   livingTime = 0;
+   doneCreation = false;
 }
 
 /****************************************************************************
@@ -40,6 +42,7 @@ void part5::Render(particle* part)
  ****************************************************************************/
 void part5::InitRender()
 {
+   livingTime++;
    glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
@@ -147,7 +150,7 @@ void part5::actualize(particle* part)
  ****************************************************************************/
 bool part5::continueLive(particle* part)
 {
-   return( true );
+   return(part->age <= MAX_BLOOD_REMOVING);
 }
 
 /****************************************************************************
@@ -155,7 +158,15 @@ bool part5::continueLive(particle* part)
  ****************************************************************************/
 int part5::needCreate()
 {
-   return(rand() % 30);
+   if( (actualParticles < maxParticles) && (!doneCreation))
+   {
+      return(rand() % 30);
+   }
+   else
+   {
+      doneCreation = true;
+      return(0);
+   }
 }
 
 /****************************************************************************
@@ -219,5 +230,13 @@ GLuint part5::LoadTexture(char* fileName)
 
    SDL_FreeSurface(img);
    return(indice);
+}
+
+/****************************************************************************
+ *                            getLivingTime                                 *
+ ****************************************************************************/
+GLuint part5::getLivingTime()
+{
+   return(livingTime);
 }
 
