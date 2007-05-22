@@ -60,6 +60,18 @@ class barter
        * \return true fi can add for buy, false otherwise */
       bool addBuyItem(object* obj);
 
+      /*! Remove a Item of Buy Slots
+       * \param x -> x coordinate
+       * \param y -> y coordinate
+       * \param curBuySlot -> current buy Slot */
+      void removeBuyItem(int x, int y, int curBuySlot);
+
+      /*! Remove a Item of Sell Slots
+       * \param x -> x coordinate
+       * \param y -> y coordinate
+       * \param curSellSlot -> current sell Slot */
+      void removeSellItem(int x, int y, int curSellSlot);
+
    private:
       inventory* sellerInventory;   /**< Pointer to the Seller Inventory */
       inventory* buyerInventory;    /**< Pointer to the Buyer Inventory */

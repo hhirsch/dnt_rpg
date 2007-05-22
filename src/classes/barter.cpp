@@ -213,4 +213,20 @@ bool barter::addBuyItem(object* obj)
    return(false);
 }
 
+/*******************************************************************
+ *                          removeBuyItem                          *
+ *******************************************************************/
+void barter::removeBuyItem(int x, int y, int curBuySlot)
+{
+   buySlot[curBuySlot]->removeObject(x,y);
+}
+
+/*******************************************************************
+ *                         removeSellItem                          *
+ *******************************************************************/
+void barter::removeSellItem(int x, int y, int curSellSlot)
+{
+   sellSlot[curSellSlot]->removeObject(x,y);
+}
+
 
