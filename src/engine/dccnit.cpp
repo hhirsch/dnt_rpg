@@ -1777,6 +1777,19 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
              if(p) 
                p->followPC = true;
          }
+         if(keys[SDLK_t])
+         {
+            particleSystem->addParticle(PART_METEOR,
+                                        activeCharacter->posicaoLadoX,ALTURAMAXIMA+100,
+                                        activeCharacter->posicaoLadoZ,
+                                        0.0, -1.0, 0.0,
+                                        activeCharacter->posicaoLadoX,
+                                        actualMap->getHeight(
+                                                         activeCharacter->posicaoLadoX,
+                                                         activeCharacter->posicaoLadoZ),
+                                        activeCharacter->posicaoLadoZ,
+                                        "../data/particles/fire1.par");
+         }
          if(keys[SDLK_l])
          {
             particleSystem->addParticle(PART_LIGHTNING,

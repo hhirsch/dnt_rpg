@@ -14,6 +14,7 @@
 #include "part6.h"
 #include "part7.h"
 #include "grass.h"
+#include "meteor.h"
 #include <string>
 using namespace std;
 
@@ -25,6 +26,7 @@ using namespace std;
 #define PART_LIGHTNING     6  /**< Lightnig ID */
 #define PART_SNOW          7  /**< Snow ID */
 #define PART_GRASS         8  /**< Grass ID */
+#define PART_METEOR        9  /**< Meteor ID */
 
 
 #define MAX_WATERFALL     2  /**< Max Number of Waterfalls per Map */
@@ -35,9 +37,7 @@ using namespace std;
 #define MAX_SNOW          1  /**< Max number of snow per map */
 #define MAX_LIGHTNING     3  /**< Max number of simultaniously lightinings */
 #define MAX_GRASS         20 /**< Max Number of Grass */
-
-/*! Number of actualizations to stabilize all systens */
-#define PART_STABILIZE_LOOP 600  
+#define MAX_METEOR        4  /**< Max Number of Meteors */
 
 /*! The patSytem class controls all particles systens, 
     make their atualizations, renderizations, etc. */
@@ -76,6 +76,10 @@ class partSystem
       particleSystem* addParticle(int type, GLfloat x1, GLfloat z1,
                                   GLfloat x2, GLfloat z2, int total,
                                   string fileName);
+      meteor* addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
+                          GLfloat varX, GLfloat varY, GLfloat varZ,
+                          GLfloat targX, GLfloat targY, GLfloat targZ,
+                          string fileName);
 
       /*!
        *************************************************************** 
@@ -83,7 +87,7 @@ class partSystem
        * \param type -> the type of the System (PART_BLOOD, PART_FIRE)
        * \param part -> address of the Particle
        ***************************************************************/
-      void removeParticle(int type, particleSystem* part);
+      void removeParticle(int type, void* part);
 
       /*!
        *************************************************************** 
@@ -135,6 +139,7 @@ class partSystem
       part6* lightning[MAX_LIGHTNING];        /**< Lightning Particles */
       part7* snow[MAX_SNOW];                  /**< Snow Particles */
       grass* grassParticles[MAX_GRASS];       /**< Grass Particles */
+      meteor* meteorParticles[MAX_METEOR];    /**< Meteor Particles */
 
 };
 

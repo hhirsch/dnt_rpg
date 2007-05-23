@@ -13,6 +13,9 @@ using namespace std;
 #define PARTICLE_DRAW_GROUPS     0 /**< Draw particles as vertex group */
 #define PARTICLE_DRAW_INDIVIDUAL 1 /**< Draw each particle individually */
 
+/*! Number of actualizations to stabilize a system */
+#define PART_STABILIZE_LOOP 600 
+
 /*! A Particle Alone */
 class particle
 {

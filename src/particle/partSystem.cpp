@@ -51,6 +51,11 @@ partSystem::partSystem()
       grassParticles[i] = NULL;
    }
 
+   for(i = 0; i < MAX_METEOR; i++)
+   {
+      meteorParticles[i] = NULL;
+   }
+
 }
 
 /**********************************************************************
@@ -140,6 +145,15 @@ void partSystem::deleteAll()
       }
    }
 
+   for(i = 0; i < MAX_METEOR; i++)
+   {
+      if(meteorParticles[i] != NULL)
+      {
+         delete(meteorParticles[i]);
+      }
+   }
+
+
 }
 
 /**********************************************************************
@@ -184,6 +198,17 @@ void partSystem::actualizeAll(float PCposX, float PCposY, float PCposZ,
             fire[i]->definePosition(PCposX, PCposY, PCposZ);
          }
          fire[i]->NextStep(matriz);
+      }
+   }
+   for(i = 0; i < MAX_METEOR; i++)
+   {
+      if(meteorParticles[i] != NULL)
+      {
+         meteorParticles[i]->NextStep(matriz);
+         if(!meteorParticles[i]->isLiving())
+         {
+            removeParticle(PART_METEOR, meteorParticles[i]);
+         }
       }
    }
    glEnable(GL_FOG);
@@ -277,6 +302,36 @@ particleSystem* partSystem::addParticle(int type, GLfloat x1, GLfloat z1,
          if(i ==  MAX_GRASS)
          {
             printf("Warn: Too much Grass\n");
+         }
+       break;
+   }
+   return(NULL);
+}
+
+/**********************************************************************
+ *                            addParticle                             *
+ **********************************************************************/
+meteor* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
+                                GLfloat varX, GLfloat varY, GLfloat varZ,
+                                GLfloat targX, GLfloat targY, GLfloat targZ,
+                                string fileName)
+{
+   int i;
+   switch(type)
+   {
+      case PART_METEOR:
+         for(i = 0; i < MAX_METEOR; i++)
+         {
+            if(meteorParticles[i] == NULL)
+            {
+               meteorParticles[i] = new meteor(X, Y, Z, varX, varY, varZ,
+                                               targX, targY, targZ, fileName);
+               return(meteorParticles[i]);
+            }
+         }
+         if(i ==  MAX_METEOR)
+         {
+            printf("Warn: Too much Meteor, your killer!\n");
          }
        break;
    }
@@ -399,7 +454,7 @@ particleSystem* partSystem::addParticle(int type, GLfloat X, GLfloat Y,
 /**********************************************************************
  *                             removeParticle                         *
  **********************************************************************/
-void partSystem::removeParticle(int type, particleSystem* part)
+void partSystem::removeParticle(int type, void* part)
 { 
    int i;
 
@@ -492,6 +547,19 @@ void partSystem::removeParticle(int type, particleSystem* part)
                 return;
              }
           }
+       break;
+       case PART_METEOR:
+       {
+         for(i = 0; i < MAX_METEOR; i++)
+         {
+            if( (particleSystem*)meteorParticles[i] == part)
+            {
+               delete(meteorParticles[i]);
+               meteorParticles[i] = NULL;
+               return;
+            }
+         }
+       }
        break;
    }
 
@@ -586,6 +654,15 @@ int partSystem::numParticles()
          total += grassParticles[i]->numParticles();
       }
    }
+
+   for(i = 0; i < MAX_METEOR; i++)
+   {
+      if(meteorParticles[i] != NULL)
+      {
+         total += meteorParticles[i]->numParticles();
+      }
+   }
+
 
    return(total);
 }
