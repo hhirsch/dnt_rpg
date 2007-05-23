@@ -3,7 +3,7 @@
 
 #include "part2.h"
 
-#define METEOR_STATIC_LIVING  200   /**< Static living time of the meteor */
+#define METEOR_STATIC_LIVING  50   /**< Static living time of the meteor */
 
 /*! The meteor class. It is just a fire particles, 
  * that have their orign translated, and when reach

@@ -1790,6 +1790,20 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         activeCharacter->posicaoLadoZ,
                                         "../data/particles/fire1.par");
          }
+         if(keys[SDLK_u])
+         {
+            GLfloat incZ = -cos(deg2Rad(activeCharacter->orientacao));
+            GLfloat incX = -sin(deg2Rad(activeCharacter->orientacao));
+            particleSystem->addParticle(PART_METEOR,
+                                        activeCharacter->posicaoLadoX,
+                                        activeCharacter->posicaoLadoY + 15,
+                                        activeCharacter->posicaoLadoZ,
+                                        incX, 0.0, incZ,
+                                        activeCharacter->posicaoLadoX + 200*incX,
+                                        activeCharacter->posicaoLadoY + 15,
+                                        activeCharacter->posicaoLadoZ + 200*incZ,
+                                        "../data/particles/fire1.par");
+         }
          if(keys[SDLK_l])
          {
             particleSystem->addParticle(PART_LIGHTNING,

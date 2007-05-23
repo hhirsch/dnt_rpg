@@ -63,31 +63,7 @@ void meteor::InitRender()
               ((varY <= 0) && (curPosY <= targY))) );
    
    glPushMatrix();
-      //Don't translate, but actualize the initial position!
       intFire->definePosition(curPosX, curPosY, curPosZ);
-      //glTranslatef(curPosX, curPosY, curPosZ );
-
-      /* Set the Correct Orientation of the meteor */
-      if(varX < 0)
-      {
-         glRotatef(-90.0, 0, 0, 1);
-      }
-      else if(varX > 0)
-      {
-         glRotatef(90.0, 0, 0, 1);
-      }
-      if(varZ < 0)
-      {
-         glRotatef(-90.0, 1, 0, 0);
-      }
-      else if(varZ > 0)
-      {
-         glRotatef(90.0, 1, 0, 0);
-      }
-      if(varY > 0)
-      {
-         glRotatef(180.0, 1, 0, 0);
-      }
 }
 
 /*****************************************************************
