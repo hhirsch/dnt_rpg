@@ -65,13 +65,12 @@ void shadow::init()
 {
    if(avaible)
    {
-      
-
       glGenTextures(1, &shadowMapTexture);
       glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 
                    SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, 0, GL_DEPTH_COMPONENT,
                    GL_UNSIGNED_BYTE, NULL);
+      glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
@@ -93,13 +92,13 @@ void shadow::defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ)
       glLoadMatrixf(lightViewMatrix);*/
 
       glLoadIdentity();
-         gluPerspective(45.0f, 1.0f, 2.0f, 8.0f);
+         gluPerspective(45.0f, 1.0f, 2.0f, FARVIEW);
          glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
 
       glLoadIdentity();
          gluLookAt(pX, pY, pZ,
                    0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-      glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
+         glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
 
       glViewport(0, 0, SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
    }
@@ -142,8 +141,8 @@ void shadow::setEnable(bool en)
 void shadow::saveShadowMap()
 {
    glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-   glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, 
-                       SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
+   glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 0, 0, 
+                    SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, 0);
 
 }
 
@@ -182,7 +181,7 @@ void shadow::beginShadowMap()
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);
 
    /* Shadow comparison should generate an INTENSITY result */
-   glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
+   glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_ALPHA);
 
    /* Set alpha test to discard false comparisons */
    glAlphaFunc(GL_GEQUAL, 0.99f);

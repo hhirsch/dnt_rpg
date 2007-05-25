@@ -2476,10 +2476,9 @@ void engine::drawWithShadows()
    /* Atualize to culling and to GUI */
    AtualizaFrustum(visibleMatrix,proj,modl);
 
-   
-
    /* First Pass, render at the light View */
-      glDisable(GL_LIGHTING);
+      glEnable(GL_DEPTH_TEST);
+      //glDisable(GL_COLOR);
       GLfloat lightPos[4];
       gameSun->getPosition(lightPos);
       shadowMap.defineLightView(lightPos[0], lightPos[1], lightPos[2]);
@@ -2491,6 +2490,7 @@ void engine::drawWithShadows()
       glColorMask(0, 0, 0, 0);
       renderScene();
       /* Read the depth buffer into the shadow map texture */
+      glEnable(GL_TEXTURE);
 	shadowMap.saveShadowMap();
 
    /* Second Pass */
@@ -2505,19 +2505,18 @@ void engine::drawWithShadows()
       glMatrixMode(GL_MODELVIEW);
       glLoadMatrixd(modl);
       glViewport(0, 0, SCREEN_X, SCREEN_Y);
-      glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
-      glLightfv(GL_LIGHT0, GL_AMBIENT, defaultColor);
-      glLightfv(GL_LIGHT0, GL_DIFFUSE, defaultColor);
-      glLightfv(GL_LIGHT0, GL_SPECULAR, blackColor);
-      glEnable(GL_LIGHT0);
-      glEnable(GL_LIGHTING);
-      renderScene();
-
-   /* Third Pass. draw with normal Light */
       gameSun->setLight();
       shadowMap.beginShadowMap();
+
       renderScene();
+
       shadowMap.endShadowMap();
+
+   /* Third Pass. draw with normal Light */
+   /*   gameSun->setLight();
+      shadowMap.beginShadowMap();
+      renderScene();
+      shadowMap.endShadowMap();*/
 
 
    /* Draw the things without shadows */
