@@ -176,7 +176,9 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
    destinyX = x;
    destinyZ = z;
    collision collisionDetect;
-   collisionDetect.defineMap(actualMap);
+
+   /* FIXME use the NPCs pointer, instead of NULL */
+   collisionDetect.defineMap(actualMap, NULL);
 
    if( (destinyX < 0) || (destinyZ < 0) || 
        (destinyX >= actualMap->getSizeX()*SQUARESIZE) ||
@@ -297,7 +299,7 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
                                       perX1, perY1, perZ1, 
                                       perX2, perY2, perZ2, 
                                       orientation, perQuad,
-                                      NULL, varHeight, nx, nz)) )
+                                      varHeight, nx, nz)) )
         {
            if( (node2 != NULL) && (node2->gone > newg))
            {

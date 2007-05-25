@@ -55,7 +55,7 @@ partSystem::partSystem()
    {
       meteorParticles[i] = NULL;
    }
-
+   colDetect = NULL;
 }
 
 /**********************************************************************
@@ -326,6 +326,7 @@ meteor* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
             {
                meteorParticles[i] = new meteor(X, Y, Z, varX, varY, varZ,
                                                targX, targY, targZ, fileName);
+               meteorParticles[i]->defineCollision(colDetect);
                return(meteorParticles[i]);
             }
          }
@@ -584,7 +585,7 @@ void partSystem::stabilizeAll()
 /**********************************************************************
  *                                setMap                              *
  **********************************************************************/
-void partSystem::setActualMap(void* map)
+void partSystem::setActualMap(void* map, collision* col)
 {
    int i;
 
@@ -595,6 +596,15 @@ void partSystem::setActualMap(void* map)
          grassParticles[i]->defineMap(map);
       }
    }
+   colDetect = col;
+   for(i = 0; i < MAX_METEOR; i++)
+   {
+      if(meteorParticles[i] != NULL)
+      {
+         meteorParticles[i]->defineCollision(colDetect);
+      }
+   }
+
 }
 
 /**********************************************************************

@@ -445,6 +445,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       snd->loadMusic(actualMap->getMusicFileName());
    }
 
+   /* Actualize the Particle System */
+   particleSystem->setActualMap(actualMap, &colisionDetect);
+   colisionDetect.defineMap(actualMap, NPCs);
+
    /* Done */
    atualizaCarga(img,&texturaTexto,texturaCarga,
                  language.LOAD_DONE.c_str(),
@@ -2609,7 +2613,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
 
 
-   colisionDetect.defineMap(actualMap);
+   colisionDetect.defineMap(actualMap, NPCs);
    result = colisionDetect.canWalk(activeCharacter->posicaoLadoX + varX,
                                    activeCharacter->posicaoLadoY,
                                    activeCharacter->posicaoLadoZ + varZ,
@@ -2620,7 +2624,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
                                    activeCharacter->max[1],
                                    activeCharacter->max[2],
                                    activeCharacter->orientacao + varAlpha, 
-                                   activeCharacter->ocupaQuad, NPCs, varHeight,
+                                   activeCharacter->ocupaQuad, varHeight,
                                    nx, nz);
 
    if(result)

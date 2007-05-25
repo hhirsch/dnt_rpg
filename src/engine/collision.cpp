@@ -24,9 +24,10 @@ collision::~collision()
 /*********************************************************************
  *                             defineMap                             *
  *********************************************************************/
-void collision::defineMap(Map* usedMap)
+void collision::defineMap(Map* usedMap, Lpersonagem* npcs)
 {
    actualMap = usedMap;
+   NPCs = npcs;
 }
 
 /*********************************************************************
@@ -130,8 +131,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
                         GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
                         GLfloat perX2, GLfloat perY2, GLfloat perZ2, 
                         GLfloat perOrientation, Square* perQuad,
-                        Lpersonagem* NPCs, GLfloat& varHeight,
-                        GLfloat& nx, GLfloat& nz)
+                        GLfloat& varHeight, GLfloat& nx, GLfloat& nz)
 {
    bool result = true;
    Square* saux;
@@ -144,6 +144,18 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    if(!actualMap)
    {
       return(false);
+   }
+
+   if(!perQuad)
+   {
+      /* Get the Relative Square */
+      int posX =(int)floor( perX / (SQUARESIZE));
+      int posZ =(int)floor( perZ / (SQUARESIZE));
+      perQuad = actualMap->relativeSquare(posX, posZ);
+      if(!perQuad)
+      {
+         return(false);
+      }
    }
 
 

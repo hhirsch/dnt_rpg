@@ -2,6 +2,7 @@
 #define _meteor_h
 
 #include "part2.h"
+#include "../engine/collision.h"
 
 #define METEOR_STATIC_LIVING  50   /**< Static living time of the meteor */
 
@@ -63,6 +64,13 @@ class meteor
        * \return number of living particles
        ***************************************************************/
       int numParticles();
+
+      /*!
+       **************************************************************
+       * Define The Collision System
+       * \param col -> pointer to the collision system
+       **************************************************************/
+      void defineCollision(collision* col);
    private:
       int actualLiving;     /**< Living Time after dead */
       GLfloat curPosX,      /**< Current Meteor X Position */
@@ -76,6 +84,7 @@ class meteor
               targZ;        /**< Target Z Coordinate */
       bool dead;            /**< When reach target, is dead */
       part2* intFire;       /**< Internal Fire Particle */
+      collision* colDetect; /**< Actual Collision Detection System */
 };
 
 #endif

@@ -28,6 +28,8 @@ meteor::meteor(float cX, float cY, float cZ, float vX, float vY, float vZ,
 
    /* Init Variables */
    actualLiving = 0;
+   colDetect = NULL;
+   dead = false;
 }
 
 /*****************************************************************
@@ -39,28 +41,49 @@ meteor::~meteor()
 }
 
 /*****************************************************************
+ *                         defineCollision                       *
+ *****************************************************************/
+void meteor::defineCollision(collision* col)
+{
+   colDetect = col;
+}
+
+/*****************************************************************
  *                           initRender                          *
  *****************************************************************/
 void meteor::InitRender()
 {
-   if(!dead)
-   {
-      curPosY += varY;
-      curPosX += varX;
-      curPosZ += varZ;
-   }
-   else
+   if(dead)
    {
       actualLiving++;
    }
+   else
+   {
+      /* Actualize Position */
+      curPosY += varY;
+      curPosX += varX;
+      curPosZ += varZ;
 
-   /* Verify if hits the target */
-   dead = ( ( ((varX > 0) && (curPosX >= targX)) ||
-              ((varX <= 0) && (curPosX <= targX))) &&
-            ( ((varZ > 0) && (curPosZ >= targZ)) ||
-              ((varZ <= 0) && (curPosZ <= targZ))) &&
-            ( ((varY > 0) && (curPosY >= targY)) ||
-              ((varY <= 0) && (curPosY <= targY))) );
+      /* Verify if hits the target */
+      dead = ( ( ((varX > 0) && (curPosX >= targX)) ||
+                 ((varX <= 0) && (curPosX <= targX))) &&
+               ( ((varZ > 0) && (curPosZ >= targZ)) ||
+                 ((varZ <= 0) && (curPosZ <= targZ))) &&
+               ( ((varY > 0) && (curPosY >= targY)) ||
+                 ((varY <= 0) && (curPosY <= targY))) );
+
+      if( (colDetect) && (!dead))
+      {
+         /* Not Used Variables */
+         GLfloat varHeight=0, 
+                 nX = 0, 
+                 nZ = 0;
+         /* Verify Collisions */
+         dead = !colDetect->canWalk(curPosX, curPosY, curPosZ, 
+                                    -0.5,-0.5,-0.5, 0.5,0.5,0.5,
+                                     0.0, NULL, varHeight, nX, nZ);
+      }
+   }
    
    glPushMatrix();
       intFire->definePosition(curPosX, curPosY, curPosZ);

@@ -126,8 +126,9 @@ class partSystem
        ***************************************************************
        * Define the opened map
        * \param map -> pointer to the opened map
+       * \param col -> pointer to the collision system
        ***************************************************************/
-      void setActualMap(void* map);
+      void setActualMap(void* map, collision* col);
 
 
    private:
@@ -140,6 +141,7 @@ class partSystem
       part7* snow[MAX_SNOW];                  /**< Snow Particles */
       grass* grassParticles[MAX_GRASS];       /**< Grass Particles */
       meteor* meteorParticles[MAX_METEOR];    /**< Meteor Particles */
+      collision* colDetect;                   /**< Collision System */
 
 };
 

@@ -845,7 +845,7 @@ void editor::doEditorIO()
    {
       terrainEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(), 
                                   actualTexture);
-      particleSystem->setActualMap(map);
+      particleSystem->setActualMap(map, NULL);
    }
    else if( (gui->getState() == GUI_IO_STATE_PORTAL) && (mapOpened))
    {

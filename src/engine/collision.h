@@ -21,8 +21,9 @@ class collision
       ~collision();
 
       /*! Define Current Map
-       * \param usedMap -> pointer to current Map*/
-      void defineMap(Map* usedMap);
+       * \param usedMap -> pointer to current Map
+       * \param NPCs -> list of NPCs */
+      void defineMap(Map* usedMap, Lpersonagem* npcs);
 
       /*! Verify if character can occupy position on Square
        * \param min -> min positions of Bounding Box (translated & rotated)
@@ -48,7 +49,6 @@ class collision
        *  \param perZ2 -> character bounding box Z2 
        *  \param perOrientation -> character Orientation
        *  \param perQuad -> square occupied by character 
-       *  \param NPCs -> list of NPCs
        *  \param varHeight -> value of the new height of the character 
        *  \param nx -> value of the center new X Character
        *  \param nz -> value of the center new Z Character
@@ -58,11 +58,11 @@ class collision
                    GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
                    GLfloat perX2, GLfloat perY2, GLfloat perZ2, 
                    GLfloat perOrientation, Square* perQuad,
-                   Lpersonagem* NPCs, GLfloat& varHeight,
-                   GLfloat& nx, GLfloat& nz);
+                   GLfloat& varHeight, GLfloat& nx, GLfloat& nz);
       
    private:
       Map* actualMap;         /**< Pointer to actual opened map */
+      Lpersonagem* NPCs;      /**< Pointer to the actual NPC List */
 };
 
 
