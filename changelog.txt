@@ -1,6 +1,8 @@
 ================================================
 |                Version 0.2                   |
 ================================================
+ - Meteors and FireSpheres;
+ - Using LUA for AI Scripts;
  - Fixed Bug on Remove no more used Models (the 
    last oe aren't removed);
 
