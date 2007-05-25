@@ -82,10 +82,10 @@ aStar::aStar()
 /****************************************************************
  *                         defineMap                            *
  ****************************************************************/
-void aStar::defineMap(Map* map)
+void aStar::defineMap(Map* actualMap)
 {
    lock();
-      actualMap = map;
+      actualMap = actualMap;
    unLock();
 }
 
