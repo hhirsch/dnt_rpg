@@ -76,8 +76,8 @@ class aStar
       ~aStar();
 
       /*! Define the actual opened map 
-       *  \param actualMap -> current opened map. */
-      void defineMap(Map* actualMap);
+       *  \param acMap -> current opened map. */
+      void defineMap(Map* acMap);
 
       /*! Calls A* thread to find path
        * \param actualX -> current x position
