@@ -177,8 +177,6 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
    destinyZ = z;
    collision collisionDetect;
 
-   printf("actualMap %p\n",actualMap);
-
    /* FIXME use the NPCs pointer, instead of NULL */
    collisionDetect.defineMap(actualMap, NULL);
 
