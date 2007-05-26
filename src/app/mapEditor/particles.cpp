@@ -7,9 +7,9 @@
 /*****************************************************************
  *                          Constructor                          *
  *****************************************************************/
-particles::particles(Map* map)
+particles::particles(Map* acMap)
 {
-   actualMap = map;
+   actualMap = acMap;
    actualParticle = NULL;
    state = -1;
    particleType = -1;

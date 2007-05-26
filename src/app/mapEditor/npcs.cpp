@@ -6,9 +6,9 @@
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-npcs::npcs(Map* map, Lpersonagem* NPCsList, featsList* lFeats)
+npcs::npcs(Map* acMap, Lpersonagem* NPCsList, featsList* lFeats)
 {
-   actualMap = map;
+   actualMap = acMap;
    state = NPCS_STATE_NONE;
    actualNpc = NULL;
    npcFile = "";

@@ -10,8 +10,8 @@ class particles
 {
    public:
       /*! Constructor
-       * \param map -> poiter to opened map*/
-      particles(Map* map);
+       * \param acMap -> poiter to opened map*/
+      particles(Map* acMap);
       /*! Destructor */
       ~particles();
 

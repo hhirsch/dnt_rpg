@@ -14,10 +14,10 @@ class npcs
 {
    public:
       /*! Constructor
-       * \param map -> pointer to opened map
+       * \param acMap -> pointer to opened map
        * \param NPCsList -> pointer to the list of NPCs 
        * \param lFeats -> pointer to features descriptions list*/
-      npcs(Map* map, Lpersonagem* NPCsList, featsList* lFeats);
+      npcs(Map* acMap, Lpersonagem* NPCsList, featsList* lFeats);
       /*! Destructor */
       ~npcs();
 

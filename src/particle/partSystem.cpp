@@ -585,7 +585,7 @@ void partSystem::stabilizeAll()
 /**********************************************************************
  *                                setMap                              *
  **********************************************************************/
-void partSystem::setActualMap(void* map, collision* col)
+void partSystem::setActualMap(void* acMap, collision* col)
 {
    int i;
 
@@ -593,7 +593,7 @@ void partSystem::setActualMap(void* map, collision* col)
    {
       if(grassParticles[i] != NULL)
       {
-         grassParticles[i]->defineMap(map);
+         grassParticles[i]->defineMap(acMap);
       }
    }
    colDetect = col;

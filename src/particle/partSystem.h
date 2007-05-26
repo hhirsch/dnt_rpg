@@ -125,10 +125,10 @@ class partSystem
       /*!
        ***************************************************************
        * Define the opened map
-       * \param map -> pointer to the opened map
+       * \param acMap -> pointer to the opened map
        * \param col -> pointer to the collision system
        ***************************************************************/
-      void setActualMap(void* map, collision* col);
+      void setActualMap(void* acMap, collision* col);
 
 
    private:
