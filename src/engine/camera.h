@@ -106,7 +106,8 @@ class camera
 
       int type;                         /**< Internal Camera Type */
 
-      GLfloat zoomAc;                   /**< Zoom AC value */
+      GLfloat zoomAc;                   /**< Zoom Acceleration Value */
+      GLfloat phiAc;                    /**< Phi Acceleration Value */
 };
 
 #endif

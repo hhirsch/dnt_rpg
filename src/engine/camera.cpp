@@ -1,7 +1,7 @@
 #include "camera.h"
 #include "util.h"
 
-#define ZOOM_ATENUATION    0.1  /**< The atenuation value of zoom aceleration */
+#define CAMERA_ATENUATION    0.1  /**< The atenuation value of aceleration */
 
 
 /******************************************************************
@@ -21,6 +21,7 @@ camera::camera()
    middleMouse = false;
    type = CAMERA_TYPE_NORMAL;
    zoomAc = 0.0;
+   phiAc = 0.0;
 }
 
 /******************************************************************
@@ -35,65 +36,46 @@ camera::~camera()
  ******************************************************************/
 bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
 {
-   bool modify = false;
    /* Keys to Camera Moviments */
    if(keys[SDLK_UP])  // Increases Zoom
    {
-      zoomAc -= 0.6;
-      if(zoomAc < (-varCamera))
-      {
-         zoomAc = -varCamera;
-      }
-      modify = true;
+      zoomAc = -varCamera;
    }
    if(keys[SDLK_DOWN]) // Decreases Zoom
    {
-      zoomAc += 0.6;
-      if(zoomAc > varCamera)
-      {
-         zoomAc = varCamera;
-      }
-      modify = true;
+      zoomAc = varCamera;
    }
    if(keys[SDLK_RIGHT]) // Rotate Camera CounterClockWise
    {
-       phi -= varCamera;  
-       modify = true;
+      phiAc = -varCamera;
    }
    if(keys[SDLK_LEFT]) // Rotate Camera ClockWise
    {
-      phi += varCamera;
-      modify = true;
+      phiAc = varCamera;
    }
    if(keys[SDLK_PAGEUP]) // Maximize Up Camera
    {
       theta += varCamera;
-      modify = true;
    }
    if(keys[SDLK_PAGEDOWN]) // Minimize Up Camera
    {
       theta -= varCamera;
-      modify = true;
    }
    if (keys[SDLK_HOME]) // Maximize zoom
    {
       d = ZOOMMAXIMO;
-      modify = true;
    }
    if(keys[SDLK_END]) // Minimize zoom
    {
       d = ZOOMMINIMO;
-      modify = true;
    }   
    if(keys[SDLK_INSERT]) //Up view Max
    {
       theta = 89;
-      modify = true;
    }
    if(keys[SDLK_DELETE]) //Down view Max
    {
       theta = 0;
-      modify = true;
    }
 
    /* Mouse to move Camera */
@@ -102,13 +84,11 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    if(x == 0)  // Turn Clockwise
    {
       phi += 2; 
-      modify = true;  
    }
    /* Right Edge */
    if(x == SCREEN_X-1) // Turn CounterClockWise
    {
      phi -= 2; 
-     modify = true;
    }
 
    /* Middle Mouse Button Rotation Control */
@@ -118,7 +98,6 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       {
          theta += (y - prevY) / 10.0;
          phi += (prevX - x) / 10.0;  // X axis is inverted :~p
-         modify = true;
       }
       else
       {
@@ -132,30 +111,7 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       middleMouse = false;
    }
 
-   if(modify)
-   {
-      /* Verify Theta Limits */
-      if(theta > 89) 
-      {
-         theta = 89;
-      }
-      else if(theta < 0)
-      {
-         theta = 0;
-      }
-
-      /* Put Phi on [0-360) range */
-      if(phi < 0)
-      {
-         phi += 360;
-      }
-      else if(phi >= 360)
-      {
-         phi = phi - 360;
-      }
-   }
-
-   /* Apply the accelerations */
+   /* Apply the Zoom accelerations */
    if(zoomAc < 0)
    {
       d += zoomAc;
@@ -166,7 +122,7 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       }
       else
       {
-         zoomAc += ZOOM_ATENUATION;
+         zoomAc += CAMERA_ATENUATION;
          if(zoomAc > 0)
          {
             zoomAc = 0;
@@ -183,7 +139,7 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       }
       else
       {
-         zoomAc -= ZOOM_ATENUATION;
+         zoomAc -= CAMERA_ATENUATION;
          if(zoomAc < 0)
          {
             zoomAc = 0;
@@ -191,7 +147,49 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       }
    }
 
-   return(modify);
+   /* Apply the Phi accelerations */
+   if(phiAc < 0)
+   {
+      phi += phiAc;
+      phiAc += CAMERA_ATENUATION;
+      if(phiAc > 0)
+      {
+         phiAc = 0;
+      }
+   }
+   else if(phiAc > 0)
+   {
+      phi += phiAc;
+      phiAc -= CAMERA_ATENUATION;
+      if(phiAc < 0)
+      {
+         phiAc = 0;
+      }
+   }
+
+   /* Verify Limits */
+
+   /* Verify Theta Limits */
+   if(theta > 89) 
+   {
+      theta = 89;
+   }
+   else if(theta < 0)
+   {
+      theta = 0;
+   }
+
+   /* Put Phi on [0-360) range */
+   if(phi < 0)
+   {
+      phi += 360;
+   }
+   else if(phi >= 360)
+   {
+      phi = phi - 360;
+   }
+
+   return(true);
 }
 
 /******************************************************************
