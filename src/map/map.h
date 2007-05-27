@@ -26,7 +26,7 @@ using namespace std;
 #define MEIOFIOALTURA           2 /**< Meio-fios height */
 #define ALTURAMAXIMA          150 /**< Max square height */
 
-#define SQUARE_DIVISIONS        8
+#define SQUARE_DIVISIONS        1
 
 /*!
  ****************************************************

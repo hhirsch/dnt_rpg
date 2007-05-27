@@ -447,7 +447,6 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       }
    }
    glEnd();
- 
    return(1);
 }
 
