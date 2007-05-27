@@ -105,6 +105,8 @@ class camera
           prevY;                        /**< Previous Mouse Z position */
 
       int type;                         /**< Internal Camera Type */
+
+      GLfloat zoomAc;                   /**< Zoom AC value */
 };
 
 #endif

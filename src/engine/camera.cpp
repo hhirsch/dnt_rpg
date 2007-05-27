@@ -1,6 +1,9 @@
 #include "camera.h"
 #include "util.h"
 
+#define ZOOM_ATENUATION    0.1  /**< The atenuation value of zoom aceleration */
+
+
 /******************************************************************
  *                         Constructor                            *
  ******************************************************************/
@@ -17,6 +20,7 @@ camera::camera()
    cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    middleMouse = false;
    type = CAMERA_TYPE_NORMAL;
+   zoomAc = 0.0;
 }
 
 /******************************************************************
@@ -35,19 +39,21 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    /* Keys to Camera Moviments */
    if(keys[SDLK_UP])  // Increases Zoom
    {
-       if (d>ZOOMMAXIMO)
-       {
-          d-= varCamera;
-          modify = true;
-       }
+      zoomAc -= 0.6;
+      if(zoomAc < (-varCamera))
+      {
+         zoomAc = -varCamera;
+      }
+      modify = true;
    }
    if(keys[SDLK_DOWN]) // Decreases Zoom
    {
-      if(d<ZOOMMINIMO)
+      zoomAc += 0.6;
+      if(zoomAc > varCamera)
       {
-          d+= varCamera; 
-          modify = true;
+         zoomAc = varCamera;
       }
+      modify = true;
    }
    if(keys[SDLK_RIGHT]) // Rotate Camera CounterClockWise
    {
@@ -146,6 +152,42 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       else if(phi >= 360)
       {
          phi = phi - 360;
+      }
+   }
+
+   /* Apply the accelerations */
+   if(zoomAc < 0)
+   {
+      d += zoomAc;
+      if(d <= ZOOMMAXIMO)
+      {
+         d = ZOOMMAXIMO;
+         zoomAc = 0;
+      }
+      else
+      {
+         zoomAc += ZOOM_ATENUATION;
+         if(zoomAc > 0)
+         {
+            zoomAc = 0;
+         }
+      }
+   }
+   else if(zoomAc > 0)
+   {
+      d += zoomAc;
+      if(d >= ZOOMMINIMO)
+      {
+         d = ZOOMMINIMO; 
+         zoomAc = 0;
+      }
+      else
+      {
+         zoomAc -= ZOOM_ATENUATION;
+         if(zoomAc < 0)
+         {
+            zoomAc = 0;
+         }
       }
    }
 
@@ -310,7 +352,8 @@ void camera::actualizeCamera(GLfloat characterX, GLfloat characterY,
    centerX = characterX;
    centerZ = characterZ;
    //centerY = characterY;
-   
+   //
+
    if( (type == CAMERA_TYPE_DRIVE) && (characterOrientation != phi) )
    {
       /* Make the camera follow character rotations */

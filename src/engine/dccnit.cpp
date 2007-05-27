@@ -2932,6 +2932,7 @@ int engine::Run(SDL_Surface *surface)
               modifState.clear();
               engineMode = ENGINE_MODE_REAL_TIME;
               gui->closeAllWindows();
+
               if(actualMap)
               {
                  delete(actualMap);
@@ -2942,6 +2943,7 @@ int engine::Run(SDL_Surface *surface)
                  delete(models);
                  models = new modelList();
               }
+              
               /* Put the animation state on normal */
               PCs->getActiveCharacter()->setState(STATE_IDLE);
               return(0);
