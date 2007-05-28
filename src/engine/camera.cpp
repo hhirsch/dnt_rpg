@@ -22,6 +22,7 @@ camera::camera()
    type = CAMERA_TYPE_NORMAL;
    zoomAc = 0.0;
    phiAc = 0.0;
+   thetaAc = 0.0;
 }
 
 /******************************************************************
@@ -55,11 +56,11 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    }
    if(keys[SDLK_PAGEUP]) // Maximize Up Camera
    {
-      theta += varCamera;
+      thetaAc = varCamera;
    }
    if(keys[SDLK_PAGEDOWN]) // Minimize Up Camera
    {
-      theta -= varCamera;
+      thetaAc = -varCamera;
    }
    if (keys[SDLK_HOME]) // Maximize zoom
    {
@@ -88,7 +89,7 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    /* Right Edge */
    if(x == SCREEN_X-1) // Turn CounterClockWise
    {
-     phi -= 2; 
+      phi -= 2; 
    }
 
    /* Middle Mouse Button Rotation Control */
@@ -115,35 +116,19 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    if(zoomAc < 0)
    {
       d += zoomAc;
-      if(d <= ZOOMMAXIMO)
+      zoomAc += CAMERA_ATENUATION;
+      if(zoomAc > 0)
       {
-         d = ZOOMMAXIMO;
          zoomAc = 0;
-      }
-      else
-      {
-         zoomAc += CAMERA_ATENUATION;
-         if(zoomAc > 0)
-         {
-            zoomAc = 0;
-         }
       }
    }
    else if(zoomAc > 0)
    {
       d += zoomAc;
-      if(d >= ZOOMMINIMO)
+      zoomAc -= CAMERA_ATENUATION;
+      if(zoomAc < 0)
       {
-         d = ZOOMMINIMO; 
          zoomAc = 0;
-      }
-      else
-      {
-         zoomAc -= CAMERA_ATENUATION;
-         if(zoomAc < 0)
-         {
-            zoomAc = 0;
-         }
       }
    }
 
@@ -167,6 +152,27 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
       }
    }
 
+   /* Apply the theta accelerations */
+   if(thetaAc < 0)
+   {
+      theta += thetaAc;
+      thetaAc += CAMERA_ATENUATION;
+      if(thetaAc > 0)
+      {
+         thetaAc = 0;
+      }
+   }
+   else if(thetaAc > 0)
+   {
+      theta += thetaAc;
+      thetaAc -= CAMERA_ATENUATION;
+      if(thetaAc < 0)
+      {
+         thetaAc = 0;
+      }
+   }
+
+
    /* Verify Limits */
 
    /* Verify Theta Limits */
@@ -177,6 +183,16 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    else if(theta < 0)
    {
       theta = 0;
+   }
+
+   /* Verify D limits */
+   if(d > ZOOMMINIMO)
+   {
+      d = ZOOMMINIMO;
+   }
+   else if(d < ZOOMMAXIMO)
+   {
+      d = ZOOMMAXIMO;
    }
 
    /* Put Phi on [0-360) range */

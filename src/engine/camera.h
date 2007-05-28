@@ -108,6 +108,7 @@ class camera
 
       GLfloat zoomAc;                   /**< Zoom Acceleration Value */
       GLfloat phiAc;                    /**< Phi Acceleration Value */
+      GLfloat thetaAc;                  /**< Theta Acceleration Value */
 };
 
 #endif
