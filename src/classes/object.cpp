@@ -130,7 +130,7 @@ object::~object()
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void object::draw(float x, float z, GLfloat dist, float orientation)
+void object::draw(float x, float z, GLfloat dist, float orientation, bool inverted)
 {
    model3d* model = modelMax;
    
@@ -149,6 +149,10 @@ void object::draw(float x, float z, GLfloat dist, float orientation)
    glPushMatrix();
       glTranslatef(x, 0 ,z);
       glRotatef(orientation,0,1,0);
+      if(inverted)
+      {
+         glScalef(1.0, -1.0, 1.0);
+      }
       model->draw();
    glPopMatrix();
    glDisable(GL_COLOR_MATERIAL);

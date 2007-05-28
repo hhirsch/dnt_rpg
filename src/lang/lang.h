@@ -62,6 +62,10 @@ class lang
    static string OPTIONS_CAMERA_DRIVE;
    static string OPTIONS_GRASS;
    static string OPTIONS_PARTICLES;
+   static string OPTIONS_REFLECTS;
+   static string OPTIONS_REFLECTS_NONE;
+   static string OPTIONS_REFLECTS_CHARACTER;
+   static string OPTIONS_REFLECTS_ALL;
 
    /* skillwindow.cpp */
    static string SKILL_TITLE;

@@ -147,6 +147,18 @@ class Map
               GLfloat matriz[6][4]);
       /*!
        *************************************************************** 
+       * Draw the map objects on screen (using view culling)  
+       * \param cameraX -> X coordinate of camera
+       * \param cameraY -> Y coordinate of camera
+       * \param cameraZ -> Z coordinate of camera
+       * \param matriz  -> view frustum matriz 
+       * \param inverted -> usefull for reflections
+       ***************************************************************/
+      void drawObjects(GLfloat cameraX, GLfloat cameraY, 
+                       GLfloat cameraZ, GLfloat matriz[6][4],
+                       bool inverted);
+      /*!
+       *************************************************************** 
        * Draw Minimap, relative to current map and character position.
        * \param img -> Surface where minimap will be draw. Usualy a
        *               valid window surface.

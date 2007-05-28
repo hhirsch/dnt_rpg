@@ -40,6 +40,7 @@ class options
       int     cameraNumber;    /**< Actual Camera Mode */
       bool    enableParticles; /**< Enable/Disable Particles */
       bool    enableGrass;     /**< Enable/Disable Grass */
+      int     reflexionType;   /**< Reflexion Type */
       janela* window;          /**< Options Window Pointer */
 
 
@@ -49,10 +50,12 @@ class options
       quadroTexto* txtSndfxVolume; /**< Sound Effects Volume Text on Window*/
       quadroTexto* txtLanguage;    /**< Language Text on Window */
       quadroTexto* txtCamera;      /**< Camera Mode Text on Window */
+      quadroTexto* txtReflexion;   /**< Reflexion Type Text on Window */
       int          prevCamera;     /**< Previous used Camera Mode */
       int          prevMusicVolume;/**< Previous used Music Volume */
       int          prevSndfxVolume;/**< Previous Used Sound Effects Volume */
       int          prevLanguage;   /**< Previous Used Language */
+      int          prevReflexion;  /**< Previous Used Reflexion */
       lang         language;       /**< Language Used */
 
       int timeLastOperation;       /**< Ticks when done last operation */
@@ -69,6 +72,9 @@ class options
       botao* buttonCamSum;
       botao* buttonCamDec;
 
+      botao* buttonReflSum;
+      botao* buttonReflDec;
+
       cxSel* cxSelGrass;
       cxSel* cxSelParticles;
       
@@ -82,6 +88,11 @@ class options
       /*! Get the Actual Camera Name
        * \return the name of the camera. */
       string cameraName();
+
+      /*! Get the Actual Reflexion Type Name
+       * \return the name of the reflexion type */
+      string reflexionName();
+
 };
 
 

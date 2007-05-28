@@ -94,7 +94,10 @@ void lang::ReloadFile(int lng)
    getline(file, OPTIONS_CAMERA_DRIVE);
    getline(file, OPTIONS_GRASS);
    getline(file, OPTIONS_PARTICLES);
-
+   getline(file, OPTIONS_REFLECTS);
+   getline(file, OPTIONS_REFLECTS_NONE);
+   getline(file, OPTIONS_REFLECTS_CHARACTER);
+   getline(file, OPTIONS_REFLECTS_ALL);
 
    /* skillwindow.cpp */
    getline(file, SKILL_TITLE);
@@ -236,8 +239,10 @@ void lang::ReloadFile(int lng)
    string lang::OPTIONS_CAMERA_DRIVE;
    string lang::OPTIONS_GRASS;
    string lang::OPTIONS_PARTICLES;
-
-
+   string lang::OPTIONS_REFLECTS;
+   string lang::OPTIONS_REFLECTS_NONE;
+   string lang::OPTIONS_REFLECTS_CHARACTER;
+   string lang::OPTIONS_REFLECTS_ALL;
    
    /* skillwindow.cpp */
    string lang::SKILL_TITLE;

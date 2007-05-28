@@ -267,11 +267,11 @@ void portal::drawTemporary()
       if(doorMode) delta = 2;
       if(doorOrientation)
       {
-        actualDoor->draw(doorX+delta, doorZ, 0, doorOrientation);
+        actualDoor->draw(doorX+delta, doorZ, 0, doorOrientation, false);
       }
       else
       {
-        actualDoor->draw(doorX, doorZ+delta, 0, doorOrientation);
+        actualDoor->draw(doorX, doorZ+delta, 0, doorOrientation, false);
       }
       glBegin(GL_QUADS);
          glVertex3f(mX-2,1,mZ-2);

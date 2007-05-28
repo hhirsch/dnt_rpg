@@ -92,7 +92,7 @@ void objects::drawTemporary()
    {
       glPushMatrix();
       glTranslatef(0.0, actualMap->getHeight(obstacleX, obstacleZ), 0.0);
-      actualObstacle->draw(obstacleX, obstacleZ, 0, obstacleOrientation);
+      actualObstacle->draw(obstacleX, obstacleZ, 0, obstacleOrientation, false);
       glPopMatrix();
    }
 }

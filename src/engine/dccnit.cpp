@@ -2218,11 +2218,28 @@ void engine::renderScene()
    GLfloat min[3],max[3];
    GLfloat x[4],z[4];
 
+
+   glCullFace(GL_BACK);
+   glEnable(GL_CULL_FACE);
+
    glPushMatrix();
 
-   /* Draws World, doing view frustum culling */
-   actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                   gameCamera.getCameraZ(),visibleMatrix);
+   /* Draw The Floor with Stencil Buffer */
+   if(option->reflexionType != REFLEXIONS_NONE)
+   {
+      glDisable(GL_DEPTH_TEST);
+      glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+      glEnable(GL_STENCIL_TEST);
+      glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+      glStencilFunc(GL_ALWAYS, 1, 0xffffffff);
+      actualMap->drawFloor(gameCamera.getCameraX(),gameCamera.getCameraY(),
+                           gameCamera.getCameraZ(),visibleMatrix);
+      glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+      glEnable(GL_DEPTH_TEST);
+      glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+      glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+      glDisable(GL_STENCIL_TEST);
+   }
    
    /* Draw Playable Characters (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
@@ -2235,6 +2252,23 @@ void engine::renderScene()
                         per->posicaoLadoZ);
            glRotatef(per->orientacao,0,1,0);
            per->render();
+
+           /* Draw Reflection */
+           if(option->reflexionType >= REFLEXIONS_CHARACTERS)
+           {
+              glEnable(GL_STENCIL_TEST);
+              glCullFace(GL_FRONT);
+              glEnable(GL_NORMALIZE);
+              glPushMatrix();
+                 glScalef(1.0, -1.0, 1.0);
+                 per->render();
+              glPopMatrix();
+              glDisable(GL_NORMALIZE);
+              glCullFace(GL_FRONT);
+              glDisable(GL_STENCIL_TEST);
+           }
+
+
            /*per->RenderBoundingBox();
            glColor3f(0.6,0.1,0.1);
            glBegin(GL_POLYGON);
@@ -2245,7 +2279,7 @@ void engine::renderScene()
 
            glEnd();*/
          glPopMatrix();
-         
+
          per = (personagem*) per->proximo;
       }
    glPopMatrix();
@@ -2279,6 +2313,22 @@ void engine::renderScene()
                            per->posicaoLadoZ);
               glRotatef(per->orientacao,0,1,0);
               per->render();
+
+              /* Draw Reflection */
+              if(option->reflexionType >= REFLEXIONS_CHARACTERS)
+              {
+                 glEnable(GL_STENCIL_TEST);
+                 glCullFace(GL_FRONT);
+                 glEnable(GL_NORMALIZE);
+                 glPushMatrix();
+                    glScalef(1.0, -1.0, 1.0);
+                    per->render();
+                 glPopMatrix();
+                 glDisable(GL_NORMALIZE);
+                 glCullFace(GL_FRONT);
+                 glDisable(GL_STENCIL_TEST);
+              }
+
               /*per->RenderBoundingBox();
               glColor3f(0.6,0.1,0.1);
               glBegin(GL_POLYGON);
@@ -2292,6 +2342,24 @@ void engine::renderScene()
          }
          per = (personagem*) per->proximo;
       }
+   }
+   glDisable(GL_CULL_FACE);
+
+   /* Draw World, doing view frustum culling */
+   actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
+                   gameCamera.getCameraZ(),visibleMatrix);
+
+   /* Draw the Map Objects with Reflexions */
+   if(option->reflexionType >= REFLEXIONS_ALL)
+   {
+      glEnable(GL_STENCIL_TEST);
+      glEnable(GL_NORMALIZE);
+      glPushMatrix();
+        actualMap->drawObjects(gameCamera.getCameraX(),gameCamera.getCameraY(),
+                               gameCamera.getCameraZ(),visibleMatrix, true);
+      glPopMatrix();
+      glDisable(GL_NORMALIZE);
+      glDisable(GL_STENCIL_TEST);
    }
 }
 

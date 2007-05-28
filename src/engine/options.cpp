@@ -3,6 +3,7 @@
 #include "../lang/lang.h"
 #include "../sound/sound.h"
 #include "camera.h"
+#include "util.h"
 
 #define NM_PORTUGUES "Português"
 #define NM_INGLES    "English"
@@ -17,6 +18,8 @@ options::options(string file)
    FILE* arq;
    char buffer[256];
    int aux;
+
+   reflexionType = REFLEXIONS_NONE;
   
    timeLastOperation = SDL_GetTicks();
 
@@ -57,6 +60,12 @@ options::options(string file)
            fgets(buffer, sizeof(buffer), arq); 
            sscanf(buffer,"%d",&aux);
            enableGrass = (aux == 1);
+         break;
+         case 'R':
+            /* Read Reflexions Options */
+            fgets(buffer, sizeof(buffer), arq);
+            sscanf(buffer,"%d",&aux);
+            reflexionType = aux;
          break;
       }
    }
@@ -121,6 +130,9 @@ void options::Save()
       fprintf(arq,"Grass: 0\n");
    }
 
+   /* Reflexion */
+   fprintf(arq, "Reflexions: %d\n", reflexionType);
+
    language.ReloadFile(langNumber);
    fclose(arq);
 }
@@ -160,6 +172,33 @@ string options::languageName()
 /****************************************************************
  *                         languageName                         *
  ****************************************************************/
+string options::reflexionName()
+{
+   string saux;
+   switch(reflexionType)
+   {
+      case REFLEXIONS_NONE:
+      {
+         saux = language.OPTIONS_REFLECTS_NONE;
+         break;
+      }
+      case REFLEXIONS_CHARACTERS:
+      {
+         saux = language.OPTIONS_REFLECTS_CHARACTER;
+         break;
+      }
+      case REFLEXIONS_ALL: 
+      {
+         saux = language.OPTIONS_REFLECTS_ALL;
+         break;
+      }
+   }
+   return(saux);
+}
+
+/****************************************************************
+ *                         languageName                         *
+ ****************************************************************/
 string options::cameraName()
 {
    string saux;
@@ -186,7 +225,7 @@ void options::DisplayOptionsScreen(interface* interf)
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
-   window = interf->insertWindow(276,174,531,429,language.OPTIONS_TITLE.c_str(),
+   window = interf->insertWindow(276,169,531,434,language.OPTIONS_TITLE.c_str(),
                                  1,1);
 
    /* Music Things */
@@ -289,15 +328,35 @@ void options::DisplayOptionsScreen(interface* interf)
    window->objects->InserirFigura(214,174,40,112,
                                   "../data/texturas/options/particles.png");
 
+   /* Reflexions */
+   prevReflexion = reflexionType;
+   saux = reflexionName();
+   qt = window->objects->InserirQuadroTexto(8,203,145,220,0,
+                                            language.OPTIONS_REFLECTS.c_str());
+   qt->fonte = FMINI;
+   buttonReflDec = window->objects->InserirBotao(121,203,131,220,
+                                 window->Cores.corBot.R,
+                                 window->Cores.corBot.G,window->Cores.corBot.B,
+                                 "<",0,NULL);
+   txtReflexion = window->objects->InserirQuadroTexto(132,203,197,220,1,
+                                 saux.c_str());
+   txtReflexion->fonte = FMINI;
+   buttonReflSum = window->objects->InserirBotao(198,203,208,220,
+                                 window->Cores.corBot.R,
+                                 window->Cores.corBot.G,window->Cores.corBot.B,
+                                 ">",0,NULL);
+   window->objects->InserirFigura(212,203,40,220,
+                                  "../data/texturas/options/reflexions.png");
+
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(181,225,251,244, 
+   buttonConfirm = window->objects->InserirBotao(181,235,251,254, 
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  language.SKILL_CONFIRM.c_str(),1,NULL);
    
    /* Cancel Button */
-   buttonCancel = window->objects->InserirBotao(8,225,78,244, 
+   buttonCancel = window->objects->InserirBotao(8,235,78,254, 
                                  window->Cores.corBot.R,
                                  window->Cores.corBot.G,window->Cores.corBot.B,
                                  language.SKILL_CANCEL.c_str(),1,NULL);
@@ -306,7 +365,8 @@ void options::DisplayOptionsScreen(interface* interf)
    window->objects->InserirQuadroTexto(5,20,250,77,1,"");
    window->objects->InserirQuadroTexto(5,78,250,115,1,"");
    window->objects->InserirQuadroTexto(5,116,250,153,1,"");
-   window->objects->InserirQuadroTexto(5,154,250,214,1,"");
+   window->objects->InserirQuadroTexto(5,154,250,192,1,"");
+   window->objects->InserirQuadroTexto(5,193,250,230,1,"");
 
    
    /* Open Skill Window */
@@ -385,6 +445,22 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
             cameraNumber--;
          }
       }
+      /* Reflexin */
+      if(object == (Tobjeto*) buttonReflSum)
+      {
+         if(reflexionType < REFLEXIONS_ALL)
+         {
+            reflexionType++;
+         }
+      }
+      if(object == (Tobjeto*) buttonReflDec)
+      {
+         if(reflexionType > REFLEXIONS_NONE)
+         {
+            reflexionType--;
+         }
+      }
+
    }
    else if(eventInfo == BOTAOPRESSIONADO) 
    {
@@ -404,6 +480,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          sndfxVolume = prevSndfxVolume;
          langNumber  = prevLanguage;
          cameraNumber = prevCamera;
+         reflexionType = prevReflexion;
          interf->closeWindow(window);
          return(OPTIONSW_CANCEL);
       }
@@ -431,6 +508,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
 
    txtLanguage->texto = languageName();
    txtCamera->texto = cameraName();
+   txtReflexion->texto = reflexionName();
 
    window->Desenhar(0,0);
    return(OPTIONSW_OTHER);

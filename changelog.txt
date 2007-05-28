@@ -8,6 +8,9 @@
  - Fixed Bug on Remove no more used Models (the 
    last oe aren't removed);
  - Workspace for compiling at M$ Visual C++ 6;
+ - More Engine Optimizations;
+ - Smooth Camera Movements;
+ - Reflexions;
 
 ================================================
 |               Version 0.1.1                  |

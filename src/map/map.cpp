@@ -336,7 +336,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    incTex = (1.0 / SQUARE_DIVISIONS);
    incPos = (GLfloat) SQUARESIZE / (GLfloat)SQUARE_DIVISIONS;
 
-   glColor3f(1.0,1.0,1.0);
+   //glColor3f(1.0,1.0,1.0);
 
    textura = MapSquares[Xaux][Zaux].textura;
    glEnable(GL_TEXTURE_2D);
@@ -463,7 +463,12 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         lights.actualize();
 
         glEnable(GL_COLOR_MATERIAL);
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glColor4f(1.0, 1.0, 1.0, 0.8);
         drawFloor( cameraX, cameraY, cameraZ, matriz );
+        glDisable(GL_BLEND);
 
         textura = MapSquares[Xaux][Zaux].textura;
            glEnable(GL_TEXTURE_2D);
@@ -584,76 +589,86 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         {
            if(porta->object != NULL)
            {
-              porta->object->draw(porta->x,porta->z,0,porta->orientacao);
+              porta->object->draw(porta->x,porta->z,0,porta->orientacao, false);
            }
            porta = porta->proximo;
         }
 
         /* Draw objects */
-        int o;
-        GLfloat distancia;
-        GLfloat deltaX, deltaZ;
-        GLfloat deltaY2 = cameraY*cameraY;
-        GLfloat min[3], max[3];
-        GLfloat X[4], Z[4];
-        boundingBox bound;
+        drawObjects(cameraX, cameraY, cameraZ, matriz, false);
 
-        for(Xaux = 0; Xaux < x; Xaux++)
-        for(Zaux = 0; Zaux < z; Zaux++)
-        {
-           deltaX = (cameraX-MapSquares[Xaux][Zaux].x1+HALFSQUARESIZE);
-           deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+HALFSQUARESIZE);
-           distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) 
-                                                          / SQUARESIZE;
-           for(o=0;o<MAXOBJETOS;o++)
-           {
-              if( (MapSquares[Xaux][Zaux].objects[o] != NULL) && 
-                  (MapSquares[Xaux][Zaux].objectsDesenha[o] == 1))
-              {
-                 /* Do the Rotation of the Bounding Box */
-                 bound = 
-                 MapSquares[Xaux][Zaux].objects[o]->getBoundingBox();
-                  X[0] = bound.x1;
-                  Z[0] = bound.z1;
-                  X[1] = bound.x1;
-                  Z[1] = bound.z2; 
-                  X[2] = bound.x2;
-                  Z[2] = bound.z2;
-                  X[3] = bound.x2;
-                  Z[3] = bound.z1;
-                  rotTransBoundingBox(
-                                  MapSquares[Xaux][Zaux].objectsOrientation[o],
-                                  X, Z, MapSquares[Xaux][Zaux].Xobjects[o], 
-                                  bound.y1, bound.y2,
-                                  MapSquares[Xaux][Zaux].Zobjects[o],
-                                  min, max );
-
-                  /* Verify ViewFrustum Culling */
-                  if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
-                                     matriz))
-                  {
-                     glPushMatrix();
-                     glTranslatef(0.0, 
-                            getHeight(MapSquares[Xaux][Zaux].Xobjects[o],
-                                      MapSquares[Xaux][Zaux].Zobjects[o]) +
-                               MapSquares[Xaux][Zaux].objects[o]->posicaoLadoY,
-                                  0.0);
-                     MapSquares[Xaux][Zaux].objects[o]->draw(
-                             MapSquares[Xaux][Zaux].Xobjects[o],
-                             MapSquares[Xaux][Zaux].Zobjects[o],
-                             distancia,
-                             MapSquares[Xaux][Zaux].objectsOrientation[o]);
-                     glPopMatrix();
-                  }
-              }
-           }
-           MapSquares[Xaux][Zaux].visivel = 0;
-        }
       glDisable(GL_COLOR_MATERIAL);
       glColor3f(1.0,1.0,1.0);
 
 
       return(0);
+}
+
+/********************************************************************
+ *                            drawObjects                           *
+ ********************************************************************/
+void Map::drawObjects(GLfloat cameraX, GLfloat cameraY, 
+                      GLfloat cameraZ, GLfloat matriz[6][4],
+                      bool inverted)
+{
+   int o;
+   int Xaux, Zaux;
+   GLfloat distancia;
+   GLfloat deltaX, deltaZ;
+   GLfloat deltaY2 = cameraY*cameraY;
+   GLfloat min[3], max[3];
+   GLfloat X[4], Z[4];
+   boundingBox bound;
+
+   for(Xaux = 0; Xaux < x; Xaux++)
+   for(Zaux = 0; Zaux < z; Zaux++)
+   {
+      deltaX = (cameraX-MapSquares[Xaux][Zaux].x1+HALFSQUARESIZE);
+      deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+HALFSQUARESIZE);
+      distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / SQUARESIZE;
+      for(o=0;o<MAXOBJETOS;o++)
+      {
+          if( (MapSquares[Xaux][Zaux].objects[o] != NULL) && 
+              (MapSquares[Xaux][Zaux].objectsDesenha[o] == 1))
+          {
+            /* Do the Rotation of the Bounding Box */
+            bound = MapSquares[Xaux][Zaux].objects[o]->getBoundingBox();
+            X[0] = bound.x1;
+            Z[0] = bound.z1;
+            X[1] = bound.x1;
+            Z[1] = bound.z2; 
+            X[2] = bound.x2;
+            Z[2] = bound.z2;
+            X[3] = bound.x2;
+            Z[3] = bound.z1;
+            rotTransBoundingBox(MapSquares[Xaux][Zaux].objectsOrientation[o],
+                                X, Z, MapSquares[Xaux][Zaux].Xobjects[o], 
+                                bound.y1, bound.y2,
+                                MapSquares[Xaux][Zaux].Zobjects[o],
+                                min, max );
+
+            /* Verify ViewFrustum Culling */
+            if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
+                               matriz))
+            {
+               glPushMatrix();
+                glTranslatef(0.0, 
+                            getHeight(MapSquares[Xaux][Zaux].Xobjects[o],
+                                      MapSquares[Xaux][Zaux].Zobjects[o]) +
+                               MapSquares[Xaux][Zaux].objects[o]->posicaoLadoY,
+                                  0.0);
+                MapSquares[Xaux][Zaux].objects[o]->draw(
+                             MapSquares[Xaux][Zaux].Xobjects[o],
+                             MapSquares[Xaux][Zaux].Zobjects[o],
+                             distancia,
+                             MapSquares[Xaux][Zaux].objectsOrientation[o],
+                             inverted);
+               glPopMatrix();
+            }
+         }
+      }
+      MapSquares[Xaux][Zaux].visivel = 0;
+   }
 }
 
 /********************************************************************

@@ -5,24 +5,24 @@ npc ../data/mapas/teste2.map.npc
 PS ../data/mapas/teste2.map.par
 MUSICA ../data/music/musica5.ogg
 Outdoor: 1
-o ../data/models/building/house4.dcc
-o ../data/models/objetos/armas/kalashnikov.dcc
-o ../data/models/objetos/armas/beretta92.dcc
-o ../data/models/objetos/geral/barrel.dcc
-o ../data/models/building/house3.dcc
-o ../data/models/objetos/tumbas/cruz.dcc
-o ../data/models/objetos/tumbas/tomb1.dcc
-o ../data/models/objetos/tumbas/tomb_column.dcc
-o ../data/models/objetos/tumbas/lapide.dcc
-o ../data/models/objetos/tumbas/cruz.dcc
-o ../data/models/objetos/armas/scimitar.dcc
-o ../data/models/objetos/armas/uzi.dcc
 o ../data/models/objetos/geral/placa_pare.dcc
-t ../data/texturas/chao_grama_trilha2.png ../data/texturas/chao_grama_trilha2.png 67 94 24
-t ../data/texturas/chao_grama_trilha.png ../data/texturas/chao_grama_trilha.png 71 95 24
-t ../data/texturas/chao_grama2.jpg ../data/texturas/chao_grama2.jpg 54 102 49
-t ../data/texturas/chao_rocha3_grama2.png ../data/texturas/chao_rocha3_grama2.png 126 129 134
+o ../data/models/objetos/armas/uzi.dcc
+o ../data/models/objetos/armas/scimitar.dcc
+o ../data/models/objetos/tumbas/cruz.dcc
+o ../data/models/objetos/tumbas/lapide.dcc
+o ../data/models/objetos/tumbas/tomb_column.dcc
+o ../data/models/objetos/tumbas/tomb1.dcc
+o ../data/models/objetos/tumbas/cruz.dcc
+o ../data/models/building/house3.dcc
+o ../data/models/objetos/geral/barrel.dcc
+o ../data/models/objetos/armas/beretta92.dcc
+o ../data/models/objetos/armas/kalashnikov.dcc
+o ../data/models/building/house4.dcc
 t ../data/texturas/chao_rocha3.png ../data/texturas/chao_rocha3.png 128 130 136
+t ../data/texturas/chao_rocha3_grama2.png ../data/texturas/chao_rocha3_grama2.png 126 129 134
+t ../data/texturas/chao_grama2.jpg ../data/texturas/chao_grama2.jpg 54 102 49
+t ../data/texturas/chao_grama_trilha.png ../data/texturas/chao_grama_trilha.png 71 95 24
+t ../data/texturas/chao_grama_trilha2.png ../data/texturas/chao_grama_trilha2.png 67 94 24
 #Z: 0
 p 0,1.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_grama2.jpg
@@ -1112,11 +1112,11 @@ p 1,3.000000,12.000000,7.000000,4.000000
 ut ../data/texturas/chao_grama2.jpg
 p 1,4.000000,7.000000,8.000000,10.000000
 ut ../data/texturas/chao_grama2.jpg
-p 1,10.000000,8.000000,16.000000,6.000000
+p 1,10.000000,8.000000,11.000000,6.000000
 ut ../data/texturas/chao_grama2.jpg
 uo ../data/models/objetos/tumbas/tomb1.dcc 1:17,20:1075.136841,1231.270386:277:0
 uo ../data/models/objetos/tumbas/tomb_column.dcc 1:17,20:1035.355225,1221.525024:263:0
-p 1,6.000000,16.000000,17.000000,14.000000
+p 1,6.000000,11.000000,17.000000,14.000000
 ut ../data/texturas/chao_grama2.jpg
 uo ../data/models/objetos/tumbas/cruz.dcc 1:18,20:1135.104614,1228.028076:147:0
 p 1,14.000000,17.000000,0.000000,0.000000
@@ -1173,11 +1173,11 @@ p 1,7.000000,72.000000,65.000000,8.000000
 ut ../data/texturas/chao_rocha3_grama2.png
 uo ../data/models/objetos/tumbas/cruz.dcc 1:16,21:1023.242920,1331.399170:84:0
 uo ../data/models/objetos/tumbas/cruz.dcc 1:16,21:969.725708,1335.708252:141:0
-p 1,8.000000,65.000000,23.000000,16.000000
+p 1,8.000000,65.000000,23.000000,11.000000
 ut ../data/texturas/chao_rocha3_grama2.png
 uo ../data/models/objetos/tumbas/cruz.dcc 0:16,21:1023.242920,1331.399170:0:0
 uo ../data/models/objetos/tumbas/lapide.dcc 1:17,21:1084.942261,1321.143433:277:0
-p 1,16.000000,23.000000,34.000000,17.000000
+p 1,11.000000,23.000000,34.000000,17.000000
 ut ../data/texturas/chao_rocha3_grama2.png
 uo ../data/models/objetos/tumbas/lapide.dcc 1:18,21:1141.749756,1287.180420:294:0
 uo ../data/models/objetos/tumbas/lapide.dcc 0:17,21:1084.942261,1321.143433:0:0
@@ -1219,19 +1219,19 @@ p 0,1.000000,105.000000,89.000000,16.000000
 ut ../data/texturas/chao_rocha3.png
 p 0,16.000000,89.000000,148.000000,57.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,57.000000,148.000000,167.000000,45.000000
+p 0,57.000000,148.000000,189.000000,45.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,45.000000,167.000000,166.000000,28.000000
+p 0,45.000000,189.000000,170.000000,28.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,28.000000,166.000000,166.000000,14.000000
+p 0,28.000000,170.000000,184.000000,14.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,14.000000,166.000000,142.000000,64.000000
+p 0,14.000000,184.000000,252.000000,64.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,64.000000,142.000000,384.000000,72.000000
+p 0,64.000000,252.000000,312.000000,72.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,72.000000,384.000000,401.000000,65.000000
+p 0,72.000000,312.000000,319.000000,65.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,65.000000,401.000000,176.000000,23.000000
+p 0,65.000000,319.000000,176.000000,23.000000
 ut ../data/texturas/chao_rocha3.png
 p 0,23.000000,176.000000,86.000000,34.000000
 ut ../data/texturas/chao_rocha3.png
@@ -1272,19 +1272,19 @@ p 0,105.000000,141.000000,159.000000,89.000000
 ut ../data/texturas/chao_rocha3.png
 p 0,89.000000,159.000000,174.000000,148.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,148.000000,174.000000,145.000000,167.000000
+p 0,148.000000,174.000000,145.000000,189.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,167.000000,145.000000,128.000000,166.000000
+p 0,189.000000,145.000000,134.000000,170.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,166.000000,128.000000,148.000000,166.000000
+p 0,170.000000,134.000000,157.000000,184.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,166.000000,148.000000,190.000000,142.000000
+p 0,184.000000,157.000000,202.000000,252.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,142.000000,190.000000,405.000000,384.000000
+p 0,252.000000,202.000000,405.000000,312.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,384.000000,405.000000,435.000000,401.000000
+p 0,312.000000,405.000000,302.000000,319.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,401.000000,435.000000,258.000000,176.000000
+p 0,319.000000,302.000000,258.000000,176.000000
 ut ../data/texturas/chao_rocha3.png
 p 0,176.000000,258.000000,247.000000,86.000000
 ut ../data/texturas/chao_rocha3.png
@@ -1327,17 +1327,17 @@ p 0,159.000000,120.000000,158.000000,174.000000
 ut ../data/texturas/chao_rocha3.png
 p 0,174.000000,158.000000,150.000000,145.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,145.000000,150.000000,137.000000,128.000000
+p 0,145.000000,150.000000,137.000000,134.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,128.000000,137.000000,160.000000,148.000000
+p 0,134.000000,137.000000,160.000000,157.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,148.000000,160.000000,181.000000,190.000000
+p 0,157.000000,160.000000,181.000000,202.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,190.000000,181.000000,220.000000,405.000000
+p 0,202.000000,181.000000,220.000000,405.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,405.000000,220.000000,204.000000,435.000000
+p 0,405.000000,220.000000,204.000000,302.000000
 ut ../data/texturas/chao_rocha3.png
-p 0,435.000000,204.000000,251.000000,258.000000
+p 0,302.000000,204.000000,251.000000,258.000000
 ut ../data/texturas/chao_rocha3.png
 p 0,258.000000,251.000000,285.000000,247.000000
 ut ../data/texturas/chao_rocha3.png

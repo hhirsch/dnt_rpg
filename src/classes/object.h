@@ -32,8 +32,9 @@ class object: public thing
        * \param x -> X position 
        * \param z -> Z posotion
        * \param dist -> distance from observator (defines the LOD used)
-       * \param orientation -> orientation angle of the object */
-      void draw(float x, float z,GLfloat dist, float orientation);
+       * \param orientation -> orientation angle of the object
+       * \param inverted -> to invert the Y position */
+      void draw(float x, float z,GLfloat dist, float orientation, bool inverted);
 
       /*! Draw the 2D Model to Surface
        * \param x -> x value on surface

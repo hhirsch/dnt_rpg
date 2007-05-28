@@ -17,6 +17,7 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
     atexit(SDL_Quit);
 
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+    SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8);
    
     /*SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
