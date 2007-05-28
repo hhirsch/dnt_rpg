@@ -2345,10 +2345,6 @@ void engine::renderScene()
    }
    glDisable(GL_CULL_FACE);
 
-   /* Draw World, doing view frustum culling */
-   actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                   gameCamera.getCameraZ(),visibleMatrix);
-
    /* Draw the Map Objects with Reflexions */
    if(option->reflexionType >= REFLEXIONS_ALL)
    {
@@ -2361,6 +2357,11 @@ void engine::renderScene()
       glDisable(GL_NORMALIZE);
       glDisable(GL_STENCIL_TEST);
    }
+
+   /* Draw World, doing view frustum culling */
+   actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
+                   gameCamera.getCameraZ(),visibleMatrix);
+
 }
 
 /********************************************************************
