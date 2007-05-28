@@ -64,19 +64,19 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    }
    if (keys[SDLK_HOME]) // Maximize zoom
    {
-      d = ZOOMMAXIMO;
+      zoomAc = -20;
    }
    if(keys[SDLK_END]) // Minimize zoom
    {
-      d = ZOOMMINIMO;
+      zoomAc = 20;
    }   
    if(keys[SDLK_INSERT]) //Up view Max
    {
-      theta = 89;
+      thetaAc = 10;
    }
    if(keys[SDLK_DELETE]) //Down view Max
    {
-      theta = 0;
+      thetaAc = -10;
    }
 
    /* Mouse to move Camera */
