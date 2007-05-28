@@ -40,11 +40,11 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    /* Keys to Camera Moviments */
    if(keys[SDLK_UP])  // Increases Zoom
    {
-      zoomAc = -varCamera;
+      zoomAc = -(2*varCamera);
    }
    if(keys[SDLK_DOWN]) // Decreases Zoom
    {
-      zoomAc = varCamera;
+      zoomAc = (2*varCamera);
    }
    if(keys[SDLK_RIGHT]) // Rotate Camera CounterClockWise
    {
