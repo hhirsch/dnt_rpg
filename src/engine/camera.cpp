@@ -84,12 +84,12 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    /* Left Edge */
    if(x == 0)  // Turn Clockwise
    {
-      phi += 2; 
+      phiAc = varCamera; 
    }
    /* Right Edge */
    if(x == SCREEN_X-1) // Turn CounterClockWise
    {
-      phi -= 2; 
+      phiAc = -varCamera; 
    }
 
    /* Middle Mouse Button Rotation Control */
