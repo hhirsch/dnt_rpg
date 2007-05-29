@@ -99,6 +99,7 @@ void sun::positionOnHour()
       }
 
    }
+   defineShadowMatrix();
 }
 
 /*********************************************************************
@@ -229,5 +230,39 @@ void sun::setLight()
    glPopMatrix();
    
    glEnable(GL_LIGHT0);
+}
+
+/*********************************************************************
+ *                       defineShadowMatrix                          *
+ *********************************************************************/
+void sun::defineShadowMatrix()
+{
+   shadowMat[0][0] = where[1];
+   shadowMat[1][0] = 0.f - where[0];
+   shadowMat[2][0] = 0.f;
+   shadowMat[3][0] = 0.f;
+
+   shadowMat[0][1] = 0.f;
+   shadowMat[1][1] = 0.f;
+   shadowMat[2][1] = 0.f;
+   shadowMat[3][1] = 0.f;
+
+   shadowMat[0][2] = 0.f;
+   shadowMat[1][2] = 0.f - where[2];
+   shadowMat[2][2] = where[1];
+   shadowMat[3][2] = 0.f;
+
+   shadowMat[0][3] = 0.f;
+   shadowMat[1][3] = 0.f - 1.0;//where[3];
+   shadowMat[2][3] = 0.f;
+   shadowMat[3][3] = where[1];
+}
+
+/*********************************************************************
+ *                       mulShadowMatrix                          *
+ *********************************************************************/
+void sun::mulShadowMatrix()
+{
+   glMultMatrixf((GLfloat *) shadowMat);
 }
 

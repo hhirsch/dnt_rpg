@@ -528,13 +528,82 @@ void aniModel::render()
  *********************************************************************/
 void aniModel::renderShadow()
 {
-   //TODO disable the texture
    glPushMatrix();
       //glMultMatrixf(fShadowMatrix);
       glTranslatef(posicaoLadoX, posicaoLadoY, posicaoLadoZ);
       glRotatef(orientacao,0,1,0);
-      render();
-   glPopMatrix();
+
+  // get the renderer of the model
+  CalRenderer *pCalRenderer;
+  pCalRenderer = m_calModel->getRenderer();
+
+  glDisable(GL_TEXTURE);
+
+  if(!pCalRenderer->beginRendering()) return;
+  glShadeModel(GL_FLAT);
+
+  // we will use vertex arrays, so enable them
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_NORMAL_ARRAY);
+
+  // get the number of meshes
+  int meshCount;
+  meshCount = pCalRenderer->getMeshCount();
+
+  // render all meshes of the model
+  int meshId;
+  for(meshId = 0; meshId < meshCount; meshId++)
+  {
+    // get the number of submeshes
+    int submeshCount;
+    submeshCount = pCalRenderer->getSubmeshCount(meshId);
+
+    // render all submeshes of the mesh
+    int submeshId;
+    for(submeshId = 0; submeshId < submeshCount; submeshId++)
+    {
+      // select mesh and submesh for further data access
+      if(pCalRenderer->selectMeshSubmesh(meshId, submeshId))
+      {
+        
+        // get the transformed vertices of the submesh
+        static float meshVertices[30000][3];
+        int vertexCount;
+        vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
+
+        // get the transformed normals of the submesh
+        static float meshNormals[30000][3];
+        pCalRenderer->getNormals(&meshNormals[0][0]);
+
+        // get the faces of the submesh
+        static CalIndex meshFaces[50000][3];
+        int faceCount;
+        faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
+
+        // set the vertex and normal buffers
+        glVertexPointer(3, GL_FLOAT, 0, &meshVertices[0][0]);
+        glNormalPointer(GL_FLOAT, 0, &meshNormals[0][0]);
+
+        // draw the submesh
+        
+        if(sizeof(CalIndex)==2)
+			  glDrawElements(GL_TRIANGLES, faceCount * 3, 
+                                   GL_UNSIGNED_SHORT, &meshFaces[0][0]);
+		  else
+			  glDrawElements(GL_TRIANGLES, faceCount * 3, 
+                                     GL_UNSIGNED_INT, &meshFaces[0][0]);
+
+      }
+    }
+  }
+
+  // clear vertex array state
+  glDisableClientState(GL_NORMAL_ARRAY);
+  glDisableClientState(GL_VERTEX_ARRAY);
+
+  pCalRenderer->endRendering();
+  glShadeModel(GL_SMOOTH);
+  glPopMatrix();
 }
 
 /*********************************************************************

@@ -880,6 +880,7 @@ void engine::Init(SDL_Surface *screen)
 
    /* ShadowMap */
    shadowMap.init();
+   glPolygonOffset(-2.0, -1.0);
 
    /* Details Definition */
    glDepthFunc(GL_LEQUAL);
@@ -2236,11 +2237,9 @@ void engine::renderScene()
                            gameCamera.getCameraZ(),visibleMatrix);
       glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
       glEnable(GL_DEPTH_TEST);
-      glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
-      glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
       glDisable(GL_STENCIL_TEST);
    }
-   
+
    /* Draw Playable Characters (PCs) */
       personagem* per = (personagem*) PCs->primeiro->proximo;
       int aux;
@@ -2257,6 +2256,8 @@ void engine::renderScene()
            if(option->reflexionType >= REFLEXIONS_CHARACTERS)
            {
               glEnable(GL_STENCIL_TEST);
+              glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+              glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
               glCullFace(GL_FRONT);
               glEnable(GL_NORMALIZE);
               glPushMatrix();
@@ -2265,6 +2266,28 @@ void engine::renderScene()
               glPopMatrix();
               glDisable(GL_NORMALIZE);
               glCullFace(GL_FRONT);
+              glDisable(GL_STENCIL_TEST);
+           }
+         glPopMatrix();
+
+           /* Draw Projective Shadow */
+           if(true)
+           {
+              glEnable(GL_STENCIL_TEST);
+              glStencilFunc(GL_EQUAL, 1, 0xffffffff);
+              glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+              glEnable(GL_POLYGON_OFFSET_FILL);
+              glEnable(GL_BLEND);
+              glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+              glDisable(GL_LIGHTING);  
+              glColor4f(0.0, 0.0, 0.0, 0.5);
+              glPushMatrix();
+                 gameSun->mulShadowMatrix();
+                 per->renderShadow();
+              glPopMatrix();
+              glDisable(GL_BLEND);
+              glEnable(GL_LIGHTING);
+              glDisable(GL_POLYGON_OFFSET_FILL);
               glDisable(GL_STENCIL_TEST);
            }
 
@@ -2278,8 +2301,6 @@ void engine::renderScene()
               glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
 
            glEnd();*/
-         glPopMatrix();
-
          per = (personagem*) per->proximo;
       }
    glPopMatrix();
@@ -2318,6 +2339,8 @@ void engine::renderScene()
               if(option->reflexionType >= REFLEXIONS_CHARACTERS)
               {
                  glEnable(GL_STENCIL_TEST);
+                 glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+                 glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
                  glCullFace(GL_FRONT);
                  glEnable(GL_NORMALIZE);
                  glPushMatrix();
@@ -2349,6 +2372,8 @@ void engine::renderScene()
    if(option->reflexionType >= REFLEXIONS_ALL)
    {
       glEnable(GL_STENCIL_TEST);
+      glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+      glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
       glEnable(GL_NORMALIZE);
       glPushMatrix();
         actualMap->drawObjects(gameCamera.getCameraX(),gameCamera.getCameraY(),

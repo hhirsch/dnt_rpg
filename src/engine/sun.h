@@ -37,6 +37,9 @@ class sun
       /*! Set the sun light to the current state */
       void setLight();
 
+      /*! Multiply the Matrix by the currenct Shadow Matrix. */
+      void mulShadowMatrix();
+
    private:
       GLfloat quadricAttenuation;   /**< Quadric Attenuation Light Value */
       GLfloat constantAttenuation;  /**< Constant Attenuation Light Value */
@@ -45,6 +48,8 @@ class sun
       GLfloat actualColor[4];       /**< Actual Sun Emiting Color */
       GLfloat where[4];             /**< Actual Sun Sky Position */
       GLfloat rotation;             /**< Actual Sun Spin to surface */
+
+      GLfloat shadowMat[4][4];      /**< Actual Shadow Matrix */
 
       GLuint  sunTexture;           /**< Current Sun Texture */
       GLuint  moonTexture;          /**< Current Moon Texture */
@@ -57,6 +62,8 @@ class sun
       /*! Set the current Color of the sun, based on the rotation */
       void colorOnHour();
 
+      /*! Define the shadow matrix */
+      void defineShadowMatrix();
 
       /*! Verifies if the sun is on visible time (born -> death)
        *  \return true if is in visible time, false otherwise.*/
