@@ -641,11 +641,22 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
             Z[2] = bound.z2;
             X[3] = bound.x2;
             Z[3] = bound.z1;
-            rotTransBoundingBox(MapSquares[Xaux][Zaux].objectsOrientation[o],
-                                X, Z, MapSquares[Xaux][Zaux].Xobjects[o], 
-                                bound.y1, bound.y2,
-                                MapSquares[Xaux][Zaux].Zobjects[o],
-                                min, max );
+            if(inverted)
+            {
+               rotTransBoundingBox(MapSquares[Xaux][Zaux].objectsOrientation[o],
+                                   X, Z, MapSquares[Xaux][Zaux].Xobjects[o], 
+                                   -bound.y2, -bound.y1,
+                                   MapSquares[Xaux][Zaux].Zobjects[o],
+                                   min, max );
+            }
+            else
+            {
+               rotTransBoundingBox(MapSquares[Xaux][Zaux].objectsOrientation[o],
+                                   X, Z, MapSquares[Xaux][Zaux].Xobjects[o], 
+                                   bound.y1, bound.y2,
+                                   MapSquares[Xaux][Zaux].Zobjects[o],
+                                   min, max );
+            }
 
             /* Verify ViewFrustum Culling */
             if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
