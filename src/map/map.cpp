@@ -479,7 +479,46 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         glColor3f(1.0,1.0,1.0);
 
         /* Draw Walls */
-        muro* maux = muros;
+        drawWalls(cameraX, cameraY, cameraZ, matriz, false);
+
+        /* Draw Roads */
+        /*if(roads)
+        {
+           roads->draw();
+        }*/
+
+
+        /* Draw Doors */
+        door* porta = portas;
+        while(porta != NULL)
+        {
+           if(porta->object != NULL)
+           {
+              porta->object->draw(porta->x,porta->z,0,porta->orientacao, false);
+           }
+           porta = porta->proximo;
+        }
+
+        /* Draw objects */
+        drawObjects(cameraX, cameraY, cameraZ, matriz, false);
+
+      glDisable(GL_COLOR_MATERIAL);
+      glColor3f(1.0,1.0,1.0);
+
+
+      return(0);
+}
+
+/********************************************************************
+ *                             drawWalls                            *
+ ********************************************************************/
+void Map::drawWalls(GLfloat cameraX, GLfloat cameraY, 
+                    GLfloat cameraZ, GLfloat matriz[6][4],
+                    bool inverted)
+{
+   muro* maux = muros;
+   int textura = -1;
+   bool visible = false;
         int fezMeioFio = 0;
         GLfloat altura = MUROALTURA;
         if(!maux)
@@ -508,8 +547,17 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
               glBegin(GL_QUADS);
            }
-           if(quadradoVisivel(maux->x1,0,maux->z1,maux->x2,
-                              altura,maux->z2,matriz))
+           if(inverted)
+           {
+              visible = quadradoVisivel(maux->x1,-altura,maux->z1,maux->x2,
+                                        0,maux->z2,matriz);
+           }
+           else
+           {
+              visible = quadradoVisivel(maux->x1,0,maux->z1,maux->x2,
+                                        altura,maux->z2,matriz);
+           }
+           if(visible)
            {
               double X = (maux->x2-maux->x1) / maux->dX;
               double Z = (maux->z2-maux->z1) / maux->dZ;
@@ -521,9 +569,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               glTexCoord2f(X,Y);
               glVertex3f(maux->x2,altura,maux->z1);
               glTexCoord2f(X,0);
-              glVertex3f(maux->x2,-1,maux->z1);
+              glVertex3f(maux->x2,0,maux->z1);
               glTexCoord2f(0,0);
-              glVertex3f(maux->x1,-1,maux->z1);
+              glVertex3f(maux->x1,0,maux->z1);
            /* Back Face */
               glNormal3i(0,0,-1);
               glTexCoord2f(0,Y);
@@ -531,9 +579,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               glTexCoord2f(X,Y);
               glVertex3f(maux->x2,altura,maux->z2);
               glTexCoord2f(X,0);
-              glVertex3f(maux->x2,-1,maux->z2);
+              glVertex3f(maux->x2,0,maux->z2);
               glTexCoord2f(0,0);
-              glVertex3f(maux->x1,-1,maux->z2);
+              glVertex3f(maux->x1,0,maux->z2);
            /* Left Face */
               glNormal3i(-1,0,0);
               glTexCoord2f(Y,0);
@@ -541,9 +589,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               glTexCoord2f(Y,Z);
               glVertex3f(maux->x1,altura,maux->z2);
               glTexCoord2f(0,Z);
-              glVertex3f(maux->x1,-1,maux->z2);
+              glVertex3f(maux->x1,0,maux->z2);
               glTexCoord2f(0,0);
-              glVertex3f(maux->x1,-1,maux->z1);
+              glVertex3f(maux->x1,0,maux->z1);
            /* Right Face */
               glNormal3i(1,0,0);
               glTexCoord2f(Y,0);
@@ -551,9 +599,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
               glTexCoord2f(Y,Z);
               glVertex3f(maux->x2,altura,maux->z2);
               glTexCoord2f(0,Z);
-              glVertex3f(maux->x2,-1,maux->z2);
+              glVertex3f(maux->x2,0,maux->z2);
               glTexCoord2f(0,0);
-              glVertex3f(maux->x2,-1,maux->z1);
+              glVertex3f(maux->x2,0,maux->z1);
            /* Upper Face */
               glNormal3i(0,1,0);
               glTexCoord2f(0,0);
@@ -575,33 +623,6 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         }
         glEnd();
         glDisable(GL_TEXTURE_2D);
-
-        /* Draw Roads */
-        /*if(roads)
-        {
-           roads->draw();
-        }*/
-
-
-        /* Draw Doors */
-        door* porta = portas;
-        while(porta != NULL)
-        {
-           if(porta->object != NULL)
-           {
-              porta->object->draw(porta->x,porta->z,0,porta->orientacao, false);
-           }
-           porta = porta->proximo;
-        }
-
-        /* Draw objects */
-        drawObjects(cameraX, cameraY, cameraZ, matriz, false);
-
-      glDisable(GL_COLOR_MATERIAL);
-      glColor3f(1.0,1.0,1.0);
-
-
-      return(0);
 }
 
 /********************************************************************

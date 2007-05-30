@@ -2368,7 +2368,7 @@ void engine::renderScene()
    }
    glDisable(GL_CULL_FACE);
 
-   /* Draw the Map Objects with Reflexions */
+   /* Draw the Map Objects && Walls with Reflexions */
    if(option->reflexionType >= REFLEXIONS_ALL)
    {
       glEnable(GL_STENCIL_TEST);
@@ -2378,6 +2378,11 @@ void engine::renderScene()
       glPushMatrix();
         actualMap->drawObjects(gameCamera.getCameraX(),gameCamera.getCameraY(),
                                gameCamera.getCameraZ(),visibleMatrix, true);
+      glPopMatrix();
+      glPushMatrix();
+         glScalef(1.0,-1.0,1.0);
+         actualMap->drawWalls(gameCamera.getCameraX(),gameCamera.getCameraY(),
+                             gameCamera.getCameraZ(),visibleMatrix, true);
       glPopMatrix();
       glDisable(GL_NORMALIZE);
       glDisable(GL_STENCIL_TEST);
