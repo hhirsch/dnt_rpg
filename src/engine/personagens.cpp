@@ -64,6 +64,18 @@ personagem::~personagem()
 }
 
 /*********************************************************************
+ *                           newInventory                            *
+ *********************************************************************/
+void personagem::newInventory()
+{
+   if(inventories)
+   {
+      delete(inventories);
+   }
+   inventories = new inventory;
+}
+
+/*********************************************************************
  *                        setConversationFile                        *
  *********************************************************************/
 void personagem::setConversationFile(string file)

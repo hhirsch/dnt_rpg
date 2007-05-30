@@ -121,8 +121,6 @@ modelList::modelList()
  ********************************************************/
 modelList::~modelList()
 {
-   printf("Destructor\n");
-   printAll();
    model3d* mdl;
    int i;
    for(i=0; i<totalModels; i++)
@@ -133,7 +131,6 @@ modelList::~modelList()
    }
    first = NULL;
    totalModels = 0;
-   printAll();
 }
 
 /********************************************************
@@ -225,8 +222,6 @@ model3d* modelList::getFirst()
  ********************************************************/
 void modelList::removeUnusedModels()
 {
-   printf("removeUnusedModels\n");
-   printAll();
    model3d* mdl;
    model3d* oth;
 
@@ -247,7 +242,6 @@ void modelList::removeUnusedModels()
          removeModel(first);
       }
    }
-   printAll();
 }
 
 /********************************************************

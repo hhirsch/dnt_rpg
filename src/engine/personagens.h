@@ -138,6 +138,10 @@ class personagem: public Tobjeto, public aniModel
       /*! Call the thing attack animation */
        void callAttackAnimation();
 
+       /*! Delete the Existed Inventory and Create a new One. 
+        *  Usually called after death*/
+       void newInventory();
+
        string getCharacterFile(){return(characterFile);};
 
        void setCharacterFile(string fileName){characterFile = fileName;}

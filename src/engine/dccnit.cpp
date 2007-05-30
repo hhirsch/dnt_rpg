@@ -3032,11 +3032,17 @@ int engine::Run(SDL_Surface *surface)
               engineMode = ENGINE_MODE_REAL_TIME;
               gui->closeAllWindows();
 
+              /* Clear the Inventary */
+              PCs->getActiveCharacter()->newInventory();
+
+              /* Clear the Actual Map */
               if(actualMap)
               {
                  delete(actualMap);
                  actualMap = NULL;
               }
+
+              /* Clear the Models List */
               if(models)
               {
                  delete(models);
