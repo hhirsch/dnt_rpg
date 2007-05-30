@@ -2219,14 +2219,13 @@ void engine::renderScene()
    GLfloat min[3],max[3];
    GLfloat x[4],z[4];
 
-
    glCullFace(GL_BACK);
    glEnable(GL_CULL_FACE);
 
    glPushMatrix();
 
    /* Draw The Floor with Stencil Buffer */
-   if(option->reflexionType != REFLEXIONS_NONE)
+   if( (option->reflexionType != REFLEXIONS_NONE) && (!actualMap->isOutdoor()))
    {
       glDisable(GL_DEPTH_TEST);
       glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
@@ -2253,7 +2252,8 @@ void engine::renderScene()
            per->render();
 
            /* Draw Reflection */
-           if(option->reflexionType >= REFLEXIONS_CHARACTERS)
+           if( (option->reflexionType >= REFLEXIONS_CHARACTERS) && 
+               (!actualMap->isOutdoor()) )
            {
               glEnable(GL_STENCIL_TEST);
               glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
@@ -2271,7 +2271,7 @@ void engine::renderScene()
          glPopMatrix();
 
            /* Draw Projective Shadow */
-           if(true)
+           if(false)
            {
               glEnable(GL_STENCIL_TEST);
               glStencilFunc(GL_EQUAL, 1, 0xffffffff);
@@ -2369,7 +2369,7 @@ void engine::renderScene()
    glDisable(GL_CULL_FACE);
 
    /* Draw the Map Objects && Walls with Reflexions */
-   if(option->reflexionType >= REFLEXIONS_ALL)
+   if( (option->reflexionType >= REFLEXIONS_ALL) && (!actualMap->isOutdoor()) )
    {
       glEnable(GL_STENCIL_TEST);
       glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
