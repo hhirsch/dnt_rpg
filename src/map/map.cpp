@@ -487,18 +487,6 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
            roads->draw();
         }*/
 
-
-        /* Draw Doors */
-        door* porta = portas;
-        while(porta != NULL)
-        {
-           if(porta->object != NULL)
-           {
-              porta->object->draw(porta->x,porta->z,0,porta->orientacao, false);
-           }
-           porta = porta->proximo;
-        }
-
         /* Draw objects */
         drawObjects(cameraX, cameraY, cameraZ, matriz, false);
 
@@ -516,6 +504,7 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
                     GLfloat cameraZ, GLfloat matriz[6][4],
                     bool inverted)
 {
+   glColor3f(1.0,1.0,1.0);
    muro* maux = muros;
    int textura = -1;
    bool visible = false;
@@ -700,6 +689,17 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
          }
       }
       MapSquares[Xaux][Zaux].visivel = 0;
+   }
+
+   /* Draw Doors */
+   door* porta = portas;
+   while(porta != NULL)
+   {
+      if(porta->object != NULL)
+      {
+         porta->object->draw(porta->x,porta->z,0,porta->orientacao, inverted);
+      }
+      porta = porta->proximo;
    }
 }
 
