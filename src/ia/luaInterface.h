@@ -21,6 +21,12 @@ class luaInterface
     void loadModule(string m);
     int getTop();
     void pop(int n);
+    void getGlobal(string name);
+    void getField(int index, string field);
+    void call(int numOfArgs, int numOfReturns);
+    void push(string s);
+    void push(int i);
+    char* getValue();
 
   private:
     int error;

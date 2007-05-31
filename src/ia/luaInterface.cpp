@@ -16,7 +16,8 @@ luaInterface::~luaInterface()
 void luaInterface::loadModule(string m)
 {
   module = m;
-  error = luaL_loadfile(state, module.c_str());
+  error = luaL_dofile(state, module.c_str());
+  printf("error = %d\n", error);
   if (error == 0)
   {
     printf("Module %s loaded succesfully\n", module.c_str());
@@ -31,4 +32,34 @@ int luaInterface::getTop()
 void luaInterface::pop(int n)
 {
   lua_pop(state, n);
+}
+
+void luaInterface::getGlobal(string name)
+{
+  lua_getglobal(state, name.c_str());
+}
+
+void luaInterface::getField(int index, string field)
+{
+  lua_getfield(state, index, field.c_str());
+}
+
+void luaInterface::call(int numOfArgs, int numOfReturns)
+{
+  lua_call(state, numOfArgs, numOfReturns);
+}
+
+void luaInterface::push(string s)
+{
+  lua_pushstring(state, s.c_str());
+}
+
+void luaInterface::push(int i)
+{
+  lua_pushinteger(state, i);
+}
+
+char* luaInterface::getValue()
+{
+  return (char*)lua_tostring(state, -1);
 }

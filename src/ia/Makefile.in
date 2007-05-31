@@ -7,7 +7,7 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o pattAgent.o potentAgent.o 
+OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o luaInterface.o pattAgent.o potentAgent.o 
 all: $(OBJS)
 
 teste: fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o teste.cpp
