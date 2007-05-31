@@ -55,6 +55,10 @@ potentAgent.o: potentAgent.cpp potentAgent.h
 	@$(CPP) $(CFLAGS) potentAgent.cpp -o potentAgent.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+luaInterface.o: luaInterface.cpp luaInterface.h
+	@printf "Making luaInterface.o... "
+	@$(CPP) $(CFLAGS) luaInterface.cpp -o luaInterface.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
 	@printf "Cleaning AI Bin Files... "
