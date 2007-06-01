@@ -538,6 +538,10 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    double profundidade = 0.012;
    janela* jan = (janela*) ljan->primeiro->proximo;
 
+   glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glColor4f(1.0, 1.0, 1.0, 0.9);
+        
    if(ljan->janelaAtiva == NULL)
      return;
    
@@ -567,6 +571,9 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    AtualizaTela2D(ljan->janelaAtiva->caraTextura,proj,modl,viewPort,
                      ljan->janelaAtiva->x1,ljan->janelaAtiva->y1,
                      ljan->janelaAtiva->x2,ljan->janelaAtiva->y2, 0.011);
+
+   glDisable(GL_BLEND);
+   glColor4f(1.0,1.0,1.0,1.0);
 }
 
 /*********************************************************************
