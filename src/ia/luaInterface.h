@@ -1,17 +1,18 @@
 #ifndef _luaInterface_h
 #define _luaInterface_h
 
+extern "C"
+{
+  #include "lua.h"
+  #include "lauxlib.h"
+  #include "lualib.h"
+}
+
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
 using namespace std;
 
-extern "C"
-{
-  #include <lua.h>
-  #include <lauxlib.h>
-  #include <lualib.h>
-}
 
 /*! The Interface of the Engine with LUA Scripts */
 class luaInterface
