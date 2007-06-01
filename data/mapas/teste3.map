@@ -2,6 +2,7 @@ T 5X5
 # Made by DccNiTghtmare's MapEditor, v0.0.3
 npc ../data/mapas/teste3.map.npc
 MUSICA ../data/music/musica13.ogg
+light ../data/mapas/teste3.map.lgh
 Outdoor: 0
 o ../data/models/objetos/armas/kalashnikov_pequena.dcc
 o ../data/models/objetos/armas/adaga.dcc
