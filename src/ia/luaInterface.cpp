@@ -59,7 +59,7 @@ void luaInterface::push(int i)
   lua_pushinteger(state, i);
 }
 
-char* luaInterface::getValue()
+string luaInterface::getValue()
 {
-  return (char*)lua_tostring(state, -1);
+  return(lua_tostring(state, -1));
 }
