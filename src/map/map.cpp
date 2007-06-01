@@ -466,7 +466,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glColor4f(1.0, 1.0, 1.0, 0.8);
+        glColor4f(1.0, 1.0, 1.0, 0.9);
         drawFloor( cameraX, cameraY, cameraZ, matriz );
         glDisable(GL_BLEND);
 
