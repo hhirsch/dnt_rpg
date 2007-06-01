@@ -16,7 +16,7 @@ part1::part1(float cX,float cY,float cZ, string fileName):
    centerZ = cZ;
    actualParticles = 0;
    actualPlanes = 0;
-   partTexture = LoadTexture("../data/particles/part2.png");
+   partTexture = LoadTexture("../data/particles/water.png");
 }
 
 /****************************************************************************

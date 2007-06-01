@@ -3,14 +3,11 @@
 ================================================
  - Meteors and FireSpheres;
  - Using LUA for AI Scripts;
- - Optimized the Map Render by puting all floor
-   textures in one BIG OpenGL texture runtime;
- - Fixed Bug on Remove no more used Models (the 
-   last oe aren't removed);
+ - Fixed Bug on Remove no more used Models;
  - Workspace for compiling at M$ Visual C++ 6;
  - More Engine Optimizations;
  - Smooth Camera Movements;
- - Reflexions;
+ - Indoor Reflexions;
 
 ================================================
 |               Version 0.1.1                  |
