@@ -185,6 +185,7 @@ void mapLights::actualize()
             glLightfv(light[l].Glight, GL_SPOT_DIRECTION,
                       light[l].light_direction);
             glLightf(light[l].Glight, GL_SPOT_CUTOFF, light[l].cutOff);
+            glLightf(light[l].Glight, GL_SPOT_EXPONENT, 2.0);
          }
          /* Atenuation */
          if(light[l].enableAtenuation)
