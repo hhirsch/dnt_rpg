@@ -614,7 +614,7 @@ void editor::draw()
    /* Redefine camera position */
    gui->cameraPos();
    AtualizaFrustum( visibleMatrix, proj, modl);
-   gameSun->actualizeHourOfDay(hour);
+   gameSun->actualizeHourOfDay(hour, 0.0, 0.0);
    gameSun->setLight();
    /* Draw Things */
    if(mapOpened)

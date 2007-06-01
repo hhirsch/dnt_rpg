@@ -53,6 +53,7 @@
 #define FARVIEW        4096           /**< FarView constant */
 
 #define HALFFARVIEW    FARVIEW / 2.0  /**< Half FarView Value */
+#define HALFFARVIEW2   HALFFARVIEW * HALFFARVIEW /**< Square Half Farview */
 
 /********************************************************************
  *                      Screen's constants                          *

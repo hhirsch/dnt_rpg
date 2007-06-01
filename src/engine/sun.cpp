@@ -15,12 +15,12 @@ sun::sun(float hour, float farViewX, float farViewZ)
    quadricAttenuation = 0.0;
    linearAttenuation = 0.0;
 
-   where[0] = HALFFARVIEW-5000;
+   where[0] = 0.0;
    where[1] = 0.0;
-   where[2] = 0.0;//HALFFARVIEW-5000;
-   where[3] = 1.0;
+   where[2] = 0.0;
+   where[3] = 0.0;
    
-   positionOnHour();
+   positionOnHour(0.0,0.0);
 
    SDL_Surface* img = IMG_Load("../data/texturas/sky/sun.png");
    if(!img)
@@ -66,18 +66,21 @@ bool sun::visibleTime()
 /*********************************************************************
  *                           positionOnHour                          *
  *********************************************************************/
-void sun::positionOnHour()
+void sun::positionOnHour(float posX, float posZ)
 {
    if(visibleTime())
    {
       rotation = SUN_EQU_B * curHour + SUN_EQU_C;
       where[1] = (sin(deg2Rad(rotation / 4.0)))*(HALFFARVIEW-1);
-      if( ( (rotation > 90) && (where[0] > 0) ) ||
+
+      where[0] = (sin(deg2Rad(rotation-90))*(HALFFARVIEW-1)) + posX;
+      where[2] = posZ;
+      /*if( ( (rotation > 90) && (where[0] > 0) ) ||
           ( (rotation < 90) && (where[0] < 0) ) )
       {
          where[0] *= -1;
          where[2] *= -1;
-      }
+      }*/
    }
    else
    {
@@ -99,6 +102,7 @@ void sun::positionOnHour()
       }
 
    }
+   //printf("X: %.3f Y: %.3f Z: %.3f\n", where[0], where[1], where[2]);
    defineShadowMatrix();
 }
 
@@ -145,10 +149,10 @@ void sun::colorOnHour()
 /*********************************************************************
  *                        actualizeHourOfDay                         *
  *********************************************************************/
-void sun::actualizeHourOfDay(float hour)
+void sun::actualizeHourOfDay(float hour, float posX, float posZ)
 {
    curHour = hour;
-   positionOnHour();
+   positionOnHour(posX, posZ);
    colorOnHour();
 }
 
@@ -176,7 +180,7 @@ void sun::drawSun()
       size = 50;
    }
    glPushMatrix();
-      glTranslatef(where[0]-3000, where[1], /*where[2]-4000*/0.0);
+      glTranslatef(where[0], where[1], where[2]);
       glBegin(GL_QUADS);
       glTexCoord2f(0,0);
       glVertex3f(0, size, -size);

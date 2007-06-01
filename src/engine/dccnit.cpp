@@ -2222,10 +2222,13 @@ void engine::renderScene()
    glCullFace(GL_BACK);
    glEnable(GL_CULL_FACE);
 
+   bool shadow = true;
+
    glPushMatrix();
 
    /* Draw The Floor with Stencil Buffer */
-   if( (option->reflexionType != REFLEXIONS_NONE) && (!actualMap->isOutdoor()))
+   if( ((option->reflexionType != REFLEXIONS_NONE) && (!actualMap->isOutdoor()))
+       || (shadow))
    {
       glDisable(GL_DEPTH_TEST);
       glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
@@ -2271,7 +2274,7 @@ void engine::renderScene()
          glPopMatrix();
 
            /* Draw Projective Shadow */
-           if(false)
+           if(shadow)
            {
               glEnable(GL_STENCIL_TEST);
               glStencilFunc(GL_EQUAL, 1, 0xffffffff);
@@ -2404,6 +2407,8 @@ void engine::renderNoShadowThings()
    if(actualMap->isOutdoor())
    {
       glPushMatrix();
+         glTranslatef(activeCharacter->posicaoLadoX, 0.0,
+                      activeCharacter->posicaoLadoZ);
          gameSky->draw(actualMap, gameSun->getRotation());
       glPopMatrix();
    }
@@ -2573,7 +2578,8 @@ void engine::drawWithShadows()
    glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
    /* Sun Actualization */
-   gameSun->actualizeHourOfDay(hour);
+   gameSun->actualizeHourOfDay(hour, PCs->getActiveCharacter()->posicaoLadoX,
+                               PCs->getActiveCharacter()->posicaoLadoZ);
    glLoadIdentity();
    gameCamera.lookAt();
    /* Atualize to culling and to GUI */
@@ -2653,7 +2659,8 @@ void engine::drawWithoutShadows()
                             gameCamera.getDeltaY());
 
    /* Sun Definition */
-   gameSun->actualizeHourOfDay(hour);
+   gameSun->actualizeHourOfDay(hour, PCs->getActiveCharacter()->posicaoLadoX,
+                               PCs->getActiveCharacter()->posicaoLadoZ);
    gameSun->setLight();
    
    /* Atualize to culling and to GUI */
@@ -3032,7 +3039,7 @@ int engine::Run(SDL_Surface *surface)
               engineMode = ENGINE_MODE_REAL_TIME;
               gui->closeAllWindows();
 
-              /* Clear the Inventary */
+              /* Clear the Inventory */
               PCs->getActiveCharacter()->newInventory();
 
               /* Clear the Actual Map */

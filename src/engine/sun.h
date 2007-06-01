@@ -20,8 +20,10 @@ class sun
       ~sun();
 
       /*! Actualize Sun Itensity, based on hour of the day 
-       * \param hour -> current hour of day */
-      void actualizeHourOfDay(float hour);
+       * \param hour -> current hour of day
+       * \param posX -> character X position
+       * \param posZ -> character Z position */
+      void actualizeHourOfDay(float hour, float posX, float posZ);
 
       /*! Draw the Sun to its position */
       void drawSun();
@@ -56,8 +58,10 @@ class sun
 
       float curHour;                /**< Current Hour of Day to Sun */
 
-      /*! Set the current Postion of the sun, based on hour of the day */
-      void positionOnHour();
+      /*! Set the current Postion of the sun, based on hour of the day
+       * \param posX -> character X position
+       * \param posZ -> character Z position*/
+      void positionOnHour(float posX, float posZ);
 
       /*! Set the current Color of the sun, based on the rotation */
       void colorOnHour();
