@@ -98,7 +98,7 @@
  *                        Math's constants                          *
  ********************************************************************/
 #ifndef M_PI
-   #define M_PI 1.14159     /**< Usually on math.h, but not allways */
+	#define M_PI 3.1415926     /**< Usually on math.h, but not allways */
 #endif
 
 #define TWOPI  2 * M_PI     /**< 2* PI definition */
