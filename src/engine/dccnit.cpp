@@ -2222,7 +2222,7 @@ void engine::renderScene()
    glCullFace(GL_BACK);
    glEnable(GL_CULL_FACE);
 
-   bool shadow = true;
+   bool shadow = actualMap->isOutdoor();
 
    glPushMatrix();
 
@@ -2575,71 +2575,6 @@ void engine::renderGUI()
  *********************************************************************/
 void engine::drawWithShadows()
 {
-   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-   /* Sun Actualization */
-   gameSun->actualizeHourOfDay(hour, PCs->getActiveCharacter()->posicaoLadoX,
-                               PCs->getActiveCharacter()->posicaoLadoZ);
-   glLoadIdentity();
-   gameCamera.lookAt();
-   /* Atualize to culling and to GUI */
-   AtualizaFrustum(visibleMatrix,proj,modl);
-
-   /* First Pass, render at the light View */
-      glEnable(GL_DEPTH_TEST);
-      //glDisable(GL_COLOR);
-      GLfloat lightPos[4];
-      gameSun->getPosition(lightPos);
-      shadowMap.defineLightView(lightPos[0], lightPos[1], lightPos[2]);
-      /* Only Back Faces on Shadow Map */
-      glEnable(GL_CULL_FACE);
-      glCullFace(GL_FRONT);
-      /* Without Color, and with Flat Mode */
-      glShadeModel(GL_FLAT);
-      glColorMask(0, 0, 0, 0);
-      renderScene();
-      /* Read the depth buffer into the shadow map texture */
-      glEnable(GL_TEXTURE);
-	shadowMap.saveShadowMap();
-
-   /* Second Pass */
-      glCullFace(GL_BACK);
-      glDisable(GL_CULL_FACE);
-      glShadeModel(GL_SMOOTH);
-      glColorMask(1, 1, 1, 1);
-      /* Set to the camera View */
-      glClear(GL_DEPTH_BUFFER_BIT);
-      glMatrixMode(GL_PROJECTION);
-      glLoadMatrixd(proj);
-      glMatrixMode(GL_MODELVIEW);
-      glLoadMatrixd(modl);
-      glViewport(0, 0, SCREEN_X, SCREEN_Y);
-      gameSun->setLight();
-      shadowMap.beginShadowMap();
-
-      renderScene();
-
-      shadowMap.endShadowMap();
-
-   /* Third Pass. draw with normal Light */
-   /*   gameSun->setLight();
-      shadowMap.beginShadowMap();
-      renderScene();
-      shadowMap.endShadowMap();*/
-
-
-   /* Draw the things without shadows */
-   renderNoShadowThings();
-   renderGUI();
-  
-   /* Actualize Listener Position */
-   snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
-                            gameCamera.getCameraZ(), gameCamera.getTheta(),
-                            gameCamera.getPhi(), gameCamera.getD(),
-                            gameCamera.getDeltaY());
-
-   /* Flush */
-   glFlush();
 }
 
 /*********************************************************************
@@ -2659,9 +2594,16 @@ void engine::drawWithoutShadows()
                             gameCamera.getDeltaY());
 
    /* Sun Definition */
-   gameSun->actualizeHourOfDay(hour, PCs->getActiveCharacter()->posicaoLadoX,
-                               PCs->getActiveCharacter()->posicaoLadoZ);
-   gameSun->setLight();
+   if(actualMap->isOutdoor())
+   {
+      gameSun->actualizeHourOfDay(hour, PCs->getActiveCharacter()->posicaoLadoX,
+                                  PCs->getActiveCharacter()->posicaoLadoZ);
+      gameSun->setLight();
+   }
+   else
+   {
+      gameSun->disableLight();
+   }
    
    /* Atualize to culling and to GUI */
    AtualizaFrustum(visibleMatrix,proj,modl);

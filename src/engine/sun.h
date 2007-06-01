@@ -39,6 +39,9 @@ class sun
       /*! Set the sun light to the current state */
       void setLight();
 
+      /*! Disable the Sun Light. Usually at indoor maps */
+      void disableLight();
+
       /*! Multiply the Matrix by the currenct Shadow Matrix. */
       void mulShadowMatrix();
 
