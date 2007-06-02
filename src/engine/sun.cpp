@@ -94,12 +94,18 @@ void sun::positionOnHour(float posX, float posZ)
          rotation = SUN_EQN_B * (curHour+24) + SUN_EQN_C;
       }
       where[1] = (sin(deg2Rad((rotation-180) / 4.0)))*(HALFFARVIEW-1);
+
+      where[0] = (sin(deg2Rad(rotation-270))*(HALFFARVIEW-1)) + posX;
+      where[2] = posZ;
+
+      /*
+      where[1] = (sin(deg2Rad((rotation-180) / 4.0)))*(HALFFARVIEW-1);
       if( ( ((rotation-180) > 90) && (where[0] > 0) ) ||
           ( ((rotation-180) < 90) && (where[0] < 0) ) )
       {
          where[0] *= -1;
          where[2] *= -1;
-      }
+      }*/
 
    }
    //printf("X: %.3f Y: %.3f Z: %.3f\n", where[0], where[1], where[2]);
@@ -162,20 +168,21 @@ void sun::actualizeHourOfDay(float hour, float posX, float posZ)
 void sun::drawSun()
 {
    GLfloat size;
+   glDisable(GL_LIGHTING);
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_TEXTURE_2D);
-   glEnable(GL_COLOR_MATERIAL);
-   glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+   //glEnable(GL_COLOR_MATERIAL);
+   //glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
    if(visibleTime())
    {
-      glColor3f(0.9,0.87,0.2);
+      glColor4f(0.9,0.87,0.2,1.0);
       glBindTexture(GL_TEXTURE_2D, sunTexture);
-      size = 80;
+      size = 160;
    }
    else
    {
-      glColor3f(1.0,1.0,1.0);
+      glColor4f(1.0,1.0,1.0,1.0);
       glBindTexture(GL_TEXTURE_2D, moonTexture);
       size = 50;
    }
@@ -198,6 +205,7 @@ void sun::drawSun()
    glDepthFunc(GL_LESS);
    glDepthMask(GL_TRUE);
    glColor4f(1,1,1,1);
+   glEnable(GL_LIGHTING);
 }
 
 /*********************************************************************
