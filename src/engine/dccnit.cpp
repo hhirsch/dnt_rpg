@@ -2339,7 +2339,8 @@ void engine::renderScene()
               per->render();
 
               /* Draw Reflection */
-              if(option->reflexionType >= REFLEXIONS_CHARACTERS)
+              if( (option->reflexionType >= REFLEXIONS_CHARACTERS) && 
+                  (!actualMap->isOutdoor()) )
               {
                  glEnable(GL_STENCIL_TEST);
                  glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
