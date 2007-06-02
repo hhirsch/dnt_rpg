@@ -20,8 +20,8 @@ using namespace std;
 #define HALF_SQUARE_SIZE        128 /**< Half size of the square */
 #define QUARTER_SQUARE_SIZE      64 /**< Quarter size of the square */
 #define SQUARE_DIAGONAL_SIZE    362.03867 /**< Diagonal size of the square */
-#define MAXOBJETOS             10 /**< Max number of objects per square */
-#define MAXMUROS                8 /**< Max number of walls per square */
+#define MAXOBJETOS             30 /**< Max number of objects per square */
+#define MAXMUROS               15  /**< Max number of walls per square */
 #define MUROALTURA             50 /**< Walls height */
 #define MEIOFIOALTURA           2 /**< Meio-fios height */
 #define ALTURAMAXIMA          150 /**< Max square height */
