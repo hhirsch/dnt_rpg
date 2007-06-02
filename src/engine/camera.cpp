@@ -54,23 +54,23 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    {
       phiAc = varCamera;
    }
-   if(keys[SDLK_PAGEUP]) // Maximize Up Camera
+   if((keys[SDLK_PAGEUP]) || (keys[SDLK_KP9])) // Maximize Up Camera
    {
       thetaAc = varCamera;
    }
-   if(keys[SDLK_PAGEDOWN]) // Minimize Up Camera
+   if((keys[SDLK_PAGEDOWN]) || (keys[SDLK_KP3])) // Minimize Up Camera
    {
       thetaAc = -varCamera;
    }
-   if (keys[SDLK_HOME]) // Maximize zoom
+   if((keys[SDLK_HOME]) || (keys[SDLK_KP7])) // Maximize zoom
    {
       zoomAc = -20;
    }
-   if(keys[SDLK_END]) // Minimize zoom
+   if((keys[SDLK_END]) || (keys[SDLK_KP1])) // Minimize zoom
    {
       zoomAc = 20;
    }   
-   if(keys[SDLK_INSERT]) //Up view Max
+   if((keys[SDLK_INSERT]) || (keys[SDLK_KP0])) //Up view Max
    {
       thetaAc = 10;
    }
