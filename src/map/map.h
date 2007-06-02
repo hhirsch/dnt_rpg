@@ -116,6 +116,9 @@ class Square
       int statusObj[MAXOBJETOS];        /**< Current Status of Object */
       int pisavelObj[MAXOBJETOS];       /**< Object collision or not */
       int divisions;                    /**< Number of Divisions */
+
+      /*! Set the Number of Divisions, based on Square Heights */
+      void setDivisions();
 };
 
 

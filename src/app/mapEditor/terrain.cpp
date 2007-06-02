@@ -110,76 +110,92 @@ void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
        if( (d1<=d2) && (d1<=d3) && (d1<=d4) )
        {
            saux->h1 += mod;
+           saux->setDivisions();
            saux = actualMap->relativeSquare(quadX-1,quadZ);
            if(saux)
            {
               saux->h4 += mod;
+              saux->setDivisions();
            }
            saux = actualMap->relativeSquare(quadX,quadZ-1);
            if(saux)
            {
                saux->h2 += mod;
+               saux->setDivisions();
                saux = actualMap->relativeSquare(quadX-1,quadZ-1);
                if(saux)
                {
                   saux->h3 += mod;
+                  saux->setDivisions();
                }
            }
        }
        else if( (d2<=d1) && (d2<=d3) && (d2<=d4) )
        {
            saux->h2 += mod;
+           saux->setDivisions();
            saux = actualMap->relativeSquare(quadX-1,quadZ);
            if(saux)
            {
               saux->h3 += mod;
+              saux->setDivisions();
            }
            saux = actualMap->relativeSquare(quadX,quadZ+1);
            if(saux)
            { 
               saux->h1 += mod;
+              saux->setDivisions();
               saux = actualMap->relativeSquare(quadX-1,quadZ+1);
               if(saux)
               {
                  saux->h4 += mod;
+                 saux->setDivisions();
               } 
            } 
        }
        else if( (d3<=d1) && (d3<=d2) && (d1<=d4) )
        {
           saux->h3 += mod;
+          saux->setDivisions();
           saux = actualMap->relativeSquare(quadX+1,quadZ);
           if(saux)
           {
              saux->h2 += mod;
+             saux->setDivisions();
           }
           saux = actualMap->relativeSquare(quadX,quadZ+1);
           if(saux)
           {
              saux->h4 += mod;
+             saux->setDivisions();
              saux = actualMap->relativeSquare(quadX+1,quadZ+1);
              if(saux)
              {
                 saux->h1 += mod;
+                saux->setDivisions();
              }
           }
        }
        else if( (d4<=d1) && (d4<=d2) && (d4<=d3) )
        {
           saux->h4 += mod;
+          saux->setDivisions();
           saux = actualMap->relativeSquare(quadX+1,quadZ);
           if(saux)
           {
              saux->h1 += mod;
+             saux->setDivisions();
           }
           saux = actualMap->relativeSquare(quadX,quadZ-1);
           if(saux)
           {
              saux->h3 += mod;
+             saux->setDivisions();
              saux = actualMap->relativeSquare(quadX+1,quadZ-1);
              if(saux)
              {
                 saux->h2 += mod;
+                saux->setDivisions();
              }
           }
        }
@@ -286,6 +302,7 @@ void terrain::doNivelate(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                   {
                       saux->h4 = nivelHeight;
                   }
+                  saux->setDivisions();
                }
             }
          }

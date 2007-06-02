@@ -48,6 +48,16 @@ Square::~Square()
 }
 
 /********************************************************************
+ *                            setDivisions                          *
+ ********************************************************************/
+void Square::setDivisions()
+{
+   divisions = (int) (( fabs(h4-h1) + fabs(h4-h2) + fabs(h4-h1) +
+                        fabs(h3-h1) + fabs(h3-h2) + fabs(h2-h1)) /
+                       SQUARE_DIVISIONS_INC) + 1;
+}
+
+/********************************************************************
  *                             Texture ID                           *
  ********************************************************************/
 int IDTextura(Map* mapa, string textura, GLuint* R, GLuint* G, GLuint* B)
@@ -408,13 +418,6 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                               ALTURAMAXIMA,
                               MapSquares[Xaux][Zaux].z2, matriz)))
          {
-            /*for(i=0;i<MAXOBJETOS;i++)
-            {
-               if(MapSquares[Xaux][Zaux].quadObjetos[i] != NULL)
-               { 
-                  MapSquares[Xaux][Zaux].quadObjetos[i]->visivel = 1;
-               }
-            }*/
             MapSquares[Xaux][Zaux].visivel = 1;
 
             /* Draw the Square as some squares */ 
@@ -1222,6 +1225,8 @@ int Map::open(string arquivo, modelList& mdlList)
                                  &MapSquares[posX][posZ].h2,
                                  &MapSquares[posX][posZ].h3,
                                  &MapSquares[posX][posZ].h4);
+
+            MapSquares[posX][posZ].setDivisions(); 
             MapSquares[posX][posZ].x1 = (posX) * SQUARE_SIZE;
             MapSquares[posX][posZ].x2 = MapSquares[posX][posZ].x1+SQUARE_SIZE;
             MapSquares[posX][posZ].z1 = (posZ) * SQUARE_SIZE;
