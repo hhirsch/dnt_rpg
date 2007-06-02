@@ -467,25 +467,6 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    return(1);
 }
 
-
-void engine::draw2DMode()
-{
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
-   gluOrtho2D(0.0, (GLdouble) 800, 0.0, (GLdouble) 600);
-   glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();
-}
-
-void engine::draw3DMode()
-{
-   glMatrixMode (GL_PROJECTION);
-   glLoadIdentity ();
-   gluPerspective(45.0, 800 / 600, 1.0, FARVIEW);
-   glMatrixMode (GL_MODELVIEW);
-   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-}
-
 /*********************************************************************
  *                            fadeInTexture                          *
  *********************************************************************/
@@ -622,7 +603,11 @@ int engine::OptionsScreen(GLuint idTextura)
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          object = interf->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
          AtualizaTela2D(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
-         interf->draw(proj,modl,viewPort);
+         glPushMatrix();
+            draw2DMode();
+            interf->draw(proj,modl,viewPort);
+            draw3DMode();
+         glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
          optionW = option->Treat(object, eventInfo, interf);
@@ -711,7 +696,11 @@ int engine::CharacterScreen(GLuint idTextura)
          object = gui->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
 
          AtualizaTela2D(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
-         gui->draw(proj,modl,viewPort);
+         glPushMatrix();
+            draw2DMode();
+            gui->draw(proj,modl,viewPort);
+            draw3DMode();
+         glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
 
@@ -1250,8 +1239,8 @@ int engine::verifyMouseActions(Uint8 Mbotao)
    minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
 
    int qx, qz;
-   qx = (int)xReal / SQUARESIZE;
-   qz = (int)zReal / SQUARESIZE;
+   qx = (int)xReal / SQUARE_SIZE;
+   qz = (int)zReal / SQUARE_SIZE;
    Square* quaux = actualMap->relativeSquare(qx,qz);
    if(quaux != NULL)
    {
@@ -2045,9 +2034,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             {
                /* Define New Occuped Square */
                int posX =(int)floor(activeCharacter->posicaoLadoX /
-                                    SQUARESIZE);
+                                    SQUARE_SIZE);
                int posZ =(int)floor(activeCharacter->posicaoLadoZ / 
-                                    SQUARESIZE);
+                                    SQUARE_SIZE);
                activeCharacter->ocupaQuad = 
                                          actualMap->relativeSquare(posX,posZ);
                /* Define New Height */
@@ -2068,12 +2057,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       /* Redraw the needed GUI */
       if(miniMapWindow)
       {
-         GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARESIZE)));
+         GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARE_SIZE)));
          if(x > actualMap->getSizeX()-1)
          {
             x = actualMap->getSizeX()-1;
          }
-         GLint z = (int)(((activeCharacter->posicaoLadoZ) / (SQUARESIZE)));
+         GLint z = (int)(((activeCharacter->posicaoLadoZ) / (SQUARE_SIZE)));
          if( z > actualMap->getSizeZ()-1)
          {
             z = actualMap->getSizeZ()-1;
@@ -2118,8 +2107,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    /* Verify Mouse Cursor Forbidden (when can't go to position) */
    if(!gui->mouseOnGui(mouseX, mouseY))
    {
-      int posX = (int) floor(xReal / SQUARESIZE);
-      int posZ = (int) floor(zReal / SQUARESIZE);
+      int posX = (int) floor(xReal / SQUARE_SIZE);
+      int posZ = (int) floor(zReal / SQUARE_SIZE);
       Square* sq = actualMap->relativeSquare(posX, posZ);
       if( (sq == NULL) || (sq->flags == 0))
       {
@@ -2537,24 +2526,29 @@ void engine::renderNoShadowThings()
 void engine::renderGUI()
 {
    /* Draw the GUI and others */
-   GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
+   //GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
    
    /* Get Portrait position */
-   gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
+   /*gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
    gluUnProject(SCREEN_X,SCREEN_Y-74,0.01, modl, proj, viewPort, &x2, &y2, &z2);
    gluUnProject(SCREEN_X-64,SCREEN_Y-74,0.01,modl,proj,viewPort, &x3, &y3, &z3);
    gluUnProject(SCREEN_X-64,SCREEN_Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
-
+   */
    
    glDisable(GL_LIGHTING);
    glDisable(GL_DEPTH_TEST);
    glDisable(GL_BLEND);
 
+   glPushMatrix();
+      draw2DMode();
+
+
    /* Player's Portrait */
-   personagem* per = (personagem*) PCs->getActiveCharacter();
-   per->drawMainPortrait(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4);
- 
-   gui->draw(proj,modl,viewPort);
+   PCs->getActiveCharacter()->drawMainPortrait();
+
+   glPushMatrix();
+      gui->draw(proj,modl,viewPort);
+   glPopMatrix();
 
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
@@ -2562,8 +2556,8 @@ void engine::renderGUI()
    
    /* Mouse Cursor */
    glPushMatrix();
-      draw2DMode();
          cursors->draw(mouseX, mouseY);
+   glPopMatrix();
       draw3DMode();
    glPopMatrix();
    
@@ -2679,8 +2673,8 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    if(result)
    {
       /* Define New Occuped Square */
-      int posX =(int)floor( nx / (SQUARESIZE));
-      int posZ =(int)floor( nz / (SQUARESIZE));
+      int posX =(int)floor( nx / (SQUARE_SIZE));
+      int posZ =(int)floor( nz / (SQUARE_SIZE));
       activeCharacter->ocupaQuad = actualMap->relativeSquare(posX,posZ);
 
       /* Define New Heigh */
@@ -2738,12 +2732,12 @@ bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
 void engine::OpenMiniMapWindow()
 {
    personagem* activeCharacter = PCs->getActiveCharacter();
-   GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARESIZE)));
+   GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARE_SIZE)));
    if(x > actualMap->getSizeX()-1)
    {
       x = actualMap->getSizeX()-1;
    }
-   GLint z = (int)(((activeCharacter->posicaoLadoZ) / (SQUARESIZE)));
+   GLint z = (int)(((activeCharacter->posicaoLadoZ) / (SQUARE_SIZE)));
    if( z > actualMap->getSizeZ()-1)
    {
       z = actualMap->getSizeZ()-1;

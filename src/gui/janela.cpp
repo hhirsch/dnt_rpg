@@ -63,10 +63,12 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
    novo->Btxt = novo->Cores.corTexto.B;
    novo->fechavel = 1;
    novo->movivel = 1;
-   novo->caraTextura = 0;
-   novo->temTextura = 0;
-   novo->cara = SDL_CreateRGBSurface(SDL_HWSURFACE,smallestPowerOfTwo(xb-xa+1),
-                                     smallestPowerOfTwo(yb-ya+1),32,
+
+   /* Commented the smmalest power of two, since is no more rendered as a
+    * texture, but as a raster2D. */
+   novo->cara = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                                     /*smallestPowerOfTwo*/(xb-xa+1),
+                                     /*smallestPowerOfTwo*/(yb-ya+1),32,
                                    0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
 
    novo->objects = new Tlista;
@@ -196,7 +198,6 @@ void janela::Desenhar(int mouseX, int mouseY)
       } //case
       obj = obj->proximo;
    }
-   AtualizaCara();
 }
 
 /*********************************************************************
@@ -231,11 +232,9 @@ void janela::Ativar(Tlista *lista)
   if (ljan->janelaAtiva != NULL)
   {
      ljan->janelaAtiva->BarraInativa();
-     ljan->janelaAtiva->AtualizaCara();
   }
   ljan->janelaAtiva = this;
   BarraAtiva();
-  AtualizaCara();
   //Desenhar();
   if(procAtiva != NULL)
   {
@@ -261,12 +260,6 @@ void janela::Fechar(Tlista *ljan)
    if(ptrExterno != NULL)
      *ptrExterno = NULL;
    Ljanela* lista = (Ljanela*) ljan;
-   if(glIsTexture(caraTextura))
-   {
-      glDeleteTextures(1,&caraTextura);
-      caraTextura = 0;
-      temTextura = 0;
-   }
    lista->RetirarJanela(this);
 }
 
@@ -313,20 +306,3 @@ int janela::Mover(Tlista *lista, SDL_Surface *screen, SDL_Surface* fundo,
 }
 
 
-void janela::AtualizaCara()
-{
-   if(temTextura)
-   {
-      glDeleteTextures(1,&caraTextura);
-      temTextura = 0;
-   }
-   
-   glGenTextures(1, &caraTextura);
-   glBindTexture(GL_TEXTURE_2D, caraTextura);
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cara->w, cara->h, 
-                               0, GL_RGBA, GL_UNSIGNED_BYTE, 
-                               cara->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   temTextura = 1;
-}

@@ -181,8 +181,8 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
    collisionDetect.defineMap(actualMap, NULL);
 
    if( (destinyX < 0) || (destinyZ < 0) || 
-       (destinyX >= actualMap->getSizeX()*SQUARESIZE) ||
-       (destinyZ >= actualMap->getSizeZ()*SQUARESIZE) )
+       (destinyX >= actualMap->getSizeX()*SQUARE_SIZE) ||
+       (destinyZ >= actualMap->getSizeZ()*SQUARE_SIZE) )
    {
       state = ASTAR_STATE_NOT_FOUND;
       unLock();
@@ -291,8 +291,8 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
         
         heuristic = diagonal + orthogonal + dX + dZ;
 
-        perQuad = actualMap->relativeSquare((int)floor( posX / (SQUARESIZE)),
-                                              (int)floor( posZ / (SQUARESIZE)));
+        perQuad = actualMap->relativeSquare((int)floor( posX / (SQUARE_SIZE)),
+                                            (int)floor( posZ / (SQUARE_SIZE)));
         if( (node2 != NULL) || (node3 != NULL) || 
             (perQuad == NULL) ||
             (!collisionDetect.canWalk(posX, 0, posZ, 

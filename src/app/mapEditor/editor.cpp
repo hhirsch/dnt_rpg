@@ -362,10 +362,10 @@ void editor::newMap()
             }
          }
       }
-      map->setInitialPosition( ((sizeX+12)*SQUARESIZE / 2.0),
-                            ((sizeZ+12)*SQUARESIZE / 2.0));
-      gui->gameCamera.actualizeCamera(((sizeX+14)*SQUARESIZE / 2.0), 0.0, 
-                                      ((sizeZ+14)*SQUARESIZE / 2.0), 0.0);
+      map->setInitialPosition( ((sizeX+12)*SQUARE_SIZE / 2.0),
+                            ((sizeZ+12)*SQUARE_SIZE / 2.0));
+      gui->gameCamera.actualizeCamera(((sizeX+14)*SQUARE_SIZE / 2.0), 0.0, 
+                                      ((sizeZ+14)*SQUARE_SIZE / 2.0), 0.0);
    }
    else
    {
@@ -378,7 +378,7 @@ void editor::newMap()
       actualWall->textura = map->Texturas->indice;
       actualWall->x1 = 0;
       actualWall->z1 = 0;
-      actualWall->x2 = (sizeX)*SQUARESIZE;
+      actualWall->x2 = (sizeX)*SQUARE_SIZE;
       actualWall->z2 = 10;
       actualWall = new(muro);
       actualWall->proximo = map->muros;
@@ -388,28 +388,28 @@ void editor::newMap()
       actualWall->x1 = 0;
       actualWall->z1 = 0;
       actualWall->x2 = 10;
-      actualWall->z2 = (sizeZ)*SQUARESIZE;
+      actualWall->z2 = (sizeZ)*SQUARE_SIZE;
       actualWall = new(muro);
       actualWall->proximo = map->muros;
       map->muros = actualWall;
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->textura = map->Texturas->indice;
-      actualWall->x1 = (sizeX)*SQUARESIZE-10;
+      actualWall->x1 = (sizeX)*SQUARE_SIZE-10;
       actualWall->z1 = 0;
-      actualWall->x2 = ((sizeX)*SQUARESIZE);
-      actualWall->z2 = (sizeZ)*SQUARESIZE;
+      actualWall->x2 = ((sizeX)*SQUARE_SIZE);
+      actualWall->z2 = (sizeZ)*SQUARE_SIZE;
       actualWall = new(muro);
       actualWall->proximo = map->muros;
       map->muros = actualWall;
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->textura = map->Texturas->indice;
       actualWall->x1 = 0;
-      actualWall->z1 = (sizeZ)*SQUARESIZE-10;
-      actualWall->x2 = (sizeX)*SQUARESIZE;
-      actualWall->z2 = (sizeZ)*SQUARESIZE;
+      actualWall->z1 = (sizeZ)*SQUARE_SIZE-10;
+      actualWall->x2 = (sizeX)*SQUARE_SIZE;
+      actualWall->z2 = (sizeZ)*SQUARE_SIZE;
       /* Define Position */
-      map->setInitialPosition( ((sizeX)*SQUARESIZE / 2.0),
-                            ((sizeZ)*SQUARESIZE / 2.0));
+      map->setInitialPosition( ((sizeX)*SQUARE_SIZE / 2.0),
+                            ((sizeZ)*SQUARE_SIZE / 2.0));
    }
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
@@ -440,9 +440,9 @@ void editor::verifyPosition()
 {
    if(mapOpened)
    {
-       if(gui->gameCamera.getCenterX() > ((map->getSizeX() * SQUARESIZE)+20))
+       if(gui->gameCamera.getCenterX() > ((map->getSizeX() * SQUARE_SIZE)+20))
        {
-          gui->gameCamera.actualizeCamera( ((map->getSizeX() * SQUARESIZE)+20),
+          gui->gameCamera.actualizeCamera( ((map->getSizeX() * SQUARE_SIZE)+20),
                                           gui->gameCamera.getCenterY(),
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
@@ -454,11 +454,11 @@ void editor::verifyPosition()
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
        }
-       if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * SQUARESIZE)+20))
+       if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * SQUARE_SIZE)+20))
        {
           gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
                                           gui->gameCamera.getCenterY(),
-                                          ((map->getSizeZ() * SQUARESIZE)+20), 
+                                          ((map->getSizeZ() * SQUARE_SIZE)+20), 
                                           0.0);
        }
        else if(gui->gameCamera.getCenterZ() < -20)
@@ -637,28 +637,28 @@ void editor::draw()
             glColor4fv(ambient);
             glBegin(GL_QUADS);
                glNormal3f(0,1,0);
-               glVertex3f(7*SQUARESIZE-5, 0.5, 7*SQUARESIZE);
-               glVertex3f(7*SQUARESIZE-5, 0.5, (sizeZ+7)*SQUARESIZE);
-               glVertex3f(7*SQUARESIZE+5, 0.5, (sizeZ+7)*SQUARESIZE);
-               glVertex3f(7*SQUARESIZE+5, 0.5, 7*SQUARESIZE);
+               glVertex3f(7*SQUARE_SIZE-5, 0.5, 7*SQUARE_SIZE);
+               glVertex3f(7*SQUARE_SIZE-5, 0.5, (sizeZ+7)*SQUARE_SIZE);
+               glVertex3f(7*SQUARE_SIZE+5, 0.5, (sizeZ+7)*SQUARE_SIZE);
+               glVertex3f(7*SQUARE_SIZE+5, 0.5, 7*SQUARE_SIZE);
 
                glNormal3f(0,1,0);
-               glVertex3f((sizeX+7)*SQUARESIZE-5, 0.5, 7*SQUARESIZE);
-               glVertex3f((sizeX+7)*SQUARESIZE-5, 0.5, (sizeZ+7)*SQUARESIZE);
-               glVertex3f((sizeX+7)*SQUARESIZE+5, 0.5, (sizeZ+7)*SQUARESIZE);
-               glVertex3f((sizeX+7)*SQUARESIZE+5, 0.5, 7*SQUARESIZE);
+               glVertex3f((sizeX+7)*SQUARE_SIZE-5, 0.5, 7*SQUARE_SIZE);
+               glVertex3f((sizeX+7)*SQUARE_SIZE-5, 0.5, (sizeZ+7)*SQUARE_SIZE);
+               glVertex3f((sizeX+7)*SQUARE_SIZE+5, 0.5, (sizeZ+7)*SQUARE_SIZE);
+               glVertex3f((sizeX+7)*SQUARE_SIZE+5, 0.5, 7*SQUARE_SIZE);
 
                glNormal3f(0,1,0);
-               glVertex3f(7*SQUARESIZE, 0.5, 7*SQUARESIZE-5);
-               glVertex3f((sizeX+7)*SQUARESIZE, 0.5, 7*SQUARESIZE-5);
-               glVertex3f((sizeX+7)*SQUARESIZE, 0.5, 7*SQUARESIZE+5);
-               glVertex3f(7*SQUARESIZE, 0.5, 7*SQUARESIZE+5);
+               glVertex3f(7*SQUARE_SIZE, 0.5, 7*SQUARE_SIZE-5);
+               glVertex3f((sizeX+7)*SQUARE_SIZE, 0.5, 7*SQUARE_SIZE-5);
+               glVertex3f((sizeX+7)*SQUARE_SIZE, 0.5, 7*SQUARE_SIZE+5);
+               glVertex3f(7*SQUARE_SIZE, 0.5, 7*SQUARE_SIZE+5);
 
                glNormal3f(0,1,0);
-               glVertex3f(7*SQUARESIZE, 0.5, (sizeZ+7)*SQUARESIZE-5);
-               glVertex3f((sizeX+7)*SQUARESIZE, 0.5, (sizeZ+7)*SQUARESIZE-5);
-               glVertex3f((sizeX+7)*SQUARESIZE, 0.5, (sizeZ+7)*SQUARESIZE+5);
-               glVertex3f(7*SQUARESIZE, 0.5, (sizeZ+7)*SQUARESIZE+5);
+               glVertex3f(7*SQUARE_SIZE, 0.5, (sizeZ+7)*SQUARE_SIZE-5);
+               glVertex3f((sizeX+7)*SQUARE_SIZE, 0.5, (sizeZ+7)*SQUARE_SIZE-5);
+               glVertex3f((sizeX+7)*SQUARE_SIZE, 0.5, (sizeZ+7)*SQUARE_SIZE+5);
+               glVertex3f(7*SQUARE_SIZE, 0.5, (sizeZ+7)*SQUARE_SIZE+5);
 
             glEnd();
          glPopMatrix();
@@ -676,10 +676,10 @@ void editor::draw()
             glDisable(GL_LIGHTING);
             glBegin(GL_QUADS);
             glVertex3f(-10, -5, -10);
-            glVertex3f(-10, -5, map->getSizeZ()*SQUARESIZE+10);
-            glVertex3f(map->getSizeX()*SQUARESIZE+10, -5,
-                       map->getSizeZ()*SQUARESIZE+10);
-            glVertex3f(map->getSizeX()*SQUARESIZE+10, -5, -10);
+            glVertex3f(-10, -5, map->getSizeZ()*SQUARE_SIZE+10);
+            glVertex3f(map->getSizeX()*SQUARE_SIZE+10, -5,
+                       map->getSizeZ()*SQUARE_SIZE+10);
+            glVertex3f(map->getSizeX()*SQUARE_SIZE+10, -5, -10);
             glEnd();
             glEnable(GL_LIGHTING);
          glPopMatrix();
@@ -780,7 +780,9 @@ void editor::draw()
    glDisable(GL_DEPTH_TEST);
    /* Draw GUI */
    glPushMatrix();
+      draw2DMode();
       gui->draw(proj, modl, viewPort);
+      draw3DMode();
    glPopMatrix();
    glEnable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);

@@ -173,4 +173,9 @@ bool actionInRange(GLfloat posX, GLfloat posZ,
                    GLfloat targX, GLfloat targZ,
                    GLfloat range);
 
+
+void draw2DMode();
+
+void draw3DMode();
+
 #endif

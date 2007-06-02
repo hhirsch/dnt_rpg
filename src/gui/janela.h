@@ -36,8 +36,6 @@ class janela: public Tobjeto
       int dify;                  /* No momento de inicio da movimentacao */
       cores Cores;
       janela **ptrExterno;       /* Ponteiro pro Ponteiro externo da Janela */
-      GLuint caraTextura;        /* Textura da cara */
-      int temTextura;            /* Se ja tem Textura ou Nao */
                                  /* Procedimento na ativacao */
       void (*procAtiva)(janela* jan, SDL_Surface *screen);
                                  /* Procedimento qdo Pressionada nela */
@@ -66,9 +64,6 @@ class janela: public Tobjeto
        * screen -> a superficie na qual esta a janela */
       int Mover(Tlista *lista, SDL_Surface *screen, SDL_Surface* fundo,
                 int xinic, int yinic, int Mbotao);
-
-      /* Atualiza textura da janela */
-      void AtualizaCara();
 
       void BarraInativa();
       void BarraAtiva();

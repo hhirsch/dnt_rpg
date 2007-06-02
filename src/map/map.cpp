@@ -258,10 +258,10 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
        }
 
        int minqx, minqz, maxqx, maxqz;
-       minqx = (int)(X[0] + xReal) / SQUARESIZE;
-       minqz = (int)(Z[0] + zReal) / SQUARESIZE;
-       maxqx = (int)(X[1] + xReal) / SQUARESIZE;
-       maxqz = (int)(Z[1] + zReal) / SQUARESIZE; 
+       minqx = (int)(X[0] + xReal) / SQUARE_SIZE;
+       minqz = (int)(Z[0] + zReal) / SQUARE_SIZE;
+       maxqx = (int)(X[1] + xReal) / SQUARE_SIZE;
+       maxqz = (int)(Z[1] + zReal) / SQUARE_SIZE; 
        int X1, Z1;
        Square* qaux;
        for(X1 = minqx; X1<=maxqx; X1++)
@@ -329,12 +329,24 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    int textura = -1;
    int Xaux = 0, Zaux = 0;
 
+   GLint wrap = GL_REPEAT;
+
    /* For each square (a square is squarizeble!) */
    int k,l;
    GLfloat texX, texZ;
    GLfloat pX1, pX2, pZ1, pZ2, incPos, incTex;
-   incTex = (1.0 / SQUARE_DIVISIONS);
-   incPos = (GLfloat) SQUARESIZE / (GLfloat)SQUARE_DIVISIONS;
+
+   if(isOutdoor())
+   {
+      wrap = GL_CLAMP;
+      incTex = (1.0 / SQUARE_DIVISIONS);
+   }
+   else
+   {
+      wrap = GL_REPEAT;
+      incTex = (TEXTURE_REPEATS / SQUARE_DIVISIONS);
+   }
+   incPos = (GLfloat) SQUARE_SIZE / (GLfloat)SQUARE_DIVISIONS;
 
    //glColor3f(1.0,1.0,1.0);
 
@@ -351,8 +363,8 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
                    GL_NEAREST_MIPMAP_LINEAR );
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
 
    glBegin(GL_QUADS);
      /* Draw at horizon */
@@ -385,10 +397,10 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
             textura = MapSquares[Xaux][Zaux].textura;
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, textura);
-            /*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+            //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap );
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap );
             glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
                             GL_NEAREST_MIPMAP_LINEAR );
             /*glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
@@ -633,9 +645,9 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
    for(Xaux = 0; Xaux < x; Xaux++)
    for(Zaux = 0; Zaux < z; Zaux++)
    {
-      deltaX = (cameraX-MapSquares[Xaux][Zaux].x1+HALFSQUARESIZE);
-      deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+HALFSQUARESIZE);
-      distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / SQUARESIZE;
+      deltaX = (cameraX-MapSquares[Xaux][Zaux].x1+HALF_SQUARE_SIZE);
+      deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+HALF_SQUARE_SIZE);
+      distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / SQUARE_SIZE;
       for(o=0;o<MAXOBJETOS;o++)
       {
           if( (MapSquares[Xaux][Zaux].objects[o] != NULL) && 
@@ -727,7 +739,7 @@ Map::Map()
    x = z = 0;
    xInic = zInic = 0;
    SQUAREMINISIZE = 4;
-   SQUAREMINIDIV = (SQUARESIZE / SQUAREMINISIZE);
+   SQUAREMINIDIV = (SQUARE_SIZE / SQUAREMINISIZE);
 }
 
 /********************************************************************
@@ -746,8 +758,8 @@ Square* Map::relativeSquare(int xa, int za)
  ********************************************************************/
 GLfloat Map::getHeight(GLfloat nx, GLfloat nz)
 {
-   int posX =(int)floor( nx / (SQUARESIZE));
-   int posZ =(int)floor( nz / (SQUARESIZE)); 
+   int posX =(int)floor( nx / (SQUARE_SIZE));
+   int posZ =(int)floor( nz / (SQUARE_SIZE)); 
 
    Square* saux = relativeSquare(posX, posZ);
 
@@ -763,10 +775,10 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz, Square* saux)
    }
 
    /* Do Interpolation to define the Height on position */
-   GLfloat dx1 = fabs(nx - saux->x1) / SQUARESIZE;
-   GLfloat dz1 = fabs(nz - saux->z1) / SQUARESIZE;
-   GLfloat dx2 = fabs(saux->x2 - nx) / SQUARESIZE;
-   GLfloat dz2 = fabs(saux->z2 - nz) / SQUARESIZE;
+   GLfloat dx1 = fabs(nx - saux->x1) / SQUARE_SIZE;
+   GLfloat dz1 = fabs(nz - saux->z1) / SQUARE_SIZE;
+   GLfloat dx2 = fabs(saux->x2 - nx) / SQUARE_SIZE;
+   GLfloat dz2 = fabs(saux->z2 - nz) / SQUARE_SIZE;
 
    GLfloat ha = (dx2 * saux->h1) + (dx1 * saux->h4);
    GLfloat hb = (dx2 * saux->h2) + (dx1 * saux->h3);
@@ -1171,8 +1183,8 @@ int Map::open(string arquivo, modelList& mdlList)
             if(xInic == -1)
             {
                sscanf(buffer, "%f,%f",&xInic,&zInic);
-               int posX =(int)floor( xInic / (SQUARESIZE));
-               int posZ =(int)floor( zInic / (SQUARESIZE));
+               int posX =(int)floor( xInic / (SQUARE_SIZE));
+               int posZ =(int)floor( zInic / (SQUARE_SIZE));
                squareInic = relativeSquare(posX,posZ);
             }
             break;
@@ -1217,10 +1229,10 @@ int Map::open(string arquivo, modelList& mdlList)
                                  &MapSquares[posX][posZ].h2,
                                  &MapSquares[posX][posZ].h3,
                                  &MapSquares[posX][posZ].h4);
-            MapSquares[posX][posZ].x1 = (posX) * SQUARESIZE;
-            MapSquares[posX][posZ].x2 = MapSquares[posX][posZ].x1+SQUARESIZE;
-            MapSquares[posX][posZ].z1 = (posZ) * SQUARESIZE;
-            MapSquares[posX][posZ].z2 = MapSquares[posX][posZ].z1+SQUARESIZE; 
+            MapSquares[posX][posZ].x1 = (posX) * SQUARE_SIZE;
+            MapSquares[posX][posZ].x2 = MapSquares[posX][posZ].x1+SQUARE_SIZE;
+            MapSquares[posX][posZ].z1 = (posZ) * SQUARE_SIZE;
+            MapSquares[posX][posZ].z2 = MapSquares[posX][posZ].z1+SQUARE_SIZE; 
             MapSquares[posX][posZ].posX = posX;
             MapSquares[posX][posZ].posZ = posZ;
             if(pisavel) 
@@ -1323,10 +1335,10 @@ int Map::open(string arquivo, modelList& mdlList)
    
    while(maux)
    {
-      inix = (int)floor(maux->x1 / SQUARESIZE);
-      iniz = (int)floor(maux->z1 / SQUARESIZE);
-      maxx = (int)floor(maux->x2 / SQUARESIZE);
-      maxz = (int)floor(maux->z2 / SQUARESIZE);
+      inix = (int)floor(maux->x1 / SQUARE_SIZE);
+      iniz = (int)floor(maux->z1 / SQUARE_SIZE);
+      maxx = (int)floor(maux->x2 / SQUARE_SIZE);
+      maxz = (int)floor(maux->z2 / SQUARE_SIZE);
       for(ax = inix;ax<=maxx;ax++)
       {
           for(az = iniz;az<=maxz;az++)
@@ -1394,10 +1406,10 @@ void Map::newMap(int X, int Z)
       for(auxX = 0; auxX < x; auxX++)
       {
           saux = relativeSquare(auxX,auxZ);
-          saux->x1 = (auxX)*SQUARESIZE;
-          saux->x2 = saux->x1+SQUARESIZE;
-          saux->z1 = (auxZ)*SQUARESIZE;
-          saux->z2 = saux->z1+SQUARESIZE; 
+          saux->x1 = (auxX)*SQUARE_SIZE;
+          saux->x2 = saux->x1+SQUARE_SIZE;
+          saux->z1 = (auxZ)*SQUARE_SIZE;
+          saux->z2 = saux->z1+SQUARE_SIZE; 
           saux->posX = auxX;
           saux->posZ = auxZ;
           saux->flags = PISAVEL;
@@ -1408,8 +1420,8 @@ void Map::newMap(int X, int Z)
       }
    }
 
-   xInic = 1*SQUARESIZE;
-   zInic = 1*SQUARESIZE;
+   xInic = 1*SQUARE_SIZE;
+   zInic = 1*SQUARE_SIZE;
    squareInic = relativeSquare(0,0);
 }
 
@@ -1648,8 +1660,8 @@ int Map::save(string arquivo)
           {
             if(MapSquares[x1][z1].objects[aux])
             {
-               x2 = (int)MapSquares[x1][z1].Xobjects[aux] / SQUARESIZE;
-               z2 = (int)MapSquares[x1][z1].Zobjects[aux] / SQUARESIZE;
+               x2 = (int)MapSquares[x1][z1].Xobjects[aux] / SQUARE_SIZE;
+               z2 = (int)MapSquares[x1][z1].Zobjects[aux] / SQUARE_SIZE;
                fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d:%d\n",
                        MapSquares[x1][z1].objects[aux]->getFileName().c_str(),
                        MapSquares[x1][z1].objectsDesenha[aux],

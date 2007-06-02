@@ -269,13 +269,13 @@ void mapRoad::draw()
          /* Draw the Surface */
          glBegin(GL_QUADS);
             glTexCoord2f(x1,z1);
-            glVertex3f((SQUARESIZE*x)-dX, 0.15, (SQUARESIZE*z)-dZ);
+            glVertex3f((SQUARE_SIZE*x)-dX, 0.15, (SQUARE_SIZE*z)-dZ);
             glTexCoord2f(x2,z2);
-            glVertex3f((SQUARESIZE*x)-dX, 0.15, (SQUARESIZE*z)+dZ);
+            glVertex3f((SQUARE_SIZE*x)-dX, 0.15, (SQUARE_SIZE*z)+dZ);
             glTexCoord2f(x3,z3);
-            glVertex3f((SQUARESIZE*x)+dX, 0.15, (SQUARESIZE*z)+dZ);
+            glVertex3f((SQUARE_SIZE*x)+dX, 0.15, (SQUARE_SIZE*z)+dZ);
             glTexCoord2f(x4,z4);
-            glVertex3f((SQUARESIZE*x)+dX, 0.15, (SQUARESIZE*z)-dZ);
+            glVertex3f((SQUARE_SIZE*x)+dX, 0.15, (SQUARE_SIZE*z)-dZ);
          glEnd();
        }
       }

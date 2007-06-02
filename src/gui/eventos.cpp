@@ -328,7 +328,6 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                     {
                        ljan->janelaAtiva->Desenhar(0,0);
                        rb->redraw();
-                       ljan->janelaAtiva->AtualizaCara();
                     }
                  }
                  obj = obj->proximo;
@@ -360,11 +359,9 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                {
                      bart->procEditada(bart,NULL);
                }
-               ljan->janelaAtiva->AtualizaCara();
                *eventInfo = BARRATEXTOESCRITA;
                return(objAtivo);
            }
-        ljan->janelaAtiva->AtualizaCara();
         *eventInfo = BARRATEXTOESCRITA; 
         return(objAtivo);
     }
@@ -376,7 +373,6 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
        cxSel* cx = (cxSel*)objAtivo;
        cx->invertSelection();
        cx->draw(ljan->janelaAtiva->cara);
-       ljan->janelaAtiva->AtualizaCara();
        foco = FOCO_JOGO;
        *eventInfo = CXSELMODIFICADA;
        return(objAtivo);
@@ -394,7 +390,6 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                             ljan->janelaAtiva->x1,
                             ljan->janelaAtiva->y1);
 
-       ljan->janelaAtiva->AtualizaCara();
        *eventInfo = MENUMODIFICADO;
 
         
@@ -452,7 +447,6 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
           *eventInfo = SELTEXTOSELECIONADA;
         }
 
-        ljan->janelaAtiva->AtualizaCara();
         
         return(objAtivo);
     }
@@ -468,7 +462,6 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                             ljan->janelaAtiva->y1,
                                             ljan->janelaAtiva->cara,
                                             actType);
-       ljan->janelaAtiva->AtualizaCara();
        if( object != NULL )
        {
             //selectObject = &object;
@@ -486,7 +479,6 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                      if(lt->eventGot(TABBOTAOPRESSIONADO, object))
                      {
                         ljan->janelaAtiva->Desenhar(0,0);
-                        ljan->janelaAtiva->AtualizaCara();
                         verified = true;
                         *eventInfo = LISTTEXT_SELECTED;
                         foco = FOCO_JOGO;
@@ -538,42 +530,41 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    double profundidade = 0.012;
    janela* jan = (janela*) ljan->primeiro->proximo;
 
-   glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glColor4f(1.0, 1.0, 1.0, 0.9);
-        
    if(ljan->janelaAtiva == NULL)
      return;
+
+   glColor4f(1.0,1.0,1.0,1.0);
+
+   glDisable(GL_DEPTH_TEST);
    
    /* Draw Inative Windows */
    for(aux = 0;aux<ljan->total;aux++)
    {
       if(jan != ljan->janelaAtiva)
       {
-         /*glRasterPos2f(jan->x1, 600-jan->y1);
+         glRasterPos2f(jan->x1, 600-jan->y1);
          glPixelZoom(1.0, -1.0);
          glDrawPixels((jan->x2-jan->x1)+1, (jan->y2-jan->y1)+1, 
-                      GL_RGBA, GL_UNSIGNED_BYTE, jan->cara->pixels);*/
-          AtualizaTela2D(jan->caraTextura,proj,modl,viewPort,jan->x1,jan->y1, 
-                         jan->x2,jan->y2,profundidade);
+                      GL_RGBA, GL_UNSIGNED_BYTE, jan->cara->pixels);
+          /*AtualizaTela2D(jan->caraTextura,proj,modl,viewPort,jan->x1,jan->y1, 
+                         jan->x2,jan->y2,profundidade);*/
           profundidade += 0.001;
       }
       jan = (janela*) jan->proximo;
    }
 
    /* Draw Active Window */
-   /*glRasterPos2f(ljan->janelaAtiva->x1, 600-ljan->janelaAtiva->y1);
+   glRasterPos2f(ljan->janelaAtiva->x1, 600-ljan->janelaAtiva->y1);
    glPixelZoom(1.0, -1.0);
    glDrawPixels((ljan->janelaAtiva->x2 - ljan->janelaAtiva->x1)+1, 
                 (ljan->janelaAtiva->y2 - ljan->janelaAtiva->y1)+1, 
-                GL_RGBA, GL_UNSIGNED_BYTE, ljan->janelaAtiva->cara->pixels);*/
+                GL_RGBA, GL_UNSIGNED_BYTE, ljan->janelaAtiva->cara->pixels);
 
-   AtualizaTela2D(ljan->janelaAtiva->caraTextura,proj,modl,viewPort,
+   glEnable(GL_DEPTH_TEST);
+
+   /*AtualizaTela2D(ljan->janelaAtiva->caraTextura,proj,modl,viewPort,
                      ljan->janelaAtiva->x1,ljan->janelaAtiva->y1,
-                     ljan->janelaAtiva->x2,ljan->janelaAtiva->y2, 0.011);
-
-   glDisable(GL_BLEND);
-   glColor4f(1.0,1.0,1.0,1.0);
+                     ljan->janelaAtiva->x2,ljan->janelaAtiva->y2, 0.011);*/
 }
 
 /*********************************************************************

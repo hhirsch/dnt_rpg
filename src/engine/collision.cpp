@@ -149,8 +149,8 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    if(!perQuad)
    {
       /* Get the Relative Square */
-      int posX =(int)floor( perX / (SQUARESIZE));
-      int posZ =(int)floor( perZ / (SQUARESIZE));
+      int posX =(int)floor( perX / (SQUARE_SIZE));
+      int posZ =(int)floor( perZ / (SQUARE_SIZE));
       perQuad = actualMap->relativeSquare(posX, posZ);
       if(!perQuad)
       {
@@ -177,8 +177,8 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
 
    /* Testa limites do Mapa */
    if( (min[0]<2) || (min[2]<2) || 
-       (max[0]>actualMap->getSizeX()*SQUARESIZE-2) || 
-       (max[2]>actualMap->getSizeZ()*SQUARESIZE-2))
+       (max[0]>actualMap->getSizeX()*SQUARE_SIZE-2) || 
+       (max[2]>actualMap->getSizeZ()*SQUARE_SIZE-2))
    {
       return(false);
    }

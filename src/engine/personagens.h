@@ -49,23 +49,8 @@ class personagem: public Tobjeto, public aniModel
        * \return -> file name of the image used */
       string getPortraitFileName();
 
-      /*! Draw the Portrait at the world position
-       * \param x1 -> x1 position 
-       * \param y1 -> y1 position
-       * \param z1 -> z1 position
-       * \param x2 -> x2 position 
-       * \param y2 -> y2 position
-       * \param z2 -> z2 position
-       * \param x3 -> x3 position 
-       * \param y3 -> y3 position
-       * \param z3 -> z3 position
-       * \param x4 -> x4 position 
-       * \param y4 -> y4 position
-       * \param z4 -> z4 position*/
-      void drawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
-                                  GLdouble x2, GLdouble y2, GLdouble z2,
-                                  GLdouble x3, GLdouble y3, GLdouble z3,
-                                  GLdouble x4, GLdouble y4, GLdouble z4);
+      /*! Draw the Portrait */
+      void drawMainPortrait();
 
       /*! Define actual life points value
        * \param newLife -> new value to the lifepoints*/
@@ -159,9 +144,6 @@ class personagem: public Tobjeto, public aniModel
       string retratoConversa;     /**< Portrait talk file name */
       string characterFile;       /**< Name of the character file */
       SDL_Surface* portraitImage; /**< Character's portrait image */
-      GLfloat portraitX,          /**< Portrait X Max coordinate */
-              portraitY;          /**< Portrait Y Max Coordinate */
-      GLuint portrait;            /**< Up screen portrait GL texture */
       string conversationFile;    /**< Name of the Conversation File */
       void* conv;                 /**< Pointer to the conversation */
       bool convPressed;           /**< To avoid do some conversation action

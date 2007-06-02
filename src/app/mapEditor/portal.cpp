@@ -220,8 +220,8 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          
          //Coloca a Porta no Mapa
          /*inserirObjetoMapa(doorX, doorZ, doorOrientation, porta, 
-                            (int)(doorX / SQUARESIZE), 
-                            (int)(doorZ / SQUARESIZE) );*/
+                            (int)(doorX / SQUARE_SIZE), 
+                            (int)(doorZ / SQUARE_SIZE) );*/
          door* novaPorta = new(door);
          novaPorta->x = doorX;
          novaPorta->z = doorZ;
@@ -331,10 +331,10 @@ void portal::addPortal(int qx, int qz, string where)
        portalList->addArea(initmX, initmZ, mX, mZ, where);
       
        int minqx, minqz, maxqx, maxqz;
-       minqx = (int)(initmX) / SQUARESIZE;
-       minqz = (int)(initmZ) / SQUARESIZE;
-       maxqx = (int)(mX) / SQUARESIZE;
-       maxqz = (int)(mZ) / SQUARESIZE; 
+       minqx = (int)(initmX) / SQUARE_SIZE;
+       minqz = (int)(initmZ) / SQUARE_SIZE;
+       maxqx = (int)(mX) / SQUARE_SIZE;
+       maxqz = (int)(mZ) / SQUARE_SIZE; 
        int X1, Z1;
        Square* q;
        for(X1 = minqx; X1<=maxqx; X1++)
@@ -361,8 +361,8 @@ void portal::addPortal(int qx, int qz, string where)
  ******************************************************/
 void portal::doAddPortal()
 {
-   int qx = (int) (mX / SQUARESIZE);
-   int qz = (int) (mZ / SQUARESIZE);
+   int qx = (int) (mX / SQUARE_SIZE);
+   int qz = (int) (mZ / SQUARE_SIZE);
 
    if( (state == PORTAL_STATE_OTHER) && (mB & SDL_BUTTON(1)) )
    {
@@ -393,8 +393,8 @@ void portal::doTagPortal(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
       initmZ = ar->y1;
       mZ = ar->y2;
       
-      int qx = (int) (mX / SQUARESIZE);
-      int qz = (int) (mZ / SQUARESIZE);
+      int qx = (int) (mX / SQUARE_SIZE);
+      int qz = (int) (mZ / SQUARE_SIZE);
       
       addPortal(qx, qz, getStringFromUser("Input Destiny", ar->whereToGo,
                 proj, modl, viewPort));

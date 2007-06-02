@@ -17,11 +17,6 @@ void botao::Desenhar(int pres, void* jan,
    
    Desenhar(pres, j->cara);
    
-   if(Salvar)
-   {
-      j->AtualizaCara();
-   }
-
 }
 
 void botao::Desenhar(int pres, SDL_Surface* screen )

@@ -123,7 +123,6 @@ void listWindow::setState(int st)
       }
       intWindow->Desenhar(0,0);
       intWindow->BarraInativa();
-      intWindow->AtualizaCara();
    }
 }
 

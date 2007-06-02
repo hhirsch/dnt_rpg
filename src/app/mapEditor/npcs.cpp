@@ -54,7 +54,7 @@ void npcs::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       if( (mButton & SDL_BUTTON(1)) && (actualNpc != NULL) )
       {
          insertNpc(mouseX, mouseZ, actualNpc, 
-                   (int)(mouseX / SQUARESIZE), (int)(mouseZ / SQUARESIZE));
+                   (int)(mouseX / SQUARE_SIZE), (int)(mouseZ / SQUARE_SIZE));
          while(mButton & SDL_BUTTON(1))
          {
             //Wait for Mouse Button Release

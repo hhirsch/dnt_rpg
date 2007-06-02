@@ -233,3 +233,22 @@ void normal (GLfloat x1, GLfloat y1, GLfloat z1,
     normalize(nx, ny, nz);
 }
 
+void draw2DMode()
+{
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   gluOrtho2D(0.0, (GLdouble) 800, 0.0, (GLdouble) 600);
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+}
+
+void draw3DMode()
+{
+   glMatrixMode (GL_PROJECTION);
+   glLoadIdentity ();
+   gluPerspective(45.0, 800 / 600, 1.0, FARVIEW);
+   glMatrixMode (GL_MODELVIEW);
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+}
+
+

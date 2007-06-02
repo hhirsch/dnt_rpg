@@ -55,7 +55,6 @@ personagem::~personagem()
    if(portraitImage)
    {
      SDL_FreeSurface(portraitImage);
-     glDeleteTextures(1,&portrait);
    }
    if(inventories)
    {
@@ -149,7 +148,6 @@ void personagem::definePortrait(string portraitFile)
    if(portraitImage != NULL)
    {
       SDL_FreeSurface(portraitImage);
-      glDeleteTextures(1, &portrait);
    }
 
    SDL_Surface* img = IMG_Load(portraitFile.c_str());
@@ -166,14 +164,6 @@ void personagem::definePortrait(string portraitFile)
 
    /* Define fileName */
    retratoConversa = portraitFile;
-
-   /* Load as Texture */
-   carregaTexturaRGBA(portraitImage, &portrait);
-
-   portraitX = (GLfloat)portraitImage->w / 
-               (GLfloat)smallestPowerOfTwo(portraitImage->w);
-   portraitY = (GLfloat)portraitImage->h / 
-               (GLfloat)smallestPowerOfTwo(portraitImage->h);
 }
 
 /*********************************************************************
@@ -202,20 +192,18 @@ void personagem::defineActualLifePoints(int newLife)
    lifePoints = newLife;
    lifeBar->defineActualHealth(newLife);
    lifeBar->draw(portraitImage);
-
-   glDeleteTextures(1, &portrait);
-   carregaTexturaRGBA(portraitImage, &portrait);
 }
 
 /*********************************************************************
  *                         drawMainPortrait                          *
  *********************************************************************/
-void personagem::drawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
-                                  GLdouble x2, GLdouble y2, GLdouble z2,
-                                  GLdouble x3, GLdouble y3, GLdouble z3,
-                                  GLdouble x4, GLdouble y4, GLdouble z4)
+void personagem::drawMainPortrait()
 {
-   glEnable(GL_TEXTURE_2D);
+   glRasterPos2f(800-portraitImage->w, 600);
+   glPixelZoom(1.0, -1.0);
+   glDrawPixels(portraitImage->w, portraitImage->h, GL_RGBA, GL_UNSIGNED_BYTE, 
+                portraitImage->pixels);
+/*   glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, portrait );
    glBegin(GL_QUADS);
       glColor3f(1,1,1);
@@ -228,7 +216,7 @@ void personagem::drawMainPortrait(GLdouble x1, GLdouble y1, GLdouble z1,
       glTexCoord2f(0,0);
       glVertex3f(x4,y4,z4);
    glEnd();
-   glDisable(GL_TEXTURE_2D);
+   glDisable(GL_TEXTURE_2D);*/
 }
 
 /******************************************************************

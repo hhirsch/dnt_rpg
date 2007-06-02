@@ -3,6 +3,7 @@
  */
 
 #include "initial.h"
+#include "util.h"
 #include <SDL/SDL_image.h>
 #include "../lang/lang.h"
 
@@ -128,7 +129,11 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
                  }
              }
          }
-         gui->draw(proj,modl,viewPort);
+         glPushMatrix();
+            draw2DMode();
+            gui->draw(proj,modl,viewPort);
+            draw3DMode();
+         glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
       }

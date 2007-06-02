@@ -306,9 +306,6 @@ class engine
        ***************************************************************/  
       void loadPCs();
 
-      void draw2DMode();
-      void draw3DMode();
-
       Map* actualMap;              /**< Actual Engine Map */
       cursor* cursors;             /**< Utilized mouse cursors */
 

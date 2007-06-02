@@ -72,11 +72,11 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 
    GLfloat posX = mouseX;
    GLfloat posZ = mouseZ;
-   if( (mouseX < 0) || (mouseX > actualMap->getSizeX()*SQUARESIZE))
+   if( (mouseX < 0) || (mouseX > actualMap->getSizeX()*SQUARE_SIZE))
    {
       posX = 0;
    }
-   if( (mouseZ < 0) || (mouseZ > actualMap->getSizeZ()*SQUARESIZE))
+   if( (mouseZ < 0) || (mouseZ > actualMap->getSizeZ()*SQUARE_SIZE))
    {
       posZ = 0;
    }
