@@ -68,7 +68,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
       //GLfloat u1,u2,v1,v2;
       boundingBox bounding;
       GLfloat X[4], Z[4];
-      while( (proxima->objects[ob] != NULL)) 
+      while( (ob < MAXOBJETOS) && (proxima->objects[ob] != NULL)) 
       {
         if(!proxima->pisavelObj[ob])
         {
