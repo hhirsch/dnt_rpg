@@ -625,6 +625,8 @@ void editor::draw()
       {
          /* Sky */
          glPushMatrix();
+            glTranslatef(gui->gameCamera.getCameraX(), 0.0, 
+                         gui->gameCamera.getCameraZ());
             gameSky->draw(map,gameSun->getRotation());
          glPopMatrix();
 

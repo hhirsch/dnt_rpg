@@ -1,4 +1,5 @@
 #include "messages.h"
+#include "../engine/util.h"
 
 /******************************************************************
  *                        getStringForUser                        *
@@ -6,6 +7,7 @@
 string getStringFromUser(string title, string previous,
                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
+   draw2DMode();
    interface* gui = new interface(NULL);
    janela* getWindow;
    botao* okButton;
@@ -82,6 +84,8 @@ string getStringFromUser(string title, string previous,
 
    delete(gui);
 
+   draw3DMode();
+
    return(returnStr);
 
 }
@@ -92,6 +96,7 @@ string getStringFromUser(string title, string previous,
 int getOptionFromUser(string title, string message, string opt1, string opt2,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
+   draw2DMode();
    interface* gui = new interface(NULL);
    janela* getWindow;
    botao* opt1Button;
@@ -173,6 +178,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    }
 
    delete(gui);
+   draw3DMode();
    return(ret);
 }
 
@@ -182,6 +188,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
 void showMessage(string title, string message,
                  GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
+   draw2DMode();
    interface* gui = new interface(NULL);
    janela* getWindow;
    botao* okButton;
@@ -244,6 +251,7 @@ void showMessage(string title, string message,
 
    }
 
+   draw3DMode();
    delete(gui);
 
 }

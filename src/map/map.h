@@ -26,7 +26,8 @@ using namespace std;
 #define MEIOFIOALTURA           2 /**< Meio-fios height */
 #define ALTURAMAXIMA          150 /**< Max square height */
 
-#define SQUARE_DIVISIONS        1
+#define SQUARE_DIVISIONS_INC   32 /**< Difference of heigh to inc the square
+                                       divisions. */ 
 #define TEXTURE_REPEATS         4 /**< Number of Repeats of indoor texture */ 
 
 /*!
@@ -114,6 +115,7 @@ class Square
       conection mapConection;           /**< Conection to other map */
       int statusObj[MAXOBJETOS];        /**< Current Status of Object */
       int pisavelObj[MAXOBJETOS];       /**< Object collision or not */
+      int divisions;                    /**< Number of Divisions */
 };
 
 

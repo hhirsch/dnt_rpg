@@ -73,7 +73,7 @@
 /********************************************************************
  *                        Sun's constants                           *
  ********************************************************************/
-
+#define SKY_SIZE       FARVIEW-256    /**< Sky Size */
 #define SUN_HOUR_BORN          4.2    /**< Sun Hour to born */
 #define SUN_HOUR_DEATH         20.0   /**< Sun hour to die */
 #define SUN_HOUR_INITIAL_TOTAL 8.5    /**< Initial hour of Total Light */

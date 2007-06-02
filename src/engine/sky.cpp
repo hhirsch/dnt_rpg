@@ -95,8 +95,8 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
       glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
       glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
       glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
-      glScalef(HALFFARVIEW,HALFFARVIEW,HALFFARVIEW);
-      drawDome(20,20);
+      glScalef(SKY_SIZE,SKY_SIZE,SKY_SIZE);
+      drawDome(15,15);
    glPopMatrix();
 
    if(!actualMap->fog.enabled)
