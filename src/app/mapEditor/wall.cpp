@@ -228,9 +228,9 @@ void wall::doWall(bool X, bool Z, bool full)
          if(limitSquare)
          {
             float cmp = ((int)(actualWall->z1) / SQUARE_SIZE)*SQUARE_SIZE;
-            actualWall->x1 = ((int)floor((actualWall->x1) / SQUARE_SIZE))*SQUARE_SIZE;
-            actualWall->x2 = ((int)floor((actualWall->x2) / SQUARE_SIZE))*SQUARE_SIZE;
-            actualWall->z1 = ((int)floor((actualWall->z1 / SQUARE_SIZE)))*SQUARE_SIZE;
+            actualWall->x1 = ((int)round((actualWall->x1) / SQUARE_SIZE))*SQUARE_SIZE;
+            actualWall->x2 = ((int)round((actualWall->x2) / SQUARE_SIZE))*SQUARE_SIZE;
+            actualWall->z1 = ((int)round((actualWall->z1 / SQUARE_SIZE)))*SQUARE_SIZE;
             if(cmp < actualWall->z1)
             {
                if(full)
@@ -254,9 +254,9 @@ void wall::doWall(bool X, bool Z, bool full)
          if(limitSquare)
          {
             float cmp = ((int)(actualWall->x1) / SQUARE_SIZE)*SQUARE_SIZE;
-            actualWall->z1 = ((int)floor((actualWall->z1) / SQUARE_SIZE))*SQUARE_SIZE;
-            actualWall->z2 = ((int)floor((actualWall->z2) / SQUARE_SIZE))*SQUARE_SIZE;
-            actualWall->x1 = ((int)floor((actualWall->x1 / SQUARE_SIZE)))*SQUARE_SIZE;
+            actualWall->z1 = ((int)round((actualWall->z1) / SQUARE_SIZE))*SQUARE_SIZE;
+            actualWall->z2 = ((int)round((actualWall->z2) / SQUARE_SIZE))*SQUARE_SIZE;
+            actualWall->x1 = ((int)round((actualWall->x1 / SQUARE_SIZE)))*SQUARE_SIZE;
             if(cmp < actualWall->x1)
             {
                if(full)
