@@ -8,6 +8,7 @@
  - More Engine Optimizations;
  - Smooth Camera Movements;
  - Indoor Reflexions;
+ - More 3D Objects;
 
 ================================================
 |               Version 0.1.1                  |
