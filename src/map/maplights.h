@@ -50,9 +50,13 @@ class mapLights
       /*! Actualize Map Lights Position */
       void actualize();
 
+      /*! Get the Lights File Name
+       * \return name of the file */
+      string getFileName();
 
    private:
       mapLight light[5];    /**< Total number of lights */
+      string fileName;      /**< FileName */
 };
 
 #endif

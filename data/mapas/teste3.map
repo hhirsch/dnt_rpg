@@ -2,9 +2,15 @@ T 5X5
 # Made by DccNiTghtmare's MapEditor, v0.0.3
 npc ../data/mapas/teste3.map.npc
 MUSICA ../data/music/musica13.ogg
+light ../data/mapas/teste3.map.lgh
 Outdoor: 0
+o ../data/models/objetos/icex/mesa_braco.dcc
+o ../data/models/objetos/icex/cadeira.dcc
 o ../data/models/objetos/geral/porta2.dcc
 o ../data/models/objetos/geral/porta3.dcc
+o ../data/models/objetos/icex/quadro.dcc
+o ../data/models/objetos/icex/lixo.dcc
+o ../data/models/objetos/icex/mesa.dcc
 t ../data/texturas/chao_ladrilho.png ../data/texturas/chao_ladrilho.png 196 196 196
 t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 129 118 131
 t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 220 170 171
@@ -80,12 +86,53 @@ mt ../data/texturas/parede_rosa.jpg
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/icex/quadro.dcc 1:1,1:106.302589,127.278740:0:0
+uo ../data/models/objetos/icex/quadro.dcc 1:1,1:9.859050,64.900032:90:0
+uo ../data/models/objetos/icex/lixo.dcc 1:1,1:14.065823,13.976111:-90:0
+uo ../data/models/objetos/icex/mesa.dcc 1:1,1:46.859779,34.382401:-270:0
+uo ../data/models/objetos/icex/mesa.dcc 1:1,1:48.432652,79.791687:-300:0
+uo ../data/models/objetos/icex/mesa.dcc 1:1,1:72.657341,33.085384:-273:0
+uo ../data/models/objetos/icex/mesa.dcc 1:1,1:98.730293,33.826859:-265:0
+uo ../data/models/objetos/icex/mesa.dcc 1:1,1:48.223267,55.587799:-270:0
+uo ../data/models/objetos/icex/mesa.dcc 1:1,1:71.640480,55.936897:-270:0
+uo ../data/models/objetos/icex/mesa.dcc 1:1,1:99.141869,57.881519:-270:0
+uo ../data/models/objetos/icex/mesa.dcc 1:1,1:73.633156,100.069290:65:0
+uo ../data/models/objetos/icex/mesa.dcc 1:1,1:104.587379,85.058296:81:0
+uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:74.598259,56.480541:88:0
+uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:57.293190,55.697399:91:0
+uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:49.237061,35.101826:90:0
+uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:83.506485,34.197178:88:0
+uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:108.179832,32.636444:100:0
+uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:106.222595,58.259785:89:0
+uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:61.455250,85.702827:60:0
+uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:82.159401,104.488525:63:0
+uo ../data/models/objetos/icex/cadeira.dcc 1:1,1:114.623123,87.241432:80:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:1,1:250.213699,22.804295:-133:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:1,1:223.470047,20.277506:-109:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:1,1:189.007965,20.067568:-112:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:1,1:247.816345,47.959705:-95:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:1,1:217.220520,49.567207:-100:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:1,1:241.534164,79.573547:-81:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:1,1:195.488388,71.143990:-85:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:1,1:217.728897,94.849930:-67:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:1,1:174.265625,41.468723:-90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/icex/quadro.dcc 1:2,1:310.843201,59.545712:-90:0
+uo ../data/models/objetos/icex/lixo.dcc 1:2,1:307.143219,109.560608:-90:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:2,1:275.694305,22.575722:-124:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:2,1:288.351288,47.087990:-96:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:2,1:269.980743,69.069107:-88:0
+uo ../data/models/objetos/icex/mesa_braco.dcc 1:2,1:277.645782,95.809471:-54:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_ladrilho.png
+uo ../data/models/objetos/icex/lixo.dcc 1:3,1:628.775940,141.173950:-90:0
+uo ../data/models/objetos/icex/lixo.dcc 1:3,1:631.948669,117.289421:-90:0
+uo ../data/models/objetos/icex/lixo.dcc 1:3,1:751.735840,15.209127:-90:0
+uo ../data/models/objetos/icex/lixo.dcc 1:3,1:747.563538,239.373566:-90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/icex/lixo.dcc 1:4,1:1012.094482,18.185965:-90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 #Z: 1
@@ -95,6 +142,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/icex/quadro.dcc 1:3,2:758.643066,486.419739:-90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -106,10 +154,14 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/icex/quadro.dcc 1:3,3:758.843689,615.972229:-90:0
+uo ../data/models/objetos/icex/lixo.dcc 1:3,3:753.882507,558.451843:-90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/icex/lixo.dcc 1:4,3:1013.405762,750.727295:-90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
+uo ../data/models/objetos/icex/lixo.dcc 1:5,3:1263.000244,762.967346:-90:0
 #Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
@@ -129,8 +181,10 @@ ut ../data/texturas/chao_madeira3.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 uc 157.559540,308.741302,178.787354,318.985077:../data/mapas/teste2.map
+uo ../data/models/objetos/icex/lixo.dcc 1:3,5:762.013550,1263.691162:-90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_ametista.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_ametista.png
+uo ../data/models/objetos/icex/lixo.dcc 1:5,5:1257.542725,1261.672119:-90:0
 i 128.000000,148.000000

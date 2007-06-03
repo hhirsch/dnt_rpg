@@ -1562,10 +1562,10 @@ int Map::save(string arquivo)
    }
 
    /* Write Lights file name */
-   /*if(!lights.empty())
+   if(!lights.getFileName().empty())
    {
-      fprintf(arq,"light %s\n",lights.c_str());
-   }*/
+      fprintf(arq,"light %s\n",lights.getFileName().c_str());
+   }
 
    /* Write if is outdoor or not */
    fprintf(arq,"Outdoor: %d\n", outdoor);

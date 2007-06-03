@@ -15,6 +15,7 @@
 #define STATE_ICEX        15
 #define STATE_NATURE      16
 #define STATE_MACABRE     17
+#define STATE_BATH        18
 
 /* Particles */
 #define STATE_FIRE        30

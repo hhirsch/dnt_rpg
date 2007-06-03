@@ -25,6 +25,7 @@ mapLight::~mapLight()
  ************************************************************/
 mapLights::mapLights()
 {
+   fileName = "";
 }
 
 /************************************************************
@@ -150,6 +151,7 @@ void mapLights::Load(string arq)
       glDisable(light[curLight].Glight);
       curLight++;
    }
+   fileName = arq;
 }
 
 /************************************************************
@@ -213,4 +215,13 @@ void mapLights::actualize()
       }
    }
 }
+
+/************************************************************
+ *                        getFileName                       *
+ ************************************************************/
+string mapLights::getFileName()
+{
+   return(fileName);
+}
+
 
