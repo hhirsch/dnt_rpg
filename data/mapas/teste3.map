@@ -4,84 +4,87 @@ npc ../data/mapas/teste3.map.npc
 MUSICA ../data/music/musica13.ogg
 light ../data/mapas/teste3.map.lgh
 Outdoor: 0
-o ../data/models/objetos/icex/mesa_braco.dcc
-o ../data/models/objetos/icex/cadeira.dcc
-o ../data/models/objetos/geral/porta2.dcc
-o ../data/models/objetos/geral/porta3.dcc
-o ../data/models/objetos/icex/quadro.dcc
-o ../data/models/objetos/icex/lixo.dcc
+o ../data/models/objetos/banho/privada.dcc
+o ../data/models/objetos/banho/mictorio.dcc
+o ../data/models/objetos/banho/privada.dcc
 o ../data/models/objetos/icex/mesa.dcc
-t ../data/texturas/chao_ladrilho.png ../data/texturas/chao_ladrilho.png 196 196 196
-t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 129 118 131
-t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 220 170 171
+o ../data/models/objetos/icex/lixo.dcc
+o ../data/models/objetos/icex/quadro.dcc
+o ../data/models/objetos/geral/porta3.dcc
+o ../data/models/objetos/geral/porta2.dcc
+o ../data/models/objetos/icex/cadeira.dcc
+o ../data/models/objetos/icex/mesa_braco.dcc
 t ../data/texturas/chao_madeira3.png ../data/texturas/chao_madeira3.png 102 57 29
-d ../data/models/objetos/geral/porta2.dcc 512.000000,83.403130:90
-d ../data/models/objetos/geral/porta2.dcc 768.000000,79.691963:90
-d ../data/models/objetos/geral/porta2.dcc 686.775940,256.000000:0
-d ../data/models/objetos/geral/porta2.dcc 553.765442,256.000000:0
-d ../data/models/objetos/geral/porta3.dcc 768.000000,1163.063843:90
-d ../data/models/objetos/geral/porta3.dcc 1154.512329,768.000000:0
-d ../data/models/objetos/geral/porta3.dcc 1024.000000,98.647957:90
-d ../data/models/objetos/geral/porta3.dcc 157.107285,320.000000:0
-d ../data/models/objetos/geral/porta3.dcc 26.435873,128.000000:0
+t ../data/texturas/parede_rosa.jpg ../data/texturas/parede_rosa.jpg 220 170 171
+t ../data/texturas/chao_ametista.png ../data/texturas/chao_ametista.png 129 118 131
+t ../data/texturas/chao_ladrilho.png ../data/texturas/chao_ladrilho.png 196 196 196
 d ../data/models/objetos/geral/porta3.dcc 162.878220,128.000000:0
-muro 512.000000,83.403130,522.000000,256.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 758.000000,79.691963,768.000000,768.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 708.613708,246.000000,758.000000,256.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 575.603210,246.000000,686.775940,256.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 512.000000,10.000000,522.000000,61.565334:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 768.000000,1163.063843,778.000000,1270.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 1176.350098,768.000000,1270.000000,778.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 1024.000000,98.647957,1034.000000,768.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 1024.000000,10.000000,1034.000000,76.810165:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 768.000000,1024.000000,778.000000,1141.226074:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 778.000000,1024.000000,1034.000000,1034.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 1024.000000,768.000000,1034.000000,1024.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 178.945084,310.000000,310.000000,320.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 48.273666,118.000000,162.878220,128.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 184.716019,118.000000,310.000000,128.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 128.000000,10.000000,138.000000,118.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,118.000000,26.435873,128.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,310.000000,157.107285,320.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 310.000000,10.000000,320.000000,320.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,1270.000000,1270.000000,1280.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 10.000000,0.000000,1270.000000,10.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 0.000000,0.000000,10.000000,1280.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 1270.000000,0.000000,1280.000000,1280.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 1034.000000,768.000000,1154.512329,778.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 758.000000,10.000000,768.000000,57.854168:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 768.000000,758.000000,1024.000000,768.000000:16,16,16
-mt ../data/texturas/parede_rosa.jpg
-muro 522.000000,246.000000,553.765442,256.000000:16,16,16
+d ../data/models/objetos/geral/porta3.dcc 26.435873,128.000000:0
+d ../data/models/objetos/geral/porta3.dcc 157.107285,320.000000:0
+d ../data/models/objetos/geral/porta3.dcc 1024.000000,98.647957:90
+d ../data/models/objetos/geral/porta3.dcc 1154.512329,768.000000:0
+d ../data/models/objetos/geral/porta3.dcc 768.000000,1163.063843:90
+d ../data/models/objetos/geral/porta2.dcc 553.765442,256.000000:0
+d ../data/models/objetos/geral/porta2.dcc 686.775940,256.000000:0
+d ../data/models/objetos/geral/porta2.dcc 768.000000,79.691963:90
+d ../data/models/objetos/geral/porta2.dcc 512.000000,83.403130:90
+muro 637.879089,3.567541,647.879089,246.614609:16,16,16
 mt ../data/texturas/parede_rosa.jpg
 muro 521.684326,126.612839,757.697021,136.612839:16,16,16
 mt ../data/texturas/parede_rosa.jpg
-muro 637.879089,3.567541,647.879089,246.614609:16,16,16
+muro 522.000000,246.000000,553.765442,256.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 768.000000,758.000000,1024.000000,768.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 758.000000,10.000000,768.000000,57.854168:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 1034.000000,768.000000,1154.512329,778.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 1270.000000,0.000000,1280.000000,1280.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 0.000000,0.000000,10.000000,1280.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,0.000000,1270.000000,10.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,1270.000000,1270.000000,1280.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 310.000000,10.000000,320.000000,320.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,310.000000,157.107285,320.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 10.000000,118.000000,26.435873,128.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 128.000000,10.000000,138.000000,118.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 184.716019,118.000000,310.000000,128.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 48.273666,118.000000,162.878220,128.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 178.945084,310.000000,310.000000,320.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 1024.000000,768.000000,1034.000000,1024.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 778.000000,1024.000000,1034.000000,1034.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 768.000000,1024.000000,778.000000,1141.226074:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 1024.000000,10.000000,1034.000000,76.810165:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 1024.000000,98.647957,1034.000000,768.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 1176.350098,768.000000,1270.000000,778.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 768.000000,1163.063843,778.000000,1270.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 512.000000,10.000000,522.000000,61.565334:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 575.603210,246.000000,686.775940,256.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 708.613708,246.000000,758.000000,256.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 758.000000,79.691963,768.000000,768.000000:16,16,16
+mt ../data/texturas/parede_rosa.jpg
+muro 512.000000,83.403130,522.000000,256.000000:16,16,16
 mt ../data/texturas/parede_rosa.jpg
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -130,6 +133,17 @@ uo ../data/models/objetos/icex/lixo.dcc 1:3,1:628.775940,141.173950:-90:0
 uo ../data/models/objetos/icex/lixo.dcc 1:3,1:631.948669,117.289421:-90:0
 uo ../data/models/objetos/icex/lixo.dcc 1:3,1:751.735840,15.209127:-90:0
 uo ../data/models/objetos/icex/lixo.dcc 1:3,1:747.563538,239.373566:-90:0
+uo ../data/models/objetos/banho/privada.dcc 1:3,1:534.823792,143.830872:0:0
+uo ../data/models/objetos/banho/privada.dcc 1:3,1:550.902710,143.620010:0:0
+uo ../data/models/objetos/banho/privada.dcc 1:3,1:567.539429,144.330765:0:0
+uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:522.936279,192.927643:-89:0
+uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:522.800110,206.400925:-89:0
+uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:522.790894,219.096649:-89:0
+uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:523.037842,232.160324:-89:0
+uo ../data/models/objetos/banho/privada.dcc 1:3,1:749.851074,153.123795:-89:0
+uo ../data/models/objetos/banho/privada.dcc 1:3,1:750.102112,170.704941:-89:0
+uo ../data/models/objetos/banho/privada.dcc 1:3,1:750.090820,189.187393:-89:0
+uo ../data/models/objetos/banho/privada.dcc 1:3,1:750.284363,206.124863:-89:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/chao_madeira3.png
 uo ../data/models/objetos/icex/lixo.dcc 1:4,1:1012.094482,18.185965:-90:0
