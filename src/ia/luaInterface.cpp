@@ -9,10 +9,10 @@ luaInterface::luaInterface()
   error = 0;
 
   /* Open the Lua State Machine */
-  //state = luaL_newstate();
+  state = luaL_newstate();
 
   /* Open the Lua Libs */
-  //luaL_openlibs(state);
+  luaL_openlibs(state);
 }
 
 /*************************************************************
@@ -29,7 +29,7 @@ luaInterface::~luaInterface()
 void luaInterface::loadModule(string m)
 {
   module = m;
-  //error = luaL_dofile(state, module.c_str());
+  error = luaL_dofile(state, module.c_str());
   printf("error = %d\n", error);
   if (error == 0)
   {
@@ -66,7 +66,7 @@ void luaInterface::getGlobal(string name)
  *************************************************************/
 void luaInterface::getField(int index, string field)
 {
-  //lua_getfield(state, index, field.c_str());
+  lua_getfield(state, index, field.c_str());
 }
 
 /*************************************************************
@@ -90,7 +90,7 @@ void luaInterface::push(string s)
  *************************************************************/
 void luaInterface::push(int i)
 {
-  //lua_pushinteger(state, i);
+  lua_pushinteger(state, i);
 }
 
 /*************************************************************
