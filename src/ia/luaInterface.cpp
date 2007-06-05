@@ -1,103 +1,71 @@
 #include "luaInterface.h"
 
-/*************************************************************
- *                         Constructor                       *
- *************************************************************/
-luaInterface::luaInterface()
+string locateAndGo(string object)
 {
-  module = "";
-  error = 0;
+  printf("Locating the %s object...\n", object.c_str());
+  //if(lookFor("bathroom"), go(x, y))
+  return "done";
+  // else
+  // return "fail"
+}
 
+string doAction(string action)
+{
+  printf("Doing the %s action...\n", action.c_str());
+  //if(action)
+  return "done";
+  // else
+  // return "fail"
+}
+
+void idle()
+{
+  printf("Entering the idle state...");
+}
+
+int cppCalls(lua_State* state)
+{
+  string currentState = lua_tostring(state, -2);
+  string args = lua_tostring(state, -1);
+  string result;
+  printf("currentState: %s\n", currentState.c_str());
+
+  // Choses the action
+  if(currentState == "locateAndGo")
+  {
+    result = locateAndGo(args);
+  }
+  else if(currentState == "doAction")
+  {
+    result = doAction(args);
+  }
+  else if(currentState == "idle")
+  {
+    // do nothing!
+  }
+
+  lua_pushstring(state, result.c_str());
+  return 1;
+  //if(fsmState =)
+}
+
+void playPlanning(string planning)
+{
   /* Open the Lua State Machine */
-  state = luaL_newstate();
+  lua_State* state = luaL_newstate();
 
   /* Open the Lua Libs */
   luaL_openlibs(state);
-}
 
-/*************************************************************
- *                          Destructor                       *
- *************************************************************/
-luaInterface::~luaInterface()
-{
+  /* Register the cpp function to call the others */
+  lua_register(state, "cppCalls", cppCalls);
+
+  /* Plays the script */
+  luaL_dofile(state, "../../data/ia/script/general/fsm.lua");
+  luaL_dofile(state, planning.c_str());
+
+  /* Closes the lua instance */
   lua_close(state);
-}
-
-/*************************************************************
- *                         loadModule                        *
- *************************************************************/
-void luaInterface::loadModule(string m)
-{
-  module = m;
-  error = luaL_dofile(state, module.c_str());
-  printf("error = %d\n", error);
-  if (error == 0)
-  {
-    printf("Module %s loaded succesfully\n", module.c_str());
-  }
-}
-
-/*************************************************************
- *                            getTop                         *
- *************************************************************/
-int luaInterface::getTop()
-{
-  return lua_gettop(state);
-}
-
-/*************************************************************
- *                             pop                           *
- *************************************************************/
-void luaInterface::pop(int n)
-{
-  lua_pop(state, n);
-}
-
-/*************************************************************
- *                          getGlobal                        *
- *************************************************************/
-void luaInterface::getGlobal(string name)
-{
-  lua_getglobal(state, name.c_str());
-}
-
-/*************************************************************
- *                          getField                         *
- *************************************************************/
-void luaInterface::getField(int index, string field)
-{
-  lua_getfield(state, index, field.c_str());
-}
-
-/*************************************************************
- *                            call                           *
- *************************************************************/
-void luaInterface::call(int numOfArgs, int numOfReturns)
-{
-  lua_call(state, numOfArgs, numOfReturns);
-}
-
-/*************************************************************
- *                             push                          *
- *************************************************************/
-void luaInterface::push(string s)
-{
-  lua_pushstring(state, s.c_str());
-}
-
-/*************************************************************
- *                             push                          *
- *************************************************************/
-void luaInterface::push(int i)
-{
-  lua_pushinteger(state, i);
-}
-
-/*************************************************************
- *                          getValue                         *
- *************************************************************/
-string luaInterface::getValue()
-{
-  return(lua_tostring(state, -1));
+  printf("Done running planning!\n");
 }
 
