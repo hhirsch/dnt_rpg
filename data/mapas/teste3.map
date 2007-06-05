@@ -135,10 +135,10 @@ uo ../data/models/objetos/icex/lixo.dcc 1:3,1:747.563538,239.373566:-90:0
 uo ../data/models/objetos/banho/privada.dcc 1:3,1:534.823792,143.830872:0:0
 uo ../data/models/objetos/banho/privada.dcc 1:3,1:550.902710,143.620010:0:0
 uo ../data/models/objetos/banho/privada.dcc 1:3,1:567.539429,144.330765:0:0
-uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:523.000000,192.927643:-90:0
-uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:523.000000,206.400925:-90:0
-uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:523.000000,219.096649:-90:0
-uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:523.000000,232.160324:-90:0
+uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:523.200000,192.927643:-90:0
+uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:523.200000,206.400925:-90:0
+uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:523.200000,219.096649:-90:0
+uo ../data/models/objetos/banho/mictorio.dcc 1:3,1:523.200000,232.160324:-90:0
 uo ../data/models/objetos/banho/privada.dcc 1:3,1:749.851074,153.123795:-90:0
 uo ../data/models/objetos/banho/privada.dcc 1:3,1:750.102112,170.704941:-90:0
 uo ../data/models/objetos/banho/privada.dcc 1:3,1:750.090820,189.187393:-90:0
