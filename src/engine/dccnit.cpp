@@ -870,7 +870,6 @@ void engine::redmensionateWindow(SDL_Surface *screen, int actualFarView)
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   printf("Farview: %d\n", actualFarView);
    gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, 
                   actualFarView);
    glGetIntegerv(GL_VIEWPORT, viewPort);
