@@ -177,6 +177,6 @@ bool actionInRange(GLfloat posX, GLfloat posZ,
 
 void draw2DMode();
 
-void draw3DMode();
+void draw3DMode(int actualFarView);
 
 #endif

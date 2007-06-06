@@ -1,4 +1,5 @@
 #include "maplights.h"
+#include "../engine/util.h"
 #include <math.h>
 
 /************************************************************
@@ -205,7 +206,8 @@ void mapLights::actualize(GLfloat posX, GLfloat posZ)
            gLight = GL_LIGHT3;
          break;
       }
-      if(activeLights[i].lightNumber >= 0)
+      if( (activeLights[i].lightNumber >= 0) && 
+          (activeLights[i].distance <= 2*INDOOR_FARVIEW))
       {
          l = activeLights[i].lightNumber;
          glDisable(GL_LIGHTING);

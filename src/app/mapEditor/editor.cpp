@@ -785,7 +785,7 @@ void editor::draw()
    glPushMatrix();
       draw2DMode();
       gui->draw(proj, modl, viewPort);
-      draw3DMode();
+      draw3DMode(FARVIEW);
    glPopMatrix();
    glEnable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);

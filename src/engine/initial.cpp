@@ -132,7 +132,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          glPushMatrix();
             draw2DMode();
             gui->draw(proj,modl,viewPort);
-            draw3DMode();
+            draw3DMode(FARVIEW);
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();

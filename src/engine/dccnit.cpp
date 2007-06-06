@@ -304,6 +304,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    {
       GLdouble fogEnd = HALFFARVIEW+200;
       GLdouble fogStart = 200;
+      GLdouble fogDensity = 0.001;
       GLfloat color[3] = {0.8,0.8,0.8};
       if(!actualMap->isOutdoor())
       {
@@ -311,13 +312,14 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
          color[1] = 0.0;
          color[2] = 0.0;
          fogStart = 40;
+         fogDensity = 1.0;
          fogEnd = INDOOR_FARVIEW-2;
       }
       glEnable(GL_FOG);
       {
         glFogi(GL_FOG_MODE,GL_LINEAR);
         glFogfv(GL_FOG_COLOR, color);
-        glFogf(GL_FOG_DENSITY, 0.001);
+        glFogf(GL_FOG_DENSITY, fogDensity);
         glHint(GL_FOG_HINT, GL_DONT_CARE);
         glFogf(GL_FOG_START, fogStart);
         glFogf(GL_FOG_END, fogEnd);
@@ -627,7 +629,7 @@ int engine::OptionsScreen(GLuint idTextura)
          glPushMatrix();
             draw2DMode();
             interf->draw(proj,modl,viewPort);
-            draw3DMode();
+            draw3DMode(FARVIEW);
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
@@ -720,7 +722,7 @@ int engine::CharacterScreen(GLuint idTextura)
          glPushMatrix();
             draw2DMode();
             gui->draw(proj,modl,viewPort);
-            draw3DMode();
+            draw3DMode(FARVIEW);
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
@@ -868,6 +870,7 @@ void engine::redmensionateWindow(SDL_Surface *screen, int actualFarView)
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
+   printf("Farview: %d\n", actualFarView);
    gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, 
                   actualFarView);
    glGetIntegerv(GL_VIEWPORT, viewPort);
@@ -2582,7 +2585,14 @@ void engine::renderGUI()
    glPushMatrix();
          cursors->draw(mouseX, mouseY);
    glPopMatrix();
-      draw3DMode();
+      if(actualMap->isOutdoor())
+      {
+         draw3DMode(FARVIEW);
+      }
+      else
+      {
+         draw3DMode(INDOOR_FARVIEW);
+      }
    glPopMatrix();
    
    glEnable(GL_LIGHTING);

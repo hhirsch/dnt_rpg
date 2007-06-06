@@ -83,6 +83,7 @@ void shadow::init()
  *******************************************************************/
 void shadow::defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ)
 {
+#if 0
    if(avaible)
    {
       /*glMatrixMode(GL_PROJECTION);
@@ -102,6 +103,7 @@ void shadow::defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ)
 
       glViewport(0, 0, SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
    }
+#endif
 }
 
 /*******************************************************************
@@ -109,6 +111,7 @@ void shadow::defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ)
  *******************************************************************/
 void shadow::defineCameraView(camera& cam, GLdouble proj[16],GLdouble modl[16])
 {
+#if 0
    if(avaible)
    {
       glClear(GL_DEPTH_BUFFER_BIT);
@@ -120,6 +123,7 @@ void shadow::defineCameraView(camera& cam, GLdouble proj[16],GLdouble modl[16])
 
       glViewport(0, 0, SCREEN_X, SCREEN_Y);
    }
+#endif
 }
 
 /*******************************************************************

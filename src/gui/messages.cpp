@@ -84,7 +84,7 @@ string getStringFromUser(string title, string previous,
 
    delete(gui);
 
-   draw3DMode();
+   draw3DMode(FARVIEW);
 
    return(returnStr);
 
@@ -178,7 +178,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    }
 
    delete(gui);
-   draw3DMode();
+   draw3DMode(FARVIEW);
    return(ret);
 }
 
@@ -251,7 +251,7 @@ void showMessage(string title, string message,
 
    }
 
-   draw3DMode();
+   draw3DMode(FARVIEW);
    delete(gui);
 
 }
