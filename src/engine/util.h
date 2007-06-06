@@ -51,7 +51,7 @@
 #define ZOOMMAXIMO       80             /**< Max value of Zoom */
 #define ZOOMMINIMO       500            /**< Min value of Zoom */
 #define FARVIEW         4096            /**< FarView constant */
-#define INDOOR_FARVIEW   512            /**< Indoor FarView */
+#define INDOOR_FARVIEW   768            /**< Indoor FarView */
 
 #define HALFFARVIEW    FARVIEW / 2.0  /**< Half FarView Value */
 #define HALFFARVIEW2   HALFFARVIEW * HALFFARVIEW /**< Square Half Farview */
