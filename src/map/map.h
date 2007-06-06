@@ -136,10 +136,13 @@ class Map
        * \param cameraY -> Y coordinate of camera
        * \param cameraZ -> Z coordinate of camera
        * \param matriz  -> view frustum matriz 
+       * \param perX -> active character X position
+       * \param perZ -> active character Z position
        * \return 1 if success.
        ***************************************************************/
       int draw(GLfloat cameraX, GLfloat cameraY, 
-               GLfloat cameraZ, GLfloat matriz[6][4]);
+               GLfloat cameraZ, GLfloat matriz[6][4],
+               GLfloat perX, GLfloat perZ);
       /*!
        *************************************************************** 
        * Draw the floor on screen (using view culling)  

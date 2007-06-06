@@ -462,13 +462,13 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
  *                           Draw  Map                              *
  ********************************************************************/
 int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-              GLfloat matriz[6][4])
+              GLfloat matriz[6][4], GLfloat perX, GLfloat perZ)
 {
         int textura = -1;
         int Xaux = 0, Zaux = 0;
 
         /* Actualize Lights */
-        lights.actualize();
+        lights.actualize(perX, perZ);
 
         glEnable(GL_COLOR_MATERIAL);
 

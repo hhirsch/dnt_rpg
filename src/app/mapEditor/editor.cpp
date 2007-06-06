@@ -669,7 +669,8 @@ void editor::draw()
 
       glPushMatrix();
          map->draw(gui->gameCamera.getCameraX(), gui->gameCamera.getCameraY(), 
-                   gui->gameCamera.getCameraZ(), visibleMatrix);
+                   gui->gameCamera.getCameraZ(), visibleMatrix,
+                   gui->gameCamera.getCameraX(), gui->gameCamera.getCameraZ());
       glPopMatrix();
 
       if(!map->isOutdoor())

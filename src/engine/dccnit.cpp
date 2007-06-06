@@ -899,7 +899,7 @@ void engine::Init(SDL_Surface *screen)
    glShadeModel(GL_SMOOTH);
 
    /* Light Definition */
-   GLfloat light_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
+   GLfloat light_ambient[] = { 0.25, 0.25, 0.25, 1.0 };
    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
@@ -2405,7 +2405,9 @@ void engine::renderScene()
 
    /* Draw World, doing view frustum culling */
    actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                   gameCamera.getCameraZ(),visibleMatrix);
+                   gameCamera.getCameraZ(),visibleMatrix,
+                   PCs->getActiveCharacter()->posicaoLadoX,
+                   PCs->getActiveCharacter()->posicaoLadoZ);
 
 }
 

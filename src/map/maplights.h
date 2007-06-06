@@ -5,7 +5,9 @@
 #include <string>
 using namespace std;
 
-/**> Map Lights Implementation \todo not working for now. */
+#define MAX_LIGHTS_PER_MAP       20
+
+/*! Map Lights Implementation \todo not working for now. */
 class mapLight
 {
    public:
@@ -21,8 +23,6 @@ class mapLight
 
       GLfloat cutOff;             /**< Spot CutOff */
 
-      GLuint Glight; /**< Internal OpenGL Light Number */
-      
       bool enableLight;      /**< Enable Light */
       bool enableDiffuse;    /**< Enable Diffuse Light */
       bool enableSpecular;   /**< Enable Specular Light */
@@ -36,7 +36,15 @@ class mapLight
       ~mapLight();
 };
 
-/*! Conjunt of lights to a map */
+/*! The light Distance Class */
+class lightDist
+{
+   public:
+      int lightNumber;  /**< Internal Number of the Light */
+      GLfloat distance; /**< Current Distance */
+};
+
+/*! Group of lights to a map */
 class mapLights
 {
    public:
@@ -47,16 +55,25 @@ class mapLights
       /*! Load Map Lights from file
        * \param arq -> filename of lights file */
       void Load(string arq);
-      /*! Actualize Map Lights Position */
-      void actualize();
+      /*! Actualize Map Lights Position
+       * \param posX -> active character X position
+       * \param posZ -> active character Z position */
+      void actualize(GLfloat posX, GLfloat posZ);
 
       /*! Get the Lights File Name
        * \return name of the file */
       string getFileName();
 
    private:
-      mapLight light[5];    /**< Total number of lights */
-      string fileName;      /**< FileName */
+      /*! Set the active lights as the near lights
+       * \param posX -> X position
+       * \param posZ -> Z position */
+      void setNearLights(GLfloat posX, GLfloat posZ);
+
+
+      mapLight light[MAX_LIGHTS_PER_MAP];    /**< Total lights */
+      string fileName;                       /**< FileName */
+      lightDist activeLights[3];             /**< Current Active Lights */
 };
 
 #endif

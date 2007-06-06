@@ -1,4 +1,5 @@
 #include "maplights.h"
+#include <math.h>
 
 /************************************************************
  *                        Constructor                       *
@@ -25,7 +26,13 @@ mapLight::~mapLight()
  ************************************************************/
 mapLights::mapLights()
 {
+   int i;
    fileName = "";
+   for(i=0; i < 3; i++)
+   {
+      activeLights[i].lightNumber = (-1*i)-1;
+      activeLights[i].distance = (-1*i)-1;
+   }
 }
 
 /************************************************************
@@ -57,27 +64,11 @@ void mapLights::Load(string arq)
       {
          case 'L':/* new light */
             curLight++;
-            light[curLight].enableLight = true;
-            /* Select Correct Light */
-            switch(curLight)
+            if(curLight > MAX_LIGHTS_PER_MAP)
             {
-               case 0: 
-                  light[curLight].Glight = GL_LIGHT1;
-               break;
-               case 1: 
-                  light[curLight].Glight = GL_LIGHT2;
-               break;
-               case 2: 
-                  light[curLight].Glight = GL_LIGHT3;
-               break;
-               case 3: 
-                  light[curLight].Glight = GL_LIGHT4;
-               break;
-               case 4: 
-                  light[curLight].Glight = GL_LIGHT5;
-               break;
+               printf("Error: Lights Overflow!\n");
             }
-            glEnable(light[curLight].Glight);
+            light[curLight].enableLight = true;
          break;
          case 'a':/* ambient */
            light[curLight].light_ambient[0] = aux0;
@@ -124,46 +115,99 @@ void mapLights::Load(string arq)
    }
 
    fclose(file);
-
-   /* Disable All Unused Lights */
-   curLight++;
-   while(curLight < 5)
-   {
-      /* Select Correct Light */
-      switch(curLight)
-      {
-         case 0: 
-            light[curLight].Glight = GL_LIGHT1;
-         break;
-         case 1: 
-            light[curLight].Glight = GL_LIGHT2;
-         break;
-         case 2: 
-            light[curLight].Glight = GL_LIGHT3;
-         break;
-         case 3: 
-            light[curLight].Glight = GL_LIGHT4;
-         break;
-         case 4: 
-            light[curLight].Glight = GL_LIGHT5;
-         break;
-      }
-      glDisable(light[curLight].Glight);
-      curLight++;
-   }
    fileName = arq;
+}
+
+/************************************************************
+ *                       setNearLights                      *
+ ************************************************************/
+void mapLights::setNearLights(GLfloat posX, GLfloat posZ)
+{
+   GLfloat auxD, prvD;
+   int l,auxN,prvN; /* Counters and Auxiliars */
+   GLfloat dist = 0;
+   for(l=0; l< MAX_LIGHTS_PER_MAP; l++)
+   {
+      if(light[l].enableLight)
+      {
+         dist = sqrt( (posX - light[l].light_position[0]) *
+                      (posX - light[l].light_position[0]) +
+                      (posZ - light[l].light_position[2]) *
+                      (posZ - light[l].light_position[2]));
+         if( (activeLights[0].distance >= dist) || 
+             (activeLights[0].lightNumber < 0) ||
+             (activeLights[0].lightNumber == l) )
+         {
+            /* Change the Light and Shift It */
+            if(activeLights[0].lightNumber != l)
+            {
+               prvN = activeLights[0].lightNumber;
+               prvD = activeLights[0].distance;
+               activeLights[0].lightNumber = l;
+               activeLights[0].distance = dist;
+               auxN = activeLights[1].lightNumber;
+               auxD = activeLights[1].distance;
+               activeLights[1].lightNumber = prvN;
+               activeLights[1].distance = prvD;
+               activeLights[2].lightNumber = auxN;
+               activeLights[2].distance = auxD;
+            }
+         }
+         else if((activeLights[1].distance >= dist) ||
+                 (activeLights[1].lightNumber < 0) ||
+                 (activeLights[1].lightNumber == l))
+         {
+            /* Change and shift */
+            if(activeLights[1].lightNumber != l)
+            {
+               prvN = activeLights[1].lightNumber;
+               prvD = activeLights[1].distance;
+               activeLights[1].lightNumber = l;
+               activeLights[1].distance = dist;
+               activeLights[2].lightNumber = prvN;
+               activeLights[2].distance = prvD;
+            }
+         }
+         else if((activeLights[2].distance >= dist) ||
+                 (activeLights[2].lightNumber < 0) ||
+                 (activeLights[2].lightNumber == l))
+         {
+            /* Change Light */
+            if(activeLights[2].lightNumber != l)
+            {
+               activeLights[2].lightNumber = l;
+               activeLights[2].distance = dist;
+            }
+         }
+      }
+   }
 }
 
 /************************************************************
  *                         actualize                        *
  ************************************************************/
-void mapLights::actualize()
+void mapLights::actualize(GLfloat posX, GLfloat posZ)
 {
-   int l;
-   for(l=0; l<5; l++)
+   int i,l;
+   int gLight = 0;
+   setNearLights(posX, posZ);
+   for(i=0; i<3; i++)
    {
-      if(light[l].enableLight)
+      switch(i)
       {
+         case 0: 
+            gLight = GL_LIGHT1;
+         break;
+         case 1: 
+            gLight = GL_LIGHT2;
+         break;
+         case 2: 
+           gLight = GL_LIGHT3;
+         break;
+      }
+      if(activeLights[i].lightNumber >= 0)
+      {
+         l = activeLights[i].lightNumber;
          glDisable(GL_LIGHTING);
          glColor3f(1.0,0.2,0.2);
          glBegin(GL_QUADS);
@@ -178,40 +222,45 @@ void mapLights::actualize()
          glEnd();
          glEnable(GL_LIGHTING);
          /* Define Position */
-         glLightfv(light[l].Glight, GL_POSITION, light[l].light_position);
+         glLightfv(gLight, GL_POSITION, light[l].light_position);
          /* Ambient */
          if(light[l].enableAmbient)
          {
-            glLightfv(light[l].Glight, GL_AMBIENT, light[l].light_ambient);
+            glLightfv(gLight, GL_AMBIENT, light[l].light_ambient);
          }
          /* Diffuse */
          if(light[l].enableDiffuse)
          {
-            glLightfv(light[l].Glight, GL_DIFFUSE, light[l].light_diffuse);
+            glLightfv(gLight, GL_DIFFUSE, light[l].light_diffuse);
          }
          /* Specular */
          if(light[l].enableSpecular)
          {
-            glLightfv(light[l].Glight, GL_SPECULAR, light[l].light_specular);
+            glLightfv(gLight, GL_SPECULAR, light[l].light_specular);
          }
          /* Specular */
          if(light[l].enableSpot)
          {
-            glLightfv(light[l].Glight, GL_SPOT_DIRECTION,
+            glLightfv(gLight, GL_SPOT_DIRECTION,
                       light[l].light_direction);
-            glLightf(light[l].Glight, GL_SPOT_CUTOFF, light[l].cutOff);
-            glLightf(light[l].Glight, GL_SPOT_EXPONENT, 2.0);
+            glLightf(gLight, GL_SPOT_CUTOFF, light[l].cutOff);
+            glLightf(gLight, GL_SPOT_EXPONENT, 2.0);
          }
          /* Atenuation */
          if(light[l].enableAtenuation)
          {
-            glLightf(light[l].Glight, GL_CONSTANT_ATTENUATION, 
+            glLightf(gLight, GL_CONSTANT_ATTENUATION, 
                      light[l].constantAtenuation);
-            glLightf(light[l].Glight, GL_LINEAR_ATTENUATION, 
+            glLightf(gLight, GL_LINEAR_ATTENUATION, 
                      light[l].linearAtenuation);
-            glLightf(light[l].Glight, GL_QUADRATIC_ATTENUATION, 
+            glLightf(gLight, GL_QUADRATIC_ATTENUATION, 
                      light[l].quadricAtenuation);
          }
+         glEnable(gLight);
+      }
+      else
+      {
+         glDisable(gLight);
       }
    }
 }
