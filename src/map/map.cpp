@@ -365,11 +365,11 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         glTexCoord2f(0.0,0.0);
         glVertex3f(-FARVIEW,-1,-FARVIEW);
         glTexCoord2f(0.0,1.0);
-        glVertex3f(-FARVIEW,-1,z+FARVIEW);
+        glVertex3f(-FARVIEW,-1,(z*SQUARE_SIZE)+FARVIEW);
         glTexCoord2f(1.0,1.0);
-        glVertex3f(x+FARVIEW,-1,z+FARVIEW);
+        glVertex3f((x*SQUARE_SIZE)+FARVIEW,-1,(z*SQUARE_SIZE)+FARVIEW);
         glTexCoord2f(1.0,0.0);
-        glVertex3f(x+FARVIEW,-1,-FARVIEW);
+        glVertex3f((x*SQUARE_SIZE)+FARVIEW,-1,-FARVIEW);
         glColor3f(1.0,1.0,1.0);
      }
 
