@@ -214,8 +214,9 @@ class engine
        *************************************************************** 
        * Define Screen to actual Screen Size  
        * \param screen -> Pointer to the Screen's Surface
+       * \param actualFarView -> FarView Value
        ***************************************************************/
-      void redmensionateWindow(SDL_Surface *screen);
+      void redmensionateWindow(SDL_Surface *screen, int actualFarView);
 
       /*!
        *************************************************************** 
@@ -404,6 +405,8 @@ class engine
       shadow shadowMap;           /**< The shadowMap Module */
       GLfloat defaultColor[4];
       GLfloat blackColor[4];
+
+      SDL_Surface* actualScreen;  /**< Pointer to the actual screen */
 
 #ifdef VIDEO_MODE
       bool startVideo;            /**< Used to start video making */

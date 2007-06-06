@@ -26,6 +26,7 @@ engine::engine()
    shortCutsWindow = NULL;
    inventoryWindow = NULL;
    imgNumber = 0;
+   actualScreen = NULL;
 
    curConection = NULL;
 
@@ -301,15 +302,25 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    }
    else
    {
+      GLdouble fogEnd = HALFFARVIEW+200;
+      GLdouble fogStart = 200;
+      GLfloat color[3] = {0.8,0.8,0.8};
+      if(!actualMap->isOutdoor())
+      {
+         color[0] = 0.0;
+         color[1] = 0.0;
+         color[2] = 0.0;
+         fogStart = 40;
+         fogEnd = INDOOR_FARVIEW-2;
+      }
       glEnable(GL_FOG);
       {
-        GLfloat color[3]={0.8,0.8,0.8};
         glFogi(GL_FOG_MODE,GL_LINEAR);
         glFogfv(GL_FOG_COLOR, color);
         glFogf(GL_FOG_DENSITY, 0.001);
         glHint(GL_FOG_HINT, GL_DONT_CARE);
-        glFogf(GL_FOG_START, 200);
-        glFogf(GL_FOG_END, HALFFARVIEW+200);
+        glFogf(GL_FOG_START, fogStart);
+        glFogf(GL_FOG_END, fogEnd);
       }
    }
 
@@ -461,6 +472,16 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    SDL_FreeSurface(img);
    glDeleteTextures(1,&texturaCarga);
    glDeleteTextures(1,&texturaTexto);
+
+   /* Set the Farview to indoor or outdoor */
+   if(actualMap->isOutdoor())
+   {
+      redmensionateWindow(actualScreen, FARVIEW);
+   }
+   else
+   {
+      redmensionateWindow(actualScreen, INDOOR_FARVIEW);
+   }
 
    glEnable(GL_LIGHTING);
 
@@ -842,12 +863,13 @@ int engine::CharacterScreen(GLuint idTextura)
 /*********************************************************************
  *                  redmensionate Window to Screen                   *
  *********************************************************************/
-void engine::redmensionateWindow(SDL_Surface *screen)
+void engine::redmensionateWindow(SDL_Surface *screen, int actualFarView)
 {
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, FARVIEW);
+   gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, 
+                  actualFarView);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
    glMatrixMode (GL_MODELVIEW);
@@ -859,8 +881,8 @@ void engine::redmensionateWindow(SDL_Surface *screen)
  *********************************************************************/
 void engine::Init(SDL_Surface *screen)
 {
-  
-   redmensionateWindow(screen);
+   actualScreen = screen;  
+   redmensionateWindow(screen, FARVIEW);
    
    /* Clear */
    glClearColor (0.0, 0.0, 0.0, 0.0);
