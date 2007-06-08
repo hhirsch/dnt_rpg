@@ -23,6 +23,7 @@ camera::camera()
    zoomAc = 0.0;
    phiAc = 0.0;
    thetaAc = 0.0;
+   minZoom = ZOOMMINIMO;
 }
 
 /******************************************************************
@@ -186,9 +187,9 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    }
 
    /* Verify D limits */
-   if(d > ZOOMMINIMO)
+   if(d > minZoom)
    {
-      d = ZOOMMINIMO;
+      d = minZoom;
    }
    else if(d < ZOOMMAXIMO)
    {
@@ -355,6 +356,14 @@ GLfloat camera::getCenterZ()
 void camera::defineCameraType(int value)
 {
    type = value;
+}
+
+/******************************************************************
+ *                           defineMinZoom                        *
+ ******************************************************************/
+void camera::defineMinZoom(GLfloat value)
+{
+   minZoom = value;
 }
 
 /******************************************************************

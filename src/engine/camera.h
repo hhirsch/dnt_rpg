@@ -87,6 +87,10 @@ class camera
       void actualizeCamera(GLfloat characterX, GLfloat characterY, 
                            GLfloat characterZ, GLfloat characterOrientation);
 
+      /*! Change the minimun zoom value. Usefull for other applications,
+       * like the map editor, who needs to be more "far" 
+       * \param value -> new value of the minimun zoom */
+      void defineMinZoom(GLfloat value);
 
    private:
       GLfloat theta;                    /**< Rotation Up*/
@@ -109,6 +113,7 @@ class camera
       GLfloat zoomAc;                   /**< Zoom Acceleration Value */
       GLfloat phiAc;                    /**< Phi Acceleration Value */
       GLfloat thetaAc;                  /**< Theta Acceleration Value */
+      GLfloat minZoom;                  /**< The max Zoom Value */
 };
 
 #endif

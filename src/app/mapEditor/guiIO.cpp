@@ -16,6 +16,9 @@ guiIO::guiIO()
    fogWindow = NULL;
    actualFog = NULL;
 
+   /* Change the minimun Zoom */
+   gameCamera.defineMinZoom(2*ZOOMMINIMO);
+
    /* Open Windows */
    ltWindow = new listWindow(gui);
    ltWindow->setState(0);
