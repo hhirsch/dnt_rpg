@@ -533,9 +533,12 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    if(ljan->janelaAtiva == NULL)
      return;
 
-   glColor4f(1.0,1.0,1.0,1.0);
+   glColor4f(1.0,1.0,0.0,0.9);
 
+   glEnable(GL_COLOR);
    glDisable(GL_DEPTH_TEST);
+
+   glDisable(GL_BLEND);
    
    /* Draw Inative Windows */
    for(aux = 0;aux<ljan->total;aux++)
@@ -561,6 +564,8 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                 GL_RGBA, GL_UNSIGNED_BYTE, ljan->janelaAtiva->cara->pixels);
 
    glEnable(GL_DEPTH_TEST);
+
+   glColor4f(1.0,1.0,1.0,1.0);
 
    /*AtualizaTela2D(ljan->janelaAtiva->caraTextura,proj,modl,viewPort,
                      ljan->janelaAtiva->x1,ljan->janelaAtiva->y1,
