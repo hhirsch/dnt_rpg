@@ -104,6 +104,12 @@ class thing
        **********************************************/
        virtual void callAttackAnimation()=0;
 
+      /*!
+       **********************************************
+       *   Virtual method to call attack animation
+       **********************************************/
+       virtual void callIdleAnimation()=0;
+
 
    protected:
       bool dead;           /**< Dead state or not (if dead is only a corpse) */

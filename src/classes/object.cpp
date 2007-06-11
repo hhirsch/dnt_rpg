@@ -222,3 +222,12 @@ void object::callAttackAnimation()
    //setState(STATE_ATTACK_MEELE);
 }
 
+/*********************************************************************
+ *                           callIdleAnimation                       *
+ *********************************************************************/
+void object::callIdleAnimation()
+{
+   //TODO
+   //setState(STATE_IDLE);
+}
+

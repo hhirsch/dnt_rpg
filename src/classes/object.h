@@ -64,6 +64,9 @@ class object: public thing
 
       /*! Call the attack animation of the model */
       void callAttackAnimation();
+
+      /*! Call the idle animation of the model */
+      void callIdleAnimation();
       
    protected:
       int inventSizeX,      /**< Size on inventory X axis */

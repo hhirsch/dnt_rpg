@@ -252,9 +252,6 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       {
           brief += "|"+ language.FEAT_CRITICAL_HIT ;
       }
-
-      
-
       return(true);
    }
    brief += language.FEAT_NO_MORE_POINTS;

@@ -307,6 +307,14 @@ void personagem::callAttackAnimation()
 }
 
 /*********************************************************************
+ *                           callIdleAnimation                       *
+ *********************************************************************/
+void personagem::callIdleAnimation()
+{
+   setState(STATE_IDLE);
+}
+
+/*********************************************************************
  *                            setOrientation                         *
  *********************************************************************/
 void personagem::setOrientation(GLfloat ori)

@@ -123,6 +123,9 @@ class personagem: public Tobjeto, public aniModel
       /*! Call the thing attack animation */
        void callAttackAnimation();
 
+      /*! Call the thing attack animation */
+       void callIdleAnimation();
+
        /*! Delete the Existed Inventory and Create a new One. 
         *  Usually called after death*/
        void newInventory();
