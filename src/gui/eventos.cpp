@@ -533,9 +533,10 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    if(ljan->janelaAtiva == NULL)
      return;
 
-   glColor4f(1.0,1.0,0.0,0.9);
+   //glColor4f(1.0,1.0,0.0,0.9);
 
-   glEnable(GL_COLOR);
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    glDisable(GL_DEPTH_TEST);
 
    glDisable(GL_BLEND);

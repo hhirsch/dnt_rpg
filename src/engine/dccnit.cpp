@@ -2235,7 +2235,7 @@ void engine::renderScene()
    glCullFace(GL_BACK);
    glEnable(GL_CULL_FACE);
 
-   bool shadow = actualMap->isOutdoor();
+   bool shadow = false;//actualMap->isOutdoor();
 
    glPushMatrix();
 
