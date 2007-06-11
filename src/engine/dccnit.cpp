@@ -2423,8 +2423,7 @@ void engine::renderNoShadowThings()
    if(actualMap->isOutdoor())
    {
       glPushMatrix();
-         glTranslatef(activeCharacter->posicaoLadoX, 0.0,
-                      activeCharacter->posicaoLadoZ);
+         glTranslatef(gameCamera.getCameraX(), 0.0, gameCamera.getCameraZ());
          gameSky->draw(actualMap, gameSun->getRotation());
       glPopMatrix();
    }
