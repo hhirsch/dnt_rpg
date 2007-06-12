@@ -141,7 +141,7 @@ GLuint InserirTextura(Map* mapa, string arq, string nome,
    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                   GL_NEAREST_MIPMAP_LINEAR );
+                   GL_LINEAR_MIPMAP_LINEAR );
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -352,7 +352,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    glBindTexture(GL_TEXTURE_2D, textura);
    
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                   GL_NEAREST_MIPMAP_LINEAR );
+                   GL_LINEAR_MIPMAP_LINEAR );
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
@@ -405,7 +405,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap );
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap );
             glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                            GL_NEAREST_MIPMAP_LINEAR );
+                            GL_LINEAR_MIPMAP_LINEAR );
             /*glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);*/

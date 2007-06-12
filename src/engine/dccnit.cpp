@@ -2124,8 +2124,10 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    else if(*forcaAtualizacao == 0)
    {
       int tmp = (int) ((ACTUALIZATION_RATE-1) - varTempo);
-      if(tmp > 0)
-      SDL_Delay(tmp);
+      if( (tmp > 0) && (tmp < ACTUALIZATION_RATE))
+      {
+         SDL_Delay(tmp);
+      }
    }
 
    /* Verify Mouse Cursor Forbidden (when can't go to position) */
