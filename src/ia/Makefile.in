@@ -7,6 +7,27 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
+ENDGUI = ../gui/
+ENDENGINE = ../engine/
+ENDMAPA = ../map/
+ENDETC = ../etc/
+ENDIA = ../ia/
+ENDPART = ../particle/
+ENDCLASSES = ../classes/
+ENDFIGHT = ../fight/
+ENDSOUND = ../sound/
+ENDLANG = ../lang/
+OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)maproad.o
+OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)messages.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)healthBar.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)listtext.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)rolbar.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
+OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
+OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o $(ENDCLASSES)skills.o $(ENDCLASSES)align.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o $(ENDCLASSES)object.o $(ENDCLASSES)itemslot.o $(ENDCLASSES)inventory.o $(ENDCLASSES)barter.o
+OBJSSOUND = $(ENDSOUND)ogg_stream.o  $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
+OBJSLANG = $(ENDLANG)lang.o
+OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o
+OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
+OBJSETC = $(ENDETC)animodel.o $(ENDETC)glm.o $(ENDETC)texture.o $(ENDETC)modellist.o
+OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)camera.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)conversa.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)personagens.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)shadow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
+
 OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o luaInterface.o pattAgent.o potentAgent.o 
 all: $(OBJS)
 
@@ -58,6 +79,16 @@ potentAgent.o: potentAgent.cpp potentAgent.h
 luaInterface.o: luaInterface.cpp luaInterface.h
 	@printf "Making luaInterface.o... "
 	@$(CPP) $(CFLAGS) luaInterface.cpp -o luaInterface.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+test.o: test.cpp
+	@printf "Making test.o... "
+	@$(CPP) $(CFLAGS) test.cpp -o test.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+test: $(OBJS) $(OBJSGUI) $(OBJSMAPA) $(OBJS) test.o
+	@printf "Linking test... "
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJS) test.o -o test
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:

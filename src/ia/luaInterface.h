@@ -13,6 +13,8 @@ extern "C"
 #include <stdio.h>
 using namespace std;
 
-void playPlanning(string planning);
+#include "../engine/personagens.h"
+
+void playPlanning(string planning, personagem* dude);
 
 #endif

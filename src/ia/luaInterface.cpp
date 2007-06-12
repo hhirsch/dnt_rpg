@@ -25,7 +25,8 @@ void idle()
 
 int cppCalls(lua_State* state)
 {
-  string currentState = lua_tostring(state, -2);
+  string currentState = lua_tostring(state, -3);
+  personagem* dude = (personagem *)lua_touserdata(state, -2);
   string args = lua_tostring(state, -1);
   string result;
   printf("currentState: %s\n", currentState.c_str());
@@ -49,7 +50,7 @@ int cppCalls(lua_State* state)
   //if(fsmState =)
 }
 
-void playPlanning(string planning)
+void playPlanning(string planning, personagem* dude)
 {
   /* Open the Lua State Machine */
   lua_State* state = luaL_newstate();
@@ -57,8 +58,15 @@ void playPlanning(string planning)
   /* Open the Lua Libs */
   luaL_openlibs(state);
 
+  /* Register the character as a variable into LUA, so it can pass it back as
+   * an argument to the cppCalls function. 
+   */
+  lua_pushlightuserdata(state, (void*)dude);
+  lua_setglobal(state, "dude");
+
   /* Register the cpp function to call the others */
   lua_register(state, "cppCalls", cppCalls);
+
 
   /* Plays the script */
   luaL_dofile(state, "../../data/ia/script/general/fsm.lua");
