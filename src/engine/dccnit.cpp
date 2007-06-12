@@ -2563,6 +2563,7 @@ void engine::renderGUI()
    */
    
    glDisable(GL_LIGHTING);
+   glDisable(GL_FOG);
    glDisable(GL_DEPTH_TEST);
    glDisable(GL_BLEND);
 
@@ -2597,6 +2598,7 @@ void engine::renderGUI()
    
    glEnable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
+   glEnable(GL_FOG);
 }
 
 /*********************************************************************

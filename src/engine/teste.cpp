@@ -99,6 +99,7 @@ int main(int argc, char **argv)
          }
          reloadMusic = true;
          glDisable(GL_LIGHTING);
+	 glDisable(GL_FOG);
          Engine->fadeInTexture(tituloID,0,0,799,599);
          result = Engine->InitialScreen(estado,tituloID,reloadMusic);
       }
