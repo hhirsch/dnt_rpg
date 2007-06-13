@@ -28,11 +28,13 @@ AC_CHECK_LIB([lua], [main], [], [AC_MSG_ERROR(Couldn't find lua. Go to http://ww
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADER(lua.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Define the CPPFLAGS to your LUA headers path.)])
-AC_CHECK_HEADER(lualib.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Define the CPPFLAGS to your LUA headers path.)])
-AC_CHECK_HEADER(lauxlib.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Define the CPPFLAGS to your LUA headers path.)])
-
-#AC_CHECK_HEADERS([stdlib.h string.h lua.h lualib.h lauxlib.h])
+AC_CHECK_HEADER(lua.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Run ./configure CPPFLAGS=-Ipath_to_lua_headers. For Example: ./configure CPPFLAGS=-I/usr/include/lua5.1/)])
+AC_CHECK_HEADER(lualib.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Run ./configure CPPFLAGS=-Ipath_to_lua_headers. For Example: ./configure CPPFLAGS=-I/usr/include/lua5.1/)])
+AC_CHECK_HEADER(lauxlib.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Run ./configure CPPFLAGS=-Ipath_to_lua_headers. For Example: ./configure CPPFLAGS=-I/usr/include/lua5.1/)])
+AC_CHECK_HEADER(GL/glu.h, [], [AC_MSG_ERROR(Couldn't find OPENGL headers. Run ./configure CPPFLAGS=-Ipath_to_opengl_headers. For Example: ./configure CPPFLAGS=-I/usr/X11R6/include)])
+AC_CHECK_HEADER(SDL/SDL_opengl.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include)])
+AC_CHECK_HEADER(SDL/SDL.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include)])
+AC_CHECK_HEADER(SDL/SDL_image.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include)])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
