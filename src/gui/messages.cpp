@@ -11,7 +11,7 @@ string getStringFromUser(string title, string previous,
    janela* getWindow;
    botao* okButton;
    botao* cancelButton;
-   barraTexto* getText = NULL;
+   textBar* getText = NULL;
    bool quit = false;
    string returnStr;
    Uint8 mButton;
@@ -29,9 +29,7 @@ string getStringFromUser(string title, string previous,
                                                    getWindow->Cores.corBot.G,
                                                    getWindow->Cores.corBot.B,
                                                    "Cancel",1,NULL);
-   getText = getWindow->objects->InserirBarraTexto(10,17,190,33,
-                                                   previous.c_str(),0,
-                                                   NULL);
+   getText = getWindow->objects->insertTextBar(10,17,190,33,previous.c_str(),0);
    getWindow->movivel = 0;
    getWindow->ptrExterno = &getWindow;
    gui->openWindow(getWindow);
@@ -44,17 +42,17 @@ string getStringFromUser(string title, string previous,
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
-      Tobjeto* object;
+      guiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
 
       if(eventInfo == BOTAOPRESSIONADO)
       {
-         if(object == (Tobjeto*) okButton)
+         if(object == (guiObject*) okButton)
          {
-            returnStr = getText->texto;
+            returnStr = getText->getText();
             quit =true;
          }
-         else if(object == (Tobjeto*) cancelButton)
+         else if(object == (guiObject*) cancelButton)
          {
             returnStr = previous;
             quit = true;
@@ -142,17 +140,17 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
-      Tobjeto* object;
+      guiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
 
       if(eventInfo == BOTAOPRESSIONADO)
       {
-         if(object == (Tobjeto*) opt1Button)
+         if(object == (guiObject*) opt1Button)
          {
             quit =true;
             ret = 1;
          }
-         else if(object == (Tobjeto*) opt2Button)
+         else if(object == (guiObject*) opt2Button)
          {
             quit =true;
             ret = 2;
@@ -227,12 +225,12 @@ void showMessage(string title, string message,
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
-      Tobjeto* object;
+      guiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
 
       if(eventInfo == BOTAOPRESSIONADO)
       {
-         if(object == (Tobjeto*) okButton)
+         if(object == (guiObject*) okButton)
          {
             quit =true;
          }

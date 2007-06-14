@@ -3,135 +3,161 @@
  */
 
 
-#include "bartexto.h"
+#include "textbar.h"
 
 #define REFRESH_RATE 170
 
+/********************************************************************
+ *                          Constructor                             *
+ ********************************************************************/
+textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto)
+{
+   lastWrite = 0;
+   x1 = xa;
+   x2 = xb;
+   y1 = ya;
+   y2 = yb;
+   init = 0;
+   end = 0;
+   pos = 0;
+   lastChar='\0';
+   cript = cripto;
+   type = GUI_TEXT_BAR;
+   Cores.Iniciar();
+   text = text1;
+}
 
-barraTexto::barraTexto()
+/********************************************************************
+ *                          Constructor                             *
+ ********************************************************************/
+textBar::~textBar()
 {
 }
 
-barraTexto::~barraTexto()
-{
-}
-
-/* Escreve o texto da barra nela mesma */
-void barraTexto::PoeTexto(int Xjan, int Yjan,int salvar,unsigned int pos, int marca,
-                          SDL_Surface *screen)
+/********************************************************************
+ *                            putText                               *
+ ********************************************************************/
+void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
 {
    unsigned int maxCarac = ((x2-3)-(x1+3)) / (fonte_incCP()+1);
-   string text = texto;
    cor_Definir(Cores.corCont[2].R,Cores.corCont[2].G,Cores.corCont[2].B);
-   retangulo_Colorir(screen,x1+1+Xjan,y1+1+Yjan,x2-1+Xjan,y2-1+Yjan,0);
+   retangulo_Colorir(screen,x1+1, y1+1, x2-1, y2-1,0);
    selFonte(FFARSO,ESQUERDA,1);
    cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
-   inic = 0;
+   init = 0;
    if(pos+1>maxCarac) 
    {
-      inic = pos-maxCarac;
-      if (inic<0) inic = 0;
-      fim = pos-1;
+      init = pos-maxCarac;
+      if (init < 0)
+      {
+         init = 0;
+      }
+      end = pos-1;
    }
-   else if (text.length()-1>=maxCarac)
+   else if (text.length()-1 >= maxCarac)
    {
-      fim = inic+maxCarac-1;
+      end = init + maxCarac-1;
    }
    else
-     fim=text.length()-1;
-
-   escxy_Def(screen,Xjan+x1+3,Yjan+y1-2,text.c_str(),inic,fim);
-   int x = (Xjan+x1+2)+(pos-inic)*(fonte_incCP()+1);
-   if (marca)
-      linha_Desenhar(screen,x,Yjan+y1+3,x,Yjan+y2-3,0);
-   if(salvar)
    {
-     //SDL_Flip(screen);
-     //SDL_GL_SwapBuffers();
-     //AtualizaTela2D(screen);
+     end = text.length()-1;
+   }
+
+   escxy_Def(screen, x1+3, y1-2, text.c_str(), init, end);
+   int x = (x1+2)+(pos-init)*(fonte_incCP()+1);
+   if (marca)
+   {
+      linha_Desenhar(screen,x,y1+3,x,y2-3,0);
    }
 }
 
-
-void barraTexto::Desenhar(int Xjan, int Yjan,int salvar, SDL_Surface *screen)
+/********************************************************************
+ *                              draw                                *
+ ********************************************************************/
+void textBar::draw(SDL_Surface *screen)
 {
    cor_Definir(Cores.corCont[0].R,Cores.corCont[0].G,Cores.corCont[0].B);
-   retangulo_2Cores(screen,x1+Xjan,y1+Yjan,x2+Xjan,y2+Yjan,
-                  Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B,0);
-   PoeTexto(Xjan,Yjan,0,0,0,screen);
-   if (salvar)
+   retangulo_2Cores(screen,x1,y1,x2,y2, Cores.corCont[1].R,
+                    Cores.corCont[1].G,Cores.corCont[1].B, 0);
+   putText(0,0,screen);
+}
+
+/********************************************************************
+ *                    defineCursorPosition                          *
+ ********************************************************************/
+void textBar::defineCursorPosition(int mouseX, int mouseY)
+{
+   pos = (mouseX-(x1+2)) / (fonte_incCP()+1);
+   if(pos > text.length()) 
    {
-       //SDL_Flip(screen);
-       //SDL_GL_SwapBuffers();
-      // AtualizaTela2D(screen);
+      pos = text.length();
    }
 }
 
-int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
-                          int mouseY, SDL_Surface *screen,
-                          Uint8 Mbotao, Uint8* teclas)
+/********************************************************************
+ *                             Write                                *
+ ********************************************************************/
+int textBar::write(int mouseX, int mouseY, SDL_Surface *screen, 
+                   Uint8 Mbotao, Uint8* teclas)
 {
-   //SDLMod Modificador;
    string c;
    c = "";
    int pronto = 0;
-   //unsigned int pos = (mouseX-(Xjan+x1+2)) / (fonte_incCP()+1);
-   //if (pos>strlen(texto)) pos = strlen(texto);
    int ult = SDL_GetTicks();
    int maiuscula = (teclas[SDLK_CAPSLOCK] || teclas[SDLK_LSHIFT] || 
                     teclas[SDLK_RSHIFT]);
 
-   //Uint8* teclas = SDL_getKeyState(NULL);
-
-   /* Teclas de Finalizacao */
+   /* End Edition Keys */
    if(teclas[SDLK_ESCAPE] || teclas[SDLK_RETURN] || teclas[SDLK_KP_ENTER])
+   {
       pronto = 1;
-   /* Teclas de Movimentacao */
+   }
+
+   /* Cursor Movimentation Keys */
    else
-   if ( (teclas[SDLK_HOME]) && ((ult - ultEsc) >= REFRESH_RATE))
+   if ( (teclas[SDLK_HOME]) && ((ult - lastWrite) >= REFRESH_RATE))
    {
        pos = 0;
-       ultEsc = ult;
+       lastWrite = ult;
    }
    else
-   if ( (teclas[SDLK_END]) && ((ult - ultEsc) >= REFRESH_RATE))
+   if ( (teclas[SDLK_END]) && ((ult - lastWrite) >= REFRESH_RATE))
    {
-       pos = texto.length();
-       ultEsc = ult;
+       pos = text.length();
+       lastWrite = ult;
    }
    else
-   if ((teclas[SDLK_RIGHT]) && ((ult - ultEsc) >= REFRESH_RATE))
+   if ((teclas[SDLK_RIGHT]) && ((ult - lastWrite) >= REFRESH_RATE))
    {
-       if(pos<texto.length()) pos++; 
-       ultEsc = ult;
+       if(pos<text.length()) pos++; 
+       lastWrite = ult;
    }
    else
-   if ((teclas[SDLK_LEFT]) && ((ult - ultEsc) >= REFRESH_RATE))
+   if ((teclas[SDLK_LEFT]) && ((ult - lastWrite) >= REFRESH_RATE))
    {
        if(pos>0) pos--;
-       ultEsc = ult;
+       lastWrite = ult;
    }
    else
-      /* Teclas de Apagar */
-   if( (teclas[SDLK_DELETE]) && ((ult - ultEsc) >= REFRESH_RATE))
+      /* Delete Keys */
+   if( (teclas[SDLK_DELETE]) && ((ult - lastWrite) >= REFRESH_RATE))
    {
-       if(pos<texto.length())
+       if(pos<text.length())
        {   
-          //texto = string_Deletar(texto,pos,1);
-          texto.erase(pos,1);
+          text.erase(pos,1);
        }
-       ultEsc = ult;
+       lastWrite = ult;
    }
    else
-   if((teclas[SDLK_BACKSPACE]) && ((ult - ultEsc) >= REFRESH_RATE))
+      /* Input Keys */
+   if((teclas[SDLK_BACKSPACE]) && ((ult - lastWrite) >= REFRESH_RATE))
    {
       if(pos>0)
       {
          pos--;
-         //texto = string_Deletar(texto,pos,1);
-         texto.erase(pos,1);
+         text.erase(pos,1);
       }
-      ultEsc = ult;
+      lastWrite = ult;
    }
    else
    {
@@ -494,12 +520,12 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
           else
             c = ' ';
       }      
-      if( (((ult - ultEsc) >= REFRESH_RATE) || (ultChar!=c)) && 
+      if( (((ult - lastWrite) >= REFRESH_RATE) || (lastChar!=c)) && 
           (c!=""))
       {
-        ultChar = c;
-        ultEsc = ult;
-        texto.insert(pos,c.c_str());
+        lastChar = c;
+        lastWrite = ult;
+        text.insert(pos,c.c_str());
         pos++;
       }
        
@@ -507,25 +533,32 @@ int barraTexto::Escrever(int Xjan,int Yjan,int mouseX,
 
    if(Mbotao & SDL_BUTTON(1))
    {
-       if(mouse_NaArea(Xjan+x1,Yjan+y1,Xjan+x2,Yjan+y2,mouseX,mouseY))
+       if(mouse_NaArea( x1, y1, x2, y2,mouseX,mouseY))
        {
-           /* Calcula a nova posicao */
-           pos=(mouseX -(Xjan+x1+2))/(fonte_incCP()+1) + inic;
-           if (pos>texto.length()) pos = texto.length();
-               PoeTexto(0,0,1,pos,1,screen);
+           /* Calculate the New Position */
+           pos=(mouseX-(x1+2)) / (fonte_incCP()+1) + init;
+           if (pos > text.length())
+           {
+              pos = text.length();
+           }
+           putText(pos,1,screen);
        }
        else
+       {
           pronto = 1;
+       }
   }
 
   if(!pronto)
-    PoeTexto(0,0,1,pos,1,screen);
+  {
+    putText(pos,1,screen);
+  }
   else
-    PoeTexto(0,0,1,0,0,screen);
+  {
+    putText(0,0,screen);
+  }
 
   return(pronto);
-   //PoeTexto(Xjan,Yjan,1,0,0,screen);
-   //SDL_Delay(150);
 }
 
 

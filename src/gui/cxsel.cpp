@@ -6,7 +6,7 @@
 #include "cxsel.h"
 
 
-cxSel::cxSel():Tobjeto()
+cxSel::cxSel():guiObject()
 {
    selected = false;
    lastChangeTime = SDL_GetTicks();

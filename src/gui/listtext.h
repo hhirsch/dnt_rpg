@@ -17,7 +17,7 @@ class textElement
 };
 
 /*! The listText class. Is a list of texts elements to select one */
-class listText: public Tobjeto
+class listText: public guiObject
 {
    public:
       /*! Constructor 
@@ -50,7 +50,7 @@ class listText: public Tobjeto
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
        * \return -> true if event is related (and treated) by the listText */
-      bool eventGot(int type, Tobjeto* object);
+      bool eventGot(int type, guiObject* object);
 
       /*! Get the selected text
        * \return selected text */

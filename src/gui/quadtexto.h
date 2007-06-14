@@ -8,12 +8,12 @@
 #include "cores.h"
 #include "desenho.h"
 #include "fonte.h"
-#include "objeto.h"
+#include "guiobject.h"
 #include <string>
 using namespace std;
 
 /*! Class of text bar (quadroTexto) representation. */
-class quadroTexto: public Tobjeto
+class quadroTexto: public guiObject
 {
    public:
       /*! Destructor */

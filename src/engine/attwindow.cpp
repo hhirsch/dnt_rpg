@@ -476,7 +476,7 @@ int attWindow::assignAttMod(int att)
 /**************************************************************
  *                            threat                          *
  **************************************************************/
-int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
+int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
                      GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    char tmp[5];
@@ -485,7 +485,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
    if(eventInfo == BOTAOPRESSIONADO)
    {
       /* Confirm */
-      if(object == (Tobjeto*) buttonConfirm)
+      if(object == (guiObject*) buttonConfirm)
       {
          if(allAssigned())
          {
@@ -504,7 +504,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
          }
       }
       /* Cancel */
-      else if(object == (Tobjeto*) buttonCancel) 
+      else if(object == (guiObject*) buttonCancel) 
       {
           inter->closeWindow(window);
           window = NULL;
@@ -513,7 +513,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
          return(ATTW_CANCEL);
       }
       /* Reroll */
-      else if(object == (Tobjeto*) rerollButton)
+      else if(object == (guiObject*) rerollButton)
       {
           clear();
           /* ReRoll All Dices */
@@ -527,12 +527,12 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
           window->Desenhar(0,0);
       }
       /* Clear */
-      else if(object == (Tobjeto*) clearButton)
+      else if(object == (guiObject*) clearButton)
       {
          clear();
       }
       /* Auto */
-      else if(object == (Tobjeto*) autoButton)
+      else if(object == (guiObject*) autoButton)
       {
          autoAssign();
       }
@@ -541,7 +541,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
       {
          for(i=0; i<6; i++) 
          {
-            if(object == (Tobjeto*) attButtonNext[i])
+            if(object == (guiObject*) attButtonNext[i])
             {
                 nextAvaiblePoints(i);
                 sprintf(tmp,"%d", points[attPointsIndex[i]]);
@@ -551,7 +551,7 @@ int attWindow::treat(Tobjeto* object, int eventInfo, interface* inter,
                                   externalSkill->m_skills[i+1].descricao);
                 window->Desenhar(0,0);
             }
-            else if(object == (Tobjeto*) attButtonPrev[i])
+            else if(object == (guiObject*) attButtonPrev[i])
             {
                 previousAvaiblePoints(i);
                 sprintf(tmp,"%d", points[attPointsIndex[i]]);

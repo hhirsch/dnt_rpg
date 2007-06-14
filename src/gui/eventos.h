@@ -7,11 +7,7 @@
 
 #include <string.h>
 #include "janela.h"
-#include "botao.h"
-#include "bartexto.h"
-#include "cxsel.h"
 #include "mouse.h"
-#include "seltexto.h"
 #include "menu.h"
 #include "lista.h"
 
@@ -67,7 +63,7 @@ class interface
        * \param eventInfo -> variable that will receive the information 
        *                     on the event that occurs
        * \return -> pointer to the active objet of the action */
-      Tobjeto* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+      guiObject* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                 int* eventInfo);
       /*! Draw all the interface (all windows and objects)
        * \param proj -> project view matrix
@@ -108,8 +104,8 @@ class interface
       SDL_Surface* fundo;     /**< background surface, if has one */
       Tlista* objects;        /**< some no window objects */
       Ljanela* ljan;          /**< windows list */
-      Tobjeto* objAtivo;      /**< pointer to the actived object */
-      Tobjeto* chamador;      /**< pointer to the caller object */
+      guiObject* objAtivo;      /**< pointer to the actived object */
+      guiObject* chamador;      /**< pointer to the caller object */
 
 };
 

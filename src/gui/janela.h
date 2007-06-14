@@ -10,14 +10,14 @@
 #include "cores.h"
 #include "fonte.h"
 #include "erro.h"
-#include "objeto.h"
+#include "guiobject.h"
 #include "lista.h"
 
 #include <string>
 using namespace std;
 
 
-class janela: public Tobjeto
+class janela: public guiObject
 {
    public:
       int x1,y1,x2,y2;           /* Dimensoes da Janela */

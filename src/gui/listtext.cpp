@@ -20,7 +20,7 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    selectedText = "";   
 
    /* Init things */
-   tipo = LISTTEXT;
+   type = GUI_LIST_TEXT;
    x1 = xa;
    y1 = ya;
    x2 = xb;
@@ -161,7 +161,7 @@ void listText::draw()
 /**************************************************************
  *                         eventGot                           *
  **************************************************************/
-bool listText::eventGot(int type, Tobjeto* object)
+bool listText::eventGot(int type, guiObject* object)
 {
    int i;
    selectedText = "";
@@ -169,7 +169,7 @@ bool listText::eventGot(int type, Tobjeto* object)
    {
       for(i = 0; i<maxButtons; i++)
       {
-         if(object == (Tobjeto*)listButtons[i])
+         if(object == (guiObject*)listButtons[i])
          {
             int pos = roll->getActualInit() + i;
             if(pos < totalElements)

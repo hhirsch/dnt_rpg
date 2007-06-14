@@ -7,11 +7,11 @@
 #define _cxsel_h
 
 #include "desenho.h"
-#include "objeto.h"
+#include "guiobject.h"
 #include "cores.h"
 
 /*! Selection Box Class */
-class cxSel: public Tobjeto
+class cxSel: public guiObject
 {
    public:
       int x,                 /**< X Window Coordinate */

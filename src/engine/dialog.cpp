@@ -532,11 +532,11 @@ void conversation::changeDialog(int numDialog)
 /*************************************************************************
  *                                treat                                  *
  *************************************************************************/
-bool conversation::treat(Tobjeto* guiObject, int eventInfo, interface* gui)
+bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui)
 {
    if(eventInfo == SELTEXTOSELECIONADA)
    {
-      if(guiObject == (Tobjeto*)pcSelText)
+      if(guiObj == (guiObject*)pcSelText)
       {
          proccessAction(actual, pcSelText->getLastSelectedItem(), gui);
          return(true);

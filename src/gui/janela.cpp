@@ -4,11 +4,6 @@
 
 #include "janela.h"
 #include "menu.h"
-#include "botao.h"
-#include "bartexto.h"
-#include "cxsel.h"
-#include "quadtexto.h"
-#include "seltexto.h"
 
 /*********************************************************************
  *                    Destroi a Lista de Janelas                     *
@@ -16,15 +11,15 @@
 Ljanela::~Ljanela()
 {
    janela* jan;
-   jan = (janela*)primeiro->proximo;
-   while(jan != primeiro )
+   jan = (janela*)first->next;
+   while(jan != first )
    {
-      //RetirarJanela((janela*)(primeiro->proximo),NULL);
+      //RetirarJanela((janela*)(first->next),NULL);
       SDL_FreeSurface(jan->cara);
       delete(jan->objects);
-      jan = (janela*)jan->proximo;
+      jan = (janela*)jan->next;
    }
-   //delete(primeiro);
+   //delete(first);
 } 
  
 /*********************************************************************
@@ -88,7 +83,7 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
    novo->objects->InserirBotao(25,3,35,12,novo->Cores.corBot.R,
                   novo->Cores.corBot.G,novo->Cores.corBot.B,"\36",0,
                   NULL);
-   novo->tipo = JANELA;
+   novo->type = GUI_WINDOW;
    InserirObj(novo);
    return(novo);
 } 
@@ -98,8 +93,8 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
  *********************************************************************/
 void Ljanela::RetirarJanela(janela *jan)
 {
-   jan->anterior->proximo = jan->proximo;
-   jan->proximo->anterior = jan->anterior;
+   jan->previous->next = jan->next;
+   jan->next->previous = jan->previous;
    if (jan->cara == NULL)
       printf("Sujou: jan->cara == NULL!!!\n");
    SDL_FreeSurface(jan->cara);
@@ -108,7 +103,7 @@ void Ljanela::RetirarJanela(janela *jan)
       janelaAtiva = NULL;
       if((total > 1))
       {
-         janela* j = (janela*)primeiro->proximo;
+         janela* j = (janela*)first->next;
          j->Ativar(this);
       }
    }
@@ -152,43 +147,43 @@ void janela::Desenhar(int mouseX, int mouseY)
    }
    escxy(cara,39,-2,texto.c_str());
    /* Desenho dos Botoes */
-   Tobjeto *obj=objects->primeiro->proximo;
+   guiObject *obj=objects->first->next;
    int aux;
    for(aux=0;aux<objects->total;aux++)
    {
-      switch(obj->tipo)
+      switch(obj->type)
       {
-         case BOTAO:{
+         case GUI_BUTTON:{
               botao *b = (botao*) obj;   
               b->Desenhar(0,this,0);
               break;
          }
-         case BARRATEXTO:{
-              barraTexto *bart = (barraTexto*) obj; 
-              bart->Desenhar(0,0,0,cara);
+         case GUI_TEXT_BAR:{
+              textBar *bart = (textBar*) obj; 
+              bart->draw(cara);
               break;
          }
-         case CXSEL:{
+         case GUI_SEL_BOX:{
               cxSel *cx = (cxSel*) obj;
               cx->draw(cara);
               break;
          }
-         case SELTEXTO:{
+         case GUI_SEL_TEXT:{
               selTexto *st = (selTexto*) obj;
               st->draw(-1,cara);
               break;
          }
-         case FIGURA:{
+         case GUI_PICTURE:{
               figura* fig = (figura*) obj;
               fig->Desenhar(0,0,0,cara);
               break;
          }
-         case QUADROTEXTO:{
+         case GUI_TEXT_BOX:{
               quadroTexto *quad = (quadroTexto*) obj;
               quad->Desenhar(0,0,0,cara);
               break;
          }
-         case TABBOTAO:{
+         case GUI_TAB_BUTTON:{
               tabButton *bt = (tabButton*) obj; 
               bt->draw(mouseX, mouseY, x1, y1, cara);
               break;
@@ -196,7 +191,7 @@ void janela::Desenhar(int mouseX, int mouseY)
          default:break;
        
       } //case
-      obj = obj->proximo;
+      obj = obj->next;
    }
 }
 

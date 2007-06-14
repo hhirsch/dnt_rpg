@@ -139,15 +139,15 @@ string raceWindow::getCharacteristics()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int raceWindow::treat(Tobjeto* object, int eventInfo, 
+int raceWindow::treat(guiObject* object, int eventInfo, 
                       interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)
    {
-      if( (object == (Tobjeto*) buttonNext) || 
-          (object == (Tobjeto*) buttonPrevious))
+      if( (object == (guiObject*) buttonNext) || 
+          (object == (guiObject*) buttonPrevious))
       {
-         if(object == (Tobjeto*) buttonNext)
+         if(object == (guiObject*) buttonNext)
          {
             actualRace = actualRace->next;
          }
@@ -162,7 +162,7 @@ int raceWindow::treat(Tobjeto* object, int eventInfo,
          raceImage->fig = actualRace->image;
          window->Desenhar(0,0);
       }
-      else if(object == (Tobjeto*) buttonConfirm)
+      else if(object == (guiObject*) buttonConfirm)
       {
          raceImage->fig = NULL;
          *choosedRace = actualRace;
@@ -172,7 +172,7 @@ int raceWindow::treat(Tobjeto* object, int eventInfo,
          SDL_ShowCursor(SDL_DISABLE);
          return(RACEW_CONFIRM);
       }
-      else if(object == (Tobjeto*) buttonCancel) 
+      else if(object == (guiObject*) buttonCancel) 
       {
          raceImage->fig = NULL; //to not delete race images
          inter->closeWindow(window);

@@ -62,7 +62,7 @@ class listWindow
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
        * \return -> true if event is related (and treated) by the window */
-      bool eventGot(int type, Tobjeto* object);
+      bool eventGot(int type, guiObject* object);
 
    private:
       /*! Open the window */

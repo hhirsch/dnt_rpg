@@ -10,7 +10,6 @@
 #include <SDL/SDL.h>
 #include "desenho.h"
 #include "botao.h"
-#include "bartexto.h"
 #include "cores.h"
 #include "cxsel.h"
 #include "janela.h"
@@ -21,7 +20,8 @@
 #include "quadtexto.h"
 #include "rolbar.h"
 #include "seltexto.h"
-#include "objeto.h"
+#include "textbar.h"
+#include "guiobject.h"
 #include "lista.h"
 #include "figura.h"
 #include "menu.h"

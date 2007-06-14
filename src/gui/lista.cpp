@@ -11,10 +11,10 @@
 Tlista::Tlista()
 {
    total = 0;
-   primeiro = new Tobjeto;
-   primeiro->tipo = -1;
-   primeiro->proximo = primeiro;
-   primeiro->anterior = primeiro;
+   first = new guiObject;
+   first->type = -1;
+   first->next = first;
+   first->previous = first;
    intMenu = NULL;
 }
 
@@ -25,11 +25,11 @@ Tlista::~Tlista()
    int aux;
    for(aux = 0;aux < tot;aux++)
    {
-      Retirar(primeiro->proximo);
+      Retirar(first->next);
    }
-   if (primeiro != NULL)
+   if (first != NULL)
    {
-      delete primeiro;
+      delete first;
    }
    if(intMenu)
    {
@@ -37,61 +37,61 @@ Tlista::~Tlista()
    }
 }
 
-void Tlista::Retirar(Tobjeto *obj)
+void Tlista::Retirar(guiObject *obj)
 {
-   obj->anterior->proximo = obj->proximo;
-   obj->proximo->anterior = obj->anterior;
-   switch (obj->tipo) 
+   obj->previous->next = obj->next;
+   obj->next->previous = obj->previous;
+   switch (obj->type) 
    {
-      case BOTAO:
+      case GUI_BUTTON:
       {
          botao* b = (botao*) obj;
          delete(b);
          break;
       }
-      case BARRATEXTO:
+      case GUI_TEXT_BAR:
       {
-         barraTexto* b = (barraTexto*) obj;
+         textBar* b = (textBar*) obj;
          delete(b);
          break;
       }
-      case CXSEL:
+      case GUI_SEL_BOX:
       {
          cxSel* c = (cxSel*) obj;
          delete(c);
          break;
       }
-      case FIGURA:
+      case GUI_PICTURE:
       {
          figura* f = (figura*) obj;
          delete(f);
          break;
       }
-      case SELTEXTO:
+      case GUI_SEL_TEXT:
       {
          selTexto* s = (selTexto*) obj;
          delete(s);
          break;
       }
-      case QUADROTEXTO:
+      case GUI_TEXT_BOX:
       {
          quadroTexto* q = (quadroTexto*) obj;
          delete(q);
          break;
       }
-      case TABBOTAO:
+      case GUI_TAB_BUTTON:
       {
          tabButton* tb = (tabButton*) obj;
          delete(tb);
          break;
       }
-      case ROLBAR:
+      case GUI_ROL_BAR:
       {
          rolBar* b = (rolBar*) obj;
          delete(b);
          break;
       }
-      case LISTTEXT:
+      case GUI_LIST_TEXT:
       {
          listText* lt = (listText*) obj;
          delete(lt);
@@ -106,12 +106,12 @@ void Tlista::Retirar(Tobjeto *obj)
    total--;
 }
 
-void Tlista::InserirObj(Tobjeto* obj)
+void Tlista::InserirObj(guiObject* obj)
 {
-   obj->proximo = primeiro->proximo;
-   obj->anterior = primeiro;
-   primeiro->proximo = obj;
-   obj->proximo->anterior = obj;
+   obj->next = first->next;
+   obj->previous = first;
+   first->next = obj;
+   obj->next->previous = obj;
    total++;
 }
 
@@ -132,7 +132,7 @@ botao* Tlista::InserirBotao(int xa,int ya,int xb,int yb,int Ra,int Ga,
    novo->texto = text;
    novo->oval = oval;
    novo->men = NULL;
-   novo->tipo = BOTAO;
+   novo->type = GUI_BUTTON;
    novo->Cores.Iniciar();
    InserirObj(novo);
    return(novo);
@@ -146,7 +146,7 @@ cxSel* Tlista::insertCxSel(int xa,int ya, bool selected)
    novo->x = xa;
    novo->y = ya;
    novo->setSelection(selected);
-   novo->tipo = CXSEL;
+   novo->type = GUI_SEL_BOX;
    novo->Colors.Iniciar();
    InserirObj(novo);
    return(novo);
@@ -160,7 +160,7 @@ figura* Tlista::InserirFigura(int x,int y,int w,int h,const char* arquivo)
    novo = new figura(x,y,w,h,arquivo);
    
 
-   novo->tipo = FIGURA;
+   novo->type = GUI_PICTURE;
    InserirObj(novo);
    return(novo);
 } 
@@ -179,31 +179,15 @@ tabButton* Tlista::InserirTabButton(int x,int y,int w,int h,const char* arquivo)
    }
    
 
-   novo->tipo = TABBOTAO;
+   novo->type = GUI_TAB_BUTTON;
    InserirObj(novo);
    return(novo);
 } 
 
-barraTexto* Tlista::InserirBarraTexto(int xa,int ya,int xb,int yb,
-                                      const char* text,int cript,
-                       void (*procEditada)(barraTexto* bart,SDL_Surface *screen))
+textBar* Tlista::insertTextBar(int xa,int ya,int xb,int yb, string text,int cript)
 {
-   barraTexto* novo;
-   novo = new(barraTexto);
-   novo->procEditada = procEditada;
-   novo->x1 = xa;
-   novo->x2 = xb;
-   novo->y1 = ya;
-   novo->y2 = yb;
-   novo->inic = 0;
-   novo->fim = 0;
-   novo->pos = 0;
-   novo->ultEsc = 0;
-   novo->ultChar='\0';
-   novo->cript = cript;
-   novo->tipo = BARRATEXTO;
-   novo->Cores.Iniciar();
-   novo->texto = text;
+   textBar* novo;
+   novo = new textBar(xa,ya,xb,yb, text, cript);
    InserirObj(novo);
    return(novo);
 } 
@@ -220,7 +204,7 @@ quadroTexto* Tlista::InserirQuadroTexto(int xa,int ya,int xb,int yb,
    novo->y2 = yb;
    novo->moldura = moldura;
    novo->texto = text; 
-   novo->tipo = QUADROTEXTO;
+   novo->type = GUI_TEXT_BOX;
    novo->fonte = FHELVETICA;
    novo->tamFonte = 1;
    novo->aliFonte = ESQUERDA;
@@ -243,7 +227,7 @@ selTexto* Tlista::insertSelTexto(int xa,int ya,int xb,int yb,
    novo->text[2] = text2;
    novo->text[3] = text3;
    novo->text[4] = text4;
-   novo->tipo = SELTEXTO;
+   novo->type = GUI_SEL_TEXT;
    InserirObj(novo);
    return(novo);
 } 
@@ -266,17 +250,17 @@ listText* Tlista::insertListText(int xa,int ya,int xb,int yb,
    return(novo);
 }
 
-Tobjeto* Tlista::addMenu()
+guiObject* Tlista::addMenu()
 {
    if(intMenu)
    {
       removeMenu();
    }
-   intMenu = (Tobjeto*)new menu();
+   intMenu = (guiObject*)new menu();
    return(intMenu);
 }
 
-Tobjeto* Tlista::getMenu()
+guiObject* Tlista::getMenu()
 {
    return(intMenu);
 }

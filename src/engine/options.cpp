@@ -378,7 +378,7 @@ void options::DisplayOptionsScreen(interface* interf)
 /****************************************************************
  *                             Treat                            *
  ****************************************************************/
-int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
+int options::Treat(guiObject* object, int eventInfo, interface* interf)
 {
    if( (eventInfo == BOTAOEMPRESSAO) && 
          (SDL_GetTicks() - timeLastOperation > 100) )
@@ -386,14 +386,14 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
       timeLastOperation = SDL_GetTicks();
 
       /* Music */
-      if(object == (Tobjeto*) buttonMusSum)
+      if(object == (guiObject*) buttonMusSum)
       {
          if(musicVolume < SDL_MIX_MAXVOLUME)
          {
              musicVolume++;
          }
       }
-      if(object == (Tobjeto*) buttonMusDec) 
+      if(object == (guiObject*) buttonMusDec) 
       {
          if(musicVolume > 0)
          {
@@ -401,14 +401,14 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          }
       }
       /* Sound Effects */
-      if(object == (Tobjeto*) buttonSndSum) 
+      if(object == (guiObject*) buttonSndSum) 
       {
          if(sndfxVolume < SDL_MIX_MAXVOLUME)
          {
              sndfxVolume++;
          }
       }
-      if(object == (Tobjeto*) buttonSndDec) 
+      if(object == (guiObject*) buttonSndDec) 
       {
          if(sndfxVolume > 0)
          {
@@ -416,14 +416,14 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          }
       }
       /* Language */
-      if(object == (Tobjeto*) buttonLangSum)
+      if(object == (guiObject*) buttonLangSum)
       {
          if(langNumber < LANG_LAST)
          {
             langNumber++;
          }
       }
-      if(object == (Tobjeto*) buttonLangDec)
+      if(object == (guiObject*) buttonLangDec)
       {
          if(langNumber > LANG_FIRST)
          {
@@ -431,14 +431,14 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          }
       }
       /* Camera */
-      if(object == (Tobjeto*) buttonCamSum)
+      if(object == (guiObject*) buttonCamSum)
       {
          if(cameraNumber < CAMERA_TYPE_DRIVE)
          {
             cameraNumber++;
          }
       }
-      if(object == (Tobjeto*) buttonCamDec)
+      if(object == (guiObject*) buttonCamDec)
       {
          if(cameraNumber > CAMERA_TYPE_NORMAL)
          {
@@ -446,14 +446,14 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          }
       }
       /* Reflexin */
-      if(object == (Tobjeto*) buttonReflSum)
+      if(object == (guiObject*) buttonReflSum)
       {
          if(reflexionType < REFLEXIONS_ALL)
          {
             reflexionType++;
          }
       }
-      if(object == (Tobjeto*) buttonReflDec)
+      if(object == (guiObject*) buttonReflDec)
       {
          if(reflexionType > REFLEXIONS_NONE)
          {
@@ -465,7 +465,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
    else if(eventInfo == BOTAOPRESSIONADO) 
    {
       /* Confirm */
-      if( (object == (Tobjeto*) buttonConfirm) )
+      if( (object == (guiObject*) buttonConfirm) )
       {
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
@@ -474,7 +474,7 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
          return(OPTIONSW_CONFIRM);
       }
       /* Cancel */
-      if( (object == (Tobjeto*) buttonCancel) )
+      if( (object == (guiObject*) buttonCancel) )
       {
          musicVolume = prevMusicVolume;
          sndfxVolume = prevSndfxVolume;
@@ -488,8 +488,8 @@ int options::Treat(Tobjeto* object, int eventInfo, interface* interf)
    else if(eventInfo == CXSELMODIFICADA)
    {
       /* cxSelParticles */
-      if( (object == (Tobjeto*) cxSelParticles) || 
-          (object == (Tobjeto*) cxSelGrass))
+      if( (object == (guiObject*) cxSelParticles) || 
+          (object == (guiObject*) cxSelGrass))
       {
          /* When disable particles, disable the grass */
          if(!cxSelParticles->isSelected())

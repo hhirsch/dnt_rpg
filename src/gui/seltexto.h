@@ -12,12 +12,12 @@ using namespace std;
 #include "fonte.h"
 #include "cores.h"
 #include "mouse.h"
-#include "objeto.h"
+#include "guiobject.h"
 
 #define MAX_OPTIONS 5
 
 /*! Select Text Class */
-class selTexto: public Tobjeto
+class selTexto: public guiObject
 {
    public:
       string text[MAX_OPTIONS];   /**< Text Options */

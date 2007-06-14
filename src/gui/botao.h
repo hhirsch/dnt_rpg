@@ -10,14 +10,15 @@
 #include <string>
 using namespace std;
 
-#include "objeto.h"
+#include "guiobject.h"
 #include "cores.h"
 #include "desenho.h"
 #include "mouse.h"
 
 /* Onde eh definido um botao e suas rotinas de utilizacao */
 
-class botao: public Tobjeto{
+class botao: public guiObject
+{
    public:
       int x1,y1,x2,y2;        // coordenadas
                               // Procedimento a ser chamado qdo pressionado

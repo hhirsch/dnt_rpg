@@ -33,7 +33,7 @@ class attWindow
        * \param modl -> Model Viewn matrix
        * \param viewPort -> ViewPort Vector
        * \return 0 on close, 1 otherwise */
-      int treat(Tobjeto* object, int eventInfo, interface* inter,
+      int treat(guiObject* object, int eventInfo, interface* inter,
                 GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       janela*      window;        /**< Pointer to the internal window */

@@ -121,11 +121,11 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
+int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)
    {
-      if(object == (Tobjeto*) buttonSum)
+      if(object == (guiObject*) buttonSum)
       {
          if( avaiblePoints - saveSkill->m_skills[curSkill].mod >=0 )
          {
@@ -143,7 +143,7 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
 
          }
       }
-      else if(object == (Tobjeto*) buttonDec)
+      else if(object == (guiObject*) buttonDec)
       {
          if(saveSkill->m_skills[curSkill].pontos - 1 >= 
             saveSkill->m_skills[curSkill].antPontos)
@@ -161,7 +161,7 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
             txtPoints->texto = saux;
          }
       }
-      else if(object == (Tobjeto*) buttonNext)
+      else if(object == (guiObject*) buttonNext)
       {
          if(curSkill < ATT_SKILL_LAST)
          {
@@ -184,7 +184,7 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          txtCosts->texto = saux;
 
       }
-      else if(object == (Tobjeto*) buttonPrevious)
+      else if(object == (guiObject*) buttonPrevious)
       {
          if(curSkill > ATT_SKILL_FIRST)
          {
@@ -207,7 +207,7 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          txtCosts->texto = saux;
 
       }
-      else if(object == (Tobjeto*) buttonConfirm)
+      else if(object == (guiObject*) buttonConfirm)
       {
          skFig->fig = NULL; //to not delete skill images
          inter->closeWindow(window);
@@ -217,7 +217,7 @@ int skillWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          SDL_ShowCursor(SDL_DISABLE);
          return(SKILLW_CONFIRM);
       }
-      else if(object == (Tobjeto*) buttonCancel) 
+      else if(object == (guiObject*) buttonCancel) 
       {
          /* Undo */
          int aux;

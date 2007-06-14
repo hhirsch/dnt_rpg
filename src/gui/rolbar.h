@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-#include "objeto.h"
+#include "guiobject.h"
 #include "cores.h"
 #include "desenho.h"
 #include "mouse.h"
@@ -17,7 +17,7 @@ using namespace std;
 #include "quadtexto.h"
 
 /*! Rolling Text Bar Definition */
-class rolBar: public Tobjeto
+class rolBar: public guiObject
 {
    public:
       /*! Constructor */
@@ -30,7 +30,7 @@ class rolBar: public Tobjeto
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
        * \return -> true if event is related (and threated) by the rolBar */
-      bool eventGot(int type, Tobjeto* object);
+      bool eventGot(int type, guiObject* object);
 
       /*! Set The Text of the Bar, putting them on top
        * \param txt -> desired text */

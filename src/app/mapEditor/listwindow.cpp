@@ -211,7 +211,7 @@ string listWindow::getFileNameWithTitle(string title)
 /********************************************************************
  *                             eventGot                             *
  ********************************************************************/
-bool listWindow::eventGot(int type, Tobjeto* object)
+bool listWindow::eventGot(int type, guiObject* object)
 {
    selFileName = "";
    if(type == LISTTEXT_SELECTED)

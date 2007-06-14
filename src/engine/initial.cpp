@@ -32,7 +32,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
    done = false;
-   Tobjeto* object = NULL;
+   guiObject* object = NULL;
    int eventInfo = NADA;
    janela* jan = gui->insertWindow(335,235,462,362,
                                    language.VERSION.c_str(),1,1);  
@@ -97,32 +97,32 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
              {
                  //snd->addSoundEffect(false, "../data/sndfx/menu/click.ogg");
 
-                 if(object == (Tobjeto*) buttonNew)
+                 if(object == (guiObject*) buttonNew)
                  {
                     result = NEW_GAME;
                     done = true;
                  }
-                 else if(object == (Tobjeto*) buttonContinue)
+                 else if(object == (guiObject*) buttonContinue)
                  {
                     result = CONTINUE_GAME;
                     done = true;
                  }
-                 else if(object == (Tobjeto*) buttonLoad)
+                 else if(object == (guiObject*) buttonLoad)
                  {
                     result = LOAD_GAME;
                     done = true;
                  }
-                 else if(object == (Tobjeto*) buttonSave)
+                 else if(object == (guiObject*) buttonSave)
                  {
                     result = SAVE_GAME;
                     done = true;
                  }
-                 else if(object == (Tobjeto*) buttonExit)
+                 else if(object == (guiObject*) buttonExit)
                  {
                     result = EXIT_GAME;
                     done = true;
                  }
-                 else if(object == (Tobjeto*) buttonOptions)
+                 else if(object == (guiObject*) buttonOptions)
                  {
                     result = OPTIONS;
                     done = true;

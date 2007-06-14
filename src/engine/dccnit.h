@@ -232,7 +232,7 @@ class engine
        * \param object -> last object modifief on GUI
        * \param eventInfo -> las event on GUI
        **************************************************************/
-      void threatGuiEvents(Tobjeto* object, int eventInfo);
+      void threatGuiEvents(guiObject* object, int eventInfo);
 
       /*!
        ***********************************************************************

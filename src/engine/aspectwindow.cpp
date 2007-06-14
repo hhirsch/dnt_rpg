@@ -41,11 +41,11 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
 
    /* Name Text */
    window->objects->InserirQuadroTexto(72,25,112,39,1,"Name:");
-   textName = window->objects->InserirBarraTexto(113,25,251,39,"Bruno",0,NULL);
+   textName = window->objects->insertTextBar(113,25,251,39,"Bruno",0);
 
    /* Age Text */
    window->objects->InserirQuadroTexto(72,40,112,54,1,"Age:");
-   textAge = window->objects->InserirBarraTexto(113,40,143,54,"20",0,NULL);
+   textAge = window->objects->insertTextBar(113,40,143,54,"20",0);
 
    /* Sex Selectors */
    window->objects->InserirQuadroTexto(72,55,112,69,1,"Sex:");
@@ -119,12 +119,12 @@ void aspectWindow::loadImages()
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
+int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)
    {
       /* Confirm */
-      if(object == (Tobjeto*) buttonConfirm)
+      if(object == (guiObject*) buttonConfirm)
       {
          /* Save Things to the character */
          usedCharacter->definePortrait(images[curImage].imageFile);
@@ -142,9 +142,9 @@ int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
             usedCharacter->sexType = SEX_OTHER;
          }
          /* Define Name */
-         usedCharacter->nome = textName->texto;
+         usedCharacter->nome = textName->getText();
          /* Define Age */
-         sscanf(textAge->texto.c_str(),"%d", &usedCharacter->age);
+         sscanf(textAge->getText().c_str(),"%d", &usedCharacter->age);
 
          /* Close Window */
          figurePortrait->fig = NULL;
@@ -155,7 +155,7 @@ int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          return(ASPECTW_CONFIRM);
       }
       /* Cancel */
-      else if(object == (Tobjeto*) buttonCancel) 
+      else if(object == (guiObject*) buttonCancel) 
       {
          figurePortrait->fig = NULL;
          inter->closeWindow(window);
@@ -165,7 +165,7 @@ int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          return(ASPECTW_CANCEL);
       }
       /* Previous Image */
-      else if(object == (Tobjeto*) buttonPreviousImage)
+      else if(object == (guiObject*) buttonPreviousImage)
       {
          curImage--;
          if(curImage < 0)
@@ -175,7 +175,7 @@ int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          figurePortrait->fig = images[curImage].image;
       }
       /* Next Image */
-      else if(object == (Tobjeto*) buttonNextImage)
+      else if(object == (guiObject*) buttonNextImage)
       {
          curImage++;
          if(curImage >= totalImages)
@@ -188,7 +188,7 @@ int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
    else if(eventInfo == CXSELMODIFICADA)
    {
       /* Female */
-      if(object == (Tobjeto*) cxSelSexF)
+      if(object == (guiObject*) cxSelSexF)
       {
          if(cxSelSexF->isSelected())
          {
@@ -201,7 +201,7 @@ int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          cxSelSexO->setSelection(false);
       }
       /* Male */
-      if(object == (Tobjeto*) cxSelSexM)
+      if(object == (guiObject*) cxSelSexM)
       {
          if(cxSelSexM->isSelected())
          {
@@ -214,7 +214,7 @@ int aspectWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          cxSelSexO->setSelection(false);
       }
       /* Other */
-      if(object == (Tobjeto*) cxSelSexO)
+      if(object == (guiObject*) cxSelSexO)
       {
          if(cxSelSexO->isSelected())
          {

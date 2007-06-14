@@ -25,7 +25,7 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    intList = list;
 
    selFonte(FMINI, ESQUERDA, 1);
-   tipo = ROLBAR;
+   type = GUI_ROL_BAR;
    x1 = xa;
    y1 = ya;
    x2 = xb;
@@ -66,25 +66,19 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
  *********************************************************************/
 rolBar::~rolBar()
 {
-   //Tlista* l = (Tlista*)intList;
-   /* Remove from List all objects used by the rolBar */
-   /*l->Retirar(contorn);
-   l->Retirar(up);
-   l->Retirar(down);
-   l->Retirar(text);*/
 }
 
 /*********************************************************************
  *                              eventGot                             *
  *********************************************************************/
-bool rolBar::eventGot(int type, Tobjeto* object)
+bool rolBar::eventGot(int type, guiObject* object)
 {
    if((SDL_GetTicks() - lastActualized) >= ACTUALIZE_RATE)
    {
       lastActualized = SDL_GetTicks();
       if(type == BOTAOEMPRESSAO)
       {
-         if(object == (Tobjeto*)up)
+         if(object == (guiObject*)up)
          {
             if(actualInit > 0)
             {
@@ -96,7 +90,7 @@ bool rolBar::eventGot(int type, Tobjeto* object)
             actualPressed = up;
             return(true);
          }
-         else if(object == (Tobjeto*)down)
+         else if(object == (guiObject*)down)
          {
             if(actualEnd < totalLines)
             {

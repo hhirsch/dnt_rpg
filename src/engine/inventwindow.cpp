@@ -138,7 +138,7 @@ void inventWindow::openMenu(int x, int y)
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
+bool inventWindow::treat(guiObject* guiObj, int eventInfo)
 {
    if(!isOpen())
    {
@@ -172,7 +172,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
       case TABBOTAOPRESSIONADO:
       {
          /* Inventory Spaces Selected */
-         if(guiObject == (Tobjeto*) inventoryButton)
+         if(guiObj == (guiObject*) inventoryButton)
          {
             if(state == INVENTORY_STATE_NONE)
             {
@@ -204,28 +204,28 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
          }
          
          /* Change to Inventory 1 */
-         else if(guiObject == (Tobjeto*) inv1Button)
+         else if(guiObj == (guiObject*) inv1Button)
          {
             currentInventory = 0;
             reDraw();
             return(true);
          }
          /* Change to Inventory 2 */
-         else if(guiObject == (Tobjeto*) inv2Button)
+         else if(guiObj == (guiObject*) inv2Button)
          {
             currentInventory = 1;
             reDraw();
             return(true);
          }
          /* Change to Inventory 3 */
-         else if(guiObject == (Tobjeto*) inv3Button)
+         else if(guiObj == (guiObject*) inv3Button)
          {
             currentInventory = 2;
             reDraw();
             return(true);
          }
          /* Change to Inventory 4 */
-         else if(guiObject == (Tobjeto*) inv4Button)
+         else if(guiObj == (guiObject*) inv4Button)
          {
             currentInventory = 3;
             reDraw();
@@ -235,42 +235,42 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
          if(state == INVENTORY_STATE_NONE)
          {
             object* aObject = NULL;
-            if(guiObject == (Tobjeto*) headButton)
+            if(guiObj == (guiObject*) headButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_HEAD);
                objWhere = INVENTORY_HEAD;
             }
-            else if(guiObject == (Tobjeto*) leftHandButton)
+            else if(guiObj == (guiObject*) leftHandButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_LEFT_HAND);
                objWhere = INVENTORY_LEFT_HAND;
             }
-            else if(guiObject == (Tobjeto*) rightHandButton)
+            else if(guiObj == (guiObject*) rightHandButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
                objWhere = INVENTORY_RIGHT_HAND;
             }
-            else if(guiObject == (Tobjeto*) leftFingerButton)
+            else if(guiObj == (guiObject*) leftFingerButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_LEFT_FINGER);
                objWhere = INVENTORY_LEFT_FINGER;
             }
-            else if(guiObject == (Tobjeto*) rightFingerButton)
+            else if(guiObj == (guiObject*) rightFingerButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_RIGHT_FINGER);
                objWhere = INVENTORY_RIGHT_FINGER;
             }
-            else if(guiObject == (Tobjeto*) neckButton)
+            else if(guiObj == (guiObject*) neckButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_NECK);
                objWhere = INVENTORY_NECK;
             }
-            else if(guiObject == (Tobjeto*) footButton)
+            else if(guiObj == (guiObject*) footButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_FOOT);
                objWhere = INVENTORY_FOOT;
             }
-            else if(guiObject == (Tobjeto*) bodyButton)
+            else if(guiObj == (guiObject*) bodyButton)
             {
                aObject = inventories->getFromPlace(INVENTORY_BODY);
                objWhere = INVENTORY_BODY;
@@ -287,7 +287,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
          /* State Object */
          else if(state == INVENTORY_STATE_OBJECT)
          {
-            if(guiObject == (Tobjeto*) headButton)
+            if(guiObj == (guiObject*) headButton)
             {
                if(inventories->equipObject(activeObject, INVENTORY_HEAD))
                {
@@ -295,7 +295,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   activeObject = NULL;
                }
             }
-            else if(guiObject == (Tobjeto*) leftHandButton)
+            else if(guiObj == (guiObject*) leftHandButton)
             {
                if(inventories->equipObject(activeObject,INVENTORY_LEFT_HAND))
                {
@@ -304,7 +304,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                }
 
             }
-            else if(guiObject == (Tobjeto*) rightHandButton)
+            else if(guiObj == (guiObject*) rightHandButton)
             {
                if(inventories->equipObject(activeObject,INVENTORY_RIGHT_HAND))
                {
@@ -312,7 +312,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   activeObject = NULL;
                }
             }
-            else if(guiObject == (Tobjeto*) leftFingerButton)
+            else if(guiObj == (guiObject*) leftFingerButton)
             {
                if(inventories->equipObject(activeObject,INVENTORY_LEFT_FINGER))
                {
@@ -320,7 +320,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   activeObject = NULL;
                }
             }
-            else if(guiObject == (Tobjeto*) rightFingerButton)
+            else if(guiObj == (guiObject*) rightFingerButton)
             {
                if(inventories->equipObject(activeObject,INVENTORY_RIGHT_FINGER))
                {
@@ -328,7 +328,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   activeObject = NULL;
                }
             }
-            else if(guiObject == (Tobjeto*) neckButton)
+            else if(guiObj == (guiObject*) neckButton)
             {
                if(inventories->equipObject(activeObject, INVENTORY_NECK))
                {
@@ -336,7 +336,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   activeObject = NULL;
                }
             }
-            else if(guiObject == (Tobjeto*) footButton)
+            else if(guiObj == (guiObject*) footButton)
             {
                if(inventories->equipObject(activeObject, INVENTORY_FOOT))
                {
@@ -344,7 +344,7 @@ bool inventWindow::treat(Tobjeto* guiObject, int eventInfo)
                   activeObject = NULL;
                }
             }
-            else if(guiObject == (Tobjeto*) bodyButton)
+            else if(guiObj == (guiObject*) bodyButton)
             {
                if(inventories->equipObject(activeObject, INVENTORY_BODY))
                {

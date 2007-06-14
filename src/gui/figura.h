@@ -8,9 +8,9 @@
 
 #include "desenho.h"
 #include "erro.h"
-#include "objeto.h"
+#include "guiobject.h"
 
-class figura: public Tobjeto
+class figura: public guiObject
 {
    public:
       int x1,y1,x2,y2;      /* Coordenadas Iniciais da Figura */

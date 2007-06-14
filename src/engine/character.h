@@ -78,7 +78,7 @@ class character: public aniModel
       /*! Clear Skills */
       void clearSkills();
 
-      Tobjeto *actualWeapon;    /**< Actual weapon */
+      //Tobjeto *actualWeapon;    /**< Actual weapon */
 
       classe* actualClass[MAX_DISTINCT_CLASSES]; /**< Pointer to each class */
       int classLevels[MAX_DISTINCT_CLASSES]; /**< Current level of each class */
@@ -109,11 +109,11 @@ class character: public aniModel
       void createConversation(void* pEngine);
 
       /*! Treat Events on Conversation Window. 
-       * \param guiObject -> active GUI object
+       * \param guiObj -> active GUI object
        * \param eventInfo -> last GUI Event 
        * \param gui -> window interface used
        * \return true if event is threated, false otherwise. */
-      bool treatConversation(Tobjeto* guiObject, int eventInfo, interface* gui);
+      bool treatConversation(guiObject* guiObj, int eventInfo, interface* gui);
 
       /*! Call the thing dead animation */
       void callDeadAnimation();

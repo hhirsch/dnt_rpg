@@ -22,10 +22,10 @@ class inventWindow
       ~inventWindow();
 
       /*! Treat Events on Window. 
-       * \param guiObject -> last GUI object
+       * \param guiObj -> last GUI object
        * \param eventInfo -> last GUI Event 
        * \return true if event is threated, false otherwise. */
-      bool treat(Tobjeto* guiObject, int eventInfo);
+      bool treat(guiObject* guiObj, int eventInfo);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */

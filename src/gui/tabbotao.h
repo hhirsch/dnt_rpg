@@ -14,7 +14,7 @@
 #define TABBUTTON_PRESSED   41 /**< Some Button pressed */
 
 /*! oneTabButton is a class to define what is a button on a table of buttons */
-class oneTabButton :Tobjeto
+class oneTabButton :guiObject
 {
    public:
       int x1,  /**< X Coordinate */
@@ -66,9 +66,9 @@ class tabButton: public figura
        * \param screen -> surface where will draw
        * \param actionType -> ID of action done
        * \return Pointer to the button pressed.*/
-      Tobjeto* verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
-                              int Xjan, int Yjan, SDL_Surface *screen,
-                              int& actionType);
+      guiObject* verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
+                                int Xjan, int Yjan, SDL_Surface *screen,
+                                int& actionType);
 
    private:
       int numButtons;                       /**< Number of active buttons */

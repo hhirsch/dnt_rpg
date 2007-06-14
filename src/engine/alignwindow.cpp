@@ -70,14 +70,14 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
 /************************************************************************
  *                              treat                                   *
  ************************************************************************/
-int alignWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
+int alignWindow::treat(guiObject* object, int eventInfo, interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)
    {
-      if( (object == (Tobjeto*) buttonNext) || 
-          (object == (Tobjeto*) buttonPrevious))
+      if( (object == (guiObject*) buttonNext) || 
+          (object == (guiObject*) buttonPrevious))
       {
-         if(object == (Tobjeto*) buttonNext)
+         if(object == (guiObject*) buttonNext)
          {
             actualAlign = actualAlign->next;
          }
@@ -90,7 +90,7 @@ int alignWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          alignImage->fig = actualAlign->image;
          window->Desenhar(0,0);
       }
-      else if(object == (Tobjeto*) buttonConfirm)
+      else if(object == (guiObject*) buttonConfirm)
       {
          alignImage->fig = NULL;
          *choosedAlign = actualAlign;
@@ -99,7 +99,7 @@ int alignWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          SDL_ShowCursor(SDL_DISABLE);
          return(ALIGNW_CONFIRM);
       }
-      else if(object == (Tobjeto*) buttonCancel) 
+      else if(object == (guiObject*) buttonCancel) 
       {
          alignImage->fig = NULL; //to not delete skill images
          inter->closeWindow(window);

@@ -39,7 +39,7 @@ class aspectWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(Tobjeto* object, int eventInfo, interface* inter);
+      int treat(guiObject* object, int eventInfo, interface* inter);
 
    private:
       /*! Load All Portrait Images */
@@ -51,8 +51,8 @@ class aspectWindow
       botao* buttonCancel;          /**< Cancel Button */
       botao* buttonNextImage;       /**< Next Image Button */
       botao* buttonPreviousImage;   /**< Previous Image Button */
-      barraTexto* textName;         /**< Character Name Text */
-      barraTexto* textAge;          /**< Character Age Text */
+      textBar* textName;            /**< Character Name Text */
+      textBar* textAge;             /**< Character Age Text */
       cxSel* cxSelSexM;             /**< Feminine Sex SelBox */
       cxSel* cxSelSexF;             /**< Masculine Sex SelBox */
       cxSel* cxSelSexO;             /**< Other Sex SelBox */

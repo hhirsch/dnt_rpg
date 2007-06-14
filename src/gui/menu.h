@@ -15,10 +15,10 @@ using namespace std;
 #include "fonte.h"
 #include "string.h"
 #include "mouse.h"
-#include "objeto.h"
+#include "guiobject.h"
 #include "lista.h"
 
-class menuItem: public Tobjeto
+class menuItem: public guiObject
 {
    public:
       string texto;        /* Texto do item */

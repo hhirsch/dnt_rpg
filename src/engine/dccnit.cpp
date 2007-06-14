@@ -604,7 +604,7 @@ int engine::OptionsScreen(GLuint idTextura)
    int tempoAnterior = 0;
    Uint8* keys;
    int x,y;
-   Tobjeto* object = NULL;
+   guiObject* object = NULL;
    int eventInfo = NADA;
 
    glDisable(GL_LIGHTING);
@@ -675,7 +675,7 @@ int engine::CharacterScreen(GLuint idTextura)
    int tempoAnterior = 0;
    Uint8* keys;
    int x,y;
-   Tobjeto* object = NULL;
+   guiObject* object = NULL;
    int eventInfo = NADA;
 
    int status = 0;
@@ -1132,7 +1132,7 @@ void engine::endTurn()
 /*********************************************************************
  *                         Threat GUI Events                         *
  *********************************************************************/
-void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
+void engine::threatGuiEvents(guiObject* object, int eventInfo)
 {
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
@@ -1166,14 +1166,14 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
    {
        case TABBOTAOPRESSIONADO:
        {
-           if(object == (Tobjeto*) buttonAttackMode)
+           if(object == (guiObject*) buttonAttackMode)
            {
               if( engineMode != ENGINE_MODE_TURN_BATTLE )
               {
                  enterBattleMode(true);
               }
            }
-           else if( object == (Tobjeto*) buttonMap)
+           else if( object == (guiObject*) buttonMap)
            {
               /* Open, if not opened, the minimap window */
               if(!miniMapWindow)
@@ -1181,11 +1181,11 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
                   OpenMiniMapWindow();
               }
            } 
-           else if(object == (Tobjeto*) buttonEndTurn)
+           else if(object == (guiObject*) buttonEndTurn)
            {
               endTurn(); 
            }
-           else if(object == (Tobjeto*) buttonInventory)
+           else if(object == (guiObject*) buttonInventory)
            {
               if(!inventoryWindow)
               {
@@ -1196,15 +1196,15 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
        }
        case BOTAOPRESSIONADO:
        {
-         if(object == (Tobjeto*) buttonMenu)
+         if(object == (guiObject*) buttonMenu)
          {
             exitEngine = 1;
          }
-         else if(object == (Tobjeto*) buttonSave)
+         else if(object == (guiObject*) buttonSave)
          {
             save();
          }
-         else if(object == (Tobjeto*) buttonLoad)
+         else if(object == (guiObject*) buttonLoad)
          {
             load();
          }
@@ -2111,7 +2111,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       {
          shortCutsWindow->Desenhar(mouseX, mouseY);
       }
-      Tobjeto* object;
+      guiObject* object;
       object = gui->manipulateEvents(x,y,Mbotao,keys, &guiEvent);
       /* Threat the GUI */
       if(guiEvent != NADA)

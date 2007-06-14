@@ -99,7 +99,7 @@ class guiIO
       botao* saveButton;    /**< Save Button */
       botao* exitButton;    /**< Exit Button */
       botao* newButton;     /**< New Button */
-      barraTexto* fileText; /**< FileName Text */
+      textBar* fileText; /**< FileName Text */
       void openFileWindow();
 
 
@@ -139,7 +139,7 @@ class guiIO
       botao* texturePreviousButton;
       botao* textureNextButton;
       botao* textureInsertButton;
-      barraTexto* textureText;
+      textBar* textureText;
       void openTextureWindow();
 
       /*********************Terrain*Window*******************************/
@@ -201,10 +201,10 @@ class guiIO
       /**************************Fog*Window******************************/
       janela* fogWindow;                  /**< Fog Window */
       cxSel* fogEnabled;                  /**< Fog enabled CxSel */
-      barraTexto* fogColor[4];            /**< Fog Color Texts */
-      barraTexto* fogDensity;             /**< Fog Density Text */
-      barraTexto* fogStart;               /**< Fog Start Text */
-      barraTexto* fogEnd;                 /**< Fog End Text */
+      textBar* fogColor[4];            /**< Fog Color Texts */
+      textBar* fogDensity;             /**< Fog Density Text */
+      textBar* fogStart;               /**< Fog Start Text */
+      textBar* fogEnd;                 /**< Fog End Text */
       botao* fogApplyButton;              /**< Fog Apply Button */
       void openFogWindow();               /**< Open Fog Window */
       

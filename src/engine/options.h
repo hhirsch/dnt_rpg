@@ -32,7 +32,7 @@ class options
       /*! Save actual options on file. */
       void Save();
       /*! Treat options Window Events */
-      int Treat(Tobjeto* object, int eventInfo, interface* interf);
+      int Treat(guiObject* object, int eventInfo, interface* interf);
 
       int     musicVolume;     /**< Actual Music Volume */
       int     sndfxVolume;     /**< Actual Sound Effects Volume */

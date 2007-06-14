@@ -45,7 +45,7 @@ interface::~interface()
 /*********************************************************************
  *                   Take care of GUI I/O Events                     *
  *********************************************************************/
-Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                      int* eventInfo)
 {
     int aux;
@@ -73,7 +73,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     /* Verify Main Super Menu */
     if(ljan->getMenu())
     {
-       objAtivo = (Tobjeto*) ljan->getMenu();
+       objAtivo = (guiObject*) ljan->getMenu();
        menu* men = (menu*)objAtivo;
        men->itemAtual = 1;
        foco = FOCO_MENU;
@@ -81,7 +81,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     else /* Verify Window Super Menu */
     if(ljan->janelaAtiva->objects->getMenu())
     {
-       objAtivo = (Tobjeto*) ljan->janelaAtiva->objects->getMenu();
+       objAtivo = (guiObject*) ljan->janelaAtiva->objects->getMenu();
        menu* men = (menu*)objAtivo;
        men->itemAtual = 1;
        foco = FOCO_MENU;
@@ -102,11 +102,11 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                           x, y))
         {
             /* Verify All objects */
-            Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
+            guiObject *obj = ljan->janelaAtiva->objects->first->next;
             for(aux=0;aux<ljan->janelaAtiva->objects->total;aux++)
             {
                /* Test selTexto */
-               if(obj->tipo == SELTEXTO) 
+               if(obj->type == GUI_SEL_TEXT) 
                {
                   selTexto *st = (selTexto*) obj;
                   int xa,ya,xb,yb;
@@ -121,7 +121,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   }
                }
                /* Verify Button Table */
-               else if(obj->tipo == TABBOTAO)
+               else if(obj->type == GUI_TAB_BUTTON)
                {
                   tabButton *tb = (tabButton*) obj;
                   if(mouse_NaArea(ljan->janelaAtiva->x1+tb->x1,
@@ -133,7 +133,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                      foco = FOCO_TABBUTTON;
                   }
                }
-               obj = obj->proximo;
+               obj = obj->next;
             }
         }
     }
@@ -150,7 +150,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             /* Active Window Moves */
             ljan->janelaAtiva->difx = x - ljan->janelaAtiva->x1;
             ljan->janelaAtiva->dify = y - ljan->janelaAtiva->y1;
-            objAtivo = (Tobjeto*) ljan->janelaAtiva;
+            objAtivo = (guiObject*) ljan->janelaAtiva;
             foco = FOCO_JANELAMOVER;
         }
         else if ( (ljan->janelaAtiva != NULL) &&
@@ -160,11 +160,11 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                 ljan->janelaAtiva->y2,x,y))
         {
             /* Here are the internal windows clicks verification */
-            Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
+            guiObject *obj = ljan->janelaAtiva->objects->first->next;
             int aux;
             for(aux=0; aux<ljan->janelaAtiva->objects->total; aux++)
             {
-               if(obj->tipo == BOTAO)
+               if(obj->type == GUI_BUTTON)
                {
                   /* Verify Click on Button */
                   botao *bot = (botao*) obj;
@@ -179,24 +179,20 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   }
                }
                /* Verify Click on TextBar */ 
-               else if(obj->tipo == BARRATEXTO)
+               else if(obj->type == GUI_TEXT_BAR)
                {
-                   barraTexto *bart = (barraTexto*) obj;
-                   if(mouse_NaArea(bart->x1+ljan->janelaAtiva->x1,
-                                   bart->y1+ljan->janelaAtiva->y1,
-                                   bart->x2+ljan->janelaAtiva->x1,
-                                   bart->y2+ljan->janelaAtiva->y1,x,y))
+                   textBar *bart = (textBar*) obj;
+                   if(bart->isMouseIn(x-ljan->janelaAtiva->x1,
+                                      y-ljan->janelaAtiva->y1))
                    {
                        objAtivo = bart;
-                       bart->pos = (mouseX-(ljan->janelaAtiva->x1+bart->x1+2)) 
-                                               / (fonte_incCP()+1);
-                       if (bart->pos > bart->texto.length()) 
-                           bart->pos = bart->texto.length();
+                       bart->defineCursorPosition(x-ljan->janelaAtiva->x1,
+                                                  y-ljan->janelaAtiva->y1);
                        foco = FOCO_BARRATEXTO;
                    }
                }
                /* Verify RadioBoxes */
-               else if(obj->tipo == CXSEL)
+               else if(obj->type == GUI_SEL_BOX)
                {
                    cxSel* cx = (cxSel*) obj;
                    if(mouse_NaArea(cx->x+ljan->janelaAtiva->x1,
@@ -209,7 +205,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                    }
                }
                /* Verify Text Select */
-               else if(obj->tipo == SELTEXTO)
+               else if(obj->type == GUI_SEL_TEXT)
                {
                   selTexto* st = (selTexto*) obj;
                   int xa,ya,xb,yb;
@@ -223,7 +219,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                      foco = FOCO_SELTEXTO;
                   }
                }
-               obj = obj->proximo;
+               obj = obj->next;
             }
             /* If out of for, without objects, call window external function */
             if(ljan->janelaAtiva->procPres != NULL)
@@ -231,13 +227,13 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                 ljan->janelaAtiva->procPres(ljan->janelaAtiva,x,y,NULL);
             }
             *eventInfo = JANELACLICADA;
-            return((Tobjeto*) ljan->janelaAtiva);
+            return((guiObject*) ljan->janelaAtiva);
         }
         else /*if( (ljan->janelaAtiva != NULL))*/
         {
            /* Test Other Windows Activation */
            int aux; 
-           janela *jaux=(janela*)ljan->primeiro->proximo;
+           janela *jaux=(janela*)ljan->first->next;
            for(aux=0;aux<ljan->total;aux++)
            {
                if( (jaux != ljan->janelaAtiva)  && 
@@ -246,9 +242,9 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                     foco = FOCO_JOGO;
                     jaux->Ativar(ljan);
                     *eventInfo = JANELAATIVADA;
-                    return((Tobjeto*) jaux);
+                    return((guiObject*) jaux);
                }
-               jaux = (janela*) jaux->proximo;
+               jaux = (janela*) jaux->next;
            }
         } 
     }
@@ -285,7 +281,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
               else if (bot->men != NULL)
               {
                  chamador = bot;
-                 objAtivo = (Tobjeto*) bot->men;
+                 objAtivo = (guiObject*) bot->men;
                  menu* men = (menu*)objAtivo;
                  men->Coordenada(bot->x1,bot->y2+1);
                  men->itemAtual = 1;
@@ -317,11 +313,11 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
            else
            {
               /* Verify RolBar */
-              Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
+              guiObject *obj = ljan->janelaAtiva->objects->first->next;
               int aux;
               for(aux=0; aux<ljan->janelaAtiva->objects->total; aux++)
               {
-                 if(obj->tipo == ROLBAR)
+                 if(obj->type == GUI_ROL_BAR)
                  {
                     rolBar* rb = (rolBar*)obj;
                     if(rb->eventGot(BOTAOEMPRESSAO, objAtivo))
@@ -330,7 +326,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                        rb->redraw();
                     }
                  }
-                 obj = obj->proximo;
+                 obj = obj->next;
               }
 
               *eventInfo = BOTAOEMPRESSAO;
@@ -349,16 +345,12 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     else 
     if (foco == FOCO_BARRATEXTO)
     {
-        barraTexto* bart = (barraTexto*)objAtivo;
-           if((bart->Escrever(ljan->janelaAtiva->x1,
-                          ljan->janelaAtiva->y1,
-                          x,y,ljan->janelaAtiva->cara,Mbotao,tecla)))
+        textBar* bart = (textBar*)objAtivo;
+           if((bart->write(x - ljan->janelaAtiva->x1,
+                           y - ljan->janelaAtiva->y1,
+                           ljan->janelaAtiva->cara, Mbotao,tecla)))
            {
                foco = FOCO_JOGO;
-               if(bart->procEditada != NULL)
-               {
-                     bart->procEditada(bart,NULL);
-               }
                *eventInfo = BARRATEXTOESCRITA;
                return(objAtivo);
            }
@@ -457,7 +449,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     {
        int actType = 0;
        tabButton* tb = (tabButton*) objAtivo;
-       Tobjeto* object = tb->verifyPosition(x,y,Mbotao,
+       guiObject* object = tb->verifyPosition(x,y,Mbotao,
                                             ljan->janelaAtiva->x1,
                                             ljan->janelaAtiva->y1,
                                             ljan->janelaAtiva->cara,
@@ -469,11 +461,11 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             {
                bool verified = false;
                /* Verify List Text */
-               Tobjeto *obj = ljan->janelaAtiva->objects->primeiro->proximo;
+               guiObject *obj = ljan->janelaAtiva->objects->first->next;
                int aux;
                for(aux=0; aux<ljan->janelaAtiva->objects->total; aux++)
                {
-                  if(obj->tipo == LISTTEXT)
+                  if(obj->type == GUI_LIST_TEXT)
                   {
                      listText* lt = (listText*)obj;
                      if(lt->eventGot(TABBOTAOPRESSIONADO, object))
@@ -485,7 +477,7 @@ Tobjeto* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                         return(lt);
                      }
                   }
-                  obj = obj->proximo;
+                  obj = obj->next;
                }
                
                /* Is not a list text pressed, so return calling for treat 
@@ -528,7 +520,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int aux;
    double profundidade = 0.012;
-   janela* jan = (janela*) ljan->primeiro->proximo;
+   janela* jan = (janela*) ljan->first->next;
 
    if(ljan->janelaAtiva == NULL)
      return;
@@ -554,7 +546,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                          jan->x2,jan->y2,profundidade);*/
           profundidade += 0.001;
       }
-      jan = (janela*) jan->proximo;
+      jan = (janela*) jan->next;
    }
 
    /* Draw Active Window */
@@ -596,12 +588,12 @@ void interface::closeWindow(janela *jan)
  *********************************************************************/
 void interface::closeAllWindows()
 {
-   janela* j = (janela*)ljan->primeiro->proximo;
+   janela* j = (janela*)ljan->first->next;
    janela* tmp;
-   while(j != (janela*)ljan->primeiro)
+   while(j != (janela*)ljan->first)
    {
       tmp = j;
-      j = (janela*)j->proximo;
+      j = (janela*)j->next;
       closeWindow(tmp);
    }
    clearActiveObject();
@@ -630,14 +622,14 @@ void interface::openWindow(janela* jan)
 bool interface::mouseOnGui(int mouseX, int mouseY)
 {
    int aux; 
-   janela *jaux=(janela*)ljan->primeiro->proximo;
+   janela *jaux=(janela*)ljan->first->next;
    for(aux=0;aux<ljan->total;aux++)
    {
       if(mouse_NaArea(jaux->x1,jaux->y1,jaux->x2,jaux->y2,mouseX,mouseY))
       {
          return(true);
       }
-      jaux = (janela*) jaux->proximo;
+      jaux = (janela*) jaux->next;
    }
    return(false);
 }

@@ -18,18 +18,18 @@ void menu::InserirMenuItem(string text, int dispon)
    novo->disponivel = dispon;
    if(text.length() > maxCarac)
       maxCarac = text.length();
-   novo->tipo = MENUITEM;
+   novo->type = GUI_MENU_ITEM;
    InserirObj(novo);
 } 
 
 menuItem* menu::Item(int i)
 {
-   menuItem* it= (menuItem*) primeiro->proximo;
+   menuItem* it= (menuItem*) first->next;
    if(i<=total)
    {
       int aux;
       for(aux=1;aux<i;aux++)
-         it = (menuItem*) it->proximo;
+         it = (menuItem*) it->next;
       return(it);  
    }
    return(NULL);
@@ -85,7 +85,7 @@ void menu::Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen)
    int xa = x1+4;
    int ya = y1+3;
    int k;
-   menuItem* item = (menuItem*) primeiro->proximo;
+   menuItem* item = (menuItem*) first->next;
    for (k=0;k<total;k++)
    {
       cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
@@ -109,7 +109,7 @@ void menu::Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen)
                          Cores.corCont[0].G,Cores.corCont[0].B,0);
       }
       ya += 11;
-      item = (menuItem*)item->proximo;
+      item = (menuItem*)item->next;
    }
   
 //   SDL_Flip(screen);

@@ -115,7 +115,7 @@ class conversation
        * \param eventInfo -> last GUI Event 
        * \param gui -> window interface used
        * \return true if event is threated, false otherwise. */
-      bool treat(Tobjeto* guiObject, int eventInfo, interface* gui);
+      bool treat(guiObject* guiObj, int eventInfo, interface* gui);
 
       /*! Verify if the dialog is open or not 
        * \return true if the window is opened */

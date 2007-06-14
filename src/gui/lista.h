@@ -8,8 +8,7 @@
 #include <string>
 using namespace std;
 
-#include "objeto.h"
-#include "bartexto.h"
+#include "guiobject.h"
 #include "botao.h"
 #include "cxsel.h"
 #include "figura.h"
@@ -17,18 +16,19 @@ using namespace std;
 #include "quadtexto.h"
 #include "seltexto.h"
 #include "tabbotao.h"
+#include "textbar.h"
 #include "rolbar.h"
 #include "listtext.h"
 
 class Tlista{
    public:
       int total;         // total de objetos na lista
-      Tobjeto *primeiro; // nodo cabeca
+      guiObject *first;  // nodo cabeca
    
       Tlista();
       ~Tlista();
 
-      void Retirar(Tobjeto* obj);
+      void Retirar(guiObject* obj);
 
       /* Insere um novo botao na lista
        * xa,ya,xb,yb -> coordenadas do novo botao
@@ -59,9 +59,7 @@ class Tlista{
        * text        -> Texto da Barra de Texto
        * cript       -> <>0 se estiver "criptografada"
        * lista       -> ponteiro para lista de barra de texto */
-      barraTexto* InserirBarraTexto(int xa,int ya,int xb,int yb,
-                                    const char* text, int cript,
-                     void (*procEditada)(barraTexto* bart,SDL_Surface *screen));
+      textBar* insertTextBar(int xa,int ya,int xb,int yb, string text, int cript);
 
       /* Insere um novo quadro de Texto na lista 
        * xa,ya,xb,yb -> coordenadas do novo quadro de texto
@@ -86,14 +84,14 @@ class Tlista{
       listText* insertListText(int xa,int ya,int xb,int yb,
                                SDL_Surface* surface);
 
-      Tobjeto* addMenu();
-      Tobjeto* getMenu();
+      guiObject* addMenu();
+      guiObject* getMenu();
       void removeMenu();
 
    protected:
-      void InserirObj(Tobjeto* obj);
+      void InserirObj(guiObject* obj);
 
-      Tobjeto* intMenu;
+      guiObject* intMenu;
 
 };
 

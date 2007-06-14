@@ -192,14 +192,14 @@ string classWindow::getCharacteristics()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int classWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
+int classWindow::treat(guiObject* object, int eventInfo, interface* inter)
 {
    if(eventInfo == BOTAOPRESSIONADO)
    {
-      if( (object == (Tobjeto*) buttonNext) || 
-          (object == (Tobjeto*) buttonPrevious))
+      if( (object == (guiObject*) buttonNext) || 
+          (object == (guiObject*) buttonPrevious))
       {
-         if(object == (Tobjeto*) buttonNext)
+         if(object == (guiObject*) buttonNext)
          {
             actualClass = actualClass->next;
          }
@@ -214,7 +214,7 @@ int classWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          classImage->fig = actualClass->image;
          window->Desenhar(0,0);
       }
-      else if(object == (Tobjeto*) buttonConfirm)
+      else if(object == (guiObject*) buttonConfirm)
       {
          classImage->fig = NULL;
          *choosedClass = actualClass;
@@ -223,7 +223,7 @@ int classWindow::treat(Tobjeto* object, int eventInfo, interface* inter)
          SDL_ShowCursor(SDL_DISABLE);
          return(CLASSW_CONFIRM);
       }
-      else if(object == (Tobjeto*) buttonCancel) 
+      else if(object == (guiObject*) buttonCancel) 
       {
          classImage->fig = NULL; //to not delete classes images
          inter->closeWindow(window);

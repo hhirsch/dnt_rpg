@@ -69,8 +69,7 @@ void guiIO::openFileWindow()
                                                   fileWindow->Cores.corBot.G,
                                                   fileWindow->Cores.corBot.B,
                                                   "Exit",1,NULL);
-   fileText = fileWindow->objects->InserirBarraTexto(10,17,173,33,
-                                                     "../data/mapas/",0,NULL);
+   fileText = fileWindow->objects->insertTextBar(10,17,173,33,"../data/mapas/",0);
    fileWindow->fechavel = 0;
    fileWindow->ptrExterno = &fileWindow;
    gui->openWindow(fileWindow);
@@ -97,8 +96,8 @@ void guiIO::openTextureWindow()
                                                   textureWindow->Cores.corBot.G,
                                                   textureWindow->Cores.corBot.B,
                                                   "Insert",1,NULL);
-   textureText = textureWindow->objects->InserirBarraTexto(10,17,173,33,
-                                                    "../data/texturas/",0,NULL);
+   textureText = textureWindow->objects->insertTextBar(10,17,173,33,
+                                                       "../data/texturas/",0);
    textureWindow->fechavel = 0;
    textureWindow->ptrExterno = &textureWindow;
    gui->openWindow(textureWindow);
@@ -319,25 +318,25 @@ void guiIO::openFogWindow()
    fogWindow = gui->insertWindow(185,100,288,255,"Fog",1,1);
    fogWindow->objects->InserirQuadroTexto(5,17,45,30,0,"Red");
    sprintf(buf,"%.4f",actualFog->color[0]);
-   fogColor[0] = fogWindow->objects->InserirBarraTexto(48,17,98,30,buf,1,NULL);
+   fogColor[0] = fogWindow->objects->insertTextBar(48,17,98,30,buf,1);
    fogWindow->objects->InserirQuadroTexto(5,31,45,44,0,"Green");
    sprintf(buf,"%.4f",actualFog->color[1]);
-   fogColor[1] = fogWindow->objects->InserirBarraTexto(48,31,98,44,buf,1,NULL);
+   fogColor[1] = fogWindow->objects->insertTextBar(48,31,98,44,buf,1);
    fogWindow->objects->InserirQuadroTexto(5,45,45,58,0,"Blue");
    sprintf(buf,"%.4f",actualFog->color[2]);
-   fogColor[2] = fogWindow->objects->InserirBarraTexto(48,45,98,58,buf,1,NULL);
+   fogColor[2] = fogWindow->objects->insertTextBar(48,45,98,58,buf,1);
    fogWindow->objects->InserirQuadroTexto(5,59,45,72,0,"Alpha");
    sprintf(buf,"%.4f",actualFog->color[3]);
-   fogColor[3] = fogWindow->objects->InserirBarraTexto(48,59,98,72,buf,1,NULL);
+   fogColor[3] = fogWindow->objects->insertTextBar(48,59,98,72,buf,1);
    fogWindow->objects->InserirQuadroTexto(5,73,45,86,0,"Dense");
    sprintf(buf,"%.4f",actualFog->density);
-   fogDensity = fogWindow->objects->InserirBarraTexto(48,73,98,86,buf,1,NULL);
+   fogDensity = fogWindow->objects->insertTextBar(48,73,98,86,buf,1);
    fogWindow->objects->InserirQuadroTexto(5,87,45,100,0,"Start");
    sprintf(buf,"%.4f",actualFog->start);
-   fogStart = fogWindow->objects->InserirBarraTexto(48,87,98,100,buf,1,NULL);
+   fogStart = fogWindow->objects->insertTextBar(48,87,98,100,buf,1);
    fogWindow->objects->InserirQuadroTexto(5,101,45,114,0,"End");
    sprintf(buf,"%.4f",actualFog->end);
-   fogEnd = fogWindow->objects->InserirBarraTexto(48,101,98,114,buf,1,NULL);
+   fogEnd = fogWindow->objects->insertTextBar(48,101,98,114,buf,1);
    fogWindow->objects->InserirQuadroTexto(5,115,45,128,0,"Enable");
    fogEnabled = fogWindow->objects->insertCxSel(48,117,actualFog->enabled);
 
@@ -364,14 +363,14 @@ void guiIO::setFog(mapFog* fog)
       for(i=0; i < 4; i++)
       {
          sprintf(buf,"%.4f",actualFog->color[i]);
-         fogColor[i]->texto = buf;
+         fogColor[i]->setText(buf);
       }
       sprintf(buf,"%.4f",actualFog->density);
-      fogDensity->texto = buf;
+      fogDensity->setText(buf);
       sprintf(buf,"%.4f",actualFog->start);
-      fogStart->texto = buf;
+      fogStart->setText(buf);
       sprintf(buf,"%.4f",actualFog->end);
-      fogEnd->texto = buf;
+      fogEnd->setText(buf);
       fogEnabled->setSelection(actualFog->enabled);
       fogWindow->Desenhar(0,0);
    }
@@ -387,11 +386,11 @@ void guiIO::applyFog()
       int i;
       for(i=0; i < 4; i++)
       {
-         sscanf(fogColor[i]->texto.c_str(),"%f",&actualFog->color[i]);
+         sscanf(fogColor[i]->getText().c_str(),"%f",&actualFog->color[i]);
       }
-      sscanf(fogDensity->texto.c_str(),"%f",&actualFog->density);
-      sscanf(fogStart->texto.c_str(),"%f",&actualFog->start);
-      sscanf(fogEnd->texto.c_str(),"%f",&actualFog->end);
+      sscanf(fogDensity->getText().c_str(),"%f",&actualFog->density);
+      sscanf(fogStart->getText().c_str(),"%f",&actualFog->start);
+      sscanf(fogEnd->getText().c_str(),"%f",&actualFog->end);
       actualFog->enabled = fogEnabled->isSelected();
       if(actualFog->enabled)
       {
@@ -459,7 +458,7 @@ void guiIO::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 {
    int eventInfo;
-   Tobjeto* object;
+   guiObject* object;
 
    /* Camera Verification */
    gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTACAMERA );
@@ -572,7 +571,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
       case TABBOTAOEMPRESSAO:
       {
          /*  Navigation Buttons  */
-         if(object == (Tobjeto*) upButton)
+         if(object == (guiObject*) upButton)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() -
                                        4.0 * sin(deg2Rad(gameCamera.getPhi())),
@@ -582,7 +581,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (Tobjeto*) downButton)
+         else if (object == (guiObject*) downButton)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() +
                                        4.0 * sin(deg2Rad(gameCamera.getPhi())),
@@ -592,7 +591,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (Tobjeto*) leftButton)
+         else if (object == (guiObject*) leftButton)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() -
                             4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
@@ -602,7 +601,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
                                        0.0);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (Tobjeto*) rightButton)
+         else if (object == (guiObject*) rightButton)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() +
                            4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
@@ -612,32 +611,32 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
                                      0.0);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (Tobjeto*) rotUpButton)
+         else if (object == (guiObject*) rotUpButton)
          {
             gameCamera.sumTheta(1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (Tobjeto*) rotDownButton)
+         else if (object == (guiObject*) rotDownButton)
          {
             gameCamera.sumTheta(-1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (Tobjeto*) rotLeftButton)
+         else if (object == (guiObject*) rotLeftButton)
          {
             gameCamera.sumPhi(1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (Tobjeto*) rotRightButton)
+         else if (object == (guiObject*) rotRightButton)
          {
             gameCamera.sumPhi(-1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (Tobjeto*) moreZoomButton)
+         else if (object == (guiObject*) moreZoomButton)
          {
             gameCamera.sumD(-1);
             return(GUI_IO_NEW_POSITION);
          }
-         else if (object == (Tobjeto*) lessZoomButton)
+         else if (object == (guiObject*) lessZoomButton)
          {
             gameCamera.sumD(1);
             return(GUI_IO_NEW_POSITION);
@@ -647,164 +646,164 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
       case TABBOTAOPRESSIONADO:
       
          /*  Terrain Buttons  */
-         if(object == (Tobjeto*) terrainUpButton)
+         if(object == (guiObject*) terrainUpButton)
          {
             state = GUI_IO_STATE_TERRAIN;
             tool = TOOL_TERRAIN_UP;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) terrainDownButton)
+         else if(object == (guiObject*) terrainDownButton)
          {
             state = GUI_IO_STATE_TERRAIN;
             tool = TOOL_TERRAIN_DOWN;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) terrainNivButton)
+         else if(object == (guiObject*) terrainNivButton)
          {
             state = GUI_IO_STATE_TERRAIN;
             tool = TOOL_TERRAIN_NIVELATE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) terrainTextureButton)
+         else if(object == (guiObject*) terrainTextureButton)
          {
             state = GUI_IO_STATE_TERRAIN;
             tool = TOOL_TERRAIN_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
          /* Portal Buttons */
-         else if(object == (Tobjeto*) portalAddButton)
+         else if(object == (guiObject*) portalAddButton)
          {
             state = GUI_IO_STATE_PORTAL;
             tool = TOOL_PORTAL_ADD;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) portalTagButton)
+         else if(object == (guiObject*) portalTagButton)
          {
             state = GUI_IO_STATE_PORTAL;
             tool = TOOL_PORTAL_TAG;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) portalDoorButton)
+         else if(object == (guiObject*) portalDoorButton)
          {
             ltWindow->setState(STATE_DOORS);
          }
 
          /* Wall Buttons */
-         else if(object == (Tobjeto*) wallXButton)
+         else if(object == (guiObject*) wallXButton)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_ADD_X;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) wallZButton)
+         else if(object == (guiObject*) wallZButton)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_ADD_Z;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) wallX2Button)
+         else if(object == (guiObject*) wallX2Button)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL2_ADD_X;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) wallZ2Button)
+         else if(object == (guiObject*) wallZ2Button)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL2_ADD_Z;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) wallTextureButton)
+         else if(object == (guiObject*) wallTextureButton)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) wallLessVerTexture)
+         else if(object == (guiObject*) wallLessVerTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_LESS_VER_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) wallMoreVerTexture)
+         else if(object == (guiObject*) wallMoreVerTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_MORE_VER_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) wallLessHorTexture)
+         else if(object == (guiObject*) wallLessHorTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_LESS_HOR_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (Tobjeto*) wallMoreHorTexture)
+         else if(object == (guiObject*) wallMoreHorTexture)
          {
             state = GUI_IO_STATE_WALL;
             tool = TOOL_WALL_MORE_HOR_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
          /* Objects Buttons */
-         else if(object == (Tobjeto*) objectCommonButton)
+         else if(object == (guiObject*) objectCommonButton)
          {
             ltWindow->setState(STATE_COMMON);
          }
-         else if(object == (Tobjeto*) objectGunsButton)
+         else if(object == (guiObject*) objectGunsButton)
          {
             ltWindow->setState(STATE_GUNS);
          }
-         else if(object == (Tobjeto*) objectBuildButton)
+         else if(object == (guiObject*) objectBuildButton)
          {
             ltWindow->setState(STATE_BUILDING);
          }
-         else if(object == (Tobjeto*) objectCarsButton)
+         else if(object == (guiObject*) objectCarsButton)
          {
             ltWindow->setState(STATE_CARS);
          }
-         else if(object == (Tobjeto*) objectIcexButton)
+         else if(object == (guiObject*) objectIcexButton)
          {
             ltWindow->setState(STATE_ICEX);
          }
-         else if(object == (Tobjeto*) objectNaturalButton)
+         else if(object == (guiObject*) objectNaturalButton)
          {
             ltWindow->setState(STATE_NATURE);
          }
-         else if(object == (Tobjeto*) objectCharButton)
+         else if(object == (guiObject*) objectCharButton)
          {
             ltWindow->setState(STATE_CHARACTERS);
          }
-         else if(object == (Tobjeto*) objectMacabreButton)
+         else if(object == (guiObject*) objectMacabreButton)
          {
             ltWindow->setState(STATE_MACABRE);
          }
-         else if(object == (Tobjeto*) objectBathButton)
+         else if(object == (guiObject*) objectBathButton)
          {
             ltWindow->setState(STATE_BATH);
          }
          /* Particles Buttons */
-         else if(object == (Tobjeto*) fireButton)
+         else if(object == (guiObject*) fireButton)
          {
             ltWindow->setState(STATE_FIRE);
          }
-         else if(object == (Tobjeto*) smokeButton)
+         else if(object == (guiObject*) smokeButton)
          {
             ltWindow->setState(STATE_SMOKE);
          }
-         else if(object == (Tobjeto*) snowButton)
+         else if(object == (guiObject*) snowButton)
          {
             ltWindow->setState(STATE_SNOW);
          }
-         else if(object == (Tobjeto*) waterfallButton)
+         else if(object == (guiObject*) waterfallButton)
          {
             ltWindow->setState(STATE_WATERFALL);
          }
-         else if(object == (Tobjeto*) waterSurfaceButton)
+         else if(object == (guiObject*) waterSurfaceButton)
          {
             //TODO
             state = GUI_IO_STATE_PARTICLES;
             tool = TOOL_PARTICLE_WATER_SURFACE;
          }
-         else if(object == (Tobjeto*) grassButton)
+         else if(object == (guiObject*) grassButton)
          {
             ltWindow->setState(STATE_GRASS);
          }
@@ -814,23 +813,23 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
       /* Buttons */
       case BOTAOPRESSIONADO:
       {
-         if(object == (Tobjeto*) exitButton)
+         if(object == (guiObject*) exitButton)
          {
             return(GUI_IO_EXIT);
          }
-         else if(object == (Tobjeto*) newButton)
+         else if(object == (guiObject*) newButton)
          {
             return(GUI_IO_NEW_MAP);
          }
-         else if(object == (Tobjeto*) openButton)
+         else if(object == (guiObject*) openButton)
          {
             return(GUI_IO_OPEN_MAP);
          }
-         else if(object == (Tobjeto*) saveButton)
+         else if(object == (guiObject*) saveButton)
          {
             return(GUI_IO_SAVE_MAP);
          }
-         else if(object == (Tobjeto*) terrainButton)
+         else if(object == (guiObject*) terrainButton)
          {
             if(!terrainWindow)
             {
@@ -838,7 +837,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (Tobjeto*) wallButton)
+         else if(object == (guiObject*) wallButton)
          {
             if(!wallWindow)
             {
@@ -846,7 +845,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (Tobjeto*) portalButton)
+         else if(object == (guiObject*) portalButton)
          {
             if(!portalWindow)
             {
@@ -854,7 +853,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (Tobjeto*) particleButton)
+         else if(object == (guiObject*) particleButton)
          {
             if(!particleWindow)
             {
@@ -862,7 +861,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (Tobjeto*) objectButton)
+         else if(object == (guiObject*) objectButton)
          {
             if(!objectWindow)
             {
@@ -870,7 +869,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (Tobjeto*) fogButton)
+         else if(object == (guiObject*) fogButton)
          {
             if(!fogWindow)
             {
@@ -878,29 +877,29 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             }
             return(GUI_IO_OTHER);
          }
-         else if(object == (Tobjeto*) npcButton)
+         else if(object == (guiObject*) npcButton)
          {
             ltWindow->setState(STATE_CHARACTERS);
          }
-         else if(object == (Tobjeto*) musicButton)
+         else if(object == (guiObject*) musicButton)
          {
             ltWindow->setState(STATE_MUSIC);
          }
          /* Texture Window */
-         else if(object == (Tobjeto*) textureNextButton)
+         else if(object == (guiObject*) textureNextButton)
          {
             return(GUI_IO_TEXTURE_NEXT);
          }
-         else if(object == (Tobjeto*) texturePreviousButton)
+         else if(object == (guiObject*) texturePreviousButton)
          {
             return(GUI_IO_TEXTURE_PREVIOUS);
          }
-         else if(object == (Tobjeto*) textureInsertButton)
+         else if(object == (guiObject*) textureInsertButton)
          {
             return(GUI_IO_TEXTURE_INSERT);
          }
          /*Fog Buttons */
-         else if(object == (Tobjeto*) fogApplyButton)
+         else if(object == (guiObject*) fogApplyButton)
          {
             applyFog();
             return(GUI_IO_NOTHING);
@@ -944,7 +943,7 @@ string guiIO::getSelectedText()
  ****************************************************************/
 string guiIO::getFileName()
 {
-   return(fileText->texto);
+   return(fileText->getText());
 }
 
 /****************************************************************
@@ -952,7 +951,7 @@ string guiIO::getFileName()
  ****************************************************************/
 string guiIO::getTextureFileName()
 {
-   return(textureText->texto);
+   return(textureText->getText());
 }
 
 /****************************************************************

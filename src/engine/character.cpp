@@ -120,7 +120,7 @@ void character::openConversationDialog(interface* gui, character * PC)
 /*********************************************************************
  *                         treatConversation                         *
  *********************************************************************/
-bool character::treatConversation(Tobjeto* guiObject, int eventInfo, 
+bool character::treatConversation(guiObject* guiObj, int eventInfo, 
                                    interface* gui)
 {
    if(convPressed)
@@ -134,7 +134,7 @@ bool character::treatConversation(Tobjeto* guiObject, int eventInfo,
       conversation* cs = (conversation*) conv;
       if( (cs != NULL) && (cs->windowOpened()) )
       {
-         return(cs->treat(guiObject, eventInfo, gui));
+         return(cs->treat(guiObj, eventInfo, gui));
       }
    }
    return(false);
@@ -372,7 +372,6 @@ character* characterList::insertCharacter(string file, featsList* ft,
    string arqModelo;
    character* novo;
    novo = new character(ft);
-   novo->actualWeapon = NULL;
    novo->orientacao = 0.0;
    novo->posicaoLadoX = 0.0;
    novo->posicaoLadoZ = 0.0;
