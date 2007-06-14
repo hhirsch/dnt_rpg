@@ -9,7 +9,7 @@
 #include <SDL/SDL_opengl.h>
 #include <math.h>
 #include "../map/map.h"
-#include "personagens.h"
+#include "character.h"
 
 /*! The collision Detection Class */
 class collision

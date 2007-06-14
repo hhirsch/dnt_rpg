@@ -5,7 +5,7 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-#include "../engine/personagens.h"
+#include "../engine/character.h"
 
 #define FIGHT_MAX_CHARACTERS_PER_GROUP 5 /**< Max avaible characters per group*/
 

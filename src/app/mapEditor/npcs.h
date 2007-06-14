@@ -4,7 +4,7 @@
 #include "../../map/map.h"
 #include "../../etc/modellist.h"
 #include "../../engine/util.h"
-#include "../../engine/personagens.h"
+#include "../../engine/character.h"
 #include "../../classes/feats.h"
 #include "message.h"
 

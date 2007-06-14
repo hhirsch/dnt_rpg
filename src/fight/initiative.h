@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string>
 using namespace std;
-#include "../engine/personagens.h"
+#include "../engine/character.h"
 #include "../lang/lang.h"
 
 /*! Implementation of the Struct of Initiative */

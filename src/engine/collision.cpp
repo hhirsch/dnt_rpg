@@ -1,6 +1,5 @@
 #include "collision.h"
 #include "util.h"
-#include "personagens.h"
 #include "../etc/glm.h"
 
 

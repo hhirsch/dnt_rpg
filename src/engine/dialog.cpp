@@ -3,7 +3,7 @@
  */
 
 
-#include "conversa.h"
+#include "dialog.h"
 #include "dccnit.h"
 
 #define BUFFER_SIZE 512

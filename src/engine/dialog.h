@@ -1,5 +1,5 @@
-#ifndef _conversa_h
-#define _conversa_h
+#ifndef _dialog_h
+#define _dialog_h
 
 /*************************************************************************
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
@@ -28,7 +28,7 @@
 #define MAX_OPTIONS 5 /**< Max number of options per dialog */
 
 #include "../gui/farso.h"
-#include "personagens.h"
+#include "character.h"
 #include <string>
 using namespace std;
 

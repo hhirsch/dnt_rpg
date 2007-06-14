@@ -3,8 +3,8 @@
  */
 
 
-#include "personagens.h"
-#include "conversa.h"
+#include "character.h"
+#include "dialog.h"
 #include "../gui/desenho.h"
 #include <SDL/SDL_image.h>
 

@@ -11,7 +11,7 @@
 #include "npcs.h"
 #include "../../engine/sun.h"
 #include "../../engine/sky.h"
-#include "../../engine/personagens.h"
+#include "../../engine/character.h"
 #include "../../particle/partSystem.h"
 #include "../../map/map.h"
 #include "../../engine/culling.h"

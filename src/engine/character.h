@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-#ifndef _personagens_h
-#define _personagens_h
+#ifndef _character_h
+#define _character_h
 
 #include <string>
 using namespace std;

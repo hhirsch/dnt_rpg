@@ -7,7 +7,7 @@
 
 #include "../gui/farso.h"
 #include "../lang/lang.h"
-#include "personagens.h"
+#include "character.h"
 
 #define ASPECTW_CANCEL  0 /**< Cancel return from Aspect Window */
 #define ASPECTW_CONFIRM 1 /**< Confirm return from Aspect window */
