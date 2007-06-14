@@ -5,7 +5,7 @@
 #include "area.h"
 #include "message.h"
 #include "../../etc/glm.h"
-#include "../../map/mapobjeto.h"
+#include "../../map/mapobject.h"
 #include "../../engine/util.h"
 
 

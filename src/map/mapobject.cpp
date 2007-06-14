@@ -2,7 +2,7 @@
  * DccNiTghtmare is Public Domain - Do whatever you want with this code. *
  *************************************************************************/
 
-#include "mapobjeto.h"
+#include "mapobject.h"
 #include "../etc/glm.h"
 
 /*********************************************************************

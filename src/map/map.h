@@ -5,7 +5,7 @@
  * DccNiTghtmare is Public Domain - Do whatever you want with this code. *
  *************************************************************************/
 
-#include "mapobjeto.h"
+#include "mapobject.h"
 #include "mapfog.h"
 #include "maplights.h"
 #include "maproad.h"

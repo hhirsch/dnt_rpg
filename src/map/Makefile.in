@@ -10,7 +10,7 @@ BINDIR = ../../bin/
 ENDGUI = ../gui/
 DIRENGINE = ../engine/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
-#DEPENDENCIAS = map.o $(OBJSGUI) mapobjeto.o ../etc/glm.o ../etc/texture.o $(DIRENGINE)culling.o
+#DEPENDENCIAS = map.o $(OBJSGUI) mapobject.o ../etc/glm.o ../etc/texture.o $(DIRENGINE)culling.o
 
 all: objetos
 
@@ -29,9 +29,9 @@ maplights.o: maplights.cpp maplights.h
 	@$(CC) $(CFLAGS) maplights.cpp -o maplights.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-mapobjeto.o: mapobjeto.cpp mapobjeto.h
-	@printf "Making mapobjeto.o... "
-	@$(CC) $(CFLAGS) mapobjeto.cpp -o mapobjeto.o
+mapobject.o: mapobject.cpp mapobject.h
+	@printf "Making mapobject.o... "
+	@$(CC) $(CFLAGS) mapobject.cpp -o mapobject.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	
 maproad.o: maproad.cpp maproad.h
@@ -39,7 +39,7 @@ maproad.o: maproad.cpp maproad.h
 	@$(CC) $(CFLAGS) maproad.cpp -o maproad.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-objetos: map.o mapfog.o maplights.o mapobjeto.o maproad.o 
+objetos: map.o mapfog.o maplights.o mapobject.o maproad.o 
 
 clean: 
 	@printf  "Cleaning Map Bin Files... "

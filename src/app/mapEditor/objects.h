@@ -2,7 +2,7 @@
 #define _objects_h
 
 #include "../../map/map.h"
-#include "../../map/mapobjeto.h"
+#include "../../map/mapobject.h"
 #include "../../etc/glm.h"
 #include "../../etc/modellist.h"
 #include "../../engine/util.h"

@@ -5,8 +5,6 @@
  * DccNiTghtmare is Public Domain - Do whatever you want with this code. *
  *************************************************************************/
 
-#include "../gui/objeto.h"
-#include "../gui/lista.h"
 #include "../etc/modellist.h"
 #include "../classes/object.h"
 #include <string>
