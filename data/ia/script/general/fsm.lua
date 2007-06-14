@@ -28,8 +28,7 @@ function play(currentState, fsm)
     return 1
   end
 
-
-  event = cppCalls(currentState, fsm[currentState].args)
+  event = cppCalls(currentState, dude, fsm[currentState].args)
   print(event)
     -- calls the play function recursevily for each possible event on the
     -- current state.

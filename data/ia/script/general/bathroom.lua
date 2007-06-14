@@ -5,8 +5,6 @@ bathroom = {{"locateAndGo", "done", "doAction", "bathroom"}
            ,{"doAction", "done", "idle", "pi"}
 	   ,{"doAction", "fail", "idle", "pi"}}
 
-locate = "bathroom"
-
 f = create(bathroom, "idle")
 play("locateAndGo", f)
 
