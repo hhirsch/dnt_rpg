@@ -48,7 +48,7 @@ guiIO::~guiIO()
  ****************************************************************/
 void guiIO::openFileWindow()
 {
-   fileWindow = gui->insertWindow(0,0,184,63,"File",1,1);
+   fileWindow = gui->insertWindow(0,1,184,63,"File",1,1);
    newButton = fileWindow->objects->InserirBotao(10,37,50,55,
                                                   fileWindow->Cores.corBot.R,
                                                   fileWindow->Cores.corBot.G,

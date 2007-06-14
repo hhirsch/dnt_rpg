@@ -780,6 +780,7 @@ void editor::draw()
    glColor4f(1.0,1.0,1.0,1.0);
 
    glDisable(GL_LIGHTING);
+   glDisable(GL_FOG);
    glDisable(GL_DEPTH_TEST);
    /* Draw GUI */
    glPushMatrix();
@@ -787,6 +788,7 @@ void editor::draw()
       gui->draw(proj, modl, viewPort);
       draw3DMode(FARVIEW);
    glPopMatrix();
+   glEnable(GL_FOG);
    glEnable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
 
