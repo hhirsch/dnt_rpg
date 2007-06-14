@@ -7,7 +7,6 @@
 string getStringFromUser(string title, string previous,
                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   draw2DMode();
    interface* gui = new interface(NULL);
    janela* getWindow;
    botao* okButton;
@@ -71,7 +70,13 @@ string getStringFromUser(string title, string previous,
       glDisable(GL_LIGHTING);
       glDisable(GL_DEPTH_TEST);
       glDisable(GL_BLEND);
-      gui->draw(proj,modl,viewPort);
+      glDisable(GL_FOG);
+      glPushMatrix();
+        draw2DMode();
+        gui->draw(proj,modl,viewPort);
+	draw3DMode(FARVIEW);
+      glPopMatrix();
+      glEnable(GL_FOG);
       glEnable(GL_LIGHTING);
       glEnable(GL_DEPTH_TEST);
 
@@ -84,8 +89,6 @@ string getStringFromUser(string title, string previous,
 
    delete(gui);
 
-   draw3DMode(FARVIEW);
-
    return(returnStr);
 
 }
@@ -96,7 +99,6 @@ string getStringFromUser(string title, string previous,
 int getOptionFromUser(string title, string message, string opt1, string opt2,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   draw2DMode();
    interface* gui = new interface(NULL);
    janela* getWindow;
    botao* opt1Button;
@@ -166,7 +168,13 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
       glDisable(GL_LIGHTING);
       glDisable(GL_DEPTH_TEST);
       glDisable(GL_BLEND);
-      gui->draw(proj,modl,viewPort);
+      glDisable(GL_FOG);
+      glPushMatrix();
+        draw2DMode();
+        gui->draw(proj,modl,viewPort);
+	draw3DMode(FARVIEW);
+      glPopMatrix();
+      glEnable(GL_FOG);
       glEnable(GL_LIGHTING);
       glEnable(GL_DEPTH_TEST);
 
@@ -178,7 +186,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    }
 
    delete(gui);
-   draw3DMode(FARVIEW);
+   
    return(ret);
 }
 
@@ -188,7 +196,6 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
 void showMessage(string title, string message,
                  GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   draw2DMode();
    interface* gui = new interface(NULL);
    janela* getWindow;
    botao* okButton;
@@ -240,7 +247,13 @@ void showMessage(string title, string message,
       glDisable(GL_LIGHTING);
       glDisable(GL_DEPTH_TEST);
       glDisable(GL_BLEND);
-      gui->draw(proj,modl,viewPort);
+      glDisable(GL_FOG);
+      glPushMatrix();
+        draw2DMode();
+        gui->draw(proj,modl,viewPort);
+	draw3DMode(FARVIEW);
+      glPopMatrix();
+      glEnable(GL_FOG);
       glEnable(GL_LIGHTING);
       glEnable(GL_DEPTH_TEST);
 
@@ -251,7 +264,6 @@ void showMessage(string title, string message,
 
    }
 
-   draw3DMode(FARVIEW);
    delete(gui);
 
 }
