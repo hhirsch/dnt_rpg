@@ -26,7 +26,7 @@ void idle()
 int cppCalls(lua_State* state)
 {
   string currentState = lua_tostring(state, -3);
-  personagem* dude = (personagem *)lua_touserdata(state, -2);
+  character* dude = (character*) lua_touserdata(state, -2);
   string args = lua_tostring(state, -1);
   string result;
   printf("currentState: %s\n", currentState.c_str());
@@ -50,7 +50,7 @@ int cppCalls(lua_State* state)
   //if(fsmState =)
 }
 
-void playPlanning(string planning, personagem* dude)
+void playPlanning(string planning, character* dude)
 {
   /* Open the Lua State Machine */
   lua_State* state = luaL_newstate();

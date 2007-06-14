@@ -41,7 +41,7 @@ fightGroup::~fightGroup()
 /***************************************************************
  *                      insertCharacter                        *
  ***************************************************************/
-bool fightGroup::insertCharacter(personagem* pers)
+bool fightGroup::insertCharacter(character* pers)
 {
    if(actualCharacters < FIGHT_MAX_CHARACTERS_PER_GROUP)
    {
@@ -60,7 +60,7 @@ bool fightGroup::insertCharacter(personagem* pers)
 /***************************************************************
  *                       isCharacterIn                         *
  ***************************************************************/
-bool fightGroup::isCharacterIn(personagem* pers)
+bool fightGroup::isCharacterIn(character* pers)
 {
    int i;
    for(i=0;i<actualCharacters;i++)
@@ -76,7 +76,7 @@ bool fightGroup::isCharacterIn(personagem* pers)
 /***************************************************************
  *                        getNPCEnemy                          *
  ***************************************************************/
-personagem* fightGroup::getNPCEnemy(personagem* pers)
+character* fightGroup::getNPCEnemy(character* pers)
 {
    /* FIXME For now, get a random enemy on list, better 
       make this in a more expert way */

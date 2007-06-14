@@ -7,7 +7,7 @@
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-aspectWindow::aspectWindow(personagem* character, interface* inter)
+aspectWindow::aspectWindow(character* dude, interface* inter)
 {
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
@@ -16,7 +16,7 @@ aspectWindow::aspectWindow(personagem* character, interface* inter)
    images = NULL;
    loadImages();
 
-   usedCharacter = character;
+   usedCharacter = dude;
    window = inter->insertWindow(276,206,531,320,"Aspect"
                                 /*language.ASPECTW_TITLE.c_str()*/,1,1);
 

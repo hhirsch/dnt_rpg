@@ -20,7 +20,7 @@ class initiativeStruct
       /*! Destructor */
       ~initiativeStruct(){};
  
-      personagem* character;   /**< Character Pointer */
+      character* dude;         /**< Character Pointer */
       initiativeStruct* next;  /**< Next Character on Initiative Pointer */
       int initiativeValue;     /**< Initiative Value of the Character */
 };
@@ -40,7 +40,7 @@ class initiative
      * \param pers -> Pointer to Character
      * \param brief -> briefing string
      ***************************************************************/
-     void insertCharacter(personagem* pers, string& brief);
+     void insertCharacter(character* pers, string& brief);
      /*!
      *************************************************************** 
      * Actualize the pointers to a new Round.  
@@ -51,13 +51,13 @@ class initiative
      * Gets the next Character to Play.  
      * \return pointer to next character to play.
      ***************************************************************/
-     personagem* nextCharacter();
+     character* nextCharacter();
      /*!
      *************************************************************** 
      * Gets the actual Character to Playing.  
      * \return pointer to actual character to playing.
      ***************************************************************/
-     personagem* actualCharacter();
+     character* actualCharacter();
      /*!
      *************************************************************** 
      * Clears The initiative List.  

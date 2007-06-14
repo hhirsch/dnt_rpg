@@ -10,8 +10,6 @@ using namespace std;
 
 #include "../gui/desenho.h"
 #include "../gui/figura.h"
-#include "../gui/objeto.h"
-#include "../gui/lista.h"
 #include "../gui/healthBar.h"
 #include "../classes/thing.h"
 #include "../classes/feats.h"
@@ -32,14 +30,14 @@ using namespace std;
 
 
 /*! Character Class */
-class personagem: public Tobjeto, public aniModel
+class character: public aniModel
 {
    public:
       /*! Constructor
        * \param ft -> pointer to all feats list */
-      personagem(featsList* ft);
+      character(featsList* ft);
       /*! Destructor */
-      ~personagem();
+      ~character();
 
       /*! Define the image used as portrait
        * \param portraitFile -> file name of the image to use*/
@@ -91,7 +89,7 @@ class personagem: public Tobjeto, public aniModel
       string nome;              /**< Character's name */
 
       int actualFightGroup;     /**< fightGroup of character, used on battles*/
-      personagem* actualEnemy;  /**< Pointer to actual fight enemy (target) */
+      character* actualEnemy;   /**< Pointer to actual fight enemy (target) */
       healthBar* lifeBar;       /**< Character's Life Bar */
 
       aStar pathFind;           /**< The A* pathFind to the character */
@@ -104,7 +102,7 @@ class personagem: public Tobjeto, public aniModel
       void setOrientation(GLfloat ori);
 
       /*! Open, if exists and not opened, the conversation dialog */
-      void openConversationDialog(interface* gui, personagem * PC);
+      void openConversationDialog(interface* gui, character *PC);
 
       /*! Create the conversation (load all things, but not open the dialog)
        * \param pEngine -> pointer to current engine */
@@ -134,6 +132,9 @@ class personagem: public Tobjeto, public aniModel
 
        void setCharacterFile(string fileName){characterFile = fileName;}
 
+       character* next;             /**< Next Character on List */
+       character* previous;         /**< Previous Character on List */
+
    protected:
        /*! Define max value of the lifePoints
        * \param maxPoints -> new max points to life points */
@@ -156,13 +157,13 @@ class personagem: public Tobjeto, public aniModel
 
 
 /*! Character's List */
-class Lpersonagem
+class characterList
 {
    public:
       /*! List Constructor */
-      Lpersonagem();
+      characterList();
       /*! List Destructor */
-      ~Lpersonagem();
+      ~characterList();
 
       /*!
        * Insert one character on list
@@ -170,34 +171,34 @@ class Lpersonagem
        * \param ft -> featsList of all feats on game 
        * \param pEngine -> pointer to current engine
        * \return pointer to opened character*/
-      personagem* insertCharacter(string file, featsList* ft, void* pEngine);
+      character* insertCharacter(string file, featsList* ft, void* pEngine);
                                     
       /*!
        * Remove one character from list
        * \param persona -> character pointer to remove */
-      void removeCharacter(personagem* persona);
+      void removeCharacter(character* persona);
 
       /*!
        * Gets hostile characters from the list
        * \param last -> last hostile taken
        * \return pointer to the hostile character
        */
-      personagem* getEnemyCharacter(personagem* last);
+      character* getEnemyCharacter(character* last);
 
       /*! Get the active character
        * \return pointer to the active character */
-      personagem* getActiveCharacter();
+      character* getActiveCharacter();
 
       /*! Set the active character
-       * \param character -> pointer to the new active character */
-      void setActiveCharacter(personagem* character);
+       * \param dude -> pointer to the new active character */
+      void setActiveCharacter(character* dude);
 
       int getTotal(){return(total);};
 
-      personagem* primeiro;         /**< List Node Pointer */
+      character* first;         /**< List Node Pointer */
 
    protected:
-      personagem* activeCharacter;  /**< Active Character's on list */
+      character* activeCharacter;  /**< Active Character's on list */
       int total;                    /**< Total Elements on List */
 
 };

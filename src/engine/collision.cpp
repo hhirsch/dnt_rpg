@@ -24,7 +24,7 @@ collision::~collision()
 /*********************************************************************
  *                             defineMap                             *
  *********************************************************************/
-void collision::defineMap(Map* usedMap, Lpersonagem* npcs)
+void collision::defineMap(Map* usedMap, characterList* npcs)
 {
    actualMap = usedMap;
    NPCs = npcs;
@@ -385,8 +385,8 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    /* Testa colisao com npcs */
    if(NPCs)
    {
-      personagem* pers = (personagem*) NPCs->primeiro->proximo;
-      while( (pers != NPCs->primeiro) )
+      character* pers = NPCs->first->next;
+      while( (pers != NPCs->first) )
       {
          x[0] = pers->min[0];
          z[0] = pers->min[2];
@@ -411,7 +411,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
             return(false);
          }
     
-         pers = (personagem*) pers->proximo;
+         pers = pers->next;
       }
    }
 

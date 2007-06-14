@@ -6,13 +6,13 @@
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-npcs::npcs(Map* acMap, Lpersonagem* NPCsList, featsList* lFeats)
+npcs::npcs(Map* acMap, characterList* NPCsList, featsList* lFeats)
 {
    actualMap = acMap;
    state = NPCS_STATE_NONE;
    actualNpc = NULL;
    npcFile = "";
-   intList = new(Lpersonagem);
+   intList = new(characterList);
    NPCs = NPCsList;
    features = lFeats;
 }
@@ -93,9 +93,9 @@ void npcs::drawTemporary()
  *                           insertNpc                            *
  ******************************************************************/
 void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
-                     personagem* npc, int qx, int qz)
+                     character* npc, int qx, int qz)
 {
-   personagem* per;
+   character* per;
    per = NPCs->insertCharacter(npcFile,features, NULL);
    per->posicaoLadoX = xReal;
    per->posicaoLadoZ = zReal;
@@ -112,7 +112,7 @@ void npcs::defineActualNpc(string fileName)
    if(npcFile != fileName)
    {
       delete(intList);
-      intList = new(Lpersonagem);
+      intList = new(characterList);
       actualNpc = intList->insertCharacter(fileName, features, NULL);
       actualNpc->update(0); 
       actualNpc->calculateBoundingBox();
@@ -142,13 +142,13 @@ bool npcs::saveFile(string fileName)
    {
       int npc;
       fprintf(arq,"%d\n",NPCs->getTotal());
-      personagem* per = (personagem*) NPCs->primeiro->proximo;
+      character* per = (character*) NPCs->first->next;
       for(npc = 0; npc < NPCs->getTotal(); npc++)
       {
          fprintf(arq,"%s %s %f %f\n",per->nome.c_str(),
                  per->getCharacterFile().c_str(),
                  per->posicaoLadoX,per->posicaoLadoZ);
-         per = (personagem*) per->proximo;
+         per = (character*) per->next;
        }
        fclose(arq);
    }

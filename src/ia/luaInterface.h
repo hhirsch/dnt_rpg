@@ -15,6 +15,6 @@ using namespace std;
 
 #include "../engine/personagens.h"
 
-void playPlanning(string planning, personagem* dude);
+void playPlanning(string planning, character* dude);
 
 #endif

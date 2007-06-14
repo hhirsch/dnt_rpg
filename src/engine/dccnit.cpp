@@ -223,12 +223,12 @@ void engine::save()
  *********************************************************************/
 void engine::loadPCs()
 {
-   personagem* per;
+   character* per;
    if(PCs)
    {
       delete(PCs);
    }
-   PCs  = new (Lpersonagem);
+   PCs  = new (characterList);
    per = PCs->insertCharacter("../data/characters/pcs/logan.pc",
                               features, this);
 }
@@ -330,7 +330,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    if(NPCs)
      delete(NPCs);
    NPCs = NULL;
-   personagem* per;
+   character* per;
    if(!actualMap->getNpcFileName().empty())
    {
       FILE* arq;
@@ -341,7 +341,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       }
       else
       {
-         NPCs = new (Lpersonagem);
+         NPCs = new (characterList);
          int total;
          int npc;
          char nome[30];
@@ -394,7 +394,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Updating the BoundingBoxes for PCs */
    int aux;
-   per = (personagem*) PCs->primeiro->proximo;
+   per = (character*) PCs->first->next;
    for(aux=0;aux < PCs->getTotal();aux++)
    {
       per->update(0); 
@@ -402,18 +402,18 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       //FIXME gambiarra to make logan bounding ok when arms down.
         per->max[0] /= 2.0;
         per->min[0] /= 2.0;
-      per = (personagem*) per->proximo;
+      per = (character*) per->next;
    }
 
    /* Updating the BoundingBoxes for NPCs */
    if(NPCs)
    { 
-      per = (personagem*) NPCs->primeiro->proximo;
+      per = (character*) NPCs->first->next;
       for(aux=0; aux < NPCs->getTotal();aux++)
       {
          per->update(0); 
          per->calculateBoundingBox();  
-         per = (personagem*) per->proximo;
+         per = (character*) per->next;
       }
    }
 
@@ -436,7 +436,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    
 
    /* Put Active Party on Init Position */
-   personagem* activeCharacter = PCs->getActiveCharacter();
+   character* activeCharacter = PCs->getActiveCharacter();
    actualMap->getInitialPosition(activeCharacter->posicaoLadoX,
                                  activeCharacter->posicaoLadoZ);
    gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
@@ -699,7 +699,7 @@ int engine::CharacterScreen(GLuint idTextura)
    aspectWindow* aspWindow = NULL;
 
    /* Race Window */
-   personagem* activeCharacter = PCs->getActiveCharacter();
+   character* activeCharacter = PCs->getActiveCharacter();
    raceWindow* rcWindow = new raceWindow(raceList,&activeCharacter->sk,gui,
                                          &activeCharacter->actualRace);
 
@@ -1034,7 +1034,7 @@ bool engine::rangeAction(GLfloat posX, GLfloat posZ,
 void engine::enterBattleMode(bool surprisePC)
 {
   int numEnemies = 0;
-  personagem* ch;
+  character* ch;
   string brief = "";
   string briefInit = "";
   //FIXME not here the dices!
@@ -1043,7 +1043,7 @@ void engine::enterBattleMode(bool surprisePC)
   dc.baseDice.numberOfDices = 1;
   dc.baseDice.sumNumber = 2;
   dc.initialLevel = 1;
-  personagem* activeCharacter = PCs->getActiveCharacter();
+  character* activeCharacter = PCs->getActiveCharacter();
   
   fight.empty();
   if(!NPCs)
@@ -1054,15 +1054,15 @@ void engine::enterBattleMode(bool surprisePC)
      }
      return;
   }
-  ch =(personagem*) NPCs->primeiro->proximo;
-  while(ch != NPCs->primeiro)
+  ch =(character*) NPCs->first->next;
+  while(ch != NPCs->first)
   {
       //TODO put enemies on groups, when enemy from enemy
       fight.insertNPC(ch, 0, briefInit);
       brief += briefInit + "|";
       numEnemies++;
       ch->actualFeats.defineMeleeWeapon(dc); //FIXME
-      ch = (personagem*) ch->proximo; 
+      ch = (character*) ch->next; 
       SDL_Delay(1);
   }
                  
@@ -1075,13 +1075,13 @@ void engine::enterBattleMode(bool surprisePC)
       moveCircleZ = activeCharacter->posicaoLadoZ;
 
       /* Put the PCs on group */
-      ch =(personagem*) PCs->primeiro->proximo;
-      while(ch != PCs->primeiro)
+      ch =(character*) PCs->first->next;
+      while(ch != PCs->first)
       {
          fight.insertPC(ch, 0, briefInit);
          brief += briefInit + "|";
          ch->actualFeats.defineMeleeWeapon(dc); //FIXME
-         ch = (personagem*) ch->proximo; 
+         ch = (character*) ch->next; 
          SDL_Delay(1);
       }
                    
@@ -1147,11 +1147,11 @@ void engine::threatGuiEvents(Tobjeto* object, int eventInfo)
    /* Verify Dialog Windows */
    if(NPCs != NULL)
    {
-      personagem* ch =(personagem*) NPCs->primeiro->proximo;
-      while(ch != NPCs->primeiro)
+      character* ch =(character*) NPCs->first->next;
+      while(ch != NPCs->first)
       {
          ch->treatConversation(object, eventInfo, gui);
-         ch = (personagem*) ch->proximo;
+         ch = (character*) ch->next;
       }
    }
 
@@ -1250,7 +1250,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
 {
    GLfloat wx,wy,wz;
    Uint32 tempo = SDL_GetTicks();
-   personagem* activeCharacter = PCs->getActiveCharacter();
+   character* activeCharacter = PCs->getActiveCharacter();
 
    wx = mouseX; wy = SCREEN_Y - mouseY; 
             
@@ -1398,8 +1398,8 @@ int engine::verifyMouseActions(Uint8 Mbotao)
       }
 
       /* Inventory Verification */
-      personagem* pers = (personagem*) PCs->primeiro->proximo;
-      while( (pers != PCs->primeiro) && (!pronto) )
+      character* pers = (character*) PCs->first->next;
+      while( (pers != PCs->first) && (!pronto) )
       {
          GLfloat x[4],z[4];
          GLfloat min[3], max[3];
@@ -1431,14 +1431,14 @@ int engine::verifyMouseActions(Uint8 Mbotao)
             }
             pronto = 1;
          }
-         pers = (personagem*) pers->proximo;
+         pers = (character*) pers->next;
       }
 
       /* Talk And Attack Events Verification */
       if(NPCs)
       {
-         pers = (personagem*) NPCs->primeiro->proximo;
-         while( (pers != NPCs->primeiro) && (!pronto) )
+         pers = (character*) NPCs->first->next;
+         while( (pers != NPCs->first) && (!pronto) )
          {
             GLfloat x[4],z[4];
             GLfloat min[3], max[3];
@@ -1533,7 +1533,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                   pronto = 1;
                }
             }
-            pers = (personagem*) pers->proximo;
+            pers = (character*) pers->next;
          }
       }
 
@@ -1601,7 +1601,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    bool passouTempo = false; // The time to actualize passes ?
    Uint32 tempo;             // Actual Time
    GLfloat varX, varZ;        // to avoid GLfloat calculate
-   personagem* activeCharacter = PCs->getActiveCharacter();
+   character* activeCharacter = PCs->getActiveCharacter();
 
    GLfloat passo;     // How much the character walks, based on time
    GLfloat rotacao;   // How much the character turns, based on time
@@ -1626,22 +1626,22 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
       hourToTxt();
       int aux;
-      personagem *per = (personagem*) PCs->primeiro->proximo;
+      character *per = (character*) PCs->first->next;
       for(aux=0;aux< PCs->getTotal();aux++)
       {
          per->update(WALK_ACTUALIZATION/*seconds*/); 
          //per->CalculateBoundingBox(); 
-         per = (personagem*) per->proximo;
+         per = (character*) per->next;
       }
     
       if(NPCs)
       {
-        per = (personagem*) NPCs->primeiro->proximo;
+        per = (character*) NPCs->first->next;
         for(aux=0;aux < NPCs->getTotal();aux++)
         {
            per->update(WALK_ACTUALIZATION/*seconds*/);   
            per->calculateBoundingBox();
-           per = (personagem*) per->proximo;
+           per = (character*) per->next;
         }
       }
 
@@ -1982,11 +1982,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          walkStatus = ENGINE_WALK_KEYS;
          if(keys[SDLK_LCTRL]) //Previous Character
          {
-            PCs->setActiveCharacter((personagem*)activeCharacter->anterior);
+            PCs->setActiveCharacter((character*)activeCharacter->previous);
          }
          else //Next Character
          {
-            PCs->setActiveCharacter((personagem*)activeCharacter->proximo);
+            PCs->setActiveCharacter((character*)activeCharacter->next);
          }
          activeCharacter = PCs->getActiveCharacter();
          gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
@@ -2258,7 +2258,7 @@ void engine::renderScene()
    }
 
    /* Draw Playable Characters (PCs) */
-      personagem* per = (personagem*) PCs->primeiro->proximo;
+      character* per = (character*) PCs->first->next;
       int aux;
       for(aux=0;aux < PCs->getTotal();aux++)
       {
@@ -2319,14 +2319,14 @@ void engine::renderScene()
               glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
 
            glEnd();*/
-         per = (personagem*) per->proximo;
+         per = (character*) per->next;
       }
    glPopMatrix();
 
    /* Draw the NPCs */
    if(NPCs)
    {
-      per = (personagem*) NPCs->primeiro->proximo;
+      per = (character*) NPCs->first->next;
       for(aux=0;aux < NPCs->getTotal();aux++)
       {
          /* Verify Bounding Box */
@@ -2382,7 +2382,7 @@ void engine::renderScene()
               glEnd();*/
             glPopMatrix();
          }
-         per = (personagem*) per->proximo;
+         per = (character*) per->next;
       }
    }
    glDisable(GL_CULL_FACE);
@@ -2420,7 +2420,7 @@ void engine::renderScene()
  ********************************************************************/
 void engine::renderNoShadowThings()
 {
-   personagem* activeCharacter = PCs->getActiveCharacter(); 
+   character* activeCharacter = PCs->getActiveCharacter(); 
    /* SKY */
    if(actualMap->isOutdoor())
    {
@@ -2657,7 +2657,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    GLfloat dist = 0;
    GLfloat varHeight = 0;
    GLfloat nx, nz;
-   personagem* activeCharacter = PCs->getActiveCharacter();
+   character* activeCharacter = PCs->getActiveCharacter();
   
    if(!activeCharacter->isAlive())
    {
@@ -2747,7 +2747,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
  *********************************************************************/
 bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
 {
-   personagem* activeCharacter = PCs->getActiveCharacter();
+   character* activeCharacter = PCs->getActiveCharacter();
    GLfloat altura_atual = activeCharacter->posicaoLadoY;
 
    GLfloat res = actualMap->getHeight(nx, nz);
@@ -2767,7 +2767,7 @@ bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
  *********************************************************************/
 void engine::OpenMiniMapWindow()
 {
-   personagem* activeCharacter = PCs->getActiveCharacter();
+   character* activeCharacter = PCs->getActiveCharacter();
    GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARE_SIZE)));
    if(x > actualMap->getSizeX()-1)
    {
@@ -2906,11 +2906,11 @@ void engine::OpenCloseInventoryWindow()
  *********************************************************************/
 void engine::actualizeAllHealthBars()
 {
-   personagem* pers = (personagem*) PCs->primeiro->proximo;
-   while(pers != PCs->primeiro)
+   character* pers = (character*) PCs->first->next;
+   while(pers != PCs->first)
    {
       pers->defineActualLifePoints(pers->lifePoints);
-      pers = (personagem*) pers->proximo;
+      pers = (character*) pers->next;
    }
 }
 
@@ -2991,15 +2991,15 @@ int engine::Run(SDL_Surface *surface)
               briefTxt->setText("|" + language.FIGHT_EXIT);
            }
            /* Verify if any PC is alive. */
-           personagem* pers = (personagem*) PCs->primeiro->proximo;
+           character* pers = (character*) PCs->first->next;
            bool alive = false;
-           while((!alive) && (pers != PCs->primeiro))
+           while((!alive) && (pers != PCs->first))
            {
               if(pers->isAlive())
               {
                  alive = true;
               }
-              pers = (personagem*) pers->proximo;
+              pers = (character*) pers->next;
            }
            if(!alive)
            {
@@ -3049,7 +3049,7 @@ int engine::Run(SDL_Surface *surface)
            {
                if(fight.actualCharacterTurn()) 
                {
-                  personagem* activeCharacter = PCs->getActiveCharacter();
+                  character* activeCharacter = PCs->getActiveCharacter();
                   PCs->setActiveCharacter(fight.actualCharacterTurn());
                   fullMovePCAction = false;
                   canMove = true;
@@ -3082,7 +3082,7 @@ int engine::Run(SDL_Surface *surface)
          {
              case MT_NEWCHAR: /* Insert new character */
              {
-                personagem* per;
+                character* per;
                 per = NPCs->InserirPersonagem(6,8,3,8,
                              "../data/pics/logan/cara.bmp",0,0,
                "LoganNPC","../data/models/personagens/logan_completo_final.obj",
@@ -3096,14 +3096,14 @@ int engine::Run(SDL_Surface *surface)
              }
              case MT_MOV: /* character movimentation */
              {
-                personagem* per = (personagem*)NPCs->primeiro->proximo;
-                if(per != NPCs->primeiro) 
+                character* per = (character*)NPCs->first->next;
+                if(per != NPCs->first) 
                 {
-                   while((per!=NPCs->primeiro) && (eventoRede->obj!=per->ID))
+                   while((per!=NPCs->first) && (eventoRede->obj!=per->ID))
                    {
-                      per = (personagem*) per->proximo;
+                      per = (character*) per->next;
                    }
-                   if(per!=NPCs->primeiro)
+                   if(per!=NPCs->first)
                    {
                        per->posicaoLadoX = eventoRede->x;
                        per->posicaoLadoZ = eventoRede->y; 
@@ -3120,7 +3120,7 @@ int engine::Run(SDL_Surface *surface)
              }
              case MT_ENDSYNC:
              {
-                 personagem* activeCharacter = PCs->getActiveCharacter();
+                 character* activeCharacter = PCs->getActiveCharacter();
                  activeCharacter->ID = createchar( &clientData, 
                  activeCharacter->posicaoLadoX, 
                  activeCharacter->posicaoLadoZ, 

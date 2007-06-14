@@ -23,7 +23,7 @@ class collision
       /*! Define Current Map
        * \param usedMap -> pointer to current Map
        * \param NPCs -> list of NPCs */
-      void defineMap(Map* usedMap, Lpersonagem* npcs);
+      void defineMap(Map* usedMap, characterList* npcs);
 
       /*! Verify if character can occupy position on Square
        * \param min -> min positions of Bounding Box (translated & rotated)
@@ -62,7 +62,7 @@ class collision
       
    private:
       Map* actualMap;         /**< Pointer to actual opened map */
-      Lpersonagem* NPCs;      /**< Pointer to the actual NPC List */
+      characterList* NPCs;      /**< Pointer to the actual NPC List */
 };
 
 

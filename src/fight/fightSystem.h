@@ -40,7 +40,7 @@ class fightSystem
      * \param brief -> briefing string
      * \return true if success.
      ***************************************************************/
-     bool insertPC(personagem* pers, int group, string& brief);
+     bool insertPC(character* pers, int group, string& brief);
      /*!
      *************************************************************** 
      * Insert Character on NPCs List.  
@@ -49,7 +49,7 @@ class fightSystem
      * \param brief -> briefing string
      * \return true if success.
      ***************************************************************/
-     bool insertNPC(personagem* pers, int group, string& brief);
+     bool insertNPC(character* pers, int group, string& brief);
 
      /*!
      *************************************************************** 
@@ -70,7 +70,7 @@ class fightSystem
      * Gets actual character's that is in turn
      * \return character that is in turn.
      ***************************************************************/
-     personagem* actualCharacterTurn();
+     character* actualCharacterTurn();
 
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
@@ -78,7 +78,7 @@ class fightSystem
      initiative charsInitiatives;     /**< Character's Initiative */
      lang language;            /**< Language Internationalization */
      Uint32 lastTime;            /**< Last time of some animation */
-     personagem* actualActor;        /**< Actual Character Acting */
+     character* actualActor;        /**< Actual Character Acting */
      bool pendingAnimation;     /**< If some animation is pending */
 
      /*!
@@ -87,7 +87,7 @@ class fightSystem
      * \param pers -> Pointer to Character
      * \return true if character is a PC.
      ***************************************************************/
-     bool isPC(personagem* pers);
+     bool isPC(character* pers);
      /*!
      *************************************************************** 
      * Do a complete turn on game.  
@@ -101,7 +101,7 @@ class fightSystem
      * \param pers -> Pointer to Character that will act
      * \param brief -> briefing to print, lines separed by '|' .
      ***************************************************************/
-     void doNPCAction(personagem* pers, string& brief);
+     void doNPCAction(character* pers, string& brief);
      /*!
      *************************************************************** 
      * Get the attack feat for NPC to use  
@@ -109,14 +109,14 @@ class fightSystem
      * \param target -> Pointer to Character that will receive feat
      * \return feat number to use.
      ***************************************************************/
-     int getNPCAttackFeat(personagem* pers, personagem* target);
+     int getNPCAttackFeat(character* pers, character* target);
      /*!
      *************************************************************** 
      * Get an ememy character to attack.  
      * \param pers -> Pointer to Character that will act
      * \return enemy character target.
      ***************************************************************/
-     personagem* getNPCEnemy(personagem* pers);
+     character* getNPCEnemy(character* pers);
      /*!
      *************************************************************** 
      * Do, if wanted, NPC movimentation  
@@ -124,7 +124,7 @@ class fightSystem
      * \param when -> time when do movimentation (before or after 
      *                attack) 
      ***************************************************************/
-     void doNPCMovimentation(personagem* pers, int when);
+     void doNPCMovimentation(character* pers, int when);
 
      /*!
      ***************************************************************
@@ -133,7 +133,7 @@ class fightSystem
      * \param brief -> briefing to print, lines separed by '|' .
      * \return true if has enemies, false otherwise.
      *************************************************************/
-     bool hasEnemies(personagem* pers, string& brief);
+     bool hasEnemies(character* pers, string& brief);
 };
 
 #endif

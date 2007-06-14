@@ -136,9 +136,9 @@ void editor::openMap()
       /* Open NPCs */
       if(NPCs)
          delete(NPCs);
-      NPCs = new (Lpersonagem);
+      NPCs = new (characterList);
       npcController = new npcs(map, NPCs, features);
-      personagem* per;
+      character* per;
       if(!map->getNpcFileName().empty())
       {
          FILE* arq;
@@ -417,7 +417,7 @@ void editor::newMap()
    objectEditor = new objects(map, models);
    particleEditor = new particles(map);
    actualTexture = map->Texturas->indice;
-   NPCs = new (Lpersonagem);
+   NPCs = new (characterList);
    npcController = new npcs(map, NPCs, features);
    gui->showMessage("Created New Game Map!");
    glEnable(GL_FOG);
@@ -722,7 +722,7 @@ void editor::draw()
    /* Draw the NPCs */
    if(NPCs)
    {
-      personagem* per = (personagem*) NPCs->primeiro->proximo;
+      character* per = NPCs->first->next;
       int aux;
       GLfloat x[4]; GLfloat z[4];
       GLfloat min[3],max[3];
@@ -764,7 +764,7 @@ void editor::draw()
                glEnd();*/
             glPopMatrix();
          }
-         per = (personagem*) per->proximo;
+         per = (character*) per->next;
       }
    }
    glColor4f(1.0,1.0,1.0,1.0);

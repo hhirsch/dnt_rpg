@@ -75,7 +75,7 @@ class editor
       int sizeX,                     /**< Real X size of the map */
           sizeZ;                     /**< Real Z size of the map */
 
-      Lpersonagem *NPCs;             /**< List of NPCs On Map */
+      characterList *NPCs;             /**< List of NPCs On Map */
       featsList* features;           /**< NPCs Geral Features */
       
       partSystem* particleSystem;    /**< Particles on Map */

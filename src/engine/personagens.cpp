@@ -11,7 +11,7 @@
 /*********************************************************************
  *                             constructor                           *
  *********************************************************************/
-personagem::personagem(featsList* ft)
+character::character(featsList* ft)
 {
   int i;
 
@@ -43,7 +43,7 @@ personagem::personagem(featsList* ft)
 /*********************************************************************
  *                             destructor                            *
  *********************************************************************/
-personagem::~personagem()
+character::~character()
 {
    delete(lifeBar);
    if(conv != NULL)
@@ -65,7 +65,7 @@ personagem::~personagem()
 /*********************************************************************
  *                           newInventory                            *
  *********************************************************************/
-void personagem::newInventory()
+void character::newInventory()
 {
    if(inventories)
    {
@@ -77,7 +77,7 @@ void personagem::newInventory()
 /*********************************************************************
  *                        setConversationFile                        *
  *********************************************************************/
-void personagem::setConversationFile(string file)
+void character::setConversationFile(string file)
 {
    conversationFile = file;
 }
@@ -85,7 +85,7 @@ void personagem::setConversationFile(string file)
 /*********************************************************************
  *                        getConversationFile                        *
  *********************************************************************/
-string personagem::getConversationFile()
+string character::getConversationFile()
 {
    return(conversationFile);
 }
@@ -93,7 +93,7 @@ string personagem::getConversationFile()
 /*********************************************************************
  *                        createConversation                         *
  *********************************************************************/
-void personagem::createConversation(void* pEngine)
+void character::createConversation(void* pEngine)
 {
    if(conversationFile != "")
    {
@@ -106,7 +106,7 @@ void personagem::createConversation(void* pEngine)
 /*********************************************************************
  *                      openConversationDialog                       *
  *********************************************************************/
-void personagem::openConversationDialog(interface* gui, personagem * PC)
+void character::openConversationDialog(interface* gui, character * PC)
 {
    conversation* cs = (conversation*) conv;
    if( (cs != NULL) && (!cs->windowOpened()) )
@@ -120,7 +120,7 @@ void personagem::openConversationDialog(interface* gui, personagem * PC)
 /*********************************************************************
  *                         treatConversation                         *
  *********************************************************************/
-bool personagem::treatConversation(Tobjeto* guiObject, int eventInfo, 
+bool character::treatConversation(Tobjeto* guiObject, int eventInfo, 
                                    interface* gui)
 {
    if(convPressed)
@@ -143,7 +143,7 @@ bool personagem::treatConversation(Tobjeto* guiObject, int eventInfo,
 /*********************************************************************
  *                           definePortrait                          *
  *********************************************************************/
-void personagem::definePortrait(string portraitFile)
+void character::definePortrait(string portraitFile)
 {
    if(portraitImage != NULL)
    {
@@ -169,7 +169,7 @@ void personagem::definePortrait(string portraitFile)
 /*********************************************************************
  *                        getPortraitFileName                        *
  *********************************************************************/
-string personagem::getPortraitFileName()
+string character::getPortraitFileName()
 {
    return(retratoConversa);
 }
@@ -177,7 +177,7 @@ string personagem::getPortraitFileName()
 /*********************************************************************
  *                       defineMaxLifePoints                         *
  *********************************************************************/
-void personagem::defineMaxLifePoints(int maxPoints)
+void character::defineMaxLifePoints(int maxPoints)
 {
   maxLifePoints = maxPoints;
   lifeBar->defineMaxHealth(maxPoints);
@@ -187,7 +187,7 @@ void personagem::defineMaxLifePoints(int maxPoints)
 /*********************************************************************
  *                      defineActualLifePoints                       *
  *********************************************************************/
-void personagem::defineActualLifePoints(int newLife)
+void character::defineActualLifePoints(int newLife)
 {
    lifePoints = newLife;
    lifeBar->defineActualHealth(newLife);
@@ -197,7 +197,7 @@ void personagem::defineActualLifePoints(int newLife)
 /*********************************************************************
  *                         drawMainPortrait                          *
  *********************************************************************/
-void personagem::drawMainPortrait()
+void character::drawMainPortrait()
 {
    glRasterPos2f(800-portraitImage->w, 600);
    glPixelZoom(1.0, -1.0);
@@ -222,7 +222,7 @@ void personagem::drawMainPortrait()
 /******************************************************************
  *                             getPoints                          *
  ******************************************************************/
-int personagem::getPoints(points pt)
+int character::getPoints(points pt)
 {
    int total = 0;
    skill* att;
@@ -246,7 +246,7 @@ int personagem::getPoints(points pt)
 /******************************************************************
  *                            clearSkills                         *
  ******************************************************************/
-void personagem::clearSkills()
+void character::clearSkills()
 {
    sk.clear();
    sk.setAvaiblePoints(getFirstLevelSkillPoints(0));
@@ -255,7 +255,7 @@ void personagem::clearSkills()
 /******************************************************************
  *                   getFirstLevelSkillPoints                     *
  ******************************************************************/
-int personagem::getFirstLevelSkillPoints(int multiClassNumber)
+int character::getFirstLevelSkillPoints(int multiClassNumber)
 {
    /* Verify if the class exists */
    if( (multiClassNumber < 0) || (multiClassNumber >= MAX_DISTINCT_CLASSES) ||
@@ -269,7 +269,7 @@ int personagem::getFirstLevelSkillPoints(int multiClassNumber)
 /******************************************************************
  *                   getOtherLevelSkillPoints                     *
  ******************************************************************/
-int personagem::getOtherLevelSkillPoints(int multiClassNumber)
+int character::getOtherLevelSkillPoints(int multiClassNumber)
 {
    /* Verify if the class exists */
    if( (multiClassNumber < 0) || (multiClassNumber >= MAX_DISTINCT_CLASSES) ||
@@ -283,7 +283,7 @@ int personagem::getOtherLevelSkillPoints(int multiClassNumber)
 /******************************************************************
  *                   defineInitialLifePoints                      *
  ******************************************************************/
-void personagem::defineInitialLifePoints()
+void character::defineInitialLifePoints()
 {
    /* At First Level, the hit points is equal to the Max dice value 
     * plus  constitution bonus */
@@ -293,7 +293,7 @@ void personagem::defineInitialLifePoints()
 /*********************************************************************
  *                           callDeadAnimation                       *
  *********************************************************************/
-void personagem::callDeadAnimation()
+void character::callDeadAnimation()
 {
    setState(STATE_DIE);
 }
@@ -301,7 +301,7 @@ void personagem::callDeadAnimation()
 /*********************************************************************
  *                          callAttackAnimation                      *
  *********************************************************************/
-void personagem::callAttackAnimation()
+void character::callAttackAnimation()
 {
    setState(STATE_ATTACK_MEELE);
 }
@@ -309,7 +309,7 @@ void personagem::callAttackAnimation()
 /*********************************************************************
  *                           callIdleAnimation                       *
  *********************************************************************/
-void personagem::callIdleAnimation()
+void character::callIdleAnimation()
 {
    setState(STATE_IDLE);
 }
@@ -317,7 +317,7 @@ void personagem::callIdleAnimation()
 /*********************************************************************
  *                            setOrientation                         *
  *********************************************************************/
-void personagem::setOrientation(GLfloat ori)
+void character::setOrientation(GLfloat ori)
 {
    orientacao = ori;
    pathFind.setOrientation(ori);
@@ -334,35 +334,34 @@ void personagem::setOrientation(GLfloat ori)
 /*********************************************************************
  *                         listConstructor                           *
  *********************************************************************/
-Lpersonagem::Lpersonagem()
+characterList::characterList()
 {
    total = 0;
-   primeiro = new personagem(NULL);
-   primeiro->tipo = -1;
-   primeiro->proximo = primeiro;
-   primeiro->anterior = primeiro;
+   first = new character(NULL);
+   first->next = first;
+   first->previous = first;
 }
 
 /*********************************************************************
  *                          listDestructor                           *
  *********************************************************************/
-Lpersonagem::~Lpersonagem()
+characterList::~characterList()
 {
-   personagem* per = (personagem*) primeiro->proximo;
-   personagem* ap;
-   while(per != primeiro)
+   character* per = first->next;
+   character* ap;
+   while(per != first)
    {
       ap = per;
-      per = (personagem*) per->proximo;
+      per = per->next;
       delete(ap);
    }
-   delete(primeiro);
+   delete(first);
 } 
  
 /*********************************************************************
  *                           insertCharacter                         *
  *********************************************************************/
-personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
+character* characterList::insertCharacter(string file, featsList* ft,
                                            void* pEngine)
 
 {
@@ -371,9 +370,8 @@ personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
    char buf2[128];
    string buf; 
    string arqModelo;
-   personagem* novo;
-   novo = new personagem(ft);
-   novo->tipo = PERSONAGEM;
+   character* novo;
+   novo = new character(ft);
    novo->actualWeapon = NULL;
    novo->orientacao = 0.0;
    novo->posicaoLadoX = 0.0;
@@ -496,10 +494,10 @@ personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
    novo->loadModel(arqModelo);
 
    
-   novo->proximo = primeiro->proximo;
-   novo->anterior = primeiro;
-   primeiro->proximo = novo;
-   novo->proximo->anterior = novo;
+   novo->next = first->next;
+   novo->previous = first;
+   first->next = novo;
+   novo->next->previous = novo;
    total++;
    activeCharacter = novo;
 
@@ -509,10 +507,10 @@ personagem* Lpersonagem::insertCharacter(string file, featsList* ft,
 /*********************************************************************
  *                          RetiraPersonagem                         *
  *********************************************************************/
-void Lpersonagem::removeCharacter(personagem* persona)
+void characterList::removeCharacter(character* persona)
 {
-   persona->anterior->proximo = persona->proximo;
-   persona->proximo->anterior = persona->anterior;
+   persona->previous->next = persona->next;
+   persona->next->previous = persona->previous;
    total--;
    delete(persona);
 }
@@ -520,15 +518,15 @@ void Lpersonagem::removeCharacter(personagem* persona)
 /*********************************************************************
  *                            getEnemyCharacter                      *
  *********************************************************************/
-personagem* Lpersonagem::getEnemyCharacter(personagem* last)
+character* characterList::getEnemyCharacter(character* last)
 {
-   while(last != primeiro)
+   while(last != first)
    {
       if(last->psychoState == PSYCHO_HOSTILE)
       {
          return(last);
       }
-      last = (personagem*) last->proximo;
+      last = (character*) last->next;
    }
    return(NULL);
 }
@@ -536,7 +534,7 @@ personagem* Lpersonagem::getEnemyCharacter(personagem* last)
 /*********************************************************************
  *                           getActiveCharacter                      *
  *********************************************************************/
-personagem* Lpersonagem::getActiveCharacter()
+character* characterList::getActiveCharacter()
 {
    return(activeCharacter);
 }
@@ -544,15 +542,15 @@ personagem* Lpersonagem::getActiveCharacter()
 /*********************************************************************
  *                           setActiveCharacter                      *
  *********************************************************************/
-void Lpersonagem::setActiveCharacter(personagem* character)
+void characterList::setActiveCharacter(character* dude)
 {
-   if(character != primeiro)
+   if(dude != first)
    {
-      activeCharacter = character;
+      activeCharacter = dude;
    }
    else
    {
-      activeCharacter = (personagem*) character->proximo;
+      activeCharacter = dude->next;
    }
 }
 

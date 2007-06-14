@@ -28,9 +28,9 @@ class aspectWindow
 {
    public:
       /*! Constructor
-       * \param character -> pointer to the edited character
+       * \param dude -> pointer to the edited character
        * \param inter -> pointer to the GUI used interface */
-      aspectWindow(personagem* character, interface* inter);
+      aspectWindow(character* dude, interface* inter);
       /*! Destructor */
       ~aspectWindow();
 
@@ -45,7 +45,7 @@ class aspectWindow
       /*! Load All Portrait Images */
       void loadImages();
 
-      personagem* usedCharacter;    /**< Pointer to the used character */
+      character* usedCharacter;    /**< Pointer to the used character */
 
       botao* buttonConfirm;         /**< Confirm Button */
       botao* buttonCancel;          /**< Cancel Button */

@@ -25,14 +25,14 @@ class fightGroup
      * \param pers -> Pointer to Character
      * \return true if success.
      ***************************************************************/
-     bool insertCharacter(personagem* pers);
+     bool insertCharacter(character* pers);
      /*!
      *************************************************************** 
      * Verify if character is in Group  
      * \param pers -> Pointer to Character
      * \return true if character is in group.
      ***************************************************************/
-     bool isCharacterIn(personagem* pers);
+     bool isCharacterIn(character* pers);
      /*!
      *************************************************************** 
      * Verify if there's any character alive and in range 
@@ -47,7 +47,7 @@ class fightGroup
      * \param pers -> character pointer.
      * \return an character pointer, enemy to this one.
      ***************************************************************/
-     personagem* getNPCEnemy(personagem* pers);
+     character* getNPCEnemy(character* pers);
 
      /*!
      *************************************************************** 
@@ -57,7 +57,7 @@ class fightGroup
 
    private:
      /*! Pointers to Characters on Group */
-     personagem* characters[FIGHT_MAX_CHARACTERS_PER_GROUP]; 
+     character* characters[FIGHT_MAX_CHARACTERS_PER_GROUP]; 
      /*! Total number of Characters on Group */
      int actualCharacters;
 };

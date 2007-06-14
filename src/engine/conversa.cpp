@@ -408,8 +408,8 @@ void conversation::removeDialog(int num)
 /*************************************************************************
  *                              openDialog                               *
  *************************************************************************/
-void conversation::openDialog(int numDialog, interface* gui, personagem* pers,
-                              personagem* PC)
+void conversation::openDialog(int numDialog, interface* gui, character* pers,
+                              character* PC)
 {
    lang language;
    usedGui = gui;

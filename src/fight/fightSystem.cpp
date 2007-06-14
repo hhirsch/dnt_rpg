@@ -24,7 +24,7 @@ fightSystem::~fightSystem()
 /***************************************************************
  *                         insertPC                            *
  ***************************************************************/
-bool fightSystem::insertPC(personagem* pers, int group,  string& brief)
+bool fightSystem::insertPC(character* pers, int group,  string& brief)
 {
    if( (group >= 0) && (group < FIGHT_MAX_PC_GROUPS))
    {
@@ -48,7 +48,7 @@ bool fightSystem::insertPC(personagem* pers, int group,  string& brief)
 /***************************************************************
  *                         insertNPC                           *
  ***************************************************************/
-bool fightSystem::insertNPC(personagem* pers, int group, string& brief)
+bool fightSystem::insertNPC(character* pers, int group, string& brief)
 {
    if( (group >= 0) && (group < FIGHT_MAX_NPC_GROUPS))
    {
@@ -73,7 +73,7 @@ bool fightSystem::insertNPC(personagem* pers, int group, string& brief)
 /***************************************************************
  *                             isPC                            *
  ***************************************************************/
-bool fightSystem::isPC(personagem* pers)
+bool fightSystem::isPC(character* pers)
 {
    int i;
    for(i=0;i<FIGHT_MAX_PC_GROUPS;i++)
@@ -89,7 +89,7 @@ bool fightSystem::isPC(personagem* pers)
 /***************************************************************
  *                           hasEnemies                        *
  ***************************************************************/
-bool fightSystem::hasEnemies(personagem* pers, string& brief)
+bool fightSystem::hasEnemies(character* pers, string& brief)
 {
    int i;
    bool isNPC = !isPC(pers);
@@ -229,7 +229,7 @@ int fightSystem::doBattleCicle(string& brief)
 /***************************************************************
  *                       doNPCAction                           *
  ***************************************************************/
-void fightSystem::doNPCAction(personagem* pers, string& brief)
+void fightSystem::doNPCAction(character* pers, string& brief)
 {
    int attackFeat;
 
@@ -271,7 +271,7 @@ void fightSystem::doNPCAction(personagem* pers, string& brief)
 /***************************************************************
  *                       getNPCAttackFeat                      *
  ***************************************************************/
-int fightSystem::getNPCAttackFeat(personagem* pers, personagem* target)
+int fightSystem::getNPCAttackFeat(character* pers, character* target)
 {
    if( (target != NULL) && (pers != NULL))
    { 
@@ -284,12 +284,12 @@ int fightSystem::getNPCAttackFeat(personagem* pers, personagem* target)
 /***************************************************************
  *                       getNPCEnemy                           *
  ***************************************************************/
-personagem* fightSystem::getNPCEnemy(personagem* pers)
+character* fightSystem::getNPCEnemy(character* pers)
 {
    /*FIXME For now, get the enemy on first enemy list. 
      better make this in a more expert way */
 
-   personagem *ch = NULL;
+   character *ch = NULL;
    int group = 0;
 
    //Take enemy on PCGroups
@@ -316,7 +316,7 @@ personagem* fightSystem::getNPCEnemy(personagem* pers)
 /***************************************************************
  *                   doNPCMovimentation                        *
  ***************************************************************/
-void fightSystem::doNPCMovimentation(personagem* pers, int when)
+void fightSystem::doNPCMovimentation(character* pers, int when)
 {
    //TODO
 }
@@ -347,7 +347,7 @@ void fightSystem::empty()
 /***************************************************************
  *                  actualCharacterTurn                        *
  ***************************************************************/
-personagem* fightSystem::actualCharacterTurn()
+character* fightSystem::actualCharacterTurn()
 {
    return(charsInitiatives.actualCharacter());
 }

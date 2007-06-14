@@ -17,7 +17,7 @@ class npcs
        * \param acMap -> pointer to opened map
        * \param NPCsList -> pointer to the list of NPCs 
        * \param lFeats -> pointer to features descriptions list*/
-      npcs(Map* acMap, Lpersonagem* NPCsList, featsList* lFeats);
+      npcs(Map* acMap, characterList* NPCsList, featsList* lFeats);
       /*! Destructor */
       ~npcs();
 
@@ -45,11 +45,11 @@ class npcs
       bool saveFile(string fileName);
                         
    private:
-      Lpersonagem* NPCs;          /**< Actual NPCs List */
-      Lpersonagem* intList;       /**< Internal NPCs List */
+      characterList* NPCs;        /**< Actual NPCs List */
+      characterList* intList;     /**< Internal NPCs List */
       featsList* features;        /**< Actual Features */
       Map* actualMap;             /**< Actual Internal Map */
-      personagem* actualNpc;      /**< Actual Npc */
+      character* actualNpc;       /**< Actual Npc */
       string npcFile;             /**< Actual Npc Filename */
       int actualTool;             /**< Actual Tool */
       int state;                  /**< Actual Internal State */
@@ -59,7 +59,7 @@ class npcs
       Uint8 mB;                   /**< Mouse Buttons */
 
       void insertNpc(GLfloat xReal, GLfloat zReal,
-                     personagem* npc, int qx, int qz);
+                     character* npc, int qx, int qz);
 };
 
 #endif

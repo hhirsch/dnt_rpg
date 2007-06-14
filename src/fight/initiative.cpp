@@ -27,7 +27,7 @@ initiative::~initiative()
 /***************************************************************
  *                     insertCharacter                        *
  ***************************************************************/
-void initiative::insertCharacter(personagem* pers, string& brief)
+void initiative::insertCharacter(character* pers, string& brief)
 {
    char text[20];
    initiativeStruct *cmp, *aux, *oth;
@@ -44,7 +44,7 @@ void initiative::insertCharacter(personagem* pers, string& brief)
                                pers->attBonus(ATT_DEXTERY);
       sprintf(text,"%d.",first->initiativeValue);
       brief += text;
-      first->character = pers;
+      first->dude = pers;
    }
    else
    {
@@ -53,7 +53,7 @@ void initiative::insertCharacter(personagem* pers, string& brief)
                              pers->attBonus(ATT_DEXTERY);
       sprintf(text,"%d.",aux->initiativeValue);
       brief += text;
-      aux->character = pers;
+      aux->dude = pers;
       cmp = first; 
       oth = NULL;
       while( (cmp != NULL) && 
@@ -88,7 +88,7 @@ void initiative::newRound()
 /***************************************************************
  *                        nextCharacter                        *
  ***************************************************************/
-personagem* initiative::nextCharacter()
+character* initiative::nextCharacter()
 {
    actual = next;
    if(next)
@@ -97,7 +97,7 @@ personagem* initiative::nextCharacter()
    }
    if( actual )
    {
-      return(actual->character);
+      return(actual->dude);
    }
    else
    {
@@ -108,11 +108,11 @@ personagem* initiative::nextCharacter()
 /***************************************************************
  *                       nextCharacter                         *
  ***************************************************************/
-personagem* initiative::actualCharacter()
+character* initiative::actualCharacter()
 {
    if(actual)
    {
-      return(actual->character);
+      return(actual->dude);
    }
    else
    {

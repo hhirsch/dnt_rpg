@@ -54,8 +54,8 @@ class engine
       /*! Engine Desctructor */                        
       ~engine();                       
  
-      Lpersonagem *NPCs;               /**< NPC's List */
-      Lpersonagem *PCs;                /**< PC's List */
+      characterList *NPCs;             /**< NPC's List */
+      characterList *PCs;              /**< PC's List */
 
       #ifdef REDE
          char *server;                 /**< Server to Connect \b NOTUSED */

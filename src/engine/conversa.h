@@ -107,8 +107,8 @@ class conversation
        * \param gui -> window interface used
        * \param pers -> character to talk to
        * \param PC -> player's character */
-      void openDialog(int numDialog, interface* gui, personagem* pers,
-                      personagem* PC);
+      void openDialog(int numDialog, interface* gui, character* pers,
+                      character* PC);
 
       /*! Treat Events on Window. 
        * \param guiObject -> active GUI object
@@ -130,8 +130,8 @@ class conversation
          rolBar* npcText;      /**< The NPC text quad */
          selTexto* pcSelText;  /**< The PC selection text */
          botao* barterButton;  /**< The Barter Button */
-         personagem* actualPC; /**< The Actual PC */
-         personagem* actualNPC;/**< The actual NPC */
+         character* actualPC; /**< The Actual PC */
+         character* actualNPC;/**< The actual NPC */
          void* actualEngine;   /**< The actual Engine */
 
          /*!
