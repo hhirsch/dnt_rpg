@@ -352,7 +352,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
          {
            fscanf(arq,"%s %s %f %f",&nome[0],&arquivo[0],&posX,&posZ);
            sprintf(texto, language.LOAD_NPC.c_str(), nome);
-           atualizaCarga(img,&texturaTexto,texturaCarga,
+           showLoading(img,&texturaTexto,texturaCarga,
                          texto,
                          proj, modl, viewPort);
            per = NPCs->insertCharacter(arquivo,features, this);
@@ -368,7 +368,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    if(RecarregaPCs)
    {
        loadPCs(); 
-       atualizaCarga(img,&texturaTexto,texturaCarga,
+       showLoading(img,&texturaTexto,texturaCarga,
                  "Loading Character: Logan",
                  proj, modl, viewPort);
        /*PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
@@ -377,7 +377,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    }
 
    /* Loading Internal Windows */
-   atualizaCarga(img,&texturaTexto,texturaCarga,
+   showLoading(img,&texturaTexto,texturaCarga,
                  language.LOAD_WINDOWS.c_str(),
                  proj, modl, viewPort);
 
@@ -418,7 +418,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    }
 
    /* Update  particle System to a stable state */
-   atualizaCarga(img,&texturaTexto,texturaCarga,
+   showLoading(img,&texturaTexto,texturaCarga,
                  language.LOAD_PARTICLE.c_str(),
                  proj, modl, viewPort);
    if(!actualMap->getParticlesFileName().empty())
@@ -445,7 +445,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                               activeCharacter->orientacao);
    activeCharacter->ocupaQuad = actualMap->squareInic;
 
-   atualizaCarga(img,&texturaTexto,texturaCarga,
+   showLoading(img,&texturaTexto,texturaCarga,
                  "Loading Changes...",
                  proj, modl, viewPort);
 
@@ -463,7 +463,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    colisionDetect.defineMap(actualMap, NPCs);
 
    /* Done */
-   atualizaCarga(img,&texturaTexto,texturaCarga,
+   showLoading(img,&texturaTexto,texturaCarga,
                  language.LOAD_DONE.c_str(),
                  proj, modl, viewPort);
 
@@ -1291,7 +1291,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                 quaux->Xobjects[obj], 0.0, 
                                 0.0,quaux->Zobjects[obj], 
                                 minObj, maxObj);
-            if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
+            if(intercepts( minObj, maxObj, minMouse, maxMouse, 1))
             {
                 cursors->setActual(CURSOR_GET);
                 if(shortCutsWindow)
@@ -1366,7 +1366,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
          Z[3] = bound.z1;
          rotTransBoundingBox(porta->orientacao, X, Z,porta->x, 0.0,0.0,porta->z, 
                              minObj, maxObj);
-         if(estaDentro( minObj, maxObj, minMouse, maxMouse, 1))
+         if(intercepts( minObj, maxObj, minMouse, maxMouse, 1))
          {
             cursors->setActual(CURSOR_DOOR);
             if(shortCutsWindow)
@@ -1415,7 +1415,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
          rotTransBoundingBox(pers->orientacao, x, z,pers->posicaoLadoX,0.0, 0.0, 
                                 pers->posicaoLadoZ, min, max );
 
-         if(estaDentro( min, max, minMouse, maxMouse, 1))
+         if(intercepts( min, max, minMouse, maxMouse, 1))
          {
             cursors->setActual(CURSOR_INVENTORY);
             if(shortCutsWindow)
@@ -1456,7 +1456,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                 pers->posicaoLadoX, 0.0, 0.0, 
                                 pers->posicaoLadoZ, min, max );
 
-            if(estaDentro( min, max, minMouse, maxMouse, 1))
+            if(intercepts( min, max, minMouse, maxMouse, 1))
             {
                if( engineMode == ENGINE_MODE_REAL_TIME )
                {
@@ -1553,7 +1553,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
          minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
          minMouse[1] = 0.0;      maxMouse[1] = 0.0;
          minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
-         if( estaDentro( minCon, maxCon, minMouse, maxMouse, 1 ) )
+         if( intercepts( minCon, maxCon, minMouse, maxMouse, 1 ) )
          {
             if(shortCutsWindow)
             {

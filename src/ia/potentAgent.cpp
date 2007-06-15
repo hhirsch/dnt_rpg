@@ -67,7 +67,7 @@ bool potentAgent::defineNextPosition()
       cosA = dX / dist;
       senA = dZ / dist;
 
-      if(estaDentro(min1, max1, min2, max2, 1))
+      if(intercepts(min1, max1, min2, max2, 1))
       {
          force = -kc*dist;
       }

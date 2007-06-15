@@ -4,9 +4,9 @@
 /*********************************************************************
  *                   Loading Screen Atualization                     *
  *********************************************************************/
-void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto, 
-                   GLuint texturaCarga, const char* texto,
-                   GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
+void showLoading(SDL_Surface* img, GLuint* texturaTexto, 
+                 GLuint texturaCarga, const char* texto,
+                 GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
 {
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
@@ -27,7 +27,7 @@ void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto,
 /*********************************************************************
  *                Verify if two bounding boxes intercepts            *
  *********************************************************************/
-int estaDentro(GLfloat min1[3], GLfloat max1[3],
+int intercepts(GLfloat min1[3], GLfloat max1[3],
                GLfloat min2[3], GLfloat max2[3],
                int inverso)
 {
@@ -111,7 +111,7 @@ int estaDentro(GLfloat min1[3], GLfloat max1[3],
 
    if(inverso)
    {
-      return( estaDentro(min2, max2, min1, max1, 0));
+      return( intercepts(min2, max2, min1, max1, 0));
    }
    else 
    {
@@ -188,7 +188,9 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
    }
 }
 
-
+/*********************************************************************
+ *                               normalize                           *
+ *********************************************************************/
 void normalize (GLfloat& nx, GLfloat& ny, GLfloat& nz)
 {
     // calculate the length of the vector
@@ -204,7 +206,9 @@ void normalize (GLfloat& nx, GLfloat& ny, GLfloat& nz)
     nz /= len;
 }
 
-/* Calculate Normal to the Poligon */
+/*********************************************************************
+ *                                normal                             *
+ *********************************************************************/
 void normal (GLfloat x1, GLfloat y1, GLfloat z1,
              GLfloat x2, GLfloat y2, GLfloat z2,
              GLfloat x3, GLfloat y3, GLfloat z3, 
@@ -233,6 +237,9 @@ void normal (GLfloat x1, GLfloat y1, GLfloat z1,
     normalize(nx, ny, nz);
 }
 
+/*********************************************************************
+ *                             draw2DMode                            *
+ *********************************************************************/
 void draw2DMode()
 {
    glMatrixMode(GL_PROJECTION);
@@ -242,6 +249,9 @@ void draw2DMode()
    glLoadIdentity();
 }
 
+/*********************************************************************
+ *                             draw3DMode                            *
+ *********************************************************************/
 void draw3DMode(int actualFarView)
 {
    glMatrixMode (GL_PROJECTION);

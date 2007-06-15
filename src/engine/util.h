@@ -126,9 +126,9 @@ inline double deg2Rad(double x){return PID180 * x;}
  * \param proj -> projection matrix
  * \param modl -> model view matrix
  * \param viewPort -> view port matrix. */
-void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto, 
-                   GLuint texturaCarga, const char* texto,
-                   GLdouble proj[16], GLdouble modl[16],GLint viewPort[4]);
+void showLoading(SDL_Surface* img, GLuint* texturaTexto, 
+                 GLuint texturaCarga, const char* texto,
+                 GLdouble proj[16], GLdouble modl[16],GLint viewPort[4]);
 
 /*! Verifies if some bounding box is inner on another
  * \param min1 -> min values of first bounding box 
@@ -138,7 +138,7 @@ void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto,
  * \param inverso -> OR verifies too if second bounding box is inner to one 
  * \return 1 if bounding 1 is inner to bounding 2. if inverso, return 1 if
  *     bounding 2 is inner to bounding 2 or bounding 2 is inner to bounding 1.*/
-int estaDentro(GLfloat min1[3], GLfloat max1[3],
+int intercepts(GLfloat min1[3], GLfloat max1[3],
                GLfloat min2[3], GLfloat max2[3],
                int inverso);
 

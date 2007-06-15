@@ -55,7 +55,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
          max2[0] = proxima->muros[mur]->x2; 
          max2[1] = MUROALTURA; 
          max2[2] = proxima->muros[mur]->z2;
-         result &= !estaDentro(min,max,min2,max2,1);
+         result &= !intercepts(min,max,min2,max2,1);
          if(!result)
            return(false);
          mur++;
@@ -86,7 +86,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
                               bounding.y2, proxima->Zobjects[ob], 
                               min2, max2);
 
-          result &= !estaDentro(min,max,min2,max2,1);
+          result &= !intercepts(min,max,min2,max2,1);
           if(!result) //se ja achou que nao pode, cai fora
              return(false);
         }
@@ -114,7 +114,7 @@ bool collision::verifyMeioFio(GLfloat min[3],GLfloat max[3], muro* meiosFio)
        max2[1] = MEIOFIOALTURA;
        min2[2] = maux->z1;
        max2[2] = maux->z2;
-       if( (estaDentro(min, max, min2, max2, 1)) )
+       if( (intercepts(min, max, min2, max2, 1)) )
        {
           return(true);
        }
@@ -203,7 +203,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       rotTransBoundingBox(porta->orientacao, XA, ZA,
                           porta->x, 0.0,0.0,porta->z, 
                           minObj, maxObj);
-      if(estaDentro( min, max, minObj, maxObj, 1))
+      if(intercepts( min, max, minObj, maxObj, 1))
       {
          return(false);
       }
@@ -217,7 +217,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    max2[0] = perQuad->x2;
    max2[1] = 400;
    max2[2] = perQuad->z2;
-   if(estaDentro(min,max,min2,max2,1))
+   if(intercepts(min,max,min2,max2,1))
    {
       result &= verifySquare(min,max,perQuad);
       if(!result)
@@ -237,7 +237,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       min2[2] = saux->z1;
       max2[0] = saux->x2;
       max2[2] = saux->z2;
-      if(estaDentro(min,max,min2,max2,1) )
+      if(intercepts(min,max,min2,max2,1) )
       {
          result &= verifySquare(min,max,saux);
          if(!result)
@@ -254,7 +254,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          min2[2] = saux->z1;
          max2[0] = saux->x2;
          max2[2] = saux->z2;
-         if(estaDentro(min,max,min2,max2,1) )
+         if(intercepts(min,max,min2,max2,1) )
          {
             result &= verifySquare(min,max,saux);
             if(!result) 
@@ -272,7 +272,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          min2[2] = saux->z1;
          max2[0] = saux->x2;
          max2[2] = saux->z2;
-         if(estaDentro(min,max,min2,max2,1))
+         if(intercepts(min,max,min2,max2,1))
          {
             result &= verifySquare(min,max,saux);
             if(!result) 
@@ -293,7 +293,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       min2[2] = saux->z1;
       max2[0] = saux->x2;
       max2[2] = saux->z2;
-      if(estaDentro(min,max,min2,max2,1))
+      if(intercepts(min,max,min2,max2,1))
       {
          result &= verifySquare(min,max,saux);
          if(!result) 
@@ -311,7 +311,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          min2[2] = saux->z1;
          max2[0] = saux->x2;
          max2[2] = saux->z2;
-         if(estaDentro(min,max,min2,max2,1) )
+         if(intercepts(min,max,min2,max2,1) )
          {
             result &= verifySquare(min,max,saux);
             if(!result) 
@@ -329,7 +329,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          min2[2] = saux->z1;
          max2[0] = saux->x2;
          max2[2] = saux->z2;
-         if(estaDentro(min,max,min2,max2,1))
+         if(intercepts(min,max,min2,max2,1))
          {
             result &=verifySquare(min,max,saux);
             if(!result) 
@@ -349,7 +349,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       min2[2] = saux->z1;
       max2[0] = saux->x2;
       max2[2] = saux->z2;
-      if(estaDentro(min,max,min2,max2,1) )
+      if(intercepts(min,max,min2,max2,1) )
       { 
          /* sul */
          result &= verifySquare(min,max,saux);
@@ -369,7 +369,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       min2[2] = saux->z1;
       max2[0] = saux->x2;
       max2[2] = saux->z2;
-      if(estaDentro(min,max,min2,max2,1) )
+      if(intercepts(min,max,min2,max2,1) )
       { 
          /* norte */
          result &= verifySquare(min,max,saux);
@@ -405,7 +405,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
                           0.0, 0.0, 
                           pers->posicaoLadoZ, min2, max2 );
 
-         if(estaDentro( min, max, min2, max2, 1))
+         if(intercepts( min, max, min2, max2, 1))
          {
             return(false);
          }

@@ -221,7 +221,7 @@ bool agent::addIfVisible(agent* testAg)
    //dist = sqrt( (agX-x)*(agX-x) + (agZ-z)*(agZ-z) );
 
    /* If "colliding", is in sight, so add! */
-   if(estaDentro(min1, max1, min2, max2, 1))
+   if(intercepts(min1, max1, min2, max2, 1))
    {
       addObstacle(posX,posZ, x[0], z[0], x[2], z[2]);
       return(true);
