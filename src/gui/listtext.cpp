@@ -3,7 +3,7 @@
  */
 
 #include "listtext.h"
-#include "lista.h"
+#include "guilist.h"
 #include "interface.h"
 
 
@@ -34,7 +34,7 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
 
    intList = list;
 
-   Tlista* l = (Tlista*)list;
+   guiList* l = (guiList*)list;
 
    /* Create the rollbar */
    roll = l->insertRolBar(x1, y1, x2, y2, "", windowSurface);

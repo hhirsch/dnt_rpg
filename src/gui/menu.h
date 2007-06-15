@@ -14,10 +14,10 @@ using namespace std;
 #include "string.h"
 #include "mouse.h"
 #include "guiobject.h"
-#include "lista.h"
+#include "guilist.h"
 
 /*! The Menu GUI class */
-class menu: public Tlista
+class menu: public guiList
 {
    public:
       /*! Constructor

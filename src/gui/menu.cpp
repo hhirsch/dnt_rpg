@@ -15,7 +15,7 @@ menu::~menu()
 /*********************************************************
  *                      Constructor                      *
  *********************************************************/
-menu::menu(int xa, int ya): Tlista()
+menu::menu(int xa, int ya): guiList()
 {
    x = xa;
    y = ya;
@@ -38,7 +38,7 @@ void menu::insertItem(string text, bool avaible)
       maxCharac = text.length();
    }
    novo->type = GUI_MENU_ITEM;
-   InserirObj(novo);
+   insertObject(novo);
 } 
 
 /*********************************************************

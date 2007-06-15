@@ -4,7 +4,7 @@
 
 #include "rolbar.h"
 #include "fonte.h"
-#include "lista.h"
+#include "guilist.h"
 #include "interface.h"
 
 #define ACTUALIZE_RATE 50
@@ -33,7 +33,7 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    maxLines = ((yb-ya) / 11)-1;
    charPerLine = (xb-xa) / font_incCP();
    
-   Tlista* l = (Tlista*)list;
+   guiList* l = (guiList*)list;
 
    /* Contorno */
    position = l->insertTextBox(xb-10, ya+2, xb-2, yb-26, 1, "");

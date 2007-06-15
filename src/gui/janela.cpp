@@ -65,7 +65,7 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
                                      /*smallestPowerOfTwo*/(yb-ya+1),32,
                                    0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
 
-   novo->objects = new Tlista;
+   novo->objects = new guiList;
    button* tmp;
    tmp = novo->objects->insertButton(3,3,13,12,"_",0);
    tmp->men = new menu(0,0);
@@ -77,7 +77,7 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
    novo->objects->insertButton(14,3,24,12,"*",0);
    novo->objects->insertButton(25,3,35,12,"\36",0);
    novo->type = GUI_WINDOW;
-   InserirObj(novo);
+   insertObject(novo);
    return(novo);
 } 
 
@@ -140,9 +140,9 @@ void janela::Desenhar(int mouseX, int mouseY)
    }
    write(cara,39,-2,texto.c_str());
    /* Desenho dos Buttonoes */
-   guiObject *obj=objects->first->next;
+   guiObject *obj=objects->getFirst()->next;
    int aux;
-   for(aux=0;aux<objects->total;aux++)
+   for(aux=0;aux<objects->getTotal();aux++)
    {
       switch(obj->type)
       {
@@ -214,7 +214,7 @@ void janela::BarraAtiva()
 /*********************************************************************
  *                       Torna a janela Ativa                        *
  *********************************************************************/
-void janela::Ativar(Tlista *lista)
+void janela::Ativar(guiList *lista)
 {
   Ljanela *ljan = (Ljanela*) lista;
   if (ljan->janelaAtiva != NULL)
@@ -230,7 +230,7 @@ void janela::Ativar(Tlista *lista)
   }
 }
 
-void janela::Abrir(Tlista *lista)
+void janela::Abrir(guiList *lista)
 {
    Ativar(lista);
    Desenhar(0,0);
@@ -239,7 +239,7 @@ void janela::Abrir(Tlista *lista)
 /*********************************************************************
  *                            Fecha a Janela                         *
  *********************************************************************/
-void janela::Fechar(Tlista *ljan)
+void janela::Fechar(guiList *ljan)
 {
    if(procFechar)
    {
@@ -254,7 +254,7 @@ void janela::Fechar(Tlista *ljan)
 /*********************************************************************
  *                Faz a Movimentacao da Janela                       *
  *********************************************************************/
-int janela::Mover(Tlista *lista, SDL_Surface *screen, SDL_Surface* fundo,
+int janela::Mover(guiList *lista, SDL_Surface *screen, SDL_Surface* fundo,
                   int xinic, int yinic, int Mbotao)
 {
 

@@ -10,7 +10,7 @@
 #include "color.h"
 #include "fonte.h"
 #include "guiobject.h"
-#include "lista.h"
+#include "guilist.h"
 
 #include <string>
 using namespace std;
@@ -27,7 +27,7 @@ class janela: public guiObject
       int Rtxt,Gtxt,Btxt;        /* Cor do Texto de titulo da Janela */
       int maximiz;               /* Permite a Maximizacao de uma janela */
       int redmens;               /* Permite o Redmensionamento de uma janela */
-      Tlista *objects;           /* Lista dos Objetos presentes */
+      guiList* objects;          /* Lista dos Objetos presentes */
       SDL_Surface *cara;         /* Cara da Janela */
       int fechavel;              /* != 0 se for fechavel */
       int movivel;
@@ -50,18 +50,18 @@ class janela: public guiObject
       /* Ativa a Janela jan, inativando a currentemente ativa 
        * jan    -> janela a ser ativada
        */
-      void Ativar(Tlista *lista);
+      void Ativar(guiList *lista);
 
-      void Abrir(Tlista *lista);
+      void Abrir(guiList *lista);
 
       /*Fecha a janela, limpando seu espaco na tela*/
-      void Fechar(Tlista *ljan);
+      void Fechar(guiList *ljan);
 
       /* Faz a movimentacao da janela pela superficie 
        * jan    -> a janela a se movimentar
        * lista  -> a lista onde a janela esta presente
        * screen -> a superficie na qual esta a janela */
-      int Mover(Tlista *lista, SDL_Surface *screen, SDL_Surface* fundo,
+      int Mover(guiList *lista, SDL_Surface *screen, SDL_Surface* fundo,
                 int xinic, int yinic, int Mbotao);
 
       void BarraInativa();
@@ -73,11 +73,11 @@ class janela: public guiObject
 };                     /* Janela */
 
 
-class Ljanela: public Tlista
+class Ljanela: public guiList
 {
    public:
       janela* janelaAtiva; /* A janela que se encontra ativa no momento */
-      Ljanela():Tlista(){janelaAtiva=NULL;};
+      Ljanela():guiList(){janelaAtiva=NULL;};
       ~Ljanela();
  
       /* Insere uma nova janela de cor padrao na lista

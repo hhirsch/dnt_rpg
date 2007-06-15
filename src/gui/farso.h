@@ -21,7 +21,7 @@
 #include "seltext.h"
 #include "textbar.h"
 #include "guiobject.h"
-#include "lista.h"
+#include "guilist.h"
 #include "picture.h"
 #include "menu.h"
 #include "mouse.h"

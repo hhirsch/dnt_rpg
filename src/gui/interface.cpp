@@ -13,7 +13,7 @@ int mouseX=0,mouseY=0;
 interface::interface(char* arqfundo)
 {
    ljan = new Ljanela;
-   objects = new Tlista;
+   objects = new guiList;
    if(arqfundo != NULL)
    {
       fundo = IMG_Load(arqfundo);
@@ -98,8 +98,8 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                           x, y))
         {
             /* Verify All objects */
-            guiObject *obj = ljan->janelaAtiva->objects->first->next;
-            for(aux=0;aux<ljan->janelaAtiva->objects->total;aux++)
+            guiObject *obj = ljan->janelaAtiva->objects->getFirst()->next;
+            for(aux=0;aux<ljan->janelaAtiva->objects->getTotal();aux++)
             {
                /* Test selTexto */
                if(obj->type == GUI_SEL_TEXT) 
@@ -154,9 +154,9 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                 ljan->janelaAtiva->y2,x,y))
         {
             /* Here are the internal windows clicks verification */
-            guiObject *obj = ljan->janelaAtiva->objects->first->next;
+            guiObject *obj = ljan->janelaAtiva->objects->getFirst()->next;
             int aux;
-            for(aux=0; aux<ljan->janelaAtiva->objects->total; aux++)
+            for(aux=0; aux<ljan->janelaAtiva->objects->getTotal(); aux++)
             {
                if(obj->type == GUI_BUTTON)
                {
@@ -223,8 +223,8 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
         {
            /* Test Other Windows Activation */
            int aux; 
-           janela *jaux=(janela*)ljan->first->next;
-           for(aux=0;aux<ljan->total;aux++)
+           janela *jaux=(janela*)ljan->getFirst()->next;
+           for(aux=0;aux<ljan->getTotal();aux++)
            {
                if( (jaux != ljan->janelaAtiva)  && 
                    isMouseAt(jaux->x1,jaux->y1,jaux->x2,jaux->y2,x,y))
@@ -298,9 +298,9 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
            else
            {
               /* Verify RolBar */
-              guiObject *obj = ljan->janelaAtiva->objects->first->next;
+              guiObject *obj = ljan->janelaAtiva->objects->getFirst()->next;
               int aux;
-              for(aux=0; aux<ljan->janelaAtiva->objects->total; aux++)
+              for(aux=0; aux<ljan->janelaAtiva->objects->getTotal(); aux++)
               {
                  if(obj->type == GUI_ROL_BAR)
                  {
@@ -441,9 +441,9 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             {
                bool verified = false;
                /* Verify List Text */
-               guiObject *obj = ljan->janelaAtiva->objects->first->next;
+               guiObject *obj = ljan->janelaAtiva->objects->getFirst()->next;
                int aux;
-               for(aux=0; aux<ljan->janelaAtiva->objects->total; aux++)
+               for(aux=0; aux<ljan->janelaAtiva->objects->getTotal(); aux++)
                {
                   if(obj->type == GUI_LIST_TEXT)
                   {
@@ -498,7 +498,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int aux;
    double profundidade = 0.012;
-   janela* jan = (janela*) ljan->first->next;
+   janela* jan = (janela*) ljan->getFirst()->next;
 
    if(ljan->janelaAtiva == NULL)
      return;
@@ -512,7 +512,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    glDisable(GL_BLEND);
    
    /* Draw Inative Windows */
-   for(aux = 0;aux<ljan->total;aux++)
+   for(aux = 0;aux<ljan->getTotal();aux++)
    {
       if(jan != ljan->janelaAtiva)
       {
@@ -566,9 +566,9 @@ void interface::closeWindow(janela *jan)
  *********************************************************************/
 void interface::closeAllWindows()
 {
-   janela* j = (janela*)ljan->first->next;
+   janela* j = (janela*)ljan->getFirst()->next;
    janela* tmp;
-   while(j != (janela*)ljan->first)
+   while(j != (janela*)ljan->getFirst())
    {
       tmp = j;
       j = (janela*)j->next;
@@ -600,8 +600,8 @@ void interface::openWindow(janela* jan)
 bool interface::mouseOnGui(int mouseX, int mouseY)
 {
    int aux; 
-   janela *jaux=(janela*)ljan->first->next;
-   for(aux=0;aux<ljan->total;aux++)
+   janela *jaux=(janela*)ljan->getFirst()->next;
+   for(aux=0;aux<ljan->getTotal();aux++)
    {
       if(isMouseAt(jaux->x1,jaux->y1,jaux->x2,jaux->y2,mouseX,mouseY))
       {

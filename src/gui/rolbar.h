@@ -20,7 +20,14 @@ using namespace std;
 class rolBar: public guiObject
 {
    public:
-      /*! Constructor */
+      /*! Constructor
+       * \param xa -> x1 coordinate
+       * \param ya -> y1 coordinate
+       * \param xb -> x2 coordinate
+       * \param yb -> y2 coordinate
+       * \param txt -> text on the rolbar
+       * \param list -> pointer to the guiList
+       * \param surface -> pointer to the screen surface */
       rolBar(int xa, int ya, int xb, int yb, string txt, void* list, 
              SDL_Surface* surface);
       /*! Destructor */

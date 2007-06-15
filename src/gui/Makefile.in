@@ -6,7 +6,7 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJSPP = button.o color.o cxsel.o draw.o farso.o fonte.o healthBar.o interface.o janela.o lista.o listtext.o menu.o messages.o mouse.o picture.o rolbar.o seltext.o tabbutton.o textbar.o textbox.o
+OBJSPP = button.o color.o cxsel.o draw.o farso.o fonte.o guilist.o healthBar.o interface.o janela.o listtext.o menu.o messages.o mouse.o picture.o rolbar.o seltext.o tabbutton.o textbar.o textbox.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -78,9 +78,9 @@ janela.o: janela.h janela.cpp
 	@$(CC) $(CFLAGS) $(MOVOPACO) janela.cpp -o janela.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-lista.o: lista.h lista.cpp guiobject.h
-	@printf "Making lista.o... "
-	@$(CC) $(CFLAGS) lista.cpp -o lista.o
+guilist.o: guilist.h guilist.cpp guiobject.h
+	@printf "Making guilist.o... "
+	@$(CC) $(CFLAGS) guilist.cpp -o guilist.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 listtext.o: listtext.h listtext.cpp

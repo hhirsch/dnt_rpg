@@ -9,7 +9,7 @@
 #include "janela.h"
 #include "mouse.h"
 #include "menu.h"
-#include "lista.h"
+#include "guilist.h"
 
 /* Return Constants */
 #define NOTHING             -1
@@ -102,10 +102,10 @@ class interface
 
    private:
       SDL_Surface* fundo;     /**< background surface, if has one */
-      Tlista* objects;        /**< some no window objects */
+      guiList* objects;       /**< some no window objects */
       Ljanela* ljan;          /**< windows list */
-      guiObject* objAtivo;      /**< pointer to the actived object */
-      guiObject* chamador;      /**< pointer to the caller object */
+      guiObject* objAtivo;    /**< pointer to the actived object */
+      guiObject* chamador;    /**< pointer to the caller object */
 
 };
 
