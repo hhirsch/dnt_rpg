@@ -8,6 +8,7 @@
 #include "rolbar.h"
 #include "tabbotao.h"
 
+/*! A element of text on listText */
 class textElement
 {
    public:
@@ -67,10 +68,6 @@ class listText: public guiObject
       oneTabButton** listButtons; /**< Buttons of the List*/
       string selectedText;        /**< Text selected */
       int maxButtons;             /**< Max number of buttons */
-      int x1,
-          y1,
-          x2,
-          y2;
 };
 
 #endif

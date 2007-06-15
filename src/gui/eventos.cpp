@@ -74,16 +74,12 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if(ljan->getMenu())
     {
        objAtivo = (guiObject*) ljan->getMenu();
-       menu* men = (menu*)objAtivo;
-       men->itemAtual = 1;
        foco = FOCO_MENU;
     }
     else /* Verify Window Super Menu */
     if(ljan->janelaAtiva->objects->getMenu())
     {
        objAtivo = (guiObject*) ljan->janelaAtiva->objects->getMenu();
-       menu* men = (menu*)objAtivo;
-       men->itemAtual = 1;
        foco = FOCO_MENU;
     }
 
@@ -270,8 +266,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                  chamador = bot;
                  objAtivo = (guiObject*) bot->men;
                  menu* men = (menu*)objAtivo;
-                 men->Coordenada(bot->getX1(),bot->getY2()+1);
-                 men->itemAtual = 1;
+                 men->setPosition(bot->getX1(),bot->getY2()+1);
                  if (!bot->getText().compare("_"))
                  {
                     foco = FOCO_MENUJANELA;
@@ -367,10 +362,10 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
        int pronto;
        menu* men = (menu*)objAtivo;
       
-       int res = men->Rodar(x,y,Mbotao,tecla,
-                            ljan->janelaAtiva->cara,&pronto,
-                            ljan->janelaAtiva->x1,
-                            ljan->janelaAtiva->y1);
+       int res = men->run(x,y,Mbotao,tecla,
+                          ljan->janelaAtiva->cara,&pronto,
+                          ljan->janelaAtiva->x1,
+                          ljan->janelaAtiva->y1);
 
        *eventInfo = MENUMODIFICADO;
 
@@ -387,12 +382,6 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
        }
        else if((res) && (pronto)) 
        {
-          if(men->procSelecionado)
-          {
-            men->procSelecionado(ljan->janelaAtiva,
-                                 chamador,men->Item(res),
-                                 NULL);
-          }
           ljan->janelaAtiva->Desenhar(x,y);
           *eventInfo = MENUSELECIONADO;
           foco = FOCO_JOGO;

@@ -232,7 +232,7 @@ guiObject* Tlista::addMenu()
    {
       removeMenu();
    }
-   intMenu = (guiObject*)new menu();
+   intMenu = (guiObject*)new menu(0,0);
    return(intMenu);
 }
 

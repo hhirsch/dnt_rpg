@@ -5,64 +5,94 @@
 
 #include "menu.h"
 
+/*********************************************************
+ *                       Destructor                      *
+ *********************************************************/
 menu::~menu()
 {
 }
 
-/* Insere um novo botao na lista */
-void menu::InserirMenuItem(string text, int dispon)
+/*********************************************************
+ *                      Constructor                      *
+ *********************************************************/
+menu::menu(int xa, int ya): Tlista()
 {
-   menuItem* novo;
-   novo = new menuItem;
-   novo->texto = text;
-   novo->disponivel = dispon;
-   if(text.length() > maxCarac)
-      maxCarac = text.length();
+   x = xa;
+   y = ya;
+   actualItem = 1;
+   maxCharac = 0;
+   pressed = false;
+}
+
+/*********************************************************
+ *                      insertItem                       *
+ *********************************************************/
+void menu::insertItem(string text, bool avaible)
+{
+   guiObject* novo;
+   novo = new guiObject;
+   novo->setText(text);
+   novo->setAvaible(avaible);
+   if(text.length() > maxCharac)
+   {
+      maxCharac = text.length();
+   }
    novo->type = GUI_MENU_ITEM;
    InserirObj(novo);
 } 
 
-menuItem* menu::Item(int i)
+/*********************************************************
+ *                        getItem                        *
+ *********************************************************/
+guiObject* menu::getItem(int i)
 {
-   menuItem* it= (menuItem*) first->next;
+   guiObject* it= (guiObject*) first->next;
    if(i<=total)
    {
       int aux;
       for(aux=1;aux<i;aux++)
-         it = (menuItem*) it->next;
+         it = (guiObject*) it->next;
       return(it);  
    }
    return(NULL);
 }
 
-
-/* Verifica se o item esta disponivel */
-int menu::ItemDisponivel(int item)
+/*********************************************************
+ *                      Constructor                      *
+ *********************************************************/
+bool menu::itemAvaible(int item)
 {
-   menuItem* it = Item(item);
-   if(!it) return(0);
-   return(it->disponivel);
-
+   guiObject* it = getItem(item);
+   if(!it)
+   {
+      return(0);
+   }
+   return(it->isAvaible());
 }
 
-
-void menu::Coordenada(int xa, int ya)
+/*********************************************************
+ *                      setCoordinate                    *
+ *********************************************************/
+void menu::setPosition(int xa, int ya)
 {
   x = xa;
   y = ya;
 }
 
-
-void menu::Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen)
+/*********************************************************
+ *                          draw                         *
+ *********************************************************/
+void menu::draw(int pos, SDL_Surface *screen)
 {
    selFonte(FFARSO,ESQUERDA,1);
-   /* Inicia coordenadas */
-   int x1 = Xjan + x;
-   int x2 = x1 + (maxCarac)*(fonte_incCP()+1)+4; 
-   int y1 = Yjan + y;
-   int y2 = (total*11) + y1  + 5; /* bizarrice da versao do DOS ehhehe */
+
+   /* Define Coordinates */
+   int x1 = x;
+   int x2 = x1 + (maxCharac)*(fonte_incCP()+1)+4; 
+   int y1 = y;
+   int y2 = (total*11) + y1  + 5; /* bizarre thing from DOS version */
    
-   /* Verifica extremos */
+   /* Verify Sides */
    if (x2 > screen->w-1)
    {
       x1 = (screen->w-1) - (x2 - x1);
@@ -74,72 +104,93 @@ void menu::Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen)
       y2 = screen->h-1;
    }
 
-   /* Desenha o menu */
-   color_Set(Cores.colorMenu.R,Cores.colorMenu.G,Cores.colorMenu.B);
+   /* Draw the Menu */
+   color_Set(Colors.colorMenu.R,Colors.colorMenu.G,Colors.colorMenu.B);
    rectangle_Fill(screen,x1+1,y1+1,x2-1,y2-1);
-   color_Set(Cores.colorCont[2].R,Cores.colorCont[2].G,Cores.colorCont[2].B);
-   rectangle_Oval(screen,x1,y1,x2,y2,Cores.colorCont[1].R,Cores.colorCont[1].G,
-                  Cores.colorCont[1].B);
+   color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,Colors.colorCont[2].B);
+   rectangle_Oval(screen,x1,y1,x2,y2,Colors.colorCont[1].R,Colors.colorCont[1].G,
+                  Colors.colorCont[1].B);
    
       /*itens*/  
    int xa = x1+4;
    int ya = y1+3;
    int k;
-   menuItem* item = (menuItem*) first->next;
+   guiObject* item = (guiObject*) first->next;
    for (k=0;k<total;k++)
    {
-      color_Set(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
-      if (item->texto.compare("-"))
+      color_Set(Colors.colorCont[1].R,
+                Colors.colorCont[1].G,
+                Colors.colorCont[1].B);
+      if (item->getText().compare("-"))
       {
-          if (item->disponivel) escxy(screen,x1+4,ya-3,item->texto.c_str());
+          if (item->isAvaible()) 
+          {
+            escxy(screen,x1+4,ya-3,item->getText().c_str());
+          }
           else
           {
-              color_Set(Cores.colorCont[2].R,Cores.colorCont[2].G,
-                          Cores.colorCont[2].B);
-              escxy(screen,x1+5,ya-2,item->texto.c_str());
-              color_Set(Cores.colorCont[1].R,Cores.colorCont[1].G,
-                          Cores.colorCont[1].B);
-              escxy(screen,x1+4,ya-3,item->texto.c_str());
+              color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,
+                          Colors.colorCont[2].B);
+              escxy(screen,x1+5,ya-2,item->getText().c_str());
+              color_Set(Colors.colorCont[1].R,Colors.colorCont[1].G,
+                          Colors.colorCont[1].B);
+              escxy(screen,x1+4,ya-3,item->getText().c_str());
           }
       } 
       else 
       {
-        color_Set(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
-        rectangle_2Colors(screen,xa-2,ya+6,x2-2,ya+7,Cores.colorCont[0].R,
-                         Cores.colorCont[0].G,Cores.colorCont[0].B);
+        color_Set(Colors.colorCont[1].R,Colors.colorCont[1].G,
+                  Colors.colorCont[1].B);
+        rectangle_2Colors(screen,xa-2,ya+6,x2-2,ya+7,Colors.colorCont[0].R,
+                         Colors.colorCont[0].G,Colors.colorCont[0].B);
       }
       ya += 11;
-      item = (menuItem*)item->next;
+      item = (guiObject*)item->next;
    }
   
-//   SDL_Flip(screen);
-//   SDL_GL_SwapBuffers();
-//   AtualizaTela2D(screen);
+}
+
+/*********************************************************
+ *                     getActualItem                     *
+ *********************************************************/
+int menu::getActualItem()
+{
+   return(actualItem);
+}
+
+/*********************************************************
+ *                      getMaxCharac                     *
+ *********************************************************/
+int menu::getMaxCharac()
+{
+   return(maxCharac);
 }
 
 
-int menu::Rodar(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
-                SDL_Surface *screen, int *pronto, int Xjan, int Yjan)
+/*********************************************************
+ *                          run                          *
+ *********************************************************/
+int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
+              SDL_Surface *screen, int *pronto, int Xjan, int Yjan)
 {
    selFonte(FFARSO,ESQUERDA,1);
 
-   /* Desenha menu */
-   Desenhar(0,0,0,screen);
+   /* Draws */
+   draw(0,screen);
    int altura = (total*11)+6;
-   int largura = (maxCarac)*(fonte_incCP()+1)+5;
+   int largura = (maxCharac)*(fonte_incCP()+1)+5;
 
-   /* Executa */
+   /* Runs */
    *pronto = 0;
    int tecla = 0;
-   //int xa,ya;
 
-      /* Verifica Movimentacao do Mouse */
+      /* Verify Mouse Moviments */
       if(mouse_NaArea(x+Xjan, y+Yjan, x+largura+Xjan,
                       y+altura+Yjan-3, mouseX, mouseY)) 
       {
-          itemAtual = ((mouseY - (y+Yjan)-4) / 11) + 1;
+          actualItem = ((mouseY - (y+Yjan)-4) / 11) + 1;
       }
-      /* Verifica Botao do Mouse Pressionado */
+      /* Verify Mouse Button */
       if(Mbotao & SDL_BUTTON(1))
       {
          pressed = true; 
@@ -151,14 +202,14 @@ int menu::Rodar(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
          pressed = false;
       }
 
-      /* Faz a verificacao do Teclado */
-      if(teclado[SDLK_UP] && (itemAtual-1 > 0))
+      /* Verify Keyboard */
+      if(teclado[SDLK_UP] && (actualItem-1 > 0))
       {
-         itemAtual --;
+         actualItem --;
       }
-      else if(teclado[SDLK_DOWN] && (itemAtual+1 <= total))
+      else if(teclado[SDLK_DOWN] && (actualItem+1 <= total))
       {
-         itemAtual++;
+         actualItem++;
       }
       else if( (teclado[SDLK_RETURN] || teclado[SDLK_KP_ENTER]) )
       {
@@ -171,25 +222,29 @@ int menu::Rodar(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
          tecla = 0;
       }
 
-      color_Set(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
-      rectangle_Oval(screen,x+2,(itemAtual-1)*11+y+4,
-                     x+largura-2,(itemAtual)*11+y+4,
-                     Cores.colorCont[2].R,Cores.colorCont[2].G,
-                     Cores.colorCont[2].B);
+      color_Set(Colors.colorCont[1].R,
+                Colors.colorCont[1].G,
+                Colors.colorCont[1].B);
+      rectangle_Oval(screen,x+2,(actualItem-1)*11+y+4,
+                     x+largura-2,(actualItem)*11+y+4,
+                     Colors.colorCont[2].R,Colors.colorCont[2].G,
+                     Colors.colorCont[2].B);
 
-   /* Calcula o Retorno */
+   /* Define the Return */
    if(mouse_NaArea(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3,
                    mouseX,mouseY) && (!tecla) &&(*pronto))
    {
-      //itemAtual = ((mouseY - y-4) / 11) + 1;
-      if (!ItemDisponivel(itemAtual)) itemAtual = 0;
+      if (!itemAvaible(actualItem))
+      {
+         actualItem = 0;
+      }
    }
    else if ( (!tecla) && (*pronto))
-      itemAtual = 0;
-   //else
-   //   item = itemAtual;
+   {
+      actualItem = 0;
+   }
 
-   return(itemAtual);
+   return(actualItem);
 }
 
 

@@ -68,12 +68,12 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
    novo->objects = new Tlista;
    button* tmp;
    tmp = novo->objects->insertButton(3,3,13,12,"_",0);
-   tmp->men = new menu();
+   tmp->men = new menu(0,0);
    menu* men = (menu*) tmp->men;
-   men->InserirMenuItem("Fechar",1);
-   men->InserirMenuItem("-",0);
-   men->InserirMenuItem("Maximizar",0);
-   men->InserirMenuItem("Mover",0); 
+   men->insertItem("Fechar",1);
+   men->insertItem("-",0);
+   men->insertItem("Maximizar",0);
+   men->insertItem("Mover",0); 
    novo->objects->insertButton(14,3,24,12,"*",0);
    novo->objects->insertButton(25,3,35,12,"\36",0);
    novo->type = GUI_WINDOW;

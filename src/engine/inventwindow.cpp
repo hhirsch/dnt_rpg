@@ -108,16 +108,16 @@ void inventWindow::openMenu(int x, int y)
 {
    int xSize;
    objectMenu = (menu*) window->objects->addMenu();
-   objectMenu->InserirMenuItem(language.INVENTW_DROP,0);
-   objectMenu->InserirMenuItem("-",0);
-   objectMenu->InserirMenuItem(language.INVENTW_SELL,0);
-   objectMenu->InserirMenuItem(language.INVENTW_USE,0);
-   objectMenu->InserirMenuItem("-",0);
-   objectMenu->InserirMenuItem(language.INVENTW_GET,1);
+   objectMenu->insertItem(language.INVENTW_DROP,0);
+   objectMenu->insertItem("-",0);
+   objectMenu->insertItem(language.INVENTW_SELL,0);
+   objectMenu->insertItem(language.INVENTW_USE,0);
+   objectMenu->insertItem("-",0);
+   objectMenu->insertItem(language.INVENTW_GET,1);
 
    selFonte(FFARSO,ESQUERDA,1);
 
-   xSize = objectMenu->maxCarac*(fonte_incCP()+1)+6;
+   xSize = objectMenu->getMaxCharac()*(fonte_incCP()+1)+6;
 
    /* Make Sure all Menu is in Window */
    if(y+70 >= window->y2)
@@ -130,7 +130,7 @@ void inventWindow::openMenu(int x, int y)
       x = window->x2 - xSize;
    }
    
-   objectMenu->Coordenada(x,y);
+   objectMenu->setPosition(x,y);
    
    state = INVENTORY_STATE_MENU;
 }
@@ -369,7 +369,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
          if(objectMenu)
          {
             state = INVENTORY_STATE_NONE;
-            switch(objectMenu->itemAtual)
+            switch(objectMenu->getActualItem())
             {
                case 1: /* Get */
                   if(objWhere == INVENTORY_INVENTORY)

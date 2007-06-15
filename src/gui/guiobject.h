@@ -71,6 +71,14 @@ class guiObject
          x1 = xa; x2 = xb; y1 = ya; y2 = yb;
       };
 
+      /*! Verify if the object is avaible
+       * return true if is avaible */
+      bool isAvaible() {return(avaible);};
+
+      /*! Set if the item is avaible or not
+       * \param av -> true if is avaible, false otherwise */
+      void setAvaible(bool av){avaible = av;};
+
    protected:
       int x1,              /**< Coordinate on Window */
           y1,              /**< Coordinate on Window */

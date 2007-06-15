@@ -5,8 +5,6 @@
 #ifndef _menu_h
 #define _menu_h
 
-/* Onde sao definidos os menus, os itens de menus, submenus, etc */
-
 #include <stdlib.h>
 #include <string>
 using namespace std;
@@ -18,56 +16,70 @@ using namespace std;
 #include "guiobject.h"
 #include "lista.h"
 
-class menuItem: public guiObject
-{
-   public:
-      string texto;        /* Texto do item */
-      int disponivel;     /* !=0 se disponivel */
-};             /* Estrutura de um item do Menu */
-
+/*! The Menu GUI class */
 class menu: public Tlista
 {
    public:
-      int x,y;              /* Coordenada do menu */   
-      unsigned int maxCarac;/* tam da Maior string  presente */
-      void (*procSelecionado)(void* jan, void* botao,menuItem* item,
-                             SDL_Surface* screen);
-      farso_colors Cores;
-      int itemAtual;
-   
-      menu(): Tlista()
-           {itemAtual = 1;procSelecionado=NULL;maxCarac=0;
-            pressed = false;};
+      /*! Constructor
+       * \param xa -> x coordinate
+       * \param ya -> y coordinate */
+      menu(int xa, int ya);
+
+      /*! Destructor */
       ~menu();
 
-      /* Insere um novo menuItem no menu
-       * texto      -> texto do menuItem
-       * disponivel ->  != 0 se o item estiver disponivel
-       * men        -> menu no qual sera inserido o item */
-      void InserirMenuItem(string text, int dispon);
+      /*! Insert a Item on the Menu
+       * \param text -> item Text
+       * \param avaible -> if the item is avaible or not */
+      void insertItem(string text, bool avaible);
 
-      /* Redefine a coordenada de um menu - Util p/ menus relativos ao mouse
-       * x,y -> coordenada */
-      void Coordenada(int xa, int ya);
+      /*! Set the Position of the Menu
+       * \param xa -> x coordinate
+       * \param ya -> y coordinate */
+      void setPosition(int xa, int ya);
 
-      /* Faz a execucao do menu, retorna o valor do item selecionado ou -1;
-       * men    -> menu a ser executado 
-       * screen -> superficie na qual esta o menu*/
-      int Rodar(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
-                SDL_Surface *screen, int* pronto, int Xjan, int Yjan);
+      /*! Do the execution of the menu. Return selected item or -1,
+       * \param mouseX -> X mouse coordinate
+       * \param mouseY -> Y mouse coordinate
+       * \param mbotao -> mouse button state
+       * \param teclado -> keyboard state
+       * \param screen -> superface where the menu is
+       * \param pronto -> it will be 1 when the execution ends 
+       * \param Xjan -> x coordinate of the window
+       * \param Yjan -> y coordinate of the window */
+      int run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
+              SDL_Surface *screen, int* pronto, int Xjan, int Yjan);
 
-      /*Retorna o i-esimo item*/
-      menuItem* Item(int i);
+      /*! Get a item
+       * \param i -> position of the item on menu
+       * \return pointer to desired item, or NULL, if not exists. */
+      guiObject* getItem(int i);
+
+      /*! Get the actual Item */
+      int getActualItem();
+
+      /*! Get the actual max character */
+      int getMaxCharac();
 
    protected:
-      /* Verifica se o item esta disponivel */
-      int ItemDisponivel(int item);
-      void Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen);
+      /*! Verify if the item is avaible
+       * \param item -> item number on the menu
+       * \return -> true if is avaible, false otherwise */
+      bool itemAvaible(int item);
 
-      bool pressed;   /**< Control to take the release button press */
+      /*! Draw the Menu
+       * \param pos -> menu position selected 
+       * \param screen -> surface to draw */
+      void draw(int pos, SDL_Surface *screen);
 
-};                 /* O menu em si */
+      int x,                   /**< Menu X Coordinate */
+          y;                   /**< Menu Y Coordinate */   
+      unsigned int maxCharac;  /**< Size of the bigger string on menu */
+      farso_colors Colors;     /**< Colors */
+      int actualItem;          /**< Actual Selected item */
+      bool pressed;            /**< Control to take the release button press */
 
+};
 
 #endif
 
