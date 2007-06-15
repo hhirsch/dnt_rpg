@@ -55,9 +55,7 @@ void tabButton::draw(int mouseX, int mouseY,
    fig->draw(screen);
    for(i=0;i<numButtons;i++)
    {
-      if(mouse_NaArea(Xjan + x1 + Buttons[i].x1, Yjan + y1 + Buttons[i].y1,
-                      Xjan + x1 + Buttons[i].x2, Yjan + y1 + Buttons[i].y2,
-                      mouseX, mouseY))
+      if(isMouseIn(mouseX - Xjan, mouseY - Yjan))
       {
           color_Set(cor.colorCont[0].R,cor.colorCont[0].G,cor.colorCont[0].B);
           rectangle_2Colors(screen,x1+Buttons[i].x1,y1+Buttons[i].y1,
@@ -86,9 +84,7 @@ guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
    draw(mouseX, mouseY, Xjan, Yjan, screen);
    for(i=0;i<numButtons;i++)
    {
-      if(mouse_NaArea(Xjan + x1 + Buttons[i].x1, Yjan + y1 + Buttons[i].y1,
-                      Xjan + x1 + Buttons[i].x2, Yjan + y1 + Buttons[i].y2,
-                      mouseX, mouseY))
+      if(isMouseIn(mouseX - Xjan, mouseY - Yjan))
       {
          if(Mbuttons & SDL_BUTTON(1))
          {

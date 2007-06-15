@@ -185,7 +185,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
    int tecla = 0;
 
       /* Verify Mouse Moviments */
-      if(mouse_NaArea(x+Xjan, y+Yjan, x+largura+Xjan,
+      if(isMouseIn(x+Xjan, y+Yjan, x+largura+Xjan,
                       y+altura+Yjan-3, mouseX, mouseY)) 
       {
           actualItem = ((mouseY - (y+Yjan)-4) / 11) + 1;
@@ -231,7 +231,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
                      Colors.colorCont[2].B);
 
    /* Define the Return */
-   if(mouse_NaArea(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3,
+   if(isMouseIn(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3,
                    mouseX,mouseY) && (!tecla) &&(*pronto))
    {
       if (!itemAvaible(actualItem))

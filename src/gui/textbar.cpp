@@ -535,7 +535,7 @@ int textBar::write(int mouseX, int mouseY, SDL_Surface *screen,
 
    if(Mbotao & SDL_BUTTON(1))
    {
-       if(mouse_NaArea( x1, y1, x2, y2,mouseX,mouseY))
+       if(isMouseIn(mouseX,mouseY))
        {
            /* Calculate the New Position */
            pos=(mouseX-(x1+2)) / (fonte_incCP()+1) + init;

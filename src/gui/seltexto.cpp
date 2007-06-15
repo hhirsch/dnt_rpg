@@ -131,7 +131,7 @@ int selTexto::threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
     /* Descolore o ultimo selectedItem */
     writeSelected(-1, screen);
 
-    if(!mouse_NaArea(x1,y1,x2,y2,xa,ya))
+    if(!isMouseIn(xa,ya))
     {
        return(-1);
     }
