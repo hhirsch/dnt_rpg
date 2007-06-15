@@ -196,8 +196,8 @@ class guiIO
       void openParticleWindow();
       /*********************Message*Window*******************************/
       janela* messageWindow;              /**< Message Window */
-      quadroTexto* messageText;           /**< Message Text */
-      void openMessageWindow();
+      textBox* messageText;               /**< Message Text */
+      void openMessageWindow(); 
       /**************************Fog*Window******************************/
       janela* fogWindow;                  /**< Fog Window */
       cxSel* fogEnabled;                  /**< Fog enabled CxSel */

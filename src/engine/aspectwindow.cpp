@@ -29,18 +29,18 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    /* Next Image Button */
    buttonNextImage = window->objects->insertButton(55,90,69,108,">",0);
    /* Contorn to the previous and next buttons */
-   window->objects->InserirQuadroTexto(20,90,54,108,1,"");
+   window->objects->insertTextBox(20,90,54,108,1,"");
 
    /* Name Text */
-   window->objects->InserirQuadroTexto(72,25,112,39,1,"Name:");
+   window->objects->insertTextBox(72,25,112,39,1,"Name:");
    textName = window->objects->insertTextBar(113,25,251,39,"Bruno",0);
 
    /* Age Text */
-   window->objects->InserirQuadroTexto(72,40,112,54,1,"Age:");
+   window->objects->insertTextBox(72,40,112,54,1,"Age:");
    textAge = window->objects->insertTextBar(113,40,143,54,"20",0);
 
    /* Sex Selectors */
-   window->objects->InserirQuadroTexto(72,55,112,69,1,"Sex:");
+   window->objects->insertTextBox(72,55,112,69,1,"Sex:");
    cxSelSexF = window->objects->insertCxSel(113, 57, false);
    window->objects->insertPicture(125,55,0,0,
                                   "../data/texturas/aspectw/sex_f.png");

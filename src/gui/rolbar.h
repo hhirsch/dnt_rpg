@@ -14,7 +14,7 @@ using namespace std;
 #include "draw.h"
 #include "mouse.h"
 #include "button.h"
-#include "quadtexto.h"
+#include "textbox.h"
 
 /*! Rolling Text Bar Definition */
 class rolBar: public guiObject
@@ -48,17 +48,13 @@ class rolBar: public guiObject
       int getActualInit(){return(actualInit);};
 
    private:
-      SDL_Surface* wSurface;  /**< Window Surface */
-      int x1,                 /**< X1 Coordinate */
-          x2,                 /**< X2 Coordinate */
-          y1,                 /**< Y1 Coordinate */
-          y2;                 /**< Y2 Coordinate */
+      SDL_Surface* wSurface;   /**< Window Surface */
       button* up;              /**< Up Button */
       button* down;            /**< Down Button */
       button* actualPressed;   /**< Actual Pressed Button */
-      quadroTexto* text;      /**< Text of The Scroll */
-      quadroTexto* contorn;   /**< Contorn of the Scroll */
-      quadroTexto* position;  /**< Contorn Text Position */
+      textBox* scrollText;     /**< Text of The Scroll */
+      textBox* contorn;        /**< Contorn of the Scroll */
+      textBox* position;       /**< Contorn Text Position */
 
       string fullText;        /**< Full Text of the rolBar */
       int    actualInit,      /**< Actual Initial Line of the Text */

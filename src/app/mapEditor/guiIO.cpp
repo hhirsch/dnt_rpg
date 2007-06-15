@@ -128,7 +128,7 @@ void guiIO::openNavWindow()
 void guiIO::openMessageWindow()
 {
    messageWindow = gui->insertWindow(113,599-36,799-68,599,"Messages",1,1);
-   messageText = messageWindow->objects->InserirQuadroTexto(7,16,610,31,0,
+   messageText = messageWindow->objects->insertTextBox(7,16,610,31,0,
                  "Welcome to DccNiTghtmare Map Editor!");
    messageWindow->fechavel = 0;
    messageWindow->ptrExterno = &messageWindow;
@@ -243,28 +243,28 @@ void guiIO::openFogWindow()
  {
    char buf[10];
    fogWindow = gui->insertWindow(185,100,288,255,"Fog",1,1);
-   fogWindow->objects->InserirQuadroTexto(5,17,45,30,0,"Red");
+   fogWindow->objects->insertTextBox(5,17,45,30,0,"Red");
    sprintf(buf,"%.4f",actualFog->color[0]);
    fogColor[0] = fogWindow->objects->insertTextBar(48,17,98,30,buf,1);
-   fogWindow->objects->InserirQuadroTexto(5,31,45,44,0,"Green");
+   fogWindow->objects->insertTextBox(5,31,45,44,0,"Green");
    sprintf(buf,"%.4f",actualFog->color[1]);
    fogColor[1] = fogWindow->objects->insertTextBar(48,31,98,44,buf,1);
-   fogWindow->objects->InserirQuadroTexto(5,45,45,58,0,"Blue");
+   fogWindow->objects->insertTextBox(5,45,45,58,0,"Blue");
    sprintf(buf,"%.4f",actualFog->color[2]);
    fogColor[2] = fogWindow->objects->insertTextBar(48,45,98,58,buf,1);
-   fogWindow->objects->InserirQuadroTexto(5,59,45,72,0,"Alpha");
+   fogWindow->objects->insertTextBox(5,59,45,72,0,"Alpha");
    sprintf(buf,"%.4f",actualFog->color[3]);
    fogColor[3] = fogWindow->objects->insertTextBar(48,59,98,72,buf,1);
-   fogWindow->objects->InserirQuadroTexto(5,73,45,86,0,"Dense");
+   fogWindow->objects->insertTextBox(5,73,45,86,0,"Dense");
    sprintf(buf,"%.4f",actualFog->density);
    fogDensity = fogWindow->objects->insertTextBar(48,73,98,86,buf,1);
-   fogWindow->objects->InserirQuadroTexto(5,87,45,100,0,"Start");
+   fogWindow->objects->insertTextBox(5,87,45,100,0,"Start");
    sprintf(buf,"%.4f",actualFog->start);
    fogStart = fogWindow->objects->insertTextBar(48,87,98,100,buf,1);
-   fogWindow->objects->InserirQuadroTexto(5,101,45,114,0,"End");
+   fogWindow->objects->insertTextBox(5,101,45,114,0,"End");
    sprintf(buf,"%.4f",actualFog->end);
    fogEnd = fogWindow->objects->insertTextBar(48,101,98,114,buf,1);
-   fogWindow->objects->InserirQuadroTexto(5,115,45,128,0,"Enable");
+   fogWindow->objects->insertTextBox(5,115,45,128,0,"Enable");
    fogEnabled = fogWindow->objects->insertCxSel(48,117,actualFog->enabled);
 
    fogApplyButton = fogWindow->objects->insertButton(24,130,79,148,"Apply",1);
@@ -891,7 +891,7 @@ string guiIO::getObjectFileName()
  ****************************************************************/
 void guiIO::showMessage(string msg)
 {
-   messageText->texto = msg;
+   messageText->setText(msg);
    messageWindow->Desenhar(0,0);
 }
 

@@ -172,8 +172,8 @@ void janela::Desenhar(int mouseX, int mouseY)
               break;
          }
          case GUI_TEXT_BOX:{
-              quadroTexto *quad = (quadroTexto*) obj;
-              quad->Desenhar(0,0,0,cara);
+              textBox *quad = (textBox*) obj;
+              quad->draw(cara);
               break;
          }
          case GUI_TAB_BUTTON:{

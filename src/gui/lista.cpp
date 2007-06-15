@@ -75,7 +75,7 @@ void Tlista::Retirar(guiObject *obj)
       }
       case GUI_TEXT_BOX:
       {
-         quadroTexto* q = (quadroTexto*) obj;
+         textBox* q = (textBox*) obj;
          delete(q);
          break;
       }
@@ -170,21 +170,13 @@ textBar* Tlista::insertTextBar(int xa,int ya,int xb,int yb, string text,int crip
 } 
  
 /* Insere um novo quadro de Texto na lista */
-quadroTexto* Tlista::InserirQuadroTexto(int xa,int ya,int xb,int yb,
-                                        int moldura,const char* text)
+textBox* Tlista::insertTextBox(int xa,int ya,int xb,int yb,
+                                   int frameType, string text)
 {
-   quadroTexto* novo;
-   novo = new quadroTexto;
-   novo->x1 = xa;
-   novo->x2 = xb;
-   novo->y1 = ya;
-   novo->y2 = yb;
-   novo->moldura = moldura;
-   novo->texto = text; 
-   novo->type = GUI_TEXT_BOX;
-   novo->fonte = FHELVETICA;
-   novo->tamFonte = 1;
-   novo->aliFonte = ESQUERDA;
+   textBox* novo;
+   novo = new textBox(xa,ya,xb,yb,frameType);
+   novo->setText(text);
+   novo->setFont(FHELVETICA, 1, ESQUERDA);
    InserirObj(novo);
    return(novo);
 } 

@@ -93,7 +93,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    janela* getWindow;
    button* opt1Button;
    button* opt2Button;
-   quadroTexto* quadText = NULL;
+   textBox* quadText = NULL;
    bool quit = false;
    Uint8 mButton;
    Uint8* keys;
@@ -113,7 +113,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    opt2Button = getWindow->objects->insertButton(med+10,37,med+80,55,
                                                  opt2.c_str(),1);                  
                                                  
-   quadText = getWindow->objects->InserirQuadroTexto(10,17,sizeX-10,33,0,
+   quadText = getWindow->objects->insertTextBox(10,17,sizeX-10,33,0,
                                                       message.c_str());
    getWindow->movivel = 0;
    getWindow->ptrExterno = &getWindow;
@@ -183,7 +183,7 @@ void showMessage(string title, string message,
    interface* gui = new interface(NULL);
    janela* getWindow;
    button* okButton;
-   quadroTexto* quadText = NULL;
+   textBox* quadText = NULL;
    bool quit = false;
    Uint8 mButton;
    Uint8* keys;
@@ -194,7 +194,7 @@ void showMessage(string title, string message,
    getWindow = gui->insertWindow(300,200,300+sizeX,262,
                                  title.c_str(),1,1);
    okButton = getWindow->objects->insertButton(med-28,37,med+28,55,"Ok",1);
-   quadText = getWindow->objects->InserirQuadroTexto(10,17,sizeX-10,33,0,
+   quadText = getWindow->objects->insertTextBox(10,17,sizeX-10,33,0,
                                                       message.c_str());
    getWindow->movivel = 0;
    getWindow->ptrExterno = &getWindow;

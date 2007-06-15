@@ -38,10 +38,9 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    /* Name and Selectors */
    buttonPrevious = window->objects->insertButton(5,19,19,37,"<",0);
    buttonNext = window->objects->insertButton(248,19,262,37,">",0);
-   textName = window->objects->InserirQuadroTexto(20,19,247,37,1, 
+   textName = window->objects->insertTextBox(20,19,247,37,1, 
                                                   actualAlign->name.c_str());
-   textName->fonte = FMINI;
-   textName->tamFonte = 1;
+   textName->setFont(FMINI,1,ESQUERDA);
 
    /* Confirm Button */
    buttonConfirm = window->objects->insertButton(193,225,263,244, 
@@ -75,7 +74,7 @@ int alignWindow::treat(guiObject* object, int eventInfo, interface* inter)
          {
             actualAlign = actualAlign->previous;
          }
-         textName->texto = actualAlign->name;
+         textName->setText(actualAlign->name);
          textDesc->setText(actualAlign->description);
          alignImage->set(actualAlign->image);
          window->Desenhar(0,0);

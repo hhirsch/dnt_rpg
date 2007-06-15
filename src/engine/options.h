@@ -46,11 +46,11 @@ class options
 
    private:
       string       fileName;       /**< options fileName to be used */
-      quadroTexto* txtMusicVolume; /**< Music Volume Text on Window*/
-      quadroTexto* txtSndfxVolume; /**< Sound Effects Volume Text on Window*/
-      quadroTexto* txtLanguage;    /**< Language Text on Window */
-      quadroTexto* txtCamera;      /**< Camera Mode Text on Window */
-      quadroTexto* txtReflexion;   /**< Reflexion Type Text on Window */
+      textBox* txtMusicVolume;     /**< Music Volume Text on Window*/
+      textBox* txtSndfxVolume;     /**< Sound Effects Volume Text on Window*/
+      textBox* txtLanguage;        /**< Language Text on Window */
+      textBox* txtCamera;          /**< Camera Mode Text on Window */
+      textBox* txtReflexion;       /**< Reflexion Type Text on Window */
       int          prevCamera;     /**< Previous used Camera Mode */
       int          prevMusicVolume;/**< Previous used Music Volume */
       int          prevSndfxVolume;/**< Previous Used Sound Effects Volume */

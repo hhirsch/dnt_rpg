@@ -1239,7 +1239,7 @@ void engine::hourToTxt()
    }
    if(shortCutsWindow)
    {
-      hourTxt->texto = htmp;
+      hourTxt->setText(htmp);
    }
 }
 
@@ -1296,7 +1296,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                 cursors->setActual(CURSOR_GET);
                 if(shortCutsWindow)
                 {
-                   ObjTxt->texto = quaux->objects[obj]->getName(); 
+                   ObjTxt->setText(quaux->objects[obj]->getName()); 
                    shortCutsWindow->Desenhar(mouseX,mouseY);
                 }
                 if( (Mbutton & SDL_BUTTON(1)) && 
@@ -1371,7 +1371,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             cursors->setActual(CURSOR_DOOR);
             if(shortCutsWindow)
             {
-               ObjTxt->texto = language.OBJ_DOOR.c_str(); 
+               ObjTxt->setText(language.OBJ_DOOR.c_str()); 
                shortCutsWindow->Desenhar(mouseX, mouseY);
             }
             if( (Mbutton & SDL_BUTTON(1)) && 
@@ -1420,7 +1420,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             cursors->setActual(CURSOR_INVENTORY);
             if(shortCutsWindow)
             {
-               ObjTxt->texto = pers->nome; 
+               ObjTxt->setText(pers->nome); 
                shortCutsWindow->Desenhar(mouseX, mouseY);
             }
 
@@ -1478,7 +1478,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   }
                   if(shortCutsWindow)
                   {
-                     ObjTxt->texto = pers->nome; 
+                     ObjTxt->setText(pers->nome); 
                      shortCutsWindow->Desenhar(mouseX, mouseY);
                   }
                   pronto = 1;
@@ -1492,7 +1492,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   cursors->setActual(CURSOR_ATTACK);
                   if(shortCutsWindow)
                   {
-                     ObjTxt->texto = pers->nome; 
+                     ObjTxt->setText(pers->nome); 
                      shortCutsWindow->Desenhar(mouseX, mouseY);
                   }
 
@@ -1557,7 +1557,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
          {
             if(shortCutsWindow)
             {
-               ObjTxt->texto = quaux->mapConection.mapName; 
+               ObjTxt->setText(quaux->mapConection.mapName); 
                shortCutsWindow->Desenhar(mouseX, mouseY);
             }
             curConection = &quaux->mapConection;
@@ -1581,7 +1581,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
 
       if( (shortCutsWindow) && (!pronto) )
       {
-         ObjTxt->texto = language.OBJ_NOTHING.c_str(); 
+         ObjTxt->setText(language.OBJ_NOTHING.c_str()); 
          shortCutsWindow->Desenhar(mouseX, mouseY);
       }
    }
@@ -2159,9 +2159,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          lastFPS = tempo;
          char texto[15];
          sprintf(texto,"FPS: %3.2f",actualFPS);
-         FPS->texto = texto;
+         FPS->setText(texto);
          sprintf(texto," Part: %d",particleSystem->numParticles());
-         FPS->texto += texto;
+         FPS->setText(texto);
       }
       
 #ifdef VIDEO_MODE
@@ -2800,15 +2800,12 @@ void engine::OpenShortcutsWindow()
 {
    shortCutsWindow = gui->insertWindow(0,472,511,599,
                                      language.WINDOW_SHORTCUTS.c_str(),1,1);
-   FPS = shortCutsWindow->objects->InserirQuadroTexto(8,20,150/*100*/,35,2,
+   FPS = shortCutsWindow->objects->insertTextBox(8,20,150/*100*/,35,2,
                                   language.WINDOW_SHORTCUTS_FPS.c_str());
    briefTxt = shortCutsWindow->objects->insertRolBar(8,36,249,100,
                                   language.WINDOW_SHORTCUTS_HELP.c_str(),
                                   shortCutsWindow->cara);
-   //briefTxt->fonte = FMINI;
-   /*ObjTxt->Cores.corCont[1].R = 0; ObjTxt->Cores.corCont[1].G = 25; 
-   ObjTxt->Cores.corCont[1].B = 255;*/
-   ObjTxt = shortCutsWindow->objects->InserirQuadroTexto(151,20,249,35,2,
+   ObjTxt = shortCutsWindow->objects->insertTextBox(151,20,249,35,2,
                                  language.OBJ_NOTHING.c_str());
 
    buttonSave = shortCutsWindow->objects->insertButton(8,102,76,120,
@@ -2816,10 +2813,9 @@ void engine::OpenShortcutsWindow()
    buttonMenu = shortCutsWindow->objects->insertButton(77,102,140,120,"Menu",0);
    buttonLoad = shortCutsWindow->objects->insertButton(141,102,209,120,
                                                language.INITIAL_LOAD.c_str(),0);
-   hourTxt = shortCutsWindow->objects->InserirQuadroTexto(210,102,249,120,2,
+   hourTxt = shortCutsWindow->objects->insertTextBox(210,102,249,120,2,
                                                           "00:00");
-   hourTxt->fonte = FMINI;
-   hourTxt->tamFonte = 1;
+   hourTxt->setFont(FMINI,1,ESQUERDA);
    hourToTxt();
 
    tabButton* tb;

@@ -220,7 +220,7 @@ void options::DisplayOptionsScreen(interface* interf)
 {
    char tmp[5];
    string saux;
-   quadroTexto* qt;
+   textBox* qt;
 
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
@@ -231,13 +231,13 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Music Things */
    sprintf(tmp,"%d",musicVolume);
    saux = tmp;
-   qt = window->objects->InserirQuadroTexto(8,27,145,44,0,
+   qt = window->objects->insertTextBox(8,27,145,44,0,
                                          language.OPTIONS_MUSIC_VOLUME.c_str());
-   qt->fonte = FMINI;
+   qt->setFont(FMINI,1,ESQUERDA);
    buttonMusDec = window->objects->insertButton(146,27,156,44,"<",0);
-   txtMusicVolume = window->objects->InserirQuadroTexto(157,27,197,44,1,
+   txtMusicVolume = window->objects->insertTextBox(157,27,197,44,1,
                                  saux.c_str());
-   txtMusicVolume->fonte = FMINI;
+   txtMusicVolume->setFont(FMINI,1,ESQUERDA);
    buttonMusSum = window->objects->insertButton(198,27,208,44,">",0);
    window->objects->insertPicture(212,27,40,112,
                                   "../data/texturas/options/music.png");
@@ -246,13 +246,13 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Sound Effects Things */
    sprintf(tmp,"%d",sndfxVolume);
    saux = tmp;
-   qt = window->objects->InserirQuadroTexto(8,52,145,69,0,
+   qt = window->objects->insertTextBox(8,52,145,69,0,
                                          language.OPTIONS_SNDFX_VOLUME.c_str());
-   qt->fonte = FMINI;
+   qt->setFont(FMINI,1,ESQUERDA);
    buttonSndDec = window->objects->insertButton(146,52,156,69,"<",0);
-   txtSndfxVolume = window->objects->InserirQuadroTexto(157,52,197,69,1,
+   txtSndfxVolume = window->objects->insertTextBox(157,52,197,69,1,
                                  saux.c_str());
-   txtSndfxVolume->fonte = FMINI;
+   txtSndfxVolume->setFont(FMINI,1,ESQUERDA);
    buttonSndSum = window->objects->insertButton(198,52,208,69,">",0);
    window->objects->insertPicture(212,52,40,112,
                                   "../data/texturas/options/sndfx.png");
@@ -261,13 +261,13 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Language Things */
    prevLanguage = langNumber;
    saux = languageName();
-   qt = window->objects->InserirQuadroTexto(8,88,145,105,0,
+   qt = window->objects->insertTextBox(8,88,145,105,0,
                                          language.OPTIONS_LANGUAGE.c_str());
-   qt->fonte = FMINI;
+   qt->setFont(FMINI,1,ESQUERDA);
    buttonLangDec = window->objects->insertButton(121,88,131,105,"<",0);
-   txtLanguage = window->objects->InserirQuadroTexto(132,88,197,105,1,
+   txtLanguage = window->objects->insertTextBox(132,88,197,105,1,
                                  saux.c_str());
-   txtLanguage->fonte = FMINI;
+   txtLanguage->setFont(FMINI,1,ESQUERDA);
    buttonLangSum = window->objects->insertButton(198,88,208,105,">",0);
    window->objects->insertPicture(212,88,40,112,
                                   "../data/texturas/options/language.png");
@@ -275,31 +275,31 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Camera Mode Things */
    prevCamera = cameraNumber;
    saux = cameraName();
-   qt = window->objects->InserirQuadroTexto(8,126,145,143,0,
+   qt = window->objects->insertTextBox(8,126,145,143,0,
                                             language.OPTIONS_CAMERA.c_str());
-   qt->fonte = FMINI;
+   qt->setFont(FMINI,1,ESQUERDA);
    buttonCamDec = window->objects->insertButton(121,126,131,143,"<",0);
-   txtCamera = window->objects->InserirQuadroTexto(132,126,197,143,1,
+   txtCamera = window->objects->insertTextBox(132,126,197,143,1,
                                  saux.c_str());
-   txtCamera->fonte = FMINI;
+   txtCamera->setFont(FMINI,1,ESQUERDA);
    buttonCamSum = window->objects->insertButton(198,126,208,143,">",0);
    window->objects->insertPicture(214,126,40,112,
                                   "../data/texturas/options/camera.png");
 
 
    /* Grass Enabled or Not */
-   qt = window->objects->InserirQuadroTexto(20,156,200,173,0,
+   qt = window->objects->insertTextBox(20,156,200,173,0,
                                          language.OPTIONS_GRASS.c_str());
-   qt->fonte = FMINI;
+   qt->setFont(FMINI,1,ESQUERDA);
    cxSelGrass = window->objects->insertCxSel(8,160, enableGrass);
    window->objects->insertPicture(214,156,40,112,
                                   "../data/texturas/options/grass.png");
 
 
    /* Particle System Enabled or Not */
-   qt = window->objects->InserirQuadroTexto(20,174,200,191,0,
+   qt = window->objects->insertTextBox(20,174,200,191,0,
                                          language.OPTIONS_PARTICLES.c_str());
-   qt->fonte = FMINI;
+   qt->setFont(FMINI,1,ESQUERDA);
    cxSelParticles = window->objects->insertCxSel(8,178, enableParticles);
    window->objects->insertPicture(214,174,40,112,
                                   "../data/texturas/options/particles.png");
@@ -307,13 +307,13 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Reflexions */
    prevReflexion = reflexionType;
    saux = reflexionName();
-   qt = window->objects->InserirQuadroTexto(8,203,145,220,0,
+   qt = window->objects->insertTextBox(8,203,145,220,0,
                                             language.OPTIONS_REFLECTS.c_str());
-   qt->fonte = FMINI;
+   qt->setFont(FMINI,1,ESQUERDA);
    buttonReflDec = window->objects->insertButton(121,203,131,220,"<",0);
-   txtReflexion = window->objects->InserirQuadroTexto(132,203,197,220,1,
+   txtReflexion = window->objects->insertTextBox(132,203,197,220,1,
                                  saux.c_str());
-   txtReflexion->fonte = FMINI;
+   txtReflexion->setFont(FMINI,1,ESQUERDA);
    buttonReflSum = window->objects->insertButton(198,203,208,220,">",0);
    window->objects->insertPicture(212,203,40,220,
                                   "../data/texturas/options/reflexions.png");
@@ -328,11 +328,11 @@ void options::DisplayOptionsScreen(interface* interf)
                                                language.SKILL_CANCEL.c_str(),1);
 
    /* borders */
-   window->objects->InserirQuadroTexto(5,20,250,77,1,"");
-   window->objects->InserirQuadroTexto(5,78,250,115,1,"");
-   window->objects->InserirQuadroTexto(5,116,250,153,1,"");
-   window->objects->InserirQuadroTexto(5,154,250,192,1,"");
-   window->objects->InserirQuadroTexto(5,193,250,230,1,"");
+   window->objects->insertTextBox(5,20,250,77,1,"");
+   window->objects->insertTextBox(5,78,250,115,1,"");
+   window->objects->insertTextBox(5,116,250,153,1,"");
+   window->objects->insertTextBox(5,154,250,192,1,"");
+   window->objects->insertTextBox(5,193,250,230,1,"");
 
    
    /* Open Skill Window */
@@ -467,14 +467,14 @@ int options::Treat(guiObject* object, int eventInfo, interface* interf)
 
    char tmp[5];
    sprintf(tmp,"%d",musicVolume);
-   txtMusicVolume->texto = tmp;
+   txtMusicVolume->setText(tmp);
 
    sprintf(tmp,"%d",sndfxVolume);
-   txtSndfxVolume->texto = tmp;
+   txtSndfxVolume->setText(tmp);
 
-   txtLanguage->texto = languageName();
-   txtCamera->texto = cameraName();
-   txtReflexion->texto = reflexionName();
+   txtLanguage->setText(languageName());
+   txtCamera->setText(cameraName());
+   txtReflexion->setText(reflexionName());
 
    window->Desenhar(0,0);
    return(OPTIONSW_OTHER);

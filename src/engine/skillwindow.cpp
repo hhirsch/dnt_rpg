@@ -37,51 +37,44 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
    /* Free Points */
    sprintf(tmp,"%d",avaiblePoints);
    saux = tmp;
-   window->objects->InserirQuadroTexto(8,20,125,33,0,
+   window->objects->insertTextBox(8,20,125,33,0,
                                        language.SKILL_FREE_POINTS.c_str());
-   txtAvaiblePoints = window->objects->InserirQuadroTexto(127,20,162,33,0,
+   txtAvaiblePoints = window->objects->insertTextBox(127,20,162,33,0,
                                                                   saux.c_str());
 
    /* Skill Description */
-   desc = window->objects->InserirQuadroTexto(8,38,251,170,1,
+   desc = window->objects->insertTextBox(8,38,251,170,1,
                            externalSkill->m_skills[curSkill].descricao.c_str());
-   /*desc->Cores.corTexto.R = 246;
-   desc->Cores.corTexto.G = 190;
-   desc->Cores.corTexto.B = 190;
-   desc->Cores.corBot.R = 155;
-   desc->Cores.corBot.G = 5;
-   desc->Cores.corBot.B = 5;*/
-   desc->fonte = FMINI;
-   desc->tamFonte = 1;
+   desc->setFont(FMINI,1,ESQUERDA);
  
    /* Skill Name & Selectors */
    buttonPrevious = window->objects->insertButton(52,175,66,193,"<",0);
    buttonNext = window->objects->insertButton(237,175,251,193,">",0);
-   skillName = window->objects->InserirQuadroTexto(67,175,236,193,1,
+   skillName = window->objects->insertTextBox(67,175,236,193,1,
                                 externalSkill->m_skills[curSkill].nome.c_str());
-   skillName->fonte = FMINI;
+   skillName->setFont(FMINI,1,ESQUERDA);
 
    /* Skill Image */
    skFig = window->objects->insertPicture(13,175,0,0,NULL);
    skFig->set(externalSkill->m_skills[curSkill].imagem);
  
    /* Skill Points */
-   window->objects->InserirQuadroTexto(52,200,101,214,0,
+   window->objects->insertTextBox(52,200,101,214,0,
                                        language.SKILL_POINTS.c_str());
    sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
    saux = tmp;
-   txtPoints = window->objects->InserirQuadroTexto(113,198,135,216,1,
+   txtPoints = window->objects->insertTextBox(113,198,135,216,1,
                                                    saux.c_str());
-   txtPoints->fonte = FMINI;
+   txtPoints->setFont(FMINI,1,ESQUERDA);
    buttonSum = window->objects->insertButton(136,198,146,216,">",0);
    buttonDec = window->objects->insertButton(102,198,112,216,"<",0);
 
    /* Skill Costs */
-   window->objects->InserirQuadroTexto(160,200,215,214,0,
+   window->objects->insertTextBox(160,200,215,214,0,
                                        language.SKILL_COST.c_str());
    sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
    saux = tmp;
-   txtCosts = window->objects->InserirQuadroTexto(216,200,251,214,0,
+   txtCosts = window->objects->insertTextBox(216,200,251,214,0,
                                                   saux.c_str());
    /*txtCosts->Cores.corTexto.R = 255;
    txtCosts->Cores.corTexto.G = 156;
@@ -119,11 +112,11 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
              char tmp[5];
              sprintf(tmp,"%d",avaiblePoints);
              string saux = tmp;
-             txtAvaiblePoints->texto = saux;
+             txtAvaiblePoints->setText(saux);
         
              sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
              saux = tmp;
-             txtPoints->texto = saux;
+             txtPoints->setText(saux);
 
          }
       }
@@ -138,11 +131,11 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
             char tmp[5];
             sprintf(tmp,"%d",avaiblePoints);
             string saux = tmp;
-            txtAvaiblePoints->texto = saux;
+            txtAvaiblePoints->setText(saux);
 
             sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
             saux = tmp;
-            txtPoints->texto = saux;
+            txtPoints->setText(saux);
          }
       }
       else if(object == (guiObject*) buttonNext)
@@ -155,17 +148,17 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
          {
             curSkill = ATT_SKILL_FIRST;
          } 
-         skillName->texto = externalSkill->m_skills[curSkill].nome.c_str();
-         desc->texto = externalSkill->m_skills[curSkill].descricao.c_str();
+         skillName->setText(externalSkill->m_skills[curSkill].nome.c_str());
+         desc->setText(externalSkill->m_skills[curSkill].descricao.c_str());
          skFig->set(externalSkill->m_skills[curSkill].imagem);
           
          char tmp[5];
          sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
          string saux = tmp;
-         txtPoints->texto = saux;
+         txtPoints->setText(saux);
          sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
          saux = tmp;
-         txtCosts->texto = saux;
+         txtCosts->setText(saux);
 
       }
       else if(object == (guiObject*) buttonPrevious)
@@ -178,17 +171,17 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
          {
             curSkill = ATT_SKILL_LAST;
          }
-         skillName->texto = externalSkill->m_skills[curSkill].nome.c_str();
-         desc->texto = externalSkill->m_skills[curSkill].descricao.c_str();
+         skillName->setText(externalSkill->m_skills[curSkill].nome.c_str());
+         desc->setText(externalSkill->m_skills[curSkill].descricao.c_str());
          skFig->set(externalSkill->m_skills[curSkill].imagem);
 
          char tmp[5];
          sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
          string saux = tmp;
-         txtPoints->texto = saux;
+         txtPoints->setText(saux);
          sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
          saux = tmp;
-         txtCosts->texto = saux;
+         txtCosts->setText(saux);
 
       }
       else if(object == (guiObject*) buttonConfirm)

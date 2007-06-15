@@ -47,12 +47,12 @@ class attWindow
       skills* saveSkill;          /**< Pointer to thje edited skill List */
       lang language;              /**< Language internationalization */
 
-      quadroTexto* rolledPoints;  /**< Rolled Points Text */
-      quadroTexto* attPoints[6];  /**< Attributes Points Texts */
-      quadroTexto* attTotals[6];  /**< Attributes Totals Texts */
-      quadroTexto* attMods[6];    /**< Attributes Totals Modifiers */
-      quadroTexto* textDesc;      /**< Description Text */
-      quadroTexto* textDescTitle; /**< Description Title Text */
+      textBox* rolledPoints;  /**< Rolled Points Text */
+      textBox* attPoints[6];  /**< Attributes Points Texts */
+      textBox* attTotals[6];  /**< Attributes Totals Texts */
+      textBox* attMods[6];    /**< Attributes Totals Modifiers */
+      textBox* textDesc;      /**< Description Text */
+      textBox* textDescTitle; /**< Description Title Text */
 
       button* attButtonNext[6];    /**< Next Buttons */
       button* attButtonPrev[6];    /**< Previous Buttons */

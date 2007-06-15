@@ -38,11 +38,11 @@ class skillWindow
       skills*      saveSkill;        /**< Pointer to the edited skill list */
       int          avaiblePoints;    /**< Avaible points to distribute */
       int          curSkill;         /**< Actual Skill */
-      quadroTexto* desc;             /**< Description Text */
-      quadroTexto* txtAvaiblePoints; /**< Avaible Points Text */
-      quadroTexto* skillName;        /**< Actual Skill Name */
-      quadroTexto* txtPoints;        /**< Actual Points Text */
-      quadroTexto* txtCosts;         /**< Actual Cost Text */
+      textBox* desc;             /**< Description Text */
+      textBox* txtAvaiblePoints; /**< Avaible Points Text */
+      textBox* skillName;        /**< Actual Skill Name */
+      textBox* txtPoints;        /**< Actual Points Text */
+      textBox* txtCosts;         /**< Actual Cost Text */
 
       button* buttonSum;
       button* buttonDec;

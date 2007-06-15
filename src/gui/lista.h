@@ -12,7 +12,7 @@ using namespace std;
 #include "button.h"
 #include "cxsel.h"
 #include "picture.h"
-#include "quadtexto.h"
+#include "textbox.h"
 #include "seltexto.h"
 #include "tabbotao.h"
 #include "textbar.h"
@@ -64,8 +64,8 @@ class Tlista{
        * moldura     -> != se o novo quadro de texto tiver moldura
        * text        -> texto do novo quadro de texto
        * lista       -> lista onde se inserira o novo quadro de texto*/
-      quadroTexto* InserirQuadroTexto(int xa,int ya,int xb,int yb,int moldura,
-                                       const char* text);
+      textBox* insertTextBox(int xa,int ya,int xb,int yb,
+                             int frameType, string text);
 
       /* Insere um novo selTexto na lista
        * xa,ya,xb,yb -> coordenadas da selTexto (yb eh calculada ao desenhar)

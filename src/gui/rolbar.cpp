@@ -36,20 +36,17 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    Tlista* l = (Tlista*)list;
 
    /* Contorno */
-   position = l->InserirQuadroTexto(xb-10, ya+2, xb-2, yb-26, 1, "");
-   contorn = l->InserirQuadroTexto(xb-12, ya, xb, yb-24, 1, "");
+   position = l->insertTextBox(xb-10, ya+2, xb-2, yb-26, 1, "");
+   contorn = l->insertTextBox(xb-12, ya, xb, yb-24, 1, "");
    
    /* Botoes */
    up = l->insertButton(xb-12,yb-23,xb,yb-12, "\36",0);
    down = l->insertButton(xb-12,yb-11,xb,yb, "\37",0);
 
    /* Texto */
-   text = l->InserirQuadroTexto(xa,ya,xb-13,yb,2,""); 
-   text->Cores.colorText.R = 246;
-   text->Cores.colorText.G = 190;
-   text->Cores.colorText.B = 190;
-   text->fonte = FMINI;
-   text->tamFonte = 1;
+   scrollText = l->insertTextBox(xa,ya,xb-13,yb,2,""); 
+   scrollText->setFont(FMINI, 1, ESQUERDA);
+   scrollText->setColor(246, 190, 190);
 
    actualPressed = NULL;
 
@@ -82,7 +79,7 @@ bool rolBar::eventGot(int type, guiObject* object)
                actualEnd = actualInit + maxLines -1;
             }
             
-            text->texto = copyLines(fullText, actualInit,actualEnd);
+            scrollText->setText(copyLines(fullText, actualInit,actualEnd));
             actualPressed = up;
             return(true);
          }
@@ -98,7 +95,7 @@ bool rolBar::eventGot(int type, guiObject* object)
                }
             }
 
-            text->texto = copyLines(fullText, actualInit,actualEnd);
+            scrollText->setText(copyLines(fullText, actualInit,actualEnd));
             actualPressed = down;
             return(true);
          }
@@ -116,16 +113,20 @@ bool rolBar::eventGot(int type, guiObject* object)
  *********************************************************************/
 void rolBar::redraw()
 {
-   contorn->Desenhar(0,0,0,wSurface);
+   contorn->draw(wSurface);
    if(maxLines <= totalLines)
    {
-      position->y1 = (int) ((y1+2) + ((float)actualInit/(float)totalLines)*
-                            (y2-28-y1));
-      position->y2 = (int) ((y1+2) + ((float)(actualEnd)/(float)totalLines)*
-                            (y2-28-y1));
+      position->setCoordinate(position->getX1(), 
+                              (int) ((y1+2) + ((float)actualInit/
+                                               (float)totalLines)*
+                                    (y2-28-y1)),
+                              position->getX2(),
+                              (int) ((y1+2) + ((float)(actualEnd)/
+                                               (float)totalLines)*
+                                    (y2-28-y1)));
    }
-   position->Desenhar(0,0,0,wSurface);   
-   text->Desenhar(0,0,0,wSurface);
+   position->draw(wSurface);   
+   scrollText->draw(wSurface);
 
    /* Mantain the draw of button pressed */
    if(actualPressed)
@@ -145,17 +146,21 @@ void rolBar::setText(string txt)
    actualEnd = maxLines - 1;
    if(maxLines <= totalLines)
    {
-      position->y1 = (int) ((y1+2) + ((float)actualInit/(float)totalLines)*
-                            (y2-28-y1));
-      position->y2 = (int) ((y1+2) + ((float)(actualEnd)/(float)totalLines)*
-                            (y2-28-y1));
+      position->setCoordinate(position->getX1(), 
+                              (int) ((y1+2) + ((float)actualInit/
+                                               (float)totalLines)*
+                                    (y2-28-y1)),
+                              position->getX2(),
+                              (int) ((y1+2) + ((float)(actualEnd)/
+                                               (float)totalLines)*
+                                    (y2-28-y1)));
    }
    else
    {
-      position->y1 = y1+2;
-      position->y2 = y2-26;
+      position->setCoordinate(position->getX1(), y1+2,
+                              position->getX2(), y2-26);
    }
-   text->texto = copyLines(fullText, actualInit,actualEnd);
+   scrollText->setText(copyLines(fullText, actualInit,actualEnd));
 }
 
 /*********************************************************************
@@ -165,7 +170,7 @@ void rolBar::addText(string txt)
 {
    /* Add Text */
    fullText += txt;
-   /* Set the new text */
+   /* Set the new scrollText */
    setText(fullText);
    /* Put the rolling bar to the end */
    actualEnd = totalLines+1;
@@ -174,7 +179,7 @@ void rolBar::addText(string txt)
    {
       actualInit = 0;
    }
-   text->texto = copyLines(fullText, actualInit,actualEnd);
+   scrollText->setText(copyLines(fullText, actualInit,actualEnd));
    redraw();
 }
 

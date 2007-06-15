@@ -44,12 +44,12 @@ class raceWindow
       button* buttonPrevious;
       button* buttonNext;
 
-      quadroTexto* textName;
-      quadroTexto* textDescTitle;
+      textBox* textName;
+      textBox* textDescTitle;
       rolBar* textDesc;
       rolBar* textCharac;
-      quadroTexto* textCharacTitle;
-      quadroTexto* textCitation;
+      textBox* textCharacTitle;
+      textBox* textCitation;
 
       picture* raceImage;
 

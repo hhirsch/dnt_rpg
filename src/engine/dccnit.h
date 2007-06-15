@@ -325,21 +325,21 @@ class engine
              zReal,                /**< Actual mouse Z coordinates on World */
              yReal;                /**< Actual mouse Y coordinates on World */
 
-      quadroTexto* FPS;            /**< Text that shows FPS */
-      quadroTexto* ObjTxt;         /**< Text that shows actual pointed object */
+      textBox* FPS;                /**< Text that shows FPS */
+      textBox* ObjTxt;             /**< Text that shows actual pointed object */
       rolBar* briefTxt;            /**< Briefing Text */
-      quadroTexto* hourTxt;        /**< Text for Hour */
+      textBox* hourTxt;            /**< Text for Hour */
       janela* shortCutsWindow;     /**< ShortCuts Window */
       janela* miniMapWindow;       /**< MiniMap Window */
-      button* botPerMiniMap;        /**< Character MiniMap Button */
+      button* botPerMiniMap;       /**< Character MiniMap Button */
 
-      button* buttonMenu;           /**< Button to call Menu */
-      button* buttonSave;           /**< Button to call Save Function */
-      button* buttonLoad;           /**< Button to call Load Function */
+      button* buttonMenu;            /**< Button to call Menu */
+      button* buttonSave;            /**< Button to call Save Function */
+      button* buttonLoad;            /**< Button to call Load Function */
       oneTabButton* buttonAttackMode;/**< Button to Enter on Attack Mode */
-      oneTabButton* buttonMap;     /**< Call MiniMap Button */
+      oneTabButton* buttonMap;       /**< Call MiniMap Button */
       oneTabButton* buttonInventory; /**< Call Inventory Button */
-      oneTabButton* buttonEndTurn; /**< End Turn Button */
+      oneTabButton* buttonEndTurn;   /**< End Turn Button */
 
       inventWindow* inventoryWindow; /**< Inventory Window */
    

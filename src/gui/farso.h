@@ -16,7 +16,7 @@
 #include "eventos.h"
 #include "fonte.h"
 #include "healthBar.h"
-#include "quadtexto.h"
+#include "textbox.h"
 #include "rolbar.h"
 #include "seltexto.h"
 #include "textbar.h"

@@ -31,20 +31,18 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    classImage->set(actualClass->image);
 
    /* Class Description */
-   textDescTitle = window->objects->InserirQuadroTexto(71,20,342,35,1,
-                                            language.CLASSW_DESCRIPTION.c_str());
-   textDescTitle->fonte = FHELVETICA;
-   textDescTitle->tamFonte = 1;
+   textDescTitle = window->objects->insertTextBox(71,20,342,35,1,
+                                           language.CLASSW_DESCRIPTION.c_str());
+   textDescTitle->setFont(FHELVETICA,1,ESQUERDA);
    
    textDesc = window->objects->insertRolBar(71,36,342,345,
              (actualClass->citation + "||" + actualClass->description).c_str(),
              window->cara);
 
    /* Race Characteristics */
-   textCharacTitle = window->objects->InserirQuadroTexto(343,20,613,35,1,
-                                        language.CLASSW_CHARACTERISTICS.c_str());
-   textCharacTitle->fonte = FHELVETICA;
-   textCharacTitle->tamFonte = 1;
+   textCharacTitle = window->objects->insertTextBox(343,20,613,35,1,
+                                       language.CLASSW_CHARACTERISTICS.c_str());
+   textCharacTitle->setFont(FHELVETICA,1,ESQUERDA);
 
    textCharac = window->objects->insertRolBar(343,36,613,345,
                                               getCharacteristics().c_str(),
@@ -53,10 +51,9 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    /* Name and Selectors */
    buttonPrevious = window->objects->insertButton(71,346,86,364,"<",0);
    buttonNext = window->objects->insertButton(598,346,613,364,">",0);
-   textName = window->objects->InserirQuadroTexto(87,346,597,364,1, 
+   textName = window->objects->insertTextBox(87,346,597,364,1, 
                                                   actualClass->name.c_str());
-   textName->fonte = FMINI;
-   textName->tamFonte = 1;
+   textName->setFont(FMINI,1,ESQUERDA);
 
    /* Confirm Button */
    buttonConfirm = window->objects->insertButton(543,370,613,389,
@@ -197,7 +194,7 @@ int classWindow::treat(guiObject* object, int eventInfo, interface* inter)
          {
             actualClass = actualClass->previous;
          }
-         textName->texto = actualClass->name;
+         textName->setText(actualClass->name);
          textDesc->setText(actualClass->citation + "||" +
                            actualClass->description);
          textCharac->setText(getCharacteristics());
