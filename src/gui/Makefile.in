@@ -6,7 +6,7 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJSPP = button.o color.o cxsel.o draw.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o lista.o listtext.o menu.o messages.o mouse.o quadtexto.o rolbar.o seltexto.o tabbotao.o textbar.o
+OBJSPP = button.o color.o cxsel.o draw.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o lista.o listtext.o menu.o messages.o mouse.o quadtexto.o rolbar.o seltexto.o tabbotao.o textbar.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/

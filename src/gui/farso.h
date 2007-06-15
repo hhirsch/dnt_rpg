@@ -14,7 +14,6 @@
 #include "cxsel.h"
 #include "janela.h"
 #include "eventos.h"
-#include "erro.h"
 #include "fonte.h"
 #include "healthBar.h"
 #include "quadtexto.h"

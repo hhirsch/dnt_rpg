@@ -7,7 +7,6 @@
 #define _figura_h
 
 #include "draw.h"
-#include "erro.h"
 #include "guiobject.h"
 
 class figura: public guiObject

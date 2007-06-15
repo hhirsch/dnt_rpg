@@ -136,7 +136,7 @@ void janela::Desenhar(int mouseX, int mouseY)
    color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    if (!selFonte(FFARSO,ESQUERDA,1))
    {
-      erro_Mensagem("Fonte farso.fnt nao encontrada!\n",3);
+      printf("Error: Not found farso.fnt font!\n");
    }
    escxy(cara,39,-2,texto.c_str());
    /* Desenho dos Buttonoes */

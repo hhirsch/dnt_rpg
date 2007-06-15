@@ -12,7 +12,6 @@ using namespace std;
 #include "button.h"
 #include "cxsel.h"
 #include "figura.h"
-#include "erro.h"
 #include "quadtexto.h"
 #include "seltexto.h"
 #include "tabbotao.h"

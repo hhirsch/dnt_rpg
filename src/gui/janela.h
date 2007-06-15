@@ -9,7 +9,6 @@
 #include "draw.h"
 #include "color.h"
 #include "fonte.h"
-#include "erro.h"
 #include "guiobject.h"
 #include "lista.h"
 

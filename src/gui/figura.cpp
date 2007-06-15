@@ -37,7 +37,7 @@ figura::figura(int x,int y,int w,int h,const char* arquivo)
       SDL_FreeSurface(img);
       if ( fig == NULL )
       {
-         erro_Mensagem("Não foi possível carregar figura\n",10);
+         printf("Warn: Can't Load Picture, may crash soon (out of memory)!\n");
       }
       else
       {

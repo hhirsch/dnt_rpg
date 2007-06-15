@@ -12,7 +12,8 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
     //Comeca a abrir a tela
     if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
     {
-        erro_Mensagem("Argh! Can't init SDL!\n",1);
+        printf("Argh! Can't init SDL!\n");
+        exit(1);
     }
     atexit(SDL_Quit);
 
@@ -25,10 +26,12 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );*/
 
-    *screen = SDL_SetVideoMode(800, 600, 24, /*SDL_FULLSCREEN |*/ SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_OPENGL);
+    *screen = SDL_SetVideoMode(800, 600, 24, /*SDL_FULLSCREEN |*/ 
+                               SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_OPENGL);
     if ( screen == NULL ) 
     {
-       erro_Mensagem("Oxi! Can't ajust video mode!\n",2);
+       printf("Oxi! Can't ajust video mode!\n");
+       exit(2);
     }
 
     SDL_WM_SetCaption(titulo,"");
