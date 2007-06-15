@@ -2781,10 +2781,10 @@ void engine::OpenMiniMapWindow()
                                      language.WINDOW_MAP.c_str(),1,1);
 
    botPerMiniMap = miniMapWindow->objects->insertButton(x,z,x+2,z+2,"",0);
-   figura* fig = miniMapWindow->objects->InserirFigura(8,20,240,95,NULL);
-   actualMap->drawMinimap(fig->fig);
+   picture* fig = miniMapWindow->objects->insertPicture(8,20,240,95,NULL);
+   actualMap->drawMinimap(fig->get());
 
-   miniMapWindow->objects->InserirFigura(3,15,252,120,
+   miniMapWindow->objects->insertPicture(3,15,252,120,
                                        "../data/texturas/map.png");
 
    
@@ -2823,7 +2823,7 @@ void engine::OpenShortcutsWindow()
    hourToTxt();
 
    tabButton* tb;
-   tb = shortCutsWindow->objects->InserirTabButton(252,15,0,0,
+   tb = shortCutsWindow->objects->insertTabButton(252,15,0,0,
                                              "../data/texturas/shortcuts.png");
    buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
    tb->insertButton(7,40,43,72);/* Attack 1 */
@@ -2849,7 +2849,7 @@ void engine::OpenShortcutsWindow()
    tb->insertButton(220,40,256,72);/* Attack 6 */
    buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 
-   shortCutsWindow->objects->InserirFigura(3,15,252,120,"../data/texturas/shortcut2.png");
+   shortCutsWindow->objects->insertPicture(3,15,252,120,"../data/texturas/shortcut2.png");
    
    shortCutsWindow->ptrExterno = &shortCutsWindow;
    gui->openWindow(shortCutsWindow);

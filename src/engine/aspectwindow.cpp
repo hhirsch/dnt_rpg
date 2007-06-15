@@ -21,8 +21,8 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
                                 /*language.ASPECTW_TITLE.c_str()*/,1,1);
 
    /* Portrait Figure */
-   figurePortrait = window->objects->InserirFigura(5,25,0,0,NULL);
-   figurePortrait->fig = images[curImage].image;
+   figurePortrait = window->objects->insertPicture(5,25,0,0,NULL);
+   figurePortrait->set(images[curImage].image);
 
    /* Previous Image Button */
    buttonPreviousImage = window->objects->insertButton(5,90,19,108,"<",0);
@@ -42,13 +42,13 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    /* Sex Selectors */
    window->objects->InserirQuadroTexto(72,55,112,69,1,"Sex:");
    cxSelSexF = window->objects->insertCxSel(113, 57, false);
-   window->objects->InserirFigura(125,55,0,0,
+   window->objects->insertPicture(125,55,0,0,
                                   "../data/texturas/aspectw/sex_f.png");
    cxSelSexM = window->objects->insertCxSel(143, 57, true);
-   window->objects->InserirFigura(155,55,0,0,
+   window->objects->insertPicture(155,55,0,0,
                                   "../data/texturas/aspectw/sex_m.png");
    cxSelSexO = window->objects->insertCxSel(173, 57, false);
-   window->objects->InserirFigura(185,55,0,0,
+   window->objects->insertPicture(185,55,0,0,
                                   "../data/texturas/aspectw/sex_o.png");
 
    /* Confirm Button */
@@ -137,7 +137,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
          sscanf(textAge->getText().c_str(),"%d", &usedCharacter->age);
 
          /* Close Window */
-         figurePortrait->fig = NULL;
+         figurePortrait->set(NULL);
          inter->closeWindow(window);
          window = NULL;
          glEnable(GL_LIGHTING);
@@ -147,7 +147,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
       /* Cancel */
       else if(object == (guiObject*) buttonCancel) 
       {
-         figurePortrait->fig = NULL;
+         figurePortrait->set(NULL);
          inter->closeWindow(window);
          window = NULL;
          glEnable(GL_LIGHTING);
@@ -162,7 +162,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
          {
             curImage = totalImages-1;
          }
-         figurePortrait->fig = images[curImage].image;
+         figurePortrait->set(images[curImage].image);
       }
       /* Next Image */
       else if(object == (guiObject*) buttonNextImage)
@@ -172,7 +172,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
          {
             curImage = 0;
          }
-         figurePortrait->fig = images[curImage].image;
+         figurePortrait->set(images[curImage].image);
       }
    }
    else if(eventInfo == CXSELMODIFICADA)

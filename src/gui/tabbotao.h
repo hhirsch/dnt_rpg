@@ -5,7 +5,7 @@
 #ifndef _tabbotao_h
 #define _tabbotao_h
 
-#include "figura.h"
+#include "picture.h"
 #include "color.h"
 
 #define MAX_TABBUTTONS      20 /**< Max Buttons per table of buttons */
@@ -25,7 +25,7 @@ class oneTabButton :guiObject
 
 /*! The table of Buttons class. Its a figure divided in squares each one 
     representing (and acting as) a button. */
-class tabButton: public figura
+class tabButton: public picture
 {
    public:
       /*! Constructor 

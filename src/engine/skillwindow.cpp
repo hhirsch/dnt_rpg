@@ -62,8 +62,8 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
    skillName->fonte = FMINI;
 
    /* Skill Image */
-   skFig = window->objects->InserirFigura(13,175,0,0,NULL);
-   skFig->fig = externalSkill->m_skills[curSkill].imagem;
+   skFig = window->objects->insertPicture(13,175,0,0,NULL);
+   skFig->set(externalSkill->m_skills[curSkill].imagem);
  
    /* Skill Points */
    window->objects->InserirQuadroTexto(52,200,101,214,0,
@@ -157,7 +157,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
          } 
          skillName->texto = externalSkill->m_skills[curSkill].nome.c_str();
          desc->texto = externalSkill->m_skills[curSkill].descricao.c_str();
-         skFig->fig = externalSkill->m_skills[curSkill].imagem;
+         skFig->set(externalSkill->m_skills[curSkill].imagem);
           
          char tmp[5];
          sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
@@ -180,7 +180,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
          }
          skillName->texto = externalSkill->m_skills[curSkill].nome.c_str();
          desc->texto = externalSkill->m_skills[curSkill].descricao.c_str();
-         skFig->fig = externalSkill->m_skills[curSkill].imagem;
+         skFig->set(externalSkill->m_skills[curSkill].imagem);
 
          char tmp[5];
          sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
@@ -193,7 +193,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
       }
       else if(object == (guiObject*) buttonConfirm)
       {
-         skFig->fig = NULL; //to not delete skill images
+         skFig->set(NULL); //to not delete skill images
          inter->closeWindow(window);
          window = NULL;
          saveSkill->setAvaiblePoints(avaiblePoints);
@@ -209,7 +209,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
          { 
             saveSkill->m_skills[aux].pontos = saveSkill->m_skills[aux].antPontos;
           }
-          skFig->fig = NULL; //to not delete skill images
+          skFig->set(NULL); //to not delete skill images
           inter->closeWindow(window);
           window = NULL;
           glEnable(GL_LIGHTING);

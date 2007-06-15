@@ -27,8 +27,8 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    window = inter->insertWindow(270,186,537,441,language.ALIGNW_TITLE.c_str(),
                                 1,1);
    /* Align Image */
-   alignImage = window->objects->InserirFigura(111,185,0,0,NULL);   
-   alignImage->fig = actualAlign->image;
+   alignImage = window->objects->insertPicture(111,185,0,0,NULL);   
+   alignImage->set(actualAlign->image);
 
    /* Align Description */
    textDesc = window->objects->insertRolBar(5,38,262,180, 
@@ -77,12 +77,12 @@ int alignWindow::treat(guiObject* object, int eventInfo, interface* inter)
          }
          textName->texto = actualAlign->name;
          textDesc->setText(actualAlign->description);
-         alignImage->fig = actualAlign->image;
+         alignImage->set(actualAlign->image);
          window->Desenhar(0,0);
       }
       else if(object == (guiObject*) buttonConfirm)
       {
-         alignImage->fig = NULL;
+         alignImage->set(NULL);
          *choosedAlign = actualAlign;
          inter->closeWindow(window);
          glEnable(GL_LIGHTING);
@@ -91,7 +91,7 @@ int alignWindow::treat(guiObject* object, int eventInfo, interface* inter)
       }
       else if(object == (guiObject*) buttonCancel) 
       {
-         alignImage->fig = NULL; //to not delete skill images
+         alignImage->set(NULL); //to not delete align images
          inter->closeWindow(window);
          *choosedAlign = NULL;
          window = NULL;

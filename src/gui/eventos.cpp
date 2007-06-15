@@ -124,10 +124,8 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                else if(obj->type == GUI_TAB_BUTTON)
                {
                   tabButton *tb = (tabButton*) obj;
-                  if(mouse_NaArea(ljan->janelaAtiva->x1+tb->x1,
-                                  ljan->janelaAtiva->y1+tb->y1,
-                                  ljan->janelaAtiva->x1+tb->x2, 
-                                  ljan->janelaAtiva->y1+tb->y2,x,y))
+                  if(tb->isMouseIn(x-ljan->janelaAtiva->x1,
+                                   y-ljan->janelaAtiva->y1))
                   {
                      objAtivo = tb;
                      foco = FOCO_TABBUTTON;
@@ -489,10 +487,8 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
        }
        else
        {
-            if(!mouse_NaArea(ljan->janelaAtiva->x1+tb->x1,
-                             ljan->janelaAtiva->y1+tb->y1,
-                             ljan->janelaAtiva->x1+tb->x2, 
-                             ljan->janelaAtiva->y1+tb->y2,x,y))
+            if(!tb->isMouseIn(x-ljan->janelaAtiva->x1,
+                              y-ljan->janelaAtiva->y1))
             {
                foco = FOCO_JOGO;
             }

@@ -11,7 +11,7 @@ using namespace std;
 #include "guiobject.h"
 #include "button.h"
 #include "cxsel.h"
-#include "figura.h"
+#include "picture.h"
 #include "quadtexto.h"
 #include "seltexto.h"
 #include "tabbotao.h"
@@ -49,8 +49,8 @@ class Tlista{
        * x,y     -> coordenada da figura
        * arquivo -> nome do arquivo que contem a figura
        * lista   -> lista onde sera inserida a figura */
-      figura* InserirFigura(int x,int y,int w,int h,const char* arquivo);
-      tabButton* InserirTabButton(int x,int y,int w,int h,const char* arquivo);
+      picture* insertPicture(int x,int y,int w,int h,const char* arquivo);
+      tabButton* insertTabButton(int x,int y,int w,int h,const char* arquivo);
 
       /* Insere uma nova barra de texto na lista
        * xa,ya,xb,yb -> Dimensoes da barra de texto

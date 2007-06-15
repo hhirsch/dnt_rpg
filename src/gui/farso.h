@@ -22,7 +22,7 @@
 #include "textbar.h"
 #include "guiobject.h"
 #include "lista.h"
-#include "figura.h"
+#include "picture.h"
 #include "menu.h"
 #include "mouse.h"
 #include "tabbotao.h"

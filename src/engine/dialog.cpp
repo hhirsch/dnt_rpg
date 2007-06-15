@@ -418,11 +418,11 @@ void conversation::openDialog(int numDialog, interface* gui, character* pers,
    actual = -1;
    jan = gui->insertWindow(330,100,585,355,language.DIALOGW_TITLE.c_str(),1,1);
    jan->objects->insertButton(5,86,69,104,"Barter",1);
-   jan->objects->InserirFigura(5,25,0,0,pers->getPortraitFileName().c_str());
+   jan->objects->insertPicture(5,25,0,0,pers->getPortraitFileName().c_str());
    npcText = jan->objects->insertRolBar(71,20,250,115,"",jan->cara);
    //npcText->fonte = FMINI;
    pcSelText = jan->objects->insertSelTexto(5,116,250,250,"","","","","");
-   jan->objects->InserirFigura(3,15,0,0,"../data/texturas/dialog.png");
+   jan->objects->insertPicture(3,15,0,0,"../data/texturas/dialog.png");
    jan->ptrExterno = &jan;
    gui->openWindow(jan);
 

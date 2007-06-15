@@ -46,7 +46,7 @@ class alignWindow
       quadroTexto* textName;         /**< Text Name */
       rolBar* textDesc;              /**< Text Description */
 
-      figura* alignImage;            /**< Alignment Image */
+      picture* alignImage;           /**< Alignment Image */
 
       lang language;                 /**< Language internationalization */
 

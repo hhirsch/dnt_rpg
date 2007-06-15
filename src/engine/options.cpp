@@ -239,7 +239,7 @@ void options::DisplayOptionsScreen(interface* interf)
                                  saux.c_str());
    txtMusicVolume->fonte = FMINI;
    buttonMusSum = window->objects->insertButton(198,27,208,44,">",0);
-   window->objects->InserirFigura(212,27,40,112,
+   window->objects->insertPicture(212,27,40,112,
                                   "../data/texturas/options/music.png");
    
   
@@ -254,7 +254,7 @@ void options::DisplayOptionsScreen(interface* interf)
                                  saux.c_str());
    txtSndfxVolume->fonte = FMINI;
    buttonSndSum = window->objects->insertButton(198,52,208,69,">",0);
-   window->objects->InserirFigura(212,52,40,112,
+   window->objects->insertPicture(212,52,40,112,
                                   "../data/texturas/options/sndfx.png");
 
 
@@ -269,7 +269,7 @@ void options::DisplayOptionsScreen(interface* interf)
                                  saux.c_str());
    txtLanguage->fonte = FMINI;
    buttonLangSum = window->objects->insertButton(198,88,208,105,">",0);
-   window->objects->InserirFigura(212,88,40,112,
+   window->objects->insertPicture(212,88,40,112,
                                   "../data/texturas/options/language.png");
 
    /* Camera Mode Things */
@@ -283,7 +283,7 @@ void options::DisplayOptionsScreen(interface* interf)
                                  saux.c_str());
    txtCamera->fonte = FMINI;
    buttonCamSum = window->objects->insertButton(198,126,208,143,">",0);
-   window->objects->InserirFigura(214,126,40,112,
+   window->objects->insertPicture(214,126,40,112,
                                   "../data/texturas/options/camera.png");
 
 
@@ -292,7 +292,7 @@ void options::DisplayOptionsScreen(interface* interf)
                                          language.OPTIONS_GRASS.c_str());
    qt->fonte = FMINI;
    cxSelGrass = window->objects->insertCxSel(8,160, enableGrass);
-   window->objects->InserirFigura(214,156,40,112,
+   window->objects->insertPicture(214,156,40,112,
                                   "../data/texturas/options/grass.png");
 
 
@@ -301,7 +301,7 @@ void options::DisplayOptionsScreen(interface* interf)
                                          language.OPTIONS_PARTICLES.c_str());
    qt->fonte = FMINI;
    cxSelParticles = window->objects->insertCxSel(8,178, enableParticles);
-   window->objects->InserirFigura(214,174,40,112,
+   window->objects->insertPicture(214,174,40,112,
                                   "../data/texturas/options/particles.png");
 
    /* Reflexions */
@@ -315,7 +315,7 @@ void options::DisplayOptionsScreen(interface* interf)
                                  saux.c_str());
    txtReflexion->fonte = FMINI;
    buttonReflSum = window->objects->insertButton(198,203,208,220,">",0);
-   window->objects->InserirFigura(212,203,40,220,
+   window->objects->insertPicture(212,203,40,220,
                                   "../data/texturas/options/reflexions.png");
 
 

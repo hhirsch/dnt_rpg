@@ -63,7 +63,7 @@ void Tlista::Retirar(guiObject *obj)
       }
       case GUI_PICTURE:
       {
-         figura* f = (figura*) obj;
+         picture* f = (picture*) obj;
          delete(f);
          break;
       }
@@ -136,19 +136,16 @@ cxSel* Tlista::insertCxSel(int xa,int ya, bool selected)
 }
  
 /* Insere uma nova figura na lista */
-figura* Tlista::InserirFigura(int x,int y,int w,int h,const char* arquivo)
+picture* Tlista::insertPicture(int x,int y,int w,int h,const char* arquivo)
 {
    //printf("Pondo Figura\n");
-   figura* novo;
-   novo = new figura(x,y,w,h,arquivo);
-   
-
-   novo->type = GUI_PICTURE;
+   picture* novo;
+   novo = new picture(x,y,w,h,arquivo);
    InserirObj(novo);
    return(novo);
 } 
 
-tabButton* Tlista::InserirTabButton(int x,int y,int w,int h,const char* arquivo)
+tabButton* Tlista::insertTabButton(int x,int y,int w,int h,const char* arquivo)
 {
    tabButton* novo;
 
@@ -160,9 +157,6 @@ tabButton* Tlista::InserirTabButton(int x,int y,int w,int h,const char* arquivo)
    {
       novo = new tabButton(x,y,w,h);
    }
-   
-
-   novo->type = GUI_TAB_BUTTON;
    InserirObj(novo);
    return(novo);
 } 

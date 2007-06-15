@@ -27,8 +27,8 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    window = inter->insertWindow(90,100,710,499,
                                 language.CLASSW_TITLE.c_str(),1,1);
    /* Class Image */
-   classImage = window->objects->InserirFigura(7,20,0,0,NULL);   
-   classImage->fig = actualClass->image;
+   classImage = window->objects->insertPicture(7,20,0,0,NULL);   
+   classImage->set(actualClass->image);
 
    /* Class Description */
    textDescTitle = window->objects->InserirQuadroTexto(71,20,342,35,1,
@@ -201,12 +201,12 @@ int classWindow::treat(guiObject* object, int eventInfo, interface* inter)
          textDesc->setText(actualClass->citation + "||" +
                            actualClass->description);
          textCharac->setText(getCharacteristics());
-         classImage->fig = actualClass->image;
+         classImage->set(actualClass->image);
          window->Desenhar(0,0);
       }
       else if(object == (guiObject*) buttonConfirm)
       {
-         classImage->fig = NULL;
+         classImage->set(NULL);
          *choosedClass = actualClass;
          inter->closeWindow(window);
          glEnable(GL_LIGHTING);
@@ -215,7 +215,7 @@ int classWindow::treat(guiObject* object, int eventInfo, interface* inter)
       }
       else if(object == (guiObject*) buttonCancel) 
       {
-         classImage->fig = NULL; //to not delete classes images
+         classImage->set(NULL); //to not delete classes images
          inter->closeWindow(window);
          *choosedClass = NULL;
          window = NULL;

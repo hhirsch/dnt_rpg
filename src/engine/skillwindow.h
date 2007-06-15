@@ -51,7 +51,7 @@ class skillWindow
       button* buttonConfirm;
       button* buttonCancel;
 
-      figura*      skFig;            /**< Actual skill Image */
+      picture*     skFig;            /**< Actual skill Image */
       lang language;                 /**< Language internationalization */ 
 
 };

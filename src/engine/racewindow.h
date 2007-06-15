@@ -51,7 +51,7 @@ class raceWindow
       quadroTexto* textCharacTitle;
       quadroTexto* textCitation;
 
-      figura* raceImage;
+      picture* raceImage;
 
       lang language;                 /**< Language internationalization */
 

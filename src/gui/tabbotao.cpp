@@ -2,14 +2,22 @@
 #include "draw.h"
 #include "mouse.h"
 
-tabButton::tabButton(int x,int y,const char* arquivo):figura(x,y,0,0,arquivo)
+/***********************************************************
+ *                       Constructor                       *
+ ***********************************************************/
+tabButton::tabButton(int x,int y,const char* arquivo):picture(x,y,0,0,arquivo)
 {
    numButtons = 0;
    pressed = false;
+   type = GUI_TAB_BUTTON;
 }
 
-tabButton::tabButton(int x, int y, int w, int h):figura(x,y,0,0, NULL)
+/***********************************************************
+ *                       Constructor                       *
+ ***********************************************************/
+tabButton::tabButton(int x, int y, int w, int h):picture(x,y,0,0, NULL)
 {
+   type = GUI_TAB_BUTTON;
    numButtons = 0;
    x1 = x;
    y1 = y;
@@ -18,6 +26,9 @@ tabButton::tabButton(int x, int y, int w, int h):figura(x,y,0,0, NULL)
    pressed = false;
 }
 
+/***********************************************************
+ *                       insertButton                      *
+ ***********************************************************/
 oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
 {
    if(numButtons < MAX_TABBUTTONS)
@@ -32,13 +43,16 @@ oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
    return(NULL);
 }
 
+/***********************************************************
+ *                           draw                          *
+ ***********************************************************/
 void tabButton::draw(int mouseX, int mouseY, 
                      int Xjan,int Yjan,SDL_Surface *screen)
 { 
    int i;
-   figura* fig;
+   picture* fig;
    fig = this;
-   fig->Desenhar(0, 0, 0,  screen);
+   fig->draw(screen);
    for(i=0;i<numButtons;i++)
    {
       if(mouse_NaArea(Xjan + x1 + Buttons[i].x1, Yjan + y1 + Buttons[i].y1,
@@ -51,7 +65,7 @@ void tabButton::draw(int mouseX, int mouseY,
                             cor.colorCont[1].R,cor.colorCont[1].G,
                             cor.colorCont[1].B);
       }
-      else if(fig->fig == NULL)
+      else if(fig->get() == NULL)
       {
          color_Set(cor.colorWindow.R, cor.colorWindow.G, cor.colorWindow.B);
          rectangle_Draw(screen, x1+Buttons[i].x1,y1+Buttons[i].y1,
@@ -60,6 +74,9 @@ void tabButton::draw(int mouseX, int mouseY,
    }
 }
 
+/***********************************************************
+ *                      verifyPosition                     *
+ ***********************************************************/
 guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons, 
                                    int Xjan, int Yjan, SDL_Surface *screen,
                                    int &actionType)

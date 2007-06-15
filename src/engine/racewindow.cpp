@@ -27,8 +27,8 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    window = inter->insertWindow(90,100,710,499,
                                 language.RACEW_TITLE.c_str(),1,1);
    /* Race Image */
-   raceImage = window->objects->InserirFigura(7,20,0,0,NULL);   
-   raceImage->fig = actualRace->image;
+   raceImage = window->objects->insertPicture(7,20,0,0,NULL);   
+   raceImage->set(actualRace->image);
 
    /* Race Description */
    textDescTitle = window->objects->InserirQuadroTexto(71,20,342,35,1,
@@ -149,12 +149,12 @@ int raceWindow::treat(guiObject* object, int eventInfo,
          textDesc->setText(actualRace->citation + "||" +
                            actualRace->description);
          textCharac->setText(getCharacteristics());
-         raceImage->fig = actualRace->image;
+         raceImage->set(actualRace->image);
          window->Desenhar(0,0);
       }
       else if(object == (guiObject*) buttonConfirm)
       {
-         raceImage->fig = NULL;
+         raceImage->set(NULL);
          *choosedRace = actualRace;
          inter->closeWindow(window);
          window = NULL;
@@ -164,7 +164,7 @@ int raceWindow::treat(guiObject* object, int eventInfo,
       }
       else if(object == (guiObject*) buttonCancel) 
       {
-         raceImage->fig = NULL; //to not delete race images
+         raceImage->set(NULL); //to not delete race images
          inter->closeWindow(window);
          *choosedRace = NULL;
          window = NULL;

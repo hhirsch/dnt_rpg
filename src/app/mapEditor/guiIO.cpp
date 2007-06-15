@@ -84,7 +84,7 @@ void guiIO::openTextureWindow()
 void guiIO::openObjectWindow()
 {
    objectWindow = gui->insertWindow(0,245,184,599-248,"Objects",1,1);
-   objectTabButton = objectWindow->objects->InserirTabButton(7,17,0,0,
+   objectTabButton = objectWindow->objects->insertTabButton(7,17,0,0,
                                                "../data/mapEditor/objects.png");
    objectCommonButton = objectTabButton->insertButton(0,0,24,19);
    objectGunsButton = objectTabButton->insertButton(25,0,44,19);
@@ -105,7 +105,7 @@ void guiIO::openObjectWindow()
 void guiIO::openNavWindow()
 {
    navWindow = gui->insertWindow(799-67,599-74,799,599,"Nav",1,1);
-   navTabButton = navWindow->objects->InserirTabButton(7,17,0,0,
+   navTabButton = navWindow->objects->insertTabButton(7,17,0,0,
                                                    "../data/mapEditor/nav.png");
    moreZoomButton = navTabButton->insertButton(0,0,8,8);    /* More Zoom */
    lessZoomButton = navTabButton->insertButton(9,0,17,8);   /* Less Zoom */
@@ -167,7 +167,7 @@ void guiIO::openMainWindow()
 void guiIO::openWallWindow()
 {
    wallWindow = gui->insertWindow(0,599-123,112,599-62,"Wall",1,1);
-   wallTabButton = wallWindow->objects->InserirTabButton(7,17,0,0,
+   wallTabButton = wallWindow->objects->insertTabButton(7,17,0,0,
                                                   "../data/mapEditor/wall.png");
    wallXButton = wallTabButton->insertButton(0,0,19,19);          /* Wall X */
    wallZButton = wallTabButton->insertButton(20,0,39,19);         /* Wall Z */
@@ -189,7 +189,7 @@ void guiIO::openWallWindow()
 void guiIO::openPortalWindow()
 {
    portalWindow = gui->insertWindow(0,599-185,112,599-124,"Portal",1,1);
-   portalTabButton = portalWindow->objects->InserirTabButton(7,17,0,0,
+   portalTabButton = portalWindow->objects->insertTabButton(7,17,0,0,
                                                 "../data/mapEditor/portal.png");
    portalAddButton = portalTabButton->insertButton(0,0,19,19); /* Add */
    portalTagButton = portalTabButton->insertButton(20,0,39,19); /* Tag */
@@ -205,7 +205,7 @@ void guiIO::openPortalWindow()
 void guiIO::openTerrainWindow()
 {
    terrainWindow = gui->insertWindow(0,599-61,112,599,"Terrain",1,1);
-   terrainTabButton = terrainWindow->objects->InserirTabButton(7,17,0,0,
+   terrainTabButton = terrainWindow->objects->insertTabButton(7,17,0,0,
                                                "../data/mapEditor/terrain.png");
    terrainUpButton = terrainTabButton->insertButton(0,0,19,19);    
    terrainNivButton = terrainTabButton->insertButton(20,0,39,19);  
@@ -222,7 +222,7 @@ void guiIO::openTerrainWindow()
 void guiIO::openParticleWindow()
 {
    particleWindow = gui->insertWindow(0,599-247,112,599-186,"Particle",1,1);
-   particleTabButton = particleWindow->objects->InserirTabButton(7,17,0,0,
+   particleTabButton = particleWindow->objects->insertTabButton(7,17,0,0,
                                               "../data/mapEditor/particle.png");
    fireButton = particleTabButton->insertButton(0,0,19,19);
    smokeButton = particleTabButton->insertButton(20,0,39,19); 

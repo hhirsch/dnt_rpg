@@ -167,8 +167,8 @@ void janela::Desenhar(int mouseX, int mouseY)
               break;
          }
          case GUI_PICTURE:{
-              figura* fig = (figura*) obj;
-              fig->Desenhar(0,0,0,cara);
+              picture* fig = (picture*) obj;
+              fig->draw(cara);
               break;
          }
          case GUI_TEXT_BOX:{

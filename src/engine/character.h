@@ -9,7 +9,7 @@
 using namespace std;
 
 #include "../gui/draw.h"
-#include "../gui/figura.h"
+#include "../gui/picture.h"
 #include "../gui/healthBar.h"
 #include "../classes/thing.h"
 #include "../classes/feats.h"

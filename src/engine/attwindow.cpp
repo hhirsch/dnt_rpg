@@ -75,7 +75,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attTotals[0]->tamFonte = 3;
    attMods[0] = window->objects->InserirQuadroTexto(196,49,226,64,0,
                                                     "");
-   window->objects->InserirFigura(130,40,0,0,"../data/skills/Img/forca.png");
+   window->objects->insertPicture(130,40,0,0,"../data/skills/Img/forca.png");
 
    /* Dextery */
    window->objects->InserirQuadroTexto(9,83,85,96,0,
@@ -89,7 +89,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attTotals[1]->tamFonte = 3;
    attMods[1] = window->objects->InserirQuadroTexto(196,82,226,98,0,
                                                     "");
-   window->objects->InserirFigura(130,74,0,0,"../data/skills/Img/destreza.png");
+   window->objects->insertPicture(130,74,0,0,"../data/skills/Img/destreza.png");
 
    /* Constitution */
    window->objects->InserirQuadroTexto(9,119,87,132,0,
@@ -103,7 +103,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attTotals[2]->tamFonte = 3;
    attMods[2] = window->objects->InserirQuadroTexto(196,119,226,134,0,
                                                     "");
-   window->objects->InserirFigura(130,108,0,0,
+   window->objects->insertPicture(130,108,0,0,
                                          "../data/skills/Img/constituicao.png");
 
    /* Inteligency */
@@ -118,7 +118,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attTotals[3]->tamFonte = 3;
    attMods[3] = window->objects->InserirQuadroTexto(196,153,226,168,0,
                                                     "");
-   window->objects->InserirFigura(130,142,0,0,
+   window->objects->insertPicture(130,142,0,0,
                                          "../data/skills/Img/inteligencia.png");
 
    /* Wisdow */
@@ -132,7 +132,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attTotals[4]->fonte = FTIMES;
    attTotals[4]->tamFonte = 3;
    attMods[4] = window->objects->InserirQuadroTexto(196,187,226,202,0,"");
-   window->objects->InserirFigura(130,176,0,0,
+   window->objects->insertPicture(130,176,0,0,
                                             "../data/skills/Img/sabedoria.png");
 
    /* Charism */
@@ -146,7 +146,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attTotals[5]->fonte = FTIMES;
    attTotals[5]->tamFonte = 3;
    attMods[5] = window->objects->InserirQuadroTexto(196,221,226,236,0,"");
-   window->objects->InserirFigura(130,210,0,0,"../data/skills/Img/carisma.png");
+   window->objects->insertPicture(130,210,0,0,"../data/skills/Img/carisma.png");
                                               
 
    /* Contorns */

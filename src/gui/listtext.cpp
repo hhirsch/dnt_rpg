@@ -40,7 +40,7 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    roll = l->insertRolBar(x1, y1, x2, y2, "", windowSurface);
    
    /* Create the tabButton */
-   table = l->InserirTabButton(x1, y1, x2-x1, y2-y1, NULL);
+   table = l->insertTabButton(x1, y1, x2-x1, y2-y1, NULL);
    for(i = 0; i<maxButtons; i++)
    {
       listButtons[i] = table->insertButton(1, (i*11)+4,  (x2-x1)-14, ((i+1)*11)+3);

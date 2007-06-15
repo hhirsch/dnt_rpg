@@ -56,7 +56,7 @@ class aspectWindow
       cxSel* cxSelSexM;             /**< Feminine Sex SelBox */
       cxSel* cxSelSexF;             /**< Masculine Sex SelBox */
       cxSel* cxSelSexO;             /**< Other Sex SelBox */
-      figura* figurePortrait;       /**< Portrait Figure */
+      picture* figurePortrait;      /**< Portrait Figure */
       janela* window;               /**< Internal pointer to the window */
 
       lang language;                /**< Language internationalized */

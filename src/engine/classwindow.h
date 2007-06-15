@@ -53,7 +53,7 @@ class classWindow
       quadroTexto* textCharacTitle;
       quadroTexto* textCitation;
 
-      figura* classImage;
+      picture* classImage;
 
       lang language;                 /**< Language internationalization */
 

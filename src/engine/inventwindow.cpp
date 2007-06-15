@@ -25,7 +25,7 @@ inventWindow::inventWindow(inventory *invent, interface* inter)
    window = inter->insertWindow(0,0,263,402,language.INVENTW_TITLE.c_str(),1,1);
 
    /* Add Character (equip) Tab Button */
-   characterTabButton = window->objects->InserirTabButton(4,15,256,256,
+   characterTabButton = window->objects->insertTabButton(4,15,256,256,
                                         "../data/texturas/inventory/equip.png");
    headButton = characterTabButton->insertButton(109,3,147,41);
    footButton = characterTabButton->insertButton(109,214,147,252);
@@ -37,7 +37,7 @@ inventWindow::inventWindow(inventory *invent, interface* inter)
    leftFingerButton = characterTabButton->insertButton(200,169,219,188);
 
    /* Add Inventory Tab Button */
-   inventoryTabButton = window->objects->InserirTabButton(4,271,256,128,
+   inventoryTabButton = window->objects->insertTabButton(4,271,256,128,
                                    "../data/texturas/inventory/inventory.png");
    inventoryButton = inventoryTabButton->insertButton(4,13,251,127);
    inv1Button = inventoryTabButton->insertButton(4,0,64,13);
@@ -93,8 +93,8 @@ void inventWindow::reDraw()
 {
    if(isOpen())
    {
-      inventories->draw(0,0, inventoryTabButton->fig, currentInventory);
-      inventories->drawEquiped(0,0,characterTabButton->fig);
+      inventories->draw(0,0, inventoryTabButton->get(), currentInventory);
+      inventories->drawEquiped(0,0,characterTabButton->get());
       window->Desenhar(0,0);
 
       //TODO Mark on actual Inventory!

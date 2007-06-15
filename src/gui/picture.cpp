@@ -3,23 +3,29 @@
  */
 
 
-#include "figura.h"
+#include "picture.h"
 #include <stdio.h>
 #include <SDL/SDL_image.h>
 
-
-figura::~figura()
+/******************************************************
+ *                    Destructor                      *
+ ******************************************************/
+picture::~picture()
 {
    if (fig)
       SDL_FreeSurface(fig);
 }
 
-figura::figura(int x,int y,int w,int h,const char* arquivo)
+/******************************************************
+ *                     Constructor                    *
+ ******************************************************/
+picture::picture(int x,int y,int w,int h,const char* arquivo)
 {
    x1 = x;
    y1 = y;
    x2 = x+w;
-   y2 = y+h; 
+   y2 = y+h;
+   type = GUI_PICTURE;
  
    if(arquivo!=NULL)
    {
@@ -57,16 +63,36 @@ figura::figura(int x,int y,int w,int h,const char* arquivo)
    }
 }
 
-void figura::Desenhar(int Xjan,int Yjan,int salvar,SDL_Surface *screen)
+/******************************************************
+ *                        draw                        *
+ ******************************************************/
+void picture::draw(SDL_Surface *screen)
 {
    if(fig == NULL)
    {
       return;
    }
    SDL_Rect Ret;
-   Ret.x = x1+Xjan;
-   Ret.y = y1+Yjan;
+   Ret.x = x1;
+   Ret.y = y1;
    Ret.w = fig->w;
    Ret.h = fig->h;
    SDL_BlitSurface(fig,NULL,screen,&Ret);
 }
+
+/******************************************************
+ *                        set                         *
+ ******************************************************/
+void picture::set(SDL_Surface* newPicture)
+{
+   fig = newPicture;
+}
+
+/******************************************************
+ *                         get                        *
+ ******************************************************/
+SDL_Surface* picture::get()
+{
+   return(fig);
+}
+
