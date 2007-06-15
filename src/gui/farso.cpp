@@ -5,11 +5,13 @@
 
 #include "farso.h"
 
-void Farso_Iniciar(SDL_Surface **screen, char* titulo)
-{
 
-    
-    //Comeca a abrir a tela
+/************************************************************
+ *                        Farso_Init                        *
+ ************************************************************/
+void Farso_Init(SDL_Surface **screen, string title)
+{
+    /* Start Openning the screen  */
     if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
     {
         printf("Argh! Can't init SDL!\n");
@@ -34,11 +36,9 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
        exit(2);
     }
 
-    SDL_WM_SetCaption(titulo,"");
-    //Terminou de abrir a janela
+    SDL_WM_SetCaption(title.c_str(),"");
 
-
-    //Define quais eventos irao ser ignorados
+    /* Define ignored events */
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
     SDL_EventState(SDL_ACTIVEEVENT, SDL_IGNORE);
     SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
@@ -49,7 +49,6 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
     SDL_EventState(SDL_JOYHATMOTION, SDL_IGNORE);
     SDL_EventState(SDL_JOYBUTTONDOWN, SDL_IGNORE);
     SDL_EventState(SDL_JOYBUTTONUP, SDL_IGNORE);
-    //SDL_EventState(SDL_QUIT, SDL_IGNORE);
     SDL_EventState(SDL_SYSWMEVENT, SDL_IGNORE);
     SDL_EventState(SDL_VIDEORESIZE, SDL_IGNORE);
     SDL_EventState(SDL_VIDEOEXPOSE, SDL_IGNORE);
@@ -57,7 +56,10 @@ void Farso_Iniciar(SDL_Surface **screen, char* titulo)
     
 }
 
-void Farso_Terminar(SDL_Surface *screen)
+/************************************************************
+ *                         Farso_End                        *
+ ************************************************************/
+void Farso_End(SDL_Surface *screen)
 {
 }
 

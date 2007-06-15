@@ -25,7 +25,7 @@ int main(int argc, char **argv)
       scanf("%s",server);
       printf("I'll conect to %s\n",server);
    #endif   
-   Farso_Iniciar(&screen,"DccNiTghtmare");
+   Farso_Init(&screen,"DccNiTghtmare");
    engine* Engine = new engine();
    
 
@@ -118,8 +118,10 @@ int main(int argc, char **argv)
    Engine->fadeOutTexture(tituloID,0,0,799,599);
 
    glDeleteTextures(1,&tituloID); 
-       
+
    delete(Engine);
+
+   Farso_End(screen);
 
    return(0); 
 }

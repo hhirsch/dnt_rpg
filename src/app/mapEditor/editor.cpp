@@ -12,7 +12,7 @@ editor::editor()
    particleSystem = new partSystem();
    features = new featsList("../data/feats/Ingles/",
                                        "../data/feats/feats.ftl");
-   Farso_Iniciar(&screen,"DccNiTghtmare Map Editor 0.1");
+   Farso_Init(&screen,"DccNiTghtmare Map Editor 0.1");
    init();
 
    /* Load Language's files */
@@ -61,6 +61,7 @@ editor::~editor()
    }
    delete(gui);
    delete(models);
+   Farso_End(screen);
 }
 
 /*********************************************************************

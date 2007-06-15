@@ -28,8 +28,14 @@
 #include "tabbotao.h"
 #include "messages.h"
 
-void Farso_Iniciar(SDL_Surface **screen, char* titulo);
-void Farso_Terminar(SDL_Surface *screen);
+/*! Init the SDL/OpenGL Context
+ * \param screen -> pointer to the pointer to the surface used as screen
+ * \param title -> title of the screen */
+void Farso_Init(SDL_Surface **screen, string title);
+
+/*! End the SDL/OpenGL Context
+ * \param screen -> surface used as screen */
+void Farso_End(SDL_Surface *screen);
 
 
 #endif
