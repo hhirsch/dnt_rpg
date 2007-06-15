@@ -421,7 +421,7 @@ void conversation::openDialog(int numDialog, interface* gui, character* pers,
    jan->objects->insertPicture(5,25,0,0,pers->getPortraitFileName().c_str());
    npcText = jan->objects->insertRolBar(71,20,250,115,"",jan->cara);
    //npcText->fonte = FMINI;
-   pcSelText = jan->objects->insertSelTexto(5,116,250,250,"","","","","");
+   pcSelText = jan->objects->insertSelText(5,116,250,250,"","","","","");
    jan->objects->insertPicture(3,15,0,0,"../data/texturas/dialog.png");
    jan->ptrExterno = &jan;
    gui->openWindow(jan);
@@ -517,7 +517,7 @@ void conversation::changeDialog(int numDialog)
    npcText->setText(npc);
    for(i = 0; i < MAX_OPTIONS; i++)
    {
-      pcSelText->text[i] = options[i];
+      pcSelText->setText(i,options[i]);
    }
 
    if(windowOpened())

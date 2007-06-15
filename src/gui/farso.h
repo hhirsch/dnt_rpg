@@ -18,7 +18,7 @@
 #include "healthBar.h"
 #include "textbox.h"
 #include "rolbar.h"
-#include "seltexto.h"
+#include "seltext.h"
 #include "textbar.h"
 #include "guiobject.h"
 #include "lista.h"

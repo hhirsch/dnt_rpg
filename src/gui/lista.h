@@ -13,7 +13,7 @@ using namespace std;
 #include "cxsel.h"
 #include "picture.h"
 #include "textbox.h"
-#include "seltexto.h"
+#include "seltext.h"
 #include "tabbotao.h"
 #include "textbar.h"
 #include "rolbar.h"
@@ -72,9 +72,9 @@ class Tlista{
        * textX       -> texto de escolha de numero X
        * proc        -> procedimento a rodar qdo ocorrer escolha
        * lista       -> lista na qual a selTexto vai ser inserida*/
-      selTexto* insertSelTexto(int xa,int ya,int xb,int yb,string text0,
-                            string text1,string text2,string text3, 
-                            string text4);
+      selText* insertSelText(int xa,int ya,int xb,int yb,string text0,
+                             string text1,string text2,string text3, 
+                             string text4);
 
       rolBar* insertRolBar(int xa,int ya,int xb,int yb,string txt,
                            SDL_Surface* surface);

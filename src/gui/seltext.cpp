@@ -2,12 +2,39 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#include "seltexto.h"
+#include "seltext.h"
+
+/***************************************************************************
+ *                            Constructor                                  *
+ ***************************************************************************/
+selText::selText(int xa,int ya,int xb,int yb, string text0, string text1,
+                 string text2, string text3, string text4)
+{
+   type = GUI_SEL_TEXT;
+   x1 = xa;
+   y1 = ya;
+   x2 = xb;
+   y2 = yb;
+   optText[0] = text0;
+   optText[1] = text1;
+   optText[2] = text2;
+   optText[3] = text3;
+   optText[4] = text4;
+   selec = -1;
+   pressed = false;
+}
+
+/***************************************************************************
+ *                             Destructor                                  *
+ ***************************************************************************/
+selText::~selText()
+{
+}
 
 /***************************************************************************
  *                           setCoordinate                                 *
  ***************************************************************************/
-void selTexto::setCoordinate(int xa,int ya,int xb,int yb)
+void selText::setCoordinate(int xa,int ya,int xb,int yb)
 {
    x1 = xa;
    y1 = ya;
@@ -20,7 +47,7 @@ void selTexto::setCoordinate(int xa,int ya,int xb,int yb)
 /***************************************************************************
  *                           getCoordinate                                 *
  ***************************************************************************/
-void selTexto::getCoordinate(int& xa,int& ya,int& xb,int& yb)
+void selText::getCoordinate(int& xa,int& ya,int& xb,int& yb)
 {
    xa = x1;
    ya = y1;
@@ -32,14 +59,14 @@ void selTexto::getCoordinate(int& xa,int& ya,int& xb,int& yb)
 /***************************************************************************
  *                                draw                                     *
  ***************************************************************************/
-void selTexto::draw(int selectedItem, SDL_Surface *screen)
+void selText::draw(int selectedItem, SDL_Surface *screen)
 {
    int ya = y1+3;
    int aux;
    selFonte(FHELVETICA,ESQUERDA,1); 
    for(aux = 0; aux<5;aux++)
    {
-      if(!text[aux].empty())
+      if(!optText[aux].empty())
       {
          if(aux!=selectedItem)
          {
@@ -50,7 +77,7 @@ void selTexto::draw(int selectedItem, SDL_Surface *screen)
             color_Set(Cores.colorSelText.R,Cores.colorSelText.G,
                         Cores.colorSelText.B);
          }
-         ya = escxy_Area(screen,4+x1,ya,text[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
+         ya = escxy_Area(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
      }
      y[aux] = ya;
      ya += 11;
@@ -64,7 +91,7 @@ void selTexto::draw(int selectedItem, SDL_Surface *screen)
 /***************************************************************************
  *                           writeSelected                                 *
  ***************************************************************************/
-void selTexto::writeSelected(int selectedItem, SDL_Surface *screen)
+void selText::writeSelected(int selectedItem, SDL_Surface *screen)
 {
    int ya;
    int aux;
@@ -89,7 +116,7 @@ void selTexto::writeSelected(int selectedItem, SDL_Surface *screen)
       color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    }
    selFonte(FHELVETICA,ESQUERDA,1);
-   escxy_Area(screen,4+x1,ya,text[aux].c_str(),
+   escxy_Area(screen,4+x1,ya,optText[aux].c_str(),
               x1+1,y1+1,x2-1,y2-1);
    selec = selectedItem;
 }
@@ -97,7 +124,7 @@ void selTexto::writeSelected(int selectedItem, SDL_Surface *screen)
 /***************************************************************************
  *                          getSelectedItem                                *
  ***************************************************************************/
-int selTexto::getSelectedItem(int ya )
+int selText::getSelectedItem(int ya )
 {
    int aux;
    int selaux = -1;
@@ -124,7 +151,7 @@ int selTexto::getSelectedItem(int ya )
 /***************************************************************************
  *                                threat                                   *
  ***************************************************************************/
-int selTexto::threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
+int selText::threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
 {
     int selaux = 1;
 
@@ -136,13 +163,13 @@ int selTexto::threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
        return(-1);
     }
 
-    /* Trata o caso do mouse encima do text */
+    /* Trata o caso do mouse encima do optText */
     selaux = getSelectedItem(ya);
 
     /* Colore o selectedItem atual */
     writeSelected(selaux, screen);
 
-    /* Testa pressionamento do text */
+    /* Testa pressionamento do optText */
     if( Mbotao & SDL_BUTTON(1) )
     {
        pressed = true;
@@ -158,9 +185,19 @@ int selTexto::threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
 /***************************************************************************
  *                          getLastSelectedItem                            *
  ***************************************************************************/
-int selTexto::getLastSelectedItem()
+int selText::getLastSelectedItem()
 {
    return(selec);
 }
 
+/***************************************************************************
+ *                                setText                                  *
+ ***************************************************************************/
+void selText::setText(int opt, string txt)
+{
+   if(opt < MAX_OPTIONS)
+   {
+      optText[opt] = txt;
+   }
+}
 

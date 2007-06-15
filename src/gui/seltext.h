@@ -14,14 +14,28 @@ using namespace std;
 #include "mouse.h"
 #include "guiobject.h"
 
-#define MAX_OPTIONS 5
+#define MAX_OPTIONS 5  /**< Max Options on Sel Text */
 
 /*! Select Text Class (from 1 to 5 texts) */
-class selTexto: public guiObject
+class selText: public guiObject
 {
    public:
-      string text[MAX_OPTIONS];   /**< Text Options */
-      
+      /*! Constructor
+       * \param xa -> x1 coordinate
+       * \param ya -> y1 coordinate
+       * \param xb -> x2 coordinate
+       * \param yb -> y2 coordinate
+       * \param text0 -> option 0 text
+       * \param text1 -> option 1 text
+       * \param text2 -> option 2 text
+       * \param text3 -> option 3 text
+       * \param text4 -> option 4 text*/
+      selText(int xa,int ya,int xb,int yb, string text0, string text1,
+              string text2, string text3, string text4);
+
+      /*! Destructor */
+      ~selText();
+
       /*! Set the SelTexto coordinates
        * \param xa -> x1 coordinate
        * \param xb -> x2 coordinate
@@ -53,6 +67,11 @@ class selTexto: public guiObject
        * \param return -> last selected item */
       int getLastSelectedItem();
 
+      /*! Set the text of an option
+       * \param opt -> option number
+       * \param txt -> option txt */
+      void setText(int opt, string txt);
+
    private:
       /*! Write to the surface the selected item on differente color.
        * \param selectItem -> number of the selected text
@@ -65,10 +84,11 @@ class selTexto: public guiObject
       int getSelectedItem(int ya);
 
    protected:
-      int y[MAX_OPTIONS];  /**< Final Y of each option */
-      int selec;           /**< last item selected */
-      farso_colors Cores; /**< colors */
-      bool pressed; /**< while pressed == true */
+      int y[MAX_OPTIONS];          /**< Final Y of each option */
+      string optText[MAX_OPTIONS]; /**< Text Options */
+      int selec;                   /**< last item selected */
+      farso_colors Cores;          /**< colors */
+      bool pressed;                /**< while pressed == true */
 
 
 };

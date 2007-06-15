@@ -128,10 +128,10 @@ class conversation
          int total;            /**< Total Dialogs */
          int actual;           /**< Actual active Dialog */
          rolBar* npcText;      /**< The NPC text quad */
-         selTexto* pcSelText;  /**< The PC selection text */
-         button* barterButton;  /**< The Barter Button */
-         character* actualPC; /**< The Actual PC */
-         character* actualNPC;/**< The actual NPC */
+         selText* pcSelText;   /**< The PC selection text */
+         button* barterButton; /**< The Barter Button */
+         character* actualPC;  /**< The Actual PC */
+         character* actualNPC; /**< The actual NPC */
          void* actualEngine;   /**< The actual Engine */
 
          /*!

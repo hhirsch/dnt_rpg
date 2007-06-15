@@ -104,13 +104,13 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                /* Test selTexto */
                if(obj->type == GUI_SEL_TEXT) 
                {
-                  selTexto *st = (selTexto*) obj;
+                  selText *st = (selText*) obj;
                   int xa,ya,xb,yb;
                   st->getCoordinate(xa,ya,xb,yb);
                   if(isMouseAt(ljan->janelaAtiva->x1+xa,
-                                  ljan->janelaAtiva->y1+ya,
-                                  ljan->janelaAtiva->x1+xb, 
-                                  ljan->janelaAtiva->y1+yb,x,y))
+                               ljan->janelaAtiva->y1+ya,
+                               ljan->janelaAtiva->x1+xb, 
+                               ljan->janelaAtiva->y1+yb,x,y))
                   {
                       objAtivo = st;
                       foco = FOCO_SELTEXTO;
@@ -197,13 +197,13 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                /* Verify Text Select */
                else if(obj->type == GUI_SEL_TEXT)
                {
-                  selTexto* st = (selTexto*) obj;
+                  selText* st = (selText*) obj;
                   int xa,ya,xb,yb;
                   st->getCoordinate(xa,ya,xb,yb);
                   if(isMouseAt(xa+ljan->janelaAtiva->x1,
-                                  ya+ljan->janelaAtiva->y1,
-                                  xb+ljan->janelaAtiva->x1,
-                                  yb+ljan->janelaAtiva->y1,x,y))
+                               ya+ljan->janelaAtiva->y1,
+                               xb+ljan->janelaAtiva->x1,
+                               yb+ljan->janelaAtiva->y1,x,y))
                   {
                      objAtivo = st;
                      foco = FOCO_SELTEXTO;
@@ -256,8 +256,8 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     {
         int pronto;
         button* bot = (button*)objAtivo;
-        if (bot->press(ljan->janelaAtiva->x1, ljan->janelaAtiva->y1, x, y, Mbotao, 
-                       &pronto, ljan->janelaAtiva->cara))
+        if (bot->press(ljan->janelaAtiva->x1, ljan->janelaAtiva->y1, x, y, 
+                       Mbotao, &pronto, ljan->janelaAtiva->cara))
         {
            if(pronto)
            {
@@ -401,7 +401,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     {
         mouseX = x;
         mouseY = y;
-        selTexto *st = (selTexto*)objAtivo;
+        selText *st = (selText*)objAtivo;
         int res = st->threat(x-ljan->janelaAtiva->x1,
                              y-ljan->janelaAtiva->y1,
                              Mbotao,ljan->janelaAtiva->cara);

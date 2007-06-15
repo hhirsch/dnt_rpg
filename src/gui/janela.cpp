@@ -162,7 +162,7 @@ void janela::Desenhar(int mouseX, int mouseY)
               break;
          }
          case GUI_SEL_TEXT:{
-              selTexto *st = (selTexto*) obj;
+              selText *st = (selText*) obj;
               st->draw(-1,cara);
               break;
          }

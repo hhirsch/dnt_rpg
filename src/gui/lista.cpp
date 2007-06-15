@@ -69,7 +69,7 @@ void Tlista::Retirar(guiObject *obj)
       }
       case GUI_SEL_TEXT:
       {
-         selTexto* s = (selTexto*) obj;
+         selText* s = (selText*) obj;
          delete(s);
          break;
       }
@@ -182,20 +182,13 @@ textBox* Tlista::insertTextBox(int xa,int ya,int xb,int yb,
 } 
 
 /* Insere um novo selTexto na lista */
-selTexto* Tlista::insertSelTexto(int xa,int ya,int xb,int yb,
-                                  string text0, string text1,
-                                  string text2, string text3, 
-                                  string text4)
+selText* Tlista::insertSelText(int xa,int ya,int xb,int yb,
+                                string text0, string text1,
+                                string text2, string text3, 
+                                string text4)
 {
-   selTexto* novo;
-   novo = new selTexto;
-   novo->setCoordinate(xa,ya,xb,yb);
-   novo->text[0] = text0;
-   novo->text[1] = text1;
-   novo->text[2] = text2;
-   novo->text[3] = text3;
-   novo->text[4] = text4;
-   novo->type = GUI_SEL_TEXT;
+   selText* novo;
+   novo = new selText(xa,ya,xb,yb,text0,text1,text2,text3,text4);
    InserirObj(novo);
    return(novo);
 } 
