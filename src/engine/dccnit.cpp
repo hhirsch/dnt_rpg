@@ -262,9 +262,9 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    color_Set(0,0,0);
    rectangle_Fill(img,0,0,255,31);
    color_Set(200,20,20);
-   selFonte(FFARSO,CENTRALIZADO,3);
+   defineFont(FFARSO,ALIGN_CENTER,3);
    sprintf(texto,language.LOAD_MAP.c_str(),arqMapa.c_str());
-   escxy(img,128,0,texto);
+   write(img,128,0,texto);
    GLuint texturaTexto;
    setTextureRGBA(img,&texturaTexto);
    fadeInTexture(texturaCarga, 272,236,527,363);
@@ -2161,7 +2161,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          sprintf(texto,"FPS: %3.2f",actualFPS);
          FPS->setText(texto);
          sprintf(texto," Part: %d",particleSystem->numParticles());
-         FPS->setText(texto);
+         FPS->setText(FPS->getText()+texto);
       }
       
 #ifdef VIDEO_MODE
@@ -2815,7 +2815,7 @@ void engine::OpenShortcutsWindow()
                                                language.INITIAL_LOAD.c_str(),0);
    hourTxt = shortCutsWindow->objects->insertTextBox(210,102,249,120,2,
                                                           "00:00");
-   hourTxt->setFont(FMINI,1,ESQUERDA);
+   hourTxt->setFont(FMINI,1,ALIGN_LEFT);
    hourToTxt();
 
    tabButton* tb;

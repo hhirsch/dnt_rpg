@@ -24,14 +24,14 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    }
    intList = list;
 
-   selFonte(FMINI, ESQUERDA, 1);
+   defineFont(FMINI, ALIGN_LEFT, 1);
    type = GUI_ROL_BAR;
    x1 = xa;
    y1 = ya;
    x2 = xb;
    y2 = yb;
    maxLines = ((yb-ya) / 11)-1;
-   charPerLine = (xb-xa) / fonte_incCP();
+   charPerLine = (xb-xa) / font_incCP();
    
    Tlista* l = (Tlista*)list;
 
@@ -45,7 +45,7 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
 
    /* Texto */
    scrollText = l->insertTextBox(xa,ya,xb-13,yb,2,""); 
-   scrollText->setFont(FMINI, 1, ESQUERDA);
+   scrollText->setFont(FMINI, 1, ALIGN_LEFT);
    scrollText->setColor(246, 190, 190);
 
    actualPressed = NULL;

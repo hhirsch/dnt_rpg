@@ -176,7 +176,7 @@ textBox* Tlista::insertTextBox(int xa,int ya,int xb,int yb,
    textBox* novo;
    novo = new textBox(xa,ya,xb,yb,frameType);
    novo->setText(text);
-   novo->setFont(FHELVETICA, 1, ESQUERDA);
+   novo->setFont(FHELVETICA, 1, ALIGN_LEFT);
    InserirObj(novo);
    return(novo);
 } 

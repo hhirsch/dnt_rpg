@@ -331,7 +331,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if (foco == FOCUS_TEXT_BAR)
     {
         textBar* bart = (textBar*)objAtivo;
-           if((bart->write(x - ljan->janelaAtiva->x1,
+           if((bart->doWrite(x - ljan->janelaAtiva->x1,
                            y - ljan->janelaAtiva->y1,
                            ljan->janelaAtiva->cara, Mbotao,tecla)))
            {

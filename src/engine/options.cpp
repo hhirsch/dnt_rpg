@@ -233,11 +233,11 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = tmp;
    qt = window->objects->insertTextBox(8,27,145,44,0,
                                          language.OPTIONS_MUSIC_VOLUME.c_str());
-   qt->setFont(FMINI,1,ESQUERDA);
+   qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonMusDec = window->objects->insertButton(146,27,156,44,"<",0);
    txtMusicVolume = window->objects->insertTextBox(157,27,197,44,1,
                                  saux.c_str());
-   txtMusicVolume->setFont(FMINI,1,ESQUERDA);
+   txtMusicVolume->setFont(FMINI,1,ALIGN_LEFT);
    buttonMusSum = window->objects->insertButton(198,27,208,44,">",0);
    window->objects->insertPicture(212,27,40,112,
                                   "../data/texturas/options/music.png");
@@ -248,11 +248,11 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = tmp;
    qt = window->objects->insertTextBox(8,52,145,69,0,
                                          language.OPTIONS_SNDFX_VOLUME.c_str());
-   qt->setFont(FMINI,1,ESQUERDA);
+   qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonSndDec = window->objects->insertButton(146,52,156,69,"<",0);
    txtSndfxVolume = window->objects->insertTextBox(157,52,197,69,1,
                                  saux.c_str());
-   txtSndfxVolume->setFont(FMINI,1,ESQUERDA);
+   txtSndfxVolume->setFont(FMINI,1,ALIGN_LEFT);
    buttonSndSum = window->objects->insertButton(198,52,208,69,">",0);
    window->objects->insertPicture(212,52,40,112,
                                   "../data/texturas/options/sndfx.png");
@@ -263,11 +263,11 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = languageName();
    qt = window->objects->insertTextBox(8,88,145,105,0,
                                          language.OPTIONS_LANGUAGE.c_str());
-   qt->setFont(FMINI,1,ESQUERDA);
+   qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonLangDec = window->objects->insertButton(121,88,131,105,"<",0);
    txtLanguage = window->objects->insertTextBox(132,88,197,105,1,
                                  saux.c_str());
-   txtLanguage->setFont(FMINI,1,ESQUERDA);
+   txtLanguage->setFont(FMINI,1,ALIGN_LEFT);
    buttonLangSum = window->objects->insertButton(198,88,208,105,">",0);
    window->objects->insertPicture(212,88,40,112,
                                   "../data/texturas/options/language.png");
@@ -277,11 +277,11 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = cameraName();
    qt = window->objects->insertTextBox(8,126,145,143,0,
                                             language.OPTIONS_CAMERA.c_str());
-   qt->setFont(FMINI,1,ESQUERDA);
+   qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonCamDec = window->objects->insertButton(121,126,131,143,"<",0);
    txtCamera = window->objects->insertTextBox(132,126,197,143,1,
                                  saux.c_str());
-   txtCamera->setFont(FMINI,1,ESQUERDA);
+   txtCamera->setFont(FMINI,1,ALIGN_LEFT);
    buttonCamSum = window->objects->insertButton(198,126,208,143,">",0);
    window->objects->insertPicture(214,126,40,112,
                                   "../data/texturas/options/camera.png");
@@ -290,7 +290,7 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Grass Enabled or Not */
    qt = window->objects->insertTextBox(20,156,200,173,0,
                                          language.OPTIONS_GRASS.c_str());
-   qt->setFont(FMINI,1,ESQUERDA);
+   qt->setFont(FMINI,1,ALIGN_LEFT);
    cxSelGrass = window->objects->insertCxSel(8,160, enableGrass);
    window->objects->insertPicture(214,156,40,112,
                                   "../data/texturas/options/grass.png");
@@ -299,7 +299,7 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Particle System Enabled or Not */
    qt = window->objects->insertTextBox(20,174,200,191,0,
                                          language.OPTIONS_PARTICLES.c_str());
-   qt->setFont(FMINI,1,ESQUERDA);
+   qt->setFont(FMINI,1,ALIGN_LEFT);
    cxSelParticles = window->objects->insertCxSel(8,178, enableParticles);
    window->objects->insertPicture(214,174,40,112,
                                   "../data/texturas/options/particles.png");
@@ -309,11 +309,11 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = reflexionName();
    qt = window->objects->insertTextBox(8,203,145,220,0,
                                             language.OPTIONS_REFLECTS.c_str());
-   qt->setFont(FMINI,1,ESQUERDA);
+   qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonReflDec = window->objects->insertButton(121,203,131,220,"<",0);
    txtReflexion = window->objects->insertTextBox(132,203,197,220,1,
                                  saux.c_str());
-   txtReflexion->setFont(FMINI,1,ESQUERDA);
+   txtReflexion->setFont(FMINI,1,ALIGN_LEFT);
    buttonReflSum = window->objects->insertButton(198,203,208,220,">",0);
    window->objects->insertPicture(212,203,40,220,
                                   "../data/texturas/options/reflexions.png");

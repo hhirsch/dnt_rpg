@@ -11,11 +11,12 @@
 #include <string>
 using namespace std;
 
-/* Alinhamentos  da Fonte */
-#define ESQUERDA         0
-#define DIREITA          1
-#define CENTRALIZADO     2
-#define TEMPOREPETICAO 100
+/* Font Aligns */
+#define ALIGN_LEFT         0
+#define ALIGN_RIGHT        1
+#define ALIGN_CENTER       2
+
+#define REPEAT_TIME  100
 
 #define FFARSO     "../data/fnt/farso.fnt"
 #define FHELVETICA "../data/fnt/Helve.fnt"
@@ -25,37 +26,54 @@ using namespace std;
 #define FPLATINA   "../data/fnt/Plat.fnt"
 #define FTIMES     "../data/fnt/times.fnt"
 
-/* Onde e definida a escrita de texto na superficie */
+/*! fnt is a font itself */
 typedef struct
 {
-   unsigned short int letra[257][16]; /* Cada Letra em HexaDecimal */
-   unsigned short int incCP;          /* O Incremento da Fonte */
-}fnt;                  /* Fonte do Tipo FNT */
+   unsigned short int letra[257][16]; /**< Each Hexadecimal character */
+   unsigned short int incCP;          /**< The Font Increment */
+}fnt;
 
-/* Escreve na superficie o texto
- * screen      -> Superficie na qual sera escrito o texto
- * x,y         -> Coordenada de base do Texto
- * texto       -> o texto a ser escrito
- * OPCIONAIS
- * inic        -> posicao inicial
- * fim         -> posicao final
- * x1,y1,x2,y2 -> coordenadas limitrofes */
-void escxy(SDL_Surface *screen,int x,int y, const char* texto);
-void escxy_Def(SDL_Surface *screen,int x,int y, const char* texto,int inic,int fim);
-/*Retorna o y */
-int escxy_Area(SDL_Surface *screen,int x, int y, const char* texto,int x1,int y1,
-                int x2,int y2);
+/*! Write the Text on the Surface
+ * \param screen -> surface where write the text
+ * \param x -> X coordinate of the text
+ * \param y -> Y coordinate of the text
+ * \param text -> text to write*/
+void write(SDL_Surface *screen,int x,int y, const char* text);
+
+/*! Write the Text on the Surface From init to end
+ * \param screen -> surface where write the text
+ * \param x -> X coordinate of the text
+ * \param y -> Y coordinate of the text
+ * \param text -> text to write
+ * \param init -> init text position to write
+ * \param end  -> end text position to write */
+void write(SDL_Surface *screen,int x,int y, const char* text,
+           int init, int end);
+
+/*! Write the Text on the Surface, with limit area
+ * \param screen -> surface where write the text
+ * \param x -> X coordinate of the text
+ * \param y -> Y coordinate of the text
+ * \param text -> text to write
+ * \param x1 -> X1 limit
+ * \param y1 -> Y1 limit
+ * \param x2 -> X2 limit
+ * \param y2 -> Y2 limit
+ * \return -> Y where ends the write. */
+int write(SDL_Surface *screen,int x, int y, const char* text,int x1,int y1,
+          int x2,int y2);
 
 /*! Gets the incCP of the current font (incCP is how much the X axis
  *  is incremented each wrote character. 
  *  \return the current font incCP*/
-int fonte_incCP();
+int font_incCP();
 
-/* Define a Fonte Ativa, retorna 0 caso nao encontre o arquivo
- * nome   -> nome do arquivo contendo a fonte
- * alinha -> alinhamento da fonte na tela
- * tam    -> tamanho da fonte na tela */
-int selFonte(const char* nome, int alinha, int tam);
+/*! Define the Active Font
+ * \param name -> filename of the font
+ * \param align -> font align
+ * \param size -> font size
+ * \return != 0  if success. */
+int defineFont(const char* name, int align, int size);
 
 /*! Copies lines from source, based on | dividers
  * \param source -> Source String

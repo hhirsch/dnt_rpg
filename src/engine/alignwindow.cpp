@@ -40,7 +40,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    buttonNext = window->objects->insertButton(248,19,262,37,">",0);
    textName = window->objects->insertTextBox(20,19,247,37,1, 
                                                   actualAlign->name.c_str());
-   textName->setFont(FMINI,1,ESQUERDA);
+   textName->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Confirm Button */
    buttonConfirm = window->objects->insertButton(193,225,263,244, 

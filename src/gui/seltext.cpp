@@ -63,7 +63,7 @@ void selText::draw(int selectedItem, SDL_Surface *screen)
 {
    int ya = y1+3;
    int aux;
-   selFonte(FHELVETICA,ESQUERDA,1); 
+   defineFont(FHELVETICA,ALIGN_LEFT,1); 
    for(aux = 0; aux<5;aux++)
    {
       if(!optText[aux].empty())
@@ -77,7 +77,7 @@ void selText::draw(int selectedItem, SDL_Surface *screen)
             color_Set(Cores.colorSelText.R,Cores.colorSelText.G,
                         Cores.colorSelText.B);
          }
-         ya = escxy_Area(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
+         ya = write(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
      }
      y[aux] = ya;
      ya += 11;
@@ -115,9 +115,8 @@ void selText::writeSelected(int selectedItem, SDL_Surface *screen)
          ya = y[selec-1]+11;
       color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    }
-   selFonte(FHELVETICA,ESQUERDA,1);
-   escxy_Area(screen,4+x1,ya,optText[aux].c_str(),
-              x1+1,y1+1,x2-1,y2-1);
+   defineFont(FHELVETICA,ALIGN_LEFT,1);
+   write(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
    selec = selectedItem;
 }
 

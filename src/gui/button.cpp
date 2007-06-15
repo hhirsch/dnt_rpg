@@ -77,7 +77,7 @@ void button::draw(bool pres, SDL_Surface* screen )
      ya++;
      xa+=2;
    }
-   selFonte(FFARSO,CENTRALIZADO,1);
+   defineFont(FFARSO,ALIGN_CENTER,1);
    xa = ((xa+x2) /2);
    
    /* Verify the arrows buttons */
@@ -85,8 +85,8 @@ void button::draw(bool pres, SDL_Surface* screen )
    {
      ya -= 6;
    }
-   escxy(screen,xa,ya,getText().c_str());
-   selFonte(FFARSO,ESQUERDA,1);
+   write(screen,xa,ya,getText().c_str());
+   defineFont(FFARSO,ALIGN_LEFT,1);
 }
 
 /***********************************************************

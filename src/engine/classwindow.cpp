@@ -33,7 +33,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    /* Class Description */
    textDescTitle = window->objects->insertTextBox(71,20,342,35,1,
                                            language.CLASSW_DESCRIPTION.c_str());
-   textDescTitle->setFont(FHELVETICA,1,ESQUERDA);
+   textDescTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
    
    textDesc = window->objects->insertRolBar(71,36,342,345,
              (actualClass->citation + "||" + actualClass->description).c_str(),
@@ -42,7 +42,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    /* Race Characteristics */
    textCharacTitle = window->objects->insertTextBox(343,20,613,35,1,
                                        language.CLASSW_CHARACTERISTICS.c_str());
-   textCharacTitle->setFont(FHELVETICA,1,ESQUERDA);
+   textCharacTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
 
    textCharac = window->objects->insertRolBar(343,36,613,345,
                                               getCharacteristics().c_str(),
@@ -53,7 +53,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    buttonNext = window->objects->insertButton(598,346,613,364,">",0);
    textName = window->objects->insertTextBox(87,346,597,364,1, 
                                                   actualClass->name.c_str());
-   textName->setFont(FMINI,1,ESQUERDA);
+   textName->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Confirm Button */
    buttonConfirm = window->objects->insertButton(543,370,613,389,

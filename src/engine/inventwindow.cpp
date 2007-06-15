@@ -115,9 +115,9 @@ void inventWindow::openMenu(int x, int y)
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(language.INVENTW_GET,1);
 
-   selFonte(FFARSO,ESQUERDA,1);
+   defineFont(FFARSO,ALIGN_LEFT,1);
 
-   xSize = objectMenu->getMaxCharac()*(fonte_incCP()+1)+6;
+   xSize = objectMenu->getMaxCharac()*(font_incCP()+1)+6;
 
    /* Make Sure all Menu is in Window */
    if(y+70 >= window->y2)

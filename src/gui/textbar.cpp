@@ -38,11 +38,11 @@ textBar::~textBar()
  ********************************************************************/
 void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
 {
-   unsigned int maxCarac = ((x2-3)-(x1+3)) / (fonte_incCP()+1);
+   defineFont(FFARSO,ALIGN_LEFT,1);
+   unsigned int maxCarac = ((x2-3)-(x1+3)) / (font_incCP()+1);
    color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,
                Colors.colorCont[2].B);
    rectangle_Fill(screen,x1+1, y1+1, x2-1, y2-1);
-   selFonte(FFARSO,ESQUERDA,1);
    color_Set(Colors.colorCont[1].R,Colors.colorCont[1].G,
                Colors.colorCont[1].B);
    init = 0;
@@ -64,8 +64,8 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
      end = text.length()-1;
    }
 
-   escxy_Def(screen, x1+3, y1-2, text.c_str(), init, end);
-   int x = (x1+2)+(pos-init)*(fonte_incCP()+1);
+   write(screen, x1+3, y1-2, text.c_str(), init, end);
+   int x = (x1+2)+(pos-init)*(font_incCP()+1);
    if (marca)
    {
       line_Draw(screen,x,y1+3,x,y2-3);
@@ -89,7 +89,7 @@ void textBar::draw(SDL_Surface *screen)
  ********************************************************************/
 void textBar::defineCursorPosition(int mouseX, int mouseY)
 {
-   pos = (mouseX-(x1+2)) / (fonte_incCP()+1);
+   pos = (mouseX-(x1+2)) / (font_incCP()+1);
    if(pos > text.length()) 
    {
       pos = text.length();
@@ -99,8 +99,8 @@ void textBar::defineCursorPosition(int mouseX, int mouseY)
 /********************************************************************
  *                             Write                                *
  ********************************************************************/
-int textBar::write(int mouseX, int mouseY, SDL_Surface *screen, 
-                   Uint8 Mbotao, Uint8* teclas)
+int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen, 
+                     Uint8 Mbotao, Uint8* teclas)
 {
    string c;
    c = "";
@@ -538,7 +538,7 @@ int textBar::write(int mouseX, int mouseY, SDL_Surface *screen,
        if(isMouseIn(mouseX,mouseY))
        {
            /* Calculate the New Position */
-           pos=(mouseX-(x1+2)) / (fonte_incCP()+1) + init;
+           pos=(mouseX-(x1+2)) / (font_incCP()+1) + init;
            if (pos > text.length())
            {
               pos = text.length();

@@ -5,28 +5,28 @@
 #include "fonte.h"
 #include <stdio.h>
 
-char arqFonte[255]; //Arquivo de Fonte atualmente utilizado
-fnt Fonte;          //Fonte Ativa
-int Tamanho;        //Tamanho da Fonte Ativa 
-int Alinhamento;    //Alinhamento da Fonte Ativa
+char arqFonte[255]; /* Actual used font */
+fnt Fonte;          /* Active Font */
+int Tamanho;        /* Size of Active Font */
+int Alinhamento;    /* Align of Active Font */
 
 /***********************************************************************
  *                             selFonte                                *
  ***********************************************************************/
-int selFonte(const char* nome, int alinha, int Tamanho)
+int defineFont(const char* name, int align, int size)
 {
-   Tamanho = Tamanho;
-   Alinhamento = alinha;
-   if(strcmp(nome,arqFonte)) 
+   Tamanho = size;
+   Alinhamento = align;
+   if(strcmp(name,arqFonte)) 
    {
       FILE *arq;
-      if ( !((arq) = fopen (nome, "rb")))
+      if ( !((arq) = fopen (name, "rb")))
       { 
          return(0);
       }
       
       fread(&Fonte,sizeof(fnt),1,arq);
-      strcpy(arqFonte,nome);
+      strcpy(arqFonte,name);
       fclose(arq);
       return(1);
    }
@@ -36,23 +36,23 @@ int selFonte(const char* nome, int alinha, int Tamanho)
 /***********************************************************************
  *                             escxy_Int                               *
  ***********************************************************************/
-int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
-              int fim, int x1,int y1,int x2,int y2)
+int write(SDL_Surface *screen,int x,int y,const char* text,int init,
+          int end, int x1,int y1,int x2,int y2)
 {
-   if(texto[0]=='\0') return(-1);
+   if(text[0]=='\0') return(-1);
    int k,aux,ax,aux1,aux2; 
    int sobra;
    int c;
 
-   if (Alinhamento==CENTRALIZADO)
-      x-=(strlen(texto)*(Fonte.incCP) / 2);
-   else if (Alinhamento==DIREITA)
-      x-=(strlen(texto)*(Fonte.incCP));
+   if (Alinhamento == ALIGN_CENTER)
+      x-=(strlen(text)*(Fonte.incCP) / 2);
+   else if (Alinhamento == ALIGN_RIGHT)
+      x-=(strlen(text)*(Fonte.incCP));
 
    k=y;
-   for(aux=inic;(aux<=fim);aux++)
+   for(aux=init;(aux<=end);aux++)
    {
-     c=texto[aux];
+     c=text[aux];
      while(c < 0) /* Corrige leitura de caracteres nao padrao */
      {
         c = 256 + c;       
@@ -109,33 +109,33 @@ int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
 /***********************************************************************
  *                               escxy                                 *
  ***********************************************************************/
-void escxy(SDL_Surface *screen,int x,int y,const char* texto)
+void write(SDL_Surface *screen,int x,int y,const char* text)
 {
-   escxy_Int(screen,x,y,texto,0,strlen(texto)-1,0,0,screen->w-1,screen->h-1);
+   write(screen,x,y,text,0,strlen(text)-1,0,0,screen->w-1,screen->h-1);
 }
 
 /***********************************************************************
  *                            escxy_Area                               *
  ***********************************************************************/
-int escxy_Area(SDL_Surface *screen,int x, int y,const char* texto,int x1,int y1,
-                int x2,int y2)
+int write(SDL_Surface *screen,int x, int y,const char* text,int x1,int y1,
+          int x2,int y2)
 {
-   return(escxy_Int(screen,x,y,texto,0,strlen(texto)-1,x1,y1,x2,y2));
+   return(write(screen,x,y,text,0,strlen(text)-1,x1,y1,x2,y2));
 }
 
 /***********************************************************************
  *                             escxy_Def                               *
  ***********************************************************************/
-void escxy_Def(SDL_Surface *screen,int x,int y,const char* texto,
-               int inic,int fim)
+void write(SDL_Surface *screen,int x,int y,const char* text,
+           int init,int end)
 {
-   escxy_Int(screen,x,y,texto,inic,fim,0,0,screen->w-1,screen->h-1);
+   write(screen,x,y,text,init,end,0,0,screen->w-1,screen->h-1);
 }
 
 /***********************************************************************
  *                           fonte_incCP                               *
  ***********************************************************************/
-int fonte_incCP()
+int font_incCP()
 {
    return(Fonte.incCP+Tamanho-1);
 }

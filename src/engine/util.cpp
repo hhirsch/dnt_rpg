@@ -14,8 +14,8 @@ void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto,
    color_Set(0,0,0);
    rectangle_Fill(img,0,0,255,31);
    color_Set(200,20,20);
-   selFonte(FFARSO,CENTRALIZADO,3);
-   escxy(img,128,0,texto);
+   defineFont(FMINI,ALIGN_CENTER,1);
+   write(img,128,0,texto);
    setTextureRGBA(img,texturaTexto);
    
    textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);

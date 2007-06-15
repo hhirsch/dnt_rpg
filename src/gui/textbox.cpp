@@ -33,7 +33,9 @@ void textBox::draw(SDL_Surface *screen)
    {
       if(framed == 1)
       {
-         color_Set(Colors.colorButton.R,Colors.colorButton.G,Colors.colorButton.B);
+         color_Set(Colors.colorButton.R,
+                   Colors.colorButton.G,
+                   Colors.colorButton.B);
          rectangle_Fill(screen,x1+1,y1+1,x2-1,y2-1);
       }
       color_Set(Colors.colorCont[0].R,Colors.colorCont[0].G,
@@ -43,8 +45,8 @@ void textBox::draw(SDL_Surface *screen)
                        Colors.colorCont[1].B);
    }
    color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
-   selFonte(fontName.c_str(),fontAlign,fontSize);
-   escxy_Area(screen, x1+5, y1, text.c_str(), x1+5, y1, x2, y2);
+   defineFont(fontName.c_str(),fontAlign,fontSize);
+   write(screen, x1+5, y1, text.c_str(), x1+5, y1, x2, y2);
 }
 
 /*******************************************************

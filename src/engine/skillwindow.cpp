@@ -45,14 +45,14 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
    /* Skill Description */
    desc = window->objects->insertTextBox(8,38,251,170,1,
                            externalSkill->m_skills[curSkill].descricao.c_str());
-   desc->setFont(FMINI,1,ESQUERDA);
+   desc->setFont(FMINI,1,ALIGN_LEFT);
  
    /* Skill Name & Selectors */
    buttonPrevious = window->objects->insertButton(52,175,66,193,"<",0);
    buttonNext = window->objects->insertButton(237,175,251,193,">",0);
    skillName = window->objects->insertTextBox(67,175,236,193,1,
                                 externalSkill->m_skills[curSkill].nome.c_str());
-   skillName->setFont(FMINI,1,ESQUERDA);
+   skillName->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Skill Image */
    skFig = window->objects->insertPicture(13,175,0,0,NULL);
@@ -65,7 +65,7 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
    saux = tmp;
    txtPoints = window->objects->insertTextBox(113,198,135,216,1,
                                                    saux.c_str());
-   txtPoints->setFont(FMINI,1,ESQUERDA);
+   txtPoints->setFont(FMINI,1,ALIGN_LEFT);
    buttonSum = window->objects->insertButton(136,198,146,216,">",0);
    buttonDec = window->objects->insertButton(102,198,112,216,"<",0);
 

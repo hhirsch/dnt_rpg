@@ -41,7 +41,7 @@ class textBar: public guiObject
        * \param screen -> surface to draw the text bar
        * \param Mbotao -> SDL mouse buttons state info
        * \param teclas -> SDL keyboard state info */
-      int write(int mouseX,int mouseY, SDL_Surface *screen, 
+      int doWrite(int mouseX,int mouseY, SDL_Surface *screen, 
                 Uint8 Mbotao, Uint8* teclas);
 
       void defineCursorPosition(int mouseX, int mouseY);

@@ -134,11 +134,11 @@ void janela::Desenhar(int mouseX, int mouseY)
    rectangle_Fill(cara,25,3,dx-4,12);
    /* Escrita do Titulo */
    color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
-   if (!selFonte(FFARSO,ESQUERDA,1))
+   if (!defineFont(FFARSO,ALIGN_LEFT,1))
    {
       printf("Error: Not found farso.fnt font!\n");
    }
-   escxy(cara,39,-2,texto.c_str());
+   write(cara,39,-2,texto.c_str());
    /* Desenho dos Buttonoes */
    guiObject *obj=objects->first->next;
    int aux;
@@ -197,8 +197,8 @@ void janela::BarraInativa()
    color_Set(Cores.colorWindow.R,Cores.colorWindow.G,Cores.colorWindow.B);
    rectangle_Fill(cara,36,3,dx-3,12);
    color_Set(0,0,0);
-   selFonte(FFARSO,ESQUERDA,1);
-   escxy(cara,39,-2,texto.c_str());
+   defineFont(FFARSO,ALIGN_LEFT,1);
+   write(cara,39,-2,texto.c_str());
 }
 
 void janela::BarraAtiva()
@@ -207,8 +207,8 @@ void janela::BarraAtiva()
    color_Set(Cores.colorBar.R,Cores.colorBar.G,Cores.colorBar.B);
    rectangle_Fill(cara,36,3,dx-3,12);
    color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
-   selFonte(FFARSO,ESQUERDA,1);
-   escxy(cara,39,-2,texto.c_str());
+   defineFont(FFARSO,ALIGN_LEFT,1);
+   write(cara,39,-2,texto.c_str());
 }
 
 /*********************************************************************
