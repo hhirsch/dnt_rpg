@@ -16,7 +16,7 @@ using namespace std;
 
 #define MAX_OPTIONS 5
 
-/*! Select Text Class */
+/*! Select Text Class (from 1 to 5 texts) */
 class selTexto: public guiObject
 {
    public:
@@ -67,16 +67,11 @@ class selTexto: public guiObject
    protected:
       int y[MAX_OPTIONS];  /**< Final Y of each option */
       int selec;           /**< last item selected */
-      int x1,     /**< x1 coordinate */
-          y1,     /**< y1 coordinate */
-          x2,     /**< x2 coordinate */
-          y2;     /**< y2 coordinate */
       farso_colors Cores; /**< colors */
       bool pressed; /**< while pressed == true */
 
 
-};                /* Tipo de selecao de 1 entre 5 textos */
-
+};
 
 #endif
 

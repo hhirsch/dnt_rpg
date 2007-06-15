@@ -138,7 +138,7 @@ int selTexto::threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen)
 
     /* Trata o caso do mouse encima do text */
     selaux = getSelectedItem(ya);
- 
+
     /* Colore o selectedItem atual */
     writeSelected(selaux, screen);
 

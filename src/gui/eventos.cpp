@@ -91,7 +91,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
         mouseY = y;
         
         if ((ljan->janelaAtiva != NULL) &&
-             isMouseIn(ljan->janelaAtiva->x1,
+             isMouseAt(ljan->janelaAtiva->x1,
                           ljan->janelaAtiva->y1,
                           ljan->janelaAtiva->x2, 
                           ljan->janelaAtiva->y2,
@@ -107,7 +107,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   selTexto *st = (selTexto*) obj;
                   int xa,ya,xb,yb;
                   st->getCoordinate(xa,ya,xb,yb);
-                  if(isMouseIn(ljan->janelaAtiva->x1+xa,
+                  if(isMouseAt(ljan->janelaAtiva->x1+xa,
                                   ljan->janelaAtiva->y1+ya,
                                   ljan->janelaAtiva->x1+xb, 
                                   ljan->janelaAtiva->y1+yb,x,y))
@@ -136,7 +136,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if((Mbotao & SDL_BUTTON(1)) &&  (foco == FOCO_JOGO))
     {
         if( ( (ljan->janelaAtiva != NULL) && (ljan->janelaAtiva->movivel) ) &&
-             isMouseIn(ljan->janelaAtiva->x1+36,
+             isMouseAt(ljan->janelaAtiva->x1+36,
                           ljan->janelaAtiva->y1, 
                           ljan->janelaAtiva->x2-3,
                           ljan->janelaAtiva->y1+12,x,y))
@@ -148,7 +148,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             foco = FOCO_JANELAMOVER;
         }
         else if ( (ljan->janelaAtiva != NULL) &&
-                   isMouseIn(ljan->janelaAtiva->x1,
+                   isMouseAt(ljan->janelaAtiva->x1,
                                 ljan->janelaAtiva->y1,
                                 ljan->janelaAtiva->x2, 
                                 ljan->janelaAtiva->y2,x,y))
@@ -200,7 +200,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   selTexto* st = (selTexto*) obj;
                   int xa,ya,xb,yb;
                   st->getCoordinate(xa,ya,xb,yb);
-                  if(isMouseIn(xa+ljan->janelaAtiva->x1,
+                  if(isMouseAt(xa+ljan->janelaAtiva->x1,
                                   ya+ljan->janelaAtiva->y1,
                                   xb+ljan->janelaAtiva->x1,
                                   yb+ljan->janelaAtiva->y1,x,y))
@@ -227,7 +227,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
            for(aux=0;aux<ljan->total;aux++)
            {
                if( (jaux != ljan->janelaAtiva)  && 
-                   isMouseIn(jaux->x1,jaux->y1,jaux->x2,jaux->y2,x,y))
+                   isMouseAt(jaux->x1,jaux->y1,jaux->x2,jaux->y2,x,y))
                {
                     foco = FOCO_JOGO;
                     jaux->Ativar(ljan);
@@ -402,8 +402,9 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
         mouseX = x;
         mouseY = y;
         selTexto *st = (selTexto*)objAtivo;
-        int res = st->threat(x-ljan->janelaAtiva->x1,y-ljan->janelaAtiva->y1,
-                       Mbotao,ljan->janelaAtiva->cara);
+        int res = st->threat(x-ljan->janelaAtiva->x1,
+                             y-ljan->janelaAtiva->y1,
+                             Mbotao,ljan->janelaAtiva->cara);
         if(res == -1)
         {
             foco = FOCO_JOGO;
@@ -602,7 +603,7 @@ bool interface::mouseOnGui(int mouseX, int mouseY)
    janela *jaux=(janela*)ljan->first->next;
    for(aux=0;aux<ljan->total;aux++)
    {
-      if(isMouseIn(jaux->x1,jaux->y1,jaux->x2,jaux->y2,mouseX,mouseY))
+      if(isMouseAt(jaux->x1,jaux->y1,jaux->x2,jaux->y2,mouseX,mouseY))
       {
          return(true);
       }

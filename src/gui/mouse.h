@@ -13,7 +13,7 @@
  * \param mouseX -> mouse X coordinate
  * \param mouseY -> mouse Y coordinate 
  * \return true id on area, false otherwise */
-bool isMouseIn(int x1,int y1,int x2,int y2, int mouseX, int mouseY);
+bool isMouseAt(int x1,int y1,int x2,int y2, int mouseX, int mouseY);
 
 #endif
 
