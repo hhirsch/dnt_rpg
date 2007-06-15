@@ -31,50 +31,51 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
    }
    
    /* Create Skill Window */
-   window = inter->insertWindow(276,186,531,441,
-                                language.SKILL_TITLE.c_str(),1,1);
+   intWindow = inter->insertWindow(276,186,531,441,
+                                   language.SKILL_TITLE.c_str());
 
    /* Free Points */
    sprintf(tmp,"%d",avaiblePoints);
    saux = tmp;
-   window->objects->insertTextBox(8,20,125,33,0,
-                                       language.SKILL_FREE_POINTS.c_str());
-   txtAvaiblePoints = window->objects->insertTextBox(127,20,162,33,0,
-                                                                  saux.c_str());
+   intWindow->getObjectsList()->insertTextBox(8,20,125,33,0,
+                                          language.SKILL_FREE_POINTS.c_str());
+   txtAvaiblePoints = intWindow->getObjectsList()->insertTextBox(127,20,162,
+                                                                 33,0,
+                                                                 saux.c_str());
 
    /* Skill Description */
-   desc = window->objects->insertTextBox(8,38,251,170,1,
+   desc = intWindow->getObjectsList()->insertTextBox(8,38,251,170,1,
                            externalSkill->m_skills[curSkill].descricao.c_str());
    desc->setFont(FMINI,1,ALIGN_LEFT);
  
    /* Skill Name & Selectors */
-   buttonPrevious = window->objects->insertButton(52,175,66,193,"<",0);
-   buttonNext = window->objects->insertButton(237,175,251,193,">",0);
-   skillName = window->objects->insertTextBox(67,175,236,193,1,
+   buttonPrevious = intWindow->getObjectsList()->insertButton(52,175,66,193,"<",0);
+   buttonNext = intWindow->getObjectsList()->insertButton(237,175,251,193,">",0);
+   skillName = intWindow->getObjectsList()->insertTextBox(67,175,236,193,1,
                                 externalSkill->m_skills[curSkill].nome.c_str());
    skillName->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Skill Image */
-   skFig = window->objects->insertPicture(13,175,0,0,NULL);
+   skFig = intWindow->getObjectsList()->insertPicture(13,175,0,0,NULL);
    skFig->set(externalSkill->m_skills[curSkill].imagem);
  
    /* Skill Points */
-   window->objects->insertTextBox(52,200,101,214,0,
+   intWindow->getObjectsList()->insertTextBox(52,200,101,214,0,
                                        language.SKILL_POINTS.c_str());
    sprintf(tmp,"%d",saveSkill->m_skills[curSkill].pontos);
    saux = tmp;
-   txtPoints = window->objects->insertTextBox(113,198,135,216,1,
+   txtPoints = intWindow->getObjectsList()->insertTextBox(113,198,135,216,1,
                                                    saux.c_str());
    txtPoints->setFont(FMINI,1,ALIGN_LEFT);
-   buttonSum = window->objects->insertButton(136,198,146,216,">",0);
-   buttonDec = window->objects->insertButton(102,198,112,216,"<",0);
+   buttonSum = intWindow->getObjectsList()->insertButton(136,198,146,216,">",0);
+   buttonDec = intWindow->getObjectsList()->insertButton(102,198,112,216,"<",0);
 
    /* Skill Costs */
-   window->objects->insertTextBox(160,200,215,214,0,
+   intWindow->getObjectsList()->insertTextBox(160,200,215,214,0,
                                        language.SKILL_COST.c_str());
    sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
    saux = tmp;
-   txtCosts = window->objects->insertTextBox(216,200,251,214,0,
+   txtCosts = intWindow->getObjectsList()->insertTextBox(216,200,251,214,0,
                                                   saux.c_str());
    /*txtCosts->Cores.corTexto.R = 255;
    txtCosts->Cores.corTexto.G = 156;
@@ -82,17 +83,17 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
 
 
    /* Confirm Button */
-   buttonConfirm = window->objects->insertButton(181,225,251,244,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(181,225,251,244,
                                               language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->insertButton(8,225,78,244,
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,225,78,244,
                                                language.SKILL_CANCEL.c_str(),1);
    
    /* Open Skill Window */
-   window->ptrExterno = &window;
-   window->fechavel = false;
-   inter->openWindow(window);
+   intWindow->setExternPointer(&intWindow);
+   intWindow->setAttributes(false,true,false,false);
+   inter->openWindow(intWindow);
 }
 
 /**************************************************************
@@ -187,8 +188,8 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
       else if(object == (guiObject*) buttonConfirm)
       {
          skFig->set(NULL); //to not delete skill images
-         inter->closeWindow(window);
-         window = NULL;
+         inter->closeWindow(intWindow);
+         intWindow = NULL;
          saveSkill->setAvaiblePoints(avaiblePoints);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
@@ -203,8 +204,8 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
             saveSkill->m_skills[aux].pontos = saveSkill->m_skills[aux].antPontos;
           }
           skFig->set(NULL); //to not delete skill images
-          inter->closeWindow(window);
-          window = NULL;
+          inter->closeWindow(intWindow);
+          intWindow = NULL;
           glEnable(GL_LIGHTING);
           SDL_ShowCursor(SDL_DISABLE);
          return(SKILLW_CANCEL);
@@ -227,7 +228,7 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
       */
    }
    
-   window->Desenhar(0,0);
+   intWindow->draw(0,0);
    return(SKILLW_OTHER);
 }
 

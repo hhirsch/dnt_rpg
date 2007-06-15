@@ -122,7 +122,7 @@ class conversation
       bool windowOpened();
 
       protected:
-         janela* jan;          /**< Pointer to window used to show */
+         window* jan;          /**< Pointer to window used to show */
          interface* usedGui;   /**< Pointer to the used interface */
          dialog* first;        /**< Head Node */
          int total;            /**< Total Dialogs */

@@ -17,53 +17,56 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    loadImages();
 
    usedCharacter = dude;
-   window = inter->insertWindow(276,206,531,320,"Aspect"
-                                /*language.ASPECTW_TITLE.c_str()*/,1,1);
+   intWindow = inter->insertWindow(276,206,531,320,"Aspect"
+                                   /*language.ASPECTW_TITLE.c_str()*/);
 
    /* Portrait Figure */
-   figurePortrait = window->objects->insertPicture(5,25,0,0,NULL);
+   figurePortrait = intWindow->getObjectsList()->insertPicture(5,25,0,0,NULL);
    figurePortrait->set(images[curImage].image);
 
    /* Previous Image Button */
-   buttonPreviousImage = window->objects->insertButton(5,90,19,108,"<",0);
+   buttonPreviousImage = intWindow->getObjectsList()->insertButton(5,90,
+                                                                  19,108,"<",0);
    /* Next Image Button */
-   buttonNextImage = window->objects->insertButton(55,90,69,108,">",0);
+   buttonNextImage = intWindow->getObjectsList()->insertButton(55,90,69,108,
+                                                                 ">",0);
    /* Contorn to the previous and next buttons */
-   window->objects->insertTextBox(20,90,54,108,1,"");
+   intWindow->getObjectsList()->insertTextBox(20,90,54,108,1,"");
 
    /* Name Text */
-   window->objects->insertTextBox(72,25,112,39,1,"Name:");
-   textName = window->objects->insertTextBar(113,25,251,39,"Bruno",0);
+   intWindow->getObjectsList()->insertTextBox(72,25,112,39,1,"Name:");
+   textName = intWindow->getObjectsList()->insertTextBar(113,25,251,39,
+                                                                     "Bruno",0);
 
    /* Age Text */
-   window->objects->insertTextBox(72,40,112,54,1,"Age:");
-   textAge = window->objects->insertTextBar(113,40,143,54,"20",0);
+   intWindow->getObjectsList()->insertTextBox(72,40,112,54,1,"Age:");
+   textAge = intWindow->getObjectsList()->insertTextBar(113,40,143,54,"20",0);
 
    /* Sex Selectors */
-   window->objects->insertTextBox(72,55,112,69,1,"Sex:");
-   cxSelSexF = window->objects->insertCxSel(113, 57, false);
-   window->objects->insertPicture(125,55,0,0,
+   intWindow->getObjectsList()->insertTextBox(72,55,112,69,1,"Sex:");
+   cxSelSexF = intWindow->getObjectsList()->insertCxSel(113, 57, false);
+   intWindow->getObjectsList()->insertPicture(125,55,0,0,
                                   "../data/texturas/aspectw/sex_f.png");
-   cxSelSexM = window->objects->insertCxSel(143, 57, true);
-   window->objects->insertPicture(155,55,0,0,
+   cxSelSexM = intWindow->getObjectsList()->insertCxSel(143, 57, true);
+   intWindow->getObjectsList()->insertPicture(155,55,0,0,
                                   "../data/texturas/aspectw/sex_m.png");
-   cxSelSexO = window->objects->insertCxSel(173, 57, false);
-   window->objects->insertPicture(185,55,0,0,
+   cxSelSexO = intWindow->getObjectsList()->insertCxSel(173, 57, false);
+   intWindow->getObjectsList()->insertPicture(185,55,0,0,
                                   "../data/texturas/aspectw/sex_o.png");
 
    /* Confirm Button */
-   buttonConfirm = window->objects->insertButton(181,90,251,108, 
+   buttonConfirm = intWindow->getObjectsList()->insertButton(181,90,251,108, 
                                                  language.SKILL_CONFIRM.c_str(),
                                                  1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->insertButton(72,90,140,108, 
+   buttonCancel = intWindow->getObjectsList()->insertButton(72,90,140,108, 
                                                 language.SKILL_CANCEL.c_str(),
                                                 1);
 
-   window->ptrExterno = &window;
-   window->fechavel = false;
-   inter->openWindow(window);
+   intWindow->setExternPointer(&intWindow);
+   intWindow->setAttributes(false,false, false, false);
+   inter->openWindow(intWindow);
 }
 
 /**************************************************************
@@ -138,8 +141,8 @@ int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
 
          /* Close Window */
          figurePortrait->set(NULL);
-         inter->closeWindow(window);
-         window = NULL;
+         inter->closeWindow(intWindow);
+         intWindow = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(ASPECTW_CONFIRM);
@@ -148,8 +151,8 @@ int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
       else if(object == (guiObject*) buttonCancel) 
       {
          figurePortrait->set(NULL);
-         inter->closeWindow(window);
-         window = NULL;
+         inter->closeWindow(intWindow);
+         intWindow = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(ASPECTW_CANCEL);
@@ -217,7 +220,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
          cxSelSexM->setSelection(false);
       }
    }
-   window->Desenhar(0,0);
+   intWindow->draw(0,0);
    return(ASPECTW_OTHER);
 }
 

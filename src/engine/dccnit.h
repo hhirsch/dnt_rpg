@@ -329,8 +329,8 @@ class engine
       textBox* ObjTxt;             /**< Text that shows actual pointed object */
       rolBar* briefTxt;            /**< Briefing Text */
       textBox* hourTxt;            /**< Text for Hour */
-      janela* shortCutsWindow;     /**< ShortCuts Window */
-      janela* miniMapWindow;       /**< MiniMap Window */
+      window* shortCutsWindow;     /**< ShortCuts Window */
+      window* miniMapWindow;       /**< MiniMap Window */
       button* botPerMiniMap;       /**< Character MiniMap Button */
 
       button* buttonMenu;            /**< Button to call Menu */

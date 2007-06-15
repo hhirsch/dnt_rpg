@@ -1297,7 +1297,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                 if(shortCutsWindow)
                 {
                    ObjTxt->setText(quaux->objects[obj]->getName()); 
-                   shortCutsWindow->Desenhar(mouseX,mouseY);
+                   shortCutsWindow->draw(mouseX,mouseY);
                 }
                 if( (Mbutton & SDL_BUTTON(1)) && 
                     (rangeAction(activeCharacter->posicaoLadoX, 
@@ -1313,7 +1313,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                    {
                       briefTxt->addText(quaux->objects[obj]->getName() + " " +
                                         language.ACTION_TAKEN); 
-                      shortCutsWindow->Desenhar(mouseX,mouseY);
+                      shortCutsWindow->draw(mouseX,mouseY);
 
                       /* Log State to the modState */
                       modifState.mapObjectAddAction(MODSTATE_ACTION_MAP_REMOVE,
@@ -1337,7 +1337,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                       if(shortCutsWindow)
                       {
                          briefTxt->addText("Inventory Full!"); 
-                         shortCutsWindow->Desenhar(mouseX,mouseY);
+                         shortCutsWindow->draw(mouseX,mouseY);
                       }
                    }
                 }
@@ -1372,7 +1372,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             if(shortCutsWindow)
             {
                ObjTxt->setText(language.OBJ_DOOR.c_str()); 
-               shortCutsWindow->Desenhar(mouseX, mouseY);
+               shortCutsWindow->draw(mouseX, mouseY);
             }
             if( (Mbutton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->posicaoLadoX, 
@@ -1421,7 +1421,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             if(shortCutsWindow)
             {
                ObjTxt->setText(pers->nome); 
-               shortCutsWindow->Desenhar(mouseX, mouseY);
+               shortCutsWindow->draw(mouseX, mouseY);
             }
 
             /* Open Inventory when button pressed */
@@ -1479,7 +1479,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   if(shortCutsWindow)
                   {
                      ObjTxt->setText(pers->nome); 
-                     shortCutsWindow->Desenhar(mouseX, mouseY);
+                     shortCutsWindow->draw(mouseX, mouseY);
                   }
                   pronto = 1;
                }
@@ -1493,7 +1493,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   if(shortCutsWindow)
                   {
                      ObjTxt->setText(pers->nome); 
-                     shortCutsWindow->Desenhar(mouseX, mouseY);
+                     shortCutsWindow->draw(mouseX, mouseY);
                   }
 
                   //TODO -> verify if weapon is ranged, so distance is other
@@ -1558,7 +1558,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             if(shortCutsWindow)
             {
                ObjTxt->setText(quaux->mapConection.mapName); 
-               shortCutsWindow->Desenhar(mouseX, mouseY);
+               shortCutsWindow->draw(mouseX, mouseY);
             }
             curConection = &quaux->mapConection;
             cursors->setActual(CURSOR_MAPTRAVEL);
@@ -1582,7 +1582,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
       if( (shortCutsWindow) && (!pronto) )
       {
          ObjTxt->setText(language.OBJ_NOTHING.c_str()); 
-         shortCutsWindow->Desenhar(mouseX, mouseY);
+         shortCutsWindow->draw(mouseX, mouseY);
       }
    }
    return(0);
@@ -2102,11 +2102,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
          botPerMiniMap->setCoordinate(x, z, x+3, z+3);
 
-         miniMapWindow->Desenhar(mouseX, mouseY);
+         miniMapWindow->draw(mouseX, mouseY);
       }
       if(shortCutsWindow)
       {
-         shortCutsWindow->Desenhar(mouseX, mouseY);
+         shortCutsWindow->draw(mouseX, mouseY);
       }
       guiObject* object;
       object = gui->manipulateEvents(x,y,Mbutton,keys, &guiEvent);
@@ -2778,18 +2778,20 @@ void engine::OpenMiniMapWindow()
    x = 8 + (x*3);
    z = 20 + (z*3);
    miniMapWindow = gui->insertWindow(512,472,799,599,//0,344,255,471,
-                                     language.WINDOW_MAP.c_str(),1,1);
+                                     language.WINDOW_MAP.c_str());
 
-   botPerMiniMap = miniMapWindow->objects->insertButton(x,z,x+2,z+2,"",0);
-   picture* fig = miniMapWindow->objects->insertPicture(8,20,240,95,NULL);
+   botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,x+2,z+2,
+                                                                 "",0);
+   picture* fig = miniMapWindow->getObjectsList()->insertPicture(8,20,240,95,
+                                                                 NULL);
    actualMap->drawMinimap(fig->get());
 
-   miniMapWindow->objects->insertPicture(3,15,252,120,
+   miniMapWindow->getObjectsList()->insertPicture(3,15,252,120,
                                        "../data/texturas/map.png");
 
    
                    
-   miniMapWindow->ptrExterno = &miniMapWindow;
+   miniMapWindow->setExternPointer(&miniMapWindow);
    gui->openWindow(miniMapWindow);
 }
 
@@ -2799,27 +2801,27 @@ void engine::OpenMiniMapWindow()
 void engine::OpenShortcutsWindow()
 {
    shortCutsWindow = gui->insertWindow(0,472,511,599,
-                                     language.WINDOW_SHORTCUTS.c_str(),1,1);
-   FPS = shortCutsWindow->objects->insertTextBox(8,20,150/*100*/,35,2,
+                                       language.WINDOW_SHORTCUTS.c_str());
+   FPS = shortCutsWindow->getObjectsList()->insertTextBox(8,20,150/*100*/,35,2,
                                   language.WINDOW_SHORTCUTS_FPS.c_str());
-   briefTxt = shortCutsWindow->objects->insertRolBar(8,36,249,100,
+   briefTxt = shortCutsWindow->getObjectsList()->insertRolBar(8,36,249,100,
                                   language.WINDOW_SHORTCUTS_HELP.c_str(),
-                                  shortCutsWindow->cara);
-   ObjTxt = shortCutsWindow->objects->insertTextBox(151,20,249,35,2,
+                                  shortCutsWindow->getSurface());
+   ObjTxt = shortCutsWindow->getObjectsList()->insertTextBox(151,20,249,35,2,
                                  language.OBJ_NOTHING.c_str());
 
-   buttonSave = shortCutsWindow->objects->insertButton(8,102,76,120,
+   buttonSave = shortCutsWindow->getObjectsList()->insertButton(8,102,76,120,
                                                language.INITIAL_SAVE.c_str(),0);
-   buttonMenu = shortCutsWindow->objects->insertButton(77,102,140,120,"Menu",0);
-   buttonLoad = shortCutsWindow->objects->insertButton(141,102,209,120,
+   buttonMenu = shortCutsWindow->getObjectsList()->insertButton(77,102,140,120,"Menu",0);
+   buttonLoad = shortCutsWindow->getObjectsList()->insertButton(141,102,209,120,
                                                language.INITIAL_LOAD.c_str(),0);
-   hourTxt = shortCutsWindow->objects->insertTextBox(210,102,249,120,2,
+   hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,249,120,2,
                                                           "00:00");
    hourTxt->setFont(FMINI,1,ALIGN_LEFT);
    hourToTxt();
 
    tabButton* tb;
-   tb = shortCutsWindow->objects->insertTabButton(252,15,0,0,
+   tb = shortCutsWindow->getObjectsList()->insertTabButton(252,15,0,0,
                                              "../data/texturas/shortcuts.png");
    buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
    tb->insertButton(7,40,43,72);/* Attack 1 */
@@ -2845,9 +2847,9 @@ void engine::OpenShortcutsWindow()
    tb->insertButton(220,40,256,72);/* Attack 6 */
    buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 
-   shortCutsWindow->objects->insertPicture(3,15,252,120,"../data/texturas/shortcut2.png");
+   shortCutsWindow->getObjectsList()->insertPicture(3,15,252,120,"../data/texturas/shortcut2.png");
    
-   shortCutsWindow->ptrExterno = &shortCutsWindow;
+   shortCutsWindow->setExternPointer(&shortCutsWindow);
    gui->openWindow(shortCutsWindow);
 }
 

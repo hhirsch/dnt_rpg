@@ -23,50 +23,50 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
       actualRace = externalRaces->getRaceByInteger(0);
    }
    
-   /* create window */
-   window = inter->insertWindow(90,100,710,499,
-                                language.RACEW_TITLE.c_str(),1,1);
+   /* create intWindow */
+   intWindow = inter->insertWindow(90,100,710,499,
+                                language.RACEW_TITLE.c_str());
    /* Race Image */
-   raceImage = window->objects->insertPicture(7,20,0,0,NULL);   
+   raceImage = intWindow->getObjectsList()->insertPicture(7,20,0,0,NULL);   
    raceImage->set(actualRace->image);
 
    /* Race Description */
-   textDescTitle = window->objects->insertTextBox(71,20,342,35,1,
+   textDescTitle = intWindow->getObjectsList()->insertTextBox(71,20,342,35,1,
                                             language.RACEW_DESCRIPTION.c_str());
    textDescTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
    
-   textDesc = window->objects->insertRolBar(71,36,342,345,
+   textDesc = intWindow->getObjectsList()->insertRolBar(71,36,342,345,
               (actualRace->citation + "||" + actualRace->description).c_str(),
-              window->cara);
+              intWindow->getSurface());
 
    /* Race Characteristics */
-   textCharacTitle = window->objects->insertTextBox(343,20,613,35,1,
+   textCharacTitle = intWindow->getObjectsList()->insertTextBox(343,20,613,35,1,
                                        language.RACEW_CHARACTERISTICS.c_str());
    textCharacTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
 
-   textCharac = window->objects->insertRolBar(343,36,613,345,
+   textCharac = intWindow->getObjectsList()->insertRolBar(343,36,613,345,
                                               getCharacteristics().c_str(),
-                                              window->cara);
+                                              intWindow->getSurface());
 
    /* Name and Selectors */
-   buttonPrevious = window->objects->insertButton(71,346,86,364,"<",0);
-   buttonNext = window->objects->insertButton(598,346,613,364,">",0);
-   textName = window->objects->insertTextBox(87,346,597,364,1, 
+   buttonPrevious = intWindow->getObjectsList()->insertButton(71,346,86,364,"<",0);
+   buttonNext = intWindow->getObjectsList()->insertButton(598,346,613,364,">",0);
+   textName = intWindow->getObjectsList()->insertTextBox(87,346,597,364,1, 
                                                   actualRace->name.c_str());
    textName->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Confirm Button */
-   buttonConfirm = window->objects->insertButton(543,370,613,389,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(543,370,613,389,
                                          language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->insertButton(8,370,78,389,
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,370,78,389,
                                                language.SKILL_CANCEL.c_str(),1);
 
    /* Open Skill Window */
-   window->ptrExterno = &window;
-   window->fechavel = false;
-   inter->openWindow(window);
+   intWindow->setExternPointer(&intWindow);
+   intWindow->setAttributes(false,true,false,false);
+   inter->openWindow(intWindow);
 }
 
 /********************************************************************
@@ -147,14 +147,14 @@ int raceWindow::treat(guiObject* object, int eventInfo,
                            actualRace->description);
          textCharac->setText(getCharacteristics());
          raceImage->set(actualRace->image);
-         window->Desenhar(0,0);
+         intWindow->draw(0,0);
       }
       else if(object == (guiObject*) buttonConfirm)
       {
          raceImage->set(NULL);
          *choosedRace = actualRace;
-         inter->closeWindow(window);
-         window = NULL;
+         inter->closeWindow(intWindow);
+         intWindow = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(RACEW_CONFIRM);
@@ -162,9 +162,9 @@ int raceWindow::treat(guiObject* object, int eventInfo,
       else if(object == (guiObject*) buttonCancel) 
       {
          raceImage->set(NULL); //to not delete race images
-         inter->closeWindow(window);
+         inter->closeWindow(intWindow);
          *choosedRace = NULL;
-         window = NULL;
+         intWindow = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(RACEW_CANCEL);

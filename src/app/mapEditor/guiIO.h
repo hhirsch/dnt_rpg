@@ -94,7 +94,7 @@ class guiIO
       interface* gui; /**< Internal GUI */
 
       /*********************File*Window*******************************/
-      janela* fileWindow;   /**< File Window */
+      window* fileWindow;   /**< File Window */
       button* openButton;    /**< Open Button */
       button* saveButton;    /**< Save Button */
       button* exitButton;    /**< Exit Button */
@@ -104,7 +104,7 @@ class guiIO
 
 
       /*********************Navigate*Window***************************/
-      janela* navWindow;              /**< Navigate Window */
+      window* navWindow;              /**< Navigate Window */
       tabButton* navTabButton;        /**< Navigation Tab Button */
       oneTabButton* moreZoomButton;   /**< Navigation More Zoom Button */
       oneTabButton* lessZoomButton;   /**< Navigation Less Zoom Button */
@@ -119,7 +119,7 @@ class guiIO
       void openNavWindow();
 
       /*********************Main*Window*******************************/
-      janela* mainWindow;   /**< Main Window */
+      window* mainWindow;   /**< Main Window */
       button* terrainButton; /**< Terrain Edition Button */
       button* wallButton;    /**< Wall Edition Button */
       button* portalButton;  /**< Portal Edition Button */
@@ -135,7 +135,7 @@ class guiIO
       void openMainWindow();
 
       /*********************Texture*Window*******************************/
-      janela* textureWindow;
+      window* textureWindow;
       button* texturePreviousButton;
       button* textureNextButton;
       button* textureInsertButton;
@@ -143,7 +143,7 @@ class guiIO
       void openTextureWindow();
 
       /*********************Terrain*Window*******************************/
-      janela* terrainWindow;               /**< Terrain Window */
+      window* terrainWindow;               /**< Terrain Window */
       tabButton* terrainTabButton;         /**< Terrain TabButton */
       oneTabButton* terrainUpButton;       /**< Terrain Up Button */
       oneTabButton* terrainDownButton;     /**< Terrain Down Button */
@@ -152,7 +152,7 @@ class guiIO
       oneTabButton* terrainTextureButton;  /**< Terrain Texture Button */
       void openTerrainWindow();
       /*********************Wall*Window*******************************/
-      janela* wallWindow;                 /**< Wall Window */
+      window* wallWindow;                 /**< Wall Window */
       tabButton* wallTabButton;           /**< Wall Tab Button */
       oneTabButton* wallXButton;          /**< X Wall Button */
       oneTabButton* wallZButton;          /**< Z Wall Button */
@@ -165,14 +165,14 @@ class guiIO
       oneTabButton* wallMoreHorTexture;   /**< Texture Horizontal More Button */
       void openWallWindow();
       /*********************Portal*Window*******************************/
-      janela* portalWindow;               /**< Portal Window */
+      window* portalWindow;               /**< Portal Window */
       tabButton* portalTabButton;         /**< Portal TabButton */
       oneTabButton* portalAddButton;      /**< Add Portal Button */
       oneTabButton* portalTagButton;      /**< Portal Tag Button */
       oneTabButton* portalDoorButton;     /**< Door Button */
       void openPortalWindow();
       /*********************Object*Window*******************************/
-      janela* objectWindow;               /**< Object Window */
+      window* objectWindow;               /**< Object Window */
       tabButton* objectTabButton;         /**< Object TabButton */
       oneTabButton* objectCommonButton;   /**< Object Common Button */
       oneTabButton* objectGunsButton;     /**< Object Guns Button */
@@ -185,7 +185,7 @@ class guiIO
       oneTabButton* objectBathButton;     /**< Object Bath Button */
       void openObjectWindow();      
       /*********************Particle*Window*******************************/
-      janela* particleWindow;             /**< Particle Window */
+      window* particleWindow;             /**< Particle Window */
       tabButton* particleTabButton;       /**< Particles Tab Button */
       oneTabButton* fireButton;           /**< Particle Fire Button */
       oneTabButton* smokeButton;          /**< Particle Smoke Button */
@@ -195,11 +195,11 @@ class guiIO
       oneTabButton* grassButton;          /**< Particle Grass Button */
       void openParticleWindow();
       /*********************Message*Window*******************************/
-      janela* messageWindow;              /**< Message Window */
+      window* messageWindow;              /**< Message Window */
       textBox* messageText;               /**< Message Text */
       void openMessageWindow(); 
       /**************************Fog*Window******************************/
-      janela* fogWindow;                  /**< Fog Window */
+      window* fogWindow;                  /**< Fog Window */
       cxSel* fogEnabled;                  /**< Fog enabled CxSel */
       textBar* fogColor[4];            /**< Fog Color Texts */
       textBar* fogDensity;             /**< Fog Density Text */

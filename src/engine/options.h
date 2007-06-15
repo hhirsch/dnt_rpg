@@ -41,7 +41,7 @@ class options
       bool    enableParticles; /**< Enable/Disable Particles */
       bool    enableGrass;     /**< Enable/Disable Grass */
       int     reflexionType;   /**< Reflexion Type */
-      janela* window;          /**< Options Window Pointer */
+      window* intWindow;       /**< Options Window Pointer */
 
 
    private:

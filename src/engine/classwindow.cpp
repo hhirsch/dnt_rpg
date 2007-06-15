@@ -1,3 +1,5 @@
+/* DccNiTghtmare is in Public Domain. Do whatever you want with this code */
+
 #include "classwindow.h"
 
 /********************************************************************
@@ -23,50 +25,50 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
       actualClass = externalClasses->getClassByInteger(0);
    }
    
-   /* create window */
-   window = inter->insertWindow(90,100,710,499,
-                                language.CLASSW_TITLE.c_str(),1,1);
+   /* create intWindow */
+   intWindow = inter->insertWindow(90,100,710,499,
+                                   language.CLASSW_TITLE.c_str());
    /* Class Image */
-   classImage = window->objects->insertPicture(7,20,0,0,NULL);   
+   classImage = intWindow->getObjectsList()->insertPicture(7,20,0,0,NULL);   
    classImage->set(actualClass->image);
 
    /* Class Description */
-   textDescTitle = window->objects->insertTextBox(71,20,342,35,1,
+   textDescTitle = intWindow->getObjectsList()->insertTextBox(71,20,342,35,1,
                                            language.CLASSW_DESCRIPTION.c_str());
    textDescTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
    
-   textDesc = window->objects->insertRolBar(71,36,342,345,
+   textDesc = intWindow->getObjectsList()->insertRolBar(71,36,342,345,
              (actualClass->citation + "||" + actualClass->description).c_str(),
-             window->cara);
+             intWindow->getSurface());
 
    /* Race Characteristics */
-   textCharacTitle = window->objects->insertTextBox(343,20,613,35,1,
+   textCharacTitle = intWindow->getObjectsList()->insertTextBox(343,20,613,35,1,
                                        language.CLASSW_CHARACTERISTICS.c_str());
    textCharacTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
 
-   textCharac = window->objects->insertRolBar(343,36,613,345,
+   textCharac = intWindow->getObjectsList()->insertRolBar(343,36,613,345,
                                               getCharacteristics().c_str(),
-                                              window->cara);
+                                              intWindow->getSurface());
 
    /* Name and Selectors */
-   buttonPrevious = window->objects->insertButton(71,346,86,364,"<",0);
-   buttonNext = window->objects->insertButton(598,346,613,364,">",0);
-   textName = window->objects->insertTextBox(87,346,597,364,1, 
+   buttonPrevious = intWindow->getObjectsList()->insertButton(71,346,86,364,"<",0);
+   buttonNext = intWindow->getObjectsList()->insertButton(598,346,613,364,">",0);
+   textName = intWindow->getObjectsList()->insertTextBox(87,346,597,364,1, 
                                                   actualClass->name.c_str());
    textName->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Confirm Button */
-   buttonConfirm = window->objects->insertButton(543,370,613,389,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(543,370,613,389,
                                               language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->insertButton(8,370,78,389,
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,370,78,389,
                                                language.SKILL_CANCEL.c_str(),1);
 
    /* Open Skill Window */
-   window->ptrExterno = &window;
-   window->fechavel = false;
-   inter->openWindow(window);
+   intWindow->setExternPointer(&intWindow);
+   intWindow->setAttributes(false,false,false,false);
+   inter->openWindow(intWindow);
 }
 
 /********************************************************************
@@ -199,13 +201,13 @@ int classWindow::treat(guiObject* object, int eventInfo, interface* inter)
                            actualClass->description);
          textCharac->setText(getCharacteristics());
          classImage->set(actualClass->image);
-         window->Desenhar(0,0);
+         intWindow->draw(0,0);
       }
       else if(object == (guiObject*) buttonConfirm)
       {
          classImage->set(NULL);
          *choosedClass = actualClass;
-         inter->closeWindow(window);
+         inter->closeWindow(intWindow);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(CLASSW_CONFIRM);
@@ -213,9 +215,9 @@ int classWindow::treat(guiObject* object, int eventInfo, interface* inter)
       else if(object == (guiObject*) buttonCancel) 
       {
          classImage->set(NULL); //to not delete classes images
-         inter->closeWindow(window);
+         inter->closeWindow(intWindow);
          *choosedClass = NULL;
-         window = NULL;
+         intWindow = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(CLASSW_CANCEL);

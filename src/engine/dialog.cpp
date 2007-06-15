@@ -416,14 +416,17 @@ void conversation::openDialog(int numDialog, interface* gui, character* pers,
    actualNPC = pers;
    actualPC = PC;
    actual = -1;
-   jan = gui->insertWindow(330,100,585,355,language.DIALOGW_TITLE.c_str(),1,1);
-   jan->objects->insertButton(5,86,69,104,"Barter",1);
-   jan->objects->insertPicture(5,25,0,0,pers->getPortraitFileName().c_str());
-   npcText = jan->objects->insertRolBar(71,20,250,115,"",jan->cara);
+   jan = gui->insertWindow(330,100,585,355,language.DIALOGW_TITLE.c_str());
+   jan->getObjectsList()->insertButton(5,86,69,104,"Barter",1);
+   jan->getObjectsList()->insertPicture(5,25,0,0,
+                                        pers->getPortraitFileName().c_str());
+   npcText = jan->getObjectsList()->insertRolBar(71,20,250,115,"",
+                                                 jan->getSurface());
    //npcText->fonte = FMINI;
-   pcSelText = jan->objects->insertSelText(5,116,250,250,"","","","","");
-   jan->objects->insertPicture(3,15,0,0,"../data/texturas/dialog.png");
-   jan->ptrExterno = &jan;
+   pcSelText = jan->getObjectsList()->insertSelText(5,116,250,250,"","","",
+                                                    "","");
+   jan->getObjectsList()->insertPicture(3,15,0,0,"../data/texturas/dialog.png");
+   jan->setExternPointer(&jan);
    gui->openWindow(jan);
 
    changeDialog(numDialog);
@@ -522,7 +525,7 @@ void conversation::changeDialog(int numDialog)
 
    if(windowOpened())
    {
-      jan->Desenhar(0,0);
+      jan->draw(0,0);
    }
 }
 

@@ -6,13 +6,13 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJSPP = button.o color.o cxsel.o draw.o farso.o fonte.o guilist.o healthBar.o interface.o janela.o listtext.o menu.o messages.o mouse.o picture.o rolbar.o seltext.o tabbutton.o textbar.o textbox.o
+OBJSPP = button.o color.o cxsel.o draw.o farso.o fonte.o guilist.o healthBar.o interface.o listtext.o menu.o messages.o mouse.o picture.o rolbar.o seltext.o tabbutton.o textbar.o textbox.o window.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
 
 
-# Comente a linha abaixo se quiser movimento transparente das janelas
+# Comente a linha abaixo se quiser movimento transparente das windows
 # POR ENQUANTO, MOVIMENTO TRANSPARENTE NAO FUNCIONA!!!!! (e provavelmente, nunca funcionara!!!)
 MOVOPACO =  -DMOVIMENTO_OPACO
 
@@ -73,9 +73,9 @@ healthBar.o: healthBar.h healthBar.cpp
 	@$(CC) $(CFLAGS) healthBar.cpp -o healthBar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-janela.o: janela.h janela.cpp
-	@printf "Making janela.o... "
-	@$(CC) $(CFLAGS) $(MOVOPACO) janela.cpp -o janela.o
+window.o: window.h window.cpp
+	@printf "Making window.o... "
+	@$(CC) $(CFLAGS) $(MOVOPACO) window.cpp -o window.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 guilist.o: guilist.h guilist.cpp guiobject.h

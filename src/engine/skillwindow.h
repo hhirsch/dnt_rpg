@@ -31,7 +31,7 @@ class skillWindow
        * \return 0 on close, 1 otherwise */
       int treat(guiObject* object, int eventInfo, interface* inter);
 
-      janela*      window;           /**< Pointer to the internal window */
+      window*   intWindow;           /**< Pointer to the internal window */
 
    private:
       skills*      externalSkill;    /**< Pointer to the skillList with descriptions */

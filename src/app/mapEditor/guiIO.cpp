@@ -48,14 +48,15 @@ guiIO::~guiIO()
  ****************************************************************/
 void guiIO::openFileWindow()
 {
-   fileWindow = gui->insertWindow(0,1,184,63,"File",1,1);
-   newButton = fileWindow->objects->insertButton(10,37,50,55,"New",1);
-   openButton = fileWindow->objects->insertButton(51,37,91,55,"Open",1);
-   saveButton = fileWindow->objects->insertButton(92,37,132,55,"Save",1);
-   exitButton = fileWindow->objects->insertButton(133,37,173,55,"Exit",1);
-   fileText = fileWindow->objects->insertTextBar(10,17,173,33,"../data/mapas/",0);
-   fileWindow->fechavel = 0;
-   fileWindow->ptrExterno = &fileWindow;
+   fileWindow = gui->insertWindow(0,1,184,63,"File");
+   newButton = fileWindow->getObjectsList()->insertButton(10,37,50,55,"New",1);
+   openButton = fileWindow->getObjectsList()->insertButton(51,37,91,55,"Open",1);
+   saveButton = fileWindow->getObjectsList()->insertButton(92,37,132,55,"Save",1);
+   exitButton = fileWindow->getObjectsList()->insertButton(133,37,173,55,"Exit",1);
+   fileText = fileWindow->getObjectsList()->insertTextBar(10,17,173,33,
+                                                 "../data/mapas/",0);
+   fileWindow->setAttributes(false,true,false,false);
+   fileWindow->setExternPointer(&fileWindow);
    gui->openWindow(fileWindow);
 }
 
@@ -64,17 +65,17 @@ void guiIO::openFileWindow()
  ****************************************************************/
 void guiIO::openTextureWindow()
 {
-   textureWindow = gui->insertWindow(0,164,184,244,"Texture",1,1);
-   texturePreviousButton = textureWindow->objects->insertButton(7,56,74,74,
+   textureWindow = gui->insertWindow(0,164,184,244,"Texture");
+   texturePreviousButton = textureWindow->getObjectsList()->insertButton(7,56,74,74,
                                                                 "Previous",1);
-   textureNextButton = textureWindow->objects->insertButton(110,56,177,74,
+   textureNextButton = textureWindow->getObjectsList()->insertButton(110,56,177,74,
                                                             "Next",1);
-   textureInsertButton = textureWindow->objects->insertButton(20,35,153,53,
+   textureInsertButton = textureWindow->getObjectsList()->insertButton(20,35,153,53,
                                                               "Insert",1);
-   textureText = textureWindow->objects->insertTextBar(10,17,173,33,
+   textureText = textureWindow->getObjectsList()->insertTextBar(10,17,173,33,
                                                        "../data/texturas/",0);
-   textureWindow->fechavel = 0;
-   textureWindow->ptrExterno = &textureWindow;
+   textureWindow->setAttributes(false,true,false,false);
+   textureWindow->setExternPointer(&textureWindow);
    gui->openWindow(textureWindow);
 }
 
@@ -83,8 +84,8 @@ void guiIO::openTextureWindow()
  ****************************************************************/
 void guiIO::openObjectWindow()
 {
-   objectWindow = gui->insertWindow(0,245,184,599-248,"Objects",1,1);
-   objectTabButton = objectWindow->objects->insertTabButton(7,17,0,0,
+   objectWindow = gui->insertWindow(0,245,184,599-248,"Objects");
+   objectTabButton = objectWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                                "../data/mapEditor/objects.png");
    objectCommonButton = objectTabButton->insertButton(0,0,24,19);
    objectGunsButton = objectTabButton->insertButton(25,0,44,19);
@@ -95,7 +96,7 @@ void guiIO::openObjectWindow()
    objectCharButton = objectTabButton->insertButton(147,0,170,19);
    objectMacabreButton = objectTabButton->insertButton(0,25,24,45);
    objectBathButton = objectTabButton->insertButton(25,25,44,45);
-   objectWindow->ptrExterno = &objectWindow;
+   objectWindow->setExternPointer(&objectWindow);
    gui->openWindow(objectWindow);
 }
 
@@ -104,8 +105,8 @@ void guiIO::openObjectWindow()
  ****************************************************************/
 void guiIO::openNavWindow()
 {
-   navWindow = gui->insertWindow(799-67,599-74,799,599,"Nav",1,1);
-   navTabButton = navWindow->objects->insertTabButton(7,17,0,0,
+   navWindow = gui->insertWindow(799-67,599-74,799,599,"Nav");
+   navTabButton = navWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                                    "../data/mapEditor/nav.png");
    moreZoomButton = navTabButton->insertButton(0,0,8,8);    /* More Zoom */
    lessZoomButton = navTabButton->insertButton(9,0,17,8);   /* Less Zoom */
@@ -117,8 +118,8 @@ void guiIO::openNavWindow()
    rotDownButton = navTabButton->insertButton(45,13,53,24); /* Rotation Down */
    rotLeftButton = navTabButton->insertButton(40,36,50,50); /* Rotation Left */
    rotRightButton = navTabButton->insertButton(0,36,10,50); /* Rotation Right */
-   navWindow->fechavel = 0;
-   navWindow->ptrExterno = &navWindow;
+   navWindow->setAttributes(false,false,false,false);
+   navWindow->setExternPointer(&navWindow);
    gui->openWindow(navWindow);
 }
 
@@ -127,11 +128,11 @@ void guiIO::openNavWindow()
  ****************************************************************/
 void guiIO::openMessageWindow()
 {
-   messageWindow = gui->insertWindow(113,599-36,799-68,599,"Messages",1,1);
-   messageText = messageWindow->objects->insertTextBox(7,16,610,31,0,
+   messageWindow = gui->insertWindow(113,599-36,799-68,599,"Messages");
+   messageText = messageWindow->getObjectsList()->insertTextBox(7,16,610,31,0,
                  "Welcome to DccNiTghtmare Map Editor!");
-   messageWindow->fechavel = 0;
-   messageWindow->ptrExterno = &messageWindow;
+   messageWindow->setAttributes(false,true,false,false);
+   messageWindow->setExternPointer(&messageWindow);
    gui->openWindow(messageWindow);
 }
 
@@ -141,23 +142,23 @@ void guiIO::openMessageWindow()
  ****************************************************************/
 void guiIO::openMainWindow()
 {
-   mainWindow = gui->insertWindow(0,64,184,163,"Main",1,1);
-   terrainButton = mainWindow->objects->insertButton(5,17,59,35,"Terrain",0);
-   wallButton = mainWindow->objects->insertButton(60,17,123,35,"Wall",0);
-   portalButton = mainWindow->objects->insertButton(124,17,179,35,"Portal",0);
-   objectButton = mainWindow->objects->insertButton(5,36,59,54,"Object",0);
-   particleButton =mainWindow->objects->insertButton(60,36,123,54,"Particle",0);
-   npcButton = mainWindow->objects->insertButton(124,36,179,54,"NPC",0);
-   destroyButton = mainWindow->objects->insertButton(5,55,59,73,"Destroy",0);
-   lightButton = mainWindow->objects->insertButton(60,55,123,73,"Light",0);
-   fogButton = mainWindow->objects->insertButton(124,55,179,73,"Fog",0);
-   optionsButton = mainWindow->objects->insertButton(5,74,59,92,"Options",0);
-   musicButton = mainWindow->objects->insertButton(60,74,123,92,"Music",0);
-   sndFxButton = mainWindow->objects->insertButton(124,74,179,92,"SndFx",0);
+   mainWindow = gui->insertWindow(0,64,184,163,"Main");
+   terrainButton = mainWindow->getObjectsList()->insertButton(5,17,59,35,"Terrain",0);
+   wallButton = mainWindow->getObjectsList()->insertButton(60,17,123,35,"Wall",0);
+   portalButton = mainWindow->getObjectsList()->insertButton(124,17,179,35,"Portal",0);
+   objectButton = mainWindow->getObjectsList()->insertButton(5,36,59,54,"Object",0);
+   particleButton =mainWindow->getObjectsList()->insertButton(60,36,123,54,"Particle",0);
+   npcButton = mainWindow->getObjectsList()->insertButton(124,36,179,54,"NPC",0);
+   destroyButton = mainWindow->getObjectsList()->insertButton(5,55,59,73,"Destroy",0);
+   lightButton = mainWindow->getObjectsList()->insertButton(60,55,123,73,"Light",0);
+   fogButton = mainWindow->getObjectsList()->insertButton(124,55,179,73,"Fog",0);
+   optionsButton = mainWindow->getObjectsList()->insertButton(5,74,59,92,"Options",0);
+   musicButton = mainWindow->getObjectsList()->insertButton(60,74,123,92,"Music",0);
+   sndFxButton = mainWindow->getObjectsList()->insertButton(124,74,179,92,"SndFx",0);
 
 
-   mainWindow->fechavel = 0;
-   mainWindow->ptrExterno = &mainWindow;
+   mainWindow->setAttributes(false,true,false,false);
+   mainWindow->setExternPointer(&mainWindow);
    gui->openWindow(mainWindow);
 }
 
@@ -166,8 +167,8 @@ void guiIO::openMainWindow()
  ****************************************************************/
 void guiIO::openWallWindow()
 {
-   wallWindow = gui->insertWindow(0,599-123,112,599-62,"Wall",1,1);
-   wallTabButton = wallWindow->objects->insertTabButton(7,17,0,0,
+   wallWindow = gui->insertWindow(0,599-123,112,599-62,"Wall");
+   wallTabButton = wallWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                                   "../data/mapEditor/wall.png");
    wallXButton = wallTabButton->insertButton(0,0,19,19);          /* Wall X */
    wallZButton = wallTabButton->insertButton(20,0,39,19);         /* Wall Z */
@@ -179,7 +180,7 @@ void guiIO::openWallWindow()
    wallLessVerTexture = wallTabButton->insertButton(60,20,79,39); /* Less V */
    wallMoreVerTexture = wallTabButton->insertButton(80,20,99,39); /* Less V */
 
-   wallWindow->ptrExterno = &wallWindow;
+   wallWindow->setExternPointer(&wallWindow);
    gui->openWindow(wallWindow);
 }
 
@@ -188,13 +189,13 @@ void guiIO::openWallWindow()
  ****************************************************************/
 void guiIO::openPortalWindow()
 {
-   portalWindow = gui->insertWindow(0,599-185,112,599-124,"Portal",1,1);
-   portalTabButton = portalWindow->objects->insertTabButton(7,17,0,0,
+   portalWindow = gui->insertWindow(0,599-185,112,599-124,"Portal");
+   portalTabButton = portalWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                                 "../data/mapEditor/portal.png");
    portalAddButton = portalTabButton->insertButton(0,0,19,19); /* Add */
    portalTagButton = portalTabButton->insertButton(20,0,39,19); /* Tag */
    portalDoorButton = portalTabButton->insertButton(40,0,59,19); /* Door */
-   portalWindow->ptrExterno = &portalWindow;
+   portalWindow->setExternPointer(&portalWindow);
    gui->openWindow(portalWindow);
 }
 
@@ -204,15 +205,15 @@ void guiIO::openPortalWindow()
  ****************************************************************/
 void guiIO::openTerrainWindow()
 {
-   terrainWindow = gui->insertWindow(0,599-61,112,599,"Terrain",1,1);
-   terrainTabButton = terrainWindow->objects->insertTabButton(7,17,0,0,
+   terrainWindow = gui->insertWindow(0,599-61,112,599,"Terrain");
+   terrainTabButton = terrainWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                                "../data/mapEditor/terrain.png");
    terrainUpButton = terrainTabButton->insertButton(0,0,19,19);    
    terrainNivButton = terrainTabButton->insertButton(20,0,39,19);  
    terrainDownButton = terrainTabButton->insertButton(40,0,59,19); 
    terrainWalkableButton = terrainTabButton->insertButton(0,20,19,39);
    terrainTextureButton = terrainTabButton->insertButton(20,20,39,39);
-   terrainWindow->ptrExterno = &terrainWindow;
+   terrainWindow->setExternPointer(&terrainWindow);
    gui->openWindow(terrainWindow);
 }
 
@@ -221,8 +222,9 @@ void guiIO::openTerrainWindow()
  ****************************************************************/
 void guiIO::openParticleWindow()
 {
-   particleWindow = gui->insertWindow(0,599-247,112,599-186,"Particle",1,1);
-   particleTabButton = particleWindow->objects->insertTabButton(7,17,0,0,
+   particleWindow = gui->insertWindow(0,599-247,112,599-186,"Particle");
+   particleTabButton = particleWindow->getObjectsList()->insertTabButton(7,17,
+                                                                         0,0,
                                               "../data/mapEditor/particle.png");
    fireButton = particleTabButton->insertButton(0,0,19,19);
    smokeButton = particleTabButton->insertButton(20,0,39,19); 
@@ -230,7 +232,7 @@ void guiIO::openParticleWindow()
    waterSurfaceButton = particleTabButton->insertButton(60,0,79,19);
    snowButton = particleTabButton->insertButton(80,0,99,19);
    grassButton = particleTabButton->insertButton(0,20,19,39);
-   particleWindow->ptrExterno = &particleWindow;
+   particleWindow->setExternPointer(&particleWindow);
    gui->openWindow(particleWindow);
 }
 
@@ -242,33 +244,35 @@ void guiIO::openFogWindow()
  if(actualFog != NULL)
  {
    char buf[10];
-   fogWindow = gui->insertWindow(185,100,288,255,"Fog",1,1);
-   fogWindow->objects->insertTextBox(5,17,45,30,0,"Red");
+   fogWindow = gui->insertWindow(185,100,288,255,"Fog");
+   fogWindow->getObjectsList()->insertTextBox(5,17,45,30,0,"Red");
    sprintf(buf,"%.4f",actualFog->color[0]);
-   fogColor[0] = fogWindow->objects->insertTextBar(48,17,98,30,buf,1);
-   fogWindow->objects->insertTextBox(5,31,45,44,0,"Green");
+   fogColor[0] = fogWindow->getObjectsList()->insertTextBar(48,17,98,30,buf,1);
+   fogWindow->getObjectsList()->insertTextBox(5,31,45,44,0,"Green");
    sprintf(buf,"%.4f",actualFog->color[1]);
-   fogColor[1] = fogWindow->objects->insertTextBar(48,31,98,44,buf,1);
-   fogWindow->objects->insertTextBox(5,45,45,58,0,"Blue");
+   fogColor[1] = fogWindow->getObjectsList()->insertTextBar(48,31,98,44,buf,1);
+   fogWindow->getObjectsList()->insertTextBox(5,45,45,58,0,"Blue");
    sprintf(buf,"%.4f",actualFog->color[2]);
-   fogColor[2] = fogWindow->objects->insertTextBar(48,45,98,58,buf,1);
-   fogWindow->objects->insertTextBox(5,59,45,72,0,"Alpha");
+   fogColor[2] = fogWindow->getObjectsList()->insertTextBar(48,45,98,58,buf,1);
+   fogWindow->getObjectsList()->insertTextBox(5,59,45,72,0,"Alpha");
    sprintf(buf,"%.4f",actualFog->color[3]);
-   fogColor[3] = fogWindow->objects->insertTextBar(48,59,98,72,buf,1);
-   fogWindow->objects->insertTextBox(5,73,45,86,0,"Dense");
+   fogColor[3] = fogWindow->getObjectsList()->insertTextBar(48,59,98,72,buf,1);
+   fogWindow->getObjectsList()->insertTextBox(5,73,45,86,0,"Dense");
    sprintf(buf,"%.4f",actualFog->density);
-   fogDensity = fogWindow->objects->insertTextBar(48,73,98,86,buf,1);
-   fogWindow->objects->insertTextBox(5,87,45,100,0,"Start");
+   fogDensity = fogWindow->getObjectsList()->insertTextBar(48,73,98,86,buf,1);
+   fogWindow->getObjectsList()->insertTextBox(5,87,45,100,0,"Start");
    sprintf(buf,"%.4f",actualFog->start);
-   fogStart = fogWindow->objects->insertTextBar(48,87,98,100,buf,1);
-   fogWindow->objects->insertTextBox(5,101,45,114,0,"End");
+   fogStart = fogWindow->getObjectsList()->insertTextBar(48,87,98,100,buf,1);
+   fogWindow->getObjectsList()->insertTextBox(5,101,45,114,0,"End");
    sprintf(buf,"%.4f",actualFog->end);
-   fogEnd = fogWindow->objects->insertTextBar(48,101,98,114,buf,1);
-   fogWindow->objects->insertTextBox(5,115,45,128,0,"Enable");
-   fogEnabled = fogWindow->objects->insertCxSel(48,117,actualFog->enabled);
+   fogEnd = fogWindow->getObjectsList()->insertTextBar(48,101,98,114,buf,1);
+   fogWindow->getObjectsList()->insertTextBox(5,115,45,128,0,"Enable");
+   fogEnabled = fogWindow->getObjectsList()->insertCxSel(48,117,
+                                                         actualFog->enabled);
 
-   fogApplyButton = fogWindow->objects->insertButton(24,130,79,148,"Apply",1);
-   fogWindow->ptrExterno = &fogWindow;
+   fogApplyButton = fogWindow->getObjectsList()->insertButton(24,130,79,148,
+                                                              "Apply",1);
+   fogWindow->setExternPointer(&fogWindow);
    gui->openWindow(fogWindow);
  }
 }
@@ -295,7 +299,7 @@ void guiIO::setFog(mapFog* fog)
       sprintf(buf,"%.4f",actualFog->end);
       fogEnd->setText(buf);
       fogEnabled->setSelection(actualFog->enabled);
-      fogWindow->Desenhar(0,0);
+      fogWindow->draw(0,0);
    }
 }
 
@@ -892,6 +896,6 @@ string guiIO::getObjectFileName()
 void guiIO::showMessage(string msg)
 {
    messageText->setText(msg);
-   messageWindow->Desenhar(0,0);
+   messageWindow->draw(0,0);
 }
 

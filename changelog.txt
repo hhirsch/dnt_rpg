@@ -10,6 +10,10 @@
  - Indoor Reflexions;
  - Better Dynamic Ligths Implementation;
  - More 3D Objects;
+ - More Characters;
+ - Rewrite the GUI;
+ - Put the code fully on English (instead of some
+   places on english, others on portuguese);
 
 ================================================
 |               Version 0.1.1                  |

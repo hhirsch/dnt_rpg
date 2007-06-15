@@ -36,7 +36,7 @@ class attWindow
       int treat(guiObject* object, int eventInfo, interface* inter,
                 GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
-      janela*      window;        /**< Pointer to the internal window */
+      window*      intWindow;     /**< Pointer to the internal window */
 
    private:
       int points[6];              /**< Rolled Points */

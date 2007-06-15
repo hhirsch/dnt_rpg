@@ -12,7 +12,7 @@
 #include "button.h"
 #include "color.h"
 #include "cxsel.h"
-#include "janela.h"
+#include "window.h"
 #include "interface.h"
 #include "fonte.h"
 #include "healthBar.h"

@@ -6,7 +6,7 @@
 #define _interface_h
 
 #include <string.h>
-#include "janela.h"
+#include "window.h"
 #include "mouse.h"
 #include "menu.h"
 #include "guilist.h"
@@ -75,7 +75,7 @@ class interface
       void clearActiveObject();
       /*! Close a window
        * \param jan -> pointer to the window */
-      void closeWindow(janela *jan);
+      void closeWindow(window *jan);
       /*! Close all interface openned windows */
       void closeAllWindows();
       /*! Verify if the mouse is on some window or not
@@ -89,21 +89,21 @@ class interface
        * \param xb -> x2 window posiiton 
        * \param yb -> y2 window position
        * \param text -> title of the window 
-       * \param maximiz -> if can be maximized
-       * \param redmens -> if can redmensionate (not used anymore)
        * \return -> pointer to the inserted window */
-      janela* insertWindow(int xa,int ya,int xb,int yb,const char *text,
-                           int maximiz,int redmens);
+      window* insertWindow(int xa,int ya,int xb,int yb,string text);
       /*! Open a Window
        * \param jan -> pointer to the window opened */
-      void openWindow(janela* jan);
+      void openWindow(window* jan);
       
-      int foco;    /**< Current GUI focus (on some element of on GAME) */
+      /*! Get the interface focus
+       * \return focus constant of the current focus*/
+      int getFocus(){return(focus);};
 
    private:
+      int focus;              /**< Current GUI focus */
       SDL_Surface* fundo;     /**< background surface, if has one */
       guiList* objects;       /**< some no window objects */
-      Ljanela* ljan;          /**< windows list */
+      windowList* ljan;       /**< windows list */
       guiObject* objAtivo;    /**< pointer to the actived object */
       guiObject* chamador;    /**< pointer to the caller object */
 

@@ -42,7 +42,7 @@ class inventWindow
       inventory *inventories;         /**< Extern Inventories*/
 
       interface* interf;              /**< Pointer to Interface */
-      janela* window;                 /**< Internal Window */
+      window* intWindow;              /**< Internal Window */
       tabButton* inventoryTabButton;  /**< Inventory Tab Button */
       oneTabButton* inventoryButton;  /**< Inventory Spaces Button */
       oneTabButton* inv1Button;       /**< First Inventory Button */

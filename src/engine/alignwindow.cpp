@@ -23,37 +23,37 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
       actualAlign = externalAligns->getAlignByInteger(0);
    }
    
-   /* create window */
-   window = inter->insertWindow(270,186,537,441,language.ALIGNW_TITLE.c_str(),
-                                1,1);
+   /* create intWindow */
+   intWindow = inter->insertWindow(270,186,537,441,
+                                  language.ALIGNW_TITLE.c_str());
    /* Align Image */
-   alignImage = window->objects->insertPicture(111,185,0,0,NULL);   
+   alignImage = intWindow->getObjectsList()->insertPicture(111,185,0,0,NULL);   
    alignImage->set(actualAlign->image);
 
    /* Align Description */
-   textDesc = window->objects->insertRolBar(5,38,262,180, 
+   textDesc = intWindow->getObjectsList()->insertRolBar(5,38,262,180, 
                                             actualAlign->description.c_str(),
-                                            window->cara);
+                                            intWindow->getSurface());
       
    /* Name and Selectors */
-   buttonPrevious = window->objects->insertButton(5,19,19,37,"<",0);
-   buttonNext = window->objects->insertButton(248,19,262,37,">",0);
-   textName = window->objects->insertTextBox(20,19,247,37,1, 
+   buttonPrevious = intWindow->getObjectsList()->insertButton(5,19,19,37,"<",0);
+   buttonNext = intWindow->getObjectsList()->insertButton(248,19,262,37,">",0);
+   textName = intWindow->getObjectsList()->insertTextBox(20,19,247,37,1, 
                                                   actualAlign->name.c_str());
    textName->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Confirm Button */
-   buttonConfirm = window->objects->insertButton(193,225,263,244, 
-                                                 language.SKILL_CONFIRM.c_str(),1);
+   buttonConfirm = intWindow->getObjectsList()->insertButton(193,225,263,244, 
+                                              language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->insertButton(8,225,78,244,
-                                                language.SKILL_CANCEL.c_str(),1);
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,225,78,244,
+                                               language.SKILL_CANCEL.c_str(),1);
 
    /* Open Skill Window */
-   window->ptrExterno = &window;
-   window->fechavel = false;
-   inter->openWindow(window);
+   intWindow->setExternPointer(&intWindow);
+   intWindow->setAttributes(false, false, false, false);
+   inter->openWindow(intWindow);
 }
 
 /************************************************************************
@@ -77,13 +77,13 @@ int alignWindow::treat(guiObject* object, int eventInfo, interface* inter)
          textName->setText(actualAlign->name);
          textDesc->setText(actualAlign->description);
          alignImage->set(actualAlign->image);
-         window->Desenhar(0,0);
+         intWindow->draw(0,0);
       }
       else if(object == (guiObject*) buttonConfirm)
       {
          alignImage->set(NULL);
          *choosedAlign = actualAlign;
-         inter->closeWindow(window);
+         inter->closeWindow(intWindow);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(ALIGNW_CONFIRM);
@@ -91,9 +91,9 @@ int alignWindow::treat(guiObject* object, int eventInfo, interface* inter)
       else if(object == (guiObject*) buttonCancel) 
       {
          alignImage->set(NULL); //to not delete align images
-         inter->closeWindow(window);
+         inter->closeWindow(intWindow);
          *choosedAlign = NULL;
-         window = NULL;
+         intWindow = NULL;
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);
          return(ALIGNW_CANCEL);

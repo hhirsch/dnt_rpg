@@ -12,7 +12,7 @@ int mouseX=0,mouseY=0;
  *********************************************************************/
 interface::interface(char* arqfundo)
 {
-   ljan = new Ljanela;
+   ljan = new windowList;
    objects = new guiList;
    if(arqfundo != NULL)
    {
@@ -21,15 +21,9 @@ interface::interface(char* arqfundo)
    } 
    else
    {
-       /*fundo =  SDL_CreateRGBSurface(SDL_HWSURFACE,512, 512,32,0x000000FF, 
-			0x0000FF00, 
-			0x00FF0000, 
-			0xFF000000);
-       cor_Definir(0,0,0);
-       retangulo_Colorir(fundo,0,0,511,511,0);*/
        fundo = NULL;
    }
-   foco = FOCUS_GAME;
+   focus = FOCUS_GAME;
 }
 
 /*********************************************************************
@@ -52,20 +46,20 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
 
     if(!objAtivo)
     {
-       foco = FOCUS_GAME;
+       focus = FOCUS_GAME;
     }
 
-    if(ljan->janelaAtiva == NULL)
+    if(ljan->getActiveWindow() == NULL)
     {
        *eventInfo = NOTHING;
-       foco = FOCUS_GAME;
+       focus = FOCUS_GAME;
        return(NULL);
     }
 
     /* Keyboard Events */
-    if ( (tecla[SDLK_ESCAPE]) && (foco != FOCUS_GAME))
+    if ( (tecla[SDLK_ESCAPE]) && (focus != FOCUS_GAME))
     {
-       foco = FOCUS_GAME;
+       focus = FOCUS_GAME;
        *eventInfo = EXIT;
        return(NULL);
     }
@@ -74,32 +68,29 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if(ljan->getMenu())
     {
        objAtivo = (guiObject*) ljan->getMenu();
-       foco = FOCUS_MENU;
+       focus = FOCUS_MENU;
     }
     else /* Verify Window Super Menu */
-    if(ljan->janelaAtiva->objects->getMenu())
+    if(ljan->getActiveWindow()->getObjectsList()->getMenu())
     {
-       objAtivo = (guiObject*) ljan->janelaAtiva->objects->getMenu();
-       foco = FOCUS_MENU;
+       objAtivo = (guiObject*) 
+                           ljan->getActiveWindow()->getObjectsList()->getMenu();
+       focus = FOCUS_MENU;
     }
 
     /* Mouse move to change focus */
     if( (x != mouseX || y != mouseY) && 
-        (foco == FOCUS_GAME) )
+        (focus == FOCUS_GAME) )
     {
         mouseX = x;
         mouseY = y;
         
-        if ((ljan->janelaAtiva != NULL) &&
-             isMouseAt(ljan->janelaAtiva->x1,
-                          ljan->janelaAtiva->y1,
-                          ljan->janelaAtiva->x2, 
-                          ljan->janelaAtiva->y2,
-                          x, y))
+        if ((ljan->getActiveWindow() != NULL) &&
+            (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
             /* Verify All objects */
-            guiObject *obj = ljan->janelaAtiva->objects->getFirst()->next;
-            for(aux=0;aux<ljan->janelaAtiva->objects->getTotal();aux++)
+            guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+            for(aux=0;aux<ljan->getActiveWindow()->getObjectsList()->getTotal();aux++)
             {
                /* Test selTexto */
                if(obj->type == GUI_SEL_TEXT) 
@@ -107,24 +98,21 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   selText *st = (selText*) obj;
                   int xa,ya,xb,yb;
                   st->getCoordinate(xa,ya,xb,yb);
-                  if(isMouseAt(ljan->janelaAtiva->x1+xa,
-                               ljan->janelaAtiva->y1+ya,
-                               ljan->janelaAtiva->x1+xb, 
-                               ljan->janelaAtiva->y1+yb,x,y))
+                  if(ljan->getActiveWindow()->isMouseIn(x,y))
                   {
                       objAtivo = st;
-                      foco = FOCUS_SEL_TEXT;
+                      focus = FOCUS_SEL_TEXT;
                   }
                }
                /* Verify Button Table */
                else if(obj->type == GUI_TAB_BUTTON)
                {
                   tabButton *tb = (tabButton*) obj;
-                  if(tb->isMouseIn(x-ljan->janelaAtiva->x1,
-                                   y-ljan->janelaAtiva->y1))
+                  if(tb->isMouseIn(x-ljan->getActiveWindow()->getX1(),
+                                   y-ljan->getActiveWindow()->getY1()))
                   {
                      objAtivo = tb;
-                     foco = FOCUS_TAB_BUTTON;
+                     focus = FOCUS_TAB_BUTTON;
                   }
                }
                obj = obj->next;
@@ -133,65 +121,64 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     }
 
     /* Verify mouse button for focus change */
-    if((Mbotao & SDL_BUTTON(1)) &&  (foco == FOCUS_GAME))
+    if((Mbotao & SDL_BUTTON(1)) &&  (focus == FOCUS_GAME))
     {
-        if( ( (ljan->janelaAtiva != NULL) && (ljan->janelaAtiva->movivel) ) &&
-             isMouseAt(ljan->janelaAtiva->x1+36,
-                          ljan->janelaAtiva->y1, 
-                          ljan->janelaAtiva->x2-3,
-                          ljan->janelaAtiva->y1+12,x,y))
+        if( ( (ljan->getActiveWindow() != NULL) && 
+              (ljan->getActiveWindow()->canMoveWindow()) ) &&
+              (isMouseAt(ljan->getActiveWindow()->getX1()+36,
+                         ljan->getActiveWindow()->getY1(), 
+                          ljan->getActiveWindow()->getX2()-3,
+                          ljan->getActiveWindow()->getY1()+12,x,y)))
         {
-            /* Active Window Moves */
-            ljan->janelaAtiva->difx = x - ljan->janelaAtiva->x1;
-            ljan->janelaAtiva->dify = y - ljan->janelaAtiva->y1;
-            objAtivo = (guiObject*) ljan->janelaAtiva;
-            foco = FOCUS_WINDOW_MOVE;
+           /* Active Window Moves */
+           ljan->getActiveWindow()->setDiff(x-ljan->getActiveWindow()->getX1(),
+                                            y-ljan->getActiveWindow()->getY1());
+           objAtivo = (guiObject*) ljan->getActiveWindow();
+           focus = FOCUS_WINDOW_MOVE;
         }
-        else if ( (ljan->janelaAtiva != NULL) &&
-                   isMouseAt(ljan->janelaAtiva->x1,
-                                ljan->janelaAtiva->y1,
-                                ljan->janelaAtiva->x2, 
-                                ljan->janelaAtiva->y2,x,y))
+        else if ( (ljan->getActiveWindow() != NULL) &&
+                  (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
             /* Here are the internal windows clicks verification */
-            guiObject *obj = ljan->janelaAtiva->objects->getFirst()->next;
+            guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
             int aux;
-            for(aux=0; aux<ljan->janelaAtiva->objects->getTotal(); aux++)
+            for(aux=0; aux<ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
             {
                if(obj->type == GUI_BUTTON)
                {
                   /* Verify Click on Button */
                   button *bot = (button*) obj;
-                  if(bot->isMouseIn(x - ljan->janelaAtiva->x1,
-                                    y - ljan->janelaAtiva->y1))
+                  if(bot->isMouseIn(x - ljan->getActiveWindow()->getX1(),
+                                    y - ljan->getActiveWindow()->getY1()))
                   {
                       
                      objAtivo = bot;
-                     foco = FOCUS_BUTTON;
+                     focus = FOCUS_BUTTON;
                   }
                }
                /* Verify Click on TextBar */ 
                else if(obj->type == GUI_TEXT_BAR)
                {
                    textBar *bart = (textBar*) obj;
-                   if(bart->isMouseIn(x-ljan->janelaAtiva->x1,
-                                      y-ljan->janelaAtiva->y1))
+                   if(bart->isMouseIn(x-ljan->getActiveWindow()->getX1(),
+                                      y-ljan->getActiveWindow()->getY1()))
                    {
                        objAtivo = bart;
-                       bart->defineCursorPosition(x-ljan->janelaAtiva->x1,
-                                                  y-ljan->janelaAtiva->y1);
-                       foco = FOCUS_TEXT_BAR;
+                       bart->defineCursorPosition(x-
+                                            ljan->getActiveWindow()->getX1(),
+                                            y-ljan->getActiveWindow()->getY1());
+                       focus = FOCUS_TEXT_BAR;
                    }
                }
                /* Verify RadioBoxes */
                else if(obj->type == GUI_SEL_BOX)
                {
                    cxSel* cx = (cxSel*) obj;
-                   if(cx->isMouseIn(x-ljan->janelaAtiva->x1,
-                                    y-ljan->janelaAtiva->y1))
+                   if(cx->isMouseIn(x-ljan->getActiveWindow()->getX1(),
+                                    y-ljan->getActiveWindow()->getY1()))
                    {
                        objAtivo = cx;
-                       foco = FOCUS_CX_SEL;
+                       focus = FOCUS_CX_SEL;
                    }
                }
                /* Verify Text Select */
@@ -200,51 +187,46 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   selText* st = (selText*) obj;
                   int xa,ya,xb,yb;
                   st->getCoordinate(xa,ya,xb,yb);
-                  if(isMouseAt(xa+ljan->janelaAtiva->x1,
-                               ya+ljan->janelaAtiva->y1,
-                               xb+ljan->janelaAtiva->x1,
-                               yb+ljan->janelaAtiva->y1,x,y))
+                  if(isMouseAt(xa+ljan->getActiveWindow()->getX1(),
+                               ya+ljan->getActiveWindow()->getY1(),
+                               xb+ljan->getActiveWindow()->getX1(),
+                               yb+ljan->getActiveWindow()->getY1(),x,y))
                   {
                      objAtivo = st;
-                     foco = FOCUS_SEL_TEXT;
+                     focus = FOCUS_SEL_TEXT;
                   }
                }
                obj = obj->next;
             }
-            /* If out of for, without objects, call window external function */
-            if(ljan->janelaAtiva->procPres != NULL)
-            {
-                ljan->janelaAtiva->procPres(ljan->janelaAtiva,x,y,NULL);
-            }
             *eventInfo = CLICKED_WINDOW;
-            return((guiObject*) ljan->janelaAtiva);
+            return((guiObject*) ljan->getActiveWindow());
         }
-        else /*if( (ljan->janelaAtiva != NULL))*/
+        else /*if( (ljan->getActiveWindow() != NULL))*/
         {
            /* Test Other Windows Activation */
            int aux; 
-           janela *jaux=(janela*)ljan->getFirst()->next;
+           window *jaux=(window*)ljan->getFirst()->next;
            for(aux=0;aux<ljan->getTotal();aux++)
            {
-               if( (jaux != ljan->janelaAtiva)  && 
-                   isMouseAt(jaux->x1,jaux->y1,jaux->x2,jaux->y2,x,y))
+               if( (jaux != ljan->getActiveWindow())  && 
+                   (jaux->isMouseIn(x,y)))
                {
-                    foco = FOCUS_GAME;
-                    jaux->Ativar(ljan);
+                    focus = FOCUS_GAME;
+                    jaux->activate();
                     *eventInfo = ACTIVATED_WINDOW;
                     return((guiObject*) jaux);
                }
-               jaux = (janela*) jaux->next;
+               jaux = (window*) jaux->next;
            }
         } 
     }
 
     /*  FOCUS ON WINDOW MOVIMENTATION  */
-    if (foco == FOCUS_WINDOW_MOVE)
+    if (focus == FOCUS_WINDOW_MOVE)
     {
-        if(!(ljan->janelaAtiva->Mover(ljan,NULL,fundo,x,y,Mbotao)))
+        if(!(ljan->getActiveWindow()->doMove(fundo,x,y,Mbotao)))
         {
-           foco = FOCUS_GAME;
+           focus = FOCUS_GAME;
         }
         *eventInfo = MOVED_WINDOW;
         return(objAtivo);
@@ -252,12 +234,12 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
 
     /* FOCUS ON BUTTON PRESSED */
     else
-    if(foco == FOCUS_BUTTON)
+    if(focus == FOCUS_BUTTON)
     {
         int pronto;
         button* bot = (button*)objAtivo;
-        if (bot->press(ljan->janelaAtiva->x1, ljan->janelaAtiva->y1, x, y, 
-                       Mbotao, &pronto, ljan->janelaAtiva->cara))
+        if (bot->press(ljan->getActiveWindow()->getX1(), ljan->getActiveWindow()->getY1(), x, y, 
+                       Mbotao, &pronto, ljan->getActiveWindow()->getSurface()))
         {
            if(pronto)
            {
@@ -269,27 +251,27 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                  men->setPosition(bot->getX1(),bot->getY2()+1);
                  if (!bot->getText().compare("_"))
                  {
-                    foco = FOCUS_WINDOW_MENU;
+                    focus = FOCUS_WINDOW_MENU;
                  }
                  else
                  {
-                    foco = FOCUS_MENU;
+                    focus = FOCUS_MENU;
                  }                 
               }
               else if (!bot->getText().compare("*"))
               {
                    /* Close Window */
-                  if(ljan->janelaAtiva->fechavel)
+                  if(ljan->getActiveWindow()->canCloseWindow())
                   {
-                     ljan->janelaAtiva->Fechar(ljan);
+                     ljan->removeWindow(ljan->getActiveWindow());
                   }
-                  foco = FOCUS_GAME;
+                  focus = FOCUS_GAME;
                   *eventInfo = CLOSED_WINDOW;
                   return(NULL);
               }
               else
               {
-                  foco = FOCUS_GAME;
+                  focus = FOCUS_GAME;
               }
               
               *eventInfo = PRESSED_BUTTON;
@@ -298,16 +280,16 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
            else
            {
               /* Verify RolBar */
-              guiObject *obj = ljan->janelaAtiva->objects->getFirst()->next;
+              guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
               int aux;
-              for(aux=0; aux<ljan->janelaAtiva->objects->getTotal(); aux++)
+              for(aux=0; aux<ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
               {
                  if(obj->type == GUI_ROL_BAR)
                  {
                     rolBar* rb = (rolBar*)obj;
                     if(rb->eventGot(ON_PRESS_BUTTON, objAtivo))
                     {
-                       ljan->janelaAtiva->Desenhar(0,0);
+                       ljan->getActiveWindow()->draw(0,0);
                        rb->redraw();
                     }
                  }
@@ -320,7 +302,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
         }
         else if(pronto)
         {
-           foco = FOCUS_GAME;
+           focus = FOCUS_GAME;
         }
         *eventInfo = ON_PRESS_BUTTON;
         return(objAtivo);
@@ -328,14 +310,14 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
  
     /* FOCUS ON BARTEXT WRITE */
     else 
-    if (foco == FOCUS_TEXT_BAR)
+    if (focus == FOCUS_TEXT_BAR)
     {
         textBar* bart = (textBar*)objAtivo;
-           if((bart->doWrite(x - ljan->janelaAtiva->x1,
-                           y - ljan->janelaAtiva->y1,
-                           ljan->janelaAtiva->cara, Mbotao,tecla)))
+           if((bart->doWrite(x - ljan->getActiveWindow()->getX1(),
+                           y - ljan->getActiveWindow()->getY1(),
+                           ljan->getActiveWindow()->getSurface(), Mbotao,tecla)))
            {
-               foco = FOCUS_GAME;
+               focus = FOCUS_GAME;
                *eventInfo = WROTE_TEXT_BAR;
                return(objAtivo);
            }
@@ -345,51 +327,55 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     
     /* FOCUS ON RADIOBOXES */
     else 
-    if(foco == FOCUS_CX_SEL)
+    if(focus == FOCUS_CX_SEL)
     {
        cxSel* cx = (cxSel*)objAtivo;
        cx->invertSelection();
-       cx->draw(ljan->janelaAtiva->cara);
-       foco = FOCUS_GAME;
+       cx->draw(ljan->getActiveWindow()->getSurface());
+       focus = FOCUS_GAME;
        *eventInfo = MODIFIED_CX_SEL;
        return(objAtivo);
     }
 
     /* FOCUS ON MENUS */
     else
-    if ((foco == FOCUS_MENU) || (foco == FOCUS_WINDOW_MENU))
+    if ((focus == FOCUS_MENU) || (focus == FOCUS_WINDOW_MENU))
     {
        int pronto;
        menu* men = (menu*)objAtivo;
       
        int res = men->run(x,y,Mbotao,tecla,
-                          ljan->janelaAtiva->cara,&pronto,
-                          ljan->janelaAtiva->x1,
-                          ljan->janelaAtiva->y1);
+                          ljan->getActiveWindow()->getSurface(),&pronto,
+                          ljan->getActiveWindow()->getX1(),
+                          ljan->getActiveWindow()->getY1());
 
        *eventInfo = MODIFIED_MENU;
 
         
-       if((foco == FOCUS_WINDOW_MENU) && (res==4) && (pronto))
+       if((focus == FOCUS_WINDOW_MENU) && (res==4) && (pronto))
        {
-           if(ljan->janelaAtiva->fechavel)
-              ljan->janelaAtiva->Fechar(ljan);
+           if(ljan->getActiveWindow()->canCloseWindow())
+           {
+              ljan->removeWindow(ljan->getActiveWindow());
+           }
            else
-              ljan->janelaAtiva->Desenhar(x,y);
-           foco = FOCUS_GAME;
+           {
+              ljan->getActiveWindow()->draw(x,y);
+           }
+           focus = FOCUS_GAME;
            *eventInfo = CLOSED_WINDOW;
            return(NULL);
        }
        else if((res) && (pronto)) 
        {
-          ljan->janelaAtiva->Desenhar(x,y);
+          ljan->getActiveWindow()->draw(x,y);
           *eventInfo = SELECTED_MENU;
-          foco = FOCUS_GAME;
+          focus = FOCUS_GAME;
        }
        else if(pronto)
        {
-          ljan->janelaAtiva->Desenhar(x,y);
-          foco = FOCUS_GAME;
+          ljan->getActiveWindow()->draw(x,y);
+          focus = FOCUS_GAME;
           *eventInfo = SELECTED_MENU;
        }
        return(objAtivo);
@@ -397,17 +383,17 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
 
     /* FOCUS ON TEXT SELECT  */
     else
-    if ((foco == FOCUS_SEL_TEXT) /*&& (x != mouseX || y != mouseY)*/ )
+    if ((focus == FOCUS_SEL_TEXT) /*&& (x != mouseX || y != mouseY)*/ )
     {
         mouseX = x;
         mouseY = y;
         selText *st = (selText*)objAtivo;
-        int res = st->threat(x-ljan->janelaAtiva->x1,
-                             y-ljan->janelaAtiva->y1,
-                             Mbotao,ljan->janelaAtiva->cara);
+        int res = st->threat(x-ljan->getActiveWindow()->getX1(),
+                             y-ljan->getActiveWindow()->getY1(),
+                             Mbotao,ljan->getActiveWindow()->getSurface());
         if(res == -1)
         {
-            foco = FOCUS_GAME;
+            focus = FOCUS_GAME;
             *eventInfo = NOTHING; 
         }
         else if(res < 0)
@@ -425,14 +411,14 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
 
     /* FOCUS ON TABBUTTON */
     else
-    if ((foco == FOCUS_TAB_BUTTON))
+    if ((focus == FOCUS_TAB_BUTTON))
     {
        int actType = 0;
        tabButton* tb = (tabButton*) objAtivo;
        guiObject* object = tb->verifyPosition(x,y,Mbotao,
-                                            ljan->janelaAtiva->x1,
-                                            ljan->janelaAtiva->y1,
-                                            ljan->janelaAtiva->cara,
+                                            ljan->getActiveWindow()->getX1(),
+                                            ljan->getActiveWindow()->getY1(),
+                                            ljan->getActiveWindow()->getSurface(),
                                             actType);
        if( object != NULL )
        {
@@ -441,19 +427,19 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             {
                bool verified = false;
                /* Verify List Text */
-               guiObject *obj = ljan->janelaAtiva->objects->getFirst()->next;
+               guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
                int aux;
-               for(aux=0; aux<ljan->janelaAtiva->objects->getTotal(); aux++)
+               for(aux=0; aux<ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
                {
                   if(obj->type == GUI_LIST_TEXT)
                   {
                      listText* lt = (listText*)obj;
                      if(lt->eventGot(PRESSED_TAB_BUTTON, object))
                      {
-                        ljan->janelaAtiva->Desenhar(0,0);
+                        ljan->getActiveWindow()->draw(0,0);
                         verified = true;
                         *eventInfo = SELECTED_LIST_TEXT;
-                        foco = FOCUS_GAME;
+                        focus = FOCUS_GAME;
                         return(lt);
                      }
                   }
@@ -464,7 +450,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                 * the event! */
                if(!verified)
                {
-                  foco = FOCUS_GAME;
+                  focus = FOCUS_GAME;
                   *eventInfo = PRESSED_TAB_BUTTON;
                   return(object);
                }
@@ -477,10 +463,10 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
        }
        else
        {
-            if(!tb->isMouseIn(x-ljan->janelaAtiva->x1,
-                              y-ljan->janelaAtiva->y1))
+            if(!tb->isMouseIn(x-ljan->getActiveWindow()->getX1(),
+                              y-ljan->getActiveWindow()->getY1()))
             {
-               foco = FOCUS_GAME;
+               focus = FOCUS_GAME;
             }
        }
     }
@@ -498,9 +484,9 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int aux;
    double profundidade = 0.012;
-   janela* jan = (janela*) ljan->getFirst()->next;
+   window* jan = (window*) ljan->getFirst()->next;
 
-   if(ljan->janelaAtiva == NULL)
+   if(ljan->getActiveWindow() == NULL)
      return;
 
    //glColor4f(1.0,1.0,0.0,0.9);
@@ -514,33 +500,32 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    /* Draw Inative Windows */
    for(aux = 0;aux<ljan->getTotal();aux++)
    {
-      if(jan != ljan->janelaAtiva)
+      if(jan != ljan->getActiveWindow())
       {
-         glRasterPos2f(jan->x1, 600-jan->y1);
+         glRasterPos2f(jan->getX1(), 600-jan->getY1());
          glPixelZoom(1.0, -1.0);
-         glDrawPixels((jan->x2-jan->x1)+1, (jan->y2-jan->y1)+1, 
-                      GL_RGBA, GL_UNSIGNED_BYTE, jan->cara->pixels);
-          /*AtualizaTela2D(jan->caraTextura,proj,modl,viewPort,jan->x1,jan->y1, 
-                         jan->x2,jan->y2,profundidade);*/
+         glDrawPixels((jan->getX2()-jan->getX1())+1,
+                      (jan->getY2()-jan->getY1())+1, 
+                      GL_RGBA, GL_UNSIGNED_BYTE, jan->getSurface()->pixels);
           profundidade += 0.001;
       }
-      jan = (janela*) jan->next;
+      jan = (window*) jan->next;
    }
 
    /* Draw Active Window */
-   glRasterPos2f(ljan->janelaAtiva->x1, 600-ljan->janelaAtiva->y1);
+   glRasterPos2f(ljan->getActiveWindow()->getX1(), 
+                 600-ljan->getActiveWindow()->getY1());
    glPixelZoom(1.0, -1.0);
-   glDrawPixels((ljan->janelaAtiva->x2 - ljan->janelaAtiva->x1)+1, 
-                (ljan->janelaAtiva->y2 - ljan->janelaAtiva->y1)+1, 
-                GL_RGBA, GL_UNSIGNED_BYTE, ljan->janelaAtiva->cara->pixels);
+   glDrawPixels((ljan->getActiveWindow()->getX2() - 
+                 ljan->getActiveWindow()->getX1())+1, 
+                (ljan->getActiveWindow()->getY2() - 
+                 ljan->getActiveWindow()->getY1())+1, 
+                GL_RGBA, GL_UNSIGNED_BYTE, 
+                ljan->getActiveWindow()->getSurface()->pixels);
 
    glEnable(GL_DEPTH_TEST);
 
    glColor4f(1.0,1.0,1.0,1.0);
-
-   /*AtualizaTela2D(ljan->janelaAtiva->caraTextura,proj,modl,viewPort,
-                     ljan->janelaAtiva->x1,ljan->janelaAtiva->y1,
-                     ljan->janelaAtiva->x2,ljan->janelaAtiva->y2, 0.011);*/
 }
 
 /*********************************************************************
@@ -548,17 +533,17 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
  *********************************************************************/
 void interface::clearActiveObject()
 {
-   foco = FOCUS_GAME;
+   focus = FOCUS_GAME;
    objAtivo = NULL;
 }
 
 /*********************************************************************
  *                             closeWindow                           *
  *********************************************************************/
-void interface::closeWindow(janela *jan)
+void interface::closeWindow(window *jan)
 {
    clearActiveObject();
-   ljan->RetirarJanela(jan);
+   ljan->removeWindow(jan);
 }
 
 /*********************************************************************
@@ -566,12 +551,12 @@ void interface::closeWindow(janela *jan)
  *********************************************************************/
 void interface::closeAllWindows()
 {
-   janela* j = (janela*)ljan->getFirst()->next;
-   janela* tmp;
-   while(j != (janela*)ljan->getFirst())
+   window* j = (window*)ljan->getFirst()->next;
+   window* tmp;
+   while(j != (window*)ljan->getFirst())
    {
       tmp = j;
-      j = (janela*)j->next;
+      j = (window*)j->next;
       closeWindow(tmp);
    }
    clearActiveObject();
@@ -580,18 +565,17 @@ void interface::closeAllWindows()
 /*********************************************************************
  *                            insertWindow                           *
  *********************************************************************/
-janela* interface::insertWindow(int xa,int ya,int xb,int yb,const char *text,
-                            int maximiz,int redmens)
+window* interface::insertWindow(int xa,int ya,int xb,int yb, string text)
 {
-   return(ljan->InserirJanela(xa,ya,xb,yb,text,maximiz,redmens, NULL, NULL));
+   return(ljan->insertWindow(xa,ya,xb,yb,text));
 }
 
 /*********************************************************************
  *                              openWindow                           *
  *********************************************************************/
-void interface::openWindow(janela* jan)
+void interface::openWindow(window* jan)
 {
-   jan->Abrir(ljan);
+   jan->open();
 }
 
 /*********************************************************************
@@ -600,14 +584,14 @@ void interface::openWindow(janela* jan)
 bool interface::mouseOnGui(int mouseX, int mouseY)
 {
    int aux; 
-   janela *jaux=(janela*)ljan->getFirst()->next;
+   window *jaux=(window*)ljan->getFirst()->next;
    for(aux=0;aux<ljan->getTotal();aux++)
    {
-      if(isMouseAt(jaux->x1,jaux->y1,jaux->x2,jaux->y2,mouseX,mouseY))
+      if(jaux->isMouseIn(mouseX,mouseY))
       {
          return(true);
       }
-      jaux = (janela*) jaux->next;
+      jaux = (window*) jaux->next;
    }
    return(false);
 }

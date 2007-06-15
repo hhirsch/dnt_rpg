@@ -8,7 +8,7 @@ string getStringFromUser(string title, string previous,
                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    interface* gui = new interface(NULL);
-   janela* getWindow;
+   window* getWindow;
    button* okButton;
    button* cancelButton;
    textBar* getText = NULL;
@@ -18,12 +18,14 @@ string getStringFromUser(string title, string previous,
    Uint8* keys;
    int mouseX, mouseY;
 
-   getWindow = gui->insertWindow(300,200,500,262,title.c_str(),1,1);
-   okButton = getWindow->objects->insertButton(40,37,95,55,"Ok",1);
-   cancelButton = getWindow->objects->insertButton(100,37,155,55,"Cancel",1);
-   getText = getWindow->objects->insertTextBar(10,17,190,33,previous.c_str(),0);
-   getWindow->movivel = 0;
-   getWindow->ptrExterno = &getWindow;
+   getWindow = gui->insertWindow(300,200,500,262,title.c_str());
+   okButton = getWindow->getObjectsList()->insertButton(40,37,95,55,"Ok",1);
+   cancelButton = getWindow->getObjectsList()->insertButton(100,37,155,55,
+                                                            "Cancel",1);
+   getText = getWindow->getObjectsList()->insertTextBar(10,17,190,33,
+                                                        previous.c_str(),0);
+   getWindow->setAttributes(true, false, false, false);
+   getWindow->setExternPointer(&getWindow);
    gui->openWindow(getWindow);
    
 
@@ -90,7 +92,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    interface* gui = new interface(NULL);
-   janela* getWindow;
+   window* getWindow;
    button* opt1Button;
    button* opt2Button;
    textBox* quadText = NULL;
@@ -106,17 +108,16 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    int med = sizeX / 2;
    int ret = -1;
 
-   getWindow = gui->insertWindow(300,200,300+sizeX,262,
-                                 title.c_str(),1,1);
-   opt1Button = getWindow->objects->insertButton(med-80,37,med-10,55,
+   getWindow = gui->insertWindow(300,200,300+sizeX,262, title.c_str());
+   opt1Button = getWindow->getObjectsList()->insertButton(med-80,37,med-10,55,
                                                  opt1.c_str(),1);
-   opt2Button = getWindow->objects->insertButton(med+10,37,med+80,55,
+   opt2Button = getWindow->getObjectsList()->insertButton(med+10,37,med+80,55,
                                                  opt2.c_str(),1);                  
                                                  
-   quadText = getWindow->objects->insertTextBox(10,17,sizeX-10,33,0,
+   quadText = getWindow->getObjectsList()->insertTextBox(10,17,sizeX-10,33,0,
                                                       message.c_str());
-   getWindow->movivel = 0;
-   getWindow->ptrExterno = &getWindow;
+   getWindow->setAttributes(true, false, false, false);
+   getWindow->setExternPointer(&getWindow);
    gui->openWindow(getWindow);
 
    while(!quit)
@@ -181,7 +182,7 @@ void showMessage(string title, string message,
                  GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    interface* gui = new interface(NULL);
-   janela* getWindow;
+   window* getWindow;
    button* okButton;
    textBox* quadText = NULL;
    bool quit = false;
@@ -191,13 +192,13 @@ void showMessage(string title, string message,
    int sizeX = message.length()*7;
    int med = sizeX / 2;
 
-   getWindow = gui->insertWindow(300,200,300+sizeX,262,
-                                 title.c_str(),1,1);
-   okButton = getWindow->objects->insertButton(med-28,37,med+28,55,"Ok",1);
-   quadText = getWindow->objects->insertTextBox(10,17,sizeX-10,33,0,
+   getWindow = gui->insertWindow(300,200,300+sizeX,262,title.c_str());
+   okButton = getWindow->getObjectsList()->insertButton(med-28,37,med+28,55,
+                                                        "Ok",1);
+   quadText = getWindow->getObjectsList()->insertTextBox(10,17,sizeX-10,33,0,
                                                       message.c_str());
-   getWindow->movivel = 0;
-   getWindow->ptrExterno = &getWindow;
+   getWindow->setAttributes(true, false, false, false);
+   getWindow->setExternPointer(&getWindow);
    gui->openWindow(getWindow);
 
    while(!quit)

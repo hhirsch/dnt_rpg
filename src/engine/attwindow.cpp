@@ -32,9 +32,8 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
       attPointsIndex[i] = -1;
    }
 
-   /* create window */
-   window = inter->insertWindow(146,166,661,441,language.ATTW_TITLE.c_str(),
-                                1,1);
+   /* create intWindow */
+   intWindow = inter->insertWindow(146,166,661,441,language.ATTW_TITLE.c_str());
 
    /* roll and write all rolled dices to string */
    if(!usePreviousValues)
@@ -51,123 +50,129 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
       sprintf(tmp,"%d ", points[i]); 
       saux += tmp;
    }
-   rolledPoints = window->objects->insertTextBox(8,18,117,31,0,
+   rolledPoints = intWindow->getObjectsList()->insertTextBox(8,18,117,31,0,
                                                                   saux.c_str());
    /* reroll button */
-   rerollButton = window->objects->insertButton(119,16,182,33,
+   rerollButton = intWindow->getObjectsList()->insertButton(119,16,182,33,
                                                   language.ATTW_ROLL.c_str(),0);
    /* clear button */
-   clearButton = window->objects->insertButton(183,16,247,33,
+   clearButton = intWindow->getObjectsList()->insertButton(183,16,247,33,
                                                  language.ATTW_CLEAR.c_str(),0);
 
    /* auto button */
-   autoButton = window->objects->insertButton(248,16,312,33,"Auto",0);
+   autoButton = intWindow->getObjectsList()->insertButton(248,16,312,33,
+                                                          "Auto",0);
 
    /* Strenght */
-   window->objects->insertTextBox(9,49,85,62,0,
+   intWindow->getObjectsList()->insertTextBox(9,49,85,62,0,
                                        language.ATTW_STRENGTH.c_str());
-   attPoints[0] = window->objects->insertTextBox(98,47,117,64,1,"");
+   attPoints[0] = intWindow->getObjectsList()->insertTextBox(98,47,117,64,1,"");
    attPoints[0]->setFont(FMINI, 1, ALIGN_LEFT);
-   attButtonPrev[0] = window->objects->insertButton(87,47,97,64,"<",0);
-   attButtonNext[0] = window->objects->insertButton(118,47,128,64,">",0);
-   attTotals[0] = window->objects->insertTextBox(165,49,195,64,0,"");
+   attButtonPrev[0] = intWindow->getObjectsList()->insertButton(87,47,97,64,
+                                                                "<",0);
+   attButtonNext[0] = intWindow->getObjectsList()->insertButton(118,47,128,64,
+                                                                ">",0);
+   attTotals[0] = intWindow->getObjectsList()->insertTextBox(165,49,195,64,0,
+                                                             "");
    attTotals[0]->setFont(FTIMES, 1, ALIGN_LEFT);
-   attMods[0] = window->objects->insertTextBox(196,49,226,64,0,
+   attMods[0] = intWindow->getObjectsList()->insertTextBox(196,49,226,64,0,
                                                     "");
-   window->objects->insertPicture(130,40,0,0,"../data/skills/Img/forca.png");
+   intWindow->getObjectsList()->insertPicture(130,40,0,0,
+                                              "../data/skills/Img/forca.png");
 
    /* Dextery */
-   window->objects->insertTextBox(9,83,85,96,0,
+   intWindow->getObjectsList()->insertTextBox(9,83,85,96,0,
                                        language.ATTW_DEXTERITY.c_str());
-   attPoints[1] = window->objects->insertTextBox(98,81,117,98,1,"");
+   attPoints[1] = intWindow->getObjectsList()->insertTextBox(98,81,117,98,1,"");
    attPoints[1]->setFont(FMINI, 1, ALIGN_LEFT);
-   attButtonPrev[1] = window->objects->insertButton(87,81,97,98,"<",0);
-   attButtonNext[1] = window->objects->insertButton(118,81,128,98,">",0);
-   attTotals[1] = window->objects->insertTextBox(165,83,195,98,0,"");
+   attButtonPrev[1] = intWindow->getObjectsList()->insertButton(87,81,97,98,"<",0);
+   attButtonNext[1] = intWindow->getObjectsList()->insertButton(118,81,128,98,">",0);
+   attTotals[1] = intWindow->getObjectsList()->insertTextBox(165,83,195,98,0,"");
    attTotals[1]->setFont(FTIMES, 1, ALIGN_LEFT);
-   attMods[1] = window->objects->insertTextBox(196,82,226,98,0,
+   attMods[1] = intWindow->getObjectsList()->insertTextBox(196,82,226,98,0,
                                                     "");
-   window->objects->insertPicture(130,74,0,0,"../data/skills/Img/destreza.png");
+   intWindow->getObjectsList()->insertPicture(130,74,0,0,
+                                             "../data/skills/Img/destreza.png");
 
    /* Constitution */
-   window->objects->insertTextBox(9,119,87,132,0,
+   intWindow->getObjectsList()->insertTextBox(9,119,87,132,0,
                                        language.ATTW_CONSTITUTION.c_str());
-   attPoints[2] = window->objects->insertTextBox(98,117,117,134,1,"");
+   attPoints[2] = intWindow->getObjectsList()->insertTextBox(98,117,117,134,1,"");
    attPoints[2]->setFont(FMINI, 1, ALIGN_LEFT);
-   attButtonPrev[2] = window->objects->insertButton(87,117,97,134,"<",0);
-   attButtonNext[2] = window->objects->insertButton(118,117,128,134,">",0);
-   attTotals[2] = window->objects->insertTextBox(165,119,195,134,0,"");
+   attButtonPrev[2] = intWindow->getObjectsList()->insertButton(87,117,97,134,"<",0);
+   attButtonNext[2] = intWindow->getObjectsList()->insertButton(118,117,128,134,">",0);
+   attTotals[2] = intWindow->getObjectsList()->insertTextBox(165,119,195,134,0,"");
    attTotals[2]->setFont(FTIMES, 1, ALIGN_LEFT);
-   attMods[2] = window->objects->insertTextBox(196,119,226,134,0,
+   attMods[2] = intWindow->getObjectsList()->insertTextBox(196,119,226,134,0,
                                                     "");
-   window->objects->insertPicture(130,108,0,0,
+   intWindow->getObjectsList()->insertPicture(130,108,0,0,
                                          "../data/skills/Img/constituicao.png");
 
    /* Inteligency */
-   window->objects->insertTextBox(9,153,87,166,0,
+   intWindow->getObjectsList()->insertTextBox(9,153,87,166,0,
                                        language.ATTW_INTELLIGENCE.c_str());
-   attPoints[3] = window->objects->insertTextBox(98,151,117,168,1,"");
+   attPoints[3] = intWindow->getObjectsList()->insertTextBox(98,151,117,168,1,"");
    attPoints[3]->setFont(FMINI, 1, ALIGN_LEFT);
-   attButtonPrev[3] = window->objects->insertButton(87,151,97,168,"<",0);
-   attButtonNext[3] = window->objects->insertButton(118,151,128,168,">",0);
-   attTotals[3] = window->objects->insertTextBox(165,153,195,168,0,"");
+   attButtonPrev[3] = intWindow->getObjectsList()->insertButton(87,151,97,168,"<",0);
+   attButtonNext[3] = intWindow->getObjectsList()->insertButton(118,151,128,168,">",0);
+   attTotals[3] = intWindow->getObjectsList()->insertTextBox(165,153,195,168,0,"");
    attTotals[3]->setFont(FTIMES, 1, ALIGN_LEFT);
-   attMods[3] = window->objects->insertTextBox(196,153,226,168,0,
+   attMods[3] = intWindow->getObjectsList()->insertTextBox(196,153,226,168,0,
                                                     "");
-   window->objects->insertPicture(130,142,0,0,
+   intWindow->getObjectsList()->insertPicture(130,142,0,0,
                                          "../data/skills/Img/inteligencia.png");
 
    /* Wisdow */
-   window->objects->insertTextBox(9,187,87,200,0,
+   intWindow->getObjectsList()->insertTextBox(9,187,87,200,0,
                                        language.ATTW_WISDOW.c_str());
-   attPoints[4] = window->objects->insertTextBox(98,185,117,202,1,"");
+   attPoints[4] = intWindow->getObjectsList()->insertTextBox(98,185,117,202,1,"");
    attPoints[4]->setFont(FMINI, 1, ALIGN_LEFT);
-   attButtonPrev[4] = window->objects->insertButton(87,185,97,202,"<",0);
-   attButtonNext[4] = window->objects->insertButton(118,185,128,202,">",0);
-   attTotals[4] = window->objects->insertTextBox(165,187,195,202,0,"");
+   attButtonPrev[4] = intWindow->getObjectsList()->insertButton(87,185,97,202,"<",0);
+   attButtonNext[4] = intWindow->getObjectsList()->insertButton(118,185,128,202,">",0);
+   attTotals[4] = intWindow->getObjectsList()->insertTextBox(165,187,195,202,0,"");
    attTotals[4]->setFont(FTIMES, 1, ALIGN_LEFT);
-   attMods[4] = window->objects->insertTextBox(196,187,226,202,0,"");
-   window->objects->insertPicture(130,176,0,0,
+   attMods[4] = intWindow->getObjectsList()->insertTextBox(196,187,226,202,0,"");
+   intWindow->getObjectsList()->insertPicture(130,176,0,0,
                                             "../data/skills/Img/sabedoria.png");
 
    /* Charism */
-   window->objects->insertTextBox(9,221,87,234,0,
+   intWindow->getObjectsList()->insertTextBox(9,221,87,234,0,
                                        language.ATTW_CHARISM.c_str());
-   attPoints[5] = window->objects->insertTextBox(98,219,117,236,1,"");
+   attPoints[5] = intWindow->getObjectsList()->insertTextBox(98,219,117,236,1,"");
    attPoints[5]->setFont(FMINI, 1, ALIGN_LEFT);
-   attButtonPrev[5] = window->objects->insertButton(87,219,97,236,"<",0);
-   attButtonNext[5] = window->objects->insertButton(118,219,128,236,">",0);
-   attTotals[5] = window->objects->insertTextBox(165,220,195,236,0,"");
+   attButtonPrev[5] = intWindow->getObjectsList()->insertButton(87,219,97,236,"<",0);
+   attButtonNext[5] = intWindow->getObjectsList()->insertButton(118,219,128,236,">",0);
+   attTotals[5] = intWindow->getObjectsList()->insertTextBox(165,220,195,236,0,"");
    attTotals[5]->setFont(FTIMES, 1, ALIGN_LEFT);
-   attMods[5] = window->objects->insertTextBox(196,221,226,236,0,"");
-   window->objects->insertPicture(130,210,0,0,"../data/skills/Img/carisma.png");
+   attMods[5] = intWindow->getObjectsList()->insertTextBox(196,221,226,236,0,"");
+   intWindow->getObjectsList()->insertPicture(130,210,0,0,"../data/skills/Img/carisma.png");
                                               
 
    /* Contorns */
-   window->objects->insertTextBox(10,39,245,72,1,"");
-   window->objects->insertTextBox(10,73,245,106,1,"");
-   window->objects->insertTextBox(10,107,245,140,1,"");
-   window->objects->insertTextBox(10,141,245,174,1,"");
-   window->objects->insertTextBox(10,175,245,208,1,"");
-   window->objects->insertTextBox(10,209,245,242,1,"");
-   window->objects->insertTextBox(8,37,247,244,1,"");
+   intWindow->getObjectsList()->insertTextBox(10,39,245,72,1,"");
+   intWindow->getObjectsList()->insertTextBox(10,73,245,106,1,"");
+   intWindow->getObjectsList()->insertTextBox(10,107,245,140,1,"");
+   intWindow->getObjectsList()->insertTextBox(10,141,245,174,1,"");
+   intWindow->getObjectsList()->insertTextBox(10,175,245,208,1,"");
+   intWindow->getObjectsList()->insertTextBox(10,209,245,242,1,"");
+   intWindow->getObjectsList()->insertTextBox(8,37,247,244,1,"");
 
    /* Attribute Description */
-   textDescTitle = window->objects->insertTextBox(248,37,507,52,1,
+   textDescTitle = intWindow->getObjectsList()->insertTextBox(248,37,507,52,1,
                                              language.ATTW_DESCRIPTION.c_str());
    textDescTitle->setFont(FHELVETICA, 1, ALIGN_LEFT);
    
-   textDesc = window->objects->insertTextBox(248,53,507,244,1,
+   textDesc = intWindow->getObjectsList()->insertTextBox(248,53,507,244,1,
                       (externalSkill->m_skills[1].nome + "||" +
                        externalSkill->m_skills[1].descricao).c_str());
    textDesc->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Confirm Button */
-   buttonConfirm = window->objects->insertButton(437,248,507,267,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(437,248,507,267,
                                               language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->insertButton(8,248,78,267,
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,248,78,267,
                                                language.SKILL_CANCEL.c_str(),1);
 
    /* Define Previous Values, if needed */
@@ -177,9 +182,9 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    }
    
    /* Open Skill Window */
-   window->ptrExterno = &window;
-   window->fechavel = false;
-   inter->openWindow(window);
+   intWindow->setExternPointer(&intWindow);
+   intWindow->setAttributes(false,false,false,false);
+   inter->openWindow(intWindow);
 }
 
 /**************************************************************
@@ -252,7 +257,7 @@ void attWindow::autoAssign()
       attPoints[i]->setText(tmp);
       assignAttMod(i);
    }
-   window->Desenhar(0,0);
+   intWindow->draw(0,0);
 }
 
 /**************************************************************
@@ -353,7 +358,7 @@ void attWindow::clear()
       attPoints[i]->setText("");
       attTotals[i]->setText("");
       attMods[i]->setText("");
-      window->Desenhar(0,0);
+      intWindow->draw(0,0);
    }
 }
 
@@ -419,8 +424,8 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
       {
          if(allAssigned())
          {
-            inter->closeWindow(window);
-            window = NULL;
+            inter->closeWindow(intWindow);
+            intWindow = NULL;
             glEnable(GL_LIGHTING);
             SDL_ShowCursor(SDL_DISABLE);
             return(ATTW_CONFIRM);
@@ -436,8 +441,8 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
       /* Cancel */
       else if(object == (guiObject*) buttonCancel) 
       {
-          inter->closeWindow(window);
-          window = NULL;
+          inter->closeWindow(intWindow);
+          intWindow = NULL;
           glEnable(GL_LIGHTING);
           SDL_ShowCursor(SDL_DISABLE);
          return(ATTW_CANCEL);
@@ -454,7 +459,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
               sprintf(tmp,"%d ", points[i]); 
               rolledPoints->setText(rolledPoints->getText() + tmp);
           }
-          window->Desenhar(0,0);
+          intWindow->draw(0,0);
       }
       /* Clear */
       else if(object == (guiObject*) clearButton)
@@ -479,7 +484,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
                 assignAttMod(i);
                 textDesc->setText(externalSkill->m_skills[i+1].nome + "||" +
                                   externalSkill->m_skills[i+1].descricao);
-                window->Desenhar(0,0);
+                intWindow->draw(0,0);
             }
             else if(object == (guiObject*) attButtonPrev[i])
             {
@@ -490,7 +495,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
                 textDesc->setText(externalSkill->m_skills[i+1].nome + "||" +
                                   externalSkill->m_skills[i+1].descricao);
 
-                window->Desenhar(0,0);
+                intWindow->draw(0,0);
             }
          }
       }

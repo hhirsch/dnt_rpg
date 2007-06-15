@@ -34,27 +34,25 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    done = false;
    guiObject* object = NULL;
    int eventInfo = NOTHING;
-   janela* jan = gui->insertWindow(335,235,462,362,
-                                   language.VERSION.c_str(),1,1);  
-   jan->fechavel = 0;
-   //jan->movivel = 0;
+   window* jan = gui->insertWindow(335,235,462,362, language.VERSION.c_str());  
+   jan->setAttributes(false,true,false,false);
    if(Status == ON_INIT)
    {
-      buttonNew = jan->objects->insertButton(30,20,98,38,
+      buttonNew = jan->getObjectsList()->insertButton(30,20,98,38,
                                                 language.INITIAL_NEW.c_str(),1);
    }
    else
    {
-      buttonContinue = jan->objects->insertButton(30,20,98,38,
+      buttonContinue = jan->getObjectsList()->insertButton(30,20,98,38,
                                            language.INITIAL_CONTINUE.c_str(),1);
    }
-   buttonSave = jan->objects->insertButton(30,40,98,58,
+   buttonSave = jan->getObjectsList()->insertButton(30,40,98,58,
                                            language.INITIAL_SAVE.c_str(),1);
-   buttonLoad = jan->objects->insertButton(30,60,98,78,
+   buttonLoad = jan->getObjectsList()->insertButton(30,60,98,78,
                                                language.INITIAL_LOAD.c_str(),1);
-   buttonOptions = jan->objects->insertButton(30,80,98,98,
+   buttonOptions = jan->getObjectsList()->insertButton(30,80,98,98,
                                             language.INITIAL_OPTIONS.c_str(),1);
-   buttonExit = jan->objects->insertButton(30,100,98,118,
+   buttonExit = jan->getObjectsList()->insertButton(30,100,98,118,
                                            language.INITIAL_EXIT.c_str(),1);
    gui->openWindow(jan);
 

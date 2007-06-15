@@ -4,7 +4,7 @@
 
 #include "button.h"
 #include "draw.h"
-#include "janela.h"
+#include "window.h"
 #include "fonte.h"
 
 /***********************************************************

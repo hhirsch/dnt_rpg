@@ -22,10 +22,10 @@ inventWindow::inventWindow(inventory *invent, interface* inter)
    inventories = invent;
 
    /* Add Window */
-   window = inter->insertWindow(0,0,263,402,language.INVENTW_TITLE.c_str(),1,1);
+   intWindow = inter->insertWindow(0,0,263,402,language.INVENTW_TITLE.c_str());
 
    /* Add Character (equip) Tab Button */
-   characterTabButton = window->objects->insertTabButton(4,15,256,256,
+   characterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,256,256,
                                         "../data/texturas/inventory/equip.png");
    headButton = characterTabButton->insertButton(109,3,147,41);
    footButton = characterTabButton->insertButton(109,214,147,252);
@@ -37,7 +37,8 @@ inventWindow::inventWindow(inventory *invent, interface* inter)
    leftFingerButton = characterTabButton->insertButton(200,169,219,188);
 
    /* Add Inventory Tab Button */
-   inventoryTabButton = window->objects->insertTabButton(4,271,256,128,
+   inventoryTabButton = intWindow->getObjectsList()->insertTabButton(4,271,
+                                                                     256,128,
                                    "../data/texturas/inventory/inventory.png");
    inventoryButton = inventoryTabButton->insertButton(4,13,251,127);
    inv1Button = inventoryTabButton->insertButton(4,0,64,13);
@@ -46,8 +47,8 @@ inventWindow::inventWindow(inventory *invent, interface* inter)
    inv4Button = inventoryTabButton->insertButton(191,0,251,13);
 
    /* Open Window */
-   window->ptrExterno = &window;
-   inter->openWindow(window);
+   intWindow->setExternPointer(&intWindow);
+   inter->openWindow(intWindow);
 
    currentInventory = 0;
    reDraw();
@@ -72,9 +73,9 @@ inventWindow::~inventWindow()
          }
       }
    }
-   if(window)
+   if(intWindow)
    {
-      interf->closeWindow(window);
+      interf->closeWindow(intWindow);
    }
 }
 
@@ -83,7 +84,7 @@ inventWindow::~inventWindow()
  **************************************************************/
 bool inventWindow::isOpen()
 {
-   return(window != NULL);
+   return(intWindow != NULL);
 }
 
 /**************************************************************
@@ -95,7 +96,7 @@ void inventWindow::reDraw()
    {
       inventories->draw(0,0, inventoryTabButton->get(), currentInventory);
       inventories->drawEquiped(0,0,characterTabButton->get());
-      window->Desenhar(0,0);
+      intWindow->draw(0,0);
 
       //TODO Mark on actual Inventory!
    }
@@ -107,7 +108,7 @@ void inventWindow::reDraw()
 void inventWindow::openMenu(int x, int y)
 {
    int xSize;
-   objectMenu = (menu*) window->objects->addMenu();
+   objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
    objectMenu->insertItem(language.INVENTW_DROP,0);
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(language.INVENTW_SELL,0);
@@ -120,14 +121,14 @@ void inventWindow::openMenu(int x, int y)
    xSize = objectMenu->getMaxCharac()*(font_incCP()+1)+6;
 
    /* Make Sure all Menu is in Window */
-   if(y+70 >= window->y2)
+   if(y+70 >= intWindow->getY2())
    {
-       y = window->y2-70;
+       y = intWindow->getY2()-70;
    }
 
-   if(x+xSize >= window->x2)
+   if(x+xSize >= intWindow->getX2())
    {
-      x = window->x2 - xSize;
+      x = intWindow->getX2() - xSize;
    }
    
    objectMenu->setPosition(x,y);
@@ -148,8 +149,8 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
    int x,y;
    Uint8 Mbotao = SDL_GetMouseState(&x,&y);
 
-   int posX = (int) floor((x - (8 + window->x1)) / (19.0));
-   int posY = (int) floor((y - (284 + window->y1)) / (19.0));
+   int posX = (int) floor((x - (8 + intWindow->getX1())) / (19.0));
+   int posY = (int) floor((y - (284 + intWindow->getY1())) / (19.0));
 
    if(Mbotao & SDL_BUTTON(3))
    {
@@ -184,7 +185,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
                   objX = posX;
                   objY = posY;
                   objWhere = INVENTORY_INVENTORY;
-                  openMenu((x-window->x1),(y-window->y1)); 
+                  openMenu((x-intWindow->getX1()),(y-intWindow->getY1())); 
                }
                return(true);
             }
@@ -279,7 +280,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
             if(aObject)
             {
                activeObject = aObject;
-               openMenu((x-window->x1),(y-window->y1));
+               openMenu((x-intWindow->getX1()),(y-intWindow->getY1()));
                state = INVENTORY_STATE_MENU;
                return(true);
             }
@@ -353,7 +354,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
                }
             }
 
-            /* if no more objects, done */
+            /* if no more getObjectsList(), done */
             if(!activeObject)
             {
                state = INVENTORY_STATE_NONE;
@@ -399,7 +400,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
                   //TODO
                break;
             }
-            window->objects->removeMenu();
+            intWindow->getObjectsList()->removeMenu();
             objectMenu = NULL;
             return(true);
          }

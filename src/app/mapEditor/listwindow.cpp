@@ -125,8 +125,7 @@ void listWindow::setState(int st)
       {
          loadFromFile(fileName);
       }
-      intWindow->Desenhar(0,0);
-      intWindow->BarraInativa();
+      intWindow->draw(0,0);
    }
 }
 
@@ -135,9 +134,10 @@ void listWindow::setState(int st)
  ********************************************************************/
 void listWindow::open()
 {
-   intWindow = intGui->insertWindow(113,599-247,363,599-37,"Select",1,1);
-   list = intWindow->objects->insertListText(5,15,245,190,intWindow->cara);
-   intWindow->ptrExterno = &intWindow;
+   intWindow = intGui->insertWindow(113,599-247,363,599-37,"Select");
+   list = intWindow->getObjectsList()->insertListText(5,15,245,190,
+                                                      intWindow->getSurface());
+   intWindow->setExternPointer(&intWindow);
    intGui->openWindow(intWindow);
 }
 

@@ -30,7 +30,7 @@ class raceWindow
        * \return 0 on close, 1 otherwise */
       int treat(guiObject* object, int eventInfo,interface* inter);
 
-      janela*      window;           /**< Pointer to the internal window */
+      window*      intWindow;      /**< Pointer to the internal window */
 
    private:
       races*      externalRaces;   /**< Pointer to the Aligns List */

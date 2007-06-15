@@ -78,7 +78,7 @@ class listWindow
       string getFileNameWithTitle(string title);
 
       int state;                 /**< Internal State */
-      janela* intWindow;         /**< Pointer to the window */
+      window* intWindow;         /**< Pointer to the window */
       interface* intGui;         /**< Pointer to the interface */
       listText* list;            /**< Pointer to the listText */
       listElement* listElements; /**< Elements on the list */

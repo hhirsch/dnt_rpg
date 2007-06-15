@@ -225,120 +225,120 @@ void options::DisplayOptionsScreen(interface* interf)
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
-   window = interf->insertWindow(276,169,531,434,language.OPTIONS_TITLE.c_str(),
-                                 1,1);
+   intWindow = interf->insertWindow(276,169,531,434,
+                                    language.OPTIONS_TITLE.c_str());
 
    /* Music Things */
    sprintf(tmp,"%d",musicVolume);
    saux = tmp;
-   qt = window->objects->insertTextBox(8,27,145,44,0,
+   qt = intWindow->getObjectsList()->insertTextBox(8,27,145,44,0,
                                          language.OPTIONS_MUSIC_VOLUME.c_str());
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonMusDec = window->objects->insertButton(146,27,156,44,"<",0);
-   txtMusicVolume = window->objects->insertTextBox(157,27,197,44,1,
+   buttonMusDec = intWindow->getObjectsList()->insertButton(146,27,156,44,"<",0);
+   txtMusicVolume = intWindow->getObjectsList()->insertTextBox(157,27,197,44,1,
                                  saux.c_str());
    txtMusicVolume->setFont(FMINI,1,ALIGN_LEFT);
-   buttonMusSum = window->objects->insertButton(198,27,208,44,">",0);
-   window->objects->insertPicture(212,27,40,112,
+   buttonMusSum = intWindow->getObjectsList()->insertButton(198,27,208,44,">",0);
+   intWindow->getObjectsList()->insertPicture(212,27,40,112,
                                   "../data/texturas/options/music.png");
    
   
    /* Sound Effects Things */
    sprintf(tmp,"%d",sndfxVolume);
    saux = tmp;
-   qt = window->objects->insertTextBox(8,52,145,69,0,
+   qt = intWindow->getObjectsList()->insertTextBox(8,52,145,69,0,
                                          language.OPTIONS_SNDFX_VOLUME.c_str());
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonSndDec = window->objects->insertButton(146,52,156,69,"<",0);
-   txtSndfxVolume = window->objects->insertTextBox(157,52,197,69,1,
+   buttonSndDec = intWindow->getObjectsList()->insertButton(146,52,156,69,"<",0);
+   txtSndfxVolume = intWindow->getObjectsList()->insertTextBox(157,52,197,69,1,
                                  saux.c_str());
    txtSndfxVolume->setFont(FMINI,1,ALIGN_LEFT);
-   buttonSndSum = window->objects->insertButton(198,52,208,69,">",0);
-   window->objects->insertPicture(212,52,40,112,
+   buttonSndSum = intWindow->getObjectsList()->insertButton(198,52,208,69,">",0);
+   intWindow->getObjectsList()->insertPicture(212,52,40,112,
                                   "../data/texturas/options/sndfx.png");
 
 
    /* Language Things */
    prevLanguage = langNumber;
    saux = languageName();
-   qt = window->objects->insertTextBox(8,88,145,105,0,
+   qt = intWindow->getObjectsList()->insertTextBox(8,88,145,105,0,
                                          language.OPTIONS_LANGUAGE.c_str());
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonLangDec = window->objects->insertButton(121,88,131,105,"<",0);
-   txtLanguage = window->objects->insertTextBox(132,88,197,105,1,
+   buttonLangDec = intWindow->getObjectsList()->insertButton(121,88,131,105,"<",0);
+   txtLanguage = intWindow->getObjectsList()->insertTextBox(132,88,197,105,1,
                                  saux.c_str());
    txtLanguage->setFont(FMINI,1,ALIGN_LEFT);
-   buttonLangSum = window->objects->insertButton(198,88,208,105,">",0);
-   window->objects->insertPicture(212,88,40,112,
+   buttonLangSum = intWindow->getObjectsList()->insertButton(198,88,208,105,">",0);
+   intWindow->getObjectsList()->insertPicture(212,88,40,112,
                                   "../data/texturas/options/language.png");
 
    /* Camera Mode Things */
    prevCamera = cameraNumber;
    saux = cameraName();
-   qt = window->objects->insertTextBox(8,126,145,143,0,
+   qt = intWindow->getObjectsList()->insertTextBox(8,126,145,143,0,
                                             language.OPTIONS_CAMERA.c_str());
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonCamDec = window->objects->insertButton(121,126,131,143,"<",0);
-   txtCamera = window->objects->insertTextBox(132,126,197,143,1,
+   buttonCamDec = intWindow->getObjectsList()->insertButton(121,126,131,143,"<",0);
+   txtCamera = intWindow->getObjectsList()->insertTextBox(132,126,197,143,1,
                                  saux.c_str());
    txtCamera->setFont(FMINI,1,ALIGN_LEFT);
-   buttonCamSum = window->objects->insertButton(198,126,208,143,">",0);
-   window->objects->insertPicture(214,126,40,112,
+   buttonCamSum = intWindow->getObjectsList()->insertButton(198,126,208,143,">",0);
+   intWindow->getObjectsList()->insertPicture(214,126,40,112,
                                   "../data/texturas/options/camera.png");
 
 
    /* Grass Enabled or Not */
-   qt = window->objects->insertTextBox(20,156,200,173,0,
+   qt = intWindow->getObjectsList()->insertTextBox(20,156,200,173,0,
                                          language.OPTIONS_GRASS.c_str());
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   cxSelGrass = window->objects->insertCxSel(8,160, enableGrass);
-   window->objects->insertPicture(214,156,40,112,
+   cxSelGrass = intWindow->getObjectsList()->insertCxSel(8,160, enableGrass);
+   intWindow->getObjectsList()->insertPicture(214,156,40,112,
                                   "../data/texturas/options/grass.png");
 
 
    /* Particle System Enabled or Not */
-   qt = window->objects->insertTextBox(20,174,200,191,0,
+   qt = intWindow->getObjectsList()->insertTextBox(20,174,200,191,0,
                                          language.OPTIONS_PARTICLES.c_str());
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   cxSelParticles = window->objects->insertCxSel(8,178, enableParticles);
-   window->objects->insertPicture(214,174,40,112,
+   cxSelParticles = intWindow->getObjectsList()->insertCxSel(8,178, enableParticles);
+   intWindow->getObjectsList()->insertPicture(214,174,40,112,
                                   "../data/texturas/options/particles.png");
 
    /* Reflexions */
    prevReflexion = reflexionType;
    saux = reflexionName();
-   qt = window->objects->insertTextBox(8,203,145,220,0,
+   qt = intWindow->getObjectsList()->insertTextBox(8,203,145,220,0,
                                             language.OPTIONS_REFLECTS.c_str());
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonReflDec = window->objects->insertButton(121,203,131,220,"<",0);
-   txtReflexion = window->objects->insertTextBox(132,203,197,220,1,
+   buttonReflDec = intWindow->getObjectsList()->insertButton(121,203,131,220,"<",0);
+   txtReflexion = intWindow->getObjectsList()->insertTextBox(132,203,197,220,1,
                                  saux.c_str());
    txtReflexion->setFont(FMINI,1,ALIGN_LEFT);
-   buttonReflSum = window->objects->insertButton(198,203,208,220,">",0);
-   window->objects->insertPicture(212,203,40,220,
+   buttonReflSum = intWindow->getObjectsList()->insertButton(198,203,208,220,">",0);
+   intWindow->getObjectsList()->insertPicture(212,203,40,220,
                                   "../data/texturas/options/reflexions.png");
 
 
    /* Confirm Button */
-   buttonConfirm = window->objects->insertButton(181,235,251,254,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(181,235,251,254,
                                               language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->insertButton(8,235,78,254,
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,235,78,254,
                                                language.SKILL_CANCEL.c_str(),1);
 
    /* borders */
-   window->objects->insertTextBox(5,20,250,77,1,"");
-   window->objects->insertTextBox(5,78,250,115,1,"");
-   window->objects->insertTextBox(5,116,250,153,1,"");
-   window->objects->insertTextBox(5,154,250,192,1,"");
-   window->objects->insertTextBox(5,193,250,230,1,"");
+   intWindow->getObjectsList()->insertTextBox(5,20,250,77,1,"");
+   intWindow->getObjectsList()->insertTextBox(5,78,250,115,1,"");
+   intWindow->getObjectsList()->insertTextBox(5,116,250,153,1,"");
+   intWindow->getObjectsList()->insertTextBox(5,154,250,192,1,"");
+   intWindow->getObjectsList()->insertTextBox(5,193,250,230,1,"");
 
    
    /* Open Skill Window */
-   window->ptrExterno = &window;
-   window->fechavel = false;
-   interf->openWindow(window);
+   intWindow->setExternPointer(&intWindow);
+   intWindow->setAttributes(false,true,false,false);
+   interf->openWindow(intWindow);
 }
 
 /****************************************************************
@@ -436,7 +436,7 @@ int options::Treat(guiObject* object, int eventInfo, interface* interf)
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
          Save();
-         interf->closeWindow(window);
+         interf->closeWindow(intWindow);
          return(OPTIONSW_CONFIRM);
       }
       /* Cancel */
@@ -447,7 +447,7 @@ int options::Treat(guiObject* object, int eventInfo, interface* interf)
          langNumber  = prevLanguage;
          cameraNumber = prevCamera;
          reflexionType = prevReflexion;
-         interf->closeWindow(window);
+         interf->closeWindow(intWindow);
          return(OPTIONSW_CANCEL);
       }
    }
@@ -476,7 +476,7 @@ int options::Treat(guiObject* object, int eventInfo, interface* interf)
    txtCamera->setText(cameraName());
    txtReflexion->setText(reflexionName());
 
-   window->Desenhar(0,0);
+   intWindow->draw(0,0);
    return(OPTIONSW_OTHER);
 } 
 
