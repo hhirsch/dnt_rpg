@@ -262,7 +262,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    color_Set(0,0,0);
    rectangle_Fill(img,0,0,255,31);
    color_Set(200,20,20);
-   defineFont(FFARSO,ALIGN_CENTER,3);
+   defineFont(FMINI,ALIGN_CENTER,1);
    sprintf(texto,language.LOAD_MAP.c_str(),arqMapa.c_str());
    write(img,128,0,texto);
    GLuint texturaTexto;
