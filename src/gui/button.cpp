@@ -19,6 +19,7 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval )
    text = txt;
    oval = isOval;
    men = NULL;
+   type = GUI_BUTTON;
 }
 
 /***********************************************************

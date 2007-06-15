@@ -129,11 +129,8 @@ button* Tlista::insertButton(int xa,int ya,int xb,int yb,
 cxSel* Tlista::insertCxSel(int xa,int ya, bool selected)
 {
    cxSel* novo;
-   novo = new cxSel;
-   novo->x = xa;
-   novo->y = ya;
+   novo = new cxSel(xa, ya);
    novo->setSelection(selected);
-   novo->type = GUI_SEL_BOX;
    InserirObj(novo);
    return(novo);
 }

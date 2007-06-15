@@ -14,11 +14,11 @@
 class cxSel: public guiObject
 {
    public:
-      int x,                 /**< X Window Coordinate */
-          y;                 /**< Y Window Coordinate */
+      /*! Constructor
+       * \param x -> x position
+       * \param y -> y position */
+      cxSel(int x, int y);
 
-      /*! Constructor */
-      cxSel();
       /*! Draws the Selected Box
        * \param screen -> surface */
       void draw(SDL_Surface *screen);

@@ -193,10 +193,8 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                else if(obj->type == GUI_SEL_BOX)
                {
                    cxSel* cx = (cxSel*) obj;
-                   if(mouse_NaArea(cx->x+ljan->janelaAtiva->x1,
-                                   cx->y+ljan->janelaAtiva->y1,
-                                   cx->x+10+ljan->janelaAtiva->x1,
-                                   cx->y+10+ljan->janelaAtiva->y1,x,y))
+                   if(cx->isMouseIn(x-ljan->janelaAtiva->x1,
+                                    y-ljan->janelaAtiva->y1))
                    {
                        objAtivo = cx;
                        foco = FOCO_CXSEL;

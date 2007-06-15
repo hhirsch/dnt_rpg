@@ -5,40 +5,56 @@
 
 #include "cxsel.h"
 
-
-cxSel::cxSel():guiObject()
+/**********************************************************
+ *                       Constructor                      *
+ **********************************************************/
+cxSel::cxSel(int x, int y):guiObject()
 {
+   x1 = x;
+   y1 = y;
+   x2 = x+10;
+   y2 = y+10;
    selected = false;
    lastChangeTime = SDL_GetTicks();
+   type = GUI_SEL_BOX;
 }
 
+/**********************************************************
+ *                           draw                         *
+ **********************************************************/
 void cxSel::draw(SDL_Surface *screen)
 {
    cor_Definir(Colors.colorCont[0].R, Colors.colorCont[0].G, 
                  Colors.colorCont[0].B);
-   retangulo_2Cores(screen, x, y, x+10, y+10, Colors.colorCont[1].R,
+   retangulo_2Cores(screen, x1, y1, x1+10, y1+10, Colors.colorCont[1].R,
                      Colors.colorCont[1].G, Colors.colorCont[1].B, 0);
    cor_Definir(Colors.colorCont[2].R, Colors.colorCont[2].G, 
                  Colors.colorCont[2].B);
-   retangulo_Colorir(screen, x+1, y+1, x+9, y+9, 0);
+   retangulo_Colorir(screen, x1+1, y1+1, x1+9, y1+9, 0);
    if(selected)
    {
       cor_Definir(Colors.colorCont[0].R, Colors.colorCont[0].G, 
                     Colors.colorCont[0].B);
-      linha_Desenhar(screen, x+2, y+2, x+8, y+8, 0);
-      linha_Desenhar(screen, x+1, y+2, x+7, y+8, 0);
-      linha_Desenhar(screen, x+3, y+2, x+9, y+8, 0);
-      linha_Desenhar(screen, x+8, y+2, x+2, y+8, 0);
-      linha_Desenhar(screen, x+7, y+2, x+1, y+8, 0);
-      linha_Desenhar(screen, x+9, y+2, x+3, y+8, 0);
+      linha_Desenhar(screen, x1+2, y1+2, x1+8, y1+8, 0);
+      linha_Desenhar(screen, x1+1, y1+2, x1+7, y1+8, 0);
+      linha_Desenhar(screen, x1+3, y1+2, x1+9, y1+8, 0);
+      linha_Desenhar(screen, x1+8, y1+2, x1+2, y1+8, 0);
+      linha_Desenhar(screen, x1+7, y1+2, x1+1, y1+8, 0);
+      linha_Desenhar(screen, x1+9, y1+2, x1+3, y1+8, 0);
    }
 }
 
+/**********************************************************
+ *                       isSelected                       *
+ **********************************************************/
 bool cxSel::isSelected()
 {
    return(selected);
 }
 
+/**********************************************************
+ *                     invertSelection                    *
+ **********************************************************/
 void cxSel::invertSelection()
 {
    GLuint actualTime = SDL_GetTicks();
@@ -49,6 +65,9 @@ void cxSel::invertSelection()
    }
 }
 
+/**********************************************************
+ *                       setSelection                     *
+ **********************************************************/
 void cxSel::setSelection(bool value)
 {
    selected = value;
