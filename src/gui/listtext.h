@@ -41,7 +41,7 @@ class listText: public guiObject
       void insertText(string text);
 
       /*! Remove text from list
-       * \paramt text -> string to remove */
+       * \param text -> string to remove */
       void removeText(string text);
 
       /*! Draw the listText to the surface */

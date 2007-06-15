@@ -22,7 +22,7 @@ class collision
 
       /*! Define Current Map
        * \param usedMap -> pointer to current Map
-       * \param NPCs -> list of NPCs */
+       * \param npcs -> list of NPCs */
       void defineMap(Map* usedMap, characterList* npcs);
 
       /*! Verify if character can occupy position on Square

@@ -384,14 +384,14 @@ class Map
       /*!
        ***************************************************************
        * Set if the map is outdoor or not  
-       * \param value -> true if is outdoor, false if indoor
+       * \param val -> true if is outdoor, false if indoor
        ***************************************************************/
       void setOutdoor(bool val); 
 
 
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
-      //mapRoad* roads;       /**< Map's Roads */
+      //mapRoad* roads;     /**< Map's Roads */
       int numtexturas;      /**< Number of distinct Textures on Map */
       texture* Texturas;    /**< List of textures on Map */
       Square* squareInic;   /**< Square where PCs starts */

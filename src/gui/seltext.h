@@ -52,7 +52,7 @@ class selText: public guiObject
 
 
       /*! Draw the seltext on a surface
-       * \param selectItem -> number of the selected text
+       * \param selectedItem -> number of the selected text
        * \param screen -> surface to draw */
       void draw(int selectedItem, SDL_Surface *screen);
 
@@ -64,7 +64,7 @@ class selText: public guiObject
       int threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen);
 
       /*! Get the last selected item 
-       * \param return -> last selected item */
+       * \return -> last selected item */
       int getLastSelectedItem();
 
       /*! Set the text of an option

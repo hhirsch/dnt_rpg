@@ -49,7 +49,7 @@ class interface
 {
    public:
       /*! Constructor
-       * \param arqfundo -> name of a image file to be the background. 
+       * \param arqFundo -> name of a image file to be the background. 
        *                    NULL if no background is used*/
       interface(char* arqFundo);
       /*! Destructor  */
@@ -80,7 +80,7 @@ class interface
       void closeAllWindows();
       /*! Verify if the mouse is on some window or not
        * \param mouseX -> mouse x position
-       * \param mouseZ -> mouse z position
+       * \param mouseY -> mouse y position
        * \return true if mouse is in some window, false otherwise. */
       bool mouseOnGui(int mouseX, int mouseY);
       /*! Insert a window on the interface

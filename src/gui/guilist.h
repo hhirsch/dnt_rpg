@@ -72,8 +72,8 @@ class guiList
        * \param ya -> y1 coordinate
        * \param xb -> x2 coordinate 
        * \param yb -> y2 coordinate
-       * \param text1 -> textBar text
-       * \param cripto -> if is crypt, or not
+       * \param text -> textBar text
+       * \param cript -> if is crypt, or not
        * \return textBar inserted */
       textBar* insertTextBar(int xa,int ya,int xb,int yb, string text, 
                              int cript);

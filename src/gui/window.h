@@ -115,7 +115,7 @@ class windowList
        * \param ya -> y1 coordinate
        * \param xb -> x2 coordinate
        * \param yb -> y2 coordinate 
-       * \param title -> title of the window */
+       * \param text -> title of the window */
       window* insertWindow(int xa,int ya,int xb,int yb,string text);
 
       /*! Remove a window from the list

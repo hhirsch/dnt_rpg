@@ -19,6 +19,7 @@ string getStringFromUser(string title, string previous,
 
 /*! Get a Option from user input
  * \param title -> title of the window
+ * \param message -> message to show
  * \param opt1 -> Option 1
  * \param opt2 -> Option 2
  * \param proj -> projection matrix

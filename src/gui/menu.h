@@ -41,7 +41,7 @@ class menu: public guiList
       /*! Do the execution of the menu. Return selected item or -1,
        * \param mouseX -> X mouse coordinate
        * \param mouseY -> Y mouse coordinate
-       * \param mbotao -> mouse button state
+       * \param Mbotao -> mouse button state
        * \param teclado -> keyboard state
        * \param screen -> superface where the menu is
        * \param pronto -> it will be 1 when the execution ends 

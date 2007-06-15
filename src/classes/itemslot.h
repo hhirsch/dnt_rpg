@@ -74,7 +74,8 @@ class itemSlot
       /*! Draw all objectsfrom the itemSlot to the surface, 
        *  begining at the x,y surface coordinate.
        *  \param x -> initial surface x coordinate
-       *  \param y -> initial surface y coordinate*/
+       *  \param y -> initial surface y coordinate
+       *  \param surface -> surface where will draw*/
       void draw(int x, int y, SDL_Surface* surface);
 
       /*! Set the slot to only accepts one item on it per time. Usefully fot

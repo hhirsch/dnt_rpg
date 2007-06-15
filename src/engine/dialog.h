@@ -5,7 +5,7 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-/*! \file conversa.h Define conversations options.*/
+/*! \file dialog.h Define conversations options.*/
 
 #define TALK_ACTION_GOTO   0 /**< Go To some conversation point */
 #define TALK_ACTION_FIGHT  1 /**< End talk and initiate a fight */
@@ -111,7 +111,7 @@ class conversation
                       character* PC);
 
       /*! Treat Events on Window. 
-       * \param guiObject -> active GUI object
+       * \param guiObj -> active GUI object
        * \param eventInfo -> last GUI Event 
        * \param gui -> window interface used
        * \return true if event is threated, false otherwise. */

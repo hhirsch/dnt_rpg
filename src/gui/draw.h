@@ -6,7 +6,7 @@
 #ifndef _desenho_h
 #define _desenho_h
 
-/*! \file desenho.h, where defined Surface draw functions. */
+/*! \file draw.h, where defined Surface draw functions. */
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <GL/glu.h>
@@ -36,7 +36,7 @@ void color_Get(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi);
 void pixel_Set(SDL_Surface *screen, int x, int y);
 
 /*! Get the surface (x,y) pixel color
- * \param screen -> surface to draw
+ * \param surface -> surface to draw
  * \param x -> x coordinate of the pixel
  * \param y -> y coordinate of the pixel 
  * \return -> (x,y) surface color */

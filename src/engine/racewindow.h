@@ -18,6 +18,7 @@ class raceWindow
 {
    public:
       /*! Constructor
+       * \param sk -> skill list
        * \param rc -> races list
        * \param inter -> GUI interface
        * \param retRace -> pointer where will be the choosed race */

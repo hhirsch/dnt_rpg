@@ -44,6 +44,7 @@ class button: public guiObject
        * \param screen -> surface where the button is.
        * \param pronto -> will be != 0 when end the proccess
        * \param screen -> surface where draws the button
+       * \param Mbotao -> mouse button state
        * \return true when pressed, false if not pressed. */
        bool press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto,
                   SDL_Surface* screen);
