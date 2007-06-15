@@ -9,7 +9,7 @@
 using namespace std;
 
 #include "guiobject.h"
-#include "botao.h"
+#include "button.h"
 #include "cxsel.h"
 #include "figura.h"
 #include "erro.h"
@@ -37,9 +37,8 @@ class Tlista{
        * oval        -> !=0 se o botao for arrrendondado
        * proc        -> ponteiro pro proc a ser chamado qdo o botao 
        *                for pressionado*/
-      botao* InserirBotao(int xa,int ya,int xb,int yb,int Ra,int Ga,
-                int Ba,const char* text,int oval,
-                int (*proc)(void *jan,void *ljan,SDL_Surface *screen));
+      button* insertButton(int xa,int ya,int xb,int yb,
+                           string text, bool oval);
 
       /*! Insert a new cxSel on the List
        * \param xa -> X coordinate

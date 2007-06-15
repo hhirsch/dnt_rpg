@@ -6,8 +6,7 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJS = textbar.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o menu.o messages.o mouse.o quadtexto.o seltexto.o 
-OBJSPP = textbar.o botao.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o lista.o listtext.o menu.o messages.o mouse.o quadtexto.o rolbar.o seltexto.o tabbotao.o
+OBJSPP = button.o cores.o cxsel.o desenho.o erro.o eventos.o farso.o figura.o fonte.o healthBar.o janela.o lista.o listtext.o menu.o messages.o mouse.o quadtexto.o rolbar.o seltexto.o tabbotao.o textbar.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -24,9 +23,9 @@ textbar.o: textbar.h textbar.cpp
 	@$(CC) $(CFLAGS) textbar.cpp -o textbar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-botao.o: botao.h botao.cpp
-	@printf "Making botao.o... "
-	@$(CC) $(CFLAGS) botao.cpp -o botao.o
+button.o: button.h button.cpp
+	@printf "Making button.o... "
+	@$(CC) $(CFLAGS) button.cpp -o button.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 cores.o: cores.h cores.cpp

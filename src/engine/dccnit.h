@@ -237,10 +237,10 @@ class engine
       /*!
        ***********************************************************************
        * Verify and treat the actions made by mouse on the game (not on gui!)
-       * \param Mbotao -> mouse Button State
+       * \param Mbutton -> mouse Button State
        * \return 1 if the map was changed, 0 otherwise
        ***********************************************************************/
-      int verifyMouseActions(Uint8 Mbotao);
+      int verifyMouseActions(Uint8 Mbutton);
 
       /*!
        *************************************************************** 
@@ -331,11 +331,11 @@ class engine
       quadroTexto* hourTxt;        /**< Text for Hour */
       janela* shortCutsWindow;     /**< ShortCuts Window */
       janela* miniMapWindow;       /**< MiniMap Window */
-      botao* botPerMiniMap;        /**< Character MiniMap Button */
+      button* botPerMiniMap;        /**< Character MiniMap Button */
 
-      botao* buttonMenu;           /**< Button to call Menu */
-      botao* buttonSave;           /**< Button to call Save Function */
-      botao* buttonLoad;           /**< Button to call Load Function */
+      button* buttonMenu;           /**< Button to call Menu */
+      button* buttonSave;           /**< Button to call Save Function */
+      button* buttonLoad;           /**< Button to call Load Function */
       oneTabButton* buttonAttackMode;/**< Button to Enter on Attack Mode */
       oneTabButton* buttonMap;     /**< Call MiniMap Button */
       oneTabButton* buttonInventory; /**< Call Inventory Button */

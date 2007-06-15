@@ -417,10 +417,7 @@ void conversation::openDialog(int numDialog, interface* gui, character* pers,
    actualPC = PC;
    actual = -1;
    jan = gui->insertWindow(330,100,585,355,language.DIALOGW_TITLE.c_str(),1,1);
-   jan->objects->InserirBotao(5,86,69,104,jan->Cores.corBot.R,
-                                          jan->Cores.corBot.G,
-                                          jan->Cores.corBot.B,
-                                          "Barter",1,NULL);
+   jan->objects->insertButton(5,86,69,104,"Barter",1);
    jan->objects->InserirFigura(5,25,0,0,pers->getPortraitFileName().c_str());
    npcText = jan->objects->insertRolBar(71,20,250,115,"",jan->cara);
    //npcText->fonte = FMINI;

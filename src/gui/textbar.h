@@ -29,8 +29,6 @@ class textBar: public guiObject
       /*! Destructor */
       ~textBar();
       
-      cores Cores;
-
       /*!
        * Draw the text bar on a surface
        * \param screen > suface to draw */
@@ -61,6 +59,7 @@ class textBar: public guiObject
       unsigned int pos;    /**< Current cursor position */
       int lastWrite;       /**< Last time when write */
       string lastChar;     /**< Last Character writed */
+      cores Colors;        /**< Internal Colors */   
 };
  
 #endif

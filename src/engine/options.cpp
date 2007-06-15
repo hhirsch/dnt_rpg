@@ -234,17 +234,11 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = window->objects->InserirQuadroTexto(8,27,145,44,0,
                                          language.OPTIONS_MUSIC_VOLUME.c_str());
    qt->fonte = FMINI;
-   buttonMusDec = window->objects->InserirBotao(146,27,156,44,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,NULL);
+   buttonMusDec = window->objects->insertButton(146,27,156,44,"<",0);
    txtMusicVolume = window->objects->InserirQuadroTexto(157,27,197,44,1,
                                  saux.c_str());
    txtMusicVolume->fonte = FMINI;
-   buttonMusSum = window->objects->InserirBotao(198,27,208,44,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                   ">",0,NULL);
+   buttonMusSum = window->objects->insertButton(198,27,208,44,">",0);
    window->objects->InserirFigura(212,27,40,112,
                                   "../data/texturas/options/music.png");
    
@@ -255,17 +249,11 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = window->objects->InserirQuadroTexto(8,52,145,69,0,
                                          language.OPTIONS_SNDFX_VOLUME.c_str());
    qt->fonte = FMINI;
-   buttonSndDec = window->objects->InserirBotao(146,52,156,69,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,NULL);
+   buttonSndDec = window->objects->insertButton(146,52,156,69,"<",0);
    txtSndfxVolume = window->objects->InserirQuadroTexto(157,52,197,69,1,
                                  saux.c_str());
    txtSndfxVolume->fonte = FMINI;
-   buttonSndSum = window->objects->InserirBotao(198,52,208,69,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,NULL);
+   buttonSndSum = window->objects->insertButton(198,52,208,69,">",0);
    window->objects->InserirFigura(212,52,40,112,
                                   "../data/texturas/options/sndfx.png");
 
@@ -276,17 +264,11 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = window->objects->InserirQuadroTexto(8,88,145,105,0,
                                          language.OPTIONS_LANGUAGE.c_str());
    qt->fonte = FMINI;
-   buttonLangDec = window->objects->InserirBotao(121,88,131,105,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,NULL);
+   buttonLangDec = window->objects->insertButton(121,88,131,105,"<",0);
    txtLanguage = window->objects->InserirQuadroTexto(132,88,197,105,1,
                                  saux.c_str());
    txtLanguage->fonte = FMINI;
-   buttonLangSum = window->objects->InserirBotao(198,88,208,105,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,NULL);
+   buttonLangSum = window->objects->insertButton(198,88,208,105,">",0);
    window->objects->InserirFigura(212,88,40,112,
                                   "../data/texturas/options/language.png");
 
@@ -296,17 +278,11 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = window->objects->InserirQuadroTexto(8,126,145,143,0,
                                             language.OPTIONS_CAMERA.c_str());
    qt->fonte = FMINI;
-   buttonCamDec = window->objects->InserirBotao(121,126,131,143,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,NULL);
+   buttonCamDec = window->objects->insertButton(121,126,131,143,"<",0);
    txtCamera = window->objects->InserirQuadroTexto(132,126,197,143,1,
                                  saux.c_str());
    txtCamera->fonte = FMINI;
-   buttonCamSum = window->objects->InserirBotao(198,126,208,143,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,NULL);
+   buttonCamSum = window->objects->insertButton(198,126,208,143,">",0);
    window->objects->InserirFigura(214,126,40,112,
                                   "../data/texturas/options/camera.png");
 
@@ -334,32 +310,22 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = window->objects->InserirQuadroTexto(8,203,145,220,0,
                                             language.OPTIONS_REFLECTS.c_str());
    qt->fonte = FMINI;
-   buttonReflDec = window->objects->InserirBotao(121,203,131,220,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,NULL);
+   buttonReflDec = window->objects->insertButton(121,203,131,220,"<",0);
    txtReflexion = window->objects->InserirQuadroTexto(132,203,197,220,1,
                                  saux.c_str());
    txtReflexion->fonte = FMINI;
-   buttonReflSum = window->objects->InserirBotao(198,203,208,220,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,NULL);
+   buttonReflSum = window->objects->insertButton(198,203,208,220,">",0);
    window->objects->InserirFigura(212,203,40,220,
                                   "../data/texturas/options/reflexions.png");
 
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(181,235,251,254, 
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.SKILL_CONFIRM.c_str(),1,NULL);
+   buttonConfirm = window->objects->insertButton(181,235,251,254,
+                                              language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->InserirBotao(8,235,78,254, 
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.SKILL_CANCEL.c_str(),1,NULL);
+   buttonCancel = window->objects->insertButton(8,235,78,254,
+                                               language.SKILL_CANCEL.c_str(),1);
 
    /* borders */
    window->objects->InserirQuadroTexto(5,20,250,77,1,"");

@@ -129,7 +129,7 @@ class conversation
          int actual;           /**< Actual active Dialog */
          rolBar* npcText;      /**< The NPC text quad */
          selTexto* pcSelText;  /**< The PC selection text */
-         botao* barterButton;  /**< The Barter Button */
+         button* barterButton;  /**< The Barter Button */
          character* actualPC; /**< The Actual PC */
          character* actualNPC;/**< The actual NPC */
          void* actualEngine;   /**< The actual Engine */

@@ -54,37 +54,22 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    rolledPoints = window->objects->InserirQuadroTexto(8,18,117,31,0,
                                                                   saux.c_str());
    /* reroll button */
-   rerollButton = window->objects->InserirBotao(119,16,182,33,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.ATTW_ROLL.c_str(),0,NULL);
+   rerollButton = window->objects->insertButton(119,16,182,33,
+                                                  language.ATTW_ROLL.c_str(),0);
    /* clear button */
-   clearButton = window->objects->InserirBotao(183,16,247,33,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.ATTW_CLEAR.c_str(),0,NULL);
+   clearButton = window->objects->insertButton(183,16,247,33,
+                                                 language.ATTW_CLEAR.c_str(),0);
 
    /* auto button */
-   autoButton = window->objects->InserirBotao(248,16,312,33,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "Auto",0,NULL);
+   autoButton = window->objects->insertButton(248,16,312,33,"Auto",0);
 
    /* Strenght */
    window->objects->InserirQuadroTexto(9,49,85,62,0,
                                        language.ATTW_STRENGTH.c_str());
    attPoints[0] = window->objects->InserirQuadroTexto(98,47,117,64,1,"");
    attPoints[0]->fonte = FMINI;
-   attButtonPrev[0] = window->objects->InserirBotao(87,47,97,64,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    "<",0,NULL);
-   attButtonNext[0] = window->objects->InserirBotao(118,47,128,64,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    ">",0,NULL);
+   attButtonPrev[0] = window->objects->insertButton(87,47,97,64,"<",0);
+   attButtonNext[0] = window->objects->insertButton(118,47,128,64,">",0);
    attTotals[0] = window->objects->InserirQuadroTexto(165,49,195,64,0,"");
    attTotals[0]->fonte = FTIMES;
    attTotals[0]->tamFonte = 3;
@@ -97,16 +82,8 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                        language.ATTW_DEXTERITY.c_str());
    attPoints[1] = window->objects->InserirQuadroTexto(98,81,117,98,1,"");
    attPoints[1]->fonte = FMINI;
-   attButtonPrev[1] = window->objects->InserirBotao(87,81,97,98,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    "<",0,NULL);
-   attButtonNext[1] = window->objects->InserirBotao(118,81,128,98,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    ">",0,NULL);
+   attButtonPrev[1] = window->objects->insertButton(87,81,97,98,"<",0);
+   attButtonNext[1] = window->objects->insertButton(118,81,128,98,">",0);
    attTotals[1] = window->objects->InserirQuadroTexto(165,83,195,98,0,"");
    attTotals[1]->fonte = FTIMES;
    attTotals[1]->tamFonte = 3;
@@ -119,16 +96,8 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                        language.ATTW_CONSTITUTION.c_str());
    attPoints[2] = window->objects->InserirQuadroTexto(98,117,117,134,1,"");
    attPoints[2]->fonte = FMINI;
-   attButtonPrev[2] = window->objects->InserirBotao(87,117,97,134,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    "<",0,NULL);
-   attButtonNext[2] = window->objects->InserirBotao(118,117,128,134,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    ">",0,NULL);
+   attButtonPrev[2] = window->objects->insertButton(87,117,97,134,"<",0);
+   attButtonNext[2] = window->objects->insertButton(118,117,128,134,">",0);
    attTotals[2] = window->objects->InserirQuadroTexto(165,119,195,134,0,"");
    attTotals[2]->fonte = FTIMES;
    attTotals[2]->tamFonte = 3;
@@ -142,16 +111,8 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                        language.ATTW_INTELLIGENCE.c_str());
    attPoints[3] = window->objects->InserirQuadroTexto(98,151,117,168,1,"");
    attPoints[3]->fonte = FMINI;
-   attButtonPrev[3] = window->objects->InserirBotao(87,151,97,168,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    "<",0,NULL);
-   attButtonNext[3] = window->objects->InserirBotao(118,151,128,168,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    ">",0,NULL);
+   attButtonPrev[3] = window->objects->insertButton(87,151,97,168,"<",0);
+   attButtonNext[3] = window->objects->insertButton(118,151,128,168,">",0);
    attTotals[3] = window->objects->InserirQuadroTexto(165,153,195,168,0,"");
    attTotals[3]->fonte = FTIMES;
    attTotals[3]->tamFonte = 3;
@@ -165,16 +126,8 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                        language.ATTW_WISDOW.c_str());
    attPoints[4] = window->objects->InserirQuadroTexto(98,185,117,202,1,"");
    attPoints[4]->fonte = FMINI;
-   attButtonPrev[4] = window->objects->InserirBotao(87,185,97,202,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    "<",0,NULL);
-   attButtonNext[4] = window->objects->InserirBotao(118,185,128,202,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    ">",0,NULL);
+   attButtonPrev[4] = window->objects->insertButton(87,185,97,202,"<",0);
+   attButtonNext[4] = window->objects->insertButton(118,185,128,202,">",0);
    attTotals[4] = window->objects->InserirQuadroTexto(165,187,195,202,0,"");
    attTotals[4]->fonte = FTIMES;
    attTotals[4]->tamFonte = 3;
@@ -187,16 +140,8 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                        language.ATTW_CHARISM.c_str());
    attPoints[5] = window->objects->InserirQuadroTexto(98,219,117,236,1,"");
    attPoints[5]->fonte = FMINI;
-   attButtonPrev[5] = window->objects->InserirBotao(87,219,97,236,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    "<",0,NULL);
-   attButtonNext[5] = window->objects->InserirBotao(118,219,128,236,
-                                                    window->Cores.corBot.R,
-                                                    window->Cores.corBot.G,
-                                                    window->Cores.corBot.B,
-                                                    ">",0,NULL);
+   attButtonPrev[5] = window->objects->insertButton(87,219,97,236,"<",0);
+   attButtonNext[5] = window->objects->insertButton(118,219,128,236,">",0);
    attTotals[5] = window->objects->InserirQuadroTexto(165,220,195,236,0,"");
    attTotals[5]->fonte = FTIMES;
    attTotals[5]->tamFonte = 3;
@@ -229,16 +174,12 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    textDesc->fonte = FMINI;
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(437,248,507,267, 
-                                window->Cores.corBot.R,
-                                window->Cores.corBot.G,window->Cores.corBot.B,
-                                language.SKILL_CONFIRM.c_str(),1,NULL);
+   buttonConfirm = window->objects->insertButton(437,248,507,267,
+                                              language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->InserirBotao(8,248,78,267, 
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.SKILL_CANCEL.c_str(),1,NULL);
+   buttonCancel = window->objects->insertButton(8,248,78,267,
+                                               language.SKILL_CANCEL.c_str(),1);
 
    /* Define Previous Values, if needed */
    if(usePreviousValues)

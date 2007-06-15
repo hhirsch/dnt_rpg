@@ -13,7 +13,7 @@ using namespace std;
 #include "cores.h"
 #include "desenho.h"
 #include "mouse.h"
-#include "botao.h"
+#include "button.h"
 #include "quadtexto.h"
 
 /*! Rolling Text Bar Definition */
@@ -53,9 +53,9 @@ class rolBar: public guiObject
           x2,                 /**< X2 Coordinate */
           y1,                 /**< Y1 Coordinate */
           y2;                 /**< Y2 Coordinate */
-      botao* up;              /**< Up Button */
-      botao* down;            /**< Down Button */
-      botao* actualPressed;   /**< Actual Pressed Button */
+      button* up;              /**< Up Button */
+      button* down;            /**< Down Button */
+      button* actualPressed;   /**< Actual Pressed Button */
       quadroTexto* text;      /**< Text of The Scroll */
       quadroTexto* contorn;   /**< Contorn of the Scroll */
       quadroTexto* position;  /**< Contorn Text Position */

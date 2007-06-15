@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <SDL/SDL.h>
 #include "desenho.h"
-#include "botao.h"
+#include "button.h"
 #include "cores.h"
 #include "cxsel.h"
 #include "janela.h"

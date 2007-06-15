@@ -25,17 +25,9 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    figurePortrait->fig = images[curImage].image;
 
    /* Previous Image Button */
-   buttonPreviousImage = window->objects->InserirBotao(5,90,19,108,
-                                                   window->Cores.corBot.R,
-                                                   window->Cores.corBot.G,
-                                                   window->Cores.corBot.B,
-                                                   "<",0, NULL);
+   buttonPreviousImage = window->objects->insertButton(5,90,19,108,"<",0);
    /* Next Image Button */
-   buttonNextImage = window->objects->InserirBotao(55,90,69,108,
-                                                   window->Cores.corBot.R,
-                                                   window->Cores.corBot.G,
-                                                   window->Cores.corBot.B,
-                                                   ">",0, NULL);
+   buttonNextImage = window->objects->insertButton(55,90,69,108,">",0);
    /* Contorn to the previous and next buttons */
    window->objects->InserirQuadroTexto(20,90,54,108,1,"");
 
@@ -60,16 +52,14 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
                                   "../data/texturas/aspectw/sex_o.png");
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(181,90,251,108, 
-                                window->Cores.corBot.R,
-                                window->Cores.corBot.G,window->Cores.corBot.B,
-                                language.SKILL_CONFIRM.c_str(),1,NULL);
+   buttonConfirm = window->objects->insertButton(181,90,251,108, 
+                                                 language.SKILL_CONFIRM.c_str(),
+                                                 1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->InserirBotao(72,90,140,108, 
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.SKILL_CANCEL.c_str(),1,NULL);
+   buttonCancel = window->objects->insertButton(72,90,140,108, 
+                                                language.SKILL_CANCEL.c_str(),
+                                                1);
 
    window->ptrExterno = &window;
    window->fechavel = false;

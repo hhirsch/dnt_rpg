@@ -623,8 +623,8 @@ int engine::OptionsScreen(GLuint idTextura)
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          glClearColor(0,0,0,1);
          keys = SDL_GetKeyState(NULL);
-         Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         object = interf->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
+         Uint8 Mbutton = SDL_GetMouseState(&x,&y);
+         object = interf->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
          AtualizaTela2D(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          glPushMatrix();
             draw2DMode();
@@ -715,8 +715,8 @@ int engine::CharacterScreen(GLuint idTextura)
          glClearColor(0,0,0,1);
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
-         Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         object = gui->manipulateEvents(x,y,Mbotao,keys,&eventInfo);
+         Uint8 Mbutton = SDL_GetMouseState(&x,&y);
+         object = gui->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
 
          AtualizaTela2D(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          glPushMatrix();
@@ -1246,7 +1246,7 @@ void engine::hourToTxt()
 /*********************************************************************
  *                         verifyMouseActions                        *
  *********************************************************************/
-int engine::verifyMouseActions(Uint8 Mbotao)
+int engine::verifyMouseActions(Uint8 Mbutton)
 {
    GLfloat wx,wy,wz;
    Uint32 tempo = SDL_GetTicks();
@@ -1299,7 +1299,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                    ObjTxt->texto = quaux->objects[obj]->getName(); 
                    shortCutsWindow->Desenhar(mouseX,mouseY);
                 }
-                if( (Mbotao & SDL_BUTTON(1)) && 
+                if( (Mbutton & SDL_BUTTON(1)) && 
                     (rangeAction(activeCharacter->posicaoLadoX, 
                                  activeCharacter->posicaoLadoZ,
                                  quaux->Xobjects[obj],
@@ -1341,7 +1341,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                       }
                    }
                 }
-                if(Mbotao & SDL_BUTTON(2))
+                if(Mbutton & SDL_BUTTON(2))
                 {
                    /* TODO Open Menu of choices */
                 }
@@ -1374,7 +1374,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                ObjTxt->texto = language.OBJ_DOOR.c_str(); 
                shortCutsWindow->Desenhar(mouseX, mouseY);
             }
-            if( (Mbotao & SDL_BUTTON(1)) && 
+            if( (Mbutton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->posicaoLadoX, 
                              activeCharacter->posicaoLadoZ,
                              porta->x, porta->z,
@@ -1425,7 +1425,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
             }
 
             /* Open Inventory when button pressed */
-            if( (Mbotao & SDL_BUTTON(1)) && (!inventoryWindow))
+            if( (Mbutton & SDL_BUTTON(1)) && (!inventoryWindow))
             {
                OpenCloseInventoryWindow();
             }
@@ -1467,7 +1467,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                   else if(pers->getConversationFile() != "")
                   {
                      cursors->setActual(CURSOR_TALK);
-                     if( (Mbotao & SDL_BUTTON(1)) && 
+                     if( (Mbutton & SDL_BUTTON(1)) && 
                          (rangeAction(activeCharacter->posicaoLadoX, 
                                       activeCharacter->posicaoLadoZ,
                                       pers->posicaoLadoX, pers->posicaoLadoZ,
@@ -1497,7 +1497,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
                   }
 
                   //TODO -> verify if weapon is ranged, so distance is other
-                  if( (Mbotao & SDL_BUTTON(1)) &&
+                  if( (Mbutton & SDL_BUTTON(1)) &&
                       (rangeAction(activeCharacter->posicaoLadoX, 
                                    activeCharacter->posicaoLadoZ,
                                    pers->posicaoLadoX, pers->posicaoLadoZ,
@@ -1563,7 +1563,7 @@ int engine::verifyMouseActions(Uint8 Mbotao)
             curConection = &quaux->mapConection;
             cursors->setActual(CURSOR_MAPTRAVEL);
             pronto = 1;
-            if( (Mbotao & SDL_BUTTON(1)) && 
+            if( (Mbutton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->posicaoLadoX, 
                              activeCharacter->posicaoLadoZ,
                              xReal, zReal,
@@ -1666,12 +1666,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
       int x,y;
       int guiEvent = 0;
-      Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+      Uint8 Mbutton = SDL_GetMouseState(&x,&y);
       mouseX = x;
       mouseY = y;
       
       if( (tempo-lastMouse>=  REFRESH_RATE ) || 
-          ( (Mbotao & SDL_BUTTON(1)) && 
+          ( (Mbutton & SDL_BUTTON(1)) && 
 	    (tempo-lastMousePression >= REFRESH_RATE)) )
       {
          cursors->setActual(CURSOR_WALK);
@@ -1679,7 +1679,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
          if(!gui->mouseOnGui(mouseX, mouseY))
          {
-            if(verifyMouseActions(Mbotao) == 1)
+            if(verifyMouseActions(Mbutton) == 1)
             {
                /* Changed Map, so */
                return(1);
@@ -1998,13 +1998,13 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
 
       /* Camera Verification */
-      if(gameCamera.doIO(keys, Mbotao, x, y, varCamera ))
+      if(gameCamera.doIO(keys, Mbutton, x, y, varCamera ))
       {
          redesenha = true;
       }
       
       /* Path Verification */
-      if(Mbotao & SDL_BUTTON(3))
+      if(Mbutton & SDL_BUTTON(3))
       {
          GLfloat dist;
          dist = sqrt( (xReal - moveCircleX) *
@@ -2100,10 +2100,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          x = 8 + (x*4);
          z = 20 + (z*4);
 
-         botPerMiniMap->x1 = x;
-         botPerMiniMap->x2 = x+3;
-         botPerMiniMap->y1 = z;
-         botPerMiniMap->y2 = z+3;
+         botPerMiniMap->setCoordinate(x, z, x+3, z+3);
 
          miniMapWindow->Desenhar(mouseX, mouseY);
       }
@@ -2112,7 +2109,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          shortCutsWindow->Desenhar(mouseX, mouseY);
       }
       guiObject* object;
-      object = gui->manipulateEvents(x,y,Mbotao,keys, &guiEvent);
+      object = gui->manipulateEvents(x,y,Mbutton,keys, &guiEvent);
       /* Threat the GUI */
       if(guiEvent != NADA)
       {
@@ -2783,18 +2780,7 @@ void engine::OpenMiniMapWindow()
    miniMapWindow = gui->insertWindow(512,472,799,599,//0,344,255,471,
                                      language.WINDOW_MAP.c_str(),1,1);
 
-   botPerMiniMap = miniMapWindow->objects->InserirBotao(x,z,x+2,z+2,255,255,128,
-                                                      "",0,NULL);
-   botPerMiniMap->Cores.corCont[0].R = 255;
-   botPerMiniMap->Cores.corCont[0].G = 255;
-   botPerMiniMap->Cores.corCont[0].B = 128;
-   botPerMiniMap->Cores.corCont[1].R = 255;
-   botPerMiniMap->Cores.corCont[1].G = 255;
-   botPerMiniMap->Cores.corCont[1].B = 128;
-   botPerMiniMap->Cores.corCont[2].R = 255;
-   botPerMiniMap->Cores.corCont[2].G = 255;
-   botPerMiniMap->Cores.corCont[2].B = 128;
-
+   botPerMiniMap = miniMapWindow->objects->insertButton(x,z,x+2,z+2,"",0);
    figura* fig = miniMapWindow->objects->InserirFigura(8,20,240,95,NULL);
    actualMap->drawMinimap(fig->fig);
 
@@ -2825,24 +2811,11 @@ void engine::OpenShortcutsWindow()
    ObjTxt = shortCutsWindow->objects->InserirQuadroTexto(151,20,249,35,2,
                                  language.OBJ_NOTHING.c_str());
 
-   buttonSave = shortCutsWindow->objects->InserirBotao(8,102,76,120,
-                                 shortCutsWindow->Cores.corBot.R, 
-                                 shortCutsWindow->Cores.corBot.G,
-                                 shortCutsWindow->Cores.corBot.B,
-                                 language.INITIAL_SAVE.c_str(),
-                                 0,NULL);
-   buttonMenu = shortCutsWindow->objects->InserirBotao(77,102,140,120,
-                                 shortCutsWindow->Cores.corBot.R, 
-                                 shortCutsWindow->Cores.corBot.G,
-                                 shortCutsWindow->Cores.corBot.B,
-                                 "Menu",
-                                 0,NULL);
-   buttonLoad = shortCutsWindow->objects->InserirBotao(141,102,209,120,
-                                 shortCutsWindow->Cores.corBot.R, 
-                                 shortCutsWindow->Cores.corBot.G,
-                                 shortCutsWindow->Cores.corBot.B,
-                                 language.INITIAL_LOAD.c_str(),
-                                 0,NULL);
+   buttonSave = shortCutsWindow->objects->insertButton(8,102,76,120,
+                                               language.INITIAL_SAVE.c_str(),0);
+   buttonMenu = shortCutsWindow->objects->insertButton(77,102,140,120,"Menu",0);
+   buttonLoad = shortCutsWindow->objects->insertButton(141,102,209,120,
+                                               language.INITIAL_LOAD.c_str(),0);
    hourTxt = shortCutsWindow->objects->InserirQuadroTexto(210,102,249,120,2,
                                                           "00:00");
    hourTxt->fonte = FMINI;

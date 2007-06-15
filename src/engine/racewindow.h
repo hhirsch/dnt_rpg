@@ -38,11 +38,11 @@ class raceWindow
       race**      choosedRace;     /**< Pointer to the choosed pointer race */
       skills*     externalSkills;  /**< Pointer to External Skills List */
 
-      botao* buttonConfirm;
-      botao* buttonCancel;
+      button* buttonConfirm;
+      button* buttonCancel;
 
-      botao* buttonPrevious;
-      botao* buttonNext;
+      button* buttonPrevious;
+      button* buttonNext;
 
       quadroTexto* textName;
       quadroTexto* textDescTitle;

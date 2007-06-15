@@ -45,6 +45,32 @@ class guiObject
        * \param txt -> new text */
       void setText(string txt){text = txt;};
 
+      /*! Gets the X1 Coordinate
+       * \return x1 coordinate */
+      int getX1(){return(x1);};
+
+      /*! Gets the X2 Coordinate
+       * \return x2 coordinate */
+      int getX2(){return(x2);};
+
+      /*! Gets the y1 Coordinate
+       * \return y1 coordinate */
+      int getY1(){return(y1);};
+
+      /*! Gets the Y2 Coordinate
+       * \return y2 coordinate */
+      int getY2(){return(y2);};
+
+      /*! Set Object Coordinate
+       * \param xa -> x1 coordinate
+       * \param ya -> y1 coordinate
+       * \param xb -> x2 coordinate
+       * \param yb -> y2 coordinate */
+      void setCoordinate(int xa, int ya, int xb, int yb)
+      {
+         x1 = xa; x2 = xb; y1 = ya; y2 = yb;
+      };
+
    protected:
       int x1,              /**< Coordinate on Window */
           y1,              /**< Coordinate on Window */

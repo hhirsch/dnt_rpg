@@ -54,13 +54,13 @@ class attWindow
       quadroTexto* textDesc;      /**< Description Text */
       quadroTexto* textDescTitle; /**< Description Title Text */
 
-      botao* attButtonNext[6];    /**< Next Buttons */
-      botao* attButtonPrev[6];    /**< Previous Buttons */
-      botao* rerollButton;        /**< ReRoll Button */
-      botao* clearButton;         /**< Clear Button */
-      botao* autoButton;          /**< Auto Assign Button */
-      botao* buttonConfirm;       /**< Confirm Button */
-      botao* buttonCancel;        /**< Cancel Button */
+      button* attButtonNext[6];    /**< Next Buttons */
+      button* attButtonPrev[6];    /**< Previous Buttons */
+      button* rerollButton;        /**< ReRoll Button */
+      button* clearButton;         /**< Clear Button */
+      button* autoButton;          /**< Auto Assign Button */
+      button* buttonConfirm;       /**< Confirm Button */
+      button* buttonCancel;        /**< Cancel Button */
 
       /*! Roll one Att Dices */
       int rollDices();

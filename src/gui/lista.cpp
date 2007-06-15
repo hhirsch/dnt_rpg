@@ -45,7 +45,7 @@ void Tlista::Retirar(guiObject *obj)
    {
       case GUI_BUTTON:
       {
-         botao* b = (botao*) obj;
+         button* b = (button*) obj;
          delete(b);
          break;
       }
@@ -115,25 +115,12 @@ void Tlista::InserirObj(guiObject* obj)
    total++;
 }
 
-botao* Tlista::InserirBotao(int xa,int ya,int xb,int yb,int Ra,int Ga,
-                int Ba,const char* text,int oval,
-                int (*proc)(void *jan,void *ljan,SDL_Surface *screen))
+button* Tlista::insertButton(int xa,int ya,int xb,int yb,
+                           string text, bool oval)
 {
-   botao* novo;
-   novo = new botao;
-   novo->x1 = xa;
-   novo->x2 = xb;
-   novo->y1 = ya;
-   novo->y2 = yb;
-   novo->R = Ra;
-   novo->G = Ga;
-   novo->B = Ba;
-   novo->procPres = proc;
-   novo->texto = text;
-   novo->oval = oval;
-   novo->men = NULL;
+   button* novo;
+   novo = new button(xa,ya,xb,yb, text, oval);
    novo->type = GUI_BUTTON;
-   novo->Cores.Iniciar();
    InserirObj(novo);
    return(novo);
 }

@@ -167,11 +167,9 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                if(obj->type == GUI_BUTTON)
                {
                   /* Verify Click on Button */
-                  botao *bot = (botao*) obj;
-                  if(mouse_NaArea(bot->x1+ljan->janelaAtiva->x1,
-                                  bot->y1+ljan->janelaAtiva->y1,
-                                  bot->x2+ljan->janelaAtiva->x1,
-                                  bot->y2+ljan->janelaAtiva->y1,x,y))
+                  button *bot = (button*) obj;
+                  if(bot->isMouseIn(x - ljan->janelaAtiva->x1,
+                                    y - ljan->janelaAtiva->y1))
                   {
                       
                      objAtivo = bot;
@@ -265,33 +263,29 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if(foco == FOCO_BOTAO)
     {
         int pronto;
-        botao* bot = (botao*)objAtivo;
-        if (bot->Pressionar(ljan->janelaAtiva->x1,
-                            ljan->janelaAtiva->y1,
-                            ljan->janelaAtiva, x, y, Mbotao, 
-                            &pronto))
+        button* bot = (button*)objAtivo;
+        if (bot->press(ljan->janelaAtiva->x1, ljan->janelaAtiva->y1, x, y, Mbotao, 
+                       &pronto, ljan->janelaAtiva->cara))
         {
            if(pronto)
            {
-              if(bot->procPres != NULL)
-              {
-                  bot->procPres(ljan->janelaAtiva,ljan,NULL);
-                  foco = FOCO_JOGO;
-              }
-              else if (bot->men != NULL)
+              if (bot->men != NULL)
               {
                  chamador = bot;
                  objAtivo = (guiObject*) bot->men;
                  menu* men = (menu*)objAtivo;
-                 men->Coordenada(bot->x1,bot->y2+1);
+                 men->Coordenada(bot->getX1(),bot->getY2()+1);
                  men->itemAtual = 1;
-                 if (!bot->texto.compare("_"))
+                 if (!bot->getText().compare("_"))
+                 {
                     foco = FOCO_MENUJANELA;
+                 }
                  else
+                 {
                     foco = FOCO_MENU;
-                 
+                 }                 
               }
-              else if (!bot->texto.compare("*"))
+              else if (!bot->getText().compare("*"))
               {
                    /* Close Window */
                   if(ljan->janelaAtiva->fechavel)

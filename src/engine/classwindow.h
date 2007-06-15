@@ -40,11 +40,11 @@ class classWindow
       classe**      choosedClass;     /**< Pointer to choosed pointer class */
       skills*       externalSkills;   /**< Pointer to actual Skill List */
 
-      botao* buttonConfirm;
-      botao* buttonCancel;
+      button* buttonConfirm;
+      button* buttonCancel;
 
-      botao* buttonPrevious;
-      botao* buttonNext;
+      button* buttonPrevious;
+      button* buttonNext;
 
       quadroTexto* textName;
       quadroTexto* textDescTitle;

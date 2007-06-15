@@ -37,11 +37,11 @@ class alignWindow
       align*       actualAlign;      /**< Pointer to actual aligned */
       align**      choosedAlign;     /**< Pointer to the pointer of choosed */
 
-      botao* buttonConfirm;          /**< Confirm Button */
-      botao* buttonCancel;           /**< Cancel Button */
+      button* buttonConfirm;          /**< Confirm Button */
+      button* buttonCancel;           /**< Cancel Button */
 
-      botao* buttonPrevious;         /**< Previous Button */
-      botao* buttonNext;             /**< Next Button */
+      button* buttonPrevious;         /**< Previous Button */
+      button* buttonNext;             /**< Next Button */
 
       quadroTexto* textName;         /**< Text Name */
       rolBar* textDesc;              /**< Text Description */

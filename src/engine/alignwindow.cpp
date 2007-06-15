@@ -36,30 +36,20 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
                                             window->cara);
       
    /* Name and Selectors */
-   buttonPrevious = window->objects->InserirBotao(5,19,19,37,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,NULL);
-   buttonNext = window->objects->InserirBotao(248,19,262,37,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,NULL);
+   buttonPrevious = window->objects->insertButton(5,19,19,37,"<",0);
+   buttonNext = window->objects->insertButton(248,19,262,37,">",0);
    textName = window->objects->InserirQuadroTexto(20,19,247,37,1, 
                                                   actualAlign->name.c_str());
    textName->fonte = FMINI;
    textName->tamFonte = 1;
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(193,225,263,244, 
-                                window->Cores.corBot.R,
-                                window->Cores.corBot.G,window->Cores.corBot.B,
-                                language.SKILL_CONFIRM.c_str(),1,NULL);
+   buttonConfirm = window->objects->insertButton(193,225,263,244, 
+                                                 language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->InserirBotao(8,225,78,244, 
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.SKILL_CANCEL.c_str(),1,NULL);
+   buttonCancel = window->objects->insertButton(8,225,78,244,
+                                                language.SKILL_CANCEL.c_str(),1);
 
    /* Open Skill Window */
    window->ptrExterno = &window;

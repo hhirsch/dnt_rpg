@@ -9,8 +9,8 @@ string getStringFromUser(string title, string previous,
 {
    interface* gui = new interface(NULL);
    janela* getWindow;
-   botao* okButton;
-   botao* cancelButton;
+   button* okButton;
+   button* cancelButton;
    textBar* getText = NULL;
    bool quit = false;
    string returnStr;
@@ -19,16 +19,8 @@ string getStringFromUser(string title, string previous,
    int mouseX, mouseY;
 
    getWindow = gui->insertWindow(300,200,500,262,title.c_str(),1,1);
-   okButton = getWindow->objects->InserirBotao(40,37,95,55,
-                                               getWindow->Cores.corBot.R,
-                                               getWindow->Cores.corBot.G,
-                                               getWindow->Cores.corBot.B,
-                                               "Ok",1,NULL);
-   cancelButton = getWindow->objects->InserirBotao(100,37,155,55,
-                                                   getWindow->Cores.corBot.R,
-                                                   getWindow->Cores.corBot.G,
-                                                   getWindow->Cores.corBot.B,
-                                                   "Cancel",1,NULL);
+   okButton = getWindow->objects->insertButton(40,37,95,55,"Ok",1);
+   cancelButton = getWindow->objects->insertButton(100,37,155,55,"Cancel",1);
    getText = getWindow->objects->insertTextBar(10,17,190,33,previous.c_str(),0);
    getWindow->movivel = 0;
    getWindow->ptrExterno = &getWindow;
@@ -99,8 +91,8 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
 {
    interface* gui = new interface(NULL);
    janela* getWindow;
-   botao* opt1Button;
-   botao* opt2Button;
+   button* opt1Button;
+   button* opt2Button;
    quadroTexto* quadText = NULL;
    bool quit = false;
    Uint8 mButton;
@@ -116,16 +108,10 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
 
    getWindow = gui->insertWindow(300,200,300+sizeX,262,
                                  title.c_str(),1,1);
-   opt1Button = getWindow->objects->InserirBotao(med-80,37,med-10,55,
-                                                 getWindow->Cores.corBot.R,
-                                                 getWindow->Cores.corBot.G,
-                                                 getWindow->Cores.corBot.B,
-                                                 opt1.c_str(),1,NULL);
-   opt2Button = getWindow->objects->InserirBotao(med+10,37,med+80,55,
-                                                 getWindow->Cores.corBot.R,
-                                                 getWindow->Cores.corBot.G,
-                                                 getWindow->Cores.corBot.B,
-                                                 opt2.c_str(),1,NULL);                  
+   opt1Button = getWindow->objects->insertButton(med-80,37,med-10,55,
+                                                 opt1.c_str(),1);
+   opt2Button = getWindow->objects->insertButton(med+10,37,med+80,55,
+                                                 opt2.c_str(),1);                  
                                                  
    quadText = getWindow->objects->InserirQuadroTexto(10,17,sizeX-10,33,0,
                                                       message.c_str());
@@ -196,7 +182,7 @@ void showMessage(string title, string message,
 {
    interface* gui = new interface(NULL);
    janela* getWindow;
-   botao* okButton;
+   button* okButton;
    quadroTexto* quadText = NULL;
    bool quit = false;
    Uint8 mButton;
@@ -207,11 +193,7 @@ void showMessage(string title, string message,
 
    getWindow = gui->insertWindow(300,200,300+sizeX,262,
                                  title.c_str(),1,1);
-   okButton = getWindow->objects->InserirBotao(med-28,37,med+28,55,
-                                               getWindow->Cores.corBot.R,
-                                               getWindow->Cores.corBot.G,
-                                               getWindow->Cores.corBot.B,
-                                               "Ok",1,NULL);
+   okButton = getWindow->objects->insertButton(med-28,37,med+28,55,"Ok",1);
    quadText = getWindow->objects->InserirQuadroTexto(10,17,sizeX-10,33,0,
                                                       message.c_str());
    getWindow->movivel = 0;

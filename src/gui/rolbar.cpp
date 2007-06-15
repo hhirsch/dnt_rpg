@@ -40,12 +40,8 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    contorn = l->InserirQuadroTexto(xb-12, ya, xb, yb-24, 1, "");
    
    /* Botoes */
-   up = l->InserirBotao(xb-12,yb-23,xb,yb-12, contorn->Cores.corBot.R, 
-                        contorn->Cores.corBot.G, contorn->Cores.corBot.B,
-                        "\36",0, NULL);
-   down = l->InserirBotao(xb-12,yb-11,xb,yb, contorn->Cores.corBot.R, 
-                          contorn->Cores.corBot.G, contorn->Cores.corBot.B,
-                          "\37",0, NULL);
+   up = l->insertButton(xb-12,yb-23,xb,yb-12, "\36",0);
+   down = l->insertButton(xb-12,yb-11,xb,yb, "\37",0);
 
    /* Texto */
    text = l->InserirQuadroTexto(xa,ya,xb-13,yb,2,""); 
@@ -134,7 +130,7 @@ void rolBar::redraw()
    /* Mantain the draw of button pressed */
    if(actualPressed)
    {
-      actualPressed->Desenhar(1, wSurface);
+      actualPressed->draw(1, wSurface);
    }
 }
 

@@ -51,30 +51,20 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
                                               window->cara);
 
    /* Name and Selectors */
-   buttonPrevious = window->objects->InserirBotao(71,346,86,364,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 "<",0,NULL);
-   buttonNext = window->objects->InserirBotao(598,346,613,364,
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 ">",0,NULL);
+   buttonPrevious = window->objects->insertButton(71,346,86,364,"<",0);
+   buttonNext = window->objects->insertButton(598,346,613,364,">",0);
    textName = window->objects->InserirQuadroTexto(87,346,597,364,1, 
                                                   actualRace->name.c_str());
    textName->fonte = FMINI;
    textName->tamFonte = 1;
 
    /* Confirm Button */
-   buttonConfirm = window->objects->InserirBotao(543,370,613,389, 
-                                window->Cores.corBot.R,
-                                window->Cores.corBot.G,window->Cores.corBot.B,
-                                language.SKILL_CONFIRM.c_str(),1,NULL);
+   buttonConfirm = window->objects->insertButton(543,370,613,389,
+                                         language.SKILL_CONFIRM.c_str(),1);
    
    /* Cancel Button */
-   buttonCancel = window->objects->InserirBotao(8,370,78,389, 
-                                 window->Cores.corBot.R,
-                                 window->Cores.corBot.G,window->Cores.corBot.B,
-                                 language.SKILL_CANCEL.c_str(),1,NULL);
+   buttonCancel = window->objects->insertButton(8,370,78,389,
+                                               language.SKILL_CANCEL.c_str(),1);
 
    /* Open Skill Window */
    window->ptrExterno = &window;

@@ -95,10 +95,10 @@ class guiIO
 
       /*********************File*Window*******************************/
       janela* fileWindow;   /**< File Window */
-      botao* openButton;    /**< Open Button */
-      botao* saveButton;    /**< Save Button */
-      botao* exitButton;    /**< Exit Button */
-      botao* newButton;     /**< New Button */
+      button* openButton;    /**< Open Button */
+      button* saveButton;    /**< Save Button */
+      button* exitButton;    /**< Exit Button */
+      button* newButton;     /**< New Button */
       textBar* fileText; /**< FileName Text */
       void openFileWindow();
 
@@ -120,25 +120,25 @@ class guiIO
 
       /*********************Main*Window*******************************/
       janela* mainWindow;   /**< Main Window */
-      botao* terrainButton; /**< Terrain Edition Button */
-      botao* wallButton;    /**< Wall Edition Button */
-      botao* portalButton;  /**< Portal Edition Button */
-      botao* objectButton;  /**< Objects Edition Button */
-      botao* npcButton;     /**< NPC Editon Button */
-      botao* particleButton;/**< Particle Edit Button */
-      botao* lightButton;   /**< Light Edit Button */
-      botao* fogButton;     /**< Fog Button */
-      botao* destroyButton; /**< Destroy Button */
-      botao* optionsButton; /**< Options Button */
-      botao* musicButton;   /**< Music Button */
-      botao* sndFxButton;   /**< Sound Effects Button */
+      button* terrainButton; /**< Terrain Edition Button */
+      button* wallButton;    /**< Wall Edition Button */
+      button* portalButton;  /**< Portal Edition Button */
+      button* objectButton;  /**< Objects Edition Button */
+      button* npcButton;     /**< NPC Editon Button */
+      button* particleButton;/**< Particle Edit Button */
+      button* lightButton;   /**< Light Edit Button */
+      button* fogButton;     /**< Fog Button */
+      button* destroyButton; /**< Destroy Button */
+      button* optionsButton; /**< Options Button */
+      button* musicButton;   /**< Music Button */
+      button* sndFxButton;   /**< Sound Effects Button */
       void openMainWindow();
 
       /*********************Texture*Window*******************************/
       janela* textureWindow;
-      botao* texturePreviousButton;
-      botao* textureNextButton;
-      botao* textureInsertButton;
+      button* texturePreviousButton;
+      button* textureNextButton;
+      button* textureInsertButton;
       textBar* textureText;
       void openTextureWindow();
 
@@ -205,7 +205,7 @@ class guiIO
       textBar* fogDensity;             /**< Fog Density Text */
       textBar* fogStart;               /**< Fog Start Text */
       textBar* fogEnd;                 /**< Fog End Text */
-      botao* fogApplyButton;              /**< Fog Apply Button */
+      button* fogApplyButton;              /**< Fog Apply Button */
       void openFogWindow();               /**< Open Fog Window */
       
 };

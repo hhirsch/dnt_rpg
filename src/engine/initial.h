@@ -49,12 +49,12 @@ class initialScreen
       int result;      /**< Result of the initial Screen */
       bool done;
       
-      botao* buttonNew;
-      botao* buttonContinue;
-      botao* buttonSave;
-      botao* buttonLoad;
-      botao* buttonOptions;
-      botao* buttonExit;
+      button* buttonNew;
+      button* buttonContinue;
+      button* buttonSave;
+      button* buttonLoad;
+      button* buttonOptions;
+      button* buttonExit;
 };
 
 #endif

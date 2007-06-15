@@ -47,10 +47,10 @@ class aspectWindow
 
       character* usedCharacter;    /**< Pointer to the used character */
 
-      botao* buttonConfirm;         /**< Confirm Button */
-      botao* buttonCancel;          /**< Cancel Button */
-      botao* buttonNextImage;       /**< Next Image Button */
-      botao* buttonPreviousImage;   /**< Previous Image Button */
+      button* buttonConfirm;         /**< Confirm Button */
+      button* buttonCancel;          /**< Cancel Button */
+      button* buttonNextImage;       /**< Next Image Button */
+      button* buttonPreviousImage;   /**< Previous Image Button */
       textBar* textName;            /**< Character Name Text */
       textBar* textAge;             /**< Character Age Text */
       cxSel* cxSelSexM;             /**< Feminine Sex SelBox */

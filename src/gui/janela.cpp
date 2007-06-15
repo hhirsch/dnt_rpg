@@ -67,22 +67,16 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
                                    0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
 
    novo->objects = new Tlista;
-   botao* tmp;
-   tmp = novo->objects->InserirBotao(3,3,13,12,novo->Cores.corBot.R,
-                  novo->Cores.corBot.G,novo->Cores.corBot.B,"_",0,
-                  NULL);
+   button* tmp;
+   tmp = novo->objects->insertButton(3,3,13,12,"_",0);
    tmp->men = new menu();
    menu* men = (menu*) tmp->men;
    men->InserirMenuItem("Fechar",1);
    men->InserirMenuItem("-",0);
    men->InserirMenuItem("Maximizar",0);
    men->InserirMenuItem("Mover",0); 
-   novo->objects->InserirBotao(14,3,24,12,novo->Cores.corBot.R,
-                  novo->Cores.corBot.G,novo->Cores.corBot.B,"*",0,
-                  NULL);
-   novo->objects->InserirBotao(25,3,35,12,novo->Cores.corBot.R,
-                  novo->Cores.corBot.G,novo->Cores.corBot.B,"\36",0,
-                  NULL);
+   novo->objects->insertButton(14,3,24,12,"*",0);
+   novo->objects->insertButton(25,3,35,12,"\36",0);
    novo->type = GUI_WINDOW;
    InserirObj(novo);
    return(novo);
@@ -154,8 +148,8 @@ void janela::Desenhar(int mouseX, int mouseY)
       switch(obj->type)
       {
          case GUI_BUTTON:{
-              botao *b = (botao*) obj;   
-              b->Desenhar(0,this,0);
+              button *b = (button*) obj;   
+              b->draw(0,cara);
               break;
          }
          case GUI_TEXT_BAR:{

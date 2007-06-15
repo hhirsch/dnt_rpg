@@ -40,34 +40,22 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    //jan->movivel = 0;
    if(Status == ON_INIT)
    {
-      buttonNew = jan->objects->InserirBotao(30,20,98,38,jan->Cores.corBot.R, 
-                                 jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 language.INITIAL_NEW.c_str(),1,NULL);
+      buttonNew = jan->objects->insertButton(30,20,98,38,
+                                                language.INITIAL_NEW.c_str(),1);
    }
    else
    {
-      buttonContinue = jan->objects->InserirBotao(30,20,98,38,
-                                 jan->Cores.corBot.R, 
-                                 jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 language.INITIAL_CONTINUE.c_str(),
-                                 1,NULL);
+      buttonContinue = jan->objects->insertButton(30,20,98,38,
+                                           language.INITIAL_CONTINUE.c_str(),1);
    }
-   buttonSave = jan->objects->InserirBotao(30,40,98,58,jan->Cores.corBot.R, 
-                                 jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 language.INITIAL_SAVE.c_str(),
-                                 1,NULL);
-   buttonLoad = jan->objects->InserirBotao(30,60,98,78,jan->Cores.corBot.R, 
-                                 jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 language.INITIAL_LOAD.c_str(),
-                                 1,NULL);
-   buttonOptions = jan->objects->InserirBotao(30,80,98,98,jan->Cores.corBot.R, 
-                                 jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 language.INITIAL_OPTIONS.c_str(),
-                                 1,NULL);
-   buttonExit = jan->objects->InserirBotao(30,100,98,118,jan->Cores.corBot.R, 
-                                 jan->Cores.corBot.G,jan->Cores.corBot.B,
-                                 language.INITIAL_EXIT.c_str(),
-                                 1,NULL);
+   buttonSave = jan->objects->insertButton(30,40,98,58,
+                                           language.INITIAL_SAVE.c_str(),1);
+   buttonLoad = jan->objects->insertButton(30,60,98,78,
+                                               language.INITIAL_LOAD.c_str(),1);
+   buttonOptions = jan->objects->insertButton(30,80,98,98,
+                                            language.INITIAL_OPTIONS.c_str(),1);
+   buttonExit = jan->objects->insertButton(30,100,98,118,
+                                           language.INITIAL_EXIT.c_str(),1);
    gui->openWindow(jan);
 
    glDisable(GL_LIGHTING);

@@ -44,12 +44,12 @@ class skillWindow
       quadroTexto* txtPoints;        /**< Actual Points Text */
       quadroTexto* txtCosts;         /**< Actual Cost Text */
 
-      botao* buttonSum;
-      botao* buttonDec;
-      botao* buttonPrevious;
-      botao* buttonNext;
-      botao* buttonConfirm;
-      botao* buttonCancel;
+      button* buttonSum;
+      button* buttonDec;
+      button* buttonPrevious;
+      button* buttonNext;
+      button* buttonConfirm;
+      button* buttonCancel;
 
       figura*      skFig;            /**< Actual skill Image */
       lang language;                 /**< Language internationalization */ 

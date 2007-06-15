@@ -60,26 +60,26 @@ class options
 
       int timeLastOperation;       /**< Ticks when done last operation */
 
-      botao* buttonMusSum;
-      botao* buttonMusDec;
+      button* buttonMusSum;
+      button* buttonMusDec;
       
-      botao* buttonSndSum;
-      botao* buttonSndDec;
+      button* buttonSndSum;
+      button* buttonSndDec;
       
-      botao* buttonLangSum;
-      botao* buttonLangDec;
+      button* buttonLangSum;
+      button* buttonLangDec;
 
-      botao* buttonCamSum;
-      botao* buttonCamDec;
+      button* buttonCamSum;
+      button* buttonCamDec;
 
-      botao* buttonReflSum;
-      botao* buttonReflDec;
+      button* buttonReflSum;
+      button* buttonReflDec;
 
       cxSel* cxSelGrass;
       cxSel* cxSelParticles;
       
-      botao* buttonConfirm;
-      botao* buttonCancel;
+      button* buttonConfirm;
+      button* buttonCancel;
 
       /*! Get the Actual Language Name
        * \return the name of the language. */

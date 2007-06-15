@@ -23,7 +23,7 @@ textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto)
    lastChar='\0';
    cript = cripto;
    type = GUI_TEXT_BAR;
-   Cores.Iniciar();
+   Colors.Iniciar();
    text = text1;
 }
 
@@ -40,10 +40,10 @@ textBar::~textBar()
 void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
 {
    unsigned int maxCarac = ((x2-3)-(x1+3)) / (fonte_incCP()+1);
-   cor_Definir(Cores.corCont[2].R,Cores.corCont[2].G,Cores.corCont[2].B);
+   cor_Definir(Colors.corCont[2].R,Colors.corCont[2].G,Colors.corCont[2].B);
    retangulo_Colorir(screen,x1+1, y1+1, x2-1, y2-1,0);
    selFonte(FFARSO,ESQUERDA,1);
-   cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
+   cor_Definir(Colors.corCont[1].R,Colors.corCont[1].G,Colors.corCont[1].B);
    init = 0;
    if(pos+1>maxCarac) 
    {
@@ -76,9 +76,9 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
  ********************************************************************/
 void textBar::draw(SDL_Surface *screen)
 {
-   cor_Definir(Cores.corCont[0].R,Cores.corCont[0].G,Cores.corCont[0].B);
-   retangulo_2Cores(screen,x1,y1,x2,y2, Cores.corCont[1].R,
-                    Cores.corCont[1].G,Cores.corCont[1].B, 0);
+   cor_Definir(Colors.corCont[0].R,Colors.corCont[0].G,Colors.corCont[0].B);
+   retangulo_2Cores(screen,x1,y1,x2,y2, Colors.corCont[1].R,
+                    Colors.corCont[1].G,Colors.corCont[1].B, 0);
    putText(0,0,screen);
 }
 
