@@ -3,7 +3,7 @@
  */
 
 #include "button.h"
-#include "desenho.h"
+#include "draw.h"
 #include "janela.h"
 #include "fonte.h"
 
@@ -54,18 +54,22 @@ void button::draw(bool pres, SDL_Surface* screen )
       B1 = Colors.colorCont[0].B; 
    }
    
-   cor_Definir(Colors.colorButton.R, 
-                 Colors.colorButton.G,
-                 Colors.colorButton.B);
-   retangulo_Colorir(screen,x1+1,y1+1,x2-1,y2-1,0);
-   cor_Definir(R1,G1,B1);
+   color_Set(Colors.colorButton.R, 
+             Colors.colorButton.G,
+             Colors.colorButton.B);
+   rectangle_Fill(screen,x1+1,y1+1,x2-1,y2-1);
+   color_Set(R1,G1,B1);
    if(oval)
-      retangulo_Oval(screen,x1,y1,x2,y2,R2,B2,G2,0);
+   {
+      rectangle_Oval(screen,x1,y1,x2,y2,R2,B2,G2);
+   }
    else
-      retangulo_2Cores(screen,x1,y1,x2,y2,R2,B2,G2,0);
+   {
+      rectangle_2Colors(screen,x1,y1,x2,y2,R2,B2,G2);
+   }
 
    /* Write the Text */
-   cor_Definir(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
+   color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
    int ya=y1;
    int xa=x1;
    if(pres) 
@@ -83,7 +87,6 @@ void button::draw(bool pres, SDL_Surface* screen )
    }
    escxy(screen,xa,ya,getText().c_str());
    selFonte(FFARSO,ESQUERDA,1);
-   
 }
 
 /***********************************************************

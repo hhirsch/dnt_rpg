@@ -8,7 +8,7 @@
 
 #include <stdlib.h>
 #include <SDL/SDL.h>
-#include "desenho.h"
+#include "draw.h"
 #include "button.h"
 #include "color.h"
 #include "cxsel.h"

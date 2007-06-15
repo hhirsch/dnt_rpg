@@ -68,15 +68,15 @@ int escxy_Int(SDL_Surface *screen,int x,int y,const char* texto,int inic,
            {
               if (sobra % 2==1)
               {
-                 pixel_Desenhar(screen,x,y,0);
-                 if(Tamanho>1) pixel_Desenhar(screen,x+1,y,0);
-                 if(Tamanho>2) pixel_Desenhar(screen,x+1,y+1,0);
+                 pixel_Set(screen,x,y);
+                 if(Tamanho>1) pixel_Set(screen,x+1,y);
+                 if(Tamanho>2) pixel_Set(screen,x+1,y+1);
                  if (Tamanho>3)
                  {
-                    pixel_Desenhar(screen,x,y+1,0);
-                    pixel_Desenhar(screen,x+2,y+1,0);
-                    pixel_Desenhar(screen,x+2,y+2,0);
-                    pixel_Desenhar(screen,x+1,y+2,0);
+                    pixel_Set(screen,x,y+1);
+                    pixel_Set(screen,x+2,y+1);
+                    pixel_Set(screen,x+2,y+2);
+                    pixel_Set(screen,x+1,y+2);
                  }
               }
               sobra = sobra / 2;

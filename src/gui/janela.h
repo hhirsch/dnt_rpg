@@ -6,7 +6,7 @@
 #define _janela_h
 
 #include <stdlib.h>
-#include "desenho.h"
+#include "draw.h"
 #include "color.h"
 #include "fonte.h"
 #include "erro.h"

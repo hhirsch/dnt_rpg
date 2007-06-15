@@ -11,15 +11,15 @@ void atualizaCarga(SDL_Surface* img, GLuint* texturaTexto,
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDeleteTextures(1,texturaTexto);
-   cor_Definir(0,0,0);
-   retangulo_Colorir(img,0,0,255,31,0);
-   cor_Definir(200,20,20);
+   color_Set(0,0,0);
+   rectangle_Fill(img,0,0,255,31);
+   color_Set(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
    escxy(img,128,0,texto);
-   carregaTexturaRGBA(img,texturaTexto);
+   setTextureRGBA(img,texturaTexto);
    
-   AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
-   AtualizaTela2D(*texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
+   textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
+   textureToScreen(*texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
    glFlush();
    SDL_GL_SwapBuffers();
 }

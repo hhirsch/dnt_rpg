@@ -5,7 +5,7 @@
 
 #include "character.h"
 #include "dialog.h"
-#include "../gui/desenho.h"
+#include "../gui/draw.h"
 #include <SDL/SDL_image.h>
 
 /*********************************************************************

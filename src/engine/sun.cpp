@@ -2,7 +2,7 @@
 
 #include "sun.h"
 #include "util.h"
-#include "../gui/desenho.h"
+#include "../gui/draw.h"
 #include <stdio.h>
 
 /*********************************************************************
@@ -29,7 +29,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
    }
    else
    {
-      carregaTexturaRGBA(img,&sunTexture);
+      setTextureRGBA(img,&sunTexture);
       SDL_FreeSurface(img);
    }
 
@@ -40,7 +40,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
    }
    else
    {
-      carregaTexturaRGBA(img,&moonTexture);
+      setTextureRGBA(img,&moonTexture);
       SDL_FreeSurface(img);
    }
 

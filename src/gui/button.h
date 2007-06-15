@@ -12,7 +12,7 @@ using namespace std;
 
 #include "guiobject.h"
 #include "color.h"
-#include "desenho.h"
+#include "draw.h"
 #include "mouse.h"
 
 /*! The button class */

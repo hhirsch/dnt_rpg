@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-#include "../gui/desenho.h"
+#include "../gui/draw.h"
 #include "../gui/figura.h"
 #include "../gui/healthBar.h"
 #include "../classes/thing.h"

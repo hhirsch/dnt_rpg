@@ -11,7 +11,7 @@
 #include <string>
 using namespace std;
 #include "color.h"
-#include "desenho.h"
+#include "draw.h"
 #include "fonte.h"
 #include "string.h"
 #include "mouse.h"

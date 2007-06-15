@@ -559,7 +559,7 @@ int editor::insertTexture()
  
    Uint8 R,G,B;
    
-   Uint32 pixel = pixel_Pegar(imgPotencia,0,0);
+   Uint32 pixel = pixel_Get(imgPotencia,0,0);
    SDL_GetRGB(pixel,imgPotencia->format, &R, &G, &B);
    tex->R = R;
    tex->G = G;
@@ -571,7 +571,7 @@ int editor::insertTexture()
    {
       for(y=0; y < imgPotencia->h; y++)
       {
-         pixel = pixel_Pegar(imgPotencia,x,y);
+         pixel = pixel_Get(imgPotencia,x,y);
          SDL_GetRGB(pixel,imgPotencia->format, &R, &G, &B);
          tex->R = (tex->R+R) / 2;
          tex->G = (tex->G+G) / 2;

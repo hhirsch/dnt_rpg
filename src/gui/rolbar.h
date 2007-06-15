@@ -11,7 +11,7 @@ using namespace std;
 
 #include "guiobject.h"
 #include "color.h"
-#include "desenho.h"
+#include "draw.h"
 #include "mouse.h"
 #include "button.h"
 #include "quadtexto.h"

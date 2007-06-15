@@ -1,5 +1,5 @@
 #include "grass.h"
-#include "../gui/desenho.h"
+#include "../gui/draw.h"
 #include "../map/map.h"
 #include "../engine/util.h"
 

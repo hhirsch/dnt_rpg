@@ -1,7 +1,7 @@
 #include "sky.h"
 #include "util.h"
 #include "../map/map.h"
-#include "../gui/desenho.h"
+#include "../gui/draw.h"
 #include <math.h>
 
 /*********************************************************************
@@ -13,7 +13,7 @@ sky::sky()
    color[1] = 1.0;
    color[2] = 1.0;
    SDL_Surface* img = IMG_Load("../data/texturas/sky/skymap.png");
-   carregaTexturaRGBA(img, &skyMap);
+   setTextureRGBA(img, &skyMap);
 }
 
 /*********************************************************************

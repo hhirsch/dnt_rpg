@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-#include "desenho.h"
+#include "draw.h"
 #include "fonte.h"
 #include "color.h"
 #include "mouse.h"

@@ -1,5 +1,5 @@
 #include "tabbotao.h"
-#include "desenho.h"
+#include "draw.h"
 #include "mouse.h"
 
 tabButton::tabButton(int x,int y,const char* arquivo):figura(x,y,0,0,arquivo)
@@ -45,17 +45,17 @@ void tabButton::draw(int mouseX, int mouseY,
                       Xjan + x1 + Buttons[i].x2, Yjan + y1 + Buttons[i].y2,
                       mouseX, mouseY))
       {
-          cor_Definir(cor.colorCont[0].R,cor.colorCont[0].G,cor.colorCont[0].B);
-          retangulo_2Cores(screen,x1+Buttons[i].x1,y1+Buttons[i].y1,
-                           x1+Buttons[i].x2,y1+Buttons[i].y2,
-                           cor.colorCont[1].R,cor.colorCont[1].G,
-                           cor.colorCont[1].B,0);
+          color_Set(cor.colorCont[0].R,cor.colorCont[0].G,cor.colorCont[0].B);
+          rectangle_2Colors(screen,x1+Buttons[i].x1,y1+Buttons[i].y1,
+                            x1+Buttons[i].x2,y1+Buttons[i].y2,
+                            cor.colorCont[1].R,cor.colorCont[1].G,
+                            cor.colorCont[1].B);
       }
       else if(fig->fig == NULL)
       {
-         cor_Definir(cor.colorWindow.R, cor.colorWindow.G, cor.colorWindow.B);
-         retangulo_Desenhar(screen, x1+Buttons[i].x1,y1+Buttons[i].y1,
-                            x1+Buttons[i].x2,y1+Buttons[i].y2, 0);
+         color_Set(cor.colorWindow.R, cor.colorWindow.G, cor.colorWindow.B);
+         rectangle_Draw(screen, x1+Buttons[i].x1,y1+Buttons[i].y1,
+                        x1+Buttons[i].x2,y1+Buttons[i].y2);
       }
    }
 }

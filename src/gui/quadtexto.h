@@ -6,7 +6,7 @@
 #define _quadtexto_h
 
 #include "color.h"
-#include "desenho.h"
+#include "draw.h"
 #include "fonte.h"
 #include "guiobject.h"
 #include <string>

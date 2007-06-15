@@ -119,21 +119,21 @@ void janela::Desenhar(int mouseX, int mouseY)
    int dy = y2 - y1 + 1;
 
 
-   cor_Definir(Rjan,Gjan,Bjan);
-   retangulo_Colorir(cara, 3,3,dx-3,dy-3,0);
-   cor_Definir(Cores.colorCont[0].R,Cores.colorCont[0].G,Cores.colorCont[0].B);
-   retangulo_Desenhar(cara,0,0,dx-1,dy-1,0);
-   cor_Definir(Cores.colorButton.R,Cores.colorButton.G,Cores.colorButton.B);
-   retangulo_Desenhar(cara,1,1,dx-2,dy-2,0);
-   cor_Definir(Cores.colorCont[2].R,Cores.colorCont[2].G,Cores.colorCont[2].B);
-   linha_Desenhar(cara,2,13,dx-4,13,0);
-   cor_Definir(Cores.colorCont[0].R,Cores.colorCont[0].G,Cores.colorCont[0].B);
-   retangulo_2Cores(cara,2,2,dx-3,dy-3,
-                    Cores.colorCont[2].R,Cores.colorCont[2].G,Cores.colorCont[2].B,0);
-   cor_Definir(Cores.colorBar.R,Cores.colorBar.G,Cores.colorBar.B);
-   retangulo_Colorir(cara,25,3,dx-4,12,0);
+   color_Set(Rjan,Gjan,Bjan);
+   rectangle_Fill(cara, 3,3,dx-3,dy-3);
+   color_Set(Cores.colorCont[0].R,Cores.colorCont[0].G,Cores.colorCont[0].B);
+   rectangle_Draw(cara,0,0,dx-1,dy-1);
+   color_Set(Cores.colorButton.R,Cores.colorButton.G,Cores.colorButton.B);
+   rectangle_Draw(cara,1,1,dx-2,dy-2);
+   color_Set(Cores.colorCont[2].R,Cores.colorCont[2].G,Cores.colorCont[2].B);
+   line_Draw(cara,2,13,dx-4,13);
+   color_Set(Cores.colorCont[0].R,Cores.colorCont[0].G,Cores.colorCont[0].B);
+   rectangle_2Colors(cara,2,2,dx-3,dy-3,Cores.colorCont[2].R,
+                     Cores.colorCont[2].G,Cores.colorCont[2].B);
+   color_Set(Cores.colorBar.R,Cores.colorBar.G,Cores.colorBar.B);
+   rectangle_Fill(cara,25,3,dx-4,12);
    /* Escrita do Titulo */
-   cor_Definir(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
+   color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    if (!selFonte(FFARSO,ESQUERDA,1))
    {
       erro_Mensagem("Fonte farso.fnt nao encontrada!\n",3);
@@ -194,9 +194,9 @@ void janela::Desenhar(int mouseX, int mouseY)
 void janela::BarraInativa()
 {
    int dx = x2-x1;
-   cor_Definir(Cores.colorWindow.R,Cores.colorWindow.G,Cores.colorWindow.B);
-   retangulo_Colorir(cara,36,3,dx-3,12,0);
-   cor_Definir(0,0,0);
+   color_Set(Cores.colorWindow.R,Cores.colorWindow.G,Cores.colorWindow.B);
+   rectangle_Fill(cara,36,3,dx-3,12);
+   color_Set(0,0,0);
    selFonte(FFARSO,ESQUERDA,1);
    escxy(cara,39,-2,texto.c_str());
 }
@@ -204,9 +204,9 @@ void janela::BarraInativa()
 void janela::BarraAtiva()
 {
    int dx = x2-x1;
-   cor_Definir(Cores.colorBar.R,Cores.colorBar.G,Cores.colorBar.B);
-   retangulo_Colorir(cara,36,3,dx-3,12,0);
-   cor_Definir(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
+   color_Set(Cores.colorBar.R,Cores.colorBar.G,Cores.colorBar.B);
+   rectangle_Fill(cara,36,3,dx-3,12);
+   color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    selFonte(FFARSO,ESQUERDA,1);
    escxy(cara,39,-2,texto.c_str());
 }

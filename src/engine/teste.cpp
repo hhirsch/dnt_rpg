@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 
    /* Load backImage */
    SDL_Surface* img = IMG_Load("../data/texturas/inicio.png");
-   carregaTextura(img,&tituloID);
+   setTexture(img,&tituloID);
    SDL_FreeSurface(img);
 
    /* Call Initial Screen */

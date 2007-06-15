@@ -3,33 +3,40 @@
  */
 
 
-#include "desenho.h"
+#include "draw.h"
 #include <SDL/SDL_opengl.h>
 #include <GL/glu.h>
 
 
-int R; int G; int B; /* Cores RGB atualmente setadas */
+int R;  /**< Active Red color */
+int G;  /**< Active Green Color */
+int B;  /**< Active Blue Color */
 
-/* Define a cor a ser utilizada */
-void cor_Definir(Uint8 Ri, Uint8 Gi, Uint8 Bi)
+
+/******************************************************************
+ *                            color_Set                           *
+ ******************************************************************/
+void color_Set(Uint8 Ri, Uint8 Gi, Uint8 Bi)
 {
    R = Ri;
    G = Gi;
    B = Bi;
 }
 
-
-/* Pega a cor atualmente utilizada */
-void cor_Pegar(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi)
+/******************************************************************
+ *                            color_Get                           *
+ ******************************************************************/
+void color_Get(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi)
 {
    *Ri = R;
    *Gi = G;
    *Bi = B;
 }
 
-
-/* Desenha um pixel em screen com coloracao em RGB */
-void pixel_Desenhar(SDL_Surface *screen, int x, int y, int salvar)
+/******************************************************************
+ *                            pixel_Set                           *
+ ******************************************************************/
+void pixel_Set(SDL_Surface *screen, int x, int y)
 {
     Uint32 color = SDL_MapRGB(screen->format, R, G, B);
 
@@ -76,20 +83,25 @@ void pixel_Desenhar(SDL_Surface *screen, int x, int y, int salvar)
         }
         break;
     }
-    if ( SDL_MUSTLOCK(screen) ) {
-        SDL_UnlockSurface(screen);
+    if ( SDL_MUSTLOCK(screen) ) 
+    {
+       SDL_UnlockSurface(screen);
     }
 }
 
-
-/* Arredondamento para o calculo da linha */
+/******************************************************************
+ *                              round                             *
+ ******************************************************************/
 inline int round(const float a)
 {
+   /* Used to the line draw function */
    return (int)(a+0.5);
 }
 
-/* Desenha a linha de inicio (x1,y1) e fim (x2,y2) na tela */
-void linha_Desenhar(SDL_Surface *screen, int x1, int y1, int x2, int y2, int salvar)
+/******************************************************************
+ *                            line_Draw                           *
+ ******************************************************************/
+void line_Draw(SDL_Surface *screen, int x1, int y1, int x2, int y2)
 {
    int dx = x2 - x1;
    int dy = y2 - y1;
@@ -101,45 +113,46 @@ void linha_Desenhar(SDL_Surface *screen, int x1, int y1, int x2, int y2, int sal
       passos = (int) fabs(dy);
    xInc = (float) (dx) / (float) (passos);
    yInc = (float) (dy) / (float) (passos);
-   pixel_Desenhar(screen, round(x), round(y), 0);
+   pixel_Set(screen, round(x), round(y));
    for(k=0;k<passos;k++)
    {
       x+=xInc;
       y+=yInc;
-      pixel_Desenhar(screen, round(x), round(y), 0);
+      pixel_Set(screen, round(x), round(y));
    }
 }
 
-
-/* Desenha o retangulo (x1,y1,x2,y2) na tela (screen) */
-void retangulo_Desenhar(SDL_Surface *screen, int x1, int y1, int x2, int y2, int salvar)
+/******************************************************************
+ *                         rectangle_Draw                         *
+ ******************************************************************/
+void rectangle_Draw(SDL_Surface *screen, int x1, int y1, int x2, int y2)
 {
-    linha_Desenhar(screen,x1,y1,x2,y1,0);
-    linha_Desenhar(screen,x1,y2,x2,y2,0);
-    linha_Desenhar(screen,x1,y1,x1,y2,0);
-    linha_Desenhar(screen,x2,y1,x2,y2,0);
+    line_Draw(screen,x1,y1,x2,y1);
+    line_Draw(screen,x1,y2,x2,y2);
+    line_Draw(screen,x1,y1,x1,y2);
+    line_Draw(screen,x2,y1,x2,y2);
 }
 
-
-void retangulo_2Cores(SDL_Surface *screen, int x1, int y1, int x2, int y2, int Ri,int Gi, int Bi, int salvar)
+/******************************************************************
+ *                        rectangle_2Colors                       *
+ ******************************************************************/
+void rectangle_2Colors(SDL_Surface *screen, int x1, int y1, int x2, int y2, 
+                       int Ri,int Gi, int Bi)
 {
     Uint8 Ra,Ga,Ba;
-    cor_Pegar(&Ra,&Ga,&Ba);
-    linha_Desenhar(screen,x1,y1,x2,y1,0);
-    linha_Desenhar(screen,x1,y1,x1,y2,0);
-    cor_Definir(Ri,Gi,Bi);
-    linha_Desenhar(screen,x1,y2,x2,y2,0);
-    linha_Desenhar(screen,x2,y1,x2,y2,0);
-    cor_Definir(Ra,Ga,Ba);
+    color_Get(&Ra,&Ga,&Ba);
+    line_Draw(screen,x1,y1,x2,y1);
+    line_Draw(screen,x1,y1,x1,y2);
+    color_Set(Ri,Gi,Bi);
+    line_Draw(screen,x1,y2,x2,y2);
+    line_Draw(screen,x2,y1,x2,y2);
+    color_Set(Ra,Ga,Ba);
 }
 
-
-
-/*
- * Return the pixel value at (x, y)
- * NOTE: The surface must be locked before calling this!
- */
-Uint32 pixel_Pegar(SDL_Surface *surface, int x, int y)
+/******************************************************************
+ *                            pixel_Get                           *
+ ******************************************************************/
+Uint32 pixel_Get(SDL_Surface *surface, int x, int y)
 {
     int bpp = surface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to retrieve */
@@ -166,8 +179,10 @@ Uint32 pixel_Pegar(SDL_Surface *surface, int x, int y)
     }
 }
 
-/* Desenha um Retangulo Colorido */
-void retangulo_Colorir(SDL_Surface *screen, int x1, int y1, int x2, int y2, int salvar)
+/******************************************************************
+ *                         rectangle_Fill                         *
+ ******************************************************************/
+void rectangle_Fill(SDL_Surface *screen, int x1, int y1, int x2, int y2)
 {
    SDL_Rect ret;
    ret.x = x1;
@@ -175,8 +190,10 @@ void retangulo_Colorir(SDL_Surface *screen, int x1, int y1, int x2, int y2, int 
    ret.w = (x2 - x1)+1;
    ret.h = (y2 - y1)+1;
    Uint32 cor = SDL_MapRGB(screen->format,R,G,B);
-   if ( SDL_MUSTLOCK(screen) ) {
-        if ( SDL_LockSurface(screen) < 0 ) {
+   if ( SDL_MUSTLOCK(screen) ) 
+   {
+        if ( SDL_LockSurface(screen) < 0 ) 
+        {
             return;
         }
     }
@@ -187,12 +204,14 @@ void retangulo_Colorir(SDL_Surface *screen, int x1, int y1, int x2, int y2, int 
    }
 }
 
-
-/* Desenha um Retangulo Oval */
-void retangulo_Oval(SDL_Surface *screen, int x1, int y1, int x2, int y2, int Ri, int Gi, int Bi, int salvar)
+/******************************************************************
+ *                         rectangle_Oval                         *
+ ******************************************************************/
+void rectangle_Oval(SDL_Surface *screen, int x1, int y1, int x2, int y2, 
+                    int Ri, int Gi, int Bi)
 {
    Uint8 Ra,Ga,Ba;
-   cor_Pegar(&Ra,&Ga,&Ba);
+   color_Get(&Ra,&Ga,&Ba);
    if (x2<x1)
    { 
       int aux = x1;
@@ -205,29 +224,30 @@ void retangulo_Oval(SDL_Surface *screen, int x1, int y1, int x2, int y2, int Ri,
       y1 = y2;
       y2 = aux;
    }
-   linha_Desenhar(screen,x1,y1+2,x1+2,y1,0);
-   linha_Desenhar(screen,x1+2,y1,x2-2,y1,0);
-   linha_Desenhar(screen,x1,y1+2,x1,y2-2,0);
-   cor_Definir(Ri,Gi,Bi);
-   linha_Desenhar(screen,x1,y2-2,x1+2,y2,0);
-   linha_Desenhar(screen,x1+2,y2,x2-2,y2,0);
-   linha_Desenhar(screen,x2-2,y2,x2,y2-2,0);
-   linha_Desenhar(screen,x2,y2-2,x2,y1+2,0);
-   linha_Desenhar(screen,x2-2,y1,x2,y1+2,0);
-   cor_Definir(Ra,Ga,Ba);
+   line_Draw(screen,x1,y1+2,x1+2,y1);
+   line_Draw(screen,x1+2,y1,x2-2,y1);
+   line_Draw(screen,x1,y1+2,x1,y2-2);
+   color_Set(Ri,Gi,Bi);
+   line_Draw(screen,x1,y2-2,x1+2,y2);
+   line_Draw(screen,x1+2,y2,x2-2,y2);
+   line_Draw(screen,x2-2,y2,x2,y2-2);
+   line_Draw(screen,x2,y2-2,x2,y1+2);
+   line_Draw(screen,x2-2,y1,x2,y1+2);
+   color_Set(Ra,Ga,Ba);
 }
 
-
-/* Desenha Circulo de raio r e centro (Xc,Yc) */
-void circulo_Desenhar(SDL_Surface *screen,int xC, int yC, int r, int salvar)
+/******************************************************************
+ *                          circle_Draw                           *
+ ******************************************************************/
+void circle_Draw(SDL_Surface *screen,int xC, int yC, int r)
 {
    int x=0, y=r,u=1,v=2*r-1,E=0;
    while(x < y)
    {
-     pixel_Desenhar(screen,xC+x, yC+y, 0);
-     pixel_Desenhar(screen,xC+y, yC-x, 0);
-     pixel_Desenhar(screen,xC-x, yC-y, 0);
-     pixel_Desenhar(screen,xC-y, yC+x, 0);
+     pixel_Set(screen,xC+x, yC+y);
+     pixel_Set(screen,xC+y, yC-x);
+     pixel_Set(screen,xC-x, yC-y);
+     pixel_Set(screen,xC-y, yC+x);
      x++; E+= u; u+=2;
      if (v < 2 * E)
      {
@@ -237,31 +257,16 @@ void circulo_Desenhar(SDL_Surface *screen,int xC, int yC, int r, int salvar)
       }
       if (x > y)
          break;
-      pixel_Desenhar(screen,xC+y, yC+x, 0);
-      pixel_Desenhar(screen,xC+x, yC-y, 0);
-      pixel_Desenhar(screen,xC-y, yC-x, 0);
-      pixel_Desenhar(screen,xC-x, yC+y, 0);
+      pixel_Set(screen,xC+y, yC+x);
+      pixel_Set(screen,xC+x, yC-y);
+      pixel_Set(screen,xC-y, yC-x);
+      pixel_Set(screen,xC-x, yC+y);
    }
 }
 
-
-void hexagono_Desenhar(SDL_Surface *screen, int x,int y, int lado, int salvar)
-{
-   int aux, auy;
-   //Para dar a perspectiva, o angulo da esquerda passa a ser de 30,
-   //ao invez de 60, que seria o habitual
-   aux = (int)( lado * RAIZ3D2);
-   auy = (lado/2);
-   //Parte de Cima
-   linha_Desenhar(screen,x,y,x+aux,y-auy,0);
-   linha_Desenhar(screen,x+aux,y-auy,x+aux+lado,y-auy,0);
-   linha_Desenhar(screen,x+aux+lado,y-auy,x+lado+2*aux,y,0);
-   //Parte de Baixo
-   linha_Desenhar(screen,x+lado+2*aux,y,x+aux+lado,y+auy,0);
-   linha_Desenhar(screen,x+aux+lado,y+auy,x+aux,y+auy,0);
-   linha_Desenhar(screen,x+aux,y+auy,x,y,0);
-}
-
+/******************************************************************
+ *                      smallestPowerOfTwo                        *
+ ******************************************************************/
 int smallestPowerOfTwo(int num)
 {
    int i = 2;
@@ -272,26 +277,23 @@ int smallestPowerOfTwo(int num)
    return(i);
 }
 
-
-void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16], 
-                    GLint viewPort[4],int xa, int ya, int xb, int yb, 
-                    double profundidade)
+/******************************************************************
+ *                         textureToScreen                        *
+ ******************************************************************/
+void textureToScreen(GLuint texturaID, GLdouble proj[16],GLdouble modl[16], 
+                     GLint viewPort[4],int xa, int ya, int xb, int yb, 
+                     double depth)
 {
-       
-
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
-   GLfloat xOverlay = (GLfloat) (xb-xa+1) / (GLfloat)smallestPowerOfTwo(xb-xa+1);
-   GLfloat yOverlay = (GLfloat) (yb-ya+1) / (GLfloat)smallestPowerOfTwo(yb-ya+1);
+   GLfloat xOverlay = (GLfloat) (xb-xa+1)/(GLfloat)smallestPowerOfTwo(xb-xa+1);
+   GLfloat yOverlay = (GLfloat) (yb-ya+1)/(GLfloat)smallestPowerOfTwo(yb-ya+1);
    
-   gluUnProject(xa,(599-ya), profundidade, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject(xa,(599-yb-1),profundidade, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject(xb+1, (599-yb-1), profundidade, modl, proj, viewPort, 
+   gluUnProject(xa,(599-ya), depth, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject(xa,(599-yb-1),depth, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(xb+1, (599-yb-1), depth, modl, proj, viewPort, 
                 &x3, &y3, &z3);
-   gluUnProject(xb+1,(599-ya),profundidade, modl, proj, viewPort, &x4, &y4, &z4);
-
-
-   //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+   gluUnProject(xb+1,(599-ya),depth, modl, proj, viewPort, &x4, &y4, &z4);
 
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texturaID);
@@ -311,18 +313,12 @@ void AtualizaTela2D(GLuint texturaID, GLdouble proj[16],GLdouble modl[16],
    glEnd();
 
    glDisable(GL_TEXTURE_2D);
-
-/*   glFlush();
-   SDL_GL_SwapBuffers();*/
-
-   //glDeleteTextures(1,&texturaID);
-
 }
 
 /*********************************************************************
- *                     Aloca uma Textura no OPENGL                   *
+ *                             setTexture                            *
  *********************************************************************/
-void carregaTextura(SDL_Surface* img, GLuint* textID)
+void setTexture(SDL_Surface* img, GLuint* textID)
 {
    glGenTextures(1,textID);
    glBindTexture(GL_TEXTURE_2D,*textID);
@@ -354,7 +350,10 @@ void carregaTextura(SDL_Surface* img, GLuint* textID)
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 }
 
-void carregaTexturaRGBA(SDL_Surface* img, GLuint* textID)
+/******************************************************************
+ *                          setTextureRGBA                        *
+ ******************************************************************/
+void setTextureRGBA(SDL_Surface* img, GLuint* textID)
 {
    glGenTextures(1,textID);
    glBindTexture(GL_TEXTURE_2D,*textID);

@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "color.h"
-#include "desenho.h"
+#include "draw.h"
 #include "fonte.h"
 #include "mouse.h"
 #include "guiobject.h"

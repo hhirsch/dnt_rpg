@@ -1779,19 +1779,18 @@ void Map::drawMinimap(SDL_Surface* img)
    {
       for(X = iX; X < limX; X++)
       {
-          cor_Definir(MapSquares[X][Z].R,
+          color_Set(MapSquares[X][Z].R,
                       MapSquares[X][Z].G,
                       MapSquares[X][Z].B);
-          retangulo_Colorir(img, x1, y1, 
-                            x1+SQUAREMINISIZE-1, y1+SQUAREMINISIZE-1, 0);
+          rectangle_Fill(img, x1,y1,x1+SQUAREMINISIZE-1,y1+SQUAREMINISIZE-1);
           x1+=SQUAREMINISIZE;
       }
       x1 = 0;
       y1+=SQUAREMINISIZE;
    }
 
-   cor_Definir(1, 1, 1);
-   retangulo_2Cores(img,0,0,sX*SQUAREMINISIZE-1,sZ*SQUAREMINISIZE-1,0,0,0,0);
+   color_Set(1, 1, 1);
+   rectangle_2Colors(img,0,0,sX*SQUAREMINISIZE-1,sZ*SQUAREMINISIZE-1,0,0,0);
    
    muro* maux = muros;
    while(maux!=NULL)
@@ -1805,8 +1804,8 @@ void Map::drawMinimap(SDL_Surface* img)
           x2 = x1;
        else 
           y2 = y1;
-       cor_Definir(255,40,30);
-       linha_Desenhar(img, x1,y1,x2,y2, 0);
+       color_Set(255,40,30);
+       line_Draw(img, x1,y1,x2,y2);
        maux = maux->proximo;
    }
 

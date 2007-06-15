@@ -77,7 +77,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          glClearColor(0,0,0,1);
          glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         AtualizaTela2D(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
+         textureToScreen(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
          object = gui->manipulateEvents(x,y,Mbotao,keys, &eventInfo);
          if(eventInfo != NADA)
          {

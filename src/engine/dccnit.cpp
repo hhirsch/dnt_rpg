@@ -174,11 +174,11 @@ void engine::InformationScreen()
    SDL_Surface* img = IMG_Load(language.TEXTURE_INFORMATION.c_str());
 
    GLuint texturaInfo;
-   carregaTexturaRGBA(img,&texturaInfo);
+   setTextureRGBA(img,&texturaInfo);
 
    glDisable(GL_LIGHTING);
    AtualizaFrustum(visibleMatrix,proj,modl);
-   AtualizaTela2D(texturaInfo,proj,modl,viewPort,272,44,527,555,0.0001);
+   textureToScreen(texturaInfo,proj,modl,viewPort,272,44,527,555,0.0001);
    glEnable(GL_LIGHTING);
    glFlush();
    SDL_GL_SwapBuffers();
@@ -251,7 +251,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Initializing Load Screen*/
    GLuint texturaCarga;
-   carregaTextura(fig,&texturaCarga);
+   setTexture(fig,&texturaCarga);
    SDL_FreeSurface(fig);
    
 
@@ -259,19 +259,19 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                        256,32,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    
-   cor_Definir(0,0,0);
-   retangulo_Colorir(img,0,0,255,31,0);
-   cor_Definir(200,20,20);
+   color_Set(0,0,0);
+   rectangle_Fill(img,0,0,255,31);
+   color_Set(200,20,20);
    selFonte(FFARSO,CENTRALIZADO,3);
    sprintf(texto,language.LOAD_MAP.c_str(),arqMapa.c_str());
    escxy(img,128,0,texto);
    GLuint texturaTexto;
-   carregaTexturaRGBA(img,&texturaTexto);
+   setTextureRGBA(img,&texturaTexto);
    fadeInTexture(texturaCarga, 272,236,527,363);
 
    AtualizaFrustum(visibleMatrix,proj,modl);
-   AtualizaTela2D(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
-   AtualizaTela2D(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
+   textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
+   textureToScreen(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
    glFlush();
    SDL_GL_SwapBuffers();
 
@@ -502,7 +502,7 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2)
               | GL_STENCIL_BUFFER_BIT);
       AtualizaFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
-      AtualizaTela2D(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
+      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -522,7 +522,7 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2)
               | GL_STENCIL_BUFFER_BIT);
       AtualizaFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
-      AtualizaTela2D(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
+      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -544,7 +544,7 @@ void engine::SplashScreen()
    AtualizaFrustum(visibleMatrix,proj,modl);
    SDL_Surface* img = IMG_Load("../data/texturas/inicio1.png"); 
    glDisable(GL_LIGHTING);
-   carregaTexturaRGBA(img,&id);
+   setTextureRGBA(img,&id);
    SDL_FreeSurface(img);
 
    /* Fade In Screen */
@@ -625,7 +625,7 @@ int engine::OptionsScreen(GLuint idTextura)
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbutton = SDL_GetMouseState(&x,&y);
          object = interf->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
-         AtualizaTela2D(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
+         textureToScreen(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          glPushMatrix();
             draw2DMode();
             interf->draw(proj,modl,viewPort);
@@ -718,7 +718,7 @@ int engine::CharacterScreen(GLuint idTextura)
          Uint8 Mbutton = SDL_GetMouseState(&x,&y);
          object = gui->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
 
-         AtualizaTela2D(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
+         textureToScreen(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
          glPushMatrix();
             draw2DMode();
             gui->draw(proj,modl,viewPort);
@@ -2896,7 +2896,7 @@ void engine::showImage(string fileName)
    Uint8 mButton = 0;
    SDL_Surface* img = IMG_Load(fileName.c_str()); 
    glDisable(GL_LIGHTING);
-   carregaTexturaRGBA(img,&id);
+   setTextureRGBA(img,&id);
    SDL_FreeSurface(img);
 
    fadeInTexture(id,0,0,799,599);

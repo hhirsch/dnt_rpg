@@ -18,7 +18,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "glm.h"
-#include "../gui/desenho.h"
+#include "../gui/draw.h"
 
 /* Some <math.h> files do not define M_PI... */
 #ifndef M_PI

@@ -43,11 +43,11 @@ void selTexto::draw(int selectedItem, SDL_Surface *screen)
       {
          if(aux!=selectedItem)
          {
-            cor_Definir(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
+            color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
          }
          else
          {
-            cor_Definir(Cores.colorSelText.R,Cores.colorSelText.G,
+            color_Set(Cores.colorSelText.R,Cores.colorSelText.G,
                         Cores.colorSelText.B);
          }
          ya = escxy_Area(screen,4+x1,ya,text[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
@@ -55,10 +55,9 @@ void selTexto::draw(int selectedItem, SDL_Surface *screen)
      y[aux] = ya;
      ya += 11;
    }
-   cor_Definir(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
-   retangulo_2Cores(screen,x1,y1,x2,y2,
-                    Cores.colorCont[0].R,Cores.colorCont[0].G,
-                    Cores.colorCont[0].B,0);
+   color_Set(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
+   rectangle_2Colors(screen,x1,y1,x2,y2,Cores.colorCont[0].R,
+                     Cores.colorCont[0].G,Cores.colorCont[0].B);
    y2 = ya+2;
 }
 
@@ -72,7 +71,7 @@ void selTexto::writeSelected(int selectedItem, SDL_Surface *screen)
    if(selectedItem != -1)
    {
       aux = selectedItem;
-      cor_Definir(Cores.colorSelText.R,Cores.colorSelText.G,
+      color_Set(Cores.colorSelText.R,Cores.colorSelText.G,
                   Cores.colorSelText.B);
       if(selectedItem == 0)
          ya = y1+3;
@@ -87,7 +86,7 @@ void selTexto::writeSelected(int selectedItem, SDL_Surface *screen)
          ya = y1+3;
       else
          ya = y[selec-1]+11;
-      cor_Definir(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
+      color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    }
    selFonte(FHELVETICA,ESQUERDA,1);
    escxy_Area(screen,4+x1,ya,text[aux].c_str(),

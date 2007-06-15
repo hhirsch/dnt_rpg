@@ -6,7 +6,7 @@
 #ifndef _cxsel_h
 #define _cxsel_h
 
-#include "desenho.h"
+#include "draw.h"
 #include "guiobject.h"
 #include "color.h"
 

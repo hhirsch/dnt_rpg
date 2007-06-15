@@ -6,7 +6,7 @@
 #ifndef _figura_h
 #define _figura_h
 
-#include "desenho.h"
+#include "draw.h"
 #include "erro.h"
 #include "guiobject.h"
 

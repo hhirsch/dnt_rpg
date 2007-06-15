@@ -5,7 +5,7 @@
 #ifndef _fonte_h
 #define _fonte_h
 
-#include "desenho.h"
+#include "draw.h"
 #include <string.h>
 
 #include <string>
