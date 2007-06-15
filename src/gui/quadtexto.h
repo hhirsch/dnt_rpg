@@ -5,7 +5,7 @@
 #ifndef _quadtexto_h
 #define _quadtexto_h
 
-#include "cores.h"
+#include "color.h"
 #include "desenho.h"
 #include "fonte.h"
 #include "guiobject.h"
@@ -22,7 +22,7 @@ class quadroTexto: public guiObject
       int x1,y1,x2,y2;     /* Coordenadas da Janela */
       int moldura;         /* 1, moldura e fundo, 2 so moldura */
       string texto;        /* Texto Escrito */
-      cores Cores;
+      farso_colors Cores;
       string fonte;
       int aliFonte;
       int tamFonte;

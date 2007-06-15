@@ -6,7 +6,7 @@
 #define _tabbotao_h
 
 #include "figura.h"
-#include "cores.h"
+#include "color.h"
 
 #define MAX_TABBUTTONS      20 /**< Max Buttons per table of buttons */
 #define TABBUTTON_NONE       0 /**< No Action */
@@ -74,7 +74,7 @@ class tabButton: public figura
       int numButtons;                       /**< Number of active buttons */
       oneTabButton Buttons[MAX_TABBUTTONS]; /**< Buttons Vector */
       bool pressed;                         /**< Internal Verifier on Treat */
-      cores cor;
+      farso_colors cor;
 };
 
 

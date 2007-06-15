@@ -134,7 +134,6 @@ cxSel* Tlista::insertCxSel(int xa,int ya, bool selected)
    novo->y = ya;
    novo->setSelection(selected);
    novo->type = GUI_SEL_BOX;
-   novo->Colors.Iniciar();
    InserirObj(novo);
    return(novo);
 }
@@ -195,7 +194,6 @@ quadroTexto* Tlista::InserirQuadroTexto(int xa,int ya,int xb,int yb,
    novo->fonte = FHELVETICA;
    novo->tamFonte = 1;
    novo->aliFonte = ESQUERDA;
-   novo->Cores.Iniciar();
    InserirObj(novo);
    return(novo);
 } 

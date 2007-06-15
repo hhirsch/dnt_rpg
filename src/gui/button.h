@@ -11,7 +11,7 @@
 using namespace std;
 
 #include "guiobject.h"
-#include "cores.h"
+#include "color.h"
 #include "desenho.h"
 #include "mouse.h"
 
@@ -52,8 +52,8 @@ class button: public guiObject
                                           activated when button presses) */
 
    protected:
-      bool oval;        /**< Oval Button?  */
-      cores Colors;     /**< Colors */
+      bool oval;            /**< Oval Button?  */
+      farso_colors Colors;  /**< Colors */
 };
 
 #endif

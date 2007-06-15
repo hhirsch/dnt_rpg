@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include "desenho.h"
-#include "cores.h"
+#include "color.h"
 #include "fonte.h"
 #include "erro.h"
 #include "guiobject.h"
@@ -34,7 +34,7 @@ class janela: public guiObject
       int movivel;
       int difx;                  /* Diferenca de qdo o mouse clicou */
       int dify;                  /* No momento de inicio da movimentacao */
-      cores Cores;
+      farso_colors Cores;
       janela **ptrExterno;       /* Ponteiro pro Ponteiro externo da Janela */
                                  /* Procedimento na ativacao */
       void (*procAtiva)(janela* jan, SDL_Surface *screen);

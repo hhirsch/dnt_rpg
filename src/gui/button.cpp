@@ -5,7 +5,6 @@
 #include "button.h"
 #include "desenho.h"
 #include "janela.h"
-#include "cores.h"
 #include "fonte.h"
 
 /***********************************************************
@@ -20,7 +19,6 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval )
    text = txt;
    oval = isOval;
    men = NULL;
-   Colors.Iniciar();
 }
 
 /***********************************************************
@@ -38,24 +36,26 @@ void button::draw(bool pres, SDL_Surface* screen )
    int R1,R2,G1,G2,B1,B2; 
    if(pres) 
    {
-      R1 = Colors.corCont[1].R;
-      G1 = Colors.corCont[1].G;
-      B1 = Colors.corCont[1].B;
-      R2 = Colors.corCont[0].R;
-      G2 = Colors.corCont[0].G;
-      B2 = Colors.corCont[0].B;
+      R1 = Colors.colorCont[1].R;
+      G1 = Colors.colorCont[1].G;
+      B1 = Colors.colorCont[1].B;
+      R2 = Colors.colorCont[0].R;
+      G2 = Colors.colorCont[0].G;
+      B2 = Colors.colorCont[0].B;
    }
    else
    {
-      R2 = Colors.corCont[1].R;
-      G2 = Colors.corCont[1].G;
-      B2 = Colors.corCont[1].B;
-      R1 = Colors.corCont[0].R;
-      G1 = Colors.corCont[0].G;
-      B1 = Colors.corCont[0].B; 
+      R2 = Colors.colorCont[1].R;
+      G2 = Colors.colorCont[1].G;
+      B2 = Colors.colorCont[1].B;
+      R1 = Colors.colorCont[0].R;
+      G1 = Colors.colorCont[0].G;
+      B1 = Colors.colorCont[0].B; 
    }
    
-   cor_Definir(Colors.corBot.R,Colors.corBot.G,Colors.corBot.B);
+   cor_Definir(Colors.colorButton.R, 
+                 Colors.colorButton.G,
+                 Colors.colorButton.B);
    retangulo_Colorir(screen,x1+1,y1+1,x2-1,y2-1,0);
    cor_Definir(R1,G1,B1);
    if(oval)
@@ -64,7 +64,7 @@ void button::draw(bool pres, SDL_Surface* screen )
       retangulo_2Cores(screen,x1,y1,x2,y2,R2,B2,G2,0);
 
    /* Write the Text */
-   cor_Definir(Colors.corTexto.R,Colors.corTexto.G,Colors.corTexto.B);
+   cor_Definir(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
    int ya=y1;
    int xa=x1;
    if(pres) 

@@ -8,7 +8,7 @@
 
 #include "desenho.h"
 #include "guiobject.h"
-#include "cores.h"
+#include "color.h"
 
 /*! Selection Box Class */
 class cxSel: public guiObject
@@ -16,7 +16,6 @@ class cxSel: public guiObject
    public:
       int x,                 /**< X Window Coordinate */
           y;                 /**< Y Window Coordinate */
-      cores Colors;          /**< Colors of the object */
 
       /*! Constructor */
       cxSel();
@@ -36,6 +35,7 @@ class cxSel: public guiObject
       void setSelection(bool value);
 
    private:
+      farso_colors Colors;   /**< Colors of the object */
       bool selected;         /**< True if selected, false otherwise  */
       GLuint lastChangeTime; /**< Last time when box was changed */
 

@@ -8,7 +8,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "cores.h"
+#include "color.h"
 #include "desenho.h"
 #include "fonte.h"
 #include "mouse.h"
@@ -59,7 +59,7 @@ class textBar: public guiObject
       unsigned int pos;    /**< Current cursor position */
       int lastWrite;       /**< Last time when write */
       string lastChar;     /**< Last Character writed */
-      cores Colors;        /**< Internal Colors */   
+      farso_colors Colors; /**< Internal Colors */   
 };
  
 #endif

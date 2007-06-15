@@ -37,7 +37,6 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
    novo->procPres = procPres;
    novo->procFechar = NULL;
    novo->ptrExterno = NULL;
-   novo->Cores.Iniciar();
    novo->x1 = xa;
    novo->x2 = xb;
    novo->y1 = ya;
@@ -47,15 +46,15 @@ janela* Ljanela::InserirJanela(int xa,int ya,int xb,int yb,const char *text,
    novo->texto = text;
    novo->maximiz = maximiz;
    novo->redmens = redmens;
-   novo->Rjan = novo->Cores.corJan.R;
-   novo->Gjan = novo->Cores.corJan.G;
-   novo->Bjan = novo->Cores.corJan.B;
-   novo->Rbar = novo->Cores.corBarra.R;
-   novo->Gbar = novo->Cores.corBarra.G;
-   novo->Bbar = novo->Cores.corBarra.B;
-   novo->Rtxt = novo->Cores.corTexto.R;
-   novo->Gtxt = novo->Cores.corTexto.G;
-   novo->Btxt = novo->Cores.corTexto.B;
+   novo->Rjan = novo->Cores.colorWindow.R;
+   novo->Gjan = novo->Cores.colorWindow.G;
+   novo->Bjan = novo->Cores.colorWindow.B;
+   novo->Rbar = novo->Cores.colorBar.R;
+   novo->Gbar = novo->Cores.colorBar.G;
+   novo->Bbar = novo->Cores.colorBar.B;
+   novo->Rtxt = novo->Cores.colorText.R;
+   novo->Gtxt = novo->Cores.colorText.G;
+   novo->Btxt = novo->Cores.colorText.B;
    novo->fechavel = 1;
    novo->movivel = 1;
 
@@ -122,25 +121,25 @@ void janela::Desenhar(int mouseX, int mouseY)
 
    cor_Definir(Rjan,Gjan,Bjan);
    retangulo_Colorir(cara, 3,3,dx-3,dy-3,0);
-   cor_Definir(Cores.corCont[0].R,Cores.corCont[0].G,Cores.corCont[0].B);
+   cor_Definir(Cores.colorCont[0].R,Cores.colorCont[0].G,Cores.colorCont[0].B);
    retangulo_Desenhar(cara,0,0,dx-1,dy-1,0);
-   cor_Definir(Cores.corBot.R,Cores.corBot.G,Cores.corBot.B);
+   cor_Definir(Cores.colorButton.R,Cores.colorButton.G,Cores.colorButton.B);
    retangulo_Desenhar(cara,1,1,dx-2,dy-2,0);
-   cor_Definir(Cores.corCont[2].R,Cores.corCont[2].G,Cores.corCont[2].B);
+   cor_Definir(Cores.colorCont[2].R,Cores.colorCont[2].G,Cores.colorCont[2].B);
    linha_Desenhar(cara,2,13,dx-4,13,0);
-   cor_Definir(Cores.corCont[0].R,Cores.corCont[0].G,Cores.corCont[0].B);
+   cor_Definir(Cores.colorCont[0].R,Cores.colorCont[0].G,Cores.colorCont[0].B);
    retangulo_2Cores(cara,2,2,dx-3,dy-3,
-                    Cores.corCont[2].R,Cores.corCont[2].G,Cores.corCont[2].B,0);
-   cor_Definir(Cores.corBarra.R,Cores.corBarra.G,Cores.corBarra.B);
+                    Cores.colorCont[2].R,Cores.colorCont[2].G,Cores.colorCont[2].B,0);
+   cor_Definir(Cores.colorBar.R,Cores.colorBar.G,Cores.colorBar.B);
    retangulo_Colorir(cara,25,3,dx-4,12,0);
    /* Escrita do Titulo */
-   cor_Definir(Cores.corTexto.R,Cores.corTexto.G,Cores.corTexto.B);
+   cor_Definir(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    if (!selFonte(FFARSO,ESQUERDA,1))
    {
       erro_Mensagem("Fonte farso.fnt nao encontrada!\n",3);
    }
    escxy(cara,39,-2,texto.c_str());
-   /* Desenho dos Botoes */
+   /* Desenho dos Buttonoes */
    guiObject *obj=objects->first->next;
    int aux;
    for(aux=0;aux<objects->total;aux++)
@@ -195,7 +194,7 @@ void janela::Desenhar(int mouseX, int mouseY)
 void janela::BarraInativa()
 {
    int dx = x2-x1;
-   cor_Definir(Cores.corJan.R,Cores.corJan.G,Cores.corJan.B);
+   cor_Definir(Cores.colorWindow.R,Cores.colorWindow.G,Cores.colorWindow.B);
    retangulo_Colorir(cara,36,3,dx-3,12,0);
    cor_Definir(0,0,0);
    selFonte(FFARSO,ESQUERDA,1);
@@ -205,9 +204,9 @@ void janela::BarraInativa()
 void janela::BarraAtiva()
 {
    int dx = x2-x1;
-   cor_Definir(Cores.corBarra.R,Cores.corBarra.G,Cores.corBarra.B);
+   cor_Definir(Cores.colorBar.R,Cores.colorBar.G,Cores.colorBar.B);
    retangulo_Colorir(cara,36,3,dx-3,12,0);
-   cor_Definir(Cores.corTexto.R,Cores.corTexto.G,Cores.corTexto.B);
+   cor_Definir(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    selFonte(FFARSO,ESQUERDA,1);
    escxy(cara,39,-2,texto.c_str());
 }

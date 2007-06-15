@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string>
 using namespace std;
-#include "cores.h"
+#include "color.h"
 #include "desenho.h"
 #include "fonte.h"
 #include "string.h"
@@ -32,11 +32,11 @@ class menu: public Tlista
       unsigned int maxCarac;/* tam da Maior string  presente */
       void (*procSelecionado)(void* jan, void* botao,menuItem* item,
                              SDL_Surface* screen);
-      cores Cores;
+      farso_colors Cores;
       int itemAtual;
    
       menu(): Tlista()
-           {itemAtual = 1;procSelecionado=NULL;maxCarac=0;Cores.Iniciar();
+           {itemAtual = 1;procSelecionado=NULL;maxCarac=0;
             pressed = false;};
       ~menu();
 

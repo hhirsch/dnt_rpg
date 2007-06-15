@@ -10,7 +10,7 @@
 #include <SDL/SDL.h>
 #include "desenho.h"
 #include "button.h"
-#include "cores.h"
+#include "color.h"
 #include "cxsel.h"
 #include "janela.h"
 #include "eventos.h"

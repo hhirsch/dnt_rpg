@@ -45,9 +45,9 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
 
    /* Texto */
    text = l->InserirQuadroTexto(xa,ya,xb-13,yb,2,""); 
-   text->Cores.corTexto.R = 246;
-   text->Cores.corTexto.G = 190;
-   text->Cores.corTexto.B = 190;
+   text->Cores.colorText.R = 246;
+   text->Cores.colorText.G = 190;
+   text->Cores.colorText.B = 190;
    text->fonte = FMINI;
    text->tamFonte = 1;
 

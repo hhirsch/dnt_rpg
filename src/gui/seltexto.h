@@ -10,7 +10,7 @@ using namespace std;
 
 #include "desenho.h"
 #include "fonte.h"
-#include "cores.h"
+#include "color.h"
 #include "mouse.h"
 #include "guiobject.h"
 
@@ -71,7 +71,7 @@ class selTexto: public guiObject
           y1,     /**< y1 coordinate */
           x2,     /**< x2 coordinate */
           y2;     /**< y2 coordinate */
-      cores Cores; /**< colors */
+      farso_colors Cores; /**< colors */
       bool pressed; /**< while pressed == true */
 
 

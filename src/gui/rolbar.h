@@ -10,7 +10,7 @@
 using namespace std;
 
 #include "guiobject.h"
-#include "cores.h"
+#include "color.h"
 #include "desenho.h"
 #include "mouse.h"
 #include "button.h"

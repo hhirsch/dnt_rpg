@@ -45,12 +45,12 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
    /* Skill Description */
    desc = window->objects->InserirQuadroTexto(8,38,251,170,1,
                            externalSkill->m_skills[curSkill].descricao.c_str());
-   desc->Cores.corTexto.R = 246;
+   /*desc->Cores.corTexto.R = 246;
    desc->Cores.corTexto.G = 190;
    desc->Cores.corTexto.B = 190;
    desc->Cores.corBot.R = 155;
    desc->Cores.corBot.G = 5;
-   desc->Cores.corBot.B = 5;
+   desc->Cores.corBot.B = 5;*/
    desc->fonte = FMINI;
    desc->tamFonte = 1;
  
@@ -83,9 +83,9 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
    saux = tmp;
    txtCosts = window->objects->InserirQuadroTexto(216,200,251,214,0,
                                                   saux.c_str());
-   txtCosts->Cores.corTexto.R = 255;
+   /*txtCosts->Cores.corTexto.R = 255;
    txtCosts->Cores.corTexto.G = 156;
-   txtCosts->Cores.corTexto.B = 0;
+   txtCosts->Cores.corTexto.B = 0;*/
 
 
    /* Confirm Button */
@@ -221,15 +221,17 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
    if( saveSkill->m_skills[curSkill].pontos > 
        saveSkill->m_skills[curSkill].antPontos )
    {
-      txtPoints->Cores.corTexto.R = 13;
+      /*txtPoints->Cores.corTexto.R = 13;
       txtPoints->Cores.corTexto.G = 250;
-      txtPoints->Cores.corTexto.B = 85; 
+      txtPoints->Cores.corTexto.B = 85; */
    }
    else
    {
+      /*
       txtPoints->Cores.corTexto.R = 255;
       txtPoints->Cores.corTexto.G = 255;
       txtPoints->Cores.corTexto.B = 255;
+      */
    }
    
    window->Desenhar(0,0);

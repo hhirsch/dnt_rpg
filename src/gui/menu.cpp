@@ -75,11 +75,11 @@ void menu::Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen)
    }
 
    /* Desenha o menu */
-   cor_Definir(Cores.corMenu.R,Cores.corMenu.G,Cores.corMenu.B);
+   cor_Definir(Cores.colorMenu.R,Cores.colorMenu.G,Cores.colorMenu.B);
    retangulo_Colorir(screen,x1+1,y1+1,x2-1,y2-1,0);
-   cor_Definir(Cores.corCont[2].R,Cores.corCont[2].G,Cores.corCont[2].B);
-   retangulo_Oval(screen,x1,y1,x2,y2,Cores.corCont[1].R,Cores.corCont[1].G,
-                  Cores.corCont[1].B,0);
+   cor_Definir(Cores.colorCont[2].R,Cores.colorCont[2].G,Cores.colorCont[2].B);
+   retangulo_Oval(screen,x1,y1,x2,y2,Cores.colorCont[1].R,Cores.colorCont[1].G,
+                  Cores.colorCont[1].B,0);
    
       /*itens*/  
    int xa = x1+4;
@@ -88,25 +88,25 @@ void menu::Desenhar(int Xjan, int Yjan,int pos, SDL_Surface *screen)
    menuItem* item = (menuItem*) first->next;
    for (k=0;k<total;k++)
    {
-      cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
+      cor_Definir(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
       if (item->texto.compare("-"))
       {
           if (item->disponivel) escxy(screen,x1+4,ya-3,item->texto.c_str());
           else
           {
-              cor_Definir(Cores.corCont[2].R,Cores.corCont[2].G,
-                          Cores.corCont[2].B);
+              cor_Definir(Cores.colorCont[2].R,Cores.colorCont[2].G,
+                          Cores.colorCont[2].B);
               escxy(screen,x1+5,ya-2,item->texto.c_str());
-              cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,
-                          Cores.corCont[1].B);
+              cor_Definir(Cores.colorCont[1].R,Cores.colorCont[1].G,
+                          Cores.colorCont[1].B);
               escxy(screen,x1+4,ya-3,item->texto.c_str());
           }
       } 
       else 
       {
-        cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
-        retangulo_2Cores(screen,xa-2,ya+6,x2-2,ya+7,Cores.corCont[0].R,
-                         Cores.corCont[0].G,Cores.corCont[0].B,0);
+        cor_Definir(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
+        retangulo_2Cores(screen,xa-2,ya+6,x2-2,ya+7,Cores.colorCont[0].R,
+                         Cores.colorCont[0].G,Cores.colorCont[0].B,0);
       }
       ya += 11;
       item = (menuItem*)item->next;
@@ -171,11 +171,11 @@ int menu::Rodar(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
          tecla = 0;
       }
 
-      cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
+      cor_Definir(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
       retangulo_Oval(screen,x+2,(itemAtual-1)*11+y+4,
                      x+largura-2,(itemAtual)*11+y+4,
-                     Cores.corCont[2].R,Cores.corCont[2].G,
-                     Cores.corCont[2].B,1);
+                     Cores.colorCont[2].R,Cores.colorCont[2].G,
+                     Cores.colorCont[2].B,1);
 
    /* Calcula o Retorno */
    if(mouse_NaArea(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3,
