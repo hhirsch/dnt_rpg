@@ -4,7 +4,7 @@
 
 #include "listtext.h"
 #include "lista.h"
-#include "eventos.h"
+#include "interface.h"
 
 
 /**************************************************************
@@ -165,7 +165,7 @@ bool listText::eventGot(int type, guiObject* object)
 {
    int i;
    selectedText = "";
-   if(type == TABBOTAOPRESSIONADO)
+   if(type == PRESSED_TAB_BUTTON)
    {
       for(i = 0; i<maxButtons; i++)
       {

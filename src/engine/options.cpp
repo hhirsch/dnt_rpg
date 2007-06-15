@@ -346,7 +346,7 @@ void options::DisplayOptionsScreen(interface* interf)
  ****************************************************************/
 int options::Treat(guiObject* object, int eventInfo, interface* interf)
 {
-   if( (eventInfo == BOTAOEMPRESSAO) && 
+   if( (eventInfo == ON_PRESS_BUTTON) && 
          (SDL_GetTicks() - timeLastOperation > 100) )
    {
       timeLastOperation = SDL_GetTicks();
@@ -428,7 +428,7 @@ int options::Treat(guiObject* object, int eventInfo, interface* interf)
       }
 
    }
-   else if(eventInfo == BOTAOPRESSIONADO) 
+   else if(eventInfo == PRESSED_BUTTON) 
    {
       /* Confirm */
       if( (object == (guiObject*) buttonConfirm) )
@@ -451,7 +451,7 @@ int options::Treat(guiObject* object, int eventInfo, interface* interf)
          return(OPTIONSW_CANCEL);
       }
    }
-   else if(eventInfo == CXSELMODIFICADA)
+   else if(eventInfo == MODIFIED_CX_SEL)
    {
       /* cxSelParticles */
       if( (object == (guiObject*) cxSelParticles) || 

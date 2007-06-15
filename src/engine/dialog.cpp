@@ -531,7 +531,7 @@ void conversation::changeDialog(int numDialog)
  *************************************************************************/
 bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui)
 {
-   if(eventInfo == SELTEXTOSELECIONADA)
+   if(eventInfo == SELECTED_SEL_TEXT)
    {
       if(guiObj == (guiObject*)pcSelText)
       {

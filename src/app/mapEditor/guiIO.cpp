@@ -491,7 +491,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 
    switch(eventInfo)
    {
-      case TABBOTAOEMPRESSAO:
+      case ON_PRESS_TAB_BUTTON:
       {
          /*  Navigation Buttons  */
          if(object == (guiObject*) upButton)
@@ -566,7 +566,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          }
       break;
       
-      case TABBOTAOPRESSIONADO:
+      case PRESSED_TAB_BUTTON:
       
          /*  Terrain Buttons  */
          if(object == (guiObject*) terrainUpButton)
@@ -734,7 +734,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
       }
 
       /* Buttons */
-      case BOTAOPRESSIONADO:
+      case PRESSED_BUTTON:
       {
          if(object == (guiObject*) exitButton)
          {
@@ -830,7 +830,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          break;
       }
    }
-   if(eventInfo == NADA)
+   if(eventInfo == NOTHING)
    {
       return(GUI_IO_NOTHING);
    }

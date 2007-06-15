@@ -2,7 +2,7 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#include "eventos.h"
+#include "interface.h"
 #include <SDL/SDL_image.h>
 
 int mouseX=0,mouseY=0;
@@ -29,7 +29,7 @@ interface::interface(char* arqfundo)
        retangulo_Colorir(fundo,0,0,511,511,0);*/
        fundo = NULL;
    }
-   foco = FOCO_JOGO;
+   foco = FOCUS_GAME;
 }
 
 /*********************************************************************
@@ -52,21 +52,21 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
 
     if(!objAtivo)
     {
-       foco = FOCO_JOGO;
+       foco = FOCUS_GAME;
     }
 
     if(ljan->janelaAtiva == NULL)
     {
-       *eventInfo = NADA;
-       foco = FOCO_JOGO;
+       *eventInfo = NOTHING;
+       foco = FOCUS_GAME;
        return(NULL);
     }
 
     /* Keyboard Events */
-    if ( (tecla[SDLK_ESCAPE]) && (foco != FOCO_JOGO))
+    if ( (tecla[SDLK_ESCAPE]) && (foco != FOCUS_GAME))
     {
-       foco = FOCO_JOGO;
-       *eventInfo = SAIR;
+       foco = FOCUS_GAME;
+       *eventInfo = EXIT;
        return(NULL);
     }
 
@@ -74,18 +74,18 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     if(ljan->getMenu())
     {
        objAtivo = (guiObject*) ljan->getMenu();
-       foco = FOCO_MENU;
+       foco = FOCUS_MENU;
     }
     else /* Verify Window Super Menu */
     if(ljan->janelaAtiva->objects->getMenu())
     {
        objAtivo = (guiObject*) ljan->janelaAtiva->objects->getMenu();
-       foco = FOCO_MENU;
+       foco = FOCUS_MENU;
     }
 
     /* Mouse move to change focus */
     if( (x != mouseX || y != mouseY) && 
-        (foco == FOCO_JOGO) )
+        (foco == FOCUS_GAME) )
     {
         mouseX = x;
         mouseY = y;
@@ -113,7 +113,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                ljan->janelaAtiva->y1+yb,x,y))
                   {
                       objAtivo = st;
-                      foco = FOCO_SELTEXTO;
+                      foco = FOCUS_SEL_TEXT;
                   }
                }
                /* Verify Button Table */
@@ -124,7 +124,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                    y-ljan->janelaAtiva->y1))
                   {
                      objAtivo = tb;
-                     foco = FOCO_TABBUTTON;
+                     foco = FOCUS_TAB_BUTTON;
                   }
                }
                obj = obj->next;
@@ -133,7 +133,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     }
 
     /* Verify mouse button for focus change */
-    if((Mbotao & SDL_BUTTON(1)) &&  (foco == FOCO_JOGO))
+    if((Mbotao & SDL_BUTTON(1)) &&  (foco == FOCUS_GAME))
     {
         if( ( (ljan->janelaAtiva != NULL) && (ljan->janelaAtiva->movivel) ) &&
              isMouseAt(ljan->janelaAtiva->x1+36,
@@ -145,7 +145,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             ljan->janelaAtiva->difx = x - ljan->janelaAtiva->x1;
             ljan->janelaAtiva->dify = y - ljan->janelaAtiva->y1;
             objAtivo = (guiObject*) ljan->janelaAtiva;
-            foco = FOCO_JANELAMOVER;
+            foco = FOCUS_WINDOW_MOVE;
         }
         else if ( (ljan->janelaAtiva != NULL) &&
                    isMouseAt(ljan->janelaAtiva->x1,
@@ -167,7 +167,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   {
                       
                      objAtivo = bot;
-                     foco = FOCO_BOTAO;
+                     foco = FOCUS_BUTTON;
                   }
                }
                /* Verify Click on TextBar */ 
@@ -180,7 +180,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                        objAtivo = bart;
                        bart->defineCursorPosition(x-ljan->janelaAtiva->x1,
                                                   y-ljan->janelaAtiva->y1);
-                       foco = FOCO_BARRATEXTO;
+                       foco = FOCUS_TEXT_BAR;
                    }
                }
                /* Verify RadioBoxes */
@@ -191,7 +191,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                     y-ljan->janelaAtiva->y1))
                    {
                        objAtivo = cx;
-                       foco = FOCO_CXSEL;
+                       foco = FOCUS_CX_SEL;
                    }
                }
                /* Verify Text Select */
@@ -206,7 +206,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                yb+ljan->janelaAtiva->y1,x,y))
                   {
                      objAtivo = st;
-                     foco = FOCO_SELTEXTO;
+                     foco = FOCUS_SEL_TEXT;
                   }
                }
                obj = obj->next;
@@ -216,7 +216,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             {
                 ljan->janelaAtiva->procPres(ljan->janelaAtiva,x,y,NULL);
             }
-            *eventInfo = JANELACLICADA;
+            *eventInfo = CLICKED_WINDOW;
             return((guiObject*) ljan->janelaAtiva);
         }
         else /*if( (ljan->janelaAtiva != NULL))*/
@@ -229,9 +229,9 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                if( (jaux != ljan->janelaAtiva)  && 
                    isMouseAt(jaux->x1,jaux->y1,jaux->x2,jaux->y2,x,y))
                {
-                    foco = FOCO_JOGO;
+                    foco = FOCUS_GAME;
                     jaux->Ativar(ljan);
-                    *eventInfo = JANELAATIVADA;
+                    *eventInfo = ACTIVATED_WINDOW;
                     return((guiObject*) jaux);
                }
                jaux = (janela*) jaux->next;
@@ -240,19 +240,19 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     }
 
     /*  FOCUS ON WINDOW MOVIMENTATION  */
-    if (foco == FOCO_JANELAMOVER)
+    if (foco == FOCUS_WINDOW_MOVE)
     {
         if(!(ljan->janelaAtiva->Mover(ljan,NULL,fundo,x,y,Mbotao)))
         {
-           foco = FOCO_JOGO;
+           foco = FOCUS_GAME;
         }
-        *eventInfo = JANELAMOVIMENTADA;
+        *eventInfo = MOVED_WINDOW;
         return(objAtivo);
     }
 
     /* FOCUS ON BUTTON PRESSED */
     else
-    if(foco == FOCO_BOTAO)
+    if(foco == FOCUS_BUTTON)
     {
         int pronto;
         button* bot = (button*)objAtivo;
@@ -269,11 +269,11 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                  men->setPosition(bot->getX1(),bot->getY2()+1);
                  if (!bot->getText().compare("_"))
                  {
-                    foco = FOCO_MENUJANELA;
+                    foco = FOCUS_WINDOW_MENU;
                  }
                  else
                  {
-                    foco = FOCO_MENU;
+                    foco = FOCUS_MENU;
                  }                 
               }
               else if (!bot->getText().compare("*"))
@@ -283,16 +283,16 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   {
                      ljan->janelaAtiva->Fechar(ljan);
                   }
-                  foco = FOCO_JOGO;
-                  *eventInfo = JANELAFECHADA;
+                  foco = FOCUS_GAME;
+                  *eventInfo = CLOSED_WINDOW;
                   return(NULL);
               }
               else
               {
-                  foco = FOCO_JOGO;
+                  foco = FOCUS_GAME;
               }
               
-              *eventInfo = BOTAOPRESSIONADO;
+              *eventInfo = PRESSED_BUTTON;
               return(objAtivo);
            }
            else
@@ -305,7 +305,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                  if(obj->type == GUI_ROL_BAR)
                  {
                     rolBar* rb = (rolBar*)obj;
-                    if(rb->eventGot(BOTAOEMPRESSAO, objAtivo))
+                    if(rb->eventGot(ON_PRESS_BUTTON, objAtivo))
                     {
                        ljan->janelaAtiva->Desenhar(0,0);
                        rb->redraw();
@@ -314,50 +314,50 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                  obj = obj->next;
               }
 
-              *eventInfo = BOTAOEMPRESSAO;
+              *eventInfo = ON_PRESS_BUTTON;
               return(objAtivo);
            }
         }
         else if(pronto)
         {
-           foco = FOCO_JOGO;
+           foco = FOCUS_GAME;
         }
-        *eventInfo = BOTAOEMPRESSAO;
+        *eventInfo = ON_PRESS_BUTTON;
         return(objAtivo);
     }
  
     /* FOCUS ON BARTEXT WRITE */
     else 
-    if (foco == FOCO_BARRATEXTO)
+    if (foco == FOCUS_TEXT_BAR)
     {
         textBar* bart = (textBar*)objAtivo;
            if((bart->write(x - ljan->janelaAtiva->x1,
                            y - ljan->janelaAtiva->y1,
                            ljan->janelaAtiva->cara, Mbotao,tecla)))
            {
-               foco = FOCO_JOGO;
-               *eventInfo = BARRATEXTOESCRITA;
+               foco = FOCUS_GAME;
+               *eventInfo = WROTE_TEXT_BAR;
                return(objAtivo);
            }
-        *eventInfo = BARRATEXTOESCRITA; 
+        *eventInfo = WROTE_TEXT_BAR; 
         return(objAtivo);
     }
     
     /* FOCUS ON RADIOBOXES */
     else 
-    if(foco == FOCO_CXSEL)
+    if(foco == FOCUS_CX_SEL)
     {
        cxSel* cx = (cxSel*)objAtivo;
        cx->invertSelection();
        cx->draw(ljan->janelaAtiva->cara);
-       foco = FOCO_JOGO;
-       *eventInfo = CXSELMODIFICADA;
+       foco = FOCUS_GAME;
+       *eventInfo = MODIFIED_CX_SEL;
        return(objAtivo);
     }
 
     /* FOCUS ON MENUS */
     else
-    if ((foco == FOCO_MENU) || (foco == FOCO_MENUJANELA))
+    if ((foco == FOCUS_MENU) || (foco == FOCUS_WINDOW_MENU))
     {
        int pronto;
        menu* men = (menu*)objAtivo;
@@ -367,37 +367,37 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                           ljan->janelaAtiva->x1,
                           ljan->janelaAtiva->y1);
 
-       *eventInfo = MENUMODIFICADO;
+       *eventInfo = MODIFIED_MENU;
 
         
-       if((foco == FOCO_MENUJANELA) && (res==4) && (pronto))
+       if((foco == FOCUS_WINDOW_MENU) && (res==4) && (pronto))
        {
            if(ljan->janelaAtiva->fechavel)
               ljan->janelaAtiva->Fechar(ljan);
            else
               ljan->janelaAtiva->Desenhar(x,y);
-           foco = FOCO_JOGO;
-           *eventInfo = JANELAFECHADA;
+           foco = FOCUS_GAME;
+           *eventInfo = CLOSED_WINDOW;
            return(NULL);
        }
        else if((res) && (pronto)) 
        {
           ljan->janelaAtiva->Desenhar(x,y);
-          *eventInfo = MENUSELECIONADO;
-          foco = FOCO_JOGO;
+          *eventInfo = SELECTED_MENU;
+          foco = FOCUS_GAME;
        }
        else if(pronto)
        {
           ljan->janelaAtiva->Desenhar(x,y);
-          foco = FOCO_JOGO;
-          *eventInfo = MENUSELECIONADO;
+          foco = FOCUS_GAME;
+          *eventInfo = SELECTED_MENU;
        }
        return(objAtivo);
     }
 
     /* FOCUS ON TEXT SELECT  */
     else
-    if ((foco == FOCO_SELTEXTO) /*&& (x != mouseX || y != mouseY)*/ )
+    if ((foco == FOCUS_SEL_TEXT) /*&& (x != mouseX || y != mouseY)*/ )
     {
         mouseX = x;
         mouseY = y;
@@ -407,16 +407,16 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                              Mbotao,ljan->janelaAtiva->cara);
         if(res == -1)
         {
-            foco = FOCO_JOGO;
-            *eventInfo = NADA; 
+            foco = FOCUS_GAME;
+            *eventInfo = NOTHING; 
         }
         else if(res < 0)
         {
-          *eventInfo = SELTEXTOMODIFICADA;
+          *eventInfo = MODIFIED_SEL_TEXT;
         }
         else
         {
-          *eventInfo = SELTEXTOSELECIONADA;
+          *eventInfo = SELECTED_SEL_TEXT;
         }
 
         
@@ -425,7 +425,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
 
     /* FOCUS ON TABBUTTON */
     else
-    if ((foco == FOCO_TABBUTTON))
+    if ((foco == FOCUS_TAB_BUTTON))
     {
        int actType = 0;
        tabButton* tb = (tabButton*) objAtivo;
@@ -448,12 +448,12 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   if(obj->type == GUI_LIST_TEXT)
                   {
                      listText* lt = (listText*)obj;
-                     if(lt->eventGot(TABBOTAOPRESSIONADO, object))
+                     if(lt->eventGot(PRESSED_TAB_BUTTON, object))
                      {
                         ljan->janelaAtiva->Desenhar(0,0);
                         verified = true;
-                        *eventInfo = LISTTEXT_SELECTED;
-                        foco = FOCO_JOGO;
+                        *eventInfo = SELECTED_LIST_TEXT;
+                        foco = FOCUS_GAME;
                         return(lt);
                      }
                   }
@@ -464,14 +464,14 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                 * the event! */
                if(!verified)
                {
-                  foco = FOCO_JOGO;
-                  *eventInfo = TABBOTAOPRESSIONADO;
+                  foco = FOCUS_GAME;
+                  *eventInfo = PRESSED_TAB_BUTTON;
                   return(object);
                }
             }
             else if(actType == TABBUTTON_ON_PRESS)
             {
-               *eventInfo = TABBOTAOEMPRESSAO;
+               *eventInfo = ON_PRESS_TAB_BUTTON;
                return(object);
             }  
        }
@@ -480,14 +480,14 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             if(!tb->isMouseIn(x-ljan->janelaAtiva->x1,
                               y-ljan->janelaAtiva->y1))
             {
-               foco = FOCO_JOGO;
+               foco = FOCUS_GAME;
             }
        }
     }
          
 
     /* If here, no actions were made on GUI */
-    *eventInfo = NADA;
+    *eventInfo = NOTHING;
     return(NULL);
 }
 
@@ -548,7 +548,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
  *********************************************************************/
 void interface::clearActiveObject()
 {
-   foco = FOCO_JOGO;
+   foco = FOCUS_GAME;
    objAtivo = NULL;
 }
 

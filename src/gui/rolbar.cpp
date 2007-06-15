@@ -5,7 +5,7 @@
 #include "rolbar.h"
 #include "fonte.h"
 #include "lista.h"
-#include "eventos.h"
+#include "interface.h"
 
 #define ACTUALIZE_RATE 50
 
@@ -69,7 +69,7 @@ bool rolBar::eventGot(int type, guiObject* object)
    if((SDL_GetTicks() - lastActualized) >= ACTUALIZE_RATE)
    {
       lastActualized = SDL_GetTicks();
-      if(type == BOTAOEMPRESSAO)
+      if(type == ON_PRESS_BUTTON)
       {
          if(object == (guiObject*)up)
          {

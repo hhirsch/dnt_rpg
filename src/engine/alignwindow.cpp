@@ -61,7 +61,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
  ************************************************************************/
 int alignWindow::treat(guiObject* object, int eventInfo, interface* inter)
 {
-   if(eventInfo == BOTAOPRESSIONADO)
+   if(eventInfo == PRESSED_BUTTON)
    {
       if( (object == (guiObject*) buttonNext) || 
           (object == (guiObject*) buttonPrevious))

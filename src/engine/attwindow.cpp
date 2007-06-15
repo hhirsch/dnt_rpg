@@ -412,7 +412,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
    char tmp[5];
    int i;
 
-   if(eventInfo == BOTAOPRESSIONADO)
+   if(eventInfo == PRESSED_BUTTON)
    {
       /* Confirm */
       if(object == (guiObject*) buttonConfirm)

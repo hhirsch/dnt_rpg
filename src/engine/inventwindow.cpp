@@ -169,7 +169,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
    
    switch(eventInfo)
    {
-      case TABBOTAOPRESSIONADO:
+      case PRESSED_TAB_BUTTON:
       {
          /* Inventory Spaces Selected */
          if(guiObj == (guiObject*) inventoryButton)
@@ -364,7 +364,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
       }
       break;
       
-      case MENUSELECIONADO:
+      case SELECTED_MENU:
       {
          if(objectMenu)
          {

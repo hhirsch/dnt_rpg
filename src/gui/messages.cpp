@@ -37,7 +37,7 @@ string getStringFromUser(string title, string previous,
       guiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
 
-      if(eventInfo == BOTAOPRESSIONADO)
+      if(eventInfo == PRESSED_BUTTON)
       {
          if(object == (guiObject*) okButton)
          {
@@ -129,7 +129,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
       guiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
 
-      if(eventInfo == BOTAOPRESSIONADO)
+      if(eventInfo == PRESSED_BUTTON)
       {
          if(object == (guiObject*) opt1Button)
          {
@@ -210,7 +210,7 @@ void showMessage(string title, string message,
       guiObject* object;
       object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
 
-      if(eventInfo == BOTAOPRESSIONADO)
+      if(eventInfo == PRESSED_BUTTON)
       {
          if(object == (guiObject*) okButton)
          {

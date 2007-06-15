@@ -6,7 +6,7 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJSPP = button.o color.o cxsel.o draw.o eventos.o farso.o picture.o fonte.o healthBar.o janela.o lista.o listtext.o menu.o messages.o mouse.o rolbar.o seltext.o tabbutton.o textbar.o textbox.o
+OBJSPP = button.o color.o cxsel.o draw.o farso.o fonte.o healthBar.o interface.o janela.o lista.o listtext.o menu.o messages.o mouse.o picture.o rolbar.o seltext.o tabbutton.o textbar.o textbox.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -48,9 +48,9 @@ erro.o: erro.cpp erro.h
 	@$(CC) $(CFLAGS) erro.cpp -o erro.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-eventos.o: eventos.h eventos.cpp
-	@printf "Making eventos.o... "
-	@$(CC) $(CFLAGS) eventos.cpp -o eventos.o
+interface.o: interface.h interface.cpp
+	@printf "Making interface.o... "
+	@$(CC) $(CFLAGS) interface.cpp -o interface.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 farso.o: farso.h farso.cpp

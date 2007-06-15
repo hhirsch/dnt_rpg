@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _eventos_h
-#define _eventos_h
+#ifndef _interface_h
+#define _interface_h
 
 #include <string.h>
 #include "janela.h"
@@ -11,37 +11,37 @@
 #include "menu.h"
 #include "lista.h"
 
-/* Constantes de Retorno */
-#define NADA                -1
-#define SAIR                 0
-#define SELTEXTOMODIFICADA   1
-#define MENUSELECIONADO      2
-#define BOTAOPRESSIONADO     3
-#define BOTAONAOPRESSIONADO  4
-#define BARRATEXTOESCRITA    5
-#define CXSELMODIFICADA      6
-#define JANELAFECHADA        7
-#define JANELAATIVADA        8
-#define JANELAMOVIMENTADA    9
-#define JANELACLICADA       10
-#define TABBOTAOPRESSIONADO 11
-#define TABBOTAOEMPRESSAO   12
-#define BOTAOEMPRESSAO      13
-#define MENUMODIFICADO      14
-#define SELTEXTOSELECIONADA 15
-#define LISTTEXT_SELECTED   16
+/* Return Constants */
+#define NOTHING             -1
+#define EXIT                 0
+#define MODIFIED_SEL_TEXT    1
+#define SELECTED_MENU        2
+#define PRESSED_BUTTON       3
+#define NOT_PRESSED_BUTTON   4
+#define WROTE_TEXT_BAR       5
+#define MODIFIED_CX_SEL      6
+#define CLOSED_WINDOW        7
+#define ACTIVATED_WINDOW     8
+#define MOVED_WINDOW         9
+#define CLICKED_WINDOW      10
+#define PRESSED_TAB_BUTTON  11
+#define ON_PRESS_TAB_BUTTON 12
+#define ON_PRESS_BUTTON     13
+#define MODIFIED_MENU       14
+#define SELECTED_SEL_TEXT   15
+#define SELECTED_LIST_TEXT  16
 
 /* Constantes de Foco */
-#define FOCO_JANELA       1
-#define FOCO_BARRATEXTO   2
-#define FOCO_BOTAO        3
-#define FOCO_CXSEL        4
-#define FOCO_MENU         5
-#define FOCO_SELTEXTO     6
-#define FOCO_JANELAMOVER  7
-#define FOCO_MENUJANELA   8
-#define FOCO_TABBUTTON    9
-#define FOCO_JOGO         100
+#define FOCUS_WINDOW         1
+#define FOCUS_TEXT_BAR       2
+#define FOCUS_BUTTON         3
+#define FOCUS_CX_SEL         4
+#define FOCUS_MENU           5
+#define FOCUS_SEL_TEXT       6
+#define FOCUS_WINDOW_MOVE    7
+#define FOCUS_WINDOW_MENU    8
+#define FOCUS_TAB_BUTTON     9
+#define FOCUS_GAME         100
 
 /*! Interface is the GUI upper level class. Is from it that all GUI events
  * are treated, and all actions maybe be takken. */

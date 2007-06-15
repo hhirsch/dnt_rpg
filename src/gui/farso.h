@@ -13,7 +13,7 @@
 #include "color.h"
 #include "cxsel.h"
 #include "janela.h"
-#include "eventos.h"
+#include "interface.h"
 #include "fonte.h"
 #include "healthBar.h"
 #include "textbox.h"

@@ -33,7 +33,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    Uint32 tempoAnterior = 0;
    done = false;
    guiObject* object = NULL;
-   int eventInfo = NADA;
+   int eventInfo = NOTHING;
    janela* jan = gui->insertWindow(335,235,462,362,
                                    language.VERSION.c_str(),1,1);  
    jan->fechavel = 0;
@@ -79,9 +79,9 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          textureToScreen(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
          object = gui->manipulateEvents(x,y,Mbotao,keys, &eventInfo);
-         if(eventInfo != NADA)
+         if(eventInfo != NOTHING)
          {
-             if(eventInfo == BOTAOPRESSIONADO)
+             if(eventInfo == PRESSED_BUTTON)
              {
                  //snd->addSoundEffect(false, "../data/sndfx/menu/click.ogg");
 

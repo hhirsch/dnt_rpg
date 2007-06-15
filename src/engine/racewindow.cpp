@@ -129,7 +129,7 @@ string raceWindow::getCharacteristics()
 int raceWindow::treat(guiObject* object, int eventInfo, 
                       interface* inter)
 {
-   if(eventInfo == BOTAOPRESSIONADO)
+   if(eventInfo == PRESSED_BUTTON)
    {
       if( (object == (guiObject*) buttonNext) || 
           (object == (guiObject*) buttonPrevious))

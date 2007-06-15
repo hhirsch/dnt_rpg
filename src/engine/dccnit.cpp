@@ -605,7 +605,7 @@ int engine::OptionsScreen(GLuint idTextura)
    Uint8* keys;
    int x,y;
    guiObject* object = NULL;
-   int eventInfo = NADA;
+   int eventInfo = NOTHING;
 
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
@@ -676,7 +676,7 @@ int engine::CharacterScreen(GLuint idTextura)
    Uint8* keys;
    int x,y;
    guiObject* object = NULL;
-   int eventInfo = NADA;
+   int eventInfo = NOTHING;
 
    int status = 0;
 
@@ -1164,7 +1164,7 @@ void engine::threatGuiEvents(guiObject* object, int eventInfo)
    /* Verify ShortCutsWindow */
    switch(eventInfo)
    {
-       case TABBOTAOPRESSIONADO:
+       case PRESSED_TAB_BUTTON:
        {
            if(object == (guiObject*) buttonAttackMode)
            {
@@ -1194,7 +1194,7 @@ void engine::threatGuiEvents(guiObject* object, int eventInfo)
            }
            break;
        }
-       case BOTAOPRESSIONADO:
+       case PRESSED_BUTTON:
        {
          if(object == (guiObject*) buttonMenu)
          {
@@ -2111,7 +2111,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       guiObject* object;
       object = gui->manipulateEvents(x,y,Mbutton,keys, &guiEvent);
       /* Threat the GUI */
-      if(guiEvent != NADA)
+      if(guiEvent != NOTHING)
       {
          threatGuiEvents(object, guiEvent);
          redesenha = true;
