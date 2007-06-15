@@ -14,7 +14,7 @@ using namespace std;
 #include "picture.h"
 #include "textbox.h"
 #include "seltext.h"
-#include "tabbotao.h"
+#include "tabbutton.h"
 #include "textbar.h"
 #include "rolbar.h"
 #include "listtext.h"
@@ -57,7 +57,8 @@ class Tlista{
        * text        -> Texto da Barra de Texto
        * cript       -> <>0 se estiver "criptografada"
        * lista       -> ponteiro para lista de barra de texto */
-      textBar* insertTextBar(int xa,int ya,int xb,int yb, string text, int cript);
+      textBar* insertTextBar(int xa,int ya,int xb,int yb, string text, 
+                             int cript);
 
       /* Insere um novo quadro de Texto na lista 
        * xa,ya,xb,yb -> coordenadas do novo quadro de texto

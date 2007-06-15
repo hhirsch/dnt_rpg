@@ -6,7 +6,7 @@
 #define _listtext_h
 
 #include "rolbar.h"
-#include "tabbotao.h"
+#include "tabbutton.h"
 
 /*! A element of text on listText */
 class textElement

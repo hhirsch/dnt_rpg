@@ -1,4 +1,6 @@
-#include "tabbotao.h"
+/* DccNiTghmare is in Public Domain. Do whatever you want with this code. */
+
+#include "tabbutton.h"
 #include "draw.h"
 #include "mouse.h"
 

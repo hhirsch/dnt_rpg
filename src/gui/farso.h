@@ -25,7 +25,7 @@
 #include "picture.h"
 #include "menu.h"
 #include "mouse.h"
-#include "tabbotao.h"
+#include "tabbutton.h"
 #include "messages.h"
 
 /*! Init the SDL/OpenGL Context
