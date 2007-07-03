@@ -41,7 +41,7 @@ void initiative::insertCharacter(character* pers, string& brief)
       first = new(initiativeStruct);
       first->next = NULL;
       first->initiativeValue = (rand() % DICE_D20 +1) +  
-                               pers->attBonus(ATT_DEXTERY);
+                                pers->attBonus(ATT_DEXTERY);
       sprintf(text,"%d.",first->initiativeValue);
       brief += text;
       first->dude = pers;
@@ -135,3 +135,4 @@ void initiative::clear()
    first = NULL;
    next = NULL;
 }
+
