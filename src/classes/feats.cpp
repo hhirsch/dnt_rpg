@@ -106,6 +106,37 @@ void feats::useFeat(int featNumber)
 }
 
 /***************************************************************
+ *                   applyHealAndFixFeat                       *
+ ***************************************************************/
+bool feats::applyHealAndFixFeat(thing& attacker, int featNumber, 
+                                  thing& target, string& brief)
+{
+   //TODO
+   return(false);
+}
+
+/***************************************************************
+ *                     applyPsychoFeat                         *
+ ***************************************************************/
+bool feats::applyPsychoFeat(thing& attacker, int featNumber, 
+                              thing& target, string& brief)
+{
+   //TODO
+   return(false);
+}
+
+/***************************************************************
+ *                   applyInvocationFeat                       *
+ ***************************************************************/
+bool feats::applyInvocationFeat(thing& attacker, int featNumber, 
+                                thing& target, string& brief)
+{
+   //TODO
+   return(false);
+}
+
+
+/***************************************************************
  *                 applyAttackAndBreakFeat                     *
  ***************************************************************/
 bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 

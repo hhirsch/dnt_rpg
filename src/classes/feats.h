@@ -141,6 +141,40 @@ class feats
                                    thing& target, string& brief);
       /*!
        **************************************************************** 
+       * Apply a heal or fix feat.
+       * \param attacker -> thing that will attack
+       * \param featNumber -> Number of Feat on List
+       * \param target -> target to use the Feat
+       * \param brief -> string that will have briefing
+       * \return \c true if the feat was used.
+       ***************************************************************/
+      bool applyHealAndFixFeat(thing& attacker, int featNumber, 
+                               thing& target, string& brief);
+      /*!
+       **************************************************************** 
+       * Apply a psycho feat.
+       * \param attacker -> thing that will attack
+       * \param featNumber -> Number of Feat on List
+       * \param target -> target to use the Feat
+       * \param brief -> string that will have briefing
+       * \return \c true if the feat was used.
+       ***************************************************************/
+      bool applyPsychoFeat(thing& attacker, int featNumber, 
+                           thing& target, string& brief);
+      /*!
+       **************************************************************** 
+       * Apply an invocation feat.
+       * \param attacker -> thing that will attack
+       * \param featNumber -> Number of Feat on List
+       * \param target -> target to use the Feat
+       * \param brief -> string that will have briefing
+       * \return \c true if the feat was used.
+       ***************************************************************/
+      bool applyInvocationFeat(thing& attacker, int featNumber, 
+                               thing& target, string& brief);
+
+      /*!
+       **************************************************************** 
        * Test if an attack feat can be used.
        * \param pers -> character that will use the feat
        * \param target -> thing that will receive the feat.
@@ -163,15 +197,10 @@ class feats
        ***************************************************************/
       void defineRangedWeapon(diceThing& weaponDice);
 
-      /*int applyCureAndFixFeat(int featNumber);
-      int applyModifyObjectFeat(int featNumber);
-      int applyConjureFeat(int featNumber);
-      int applyInvocationFeat(int featNumber);*/
-
    private:
-      feat m_feats[MAX_FEATS];           /**< Internal Feats Struct */
-      int  totalFeats;         /**< Actual Number of Feats */
-      lang language; /**< Language Internationalization */
+      feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
+      int  totalFeats;          /**< Actual Number of Feats */
+      lang language;            /**< Language Internationalization */
 
       /*!
        **************************************************************** 
