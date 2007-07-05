@@ -38,15 +38,47 @@ on the game.
 \section{Feats File}
 
 All feats have the same file struct. The way the struct is interpreted is
-dependant from each type of feat.
+dependant from each type of feat. The file struct is:
 
-\subsection{Attack or Break Feats}
+\begin{verbatim}
+Feature Name
+Feature Description
+Requerided Level
+Requerided_Factor_Type Requerided_Factor_Id
+Concept_Bonus_Type Concept_Bonus_Id
+Concept_Against_Type Concept_Against_Id
+Target_Type Target_Id
+Base_Dice
+Aditional_Dice
+Quantity_Per_Day,Aditional_Quantity,Aditional_Levels
+Cost_To_Use Action_Type Action_Id
+Dependent_Feat_Name Dependence_Ratio,Flag_Used
+Dependent_Feat_Name Dependence_Ratio,Flag_Used
+Dependent_Feat_Name Dependence_Ratio,Flag_Used
+Dependent_Feat_Name Dependence_Ratio,Flag_Used
+Dependent_Feat_Name Dependence_Ratio,Flag_Used
+\end{verbatim}
 
-\subsection{Heal or Fix Feats}
+\subsection{Feature Name}
+{\bf Type:} String;\\
+It's the name of the feature.
 
-\subsection{Psycho Feats}
+\subsection{Feature Description}
+{\bf Type:} String;\\
+It's the description of the feature, in only one line, divided by '|' to change lines on the game ({\it will decided latter}).
 
-\subsection{Invocation Feats}
+\subsection{Requerided Level}
+{\bf Type:} Integer;\\
+It's the minimal level (or value) requerided to use this feat.
+
+\subsection{Requerided Factor Type}
+{\bf Type:} String (without spaces);\\
+It's the type of the requerided factor (CLASS, ATTRIBUTE, RACE, etc).
+
+\subsection{Requerided Factor Id}
+{\bf Type:} String (without spaces);\\
+It's the ID of the requerided factor ().
+
 
 \section{Feats List}
 
