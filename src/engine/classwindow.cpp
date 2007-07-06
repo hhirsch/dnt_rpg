@@ -97,7 +97,7 @@ string classWindow::getCharacteristics()
    if(skTmp)
    {
       sprintf(tmp,": ( %d %c %s)x%d|",actualClass->firstLevelSP.sum, 
-              c, skTmp->nome.c_str(), 
+              c, skTmp->name.c_str(), 
               actualClass->firstLevelSP.mult);
    }
    else
@@ -120,7 +120,7 @@ string classWindow::getCharacteristics()
    {
       sprintf(tmp,": ( %d %c %s)x%d||",
               actualClass->otherLevelsSP.sum,
-              c, skTmp->nome.c_str(), 
+              c, skTmp->name.c_str(), 
               actualClass->otherLevelsSP.mult);
    }
    else
@@ -162,7 +162,7 @@ string classWindow::getCharacteristics()
       skTmp = externalSkills->getSkillByString(actualClass->classSkills[i]);
       if(skTmp != NULL)
       {
-         text += skTmp->nome + "|";
+         text += skTmp->name + "|";
       }
       else
       {

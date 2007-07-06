@@ -107,7 +107,7 @@ string raceWindow::getCharacteristics()
       skTmp = externalSkills->getSkillByString(actualRace->raceSkills[i]);
       if(skTmp)
       {
-         text += skTmp->nome + "|";
+         text += skTmp->name + "|";
       }
       else
       {

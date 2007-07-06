@@ -156,7 +156,6 @@ int fightSystem::doTurn(string& brief)
       }
       else
       {
- 
          actualActor = charsInitiatives.nextCharacter();
 
          if(actualActor == NULL)

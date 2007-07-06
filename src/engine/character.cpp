@@ -469,7 +469,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
          if( (isAttribute(cn)) || (isSkill(cn)) )
          {
             fgets(buffer, sizeof(buffer),arq);
-            sscanf(buffer, "%d", &novo->sk.m_skills[cn].pontos);
+            sscanf(buffer, "%d", &novo->sk.m_skills[cn].points);
             //TODO COSTS per SKILL, based on classes...
          }
          else

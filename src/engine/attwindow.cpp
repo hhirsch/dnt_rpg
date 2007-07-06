@@ -163,8 +163,8 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    textDescTitle->setFont(FHELVETICA, 1, ALIGN_LEFT);
    
    textDesc = intWindow->getObjectsList()->insertTextBox(248,53,507,244,1,
-                      (externalSkill->m_skills[1].nome + "||" +
-                       externalSkill->m_skills[1].descricao).c_str());
+                      (externalSkill->m_skills[1].name + "||" +
+                       externalSkill->m_skills[1].description).c_str());
    textDesc->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Confirm Button */
@@ -222,7 +222,7 @@ void attWindow::assignPreviousToDices()
    int i;
    for(i = 0; i < 6; i++)
    {
-      points[i] = saveSkill->m_skills[i+1].pontos;
+      points[i] = saveSkill->m_skills[i+1].points;
       used[i] = true;
    }
 }
@@ -236,7 +236,7 @@ void attWindow::assignPreviousValues()
    char tmp[10];
    for(i = 0; i < 6; i++)
    {
-      sprintf(tmp,"%d", saveSkill->m_skills[i+1].pontos);
+      sprintf(tmp,"%d", saveSkill->m_skills[i+1].points);
       attPoints[i]->setText(tmp);
       attPointsIndex[i] = i;
       assignAttMod(i);
@@ -387,7 +387,7 @@ int attWindow::assignAttMod(int att)
    char tmpTotal[10];
    int attBonus = (int)floor((points[attPointsIndex[att]]-10) / 2.0);
 
-   saveSkill->m_skills[att+1].pontos = points[attPointsIndex[att]];
+   saveSkill->m_skills[att+1].points = points[attPointsIndex[att]];
 
    //TODO calculate race and class bonus
    
@@ -482,8 +482,8 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
                 sprintf(tmp,"%d", points[attPointsIndex[i]]);
                 attPoints[i]->setText(tmp);
                 assignAttMod(i);
-                textDesc->setText(externalSkill->m_skills[i+1].nome + "||" +
-                                  externalSkill->m_skills[i+1].descricao);
+                textDesc->setText(externalSkill->m_skills[i+1].name + "||" +
+                                  externalSkill->m_skills[i+1].description);
                 intWindow->draw(0,0);
             }
             else if(object == (guiObject*) attButtonPrev[i])
@@ -492,8 +492,8 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
                 sprintf(tmp,"%d", points[attPointsIndex[i]]);
                 attPoints[i]->setText(tmp);
                 assignAttMod(i);
-                textDesc->setText(externalSkill->m_skills[i+1].nome + "||" +
-                                  externalSkill->m_skills[i+1].descricao);
+                textDesc->setText(externalSkill->m_skills[i+1].name + "||" +
+                                  externalSkill->m_skills[i+1].description);
 
                 intWindow->draw(0,0);
             }

@@ -55,14 +55,14 @@ skills::skills(string dir, string arq)
          return;
       }
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].nome = buffer;
+      m_skills[aux].name = buffer;
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].descricao = buffer;
-      fscanf(desc,"%d",&m_skills[aux].habilidadeBase);
-      m_skills[aux].pontos = 0;
+      m_skills[aux].description = buffer;
+      fscanf(desc,"%d",&m_skills[aux].baseAttribute);
+      m_skills[aux].points = 0;
       m_skills[aux].mod = 2;
-      m_skills[aux].antPontos = 0;
-      m_skills[aux].imagem = IMG_Load(arqImagem.c_str());
+      m_skills[aux].prevPoints = 0;
+      m_skills[aux].image = IMG_Load(arqImagem.c_str());
       fclose(desc);
    }
 
@@ -91,13 +91,13 @@ skills::skills(skills* sk)
 
    for(aux = 0; aux < totalSkills; aux++)
    {
-      m_skills[aux].nome = sk->m_skills[aux].nome;
-      m_skills[aux].descricao = "";//sk->m_skills[aux].descricao;
-      m_skills[aux].pontos = 0;
-      m_skills[aux].antPontos = 0;
+      m_skills[aux].name = sk->m_skills[aux].name;
+      m_skills[aux].description = "";//sk->m_skills[aux].descricao;
+      m_skills[aux].points = 0;
+      m_skills[aux].prevPoints = 0;
       m_skills[aux].mod = 2;
-      m_skills[aux].habilidadeBase = sk->m_skills[aux].habilidadeBase;
-      m_skills[aux].imagem = NULL;
+      m_skills[aux].baseAttribute = sk->m_skills[aux].baseAttribute;
+      m_skills[aux].image = NULL;
       m_skills[aux].idString = sk->m_skills[aux].idString;
    }
 
@@ -156,14 +156,14 @@ skills::skills()
          return;
       }
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].nome = buffer;
+      m_skills[aux].name = buffer;
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].descricao = "";
-      fscanf(desc,"%d",&m_skills[aux].habilidadeBase);
-      m_skills[aux].pontos = 0;
+      m_skills[aux].description = "";
+      fscanf(desc,"%d",&m_skills[aux].baseAttribute);
+      m_skills[aux].points = 0;
       m_skills[aux].mod = 2;
-      m_skills[aux].antPontos = 0;
-      m_skills[aux].imagem = NULL;
+      m_skills[aux].prevPoints = 0;
+      m_skills[aux].image = NULL;
       fclose(desc);
    }
 
@@ -179,9 +179,9 @@ skills::~skills()
   int aux;
   for(aux = 0; aux < totalSkills;aux++)
   {
-     if( m_skills[aux].imagem)
+     if( m_skills[aux].image)
      {
-        SDL_FreeSurface( m_skills[aux].imagem );
+        SDL_FreeSurface( m_skills[aux].image );
      }
   }
   if(m_skills)
@@ -234,8 +234,8 @@ void skills::clear()
    /* Clear only skills */
    for(aux = ATT_SKILL_FIRST; aux < totalSkills; aux++)
    {
-      m_skills[aux].pontos = 0;
-      m_skills[aux].antPontos = 0;
+      m_skills[aux].points = 0;
+      m_skills[aux].prevPoints = 0;
    }
 }
 

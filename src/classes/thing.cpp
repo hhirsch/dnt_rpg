@@ -43,8 +43,8 @@ thing::~thing()
 int thing::skillBonus(skill* curSkill)
 {
    int att;
-   att = attBonus(curSkill->habilidadeBase);
-   return(att + curSkill->pontos);
+   att = attBonus(curSkill->baseAttribute);
+   return(att + curSkill->points);
 }
 
 /******************************************************
@@ -52,7 +52,7 @@ int thing::skillBonus(skill* curSkill)
  ******************************************************/
 int thing::attBonus(skill* curAttribute)
 {
-   return((int)floor((curAttribute->pontos-10) / 2.0));
+   return((int)floor((curAttribute->points-10) / 2.0));
 }
 
 int thing::attBonus(int curAttribute)
