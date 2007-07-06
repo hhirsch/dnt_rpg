@@ -3,7 +3,6 @@
 ================================================
  - Meteors and FireSpheres;
  - Using LUA for AI Scripts;
- - Fixed Bug on Remove no more used Models;
  - Workspace for compiling at M$ Visual C++ 6;
  - More Engine Optimizations;
  - Smooth Camera Movements;
@@ -14,6 +13,10 @@
  - Rewrite the GUI;
  - Put the code fully on English (instead of some
    places on english, others on portuguese);
+ - Fixed Bug on Remove no more used Models;
+ - Fixed Bug on NPCs Fight Animations;
+ - Fixed Bug on configures;
+
 
 ================================================
 |               Version 0.1.1                  |
