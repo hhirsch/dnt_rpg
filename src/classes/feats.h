@@ -184,15 +184,13 @@ class feats
 
       /*!
        **************************************************************** 
-       * Define the active character's base attack character to be 
-       * a melee attack.
+       * Define the active character's base attack to be a melee one.
        * \param weaponDice -> the dice of the weapon used.
        ***************************************************************/
       void defineMeleeWeapon(diceThing& weaponDice);
       /*!
        **************************************************************** 
-       * Define the active character's base attack character to be 
-       * a ranged attack.
+       * Define the active character's base attack to be a ranged one.
        * \param weaponDice -> the dice of the weapon used.
        ***************************************************************/
       void defineRangedWeapon(diceThing& weaponDice);

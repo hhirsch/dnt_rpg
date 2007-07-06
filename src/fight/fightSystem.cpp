@@ -139,7 +139,11 @@ int fightSystem::doTurn(string& brief)
       if( (actualActor != NULL) && (actualActor->actualEnemy != NULL) && 
           (pendingAnimation))
       {
+         /* Put the actor at idle state */
          pendingAnimation = false;
+         actualActor->setState(STATE_IDLE);
+
+         /* Kill the target, if it is dead */
          if(actualActor->actualEnemy->lifePoints <= 0)
          {
             //FIXME Other states, like partial death to be implemented
