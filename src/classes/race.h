@@ -16,6 +16,12 @@ class race
       race();
       ~race();
 
+      /*! Apply the Skill Costs, based on the race (in other words,
+       * put the cost = 1 to all race skills)
+       * \param sk -> character skill list */
+      void applySkillCosts(skills* sk);
+
+
       int intID;              /**< Integer Identifier of the race */
       string strID;           /**< String Identifier of the race */
       SDL_Surface* image;     /**< Image of the Race */
@@ -58,7 +64,7 @@ class races
        * \param id -> string ID of the race
        * \return race found, if found one. */
       race* getRaceByString(string id);
-      
+
    private:
       int totalRaces;              /**< Total Races on List */
       race* first;                 /**< First Race on List */

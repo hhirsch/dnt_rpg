@@ -18,6 +18,11 @@ class classe
       /*! Destructor */
       ~classe();
 
+      /*! Apply the Skill Costs, based on the race (in other words,
+       * put the cost = 1 to all race skills)
+       * \param sk -> character skill list */
+      void applySkillCosts(skills* sk);
+
       int intID;                 /**< Integer Identifier of the class */
       string strID;              /**< String Identifier of the class */
       SDL_Surface* image;        /**< Image of the Class */

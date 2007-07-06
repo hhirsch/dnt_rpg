@@ -52,6 +52,26 @@ race::~race()
    }
 }
 
+/******************************************************************
+ *                          applySkillCosts                       *
+ ******************************************************************/
+void race::applySkillCosts(skills* sk)
+{
+   int i;
+   skill* s = NULL;
+   for(i=0; i<totalSkills; i++)
+   {
+      s = sk->getSkillByString(raceSkills[i]);
+      if(s != NULL)
+      {
+         s->mod = 1;
+      }
+      else
+      {
+         printf("Warn: Unknow race Skill: %s\n",raceSkills[i].c_str());
+      }
+   }
+}
 
 /******************************************************************
  *                            Constructor                         *
@@ -84,7 +104,8 @@ races::races(string directory, string fileListName)
    for(i = 0; i < total; i++)
    {
       getline(file, aux);
-      sscanf(aux.c_str(),"%d %s %s %s",&idInt,&arqName[0],&imgFile[0],&idStr[0]);
+      sscanf(aux.c_str(),"%d %s %s %s",&idInt,&arqName[0],&imgFile[0],
+             &idStr[0]);
       insertRace(directory+arqName, imgFile, idStr, idInt);
    }
 
@@ -140,8 +161,6 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
    getline(file, ins->description);
 
    /* Image */
-   //getline(file, str);
-
    ins->image = IMG_Load(imgFile.c_str());
    if(!ins->image)
    {
@@ -234,9 +253,8 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
    totalRaces++;
 }
 
-
 /******************************************************************
- *                         getRaceByInteger                      *
+ *                          getRaceByInteger                      *
  ******************************************************************/
 race* races::getRaceByInteger(int id)
 {

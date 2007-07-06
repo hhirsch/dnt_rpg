@@ -236,6 +236,7 @@ void skills::clear()
    {
       m_skills[aux].points = 0;
       m_skills[aux].prevPoints = 0;
+      m_skills[aux].mod = 2;
    }
 }
 

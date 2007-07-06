@@ -17,7 +17,7 @@ typedef struct _skill
 {
    int points;             /**< Total skill points */
    int prevPoints;         /**< Previous skill points, when adding and cancel */
-   int mod;                /**< Needed points to add +1 on pontos */
+   int mod;                /**< Needed points to add +1 on points */
    string name;            /**< Skill Name */
    string description;     /**< Skill Description */
    string idString;        /**< String Identificator of the Skill */

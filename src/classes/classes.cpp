@@ -53,6 +53,27 @@ classe::~classe()
 }
 
 /******************************************************************
+ *                          applySkillCosts                       *
+ ******************************************************************/
+void classe::applySkillCosts(skills* sk)
+{
+   int i;
+   skill* s = NULL;
+   for(i=0; i<totalSkills; i++)
+   {
+      s = sk->getSkillByString(classSkills[i]);
+      if(s != NULL)
+      {
+         s->mod = 1;
+      }
+      else
+      {
+         printf("Warn: Unknow class Skill: %s\n",classSkills[i].c_str());
+      }
+   }
+}
+
+/******************************************************************
  *                            Constructor                         *
  ******************************************************************/
 classes::classes(string directory, string fileListName)

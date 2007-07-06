@@ -128,8 +128,15 @@ class character: public aniModel
         *  Usually called after death*/
        void newInventory();
 
-       string getCharacterFile(){return(characterFile);};
+       /*! Apply all Race and Classes Skills Costs */
+       void applySkillCosts();
 
+       /*! Get the character filename
+        * \return -> the character filename */
+       string getCharacterFile(){return(characterFile);};
+   
+       /*! Set the character file
+        * \param fileName -> new fileName of the character */
        void setCharacterFile(string fileName){characterFile = fileName;}
 
        character* next;             /**< Next Character on List */

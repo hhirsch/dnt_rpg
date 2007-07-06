@@ -249,6 +249,7 @@ int character::getPoints(points pt)
 void character::clearSkills()
 {
    sk.clear();
+   applySkillCosts();
    sk.setAvaiblePoints(getFirstLevelSkillPoints(0));
 }
 
@@ -321,6 +322,27 @@ void character::setOrientation(GLfloat ori)
 {
    orientacao = ori;
    pathFind.setOrientation(ori);
+}
+
+/*********************************************************************
+ *                           applySkillCosts                         *
+ *********************************************************************/
+void character::applySkillCosts()
+{
+   int i;
+
+   /* Apply Race Costs */
+   actualRace->applySkillCosts(&sk);
+
+   //FIXME Classes Costs will be only per actual class?
+   //      In the way bellow is always for all classes.
+   for(i = 0; i<MAX_DISTINCT_CLASSES; i++)
+   {
+      if(actualClass[i] != NULL)
+      {
+         actualClass[i]->applySkillCosts(&sk);
+      }
+   }
 }
 
 
