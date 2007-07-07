@@ -154,6 +154,7 @@ bool barter::imposeBarter()
    //   doBarter();
    //   return(true);
    //}
+   //TODO, it rejects, verify if will enter battle mode.
    return(false);
 }
 

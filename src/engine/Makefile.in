@@ -26,7 +26,7 @@ OBJSLANG = $(ENDLANG)lang.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)glm.o $(ENDETC)texture.o $(ENDETC)modellist.o
-OBJS = alignwindow.o aspectwindow.o attwindow.o camera.o character.o classwindow.o collision.o dialog.o culling.o cursor.o dccnit.o initial.o inventwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
+OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o camera.o character.o classwindow.o collision.o dialog.o culling.o cursor.o dccnit.o initial.o inventwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
@@ -46,6 +46,11 @@ aspectwindow.o: aspectwindow.h aspectwindow.cpp
 attwindow.o: attwindow.h attwindow.cpp
 	@printf "Making attwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) attwindow.cpp -o attwindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+barterwindow.o: barterwindow.h barterwindow.cpp
+	@printf "Making barterwindow.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) barterwindow.cpp -o barterwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 camera.o: camera.cpp camera.h
