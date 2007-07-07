@@ -703,8 +703,6 @@ int engine::CharacterScreen(GLuint idTextura)
    raceWindow* rcWindow = new raceWindow(raceList,&activeCharacter->sk,gui,
                                          &activeCharacter->actualRace);
 
-   //TODO Apply skills cost points modifiers                              
-
    while( (status != 6) )
    {
       tempo = SDL_GetTicks();
@@ -1309,7 +1307,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                    /* Get Object */
                    lastMousePression = tempo;
                    briefTxt->addText("|");
-                   if(activeCharacter->inventories->addObject(quaux->objects[obj]))
+                   if(activeCharacter->inventories->addObject(
+                                                           quaux->objects[obj]))
                    {
                       briefTxt->addText(quaux->objects[obj]->getName() + " " +
                                         language.ACTION_TAKEN); 
@@ -1412,8 +1411,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
          x[3] = pers->max[0];
          z[3] = pers->min[2];
 
-         rotTransBoundingBox(pers->orientacao, x, z,pers->posicaoLadoX,0.0, 0.0, 
-                                pers->posicaoLadoZ, min, max );
+         rotTransBoundingBox(pers->orientacao, x, z,pers->posicaoLadoX,0.0, 0.0,
+                             pers->posicaoLadoZ, min, max );
 
          if(intercepts( min, max, minMouse, maxMouse, 1))
          {
@@ -1798,29 +1797,30 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          if(keys[SDLK_t])
          {
             particleSystem->addParticle(PART_METEOR,
-                                        activeCharacter->posicaoLadoX,ALTURAMAXIMA+100,
+                                        activeCharacter->posicaoLadoX,
+                                        ALTURAMAXIMA+100,
                                         activeCharacter->posicaoLadoZ,
                                         0.0, -1.0, 0.0,
                                         activeCharacter->posicaoLadoX,
                                         actualMap->getHeight(
-                                                         activeCharacter->posicaoLadoX,
-                                                         activeCharacter->posicaoLadoZ),
-                                        activeCharacter->posicaoLadoZ,
-                                        "../data/particles/fire1.par");
+                                                activeCharacter->posicaoLadoX,
+                                                activeCharacter->posicaoLadoZ),
+                                                activeCharacter->posicaoLadoZ,
+                                                "../data/particles/fire1.par");
          }
          if(keys[SDLK_u])
          {
             GLfloat incZ = -cos(deg2Rad(activeCharacter->orientacao));
             GLfloat incX = -sin(deg2Rad(activeCharacter->orientacao));
             particleSystem->addParticle(PART_METEOR,
-                                        activeCharacter->posicaoLadoX,
-                                        activeCharacter->posicaoLadoY + 15,
-                                        activeCharacter->posicaoLadoZ,
-                                        incX, 0.0, incZ,
-                                        activeCharacter->posicaoLadoX + 200*incX,
-                                        activeCharacter->posicaoLadoY + 15,
-                                        activeCharacter->posicaoLadoZ + 200*incZ,
-                                        "../data/particles/fire1.par");
+                                       activeCharacter->posicaoLadoX,
+                                       activeCharacter->posicaoLadoY + 15,
+                                       activeCharacter->posicaoLadoZ,
+                                       incX, 0.0, incZ,
+                                       activeCharacter->posicaoLadoX + 200*incX,
+                                       activeCharacter->posicaoLadoY + 15,
+                                       activeCharacter->posicaoLadoZ + 200*incZ,
+                                       "../data/particles/fire1.par");
          }
          if(keys[SDLK_l])
          {
@@ -2549,16 +2549,7 @@ void engine::renderNoShadowThings()
  ********************************************************************/
 void engine::renderGUI()
 {
-   /* Draw the GUI and others */
-   //GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
-   
-   /* Get Portrait position */
-   /*gluUnProject(SCREEN_X,SCREEN_Y, 0.01, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject(SCREEN_X,SCREEN_Y-74,0.01, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject(SCREEN_X-64,SCREEN_Y-74,0.01,modl,proj,viewPort, &x3, &y3, &z3);
-   gluUnProject(SCREEN_X-64,SCREEN_Y,0.01, modl, proj, viewPort, &x4, &y4, &z4);
-   */
-   
+   /* Draw the GUI */   
    glDisable(GL_LIGHTING);
    glDisable(GL_FOG);
    glDisable(GL_DEPTH_TEST);
@@ -2812,7 +2803,8 @@ void engine::OpenShortcutsWindow()
 
    buttonSave = shortCutsWindow->getObjectsList()->insertButton(8,102,76,120,
                                                language.INITIAL_SAVE.c_str(),0);
-   buttonMenu = shortCutsWindow->getObjectsList()->insertButton(77,102,140,120,"Menu",0);
+   buttonMenu = shortCutsWindow->getObjectsList()->insertButton(77,102,140,120,
+                                                                "Menu",0);
    buttonLoad = shortCutsWindow->getObjectsList()->insertButton(141,102,209,120,
                                                language.INITIAL_LOAD.c_str(),0);
    hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,249,120,2,
@@ -2847,7 +2839,8 @@ void engine::OpenShortcutsWindow()
    tb->insertButton(220,40,256,72);/* Attack 6 */
    buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 
-   shortCutsWindow->getObjectsList()->insertPicture(3,15,252,120,"../data/texturas/shortcut2.png");
+   shortCutsWindow->getObjectsList()->insertPicture(3,15,252,120,
+                                              "../data/texturas/shortcut2.png");
    
    shortCutsWindow->setExternPointer(&shortCutsWindow);
    gui->openWindow(shortCutsWindow);
@@ -2860,8 +2853,6 @@ void engine::OpenCloseInventoryWindow()
 {
    if(!inventoryWindow)
    {
-      /* TODO get the right inventories!!! (when openning inventory from 
-       * another person) */
       inventoryWindow = new inventWindow(PCs->getActiveCharacter()->inventories,
                                          gui); 
    }
