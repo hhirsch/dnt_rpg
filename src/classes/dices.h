@@ -19,9 +19,10 @@
        correspondent to \e numberOfDices*random(diceID)+sumNumber.*/
 typedef struct _dice
 {
-   int diceID;           /**< ID of Dice. Represents the number of dice faces.*/
-   int numberOfDices;    /**< Number of Dices to roll. */
-   int sumNumber;        /**< Base Number to Sum to value.*/
+   int diceID;             /**< ID of Dice. Represents the number of faces.*/
+   int numberOfDices;      /**< Number of Dices to roll. */
+   int sumNumber;          /**< Base Number to Sum to value.*/
+   int criticalMultiplier; /**< The critical Multiplier Value */
 }dice;
 
 /*! 

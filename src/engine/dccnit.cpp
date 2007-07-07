@@ -1041,6 +1041,7 @@ void engine::enterBattleMode(bool surprisePC)
   dc.baseDice.numberOfDices = 1;
   dc.baseDice.sumNumber = 2;
   dc.initialLevel = 1;
+  dc.baseDice.criticalMultiplier = 1;
   character* activeCharacter = PCs->getActiveCharacter();
   
   fight.empty();

@@ -147,7 +147,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
    int damage = 0;
    int targetValue; 
    int bonus;
-   int i;
+   int i,j;
    bool criticalHit = false;
    bool criticalMiss = false;
    bool miss = false;
@@ -257,13 +257,19 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       /* Apply Critical Hit */
       if(criticalHit)
       {
-         /* Double Base Damage Dices */
-         for(i = 0; i<m_feats[featNumber].diceInfo.baseDice.numberOfDices; i++)
+         /* Throws the dice by the number of critical multipliers */
+         for(j = 0; j<m_feats[featNumber].diceInfo.baseDice.criticalMultiplier; 
+             j++)
          {
-             damage+=(rand()%m_feats[featNumber].diceInfo.baseDice.diceID)+1;
+            /* Double Base Damage Dices */
+            for(i = 0; i<m_feats[featNumber].diceInfo.baseDice.numberOfDices; 
+                i++)
+            {
+                damage+=(rand()%m_feats[featNumber].diceInfo.baseDice.diceID)+1;
+            }
+            /* Sum Dice Damage Number */
+            damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
          }
-         /* Sum Dice Damage Number */
-         damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
       }
 
       
