@@ -198,7 +198,9 @@ int attWindow::rollDices()
    int ret = 0;
    for(i = 0; i < 4; i++)
    {
+      srand(SDL_GetTicks());
       value[i] = (rand() % DICE_D6) + 1;
+      SDL_Delay(10);
       if(value[i] < value[minor])
       {
          minor = i;
@@ -268,9 +270,7 @@ void attWindow::rollAllDices()
    int i;
    for(i = 0; i < 6; i++)
    {
-      srand(SDL_GetTicks());
       points[i] = rollDices();
-      SDL_Delay(40);
    }
 }
 
