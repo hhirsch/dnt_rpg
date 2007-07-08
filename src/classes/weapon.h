@@ -2,6 +2,7 @@
 #define _weapon_h
 
 #include "../etc/animodel.h"
+#include "dices.h"
 
 /*! The Weapon Class Definition */
 class weapon: public aniModel
@@ -41,12 +42,12 @@ class weapon: public aniModel
       /*! Calls the attack animation of the weapon */
       void attackAnimation();
    protected:
-      int category;           /**< Weapon Category (Ex: Exothic)  */
+      int categoryType;       /**< Weapon Category (Ex: Exothic)  */
       int rangeType;          /**< Range Type (Ex: Meele) */
       int sizeType;           /**< Size Type (Ex: Light) */
       int styleType;          /**< Style Type (Ex: Two-Handed) */
       float cost;             /**< Cost Value */
-      diceThing damage;       /**< Damage Dices */
+      diceThing damageDice;   /**< Damage Dices */
       int rangeValue;         /**< Range Value */
       float weight;           /**< Weight Value */
       int damageType;         /**< Damage Type (Ex: Slashing) */
