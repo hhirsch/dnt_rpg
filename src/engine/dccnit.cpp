@@ -399,9 +399,6 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    {
       per->update(0); 
       per->calculateBoundingBox();  
-      //FIXME gambiarra to make logan bounding ok when arms down.
-        per->max[0] /= 2.0;
-        per->min[0] /= 2.0;
       per = (character*) per->next;
    }
 

@@ -20,14 +20,15 @@ weapon::~weapon()
 /************************************************************
  *                           getType                        *
  ************************************************************/
-void weapon::getType(int& category, int& range, int& size, int& style, 
-                     int& damage)
+void weapon::getType(int& category, int& range, int& size, int& style,
+                     int& damageA, int& damageB)
 {
    category = categoryType;
    range = rangeType;
    size = sizeType;
    style = styleType;
-   damage = damageType;
+   damageA = damageType[0];
+   damageB = damageType[1];
 }
 
 /************************************************************

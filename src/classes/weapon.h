@@ -19,9 +19,10 @@ class weapon: public aniModel
        * \param range -> range type of the weapn (meele or ranged)
        * \param size -> size type of the weapon
        * \param style -> style type of the weapon
-       * \param damage -> damage type of the weapon */
-      void getType(int& category, int& range, int& size, int& style, 
-                   int& damage);
+       * \param damageA -> first damage type
+       * \param damageB -> second damage type */
+      void getType(int& category, int& range, int& size, int& style,
+                   int& damageA, int& damageB);
 
       /*! Get the weapon's cost
        * \return weapons cost */
@@ -50,7 +51,8 @@ class weapon: public aniModel
       diceThing damageDice;   /**< Damage Dices */
       int rangeValue;         /**< Range Value */
       float weight;           /**< Weight Value */
-      int damageType;         /**< Damage Type (Ex: Slashing) */
+      int damageType[2];      /**< Damage Type Vector (Ex: Slashing) */
+      string attackSound[2];  /**< Damage Type Sounds Files */
 
       /*! TODO /todo Special things on weapons! It's, for example a 
        * resistance, a special damage, etc.. */

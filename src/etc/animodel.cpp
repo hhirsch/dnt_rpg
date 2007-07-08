@@ -96,27 +96,29 @@ void aniModel::calculateBoundingBox()
      
      for(aux2 = 0;aux2 < 8; aux2++)
      {
+        /* NOTE: Do not forget that if the blender coordinate system is
+         * (x,y,z), the DNT system is (-x,z,y) */
         if(!computed)
         {
-           min[0] = p[aux2].x; max[0] = p[aux2].x; 
-           min[1] = p[aux2].y; max[1] = p[aux2].y;
-           min[2] = p[aux2].z; max[2] = p[aux2].z;
+           min[0] = -p[aux2].x; max[0] = -p[aux2].x; 
+           min[1] = p[aux2].z; max[1] = p[aux2].z;
+           min[2] = p[aux2].y; max[2] = p[aux2].y;
            computed = 1;
         }
         else
         {
-           if(p[aux2].x > max[0])
-             max[0] = p[aux2].x;
-           if(p[aux2].x < min[0])
-             min[0] = p[aux2].x;
-           if(p[aux2].y > max[1])
-             max[1] = p[aux2].y;
-           if(p[aux2].y < min[1])
-             min[1] = p[aux2].y;
-           if(p[aux2].z > max[2])
-             max[2] = p[aux2].z;
-           if(p[aux2].z < min[2])
-             min[2] = p[aux2].z;
+           if(-p[aux2].x > max[0])
+             max[0] = -p[aux2].x;
+           if(-p[aux2].x < min[0])
+             min[0] = -p[aux2].x;
+           if(p[aux2].z > max[1])
+             max[1] = p[aux2].z;
+           if(p[aux2].z < min[1])
+             min[1] = p[aux2].z;
+           if(p[aux2].y > max[2])
+             max[2] = p[aux2].y;
+           if(p[aux2].y < min[2])
+             min[2] = p[aux2].y;
         }
      }
   }
@@ -233,7 +235,8 @@ bool aniModel::loadModel(const string& strFilename)
     {
       // load core mesh
       //std::cout << "Loading mesh '" << strData << "'..." << std::endl;
-      if(m_calCoreModel->loadCoreMesh(strPath + strData) == -1)
+      int meshID = m_calCoreModel->loadCoreMesh(strPath + strData);
+      if(meshID == -1)
       {
         CalError::printLastError();
         return false;
@@ -286,7 +289,8 @@ bool aniModel::loadModel(const string& strFilename)
 
   // make one material thread for each material
   // mapping without further information on the model etc.
-  for(materialId = 0; materialId < m_calCoreModel->getCoreMaterialCount(); materialId++)
+  for(materialId = 0; 
+      materialId < m_calCoreModel->getCoreMaterialCount(); materialId++)
   {
     // create the a material thread
     m_calCoreModel->createCoreMaterialThread(materialId);
@@ -336,7 +340,7 @@ void aniModel::renderBoundingBox()
 
    for(size_t boneId=0;boneId<vectorCoreBone.size();++boneId)
    {
-      CalBoundingBox & calBoundingBox  = vectorCoreBone[boneId]->getBoundingBox();
+      CalBoundingBox &calBoundingBox = vectorCoreBone[boneId]->getBoundingBox();
 
 	  CalVector p[8];
 	  calBoundingBox.computePoints(p);
@@ -389,6 +393,9 @@ void aniModel::renderBoundingBox()
  *********************************************************************/
 void aniModel::render()
 {
+  glPushMatrix();
+   glRotatef(180,0,1,0);
+   glRotatef(-90,1,0,0);
 
   m_calModel->getSkeleton()->calculateBoundingBoxes();
   // get the renderer of the model
@@ -487,7 +494,8 @@ void aniModel::render()
           glEnable(GL_COLOR_MATERIAL);
 
           // set the texture id we stored in the map user data
-          glBindTexture(GL_TEXTURE_2D, (unsigned long)pCalRenderer->getMapUserData(0));
+          glBindTexture(GL_TEXTURE_2D, 
+                        (unsigned long)pCalRenderer->getMapUserData(0));
 
           // set the texture coordinate buffer
           glTexCoordPointer(2, GL_FLOAT, 0, &meshTextureCoordinates[0][0]);
@@ -520,6 +528,8 @@ void aniModel::render()
   glDisableClientState(GL_VERTEX_ARRAY);
 
   pCalRenderer->endRendering();
+
+  glPopMatrix();
 
 }
 
