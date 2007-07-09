@@ -14,6 +14,7 @@
  - Put the code fully on English (instead of some
    places on english, others on portuguese);
  - New Sound Effects;
+ - Objects are now only in cal3D, no more .obj;
  - Fixed Bug on Remove no more used Models;
  - Fixed Bug on NPCs Fight Animations;
  - Fixed Bug on configures;

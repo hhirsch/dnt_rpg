@@ -1,4 +1,4 @@
 3
-Door_1 ../data/models/objetos/geral/porta.dcc
-Door_2 ../data/models/objetos/geral/porta2.dcc
-Door_3 ../data/models/objetos/geral/porta3.dcc
+Door_1 ../data/models/objetos/geral/porta/porta.dcc
+Door_2 ../data/models/objetos/geral/porta2/porta2.dcc
+Door_3 ../data/models/objetos/geral/porta3/porta3.dcc

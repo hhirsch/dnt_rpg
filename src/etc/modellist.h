@@ -1,7 +1,7 @@
 #ifndef _modelslist_h
 #define _modelslist_h
 
-#include "glm.h"
+#include "animodel.h"
 #include <string>
 using namespace std;
 
@@ -23,7 +23,7 @@ class boundingBox
 
 
 /*! The 3D model of an object */
-class model3d
+class model3d: public aniModel
 {
    public:
       /*! Constructor
@@ -54,12 +54,23 @@ class model3d
       /*! Gets the Bounding box of the model */
       boundingBox getBoundingBox();
 
+
+      /*!
+       **********************************************/
+       void callDeadAnimation();
+
+      /*!
+       **********************************************/
+       void callAttackAnimation();
+
+      /*!
+       **********************************************/
+       void callIdleAnimation();
       
       model3d* next;     /**< next model on list */
       model3d* previous; /**< previous model on list */
 
    protected:
-      GLMmodel* model;   /**< Pointer to opened GLM Object */
       string fileName;   /**< Nome of the Model's file */
 
       int usedFlag;      /**< The used flag. When used is 0, remove the 

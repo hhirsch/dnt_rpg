@@ -15,13 +15,7 @@
 model3d::model3d(string path, string texturePath)
 {
    fileName = path;
-   model = glmReadOBJ(path.c_str(), texturePath.c_str(), 1);
-   if(!model)
-   {
-      model = NULL;
-      printf("Error on Openning Model: %s\n", path.c_str());
-      printf("Maybe will crash soon!\n");
-   }
+   loadModel(path);
    usedFlag = 0;
 }
 
@@ -30,14 +24,6 @@ model3d::model3d(string path, string texturePath)
  ********************************************************/
 model3d::~model3d()
 {
-   if(model)
-   {
-      glmDelete(model);
-   }
-   else
-   {
-      printf("Model: %s can't remove Model!\n", fileName.c_str());
-   }
 }
 
 /********************************************************
@@ -45,10 +31,7 @@ model3d::~model3d()
  ********************************************************/
 void model3d::draw()
 {
-   if(model)
-   {
-      glmDrawLists(model);
-   }
+   render();
 }
 
 /********************************************************
@@ -93,14 +76,31 @@ string model3d::getFileName()
 boundingBox model3d::getBoundingBox()
 {
    boundingBox b;
-   b.x1 = model->x1;
-   b.x2 = model->x2;
-   b.z1 = model->z1;
-   b.z2 = model->z2;
-   b.y1 = model->y1;
-   b.y2 = model->y2;
+   calculateBoundingBox();
+   b.x1 = min[0];
+   b.x2 = max[0];
+   b.z1 = min[2];
+   b.z2 = max[2];
+   b.y1 = min[1];
+   b.y2 = max[1];
    return(b);
 }
+
+void model3d::callDeadAnimation()
+{
+   //TODO
+}
+
+void model3d::callAttackAnimation()
+{
+   //TODO
+}
+
+void model3d::callIdleAnimation()
+{
+   //TODO
+}
+
 
 
 /*************************************************************************
