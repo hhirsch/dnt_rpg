@@ -82,9 +82,9 @@ public:
       /*!
        ***************************************************************
        * Define the opened map
-       * \param map -> pointer to the opened map
+       * \param actualMap -> pointer to the opened map
        ***************************************************************/
-      void defineMap(void* map);
+      void defineMap(void* actualMap);
 
       /*!
        ***************************************************************

@@ -245,11 +245,11 @@ string grass::getGrassFileName()
 /**************************************************************************
  *                              defineMap                                 *
  **************************************************************************/
-void grass::defineMap(void* map)
+void grass::defineMap(void* actualMap)
 {
    int i;
-   usedMap = map;
-   Map* mapa = (Map*)map;
+   usedMap = actualMap;
+   Map* mapa = (Map*)actualMap;
    for(i = 0; i < maxParticles; i++)
    {
       if(particles[i].status != PARTICLE_STATUS_DEAD)
