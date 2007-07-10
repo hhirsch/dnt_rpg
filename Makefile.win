@@ -5,9 +5,9 @@ CPP  = g++.exe
 CC   = gcc.exe
 WINDRES = windres.exe
 RES  = 
-OBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/classes/align.o src/engine/alignwindow.o src/engine/camera.o src/engine/collision.o src/ia/astar.o src/particle/wave.o src/ia/agent.o src/ia/pattAgent.o src/ia/potentAgent.o src/ia/fuzzy.o src/ia/fuzzyfunction.o src/ia/fuzzyrule.o src/ia/fuzzyvariable.o src/particle/grass.o src/classes/race.o src/engine/racewindow.o src/sound/ogg_stream.o src/sound/sndfx.o src/gui/messages.o src/engine/sky.o src/classes/inventory.o src/classes/object.o src/etc/modellist.o src/engine/inventwindow.o src/gui/rolbar.o src/map/maproad.o src/classes/classes.o src/engine/classwindow.o src/etc/animodel.o src/engine/modstate.o src/engine/aspectwindow.o $(RES)
-LINKOBJ  = src/engine/teste.o src/engine/conversa.o src/engine/culling.o src/engine/dccnit.o src/engine/personagens.o src/etc/fifo.o src/etc/glm.o src/gui/bartexto.o src/gui/botao.o src/gui/cores.o src/gui/cxsel.o src/gui/desenho.o src/gui/erro.o src/gui/eventos.o src/gui/farso.o src/gui/figura.o src/gui/fonte.o src/gui/janela.o src/gui/lista.o src/gui/menu.o src/gui/mouse.o src/gui/quadtexto.o src/gui/seltexto.o src/map/map.o src/map/mapobjeto.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/gui/tabbotao.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/classes/align.o src/engine/alignwindow.o src/engine/camera.o src/engine/collision.o src/ia/astar.o src/particle/wave.o src/ia/agent.o src/ia/pattAgent.o src/ia/potentAgent.o src/ia/fuzzy.o src/ia/fuzzyfunction.o src/ia/fuzzyrule.o src/ia/fuzzyvariable.o src/particle/grass.o src/classes/race.o src/engine/racewindow.o src/sound/ogg_stream.o src/sound/sndfx.o src/gui/messages.o src/engine/sky.o src/classes/inventory.o src/classes/object.o src/etc/modellist.o src/engine/inventwindow.o src/gui/rolbar.o src/map/maproad.o src/classes/classes.o src/engine/classwindow.o src/etc/animodel.o src/engine/modstate.o src/engine/aspectwindow.o $(RES)
-LIBS =  -L"C:/DevCpp/lib" -mwindows -g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_image -lcal3d -logg -lvorbis -lvorbisfile -lopenal32   
+OBJ  = src/engine/teste.o src/engine/culling.o src/engine/dccnit.o src/gui/cxsel.o src/gui/menu.o src/map/map.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/classes/align.o src/engine/alignwindow.o src/engine/camera.o src/engine/collision.o src/ia/astar.o src/particle/wave.o src/ia/agent.o src/ia/pattAgent.o src/ia/potentAgent.o src/ia/fuzzy.o src/ia/fuzzyfunction.o src/ia/fuzzyrule.o src/ia/fuzzyvariable.o src/particle/grass.o src/classes/race.o src/engine/racewindow.o src/sound/ogg_stream.o src/sound/sndfx.o src/gui/messages.o src/engine/sky.o src/classes/inventory.o src/classes/object.o src/etc/modellist.o src/engine/inventwindow.o src/gui/rolbar.o src/map/maproad.o src/classes/classes.o src/engine/classwindow.o src/etc/animodel.o src/engine/modstate.o src/engine/aspectwindow.o src/gui/button.o src/gui/color.o src/gui/draw.o src/gui/farso.o src/gui/fonte.o src/gui/guilist.o src/gui/interface.o src/gui/listtext.o src/gui/mouse.o src/gui/picture.o src/gui/seltext.o src/gui/tabbutton.o src/gui/textbar.o src/gui/textbox.o src/gui/window.o src/classes/barter.o src/classes/itemslot.o src/classes/weapon.o src/engine/barterwindow.o src/engine/character.o src/engine/dialog.o src/engine/shadow.o src/etc/glm.o src/ia/luaInterface.o src/map/mapobject.o src/particle/meteor.o $(RES)
+LINKOBJ  = src/engine/teste.o src/engine/culling.o src/engine/dccnit.o src/gui/cxsel.o src/gui/menu.o src/map/map.o src/engine/initial.o src/engine/cursor.o src/engine/skillwindow.o src/classes/skills.o src/map/mapfog.o src/map/maplights.o src/sound/sound.o src/engine/options.o src/lang/lang.o src/engine/util.o src/particle/part1.o src/particle/part2.o src/particle/part3.o src/particle/part4.o src/particle/part5.o src/particle/part6.o src/particle/part7.o src/particle/particle.o src/classes/defs.o src/classes/feats.o src/classes/thing.o src/fight/fightGroup.o src/fight/fightSystem.o src/fight/initiative.o src/gui/healthBar.o src/particle/partSystem.o src/classes/actions.o src/engine/sun.o src/engine/attwindow.o src/classes/align.o src/engine/alignwindow.o src/engine/camera.o src/engine/collision.o src/ia/astar.o src/particle/wave.o src/ia/agent.o src/ia/pattAgent.o src/ia/potentAgent.o src/ia/fuzzy.o src/ia/fuzzyfunction.o src/ia/fuzzyrule.o src/ia/fuzzyvariable.o src/particle/grass.o src/classes/race.o src/engine/racewindow.o src/sound/ogg_stream.o src/sound/sndfx.o src/gui/messages.o src/engine/sky.o src/classes/inventory.o src/classes/object.o src/etc/modellist.o src/engine/inventwindow.o src/gui/rolbar.o src/map/maproad.o src/classes/classes.o src/engine/classwindow.o src/etc/animodel.o src/engine/modstate.o src/engine/aspectwindow.o src/gui/button.o src/gui/color.o src/gui/draw.o src/gui/farso.o src/gui/fonte.o src/gui/guilist.o src/gui/interface.o src/gui/listtext.o src/gui/mouse.o src/gui/picture.o src/gui/seltext.o src/gui/tabbutton.o src/gui/textbar.o src/gui/textbox.o src/gui/window.o src/classes/barter.o src/classes/itemslot.o src/classes/weapon.o src/engine/barterwindow.o src/engine/character.o src/engine/dialog.o src/engine/shadow.o src/etc/glm.o src/ia/luaInterface.o src/map/mapobject.o src/particle/meteor.o $(RES)
+LIBS =  -L"C:/DevCpp/lib" -mwindows -g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_image -lcal3d -logg -lvorbis -lvorbisfile -lopenal32 -llua51   
 INCS =  -I"C:/DevCpp/include" 
 CXXINCS =  -I"C:/DevCpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/DevCpp/include/c++/3.4.2/backward"  -I"C:/DevCpp/include/c++/3.4.2/mingw32"  -I"C:/DevCpp/include/c++/3.4.2"  -I"C:/DevCpp/include" 
 BIN  = bin/DccNiTghtmare.exe
@@ -29,77 +29,20 @@ $(BIN): $(OBJ)
 src/engine/teste.o: src/engine/teste.cpp
 	$(CPP) -c src/engine/teste.cpp -o src/engine/teste.o $(CXXFLAGS)
 
-src/engine/conversa.o: src/engine/conversa.cpp
-	$(CPP) -c src/engine/conversa.cpp -o src/engine/conversa.o $(CXXFLAGS)
-
 src/engine/culling.o: src/engine/culling.cpp
 	$(CPP) -c src/engine/culling.cpp -o src/engine/culling.o $(CXXFLAGS)
 
 src/engine/dccnit.o: src/engine/dccnit.cpp
 	$(CPP) -c src/engine/dccnit.cpp -o src/engine/dccnit.o $(CXXFLAGS)
 
-src/engine/personagens.o: src/engine/personagens.cpp
-	$(CPP) -c src/engine/personagens.cpp -o src/engine/personagens.o $(CXXFLAGS)
-
-src/etc/fifo.o: src/etc/fifo.c
-	$(CPP) -c src/etc/fifo.c -o src/etc/fifo.o $(CXXFLAGS)
-
-src/etc/glm.o: src/etc/glm.c
-	$(CPP) -c src/etc/glm.c -o src/etc/glm.o $(CXXFLAGS)
-
-src/gui/bartexto.o: src/gui/bartexto.cpp
-	$(CPP) -c src/gui/bartexto.cpp -o src/gui/bartexto.o $(CXXFLAGS)
-
-src/gui/botao.o: src/gui/botao.cpp
-	$(CPP) -c src/gui/botao.cpp -o src/gui/botao.o $(CXXFLAGS)
-
-src/gui/cores.o: src/gui/cores.cpp
-	$(CPP) -c src/gui/cores.cpp -o src/gui/cores.o $(CXXFLAGS)
-
 src/gui/cxsel.o: src/gui/cxsel.cpp
 	$(CPP) -c src/gui/cxsel.cpp -o src/gui/cxsel.o $(CXXFLAGS)
-
-src/gui/desenho.o: src/gui/desenho.c
-	$(CPP) -c src/gui/desenho.c -o src/gui/desenho.o $(CXXFLAGS)
-
-src/gui/erro.o: src/gui/erro.c
-	$(CPP) -c src/gui/erro.c -o src/gui/erro.o $(CXXFLAGS)
-
-src/gui/eventos.o: src/gui/eventos.cpp
-	$(CPP) -c src/gui/eventos.cpp -o src/gui/eventos.o $(CXXFLAGS)
-
-src/gui/farso.o: src/gui/farso.c
-	$(CPP) -c src/gui/farso.c -o src/gui/farso.o $(CXXFLAGS)
-
-src/gui/figura.o: src/gui/figura.cpp
-	$(CPP) -c src/gui/figura.cpp -o src/gui/figura.o $(CXXFLAGS)
-
-src/gui/fonte.o: src/gui/fonte.c
-	$(CPP) -c src/gui/fonte.c -o src/gui/fonte.o $(CXXFLAGS)
-
-src/gui/janela.o: src/gui/janela.cpp
-	$(CPP) -c src/gui/janela.cpp -o src/gui/janela.o $(CXXFLAGS)
-
-src/gui/lista.o: src/gui/lista.cpp
-	$(CPP) -c src/gui/lista.cpp -o src/gui/lista.o $(CXXFLAGS)
 
 src/gui/menu.o: src/gui/menu.cpp
 	$(CPP) -c src/gui/menu.cpp -o src/gui/menu.o $(CXXFLAGS)
 
-src/gui/mouse.o: src/gui/mouse.c
-	$(CPP) -c src/gui/mouse.c -o src/gui/mouse.o $(CXXFLAGS)
-
-src/gui/quadtexto.o: src/gui/quadtexto.cpp
-	$(CPP) -c src/gui/quadtexto.cpp -o src/gui/quadtexto.o $(CXXFLAGS)
-
-src/gui/seltexto.o: src/gui/seltexto.cpp
-	$(CPP) -c src/gui/seltexto.cpp -o src/gui/seltexto.o $(CXXFLAGS)
-
 src/map/map.o: src/map/map.cpp
 	$(CPP) -c src/map/map.cpp -o src/map/map.o $(CXXFLAGS)
-
-src/map/mapobjeto.o: src/map/mapobjeto.cpp
-	$(CPP) -c src/map/mapobjeto.cpp -o src/map/mapobjeto.o $(CXXFLAGS)
 
 src/engine/initial.o: src/engine/initial.cpp
 	$(CPP) -c src/engine/initial.cpp -o src/engine/initial.o $(CXXFLAGS)
@@ -154,9 +97,6 @@ src/particle/part7.o: src/particle/part7.cpp
 
 src/particle/particle.o: src/particle/particle.cpp
 	$(CPP) -c src/particle/particle.cpp -o src/particle/particle.o $(CXXFLAGS)
-
-src/gui/tabbotao.o: src/gui/tabbotao.cpp
-	$(CPP) -c src/gui/tabbotao.cpp -o src/gui/tabbotao.o $(CXXFLAGS)
 
 src/classes/defs.o: src/classes/defs.cpp
 	$(CPP) -c src/classes/defs.cpp -o src/classes/defs.o $(CXXFLAGS)
@@ -283,3 +223,81 @@ src/engine/modstate.o: src/engine/modstate.cpp
 
 src/engine/aspectwindow.o: src/engine/aspectwindow.cpp
 	$(CPP) -c src/engine/aspectwindow.cpp -o src/engine/aspectwindow.o $(CXXFLAGS)
+
+src/gui/button.o: src/gui/button.cpp
+	$(CPP) -c src/gui/button.cpp -o src/gui/button.o $(CXXFLAGS)
+
+src/gui/color.o: src/gui/color.cpp
+	$(CPP) -c src/gui/color.cpp -o src/gui/color.o $(CXXFLAGS)
+
+src/gui/draw.o: src/gui/draw.cpp
+	$(CPP) -c src/gui/draw.cpp -o src/gui/draw.o $(CXXFLAGS)
+
+src/gui/farso.o: src/gui/farso.cpp
+	$(CPP) -c src/gui/farso.cpp -o src/gui/farso.o $(CXXFLAGS)
+
+src/gui/fonte.o: src/gui/fonte.cpp
+	$(CPP) -c src/gui/fonte.cpp -o src/gui/fonte.o $(CXXFLAGS)
+
+src/gui/guilist.o: src/gui/guilist.cpp
+	$(CPP) -c src/gui/guilist.cpp -o src/gui/guilist.o $(CXXFLAGS)
+
+src/gui/interface.o: src/gui/interface.cpp
+	$(CPP) -c src/gui/interface.cpp -o src/gui/interface.o $(CXXFLAGS)
+
+src/gui/listtext.o: src/gui/listtext.cpp
+	$(CPP) -c src/gui/listtext.cpp -o src/gui/listtext.o $(CXXFLAGS)
+
+src/gui/mouse.o: src/gui/mouse.cpp
+	$(CPP) -c src/gui/mouse.cpp -o src/gui/mouse.o $(CXXFLAGS)
+
+src/gui/picture.o: src/gui/picture.cpp
+	$(CPP) -c src/gui/picture.cpp -o src/gui/picture.o $(CXXFLAGS)
+
+src/gui/seltext.o: src/gui/seltext.cpp
+	$(CPP) -c src/gui/seltext.cpp -o src/gui/seltext.o $(CXXFLAGS)
+
+src/gui/tabbutton.o: src/gui/tabbutton.cpp
+	$(CPP) -c src/gui/tabbutton.cpp -o src/gui/tabbutton.o $(CXXFLAGS)
+
+src/gui/textbar.o: src/gui/textbar.cpp
+	$(CPP) -c src/gui/textbar.cpp -o src/gui/textbar.o $(CXXFLAGS)
+
+src/gui/textbox.o: src/gui/textbox.cpp
+	$(CPP) -c src/gui/textbox.cpp -o src/gui/textbox.o $(CXXFLAGS)
+
+src/gui/window.o: src/gui/window.cpp
+	$(CPP) -c src/gui/window.cpp -o src/gui/window.o $(CXXFLAGS)
+
+src/classes/barter.o: src/classes/barter.cpp
+	$(CPP) -c src/classes/barter.cpp -o src/classes/barter.o $(CXXFLAGS)
+
+src/classes/itemslot.o: src/classes/itemslot.cpp
+	$(CPP) -c src/classes/itemslot.cpp -o src/classes/itemslot.o $(CXXFLAGS)
+
+src/classes/weapon.o: src/classes/weapon.cpp
+	$(CPP) -c src/classes/weapon.cpp -o src/classes/weapon.o $(CXXFLAGS)
+
+src/engine/barterwindow.o: src/engine/barterwindow.cpp
+	$(CPP) -c src/engine/barterwindow.cpp -o src/engine/barterwindow.o $(CXXFLAGS)
+
+src/engine/character.o: src/engine/character.cpp
+	$(CPP) -c src/engine/character.cpp -o src/engine/character.o $(CXXFLAGS)
+
+src/engine/dialog.o: src/engine/dialog.cpp
+	$(CPP) -c src/engine/dialog.cpp -o src/engine/dialog.o $(CXXFLAGS)
+
+src/engine/shadow.o: src/engine/shadow.cpp
+	$(CPP) -c src/engine/shadow.cpp -o src/engine/shadow.o $(CXXFLAGS)
+
+src/etc/glm.o: src/etc/glm.cpp
+	$(CPP) -c src/etc/glm.cpp -o src/etc/glm.o $(CXXFLAGS)
+
+src/ia/luaInterface.o: src/ia/luaInterface.cpp
+	$(CPP) -c src/ia/luaInterface.cpp -o src/ia/luaInterface.o $(CXXFLAGS)
+
+src/map/mapobject.o: src/map/mapobject.cpp
+	$(CPP) -c src/map/mapobject.cpp -o src/map/mapobject.o $(CXXFLAGS)
+
+src/particle/meteor.o: src/particle/meteor.cpp
+	$(CPP) -c src/particle/meteor.cpp -o src/particle/meteor.o $(CXXFLAGS)
