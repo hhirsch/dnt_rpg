@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <HEADER MAGIC="XMF" VERSION="1200"/>
-<MESH NUMSUBMESH="1">
+<MESH NUMSUBMESH="2">
     <SUBMESH
         NUMVERTICES="40"
-        NUMFACES="75"
+        NUMFACES="73"
         MATERIAL="0"
         NUMLODSTEPS="0"
         NUMSPRINGS="0"
@@ -119,7 +119,7 @@
         </VERTEX>
         <VERTEX ID="18" NUMINFLUENCES="1">
             <POS>17.44534 -0.98550 40.07049</POS>
-            <NORM>-0.08072 -0.98579 -0.14731</NORM>
+            <NORM>-0.48054 0.00000 -0.87698</NORM>
             <!-- UV Coords unset -->
             <INFLUENCE ID="0">1.00000</INFLUENCE>
         </VERTEX>
@@ -137,13 +137,13 @@
         </VERTEX>
         <VERTEX ID="21" NUMINFLUENCES="1">
             <POS>-17.37291 -0.98550 40.07049</POS>
-            <NORM>0.08072 -0.98579 -0.14731</NORM>
+            <NORM>0.48054 0.00000 -0.87698</NORM>
             <!-- UV Coords unset -->
             <INFLUENCE ID="0">1.00000</INFLUENCE>
         </VERTEX>
         <VERTEX ID="22" NUMINFLUENCES="1">
             <POS>17.44534 -0.98550 21.72967</POS>
-            <NORM>-0.07795 -0.98707 0.14005</NORM>
+            <NORM>-0.46549 -0.28967 0.83631</NORM>
             <!-- UV Coords unset -->
             <INFLUENCE ID="0">1.00000</INFLUENCE>
         </VERTEX>
@@ -161,7 +161,7 @@
         </VERTEX>
         <VERTEX ID="25" NUMINFLUENCES="1">
             <POS>-17.37291 -0.98550 21.72968</POS>
-            <NORM>0.07576 -0.98724 0.14007</NORM>
+            <NORM>0.45511 -0.29141 0.84140</NORM>
             <!-- UV Coords unset -->
             <INFLUENCE ID="0">1.00000</INFLUENCE>
         </VERTEX>
@@ -301,8 +301,6 @@
         <FACE VERTEXID="31 27 19"/>
         <FACE VERTEXID="6 4 31"/>
         <FACE VERTEXID="31 17 6"/>
-        <FACE VERTEXID="25 22 18"/>
-        <FACE VERTEXID="18 21 25"/>
         <FACE VERTEXID="31 32 33"/>
         <FACE VERTEXID="33 17 31"/>
         <FACE VERTEXID="23 34 32"/>
@@ -324,6 +322,41 @@
         <FACE VERTEXID="32 34 38"/>
         <FACE VERTEXID="39 38 34"/>
         <FACE VERTEXID="34 36 39"/>
+    </SUBMESH>
+    <SUBMESH
+        NUMVERTICES="4"
+        NUMFACES="2"
+        MATERIAL="1"
+        NUMLODSTEPS="0"
+        NUMSPRINGS="0"
+        NUMTEXCOORDS="0"
+    >
+        <VERTEX ID="0" NUMINFLUENCES="1">
+            <POS>17.44534 -0.98550 40.07049</POS>
+            <NORM>0.00000 -1.00000 -0.00000</NORM>
+            <!-- UV Coords unset -->
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="1" NUMINFLUENCES="1">
+            <POS>-17.37291 -0.98550 40.07049</POS>
+            <NORM>0.00000 -1.00000 -0.00000</NORM>
+            <!-- UV Coords unset -->
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="2" NUMINFLUENCES="1">
+            <POS>-17.37291 -0.98550 21.72968</POS>
+            <NORM>0.00000 -1.00000 -0.00000</NORM>
+            <!-- UV Coords unset -->
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="3" NUMINFLUENCES="1">
+            <POS>17.44534 -0.98550 21.72967</POS>
+            <NORM>0.00000 -1.00000 -0.00000</NORM>
+            <!-- UV Coords unset -->
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <FACE VERTEXID="0 1 2"/>
+        <FACE VERTEXID="2 3 0"/>
     </SUBMESH>
 </MESH>
 
