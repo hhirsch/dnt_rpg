@@ -1,6 +1,6 @@
 Guitar
 0
-../data/models/objetos/geral/guitarra.obj
+../data/models/objetos/geral/guitarra/model.cfg
 ../data/texturas/
 2 4
 ../data/models/objetos/geral/guitarra_inv.png
