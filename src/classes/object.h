@@ -24,6 +24,8 @@ class object: public thing
       /*! Constructor
        * \param obj -> some object to be the source of actual */
       object(object* obj);
+      /*! Constructor withou parameter. Do not load nothing */
+      object();
       /*! Destructor */
       ~object();
 

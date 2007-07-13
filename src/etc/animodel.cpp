@@ -406,6 +406,7 @@ void aniModel::render()
 
   // set the global OpenGL states
   glShadeModel(GL_SMOOTH);
+  glDisable(GL_COLOR_MATERIAL);
 
   // we will use vertex arrays, so enable them
   glEnableClientState(GL_VERTEX_ARRAY);
@@ -439,7 +440,7 @@ void aniModel::render()
         materialColor[1] = meshColor[1] / 255.0f; 
         materialColor[2] = meshColor[2] / 255.0f; 
         materialColor[3] = meshColor[3] / 255.0f;
-        glMaterialfv(GL_FRONT, GL_AMBIENT, materialColor);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialColor);
 
         // set the material diffuse color
         pCalRenderer->getDiffuseColor(&meshColor[0]);
@@ -447,7 +448,7 @@ void aniModel::render()
         materialColor[1] = meshColor[1] / 255.0f; 
         materialColor[2] = meshColor[2] / 255.0f; 
         materialColor[3] = meshColor[3] / 255.0f;
-        glMaterialfv(GL_FRONT, GL_DIFFUSE, materialColor);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialColor);
 
         // set the material specular color
         pCalRenderer->getSpecularColor(&meshColor[0]);
@@ -455,12 +456,12 @@ void aniModel::render()
         materialColor[1] = meshColor[1] / 255.0f; 
         materialColor[2] = meshColor[2] / 255.0f; 
         materialColor[3] = meshColor[3] / 255.0f;
-        glMaterialfv(GL_FRONT, GL_SPECULAR, materialColor);
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, materialColor);
 
         // set the material shininess factor
         float shininess;
-        shininess = /*50.0f;*/ pCalRenderer->getShininess();
-        glMaterialfv(GL_FRONT, GL_SHININESS, &shininess);
+        shininess = 50.0f;// pCalRenderer->getShininess();
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &shininess);
 
         // get the transformed vertices of the submesh
         static float meshVertices[30000][3];
@@ -530,6 +531,8 @@ void aniModel::render()
   pCalRenderer->endRendering();
 
   glPopMatrix();
+
+  glColor3f(1.0, 1.0, 1.0);
 
 }
 

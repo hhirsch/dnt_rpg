@@ -81,6 +81,9 @@ class model3d: public aniModel
                               and decrement the used flag when is no more 
                               using them. */
 
+      /* TODO Static Flag: if this flag is used, the model is static,
+         and can be utilized by more than one entity. */
+
 };
 
 /*! List of all 3D GLM models actually on game */

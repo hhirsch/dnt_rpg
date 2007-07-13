@@ -1613,7 +1613,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       redesenha = true;
       passouTempo = true;
 
-      /* Actualize Characters Animations */
+      /* Actualize Time */
       seconds = varTempo / 1000.0;
 
       hour = (hour + seconds / 100.0 );
@@ -1622,25 +1622,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          hour = 0.0;
       }
       hourToTxt();
-      int aux;
-      character *per = (character*) PCs->first->next;
-      for(aux=0;aux< PCs->getTotal();aux++)
-      {
-         per->update(WALK_ACTUALIZATION/*seconds*/); 
-         //per->CalculateBoundingBox(); 
-         per = (character*) per->next;
-      }
-    
-      if(NPCs)
-      {
-        per = (character*) NPCs->first->next;
-        for(aux=0;aux < NPCs->getTotal();aux++)
-        {
-           per->update(WALK_ACTUALIZATION/*seconds*/);   
-           per->calculateBoundingBox();
-           per = (character*) per->next;
-        }
-      }
 
       /* Calculate the real Modification on walk, rotate, turn, etc */
       GLfloat vt = 1;//varTempo / ACTUALIZATION_RATE;
@@ -2257,6 +2238,8 @@ void engine::renderScene()
       int aux;
       for(aux=0;aux < PCs->getTotal();aux++)
       {
+         /* Actualize the model */
+         per->update(WALK_ACTUALIZATION);
          /* Draw Character */
          glPushMatrix();
            glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
@@ -2324,6 +2307,8 @@ void engine::renderScene()
       per = (character*) NPCs->first->next;
       for(aux=0;aux < NPCs->getTotal();aux++)
       {
+         /* Actualize the model */
+         per->update(WALK_ACTUALIZATION);
          /* Verify Bounding Box */
          x[0] = per->min[0];
          z[0] = per->min[2];

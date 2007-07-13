@@ -5,6 +5,7 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_opengl.h>
 #include "object.h"
+#include "../engine/util.h"
 
 /**************************************************************
  *                         Constructor                        *
@@ -108,6 +109,27 @@ object::object(object* obj): thing()
 }
 
 /**************************************************************
+ *                         Constructor                        *
+ **************************************************************/
+object::object(): thing()
+{
+   inventSizeX = 0;
+   inventSizeY = 0;
+   name = "";
+   fileName = "";
+   model2dName = "";
+   model2d = NULL;
+   modelMax = NULL;
+   modelMed = NULL;
+   modelMin = NULL;
+   maxLifePoints = 0;
+   lifePoints = 0;
+   fortitude = 0;
+   armatureClass = 0;
+   sizeModifier = 0;
+}
+
+/**************************************************************
  *                          Destructor                        *
  **************************************************************/
 object::~object()
@@ -153,6 +175,7 @@ void object::draw(float x, float z, GLfloat dist, float orientation, bool invert
       {
          glScalef(1.0, -1.0, 1.0);
       }
+      model->update(WALK_ACTUALIZATION);
       model->draw();
    glPopMatrix();
    glDisable(GL_COLOR_MATERIAL);

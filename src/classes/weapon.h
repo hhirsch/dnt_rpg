@@ -1,11 +1,11 @@
 #ifndef _weapon_h
 #define _weapon_h
 
-#include "../etc/animodel.h"
 #include "dices.h"
+#include "object.h"
 
 /*! The Weapon Class Definition */
-class weapon: public aniModel
+class weapon: public object
 {
    public:
       /*! Constructor
@@ -43,7 +43,7 @@ class weapon: public aniModel
       /*! Calls the attack animation of the weapon */
       void attackAnimation();
    protected:
-      int categoryType;       /**< Weapon Category (Ex: Exothic)  */
+      int categoryType;       /**< Weapon Category (Ex: Exotic)  */
       int rangeType;          /**< Range Type (Ex: Meele) */
       int sizeType;           /**< Size Type (Ex: Light) */
       int styleType;          /**< Style Type (Ex: Two-Handed) */
@@ -57,6 +57,56 @@ class weapon: public aniModel
       /*! TODO /todo Special things on weapons! It's, for example a 
        * resistance, a special damage, etc.. */
 
+};
+
+/*! The Weapon Types Class. This class receives all informations about
+ * all the types of weapons, readed at the ../data/weapons/types files. */
+class weaponTypes
+{
+   public:
+      /*! Constructor */
+      weaponTypes();
+      /*! Destructor */
+      ~weaponTypes();
+
+      /*! Get the category number
+       * \param name -> name of the category
+       * \return -> the category internal number. -1 on error. */
+      int getCategory(string name);
+
+      /*! Get the size number
+       * \param name -> name of the size
+       * \return -> the size internal number. -1 on error. */
+      int getSize(string name);
+
+      /*! Get the weight number
+       * \param name -> name of the weight
+       * \return -> the weight internal number. -1 on error. */
+      int getWeight(string name);
+
+      /*! Get the damage number
+       * \param name -> name of the damage
+       * \return -> the damage internal number. -1 on error. */
+      int getDamage(string name);
+
+   private:
+      /*! Read A definition file
+       * \param names -> pointer to the string pointer to be loaded
+       * \param totals -> pointer to the integer with totals 
+       * \param fileName ->  string with the fileName of the file to load */
+      void readFile(string** names, int* totals, string fileName);
+
+
+      int totalCategories;    /**< Total number of categories */
+      string* categories;     /**< The categories */
+      int totalRanges;        /**< Total Number of ranges */
+      string* ranges;         /**< The ranges */
+      int totalSizes;         /**< Total Number of Sizes */
+      string* sizes;          /**< The sizes */
+      int totalWeights;       /**< Total Number of Weights */
+      string* weights;        /**< The weights */
+      int totalDamages;       /**< Total Number of damages */
+      string* damages;        /**< The damages */
 };
 
 #endif
