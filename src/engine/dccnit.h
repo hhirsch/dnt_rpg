@@ -11,6 +11,7 @@
 #include "../classes/align.h"
 #include "../classes/race.h"
 #include "../classes/classes.h"
+#include "../classes/weapon.h"
 #include "../fight/fightSystem.h"
 #include "../gui/farso.h"
 #include "../lang/lang.h"
@@ -361,6 +362,7 @@ class engine
       races* raceList;             /**< Races List */
       classes* classList;          /**< Classes List */
       skills* skillsList;          /**< List of Skills */
+      weaponTypes* weaponsTypes;   /**< List of Types of Weapons */
 
       lang language;               /**< Language struct: internationalization */
 

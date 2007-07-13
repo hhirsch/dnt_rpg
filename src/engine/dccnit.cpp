@@ -68,6 +68,9 @@ engine::engine()
    classList = new classes(language.CLASS_DIR.c_str(),
                            "../data/classes/classes.lst");
 
+   /* Load Weapons Types */
+   weaponsTypes = new weaponTypes();
+
    /* Create 3D Models List */
    models = new modelList();
 
@@ -163,6 +166,7 @@ engine::~engine()
    delete(raceList);
    delete(classList);
    delete(skillsList);
+   delete(weaponsTypes);
 }
 
 /*********************************************************************

@@ -59,6 +59,14 @@ class weapon: public object
 
 };
 
+/* A single weapon info type */
+class wInfo
+{
+   public:
+      string name;   /**< Name of the info */
+      int index;     /**< Index of the info */
+};
+
 /*! The Weapon Types Class. This class receives all informations about
  * all the types of weapons, readed at the ../data/weapons/types files. */
 class weaponTypes
@@ -91,22 +99,27 @@ class weaponTypes
 
    private:
       /*! Read A definition file
-       * \param names -> pointer to the string pointer to be loaded
-       * \param totals -> pointer to the integer with totals 
        * \param fileName ->  string with the fileName of the file to load */
-      void readFile(string** names, int* totals, string fileName);
+      void readFile(string fileName);
+
+      /*! Get a thing from a wInfo
+       * \param thing -> the pointer to the desired wInfo 
+       * \param total -> the total elements on the thing
+       * \param name -> thing name to get
+       * \return -> the thing internal number . -1 on error. */
+      int getThing(wInfo* thing, int total, string name);
 
 
       int totalCategories;    /**< Total number of categories */
-      string* categories;     /**< The categories */
+      wInfo* categories;      /**< The categories */
       int totalRanges;        /**< Total Number of ranges */
-      string* ranges;         /**< The ranges */
+      wInfo* ranges;          /**< The ranges */
       int totalSizes;         /**< Total Number of Sizes */
-      string* sizes;          /**< The sizes */
+      wInfo* sizes;           /**< The sizes */
       int totalWeights;       /**< Total Number of Weights */
-      string* weights;        /**< The weights */
+      wInfo* weights;         /**< The weights */
       int totalDamages;       /**< Total Number of damages */
-      string* damages;        /**< The damages */
+      wInfo* damages;         /**< The damages */
 };
 
 #endif

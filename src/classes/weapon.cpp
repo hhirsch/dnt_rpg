@@ -89,15 +89,15 @@ void weapon::attackAnimation()
 weaponTypes::weaponTypes()
 {
    /* Read Categories */
-   readFile(&categories, &totalCategories, FILE_CATEGORIES);
+   readFile(FILE_CATEGORIES);
    /* Read Ranges */
-   readFile(&ranges, &totalRanges, FILE_RANGES);
+   readFile(FILE_RANGES);
    /* Read Weights */
-   readFile(&weights, &totalWeights, FILE_WEIGHTS);
+   readFile(FILE_WEIGHTS);
    /* Read Sizes */
-   readFile(&sizes, &totalSizes, FILE_SIZES);
+   readFile(FILE_SIZES);
    /* Read Damages */
-   readFile(&damages, &totalDamages, FILE_DAMAGES);
+   readFile(FILE_DAMAGES);
 }
 
 /************************************************************
@@ -115,11 +115,14 @@ weaponTypes::~weaponTypes()
 /************************************************************
  *                          readFile                        *
  ************************************************************/
-void weaponTypes::readFile(string** names, int* totals, string fileName)
+void weaponTypes::readFile(string fileName)
 {
    FILE* file;
    int i, index;
    char buffer[255];
+
+   int totals;
+   wInfo* names = NULL;
 
    /* Open the file */
    if(!(file=fopen(fileName.c_str(),"r")))
@@ -129,19 +132,102 @@ void weaponTypes::readFile(string** names, int* totals, string fileName)
    }
 
    /* Read the total number of itens on the file */
-   fscanf(file,"%d", totals);
+   fscanf(file,"%d", &totals);
 
    /* Alloc the vector */
-   *names = new string[*totals];
+   names = new wInfo[totals];
+
+   /* Define the correct pointers */
+   if(fileName == FILE_CATEGORIES)
+   {
+      categories = names;
+      totalCategories = totals;
+   }
+   else if(fileName == FILE_RANGES)
+   {
+      ranges = names;
+      totalRanges = totals;
+   } 
+   else if(fileName == FILE_SIZES)
+   {
+      sizes = names;
+      totalSizes = totals;
+   }
+   else if(fileName == FILE_WEIGHTS)
+   {
+      weights = names;
+      totalWeights = totals;
+   }
+   else if(fileName == FILE_DAMAGES)
+   {
+      damages = names;
+      totalDamages = totals;
+   }
+   else
+   {
+      fclose(file);
+      printf("Unkown definitions file: %s\n", fileName.c_str());
+      return;
+   }
 
    /* Read All definitions */
-   for(i=0; i < (*totals); i++)
+   for(i=0; i < totals; i++)
    {
       fscanf(file, "%d %s", &index, &buffer[0]);
-      *names[index] = buffer;
+      names[index].name = buffer;
+      names[index].index = index;
    }
 
    /* Close the file */
    fclose(file);
+}
+
+/************************************************************
+ *                        getCategory                       *
+ ************************************************************/
+int weaponTypes::getCategory(string name)
+{
+   return(getThing(categories, totalCategories, name));
+}
+
+/************************************************************
+ *                         getSize                          *
+ ************************************************************/
+int weaponTypes::getSize(string name)
+{
+   return(getThing(sizes, totalSizes, name));
+}
+
+/************************************************************
+ *                         getWeight                        *
+ ************************************************************/
+int weaponTypes::getWeight(string name)
+{
+   return(getThing(weights, totalWeights, name));
+}
+
+/************************************************************
+ *                         getDamage                        *
+ ************************************************************/
+int weaponTypes::getDamage(string name)
+{
+   return(getThing(damages, totalDamages, name));
+}
+
+/************************************************************
+ *                          getThing                        *
+ ************************************************************/
+int weaponTypes::getThing(wInfo* thing, int total, string name)
+{
+   int i;
+   for(i=0; i<total; i++)
+   {
+      if(thing[i].name == name)
+      {
+         return(thing[i].index);
+      }
+   }
+   printf("Can't found weapon definition type of: %s\n", name.c_str());
+   return(-1);
 }
 
