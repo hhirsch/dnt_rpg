@@ -3,6 +3,6 @@ Guitar
 ../data/models/objetos/geral/guitarra/model.cfg
 ../data/texturas/
 2 4
-../data/models/objetos/geral/guitarra_inv.png
+../data/models/objetos/geral/guitarra/guitarra_inv.png
 5000
 40 40 -1
