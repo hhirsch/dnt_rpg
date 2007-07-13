@@ -1,7 +1,9 @@
-6
-Barrel ../data/models/objetos/geral/barrel.dcc
-Briefcase ../data/models/objetos/geral/mala.dcc
-Computer ../data/models/objetos/geral/computador.dcc
-Exclamation ../data/models/objetos/geral/exclamacao.dcc
-Guitar ../data/models/objetos/geral/guitarra.dcc
-Stop_Sign ../data/models/objetos/geral/placa_pare.dcc
+8
+Barrel ../data/models/objetos/geral/barrel/barrel.dcc
+Briefcase ../data/models/objetos/geral/mala/mala.dcc
+Cap ../data/models/objetos/geral/cap/cap.dcc
+Colarinho ../data/models/objetos/geral/colarinho_e_oculos/colarinho_e_oculos.dcc
+Computer ../data/models/objetos/geral/computador/computador.dcc
+Exclamation ../data/models/objetos/geral/exclamacao/exclamacao.dcc
+Guitar ../data/models/objetos/geral/guitarra/guitarra.dcc
+Stop_Sign ../data/models/objetos/geral/placa_pare/placa_pare.dcc

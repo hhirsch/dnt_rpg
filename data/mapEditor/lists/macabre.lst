@@ -1,5 +1,5 @@
 4
-Cross ../data/models/objetos/tumbas/cruz.dcc
-Stone_1 ../data/models/objetos/tumbas/lapide.dcc
-Tomb_1 ../data/models/objetos/tumbas/tomb1.dcc
-Tomb_Collumn ../data/models/objetos/tumbas/tomb_column.dcc
+Cross ../data/models/objetos/tumbas/cruz/cruz.dcc
+Stone_1 ../data/models/objetos/tumbas/lapide/lapide.dcc
+Tomb_1 ../data/models/objetos/tumbas/tomb1/tomb1.dcc
+Tomb_Collumn ../data/models/objetos/tumbas/tomb_column/tomb_column.dcc
