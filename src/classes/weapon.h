@@ -24,10 +24,6 @@ class weapon: public object
       void getType(int& category, int& range, int& size, int& style,
                    int& damageA, int& damageB);
 
-      /*! Get the weapon's cost
-       * \return weapons cost */
-      float getCost();
-
       /*! Get the weapon's damage dice
        * \return the weapons damage dice */
       diceThing getDice();
@@ -47,7 +43,6 @@ class weapon: public object
       int rangeType;          /**< Range Type (Ex: Meele) */
       int sizeType;           /**< Size Type (Ex: Light) */
       int styleType;          /**< Style Type (Ex: Two-Handed) */
-      float cost;             /**< Cost Value */
       diceThing damageDice;   /**< Damage Dices */
       int rangeValue;         /**< Range Value */
       float weight;           /**< Weight Value */

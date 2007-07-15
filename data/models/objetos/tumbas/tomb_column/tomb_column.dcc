@@ -1,8 +1,12 @@
-Tomb
-0
-../data/models/objetos/tumbas/tomb_column/model.cfg
-../data/models/objetos/tumbas/
-0 0
-../data/texturas/na.png
-5000
-40 40 -1
+name = Tomb
+cal3d = ../data/models/objetos/tumbas/tomb_column/model.cfg
+inventory_sizes = 0 0
+inventory_texture = ../data/texturas/na.png
+life_points = 1000
+fortitude = 9
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 18
+size_modifier = 0
+cost = 3500

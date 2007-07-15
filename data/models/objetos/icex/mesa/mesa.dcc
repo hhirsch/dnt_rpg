@@ -1,8 +1,12 @@
-Table
-0
-../data/models/objetos/icex/mesa/model.cfg
-../data/models/
-0 0
-../data/texturas/na.png
-5000
-40 40 -1
+name = Table
+cal3d = ../data/models/objetos/icex/mesa/model.cfg
+inventory_sizes = 0 0
+inventory_texture = ../data/texturas/na.png
+life_points = 120
+fortitude = 14
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 14
+size_modifier = 0
+cost = 300

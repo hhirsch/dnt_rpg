@@ -74,8 +74,6 @@ class object: public thing
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
 
-      int deltaVar;         /**< Variation on static LOD */
-      
       model3d* model3D;     /**< Pointer to used 3D Model Maximun Quality */
       SDL_Surface* model2d; /**< Pointer to used 2D Model */
       

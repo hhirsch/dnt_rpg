@@ -1,8 +1,12 @@
-Chair
-0
-../data/models/objetos/icex/cadeira/cadeira.cfg
-../data/models/
-0 0
-../data/texturas/na.png
-5000
-40 40 -1
+name = Chair
+cal3d = ../data/models/objetos/icex/cadeira/cadeira.cfg
+inventory_sizes = 0 0
+inventory_texture = ../data/texturas/na.png
+life_points = 80
+fortitude = 5
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = -1
+cost = 250

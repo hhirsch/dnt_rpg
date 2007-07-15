@@ -1,8 +1,12 @@
-Lixo
-0
-../data/models/objetos/icex/lixo/lixo.cfg
-../data/models/
-0 0
-../data/texturas/na.png
-5000
-40 40 -1
+name = Lixo
+cal3d = ../data/models/objetos/icex/lixo/lixo.cfg
+inventory_sizes = 0 0
+inventory_texture = ../data/texturas/na.png
+life_points = 50
+fortitude = 10
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 12
+size_modifier = -1
+cost = 52

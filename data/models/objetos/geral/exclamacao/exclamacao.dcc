@@ -1,8 +1,12 @@
-Exclamation
-0
-../data/models/objetos/geral/exclamacao/model.cfg
-../data/texturas/
-0 0
-../data/texturas/na.png
-5000
-40 40 -1
+name = Exclamation
+cal3d = ../data/models/objetos/geral/exclamacao/model.cfg
+inventory_sizes = 0 0
+inventory_texture = ../data/texturas/na.png
+life_points = 400
+fortitude = 5
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = 0
+cost = 350

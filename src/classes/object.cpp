@@ -7,54 +7,133 @@
 #include "object.h"
 #include "../engine/util.h"
 
+string getAfterEqual(string s)
+{
+   unsigned int i = 0;
+
+   /* First, delete the \n character at the end of the string,
+    * if there is one there. */
+   if(s[s.length()-1] == '\n')
+   {
+      s.erase(s.length()-1,1);
+   }
+
+   /* Goes to the equal character */
+   while( (i < s.length()) && (s[i] != '='))
+   {
+      i++;
+   }
+   i++;
+
+   /* Remove all spaces after the equal */
+   while( (i < s.length()) && (s[i] == ' '))
+   {
+      i++;
+   }
+
+   if(i < s.length())
+   {
+      return(s.substr(i));
+   }
+   printf("Error parsing %s\n", s.c_str());
+   return("");
+}
+
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
 object::object(string path, modelList& mdlList): thing()
 {
-   FILE* arq;
-   char arqModelo[128], dirTexturas[128], nome[128];
+   FILE* file;
+   char buffer[512];
+   string token, token2;
 
-   if(!(arq=fopen(path.c_str(),"r")))
+   if(!(file=fopen(path.c_str(),"r")))
    {
        printf("Error on open object %s\n", path.c_str());
        return;
    }
 
-   fscanf(arq, "%s", &nome[0]);
-   name = nome;
    fileName = path;
 
-   /* Read Models Variations */
-   fscanf(arq,"%d",&deltaVar);
-   fscanf(arq,"%s",&arqModelo[0]); 
-   
-   /* Read Texture Dir */
-   fscanf(arq,"%s",&dirTexturas[0]);
-
-   model3D = mdlList.addModel(arqModelo,dirTexturas);
-   model3D->incUsed();
-
-   /* Read Inventory Sizes */
-   fscanf(arq,"%d %d", &inventSizeX, &inventSizeY);
-
-   /* Read Object 2D Model */
-   fscanf(arq,"%s",&arqModelo[0]);
-   model2dName = arqModelo;
-   model2d = IMG_Load(arqModelo);
-   if(!model2d)
+   while(fscanf(file, "%s", buffer) != EOF)
    {
-      printf("Can't open image: %s\nWill Crash Soon!\n", arqModelo);
+      token = buffer;
+
+      /* eat up the rest of line */
+      fgets(buffer, sizeof(buffer), file);
+      token2 = getAfterEqual(buffer);
+
+      if(token2 == "")
+      {
+         printf("at file: %s\n",path.c_str());
+      }
+
+      /* Tokenize the first token */
+      if(token == "name")
+      {
+         name = token2;
+      }
+      else if(token == "cal3d")
+      {
+         model3D = mdlList.addModel(token2,"");
+         model3D->incUsed();
+      }
+      else if(token == "inventory_sizes")
+      {
+         sscanf(token2.c_str(),"%d %d",&inventSizeX, &inventSizeY);
+      }
+      else if(token == "inventory_texture")
+      {
+         model2dName = token2;
+         model2d = IMG_Load(model2dName.c_str());
+         if(!model2d)
+         {
+            printf("Can't open image: %s\n"
+                   "Will Crash Soon!\n", model2dName.c_str());
+         }
+      }
+      else if(token == "life_points")
+      {
+         sscanf(token2.c_str(),"%d",&maxLifePoints);
+         lifePoints = maxLifePoints;
+      }
+      else if(token == "fortitude")
+      {
+         sscanf(token2.c_str(),"%d",&fortitude);
+      }
+      else if(token == "reflex")
+      {
+         sscanf(token2.c_str(),"%d",&reflexes);
+      }
+      else if(token == "will")
+      {
+         sscanf(token2.c_str(),"%d",&will);
+      }
+      else if(token == "displacement")
+      {
+         sscanf(token2.c_str(),"%d",&displacement);
+      }
+      else if(token == "armature_class")
+      {
+         sscanf(token2.c_str(),"%d",&armatureClass);
+      }
+      else if(token == "size_modifier")
+      {
+         sscanf(token2.c_str(),"%d",&sizeModifier);
+      }
+      else if(token =="cost") 
+      {
+         sscanf(token2.c_str(),"%f",&cost);
+      }
+      else
+      {
+         printf("Warning: Unknow token '%s' at %s\n", token.c_str(), 
+                                                      path.c_str());
+      }
    }
 
-   /* Read Max Life Points */
-   fscanf(arq,"%d",&maxLifePoints);
-   lifePoints = maxLifePoints;
-
-   /* Read Modifiers */
-   fscanf(arq,"%d %d %d",&fortitude, &armatureClass, &sizeModifier);
-   
-   fclose(arq);
+   fclose(file);
 }
 
 /**************************************************************

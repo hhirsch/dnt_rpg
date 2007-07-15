@@ -41,6 +41,7 @@ class thing
       float posicaoLadoZ;     /**< Character's Z Position */
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
+      float cost;             /**< Cost Value */
 
       /*!
        **********************************************
