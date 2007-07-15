@@ -32,29 +32,8 @@ object::object(string path, modelList& mdlList): thing()
    /* Read Texture Dir */
    fscanf(arq,"%s",&dirTexturas[0]);
 
-   modelMax = mdlList.addModel(arqModelo,dirTexturas);
-   modelMax->incUsed();
-
-   /* If exists, read LOD models */
-   if(deltaVar !=0) 
-   {
-      /* Medium Model */
-      fscanf(arq,"%s",arqModelo);
-      fscanf(arq,"%s",dirTexturas);
-      modelMed = mdlList.addModel(arqModelo,dirTexturas);
-      modelMed->incUsed();
-
-      /* Max Model */
-      fscanf(arq,"%s",arqModelo);
-      fscanf(arq,"%s",dirTexturas);
-      modelMin = mdlList.addModel(arqModelo,dirTexturas);
-      modelMin->incUsed();
-   }
-   else 
-   {
-      modelMed = NULL;
-      modelMin = NULL;
-   }
+   model3D = mdlList.addModel(arqModelo,dirTexturas);
+   model3D->incUsed();
 
    /* Read Inventory Sizes */
    fscanf(arq,"%d %d", &inventSizeX, &inventSizeY);
@@ -89,18 +68,8 @@ object::object(object* obj): thing()
    fileName = obj->fileName;
    model2dName = obj->model2dName;
    model2d = IMG_Load(model2dName.c_str());
-   modelMax = obj->modelMax;
-   modelMax->incUsed();
-   modelMed = obj->modelMed;
-   if(modelMed)
-   {
-      modelMed->incUsed();
-   }
-   modelMin = obj->modelMin;
-   if(modelMin)
-   {
-      modelMin->incUsed();
-   }
+   model3D = obj->model3D;
+   model3D->incUsed();
    maxLifePoints = obj->maxLifePoints;
    lifePoints = maxLifePoints;
    fortitude = obj->fortitude;
@@ -119,9 +88,7 @@ object::object(): thing()
    fileName = "";
    model2dName = "";
    model2d = NULL;
-   modelMax = NULL;
-   modelMed = NULL;
-   modelMin = NULL;
+   model3D = NULL;
    maxLifePoints = 0;
    lifePoints = 0;
    fortitude = 0;
@@ -134,15 +101,7 @@ object::object(): thing()
  **************************************************************/
 object::~object()
 {
-   modelMax->decUsed();
-   if(modelMed)
-   {
-     modelMed->decUsed();
-   }
-   if(modelMin)
-   {
-     modelMin->decUsed(); 
-   }
+   model3D->decUsed();
    if(model2d)
    {
       SDL_FreeSurface(model2d);
@@ -154,18 +113,6 @@ object::~object()
  **************************************************************/
 void object::draw(float x, float z, GLfloat dist, float orientation, bool inverted)
 {
-   model3d* model = modelMax;
-   
-   /* Do the Static LOD, based on the Distance */
-   if((dist > deltaVar) && (dist < 2*deltaVar) && (modelMed != NULL))
-   {
-      model = modelMed;
-   }
-   else if( (dist > 2*deltaVar) && (modelMin != NULL))
-   {
-      model = modelMin;
-   }
-
    /* Draw the defined model */
    glEnable(GL_COLOR_MATERIAL);
    glPushMatrix();
@@ -175,8 +122,8 @@ void object::draw(float x, float z, GLfloat dist, float orientation, bool invert
       {
          glScalef(1.0, -1.0, 1.0);
       }
-      model->update(WALK_ACTUALIZATION);
-      model->draw();
+      model3D->update(WALK_ACTUALIZATION);
+      model3D->draw();
    glPopMatrix();
    glDisable(GL_COLOR_MATERIAL);
 }
@@ -199,7 +146,7 @@ void object::draw2D(int x, int y, SDL_Surface* surface)
  **************************************************************/
 boundingBox object::getBoundingBox()
 {
-   return(modelMax->getBoundingBox());
+   return(model3D->getBoundingBox());
 }
 
 /**************************************************************

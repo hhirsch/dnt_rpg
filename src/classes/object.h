@@ -76,9 +76,7 @@ class object: public thing
 
       int deltaVar;         /**< Variation on static LOD */
       
-      model3d* modelMax;    /**< Pointer to used 3D Model Maximun Quality */
-      model3d* modelMed;    /**< Pointer to used 3D Model Medium Quality */
-      model3d* modelMin;    /**< Pointer to used 3D Model Minimun Quality */
+      model3d* model3D;     /**< Pointer to used 3D Model Maximun Quality */
       SDL_Surface* model2d; /**< Pointer to used 2D Model */
       
       string name;          /**< Name of the Object */
