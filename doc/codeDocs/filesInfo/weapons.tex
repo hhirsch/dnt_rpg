@@ -81,7 +81,7 @@ cal3d = filename
 \subsection{Category}
 
 Defines the category of the weapon. The category must be a valid one 
-declared on the categories.dlg file.\\
+declared on the categories.dcl file.\\
 
 {\bf Syntax: }
 \begin{verbatim}
@@ -91,22 +91,70 @@ category = category_name
 \subsection{Range}
 
 Defines the range of the weapon. The range type must be a valid one 
-declared on the range.dlg file.\\
+declared on the range.dcl file.\\
 
 {\bf Syntax: }
 \begin{verbatim}
-rangeType = range_name
-rangeValue = range_value_integer
+range_type = range_name
+range_value = range_value_integer
 \end{verbatim}
 
 \subsection{Size}
 
 Defines the size of the weapon. The size type must be a valid one
-declared on the sizes.dlg file.\\
+declared on the sizes.dcl file.\\
 
 {\bf Syntax: }
 \begin{verbatim}
-sizeType = size_name
+size_type = size_name
+\end{verbatim}
+
+\subsection{Weight}
+
+Define the weight of the weapon. The weight type must be a valid one declared
+on the weights.dcl file. The weight value is a float.
+
+{\bf Syntax:}
+\begin{verbatim}
+weight_type = weight_name
+weight_value = weight_value_float
+\end{verbatim}
+
+
+\subsection{Damage}
+
+Each weapon can have one or two types of damages. The types must be a valid one
+declared on the damages.dcl. If the weapon has only one damage, it must be the
+main\_damage.
+
+{\bf Syntax:}
+\begin{verbatim}
+main_damage_type = damage_name
+second_damage_type = damage_name
+\end{verbatim}
+
+\subsection{Damage Dice}
+
+The damage dice defines the damage that the weapon can inflict.
+
+{\bf Syntax:}
+\begin{verbatim}
+damage_dice = number_of_dices*dice_identifier+sum_numberxcritical_multiplier
+\end{verbatim}
+
+{\bf Example:}
+\begin{verbatim}
+damage_dice = 4*d6+2x3
+\end{verbatim}
+
+\subsection{Attack Sound}
+
+Each type of damage can have a distinct sound.
+
+{\bf Syntax:}
+\begin{verbatim}
+main_attack_sound = ogg_file_name
+second_attack_sound = ogg_file_name
 \end{verbatim}
 
 \subsection{Object Things}
