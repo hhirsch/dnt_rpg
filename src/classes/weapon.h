@@ -4,56 +4,6 @@
 #include "dices.h"
 #include "object.h"
 
-/*! The Weapon Class Definition */
-class weapon: public object
-{
-   public:
-      /*! Constructor
-       * \param fileName -> name of the weapon file to load */
-      weapon(string fileName);
-      /*! Destructor */
-      ~weapon();
-
-      /*! Get the Types Informations of the weapon
-       * \param category -> category type of the weapon
-       * \param range -> range type of the weapn (meele or ranged)
-       * \param size -> size type of the weapon
-       * \param style -> style type of the weapon
-       * \param damageA -> first damage type
-       * \param damageB -> second damage type */
-      void getType(int& category, int& range, int& size, int& style,
-                   int& damageA, int& damageB);
-
-      /*! Get the weapon's damage dice
-       * \return the weapons damage dice */
-      diceThing getDice();
-
-      /*! Get the range distance of the weapon
-       * \return -> range distance */
-      int getRange();
-
-      /*! Get the weight of the weapon
-       * \return -> weapon's weight in Kg. */
-      float getWeight();
-
-      /*! Calls the attack animation of the weapon */
-      void attackAnimation();
-   protected:
-      int categoryType;       /**< Weapon Category (Ex: Exotic)  */
-      int rangeType;          /**< Range Type (Ex: Meele) */
-      int sizeType;           /**< Size Type (Ex: Light) */
-      int styleType;          /**< Style Type (Ex: Two-Handed) */
-      diceThing damageDice;   /**< Damage Dices */
-      int rangeValue;         /**< Range Value */
-      float weight;           /**< Weight Value */
-      int damageType[2];      /**< Damage Type Vector (Ex: Slashing) */
-      string attackSound[2];  /**< Damage Type Sounds Files */
-
-      /*! TODO /todo Special things on weapons! It's, for example a 
-       * resistance, a special damage, etc.. */
-
-};
-
 /* A single weapon info type */
 class wInfo
 {
@@ -92,6 +42,11 @@ class weaponTypes
        * \return -> the damage internal number. -1 on error. */
       int getDamage(string name);
 
+      /*! Get the range number
+       * \param name -> name of the range
+       * \return -> the range internal number. -1 on error. */
+      int getRange(string name);
+
    private:
       /*! Read A definition file
        * \param fileName ->  string with the fileName of the file to load */
@@ -116,6 +71,58 @@ class weaponTypes
       int totalDamages;       /**< Total Number of damages */
       wInfo* damages;         /**< The damages */
 };
+
+
+/*! The Weapon Class Definition */
+class weapon: public object
+{
+   public:
+      /*! Constructor
+       * \param path -> name of the weapon file to load
+       * \param mdlList -> list of models
+       * \param wTypes -> the weapons types */
+      weapon(string path, modelList& mdlList, weaponTypes& wTypes);
+      /*! Destructor */
+      ~weapon();
+
+      /*! Get the Types Informations of the weapon
+       * \param category -> category type of the weapon
+       * \param range -> range type of the weapn (meele or ranged)
+       * \param size -> size type of the weapon
+       * \param weight -> weight type of the weapon
+       * \param damageA -> first damage type
+       * \param damageB -> second damage type */
+      void getType(int& category, int& range, int& size, int& weight,
+                   int& damageA, int& damageB);
+
+      /*! Get the weapon's damage dice
+       * \return the weapons damage dice */
+      diceThing getDice();
+
+      /*! Get the range distance of the weapon
+       * \return -> range distance */
+      int getRange();
+
+      /*! Get the weight of the weapon
+       * \return -> weapon's weight in Kg. */
+      float getWeight();
+
+   protected:
+      int categoryType;       /**< Weapon Category (Ex: Exotic)  */
+      int rangeType;          /**< Range Type (Ex: Meele) */
+      int sizeType;           /**< Size Type (Ex: Small) */
+      int weightType;         /**< Weight Type (Ex: Light) */
+      diceThing damageDice;   /**< Damage Dices */
+      int rangeValue;         /**< Range Value */
+      float weightValue;      /**< Weight Value */
+      int damageType[2];      /**< Damage Type Vector (Ex: Slashing) */
+      string attackSound[2];  /**< Damage Type Sounds Files */
+
+      /*! TODO /todo Special things on weapons! It's, for example a 
+       * resistance, a special damage, etc.. */
+
+};
+
 
 #endif
 

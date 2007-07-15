@@ -7,7 +7,10 @@
 #include "object.h"
 #include "../engine/util.h"
 
-string getAfterEqual(string s)
+/**************************************************************
+ *                        getAfterEqual                       *
+ **************************************************************/
+string object::getAfterEqual(string s)
 {
    unsigned int i = 0;
 
@@ -47,6 +50,8 @@ object::object(string path, modelList& mdlList): thing()
    FILE* file;
    char buffer[512];
    string token, token2;
+
+   cleanValues();
 
    if(!(file=fopen(path.c_str(),"r")))
    {
@@ -161,6 +166,14 @@ object::object(object* obj): thing()
  **************************************************************/
 object::object(): thing()
 {
+   cleanValues();
+}
+
+/**************************************************************
+ *                         cleanValues                        *
+ **************************************************************/
+void object::cleanValues()
+{
    inventSizeX = 0;
    inventSizeY = 0;
    name = "";
@@ -173,6 +186,7 @@ object::object(): thing()
    fortitude = 0;
    armatureClass = 0;
    sizeModifier = 0;
+   cost = 0;
 }
 
 /**************************************************************

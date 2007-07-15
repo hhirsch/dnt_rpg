@@ -80,6 +80,15 @@ class object: public thing
       string name;          /**< Name of the Object */
       string fileName;      /**< FileName of the Object */
       string model2dName;   /**< FileName of the 2D Model */
+
+      /*! Init the values (all with null or zero). Usually called
+       * at begining of the constructors. */
+      void cleanValues();
+
+      /*! Gets a substring after the equal character.
+       * \param s -> source string
+       * \return -> the substring after the equal character */
+      string getAfterEqual(string s);
 };
 
 
