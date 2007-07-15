@@ -1,0 +1,116 @@
+\documentclass[letterpaper,12pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{epsfig}
+
+\begin{document}
+
+\title{Weapons File Description}
+
+\author{
+DNTeam
+}
+
+\maketitle
+
+\abstract{\begin{center}This document describes the Weapons files Struct
+          \end{center}}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+  The weapon file is some kind of header to the cal3D model that represents
+the weapon. Also, there are definitions to weapons categories, range types,
+size types, weight types and damage types, each one on its respective file,
+as described below.
+
+\section{Types File Struct}
+
+The types files declares the types definitions of weapons. Each file have the
+same struct:
+
+\begin{verbatim}
+NUMBER_OF_DECLARATIONS
+INDEX DECLARATION_NAME
+\end{verbatim}
+
+The files are:
+
+\begin{itemize}
+\item{Categories: ../data/weapons/types/categories.dcl}
+\item{Ranges: ../data/weapons/types/ranges.dcl}
+\item{Sizes: ../data/weapons/types/sizes.dcl}
+\item{Weights: ../data/weapons/types/weights.dcl}
+\item{Damages: ../data/weapons/types/damages.dcl}
+\end{itemize}
+
+\subsection{Number of Declarations}
+{\bf Type: }Integer\\
+Describes how many declarations on the file.
+
+\subsection{Index}
+{\bf Type: }Integer\\
+Describes the index of the declaration. {\bf Must be in range
+[0,Number\_Of\_Declarations-1]}
+
+\subsection{Declaration Name}
+{\bf Type: }String\\
+The internal name of the declaration.
+
+\section{Weapon File Struct}
+
+The order of each definition on the file is not important. 
+
+\subsection{Model}
+
+Defines the cal3d filename, relative to the ./bin directory.\\
+
+{\bf Syntax: }
+\begin{verbatim}
+cal3d = filename
+\end{verbatim}
+
+\subsection{Category}
+
+Defines the category of the weapon. The category must be a valid one 
+declared on the categories.dlg file.\\
+
+{\bf Syntax: }
+\begin{verbatim}
+category = category_name
+\end{verbatim}
+
+\subsection{Range}
+
+Defines the range of the weapon. The range type must be a valid one 
+declared on the range.dlg file.\\
+
+{\bf Syntax: }
+\begin{verbatim}
+rangeType = range_name
+rangeValue = range_value_integer
+\end{verbatim}
+
+\subsection{Size}
+
+Defines the size of the weapon. The size type must be a valid one
+declared on the sizes.dlg file.\\
+
+{\bf Syntax: }
+\begin{verbatim}
+sizeType = size_name
+\end{verbatim}
+
+\subsection{Object Things}
+Those things are the same as the object (*.dcc) ones. Take a look a the objects document to see what they are.
+
+
+\end{document}
