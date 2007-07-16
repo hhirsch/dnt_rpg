@@ -1158,7 +1158,10 @@ void engine::threatGuiEvents(guiObject* object, int eventInfo)
    /* Verify Inventory Window */
    if( (inventoryWindow) )
    {
-      inventoryWindow->treat(object, eventInfo);
+      if(inventoryWindow->treat(object, eventInfo))
+      {
+         //TODO redefine the used weapon, redefine the armors bonus, etc.
+      }
    }
 
    /* Verify ShortCutsWindow */

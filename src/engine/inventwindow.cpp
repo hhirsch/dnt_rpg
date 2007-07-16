@@ -25,7 +25,8 @@ inventWindow::inventWindow(inventory *invent, interface* inter)
    intWindow = inter->insertWindow(0,0,263,402,language.INVENTW_TITLE.c_str());
 
    /* Add Character (equip) Tab Button */
-   characterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,256,256,
+   characterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,
+                                                                     256,256,
                                         "../data/texturas/inventory/equip.png");
    headButton = characterTabButton->insertButton(109,3,147,41);
    footButton = characterTabButton->insertButton(109,214,147,252);
@@ -80,7 +81,7 @@ inventWindow::~inventWindow()
 }
 
 /**************************************************************
- *                            isOPen                          *
+ *                            isOpen                          *
  **************************************************************/
 bool inventWindow::isOpen()
 {

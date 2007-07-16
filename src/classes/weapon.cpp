@@ -117,6 +117,15 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
       {
          sscanf(token2.c_str(),"%f",&weightValue);
       }
+      else if(token == "munition_type")
+      {
+         munitionType = wTypes.getMunition(token2);
+      }
+      else if(token == "munition_capacity")
+      {
+         sscanf(token2.c_str(),"%d",&munitionCapacity);
+         actualMunition = munitionCapacity;
+      }
       else if(token == "main_damage_type")
       {
          damageType[0] = wTypes.getDamage(token2);
@@ -162,7 +171,9 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
  ************************************************************/
 weapon::~weapon()
 {
-   model3D->decUsed();
+   //Do not need to dec the model3D, since it is already done at the
+   //destructor of the object. Also, do not need to free the model2D, since
+   //is is done at the object destructor.
 }
 
 /************************************************************
@@ -214,6 +225,7 @@ float weapon::getWeight()
 #define FILE_SIZES "../data/weapons/types/sizes.dcl"
 #define FILE_WEIGHTS "../data/weapons/types/weights.dcl"
 #define FILE_DAMAGES "../data/weapons/types/damages.dcl"
+#define FILE_MUNITIONS "../data/weapons/types/munitions.dcl"
 
 /************************************************************
  *                        Constructor                       *
@@ -230,6 +242,8 @@ weaponTypes::weaponTypes()
    readFile(FILE_SIZES);
    /* Read Damages */
    readFile(FILE_DAMAGES);
+   /* Read Munitions */
+   readFile(FILE_MUNITIONS);
 }
 
 /************************************************************
@@ -242,6 +256,7 @@ weaponTypes::~weaponTypes()
    delete[] weights;
    delete[] sizes;
    delete[] damages;
+   delete[] munitions;
 }
 
 /************************************************************
@@ -294,6 +309,11 @@ void weaponTypes::readFile(string fileName)
    {
       damages = names;
       totalDamages = totals;
+   }
+   else if(fileName == FILE_MUNITIONS)
+   {
+      munitions = names;
+      totalMunitions = totals;
    }
    else
    {
@@ -354,6 +374,15 @@ int weaponTypes::getDamage(string name)
 {
    return(getThing(damages, totalDamages, name));
 }
+
+/************************************************************
+ *                        getMunition                       *
+ ************************************************************/
+int weaponTypes::getMunition(string name)
+{
+   return(getThing(munitions, totalMunitions, name));
+}
+
 
 /************************************************************
  *                          getThing                        *

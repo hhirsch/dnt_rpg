@@ -47,6 +47,11 @@ class weaponTypes
        * \return -> the range internal number. -1 on error. */
       int getRange(string name);
 
+      /*! Get the munition type number
+       * \para name -> name of the munition
+       * \return -> the munition internal number. -1 on error. */
+      int getMunition(string name);
+
    private:
       /*! Read A definition file
        * \param fileName ->  string with the fileName of the file to load */
@@ -70,6 +75,8 @@ class weaponTypes
       wInfo* weights;         /**< The weights */
       int totalDamages;       /**< Total Number of damages */
       wInfo* damages;         /**< The damages */
+      int totalMunitions;     /**< Total Number of Munitions */
+      wInfo* munitions;       /**< The munitions */
 };
 
 
@@ -108,6 +115,9 @@ class weapon: public object
       float getWeight();
 
    protected:
+      int munitionType;       /**< Weapon Munition Type (ex: 9mm) */
+      int munitionCapacity;   /**< Weapon Max Munition */
+      int actualMunition;     /**< Weapon actual munition */
       int categoryType;       /**< Weapon Category (Ex: Exotic)  */
       int rangeType;          /**< Range Type (Ex: Meele) */
       int sizeType;           /**< Size Type (Ex: Small) */

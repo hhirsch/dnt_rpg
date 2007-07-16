@@ -9,6 +9,12 @@
 #include "../lang/lang.h"
 #include "util.h"
 
+#define INVENTORY_ACTION_NONE           0
+#define INVENTORY_ACTION_INTERNAL       1
+#define INVENTORY_ACTION_EQUIPED_WEAPON 2
+#define INVENTORY_ACTION_EQUIPED_ARMOR  3
+#define INVENTORY_ACTION_USE_ITEM       4
+
 /*! Inventory Window Class */
 class inventWindow
 {

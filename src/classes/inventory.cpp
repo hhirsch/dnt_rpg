@@ -98,8 +98,14 @@ bool inventory::equipObject(object* obj, int where)
 {
    if( (obj) && (where >= 0) && (where < INVENTORY_TOTAL_PLACES) )
    {
-      //TODO verify if object Use Type is compatible with the place
-      return(equippedSlots[where]->addObject(obj,0,0));
+      //TODO verify if object Use Type is compatible with other places
+
+      if( (obj->getType() == OBJECT_TYPE_WEAPON) && 
+          ( (where == INVENTORY_LEFT_HAND) ||
+            (where == INVENTORY_RIGHT_HAND)))
+      {
+         return(equippedSlots[where]->addObject(obj,0,0));
+      }
    }
    return(false);
 }
