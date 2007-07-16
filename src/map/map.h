@@ -20,14 +20,13 @@ using namespace std;
 #define HALF_SQUARE_SIZE        128 /**< Half size of the square */
 #define QUARTER_SQUARE_SIZE      64 /**< Quarter size of the square */
 #define SQUARE_DIAGONAL_SIZE    362.03867 /**< Diagonal size of the square */
-#define MAXOBJETOS             30 /**< Max number of objects per square */
+#define MAXOBJETOS             50 /**< Max number of objects per square */
 #define MAXMUROS               15  /**< Max number of walls per square */
 #define MUROALTURA             50 /**< Walls height */
 #define MEIOFIOALTURA           2 /**< Meio-fios height */
 #define ALTURAMAXIMA          150 /**< Max square height */
 
-#define SQUARE_DIVISIONS_INC  256 /**< Difference of heigh to inc the square
-                                       divisions. */ 
+#define SQUARE_DIVISIONS_INC  256 /**< Difference heigh to inc the square divisions. */ 
 #define TEXTURE_REPEATS         4 /**< Number of Repeats of indoor texture */ 
 
 /*!
@@ -78,7 +77,7 @@ typedef struct _texture
  ****************************************************/
 typedef struct _door
 {
-  mapObject* object;       /**< pointer to door map object */
+  object* obj;             /**< pointer to door object */
   GLfloat x,z;             /**< position on map */
   GLint status;            /**< actual status (opened, closed) */
   GLint orientacao;        /**< orientation */
@@ -102,7 +101,7 @@ class Square
       int flags;                        /**< Condition flag */
       int visivel;                      /**< Visible on active frame ? */
       int textura;                      /**< Actual Texture */
-      mapObject *objects[MAXOBJETOS];   /**< Objects on Square */
+      object *objects[MAXOBJETOS];      /**< Objects on Square */
       int objectsDesenha[MAXOBJETOS];   /**< Draw object on active frame ? */
       int quadXobjects[MAXOBJETOS];     /**< Object Square X coordinate */ 
       int quadZobjects[MAXOBJETOS];     /**< Object Square Z coordinate */
@@ -197,9 +196,10 @@ class Map
        * Opens map from file
        * \param arquivo ->  Name of file to be opened
        * \param mdlList -> Game models list
+       * \param wTypes -> weapons types
        * \return 1 on success.
        ***************************************************************/
-      int open( string arquivo, modelList& mdlList ); 
+      int open( string arquivo, modelList& mdlList, weaponTypes& wTypes ); 
       /*!
        *************************************************************** 
        * Gets coordinate relative square
@@ -274,16 +274,17 @@ class Map
        * \param qz -> square internal Z (in squares)
        **************************************************************/
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                   mapObject* obj, int qx, int qz);
+                        object* obj, int qx, int qz);
 
       /*!
        ************************************************************* 
        * Insert object on map list
        * \param arquivo -> filename to load
        * \param mdlList -> modelList
+       * \param wTypes -> list of weapons types
        * \return pointer to the map Object created 
        *************************************************************/
-      mapObject* insertMapObject(string arquivo, modelList& mdlList);
+      object* insertObject(string arquivo, modelList& mdlList, weaponTypes& wTypes);
 
       /*! 
        **************************************************************
@@ -407,7 +408,7 @@ class Map
              z;                /**< Map Z Dimension (in squares) */
          bool outdoor;         /**< If it's an outdoor or indoor map */
          Square** MapSquares;  /**< Internal Map squares */
-         lMapObject* objects;  /**< Map's objects list */
+         lObject* objects;     /**< Map's objects list */
          string music;         /**< Map Music */
          string name;          /**< File name of loaded map */
          string particlesFileName; /**< File Name of Map Particles Systens */

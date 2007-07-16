@@ -289,7 +289,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    }
    actualMap = new(Map);
    actualMap->setFileName(arqVelho);
-   actualMap->open(arqMapa,*models);
+   actualMap->open(arqMapa,*models, *weaponsTypes);
 
    /* Enable, if needed, the FOG */
    if(actualMap->fog.enabled)
@@ -1355,7 +1355,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
       door* porta = actualMap->portas;
       while( (porta != NULL) && (!pronto) )
       {
-         boundingBox bound = porta->object->getBoundingBox();
+         boundingBox bound = porta->obj->getBoundingBox();
          GLfloat X[4]; GLfloat Z[4];
          X[0] = bound.x1;
          Z[0] = bound.z1;

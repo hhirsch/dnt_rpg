@@ -24,6 +24,7 @@ editor::editor()
    gameSun = new sun(hour , FARVIEW, FARVIEW);
    gameSky = new(sky);
    models = new modelList();
+   wTypes = new weaponTypes();
 
    terrainEditor = NULL;
    portalEditor = NULL;
@@ -61,6 +62,7 @@ editor::~editor()
    }
    delete(gui);
    delete(models);
+   delete(wTypes);
    Farso_End(screen);
 }
 
@@ -124,7 +126,7 @@ void editor::openMap()
    gui->showMessage("Opening actual Map...");
    draw();
    map = new(Map);
-   if(map->open(gui->getFileName(),*models))
+   if(map->open(gui->getFileName(),*models,*wTypes))
    {
       mapOpened = true;
       terrainEditor = new terrain(map);
@@ -864,8 +866,8 @@ void editor::doEditorIO()
       {
          if(!doorFile.empty())
          {
-            mapObject* obj = map->insertMapObject(doorFile, *models);
-            portalEditor->defineDoor(obj, gui->getSelectedText());
+            object* obj = map->insertObject(doorFile, *models, *wTypes);
+            portalEditor->defineDoor((mapObject*)obj, gui->getSelectedText());
          }
       }
       portalEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(),
@@ -881,7 +883,7 @@ void editor::doEditorIO()
       string objFile = gui->getSelectedText();
       if( (!objFile.empty()) && (objFile != objectEditor->getObjectFileName()))
       {
-         mapObject* obj = map->insertMapObject(objFile, *models);
+         mapObject* obj = (mapObject*) map->insertObject(objFile, *models, *wTypes);
          objectEditor->defineActualObject(obj, objFile);
       }
       objectEditor->verifyAction(xReal, yReal, zReal, mButton, mouseX, mouseY,

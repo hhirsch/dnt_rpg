@@ -88,6 +88,7 @@ class editor
       particles* particleEditor;     /**< The Particle Editor Module */
       modelList* models;             /**< The Objects Model List */
       npcs* npcController;           /**< The Npcs Controller */
+      weaponTypes* wTypes;           /**< The list of types */
 
       GLuint actualTexture;          /**< Actual Texture */
 

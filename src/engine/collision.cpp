@@ -187,7 +187,7 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    while( porta != NULL )
    {
       GLfloat minObj[3], maxObj[3];
-      boundingBox boundPorta = porta->object->getBoundingBox();
+      boundingBox boundPorta = porta->obj->getBoundingBox();
       GLfloat XA[4]; GLfloat ZA[4];
       XA[0] = boundPorta.x1;
       ZA[0] = boundPorta.z1;

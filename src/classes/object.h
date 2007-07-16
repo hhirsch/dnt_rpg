@@ -12,6 +12,12 @@ using namespace std;
 #include "../etc/modellist.h"
 #include "thing.h"
 
+#define OBJECT_TYPE_GENERIC   0
+#define OBJECT_TYPE_MAPOBJECT 1
+#define OBJECT_TYPE_WEAPON    2
+#define OBJECT_TYPE_ARMOR     3
+#define OBJECT_TYPE_ITEM      4
+
 /*! Define Objects of the DNT (an object is almost everything that 
  * isn't live (like chairs, doors, equipments, weapons, etc).*/
 class object: public thing
@@ -29,6 +35,10 @@ class object: public thing
       /*! Destructor */
       ~object();
 
+      /*! Verify if Map object can be got
+       * \return true if the object is pickable */
+      bool canGet();
+
       /*!
        * Draws the object
        * \param x -> X position 
@@ -36,7 +46,8 @@ class object: public thing
        * \param dist -> distance from observator (defines the LOD used)
        * \param orientation -> orientation angle of the object
        * \param inverted -> to invert the Y position */
-      void draw(float x, float z,GLfloat dist, float orientation, bool inverted);
+      void draw(float x, float z,GLfloat dist, float orientation, 
+                bool inverted);
 
       /*! Draw the 2D Model to Surface
        * \param x -> x value on surface
@@ -69,10 +80,18 @@ class object: public thing
 
       /*! Call the idle animation of the model */
       void callIdleAnimation();
+
+      /*! Get the type of the object */
+      int getType(){return(type);};
+
+      object* next;         /**< Next Object on List */
+      object* previous;     /**< Previous Object on List */
       
    protected:
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
+
+      int type;             /**< Type of the object */
 
       model3d* model3D;     /**< Pointer to used 3D Model Maximun Quality */
       SDL_Surface* model2d; /**< Pointer to used 2D Model */

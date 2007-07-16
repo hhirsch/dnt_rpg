@@ -213,7 +213,7 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
  *                          insertObject                          *
  ******************************************************************/
 void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                       mapObject* obj, int qx, int qz)
+                       object* obj, int qx, int qz)
 {
    Square* saux = relativeSquare(qx,qz);
    int ob=0;
@@ -703,9 +703,9 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
    door* porta = portas;
    while(porta != NULL)
    {
-      if(porta->object != NULL)
+      if(porta->obj != NULL)
       {
-         porta->object->draw(porta->x,porta->z,0,porta->orientacao, inverted);
+         porta->obj->draw(porta->x,porta->z,0,porta->orientacao, inverted);
       }
       porta = porta->proximo;
    }
@@ -731,7 +731,7 @@ Map::Map()
    MapSquares = NULL;
    
    /* Initialize Structs */
-   objects = new(lMapObject);
+   objects = new(lObject);
    x = z = 0;
    xInic = zInic = 0;
    SQUAREMINISIZE = 4;
@@ -970,15 +970,16 @@ void Map::setOutdoor(bool val)
 /********************************************************************
  *                       insertMapObject                            *
  ********************************************************************/
-mapObject* Map::insertMapObject(string arquivo, modelList& mdlList)
+object* Map::insertObject(string arquivo, modelList& mdlList, 
+                          weaponTypes& wTypes)
 {
-   return(objects->insertMapObject(arquivo, mdlList));
+   return(objects->insertObject(arquivo, mdlList, wTypes));
 }
 
 /********************************************************************
  *                       Open Map File                              *
  ********************************************************************/
-int Map::open(string arquivo, modelList& mdlList)
+int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
 {
    FILE* arq;        // file used for the map
    char buffer[128]; // buffer used to read
@@ -1087,8 +1088,8 @@ int Map::open(string arquivo, modelList& mdlList)
             fgets(buffer, sizeof(buffer),arq);
             sscanf(buffer,"%s %f,%f:%d",nome,&porta->x,&porta->z,
                                         &porta->orientacao);
-            porta->object = objects->getMapObject(nome);
-            if(porta->object == NULL)
+            porta->obj = objects->getObject(nome);
+            if(porta->obj == NULL)
             {
                printf("Can't Locate Door File: %s\n",nome);
             }
@@ -1189,7 +1190,7 @@ int Map::open(string arquivo, modelList& mdlList)
          {
              fgets(buffer, sizeof(buffer), arq); 
              sscanf(buffer, "%s",nomeArq);
-             objects->insertMapObject(nomeArq, mdlList);
+             objects->insertObject(nomeArq, mdlList, wTypes);
              break;
          }
          case 'O': /* Define OutDoor */
@@ -1295,7 +1296,7 @@ int Map::open(string arquivo, modelList& mdlList)
                        &MapSquares[posX][posZ].objectsOrientation[numObjetosAtual],
                        &MapSquares[posX][posZ].pisavelObj[numObjetosAtual]);
                      MapSquares[posX][posZ].objects[numObjetosAtual] = 
-                                                   objects->getMapObject(nome);
+                                                   objects->getObject(nome);
                      MapSquares[posX][posZ].quadObjetos[i] = relativeSquare(
                          MapSquares[posX][posZ].quadXobjects[numObjetosAtual],
                          MapSquares[posX][posZ].quadZobjects[numObjetosAtual]);
@@ -1574,7 +1575,7 @@ int Map::save(string arquivo)
    int i;
    if(objects->total>0)
    {
-      mapObject* objAux = objects->first;
+      object* objAux = objects->first;
       for(i = 0; i < objects->total; i++)
       {
          if(!objAux->getFileName().empty())
@@ -1602,7 +1603,7 @@ int Map::save(string arquivo)
    door* porta = (door*)portas;
    while(porta != NULL)
    {
-      fprintf(arq,"d %s %f,%f:%d\n",porta->object->getFileName().c_str(),
+      fprintf(arq,"d %s %f,%f:%d\n",porta->obj->getFileName().c_str(),
                                     porta->x,porta->z,
                                     porta->orientacao);
       porta = porta->proximo;
@@ -1717,20 +1718,10 @@ Map::~Map()
       delete(auxporta);
    }
 
-
-
    /* Deleting all objects */
    delete(objects);
   
    /* Deleting all squares */
-   //int x1,z1;
-   /*for(x1 = 0; x1<x; x1++)
-   {
-      for(z1 = 0; z1<z;z1++)
-      {
-         delete (MapSquares[x1][z1]);
-      }
-   }*/
    int x1;
    for(x1 = 0; x1<x;x1++)
    {

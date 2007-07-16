@@ -11,6 +11,8 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
 
    cleanValues();
 
+   type = OBJECT_TYPE_WEAPON;
+
    if(!(file=fopen(path.c_str(),"r")))
    {
        printf("Error on open object %s\n", path.c_str());
@@ -160,6 +162,7 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
  ************************************************************/
 weapon::~weapon()
 {
+   model3D->decUsed();
 }
 
 /************************************************************

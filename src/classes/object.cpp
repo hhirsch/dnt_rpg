@@ -146,6 +146,7 @@ object::object(string path, modelList& mdlList): thing()
  **************************************************************/
 object::object(object* obj): thing()
 {
+   type = obj->type;
    inventSizeX = obj->inventSizeX;
    inventSizeY = obj->inventSizeY;
    name = obj->name;
@@ -181,6 +182,9 @@ void object::cleanValues()
    model2dName = "";
    model2d = NULL;
    model3D = NULL;
+   next = NULL;
+   previous = NULL;
+   type = OBJECT_TYPE_GENERIC;
    maxLifePoints = 0;
    lifePoints = 0;
    fortitude = 0;
@@ -265,6 +269,16 @@ void object::getInventorySize(int &x, int &y)
 {
    x = inventSizeX;
    y = inventSizeY;
+}
+
+/*********************************************************************
+ *                              canGet                               *
+ *********************************************************************/
+bool object::canGet()
+{
+   int x, y;
+   getInventorySize(x,y);
+   return( (x != 0) && (y != 0));
 }
 
 /*********************************************************************

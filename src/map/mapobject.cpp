@@ -3,12 +3,12 @@
  *************************************************************************/
 
 #include "mapobject.h"
-#include "../etc/glm.h"
+#include "../classes/weapon.h"
 
 /*********************************************************************
  *                             Constructor                           *
  *********************************************************************/
-lMapObject::lMapObject()
+lObject::lObject()
 {
    first = NULL;
    total = 0;
@@ -17,10 +17,10 @@ lMapObject::lMapObject()
 /*********************************************************************
  *                              Destructor                           *
  *********************************************************************/
-lMapObject::~lMapObject()
+lObject::~lObject()
 {
-   mapObject* obj = first;
-   mapObject* tmp;
+   object* obj = first;
+   object* tmp;
    while(total > 0)
    {
       tmp = obj;
@@ -33,10 +33,31 @@ lMapObject::~lMapObject()
 /*********************************************************************
  *                           insertMapObject                         *
  *********************************************************************/
-mapObject* lMapObject::insertMapObject(string arquivo, modelList& mdlList)
+object* lObject::insertObject(string arquivo, modelList& mdlList, weaponTypes& wTypes)
 {
-   mapObject* novo;
-   novo = new mapObject(arquivo, mdlList);
+   object* novo = NULL;
+
+   string::size_type loc = arquivo.find( ".dcc", 0 );
+   if( loc != string::npos )
+   {
+      /* Is a map Object *.dcc */
+      novo = (object*) new mapObject(arquivo, mdlList);
+   }
+
+   loc = arquivo.find( ".wcc", 0 );
+   if( loc != string::npos )
+   {
+      /* Is a weapon Object *.wcc */
+      novo = (object*) new weapon(arquivo, mdlList, wTypes);
+   }
+
+   if(novo == NULL)
+   {
+      printf("Error, cannot define the type of %s\n",arquivo.c_str());
+      return(NULL);
+   }
+
+
    if(first == NULL)
    {
       first = novo;
@@ -59,11 +80,28 @@ mapObject* lMapObject::insertMapObject(string arquivo, modelList& mdlList)
 /*********************************************************************
  *                           removeMapObject                         *
  *********************************************************************/
-void lMapObject::removeMapObject(mapObject* obj)
+void lObject::removeObject(object* obj)
 {
    obj->previous->next = obj->next;
    obj->next->previous = obj->previous;
-   delete(obj);
+
+   switch(obj->getType())
+   {
+      case OBJECT_TYPE_MAPOBJECT:
+      {
+         mapObject *o = (mapObject*)obj;
+         delete(o);
+      }
+      case OBJECT_TYPE_WEAPON:
+      {
+         weapon *w = (weapon*)obj;
+         delete(w);
+      }
+      default:
+      {
+         delete(obj);
+      }
+   }
    total--;
    if(total == 0)
    {
@@ -72,12 +110,12 @@ void lMapObject::removeMapObject(mapObject* obj)
 }
 
 /*********************************************************************
- *                           getMapObject                            *
+ *                             getObject                             *
  *********************************************************************/
-mapObject* lMapObject::getMapObject(string fileName)
+object* lObject::getObject(string fileName)
 {
    int aux;
-   mapObject* obj = first;
+   object* obj = first;
    for(aux=0;aux<total;aux++)
    {
       if(obj->getFileName() == fileName)
@@ -87,16 +125,6 @@ mapObject* lMapObject::getMapObject(string fileName)
       obj = obj->next;
    }
    return(NULL);
-}
-
-/*********************************************************************
- *                              canGet                               *
- *********************************************************************/
-bool mapObject::canGet()
-{
-   int x, y;
-   getInventorySize(x,y);
-   return( (x != 0) && (y != 0));
 }
 
 /*********************************************************************

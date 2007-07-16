@@ -7,6 +7,7 @@
 
 #include "../etc/modellist.h"
 #include "../classes/object.h"
+#include "../classes/weapon.h"
 #include <string>
 using namespace std;
 
@@ -22,46 +23,41 @@ class mapObject: public object
        * \param path -> path to the object file
        * \param mdlList -> list of openned models */
       mapObject(string path, modelList& mdlList):
-         object(path, mdlList){};
-
-      /*! Verify if Map object can be got
-       * \return true if the object is pickable */
-      bool canGet();
-
-      mapObject* next;        /**< Next Object on List */
-      mapObject* previous;    /**< Previous Object on List */
+         object(path, mdlList){type = OBJECT_TYPE_MAPOBJECT;};
 
    protected:
       void callDeadAnimation();
 };
 
-/*! Map Objects list */
-class lMapObject
+/*! Objects list */
+class lObject
 {
     public:
        /*! Constructor */
-       lMapObject();
+       lObject();
        /*! Destructor */
-       ~lMapObject();
+       ~lObject();
 
        /*!
         * Insert object on map list
         * \param arquivo -> filename to load
         * \param mdlList -> modelList
+        * \param wTypes -> list of weapons types
         * \return pointer to the map Object created */
-       mapObject* insertMapObject(string arquivo, modelList& mdlList);
+       object* insertObject(string arquivo, modelList& mdlList,
+                            weaponTypes& wTypes);
        /*!
         * Search for object on map list
         * \param fileName -> object file name 
         * \return pointer to the map Object founded. */
-       mapObject* getMapObject(string fileName);
+       object* getObject(string fileName);
 
        /*!
         * Remove object from list
         * \param obj-> pointer to the object to remove. */
-       void removeMapObject(mapObject* obj);
+       void removeObject(object* obj);
 
-       mapObject* first;
+       object* first;
        int total;
 
 }; 

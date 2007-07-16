@@ -226,7 +226,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          novaPorta->x = doorX;
          novaPorta->z = doorZ;
          novaPorta->orientacao = doorOrientation;
-         novaPorta->object = actualDoor;
+         novaPorta->obj = actualDoor;
          door* paux = actualMap->portas;
          paux = actualMap->portas;
          actualMap->portas = novaPorta;
