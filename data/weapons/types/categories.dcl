@@ -1,6 +1,7 @@
-5
+6
 00 martial
 01 exotic
-02 gun
-03 throw
-04 simple
+02 throw
+03 simple
+04 two_handed
+05 gun
