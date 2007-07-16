@@ -46,10 +46,11 @@ The files are:
 
 \begin{itemize}
 \item{Categories: ../data/weapons/types/categories.dcl}
+\item{Damages: ../data/weapons/types/damages.dcl}
+\item{Munitions: ../data/weapons/types/munitions.dcl}
 \item{Ranges: ../data/weapons/types/ranges.dcl}
 \item{Sizes: ../data/weapons/types/sizes.dcl}
 \item{Weights: ../data/weapons/types/weights.dcl}
-\item{Damages: ../data/weapons/types/damages.dcl}
 \end{itemize}
 
 \subsection{Number of Declarations}
@@ -120,6 +121,16 @@ weight_type = weight_name
 weight_value = weight_value_float
 \end{verbatim}
 
+\subsection{Munition / Ammunition}
+
+Defines the munition type, as one declared on the munitions.dcl file and the
+max capacity of the weapon.
+
+{\bf Syntax:}
+\begin{verbatim}
+munition_type = munition_name
+munition_capacity = munition_capacity_integer
+\end{verbatim}
 
 \subsection{Damage}
 
