@@ -65,7 +65,7 @@ class inventory
        * \return -> pointer to object on position */
       object* getFromPosition(int x, int y, int curInv);
 
-      /*! Get object from iventory place
+      /*! Get object from inventory place
        * \param where -> place ID on inventory
        * \return -> pointer to object on position */
       object* getFromPlace(int where);

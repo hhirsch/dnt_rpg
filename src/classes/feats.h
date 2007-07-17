@@ -51,6 +51,7 @@ typedef struct _featDesc
    int costToUse;                  /**< Cost, in PP to use the feat */
    int actionType;                 /**< Action Type of the feat */
    int action;                     /**< Defined Action of the feat */
+   int range;                      /**< Range action of the feat */
    factor conceptBonus;            /**< The concept that bonus the feat */
    factor conceptAgainst;          /**< Define the concept against the feat */
    factor conceptTarget;           /**< Define the valid target of feat */
@@ -78,6 +79,7 @@ typedef struct _feat
    int costToUse;                   /**< Cost, in PP to use */
    int actionType;                  /**< Action Type of the feat */
    int action;                      /**< Action of the feat */
+   int range;                       /**< Range of Action of the feat */
    factor conceptBonus;             /**< Concept that bonus the feat */
    factor conceptAgainst;           /**< Define the concept against the feat */
    factor conceptTarget;            /**< Define the valid target of feat */

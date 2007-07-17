@@ -27,6 +27,17 @@ using namespace std;
 
 #define MAX_DISTINCT_CLASSES 3 /**< Max Different Classes for MultiClass */
 
+/*! The character util model class. Usually used to retain weapons 
+ * and armors meshes when they are with the character. */
+class characterUtilModel
+{
+   public:
+      int meshID;          /**< The cal3D mesh id loaded */
+      string modelName;    /**< The name of the model loaded (for example, 
+                                it is the weapon name, or the armor name) */
+      string soundFile;    /**< The sound file (ogg). It's the sound that
+                                will be played when actions on the UtilModel. */
+};
 
 
 /*! Character Class */
@@ -75,10 +86,13 @@ class character: public aniModel
       /*! Define Character initial life points, based on its class */
       void defineInitialLifePoints();
 
+      /*! Define the character weapon, based on the current one at
+       * the inventory. If none is there, the current weapon is bare
+       * hands. */
+      void defineWeapon();
+
       /*! Clear Skills */
       void clearSkills();
-
-      //Tobjeto *actualWeapon;    /**< Actual weapon */
 
       classe* actualClass[MAX_DISTINCT_CLASSES]; /**< Pointer to each class */
       int classLevels[MAX_DISTINCT_CLASSES]; /**< Current level of each class */
@@ -159,6 +173,15 @@ class character: public aniModel
       void* conv;                 /**< Pointer to the conversation */
       bool convPressed;           /**< To avoid do some conversation action
                                        before releases the left mouse button */
+
+      characterUtilModel headModel;       /**< Head Model */
+      characterUtilModel leftHandModel;   /**< Left Hand Model */
+      characterUtilModel rightHandModel;  /**< Right Hand Model */
+      characterUtilModel leftFingerModel; /**< Left Finger Model */
+      characterUtilModel rightFingerModel;/**< Right Finger Model */
+      characterUtilModel neckModel;       /**< Neck Model */
+      characterUtilModel footModel;       /**< Foot Model */
+      characterUtilModel bodyModel;       /**< Body (Torso) Model */
 
 };
 

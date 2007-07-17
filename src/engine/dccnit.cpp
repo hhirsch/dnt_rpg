@@ -1160,7 +1160,10 @@ void engine::threatGuiEvents(guiObject* object, int eventInfo)
    {
       if(inventoryWindow->treat(object, eventInfo))
       {
-         //TODO redefine the used weapon, redefine the armors bonus, etc.
+         /* Redefine, if need, the weapons */
+         PCs->getActiveCharacter()->defineWeapon();
+
+         /* TODO redefine the armors! */
       }
    }
 
