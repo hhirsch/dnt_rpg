@@ -65,7 +65,7 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
    }
 
    write(screen, x1+3, y1-2, text.c_str(), init, end);
-   int x = (x1+2)+(pos-init)*(font_incCP()+1);
+   int x = (x1+2)+ ((pos-init)*(font_incCP()));
    if (marca)
    {
       line_Draw(screen,x,y1+3,x,y2-3);
@@ -89,7 +89,7 @@ void textBar::draw(SDL_Surface *screen)
  ********************************************************************/
 void textBar::defineCursorPosition(int mouseX, int mouseY)
 {
-   pos = (mouseX-(x1+2)) / (font_incCP()+1);
+   pos = (mouseX-(x1+2)) / (font_incCP());
    if(pos > text.length()) 
    {
       pos = text.length();
@@ -538,11 +538,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
        if(isMouseIn(mouseX,mouseY))
        {
            /* Calculate the New Position */
-           pos=(mouseX-(x1+2)) / (font_incCP()+1) + init;
-           if (pos > text.length())
-           {
-              pos = text.length();
-           }
+           defineCursorPosition(mouseX, mouseY);
            putText(pos,1,screen);
        }
        else
