@@ -1036,13 +1036,7 @@ void engine::enterBattleMode(bool surprisePC)
   character* ch;
   string brief = "";
   string briefInit = "";
-  //FIXME not here the dices!
-  diceThing dc;
-  dc.baseDice.diceID = DICE_D4;
-  dc.baseDice.numberOfDices = 1;
-  dc.baseDice.sumNumber = 2;
-  dc.initialLevel = 1;
-  dc.baseDice.criticalMultiplier = 1;
+  
   character* activeCharacter = PCs->getActiveCharacter();
   
   fight.empty();
@@ -1061,7 +1055,6 @@ void engine::enterBattleMode(bool surprisePC)
       fight.insertNPC(ch, 0, briefInit);
       brief += briefInit + "|";
       numEnemies++;
-      ch->actualFeats.defineMeleeWeapon(dc); //FIXME
       ch = (character*) ch->next; 
       SDL_Delay(1);
   }
@@ -1080,7 +1073,6 @@ void engine::enterBattleMode(bool surprisePC)
       {
          fight.insertPC(ch, 0, briefInit);
          brief += briefInit + "|";
-         ch->actualFeats.defineMeleeWeapon(dc); //FIXME
          ch = (character*) ch->next; 
          SDL_Delay(1);
       }

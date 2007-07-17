@@ -56,6 +56,9 @@ character::character(featsList* ft)
   footModel.meshID = -1;
   bodyModel.modelName = "";
   bodyModel.meshID = -1;
+
+  /* Define the weapon */
+  defineWeapon();
 }
 
 /*********************************************************************
@@ -348,6 +351,8 @@ void character::setOrientation(GLfloat ori)
 void character::defineWeapon()
 {
    object* obj = inventories->getFromPlace(INVENTORY_LEFT_HAND);
+   weapon* wp = (weapon*) obj;
+   diceThing dc;
    /* Load the Left Hand Weapon, if one is, and if is different than the
     * current one. */
    if(obj)
@@ -373,7 +378,15 @@ void character::defineWeapon()
          //        and so on. Will try that latter, when have more patience.
 
          /* Define the weapon */
-
+         dc = wp->getDice();
+         if(wp->getRangeType() == FEAT_MELEE_ATTACK)
+         {
+            actualFeats.defineMeleeWeapon(dc, wp->getRange());
+         }
+         else if(wp->getRangeType() == FEAT_RANGED_ATTACK)
+         {
+            actualFeats.defineRangedWeapon(dc, wp->getRange());
+         }
       }
    }
    else
@@ -382,22 +395,72 @@ void character::defineWeapon()
       //TODO
       
       /* Define the weapon to bare hands */
-      //TODO better definition of bare hands, based on strenght
-      // and other attributes of the character.
-
+      dc.baseDice.diceID = DICE_D2;
+      dc.baseDice.numberOfDices = 1;
+      dc.baseDice.sumNumber = 0;
+      dc.initialLevel = 1;
+      dc.baseDice.criticalMultiplier = 2;
+      actualFeats.defineMeleeWeapon(dc, 
+                                    (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER));
    }   
 
    obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
+   wp = (weapon*) obj;
    /* Load the Right Hand Weapon, if one is, and if is different than the
     * current one. */
    if(obj)
    {
+      if( (obj->getName()) != (leftHandModel.modelName))
+      {
+         /* Detach the mesh */
+         //TODO
+
+         /* Attach the mesh */
+         //TODO the big problem to attach the mesh now, is that we have
+         //     a new cal3d model for each weapon, and the attach function
+         //     of the cal3d only attachs meshes to the model (can't attach
+         //     models to the model). So, the possibly solution is:
+         //     1- Reload the mesh from the file, the materials, and its
+         //        bones, than put them as a child of another bone, update
+         //        all id values of the weapon and so it is on the model.
+         //        It's a not so beautyful way to do it, and is a lot of 
+         //        work to be done;
+         //     2- Maybe, trying to use the 
+         //           addCoreMaterial(CalCoreMaterial *pCoreMaterial);
+         //           int addCoreMesh(CalCoreMesh *pCoreMesh);
+         //        and so on. Will try that latter, when have more patience.
+
+         /* Define the weapon */
+         dc = wp->getDice();
+         if(wp->getRangeType() == FEAT_MELEE_ATTACK)
+         {
+            actualFeats.defineMeleeWeapon(dc, wp->getRange());
+         }
+         else if(wp->getRangeType() == FEAT_RANGED_ATTACK)
+         {
+            actualFeats.defineRangedWeapon(dc, wp->getRange());
+         }
+      }
    }
    else
    {
+      /* Detach the mesh */
+      //TODO
+      
+      /* Define the weapon to bare hands */
+
+      if(!inventories->getFromPlace(INVENTORY_LEFT_HAND))
+      {
+         dc.baseDice.diceID = DICE_D2;
+         dc.baseDice.numberOfDices = 1;
+         dc.baseDice.sumNumber = 0;
+         dc.initialLevel = 1;
+         dc.baseDice.criticalMultiplier = 2;
+         actualFeats.defineMeleeWeapon(dc, 
+                                    (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER));
+      }
    }
 
-   /* Define the Weapon */
 }
 
 /*********************************************************************

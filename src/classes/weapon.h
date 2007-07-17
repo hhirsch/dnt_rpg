@@ -102,6 +102,9 @@ class weapon: public object
       void getType(int& category, int& range, int& size, int& weight,
                    int& damageA, int& damageB);
 
+      /*! Gets the range type of the weapon (usually, meele or ranged) */
+      int getRangeType();
+
       /*! Get the weapon's damage dice
        * \return the weapons damage dice */
       diceThing getDice();

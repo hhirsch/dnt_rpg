@@ -68,6 +68,7 @@ bool feats::insertFeat(featDescription featInsert)
       m_feats[totalFeats].costToUse = featInsert.costToUse;
       m_feats[totalFeats].actionType = featInsert.actionType;
       m_feats[totalFeats].action = featInsert.action;
+      m_feats[totalFeats].range = featInsert.range;
       m_feats[totalFeats].name = featInsert.name;
       m_feats[totalFeats].diceInfo = featInsert.diceInfo;
       m_feats[totalFeats].conceptBonus = featInsert.conceptBonus;
@@ -346,24 +347,26 @@ int feats::getNPCAttackFeat(thing* pers, thing* target)
 /***************************************************************
  *                      defineMeleeWeapon                      *
  ***************************************************************/
-void feats::defineMeleeWeapon(diceThing& weaponDice)
+void feats::defineMeleeWeapon(diceThing& weaponDice, int rangeValue)
 { 
    /* Disable Ranged Attacks */
    m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel = 0;
    /* Enable Melee Attacks */
    m_feats[FEAT_MELEE_ATTACK].diceInfo = weaponDice;
+   m_feats[FEAT_MELEE_ATTACK].range = rangeValue;
+
 }
 
 /***************************************************************
  *                      defineRangedWeapon                     *
  ***************************************************************/
-void feats::defineRangedWeapon(diceThing& weaponDice)
+void feats::defineRangedWeapon(diceThing& weaponDice, int rangeValue)
 {
    /* Disable Melee Attacks */
    m_feats[FEAT_MELEE_ATTACK].diceInfo.initialLevel = 0;
    /* Enable Ranged Attacks */
    m_feats[FEAT_RANGED_ATTACK].diceInfo = weaponDice;
-
+   m_feats[FEAT_RANGED_ATTACK].range = rangeValue;
 }
 
 /**************************************************************************
@@ -454,6 +457,7 @@ featsList::featsList(string dir, string arq)
                              &buf2[0],&buf3[0]);
       m_feats[aux].actionType = numberActionType(buf2);
       m_feats[aux].action = numberAction(buf3);
+      fscanf(desc,"%d",&m_feats[aux].range);
       //Read Dependent Feats
       for(i=0; i<MAX_DEP_FEATS;i++)
       {

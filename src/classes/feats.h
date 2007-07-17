@@ -188,14 +188,16 @@ class feats
        **************************************************************** 
        * Define the active character's base attack to be a melee one.
        * \param weaponDice -> the dice of the weapon used.
+       * \param rangeValue -> range of action
        ***************************************************************/
-      void defineMeleeWeapon(diceThing& weaponDice);
+      void defineMeleeWeapon(diceThing& weaponDice, int rangeValue);
       /*!
        **************************************************************** 
        * Define the active character's base attack to be a ranged one.
        * \param weaponDice -> the dice of the weapon used.
+       * \param rangeValue -> range of the weapon
        ***************************************************************/
-      void defineRangedWeapon(diceThing& weaponDice);
+      void defineRangedWeapon(diceThing& weaponDice, int rangeValue);
 
    private:
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
