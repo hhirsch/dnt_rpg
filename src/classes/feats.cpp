@@ -162,7 +162,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
    if(!actionInRange(attacker.posicaoLadoX, attacker.posicaoLadoZ, 
                      target.posicaoLadoX, target.posicaoLadoZ,
-                     WALK_PER_MOVE_ACTION))
+                     m_feats[featNumber].range*METER_TO_DNT))
    {
       brief += language.MSG_FAR_AWAY;
       return(false);
@@ -345,12 +345,38 @@ int feats::getNPCAttackFeat(thing* pers, thing* target)
 }
 
 /***************************************************************
+ *                   getAttackFeatRangeType                    *
+ ***************************************************************/
+int feats::getAttackFeatRangeType()
+{
+   if(m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel == 0)
+   {
+      return(FEAT_MELEE_ATTACK);
+   }
+   return(FEAT_RANGED_ATTACK);
+}
+
+/***************************************************************
+ *                     getAttackFeatRange                      *
+ ***************************************************************/
+int feats::getAttackFeatRange()
+{
+   int value =  m_feats[FEAT_RANGED_ATTACK].range;
+   if(m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel == 0)
+   {
+      value = m_feats[FEAT_MELEE_ATTACK].range;
+   }
+   return(value);
+}
+
+/***************************************************************
  *                      defineMeleeWeapon                      *
  ***************************************************************/
 void feats::defineMeleeWeapon(diceThing& weaponDice, int rangeValue)
 { 
    /* Disable Ranged Attacks */
    m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel = 0;
+   m_feats[FEAT_RANGED_ATTACK].range = 0;
    /* Enable Melee Attacks */
    m_feats[FEAT_MELEE_ATTACK].diceInfo = weaponDice;
    m_feats[FEAT_MELEE_ATTACK].range = rangeValue;
@@ -364,6 +390,7 @@ void feats::defineRangedWeapon(diceThing& weaponDice, int rangeValue)
 {
    /* Disable Melee Attacks */
    m_feats[FEAT_MELEE_ATTACK].diceInfo.initialLevel = 0;
+   m_feats[FEAT_MELEE_ATTACK].range = 0;
    /* Enable Ranged Attacks */
    m_feats[FEAT_RANGED_ATTACK].diceInfo = weaponDice;
    m_feats[FEAT_RANGED_ATTACK].range = rangeValue;

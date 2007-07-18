@@ -199,6 +199,21 @@ class feats
        ***************************************************************/
       void defineRangedWeapon(diceThing& weaponDice, int rangeValue);
 
+      /*!
+       **************************************************************** 
+       * Get the range type of the attack feat
+       * \return range Type of the attack feat
+       ***************************************************************/
+      int getAttackFeatRangeType();
+
+      /*!
+       **************************************************************** 
+       * Get the range of the attack feat
+       * \return range of the attack feat
+       ***************************************************************/
+      int getAttackFeatRange();
+
+
    private:
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
       int  totalFeats;          /**< Actual Number of Feats */

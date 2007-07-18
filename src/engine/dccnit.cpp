@@ -131,6 +131,7 @@ engine::~engine()
    glDeleteTextures(1, &fullMoveCircle);
    glDeleteTextures(1, &destinyImage);
    glDeleteTextures(1, &rangeCircle);
+   glDeleteTextures(1, &featRangeCircle);
 
    /* Clear Characters */
    if(NPCs)
@@ -951,6 +952,24 @@ void engine::Init(SDL_Surface *screen)
 
    SDL_FreeSurface(img);
 
+   /* feat range circle */
+   img = IMG_Load("../data/texturas/fightMode/featRangeCircle.png");
+   if(!img)
+   {
+      printf("Error: can't Load Texure: fightMode/featRangeCircle.png\n");
+   }
+
+   glGenTextures(1, &featRangeCircle);
+
+   glBindTexture(GL_TEXTURE_2D, featRangeCircle);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+
    /* range circle */
    img = IMG_Load("../data/texturas/walk/range.png");
    if(!img)
@@ -1093,9 +1112,7 @@ void engine::enterBattleMode(bool surprisePC)
          canMove = false;
          canAttack = false;
       }
-      //TODO Verify if weapon is ranged before do this
-      attackFeat = FEAT_MELEE_ATTACK;
-      
+      attackFeat = activeCharacter->getActiveFeatRangeType();
       
    }
    else
@@ -1495,12 +1512,12 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                      shortCutsWindow->draw(mouseX, mouseY);
                   }
 
-                  //TODO -> verify if weapon is ranged, so distance is other
                   if( (Mbutton & SDL_BUTTON(1)) &&
                       (rangeAction(activeCharacter->posicaoLadoX, 
                                    activeCharacter->posicaoLadoZ,
                                    pers->posicaoLadoX, pers->posicaoLadoZ,
-                                   WALK_PER_MOVE_ACTION) ) )
+                                   activeCharacter->getActiveFeatRange() *
+                                   METER_TO_DNT) ) )
                   {
                      brief = activeCharacter->nome + " " + 
                              language.FIGHT_ATTACKS + " " + 
@@ -2453,6 +2470,15 @@ void engine::renderNoShadowThings()
                                       moveCircleX+WALK_PER_MOVE_ACTION, 
                                       moveCircleZ+WALK_PER_MOVE_ACTION,
                                       0.2,20);
+          /* Feat Range Circle */
+          float rangeValue=activeCharacter->getActiveFeatRange()*METER_TO_DNT;
+          actualMap->drawSurfaceOnMap(featRangeCircle, 
+                                      activeCharacter->posicaoLadoX-rangeValue,
+                                      activeCharacter->posicaoLadoZ-rangeValue, 
+                                      activeCharacter->posicaoLadoX+rangeValue, 
+                                      activeCharacter->posicaoLadoZ+rangeValue, 
+                                      0.3,20);
+                                       
    }
 
    if(walkStatus == ENGINE_WALK_MOUSE)
@@ -3000,8 +3026,7 @@ int engine::Run(SDL_Surface *surface)
                   PCs->setActiveCharacter(fight.actualCharacterTurn());
                   fullMovePCAction = false;
                   canMove = true;
-                  //TODO Verify if weapon is ranged before do this
-                  attackFeat = FEAT_MELEE_ATTACK;
+                  attackFeat = activeCharacter->getActiveFeatRangeType();
                   canAttack = true;
 
                   moveCircleX = activeCharacter->posicaoLadoX;

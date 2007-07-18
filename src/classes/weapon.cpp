@@ -153,7 +153,7 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
          damageDice.aditionalDice.diceID = 2;
          damageDice.aditionalDice.sumNumber = 0;
          damageDice.aditionalDice.criticalMultiplier = 0;
-         damageDice.initialLevel = 0;
+         damageDice.initialLevel = 1;
          damageDice.aditionalLevels = 0;
       }
       else

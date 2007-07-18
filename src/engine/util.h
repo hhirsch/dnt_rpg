@@ -26,7 +26,7 @@
 
 //#define ENGINE_ANIMATION_DELAY 4000 /**< Value to delay for end animation */
 
-#define DNT_TO_METER   0.1 /**< Constant to multiply to convert meter to DNT.*/
+#define DNT_TO_METER   0.5 /**< Constant to multiply to convert meter to DNT.*/
 #define METER_TO_DNT   1.0 / DNT_TO_METER /**< Constant to DNT to Meter value*/
 
 /********************************************************************

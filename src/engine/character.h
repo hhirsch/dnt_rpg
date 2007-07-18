@@ -153,6 +153,14 @@ class character: public aniModel
         * \param fileName -> new fileName of the character */
        void setCharacterFile(string fileName){characterFile = fileName;}
 
+       /*! Get the range type of the active attack feat
+        * \return range type of the actual attack feat */
+       int getActiveFeatRangeType();
+      
+       /*! Get the active attack feat range
+        * \return range value in meters */ 
+       int getActiveFeatRange();
+
        character* next;             /**< Next Character on List */
        character* previous;         /**< Previous Character on List */
 

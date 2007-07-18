@@ -40,7 +40,7 @@ itemSlot::~itemSlot()
    int i, x, y;
 
    /* Free Objects */
-   for(x=0; x < sizeX; x++)
+   /*for(x=0; x < sizeX; x++)
    {
       for(y=0; y < sizeY; y++)
       {
@@ -52,7 +52,7 @@ itemSlot::~itemSlot()
          }
          spaces[x][y].obj = NULL;
       }
-   }
+   }*/
 
    /* Free Spaces */
    for(i=0; i < sizeX; i++)
@@ -75,19 +75,15 @@ bool itemSlot::addObject(object* obj, int x, int y)
    int j,k;
    obj->getInventorySize(sX, sY);
 
-   object* nObj;
 
    if(canAdd(obj, x, y))
    {
-      /* Alloc Intern Object */
-      nObj = new object(obj);
-      
       /* Occup all needed spaces */
       for(j=x; j<x+sX; j++)
       {
          for(k=y; k<y+sY; k++)
          {
-            spaces[j][k].obj = nObj;
+            spaces[j][k].obj = obj;
             spaces[j][k].origX = x;
             spaces[j][k].origY = y;
          }
@@ -185,12 +181,13 @@ void itemSlot::removeObject(object* obj)
       {
          if(spaces[x][y].obj == obj)
          {
-            if( (spaces[x][y].origX == x) && 
+            /*if( (spaces[x][y].origX == x) && 
                 (spaces[x][y].origY == y))
             {
-               /* Free use of the Object */
+               // Free use of the Object
                delete(spaces[x][y].obj);
             }
+            */
             spaces[x][y].obj = NULL;
             spaces[x][y].origX = x;
             spaces[x][y].origY = y;
@@ -226,7 +223,7 @@ void itemSlot::removeObject(int x, int y)
             }
          }
          /* Free obj from use here */
-         delete(obj);
+         //delete(obj);
       }
    }
 }

@@ -359,6 +359,7 @@ void character::defineWeapon()
    {
       if( (obj->getName()) != (leftHandModel.modelName))
       {
+         leftHandModel.modelName = obj->getName();
          /* Detach the mesh */
          //TODO
 
@@ -387,21 +388,32 @@ void character::defineWeapon()
          {
             actualFeats.defineRangedWeapon(dc, wp->getRange());
          }
+         else
+         {
+            printf("Warn: Unknow Range Type: %d\n", wp->getRangeType());
+         }
       }
    }
    else
    {
-      /* Detach the mesh */
-      //TODO
+      if(leftHandModel.modelName != "Bare Hands")
+      {
+         leftHandModel.modelName = "Bare Hands";
+         if(!inventories->getFromPlace(INVENTORY_RIGHT_HAND))
+         {
+            /* Detach the mesh */
+            //TODO
       
-      /* Define the weapon to bare hands */
-      dc.baseDice.diceID = DICE_D2;
-      dc.baseDice.numberOfDices = 1;
-      dc.baseDice.sumNumber = 0;
-      dc.initialLevel = 1;
-      dc.baseDice.criticalMultiplier = 2;
-      actualFeats.defineMeleeWeapon(dc, 
+            /* Define the weapon to bare hands */
+            dc.baseDice.diceID = DICE_D2;
+            dc.baseDice.numberOfDices = 1;
+            dc.baseDice.sumNumber = 0;
+            dc.initialLevel = 1;
+            dc.baseDice.criticalMultiplier = 2;
+            actualFeats.defineMeleeWeapon(dc, 
                                     (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER));
+         }
+      }
    }   
 
    obj = inventories->getFromPlace(INVENTORY_RIGHT_HAND);
@@ -410,8 +422,9 @@ void character::defineWeapon()
     * current one. */
    if(obj)
    {
-      if( (obj->getName()) != (leftHandModel.modelName))
+      if( (obj->getName()) != (rightHandModel.modelName))
       {
+         rightHandModel.modelName = obj->getName();
          /* Detach the mesh */
          //TODO
 
@@ -440,6 +453,10 @@ void character::defineWeapon()
          {
             actualFeats.defineRangedWeapon(dc, wp->getRange());
          }
+         else
+         {
+            printf("Warn: Unknow Range Type: %d\n", wp->getRangeType());
+         }
       }
    }
    else
@@ -448,20 +465,40 @@ void character::defineWeapon()
       //TODO
       
       /* Define the weapon to bare hands */
-
-      if(!inventories->getFromPlace(INVENTORY_LEFT_HAND))
+      if(rightHandModel.modelName != "Bare Hands")
       {
-         dc.baseDice.diceID = DICE_D2;
-         dc.baseDice.numberOfDices = 1;
-         dc.baseDice.sumNumber = 0;
-         dc.initialLevel = 1;
-         dc.baseDice.criticalMultiplier = 2;
-         actualFeats.defineMeleeWeapon(dc, 
+         rightHandModel.modelName = "Bare Hands";
+         if(!inventories->getFromPlace(INVENTORY_LEFT_HAND))
+         {
+            dc.baseDice.diceID = DICE_D2;
+            dc.baseDice.numberOfDices = 1;
+            dc.baseDice.sumNumber = 0;
+            dc.initialLevel = 1;
+            dc.baseDice.criticalMultiplier = 2;
+            actualFeats.defineMeleeWeapon(dc, 
                                     (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER));
+         }
       }
    }
 
 }
+
+/*********************************************************************
+ *                       getActiveFeatRangeType                      *
+ *********************************************************************/
+int character::getActiveFeatRangeType()
+{
+   return(actualFeats.getAttackFeatRangeType());
+}
+
+/*********************************************************************
+ *                         getActiveFeatRange                        *
+ *********************************************************************/
+int character::getActiveFeatRange()
+{
+   return(actualFeats.getAttackFeatRange());
+}
+
 
 /*********************************************************************
  *                           applySkillCosts                         *

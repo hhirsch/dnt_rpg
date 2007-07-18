@@ -385,6 +385,7 @@ class engine
       /* Combat Things */
       GLuint  normalMoveCircle,    /**< One Movimentation Circle */
               fullMoveCircle,      /**< Full Round Movimentation Circle */
+              featRangeCircle,     /**< Feat Range Circle */
               rangeCircle;         /**< Range Circle */
 
       fightSystem fight;           /**< The Engine fight System */
