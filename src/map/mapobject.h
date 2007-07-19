@@ -57,6 +57,9 @@ class lObject
         * \param obj-> pointer to the object to remove. */
        void removeObject(object* obj);
 
+       /*! Remove all unused objects */
+       void removeUnusedObjects();
+
        object* first;
        int total;
 

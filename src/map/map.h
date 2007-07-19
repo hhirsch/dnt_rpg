@@ -125,7 +125,7 @@ class Square
 class Map
 {
    public:
-      Map();                     /**< Construtor */
+      Map(lObject* lObjects);    /**< Construtor */
       ~Map();                    /**< Destruidor */
 
       /*!

@@ -300,6 +300,8 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
              }
           }
        }
+       /* Mark the object as used */
+       obj->incUsedFlag();
      }
      else
        printf("Objects Overflow on Square %d %d\n",qx+1,qz+1);
@@ -714,7 +716,7 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
 /********************************************************************
  *                          Map Constructor                         *
  ********************************************************************/
-Map::Map()
+Map::Map(lObject* lObjects)
 {
    numtexturas = 0;
    Texturas = NULL;
@@ -731,7 +733,7 @@ Map::Map()
    MapSquares = NULL;
    
    /* Initialize Structs */
-   objects = new(lObject);
+   objects = lObjects;
    x = z = 0;
    xInic = zInic = 0;
    SQUAREMINISIZE = 4;
@@ -1300,6 +1302,10 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      MapSquares[posX][posZ].quadObjetos[i] = relativeSquare(
                          MapSquares[posX][posZ].quadXobjects[numObjetosAtual],
                          MapSquares[posX][posZ].quadZobjects[numObjetosAtual]);
+                     if(MapSquares[posX][posZ].objectsDesenha[numObjetosAtual])
+                     {
+                        objects->getObject(nome)->incUsedFlag();
+                     }
                      numObjetosAtual++;
                   }
                   break;
@@ -1718,8 +1724,23 @@ Map::~Map()
       delete(auxporta);
    }
 
-   /* Deleting all objects */
-   delete(objects);
+   /* Dec the used flag of all used objects */
+   int k,l,g;
+   for(k=0; k < x; k++)
+   {
+      for(l=0; l < z; l++)
+      {
+         for(g = 0; g < MAXOBJETOS; g++)
+         {
+            if( (MapSquares[k][l].objects[g]) &&
+                (MapSquares[k][l].objectsDesenha[g]) )
+            {
+               MapSquares[k][l].objects[g]->decUsedFlag();
+            }
+         }
+      }
+   }
+   objects = NULL;
   
    /* Deleting all squares */
    int x1;

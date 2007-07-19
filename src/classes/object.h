@@ -84,10 +84,19 @@ class object: public thing
       /*! Get the type of the object */
       int getType(){return(type);};
 
+      /*! Inc the used flag  */
+      void incUsedFlag(){usedFlag++;};
+      /*! Dec the used flag */
+      void decUsedFlag(){usedFlag--;};
+      /*! Get the used Flag
+       * \return usedFlag Number. If is 0, the object can be deleted */
+      int getUsedFlag(){return(usedFlag);};
+
       object* next;         /**< Next Object on List */
       object* previous;     /**< Previous Object on List */
       
    protected:
+      int usedFlag;         /**< The used flag of an object */
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
 

@@ -8,9 +8,6 @@
 #define INVENTORY_STATE_OBJECT 1
 #define INVENTORY_STATE_MENU   2
 
-//FIXME on change map, the object will be no more. The previous fix, wasn't a good one,
-//so I've removed it.
-
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
@@ -163,7 +160,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
          /* Reput the object to the inventory */
          if(inventories->addObject(activeObject)) 
          {
-            //delete(activeObject);
             activeObject = NULL;
             state = INVENTORY_STATE_NONE;
             reDraw();
@@ -199,7 +195,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
                if(inventories->addObject(activeObject, posX, posY, 
                                          currentInventory))
                {
-                  //delete(activeObject);
                   activeObject = NULL;
                   state = INVENTORY_STATE_NONE;
                   reDraw();
@@ -296,7 +291,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
             {
                if(inventories->equipObject(activeObject, INVENTORY_HEAD))
                {
-                  //delete(activeObject);
                   activeObject = NULL;
                }
             }
@@ -304,7 +298,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
             {
                if(inventories->equipObject(activeObject,INVENTORY_LEFT_HAND))
                {
-                  //delete(activeObject);
                   activeObject = NULL;
                }
 
@@ -313,7 +306,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
             {
                if(inventories->equipObject(activeObject,INVENTORY_RIGHT_HAND))
                {
-                  //delete(activeObject);
                   activeObject = NULL;
                }
             }
@@ -321,7 +313,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
             {
                if(inventories->equipObject(activeObject,INVENTORY_LEFT_FINGER))
                {
-                  //delete(activeObject);
                   activeObject = NULL;
                }
             }
@@ -329,7 +320,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
             {
                if(inventories->equipObject(activeObject,INVENTORY_RIGHT_FINGER))
                {
-                  //delete(activeObject);
                   activeObject = NULL;
                }
             }
@@ -337,7 +327,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
             {
                if(inventories->equipObject(activeObject, INVENTORY_NECK))
                {
-                  //delete(activeObject);
                   activeObject = NULL;
                }
             }
@@ -345,7 +334,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
             {
                if(inventories->equipObject(activeObject, INVENTORY_FOOT))
                {
-                  //delete(activeObject);
                   activeObject = NULL;
                }
             }
@@ -353,7 +341,6 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
             {
                if(inventories->equipObject(activeObject, INVENTORY_BODY))
                {
-                  //delete(activeObject);
                   activeObject = NULL;
                }
             }
@@ -379,16 +366,12 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
                case 1: /* Get */
                   if(objWhere == INVENTORY_INVENTORY)
                   {
-                    /* Recreate the object, since it will be deleted when
-                     * removed from Inventory. */
-                    //activeObject = new object(activeObject);
                     inventories->removeFromInventory(objX,objY, 
                                                      currentInventory);
                     reDraw();
                   }
                   else
                   {
-                     //activeObject = new object(activeObject);
                      inventories->removeFromPlace(objWhere);
                      reDraw();
                   }

@@ -39,8 +39,8 @@ itemSlot::~itemSlot()
 {
    int i, x, y;
 
-   /* Free Objects */
-   /*for(x=0; x < sizeX; x++)
+   /* Mark as Unused Objects */
+   for(x=0; x < sizeX; x++)
    {
       for(y=0; y < sizeY; y++)
       {
@@ -48,11 +48,11 @@ itemSlot::~itemSlot()
              (spaces[x][y].origX == x) &&
              (spaces[x][y].origY == y))
          {
-            delete(spaces[x][y].obj);
+            spaces[x][y].obj->decUsedFlag();
          }
          spaces[x][y].obj = NULL;
       }
-   }*/
+   }
 
    /* Free Spaces */
    for(i=0; i < sizeX; i++)
@@ -181,13 +181,12 @@ void itemSlot::removeObject(object* obj)
       {
          if(spaces[x][y].obj == obj)
          {
-            /*if( (spaces[x][y].origX == x) && 
+            if( (spaces[x][y].origX == x) && 
                 (spaces[x][y].origY == y))
             {
                // Free use of the Object
-               delete(spaces[x][y].obj);
+               spaces[x][y].obj->decUsedFlag();
             }
-            */
             spaces[x][y].obj = NULL;
             spaces[x][y].origX = x;
             spaces[x][y].origY = y;
@@ -223,7 +222,7 @@ void itemSlot::removeObject(int x, int y)
             }
          }
          /* Free obj from use here */
-         //delete(obj);
+         obj->decUsedFlag();
       }
    }
 }

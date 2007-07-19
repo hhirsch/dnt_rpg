@@ -380,7 +380,6 @@ void feats::defineMeleeWeapon(diceThing& weaponDice, int rangeValue)
    /* Enable Melee Attacks */
    m_feats[FEAT_MELEE_ATTACK].diceInfo = weaponDice;
    m_feats[FEAT_MELEE_ATTACK].range = rangeValue;
-
 }
 
 /***************************************************************

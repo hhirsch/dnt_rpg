@@ -30,6 +30,8 @@ engine::engine()
 
    curConection = NULL;
 
+   objectsList = new(lObject);
+
    walkStatus = ENGINE_WALK_KEYS;
 
    /* Initialize the Cursor */
@@ -158,6 +160,9 @@ engine::~engine()
    /* Clear Cursors */
    delete(cursors);
 
+   /* Delete the list of objects */
+   delete(objectsList);
+
    /* Clear 3D Models List */
    delete(models);
    
@@ -285,10 +290,12 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    {
      arqVelho = actualMap->getFileName();
      delete(actualMap);
+     /* Remove All Unused Objects */
+     objectsList->removeUnusedObjects();
      /* Remove All Unused 3D Models */
      models->removeUnusedModels();
    }
-   actualMap = new(Map);
+   actualMap = new Map(objectsList);
    actualMap->setFileName(arqVelho);
    actualMap->open(arqMapa,*models, *weaponsTypes);
 

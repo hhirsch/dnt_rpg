@@ -146,6 +146,7 @@ object::object(string path, modelList& mdlList): thing()
  **************************************************************/
 object::object(object* obj): thing()
 {
+   usedFlag = 0;
    type = obj->type;
    inventSizeX = obj->inventSizeX;
    inventSizeY = obj->inventSizeY;
@@ -175,6 +176,7 @@ object::object(): thing()
  **************************************************************/
 void object::cleanValues()
 {
+   usedFlag = 0;
    inventSizeX = 0;
    inventSizeY = 0;
    name = "";

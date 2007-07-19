@@ -78,6 +78,33 @@ object* lObject::insertObject(string arquivo, modelList& mdlList, weaponTypes& w
 }
 
 /*********************************************************************
+ *                         removeUnusedObjects                       *
+ *********************************************************************/
+void lObject::removeUnusedObjects()
+{
+   object* mdl;
+   object* oth;
+
+   if(first)
+   {
+      mdl = first->next;
+      while( (first != NULL) && (mdl != first) )
+      {
+         oth = mdl;
+         mdl = mdl->next;
+         if(oth->getUsedFlag() <= 0)
+         {
+            removeObject(oth);
+         }
+      }
+      if((first != NULL) && (first->getUsedFlag() <= 0))
+      {
+         removeObject(first);
+      }
+   }
+}
+
+/*********************************************************************
  *                           removeMapObject                         *
  *********************************************************************/
 void lObject::removeObject(object* obj)
