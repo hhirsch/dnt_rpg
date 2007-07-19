@@ -92,6 +92,10 @@ class object: public thing
        * \return usedFlag Number. If is 0, the object can be deleted */
       int getUsedFlag(){return(usedFlag);};
 
+      /*! Get the 2D image of the object
+       * \return the pointer to the surface */
+      SDL_Surface* get2dModel(){return(model2d);};
+
       object* next;         /**< Next Object on List */
       object* previous;     /**< Previous Object on List */
       

@@ -31,10 +31,18 @@ class cursor
 
       /*! Set actual mouse Cursor 
        * \param nCursor -> cursor Number to use.*/
-      void setActual(int nCursor); 
+      void setActual(int nCursor);
+
+      /*! Set the actual mouse Cursor to an image
+       * \param img -> sdl surface to set as cursor */
+      void setActual(SDL_Surface* img);
 
       /*! Draw th Cursor to screen */
       void draw(int mouseX, int mouseY);
+
+      /*! Gets the actual mouse cursor
+       * \return -> pointer to the surface of the mouse cursor */
+      SDL_Surface* getActual();
       
    private:
       SDL_Surface* textura[CURSOR_TOTAL]; /**< internal Surfaces of cursors */

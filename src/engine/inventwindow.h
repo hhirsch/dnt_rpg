@@ -7,6 +7,7 @@
 
 #include "../classes/inventory.h"
 #include "../lang/lang.h"
+#include "cursor.h"
 #include "util.h"
 
 #define INVENTORY_ACTION_NONE           0
@@ -30,8 +31,9 @@ class inventWindow
       /*! Treat Events on Window. 
        * \param guiObj -> last GUI object
        * \param eventInfo -> last GUI Event 
+       * \param mouseCursor -> the mouse cursor
        * \return true if event is threated, false otherwise. */
-      bool treat(guiObject* guiObj, int eventInfo);
+      bool treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */
@@ -74,6 +76,8 @@ class inventWindow
       int objY;                       /**< Y of the object in inventory */
 
       object* activeObject;           /**< Active Object */
+
+      SDL_Surface* previousCursor;    /**< The previous mouse Cursor */
 
       lang language;                  /**< Language internationalization */
       

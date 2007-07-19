@@ -1174,7 +1174,7 @@ void engine::threatGuiEvents(guiObject* object, int eventInfo)
    /* Verify Inventory Window */
    if( (inventoryWindow) )
    {
-      if(inventoryWindow->treat(object, eventInfo))
+      if(inventoryWindow->treat(object, eventInfo, cursors))
       {
          /* Redefine, if need, the weapons */
          PCs->getActiveCharacter()->defineWeapon();
@@ -2116,12 +2116,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       guiObject* object;
       object = gui->manipulateEvents(x,y,Mbutton,keys, &guiEvent);
       /* Threat the GUI */
-      if(guiEvent != NOTHING)
-      {
-         threatGuiEvents(object, guiEvent);
-         redesenha = true;
-      }
-
+      threatGuiEvents(object, guiEvent);
    }
    else if(*forcaAtualizacao == 0)
    {

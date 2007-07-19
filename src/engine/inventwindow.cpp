@@ -14,6 +14,7 @@
 inventWindow::inventWindow(inventory *invent, interface* inter)
 {
    objectMenu = NULL;
+   previousCursor = NULL;
 
    /* Copy Interface Pointer */
    interf = inter;
@@ -140,7 +141,7 @@ void inventWindow::openMenu(int x, int y)
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-bool inventWindow::treat(guiObject* guiObj, int eventInfo)
+bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor)
 {
    if(!isOpen())
    {
@@ -149,6 +150,42 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo)
    }
    int x,y;
    Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+
+   if((state == INVENTORY_STATE_OBJECT) && (activeObject))
+   {
+      if(mouseCursor->getActual() != activeObject->get2dModel())
+      {
+         previousCursor = mouseCursor->getActual();
+      }
+      mouseCursor->setActual(activeObject->get2dModel());
+
+      if( x < intWindow->getX1())
+      {
+         x = intWindow->getX1();
+      }
+      else if(x > (intWindow->getX2() - activeObject->get2dModel()->w))
+      {
+         x = intWindow->getX2() - activeObject->get2dModel()->w;
+      }
+      if( y < intWindow->getY1())
+      {
+         y = intWindow->getY1();
+      }
+      else if(y > (intWindow->getY2() -activeObject->get2dModel()->h) )
+      {
+         y = intWindow->getY2() - activeObject->get2dModel()->h;
+      }
+      SDL_WarpMouse(x,y);
+   }
+   else
+   {
+      if(previousCursor)
+      {
+         mouseCursor->setActual(previousCursor);
+         previousCursor = NULL;
+      }
+   }
+
 
    int posX = (int) floor((x - (8 + intWindow->getX1())) / (19.0));
    int posY = (int) floor((y - (284 + intWindow->getY1())) / (19.0));
