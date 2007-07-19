@@ -1,8 +1,11 @@
-Fireplace
-0
-../data/models/natural/fogueira/model.cfg
-../data/models/natural/
-0 0
-../data/texturas/na.png
-800
-40 40 +5
+name = Fireplace
+cal3d = ../data/models/natural/fogueira/model.cfg
+inventory_texture = ../data/texturas/na.png
+inventory_sizes = 0 0
+life_points = 300
+fortitude = 5
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 15
+cost = 10

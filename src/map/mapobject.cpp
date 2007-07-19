@@ -94,6 +94,7 @@ void lObject::removeUnusedObjects()
          mdl = mdl->next;
          if(oth->getUsedFlag() <= 0)
          {
+            printf("Flag for: %s is %d\n",oth->getName().c_str(), oth->getUsedFlag());
             removeObject(oth);
          }
       }
@@ -112,21 +113,26 @@ void lObject::removeObject(object* obj)
    obj->previous->next = obj->next;
    obj->next->previous = obj->previous;
 
+   printf("Will delete: %s type: %d\n", obj->getName().c_str(), obj->getType());
+
    switch(obj->getType())
    {
       case OBJECT_TYPE_MAPOBJECT:
       {
          mapObject *o = (mapObject*)obj;
          delete(o);
+         break;
       }
       case OBJECT_TYPE_WEAPON:
       {
          weapon *w = (weapon*)obj;
          delete(w);
+         break;
       }
       default:
       {
          delete(obj);
+         break;
       }
    }
    total--;
