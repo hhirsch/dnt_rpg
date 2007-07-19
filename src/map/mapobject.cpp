@@ -94,7 +94,6 @@ void lObject::removeUnusedObjects()
          mdl = mdl->next;
          if(oth->getUsedFlag() <= 0)
          {
-            printf("Flag for: %s is %d\n",oth->getName().c_str(), oth->getUsedFlag());
             removeObject(oth);
          }
       }
@@ -112,8 +111,6 @@ void lObject::removeObject(object* obj)
 {
    obj->previous->next = obj->next;
    obj->next->previous = obj->previous;
-
-   printf("Will delete: %s type: %d\n", obj->getName().c_str(), obj->getType());
 
    switch(obj->getType())
    {
