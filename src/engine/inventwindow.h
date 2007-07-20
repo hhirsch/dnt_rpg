@@ -16,6 +16,10 @@
 #define INVENTORY_ACTION_EQUIPED_ARMOR  3
 #define INVENTORY_ACTION_USE_ITEM       4
 
+
+#define MENU_TYPE_INVENTORY             1
+#define MENU_TYPE_EQUIPED               2
+
 /*! Inventory Window Class */
 class inventWindow
 {
@@ -45,7 +49,7 @@ class inventWindow
    private:
 
       /*! Open the Inventory Object Menu  */
-      void openMenu(int x, int y);
+      void openMenu(int x, int y, int type);
 
       inventory *inventories;         /**< Extern Inventories*/
 
@@ -71,6 +75,7 @@ class inventWindow
       int state;                      /**< Internal State of the Window */
       int currentInventory;           /**< Current Opened Inventory */
       menu* objectMenu;               /**< Pointer to Object Actions Menu */
+      int menuType;                   /**< Type of the menu opened */
       int objWhere;                   /**< Where The Object is on Inventory */
       int objX;                       /**< X of the object in inventory */
       int objY;                       /**< Y of the object in inventory */

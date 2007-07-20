@@ -48,7 +48,7 @@ class weaponTypes
       int getRange(string name);
 
       /*! Get the munition type number
-       * \para name -> name of the munition
+       * \param name -> name of the munition
        * \return -> the munition internal number. -1 on error. */
       int getMunition(string name);
 

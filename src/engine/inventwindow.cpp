@@ -107,14 +107,24 @@ void inventWindow::reDraw()
 /**************************************************************
  *                          openMenu                          *
  **************************************************************/
-void inventWindow::openMenu(int x, int y)
+void inventWindow::openMenu(int x, int y, int type)
 {
    int xSize;
+   menuType = type;
    objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
    objectMenu->insertItem(language.INVENTW_DROP,0);
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(language.INVENTW_SELL,0);
-   objectMenu->insertItem(language.INVENTW_USE,0);
+   if(menuType == MENU_TYPE_INVENTORY)
+   {
+      objectMenu->insertItem(language.INVENTW_USE,1);
+   }
+   else
+   {
+      objectMenu->insertItem("Unequip",1);
+   }
+   objectMenu->insertItem("-",0);
+   objectMenu->insertItem("Info",0);
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(language.INVENTW_GET,1);
 
@@ -123,9 +133,9 @@ void inventWindow::openMenu(int x, int y)
    xSize = objectMenu->getMaxCharac()*(font_incCP()+1)+6;
 
    /* Make Sure all Menu is in Window */
-   if(y+70 >= intWindow->getY2())
+   if(y+94 >= intWindow->getY2())
    {
-       y = intWindow->getY2()-70;
+       y = intWindow->getY2()-94;
    }
 
    if(x+xSize >= intWindow->getX2())
@@ -222,7 +232,8 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor)
                   objX = posX;
                   objY = posY;
                   objWhere = INVENTORY_INVENTORY;
-                  openMenu((x-intWindow->getX1()),(y-intWindow->getY1())); 
+                  openMenu((x-intWindow->getX1()),(y-intWindow->getY1()),
+                           MENU_TYPE_INVENTORY); 
                }
                return(true);
             }
@@ -316,7 +327,8 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor)
             if(aObject)
             {
                activeObject = aObject;
-               openMenu((x-intWindow->getX1()),(y-intWindow->getY1()));
+               openMenu((x-intWindow->getX1()),(y-intWindow->getY1()),
+                        MENU_TYPE_EQUIPED);
                state = INVENTORY_STATE_MENU;
                return(true);
             }
@@ -414,13 +426,50 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor)
                   }
                   state = INVENTORY_STATE_OBJECT;
                break;
-               case 3: /* Use */
+               case 3: /* Info */
+               break;
+               case 5: /* Use */
+               {
+                  if(objWhere == INVENTORY_INVENTORY)
+                  {
+                     if(activeObject->getType() == OBJECT_TYPE_WEAPON)
+                     {
+                        /* Equip Weapon */
+                        inventories->removeFromInventory(objX,objY, 
+                                                         currentInventory);
+                        if(!inventories->equipObject(activeObject, 
+                                                     INVENTORY_RIGHT_HAND))
+                        {
+                           /* Can't equip the weapon, so back on inventory */
+                           inventories->addObject(activeObject,
+                                                  objX,objY,currentInventory);
+                        }
+                        activeObject = NULL;
+                        reDraw();
+                     }
+                  }
+                  else
+                  {
+                     /* Unequip */
+                     inventories->removeFromPlace(objWhere);
+                     if(!inventories->addObject(activeObject))
+                     {
+                        /* Inventory is Full, so not remove from used place */
+                        inventories->equipObject(activeObject, objWhere);
+                     }
+                     activeObject = NULL;
+                     reDraw();
+                  }
+                  if(!activeObject)
+                  {
+                     state = INVENTORY_STATE_NONE;
+                  }
+               }
+               break;
+               case 6: /* Sell */
                   //TODO
                break;
-               case 4: /* Sell */
-                  //TODO
-               break;
-               case 5: /* Drop */
+               case 8: /* Drop */
                   //TODO
                break;
             }

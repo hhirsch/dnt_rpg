@@ -5,7 +5,7 @@ inline double deg2Rad(double x){return 3.1415927 * x/180.0;}
 bool sair = false;
 int tipo = 1;
 
-barraTexto* bartSalvar;
+textBar* bartSalvar;
 GLfloat matrizVisivel[6][4]; /* Matriz do frustum atual */
 GLdouble proj[16];
 GLdouble modl[16];
@@ -634,14 +634,14 @@ void actualizeParticle(double segundos)
 /*                   O TRECO DE MUDAR BARRA TEXTO                       */
 /************************************************************************/
 
-void editedMaxLive(barraTexto* bart,SDL_Surface *screen)
+void editedMaxLive(textBar* bart,SDL_Surface *screen)
 {
    int i;
    sscanf(bart->texto.c_str(),"%d",&i);
    p->updateMaxLive(i);
 }
 
-void editedMaxParticles(barraTexto* bart,SDL_Surface *screen)
+void editedMaxParticles(textBar* bart,SDL_Surface *screen)
 {
    int i;
    sscanf(bart->texto.c_str(),"%d",&i);
@@ -651,245 +651,245 @@ void editedMaxParticles(barraTexto* bart,SDL_Surface *screen)
    createParticle("temp.tmp");
 }
 
-void editedCenterX(barraTexto* bart,SDL_Surface *screen)
+void editedCenterX(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateCenterX(i);
 }
 
-void editedCenterY(barraTexto* bart,SDL_Surface *screen)
+void editedCenterY(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateCenterY(i);
 }
 
-void editedCenterZ(barraTexto* bart,SDL_Surface *screen)
+void editedCenterZ(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateCenterZ(i);
 }
 
-void editedGravity(barraTexto* bart,SDL_Surface *screen)
+void editedGravity(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateGravity(i);
 }
 
-void editedInitR(barraTexto* bart,SDL_Surface *screen)
+void editedInitR(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateInitR(i);
 }
 
-void editedInitG(barraTexto* bart,SDL_Surface *screen)
+void editedInitG(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateInitG(i);
 }
 
-void editedInitB(barraTexto* bart,SDL_Surface *screen)
+void editedInitB(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateInitB(i);
 }
 
-void editedFinalR(barraTexto* bart,SDL_Surface *screen)
+void editedFinalR(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateFinalR(i);
 }
 
-void editedFinalG(barraTexto* bart,SDL_Surface *screen)
+void editedFinalG(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateFinalG(i);
 }
 
-void editedFinalB(barraTexto* bart,SDL_Surface *screen)
+void editedFinalB(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateFinalB(i);
 }
 
-void editedAlpha(barraTexto* bart,SDL_Surface *screen)
+void editedAlpha(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateAlpha(i);
 }
 
-void editedDMultCenterX(barraTexto* bart,SDL_Surface *screen)
+void editedDMultCenterX(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultCenterX(i);
 }
 
-void editedDMultCenterY(barraTexto* bart,SDL_Surface *screen)
+void editedDMultCenterY(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultCenterY(i);
 }
 
-void editedDMultCenterZ(barraTexto* bart,SDL_Surface *screen)
+void editedDMultCenterZ(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultCenterZ(i);
 }
 
-void editedDSumCenterX(barraTexto* bart,SDL_Surface *screen)
+void editedDSumCenterX(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumCenterX(i);
 }
 
-void editedDSumCenterY(barraTexto* bart,SDL_Surface *screen)
+void editedDSumCenterY(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumCenterY(i);
 }
 
-void editedDSumCenterZ(barraTexto* bart,SDL_Surface *screen)
+void editedDSumCenterZ(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumCenterZ(i);
 }
 
-void editedDMultPosX(barraTexto* bart,SDL_Surface *screen)
+void editedDMultPosX(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultPosX(i);
 }
 
-void editedDMultPosY(barraTexto* bart,SDL_Surface *screen)
+void editedDMultPosY(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultPosY(i);
 }
 
-void editedDMultPosZ(barraTexto* bart,SDL_Surface *screen)
+void editedDMultPosZ(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultPosZ(i);
 }
 
-void editedDSumPosX(barraTexto* bart,SDL_Surface *screen)
+void editedDSumPosX(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumPosX(i);
 }
 
-void editedDSumPosY(barraTexto* bart,SDL_Surface *screen)
+void editedDSumPosY(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumPosY(i);
 }
 
-void editedDSumPosZ(barraTexto* bart,SDL_Surface *screen)
+void editedDSumPosZ(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumPosZ(i);
 }
 
-void editedDMultVelX(barraTexto* bart,SDL_Surface *screen)
+void editedDMultVelX(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultVelX(i);
 }
 
-void editedDMultVelY(barraTexto* bart,SDL_Surface *screen)
+void editedDMultVelY(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultVelY(i);
 }
 
-void editedDMultVelZ(barraTexto* bart,SDL_Surface *screen)
+void editedDMultVelZ(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultVelZ(i);
 }
 
-void editedDSumVelX(barraTexto* bart,SDL_Surface *screen)
+void editedDSumVelX(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumVelX(i);
 }
 
-void editedDSumVelY(barraTexto* bart,SDL_Surface *screen)
+void editedDSumVelY(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumVelY(i);
 }
 
-void editedDSumVelZ(barraTexto* bart,SDL_Surface *screen)
+void editedDSumVelZ(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumVelZ(i);
 }
 
-void editedDMultColorR(barraTexto* bart,SDL_Surface *screen)
+void editedDMultColorR(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultColorR(i);
 }
 
-void editedDMultColorG(barraTexto* bart,SDL_Surface *screen)
+void editedDMultColorG(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultColorG(i);
 }
 
-void editedDMultColorB(barraTexto* bart,SDL_Surface *screen)
+void editedDMultColorB(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDMultColorB(i);
 }
 
-void editedDSumColorR(barraTexto* bart,SDL_Surface *screen)
+void editedDSumColorR(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumColorR(i);
 }
 
-void editedDSumColorG(barraTexto* bart,SDL_Surface *screen)
+void editedDSumColorG(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
    p->updateDSumColorG(i);
 }
 
-void editedDSumColorB(barraTexto* bart,SDL_Surface *screen)
+void editedDSumColorB(textBar* bart,SDL_Surface *screen)
 {
    float i;
    sscanf(bart->texto.c_str(),"%f",&i);
