@@ -2009,7 +2009,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
       
       /* Path Verification */
-      if(Mbutton & SDL_BUTTON(3))
+      if( (Mbutton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)))
       {
          GLfloat dist;
          dist = sqrt( (xReal - moveCircleX) *
