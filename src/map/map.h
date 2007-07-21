@@ -88,7 +88,9 @@ typedef struct _door
 /*!
  ****************************************************
  *                  Map's Square                    *
- ****************************************************/
+ ****************************************************
+ \fixme FIXME: make the number of objects per square not constant!
+               In other words, make a list for it. */
 class Square
 {
    public:
@@ -272,9 +274,12 @@ class Map
        * \param obj -> pointer to mapObject
        * \param qx -> square internal X (in Squares)
        * \param qz -> square internal Z (in squares)
+       * \param collision -> 1 if has collision with object, 0 otherwise
        **************************************************************/
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                        object* obj, int qx, int qz);
+                        object* obj, int qx, int qz, int collision);
+      void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
+                        object* obj, int collision);
 
       /*!
        ************************************************************* 
@@ -284,7 +289,8 @@ class Map
        * \param wTypes -> list of weapons types
        * \return pointer to the map Object created 
        *************************************************************/
-      object* insertObject(string arquivo, modelList& mdlList, weaponTypes& wTypes);
+      object* insertObject(string arquivo, modelList& mdlList, 
+                           weaponTypes& wTypes);
 
       /*! 
        **************************************************************

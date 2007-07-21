@@ -213,7 +213,18 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
  *                          insertObject                          *
  ******************************************************************/
 void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                       object* obj, int qx, int qz)
+                        object* obj, int collision)
+{
+   int qx = (int)xReal / SQUARE_SIZE;
+   int qz = (int)zReal / SQUARE_SIZE;
+   insertObject(xReal, zReal, orObj, obj, qx, qz, collision);
+}
+
+/******************************************************************
+ *                          insertObject                          *
+ ******************************************************************/
+void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
+                       object* obj, int qx, int qz, int collision)
 {
    Square* saux = relativeSquare(qx,qz);
    int ob=0;
@@ -230,6 +241,7 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
         saux->Zobjects[ob] = zReal;
         saux->objectsOrientation[ob] = orObj;
         saux->objectsDesenha[ob] = 1;
+        saux->pisavelObj[ob] = !collision;
         //printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
                   
         //GLMmodel* modelo = (GLMmodel*)obj->modelo3d; 
@@ -295,6 +307,7 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                    qaux->Zobjects[ob] = zReal;
                    qaux->objectsDesenha[ob] = 0;
                    qaux->objectsOrientation[ob] = orObj;
+                   qaux->pisavelObj[ob] = !collision;
                    //printf("%d° Object Inserted on %d %d\n",ob,X1+1,Z1+1);
                 }
              }

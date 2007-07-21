@@ -112,7 +112,7 @@ void inventWindow::openMenu(int x, int y, int type)
    int xSize;
    menuType = type;
    objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
-   objectMenu->insertItem(language.INVENTW_DROP,0);
+   objectMenu->insertItem(language.INVENTW_DROP,menuType==MENU_TYPE_INVENTORY);
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(language.INVENTW_SELL,0);
    if(menuType == MENU_TYPE_INVENTORY)
@@ -151,7 +151,8 @@ void inventWindow::openMenu(int x, int y, int type)
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor)
+bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
+                         Map* actualMap, GLfloat X, GLfloat Z)
 {
    if(!isOpen())
    {
@@ -470,7 +471,18 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor)
                   //TODO
                break;
                case 8: /* Drop */
-                  //TODO
+                  if(objWhere == INVENTORY_INVENTORY)
+                  {
+                     /* Only can drop if it is on the inventory */
+                     inventories->removeFromInventory(objX,objY, 
+                                                      currentInventory);
+                     /* Add it to the map */
+                     actualMap->insertObject(X,Z,0,activeObject,0);
+                     /* Return to the NONE state */
+                     activeObject = NULL;
+                     state = INVENTORY_STATE_NONE;
+                     reDraw();
+                  }
                break;
             }
             intWindow->getObjectsList()->removeMenu();

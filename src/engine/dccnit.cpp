@@ -1174,7 +1174,9 @@ void engine::threatGuiEvents(guiObject* object, int eventInfo)
    /* Verify Inventory Window */
    if( (inventoryWindow) )
    {
-      if(inventoryWindow->treat(object, eventInfo, cursors))
+      if(inventoryWindow->treat(object, eventInfo, cursors, actualMap,
+                                PCs->getActiveCharacter()->posicaoLadoX,
+                                PCs->getActiveCharacter()->posicaoLadoZ))
       {
          /* Redefine, if need, the weapons */
          PCs->getActiveCharacter()->defineWeapon();

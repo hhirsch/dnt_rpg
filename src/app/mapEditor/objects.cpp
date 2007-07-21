@@ -103,7 +103,8 @@ void objects::drawTemporary()
 void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                           Map* map, mapObject* obj, int qx, int qz)
 {
-   map->insertObject(xReal, zReal, orObj, obj, qx, qz); 
+   //TODO, mark with no collision some pickable objects
+   map->insertObject(xReal, zReal, orObj, obj, qx, qz, 1); 
 }
 
 /******************************************************************
