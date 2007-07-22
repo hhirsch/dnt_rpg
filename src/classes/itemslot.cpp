@@ -88,6 +88,7 @@ bool itemSlot::addObject(object* obj, int x, int y)
             spaces[j][k].origY = y;
          }
       }
+      obj->incUsedFlag();
       return(true);
    }
    return(false); 

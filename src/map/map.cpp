@@ -165,22 +165,7 @@ GLuint InserirTextura(Map* mapa, string arq, string nome,
  ********************************************************************/
 void Map::removeObject(GLfloat xObj, GLfloat zObj, object* obj)
 {
-   int Xaux, Zaux, o;
-   for(Xaux = 0; Xaux < x; Xaux++)
-   {
-     for(Zaux = 0; Zaux < z; Zaux++)
-     {
-        for(o=0;o<MAXOBJETOS;o++)
-        {
-           if( (MapSquares[Xaux][Zaux].objects[o] == obj) && 
-               (MapSquares[Xaux][Zaux].Xobjects[o] == xObj) &&
-               (MapSquares[Xaux][Zaux].Zobjects[o] == zObj) )
-           {
-              MapSquares[Xaux][Zaux].objects[o] = NULL;
-           }
-        }
-     }
-   }
+    removeObject(xObj, zObj, obj->getName());
 }
 
 /********************************************************************
@@ -201,6 +186,11 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
            {
               if(MapSquares[Xaux][Zaux].objects[o]->getName() == fileName)
               {
+                 if(MapSquares[Xaux][Zaux].objectsDesenha[o] == 1)
+                 {
+                    /* Dec the used Flag */
+                    MapSquares[Xaux][Zaux].objects[o]->decUsedFlag();
+                 }
                  MapSquares[Xaux][Zaux].objects[o] = NULL;
               }
            }

@@ -94,12 +94,22 @@ void lObject::removeUnusedObjects()
          mdl = mdl->next;
          if(oth->getUsedFlag() <= 0)
          {
+            printf("Removed: %s\n",oth->getName().c_str());
             removeObject(oth);
+         }
+         else
+         {
+            printf("Not Removed: %s, flag: %d\n",oth->getName().c_str(), oth->getUsedFlag());
          }
       }
       if((first != NULL) && (first->getUsedFlag() <= 0))
       {
+         printf("Removed: %s\n",first->getName().c_str());
          removeObject(first);
+      }
+      else if(first != NULL)
+      {
+         printf("Not Removed: %s, flag: %d\n",first->getName().c_str(), first->getUsedFlag());
       }
    }
 }
