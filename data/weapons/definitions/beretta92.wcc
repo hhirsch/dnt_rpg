@@ -1,4 +1,4 @@
-name = Bereta 92
+name = Beretta 92
 cal3d = ../data/models/objetos/armas/beretta92/model.cfg
 inventory_sizes = 2 2
 inventory_texture = ../data/models/objetos/armas/beretta92/beretta_inv.png
