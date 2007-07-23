@@ -152,7 +152,8 @@ void inventWindow::openMenu(int x, int y, int type)
  *                             treat                          *
  **************************************************************/
 bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
-                         Map* actualMap, GLfloat X, GLfloat Z)
+                         Map* actualMap, GLfloat X, GLfloat Z, 
+                         modState* modifState)
 {
    if(!isOpen())
    {
@@ -478,6 +479,10 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                                                       currentInventory);
                      /* Add it to the map */
                      actualMap->insertObject(X,Z,0,activeObject,0);
+                     modifState->mapObjectAddAction(MODSTATE_ACTION_MAP_ADD,
+                                                    activeObject->getName(),
+                                                    actualMap->getFileName(),
+                                                    X,Z);
                      /* Return to the NONE state */
                      activeObject = NULL;
                      state = INVENTORY_STATE_NONE;

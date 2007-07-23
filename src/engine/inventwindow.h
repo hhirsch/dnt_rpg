@@ -9,6 +9,7 @@
 #include "../lang/lang.h"
 #include "../map/map.h"
 #include "cursor.h"
+#include "modstate.h"
 #include "util.h"
 
 #define INVENTORY_ACTION_NONE           0
@@ -40,9 +41,11 @@ class inventWindow
        * \param actualMap -> pointer to the opened map
        * \param X -> character that ownes the inventory X position
        * \param Z ->     "       "    "    "      "     Z    "  
+       * \param modifState -> the modification state controller
        * \return true if event is threated, false otherwise. */
       bool treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
-                 Map* actualMap, GLfloat X, GLfloat Z);
+                 Map* actualMap, GLfloat X, GLfloat Z,
+                 modState* modifState);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */
