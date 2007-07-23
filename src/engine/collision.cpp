@@ -44,7 +44,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
      result = true;
    }
    
-   if(result) // Se possivel entrar, testa com Muros
+   if(result) // If can enter, test with walls
    {
       int mur = 0;
       while((mur < MAXMUROS ) && (proxima->muros[mur] != NULL))
@@ -61,17 +61,17 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
          mur++;
       }
    }
-   if(result) // Se eh possivel entrar, testa com os objects
+   if(result) // if can enter, test with objects
    {
       int ob = 0;
-      //GLfloat u1,u2,v1,v2;
       boundingBox bounding;
       GLfloat X[4], Z[4];
-      while( (ob < MAXOBJETOS) && (proxima->objects[ob] != NULL)) 
+      objSquare* sobj = proxima->getFirstObject();
+      while( (ob < proxima->getTotalObjects())) 
       {
-        if(!proxima->pisavelObj[ob])
+        if(sobj->colision)
         {
-          bounding = proxima->objects[ob]->getBoundingBox();
+          bounding = sobj->obj->getBoundingBox();
           X[0] = bounding.x1;
           Z[0] = bounding.z1;
           X[1] = bounding.x1;
@@ -81,16 +81,14 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
           X[3] = bounding.x2;
           Z[3] = bounding.z1;
 /* TODO +Yobjects */
-          rotTransBoundingBox(proxima->objectsOrientation[ob], X, Z,
-                              proxima->Xobjects[ob], bounding.y1, 
-                              bounding.y2, proxima->Zobjects[ob], 
-                              min2, max2);
-
+          rotTransBoundingBox(sobj->orientation, X, Z, sobj->x, bounding.y1, 
+                              bounding.y2, sobj->z, min2, max2);
           result &= !intercepts(min,max,min2,max2,1);
           if(!result) //se ja achou que nao pode, cai fora
              return(false);
         }
         ob++;
+        sobj = sobj->next;
       }
    }
 

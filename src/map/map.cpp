@@ -13,7 +13,9 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
-
+//////////////////////////////////////////////////////////////////////////////
+//                                  SQUARE                                  //
+//////////////////////////////////////////////////////////////////////////////
 
 /********************************************************************
  *                      Square Constructor                          *
@@ -26,16 +28,12 @@ Square::Square()
    mapConection.mapName = "Nothing";
    divisions = 1;
    int aux;
-   for(aux=0;aux<MAXOBJETOS;aux++)
-   {
-      objects[aux] = NULL;
-      objectsDesenha[aux] = 0;
-      quadObjetos[aux] = NULL;
-      statusObj[aux] = 0;
-      pisavelObj[aux] = 0;
-   }
    for(aux=0;aux<MAXMUROS;aux++)
+   {
      muros[aux] = NULL;
+   }
+   objList = NULL;
+   totalObjects = 0;
    return;
 }
 
@@ -44,7 +42,92 @@ Square::Square()
  ********************************************************************/
 Square::~Square()
 {
+   /* Remove all objects on the list */
+   while(totalObjects > 0)
+   {
+      removeObject(objList);
+   }
    return;
+}
+
+/********************************************************************
+ *                           addObject                              *
+ ********************************************************************/
+objSquare* Square::addObject(bool draw, int squareX, int squareZ, 
+                             int orientation, float x, float z, 
+                             bool colision, object* obj)
+{
+   objSquare* n = new objSquare;
+   n->draw = draw;
+   n->status = 0;
+   n->squareX = squareX;
+   n->squareZ = squareZ;
+   n->orientation = orientation;
+   n->x = x;
+   n->z = z;
+   n->colision = colision;
+   n->obj = obj;
+
+   if(totalObjects == 0)
+   {
+      n->next = n;
+      n->previous = n;
+   }
+   else
+   {
+      n->next = objList;
+      n->previous = objList->previous;
+      objList->previous->next = n;
+      objList->previous = n;
+   }
+   objList = n;
+
+   totalObjects++;
+
+   return(n);
+}
+
+/********************************************************************
+ *                         removeObject                             *
+ ********************************************************************/
+void Square::removeObject(objSquare* obj)
+{
+   if(obj == objList)
+   {
+      objList = obj->next;
+   }
+   obj->previous->next = obj->next;
+   obj->next->previous = obj->previous;
+
+   if(obj->draw)
+   {
+      /* If mark as draw, dec the used flag of the object, since it
+       * is no more used here. */
+      obj->obj->decUsedFlag();
+   }
+   delete(obj);
+
+   totalObjects--;
+   if(totalObjects == 0)
+   {
+      objList = NULL;
+   }
+}
+
+/********************************************************************
+ *                         getFirstObject                           *
+ ********************************************************************/
+objSquare* Square::getFirstObject()
+{
+   return(objList);
+}
+
+/********************************************************************
+ *                        getTotalObjects                           *
+ ********************************************************************/
+int Square::getTotalObjects()
+{
+   return(totalObjects);
 }
 
 /********************************************************************
@@ -56,6 +139,10 @@ void Square::setDivisions()
                         fabs(h3-h1) + fabs(h3-h2) + fabs(h2-h1)) /
                        SQUARE_DIVISIONS_INC) + 1;
 }
+
+//////////////////////////////////////////////////////////////////////////////
+//                                  OTHERS                                  //
+//////////////////////////////////////////////////////////////////////////////
 
 /********************************************************************
  *                             Texture ID                           *
@@ -160,6 +247,10 @@ GLuint InserirTextura(Map* mapa, string arq, string nome,
    return(tex->indice);
 }
 
+//////////////////////////////////////////////////////////////////////////////
+//                                   MAP                                    //
+//////////////////////////////////////////////////////////////////////////////
+
 /********************************************************************
  *                          removeObject                            *
  ********************************************************************/
@@ -173,27 +264,29 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, object* obj)
  ********************************************************************/
 void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
 {
-   int Xaux, Zaux, o;
+   int Xaux = 0, Zaux = 0, o = 0;
+   objSquare* obj = MapSquares[Xaux][Zaux].getFirstObject();
+   objSquare* next;
    for(Xaux = 0; Xaux < x; Xaux++)
    {
      for(Zaux = 0; Zaux < z; Zaux++)
      {
-        for(o=0;o<MAXOBJETOS;o++)
+        for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
         {
-           if( (MapSquares[Xaux][Zaux].objects[o] != NULL) && 
-               (MapSquares[Xaux][Zaux].Xobjects[o] == xObj) &&
-               (MapSquares[Xaux][Zaux].Zobjects[o] == zObj) )
+           next = obj->next;
+           if( (obj != NULL) && (obj->x == xObj) && (obj->z == zObj) )
            {
-              if(MapSquares[Xaux][Zaux].objects[o]->getName() == fileName)
+              if(obj->obj->getName() == fileName)
               {
-                 if(MapSquares[Xaux][Zaux].objectsDesenha[o] == 1)
+                 if(obj->draw)
                  {
                     /* Dec the used Flag */
-                    MapSquares[Xaux][Zaux].objects[o]->decUsedFlag();
+                    obj->obj->decUsedFlag();
                  }
-                 MapSquares[Xaux][Zaux].objects[o] = NULL;
+                 MapSquares[Xaux][Zaux].removeObject(obj);
               }
            }
+           obj = next;
         }
      }
    }
@@ -203,7 +296,7 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
  *                          insertObject                          *
  ******************************************************************/
 void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                        object* obj, int collision)
+                        object* obj, bool collision)
 {
    int qx = (int)xReal / SQUARE_SIZE;
    int qz = (int)zReal / SQUARE_SIZE;
@@ -214,103 +307,73 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
  *                          insertObject                          *
  ******************************************************************/
 void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                       object* obj, int qx, int qz, int collision)
+                       object* obj, int qx, int qz, bool collision)
 {
    Square* saux = relativeSquare(qx,qz);
    int ob=0;
    if(saux)
    {
-     while( (ob < MAXOBJETOS ) && (saux->objects[ob] != NULL))
-     {
-        ob++;
-     }
-     if(ob<MAXOBJETOS)
-     {
-        saux->objects[ob] = obj;
-        saux->Xobjects[ob] = xReal;
-        saux->Zobjects[ob] = zReal;
-        saux->objectsOrientation[ob] = orObj;
-        saux->objectsDesenha[ob] = 1;
-        saux->pisavelObj[ob] = !collision;
-        //printf("%d° Object Inserted on %d %d\n",ob,qx+1,qz+1);
-                  
-        //GLMmodel* modelo = (GLMmodel*)obj->modelo3d; 
-        //
-        boundingBox  bounds = obj->getBoundingBox();
+      saux->addObject(true, qx, qz, orObj, xReal, zReal, collision, obj);
+      boundingBox  bounds = obj->getBoundingBox();
 
-        float X[2], Z[2];
-        X[0] = bounds.x1;
-        X[1] = bounds.x2;
-        Z[0] = bounds.z1;
-        Z[1] = bounds.z2;
-        if(orObj!=0)
+      float X[2], Z[2];
+      X[0] = bounds.x1;
+      X[1] = bounds.x2;
+      Z[0] = bounds.z1;
+      Z[1] = bounds.z2;
+      if(orObj!=0)
+      {
+         GLfloat oldX, oldZ;
+         GLfloat cosseno = cos(deg2Rad(orObj));
+         GLfloat seno = sin(deg2Rad(orObj));
+         int aux;
+         for(aux = 0;aux<=1;aux++)
+         {
+            oldX = X[aux];
+            oldZ = Z[aux];
+            X[aux] = (oldZ*seno) + (oldX*cosseno);
+            Z[aux] = (oldZ*cosseno) - (oldX*seno);
+         }
+         if(X[0]>X[1])
+         {
+            oldX = X[0];
+            X[0] = X[1];
+            X[1] = oldX;
+         }
+         if(Z[0]>Z[1])
+         {
+            oldZ = Z[0];
+            Z[0] = Z[1];
+            Z[1] = oldZ;
+         }
+     }
+
+     int minqx, minqz, maxqx, maxqz;
+     minqx = (int)(X[0] + xReal) / SQUARE_SIZE;
+     minqz = (int)(Z[0] + zReal) / SQUARE_SIZE;
+     maxqx = (int)(X[1] + xReal) / SQUARE_SIZE;
+     maxqz = (int)(Z[1] + zReal) / SQUARE_SIZE; 
+     int X1, Z1;
+     Square* qaux;
+     for(X1 = minqx; X1<=maxqx; X1++)
+     {
+        for(Z1 = minqz; Z1 <=maxqz; Z1++) 
         {
-           GLfloat oldX, oldZ;
-           GLfloat cosseno = cos(deg2Rad(orObj));
-           GLfloat seno = sin(deg2Rad(orObj));
-           int aux;
-           for(aux = 0;aux<=1;aux++)
+           qaux = relativeSquare(X1,Z1);
+           if((qaux) && (qaux != saux))
            {
-              oldX = X[aux];
-              oldZ = Z[aux];
-              X[aux] = (oldZ*seno) + (oldX*cosseno);
-              Z[aux] = (oldZ*cosseno) - (oldX*seno);
+              ob =0;
+              qaux->addObject(false,qx,qz,orObj,xReal,zReal,collision,obj);
            }
-           if(X[0]>X[1])
-           {
-              oldX = X[0];
-              X[0] = X[1];
-              X[1] = oldX;
-           }
-           if(Z[0]>Z[1])
-           {
-              oldZ = Z[0];
-              Z[0] = Z[1];
-              Z[1] = oldZ;
-           }
-       }
-
-       int minqx, minqz, maxqx, maxqz;
-       minqx = (int)(X[0] + xReal) / SQUARE_SIZE;
-       minqz = (int)(Z[0] + zReal) / SQUARE_SIZE;
-       maxqx = (int)(X[1] + xReal) / SQUARE_SIZE;
-       maxqz = (int)(Z[1] + zReal) / SQUARE_SIZE; 
-       int X1, Z1;
-       Square* qaux;
-       for(X1 = minqx; X1<=maxqx; X1++)
-       {
-          for(Z1 = minqz; Z1 <=maxqz; Z1++) 
-          {
-             qaux = relativeSquare(X1,Z1);
-             if((qaux) && (qaux != saux))
-             {
-                ob =0;
-                while( (ob < MAXOBJETOS ) && 
-                       (qaux->objects[ob] != NULL))
-                {
-                   ob++;
-                }
-                if(ob < MAXOBJETOS)
-                {
-                   qaux->objects[ob] = obj;
-                   qaux->Xobjects[ob] = xReal;
-                   qaux->Zobjects[ob] = zReal;
-                   qaux->objectsDesenha[ob] = 0;
-                   qaux->objectsOrientation[ob] = orObj;
-                   qaux->pisavelObj[ob] = !collision;
-                   //printf("%d° Object Inserted on %d %d\n",ob,X1+1,Z1+1);
-                }
-             }
-          }
-       }
-       /* Mark the object as used */
-       obj->incUsedFlag();
+        }
      }
-     else
-       printf("Objects Overflow on Square %d %d\n",qx+1,qz+1);
+     /* Mark the object as used */
+     obj->incUsedFlag();
    }
    else
-     printf("Out of Map's Limits!\n");
+   {
+     printf("Warn: Try to insert object out of Map's Limits!\n");
+   }
 }
 
 /********************************************************************
@@ -642,6 +705,7 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
    GLfloat min[3], max[3];
    GLfloat X[4], Z[4];
    boundingBox bound;
+   objSquare* obj;
 
    for(Xaux = 0; Xaux < x; Xaux++)
    for(Zaux = 0; Zaux < z; Zaux++)
@@ -649,13 +713,13 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
       deltaX = (cameraX-MapSquares[Xaux][Zaux].x1+HALF_SQUARE_SIZE);
       deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+HALF_SQUARE_SIZE);
       distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / SQUARE_SIZE;
-      for(o=0;o<MAXOBJETOS;o++)
+      obj = MapSquares[Xaux][Zaux].getFirstObject();
+      for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
       {
-          if( (MapSquares[Xaux][Zaux].objects[o] != NULL) && 
-              (MapSquares[Xaux][Zaux].objectsDesenha[o] == 1))
+          if( (obj != NULL) && (obj->draw))
           {
             /* Do the Rotation of the Bounding Box */
-            bound = MapSquares[Xaux][Zaux].objects[o]->getBoundingBox();
+            bound = obj->obj->getBoundingBox();
             X[0] = bound.x1;
             Z[0] = bound.z1;
             X[1] = bound.x1;
@@ -666,19 +730,13 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
             Z[3] = bound.z1;
             if(inverted)
             {
-               rotTransBoundingBox(MapSquares[Xaux][Zaux].objectsOrientation[o],
-                                   X, Z, MapSquares[Xaux][Zaux].Xobjects[o], 
-                                   -bound.y2, -bound.y1,
-                                   MapSquares[Xaux][Zaux].Zobjects[o],
-                                   min, max );
+               rotTransBoundingBox(obj->orientation, X, Z, obj->x, -bound.y2, 
+                                   -bound.y1, obj->z, min, max);
             }
             else
             {
-               rotTransBoundingBox(MapSquares[Xaux][Zaux].objectsOrientation[o],
-                                   X, Z, MapSquares[Xaux][Zaux].Xobjects[o], 
-                                   bound.y1, bound.y2,
-                                   MapSquares[Xaux][Zaux].Zobjects[o],
-                                   min, max );
+               rotTransBoundingBox(obj->orientation, X, Z, obj->x, bound.y1, 
+                                   bound.y2, obj->z, min, max );
             }
 
             /* Verify ViewFrustum Culling */
@@ -686,20 +744,14 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
                                matriz))
             {
                glPushMatrix();
-                glTranslatef(0.0, 
-                            getHeight(MapSquares[Xaux][Zaux].Xobjects[o],
-                                      MapSquares[Xaux][Zaux].Zobjects[o]) +
-                               MapSquares[Xaux][Zaux].objects[o]->posicaoLadoY,
-                                  0.0);
-                MapSquares[Xaux][Zaux].objects[o]->draw(
-                             MapSquares[Xaux][Zaux].Xobjects[o],
-                             MapSquares[Xaux][Zaux].Zobjects[o],
-                             distancia,
-                             MapSquares[Xaux][Zaux].objectsOrientation[o],
-                             inverted);
+                glTranslatef(0.0, getHeight(obj->x,obj->z) +
+                             obj->obj->posicaoLadoY, 0.0);
+                obj->obj->draw(obj->x, obj->z, distancia, obj->orientation, 
+                               inverted);
                glPopMatrix();
             }
          }
+         obj = obj->next;
       }
       MapSquares[Xaux][Zaux].visivel = 0;
    }
@@ -767,6 +819,9 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz)
    return(getHeight(nx, nz, saux));
 }
 
+/********************************************************************
+ *                            getHeight                             *
+ ********************************************************************/
 GLfloat Map::getHeight(GLfloat nx, GLfloat nz, Square* saux)
 {
    if(!saux)
@@ -995,7 +1050,6 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    int IDtexturaAtual = -1;
    int IDmuroTexturaAtual = -1;
    string nomeMuroTexturaAtual = "nada";
-   int numObjetosAtual = 0;
    int pisavel=0;
    GLuint R,G,B;
    GLuint Ratual,Gatual,Batual;
@@ -1030,19 +1084,11 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
 
 
    /* Alloc MapSquares */
-   MapSquares = new Square*[x];//(Square***) malloc(x*sizeof(Square**));
+   MapSquares = new Square*[x];
    for(i = 0; i < x; i++)
    {
-      MapSquares[i] = new Square[z];//(Square**) malloc(z*sizeof(Square*));
+      MapSquares[i] = new Square[z];
    } 
-
-   /*for(posX = 0; posX < x; posX++)
-   {
-      for(posZ = 0; posZ < z; posZ++)
-      {
-         MapSquares[posX][posZ] = new(Square);
-      }
-   }*/
 
    /* Alloc Roads Struct */
    //roads = new mapRoad(x, z);
@@ -1215,7 +1261,6 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
          }
          case 'p': /* Insert new square */
          {
-            numObjetosAtual = 0;
             if(posX == (x-1)) //end of the line of squares
             { 
                 posX = 0;
@@ -1285,41 +1330,30 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                }
                case 'o': /* Insert Object on Square */
                {
-                  if(numObjetosAtual >= MAXOBJETOS)
+                  int des, quadX, quadZ, oOri, oPis;
+                  float oX, oZ;
+                  objSquare* oObj;
+                  fgets(buffer, sizeof(buffer), arq);
+                  sscanf(buffer,"%s %d:%d,%d:%f,%f:%d:%d",nome,
+                         &des, &quadX, &quadZ, &oX, &oZ, &oOri, &oPis);
+                  oObj = MapSquares[posX][posZ].addObject(des==1, quadX,quadZ,
+                                                          oOri,oX,oZ,oPis!=1,
+                                                    objects->getObject(nome));
+                  if(oObj->draw)
                   {
-                     printf("Overflow of objects per Square\n");
-                  }
-                  else
-                  {
-                     fgets(buffer, sizeof(buffer), arq);
-                     sscanf(buffer,"%s %d:%d,%d:%f,%f:%d:%d",nome,
-                       &MapSquares[posX][posZ].objectsDesenha[numObjetosAtual],
-                       &MapSquares[posX][posZ].quadXobjects[numObjetosAtual],
-                       &MapSquares[posX][posZ].quadZobjects[numObjetosAtual],
-                       &MapSquares[posX][posZ].Xobjects[numObjetosAtual],
-                       &MapSquares[posX][posZ].Zobjects[numObjetosAtual],
-                       &MapSquares[posX][posZ].objectsOrientation[numObjetosAtual],
-                       &MapSquares[posX][posZ].pisavelObj[numObjetosAtual]);
-                     MapSquares[posX][posZ].objects[numObjetosAtual] = 
-                                                   objects->getObject(nome);
-                     MapSquares[posX][posZ].quadObjetos[i] = relativeSquare(
-                         MapSquares[posX][posZ].quadXobjects[numObjetosAtual],
-                         MapSquares[posX][posZ].quadZobjects[numObjetosAtual]);
-                     if(MapSquares[posX][posZ].objectsDesenha[numObjetosAtual])
-                     {
-                        objects->getObject(nome)->incUsedFlag();
-                     }
-                     numObjetosAtual++;
+                     oObj->obj->incUsedFlag();
                   }
                   break;
                }
                default:
-                       printf("What the Hell: %s on %s\n",buffer,arquivo.c_str());
-                       break;
+               {
+                  printf("What the Hell: %s on %s\n",buffer,arquivo.c_str());
+                  break;
+               }
             }
             break; 
          }
-         case '#': //ignore comentaires
+         case '#': //ignore comments
          {
              fgets(buffer, sizeof(buffer), arq);
              break;
@@ -1664,21 +1698,19 @@ int Map::save(string arquivo)
                       MapSquares[x1][z1].mapConection.mapName.c_str());
           }
           int aux;
-          for(aux=0;aux<MAXOBJETOS;aux++)
+          objSquare* obj = MapSquares[x1][z1].getFirstObject();
+          for(aux=0; aux < MapSquares[x1][z1].getTotalObjects(); aux++)
           {
-            if(MapSquares[x1][z1].objects[aux])
+            if(obj->obj)
             {
-               x2 = (int)MapSquares[x1][z1].Xobjects[aux] / SQUARE_SIZE;
-               z2 = (int)MapSquares[x1][z1].Zobjects[aux] / SQUARE_SIZE;
+               x2 = (int)obj->x / SQUARE_SIZE;
+               z2 = (int)obj->z / SQUARE_SIZE;
                fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d:%d\n",
-                       MapSquares[x1][z1].objects[aux]->getFileName().c_str(),
-                       MapSquares[x1][z1].objectsDesenha[aux],
-                       x2+1,z2+1,
-                       MapSquares[x1][z1].Xobjects[aux],
-                       MapSquares[x1][z1].Zobjects[aux],
-                       MapSquares[x1][z1].objectsOrientation[aux],
-                       MapSquares[x1][z1].pisavelObj[aux]);
+                       obj->obj->getFileName().c_str(),
+                       obj->draw, x2 + 1, z2 + 1,
+                       obj->x, obj->z, obj->orientation, !obj->colision);
             }
+            obj = obj->next;
           }
       }
    }
@@ -1727,24 +1759,7 @@ Map::~Map()
       delete(auxporta);
    }
 
-   /* Dec the used flag of all used objects */
-   int k,l,g;
-   for(k=0; k < x; k++)
-   {
-      for(l=0; l < z; l++)
-      {
-         for(g = 0; g < MAXOBJETOS; g++)
-         {
-            if( (MapSquares[k][l].objects[g]) &&
-                (MapSquares[k][l].objectsDesenha[g]) )
-            {
-               MapSquares[k][l].objects[g]->decUsedFlag();
-            }
-         }
-      }
-   }
    objects = NULL;
-  
    /* Deleting all squares */
    int x1;
    for(x1 = 0; x1<x;x1++)

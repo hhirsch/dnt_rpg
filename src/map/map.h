@@ -20,7 +20,6 @@ using namespace std;
 #define HALF_SQUARE_SIZE        128 /**< Half size of the square */
 #define QUARTER_SQUARE_SIZE      64 /**< Quarter size of the square */
 #define SQUARE_DIAGONAL_SIZE    362.03867 /**< Diagonal size of the square */
-#define MAXOBJETOS             50 /**< Max number of objects per square */
 #define MAXMUROS               15  /**< Max number of walls per square */
 #define MUROALTURA             50 /**< Walls height */
 #define MEIOFIOALTURA           2 /**< Meio-fios height */
@@ -84,13 +83,36 @@ typedef struct _door
   struct _door* proximo;   /**< pointer to next door on map */
 }door;
 
+/*!
+ *****************************************************
+ *                  Object at Square                 *
+ *****************************************************/
+class objSquare
+{
+   public:
+      bool draw;           /**< If is to draw the object (true if
+                                the object orign is in this square,
+                                false if the object orign is on other 
+                                square. This is used to avoid drawning
+                                more than one time the object, if it is on
+                                more than one square at a time).*/
+      int squareX;         /**< The square X coordinate of the object */
+      int squareZ;         /**< The square Z coordinate of the object */
+      int orientation;     /**< The orientation angle of the object */
+      float x;             /**< The X position of the object on the map */
+      float z;             /**< The Z position of the object on the map */
+      int status;          /**< The status of the object */
+      bool colision;       /**< If the collision is enable to this object */
+      object* obj;         /**< The pointer to the object used */
+
+      objSquare* next;     /**< Next object on the list */
+      objSquare* previous; /**< Previous object on the list */
+};
 
 /*!
  ****************************************************
  *                  Map's Square                    *
- ****************************************************
- \fixme FIXME: make the number of objects per square not constant!
-               In other words, make a list for it. */
+ ****************************************************/
 class Square
 {
    public:
@@ -103,23 +125,33 @@ class Square
       int flags;                        /**< Condition flag */
       int visivel;                      /**< Visible on active frame ? */
       int textura;                      /**< Actual Texture */
-      object *objects[MAXOBJETOS];      /**< Objects on Square */
-      int objectsDesenha[MAXOBJETOS];   /**< Draw object on active frame ? */
-      int quadXobjects[MAXOBJETOS];     /**< Object Square X coordinate */ 
-      int quadZobjects[MAXOBJETOS];     /**< Object Square Z coordinate */
-      int objectsOrientation[MAXOBJETOS];/**< Object Orientation */
-      float Xobjects[MAXOBJETOS];       /**< Object X coordinate */
-      float Zobjects[MAXOBJETOS];       /**< Object Z coordinate */
       muro* muros[MAXMUROS];            /**< Square walls on */
       GLuint R,G,B;                     /**< Square Color to MINIMAP */
-      Square* quadObjetos[MAXOBJETOS];  /**< Orign object from square: */
       conection mapConection;           /**< Conection to other map */
-      int statusObj[MAXOBJETOS];        /**< Current Status of Object */
-      int pisavelObj[MAXOBJETOS];       /**< Object collision or not */
       int divisions;                    /**< Number of Divisions */
 
       /*! Set the Number of Divisions, based on Square Heights */
       void setDivisions();
+
+      /*! Add object to the square */
+      objSquare* addObject(bool draw, int squareX, int squareZ, int orientation,
+                           float x, float z, bool colision, object* obj);
+
+      /*! Remove Object from the square */
+      void removeObject(objSquare* obj);
+   
+      /*! Get the first object on the list
+       * \return pointer to the first objSquare on the list */
+      objSquare* getFirstObject();
+
+      /*! Get the number of objects on the list
+       * \return number of objects on the list */
+      int getTotalObjects();
+
+   protected:
+      objSquare* objList;     /**< List of Objects on the square */
+      int totalObjects;       /**< Total objects on the list */
+
 };
 
 
@@ -274,12 +306,12 @@ class Map
        * \param obj -> pointer to mapObject
        * \param qx -> square internal X (in Squares)
        * \param qz -> square internal Z (in squares)
-       * \param collision -> 1 if has collision with object, 0 otherwise
+       * \param collision -> true if has collision with object, false otherwise
        **************************************************************/
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                        object* obj, int qx, int qz, int collision);
+                        object* obj, int qx, int qz, bool collision);
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                        object* obj, int collision);
+                        object* obj, bool collision);
 
       /*!
        ************************************************************* 

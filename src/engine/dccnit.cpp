@@ -1295,13 +1295,14 @@ int engine::verifyMouseActions(Uint8 Mbutton)
       int pronto;
       int obj = 0;
       GLfloat minObj[3], maxObj[3];
+      objSquare* sobj = quaux->getFirstObject();
 
       /* Objects Verification */
-      for(pronto = 0; ( (obj<MAXOBJETOS) && (!pronto) );obj++)
+      for(pronto = 0; ( (obj < quaux->getTotalObjects()) && (!pronto) );obj++)
       {
-         if( (quaux->objects[obj]) && (quaux->objects[obj]->canGet()) )
+         if( (sobj->obj) && (sobj->obj->canGet()) )
          {
-            boundingBox bound = quaux->objects[obj]->getBoundingBox();
+            boundingBox bound = sobj->obj->getBoundingBox();
             GLfloat X[4]; GLfloat Z[4];
             X[0] = bound.x1;
             Z[0] = bound.z1;
@@ -1311,46 +1312,39 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             Z[2] = bound.z2;
             X[3] = bound.x2;
             Z[3] = bound.z1;
-            rotTransBoundingBox(quaux->objectsOrientation[obj], X, Z,
-                                quaux->Xobjects[obj], 0.0, 
-                                0.0,quaux->Zobjects[obj], 
-                                minObj, maxObj);
+            rotTransBoundingBox(sobj->orientation, X, Z, sobj->x, 0.0, 
+                                0.0, sobj->z, minObj, maxObj);
             if(intercepts( minObj, maxObj, minMouse, maxMouse, 1))
             {
                 cursors->setActual(CURSOR_GET);
                 if(shortCutsWindow)
                 {
-                   ObjTxt->setText(quaux->objects[obj]->getName()); 
+                   ObjTxt->setText(sobj->obj->getName()); 
                    shortCutsWindow->draw(mouseX,mouseY);
                 }
                 if( (Mbutton & SDL_BUTTON(1)) && 
                     (rangeAction(activeCharacter->posicaoLadoX, 
                                  activeCharacter->posicaoLadoZ,
-                                 quaux->Xobjects[obj],
-                                 quaux->Zobjects[obj],
+                                 sobj->x, sobj->z,
                                  WALK_PER_MOVE_ACTION) ) )
                 {
                    /* Get Object */
                    lastMousePression = tempo;
                    briefTxt->addText("|");
-                   if(activeCharacter->inventories->addObject(
-                                                           quaux->objects[obj]))
+                   if(activeCharacter->inventories->addObject(sobj->obj))
                    {
-                      briefTxt->addText(quaux->objects[obj]->getName() + " " +
+                      briefTxt->addText(sobj->obj->getName() + " " +
                                         language.ACTION_TAKEN); 
                       shortCutsWindow->draw(mouseX,mouseY);
 
                       /* Log State to the modState */
                       modifState.mapObjectAddAction(MODSTATE_ACTION_MAP_REMOVE,
-                                                 quaux->objects[obj]->getName(),
-                                                 actualMap->getFileName(),
-                                                 quaux->Xobjects[obj],
-                                                 quaux->Zobjects[obj]);
+                                                    sobj->obj->getName(),
+                                                    actualMap->getFileName(),
+                                                    sobj->x, sobj->z);
                          
                       /* Remove object from Map */
-                      actualMap->removeObject(quaux->Xobjects[obj],
-                                              quaux->Zobjects[obj],
-                                              quaux->objects[obj]);
+                      actualMap->removeObject(sobj->x, sobj->z, sobj->obj);
                          
                       if(inventoryWindow)
                       {
@@ -1373,6 +1367,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                 pronto = 1;
             }
          }
+         sobj = sobj->next;
       }
 
       /* Doors Verification */
