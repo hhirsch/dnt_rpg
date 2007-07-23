@@ -460,6 +460,10 @@ SOURCE=.\src\particle\wave.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\classes\weapon.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\window.cpp
 # End Source File
 # End Group
@@ -845,6 +849,10 @@ SOURCE=.\src\engine\util.h
 # Begin Source File
 
 SOURCE=.\src\particle\wave.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\weapon.h
 # End Source File
 # Begin Source File
 
