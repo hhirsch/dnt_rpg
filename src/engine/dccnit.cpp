@@ -1340,7 +1340,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
 
                       /* Log State to the modState */
                       modifState.mapObjectAddAction(MODSTATE_ACTION_MAP_REMOVE,
-                                                    sobj->obj->getName(),
+                                                    sobj->obj->getFileName(),
                                                     actualMap->getFileName(),
                                                     sobj->x, sobj->z);
                          

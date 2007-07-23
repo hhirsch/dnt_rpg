@@ -85,7 +85,7 @@ class modState
 
       /*! Add action to the list (or remove some inverse action from)
        * \param action -> action type
-       * \param target -> name of the object
+       * \param target -> fileName of the object
        * \param mapFileName - name of the map file where action occurs
        * \param xPos -> x position
        * \param zPos -> z position*/
