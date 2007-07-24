@@ -35,10 +35,10 @@ class thing
       int baseAttackModifier; /**< Thing's Base Attack Modifier */
       int sizeModifier;       /**< Thing's Size Modifier */
       int psychoState;        /**< Thing's Psycho State */
-      float orientacao;       /**< Character's orientation (angle) */
-      float posicaoLadoX;     /**< Character's X Position */
-      float posicaoLadoY;     /**< Character's Y Position (UP) */
-      float posicaoLadoZ;     /**< Character's Z Position */
+      float orientation;      /**< Character's orientation (angle) */
+      float xPosition;        /**< Character's X Position */
+      float yPosition;        /**< Character's Y Position (UP) */
+      float zPosition;        /**< Character's Z Position */
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
       float cost;             /**< Cost Value */

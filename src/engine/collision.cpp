@@ -47,14 +47,14 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
    if(result) // If can enter, test with walls
    {
       int mur = 0;
-      while((mur < MAXMUROS ) && (proxima->muros[mur] != NULL))
+      while((mur < MAX_WALLS ) && (proxima->walls[mur] != NULL))
       {
-         min2[0] = proxima->muros[mur]->x1; 
+         min2[0] = proxima->walls[mur]->x1; 
          min2[1] = 0; 
-         min2[2] = proxima->muros[mur]->z1;
-         max2[0] = proxima->muros[mur]->x2; 
-         max2[1] = MUROALTURA; 
-         max2[2] = proxima->muros[mur]->z2;
+         min2[2] = proxima->walls[mur]->z1;
+         max2[0] = proxima->walls[mur]->x2; 
+         max2[1] = WALL_HEIGHT; 
+         max2[2] = proxima->walls[mur]->z2;
          result &= !intercepts(min,max,min2,max2,1);
          if(!result)
            return(false);
@@ -99,24 +99,24 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
 /*********************************************************************
  *                           verifyMeioFio                           *
  *********************************************************************/
-bool collision::verifyMeioFio(GLfloat min[3],GLfloat max[3], muro* meiosFio)
+bool collision::verifyCurb(GLfloat min[3],GLfloat max[3], wall* curb)
 {
     GLfloat min2[3];
     GLfloat max2[3];
-    muro* maux = meiosFio;
+    wall* maux = curb;
     while(maux)
     {
        min2[0] = maux->x1;
        max2[0] = maux->x2;
        min2[1] = 0;
-       max2[1] = MEIOFIOALTURA;
+       max2[1] = CURB_HEIGHT;
        min2[2] = maux->z1;
        max2[2] = maux->z2;
        if( (intercepts(min, max, min2, max2, 1)) )
        {
           return(true);
        }
-       maux = maux->proximo;
+       maux = maux->next;
     }
     return(false);
 }
@@ -180,12 +180,12 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       return(false);
    }
 
-   /* Testa Portas */
-   door* porta = actualMap->portas;
-   while( porta != NULL )
+   /* Test Doors */
+   door* door1 = actualMap->doors;
+   while( door1 != NULL )
    {
       GLfloat minObj[3], maxObj[3];
-      boundingBox boundPorta = porta->obj->getBoundingBox();
+      boundingBox boundPorta = door1->obj->getBoundingBox();
       GLfloat XA[4]; GLfloat ZA[4];
       XA[0] = boundPorta.x1;
       ZA[0] = boundPorta.z1;
@@ -198,17 +198,17 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
 
       XA[3] = boundPorta.x2;
       ZA[3] = boundPorta.z1;
-      rotTransBoundingBox(porta->orientacao, XA, ZA,
-                          porta->x, 0.0,0.0,porta->z, 
+      rotTransBoundingBox(door1->orientation, XA, ZA,
+                          door1->x, 0.0,0.0,door1->z, 
                           minObj, maxObj);
       if(intercepts( min, max, minObj, maxObj, 1))
       {
          return(false);
       }
-      porta = porta->proximo;
+      door1 = door1->next;
    }
 
-   /* Testa o Atual, ja que eh GRANDE! */
+   /* Test the actual square, since is BIG ! */
    min2[0] = perQuad->x1;
    min2[1] = 0;
    min2[2] = perQuad->z1;
@@ -220,17 +220,16 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       result &= verifySquare(min,max,perQuad);
       if(!result)
       {
-         //printf("sai na atual\n"); 
          return(false);
       }
    }
 
  
-   /* Testa quadrados a direita */
+   /* Test right walls */
    saux = actualMap->relativeSquare(perQuad->posX+1, perQuad->posZ);
    if(saux) 
    { 
-      /* leste */
+      /* lest */
       min2[0] = saux->x1;
       min2[2] = saux->z1;
       max2[0] = saux->x2;
@@ -240,11 +239,10 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          result &= verifySquare(min,max,saux);
          if(!result)
          {
-            //printf("sai na direita\n"); 
             return(false);
          }
       }
-      /* Nordeste */
+      /* Northest */
       saux = actualMap->relativeSquare(perQuad->posX+1, perQuad->posZ-1);
       if( saux )
       {
@@ -257,12 +255,11 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
             result &= verifySquare(min,max,saux);
             if(!result) 
             {
-               //printf("sai na direita->cima\n"); 
                return(false);
             }
          }
       }
-      /* Sudeste */
+      /* Southest */
       saux = actualMap->relativeSquare(perQuad->posX+1, perQuad->posZ+1);
       if( saux )
       {
@@ -275,18 +272,17 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
             result &= verifySquare(min,max,saux);
             if(!result) 
             {
-               //printf("sai na direita->baixo\n"); 
                return(false);
             }
          }
       }
    }
 
-   /* Testa quadrados a esquerda */
+   /* Test left walls */
    saux = actualMap->relativeSquare(perQuad->posX-1, perQuad->posZ);
    if( saux ) 
    { 
-      /* oeste */
+      /* west */
       min2[0] = saux->x1;
       min2[2] = saux->z1;
       max2[0] = saux->x2;
@@ -296,12 +292,11 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          result &= verifySquare(min,max,saux);
          if(!result) 
          {
-            //printf("sai na esquerda\n"); 
             return(false);
          }
       }
 
-      /* Noroeste */
+      /* Northest */
       saux = actualMap->relativeSquare(perQuad->posX-1, perQuad->posZ-1);
       if( saux )
       {
@@ -314,12 +309,11 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
             result &= verifySquare(min,max,saux);
             if(!result) 
             {
-               //printf("sai na esquerda->cima\n"); 
                return(false);
             }
          }
       }
-      /* Sudoeste */
+      /* Southest */
       saux = actualMap->relativeSquare(perQuad->posX-1, perQuad->posZ+1);
       if( saux )
       { 
@@ -332,14 +326,13 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
             result &=verifySquare(min,max,saux);
             if(!result) 
             {
-                //printf("sai na esquerda->baixo\n"); 
                return(false);
             }
          }
       }
    }
   
-   /* Testa quadrados abaixo */
+   /* Test down squares */
    saux = actualMap->relativeSquare(perQuad->posX, perQuad->posZ+1);
    if( saux )
    {
@@ -349,17 +342,16 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       max2[2] = saux->z2;
       if(intercepts(min,max,min2,max2,1) )
       { 
-         /* sul */
+         /* south */
          result &= verifySquare(min,max,saux);
          if(!result) 
          {
-            //printf("sai no de baixo\n"); 
             return(false);
          }
       }
    }
 
-   /* Testa quadrados acima */
+   /* Up Squares */
    saux = actualMap->relativeSquare(perQuad->posX, perQuad->posZ-1);
    if( saux )
    {  
@@ -369,17 +361,16 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       max2[2] = saux->z2;
       if(intercepts(min,max,min2,max2,1) )
       { 
-         /* norte */
+         /* nort */
          result &= verifySquare(min,max,saux);
          if(!result) 
          {
-            //printf("sai no de cima\n"); 
             return(false);
          }
       }
    }
 
-   /* Testa colisao com npcs */
+   /* Test colision with npcs */
    if(NPCs)
    {
       character* pers = NPCs->first->next;
@@ -397,11 +388,10 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          x[3] = pers->max[0];
          z[3] = pers->min[2];
 
-         /* Rotaciona e translada o Bounding Box */
-         rotTransBoundingBox(pers->orientacao, x, z,
-                          pers->posicaoLadoX, 
+         rotTransBoundingBox(pers->orientation, x, z,
+                          pers->xPosition, 
                           0.0, 0.0, 
-                          pers->posicaoLadoZ, min2, max2 );
+                          pers->zPosition, min2, max2 );
 
          if(intercepts( min, max, min2, max2, 1))
          {
@@ -412,10 +402,10 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       }
    }
 
-   /* Testa Meio-fio */
-   if( verifyMeioFio( min, max, actualMap->meiosFio) )
+   /* Test Curb */
+   if( verifyCurb( min, max, actualMap->curbs) )
    {
-      varHeight = MEIOFIOALTURA+0.1;
+      varHeight = CURB_HEIGHT+0.1;
    }
    else
    {

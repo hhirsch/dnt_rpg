@@ -50,7 +50,7 @@ class portal
       int doorOrientation;    /**< Actual Door Orientation */
       GLfloat doorX;          /**< Actual Door X position */
       GLfloat doorZ;          /**< Actual Door Z position */
-      muro* doorWall;         /**< Actual Door Wall */
+      wall* doorWall;         /**< Actual Door Wall */
       int actualTool;         /**< Actual Tool */
       int state;              /**< Actual Internal State */
 

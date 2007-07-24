@@ -16,14 +16,20 @@ using namespace std;
 #define PISAVEL 1   /**< If a Square is walkable or not. */
 
 /* Constraints */
-#define SQUARE_SIZE             256 /**< Size of the Square */
-#define HALF_SQUARE_SIZE        128 /**< Half size of the square */
-#define QUARTER_SQUARE_SIZE      64 /**< Quarter size of the square */
-#define SQUARE_DIAGONAL_SIZE    362.03867 /**< Diagonal size of the square */
-#define MAXMUROS               15  /**< Max number of walls per square */
-#define MUROALTURA             50 /**< Walls height */
-#define MEIOFIOALTURA           2 /**< Meio-fios height */
-#define ALTURAMAXIMA          150 /**< Max square height */
+#define SQUARE_SIZE           256       /**< Size of the Square */
+#define HALF_SQUARE_SIZE      128       /**< Half size of the square */
+#define QUARTER_SQUARE_SIZE    64       /**< Quarter size of the square */
+#define SQUARE_DIAGONAL_SIZE  362.03867 /**< Diagonal size of the square */
+#define MAX_WALLS              15       /**< Max number of walls per square */
+#define WALL_HEIGHT           50        /**< Walls height */
+#define CURB_HEIGHT            2        /**< Curbs height */
+#define MAX_HEIGHT            150       /**< Max square height */
+
+
+#define SQUARE_TEXTURE_TYPE_NORMAL            0  /**< Uses the Texture */
+#define SQUARE_TEXTURE_TYPE_VERTICAL_MERGE    1  /**< Uses a vertical merge */
+#define SQUARE_TEXTURE_TYPE_HORIZONTAL_MERGE  2  /**< Uses an horizontal merge*/
+#define SQUARE_TEXTURE_TYPE_ALL_MERGE         3  /**< Uses all directions */
 
 #define SQUARE_DIVISIONS_INC  256 /**< Difference heigh to inc the square divisions. */ 
 #define TEXTURE_REPEATS         4 /**< Number of Repeats of indoor texture */ 
@@ -43,7 +49,7 @@ typedef struct _conection
  ****************************************************
  *                  Map's Walls                     *
  ****************************************************/
-typedef struct _muro
+typedef struct _wall
 {
    GLfloat x1,   /**< X min coordinates */
            z1,   /**< Z min coordinates */
@@ -52,9 +58,9 @@ typedef struct _muro
    GLuint dX,    /**< Delta X of texture cycle */
           dY,    /**< Delta Y of texture cycle */
           dZ;    /**< Delta Z of texture cycle */
-   int textura;  /**< Texture ID */
-   struct _muro* proximo; /**< Next on list */
-}muro;
+   int texture;  /**< Texture ID */
+   struct _wall* next; /**< Next on list */
+}wall;
 
 /*!
  ****************************************************
@@ -62,12 +68,12 @@ typedef struct _muro
  ****************************************************/
 typedef struct _texture
 {
-   string nome;              /**< Name */
-   string arqNome;           /**< File Name */
-   GLuint indice;            /**< Texture ID */
+   string name;              /**< Name */
+   string fileName;          /**< File Name */
+   GLuint index;             /**< Texture ID */
    GLuint w,h;               /**< Dimmensions */
    GLuint R,G,B;             /**< Colors to MINIMAP */
-   struct _texture* proximo; /**< Next on List */
+   struct _texture* next;    /**< Next on List */
 }texture;
 
 /*!
@@ -79,8 +85,8 @@ typedef struct _door
   object* obj;             /**< pointer to door object */
   GLfloat x,z;             /**< position on map */
   GLint status;            /**< actual status (opened, closed) */
-  GLint orientacao;        /**< orientation */
-  struct _door* proximo;   /**< pointer to next door on map */
+  GLint orientation;       /**< orientation */
+  struct _door* next;      /**< pointer to next door on map */
 }door;
 
 /*!
@@ -121,11 +127,12 @@ class Square
 
       GLfloat x1,z1,x2,z2;              /**< Coordinates */
       GLfloat h1,h2,h3,h4;              /**< Vertice's Height */
+      int textureType;                  /**< The texture Type */
       int posX, posZ;                   /**< Map positions */
       int flags;                        /**< Condition flag */
-      int visivel;                      /**< Visible on active frame ? */
-      int textura;                      /**< Actual Texture */
-      muro* muros[MAXMUROS];            /**< Square walls on */
+      int visible;                      /**< Visible on active frame ? */
+      int texture;                      /**< Actual Texture */
+      wall* walls[MAX_WALLS];           /**< Square walls on */
       GLuint R,G,B;                     /**< Square Color to MINIMAP */
       conection mapConection;           /**< Conection to other map */
       int divisions;                    /**< Number of Divisions */
@@ -431,12 +438,12 @@ class Map
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
       //mapRoad* roads;     /**< Map's Roads */
-      int numtexturas;      /**< Number of distinct Textures on Map */
-      texture* Texturas;    /**< List of textures on Map */
+      int numTextures;      /**< Number of distinct Textures on Map */
+      texture* textures;    /**< List of textures on Map */
       Square* squareInic;   /**< Square where PCs starts */
-      muro* muros;          /**< Map Walls */
-      muro* meiosFio;       /**< Map Meio Fios (how translate this?) */
-      door* portas;         /**< Map Doors */
+      wall* walls;          /**< Map Walls */
+      wall* curbs;          /**< Map Meio Fios (how translate this?) */
+      door* doors;          /**< Map Doors */
 
       int SQUAREMINISIZE;   /**< Minimap square size */
       int SQUAREMINIDIV;    /**< MiniMap square division relation */

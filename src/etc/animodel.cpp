@@ -543,8 +543,8 @@ void aniModel::renderShadow()
 {
    glPushMatrix();
       //glMultMatrixf(fShadowMatrix);
-      glTranslatef(posicaoLadoX, posicaoLadoY, posicaoLadoZ);
-      glRotatef(orientacao,0,1,0);
+      glTranslatef(xPosition, yPosition, zPosition);
+      glRotatef(orientation,0,1,0);
 
   // get the renderer of the model
   CalRenderer *pCalRenderer;

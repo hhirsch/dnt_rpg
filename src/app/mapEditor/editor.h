@@ -84,7 +84,7 @@ class editor
       guiIO* gui;                    /**< The Editor's GUI */
       terrain* terrainEditor;        /**< The terrain Editor Module */
       portal* portalEditor;          /**< The portal Editor Module */
-      wall* wallEditor;              /**< The wall Editor Module */
+      wallController* wallEditor;    /**< The wall Editor Module */
       objects* objectEditor;         /**< The Object Editor Module */
       particles* particleEditor;     /**< The Particle Editor Module */
       modelList* models;             /**< The Objects Model List */

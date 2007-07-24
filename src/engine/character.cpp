@@ -341,7 +341,7 @@ void character::callIdleAnimation()
  *********************************************************************/
 void character::setOrientation(GLfloat ori)
 {
-   orientacao = ori;
+   orientation = ori;
    pathFind.setOrientation(ori);
 }
 
@@ -570,10 +570,10 @@ character* characterList::insertCharacter(string file, featsList* ft,
    string arqModelo;
    character* novo;
    novo = new character(ft);
-   novo->orientacao = 0.0;
-   novo->posicaoLadoX = 0.0;
-   novo->posicaoLadoZ = 0.0;
-   novo->posicaoLadoY = 0.0;
+   novo->orientation = 0.0;
+   novo->xPosition = 0.0;
+   novo->zPosition = 0.0;
+   novo->yPosition = 0.0;
 
    if(!(arq = fopen(file.c_str(),"r")))
    {

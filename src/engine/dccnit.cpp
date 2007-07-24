@@ -372,9 +372,9 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                          texto,
                          proj, modl, viewPort);
            per = NPCs->insertCharacter(arquivo,features, this);
-           per->posicaoLadoX = posX;
-           per->posicaoLadoZ = posZ;
-           per->posicaoLadoY = actualMap->getHeight(posX, posZ);
+           per->xPosition = posX;
+           per->zPosition = posZ;
+           per->yPosition = actualMap->getHeight(posX, posZ);
          }
          fclose(arq);
       }  
@@ -450,12 +450,12 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Put Active Party on Init Position */
    character* activeCharacter = PCs->getActiveCharacter();
-   actualMap->getInitialPosition(activeCharacter->posicaoLadoX,
-                                 activeCharacter->posicaoLadoZ);
-   gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
-                              activeCharacter->posicaoLadoY,
-                              activeCharacter->posicaoLadoZ,
-                              activeCharacter->orientacao);
+   actualMap->getInitialPosition(activeCharacter->xPosition,
+                                 activeCharacter->zPosition);
+   gameCamera.actualizeCamera(activeCharacter->xPosition,
+                              activeCharacter->yPosition,
+                              activeCharacter->zPosition,
+                              activeCharacter->orientation);
    activeCharacter->ocupaQuad = actualMap->squareInic;
 
    showLoading(img,&texturaTexto,texturaCarga,
@@ -1093,9 +1093,9 @@ void engine::enterBattleMode(bool surprisePC)
   {
       snd->addSoundEffect(false,"../data/sndfx/battleMode.ogg");
       engineMode = ENGINE_MODE_TURN_BATTLE;
-      moveCircleX = activeCharacter->posicaoLadoX;
-      moveCircleY = activeCharacter->posicaoLadoY;
-      moveCircleZ = activeCharacter->posicaoLadoZ;
+      moveCircleX = activeCharacter->xPosition;
+      moveCircleY = activeCharacter->yPosition;
+      moveCircleZ = activeCharacter->zPosition;
 
       /* Put the PCs on group */
       ch =(character*) PCs->first->next;
@@ -1179,8 +1179,8 @@ void engine::threatGuiEvents(guiObject* object, int eventInfo)
    if( (inventoryWindow) )
    {
       if(inventoryWindow->treat(object, eventInfo, cursors, actualMap,
-                                PCs->getActiveCharacter()->posicaoLadoX,
-                                PCs->getActiveCharacter()->posicaoLadoZ,
+                                PCs->getActiveCharacter()->xPosition,
+                                PCs->getActiveCharacter()->zPosition,
                                 &modifState))
       {
          /* Redefine, if need, the weapons */
@@ -1328,8 +1328,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                    shortCutsWindow->draw(mouseX,mouseY);
                 }
                 if( (Mbutton & SDL_BUTTON(1)) && 
-                    (rangeAction(activeCharacter->posicaoLadoX, 
-                                 activeCharacter->posicaoLadoZ,
+                    (rangeAction(activeCharacter->xPosition, 
+                                 activeCharacter->zPosition,
                                  sobj->x, sobj->z,
                                  WALK_PER_MOVE_ACTION) ) )
                 {
@@ -1376,7 +1376,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
       }
 
       /* Doors Verification */
-      door* porta = actualMap->portas;
+      door* porta = actualMap->doors;
       while( (porta != NULL) && (!pronto) )
       {
          boundingBox bound = porta->obj->getBoundingBox();
@@ -1389,7 +1389,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
          Z[2] = bound.z2;
          X[3] = bound.x2;
          Z[3] = bound.z1;
-         rotTransBoundingBox(porta->orientacao, X, Z,porta->x, 0.0,0.0,porta->z, 
+         rotTransBoundingBox(porta->orientation, X, Z,porta->x, 0.0,0.0,porta->z, 
                              minObj, maxObj);
          if(intercepts( minObj, maxObj, minMouse, maxMouse, 1))
          {
@@ -1400,26 +1400,26 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                shortCutsWindow->draw(mouseX, mouseY);
             }
             if( (Mbutton & SDL_BUTTON(1)) && 
-                (rangeAction(activeCharacter->posicaoLadoX, 
-                             activeCharacter->posicaoLadoZ,
+                (rangeAction(activeCharacter->xPosition, 
+                             activeCharacter->zPosition,
                              porta->x, porta->z,
                              WALK_PER_MOVE_ACTION) ) )
             {
                lastMousePression = tempo;
                if(porta->status)
                {
-                  porta->orientacao -= 90;
+                  porta->orientation -= 90;
                   porta->status = 0;
                }
                else
                {
-                  porta->orientacao += 90;
+                  porta->orientation += 90;
                   porta->status = 1;
                }
             }
             pronto = 1;
          }
-         porta = porta->proximo;
+         porta = porta->next;
       }
 
       /* Inventory Verification */
@@ -1437,8 +1437,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
          x[3] = pers->max[0];
          z[3] = pers->min[2];
 
-         rotTransBoundingBox(pers->orientacao, x, z,pers->posicaoLadoX,0.0, 0.0,
-                             pers->posicaoLadoZ, min, max );
+         rotTransBoundingBox(pers->orientation, x, z,pers->xPosition,0.0, 0.0,
+                             pers->zPosition, min, max );
 
          if(intercepts( min, max, minMouse, maxMouse, 1))
          {
@@ -1477,9 +1477,9 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             x[3] = pers->max[0];
             z[3] = pers->min[2];
 
-            rotTransBoundingBox(pers->orientacao, x, z, 
-                                pers->posicaoLadoX, 0.0, 0.0, 
-                                pers->posicaoLadoZ, min, max );
+            rotTransBoundingBox(pers->orientation, x, z, 
+                                pers->xPosition, 0.0, 0.0, 
+                                pers->zPosition, min, max );
 
             if(intercepts( min, max, minMouse, maxMouse, 1))
             {
@@ -1493,9 +1493,9 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   {
                      cursors->setActual(CURSOR_TALK);
                      if( (Mbutton & SDL_BUTTON(1)) && 
-                         (rangeAction(activeCharacter->posicaoLadoX, 
-                                      activeCharacter->posicaoLadoZ,
-                                      pers->posicaoLadoX, pers->posicaoLadoZ,
+                         (rangeAction(activeCharacter->xPosition, 
+                                      activeCharacter->zPosition,
+                                      pers->xPosition, pers->zPosition,
                                       WALK_PER_MOVE_ACTION)) )
                      {
                         pers->openConversationDialog(gui,activeCharacter);
@@ -1522,9 +1522,9 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   }
 
                   if( (Mbutton & SDL_BUTTON(1)) &&
-                      (rangeAction(activeCharacter->posicaoLadoX, 
-                                   activeCharacter->posicaoLadoZ,
-                                   pers->posicaoLadoX, pers->posicaoLadoZ,
+                      (rangeAction(activeCharacter->xPosition, 
+                                   activeCharacter->zPosition,
+                                   pers->xPosition, pers->zPosition,
                                    activeCharacter->getActiveFeatRange() *
                                    METER_TO_DNT) ) )
                   {
@@ -1589,8 +1589,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             cursors->setActual(CURSOR_MAPTRAVEL);
             pronto = 1;
             if( (Mbutton & SDL_BUTTON(1)) && 
-                (rangeAction(activeCharacter->posicaoLadoX, 
-                             activeCharacter->posicaoLadoZ,
+                (rangeAction(activeCharacter->xPosition, 
+                             activeCharacter->zPosition,
                              xReal, zReal,
                              WALK_PER_MOVE_ACTION) ) )
             {
@@ -1767,8 +1767,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             if(!effect)
             {
                effect = (part2*)particleSystem->addParticle(PART_FIRE,
-                                          activeCharacter->posicaoLadoX,0,
-                                          activeCharacter->posicaoLadoZ,
+                                          activeCharacter->xPosition,0,
+                                          activeCharacter->zPosition,
                                           "../data/particles/effect1.par");
                if(effect)
                {
@@ -1785,8 +1785,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             part5 *p;
             p =  (part5*)particleSystem->addParticle(PART_BLOOD,
-                                    activeCharacter->posicaoLadoX,28,
-                                    activeCharacter->posicaoLadoZ, 
+                                    activeCharacter->xPosition,28,
+                                    activeCharacter->zPosition, 
                                     "../data/particles/blood1.par");
             if(p)
                p->followPC = true;
@@ -1795,8 +1795,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
              part5 *p;
              p = (part5*) particleSystem->addParticle(PART_BLOOD,
-                                         activeCharacter->posicaoLadoX,28,
-                                         activeCharacter->posicaoLadoZ, 
+                                         activeCharacter->xPosition,28,
+                                         activeCharacter->zPosition, 
                                          "../data/particles/blood2.par");
              if(p) 
                p->followPC = true;
@@ -1804,36 +1804,36 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          if(keys[SDLK_t])
          {
             particleSystem->addParticle(PART_METEOR,
-                                        activeCharacter->posicaoLadoX,
-                                        ALTURAMAXIMA+100,
-                                        activeCharacter->posicaoLadoZ,
+                                        activeCharacter->xPosition,
+                                        MAX_HEIGHT+100,
+                                        activeCharacter->zPosition,
                                         0.0, -1.0, 0.0,
-                                        activeCharacter->posicaoLadoX,
+                                        activeCharacter->xPosition,
                                         actualMap->getHeight(
-                                                activeCharacter->posicaoLadoX,
-                                                activeCharacter->posicaoLadoZ),
-                                                activeCharacter->posicaoLadoZ,
+                                                activeCharacter->xPosition,
+                                                activeCharacter->zPosition),
+                                                activeCharacter->zPosition,
                                                 "../data/particles/fire1.par");
          }
          if(keys[SDLK_u])
          {
-            GLfloat incZ = -cos(deg2Rad(activeCharacter->orientacao));
-            GLfloat incX = -sin(deg2Rad(activeCharacter->orientacao));
+            GLfloat incZ = -cos(deg2Rad(activeCharacter->orientation));
+            GLfloat incX = -sin(deg2Rad(activeCharacter->orientation));
             particleSystem->addParticle(PART_METEOR,
-                                       activeCharacter->posicaoLadoX,
-                                       activeCharacter->posicaoLadoY + 15,
-                                       activeCharacter->posicaoLadoZ,
+                                       activeCharacter->xPosition,
+                                       activeCharacter->yPosition + 15,
+                                       activeCharacter->zPosition,
                                        incX, 0.0, incZ,
-                                       activeCharacter->posicaoLadoX + 200*incX,
-                                       activeCharacter->posicaoLadoY + 15,
-                                       activeCharacter->posicaoLadoZ + 200*incZ,
+                                       activeCharacter->xPosition + 200*incX,
+                                       activeCharacter->yPosition + 15,
+                                       activeCharacter->zPosition + 200*incZ,
                                        "../data/particles/fire1.par");
          }
          if(keys[SDLK_l])
          {
             particleSystem->addParticle(PART_LIGHTNING,
-                                        activeCharacter->posicaoLadoX,250,
-                                        activeCharacter->posicaoLadoZ,
+                                        activeCharacter->xPosition,250,
+                                        activeCharacter->zPosition,
                                         "../data/particles/lightning1.par");
          }
 
@@ -1856,8 +1856,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       if(keys[SDLK_q] || keys[SDLK_e])
       {
          walkStatus = ENGINE_WALK_KEYS;
-          varX = passo * sin(deg2Rad(activeCharacter->orientacao+90.0));
-          varZ = passo * cos(deg2Rad(activeCharacter->orientacao+90.0));
+          varX = passo * sin(deg2Rad(activeCharacter->orientation+90.0));
+          varZ = passo * cos(deg2Rad(activeCharacter->orientation+90.0));
          // Left walk
          if(keys[SDLK_q]) 
          {
@@ -1867,12 +1867,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
          if(canWalk(varX,varZ,0)) 
          {
-            activeCharacter->posicaoLadoX += varX;
-            activeCharacter->posicaoLadoZ += varZ;
-            gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
-                                       activeCharacter->posicaoLadoY,
-                                       activeCharacter->posicaoLadoZ,
-                                       activeCharacter->orientacao);
+            activeCharacter->xPosition += varX;
+            activeCharacter->zPosition += varZ;
+            gameCamera.actualizeCamera(activeCharacter->xPosition,
+                                       activeCharacter->yPosition,
+                                       activeCharacter->zPosition,
+                                       activeCharacter->orientation);
             redesenha = true;
             andou = true;
          }
@@ -1881,11 +1881,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             if(varX < 0)
                passo *= -1;
-            activeCharacter->posicaoLadoX += passo;
-            gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
-                                       activeCharacter->posicaoLadoY,
-                                       activeCharacter->posicaoLadoZ,
-                                       activeCharacter->orientacao);
+            activeCharacter->xPosition += passo;
+            gameCamera.actualizeCamera(activeCharacter->xPosition,
+                                       activeCharacter->yPosition,
+                                       activeCharacter->zPosition,
+                                       activeCharacter->orientation);
             redesenha = true;
             andou = true;
          }
@@ -1894,11 +1894,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
             if(varZ < 0) 
                passo *= -1;
-            activeCharacter->posicaoLadoZ += passo;
-            gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
-                                       activeCharacter->posicaoLadoY,
-                                       activeCharacter->posicaoLadoZ,
-                                       activeCharacter->orientacao);
+            activeCharacter->zPosition += passo;
+            gameCamera.actualizeCamera(activeCharacter->xPosition,
+                                       activeCharacter->yPosition,
+                                       activeCharacter->zPosition,
+                                       activeCharacter->orientation);
             redesenha = true;
             andou = true;
          }
@@ -1907,8 +1907,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       else if(keys[SDLK_w] || keys[SDLK_s])
       { 
          walkStatus = ENGINE_WALK_KEYS;
-         varX = passo * sin(deg2Rad(activeCharacter->orientacao));
-         varZ = passo * cos(deg2Rad(activeCharacter->orientacao));
+         varX = passo * sin(deg2Rad(activeCharacter->orientation));
+         varZ = passo * cos(deg2Rad(activeCharacter->orientation));
          if(keys[SDLK_w]) 
          {
               varX *= -1;
@@ -1916,12 +1916,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          }
          if((canWalk(varX,varZ,0)) ) 
          {
-             activeCharacter->posicaoLadoX += varX;
-             activeCharacter->posicaoLadoZ += varZ;
-             gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
-                                        activeCharacter->posicaoLadoY,
-                                        activeCharacter->posicaoLadoZ,
-                                        activeCharacter->orientacao);
+             activeCharacter->xPosition += varX;
+             activeCharacter->zPosition += varZ;
+             gameCamera.actualizeCamera(activeCharacter->xPosition,
+                                        activeCharacter->yPosition,
+                                        activeCharacter->zPosition,
+                                        activeCharacter->orientation);
              redesenha = true;
              andou  = true;
          }
@@ -1931,11 +1931,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
               if(varX < 0 )
                  passo *= -1;
-              activeCharacter->posicaoLadoX += passo;
-              gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
-                              activeCharacter->posicaoLadoY,
-                              activeCharacter->posicaoLadoZ,
-                              activeCharacter->orientacao);
+              activeCharacter->xPosition += passo;
+              gameCamera.actualizeCamera(activeCharacter->xPosition,
+                              activeCharacter->yPosition,
+                              activeCharacter->zPosition,
+                              activeCharacter->orientation);
               redesenha = true;
               andou = true;
          }
@@ -1944,11 +1944,11 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          {
               if( varZ < 0 )
                  passo *= -1;
-              activeCharacter->posicaoLadoZ += passo;
-              gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
-                              activeCharacter->posicaoLadoY,
-                              activeCharacter->posicaoLadoZ,
-                              activeCharacter->orientacao);
+              activeCharacter->zPosition += passo;
+              gameCamera.actualizeCamera(activeCharacter->xPosition,
+                              activeCharacter->yPosition,
+                              activeCharacter->zPosition,
+                              activeCharacter->orientation);
               redesenha = true;
               andou = true;
          }
@@ -1957,7 +1957,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
 
       if( (keys[SDLK_a]) || (keys[SDLK_d]))
       {
-         GLfloat ori = activeCharacter->orientacao;
+         GLfloat ori = activeCharacter->orientation;
          walkStatus = ENGINE_WALK_KEYS;
          // CounterClockWise Character turn
          if((keys[SDLK_a]) && (canWalk(0,0,rotacao)) )  
@@ -1996,10 +1996,10 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             PCs->setActiveCharacter((character*)activeCharacter->next);
          }
          activeCharacter = PCs->getActiveCharacter();
-         gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
-                                    activeCharacter->posicaoLadoY,
-                                    activeCharacter->posicaoLadoZ,
-                                    activeCharacter->orientacao);
+         gameCamera.actualizeCamera(activeCharacter->xPosition,
+                                    activeCharacter->yPosition,
+                                    activeCharacter->zPosition,
+                                    activeCharacter->orientation);
          redesenha = true;
          SDL_Delay(100);
       }
@@ -2032,10 +2032,10 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             activeCharacter->pathFind.defineMap(actualMap);
        
             activeCharacter->pathFind.findPath(
-                                             activeCharacter->posicaoLadoX,
-                                             activeCharacter->posicaoLadoZ,
+                                             activeCharacter->xPosition,
+                                             activeCharacter->zPosition,
                                              xReal, zReal, ANDAR, 
-                                             activeCharacter->orientacao,
+                                             activeCharacter->orientation,
                                              activeCharacter->min[0],
                                              activeCharacter->min[1],
                                              activeCharacter->min[2],
@@ -2055,30 +2055,30 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       if(walkStatus == ENGINE_WALK_MOUSE)
       {
             if(! activeCharacter->pathFind.getNewPosition(
-                                             activeCharacter->posicaoLadoX,
-                                             activeCharacter->posicaoLadoZ,
-                                             activeCharacter->orientacao))
+                                             activeCharacter->xPosition,
+                                             activeCharacter->zPosition,
+                                             activeCharacter->orientation))
             {
                walkStatus = ENGINE_WALK_KEYS;
             }
             else
             {
                /* Define New Occuped Square */
-               int posX =(int)floor(activeCharacter->posicaoLadoX /
+               int posX =(int)floor(activeCharacter->xPosition /
                                     SQUARE_SIZE);
-               int posZ =(int)floor(activeCharacter->posicaoLadoZ / 
+               int posZ =(int)floor(activeCharacter->zPosition / 
                                     SQUARE_SIZE);
                activeCharacter->ocupaQuad = 
                                          actualMap->relativeSquare(posX,posZ);
                /* Define New Height */
-               defineActiveCharacterHeight(activeCharacter->posicaoLadoX,
-                                           activeCharacter->posicaoLadoZ);
+               defineActiveCharacterHeight(activeCharacter->xPosition,
+                                           activeCharacter->zPosition);
             }
 
-            gameCamera.actualizeCamera(activeCharacter->posicaoLadoX,
-                                       activeCharacter->posicaoLadoY,
-                                       activeCharacter->posicaoLadoZ,
-                                       activeCharacter->orientacao);
+            gameCamera.actualizeCamera(activeCharacter->xPosition,
+                                       activeCharacter->yPosition,
+                                       activeCharacter->zPosition,
+                                       activeCharacter->orientation);
             redesenha = true;
             andou = true;
       }
@@ -2088,12 +2088,12 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       /* Redraw the needed GUI */
       if(miniMapWindow)
       {
-         GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARE_SIZE)));
+         GLint x = (int)(((activeCharacter->xPosition) / (SQUARE_SIZE)));
          if(x > actualMap->getSizeX()-1)
          {
             x = actualMap->getSizeX()-1;
          }
-         GLint z = (int)(((activeCharacter->posicaoLadoZ) / (SQUARE_SIZE)));
+         GLint z = (int)(((activeCharacter->zPosition) / (SQUARE_SIZE)));
          if( z > actualMap->getSizeZ()-1)
          {
             z = actualMap->getSizeZ()-1;
@@ -2190,20 +2190,20 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    {
       if(!walkSound)
       {
-         walkSound = snd->addSoundEffect(activeCharacter->posicaoLadoX,0.0,
-                                        activeCharacter->posicaoLadoZ,true,
+         walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,
+                                        activeCharacter->zPosition,true,
                                         "../data/sndfx/passos.ogg" );
       }
       else
       {
-         walkSound->redefinePosition(activeCharacter->posicaoLadoX, 0.0,
-                                     activeCharacter->posicaoLadoZ);
+         walkSound->redefinePosition(activeCharacter->xPosition, 0.0,
+                                     activeCharacter->zPosition);
       }
       activeCharacter->setState(STATE_WALK);
       #ifdef REDE
         movchar(&clientData, activeCharacter->ID, 
-          activeCharacter->posicaoLadoX,activeCharacter->posicaoLadoZ,
-          activeCharacter->orientacao );
+          activeCharacter->xPosition,activeCharacter->zPosition,
+          activeCharacter->orientation );
       #endif
    }
    else if( (passouTempo) && (activeCharacter->isAlive()))
@@ -2265,9 +2265,9 @@ void engine::renderScene()
          per->update(WALK_ACTUALIZATION);
          /* Draw Character */
          glPushMatrix();
-           glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
-                        per->posicaoLadoZ);
-           glRotatef(per->orientacao,0,1,0);
+           glTranslatef(per->xPosition, per->yPosition,
+                        per->zPosition);
+           glRotatef(per->orientation,0,1,0);
            per->render();
 
            /* Draw Reflection */
@@ -2341,19 +2341,19 @@ void engine::renderScene()
          z[2] = per->max[2];
          x[3] = per->max[0];
          z[3] = per->min[2];
-         rotTransBoundingBox(per->orientacao, x, z,per->posicaoLadoX, 
-                             per->min[1] + per->posicaoLadoY, 
-                             per->max[1] + per->posicaoLadoY,
-                             per->posicaoLadoZ, min, max );
+         rotTransBoundingBox(per->orientation, x, z,per->xPosition, 
+                             per->min[1] + per->yPosition, 
+                             per->max[1] + per->yPosition,
+                             per->zPosition, min, max );
 
          /* Only Draw Visible Characters */
          if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
                             visibleMatrix))
          {
             glPushMatrix();
-              glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
-                           per->posicaoLadoZ);
-              glRotatef(per->orientacao,0,1,0);
+              glTranslatef(per->xPosition, per->yPosition,
+                           per->zPosition);
+              glRotatef(per->orientation,0,1,0);
               per->render();
 
               /* Draw Reflection */
@@ -2413,8 +2413,8 @@ void engine::renderScene()
    /* Draw World, doing view frustum culling */
    actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
                    gameCamera.getCameraZ(),visibleMatrix,
-                   PCs->getActiveCharacter()->posicaoLadoX,
-                   PCs->getActiveCharacter()->posicaoLadoZ);
+                   PCs->getActiveCharacter()->xPosition,
+                   PCs->getActiveCharacter()->zPosition);
 
 }
 
@@ -2444,13 +2444,13 @@ void engine::renderNoShadowThings()
    {
        /* Range Circle */
        actualMap->drawSurfaceOnMap(rangeCircle,
-                                   activeCharacter->posicaoLadoX - 
+                                   activeCharacter->xPosition - 
                                                            WALK_PER_MOVE_ACTION,
-                                   activeCharacter->posicaoLadoZ - 
+                                   activeCharacter->zPosition - 
                                                            WALK_PER_MOVE_ACTION,
-                                   activeCharacter->posicaoLadoX + 
+                                   activeCharacter->xPosition + 
                                                            WALK_PER_MOVE_ACTION,
-                                   activeCharacter->posicaoLadoZ + 
+                                   activeCharacter->zPosition + 
                                                            WALK_PER_MOVE_ACTION,
                                    0.05, 20);
    }
@@ -2477,10 +2477,10 @@ void engine::renderNoShadowThings()
           /* Feat Range Circle */
           float rangeValue=activeCharacter->getActiveFeatRange()*METER_TO_DNT;
           actualMap->drawSurfaceOnMap(featRangeCircle, 
-                                      activeCharacter->posicaoLadoX-rangeValue,
-                                      activeCharacter->posicaoLadoZ-rangeValue, 
-                                      activeCharacter->posicaoLadoX+rangeValue, 
-                                      activeCharacter->posicaoLadoZ+rangeValue, 
+                                      activeCharacter->xPosition-rangeValue,
+                                      activeCharacter->zPosition-rangeValue, 
+                                      activeCharacter->xPosition+rangeValue, 
+                                      activeCharacter->zPosition+rangeValue, 
                                       0.3,20);
                                        
    }
@@ -2550,9 +2550,9 @@ void engine::renderNoShadowThings()
    if(option->enableParticles)
    {
       glPushMatrix();
-         particleSystem->actualizeAll(activeCharacter->posicaoLadoX,
-                                      activeCharacter->posicaoLadoY,
-                                      activeCharacter->posicaoLadoZ, 
+         particleSystem->actualizeAll(activeCharacter->xPosition,
+                                      activeCharacter->yPosition,
+                                      activeCharacter->zPosition, 
                                       visibleMatrix, option->enableGrass);
       glPopMatrix();
    }
@@ -2630,8 +2630,8 @@ void engine::drawWithoutShadows()
    /* Sun Definition */
    if(actualMap->isOutdoor())
    {
-      gameSun->actualizeHourOfDay(hour, PCs->getActiveCharacter()->posicaoLadoX,
-                                  PCs->getActiveCharacter()->posicaoLadoZ);
+      gameSun->actualizeHourOfDay(hour, PCs->getActiveCharacter()->xPosition,
+                                  PCs->getActiveCharacter()->zPosition);
       gameSun->setLight();
    }
    else
@@ -2683,10 +2683,10 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
          return(false);
       }
       //verify distance to the orign point
-      dist = sqrt( (activeCharacter->posicaoLadoX + varX - moveCircleX) *
-                   (activeCharacter->posicaoLadoX + varX - moveCircleX) +
-                   (activeCharacter->posicaoLadoZ + varZ - moveCircleZ) *
-                   (activeCharacter->posicaoLadoZ + varZ - moveCircleZ) );
+      dist = sqrt( (activeCharacter->xPosition + varX - moveCircleX) *
+                   (activeCharacter->xPosition + varX - moveCircleX) +
+                   (activeCharacter->zPosition + varZ - moveCircleZ) *
+                   (activeCharacter->zPosition + varZ - moveCircleZ) );
       if( ( (canAttack) && (dist > 2*WALK_PER_MOVE_ACTION)) || 
             (!canAttack) && (dist > WALK_PER_MOVE_ACTION))
       {
@@ -2696,16 +2696,16 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 
 
    colisionDetect.defineMap(actualMap, NPCs);
-   result = colisionDetect.canWalk(activeCharacter->posicaoLadoX + varX,
-                                   activeCharacter->posicaoLadoY,
-                                   activeCharacter->posicaoLadoZ + varZ,
+   result = colisionDetect.canWalk(activeCharacter->xPosition + varX,
+                                   activeCharacter->yPosition,
+                                   activeCharacter->zPosition + varZ,
                                    activeCharacter->min[0],
                                    activeCharacter->min[1],
                                    activeCharacter->min[2],
                                    activeCharacter->max[0],
                                    activeCharacter->max[1],
                                    activeCharacter->max[2],
-                                   activeCharacter->orientacao + varAlpha, 
+                                   activeCharacter->orientation + varAlpha, 
                                    activeCharacter->ocupaQuad, varHeight,
                                    nx, nz);
 
@@ -2725,7 +2725,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       }
 
       /* Apply VarHeight */
-      activeCharacter->posicaoLadoY += varHeight;
+      activeCharacter->yPosition += varHeight;
       
       /* Verify Turn Based Mode Action */
       if((engineMode == ENGINE_MODE_TURN_BATTLE) && 
@@ -2751,17 +2751,17 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
 {
    character* activeCharacter = PCs->getActiveCharacter();
-   GLfloat altura_atual = activeCharacter->posicaoLadoY;
+   GLfloat altura_atual = activeCharacter->yPosition;
 
    GLfloat res = actualMap->getHeight(nx, nz);
 
    if( res - altura_atual > ANDAR)
    {
-       activeCharacter->posicaoLadoY = altura_atual;
+       activeCharacter->yPosition = altura_atual;
        return(false);
    }
 
-   activeCharacter->posicaoLadoY = res;
+   activeCharacter->yPosition = res;
    return(true);
 }
 
@@ -2771,12 +2771,12 @@ bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
 void engine::OpenMiniMapWindow()
 {
    character* activeCharacter = PCs->getActiveCharacter();
-   GLint x = (int)(((activeCharacter->posicaoLadoX) / (SQUARE_SIZE)));
+   GLint x = (int)(((activeCharacter->xPosition) / (SQUARE_SIZE)));
    if(x > actualMap->getSizeX()-1)
    {
       x = actualMap->getSizeX()-1;
    }
-   GLint z = (int)(((activeCharacter->posicaoLadoZ) / (SQUARE_SIZE)));
+   GLint z = (int)(((activeCharacter->zPosition) / (SQUARE_SIZE)));
    if( z > actualMap->getSizeZ()-1)
    {
       z = actualMap->getSizeZ()-1;
@@ -3033,9 +3033,9 @@ int engine::Run(SDL_Surface *surface)
                   attackFeat = activeCharacter->getActiveFeatRangeType();
                   canAttack = true;
 
-                  moveCircleX = activeCharacter->posicaoLadoX;
-                  moveCircleY = activeCharacter->posicaoLadoY;
-                  moveCircleZ = activeCharacter->posicaoLadoZ;
+                  moveCircleX = activeCharacter->xPosition;
+                  moveCircleY = activeCharacter->yPosition;
+                  moveCircleZ = activeCharacter->zPosition;
                }
                else
                { //FIXME
@@ -3063,9 +3063,9 @@ int engine::Run(SDL_Surface *surface)
                              "../data/pics/logan/cara.bmp",0,0,
                "LoganNPC","../data/models/personagens/logan_completo_final.obj",
                   "../data/pics/logan/",features);
-                per->posicaoLadoX = eventoRede->x;
-                per->posicaoLadoZ = eventoRede->y; 
-                per->orientacao = eventoRede->teta;
+                per->xPosition = eventoRede->x;
+                per->zPosition = eventoRede->y; 
+                per->orientation = eventoRede->teta;
                 per->ID = eventoRede->obj;
                 forcaAtualizacao = 1;
                 break; 
@@ -3081,9 +3081,9 @@ int engine::Run(SDL_Surface *surface)
                    }
                    if(per!=NPCs->first)
                    {
-                       per->posicaoLadoX = eventoRede->x;
-                       per->posicaoLadoZ = eventoRede->y; 
-                       per->orientacao = eventoRede->teta;
+                       per->xPosition = eventoRede->x;
+                       per->zPosition = eventoRede->y; 
+                       per->orientation = eventoRede->teta;
 		       forcaAtualizacao = 1;
                    }
                 }
@@ -3098,9 +3098,9 @@ int engine::Run(SDL_Surface *surface)
              {
                  character* activeCharacter = PCs->getActiveCharacter();
                  activeCharacter->ID = createchar( &clientData, 
-                 activeCharacter->posicaoLadoX, 
-                 activeCharacter->posicaoLadoZ, 
-                 activeCharacter->orientacao );
+                 activeCharacter->xPosition, 
+                 activeCharacter->zPosition, 
+                 activeCharacter->orientation );
                  if( activeCharacter->ID == -2 )
                  {
                      entergame( &clientData );

@@ -160,8 +160,8 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       return(false);
    }
 
-   if(!actionInRange(attacker.posicaoLadoX, attacker.posicaoLadoZ, 
-                     target.posicaoLadoX, target.posicaoLadoZ,
+   if(!actionInRange(attacker.xPosition, attacker.zPosition, 
+                     target.xPosition, target.zPosition,
                      m_feats[featNumber].range*METER_TO_DNT))
    {
       brief += language.MSG_FAR_AWAY;

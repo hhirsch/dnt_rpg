@@ -5,14 +5,14 @@
 #include "message.h"
 
 
-class wall
+class wallController
 {
    public:
       /*! Constructor 
        * \param map -> pointer to opened map */
-      wall(Map* map);
+      wallController(Map* map);
       /*! Destructor */
-      ~wall();
+      ~wallController();
 
       /*! Verify and do action by mouse and state 
        * \param mouseX -> mouse X coordinate
@@ -32,7 +32,7 @@ class wall
       Map* actualMap;         /**< Actual Internal Map */
       int actualTool;         /**< Actual Tool */
       int state;              /**< Actual Internal State */
-      muro* actualWall;       /**< Actual Selected Wall */
+      wall* actualWall;       /**< Actual Selected Wall */
       bool limitSquare;       /**< Limit Wall to square's vertices*/
 
       GLuint texture;         /**< Current Texture */
@@ -44,7 +44,7 @@ class wall
       GLfloat initmX, initmZ; /**< Mouse Initial Positions on some States */
 
       /*! Gets wall on actual Mouse Position */
-      muro* getWall();
+      wall* getWall();
       /*! Do the modifications in Horizontal Vertical Texture repeat */
       void doModifyVerHorTexture();
       /*! Do the modification on texture */

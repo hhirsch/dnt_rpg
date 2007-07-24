@@ -138,10 +138,10 @@ void editor::openMap()
       mapOpened = true;
       terrainEditor = new terrain(map);
       portalEditor = new portal(map);
-      wallEditor = new wall(map);
+      wallEditor = new wallController(map);
       objectEditor = new objects(map, models);
       particleEditor = new particles(map);
-      actualTexture = map->Texturas->indice;
+      actualTexture = map->textures->index;
 
       /* Open NPCs */
       if(NPCs)
@@ -160,17 +160,17 @@ void editor::openMap()
          {
             int total;
             int npc;
-            char nome[30];
+            char name[30];
             char arquivo[255];
             float posX, posZ;
             fscanf(arq,"%d",&total);
             for(npc = 0; npc < total; npc++)
             {
-                fscanf(arq,"%s %s %f %f",&nome[0],&arquivo[0],
+                fscanf(arq,"%s %s %f %f",&name[0],&arquivo[0],
                        &posX,&posZ);
                 per = NPCs->insertCharacter(arquivo,features, NULL);
-                per->posicaoLadoX = posX;
-                per->posicaoLadoZ = posZ;
+                per->xPosition = posX;
+                per->zPosition = posZ;
                 per->update(0); 
                 per->calculateBoundingBox();
             }
@@ -381,38 +381,38 @@ void editor::newMap()
    {
       map->newMap(sizeX,sizeZ);
       /* Insert walls */
-      muro* actualWall = new(muro);
-      actualWall->proximo = map->muros;
-      map->muros = actualWall;
+      wall* actualWall = new(wall);
+      actualWall->next = map->walls;
+      map->walls = actualWall;
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
-      actualWall->textura = map->Texturas->indice;
+      actualWall->texture = map->textures->index;
       actualWall->x1 = 0;
       actualWall->z1 = 0;
       actualWall->x2 = (sizeX)*SQUARE_SIZE;
       actualWall->z2 = 10;
-      actualWall = new(muro);
-      actualWall->proximo = map->muros;
-      map->muros = actualWall;
+      actualWall = new(wall);
+      actualWall->next = map->walls;
+      map->walls = actualWall;
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
-      actualWall->textura = map->Texturas->indice;
+      actualWall->texture = map->textures->index;
       actualWall->x1 = 0;
       actualWall->z1 = 0;
       actualWall->x2 = 10;
       actualWall->z2 = (sizeZ)*SQUARE_SIZE;
-      actualWall = new(muro);
-      actualWall->proximo = map->muros;
-      map->muros = actualWall;
+      actualWall = new(wall);
+      actualWall->next = map->walls;
+      map->walls = actualWall;
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
-      actualWall->textura = map->Texturas->indice;
+      actualWall->texture = map->textures->index;
       actualWall->x1 = (sizeX)*SQUARE_SIZE-10;
       actualWall->z1 = 0;
       actualWall->x2 = ((sizeX)*SQUARE_SIZE);
       actualWall->z2 = (sizeZ)*SQUARE_SIZE;
-      actualWall = new(muro);
-      actualWall->proximo = map->muros;
-      map->muros = actualWall;
+      actualWall = new(wall);
+      actualWall->next = map->walls;
+      map->walls = actualWall;
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
-      actualWall->textura = map->Texturas->indice;
+      actualWall->texture = map->textures->index;
       actualWall->x1 = 0;
       actualWall->z1 = (sizeZ)*SQUARE_SIZE-10;
       actualWall->x2 = (sizeX)*SQUARE_SIZE;
@@ -423,10 +423,10 @@ void editor::newMap()
    }
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
-   wallEditor = new wall(map);
+   wallEditor = new wallController(map);
    objectEditor = new objects(map, models);
    particleEditor = new particles(map);
-   actualTexture = map->Texturas->indice;
+   actualTexture = map->textures->index;
    NPCs = new (characterList);
    npcController = new npcs(map, NPCs, features);
    gui->showMessage("Created New Game Map!");
@@ -488,19 +488,19 @@ void editor::verifyPosition()
 int editor::previousTexture()
 {
    int aux=0;
-   texture* tex = map->Texturas;
-   while(aux < map->numtexturas-1)
+   texture* tex = map->textures;
+   while(aux < map->numTextures-1)
    {
-      if(tex->proximo->indice == actualTexture)
+      if(tex->next->index == actualTexture)
       {
-         actualTexture = tex->indice;
-         return(tex->indice);
+         actualTexture = tex->index;
+         return(tex->index);
       }
-      tex = tex->proximo;
+      tex = tex->next;
       aux++;
    }
-   actualTexture = map->Texturas->indice;
-   return(map->Texturas->indice);
+   actualTexture = map->textures->index;
+   return(map->textures->index);
 }
 
 /************************************************************************
@@ -509,23 +509,23 @@ int editor::previousTexture()
 int editor::nextTexture()
 {
    int aux=0;
-   texture* tex = map->Texturas;
-   while(aux < map->numtexturas)
+   texture* tex = map->textures;
+   while(aux < map->numTextures)
    {
-      if(tex->indice == actualTexture)
+      if(tex->index == actualTexture)
       {
-         if(tex->proximo)
+         if(tex->next)
          {
-           actualTexture = tex->proximo->indice;
-           return(tex->proximo->indice);
+           actualTexture = tex->next->index;
+           return(tex->next->index);
          }
          else
          {
-            actualTexture = tex->indice;
-           return(tex->indice);
+            actualTexture = tex->index;
+           return(tex->index);
          }
       }
-      tex = tex->proximo;
+      tex = tex->next;
       aux++;
    }
    actualTexture = 0;
@@ -533,7 +533,7 @@ int editor::nextTexture()
 }
 
 /************************************************************************
- *             Insere Textura na Lista de Texturas                      *
+ *             Insere Textura na Lista de textures                      *
  ************************************************************************/
 int editor::insertTexture()
 {
@@ -546,21 +546,21 @@ int editor::insertTexture()
       return(-1);
    }
 
-   /* Insere realmente a textura */ 
+   /* Insere realmente a texture */ 
    tex = (texture*) new(texture);
-   if(map->numtexturas == 0)
+   if(map->numTextures == 0)
    {
-      map->Texturas = tex;
-      tex->proximo = NULL;
+      map->textures = tex;
+      tex->next = NULL;
    }
    else
    {
-      tex->proximo = map->Texturas;
-      map->Texturas = tex;
+      tex->next = map->textures;
+      map->textures = tex;
    }
 
-   tex->arqNome = gui->getTextureFileName();
-   tex->nome = gui->getTextureFileName();
+   tex->fileName = gui->getTextureFileName();
+   tex->name = gui->getTextureFileName();
 
    SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
@@ -589,13 +589,13 @@ int editor::insertTexture()
       }
    }
 
-   glGenTextures(1, &(tex->indice));
-   glBindTexture(GL_TEXTURE_2D, tex->indice);
+   glGenTextures(1, &(tex->index));
+   glBindTexture(GL_TEXTURE_2D, tex->index);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
                 0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   map->numtexturas++;
+   map->numTextures++;
 
    string tmp;
    tmp = "Inserted Texture:";
@@ -605,7 +605,7 @@ int editor::insertTexture()
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
    SDL_FreeSurface(imgPotencia);
-   return(tex->indice);
+   return(tex->index);
 }
 
 /*********************************************************************
@@ -750,19 +750,19 @@ void editor::draw()
          z[2] = per->max[2];
          x[3] = per->max[0];
          z[3] = per->min[2];
-         rotTransBoundingBox(per->orientacao, x, z,per->posicaoLadoX, 
-                             per->min[1] + per->posicaoLadoY, 
-                             per->max[1] + per->posicaoLadoY,
-                             per->posicaoLadoZ, min, max );
+         rotTransBoundingBox(per->orientation, x, z,per->xPosition, 
+                             per->min[1] + per->yPosition, 
+                             per->max[1] + per->yPosition,
+                             per->zPosition, min, max );
 
          /* Only Draw Visible Characters */
          if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
             visibleMatrix))
          {
             glPushMatrix();
-               glTranslatef(per->posicaoLadoX, per->posicaoLadoY,
-                            per->posicaoLadoZ);
-               glRotatef(per->orientacao,0,1,0);
+               glTranslatef(per->xPosition, per->yPosition,
+                            per->zPosition);
+               glRotatef(per->orientation,0,1,0);
                per->render();
              /*per->RenderBoundingBox();
                glColor3f(0.6,0.1,0.1);

@@ -6,7 +6,7 @@
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-wall::wall(Map* map)
+wallController::wallController(Map* map)
 {
    actualMap = map;
    state = WALL_STATE_OTHER;
@@ -17,7 +17,7 @@ wall::wall(Map* map)
 /******************************************************
  *                      Destructor                    *
  ******************************************************/
-wall::~wall()
+wallController::~wallController()
 {
    actualMap = NULL;
 }
@@ -25,18 +25,18 @@ wall::~wall()
 /******************************************************
  *                        getWall                     *
  ******************************************************/
-muro* wall::getWall()
+wall* wallController::getWall()
 {
-   muro* aux;
+   wall* aux;
    bool doneWalls2 = false;
 
    /* Search on Walls */
-   aux = actualMap->muros;
+   aux = actualMap->walls;
    
    if( (!doneWalls2) && (aux == NULL) )
    {
       /* Not Found, So Search on 1/2 Walls */
-      aux = actualMap->meiosFio;
+      aux = actualMap->curbs;
       doneWalls2 = true;
    }
 
@@ -51,12 +51,12 @@ muro* wall::getWall()
       {
          return(aux);
       }
-      aux = aux->proximo;
+      aux = aux->next;
 
       if( (!doneWalls2) && (aux == NULL) )
       {
          /* Not Found, So Search on 1/2 Walls */
-         aux = actualMap->meiosFio;
+         aux = actualMap->curbs;
          doneWalls2 = true;
       }
    }
@@ -66,7 +66,7 @@ muro* wall::getWall()
 /******************************************************
  *                      verifyAction                  *
  ******************************************************/
-void wall::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                         Uint8 mButton, Uint8* keys,
                         int tool, GLuint actualTexture)
 {
@@ -116,7 +116,7 @@ void wall::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 /******************************************************
  *                      drawTemporary                 *
  ******************************************************/
-void wall::drawTemporary()
+void wallController::drawTemporary()
 {
    glDisable(GL_LIGHTING);
    if(state == WALL_STATE_OTHER)
@@ -136,7 +136,7 @@ void wall::drawTemporary()
 /******************************************************
  *                doModifyVerHorTexture()             *
  ******************************************************/
-void wall::doModifyVerHorTexture()
+void wallController::doModifyVerHorTexture()
 {
    state = WALL_STATE_OTHER;
    if( (actualWall) && (mB & SDL_BUTTON(1)) )
@@ -162,39 +162,39 @@ void wall::doModifyVerHorTexture()
 /******************************************************
  *                        doTexture()                 *
  ******************************************************/
-void wall::doTexture()
+void wallController::doTexture()
 {
    state =  WALL_STATE_OTHER;
    if( (actualWall) && ((mB & SDL_BUTTON(1))))
    {
-      actualWall->textura = texture;
+      actualWall->texture = texture;
    }
 }
 
 /******************************************************
  *                        doWall()                    *
  ******************************************************/
-void wall::doWall(bool X, bool Z, bool full)
+void wallController::doWall(bool X, bool Z, bool full)
 {
    if( (state == WALL_STATE_OTHER) && (mB & SDL_BUTTON(1)))
    {
       state = WALL_STATE_ADD_INIT;
       limitSquare = false;
-      actualWall = new(muro);
+      actualWall = new(wall);
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       if(full)
       {
-         actualWall->proximo = actualMap->muros;
-         actualMap->muros = actualWall;
+         actualWall->next = actualMap->walls;
+         actualMap->walls = actualWall;
       }
       else
       {
-         actualWall->proximo = actualMap->meiosFio;
-         actualMap->meiosFio = actualWall;
+         actualWall->next = actualMap->curbs;
+         actualMap->curbs = actualWall;
       }
       actualWall->x1 = mX;
       actualWall->z1 = mZ;
-      actualWall->textura = texture;
+      actualWall->texture = texture;
       if( X )
       {
           actualWall->x2 = mX;

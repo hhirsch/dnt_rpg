@@ -46,9 +46,9 @@ void npcs::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       {
          mX = mouseXw;
          mY = mouseYw;
-         actualNpc->posicaoLadoX = mouseX;
-         actualNpc->posicaoLadoZ = mouseZ;
-         actualNpc->posicaoLadoY = actualMap->getHeight(mouseX, mouseZ);
+         actualNpc->xPosition = mouseX;
+         actualNpc->zPosition = mouseZ;
+         actualNpc->yPosition = actualMap->getHeight(mouseX, mouseZ);
       }
       
       if( (mButton & SDL_BUTTON(1)) && (actualNpc != NULL) )
@@ -80,10 +80,10 @@ void npcs::drawTemporary()
       actualNpc->update(WALK_ACTUALIZATION/*seconds*/);   
       actualNpc->calculateBoundingBox();
       glPushMatrix();
-         glTranslatef(actualNpc->posicaoLadoX, 
-                      actualNpc->posicaoLadoY,
-                      actualNpc->posicaoLadoZ);
-         glRotatef(actualNpc->orientacao,0,1,0);
+         glTranslatef(actualNpc->xPosition, 
+                      actualNpc->yPosition,
+                      actualNpc->zPosition);
+         glRotatef(actualNpc->orientation,0,1,0);
          actualNpc->render();
       glPopMatrix();
    }
@@ -97,9 +97,9 @@ void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
 {
    character* per;
    per = NPCs->insertCharacter(npcFile,features, NULL);
-   per->posicaoLadoX = xReal;
-   per->posicaoLadoZ = zReal;
-   per->posicaoLadoY = actualMap->getHeight(xReal, zReal);
+   per->xPosition = xReal;
+   per->zPosition = zReal;
+   per->yPosition = actualMap->getHeight(xReal, zReal);
    per->update(0); 
    per->calculateBoundingBox();
 }
@@ -147,7 +147,7 @@ bool npcs::saveFile(string fileName)
       {
          fprintf(arq,"%s %s %f %f\n",per->nome.c_str(),
                  per->getCharacterFile().c_str(),
-                 per->posicaoLadoX,per->posicaoLadoZ);
+                 per->xPosition,per->zPosition);
          per = (character*) per->next;
        }
        fclose(arq);

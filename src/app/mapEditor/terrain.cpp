@@ -321,7 +321,7 @@ void terrain::doTexture(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       Square* quad = actualMap->relativeSquare(quadX, quadZ);
       if(quad)
       {
-         quad->textura = actualTexture;
+         quad->texture = actualTexture;
       }
    }
 }

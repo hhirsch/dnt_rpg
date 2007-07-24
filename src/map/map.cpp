@@ -28,13 +28,13 @@ Square::Square()
    mapConection.mapName = "Nothing";
    divisions = 1;
    int aux;
-   for(aux=0;aux<MAXMUROS;aux++)
+   for(aux=0; aux < MAX_WALLS; aux++)
    {
-     muros[aux] = NULL;
+     walls[aux] = NULL;
    }
    objList = NULL;
    totalObjects = 0;
-   return;
+   textureType = SQUARE_TEXTURE_TYPE_NORMAL;
 }
 
 /********************************************************************
@@ -147,19 +147,19 @@ void Square::setDivisions()
 /********************************************************************
  *                             Texture ID                           *
  ********************************************************************/
-int IDTextura(Map* mapa, string textura, GLuint* R, GLuint* G, GLuint* B)
+int IDTextura(Map* mapa, string textureName, GLuint* R, GLuint* G, GLuint* B)
 {
-   /* procura pela textura */
+   /* procura pela texture */
    int aux=0;
-   texture* tex = mapa->Texturas;
-   while(aux < mapa->numtexturas)
+   texture* tex = mapa->textures;
+   while(aux < mapa->numTextures)
    {
-      if(!(tex->nome.compare(textura)) )
+      if(!(tex->name.compare(textureName)) )
       {
          *R = tex->R; *G = tex->G; *B = tex->B;
-         return(tex->indice); //a textura ja esta presente 
+         return(tex->index); //a texture ja esta presente 
       }
-      tex = tex->proximo;
+      tex = tex->next;
       aux++;
    }
    return(-1);
@@ -171,14 +171,14 @@ int IDTextura(Map* mapa, string textura, GLuint* R, GLuint* G, GLuint* B)
 string NomeTextura(Map* mapa, GLuint ID)
 {
    int aux=0;
-   texture* tex = mapa->Texturas;
-   while(aux < mapa->numtexturas)
+   texture* tex = mapa->textures;
+   while(aux < mapa->numTextures)
    {
-      if(tex->indice == ID)
+      if(tex->index == ID)
       {
-         return(tex->nome);
+         return(tex->name);
       }
-      tex = tex->proximo;
+      tex = tex->next;
       aux++;
    }
    return(NULL);
@@ -187,8 +187,8 @@ string NomeTextura(Map* mapa, GLuint ID)
 /********************************************************************
  *                         Insert texture                           *
  ********************************************************************/
-GLuint InserirTextura(Map* mapa, string arq, string nome, 
-                    GLuint R, GLuint G, GLuint B)
+GLuint InserirTextura(Map* mapa, string arq, string name, 
+                      GLuint R, GLuint G, GLuint B)
 {
    texture* tex;
 
@@ -199,28 +199,28 @@ GLuint InserirTextura(Map* mapa, string arq, string nome,
       return(0);
    }
 
-   /* Insere realmente a textura */ 
+   /* Insere realmente a texture */ 
    tex = new(texture);
-   if(mapa->numtexturas == 0)
+   if(mapa->numTextures == 0)
    {
-      mapa->Texturas = tex;
-      tex->proximo = NULL;
+      mapa->textures = tex;
+      tex->next = NULL;
    }
    else
    {
-      tex->proximo = mapa->Texturas;
-      mapa->Texturas = tex;
+      tex->next = mapa->textures;
+      mapa->textures = tex;
    }
 
-   tex->arqNome = arq.c_str();
-   tex->nome = nome.c_str();
+   tex->fileName = arq.c_str();
+   tex->name = name.c_str();
 
    tex->R = R;
    tex->G = G;
    tex->B = B;
 
-   glGenTextures(1, &(tex->indice));
-   glBindTexture(GL_TEXTURE_2D, tex->indice);
+   glGenTextures(1, &(tex->index));
+   glBindTexture(GL_TEXTURE_2D, tex->index);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h, 
                 0, GL_RGB, GL_UNSIGNED_BYTE, img->pixels);
 
@@ -239,12 +239,12 @@ GLuint InserirTextura(Map* mapa, string arq, string nome,
                      img->h, GL_RGB, GL_UNSIGNED_BYTE, 
                      img->pixels );
 
-   mapa->numtexturas++;
+   mapa->numTextures++;
 
    /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
 
-   return(tex->indice);
+   return(tex->index);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -400,7 +400,7 @@ void drawQuad(GLfloat x1, GLfloat z1,
 int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
               GLfloat matriz[6][4])
 {
-   int textura = -1;
+   int texture = -1;
    int Xaux = 0, Zaux = 0;
 
    int k,l;
@@ -421,9 +421,9 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    }
 
    /* For each square (a square is squarizeble!) */
-   textura = MapSquares[Xaux][Zaux].textura;
+   texture = MapSquares[Xaux][Zaux].texture;
    glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, textura);
+   glBindTexture(GL_TEXTURE_2D, texture);
    
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
                    GL_LINEAR_MIPMAP_LINEAR );
@@ -454,17 +454,17 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       {
          incPos = (GLfloat) SQUARE_SIZE / 
                   (GLfloat)MapSquares[Xaux][Zaux].divisions;
-         if((textura!= -1) && (MapSquares[Xaux][Zaux].textura == -1))
+         if((texture!= -1) && (MapSquares[Xaux][Zaux].texture == -1))
          {
              glDisable(GL_TEXTURE_2D); 
-             textura = -1;
+             texture = -1;
          }
-         else if(textura != MapSquares[Xaux][Zaux].textura)
+         else if(texture != MapSquares[Xaux][Zaux].texture)
          {
             glEnd();
-            textura = MapSquares[Xaux][Zaux].textura;
+            texture = MapSquares[Xaux][Zaux].texture;
             glEnable(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D, textura);
+            glBindTexture(GL_TEXTURE_2D, texture);
             //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap );
@@ -476,14 +476,14 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);*/
             glBegin(GL_QUADS);
          }
-         if( (MapSquares[Xaux][Zaux].visivel) || 
+         if( (MapSquares[Xaux][Zaux].visible) || 
              (quadradoVisivel(MapSquares[Xaux][Zaux].x1,0,
                               MapSquares[Xaux][Zaux].z1,
                               MapSquares[Xaux][Zaux].x2,
-                              ALTURAMAXIMA,
+                              MAX_HEIGHT,
                               MapSquares[Xaux][Zaux].z2, matriz)))
          {
-            MapSquares[Xaux][Zaux].visivel = 1;
+            MapSquares[Xaux][Zaux].visible = 1;
 
             /* Draw the Square as some squares */ 
             for(k = 0; k < MapSquares[Xaux][Zaux].divisions; k++)
@@ -515,7 +515,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
          }
          else
          {
-            MapSquares[Xaux][Zaux].visivel = 0;
+            MapSquares[Xaux][Zaux].visible = 0;
          }
       }
    }
@@ -529,7 +529,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
               GLfloat matriz[6][4], GLfloat perX, GLfloat perZ)
 {
-        int textura = -1;
+        int texture = -1;
         int Xaux = 0, Zaux = 0;
 
         /* Actualize Lights */
@@ -543,9 +543,9 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
         drawFloor( cameraX, cameraY, cameraZ, matriz );
         glDisable(GL_BLEND);
 
-        textura = MapSquares[Xaux][Zaux].textura;
+        texture = MapSquares[Xaux][Zaux].texture;
            glEnable(GL_TEXTURE_2D);
-           glBindTexture(GL_TEXTURE_2D, textura);
+           glBindTexture(GL_TEXTURE_2D, texture);
 
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
@@ -578,32 +578,32 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
                     bool inverted)
 {
    glColor3f(1.0,1.0,1.0);
-   muro* maux = muros;
-   int textura = -1;
+   wall* maux = walls;
+   int texture = -1;
    bool visible = false;
         int fezMeioFio = 0;
-        GLfloat altura = MUROALTURA;
+        GLfloat altura = WALL_HEIGHT;
         if(!maux)
         {
-            maux = meiosFio;
+            maux = curbs;
             fezMeioFio = 1;
-            altura = MEIOFIOALTURA;
+            altura = CURB_HEIGHT;
         }
         glBegin(GL_QUADS);
         while( (maux != NULL) )
         {
            
-           if((textura!= -1) && (maux->textura == -1))
+           if((texture!= -1) && (maux->texture == -1))
            {
                glDisable(GL_TEXTURE_2D); 
-               textura = -1;
+               texture = -1;
            }
-           else if(textura != maux->textura)
+           else if(texture != maux->texture)
            {
               glEnd();
-              textura = maux->textura;
+              texture = maux->texture;
               glEnable(GL_TEXTURE_2D);
-              glBindTexture(GL_TEXTURE_2D, textura);
+              glBindTexture(GL_TEXTURE_2D, texture);
               glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
               glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 
@@ -675,12 +675,12 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
               glTexCoord2f(0,Z);
               glVertex3f(maux->x1,altura,maux->z2);
            }
-           maux = maux->proximo;
+           maux = maux->next;
            if( (!maux) && (!fezMeioFio) )
            {
-               maux = meiosFio;
+               maux = curbs;
                fezMeioFio = 1;
-               altura = MEIOFIOALTURA;
+               altura = CURB_HEIGHT;
            }
         }
         glEnd();
@@ -742,7 +742,7 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
             {
                glPushMatrix();
                 glTranslatef(0.0, getHeight(obj->x,obj->z) +
-                             obj->obj->posicaoLadoY, 0.0);
+                             obj->obj->yPosition, 0.0);
                 obj->obj->draw(obj->x, obj->z, distancia, obj->orientation, 
                                inverted);
                glPopMatrix();
@@ -750,18 +750,18 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
          }
          obj = obj->next;
       }
-      MapSquares[Xaux][Zaux].visivel = 0;
+      MapSquares[Xaux][Zaux].visible = 0;
    }
 
    /* Draw Doors */
-   door* porta = portas;
-   while(porta != NULL)
+   door* door = doors;
+   while(door != NULL)
    {
-      if(porta->obj != NULL)
+      if(door->obj != NULL)
       {
-         porta->obj->draw(porta->x,porta->z,0,porta->orientacao, inverted);
+         door->obj->draw(door->x,door->z,0,door->orientation, inverted);
       }
-      porta = porta->proximo;
+      door = door->next;
    }
 }
 
@@ -770,14 +770,14 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
  ********************************************************************/
 Map::Map(lObject* lObjects)
 {
-   numtexturas = 0;
-   Texturas = NULL;
+   numTextures = 0;
+   textures = NULL;
    name = "oxi!";
    squareInic = NULL;
-   muros = NULL;
-   meiosFio = NULL; 
+   walls = NULL;
+   curbs = NULL; 
    MapSquares = NULL;
-   portas = NULL;
+   doors = NULL;
    music = "";
    npcFileName = "";
    particlesFileName = "";
@@ -1044,9 +1044,9 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    string arqVelho;
    int i;
    int posX,posZ;    //actual position of last active square
-   int IDtexturaAtual = -1;
-   int IDmuroTexturaAtual = -1;
-   string nomeMuroTexturaAtual = "nada";
+   int IDtextureAtual = -1;
+   int IDwallTexturaAtual = -1;
+   string nameMuroTexturaAtual = "nada";
    int pisavel=0;
    GLuint R,G,B;
    GLuint Ratual,Gatual,Batual;
@@ -1091,8 +1091,8 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    //roads = new mapRoad(x, z);
 
    
-   muro* maux = NULL;
-   door* porta = NULL;
+   wall* maux = NULL;
+   door* doorAux = NULL;
 
    posX = -1;
    posZ = 0;
@@ -1132,20 +1132,20 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
          }
          case 'd': /* Define Doors */
          {
-            porta = new(door);
+            doorAux = new(door);
             fgets(buffer, sizeof(buffer),arq);
-            sscanf(buffer,"%s %f,%f:%d",nome,&porta->x,&porta->z,
-                                        &porta->orientacao);
-            porta->obj = objects->getObject(nome);
-            if(porta->obj == NULL)
+            sscanf(buffer,"%s %f,%f:%d",nome,&doorAux->x,&doorAux->z,
+                                        &doorAux->orientation);
+            doorAux->obj = objects->getObject(nome);
+            if(doorAux->obj == NULL)
             {
                printf("Can't Locate Door File: %s\n",nome);
             }
             else
             {
-               porta->status = 0;
-               porta->proximo = portas;
-               portas = porta;
+               doorAux->status = 0;
+               doorAux->next = doors;
+               doors = doorAux;
             }
             break;
          }
@@ -1162,7 +1162,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             {
                case 'u': /* Define Wall */
                {
-                  maux = new(muro);
+                  maux = new(wall);
                   fgets(buffer, sizeof(buffer),arq);
                   sscanf(buffer,"%f,%f,%f,%f:%d,%d,%d",&maux->x1,&maux->z1,
                                               &maux->x2,&maux->z2,
@@ -1180,23 +1180,23 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      maux->z2 = maux->z1;
                      maux->z1 = tmp;
                   }  
-                  maux->proximo = muros;
-                  maux->textura = -1;
-                  muros = maux;
+                  maux->next = walls;
+                  maux->texture = -1;
+                  walls = maux;
                   break;
                }
                case 't': /* Define Wall texture */
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                     nomeMuroTexturaAtual = nome;
-                     IDmuroTexturaAtual = IDTextura(this,nome,&R,&G,&B);
-                  maux->textura = IDmuroTexturaAtual;
+                     nameMuroTexturaAtual = nome;
+                     IDwallTexturaAtual = IDTextura(this,nome,&R,&G,&B);
+                  maux->texture = IDwallTexturaAtual;
                   break;
                }
                case 'e': /* Define Half Wall */
                {
-                  maux = new(muro);
+                  maux = new(wall);
                   fgets(buffer, sizeof(buffer),arq);
                   sscanf(buffer,"%f,%f,%f,%f",&maux->x1,&maux->z1,
                                               &maux->x2,&maux->z2);
@@ -1214,9 +1214,9 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      maux->z2 = maux->z1;
                      maux->z1 = tmp;
                   }  
-                  maux->proximo = meiosFio;
-                  maux->textura = -1;
-                  meiosFio = maux;
+                  maux->next = curbs;
+                  maux->texture = -1;
+                  curbs = maux;
                   break;
                }
             }
@@ -1318,8 +1318,8 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                  IDtexturaAtual = IDTextura(this,nome,&Ratual,&Gatual,&Batual);
-                  MapSquares[posX][posZ].textura = IDtexturaAtual;
+                  IDtextureAtual = IDTextura(this,nome,&Ratual,&Gatual,&Batual);
+                  MapSquares[posX][posZ].texture = IDtextureAtual;
                   MapSquares[posX][posZ].R = Ratual;
                   MapSquares[posX][posZ].G = Gatual;
                   MapSquares[posX][posZ].B = Batual;
@@ -1367,9 +1367,9 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    int ax,az;
    
    /* Now, actualize pointers to the walls */
-   maux = muros;
+   maux = walls;
    int inix,iniz,maxx,maxz;
-   int indiceMuro;
+   int indexMuro;
    Square* aux;
    
    while(maux)
@@ -1382,23 +1382,23 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
       {
           for(az = iniz;az<=maxz;az++)
           {
-              indiceMuro = 0;
+              indexMuro = 0;
               aux = relativeSquare(ax,az);
-              while((aux!=NULL) && (indiceMuro < MAXMUROS) && 
-                    (aux->muros[indiceMuro] != NULL))
+              while((aux!=NULL) && (indexMuro < MAX_WALLS) && 
+                    (aux->walls[indexMuro] != NULL))
               {
-                 indiceMuro++;
+                 indexMuro++;
               }
-              if((aux!=NULL) && (indiceMuro < MAXMUROS))
+              if((aux!=NULL) && (indexMuro < MAX_WALLS))
               {
-                 aux->muros[indiceMuro] = maux;
+                 aux->walls[indexMuro] = maux;
               }
-              else if(indiceMuro >= MAXMUROS)
+              else if(indexMuro >= MAX_WALLS)
                  printf("Quad: %d %d has more walls than permitted: %d\n",ax,az,
-                          indiceMuro);
+                          indexMuro);
           }
       }
-      maux = maux->proximo;
+      maux = maux->next;
    }
 
    return(1);
@@ -1436,8 +1436,8 @@ void Map::newMap(int X, int Z)
    Square* saux;
    x = X;
    z = Z;
-   int IDtextura = InserirTextura(this,
-                                  "../data/texturas/chao_grama2.jpg", 
+   int IDtexture = InserirTextura(this,
+                                  "../data/textures/chao_grama2.jpg", 
                                   "chao_grama2",54,102,49);
 
    for(auxZ = 0; auxZ < z; auxZ++)
@@ -1452,7 +1452,7 @@ void Map::newMap(int X, int Z)
           saux->posX = auxX;
           saux->posZ = auxZ;
           saux->flags = PISAVEL;
-          saux->textura = IDtextura;
+          saux->texture = IDtexture;
           saux->R = 130;
           saux->G = 148;
           saux->B = 96;
@@ -1471,10 +1471,10 @@ void Map::newMap(int X, int Z)
 void Map::optimize()
 {
     /* Verify Wall Superposition */
-    muro* maux = muros;
+    wall* maux = walls;
     while(maux != NULL)
     {
-        muro* maux2 = muros;
+        wall* maux2 = walls;
         while(maux2 !=NULL)
         {
             if(maux != maux2)
@@ -1548,9 +1548,9 @@ void Map::optimize()
                     }
                 }
             }
-            maux2 = maux2->proximo;
+            maux2 = maux2->next;
         }
-        maux = maux->proximo;
+        maux = maux->next;
     }
 
    /* Verify Object Occupied Squares */
@@ -1631,43 +1631,43 @@ int Map::save(string arquivo)
    }
 
    /* Write used Textures */
-   texture* tex = (texture*)Texturas;
+   texture* tex = (texture*)textures;
    while(tex)
    {
-      fprintf(arq,"t %s %s %d %d %d\n",tex->nome.c_str(),tex->arqNome.c_str(),
+      fprintf(arq,"t %s %s %d %d %d\n",tex->name.c_str(),tex->fileName.c_str(),
                                        tex->R,tex->G,tex->B);
-      tex = (texture*)tex->proximo;
+      tex = (texture*)tex->next;
    }
 
    /* Write Doors */
-   door* porta = (door*)portas;
-   while(porta != NULL)
+   door* doorAux = (door*)doors;
+   while(doorAux != NULL)
    {
-      fprintf(arq,"d %s %f,%f:%d\n",porta->obj->getFileName().c_str(),
-                                    porta->x,porta->z,
-                                    porta->orientacao);
-      porta = porta->proximo;
+      fprintf(arq,"d %s %f,%f:%d\n",doorAux->obj->getFileName().c_str(),
+                                    doorAux->x,doorAux->z,
+                                    doorAux->orientation);
+      doorAux = doorAux->next;
    }
    
    /* Write Walls */
-   muro* maux = (muro*)muros;
+   wall* maux = (wall*)walls;
    int x1,z1,x2,z2;
    while(maux)
    {
-      fprintf(arq,"muro %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
+      fprintf(arq,"wall %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
                                                 maux->z2,maux->dX,maux->dY,
                                                 maux->dZ);
-      fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura).c_str());
-      maux = (muro*)maux->proximo;
+      fprintf(arq,"mt %s\n",NomeTextura(this, maux->texture).c_str());
+      maux = (wall*)maux->next;
    }
 
    /* Write Half Walls */
-   maux = (muro*)meiosFio;
+   maux = (wall*)curbs;
    while(maux)
    {
       fprintf(arq,"meioFio %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
-      fprintf(arq,"mt %s\n",NomeTextura(this, maux->textura).c_str());
-      maux = (muro*)maux->proximo;
+      fprintf(arq,"mt %s\n",NomeTextura(this, maux->texture).c_str());
+      maux = (wall*)maux->next;
    }
 
  
@@ -1684,7 +1684,7 @@ int Map::save(string arquivo)
                   MapSquares[x1][z1].h3,
                   MapSquares[x1][z1].h4);
           fprintf(arq,"ut %s\n",NomeTextura(this, 
-                      MapSquares[x1][z1].textura).c_str());
+                      MapSquares[x1][z1].texture).c_str());
           if( MapSquares[x1][z1].mapConection.active )
           {
               fprintf(arq,"uc %f,%f,%f,%f:%s\n",
@@ -1725,35 +1725,35 @@ int Map::save(string arquivo)
 Map::~Map()
 {
    /* Delete All Textures */
-   texture* tex = Texturas;
+   texture* tex = textures;
    texture* au;
    int i;
-   for(i=0;i<numtexturas;i++)
+   for(i=0;i<numTextures;i++)
    {
       au = tex;
-      tex = tex->proximo;
-      glDeleteTextures(1,&(au->indice));
+      tex = tex->next;
+      glDeleteTextures(1,&(au->index));
       delete(au);
    }
    
    /* Delete all Walls */
-   muro* m = muros;
-   muro* am =NULL;
+   wall* m = walls;
+   wall* am =NULL;
    while(m)
    {
       am = m;
-      m = m->proximo;
+      m = m->next;
       delete(am);
    }
 
    /* Deleting wall Doors */
-   door* porta = portas;
-   door* auxporta =NULL;
-   while(porta)
+   door* door1 = doors;
+   door* door2 =NULL;
+   while(door1)
    {
-      auxporta = porta;
-      porta = porta->proximo;
-      delete(auxporta);
+      door2 = door1;
+      door1 = door1->next;
+      delete(door2);
    }
 
    objects = NULL;
@@ -1819,7 +1819,7 @@ void Map::drawMinimap(SDL_Surface* img)
    color_Set(1, 1, 1);
    rectangle_2Colors(img,0,0,sX*SQUAREMINISIZE-1,sZ*SQUAREMINISIZE-1,0,0,0);
    
-   muro* maux = muros;
+   wall* maux = walls;
    while(maux!=NULL)
    {
       //FIXME walls values when outdoor!
@@ -1833,7 +1833,7 @@ void Map::drawMinimap(SDL_Surface* img)
           y2 = y1;
        color_Set(255,40,30);
        line_Draw(img, x1,y1,x2,y2);
-       maux = maux->proximo;
+       maux = maux->next;
    }
 
 }

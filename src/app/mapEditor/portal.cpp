@@ -106,7 +106,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
    else if( (tool == TOOL_PORTAL_DOOR) && (actualDoor))
    {
       //Pega Muro Mais Proximo
-      muro* m = actualMap->muros;
+      wall* m = actualMap->walls;
       doorWall = m;
 
       if(!doorWall)
@@ -129,7 +129,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
               doorWall = m;
            }
 
-           m = m->proximo;
+           m = m->next;
       }
 
       //Coloca X ou Z da porta fixo nele
@@ -189,12 +189,12 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          mx2 = doorWall->x2;
          mz1 = doorWall->z1;
          mz2 = doorWall->z2;
-         muro* novoMuro;
-         novoMuro = new(muro);
+         wall* novoMuro;
+         novoMuro = new(wall);
          novoMuro->dX = doorWall->dX;
          novoMuro->dY = doorWall->dY;
          novoMuro->dZ = doorWall->dZ;
-         muro* maux;
+         wall* maux;
          //GLMmodel* modelo = (GLMmodel*)actualDoor->modelo3d;
          boundingBox bounds = actualDoor->getBoundingBox();
          if( doorOrientation == 0 )
@@ -213,10 +213,10 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
             novoMuro->x1 = mx1;
             novoMuro->z2 = mz2;
          }
-         novoMuro->textura = doorWall->textura;
-         maux = actualMap->muros;
-         actualMap->muros = novoMuro;
-         novoMuro->proximo = maux;
+         novoMuro->texture = doorWall->texture;
+         maux = actualMap->walls;
+         actualMap->walls = novoMuro;
+         novoMuro->next = maux;
          
          //Coloca a Porta no Mapa
          /*inserirObjetoMapa(doorX, doorZ, doorOrientation, porta, 
@@ -225,12 +225,12 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          door* novaPorta = new(door);
          novaPorta->x = doorX;
          novaPorta->z = doorZ;
-         novaPorta->orientacao = doorOrientation;
+         novaPorta->orientation = doorOrientation;
          novaPorta->obj = actualDoor;
-         door* paux = actualMap->portas;
-         paux = actualMap->portas;
-         actualMap->portas = novaPorta;
-         novaPorta->proximo = paux;
+         door* paux = actualMap->doors;
+         paux = actualMap->doors;
+         actualMap->doors = novaPorta;
+         novaPorta->next = paux;
          printf("Added Door: %.3f %.3f\n",doorX,doorZ);
          while(mButton & SDL_BUTTON(1))
          {
