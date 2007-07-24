@@ -403,19 +403,31 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    int textura = -1;
    int Xaux = 0, Zaux = 0;
 
-   GLint wrap = GL_REPEAT;
-
-   /* For each square (a square is squarizeble!) */
    int k,l;
    GLfloat texX, texZ;
    GLfloat pX1, pX2, pZ1, pZ2, incPos, incTex;
 
+   GLint wrap = GL_REPEAT;
+
+   if(isOutdoor())
+   {
+      wrap = GL_REPEAT;
+      incTex = (TEXTURE_REPEATS / MapSquares[Xaux][Zaux].divisions);
+   }
+   else
+   {
+      wrap = GL_REPEAT;
+      incTex = (TEXTURE_REPEATS / MapSquares[Xaux][Zaux].divisions);
+   }
+
+   /* For each square (a square is squarizeble!) */
    textura = MapSquares[Xaux][Zaux].textura;
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, textura);
    
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
                    GL_LINEAR_MIPMAP_LINEAR );
+   glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
@@ -425,13 +437,13 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
      if(outdoor)
      {
         glNormal3f(0,1,0);
-        glTexCoord2f(0.0,0.0);
+        glTexCoord2d(0,0);
         glVertex3f(-FARVIEW,-1,-FARVIEW);
-        glTexCoord2f(0.0,1.0);
+        glTexCoord2d(0,1);
         glVertex3f(-FARVIEW,-1,(z*SQUARE_SIZE)+FARVIEW);
-        glTexCoord2f(1.0,1.0);
+        glTexCoord2d(1,1);
         glVertex3f((x*SQUARE_SIZE)+FARVIEW,-1,(z*SQUARE_SIZE)+FARVIEW);
-        glTexCoord2f(1.0,0.0);
+        glTexCoord2d(1,0);
         glVertex3f((x*SQUARE_SIZE)+FARVIEW,-1,-FARVIEW);
         glColor3f(1.0,1.0,1.0);
      }
@@ -440,16 +452,6 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    {
       for(Zaux = 0; Zaux < z; Zaux++)
       {
-         if(isOutdoor())
-         {
-            wrap = GL_CLAMP;
-            incTex = (1.0 / MapSquares[Xaux][Zaux].divisions);
-         }
-         else
-         {
-            wrap = GL_REPEAT;
-            incTex = (TEXTURE_REPEATS / MapSquares[Xaux][Zaux].divisions);
-         }
          incPos = (GLfloat) SQUARE_SIZE / 
                   (GLfloat)MapSquares[Xaux][Zaux].divisions;
          if((textura!= -1) && (MapSquares[Xaux][Zaux].textura == -1))

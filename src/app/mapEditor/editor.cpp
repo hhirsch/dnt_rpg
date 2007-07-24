@@ -1,4 +1,5 @@
 #include "editor.h"
+#include "../../etc/extensions.h"
 #include "../../lang/lang.h"
 
 /*********************************************************************
@@ -14,6 +15,10 @@ editor::editor()
                                        "../data/feats/feats.ftl");
    Farso_Init(&screen,"DccNiTghtmare Map Editor 0.1");
    init();
+
+   /* Load Extensions */
+   extensions ext;
+   ext.defineAllExtensions();
 
    /* Load Language's files */
    lang language;

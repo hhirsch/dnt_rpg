@@ -6,6 +6,8 @@
 #include <string>
 using namespace std;
 
+#include "../etc/extensions.h"
+
 #define PARTICLE_STATUS_DEAD   0  /**< Say that a particle is dead */
 #define PARTICLE_STATUS_ALIVE  1  /**< Say that a particle is alive */
 #define PARTICLE_STATUS_STATIC 2  /**< Says a particle don't change anymore */
@@ -143,10 +145,6 @@ class particleSystem
 
       int getMaxParticles(){return(maxParticles);};
       
-
-   PFNGLPOINTPARAMETERFARBPROC PointParameterf; /**< OpenGL extended function*/  
-   PFNGLPOINTPARAMETERFVARBPROC PointParameterfv;/**< OpenGL extended function*/
-
    protected:
 
       string strFileName;      /**< Name of the File */
@@ -188,6 +186,8 @@ class particleSystem
       float dSumVel[3];        /**< Sum Values to Actual Velocity */
 
       particle* particles;     /**< Internal Particles Vector */
+
+      extensions ext;          /**< The OpenGL Extensions */
 
 
       /*!

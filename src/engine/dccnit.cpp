@@ -8,7 +8,7 @@
 #include "../lang/lang.h"
 #include <math.h>
 #include <SDL/SDL_image.h>
-#include "../etc/glm.h"
+#include "../etc/extensions.h"
 
 
 /*********************************************************************
@@ -52,6 +52,10 @@ engine::engine()
 
    /* Set Camera, based on options */
    gameCamera.defineCameraType(option->cameraNumber);
+
+   /* Define all OpenGL Extensions used */
+   extensions ext;
+   ext.defineAllExtensions();
 
    /* Load Skills List */
    skillsList = new skills(language.SKILLS_DIR.c_str(),
