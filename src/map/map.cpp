@@ -278,11 +278,6 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
            {
               if(obj->obj->getName() == fileName)
               {
-                 if(obj->draw)
-                 {
-                    /* Dec the used Flag */
-                    obj->obj->decUsedFlag();
-                 }
                  MapSquares[Xaux][Zaux].removeObject(obj);
               }
            }
