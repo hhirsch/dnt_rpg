@@ -437,6 +437,25 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    texture* tex;
    glEnableClientState(GL_VERTEX_ARRAY);
    glVertexPointer(3, GL_FLOAT, 0, vertexBuffer);
+
+
+   /* First Draw with the common texture. */
+   glTexCoordPointer(2, GL_FLOAT, 0, uvBuffer);
+   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+   glBindTexture(GL_TEXTURE_2D, commonTexture);
+   glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+                         GL_LINEAR_MIPMAP_LINEAR );
+   glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+   glEnable(GL_TEXTURE_2D);
+   glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
+   glDisable(GL_TEXTURE_2D);
+   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+   /* Next, define and draww all textures, with multitexture.
+    * \FIXME -> when no multitexture is avaible! */
    if(ext.ARBActiveTexture != NULL)
    { 
       ext.ARBClientActiveTexture(GL_TEXTURE0_ARB);
@@ -450,7 +469,8 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    tex = textures;
    while(aux < numTextures)
    {
-      if(ext.ARBActiveTexture != NULL)
+      /* Only Draw texture with floor count > 0 */
+      if( (ext.ARBActiveTexture != NULL) && (tex->count > 0))
       {
          glEnable(GL_BLEND);
          glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -497,12 +517,6 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
          glDisable(GL_BLEND);
       }
-      else
-      {
-         /* Draw The Array, without textures... FIXME */
-         glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
-      }
-
       tex = tex->next;
       aux++;
    }
@@ -552,19 +566,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
    glBegin(GL_QUADS);
      /* Draw at horizon */
-     if(outdoor)
-     {
-        glNormal3f(0,1,0);
-        glTexCoord2d(0,0);
-        glVertex3f(-FARVIEW,-1,-FARVIEW);
-        glTexCoord2d(0,1);
-        glVertex3f(-FARVIEW,-1,(z*SQUARE_SIZE)+FARVIEW);
-        glTexCoord2d(1,1);
-        glVertex3f((x*SQUARE_SIZE)+FARVIEW,-1,(z*SQUARE_SIZE)+FARVIEW);
-        glTexCoord2d(1,0);
-        glVertex3f((x*SQUARE_SIZE)+FARVIEW,-1,-FARVIEW);
-        glColor3f(1.0,1.0,1.0);
-     }
+     
 
    for(Xaux = 0; Xaux < x; Xaux++)
    {
@@ -656,11 +658,11 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
         glEnable(GL_COLOR_MATERIAL);
 
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glColor4f(1.0, 1.0, 1.0, 0.9);
+        //glEnable(GL_BLEND);
+        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glColor4f(1.0, 1.0, 1.0, 1.0);
         drawFloor( cameraX, cameraY, cameraZ, matriz );
-        glDisable(GL_BLEND);
+        //glDisable(GL_BLEND);
 
         texture = MapSquares[Xaux][Zaux].texture;
            glEnable(GL_TEXTURE_2D);
@@ -907,6 +909,7 @@ Map::Map(lObject* lObjects)
    vertexBuffer = NULL;
    uvBuffer = NULL;
    uvAlphaBuffer = NULL;
+   commonTexture = 0;
    
    /* Initialize Structs */
    objects = lObjects;
@@ -2071,6 +2074,7 @@ void Map::createSplats()
   }
 
    actualizeAlphaTextures();
+   defineCommonTexture();
 }
 
 /********************************************************************
@@ -2200,5 +2204,39 @@ void Map::actualizeAlphaTextures()
       aux++;
    }
    SDL_FreeSurface(img);
+}
+
+/********************************************************************
+ *                        defineCommonTexture                       *
+ ********************************************************************/
+void Map::defineCommonTexture()
+{
+   texture* actualCommon = textures;
+   /* Zero the Count of each texture */
+   int x1,z1,aux = 0;
+   texture* tex = textures;
+   while(aux < numTextures)
+   {
+      tex->count = 0;
+      tex = tex->next;
+      aux++;
+   }
+
+   /* Count the use of each texture */
+   for(x1=0;x1<x;x1++)
+   {
+      for(z1=0;z1<z;z1++)
+      {
+         tex = getTexture(MapSquares[x1][z1].texture);
+         tex->count++;
+         if(tex->count > actualCommon->count)
+         {
+            actualCommon = tex;
+         }
+      }
+   }
+
+   /* Get the most common texture */
+   commonTexture = tex->index;
 }
 
