@@ -537,8 +537,6 @@ int editor::nextTexture()
  ************************************************************************/
 int editor::insertTexture()
 {
-   texture* tex;
-
    SDL_Surface* img = IMG_Load(gui->getTextureFileName().c_str());
    if(!img)
    {
@@ -546,66 +544,34 @@ int editor::insertTexture()
       return(-1);
    }
 
-   /* Insere realmente a texture */ 
-   tex = (texture*) new(texture);
-   if(map->numTextures == 0)
-   {
-      map->textures = tex;
-      tex->next = NULL;
-   }
-   else
-   {
-      tex->next = map->textures;
-      map->textures = tex;
-   }
-
-   tex->fileName = gui->getTextureFileName();
-   tex->name = gui->getTextureFileName();
-
-   SDL_Surface *imgPotencia = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       img->w,img->h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   SDL_BlitSurface(img,NULL,imgPotencia,NULL);
- 
-   Uint8 R,G,B;
+   Uint8 R,G,B,tR,tG,tB;
    
-   Uint32 pixel = pixel_Get(imgPotencia,0,0);
-   SDL_GetRGB(pixel,imgPotencia->format, &R, &G, &B);
-   tex->R = R;
-   tex->G = G;
-   tex->B = B;
+   Uint32 pixel = pixel_Get(img,0,0);
+   SDL_GetRGB(pixel,img->format, &R, &G, &B);
+   tR = R;
+   tG = G;
+   tB = B;
 
    int x, y;
    /* Get the Medium Color Value of the texture */
-   for(x=0;x < imgPotencia->w; x++)
+   for(x=0;x < img->w; x++)
    {
-      for(y=0; y < imgPotencia->h; y++)
+      for(y=0; y < img->h; y++)
       {
-         pixel = pixel_Get(imgPotencia,x,y);
-         SDL_GetRGB(pixel,imgPotencia->format, &R, &G, &B);
-         tex->R = (tex->R+R) / 2;
-         tex->G = (tex->G+G) / 2;
-         tex->B = (tex->B+B) / 2;
+         pixel = pixel_Get(img,x,y);
+         SDL_GetRGB(pixel,img->format, &R, &G, &B);
+         tR = (tR+R) / 2;
+         tG = (tG+G) / 2;
+         tB = (tB+B) / 2;
       }
    }
 
-   glGenTextures(1, &(tex->index));
-   glBindTexture(GL_TEXTURE_2D, tex->index);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,imgPotencia->w,imgPotencia->h, 
-                0, GL_RGBA, GL_UNSIGNED_BYTE, imgPotencia->pixels);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   map->numTextures++;
-
-   string tmp;
-   tmp = "Inserted Texture:";
-   tmp += gui->getTextureFileName();
-   gui->showMessage(tmp);
-
-   /* Libera a memoria utilizada */
    SDL_FreeSurface(img);
-   SDL_FreeSurface(imgPotencia);
-   return(tex->index);
+
+   return(map->insertTexture(gui->getTextureFileName(),
+                             gui->getTextureFileName(), tR, tG, tB));
+
+   
 }
 
 /*********************************************************************

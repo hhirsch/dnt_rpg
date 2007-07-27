@@ -6,6 +6,7 @@
 #include "../engine/culling.h"
 #include "../etc/glm.h"
 #include "../engine/util.h"
+#include "../etc/extensions.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,7 +35,6 @@ Square::Square()
    }
    objList = NULL;
    totalObjects = 0;
-   textureType = SQUARE_TEXTURE_TYPE_NORMAL;
 }
 
 /********************************************************************
@@ -135,9 +135,11 @@ int Square::getTotalObjects()
  ********************************************************************/
 void Square::setDivisions()
 {
-   divisions = (int) (( fabs(h4-h1) + fabs(h4-h2) + fabs(h4-h1) +
+   /*divisions = (int) (( fabs(h4-h1) + fabs(h4-h2) + fabs(h4-h1) +
                         fabs(h3-h1) + fabs(h3-h2) + fabs(h2-h1)) /
                        SQUARE_DIVISIONS_INC) + 1;
+   */
+   divisions = 1;
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -147,12 +149,12 @@ void Square::setDivisions()
 /********************************************************************
  *                             Texture ID                           *
  ********************************************************************/
-int IDTextura(Map* mapa, string textureName, GLuint* R, GLuint* G, GLuint* B)
+int Map::getTextureID(string textureName, GLuint* R, GLuint* G, GLuint* B)
 {
    /* procura pela texture */
    int aux=0;
-   texture* tex = mapa->textures;
-   while(aux < mapa->numTextures)
+   texture* tex = textures;
+   while(aux < numTextures)
    {
       if(!(tex->name.compare(textureName)) )
       {
@@ -168,11 +170,11 @@ int IDTextura(Map* mapa, string textureName, GLuint* R, GLuint* G, GLuint* B)
 /*********************************************************************
  *                   Returns texture's name                          *
  *********************************************************************/
-string NomeTextura(Map* mapa, GLuint ID)
+string Map::getTextureName(GLuint ID)
 {
    int aux=0;
-   texture* tex = mapa->textures;
-   while(aux < mapa->numTextures)
+   texture* tex = textures;
+   while(aux < numTextures)
    {
       if(tex->index == ID)
       {
@@ -184,14 +186,34 @@ string NomeTextura(Map* mapa, GLuint ID)
    return(NULL);
 }
 
+/*********************************************************************
+ *                      Returns texture                              *
+ *********************************************************************/
+texture* Map::getTexture(GLuint id)
+{
+   int aux=0;
+   texture* tex = textures;
+   while(aux < numTextures)
+   {
+      if(tex->index == id)
+      {
+         return(tex);
+      }
+      tex = tex->next;
+      aux++;
+   }
+   return(NULL);
+}
+
 /********************************************************************
  *                         Insert texture                           *
  ********************************************************************/
-GLuint InserirTextura(Map* mapa, string arq, string name, 
-                      GLuint R, GLuint G, GLuint B)
+GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
 {
    texture* tex;
+   int aux;
 
+   /* Load Texture Images */
    SDL_Surface* img = IMG_Load(arq.c_str());
    if(!img)
    {
@@ -199,17 +221,17 @@ GLuint InserirTextura(Map* mapa, string arq, string name,
       return(0);
    }
 
-   /* Insere realmente a texture */ 
+   /* Create the Texture Structs */ 
    tex = new(texture);
-   if(mapa->numTextures == 0)
+   if(numTextures == 0)
    {
-      mapa->textures = tex;
+      textures = tex;
       tex->next = NULL;
    }
    else
    {
-      tex->next = mapa->textures;
-      mapa->textures = tex;
+      tex->next = textures;
+      textures = tex;
    }
 
    tex->fileName = arq.c_str();
@@ -219,6 +241,16 @@ GLuint InserirTextura(Map* mapa, string arq, string name,
    tex->G = G;
    tex->B = B;
 
+   tex->definedAlpha = false;
+
+   /* Alloc the alpha values */
+   tex->alphaValues = new float*[getSizeX()*ALPHA_TEXTURE_INC];
+   for(aux = 0; aux < (getSizeX()*ALPHA_TEXTURE_INC); aux++)
+   {
+      tex->alphaValues[aux] = new float[getSizeZ() * ALPHA_TEXTURE_INC];
+   }
+
+   /* Generate the openGL texture */
    glGenTextures(1, &(tex->index));
    glBindTexture(GL_TEXTURE_2D, tex->index);
    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h, 
@@ -239,9 +271,9 @@ GLuint InserirTextura(Map* mapa, string arq, string name,
                      img->h, GL_RGB, GL_UNSIGNED_BYTE, 
                      img->pixels );
 
-   mapa->numTextures++;
+   numTextures++;
 
-   /* Libera a memoria utilizada */
+   /* Free the image */
    SDL_FreeSurface(img);
 
    return(tex->index);
@@ -400,6 +432,90 @@ void drawQuad(GLfloat x1, GLfloat z1,
 int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
               GLfloat matriz[6][4])
 {
+   extensions ext;
+   int aux = 0;
+   texture* tex;
+   glEnableClientState(GL_VERTEX_ARRAY);
+   glVertexPointer(3, GL_FLOAT, 0, vertexBuffer);
+   if(ext.ARBActiveTexture != NULL)
+   { 
+      ext.ARBClientActiveTexture(GL_TEXTURE0_ARB);
+      glTexCoordPointer(2, GL_FLOAT, 0, uvAlphaBuffer);
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+      ext.ARBClientActiveTexture(GL_TEXTURE1_ARB);
+      glTexCoordPointer(2, GL_FLOAT, 0, uvBuffer);
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+   }
+
+   tex = textures;
+   while(aux < numTextures)
+   {
+      if(ext.ARBActiveTexture != NULL)
+      {
+         glEnable(GL_BLEND);
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+         /* Bind the Alpha Texture */
+         ext.ARBActiveTexture(GL_TEXTURE0);
+         glBindTexture(GL_TEXTURE_2D, tex->alphaTexture);
+         /*glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_ALPHA_ARB, GL_TEXTURE0);
+         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_ALPHA_ARB, GL_SRC_ALPHA);*/
+         glEnable(GL_TEXTURE_2D);
+
+         /* Bind the Texture */ 
+         ext.ARBActiveTexture(GL_TEXTURE1);
+         glBindTexture(GL_TEXTURE_2D, tex->index);
+         /*glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+         glTexEnvf(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
+         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_TEXTURE1);
+         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
+         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE1_RGB_ARB, GL_TEXTURE1);
+         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND1_RGB_ARB, GL_SRC_COLOR);
+         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_ALPHA_ARB, GL_PREVIOUS);
+         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_ALPHA_ARB, GL_SRC_ALPHA);
+         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE1_ALPHA_ARB, GL_PREVIOUS);
+         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND1_ALPHA_ARB, GL_SRC_ALPHA);
+         glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+                         GL_LINEAR_MIPMAP_LINEAR );
+         glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);*/
+         glEnable(GL_TEXTURE_2D);
+         
+         /* Draw The Array */
+         glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
+         
+         ext.ARBActiveTexture(GL_TEXTURE1_ARB);
+      	glDisable(GL_TEXTURE_2D);
+
+      	ext.ARBActiveTexture(GL_TEXTURE0_ARB);
+      	glDisable(GL_TEXTURE_2D);
+
+         glDisable(GL_BLEND);
+      }
+      else
+      {
+         /* Draw The Array, without textures... FIXME */
+         glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
+      }
+
+      tex = tex->next;
+      aux++;
+   }
+
+   if(ext.ARBActiveTexture != NULL)
+   { 
+      ext.ARBClientActiveTexture(GL_TEXTURE1_ARB);
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+      ext.ARBClientActiveTexture(GL_TEXTURE0_ARB);
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+   }
+
+   glDisableClientState(GL_VERTEX_ARRAY);
+
+#if 0
    int texture = -1;
    int Xaux = 0, Zaux = 0;
 
@@ -520,6 +636,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       }
    }
    glEnd();
+#endif
    return(1);
 }
 
@@ -783,6 +900,11 @@ Map::Map(lObject* lObjects)
    particlesFileName = "";
    outdoor = false;
    MapSquares = NULL;
+
+   totalVertex = 0;
+   vertexBuffer = NULL;
+   uvBuffer = NULL;
+   uvAlphaBuffer = NULL;
    
    /* Initialize Structs */
    objects = lObjects;
@@ -1087,6 +1209,11 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
       MapSquares[i] = new Square[z];
    } 
 
+   /* Alloc Draw Buffers */
+   vertexBuffer = new float[x*z*12];
+   uvBuffer = new float[x*z*8];
+   uvAlphaBuffer = new float[x*z*8];
+
    /* Alloc Roads Struct */
    //roads = new mapRoad(x, z);
 
@@ -1190,7 +1317,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
                      nameMuroTexturaAtual = nome;
-                     IDwallTexturaAtual = IDTextura(this,nome,&R,&G,&B);
+                     IDwallTexturaAtual = getTextureID(nome,&R,&G,&B);
                   maux->texture = IDwallTexturaAtual;
                   break;
                }
@@ -1253,7 +1380,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
          {
             fgets(buffer, sizeof(buffer), arq);
             sscanf(buffer, "%s %s %d %d %d",nome,nomeArq,&R,&G,&B);  
-            InserirTextura(this,nomeArq, nome,R,G,B);
+            insertTexture(nomeArq,nome,R,G,B);
             break;
          }
          case 'p': /* Insert new square */
@@ -1318,7 +1445,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                  IDtextureAtual = IDTextura(this,nome,&Ratual,&Gatual,&Batual);
+                  IDtextureAtual = getTextureID(nome,&Ratual,&Gatual,&Batual);
                   MapSquares[posX][posZ].texture = IDtextureAtual;
                   MapSquares[posX][posZ].R = Ratual;
                   MapSquares[posX][posZ].G = Gatual;
@@ -1401,6 +1528,9 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
       maux = maux->next;
    }
 
+   /* And create the splats */
+   createSplats();
+
    return(1);
 }
 
@@ -1422,23 +1552,22 @@ void Map::newMap(int X, int Z)
       MapSquares[i] = new Square[Z];//(Square**) malloc(Z*sizeof(Square*));
    } 
 
-   /*for(auxX = 0; auxX < X; auxX++)
-   {
-      for(auxZ = 0; auxZ < Z; auxZ++)
-      {
-         MapSquares[auxX][auxZ] = new(Square);
-      }
-   }*/
-
    //roads = new mapRoad(X, Z);
 
    
    Square* saux;
    x = X;
    z = Z;
-   int IDtexture = InserirTextura(this,
-                                  "../data/textures/chao_grama2.jpg", 
-                                  "chao_grama2",54,102,49);
+
+   /* Alloc Draw Buffers */
+   vertexBuffer = new float[x*z*12];
+   uvBuffer = new float[x*z*8];
+   uvAlphaBuffer = new float[x*z*8];
+
+
+   /* add a first default texture */
+   int IDtexture = insertTexture("../data/texturas/chao_grama2.jpg", 
+                                 "../data/texturas/chao_grama2.jpg",54,102,49);
 
    for(auxZ = 0; auxZ < z; auxZ++)
    {
@@ -1462,6 +1591,10 @@ void Map::newMap(int X, int Z)
    xInic = 1*SQUARE_SIZE;
    zInic = 1*SQUARE_SIZE;
    squareInic = relativeSquare(0,0);
+
+   /* And create the splats */
+   createSplats();
+
 }
 
 
@@ -1657,7 +1790,7 @@ int Map::save(string arquivo)
       fprintf(arq,"wall %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
                                                 maux->z2,maux->dX,maux->dY,
                                                 maux->dZ);
-      fprintf(arq,"mt %s\n",NomeTextura(this, maux->texture).c_str());
+      fprintf(arq,"mt %s\n",getTextureName(maux->texture).c_str());
       maux = (wall*)maux->next;
    }
 
@@ -1666,7 +1799,7 @@ int Map::save(string arquivo)
    while(maux)
    {
       fprintf(arq,"meioFio %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
-      fprintf(arq,"mt %s\n",NomeTextura(this, maux->texture).c_str());
+      fprintf(arq,"mt %s\n",getTextureName(maux->texture).c_str());
       maux = (wall*)maux->next;
    }
 
@@ -1683,8 +1816,8 @@ int Map::save(string arquivo)
                   MapSquares[x1][z1].h2,
                   MapSquares[x1][z1].h3,
                   MapSquares[x1][z1].h4);
-          fprintf(arq,"ut %s\n",NomeTextura(this, 
-                      MapSquares[x1][z1].texture).c_str());
+          fprintf(arq,"ut %s\n",
+                  getTextureName(MapSquares[x1][z1].texture).c_str());
           if( MapSquares[x1][z1].mapConection.active )
           {
               fprintf(arq,"uc %f,%f,%f,%f:%s\n",
@@ -1728,11 +1861,29 @@ Map::~Map()
    texture* tex = textures;
    texture* au;
    int i;
+   int aux;
    for(i=0;i<numTextures;i++)
    {
       au = tex;
       tex = tex->next;
+
+      /* Delete the OpenGL Texture */
       glDeleteTextures(1,&(au->index));
+
+      /* Delete the alpha Texture */
+      if(au->definedAlpha)
+      {
+         glDeleteTextures(1,&(au->alphaTexture));
+      }
+
+      /* Delete the Alpha Matrix */
+      for(aux = 0; aux < (x*ALPHA_TEXTURE_INC); aux++)
+      {
+         delete[] (au->alphaValues[aux]);
+      }
+      delete[] au->alphaValues;
+
+      /* Delete the texture struct */
       delete(au);
    }
    
@@ -1756,7 +1907,23 @@ Map::~Map()
       delete(door2);
    }
 
+   /* Delete all Buffers */
+   if(vertexBuffer != NULL)
+   {
+      delete[] vertexBuffer;
+   }
+   if(uvBuffer != NULL)
+   {
+      delete[] uvBuffer;
+   }
+   if(uvAlphaBuffer != NULL)
+   {
+      delete[] uvAlphaBuffer;
+   }
+
+   /* Unselect the objects list */
    objects = NULL;
+
    /* Deleting all squares */
    int x1;
    for(x1 = 0; x1<x;x1++)
@@ -1836,5 +2003,200 @@ void Map::drawMinimap(SDL_Surface* img)
        maux = maux->next;
    }
 
+}
+
+/********************************************************************
+ *                              createSplats                        *
+ ********************************************************************/
+void Map::createSplats()
+{
+   int x1, z1;
+   int actualTexture = 0;
+   float alphaCoordX = 0;
+   float alphaCoordZ = 0;
+   float modX = smallestPowerOfTwo(x*ALPHA_TEXTURE_INC);
+   float modZ = smallestPowerOfTwo(z*ALPHA_TEXTURE_INC);
+
+   /* Reinit the vertex buffer */
+   totalVertex = 0;
+
+   /* Create the Buffers */
+   for(z1=0;z1<z;z1++)
+   {
+      alphaCoordX = 0;
+      for(x1=0;x1<x;x1++)
+      {
+         uvBuffer[actualTexture] = 0.0;
+         uvBuffer[actualTexture+1] = 0.0;
+         uvAlphaBuffer[actualTexture] = alphaCoordX / modX;
+         uvAlphaBuffer[actualTexture+1] = alphaCoordZ / modZ;
+         vertexBuffer[totalVertex] = MapSquares[x1][z1].x1;
+         vertexBuffer[totalVertex+1] = MapSquares[x1][z1].h1;
+         vertexBuffer[totalVertex+2] = MapSquares[x1][z1].z1;
+
+         uvBuffer[actualTexture+2] = 0.0;
+         uvBuffer[actualTexture+3] = TEXTURE_REPEATS;
+         uvAlphaBuffer[actualTexture+2] = alphaCoordX / modX;
+         uvAlphaBuffer[actualTexture+3] = (alphaCoordZ+ALPHA_TEXTURE_INC)/modZ;
+         vertexBuffer[totalVertex+3] = MapSquares[x1][z1].x1;
+         vertexBuffer[totalVertex+4] = MapSquares[x1][z1].h2;
+         vertexBuffer[totalVertex+5] = MapSquares[x1][z1].z2;
+
+         uvBuffer[actualTexture+4] = TEXTURE_REPEATS;
+         uvBuffer[actualTexture+5] = TEXTURE_REPEATS;
+         uvAlphaBuffer[actualTexture+4] = (alphaCoordX+ALPHA_TEXTURE_INC)/modX; 
+         uvAlphaBuffer[actualTexture+5] = (alphaCoordZ+ALPHA_TEXTURE_INC)/modZ;
+         vertexBuffer[totalVertex+6] = MapSquares[x1][z1].x2;
+         vertexBuffer[totalVertex+7] = MapSquares[x1][z1].h3;
+         vertexBuffer[totalVertex+8] = MapSquares[x1][z1].z2;
+
+         uvBuffer[actualTexture+6] = TEXTURE_REPEATS;
+         uvBuffer[actualTexture+7] = 0.0;
+         uvAlphaBuffer[actualTexture+6] = (alphaCoordX+ALPHA_TEXTURE_INC)/modX; 
+         uvAlphaBuffer[actualTexture+7] = alphaCoordZ / modZ;
+         vertexBuffer[totalVertex+9] = MapSquares[x1][z1].x2;
+         vertexBuffer[totalVertex+10] = MapSquares[x1][z1].h4;
+         vertexBuffer[totalVertex+11] = MapSquares[x1][z1].z1;
+
+         /* Create The Alphas */
+         createAlpha(x1,z1);
+         
+         totalVertex += 12;
+         actualTexture += 8;
+         alphaCoordX += ALPHA_TEXTURE_INC;
+     }
+     alphaCoordZ += ALPHA_TEXTURE_INC;
+  }
+
+   actualizeAlphaTextures();
+}
+
+/********************************************************************
+ *                            createAlpha                           *
+ ********************************************************************/
+void Map::createAlpha(int x1, int z1)
+{
+   int z2, x2, aux;
+   float total = 0, dist = 0, value = 0;
+   float incCoord = 1.0 / (float)ALPHA_TEXTURE_INC;
+   float actualCoordX = x1, actualCoordZ = z1;
+   int neigX, neigZ;
+   texture* tex;
+
+   for(z2 = z1*ALPHA_TEXTURE_INC; z2 < (z1+1)*ALPHA_TEXTURE_INC; z2++)
+   {
+      actualCoordX = x1;
+      for(x2 = x1*ALPHA_TEXTURE_INC; x2 <(x1+1)*ALPHA_TEXTURE_INC; x2++)
+      {
+         total = 0;
+
+         /* Clear Alpha Values */
+         aux = 0;
+         tex = textures;
+         while(aux < numTextures)
+         {
+            tex->alphaValues[x2][z2] = 0;
+            tex = tex->next;
+            aux++;
+         }
+
+         /* Visit all 8 potential Neighbors */
+         for(neigZ = z1-1; neigZ <= z1+1; neigZ++)
+         {           
+            /* Verify if the Z coordinate is valid */
+            if( (neigZ >= 0) && (neigZ < z) )
+            {
+               for(neigX = x1-1; neigX <= x1+1; neigX++)
+               {
+                  /* Verify if the X coordinate is valid */
+                  if( (neigX >= 0) && (neigX < x) )
+                  {
+                     tex = getTexture(MapSquares[neigX][neigZ].texture);
+                     if(tex)
+                     {
+                        dist = (actualCoordX - neigX)*(actualCoordX - neigX) +
+                               (actualCoordZ - neigZ)*(actualCoordZ - neigZ);
+                        value = 1 - (dist / 3.0625);
+                        if(value < 0)
+                        {
+                           value = 0.0;
+                        }
+                        tex->alphaValues[x2][z2] += value;
+                        total += value;
+                     }
+                  }
+               }
+            }
+         }
+
+         /* Normalize the result */
+         aux = 0;
+         tex = textures;
+         while(aux < numTextures)
+         {
+            tex->alphaValues[x2][z2] = tex->alphaValues[x2][z2] / total;
+            tex = tex->next;
+            aux++;
+         }
+
+         actualCoordX += incCoord;
+      }
+      actualCoordZ += incCoord;
+   }
+}
+
+/********************************************************************
+ *                      actualizeAlphaTextures                      *
+ ********************************************************************/
+void Map::actualizeAlphaTextures()
+{
+   int aux = 0;
+   texture* tex = textures;
+   int x1, z1;
+   SDL_Surface* img = SDL_CreateRGBSurface(SDL_HWSURFACE,
+                                     smallestPowerOfTwo(x*ALPHA_TEXTURE_INC),
+                                     smallestPowerOfTwo(z*ALPHA_TEXTURE_INC),
+                                     32,0x000000FF,0x0000FF00,
+                                     0x00FF0000,0xFF000000);
+
+   char buf[1024];
+   while(aux < numTextures)
+   {
+      if(tex->definedAlpha)
+      {
+         glDeleteTextures(1,&(tex->alphaTexture));
+      }
+      tex->definedAlpha = true;
+
+      /* Define The SDL_Surface */
+      for(x1=0; x1 < x*ALPHA_TEXTURE_INC; x1++)
+      {
+         for(z1=0; z1 < z*ALPHA_TEXTURE_INC; z1++)
+         {
+            pixel_Set(img, x1, z1, 255, 255, 255, 
+                      (int)((tex->alphaValues[x1][z1])*255));
+         }
+      }
+
+      glGenTextures(1, &(tex->alphaTexture));
+      glBindTexture(GL_TEXTURE_2D, tex->alphaTexture);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 
+                   0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+      glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+      glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,  GL_LINEAR);
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+      sprintf(buf,"./alpha%d.bmp",aux);
+      SDL_SaveBMP(img, buf);
+
+
+      tex = tex->next;
+      aux++;
+   }
+   SDL_FreeSurface(img);
 }
 

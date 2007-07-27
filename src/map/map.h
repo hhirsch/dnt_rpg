@@ -16,23 +16,19 @@ using namespace std;
 #define PISAVEL 1   /**< If a Square is walkable or not. */
 
 /* Constraints */
-#define SQUARE_SIZE           256       /**< Size of the Square */
-#define HALF_SQUARE_SIZE      128       /**< Half size of the square */
-#define QUARTER_SQUARE_SIZE    64       /**< Quarter size of the square */
-#define SQUARE_DIAGONAL_SIZE  362.03867 /**< Diagonal size of the square */
-#define MAX_WALLS              15       /**< Max number of walls per square */
-#define WALL_HEIGHT           50        /**< Walls height */
-#define CURB_HEIGHT            2        /**< Curbs height */
-#define MAX_HEIGHT            150       /**< Max square height */
-
-
-#define SQUARE_TEXTURE_TYPE_NORMAL            0  /**< Uses the Texture */
-#define SQUARE_TEXTURE_TYPE_VERTICAL_MERGE    1  /**< Uses a vertical merge */
-#define SQUARE_TEXTURE_TYPE_HORIZONTAL_MERGE  2  /**< Uses an horizontal merge*/
-#define SQUARE_TEXTURE_TYPE_ALL_MERGE         3  /**< Uses all directions */
+#define SQUARE_SIZE          256      /**< Size of the Square */
+#define HALF_SQUARE_SIZE SQUARE_SIZE / 2 /**< Half size of the square */
+#define QUARTER_SQUARE_SIZE SQUARE_SIZE / 4 /**< Quarter size of the square */
+#define SQUARE_DIAGONAL_SIZE SQUARE_SIZE * 1.4142136 /**< Diagonal squaresize */
+#define MAX_WALLS             15       /**< Max number of walls per square */
+#define WALL_HEIGHT           50       /**< Walls height */
+#define CURB_HEIGHT            2       /**< Curbs height */
+#define MAX_HEIGHT           150       /**< Max square height */
 
 #define SQUARE_DIVISIONS_INC  256 /**< Difference heigh to inc the square divisions. */ 
 #define TEXTURE_REPEATS         4 /**< Number of Repeats of indoor texture */ 
+#define ALPHA_TEXTURE_INC       2 /**< Points per square on each alpha texture*/
+
 
 /*!
  ****************************************************
@@ -73,6 +69,9 @@ typedef struct _texture
    GLuint index;             /**< Texture ID */
    GLuint w,h;               /**< Dimmensions */
    GLuint R,G,B;             /**< Colors to MINIMAP */
+   GLuint alphaTexture;      /**< The Alpha Texture */
+   float** alphaValues;      /**< The Alpha Values Matrix */
+   bool definedAlpha;        /**< If the alpha is defined */
    struct _texture* next;    /**< Next on List */
 }texture;
 
@@ -127,7 +126,6 @@ class Square
 
       GLfloat x1,z1,x2,z2;              /**< Coordinates */
       GLfloat h1,h2,h3,h4;              /**< Vertice's Height */
-      int textureType;                  /**< The texture Type */
       int posX, posZ;                   /**< Map positions */
       int flags;                        /**< Condition flag */
       int visible;                      /**< Visible on active frame ? */
@@ -160,7 +158,6 @@ class Square
       int totalObjects;       /**< Total objects on the list */
 
 };
-
 
 /*! Map Class */
 class Map
@@ -432,8 +429,25 @@ class Map
        * Set if the map is outdoor or not  
        * \param val -> true if is outdoor, false if indoor
        ***************************************************************/
-      void setOutdoor(bool val); 
+      void setOutdoor(bool val);
 
+      /*!
+       ***************************************************************
+       * Create all the splats vertexes related to splatting, if map
+       * is outdoor. If is indoor, only create splats to any of the
+       * textures, without merging them with alpha things.
+       ***************************************************************/
+      void createSplats();
+
+      void createAlpha(int x1, int z1);
+
+      void actualizeAlphaTextures();
+
+      int getTextureID(string textureName, GLuint* R, GLuint* G, GLuint* B);
+      string getTextureName(GLuint ID);
+      texture* getTexture(GLuint id);
+      GLuint insertTexture(string arq, string name, 
+                           GLuint R, GLuint G, GLuint B);
 
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
@@ -460,6 +474,11 @@ class Map
          string npcFileName;   /**< Static NPC's on map filename */
          float xInic,            /**< X coordinate where PCs starts */
                zInic;            /**< Z Coordinate where PCs starts */
+
+         float* vertexBuffer;
+         float* uvBuffer;
+         float* uvAlphaBuffer;
+         int totalVertex;
 };
 
 #endif

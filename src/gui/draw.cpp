@@ -36,6 +36,50 @@ void color_Get(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi)
 /******************************************************************
  *                            pixel_Set                           *
  ******************************************************************/
+void pixel_Set(SDL_Surface* screen, int x, int y, 
+               int red, int green, int blue, int alpha)
+{
+   Uint32 color = SDL_MapRGBA(screen->format, red, green, blue, alpha);
+   if((x>screen->w-1) || (y>screen->h-1) || (x<0) || (y<0))
+       return;
+   switch (screen->format->BytesPerPixel) 
+   {
+        case 1: 
+        { /* 8-bpp */
+            Uint8 *bufp;
+            bufp = (Uint8 *)screen->pixels + y*screen->pitch + x;
+            *bufp = color;
+        }
+        break;
+        case 2: 
+        { /* 15-bpp or 16-bpp */
+            Uint16 *bufp;
+            bufp = (Uint16 *)screen->pixels + y*screen->pitch/2 + x;
+            *bufp = color;
+        }
+        break;
+        case 3: 
+        { /* mode 24-bpp lento,normalmente não usado */
+            Uint8 *bufp;
+            bufp = (Uint8 *)screen->pixels + y*screen->pitch + x;
+            *(bufp+screen->format->Rshift/8) = R;
+            *(bufp+screen->format->Gshift/8) = G;
+            *(bufp+screen->format->Bshift/8) = B;
+        }
+        break;
+        case 4: 
+        { /* Provavelmente 32-bpp */
+            Uint32 *bufp;
+            bufp = (Uint32 *)screen->pixels + y*screen->pitch/4 + x;
+            *bufp = color;
+        }
+        break;
+    }
+}
+
+/******************************************************************
+ *                            pixel_Set                           *
+ ******************************************************************/
 void pixel_Set(SDL_Surface *screen, int x, int y)
 {
     Uint32 color = SDL_MapRGB(screen->format, R, G, B);

@@ -199,6 +199,7 @@ void terrain::doUpDown(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
              }
           }
        }
+       actualMap->createSplats();
    }
 }
 
@@ -306,6 +307,7 @@ void terrain::doNivelate(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                }
             }
          }
+         actualMap->createSplats();
       }
    }
 }
@@ -322,6 +324,7 @@ void terrain::doTexture(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       if(quad)
       {
          quad->texture = actualTexture;
+         actualMap->createSplats();
       }
    }
 }

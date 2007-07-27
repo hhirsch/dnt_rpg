@@ -13,6 +13,7 @@ class extensions
 
       /* Multi Textures Functions */
       static PFNGLACTIVETEXTUREPROC ARBActiveTexture;
+      static PFNGLCLIENTACTIVETEXTUREPROC ARBClientActiveTexture;
       static PFNGLMULTITEXCOORD2FPROC ARBMultiTexCoord2f;
       static PFNGLMULTITEXCOORD2FVPROC ARBMultiTexCoord2fv;
       static PFNGLMULTITEXCOORD2DPROC ARBMultiTexCoord2d;

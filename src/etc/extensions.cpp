@@ -42,18 +42,26 @@ void extensions::defineAllExtensions()
       {
          printf("Not Found glActiveTextureARB. DNT will be in worse quality.\n");
       }
+      ARBClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREPROC) 
+                              SDL_GL_GetProcAddress("glClientActiveTextureARB");
+      if(!ARBClientActiveTexture)
+      {
+         printf("Not Found glClientActiveTextureARB. "
+                "DNT will be in worse quality.\n");
+      }
       ARBMultiTexCoord2d = (PFNGLMULTITEXCOORD2DPROC)
-                                     SDL_GL_GetProcAddress("glMultiTexCoord2dARB");
+                                SDL_GL_GetProcAddress("glMultiTexCoord2dARB");
       ARBMultiTexCoord2f = (PFNGLMULTITEXCOORD2FPROC)
-                                     SDL_GL_GetProcAddress("glMultiTexCoord2fARB");
+                                SDL_GL_GetProcAddress("glMultiTexCoord2fARB");
       ARBMultiTexCoord2dv = (PFNGLMULTITEXCOORD2DVPROC)
-                                     SDL_GL_GetProcAddress("glMultiTexCoord2dvARB");
+                                SDL_GL_GetProcAddress("glMultiTexCoord2dvARB");
       ARBMultiTexCoord2fv = (PFNGLMULTITEXCOORD2FVPROC)
-                                     SDL_GL_GetProcAddress("glMultiTexCoord2fvARB");
+                                SDL_GL_GetProcAddress("glMultiTexCoord2fvARB");
       if( (!ARBMultiTexCoord2d) || (!ARBMultiTexCoord2f) || 
           (!ARBMultiTexCoord2dv) || (!ARBMultiTexCoord2fv) )
       {
-         printf("Not found glMultiTextCoord*ARB. DNT will be in worse quality.\n");
+         printf("Not found glMultiTextCoord*ARB. "
+                "DNT will be in worse quality!\n");
       }
    }
 
@@ -66,6 +74,7 @@ PFNGLPOINTPARAMETERFVARBPROC extensions::PointParameterfv;
 
 /* Multi Textures Functions */
 PFNGLACTIVETEXTUREPROC extensions::ARBActiveTexture;
+PFNGLCLIENTACTIVETEXTUREPROC extensions::ARBClientActiveTexture;
 PFNGLMULTITEXCOORD2FPROC extensions::ARBMultiTexCoord2f;
 PFNGLMULTITEXCOORD2FVPROC extensions::ARBMultiTexCoord2fv;
 PFNGLMULTITEXCOORD2DPROC extensions::ARBMultiTexCoord2d;

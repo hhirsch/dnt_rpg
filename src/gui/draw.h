@@ -35,6 +35,17 @@ void color_Get(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi);
  * \param y -> y coordinate of the pixel */
 void pixel_Set(SDL_Surface *screen, int x, int y);
 
+/*! Set the surface (x,y) pixel color
+ * \param screen -> surface to draw
+ * \param x -> x coordinate of the pixel
+ * \param y -> y coordinate of the pixel
+ * \param red -> red  value
+ * \param green -> green value
+ * \param blue -> blue value
+ * \param alpha -> alpha value */
+void pixel_Set(SDL_Surface* screen, int x, int y, 
+               int red, int green, int blue, int alpha);
+
 /*! Get the surface (x,y) pixel color
  * \param surface -> surface to draw
  * \param x -> x coordinate of the pixel
