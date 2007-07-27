@@ -2056,7 +2056,6 @@ void Map::actualizeAlphaTextures()
                                      32,0x000000FF,0x0000FF00,
                                      0x00FF0000,0xFF000000);
 
-   char buf[1024];
    while(aux < numTextures)
    {
       if(tex->definedAlpha)
@@ -2086,10 +2085,6 @@ void Map::actualizeAlphaTextures()
 
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-      sprintf(buf,"./alpha%d.bmp",aux);
-      SDL_SaveBMP(img, buf);
-
 
       tex = tex->next;
       aux++;
