@@ -16,7 +16,7 @@ using namespace std;
 #define PISAVEL 1   /**< If a Square is walkable or not. */
 
 /* Constraints */
-#define SQUARE_SIZE          64      /**< Size of the Square */
+#define SQUARE_SIZE          256      /**< Size of the Square */
 #define HALF_SQUARE_SIZE SQUARE_SIZE / 2 /**< Half size of the square */
 #define QUARTER_SQUARE_SIZE SQUARE_SIZE / 4 /**< Quarter size of the square */
 #define SQUARE_DIAGONAL_SIZE SQUARE_SIZE * 1.4142136 /**< Diagonal squaresize */
@@ -25,8 +25,8 @@ using namespace std;
 #define CURB_HEIGHT            2       /**< Curbs height */
 #define MAX_HEIGHT           150       /**< Max square height */
 
-#define SQUARE_DIVISIONS_INC  256 /**< Difference heigh to inc the square divisions. */ 
-#define TEXTURE_REPEATS         1 /**< Number of Repeats of indoor texture */ 
+#define SQUARE_DIVISIONS_INC  256 /**< Difference heigh to inc the square divisions. NOT used anymore. */ 
+#define TEXTURE_REPEATS SQUARE_SIZE / 64 /**< Number of Repeats of textures */ 
 #define ALPHA_TEXTURE_INC       2 /**< Points per square on each alpha texture*/
 
 

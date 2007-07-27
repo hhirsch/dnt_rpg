@@ -454,7 +454,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    glDisable(GL_TEXTURE_2D);
    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
-   /* Next, define and draww all textures, with multitexture.
+   /* Next, define and draw all textures, with multitexture.
     * \FIXME -> when no multitexture is avaible! */
    if(ext.ARBActiveTexture != NULL)
    { 
@@ -531,116 +531,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
    glDisableClientState(GL_VERTEX_ARRAY);
 
-#if 0
-   int texture = -1;
-   int Xaux = 0, Zaux = 0;
 
-   int k,l;
-   GLfloat texX, texZ;
-   GLfloat pX1, pX2, pZ1, pZ2, incPos, incTex;
-
-   GLint wrap = GL_REPEAT;
-
-   if(isOutdoor())
-   {
-      wrap = GL_REPEAT;
-      incTex = (TEXTURE_REPEATS / MapSquares[Xaux][Zaux].divisions);
-   }
-   else
-   {
-      wrap = GL_REPEAT;
-      incTex = (TEXTURE_REPEATS / MapSquares[Xaux][Zaux].divisions);
-   }
-
-   /* For each square (a square is squarizeble!) */
-   texture = MapSquares[Xaux][Zaux].texture;
-   glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, texture);
-   
-   glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                   GL_LINEAR_MIPMAP_LINEAR );
-   glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
-
-   glBegin(GL_QUADS);
-     /* Draw at horizon */
-     
-
-   for(Xaux = 0; Xaux < x; Xaux++)
-   {
-      for(Zaux = 0; Zaux < z; Zaux++)
-      {
-         incPos = (GLfloat) SQUARE_SIZE / 
-                  (GLfloat)MapSquares[Xaux][Zaux].divisions;
-         if((texture!= -1) && (MapSquares[Xaux][Zaux].texture == -1))
-         {
-             glDisable(GL_TEXTURE_2D); 
-             texture = -1;
-         }
-         else if(texture != MapSquares[Xaux][Zaux].texture)
-         {
-            glEnd();
-            texture = MapSquares[Xaux][Zaux].texture;
-            glEnable(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D, texture);
-            //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap );
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap );
-            glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                            GL_LINEAR_MIPMAP_LINEAR );
-            /*glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);*/
-            glBegin(GL_QUADS);
-         }
-         if( (MapSquares[Xaux][Zaux].visible) || 
-             (quadradoVisivel(MapSquares[Xaux][Zaux].x1,0,
-                              MapSquares[Xaux][Zaux].z1,
-                              MapSquares[Xaux][Zaux].x2,
-                              MAX_HEIGHT,
-                              MapSquares[Xaux][Zaux].z2, matriz)))
-         {
-            MapSquares[Xaux][Zaux].visible = 1;
-
-            /* Draw the Square as some squares */ 
-            for(k = 0; k < MapSquares[Xaux][Zaux].divisions; k++)
-            {
-               texX = k*incTex;
-               pX1 = (k*incPos) + MapSquares[Xaux][Zaux].x1;
-               pX2 = (incPos) + pX1;
-               for(l = 0; l < MapSquares[Xaux][Zaux].divisions; l++)
-               {
-                  texZ = l*incTex;
-                  pZ1 = (l*incPos) + MapSquares[Xaux][Zaux].z1;
-                  pZ2 = (incPos) + pZ1;
-                  drawQuad(pX1, pZ1, pX2, pZ2,
-                           getHeight(pX1, pZ1, &MapSquares[Xaux][Zaux]),
-                           getHeight(pX1, pZ2, &MapSquares[Xaux][Zaux]),
-                           getHeight(pX2, pZ2, &MapSquares[Xaux][Zaux]),
-                           getHeight(pX2, pZ1, &MapSquares[Xaux][Zaux]),
-                           texX, texZ, texX + incTex, texZ + incTex);
-               }
-            }
-
-            /* //Old Draw, as only one square
-             * drawQuad(MapSquares[Xaux][Zaux].x1, MapSquares[Xaux][Zaux].z1,
-                     MapSquares[Xaux][Zaux].x2, MapSquares[Xaux][Zaux].z2,
-                     MapSquares[Xaux][Zaux].h1, MapSquares[Xaux][Zaux].h2,
-                     MapSquares[Xaux][Zaux].h3, MapSquares[Xaux][Zaux].h4,
-                     0.0, 0.0, 1.0, 1.0);*/
-
-         }
-         else
-         {
-            MapSquares[Xaux][Zaux].visible = 0;
-         }
-      }
-   }
-   glEnd();
-#endif
    return(1);
 }
 
