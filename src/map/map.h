@@ -26,7 +26,7 @@ using namespace std;
 #define MAX_HEIGHT           150       /**< Max square height */
 
 #define SQUARE_DIVISIONS_INC  256 /**< Difference heigh to inc the square divisions. NOT used anymore. */ 
-#define TEXTURE_REPEATS SQUARE_SIZE / 64 /**< Number of Repeats of textures */ 
+#define TEXTURE_REPEATS SQUARE_SIZE / 128 /**< Number of Repeats of textures */ 
 #define ALPHA_TEXTURE_INC       2 /**< Points per square on each alpha texture*/
 
 
