@@ -1997,35 +1997,48 @@ void Map::createAlpha(int x1, int z1)
             aux++;
          }
 
-         /* Visit all 8 potential Neighbors */
-         for(neigZ = z1-1; neigZ <= z1+1; neigZ++)
-         {           
-            /* Verify if the Z coordinate is valid */
-            if( (neigZ >= 0) && (neigZ < z) )
-            {
-               for(neigX = x1-1; neigX <= x1+1; neigX++)
+         /* Make Alpha for Outdoor maps */
+         if(isOutdoor())
+         {
+            /* Visit all 8 potential Neighbors */
+            for(neigZ = z1-1; neigZ <= z1+1; neigZ++)
+            {           
+               /* Verify if the Z coordinate is valid */
+               if( (neigZ >= 0) && (neigZ < z) )
                {
-                  /* Verify if the X coordinate is valid */
-                  if( (neigX >= 0) && (neigX < x) )
+                  for(neigX = x1-1; neigX <= x1+1; neigX++)
                   {
-                     tex = getTexture(MapSquares[neigX][neigZ].texture);
-                     if(tex)
+                     /* Verify if the X coordinate is valid */
+                     if( (neigX >= 0) && (neigX < x) )
                      {
-                        dist = (actualCoordX - neigX)*(actualCoordX - neigX) +
-                               (actualCoordZ - neigZ)*(actualCoordZ - neigZ);
-                        value = 1 - (dist / 3.0625);
-                        if(value < 0)
+                        tex = getTexture(MapSquares[neigX][neigZ].texture);
+                        if(tex)
                         {
-                           value = 0.0;
+                           dist = (actualCoordX-neigX)*(actualCoordX-neigX)+
+                                  (actualCoordZ-neigZ)*(actualCoordZ-neigZ);
+                           value = 1 - (dist / 3.0625);
+                           if(value < 0)
+                           {
+                              value = 0.0;
+                           }
+                           tex->alphaValues[x2][z2] += value;
+                           total += value;
                         }
-                        tex->alphaValues[x2][z2] += value;
-                        total += value;
                      }
                   }
                }
             }
          }
-
+         /* Do the Alpha for the indoor maps. This is only the texture. */
+         else
+         {
+            tex = getTexture(MapSquares[x1][z1].texture);
+            if(tex)
+            {
+               tex->alphaValues[x2][z2] = 1.0;
+               total = 1.0;
+            }
+         }
          /* Normalize the result */
          aux = 0;
          tex = textures;
