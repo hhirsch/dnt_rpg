@@ -1439,8 +1439,6 @@ void Map::newMap(int X, int Z)
    int auxX, auxZ;
    int i;
 
-   printf("Beginning a new Map: %d,%d\n",X,Z);
-
    /* Alloc MapSquares */
    MapSquares = new Square*[X];//(Square***) malloc(X*sizeof(Square**));
    for(i = 0; i < X; i++)
@@ -1462,8 +1460,9 @@ void Map::newMap(int X, int Z)
 
 
    /* add a first default texture */
-   int IDtexture = insertTexture("../data/texturas/chao_grama2.jpg", 
-                                 "../data/texturas/chao_grama2.jpg",54,102,49);
+   int IDtexture = insertTexture("../data/texturas/floor_outdoor/grass.png", 
+                                 "../data/texturas/floor_outdoor/grass.png",
+                                 54,102,49);
 
    for(auxZ = 0; auxZ < z; auxZ++)
    {
