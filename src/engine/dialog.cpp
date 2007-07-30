@@ -425,7 +425,8 @@ void conversation::openDialog(int numDialog, interface* gui, character* pers,
    //npcText->fonte = FMINI;
    pcSelText = jan->getObjectsList()->insertSelText(5,116,250,250,"","","",
                                                     "","");
-   jan->getObjectsList()->insertPicture(3,15,0,0,"../data/texturas/dialog.png");
+   jan->getObjectsList()->insertPicture(3,15,0,0,
+                                        "../data/texturas/dialogw/dialog.png");
    jan->setExternPointer(&jan);
    gui->openWindow(jan);
 

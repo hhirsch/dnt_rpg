@@ -1,6 +1,7 @@
 ================================================
 |                Version 0.2                   |
 ================================================
+ - Terrain texture splatting;
  - Meteors and FireSpheres;
  - Using LUA for AI Scripts;
  - Workspace for compiling at M$ Visual C++ 6;

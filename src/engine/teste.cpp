@@ -36,7 +36,7 @@ int main(int argc, char **argv)
    Engine->SplashScreen();
 
    /* Load backImage */
-   SDL_Surface* img = IMG_Load("../data/texturas/inicio.png");
+   SDL_Surface* img = IMG_Load("../data/texturas/general/inicio.png");
    setTexture(img,&tituloID);
    SDL_FreeSurface(img);
 

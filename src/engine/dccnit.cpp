@@ -261,7 +261,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
-   SDL_Surface* fig = IMG_Load("../data/texturas/carregar.jpg");
+   SDL_Surface* fig = IMG_Load("../data/texturas/general/carregar.png");
 
    /* Initializing Load Screen*/
    GLuint texturaCarga;
@@ -555,7 +555,7 @@ void engine::SplashScreen()
    Uint32 time = SDL_GetTicks();
    glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
    AtualizaFrustum(visibleMatrix,proj,modl);
-   SDL_Surface* img = IMG_Load("../data/texturas/inicio1.png"); 
+   SDL_Surface* img = IMG_Load("../data/texturas/general/inicio1.png"); 
    glDisable(GL_LIGHTING);
    setTextureRGBA(img,&id);
    SDL_FreeSurface(img);
@@ -2793,7 +2793,7 @@ void engine::OpenMiniMapWindow()
    actualMap->drawMinimap(fig->get());
 
    miniMapWindow->getObjectsList()->insertPicture(3,15,252,120,
-                                       "../data/texturas/map.png");
+                                             "../data/texturas/mapw/map.png");
 
    
                    
@@ -2829,7 +2829,7 @@ void engine::OpenShortcutsWindow()
 
    tabButton* tb;
    tb = shortCutsWindow->getObjectsList()->insertTabButton(252,15,0,0,
-                                             "../data/texturas/shortcuts.png");
+                                   "../data/texturas/shortcutsw/shortcuts.png");
    buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
    tb->insertButton(7,40,43,72);/* Attack 1 */
    tb->insertButton(7,75,43,107);/* Attack 7 */
@@ -2855,7 +2855,7 @@ void engine::OpenShortcutsWindow()
    buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 
    shortCutsWindow->getObjectsList()->insertPicture(3,15,252,120,
-                                              "../data/texturas/shortcut2.png");
+                                   "../data/texturas/shortcutsw/shortcut2.png");
    
    shortCutsWindow->setExternPointer(&shortCutsWindow);
    gui->openWindow(shortCutsWindow);
