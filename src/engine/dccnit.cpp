@@ -1823,10 +1823,10 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                        activeCharacter->xPosition,
                                        activeCharacter->yPosition + 15,
                                        activeCharacter->zPosition,
-                                       incX, 0.0, incZ,
-                                       activeCharacter->xPosition + 200*incX,
+                                       2*incX, 0.0, 2*incZ,
+                                       activeCharacter->xPosition + 800*incX,
                                        activeCharacter->yPosition + 15,
-                                       activeCharacter->zPosition + 200*incZ,
+                                       activeCharacter->zPosition + 800*incZ,
                                        "../data/particles/fire1.par");
          }
          if(keys[SDLK_l])
