@@ -435,6 +435,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
             showMessage(language.ATTW_WARN_TITLE, language.ATTW_WARN_MESSAGE,
                         proj, modl,viewPort);
             glDisable(GL_LIGHTING);
+            glDisable(GL_FOG);
             return(ATTW_OTHER);
          }
       }
