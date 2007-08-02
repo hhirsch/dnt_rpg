@@ -2233,13 +2233,9 @@ void engine::renderScene()
    GLfloat min[3],max[3];
    GLfloat x[4],z[4];
 
-   glCullFace(GL_BACK);
-   glEnable(GL_CULL_FACE);
-
    bool shadow = false;//actualMap->isOutdoor();
 
    glPushMatrix();
-
    /* Draw The Floor with Stencil Buffer */
    if( ((option->reflexionType != REFLEXIONS_NONE) && (!actualMap->isOutdoor()))
        || (shadow))
@@ -2388,7 +2384,6 @@ void engine::renderScene()
          per = (character*) per->next;
       }
    }
-   glDisable(GL_CULL_FACE);
 
    /* Draw the Map Objects && Walls with Reflexions */
    if( (option->reflexionType >= REFLEXIONS_ALL) && (!actualMap->isOutdoor()) )
@@ -2410,11 +2405,12 @@ void engine::renderScene()
       glDisable(GL_STENCIL_TEST);
    }
 
-   /* Draw World, doing view frustum culling */
+   glPushMatrix();
    actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
                    gameCamera.getCameraZ(),visibleMatrix,
                    PCs->getActiveCharacter()->xPosition,
                    PCs->getActiveCharacter()->zPosition);
+   glPopMatrix();
 
 }
 
@@ -2423,6 +2419,7 @@ void engine::renderScene()
  ********************************************************************/
 void engine::renderNoShadowThings()
 {
+
    character* activeCharacter = PCs->getActiveCharacter(); 
    /* SKY */
    if(actualMap->isOutdoor())
@@ -2438,7 +2435,6 @@ void engine::renderNoShadowThings()
    {
       activeCharacter->pathFind.drawPath();
    }*/
-
 
    if( showRange )
    {
@@ -2519,6 +2515,7 @@ void engine::renderNoShadowThings()
          glEnable(GL_FOG);
       }
    }
+
 
    /* The Current Connection */
    if(curConection)
