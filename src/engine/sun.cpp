@@ -184,7 +184,7 @@ void sun::drawSun()
    {
       glColor4f(1.0,1.0,1.0,1.0);
       glBindTexture(GL_TEXTURE_2D, moonTexture);
-      size = 50;
+      size = 200;
    }
    glPushMatrix();
       glTranslatef(where[0], where[1], where[2]);
