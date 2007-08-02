@@ -121,6 +121,8 @@ class lang
    static string INVENTW_SELL;
    static string INVENTW_USE;
    static string INVENTW_GET;
+   static string INVENTW_REMOVE;
+   static string INVENTW_INFO;
 
    /* conversa.cpp */
    static string DIALOGW_TITLE;

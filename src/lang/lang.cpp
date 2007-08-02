@@ -153,6 +153,8 @@ void lang::ReloadFile(int lng)
    getline(file, INVENTW_SELL);
    getline(file, INVENTW_USE);
    getline(file, INVENTW_GET);
+   getline(file, INVENTW_REMOVE);
+   getline(file, INVENTW_INFO);
 
    /* conversa.cpp */
    getline(file, DIALOGW_TITLE);
@@ -298,6 +300,8 @@ void lang::ReloadFile(int lng)
    string lang::INVENTW_SELL;
    string lang::INVENTW_USE;
    string lang::INVENTW_GET;
+   string lang::INVENTW_REMOVE;
+   string lang::INVENTW_INFO;
 
    /* conversa.cpp */
    string lang::DIALOGW_TITLE;

@@ -121,10 +121,10 @@ void inventWindow::openMenu(int x, int y, int type)
    }
    else
    {
-      objectMenu->insertItem("Unequip",1);
+      objectMenu->insertItem(language.INVENTW_REMOVE,1);
    }
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem("Info",0);
+   objectMenu->insertItem(language.INVENTW_INFO,0);
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(language.INVENTW_GET,1);
 
