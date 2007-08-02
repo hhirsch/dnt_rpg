@@ -19,6 +19,7 @@
  - Fixed Bug on Remove no more used Models;
  - Fixed Bug on NPCs Fight Animations;
  - Fixed Bug on configures;
+ - Other minor bugs fixes;
 
 
 ================================================
