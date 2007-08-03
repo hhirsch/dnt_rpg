@@ -435,6 +435,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    extensions ext;
    int aux = 0;
    texture* tex;
+
    glEnableClientState(GL_VERTEX_ARRAY);
    glVertexPointer(3, GL_FLOAT, 0, vertexBuffer);
 
@@ -472,6 +473,10 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       /* Only Draw texture with floor count > 0 */
       if( (ext.ARBActiveTexture != NULL) && (tex->count > 0))
       {
+         glEnable(GL_DEPTH_TEST);
+         glDepthFunc(GL_LEQUAL);
+         glDepthMask(GL_TRUE);
+
          glEnable(GL_BLEND);
          glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -516,6 +521,11 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
          glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
          glDisable(GL_BLEND);
+
+         glEnable(GL_DEPTH_TEST);
+         glDepthFunc(GL_LESS);
+         glDepthMask(GL_TRUE);
+
       }
       tex = tex->next;
       aux++;
