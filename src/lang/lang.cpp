@@ -156,8 +156,15 @@ void lang::ReloadFile(int lng)
    getline(file, INVENTW_REMOVE);
    getline(file, INVENTW_INFO);
 
-   /* conversa.cpp */
+   /* dialog.cpp */
    getline(file, DIALOGW_TITLE);
+
+   /* barterwindow.cpp */
+   getline(file, BARTERW_TITLE);
+   getline(file, BARTERW_OFFER);
+   getline(file, BARTERW_IMPOSE);
+   getline(file, BARTERW_CANCEL);
+
 
    /* actions */
    getline(file, ACTION_TAKEN);
@@ -303,8 +310,15 @@ void lang::ReloadFile(int lng)
    string lang::INVENTW_REMOVE;
    string lang::INVENTW_INFO;
 
-   /* conversa.cpp */
+   /* dialog.cpp */
    string lang::DIALOGW_TITLE;
+
+   /* barterwindow.cpp */
+   string lang::BARTERW_TITLE;
+   string lang::BARTERW_OFFER;
+   string lang::BARTERW_IMPOSE;
+   string lang::BARTERW_CANCEL;
+
 
    /* actions */
    string lang::ACTION_TAKEN;

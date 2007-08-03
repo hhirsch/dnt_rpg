@@ -1,4 +1,4 @@
-0.1.1
+0.2
 ../data/texturas/general/info.png
 Loading NPC: %s
 Loading Character: %s
@@ -77,6 +77,10 @@ Get
 Remove
 Info
 Dialog
+Barter
+Offer
+Impose
+Cancel
 taken.
 rolls initiative:
 No more enemies.

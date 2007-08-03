@@ -98,4 +98,12 @@ bool barterWindow::impose()
    return(barterInventory->imposeBarter());
 }
 
+/**************************************************************
+ *                            treat                           *
+ **************************************************************/
+bool barterWindow::treat(guiObject* guiObj, int eventInfo)
+{
+   //TODO
+   return(false);
+}
 

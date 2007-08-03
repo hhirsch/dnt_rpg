@@ -1,4 +1,4 @@
-0.1.1
+0.2
 ../data/texturas/general/info.png
 Chargement NPC: %s
 Chargement Personage: %s
@@ -77,6 +77,10 @@ Obtenir
 Enlever
 Info
 Dialogue
+Échange
+Offrer
+Imposer
+Annuler
 pris.
 roule l'initiative:
 Plus d'ennemis.

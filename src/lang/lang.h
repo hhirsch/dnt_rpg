@@ -124,8 +124,14 @@ class lang
    static string INVENTW_REMOVE;
    static string INVENTW_INFO;
 
-   /* conversa.cpp */
+   /* dialog.cpp */
    static string DIALOGW_TITLE;
+
+   /* barterwindow.cpp */
+   static string BARTERW_TITLE;
+   static string BARTERW_OFFER;
+   static string BARTERW_IMPOSE;
+   static string BARTERW_CANCEL;
 
    /* actions */
    static string ACTION_TAKEN;

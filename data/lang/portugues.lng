@@ -1,4 +1,4 @@
-0.1.1
+0.2
 ../data/texturas/general/infoPort.png
 Carregando NPC: %s
 Carregando Personagem: %s
@@ -77,6 +77,10 @@ Pegar
 Remover
 Info
 Diálogo
+Barganha
+Oferecer
+Impor
+Cancelar
 recolhido(a).
 rola iniciativa:
 Sem inimigos.
