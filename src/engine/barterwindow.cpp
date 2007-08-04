@@ -18,15 +18,23 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    /* Create Window */
    intWindow = gui->insertWindow(268,0,531,274,language.BARTERW_TITLE.c_str());
 
+   /* Totals */
+   buyerTotals = intWindow->getObjectsList()->insertTextBox(27,234,118,250,
+                                                            0,"0,00");
+   sellerTotals = intWindow->getObjectsList()->insertTextBox(160,234,251,250,
+                                                             0,"0,00");
+   buyerTotals->setColor(255,10,10);
+   sellerTotals->setColor(255,10,10);
+
    /* Actions Buttons */
-   offerButton = intWindow->getObjectsList()->insertButton(173,242,251,262,
+   offerButton = intWindow->getObjectsList()->insertButton(173,252,251,270,
                                              language.BARTERW_OFFER.c_str(),0);
-   imposeButton = intWindow->getObjectsList()->insertButton(91,242,168,262,
+   imposeButton = intWindow->getObjectsList()->insertButton(91,252,168,270,
                                              language.BARTERW_IMPOSE.c_str(),0);
-   cancelButton = intWindow->getObjectsList()->insertButton(9,242,87,262,
+   cancelButton = intWindow->getObjectsList()->insertButton(9,252,87,270,
                                              language.BARTERW_CANCEL.c_str(),0);
 
-   /* Create the low figure */
+   /* Create the botton figure */
    intWindow->getObjectsList()->insertPicture(4,232,256,39,
                               "../data/texturas/inventory/trade_inf.png");
 

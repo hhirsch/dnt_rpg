@@ -49,6 +49,8 @@ class barterWindow
 
       barter* barterInventory;   /**< The barter inventory */
       interface* gui;            /**< The used GUI */
+      textBox* sellerTotals;     /**< The Seller Totals */
+      textBox* buyerTotals;      /**< The Buyer Totals */
       window* intWindow;         /**< The window used */
       button* imposeButton;      /**< The Impose Button */
       button* offerButton;       /**< The Offer Button */
