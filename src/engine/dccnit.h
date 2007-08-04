@@ -344,6 +344,7 @@ class engine
       oneTabButton* buttonEndTurn;   /**< End Turn Button */
 
       inventWindow* inventoryWindow; /**< Inventory Window */
+      barterWindow* tradeWindow;     /**< The Barter Window */
    
       Uint32 lastRead;             /**< Last Verification of I/O */
       Uint32 lastMouse;            /**< Last read from mouse */

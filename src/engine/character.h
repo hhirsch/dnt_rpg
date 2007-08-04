@@ -19,6 +19,7 @@ using namespace std;
 #include "../ia/astar.h"
 #include "../etc/animodel.h"
 #include "../map/map.h"
+#include "barterwindow.h"
 
 #define POSRETX 8   /**< X screen portrait position */
 #define POSRETY 20  /**< Y screen portrait position */
@@ -126,8 +127,10 @@ class character: public aniModel
        * \param guiObj -> active GUI object
        * \param eventInfo -> last GUI Event 
        * \param gui -> window interface used
+       * \param tradeWindow -> pointer to the pointer of the barterWindow
        * \return true if event is threated, false otherwise. */
-      bool treatConversation(guiObject* guiObj, int eventInfo, interface* gui);
+      bool treatConversation(guiObject* guiObj, int eventInfo, interface* gui,
+                             barterWindow** tradeWindow);
 
       /*! Call the thing dead animation */
       void callDeadAnimation();

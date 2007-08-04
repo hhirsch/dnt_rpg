@@ -142,7 +142,7 @@ void character::openConversationDialog(interface* gui, character * PC)
  *                         treatConversation                         *
  *********************************************************************/
 bool character::treatConversation(guiObject* guiObj, int eventInfo, 
-                                   interface* gui)
+                                   interface* gui, barterWindow** tradeWindow)
 {
    if(convPressed)
    {
@@ -155,7 +155,7 @@ bool character::treatConversation(guiObject* guiObj, int eventInfo,
       conversation* cs = (conversation*) conv;
       if( (cs != NULL) && (cs->windowOpened()) )
       {
-         return(cs->treat(guiObj, eventInfo, gui));
+         return(cs->treat(guiObj, eventInfo, gui, tradeWindow));
       }
    }
    return(false);

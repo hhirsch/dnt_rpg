@@ -463,15 +463,11 @@ void conversation::proccessAction(int numDialog, int opcao, interface* gui)
          engine* eng = (engine*)actualEngine;
          actualNPC->setAsEnemy();
          eng->enterBattleMode(false);
-         gui->closeWindow(jan);
-         jan = NULL;
-         usedGui = NULL;
+         closeWindow(gui);
       }
       break;
       case TALK_ACTION_CLOSE:
-         gui->closeWindow(jan);
-         jan = NULL;
-         usedGui = NULL;
+         closeWindow(gui);
       break;
       case TALK_ACTION_MODPC:
          //TODO
@@ -532,9 +528,20 @@ void conversation::changeDialog(int numDialog)
 }
 
 /*************************************************************************
+ *                             closeWindow                               *
+ *************************************************************************/
+void conversation::closeWindow(interface* gui)
+{
+   gui->closeWindow(jan);
+   jan = NULL;
+   usedGui = NULL;
+}
+
+/*************************************************************************
  *                                treat                                  *
  *************************************************************************/
-bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui)
+bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui,
+                         barterWindow** tradeWindow)
 {
    if(eventInfo == SELECTED_SEL_TEXT)
    {
@@ -548,10 +555,18 @@ bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui)
    {
       if(guiObj == (guiObject*)barterButton)
       {
-         //FIXME
-         barterWindow* bt = new barterWindow(actualNPC->inventories, 
-                                             actualPC->inventories,
-                                             gui);
+         /* Closes the dialog window  */
+         closeWindow(gui);
+
+         /* If exists a barter, delete it! */
+         if( (*tradeWindow) != NULL)
+         {
+            delete(*tradeWindow);
+            *tradeWindow = NULL;
+         }
+         *tradeWindow = new barterWindow(actualNPC->inventories, 
+                                         actualPC->inventories, gui);
+
       }
    }
    return(false);

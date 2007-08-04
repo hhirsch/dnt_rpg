@@ -115,12 +115,18 @@ class conversation
        * \param guiObj -> active GUI object
        * \param eventInfo -> last GUI Event 
        * \param gui -> window interface used
+       * \param tradeWindow -> pointer to the pointer the barter window
        * \return true if event is threated, false otherwise. */
-      bool treat(guiObject* guiObj, int eventInfo, interface* gui);
+      bool treat(guiObject* guiObj, int eventInfo, interface* gui,
+                 barterWindow** tradeWindow);
 
       /*! Verify if the dialog is open or not 
        * \return true if the window is opened */
       bool windowOpened();
+
+      /*! Close, if opened, the dialog window
+       * \param gui -> the GUI interface where the window is */
+      void closeWindow(interface* gui);
 
       protected:
          window* jan;          /**< Pointer to window used to show */

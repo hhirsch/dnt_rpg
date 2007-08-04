@@ -25,6 +25,7 @@ engine::engine()
    miniMapWindow = NULL;
    shortCutsWindow = NULL;
    inventoryWindow = NULL;
+   tradeWindow = NULL;
    imgNumber = 0;
    actualScreen = NULL;
 
@@ -149,6 +150,18 @@ engine::~engine()
    if(gameSun)
    {
       delete(gameSun);
+   }
+
+   /* Clear the Barter Window */
+   if(tradeWindow)
+   {
+      delete(tradeWindow);
+   }
+
+   /* Clear the Inventory too */
+   if(inventoryWindow)
+   {
+      delete(inventoryWindow);
    }
 
    /* Clear GUI */
@@ -1164,13 +1177,23 @@ void engine::threatGuiEvents(guiObject* object, int eventInfo)
       }  
    }
 
+   /* Verify if Barter Window is Opened */
+   if(tradeWindow)
+   {
+      if(!tradeWindow->isOpen())
+      {
+         delete(tradeWindow);
+         tradeWindow = NULL;
+      }
+   }
+
    /* Verify Dialog Windows */
    if(NPCs != NULL)
    {
       character* ch =(character*) NPCs->first->next;
       while(ch != NPCs->first)
       {
-         ch->treatConversation(object, eventInfo, gui);
+         ch->treatConversation(object, eventInfo, gui, &tradeWindow);
          ch = (character*) ch->next;
       }
    }
