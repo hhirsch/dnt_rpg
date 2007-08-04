@@ -105,6 +105,9 @@ class inventory
        * \param y -> y coordinate on surface */
       void drawEquiped(int x, int y, SDL_Surface* surface);
 
+      bool openedWindow;   /**< Flag to control if the inventory have a 
+                                openned window or not */
+
    private:
       /*! For debug: print all names of inventory itens on terminal */
       void print();

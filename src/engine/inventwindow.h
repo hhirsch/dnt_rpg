@@ -31,6 +31,15 @@ class inventWindow
        * \param inter -> GUI interface to use */
       inventWindow(inventory *invent,interface* inter);
 
+      /*! Constructor
+       * \param xa -> position X to open the window
+       * \param ya -> y position to open the window
+       * \param title -> title of the inventory window
+       * \param invent -> inventories to show
+       * \param inter -> GUI interface to use */
+      inventWindow(int xa, int ya, string title, 
+                   inventory *invent,interface* inter);
+
       /*! Destructor */
       ~inventWindow();
 
@@ -55,6 +64,10 @@ class inventWindow
       void reDraw();
 
    private:
+
+      /*! Init the window */
+      void init(int xa, int ya, string title, inventory *invent,
+                interface* inter);
 
       /*! Open the Inventory Object Menu  */
       void openMenu(int x, int y, int type);

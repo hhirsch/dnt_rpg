@@ -11,7 +11,25 @@
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
+inventWindow::inventWindow(int xa, int ya, string title, 
+                           inventory *invent,interface* inter)
+{
+   init(xa,ya,title,invent,inter);
+}
+
+/**************************************************************
+ *                          Constructor                       *
+ **************************************************************/
 inventWindow::inventWindow(inventory *invent, interface* inter)
+{
+   init(0,0, language.INVENTW_TITLE.c_str(), invent, inter);
+}
+
+/**************************************************************
+ *                              init                          *
+ **************************************************************/
+void inventWindow::init(int xa, int ya, string title, 
+                       inventory *invent,interface* inter)
 {
    objectMenu = NULL;
    previousCursor = NULL;
@@ -21,9 +39,10 @@ inventWindow::inventWindow(inventory *invent, interface* inter)
 
    /* Copy Inventories Pointers */
    inventories = invent;
+   inventories->openedWindow = true;
 
    /* Add Window */
-   intWindow = inter->insertWindow(0,0,263,402,language.INVENTW_TITLE.c_str());
+   intWindow = inter->insertWindow(xa,ya,xa+263,ya+402,title.c_str());
 
    /* Add Character (equip) Tab Button */
    characterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,
@@ -79,6 +98,7 @@ inventWindow::~inventWindow()
    {
       interf->closeWindow(intWindow);
    }
+   inventories->openedWindow = false;
 }
 
 /**************************************************************

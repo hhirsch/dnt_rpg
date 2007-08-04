@@ -28,6 +28,7 @@
 #define MAX_OPTIONS 5 /**< Max number of options per dialog */
 
 #include "../gui/farso.h"
+#include "barterwindow.h"
 #include "character.h"
 #include <string>
 using namespace std;

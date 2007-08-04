@@ -13,6 +13,7 @@ inventory::inventory()
 {
    int i;
    inventoryImage = NULL;
+   openedWindow = false;
 
    /* Create Slots */
    slots = new itemSlot*[INVENTORY_PER_CHARACTER];
