@@ -297,12 +297,13 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, object* obj)
 void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
 {
    int Xaux = 0, Zaux = 0, o = 0;
-   objSquare* obj = MapSquares[Xaux][Zaux].getFirstObject();
+   objSquare* obj;
    objSquare* next;
    for(Xaux = 0; Xaux < x; Xaux++)
    {
      for(Zaux = 0; Zaux < z; Zaux++)
      {
+        obj = MapSquares[Xaux][Zaux].getFirstObject();
         for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
         {
            next = obj->next;

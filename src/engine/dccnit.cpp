@@ -1185,6 +1185,10 @@ void engine::threatGuiEvents(guiObject* object, int eventInfo)
          delete(tradeWindow);
          tradeWindow = NULL;
       }
+      else
+      {
+         tradeWindow->treat(object, eventInfo);
+      }
    }
 
    /* Verify Dialog Windows */
