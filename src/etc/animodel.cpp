@@ -3,6 +3,7 @@
  */
 
 #include "animodel.h"
+#include "../engine/util.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_opengl.h>
@@ -663,5 +664,74 @@ int aniModel::getState()
 void aniModel::update(GLfloat pos)
 {
    m_calModel->update(pos);
+}
+
+/*********************************************************************
+ *                           depthColision                           *
+ *********************************************************************/
+bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
+                              GLfloat colMin[3],GLfloat colMax[3])
+{
+
+  /* Calculate the sin and cos of the angle */
+  float angleSin = sin(deg2Rad(angle));
+  float angleCos = cos(deg2Rad(angle));
+
+  /* get the renderer of the model */
+  CalRenderer *pCalRenderer;
+  pCalRenderer = m_calModel->getRenderer();
+
+  /* get the number of meshes */
+  int meshCount;
+  meshCount = pCalRenderer->getMeshCount();
+
+  /* verify all meshes of the model */
+  int meshId;
+  for(meshId = 0; meshId < meshCount; meshId++)
+  {
+    /* get the number of submeshes */
+    int submeshCount;
+    submeshCount = pCalRenderer->getSubmeshCount(meshId);
+
+    /* verify all submeshes of the mesh */
+    int submeshId;
+    for(submeshId = 0; submeshId < submeshCount; submeshId++)
+    {
+      /* select mesh and submesh for further data access */
+      if(pCalRenderer->selectMeshSubmesh(meshId, submeshId))
+      {
+        
+        /* get the transformed vertices of the submesh */
+        static float meshVertices[30000][3];
+        int vertexCount;
+        vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
+
+        int v;
+        float x,y,z;
+
+        /* Verify, finally, all vertices of the model */
+        for(v = 0; v < vertexCount; v++)
+        {
+            /* Rotate and translate the point */
+            x = pX+(meshVertices[v][0]*angleCos)+(meshVertices[v][2]*angleSin);
+            y = pY + meshVertices[v][1]; /* Since no angle */
+            z = pZ+(meshVertices[v][0]*angleSin)+(meshVertices[v][2]*angleCos);
+
+            /* Verify interception */
+            if( (x >= colMin[0]) && (x <= colMax[0]) &&
+                (y >= colMin[1]) && (y <= colMax[1]) &&
+                (z >= colMin[2]) && (z <= colMax[2]) )
+            {
+               /* If is in, the colision is true. */
+               return(true);
+            }
+        }
+
+      }
+    }
+  }
+
+  /* If got here, the collision is false */
+  return(false);
 }
 

@@ -34,17 +34,16 @@ void collision::defineMap(Map* usedMap, characterList* npcs)
  *********************************************************************/
 bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
 {
-   bool result = false;
    GLfloat min2[3];
    GLfloat max2[3];
 
    Square* proxima = quad;
-   if(proxima->flags == PISAVEL)
+   if(proxima->flags != PISAVEL)
    {
-     result = true;
+     return(false);
    }
    
-   if(result) // If can enter, test with walls
+   /* test with walls */
    {
       int mur = 0;
       while((mur < MAX_WALLS ) && (proxima->walls[mur] != NULL))
@@ -55,13 +54,14 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
          max2[0] = proxima->walls[mur]->x2; 
          max2[1] = WALL_HEIGHT; 
          max2[2] = proxima->walls[mur]->z2;
-         result &= !intercepts(min,max,min2,max2,1);
-         if(!result)
+         if(intercepts(min,max,min2,max2,1))
+         {
            return(false);
+         }
          mur++;
       }
    }
-   if(result) // if can enter, test with objects
+   /* test with objects */
    {
       int ob = 0;
       boundingBox bounding;
@@ -83,16 +83,26 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
 /* TODO +Yobjects */
           rotTransBoundingBox(sobj->orientation, X, Z, sobj->x, bounding.y1, 
                               bounding.y2, sobj->z, min2, max2);
-          result &= !intercepts(min,max,min2,max2,1);
-          if(!result) //se ja achou que nao pode, cai fora
-             return(false);
+          if(intercepts(min,max,min2,max2,1))
+          {
+             /* If the bounding boxes intercepts, we'll need to do a more 
+              * depth collision verify, so it is */
+             if(sobj->obj->depthCollision(sobj->orientation, sobj->x, 
+                                          sobj->obj->yPosition +
+                                          actualMap->getHeight(sobj->x,sobj->z),
+                                          sobj->z,min,max))
+             {
+                /* So if the depth collision is true, can't go to position */
+                return(false);
+             }
+          }
         }
         ob++;
         sobj = sobj->next;
       }
    }
 
-   return(result);
+   return(true);
 }
 
 
@@ -168,11 +178,11 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    x[3] = perX2;
    z[3] = perZ1;
 
-   /* Rotaciona e translada o Bounding Box */
+   /* Rotate and translate the Bounding Box */
    rotTransBoundingBox(perOrientation, x, z, perX, perY1 + perY, 
                        perY2 + perY, perZ, min, max );
 
-   /* Testa limites do Mapa */
+   /* Test map limits */
    if( (min[0]<2) || (min[2]<2) || 
        (max[0]>actualMap->getSizeX()*SQUARE_SIZE-2) || 
        (max[2]>actualMap->getSizeZ()*SQUARE_SIZE-2))
@@ -388,6 +398,8 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          x[3] = pers->max[0];
          z[3] = pers->min[2];
 
+
+         //FIXME put the map height here!
          rotTransBoundingBox(pers->orientation, x, z,
                           pers->xPosition, 
                           0.0, 0.0, 
@@ -395,7 +407,12 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
 
          if(intercepts( min, max, min2, max2, 1))
          {
-            return(false);
+            /* Do a more depth colision verify */
+            if(pers->depthCollision(pers->orientation, pers->xPosition, 0.0,
+                                    pers->zPosition, min, max))
+            {
+               return(false);
+            }
          }
     
          pers = pers->next;

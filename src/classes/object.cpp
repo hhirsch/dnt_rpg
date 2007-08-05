@@ -310,3 +310,17 @@ void object::callIdleAnimation()
    //setState(STATE_IDLE);
 }
 
+/*********************************************************************
+ *                            depthCollision                         *
+ *********************************************************************/
+bool object::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
+                            GLfloat colMin[3], GLfloat colMax[3])
+{
+   if(model3D)
+   {
+      return(model3D->depthCollision(angle,pX,pY,pZ,colMin,colMax));
+   }
+   /* If no model, no collision =^P */
+   return(false);
+}
+

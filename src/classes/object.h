@@ -96,6 +96,18 @@ class object: public thing
        * \return the pointer to the surface */
       SDL_Surface* get2dModel(){return(model2d);};
 
+      /*! Verify, with all Meshes of the model, if the model colides
+       *  with the bounding box defined as parameter. 
+       *  \param angle -> model angle
+       *  \param pX -> model X position
+       *  \param pY -> model Y position
+       *  \param pZ -> model Z position
+       *  \param colMin -> colider min values of bounding box
+       *  \param colMax -> colider max values of bounding box 
+       *  \return -> true if one or more meshes colides, false otherwise */
+      bool depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
+                          GLfloat colMin[3], GLfloat colMax[3]);
+
       object* next;         /**< Next Object on List */
       object* previous;     /**< Previous Object on List */
       

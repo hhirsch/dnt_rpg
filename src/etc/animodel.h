@@ -52,6 +52,18 @@ class aniModel:public thing
       /*! Render the model bounding box. Only used on debugging */
       void renderBoundingBox();
 
+      /*! Verify, with all Meshes of the model, if the model colides
+       *  with the bounding box defined as parameter. 
+       *  \param angle -> model angle
+       *  \param pX -> model X position
+       *  \param pY -> model Y position
+       *  \param pZ -> model Z position
+       *  \param colMin -> colider min values of bounding box
+       *  \param colMax -> colider max values of bounding box 
+       *  \return -> true if one or more meshes colides, false otherwise */
+      bool depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
+                          GLfloat colMin[3], GLfloat colMax[3]);
+
       GLfloat min[3];           /**< Min points of static bounding box */
       GLfloat max[3];           /**< Max points of static bounding box */
 
