@@ -256,7 +256,9 @@ void engine::loadPCs()
       delete(PCs);
    }
    PCs  = new (characterList);
-   per = PCs->insertCharacter("../data/characters/pcs/logan.pc",
+   /*per = PCs->insertCharacter("../data/characters/pcs/logan.pc",
+                              features, this);*/
+   per = PCs->insertCharacter("../data/characters/npcs/ratazana.npc",
                               features, this);
 }
 

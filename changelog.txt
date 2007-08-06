@@ -12,6 +12,7 @@
  - More 3D Objects;
  - More Characters;
  - Rewrite the GUI;
+ - Fully and scalable collision for the 3D models;
  - Put the code fully on English (instead of some
    places on english, others on portuguese);
  - New Sound Effects;
