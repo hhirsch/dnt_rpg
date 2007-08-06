@@ -2293,6 +2293,17 @@ void engine::renderScene()
            glRotatef(per->orientation,0,1,0);
            per->render();
 
+           //per->renderBoundingBox();
+           /*glColor3f(1.0,0.1,0.1);
+           glBegin(GL_QUADS);
+              glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
+              glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
+              glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
+              glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+
+           glEnd();*/
+
+
            /* Draw Reflection */
            if( (option->reflexionType >= REFLEXIONS_CHARACTERS) && 
                (!actualMap->isOutdoor()) )
@@ -2334,16 +2345,7 @@ void engine::renderScene()
            }
 
 
-           /*per->RenderBoundingBox();
-           glColor3f(0.6,0.1,0.1);
-           glBegin(GL_POLYGON);
-              glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
-              glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
-              glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
-              glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-
-           glEnd();*/
-         per = (character*) per->next;
+           per = (character*) per->next;
       }
    glPopMatrix();
 
@@ -2379,6 +2381,17 @@ void engine::renderScene()
               glRotatef(per->orientation,0,1,0);
               per->render();
 
+              //per->RenderBoundingBox();
+              /*glDisable(GL_LIGHTING);
+              glColor3f(0.6,0.1,0.1);
+              glBegin(GL_POLYGON);
+                 glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
+                 glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
+                 glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
+                 glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+              glEnd();
+              glEnable(GL_LIGHTING);*/
+
               /* Draw Reflection */
               if( (option->reflexionType >= REFLEXIONS_CHARACTERS) && 
                   (!actualMap->isOutdoor()) )
@@ -2397,16 +2410,7 @@ void engine::renderScene()
                  glDisable(GL_STENCIL_TEST);
               }
 
-              /*per->RenderBoundingBox();
-              glColor3f(0.6,0.1,0.1);
-              glBegin(GL_POLYGON);
-                 glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
-                 glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
-                 glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
-                 glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-   
-              glEnd();*/
-            glPopMatrix();
+              glPopMatrix();
          }
          per = (character*) per->next;
       }

@@ -672,7 +672,6 @@ void aniModel::update(GLfloat pos)
 bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
                               GLfloat colMin[3],GLfloat colMax[3])
 {
-
   /* Calculate the sin and cos of the angle */
   float angleSin = sin(deg2Rad(angle));
   float angleCos = cos(deg2Rad(angle));
@@ -709,13 +708,18 @@ bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
         int v;
         float x,y,z;
 
+        /* NOTE: Do not forget that if the blender coordinate system is
+         * (x,y,z), the DNT system is (-x,z,y) */
+
         /* Verify, finally, all vertices of the model */
         for(v = 0; v < vertexCount; v++)
         {
             /* Rotate and translate the point */
-            x = pX+(meshVertices[v][0]*angleCos)+(meshVertices[v][2]*angleSin);
-            y = pY + meshVertices[v][1]; /* Since no angle */
-            z = pZ+(meshVertices[v][0]*angleSin)+(meshVertices[v][2]*angleCos);
+            x = pX + ( (-meshVertices[v][0])*angleCos) + 
+                     ( (meshVertices[v][1])*angleSin);
+            y = pY + meshVertices[v][2]; /* Since no angle */
+            z = pZ + ( (-meshVertices[v][0]*angleSin)) +
+                     ( (meshVertices[v][1]*angleCos));
 
             /* Verify interception */
             if( (x >= colMin[0]) && (x <= colMax[0]) &&
@@ -726,7 +730,6 @@ bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
                return(true);
             }
         }
-
       }
     }
   }

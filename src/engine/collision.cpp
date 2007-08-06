@@ -402,13 +402,15 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
          //FIXME put the map height here!
          rotTransBoundingBox(pers->orientation, x, z,
                           pers->xPosition, 
-                          0.0, 0.0, 
+                          pers->min[1]+pers->yPosition,
+                          pers->max[1]+pers->yPosition, 
                           pers->zPosition, min2, max2 );
 
          if(intercepts( min, max, min2, max2, 1))
          {
             /* Do a more depth colision verify */
-            if(pers->depthCollision(pers->orientation, pers->xPosition, 0.0,
+            if(pers->depthCollision(pers->orientation, pers->xPosition, 
+                                    pers->yPosition,
                                     pers->zPosition, min, max))
             {
                return(false);
