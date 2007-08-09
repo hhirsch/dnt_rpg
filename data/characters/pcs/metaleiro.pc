@@ -1,0 +1,21 @@
+Logan
+../data/models/personagens/metaleiro/model.cfg
+../data/characters/portraits/metaleiro.png
+maxLifePoints               10
+baseModifier                2/1/2
+attackModifier              1/0/0/0/0/0
+sizeModifier                0
+ATT_STRENGHT                1
+ATT_DEXTERY                 1
+ATT_CONSTITUTION            1
+ATT_INTELIGENCY             1
+ATT_WISDOW                  1
+ATT_CHARISM                 1
+psychoState                 2
+SKILL_SALTAR                0
+SKILL_ADESTRAR_BICHOS       0
+SKILL_INTIMIDAR             0
+SKILL_SEM_TEMPO             0
+SKILL_ESCONDER              0
+SKILL_OUVIR                 0
+SKILL_OP_OBJ_ELETRICO       0
