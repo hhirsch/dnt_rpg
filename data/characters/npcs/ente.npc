@@ -1,19 +1,19 @@
-Ente
-../data/models/personagens/Jacaranda/modelo.cfg
-../data/characters/portraits/ente.png
-maxLifePoints               187
-baseModifier                18/3/18
-attackModifier              12/7/2/0/0/0
-sizeModifier                -1
-conversationFile            initial.dlg
-ATT_LEVEL                   14
-ATT_STRENGHT                18
-ATT_DEXTERY                 6
-ATT_CONSTITUTION            18
-ATT_INTELIGENCY             10
-ATT_WISDOW                  6
-ATT_CHARISM                 12
-psychoState                 1
-SKILL_ADESTRAR_BICHOS       20
-SKILL_INTIMIDAR             30
-SKILL_OUVIR                 26
+name = Ente
+model = ../data/models/personagens/Jacaranda/modelo.cfg
+portrait = ../data/characters/portraits/ente.png
+maxLifePoints = 187
+baseModifier = 18/3/18
+attackModifier = 12/7/2/0/0/0
+sizeModifier = -1
+conversationFile = initial.dlg
+ATT_LEVEL = 14
+ATT_STRENGHT = 18
+ATT_DEXTERY = 6
+ATT_CONSTITUTION = 18
+ATT_INTELIGENCY = 10
+ATT_WISDOW = 6
+ATT_CHARISM = 12
+psychoState = 1
+SKILL_ADESTRAR_BICHOS = 20
+SKILL_INTIMIDAR = 30
+SKILL_OUVIR = 26

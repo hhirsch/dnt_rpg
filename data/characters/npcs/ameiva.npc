@@ -1,20 +1,20 @@
-Ameiva
-../data/models/personagens/Ameiva/modelo.cfg
-../data/characters/portraits/ameiva.png
-maxLifePoints               53
-baseModifier                12/25/17
-attackModifier              13/8/3/0/0/0
-sizeModifier                3
-conversationFile            ameiva1.dlg
-ATT_LEVEL                   7
-ATT_STRENGHT                10
-ATT_DEXTERY                 20
-ATT_CONSTITUTION            14
-ATT_INTELIGENCY             18
-ATT_WISDOW                  4
-ATT_CHARISM                 18
-psychoState                 1
-SKILL_ADESTRAR_BICHOS       20
-SKILL_INTIMIDAR             30
-SKILL_OUVIR                 26
-SKILL_ESCONDER              30
+name = Ameiva
+model = ../data/models/personagens/Ameiva/modelo.cfg
+portrait = ../data/characters/portraits/ameiva.png
+maxLifePoints = 53
+baseModifier = 12/25/17
+attackModifier = 13/8/3/0/0/0
+sizeModifier = 3
+conversationFile = ameiva1.dlg
+ATT_LEVEL = 7
+ATT_STRENGHT = 10
+ATT_DEXTERY = 20
+ATT_CONSTITUTION = 14
+ATT_INTELIGENCY = 18
+ATT_WISDOW = 4
+ATT_CHARISM = 18
+psychoState = 1
+SKILL_ADESTRAR_BICHOS = 20
+SKILL_INTIMIDAR = 30
+SKILL_OUVIR = 26
+SKILL_ESCONDER = 30

@@ -224,20 +224,6 @@ void character::drawMainPortrait()
    glPixelZoom(1.0, -1.0);
    glDrawPixels(portraitImage->w, portraitImage->h, GL_RGBA, GL_UNSIGNED_BYTE, 
                 portraitImage->pixels);
-/*   glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, portrait );
-   glBegin(GL_QUADS);
-      glColor3f(1,1,1);
-      glTexCoord2f(portraitX,0);
-      glVertex3f(x1,y1,z1);
-      glTexCoord2f(portraitX,portraitY);
-      glVertex3f(x2,y2,z2);
-      glTexCoord2f(0,portraitY);
-      glVertex3f(x3,y3,z3);
-      glTexCoord2f(0,0);
-      glVertex3f(x4,y4,z4);
-   glEnd();
-   glDisable(GL_TEXTURE_2D);*/
 }
 
 /******************************************************************
@@ -554,7 +540,42 @@ characterList::~characterList()
       delete(ap);
    }
    delete(first);
-} 
+}
+
+/**************************************************************
+ *                        getAfterEqual                       *
+ **************************************************************/
+string getAfterEqual(string s)
+{
+   unsigned int i = 0;
+
+   /* First, delete the \n character at the end of the string,
+    * if there is one there. */
+   if(s[s.length()-1] == '\n')
+   {
+      s.erase(s.length()-1,1);
+   }
+
+   /* Goes to the equal character */
+   while( (i < s.length()) && (s[i] != '='))
+   {
+      i++;
+   }
+   i++;
+
+   /* Remove all spaces after the equal */
+   while( (i < s.length()) && (s[i] == ' '))
+   {
+      i++;
+   }
+
+   if(i < s.length())
+   {
+      return(s.substr(i));
+   }
+   printf("Error parsing %s\n", s.c_str());
+   return("");
+}
  
 /*********************************************************************
  *                           insertCharacter                         *
@@ -565,9 +586,9 @@ character* characterList::insertCharacter(string file, featsList* ft,
 {
    FILE* arq;
    char buffer[128];
-   char buf2[128];
    string buf; 
    string arqModelo;
+   string token2;
    character* novo;
    novo = new character(ft);
    novo->orientation = 0.0;
@@ -581,50 +602,67 @@ character* characterList::insertCharacter(string file, featsList* ft,
 	return(0);
    }
 
-   /* Character Name */
-   fscanf(arq, "%s", buffer);
-   novo->nome = buffer;
-
-   /* Character FileName */
-   fscanf(arq, "%s", buffer);
-   novo->setCharacterFile(file);
-   arqModelo = buffer;
-
-   /* Define the Portrait */
-   fscanf(arq, "%s", buffer);
-   novo->definePortrait(buffer);
-
    while(fscanf(arq, "%s", buffer) != EOF)
    {
       buf = buffer;
-      if(buf == "maxLifePoints")
+
+      /* eat up the rest of line */
+      fgets(buffer, sizeof(buffer), arq);
+      token2 = getAfterEqual(buffer);
+      if(token2 == "")
       {
-         fgets(buffer, sizeof(buffer),arq);
-         sscanf(buffer, "%d", &novo->lifePoints);
+         printf("at file: %s\n",file.c_str());
+      }
+
+      /* Character Name */
+      if(buf == "name")
+      {
+         novo->nome = token2;
+      }
+      /* Character FileName */
+      else if(buf == "model")
+      {
+         novo->setCharacterFile(file);
+         arqModelo = token2;
+      }
+      /* Define the Portrait */
+      else if(buf == "portrait")
+      {
+         novo->definePortrait(token2);
+      }
+      /* LifePoints */
+      else if(buf == "maxLifePoints")
+      {
+         sscanf(token2.c_str(), "%d", &novo->lifePoints);
          novo->maxLifePoints = novo->lifePoints;
       }
+      /* Base Modifier */
       else if (buf == "baseModifier")
       {
-         fgets(buffer, sizeof(buffer),arq);
-         sscanf(buffer,  "%d/%d/%d", &novo->fortitude, &novo->reflexes, 
-                                     &novo->will); 
+         sscanf(token2.c_str(),"%d/%d/%d", &novo->fortitude, &novo->reflexes, 
+                                           &novo->will); 
       }
+      /* Attack Modifier */
       else if (buf == "attackModifier")
       {
-         fgets(buffer, sizeof(buffer),arq);
-         sscanf(buffer, "%d", &novo->baseAttackModifier);
+         sscanf(token2.c_str(),"%d", &novo->baseAttackModifier);
          //TODO others attack modifiers
       }
+      /* Size Mofifier */
       else if (buf == "sizeModifier")
       {
-         fgets(buffer, sizeof(buffer),arq);
-         sscanf(buffer, "%d", &novo->sizeModifier);
+         sscanf(token2.c_str(), "%d", &novo->sizeModifier);
       }
+      /* Walk Interval */
+      else if (buf == "walk_interval")
+      {
+         sscanf(token2.c_str(), "%f", &novo->walk_interval);
+         novo->walk_interval *= WALK_ACTUALIZATION;
+      }
+      /* Conversation File */
       else if (buf == "conversationFile")
       {
-         fgets(buffer, sizeof(buffer), arq);
-         sscanf(buffer, "%s", &buf2[0]);
-         novo->setConversationFile(buf2);
+         novo->setConversationFile(token2);
          if(pEngine != NULL)
          {
             novo->createConversation(pEngine);
@@ -655,24 +693,25 @@ character* characterList::insertCharacter(string file, featsList* ft,
          sscanf(buffer, "%s", &buf2[0]);
          novo->tendency = numberConstant(buf2);
       }*/
+
+      /* Psycho State */
       else if (buf == "psychoState")
       {
-         fgets(buffer, sizeof(buffer),arq);
-         sscanf(buffer, "%d", &novo->psychoState);
+         sscanf(token2.c_str(), "%d", &novo->psychoState);
       }
       else
       {
          int cn;
-         cn = numberConstant(buffer);
+         cn = numberConstant(buf);
          if( (isAttribute(cn)) || (isSkill(cn)) )
          {
-            fgets(buffer, sizeof(buffer),arq);
-            sscanf(buffer, "%d", &novo->sk.m_skills[cn].points);
+            sscanf(token2.c_str(), "%d", &novo->sk.m_skills[cn].points);
             //TODO COSTS per SKILL, based on classes...
          }
          else
          {
-            fgets(buffer, sizeof(buffer),arq);
+            //FIXME commented until fix the numberConstant thing
+            //printf("Unkown token: %s at file: %s\n",buf.c_str(),file.c_str());
          }
          //TODO FEATS.
       }

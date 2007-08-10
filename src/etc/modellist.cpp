@@ -242,6 +242,7 @@ void modelList::removeUnusedModels()
          removeModel(first);
       }
    }
+   printAll();
 }
 
 /********************************************************

@@ -1659,9 +1659,6 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
    GLfloat varX, varZ;        // to avoid GLfloat calculate
    character* activeCharacter = PCs->getActiveCharacter();
 
-   GLfloat passo;     // How much the character walks, based on time
-   GLfloat rotacao;   // How much the character turns, based on time
-   GLfloat varCamera; // Camera Variation
    GLfloat varTempo;  // Time Variation
    
    tempo = SDL_GetTicks();
@@ -1682,21 +1679,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
       hourToTxt();
 
-      /* Calculate the real Modification on walk, rotate, turn, etc */
-      GLfloat vt = 1;//varTempo / ACTUALIZATION_RATE;
-      passo = (vt)*ANDAR;
-      if(passo > 9)
-        passo = 9;  /* To avoid phantom efects when LAGs occurs */
-      rotacao = (vt)*GIRAR;
-      varCamera = vt*DELTACAMERA;
-      
       SDL_PumpEvents();
-
       lastRead = tempo;
-
         
-      //redesenha = TrataIA();
-       
       /* Keyboard Events */
       Uint8 *keys;
       keys = SDL_GetKeyState(NULL);
@@ -1887,8 +1872,10 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       if(keys[SDLK_q] || keys[SDLK_e])
       {
          walkStatus = ENGINE_WALK_KEYS;
-          varX = passo * sin(deg2Rad(activeCharacter->orientation+90.0));
-          varZ = passo * cos(deg2Rad(activeCharacter->orientation+90.0));
+          varX = activeCharacter->walk_interval * 
+                 sin(deg2Rad(activeCharacter->orientation+90.0));
+          varZ = activeCharacter->walk_interval * 
+                 cos(deg2Rad(activeCharacter->orientation+90.0));
          // Left walk
          if(keys[SDLK_q]) 
          {
@@ -1907,12 +1894,17 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             redesenha = true;
             andou = true;
          }
-         else if( ((varX > 0) && (canWalk(passo,0,0))) ||
-                  ((varX < 0) && (canWalk(-passo,0,0))) )       
+         else if(((varX > 0)&&(canWalk(activeCharacter->walk_interval,0,0))) ||
+                 ((varX < 0)&&(canWalk(-activeCharacter->walk_interval,0,0))) )
          {
             if(varX < 0)
-               passo *= -1;
-            activeCharacter->xPosition += passo;
+            {
+               activeCharacter->xPosition -= activeCharacter->walk_interval;
+            }
+            else
+            {
+               activeCharacter->xPosition += activeCharacter->walk_interval;
+            }
             gameCamera.actualizeCamera(activeCharacter->xPosition,
                                        activeCharacter->yPosition,
                                        activeCharacter->zPosition,
@@ -1920,12 +1912,18 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             redesenha = true;
             andou = true;
          }
-         else if( ((varZ > 0) && canWalk(0,passo,0)) ||
-                  ((varZ < 0) && canWalk(0,-passo,0)) )
+         else if( ((varZ > 0) && canWalk(0,activeCharacter->walk_interval,0)) ||
+                  ((varZ < 0) && canWalk(0,-activeCharacter->walk_interval,0)) )
          {
-            if(varZ < 0) 
-               passo *= -1;
-            activeCharacter->zPosition += passo;
+            if(varZ < 0)
+            {
+               activeCharacter->zPosition -= activeCharacter->walk_interval;
+            }
+            else
+            {
+               activeCharacter->zPosition += activeCharacter->walk_interval;
+            }
+
             gameCamera.actualizeCamera(activeCharacter->xPosition,
                                        activeCharacter->yPosition,
                                        activeCharacter->zPosition,
@@ -1938,8 +1936,10 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       else if(keys[SDLK_w] || keys[SDLK_s])
       { 
          walkStatus = ENGINE_WALK_KEYS;
-         varX = passo * sin(deg2Rad(activeCharacter->orientation));
-         varZ = passo * cos(deg2Rad(activeCharacter->orientation));
+         varX = activeCharacter->walk_interval * 
+                sin(deg2Rad(activeCharacter->orientation));
+         varZ = activeCharacter->walk_interval * 
+                cos(deg2Rad(activeCharacter->orientation));
          if(keys[SDLK_w]) 
          {
               varX *= -1;
@@ -1956,13 +1956,18 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
              redesenha = true;
              andou  = true;
          }
-         else if( ((varX > 0) && (canWalk(passo,0,0))) ||
-                  ((varX < 0) && (canWalk(-passo,0,0))) ) 
+         else if(((varX > 0)&&(canWalk(activeCharacter->walk_interval,0,0))) ||
+                 ((varX < 0)&&(canWalk(-activeCharacter->walk_interval,0,0))) ) 
                    
          {
-              if(varX < 0 )
-                 passo *= -1;
-              activeCharacter->xPosition += passo;
+              if(varX < 0)
+              {
+                 activeCharacter->xPosition -= activeCharacter->walk_interval;
+              }
+              else
+              {
+                 activeCharacter->xPosition += activeCharacter->walk_interval;
+              }
               gameCamera.actualizeCamera(activeCharacter->xPosition,
                               activeCharacter->yPosition,
                               activeCharacter->zPosition,
@@ -1970,12 +1975,17 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
               redesenha = true;
               andou = true;
          }
-         else if( ((varZ > 0) && (canWalk(0,passo,0))) ||
-                  ((varZ < 0) && (canWalk(0,-passo,0))) )
+         else if(((varZ > 0)&&(canWalk(0,activeCharacter->walk_interval,0))) ||
+                 ((varZ < 0)&&(canWalk(0,-activeCharacter->walk_interval,0))))
          {
-              if( varZ < 0 )
-                 passo *= -1;
-              activeCharacter->zPosition += passo;
+              if(varZ < 0)
+              {
+                 activeCharacter->zPosition -= activeCharacter->walk_interval;
+              }
+              else
+              {
+                 activeCharacter->zPosition += activeCharacter->walk_interval;
+              }
               gameCamera.actualizeCamera(activeCharacter->xPosition,
                               activeCharacter->yPosition,
                               activeCharacter->zPosition,
@@ -1991,9 +2001,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
          GLfloat ori = activeCharacter->orientation;
          walkStatus = ENGINE_WALK_KEYS;
          // CounterClockWise Character turn
-         if((keys[SDLK_a]) && (canWalk(0,0,rotacao)) )  
+         if((keys[SDLK_a]) && (canWalk(0,0,TURN_VALUE)) )  
          {
-            ori += rotacao;
+            ori += TURN_VALUE;
             if(ori > 360.0)
             { 
                ori -= 360.0;
@@ -2003,9 +2013,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             andou = true;
          }
          // Clockwise Character Turn
-         if((keys[SDLK_d]) && (canWalk(0,0,-rotacao)) )
+         if((keys[SDLK_d]) && (canWalk(0,0,-TURN_VALUE)) )
          {
-            ori -= rotacao;
+            ori -= TURN_VALUE;
             if(ori < 0.0)
             {
                ori += 360.0;
@@ -2036,7 +2046,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       }
 
       /* Camera Verification */
-      if(gameCamera.doIO(keys, Mbutton, x, y, varCamera ))
+      if(gameCamera.doIO(keys, Mbutton, x, y, DELTA_CAMERA ))
       {
          redesenha = true;
       }
@@ -2065,7 +2075,8 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             activeCharacter->pathFind.findPath(
                                              activeCharacter->xPosition,
                                              activeCharacter->zPosition,
-                                             xReal, zReal, ANDAR, 
+                                             xReal, zReal, 
+                                             activeCharacter->walk_interval, 
                                              activeCharacter->orientation,
                                              activeCharacter->min[0],
                                              activeCharacter->min[1],
@@ -2787,7 +2798,7 @@ bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
 
    GLfloat res = actualMap->getHeight(nx, nz);
 
-   if( res - altura_atual > ANDAR)
+   if( res - altura_atual > activeCharacter->walk_interval)
    {
        activeCharacter->yPosition = altura_atual;
        return(false);

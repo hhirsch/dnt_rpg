@@ -42,6 +42,9 @@ class thing
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
       float cost;             /**< Cost Value */
+      float walk_interval;    /**< The interval of walking (for multiply per
+                                   WALK_ACTUALIZATION value. This is for 
+                                   temporize the walk animation of the thing) */
 
       /*!
        **********************************************

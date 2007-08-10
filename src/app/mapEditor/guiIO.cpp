@@ -17,7 +17,7 @@ guiIO::guiIO()
    actualFog = NULL;
 
    /* Change the minimun Zoom */
-   gameCamera.defineMinZoom(2*ZOOMMINIMO);
+   gameCamera.defineMinZoom(2*ZOOM_MIN);
 
    /* Open Windows */
    ltWindow = new listWindow(gui);
@@ -388,7 +388,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
    guiObject* object;
 
    /* Camera Verification */
-   gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTACAMERA );
+   gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA );
 
    if(keys[SDLK_KP8])
    {

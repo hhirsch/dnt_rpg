@@ -23,7 +23,7 @@ camera::camera()
    zoomAc = 0.0;
    phiAc = 0.0;
    thetaAc = 0.0;
-   minZoom = ZOOMMINIMO;
+   minZoom = ZOOM_MIN;
 }
 
 /******************************************************************
@@ -191,9 +191,9 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    {
       d = minZoom;
    }
-   else if(d < ZOOMMAXIMO)
+   else if(d < ZOOM_MAX)
    {
-      d = ZOOMMAXIMO;
+      d = ZOOM_MAX;
    }
 
    /* Put Phi on [0-360) range */
@@ -223,7 +223,8 @@ void camera::lookAt()
 /******************************************************************
  *                          getCameraX                            *
  ******************************************************************/
-GLfloat camera::getCameraX(){
+GLfloat camera::getCameraX()
+{
    return(cameraX);
 }
 
@@ -281,13 +282,13 @@ void camera::sumPhi(GLfloat f)
 void camera::sumD(GLfloat f)
 {
    d += f;
-   if (d < ZOOMMAXIMO) 
+   if (d < ZOOM_MAX) 
    {
-      d = ZOOMMAXIMO;
+      d = ZOOM_MAX;
    }
-   else if (d > ZOOMMINIMO)
+   else if (d > ZOOM_MIN)
    {
-      d = ZOOMMINIMO;
+      d = ZOOM_MIN;
    }
 }
 
@@ -382,7 +383,7 @@ void camera::actualizeCamera(GLfloat characterX, GLfloat characterY,
       /* Make the camera follow character rotations */
       GLfloat variation = fabs(characterOrientation - phi);
       GLfloat othVariation = fabs(360-variation);
-      if( (variation <= DELTACAMERA) || (othVariation <= DELTACAMERA) )
+      if( (variation <= DELTA_CAMERA) || (othVariation <= DELTA_CAMERA) )
       {
          phi = characterOrientation;
       }
@@ -390,22 +391,22 @@ void camera::actualizeCamera(GLfloat characterX, GLfloat characterY,
       {
          if(variation < othVariation)
          {
-            phi -= DELTACAMERA;
+            phi -= DELTA_CAMERA;
          }
          else
          {
-            phi += DELTACAMERA;
+            phi += DELTA_CAMERA;
          }
       }
       else
       {
          if(variation < othVariation)
          {
-            phi += DELTACAMERA;
+            phi += DELTA_CAMERA;
          }
          else
          {
-            phi -= DELTACAMERA;
+            phi -= DELTA_CAMERA;
          }
       }
    }

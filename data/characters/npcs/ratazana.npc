@@ -1,19 +1,19 @@
-Ratazana
-../data/models/personagens/Ratazana/modelo.cfg
-../data/characters/portraits/ratazana.png
-maxLifePoints               12
-baseModifier                2/2/2
-attackModifier              5/0/0/0/0/0
-sizeModifier                2
-conversationFile            ratazana1.dlg
-ATT_STRENGHT                10
-ATT_DEXTERY                 18
-ATT_CONSTITUTION            12
-ATT_INTELIGENCY             14
-ATT_WISDOW                  6
-ATT_CHARISM                 2
-psychoState                 1
-SKILL_ADESTRAR_BICHOS       20
-SKILL_INTIMIDAR             30
-SKILL_OUVIR                 26
-SKILL_ESCONDER              30
+name = Ratazana
+model = ../data/models/personagens/Ratazana/modelo.cfg
+portrait = ../data/characters/portraits/ratazana.png
+maxLifePoints = 12
+baseModifier = 2/2/2
+attackModifier = 5/0/0/0/0/0
+sizeModifier = 2
+conversationFile = ratazana1.dlg
+ATT_STRENGHT = 10
+ATT_DEXTERY = 18
+ATT_CONSTITUTION = 12
+ATT_INTELIGENCY = 14
+ATT_WISDOW = 6
+ATT_CHARISM = 2
+psychoState = 1
+SKILL_ADESTRAR_BICHOS = 20
+SKILL_INTIMIDAR = 30
+SKILL_OUVIR = 26
+SKILL_ESCONDER = 30

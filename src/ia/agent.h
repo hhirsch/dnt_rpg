@@ -5,7 +5,7 @@
 #include "../engine/util.h"
 
 #define MAX_OBSTACLES 30
-#define MAX_ROTATION GIRAR
+#define MAX_ROTATION  TURN_VALUE
 
 
 

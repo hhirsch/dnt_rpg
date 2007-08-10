@@ -34,24 +34,22 @@
  ********************************************************************/
 #define REFRESH_RATE 100.0  /**< Keyboard Refresh Rate for the Engine */
 #define NORMAL_FPS 35       /**< Minimun FPS to the engine runs smooth */
-#define ACTUALIZATION_RATE (1000/NORMAL_FPS)  /**< Actualization Rate in ms */
-#define WALK_ACTUALIZATION (1.0/NORMAL_FPS) /**< Walk Actualization */ //0.021
+#define ACTUALIZATION_RATE (1000/NORMAL_FPS) /**< Actualization Rate in ms */
+#define WALK_ACTUALIZATION (1.0/NORMAL_FPS)  /**< Walk Actualization */
 
 /********************************************************************
  *                Character's moviments constants                   *
  ********************************************************************/
-
-#define ANDAR  WALK_ACTUALIZATION * 37.5 //0.75 /**< The distance that normal character walks */
-#define GIRAR  WALK_ACTUALIZATION * 125.0 //2.5 /**< The turn velocity of normal character */
-#define WALK_PER_MOVE_ACTION 60 /**< Distance that can be walked per move */
+#define TURN_VALUE (WALK_ACTUALIZATION * 125.0) /**< The turn velocity */
+#define WALK_PER_MOVE_ACTION  60 /**< Distance that can be walked per move */
 
 /********************************************************************
  *                      Camera's constants                          *
  ********************************************************************/
 
-#define DELTACAMERA  WALK_ACTUALIZATION * 75 /**<  The camera velocity */ //1.5
-#define ZOOMMAXIMO       80             /**< Max value of Zoom */
-#define ZOOMMINIMO       500            /**< Min value of Zoom */
+#define DELTA_CAMERA  WALK_ACTUALIZATION * 75 /**<  The camera velocity */
+#define ZOOM_MAX          80            /**< Max value of Zoom */
+#define ZOOM_MIN         500            /**< Min value of Zoom */
 #define FARVIEW         4096            /**< FarView constant */
 #define INDOOR_FARVIEW   768            /**< Indoor FarView */
 
@@ -176,9 +174,11 @@ bool actionInRange(GLfloat posX, GLfloat posZ,
                    GLfloat targX, GLfloat targZ,
                    GLfloat range);
 
-
+/*! Set the buffer to 2D draw mode */
 void draw2DMode();
 
+/*! Set the buffer to 3D draw mode
+ * \param actualFarView -> the actual value of farView to set */
 void draw3DMode(int actualFarView);
 
 #endif

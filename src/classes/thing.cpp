@@ -1,5 +1,6 @@
 #include "thing.h"
 #include "defs.h"
+#include "../engine/util.h"
 #include <math.h>
 
 /*************************************************************************
@@ -27,6 +28,8 @@ thing::thing()
    yPosition = 0;
    zPosition = 0;
    dead = false;
+   walk_interval = 37.5 * WALK_ACTUALIZATION; //default value, if not
+                                              //defined at the def file.
 }
 
 /******************************************************
