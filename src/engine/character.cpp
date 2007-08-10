@@ -220,7 +220,7 @@ void character::defineActualLifePoints(int newLife)
  *********************************************************************/
 void character::drawMainPortrait()
 {
-   glRasterPos2f(800-portraitImage->w, 600);
+   glRasterPos2f(799-portraitImage->w, 599);
    glPixelZoom(1.0, -1.0);
    glDrawPixels(portraitImage->w, portraitImage->h, GL_RGBA, GL_UNSIGNED_BYTE, 
                 portraitImage->pixels);
