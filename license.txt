@@ -1,0 +1,24 @@
+License
+
+   DccNiTghtmare is provided on an "as is" basis, without warranty of any
+kind.  Use at your own risk! Under no circumstances shall the author(s) or
+contributor(s) be liable for damages resulting directly or indirectly from
+the use or non-use of DccNiTghtmare and derivates. 
+
+   The DccNiTghtmare's source code is all in the Public Domain, relinquishing
+all copyrights. Everyone is free to use, modify, republish, sell or give
+away it without prior consent from anybody.
+
+   All DccNiTghtmare's data files that are made by the DNTeam are also at
+Public Domain. The data that aren't made by the DNTeam is listed bellow,
+with autor's names and license (those not listed here are in Public Domain).
+   
+   Just as a reminder, if the .blend file is described here, the correspondents
+cal3D files are at the same license of the blend that originated them.
+
+*******************************************************************************
+**           File            **         Authors          **      License     **
+*******************************************************************************
+**                           **                          **                  **
+*******************************************************************************
+   
