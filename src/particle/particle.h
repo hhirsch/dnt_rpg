@@ -144,6 +144,9 @@ class particleSystem
       bool windAffect;       /**< If Wind Affects the System */
 
       int getMaxParticles(){return(maxParticles);};
+
+      particleSystem* next;     /**< Next Particle System on the List */
+      particleSystem* previous; /**< Previous Particle System on the list */
       
    protected:
 

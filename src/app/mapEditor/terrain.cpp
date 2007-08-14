@@ -368,10 +368,10 @@ void terrain::drawTemporary()
       }
       glDisable(GL_LIGHTING);
       glBegin(GL_POLYGON);
-        glVertex3f(mX-2,quad->h1+1,mZ-2);
-        glVertex3f(mX-2,quad->h2+1,mZ+2);
-        glVertex3f(mX+2,quad->h3+1,mZ+2);
-        glVertex3f(mX+2,quad->h4+1,mZ-2);
+        glVertex3f(mX-2,actualMap->getHeight(mX-2,mZ-2)+1,mZ-2);
+        glVertex3f(mX-2,actualMap->getHeight(mX-2,mZ+2)+1,mZ+2);
+        glVertex3f(mX+2,actualMap->getHeight(mX+2,mZ+2)+1,mZ+2);
+        glVertex3f(mX+2,actualMap->getHeight(mX+2,mZ-2)+1,mZ-2);
       glEnd();
       glEnable(GL_LIGHTING);
    }

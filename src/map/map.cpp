@@ -850,22 +850,61 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz)
  ********************************************************************/
 GLfloat Map::getHeight(GLfloat nx, GLfloat nz, Square* saux)
 {
+   float d2, d4, h = 0;
+   double a = 0, 
+          b = 0,
+          c = 0,
+          d = 0,
+          l = 0;
+
    if(!saux)
    {
       /* No positon on map, so no height! */
       return(0.0);
    }
 
-   /* Do Interpolation to define the Height on position */
-   GLfloat dx1 = fabs(nx - saux->x1) / SQUARE_SIZE;
-   GLfloat dz1 = fabs(nz - saux->z1) / SQUARE_SIZE;
-   GLfloat dx2 = fabs(saux->x2 - nx) / SQUARE_SIZE;
-   GLfloat dz2 = fabs(saux->z2 - nz) / SQUARE_SIZE;
+   /* Calculate the squared distances */
+   d2 = sqrt( (nx-saux->x2)*(nx-saux->x2) + (nz-saux->z1)*(nz-saux->z1) );
+   d4 = sqrt( (nx-saux->x1)*(nx-saux->x1) + (nz-saux->z2)*(nz-saux->z2) );
 
-   GLfloat ha = (dx2 * saux->h1) + (dx1 * saux->h4);
-   GLfloat hb = (dx2 * saux->h2) + (dx1 * saux->h3);
+   /* Verify to each triangle the nx,ny is at, by just looking
+    * if it is near to v2 or v4 vertex. */
 
-   return((ha * dz2) + (hb * dz1));
+   /* FIXME -> precalcualte for each square the 2 equations, to
+    * make less calculates here. */
+
+   if( d2 <= d4 )
+   {
+      /* is at the upper triangle */
+      a = ( (saux->h4 - saux->h1) * (saux->z2 - saux->z1) ); 
+      b = -( (saux->z2 - saux->z1) * (saux->x2 - saux->x1) );
+      c = ( (saux->x2 - saux->x1) * (saux->h3 - saux->h1) ) - 
+          ( (saux->h4 - saux->h1) * (saux->x2 - saux->x1) );
+      l = sqrt( a*a + b*b + c*c);
+      a = a / l;
+      b = b / l;
+      c = c / l;
+      d = -( (saux->x1*a) + (saux->h1*b) + (saux->z1*c) );
+   }
+   else
+   {
+      /* is at botton triangle */
+      a = ( (saux->h3 - saux->h1) * (saux->z2 - saux->z1) ) -
+          ( (saux->h2 - saux->h1) * (saux->z2 - saux->z1) );
+      b = -( (saux->x2 - saux->x1) * (saux->z2 - saux->z1) );
+      c = ( (saux->x2 - saux->x1) * (saux->h2 - saux->h1) );
+      l = sqrt( a*a + b*b + c*c);
+      a = a / l;
+      b = b / l;
+      c = c / l;
+      d = -( (saux->x1*a) + (saux->h1*b) + (saux->z1*c) );
+   }
+
+   if(b != 0)
+   {
+      h = (-(a*nx) - (c*nz) - (d)) / b;
+   }
+   return(h);
 }
 
 /********************************************************************
@@ -904,16 +943,16 @@ void Map::drawSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za,
            pZ2 = (incPosZ) + pZ1;
            glTexCoord2f(texX, texZ);
            glNormal3i(0,1,0);
-           glVertex3f( pX1 , getHeight(pX1, pZ1)+sumY, pZ1 );
+           glVertex3f( pX1 , getHeight(pX1, pZ1)+sumY+0.5, pZ1 );
            glTexCoord2f(texX, texZ + incTex);
            glNormal3i(0,1,0);
-           glVertex3f( pX1 , getHeight(pX1, pZ2)+sumY, pZ2);
+           glVertex3f( pX1 , getHeight(pX1, pZ2)+sumY+0.5, pZ2);
            glTexCoord2f(texX + incTex, texZ + incTex);
            glNormal3i(0,1,0);
-           glVertex3f( pX2, getHeight(pX2, pZ2)+sumY, pZ2 );
+           glVertex3f( pX2, getHeight(pX2, pZ2)+sumY+0.5, pZ2 );
            glTexCoord2f(texX + incTex, texZ);
            glNormal3i(0,1,0);
-           glVertex3f( pX2, getHeight(pX2, pZ1)+sumY, pZ1 );
+           glVertex3f( pX2, getHeight(pX2, pZ1)+sumY+0.5, pZ1 );
         }
      }
      glEnd();
