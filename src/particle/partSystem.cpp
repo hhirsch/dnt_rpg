@@ -9,52 +9,15 @@
  **********************************************************************/
 partSystem::partSystem()
 {
-   int i;
-   
-   for(i = 0; i < MAX_WATERFALL; i++)
-   {
-      waterfall[i] = NULL;
-   }
-
-   for(i = 0; i < MAX_FIRE; i++)
-   {
-      fire[i] = NULL;
-   }
-
-   for(i = 0; i < MAX_WATER_SURFACE; i++)
-   {
-      waterSurface[i] = NULL;
-   }
-
-   for(i = 0; i < MAX_SMOKE; i++)
-   {
-      smoke[i] = NULL;
-   }
-
-   for(i = 0; i < MAX_BLOOD; i++)
-   {
-      blood[i] = NULL;
-   }
-
-   for(i = 0; i < MAX_LIGHTNING; i++)
-   {
-      lightning[i] = NULL;
-   }
-
-   for(i = 0; i < MAX_SNOW; i++)
-   {
-      snow[i] = NULL;
-   }
-
-   for(i = 0; i < MAX_GRASS; i++)
-   {
-      grassParticles[i] = NULL;
-   }
-
-   for(i = 0; i < MAX_METEOR; i++)
-   {
-      meteorParticles[i] = NULL;
-   }
+   waterfall = new particleList();
+   fire = new particleList();
+   waterSurface = new particleList();
+   smoke = new particleList();
+   blood = new particleList();
+   lightning = new particleList();
+   snow = new particleList();
+   grassParticles = new particleList();
+   meteorParticles = new particleList();
    colDetect = NULL;
 }
 
@@ -64,6 +27,15 @@ partSystem::partSystem()
 partSystem::~partSystem()
 {
    deleteAll();
+   delete(waterfall);
+   delete(fire);
+   delete(waterSurface);
+   delete(smoke);
+   delete(blood);
+   delete(lightning);
+   delete(snow);
+   delete(grassParticles);
+   delete(meteorParticles);
 }
 
 /**********************************************************************
@@ -71,88 +43,68 @@ partSystem::~partSystem()
  **********************************************************************/
 void partSystem::deleteAll()
 {
-   int i;
-   
-   for(i = 0; i < MAX_WATERFALL; i++)
+   while(waterfall->getTotal() > 0)
    {
-      if( waterfall[i] != NULL)
-      {
-         delete(waterfall[i]);
-         waterfall[i] = NULL;
-      }
+      part1* wt = (part1*)waterfall->getFirst();
+      waterfall->removeSystem(waterfall->getFirst());
+      delete(wt);
    }
 
-   for(i = 0; i < MAX_FIRE; i++)
+   while(fire->getTotal() > 0)
    {
-      if(fire[i] != NULL)
-      {
-         delete(fire[i]);
-         fire[i] = NULL;
-      }
+      part2* fr = (part2*)fire->getFirst();
+      fire->removeSystem(fire->getFirst());
+      delete(fr);
    }
 
-   for(i = 0; i < MAX_WATER_SURFACE; i++)
+   while(waterSurface->getTotal() > 0)
    {
-      if(waterSurface[i] != NULL)
-      {
-         delete(waterSurface[i]);
-         waterSurface[i] = NULL;
-      }
+      part3* ws = (part3*)waterSurface->getFirst();
+      waterSurface->removeSystem(waterSurface->getFirst());
+      delete(ws);
    }
 
-   for(i = 0; i < MAX_SMOKE; i++)
+   while(smoke->getTotal() > 0)
    {
-      if(smoke[i] != NULL)
-      {
-         delete(smoke[i]);
-         smoke[i] = NULL;
-      }
+      part4* sm = (part4*)smoke->getFirst();
+      smoke->removeSystem(smoke->getFirst());
+      delete(sm);
    }
 
-   for(i = 0; i < MAX_BLOOD; i++)
+   while(blood->getTotal() > 0)
    {
-      if(blood[i] != NULL)
-      {
-         delete(blood[i]);
-         blood[i] = NULL;
-      }
+      part5* bl = (part5*)blood->getFirst();
+      blood->removeSystem(blood->getFirst());
+      delete(bl);
    }
 
-   for(i = 0; i < MAX_LIGHTNING; i++)
+   while(lightning->getTotal() > 0)
    {
-      if(lightning[i] != NULL)
-      {
-         delete(lightning[i]);
-         lightning[i] = NULL;
-      }
+      part6* lt = (part6*)lightning->getFirst();
+      lightning->removeSystem(lightning->getFirst());
+      delete(lt);
    }
 
-   for(i = 0; i < MAX_SNOW; i++)
+   while(snow->getTotal() > 0)
    {
-      if(snow[i] != NULL)
-      {
-         delete(snow[i]);
-         snow[i] = NULL;
-      }
+      part7* sn = (part7*)snow->getFirst();
+      snow->removeSystem(snow->getFirst());
+      delete(sn);
    }
 
-   for(i = 0; i < MAX_GRASS; i++)
+   while(grassParticles->getTotal() > 0)
    {
-      if(grassParticles[i] != NULL)
-      {
-         delete(grassParticles[i]);
-         grassParticles[i] = NULL;
-      }
+      grass* gr = (grass*)grassParticles->getFirst();
+      grassParticles->removeSystem(grassParticles->getFirst());
+      delete(gr);
    }
 
-   for(i = 0; i < MAX_METEOR; i++)
+   while(meteorParticles->getTotal() > 0)
    {
-      if(meteorParticles[i] != NULL)
-      {
-         delete(meteorParticles[i]);
-      }
+      meteor* mt = (meteor*)meteorParticles->getFirst();
+      meteorParticles->removeSystem(meteorParticles->getFirst());
+      delete(mt);
    }
-
 
 }
 
@@ -164,117 +116,118 @@ void partSystem::actualizeAll(float PCposX, float PCposY, float PCposZ,
 {
    int i;
 
+   /* Grass */
    if(enableGrass)
    {
-      for(i = 0; i < MAX_GRASS; i++)
+      grass* gr = (grass*)grassParticles->getFirst();
+      for(i = 0; i < grassParticles->getTotal(); i++)
       {
-         if(grassParticles[i] != NULL)
-         {
-            grassParticles[i]->NextStep(matriz);
-         }
+         gr->NextStep(matriz);
+         gr = (grass*)gr->next;
       }
    }
 
-   
-   for(i = 0; i < MAX_WATERFALL; i++)
+   /* Waterfall */ 
+   part1* wt = (part1*)waterfall->getFirst();
+   for(i = 0; i < waterfall->getTotal(); i++)
    {
-      if( waterfall[i] != NULL)
+      if(wt->followPC)
       {
-         if(waterfall[i]->followPC)
-         {
-            waterfall[i]->definePosition(PCposX, PCposY, PCposZ);
-         }
-         waterfall[i]->NextStep(matriz);
+         wt->definePosition(PCposX, PCposY, PCposZ);
       }
+      wt->NextStep(matriz);
+      wt = (part1*) wt->next;
    }
 
    glDisable(GL_FOG);
-   for(i = 0; i < MAX_FIRE; i++)
+
+   /* Fire */
+   part2* fr = (part2*)fire->getFirst();
+   for(i = 0; i < fire->getTotal(); i++)
    {
-      if(fire[i] != NULL)
+      if(fr->followPC)
       {
-         if(fire[i]->followPC)
-         {
-            fire[i]->definePosition(PCposX, PCposY, PCposZ);
-         }
-         fire[i]->NextStep(matriz);
+         fr->definePosition(PCposX, PCposY, PCposZ);
       }
+      fr->NextStep(matriz);
+      fr = (part2*) fr->next;
    }
-   for(i = 0; i < MAX_METEOR; i++)
+
+   /* Meteor */
+   meteor* mt = (meteor*)meteorParticles->getFirst();
+   for(i = 0; i < meteorParticles->getTotal(); i++)
    {
-      if(meteorParticles[i] != NULL)
+      mt->NextStep(matriz);
+      if(!mt->isLiving())
       {
-         meteorParticles[i]->NextStep(matriz);
-         if(!meteorParticles[i]->isLiving())
-         {
-            removeParticle(PART_METEOR, meteorParticles[i]);
-         }
+         removeParticle(PART_METEOR, mt);
       }
+      mt = (meteor*)mt->next;
    }
    glEnable(GL_FOG);
 
-   for(i = 0; i < MAX_WATER_SURFACE; i++)
+   /* WaterSurface */
+   part3* ws = (part3*)waterSurface->getFirst();
+   for(i = 0; i < waterSurface->getTotal(); i++)
    {
-      if(waterSurface[i] != NULL)
+      if(ws->followPC)
       {
-         if(waterSurface[i]->followPC)
-         {
-            waterSurface[i]->definePosition(PCposX, PCposY, PCposZ);
-         }
-         waterSurface[i]->NextStep(matriz);
+         ws->definePosition(PCposX, PCposY, PCposZ);
       }
+      ws->NextStep(matriz);
+      ws = (part3*) ws->next;
    }
 
-   for(i = 0; i < MAX_SMOKE; i++)
+   /* Smoke */
+   part4* sm = (part4*)smoke->getFirst();
+   for(i = 0; i < smoke->getTotal(); i++)
    {
-      if(smoke[i] != NULL)
+      if(sm->followPC)
       {
-         if(smoke[i]->followPC)
-         {
-            smoke[i]->definePosition(PCposX, PCposY, PCposZ);
-         }
-         smoke[i]->NextStep(matriz);
+         sm->definePosition(PCposX, PCposY, PCposZ);
       }
+      sm->NextStep(matriz);
+      sm = (part4*)sm->next;
    }
 
-   for(i = 0; i < MAX_BLOOD; i++)
+   /* Blood */
+   part5* bl = (part5*)blood->getFirst();
+   for(i = 0; i < blood->getTotal(); i++)
    {
-      if(blood[i] != NULL)
+      if(bl->followPC)
       {
-         if(blood[i]->followPC)
-         {
-            blood[i]->definePosition(PCposX, PCposY, PCposZ);
-         }
-         blood[i]->NextStep(matriz);
-         if(blood[i]->getLivingTime() >= MAX_BLOOD_LIVING)
-         {
-            removeParticle(PART_BLOOD, blood[i]);
-         }
+         bl->definePosition(PCposX, PCposY, PCposZ);
       }
+      bl->NextStep(matriz);
+      if(bl->getLivingTime() >= MAX_BLOOD_LIVING)
+      {
+         removeParticle(PART_BLOOD, bl);
+      }
+      bl = (part5*)bl->next;
    }
 
-   for(i = 0; i < MAX_LIGHTNING; i++)
+   /* Lightning */
+   part6* lt = (part6*)lightning->getFirst();
+   for(i = 0; i < lightning->getTotal(); i++)
    {
-      if(lightning[i] != NULL)
+      if(lt->followPC)
       {
-         if(lightning[i]->followPC)
-         {
-            lightning[i]->definePosition(PCposX, PCposY, PCposZ);
-         }
-         lightning[i]->NextStep(matriz);
+         lt->definePosition(PCposX, PCposY, PCposZ);
       }
+      lt->NextStep(matriz);
+      lt = (part6*) lt->next;
    }
 
-   for(i = 0; i < MAX_SNOW; i++)
+   /* Snow */
+   part7* sn = (part7*)snow->getFirst();
+   for(i = 0; i < snow->getTotal(); i++)
    {
-      if(snow[i] != NULL)
+      if(sn->followPC)
       {
-         if(snow[i]->followPC)
-         {
-            snow[i]->definePosition(PCposX, PCposY, PCposZ);
-         }
-         snow[i]->NextStep(matriz);
+         sn->definePosition(PCposX, PCposY, PCposZ);
       }
+      sn->NextStep(matriz);
+      sn = (part7*)sn->next;
    }
 
    glColor3f(1.0,1.0,1.0);
@@ -287,23 +240,15 @@ particleSystem* partSystem::addParticle(int type, GLfloat x1, GLfloat z1,
                                         GLfloat x2, GLfloat z2, int total,
                                         string fileName)
 {
-   int i;
    switch(type)
    {
       case PART_GRASS:
-         for(i = 0; i < MAX_GRASS; i++)
-         {
-            if(grassParticles[i] == NULL)
-            {
-               grassParticles[i] = new grass(x1,z1,x2,z2,total, fileName);
-               return(grassParticles[i]);
-            }
-         }
-         if(i ==  MAX_GRASS)
-         {
-            printf("Warn: Too much Grass\n");
-         }
-       break;
+      {
+         grass* gr = new grass(x1,z1,x2,z2,total, fileName);
+         grassParticles->addSystem(gr);
+         return(gr);
+      }
+      break;
    }
    return(NULL);
 }
@@ -316,25 +261,17 @@ meteor* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
                                 GLfloat targX, GLfloat targY, GLfloat targZ,
                                 string fileName)
 {
-   int i;
    switch(type)
    {
       case PART_METEOR:
-         for(i = 0; i < MAX_METEOR; i++)
-         {
-            if(meteorParticles[i] == NULL)
-            {
-               meteorParticles[i] = new meteor(X, Y, Z, varX, varY, varZ,
-                                               targX, targY, targZ, fileName);
-               meteorParticles[i]->defineCollision(colDetect);
-               return(meteorParticles[i]);
-            }
-         }
-         if(i ==  MAX_METEOR)
-         {
-            printf("Warn: Too much Meteor, your killer!\n");
-         }
-       break;
+      {
+         meteor* mt = new meteor(X, Y, Z, varX, varY, varZ,
+                                 targX, targY, targZ, fileName);
+         meteorParticles->addSystem(mt);
+         mt->defineCollision(colDetect);
+         return(mt);
+      }
+      break;
    }
    return(NULL);
 }
@@ -345,107 +282,56 @@ meteor* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
 particleSystem* partSystem::addParticle(int type, GLfloat X, GLfloat Y, 
                                         GLfloat Z, string fileName )
 { 
-   int i;
-
    switch(type)
    {
        case PART_WATERFALL:
-          for(i = 0; i < MAX_WATERFALL; i++)
-          {
-             if( waterfall[i] == NULL)
-             {
-                 waterfall[i] = new part1(X,Y,Z,fileName);
-                 return(waterfall[i]);
-             }
-          }
-          if(i == MAX_WATERFALL)
-          {
-              printf("Warn: Too much Waterfalls\n");
-          }
+       {
+          part1* wt = new part1(X,Y,Z,fileName);
+          waterfall->addSystem(wt);
+          return(wt);
+       }
        break;
        case PART_FIRE:
-          for(i = 0; i < MAX_FIRE; i++)
-          {
-             if( fire[i] == NULL)
-             {
-                 fire[i] = new part2(X,Y,Z,fileName);
-                 return(fire[i]);
-             }
-          }
-          if(i == MAX_FIRE)
-          {
-              printf("Warn: Too much Fires\n");
-          }
+       {
+          part2* fr = new part2(X,Y,Z,fileName);
+          fire->addSystem(fr);
+          return(fr);
+       }
        break;
        case PART_WATER_SURFACE:
-          for(i = 0; i < MAX_WATER_SURFACE; i++)
-          {
-             if( waterSurface[i] == NULL)
-             {
-                 waterSurface[i] = new part3(X,Y,Z);
-                 return(waterSurface[i]);
-             }
-          }
-          if(i == MAX_WATER_SURFACE)
-          {
-              printf("Warn: Too much Water Surfaces\n");
-          }
+       {
+          part3* ws = new part3(X,Y,Z);
+          waterSurface->addSystem(ws);
+          return(ws);
+       }
        break;
        case PART_SMOKE:
-          for(i = 0; i < MAX_SMOKE; i++)
-          {
-             if( smoke[i] == NULL)
-             {
-                 smoke[i] = new part4(X,Y,Z,fileName);
-                 return(smoke[i]);
-             }
-          }
-          if(i == MAX_SMOKE)
-          {
-              printf("Warn: Too much Smokes\n");
-          }
+       {
+          part4* sm = new part4(X,Y,Z,fileName);
+          smoke->addSystem(sm);
+          return(sm);
+       }
        break;
        case PART_BLOOD:
-          for(i = 0; i < MAX_BLOOD; i++)
-          {
-             if( blood[i] == NULL)
-             {
-                 blood[i] = new part5(X,Y,Z,fileName);
-                 return(blood[i]);
-             }
-          }
-          if(i == MAX_BLOOD)
-          {
-              printf("Warn: Too much Blood!\n");
-          }
+       {
+          part5* bl =  new part5(X,Y,Z,fileName);
+          blood->addSystem(bl);
+          return(bl);
+       }
        break;
        case PART_LIGHTNING:
-          for(i = 0; i < MAX_LIGHTNING; i++)
-          {
-             if( lightning[i] == NULL)
-             {
-                 lightning[i] = new part6(X,Y,Z,fileName);
-                 return(lightning[i]);
-             }
-          }
-          if(i == MAX_LIGHTNING)
-          {
-              printf("Warn: Too much Lightning\n");
-          }
+       {
+          part6* ln = new part6(X,Y,Z,fileName);
+          lightning->addSystem(ln);
+          return(ln);
+       }
        break;
        case PART_SNOW:
-          for(i = 0; i < MAX_SNOW; i++)
-          {
-             if( snow[i] == NULL)
-             {
-                 snow[i] = new part7(X,Y,Z,fileName);
-                 return(snow[i]);
-             }
-          }
-          if(i == MAX_SNOW)
-          {
-              printf("Warn: Too much Snow\n");
-          }
+       {
+          part7* sn = new part7(X,Y,Z,fileName);
+          snow->addSystem(sn);
+          return(sn);
+       }
        break;
    }
 
@@ -457,109 +343,69 @@ particleSystem* partSystem::addParticle(int type, GLfloat X, GLfloat Y,
  **********************************************************************/
 void partSystem::removeParticle(int type, void* part)
 { 
-   int i;
-
    switch(type)
    {
        case PART_WATERFALL:
-          for(i = 0; i < MAX_WATERFALL; i++)
-          {
-             if( (particleSystem*)waterfall[i] == part)
-             {
-                 delete(waterfall[i]);
-                 waterfall[i] = NULL;
-                 return;
-             }
-          }
+       {
+          part1* wt = (part1*) part;
+          waterfall->removeSystem(wt);
+          delete(wt);
+       }
        break;
        case PART_FIRE:
-          for(i = 0; i < MAX_FIRE; i++)
-          {
-             if( (particleSystem*)fire[i] == part)
-             {
-                 delete(fire[i]);
-                 fire[i] = NULL;
-                 return;
-             }
-          }
+       {
+          part2* fr = (part2*) part;
+          fire->removeSystem(fr);
+          delete(fr);
+       }
        break;
        case PART_WATER_SURFACE:
-          for(i = 0; i < MAX_WATER_SURFACE; i++)
-          {
-             if( (particleSystem*)waterSurface[i] == part)
-             {
-                 delete(waterSurface[i]);
-                 waterSurface[i] = NULL;
-                 return;
-             }
-          }
+       {
+          part3* ws = (part3*) part;
+          waterSurface->removeSystem(ws);
+          delete(ws);
+       }
        break;
        case PART_SMOKE:
-          for(i = 0; i < MAX_SMOKE; i++)
-          {
-             if( (particleSystem*)smoke[i] == part)
-             {
-                 delete(smoke[i]);
-                 smoke[i] = NULL;
-                 return;
-             }
-          }
+       {
+          part4* sm = (part4*) part;
+          smoke->removeSystem(sm);
+          delete(sm);
+       }
        break;
        case PART_BLOOD:
-          for(i = 0; i < MAX_BLOOD; i++)
-          {
-             if( (particleSystem*)blood[i] == part)
-             {
-                 delete(blood[i]);
-                 blood[i] = NULL;
-                 return;
-             }
-          }
+       {
+          part5* bl = (part5*)part;
+          blood->removeSystem(bl);
+          delete(bl);
+       }
        break;
        case PART_LIGHTNING:
-          for(i = 0; i < MAX_LIGHTNING; i++)
-          {
-             if( (particleSystem*)lightning[i] == part)
-             {
-                 delete(lightning[i]);
-                 lightning[i] = NULL;
-                 return;
-             }
-          }
+       {
+          part6* lt = (part6*)part;
+          lightning->removeSystem(lt);
+          delete(lt);
+       }
        break;
        case PART_SNOW:
-          for(i = 0; i < MAX_SNOW; i++)
-          {
-             if( (particleSystem*)snow[i] == part)
-             {
-                 delete(snow[i]);
-                 snow[i] = NULL;
-                 return;
-             }
-          }
+       {
+          part7* sn = (part7*)part;
+          snow->removeSystem(sn);
+          delete(sn);
+       }
        break;
        case PART_GRASS:
-          for(i = 0; i < MAX_GRASS; i++)
-          {
-             if( (particleSystem*)grassParticles[i] == part)
-             {
-                delete(grassParticles[i]);
-                grassParticles[i] = NULL;
-                return;
-             }
-          }
+       {
+          grass* gr = (grass*)part;
+          grassParticles->removeSystem(gr);
+          delete(gr);
+       }
        break;
        case PART_METEOR:
        {
-         for(i = 0; i < MAX_METEOR; i++)
-         {
-            if( (particleSystem*)meteorParticles[i] == part)
-            {
-               delete(meteorParticles[i]);
-               meteorParticles[i] = NULL;
-               return;
-            }
-         }
+         meteor* mt = (meteor*)part;
+         meteorParticles->removeSystem(mt);
+         delete(mt);
        }
        break;
    }
@@ -589,20 +435,23 @@ void partSystem::setActualMap(void* acMap, collision* col)
 {
    int i;
 
-   for(i = 0; i < MAX_GRASS; i++)
-   {
-      if(grassParticles[i] != NULL)
-      {
-         grassParticles[i]->defineMap(acMap);
-      }
-   }
+   /* Collision system */
    colDetect = col;
-   for(i = 0; i < MAX_METEOR; i++)
+
+   /* Grass */
+   grass* gr = (grass*)grassParticles->getFirst();
+   for(i = 0; i < grassParticles->getTotal(); i++)
    {
-      if(meteorParticles[i] != NULL)
-      {
-         meteorParticles[i]->defineCollision(colDetect);
-      }
+      gr->defineMap(acMap);
+      gr = (grass*)gr->next;
+   }
+
+   /* Meteor */
+   meteor* mt = (meteor*)meteorParticles->getFirst();
+   for(i = 0; i < meteorParticles->getTotal(); i++)
+   {
+      mt->defineCollision(colDetect);
+      mt = (meteor*)mt->next;
    }
 
 }
@@ -615,62 +464,67 @@ int partSystem::numParticles()
    int i;
    int total = 0;
    
-   for(i = 0; i < MAX_WATERFALL; i++)
+   part1* wt = (part1*)waterfall->getFirst();
+   for(i = 0; i < waterfall->getTotal(); i++)
    {
-      if( waterfall[i] != NULL)
-         total += waterfall[i]->numParticles();
+      total += wt->numParticles();
+      wt = (part1*)wt->next;
    }
 
-   for(i = 0; i < MAX_FIRE; i++)
+   part2* fr = (part2*)fire->getFirst();
+   for(i = 0; i < fire->getTotal(); i++)
    {
-      if(fire[i] != NULL)
-        total += fire[i]->numParticles();
+      total += fr->numParticles();
+      fr = (part2*) fr->next;
    }
 
-   for(i = 0; i < MAX_WATER_SURFACE; i++)
+   part3* ws = (part3*)waterSurface->getFirst();
+   for(i = 0; i < waterSurface->getTotal(); i++)
    {
-      if(waterSurface[i] != NULL)
-        total += waterSurface[i]->numParticles();
+      total += ws->numParticles();
+      ws = (part3*)ws->next;
    }
 
-   for(i = 0; i < MAX_SMOKE; i++)
+   part4* sm = (part4*)smoke->getFirst();
+   for(i = 0; i < smoke->getTotal(); i++)
    {
-      if(smoke[i] != NULL)
-        total += smoke[i]->numParticles();
+      total += sm->numParticles();
+      sm = (part4*)sm->next;
    }
 
-   for(i = 0; i < MAX_BLOOD; i++)
+   part5* bl = (part5*)blood->getFirst();
+   for(i = 0; i < blood->getTotal(); i++)
    {
-      if(blood[i] != NULL)
-        total += blood[i]->numParticles();
+      total += bl->numParticles();
+      bl = (part5*) bl->next;
    }
 
-   for(i = 0; i < MAX_LIGHTNING; i++)
+   part6* lt = (part6*) lightning->getFirst();
+   for(i = 0; i < lightning->getTotal(); i++)
    {
-      if(lightning[i] != NULL)
-        total += lightning[i]->numParticles();
+      total += lt->numParticles();
+      lt = (part6*)lt->next;
    }
 
-   for(i = 0; i < MAX_SNOW; i++)
+   part7* sn = (part7*)snow->getFirst();
+   for(i = 0; i < snow->getTotal(); i++)
    {
-      if(snow[i] != NULL)
-        total += snow[i]->numParticles();
+      total += sn->numParticles();
+      sn = (part7*)sn->next;
    }
 
-   for(i = 0; i < MAX_GRASS; i++)
+   grass* gr = (grass*)grassParticles->getFirst();
+   for(i = 0; i < grassParticles->getTotal(); i++)
    {
-      if(grassParticles[i] != NULL)
-      {
-         total += grassParticles[i]->numParticles();
-      }
+      total += gr->numParticles();
+      gr = (grass*)gr->next;
    }
 
-   for(i = 0; i < MAX_METEOR; i++)
+   meteor* mt = (meteor*)meteorParticles->getFirst();
+   for(i = 0; i < meteorParticles->getTotal(); i++)
    {
-      if(meteorParticles[i] != NULL)
-      {
-         total += meteorParticles[i]->numParticles();
-      }
+      total += mt->numParticles();
+      mt = (meteor*)mt->next;
    }
 
 
@@ -746,93 +600,92 @@ void partSystem::saveToFile(string fileName)
        return;
    }
 
-   for(i = 0; i < MAX_WATERFALL; i++)
+   /* Save Waterfalls */
+   part1* wt = (part1*)waterfall->getFirst();
+   for(i = 0; i < waterfall->getTotal(); i++)
    {
-      if( waterfall[i] != NULL)
+      wt->getPosition(X, Y, Z);
+      fprintf(file,"%d %f %f %f %s\n",PART_WATERFALL, X, Y, Z,
+              wt->getFileName().c_str());
+
+      /* Save Planes */
+      if(wt->getTotalPlanes() > 0)
       {
-         waterfall[i]->getPosition(X, Y, Z);
-         fprintf(file,"%d %f %f %f %s\n",PART_WATERFALL, X, Y, Z,
-                                       waterfall[i]->getFileName().c_str());
-         if(waterfall[i]->getTotalPlanes() > 0)
-         {
-            fprintf(file,"%d\n",waterfall[i]->getTotalPlanes());
-         }
-         for(p = 0; p < waterfall[i]->getTotalPlanes(); p++)
-         {
-            plane = waterfall[i]->getPlane(p);
-            fprintf(file,"%f %f %f %f %f %f %f %f %d\n", plane->x1, plane->y1, 
-                    plane->z1, plane->x2, plane->y2, plane->z2, plane->dX, 
-                    plane->dZ, plane->inclination);
-         }
+         fprintf(file,"%d\n",wt->getTotalPlanes());
       }
+      for(p = 0; p < wt->getTotalPlanes(); p++)
+      {
+         plane = wt->getPlane(p);
+         fprintf(file,"%f %f %f %f %f %f %f %f %d\n", plane->x1, plane->y1, 
+                 plane->z1, plane->x2, plane->y2, plane->z2, plane->dX, 
+                 plane->dZ, plane->inclination);
+      }
+      wt = (part1*)wt->next;
    }
 
-   for(i = 0; i < MAX_FIRE; i++)
+   /* Save Fires */
+   part2* fr = (part2*)fire->getFirst();
+   for(i = 0; i < fire->getTotal(); i++)
    {
-      if(fire[i] != NULL)
-      {
-         fire[i]->getPosition(X, Y, Z);
-         fprintf(file,"%d %f %f %f %s\n",PART_FIRE, X, Y, Z,
-                                       fire[i]->getFileName().c_str());
-      }
+      fr->getPosition(X, Y, Z);
+      fprintf(file,"%d %f %f %f %s\n",PART_FIRE, X, Y, Z,
+              fr->getFileName().c_str());
+      fr = (part2*)fr->next;
    }
 
-   for(i = 0; i < MAX_WATER_SURFACE; i++)
+   /* Save Water Surfaces */
+   part3* ws = (part3*)waterSurface->getFirst();
+   for(i = 0; i < waterSurface->getTotal(); i++)
    {
-      if(waterSurface[i] != NULL)
-      {
-         waterSurface[i]->getPosition(X, Y, Z);
-         fprintf(file,"%d %f %f %f %s\n",PART_WATER_SURFACE, X, Y, Z,
-                                       waterSurface[i]->getFileName().c_str());
-      }
+      ws->getPosition(X, Y, Z);
+      fprintf(file,"%d %f %f %f %s\n",PART_WATER_SURFACE, X, Y, Z,
+              ws->getFileName().c_str());
+      ws = (part3*)ws->next;
    }
 
-   for(i = 0; i < MAX_SMOKE; i++)
+   /* Save Smokes */
+   part4* sm = (part4*)smoke->getFirst();
+   for(i = 0; i < smoke->getTotal(); i++)
    {
-      if(smoke[i] != NULL)
-      {
-         smoke[i]->getPosition(X, Y, Z);
-         fprintf(file,"%d %f %f %f %s\n",PART_SMOKE, X, Y, Z,
-                                       smoke[i]->getFileName().c_str());
-      }
+      sm->getPosition(X, Y, Z);
+      fprintf(file,"%d %f %f %f %s\n",PART_SMOKE, X, Y, Z,
+              sm->getFileName().c_str());
+      sm = (part4*)sm->next;
    }
 
    /* Don't Save Blood Particles */
-   /*for(i = 0; i < MAX_BLOOD; i++)
+   /*for(i = 0; i < blood->getTotal(); i++)
    {
       if(blood[i] != NULL)
    }*/
 
    /* Don't Save Lightning Particles */
-   /*for(i = 0; i < MAX_LIGHTNING; i++)
+   /*for(i = 0; i < lightning->getTotal(); i++)
    {
       if(lightning[i] != NULL)
    }*/
 
-   for(i = 0; i < MAX_SNOW; i++)
+   /* Save Snows */
+   part7* sn = (part7*)snow->getFirst();
+   for(i = 0; i < snow->getTotal(); i++)
    {
-      if(snow[i] != NULL)
-      {
-         snow[i]->getPosition(X, Y, Z);
-         fprintf(file,"%d %f %f %f %s\n",PART_SNOW, X, Y, Z,
-                                       snow[i]->getFileName().c_str());
-      }
+      sn->getPosition(X, Y, Z);
+      fprintf(file,"%d %f %f %f %s\n",PART_SNOW, X, Y, Z,
+              sn->getFileName().c_str());
+      sn = (part7*)sn->next;
    }
 
-   for(i = 0; i < MAX_GRASS; i++)
+   /* Save Grass */
+   grass* gr = (grass*)grassParticles->getFirst();
+   for(i = 0; i < grassParticles->getTotal(); i++)
    {
-      if(grassParticles[i] != NULL)
-      {
-         GLfloat x1,x2,z1,z2;
-         grassParticles[i]->getPosition(x1,z1,x2,z2);
-         string name = grassParticles[i]->getGrassFileName();
-         fprintf(file,"%d %f %f %f %s\n",PART_GRASS, x1, 0.0, z1,
-                                  name.c_str());
-         fprintf(file,"%f %f %d\n", x2, z2, 
-                                    grassParticles[i]->getMaxParticles());
-      }
+      GLfloat x1,x2,z1,z2;
+      gr->getPosition(x1,z1,x2,z2);
+      string name = gr->getGrassFileName();
+      fprintf(file,"%d %f %f %f %s\n",PART_GRASS, x1, 0.0, z1, name.c_str());
+      fprintf(file,"%f %f %d\n", x2, z2, gr->getMaxParticles());
+      gr = (grass*)gr->next;
    }
-
    
    fclose(file);
 }

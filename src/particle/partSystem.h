@@ -15,6 +15,7 @@
 #include "part7.h"
 #include "grass.h"
 #include "meteor.h"
+#include "partlist.h"
 #include <string>
 using namespace std;
 
@@ -27,17 +28,6 @@ using namespace std;
 #define PART_SNOW          7  /**< Snow ID */
 #define PART_GRASS         8  /**< Grass ID */
 #define PART_METEOR        9  /**< Meteor ID */
-
-
-#define MAX_WATERFALL     2  /**< Max Number of Waterfalls per Map */
-#define MAX_FIRE          5  /**< Max number of Fire per map */
-#define MAX_SMOKE         5  /**< Max Number of Smoke per map */
-#define MAX_WATER_SURFACE 3  /**< Max number of waters surfaces per map */
-#define MAX_BLOOD         10 /**< Max number of blood per map */
-#define MAX_SNOW          1  /**< Max number of snow per map */
-#define MAX_LIGHTNING     3  /**< Max number of simultaniously lightinings */
-#define MAX_GRASS         20 /**< Max Number of Grass */
-#define MAX_METEOR        4  /**< Max Number of Meteors */
 
 /*! The patSytem class controls all particles systens, 
     make their atualizations, renderizations, etc. */
@@ -132,16 +122,16 @@ class partSystem
 
 
    private:
-      part1* waterfall[MAX_WATERFALL];        /**< Waterfall Particles */
-      part2* fire[MAX_FIRE];                  /**< Fire Particles */
-      part3* waterSurface[MAX_WATER_SURFACE]; /**< WaterSurfaces Particles */
-      part4* smoke[MAX_SMOKE];                /**< Smoke Particles */
-      part5* blood[MAX_BLOOD];                /**< Blood Particles */
-      part6* lightning[MAX_LIGHTNING];        /**< Lightning Particles */
-      part7* snow[MAX_SNOW];                  /**< Snow Particles */
-      grass* grassParticles[MAX_GRASS];       /**< Grass Particles */
-      meteor* meteorParticles[MAX_METEOR];    /**< Meteor Particles */
-      collision* colDetect;                   /**< Collision System */
+      particleList* waterfall;               /**< Waterfall Particles */
+      particleList* fire;                    /**< Fire Particles */
+      particleList* waterSurface;            /**< WaterSurfaces Particles */
+      particleList* smoke;                   /**< Smoke Particles */
+      particleList* blood;                   /**< Blood Particles */
+      particleList* lightning;               /**< Lightning Particles */
+      particleList* snow;                    /**< Snow Particles */
+      particleList* grassParticles;          /**< Grass Particles */
+      particleList* meteorParticles;         /**< Meteor Particles */
+      collision* colDetect;              /**< Collision System */
 
 };
 

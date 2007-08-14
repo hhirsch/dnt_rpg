@@ -17,6 +17,12 @@ particleSystem::particleSystem(int total, int mode)
    strFileName = "";
 }
 
+particleSystem::particleSystem()
+{
+   init(1,PARTICLE_DRAW_INDIVIDUAL);
+   strFileName = "";
+}
+
 /***************************************************************
  *                 Particle System Constructor                 *
  ***************************************************************/

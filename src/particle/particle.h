@@ -44,6 +44,7 @@ class particleSystem
        * \param mode -> draw mode                                    *
        ***************************************************************/
       particleSystem(int total, int mode);
+      particleSystem();
       /*!
        ***************************************************************
        * Construct internal structs                                  *

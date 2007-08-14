@@ -9,7 +9,7 @@
 /*! The meteor class. It is just a fire particles, 
  * that have their orign translated, and when reach
  * target, stop the motion, for MAX_STATIC_LIVING iterations */
-class meteor
+class meteor: public particleSystem
 {
    public:
       /*!
@@ -71,6 +71,13 @@ class meteor
        * \param col -> pointer to the collision system
        **************************************************************/
       void defineCollision(collision* col);
+
+       void Render(particle*);
+       void actualize(particle*);
+       bool continueLive(particle*);
+       int  needCreate();
+       void createParticle(particle*);
+
    private:
       int actualLiving;     /**< Living Time after dead */
       GLfloat curPosX,      /**< Current Meteor X Position */

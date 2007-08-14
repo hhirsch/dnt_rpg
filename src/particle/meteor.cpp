@@ -5,7 +5,7 @@
  *                          Constructor                          *
  *****************************************************************/
 meteor::meteor(float cX, float cY, float cZ, float vX, float vY, float vZ,
-               float tX, float tY, float tZ, string fileName)
+               float tX, float tY, float tZ, string fileName):particleSystem()
                                      
 {
    /* Create the Fire Particle */
@@ -118,5 +118,27 @@ void meteor::NextStep(GLfloat matriz[6][4])
 int meteor::numParticles()
 {
    return(intFire->numParticles());
+}
+
+void meteor::Render(particle* p)
+{
+}
+
+void meteor::actualize(particle* p)
+{
+}
+
+bool meteor::continueLive(particle* p)
+{
+   return(true);
+}
+
+int meteor::needCreate()
+{
+   return(0);
+}
+
+void meteor::createParticle(particle* p)
+{
 }
 
