@@ -24,7 +24,15 @@ AC_CHECK_LIB([ogg], [main], [], [AC_MSG_ERROR(Couldn't find libogg. Go to http:/
 AC_CHECK_LIB([openal], [main], [], [AC_MSG_ERROR(Couldn't find OpenAL. Go to http://www.openal.org and get it.)])
 AC_CHECK_LIB([vorbis], [main], [], [AC_MSG_ERROR(Couldn't find libvorbis. Go to http://xiph.org/vorbis and get it.)])
 AC_CHECK_LIB([vorbisfile], [main], [], [AC_MSG_ERROR(Couldn't find libogg. Go to http://xiph.org/vorbis and get the libvorbis file.)])
-AC_CHECK_LIB([lua], [main], [], [AC_MSG_ERROR(Couldn't find lua. Go to http://www.lua.org and get it. If you already have lua try to run ./configure LDFLAGS=-Lpath_to_lua_lib. For Example: ./configure LDFLAGS=-L/usr/lib/lua5.1/)])
+
+AC_CHECK_LIB([lua], [main], [], 
+             #if is false
+             [ AC_CHECK_LIB([lua51], [main], [], 
+             #if is false too, not found the library
+             [AC_MSG_ERROR(Couldn't find lua. Go to http://www.lua.org and get it.)])  ])
+
+
+#AC_CHECK_LIB([lua], [main], [], [AC_MSG_ERROR(Couldn't find lua. Go to http://www.lua.org and get it. If you already have lua, try to run ./configure LDFLAGS=-Lpath_to_lua_lib. For Example: ./configure LDFLAGS=-L/usr/lib/lua5.1/)])
 
 # Checks for header files.
 AC_HEADER_STDC
