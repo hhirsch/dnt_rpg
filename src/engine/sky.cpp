@@ -13,7 +13,11 @@ sky::sky()
    color[1] = 1.0;
    color[2] = 1.0;
    SDL_Surface* img = IMG_Load("../data/texturas/sky/skymap.png");
-   setTextureRGBA(img, &skyMap);
+   if(img != NULL)
+   {
+      setTextureRGBA(img, &skyMap);
+   }
+   SDL_FreeSurface(img);
 }
 
 /*********************************************************************
