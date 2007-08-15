@@ -11,11 +11,39 @@ AC_PROG_CC
 AC_PROG_MAKE_SET
 AC_PROG_CPP
 
+
+# Check for sdl-config to find SDL Paths
+AC_CHECK_PROG(SDLCONFIG,sdl-config,yes,no)
+if test $SDLCONFIG = "yes"; then
+{
+   CFLAGS="$CFLAGS $(sdl-config --cflags)"
+   LIBS="$LIBS $(sdl-config --libs)"
+}
+else
+{
+   AC_MSG_ERROR(Coudn't find the program sdl-config. Usually it is installed with SDL library. Please go to http://www.libsdl.org and get it.)
+}
+fi
+
+#Check for openal-config to find openal Paths
+AC_CHECK_PROG(OPENALCONFIG,openal-config,yes,no)
+if test $OPENALCONFIG = "yes"; then
+{
+   CFLAGS="$CFLAGS $(openal-config --cflags)"
+   LIBS="$LIBS $(openal-config --libs)"
+}
+else
+{
+   AC_MSG_ERROR(Coudn't find the program open-config. Usually it is installed with SDL library. Please go to http://www.libsdl.org and get it.)
+}
+fi
+
+
 # Checks for libraries.
 
 #OpenGL
-AC_CHECK_LIB([GL], [main], [], [AC_MSG_ERROR(Couldn't find OpenGL. Run ./configure LDFLAGS=-Lpath_to_opengl_lib. For Example: ./configure LDFLAGS=-L/usr/X11R6/lib)])
-AC_CHECK_LIB([GLU], [main], [], [AC_MSG_ERROR(Couldn't find GLU. Run ./configure LDFLAGS=-Lpath_to_opengl_lib. For Example: ./configure LDFLAGS=-L/usr/X11R6/lib.)])
+AC_CHECK_LIB([GL], [main], [], [AC_MSG_ERROR(Couldn't find OpenGL. Run ./configure LDFLAGS=-Lpath_to_opengl_lib. For Example: ./configure LDFLAGS=-L/usr/X11R6/lib/)])
+AC_CHECK_LIB([GLU], [main], [], [AC_MSG_ERROR(Couldn't find GLU. Run ./configure LDFLAGS=-Lpath_to_opengl_lib. For Example: ./configure LDFLAGS=-L/usr/X11R6/lib/)])
 AC_CHECK_LIB([SDL], [main], [], [AC_MSG_ERROR(Coudn't find SDL. Please go to http://www.libsdl.org and get it.)])
 AC_CHECK_LIB([SDL_image], [main], [], [AC_MSG_ERROR(Couldn't find SDL_image. Please go to http://www.libsdl.org/projects/SDL_image and get it!)])
 AC_CHECK_LIB([cal3d], [main], [], [AC_MSG_ERROR(Couldn't find Cal3D. Please go to http://home.gna.org/cal3d and get it.)])
@@ -39,10 +67,10 @@ AC_HEADER_STDC
 AC_CHECK_HEADER(lua.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Run ./configure CPPFLAGS=-Ipath_to_lua_headers. For Example: ./configure CPPFLAGS=-I/usr/include/lua5.1/)])
 AC_CHECK_HEADER(lualib.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Run ./configure CPPFLAGS=-Ipath_to_lua_headers. For Example: ./configure CPPFLAGS=-I/usr/include/lua5.1/)])
 AC_CHECK_HEADER(lauxlib.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Run ./configure CPPFLAGS=-Ipath_to_lua_headers. For Example: ./configure CPPFLAGS=-I/usr/include/lua5.1/)])
-AC_CHECK_HEADER(GL/glu.h, [], [AC_MSG_ERROR(Couldn't find OPENGL headers. Run ./configure CPPFLAGS=-Ipath_to_opengl_headers. For Example: ./configure CPPFLAGS=-I/usr/X11R6/include)])
-AC_CHECK_HEADER(SDL/SDL_opengl.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include)])
-AC_CHECK_HEADER(SDL/SDL.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include)])
-AC_CHECK_HEADER(SDL/SDL_image.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include)])
+AC_CHECK_HEADER(GL/glu.h, [], [AC_MSG_ERROR(Couldn't find OPENGL headers. Run ./configure CPPFLAGS=-Ipath_to_opengl_headers. For Example: ./configure CPPFLAGS=-I/usr/X11R6/include/)])
+AC_CHECK_HEADER(SDL/SDL_opengl.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include/)])
+AC_CHECK_HEADER(SDL/SDL.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include/)])
+AC_CHECK_HEADER(SDL/SDL_image.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include/)])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
