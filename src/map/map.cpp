@@ -4,7 +4,6 @@
 
 #include "map.h"
 #include "../engine/culling.h"
-#include "../etc/glm.h"
 #include "../engine/util.h"
 #include "../etc/extensions.h"
 #include <stdio.h>

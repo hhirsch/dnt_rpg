@@ -9,8 +9,6 @@
 #include <string>
 using namespace std;
 
-#include "../etc/glm.h"
-
 class grass:public particleSystem
 {
 public:

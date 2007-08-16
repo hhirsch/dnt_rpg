@@ -3,7 +3,6 @@
 
 #include "../../map/map.h"
 #include "../../map/mapobject.h"
-#include "../../etc/glm.h"
 #include "../../etc/modellist.h"
 #include "../../engine/util.h"
 #include "message.h"

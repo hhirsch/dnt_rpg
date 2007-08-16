@@ -1,6 +1,5 @@
 #include "collision.h"
 #include "util.h"
-#include "../etc/glm.h"
 
 
 /*********************************************************************

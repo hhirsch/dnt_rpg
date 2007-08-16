@@ -17,7 +17,6 @@
 #include "../../engine/culling.h"
 #include "../../engine/util.h"
 #include "../../etc/modellist.h"
-#include "../../etc/glm.h"
 #include <SDL/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
