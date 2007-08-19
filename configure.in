@@ -17,6 +17,7 @@ AC_CHECK_PROG(SDLCONFIG,sdl-config,yes,no)
 if test $SDLCONFIG = "yes"; then
 {
    CFLAGS="$CFLAGS $(sdl-config --cflags)"
+   CPPFLAGS="$CPPFLAGS $(sdl-config --cflags)"
    LIBS="$LIBS $(sdl-config --libs)"
 }
 else
@@ -30,11 +31,12 @@ AC_CHECK_PROG(OPENALCONFIG,openal-config,yes,no)
 if test $OPENALCONFIG = "yes"; then
 {
    CFLAGS="$CFLAGS $(openal-config --cflags)"
+   CPPFLAGS="$CPPFLAGS $(openal-config --cflags)" 
    LIBS="$LIBS $(openal-config --libs)"
 }
 else
 {
-   AC_MSG_ERROR(Coudn't find the program open-config. Usually it is installed with SDL library. Please go to http://www.libsdl.org and get it.)
+   AC_MSG_ERROR(Coudn't find the program openal-config. Usually it is installed with OpenAL library. Please go to http://www.openal.org and get it.)
 }
 fi
 
