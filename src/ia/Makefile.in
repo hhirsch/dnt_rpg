@@ -28,7 +28,7 @@ OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSyst
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)glm.o $(ENDETC)texture.o $(ENDETC)modellist.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)camera.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)conversa.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)personagens.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)shadow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 
-OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o luaInterface.o pattAgent.o potentAgent.o 
+OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o iafuncs.o iascript.o iavariable.o luaInterface.o pattAgent.o potentAgent.o  
 all: $(OBJS)
 
 teste: fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o teste.cpp
@@ -64,6 +64,21 @@ fuzzyrule.o: fuzzyrule.cpp fuzzyrule.h
 fuzzyvariable.o: fuzzyvariable.cpp fuzzyvariable.h
 	@printf "Making fuzzyvariable.o... "
 	@$(CPP) $(CFLAGS) fuzzyvariable.cpp -o fuzzyvariable.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+iafuncs.o: iafuncs.cpp iafuncs.h
+	@printf "Making iafuncs.o... "
+	@$(CPP) $(CFLAGS) iafuncs.cpp -o iafuncs.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+iascript.o: iascript.cpp iascript.h iafuncs.h
+	@printf "Making iascript.o... "
+	@$(CPP) $(CFLAGS) iascript.cpp -o iascript.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+iavariable.o: iavariable.cpp iavariable.h iafuncs.h
+	@printf "Making iavariable.o... "
+	@$(CPP) $(CFLAGS) iavariable.cpp -o iavariable.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 pattAgent.o: pattAgent.cpp pattAgent.h

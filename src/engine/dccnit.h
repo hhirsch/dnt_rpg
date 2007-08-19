@@ -19,6 +19,7 @@
 #include "../particle/partSystem.h"
 #include "../particle/wave.h"
 #include "../sound/sound.h"
+#include "../ia/iascript.h"
 
 #include "alignwindow.h"
 #include "aspectwindow.h"

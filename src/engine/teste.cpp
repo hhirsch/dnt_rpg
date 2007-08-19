@@ -10,7 +10,6 @@
 #include <SDL/SDL.h>
 #include <stdlib.h>
 
-
 /*********************************************************************
  *                           Main Code                               *
  *********************************************************************/
@@ -28,7 +27,6 @@ int main(int argc, char **argv)
    Farso_Init(&screen,"DccNiTghtmare");
    engine* Engine = new engine();
    
-
    Engine->Init(screen);
  
    GLuint tituloID;
