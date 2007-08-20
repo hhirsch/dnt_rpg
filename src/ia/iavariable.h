@@ -1,19 +1,7 @@
 #ifndef _iavariable_h
 #define _iavariable_h
 
-
-/* Types */
-#define IA_VOID "void"
-#define IA_BOOL "bool"
-#define IA_INT "int" 
-#define IA_FLOAT "float"
-#define IA_STRING "string"
-#define IA_CHARACTER "character"
-#define IA_OBJECT "object"
-#define IA_FEAT "feat"
-#define IA_SKILL "skill"
-
-
+#include "iafuncs.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -45,6 +33,35 @@ class iaVariable
       iaVariable* previous;   /**< Previous variable on the list */
 };
 
+/*! The symbols table of the language */
+class iaSymbolsTable
+{
+   public:
+      /*! Constructor */
+      iaSymbolsTable();
+      /*! Destructor */
+      ~iaSymbolsTable();
+
+      /*! Add the symbol to the table.
+       * \param type -> type of the symbol;
+       * \param name -> name of the symbol; */
+      void addSymbol(string type, string name);
+
+      /*! Remove the Symbol from the table
+       * \param name -> symbol's name */
+      void removeSymbol(string name);
+      /*! Remove the Symbol from the table
+       * \param symbol -> the symbol's pointer */
+      void removeSymbol(iaVariable* symbol);
+
+      /*! Get the symbol from the table
+       * \param name -/. name of the symbol to get.
+       * \return pointer to the symbol, or NULL if not found any. */
+      iaVariable* getSymbol(string name);
+   protected:
+      iaVariable* first;   /**< First element on the list */
+      int total;           /**< Total symbols on the list */
+};
 
 #endif
 

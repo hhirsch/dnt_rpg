@@ -25,9 +25,35 @@ using namespace std;
 
 #define IA_OPERATOR_ASSIGN         "="
 
+#define IA_OPERATOR_COMMA          ","
+
 #define IA_OPERATOR_LPARENTHESIS   "("
 #define IA_OPERATOR_RPARENTHESIS   ")"
 
+/* Comments */
+#define IA_COMMENT_LINE            '#'
+
+/* Types */
+#define IA_TYPE_VOID "void"
+#define IA_TYPE_BOOL "bool"
+#define IA_TYPE_INT "int" 
+#define IA_TYPE_FLOAT "float"
+#define IA_TYPE_STRING "string"
+#define IA_TYPE_CHARACTER "character"
+#define IA_TYPE_OBJECT "object"
+#define IA_TYPE_FEAT "feat"
+#define IA_TYPE_SKILL "skill"
+#define IA_TYPE_MAP "map"
+
+/* Setences */
+#define IA_SETENCE_IF "if"
+#define IA_SETENCE_ELSE "else"
+
+#define IA_SETENCE_FOR "for"
+
+#define IA_SETENCE_END "end"
+
+#define IA_SETENCE_SCRIPT "script"
 
 /* Quick Pointers */
 #define IA_SELF_OBJECT "SELF_OBJECT"  /**< As the owner object of the script */
@@ -56,7 +82,7 @@ using namespace std;
 
 /* Fight Functions */
 #define IA_FIGHT_ENTER "void combatEnter"
-#define IA_FIGHT_ExIT "void combartExit"
+#define IA_FIGHT_EXIT "void combatExit"
 
 /* Character Functions */
 #define IA_CHARACTER_GET_PSYCHO "string getPsycho"
@@ -68,9 +94,31 @@ using namespace std;
  * \return -> postfix expression */
  string toPostFix(string infix);
 
- bool isOperator(string c);
+/*! Get the precedence number of the operator
+ * \param s -> operator string
+ * \return -> precedence number of the operator */
  int precedence(string s);
+
+/*! Get the next token on the string from the position pos.
+ * \param s -> string to get the token
+ * \param pos -> position where the last token was got.
+ * \return -> the token string got. "" if no more tokens exists.*/
  string nextToken(string s, unsigned int& pos);
+
+/*! Verify if the string is a operator
+ * \param c -> token to verify
+ * \return true if is operator. */
+ bool isOperator(string c);
+
+/*! Verify if the string is a type
+ * \param s -> token to verify
+ * \return -> true if the string is a type. */
+ bool isType(string s);
+
+/*! Verify if the string is a function name or not.
+ * \param s -> token to verify.
+ * \return true if is a function name*/
+ bool isFunction(string s);
 
 
 #endif

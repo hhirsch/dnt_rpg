@@ -3,6 +3,7 @@
 
 #include "iafuncs.h"
 #include "iavariable.h"
+#include "iastack.h"
 
 #include "../engine/character.h"
 #include "../classes/object.h"
@@ -29,8 +30,9 @@ class iaScript
 {
    public:
       /*! Constructor
-       * \param scriptFile -> fileName of the script */
-      iaScript(string scriptFile);
+       * \param scriptFile -> fileName of the script
+       * \param usedEngine -> the pointer to the engine used */
+      iaScript(string scriptFile, void* usedEngine);
       /*! Destructor */
       ~iaScript();
    
@@ -58,15 +60,40 @@ class iaScript
       object* objectOwner;       /**< Object Owner */
       character* characterOwner; /**< Character Owner */
 
+      void* actualEngine;        /**< The actual Engine */
+
       Map* actualMap;            /**< Actual Opened Map */
+
+      int actualLine;            /**< The actual Line */
+
+      string context;            /**< The context */
 
       action* pendingAction;     /**< Pending Action on the script. Only
                                       will advance on script when receive
                                       that this actions was done. */
 
-      int actualLine;
+      iaSymbolsTable* symbols;   /**< The script's table of symbols */
+      iaStack* jumpStack;        /**< The jump stack (if, else, for) */
 
+      /*! Declare a variable at the symbol's table, with the declaration
+       * line, if it is with right syntax. The syntax for declaration is
+       * type name1 name2 name3 
+       * where type is the type of the variable and name is how many
+       * new variable of the type will be declared. 
+       * \param strLine -> the line of declaration read from the file */
+      void declareVariable(string strLine);
 
+      /*! Call a function.
+       * \param var -> variable that will receive the result of the function
+       *               (can be NULL, if no variable will receive, or with the
+       *                function is without return) 
+       * \param strLine -> the line that contains the function call. */
+      void callFunction(iaVariable* var, string strLine);
+
+      /*! Evaluate a expression
+       * \param var -> variable that will contain the expression result
+       * \param strLine -> the line that contains the expression */
+      void evaluateExpression(iaVariable* var, string strLine);
 };
 
 #endif

@@ -14,7 +14,36 @@ bool isOperator(string c)
            (c == IA_OPERATOR_LESSER) || (c == IA_OPERATOR_GREATER) ||
            (c == IA_OPERATOR_GEQUAL) || (c == IA_OPERATOR_LEQUAL) ||
            (c == IA_OPERATOR_ASSIGN) || (c == IA_OPERATOR_LPARENTHESIS) ||
-           (c == IA_OPERATOR_RPARENTHESIS) );
+           (c == IA_OPERATOR_RPARENTHESIS) || (c == IA_OPERATOR_COMMA) );
+}
+
+/***********************************************************************
+ *                              isType                                 *
+ ***********************************************************************/
+bool isType(string s)
+{
+   return( (s == IA_TYPE_VOID) || (s == IA_TYPE_BOOL) ||
+           (s == IA_TYPE_INT) || (s == IA_TYPE_FLOAT) ||
+           (s == IA_TYPE_STRING) || (s == IA_TYPE_CHARACTER) ||
+           (s == IA_TYPE_OBJECT) || (s == IA_TYPE_FEAT) ||
+           (s == IA_TYPE_SKILL) || (s == IA_TYPE_MAP) );
+
+}
+
+/***********************************************************************
+ *                            isFunction                               *
+ ***********************************************************************/
+bool isFunction(string s)
+{
+   return( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
+           (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_TOTAL) ||
+           (s == IA_FEAT_COST) || (s == IA_FEAT_USE_AT_CHARACTER) ||
+           (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_SKILL_POINTS) ||
+           (s == IA_SKILL_MODIFIER) || (s == IA_FIGHT_ENTER) ||
+           (s == IA_FIGHT_EXIT) || (s == IA_CHARACTER_GET_PSYCHO) ||
+           (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_SELF_OBJECT) ||
+           (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
+           (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) );
 }
 
 /***********************************************************************
