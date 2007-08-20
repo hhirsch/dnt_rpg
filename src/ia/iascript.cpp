@@ -169,21 +169,20 @@ action* iaScript::run()
                      /* The token is a function */
                      callFunction(NULL, strBuffer);
                   }
-   
-                  else
+                  else if(!token.empty())
                   {
                      /* Unknow! */
-                     cerr << "Unknow token: " << token << "at line " 
-                          << actualLine << "of the script file: " 
+                     cerr << "Unknow token: " << token << " at line " 
+                          << actualLine << " of the script file: " 
                           << fileName << endl;
                   }
                }
-               else
+               else if(!token.empty())
                {
                   /* No Context defined! */
                   cerr << "No context defined at line: " << actualLine 
-                       << "of script file: " << fileName 
-                       << "did you forget the script() declaration?" << endl;
+                       << " of script file: " << fileName 
+                       << " did you forget the script() declaration?" << endl;
                }
             }
          }
@@ -200,8 +199,10 @@ void iaScript::declareVariable(string strLine)
    unsigned int pos = 0;
    string type = nextToken(strLine, pos);
    string name = nextToken(strLine, pos);
+   cout << "strLine: " << strLine << endl;
    while(name != "")
    {
+      cout << "Type: " << type << " name: " << name << endl;
       symbols->addSymbol(type, name);
       name = nextToken(strLine, pos);
    }
@@ -295,7 +296,7 @@ void iaScript::callFunction(iaVariable* var, string strLine)
          else
          {
             cerr << "Error: Expected object symbol, but got: " << var->type
-                 << " at " << strLine << " on script:" << fileName << endl;
+                 << " at " << strLine << " on script: " << fileName << endl;
          }
       }
    }
@@ -311,7 +312,7 @@ void iaScript::callFunction(iaVariable* var, string strLine)
          else
          {
             cerr << "Error: Expected character symbol, but got: " << var->type
-                 << " at " << strLine << " on script:" << fileName << endl;
+                 << " at " << strLine << " on script: " << fileName << endl;
          }
       }
    }
@@ -327,7 +328,7 @@ void iaScript::callFunction(iaVariable* var, string strLine)
          else
          {
             cerr << "Error: Expected character symbol, but got: " << var->type
-                 << " at " << strLine << " on script:" << fileName << endl;
+                 << " at " << strLine << " on script: " << fileName << endl;
          }
       }
    }
@@ -343,7 +344,7 @@ void iaScript::callFunction(iaVariable* var, string strLine)
          else
          {
             cerr << "Error: Expected map symbol, but got: " << var->type 
-                 << " at " << strLine << " on script:" << fileName << endl;
+                 << " at " << strLine << " on script: " << fileName << endl;
          }
       }
    }
@@ -360,7 +361,7 @@ void iaScript::callFunction(iaVariable* var, string strLine)
          else
          {
             cerr << "Error: Expected bool symbol, but got: " << var->type
-                 << " at " << strLine << " on script:" << fileName << endl;
+                 << " at " << strLine << " on script: " << fileName << endl;
          }
       }
    }
@@ -377,7 +378,7 @@ void iaScript::callFunction(iaVariable* var, string strLine)
          else
          {
             cerr << "Error: Expected bool symbol, but got: " << var->type
-                 << " at " << strLine << " on script:" << fileName << endl;
+                 << " at " << strLine << " on script: " << fileName << endl;
          }
       }
    }
@@ -389,6 +390,170 @@ void iaScript::callFunction(iaVariable* var, string strLine)
  ***********************************************************************/
 void iaScript::evaluateExpression(iaVariable* var, string strLine)
 {
-   //TODO
+   unsigned int pos = 0;
+   string token;
+   string type; 
+
+   /* get the variable */
+   nextToken(strLine, pos);
+
+   iaVariable* varStack[1024];
+   int varPos = 0;
+
+   iaVariable* var1 = NULL;
+   iaVariable* var2 = NULL;
+
+   /* get the assign token */
+   token = nextToken(strLine, pos);
+   if(token == IA_OPERATOR_ASSIGN)
+   {
+      /* Remove the variable and assign */
+      strLine.erase(0, pos);
+      /* Translate the string to postfix */
+      string postFix = toPostFix(strLine);
+
+      cout << strLine << endl;
+      cout << postFix << endl;
+
+      /* Evaluate the expression */
+      pos = 0;
+      token = nextToken(postFix, pos);
+      while(!token.empty())
+      {
+         if(isOperator(token))
+         {
+            /* Apply the operator */
+            if( (token == IA_OPERATOR_ADDITION) ||
+                (token == IA_OPERATOR_SUBTRACTION) ||
+                (token == IA_OPERATOR_MULTIPLICATION) ||
+                (token == IA_OPERATOR_DIVISION) ||
+                (token == IA_OPERATOR_MODULUS) )
+            {
+               /* Pop the two variables */
+               if(varPos < 2)
+               {
+                  cerr << "Error: operator " << token << " needs two variables"
+                       << endl;
+               }
+               else
+               {
+                  var1 = varStack[varPos-1];
+                  var2 = varStack[varPos-2];
+                  varPos -= 2;
+                  /* Type must be integer or float */
+                  if( ( (var1->type == IA_TYPE_FLOAT) ||
+                        (var1->type == IA_TYPE_INT) ) &&
+                      ( (var2->type == IA_TYPE_FLOAT) ||
+                        (var2->type == IA_TYPE_INT) ) )
+                  {
+                     if( (var1->type == IA_TYPE_FLOAT) ||
+                         (var2->type == IA_TYPE_FLOAT) )
+                     {
+                        type = IA_TYPE_FLOAT;
+                     }
+                     else
+                     {
+                        type = IA_TYPE_INT;
+                     }
+                     /* Alloc the result variable */
+                     varStack[varPos] = new iaVariable(type,"result");
+                     varStack[varPos]->receiveOperation(token, var1, var2);
+                     cout << "result: " << varStack[varPos]->toString() << endl;
+                     varPos++;
+
+                     /* Free the memory */
+                     delete(var1);
+                     delete(var2);
+                  }
+                  else
+                  {
+                     cerr << "Error: Operator " << token << " is only for "
+                          << IA_TYPE_INT << " or " << IA_TYPE_FLOAT << endl;
+                  }
+               }
+            }
+
+         }
+         else
+         {
+            /* Put it at the stack */
+            iaVariable* iv = symbols->getSymbol(token);
+            if(iv != NULL)
+            {
+               cout << "Add " << token << " type " << iv->type << endl;
+               varStack[varPos] = new iaVariable(iv->type, token);
+               *(varStack[varPos]) = (*iv);
+               varPos++;
+            }
+            else if(isFunction(token))
+            {
+               string ftype = functionType(token);
+               if(ftype != IA_TYPE_VOID)
+               {
+                  //TODO
+                  //varStack[varPos] = new iaVariable(iv->type, token);
+                  //callFunction(varStack[varPos], strFunc);
+                  //varPos++;
+               }
+               else
+               {
+                  cerr << "Error: void function used as operand at " << strLine
+                       << " on script " << fileName << endl;
+               }
+            }
+            else
+            {
+               /* Must be a value */
+               if(isInteger(token))
+               {
+                  /* Create the integer value at the stack */
+                  int ti;
+                  sscanf(token.c_str(),"%d",&ti);
+                  varStack[varPos] = new iaVariable(IA_TYPE_INT, token);
+                  *(int*)varStack[varPos]->value = ti;
+                  varPos++;
+               }
+               else if(isFloat(token))
+               {
+                  /* Create the float value at the stack */
+                  float tf;
+                  sscanf(token.c_str(),"%f",&tf);
+                  varStack[varPos] = new iaVariable(IA_TYPE_FLOAT, token);
+                  *(float*)varStack[varPos]->value = tf;
+                  varPos++;
+               }
+               else
+               {
+                  cerr << "Error: unknow token " << token << " at " << strLine
+                       << " on script " << fileName << " line " << actualLine
+                       << endl;
+               }
+            }
+         }
+         token = nextToken(postFix, pos);
+      }
+
+      /* Take the result to the correct place */
+      if(varPos != 1)
+      {
+         cerr << "Error: The evaluation stack isn't with only the result!" 
+              << endl << "Size: " << varPos << " line " << actualLine 
+              << " script " << fileName;
+      }
+      else if(var != NULL)
+      {
+         *(var) = *(varStack[0]);
+         cout << "Final Result: " << var->toString() << endl;
+         delete(varStack[0]);
+      }
+
+   }
+   else
+   {
+      /* Unknow operation! */
+      cerr << "Error: Expected assign operator at " << strLine << " on script "
+           << fileName << endl;
+   }
+
 }
 

@@ -66,27 +66,27 @@ using namespace std;
 #define IA_FALSE "false"
 
 /* Movimentation Functions */
-#define IA_MOVE_TO_POSITION "void moveToPosition"
-#define IA_MOVE_TO_CHARACTER "void moveToCharacter"
-#define IA_MOVE_TO_OBJECT "void moveToObject"
+#define IA_MOVE_TO_POSITION "moveToPosition"
+#define IA_MOVE_TO_CHARACTER "moveToCharacter"
+#define IA_MOVE_TO_OBJECT "moveToObject"
 
 /* Feats Functions */
-#define IA_FEAT_TOTAL "int featTotal"
-#define IA_FEAT_COST  "int featCost"
-#define IA_FEAT_USE_AT_CHARACTER "void featUseAtCharacter"
-#define IA_FEAT_USE_AT_OBJECT "void featUseAtObject"
+#define IA_FEAT_TOTAL "featTotal"
+#define IA_FEAT_COST  "featCost"
+#define IA_FEAT_USE_AT_CHARACTER "featUseAtCharacter"
+#define IA_FEAT_USE_AT_OBJECT "featUseAtObject"
 
 /* Skills Functions */
-#define IA_SKILL_POINTS "int skillPoints"
-#define IA_SKILL_MODIFIER "int skillModifier"
+#define IA_SKILL_POINTS "skillPoints"
+#define IA_SKILL_MODIFIER "skillModifier"
 
 /* Fight Functions */
-#define IA_FIGHT_ENTER "void combatEnter"
-#define IA_FIGHT_EXIT "void combatExit"
+#define IA_FIGHT_ENTER "combatEnter"
+#define IA_FIGHT_EXIT "combatExit"
 
 /* Character Functions */
-#define IA_CHARACTER_GET_PSYCHO "string getPsycho"
-#define IA_CHARACTER_SET_PSYCHO "string setPsycho"
+#define IA_CHARACTER_GET_PSYCHO "getPsycho"
+#define IA_CHARACTER_SET_PSYCHO "setPsycho"
 
 
 /*! Convert the infix string to a postfix one
@@ -119,6 +119,20 @@ using namespace std;
  * \param s -> token to verify.
  * \return true if is a function name*/
  bool isFunction(string s);
+
+/*! Verify if the string is a float literal
+ * \param s -> string to verify 
+ * \return true if is float. */
+ bool isFloat(string s);
+/*! Verify if the string is an integer literal 
+ * \param s -> string to verify
+ * \return true if is integer */
+ bool isInteger(string s);
+
+/*! Get the function type
+ * \param s -> function name
+ * \return -> the type of the function. default is void. */
+ string functionType(string s);
 
 
 #endif

@@ -1,5 +1,43 @@
 #include "iafuncs.h"
 
+/***********************************************************************
+ *                            isInteger                                *
+ ***********************************************************************/
+bool isInteger(string s)
+{
+   int i;
+   for(i = 0; i < (int)s.length(); i++)
+   {
+      if( (s[i] != '0') && (s[i] != '1') && (s[i] != '2') &&
+          (s[i] != '3') && (s[i] != '4') && (s[i] != '5') &&
+          (s[i] != '6') && (s[i] != '7') && (s[i] != '8') &&
+          (s[i] != '9') )
+      {
+         return(false);
+      }
+   }
+   return(true);
+}
+
+/***********************************************************************
+ *                             isFloat                                 *
+ ***********************************************************************/
+bool isFloat(string s)
+{
+   int i;
+   for(i = 0; i < (int)s.length(); i++)
+   {
+      if( (s[i] != '0') && (s[i] != '1') && (s[i] != '2') &&
+          (s[i] != '3') && (s[i] != '4') && (s[i] != '5') &&
+          (s[i] != '6') && (s[i] != '7') && (s[i] != '8') &&
+          (s[i] != '9') && (s[i] != '.') )
+      {
+         return(false);
+      }
+   }
+   return(true);
+}
+
 
 /***********************************************************************
  *                            isOperator                               *
@@ -45,6 +83,39 @@ bool isFunction(string s)
            (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
            (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) );
 }
+
+/***********************************************************************
+ *                           functionType                              *
+ ***********************************************************************/
+string functionType(string s)
+{
+   if( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
+       (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_USE_AT_CHARACTER) ||
+       (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_TRUE) || (s == IA_FALSE))
+   {
+      return(IA_TYPE_BOOL);
+   }
+   else if( (s == IA_FEAT_TOTAL) || (s == IA_FEAT_COST) || 
+            (s == IA_SKILL_POINTS) || (s == IA_SKILL_MODIFIER) ||
+            (s == IA_CHARACTER_GET_PSYCHO) )
+   {
+      return(IA_TYPE_INT);
+   }
+   else if(s == IA_SELF_OBJECT)
+   {
+      return(IA_TYPE_OBJECT);
+   }
+   else if((s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) )
+   {
+      return(IA_TYPE_CHARACTER);
+   }
+   else if(s == IA_ACTUAL_MAP)
+   {
+      return(IA_TYPE_MAP);
+   }
+   return(IA_TYPE_VOID);
+}
+
 
 /***********************************************************************
  *                           precedence                                *

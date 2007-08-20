@@ -5,7 +5,7 @@
  ***********************************************************/
 iaVariable::iaVariable(string varType, string varName)
 {
-   type = type;
+   type = varType;
    name = varName;
    value = NULL;
 
@@ -85,25 +85,37 @@ bool iaVariable::operator==(const iaVariable& v)
    }
    else
    {
-      if(type == IA_TYPE_BOOL)
+      if((type == IA_TYPE_BOOL) && (v.type == IA_TYPE_BOOL))
       {
          bool* ba = (bool*) value;
          bool* bb = (bool*) v.value;
          return( (*ba) == (*bb) );
       }
-      else if(type == IA_TYPE_INT)
+      else if( (type == IA_TYPE_INT) && (v.type == IA_TYPE_INT))
       {
          int* ia = (int*) value;
          int* ib = (int*) v.value;
          return( (*ia) == (*ib) );
       }
-      else if(type == IA_TYPE_FLOAT)
+      else if( (type == IA_TYPE_INT) && (v.type == IA_TYPE_FLOAT))
+      {
+         int* ia = (int*) value;
+         float* ib = (float*) v.value;
+         return( (*ia) == (*ib) );
+      }
+      else if( (type == IA_TYPE_FLOAT) && (v.type == IA_TYPE_INT))
+      {
+         float* fa = (float*) value;
+         int* fb = (int*) v.value;
+         return( (*fa) == (*fb) );
+      }
+      else if( (type == IA_TYPE_FLOAT) && (v.type == IA_TYPE_FLOAT))
       {
          float* fa = (float*) value;
          float* fb = (float*) v.value;
          return( (*fa) == (*fb) );
       }
-      else if(type == IA_TYPE_STRING)
+      else if( (type == IA_TYPE_STRING) && (v.type == IA_TYPE_STRING))
       {
          string* sa = (string*) value;
          string* sb = (string*) v.value;
@@ -124,6 +136,87 @@ bool iaVariable::operator==(const iaVariable& v)
 bool iaVariable::operator!=(const iaVariable& v)
 {
    return(!operator==(v));
+}
+
+/***********************************************************
+ *                           >=                            *
+ ***********************************************************/
+bool iaVariable::operator>=(const iaVariable& v)
+{
+   return( (operator==(v)) || (operator>(v)) );
+}
+
+
+/***********************************************************
+ *                           >                             *
+ ***********************************************************/
+bool iaVariable::operator>(const iaVariable& v)
+{
+   if(type != v.type)
+   {
+      return(false);
+   }
+   else
+   {
+      if( (type == IA_TYPE_BOOL) && (v.type == IA_TYPE_BOOL) )
+      {
+         bool* ba = (bool*) value;
+         bool* bb = (bool*) v.value;
+         return( (*ba) > (*bb) );
+      }
+      else if( (type == IA_TYPE_INT) && (v.type == IA_TYPE_INT))
+      {
+         int* ia = (int*) value;
+         int* ib = (int*) v.value;
+         return( (*ia) > (*ib) );
+      }
+      else if( (type == IA_TYPE_INT) && (v.type == IA_TYPE_FLOAT))
+      {
+         int* ia = (int*) value;
+         float* ib = (float*) v.value;
+         return( (*ia) > (*ib) );
+      }
+      else if( (type == IA_TYPE_FLOAT) && (v.type == IA_TYPE_INT))
+      {
+         float* fa = (float*) value;
+         int* fb = (int*) v.value;
+         return( (*fa) > (*fb) );
+      }
+      else if( (type == IA_TYPE_FLOAT) && (v.type == IA_TYPE_FLOAT))
+      {
+         float* fa = (float*) value;
+         float* fb = (float*) v.value;
+         return( (*fa) > (*fb) );
+      }
+      else if( (type == IA_TYPE_STRING) && (v.type == IA_TYPE_STRING))
+      {
+         string* sa = (string*) value;
+         string* sb = (string*) v.value;
+         return( (*sa) > (*sb) );
+      }
+      else
+      {
+         /* the pointer; not so usefull */
+         return( (value) > (v.value) ); 
+      }
+   }
+   return(false);
+}
+
+/***********************************************************
+ *                           <=                            *
+ ***********************************************************/
+bool iaVariable::operator<=(const iaVariable& v)
+{
+   return( (operator==(v)) || (operator<(v)) );
+}
+
+/***********************************************************
+ *                           <                             *
+ ***********************************************************/
+bool iaVariable::operator<(const iaVariable& v)
+{
+   return(!(operator>=(v)));
 }
 
 /***********************************************************
@@ -166,6 +259,240 @@ void iaVariable::operator=(const iaVariable& v)
    }
 }
 
+/***********************************************************
+ *                  receiveOperation                       *
+ ***********************************************************/
+void iaVariable::receiveOperation(string operation, iaVariable* v1,
+                                  iaVariable* v2)
+{
+   /* Arithimetic  */
+   if( (operation == IA_OPERATOR_ADDITION) ||
+       (operation == IA_OPERATOR_SUBTRACTION) ||
+       (operation == IA_OPERATOR_MULTIPLICATION) ||
+       (operation == IA_OPERATOR_DIVISION) ||
+       (operation == IA_OPERATOR_MODULUS) )
+   {
+      if( (type == IA_TYPE_INT) && (v1->type == IA_TYPE_INT) &&
+          (v2->type == IA_TYPE_INT) )
+      {
+         /* Integer operation */
+         int val1 = *(int*)v1->value;
+         int val2 = *(int*)v2->value;
+         if(operation == IA_OPERATOR_ADDITION)
+         {
+            *(int*)value = val1 + val2;
+         }
+         else if(operation == IA_OPERATOR_SUBTRACTION)
+         {
+            *(int*)value = val1 - val2;
+         }
+         else if(operation == IA_OPERATOR_MULTIPLICATION)
+         {
+            *(int*)value = val1 * val2;
+         }
+         else if(operation == IA_OPERATOR_DIVISION)
+         {
+            *(int*)value = val1 / val2;
+         }
+         else if(operation == IA_OPERATOR_MODULUS)
+         {
+            *(int*)value = val1 % val2;
+         }
+      }
+      else if( (type == IA_TYPE_FLOAT) && (v1->type == IA_TYPE_FLOAT) &&
+               (v2->type == IA_TYPE_INT) )
+      {
+         /* FLOAT operation */
+         float val1 = *(float*)v1->value;
+         int val2 = *(int*)v2->value;
+         if(operation == IA_OPERATOR_ADDITION)
+         {
+            *(float*)value = val1 + val2;
+         }
+         else if(operation == IA_OPERATOR_SUBTRACTION)
+         {
+            *(float*)value = val1 - val2;
+         }
+         else if(operation == IA_OPERATOR_MULTIPLICATION)
+         {
+            *(float*)value = val1 * val2;
+         }
+         else if(operation == IA_OPERATOR_DIVISION)
+         {
+            *(float*)value = val1 / val2;
+         }
+         else if(operation == IA_OPERATOR_MODULUS)
+         {
+            cerr << "Erro: Modulus Operation is not defined for " 
+                 << IA_TYPE_FLOAT << endl;
+         }
+      }
+      else if( (type == IA_TYPE_FLOAT) && (v1->type == IA_TYPE_INT) &&
+               (v2->type == IA_TYPE_FLOAT) )
+      {
+         /* FLOAT operation */
+         int val1 = *(int*)v1->value;
+         float val2 = *(float*)v2->value;
+         if(operation == IA_OPERATOR_ADDITION)
+         {
+            *(float*)value = val1 + val2;
+         }
+         else if(operation == IA_OPERATOR_SUBTRACTION)
+         {
+            *(float*)value = val1 - val2;
+         }
+         else if(operation == IA_OPERATOR_MULTIPLICATION)
+         {
+            *(float*)value = val1 * val2;
+         }
+         else if(operation == IA_OPERATOR_DIVISION)
+         {
+            *(float*)value = val1 / val2;
+         }
+         else if(operation == IA_OPERATOR_MODULUS)
+         {
+            cerr << "Erro: Modulus Operation is not defined for " 
+                 << IA_TYPE_FLOAT << endl;
+         }
+      }
+      else if( (type == IA_TYPE_FLOAT) && (v1->type == IA_TYPE_FLOAT) &&
+               (v2->type == IA_TYPE_FLOAT) )
+      {
+         /* FLOAT operation */
+         float val1 = *(float*)v1->value;
+         float val2 = *(float*)v2->value;
+         if(operation == IA_OPERATOR_ADDITION)
+         {
+            *(float*)value = val1 + val2;
+         }
+         else if(operation == IA_OPERATOR_SUBTRACTION)
+         {
+            *(float*)value = val1 - val2;
+         }
+         else if(operation == IA_OPERATOR_MULTIPLICATION)
+         {
+            *(float*)value = val1 * val2;
+         }
+         else if(operation == IA_OPERATOR_DIVISION)
+         {
+            *(float*)value = val1 / val2;
+         }
+         else if(operation == IA_OPERATOR_MODULUS)
+         {
+            cerr << "Erro: Modulus Operation is not defined for " 
+                 << IA_TYPE_FLOAT << endl;
+         }
+      }
+   }
+
+   /* and && or || operations */
+   else if( (operation == IA_OPERATOR_AND) ||
+            (operation == IA_OPERATOR_OR) )
+   {
+      if( (type == IA_TYPE_BOOL) && (v1->type == IA_TYPE_BOOL) &&
+          (v2->type == IA_TYPE_BOOL))
+      {
+         bool val1 = *(bool*)v1->value;
+         bool val2 = *(bool*)v2->value;
+         if(operation == IA_OPERATOR_AND)
+         {
+            *(bool*)value = val1 && val2;
+         }
+         else if(operation == IA_OPERATOR_OR)
+         {
+            *(bool*)value = val1 || val2;
+         }
+      }
+      else
+      {
+         cerr << "Error: Operator " << operation << " requires "
+              << IA_TYPE_BOOL << " types" << endl;
+      }
+   }
+
+   /* Comparations */
+   else if( (operation == IA_OPERATOR_EQUAL) ||
+            (operation == IA_OPERATOR_NOT_EQUAL) ||
+            (operation == IA_OPERATOR_LESSER) || 
+            (operation == IA_OPERATOR_GREATER) ||
+            (operation == IA_OPERATOR_GEQUAL) ||
+            (operation == IA_OPERATOR_LEQUAL) )
+   {
+      if(type == IA_TYPE_BOOL)
+      {
+         if(operation == IA_OPERATOR_EQUAL)
+         {
+            *(bool*)value = (*v1) == (*v2);
+         }
+         else if(operation == IA_OPERATOR_NOT_EQUAL)
+         {
+            *(bool*)value = (*v1) != (*v2);
+         }
+         else if(operation == IA_OPERATOR_LESSER)
+         {
+            *(bool*)value = (*v1) < (*v2);
+         }
+         else if(operation == IA_OPERATOR_GREATER)
+         {
+            *(bool*)value = (*v1) > (*v2);
+         }
+         else if(operation == IA_OPERATOR_LEQUAL)
+         {
+            *(bool*)value = (*v1) <= (*v2);
+         }
+         else if(operation == IA_OPERATOR_GEQUAL)
+         {
+            *(bool*)value = (*v1) >= (*v2);
+         }
+      }
+      else
+      {
+         cerr << "Error: Operator " << operation << " type is " << 
+                 IA_TYPE_BOOL << " not " << type << endl;
+      }
+   }
+   else if((operation == IA_OPERATOR_NOT))
+   {
+      if( (type == IA_TYPE_BOOL) && (v1->type == IA_TYPE_BOOL) )
+      {
+         *(bool*)value = !(*(bool*)v1->value);
+      }
+      else
+      {
+         cerr << "Error: Operator " << operation << " is only defined for " 
+              << IA_TYPE_BOOL << " type" << endl;
+      }
+   }
+}
+
+/***********************************************************
+ *                       toString                          *
+ ***********************************************************/
+string iaVariable::toString()
+{
+   char buffer[1024];
+   if(type == IA_TYPE_BOOL)
+   {
+      sprintf(buffer,"%d",*(bool*)value);
+   }
+   else if(type == IA_TYPE_INT)
+   {
+      sprintf(buffer,"%d",*(int*)value);  
+   }
+   else if(type == IA_TYPE_FLOAT)
+   {
+      sprintf(buffer,"%f",*(float*)value);
+   }
+   else if(type == IA_TYPE_STRING)
+   {
+      return(*(string*)value);
+   }
+   else
+   {
+      sprintf(buffer,"%p",value);
+   }
+   return(buffer);
+}
 
 
 /***********************************************************
@@ -223,7 +550,7 @@ void iaSymbolsTable::removeSymbol(string name)
    }
    else
    {
-      cerr << "IA Symbol's Table Warning: Atempt to remove unkonow symbol:" <<
+      cerr << "IA Symbol's Table Warning: Atempt to remove unkonow symbol: " <<
               name << endl;
    }
 }
@@ -271,4 +598,6 @@ iaVariable* iaSymbolsTable::getSymbol(string name)
    }
    return(NULL);
 }
+
+
 

@@ -1,0 +1,12 @@
+# it's a comment
+# another comment
+
+script()
+   int a b
+   a = 2
+   b = 10
+   a=b +a
+   int c
+   c = (a + b)*20+30;
+end
+

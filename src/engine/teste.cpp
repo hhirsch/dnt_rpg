@@ -28,6 +28,10 @@ int main(int argc, char **argv)
    engine* Engine = new engine();
    
    Engine->Init(screen);
+
+   iaScript* ias = new iaScript("../data/ia/script/general/test.dls", &Engine);
+   ias->run();
+   delete(ias);
  
    GLuint tituloID;
    /* Call Splash Screen  */

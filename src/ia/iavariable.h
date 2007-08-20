@@ -22,8 +22,30 @@ class iaVariable
       /*! Difference Operator */
       bool operator!=(const iaVariable& v);
 
+      /*! Gequal Operator */
+      bool operator>=(const iaVariable& v);
+
+      /*! Greater Operator */
+      bool operator>(const iaVariable& v);
+
+      /*! Lesser Operator */
+      bool operator<(const iaVariable& v);
+
+      /*! Lequal Operator */
+      bool operator<=(const iaVariable& v);
+
       /*! Assign Operator */
       void operator=(const iaVariable& v);
+
+      /*! Define the variable value to be the result of the operation on
+       * the two variables.
+       * \param operation -> operation to do
+       * \param v1 -> pointer to the first variable
+       * \param v2 -> pointer to the second variable (NULL on NOT !)*/
+      void receiveOperation(string operation, iaVariable* v1, iaVariable* v2);
+
+      /*!  Convert the variable value to a string one. */
+      string toString();
 
       void* value;   /**< The value of the variable. */
       string type;   /**< The type string id of the variable */
