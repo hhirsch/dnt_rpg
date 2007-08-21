@@ -183,9 +183,9 @@ string nextToken(string s, unsigned int& pos)
    string ret = "";
    string cmp = "";
 
-   /* Ignore all previous spaces */
+   /* Ignore all previous spaces (and commas) */
    while( (pos < s.length()) && ( (s[pos] == ' ') || (s[pos] == '\t') ||
-          (s[pos] == '\n') || (s[pos] == '\0')) )
+          (s[pos] == '\n') || (s[pos] == '\0') ) )
    {
       pos++;
    }

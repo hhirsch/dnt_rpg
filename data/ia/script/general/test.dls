@@ -5,8 +5,15 @@ script()
    int a b
    a = 2
    b = 10
-   a=b +a
+   a=b + a
    int c
    c = (a + b)*20+30;
+   bool variavel
+   variavel = false
+   if(variavel)
+      int t
+   else
+      int f
+   end
 end
 

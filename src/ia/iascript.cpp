@@ -139,14 +139,119 @@ action* iaScript::run()
                   else if(token == IA_SETENCE_IF)
                   {
                     /* It's an if */
+                    iaVariable* ifCond = new iaVariable(IA_TYPE_BOOL,"ifcond");
+                    evaluateExpression(ifCond, strBuffer, false);
 
-                     //TODO
+                    /* If false, need to get to an else or end.
+                     * If true, just put it at the stack and continue */
+                    if( (*(bool*)ifCond->value) == false)
+                    {
+                      while( (token != IA_SETENCE_END) )
+                      {
+                         lastPos = file.tellg();
+                         getline(file, strBuffer);
+                         actualLine++;
+                         pos = 0;
+                         if(file.eof())
+                         {
+                           /* is end of file, so the script is done */
+                           done = true;
+                           cerr << "if without end or else on script " << 
+                                   fileName << endl;
+                           token = "end";
+                         }
+                         else
+                         {
+                           token = nextToken(strBuffer, pos);
+                           if(token == IA_SETENCE_ELSE)
+                           {
+                              token = nextToken(strBuffer, pos);
+                              if(token.empty())
+                              {
+                                 /* It's an pure else thing, so run it! */
+                                 token = "end";
+                                 /* Put the else at the stack */
+                                 iaJumpPos* jmp = new iaJumpPos;
+                                 jmp->begin = lastPos;
+                                 jmp->end = 0; //Unknow.
+                                 jmp->command = IA_SETENCE_ELSE;
+                                 jumpStack->push(jmp);
+                              }
+                              else if(token == IA_SETENCE_IF)
+                              {
+                                 evaluateExpression(ifCond, strBuffer, false);
+                                 if( (*(bool*)ifCond->value) == true)
+                                 {
+                                    /* It's an valid else if, so run it! */
+                                    token = "end";
+                                    /* Put the else if at the stack */
+                                    iaJumpPos* jmp = new iaJumpPos;
+                                    jmp->begin = lastPos;
+                                    jmp->end = 0; //Unknow.
+                                    jmp->command = IA_SETENCE_IF;
+                                    jumpStack->push(jmp);
+                                 }
+                              }
+                              else
+                              {
+                                 cerr << "Error: Unkown statment " << strBuffer
+                                      << " at line " << actualLine << 
+                                         " of script " << fileName << endl;
+                              }
+                           }
+                         }
+                      }
+                    }
+                    else
+                    {
+                       /* Put the if at the stack */
+                       iaJumpPos* jmp = new iaJumpPos;
+                       jmp->begin = lastPos;
+                       jmp->end = 0; //Unknow.
+                       jmp->command = IA_SETENCE_IF;
+                       jumpStack->push(jmp);
+                    }
+                    delete(ifCond);
                   }
                   else if(token == IA_SETENCE_ELSE)
                   {
                      /* It's an else */
-  
-                     //TODO
+                     iaJumpPos* jmp = jumpStack->pop();
+                     if( (jmp) && (jmp->command == IA_SETENCE_IF) )
+                     {
+                        //ignore the else and all elses after it, to an end
+                        while( (token != IA_SETENCE_END) )
+                        {
+                           lastPos = file.tellg();
+                           getline(file, strBuffer);
+                           actualLine++;
+                           pos = 0;
+                           if(file.eof())
+                           {
+                              /* is end of file, so the script is done */
+                              done = true;
+                              cerr << "if without end or else on script " << 
+                                      fileName << endl;
+                              token = "end";
+                           }
+                           else
+                           {
+                              token = nextToken(strBuffer, pos);
+                           }
+                        }
+                        /* free the jump */
+                        delete(jmp);
+                     }
+                     else
+                     {
+                        cerr << "Got else, without ifs, at line " << actualLine
+                             << " of script " << fileName << endl;
+                        if(jmp)
+                        {
+                           /* Push Back the jump  */
+                           jumpStack->push(jmp);
+                        }
+                     }
                   }
                   else if(token == IA_SETENCE_FOR)
                   {
@@ -156,18 +261,27 @@ action* iaScript::run()
                   else if(token == IA_SETENCE_END)
                   {
                      /* It's an end */
-                     //TODO
+                     iaJumpPos* jmp = jumpStack->pop();
+                     if(!jmp)
+                     {
+                        cerr << "Got an end without any initial statement at "
+                             << fileName << " line " << actualLine << endl;
+                     }
+                     else
+                     {
+                        delete(jmp);
+                     }
                   }
                   else if(iv != NULL)
                   {
                      /* The token is a symbol on the table.
                       * So it must be an assign operation */
-                      evaluateExpression(iv, strBuffer);
+                      evaluateExpression(iv, strBuffer, true);
                   }
                   else if(isFunction(token))
                   {
                      /* The token is a function */
-                     callFunction(NULL, strBuffer);
+                     callFunction(NULL, strBuffer, token, pos);
                   }
                   else if(!token.empty())
                   {
@@ -211,12 +325,9 @@ void iaScript::declareVariable(string strLine)
 /***********************************************************************
  *                          callFunction                               *
  ***********************************************************************/
-void iaScript::callFunction(iaVariable* var, string strLine)
+void iaScript::callFunction(iaVariable* var, string strLine, 
+                            string functionName, unsigned int& pos)
 {
-   unsigned int pos = 0;
-
-   string functionName = nextToken(strLine, pos);
-
    engine* eng = (engine*)actualEngine;
 
    if(functionName == IA_MOVE_TO_POSITION)
@@ -388,7 +499,8 @@ void iaScript::callFunction(iaVariable* var, string strLine)
 /***********************************************************************
  *                       evaluateExpression                            *
  ***********************************************************************/
-void iaScript::evaluateExpression(iaVariable* var, string strLine)
+void iaScript::evaluateExpression(iaVariable* var, string strLine,
+                                  bool assignExpression)
 {
    unsigned int pos = 0;
    string token;
@@ -404,8 +516,14 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine)
    iaVariable* var2 = NULL;
 
    /* get the assign token */
-   token = nextToken(strLine, pos);
-   if(token == IA_OPERATOR_ASSIGN)
+   if(assignExpression)
+   {
+      token = nextToken(strLine, pos);
+   }
+
+   /* If var is null, the expression is not an assign operation,
+    * so just evaluate it. */
+   if( (!assignExpression) || (token == IA_OPERATOR_ASSIGN) )
    {
       /* Remove the variable and assign */
       strLine.erase(0, pos);
@@ -490,10 +608,9 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine)
                string ftype = functionType(token);
                if(ftype != IA_TYPE_VOID)
                {
-                  //TODO
-                  //varStack[varPos] = new iaVariable(iv->type, token);
-                  //callFunction(varStack[varPos], strFunc);
-                  //varPos++;
+                  varStack[varPos] = new iaVariable(ftype, token);
+                  callFunction(varStack[varPos], strLine, token, pos);
+                  varPos++;
                }
                else
                {
@@ -539,6 +656,13 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine)
          cerr << "Error: The evaluation stack isn't with only the result!" 
               << endl << "Size: " << varPos << " line " << actualLine 
               << " script " << fileName;
+         /* Delete the stack, to avoid leaks */
+         varPos--;
+         while(varPos >= 0)
+         {
+            delete(varStack[varPos]);
+            varPos--;
+         }
       }
       else if(var != NULL)
       {

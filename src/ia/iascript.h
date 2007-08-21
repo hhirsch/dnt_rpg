@@ -87,13 +87,20 @@ class iaScript
        * \param var -> variable that will receive the result of the function
        *               (can be NULL, if no variable will receive, or with the
        *                function is without return) 
-       * \param strLine -> the line that contains the function call. */
-      void callFunction(iaVariable* var, string strLine);
+       * \param strLine -> the line that contains the function call.
+       * \param functionName -> the name of the function to call
+       * \param acPos -> the position on the strLine after the function name */
+      void callFunction(iaVariable* var, string strLine,
+                        string functionName, unsigned int &pos);
 
       /*! Evaluate a expression
        * \param var -> variable that will contain the expression result
-       * \param strLine -> the line that contains the expression */
-      void evaluateExpression(iaVariable* var, string strLine);
+       * \param strLine -> the line that contains the expression
+       * \param assignExpression -> true if is an assign expression,
+       *                            false otherwise (false usually if
+       *                            only a parameter or conditional one) */
+      void evaluateExpression(iaVariable* var, string strLine,
+                              bool assignExpression);
 };
 
 #endif
