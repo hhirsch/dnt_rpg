@@ -1,20 +1,45 @@
-# it's a comment
-# another comment
+# This script is a test to the DNT script language
+# actually, it don't do anything util.
 
+# All scripts need to have a script()
+# that will mark its beginning, like
+# a C main() function.
 script()
+
+   #its a multiple variable declaration. Each variable
+   #is separated with spaces.
    int a b
+
+   #some maths
    a = 2
    b = 10
    a=b + a
    int c
    c = (a + b)*20+30;
+
+   #other declarations
    bool variavel
    variavel = false
    c = c / 10
+
+   #ifs tests
    if( (c > 40) && (a > 10) && (!variavel) )
       int t
+      if(c < 40)
+         int t1
+      else
+         int f1
+      end
    else
       int f
+   end
+
+   #while tests
+   int count
+   count = 0
+   while(count <= 5)
+      count = count + 1
+      c = c + (count * 2)
    end
 end
 

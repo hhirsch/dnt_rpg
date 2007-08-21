@@ -25,10 +25,16 @@ using namespace std;
 
 #define IA_OPERATOR_ASSIGN         "="
 
-#define IA_OPERATOR_COMMA          ","
-
 #define IA_OPERATOR_LPARENTHESIS   "("
 #define IA_OPERATOR_RPARENTHESIS   ")"
+
+/* Separators */
+#define IA_SEPARATOR_COMMA         ","
+#define IA_SEPARATOR_SEMI_COLON    ';'
+#define IA_SEPARATOR_SPACE         ' '
+#define IA_SEPARATOR_TAB           '\t'
+#define IA_SEPARATOR_NEW_LINE      '\n'
+#define IA_SEPARATOR_NULL          '\0'
 
 /* Comments */
 #define IA_COMMENT_LINE            '#'
@@ -46,14 +52,15 @@ using namespace std;
 #define IA_TYPE_MAP "map"
 
 /* Setences */
+#define IA_SETENCE_SCRIPT "script"
+
 #define IA_SETENCE_IF "if"
 #define IA_SETENCE_ELSE "else"
 
-#define IA_SETENCE_FOR "for"
+#define IA_SETENCE_WHILE "while"
 
 #define IA_SETENCE_END "end"
 
-#define IA_SETENCE_SCRIPT "script"
 
 /* Quick Pointers */
 #define IA_SELF_OBJECT "SELF_OBJECT"  /**< As the owner object of the script */

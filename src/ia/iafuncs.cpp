@@ -52,7 +52,7 @@ bool isOperator(string c)
            (c == IA_OPERATOR_LESSER) || (c == IA_OPERATOR_GREATER) ||
            (c == IA_OPERATOR_GEQUAL) || (c == IA_OPERATOR_LEQUAL) ||
            (c == IA_OPERATOR_ASSIGN) || (c == IA_OPERATOR_LPARENTHESIS) ||
-           (c == IA_OPERATOR_RPARENTHESIS) || (c == IA_OPERATOR_COMMA) );
+           (c == IA_OPERATOR_RPARENTHESIS) || (c == IA_SEPARATOR_COMMA) );
 }
 
 /***********************************************************************
@@ -184,8 +184,9 @@ string nextToken(string s, unsigned int& pos)
    string cmp = "";
 
    /* Ignore all previous spaces (and commas) */
-   while( (pos < s.length()) && ( (s[pos] == ' ') || (s[pos] == '\t') ||
-          (s[pos] == '\n') || (s[pos] == '\0') ) )
+   while( (pos < s.length()) && ( (s[pos] == IA_SEPARATOR_SPACE) || 
+          (s[pos] == IA_SEPARATOR_TAB) || (s[pos] == IA_SEPARATOR_NEW_LINE) || 
+          (s[pos] == IA_SEPARATOR_NULL) || (s[pos] == IA_SEPARATOR_COMMA[0]) ))
    {
       pos++;
    }

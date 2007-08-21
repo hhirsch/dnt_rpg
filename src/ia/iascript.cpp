@@ -253,11 +253,46 @@ action* iaScript::run()
                         }
                      }
                   }
-                  else if(token == IA_SETENCE_FOR)
+                  else if(token == IA_SETENCE_WHILE)
                   {
-                     /* It's a for */
-                     //TODO
+                     /* It's a for or an while */
+                     iaVariable* iv = new iaVariable(IA_TYPE_BOOL, "result");
+                     evaluateExpression(iv, strBuffer, false);
+                     if( (*(bool*)iv->value) == true )
+                     {
+                        /* Put the if at the stack */
+                       iaJumpPos* jmp = new iaJumpPos;
+                       jmp->begin = lastPos;
+                       jmp->end = 0; //Unknow.
+                       jmp->command = IA_SETENCE_WHILE;
+                       jumpStack->push(jmp);
+                     }
+                     else
+                     {
+                        /* Get to the end of the while */
+                        while( (token != IA_SETENCE_END) )
+                        {
+                           lastPos = file.tellg();
+                           getline(file, strBuffer);
+                           actualLine++;
+                           pos = 0;
+                           if(file.eof())
+                           {
+                              /* is end of file, so the script is done */
+                              done = true;
+                              cerr << "while without end on script "
+                                   << fileName << endl;
+                              token = "end";
+                           }
+                           else
+                           {
+                              token = nextToken(strBuffer, pos);
+                           }
+                        }
+                     }
+                     delete(iv);
                   }
+                  /* Treat the END statment */
                   else if(token == IA_SETENCE_END)
                   {
                      /* It's an end */
@@ -269,6 +304,10 @@ action* iaScript::run()
                      }
                      else
                      {
+                        if(jmp->command == IA_SETENCE_WHILE)
+                        {
+                           file.seekg(jmp->begin);
+                        }
                         delete(jmp);
                      }
                   }
