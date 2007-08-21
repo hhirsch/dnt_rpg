@@ -10,7 +10,8 @@ script()
    c = (a + b)*20+30;
    bool variavel
    variavel = false
-   if(variavel)
+   c = c / 10
+   if( (c > 40) && (a > 10) && (!variavel) )
       int t
    else
       int f

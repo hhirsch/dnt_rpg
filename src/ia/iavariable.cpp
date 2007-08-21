@@ -451,6 +451,7 @@ void iaVariable::receiveOperation(string operation, iaVariable* v1,
                  IA_TYPE_BOOL << " not " << type << endl;
       }
    }
+   /* ! not operations */
    else if((operation == IA_OPERATOR_NOT))
    {
       if( (type == IA_TYPE_BOOL) && (v1->type == IA_TYPE_BOOL) )

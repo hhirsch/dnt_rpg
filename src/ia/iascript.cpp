@@ -575,20 +575,100 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                      }
                      /* Alloc the result variable */
                      varStack[varPos] = new iaVariable(type,"result");
-                     varStack[varPos]->receiveOperation(token, var1, var2);
+                     varStack[varPos]->receiveOperation(token, var2, var1);
                      cout << "result: " << varStack[varPos]->toString() << endl;
                      varPos++;
-
-                     /* Free the memory */
-                     delete(var1);
-                     delete(var2);
                   }
                   else
                   {
                      cerr << "Error: Operator " << token << " is only for "
                           << IA_TYPE_INT << " or " << IA_TYPE_FLOAT << endl;
                   }
+                  /* Free the memory */
+                  delete(var1);
+                  delete(var2);
                }
+            }
+            /* Comparations operations */
+            else if( (token == IA_OPERATOR_EQUAL) ||
+                     (token == IA_OPERATOR_NOT_EQUAL) ||
+                     (token == IA_OPERATOR_LESSER) || 
+                     (token == IA_OPERATOR_GREATER) ||
+                     (token == IA_OPERATOR_GEQUAL) ||
+                     (token == IA_OPERATOR_LEQUAL) )
+            {
+               /* Pop the two variables */
+               if(varPos < 2)
+               {
+                  cerr << "Error: operator " << token << " needs two variables"
+                       << endl;
+               }
+               else
+               {
+                  var1 = varStack[varPos-1];
+                  var2 = varStack[varPos-2];
+                  varPos -= 2;
+                  /* Alloc the result variable */
+                  varStack[varPos] = new iaVariable(IA_TYPE_BOOL,"result");
+                  varStack[varPos]->receiveOperation(token, var2, var1);
+                  cout << "result: " << varStack[varPos]->toString() << endl;
+                  varPos++;
+                  /* Free the memory */
+                  delete(var1);
+                  delete(var2);
+               }
+            }
+            /* and && or || operations */
+            else if( (token == IA_OPERATOR_AND) ||
+                     (token == IA_OPERATOR_OR) )
+            {
+               /* Pop the two variables */
+               if(varPos < 2)
+               {
+                  cerr << "Error: operator " << token << " needs two variables"
+                       << endl;
+               }
+               else
+               {
+                  var1 = varStack[varPos-1];
+                  var2 = varStack[varPos-2];
+                  varPos -= 2;
+                  /* Alloc the result variable */
+                  varStack[varPos] = new iaVariable(IA_TYPE_BOOL,"result");
+                  varStack[varPos]->receiveOperation(token, var2, var1);
+                  cout << "result: " << varStack[varPos]->toString() << endl;
+                  varPos++;
+                  /* Free the memory */
+                  delete(var1);
+                  delete(var2);
+               }
+            }
+            /* ! not operations */
+            else if((token == IA_OPERATOR_NOT))
+            {
+               /* Pop the variable */
+               if(varPos < 1)
+               {
+                  cerr << "Error: operator " << token << " needs two variables"
+                       << endl;
+               }
+               else
+               {
+                  var1 = varStack[varPos-1];
+                  varPos --;
+                  /* Alloc the result variable */
+                  varStack[varPos] = new iaVariable(IA_TYPE_BOOL,"result");
+                  varStack[varPos]->receiveOperation(token, var1, NULL);
+                  cout << "result: " << varStack[varPos]->toString() << endl;
+                  varPos++;
+                  /* Free the memory */
+                  delete(var1);
+               }
+            }
+            else
+            {
+               cerr << "Unimplemented operator: " << token << " at " 
+                    << fileName << " line " << actualLine << endl;
             }
 
          }
@@ -655,7 +735,7 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
       {
          cerr << "Error: The evaluation stack isn't with only the result!" 
               << endl << "Size: " << varPos << " line " << actualLine 
-              << " script " << fileName;
+              << " script " << fileName << endl;
          /* Delete the stack, to avoid leaks */
          varPos--;
          while(varPos >= 0)
