@@ -1,5 +1,23 @@
 # This script is a test to the DNT script language
 # actually, it don't do anything util.
+#
+# things that the language don't support:
+#   - if without a end or a else
+#   - else without end
+#   - while without end
+#   - statments before the main
+#   - expressions as functions parameters (they must be assign to variables
+#                                          before used as parameters)
+#   - literals as functions parameters
+#   - declare functions (will add it latter);
+#   - comments after some statments (the comments must be full lines)
+#   - direct assign at declaration (like int a = 20)
+#
+# details (supported):
+#   - multiple variables declarations
+#   - expressions
+#   - functions as functions parameters
+#   - else if
 
 # All scripts need to have a script()
 # that will mark its beginning, like

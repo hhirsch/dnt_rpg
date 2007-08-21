@@ -94,6 +94,11 @@ action* iaScript::run()
          {
             delete(pendingAction);
             pendingAction = NULL;
+            //TODO go to where stops at the action
+         }
+         else if(pendingAction)
+         {
+            //TODO
          }
          else
          {
@@ -367,6 +372,8 @@ void iaScript::declareVariable(string strLine)
 void iaScript::callFunction(iaVariable* var, string strLine, 
                             string functionName, unsigned int& pos)
 {
+   string token = "";
+   iaVariable* iv = NULL;
    engine* eng = (engine*)actualEngine;
 
    if(functionName == IA_MOVE_TO_POSITION)
@@ -426,14 +433,71 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       //something that will remove the hostile state of all battle characters.
       //eng->exitBattleMode();
    }
+
+   /* IA_CHARACTER_GET_PSYCHO */
    else if(functionName == IA_CHARACTER_GET_PSYCHO)
    {
-      //TODO
+      /* Syntax int getPsycho(character c)  */
+      token = nextToken(strLine, pos);
+      iv = symbols->getSymbol(token);
+      if(isFunction(token))
+      {
+         /* Get the function value */
+         iv = new iaVariable(IA_TYPE_CHARACTER,"charac");
+         callFunction(iv,strLine,token,pos);
+      }
+
+      if( (!iv) && (!isFunction(token)) )
+      {
+         cerr << "Error: Unknow parameter " << token << " to function "
+              << IA_CHARACTER_GET_PSYCHO << " must be a " 
+              << IA_TYPE_CHARACTER << " type"
+              << " at file " << fileName << " line " << actualLine << endl;
+      }
+      else if(iv->type == IA_TYPE_CHARACTER)
+      {
+         character* c = (character*)iv->value;
+         if(c != NULL)
+         {
+            if( (var) && (var->value == IA_TYPE_INT))
+            {
+               (*(int*)var->value) = c->psychoState;
+            }
+            else if(var)
+            {
+               cerr << "Error: Expected " << IA_TYPE_INT
+                    << " variable, but got " << var->type 
+                    << " at line " << actualLine << " file "
+                    << fileName << endl;
+            }
+         }
+         else
+         {
+            cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
+         }
+      }
+      else
+      {
+         cerr << "Error: Type for parameter of function " 
+              << IA_CHARACTER_GET_PSYCHO << " must be " << IA_TYPE_CHARACTER
+              << " at script: " << fileName << endl;
+      }
+
+      /* Free the token */
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
    }
+
+   /* IA_CHARACTER_SET_PSYCHO */
    else if(functionName == IA_CHARACTER_SET_PSYCHO)
    {
       //TODO
    }
+
+   /* IA_SELF_OBJECT */
    else if(functionName == IA_SELF_OBJECT)
    {
       /* Define the variable as the object owner */
@@ -450,6 +514,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
    }
+
+   /* IA_SELF_CHARACTER */
    else if(functionName == IA_SELF_CHARACTER)
    {
       /* Define the variable as the character owner */

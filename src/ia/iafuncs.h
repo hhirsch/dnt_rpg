@@ -92,7 +92,10 @@ using namespace std;
 #define IA_FIGHT_EXIT "combatExit"
 
 /* Character Functions */
+
+/* int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"
+/* void setPsycho(character c, int psychoState)  */
 #define IA_CHARACTER_SET_PSYCHO "setPsycho"
 
 
