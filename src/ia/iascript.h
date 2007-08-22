@@ -49,10 +49,10 @@ class iaScript
 
       /*! run the Script to the point of a more than one cicle action,
        * that will be marked as pending or at the end of the script.
-       * if the scripts ends, a NULL is retorned, and the script can
-       * be removed from the memory.
+       * \param maxLines -> maxLines that will be interpreted at this
+       *                    cicle. 0 for no line limit.
        * \return action pointer of a new pending action */
-      action* run();
+      action* run(int maxLines);
 
    protected:
       ifstream file;             /**< The script's file */

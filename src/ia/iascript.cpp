@@ -75,12 +75,14 @@ void iaScript::defineMap(Map* acMap)
 /***********************************************************************
  *                              run                                    *
  ***********************************************************************/
-action* iaScript::run()
+action* iaScript::run(int maxLines)
 {
    bool done = false; /* Will be done when finish the file, 
                          or at pending action */
    string strBuffer, token;
    unsigned int pos = 0;
+
+   int lines = 0;
 
    streampos lastPos;
 
@@ -92,13 +94,14 @@ action* iaScript::run()
       {
          if( (pendingAction) && (pendingAction->done) )
          {
+            //TODO go to where stops at the action
             delete(pendingAction);
             pendingAction = NULL;
-            //TODO go to where stops at the action
          }
          else if(pendingAction)
          {
-            //TODO
+            /* The pending action isn't finished, so do nothing */
+            done = true;
          }
          else
          {
@@ -106,6 +109,7 @@ action* iaScript::run()
             lastPos = file.tellg();
             getline(file, strBuffer);
             actualLine++;
+            lines++;
             pos = 0;
             if(file.eof())
             {
@@ -122,6 +126,7 @@ action* iaScript::run()
                if(token[0] == IA_COMMENT_LINE)
                {
                   //ignore the line, since it is commented
+                  lines--;
                }
                else if(token == IA_SETENCE_SCRIPT)
                {
@@ -334,6 +339,11 @@ action* iaScript::run()
                           << actualLine << " of the script file: " 
                           << fileName << endl;
                   }
+                  else
+                  {
+                     //ignore line
+                     lines--;
+                  }
                }
                else if(!token.empty())
                {
@@ -342,7 +352,16 @@ action* iaScript::run()
                        << " of script file: " << fileName 
                        << " did you forget the script() declaration?" << endl;
                }
+               else
+               {
+                  //ignore line
+                  lines--;
+               }
             }
+         }
+         if( (maxLines != 0) && (lines >= maxLines) )
+         {
+            done = true;
          }
       }
    }
