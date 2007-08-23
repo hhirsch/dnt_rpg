@@ -92,7 +92,7 @@ action* iaScript::run(int maxLines)
    {
       while(!done)
       {
-         if( (pendingAction) && (pendingAction->done) )
+         if( (pendingAction) && (!pendingAction->isRunning()) )
          {
             //TODO go to where stops at the action
             delete(pendingAction);

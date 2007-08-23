@@ -17,8 +17,8 @@ int numberAction(string buffer)
      ret = ACT_TALK;
    else if(buffer.compare(ACT_STR_CLOSE) == 0)
      ret = ACT_CLOSE;
-   else if(buffer.compare(ACT_STR_MOVIMENT) == 0)
-     ret = ACT_MOVIMENT;
+   else if(buffer.compare(ACT_STR_MOVE) == 0)
+     ret = ACT_MOVE;
    else if(buffer.compare(ACT_STR_TAKE) == 0)
      ret = ACT_TAKE;
    else if(buffer.compare(ACT_STR_FREE) == 0)
@@ -56,3 +56,213 @@ int numberActionType(string buffer)
 
    return(ret);
 }
+
+
+/////////////////////////////////////////////////////////////////////////////
+//                                                                         //
+//                                action                                   //
+//                                                                         //
+/////////////////////////////////////////////////////////////////////////////
+
+
+/************************************************************
+ *                        Constructor                       *
+ ************************************************************/
+action::action(string strLine, int type, character* act, thing* tgt)
+{
+   action(strLine, type, act, tgt, -1, -1);
+}
+
+/************************************************************
+ *                        Constructor                       *
+ ************************************************************/
+action::action(string strLine, int type, character* act, thing* tgt,
+               GLfloat tgtX, GLfloat tgtZ)
+{
+   scriptLine = strLine;
+   actionType = type;
+   actor = act;
+   target = tgt;
+   targetX = tgtX;
+   targetZ = tgtZ;
+   next = NULL;
+   previous = NULL;
+}
+
+/************************************************************
+ *                        Constructor                       *
+ ************************************************************/
+action::action(string strLine, int type, character* act, 
+               GLfloat tgtX, GLfloat tgtZ)
+{
+   action(strLine, type, act, NULL, tgtX, tgtZ);
+}
+
+/************************************************************
+ *                         Destructor                       *
+ ************************************************************/
+action::~action()
+{
+}
+
+/************************************************************
+ *                         isRunning                        *
+ ************************************************************/
+bool action::isRunning()
+{
+   return(!done);
+}
+
+/************************************************************
+ *                         setAsEnded                       *
+ ************************************************************/
+void action::setAsEnded(bool result)
+{
+   done = true;
+   returnValue = result;
+}
+
+/************************************************************
+ *                           getType                        *
+ ************************************************************/
+int action::getType()
+{
+   return(actionType);
+}
+
+/************************************************************
+ *                          getActor                        *
+ ************************************************************/
+character* action::getActor()
+{
+   return(actor);
+}
+
+/************************************************************
+ *                       getTargetThing                     *
+ ************************************************************/
+thing* action::getTargetThing()
+{
+   return(target);
+}
+
+/************************************************************
+ *                      getTargetPosition                   *
+ ************************************************************/
+void action::getTargetPosition(GLfloat& x, GLfloat& z)
+{
+   x = targetX;
+   z = targetZ;
+}
+
+/************************************************************
+ *                       getReturnValue                     *
+ ************************************************************/
+bool action::getReturnValue()
+{
+   return(returnValue);
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+//                                                                         //
+//                           actionController                              //
+//                                                                         //
+/////////////////////////////////////////////////////////////////////////////
+
+
+/************************************************************
+ *                        Constructor                       *
+ ************************************************************/
+actionController::actionController()
+{
+   first = NULL;
+   total = 0;
+}
+
+/************************************************************
+ *                         Destructor                       *
+ ************************************************************/
+actionController::~actionController()
+{
+   while(total > 0)
+   {
+      removeAction(first);
+   }
+}
+
+/************************************************************
+ *                        removeAction                      *
+ ************************************************************/
+void actionController::removeAction(action* act)
+{
+   act->next->previous = act->previous;
+   act->previous->next = act->next;
+   if(act == first)
+   {
+      first = act->next;
+   }
+   delete(act);
+   total--;
+   if(total <= 0)
+   {
+      first = NULL;
+   }
+}
+
+/************************************************************
+ *                        addAction                         *
+ ************************************************************/
+action* actionController::addAction(action* act)
+{
+   if(act)
+   {
+      if(first)
+      {
+         act->next = first;
+         act->previous = first->previous;
+      }
+      else
+      {
+         act->next = act;
+         act->previous = act;
+      }
+      act->next->previous = act;
+      act->previous->next = act;
+      first = act;
+      total++;
+   }
+   return(act);
+}
+
+/************************************************************
+ *                        addAction                         *
+ ************************************************************/
+action* actionController::addAction(string strLine, int type, character* act, 
+                                    thing* tgt)
+{
+   action* a = new action(strLine, type, act, tgt);
+   return(addAction(a));
+}
+
+/************************************************************
+ *                        addAction                         *
+ ************************************************************/
+action* actionController::addAction(string strLine, int type, character* act, 
+                                    GLfloat tgtX, GLfloat tgtZ)
+{
+   action* a = new action(strLine, type, act, tgtX, tgtZ);
+   return(addAction(a));
+}
+
+/************************************************************
+ *                        addAction                         *
+ ************************************************************/
+action* actionController::addAction(string strLine, int type, character* act, 
+                                    thing* tgt, GLfloat tgtX, GLfloat tgtZ)
+{
+   action* a = new action(strLine, type, act, tgt, tgtX, tgtZ);
+   return(addAction(a));
+}
+
+

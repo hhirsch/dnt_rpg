@@ -10,19 +10,13 @@
 #include "../classes/feats.h"
 #include "../classes/skills.h"
 #include "../map/map.h"
+#include "../classes/actions.h"
 
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
 using namespace std;
-
-/*! FIXME, not here, temporaly */
-class action
-{
-   public:
-      bool done;
-};
 
 /*! The ia Script is the script that controls the behaviour
  * of characters, objects and events on DNT. */
@@ -89,7 +83,7 @@ class iaScript
        *                function is without return) 
        * \param strLine -> the line that contains the function call.
        * \param functionName -> the name of the function to call
-       * \param acPos -> the position on the strLine after the function name */
+       * \param pos -> the position on the strLine after the function name */
       void callFunction(iaVariable* var, string strLine,
                         string functionName, unsigned int &pos);
 

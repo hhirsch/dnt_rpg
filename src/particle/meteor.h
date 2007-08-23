@@ -72,11 +72,21 @@ class meteor: public particleSystem
        **************************************************************/
       void defineCollision(collision* col);
 
-       void Render(particle*);
-       void actualize(particle*);
-       bool continueLive(particle*);
+      /*! Not Used
+       * \param part -> not used */
+       void Render(particle* part);
+       /*! Not Used
+       * \param part -> not used */
+       void actualize(particle* part);
+       /*! Not Used
+       * \param part -> not used */
+       bool continueLive(particle* part);
+       /*! Not Used
+       * \return -> not used */
        int  needCreate();
-       void createParticle(particle*);
+       /*! Not Used
+       * \param part -> not used */
+       void createParticle(particle* part);
 
    private:
       int actualLiving;     /**< Living Time after dead */
