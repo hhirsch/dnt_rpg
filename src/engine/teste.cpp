@@ -29,11 +29,9 @@ int main(int argc, char **argv)
    
    Engine->Init(screen);
 
-   iaScript* ias = new iaScript("../data/ia/script/general/test.dls", &Engine);
-   actionController* iac = new actionController();
-   ias->run(0,iac);
+   iaScript* ias = new iaScript("../data/ia/script/general/test.dls", Engine);
+   ias->run(0);
    delete(ias);
-   delete(iac);
  
    GLuint tituloID;
    /* Call Splash Screen  */

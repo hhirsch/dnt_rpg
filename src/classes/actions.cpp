@@ -76,7 +76,7 @@ int numberActionType(string buffer)
  ************************************************************/
 action::action(string strLine, int type, character* act, thing* tgt)
 {
-   action(strLine, type, act, tgt, -1, -1);
+   init(strLine, type, act, tgt, -1, -1);
 }
 
 /************************************************************
@@ -84,6 +84,24 @@ action::action(string strLine, int type, character* act, thing* tgt)
  ************************************************************/
 action::action(string strLine, int type, character* act, thing* tgt,
                GLfloat tgtX, GLfloat tgtZ)
+{
+   init(strLine, type, act, tgt, tgtX, tgtZ);
+}
+
+/************************************************************
+ *                        Constructor                       *
+ ************************************************************/
+action::action(string strLine, int type, character* act, 
+               GLfloat tgtX, GLfloat tgtZ)
+{
+   init(strLine, type, act, NULL, tgtX, tgtZ);
+}
+
+/************************************************************
+ *                           init                           *
+ ************************************************************/
+void action::init(string strLine, int type, character* act, thing* tgt,
+                  GLfloat tgtX, GLfloat tgtZ)
 {
    scriptLine = strLine;
    actionType = type;
@@ -93,15 +111,6 @@ action::action(string strLine, int type, character* act, thing* tgt,
    targetZ = tgtZ;
    next = NULL;
    previous = NULL;
-}
-
-/************************************************************
- *                        Constructor                       *
- ************************************************************/
-action::action(string strLine, int type, character* act, 
-               GLfloat tgtX, GLfloat tgtZ)
-{
-   action(strLine, type, act, NULL, tgtX, tgtZ);
 }
 
 /************************************************************
@@ -223,7 +232,7 @@ action* actionController::addAction(action* act)
 {
    if(act)
    {
-      if(first)
+      if(first != NULL)
       {
          act->next = first;
          act->previous = first->previous;

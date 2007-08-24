@@ -47,7 +47,7 @@ class iaScript
        *                    cicle. 0 for no line limit.
        * \param actControl -> the action controller pointer
        * \return action pointer of a new pending action */
-      action* run(int maxLines, actionController* actControl);
+      void run(int maxLines);
 
       /*! Verify if the script is finished or not
        * \return -> if the end of the script is found. False otherwise. */

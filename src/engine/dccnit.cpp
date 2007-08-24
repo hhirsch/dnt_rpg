@@ -99,6 +99,8 @@ engine::engine()
 
    destinyVariation = -2.0;
 
+   actionControl = new actionController();
+
    /* Colors */
    int i;
    for(i = 0; i < 3; i++)
@@ -176,6 +178,9 @@ engine::~engine()
  
    /* Clear Cursors */
    delete(cursors);
+
+   /* Delete the action controller */
+   delete(actionControl);
 
    /* Delete the list of objects */
    delete(objectsList);

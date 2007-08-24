@@ -3,7 +3,7 @@
 ================================================
  - Terrain texture splatting;
  - Meteors and FireSpheres;
- - Using LUA for AI Scripts;
+ - Script Language for AI;
  - Workspace for compiling at M$ Visual C++ 6;
  - More Engine Optimizations;
  - Smooth Camera Movements;

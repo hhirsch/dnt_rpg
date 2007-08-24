@@ -120,7 +120,7 @@ string iaScript::changeFrom(string postFix, string token, int num,
 /***********************************************************************
  *                              run                                    *
  ***********************************************************************/
-action* iaScript::run(int maxLines, actionController* actControl)
+void iaScript::run(int maxLines)
 {
    bool done = false; /* Will be done when finish the file, 
                          or at pending action */
@@ -375,7 +375,11 @@ action* iaScript::run(int maxLines, actionController* actControl)
                   else if(isFunction(token))
                   {
                      /* The token is a function */
-                     callFunction(NULL, strBuffer, token, pos);
+                     string postFix = toPostFix(strBuffer);
+                     /* Get the position after the function token */
+                     unsigned int p = 0;
+                     nextToken(postFix,p);
+                     callFunction(NULL, postFix, token, p);
                   }
                   else if(!token.empty())
                   {
@@ -409,11 +413,14 @@ action* iaScript::run(int maxLines, actionController* actControl)
             done = true;
          }
 
-         /* Remove all temporary symbols used */
-         symbols->removeTempSymbols();
+         if(!pendingAction)
+         {
+            /* Remove all temporary symbols used */
+            symbols->removeTempSymbols();
+         }
       }
    }
-   return(NULL);
+   return;
 }
 
 /***********************************************************************
@@ -443,8 +450,109 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    iaVariable* iv = NULL;
    engine* eng = (engine*)actualEngine;
 
+   string varName = "";
+
    if(functionName == IA_MOVE_TO_POSITION)
    {
+      cout << "Got: " << strLine << endl;
+      /* Syntax bool moveToPosition(character* char, int x, int z) */
+      varName = symbols->addTempSymbol(IA_TYPE_BOOL);
+
+      string line = changeFrom(strLine, functionName, 2, varName);
+      character* dude = NULL;
+      GLfloat X = 0;
+      GLfloat Z = 0;
+
+      /* Get the character */
+      token = nextToken(strLine, pos);
+      iv = symbols->getSymbol(token);
+
+      cout << "Token " << token << endl;
+
+      if(isFunction(token))
+      {
+         /* Get the function value */
+         iv = new iaVariable(IA_TYPE_CHARACTER,"charac");
+         callFunction(iv,strLine,token,pos);
+      }
+      if( ( (!iv) && (!isFunction(token)) ) ||
+          ( (iv) && (iv->type != IA_TYPE_CHARACTER)) )
+      {
+         cerr << "Error: Unknow parameter " << token << " to function "
+              << IA_MOVE_TO_POSITION << " must be a " 
+              << IA_TYPE_CHARACTER << " type"
+              << " at file " << fileName << " line " << actualLine << endl;
+      }
+      else
+      {
+         dude = (character*)iv->value;
+      }
+
+      /* Get the X */
+      token = nextToken(strLine, pos);
+      iv = symbols->getSymbol(token);
+
+      if(isFunction(token))
+      {
+         /* Get the function value */
+         iv = new iaVariable(IA_TYPE_FLOAT,"X");
+         callFunction(iv,strLine,token,pos);
+      }
+      if( ( (!iv) && (!isFunction(token)) ) ||
+          ( (iv) && ( (iv->type != IA_TYPE_FLOAT) && 
+                      (iv->type != IA_TYPE_INT ) ) ) )
+      {
+         cerr << "Error: Unknow parameter " << token << " to function "
+              << IA_MOVE_TO_POSITION << " must be a " 
+              << IA_TYPE_FLOAT << " type"
+              << " at file " << fileName << " line " << actualLine << endl;
+      }
+      else
+      {
+         if(iv->type == IA_TYPE_FLOAT)
+         {
+            X = *(float*)iv->value;
+         }
+         else
+         {
+            X = *(int*)iv->value;
+         }
+      }
+
+      /* Get the Z */
+      token = nextToken(strLine, pos);
+      iv = symbols->getSymbol(token);
+
+      if(isFunction(token))
+      {
+         /* Get the function value */
+         iv = new iaVariable(IA_TYPE_FLOAT,"X");
+         callFunction(iv,strLine,token,pos);
+      }
+      if( ( (!iv) && (!isFunction(token)) ) ||
+          ( (iv) && ( (iv->type != IA_TYPE_FLOAT) && 
+                      (iv->type != IA_TYPE_INT ) ) ) )
+      {
+         cerr << "Error: Unknow parameter " << token << " to function "
+              << IA_MOVE_TO_POSITION << " must be a " 
+              << IA_TYPE_FLOAT << " type"
+              << " at file " << fileName << " line " << actualLine << endl;
+      }
+      else
+      {
+         if(iv->type == IA_TYPE_FLOAT)
+         {
+            Z = *(float*)iv->value;
+         }
+         else
+         {
+            Z = *(int*)iv->value;
+         }
+      }
+
+      pendingAction = eng->actionControl->addAction(line, ACT_MOVE, dude, X, Z);
+
+
       //TODO
    }
    else if(functionName == IA_MOVE_TO_CHARACTER)

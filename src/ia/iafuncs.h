@@ -73,6 +73,7 @@ using namespace std;
 #define IA_FALSE "false"
 
 /* Movimentation Functions */
+/*! bool moveToPosition(character* char, int x, int z) */
 #define IA_MOVE_TO_POSITION "moveToPosition"
 #define IA_MOVE_TO_CHARACTER "moveToCharacter"
 #define IA_MOVE_TO_OBJECT "moveToObject"
@@ -93,9 +94,9 @@ using namespace std;
 
 /* Character Functions */
 
-/* int getPsycho(character c)  */
+/*! int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"
-/* void setPsycho(character c, int psychoState)  */
+/*! void setPsycho(character c, int psychoState)  */
 #define IA_CHARACTER_SET_PSYCHO "setPsycho"
 
 

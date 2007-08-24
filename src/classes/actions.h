@@ -105,7 +105,18 @@ class action
        * \param tgtZ -> target Z position */
       action(string strLine, int type, character* act, thing* tgt,
              GLfloat tgtX, GLfloat tgtZ);
+      /*! Destructor */
       ~action();
+
+      /*! Constructor
+       * \param strLine -> the line of the script the action was 
+       * \param type -> the type of the action
+       * \param act -> the character actor
+       * \param tgt -> the target thing
+       * \param tgtX -> target X position
+       * \param tgtZ -> target Z position */
+      void init(string strLine, int type, character* act, thing* tgt,
+                GLfloat tgtX, GLfloat tgtZ);
 
       /*! Verify if the action is still running
        * \return true if is still running */

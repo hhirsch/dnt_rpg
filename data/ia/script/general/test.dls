@@ -52,6 +52,8 @@ script()
       int f
    end
 
+   moveToPosition(SELF_CHARACTER, a, c)
+
    #while tests
    int count
    count = 0
