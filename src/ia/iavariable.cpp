@@ -503,6 +503,7 @@ iaSymbolsTable::iaSymbolsTable()
 {
    first = NULL;
    total = 0;
+   tempSymbol = 0;
 }
 
 /***********************************************************
@@ -537,6 +538,43 @@ void iaSymbolsTable::addSymbol(string type, string name)
    }
    first = iv;
    total++;
+}
+
+/***********************************************************
+ *                      addTempSymbol                      *
+ ***********************************************************/
+string iaSymbolsTable::addTempSymbol(string type)
+{
+   char buffer[32];
+   sprintf(buffer,"&tmp%d",tempSymbol);
+   tempSymbol++;
+   addSymbol(type, buffer);
+   return(buffer);
+}
+
+/***********************************************************
+ *                    removeTempSymbol                     *
+ ***********************************************************/
+void iaSymbolsTable::removeTempSymbols()
+{
+   int i;
+   int initialTotal = total;
+
+   iaVariable* symbol = first;
+   iaVariable* tmp;
+
+   for(i=0; i<initialTotal; i++)
+   {
+      tmp = symbol;
+      symbol = symbol->next;
+      if( (tmp->name[0] == '&') && (tmp->name[1] == 't') &&
+          (tmp->name[2] == 'm') && (tmp->name[3] == 'p') )
+      {
+         removeSymbol(tmp);
+         tempSymbol--;
+      }
+
+   }
 }
 
 /***********************************************************

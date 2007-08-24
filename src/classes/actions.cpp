@@ -1,5 +1,8 @@
 #include "actions.h"
 
+/********************************************************
+ *                    numberAction                      *
+ ********************************************************/
 int numberAction(string buffer)
 {
    int ret = -1;
@@ -41,6 +44,9 @@ int numberAction(string buffer)
    return(ret);
 }
 
+/********************************************************
+ *                  numberActionType                    *
+ ********************************************************/
 int numberActionType(string buffer)
 {
    int ret = -1;

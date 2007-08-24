@@ -45,8 +45,13 @@ class iaScript
        * that will be marked as pending or at the end of the script.
        * \param maxLines -> maxLines that will be interpreted at this
        *                    cicle. 0 for no line limit.
+       * \param actControl -> the action controller pointer
        * \return action pointer of a new pending action */
-      action* run(int maxLines);
+      action* run(int maxLines, actionController* actControl);
+
+      /*! Verify if the script is finished or not
+       * \return -> if the end of the script is found. False otherwise. */
+      bool finished();
 
    protected:
       ifstream file;             /**< The script's file */
@@ -95,6 +100,15 @@ class iaScript
        *                            only a parameter or conditional one) */
       void evaluateExpression(iaVariable* var, string strLine,
                               bool assignExpression);
+
+
+      /*! change from the postFix string the token string and
+       * num tokens after the token string, for the newToken string
+       * \param postFix -> the postFix string
+       * \param token -> the token string to remove
+       * \param num -> the number of tokens to remove after the token 
+       * \param newToken -> the token that will take place of removed ones. */
+      string changeFrom(string postFix, string token, int num, string newToken);
 };
 
 #endif

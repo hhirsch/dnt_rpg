@@ -69,6 +69,14 @@ class iaSymbolsTable
        * \param name -> name of the symbol; */
       void addSymbol(string type, string name);
 
+      /*! Add the symbol to the table.
+       * \param type -> type of the symbol;
+       * \return -> name of the symbol; */
+      string addTempSymbol(string type);
+
+      /*! Remove all temporary symbols from the table */
+      void removeTempSymbols();
+
       /*! Remove the Symbol from the table
        * \param name -> symbol's name */
       void removeSymbol(string name);
@@ -83,6 +91,7 @@ class iaSymbolsTable
    protected:
       iaVariable* first;   /**< First element on the list */
       int total;           /**< Total symbols on the list */
+      int tempSymbol;      /**< The next temporary symbol number */
 };
 
 #endif

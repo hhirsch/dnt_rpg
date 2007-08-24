@@ -73,9 +73,54 @@ void iaScript::defineMap(Map* acMap)
 }
 
 /***********************************************************************
+ *                            finished                                 *
+ ***********************************************************************/
+bool iaScript::finished()
+{
+   return(file.eof());
+}
+
+/***********************************************************************
+ *                           changeFrom                                *
+ ***********************************************************************/
+string iaScript::changeFrom(string postFix, string token, int num,
+                            string newToken)
+{
+   unsigned int pos = 0;
+   string result = "";
+
+   /* Get all previous tokens */
+   string actual = nextToken(postFix, pos);
+   while( (actual != token) && (!actual.empty()) )
+   {
+      result += " " + actual;
+      actual = nextToken(postFix, pos);
+   }
+
+   /* Ignore all desirable tokens */
+   int i;
+   for(i = 0; i < num; i++)
+   {
+      actual = nextToken(postFix, pos);
+   }
+
+   /* Change to the newToken */
+   result += " " + newToken;
+
+   /* Copy all remaining tokens  */
+   while(actual != "")
+   {
+      actual = nextToken(postFix, pos);
+      result += " " + actual;
+   }
+
+   return(result);
+}
+
+/***********************************************************************
  *                              run                                    *
  ***********************************************************************/
-action* iaScript::run(int maxLines)
+action* iaScript::run(int maxLines, actionController* actControl)
 {
    bool done = false; /* Will be done when finish the file, 
                          or at pending action */
@@ -363,6 +408,9 @@ action* iaScript::run(int maxLines)
          {
             done = true;
          }
+
+         /* Remove all temporary symbols used */
+         symbols->removeTempSymbols();
       }
    }
    return(NULL);
