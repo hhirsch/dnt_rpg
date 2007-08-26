@@ -178,6 +178,30 @@ bool action::getReturnValue()
    return(returnValue);
 }
 
+/************************************************************
+ *                         getToggle                        *
+ ************************************************************/
+bool action::getToggle()
+{
+   return(toggle);
+}
+
+/************************************************************
+ *                         setToggle                        *
+ ************************************************************/
+void action::setToggle(bool b)
+{
+   toggle = b;
+}
+
+/************************************************************
+ *                       getScriptLine                      *
+ ************************************************************/
+string action::getScriptLine()
+{
+   return(scriptLine);
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 //                                                                         //
@@ -244,8 +268,39 @@ action* actionController::addAction(action* act)
       }
       act->next->previous = act;
       act->previous->next = act;
+      act->done = false;
+      act->toggle = false;
       first = act;
       total++;
+
+      /* Do the related trigger action to the one defined */
+      if(act->actionType == ACT_MOVE )
+      {
+         if(act->target == NULL)
+         {
+            /* It's a move to position */
+            act->actor->pathFind.findPath(act->actor->xPosition, 
+                                          act->actor->zPosition,
+                                          act->targetX, act->targetZ, 
+                                          act->actor->walk_interval, 
+                                          act->actor->orientation,
+                                          act->actor->min[0],
+                                          act->actor->min[1],
+                                          act->actor->min[2],
+                                          act->actor->max[0],
+                                          act->actor->max[1],
+                                          act->actor->max[2]);
+         }
+         else
+         {
+            //TODO
+         }
+      }
+      else
+      {
+         //TODO
+      }
+
    }
    return(act);
 }
@@ -280,4 +335,19 @@ action* actionController::addAction(string strLine, int type, character* act,
    return(addAction(a));
 }
 
+/************************************************************
+ *                        getTotal                          *
+ ************************************************************/
+int actionController::getTotal()
+{
+   return(total);
+}
+
+/************************************************************
+ *                        getFirst                          *
+ ************************************************************/
+action* actionController::getFirst()
+{
+   return(first);
+}
 

@@ -18,6 +18,8 @@
 #include <iostream>
 using namespace std;
 
+#define MAX_SCRIPT_LINES 8 /**< Max interpreted script lines per cycle */
+
 /*! The ia Script is the script that controls the behaviour
  * of characters, objects and events on DNT. */
 class iaScript
@@ -64,6 +66,8 @@ class iaScript
       Map* actualMap;            /**< Actual Opened Map */
 
       int actualLine;            /**< The actual Line */
+
+      streampos lastPos;         /**< Last pos before the read */
 
       string context;            /**< The context */
 

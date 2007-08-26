@@ -397,6 +397,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
            per->xPosition = posX;
            per->zPosition = posZ;
            per->yPosition = actualMap->getHeight(posX, posZ);
+           /* Define Occuped Square */
+           int posX =(int)floor(per->xPosition / SQUARE_SIZE);
+           int posZ =(int)floor(per->zPosition / SQUARE_SIZE);
+           per->ocupaQuad = actualMap->relativeSquare(posX,posZ);
          }
          fclose(arq);
       }  
@@ -1172,9 +1176,101 @@ void engine::endTurn()
 }
 
 /*********************************************************************
- *                         Threat GUI Events                         *
+ *                        treat all scripts                          *
  *********************************************************************/
-void engine::threatGuiEvents(guiObject* object, int eventInfo)
+void engine::treatScripts()
+{
+   /* Treat all pending actions */
+   treatPendingActions();
+
+   /* Treat NPCs scripts */
+   int i;
+   character* npc = NPCs->first;
+   iaScript* script;
+   for(i=0; i < NPCs->getTotal(); i++)
+   {
+      script = (iaScript*) npc->getGeneralScript();
+      if(script)
+      {
+         script->defineMap(actualMap);
+         script->run(MAX_SCRIPT_LINES);
+      }
+      npc = npc->next;
+   }
+}
+
+/*********************************************************************
+ *                       Treat Pending Actions                       *
+ *********************************************************************/
+void engine::treatPendingActions()
+{
+   int i;
+   action* act = actionControl->getFirst();
+
+   for(i = 0; i < actionControl->getTotal(); i++)
+   {
+      if(!act->isRunning())
+      {
+         //do nothing.
+      }
+      else if(act->getType() == ACT_MOVE)
+      {
+         if(act->getTargetThing() == NULL)
+         {
+            character* actor = act->getActor();
+            if(actor->pathFind.getState() == ASTAR_STATE_FOUND)
+            {
+               act->setToggle(true);
+               actor->setState(STATE_WALK);
+            }
+            else if(actor->pathFind.getState() == ASTAR_STATE_NOT_FOUND)
+            {
+               /* The move ended, since not found a path */
+               act->setAsEnded(false);
+               actor->setState(STATE_IDLE);
+            }
+
+            /* If the toggle is seted, the path was found */
+            if(act->getToggle())
+            {
+               if(!actor->pathFind.getNewPosition(actor->xPosition,
+                                                  actor->zPosition,
+                                                  actor->orientation))
+               {
+                  /* The move ended */
+                  act->setAsEnded(true);
+                  actor->setState(STATE_IDLE);
+               }
+               else
+               {
+                  /* Define New Occuped Square */
+                  int posX =(int)floor(actor->xPosition / SQUARE_SIZE);
+                  int posZ =(int)floor(actor->zPosition / SQUARE_SIZE);
+                  actor->ocupaQuad = actualMap->relativeSquare(posX,posZ);
+
+                  /* Define New Height */
+                  defineCharacterHeight(actor, actor->xPosition,
+                                        actor->zPosition);
+               }
+            }
+         }
+         else
+         {
+            //TODO
+         }
+      }
+      else
+      {
+         //TODO
+      }
+      act = act->next;
+   }
+}
+
+/*********************************************************************
+ *                          Treat GUI Events                         *
+ *********************************************************************/
+void engine::treatGuiEvents(guiObject* object, int eventInfo)
 {
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
@@ -1654,7 +1750,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
 /*********************************************************************
  *                   Threat Input/Output Events                      *
  *********************************************************************/
-int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
+int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
 {
    exitEngine = 0;           // Exit the engine ?
    bool redesenha = false;   // Redraw things ?
@@ -2055,7 +2151,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       {
          redesenha = true;
       }
-      
+
       /* Path Verification */
       if( (Mbutton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)))
       {
@@ -2118,8 +2214,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
                activeCharacter->ocupaQuad = 
                                          actualMap->relativeSquare(posX,posZ);
                /* Define New Height */
-               defineActiveCharacterHeight(activeCharacter->xPosition,
-                                           activeCharacter->zPosition);
+               defineCharacterHeight(activeCharacter, 
+                                     activeCharacter->xPosition,
+                                     activeCharacter->zPosition);
             }
 
             gameCamera.actualizeCamera(activeCharacter->xPosition,
@@ -2129,6 +2226,9 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
             redesenha = true;
             andou = true;
       }
+
+      /* IA cycle */
+      treatScripts();
 
       /* GUI Events */
 
@@ -2165,7 +2265,7 @@ int engine::threatIO(SDL_Surface *screen,int *forcaAtualizacao)
       guiObject* object;
       object = gui->manipulateEvents(x,y,Mbutton,keys, &guiEvent);
       /* Threat the GUI */
-      threatGuiEvents(object, guiEvent);
+      treatGuiEvents(object, guiEvent);
    }
    else if(*forcaAtualizacao == 0)
    {
@@ -2765,7 +2865,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       activeCharacter->ocupaQuad = actualMap->relativeSquare(posX,posZ);
 
       /* Define New Heigh */
-      if(!defineActiveCharacterHeight(nx, nz))
+      if(!defineCharacterHeight(activeCharacter, nx, nz))
       {
          /* Can't define new height or too much
           * to up or down, so can't move */
@@ -2794,22 +2894,21 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 }
 
 /*********************************************************************
- *                      defineActiveCharacterHeight                  *
+ *                      defineCharacterHeight                  *
  *********************************************************************/
-bool engine::defineActiveCharacterHeight(GLfloat nx, GLfloat nz)
+bool engine::defineCharacterHeight(character* c, GLfloat nx, GLfloat nz)
 {
-   character* activeCharacter = PCs->getActiveCharacter();
-   GLfloat altura_atual = activeCharacter->yPosition;
+   GLfloat altura_atual = c->yPosition;
 
    GLfloat res = actualMap->getHeight(nx, nz);
 
-   if( res - altura_atual > activeCharacter->walk_interval)
+   if( res - altura_atual > c->walk_interval)
    {
-       activeCharacter->yPosition = altura_atual;
+       c->yPosition = altura_atual;
        return(false);
    }
 
-   activeCharacter->yPosition = res;
+   c->yPosition = res;
    return(true);
 }
 
@@ -3001,7 +3100,7 @@ int engine::Run(SDL_Surface *surface)
    #endif
   
    /* Main Things Run */
-   while(threatIO(surface,&forcaAtualizacao))
+   while(treatIO(surface,&forcaAtualizacao))
    {
 
      /* Verify battle events */

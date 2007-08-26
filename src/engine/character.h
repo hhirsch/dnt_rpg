@@ -167,6 +167,13 @@ class character: public aniModel
        character* next;             /**< Next Character on List */
        character* previous;         /**< Previous Character on List */
 
+       /*! Get the general script pointer
+        * \return genereal iaScript pointer */
+       void* getGeneralScript();    
+
+       /*! Define the character list as friend class */
+      friend class characterList;
+       
    protected:
        /*! Define max value of the lifePoints
        * \param maxPoints -> new max points to life points */
@@ -184,6 +191,10 @@ class character: public aniModel
       void* conv;                 /**< Pointer to the conversation */
       bool convPressed;           /**< To avoid do some conversation action
                                        before releases the left mouse button */
+
+      void* generalScript;         /**< Pointer to the general iaScript */
+      string generalScriptFileName;/**< The General Script Filename */
+
 
       characterUtilModel headModel;       /**< Head Model */
       characterUtilModel leftHandModel;   /**< Left Hand Model */

@@ -60,7 +60,6 @@ using namespace std;
 #define ACT_TYPE_STR_SECUNDARY_ACTION  "ACT_TYPE_SECUNDARY_ACTION"
 #define ACT_TYPE_STR_NO_ACTION         "ACT_TYPE_NO_ACTION"
 
-
 /*!
  ************************************************************* 
  * Return the number of the action with name buffer  
@@ -150,6 +149,22 @@ class action
       /*! Define the controller as friend class */
       friend class actionController;
 
+      /*! Return the toggle state. the toggle is used to set an internal
+       * state, like the false while pending for the result of the astar
+       * \return toggle state. */
+      bool getToggle();
+
+      /*! set the toggle state */
+      void setToggle(bool b);
+
+      /*! Get the script line where the action was called
+       * \return -> the line, with the action's function changed to the
+       *            temporary variable. */
+      string getScriptLine();
+
+      action* next;       /**< Next action on the list */
+      action* previous;   /**< Previous action on the list */
+
    private:
       string scriptLine;   /**< The line of the script that calls the more than
                                 one cycle function. */
@@ -168,8 +183,7 @@ class action
                                value. */
       int actionType;     /**< The type of the action */
 
-      action* next;       /**< Next action on the list */
-      action* previous;   /**< Previous action on the list */
+      bool toggle;        /**< The state of the action */
 };
 
 /*! the controller of actions taked by characters on the game */
@@ -215,6 +229,14 @@ class actionController
       /*! Remove Action from the controller
        * \param act -> pointer to the action to remove */
       void removeAction(action* act);
+
+      /*! Get the total actions on list
+       * \return number of actions on the list */
+      int getTotal();
+
+      /*! Get the first action on the list
+       * \return pointer to the first action on the list */
+      action* getFirst();
    private:
       action* first;    /**< First action on the list */
       int total;        /**< Total actions on the list */

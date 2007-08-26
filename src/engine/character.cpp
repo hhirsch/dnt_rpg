@@ -6,6 +6,7 @@
 #include "character.h"
 #include "dialog.h"
 #include "../gui/draw.h"
+#include "../ia/iascript.h"
 #include <SDL/SDL_image.h>
 
 /*********************************************************************
@@ -38,6 +39,10 @@ character::character(featsList* ft)
      actualFeats.insertFeat(ft->featByNumber(FEAT_MELEE_ATTACK));
      actualFeats.insertFeat(ft->featByNumber(FEAT_RANGED_ATTACK));
   }
+
+  /* Scripts */
+  generalScript = NULL;
+  generalScriptFileName = "";
 
   /* Clear Models */
   headModel.modelName = "";
@@ -81,6 +86,20 @@ character::~character()
    {
       delete(inventories);
    }
+   if(generalScript)
+   {
+      iaScript* isc = (iaScript*)generalScript;
+      delete(isc);
+      generalScript = NULL;
+   }
+}
+
+/*********************************************************************
+ *                         getGeneralScript                          *
+ *********************************************************************/
+void* character::getGeneralScript()
+{
+   return(generalScript);
 }
 
 /*********************************************************************
@@ -667,6 +686,15 @@ character* characterList::insertCharacter(string file, featsList* ft,
          {
             novo->createConversation(pEngine);
          }
+      }
+      /* General Script */
+      else if(buf == "generalScript")
+      {
+         /* Create the script */
+         iaScript* isc = new iaScript(token2, pEngine);
+         novo->generalScript = isc;
+         /* Set the owner */
+         isc->defineCharacterOwner(novo);
       }
 
       //TODO

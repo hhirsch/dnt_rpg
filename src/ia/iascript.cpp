@@ -129,7 +129,7 @@ void iaScript::run(int maxLines)
 
    int lines = 0;
 
-   streampos lastPos;
+   bool interpret = false;
 
    iaVariable* iv = NULL;
 
@@ -139,14 +139,20 @@ void iaScript::run(int maxLines)
       {
          if( (pendingAction) && (!pendingAction->isRunning()) )
          {
-            //TODO go to where stops at the action
-            delete(pendingAction);
+            /* Go to where stops at the action */
+            strBuffer = pendingAction->getScriptLine();
+            interpret = true;
+
+            /* Remove the action from the controller */
+            engine* eng = (engine*)actualEngine;
+            eng->actionControl->removeAction(pendingAction);
             pendingAction = NULL;
          }
          else if(pendingAction)
          {
             /* The pending action isn't finished, so do nothing */
             done = true;
+            interpret = false;
          }
          else
          {
@@ -155,6 +161,11 @@ void iaScript::run(int maxLines)
             getline(file, strBuffer);
             actualLine++;
             lines++;
+            interpret = true;
+         }
+
+         if(interpret)
+         {
             pos = 0;
             if(file.eof())
             {
@@ -550,6 +561,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
 
+      dude->pathFind.defineMap(actualMap);
       pendingAction = eng->actionControl->addAction(line, ACT_MOVE, dude, X, Z);
 
 

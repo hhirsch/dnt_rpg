@@ -225,19 +225,31 @@ class engine
 
       /*!
        *************************************************************** 
-       * Threat Input/Output Events
+       * Treat Input/Output Events
        * \param screen -> Pointer to the Screen's Surface
        * \param forcaAtualizacao -> to force the draw
        ***************************************************************/
-      int threatIO(SDL_Surface *screen,int *forcaAtualizacao);
+      int treatIO(SDL_Surface *screen,int *forcaAtualizacao);
 
       /*!
        **************************************************************
-       * Threat Gui Events
+       * Treat Gui Events
        * \param object -> last object modifief on GUI
        * \param eventInfo -> las event on GUI
        **************************************************************/
-      void threatGuiEvents(guiObject* object, int eventInfo);
+      void treatGuiEvents(guiObject* object, int eventInfo);
+
+      /*!
+       **************************************************************
+       * Treat the pending actions
+       **************************************************************/
+      void treatPendingActions();
+
+      /*!
+       **************************************************************
+       * Treat all characters scripts
+       **************************************************************/
+      void treatScripts();
 
       /*!
        ***********************************************************************
@@ -260,11 +272,12 @@ class engine
       /*!
        ***************************************************************
        * Define New Character Height, based on character position
+       * \param c -> pointer to the character
        * \param nx -> character new X position
        * \param nz -> character new Z position
        * \return -> true if can define new heigh, false if can't move.
        ***************************************************************/
-      bool defineActiveCharacterHeight(GLfloat nx, GLfloat nz);
+      bool defineCharacterHeight(character* c, GLfloat nx, GLfloat nz);
 
       /*!
        ************************************************************** 
