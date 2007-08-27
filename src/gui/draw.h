@@ -108,13 +108,6 @@ void rectangle_2Colors(SDL_Surface *screen, int x1, int y1, int x2, int y2,
  * \param r  -> circle radius */
 void circle_Draw(SDL_Surface *screen, int xC, int yC, int r);
 
-/*! Draw a Hexagon on surface
- * \param screen -> surface to draw the hexagon
- * \param x -> x coordinate
- * \param y -> y coordinate
- * \param side -> side size of the hexagon */
-void hexagon_Desenhar(SDL_Surface *screen, int x,int y, int side);
-
 /*! Draw the Texture to the Screen Coordinates 
  * \param texturaID -> GL Identifier of the texture
  * \param proj -> the projection matrix
