@@ -192,6 +192,10 @@ SOURCE=.\src\gui\draw.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\extensions.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\farso.cpp
 # End Source File
 # Begin Source File
@@ -232,10 +236,6 @@ SOURCE=.\src\ia\fuzzyvariable.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\etc\glm.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\particle\grass.cpp
 # End Source File
 # Begin Source File
@@ -245,6 +245,22 @@ SOURCE=.\src\gui\guilist.cpp
 # Begin Source File
 
 SOURCE=.\src\gui\healthBar.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iafuncs.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iascript.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iastack.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iavariable.cpp
 # End Source File
 # Begin Source File
 
@@ -365,6 +381,10 @@ SOURCE=.\src\particle\part7.cpp
 # Begin Source File
 
 SOURCE=.\src\particle\particle.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\particle\partlist.cpp
 # End Source File
 # Begin Source File
 
@@ -572,6 +592,10 @@ SOURCE=.\src\gui\draw.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\extensions.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\farso.h
 # End Source File
 # Begin Source File
@@ -608,10 +632,6 @@ SOURCE=.\src\ia\fuzzyvariable.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\etc\glm.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\particle\grass.h
 # End Source File
 # Begin Source File
@@ -625,6 +645,22 @@ SOURCE=.\src\gui\guiobject.h
 # Begin Source File
 
 SOURCE=.\src\gui\healthBar.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iafuncs.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iascript.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iastack.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iavariable.h
 # End Source File
 # Begin Source File
 
@@ -761,6 +797,10 @@ SOURCE=.\src\particle\part7.h
 # Begin Source File
 
 SOURCE=.\src\particle\particle.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\particle\partlist.h
 # End Source File
 # Begin Source File
 
