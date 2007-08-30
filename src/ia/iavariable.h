@@ -77,6 +77,11 @@ class iaSymbolsTable
       /*! Remove all temporary symbols from the table */
       void removeTempSymbols();
 
+      /*! Verify if the variable is a temp one
+       * \param var -> pointer to the variable
+       * \return true if is a tem variable. */
+      bool isTemp(iaVariable* var);
+
       /*! Remove the Symbol from the table
        * \param name -> symbol's name */
       void removeSymbol(string name);

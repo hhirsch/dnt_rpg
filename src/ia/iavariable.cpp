@@ -578,6 +578,19 @@ void iaSymbolsTable::removeTempSymbols()
 }
 
 /***********************************************************
+ *                        isTemp                           *
+ ***********************************************************/
+bool iaSymbolsTable::isTemp(iaVariable* var)
+{
+   if(var)
+   {
+      return( (var->name[0] == '&') && (var->name[1] == 't') &&
+              (var->name[2] == 'm') && (var->name[3] == 'p') );
+   }
+   return(false);
+}
+
+/***********************************************************
  *                      removeSymbol                       *
  ***********************************************************/
 void iaSymbolsTable::removeSymbol(string name)

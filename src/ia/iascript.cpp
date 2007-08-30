@@ -1044,7 +1044,9 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
       }
 
    }
-   else
+   /* If not is temporary, we expected an assign (on temps, no assign is
+    * nedded, since they are functions results). */
+   else if(!symbols->isTemp(var))
    {
       /* Unknow operation! */
       cerr << "Error: Expected assign operator at " << strLine << " on script "
