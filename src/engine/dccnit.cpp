@@ -1180,22 +1180,25 @@ void engine::endTurn()
  *********************************************************************/
 void engine::treatScripts()
 {
-   /* Treat all pending actions */
-   treatPendingActions();
-
-   /* Treat NPCs scripts */
-   int i;
-   character* npc = NPCs->first;
-   iaScript* script;
-   for(i=0; i < NPCs->getTotal(); i++)
+   if(engineMode != ENGINE_MODE_TURN_BATTLE)
    {
-      script = (iaScript*) npc->getGeneralScript();
-      if(script)
+      /* Treat all pending actions */
+      treatPendingActions();
+
+      /* Treat NPCs scripts */
+      int i;
+      character* npc = NPCs->first;
+      iaScript* script;
+      for(i=0; i < NPCs->getTotal(); i++)
       {
-         script->defineMap(actualMap);
-         script->run(MAX_SCRIPT_LINES);
+         script = (iaScript*) npc->getGeneralScript();
+         if(script)
+         {
+            script->defineMap(actualMap);
+            script->run(MAX_SCRIPT_LINES);
+         }
+         npc = npc->next;
       }
-      npc = npc->next;
    }
 }
 
