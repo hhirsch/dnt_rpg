@@ -1116,6 +1116,8 @@ void engine::enterBattleMode(bool surprisePC)
       fight.insertNPC(ch, 0, briefInit);
       brief += briefInit + "|";
       numEnemies++;
+      /* Set the state to Idle */
+      ch->callIdleAnimation();
       ch = (character*) ch->next; 
       SDL_Delay(1);
   }
@@ -1135,6 +1137,8 @@ void engine::enterBattleMode(bool surprisePC)
          fight.insertPC(ch, 0, briefInit);
          brief += briefInit + "|";
          ch = (character*) ch->next; 
+         /* Set the state to Idle */
+         ch->callIdleAnimation();
          SDL_Delay(1);
       }
                    
@@ -1230,10 +1234,10 @@ void engine::treatPendingActions()
          if(act->getTargetThing() == NULL)
          {
             character* actor = act->getActor();
+            actor->setState(STATE_WALK);
             if(actor->pathFind.getState() == ASTAR_STATE_FOUND)
             {
                act->setToggle(true);
-               actor->setState(STATE_WALK);
             }
             else if(actor->pathFind.getState() == ASTAR_STATE_NOT_FOUND)
             {
