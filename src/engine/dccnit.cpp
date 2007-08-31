@@ -1234,40 +1234,48 @@ void engine::treatPendingActions()
          if(act->getTargetThing() == NULL)
          {
             character* actor = act->getActor();
-            actor->setState(STATE_WALK);
-            if(actor->pathFind.getState() == ASTAR_STATE_FOUND)
+            if(actor->isAlive())
             {
-               act->setToggle(true);
-            }
-            else if(actor->pathFind.getState() == ASTAR_STATE_NOT_FOUND)
-            {
-               /* The move ended, since not found a path */
-               act->setAsEnded(false);
-               actor->setState(STATE_IDLE);
-            }
-
-            /* If the toggle is seted, the path was found */
-            if(act->getToggle())
-            {
-               if(!actor->pathFind.getNewPosition(actor->xPosition,
-                                                  actor->zPosition,
-                                                  actor->orientation))
+               actor->setState(STATE_WALK);
+               if(actor->pathFind.getState() == ASTAR_STATE_FOUND)
                {
-                  /* The move ended */
-                  act->setAsEnded(true);
+                  act->setToggle(true);
+               }
+               else if(actor->pathFind.getState() == ASTAR_STATE_NOT_FOUND)
+               {
+                  /* The move ended, since not found a path */
+                  act->setAsEnded(false);
                   actor->setState(STATE_IDLE);
                }
-               else
+   
+               /* If the toggle is seted, the path was found */
+               if(act->getToggle())
                {
-                  /* Define New Occuped Square */
-                  int posX =(int)floor(actor->xPosition / SQUARE_SIZE);
-                  int posZ =(int)floor(actor->zPosition / SQUARE_SIZE);
-                  actor->ocupaQuad = actualMap->relativeSquare(posX,posZ);
-
-                  /* Define New Height */
-                  defineCharacterHeight(actor, actor->xPosition,
-                                        actor->zPosition);
+                  if(!actor->pathFind.getNewPosition(actor->xPosition,
+                                                     actor->zPosition,
+                                                     actor->orientation))
+                  {  
+                     /* The move ended */
+                     act->setAsEnded(true);
+                     actor->setState(STATE_IDLE);
+                  }
+                  else
+                  {
+                     /* Define New Occuped Square */
+                     int posX =(int)floor(actor->xPosition / SQUARE_SIZE);
+                     int posZ =(int)floor(actor->zPosition / SQUARE_SIZE);
+                     actor->ocupaQuad = actualMap->relativeSquare(posX,posZ);
+   
+                     /* Define New Height */
+                     defineCharacterHeight(actor, actor->xPosition,
+                                           actor->zPosition);
+                  }
                }
+            }
+            else
+            {
+               /* Dead Characters can't walk. */
+               act->setAsEnded(false);
             }
          }
          else
@@ -1646,6 +1654,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                       pers->xPosition, pers->zPosition,
                                       WALK_PER_MOVE_ACTION)) )
                      {
+                        //TODO stop walking, if it is walking!
                         pers->openConversationDialog(gui,activeCharacter);
                      }
                   }

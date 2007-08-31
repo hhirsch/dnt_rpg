@@ -395,6 +395,7 @@ void aniModel::renderBoundingBox()
 void aniModel::render()
 {
   glPushMatrix();
+   /* Correct from blender to dnt coordinates */
    glRotatef(180,0,1,0);
    glRotatef(-90,1,0,0);
 
