@@ -367,8 +367,10 @@ class engine
       Uint32 lastMouse;            /**< Last read from mouse */
       Uint32 lastMousePression;    /**< Last mouse pressure */
       Uint32 lastFPS;              /**< Last obtained FPS */
-      Uint32 lastKeyb;             /**< Last read from keyboard */
       double actualFPS;            /**< Actual FPS */
+
+      Uint32 lastKeyb;             /**< Last time read from keyboard */
+      Uint8  lastKey;              /**< Last key with refresh readed */
 
       sound* snd;                  /**< Actual Sounds thing */
       sndfx* walkSound;            /**< Actual walking sound */

@@ -98,6 +98,7 @@ engine::engine()
    engineMode = ENGINE_MODE_REAL_TIME;
 
    destinyVariation = -2.0;
+   lastKey = 0;
 
    actionControl = new actionController();
 
@@ -1817,19 +1818,22 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
          }
       }
 
-      if(tempo-lastKeyb >= REFRESH_RATE)
-      {
-         lastKeyb = tempo;
-         /* Keyboard Verification */
+               /* Keyboard Verification */
 
          /* Exit Engine */
-         if ( keys[SDLK_ESCAPE] )
+         if( ( keys[SDLK_ESCAPE] ) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_ESCAPE) ) )
          {
+            lastKey = SDLK_ESCAPE;
+            lastKeyb = tempo;
             return(0);
          }
 
          /* Enter Attack Mode or End Turn */
-         if(keys[SDLK_SPACE])
+         if( (keys[SDLK_SPACE]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_SPACE) ) )
          {
             if(engineMode != ENGINE_MODE_TURN_BATTLE)
             {
@@ -1839,12 +1843,18 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
             {
                endTurn();
             }
+            lastKey = SDLK_SPACE;
+            lastKeyb = tempo;
          }
 
          /* Enable / Disable The Range Draw */
-         if(keys[SDLK_r])
+         if( (keys[SDLK_r]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_r) ) )
          {
             showRange = !showRange;
+            lastKey = SDLK_r;
+            lastKeyb = tempo;
          }
 
          /* Print All Models on List */
@@ -1854,29 +1864,41 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
          /* Open Minimap */
-         if(keys[SDLK_m]) 
+         if( (keys[SDLK_m]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_m) ) )
          {
              if(!miniMapWindow)
              {
                OpenMiniMapWindow();
                redesenha = true;
              }
+             lastKey = SDLK_m;
+             lastKeyb = tempo;
          }
 
          /* Open ShortCuts */
-         if(keys[SDLK_n])
+         if( (keys[SDLK_n]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_n) ) )
          {
              if(!shortCutsWindow)
              {
                  OpenShortcutsWindow();
                  redesenha = true;
              }
+             lastKey = SDLK_n;
+             lastKeyb = tempo;
          }
 
          /* Open Inventory */
-         if(keys[SDLK_i])
+         if( (keys[SDLK_i]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_i) ) )
          {
             OpenCloseInventoryWindow(); 
+            lastKey = SDLK_i;
+            lastKeyb = tempo;
          }
 
          if(keys[SDLK_F1]) //Call Information Screen
@@ -1886,8 +1908,12 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
          /* Temporariamente, para visualizar o efeito de sangue */
-         if(keys[SDLK_y])
+         if( (keys[SDLK_y]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_y) ) )
          {
+            lastKey = SDLK_y;
+            lastKeyb = tempo;
             if(!effect)
             {
                effect = (part2*)particleSystem->addParticle(PART_FIRE,
@@ -1905,8 +1931,12 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                effect = NULL;
             }
          }
-         if(keys[SDLK_p])
+         if( (keys[SDLK_p]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_p) ) )
          {
+            lastKey = SDLK_p;
+            lastKeyb = tempo;
             part5 *p;
             p =  (part5*)particleSystem->addParticle(PART_BLOOD,
                                     activeCharacter->xPosition,28,
@@ -1915,8 +1945,12 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
             if(p)
                p->followPC = true;
          }   
-         if(keys[SDLK_o])
+         if( (keys[SDLK_o]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_o) ) )
          {
+            lastKey = SDLK_o;
+            lastKeyb = tempo;
              part5 *p;
              p = (part5*) particleSystem->addParticle(PART_BLOOD,
                                          activeCharacter->xPosition,28,
@@ -1925,8 +1959,12 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
              if(p) 
                p->followPC = true;
          }
-         if(keys[SDLK_t])
+         if( (keys[SDLK_t]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_t) ) )
          {
+            lastKey = SDLK_t;
+            lastKeyb = tempo;
             particleSystem->addParticle(PART_METEOR,
                                         activeCharacter->xPosition,
                                         MAX_HEIGHT+100,
@@ -1939,8 +1977,11 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                                 activeCharacter->zPosition,
                                                 "../data/particles/fire1.par");
          }
-         if(keys[SDLK_u])
+         if( (keys[SDLK_u]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_u) ) )
          {
+            lastKey = SDLK_u;
             GLfloat incZ = -cos(deg2Rad(activeCharacter->orientation));
             GLfloat incX = -sin(deg2Rad(activeCharacter->orientation));
             particleSystem->addParticle(PART_METEOR,
@@ -1953,20 +1994,26 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                        activeCharacter->zPosition + 800*incZ,
                                        "../data/particles/fire1.par");
          }
-         if(keys[SDLK_l])
+         if( (keys[SDLK_l]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_l) ) )
          {
+            lastKey = SDLK_l;
+            lastKeyb = tempo;
             particleSystem->addParticle(PART_LIGHTNING,
                                         activeCharacter->xPosition,250,
                                         activeCharacter->zPosition,
                                         "../data/particles/lightning1.par");
          }
 
-         if(keys[SDLK_0])
+         if( (keys[SDLK_0]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_0) ) )
          {
+            lastKey = SDLK_0;
+            lastKeyb = tempo;
             hour += 0.1;
          }
-
-      }
 
 #ifdef VIDEO_MODE
    if(keys[SDLK_v])
