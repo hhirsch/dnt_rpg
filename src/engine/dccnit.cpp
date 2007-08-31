@@ -322,6 +322,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
      /* Remove All Unused 3D Models */
      models->removeUnusedModels();
    }
+
+   /* Remove All Pending Actions */
+   actionControl->removeAllActions();
+
    actualMap = new Map(objectsList);
    actualMap->setFileName(arqVelho);
    actualMap->open(arqMapa,*models, *weaponsTypes);

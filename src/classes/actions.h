@@ -230,6 +230,9 @@ class actionController
        * \param act -> pointer to the action to remove */
       void removeAction(action* act);
 
+      /*! Remove all Actions from the controller */
+      void removeAllActions();
+
       /*! Get the total actions on list
        * \return number of actions on the list */
       int getTotal();

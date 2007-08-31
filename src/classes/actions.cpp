@@ -224,6 +224,14 @@ actionController::actionController()
  ************************************************************/
 actionController::~actionController()
 {
+   removeAllActions();
+}
+
+/************************************************************
+ *                      removeAllActions                    *
+ ************************************************************/
+void actionController::removeAllActions()
+{
    while(total > 0)
    {
       removeAction(first);
