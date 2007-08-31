@@ -442,10 +442,8 @@ void iaScript::declareVariable(string strLine)
    unsigned int pos = 0;
    string type = nextToken(strLine, pos);
    string name = nextToken(strLine, pos);
-   cout << "strLine: " << strLine << endl;
    while(name != "")
    {
-      cout << "Type: " << type << " name: " << name << endl;
       symbols->addSymbol(type, name);
       name = nextToken(strLine, pos);
    }
@@ -465,7 +463,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
    if(functionName == IA_MOVE_TO_POSITION)
    {
-      cout << "Got: " << strLine << endl;
       /* Syntax bool moveToPosition(character* char, int x, int z) */
       varName = symbols->addTempSymbol(IA_TYPE_BOOL);
 
@@ -477,8 +474,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Get the character */
       token = nextToken(strLine, pos);
       iv = symbols->getSymbol(token);
-
-      cout << "Token " << token << endl;
 
       if(isFunction(token))
       {
@@ -822,9 +817,6 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
       /* Translate the string to postfix */
       string postFix = toPostFix(strLine);
 
-      cout << strLine << endl;
-      cout << postFix << endl;
-
       /* Evaluate the expression */
       pos = 0;
       token = nextToken(postFix, pos);
@@ -868,7 +860,6 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                      /* Alloc the result variable */
                      varStack[varPos] = new iaVariable(type,"result");
                      varStack[varPos]->receiveOperation(token, var2, var1);
-                     cout << "result: " << varStack[varPos]->toString() << endl;
                      varPos++;
                   }
                   else
@@ -903,7 +894,6 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                   /* Alloc the result variable */
                   varStack[varPos] = new iaVariable(IA_TYPE_BOOL,"result");
                   varStack[varPos]->receiveOperation(token, var2, var1);
-                  cout << "result: " << varStack[varPos]->toString() << endl;
                   varPos++;
                   /* Free the memory */
                   delete(var1);
@@ -928,7 +918,6 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                   /* Alloc the result variable */
                   varStack[varPos] = new iaVariable(IA_TYPE_BOOL,"result");
                   varStack[varPos]->receiveOperation(token, var2, var1);
-                  cout << "result: " << varStack[varPos]->toString() << endl;
                   varPos++;
                   /* Free the memory */
                   delete(var1);
@@ -951,7 +940,6 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                   /* Alloc the result variable */
                   varStack[varPos] = new iaVariable(IA_TYPE_BOOL,"result");
                   varStack[varPos]->receiveOperation(token, var1, NULL);
-                  cout << "result: " << varStack[varPos]->toString() << endl;
                   varPos++;
                   /* Free the memory */
                   delete(var1);
@@ -970,7 +958,6 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
             iaVariable* iv = symbols->getSymbol(token);
             if(iv != NULL)
             {
-               cout << "Add " << token << " type " << iv->type << endl;
                varStack[varPos] = new iaVariable(iv->type, token);
                *(varStack[varPos]) = (*iv);
                varPos++;
@@ -1039,7 +1026,6 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
       else if(var != NULL)
       {
          *(var) = *(varStack[0]);
-         cout << "Final Result: " << var->toString() << endl;
          delete(varStack[0]);
       }
 
