@@ -23,9 +23,9 @@ hardware. São eles:
    Cal3D     - Versão 0.11, http://home.gna.org/cal3d/
    LibVorbis - http://www.vorbis.com/
    OpenGL
-   SDL       - Versão 1.2.11, www.libsdl.org
-   SDLImage  - Versão 1.2.5, www.libsdl.org/projects/SDL_image/
-   OpenAL    - Version 1.1, www.openal.org
+   SDL       - Versão 1.2.12, www.libsdl.org
+   SDLImage  - Versão 1.2.6, www.libsdl.org/projects/SDL_image/
+   OpenAL    - Version 0.0.8, www.openal.org
 
    Hardware:
    Placa de Vídeo com aceleração 3D compatível  com  OpenGl no

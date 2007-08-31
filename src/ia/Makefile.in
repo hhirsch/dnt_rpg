@@ -28,7 +28,7 @@ OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSyst
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)glm.o $(ENDETC)texture.o $(ENDETC)modellist.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)camera.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)conversa.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)personagens.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)shadow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 
-OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o iafuncs.o iascript.o iastack.o iavariable.o luaInterface.o pattAgent.o potentAgent.o  
+OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o iafuncs.o iascript.o iastack.o iavariable.o pattAgent.o potentAgent.o  
 all: $(OBJS)
 
 teste: fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o teste.cpp
@@ -94,11 +94,6 @@ pattAgent.o: pattAgent.cpp pattAgent.h
 potentAgent.o: potentAgent.cpp potentAgent.h
 	@printf "Making potentAgent.o... "
 	@$(CPP) $(CFLAGS) potentAgent.cpp -o potentAgent.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-luaInterface.o: luaInterface.cpp luaInterface.h
-	@printf "Making luaInterface.o... "
-	@$(CPP) $(CFLAGS) luaInterface.cpp -o luaInterface.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 test.o: test.cpp

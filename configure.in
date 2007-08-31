@@ -55,20 +55,8 @@ AC_CHECK_LIB([openal], [main], [], [AC_MSG_ERROR(Couldn't find OpenAL. Go to htt
 AC_CHECK_LIB([vorbis], [main], [], [AC_MSG_ERROR(Couldn't find libvorbis. Go to http://xiph.org/vorbis and get it.)])
 AC_CHECK_LIB([vorbisfile], [main], [], [AC_MSG_ERROR(Couldn't find libogg. Go to http://xiph.org/vorbis and get the libvorbis file.)])
 
-AC_CHECK_LIB([lua], [main], [], 
-             #if is false
-             [ AC_CHECK_LIB([lua51], [main], [], 
-             #if is false too, not found the library
-             [AC_MSG_ERROR(Couldn't find lua. Go to http://www.lua.org and get it.)])  ])
-
-
-#AC_CHECK_LIB([lua], [main], [], [AC_MSG_ERROR(Couldn't find lua. Go to http://www.lua.org and get it. If you already have lua, try to run ./configure LDFLAGS=-Lpath_to_lua_lib. For Example: ./configure LDFLAGS=-L/usr/lib/lua5.1/)])
-
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADER(lua.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Run ./configure CPPFLAGS=-Ipath_to_lua_headers. For Example: ./configure CPPFLAGS=-I/usr/include/lua5.1/)])
-AC_CHECK_HEADER(lualib.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Run ./configure CPPFLAGS=-Ipath_to_lua_headers. For Example: ./configure CPPFLAGS=-I/usr/include/lua5.1/)])
-AC_CHECK_HEADER(lauxlib.h, [], [AC_MSG_ERROR(Couldn't find lua headers. Run ./configure CPPFLAGS=-Ipath_to_lua_headers. For Example: ./configure CPPFLAGS=-I/usr/include/lua5.1/)])
 AC_CHECK_HEADER(GL/glu.h, [], [AC_MSG_ERROR(Couldn't find OPENGL headers. Run ./configure CPPFLAGS=-Ipath_to_opengl_headers. For Example: ./configure CPPFLAGS=-I/usr/X11R6/include/)])
 AC_CHECK_HEADER(SDL/SDL_opengl.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include/)])
 AC_CHECK_HEADER(SDL/SDL.h, [], [AC_MSG_ERROR(Couldn't find SDL headers. Run ./configure CPPFLAGS=-Ipath_to_sdl_headers. For Example: ./configure CPPFLAGS=-I/usr/local/include/)])
