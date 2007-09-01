@@ -122,6 +122,10 @@ class character: public aniModel
       /*! Create the conversation (load all things, but not open the dialog)
        * \param pEngine -> pointer to current engine */
       void createConversation(void* pEngine);
+   
+      /*! Verify if the conversation dialog is opened
+       * \return true if the conversation dialog is opened */
+      bool isConversationOpened();
 
       /*! Treat Events on Conversation Window. 
        * \param guiObj -> active GUI object

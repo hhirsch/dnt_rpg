@@ -1200,13 +1200,13 @@ void engine::treatScripts()
       iaScript* script;
       for(i=0; i < NPCs->getTotal(); i++)
       {
+         npc = npc->next;
          script = (iaScript*) npc->getGeneralScript();
          if(script)
          {
             script->defineMap(actualMap);
             script->run(MAX_SCRIPT_LINES);
          }
-         npc = npc->next;
       }
    }
    else
@@ -1234,7 +1234,7 @@ void engine::treatPendingActions()
          if(act->getTargetThing() == NULL)
          {
             character* actor = act->getActor();
-            if(actor->isAlive())
+            if( (actor->isAlive()) && (!actor->isConversationOpened()) )
             {
                actor->setState(STATE_WALK);
                if(actor->pathFind.getState() == ASTAR_STATE_FOUND)
@@ -1272,10 +1272,15 @@ void engine::treatPendingActions()
                   }
                }
             }
-            else
+            else if(!actor->isAlive())
             {
                /* Dead Characters can't walk. */
                act->setAsEnded(false);
+            }
+            else
+            {
+               /* Talk window is opened, so Idle. */
+               actor->setState(STATE_IDLE);
             }
          }
          else
@@ -1654,7 +1659,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                       pers->xPosition, pers->zPosition,
                                       WALK_PER_MOVE_ACTION)) )
                      {
-                        //TODO stop walking, if it is walking!
                         pers->openConversationDialog(gui,activeCharacter);
                      }
                   }

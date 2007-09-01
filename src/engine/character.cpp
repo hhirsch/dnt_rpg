@@ -144,6 +144,15 @@ void character::createConversation(void* pEngine)
 }
 
 /*********************************************************************
+ *                       isConversationOpenned                       *
+ *********************************************************************/
+bool character::isConversationOpened()
+{
+   conversation* cs = (conversation*) conv;
+   return((cs != NULL) && (cs->windowOpened()));
+}
+
+/*********************************************************************
  *                      openConversationDialog                       *
  *********************************************************************/
 void character::openConversationDialog(interface* gui, character * PC)
@@ -693,6 +702,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
          /* Create the script */
          iaScript* isc = new iaScript(token2, pEngine);
          novo->generalScript = isc;
+         novo->generalScriptFileName = token2;
          /* Set the owner */
          isc->defineCharacterOwner(novo);
       }
