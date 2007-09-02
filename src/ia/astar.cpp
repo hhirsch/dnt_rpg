@@ -213,15 +213,17 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
       }
      
        /* Verify if arrived at destiny */
-      if( (node->x>=destinyX-(stepSize*5))&&(node->x<=destinyX+(stepSize*5)) && 
-          (node->z>=destinyZ-(stepSize*5))&&(node->z<=destinyZ+(stepSize*5)) )
+      if( (node->x>=destinyX-(stepSize*10)) &&
+          (node->x<=destinyX+(stepSize*10)) && 
+          (node->z>=destinyZ-(stepSize*10)) &&
+          (node->z<=destinyZ+(stepSize*10)) )
       {
          delete(patt);
          patt = new pattAgent(true);
          patt->defineDestiny(node->x, node->z);
          patt->defineStepSize(stepSize);
          patt->defineOrientation(orientation);
-         patt->defineSight(stepSize*5, 360);
+         patt->defineSight(stepSize*10, 360);
          destinyX = node->x;
          destinyZ = node->z;
 
@@ -237,8 +239,8 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
          return(true);
       }
 
-      GLfloat pass = stepSize*5;
-      GLfloat passMid = ((stepSize*5) / sqrt(2.0));
+      GLfloat pass = stepSize*10;
+      GLfloat passMid = ((stepSize*10) / sqrt(2.0));
       /* Visit all Adjacents Positions */
       for(i=0; i<9; i++)
       {

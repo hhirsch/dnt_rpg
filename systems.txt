@@ -10,8 +10,8 @@ dnt@dnteam.org and it will be put here.
 |      Linux Debian 4.0       |       x86,x86_64     |
 |        Linux Gentoo         |       x86,amd64      |
 |      Linux Mandriva 7       |          x86         |
-|     Linux Slackware 12      |          x86         |
 |     Linux OpenSuse 10.2     |          x86         |
+|     Linux Slackware 12      |          x86         |
 |       Linux Ubuntu 7        |          x86         |
 |         Windows XP          |       x86,x86_64     |
 ======================================================
