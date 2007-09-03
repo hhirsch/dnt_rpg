@@ -450,6 +450,41 @@ void iaScript::declareVariable(string strLine)
 }
 
 /***********************************************************************
+ *                          getParameter                               *
+ ***********************************************************************/
+iaVariable* iaScript::getParameter(string& token, string strLine, 
+                                   string paramType, unsigned int& pos)
+{
+   token = nextToken(strLine, pos);
+   iaVariable* iv = symbols->getSymbol(token);
+
+   if(isFunction(token))
+   {
+      /* Get the function value */
+      iv = new iaVariable(paramType,"param");
+      callFunction(iv,strLine,token,pos);
+   }
+
+   /* Verify type compatibility */
+   if( ( (!iv) && (!isFunction(token)) ) ||
+       ( (iv) && 
+         ( (iv->type != paramType) && 
+           (! (paramType == IA_TYPE_FLOAT) &&
+              (iv->type == IA_TYPE_INT) 
+           )
+         ) 
+       )
+     )
+   {
+      cerr << "Error: Unknow parameter " << token << " must be a " 
+           << paramType << " type"
+           << " at file " << fileName << " line " << actualLine << endl;
+      return(NULL);
+   }
+   return(iv);
+}
+
+/***********************************************************************
  *                          callFunction                               *
  ***********************************************************************/
 void iaScript::callFunction(iaVariable* var, string strLine, 
@@ -461,6 +496,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
    string varName = "";
 
+   /* Move to Position */
    if(functionName == IA_MOVE_TO_POSITION)
    {
       /* Syntax bool moveToPosition(character* char, int x, int z) */
@@ -472,48 +508,19 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       GLfloat Z = 0;
 
       /* Get the character */
-      token = nextToken(strLine, pos);
-      iv = symbols->getSymbol(token);
-
-      if(isFunction(token))
-      {
-         /* Get the function value */
-         iv = new iaVariable(IA_TYPE_CHARACTER,"charac");
-         callFunction(iv,strLine,token,pos);
-      }
-      if( ( (!iv) && (!isFunction(token)) ) ||
-          ( (iv) && (iv->type != IA_TYPE_CHARACTER)) )
-      {
-         cerr << "Error: Unknow parameter " << token << " to function "
-              << IA_MOVE_TO_POSITION << " must be a " 
-              << IA_TYPE_CHARACTER << " type"
-              << " at file " << fileName << " line " << actualLine << endl;
-      }
-      else
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
       {
          dude = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
       }
 
       /* Get the X */
-      token = nextToken(strLine, pos);
-      iv = symbols->getSymbol(token);
-
-      if(isFunction(token))
-      {
-         /* Get the function value */
-         iv = new iaVariable(IA_TYPE_FLOAT,"X");
-         callFunction(iv,strLine,token,pos);
-      }
-      if( ( (!iv) && (!isFunction(token)) ) ||
-          ( (iv) && ( (iv->type != IA_TYPE_FLOAT) && 
-                      (iv->type != IA_TYPE_INT ) ) ) )
-      {
-         cerr << "Error: Unknow parameter " << token << " to function "
-              << IA_MOVE_TO_POSITION << " must be a " 
-              << IA_TYPE_FLOAT << " type"
-              << " at file " << fileName << " line " << actualLine << endl;
-      }
-      else
+      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
+      if(iv != NULL)
       {
          if(iv->type == IA_TYPE_FLOAT)
          {
@@ -523,28 +530,15 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          {
             X = *(int*)iv->value;
          }
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
       }
 
       /* Get the Z */
-      token = nextToken(strLine, pos);
-      iv = symbols->getSymbol(token);
-
-      if(isFunction(token))
-      {
-         /* Get the function value */
-         iv = new iaVariable(IA_TYPE_FLOAT,"X");
-         callFunction(iv,strLine,token,pos);
-      }
-      if( ( (!iv) && (!isFunction(token)) ) ||
-          ( (iv) && ( (iv->type != IA_TYPE_FLOAT) && 
-                      (iv->type != IA_TYPE_INT ) ) ) )
-      {
-         cerr << "Error: Unknow parameter " << token << " to function "
-              << IA_MOVE_TO_POSITION << " must be a " 
-              << IA_TYPE_FLOAT << " type"
-              << " at file " << fileName << " line " << actualLine << endl;
-      }
-      else
+      iv = getParameter(token, strLine, IA_TYPE_FLOAT, pos);
+      if(iv != NULL)
       {
          if(iv->type == IA_TYPE_FLOAT)
          {
@@ -554,18 +548,29 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          {
             Z = *(int*)iv->value;
          }
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
       }
 
-      dude->pathFind.defineMap(actualMap);
-      pendingAction = eng->actionControl->addAction(line, ACT_MOVE, dude, X, Z);
-
-
-      //TODO
+      if(dude)
+      {
+         dude->pathFind.defineMap(actualMap);
+         pendingAction = eng->actionControl->addAction(line, ACT_MOVE, 
+                                                       dude, X, Z);
+      }
    }
+
+
+   /* Move to Character */
    else if(functionName == IA_MOVE_TO_CHARACTER)
    {
       //TODO
    }
+
+
+
    else if(functionName == IA_MOVE_TO_OBJECT)
    {
       //TODO
@@ -594,6 +599,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    {
       //TODO
    }
+
+
+   /* fight enter */
    else if(functionName == IA_FIGHT_ENTER)
    {
       /* Enter the battle mode, with the character owner and
@@ -609,6 +617,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
               << " at " << strLine << " on script: " << fileName << endl;
       }
    }
+
+
+   /* fight_exit */
    else if(functionName == IA_FIGHT_EXIT)
    {
       //TODO
@@ -616,27 +627,13 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       //eng->exitBattleMode();
    }
 
+
    /* IA_CHARACTER_GET_PSYCHO */
    else if(functionName == IA_CHARACTER_GET_PSYCHO)
    {
       /* Syntax int getPsycho(character c)  */
-      token = nextToken(strLine, pos);
-      iv = symbols->getSymbol(token);
-      if(isFunction(token))
-      {
-         /* Get the function value */
-         iv = new iaVariable(IA_TYPE_CHARACTER,"charac");
-         callFunction(iv,strLine,token,pos);
-      }
-
-      if( (!iv) && (!isFunction(token)) )
-      {
-         cerr << "Error: Unknow parameter " << token << " to function "
-              << IA_CHARACTER_GET_PSYCHO << " must be a " 
-              << IA_TYPE_CHARACTER << " type"
-              << " at file " << fileName << " line " << actualLine << endl;
-      }
-      else if(iv->type == IA_TYPE_CHARACTER)
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
       {
          character* c = (character*)iv->value;
          if(c != NULL)
@@ -658,26 +655,22 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             cerr << "Error: Tried to access a NULL character at line " 
                  << actualLine << " of the script: " << fileName << endl;
          }
-      }
-      else
-      {
-         cerr << "Error: Type for parameter of function " 
-              << IA_CHARACTER_GET_PSYCHO << " must be " << IA_TYPE_CHARACTER
-              << " at script: " << fileName << endl;
-      }
-
-      /* Free the token */
-      if(isFunction(token))
-      {
-         delete(iv);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
       }
    }
+
+
 
    /* IA_CHARACTER_SET_PSYCHO */
    else if(functionName == IA_CHARACTER_SET_PSYCHO)
    {
       //TODO
    }
+
+
 
    /* IA_SELF_OBJECT */
    else if(functionName == IA_SELF_OBJECT)

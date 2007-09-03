@@ -95,6 +95,16 @@ class iaScript
       void callFunction(iaVariable* var, string strLine,
                         string functionName, unsigned int &pos);
 
+      /*! Get next parameter of the function
+       * \param token -> token got
+       * \param strLine -> string line to got parameter
+       * \param paramType -> the type of the parameter to got 
+       * \param pos -> position of after the rpevious parameter got
+       * \return -> the iaVariable with the parameter got, or NULL if an
+       *            error occurs. */
+      iaVariable* getParameter(string& token, string strLine, 
+                               string paramType, unsigned int& pos);
+
       /*! Evaluate a expression
        * \param var -> variable that will contain the expression result
        * \param strLine -> the line that contains the expression
