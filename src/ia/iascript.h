@@ -47,7 +47,6 @@ class iaScript
        * that will be marked as pending or at the end of the script.
        * \param maxLines -> maxLines that will be interpreted at this
        *                    cicle. 0 for no line limit.
-       * \param actControl -> the action controller pointer
        * \return action pointer of a new pending action */
       void run(int maxLines);
 
