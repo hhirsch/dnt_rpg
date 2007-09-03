@@ -570,11 +570,14 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
 
-
+   /* Move to Object */
    else if(functionName == IA_MOVE_TO_OBJECT)
    {
       //TODO
    }
+
+
+   /* Feat Total */
    else if(functionName == IA_FEAT_TOTAL)
    {
       //TODO
@@ -667,9 +670,43 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* IA_CHARACTER_SET_PSYCHO */
    else if(functionName == IA_CHARACTER_SET_PSYCHO)
    {
-      //TODO
-   }
+      /* Syntax void setPsycho(character c, int psycho)  */
+      character* dude = NULL;
+      int psy = 0;
 
+      /* Get character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         dude = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get psycho */
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv != NULL)
+      {
+         psy = (*(int*)iv->value);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Set the things */
+      if(dude != NULL)
+      {
+         dude->psychoState = psy;
+      }
+      else
+      {
+         cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
+      }
+   }
 
 
    /* IA_SELF_OBJECT */
@@ -707,6 +744,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
    }
+
+
+   /* Active Character */
    else if(functionName == IA_ACTIVE_CHARACTER)
    {
       /* Define the variable as the character owner */
@@ -723,6 +763,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
    }
+
+
+   /* Actual Map */
    else if(functionName == IA_ACTUAL_MAP)
    {
       /* Define the variable as the actualMap */
@@ -739,6 +782,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
    }
+
+
+   /* true */
    else if(functionName == IA_TRUE)
    {
       /* Define the variable as true */
@@ -756,6 +802,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
    }
+
+
+   /* false */
    else if(functionName == IA_FALSE)
    {
       /* Define the variable as false */
