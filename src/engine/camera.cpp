@@ -375,8 +375,7 @@ void camera::actualizeCamera(GLfloat characterX, GLfloat characterY,
 {
    centerX = characterX;
    centerZ = characterZ;
-   centerY = characterY;
-   //
+   centerY = characterY + 30;
 
    if( (type == CAMERA_TYPE_DRIVE) && (characterOrientation != phi) )
    {
