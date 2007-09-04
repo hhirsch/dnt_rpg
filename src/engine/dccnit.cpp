@@ -58,6 +58,9 @@ engine::engine()
    extensions ext;
    ext.defineAllExtensions();
 
+   /* Create the message controller */
+   msgController = new messageController();
+
    /* Load Skills List */
    skillsList = new skills(language.SKILLS_DIR.c_str(),
                            "../data/skills/skills.skl");
@@ -128,13 +131,18 @@ engine::~engine()
 
    /* Delete particles */
    if(particleSystem != NULL)
+   {
       delete(particleSystem);
+   }
 
    /* Close option */
    delete(option);
 
    /* Clear Sky */
    delete(gameSky);
+
+   /* Delete message Controller */
+   delete(msgController);
 
    /* Clear Other Textures */
    glDeleteTextures(1, &normalMoveCircle);
@@ -145,9 +153,13 @@ engine::~engine()
 
    /* Clear Characters */
    if(NPCs)
+   {
       delete(NPCs);
+   }
    if(PCs)
+   {
       delete(PCs);
+   }
 
    /* Clear Sun */
    if(gameSun)
@@ -1928,7 +1940,21 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
             redesenha = true;
          }
 
-         /* Temporariamente, para visualizar o efeito de sangue */
+         /* FIXME only to test */
+         if( (keys[SDLK_c])&& 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_c) ) )
+         {
+            lastKey = SDLK_c;
+            lastKeyb = tempo;
+            msgController->addMessage(PCs->getActiveCharacter()->xPosition,
+                                      PCs->getActiveCharacter()->yPosition +
+                                      PCs->getActiveCharacter()->max[1],
+                                      PCs->getActiveCharacter()->zPosition,
+                                      "80");
+         }
+
+         /* FIXME Temporariamente, para visualizar o efeito de sangue */
          if( (keys[SDLK_y]) && 
              ( (tempo-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_y) ) )
@@ -2655,6 +2681,9 @@ void engine::renderNoShadowThings()
          gameSky->draw(actualMap, gameSun->getRotation());
       glPopMatrix();
    }
+
+   /* World Messages */
+   msgController->draw();
 
    /* Draw Path */
    /*if(walkStatus == ENGINE_WALK_MOUSE)

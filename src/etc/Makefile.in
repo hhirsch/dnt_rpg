@@ -7,7 +7,7 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-all: animodel.o distance.o extensions.o fifo.o modellist.o texture.o
+all: animodel.o distance.o extensions.o fifo.o message3d.o modellist.o texture.o
 
 animodel.o: animodel.h animodel.cpp
 	@printf "Making animodel.o... "
@@ -36,6 +36,11 @@ fifo.o: fifo.cpp fifo.h
 
 fifo: fifo.cpp fifo.h
 	$(CPP) $(CFLAGS) -DFIFO_TEST fifo.cpp -o fifo
+
+message3d.o: message3d.cpp message3d.h
+	@printf "Making message3d.o... "
+	@$(CPP) $(CFLAGS) -c message3d.cpp -o message3d.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 modellist.o: modellist.h modellist.cpp
 	@printf "Making modellist.o... "

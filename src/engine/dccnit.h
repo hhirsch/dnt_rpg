@@ -13,6 +13,7 @@
 #include "../classes/classes.h"
 #include "../classes/weapon.h"
 #include "../classes/actions.h"
+#include "../etc/message3d.h"
 #include "../fight/fightSystem.h"
 #include "../gui/farso.h"
 #include "../lang/lang.h"
@@ -330,6 +331,8 @@ class engine
       cursor* cursors;             /**< Utilized mouse cursors */
 
       modState modifState;         /**< Current modification state */
+
+      messageController* msgController;  /**< The message controller */
 
       int walkStatus;              /**< Engine Walk Status */
       GLuint destinyImage;         /**< Move Destiny Image */
