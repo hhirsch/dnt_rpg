@@ -7,12 +7,13 @@
 /***************************************************************
  *                       CONSTRUCTOR                           *
  ***************************************************************/
-fightSystem::fightSystem(messageController* controller)
+fightSystem::fightSystem(messageController* controller, partSystem* pSystem)
 {
    lastTime = 0;
    actualActor = NULL;
    pendingAnimation = true;
    msgController = controller;
+   particleSystem = pSystem;
 }
 
 /***************************************************************
@@ -259,7 +260,8 @@ void fightSystem::doNPCAction(character* pers, string& brief)
                pers->actualEnemy->nome + "|";
       pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
                                                 *pers->actualEnemy, brief,
-                                                msgController);
+                                                msgController,
+                                                particleSystem);
          
       if(!pers->actualEnemy->isAlive())
       {

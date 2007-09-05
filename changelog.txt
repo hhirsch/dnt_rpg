@@ -6,12 +6,13 @@
  - Script Language for AI;
  - Workspace for compiling at M$ Visual C++ 6;
  - More Engine Optimizations;
- - Smooth Camera Movements;
+ - Messages on world map;
+ - Smooth Camera Moves;
  - Indoor Reflexions;
  - Better Dynamic Ligths Implementation;
  - More 3D Objects;
  - More Characters;
- - Rewrite the GUI;
+ - Rewrite the GUI Renderer;
  - Fully and scalable collision for the 3D models;
  - Put the code fully on English (instead of some
    places on english, others on portuguese);

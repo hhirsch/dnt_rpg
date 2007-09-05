@@ -1,6 +1,7 @@
 #include "feats.h" 
 #include "actions.h"
 #include "../engine/util.h"
+#include "../particle/partSystem.h"
 #include <SDL/SDL_image.h>
 
 /**************************************************************************
@@ -145,7 +146,8 @@ bool feats::applyInvocationFeat(thing& attacker, int featNumber,
  ***************************************************************/
 bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
                                     thing& target, string& brief,
-                                    messageController* controller)
+                                    messageController* controller,
+                                    void* pSystem)
 {
    int diceValue;
    int criticalRoll = -1;
@@ -300,11 +302,23 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       {
           brief += "|"+ language.FEAT_CRITICAL_HIT ;
           /* Show critical hit */
-          controller->addMessage(attacker.xPosition,attacker.yPosition+attacker.max[1],
+          controller->addMessage(attacker.xPosition,
+                                 attacker.yPosition+attacker.max[1],
                                  attacker.zPosition,language.FEAT_CRITICAL_HIT);
       }
+      /* Show Damage */
       controller->addMessage(target.xPosition, target.yPosition + target.max[1],
                              target.zPosition, texto);
+
+      /* Add Blood */
+      GLfloat cs = cos(deg2Rad(target.orientation));
+      GLfloat sn = sin(deg2Rad(target.orientation));
+      partSystem* ps = (partSystem*)pSystem;
+      ps->addParticle(PART_BLOOD, target.xPosition - (sn*2),
+                      target.yPosition + target.max[1]-5,
+                      target.zPosition - (cs*2), 
+                      "../data/particles/blood3.par");
+
       return(true);
    }
    brief += language.FEAT_NO_MORE_POINTS;

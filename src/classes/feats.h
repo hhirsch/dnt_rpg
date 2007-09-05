@@ -139,11 +139,13 @@ class feats
        * \param target -> target to use the Feat
        * \param brief -> string that will have briefing
        * \param controller -> the world message controller
+       * \param pSystem -> the particle system controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyAttackAndBreakFeat(thing& attacker, int featNumber, 
                                    thing& target, string& brief,
-                                   messageController* controller);
+                                   messageController* controller,
+                                   void* pSystem);
       /*!
        **************************************************************** 
        * Apply a heal or fix feat.

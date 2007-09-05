@@ -58,12 +58,6 @@ engine::engine()
    extensions ext;
    ext.defineAllExtensions();
 
-   /* Create the message controller */
-   msgController = new messageController();
-
-   /* Create the fight system */
-   fight = new fightSystem(msgController);
-
    /* Load Skills List */
    skillsList = new skills(language.SKILLS_DIR.c_str(),
                            "../data/skills/skills.skl");
@@ -96,7 +90,14 @@ engine::engine()
 
    showRange = false;
 
+   /* Create the particle System */
    particleSystem = new partSystem();
+
+   /* Create the message controller */
+   msgController = new messageController();
+
+   /* Create the fight system */
+   fight = new fightSystem(msgController, particleSystem);
 
    hour = 9.0;
    gameSun = new sun(hour , HALFFARVIEW, HALFFARVIEW);
@@ -1715,7 +1716,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                                           *activeCharacter,
                                                           attackFeat, *pers, 
                                                           brief, 
-                                                          msgController);
+                                                          msgController,
+                                                          particleSystem);
                      if(pers->lifePoints <= 0)
                      {
                         pers->kill();
