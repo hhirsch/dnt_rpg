@@ -1986,34 +1986,6 @@ int engine::treatIO(SDL_Surface *screen)
                effect = NULL;
             }
          }
-         if( (keys[SDLK_p]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_p) ) )
-         {
-            lastKey = SDLK_p;
-            lastKeyb = tempo;
-            part5 *p;
-            p =  (part5*)particleSystem->addParticle(PART_BLOOD,
-                                    activeCharacter->xPosition,28,
-                                    activeCharacter->zPosition, 
-                                    "../data/particles/blood1.par");
-            if(p)
-               p->followPC = true;
-         }   
-         if( (keys[SDLK_o]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_o) ) )
-         {
-            lastKey = SDLK_o;
-            lastKeyb = tempo;
-             part5 *p;
-             p = (part5*) particleSystem->addParticle(PART_BLOOD,
-                                         activeCharacter->xPosition,28,
-                                         activeCharacter->zPosition, 
-                                         "../data/particles/blood2.par");
-             if(p) 
-               p->followPC = true;
-         }
          if( (keys[SDLK_t]) && 
              ( (tempo-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_t) ) )
