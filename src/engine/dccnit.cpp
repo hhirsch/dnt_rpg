@@ -1220,7 +1220,7 @@ void engine::treatScripts()
       {
          npc = npc->next;
          script = (iaScript*) npc->getGeneralScript();
-         if(script)
+         if( (script) && (npc->isAlive()))
          {
             script->defineMap(actualMap);
             script->run(MAX_SCRIPT_LINES);
