@@ -47,8 +47,9 @@ class messageController
       /*! Destructor */
       ~messageController();
 
-      /*! Actualize and draw all messages */
-      void draw();
+      /*! Actualize and draw all messages
+       * \param modelView -> the model view matrix*/
+      void draw(GLdouble modelView[16]);
 
       /* Add a message
        * \param x -> x position

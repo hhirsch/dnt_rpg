@@ -2683,7 +2683,7 @@ void engine::renderNoShadowThings()
    }
 
    /* World Messages */
-   msgController->draw();
+   msgController->draw(modl);
 
    /* Draw Path */
    /*if(walkStatus == ENGINE_WALK_MOUSE)

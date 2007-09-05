@@ -17,7 +17,7 @@ message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg)
    message = msg;
 
    int size = message.length()*font_incCP();
-   halfSize = (size / 10.0);
+   halfSize = (size / 5.0);
 
    /* Define the font and sizes */
    defineFont(FHELVETICA, ALIGN_LEFT, 1);
@@ -112,7 +112,7 @@ void messageController::removeMessage(message3d* msg)
 /***********************************************************
  *                           draw                          *
  ***********************************************************/
-void messageController::draw()
+void messageController::draw(GLdouble modelView[16])
 {
    int i;
    int tot = total;
@@ -124,20 +124,27 @@ void messageController::draw()
    for(i = 0; i < tot; i++)
    {
       /* Draw */
-      //FIXME
-      
       glColor3f(1.0, 1.0, 1.0);
       glBindTexture(GL_TEXTURE_2D, msg->messageTexture);
-      glBegin(GL_QUADS);
-         glTexCoord2f(1,0);
-         glVertex3f(msg->posX-msg->halfSize, msg->posY-2, msg->posZ);
-         glTexCoord2f(1,1);
-         glVertex3f(msg->posX-msg->halfSize, msg->posY+2, msg->posZ);
+      glPushMatrix();
+      glTranslatef(msg->posX, msg->posY, msg->posZ);
+       glBegin(GL_QUADS);
          glTexCoord2f(0,1);
-         glVertex3f(msg->posX+msg->halfSize, msg->posY+2, msg->posZ);
+         glVertex3f(-msg->halfSize*modelView[0],0.0f,
+                    -msg->halfSize*modelView[8]);
+         glTexCoord2f(1,1);
+         glVertex3f(msg->halfSize*modelView[0],0.0f,
+                    msg->halfSize*modelView[8]);
+         glTexCoord2f(1,0);
+         glVertex3f(msg->halfSize*modelView[0] + 8*modelView[1], 
+                    8*modelView[5] + msg->halfSize*modelView[4], 
+                    msg->halfSize* modelView[8] + 8*modelView[9]);
          glTexCoord2f(0,0);
-         glVertex3f(msg->posX+msg->halfSize, msg->posY-2, msg->posZ);
-      glEnd();
+         glVertex3f(-msg->halfSize* modelView[0] + 8*modelView[1], 
+                    8*modelView[5] - msg->halfSize*modelView[4],
+                    -msg->halfSize * modelView[8] + 8*modelView[9]);
+       glEnd();
+      glPopMatrix();
       msg->live++;
       msg->posY += 0.5;
       msg = msg->next;
