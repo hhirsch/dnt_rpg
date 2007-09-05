@@ -110,7 +110,8 @@ void feats::useFeat(int featNumber)
  *                   applyHealAndFixFeat                       *
  ***************************************************************/
 bool feats::applyHealAndFixFeat(thing& attacker, int featNumber, 
-                                  thing& target, string& brief)
+                                thing& target, string& brief,
+                                messageController* controller)
 {
    //TODO
    return(false);
@@ -120,7 +121,8 @@ bool feats::applyHealAndFixFeat(thing& attacker, int featNumber,
  *                     applyPsychoFeat                         *
  ***************************************************************/
 bool feats::applyPsychoFeat(thing& attacker, int featNumber, 
-                              thing& target, string& brief)
+                            thing& target, string& brief,
+                            messageController* controller)
 {
    //TODO
    return(false);
@@ -130,7 +132,8 @@ bool feats::applyPsychoFeat(thing& attacker, int featNumber,
  *                   applyInvocationFeat                       *
  ***************************************************************/
 bool feats::applyInvocationFeat(thing& attacker, int featNumber, 
-                                thing& target, string& brief)
+                                thing& target, string& brief,
+                                messageController* controller)
 {
    //TODO
    return(false);
@@ -141,7 +144,8 @@ bool feats::applyInvocationFeat(thing& attacker, int featNumber,
  *                 applyAttackAndBreakFeat                     *
  ***************************************************************/
 bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                    thing& target, string& brief)
+                                    thing& target, string& brief,
+                                    messageController* controller)
 {
    int diceValue;
    int criticalRoll = -1;
@@ -238,7 +242,15 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
          if( criticalMiss )
          {
              brief += "|"+language.FEAT_CRITICAL_MISS ;
+             controller->addMessage(attacker.xPosition,
+                                    attacker.yPosition+attacker.max[1],
+                                    attacker.zPosition,language.FEAT_CRITICAL_MISS);
              //TODO lose weapon;
+         }
+         else
+         {
+            controller->addMessage(attacker.xPosition,attacker.yPosition+attacker.max[1],
+                                   attacker.zPosition,language.FEAT_MISS);
          }
          return(true);
       }
@@ -287,7 +299,12 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       if( criticalHit)
       {
           brief += "|"+ language.FEAT_CRITICAL_HIT ;
+          /* Show critical hit */
+          controller->addMessage(attacker.xPosition,attacker.yPosition+attacker.max[1],
+                                 attacker.zPosition,language.FEAT_CRITICAL_HIT);
       }
+      controller->addMessage(target.xPosition, target.yPosition + target.max[1],
+                             target.zPosition, texto);
       return(true);
    }
    brief += language.FEAT_NO_MORE_POINTS;

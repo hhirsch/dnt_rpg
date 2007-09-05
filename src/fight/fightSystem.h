@@ -8,6 +8,7 @@
 #include "fightGroup.h"
 #include "initiative.h"
 #include "../lang/lang.h"
+#include "../etc/message3d.h"
 #include <SDL/SDL.h>
 
 
@@ -27,8 +28,9 @@
 class fightSystem
 {
    public:
-     /*! Constructor */
-     fightSystem();
+     /*! Constructor 
+      * \param controller -> the world messages controller */
+     fightSystem(messageController* controller);
      /*! Destructor */
      ~fightSystem();
   
@@ -78,8 +80,9 @@ class fightSystem
      initiative charsInitiatives;     /**< Character's Initiative */
      lang language;            /**< Language Internationalization */
      Uint32 lastTime;            /**< Last time of some animation */
-     character* actualActor;        /**< Actual Character Acting */
+     character* actualActor;         /**< Actual Character Acting */
      bool pendingAnimation;     /**< If some animation is pending */
+     messageController* msgController; /**< World message control */
 
      /*!
      ***************************************************************

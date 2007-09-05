@@ -64,9 +64,6 @@ class aniModel:public thing
       bool depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
                           GLfloat colMin[3], GLfloat colMax[3]);
 
-      GLfloat min[3];           /**< Min points of static bounding box */
-      GLfloat max[3];           /**< Max points of static bounding box */
-
    protected:
       int m_state;                   /**< current animation state */
       CalCoreModel* m_calCoreModel;  /**< Cal3D Core Model of character */

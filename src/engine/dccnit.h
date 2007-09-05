@@ -412,7 +412,7 @@ class engine
               featRangeCircle,     /**< Feat Range Circle */
               rangeCircle;         /**< Range Circle */
 
-      fightSystem fight;           /**< The Engine fight System */
+      fightSystem* fight;          /**< The Engine fight System */
 
       Uint32 lastTurnTime;        /**< Time when last calls for turn */
       int fightStatus;            /**< Current Fight Status */

@@ -61,6 +61,9 @@ engine::engine()
    /* Create the message controller */
    msgController = new messageController();
 
+   /* Create the fight system */
+   fight = new fightSystem(msgController);
+
    /* Load Skills List */
    skillsList = new skills(language.SKILLS_DIR.c_str(),
                            "../data/skills/skills.skl");
@@ -143,6 +146,9 @@ engine::~engine()
 
    /* Delete message Controller */
    delete(msgController);
+
+   /* Delete fight system */
+   delete(fight);
 
    /* Clear Other Textures */
    glDeleteTextures(1, &normalMoveCircle);
@@ -1112,7 +1118,7 @@ void engine::enterBattleMode(bool surprisePC)
   
   character* activeCharacter = PCs->getActiveCharacter();
   
-  fight.empty();
+  fight->empty();
   if(!NPCs)
   {
      if(shortCutsWindow != NULL)
@@ -1125,7 +1131,7 @@ void engine::enterBattleMode(bool surprisePC)
   while(ch != NPCs->first)
   {
       //TODO put enemies on groups, when enemy from enemy
-      fight.insertNPC(ch, 0, briefInit);
+      fight->insertNPC(ch, 0, briefInit);
       brief += briefInit + "|";
       numEnemies++;
       /* Set the state to Idle */
@@ -1146,7 +1152,7 @@ void engine::enterBattleMode(bool surprisePC)
       ch =(character*) PCs->first->next;
       while(ch != PCs->first)
       {
-         fight.insertPC(ch, 0, briefInit);
+         fight->insertPC(ch, 0, briefInit);
          brief += briefInit + "|";
          ch = (character*) ch->next; 
          /* Set the state to Idle */
@@ -1708,7 +1714,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                                         applyAttackAndBreakFeat(
                                                           *activeCharacter,
                                                           attackFeat, *pers, 
-                                                          brief);
+                                                          brief, 
+                                                          msgController);
                      if(pers->lifePoints <= 0)
                      {
                         pers->kill();
@@ -2682,9 +2689,6 @@ void engine::renderNoShadowThings()
       glPopMatrix();
    }
 
-   /* World Messages */
-   msgController->draw(modl);
-
    /* Draw Path */
    /*if(walkStatus == ENGINE_WALK_MOUSE)
    {
@@ -2808,6 +2812,9 @@ void engine::renderNoShadowThings()
                                       visibleMatrix, option->enableGrass);
       glPopMatrix();
    }
+
+   /* World Messages */
+   msgController->draw(modl);
 
 }
 
@@ -3266,7 +3273,7 @@ int engine::Run(SDL_Surface *surface)
         else if( (fightStatus == FIGHT_CONTINUE) ) 
         {
            lastTurnTime = time;
-           fightStatus = fight.doBattleCicle(brief);
+           fightStatus = fight->doBattleCicle(brief);
            if( (shortCutsWindow) && (!brief.empty()))
            {
               briefTxt->setText(brief);
@@ -3275,10 +3282,10 @@ int engine::Run(SDL_Surface *surface)
 
            if(fightStatus == FIGHT_PC_TURN)
            {
-               if(fight.actualCharacterTurn()) 
+               if(fight->actualCharacterTurn()) 
                {
                   character* activeCharacter = PCs->getActiveCharacter();
-                  PCs->setActiveCharacter(fight.actualCharacterTurn());
+                  PCs->setActiveCharacter(fight->actualCharacterTurn());
                   fullMovePCAction = false;
                   canMove = true;
                   attackFeat = activeCharacter->getActiveFeatRangeType();

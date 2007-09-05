@@ -46,6 +46,9 @@ class thing
                                    WALK_ACTUALIZATION value. This is for 
                                    temporize the walk animation of the thing) */
 
+      float min[3];           /**< Min points of static bounding box */
+      float max[3];           /**< Max points of static bounding box */
+
       /*!
        **********************************************
        *  Get the skill bonus (modifier or not).

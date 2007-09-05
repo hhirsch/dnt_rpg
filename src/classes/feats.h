@@ -13,6 +13,7 @@ using namespace std;
 #include "thing.h"
 #include "modifier.h"
 #include "../lang/lang.h"
+#include "../etc/message3d.h"
 
 #define MAX_FEATS          30 /**< Max number of Feats per Character */
 #define MAX_DEP_FEATS       5 /**< Max number of cost this, cost that feats */
@@ -137,10 +138,12 @@ class feats
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
        * \param brief -> string that will have briefing
+       * \param controller -> the world message controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                   thing& target, string& brief);
+                                   thing& target, string& brief,
+                                   messageController* controller);
       /*!
        **************************************************************** 
        * Apply a heal or fix feat.
@@ -148,10 +151,12 @@ class feats
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
        * \param brief -> string that will have briefing
+       * \param controller -> the world message controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyHealAndFixFeat(thing& attacker, int featNumber, 
-                               thing& target, string& brief);
+                               thing& target, string& brief,
+                               messageController* controller);
       /*!
        **************************************************************** 
        * Apply a psycho feat.
@@ -159,10 +164,12 @@ class feats
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
        * \param brief -> string that will have briefing
+       * \param controller -> the world message controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyPsychoFeat(thing& attacker, int featNumber, 
-                           thing& target, string& brief);
+                           thing& target, string& brief,
+                           messageController* controller);
       /*!
        **************************************************************** 
        * Apply an invocation feat.
@@ -170,10 +177,12 @@ class feats
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
        * \param brief -> string that will have briefing
+       * \param controller -> the world message controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyInvocationFeat(thing& attacker, int featNumber, 
-                               thing& target, string& brief);
+                               thing& target, string& brief,
+                               messageController* controller);
 
       /*!
        **************************************************************** 
