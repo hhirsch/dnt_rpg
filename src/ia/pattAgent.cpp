@@ -33,6 +33,63 @@ pattAgent::~pattAgent()
 }
 
 /********************************************************************
+ *                         calculateAngle                           *
+ ********************************************************************/
+void pattAgent::calculateAngle(wayPoint* way, wayPoint* previous)
+{
+   if(withOrientation)
+   {
+      GLfloat ax;
+      GLfloat az;
+      ax = fabs(previous->x - way->x);
+      az = fabs(previous->z - way->z);
+      GLfloat alpha;
+      if( (ax != 0) )
+      {
+         alpha = ( (atan(fabs(az / ax)) / M_PI) * 180);
+         if( (previous->x > way->x) && (previous->z < way->z) )
+         {
+            alpha += 180;
+         }
+         if( (previous->x < way->x) && (previous->z < way->z) )
+         {
+            alpha = -alpha;
+         }
+         if( (previous->x > way->x) && (previous->z > way->z) )
+         {
+            alpha = 180-alpha;
+         }
+         if(az == 0)
+         {
+            if(previous->x < way->x)
+            {
+               alpha = 0;
+            }
+            else
+            {
+               alpha = 180;
+            }
+         }
+
+         way->angle = alpha-90; /* -90 to correct model orientation*/
+
+      }
+      else
+      {
+         //alpha == 0 or 180 or no one!;
+         if(previous->z < way->z)
+         {
+            way->angle = 180;
+         }
+         else
+         {
+            way->angle = 0;
+         }
+      }
+   }
+}
+
+/********************************************************************
  *                    define Next Position                          *
  ********************************************************************/
 bool pattAgent::defineNextPosition()
@@ -48,66 +105,12 @@ bool pattAgent::defineNextPosition()
       changeToNextWayPoint();
       
       //calculate angle
-      if(withOrientation)
+      desiredAngle = actualWayPoint->angle;
+      if(doAngle())
       {
-         GLfloat ax;
-         GLfloat az;
-         ax = fabs(actualX - actualWayPoint->x);
-         az = fabs(actualZ - actualWayPoint->z);
-         GLfloat alpha;
-         if( (ax != 0) )
-         {
-            alpha = ( (atan(fabs(az / ax)) / M_PI) * 180);
-            if( (actualX > actualWayPoint->x) && (actualZ < actualWayPoint->z) )
-            {
-               alpha += 180;
-            }
-            if( (actualX < actualWayPoint->x) && (actualZ < actualWayPoint->z) )
-            {
-               alpha = -alpha;
-            }
-            if( (actualX > actualWayPoint->x) && (actualZ > actualWayPoint->z) )
-            {
-               alpha = 180-alpha;
-            }
-
-            if(az == 0)
-            {
-               if(actualX < actualWayPoint->x)
-               {
-                  alpha = 0;
-               }
-               else
-               {
-                  alpha = 180;
-               }
-            }
-
-
-            desiredAngle = alpha-90; /* -90 to correct model orientation*/
-
-            if(doAngle())
-            {
-               return(true);
-            }
-         }
-         else
-         {
-            //alpha == 0 or 180 or no one!;
-            if(actualZ < actualWayPoint->z)
-            {
-               desiredAngle = 180;
-            }
-            else
-            {
-               desiredAngle = 0;
-            }
-            if(doAngle())
-            {
-               return(true);
-            }
-         }
+         return(true);
       }
+      
    }
    else if(doAngle())
    {
@@ -154,6 +157,7 @@ void pattAgent::addWayPoint(GLfloat x, GLfloat z)
       newWay->next = newWay;
       newWay->previous = newWay;
       wayPoints = newWay;
+      newWay->angle = orientation;
    }
    else
    {
@@ -161,6 +165,7 @@ void pattAgent::addWayPoint(GLfloat x, GLfloat z)
       newWay->previous->next = newWay;
       newWay->next = wayPoints;
       wayPoints->previous = newWay;
+      calculateAngle(newWay, newWay->previous);
    }
 
    totalWayPoints++;
@@ -169,6 +174,7 @@ void pattAgent::addWayPoint(GLfloat x, GLfloat z)
    {
       actualWayPoint = newWay;
    }
+
 }
 
 /********************************************************************
@@ -184,6 +190,7 @@ void pattAgent::addWayPointFirst(GLfloat x, GLfloat z)
       newWay->next = newWay;
       newWay->previous = newWay;
       wayPoints = newWay;
+      newWay->angle = orientation;
    }
    else
    {
@@ -192,11 +199,60 @@ void pattAgent::addWayPointFirst(GLfloat x, GLfloat z)
       newWay->next = wayPoints;
       newWay->next->previous = newWay;
       wayPoints = newWay;
+      calculateAngle(newWay->next, newWay);
    }
 
    totalWayPoints++;
    
    actualWayPoint = newWay;
+
+}
+
+/********************************************************************
+ *                         removeWayPoint                           *
+ ********************************************************************/
+void pattAgent::removeWayPoint(wayPoint* way)
+{
+   if(way)
+   {
+      if(way == wayPoints)
+      {
+         wayPoints = wayPoints->next;
+      }
+      way->next->previous = way->previous;
+      way->previous->next = way->next;
+      delete(way);
+      totalWayPoints--;
+      if(totalWayPoints <= 0)
+      {
+         wayPoints = NULL;
+      }
+   }
+}
+
+/********************************************************************
+ *                      removeLinearWayPoints                       *
+ ********************************************************************/
+void pattAgent::removeLinearWayPoints()
+{
+   /* note: Only can't remove the first and the last wayPoints. */
+   int total = totalWayPoints;
+   int i;
+   wayPoint* way = wayPoints;
+   wayPoint* oth;
+   for(i = 0; i<total; i++)
+   {
+      oth = way;
+      way = way->next;
+      if( (oth != wayPoints) && (oth != wayPoints->previous) )
+      {
+         if(oth->angle == oth->next->angle)
+         {
+            /* Can remove the wayPoint */
+            removeWayPoint(oth);
+         }
+      }
+   } 
 }
 
 

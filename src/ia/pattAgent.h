@@ -10,6 +10,8 @@ class wayPoint
       GLfloat x,           /**< Way Point X Coordinate */
               z;           /**< Way Point Z Coordinate */
 
+      GLfloat angle;       /**< Angle for the wayPoint to previous one */
+
       wayPoint* next;      /**< Next Way Point on list */
       wayPoint* previous;  /**< Previous Way point on list */
 };
@@ -32,6 +34,11 @@ class pattAgent: public agent
 
       /*! Add WayPoint to be the "first" on the Agent */
       void addWayPointFirst(GLfloat x, GLfloat z);
+
+      /*! Remove waypoint from the path */
+      void removeWayPoint(wayPoint* way);
+      /*! Remove all linear way points (they are redundant) */
+      void removeLinearWayPoints();
 
 
       /*! Draw Waypoints, conneting them */
@@ -59,7 +66,13 @@ class pattAgent: public agent
       GLfloat zInc;                 /**< How many units Z coordinate update */
 
       /*! Define that the agent will go to next Way Point */
-      void changeToNextWayPoint();    
+      void changeToNextWayPoint();  
+
+      /*! Calculate the angle value for the waypoint
+       * \param way-> the waypoint to calculate angle
+       * \param previous -> previous wayPoint */
+      void calculateAngle(wayPoint* way, wayPoint* previous);
+
 };
                    
 

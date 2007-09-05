@@ -233,6 +233,7 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
             patt->addWayPointFirst(node->x, node->z);
             node = closed.find(node->parentX, node->parentZ);
          }
+         patt->removeLinearWayPoints();
          patt->definePosition(actualX, actualZ);
          state = ASTAR_STATE_FOUND;
          unLock();

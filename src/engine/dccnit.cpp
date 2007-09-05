@@ -1568,8 +1568,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
          Z[2] = bound.z2;
          X[3] = bound.x2;
          Z[3] = bound.z1;
-         rotTransBoundingBox(porta->orientation, X, Z,porta->x, 0.0,0.0,porta->z, 
-                             minObj, maxObj);
+         rotTransBoundingBox(porta->orientation, X, Z,porta->x, 
+                             0.0,0.0,porta->z, minObj, maxObj);
          if(intercepts( minObj, maxObj, minMouse, maxMouse, 1))
          {
             cursors->setActual(CURSOR_DOOR);
@@ -1798,10 +1798,9 @@ int engine::verifyMouseActions(Uint8 Mbutton)
 /*********************************************************************
  *                   Threat Input/Output Events                      *
  *********************************************************************/
-int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
+int engine::treatIO(SDL_Surface *screen)
 {
    exitEngine = 0;           // Exit the engine ?
-   bool redesenha = false;   // Redraw things ?
    bool andou = false;       // Character Walk ?
    bool passouTempo = false; // The time to actualize passes ?
    Uint32 tempo;             // Actual Time
@@ -1815,7 +1814,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
    varTempo = (tempo-lastRead);
    if( ((varTempo)) >= ACTUALIZATION_RATE)
    {
-      redesenha = true;
       passouTempo = true;
 
       /* Actualize Time */
@@ -1915,7 +1913,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
              if(!miniMapWindow)
              {
                OpenMiniMapWindow();
-               redesenha = true;
              }
              lastKey = SDLK_m;
              lastKeyb = tempo;
@@ -1929,7 +1926,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
              if(!shortCutsWindow)
              {
                  OpenShortcutsWindow();
-                 redesenha = true;
              }
              lastKey = SDLK_n;
              lastKeyb = tempo;
@@ -1948,7 +1944,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
          if(keys[SDLK_F1]) //Call Information Screen
          {
             InformationScreen();
-            redesenha = true;
          }
 
          /* FIXME only to test */
@@ -2104,7 +2099,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                        activeCharacter->yPosition,
                                        activeCharacter->zPosition,
                                        activeCharacter->orientation);
-            redesenha = true;
             andou = true;
          }
          else if(((varX > 0)&&(canWalk(activeCharacter->walk_interval,0,0))) ||
@@ -2122,7 +2116,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                        activeCharacter->yPosition,
                                        activeCharacter->zPosition,
                                        activeCharacter->orientation);
-            redesenha = true;
             andou = true;
          }
          else if( ((varZ > 0) && canWalk(0,activeCharacter->walk_interval,0)) ||
@@ -2141,7 +2134,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                        activeCharacter->yPosition,
                                        activeCharacter->zPosition,
                                        activeCharacter->orientation);
-            redesenha = true;
             andou = true;
          }
         
@@ -2166,7 +2158,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                         activeCharacter->yPosition,
                                         activeCharacter->zPosition,
                                         activeCharacter->orientation);
-             redesenha = true;
              andou  = true;
          }
          else if(((varX > 0)&&(canWalk(activeCharacter->walk_interval,0,0))) ||
@@ -2185,7 +2176,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                               activeCharacter->yPosition,
                               activeCharacter->zPosition,
                               activeCharacter->orientation);
-              redesenha = true;
               andou = true;
          }
          else if(((varZ > 0)&&(canWalk(0,activeCharacter->walk_interval,0))) ||
@@ -2203,7 +2193,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                               activeCharacter->yPosition,
                               activeCharacter->zPosition,
                               activeCharacter->orientation);
-              redesenha = true;
               andou = true;
          }
 
@@ -2222,7 +2211,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                ori -= 360.0;
             }
             activeCharacter->setOrientation(ori);
-            redesenha = true;
             andou = true;
          }
          // Clockwise Character Turn
@@ -2235,7 +2223,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
             }
             activeCharacter->setOrientation(ori);
          }
-         redesenha = true;
          andou = true;
       }
       if(keys[SDLK_TAB]) //Activate Character
@@ -2254,15 +2241,11 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                     activeCharacter->yPosition,
                                     activeCharacter->zPosition,
                                     activeCharacter->orientation);
-         redesenha = true;
          SDL_Delay(100);
       }
 
       /* Camera Verification */
-      if(gameCamera.doIO(keys, Mbutton, x, y, DELTA_CAMERA ))
-      {
-         redesenha = true;
-      }
+      gameCamera.doIO(keys, Mbutton, x, y, DELTA_CAMERA );
 
       /* Path Verification */
       if( (Mbutton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)))
@@ -2335,7 +2318,6 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
                                        activeCharacter->yPosition,
                                        activeCharacter->zPosition,
                                        activeCharacter->orientation);
-            redesenha = true;
             andou = true;
       }
 
@@ -2378,30 +2360,22 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
       object = gui->manipulateEvents(x,y,Mbutton,keys, &guiEvent);
       /* Threat the GUI */
       treatGuiEvents(object, guiEvent);
-   }
-   else if(*forcaAtualizacao == 0)
-   {
-      int tmp = (int) ((ACTUALIZATION_RATE-1) - varTempo);
-      if( (tmp > 0) && (tmp < ACTUALIZATION_RATE))
-      {
-         SDL_Delay(tmp);
-      }
-   }
 
-   /* Verify Mouse Cursor Forbidden (when can't go to position) */
-   if(!gui->mouseOnGui(mouseX, mouseY))
-   {
-      int posX = (int) floor(xReal / SQUARE_SIZE);
-      int posZ = (int) floor(zReal / SQUARE_SIZE);
-      Square* sq = actualMap->relativeSquare(posX, posZ);
-      if( (sq == NULL) || (sq->flags == 0))
+
+      
+      /* Verify Mouse Cursor Forbidden (when can't go to position) */
+      if(!gui->mouseOnGui(mouseX, mouseY))
       {
-         cursors->setActual(CURSOR_FORBIDDEN);
+         int posX = (int) floor(xReal / SQUARE_SIZE);
+         int posZ = (int) floor(zReal / SQUARE_SIZE);
+         Square* sq = actualMap->relativeSquare(posX, posZ);
+         if( (sq == NULL) || (sq->flags == 0))
+         {
+            cursors->setActual(CURSOR_FORBIDDEN);
+         }
       }
-   }
    
-   if( (redesenha) || ( (*forcaAtualizacao != 0)))
-   {
+      /* Draw things */
       if(shadowMap.isEnable())
       {
          drawWithShadows();
@@ -2442,45 +2416,53 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
          imgNumber++;
       }
 #endif
-      *forcaAtualizacao = 0;
-   }
  
-   if( (andou) && (activeCharacter->isAlive()) )
+      /* Verify Sounds FIXME -> for npc sounds! */
+      if( (andou) && (activeCharacter->isAlive()) )
+      {
+         if(!walkSound)
+         {
+            walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,
+                                           activeCharacter->zPosition,true,
+                                           "../data/sndfx/passos.ogg" );
+         }
+         else
+         {
+            walkSound->redefinePosition(activeCharacter->xPosition, 0.0,
+                                        activeCharacter->zPosition);
+         }
+         activeCharacter->setState(STATE_WALK);
+         #ifdef REDE
+           movchar(&clientData, activeCharacter->ID, 
+             activeCharacter->xPosition,activeCharacter->zPosition,
+             activeCharacter->orientation );
+         #endif
+      }
+      else if( (passouTempo) && (activeCharacter->isAlive()))
+      { 
+         if( (activeCharacter->getState() == STATE_WALK) &&
+             (engineMode == ENGINE_MODE_TURN_BATTLE) && 
+             (fightStatus == FIGHT_PC_TURN) )
+         {
+            canMove = false;
+         }
+         activeCharacter->setState(STATE_IDLE);
+         if(walkSound)
+         {
+            snd->removeSoundEffect(walkSound);
+            walkSound = NULL;
+         }
+      }
+   }
+   else
    {
-      if(!walkSound)
+      int tmp = (int) ((ACTUALIZATION_RATE-1) - varTempo);
+      if( (tmp > 0) && (tmp < ACTUALIZATION_RATE))
       {
-         walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,
-                                        activeCharacter->zPosition,true,
-                                        "../data/sndfx/passos.ogg" );
-      }
-      else
-      {
-         walkSound->redefinePosition(activeCharacter->xPosition, 0.0,
-                                     activeCharacter->zPosition);
-      }
-      activeCharacter->setState(STATE_WALK);
-      #ifdef REDE
-        movchar(&clientData, activeCharacter->ID, 
-          activeCharacter->xPosition,activeCharacter->zPosition,
-          activeCharacter->orientation );
-      #endif
-   }
-   else if( (passouTempo) && (activeCharacter->isAlive()))
-   { 
-      if( (activeCharacter->getState() == STATE_WALK) &&
-          (engineMode == ENGINE_MODE_TURN_BATTLE) && 
-          (fightStatus == FIGHT_PC_TURN) )
-      {
-         canMove = false;
-      }
-      activeCharacter->setState(STATE_IDLE);
-      if(walkSound)
-      {
-         snd->removeSoundEffect(walkSound);
-         walkSound = NULL;
+         SDL_Delay(tmp);
       }
    }
- 
+
    return(!exitEngine);
 }
 
@@ -3195,7 +3177,6 @@ int engine::Run(SDL_Surface *surface)
       snd->loadMusic(actualMap->getMusicFileName());
    }
 
-   int forcaAtualizacao = 0; //force screen atualization FIXME, no more used
    int time;
    actualFPS = 10.0;
    lastFPS = 0;
@@ -3215,7 +3196,7 @@ int engine::Run(SDL_Surface *surface)
    #endif
   
    /* Main Things Run */
-   while(treatIO(surface,&forcaAtualizacao))
+   while(treatIO(surface))
    {
 
      /* Verify battle events */
@@ -3346,7 +3327,6 @@ int engine::Run(SDL_Surface *surface)
                        per->xPosition = eventoRede->x;
                        per->zPosition = eventoRede->y; 
                        per->orientation = eventoRede->teta;
-		       forcaAtualizacao = 1;
                    }
                 }
                 break; 

@@ -228,9 +228,8 @@ class engine
        *************************************************************** 
        * Treat Input/Output Events
        * \param screen -> Pointer to the Screen's Surface
-       * \param forcaAtualizacao -> to force the draw
        ***************************************************************/
-      int treatIO(SDL_Surface *screen,int *forcaAtualizacao);
+      int treatIO(SDL_Surface *screen);
 
       /*!
        **************************************************************
