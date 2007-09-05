@@ -1898,8 +1898,12 @@ int engine::treatIO(SDL_Surface *screen,int *forcaAtualizacao)
          }
 
          /* Print All Models on List */
-         if(keys[SDLK_F2])
+         if( (keys[SDLK_F2]) && 
+             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_F2) ) )
          {
+            lastKey = SDLK_F2;
+            lastKeyb = tempo;
             models->printAll();
          }
 

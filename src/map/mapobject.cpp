@@ -25,8 +25,7 @@ lObject::~lObject()
    {
       tmp = obj;
       obj = obj->next;
-      delete(tmp);
-      total--;
+      removeObject(tmp);
    }
 }
 

@@ -121,16 +121,10 @@ modelList::modelList()
  ********************************************************/
 modelList::~modelList()
 {
-   model3d* mdl;
-   int i;
-   for(i=0; i<totalModels; i++)
+   while(first)
    {
-      mdl = first;
-      first = first->next;
-      delete(mdl);
+      removeModel(first);
    }
-   first = NULL;
-   totalModels = 0;
 }
 
 /********************************************************
@@ -222,24 +216,17 @@ model3d* modelList::getFirst()
  ********************************************************/
 void modelList::removeUnusedModels()
 {
-   model3d* mdl;
-   model3d* oth;
+   model3d* mdl = first;
+   int i, total;
 
-   if(first)
+   total = totalModels;
+   
+   for(i = 0; i < totalModels; i++)
    {
-      mdl = first->next;
-      while( (first != NULL) && (mdl != first) )
+      mdl = mdl->next;
+      if(mdl->previous->getUsedFlag() <= 0)
       {
-         oth = mdl;
-         mdl = mdl->next;
-         if(oth->getUsedFlag() <= 0)
-         {
-            removeModel(oth);
-         }
-      }
-      if((first != NULL) && (first->getUsedFlag() <= 0))
-      {
-         removeModel(first);
+         removeModel(mdl->previous);
       }
    }
    printAll();
