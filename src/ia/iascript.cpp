@@ -1042,6 +1042,13 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                   *(float*)varStack[varPos]->value = tf;
                   varPos++;
                }
+               else if(isString(token))
+               {
+                  /* Create the string value on the stack */
+                  varStack[varPos] = new iaVariable(IA_TYPE_STRING, "name");
+                  *(string*)varStack[varPos]->value = token;
+                  varPos++;
+               }
                else
                {
                   cerr << "Error: unknow token " << token << " at " << strLine

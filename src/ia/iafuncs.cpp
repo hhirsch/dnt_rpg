@@ -38,6 +38,15 @@ bool isFloat(string s)
    return(true);
 }
 
+/***********************************************************************
+ *                             isString                                *
+ ***********************************************************************/
+bool isString(string s)
+{
+   return( (s[0] == IA_SEPARATOR_STRING) && 
+           (s[s.length()-1] == IA_SEPARATOR_STRING));
+}
+
 
 /***********************************************************************
  *                            isOperator                               *
@@ -183,6 +192,8 @@ string nextToken(string s, unsigned int& pos)
    string ret = "";
    string cmp = "";
 
+   char first = ' ';
+
    /* Ignore all previous spaces (and commas) */
    while( (pos < s.length()) && ( (s[pos] == IA_SEPARATOR_SPACE) || 
           (s[pos] == IA_SEPARATOR_TAB) || (s[pos] == IA_SEPARATOR_NEW_LINE) || 
@@ -210,14 +221,32 @@ string nextToken(string s, unsigned int& pos)
    {
       /* If the character isn't a operator, read until
        * find separator or a operator part */
-      while( (pos < s.length()) && (s[pos] != ';') && (s[pos] != ',') &&
-             (s[pos] != '\n') && (s[pos] != '\0') && (s[pos] != ' ') &&
-             (s[pos] != '\t') && (!isOperator(cmp)) )
+      first = s[pos];
+      if(first == IA_SEPARATOR_STRING)
+      {
+         ret += s[pos];
+         pos++;
+      }
+      while( (pos < s.length()) && 
+             ( ( (s[pos] != ';') && (s[pos] != ',') &&
+                 (s[pos] != '\n') && (s[pos] != '\0') && (s[pos] != ' ') &&
+                 (s[pos] != '\t') && (!isOperator(cmp)) ) ||
+               ( (first == IA_SEPARATOR_STRING) && (s[pos] != IA_SEPARATOR_STRING))
+             )
+           )
        {
          ret += s[pos];
          pos++;
          cmp = s[pos];
       }
+
+      if( (pos < s.length()) && 
+          (first == IA_SEPARATOR_STRING) && (s[pos] == IA_SEPARATOR_STRING))
+      {
+         ret += s[pos];
+         pos++;
+      }
+
    }
 
    return(ret);

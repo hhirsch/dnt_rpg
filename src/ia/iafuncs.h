@@ -35,6 +35,8 @@ using namespace std;
 #define IA_SEPARATOR_TAB           '\t'
 #define IA_SEPARATOR_NEW_LINE      '\n'
 #define IA_SEPARATOR_NULL          '\0'
+#define IA_SEPARATOR_STRING        '"'
+
 
 /* Comments */
 #define IA_COMMENT_LINE            '#'
@@ -147,6 +149,10 @@ using namespace std;
  * \param s -> string to verify
  * \return true if is integer */
  bool isInteger(string s);
+/*! Verify if the string is an string literal
+ * \param s -> string to verify
+ * \return true if is an string literal */
+ bool isString(string s);
 
 /*! Get the function type
  * \param s -> function name
