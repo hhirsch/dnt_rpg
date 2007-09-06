@@ -975,9 +975,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
       if(dude != NULL)
       {
-         //TODO
-         //bool bl = 
-         //assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+         bool bl = dude->inventories->getItemByFileName(objectFile);
+         assignValue(var, (void*)&bl, IA_TYPE_BOOL);
       }
       else
       {

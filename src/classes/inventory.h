@@ -105,6 +105,11 @@ class inventory
        * \param y -> y coordinate on surface */
       void drawEquiped(int x, int y, SDL_Surface* surface);
 
+      /*! Get a item from the inventory with the desired fileName, if exists.
+       * \param fileName -> fileName of the item
+       * \return -> pointer to the found object of NULL */
+      object* getItemByFileName(string fileName);
+
       bool openedWindow;   /**< Flag to control if the inventory have a 
                                 openned window or not */
 

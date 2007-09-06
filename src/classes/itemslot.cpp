@@ -279,3 +279,24 @@ object* itemSlot::getFirstItem(int& x, int& y)
    return(NULL);
 }
 
+/**************************************************************
+ *                       getItemByFileName                    *
+ **************************************************************/
+object* itemSlot::getItemByFileName(string fileName)
+{
+   int j,k;
+   for(j=0; j < sizeX; j++)
+   {
+      for(k=0; k < sizeY; k++)
+      {
+         if( (spaces[j][k].obj != NULL) &&
+             (spaces[j][k].obj->getFileName() == fileName) )
+         {
+            /* Found One! */
+            return(spaces[j][k].obj);
+         }
+      }
+   }
+   return(NULL);
+}
+

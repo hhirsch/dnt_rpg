@@ -81,6 +81,12 @@ class itemSlot
       /*! Set the slot to only accepts one item on it per time. Usefully fot
        *  equipped objects slots. */
       void setAsOneItemPerTime();
+
+      /*! Get a item from the slots with the desired fileName, if exists.
+       * \param fileName -> fileName of the item
+       * \return -> pointer to the found object of NULL */
+      object* getItemByFileName(string fileName);
+
    private:
       int sizeX,  /**< Size X of the slot */
           sizeY;  /**< Size Y of the slot */

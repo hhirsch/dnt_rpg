@@ -250,4 +250,35 @@ void inventory::drawEquiped(int x, int y, SDL_Surface* surface)
    equippedSlots[INVENTORY_BODY]->draw(x+95,y+87, surface);
 }
 
+/**************************************************************
+ *                     getItemByFileName                      *
+ **************************************************************/
+object* inventory::getItemByFileName(string fileName)
+{
+   object* res = NULL;
+
+   /* First, search at the normal slots */
+   int i;
+   for(i=0; i<INVENTORY_PER_CHARACTER; i++)
+   {
+      res = slots[i]->getItemByFileName(fileName);
+      if(res != NULL)
+      {
+         return(res);
+      }
+   }
+
+   /* Next search at the equipped ones */
+   for(i = 0; i < INVENTORY_TOTAL_PLACES; i++)
+   {
+      res = equippedSlots[i]->getItemByFileName(fileName);
+      if(res != NULL)
+      {
+         return(res);
+      }
+   }
+
+   return(NULL);
+}
+
 
