@@ -655,6 +655,117 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
 
+   /* mission set temp */
+   else if(functionName == IA_MISSION_SET_TEMP)
+   {
+      mission* m = NULL;
+      int tmpNumber = 0;
+      int newValue = 0;
+      string missionFile = "";
+      /*! void missionSetTemp(string missionfile, int tmpNumber, int value) */
+
+      /* Get mission */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         missionFile = *(string*)iv->value;
+         /* get the mission */
+         m = eng->missions->getCurrentMission(missionFile);
+      }
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+
+      /* get temp number */
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv)
+      {
+         tmpNumber = *(int*)iv->value;
+      }
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+
+      /* get value */
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv)
+      {
+         newValue = *(int*)iv->value;
+      }
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+
+      /* Run the function */
+      if(m)
+      {
+         m->setTempFlag(tmpNumber, newValue);
+      }
+      else
+      {
+         cerr << "Error: No current mission " << missionFile 
+              << " at " << strLine << " on script: " << fileName << endl;
+      }
+   }
+
+
+   /* mission get temp */
+   else if(functionName == IA_MISSION_GET_TEMP)
+   {
+      mission* m = NULL;
+      int tmpNumber = 0;
+      string missionFile = "";
+      /* int missionGetTemp(string missionFile, int tmpNumber) */
+
+      /* Get mission */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         missionFile = *(string*)iv->value;
+         /* get the mission */
+         m = eng->missions->getCurrentMission(missionFile);
+      }
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+
+      /* get temp number */
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv)
+      {
+         tmpNumber = *(int*)iv->value;
+      }
+      if(isFunction(token))
+      {
+         delete(iv);
+      }
+
+      /* Run the function */
+      if(m)
+      {
+         if( (var) && (var->value == IA_TYPE_INT))
+         {
+            (*(int*)var->value) = m->getTempFlag(tmpNumber);
+         }
+         else if(var)
+         {
+            cerr << "Error: Expected " << IA_TYPE_INT
+                 << " variable, but got " << var->type 
+                 << " at line " << actualLine << " file "
+                 << fileName << endl;
+         }
+      }
+      else
+      {
+         cerr << "Error: No current mission " << missionFile 
+              << " at " << strLine << " on script: " << fileName << endl;
+      }
+   }
+
 
    /* Feat Total */
    else if(functionName == IA_FEAT_TOTAL)

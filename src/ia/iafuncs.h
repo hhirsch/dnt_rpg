@@ -87,6 +87,10 @@ using namespace std;
 #define IA_MISSION_COMPLETE "missionComplete"
 /*! bool missionIsActive(string missionFile) */
 #define IA_MISSION_IS_ACTIVE "missionIsActive"
+/*! void missionSetTemp(string missionfile, int tmpNumber, int value) */
+#define IA_MISSION_SET_TEMP "missionSetTemp"
+/*! int missionGetTemp(string missionFile, int tmpNumber) */
+#define IA_MISSION_GET_TEMP "missionGetTemp"
 
 /* Feats Functions */
 #define IA_FEAT_TOTAL "featTotal"

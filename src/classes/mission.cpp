@@ -37,7 +37,12 @@ int mission::getCompletion()
  ************************************************************/
 int mission::getTempFlag(int flagNumber)
 {
-   return(tempFlag[flagNumber]);
+   if((flagNumber >= 0) && (flagNumber < MISSION_TEMP_FLAGS))
+   {
+      return(tempFlag[flagNumber]);
+   }
+   
+   return(0);
 }
 
 /************************************************************
@@ -45,7 +50,10 @@ int mission::getTempFlag(int flagNumber)
  ************************************************************/
 void mission::setTempFlag(int flagNumber, int flagValue)
 {
-   tempFlag[flagNumber] = flagValue;
+   if((flagNumber >= 0) && (flagNumber < MISSION_TEMP_FLAGS))
+   {
+      tempFlag[flagNumber] = flagValue;
+   }
 }
 
 /************************************************************

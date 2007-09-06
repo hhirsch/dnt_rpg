@@ -107,7 +107,7 @@ string functionType(string s)
    }
    else if( (s == IA_FEAT_TOTAL) || (s == IA_FEAT_COST) || 
             (s == IA_SKILL_POINTS) || (s == IA_SKILL_MODIFIER) ||
-            (s == IA_CHARACTER_GET_PSYCHO) )
+            (s == IA_CHARACTER_GET_PSYCHO) || (s == IA_MISSION_GET_TEMP) )
    {
       return(IA_TYPE_INT);
    }
