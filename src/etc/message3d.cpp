@@ -112,37 +112,46 @@ void messageController::removeMessage(message3d* msg)
 /***********************************************************
  *                           draw                          *
  ***********************************************************/
-void messageController::draw(GLdouble modelView[16])
+void messageController::draw(GLdouble modelView[16], 
+                             GLfloat camX, GLfloat camY, GLfloat camZ)
 {
    int i;
    int tot = total;
    message3d* msg = first;
+   GLfloat scale = 1.0;
+   GLfloat dist = 0;
 
    glEnable(GL_TEXTURE_2D);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_BLEND);
    for(i = 0; i < tot; i++)
    {
+      /* Calculate scale factor */
+      dist = sqrt( (camX-msg->posX)*(camX-msg->posX) +
+                   (camY-msg->posY)*(camY-msg->posY) +
+                   (camZ-msg->posZ)*(camZ-msg->posZ) );
+      scale = dist / 200.0;
+
       /* Draw */
       glColor3f(1.0, 1.0, 1.0);
       glBindTexture(GL_TEXTURE_2D, msg->messageTexture);
       glPushMatrix();
       glTranslatef(msg->posX, msg->posY, msg->posZ);
-       glBegin(GL_QUADS);
+      glBegin(GL_QUADS);
          glTexCoord2f(0,1);
-         glVertex3f(-msg->halfSize*modelView[0],0.0f,
-                    -msg->halfSize*modelView[8]);
+         glVertex3f(-msg->halfSize*modelView[0]*scale,0.0f,
+                    -msg->halfSize*modelView[8]*scale);
          glTexCoord2f(1,1);
-         glVertex3f(msg->halfSize*modelView[0],0.0f,
-                    msg->halfSize*modelView[8]);
+         glVertex3f(msg->halfSize*modelView[0]*scale,0.0f,
+                    msg->halfSize*modelView[8]*scale);
          glTexCoord2f(1,0);
-         glVertex3f(msg->halfSize*modelView[0] + 8*modelView[1], 
-                    8*modelView[5] + msg->halfSize*modelView[4], 
-                    msg->halfSize* modelView[8] + 8*modelView[9]);
+         glVertex3f(msg->halfSize*modelView[0]*scale + scale*8*modelView[1], 
+                    scale*8*modelView[5] + scale*msg->halfSize*modelView[4], 
+                    scale*msg->halfSize*modelView[8] + scale*8*modelView[9]);
          glTexCoord2f(0,0);
-         glVertex3f(-msg->halfSize* modelView[0] + 8*modelView[1], 
-                    8*modelView[5] - msg->halfSize*modelView[4],
-                    -msg->halfSize * modelView[8] + 8*modelView[9]);
+         glVertex3f(-msg->halfSize*modelView[0]*scale + scale*8*modelView[1], 
+                    scale*8*modelView[5] - msg->halfSize*modelView[4]*scale,
+                    -msg->halfSize*modelView[8]*scale + 8*modelView[9]*scale);
        glEnd();
       glPopMatrix();
       msg->live++;

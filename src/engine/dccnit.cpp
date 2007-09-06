@@ -2787,7 +2787,8 @@ void engine::renderNoShadowThings()
    }
 
    /* World Messages */
-   msgController->draw(modl);
+   msgController->draw(modl, gameCamera.getCameraX(), 
+                       gameCamera.getCameraY(), gameCamera.getCameraZ() );
 
 }
 

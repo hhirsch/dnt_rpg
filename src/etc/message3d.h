@@ -48,8 +48,12 @@ class messageController
       ~messageController();
 
       /*! Actualize and draw all messages
-       * \param modelView -> the model view matrix*/
-      void draw(GLdouble modelView[16]);
+       * \param modelView -> the model view matrix
+       * \param camX -> camera X position 
+       * \param camY -> camera Y position
+       * \param camZ -> camera Z position */
+      void draw(GLdouble modelView[16], GLfloat camX, GLfloat camY, 
+                GLfloat camZ);
 
       /* Add a message
        * \param x -> x position
