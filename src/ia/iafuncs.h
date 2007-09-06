@@ -63,24 +63,31 @@ using namespace std;
 
 #define IA_SETENCE_END "end"
 
-
-/* Quick Pointers */
+////////////////////////////////////////////////////
+//                Quick Pointers                  //
+////////////////////////////////////////////////////
 #define IA_SELF_OBJECT "SELF_OBJECT"  /**< As the owner object of the script */
 #define IA_SELF_CHARACTER "SELF_CHARACTER" /**< As script's owner character */
 #define IA_ACTIVE_CHARACTER "ACTIVE_CHARACTER" /**< The Active PC */
 #define IA_ACTUAL_MAP "ACTUAL_MAP" /**< The actual openned map */
 
-/* Imediate Expressions */
-#define IA_TRUE "true"
-#define IA_FALSE "false"
+////////////////////////////////////////////////////
+//              Imediate Expressions              //
+////////////////////////////////////////////////////
+#define IA_TRUE "true"     /**< Boolean TRUE value */
+#define IA_FALSE "false"   /**< Boolean FALSE value */
 
-/* Movimentation Functions */
+////////////////////////////////////////////////////
+//             Movimentation Functions            //
+////////////////////////////////////////////////////
 /*! bool moveToPosition(character* char, int x, int z) */
 #define IA_MOVE_TO_POSITION "moveToPosition"
 #define IA_MOVE_TO_CHARACTER "moveToCharacter"
 #define IA_MOVE_TO_OBJECT "moveToObject"
 
-/* Mission functions */
+////////////////////////////////////////////////////
+//                Mission Functions               //
+////////////////////////////////////////////////////
 /*! void missionAdd(string missionFile) */
 #define IA_MISSION_ADD  "missionAdd"
 /*! void missionComplete(string missionFile) */
@@ -92,27 +99,40 @@ using namespace std;
 /*! int missionGetTemp(string missionFile, int tmpNumber) */
 #define IA_MISSION_GET_TEMP "missionGetTemp"
 
-/* Feats Functions */
+////////////////////////////////////////////////////
+//                 Feats Functions                //
+////////////////////////////////////////////////////
 #define IA_FEAT_TOTAL "featTotal"
 #define IA_FEAT_COST  "featCost"
 #define IA_FEAT_USE_AT_CHARACTER "featUseAtCharacter"
 #define IA_FEAT_USE_AT_OBJECT "featUseAtObject"
 
-/* Skills Functions */
+////////////////////////////////////////////////////
+//                Skills Functions                //
+////////////////////////////////////////////////////
 #define IA_SKILL_POINTS "skillPoints"
 #define IA_SKILL_MODIFIER "skillModifier"
 
-/* Fight Functions */
+////////////////////////////////////////////////////
+//                  Fight Functions               //
+////////////////////////////////////////////////////
+/*! void combatEnter() */
 #define IA_FIGHT_ENTER "combatEnter"
 #define IA_FIGHT_EXIT "combatExit"
 
-/* Character Functions */
-
+////////////////////////////////////////////////////
+//                Character Functions             //
+////////////////////////////////////////////////////
 /*! int getPsycho(character c)  */
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"
 /*! void setPsycho(character c, int psychoState)  */
 #define IA_CHARACTER_SET_PSYCHO "setPsycho"
 
+////////////////////////////////////////////////////
+//                Inventory Functions             //
+////////////////////////////////////////////////////
+/*! bool inventoryHave(character* owner, string objectFile) */
+#define IA_INVENTORY_HAVE "inventoryHave"
 
 /*! Convert the infix string to a postfix one
  * \param infix -> infix expression 

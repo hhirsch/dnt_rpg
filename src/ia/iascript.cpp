@@ -487,6 +487,44 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
 }
 
 /***********************************************************************
+ *                           assignValue                               *
+ ***********************************************************************/
+void iaScript::assignValue(iaVariable* var, void* value, string type)
+{
+   if( (var) && (var->type == type))
+   {
+      if(type == IA_TYPE_INT)
+      {
+         (*(int*)var->value) = *(int*)value;
+      }
+      else if(type == IA_TYPE_BOOL)
+      {
+         (*(bool*)var->value) = *(bool*)value;
+      }
+      else if(type == IA_TYPE_FLOAT)
+      {
+         (*(float*)var->value) = *(float*)value;
+      }
+      else if(type == IA_TYPE_STRING)
+      {
+         (*(string*)var->value) = *(string*)value;
+      }
+      else
+      {
+         /* It's a pointer only */
+         var->value = value;
+      }
+   }
+   else if(var)
+   {
+      cerr << "Error: Expected " << type
+           << " variable, but got " << var->type 
+           << " at line " << actualLine << " file "
+           << fileName << endl;
+   }
+}
+
+/***********************************************************************
  *                          callFunction                               *
  ***********************************************************************/
 void iaScript::callFunction(iaVariable* var, string strLine, 
@@ -497,6 +535,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    engine* eng = (engine*)actualEngine;
 
    string varName = "";
+
+   ////////////////////////////////////////////////////
+   //             Movimentation Functions            //
+   ////////////////////////////////////////////////////
 
    /* Move to Position */
    if(functionName == IA_MOVE_TO_POSITION)
@@ -579,6 +621,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
 
+   ////////////////////////////////////////////////////
+   //                Mission Functions               //
+   ////////////////////////////////////////////////////
+
    /* Mission Add */
    else if(functionName == IA_MISSION_ADD)
    {
@@ -634,18 +680,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          string st = *(string*)iv->value;
          /* Add the mission to the engine */
          mission* m = eng->missions->getCurrentMission(st);
+         bool bl = (m != NULL);
 
-         if( (var) && (var->value == IA_TYPE_BOOL))
-         {
-            (*(bool*)var->value) = (m != NULL);
-         }
-         else if(var)
-         {
-            cerr << "Error: Expected " << IA_TYPE_BOOL
-                 << " variable, but got " << var->type 
-                 << " at line " << actualLine << " file "
-                 << fileName << endl;
-         }
+         assignValue(var, (void*)&bl, IA_TYPE_BOOL);
 
          if(isFunction(token))
          {
@@ -671,21 +708,21 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          missionFile = *(string*)iv->value;
          /* get the mission */
          m = eng->missions->getCurrentMission(missionFile);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
       }
-      if(isFunction(token))
-      {
-         delete(iv);
-      }
-
+      
       /* get temp number */
       iv = getParameter(token, strLine, IA_TYPE_INT, pos);
       if(iv)
       {
          tmpNumber = *(int*)iv->value;
-      }
-      if(isFunction(token))
-      {
-         delete(iv);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
       }
 
       /* get value */
@@ -693,10 +730,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(iv)
       {
          newValue = *(int*)iv->value;
-      }
-      if(isFunction(token))
-      {
-         delete(iv);
+         if(isFunction(token))
+         {
+           delete(iv);
+         }
       }
 
       /* Run the function */
@@ -727,10 +764,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          missionFile = *(string*)iv->value;
          /* get the mission */
          m = eng->missions->getCurrentMission(missionFile);
-      }
-      if(isFunction(token))
-      {
-         delete(iv);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
       }
 
       /* get temp number */
@@ -738,26 +775,17 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(iv)
       {
          tmpNumber = *(int*)iv->value;
-      }
-      if(isFunction(token))
-      {
-         delete(iv);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
       }
 
       /* Run the function */
       if(m)
       {
-         if( (var) && (var->value == IA_TYPE_INT))
-         {
-            (*(int*)var->value) = m->getTempFlag(tmpNumber);
-         }
-         else if(var)
-         {
-            cerr << "Error: Expected " << IA_TYPE_INT
-                 << " variable, but got " << var->type 
-                 << " at line " << actualLine << " file "
-                 << fileName << endl;
-         }
+         int i = m->getTempFlag(tmpNumber);
+         assignValue(var, (void*)&i, IA_TYPE_INT);
       }
       else
       {
@@ -766,6 +794,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+
+   ////////////////////////////////////////////////////
+   //                 Feats Functions                //
+   ////////////////////////////////////////////////////
 
    /* Feat Total */
    else if(functionName == IA_FEAT_TOTAL)
@@ -784,6 +816,13 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    {
       //TODO
    }
+
+   
+   ////////////////////////////////////////////////////
+   //                Skills Functions                //
+   ////////////////////////////////////////////////////
+
+
    else if(functionName == IA_SKILL_POINTS)
    {
       //TODO
@@ -792,6 +831,11 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    {
       //TODO
    }
+
+
+   ////////////////////////////////////////////////////
+   //                  Fight Functions               //
+   ////////////////////////////////////////////////////
 
 
    /* fight enter */
@@ -821,6 +865,11 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
 
+   ////////////////////////////////////////////////////
+   //                Character Functions             //
+   ////////////////////////////////////////////////////
+
+
    /* IA_CHARACTER_GET_PSYCHO */
    else if(functionName == IA_CHARACTER_GET_PSYCHO)
    {
@@ -831,17 +880,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          character* c = (character*)iv->value;
          if(c != NULL)
          {
-            if( (var) && (var->value == IA_TYPE_INT))
-            {
-               (*(int*)var->value) = c->psychoState;
-            }
-            else if(var)
-            {
-               cerr << "Error: Expected " << IA_TYPE_INT
-                    << " variable, but got " << var->type 
-                    << " at line " << actualLine << " file "
-                    << fileName << endl;
-            }
+            int i = c->psychoState;
+            assignValue(var, (void*)&i, IA_TYPE_INT);
          }
          else
          {
@@ -899,21 +939,65 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
 
+   ////////////////////////////////////////////////////
+   //                Inventory Functions             //
+   ////////////////////////////////////////////////////
+
+
+   /* inventoryHave */
+   else if(functionName == IA_INVENTORY_HAVE)
+   {
+      /* Syntax: bool inventoryHave(character* owner, string objectFile) */
+      character* dude = NULL;
+      string objectFile = "";
+
+      /* Get character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         dude = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get Object FileName */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv != NULL)
+      {
+         objectFile = *(string*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      if(dude != NULL)
+      {
+         //TODO
+         //bool bl = 
+         //assignValue(var, (void*)&bl, IA_TYPE_BOOL);
+      }
+      else
+      {
+         cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
+      }
+   }
+
+
+   ////////////////////////////////////////////////////
+   //                Quick Pointers                  //
+   ////////////////////////////////////////////////////
+
    /* IA_SELF_OBJECT */
    else if(functionName == IA_SELF_OBJECT)
    {
       /* Define the variable as the object owner */
       if(var)
       {
-         if(var->type == IA_TYPE_OBJECT)
-         {
-            var->value = (void*)objectOwner;
-         }
-         else
-         {
-            cerr << "Error: Expected object symbol, but got: " << var->type
-                 << " at " << strLine << " on script: " << fileName << endl;
-         }
+         assignValue(var, (void*)objectOwner, IA_TYPE_OBJECT);
       }
    }
 
@@ -923,15 +1007,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Define the variable as the character owner */
       if(var)
       {
-         if(var->type == IA_TYPE_CHARACTER)
-         {
-            var->value = (void*)characterOwner;
-         }
-         else
-         {
-            cerr << "Error: Expected character symbol, but got: " << var->type
-                 << " at " << strLine << " on script: " << fileName << endl;
-         }
+         assignValue(var, (void*)characterOwner, IA_TYPE_CHARACTER);
       }
    }
 
@@ -942,15 +1018,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Define the variable as the character owner */
       if(var)
       {
-         if(var->type == IA_TYPE_CHARACTER)
-         {
-            var->value = (void*)eng->PCs->getActiveCharacter();
-         }
-         else
-         {
-            cerr << "Error: Expected character symbol, but got: " << var->type
-                 << " at " << strLine << " on script: " << fileName << endl;
-         }
+         character* dude = eng->PCs->getActiveCharacter();
+         assignValue(var, (void*)dude, IA_TYPE_CHARACTER);
       }
    }
 
@@ -961,18 +1030,14 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Define the variable as the actualMap */
       if(var)
       {
-         if(var->type == IA_TYPE_MAP)
-         {
-            var->value = (void*)actualMap;
-         }
-         else
-         {
-            cerr << "Error: Expected map symbol, but got: " << var->type 
-                 << " at " << strLine << " on script: " << fileName << endl;
-         }
+         assignValue(var, actualMap, IA_TYPE_MAP);
       }
    }
 
+
+   ////////////////////////////////////////////////////
+   //              Imediate Expressions              //
+   ////////////////////////////////////////////////////
 
    /* true */
    else if(functionName == IA_TRUE)
@@ -980,16 +1045,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Define the variable as true */
       if(var)
       {
-         if(var->type == IA_TYPE_BOOL)
-         {
-            bool* v = (bool*)var->value;
-            *v = true;
-         }
-         else
-         {
-            cerr << "Error: Expected bool symbol, but got: " << var->type
-                 << " at " << strLine << " on script: " << fileName << endl;
-         }
+         bool v = true;
+         assignValue(var, (void*)&v, IA_TYPE_BOOL);
       }
    }
 
@@ -1000,16 +1057,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Define the variable as false */
       if(var)
       {
-         if(var->type == IA_TYPE_BOOL)
-         {
-            bool* v = (bool*)var->value;
-            *v = false;
-         }
-         else
-         {
-            cerr << "Error: Expected bool symbol, but got: " << var->type
-                 << " at " << strLine << " on script: " << fileName << endl;
-         }
+         bool v = false;
+         assignValue(var, (void*)&v, IA_TYPE_BOOL);
       }
    }
 

@@ -109,6 +109,12 @@ class iaScript
       iaVariable* getParameter(string& token, string strLine, 
                                string paramType, unsigned int& pos);
 
+      /*! Assign the value to the variable
+       * \param var -> pointer to a variable
+       * \param value -> pointer to the value to assign
+       * \param type -> the type of parameter AND value */
+      void assignValue(iaVariable* var, void* value, string type);
+
       /*! Evaluate a expression
        * \param var -> variable that will contain the expression result
        * \param strLine -> the line that contains the expression

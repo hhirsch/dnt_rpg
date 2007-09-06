@@ -101,7 +101,7 @@ string functionType(string s)
    if( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
        (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_USE_AT_CHARACTER) ||
        (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_TRUE) || (s == IA_FALSE) ||
-       (s == IA_MISSION_IS_ACTIVE) )
+       (s == IA_MISSION_IS_ACTIVE) || (s == IA_INVENTORY_HAVE) )
    {
       return(IA_TYPE_BOOL);
    }
