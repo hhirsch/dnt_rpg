@@ -13,6 +13,7 @@
 #include "../classes/classes.h"
 #include "../classes/weapon.h"
 #include "../classes/actions.h"
+#include "../classes/mission.h"
 #include "../etc/message3d.h"
 #include "../fight/fightSystem.h"
 #include "../gui/farso.h"
@@ -62,6 +63,8 @@ class engine
       characterList *PCs;              /**< PC's List */
 
       actionController* actionControl; /**< The action controller */
+
+      missionsController* missions;    /**< The missions controller */
 
       #ifdef REDE
          char *server;                 /**< Server to Connect \b NOTUSED */

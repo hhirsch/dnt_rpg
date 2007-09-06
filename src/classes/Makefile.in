@@ -9,9 +9,10 @@ BINDIR = ../../bin/
 ENDGUI = ../gui/
 ENDENGINE = ../engine/
 ENDFIGHT = ../fight/
+ENDIA = ../ia/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o $(ENDENGINE)personagens.o $(OBJSGUI)
-objetos = actions.o align.o barter.o classes.o defs.o feats.o inventory.o itemslot.o object.o race.o skills.o thing.o weapon.o
+objetos = actions.o align.o barter.o classes.o defs.o feats.o inventory.o itemslot.o mission.o object.o race.o skills.o thing.o weapon.o
 
 
 all: $(objetos)
@@ -46,7 +47,7 @@ feats.o: feats.cpp feats.h actions.h defs.h dices.h
 	@$(CC) $(CFLAGS) feats.cpp -o feats.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-actions.o: actions.cpp actions.h
+actions.o: actions.cpp actions.h thing.h $(ENDENGINE)character.h
 	@printf "Making actions.o... "
 	@$(CC) $(CFLAGS) actions.cpp -o actions.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -74,6 +75,11 @@ itemslot.o: itemslot.cpp itemslot.h
 barter.o: barter.cpp barter.h
 	@printf "Making barter.o... "
 	@$(CC) $(CFLAGS) barter.cpp -o barter.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+mission.o: mission.h mission.cpp $(ENDIA)iascript.h
+	@printf "Making mission.o... "
+	@$(CPP) $(CFLAGS) mission.cpp -o mission.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 weapon.o: weapon.cpp weapon.h

@@ -99,6 +99,9 @@ engine::engine()
    /* Create the fight system */
    fight = new fightSystem(msgController, particleSystem);
 
+   /* Create the missions controller */
+   missions = new missionsController(this);
+
    hour = 9.0;
    gameSun = new sun(hour , HALFFARVIEW, HALFFARVIEW);
 
@@ -147,6 +150,9 @@ engine::~engine()
 
    /* Delete message Controller */
    delete(msgController);
+
+   /* Delete missions controller */
+   delete(missions);
 
    /* Delete fight system */
    delete(fight);
@@ -1212,6 +1218,9 @@ void engine::treatScripts()
    {
       /* Treat all pending actions */
       treatPendingActions();
+
+      /* Treatm missions scripts */
+      missions->treat(actualMap);
 
       /* Treat NPCs scripts */
       int i;

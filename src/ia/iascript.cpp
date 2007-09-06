@@ -26,6 +26,8 @@ iaScript::iaScript(string scriptFile, void* usedEngine)
    actualEngine = usedEngine;
 
    context = "";
+
+   type = IASCRIPT_TYPE_DEFAULT;
 }
 
 

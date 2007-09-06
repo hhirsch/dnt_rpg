@@ -20,6 +20,9 @@ using namespace std;
 
 #define MAX_SCRIPT_LINES 8 /**< Max interpreted script lines per cycle */
 
+#define IASCRIPT_TYPE_DEFAULT   0  /**< Default type */
+#define IASCRIPT_TYPE_MISSION   1  /**< Mission type */
+
 /*! The ia Script is the script that controls the behaviour
  * of characters, objects and events on DNT. */
 class iaScript
@@ -46,8 +49,7 @@ class iaScript
       /*! run the Script to the point of a more than one cicle action,
        * that will be marked as pending or at the end of the script.
        * \param maxLines -> maxLines that will be interpreted at this
-       *                    cicle. 0 for no line limit.
-       * \return action pointer of a new pending action */
+       *                    cicle. 0 for no line limit. */
       void run(int maxLines);
 
       /*! Verify if the script is finished or not
@@ -69,6 +71,8 @@ class iaScript
       streampos lastPos;         /**< Last pos before the read */
 
       string context;            /**< The context */
+
+      int type;                  /**< Define the type if is a child */
 
       action* pendingAction;     /**< Pending Action on the script. Only
                                       will advance on script when receive

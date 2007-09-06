@@ -78,6 +78,14 @@ using namespace std;
 #define IA_MOVE_TO_CHARACTER "moveToCharacter"
 #define IA_MOVE_TO_OBJECT "moveToObject"
 
+/* Mission functions */
+/*! void missionAdd(string missionFile) */
+#define IA_MISSION_ADD  "missionAdd"
+/*! void missionComplete(string missionFile) */
+#define IA_MISSION_COMPLETE "missionComplete"
+/*! bool missionIsActive(string missionFile) */
+#define IA_MISSION_IS_ACTIVE "missionIsActive"
+
 /* Feats Functions */
 #define IA_FEAT_TOTAL "featTotal"
 #define IA_FEAT_COST  "featCost"
