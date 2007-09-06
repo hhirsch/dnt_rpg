@@ -108,7 +108,7 @@ void particleSystem::init(int total, int mode)
    next = NULL;
    previous = NULL;
    actualParticles = 0;
-   particles = (particle*) malloc(total*sizeof(particle));
+   particles = (particle*) new particle[total];
    maxParticles = total;
 
    int n;
@@ -120,8 +120,8 @@ void particleSystem::init(int total, int mode)
    drawMode =  mode;
    if(drawMode == PARTICLE_DRAW_GROUPS)
    {
-      vertexArray = (float*) malloc(total*sizeof(float)*3);
-      colorArray = (float*) malloc(total*sizeof(float)*4); 
+      vertexArray = (float*) new float[total*3];
+      colorArray = (float*) new float[total*4];
    }
    else
    {
@@ -137,12 +137,12 @@ void particleSystem::init(int total, int mode)
  ***************************************************************/
 particleSystem::~particleSystem()
 {
-   free(particles); 
+   delete []particles; 
    if(drawMode == PARTICLE_DRAW_GROUPS)
    {
-      free(vertexArray);
+      delete[] vertexArray;
       vertexArray = NULL;
-      free(colorArray);
+      delete[] colorArray;
       colorArray = NULL;
    }
    particles = NULL;
