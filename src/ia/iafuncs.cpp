@@ -90,7 +90,10 @@ bool isFunction(string s)
            (s == IA_FIGHT_EXIT) || (s == IA_CHARACTER_GET_PSYCHO) ||
            (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_SELF_OBJECT) ||
            (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
-           (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) );
+           (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) ||
+           (s == IA_MISSION_ADD) || (s == IA_MISSION_COMPLETE) ||
+           (s == IA_MISSION_IS_ACTIVE) || (s == IA_MISSION_SET_TEMP) ||
+           (s == IA_MISSION_GET_TEMP) || (s == IA_INVENTORY_HAVE) );
 }
 
 /***********************************************************************
@@ -228,26 +231,34 @@ string nextToken(string s, unsigned int& pos)
          ret += s[pos];
          pos++;
       }
-      while( (pos < s.length()) && 
-             ( ( (s[pos] != ';') && (s[pos] != ',') &&
-                 (s[pos] != '\n') && (s[pos] != '\0') && (s[pos] != ' ') &&
-                 (s[pos] != '\t') && (!isOperator(cmp)) ) ||
-               ( (first == IA_SEPARATOR_STRING) && (s[pos] != IA_SEPARATOR_STRING))
-             )
-           )
-       {
-         ret += s[pos];
-         pos++;
-         cmp = s[pos];
-      }
 
-      if( (pos < s.length()) && 
-          (first == IA_SEPARATOR_STRING) && (s[pos] == IA_SEPARATOR_STRING))
+      if( first == IA_SEPARATOR_STRING )
       {
-         ret += s[pos];
-         pos++;
+         /* Treat as a literal string */
+         while( (pos < s.length()) && (s[pos] != IA_SEPARATOR_STRING) )
+         {
+            ret += s[pos];
+            pos++;
+         }
+         /* Get the last " */
+         if(pos < s.length())
+         {
+            ret += s[pos];
+            pos++;
+         }
       }
-
+      else
+      {
+         /* Treat as an normal input */
+         while( (pos < s.length()) && (s[pos] != ';') && (s[pos] != ',') &&
+                (s[pos] != '\n') && (s[pos] != '\0') && (s[pos] != ' ') &&
+                (s[pos] != '\t') && (!isOperator(cmp)) )
+          {
+            ret += s[pos];
+            pos++;
+            cmp = s[pos];
+         }
+      }
    }
 
    return(ret);

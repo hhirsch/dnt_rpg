@@ -63,7 +63,7 @@ class engine
       characterList *PCs;              /**< PC's List */
 
       actionController* actionControl; /**< The action controller */
-
+      messageController* msgController;/**< The message controller */
       missionsController* missions;    /**< The missions controller */
 
       #ifdef REDE
@@ -333,8 +333,6 @@ class engine
       cursor* cursors;             /**< Utilized mouse cursors */
 
       modState modifState;         /**< Current modification state */
-
-      messageController* msgController;  /**< The message controller */
 
       int walkStatus;              /**< Engine Walk Status */
       GLuint destinyImage;         /**< Move Destiny Image */

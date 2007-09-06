@@ -34,6 +34,9 @@ class iaScript
       iaScript(string scriptFile, void* usedEngine);
       /*! Destructor */
       ~iaScript();
+
+      /*! Close the iaScript. A closed iaScript can't run. */
+      void close();
    
       /*! Define the owner of the script as a object
        * \param owner -> pointer to the object */

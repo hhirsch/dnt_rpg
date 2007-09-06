@@ -36,16 +36,37 @@ iaScript::iaScript(string scriptFile, void* usedEngine)
  ***********************************************************************/
 iaScript::~iaScript()
 {
-   if(file)
-   {
-      file.close();
-   }
+   close(); 
    objectOwner = NULL;
    characterOwner = NULL;
    actualMap = NULL;
-   pendingAction = NULL;
-   delete(symbols);
-   delete(jumpStack);
+}
+
+/***********************************************************************
+ *                              close                                  *
+ ***********************************************************************/
+void iaScript::close()
+{
+   if(pendingAction)
+   {
+      engine* eng = (engine*)actualEngine;
+      eng->actionControl->removeAction(pendingAction);
+      pendingAction = NULL;
+   }
+   if(file.is_open())
+   {
+      file.close();
+   }   
+   if(symbols)
+   {
+      delete(symbols);
+      symbols = NULL;
+   }
+   if(jumpStack)
+   {
+      delete(jumpStack);
+      jumpStack = NULL;
+   }
 }
 
 /***********************************************************************
@@ -426,7 +447,7 @@ void iaScript::run(int maxLines)
             done = true;
          }
 
-         if(!pendingAction)
+         if( (!pendingAction) && (symbols) )
          {
             /* Remove all temporary symbols used */
             symbols->removeTempSymbols();
@@ -479,7 +500,7 @@ iaVariable* iaScript::getParameter(string& token, string strLine,
      )
    {
       cerr << "Error: Unknow parameter " << token << " must be a " 
-           << paramType << " type"
+           << paramType << " variable type"
            << " at file " << fileName << " line " << actualLine << endl;
       return(NULL);
    }
@@ -646,7 +667,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* Mission Complete */
    else if(functionName == IA_MISSION_COMPLETE)
    {
-      /*! void missionComplete(string missionFile) */
+      /*! void missionComplete(string missionFile, int ctype) */
       iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
       if(iv)
       {
@@ -655,7 +676,24 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          mission* m = eng->missions->getCurrentMission(st);
          if(m)
          {
-            eng->missions->completeMission(m);
+            int cType = 1;
+            /* Get the cType */
+            string nt;
+            iaVariable* iav = getParameter(nt, strLine, IA_TYPE_INT, pos);
+            if(iav)
+            {
+               cType = *(int*)iav->value;
+               if(isFunction(nt))
+               {
+                  delete(iav);
+               }
+            }
+            character* dude = eng->PCs->getActiveCharacter();
+            eng->msgController->addMessage(dude->xPosition,
+                                           dude->max[1]+dude->yPosition,
+                                           dude->zPosition,
+                                           "Mission Completed!");
+            eng->missions->completeMission(m, cType);
          }
          else
          {
@@ -1248,7 +1286,7 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                if(ftype != IA_TYPE_VOID)
                {
                   varStack[varPos] = new iaVariable(ftype, token);
-                  callFunction(varStack[varPos], strLine, token, pos);
+                  callFunction(varStack[varPos], postFix, token, pos);
                   varPos++;
                }
                else

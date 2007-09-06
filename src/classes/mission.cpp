@@ -127,13 +127,17 @@ void missionsController::addNewMission(string scriptFile)
 /************************************************************
  *                      completeMission                     *
  ************************************************************/
-void missionsController::completeMission(mission* m)
+void missionsController::completeMission(mission* m, int type)
 {
    /* First, remove from the current list, without deleting it. */
    removeFromCurrent(m, false);
 
    /* So, insert at the completed list */
    addCompleted(m);
+
+   /* Close the script, since it won't run anymore */
+   m->close();
+   m->completed = type;
 }
 
 /************************************************************
@@ -245,16 +249,10 @@ void missionsController::treat(Map* acMap)
       m->run(MAX_SCRIPT_LINES);
       m = m->next;
 
-      /* Verify if finished */
+      /* Verify if finished the script file. */
       if(m->previous->finished())
       {
-         m->previous->completed = MISSION_COMPLETION_FINISHED;
-      }
-
-      /* Verify completion */
-      if(m->previous->completed != MISSION_COMPLETION_FALSE)
-      {
-         completeMission(m->previous);
+         completeMission(m->previous, MISSION_COMPLETION_FINISHED);
       }
    }
 }

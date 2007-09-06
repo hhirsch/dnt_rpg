@@ -99,8 +99,14 @@ engine::engine()
    /* Create the fight system */
    fight = new fightSystem(msgController, particleSystem);
 
+   /* Create the action Controller */
+   actionControl = new actionController();
+
    /* Create the missions controller */
    missions = new missionsController(this);
+
+   /*  FIXME remove from here the addMission */
+   missions->addNewMission("../data/missions/tutorial/mission1.dsl");
 
    hour = 9.0;
    gameSun = new sun(hour , HALFFARVIEW, HALFFARVIEW);
@@ -109,8 +115,6 @@ engine::engine()
 
    destinyVariation = -2.0;
    lastKey = 0;
-
-   actionControl = new actionController();
 
    /* Colors */
    int i;

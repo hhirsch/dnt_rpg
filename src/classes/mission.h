@@ -72,7 +72,7 @@ class missionsController
 
       /*! Complete the mission (remove from current and put at completed)
        * \param m -> mission completed. */
-      void completeMission(mission* m);
+      void completeMission(mission* m, int type);
 
       /*! Search for a mission on the current list
        * \param scriptFile -> filename of mission to find
