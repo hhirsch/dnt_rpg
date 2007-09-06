@@ -204,6 +204,24 @@ void missionsController::removeFromCompleted(mission* m)
 }
 
 /************************************************************
+ *                    getCurrentMission                     *
+ ************************************************************/
+mission* missionsController::getCurrentMission(string scriptFile)
+{
+   int i;
+   mission* m = current;
+   for(i = 0; i < totalCurrent; i++)
+   {
+      if(m->fileName == scriptFile)
+      {
+         return(m);
+      }
+      m = m->next;
+   }
+   return(NULL);
+}
+
+/************************************************************
  *                           Treat                          *
  ************************************************************/
 void missionsController::treat(Map* acMap)

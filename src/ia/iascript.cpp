@@ -579,6 +579,83 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
 
+   /* Mission Add */
+   else if(functionName == IA_MISSION_ADD)
+   {
+      /*! void missionAdd(string missionFile) */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         string st = *(string*)iv->value;
+         /* Add the mission to the engine */
+         eng->missions->addNewMission(st);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+   }
+
+
+   /* Mission Complete */
+   else if(functionName == IA_MISSION_COMPLETE)
+   {
+      /*! void missionComplete(string missionFile) */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         string st = *(string*)iv->value;
+         /* Add the mission to the engine */
+         mission* m = eng->missions->getCurrentMission(st);
+         if(m)
+         {
+            eng->missions->completeMission(m);
+         }
+         else
+         {
+            cerr << "Error: No current mission " << st 
+                 << " at " << strLine << " on script: " << fileName << endl;
+         }
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+   }
+
+
+   /* Mission is Active */
+   else if(functionName == IA_MISSION_IS_ACTIVE)
+   {
+      /*! bool missionIsActive(string missionFile) */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         string st = *(string*)iv->value;
+         /* Add the mission to the engine */
+         mission* m = eng->missions->getCurrentMission(st);
+
+         if( (var) && (var->value == IA_TYPE_BOOL))
+         {
+            (*(bool*)var->value) = (m != NULL);
+         }
+         else if(var)
+         {
+            cerr << "Error: Expected " << IA_TYPE_BOOL
+                 << " variable, but got " << var->type 
+                 << " at line " << actualLine << " file "
+                 << fileName << endl;
+         }
+
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+   }
+
+
+
    /* Feat Total */
    else if(functionName == IA_FEAT_TOTAL)
    {

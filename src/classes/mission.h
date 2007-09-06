@@ -74,6 +74,11 @@ class missionsController
        * \param m -> mission completed. */
       void completeMission(mission* m);
 
+      /*! Search for a mission on the current list
+       * \param scriptFile -> filename of mission to find
+       * \return -> pointer to the mission */
+      mission* getCurrentMission(string scriptFile);
+
       /*! Treat all current missions scripts
        * \param acMap -> pointer to current opened map */
       void treat(Map* acMap);
