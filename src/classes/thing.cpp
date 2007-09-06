@@ -27,6 +27,7 @@ thing::thing()
    xPosition = 0;
    yPosition = 0;
    zPosition = 0;
+   xp = 0;
    dead = false;
    walk_interval = 37.5 * WALK_ACTUALIZATION; //default value, if not
                                               //defined at the def file.

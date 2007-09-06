@@ -98,6 +98,8 @@ using namespace std;
 #define IA_MISSION_SET_TEMP "missionSetTemp"
 /*! int missionGetTemp(string missionFile, int tmpNumber) */
 #define IA_MISSION_GET_TEMP "missionGetTemp"
+/*! void missionSetXp(string missionFile, int xpValue) */
+#define IA_MISSION_SET_XP "missionSetXp"
 
 ////////////////////////////////////////////////////
 //                 Feats Functions                //

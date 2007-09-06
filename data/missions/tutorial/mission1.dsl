@@ -11,6 +11,10 @@ script()
    string missionFile
    missionFile = "../data/missions/tutorial/mission1.dsl"
 
+   int xpValue
+   xpValue = 100
+   missionSetXp(missionFile, xpValue)
+
    while(true)
       if(inventoryHave(ACTIVE_CHARACTER,objFile))
          int compType

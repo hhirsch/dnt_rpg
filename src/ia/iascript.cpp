@@ -688,11 +688,19 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                   delete(iav);
                }
             }
+
+            /*! Create a "completed" message on the world */
             character* dude = eng->PCs->getActiveCharacter();
             eng->msgController->addMessage(dude->xPosition,
                                            dude->max[1]+dude->yPosition,
                                            dude->zPosition,
                                            "Mission Completed!");
+            char vstr[20];
+            sprintf(vstr,"%d XP",m->getXp()); 
+            eng->msgController->addMessage(dude->xPosition,
+                                           dude->max[1]+dude->yPosition-5,
+                                           dude->zPosition, vstr);
+            /*! Do the Completion */
             eng->missions->completeMission(m, cType);
          }
          else
@@ -786,7 +794,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
-
    /* mission get temp */
    else if(functionName == IA_MISSION_GET_TEMP)
    {
@@ -824,6 +831,51 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          int i = m->getTempFlag(tmpNumber);
          assignValue(var, (void*)&i, IA_TYPE_INT);
+      }
+      else
+      {
+         cerr << "Error: No current mission " << missionFile 
+              << " at " << strLine << " on script: " << fileName << endl;
+      }
+   }
+
+
+   /* mission set XP */
+   else if(functionName == IA_MISSION_SET_XP)
+   {
+      mission* m = NULL;
+      int xpValue = 0;
+      string missionFile = "";
+      /* void missionSetXp(string missionFile, int xpValue) */
+
+      /* Get mission */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         missionFile = *(string*)iv->value;
+         /* get the mission */
+         m = eng->missions->getCurrentMission(missionFile);
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* get xp value */
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv)
+      {
+         xpValue = *(int*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Run the function */
+      if(m)
+      {
+         m->setXp(xpValue);
       }
       else
       {

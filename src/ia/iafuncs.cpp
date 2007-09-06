@@ -93,7 +93,8 @@ bool isFunction(string s)
            (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) ||
            (s == IA_MISSION_ADD) || (s == IA_MISSION_COMPLETE) ||
            (s == IA_MISSION_IS_ACTIVE) || (s == IA_MISSION_SET_TEMP) ||
-           (s == IA_MISSION_GET_TEMP) || (s == IA_INVENTORY_HAVE) );
+           (s == IA_MISSION_GET_TEMP) || (s == IA_MISSION_SET_XP) ||
+           (s == IA_INVENTORY_HAVE) );
 }
 
 /***********************************************************************

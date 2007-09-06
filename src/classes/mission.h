@@ -5,6 +5,7 @@
 
 #define MISSION_TEMP_FLAGS  5    /**< Number of temp flags on missions */
 
+#define MISSION_COMPLETION_FAILED   -2
 #define MISSION_COMPLETION_FINISHED -1
 #define MISSION_COMPLETION_FALSE     0
 
@@ -40,6 +41,10 @@ class mission: public iaScript
        * \return xp */
       int getXp();
 
+      /*! Set the xp value of the function
+       * \param xp -> new xp value */
+      void setXp(int xp);
+
       /*! Define the controller as friend */
       friend class missionsController;
 
@@ -49,8 +54,7 @@ class mission: public iaScript
 
       int xpValue;         /**< XP received on complete the mission */
 
-      int completed;       /**< 0 if isn't completed, type of completion, if
-                                is completed by any way. */
+      int completed;       /**< 0 if isn't completed. < 0 means failed. > 0 success */
 
       int tempFlag[MISSION_TEMP_FLAGS];  /**< Temporary flags to controll
                                                the mission at script. */

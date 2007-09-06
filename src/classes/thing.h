@@ -41,6 +41,7 @@ class thing
       float zPosition;        /**< Character's Z Position */
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
+      int xp;                 /**< The experience of the thing */
       float cost;             /**< Cost Value */
       float walk_interval;    /**< The interval of walking (for multiply per
                                    WALK_ACTUALIZATION value. This is for 

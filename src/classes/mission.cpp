@@ -1,4 +1,5 @@
 #include "mission.h"
+#include "../engine/dccnit.h"
 
 /************************************************************
  *                        Constructor                       *
@@ -64,6 +65,13 @@ int mission::getXp()
    return(xpValue);
 }
 
+/************************************************************
+ *                           setXp                          *
+ ************************************************************/
+void mission::setXp(int xp)
+{
+   xpValue = xp;
+}
 ///////////////////////////////////////////////////////////////////////
 //                                                                   //
 //                        MISSIONS CONTROLLER                        //
@@ -138,6 +146,20 @@ void missionsController::completeMission(mission* m, int type)
    /* Close the script, since it won't run anymore */
    m->close();
    m->completed = type;
+
+   /* type < 0 means failed. > 0 success */
+   if(type > 0)
+   {
+      engine* eng = (engine*)pEngine;
+      character* dude = eng->PCs->first->next;
+      /* Add XP to all PC characters */
+      while(dude != eng->PCs->first)
+      {
+         dude->xp += m->xpValue;
+         dude = dude->next;
+      }
+      
+   }
 }
 
 /************************************************************
