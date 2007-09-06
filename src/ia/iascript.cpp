@@ -1046,6 +1046,11 @@ void iaScript::evaluateExpression(iaVariable* var, string strLine,
                {
                   /* Create the string value on the stack */
                   varStack[varPos] = new iaVariable(IA_TYPE_STRING, "name");
+
+                  /* remove the first and the last " */
+                  token.erase(0,1);
+                  token.erase(token.length()-1,1);
+
                   *(string*)varStack[varPos]->value = token;
                   varPos++;
                }
