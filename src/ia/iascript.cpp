@@ -691,14 +691,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
 
             /*! Create a "completed" message on the world */
             character* dude = eng->PCs->getActiveCharacter();
+            char vstr[20];
+            sprintf(vstr,"Mission Completed: %d XP!",m->getXp()); 
             eng->msgController->addMessage(dude->xPosition,
                                            dude->max[1]+dude->yPosition,
-                                           dude->zPosition,
-                                           "Mission Completed!");
-            char vstr[20];
-            sprintf(vstr,"%d XP",m->getXp()); 
-            eng->msgController->addMessage(dude->xPosition,
-                                           dude->max[1]+dude->yPosition-5,
                                            dude->zPosition, vstr);
             /*! Do the Completion */
             eng->missions->completeMission(m, cType);

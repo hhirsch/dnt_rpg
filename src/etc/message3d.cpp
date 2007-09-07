@@ -16,11 +16,11 @@ message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg)
    live = 0;
    message = msg;
 
-   int size = message.length()*font_incCP();
-   halfSize = (size / 5.0);
+   int size = message.length()*(font_incCP()+1);
+   halfSize = (size / 2.0);
 
    /* Define the font and sizes */
-   defineFont(FHELVETICA, ALIGN_LEFT, 1);
+   defineFont(FFARSO, ALIGN_LEFT, 1);
    color_Set(155,0,0);
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        smallestPowerOfTwo(size),
@@ -130,7 +130,7 @@ void messageController::draw(GLdouble modelView[16],
       dist = sqrt( (camX-msg->posX)*(camX-msg->posX) +
                    (camY-msg->posY)*(camY-msg->posY) +
                    (camZ-msg->posZ)*(camZ-msg->posZ) );
-      scale = dist / 200.0;
+      scale = dist / 500.0;
 
       /* Draw */
       glColor3f(1.0, 1.0, 1.0);
@@ -145,13 +145,13 @@ void messageController::draw(GLdouble modelView[16],
          glVertex3f(msg->halfSize*modelView[0]*scale,0.0f,
                     msg->halfSize*modelView[8]*scale);
          glTexCoord2f(1,0);
-         glVertex3f(msg->halfSize*modelView[0]*scale + scale*8*modelView[1], 
-                    scale*8*modelView[5] + scale*msg->halfSize*modelView[4], 
-                    scale*msg->halfSize*modelView[8] + scale*8*modelView[9]);
+         glVertex3f(msg->halfSize*modelView[0]*scale + scale*16*modelView[1], 
+                    scale*16*modelView[5] + scale*msg->halfSize*modelView[4], 
+                    scale*msg->halfSize*modelView[8] + scale*16*modelView[9]);
          glTexCoord2f(0,0);
-         glVertex3f(-msg->halfSize*modelView[0]*scale + scale*8*modelView[1], 
-                    scale*8*modelView[5] - msg->halfSize*modelView[4]*scale,
-                    -msg->halfSize*modelView[8]*scale + 8*modelView[9]*scale);
+         glVertex3f(-msg->halfSize*modelView[0]*scale + scale*16*modelView[1], 
+                    scale*16*modelView[5] - msg->halfSize*modelView[4]*scale,
+                    -msg->halfSize*modelView[8]*scale + 16*modelView[9]*scale);
        glEnd();
       glPopMatrix();
       msg->live++;
