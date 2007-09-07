@@ -24,6 +24,11 @@ void fightGroup::empty()
    /* mark with NULL all pointers */
    for(i=0;i<FIGHT_MAX_CHARACTERS_PER_GROUP;i++)
    {
+      if(characters[i] != NULL)
+      {
+         /* Remove the enemy status and put as neutral */
+         characters[i]->psychoState = PSYCHO_NEUTRAL;
+      }
       characters[i] = NULL;
    }
    actualCharacters = 0;

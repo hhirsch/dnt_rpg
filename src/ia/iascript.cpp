@@ -927,6 +927,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* fight enter */
    else if(functionName == IA_FIGHT_ENTER)
    {
+      /* syntax: void fightEnter() */
       /* Enter the battle mode, with the character owner and
        * the PC's characters. */
       if(!var)
@@ -945,9 +946,16 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* fight_exit */
    else if(functionName == IA_FIGHT_EXIT)
    {
-      //TODO
-      //something that will remove the hostile state of all battle characters.
-      //eng->exitBattleMode();
+      /* syntax void fightExit() */
+      if(!var)
+      {
+         eng->exitBattleMode();
+      }
+      else
+      {
+         cerr << "Error: " << IA_FIGHT_EXIT << " don't return any value!" 
+              << " at " << strLine << " on script: " << fileName << endl;
+      }
    }
 
 

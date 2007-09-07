@@ -216,6 +216,11 @@ class engine
        ***************************************************************/
       void enterBattleMode(bool surprisePC);
 
+      /*!
+       **************************************************************
+       * Exit the battle (puting all enemys as neutrals)
+       **************************************************************/
+      void exitBattleMode();
 
    private:
 

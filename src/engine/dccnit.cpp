@@ -1116,6 +1116,14 @@ bool engine::rangeAction(GLfloat posX, GLfloat posZ,
    return(true);
 }
 
+/*********************************************************************
+ *                           exitBattleMode                          *
+ *********************************************************************/
+void engine::exitBattleMode()
+{
+   fight->empty();
+   engineMode = ENGINE_MODE_REAL_TIME;
+}
 
 /*********************************************************************
  *                          enterBattleMode                          *
@@ -1223,7 +1231,7 @@ void engine::treatScripts()
       /* Treat all pending actions */
       treatPendingActions();
 
-      /* Treatm missions scripts */
+      /* Treat missions scripts */
       missions->treat(actualMap);
 
       /* Treat NPCs scripts */
