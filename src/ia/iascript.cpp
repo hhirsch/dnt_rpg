@@ -695,7 +695,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             sprintf(vstr,"Mission Completed: %d XP!",m->getXp()); 
             eng->msgController->addMessage(dude->xPosition,
                                            dude->max[1]+dude->yPosition,
-                                           dude->zPosition, vstr);
+                                           dude->zPosition, vstr,
+                                           0.94, 0.8, 0.0);
             /*! Do the Completion */
             eng->missions->completeMission(m, cType);
          }

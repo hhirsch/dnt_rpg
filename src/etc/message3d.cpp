@@ -8,6 +8,24 @@
  ***********************************************************/
 message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg)
 {
+   init(x, y, z, msg, 1.0,1.0,1.0);
+}
+
+/***********************************************************
+ *                       Constructor                       *
+ ***********************************************************/
+message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg,
+                     GLfloat R, GLfloat G, GLfloat B)
+{
+   init(x,y,z,msg, R,G,B);
+}
+
+/***********************************************************
+ *                           init                          *
+ ***********************************************************/
+void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
+                     GLfloat R, GLfloat G, GLfloat B)
+{
    previous = NULL;
    next = NULL;
    posX = x;
@@ -22,13 +40,14 @@ message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg)
    /* Define the font and sizes */
    defineFont(FFARSO, ALIGN_LEFT, 1);
    color_Alpha(0);
-   color_Set(255,255,255);
+   color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255));
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        smallestPowerOfTwo(size),
                        32,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    rectangle_Fill(s, 0, 0, smallestPowerOfTwo(size)-1, 32-1);
    color_Alpha(255);
+   
    write(s, 0, 0, message.c_str());
 
    setTextureRGBA(s, &messageTexture);
@@ -73,6 +92,30 @@ void messageController::addMessage(GLfloat x, GLfloat y, GLfloat z, string msg)
    if(!msg.empty())
    {
       message3d* m = new message3d(x,y,z,msg);
+      addMessage(m);
+   }
+}
+
+/***********************************************************
+ *                           add                           *
+ ***********************************************************/
+void messageController::addMessage(GLfloat x, GLfloat y, GLfloat z, string msg,
+                                   GLfloat R, GLfloat G, GLfloat B)
+{
+   if(!msg.empty())
+   {
+      message3d* m = new message3d(x,y,z,msg, R, G, B);
+      addMessage(m);
+   }
+}
+
+/***********************************************************
+ *                           add                           *
+ ***********************************************************/
+void messageController::addMessage(message3d* m)
+{
+   if(m)
+   {
       if(first)
       {
          m->next = first;

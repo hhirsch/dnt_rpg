@@ -246,13 +246,17 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
              brief += "|"+language.FEAT_CRITICAL_MISS ;
              controller->addMessage(attacker.xPosition,
                                     attacker.yPosition+attacker.max[1],
-                                    attacker.zPosition,language.FEAT_CRITICAL_MISS);
+                                    attacker.zPosition,
+                                    language.FEAT_CRITICAL_MISS,
+                                    0.92,0.41,0.14);
              //TODO lose weapon;
          }
          else
          {
-            controller->addMessage(attacker.xPosition,attacker.yPosition+attacker.max[1],
-                                   attacker.zPosition,language.FEAT_MISS);
+            controller->addMessage(attacker.xPosition,
+                                   attacker.yPosition+attacker.max[1],
+                                   attacker.zPosition,language.FEAT_MISS,
+                                   0.92,0.41,0.14);
          }
          return(true);
       }
@@ -304,11 +308,13 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
           /* Show critical hit */
           controller->addMessage(attacker.xPosition,
                                  attacker.yPosition+attacker.max[1],
-                                 attacker.zPosition,language.FEAT_CRITICAL_HIT);
+                                 attacker.zPosition,language.FEAT_CRITICAL_HIT,
+                                 0.01,0.04,0.52);
       }
       /* Show Damage */
       controller->addMessage(target.xPosition, target.yPosition + target.max[1],
-                             target.zPosition, texto);
+                             target.zPosition, texto,
+                             0.4, 0.01,0.03);
 
       /* Add Blood */
       GLfloat cs = cos(deg2Rad(target.orientation));

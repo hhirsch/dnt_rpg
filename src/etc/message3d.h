@@ -20,6 +20,16 @@ class message3d
        * \param z -> z position
        * \param msg -> message to show */
       message3d(GLfloat x, GLfloat y, GLfloat z, string msg);
+      /*! Constructor
+       * \param x -> x position
+       * \param y -> y position
+       * \param z -> z position
+       * \param msg -> message to show
+       * \param R -> red color [0..1]
+       * \param G -> green color [0..1]
+       * \param B -> blue color [0..1]*/
+      message3d(GLfloat x, GLfloat y, GLfloat z, string msg,
+                GLfloat R, GLfloat G, GLfloat B);
       /*! Destructor */
       ~message3d();
 
@@ -27,6 +37,19 @@ class message3d
       friend class messageController;
 
    protected:
+      /*! Init structs 
+       * \param x -> x position
+       * \param y -> y position
+       * \param z -> z position
+       * \param msg -> message to show
+       * \param R -> red color [0..1]
+       * \param G -> green color [0..1]
+       * \param B -> blue color [0..1]*/
+      void init(GLfloat x, GLfloat y, GLfloat z, string msg,
+                GLfloat R, GLfloat G, GLfloat B);
+
+
+
       GLfloat posX,          /**< X position */
               posY,          /**< Y position */
               posZ;          /**< Z position */
@@ -62,10 +85,26 @@ class messageController
        * \param msg -> message to show */
       void addMessage(GLfloat x, GLfloat y, GLfloat z, string msg);
 
+      /*! Add a message
+       * \param x -> x position
+       * \param y -> y position
+       * \param z -> z position
+       * \param msg -> message to show
+       * \param R -> red color [0..1]
+       * \param G -> green color [0..1]
+       * \param B -> blue color [0..1]*/
+      void addMessage(GLfloat x, GLfloat y, GLfloat z, string msg,
+                      GLfloat R, GLfloat G, GLfloat B);
+
 
    protected:
-      /*! Remove message from controller */
+      /*! Remove message from controller
+       * \param msg -> pointer to the message to remove */
       void removeMessage(message3d* msg);
+
+      /*! Add a message to the controller
+       * \param m -> pointer to the message to add */
+      void addMessage(message3d* m);
 
       message3d* first;    /**< The first message on the list */
       int total;           /**< Total messages on the list */
