@@ -11,7 +11,14 @@
  ***************************************************************/
 fightGroup::fightGroup()
 {
-   empty();
+   int i;
+
+   /* mark with NULL all pointers */
+   for(i=0;i<FIGHT_MAX_CHARACTERS_PER_GROUP;i++)
+   {
+      characters[i] = NULL;
+   }
+   actualCharacters = 0;
 }
 
 /***************************************************************
