@@ -21,11 +21,14 @@ message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg)
 
    /* Define the font and sizes */
    defineFont(FFARSO, ALIGN_LEFT, 1);
-   color_Set(155,0,0);
+   color_Alpha(0);
+   color_Set(255,255,255);
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        smallestPowerOfTwo(size),
                        32,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+   rectangle_Fill(s, 0, 0, smallestPowerOfTwo(size)-1, 32-1);
+   color_Alpha(255);
    write(s, 0, 0, message.c_str());
 
    setTextureRGBA(s, &messageTexture);
@@ -121,6 +124,8 @@ void messageController::draw(GLdouble modelView[16],
    GLfloat scale = 1.0;
    GLfloat dist = 0;
 
+   glDisable(GL_LIGHTING);
+   glDisable(GL_FOG);
    glEnable(GL_TEXTURE_2D);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_BLEND);
@@ -130,7 +135,7 @@ void messageController::draw(GLdouble modelView[16],
       dist = sqrt( (camX-msg->posX)*(camX-msg->posX) +
                    (camY-msg->posY)*(camY-msg->posY) +
                    (camZ-msg->posZ)*(camZ-msg->posZ) );
-      scale = dist / 500.0;
+      scale = dist / 400.0;
 
       /* Draw */
       glColor3f(1.0, 1.0, 1.0);
@@ -166,6 +171,8 @@ void messageController::draw(GLdouble modelView[16],
    }
    glDisable(GL_BLEND);
    glDisable(GL_TEXTURE_2D);
+   glEnable(GL_LIGHTING);
+   glEnable(GL_FOG);
 }
 
 

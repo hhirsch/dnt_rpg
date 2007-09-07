@@ -11,7 +11,7 @@
 int R;  /**< Active Red color */
 int G;  /**< Active Green Color */
 int B;  /**< Active Blue Color */
-
+int A;  /**< Active Alpha Color */
 
 /******************************************************************
  *                            color_Set                           *
@@ -21,6 +21,14 @@ void color_Set(Uint8 Ri, Uint8 Gi, Uint8 Bi)
    R = Ri;
    G = Gi;
    B = Bi;
+}
+
+/******************************************************************
+ *                           color_Alpha                          *
+ ******************************************************************/
+void color_Alpha(Uint8 Ai)
+{
+   A = Ai;
 }
 
 /******************************************************************
@@ -82,7 +90,7 @@ void pixel_Set(SDL_Surface* screen, int x, int y,
  ******************************************************************/
 void pixel_Set(SDL_Surface *screen, int x, int y)
 {
-    Uint32 color = SDL_MapRGB(screen->format, R, G, B);
+    Uint32 color = SDL_MapRGBA(screen->format, R, G, B, A);
 
     if((x>screen->w-1) || (y>screen->h-1) || (x<0) || (y<0))
        return;
@@ -233,7 +241,7 @@ void rectangle_Fill(SDL_Surface *screen, int x1, int y1, int x2, int y2)
    ret.y = y1;
    ret.w = (x2 - x1)+1;
    ret.h = (y2 - y1)+1;
-   Uint32 cor = SDL_MapRGB(screen->format,R,G,B);
+   Uint32 cor = SDL_MapRGBA(screen->format,R,G,B,A);
    if ( SDL_MUSTLOCK(screen) ) 
    {
         if ( SDL_LockSurface(screen) < 0 ) 

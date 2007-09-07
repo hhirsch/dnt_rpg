@@ -23,6 +23,10 @@
  * \param Bi -> Blue, from 0 to 255 */
 void color_Set(Uint8 Ri, Uint8 Gi, Uint8 Bi);
 
+/*! Define the active alpha
+ * \para, Ai -> Alpha, from 0 to 255 */
+void color_Alpha(Uint8 Ai);
+
 /*! Gets the Active Color
  * \param Ri -> Red
  * \param Gi -> Green
