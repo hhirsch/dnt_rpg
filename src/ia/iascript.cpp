@@ -148,7 +148,9 @@ void iaScript::run(int maxLines)
    bool done = false; /* Will be done when finish the file, 
                          or at pending action */
    string strBuffer, token;
+   string postFix;
    unsigned int pos = 0;
+   unsigned int p = 0;
 
    int lines = 0;
 
@@ -409,9 +411,9 @@ void iaScript::run(int maxLines)
                   else if(isFunction(token))
                   {
                      /* The token is a function */
-                     string postFix = toPostFix(strBuffer);
+                     postFix = toPostFix(strBuffer);
                      /* Get the position after the function token */
-                     unsigned int p = 0;
+                     p = 0;
                      nextToken(postFix,p);
                      callFunction(NULL, postFix, token, p);
                   }
@@ -678,7 +680,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          {
             int cType = 1;
             /* Get the cType */
-            string nt;
+            string nt = "";
             iaVariable* iav = getParameter(nt, strLine, IA_TYPE_INT, pos);
             if(iav)
             {
@@ -688,10 +690,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                   delete(iav);
                }
             }
-
             /*! Create a "completed" message on the world */
             character* dude = eng->PCs->getActiveCharacter();
-            char vstr[20];
+            char vstr[200];
             sprintf(vstr,"Mission Completed: %d XP!",m->getXp()); 
             eng->msgController->addMessage(dude->xPosition,
                                            dude->max[1]+dude->yPosition,
