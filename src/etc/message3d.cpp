@@ -38,7 +38,7 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    halfSize = (size / 2.0);
 
    /* Define the font and sizes */
-   defineFont(FFARSO, ALIGN_LEFT, 1);
+   defineFont(FTIMES, ALIGN_LEFT, 1);
    color_Alpha(0);
    color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255));
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
@@ -178,7 +178,7 @@ void messageController::draw(GLdouble modelView[16],
       dist = sqrt( (camX-msg->posX)*(camX-msg->posX) +
                    (camY-msg->posY)*(camY-msg->posY) +
                    (camZ-msg->posZ)*(camZ-msg->posZ) );
-      scale = dist / 400.0;
+      scale = dist / 500.0;
 
       /* Draw */
       glColor3f(1.0, 1.0, 1.0);
