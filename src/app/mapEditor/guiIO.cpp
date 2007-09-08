@@ -502,7 +502,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() -
                                        4.0 * sin(deg2Rad(gameCamera.getPhi())),
-                                       gameCamera.getCenterY(),
+                                       gameCamera.getCenterY()-30,
                                        gameCamera.getCenterZ() - 
                                        4.0 * cos(deg2Rad(gameCamera.getPhi())), 
                                        0.0);
@@ -512,7 +512,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() +
                                        4.0 * sin(deg2Rad(gameCamera.getPhi())),
-                                       gameCamera.getCenterY(),
+                                       gameCamera.getCenterY()-30,
                                        gameCamera.getCenterZ() + 
                                        4.0 * cos(deg2Rad(gameCamera.getPhi())), 
                                        0.0);
@@ -522,7 +522,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() -
                             4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
-                                      gameCamera.getCenterY(),
+                                      gameCamera.getCenterY()-30,
                                       gameCamera.getCenterZ() - 
                             4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                        0.0);
@@ -532,7 +532,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          {
             gameCamera.actualizeCamera(gameCamera.getCenterX() +
                            4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
-                                     gameCamera.getCenterY(),
+                                     gameCamera.getCenterY()-30,
                                      gameCamera.getCenterZ() +
                            4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                      0.0);
