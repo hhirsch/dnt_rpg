@@ -57,6 +57,7 @@ int main(int argc, char **argv)
              glDisable(GL_LIGHTING);
              Engine->fadeOutTexture(tituloID,0,0,799,599);
              Engine->LoadMap("../data/mapas/teste1.map",0);
+             //Engine->LoadMap("../data/mapas/tutorial/temple.map",0);
           }
        }
        
@@ -97,7 +98,7 @@ int main(int argc, char **argv)
          }
          reloadMusic = true;
          glDisable(GL_LIGHTING);
-	 glDisable(GL_FOG);
+	      glDisable(GL_FOG);
          Engine->fadeInTexture(tituloID,0,0,799,599);
          result = Engine->InitialScreen(estado,tituloID,reloadMusic);
       }

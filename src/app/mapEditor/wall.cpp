@@ -227,10 +227,10 @@ void wallController::doWall(bool X, bool Z, bool full)
          actualWall->x2 = mX;
          if(limitSquare)
          {
-            float cmp = ((int)(actualWall->z1) / SQUARE_SIZE)*SQUARE_SIZE;
-            actualWall->x1 = ((int)round((actualWall->x1) / SQUARE_SIZE))*SQUARE_SIZE;
-            actualWall->x2 = ((int)round((actualWall->x2) / SQUARE_SIZE))*SQUARE_SIZE;
-            actualWall->z1 = ((int)round((actualWall->z1 / SQUARE_SIZE)))*SQUARE_SIZE;
+            float cmp = ((int)(actualWall->z1) / actualMap->squareSize())*actualMap->squareSize();
+            actualWall->x1 = ((int)round((actualWall->x1) / actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->x2 = ((int)round((actualWall->x2) / actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->z1 = ((int)round((actualWall->z1 / actualMap->squareSize())))*actualMap->squareSize();
             if(cmp < actualWall->z1)
             {
                if(full)
@@ -253,10 +253,14 @@ void wallController::doWall(bool X, bool Z, bool full)
          actualWall->z2 = mZ;
          if(limitSquare)
          {
-            float cmp = ((int)(actualWall->x1) / SQUARE_SIZE)*SQUARE_SIZE;
-            actualWall->z1 = ((int)round((actualWall->z1) / SQUARE_SIZE))*SQUARE_SIZE;
-            actualWall->z2 = ((int)round((actualWall->z2) / SQUARE_SIZE))*SQUARE_SIZE;
-            actualWall->x1 = ((int)round((actualWall->x1 / SQUARE_SIZE)))*SQUARE_SIZE;
+            float cmp = ((int)(actualWall->x1) / actualMap->squareSize()) 
+                         * actualMap->squareSize();
+            actualWall->z1 = ((int)round((actualWall->z1) / actualMap->squareSize()))
+                              * actualMap->squareSize();
+            actualWall->z2 = ((int)round((actualWall->z2) / actualMap->squareSize()))
+                              * actualMap->squareSize();
+            actualWall->x1 = ((int)round((actualWall->x1 / actualMap->squareSize())))
+                             * actualMap->squareSize();
             if(cmp < actualWall->x1)
             {
                if(full)

@@ -57,7 +57,8 @@ void objects::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       {
          insertObject(mouseX, mouseZ, obstacleOrientation, actualMap, 
                       actualObstacle, 
-                      (int)(mouseX / SQUARE_SIZE), (int)(mouseZ / SQUARE_SIZE));
+                      (int)(mouseX / actualMap->squareSize()), 
+                      (int)(mouseZ / actualMap->squareSize()));
          while(mButton & SDL_BUTTON(1))
          {
             //Wait for Mouse Button Release

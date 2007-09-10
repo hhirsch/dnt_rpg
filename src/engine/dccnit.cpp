@@ -432,8 +432,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
            per->zPosition = posZ;
            per->yPosition = actualMap->getHeight(posX, posZ);
            /* Define Occuped Square */
-           int posX =(int)floor(per->xPosition / SQUARE_SIZE);
-           int posZ =(int)floor(per->zPosition / SQUARE_SIZE);
+           int posX =(int)floor(per->xPosition / actualMap->squareSize());
+           int posZ =(int)floor(per->zPosition / actualMap->squareSize());
            per->ocupaQuad = actualMap->relativeSquare(posX,posZ);
          }
          fclose(arq);
@@ -1235,17 +1235,20 @@ void engine::treatScripts()
       missions->treat(actualMap);
 
       /* Treat NPCs scripts */
-      int i;
-      character* npc = NPCs->first;
-      iaScript* script;
-      for(i=0; i < NPCs->getTotal(); i++)
+      if(NPCs)
       {
-         npc = npc->next;
-         script = (iaScript*) npc->getGeneralScript();
-         if( (script) && (npc->isAlive()))
+         int i;
+         character* npc = NPCs->first;
+         iaScript* script;
+         for(i=0; i < NPCs->getTotal(); i++)
          {
-            script->defineMap(actualMap);
-            script->run(MAX_SCRIPT_LINES);
+            npc = npc->next;
+            script = (iaScript*) npc->getGeneralScript();
+            if( (script) && (npc->isAlive()))
+            {
+               script->defineMap(actualMap);
+               script->run(MAX_SCRIPT_LINES);
+            }
          }
       }
    }
@@ -1302,8 +1305,8 @@ void engine::treatPendingActions()
                   else
                   {
                      /* Define New Occuped Square */
-                     int posX =(int)floor(actor->xPosition / SQUARE_SIZE);
-                     int posZ =(int)floor(actor->zPosition / SQUARE_SIZE);
+                     int posX =(int)floor(actor->xPosition / actualMap->squareSize());
+                     int posZ =(int)floor(actor->zPosition / actualMap->squareSize());
                      actor->ocupaQuad = actualMap->relativeSquare(posX,posZ);
    
                      /* Define New Height */
@@ -1493,8 +1496,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
    minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
 
    int qx, qz;
-   qx = (int)xReal / SQUARE_SIZE;
-   qz = (int)zReal / SQUARE_SIZE;
+   qx = (int)xReal / actualMap->squareSize();
+   qz = (int)zReal / actualMap->squareSize();
    Square* quaux = actualMap->relativeSquare(qx,qz);
    if(quaux != NULL)
    {
@@ -2298,9 +2301,9 @@ int engine::treatIO(SDL_Surface *screen)
             {
                /* Define New Occuped Square */
                int posX =(int)floor(activeCharacter->xPosition /
-                                    SQUARE_SIZE);
+                                    actualMap->squareSize());
                int posZ =(int)floor(activeCharacter->zPosition / 
-                                    SQUARE_SIZE);
+                                    actualMap->squareSize());
                activeCharacter->ocupaQuad = 
                                          actualMap->relativeSquare(posX,posZ);
                /* Define New Height */
@@ -2324,12 +2327,12 @@ int engine::treatIO(SDL_Surface *screen)
       /* Redraw the needed GUI */
       if(miniMapWindow)
       {
-         GLint x = (int)(((activeCharacter->xPosition) / (SQUARE_SIZE)));
+         GLint x = (int)(((activeCharacter->xPosition) / (actualMap->squareSize())));
          if(x > actualMap->getSizeX()-1)
          {
             x = actualMap->getSizeX()-1;
          }
-         GLint z = (int)(((activeCharacter->zPosition) / (SQUARE_SIZE)));
+         GLint z = (int)(((activeCharacter->zPosition) / (actualMap->squareSize())));
          if( z > actualMap->getSizeZ()-1)
          {
             z = actualMap->getSizeZ()-1;
@@ -2361,8 +2364,8 @@ int engine::treatIO(SDL_Surface *screen)
       /* Verify Mouse Cursor Forbidden (when can't go to position) */
       if(!gui->mouseOnGui(mouseX, mouseY))
       {
-         int posX = (int) floor(xReal / SQUARE_SIZE);
-         int posZ = (int) floor(zReal / SQUARE_SIZE);
+         int posX = (int) floor(xReal / actualMap->squareSize());
+         int posZ = (int) floor(zReal / actualMap->squareSize());
          Square* sq = actualMap->relativeSquare(posX, posZ);
          if( (sq == NULL) || (sq->flags == 0))
          {
@@ -2953,8 +2956,8 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    if(result)
    {
       /* Define New Occuped Square */
-      int posX =(int)floor( nx / (SQUARE_SIZE));
-      int posZ =(int)floor( nz / (SQUARE_SIZE));
+      int posX =(int)floor( nx / (actualMap->squareSize()));
+      int posZ =(int)floor( nz / (actualMap->squareSize()));
       activeCharacter->ocupaQuad = actualMap->relativeSquare(posX,posZ);
 
       /* Define New Heigh */
@@ -3011,12 +3014,12 @@ bool engine::defineCharacterHeight(character* c, GLfloat nx, GLfloat nz)
 void engine::OpenMiniMapWindow()
 {
    character* activeCharacter = PCs->getActiveCharacter();
-   GLint x = (int)(((activeCharacter->xPosition) / (SQUARE_SIZE)));
+   GLint x = (int)(((activeCharacter->xPosition) / (actualMap->squareSize())));
    if(x > actualMap->getSizeX()-1)
    {
       x = actualMap->getSizeX()-1;
    }
-   GLint z = (int)(((activeCharacter->zPosition) / (SQUARE_SIZE)));
+   GLint z = (int)(((activeCharacter->zPosition) / (actualMap->squareSize())));
    if( z > actualMap->getSizeZ()-1)
    {
       z = actualMap->getSizeZ()-1;

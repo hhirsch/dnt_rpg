@@ -26,8 +26,8 @@ terrain::~terrain()
 void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                            Uint8 mButton, int tool, GLuint actualTexture)
 {
-   quadX = (int) (mouseX / SQUARE_SIZE);
-   quadZ = (int) (mouseZ / SQUARE_SIZE);
+   quadX = (int) (mouseX / actualMap->squareSize());
+   quadZ = (int) (mouseZ / actualMap->squareSize());
 
    mX = mouseX;
    mY = mouseY;
@@ -38,10 +38,10 @@ void terrain::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 
    if(saux)
    {
-      GLfloat dx1 = fabs(mX - saux->x1) / SQUARE_SIZE;
-      GLfloat dz1 = fabs(mZ - saux->z1) / SQUARE_SIZE;
-      GLfloat dx2 = fabs(mX - saux->x2) / SQUARE_SIZE;
-      GLfloat dz2 = fabs(mZ - saux->z2) / SQUARE_SIZE;
+      GLfloat dx1 = fabs(mX - saux->x1) / actualMap->squareSize();
+      GLfloat dz1 = fabs(mZ - saux->z1) / actualMap->squareSize();
+      GLfloat dx2 = fabs(mX - saux->x2) / actualMap->squareSize();
+      GLfloat dz2 = fabs(mZ - saux->z2) / actualMap->squareSize();
       GLfloat ha = (dx2 * saux->h1) + 
                    (dx1 * saux->h4);
       GLfloat hb = (dx2 * saux->h2) + 

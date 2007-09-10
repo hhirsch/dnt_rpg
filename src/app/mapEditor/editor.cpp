@@ -372,10 +372,10 @@ void editor::newMap()
             }
          }
       }
-      map->setInitialPosition( ((sizeX+12)*SQUARE_SIZE / 2.0),
-                            ((sizeZ+12)*SQUARE_SIZE / 2.0));
-      gui->gameCamera.actualizeCamera(((sizeX+14)*SQUARE_SIZE / 2.0), 0.0, 
-                                      ((sizeZ+14)*SQUARE_SIZE / 2.0), 0.0);
+      map->setInitialPosition( ((sizeX+12)*map->squareSize() / 2.0),
+                            ((sizeZ+12)*map->squareSize() / 2.0));
+      gui->gameCamera.actualizeCamera(((sizeX+14)*map->squareSize() / 2.0), 0.0, 
+                                      ((sizeZ+14)*map->squareSize() / 2.0), 0.0);
    }
    else
    {
@@ -388,7 +388,7 @@ void editor::newMap()
       actualWall->texture = map->textures->index;
       actualWall->x1 = 0;
       actualWall->z1 = 0;
-      actualWall->x2 = (sizeX)*SQUARE_SIZE;
+      actualWall->x2 = (sizeX)*map->squareSize();
       actualWall->z2 = 10;
       actualWall = new(wall);
       actualWall->next = map->walls;
@@ -398,28 +398,28 @@ void editor::newMap()
       actualWall->x1 = 0;
       actualWall->z1 = 0;
       actualWall->x2 = 10;
-      actualWall->z2 = (sizeZ)*SQUARE_SIZE;
+      actualWall->z2 = (sizeZ)*map->squareSize();
       actualWall = new(wall);
       actualWall->next = map->walls;
       map->walls = actualWall;
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->texture = map->textures->index;
-      actualWall->x1 = (sizeX)*SQUARE_SIZE-10;
+      actualWall->x1 = (sizeX)*map->squareSize()-10;
       actualWall->z1 = 0;
-      actualWall->x2 = ((sizeX)*SQUARE_SIZE);
-      actualWall->z2 = (sizeZ)*SQUARE_SIZE;
+      actualWall->x2 = ((sizeX)*map->squareSize());
+      actualWall->z2 = (sizeZ)*map->squareSize();
       actualWall = new(wall);
       actualWall->next = map->walls;
       map->walls = actualWall;
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->texture = map->textures->index;
       actualWall->x1 = 0;
-      actualWall->z1 = (sizeZ)*SQUARE_SIZE-10;
-      actualWall->x2 = (sizeX)*SQUARE_SIZE;
-      actualWall->z2 = (sizeZ)*SQUARE_SIZE;
+      actualWall->z1 = (sizeZ)*map->squareSize()-10;
+      actualWall->x2 = (sizeX)*map->squareSize();
+      actualWall->z2 = (sizeZ)*map->squareSize();
       /* Define Position */
-      map->setInitialPosition( ((sizeX)*SQUARE_SIZE / 2.0),
-                            ((sizeZ)*SQUARE_SIZE / 2.0));
+      map->setInitialPosition( ((sizeX)*map->squareSize() / 2.0),
+                            ((sizeZ)*map->squareSize() / 2.0));
    }
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
@@ -450,9 +450,9 @@ void editor::verifyPosition()
 {
    if(mapOpened)
    {
-       if(gui->gameCamera.getCenterX() > ((map->getSizeX() * SQUARE_SIZE)+20))
+       if(gui->gameCamera.getCenterX() > ((map->getSizeX() * map->squareSize())+20))
        {
-          gui->gameCamera.actualizeCamera( ((map->getSizeX() * SQUARE_SIZE)+20),
+          gui->gameCamera.actualizeCamera( ((map->getSizeX() * map->squareSize())+20),
                                           gui->gameCamera.getCenterY()-30,
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
@@ -464,11 +464,11 @@ void editor::verifyPosition()
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
        }
-       if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * SQUARE_SIZE)+20))
+       if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * map->squareSize())+20))
        {
           gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
                                           gui->gameCamera.getCenterY()-30,
-                                          ((map->getSizeZ() * SQUARE_SIZE)+20), 
+                                          ((map->getSizeZ() * map->squareSize())+20), 
                                           0.0);
        }
        else if(gui->gameCamera.getCenterZ() < -20)
@@ -615,28 +615,28 @@ void editor::draw()
             glColor4fv(ambient);
             glBegin(GL_QUADS);
                glNormal3f(0,1,0);
-               glVertex3f(7*SQUARE_SIZE-5, 0.5, 7*SQUARE_SIZE);
-               glVertex3f(7*SQUARE_SIZE-5, 0.5, (sizeZ+7)*SQUARE_SIZE);
-               glVertex3f(7*SQUARE_SIZE+5, 0.5, (sizeZ+7)*SQUARE_SIZE);
-               glVertex3f(7*SQUARE_SIZE+5, 0.5, 7*SQUARE_SIZE);
+               glVertex3f(7*map->squareSize()-5, 0.5, 7*map->squareSize());
+               glVertex3f(7*map->squareSize()-5, 0.5, (sizeZ+7)*map->squareSize());
+               glVertex3f(7*map->squareSize()+5, 0.5, (sizeZ+7)*map->squareSize());
+               glVertex3f(7*map->squareSize()+5, 0.5, 7*map->squareSize());
 
                glNormal3f(0,1,0);
-               glVertex3f((sizeX+7)*SQUARE_SIZE-5, 0.5, 7*SQUARE_SIZE);
-               glVertex3f((sizeX+7)*SQUARE_SIZE-5, 0.5, (sizeZ+7)*SQUARE_SIZE);
-               glVertex3f((sizeX+7)*SQUARE_SIZE+5, 0.5, (sizeZ+7)*SQUARE_SIZE);
-               glVertex3f((sizeX+7)*SQUARE_SIZE+5, 0.5, 7*SQUARE_SIZE);
+               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5, 7*map->squareSize());
+               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5, (sizeZ+7)*map->squareSize());
+               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5, (sizeZ+7)*map->squareSize());
+               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5, 7*map->squareSize());
 
                glNormal3f(0,1,0);
-               glVertex3f(7*SQUARE_SIZE, 0.5, 7*SQUARE_SIZE-5);
-               glVertex3f((sizeX+7)*SQUARE_SIZE, 0.5, 7*SQUARE_SIZE-5);
-               glVertex3f((sizeX+7)*SQUARE_SIZE, 0.5, 7*SQUARE_SIZE+5);
-               glVertex3f(7*SQUARE_SIZE, 0.5, 7*SQUARE_SIZE+5);
+               glVertex3f(7*map->squareSize(), 0.5, 7*map->squareSize()-5);
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 7*map->squareSize()-5);
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 7*map->squareSize()+5);
+               glVertex3f(7*map->squareSize(), 0.5, 7*map->squareSize()+5);
 
                glNormal3f(0,1,0);
-               glVertex3f(7*SQUARE_SIZE, 0.5, (sizeZ+7)*SQUARE_SIZE-5);
-               glVertex3f((sizeX+7)*SQUARE_SIZE, 0.5, (sizeZ+7)*SQUARE_SIZE-5);
-               glVertex3f((sizeX+7)*SQUARE_SIZE, 0.5, (sizeZ+7)*SQUARE_SIZE+5);
-               glVertex3f(7*SQUARE_SIZE, 0.5, (sizeZ+7)*SQUARE_SIZE+5);
+               glVertex3f(7*map->squareSize(), 0.5, (sizeZ+7)*map->squareSize()-5);
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5, (sizeZ+7)*map->squareSize()-5);
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5, (sizeZ+7)*map->squareSize()+5);
+               glVertex3f(7*map->squareSize(), 0.5, (sizeZ+7)*map->squareSize()+5);
 
             glEnd();
          glPopMatrix();
@@ -655,10 +655,10 @@ void editor::draw()
             glDisable(GL_LIGHTING);
             glBegin(GL_QUADS);
             glVertex3f(-10, -5, -10);
-            glVertex3f(-10, -5, map->getSizeZ()*SQUARE_SIZE+10);
-            glVertex3f(map->getSizeX()*SQUARE_SIZE+10, -5,
-                       map->getSizeZ()*SQUARE_SIZE+10);
-            glVertex3f(map->getSizeX()*SQUARE_SIZE+10, -5, -10);
+            glVertex3f(-10, -5, map->getSizeZ()*map->squareSize()+10);
+            glVertex3f(map->getSizeX()*map->squareSize()+10, -5,
+                       map->getSizeZ()*map->squareSize()+10);
+            glVertex3f(map->getSizeX()*map->squareSize()+10, -5, -10);
             glEnd();
             glEnable(GL_LIGHTING);
          glPopMatrix();

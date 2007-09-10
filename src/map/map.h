@@ -16,17 +16,21 @@ using namespace std;
 #define PISAVEL 1   /**< If a Square is walkable or not. */
 
 /* Constraints */
-#define SQUARE_SIZE          256      /**< Size of the Square */
-#define HALF_SQUARE_SIZE SQUARE_SIZE / 2 /**< Half size of the square */
-#define QUARTER_SQUARE_SIZE SQUARE_SIZE / 4 /**< Quarter size of the square */
-#define SQUARE_DIAGONAL_SIZE SQUARE_SIZE * 1.4142136 /**< Diagonal squaresize */
+#define OUTDOOR_SQUARE_SIZE      256      /**< Size of the Outdoor Square */
+#define INDOOR_SQUARE_SIZE        64      /**< Size of the indoor square */
+
+
+//#define HALF_SQUARE_SIZE SQUARE_SIZE / 2 /**< Half size of the square */
+//#define QUARTER_SQUARE_SIZE SQUARE_SIZE / 4 /**< Quarter size of the square */
+//#define SQUARE_DIAGONAL_SIZE SQUARE_SIZE * 1.4142136 /**< Diagonal squaresize */
+
 #define MAX_WALLS             15       /**< Max number of walls per square */
 #define WALL_HEIGHT           50       /**< Walls height */
 #define CURB_HEIGHT            2       /**< Curbs height */
 #define MAX_HEIGHT           150       /**< Max square height */
 
 #define SQUARE_DIVISIONS_INC  256 /**< Difference heigh to inc the square divisions. NOT used anymore. */ 
-#define TEXTURE_REPEATS SQUARE_SIZE / 256 /**< Number of Repeats of textures */ 
+#define TEXTURE_REPEATS (OUTDOOR_SQUARE_SIZE / 256) /**< Number of Repeats */ 
 #define ALPHA_TEXTURE_INC       4 /**< Points per square on each alpha texture*/
 
 
@@ -166,6 +170,15 @@ class Map
    public:
       Map(lObject* lObjects);    /**< Construtor */
       ~Map();                    /**< Destruidor */
+
+
+      /*!
+       ***************************************************************
+       * Gets the square size on the map 
+       * \return-> the square size used on the map 
+       ***************************************************************/
+       int squareSize(){if(outdoor) return(OUTDOOR_SQUARE_SIZE);
+                        else return(INDOOR_SQUARE_SIZE);};
 
       /*!
        *************************************************************** 

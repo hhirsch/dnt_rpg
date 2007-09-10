@@ -325,8 +325,8 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
 void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                         object* obj, bool collision)
 {
-   int qx = (int)xReal / SQUARE_SIZE;
-   int qz = (int)zReal / SQUARE_SIZE;
+   int qx = (int)xReal / squareSize();
+   int qz = (int)zReal / squareSize();
    insertObject(xReal, zReal, orObj, obj, qx, qz, collision);
 }
 
@@ -376,10 +376,11 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
      }
 
      int minqx, minqz, maxqx, maxqz;
-     minqx = (int)(X[0] + xReal) / SQUARE_SIZE;
-     minqz = (int)(Z[0] + zReal) / SQUARE_SIZE;
-     maxqx = (int)(X[1] + xReal) / SQUARE_SIZE;
-     maxqz = (int)(Z[1] + zReal) / SQUARE_SIZE; 
+     int ssize = squareSize();
+     minqx = (int)(X[0] + xReal) / ssize;
+     minqz = (int)(Z[0] + zReal) / ssize;
+     maxqx = (int)(X[1] + xReal) / ssize;
+     maxqz = (int)(Z[1] + zReal) / ssize; 
      int X1, Z1;
      Square* qaux;
      for(X1 = minqx; X1<=maxqx; X1++)
@@ -792,12 +793,15 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
    boundingBox bound;
    objSquare* obj;
 
+   float ssize = squareSize();
+   float hsize = squareSize() / 2.0;
+
    for(Xaux = 0; Xaux < x; Xaux++)
    for(Zaux = 0; Zaux < z; Zaux++)
    {
-      deltaX = (cameraX-MapSquares[Xaux][Zaux].x1+HALF_SQUARE_SIZE);
-      deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+HALF_SQUARE_SIZE);
-      distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / SQUARE_SIZE;
+      deltaX = (cameraX-MapSquares[Xaux][Zaux].x1+hsize);
+      deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+hsize);
+      distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / ssize;
       obj = MapSquares[Xaux][Zaux].getFirstObject();
       for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
       {
@@ -883,7 +887,7 @@ Map::Map(lObject* lObjects)
    x = z = 0;
    xInic = zInic = 0;
    SQUAREMINISIZE = 4;
-   SQUAREMINIDIV = (SQUARE_SIZE / SQUAREMINISIZE);
+   SQUAREMINIDIV = (squareSize() / SQUAREMINISIZE);
 }
 
 /********************************************************************
@@ -902,8 +906,8 @@ Square* Map::relativeSquare(int xa, int za)
  ********************************************************************/
 GLfloat Map::getHeight(GLfloat nx, GLfloat nz)
 {
-   int posX =(int)floor( nx / (SQUARE_SIZE));
-   int posZ =(int)floor( nz / (SQUARE_SIZE)); 
+   int posX =(int)floor( nx / (squareSize()));
+   int posZ =(int)floor( nz / (squareSize())); 
 
    Square* saux = relativeSquare(posX, posZ);
 
@@ -1294,11 +1298,11 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             music = nome;
             break;
          }
-         case 'm': /* Define Walls and Half Walls */
+         case 'w': /* Define Walls and Half Walls */
          {
             switch(buffer[1])
             {
-               case 'u': /* Define Wall */
+               case 'a': /* Define Wall */
                {
                   maux = new(wall);
                   fgets(buffer, sizeof(buffer),arq);
@@ -1366,8 +1370,8 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             if(xInic == -1)
             {
                sscanf(buffer, "%f,%f",&xInic,&zInic);
-               int posX =(int)floor( xInic / (SQUARE_SIZE));
-               int posZ =(int)floor( zInic / (SQUARE_SIZE));
+               int posX =(int)floor( xInic / (squareSize()));
+               int posZ =(int)floor( zInic / (squareSize()));
                squareInic = relativeSquare(posX,posZ);
             }
             break;
@@ -1413,10 +1417,10 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                                  &MapSquares[posX][posZ].h4);
 
             MapSquares[posX][posZ].setDivisions(); 
-            MapSquares[posX][posZ].x1 = (posX) * SQUARE_SIZE;
-            MapSquares[posX][posZ].x2 = MapSquares[posX][posZ].x1+SQUARE_SIZE;
-            MapSquares[posX][posZ].z1 = (posZ) * SQUARE_SIZE;
-            MapSquares[posX][posZ].z2 = MapSquares[posX][posZ].z1+SQUARE_SIZE; 
+            MapSquares[posX][posZ].x1 = (posX) * squareSize();
+            MapSquares[posX][posZ].x2 = MapSquares[posX][posZ].x1+squareSize();
+            MapSquares[posX][posZ].z1 = (posZ) * squareSize();
+            MapSquares[posX][posZ].z2 = MapSquares[posX][posZ].z1+squareSize(); 
             MapSquares[posX][posZ].posX = posX;
             MapSquares[posX][posZ].posZ = posZ;
             if(pisavel) 
@@ -1509,13 +1513,14 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    int inix,iniz,maxx,maxz;
    int indexMuro;
    Square* aux;
+   float ssize = squareSize();
    
    while(maux)
    {
-      inix = (int)floor(maux->x1 / SQUARE_SIZE);
-      iniz = (int)floor(maux->z1 / SQUARE_SIZE);
-      maxx = (int)floor(maux->x2 / SQUARE_SIZE);
-      maxz = (int)floor(maux->z2 / SQUARE_SIZE);
+      inix = (int)floor(maux->x1 / ssize);
+      iniz = (int)floor(maux->z1 / ssize);
+      maxx = (int)floor(maux->x2 / ssize);
+      maxz = (int)floor(maux->z2 / ssize);
       for(ax = inix;ax<=maxx;ax++)
       {
           for(az = iniz;az<=maxz;az++)
@@ -1584,10 +1589,10 @@ void Map::newMap(int X, int Z)
       for(auxX = 0; auxX < x; auxX++)
       {
           saux = relativeSquare(auxX,auxZ);
-          saux->x1 = (auxX)*SQUARE_SIZE;
-          saux->x2 = saux->x1+SQUARE_SIZE;
-          saux->z1 = (auxZ)*SQUARE_SIZE;
-          saux->z2 = saux->z1+SQUARE_SIZE; 
+          saux->x1 = (auxX)*squareSize();
+          saux->x2 = saux->x1+squareSize();
+          saux->z1 = (auxZ)*squareSize();
+          saux->z2 = saux->z1+squareSize(); 
           saux->posX = auxX;
           saux->posZ = auxZ;
           saux->flags = PISAVEL;
@@ -1598,8 +1603,8 @@ void Map::newMap(int X, int Z)
       }
    }
 
-   xInic = 1*SQUARE_SIZE;
-   zInic = 1*SQUARE_SIZE;
+   xInic = 1*squareSize();
+   zInic = 1*squareSize();
    squareInic = relativeSquare(0,0);
 
    /* And create the splats */
@@ -1800,7 +1805,7 @@ int Map::save(string arquivo)
       fprintf(arq,"wall %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
                                                 maux->z2,maux->dX,maux->dY,
                                                 maux->dZ);
-      fprintf(arq,"mt %s\n",getTextureName(maux->texture).c_str());
+      fprintf(arq,"wt %s\n",getTextureName(maux->texture).c_str());
       maux = (wall*)maux->next;
    }
 
@@ -1808,8 +1813,8 @@ int Map::save(string arquivo)
    maux = (wall*)curbs;
    while(maux)
    {
-      fprintf(arq,"meioFio %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
-      fprintf(arq,"mt %s\n",getTextureName(maux->texture).c_str());
+      fprintf(arq,"we %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
+      fprintf(arq,"wt %s\n",getTextureName(maux->texture).c_str());
       maux = (wall*)maux->next;
    }
 
@@ -1843,8 +1848,8 @@ int Map::save(string arquivo)
           {
             if(obj->obj)
             {
-               x2 = (int)obj->x / SQUARE_SIZE;
-               z2 = (int)obj->z / SQUARE_SIZE;
+               x2 = (int)obj->x / squareSize();
+               z2 = (int)obj->z / squareSize();
                fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d:%d\n",
                        obj->obj->getFileName().c_str(),
                        obj->draw, x2 + 1, z2 + 1,
@@ -1984,8 +1989,9 @@ void Map::drawMinimap(SDL_Surface* img)
       for(X = iX; X < limX; X++)
       {
           color_Set(MapSquares[X][Z].R,
-                      MapSquares[X][Z].G,
-                      MapSquares[X][Z].B);
+                    MapSquares[X][Z].G,
+                    MapSquares[X][Z].B);
+          color_Alpha(255);
           rectangle_Fill(img, x1,y1,x1+SQUAREMINISIZE-1,y1+SQUAREMINISIZE-1);
           x1+=SQUAREMINISIZE;
       }
