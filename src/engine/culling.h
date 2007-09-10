@@ -12,7 +12,7 @@
  * \param matriz -> view frustum matrix (actualized)
  * \param proj -> projection view matrix
  * \param modl -> model view matrix */
-void AtualizaFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16]);
+void actualizeFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16]);
 
 /*!
  * Verify if the square is in frustum or not.
@@ -23,7 +23,9 @@ void AtualizaFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16]);
  * \param y2 -> lower Y coordinate
  * \param z2 -> lower Z coordinate  
  * \param matriz -> view Frustum Matrix */
-int quadradoVisivel(GLfloat x1,GLfloat y1,GLfloat z1,GLfloat x2,GLfloat y2,GLfloat z2,GLfloat matriz[6][4]);
+int visibleCube(GLfloat x1,GLfloat y1,GLfloat z1,
+                GLfloat x2,GLfloat y2,GLfloat z2,
+                GLfloat matriz[6][4]);
 
 
 #endif

@@ -27,7 +27,7 @@ using namespace std;
 
 #define SQUARE_DIVISIONS_INC  256 /**< Difference heigh to inc the square divisions. NOT used anymore. */ 
 #define TEXTURE_REPEATS SQUARE_SIZE / 256 /**< Number of Repeats of textures */ 
-#define ALPHA_TEXTURE_INC       2 /**< Points per square on each alpha texture*/
+#define ALPHA_TEXTURE_INC       4 /**< Points per square on each alpha texture*/
 
 
 /*!
@@ -190,8 +190,8 @@ class Map
        * \param matriz  -> view frustum matriz 
        * \return 1 if success.
        ***************************************************************/
-      int drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-              GLfloat matriz[6][4]);
+      void drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                     GLfloat matriz[6][4]);
       /*!
        *************************************************************** 
        * Draw the map objects on screen (using view culling)  
@@ -465,6 +465,33 @@ class Map
       int SQUAREMINIDIV;    /**< MiniMap square division relation */
 
       protected:
+
+
+      /*!
+       *************************************************************** 
+       * Draw the Outdoor floor on screen
+       * \param cameraX -> X coordinate of camera
+       * \param cameraY -> Y coordinate of camera
+       * \param cameraZ -> Z coordinate of camera
+       * \param matriz  -> view frustum matriz 
+       * \return 1 if success.
+       ***************************************************************/
+      void drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                            GLfloat matriz[6][4]);
+
+      /*!
+       *************************************************************** 
+       * Draw the indoor floor on screen (using view culling)  
+       * \param cameraX -> X coordinate of camera
+       * \param cameraY -> Y coordinate of camera
+       * \param cameraZ -> Z coordinate of camera
+       * \param matriz  -> view frustum matriz 
+       * \return 1 if success.
+       ***************************************************************/
+      void drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                           GLfloat matriz[6][4]);
+
+
          int x,                /**< Map X dimension (in squares) */
              z;                /**< Map Z Dimension (in squares) */
          bool outdoor;         /**< If it's an outdoor or indoor map */

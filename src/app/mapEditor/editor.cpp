@@ -589,7 +589,7 @@ void editor::draw()
 
    /* Redefine camera position */
    gui->cameraPos();
-   AtualizaFrustum( visibleMatrix, proj, modl);
+   actualizeFrustum( visibleMatrix, proj, modl);
    gameSun->actualizeHourOfDay(hour, 0.0, 0.0);
    gameSun->setLight();
    /* Draw Things */
@@ -722,8 +722,8 @@ void editor::draw()
                              per->zPosition, min, max );
 
          /* Only Draw Visible Characters */
-         if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
-            visibleMatrix))
+         if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
+                        visibleMatrix))
          {
             glPushMatrix();
                glTranslatef(per->xPosition, per->yPosition,

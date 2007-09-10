@@ -239,7 +239,7 @@ void engine::InformationScreen()
    setTextureRGBA(img,&texturaInfo);
 
    glDisable(GL_LIGHTING);
-   AtualizaFrustum(visibleMatrix,proj,modl);
+   actualizeFrustum(visibleMatrix,proj,modl);
    textureToScreen(texturaInfo,proj,modl,viewPort,272,44,527,555,0.0001);
    glEnable(GL_LIGHTING);
    glFlush();
@@ -335,7 +335,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    setTextureRGBA(img,&texturaTexto);
    fadeInTexture(texturaCarga, 272,236,527,363);
 
-   AtualizaFrustum(visibleMatrix,proj,modl);
+   actualizeFrustum(visibleMatrix,proj,modl);
    textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
    textureToScreen(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
    glFlush();
@@ -573,7 +573,7 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2)
    {
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
-      AtualizaFrustum(visibleMatrix,proj,modl);
+      actualizeFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
       textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
       glFlush();
@@ -593,7 +593,7 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2)
    {
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
-      AtualizaFrustum(visibleMatrix,proj,modl);
+      actualizeFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
       textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
       glFlush();
@@ -614,7 +614,7 @@ void engine::SplashScreen()
    int x,y;
    Uint32 time = SDL_GetTicks();
    glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-   AtualizaFrustum(visibleMatrix,proj,modl);
+   actualizeFrustum(visibleMatrix,proj,modl);
    SDL_Surface* img = IMG_Load("../data/texturas/general/inicio1.png"); 
    glDisable(GL_LIGHTING);
    setTextureRGBA(img,&id);
@@ -659,7 +659,7 @@ int engine::InitialScreen(int Status, GLuint idTextura, bool reloadMusic)
    }
 
    /* Executes Initial Screen */
-   AtualizaFrustum(visibleMatrix,proj,modl);
+   actualizeFrustum(visibleMatrix,proj,modl);
    initialScreen* inic = new(initialScreen);
    int result = inic->Execute(Status, proj, modl, viewPort, idTextura, snd);
    delete(inic);
@@ -2418,8 +2418,8 @@ int engine::treatIO(SDL_Surface *screen)
          if(!walkSound)
          {
             walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,
-                                           activeCharacter->zPosition,true,
-                                           "../data/sndfx/passos.ogg" );
+                                            activeCharacter->zPosition,true,
+                                            "../data/sndfx/passos.ogg" );
          }
          else
          {
@@ -2581,8 +2581,8 @@ void engine::renderScene()
                              per->zPosition, min, max );
 
          /* Only Draw Visible Characters */
-         if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
-                            visibleMatrix))
+         if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
+                        visibleMatrix))
          {
             glPushMatrix();
               glTranslatef(per->xPosition, per->yPosition,
@@ -2881,7 +2881,7 @@ void engine::drawWithoutShadows()
    }
    
    /* Atualize to culling and to GUI */
-   AtualizaFrustum(visibleMatrix,proj,modl);
+   actualizeFrustum(visibleMatrix,proj,modl);
 
    /* Render all things */
    renderScene();

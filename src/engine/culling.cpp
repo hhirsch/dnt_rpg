@@ -1,8 +1,9 @@
 #include "culling.h"
 
-/* Atualiza o Frustum para o culling ser feito. Como o mapa é plano,
- * e posicionado no plano XZ, com Y=0, ignora-se o eixo Y. */ 
-void AtualizaFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16])
+/*********************************************************
+ *                    actualizeFrustum                   *
+ *********************************************************/
+void actualizeFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16])
 {
       GLfloat clip[16];
 	GLfloat t;
@@ -114,7 +115,12 @@ void AtualizaFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16])
 
 };
 
-int quadradoVisivel(GLfloat x1,GLfloat y1, GLfloat z1,GLfloat x2,GLfloat y2, GLfloat z2,GLfloat matriz[6][4])
+/*********************************************************
+ *                      visibleCube                      *
+ *********************************************************/
+int visibleCube(GLfloat x1, GLfloat y1, GLfloat z1,
+                GLfloat x2, GLfloat y2, GLfloat z2,
+                GLfloat matriz[6][4])
 {
    /* Se todos os pontos estao fora de algum plano, esta fora */
    if(((matriz[0][0]*x1+matriz[0][1]*y1+matriz[0][2]*z1+matriz[0][3] <= 0) &&

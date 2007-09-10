@@ -258,7 +258,7 @@ void particleSystem::DoStep(GLfloat matriz[6][4])
             colorArray[aliveColor+2] = particles[n].B;
             //colorArray[aliveColor+3] = 1.0;
          }
-         else if(quadradoVisivel(boundX1, boundY1, boundZ1, boundX2, 
+         else if(visibleCube(boundX1, boundY1, boundZ1, boundX2, 
                                  boundY2, boundZ2,matriz))
          {
             Render(&particles[n]);
@@ -270,7 +270,7 @@ void particleSystem::DoStep(GLfloat matriz[6][4])
    }
 
    if( (drawMode == PARTICLE_DRAW_GROUPS) && (aliveColor > 0) && (alive > 0) &&
-       (quadradoVisivel(boundX1, boundY1, boundZ1, boundX2, boundY2, boundZ2,
+       (visibleCube(boundX1, boundY1, boundZ1, boundX2, boundY2, boundZ2,
                            matriz)))
    {
       glEnableClientState(GL_COLOR_ARRAY);

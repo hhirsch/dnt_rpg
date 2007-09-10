@@ -427,10 +427,72 @@ void drawQuad(GLfloat x1, GLfloat z1,
 }
 
 /********************************************************************
- *                            DrawFloor                             *
+ *                       drawFloorIndoor                            *
  ********************************************************************/
-int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-              GLfloat matriz[6][4])
+void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                          GLfloat matriz[6][4])
+{
+   int aux = 0;
+   int x1, z1;
+   texture* tex;
+
+   glColor4f(1.0, 1.0, 1.0, 0.9);
+
+   /* For Reflexions */
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   glEnable(GL_TEXTURE_2D);
+
+   tex = textures;
+   while(aux < numTextures)
+   {
+      /* Bind the texture */
+      glBindTexture(GL_TEXTURE_2D, tex->index);
+      glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+                      GL_LINEAR_MIPMAP_LINEAR );
+      glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+      /* Draw all vertex with this texture */
+      glBegin(GL_QUADS);
+
+      for(x1=0; x1 < x; x1++)
+      {
+         for(z1=0; z1 < z; z1++)
+         {
+            if( (MapSquares[x1][z1].texture == (int)tex->index) &&
+                (visibleCube(MapSquares[x1][z1].x1,0,
+                                 MapSquares[x1][z1].z1,
+                                 MapSquares[x1][z1].x2,
+                                 MAX_HEIGHT,
+                                 MapSquares[x1][z1].z2, matriz)))
+            {
+               drawQuad(MapSquares[x1][z1].x1, MapSquares[x1][z1].z1,
+                        MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
+                        MapSquares[x1][z1].h1, MapSquares[x1][z1].h2, 
+                        MapSquares[x1][z1].h3, MapSquares[x1][z1].h4,
+                        0.0, 0.0, 1.0, 1.0);
+            }
+         }
+      }
+
+      glEnd();
+
+      tex = tex->next;
+      aux++;
+   }
+
+   glDisable(GL_TEXTURE_2D);
+   glDisable(GL_BLEND);
+}
+
+/********************************************************************
+ *                      drawFloorOutdoor                            *
+ ********************************************************************/
+void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                           GLfloat matriz[6][4])
 {
    extensions ext;
    int aux = 0;
@@ -439,13 +501,12 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    glEnableClientState(GL_VERTEX_ARRAY);
    glVertexPointer(3, GL_FLOAT, 0, vertexBuffer);
 
-
    /* First Draw with the common texture. */
    glTexCoordPointer(2, GL_FLOAT, 0, uvBuffer);
    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
    glBindTexture(GL_TEXTURE_2D, commonTexture);
    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                         GL_LINEAR_MIPMAP_LINEAR );
+                   GL_LINEAR_MIPMAP_LINEAR );
    glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -510,6 +571,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
          glEnable(GL_TEXTURE_2D);
          
          /* Draw The Array */
+         glNormal3i(0,1,0);
          glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
          
          ext.ARBActiveTexture(GL_TEXTURE1_ARB);
@@ -531,6 +593,7 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       aux++;
    }
 
+   /* So disable the multitexture state. */
    if(ext.ARBActiveTexture != NULL)
    { 
       ext.ARBClientActiveTexture(GL_TEXTURE1_ARB);
@@ -540,9 +603,25 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    }
 
    glDisableClientState(GL_VERTEX_ARRAY);
+}
 
+/********************************************************************
+ *                            DrawFloor                             *
+ ********************************************************************/
+void Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                    GLfloat matriz[6][4])
+{
+  
+   if(outdoor)
+   {
+      drawFloorOutdoor(cameraX, cameraY, cameraZ, matriz);
+   }
+   else
+   {
+      drawFloorIndoor(cameraX, cameraY, cameraZ, matriz);
+   }
 
-   return(1);
+   return;
 }
 
 /********************************************************************
@@ -551,45 +630,32 @@ int Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
               GLfloat matriz[6][4], GLfloat perX, GLfloat perZ)
 {
-        int texture = -1;
-        int Xaux = 0, Zaux = 0;
+   /* Actualize Lights */
+   lights.actualize(perX, perZ);
 
-        /* Actualize Lights */
-        lights.actualize(perX, perZ);
+   //glEnable(GL_COLOR_MATERIAL);
 
-        glEnable(GL_COLOR_MATERIAL);
+   glColor4f(1.0, 1.0, 1.0, 1.0);
+   drawFloor( cameraX, cameraY, cameraZ, matriz );
 
-        //glEnable(GL_BLEND);
-        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glColor4f(1.0, 1.0, 1.0, 1.0);
-        drawFloor( cameraX, cameraY, cameraZ, matriz );
-        //glDisable(GL_BLEND);
+   glColor3f(1.0,1.0,1.0);
 
-        texture = MapSquares[Xaux][Zaux].texture;
-           glEnable(GL_TEXTURE_2D);
-           glBindTexture(GL_TEXTURE_2D, texture);
+   /* Draw Walls */
+   drawWalls(cameraX, cameraY, cameraZ, matriz, false);
 
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-        glColor3f(1.0,1.0,1.0);
+   /* Draw Roads */
+   /*if(roads)
+   {
+      roads->draw();
+   }*/
 
-        /* Draw Walls */
-        drawWalls(cameraX, cameraY, cameraZ, matriz, false);
+   /* Draw objects */
+   drawObjects(cameraX, cameraY, cameraZ, matriz, false);
 
-        /* Draw Roads */
-        /*if(roads)
-        {
-           roads->draw();
-        }*/
+   //glDisable(GL_COLOR_MATERIAL);
+   glColor3f(1.0,1.0,1.0);
 
-        /* Draw objects */
-        drawObjects(cameraX, cameraY, cameraZ, matriz, false);
-
-      glDisable(GL_COLOR_MATERIAL);
-      glColor3f(1.0,1.0,1.0);
-
-
-      return(0);
+   return(0);
 }
 
 /********************************************************************
@@ -633,12 +699,12 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
            }
            if(inverted)
            {
-              visible = quadradoVisivel(maux->x1,-altura,maux->z1,maux->x2,
+              visible = visibleCube(maux->x1,-altura,maux->z1,maux->x2,
                                         0,maux->z2,matriz);
            }
            else
            {
-              visible = quadradoVisivel(maux->x1,0,maux->z1,maux->x2,
+              visible = visibleCube(maux->x1,0,maux->z1,maux->x2,
                                         altura,maux->z2,matriz);
            }
            if(visible)
@@ -759,7 +825,7 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
             }
 
             /* Verify ViewFrustum Culling */
-            if(quadradoVisivel(min[0],min[1],min[2],max[0],max[1],max[2],
+            if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
                                matriz))
             {
                glPushMatrix();
@@ -2088,13 +2154,16 @@ void Map::createAlpha(int x1, int z1)
             }
          }
          /* Normalize the result */
-         aux = 0;
-         tex = textures;
-         while(aux < numTextures)
+         if(outdoor)
          {
-            tex->alphaValues[x2][z2] = tex->alphaValues[x2][z2] / total;
-            tex = tex->next;
-            aux++;
+            aux = 0;
+            tex = textures;
+            while(aux < numTextures)
+            {
+               tex->alphaValues[x2][z2] = tex->alphaValues[x2][z2] / total;
+               tex = tex->next;
+               aux++;
+            }
          }
 
          actualCoordX += incCoord;
@@ -2131,7 +2200,7 @@ void Map::actualizeAlphaTextures()
          for(z1=0; z1 < z*ALPHA_TEXTURE_INC; z1++)
          {
             pixel_Set(img, x1, z1, 255, 255, 255, 
-                      (int)((tex->alphaValues[x1][z1])*255));
+                      (int)floor(((tex->alphaValues[x1][z1])*255)));
          }
       }
 
