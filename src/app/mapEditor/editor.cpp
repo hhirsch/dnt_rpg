@@ -453,28 +453,28 @@ void editor::verifyPosition()
        if(gui->gameCamera.getCenterX() > ((map->getSizeX() * SQUARE_SIZE)+20))
        {
           gui->gameCamera.actualizeCamera( ((map->getSizeX() * SQUARE_SIZE)+20),
-                                          gui->gameCamera.getCenterY(),
+                                          gui->gameCamera.getCenterY()-30,
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
        }
        else if(gui->gameCamera.getCenterX() < -20)
        {
           gui->gameCamera.actualizeCamera( -20 ,
-                                          gui->gameCamera.getCenterY(),
+                                          gui->gameCamera.getCenterY()-30,
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
        }
        if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * SQUARE_SIZE)+20))
        {
           gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
-                                          gui->gameCamera.getCenterY(),
+                                          gui->gameCamera.getCenterY()-30,
                                           ((map->getSizeZ() * SQUARE_SIZE)+20), 
                                           0.0);
        }
        else if(gui->gameCamera.getCenterZ() < -20)
        {
           gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
-                                          gui->gameCamera.getCenterY(),
+                                          gui->gameCamera.getCenterY()-30,
                                           -20, 
                                           0.0);
 
