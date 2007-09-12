@@ -6,10 +6,10 @@
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-objects::objects(Map* map, modelList* usedModels)
+objects::objects(Map* acMap, modelList* usedModels)
 {
    actualTool = 0;
-   actualMap = map;
+   actualMap = acMap;
    state = OBJECTS_STATE_NONE;
    if(usedModels == NULL)
    {
@@ -102,10 +102,10 @@ void objects::drawTemporary()
  *                          insertObject                          *
  ******************************************************************/
 void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                          Map* map, mapObject* obj, int qx, int qz)
+                          Map* acMap, mapObject* obj, int qx, int qz)
 {
    //TODO, mark with no collision some pickable objects
-   map->insertObject(xReal, zReal, orObj, obj, qx, qz, 1); 
+   acMap->insertObject(xReal, zReal, orObj, obj, qx, qz, 1); 
 }
 
 /******************************************************************

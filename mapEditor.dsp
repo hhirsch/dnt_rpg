@@ -131,15 +131,19 @@ SOURCE=.\src\classes\barter.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\bartexto.cpp
+SOURCE=.\src\engine\barterwindow.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\botao.cpp
+SOURCE=.\src\gui\button.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\engine\camera.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\engine\character.cpp
 # End Source File
 # Begin Source File
 
@@ -155,11 +159,7 @@ SOURCE=.\src\engine\collision.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\engine\conversa.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\cores.cpp
+SOURCE=.\src\gui\color.cpp
 # End Source File
 # Begin Source File
 
@@ -183,7 +183,7 @@ SOURCE=.\src\classes\defs.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\desenho.cpp
+SOURCE=.\src\engine\dialog.cpp
 # End Source File
 # Begin Source File
 
@@ -191,15 +191,15 @@ SOURCE=.\src\etc\distance.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\gui\draw.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\app\mapEditor\editor.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\erro.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\eventos.cpp
+SOURCE=.\src\etc\extensions.cpp
 # End Source File
 # Begin Source File
 
@@ -223,10 +223,6 @@ SOURCE=.\src\fight\fightSystem.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\figura.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\gui\fonte.cpp
 # End Source File
 # Begin Source File
@@ -247,10 +243,6 @@ SOURCE=.\src\ia\fuzzyvariable.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\etc\glm.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\particle\grass.cpp
 # End Source File
 # Begin Source File
@@ -259,7 +251,27 @@ SOURCE=.\src\app\mapEditor\guiIO.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\gui\guilist.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\healthBar.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iafuncs.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iascript.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iastack.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\ia\iavariable.cpp
 # End Source File
 # Begin Source File
 
@@ -268,6 +280,10 @@ SOURCE=.\src\engine\initial.cpp
 # Begin Source File
 
 SOURCE=.\src\fight\initiative.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\interface.cpp
 # End Source File
 # Begin Source File
 
@@ -283,15 +299,7 @@ SOURCE=.\src\classes\itemslot.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\janela.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\lang\lang.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\lista.cpp
 # End Source File
 # Begin Source File
 
@@ -319,7 +327,7 @@ SOURCE=.\src\map\maplights.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\map\mapobjeto.cpp
+SOURCE=.\src\map\mapobject.cpp
 # End Source File
 # Begin Source File
 
@@ -335,11 +343,19 @@ SOURCE=.\src\app\mapEditor\message.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\message3d.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\messages.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\particle\meteor.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\mission.cpp
 # End Source File
 # Begin Source File
 
@@ -411,6 +427,10 @@ SOURCE=.\src\app\mapEditor\particles.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\particle\partlist.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\particle\partSystem.cpp
 # End Source File
 # Begin Source File
@@ -419,7 +439,7 @@ SOURCE=.\src\ia\pattAgent.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\engine\personagens.cpp
+SOURCE=.\src\gui\picture.cpp
 # End Source File
 # Begin Source File
 
@@ -428,10 +448,6 @@ SOURCE=.\src\app\mapEditor\portal.cpp
 # Begin Source File
 
 SOURCE=.\src\ia\potentAgent.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\quadtexto.cpp
 # End Source File
 # Begin Source File
 
@@ -447,7 +463,7 @@ SOURCE=.\src\gui\rolbar.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\seltexto.cpp
+SOURCE=.\src\gui\seltext.cpp
 # End Source File
 # Begin Source File
 
@@ -479,11 +495,19 @@ SOURCE=.\src\engine\sun.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\tabbotao.cpp
+SOURCE=.\src\gui\tabbutton.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\app\mapEditor\terrain.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\textbar.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\textbox.cpp
 # End Source File
 # Begin Source File
 
@@ -505,6 +529,14 @@ SOURCE=.\src\app\mapEditor\wall.cpp
 
 SOURCE=.\src\particle\wave.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\weapon.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\window.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -523,10 +555,6 @@ SOURCE=.\src\classes\align.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\engine\alignwindow.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\etc\animodel.h
 # End Source File
 # Begin Source File
@@ -535,27 +563,11 @@ SOURCE=.\src\app\mapEditor\area.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\engine\aspectwindow.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\ia\astar.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\engine\attwindow.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\classes\barter.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\bartexto.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\botao.h
 # End Source File
 # Begin Source File
 
@@ -564,10 +576,6 @@ SOURCE=.\src\engine\camera.h
 # Begin Source File
 
 SOURCE=.\src\classes\classes.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\engine\classwindow.h
 # End Source File
 # Begin Source File
 
@@ -595,10 +603,6 @@ SOURCE=.\src\classes\defs.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\desenho.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\classes\dices.h
 # End Source File
 # Begin Source File
@@ -608,14 +612,6 @@ SOURCE=.\src\etc\distance.h
 # Begin Source File
 
 SOURCE=.\src\app\mapEditor\editor.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\erro.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\eventos.h
 # End Source File
 # Begin Source File
 
@@ -639,10 +635,6 @@ SOURCE=.\src\fight\fightSystem.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\figura.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\gui\fonte.h
 # End Source File
 # Begin Source File
@@ -660,10 +652,6 @@ SOURCE=.\src\ia\fuzzyrule.h
 # Begin Source File
 
 SOURCE=.\src\ia\fuzzyvariable.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\etc\glm.h
 # End Source File
 # Begin Source File
 
@@ -691,10 +679,6 @@ SOURCE=.\src\classes\inventory.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\engine\inventwindow.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\classes\itemslot.h
 # End Source File
 # Begin Source File
@@ -715,10 +699,6 @@ SOURCE=.\src\gui\listtext.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\app\mapEditor\listwindow.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\map\map.h
 # End Source File
 # Begin Source File
@@ -732,10 +712,6 @@ SOURCE=.\src\map\mapfog.h
 # Begin Source File
 
 SOURCE=.\src\map\maplights.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\map\mapobjeto.h
 # End Source File
 # Begin Source File
 
@@ -843,10 +819,6 @@ SOURCE=.\src\ia\pattAgent.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\engine\personagens.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\app\mapEditor\portal.h
 # End Source File
 # Begin Source File
@@ -855,23 +827,11 @@ SOURCE=.\src\ia\potentAgent.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\gui\quadtexto.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\classes\race.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\engine\racewindow.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\gui\rolbar.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\seltexto.h
 # End Source File
 # Begin Source File
 
@@ -880,10 +840,6 @@ SOURCE=.\src\engine\shadow.h
 # Begin Source File
 
 SOURCE=.\src\classes\skills.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\engine\skillwindow.h
 # End Source File
 # Begin Source File
 
@@ -900,10 +856,6 @@ SOURCE=.\src\sound\sound.h
 # Begin Source File
 
 SOURCE=.\src\engine\sun.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\tabbotao.h
 # End Source File
 # Begin Source File
 

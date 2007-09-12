@@ -6,9 +6,9 @@
 /********************************************************************
  *                             Constructor                          *
  ********************************************************************/
-terrain::terrain(Map* map)
+terrain::terrain(Map* acMap)
 {
-   actualMap = map;
+   actualMap = acMap;
    state = STATE_TERRAIN_OTHER;
 }
 

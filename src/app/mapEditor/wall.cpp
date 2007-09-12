@@ -6,9 +6,9 @@
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-wallController::wallController(Map* map)
+wallController::wallController(Map* acMap)
 {
-   actualMap = map;
+   actualMap = acMap;
    state = WALL_STATE_OTHER;
    actualWall = NULL;
    limitSquare = false;
@@ -228,9 +228,9 @@ void wallController::doWall(bool X, bool Z, bool full)
          if(limitSquare)
          {
             float cmp = ((int)(actualWall->z1) / actualMap->squareSize())*actualMap->squareSize();
-            actualWall->x1 = ((int)round((actualWall->x1) / actualMap->squareSize()))*actualMap->squareSize();
-            actualWall->x2 = ((int)round((actualWall->x2) / actualMap->squareSize()))*actualMap->squareSize();
-            actualWall->z1 = ((int)round((actualWall->z1 / actualMap->squareSize())))*actualMap->squareSize();
+            actualWall->x1 = ((int)floor((actualWall->x1) / actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->x2 = ((int)floor((actualWall->x2) / actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->z1 = ((int)floor((actualWall->z1 / actualMap->squareSize())))*actualMap->squareSize();
             if(cmp < actualWall->z1)
             {
                if(full)
@@ -255,11 +255,11 @@ void wallController::doWall(bool X, bool Z, bool full)
          {
             float cmp = ((int)(actualWall->x1) / actualMap->squareSize()) 
                          * actualMap->squareSize();
-            actualWall->z1 = ((int)round((actualWall->z1) / actualMap->squareSize()))
+            actualWall->z1 = ((int)floor((actualWall->z1) / actualMap->squareSize()))
                               * actualMap->squareSize();
-            actualWall->z2 = ((int)round((actualWall->z2) / actualMap->squareSize()))
+            actualWall->z2 = ((int)floor((actualWall->z2) / actualMap->squareSize()))
                               * actualMap->squareSize();
-            actualWall->x1 = ((int)round((actualWall->x1 / actualMap->squareSize())))
+            actualWall->x1 = ((int)floor((actualWall->x1 / actualMap->squareSize())))
                              * actualMap->squareSize();
             if(cmp < actualWall->x1)
             {

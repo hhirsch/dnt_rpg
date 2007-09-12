@@ -8,9 +8,9 @@
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
-portal::portal(Map* map)
+portal::portal(Map* acMap)
 {
-   actualMap = map;
+   actualMap = acMap;
    state = PORTAL_STATE_OTHER;
    fileDoor = "";
    portalList = new(areaList);

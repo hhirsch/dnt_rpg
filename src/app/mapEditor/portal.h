@@ -12,8 +12,8 @@ class portal
 {
    public:
       /*! Constructor
-       * \param map -> poiter to opened map */
-      portal(Map* map);
+       * \param acMap -> poiter to opened map */
+      portal(Map* acMap);
       /*! Destructor */
       ~portal();
 

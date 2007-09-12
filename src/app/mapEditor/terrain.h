@@ -9,8 +9,8 @@ class terrain
 {
    public:
       /*! Constructor
-       * \param map -> pointer to opened map */
-      terrain(Map* map);
+       * \param acMap -> pointer to opened map */
+      terrain(Map* acMap);
       /*! Destructor */
       ~terrain();
 

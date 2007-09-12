@@ -12,8 +12,8 @@ class objects
 {
    public:
       /*! Constructor
-       * \param map -> poiter to opened map*/
-      objects(Map* map, modelList* usedModels);
+       * \param acMap -> poiter to opened map*/
+      objects(Map* acMap, modelList* usedModels);
       /*! Destructor */
       ~objects();
 
@@ -51,7 +51,7 @@ class objects
       GLint obstacleOrientation;  /**< Orientation of the Obstacle */
 
       void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
-                        Map* map, mapObject* obj, int qx, int qz);
+                        Map* acMap, mapObject* obj, int qx, int qz);
 
 };
 

@@ -9,8 +9,8 @@ class wallController
 {
    public:
       /*! Constructor 
-       * \param map -> pointer to opened map */
-      wallController(Map* map);
+       * \param acMap -> pointer to opened map */
+      wallController(Map* acMap);
       /*! Destructor */
       ~wallController();
 
