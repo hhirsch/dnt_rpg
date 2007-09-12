@@ -9,7 +9,7 @@
  - Messages on world map;
  - Smooth Camera Moves;
  - Indoor Reflexions;
- - Better Dynamic Ligths Implementation;
+ - Better Dynamic Lights Implementation;
  - More 3D Objects;
  - More Characters;
  - Rewrite the GUI Renderer;
@@ -22,7 +22,6 @@
  - Fixed Bug on NPCs Fight Animations;
  - Fixed Bug on configures;
  - Other minor bugs fixes;
-
 
 ================================================
 |               Version 0.1.1                  |
