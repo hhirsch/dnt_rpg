@@ -320,11 +320,19 @@ SOURCE=.\src\gui\menu.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\message3d.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\messages.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\particle\meteor.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\mission.cpp
 # End Source File
 # Begin Source File
 
@@ -728,11 +736,19 @@ SOURCE=.\src\gui\menu.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\message3d.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\messages.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\particle\meteor.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\mission.h
 # End Source File
 # Begin Source File
 

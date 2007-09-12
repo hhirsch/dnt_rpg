@@ -1,7 +1,7 @@
 [Project]
 FileName=DccNiTghtmare.dev
 Name=DccNiTghtmare
-UnitCount=196
+UnitCount=198
 Type=0
 Ver=1
 ObjFiles=
@@ -1818,26 +1818,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit179]
-FileName=src\ia\luaInterface.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit180]
-FileName=src\ia\luaInterface.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit181]
 FileName=src\map\mapobject.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1847,7 +1827,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit182]
+[Unit180]
 FileName=src\map\mapobject.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1857,7 +1837,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit183]
+[Unit181]
 FileName=src\particle\meteor.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1867,7 +1847,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit184]
+[Unit182]
 FileName=src\particle\meteor.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1877,7 +1857,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit185]
+[Unit183]
 FileName=src\ia\iafuncs.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1887,7 +1867,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit186]
+[Unit184]
 FileName=src\ia\iafuncs.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1897,8 +1877,28 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit187]
+[Unit185]
 FileName=src\ia\iascript.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit186]
+FileName=src\ia\iascript.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit187]
+FileName=src\ia\iastack.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
@@ -1918,26 +1918,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit188]
-FileName=src\ia\iascript.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit189]
-FileName=src\ia\iastack.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit190]
 FileName=src\ia\iastack.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1947,7 +1927,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit191]
+[Unit189]
 FileName=src\ia\iavariable.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1957,7 +1937,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit192]
+[Unit190]
 FileName=src\ia\iavariable.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1967,7 +1947,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit193]
+[Unit191]
 FileName=src\etc\extensions.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1977,7 +1957,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit194]
+[Unit192]
 FileName=src\etc\extensions.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1987,7 +1967,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit195]
+[Unit193]
 FileName=src\particle\partlist.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1997,8 +1977,48 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit196]
+[Unit194]
 FileName=src\particle\partlist.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit195]
+FileName=src\classes\mission.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit196]
+FileName=src\classes\mission.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit197]
+FileName=src\etc\message3d.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit198]
+FileName=src\etc\message3d.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
