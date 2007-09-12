@@ -210,7 +210,8 @@ object::~object()
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void object::draw(float x, float z, GLfloat dist, float orientation, bool inverted)
+void object::draw(float x, float z, GLfloat dist, float orientation, 
+                  bool inverted)
 {
    /* Draw the defined model */
    glEnable(GL_COLOR_MATERIAL);

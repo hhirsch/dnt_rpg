@@ -634,7 +634,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    /* Actualize Lights */
    lights.actualize(perX, perZ);
 
-   //glEnable(GL_COLOR_MATERIAL);
+   glEnable(GL_COLOR_MATERIAL);
 
    glColor4f(1.0, 1.0, 1.0, 1.0);
    drawFloor( cameraX, cameraY, cameraZ, matriz );
@@ -653,7 +653,7 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    /* Draw objects */
    drawObjects(cameraX, cameraY, cameraZ, matriz, false);
 
-   //glDisable(GL_COLOR_MATERIAL);
+   glDisable(GL_COLOR_MATERIAL);
    glColor3f(1.0,1.0,1.0);
 
    return(0);
@@ -886,8 +886,6 @@ Map::Map(lObject* lObjects)
    objects = lObjects;
    x = z = 0;
    xInic = zInic = 0;
-   SQUAREMINISIZE = 4;
-   SQUAREMINIDIV = (squareSize() / SQUAREMINISIZE);
 }
 
 /********************************************************************
@@ -1544,6 +1542,10 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
       maux = maux->next;
    }
 
+   /* Define minimap sizes */
+   SQUAREMINISIZE = 2;
+   SQUAREMINIDIV = (squareSize() / SQUAREMINISIZE);
+
    /* And create the splats */
    createSplats();
 
@@ -1602,6 +1604,10 @@ void Map::newMap(int X, int Z)
           saux->B = 96;
       }
    }
+
+   /* Define new minimap sizes */
+   SQUAREMINISIZE = 2;
+   SQUAREMINIDIV = (squareSize() / SQUAREMINISIZE);
 
    xInic = 1*squareSize();
    zInic = 1*squareSize();

@@ -2343,10 +2343,10 @@ int engine::treatIO(SDL_Surface *screen)
             x -= 7;
             z -= 7;
          }
-         x = 8 + (x*4);
-         z = 20 + (z*4);
+         x = 8 + (x*2);
+         z = 20 + (z*2);
 
-         botPerMiniMap->setCoordinate(x, z, x+3, z+3);
+         botPerMiniMap->setCoordinate(x, z, x+1, z+1);
 
          miniMapWindow->draw(mouseX, mouseY);
       }
@@ -2526,6 +2526,9 @@ void engine::renderScene()
               glCullFace(GL_FRONT);
               glEnable(GL_NORMALIZE);
               glPushMatrix();
+                 glTranslatef(per->xPosition, per->yPosition,
+                        per->zPosition);
+                 glRotatef(per->orientation,0,1,0);
                  glScalef(1.0, -1.0, 1.0);
                  per->render();
               glPopMatrix();
@@ -2614,6 +2617,9 @@ void engine::renderScene()
                  glCullFace(GL_FRONT);
                  glEnable(GL_NORMALIZE);
                  glPushMatrix();
+                    glTranslatef(per->xPosition, per->yPosition,
+                                 per->zPosition);
+                    glRotatef(per->orientation,0,1,0);
                     glScalef(1.0, -1.0, 1.0);
                     per->render();
                  glPopMatrix();
