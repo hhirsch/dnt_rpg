@@ -89,7 +89,8 @@ string conversation::getString(int& initialPosition, string buffer,
       if( (!considerSpace) && 
           ( (buffer[i] == '\0') || (buffer[i] == '\n') || 
             (buffer[i] == '(') || (buffer[i] == ')') || 
-            (buffer[i] == ',') || (buffer[i] == '=') ) )
+            (buffer[i] == ',') || (buffer[i] == '=') ||
+			(buffer[i] == 13) ) )
       {
          separator = buffer[i];
          endGet = true;

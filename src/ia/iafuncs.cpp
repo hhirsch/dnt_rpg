@@ -202,7 +202,8 @@ string nextToken(string s, unsigned int& pos)
    /* Ignore all previous spaces (and commas) */
    while( (pos < s.length()) && ( (s[pos] == IA_SEPARATOR_SPACE) || 
           (s[pos] == IA_SEPARATOR_TAB) || (s[pos] == IA_SEPARATOR_NEW_LINE) || 
-          (s[pos] == IA_SEPARATOR_NULL) || (s[pos] == IA_SEPARATOR_COMMA[0]) ))
+          (s[pos] == IA_SEPARATOR_NULL) || (s[pos] == IA_SEPARATOR_COMMA[0]) ||
+		  (s[pos] == 13)) )
    {
       pos++;
    }
@@ -253,7 +254,7 @@ string nextToken(string s, unsigned int& pos)
          /* Treat as an normal input */
          while( (pos < s.length()) && (s[pos] != ';') && (s[pos] != ',') &&
                 (s[pos] != '\n') && (s[pos] != '\0') && (s[pos] != ' ') &&
-                (s[pos] != '\t') && (!isOperator(cmp)) )
+                (s[pos] != '\t') && (s[pos] != 13) && (!isOperator(cmp)) )
           {
             ret += s[pos];
             pos++;
