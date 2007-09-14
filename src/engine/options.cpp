@@ -4,10 +4,20 @@
 #include "camera.h"
 #include "util.h"
 
-#define NM_PORTUGUES gettext("Portuguese")
-#define NM_INGLES    gettext("English")
-#define NM_FRANCES   gettext("French")
-#define NM_ESPANHOL  gettext("Spanish")
+#define NM_PORTUGUESE gettext("Portuguese")
+#define NM_ENGLISH    gettext("English")
+#define NM_FRENCH     gettext("French")
+#define NM_SPANISH    gettext("Spanish")
+
+#define FL_PORTUGUESE "pt_BR"
+#define FL_ENGLISH    "en"
+#define FL_FRENCH     "fr"
+#define FL_SPANISH    "es"
+
+#define LANG_PORTUGUESE 3 /**< Portuguese Language */
+#define LANG_SPANISH    2 /**< Spanish Language */
+#define LANG_FRENCH     1 /**< French Language */
+#define LANG_ENGLISH    0 /**< English Language */
 
 #define LANG_LAST  3
 #define LANG_FIRST 0
@@ -146,33 +156,75 @@ string options::languageName()
    string saux;
    switch(langNumber)
    {
-      /*case LANG_PORTUGUES:
+      case LANG_PORTUGUESE:
       {
-         saux = NM_PORTUGUES;
+         saux = NM_PORTUGUESE;
          break;
       }
-      case LANG_ESPANHOL:
+      case LANG_SPANISH:
       {
-         saux = NM_ESPANHOL;
+         saux = NM_SPANISH;
          break;
       }
-      case LANG_FRANCES: 
+      case LANG_FRENCH: 
       {
-         saux = NM_FRANCES;
+         saux = NM_FRENCH;
          break;
       }
-      case LANG_INGLES:
+      case LANG_ENGLISH:
       {
-         saux = NM_INGLES;
+         saux = NM_ENGLISH;
          break;
-      }*/
-      //FIXME for the gettext use! here will reset the locale!
+      }
    }
    return(saux);
 }
 
 /****************************************************************
- *                         languageName                         *
+ *                         setLanguage                          *
+ ****************************************************************/
+void options::setLanguage()
+{
+   string saux = "";
+   switch(langNumber)
+   {
+      case LANG_PORTUGUESE:
+      {
+         saux = FL_PORTUGUESE;
+         break;
+      }
+      case LANG_SPANISH:
+      {
+         saux = FL_SPANISH;
+         break;
+      }
+      case LANG_FRENCH: 
+      {
+         saux = FL_FRENCH;
+         break;
+      }
+      case LANG_ENGLISH:
+      {
+         saux = FL_ENGLISH;
+         break;
+      }
+   }
+
+   if(!saux.empty())
+   {
+      /* Change language.  */
+      setenv ("LANGUAGE", saux.c_str(), 1);
+       
+      /* Make change known.  */
+      {
+         extern int  _nl_msg_cat_cntr;
+         ++_nl_msg_cat_cntr;
+      }
+   }
+}
+
+/****************************************************************
+ *                        reflexionName                         *
  ****************************************************************/
 string options::reflexionName()
 {

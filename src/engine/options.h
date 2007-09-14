@@ -33,6 +33,9 @@ class options
       /*! Treat options Window Events */
       int Treat(guiObject* object, int eventInfo, interface* interf);
 
+      /*! Set language to one defined at the option's file */
+      void setLanguage();
+
       int     musicVolume;     /**< Actual Music Volume */
       int     sndfxVolume;     /**< Actual Sound Effects Volume */
       int     langNumber;      /**< Actual Language Number */

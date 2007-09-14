@@ -50,6 +50,9 @@ engine::engine()
    /* Set Camera, based on options */
    gameCamera.defineCameraType(option->cameraNumber);
 
+   /* Set Language, base on options */
+   option->setLanguage();
+
    /* Define all OpenGL Extensions used */
    extensions ext;
    ext.defineAllExtensions();
@@ -714,6 +717,8 @@ int engine::OptionsScreen(GLuint idTextura)
    {
       snd->changeVolume(option->musicVolume, option->sndfxVolume);
       gameCamera.defineCameraType(option->cameraNumber);
+      /* Change the language */
+      option->setLanguage();
    }
 
    delete(alignList);
