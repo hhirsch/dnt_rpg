@@ -308,6 +308,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
                                  0.01,0.04,0.52);
       }
       /* Show Damage */
+      sprintf(texto,"%d",damage);
       controller->addMessage(target.xPosition, target.yPosition + target.max[1],
                              target.zPosition, texto,
                              0.4, 0.01,0.03);
