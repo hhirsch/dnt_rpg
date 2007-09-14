@@ -13,6 +13,13 @@ string translateDataString(string dataString)
    {
       /* Is a translatable string */
 
+      /* Verify and remove \n or DOS carriage at the end */
+      if( (dataString[dataString.length()-1] == '\n') ||
+          (dataString[dataString.length()-1] == 13) )
+      {
+         dataString.erase(dataString.length()-1);
+      }
+
       /* Remove gettext(" */
       dataString.erase(0,9);
       /* Remove ") */

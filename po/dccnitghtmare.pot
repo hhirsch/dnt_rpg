@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-14 14:30-0300\n"
+"POT-Creation-Date: 2007-09-14 15:48-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1743,6 +1743,16 @@ msgid ""
 "enemy's areas|without  taking  damage  or oportunity|attacks, fall from high "
 "places without|taking  damage  and  also  make an im-|pression to little "
 "girls.|Key Attribute: Dexterity."
+msgstr ""
+
+#: data/skills/adestrarbichos.ski:1
+msgid "Train Animals"
+msgstr ""
+
+#: data/skills/adestrarbichos.ski:2
+msgid ""
+"   The  organism  graduate  with  this|skill  is  capable  to  teach  and  "
+"be|likeable with animals and/or similars.|Key Attribute: Charism."
 msgstr ""
 
 #: data/skills/arrombar.ski:1

@@ -157,7 +157,7 @@ skills::skills()
          return;
       }
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].name = buffer;
+      m_skills[aux].name = translateDataString(buffer);
       fgets(buffer, sizeof(buffer), desc);
       m_skills[aux].description = "";
       fscanf(desc,"%d",&m_skills[aux].baseAttribute);
