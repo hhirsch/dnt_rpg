@@ -1,0 +1,17 @@
+gettext("Powerful Esophagus")
+gettext("Cause his muscles grown in internal organs, the Phisical Education Estudant is able to expel, one time per day, a fire sphere that causes 6d6 plus 2d6 each level above 15.")
+15
+CLASS EDFISICA
+ATTRIBUTE CONSTITUTION
+ATTRIBUTE CONSTITUTION
+ALL ALL
+6*d6+0
+2*d6+0
+1,0,1
+0 ACT_TYPE_NORMAL_ACTION ACT_ATTACK
+15
+NONE 0.0,0
+NONE 0.0,0
+NONE 0.0,0
+NONE 0.0,0
+NONE 0.0,0
