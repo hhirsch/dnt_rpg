@@ -21,36 +21,36 @@ msgstr ""
 
 #: src/classes/feats.cpp:174
 msgid "Too far away for action!"
-msgstr ""
+msgstr "Trop lointain pour l'action!"
 
 #: src/classes/feats.cpp:244 src/classes/feats.cpp:259
 msgid "Miss."
-msgstr ""
+msgstr "Manque."
 
 #: src/classes/feats.cpp:247
 msgid "|Critical Miss!"
-msgstr ""
+msgstr "|Manque Critique!"
 
 #: src/classes/feats.cpp:251
 msgid "Critical Miss!"
-msgstr ""
+msgstr "Manque Critique!"
 
 #: src/classes/feats.cpp:295
 #, c-format
 msgid "Hit for %d points."
-msgstr ""
+msgstr "Coup pour %d points."
 
 #: src/classes/feats.cpp:303
 msgid "|Critical Hit!"
-msgstr ""
+msgstr "|Coup Critique!"
 
 #: src/classes/feats.cpp:307
 msgid "Critical Hit!"
-msgstr ""
+msgstr "Coup Critique!"
 
 #: src/classes/feats.cpp:326
 msgid "Not enought points to use!"
-msgstr ""
+msgstr "Pas de points à employer!"
 
 #: src/classes/skills.cpp:25
 #, c-format
@@ -71,21 +71,21 @@ msgstr ""
 
 #: src/engine/alignwindow.cpp:28
 msgid "Tendency & Alignment"
-msgstr ""
+msgstr "Alignement"
 
 #: src/engine/alignwindow.cpp:47 src/engine/aspectwindow.cpp:58
 #: src/engine/attwindow.cpp:174 src/engine/options.cpp:325
 #: src/engine/racewindow.cpp:59 src/engine/classwindow.cpp:61
 #: src/engine/skillwindow.cpp:85
 msgid "Confirm"
-msgstr ""
+msgstr "Comfirmez"
 
 #: src/engine/alignwindow.cpp:51 src/engine/aspectwindow.cpp:62
 #: src/engine/attwindow.cpp:178 src/engine/barterwindow.cpp:34
 #: src/engine/options.cpp:329 src/engine/racewindow.cpp:63
 #: src/engine/classwindow.cpp:65 src/engine/skillwindow.cpp:89
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: src/engine/initial.cpp:37
 msgid "0.2"
@@ -117,19 +117,19 @@ msgstr "Sortir"
 
 #: src/engine/aspectwindow.cpp:20
 msgid "Aspect"
-msgstr ""
+msgstr "Aspect"
 
 #: src/engine/aspectwindow.cpp:36
 msgid "Name:"
-msgstr ""
+msgstr "Nom"
 
 #: src/engine/aspectwindow.cpp:41
 msgid "Age:"
-msgstr ""
+msgstr "Âge"
 
 #: src/engine/aspectwindow.cpp:45
 msgid "Sex:"
-msgstr ""
+msgstr "Sexe"
 
 #: src/engine/aspectwindow.cpp:94
 #, c-format
@@ -139,31 +139,31 @@ msgstr ""
 #: src/engine/inventwindow.cpp:25 src/engine/barterwindow.cpp:65
 #: src/engine/barterwindow.cpp:75
 msgid "Inventory"
-msgstr ""
+msgstr "Inventaire"
 
 #: src/engine/inventwindow.cpp:135
 msgid "Drop"
-msgstr ""
+msgstr "Rejeter"
 
 #: src/engine/inventwindow.cpp:137
 msgid "Sell"
-msgstr ""
+msgstr "Vendre"
 
 #: src/engine/inventwindow.cpp:140
 msgid "Use"
-msgstr ""
+msgstr "Utiliser"
 
 #: src/engine/inventwindow.cpp:144
 msgid "Remove"
-msgstr ""
+msgstr "Enlever"
 
 #: src/engine/inventwindow.cpp:147
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: src/engine/inventwindow.cpp:149
 msgid "Get"
-msgstr ""
+msgstr "Obtenir"
 
 #: src/engine/attwindow.cpp:36
 msgid "Attributes"
@@ -171,11 +171,11 @@ msgstr ""
 
 #: src/engine/attwindow.cpp:57
 msgid "Roll"
-msgstr ""
+msgstr "Rouler"
 
 #: src/engine/attwindow.cpp:60
 msgid "Clear"
-msgstr ""
+msgstr "Éclaircir"
 
 #: src/engine/attwindow.cpp:64
 msgid "Auto"
@@ -183,40 +183,39 @@ msgstr ""
 
 #: src/engine/attwindow.cpp:67 data/skills/forca.ski:1
 msgid "Strength"
-msgstr ""
+msgstr "Force"
 
 #: src/engine/attwindow.cpp:84 data/skills/destreza.ski:1
 msgid "Dexterity"
-msgstr ""
+msgstr "Dextérité"
 
 #: src/engine/attwindow.cpp:98 data/skills/constituicao.ski:1
-#, fuzzy
 msgid "Constitution"
-msgstr "Continue"
+msgstr "Constitution"
 
 #: src/engine/attwindow.cpp:115 data/skills/inteligencia.ski:1
 msgid "Intelligence"
-msgstr ""
+msgstr "Intelligence"
 
 #: src/engine/attwindow.cpp:129 data/skills/sabedoria.ski:1
 msgid "Wisdom"
-msgstr ""
+msgstr "Sagesse"
 
 #: src/engine/attwindow.cpp:142 data/skills/carisma.ski:1
 msgid "Charism"
-msgstr ""
+msgstr "Charisme"
 
 #: src/engine/attwindow.cpp:164
 msgid "Attribute Description"
-msgstr ""
+msgstr "Description de Caractéristique"
 
 #: src/engine/attwindow.cpp:437
 msgid "Warning"
-msgstr ""
+msgstr "Erreur"
 
 #: src/engine/attwindow.cpp:438
 msgid "You Need to Assign All Attributes."
-msgstr ""
+msgstr "Vous avez assigner tous les Caractéristiques."
 
 #: src/engine/barterwindow.cpp:18 src/engine/dialog.cpp:427
 msgid "Barter"
@@ -232,19 +231,19 @@ msgstr ""
 
 #: src/engine/options.cpp:7
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugais"
 
 #: src/engine/options.cpp:8
 msgid "English"
-msgstr ""
+msgstr "Anglais"
 
 #: src/engine/options.cpp:9
 msgid "French"
-msgstr ""
+msgstr "Français"
 
 #: src/engine/options.cpp:10
 msgid "Spanish"
-msgstr ""
+msgstr "Espagnol"
 
 #: src/engine/options.cpp:102
 #, c-format
@@ -253,91 +252,91 @@ msgstr ""
 
 #: src/engine/options.cpp:184
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 #: src/engine/options.cpp:189
 msgid "Characters"
-msgstr ""
+msgstr "Personnages"
 
 #: src/engine/options.cpp:194
 msgid "All"
-msgstr ""
+msgstr "Tout"
 
 #: src/engine/options.cpp:210
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/engine/options.cpp:213
 msgid "Pursue"
-msgstr ""
+msgstr "Poursuivre"
 
 #: src/engine/options.cpp:236
 msgid "Music Volume:"
-msgstr ""
+msgstr "Volume de Musique:"
 
 #: src/engine/options.cpp:251
 msgid "Effects Volume:"
-msgstr ""
+msgstr "Volume d'Effets:"
 
 #: src/engine/options.cpp:266
 msgid "Language:"
-msgstr ""
+msgstr "Langue:"
 
 #: src/engine/options.cpp:280
 msgid "Camera Mode:"
-msgstr ""
+msgstr "Mode de Caméra:"
 
 #: src/engine/options.cpp:293
 msgid "Enable Grass Effects (need particles)"
-msgstr ""
+msgstr "Permettre les effets d'herbe"
 
 #: src/engine/options.cpp:302
 msgid "Enable Particles Effects"
-msgstr ""
+msgstr "Permettre les particules"
 
 #: src/engine/options.cpp:312
 msgid "Reflections:"
-msgstr ""
+msgstr "Reflets:"
 
 #: src/engine/racewindow.cpp:27
 msgid "Race"
-msgstr ""
+msgstr "Race"
 
 #: src/engine/racewindow.cpp:34
 msgid "Race Description"
-msgstr ""
+msgstr "Description Raciale"
 
 #: src/engine/racewindow.cpp:43
 msgid "Race Characteristcs"
-msgstr ""
+msgstr "Caractéristiques Raciales"
 
 #: src/engine/racewindow.cpp:78
 msgid "Race Modifiers||"
-msgstr ""
+msgstr "Modificateurs Raciales||"
 
 #: src/engine/racewindow.cpp:86
 msgid "No Modifiers.||"
-msgstr ""
+msgstr "Aucuns Modificateurs.||"
 
 #: src/engine/racewindow.cpp:90
 msgid "Race Feats||"
-msgstr ""
+msgstr "Dons Raciales||"
 
 #: src/engine/racewindow.cpp:98 src/engine/classwindow.cpp:156
 msgid "No Feats.|"
-msgstr ""
+msgstr "Aucuns Dons.|"
 
 #: src/engine/racewindow.cpp:103
 msgid "|Race Skills||"
-msgstr ""
+msgstr "|Compétences Raciales||"
 
 #: src/engine/racewindow.cpp:119 src/engine/classwindow.cpp:177
 msgid "No Skills."
-msgstr ""
+msgstr "Aucunes Compétences."
 
 #: src/engine/classwindow.cpp:29
 msgid "Class"
-msgstr ""
+msgstr "Classe"
 
 #: src/engine/classwindow.cpp:36
 msgid "Class Description"
@@ -349,7 +348,7 @@ msgstr ""
 
 #: src/engine/classwindow.cpp:83
 msgid "Life Dice"
-msgstr ""
+msgstr "Dés de Vie"
 
 #: src/engine/classwindow.cpp:86
 msgid "Skill Points|"
@@ -369,7 +368,7 @@ msgstr ""
 
 #: src/engine/classwindow.cpp:144
 msgid "No Modifiers||"
-msgstr ""
+msgstr "Aucuns Modificateurs.||"
 
 #: src/engine/classwindow.cpp:148
 msgid "Class Feats||"
