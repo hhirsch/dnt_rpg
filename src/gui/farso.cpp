@@ -14,7 +14,7 @@ void Farso_Init(SDL_Surface **screen, string title)
     /* Start Openning the screen  */
     if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
     {
-        printf("Argh! Can't init SDL!\n");
+        printf(gettext("Argh! Can't init SDL!\n"));
         exit(1);
     }
     atexit(SDL_Quit);
@@ -32,7 +32,7 @@ void Farso_Init(SDL_Surface **screen, string title)
                                SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_OPENGL);
     if ( screen == NULL ) 
     {
-       printf("Oxi! Can't ajust video mode!\n");
+       printf(gettext("Oxi! Can't ajust video mode!\n"));
        exit(2);
     }
 

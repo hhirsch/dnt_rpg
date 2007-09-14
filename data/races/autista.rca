@@ -1,0 +1,12 @@
+gettext("Strange Autistic")
+gettext("' -Look at this boy! He is you  when  you|were small!|-No, Farrer, I was a normal happy child.'|(Farrer  to  a  Strange Autistic (Panda),|Anamabeka's  vocalist,  when  watching an|Oblongs episode  where one  infant,  with|eyes  of different  sizes, sawed  his bed|utilizing a saw)")
+gettext("Despite of, in the distance, looks like a|common and  normal person, this tormented|organism  suffers  serious  psychological|dysfunctions and comportamentals detours.|These creatures have  the  power to bring|outside their own world  all the elements|that exists there,  sometimes  confunding|other   races.   Feared   by   many   and|misunderstood by everybody, this organism|is going  to lead their life as any other|race, without put  the others, or  he, in|risk. Everybody  has a  little of Strange|Autistic inside itself,  be this autism a|world  of  wars  and  shots,  fights  and|samurais,  latin  culture  or  styles  of|swords and drums.")
+2
+-4 SOCIAL_TESTS ALL TENDENCY OPPOSITE
+gettext("Being too much strange for someone else's|eyes, the Strange Autistic receives -4 in|all Social Tests when deal with an aim of|opposite tendencies.")
+2 SOCIAL_TESTS ALL TENDENCY COMPATIBLE
+gettext("Understanding the fact that everybody  is|a  little  Strange Autistics, the Strange|Autistic receives a  bonus  of + 2 in all|Social Tests  when  deal  with  an aim of|compatible tendencies.")
+2
+CONFUSION_ACTIONS
+ONLY_YOU_ARE
+0

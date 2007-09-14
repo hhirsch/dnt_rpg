@@ -1,6 +1,7 @@
 #ifndef _barter_window_h
 #define _barter_window_h
 
+#include <libintl.h>
 #include "../gui/farso.h"
 #include "../classes/barter.h"
 #include "inventwindow.h"

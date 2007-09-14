@@ -1,0 +1,11 @@
+gettext("Hippie")
+gettext("'They  say that they want to save nature,|but the  only  thing  they  do  is  smoke|maryjane and smells bad!'|(Eric Cartman)")
+gettext("Lovers  of plants, animals, fungi, worms,|air,  wind, water, breeze, fire, heat, in|other   words,  everything  that  emanate|something  from  nature  and can transmit|them  energy  or  karma (no,  we   aren't|talking about  Druid Elfs),  the  hippies|can be  for hours  listening  to the wind|voice   or   seeing   little  land  worms|entering their bodies, since equiped with|high LSD doses.")
+2
+5 SKILL TRAIN_ANIMALS ALL ALL
+gettext("Since  they have  a lot  of love for  the|nature,  the el..,  I've  said,  hippies,|receive +5 in Train Animals.")
+-6 SKILL FREE_PASS ALL ALL
+gettext("Usually  Hippies  creatures  aren't  well|accept  by  society,  fearful   of  their|subversives  actions based  on  LSD,  so,|they receive -6 in Free-pass.")
+1
+LSD
+0

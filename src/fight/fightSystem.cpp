@@ -120,7 +120,7 @@ bool fightSystem::hasEnemies(character* pers, string& brief)
        }
    }
 
-   brief += "|"+ language.FIGHT_END_NOENEMIES;
+   brief += gettext("|No more enemies.");
    return(false);
 }
 
@@ -131,6 +131,7 @@ bool fightSystem::hasEnemies(character* pers, string& brief)
 int fightSystem::doTurn(string& brief)
 {
    string tmp;
+   char buffer[512];
    Uint32 time = SDL_GetTicks();
    brief = "";
 
@@ -163,12 +164,12 @@ int fightSystem::doTurn(string& brief)
          if(actualActor == NULL)
          {
             /* Begin new Round */
-            brief += language.FIGHT_ROUND_NEW  + "|";
+            brief += gettext("New Round|");
             charsInitiatives.newRound(); 
             actualActor = charsInitiatives.nextCharacter();
             if(actualActor == NULL)
             {
-               brief += language.FIGHT_ERROR_NO_CHARACTERS;
+               brief += gettext("Error: No Characters!");
                return(FIGHT_END);
             }
          }
@@ -182,12 +183,12 @@ int fightSystem::doTurn(string& brief)
             if(actualActor == NULL)
             {
                /* Begin new Round */
-               brief += language.FIGHT_ROUND_NEW  + "|";;
+               brief += gettext("New Round|");
                charsInitiatives.newRound(); 
                actualActor = charsInitiatives.nextCharacter();
                if(actualActor == NULL)
                {
-                  brief += language.FIGHT_ERROR_NO_CHARACTERS;
+                  brief += gettext("Error: No Characters!");
                   return(FIGHT_END);
                }
             } 
@@ -201,7 +202,8 @@ int fightSystem::doTurn(string& brief)
                 /* There's no more enemies, so no more battle */
                 return(FIGHT_END);
              }
-             brief += actualActor->nome + " " + language.FIGHT_TURN;
+             sprintf(buffer, "%s's turn.", actualActor->nome.c_str());
+             brief += buffer;
              return(FIGHT_PC_TURN);
          }
          else
@@ -237,6 +239,7 @@ int fightSystem::doBattleCicle(string& brief)
 void fightSystem::doNPCAction(character* pers, string& brief)
 {
    int attackFeat;
+   char buffer[1024];
 
    /* Determine the target of the character */
    if( (pers->actualEnemy == NULL) || (!pers->actualEnemy->isAlive()))
@@ -256,8 +259,9 @@ void fightSystem::doNPCAction(character* pers, string& brief)
 
    if( (pers->actualEnemy != NULL) && (attackFeat != -1))
    {
-      brief += pers->nome + " " + language.FIGHT_ATTACKS + " " + 
-               pers->actualEnemy->nome + "|";
+      sprintf(buffer, gettext("%s attacks %s|"), pers->nome.c_str(),
+              pers->actualEnemy->nome.c_str());
+      brief += buffer;
       pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
                                                 *pers->actualEnemy, brief,
                                                 msgController,
@@ -265,7 +269,9 @@ void fightSystem::doNPCAction(character* pers, string& brief)
          
       if(!pers->actualEnemy->isAlive())
       {
-         brief += "|" + pers->actualEnemy->nome +" "+ language.FIGHT_DEAD;
+         sprintf(buffer, gettext("|%s is dead!"),
+                 pers->actualEnemy->nome.c_str());
+         brief += buffer;
       }
       
    }

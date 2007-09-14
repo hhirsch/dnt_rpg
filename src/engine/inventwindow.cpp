@@ -22,7 +22,7 @@ inventWindow::inventWindow(int xa, int ya, string title,
  **************************************************************/
 inventWindow::inventWindow(inventory *invent, interface* inter)
 {
-   init(0,0, language.INVENTW_TITLE.c_str(), invent, inter);
+   init(0,0, gettext("Inventory"), invent, inter);
 }
 
 /**************************************************************
@@ -132,21 +132,21 @@ void inventWindow::openMenu(int x, int y, int type)
    int xSize;
    menuType = type;
    objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
-   objectMenu->insertItem(language.INVENTW_DROP,menuType==MENU_TYPE_INVENTORY);
+   objectMenu->insertItem(gettext("Drop"),menuType==MENU_TYPE_INVENTORY);
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem(language.INVENTW_SELL,0);
+   objectMenu->insertItem(gettext("Sell"),0);
    if(menuType == MENU_TYPE_INVENTORY)
    {
-      objectMenu->insertItem(language.INVENTW_USE,1);
+      objectMenu->insertItem(gettext("Use"),1);
    }
    else
    {
-      objectMenu->insertItem(language.INVENTW_REMOVE,1);
+      objectMenu->insertItem(gettext("Remove"),1);
    }
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem(language.INVENTW_INFO,0);
+   objectMenu->insertItem(gettext("Info"),0);
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem(language.INVENTW_GET,1);
+   objectMenu->insertItem(gettext("Get"),1);
 
    defineFont(FFARSO,ALIGN_LEFT,1);
 

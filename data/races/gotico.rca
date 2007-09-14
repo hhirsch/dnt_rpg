@@ -1,0 +1,11 @@
+gettext("Gothic")
+gettext("'I have a problem...'|(Creepy Susie)")
+gettext("With their nose facing the moon and their|depressive way of life (that for them are|a  bale), the Gothic live in groups since|cemeteries  up  to Savassi  plaza. Always|dressed   entirely   in  black  and  with|strange  makeups,  wandering by the night|reciting  Alvares  de  Azevedo (Brazilian|Lord  Byron clone) and  claiming of their|life to the other innocent races.||They  love  the internet,  but there they|forget, from time to time, that they hate|the life,  leaving visible flashes of joy|and of  that  everything  they do is only|pretend to other's eyes.")
+1
+2 SKILL INTIMIDATION RACE BOY_PATY
+gettext("Since Boys / Patys are hightly emotional,|Gothics  receive   +2   in   intimidation|against them.")
+3
+SUN_WEAKNESS
+NIGHT_ADORATION
+LAMENTS_OF_ONE_THOUSANDS_SOULS
+0

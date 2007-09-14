@@ -33,7 +33,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    }
 
    /* create intWindow */
-   intWindow = inter->insertWindow(146,166,661,441,language.ATTW_TITLE.c_str());
+   intWindow = inter->insertWindow(146,166,661,441,gettext("Attributes"));
 
    /* roll and write all rolled dices to string */
    if(!usePreviousValues)
@@ -54,18 +54,17 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                                                   saux.c_str());
    /* reroll button */
    rerollButton = intWindow->getObjectsList()->insertButton(119,16,182,33,
-                                                  language.ATTW_ROLL.c_str(),0);
+                                                  gettext("Roll"),0);
    /* clear button */
    clearButton = intWindow->getObjectsList()->insertButton(183,16,247,33,
-                                                 language.ATTW_CLEAR.c_str(),0);
+                                                  gettext("Clear"),0);
 
    /* auto button */
    autoButton = intWindow->getObjectsList()->insertButton(248,16,312,33,
-                                                          "Auto",0);
+                                                   gettext("Auto"),0);
 
    /* Strenght */
-   intWindow->getObjectsList()->insertTextBox(9,49,85,62,0,
-                                       language.ATTW_STRENGTH.c_str());
+   intWindow->getObjectsList()->insertTextBox(9,49,85,62,0,gettext("Strength"));
    attPoints[0] = intWindow->getObjectsList()->insertTextBox(98,47,117,64,1,"");
    attPoints[0]->setFont(FMINI, 1, ALIGN_LEFT);
    attButtonPrev[0] = intWindow->getObjectsList()->insertButton(87,47,97,64,
@@ -82,7 +81,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
 
    /* Dextery */
    intWindow->getObjectsList()->insertTextBox(9,83,85,96,0,
-                                       language.ATTW_DEXTERITY.c_str());
+                                              gettext("Dexterity"));
    attPoints[1] = intWindow->getObjectsList()->insertTextBox(98,81,117,98,1,"");
    attPoints[1]->setFont(FMINI, 1, ALIGN_LEFT);
    attButtonPrev[1] = intWindow->getObjectsList()->insertButton(87,81,97,98,"<",0);
@@ -96,12 +95,15 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
 
    /* Constitution */
    intWindow->getObjectsList()->insertTextBox(9,119,87,132,0,
-                                       language.ATTW_CONSTITUTION.c_str());
+                                              gettext("Constitution"));
    attPoints[2] = intWindow->getObjectsList()->insertTextBox(98,117,117,134,1,"");
    attPoints[2]->setFont(FMINI, 1, ALIGN_LEFT);
-   attButtonPrev[2] = intWindow->getObjectsList()->insertButton(87,117,97,134,"<",0);
-   attButtonNext[2] = intWindow->getObjectsList()->insertButton(118,117,128,134,">",0);
-   attTotals[2] = intWindow->getObjectsList()->insertTextBox(165,119,195,134,0,"");
+   attButtonPrev[2] = intWindow->getObjectsList()->insertButton(87,117,97,134,
+                                                                "<",0);
+   attButtonNext[2] = intWindow->getObjectsList()->insertButton(118,117,128,134
+                                                                ,">",0);
+   attTotals[2] = intWindow->getObjectsList()->insertTextBox(165,119,195,134,
+                                                             0,"");
    attTotals[2]->setFont(FTIMES, 1, ALIGN_LEFT);
    attMods[2] = intWindow->getObjectsList()->insertTextBox(196,119,226,134,0,
                                                     "");
@@ -110,7 +112,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
 
    /* Inteligency */
    intWindow->getObjectsList()->insertTextBox(9,153,87,166,0,
-                                       language.ATTW_INTELLIGENCE.c_str());
+                                              gettext("Intelligence"));
    attPoints[3] = intWindow->getObjectsList()->insertTextBox(98,151,117,168,1,"");
    attPoints[3]->setFont(FMINI, 1, ALIGN_LEFT);
    attButtonPrev[3] = intWindow->getObjectsList()->insertButton(87,151,97,168,"<",0);
@@ -124,7 +126,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
 
    /* Wisdow */
    intWindow->getObjectsList()->insertTextBox(9,187,87,200,0,
-                                       language.ATTW_WISDOW.c_str());
+                                              gettext("Wisdom"));
    attPoints[4] = intWindow->getObjectsList()->insertTextBox(98,185,117,202,1,"");
    attPoints[4]->setFont(FMINI, 1, ALIGN_LEFT);
    attButtonPrev[4] = intWindow->getObjectsList()->insertButton(87,185,97,202,"<",0);
@@ -137,7 +139,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
 
    /* Charism */
    intWindow->getObjectsList()->insertTextBox(9,221,87,234,0,
-                                       language.ATTW_CHARISM.c_str());
+                                              gettext("Charism"));
    attPoints[5] = intWindow->getObjectsList()->insertTextBox(98,219,117,236,1,"");
    attPoints[5]->setFont(FMINI, 1, ALIGN_LEFT);
    attButtonPrev[5] = intWindow->getObjectsList()->insertButton(87,219,97,236,"<",0);
@@ -159,7 +161,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
 
    /* Attribute Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(248,37,507,52,1,
-                                             language.ATTW_DESCRIPTION.c_str());
+                                             gettext("Attribute Description"));
    textDescTitle->setFont(FHELVETICA, 1, ALIGN_LEFT);
    
    textDesc = intWindow->getObjectsList()->insertTextBox(248,53,507,244,1,
@@ -169,11 +171,11 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(437,248,507,267,
-                                              language.SKILL_CONFIRM.c_str(),1);
+                                              gettext("Confirm"),1);
    
    /* Cancel Button */
    buttonCancel = intWindow->getObjectsList()->insertButton(8,248,78,267,
-                                               language.SKILL_CANCEL.c_str(),1);
+                                               gettext("Cancel"),1);
 
    /* Define Previous Values, if needed */
    if(usePreviousValues)
@@ -432,7 +434,8 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
          }
          else
          {
-            showMessage(language.ATTW_WARN_TITLE, language.ATTW_WARN_MESSAGE,
+            showMessage(gettext("Warning"), 
+                        gettext("You Need to Assign All Attributes."),
                         proj, modl,viewPort);
             glDisable(GL_LIGHTING);
             glDisable(GL_FOG);

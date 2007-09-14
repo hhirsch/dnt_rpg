@@ -6,7 +6,6 @@
  *************************************************************************/
 
 #include "../gui/farso.h"
-#include "../lang/lang.h"
 #include "character.h"
 
 #define ASPECTW_CANCEL  0 /**< Cancel return from Aspect Window */
@@ -58,8 +57,6 @@ class aspectWindow
       cxSel* cxSelSexO;             /**< Other Sex SelBox */
       picture* figurePortrait;      /**< Portrait Figure */
       window* intWindow;            /**< Internal pointer to the window */
-
-      lang language;                /**< Language internationalized */
 
       int totalImages;              /**< Number of total images */
       int curImage;                 /**< Nuber of the Current Image */

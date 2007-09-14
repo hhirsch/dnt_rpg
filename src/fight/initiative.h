@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 #include "../engine/character.h"
-#include "../lang/lang.h"
+#include <libintl.h>
 
 /*! Implementation of the Struct of Initiative */
 class initiativeStruct
@@ -68,7 +68,6 @@ class initiative
      initiativeStruct* first;  /**< First character on initiative list */
      initiativeStruct* next;   /**< Next character on initiative list */
      initiativeStruct* actual; /**< Actual character on initiative list */
-     lang language; /**< Language Internationalization */
 };
 
 #endif

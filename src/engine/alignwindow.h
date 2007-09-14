@@ -5,8 +5,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
+#include <libintl.h>
 #include "../gui/farso.h"
-#include "../lang/lang.h"
 #include "../classes/align.h"
 
 #define ALIGNW_CANCEL  0
@@ -47,8 +47,6 @@ class alignWindow
       rolBar* textDesc;              /**< Text Description */
 
       picture* alignImage;           /**< Alignment Image */
-
-      lang language;                 /**< Language internationalization */
 
 };
 

@@ -2,6 +2,7 @@
 #include "actions.h"
 #include "../engine/util.h"
 #include "../particle/partSystem.h"
+#include "../lang/translate.h"
 #include <SDL/SDL_image.h>
 
 /**************************************************************************
@@ -158,11 +159,11 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
    bool criticalHit = false;
    bool criticalMiss = false;
    bool miss = false;
-   char texto[50];
+   char texto[1024];
 
    if( (featNumber < 0) || (featNumber >= totalFeats) )
    {
-      brief += language.FEAT_INVALID;
+      brief += gettext("Invalid Feat");
       return(false);
    }
 
@@ -170,7 +171,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
                      target.xPosition, target.zPosition,
                      m_feats[featNumber].range*METER_TO_DNT))
    {
-      brief += language.MSG_FAR_AWAY;
+      brief += gettext("Too far away for action!");
       return(false);
    }
 
@@ -240,14 +241,14 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       if( (diceValue - targetValue <= 0) || (criticalMiss) || (miss) )
       {
-         brief += language.FEAT_MISS;
+         brief += gettext("Miss.");
          if( criticalMiss )
          {
-             brief += "|"+language.FEAT_CRITICAL_MISS ;
+             brief += gettext("|Critical Miss!");
              controller->addMessage(attacker.xPosition,
                                     attacker.yPosition+attacker.max[1],
                                     attacker.zPosition,
-                                    language.FEAT_CRITICAL_MISS,
+                                    gettext("Critical Miss!"),
                                     0.92,0.41,0.14);
              //TODO lose weapon;
          }
@@ -255,14 +256,10 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
          {
             controller->addMessage(attacker.xPosition,
                                    attacker.yPosition+attacker.max[1],
-                                   attacker.zPosition,language.FEAT_MISS,
+                                   attacker.zPosition,gettext("Miss."),
                                    0.92,0.41,0.14);
          }
          return(true);
-      }
-      else
-      {
-         brief += "|"+language.FEAT_HIT_FOR+" ";
       }
 
       /* Apply Base Damage Dices */
@@ -295,20 +292,19 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       /*TODO apply aditional dices */
 
-      sprintf(texto,"%d",damage);
+      sprintf(texto,gettext("Hit for %d points."),damage);
       brief += texto;
-      brief += " " + language.FEAT_POINTS;
 
       /* apply damage on thing */
       target.lifePoints -= damage;
 
       if( criticalHit)
       {
-          brief += "|"+ language.FEAT_CRITICAL_HIT ;
+          brief += gettext("|Critical Hit!");
           /* Show critical hit */
           controller->addMessage(attacker.xPosition,
                                  attacker.yPosition+attacker.max[1],
-                                 attacker.zPosition,language.FEAT_CRITICAL_HIT,
+                                 attacker.zPosition,gettext("Critical Hit!"),
                                  0.01,0.04,0.52);
       }
       /* Show Damage */
@@ -327,7 +323,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       return(true);
    }
-   brief += language.FEAT_NO_MORE_POINTS;
+   brief += gettext("Not enought points to use!");
    return(false);
 }
 
@@ -445,9 +441,9 @@ featsList::featsList(string dir, string arq)
    string arqDescricao;
    string arqImagem;
    char buffer[1024];
-   char buf2[128];
-   char buf3[128];
-   char buf4[128];
+   char buf2[256];
+   char buf3[256];
+   char buf4[256];
    int num;
    int i;
    int aux;
@@ -490,9 +486,9 @@ featsList::featsList(string dir, string arq)
       }
       m_feats[aux].internalListNumber = aux;
       fgets(buffer, sizeof(buffer), desc);
-      m_feats[aux].name = buffer;
+      m_feats[aux].name = translateDataString(buffer);
       fgets(buffer, sizeof(buffer), desc);
-      m_feats[aux].description = buffer;
+      m_feats[aux].description = translateDataString(buffer);
       fscanf(desc,"%d",&m_feats[aux].requeridedLevel);
       fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
       m_feats[aux].requeridedFactor.type = buffer;

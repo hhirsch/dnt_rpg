@@ -1,0 +1,2444 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
+"POT-Creation-Date: 2007-09-14 14:30-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/classes/feats.cpp:166
+msgid "Invalid Feat"
+msgstr ""
+
+#: src/classes/feats.cpp:174
+msgid "Too far away for action!"
+msgstr ""
+
+#: src/classes/feats.cpp:244 src/classes/feats.cpp:259
+msgid "Miss."
+msgstr ""
+
+#: src/classes/feats.cpp:247
+msgid "|Critical Miss!"
+msgstr ""
+
+#: src/classes/feats.cpp:251
+msgid "Critical Miss!"
+msgstr ""
+
+#: src/classes/feats.cpp:295
+#, c-format
+msgid "Hit for %d points."
+msgstr ""
+
+#: src/classes/feats.cpp:303
+msgid "|Critical Hit!"
+msgstr ""
+
+#: src/classes/feats.cpp:307
+msgid "Critical Hit!"
+msgstr ""
+
+#: src/classes/feats.cpp:326
+msgid "Not enought points to use!"
+msgstr ""
+
+#: src/classes/skills.cpp:25
+#, c-format
+msgid "Error while opening skills list: %s\n"
+msgstr ""
+
+#: src/classes/skills.cpp:55 src/classes/skills.cpp:156
+#, c-format
+msgid "Can't open skill file: %s \n"
+msgstr ""
+
+#: src/classes/skills.cpp:124
+#, c-format
+msgid ""
+"Error while opening skills list:                        ../data/skills/"
+"skills.skl\n"
+msgstr ""
+
+#: src/engine/alignwindow.cpp:28
+msgid "Tendency & Alignment"
+msgstr ""
+
+#: src/engine/alignwindow.cpp:47 src/engine/aspectwindow.cpp:58
+#: src/engine/attwindow.cpp:174 src/engine/options.cpp:325
+#: src/engine/racewindow.cpp:59 src/engine/classwindow.cpp:61
+#: src/engine/skillwindow.cpp:85
+msgid "Confirm"
+msgstr ""
+
+#: src/engine/alignwindow.cpp:51 src/engine/aspectwindow.cpp:62
+#: src/engine/attwindow.cpp:178 src/engine/barterwindow.cpp:34
+#: src/engine/options.cpp:329 src/engine/racewindow.cpp:63
+#: src/engine/classwindow.cpp:65 src/engine/skillwindow.cpp:89
+msgid "Cancel"
+msgstr ""
+
+#: src/engine/initial.cpp:37
+msgid "0.2"
+msgstr ""
+
+#: src/engine/initial.cpp:42
+msgid "New"
+msgstr ""
+
+#: src/engine/initial.cpp:47
+msgid "Continue"
+msgstr ""
+
+#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3067
+msgid "Save"
+msgstr ""
+
+#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3071
+msgid "Load"
+msgstr ""
+
+#: src/engine/initial.cpp:54 src/engine/options.cpp:230
+msgid "Options"
+msgstr ""
+
+#: src/engine/initial.cpp:56
+msgid "Exit"
+msgstr ""
+
+#: src/engine/aspectwindow.cpp:20
+msgid "Aspect"
+msgstr ""
+
+#: src/engine/aspectwindow.cpp:36
+msgid "Name:"
+msgstr ""
+
+#: src/engine/aspectwindow.cpp:41
+msgid "Age:"
+msgstr ""
+
+#: src/engine/aspectwindow.cpp:45
+msgid "Sex:"
+msgstr ""
+
+#: src/engine/aspectwindow.cpp:94
+#, c-format
+msgid "Can't open the list with portraits: portraits.lst!\n"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:25 src/engine/barterwindow.cpp:65
+#: src/engine/barterwindow.cpp:75
+msgid "Inventory"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:135
+msgid "Drop"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:137
+msgid "Sell"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:140
+msgid "Use"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:144
+msgid "Remove"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:147
+msgid "Info"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:149
+msgid "Get"
+msgstr ""
+
+#: src/engine/attwindow.cpp:36
+msgid "Attributes"
+msgstr ""
+
+#: src/engine/attwindow.cpp:57
+msgid "Roll"
+msgstr ""
+
+#: src/engine/attwindow.cpp:60
+msgid "Clear"
+msgstr ""
+
+#: src/engine/attwindow.cpp:64
+msgid "Auto"
+msgstr ""
+
+#: src/engine/attwindow.cpp:67 data/skills/forca.ski:1
+msgid "Strength"
+msgstr ""
+
+#: src/engine/attwindow.cpp:84 data/skills/destreza.ski:1
+msgid "Dexterity"
+msgstr ""
+
+#: src/engine/attwindow.cpp:98 data/skills/constituicao.ski:1
+msgid "Constitution"
+msgstr ""
+
+#: src/engine/attwindow.cpp:115 data/skills/inteligencia.ski:1
+msgid "Intelligence"
+msgstr ""
+
+#: src/engine/attwindow.cpp:129 data/skills/sabedoria.ski:1
+msgid "Wisdom"
+msgstr ""
+
+#: src/engine/attwindow.cpp:142 data/skills/carisma.ski:1
+msgid "Charism"
+msgstr ""
+
+#: src/engine/attwindow.cpp:164
+msgid "Attribute Description"
+msgstr ""
+
+#: src/engine/attwindow.cpp:437
+msgid "Warning"
+msgstr ""
+
+#: src/engine/attwindow.cpp:438
+msgid "You Need to Assign All Attributes."
+msgstr ""
+
+#: src/engine/barterwindow.cpp:18 src/engine/dialog.cpp:427
+msgid "Barter"
+msgstr ""
+
+#: src/engine/barterwindow.cpp:30
+msgid "Offer"
+msgstr ""
+
+#: src/engine/barterwindow.cpp:32
+msgid "Impose"
+msgstr ""
+
+#: src/engine/options.cpp:7
+msgid "Portuguese"
+msgstr ""
+
+#: src/engine/options.cpp:8
+msgid "English"
+msgstr ""
+
+#: src/engine/options.cpp:9
+msgid "French"
+msgstr ""
+
+#: src/engine/options.cpp:10
+msgid "Spanish"
+msgstr ""
+
+#: src/engine/options.cpp:102
+#, c-format
+msgid "Error while writing Options: %s\n"
+msgstr ""
+
+#: src/engine/options.cpp:184
+msgid "None"
+msgstr ""
+
+#: src/engine/options.cpp:189
+msgid "Characters"
+msgstr ""
+
+#: src/engine/options.cpp:194
+msgid "All"
+msgstr ""
+
+#: src/engine/options.cpp:210
+msgid "Normal"
+msgstr ""
+
+#: src/engine/options.cpp:213
+msgid "Pursue"
+msgstr ""
+
+#: src/engine/options.cpp:236
+msgid "Music Volume:"
+msgstr ""
+
+#: src/engine/options.cpp:251
+msgid "Effects Volume:"
+msgstr ""
+
+#: src/engine/options.cpp:266
+msgid "Language:"
+msgstr ""
+
+#: src/engine/options.cpp:280
+msgid "Camera Mode:"
+msgstr ""
+
+#: src/engine/options.cpp:293
+msgid "Enable Grass Effects (need particles)"
+msgstr ""
+
+#: src/engine/options.cpp:302
+msgid "Enable Particles Effects"
+msgstr ""
+
+#: src/engine/options.cpp:312
+msgid "Reflections:"
+msgstr ""
+
+#: src/engine/racewindow.cpp:27
+msgid "Race"
+msgstr ""
+
+#: src/engine/racewindow.cpp:34
+msgid "Race Description"
+msgstr ""
+
+#: src/engine/racewindow.cpp:43
+msgid "Race Characteristcs"
+msgstr ""
+
+#: src/engine/racewindow.cpp:78
+msgid "Race Modifiers||"
+msgstr ""
+
+#: src/engine/racewindow.cpp:86
+msgid "No Modifiers.||"
+msgstr ""
+
+#: src/engine/racewindow.cpp:90
+msgid "Race Feats||"
+msgstr ""
+
+#: src/engine/racewindow.cpp:98 src/engine/classwindow.cpp:156
+msgid "No Feats.|"
+msgstr ""
+
+#: src/engine/racewindow.cpp:103
+msgid "|Race Skills||"
+msgstr ""
+
+#: src/engine/racewindow.cpp:119 src/engine/classwindow.cpp:177
+msgid "No Skills."
+msgstr ""
+
+#: src/engine/classwindow.cpp:29
+msgid "Class"
+msgstr ""
+
+#: src/engine/classwindow.cpp:36
+msgid "Class Description"
+msgstr ""
+
+#: src/engine/classwindow.cpp:45
+msgid "Class Characteristics"
+msgstr ""
+
+#: src/engine/classwindow.cpp:83
+msgid "Life Dice"
+msgstr ""
+
+#: src/engine/classwindow.cpp:86
+msgid "Skill Points|"
+msgstr ""
+
+#: src/engine/classwindow.cpp:109
+msgid "First Level"
+msgstr ""
+
+#: src/engine/classwindow.cpp:134
+msgid "Other Levels"
+msgstr ""
+
+#: src/engine/classwindow.cpp:136
+msgid "Class Modifiers||"
+msgstr ""
+
+#: src/engine/classwindow.cpp:144
+msgid "No Modifiers||"
+msgstr ""
+
+#: src/engine/classwindow.cpp:148
+msgid "Class Feats||"
+msgstr ""
+
+#: src/engine/classwindow.cpp:161
+msgid "Class Skills||"
+msgstr ""
+
+#: src/engine/skillwindow.cpp:33
+msgid "Skills"
+msgstr ""
+
+#: src/engine/skillwindow.cpp:39
+msgid "Total Free Points:"
+msgstr ""
+
+#: src/engine/skillwindow.cpp:62
+msgid "Points:"
+msgstr ""
+
+#: src/engine/skillwindow.cpp:73
+msgid "Cost"
+msgstr ""
+
+#: src/engine/dccnit.cpp:232
+msgid "../data/texturas/general/info.png"
+msgstr ""
+
+#: src/engine/dccnit.cpp:328
+#, c-format
+msgid "Loading Map: %s"
+msgstr ""
+
+#: src/engine/dccnit.cpp:407
+#, c-format
+msgid "Ouch, can't load NPC's file: %s.\n"
+msgstr ""
+
+#: src/engine/dccnit.cpp:422
+#, c-format
+msgid "Loading NPC: %s"
+msgstr ""
+
+#: src/engine/dccnit.cpp:444
+msgid "Loading Character"
+msgstr ""
+
+#: src/engine/dccnit.cpp:453
+msgid "Putting GUI on Screen"
+msgstr ""
+
+#: src/engine/dccnit.cpp:491
+msgid "Loading Particles"
+msgstr ""
+
+#: src/engine/dccnit.cpp:518
+msgid "Loading Changes..."
+msgstr ""
+
+#: src/engine/dccnit.cpp:536
+msgid "Done!"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1108
+msgid "Too far away for the action!"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1142 src/engine/dccnit.cpp:1200
+msgid "No NPCs in the area."
+msgstr ""
+
+#: src/engine/dccnit.cpp:1186
+msgid "Surprise Attack Turn."
+msgstr ""
+
+#: src/engine/dccnit.cpp:1543
+#, c-format
+msgid "%s taken."
+msgstr ""
+
+#: src/engine/dccnit.cpp:1601
+msgid "Door"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1733 src/fight/fightSystem.cpp:262
+#, c-format
+msgid "%s attacks %s|"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1751
+#, c-format
+msgid "%s is dead."
+msgstr ""
+
+#: src/engine/dccnit.cpp:1815 src/engine/dccnit.cpp:3064
+msgid "Nothing"
+msgstr ""
+
+#: src/engine/dccnit.cpp:3035
+msgid "Map"
+msgstr ""
+
+#: src/engine/dccnit.cpp:3057
+msgid "Shortcuts"
+msgstr ""
+
+#: src/engine/dccnit.cpp:3059
+msgid "FPS:"
+msgstr ""
+
+#: src/engine/dccnit.cpp:3061
+msgid "Press F1 for Help"
+msgstr ""
+
+#: src/engine/dccnit.cpp:3069
+msgid "Menu"
+msgstr ""
+
+#: src/engine/dccnit.cpp:3214
+msgid "|Exit Battle Mode"
+msgstr ""
+
+#: src/engine/dialog.cpp:171
+msgid "Cannot open File!\n"
+msgstr ""
+
+#: src/engine/dialog.cpp:194
+msgid "Tried to define dialog before end last one!"
+msgstr ""
+
+#: src/engine/dialog.cpp:210
+msgid "Tried to end an undefined dialog!"
+msgstr ""
+
+#: src/engine/dialog.cpp:221
+msgid "Tried to begin NPC before end something!"
+msgstr ""
+
+#: src/engine/dialog.cpp:230
+msgid "Tried to end NPC before begin it!"
+msgstr ""
+
+#: src/engine/dialog.cpp:239
+msgid "Tried to begin PC before end something!"
+msgstr ""
+
+#: src/engine/dialog.cpp:249
+msgid "Tried to end PC before begin it!"
+msgstr ""
+
+#: src/engine/dialog.cpp:274
+msgid "Option Text without option!"
+msgstr ""
+
+#: src/engine/dialog.cpp:278 src/engine/dialog.cpp:328
+msgid "Options overflow!"
+msgstr ""
+
+#: src/engine/dialog.cpp:284
+msgid "Text without any relation!"
+msgstr ""
+
+#: src/engine/dialog.cpp:296
+msgid "Option without begin PC!"
+msgstr ""
+
+#: src/engine/dialog.cpp:304
+msgid "Action isn't yet defined to NPC!"
+msgstr ""
+
+#: src/engine/dialog.cpp:323
+msgid "Option Action without option!"
+msgstr ""
+
+#: src/engine/dialog.cpp:334
+msgid "Action without any relation!\n"
+msgstr ""
+
+#: src/engine/dialog.cpp:340
+msgid "Unknow Token!"
+msgstr ""
+
+#: src/engine/dialog.cpp:404
+#, c-format
+msgid "Not found on dialog: %d\n"
+msgstr ""
+
+#: src/engine/dialog.cpp:425
+msgid "Dialog"
+msgstr ""
+
+#: src/fight/fightSystem.cpp:123
+msgid "|No more enemies."
+msgstr ""
+
+#: src/fight/fightSystem.cpp:167 src/fight/fightSystem.cpp:186
+msgid "New Round|"
+msgstr ""
+
+#: src/fight/fightSystem.cpp:172 src/fight/fightSystem.cpp:191
+msgid "Error: No Characters!"
+msgstr ""
+
+#: src/fight/fightSystem.cpp:272
+#, c-format
+msgid "|%s is dead!"
+msgstr ""
+
+#: src/fight/initiative.cpp:38
+#, c-format
+msgid "%s rolls initiative: "
+msgstr ""
+
+#: src/gui/farso.cpp:17
+#, c-format
+msgid "Argh! Can't init SDL!\n"
+msgstr ""
+
+#: src/gui/farso.cpp:35
+#, c-format
+msgid "Oxi! Can't ajust video mode!\n"
+msgstr ""
+
+#: data/alignment/neutrocaotico.ali:1
+msgid "Chaotic Neutral"
+msgstr ""
+
+#: data/alignment/neutrocaotico.ali:2
+msgid ""
+"   Chaotic  Neutral creature sometimes|are  free  software  adepts, "
+"sometimes|are   proprietary   software   adepts,|depending on their daily "
+"humor."
+msgstr ""
+
+#: data/alignment/sllibertario.ali:1
+msgid "Libertarian Free-Software"
+msgstr ""
+
+#: data/alignment/sllibertario.ali:2
+msgid ""
+"   Libertarian   Free-Software  Adepts|usually are creatures that  believe "
+"in|the  free  circulation  of  knowledge,|without   any   intervention,  "
+"be   of|governments,  be  of  private   groups|or  individuals.   Usually   "
+"they  are|adepts of public-domain software."
+msgstr ""
+
+#: data/alignment/neutrocentrista.ali:1
+msgid "Center Neutral"
+msgstr ""
+
+#: data/alignment/neutrocentrista.ali:2
+msgid ""
+"   The thing  more on top of the wall|in the DccNiTghtmare's universe. They|"
+"have tendency to be favorable to what|people near them are."
+msgstr ""
+
+#: data/alignment/spcaotico.ali:1
+msgid "Chaotic Proprietary-Software"
+msgstr ""
+
+#: data/alignment/spcaotico.ali:2
+msgid ""
+"   The wealth sometimes interest them,|sometimes  not,  also  uncle  Portoe"
+"$,|although     they      consider    the|Free-Software Adepts as crazy guys."
+msgstr ""
+
+#: data/alignment/neutrofuncional.ali:1
+msgid "Functional Neutral"
+msgstr ""
+
+#: data/alignment/neutrofuncional.ali:2
+msgid ""
+"   Functional Neutral creatures  don't|have  a  solid  position  on  "
+"software|licenses.  They are adepts of software|that works correctly (and "
+"this concept|is a lot vague)."
+msgstr ""
+
+#: data/alignment/spcapitalista.ali:1
+msgid "Capitalist Proprietary-Software"
+msgstr ""
+
+#: data/alignment/spcapitalista.ali:2
+msgid ""
+"   Capitalist   Proprietary - Software|Adepts  have  in  uncle  Bill  Portoe"
+"$|their big  idol. They want to  be rich|with the software they make, "
+"although,|most of them, have their work explored|by national software "
+"factories."
+msgstr ""
+
+#: data/alignment/slcaotico.ali:1
+msgid "Chaotic Free-Software"
+msgstr ""
+
+#: data/alignment/slcaotico.ali:2
+msgid ""
+"   Chaotic   Free-Software   are  more|permissive to  the  software  "
+"license,|since they are without charge  and let|full access to the source "
+"code."
+msgstr ""
+
+#: data/alignment/spneutro.ali:1
+msgid "Neutral Proprietary-Software"
+msgstr ""
+
+#: data/alignment/spneutro.ali:2
+msgid ""
+"   Neutral    Proprietary  -  Software|Adepts  want  to make money with "
+"their|programs,  but distrust of the absence|of security on their Ruindow$."
+msgstr ""
+
+#: data/alignment/slcentrista.ali:1
+msgid "Center Free-Software"
+msgstr ""
+
+#: data/alignment/slcentrista.ali:2
+msgid ""
+"   Center  Free-Software  Adepts  also|believes   in   the   free   "
+"knowledge|circulation,  but,   for   them,   the|circulation hasn't to be as "
+"free as in|public domain, but restrict to be free|for all  since continue "
+"free.  Usually|they are only adepts of GPL licences."
+msgstr ""
+
+#: data/classes/administration.cls:1
+msgid "Administration Student"
+msgstr ""
+
+#: data/classes/administration.cls:2
+msgid "'Steel with steel is bad...'|(Zamboy, future Administration Student)"
+msgstr ""
+
+#: data/classes/administration.cls:3
+msgid ""
+"Also  knowledged as Taylor's  little boys|Administration        "
+"Students        are|frequently found  in self-help shelves of|commercial "
+"bookstores. They enter in this|course  since  they not  really know what|"
+"want to their   lifes  (exacts   science,|human science,   group  "
+"dynamics??)  and,|although  in  most   of  the cases  don't|possess  "
+"NOTHING  to   administer,   they|think,   vehemently,  that  are doing the|"
+"helpful and certain thing to their lives."
+msgstr ""
+
+#: data/classes/administration.cls:7
+msgid ""
+"Administration   Students,  definitively,|aren't   know   by   their    "
+"intelectual|(Am I wrong Elis Regina???)"
+msgstr ""
+
+#: data/classes/administration.cls:9
+msgid ""
+"Charismatics???  Nor  a little.  A really|dumb ass to find some of them in "
+"group."
+msgstr ""
+
+#: data/classes/administration.cls:11
+msgid ""
+"The Taylor's Knowledges are a common part|of the  Administration Students, "
+"so their|Taylor's Bovinice is always inerent."
+msgstr ""
+
+#: data/classes/administration.cls:13
+msgid ""
+"Since  they  are Taylor's fiel disciples,|they  receive  +4  in  Taylor's  "
+"Bovinice|Skill"
+msgstr ""
+
+#: data/classes/administration.cls:15
+msgid ""
+"They  receive  +4   em  Bizarre  Clothes,|because in their dogmatic cult  to "
+"Taylor|they  found  bizarre  things  (and   with|maximun financial "
+"efficiency) to be their|'clothes'."
+msgstr ""
+
+#: data/classes/administration.cls:17
+msgid ""
+"Everyone knows  that  the  Administration|Students  have  a  lot  of  "
+"difficulty in|assimilate other's opinions, and  also to|ask in a  concise "
+"way  some question,  so|they receive -6 in Listen."
+msgstr ""
+
+#: data/classes/medician.cls:1
+msgid "Medicine Student"
+msgstr ""
+
+#: data/classes/medician.cls:2
+msgid ""
+"'If  I've  tried  Physiotherapy  there, I|should passed  in  first  place  "
+"with the|points I've made in Medicine.'|(Mattar, Medician  Student  "
+"answering the|provocation   of  Wanucia,  Physiotherapy|Student)"
+msgstr ""
+
+#: data/classes/medician.cls:3
+msgid ""
+"The Medicine  Student  is  the thing that|abdicated to their social life  in "
+"change|of  an anormal   dedication   to   study,|believing  they'll  be "
+"something in life.|Those things haven't any cleverness,  one|time  they  "
+"base  their lifes in theories|and more theories.  To  be of this class,|the "
+"character need to be submitted to any|hideous  attitude,  like  drown  "
+"hookies,|public  peversion,   among   others  that|result in death."
+msgstr ""
+
+#: data/classes/medician.cls:7
+msgid ""
+"Although  being  theory  creatures,  they|usually  spent  their  money  in "
+"physical|academies, receiving +1 in Strenght."
+msgstr ""
+
+#: data/classes/medician.cls:9
+msgid ""
+"By  the  dedication  to  the  study,  the|Medicine   Student    receive    "
+"+2    in|Intelligence."
+msgstr ""
+
+#: data/classes/medician.cls:11
+msgid ""
+"Since  their  attention is only  for  the|books,  these   creatures   "
+"haven't   any|cleverness, receiving -4 in Wisdom."
+msgstr ""
+
+#: data/classes/medician.cls:13
+msgid ""
+"Frequently in the studies,  the  Medicine|Student  forgot  to  grow up,  "
+"being very|susceptible to questions, receiving -3 in|all I am not a Fool "
+"(these modifier  fall|to -6 when the target is their father  or|mother)."
+msgstr ""
+
+#: data/classes/medician.cls:15
+msgid ""
+"Those creatures receive +4 in  all  Bluff|tests, one time that all bluff "
+"they made,|for more ridiculous they are, can  really|(and easily) be true."
+msgstr ""
+
+#: data/classes/medician.cls:17
+msgid "They Receive +2 in diplomacy when talking|to boys and patys."
+msgstr ""
+
+#: data/classes/medician.cls:19
+msgid "They receive -2 in diplomacy when talking|to other races."
+msgstr ""
+
+#: data/classes/medician.cls:21
+msgid "They receive -4 in Diplomacy when talking|to Physiotherapy Students."
+msgstr ""
+
+#: data/classes/biology.cls:1
+msgid "Biology Student"
+msgstr ""
+
+#: data/classes/biology.cls:2
+msgid ""
+"'This place is filled with arthropodes!'|(Bin, that time, a Biology Student)"
+msgstr ""
+
+#: data/classes/biology.cls:3
+msgid ""
+"Able to be for two weeks isoleted  in the|mountains  making  their  'Field  "
+"Works',|ambushing and  observing  the  incredible|and  exciting  ameiva's "
+"feed habits (and,|for it,  sometimes mistaken as Hippies in|their search for "
+"Feed-Karma), the Biology|Students are from  all things a little: a|little  "
+"medicians,  a little  hippies,  a|little   computers,   a  little   hot-dog|"
+"sellers..."
+msgstr ""
+
+#: data/classes/biology.cls:7
+msgid ""
+"+2  in  Dexterity,   since  they   always|observe  and follow  in distinct "
+"terrains|the  ameivas (and also  to open its body,|counting how many worms "
+"it has)."
+msgstr ""
+
+#: data/classes/biology.cls:9
+msgid ""
+"-1  in  Strenght,  since  their   muscles|atrophy   after  spent  12   "
+"hours  inert|observing the ameiva's coupling rituals."
+msgstr ""
+
+#: data/classes/biology.cls:11
+msgid ""
+"Since  they  are   mistaken  as  hippies,|Biology  Students receive +6 in "
+"Disguises|when disguised as hippie (and when not of|this race)"
+msgstr ""
+
+#: data/classes/biology.cls:13
+msgid "For the same reason, -4 in free-pass."
+msgstr ""
+
+#: data/classes/biology.cls:15
+msgid ""
+"For the hard work observing ameivas,  the|Biology Student receveis +2 in "
+"furtivity."
+msgstr ""
+
+#: data/classes/music.cls:1
+msgid "Music Student"
+msgstr ""
+
+#: data/classes/music.cls:2
+msgid ""
+"'Without you I sound nothing.'|(Typical commentary of  a Lyric-man  to a|"
+"Musician)"
+msgstr ""
+
+#: data/classes/music.cls:3
+msgid ""
+"In  a  scientific   world,   few   people|adventure in a different  concept, "
+"follow|some art source, like  music.  The  Music|Student  is  a  creature   "
+"with   extreme|patience to learn all tecnics related  to|ternary  compass  "
+"atonalisms,  have   the|capacity to realize them and  a distorced|like to "
+"play one of the most bizarre  and|ocult musical instrument.|Note of the "
+"Creator: 'Based  on  the idea|that musical likes are distints  and only|the "
+"the most understood  ones  appreciate|distinct rhythms (obviously all ones "
+"that|aren't  atempts  to   kill,  for bad, the|musical theory), the class "
+"was made.  So,|the same sound, Bach for example, can  be|a beautifull music "
+"or  something  boring,|depending  from  the  ear   who   listen.|Probably a "
+"progressive fan will like Bach|but a fan of Tati-Quebra-Barraco, without|any "
+"musical sense, will think  Bach=shit.|So, the Music Student will be a  "
+"virtuous|misunderstood.'"
+msgstr ""
+
+#: data/classes/music.cls:7
+msgid ""
+"-4 of  Strenght  by  the fact  that their|muscles atrophy for aren't used "
+"more than|the much needed to play their instrument."
+msgstr ""
+
+#: data/classes/music.cls:9
+msgid "-1 of Constitution for hours  spent  in a|closed ambient, playing."
+msgstr ""
+
+#: data/classes/music.cls:11
+msgid ""
+"+2 of Dexterity for having the ability to|play  a  Gb7M  or  a  Am#5/7/9  "
+"on  their|strange musical instrument."
+msgstr ""
+
+#: data/classes/music.cls:13
+msgid ""
+"+1 of Intelligence for  know those notes,|how  they  are  created  and  all "
+"musical|theory envolved on their creation."
+msgstr ""
+
+#: data/classes/music.cls:15
+msgid "+2 of Charism  for  the  capacity  to joy|people."
+msgstr ""
+
+#: data/classes/music.cls:17
+msgid ""
+"Cause of the extense and hard work  since|they were childs, the Music "
+"Student  have|incredible   capacity   to   play   their|bizarre  "
+"instrument,  receiving  the   +8|bonus when playing it."
+msgstr ""
+
+#: data/classes/music.cls:19
+msgid ""
+"The Music Student need to have  at  least|one graduation on Play Instrument, "
+"on one|presented  at   the    Bizarre    Musical|Instruments List."
+msgstr ""
+
+#: data/classes/compsci.cls:1
+msgid "Computer Science Student"
+msgstr ""
+
+#: data/classes/compsci.cls:2
+msgid ""
+"'-I really don't know why I'm making this|graduation...|- How  not??  For  "
+"the womans,  obvious!'|(Gushm,    that    time    CS    Student,|answering "
+"the CS dilema)"
+msgstr ""
+
+#: data/classes/compsci.cls:3
+msgid ""
+"Computes  Science  Student  is  the  most|bizarre  class  in  "
+"DccNiTghtmare   (and,|paradoxically, the most common). They are|know by "
+"their suicidal choices (the first|one  is  the  graduation  they  choosed),|"
+"their  little patience to view what their|masters    denominate    "
+"'classes',   the|infinity time spent in Pratical Exercises|(TP) and  the "
+"hate when they percept that|it works perfectly,  but  their   masters|won't  "
+"look  and  appraise  it,  since CS|teachers  are displicents and without any|"
+"compromise with the graduation."
+msgstr ""
+
+#: data/classes/compsci.cls:7
+msgid ""
+"Since all they are auto-teachers, because|they can't  count  with  theirs "
+"teachers,|they receive +2 in Wisdom."
+msgstr ""
+
+#: data/classes/compsci.cls:9
+msgid ""
+"By their natural tendency to be qualified|as Nerd, being one or not,  they  "
+"receive|-1 in Charism."
+msgstr ""
+
+#: data/classes/compsci.cls:11
+msgid ""
+"Computer Science Students  receive  +5 in|fortitute  by support the hoax and "
+"boring|that are their course."
+msgstr ""
+
+#: data/classes/compsci.cls:13
+msgid ""
+"Also  receive -2 in reflexes for a lot of|time they spent in front of the "
+"computer."
+msgstr ""
+
+#: data/classes/philosophy.cls:1
+msgid "Philosophy Student"
+msgstr ""
+
+#: data/classes/philosophy.cls:2
+msgid "'Better die by vodka than by boredom!'|(Vladmir Maiakovsky)"
+msgstr ""
+
+#: data/classes/philosophy.cls:3
+msgid ""
+"Not satisfied  with  don't  want  nothing|for their life,  the  Philosophy  "
+"Student|enter  the  university   with   just  one|objective:  to   perfect   "
+"this   wanting|nothing.  Adepts  of drinking beer and of|to do nothing,  "
+"mixing their time between|one and another  activity, the Philosophy|Student "
+"become  the  bohemian  master and|full of hot air."
+msgstr ""
+
+#: data/classes/philosophy.cls:7
+msgid ""
+"Receive +2 in Constitution, because their|body is barely  of a monk, fully "
+"usual to|the alcohol."
+msgstr ""
+
+#: data/classes/philosophy.cls:9
+msgid ""
+"Since they only study complex things, the|Philosophy  Student  easily  "
+"forgets  all|pratical and common things  of the  life,|receiving -2 in "
+"Wisdom."
+msgstr ""
+
+#: data/classes/philosophy.cls:11
+msgid ""
+"For spending  almost all  their student's|life  in  pubs,  the  Philosophy  "
+"Student|acquire  some  kind  of  aptitude to deal|with others, receiving +2 "
+"in Charisma."
+msgstr ""
+
+#: data/classes/philosophy.cls:13
+msgid ""
+"The  Philosophy  Student  receive  +4  in|Knowledge  (classic)  for  the  "
+"few  they|study at university."
+msgstr ""
+
+#: data/classes/philosophy.cls:15
+msgid "Receive +4 in  Bohemia,  cause  they  are|always in Pubs."
+msgstr ""
+
+#: data/classes/philosophy.cls:17
+msgid ""
+"Receive -4 in all dexterity related tests|one time they are frequently drunk."
+msgstr ""
+
+#: data/classes/philosophy.cls:19
+msgid ""
+"For don't make any (or very few) classes,|the Philosophy Student receive -4  "
+"in Out|of time."
+msgstr ""
+
+#: data/classes/journalism.cls:1
+msgid "Journalism Student"
+msgstr ""
+
+#: data/classes/journalism.cls:2
+msgid ""
+"'The judge thinks he is  God,  the  Medic|plays God.  The  journalist,  if "
+"he isn't|God, convinces you that he is'|(Matheus de Paula, ex-Journalism "
+"student)"
+msgstr ""
+
+#: data/classes/journalism.cls:3
+msgid ""
+"Graduating  in  the   arts  of  deceit  a|cheating, the  journalism  "
+"student  is  a|writing master. With words, he can create|events,  stun  his  "
+"enemies, swindle  his|audience towards other habilities.|Despite of being "
+"college  friends,  these|malicious organisms can  be  very rude to|each "
+"other, not being common  to see them|in large groups. But they can easily "
+"join|the masses, to gather as much information|as possible."
+msgstr ""
+
+#: data/classes/journalism.cls:7
+msgid ""
+"As they  are  usually  deep  involved  in|mental work,  these  organisms "
+"don't find|time or will to  exercise  their muscles,|receive -2 of Strenght."
+msgstr ""
+
+#: data/classes/journalism.cls:9
+msgid ""
+"Journalism students have a  'know it all'|need, increasing by 2 their "
+"intelligence."
+msgstr ""
+
+#: data/classes/journalism.cls:11
+msgid ""
+"Despite of being extemely hard criticals,|these organisms  can  "
+"dissimulate   their|true nature,  being very  kind  to  their|audience    "
+"and    information   sources,|receiving +1 in Charism."
+msgstr ""
+
+#: data/classes/journalism.cls:13
+msgid ""
+"Impartiality: Before choosing this class,|the Journalism student rolls  a  "
+"d100. If|the result is between  1 and 99, he can't|be neutral. Else, he can  "
+"be a Journalism|Student with any alingment."
+msgstr ""
+
+#: data/classes/journalism.cls:15
+msgid ""
+"Journalism    students    neglects    any|penalties  to  their  social  "
+"tests,  for|being  able  to  survive   in   turbulent|environments."
+msgstr ""
+
+#: data/classes/journalism.cls:17
+msgid ""
+"As  long as the Journalism Student speaks|the  targets  language,  he will "
+"never be|ignored."
+msgstr ""
+
+#: data/classes/physicaled.cls:1
+msgid "Physical Education Student"
+msgstr ""
+
+#: data/classes/physicaled.cls:2
+msgid ""
+"'No!! The swimming class is too complex!'|(Typical   Physical   Education   "
+"Student|thought)"
+msgstr ""
+
+#: data/classes/physicaled.cls:3
+msgid ""
+"Usually  having 'Soccer' and 'Basketball'|as  classes,  the   dedicated   "
+"(in   the|physical  sense of the word)  Students of|Physical Education  are "
+"things that value|the muscular  force  above all.  With too|muscles  in  "
+"the  brain,  those  Students|possess nothing  less than a supernatural|"
+"resistance  in  the  head - in  change of|some  points   of  Intelligence,  "
+"really.|Finally,  these   boys   are   stars   in|soccer but  aren't "
+"distinguished students|of   mathematics   (hardly   knowing  the|fundaments "
+"of numbers)."
+msgstr ""
+
+#: data/classes/physicaled.cls:7
+msgid "Receive +3 of Strength, due to the lot of|hours kicking a ball."
+msgstr ""
+
+#: data/classes/physicaled.cls:9
+msgid "+2  of  Dexterity,   due   to  the  hours|fluctuating in the water."
+msgstr ""
+
+#: data/classes/physicaled.cls:11
+msgid "+4 of Constitution for  hours  running in|circles."
+msgstr ""
+
+#: data/classes/physicaled.cls:13
+msgid "-6  of  Intelligence since they abandoned|the books in a remote past."
+msgstr ""
+
+#: data/classes/physicaled.cls:15
+msgid "-6 of Widow, by the same reasons."
+msgstr ""
+
+#: data/classes/physicaled.cls:17
+msgid ""
+"The   Student   of   Physical   Education|receives  +4  in  Jump,   Scale,   "
+"Mount,|Swimming,  Soccer,  Basketball,  finally,|sports  in  general  or   "
+"anything   that|emanates physical power."
+msgstr ""
+
+#: data/classes/physicaled.cls:19
+msgid ""
+"Receive  -5  in  all  knowledges  by  the|simple fact of they have  no  idea "
+"of the|meaning of this word."
+msgstr ""
+
+#: data/classes/physicaled.cls:21
+msgid "-4 in Hide, since they are coarse hulks."
+msgstr ""
+
+#: data/classes/physicaled.cls:23
+msgid "-2 in listen, therefore  the muscles take|all ear's openings."
+msgstr ""
+
+#: data/classes/physicaled.cls:25
+msgid "The Student receives +1 of Natural Armor."
+msgstr ""
+
+#: data/classes/physicaled.cls:27
+msgid ""
+"Receive +2 of I Am Not A Fool by the fact|of their brain stop function "
+"sometimes."
+msgstr ""
+
+#: data/classes/physicaled.cls:29
+msgid ""
+"The Student receives -4 in Train Animals,|since,  by  haven't  absolute  "
+"control of|their  muscles,  there  is  a  chance  of|crushing the animal."
+msgstr ""
+
+#: data/classes/physicaled.cls:31
+msgid ""
+"Receives  -3  in   Direction  cause  they|usually get lost among their own "
+"muscles."
+msgstr ""
+
+#: data/classes/physicaled.cls:33
+msgid ""
+"Also  they possess -2 in Bluff, therefore|their  muscles  practically  "
+"possess  own|life  and  easily contratic them in their|lies."
+msgstr ""
+
+#: data/classes/physicaled.cls:35
+msgid ""
+"By  the  corpulent size of their  muscles|and  the  total  absence  of "
+"control, the|Student of Physical  Education  have  0.60|chance to tumble in "
+"battle."
+msgstr ""
+
+#: data/classes/physicaled.cls:37
+msgid ""
+"Beyond  this,  the  Student  of  Physical|Education  can't  buy  points  in  "
+"skills|whose ability key is Intelligence."
+msgstr ""
+
+#: data/classes/physicaled.cls:39
+msgid ""
+"Since extremely  limited  on  its skills,|the Physical Education Student "
+"don't have|any limit on Sports graduation."
+msgstr ""
+
+#: data/classes/lawner.cls:1
+msgid "Law Student"
+msgstr ""
+
+#: data/classes/lawner.cls:2
+msgid ""
+"'- Are we going to the bar taking one?|- Yes, from whose?'|(Typical dialog "
+"between two law students)"
+msgstr ""
+
+#: data/classes/lawner.cls:3
+msgid ""
+"Living  at   the   Campus   disguised  as|penguins,  the Law Students are "
+"organisms|that, when perceive the minor possibility|to  make profits  by  "
+"some situation they|judge  'juridic',  will  use of all their|verborragy,  "
+"deturpations  and sofisms to|make  it.  Is  always important to have a|Law "
+"Student in your group (party), be for|avoiding  other  Law  Students  "
+"knowledge|(and policial aparate) to take advantages|on  you, or  for taking  "
+"advantages  from|others and avoid that iminent punition."
+msgstr ""
+
+#: data/classes/lawner.cls:7
+msgid ""
+"For usually  being stupids among anything|that  is  not  related  with  "
+"money, they|receive -2 in intelligence."
+msgstr ""
+
+#: data/classes/lawner.cls:9
+msgid ""
+"For  their  hungry will to take the  last|copeck of their victims, they  "
+"receive -1|in charism."
+msgstr ""
+
+#: data/classes/lawner.cls:11
+msgid "By can modify any situation to make money|from it."
+msgstr ""
+
+#: data/classes/lawner.cls:13
+msgid ""
+"Since they know  anything  of  money, the|Law  Student  receives  +1 in "
+"Appraise on|their first level."
+msgstr ""
+
+#: data/classes/physiotherapy.cls:1
+msgid "Physiotherapy Student"
+msgstr ""
+
+#: data/classes/physiotherapy.cls:2
+msgid ""
+"'You should have studied and  entered the|Federal University!'|(Wanucia, "
+"Pysiotherapy Student angry with|Mattar, Medicine Student)"
+msgstr ""
+
+#: data/classes/physiotherapy.cls:3
+msgid ""
+"Medicine   Students   arqui-rivals,   the|Physiotherapy Student feeds a "
+"mortal hate|whith  their   half-blood  brothers.  The|Physiotherapy   "
+"Student,  althought  have|something similar with the  Medicine ones|(like "
+"elves  and  half-elves),  hate them|with all their forces because  the "
+"little|medicians  passed  in the  place that the|physiotherapy   one   "
+"always   want.  The|Physiotherapy Student  usually  works  at|physical "
+"academies,  to  better  look for|their victims."
+msgstr ""
+
+#: data/classes/physiotherapy.cls:7
+msgid ""
+"For hard study  the  human body mobility,|they  can   realize  some   "
+"achievements,|receiveing +1 in Dexterity."
+msgstr ""
+
+#: data/classes/physiotherapy.cls:9
+msgid ""
+"All  Physiotherapy Student  lost  one  or|more  years  studing  to  be  a  "
+"Medicine|Student, receiving +1 in Intelligence."
+msgstr ""
+
+#: data/classes/physiotherapy.cls:11
+msgid ""
+"Because of the effort  to  be  a Medicine|Student,    the   little   "
+"Physioterapist|inherit the penalty of -2 in Wisdom."
+msgstr ""
+
+#: data/classes/physiotherapy.cls:13
+msgid ""
+"Feeding  the  hate  to   their   medicine|rivals, the Physiotherapy Student "
+"receive|the  class bonus  against  them, of +1 in|all attacks against "
+"Medicians."
+msgstr ""
+
+#: data/classes/physiotherapy.cls:15
+msgid ""
+"They receive +3 in all Listen, Observate,|Bluff  and  I  am not a Fool  "
+"tests  when|targeting Medicine Students."
+msgstr ""
+
+#: data/classes/physiotherapy.cls:17
+msgid ""
+"Because  they  are  failed medicians, any|chances of social interaction "
+"when  there|are Medicine Students in a radius of 20m,|the Physiotherapy "
+"Student will receive -5|in all social skills.  If  they fail in a|test  by  "
+"5  or  more,  they  will commit|suicide."
+msgstr ""
+
+#: data/classes/mechanic.cls:1
+msgid "Mechanical Engineering Student"
+msgstr ""
+
+#: data/classes/mechanic.cls:2
+msgid ""
+"'Today we'll see the comprex prane pracle|probrem!'|(Haroldao, Mechanical "
+"teacher)"
+msgstr ""
+
+#: data/classes/mechanic.cls:3
+msgid ""
+"The student  of mechanical engineering is|the campus most frustrated "
+"person.  After|enter   the  faculty in the hope of learn|everything about "
+"cars, planes,  boats and|other   mechanical   structures  of  high|"
+"complexity,  they  uncover that the world|is   summarized   to   F = m*a.  "
+"In   the|possession of that simple equation and of|absurd    quantities   "
+"of    inexplicable|calculations,  the  teachers  of  physics|make  their  "
+"life  a  hell  in  the basic|course.  In  the  specific  classes  they|"
+"realize  that  the world was happy in the|basic cycle.  Generally  they're "
+"seen  in|all classes  inside the Exacts Institute,|therefore  no  one  of is "
+"going to finish|the course regularly."
+msgstr ""
+
+#: data/classes/mechanic.cls:7
+msgid ""
+"Students  of Mechanics are going to study|crazy, if they want to  do "
+"something more|than  hold tight bolts in their lifes, so|they receive + 3 in "
+"Intelligence."
+msgstr ""
+
+#: data/classes/mechanic.cls:9
+msgid ""
+"Due  to the quantity of information about|steels,  kinds  of   tempera,   "
+"tools  of|plants,  electronic   systems  and  other|things that  are  "
+"obliged to swallow, the|Students  of   Mechanics  receive  +3  in|Wisdom."
+msgstr ""
+
+#: data/classes/mechanic.cls:11
+msgid ""
+"They  receive -2 in  strength,  one  time|that the  mouse  for  design  in  "
+"AutoCAD|doesn't weigh much."
+msgstr ""
+
+#: data/classes/mechanic.cls:13
+msgid ""
+"A  student  of Mechanics always suffers a|penalty of  -10  in  any  kind  "
+"of  tests|against things of female sex.  The  total|absence  of  contact  "
+"with  that  kind of|agency causes a  barely unruly  frenzy in|the  student,  "
+"that  should  do a test of|I Am Not A Fool (with the penalty of -10)|to not "
+"jump wildily on top of the female.|In the  case  of fail, the student enters|"
+"in  frenzy  and  will  try  with  all his|forces to 'copulate' with the same "
+"one."
+msgstr ""
+
+#: data/classes/to.cls:1
+msgid "Occupational Therapy Student"
+msgstr ""
+
+#: data/classes/to.cls:2
+msgid ""
+"'- Hey,  girls  from  OT,  answer  me   a|question   I   have   since   "
+"enter   the|university...|- No,  We  also  don't  know to  what our|faculty "
+"is made for and are bored  by the|others asking us about it!'|(Turmalina,  "
+"Computer  Science   Student,|asking three OT Students)"
+msgstr ""
+
+#: data/classes/to.cls:3
+msgid ""
+"Usually   little    and    fragile,   the|Occupational Therapy Students can "
+"be high|emoted  watching  the   most   previsible|mexican novel. Known by "
+"the 'hard'  group|therapies  they  call 'Academic Classes',|and for the "
+"hours spent painting a little|paper like a three years child (and FOR a|"
+"three   years    child),    calling    it|'Scientific  Project',  the  OT  "
+"Students|can't  explain  to  what  their course is|(it's one  of  the  "
+"universe's  secrets),|their  life  is,  their  clients,   their|friends,   "
+"their   bass,  the  Anamabeka,|their..., finally... but sure  know  what|"
+"happened at the previous  chapter  of the|midday television novel."
+msgstr ""
+
+#: data/classes/to.cls:7
+msgid "Receive -2 of Intelligence, for spent too|much time watching TV novels."
+msgstr ""
+
+#: data/classes/to.cls:9
+msgid "+1 of Wisdom, for the inutiles knowledges|obtained watching TV novels."
+msgstr ""
+
+#: data/classes/to.cls:11
+msgid ""
+"+3 of Charism,  for  not  study  at   the|Exacts Sciences Institute (ICEX), "
+"usually|being pleasants."
+msgstr ""
+
+#: data/classes/to.cls:13
+msgid ""
+"For usually have some rare  beauty to the|ICEX, the OT Students receive +10 "
+"in  all|social tests against Students  from  that|Institute."
+msgstr ""
+
+#: data/classes/to.cls:15
+msgid "-12 in furtive when in a radius of 30m of|at least one ICEX Student."
+msgstr ""
+
+#: data/classes/to.cls:17
+msgid "-12 in hide in the same circunstances."
+msgstr ""
+
+#: data/classes/to.cls:19
+msgid "And +5 in Intimidate for the same reason."
+msgstr ""
+
+#: data/classes/to.cls:21
+msgid ""
+"OT Students have  the  tendency  to  play|that  musical  instrument  "
+"someone  calls|bass  (and  maybe  for  this,  forgot  by|Anamabeka), "
+"receiving -4 in observe."
+msgstr ""
+
+#: data/races/autista.rca:1
+msgid "Strange Autistic"
+msgstr ""
+
+#: data/races/autista.rca:2
+msgid ""
+"' -Look at this boy! He is you  when  you|were small!|-No, Farrer, I was a "
+"normal happy child.'|(Farrer  to  a  Strange Autistic (Panda),|Anamabeka's  "
+"vocalist,  when  watching an|Oblongs episode  where one  infant,  with|eyes  "
+"of different  sizes, sawed  his bed|utilizing a saw)"
+msgstr ""
+
+#: data/races/autista.rca:3
+msgid ""
+"Despite of, in the distance, looks like a|common and  normal person, this "
+"tormented|organism  suffers  serious  psychological|dysfunctions and "
+"comportamentals detours.|These creatures have  the  power to bring|outside "
+"their own world  all the elements|that exists there,  sometimes  confunding|"
+"other   races.   Feared   by   many   and|misunderstood by everybody, this "
+"organism|is going  to lead their life as any other|race, without put  the "
+"others, or  he, in|risk. Everybody  has a  little of Strange|Autistic inside "
+"itself,  be this autism a|world  of  wars  and  shots,  fights  and|"
+"samurais,  latin  culture  or  styles  of|swords and drums."
+msgstr ""
+
+#: data/races/autista.rca:6
+msgid ""
+"Being too much strange for someone else's|eyes, the Strange Autistic "
+"receives -4 in|all Social Tests when deal with an aim of|opposite tendencies."
+msgstr ""
+
+#: data/races/autista.rca:8
+msgid ""
+"Understanding the fact that everybody  is|a  little  Strange Autistics, the "
+"Strange|Autistic receives a  bonus  of + 2 in all|Social Tests  when  deal  "
+"with  an aim of|compatible tendencies."
+msgstr ""
+
+#: data/races/boy.rca:1
+msgid "Boy / Paty"
+msgstr ""
+
+#: data/races/boy.rca:2
+msgid ""
+"'Ah friend, I can't, 'cause I'll  do some|biceps exercises today'|(Tico "
+"Bombadinho)"
+msgstr ""
+
+#: data/races/boy.rca:3
+msgid ""
+"Boys, and their  female  versions, Patys,|are  creatures  endowed  with  a  "
+"strange|fondness   to   body   academies.  Always|wanting  to  be slenders "
+"to go to jet set|parties  and  rubbing  with their oposite|sex  "
+"equivalents,  they  usually   ignore|their friends  of distinct races. But, "
+"by|more upper they consider theirselves, and|despite   they   have  a  "
+"huge   fondness|themselves,  this race  is always the aim|of mockeries and "
+"jokes by other races."
+msgstr ""
+
+#: data/races/boy.rca:6
+msgid ""
+"Patys  have  +1  in  Diplomacy since they|always     exhibit      their      "
+"bodies|characteristics. For more horrendous than|she was,  she   is  able  "
+"to  'magically'|alter herself in few hours."
+msgstr ""
+
+#: data/races/boy.rca:8
+msgid "By the  aforesaid reasons, the Patys also|receive + 2 in Disguises."
+msgstr ""
+
+#: data/races/boy.rca:10
+msgid ""
+"Boys and Patys receive +1 in Constitution|due  to  the  constant time they "
+"spend on|body academies. If they no more go there,|they'll lose this bonus "
+"and automatically|become aim of jokes among others of their|own race."
+msgstr ""
+
+#: data/races/boy.rca:14
+msgid ""
+"Boys  have  Driver  as class skill, since|they   are  distinguished   "
+"offenders  of|traffic laws."
+msgstr ""
+
+#: data/races/gotico.rca:1
+msgid "Gothic"
+msgstr ""
+
+#: data/races/gotico.rca:2
+msgid "'I have a problem...'|(Creepy Susie)"
+msgstr ""
+
+#: data/races/gotico.rca:3
+msgid ""
+"With their nose facing the moon and their|depressive way of life (that for "
+"them are|a  bale), the Gothic live in groups since|cemeteries  up  to "
+"Savassi  plaza. Always|dressed   entirely   in  black  and  with|strange  "
+"makeups,  wandering by the night|reciting  Alvares  de  Azevedo (Brazilian|"
+"Lord  Byron clone) and  claiming of their|life to the other innocent races.||"
+"They  love  the internet,  but there they|forget, from time to time, that "
+"they hate|the life,  leaving visible flashes of joy|and of  that  "
+"everything  they do is only|pretend to other's eyes."
+msgstr ""
+
+#: data/races/gotico.rca:6 data/races/metaleiro.rca:6
+msgid ""
+"Since Boys / Patys are hightly emotional,|Gothics  receive   +2   in   "
+"intimidation|against them."
+msgstr ""
+
+#: data/races/hippie.rca:1
+msgid "Hippie"
+msgstr ""
+
+#: data/races/hippie.rca:2
+msgid ""
+"'They  say that they want to save nature,|but the  only  thing  they  do  "
+"is  smoke|maryjane and smells bad!'|(Eric Cartman)"
+msgstr ""
+
+#: data/races/hippie.rca:3
+msgid ""
+"Lovers  of plants, animals, fungi, worms,|air,  wind, water, breeze, fire, "
+"heat, in|other   words,  everything  that  emanate|something  from  nature  "
+"and can transmit|them  energy  or  karma (no,  we   aren't|talking about  "
+"Druid Elfs),  the  hippies|can be  for hours  listening  to the wind|voice   "
+"or   seeing   little  land  worms|entering their bodies, since equiped with|"
+"high LSD doses."
+msgstr ""
+
+#: data/races/hippie.rca:6
+msgid ""
+"Since  they have  a lot  of love for  the|nature,  the el..,  I've  said,  "
+"hippies,|receive +5 in Train Animals."
+msgstr ""
+
+#: data/races/hippie.rca:8
+msgid ""
+"Usually  Hippies  creatures  aren't  well|accept  by  society,  fearful   "
+"of  their|subversives  actions based  on  LSD,  so,|they receive -6 in Free-"
+"pass."
+msgstr ""
+
+#: data/races/humano.rca:1
+msgid "Common Human"
+msgstr ""
+
+#: data/races/humano.rca:2
+msgid ""
+"'Satana sum et nihil humanum a me alienum|puto'|(Demon talking to Ivan "
+"Karamazov)"
+msgstr ""
+
+#: data/races/humano.rca:3
+msgid ""
+"Also  knowleged  as Homo Sapiens Sapiens.|An  human is an human, uai! Look "
+"the rest|at your  D&D  book  cause I'm too busy to|write  normal things "
+"here. We really hope|that nobody owns  the  patent to the name|'human'   "
+"and  we  have  to  use  another|denomination  to  this  race in reason of|"
+"copyright violations.|The  Common  Human  is  so  normal and so|common  "
+"that  don't own any extraordinary|quality nor extraordinary defects."
+msgstr ""
+
+#: data/races/llama.rca:1
+msgid "Human Llama"
+msgstr ""
+
+#: data/races/llama.rca:2
+msgid ""
+"'Is he insane??'|(Oktober Fest's Queen,  while  looking at|Farrer, the llama)"
+msgstr ""
+
+#: data/races/llama.rca:3
+msgid ""
+"Human  llamas  are  humans  that  believe|earnestly  they are nearly "
+"descendants of|the Andes llamas.  Usually they walk with|a  bolivian poncho, "
+"drink a  lot of water|and think exactly like a llama."
+msgstr ""
+
+#: data/races/llama.rca:6
+msgid ""
+"For  having   sociopats  tendencies,  the|Human  Llammas receive -4  in  all "
+"social|tests."
+msgstr ""
+
+#: data/races/llama.rca:8
+msgid "Human llamas receive +2 in Inteligency."
+msgstr ""
+
+#: data/races/metaleiro.rca:1
+msgid "Headbanger"
+msgstr ""
+
+#: data/races/metaleiro.rca:2
+msgid "'Dark...'|(Anamatheus Iskurium)"
+msgstr ""
+
+#: data/races/metaleiro.rca:3
+msgid ""
+"These  creatures  usually walk with black|pants, black skirts (of bands or "
+"not) and|military  boots.  They wear  this kind of|clothes to  'be "
+"different', althought all|of them  use  the same. They love to play|all "
+"things they  find  thinking  it was a|drum,  and  to  sing  the lyrics  of  "
+"the|musics  they  love.  Usually  passed   as|autistcs,  these   creatures  "
+"walk   with|others headbangers (from 2 to 5) and have|the need  to show  "
+"others their 'revolt'.|They are attracted  easily  by  any thing|that looks "
+"'malignant',  for more rougher|than it can be."
+msgstr ""
+
+#: data/races/mutante.rca:1
+msgid "Mutant Human Cricket"
+msgstr ""
+
+#: data/races/mutante.rca:2
+msgid "'A tasty Cricket, please!'|(Logan in a barbecue restaurant)"
+msgstr ""
+
+#: data/races/mutante.rca:3
+msgid ""
+"No  one  knows  why,  but  mutant  things|started to  habit  Icex.  With "
+"their diet|based on  crickets or small hopping bugs,|the  Human Cricket have "
+"some canibalistic|habits  and, for this, are not welcome by|bugs. The "
+"habitat of the Human Cricket is|the  famous  Tyrol, near  Barreiro, where|"
+"they live happily among their parents."
+msgstr ""
+
+#: data/races/mutante.rca:6
+msgid ""
+"Since  they  eat  Crickets, Human Crickts|receive  -4  in  all  social  "
+"tests  when|threat  with  someone  of  their  race or|insects."
+msgstr ""
+
+#: data/races/mutante.rca:8
+msgid "By  obvious  reasons, the  Human  Cricket|receives + 6 in Jump."
+msgstr ""
+
+#: data/races/skinhead.rca:1
+msgid "Skinhead Maniac"
+msgstr ""
+
+#: data/races/skinhead.rca:2
+msgid ""
+"' -  Is  'cause  ther'are  some  peopl'in|front  of  my house that puts a "
+"pagode in|high volume on the weekends...|- There is, so? Give me R$500,00 "
+"and I'll|five you a fragmentation granade to throw|up there and end with "
+"their party!'|(Corrente,  Skinhead  Maniac,   answering|Gordo, Mechanical  "
+"engineering frustrated|studant)"
+msgstr ""
+
+#: data/races/skinhead.rca:3
+msgid ""
+"Skinhead  Maniacs  are a rare race in the|campus. Without  any  comon  "
+"sense, these|creatures  don't  lose  time  to finalize|their  objectives  "
+"in  the  more directly|possible way. Walking alone in the world,|they "
+"aren't  capable to make friends with|any  other  race,  always  wanting to "
+"end|those they dislike."
+msgstr ""
+
+#: data/races/skinhead.rca:6
+msgid ""
+"Since   they  don't  have  common  sense,|Skinhead Maniacs have to be of "
+"Alignment/|Tendency  Capitalist Proprietary-Software|or Chaotic Proprietary-"
+"Software"
+msgstr ""
+
+#: data/races/skinhead.rca:12
+msgid ""
+"Skinhead  Maniacs, since they have army's|friends, can get  any  kind of "
+"heavy guns|and  walk  freely  with  them.  So,  they|receive  the  skill  "
+"Free-pass for  class|skill for any choosed class;"
+msgstr ""
+
+#: data/feats/im_bombadinho.fta:1
+msgid "I am Bombadinho"
+msgstr ""
+
+#: data/feats/im_bombadinho.fta:2
+msgid ""
+"The Student, who had gone frequently to the academy, permanently receives +1 "
+"to strenght."
+msgstr ""
+
+#: data/feats/melee_attack.fta:1
+msgid "Melee Attack"
+msgstr ""
+
+#: data/feats/melee_attack.fta:2
+msgid "Character's melee attack."
+msgstr ""
+
+#: data/feats/powerfull_esophagus.fta:1
+msgid "Powerful Esophagus"
+msgstr ""
+
+#: data/feats/powerfull_esophagus.fta:2
+msgid ""
+"Cause his muscles grown in internal organs, the Phisical Education Estudant "
+"is able to expel, one time per day, a fire sphere that causes 6d6 plus 2d6 "
+"each level above 15."
+msgstr ""
+
+#: data/feats/ranged_attack.fta:1
+msgid "Ranged Attack"
+msgstr ""
+
+#: data/feats/ranged_attack.fta:2
+msgid "Character's ranged attack."
+msgstr ""
+
+#: data/skills/acrobacias.ski:1
+msgid "Acrobatics"
+msgstr ""
+
+#: data/skills/acrobacias.ski:2
+msgid ""
+"   The  acrobatic  organism is able to|do trully exploits, like capers, "
+"twir-|ling or play capoeira.With this skill,|he  is  capable to cross "
+"enemy's areas|without  taking  damage  or oportunity|attacks, fall from high "
+"places without|taking  damage  and  also  make an im-|pression to little "
+"girls.|Key Attribute: Dexterity."
+msgstr ""
+
+#: data/skills/arrombar.ski:1
+msgid "Burglarize"
+msgstr ""
+
+#: data/skills/arrombar.ski:2
+msgid ""
+"   The  organism   graduated  in  this|skill is capable to  burglarize "
+"locks,|unlock doors, safes and similars.|Key Attribure: Dexterity."
+msgstr ""
+
+#: data/skills/artedoescape.ski:1
+msgid "Art of the Escape"
+msgstr ""
+
+#: data/skills/artedoescape.ski:2
+msgid ""
+"   The  art of the escape's   perit is|capable to escape from the most "
+"diver-|se normal ways that can imprision him.|Base Attribute: Dexterity"
+msgstr ""
+
+#: data/skills/avaliar.ski:1
+msgid "Appraise"
+msgstr ""
+
+#: data/skills/avaliar.ski:2
+msgid ""
+"   Usually  utilized  to  estimate the|price of that 486  processor  sold  "
+"by|that  contrabandist  or  that poisoned|chips to your loved teacher.|Key "
+"Hability: Intelligence"
+msgstr ""
+
+#: data/skills/beber.ski:1
+msgid "Drinking"
+msgstr ""
+
+#: data/skills/beber.ski:2
+msgid ""
+"   It's  the  hability  to  get really|drunk without throwing up. Drinking "
+"is|a good way to get more extroverted and|social."
+msgstr ""
+
+#: data/skills/blefar.ski:1
+msgid "Bluff"
+msgstr ""
+
+#: data/skills/blefar.ski:2
+msgid ""
+"   The organism  master in this  skill|is capable  to deceptive the "
+"expertest|teacher.|Key Attribute: Charism."
+msgstr ""
+
+#: data/skills/boemia.ski:1
+msgid "Bohemia"
+msgstr ""
+
+#: data/skills/boemia.ski:2
+msgid ""
+"   It's  the  hability to socialize in|various  environments,  being  a  "
+"nice|person to be with."
+msgstr ""
+
+#: data/skills/bovinice.ski:1
+msgid "Taylor's Bovinity"
+msgstr ""
+
+#: data/skills/bovinice.ski:2
+msgid ""
+"   Taylor  wrote  'The  Principles  of|Scientific Management' where people "
+"is|(to him) like cattle, only for maximi-|ze the  profits. Measure  the "
+"capacity|of  people to  do  hard  work  without|discuss.|Key Attribute: (-1)"
+"*Inteligency."
+msgstr ""
+
+#: data/skills/carisma.ski:2
+msgid ""
+"Measures  how  eloquent,  imponent   with|words,  inspirated  or similar "
+"adjectives|the  creature  is.  A  very   charismatic|organism  can  "
+"aglomerate students groups|to   invade   the  University  Presidency|"
+"Building. A  not  charismatic  one  can't|make his dog obey him.||Ameiva: "
+"Charism 25|Ratazana: Charism 6|Ente: Charism 8"
+msgstr ""
+
+#: data/skills/cnhgeral.ski:1
+msgid "Knowledge: (General)"
+msgstr ""
+
+#: data/skills/cnhgeral.ski:2
+msgid ""
+"   This    feature   points   to   any|knowledge the organism might have. "
+"The|'(General)' must be substituted by the|knowledge.  Each  type  of   "
+"knowledge|affects the tests related to it."
+msgstr ""
+
+#: data/skills/cnhsofrimento.ski:1
+msgid "Knowledge: (Suffer)"
+msgstr ""
+
+#: data/skills/cnhsofrimento.ski:2
+msgid ""
+"   People   who    has    this   knows|everything about suffer  (but  in  "
+"the|normal case don't suffered them).|Key Attribute: (-1)*Charisma."
+msgstr ""
+
+#: data/skills/cnhtagmedicinal.ski:1
+msgid "Medical 'Loud Mouth'"
+msgstr ""
+
+#: data/skills/cnhtagmedicinal.ski:2
+msgid ""
+"   The  character  can talk in  an way|fully unrecognizable to those that "
+"not|know this skill,  making use only from|words   deriving   from  the   "
+"'Little|medician dictionary'.|Key Attribute: Intelligence."
+msgstr ""
+
+#: data/skills/conducao.ski:1
+msgid "Conduction(Vehicle)"
+msgstr ""
+
+#: data/skills/conducao.ski:2
+msgid ""
+"   It's the organism capacity to drive|vehicles.  The  player  has to "
+"specify|the type of vehicle he is proficient."
+msgstr ""
+
+#: data/skills/constituicao.ski:2
+msgid ""
+"Measures  how  physical  resistent is the|organism.  A  creature  with   a  "
+"lot  of|constitution is so resistent  as a horse,|able  to  injected  venon  "
+"on  itself  to|withdrawn the antidote. A character  with|little "
+"constitution  is  constantly found|in  vegetative  state,  and,  to him, the|"
+"common influenza can be lethal.||Ameiva: Constitution 12|Ratazana: "
+"Constitution 6|Ente: Constitution 26"
+msgstr ""
+
+#: data/skills/curar.ski:1
+msgid "Heal"
+msgstr ""
+
+#: data/skills/curar.ski:2
+msgid ""
+"   The organism  with  points in  this|skill  is  capable  to heal  by "
+"normal|ways. He can from stop an hemorragy to|treat a sickness.|Base "
+"Attibute: Wisdom"
+msgstr ""
+
+#: data/skills/desmentir.ski:1
+msgid "See Lies"
+msgstr ""
+
+#: data/skills/desmentir.ski:2
+msgid ""
+"   This  feature  is  tested when  the|organism  is  being  cheated. You  "
+"can|resist a Bluff with this feature."
+msgstr ""
+
+#: data/skills/destreza.ski:2
+msgid ""
+"It  is  how  skillful,  agile,  flexible,|among   others   similar  "
+"adjectives, the|creature  is.  An   organism   with  much|dexterity  is  "
+"able  to do jugglings with|knives and deviate easily  from  shots. A|"
+"creature  with  low  dexterity constantly|stumbles at  its  legs  and  "
+"can't  set a|stone in the wall of a granary.||Ameiva: Dexterity 8|Ratazana: "
+"Dexteterity 12|Ente: Dexterity 2"
+msgstr ""
+
+#: data/skills/diplomacia.ski:1
+msgid "Diplomacy"
+msgstr ""
+
+#: data/skills/diplomacia.ski:2
+msgid ""
+"   Is the organism's capacity to treat|a lot of questions  types  with "
+"others|organims. Include eloquency,gentleman,|know how  to use the  correct "
+"words in|correct  times, in  other  words,  all|those fucking social things.|"
+"Base Atrtibute: Intelligence."
+msgstr ""
+
+#: data/skills/discursoprof.ski:1
+msgid "Professional Speech"
+msgstr ""
+
+#: data/skills/discursoprof.ski:2
+msgid ""
+"   Measures the fluency and  eloquency|the character's normal speak.|Key "
+"Attribute: Wisdom."
+msgstr ""
+
+#: data/skills/disfarces.ski:1
+msgid "Disguises"
+msgstr ""
+
+#: data/skills/disfarces.ski:2
+msgid ""
+"   Measures  the  character's hability|to disguise (and be unrecognizable)."
+msgstr ""
+
+#: data/skills/equilibrio.ski:1
+msgid "Balance"
+msgstr ""
+
+#: data/skills/equilibrio.ski:2
+msgid ""
+"   Is the organism's  capacity to  not|fall from  a wall when walks on it, "
+"or|to walk on a narrow rope in an attempt|to obtain money for lunch."
+msgstr ""
+
+#: data/skills/escalar.ski:1
+msgid "Scale"
+msgstr ""
+
+#: data/skills/escalar.ski:2
+msgid "   Measure the  organism's capacity to|scale accented superfices."
+msgstr ""
+
+#: data/skills/esconder.ski:1
+msgid "Hide"
+msgstr ""
+
+#: data/skills/esconder.ski:2
+msgid ""
+"   Is  the hability to put yourself on|a  buch  or  hide in the shadows, "
+"with|the aim to not be spoted."
+msgstr ""
+
+#: data/skills/falaridioma.ski:1
+msgid "Speak Language"
+msgstr ""
+
+#: data/skills/falaridioma.ski:2
+msgid ""
+"   The  organism  with  this  skill is|able to talk an aditional language "
+"for|each point on it.||Key Attribute: Inteligency."
+msgstr ""
+
+#: data/skills/falsificar.ski:1
+msgid "Counterfeit"
+msgstr ""
+
+#: data/skills/falsificar.ski:2
+msgid ""
+"   Is  used  to  make false  copies of|something,  like director's "
+"signatures|or teacher's points notebook.||Key Attribute: Inteligency."
+msgstr ""
+
+#: data/skills/forca.ski:2
+msgid ""
+"It's   the   physical  strength  of   the|creature,   measuring   how   "
+"gross   and|potential it  is.  A  creature  with  too|much strength  can  "
+"beat like a Titan and|smash like  a Hulk.  A  creature with low|strength  "
+"can't  beat   anyone   and   is|frequently subjugated by  others  like  a|"
+"little chicken.||Ameiva: Strenght 1|Ratazana: Strenght 2|Ente: Strenght 23"
+msgstr ""
+
+#: data/skills/furtividade.ski:1
+msgid "Furtive"
+msgstr ""
+
+#: data/skills/furtividade.ski:2
+msgid ""
+"   Is the  organism's capacity to pass|on some areas without making sounds.||"
+"Key Attribute: Dextery."
+msgstr ""
+
+#: data/skills/inteligencia.ski:2
+msgid ""
+"Measures  how smart  or dumb the creature|is. Organisms with  a lot of "
+"intelligence|can take 80 in OC2 (Computer Organization|2, more  than  80  is "
+"only for Claudionor|Disciples).  Creatures  too   dumb   only|comunicate by "
+"gestures and grunts.||Ameiva: Intelligence 6|Ratazana: Intelligence 2|Ente: "
+"Intelligence 16"
+msgstr ""
+
+#: data/skills/intimidar.ski:1
+msgid "Intimidate"
+msgstr ""
+
+#: data/skills/intimidar.ski:2
+msgid ""
+"   Measures the capacity  to, throught|gestures,     words     or    "
+"strenght|exhibition,  compel  the target to act|in accordance with yours  "
+"orders. This|hability  don't  let  you   directally|control the will  of  a  "
+"target.  It's|only  used  to assure exemptions, like|make  a  studant  let  "
+"you   copy  its|exercises or  make  the snack-barwoman|give a discount on "
+"hot-dog.|Key Attribute: Charism."
+msgstr ""
+
+#: data/skills/montar.ski:1
+msgid "Ride Animals"
+msgstr ""
+
+#: data/skills/montar.ski:2
+msgid ""
+"   Those   who   knows   how  to  ride|animals, hardly will fall from  an "
+"War|Ente. This  skill is used  to hide any|creature.|Key Attribute: Dextery."
+msgstr ""
+
+#: data/skills/nadar.ski:1
+msgid "Sports"
+msgstr ""
+
+#: data/skills/nadar.ski:2
+msgid ""
+"   This skill  measures  how  good the|thing is on sports, without  any  "
+"kind|of distinction; Surelly, who  is  good|on sports, usually aren't good "
+"on  any|more thing.||Key Attribute: Dexterity."
+msgstr ""
+
+#: data/skills/notused.ski:1
+msgid "Not Used"
+msgstr ""
+
+#: data/skills/notused.ski:2
+msgid "This Skill Place is Avaible for new skills in the future."
+msgstr ""
+
+#: data/skills/observar.ski:1
+msgid "Observate"
+msgstr ""
+
+#: data/skills/observar.ski:2
+msgid ""
+"   Is   the   visual   acuidate  of an|organism to view far  distances  or "
+"to|discern  details  from   an   objector|scene. It's the counter-skill of "
+"Hide.|Key Feature: Wisdom."
+msgstr ""
+
+#: data/skills/obterinf.ski:1
+msgid "Get Information"
+msgstr ""
+
+#: data/skills/obterinf.ski:2
+msgid ""
+"   This   skill  is   used   to   gain|restricted informations.  It's  not "
+"so|strange to understand.|Key Feature: Wisdom."
+msgstr ""
+
+#: data/skills/opobjele.ski:1
+msgid "Operate Eletronic Object"
+msgstr ""
+
+#: data/skills/opobjele.ski:2
+msgid ""
+"   Is  the  capacity to operate or fix|eletronic   objects   without   "
+"taking|eletric shocks and lose 70/100 of your|brain  or  explode  the  "
+"object  ( and|yourself).|Key Attribute: Inteligency."
+msgstr ""
+
+#: data/skills/opobjmec.ski:1
+msgid "Operate Mechanic Object"
+msgstr ""
+
+#: data/skills/opobjmec.ski:2
+msgid ""
+"   Is  the  capacity to operate or fix|mechanical   objects   without  loss "
+"a|finger or hand.|Key Attribute: Inteligency."
+msgstr ""
+
+#: data/skills/ouvir.ski:1
+msgid "Listen"
+msgstr ""
+
+#: data/skills/ouvir.ski:2
+msgid ""
+"   The  so  good  that an organism can|listen  and  discern sounds. It is "
+"the|counter-skill to Furtive.|Key Attribute: Wisdom."
+msgstr ""
+
+#: data/skills/passelivre.ski:1
+msgid "Free-Pass"
+msgstr ""
+
+#: data/skills/passelivre.ski:2
+msgid ""
+"   Is  the  hability  to  realize  any|ilegal    thing     without     "
+"suffer|retaliations  from   the  responsibles|authorities. Free-Pass  serves "
+"to walk|on restricted areas or walk with heavy|guns.|Key Attribute: Charisma."
+msgstr ""
+
+#: data/skills/penosaco.ski:1
+msgid "Foot on Man's Genitals"
+msgstr ""
+
+#: data/skills/penosaco.ski:2
+msgid ""
+"   People  who  have  the capacity  to|make you feel,  while talking to "
+"them,|like  if  a  foot  was  put  on   your|genitals.|Key Attribute: (-1)"
+"*Charism."
+msgstr ""
+
+#: data/skills/performar.ski:1
+msgid "Perform"
+msgstr ""
+
+#: data/skills/performar.ski:2
+msgid ""
+"   Those  who knows the art to perform|is  able  to  participate  on   "
+"little|theaters  in  the street or join a lot|of  vacated  persons  to see "
+"they make|something banal.  Perform perits DON'T|know how to play musical "
+"instruments.|Key Attribute: Charism."
+msgstr ""
+
+#: data/skills/prestidig.ski:1
+msgid "Prestidigitation"
+msgstr ""
+
+#: data/skills/prestidig.ski:2
+msgid ""
+"   Is  the  skill used to steal little|objects  that  are  with someone or "
+"in|somewhere observed by a lot of people.|Key Attibute: Dexterity."
+msgstr ""
+
+#: data/skills/roupasbizarras.ski:1
+msgid "Bizarre Cloths"
+msgstr ""
+
+#: data/skills/roupasbizarras.ski:2
+msgid ""
+"   It   measure   the   capacity    of|character  to  wear the  most  "
+"bizarre|things and call it 'Cloth'.|Key Attribute: (-1)*Intelligence."
+msgstr ""
+
+#: data/skills/sabedoria.ski:2
+msgid ""
+"Measures how much expert the creature is,|knowing how to do in any life "
+"situations.|An wisdom organism  can  make 10 years of|post  graduation "
+"without  any  problem. A|creature  with  low wisdom can be lost in|the way "
+"from the university restaurant to|the bathroom.||Ameiva: Wisdom 4|Ratazana: "
+"Wisdom 6|Ente: Wisdom 12"
+msgstr ""
+
+#: data/skills/semtempo.ski:1
+msgid "Out of Time"
+msgstr ""
+
+#: data/skills/semtempo.ski:2
+msgid ""
+"   People  with  it  can't  make   all|normal  things  in  live, 'cause "
+"their|course don't let! (Can  be  a glorious|excuse to not to something)| "
+"Key Attribute: Wisdom"
+msgstr ""
+
+#: data/skills/suborno.ski:1
+msgid "Bribe"
+msgstr ""
+
+#: data/skills/suborno.ski:2
+msgid ""
+"   This skill  measures  how good  you|are  to  'buy'  people,  getting  "
+"some|goods  in  exchange  of money or other|material stuff."
+msgstr ""
+
+#: data/skills/tocarinst.ski:1
+msgid "Play Instrument"
+msgstr ""
+
+#: data/skills/tocarinst.ski:2
+msgid ""
+"   Is  the  capacity to play a musical|instrument. The instrument is "
+"anything|that  can  produce  at last 7 distinct|notes.|Key Attribute: "
+"Dexterity."
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:6
+msgid "Oh, little  student,  what|do you want?"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:10
+msgid "Why can't I win  a  battle  against|the Ente?"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:13
+msgid "I am a brutal killing machine. Die!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:16
+msgid "What are you?"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:19
+msgid "Nothing."
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:28
+msgid ""
+"Win Ente on a Battle?  Are|you crazy? You only  are a|first  level  student  "
+"and|the Ente is a mythological|14   level  creature!  Say|thanks to the DNT "
+"dev team|yet  not  implemented  the|Ente attack feats (He only|attack  you  "
+"with his bare|hands!)"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:32
+msgid "Mythological, like a D&D Dragon?"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:35
+msgid "Bare  hands?  Oh, thank you DNT dev|team!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:38
+msgid "And you, can I kill?"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:47
+msgid ""
+"I  am  an   Ameiva. A very|usefull little Ameiva.  An|wise and great Ameiva!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:51
+msgid "Wise?  So, why can't I win a battle|against the Ente?"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:54
+msgid "You are fully of yourself!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:57 data/dialogs/ameiva1.dlg:105
+#: data/dialogs/ameiva1.dlg:121 data/dialogs/ameiva1.dlg:150
+msgid "Let's talk about something else."
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:66
+msgid ""
+"Nothing?  You  click  that|ugly  mouse  cursor  on me|for  nothing?  I'll   "
+"kill|you, humanoid!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:70
+msgid "Come on!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:73
+msgid "Please, no!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:82
+msgid ""
+"Mythological. Like  a  D&D|Giant.  A  D&D  dragon  is|much  more  like   a   "
+"DNT|Panda. Thankfully  to  the|dev  team,  no  Pandas are|actually modeled, "
+"so don't|worry,  almost   for  this|version."
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:86
+msgid "Thank you DNT team, for not modeled|a Panda!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:95
+msgid ""
+"That's the way  to  think!|I,   too,    won't   exist|without DNT dev team!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:99
+msgid "And I won't be killing you  without|them! Die little Ameiva!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:102
+msgid "Yes. See you great Ameiva!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:114
+msgid ""
+"Of course  I  am! You, for|example,   can't    be   a|great Ameiva like me!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:118
+msgid ""
+"Yes,  I can only  be  this  fucking|Logan   Model!  I  hope  that  on  next|"
+"version  the  DNT   team   make   other|humanoid model!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:130
+msgid "Ok, I'll  be mercy on you.|Now, get out of my sight!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:134
+msgid "Yes, great Ameiva!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:137
+msgid "I've changed my mind. Die!"
+msgstr ""
+
+#: data/dialogs/ameiva1.dlg:146
+msgid ""
+"Yes, I  hope too. But  the|team needs more people  to|help them!  If  you  "
+"wanna|join  them,  just   go  to|their       forum       at|dnt.dnteam.org"
+msgstr ""
+
+#: data/dialogs/ratazana1.dlg:6
+msgid ""
+"Cri... If you  wanna  know|about  DccNiTghtmare, talk|to  the  Ente  "
+"outside!  I|don't know anything."
+msgstr ""
+
+#: data/dialogs/ratazana1.dlg:10
+msgid "Calm down little one. I'll look for|the Ente."
+msgstr ""
+
+#: data/dialogs/ratazana1.dlg:13
+msgid "Ja, ja, ja. A weak animal! Die!"
+msgstr ""
+
+#: data/dialogs/ratazana1.dlg:16
+msgid "Who are you?"
+msgstr ""
+
+#: data/dialogs/ratazana1.dlg:25
+msgid ""
+"I'm   only   a   Ratazana.|Please, human  that  come|from  nowhere   here,  "
+"I'm|afraid, go out, please!"
+msgstr ""
+
+#: data/dialogs/ratazana1.dlg:29
+msgid "I'll go. (After kill you)..."
+msgstr ""
+
+#: data/dialogs/ratazana1.dlg:32
+msgid "Ok. Just calm down..."
+msgstr ""
+
+#: data/dialogs/initial.dlg:6
+msgid "Welcome to DccNiTghtmare!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:10 data/dialogs/initial.dlg:79
+msgid "What is DccNiTghtmare?"
+msgstr ""
+
+#: data/dialogs/initial.dlg:13
+msgid "I wanna help!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:16 data/dialogs/initial.dlg:41
+#: data/dialogs/initial.dlg:63
+msgid "What the hell! A tree talking?"
+msgstr ""
+
+#: data/dialogs/initial.dlg:19
+msgid "Die!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:22
+msgid "Bye!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:31
+msgid ""
+"DccNiTghtmare is a project|to make a post-apocalyptic|realtime RPG  with "
+"battles|in turns. Actually, it  is|on    early    stage    of|"
+"development,    so   don't|expect too much here."
+msgstr ""
+
+#: data/dialogs/initial.dlg:35
+msgid "I really wanna help!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:38
+msgid "Die Fanatic!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:44
+msgid "So, bye!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:53
+msgid "Use    our    foruns    at|dnt.dnteam.org  to contact|us!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:57
+msgid "I forgot what is DccNiTghtmare!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:60
+msgid "I don't like, die!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:66
+msgid "Goodbye!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:75
+msgid ""
+"Tree?   Where   are    you|seeing a talking tree? I??|I  am  an ENTE! (Ok "
+"that a|Ente  was   a  tree  on  a|remote  past,  but  it's a|too long "
+"history for a 0.1|techdemo of DccNiTghtmare)"
+msgstr ""
+
+#: data/dialogs/initial.dlg:82
+msgid "Die Cursed Tree!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:85
+msgid "Bye Tree!"
+msgstr ""
+
+#: data/dialogs/initial.dlg:88
+msgid "Bye Ente!"
+msgstr ""

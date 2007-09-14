@@ -1,6 +1,5 @@
 #include "editor.h"
 #include "../../etc/extensions.h"
-#include "../../lang/lang.h"
 
 /*********************************************************************
  *                            Constructor                             *
@@ -19,10 +18,6 @@ editor::editor()
    /* Load Extensions */
    extensions ext;
    ext.defineAllExtensions();
-
-   /* Load Language's files */
-   lang language;
-   language.ReloadFile(1);
 
    gui = new(guiIO);
    hour = 12.0;

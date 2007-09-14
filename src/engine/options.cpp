@@ -1,14 +1,16 @@
 #include "options.h"
 
-#include "../lang/lang.h"
 #include "../sound/sound.h"
 #include "camera.h"
 #include "util.h"
 
-#define NM_PORTUGUES "Português"
-#define NM_INGLES    "English"
-#define NM_FRANCES   "Français"
-#define NM_ESPANHOL  "Español"
+#define NM_PORTUGUES gettext("Portuguese")
+#define NM_INGLES    gettext("English")
+#define NM_FRANCES   gettext("French")
+#define NM_ESPANHOL  gettext("Spanish")
+
+#define LANG_LAST  3
+#define LANG_FIRST 0
 
 /****************************************************************
  *                          Constructor                         *
@@ -97,7 +99,7 @@ void options::Save()
    FILE* arq;
    if(!(arq = fopen(fileName.c_str(),"w")))
    {
-      printf("Error while opening Options: %s\n",fileName.c_str());
+      printf(gettext("Error while writing Options: %s\n"),fileName.c_str());
       return;
    }
 
@@ -133,7 +135,6 @@ void options::Save()
    /* Reflexion */
    fprintf(arq, "Reflexions: %d\n", reflexionType);
 
-   language.ReloadFile(langNumber);
    fclose(arq);
 }
 
@@ -145,7 +146,7 @@ string options::languageName()
    string saux;
    switch(langNumber)
    {
-      case LANG_PORTUGUES:
+      /*case LANG_PORTUGUES:
       {
          saux = NM_PORTUGUES;
          break;
@@ -164,7 +165,8 @@ string options::languageName()
       {
          saux = NM_INGLES;
          break;
-      }
+      }*/
+      //FIXME for the gettext use! here will reset the locale!
    }
    return(saux);
 }
@@ -179,17 +181,17 @@ string options::reflexionName()
    {
       case REFLEXIONS_NONE:
       {
-         saux = language.OPTIONS_REFLECTS_NONE;
+         saux = gettext("None");
          break;
       }
       case REFLEXIONS_CHARACTERS:
       {
-         saux = language.OPTIONS_REFLECTS_CHARACTER;
+         saux = gettext("Characters");
          break;
       }
       case REFLEXIONS_ALL: 
       {
-         saux = language.OPTIONS_REFLECTS_ALL;
+         saux = gettext("All");
          break;
       }
    }
@@ -205,10 +207,10 @@ string options::cameraName()
    switch(cameraNumber)
    {
       case CAMERA_TYPE_NORMAL:
-         saux = language.OPTIONS_CAMERA_NORMAL;
+         saux = gettext("Normal");
       break;
       case CAMERA_TYPE_DRIVE:
-         saux = language.OPTIONS_CAMERA_DRIVE;
+         saux = gettext("Pursue");
       break;
    }
    return(saux);
@@ -225,14 +227,13 @@ void options::DisplayOptionsScreen(interface* interf)
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
-   intWindow = interf->insertWindow(276,169,531,434,
-                                    language.OPTIONS_TITLE.c_str());
+   intWindow = interf->insertWindow(276,169,531,434,gettext("Options"));
 
    /* Music Things */
    sprintf(tmp,"%d",musicVolume);
    saux = tmp;
    qt = intWindow->getObjectsList()->insertTextBox(8,27,145,44,0,
-                                         language.OPTIONS_MUSIC_VOLUME.c_str());
+                                         gettext("Music Volume:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonMusDec = intWindow->getObjectsList()->insertButton(146,27,156,44,"<",0);
    txtMusicVolume = intWindow->getObjectsList()->insertTextBox(157,27,197,44,1,
@@ -247,7 +248,7 @@ void options::DisplayOptionsScreen(interface* interf)
    sprintf(tmp,"%d",sndfxVolume);
    saux = tmp;
    qt = intWindow->getObjectsList()->insertTextBox(8,52,145,69,0,
-                                         language.OPTIONS_SNDFX_VOLUME.c_str());
+                                         gettext("Effects Volume:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonSndDec = intWindow->getObjectsList()->insertButton(146,52,156,69,"<",0);
    txtSndfxVolume = intWindow->getObjectsList()->insertTextBox(157,52,197,69,1,
@@ -262,7 +263,7 @@ void options::DisplayOptionsScreen(interface* interf)
    prevLanguage = langNumber;
    saux = languageName();
    qt = intWindow->getObjectsList()->insertTextBox(8,88,145,105,0,
-                                         language.OPTIONS_LANGUAGE.c_str());
+                                                   gettext("Language:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonLangDec = intWindow->getObjectsList()->insertButton(121,88,131,105,"<",0);
    txtLanguage = intWindow->getObjectsList()->insertTextBox(132,88,197,105,1,
@@ -276,7 +277,7 @@ void options::DisplayOptionsScreen(interface* interf)
    prevCamera = cameraNumber;
    saux = cameraName();
    qt = intWindow->getObjectsList()->insertTextBox(8,126,145,143,0,
-                                            language.OPTIONS_CAMERA.c_str());
+                                            gettext("Camera Mode:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonCamDec = intWindow->getObjectsList()->insertButton(121,126,131,143,"<",0);
    txtCamera = intWindow->getObjectsList()->insertTextBox(132,126,197,143,1,
@@ -289,7 +290,7 @@ void options::DisplayOptionsScreen(interface* interf)
 
    /* Grass Enabled or Not */
    qt = intWindow->getObjectsList()->insertTextBox(20,156,200,173,0,
-                                         language.OPTIONS_GRASS.c_str());
+                          gettext("Enable Grass Effects (need particles)"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
    cxSelGrass = intWindow->getObjectsList()->insertCxSel(8,160, enableGrass);
    intWindow->getObjectsList()->insertPicture(214,156,40,112,
@@ -298,7 +299,7 @@ void options::DisplayOptionsScreen(interface* interf)
 
    /* Particle System Enabled or Not */
    qt = intWindow->getObjectsList()->insertTextBox(20,174,200,191,0,
-                                         language.OPTIONS_PARTICLES.c_str());
+                                         gettext("Enable Particles Effects"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
    cxSelParticles = intWindow->getObjectsList()->insertCxSel(8,178, enableParticles);
    intWindow->getObjectsList()->insertPicture(214,174,40,112,
@@ -308,7 +309,7 @@ void options::DisplayOptionsScreen(interface* interf)
    prevReflexion = reflexionType;
    saux = reflexionName();
    qt = intWindow->getObjectsList()->insertTextBox(8,203,145,220,0,
-                                            language.OPTIONS_REFLECTS.c_str());
+                                            gettext("Reflections:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
    buttonReflDec = intWindow->getObjectsList()->insertButton(121,203,131,220,"<",0);
    txtReflexion = intWindow->getObjectsList()->insertTextBox(132,203,197,220,1,
@@ -321,11 +322,11 @@ void options::DisplayOptionsScreen(interface* interf)
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(181,235,251,254,
-                                              language.SKILL_CONFIRM.c_str(),1);
+                                              gettext("Confirm"),1);
    
    /* Cancel Button */
    buttonCancel = intWindow->getObjectsList()->insertButton(8,235,78,254,
-                                               language.SKILL_CANCEL.c_str(),1);
+                                              gettext("Cancel"),1);
 
    /* borders */
    intWindow->getObjectsList()->insertTextBox(5,20,250,77,1,"");

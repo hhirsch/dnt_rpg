@@ -1,4 +1,5 @@
 #include "align.h"
+#include "../lang/translate.h"
 #include <iostream>
 #include <fstream>
 
@@ -79,8 +80,14 @@ void aligns::insertAlign(string fileName, string idString, int idInt)
    /* Name */
    getline(file, ins->name);
 
+   /* Translate Name */
+   ins->name = translateDataString(ins->name);
+
    /* Description */
    getline(file, ins->description);
+
+   /* Translate Description */
+   ins->description = translateDataString(ins->description);
 
    /* Image */
    getline(file, str);

@@ -5,17 +5,24 @@
 
 #include "../gui/farso.h"
 #include "dccnit.h"
-#include "../lang/lang.h"
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <stdlib.h>
+#include <libintl.h>
+
+#include "../config.h"
 
 /*********************************************************************
  *                           Main Code                               *
  *********************************************************************/
 int main(int argc, char **argv)
 {
-  
+   /* Set locale */
+   setlocale (LC_CTYPE, "");
+   setlocale(LC_MESSAGES, "");
+   bindtextdomain (PACKAGE, LOCALEDIR);
+   textdomain (PACKAGE);
+
    SDL_Surface *screen;
    
    #ifdef REDE
@@ -56,8 +63,8 @@ int main(int argc, char **argv)
           {
              glDisable(GL_LIGHTING);
              Engine->fadeOutTexture(tituloID,0,0,799,599);
-             //Engine->LoadMap("../data/mapas/teste1.map",0);
-             Engine->LoadMap("../data/mapas/tutorial/temple.map",0);
+             Engine->LoadMap("../data/mapas/teste1.map",0);
+             //Engine->LoadMap("../data/mapas/tutorial/temple.map",0);
           }
        }
        

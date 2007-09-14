@@ -6,7 +6,6 @@
 barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
                            interface* inter)
 {
-   lang language;
    /* Init Values */
    curSellSlot = 0;
    curBuySlot = 0;
@@ -16,7 +15,7 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    barterInventory = new barter(inventSeller, inventBuyer);
    
    /* Create Window */
-   intWindow = gui->insertWindow(268,0,531,274,language.BARTERW_TITLE.c_str());
+   intWindow = gui->insertWindow(268,0,531,274,gettext("Barter"));
 
    /* Totals */
    buyerTotals = intWindow->getObjectsList()->insertTextBox(27,234,118,250,
@@ -28,11 +27,11 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
 
    /* Actions Buttons */
    offerButton = intWindow->getObjectsList()->insertButton(173,252,251,270,
-                                             language.BARTERW_OFFER.c_str(),0);
+                                             gettext("Offer"),0);
    imposeButton = intWindow->getObjectsList()->insertButton(91,252,168,270,
-                                             language.BARTERW_IMPOSE.c_str(),0);
+                                             gettext("Impose"),0);
    cancelButton = intWindow->getObjectsList()->insertButton(9,252,87,270,
-                                             language.BARTERW_CANCEL.c_str(),0);
+                                             gettext("Cancel"),0);
 
    /* Create the botton figure */
    intWindow->getObjectsList()->insertPicture(4,232,256,39,
@@ -63,7 +62,7 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    /* Verify if the buyer and seller windows are opened. If not open them */
    if(!inventSeller->openedWindow)
    {
-      sellerWindow = new inventWindow(536,0,language.INVENTW_TITLE.c_str(),
+      sellerWindow = new inventWindow(536,0,gettext("Inventory"),
                                       inventSeller, inter);
    }
    else
@@ -73,7 +72,7 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
 
    if(!inventBuyer->openedWindow)
    {
-      buyerWindow = new inventWindow(0,0,language.INVENTW_TITLE.c_str(),
+      buyerWindow = new inventWindow(0,0,gettext("Inventory"),
                                      inventBuyer, inter);
    }
    else

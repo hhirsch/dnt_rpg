@@ -17,7 +17,6 @@
 #include "../etc/message3d.h"
 #include "../fight/fightSystem.h"
 #include "../gui/farso.h"
-#include "../lang/lang.h"
 #include "../map/map.h"
 #include "../particle/partSystem.h"
 #include "../particle/wave.h"
@@ -392,8 +391,6 @@ class engine
       classes* classList;          /**< Classes List */
       skills* skillsList;          /**< List of Skills */
       weaponTypes* weaponsTypes;   /**< List of Types of Weapons */
-
-      lang language;               /**< Language struct: internationalization */
 
       partSystem* particleSystem;  /**< The Particle System */
       GLfloat seconds;             /**< Seconds from last actualization */

@@ -7,12 +7,12 @@
 
 #include <SDL/SDL.h>
 #include "defs.h"
+#include <libintl.h>
 #include <string>
 using namespace std;
 
 #include "thing.h"
 #include "modifier.h"
-#include "../lang/lang.h"
 #include "../etc/message3d.h"
 
 #define MAX_FEATS          30 /**< Max number of Feats per Character */
@@ -228,7 +228,6 @@ class feats
    private:
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
       int  totalFeats;          /**< Actual Number of Feats */
-      lang language;            /**< Language Internationalization */
 
       /*!
        **************************************************************** 

@@ -6,7 +6,6 @@
  *************************************************************************/
 
 #include "../gui/farso.h"
-#include "../lang/lang.h"
 #include "../classes/race.h"
 
 #define RACEW_CANCEL  0
@@ -53,8 +52,6 @@ class raceWindow
       textBox* textCitation;
 
       picture* raceImage;
-
-      lang language;                 /**< Language internationalization */
 
       string getCharacteristics();
 

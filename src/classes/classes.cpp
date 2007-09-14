@@ -1,4 +1,5 @@
 #include "classes.h"
+#include "../lang/translate.h"
 #include <iostream>
 #include <fstream>
 
@@ -155,15 +156,21 @@ void classes::insertClass(string fileName, string imgFile, string idString,
    /* Name */
    getline(file, ins->name);
 
+   /* Translate Name */
+   ins->name = translateDataString(ins->name);
+
    /* Citation */
    getline(file, ins->citation);
+
+   /* Translate Citation */
+   ins->citation = translateDataString(ins->citation);
 
    /* Description */
    getline(file, ins->description);
 
-   /* Image */
-   //getline(file, str);
-   
+   /* Translate Description */
+   ins->description = translateDataString(ins->description);
+
    /* Life Dice */
    getline(file, str);
    sscanf(str.c_str(), "d%d",&ins->lifeDiceID);
@@ -199,6 +206,8 @@ void classes::insertClass(string fileName, string imgFile, string idString,
       ins->classModifiers[i].target.id = buf4;
       /* Modifier Description */
       getline(file, ins->classModifiers[i].description);
+      ins->classModifiers[i].description = translateDataString(
+                                           ins->classModifiers[i].description);
    }
 
    /* Feats */

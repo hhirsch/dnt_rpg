@@ -24,15 +24,14 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(90,100,710,499,
-                                language.RACEW_TITLE.c_str());
+   intWindow = inter->insertWindow(90,100,710,499, gettext("Race"));
    /* Race Image */
    raceImage = intWindow->getObjectsList()->insertPicture(7,20,0,0,NULL);   
    raceImage->set(actualRace->image);
 
    /* Race Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(71,20,342,35,1,
-                                            language.RACEW_DESCRIPTION.c_str());
+                                            gettext("Race Description"));
    textDescTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(71,36,342,345,
@@ -41,7 +40,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
 
    /* Race Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(343,20,613,35,1,
-                                       language.RACEW_CHARACTERISTICS.c_str());
+                                       gettext("Race Characteristcs"));
    textCharacTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
 
    textCharac = intWindow->getObjectsList()->insertRolBar(343,36,613,345,
@@ -57,11 +56,11 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(543,370,613,389,
-                                         language.SKILL_CONFIRM.c_str(),1);
+                                         gettext("Confirm"),1);
    
    /* Cancel Button */
    buttonCancel = intWindow->getObjectsList()->insertButton(8,370,78,389,
-                                               language.SKILL_CANCEL.c_str(),1);
+                                               gettext("Cancel"),1);
 
    /* Open Skill Window */
    intWindow->setExternPointer(&intWindow);
@@ -76,7 +75,7 @@ string raceWindow::getCharacteristics()
 {
    int i;
    //char mod[5];
-   string text = language.RACEW_MODIFIERS + "||";
+   string text = gettext("Race Modifiers||");
    for(i=0; i<actualRace->totalModifiers; i++)
    {
       text += actualRace->raceModifiers[i].description + "||";
@@ -84,11 +83,11 @@ string raceWindow::getCharacteristics()
 
    if(actualRace->totalModifiers == 0)
    {
-      text += language.RACEW_NO_MODIFIERS + "||";
+      text += gettext("No Modifiers.||");
    }
 
    //TODO get race Name
-   text += language.RACEW_FEATS + "||";
+   text += gettext("Race Feats||");
    for(i=0; i<actualRace->totalFeats; i++)
    {
       text += actualRace->raceFeats[i] + "|";
@@ -96,12 +95,12 @@ string raceWindow::getCharacteristics()
 
    if(actualRace->totalFeats == 0)
    {
-      text += language.RACEW_NO_FEATS + "|";
+      text += gettext("No Feats.|");
    }
 
    /* Race Skills */
    skill* skTmp;
-   text += "|" + language.RACEW_SKILLS + "||";
+   text += gettext("|Race Skills||");
    for(i=0; i<actualRace->totalSkills; i++)
    {
       skTmp = externalSkills->getSkillByString(actualRace->raceSkills[i]);
@@ -117,7 +116,7 @@ string raceWindow::getCharacteristics()
 
    if(actualRace->totalSkills == 0)
    {
-      text += language.RACEW_NO_SKILLS;
+      text += gettext("No Skills.");
    }
 
    return(text);

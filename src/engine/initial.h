@@ -6,7 +6,6 @@
 #define _initial_h
 
 #include "../gui/farso.h"
-#include "../lang/lang.h"
 #include "../sound/sound.h"
 
 /* initialScreen Returns Values */
@@ -44,7 +43,6 @@ class initialScreen
                            GLuint idTextura, sound* snd);
    private:
       interface* gui;  /**< GUI for Windows */
-      lang language;   /**< language internationalization */
 
       int result;      /**< Result of the initial Screen */
       bool done;

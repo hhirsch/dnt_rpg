@@ -6,7 +6,6 @@
  *************************************************************************/
 
 #include "../gui/farso.h"
-#include "../lang/lang.h"
 #include "../classes/classes.h"
 
 #define CLASSW_CANCEL  0
@@ -54,8 +53,6 @@ class classWindow
       textBox* textCitation;
 
       picture* classImage;
-
-      lang language;                 /**< Language internationalization */
 
       string getCharacteristics();
 

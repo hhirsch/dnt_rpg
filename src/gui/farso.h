@@ -6,6 +6,8 @@
 #ifndef _farso_h
 #define _farso_h
 
+
+#include <libintl.h>
 #include <stdlib.h>
 #include <SDL/SDL.h>
 #include "draw.h"

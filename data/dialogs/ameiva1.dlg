@@ -1,0 +1,153 @@
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("Oh, little  student,  what|do you want?")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Why can't I win  a  battle  against|the Ente?")
+         action = go_to_dialog(1)
+      option
+         text = gettext("I am a brutal killing machine. Die!")
+         action = init_fight()
+      option
+         text = gettext("What are you?")
+         action = go_to_dialog(2)
+      option
+         text = gettext("Nothing.")
+         action = go_to_dialog(3)
+   pc_end
+end_dialog
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("Win Ente on a Battle?  Are|you crazy? You only  are a|first  level  student  and|the Ente is a mythological|14   level  creature!  Say|thanks to the DNT dev team|yet  not  implemented  the|Ente attack feats (He only|attack  you  with his bare|hands!)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Mythological, like a D&D Dragon?")
+         action = go_to_dialog(4)
+      option
+         text = gettext("Bare  hands?  Oh, thank you DNT dev|team!")
+         action = go_to_dialog(5)
+      option
+         text = gettext("And you, can I kill?")
+         action = init_fight()
+   pc_end
+end_dialog
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("I  am  an   Ameiva. A very|usefull little Ameiva.  An|wise and great Ameiva!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Wise?  So, why can't I win a battle|against the Ente?")
+         action = go_to_dialog(1)
+      option
+         text = gettext("You are fully of yourself!")
+         action = go_to_dialog(6)
+      option
+         text = gettext("Let's talk about something else.")
+         action = go_to_dialog(0)
+   pc_end
+end_dialog
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("Nothing?  You  click  that|ugly  mouse  cursor  on me|for  nothing?  I'll   kill|you, humanoid!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Come on!")
+         action = init_fight()
+      option
+         text = gettext("Please, no!")
+         action = go_to_dialog(7)
+   pc_end
+end_dialog
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("Mythological. Like  a  D&D|Giant.  A  D&D  dragon  is|much  more  like   a   DNT|Panda. Thankfully  to  the|dev  team,  no  Pandas are|actually modeled, so don't|worry,  almost   for  this|version.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Thank you DNT team, for not modeled|a Panda!")
+         action = go_to_dialog(5)
+   pc_end
+end_dialog
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(5)
+   npc_begin
+      text = gettext("That's the way  to  think!|I,   too,    won't   exist|without DNT dev team!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("And I won't be killing you  without|them! Die little Ameiva!")
+         action = init_fight()
+      option
+         text = gettext("Yes. See you great Ameiva!")
+         action = finish_dialog()
+      option
+         text = gettext("Let's talk about something else.")
+         action = go_to_dialog(0)
+   pc_end
+end_dialog
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(6)
+   npc_begin
+      text = gettext("Of course  I  am! You, for|example,   can't    be   a|great Ameiva like me!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Yes,  I can only  be  this  fucking|Logan   Model!  I  hope  that  on  next|version  the  DNT   team   make   other|humanoid model!")
+         action = go_to_dialog(8)
+      option
+         text = gettext("Let's talk about something else.")
+         action = go_to_dialog(0)
+   pc_end
+end_dialog
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(7)
+   npc_begin
+      text = gettext("Ok, I'll  be mercy on you.|Now, get out of my sight!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Yes, great Ameiva!")
+         action = finish_dialog()
+      option
+         text = gettext("I've changed my mind. Die!")
+         action = init_fight()
+   pc_end
+end_dialog
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(8)
+   npc_begin
+      text = gettext("Yes, I  hope too. But  the|team needs more people  to|help them!  If  you  wanna|join  them,  just   go  to|their       forum       at|dnt.dnteam.org")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Let's talk about something else.")
+         action = go_to_dialog(0)
+   pc_end
+end_dialog

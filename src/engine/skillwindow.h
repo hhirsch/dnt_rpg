@@ -7,7 +7,6 @@
 
 #include "../gui/farso.h"
 #include "../classes/skills.h"
-#include "../lang/lang.h"
 
 #define CHAR_CANCEL  0 /**< Cancel Character Edition Return TODO not here*/
 #define CHAR_CONFIRM 1 /**< Confirm Character Edition Return TODO not here */
@@ -52,7 +51,6 @@ class skillWindow
       button* buttonCancel;
 
       picture*     skFig;            /**< Actual skill Image */
-      lang language;                 /**< Language internationalization */ 
 
 };
 

@@ -2,7 +2,6 @@
 #define _options_h
 
 #include "../gui/farso.h"
-#include "../lang/lang.h"
 #include <string>
 using namespace std;
 
@@ -56,7 +55,6 @@ class options
       int          prevSndfxVolume;/**< Previous Used Sound Effects Volume */
       int          prevLanguage;   /**< Previous Used Language */
       int          prevReflexion;  /**< Previous Used Reflexion */
-      lang         language;       /**< Language Used */
 
       int timeLastOperation;       /**< Ticks when done last operation */
 

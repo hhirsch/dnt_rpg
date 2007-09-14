@@ -2,10 +2,10 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
+#include <libintl.h>
 #include "initial.h"
 #include "util.h"
 #include <SDL/SDL_image.h>
-#include "../lang/lang.h"
 
 initialScreen::initialScreen()
 {
@@ -34,26 +34,26 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    done = false;
    guiObject* object = NULL;
    int eventInfo = NOTHING;
-   window* jan = gui->insertWindow(335,235,462,362, language.VERSION.c_str());  
+   window* jan = gui->insertWindow(335,235,462,362, gettext("0.2"));  
    jan->setAttributes(false,true,false,false);
    if(Status == ON_INIT)
    {
-      buttonNew = jan->getObjectsList()->insertButton(30,20,98,38,
-                                                language.INITIAL_NEW.c_str(),1);
+      buttonNew = jan->getObjectsList()->insertButton(30,20,98,38, 
+                                                      gettext("New"),1);
    }
    else
    {
       buttonContinue = jan->getObjectsList()->insertButton(30,20,98,38,
-                                           language.INITIAL_CONTINUE.c_str(),1);
+                                           gettext("Continue"),1);
    }
    buttonSave = jan->getObjectsList()->insertButton(30,40,98,58,
-                                           language.INITIAL_SAVE.c_str(),1);
+                                           gettext("Save"),1);
    buttonLoad = jan->getObjectsList()->insertButton(30,60,98,78,
-                                               language.INITIAL_LOAD.c_str(),1);
+                                               gettext("Load"),1);
    buttonOptions = jan->getObjectsList()->insertButton(30,80,98,98,
-                                            language.INITIAL_OPTIONS.c_str(),1);
+                                            gettext("Options"),1);
    buttonExit = jan->getObjectsList()->insertButton(30,100,98,118,
-                                           language.INITIAL_EXIT.c_str(),1);
+                                           gettext("Exit"),1);
    gui->openWindow(jan);
 
    glDisable(GL_LIGHTING);

@@ -5,6 +5,8 @@
 
 #include "dialog.h"
 #include "dccnit.h"
+#include "../lang/translate.h"
+
 
 #define BUFFER_SIZE 512
 
@@ -146,7 +148,6 @@ int conversation::getActionID(string token, string fileName, int line)
  *************************************************************************/
 int conversation::loadFile(string name)
 {
-  lang language;
   string buffer;
   string stmp;
   dialog* dlg = NULL;
@@ -160,14 +161,14 @@ int conversation::loadFile(string name)
   bool npcBegin = false;
   bool pcBegin = false;
 
-  name = language.DIALOG_DIR + name;
+  name = "../data/dialogs/"+name;
 
   std::ifstream file;
   
   file.open(name.c_str(), ios::in | ios::binary);
   if(!file)
   {
-     printError(name, "Cannot open File!\n", 0);
+     printError(name, gettext("Cannot open File!\n"), 0);
      return(0);
   }
 
@@ -189,7 +190,9 @@ int conversation::loadFile(string name)
       {
          if(!endDialog)
          {
-            printError(name,"Tried to define dialog before end last one!",line);
+            printError(name,
+                       gettext("Tried to define dialog before end last one!"),
+                       line);
          }
          else
          {
@@ -204,7 +207,7 @@ int conversation::loadFile(string name)
       {
          if( (endDialog) || (dlg == NULL))
          {
-            printError(name, "Tried to end an undefined dialog!", line);
+            printError(name,gettext("Tried to end an undefined dialog!"),line);
          }
 
          endDialog = true;
@@ -215,7 +218,8 @@ int conversation::loadFile(string name)
       {
          if(npcBegin || pcBegin)
          {
-            printError(name, "Tried to begin NPC before end something!", line);
+            printError(name,gettext("Tried to begin NPC before end something!"),
+                       line);
          }
          npcBegin = true;
       }
@@ -223,7 +227,7 @@ int conversation::loadFile(string name)
       {
          if(!npcBegin)
          {
-            printError(name, "Tried to end NPC before begin it!", line);
+            printError(name, gettext("Tried to end NPC before begin it!"),line);
          }
          npcBegin = false;
       }
@@ -232,7 +236,8 @@ int conversation::loadFile(string name)
       {
          if(npcBegin || pcBegin)
          {
-            printError(name, "Tried to begin PC before end something!", line);
+            printError(name,gettext("Tried to begin PC before end something!"),
+                       line);
          }
          pcBegin = true;
          option = -1;
@@ -241,7 +246,7 @@ int conversation::loadFile(string name)
       {
          if(!pcBegin)
          {
-            printError(name, "Tried to end PC before begin it!", line);
+            printError(name, gettext("Tried to end PC before begin it!"),line);
          }
          pcBegin = false;
       }
@@ -266,17 +271,17 @@ int conversation::loadFile(string name)
             {
                if(option < 0)
                {
-                  printError(name, "Option Text without option!", line);
+                  printError(name,gettext("Option Text without option!"),line);
                }
                else
                {
-                  printError(name, "Options overflow!", line);
+                  printError(name,gettext("Options overflow!"), line);
                }
             }
          }
          else
          {
-            printError(name, "Text without any relation!", line);
+            printError(name,gettext("Text without any relation!"), line);
          }
       }
       /* Option */
@@ -288,7 +293,7 @@ int conversation::loadFile(string name)
          }
          else
          {
-            printError(name, "Option without begin PC!", line);
+            printError(name, gettext("Option without begin PC!"), line);
          }
       }
       /* Action */
@@ -296,7 +301,7 @@ int conversation::loadFile(string name)
       {
          if(npcBegin)
          {
-            printError(name, "Action isn't yet defined to NPC!", line);
+            printError(name,gettext("Action isn't yet defined to NPC!"),line);
          }
          else if(pcBegin)
          {
@@ -315,23 +320,24 @@ int conversation::loadFile(string name)
             {
                if(option < 0)
                {
-                  printError(name, "Option Action without option!", line);
+                  printError(name,gettext("Option Action without option!"),
+                             line);
                }
                else
                {
-                  printError(name, "Options overflow!", line);
+                  printError(name, gettext("Options overflow!"), line);
                }
             }
          }
          else
          {
-            printError(name, "Action without any relation!\n", line);
+            printError(name, gettext("Action without any relation!\n"), line);
          }
       }
       /* Unkown! */
       else
       {
-         printError(name, "Unknow Token!", line);
+         printError(name, gettext("Unknow Token!"), line);
       }
     }
   }
@@ -395,7 +401,7 @@ void conversation::removeDialog(int num)
    }
    if(dlg == first)
    {
-      printf("Not found on dialog %d\n",num);
+      printf(gettext("Not found on dialog: %d\n"),num);
    }
    else
    {
@@ -412,14 +418,13 @@ void conversation::removeDialog(int num)
 void conversation::openDialog(int numDialog, interface* gui, character* pers,
                               character* PC)
 {
-   lang language;
    usedGui = gui;
    actualNPC = pers;
    actualPC = PC;
    actual = -1;
-   jan = gui->insertWindow(330,100,585,355,language.DIALOGW_TITLE.c_str());
+   jan = gui->insertWindow(330,100,585,355,gettext("Dialog"));
    barterButton = jan->getObjectsList()->insertButton(5,86,69,104,
-                                            language.BARTERW_TITLE.c_str(),1);
+                                            gettext("Barter"),1);
    jan->getObjectsList()->insertPicture(5,25,0,0,
                                         pers->getPortraitFileName().c_str());
    npcText = jan->getObjectsList()->insertRolBar(71,20,250,115,"",

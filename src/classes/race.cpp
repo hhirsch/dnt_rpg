@@ -1,4 +1,5 @@
 #include "race.h"
+#include "../lang/translate.h"
 #include <iostream>
 #include <fstream>
 
@@ -153,12 +154,15 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
 
    /* Name */
    getline(file, ins->name);
+   ins->name = translateDataString(ins->name);
 
    /* Citation */
    getline(file, ins->citation);
+   ins->citation = translateDataString(ins->citation);
 
    /* Description */
    getline(file, ins->description);
+   ins->description = translateDataString(ins->description);
 
    /* Image */
    ins->image = IMG_Load(imgFile.c_str());
@@ -192,6 +196,8 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
       ins->raceModifiers[i].target.id = buf4;
       /* Modifier Description */
       getline(file, ins->raceModifiers[i].description);
+      ins->raceModifiers[i].description = translateDataString(
+                                           ins->raceModifiers[i].description);
    }
 
    /* Feats */
@@ -231,6 +237,7 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
    {
       getline(file, ins->raceSkills[i]);
       getline(file, ins->raceSkillsJustify[i]);
+      ins->raceSkillsJustify[i]=translateDataString(ins->raceSkillsJustify[i]);
    }
    
    file.close();

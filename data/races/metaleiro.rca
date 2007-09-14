@@ -1,0 +1,10 @@
+gettext("Headbanger")
+gettext("'Dark...'|(Anamatheus Iskurium)")
+gettext("These  creatures  usually walk with black|pants, black skirts (of bands or not) and|military  boots.  They wear  this kind of|clothes to  'be different', althought all|of them  use  the same. They love to play|all things they  find  thinking  it was a|drum,  and  to  sing  the lyrics  of  the|musics  they  love.  Usually  passed   as|autistcs,  these   creatures  walk   with|others headbangers (from 2 to 5) and have|the need  to show  others their 'revolt'.|They are attracted  easily  by  any thing|that looks 'malignant',  for more rougher|than it can be.")
+1
+2 SKILL INTIMIDATION RACE BOY_PATY
+gettext("Since Boys / Patys are hightly emotional,|Gothics  receive   +2   in   intimidation|against them.")
+2
+VOLUNTARY_AUTISM
+PROMPT_MOSH
+0

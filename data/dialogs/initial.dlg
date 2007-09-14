@@ -1,0 +1,91 @@
+############################################################
+#                      Dialog                              #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("Welcome to DccNiTghtmare!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("What is DccNiTghtmare?")
+         action = go_to_dialog(1)
+      option 
+         text = gettext("I wanna help!")
+         action = go_to_dialog(2)
+      option
+         text = gettext("What the hell! A tree talking?")
+         action = go_to_dialog(3)
+      option 
+         text = gettext("Die!")
+         action = init_fight()
+      option 
+         text = gettext("Bye!")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                        Dialog                            #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("DccNiTghtmare is a project|to make a post-apocalyptic|realtime RPG  with battles|in turns. Actually, it  is|on    early    stage    of|development,    so   don't|expect too much here.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("I really wanna help!")
+         action = go_to_dialog(2)
+      option
+         text = gettext("Die Fanatic!")
+         action = init_fight()
+      option
+         text = gettext("What the hell! A tree talking?")
+         action = go_to_dialog(3)
+      option 
+         text = gettext("So, bye!")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                        Dialog                            #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("Use    our    foruns    at|dnt.dnteam.org  to contact|us!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("I forgot what is DccNiTghtmare!")
+         action = go_to_dialog(1)
+      option
+         text = gettext("I don't like, die!")
+         action = init_fight()
+      option
+         text = gettext("What the hell! A tree talking?")
+         action = go_to_dialog(3)
+      option
+         text = gettext("Goodbye!")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                        Dialog                            #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("Tree?   Where   are    you|seeing a talking tree? I??|I  am  an ENTE! (Ok that a|Ente  was   a  tree  on  a|remote  past,  but  it's a|too long history for a 0.1|techdemo of DccNiTghtmare)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("What is DccNiTghtmare?")
+         action = go_to_dialog(1)
+      option
+         text = gettext("Die Cursed Tree!")
+         action = init_fight()
+      option
+         text = gettext("Bye Tree!")
+         action = init_fight()
+      option
+         text = gettext("Bye Ente!")
+         action = finish_dialog()
+   pc_end
+end_dialog

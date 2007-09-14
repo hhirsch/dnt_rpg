@@ -5,7 +5,6 @@
 #include "dccnit.h"
 #include "culling.h"
 #include "util.h"
-#include "../lang/lang.h"
 #include <math.h>
 #include <SDL/SDL_image.h>
 #include "../etc/extensions.h"
@@ -45,9 +44,6 @@ engine::engine()
    /* Load Options */
    option = new options("dcc.opc");
 
-   /* Load Language's files */
-   language.ReloadFile(option->langNumber);
-
    /* Set sound and music volume, based on options */
    snd->changeVolume(option->musicVolume, option->sndfxVolume);
 
@@ -59,20 +55,20 @@ engine::engine()
    ext.defineAllExtensions();
 
    /* Load Skills List */
-   skillsList = new skills(language.SKILLS_DIR.c_str(),
+   skillsList = new skills("../data/skills/",
                            "../data/skills/skills.skl");
   
    /* Load Features List */
-   features = new featsList(language.FEATS_DIR,"../data/feats/feats.ftl");
+   features = new featsList("../data/feats/","../data/feats/feats.ftl");
 
    /* Load Alignments & Tendecies */
-   alignList = new aligns(language.ALIGN_DIR.c_str(), "../data/alignment/alignment.lst");
+   alignList = new aligns("../data/alignment/", "../data/alignment/alignment.lst");
 
    /* Load Races */
-   raceList = new races(language.RACE_DIR.c_str(), "../data/races/races.lst");
+   raceList = new races("../data/races/", "../data/races/races.lst");
 
    /* Load Classes */
-   classList = new classes(language.CLASS_DIR.c_str(),
+   classList = new classes("../data/classes/",
                            "../data/classes/classes.lst");
 
    /* Load Weapons Types */
@@ -105,7 +101,7 @@ engine::engine()
    /* Create the missions controller */
    missions = new missionsController(this);
 
-   /*  FIXME remove from here the addMission */
+   /* FIXME remove from here the addMission */
    missions->addNewMission("../data/missions/tutorial/mission1.dsl");
 
    hour = 9.0;
@@ -233,7 +229,7 @@ engine::~engine()
 void engine::InformationScreen()
 {
    Uint8 *keys;
-   SDL_Surface* img = IMG_Load(language.TEXTURE_INFORMATION.c_str());
+   SDL_Surface* img = IMG_Load(gettext("../data/texturas/general/info.png"));
 
    GLuint texturaInfo;
    setTextureRGBA(img,&texturaInfo);
@@ -304,7 +300,7 @@ void engine::loadPCs()
  *********************************************************************/
 int engine::LoadMap(string arqMapa, int RecarregaPCs)
 {
-   char texto[255];
+   char texto[512];
    string arqVelho = "nada";
    curConection = NULL;
    
@@ -329,7 +325,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    rectangle_Fill(img,0,0,255,31);
    color_Set(200,20,20);
    defineFont(FMINI,ALIGN_CENTER,1);
-   sprintf(texto,language.LOAD_MAP.c_str(),arqMapa.c_str());
+   sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
    write(img,128,0,texto);
    GLuint texturaTexto;
    setTextureRGBA(img,&texturaTexto);
@@ -408,7 +404,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       FILE* arq;
       if(!(arq = fopen(actualMap->getNpcFileName().c_str(),"r")))
       {
-         printf("Ouch, can't load NPC's file: %s.\n",
+         printf(gettext("Ouch, can't load NPC's file: %s.\n"),
                                            actualMap->getNpcFileName().c_str());
       }
       else
@@ -423,7 +419,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
          for(npc = 0; npc < total; npc++)
          {
            fscanf(arq,"%s %s %f %f",&nome[0],&arquivo[0],&posX,&posZ);
-           sprintf(texto, language.LOAD_NPC.c_str(), nome);
+           sprintf(texto, gettext("Loading NPC: %s"), nome);
            showLoading(img,&texturaTexto,texturaCarga,
                          texto,
                          proj, modl, viewPort);
@@ -445,7 +441,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    {
        loadPCs(); 
        showLoading(img,&texturaTexto,texturaCarga,
-                 "Loading Character: Logan",
+                   gettext("Loading Character"),
                  proj, modl, viewPort);
        /*PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
                               "Gushm",
@@ -454,7 +450,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Loading Internal Windows */
    showLoading(img,&texturaTexto,texturaCarga,
-                 language.LOAD_WINDOWS.c_str(),
+               gettext("Putting GUI on Screen"),
                  proj, modl, viewPort);
 
    if(miniMapWindow)
@@ -492,7 +488,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Update  particle System to a stable state */
    showLoading(img,&texturaTexto,texturaCarga,
-                 language.LOAD_PARTICLE.c_str(),
+               gettext("Loading Particles"),
                  proj, modl, viewPort);
    if(!actualMap->getParticlesFileName().empty())
    {
@@ -519,7 +515,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    activeCharacter->ocupaQuad = actualMap->squareInic;
 
    showLoading(img,&texturaTexto,texturaCarga,
-                 "Loading Changes...",
+               gettext("Loading Changes..."),
                  proj, modl, viewPort);
 
    /* Do Modifications */
@@ -537,7 +533,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Done */
    showLoading(img,&texturaTexto,texturaCarga,
-                 language.LOAD_DONE.c_str(),
+               gettext("Done!"),
                  proj, modl, viewPort);
 
    glDisable(GL_LIGHTING);
@@ -721,14 +717,14 @@ int engine::OptionsScreen(GLuint idTextura)
    }
 
    delete(alignList);
-   alignList = new aligns(language.ALIGN_DIR.c_str(),
+   alignList = new aligns("../data/alignment/",
                           "../data/alignment/alignment.lst");
 
    delete(features);
-   features = new featsList(language.FEATS_DIR,"../data/feats/feats.ftl");
+   features = new featsList("../data/feats/","../data/feats/feats.ftl");
 
    delete(raceList);
-   raceList = new races(language.RACE_DIR.c_str(), "../data/races/races.lst");
+   raceList = new races("../data/races/", "../data/races/races.lst");
 
    glEnable(GL_LIGHTING);
    SDL_ShowCursor(SDL_DISABLE);
@@ -1108,7 +1104,8 @@ bool engine::rangeAction(GLfloat posX, GLfloat posZ,
    {
       if(shortCutsWindow != NULL)
       {
-         string txt = "|" + language.MSG_FAR_AWAY;
+         string txt = "|";
+         txt += gettext("Too far away for the action!");
          briefTxt->addText(txt);
       }
       return(false);
@@ -1142,7 +1139,7 @@ void engine::enterBattleMode(bool surprisePC)
   {
      if(shortCutsWindow != NULL)
      {
-        briefTxt->setText(language.FIGHT_NO_NPCS);
+        briefTxt->setText(gettext("No NPCs in the area."));
      }
      return;
   }
@@ -1186,7 +1183,7 @@ void engine::enterBattleMode(bool surprisePC)
          fullMovePCAction = false;
          canMove = true;
          canAttack = true;
-         brief += language.FIGHT_SURPRISE_TURN;
+         brief += gettext("Surprise Attack Turn.");
       }
       else
       {
@@ -1200,7 +1197,7 @@ void engine::enterBattleMode(bool surprisePC)
    }
    else
    {
-      brief = language.FIGHT_NO_NPCS;
+      brief = gettext("No NPCs in the area.");
    }
    if( (shortCutsWindow != NULL) && (!brief.empty()))
    {
@@ -1451,7 +1448,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
  *********************************************************************/
 void engine::hourToTxt()
 {
-   char htmp[15];
+   char htmp[32];
    int ihour = (int)hour;
    int imin = (int) (( hour - ihour ) * 60 );
    if( (imin >= 10) && (ihour >= 10))
@@ -1481,6 +1478,7 @@ void engine::hourToTxt()
  *********************************************************************/
 int engine::verifyMouseActions(Uint8 Mbutton)
 {
+   char buf[1024];
    GLfloat wx,wy,wz;
    Uint32 tempo = SDL_GetTicks();
    character* activeCharacter = PCs->getActiveCharacter();
@@ -1542,8 +1540,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                    briefTxt->addText("|");
                    if(activeCharacter->inventories->addObject(sobj->obj))
                    {
-                      briefTxt->addText(sobj->obj->getName() + " " +
-                                        language.ACTION_TAKEN); 
+                      sprintf(buf,gettext("%s taken."),sobj->obj->getName().c_str());
+                      briefTxt->addText(buf);
                       shortCutsWindow->draw(mouseX,mouseY);
 
                       /* Log State to the modState */
@@ -1600,7 +1598,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             cursors->setActual(CURSOR_DOOR);
             if(shortCutsWindow)
             {
-               ObjTxt->setText(language.OBJ_DOOR.c_str()); 
+               ObjTxt->setText(gettext("Door")); 
                shortCutsWindow->draw(mouseX, mouseY);
             }
             if( (Mbutton & SDL_BUTTON(1)) && 
@@ -1732,9 +1730,9 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                    activeCharacter->getActiveFeatRange() *
                                    METER_TO_DNT) ) )
                   {
-                     brief = activeCharacter->nome + " " + 
-                             language.FIGHT_ATTACKS + " " + 
-                             pers->nome + "|";
+                     sprintf(buf, gettext("%s attacks %s|"),
+                             activeCharacter->nome.c_str(), pers->nome.c_str());
+                     brief = buf;
                      canAttack = !activeCharacter->actualFeats.
                                                         applyAttackAndBreakFeat(
                                                           *activeCharacter,
@@ -1749,7 +1747,9 @@ int engine::verifyMouseActions(Uint8 Mbutton)
 
                      if(!pers->isAlive())
                      {
-                        brief += "|" + pers->nome + " " +  language.FIGHT_DEAD;
+                        brief += "|";
+                        sprintf(buf, gettext("%s is dead."), pers->nome.c_str());
+                        brief += buf;
                      }
                      if( pers->psychoState != PSYCHO_HOSTILE)
                      {
@@ -1812,7 +1812,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
 
       if( (shortCutsWindow) && (!pronto) )
       {
-         ObjTxt->setText(language.OBJ_NOTHING.c_str()); 
+         ObjTxt->setText(gettext("Nothing")); 
          shortCutsWindow->draw(mouseX, mouseY);
       }
    }
@@ -2390,7 +2390,7 @@ int engine::treatIO(SDL_Surface *screen)
       if( (shortCutsWindow) && (tempo-lastFPS >= 500))
       {
          lastFPS = tempo;
-         char texto[15];
+         char texto[32];
          sprintf(texto,"FPS: %3.2f",actualFPS);
          FPS->setText(texto);
          sprintf(texto," Part: %d",particleSystem->numParticles());
@@ -3032,8 +3032,7 @@ void engine::OpenMiniMapWindow()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   miniMapWindow = gui->insertWindow(512,472,799,599,//0,344,255,471,
-                                     language.WINDOW_MAP.c_str());
+   miniMapWindow = gui->insertWindow(512,472,799,599,gettext("Map"));
 
    botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,x+2,z+2,
                                                                  "",0);
@@ -3055,22 +3054,21 @@ void engine::OpenMiniMapWindow()
  *********************************************************************/
 void engine::OpenShortcutsWindow()
 {
-   shortCutsWindow = gui->insertWindow(0,472,511,599,
-                                       language.WINDOW_SHORTCUTS.c_str());
+   shortCutsWindow = gui->insertWindow(0,472,511,599,gettext("Shortcuts"));
    FPS = shortCutsWindow->getObjectsList()->insertTextBox(8,20,150/*100*/,35,2,
-                                  language.WINDOW_SHORTCUTS_FPS.c_str());
+                                  gettext("FPS:"));
    briefTxt = shortCutsWindow->getObjectsList()->insertRolBar(8,36,249,100,
-                                  language.WINDOW_SHORTCUTS_HELP.c_str(),
+                                  gettext("Press F1 for Help"),
                                   shortCutsWindow->getSurface());
    ObjTxt = shortCutsWindow->getObjectsList()->insertTextBox(151,20,249,35,2,
-                                 language.OBJ_NOTHING.c_str());
+                                  gettext("Nothing"));
 
    buttonSave = shortCutsWindow->getObjectsList()->insertButton(8,102,76,120,
-                                               language.INITIAL_SAVE.c_str(),0);
+                                               gettext("Save"),0);
    buttonMenu = shortCutsWindow->getObjectsList()->insertButton(77,102,140,120,
-                                                                "Menu",0);
+                                                      gettext("Menu"),0);
    buttonLoad = shortCutsWindow->getObjectsList()->insertButton(141,102,209,120,
-                                               language.INITIAL_LOAD.c_str(),0);
+                                               gettext("Load"),0);
    hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,249,120,2,
                                                           "00:00");
    hourTxt->setFont(FMINI,1,ALIGN_LEFT);
@@ -3213,7 +3211,7 @@ int engine::Run(SDL_Surface *surface)
            engineMode = ENGINE_MODE_REAL_TIME;
            if(shortCutsWindow)
            {
-              briefTxt->setText("|" + language.FIGHT_EXIT);
+              briefTxt->setText( gettext("|Exit Battle Mode"));
            }
            /* Verify if any PC is alive. */
            character* pers = (character*) PCs->first->next;

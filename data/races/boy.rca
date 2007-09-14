@@ -1,0 +1,14 @@
+gettext("Boy / Paty")
+gettext("'Ah friend, I can't, 'cause I'll  do some|biceps exercises today'|(Tico Bombadinho)")
+gettext("Boys, and their  female  versions, Patys,|are  creatures  endowed  with  a  strange|fondness   to   body   academies.  Always|wanting  to  be slenders to go to jet set|parties  and  rubbing  with their oposite|sex  equivalents,  they  usually   ignore|their friends  of distinct races. But, by|more upper they consider theirselves, and|despite   they   have  a  huge   fondness|themselves,  this race  is always the aim|of mockeries and jokes by other races.")
+3
+1 SKILL DIPLOMACY SEX OPOSITE
+gettext("Patys  have  +1  in  Diplomacy since they|always     exhibit      their      bodies|characteristics. For more horrendous than|she was,  she   is  able  to  'magically'|alter herself in few hours.")
+2 SKILL DISGUISES ALL ALL
+gettext("By the  aforesaid reasons, the Patys also|receive + 2 in Disguises.")
+1 ATT CONSTITUTION ALL ALL
+gettext("Boys and Patys receive +1 in Constitution|due  to  the  constant time they spend on|body academies. If they no more go there,|they'll lose this bonus and automatically|become aim of jokes among others of their|own race.")
+0
+1
+CONDUCTION
+gettext("Boys  have  Driver  as class skill, since|they   are  distinguished   offenders  of|traffic laws.")

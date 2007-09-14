@@ -4,13 +4,13 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJS = lang.o
+OBJS = translate.o
 
 all: $(OBJS)
 
-lang.o: lang.cpp lang.h
-	@printf "Making lang.o... "
-	@$(CC) $(CFLAGS) lang.cpp -o lang.o
+translate.o: translate.cpp translate.h
+	@printf "Making translate.o... "
+	@$(CC) $(CFLAGS) translate.cpp -o translate.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean: 

@@ -25,7 +25,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    
    /* create intWindow */
    intWindow = inter->insertWindow(270,186,537,441,
-                                  language.ALIGNW_TITLE.c_str());
+                                  gettext("Tendency & Alignment"));
    /* Align Image */
    alignImage = intWindow->getObjectsList()->insertPicture(111,185,0,0,NULL);   
    alignImage->set(actualAlign->image);
@@ -44,11 +44,11 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(193,225,263,244, 
-                                              language.SKILL_CONFIRM.c_str(),1);
+                                              gettext("Confirm"),1);
    
    /* Cancel Button */
    buttonCancel = intWindow->getObjectsList()->insertButton(8,225,78,244,
-                                               language.SKILL_CANCEL.c_str(),1);
+                                               gettext("Cancel"),1);
 
    /* Open Skill Window */
    intWindow->setExternPointer(&intWindow);

@@ -17,8 +17,7 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    loadImages();
 
    usedCharacter = dude;
-   intWindow = inter->insertWindow(276,206,531,320,"Aspect"
-                                   /*language.ASPECTW_TITLE.c_str()*/);
+   intWindow = inter->insertWindow(276,206,531,320,gettext("Aspect"));
 
    /* Portrait Figure */
    figurePortrait = intWindow->getObjectsList()->insertPicture(5,25,0,0,NULL);
@@ -34,16 +33,16 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    intWindow->getObjectsList()->insertTextBox(20,90,54,108,1,"");
 
    /* Name Text */
-   intWindow->getObjectsList()->insertTextBox(72,25,112,39,1,"Name:");
+   intWindow->getObjectsList()->insertTextBox(72,25,112,39,1,gettext("Name:"));
    textName = intWindow->getObjectsList()->insertTextBar(113,25,251,39,
-                                                                     "Bruno",0);
+                                                                  "Bruno",0);
 
    /* Age Text */
-   intWindow->getObjectsList()->insertTextBox(72,40,112,54,1,"Age:");
+   intWindow->getObjectsList()->insertTextBox(72,40,112,54,1,gettext("Age:"));
    textAge = intWindow->getObjectsList()->insertTextBar(113,40,143,54,"20",0);
 
    /* Sex Selectors */
-   intWindow->getObjectsList()->insertTextBox(72,55,112,69,1,"Sex:");
+   intWindow->getObjectsList()->insertTextBox(72,55,112,69,1,gettext("Sex:"));
    cxSelSexF = intWindow->getObjectsList()->insertCxSel(113, 57, false);
    intWindow->getObjectsList()->insertPicture(125,55,0,0,
                                   "../data/texturas/aspectw/sex_f.png");
@@ -56,13 +55,11 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(181,90,251,108, 
-                                                 language.SKILL_CONFIRM.c_str(),
-                                                 1);
+                                                 gettext("Confirm"),1);
    
    /* Cancel Button */
    buttonCancel = intWindow->getObjectsList()->insertButton(72,90,140,108, 
-                                                language.SKILL_CANCEL.c_str(),
-                                                1);
+                                                  gettext("Cancel"),1);
 
    intWindow->setExternPointer(&intWindow);
    intWindow->setAttributes(false,false, false, false);
@@ -94,7 +91,7 @@ void aspectWindow::loadImages()
 
    if( !(f = fopen("../data/characters/portraits/portraits.lst", "r")) )
    {
-      printf("Can't open the list with portraits: portraits.lst!\n");
+      printf(gettext("Can't open the list with portraits: portraits.lst!\n"));
       return;
    }
 

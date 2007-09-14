@@ -3,7 +3,6 @@
  *************************************************************************/
 
 #include "skillwindow.h"
-#include "../lang/lang.h"
 #include "../classes/defs.h"
 
 /**************************************************************
@@ -31,14 +30,13 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
    }
    
    /* Create Skill Window */
-   intWindow = inter->insertWindow(276,186,531,441,
-                                   language.SKILL_TITLE.c_str());
+   intWindow = inter->insertWindow(276,186,531,441, gettext("Skills"));
 
    /* Free Points */
    sprintf(tmp,"%d",avaiblePoints);
    saux = tmp;
    intWindow->getObjectsList()->insertTextBox(8,20,125,33,0,
-                                          language.SKILL_FREE_POINTS.c_str());
+                                         gettext("Total Free Points:"));
    txtAvaiblePoints = intWindow->getObjectsList()->insertTextBox(127,20,162,
                                                                  33,0,
                                                                  saux.c_str());
@@ -61,7 +59,7 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
  
    /* Skill Points */
    intWindow->getObjectsList()->insertTextBox(52,200,101,214,0,
-                                       language.SKILL_POINTS.c_str());
+                                       gettext("Points:"));
    sprintf(tmp,"%d",saveSkill->m_skills[curSkill].points);
    saux = tmp;
    txtPoints = intWindow->getObjectsList()->insertTextBox(113,198,135,216,1,
@@ -72,7 +70,7 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
 
    /* Skill Costs */
    intWindow->getObjectsList()->insertTextBox(160,200,215,214,0,
-                                       language.SKILL_COST.c_str());
+                                       gettext("Cost"));
    sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
    saux = tmp;
    txtCosts = intWindow->getObjectsList()->insertTextBox(216,200,251,214,0,
@@ -84,11 +82,11 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(181,225,251,244,
-                                              language.SKILL_CONFIRM.c_str(),1);
+                                              gettext("Confirm"),1);
    
    /* Cancel Button */
    buttonCancel = intWindow->getObjectsList()->insertButton(8,225,78,244,
-                                               language.SKILL_CANCEL.c_str(),1);
+                                              gettext("Cancel"),1);
    
    /* Open Skill Window */
    intWindow->setExternPointer(&intWindow);

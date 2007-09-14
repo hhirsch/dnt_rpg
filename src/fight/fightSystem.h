@@ -7,7 +7,7 @@
 
 #include "fightGroup.h"
 #include "initiative.h"
-#include "../lang/lang.h"
+#include <libintl.h>
 #include "../etc/message3d.h"
 #include "../particle/partSystem.h"
 #include <SDL/SDL.h>
@@ -80,7 +80,6 @@ class fightSystem
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
      fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /**< NPCs groups */
      initiative charsInitiatives;     /**< Character's Initiative */
-     lang language;            /**< Language Internationalization */
      Uint32 lastTime;            /**< Last time of some animation */
      character* actualActor;         /**< Actual Character Acting */
      bool pendingAnimation;     /**< If some animation is pending */

@@ -1,0 +1,10 @@
+gettext("Mutant Human Cricket")
+gettext("'A tasty Cricket, please!'|(Logan in a barbecue restaurant)")
+gettext("No  one  knows  why,  but  mutant  things|started to  habit  Icex.  With their diet|based on  crickets or small hopping bugs,|the  Human Cricket have some canibalistic|habits  and, for this, are not welcome by|bugs. The habitat of the Human Cricket is|the  famous  Tyrol, near  Barreiro, where|they live happily among their parents.")
+2
+-6 SOCIAL_TESTS ALL RACE COMPATIBLE
+gettext("Since  they  eat  Crickets, Human Crickts|receive  -4  in  all  social  tests  when|threat  with  someone  of  their  race or|insects.")
+1 SKILL JUMP ALL ALL
+gettext("By  obvious  reasons, the  Human  Cricket|receives + 6 in Jump.")
+0
+0

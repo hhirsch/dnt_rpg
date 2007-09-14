@@ -26,15 +26,14 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(90,100,710,499,
-                                   language.CLASSW_TITLE.c_str());
+   intWindow = inter->insertWindow(90,100,710,499,gettext("Class"));
    /* Class Image */
    classImage = intWindow->getObjectsList()->insertPicture(7,20,0,0,NULL);   
    classImage->set(actualClass->image);
 
    /* Class Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(71,20,342,35,1,
-                                           language.CLASSW_DESCRIPTION.c_str());
+                                           gettext("Class Description"));
    textDescTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(71,36,342,345,
@@ -43,7 +42,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
 
    /* Race Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(343,20,613,35,1,
-                                       language.CLASSW_CHARACTERISTICS.c_str());
+                                       gettext("Class Characteristics"));
    textCharacTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
 
    textCharac = intWindow->getObjectsList()->insertRolBar(343,36,613,345,
@@ -59,11 +58,11 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(543,370,613,389,
-                                              language.SKILL_CONFIRM.c_str(),1);
+                                              gettext("Confirm"),1);
    
    /* Cancel Button */
    buttonCancel = intWindow->getObjectsList()->insertButton(8,370,78,389,
-                                               language.SKILL_CANCEL.c_str(),1);
+                                               gettext("Cancel"),1);
 
    /* Open Skill Window */
    intWindow->setExternPointer(&intWindow);
@@ -77,13 +76,14 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
 string classWindow::getCharacteristics()
 {
    int i;
-   char tmp[50];
+   char tmp[1024];
    char c;
    skill* skTmp;
    sprintf(tmp,": d%d||",actualClass->lifeDiceID);
-   string text = language.CLASSW_LIFE_DICE + tmp;
+   string text = gettext("Life Dice");
+   text += tmp;
 
-   text += language.CLASSW_SKILL_POINTS + "|";
+   text += gettext("Skill Points|");
 
    if(actualClass->firstLevelSP.signal == SIGNAL_DEC)
    {
@@ -106,7 +106,8 @@ string classWindow::getCharacteristics()
               c, actualClass->firstLevelSP.attID.c_str(), 
               actualClass->firstLevelSP.mult);
    }
-   text += language.CLASSW_FIRST_LEVEL + tmp;
+   text += gettext("First Level");
+   text += tmp;
    if(actualClass->otherLevelsSP.signal == SIGNAL_DEC)
    {
       c = '-';
@@ -130,8 +131,9 @@ string classWindow::getCharacteristics()
               c, actualClass->otherLevelsSP.attID.c_str(), 
               actualClass->otherLevelsSP.mult);
    }
-   text += language.CLASSW_OTHER_LEVELS + tmp;
-   text += language.CLASSW_MODIFIERS + "||";
+   text += gettext("Other Levels");
+   text += tmp;
+   text += gettext("Class Modifiers||");
    for(i=0; i<actualClass->totalModifiers; i++)
    {
       text += actualClass->classModifiers[i].description + "||";
@@ -139,11 +141,11 @@ string classWindow::getCharacteristics()
 
    if(actualClass->totalModifiers == 0)
    {
-      text += language.RACEW_NO_MODIFIERS + "||";
+      text += gettext("No Modifiers||");
    }
 
    //TODO get Feat Name
-   text += language.CLASSW_FEATS + "||";
+   text += gettext("Class Feats||");
    for(i=0; i<actualClass->totalFeats; i++)
    {
       text += actualClass->classFeats[i] + "|";
@@ -151,12 +153,12 @@ string classWindow::getCharacteristics()
 
    if(actualClass->totalFeats == 0)
    {
-      text += language.RACEW_NO_FEATS + "|";
+      text += gettext("No Feats.|");
    }
 
    //Print Skills
    text += "|";
-   text += language.CLASSW_SKILLS + "||";
+   text += gettext("Class Skills||");
    for(i=0; i<actualClass->totalSkills; i++)
    {
       skTmp = externalSkills->getSkillByString(actualClass->classSkills[i]);
@@ -172,7 +174,7 @@ string classWindow::getCharacteristics()
 
    if(actualClass->totalSkills == 0)
    {
-      text += language.RACEW_NO_SKILLS;
+      text += gettext("No Skills.");
    }
 
    return(text);

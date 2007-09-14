@@ -2,9 +2,10 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
+#include <libintl.h>
 #include "skills.h"
 #include "defs.h"
-#include "../lang/lang.h"
+#include "../lang/translate.h"
 
 /*************************************************************
  *                      Constructor                          *
@@ -21,7 +22,7 @@ skills::skills(string dir, string arq)
    int num;
    if(!(file=fopen(arq.c_str(),"r")))
    {
-       printf("Error while opening skills list: %s\n",arq.c_str());
+       printf(gettext("Error while opening skills list: %s\n"),arq.c_str());
        return;
    }
 
@@ -51,13 +52,13 @@ skills::skills(string dir, string arq)
       FILE* desc;
       if(! (desc = fopen(arqDescricao.c_str(), "r")))
       {
-         printf("Can't open skill file: %s \n",arqDescricao.c_str() );
+         printf(gettext("Can't open skill file: %s \n"),arqDescricao.c_str() );
          return;
       }
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].name = buffer;
+      m_skills[aux].name = translateDataString(buffer);
       fgets(buffer, sizeof(buffer), desc);
-      m_skills[aux].description = buffer;
+      m_skills[aux].description = translateDataString(buffer);
       fscanf(desc,"%d",&m_skills[aux].baseAttribute);
       m_skills[aux].points = 0;
       m_skills[aux].mod = 2;
@@ -117,11 +118,11 @@ skills::skills()
    char buf3[128];
    char buf4[128];
    int num;
-   lang language;
    string fName = "";
    if(!(file=fopen("../data/skills/skills.skl","r")))
    {
-       printf("Error while opening skills list: ../data/skills/skills.skl\n");
+       printf(gettext("Error while opening skills list: \
+                       ../data/skills/skills.skl\n"));
        return;
    }
 
@@ -146,13 +147,13 @@ skills::skills()
       sscanf(buffer,"%d %s %s %s",&num, &buf2[0],&buf3[0], &buf4[0]);
       arqImagem = buf3;
       arqDescricao = buf2;
-      arqDescricao = language.SKILLS_DIR + arqDescricao;
+      arqDescricao = "../data/skills/" + arqDescricao;
       m_skills[aux].idString = buf4;
 
       FILE* desc;
       if(! (desc = fopen(arqDescricao.c_str(), "r")))
       {
-         printf("Can't open skill file: %s \n",arqDescricao.c_str() );
+         printf(gettext("Can't open skill file: %s \n"),arqDescricao.c_str() );
          return;
       }
       fgets(buffer, sizeof(buffer), desc);

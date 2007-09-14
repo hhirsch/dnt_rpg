@@ -30,10 +30,13 @@ initiative::~initiative()
 void initiative::insertCharacter(character* pers, string& brief)
 {
    char text[20];
+   char buffer[1024];
+
    initiativeStruct *cmp, *aux, *oth;
    srand(SDL_GetTicks());
 
-   brief = pers->nome + " " + language.FIGHT_ROLLS_INITIATIVE + " ";
+   sprintf(buffer, gettext("%s rolls initiative: "),pers->nome.c_str()); 
+   brief = buffer;
 
    /* Insertion on List, orded by initiativeValue (decrescent order) */
    if(first == NULL)

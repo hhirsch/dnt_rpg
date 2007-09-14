@@ -5,8 +5,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
+#include <libintl.h>
 #include "../classes/inventory.h"
-#include "../lang/lang.h"
 #include "../map/map.h"
 #include "cursor.h"
 #include "modstate.h"
@@ -105,8 +105,6 @@ class inventWindow
 
       SDL_Surface* previousCursor;    /**< The previous mouse Cursor */
 
-      lang language;                  /**< Language internationalization */
-      
 };
 
 #endif

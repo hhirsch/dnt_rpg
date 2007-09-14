@@ -5,8 +5,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
+#include <libintl.h>
 #include "../gui/farso.h"
-#include "../lang/lang.h"
 #include "../classes/skills.h"
 
 #define ATTW_CANCEL  0
@@ -45,7 +45,6 @@ class attWindow
 
       skills* externalSkill;      /**< Pointer to skill List with description */
       skills* saveSkill;          /**< Pointer to thje edited skill List */
-      lang language;              /**< Language internationalization */
 
       textBox* rolledPoints;  /**< Rolled Points Text */
       textBox* attPoints[6];  /**< Attributes Points Texts */

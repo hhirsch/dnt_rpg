@@ -1,9 +1,14 @@
 #  DccNiTghtmare is public domain. Do whatever you want with this code.
 
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+
 all: buildparts
 
 buildparts:
 	cd ./src && ${MAKE} all;
+	cd ./po && ${MAKE} all;
 
 clean:
 	cd ./src && ${MAKE} clean;
+	cd ./po && ${MAKE} clean;
