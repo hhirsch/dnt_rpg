@@ -6,7 +6,7 @@
  ************************************************************/
 string translateDataString(string dataString)
 {
-   if( (dataString.length() > 10) && (dataString[0] = 'g') &&
+   if( (dataString.length() > 10) && (dataString[0] == 'g') &&
        (dataString[1] == 'e') && (dataString[2] == 't') && 
        (dataString[3] == 't') && (dataString[4] == 'e') &&
        (dataString[5] == 'x') && (dataString[6] == 't') ) 

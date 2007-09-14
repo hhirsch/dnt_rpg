@@ -81,6 +81,24 @@ string conversation::getString(int& initialPosition, string buffer,
    string ret = "";
    bool endGet = false;
    bool considerSpace = false;
+   bool gnuGet = false;
+
+   /* Remove spaces at begining */
+   while( ( i < (int)buffer.length() ) && ( buffer[i] == ' ' ) )
+   {
+      i++;
+   }
+
+   /* Verify the gettext */
+   if( (buffer.length() > 10) && (buffer[i] == 'g') &&
+       (buffer[i+1] == 'e') && (buffer[i+2] == 't') && 
+       (buffer[i+3] == 't') && (buffer[i+4] == 'e') &&
+       (buffer[i+5] == 'x') && (buffer[i+6] == 't') )
+   {
+      gnuGet = true;
+   }
+
+
    while(!endGet)
    {
       if( (i >= (int)buffer.length()-1) )
@@ -88,22 +106,46 @@ string conversation::getString(int& initialPosition, string buffer,
          endGet = true;
          separator = '\0';
       }
-      if( (!considerSpace) && 
-          ( (buffer[i] == '\0') || (buffer[i] == '\n') || 
-            (buffer[i] == '(') || (buffer[i] == ')') || 
-            (buffer[i] == ',') || (buffer[i] == '=') ||
-			(buffer[i] == 13) ) )
+
+      if(gnuGet)
       {
-         separator = buffer[i];
-         endGet = true;
-      }
-      else if(buffer[i] == '"')
-      {
-         considerSpace = true;
-      }
-      else if( ( ( buffer[i] != ' ') || considerSpace) && (buffer[i] != '"') )
-      {
+         /* It's an gettext("STRING") */
+
+         /* Verify the begining */
+         if(buffer[i] == '"')
+         {
+            considerSpace = !considerSpace;
+         }
+
+         /* Verify the end */
+         if( (buffer[i] == ')') && (!considerSpace))
+         {
+            endGet = true;
+            separator = buffer[i];
+         }
          ret += buffer[i];
+      }
+      else
+      {
+
+         if( (!considerSpace) && 
+             ( (buffer[i] == '\0') || (buffer[i] == '\n') || 
+               (buffer[i] == '(') || (buffer[i] == ')') || 
+               (buffer[i] == ',') || (buffer[i] == '=') ||
+	   		   (buffer[i] == 13) ) )
+         {
+            separator = buffer[i];
+            endGet = true;
+         }
+         else if(buffer[i] == '"')
+         {
+            considerSpace = true;
+         }
+         else if( ( ( buffer[i] != ' ') || considerSpace) && 
+                  (buffer[i] != '"') )
+         {
+            ret += buffer[i];
+         }
       }
       i++;
    }
@@ -255,7 +297,8 @@ int conversation::loadFile(string name)
       {
          if(npcBegin)
          {
-            dlg->npc.ifText = getString(position, buffer, separator);
+            dlg->npc.ifText = translateDataString(getString(position, buffer, 
+                                                            separator));
          }
          else if(pcBegin)
          {
@@ -264,8 +307,9 @@ int conversation::loadFile(string name)
                char str[10];
                sprintf(str, "%d - ", option+1);
                dlg->options[option].ifText = str;
-               dlg->options[option].ifText += getString(position, buffer, 
-                                                       separator);
+               dlg->options[option].ifText += translateDataString(
+                                                   getString(position, buffer, 
+                                                             separator));
             }
             else
             {
