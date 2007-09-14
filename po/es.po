@@ -7,12 +7,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-14 15:48-0300\n"
+"POT-Creation-Date: 2007-09-14 18:25-0300\n"
 "PO-Revision-Date: 2007-09-14 17:53-0300\n"
 "Last-Translator: DNTeam <dnt@dnteam.org>\n"
 "Language-Team: DNTeam <dnt@dnteam.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/classes/feats.cpp:166
@@ -48,7 +48,7 @@ msgstr "|Golpe Crítico!"
 msgid "Critical Hit!"
 msgstr "Golpe Crítico!"
 
-#: src/classes/feats.cpp:326
+#: src/classes/feats.cpp:327
 msgid "Not enought points to use!"
 msgstr "Puntos no suficientes!"
 
@@ -217,7 +217,7 @@ msgstr "Aviso"
 msgid "You Need to Assign All Attributes."
 msgstr "Se necesita asignar a todas Características."
 
-#: src/engine/barterwindow.cpp:18 src/engine/dialog.cpp:427
+#: src/engine/barterwindow.cpp:18 src/engine/dialog.cpp:471
 msgid "Barter"
 msgstr "Cambios"
 
@@ -492,72 +492,72 @@ msgstr "Menu"
 msgid "|Exit Battle Mode"
 msgstr "|Sale del Modo de Batalla"
 
-#: src/engine/dialog.cpp:171
+#: src/engine/dialog.cpp:213
 msgid "Cannot open File!\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:194
+#: src/engine/dialog.cpp:236
 msgid "Tried to define dialog before end last one!"
 msgstr ""
 
-#: src/engine/dialog.cpp:210
+#: src/engine/dialog.cpp:252
 msgid "Tried to end an undefined dialog!"
 msgstr ""
 
-#: src/engine/dialog.cpp:221
+#: src/engine/dialog.cpp:263
 msgid "Tried to begin NPC before end something!"
 msgstr ""
 
-#: src/engine/dialog.cpp:230
+#: src/engine/dialog.cpp:272
 msgid "Tried to end NPC before begin it!"
 msgstr ""
 
-#: src/engine/dialog.cpp:239
+#: src/engine/dialog.cpp:281
 msgid "Tried to begin PC before end something!"
 msgstr ""
 
-#: src/engine/dialog.cpp:249
+#: src/engine/dialog.cpp:291
 msgid "Tried to end PC before begin it!"
 msgstr ""
 
-#: src/engine/dialog.cpp:274
+#: src/engine/dialog.cpp:318
 msgid "Option Text without option!"
 msgstr ""
 
-#: src/engine/dialog.cpp:278 src/engine/dialog.cpp:328
+#: src/engine/dialog.cpp:322 src/engine/dialog.cpp:372
 msgid "Options overflow!"
 msgstr ""
 
-#: src/engine/dialog.cpp:284
+#: src/engine/dialog.cpp:328
 msgid "Text without any relation!"
 msgstr ""
 
-#: src/engine/dialog.cpp:296
+#: src/engine/dialog.cpp:340
 msgid "Option without begin PC!"
 msgstr ""
 
-#: src/engine/dialog.cpp:304
+#: src/engine/dialog.cpp:348
 msgid "Action isn't yet defined to NPC!"
 msgstr ""
 
-#: src/engine/dialog.cpp:323
+#: src/engine/dialog.cpp:367
 msgid "Option Action without option!"
 msgstr ""
 
-#: src/engine/dialog.cpp:334
+#: src/engine/dialog.cpp:378
 msgid "Action without any relation!\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:340
+#: src/engine/dialog.cpp:384
 msgid "Unknow Token!"
 msgstr ""
 
-#: src/engine/dialog.cpp:404
+#: src/engine/dialog.cpp:448
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:425
+#: src/engine/dialog.cpp:469
 msgid "Dialog"
 msgstr "Diálogo"
 
