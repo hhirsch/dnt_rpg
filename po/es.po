@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-14 18:25-0300\n"
+"POT-Creation-Date: 2007-09-15 15:57-0300\n"
 "PO-Revision-Date: 2007-09-14 17:53-0300\n"
 "Last-Translator: DNTeam <dnt@dnteam.org>\n"
 "Language-Team: DNTeam <dnt@dnteam.org>\n"
@@ -64,9 +64,7 @@ msgstr ""
 
 #: src/classes/skills.cpp:124
 #, c-format
-msgid ""
-"Error while opening skills list:                        ../data/skills/"
-"skills.skl\n"
+msgid "Error while opening skills list:../data/skills/skills.skl\n"
 msgstr ""
 
 #: src/engine/alignwindow.cpp:28
@@ -74,7 +72,7 @@ msgid "Tendency & Alignment"
 msgstr "Alineamiento"
 
 #: src/engine/alignwindow.cpp:47 src/engine/aspectwindow.cpp:58
-#: src/engine/attwindow.cpp:174 src/engine/options.cpp:325
+#: src/engine/attwindow.cpp:174 src/engine/options.cpp:377
 #: src/engine/racewindow.cpp:59 src/engine/classwindow.cpp:61
 #: src/engine/skillwindow.cpp:85
 msgid "Confirm"
@@ -82,7 +80,7 @@ msgstr "Aceptar"
 
 #: src/engine/alignwindow.cpp:51 src/engine/aspectwindow.cpp:62
 #: src/engine/attwindow.cpp:178 src/engine/barterwindow.cpp:34
-#: src/engine/options.cpp:329 src/engine/racewindow.cpp:63
+#: src/engine/options.cpp:381 src/engine/racewindow.cpp:63
 #: src/engine/classwindow.cpp:65 src/engine/skillwindow.cpp:89
 msgid "Cancel"
 msgstr "Cancelar"
@@ -99,15 +97,15 @@ msgstr "Nuevo"
 msgid "Continue"
 msgstr "Volver"
 
-#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3067
+#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3072
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3071
+#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3076
 msgid "Load"
 msgstr "Cargar"
 
-#: src/engine/initial.cpp:54 src/engine/options.cpp:230
+#: src/engine/initial.cpp:54 src/engine/options.cpp:282
 msgid "Options"
 msgstr "Opciones"
 
@@ -171,7 +169,7 @@ msgstr "Características"
 
 #: src/engine/attwindow.cpp:57
 msgid "Roll"
-msgstr "Arrollar"
+msgstr "Tirar"
 
 #: src/engine/attwindow.cpp:60
 msgid "Clear"
@@ -245,56 +243,56 @@ msgstr "Francés"
 msgid "Spanish"
 msgstr "Español"
 
-#: src/engine/options.cpp:102
+#: src/engine/options.cpp:112
 #, c-format
 msgid "Error while writing Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:184
+#: src/engine/options.cpp:236
 msgid "None"
 msgstr "Nada"
 
-#: src/engine/options.cpp:189
+#: src/engine/options.cpp:241
 msgid "Characters"
 msgstr "Personajes"
 
-#: src/engine/options.cpp:194
+#: src/engine/options.cpp:246
 msgid "All"
 msgstr "Todos"
 
-#: src/engine/options.cpp:210
+#: src/engine/options.cpp:262
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:213
+#: src/engine/options.cpp:265
 msgid "Pursue"
 msgstr "Perseguir"
 
-#: src/engine/options.cpp:236
+#: src/engine/options.cpp:288
 msgid "Music Volume:"
 msgstr "Volumen de Música:"
 
-#: src/engine/options.cpp:251
+#: src/engine/options.cpp:303
 msgid "Effects Volume:"
 msgstr "Volumen de Efectos:"
 
-#: src/engine/options.cpp:266
+#: src/engine/options.cpp:318
 msgid "Language:"
 msgstr "Lengua"
 
-#: src/engine/options.cpp:280
+#: src/engine/options.cpp:332
 msgid "Camera Mode:"
 msgstr "Modo de la Cámara:"
 
-#: src/engine/options.cpp:293
+#: src/engine/options.cpp:345
 msgid "Enable Grass Effects (need particles)"
 msgstr "Permitir la Hierba"
 
-#: src/engine/options.cpp:302
+#: src/engine/options.cpp:354
 msgid "Enable Particles Effects"
 msgstr "Permitir las Partículas"
 
-#: src/engine/options.cpp:312
+#: src/engine/options.cpp:364
 msgid "Reflections:"
 msgstr "Reflejos:"
 
@@ -394,101 +392,101 @@ msgstr "Puntos:"
 msgid "Cost"
 msgstr "Coste"
 
-#: src/engine/dccnit.cpp:232
+#: src/engine/dccnit.cpp:235
 msgid "../data/texturas/general/info.png"
 msgstr ""
 
-#: src/engine/dccnit.cpp:328
+#: src/engine/dccnit.cpp:331
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargando Mapa: %s"
 
-#: src/engine/dccnit.cpp:407
+#: src/engine/dccnit.cpp:410
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:422
+#: src/engine/dccnit.cpp:425
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargando NPC: %s"
 
-#: src/engine/dccnit.cpp:444
+#: src/engine/dccnit.cpp:447
 msgid "Loading Character"
 msgstr "Cargando Personaje"
 
-#: src/engine/dccnit.cpp:453
+#: src/engine/dccnit.cpp:456
 msgid "Putting GUI on Screen"
 msgstr "Cargando Ventanas"
 
-#: src/engine/dccnit.cpp:491
+#: src/engine/dccnit.cpp:494
 msgid "Loading Particles"
 msgstr "Cargando Partículas"
 
-#: src/engine/dccnit.cpp:518
+#: src/engine/dccnit.cpp:521
 msgid "Loading Changes..."
 msgstr "Cargando Modificaciones..."
 
-#: src/engine/dccnit.cpp:536
+#: src/engine/dccnit.cpp:539
 msgid "Done!"
 msgstr "Hecho!"
 
-#: src/engine/dccnit.cpp:1108
+#: src/engine/dccnit.cpp:1113
 msgid "Too far away for the action!"
 msgstr "Demasiado lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1142 src/engine/dccnit.cpp:1200
+#: src/engine/dccnit.cpp:1147 src/engine/dccnit.cpp:1205
 msgid "No NPCs in the area."
 msgstr "Sin NPCs en la área."
 
-#: src/engine/dccnit.cpp:1186
+#: src/engine/dccnit.cpp:1191
 msgid "Surprise Attack Turn."
 msgstr "Turno de golpe sorpresa."
 
-#: src/engine/dccnit.cpp:1543
+#: src/engine/dccnit.cpp:1548
 #, c-format
 msgid "%s taken."
 msgstr "Recogido %s."
 
-#: src/engine/dccnit.cpp:1601
+#: src/engine/dccnit.cpp:1606
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:1733 src/fight/fightSystem.cpp:262
+#: src/engine/dccnit.cpp:1738 src/fight/fightSystem.cpp:262
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/engine/dccnit.cpp:1751
+#: src/engine/dccnit.cpp:1756
 #, c-format
 msgid "%s is dead."
 msgstr "%s estás muerto!"
 
-#: src/engine/dccnit.cpp:1815 src/engine/dccnit.cpp:3064
+#: src/engine/dccnit.cpp:1820 src/engine/dccnit.cpp:3069
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:3035
+#: src/engine/dccnit.cpp:3040
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/dccnit.cpp:3057
+#: src/engine/dccnit.cpp:3062
 msgid "Shortcuts"
 msgstr "Atajos"
 
-#: src/engine/dccnit.cpp:3059
+#: src/engine/dccnit.cpp:3064
 msgid "FPS:"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3061
+#: src/engine/dccnit.cpp:3066
 msgid "Press F1 for Help"
 msgstr "Presione F1 para Ayuda"
 
-#: src/engine/dccnit.cpp:3069
+#: src/engine/dccnit.cpp:3074
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3214
+#: src/engine/dccnit.cpp:3219
 msgid "|Exit Battle Mode"
 msgstr "|Sale del Modo de Batalla"
 

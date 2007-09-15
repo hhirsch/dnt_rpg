@@ -121,8 +121,8 @@ skills::skills()
    string fName = "";
    if(!(file=fopen("../data/skills/skills.skl","r")))
    {
-       printf(gettext("Error while opening skills list: \
-                       ../data/skills/skills.skl\n"));
+       printf(gettext("Error while opening skills list:"
+                      "../data/skills/skills.skl\n"));
        return;
    }
 

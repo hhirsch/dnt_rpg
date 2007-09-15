@@ -10,9 +10,8 @@ editor::editor()
    map = NULL;
    NPCs = NULL;
    particleSystem = new partSystem();
-   features = new featsList("../data/feats/Ingles/",
-                                       "../data/feats/feats.ftl");
-   Farso_Init(&screen,"DccNiTghtmare Map Editor 0.1");
+   features = new featsList("../data/feats/","../data/feats/feats.ftl");
+   Farso_Init(&screen,"DccNiTghtmare Map Editor 0.2");
    init();
 
    /* Load Extensions */
@@ -611,27 +610,39 @@ void editor::draw()
             glBegin(GL_QUADS);
                glNormal3f(0,1,0);
                glVertex3f(7*map->squareSize()-5, 0.5, 7*map->squareSize());
-               glVertex3f(7*map->squareSize()-5, 0.5, (sizeZ+7)*map->squareSize());
-               glVertex3f(7*map->squareSize()+5, 0.5, (sizeZ+7)*map->squareSize());
+               glVertex3f(7*map->squareSize()-5, 0.5, 
+                          (sizeZ+7)*map->squareSize());
+               glVertex3f(7*map->squareSize()+5, 0.5, 
+                          (sizeZ+7)*map->squareSize());
                glVertex3f(7*map->squareSize()+5, 0.5, 7*map->squareSize());
 
                glNormal3f(0,1,0);
-               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5, 7*map->squareSize());
-               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5, (sizeZ+7)*map->squareSize());
-               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5, (sizeZ+7)*map->squareSize());
-               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5, 7*map->squareSize());
+               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5, 
+                          7*map->squareSize());
+               glVertex3f((sizeX+7)*map->squareSize()-5, 0.5, 
+                          (sizeZ+7)*map->squareSize());
+               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5, 
+                          (sizeZ+7)*map->squareSize());
+               glVertex3f((sizeX+7)*map->squareSize()+5, 0.5, 
+                          7*map->squareSize());
 
                glNormal3f(0,1,0);
                glVertex3f(7*map->squareSize(), 0.5, 7*map->squareSize()-5);
-               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 7*map->squareSize()-5);
-               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 7*map->squareSize()+5);
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 
+                          7*map->squareSize()-5);
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 
+                          7*map->squareSize()+5);
                glVertex3f(7*map->squareSize(), 0.5, 7*map->squareSize()+5);
 
                glNormal3f(0,1,0);
-               glVertex3f(7*map->squareSize(), 0.5, (sizeZ+7)*map->squareSize()-5);
-               glVertex3f((sizeX+7)*map->squareSize(), 0.5, (sizeZ+7)*map->squareSize()-5);
-               glVertex3f((sizeX+7)*map->squareSize(), 0.5, (sizeZ+7)*map->squareSize()+5);
-               glVertex3f(7*map->squareSize(), 0.5, (sizeZ+7)*map->squareSize()+5);
+               glVertex3f(7*map->squareSize(), 0.5, 
+                          (sizeZ+7)*map->squareSize()-5);
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 
+                          (sizeZ+7)*map->squareSize()-5);
+               glVertex3f((sizeX+7)*map->squareSize(), 0.5, 
+                          (sizeZ+7)*map->squareSize()+5);
+               glVertex3f(7*map->squareSize(), 0.5, 
+                          (sizeZ+7)*map->squareSize()+5);
 
             glEnd();
          glPopMatrix();
@@ -851,7 +862,8 @@ void editor::doEditorIO()
       string objFile = gui->getSelectedText();
       if( (!objFile.empty()) && (objFile != objectEditor->getObjectFileName()))
       {
-         mapObject* obj = (mapObject*) map->insertObject(objFile, *models, *wTypes);
+         mapObject* obj = (mapObject*) map->insertObject(objFile, *models, 
+                                                         *wTypes);
          objectEditor->defineActualObject(obj, objFile);
       }
       objectEditor->verifyAction(xReal, yReal, zReal, mButton, mouseX, mouseY,
