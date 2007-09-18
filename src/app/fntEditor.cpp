@@ -2,193 +2,164 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
+#include "fntEditor.h"
 
-#include <stdlib.h>
-#include <SDL/SDL.h>
-#include "../gui/farso.h"
-#include "../engine/culling.h"
-
-char caractere[16][16];   /* Caractere Atualmente editado */
-fnt fonte;                /* Fonte em edicao */
-int corAtv;               /* Cor Ativa-> 0 = transparente, !=0 corativa */
-cores Cores;
-barraTexto *arquivo;      /* Arquivo a ser salvo ou aberto */
-int tecAberta;           /* Tecla Atualmente Aberta */
-int sair = 0;
-figura* grid;
-janela *jan, *janelaEdicao;
-barraTexto* btCP;
-barraTexto* btVaiPara;
-
-
-
-void zera()
+/*************************************************************
+ *                          clear                            *
+ *************************************************************/
+void fntEditor::clear()
 {
   int aux,aux2;
   for (aux=0;aux<=256;aux++)
      for (aux2=0;aux2<16;aux2++)
-          fonte.letra[aux][aux2] = 0;
+          actualFont.letra[aux][aux2] = 0;
   for(aux = 0;aux<16;aux++)
     for(aux2=0;aux2<16;aux2++)
-       caractere[aux][aux2] = 0;
+       character[aux][aux2] = 0;
 }
 
-void poeLetra()
+/*************************************************************
+ *                        putLetter                          *
+ *************************************************************/
+void fntEditor::putLetter()
 {
    int aux,aux2;
    int sobra;
-   if(tecAberta != -1)
+   if(actualCharacter != -1)
    {
       for(aux=0;aux<16;aux++)
       {
          sobra = 0;
          for (aux2=15;aux2>=0;aux2--)
          {
-            if (caractere[aux][aux2])
-               sobra += (2<<(aux2-1)); //Eleva 2 a aux2
+            if (character[aux][aux2])
+               sobra += (2<<(aux2-1)); // 2^aux2
          }
-         fonte.letra[tecAberta][aux] = sobra;
+         actualFont.letra[actualCharacter][aux] = sobra;
       }
    }
 }
 
-void pegaLetra(int n)
+/*************************************************************
+ *                        getLetter                          *
+ *************************************************************/
+void fntEditor::getLetter(int n)
 {
-   poeLetra();
-   if(n == tecAberta) return;
+   SDL_Surface* surf = grid->get();
+   putLetter();
+   if(n == actualCharacter) return;
    int sobra;
    int aux,aux2;
    for (aux=0;aux<16;aux++)
    {
-      sobra = fonte.letra[n][aux];
+      sobra = actualFont.letra[n][aux];
       for (aux2=0;aux2<16;aux2++)
       {
-          caractere[aux][aux2] = sobra % 2;
+          character[aux][aux2] = sobra % 2;
           sobra = sobra / 2;
-          if(caractere[aux][aux2])
-             cor_Definir(255,255,255);
+          if(character[aux][aux2])
+             color_Set(255,255,255);
           else
-             cor_Definir(0,0,0);
-          retangulo_Colorir( grid->fig,((aux)*14)+1,((aux2)*14)+1,
-                             ((aux+1)*14)-1,((aux2+1)*14)-1,0);
+             color_Set(0,0,0);
+          rectangle_Fill( surf,((aux)*14)+1,((aux2)*14)+1,
+                          ((aux+1)*14)-1,((aux2+1)*14)-1);
       }
    }
-   tecAberta = n;
+   grid->set(surf);
+   actualCharacter = n;
 }
 
-void DefCP(barraTexto* bart, SDL_Surface *screen)
+/*************************************************************
+ *                          defCP                            *
+ *************************************************************/
+void fntEditor::defCP()
 {
    int aux;
-   fonte.incCP = 0;
-   for(aux=0;bart->texto[aux]!='\0';aux++)
+   actualFont.incCP = 0;
+   for(aux=0;textCP->getText()[aux]!='\0';aux++)
    {
-      fonte.incCP += bart->texto[aux] - '0';
+      actualFont.incCP += textCP->getText()[aux] - '0';
    }
 }
 
-int botao_Sair(void* jan,void *ljan,SDL_Surface *screen)
-{
-    sair = 1;
-    return(1);
-}
-
-int botao_VaiPara(void* jan,void *ljan,SDL_Surface *screen)
-{
-    int cDesejado =  atoi(btVaiPara->texto.c_str());
-    printf("%c %d\n",cDesejado,cDesejado);
-    pegaLetra(cDesejado);
-    janelaEdicao->Desenhar(0,0);
-    return(1);
-}
-
-int botao_CorAtiva(void* jan,void *ljan,SDL_Surface *screen)
-{
-    corAtv = 1;
-    return(1);
-}
-
-int botao_CorInativa(void* jan,void *ljan,SDL_Surface *screen)
-{
-    corAtv = 0;
-    return(1);
-}
-
- 
-int botao_Novo(void* jan,void *ljan,SDL_Surface *screen)
-{
-  //janela* j = (janela*) jan;
-  zera();
-  tecAberta = -1; 
-//  j->Ativar((Ljanela*)ljan);
-  return(0);
-}
-
-int botao_Abrir(void* jan,void *ljan,SDL_Surface *screen)
+/*************************************************************
+ *                           open                            *
+ *************************************************************/
+void fntEditor::open()
 {
   char tmp[4];
-  janela* j = (janela*) jan;
+  window* j = (window*) mainWindow;
   FILE *arq;
-  if ( !((arq) = fopen (arquivo->texto.c_str(), "rb")))
+  if ( !((arq) = fopen (textFileName->getText().c_str(), "rb")))
   { 
-     printf("Arquivo Nao Aberto: %s\n",arquivo->texto.c_str());
-     return(0);
+     printf("Can't Open: %s\n",textFileName->getText().c_str());
   }
-  fread(&fonte,sizeof(fnt),1,arq);
+  fread(&actualFont,sizeof(fnt),1,arq);
   fclose(arq);
-  sprintf(tmp,"%d",fonte.incCP);
-  btCP->texto = tmp;
-  j->Desenhar(0,0);
-  tecAberta = -1;
-  return(1);
+  sprintf(tmp,"%d",actualFont.incCP);
+  textCP->getText() = tmp;
+  j->draw(0,0);
+  actualCharacter = -1;
 }
 
-int botao_Salvar(void *jan,void *ljan,SDL_Surface *screen)
+/*************************************************************
+ *                           save                            *
+ *************************************************************/
+void fntEditor::save()
 {
-   poeLetra();
+   putLetter();
    FILE *arq;
-   if( !((arq) = fopen (arquivo->texto.c_str(), "wb")))
+   if( !((arq) = fopen (textFileName->getText().c_str(), "wb")))
    {
-       printf("Arquivo nao foi salvo: %s\n",arquivo->texto.c_str());
-       return(0);
+       printf("Can't Save: %s\n",textFileName->getText().c_str());
    }
-   fwrite(&fonte,sizeof(fnt),1,arq);
+   fwrite(&actualFont,sizeof(fnt),1,arq);
    fclose(arq);
-   printf("Arquivo Salvo.\n");
-   return(1);
+   printf("File Saved.\n");
 }
 
-
-void colocaCor(janela* jan, int x, int y, SDL_Surface* suf)
+/*************************************************************
+ *                        putColor                           *
+ *************************************************************/
+void fntEditor::putColor(int x, int y)
 {
-   x -= jan->x1;
-   y -= jan->y1;
+   SDL_Surface* surf = grid->get();
+   x -= mainWindow->getX1();
+   y -= mainWindow->getY1();
    int nx = ((x) / 14) ;
    int ny = ((y) / 14) ;
    if (nx>0 && nx<=16 && ny>0 && ny<=16)
    {
-      if(corAtv)
-         cor_Definir(255,255,255);
+      if(actualColor)
+         color_Set(255,255,255);
       else
-         cor_Definir(0,0,0);
-      retangulo_Colorir( grid->fig,((nx-1)*14)+1,((ny-1)*14)+1,
-                         ((nx)*14)-1,((ny)*14)-1,0);
-      caractere[nx-1][ny-1]=corAtv;
-      jan->Desenhar(0,0);
+         color_Set(0,0,0);
+      rectangle_Fill( surf,((nx-1)*14)+1,((ny-1)*14)+1,
+                         ((nx)*14)-1,((ny)*14)-1);
+      character[nx-1][ny-1] = actualColor;
+      grid->set(surf);
+      mainWindow->draw(0,0);
    }
 }
 
-void grade()
+/*************************************************************
+ *                        drawGrid                           *
+ *************************************************************/
+void fntEditor::drawGrid()
 {
-    cor_Definir(0,0,0);
-    retangulo_Colorir(grid->fig,0,0,224,224,0);
+    SDL_Surface* surf = grid->get();
+    color_Set(0,0,0);
+    rectangle_Fill(surf,0,0,224,224);
     int y = 0;
     int x = 0;
-    cor_Definir(Cores.corCont[1].R,Cores.corCont[1].G,Cores.corCont[1].B);
+    color_Set(color.colorCont[1].R,
+              color.colorCont[1].G,
+              color.colorCont[1].B);
     int aux;
     for(aux=0;aux<17;aux++)
     {
-       linha_Desenhar(grid->fig,0,y,224,y,0);
-       linha_Desenhar(grid->fig,x,0,x,224,0);
+       line_Draw(surf,0,y,224,y);
+       line_Draw(surf,x,0,x,224);
        y+=14;
        x+=14;
     }
@@ -197,28 +168,30 @@ void grade()
     {
         for(aux2=0;aux2<16;aux2++)
         {
-           if(caractere[aux][aux2])
+           if(character[aux][aux2])
            { 
-               cor_Definir(255,255,255);
-               retangulo_Colorir( grid->fig,((aux)*14)+1,
+               color_Set(255,255,255);
+               rectangle_Fill( surf,((aux)*14)+1,
                                   ((aux2)*14)+1,
-                                  ((aux+1)*14)-1,((aux2+1)*14)-1,0);
+                                  ((aux+1)*14)-1,((aux2+1)*14)-1);
            }
         }
     }
-    //janela_PoeCaraNaTela(jan,1,screen);
-    janelaEdicao->Desenhar(0,0);
-
+    grid->set(surf);
+    editWindow->draw(0,0);
 }
 
-void defineCaractere(Uint8* teclas, char* c)
+/*************************************************************
+ *                     defineCharacter                       *
+ *************************************************************/
+void fntEditor::defineCharacter(Uint8* keys, char* c)
 {
    c[0] = ' ';
 
-   int maiuscula = (teclas[SDLK_CAPSLOCK] || teclas[SDLK_LSHIFT] || 
-                    teclas[SDLK_RSHIFT]);
+   int maiuscula = (keys[SDLK_CAPSLOCK] || keys[SDLK_LSHIFT] || 
+                    keys[SDLK_RSHIFT]);
 
-   if( teclas[SDLK_KP_DIVIDE])
+   if( keys[SDLK_KP_DIVIDE])
       {
           if(maiuscula)
             c[0] = '?';
@@ -226,7 +199,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '/';
       }
       else 
-      if( teclas[SDLK_a])
+      if( keys[SDLK_a])
       {
           if (maiuscula)
             c[0] = 'A';
@@ -234,7 +207,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'a';
       } 
       else 
-      if( teclas[SDLK_b])
+      if( keys[SDLK_b])
       {
           if (maiuscula)
             c[0] = 'B';
@@ -242,7 +215,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'b';
       }
       else 
-      if( teclas[SDLK_c])
+      if( keys[SDLK_c])
       {
           if (maiuscula)
             c[0] = 'C';
@@ -250,7 +223,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'c';
       } 
       else 
-      if( teclas[SDLK_d])
+      if( keys[SDLK_d])
       {
           if (maiuscula)
             c[0] = 'D';
@@ -258,7 +231,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'd';
       }
       else 
-      if( teclas[SDLK_e])
+      if( keys[SDLK_e])
       {
           if (maiuscula)
             c[0] = 'E';
@@ -266,7 +239,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'e';
       }
       else 
-      if( teclas[SDLK_f])
+      if( keys[SDLK_f])
       {
           if (maiuscula)
             c[0] = 'F';
@@ -274,7 +247,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'f';
       }
       else 
-      if( teclas[SDLK_g])
+      if( keys[SDLK_g])
       {
           if (maiuscula)
             c[0] = 'G';
@@ -282,7 +255,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'g';
       }
       else 
-      if( teclas[SDLK_h])
+      if( keys[SDLK_h])
       {
           if (maiuscula)
             c[0] = 'H';
@@ -290,7 +263,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'h';
       }
       else 
-      if( teclas[SDLK_i])
+      if( keys[SDLK_i])
       {
           if (maiuscula)
             c[0] = 'I';
@@ -298,7 +271,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'i';
       }
       else 
-      if( teclas[SDLK_j])
+      if( keys[SDLK_j])
       {
           if (maiuscula)
             c[0] = 'J';
@@ -306,7 +279,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'j';
       }
       else 
-      if( teclas[SDLK_k])
+      if( keys[SDLK_k])
       {
           if (maiuscula)
             c[0] = 'K';
@@ -314,7 +287,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'k';
       }
       else 
-      if( teclas[SDLK_l])
+      if( keys[SDLK_l])
       {
           if (maiuscula)
             c[0] = 'L';
@@ -322,7 +295,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'l';
       }
       else 
-      if( teclas[SDLK_m])
+      if( keys[SDLK_m])
       {
           if (maiuscula)
             c[0] = 'M';
@@ -330,7 +303,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'm';
       }
       else 
-      if( teclas[SDLK_n])
+      if( keys[SDLK_n])
       {
           if (maiuscula)
             c[0] = 'N';
@@ -338,7 +311,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'n';
       }
       else 
-      if( teclas[SDLK_o])
+      if( keys[SDLK_o])
       {
           if (maiuscula)
             c[0] = 'O';
@@ -346,7 +319,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'o';
       }
       else 
-      if( teclas[SDLK_p])
+      if( keys[SDLK_p])
       {
           if (maiuscula)
             c[0] = 'P';
@@ -354,7 +327,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'p';
       }
       else 
-      if( teclas[SDLK_q])
+      if( keys[SDLK_q])
       {
           if (maiuscula)
             c[0] = 'Q';
@@ -362,7 +335,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'q';
       }
       else 
-      if( teclas[SDLK_r])
+      if( keys[SDLK_r])
       {
           if (maiuscula)
             c[0] = 'R';
@@ -370,7 +343,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'r';
       }
       else 
-      if( teclas[SDLK_s])
+      if( keys[SDLK_s])
       {
           if (maiuscula)
             c[0] = 'S';
@@ -378,7 +351,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 's';
       }
       else 
-      if( teclas[SDLK_t])
+      if( keys[SDLK_t])
       {
           if (maiuscula)
             c[0] = 'T';
@@ -386,7 +359,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 't';
       }
       else 
-      if( teclas[SDLK_u])
+      if( keys[SDLK_u])
       {
           if (maiuscula)
             c[0] = 'U';
@@ -394,7 +367,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'u';
       }
       else 
-      if( teclas[SDLK_w])
+      if( keys[SDLK_w])
       {
           if (maiuscula)
             c[0] = 'W';
@@ -402,7 +375,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'w';
       }
       else 
-      if( teclas[SDLK_x])
+      if( keys[SDLK_x])
       {
           if (maiuscula)
             c[0] = 'X';
@@ -410,7 +383,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'x';
       }
       else 
-      if( teclas[SDLK_y])
+      if( keys[SDLK_y])
       {
           if (maiuscula)
             c[0] = 'Y';
@@ -418,7 +391,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'y';
       }
       else 
-      if( teclas[SDLK_z])
+      if( keys[SDLK_z])
       {
           if (maiuscula)
             c[0] = 'Z';
@@ -426,7 +399,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = 'z';
       }
       else 
-      if( teclas[SDLK_SLASH])
+      if( keys[SDLK_SLASH])
       {
           if (maiuscula)
             c[0] = '?';
@@ -434,7 +407,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '/';
       }
       else 
-      if( teclas[SDLK_BACKSLASH])
+      if( keys[SDLK_BACKSLASH])
       {
           if (maiuscula)
             c[0] = '|';
@@ -442,7 +415,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '\\';
       }
       else 
-      if( teclas[SDLK_SEMICOLON])
+      if( keys[SDLK_SEMICOLON])
       {
           if (maiuscula)
             c[0] = ':';
@@ -450,7 +423,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = ';';
       }
       else 
-      if( teclas[SDLK_0])
+      if( keys[SDLK_0])
       {
           if (maiuscula)
             c[0] = ')';
@@ -458,7 +431,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '0';
       }
       else 
-      if( teclas[SDLK_1])
+      if( keys[SDLK_1])
       {
           if (maiuscula)
             c[0] = '!';
@@ -466,7 +439,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '1';
       }
       else 
-      if( teclas[SDLK_2])
+      if( keys[SDLK_2])
       {
           if (maiuscula)
             c[0] = '@';
@@ -474,7 +447,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '2';
       }
       else 
-      if( teclas[SDLK_3])
+      if( keys[SDLK_3])
       {
           if (maiuscula)
             c[0] = '#';
@@ -482,7 +455,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '3';
       }
       else 
-      if( teclas[SDLK_4])
+      if( keys[SDLK_4])
       {
           if (maiuscula)
             c[0] = '$';
@@ -490,7 +463,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '4';
       }
       else 
-      if( teclas[SDLK_5])
+      if( keys[SDLK_5])
       {
           if (maiuscula)
             c[0] = '%';
@@ -498,7 +471,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '5';
       }
       else 
-      if( teclas[SDLK_6])
+      if( keys[SDLK_6])
       {
           if (maiuscula)
             c[0] = '"';
@@ -506,7 +479,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '6';
       }
       else 
-      if( teclas[SDLK_7])
+      if( keys[SDLK_7])
       {
           if (maiuscula)
             c[0] = '&';
@@ -514,7 +487,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '7';
       }
       else 
-      if( teclas[SDLK_8])
+      if( keys[SDLK_8])
       {
           if (maiuscula)
             c[0] = '*';
@@ -522,7 +495,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '8';
       }
       else 
-      if( teclas[SDLK_9])
+      if( keys[SDLK_9])
       {
           if (maiuscula)
             c[0] = '(';
@@ -530,7 +503,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '9';
       }
       else 
-      if( teclas[SDLK_BACKQUOTE])
+      if( keys[SDLK_BACKQUOTE])
       {
           if (maiuscula)
             c[0] = '"';
@@ -538,7 +511,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '\'';
       }
       else 
-      if( teclas[SDLK_MINUS])
+      if( keys[SDLK_MINUS])
       {
           if (maiuscula)
             c[0] = '_';
@@ -546,7 +519,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '-';
       }
       else 
-      if( teclas[SDLK_PERIOD])
+      if( keys[SDLK_PERIOD])
       {
           if (maiuscula)
             c[0] = '>';
@@ -554,7 +527,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = '.';
       }
       else 
-      if( teclas[SDLK_COMMA])
+      if( keys[SDLK_COMMA])
       {
           if (maiuscula)
             c[0] = '<';
@@ -562,7 +535,7 @@ void defineCaractere(Uint8* teclas, char* c)
             c[0] = ',';
       }
       else 
-      if( teclas[SDLK_SPACE])
+      if( keys[SDLK_SPACE])
       {
           if (maiuscula)
             c[0] = ' ';
@@ -571,123 +544,202 @@ void defineCaractere(Uint8* teclas, char* c)
       }
 }
 
+/*************************************************************
+ *                       Constructor                         *
+ *************************************************************/
+fntEditor::fntEditor()
+{
+   int aux;
 
+   /* Clear Values */
+   for(aux = 0;aux<16;aux++)
+   {
+       character[aux][aux] = 0;
+   }
+   actualColor = 1;
+   color_Alpha(255);
+   actualFont.incCP = 1;
+   done = false;
+   actualCharacter = 0;
+
+   /* Init the system */
+   Farso_Init(&screen,"Editor de Fnt");
+   glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
+   glMatrixMode (GL_PROJECTION);
+   glLoadIdentity ();
+   gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, 512);
+   glGetIntegerv(GL_VIEWPORT, viewPort);
+   glGetDoublev(GL_MODELVIEW_MATRIX, proj);
+   glMatrixMode (GL_MODELVIEW);
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
+   /* Create the GUI */
+   interf = new interface(NULL);
+
+   /* Create the Main Window */
+   mainWindow = interf->insertWindow(0,0,255,127,"fntEditor");
+   textFileName = mainWindow->getObjectsList()->insertTextBar(24,20,227,34,
+                                                              "../data/fnt/",0);
+    newButton = mainWindow->getObjectsList()->insertButton(24,42,74,60,
+                                                           "New",1);
+    openButton = mainWindow->getObjectsList()->insertButton(75,42,125,60,
+                                                            "Load",1);
+    saveButton = mainWindow->getObjectsList()->insertButton(126,42,176,60,
+                                                            "Save",1);
+    exitButton = mainWindow->getObjectsList()->insertButton(177,42,227,60,
+                                                            "Exit",1);
+
+    mainWindow->getObjectsList()->insertTextBox(24,67,61,80,0,"INCP:");
+    textCP = mainWindow->getObjectsList()->insertTextBar(60,66,84,80,"1",0);
+    activeButton = mainWindow->getObjectsList()->insertButton(13,90,93,108,
+                                                              "Active",1);
+    inactiveButton = mainWindow->getObjectsList()->insertButton(96,90,185,108,
+                                                                "Inactive",1);
+    
+    textGoto = mainWindow->getObjectsList()->insertTextBar(100,66,144,80,
+                                                           "233",0);
+    gotoButton = mainWindow->getObjectsList()->insertButton(150,64,215,82,
+                                                            "GoTo",1);
+
+    mainWindow->setAttributes(false, true, true, true);
+    mainWindow->setExternPointer(&mainWindow);
+    interf->openWindow(mainWindow);
+
+    /* Create the Edit Window */
+    editWindow = interf->insertWindow(10,210,265,465, "Caractere");
+    grid = editWindow->getObjectsList()->insertPicture(8,18,256,256,NULL);
+    drawGrid();
+    clear();
+    editWindow->setExternPointer(&editWindow);
+    editWindow->setAttributes(false, true, true, true);
+    interf->openWindow(editWindow);
+}
+
+/*************************************************************
+ *                        Destructor                         *
+ *************************************************************/
+fntEditor::~fntEditor()
+{
+   delete(interf);
+}
+
+/*************************************************************
+ *                            run                            *
+ *************************************************************/
+void fntEditor::run()
+{
+   Uint8 *keys;
+   int x,y;
+   guiObject* object = NULL;
+   int event;
+
+   char c[1];
+   char lastLetter = 0;
+
+   /* Get the matrix */
+   actualizeFrustum(visibleMatrix,proj,modl);
+  
+   /* Run the Editor */
+   while (!done)
+   {
+      SDL_PumpEvents();
+      keys = SDL_GetKeyState(NULL);
+      glClearColor(0,0,0,1);
+      glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+      Uint8 Mbotao = SDL_GetMouseState(&x,&y);
+      object = interf->manipulateEvents(x,y,Mbotao, keys, &event);
+
+      if(event == PRESSED_BUTTON)
+      {
+         /* New Button */
+         if(object == (guiObject*)newButton)
+         {
+            clear();
+            actualCharacter = -1;
+         }
+         /* Save Button */
+         else if(object == (guiObject*)saveButton)
+         {
+            save();
+         }
+         /* Open Button */
+         else if(object == (guiObject*)openButton)
+         {
+            open();
+         }
+         /* Exit Button */
+         else if(object == (guiObject*)exitButton)
+         {
+            done = true;
+         }
+         /* Active Color Button */
+         else if(object == (guiObject*)activeButton)
+         {
+            actualColor = 1;
+         }
+         /* Inactive Color Button */
+         else if(object == (guiObject*)inactiveButton)
+         {
+            actualColor = 0;
+         }
+         /* goTo Button */
+         else if(object == (guiObject*)gotoButton)
+         {
+            int cDesejado =  atoi(textGoto->getText().c_str());
+            printf("%c %d\n",cDesejado,cDesejado);
+            getLetter(cDesejado);
+            editWindow->draw(0,0);
+         }
+      }
+      else if(event == WROTE_TEXT_BAR)
+      {
+         /* Edited the textCP */
+         if(object == (guiObject *)textCP)
+         {
+            defCP();
+         }
+      }
+      else if(event == CLICKED_WINDOW)
+      {
+         /* Edit the grid */
+         if(object == (guiObject *)editWindow)
+         {
+            putColor(x, y);
+         }
+      }
+      else
+      {
+         /* Define the new editable character */
+         defineCharacter(keys,c);
+         if( (c[0] != lastLetter) && (c[0] != ' '))
+         {
+            printf("%c\n",c[0]);
+            getLetter(c[0]);
+            editWindow->draw(0,0);
+            lastLetter = c[0];
+         }
+      }
+       
+      /* Draw to the window */
+      glPushMatrix();
+        draw2DMode();
+           interf->draw(proj,modl,viewPort);
+        draw3DMode(45);
+      glPopMatrix();
+      glFlush();
+      SDL_GL_SwapBuffers();
+      SDL_Delay(50);
+   }
+}
+
+/*************************************************************
+ *                           main                            *
+ *************************************************************/
 int main(int argc, char *argv[])
 {
-    int aux;
-    for(aux = 0;aux<16;aux++)
-       caractere[aux][aux] = 0;
-    corAtv = 1;
-
-    Cores.Iniciar();
-    
-
-    SDL_Surface *screen;
-    Farso_Iniciar(&screen,"Editor de Fnt");
-    glViewport(0,0,800,600);
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
-
-   glOrtho(0.0f, 800, 600, 0.0f, -1.0f, 1.0f);
-	
-   glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();
-
-//    cor_Definir(0,0,0);
-//    retangulo_Colorir(screen,0,0,639,479,0);
-    fonte.incCP = 1;
-    corAtv = 1;
-    string txt = "Arquivo a Abrir";
-
-    //Ljanela j;
-    interface* interf = new interface(NULL);
-    
-    jan = interf->insertWindow(0,0,255,255,"fntEditor",1,1);
-    jan->fechavel = 0;
-    arquivo = jan->objects->InserirBarraTexto(24,20,176,34,txt.c_str(),0,NULL);
-    jan->objects->InserirBotao(24,42,74,60,Cores.corBot.R,Cores.corBot.G,
-                               Cores.corBot.B,"Nova",1,&botao_Novo);
-    jan->objects->InserirBotao(75,42,125,60,Cores.corBot.R,Cores.corBot.G,
-                               Cores.corBot.B,"Abrir",1,&botao_Abrir);
-    jan->objects->InserirBotao(126,42,176,60,Cores.corBot.R,Cores.corBot.G,
-                               Cores.corBot.B,"Salvar",1,&botao_Salvar);
-    jan->objects->InserirQuadroTexto(24,67,61,80,0,"INCP:");
-    btCP = jan->objects->InserirBarraTexto(60,66,84,80,"1",0,&DefCP);
-    jan->objects->InserirBotao(13,90,93,108,Cores.corBot.R,Cores.corBot.G,
-                            Cores.corBot.B,"Cor Ativa",1,&botao_CorAtiva);
-    jan->objects->InserirBotao(96,90,185,108,Cores.corBot.R,Cores.corBot.G,
-                         Cores.corBot.B,"Cor Inativa",1,&botao_CorInativa);
-    jan->objects->InserirBotao(130,220,180,238,Cores.corBot.R,Cores.corBot.G,
-                               Cores.corBot.B,"Sair",1,&botao_Sair);
-    txt = "233";
-    btVaiPara = jan->objects->InserirBarraTexto(40,112,84,126,txt.c_str(),0,NULL);
-    jan->objects->InserirBotao(90,110,155,128,Cores.corBot.R,Cores.corBot.G,
-                               Cores.corBot.B,"VaiPara",1,&botao_VaiPara);
-
-    interf->openWindow(jan);
-
-    janelaEdicao = interf->insertWindow(10,210,265,465, "Caractere",1,1);
-    janelaEdicao->fechavel = 0;
-    grid = janelaEdicao->objects->InserirFigura(8,18,256,256,NULL);
-    grade();
-    zera();
-    interf->openWindow(janelaEdicao);
-   
-
-    int pronto = 0;
-    char c[1];
-    char ultimaLetra = 0;
-    tecAberta = 0;
-
-    Uint8 *keys;
-    int x,y;
-
-    GLdouble proj[16];
-    GLdouble modl[16];
-    GLint viewPort[4];
-    GLfloat matrizVisivel[6][4];
-    Tobjeto* object = NULL;
-
-    glGetIntegerv(GL_VIEWPORT, viewPort);
-
-    AtualizaFrustum(matrizVisivel,proj,modl);
-    
-    while (!sair)
-    {
-       SDL_PumpEvents();
-       keys = SDL_GetKeyState(NULL);
-       glClearColor(0,0,0,1);
-       glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-       Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-       object = interf->manipulateEvents(x,y,Mbotao, keys, &pronto);
-       if(pronto != BARRATEXTOESCRITA)
-       {
-          defineCaractere(keys,c);
-          if( (c[0] != ultimaLetra) && (c[0] != ' '))
-          {
-             printf("%c\n",c[0]);
-             pegaLetra(c[0]);
-//             janelaEdicao->Ativar(interf->ljan);
-             janelaEdicao->Desenhar(0,0);
-          }
-       }
-       
-       interf->draw(proj,modl,viewPort);
-       glFlush();
-       SDL_GL_SwapBuffers();
-       SDL_Delay(50);
-    }
-
-    atexit(SDL_Quit);
-
-    delete(interf);
-
-    int d = 'û';
-    printf("%c %d\n",d,d);
-    d = 'Û';
-    printf("%c %d\n",d,d);    
-
-    return(0);
-
+   fntEditor* f = new fntEditor();
+   f->run();
+   delete(f);
+   return(0);
 }
 
