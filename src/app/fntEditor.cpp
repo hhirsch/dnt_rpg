@@ -106,7 +106,7 @@ void fntEditor::open()
   fread(&actualFont,sizeof(fnt),1,arq);
   fclose(arq);
   sprintf(tmp,"%d",actualFont.incCP);
-  textCP->getText() = tmp;
+  textCP->setText(tmp);
   j->draw(0,0);
   actualCharacter = -1;
 }
