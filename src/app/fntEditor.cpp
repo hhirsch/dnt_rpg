@@ -124,8 +124,8 @@ void fntEditor::save()
 void fntEditor::putColor(int x, int y)
 {
    SDL_Surface* surf = grid->get();
-   x -= mainWindow->getX1();
-   y -= mainWindow->getY1();
+   x -= editWindow->getX1();
+   y -= editWindow->getY1();
    int nx = ((x) / 14) ;
    int ny = ((y) / 14) ;
    if (nx>0 && nx<=16 && ny>0 && ny<=16)
@@ -138,7 +138,7 @@ void fntEditor::putColor(int x, int y)
                          ((nx)*14)-1,((ny)*14)-1);
       character[nx-1][ny-1] = actualColor;
       grid->set(surf);
-      mainWindow->draw(0,0);
+      editWindow->draw(0,0);
    }
 }
 
