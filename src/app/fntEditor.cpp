@@ -572,7 +572,7 @@ fntEditor::fntEditor()
    actualCharacter = 0;
 
    /* Init the system */
-   Farso_Init(&screen,"Editor de Fnt");
+   Farso_Init(&screen,"DNT FNT Editor");
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
