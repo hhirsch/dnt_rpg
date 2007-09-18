@@ -33,7 +33,16 @@ void fntEditor::putLetter()
          for (aux2=15;aux2>=0;aux2--)
          {
             if (character[aux][aux2])
-               sobra += (2<<(aux2-1)); // 2^aux2
+            {
+               if(aux2 > 0)
+               {
+                  sobra += (2<<(aux2-1)); // 2^aux2
+               }
+               else
+               {
+                  sobra += 1;
+               }
+            }
          }
          actualFont.letra[actualCharacter][aux] = sobra;
       }
