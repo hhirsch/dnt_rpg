@@ -55,7 +55,6 @@ void fntEditor::putLetter()
 void fntEditor::getLetter(int n)
 {
    SDL_Surface* surf = grid->get();
-   putLetter();
    if(n == actualCharacter) return;
    int sobra;
    int aux,aux2;
@@ -90,6 +89,24 @@ void fntEditor::defCP()
       actualFont.incCP += textCP->getText()[aux] - '0';
    }
 }
+/*************************************************************
+ *                      copyCharacter                        *
+ *************************************************************/
+void fntEditor::copyCharacter(int cFrom, int cTo)
+{
+   int aux;
+   for(aux=0;aux<16;aux++)
+   {
+      actualFont.letra[cTo][aux] = actualFont.letra[cFrom][aux];
+   }
+
+   if(actualCharacter == cTo)
+   {
+      actualCharacter = -1;
+      getLetter(cTo);
+      editWindow->draw(0,0);
+   }
+}
 
 /*************************************************************
  *                           open                            *
@@ -97,7 +114,6 @@ void fntEditor::defCP()
 void fntEditor::open()
 {
   char tmp[4];
-  window* j = (window*) mainWindow;
   FILE *arq;
   if ( !((arq) = fopen (textFileName->getText().c_str(), "rb")))
   { 
@@ -107,7 +123,7 @@ void fntEditor::open()
   fclose(arq);
   sprintf(tmp,"%d",actualFont.incCP);
   textCP->setText(tmp);
-  j->draw(0,0);
+  infoWindow->draw(0,0);
   actualCharacter = -1;
 }
 
@@ -586,36 +602,57 @@ fntEditor::fntEditor()
    interf = new interface(NULL);
 
    /* Create the Main Window */
-   mainWindow = interf->insertWindow(0,0,255,127,"fntEditor");
-   textFileName = mainWindow->getObjectsList()->insertTextBar(24,20,227,34,
+   mainWindow = interf->insertWindow(0,1,230,68,"fntEditor");
+   textFileName = mainWindow->getObjectsList()->insertTextBar(9,20,221,34,
                                                               "../data/fnt/",0);
-    newButton = mainWindow->getObjectsList()->insertButton(24,42,74,60,
+    newButton = mainWindow->getObjectsList()->insertButton(13,42,63,60,
                                                            "New",1);
-    openButton = mainWindow->getObjectsList()->insertButton(75,42,125,60,
+    openButton = mainWindow->getObjectsList()->insertButton(64,42,114,60,
                                                             "Load",1);
-    saveButton = mainWindow->getObjectsList()->insertButton(126,42,176,60,
+    saveButton = mainWindow->getObjectsList()->insertButton(115,42,165,60,
                                                             "Save",1);
-    exitButton = mainWindow->getObjectsList()->insertButton(177,42,227,60,
+    exitButton = mainWindow->getObjectsList()->insertButton(167,42,217,60,
                                                             "Exit",1);
-
-    mainWindow->getObjectsList()->insertTextBox(24,67,61,80,0,"INCP:");
-    textCP = mainWindow->getObjectsList()->insertTextBar(60,66,84,80,"1",0);
-    activeButton = mainWindow->getObjectsList()->insertButton(13,90,93,108,
-                                                              "Active",1);
-    inactiveButton = mainWindow->getObjectsList()->insertButton(96,90,185,108,
-                                                                "Inactive",1);
-    
-    textGoto = mainWindow->getObjectsList()->insertTextBar(100,66,144,80,
-                                                           "233",0);
-    gotoButton = mainWindow->getObjectsList()->insertButton(150,64,215,82,
-                                                            "GoTo",1);
-
     mainWindow->setAttributes(false, true, true, true);
     mainWindow->setExternPointer(&mainWindow);
     interf->openWindow(mainWindow);
 
+    /* Info Window */
+    infoWindow = interf->insertWindow(0,69,230,205,"Attributes");
+    infoWindow->getObjectsList()->insertTextBox(9,21,46,34,0,"INCP:");
+    textCP = infoWindow->getObjectsList()->insertTextBar(45,20,70,34,"1",0);
+    infoWindow->getObjectsList()->insertTextBox(5, 17 ,225, 37, 1, "");
+
+    activeButton = infoWindow->getObjectsList()->insertButton(28,44,108,62,
+                                                              "Active",1);
+    inactiveButton = infoWindow->getObjectsList()->insertButton(111,44,200,62,
+                                                                "Inactive",1);
+    infoWindow->getObjectsList()->insertTextBox(5, 38 ,225, 68, 1, "");
+    
+    infoWindow->getObjectsList()->insertTextBox(9,78,79,91,0,
+                                                "Character:");
+    textGoto = infoWindow->getObjectsList()->insertTextBar(80,77,110,91,
+                                                           "233",0);
+    gotoButton = infoWindow->getObjectsList()->insertButton(113,75,176,93,
+                                                            "GoTo",1);
+    infoWindow->getObjectsList()->insertTextBox(5, 69 ,225, 99, 1, "");
+
+    infoWindow->getObjectsList()->insertTextBox(9,109,45,121,0,"From:");
+    textFrom = infoWindow->getObjectsList()->insertTextBar(45,108,75,122,
+                                                           "1",0);
+    infoWindow->getObjectsList()->insertTextBox(76,109,106,121,0,"To:");
+    textTo = infoWindow->getObjectsList()->insertTextBar(107,108,137,122,
+                                                         "2",0);
+    copyButton = infoWindow->getObjectsList()->insertButton(150,106,215,124,
+                                                            "Copy",1);
+    infoWindow->getObjectsList()->insertTextBox(5, 100 ,225, 130, 1, "");
+
+    infoWindow->setAttributes(false, true, true, true);
+    infoWindow->setExternPointer(&infoWindow);
+    interf->openWindow(infoWindow);
+
     /* Create the Edit Window */
-    editWindow = interf->insertWindow(10,210,265,465, "Caractere");
+    editWindow = interf->insertWindow(0,206,255,461, "Caractere");
     grid = editWindow->getObjectsList()->insertPicture(8,18,256,256,NULL);
     drawGrid();
     clear();
@@ -643,7 +680,7 @@ void fntEditor::run()
    int event;
 
    char c[1];
-   char lastLetter = 0;
+   lastLetter = 0;
 
    /* Get the matrix */
    actualizeFrustum(visibleMatrix,proj,modl);
@@ -696,8 +733,17 @@ void fntEditor::run()
          {
             int cDesejado =  atoi(textGoto->getText().c_str());
             printf("%c %d\n",cDesejado,cDesejado);
+            putLetter();
             getLetter(cDesejado);
+            lastLetter = cDesejado;
             editWindow->draw(0,0);
+         }
+         /* copy Button */
+         else if(object == (guiObject*)copyButton)
+         {
+            int cFrom = atoi(textFrom->getText().c_str());
+            int cTo = atoi(textTo->getText().c_str());
+            copyCharacter(cFrom, cTo);
          }
       }
       else if(event == WROTE_TEXT_BAR)
@@ -722,7 +768,8 @@ void fntEditor::run()
          defineCharacter(keys,c);
          if( (c[0] != lastLetter) && (c[0] != ' '))
          {
-            printf("%c\n",c[0]);
+            printf("%c %d\n",c[0],c[0]);
+            putLetter();
             getLetter(c[0]);
             editWindow->draw(0,0);
             lastLetter = c[0];

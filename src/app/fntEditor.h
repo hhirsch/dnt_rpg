@@ -44,6 +44,10 @@ class fntEditor
        * \param keys -> keyboard state
        * \param c -> define character */
       void defineCharacter(Uint8* keys, char* c);
+      /*! Copy Characters
+       * \param cFrom -> orign character
+       * \param cTo -> destiny character */
+      void copyCharacter(int cFrom, int cTo);
 
 
       GLdouble proj[16];           /**< Projection Matrix */
@@ -60,18 +64,23 @@ class fntEditor
       int actualColor;          /**< Active Color if != 0. Inactive if 0 */
       int actualCharacter;      /**< Actual Opened Character code */
       bool done;                /**< Main Flux Controller */
+      char lastLetter;          /**< Last pressed letter to edit */
 
       window *mainWindow;       /**< Main Window */
+      window* infoWindow;       /**< Info Window */
       textBar* textFileName;    /**< Text bar with for the fileName */
       textBar* textCP;          /**< TextBar with actual incCP */
       textBar* textGoto;        /**< TextBar with the character to goto */
+      textBar* textFrom;        /**< Character to copy from */
+      textBar* textTo;          /**< Character to copy to */
       button *newButton,        /**< The NEW button */
              *openButton,       /**< The OPEN button */
              *saveButton,       /**< The SAVE button */
              *exitButton,       /**< The EXIT button */
              *activeButton,     /**< The ACTIVE COLOR button */
              *inactiveButton,   /**< The INACTIVE COLOR button */
-             *gotoButton;       /**< The GOTO button */
+             *gotoButton,       /**< The GOTO button */
+             *copyButton;       /**< Copy Button */
 
       window *editWindow;       /**< Edit Window  */
       picture* grid;            /**< Editing Grid */
