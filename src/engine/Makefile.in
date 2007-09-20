@@ -9,7 +9,7 @@ CFLAGS = @CPPFLAGS@ $(DEFS) -g -c -Wall -O2
 CC = @CXX@
 EFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
-LIBS = @LIBINTL@ @LIBS@
+LIBS = @LIBS@
 
 
 ENDGUI = ../gui/
