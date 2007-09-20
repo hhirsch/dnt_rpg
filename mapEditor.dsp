@@ -53,7 +53,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib SDL.lib SDL_image.lib opengl32.lib openal32.lib cal3d.lib ogg.lib glu32.lib vorbis.lib vorbisenc.lib vorbisfile.lib sdlmain.lib /nologo /subsystem:windows /machine:I386 /out:"bin/mapEditor.exe"
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib SDL.lib SDL_image.lib opengl32.lib openal32.lib cal3d.lib ogg.lib glu32.lib vorbis.lib vorbisenc.lib vorbisfile.lib sdlmain.lib charset.lib iconv.lib intl.lib asprintf.lib gettextpo.lib /nologo /subsystem:windows /machine:I386 /out:"bin/mapEditor.exe"
 
 !ELSEIF  "$(CFG)" == "mapEditor - Win32 Debug"
 
@@ -299,10 +299,6 @@ SOURCE=.\src\classes\itemslot.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\lang\lang.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\gui\listtext.cpp
 # End Source File
 # Begin Source File
@@ -519,6 +515,10 @@ SOURCE=.\src\classes\thing.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\lang\translate.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\engine\util.cpp
 # End Source File
 # Begin Source File
@@ -684,10 +684,6 @@ SOURCE=.\src\classes\itemslot.h
 # Begin Source File
 
 SOURCE=.\src\gui\janela.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\lang\lang.h
 # End Source File
 # Begin Source File
 
@@ -868,6 +864,10 @@ SOURCE=.\src\etc\texture.h
 # Begin Source File
 
 SOURCE=.\src\classes\thing.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\lang\translate.h
 # End Source File
 # Begin Source File
 
