@@ -14,13 +14,13 @@
 #define FL_FRENCH     "fr"
 #define FL_SPANISH    "es"
 
-#define LANG_PORTUGUESE 3 /**< Portuguese Language */
-#define LANG_SPANISH    2 /**< Spanish Language */
-#define LANG_FRENCH     1 /**< French Language */
-#define LANG_ENGLISH    0 /**< English Language */
+#define DNT_LANG_PORTUGUESE 3 /**< Portuguese Language */
+#define DNT_LANG_SPANISH    2 /**< Spanish Language */
+#define DNT_LANG_FRENCH     1 /**< French Language */
+#define DNT_LANG_ENGLISH    0 /**< English Language */
 
-#define LANG_LAST  3
-#define LANG_FIRST 0
+#define DNT_LANG_LAST  3
+#define DNT_LANG_FIRST 0
 
 /****************************************************************
  *                          Constructor                         *
@@ -156,22 +156,22 @@ string options::languageName()
    string saux;
    switch(langNumber)
    {
-      case LANG_PORTUGUESE:
+      case DNT_LANG_PORTUGUESE:
       {
          saux = NM_PORTUGUESE;
          break;
       }
-      case LANG_SPANISH:
+      case DNT_LANG_SPANISH:
       {
          saux = NM_SPANISH;
          break;
       }
-      case LANG_FRENCH: 
+      case DNT_LANG_FRENCH: 
       {
          saux = NM_FRENCH;
          break;
       }
-      case LANG_ENGLISH:
+      case DNT_LANG_ENGLISH:
       {
          saux = NM_ENGLISH;
          break;
@@ -188,22 +188,22 @@ void options::setLanguage()
    string saux = "";
    switch(langNumber)
    {
-      case LANG_PORTUGUESE:
+      case DNT_LANG_PORTUGUESE:
       {
          saux = FL_PORTUGUESE;
          break;
       }
-      case LANG_SPANISH:
+      case DNT_LANG_SPANISH:
       {
          saux = FL_SPANISH;
          break;
       }
-      case LANG_FRENCH: 
+      case DNT_LANG_FRENCH: 
       {
          saux = FL_FRENCH;
          break;
       }
-      case LANG_ENGLISH:
+      case DNT_LANG_ENGLISH:
       {
          saux = FL_ENGLISH;
          break;
@@ -213,13 +213,16 @@ void options::setLanguage()
    if(!saux.empty())
    {
       /* Change language.  */
-      setenv ("LANGUAGE", saux.c_str(), 1);
-       
-      /* Make change known.  */
-      {
-         extern int  _nl_msg_cat_cntr;
-         ++_nl_msg_cat_cntr;
-      }
+	  #ifdef _MSC_VER
+	     SetEnvironmentVariable( "LANGUAGE", saux.c_str() );
+      #else
+         setenv ("LANGUAGE", saux.c_str(), 1);
+		 /* Make change known.  */
+		 {
+            extern int  _nl_msg_cat_cntr;
+            ++_nl_msg_cat_cntr;
+		 }
+      #endif
    }
 }
 
@@ -437,14 +440,14 @@ int options::Treat(guiObject* object, int eventInfo, interface* interf)
       /* Language */
       if(object == (guiObject*) buttonLangSum)
       {
-         if(langNumber < LANG_LAST)
+         if(langNumber < DNT_LANG_LAST)
          {
             langNumber++;
          }
       }
       if(object == (guiObject*) buttonLangDec)
       {
-         if(langNumber > LANG_FIRST)
+         if(langNumber > DNT_LANG_FIRST)
          {
             langNumber--;
          }
