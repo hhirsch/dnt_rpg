@@ -55,6 +55,22 @@ class fightGroup
      ***************************************************************/
      void empty();
 
+     /*!
+      **************************************************************
+      * Get total elements on the group
+      * \return number of characters on the group;
+      **************************************************************/
+      int total();
+
+     /*!
+      **************************************************************
+      * Get the character on the group position
+      * \param pos -> position on the group (0 to (total()-1))
+      * \return pointer to the character at the position, or NULL
+      **************************************************************/
+     character* getAtPosition(int pos);
+
+
    private:
      /*! Pointers to Characters on Group */
      character* characters[FIGHT_MAX_CHARACTERS_PER_GROUP]; 

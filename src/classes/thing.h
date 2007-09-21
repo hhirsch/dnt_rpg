@@ -42,6 +42,7 @@ class thing
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
       int xp;                 /**< The experience of the thing */
+      float cr;               /**< The Challenge Rating */
       float cost;             /**< Cost Value */
       float walk_interval;    /**< The interval of walking (for multiply per
                                    WALK_ACTUALIZATION value. This is for 

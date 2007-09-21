@@ -1,6 +1,8 @@
 #ifndef _fightSystem_h
 #define _fightSystem_h
 
+#include "../classes/xp.h"
+
 /*************************************************************************
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/

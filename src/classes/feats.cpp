@@ -233,6 +233,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
          sprintf(texto,"%d(+%d) x %d : ",diceValue,bonus,targetValue);
       }
       brief += texto;
+      brief += "|";
 
       //apply bonus (skill bonus)
       diceValue += bonus;

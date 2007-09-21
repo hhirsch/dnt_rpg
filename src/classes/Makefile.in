@@ -12,7 +12,7 @@ ENDFIGHT = ../fight/
 ENDIA = ../ia/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o $(ENDENGINE)personagens.o $(OBJSGUI)
-objetos = actions.o align.o barter.o classes.o defs.o feats.o inventory.o itemslot.o mission.o object.o race.o skills.o thing.o weapon.o
+objetos = actions.o align.o barter.o classes.o defs.o feats.o inventory.o itemslot.o mission.o object.o race.o skills.o thing.o weapon.o xp.o
 
 
 all: $(objetos)
@@ -85,6 +85,11 @@ mission.o: mission.h mission.cpp $(ENDIA)iascript.h
 weapon.o: weapon.cpp weapon.h
 	@printf "Making weapon.o... "
 	@$(CC) $(CFLAGS) weapon.cpp -o weapon.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+xp.o: xp.h xp.cpp
+	@printf "Making xp.o... "
+	@$(CPP) $(CFLAGS) xp.cpp -o xp.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 teste: $(objetos) $(OBJSFIGHT) teste.cpp

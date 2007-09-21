@@ -147,3 +147,23 @@ bool fightGroup::anyoneIsAliveAndInRange(bool onlyHostile)
    return(false);
 }
 
+/***************************************************************
+ *                             total                           *
+ ***************************************************************/
+int fightGroup::total()
+{
+   return(actualCharacters);
+}
+
+/***************************************************************
+ *                          getAtPosition                      *
+ ***************************************************************/
+character* fightGroup::getAtPosition(int pos)
+{
+   if( (pos >= 0) && (pos < actualCharacters) )
+   {
+      return(characters[pos]);
+   }
+   return(NULL);
+}
+

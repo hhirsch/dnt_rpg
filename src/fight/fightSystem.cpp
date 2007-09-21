@@ -153,10 +153,36 @@ void fightSystem::verifyDeads(string& brief)
               actualActor->actualEnemy->nome.c_str());
       brief += buf;
 
-      //if(isPC(actualActor))
-      /* Calculate and apply the number of XP points 
-       * for killing this character */
-       //TODO
+      if(isPC(actualActor))
+      {
+         int i;
+         int pcg = 0;
+         character* p = NULL;
+         int xp = 0;
+         /* Get the PC group */
+         for(i=0;i<FIGHT_MAX_PC_GROUPS;i++)
+         {
+            if(pcGroups[i].isCharacterIn(actualActor))
+            {
+               pcg = i;
+            }
+         }
+
+         /* Calculate and apply the number of XP points 
+          * for killing the target */
+          xp = getXP(actualActor, actualActor->actualEnemy->cr) / 
+               pcGroups[pcg].total();
+
+         /* Apply the XP for all PC Characters on the group */
+         for(i=0; i < pcGroups[pcg].total(); i++)
+         {
+            p = pcGroups[pcg].getAtPosition(i);
+            if(p)
+            {
+               p->xp += xp;
+            }
+         }
+      }
    }
    else
    {
@@ -236,10 +262,14 @@ int fightSystem::doTurn(string& brief)
              }
              sprintf(buffer, "%s's turn.", actualActor->nome.c_str());
              brief += buffer;
+             brief += "|";
              return(FIGHT_PC_TURN);
          }
          else
          { 
+            sprintf(buffer, "%s's turn.", actualActor->nome.c_str());
+            brief += buffer;
+            brief += "|";
             doNPCAction(actualActor,tmp);
             pendingAnimation = true;
             brief += "|" + tmp;

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-15 15:57-0300\n"
+"POT-Creation-Date: 2007-09-21 10:51-0300\n"
 "PO-Revision-Date: 2007-09-13 11:00+0000\n"
 "Last-Translator: farrer <farrer@dnteam.org>\n"
 "Language-Team: FRANÇAIS <fr@li.org>\n"
@@ -23,32 +23,24 @@ msgstr ""
 msgid "Too far away for action!"
 msgstr "Trop lointain pour l'action!"
 
-#: src/classes/feats.cpp:244 src/classes/feats.cpp:259
+#: src/classes/feats.cpp:244 src/classes/feats.cpp:260
 msgid "Miss."
 msgstr "Manque."
 
-#: src/classes/feats.cpp:247
-msgid "|Critical Miss!"
-msgstr "|Manque Critique!"
-
-#: src/classes/feats.cpp:251
+#: src/classes/feats.cpp:248 src/classes/feats.cpp:252
 msgid "Critical Miss!"
 msgstr "Manque Critique!"
 
-#: src/classes/feats.cpp:295
+#: src/classes/feats.cpp:296
 #, c-format
 msgid "Hit for %d points."
 msgstr "Coup pour %d points."
 
-#: src/classes/feats.cpp:303
-msgid "|Critical Hit!"
-msgstr "|Coup Critique!"
-
-#: src/classes/feats.cpp:307
+#: src/classes/feats.cpp:305 src/classes/feats.cpp:309
 msgid "Critical Hit!"
 msgstr "Coup Critique!"
 
-#: src/classes/feats.cpp:327
+#: src/classes/feats.cpp:329
 msgid "Not enought points to use!"
 msgstr "Pas de points à employer!"
 
@@ -72,7 +64,7 @@ msgid "Tendency & Alignment"
 msgstr "Alignement"
 
 #: src/engine/alignwindow.cpp:47 src/engine/aspectwindow.cpp:58
-#: src/engine/attwindow.cpp:174 src/engine/options.cpp:377
+#: src/engine/attwindow.cpp:174 src/engine/options.cpp:380
 #: src/engine/racewindow.cpp:59 src/engine/classwindow.cpp:61
 #: src/engine/skillwindow.cpp:85
 msgid "Confirm"
@@ -80,7 +72,7 @@ msgstr "Comfirmez"
 
 #: src/engine/alignwindow.cpp:51 src/engine/aspectwindow.cpp:62
 #: src/engine/attwindow.cpp:178 src/engine/barterwindow.cpp:34
-#: src/engine/options.cpp:381 src/engine/racewindow.cpp:63
+#: src/engine/options.cpp:384 src/engine/racewindow.cpp:63
 #: src/engine/classwindow.cpp:65 src/engine/skillwindow.cpp:89
 msgid "Cancel"
 msgstr "Annuler"
@@ -97,15 +89,15 @@ msgstr "Nouveau"
 msgid "Continue"
 msgstr "Continue"
 
-#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3072
+#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3073
 msgid "Save"
 msgstr "Registrer"
 
-#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3076
+#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3077
 msgid "Load"
 msgstr "Charger"
 
-#: src/engine/initial.cpp:54 src/engine/options.cpp:282
+#: src/engine/initial.cpp:54 src/engine/options.cpp:285
 msgid "Options"
 msgstr "Options"
 
@@ -248,51 +240,51 @@ msgstr "Espagnol"
 msgid "Error while writing Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:236
+#: src/engine/options.cpp:239
 msgid "None"
 msgstr "Aucun"
 
-#: src/engine/options.cpp:241
+#: src/engine/options.cpp:244
 msgid "Characters"
 msgstr "Personnages"
 
-#: src/engine/options.cpp:246
+#: src/engine/options.cpp:249
 msgid "All"
 msgstr "Tout"
 
-#: src/engine/options.cpp:262
+#: src/engine/options.cpp:265
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:265
+#: src/engine/options.cpp:268
 msgid "Pursue"
 msgstr "Poursuivre"
 
-#: src/engine/options.cpp:288
+#: src/engine/options.cpp:291
 msgid "Music Volume:"
 msgstr "Volume de Musique:"
 
-#: src/engine/options.cpp:303
+#: src/engine/options.cpp:306
 msgid "Effects Volume:"
 msgstr "Volume d'Effets:"
 
-#: src/engine/options.cpp:318
+#: src/engine/options.cpp:321
 msgid "Language:"
 msgstr "Langue:"
 
-#: src/engine/options.cpp:332
+#: src/engine/options.cpp:335
 msgid "Camera Mode:"
 msgstr "Mode de Caméra:"
 
-#: src/engine/options.cpp:345
+#: src/engine/options.cpp:348
 msgid "Enable Grass Effects (need particles)"
 msgstr "Permettre les effets d'herbe"
 
-#: src/engine/options.cpp:354
+#: src/engine/options.cpp:357
 msgid "Enable Particles Effects"
 msgstr "Permettre les particules"
 
-#: src/engine/options.cpp:364
+#: src/engine/options.cpp:367
 msgid "Reflections:"
 msgstr "Reflets:"
 
@@ -435,58 +427,53 @@ msgstr ""
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1147 src/engine/dccnit.cpp:1205
+#: src/engine/dccnit.cpp:1147 src/engine/dccnit.cpp:1210
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1191
+#: src/engine/dccnit.cpp:1195
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1548
+#: src/engine/dccnit.cpp:1555
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1606
+#: src/engine/dccnit.cpp:1614
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1738 src/fight/fightSystem.cpp:262
+#: src/engine/dccnit.cpp:1746 src/fight/fightSystem.cpp:294
 #, c-format
 msgid "%s attacks %s|"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1756
-#, c-format
-msgid "%s is dead."
-msgstr ""
-
-#: src/engine/dccnit.cpp:1820 src/engine/dccnit.cpp:3069
+#: src/engine/dccnit.cpp:1821 src/engine/dccnit.cpp:3070
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3040
+#: src/engine/dccnit.cpp:3041
 msgid "Map"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3062
+#: src/engine/dccnit.cpp:3063
 msgid "Shortcuts"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3064
+#: src/engine/dccnit.cpp:3065
 msgid "FPS:"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3066
+#: src/engine/dccnit.cpp:3067
 msgid "Press F1 for Help"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3074
+#: src/engine/dccnit.cpp:3075
 msgid "Menu"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3219
+#: src/engine/dccnit.cpp:3220
 msgid "|Exit Battle Mode"
 msgstr ""
 
@@ -563,15 +550,20 @@ msgstr ""
 msgid "|No more enemies."
 msgstr ""
 
-#: src/fight/fightSystem.cpp:167 src/fight/fightSystem.cpp:186
+#: src/fight/fightSystem.cpp:152
+#, c-format
+msgid "%s is dead."
+msgstr ""
+
+#: src/fight/fightSystem.cpp:199 src/fight/fightSystem.cpp:218
 msgid "New Round|"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:172 src/fight/fightSystem.cpp:191
+#: src/fight/fightSystem.cpp:204 src/fight/fightSystem.cpp:223
 msgid "Error: No Characters!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:272
+#: src/fight/fightSystem.cpp:304
 #, c-format
 msgid "|%s is dead!"
 msgstr ""
@@ -590,6 +582,11 @@ msgstr "Argh! Ne peux pas init SDL!\n"
 #, c-format
 msgid "Oxi! Can't ajust video mode!\n"
 msgstr "Oxi! Ne peux pas le video!\n"
+
+#: src/ia/iascript.cpp:696
+#, c-format
+msgid "Mission Completed: %d XP!"
+msgstr ""
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"
@@ -2449,3 +2446,9 @@ msgstr ""
 #: data/dialogs/initial.dlg:88
 msgid "Bye Ente!"
 msgstr ""
+
+#~ msgid "|Critical Miss!"
+#~ msgstr "|Manque Critique!"
+
+#~ msgid "|Critical Hit!"
+#~ msgstr "|Coup Critique!"
