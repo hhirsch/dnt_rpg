@@ -1155,8 +1155,11 @@ void engine::enterBattleMode(bool surprisePC)
       fight->insertNPC(ch, 0, briefInit);
       brief += briefInit + "|";
       numEnemies++;
-      /* Set the state to Idle */
-      ch->callIdleAnimation();
+      /* Set the state to Idle, if the character is alive */
+      if(ch->isAlive())
+      {
+         ch->callIdleAnimation();
+      }
       ch = (character*) ch->next; 
       SDL_Delay(1);
   }
@@ -1307,8 +1310,10 @@ void engine::treatPendingActions()
                   else
                   {
                      /* Define New Occuped Square */
-                     int posX =(int)floor(actor->xPosition / actualMap->squareSize());
-                     int posZ =(int)floor(actor->zPosition / actualMap->squareSize());
+                     int posX =(int)floor(actor->xPosition / 
+                                          actualMap->squareSize());
+                     int posZ =(int)floor(actor->zPosition / 
+                                          actualMap->squareSize());
                      actor->ocupaQuad = actualMap->relativeSquare(posX,posZ);
    
                      /* Define New Height */
@@ -1545,7 +1550,8 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                    briefTxt->addText("|");
                    if(activeCharacter->inventories->addObject(sobj->obj))
                    {
-                      sprintf(buf,gettext("%s taken."),sobj->obj->getName().c_str());
+                      sprintf(buf,gettext("%s taken."),
+                              sobj->obj->getName().c_str());
                       briefTxt->addText(buf);
                       shortCutsWindow->draw(mouseX,mouseY);
 

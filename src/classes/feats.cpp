@@ -190,7 +190,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       //TODO call other animation, if is defined
       attacker.callAttackAnimation();
 
-      //TODO verify if can use or not based on target thing and range
+      //TODO verify if can use or not based on target thing
 
       //verify Bonus
       bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus) + 
@@ -244,7 +244,8 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
          brief += gettext("Miss.");
          if( criticalMiss )
          {
-             brief += gettext("|Critical Miss!");
+             brief += "|";
+             brief += gettext("Critical Miss!");
              controller->addMessage(attacker.xPosition,
                                     attacker.yPosition+attacker.max[1],
                                     attacker.zPosition,
@@ -300,7 +301,8 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       if( criticalHit)
       {
-          brief += gettext("|Critical Hit!");
+          brief += "|";
+          brief += gettext("Critical Hit!");
           /* Show critical hit */
           controller->addMessage(attacker.xPosition,
                                  attacker.yPosition+attacker.max[1],
