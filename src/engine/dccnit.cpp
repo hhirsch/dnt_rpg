@@ -1191,7 +1191,9 @@ void engine::enterBattleMode(bool surprisePC)
          fullMovePCAction = false;
          canMove = true;
          canAttack = true;
+         fight->setActualActor(PCs->getActiveCharacter());
          brief += gettext("Surprise Attack Turn.");
+         brief += "|";
       }
       else
       {
@@ -1751,24 +1753,17 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                                           brief, 
                                                           msgController,
                                                           particleSystem);
-                     if(pers->lifePoints <= 0)
-                     {
-                        pers->kill();
-                     }
 
-                     if(!pers->isAlive())
-                     {
-                        brief += "|";
-                        sprintf(buf, gettext("%s is dead."), pers->nome.c_str());
-                        brief += buf;
-                     }
+                     activeCharacter->actualEnemy = pers;
+                     fight->verifyDeads(brief);
+
                      if( pers->psychoState != PSYCHO_HOSTILE)
                      {
                         pers->psychoState = PSYCHO_HOSTILE;
                      }
                      if( (shortCutsWindow != NULL) && (!brief.empty()))
                      {
-                        briefTxt->setText(brief);
+                        briefTxt->addText(brief);
                      }
 
                   }

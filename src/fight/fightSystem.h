@@ -76,6 +76,20 @@ class fightSystem
      ***************************************************************/
      character* actualCharacterTurn();
 
+    /*!
+     *************************************************************** 
+     * Sets actual character's that is in turn
+     * \param actor -> new character that is in turn
+     ***************************************************************/
+     void setActualActor(character* actor);
+
+     /*!
+      **************************************************************
+      * Verify all Deads that occurs on the turn.
+      * \param brief -> briefing to print
+      **************************************************************/
+      void verifyDeads(string& brief);
+
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
      fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /**< NPCs groups */

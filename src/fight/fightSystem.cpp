@@ -124,6 +124,46 @@ bool fightSystem::hasEnemies(character* pers, string& brief)
    return(false);
 }
 
+/***************************************************************
+ *                        setActualActor                       *
+ ***************************************************************/
+void fightSystem::setActualActor(character* actor)
+{
+   actualActor = actor;
+}
+
+/***************************************************************
+ *                         verifyDeads                         *
+ ***************************************************************/ 
+void fightSystem::verifyDeads(string& brief)
+{
+   char buf[512];
+   //TODO verify other deads than the target one (for example for a feat
+   // that affects an area instead of a target)!
+
+   /* Kill the target, if it is dead and not marked as dead */
+   if( (actualActor->actualEnemy->lifePoints <= 0) && 
+       (actualActor->actualEnemy->isAlive()) )
+   {
+      //FIXME Other states, like partial death to be implemented
+      actualActor->actualEnemy->kill();
+
+      brief += "|";
+      sprintf(buf, gettext("%s is dead!"), 
+              actualActor->actualEnemy->nome.c_str());
+      brief += buf;
+
+      //if(isPC(actualActor))
+      /* Calculate and apply the number of XP points 
+       * for killing this character */
+       //TODO
+   }
+   else
+   {
+      //TODO call defend or receive animation
+   }
+
+}
 
 /***************************************************************
  *                           doRound                           *
@@ -146,16 +186,8 @@ int fightSystem::doTurn(string& brief)
          pendingAnimation = false;
          actualActor->setState(STATE_IDLE);
 
-         /* Kill the target, if it is dead */
-         if(actualActor->actualEnemy->lifePoints <= 0)
-         {
-            //FIXME Other states, like partial death to be implemented
-            actualActor->actualEnemy->kill();
-         }
-         else
-         {
-            //TODO call defend or receive animation
-         }
+         verifyDeads(brief);
+
       }
       else
       {
@@ -266,14 +298,7 @@ void fightSystem::doNPCAction(character* pers, string& brief)
                                                 *pers->actualEnemy, brief,
                                                 msgController,
                                                 particleSystem);
-         
-      if(!pers->actualEnemy->isAlive())
-      {
-         sprintf(buffer, gettext("|%s is dead!"),
-                 pers->actualEnemy->nome.c_str());
-         brief += buffer;
-      }
-      
+      verifyDeads(brief);   
    }
 
    //TODO call the animations and sound effects.
