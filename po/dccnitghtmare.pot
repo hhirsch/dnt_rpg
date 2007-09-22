@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-21 10:51-0300\n"
+"POT-Creation-Date: 2007-09-22 16:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,24 +23,24 @@ msgstr ""
 msgid "Too far away for action!"
 msgstr ""
 
-#: src/classes/feats.cpp:244 src/classes/feats.cpp:260
+#: src/classes/feats.cpp:245 src/classes/feats.cpp:261
 msgid "Miss."
 msgstr ""
 
-#: src/classes/feats.cpp:248 src/classes/feats.cpp:252
+#: src/classes/feats.cpp:249 src/classes/feats.cpp:253
 msgid "Critical Miss!"
 msgstr ""
 
-#: src/classes/feats.cpp:296
+#: src/classes/feats.cpp:297
 #, c-format
 msgid "Hit for %d points."
 msgstr ""
 
-#: src/classes/feats.cpp:305 src/classes/feats.cpp:309
+#: src/classes/feats.cpp:306 src/classes/feats.cpp:310
 msgid "Critical Hit!"
 msgstr ""
 
-#: src/classes/feats.cpp:329
+#: src/classes/feats.cpp:330
 msgid "Not enought points to use!"
 msgstr ""
 
@@ -445,7 +444,7 @@ msgstr ""
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1746 src/fight/fightSystem.cpp:294
+#: src/engine/dccnit.cpp:1746 src/fight/fightSystem.cpp:331
 #, c-format
 msgid "%s attacks %s|"
 msgstr ""
@@ -553,20 +552,20 @@ msgstr ""
 
 #: src/fight/fightSystem.cpp:152
 #, c-format
-msgid "%s is dead."
+msgid "%s is dead!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:199 src/fight/fightSystem.cpp:218
+#: src/fight/fightSystem.cpp:184
+#, c-format
+msgid "%s receive %d XP for killing"
+msgstr ""
+
+#: src/fight/fightSystem.cpp:232 src/fight/fightSystem.cpp:251
 msgid "New Round|"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:204 src/fight/fightSystem.cpp:223
+#: src/fight/fightSystem.cpp:237 src/fight/fightSystem.cpp:256
 msgid "Error: No Characters!"
-msgstr ""
-
-#: src/fight/fightSystem.cpp:304
-#, c-format
-msgid "|%s is dead!"
 msgstr ""
 
 #: src/fight/initiative.cpp:38

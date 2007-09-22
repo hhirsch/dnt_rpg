@@ -43,6 +43,7 @@ class thing
       int age;                /**< Thing's Age */
       int xp;                 /**< The experience of the thing */
       float cr;               /**< The Challenge Rating */
+      int xpPercent;          /**< The percentual Left of XP to give */
       float cost;             /**< Cost Value */
       float walk_interval;    /**< The interval of walking (for multiply per
                                    WALK_ACTUALIZATION value. This is for 

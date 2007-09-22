@@ -168,20 +168,27 @@ void fightSystem::verifyDeads(string& brief)
             }
          }
 
-         /* Calculate and apply the number of XP points 
-          * for killing the target */
-          xp = getXP(actualActor, actualActor->actualEnemy->cr) / 
-               pcGroups[pcg].total();
-
          /* Apply the XP for all PC Characters on the group */
          for(i=0; i < pcGroups[pcg].total(); i++)
          {
             p = pcGroups[pcg].getAtPosition(i);
             if(p)
             {
+               /* Calculate and apply the number of XP points 
+                * for killing the target */
+               xp = (int)(actualActor->actualEnemy->xpPercent/100.0 * 
+                     getXP(actualActor, actualActor->actualEnemy->cr)) / 
+                     pcGroups[pcg].total();
                p->xp += xp;
+               brief += "|";
+               sprintf(buf, gettext("%s receive %d XP for killing"), 
+                       p->nome.c_str(), xp);
+               brief += buf;
             }
          }
+
+         /* Since is dead, the xpPercent avaible to give is now 0 */
+         actualActor->actualEnemy->xpPercent = 0;
       }
    }
    else

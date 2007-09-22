@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-21 10:51-0300\n"
+"POT-Creation-Date: 2007-09-22 16:26-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -23,24 +23,24 @@ msgstr "Habilidade Inválida"
 msgid "Too far away for action!"
 msgstr "Muito distante para realizar ação!"
 
-#: src/classes/feats.cpp:244 src/classes/feats.cpp:260
+#: src/classes/feats.cpp:245 src/classes/feats.cpp:261
 msgid "Miss."
 msgstr "Erro."
 
-#: src/classes/feats.cpp:248 src/classes/feats.cpp:252
+#: src/classes/feats.cpp:249 src/classes/feats.cpp:253
 msgid "Critical Miss!"
 msgstr "Erro Crítico!"
 
-#: src/classes/feats.cpp:296
+#: src/classes/feats.cpp:297
 #, c-format
 msgid "Hit for %d points."
 msgstr "Acertou para %d pontos."
 
-#: src/classes/feats.cpp:305 src/classes/feats.cpp:309
+#: src/classes/feats.cpp:306 src/classes/feats.cpp:310
 msgid "Critical Hit!"
 msgstr "Dano Crítico!"
 
-#: src/classes/feats.cpp:329
+#: src/classes/feats.cpp:330
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
@@ -444,7 +444,7 @@ msgstr "Pegou %s."
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1746 src/fight/fightSystem.cpp:294
+#: src/engine/dccnit.cpp:1746 src/fight/fightSystem.cpp:331
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
@@ -552,21 +552,21 @@ msgstr "|Sem mais inimigos."
 
 #: src/fight/fightSystem.cpp:152
 #, c-format
-msgid "%s is dead."
-msgstr "%s morreu."
+msgid "%s is dead!"
+msgstr "|%s morreu!"
 
-#: src/fight/fightSystem.cpp:199 src/fight/fightSystem.cpp:218
+#: src/fight/fightSystem.cpp:184
+#, c-format
+msgid "%s receive %d XP for killing"
+msgstr "%s recebe %d XP por matar"
+
+#: src/fight/fightSystem.cpp:232 src/fight/fightSystem.cpp:251
 msgid "New Round|"
 msgstr "Novo Turno|"
 
-#: src/fight/fightSystem.cpp:204 src/fight/fightSystem.cpp:223
+#: src/fight/fightSystem.cpp:237 src/fight/fightSystem.cpp:256
 msgid "Error: No Characters!"
 msgstr "Erro: Sem Personagens!"
-
-#: src/fight/fightSystem.cpp:304
-#, c-format
-msgid "|%s is dead!"
-msgstr "|%s morreu!"
 
 #: src/fight/initiative.cpp:38
 #, c-format
@@ -3088,6 +3088,9 @@ msgstr "Adeus Árvore"
 #: data/dialogs/initial.dlg:88
 msgid "Bye Ente!"
 msgstr "Adeus Ente!"
+
+#~ msgid "%s is dead."
+#~ msgstr "%s morreu."
 
 #~ msgid "|Critical Miss!"
 #~ msgstr "|Erro Crítico!"
