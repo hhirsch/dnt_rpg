@@ -27,22 +27,23 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    intWindow = inter->insertWindow(90,100,710,499, gettext("Race"));
 
    /* Race Image */
+   intWindow->getObjectsList()->insertTextBox(278,18,344,345,2,"");
    raceImage = intWindow->getObjectsList()->insertPicture(279,152,0,0,NULL);   
    raceImage->set(actualRace->image);
 
    /* Race Description */
-   textDescTitle = intWindow->getObjectsList()->insertTextBox(6,20,277,35,1,
+   textDescTitle = intWindow->getObjectsList()->insertTextBox(6,18,277,35,1,
                                             gettext("Race Description"));
-   textDescTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
+   textDescTitle->setFont(FMINI,2,ALIGN_CENTER);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,
               (actualRace->citation + "||" + actualRace->description).c_str(),
               intWindow->getSurface());
 
    /* Race Characteristics */
-   textCharacTitle = intWindow->getObjectsList()->insertTextBox(345,20,615,35,1,
+   textCharacTitle = intWindow->getObjectsList()->insertTextBox(345,18,615,35,1,
                                        gettext("Race Characteristcs"));
-   textCharacTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
+   textCharacTitle->setFont(FMINI,2,ALIGN_CENTER);
 
    textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,
                                               getCharacteristics().c_str(),
@@ -55,14 +56,16 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
                                                           ">",0);
    textName = intWindow->getObjectsList()->insertTextBox(22,346,599,364,1, 
                                                   actualRace->name.c_str());
-   textName->setFont(FMINI,1,ALIGN_LEFT);
+   textName->setFont(FMINI,1,ALIGN_CENTER);
+
+   intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
 
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(543,370,613,389,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(541,370,611,389,
                                          gettext("Confirm"),1);
    
    /* Cancel Button */
-   buttonCancel = intWindow->getObjectsList()->insertButton(8,370,78,389,
+   buttonCancel = intWindow->getObjectsList()->insertButton(10,370,80,389,
                                                gettext("Cancel"),1);
 
    /* Open Skill Window */

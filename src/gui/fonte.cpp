@@ -45,9 +45,18 @@ int write(SDL_Surface *screen,int x,int y,const char* text,int init,
    int c;
 
    if (Alinhamento == ALIGN_CENTER)
-      x-=(strlen(text)*(Fonte.incCP) / 2);
+   {
+      if(Tamanho < 2)
+      {
+         x -= (strlen(text)*(Fonte.incCP) / 2);
+      }
+      else if(Tamanho == 2)
+      {
+         x -= (strlen(text)*(Fonte.incCP+1) / 2);
+      }
+   }
    else if (Alinhamento == ALIGN_RIGHT)
-      x-=(strlen(text)*(Fonte.incCP));
+      x -= (strlen(text)*(Fonte.incCP));
 
    k=y;
    for(aux=init;(aux<=end);aux++)

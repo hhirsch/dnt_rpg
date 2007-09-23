@@ -46,7 +46,18 @@ void textBox::draw(SDL_Surface *screen)
    }
    color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
    defineFont(fontName.c_str(),fontAlign,fontSize);
-   write(screen, x1+5, y1, text.c_str(), x1+5, y1, x2, y2);
+   if(fontAlign == ALIGN_LEFT)
+   {
+      write(screen, x1+5, y1, text.c_str(), x1+5, y1, x2, y2);
+   }
+   else if(fontAlign == ALIGN_CENTER)
+   {
+      write(screen, ((x2-x1-5) / 2)+x1+5, y1, text.c_str(), x1+5, y1, x2, y2);
+   }
+   else
+   {
+      write(screen, x2, y1, text.c_str(), x1+5, y1, x2, y2);
+   }
 }
 
 /*******************************************************

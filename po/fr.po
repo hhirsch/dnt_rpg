@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-22 16:26-0300\n"
+"POT-Creation-Date: 2007-09-23 14:21-0300\n"
 "PO-Revision-Date: 2007-09-13 11:00+0000\n"
 "Last-Translator: farrer <farrer@dnteam.org>\n"
 "Language-Team: FRANÇAIS <fr@li.org>\n"
@@ -65,14 +65,14 @@ msgstr "Alignement"
 
 #: src/engine/alignwindow.cpp:47 src/engine/aspectwindow.cpp:58
 #: src/engine/attwindow.cpp:174 src/engine/options.cpp:380
-#: src/engine/racewindow.cpp:59 src/engine/classwindow.cpp:61
+#: src/engine/racewindow.cpp:65 src/engine/classwindow.cpp:61
 #: src/engine/skillwindow.cpp:85
 msgid "Confirm"
 msgstr "Comfirmez"
 
 #: src/engine/alignwindow.cpp:51 src/engine/aspectwindow.cpp:62
 #: src/engine/attwindow.cpp:178 src/engine/barterwindow.cpp:34
-#: src/engine/options.cpp:384 src/engine/racewindow.cpp:63
+#: src/engine/options.cpp:384 src/engine/racewindow.cpp:69
 #: src/engine/classwindow.cpp:65 src/engine/skillwindow.cpp:89
 msgid "Cancel"
 msgstr "Annuler"
@@ -292,35 +292,35 @@ msgstr "Reflets:"
 msgid "Race"
 msgstr "Race"
 
-#: src/engine/racewindow.cpp:34
+#: src/engine/racewindow.cpp:36
 msgid "Race Description"
 msgstr "Description Raciale"
 
-#: src/engine/racewindow.cpp:43
+#: src/engine/racewindow.cpp:45
 msgid "Race Characteristcs"
 msgstr "Caractéristiques Raciales"
 
-#: src/engine/racewindow.cpp:78
+#: src/engine/racewindow.cpp:84
 msgid "Race Modifiers||"
 msgstr "Modificateurs Raciales||"
 
-#: src/engine/racewindow.cpp:86
+#: src/engine/racewindow.cpp:92
 msgid "No Modifiers.||"
 msgstr "Aucuns Modificateurs.||"
 
-#: src/engine/racewindow.cpp:90
+#: src/engine/racewindow.cpp:96
 msgid "Race Feats||"
 msgstr "Dons Raciales||"
 
-#: src/engine/racewindow.cpp:98 src/engine/classwindow.cpp:156
+#: src/engine/racewindow.cpp:104 src/engine/classwindow.cpp:156
 msgid "No Feats.|"
 msgstr "Aucuns Dons.|"
 
-#: src/engine/racewindow.cpp:103
+#: src/engine/racewindow.cpp:109
 msgid "|Race Skills||"
 msgstr "|Compétences Raciales||"
 
-#: src/engine/racewindow.cpp:119 src/engine/classwindow.cpp:177
+#: src/engine/racewindow.cpp:125 src/engine/classwindow.cpp:177
 msgid "No Skills."
 msgstr "Aucunes Compétences."
 

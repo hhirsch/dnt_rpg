@@ -19,7 +19,7 @@ farso_colors::farso_colors()
    colorCont[2].R = 254;
    colorCont[2].G = 125;
    colorCont[2].B = 120;
-   colorWindow.R = 188; 
+   colorWindow.R = 188;
    colorWindow.G = 2;
    colorWindow.B = 9;
    colorText.R = 255;
@@ -36,6 +36,7 @@ farso_colors::farso_colors()
    colorButton.B = 9;
    colorMenu.R = 188;
    colorMenu.G = 2;
-   colorMenu.B = 9;
+   colorMenu.B = 9; 
+
 } 
 
