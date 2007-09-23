@@ -290,11 +290,13 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = intWindow->getObjectsList()->insertTextBox(8,27,145,44,0,
                                          gettext("Music Volume:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonMusDec = intWindow->getObjectsList()->insertButton(146,27,156,44,"<",0);
-   txtMusicVolume = intWindow->getObjectsList()->insertTextBox(157,27,197,44,1,
-                                 saux.c_str());
+   buttonMusDec = intWindow->getObjectsList()->insertButton(146,27,156,44,
+                                                            "<",0);
+   txtMusicVolume = intWindow->getObjectsList()->insertTextBox(157,27,197,44,
+                                                               1,saux.c_str());
    txtMusicVolume->setFont(FMINI,1,ALIGN_LEFT);
-   buttonMusSum = intWindow->getObjectsList()->insertButton(198,27,208,44,">",0);
+   buttonMusSum = intWindow->getObjectsList()->insertButton(198,27,208,44,
+                                                            ">",0);
    intWindow->getObjectsList()->insertPicture(212,27,40,112,
                                   "../data/texturas/options/music.png");
    
@@ -305,11 +307,13 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = intWindow->getObjectsList()->insertTextBox(8,52,145,69,0,
                                          gettext("Effects Volume:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonSndDec = intWindow->getObjectsList()->insertButton(146,52,156,69,"<",0);
+   buttonSndDec = intWindow->getObjectsList()->insertButton(146,52,156,69,
+                                                            "<",0);
    txtSndfxVolume = intWindow->getObjectsList()->insertTextBox(157,52,197,69,1,
                                  saux.c_str());
    txtSndfxVolume->setFont(FMINI,1,ALIGN_LEFT);
-   buttonSndSum = intWindow->getObjectsList()->insertButton(198,52,208,69,">",0);
+   buttonSndSum = intWindow->getObjectsList()->insertButton(198,52,208,69,
+                                                            ">",0);
    intWindow->getObjectsList()->insertPicture(212,52,40,112,
                                   "../data/texturas/options/sndfx.png");
 
@@ -320,11 +324,13 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = intWindow->getObjectsList()->insertTextBox(8,88,145,105,0,
                                                    gettext("Language:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonLangDec = intWindow->getObjectsList()->insertButton(121,88,131,105,"<",0);
+   buttonLangDec = intWindow->getObjectsList()->insertButton(121,88,131,105,
+                                                             "<",0);
    txtLanguage = intWindow->getObjectsList()->insertTextBox(132,88,197,105,1,
                                  saux.c_str());
    txtLanguage->setFont(FMINI,1,ALIGN_LEFT);
-   buttonLangSum = intWindow->getObjectsList()->insertButton(198,88,208,105,">",0);
+   buttonLangSum = intWindow->getObjectsList()->insertButton(198,88,208,105,
+                                                             ">",0);
    intWindow->getObjectsList()->insertPicture(212,88,40,112,
                                   "../data/texturas/options/language.png");
 
@@ -334,11 +340,13 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = intWindow->getObjectsList()->insertTextBox(8,126,145,143,0,
                                             gettext("Camera Mode:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonCamDec = intWindow->getObjectsList()->insertButton(121,126,131,143,"<",0);
+   buttonCamDec = intWindow->getObjectsList()->insertButton(121,126,131,143,
+                                                            "<",0);
    txtCamera = intWindow->getObjectsList()->insertTextBox(132,126,197,143,1,
                                  saux.c_str());
    txtCamera->setFont(FMINI,1,ALIGN_LEFT);
-   buttonCamSum = intWindow->getObjectsList()->insertButton(198,126,208,143,">",0);
+   buttonCamSum = intWindow->getObjectsList()->insertButton(198,126,208,143,
+                                                            ">",0);
    intWindow->getObjectsList()->insertPicture(214,126,40,112,
                                   "../data/texturas/options/camera.png");
 
@@ -356,7 +364,8 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = intWindow->getObjectsList()->insertTextBox(20,174,200,191,0,
                                          gettext("Enable Particles Effects"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   cxSelParticles = intWindow->getObjectsList()->insertCxSel(8,178, enableParticles);
+   cxSelParticles = intWindow->getObjectsList()->insertCxSel(8,178, 
+                                                             enableParticles);
    intWindow->getObjectsList()->insertPicture(214,174,40,112,
                                   "../data/texturas/options/particles.png");
 
@@ -366,17 +375,19 @@ void options::DisplayOptionsScreen(interface* interf)
    qt = intWindow->getObjectsList()->insertTextBox(8,203,145,220,0,
                                             gettext("Reflections:"));
    qt->setFont(FMINI,1,ALIGN_LEFT);
-   buttonReflDec = intWindow->getObjectsList()->insertButton(121,203,131,220,"<",0);
+   buttonReflDec = intWindow->getObjectsList()->insertButton(121,203,131,220,
+                                                             "<",0);
    txtReflexion = intWindow->getObjectsList()->insertTextBox(132,203,197,220,1,
                                  saux.c_str());
    txtReflexion->setFont(FMINI,1,ALIGN_LEFT);
-   buttonReflSum = intWindow->getObjectsList()->insertButton(198,203,208,220,">",0);
+   buttonReflSum = intWindow->getObjectsList()->insertButton(198,203,208,220,
+                                                             ">",0);
    intWindow->getObjectsList()->insertPicture(212,203,40,220,
                                   "../data/texturas/options/reflexions.png");
 
 
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(181,235,251,254,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(177,235,247,254,
                                               gettext("Confirm"),1);
    
    /* Cancel Button */
@@ -384,11 +395,12 @@ void options::DisplayOptionsScreen(interface* interf)
                                               gettext("Cancel"),1);
 
    /* borders */
-   intWindow->getObjectsList()->insertTextBox(5,20,250,77,1,"");
-   intWindow->getObjectsList()->insertTextBox(5,78,250,115,1,"");
-   intWindow->getObjectsList()->insertTextBox(5,116,250,153,1,"");
-   intWindow->getObjectsList()->insertTextBox(5,154,250,192,1,"");
-   intWindow->getObjectsList()->insertTextBox(5,193,250,230,1,"");
+   intWindow->getObjectsList()->insertTextBox(5,20,250,77,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,78,250,115,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,116,250,153,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,154,250,192,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,193,250,230,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,231,250,258,2,"");
 
    
    /* Open Skill Window */
