@@ -195,7 +195,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    intWindow->getObjectsList()->insertTextBox(6,246,519,273,2,"");
 
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(447,249,517,268,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(445,249,515,268,
                                               gettext("Confirm"),1);
    
    /* Cancel Button */

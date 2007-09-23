@@ -33,15 +33,15 @@ class skillWindow
       window*   intWindow;           /**< Pointer to the internal window */
 
    private:
-      skills*      externalSkill;    /**< Pointer to the skillList with descriptions */
-      skills*      saveSkill;        /**< Pointer to the edited skill list */
-      int          avaiblePoints;    /**< Avaible points to distribute */
-      int          curSkill;         /**< Actual Skill */
-      textBox* desc;             /**< Description Text */
-      textBox* txtAvaiblePoints; /**< Avaible Points Text */
-      textBox* skillName;        /**< Actual Skill Name */
-      textBox* txtPoints;        /**< Actual Points Text */
-      textBox* txtCosts;         /**< Actual Cost Text */
+      skills*      externalSkill; /**< Pointer to SkillList with descriptions */
+      skills*      saveSkill;     /**< Pointer to the edited skill list */
+      int          avaiblePoints; /**< Avaible points to distribute */
+      int          curSkill;      /**< Actual Skill */
+      rolBar* desc;               /**< Description Text */
+      textBox* txtAvaiblePoints;  /**< Avaible Points Text */
+      textBox* skillName;         /**< Actual Skill Name */
+      textBox* txtPoints;         /**< Actual Points Text */
+      textBox* txtCosts;          /**< Actual Cost Text */
 
       button* buttonSum;
       button* buttonDec;
@@ -50,7 +50,7 @@ class skillWindow
       button* buttonConfirm;
       button* buttonCancel;
 
-      picture*     skFig;            /**< Actual skill Image */
+      picture*     skFig;         /**< Actual skill Image */
 
 };
 
