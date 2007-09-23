@@ -50,7 +50,7 @@ class attWindow
       textBox* attPoints[6];  /**< Attributes Points Texts */
       textBox* attTotals[6];  /**< Attributes Totals Texts */
       textBox* attMods[6];    /**< Attributes Totals Modifiers */
-      textBox* textDesc;      /**< Description Text */
+      rolBar* textDesc;       /**< Description Text */
       textBox* textDescTitle; /**< Description Title Text */
 
       button* attButtonNext[6];    /**< Next Buttons */
