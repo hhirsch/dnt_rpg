@@ -17,48 +17,52 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    loadImages();
 
    usedCharacter = dude;
-   intWindow = inter->insertWindow(276,206,531,320,gettext("Aspect"));
+   intWindow = inter->insertWindow(275,206,532,315,gettext("Aspect"));
 
    /* Portrait Figure */
-   figurePortrait = intWindow->getObjectsList()->insertPicture(5,25,0,0,NULL);
+   figurePortrait = intWindow->getObjectsList()->insertPicture(5,18,0,0,NULL);
    figurePortrait->set(images[curImage].image);
 
    /* Previous Image Button */
-   buttonPreviousImage = intWindow->getObjectsList()->insertButton(5,90,
-                                                                  19,108,"<",0);
+   buttonPreviousImage = intWindow->getObjectsList()->insertButton(5,83,
+                                                                  19,101,"<",0);
    /* Next Image Button */
-   buttonNextImage = intWindow->getObjectsList()->insertButton(55,90,69,108,
+   buttonNextImage = intWindow->getObjectsList()->insertButton(55,83,69,101,
                                                                  ">",0);
    /* Contorn to the previous and next buttons */
-   intWindow->getObjectsList()->insertTextBox(20,90,54,108,1,"");
+   intWindow->getObjectsList()->insertTextBox(20,83,54,101,1,"");
 
    /* Name Text */
-   intWindow->getObjectsList()->insertTextBox(72,25,112,39,1,gettext("Name:"));
-   textName = intWindow->getObjectsList()->insertTextBar(113,25,251,39,
-                                                                  "Bruno",0);
+   intWindow->getObjectsList()->insertTextBox(72,20,112,34,1,gettext("Name:"));
+   textName = intWindow->getObjectsList()->insertTextBar(113,20,251,34,
+                                                                  "",0);
 
    /* Age Text */
-   intWindow->getObjectsList()->insertTextBox(72,40,112,54,1,gettext("Age:"));
-   textAge = intWindow->getObjectsList()->insertTextBar(113,40,143,54,"20",0);
+   intWindow->getObjectsList()->insertTextBox(72,35,112,49,1,gettext("Age:"));
+   textAge = intWindow->getObjectsList()->insertTextBar(113,35,143,49,"20",0);
 
    /* Sex Selectors */
-   intWindow->getObjectsList()->insertTextBox(72,55,112,69,1,gettext("Sex:"));
-   cxSelSexF = intWindow->getObjectsList()->insertCxSel(113, 57, false);
-   intWindow->getObjectsList()->insertPicture(125,55,0,0,
+   intWindow->getObjectsList()->insertTextBox(72,50,112,64,1,gettext("Sex:"));
+   cxSelSexF = intWindow->getObjectsList()->insertCxSel(113, 52, false);
+   intWindow->getObjectsList()->insertPicture(125,50,0,0,
                                   "../data/texturas/aspectw/sex_f.png");
-   cxSelSexM = intWindow->getObjectsList()->insertCxSel(143, 57, true);
-   intWindow->getObjectsList()->insertPicture(155,55,0,0,
+   cxSelSexM = intWindow->getObjectsList()->insertCxSel(143, 52, true);
+   intWindow->getObjectsList()->insertPicture(155,50,0,0,
                                   "../data/texturas/aspectw/sex_m.png");
-   cxSelSexO = intWindow->getObjectsList()->insertCxSel(173, 57, false);
-   intWindow->getObjectsList()->insertPicture(185,55,0,0,
+   cxSelSexO = intWindow->getObjectsList()->insertCxSel(173, 52, false);
+   intWindow->getObjectsList()->insertPicture(185,50,0,0,
                                   "../data/texturas/aspectw/sex_o.png");
 
+   /* Contorns */
+   intWindow->getObjectsList()->insertTextBox(70,18,254,74,2,"");
+   intWindow->getObjectsList()->insertTextBox(70,75,254,101,2,"");
+
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(181,90,251,108, 
+   buttonConfirm = intWindow->getObjectsList()->insertButton(181,79,251,97, 
                                                  gettext("Confirm"),1);
    
    /* Cancel Button */
-   buttonCancel = intWindow->getObjectsList()->insertButton(72,90,140,108, 
+   buttonCancel = intWindow->getObjectsList()->insertButton(72,79,140,97, 
                                                   gettext("Cancel"),1);
 
    intWindow->setExternPointer(&intWindow);

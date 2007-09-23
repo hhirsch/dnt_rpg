@@ -24,10 +24,11 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(270,186,537,441,
+   intWindow = inter->insertWindow(270,186,537,444,
                                   gettext("Tendency & Alignment"));
+
    /* Align Image */
-   alignImage = intWindow->getObjectsList()->insertPicture(111,185,0,0,NULL);   
+   alignImage = intWindow->getObjectsList()->insertPicture(103,185,0,0,NULL);   
    alignImage->set(actualAlign->image);
 
    /* Align Description */
@@ -43,12 +44,19 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    textName->setFont(FMINI,1,ALIGN_LEFT);
 
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(193,225,263,244, 
+   buttonConfirm = intWindow->getObjectsList()->insertButton(188,229,258,248, 
                                               gettext("Confirm"),1);
    
    /* Cancel Button */
-   buttonCancel = intWindow->getObjectsList()->insertButton(8,225,78,244,
+   buttonCancel = intWindow->getObjectsList()->insertButton(11,229,81,248,
                                                gettext("Cancel"),1);
+
+   /* Contorns */
+   intWindow->getObjectsList()->insertTextBox(5,181,87,224,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,225,87,252,2,"");
+   intWindow->getObjectsList()->insertTextBox(88,181,181,252,2,"");
+   intWindow->getObjectsList()->insertTextBox(182,181,262,224,2,"");
+   intWindow->getObjectsList()->insertTextBox(182,225,262,252,2,"");
 
    /* Open Skill Window */
    intWindow->setExternPointer(&intWindow);
