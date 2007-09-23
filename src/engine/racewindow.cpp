@@ -25,32 +25,35 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    
    /* create intWindow */
    intWindow = inter->insertWindow(90,100,710,499, gettext("Race"));
+
    /* Race Image */
-   raceImage = intWindow->getObjectsList()->insertPicture(7,20,0,0,NULL);   
+   raceImage = intWindow->getObjectsList()->insertPicture(279,152,0,0,NULL);   
    raceImage->set(actualRace->image);
 
    /* Race Description */
-   textDescTitle = intWindow->getObjectsList()->insertTextBox(71,20,342,35,1,
+   textDescTitle = intWindow->getObjectsList()->insertTextBox(6,20,277,35,1,
                                             gettext("Race Description"));
    textDescTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
    
-   textDesc = intWindow->getObjectsList()->insertRolBar(71,36,342,345,
+   textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,
               (actualRace->citation + "||" + actualRace->description).c_str(),
               intWindow->getSurface());
 
    /* Race Characteristics */
-   textCharacTitle = intWindow->getObjectsList()->insertTextBox(343,20,613,35,1,
+   textCharacTitle = intWindow->getObjectsList()->insertTextBox(345,20,615,35,1,
                                        gettext("Race Characteristcs"));
    textCharacTitle->setFont(FHELVETICA,1,ALIGN_LEFT);
 
-   textCharac = intWindow->getObjectsList()->insertRolBar(343,36,613,345,
+   textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,
                                               getCharacteristics().c_str(),
                                               intWindow->getSurface());
 
    /* Name and Selectors */
-   buttonPrevious = intWindow->getObjectsList()->insertButton(71,346,86,364,"<",0);
-   buttonNext = intWindow->getObjectsList()->insertButton(598,346,613,364,">",0);
-   textName = intWindow->getObjectsList()->insertTextBox(87,346,597,364,1, 
+   buttonPrevious = intWindow->getObjectsList()->insertButton(6,346,21,364,
+                                                              "<",0);
+   buttonNext = intWindow->getObjectsList()->insertButton(600,346,615,364,
+                                                          ">",0);
+   textName = intWindow->getObjectsList()->insertTextBox(22,346,599,364,1, 
                                                   actualRace->name.c_str());
    textName->setFont(FMINI,1,ALIGN_LEFT);
 

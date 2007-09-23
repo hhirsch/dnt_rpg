@@ -10,9 +10,9 @@
 class farso_color
 {
    public:
-      int R, /**< Red [0,127] */
-          G, /**< Green [0,127] */
-          B; /**< Blue [0,127] */
+      int R, /**< Red [0,255] */
+          G, /**< Green [0,255] */
+          B; /**< Blue [0,255] */
 };
 
 /*! The GUI Colors Definition */

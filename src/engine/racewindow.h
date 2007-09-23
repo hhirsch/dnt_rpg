@@ -52,6 +52,10 @@ class raceWindow
       textBox* textCitation;
 
       picture* raceImage;
+      /*picture* prev2RaceImage;
+      picture* prevRaceImage;
+      picture* nextRaceImage;
+      picture* next2RaceImage;*/
 
       string getCharacteristics();
 

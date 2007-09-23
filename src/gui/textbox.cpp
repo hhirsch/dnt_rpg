@@ -69,3 +69,14 @@ void textBox::setColor(int R, int G, int B)
    Colors.colorText.B = B;
 }
 
+/*******************************************************
+ *                     setBackColor                    *
+ *******************************************************/
+void textBox::setBackColor(int R, int G, int B)
+{
+   Colors.colorButton.R = R;
+   Colors.colorButton.G = G;
+   Colors.colorButton.B = B;
+}
+
+

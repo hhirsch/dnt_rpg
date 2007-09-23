@@ -41,6 +41,12 @@ class textBox: public guiObject
        * \param G -> green color
        * \param B -> blue color */
       void setColor(int R, int G, int B);
+
+      /*! Set the Back color
+       * \param R -> red color
+       * \param G -> green color
+       * \param B -> blue color */
+      void setBackColor(int R, int G, int B);
    private:
       int framed;          /**< Type of the frame. 0 for none */
       string fontName;     /**< Font FileName */
