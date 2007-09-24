@@ -18,10 +18,19 @@ class classe
       /*! Destructor */
       ~classe();
 
-      /*! Apply the Skill Costs, based on the race (in other words,
+      /*! Apply the Skill Costs, based on the classe (in other words,
        * put the cost = 1 to all race skills)
        * \param sk -> character skill list */
       void applySkillCosts(skills* sk);
+
+      /*! Get the attributes modifiers based on the classe
+       * \param mods -> the modifiers
+       * \param sum -> if is to sum to the mods or just set the mods as
+       *               the modifiers. (the sum = true is util when calling
+       *               this function after a call to the similar one at
+       *               the races)
+       * \param sk -> character skill list */
+      void getAttModifiers(int mods[6], bool sum, skills* sk);
 
       int intID;                 /**< Integer Identifier of the class */
       string strID;              /**< String Identifier of the class */

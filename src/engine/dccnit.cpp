@@ -752,6 +752,8 @@ int engine::CharacterScreen(GLuint idTextura)
    guiObject* object = NULL;
    int eventInfo = NOTHING;
 
+   int mods[6];
+
    int status = 0;
 
    /* First Load PCs */
@@ -846,8 +848,9 @@ int engine::CharacterScreen(GLuint idTextura)
             {
                status = 3;
                delete(alWindow);
+               activeCharacter->getAttModifiers(mods);
                atWindow = new attWindow(skillsList, &activeCharacter->sk,
-                                        gui, false);
+                                        gui, mods, false);
             }
             else if(charCreation == ALIGNW_CANCEL)
             {
@@ -893,8 +896,9 @@ int engine::CharacterScreen(GLuint idTextura)
             {
                status = 3;
                delete(skWindow);
+               activeCharacter->getAttModifiers(mods);
                atWindow = new attWindow(skillsList, &activeCharacter->sk,
-                                        gui, true);
+                                        gui, mods, true);
             }
          }
          /* Aspect Window Opened */

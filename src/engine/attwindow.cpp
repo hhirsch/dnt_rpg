@@ -11,7 +11,7 @@
  *                      Constructor                           *
  **************************************************************/
 attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
-                     bool usePreviousValues)
+                     int modifiers[6],bool usePreviousValues)
 {
    int i;
    string saux;
@@ -30,6 +30,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
       points[i] = 0;
       used[i] = false;
       attPointsIndex[i] = -1;
+      rcModifiers[i] = modifiers[i];
    }
 
    /* create intWindow */
@@ -412,18 +413,23 @@ int attWindow::assignAttMod(int att)
 {
    char tmpMod[10];
    char tmpTotal[10];
-   string total = "";
-   int attBonus = (int)floor((points[attPointsIndex[att]]-10) / 2.0);
+   int attBonus = 0;
+   string total;
 
+   /* Get the assign value */
    saveSkill->m_skills[att+1].points = points[attPointsIndex[att]];
 
-   //TODO calculate race and class bonus
-   
-   if(points[attPointsIndex[att]] < 10)
+   /* Apply the modifiers */
+   saveSkill->m_skills[att+1].points += rcModifiers[att];
+
+   /* Get the bonus */
+   attBonus = (int)floor((saveSkill->m_skills[att+1].points-10) / 2.0);
+
+   if(saveSkill->m_skills[att+1].points < 10)
    {
       total = "0";
    }
-   sprintf(tmpTotal,"%d",points[attPointsIndex[att]]);
+   sprintf(tmpTotal,"%d",saveSkill->m_skills[att+1].points);
    total += tmpTotal;
 
    if(attBonus > 0)

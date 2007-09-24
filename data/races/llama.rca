@@ -4,8 +4,8 @@ gettext("Human  llamas  are  humans  that  believe|earnestly  they are nearly de
 2
 -4 SOCIAL_TESTS ALL ALL ALL
 gettext("For  having   sociopats  tendencies,  the|Human  Llammas receive -4  in  all social|tests.")
-2 ATT INTELIGENCY ALL ALL
-gettext("Human llamas receive +2 in Inteligency.")
+2 ATT INTELLIGENCE ALL ALL
+gettext("Human llamas receive +2 in Intelligence.")
 2
 NEED_WATER
 I_DISLIKE_YOU

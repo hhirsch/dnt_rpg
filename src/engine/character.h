@@ -51,6 +51,10 @@ class character: public aniModel
       /*! Destructor */
       ~character();
 
+      /*! Get all the attributes modifiers for the character
+       * \param mods -> vector that will contain the attribute modifiers */
+      void getAttModifiers(int mods[6]);
+
       /*! Define the image used as portrait
        * \param portraitFile -> file name of the image to use*/
       void definePortrait(string portraitFile);

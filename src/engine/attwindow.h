@@ -21,9 +21,10 @@ class attWindow
        * \param sk -> skill List Descriptions
        * \param savSkill -> skill to be edited
        * \param inter -> GUI interface to be used
+       * \param modifiers -> race and class Modifiers
        * \param usePreviousValues -> if will use previous values or new ones */
       attWindow(skills* sk, skills* savSkill, interface* inter, 
-                bool usePreviousValues);
+                int modifiers[6], bool usePreviousValues);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
@@ -42,6 +43,7 @@ class attWindow
       int points[6];              /**< Rolled Points */
       int attPointsIndex[6];      /**< Index of the selected points for att */
       bool used[6];               /**< Mark Used Rolled Points */
+      int rcModifiers[6];         /**< Race And class modifiers */
 
       skills* externalSkill;      /**< Pointer to skill List with description */
       skills* saveSkill;          /**< Pointer to thje edited skill List */

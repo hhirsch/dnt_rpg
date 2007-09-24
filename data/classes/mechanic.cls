@@ -5,7 +5,7 @@ d8
 4
 3 ATT INTELLIGENCE ALL ALL
 gettext("Students  of Mechanics are going to study|crazy, if they want to  do something more|than  hold tight bolts in their lifes, so|they receive + 3 in Intelligence.")
-3 ATT WISDOW ALL ALL
+3 ATT WISDOM ALL ALL
 gettext("Due  to the quantity of information about|steels,  kinds  of   tempera,   tools  of|plants,  electronic   systems  and  other|things that  are  obliged to swallow, the|Students  of   Mechanics  receive  +3  in|Wisdom.")
 -2 ATT STRENGTH
 gettext("They  receive -2 in  strength,  one  time|that the  mouse  for  design  in  AutoCAD|doesn't weigh much.")

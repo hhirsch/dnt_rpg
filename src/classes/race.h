@@ -21,6 +21,15 @@ class race
        * \param sk -> character skill list */
       void applySkillCosts(skills* sk);
 
+      /*! Get the attributes modifiers based on the race
+       * \param mods -> the modifiers
+       * \param sum -> if is to sum to the mods or just set the mods as
+       *               the modifiers. (the sum = true is util when calling
+       *               this function after a call to the similar one at
+       *               the classes)
+       * \param sk -> character skill list */
+      void getAttModifiers(int mods[6], bool sum, skills* sk);
+
 
       int intID;              /**< Integer Identifier of the race */
       string strID;           /**< String Identifier of the race */

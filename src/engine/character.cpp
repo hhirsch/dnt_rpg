@@ -95,6 +95,27 @@ character::~character()
 }
 
 /*********************************************************************
+ *                         getAttModifiers                           *
+ *********************************************************************/
+void character::getAttModifiers(int mods[6])
+{
+   /* Get the race attributes modifiers */
+   actualRace->getAttModifiers(mods, false, &sk);
+
+   /* Get and add all the classes attributes modifiers */
+   int i;
+   for(i = 0; i < MAX_DISTINCT_CLASSES; i++)
+   {
+      if(actualClass[i] != NULL)
+      {
+         actualClass[i]->getAttModifiers(mods, true, &sk);
+      }
+   }
+
+   /* TODO -> get attribute modifiers from itens, spells, etc. */
+}
+
+/*********************************************************************
  *                         getGeneralScript                          *
  *********************************************************************/
 void* character::getGeneralScript()

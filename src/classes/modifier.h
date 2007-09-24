@@ -9,6 +9,9 @@ using namespace std;
 
 #define MAX_ATTACKS 6
 
+
+#define MOD_TYPE_ATT  "ATT"
+
 /**! Actuation Factor */
 class factor
 {

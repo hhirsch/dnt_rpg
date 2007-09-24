@@ -49,6 +49,9 @@ class skills
       /*! Return the wanted skill */
       skill* getSkillByString(string idString);
 
+      /*! Return the wanted skill number */
+      int getSkillIntByString(string idString);
+
       /*! set avaible points
        * \param points -> avaiblePoints */
       void setAvaiblePoints(int points);

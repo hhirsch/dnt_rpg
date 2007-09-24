@@ -75,6 +75,41 @@ void classe::applySkillCosts(skills* sk)
 }
 
 /******************************************************************
+ *                          getAttModifiers                       *
+ ******************************************************************/
+void classe::getAttModifiers(int mods[6], bool sum, skills* sk)
+{
+   int i, n;
+   /* If isn't to sum, zero's to the mods */
+   if(!sum)
+   {
+      for(i=0; i<6; i++)
+      {
+         mods[i] = 0;
+      }
+   }
+   
+   /* Now Apply all attributes modifiers */
+   for(i=0; i < totalModifiers; i++)
+   {
+      if(classModifiers[i].cause.type == MOD_TYPE_ATT)
+      {
+         n = sk->getSkillIntByString(classModifiers[i].cause.id);
+         if((n > 0) && (n <=6 ) )
+         {
+            mods[n-1] += classModifiers[i].mod;
+         }
+         else
+         {
+            cout << gettext("Unknow Attribute:") << classModifiers[i].cause.id
+                 << endl;
+         }
+      }
+   }
+
+}
+
+/******************************************************************
  *                            Constructor                         *
  ******************************************************************/
 classes::classes(string directory, string fileListName)

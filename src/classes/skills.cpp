@@ -207,6 +207,23 @@ skill* skills::getSkillByString(string idString)
    }
 
    return(NULL);
+}
+
+/*************************************************************
+ *                   getSkillIntByString                     *
+ *************************************************************/
+int skills::getSkillIntByString(string idString)
+{
+   int i;
+   for(i=0; i<totalSkills; i++)
+   {
+      if(idString == m_skills[i].idString)
+      {
+         return(i);
+      }
+   }
+
+   return(-1);
    
 }
 
