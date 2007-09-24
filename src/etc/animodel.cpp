@@ -124,6 +124,13 @@ void aniModel::calculateBoundingBox()
      }
   }
 
+  /* Do the Scale to the bounding box */
+  for(aux = 0; aux < 3; aux++)
+  {
+     min[aux] *= m_renderScale;
+     max[aux] *= m_renderScale;
+  }
+
 }
 
 /*********************************************************************
@@ -398,6 +405,11 @@ void aniModel::render()
    /* Correct from blender to dnt coordinates */
    glRotatef(180,0,1,0);
    glRotatef(-90,1,0,0);
+   /* Scale, if needed */
+   if(m_renderScale != 1.0)
+   {
+      glScalef(m_renderScale,m_renderScale,m_renderScale);
+   }
 
   m_calModel->getSkeleton()->calculateBoundingBoxes();
   // get the renderer of the model
