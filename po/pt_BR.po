@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-23 14:21-0300\n"
+"POT-Creation-Date: 2007-09-24 14:51-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -44,6 +44,10 @@ msgstr "Dano Crítico!"
 msgid "Not enought points to use!"
 msgstr "Pontos não suficientes para usar!"
 
+#: src/classes/race.cpp:104 src/classes/classes.cpp:104
+msgid "Unknow Attribute:"
+msgstr "Atributo Desconhecido:"
+
 #: src/classes/skills.cpp:25
 #, c-format
 msgid "Error while opening skills list: %s\n"
@@ -63,17 +67,17 @@ msgstr "Erro ao abrir lista de perícias: ../data/skills/skills.skl\n"
 msgid "Tendency & Alignment"
 msgstr "Tendência e Alinhamento"
 
-#: src/engine/alignwindow.cpp:47 src/engine/aspectwindow.cpp:58
-#: src/engine/attwindow.cpp:174 src/engine/options.cpp:380
-#: src/engine/racewindow.cpp:65 src/engine/classwindow.cpp:61
-#: src/engine/skillwindow.cpp:85
+#: src/engine/alignwindow.cpp:48 src/engine/aspectwindow.cpp:62
+#: src/engine/attwindow.cpp:200 src/engine/options.cpp:391
+#: src/engine/racewindow.cpp:65 src/engine/classwindow.cpp:66
+#: src/engine/skillwindow.cpp:88
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: src/engine/alignwindow.cpp:51 src/engine/aspectwindow.cpp:62
-#: src/engine/attwindow.cpp:178 src/engine/barterwindow.cpp:34
-#: src/engine/options.cpp:384 src/engine/racewindow.cpp:69
-#: src/engine/classwindow.cpp:65 src/engine/skillwindow.cpp:89
+#: src/engine/alignwindow.cpp:52 src/engine/aspectwindow.cpp:66
+#: src/engine/attwindow.cpp:204 src/engine/barterwindow.cpp:34
+#: src/engine/options.cpp:395 src/engine/racewindow.cpp:69
+#: src/engine/classwindow.cpp:70 src/engine/skillwindow.cpp:92
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -89,11 +93,11 @@ msgstr "Novo"
 msgid "Continue"
 msgstr "Continuar"
 
-#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3073
+#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3077
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3077
+#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3081
 msgid "Load"
 msgstr "Carregar"
 
@@ -121,7 +125,7 @@ msgstr "Idade:"
 msgid "Sex:"
 msgstr "Sexo:"
 
-#: src/engine/aspectwindow.cpp:94
+#: src/engine/aspectwindow.cpp:98
 #, c-format
 msgid "Can't open the list with portraits: portraits.lst!\n"
 msgstr "Erro ao abrir lista de retratos: portraits.lst!\n"
@@ -155,55 +159,55 @@ msgstr "Info"
 msgid "Get"
 msgstr "Pegar"
 
-#: src/engine/attwindow.cpp:36
+#: src/engine/attwindow.cpp:37
 msgid "Attributes"
 msgstr "Atributos"
 
-#: src/engine/attwindow.cpp:57
+#: src/engine/attwindow.cpp:59
 msgid "Roll"
 msgstr "Rolar"
 
-#: src/engine/attwindow.cpp:60
+#: src/engine/attwindow.cpp:62
 msgid "Clear"
 msgstr "Limpar"
 
-#: src/engine/attwindow.cpp:64
+#: src/engine/attwindow.cpp:66
 msgid "Auto"
 msgstr "Auto"
 
-#: src/engine/attwindow.cpp:67 data/skills/forca.ski:1
+#: src/engine/attwindow.cpp:69 data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Força"
 
-#: src/engine/attwindow.cpp:84 data/skills/destreza.ski:1
+#: src/engine/attwindow.cpp:87 data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Destreza"
 
-#: src/engine/attwindow.cpp:98 data/skills/constituicao.ski:1
+#: src/engine/attwindow.cpp:105 data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Constituição"
 
-#: src/engine/attwindow.cpp:115 data/skills/inteligencia.ski:1
+#: src/engine/attwindow.cpp:123 data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Inteligência"
 
-#: src/engine/attwindow.cpp:129 data/skills/sabedoria.ski:1
+#: src/engine/attwindow.cpp:141 data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Sabedoria"
 
-#: src/engine/attwindow.cpp:142 data/skills/carisma.ski:1
+#: src/engine/attwindow.cpp:159 data/skills/carisma.ski:1
 msgid "Charism"
 msgstr "Carisma"
 
-#: src/engine/attwindow.cpp:164
+#: src/engine/attwindow.cpp:188
 msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
-#: src/engine/attwindow.cpp:437
+#: src/engine/attwindow.cpp:482
 msgid "Warning"
 msgstr "Aviso"
 
-#: src/engine/attwindow.cpp:438
+#: src/engine/attwindow.cpp:483
 msgid "You Need to Assign All Attributes."
 msgstr "Você precisa definir todos atributos."
 
@@ -264,27 +268,27 @@ msgstr "Perseguir"
 msgid "Music Volume:"
 msgstr "Volume da Música:"
 
-#: src/engine/options.cpp:306
+#: src/engine/options.cpp:308
 msgid "Effects Volume:"
 msgstr "Volume dos Efeitos:"
 
-#: src/engine/options.cpp:321
+#: src/engine/options.cpp:325
 msgid "Language:"
 msgstr "Língua:"
 
-#: src/engine/options.cpp:335
+#: src/engine/options.cpp:341
 msgid "Camera Mode:"
 msgstr "Modo da Câmera:"
 
-#: src/engine/options.cpp:348
+#: src/engine/options.cpp:356
 msgid "Enable Grass Effects (need particles)"
 msgstr "Habilitar Vegetação"
 
-#: src/engine/options.cpp:357
+#: src/engine/options.cpp:365
 msgid "Enable Particles Effects"
 msgstr "Habilitar Partículas"
 
-#: src/engine/options.cpp:367
+#: src/engine/options.cpp:376
 msgid "Reflections:"
 msgstr "Reflexões:"
 
@@ -312,7 +316,7 @@ msgstr "Sem Modificadores.||"
 msgid "Race Feats||"
 msgstr "Habilidades da Raça||"
 
-#: src/engine/racewindow.cpp:104 src/engine/classwindow.cpp:156
+#: src/engine/racewindow.cpp:104 src/engine/classwindow.cpp:161
 msgid "No Feats.|"
 msgstr "Sem Habilidades."
 
@@ -320,7 +324,7 @@ msgstr "Sem Habilidades."
 msgid "|Race Skills||"
 msgstr "|Perícias da Raça||"
 
-#: src/engine/racewindow.cpp:125 src/engine/classwindow.cpp:177
+#: src/engine/racewindow.cpp:125 src/engine/classwindow.cpp:182
 msgid "No Skills."
 msgstr "Sem Perícias"
 
@@ -328,43 +332,43 @@ msgstr "Sem Perícias"
 msgid "Class"
 msgstr "Classe"
 
-#: src/engine/classwindow.cpp:36
+#: src/engine/classwindow.cpp:37
 msgid "Class Description"
 msgstr "Descrição da Classe"
 
-#: src/engine/classwindow.cpp:45
+#: src/engine/classwindow.cpp:46
 msgid "Class Characteristics"
 msgstr "Características da Classe"
 
-#: src/engine/classwindow.cpp:83
+#: src/engine/classwindow.cpp:88
 msgid "Life Dice"
 msgstr "Dado de Vida"
 
-#: src/engine/classwindow.cpp:86
+#: src/engine/classwindow.cpp:91
 msgid "Skill Points|"
 msgstr "Pontos de Perícia|"
 
-#: src/engine/classwindow.cpp:109
+#: src/engine/classwindow.cpp:114
 msgid "First Level"
 msgstr "Primeiro Nível"
 
-#: src/engine/classwindow.cpp:134
+#: src/engine/classwindow.cpp:139
 msgid "Other Levels"
 msgstr "Outros Níveis"
 
-#: src/engine/classwindow.cpp:136
+#: src/engine/classwindow.cpp:141
 msgid "Class Modifiers||"
 msgstr "Moficadores de Classe||"
 
-#: src/engine/classwindow.cpp:144
+#: src/engine/classwindow.cpp:149
 msgid "No Modifiers||"
 msgstr "Sem Modificadores.||"
 
-#: src/engine/classwindow.cpp:148
+#: src/engine/classwindow.cpp:153
 msgid "Class Feats||"
 msgstr "Habilidades da Classe||"
 
-#: src/engine/classwindow.cpp:161
+#: src/engine/classwindow.cpp:166
 msgid "Class Skills||"
 msgstr "Perícias da Classe||"
 
@@ -376,11 +380,11 @@ msgstr "Perícias"
 msgid "Total Free Points:"
 msgstr "Pontos Livres:"
 
-#: src/engine/skillwindow.cpp:62
+#: src/engine/skillwindow.cpp:69
 msgid "Points:"
 msgstr "Pontos:"
 
-#: src/engine/skillwindow.cpp:73
+#: src/engine/skillwindow.cpp:80
 msgid "Cost"
 msgstr "Custo"
 
@@ -423,57 +427,57 @@ msgstr "Carregando Mudanças..."
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:1113
+#: src/engine/dccnit.cpp:1117
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1147 src/engine/dccnit.cpp:1210
+#: src/engine/dccnit.cpp:1151 src/engine/dccnit.cpp:1214
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1195
+#: src/engine/dccnit.cpp:1199
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1555
+#: src/engine/dccnit.cpp:1559
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1614
+#: src/engine/dccnit.cpp:1618
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1746 src/fight/fightSystem.cpp:331
+#: src/engine/dccnit.cpp:1750 src/fight/fightSystem.cpp:331
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/engine/dccnit.cpp:1821 src/engine/dccnit.cpp:3070
+#: src/engine/dccnit.cpp:1825 src/engine/dccnit.cpp:3074
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:3041
+#: src/engine/dccnit.cpp:3045
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/dccnit.cpp:3063
+#: src/engine/dccnit.cpp:3067
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: src/engine/dccnit.cpp:3065
+#: src/engine/dccnit.cpp:3069
 msgid "FPS:"
 msgstr "FPS:"
 
-#: src/engine/dccnit.cpp:3067
+#: src/engine/dccnit.cpp:3071
 msgid "Press F1 for Help"
 msgstr "Pressione F1 para Ajuda"
 
-#: src/engine/dccnit.cpp:3075
+#: src/engine/dccnit.cpp:3079
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3220
+#: src/engine/dccnit.cpp:3224
 msgid "|Exit Battle Mode"
 msgstr "|Sai do Modo de Batalha"
 
@@ -827,7 +831,7 @@ msgstr ""
 #: data/classes/medician.cls:7
 msgid ""
 "Although  being  theory  creatures,  they|usually  spent  their  money  in "
-"physical|academies, receiving +1 in Strenght."
+"physical|academies, receiving +1 in Strength."
 msgstr ""
 "Apesar  de serem criaturas que se dedicam|à teoria,  estas  geralmente "
 "utilizam seu|dinheiro    em   academias,    pois   sua|característica 'boy' "
@@ -927,7 +931,7 @@ msgstr ""
 
 #: data/classes/biology.cls:9
 msgid ""
-"-1  in  Strenght,  since  their   muscles|atrophy   after  spent  12   "
+"-1  in  Strength,  since  their   muscles|atrophy   after  spent  12   "
 "hours  inert|observing the ameiva's coupling rituals."
 msgstr ""
 "Recebem  -1  de Força, já que os músculos|acabam  atrofiando  um  "
@@ -1003,7 +1007,7 @@ msgstr ""
 
 #: data/classes/music.cls:7
 msgid ""
-"-4 of  Strenght  by  the fact  that their|muscles atrophy for aren't used "
+"-4 of  Strength  by  the fact  that their|muscles atrophy for aren't used "
 "more than|the much needed to play their instrument."
 msgstr ""
 "-4  de  Força  pelo  fato  de  que   seus|músculos   se   atrofiaram  por "
@@ -1242,7 +1246,7 @@ msgstr ""
 #: data/classes/journalism.cls:7
 msgid ""
 "As they  are  usually  deep  involved  in|mental work,  these  organisms "
-"don't find|time or will to  exercise  their muscles,|receive -2 of Strenght."
+"don't find|time or will to  exercise  their muscles,|receive -2 of Strength."
 msgstr ""
 "Por  estarem constantemente envolvidos em|trabalhos  mentais,  esses "
 "organismos não|encontram tempo ou vontade de desenvolver|sua força|(-2 "
@@ -2026,7 +2030,7 @@ msgstr ""
 "recebe -4 em|todos os testes sociais."
 
 #: data/races/llama.rca:8
-msgid "Human llamas receive +2 in Inteligency."
+msgid "Human llamas receive +2 in Intelligence."
 msgstr "Llamas recebem +2 de Inteligência."
 
 #: data/races/metaleiro.rca:1
@@ -2544,7 +2548,7 @@ msgid ""
 "gross   and|potential it  is.  A  creature  with  too|much strength  can  "
 "beat like a Titan and|smash like  a Hulk.  A  creature with low|strength  "
 "can't  beat   anyone   and   is|frequently subjugated by  others  like  a|"
-"little chicken.||Ameiva: Strenght 1|Ratazana: Strenght 2|Ente: Strenght 23"
+"little chicken.||Ameiva: Strength 1|Ratazana: Strength 2|Ente: Strength 23"
 msgstr ""
 "É a Força física do organismo,  medindo o|quão bruto e potente ele é.  Um "
 "organismo|muito forte é capaz de bater como um titã|e esmagar  como  um "

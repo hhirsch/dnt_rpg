@@ -3,8 +3,8 @@ gettext("'The judge thinks he is  God,  the  Medic|plays God.  The  journalist, 
 gettext("Graduating  in  the   arts  of  deceit  a|cheating, the  journalism  student  is  a|writing master. With words, he can create|events,  stun  his  enemies, swindle  his|audience towards other habilities.|Despite of being college  friends,  these|malicious organisms can  be  very rude to|each other, not being common  to see them|in large groups. But they can easily join|the masses, to gather as much information|as possible.")
 d6
 6
--2 ATT STRENGHT ALL ALL
-gettext("As they  are  usually  deep  involved  in|mental work,  these  organisms don't find|time or will to  exercise  their muscles,|receive -2 of Strenght.")
+-2 ATT STRENGTH ALL ALL
+gettext("As they  are  usually  deep  involved  in|mental work,  these  organisms don't find|time or will to  exercise  their muscles,|receive -2 of Strength.")
 2 ATT INTELLIGENCE ALL ALL
 gettext("Journalism students have a  'know it all'|need, increasing by 2 their intelligence.")
 1 ATT CHARISM ALL ALL

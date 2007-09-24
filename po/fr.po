@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-23 14:21-0300\n"
+"POT-Creation-Date: 2007-09-24 14:51-0300\n"
 "PO-Revision-Date: 2007-09-13 11:00+0000\n"
 "Last-Translator: farrer <farrer@dnteam.org>\n"
 "Language-Team: FRANÇAIS <fr@li.org>\n"
@@ -44,6 +44,10 @@ msgstr "Coup Critique!"
 msgid "Not enought points to use!"
 msgstr "Pas de points à employer!"
 
+#: src/classes/race.cpp:104 src/classes/classes.cpp:104
+msgid "Unknow Attribute:"
+msgstr ""
+
 #: src/classes/skills.cpp:25
 #, c-format
 msgid "Error while opening skills list: %s\n"
@@ -63,17 +67,17 @@ msgstr ""
 msgid "Tendency & Alignment"
 msgstr "Alignement"
 
-#: src/engine/alignwindow.cpp:47 src/engine/aspectwindow.cpp:58
-#: src/engine/attwindow.cpp:174 src/engine/options.cpp:380
-#: src/engine/racewindow.cpp:65 src/engine/classwindow.cpp:61
-#: src/engine/skillwindow.cpp:85
+#: src/engine/alignwindow.cpp:48 src/engine/aspectwindow.cpp:62
+#: src/engine/attwindow.cpp:200 src/engine/options.cpp:391
+#: src/engine/racewindow.cpp:65 src/engine/classwindow.cpp:66
+#: src/engine/skillwindow.cpp:88
 msgid "Confirm"
 msgstr "Comfirmez"
 
-#: src/engine/alignwindow.cpp:51 src/engine/aspectwindow.cpp:62
-#: src/engine/attwindow.cpp:178 src/engine/barterwindow.cpp:34
-#: src/engine/options.cpp:384 src/engine/racewindow.cpp:69
-#: src/engine/classwindow.cpp:65 src/engine/skillwindow.cpp:89
+#: src/engine/alignwindow.cpp:52 src/engine/aspectwindow.cpp:66
+#: src/engine/attwindow.cpp:204 src/engine/barterwindow.cpp:34
+#: src/engine/options.cpp:395 src/engine/racewindow.cpp:69
+#: src/engine/classwindow.cpp:70 src/engine/skillwindow.cpp:92
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -89,11 +93,11 @@ msgstr "Nouveau"
 msgid "Continue"
 msgstr "Continue"
 
-#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3073
+#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3077
 msgid "Save"
 msgstr "Registrer"
 
-#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3077
+#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3081
 msgid "Load"
 msgstr "Charger"
 
@@ -121,7 +125,7 @@ msgstr "Âge"
 msgid "Sex:"
 msgstr "Sexe"
 
-#: src/engine/aspectwindow.cpp:94
+#: src/engine/aspectwindow.cpp:98
 #, c-format
 msgid "Can't open the list with portraits: portraits.lst!\n"
 msgstr ""
@@ -155,55 +159,55 @@ msgstr "Info"
 msgid "Get"
 msgstr "Obtenir"
 
-#: src/engine/attwindow.cpp:36
+#: src/engine/attwindow.cpp:37
 msgid "Attributes"
 msgstr ""
 
-#: src/engine/attwindow.cpp:57
+#: src/engine/attwindow.cpp:59
 msgid "Roll"
 msgstr "Rouler"
 
-#: src/engine/attwindow.cpp:60
+#: src/engine/attwindow.cpp:62
 msgid "Clear"
 msgstr "Éclaircir"
 
-#: src/engine/attwindow.cpp:64
+#: src/engine/attwindow.cpp:66
 msgid "Auto"
 msgstr ""
 
-#: src/engine/attwindow.cpp:67 data/skills/forca.ski:1
+#: src/engine/attwindow.cpp:69 data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Force"
 
-#: src/engine/attwindow.cpp:84 data/skills/destreza.ski:1
+#: src/engine/attwindow.cpp:87 data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Dextérité"
 
-#: src/engine/attwindow.cpp:98 data/skills/constituicao.ski:1
+#: src/engine/attwindow.cpp:105 data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Constitution"
 
-#: src/engine/attwindow.cpp:115 data/skills/inteligencia.ski:1
+#: src/engine/attwindow.cpp:123 data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Intelligence"
 
-#: src/engine/attwindow.cpp:129 data/skills/sabedoria.ski:1
+#: src/engine/attwindow.cpp:141 data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Sagesse"
 
-#: src/engine/attwindow.cpp:142 data/skills/carisma.ski:1
+#: src/engine/attwindow.cpp:159 data/skills/carisma.ski:1
 msgid "Charism"
 msgstr "Charisme"
 
-#: src/engine/attwindow.cpp:164
+#: src/engine/attwindow.cpp:188
 msgid "Attribute Description"
 msgstr "Description de Caractéristique"
 
-#: src/engine/attwindow.cpp:437
+#: src/engine/attwindow.cpp:482
 msgid "Warning"
 msgstr "Erreur"
 
-#: src/engine/attwindow.cpp:438
+#: src/engine/attwindow.cpp:483
 msgid "You Need to Assign All Attributes."
 msgstr "Vous avez assigner tous les Caractéristiques."
 
@@ -264,27 +268,27 @@ msgstr "Poursuivre"
 msgid "Music Volume:"
 msgstr "Volume de Musique:"
 
-#: src/engine/options.cpp:306
+#: src/engine/options.cpp:308
 msgid "Effects Volume:"
 msgstr "Volume d'Effets:"
 
-#: src/engine/options.cpp:321
+#: src/engine/options.cpp:325
 msgid "Language:"
 msgstr "Langue:"
 
-#: src/engine/options.cpp:335
+#: src/engine/options.cpp:341
 msgid "Camera Mode:"
 msgstr "Mode de Caméra:"
 
-#: src/engine/options.cpp:348
+#: src/engine/options.cpp:356
 msgid "Enable Grass Effects (need particles)"
 msgstr "Permettre les effets d'herbe"
 
-#: src/engine/options.cpp:357
+#: src/engine/options.cpp:365
 msgid "Enable Particles Effects"
 msgstr "Permettre les particules"
 
-#: src/engine/options.cpp:367
+#: src/engine/options.cpp:376
 msgid "Reflections:"
 msgstr "Reflets:"
 
@@ -312,7 +316,7 @@ msgstr "Aucuns Modificateurs.||"
 msgid "Race Feats||"
 msgstr "Dons Raciales||"
 
-#: src/engine/racewindow.cpp:104 src/engine/classwindow.cpp:156
+#: src/engine/racewindow.cpp:104 src/engine/classwindow.cpp:161
 msgid "No Feats.|"
 msgstr "Aucuns Dons.|"
 
@@ -320,7 +324,7 @@ msgstr "Aucuns Dons.|"
 msgid "|Race Skills||"
 msgstr "|Compétences Raciales||"
 
-#: src/engine/racewindow.cpp:125 src/engine/classwindow.cpp:177
+#: src/engine/racewindow.cpp:125 src/engine/classwindow.cpp:182
 msgid "No Skills."
 msgstr "Aucunes Compétences."
 
@@ -328,43 +332,43 @@ msgstr "Aucunes Compétences."
 msgid "Class"
 msgstr "Classe"
 
-#: src/engine/classwindow.cpp:36
+#: src/engine/classwindow.cpp:37
 msgid "Class Description"
 msgstr ""
 
-#: src/engine/classwindow.cpp:45
+#: src/engine/classwindow.cpp:46
 msgid "Class Characteristics"
 msgstr ""
 
-#: src/engine/classwindow.cpp:83
+#: src/engine/classwindow.cpp:88
 msgid "Life Dice"
 msgstr "Dés de Vie"
 
-#: src/engine/classwindow.cpp:86
+#: src/engine/classwindow.cpp:91
 msgid "Skill Points|"
 msgstr ""
 
-#: src/engine/classwindow.cpp:109
+#: src/engine/classwindow.cpp:114
 msgid "First Level"
 msgstr ""
 
-#: src/engine/classwindow.cpp:134
+#: src/engine/classwindow.cpp:139
 msgid "Other Levels"
 msgstr ""
 
-#: src/engine/classwindow.cpp:136
+#: src/engine/classwindow.cpp:141
 msgid "Class Modifiers||"
 msgstr ""
 
-#: src/engine/classwindow.cpp:144
+#: src/engine/classwindow.cpp:149
 msgid "No Modifiers||"
 msgstr "Aucuns Modificateurs.||"
 
-#: src/engine/classwindow.cpp:148
+#: src/engine/classwindow.cpp:153
 msgid "Class Feats||"
 msgstr ""
 
-#: src/engine/classwindow.cpp:161
+#: src/engine/classwindow.cpp:166
 msgid "Class Skills||"
 msgstr ""
 
@@ -376,11 +380,11 @@ msgstr ""
 msgid "Total Free Points:"
 msgstr ""
 
-#: src/engine/skillwindow.cpp:62
+#: src/engine/skillwindow.cpp:69
 msgid "Points:"
 msgstr ""
 
-#: src/engine/skillwindow.cpp:73
+#: src/engine/skillwindow.cpp:80
 msgid "Cost"
 msgstr ""
 
@@ -423,57 +427,57 @@ msgstr ""
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1113
+#: src/engine/dccnit.cpp:1117
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1147 src/engine/dccnit.cpp:1210
+#: src/engine/dccnit.cpp:1151 src/engine/dccnit.cpp:1214
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1195
+#: src/engine/dccnit.cpp:1199
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1555
+#: src/engine/dccnit.cpp:1559
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1614
+#: src/engine/dccnit.cpp:1618
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1746 src/fight/fightSystem.cpp:331
+#: src/engine/dccnit.cpp:1750 src/fight/fightSystem.cpp:331
 #, c-format
 msgid "%s attacks %s|"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1821 src/engine/dccnit.cpp:3070
+#: src/engine/dccnit.cpp:1825 src/engine/dccnit.cpp:3074
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3041
+#: src/engine/dccnit.cpp:3045
 msgid "Map"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3063
+#: src/engine/dccnit.cpp:3067
 msgid "Shortcuts"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3065
+#: src/engine/dccnit.cpp:3069
 msgid "FPS:"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3067
+#: src/engine/dccnit.cpp:3071
 msgid "Press F1 for Help"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3075
+#: src/engine/dccnit.cpp:3079
 msgid "Menu"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3220
+#: src/engine/dccnit.cpp:3224
 msgid "|Exit Battle Mode"
 msgstr ""
 
@@ -768,7 +772,7 @@ msgstr ""
 #: data/classes/medician.cls:7
 msgid ""
 "Although  being  theory  creatures,  they|usually  spent  their  money  in "
-"physical|academies, receiving +1 in Strenght."
+"physical|academies, receiving +1 in Strength."
 msgstr ""
 
 #: data/classes/medician.cls:9
@@ -836,7 +840,7 @@ msgstr ""
 
 #: data/classes/biology.cls:9
 msgid ""
-"-1  in  Strenght,  since  their   muscles|atrophy   after  spent  12   "
+"-1  in  Strength,  since  their   muscles|atrophy   after  spent  12   "
 "hours  inert|observing the ameiva's coupling rituals."
 msgstr ""
 
@@ -885,7 +889,7 @@ msgstr ""
 
 #: data/classes/music.cls:7
 msgid ""
-"-4 of  Strenght  by  the fact  that their|muscles atrophy for aren't used "
+"-4 of  Strength  by  the fact  that their|muscles atrophy for aren't used "
 "more than|the much needed to play their instrument."
 msgstr ""
 
@@ -1051,7 +1055,7 @@ msgstr ""
 #: data/classes/journalism.cls:7
 msgid ""
 "As they  are  usually  deep  involved  in|mental work,  these  organisms "
-"don't find|time or will to  exercise  their muscles,|receive -2 of Strenght."
+"don't find|time or will to  exercise  their muscles,|receive -2 of Strength."
 msgstr ""
 
 #: data/classes/journalism.cls:9
@@ -1603,7 +1607,7 @@ msgid ""
 msgstr ""
 
 #: data/races/llama.rca:8
-msgid "Human llamas receive +2 in Inteligency."
+msgid "Human llamas receive +2 in Intelligence."
 msgstr ""
 
 #: data/races/metaleiro.rca:1
@@ -1999,7 +2003,7 @@ msgid ""
 "gross   and|potential it  is.  A  creature  with  too|much strength  can  "
 "beat like a Titan and|smash like  a Hulk.  A  creature with low|strength  "
 "can't  beat   anyone   and   is|frequently subjugated by  others  like  a|"
-"little chicken.||Ameiva: Strenght 1|Ratazana: Strenght 2|Ente: Strenght 23"
+"little chicken.||Ameiva: Strength 1|Ratazana: Strength 2|Ente: Strength 23"
 msgstr ""
 
 #: data/skills/furtividade.ski:1

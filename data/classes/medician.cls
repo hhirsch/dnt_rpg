@@ -3,8 +3,8 @@ gettext("'If  I've  tried  Physiotherapy  there, I|should passed  in  first  pla
 gettext("The Medicine  Student  is  the thing that|abdicated to their social life  in change|of  an anormal   dedication   to   study,|believing  they'll  be something in life.|Those things haven't any cleverness,  one|time  they  base  their lifes in theories|and more theories.  To  be of this class,|the character need to be submitted to any|hideous  attitude,  like  drown  hookies,|public  peversion,   among   others  that|result in death.")
 d6
 8
-1 ATT STRENGHT ALL ALL
-gettext("Although  being  theory  creatures,  they|usually  spent  their  money  in physical|academies, receiving +1 in Strenght.")
+1 ATT STRENGTH ALL ALL
+gettext("Although  being  theory  creatures,  they|usually  spent  their  money  in physical|academies, receiving +1 in Strength.")
 2 ATT INTELLIGENCE ALL ALL
 gettext("By  the  dedication  to  the  study,  the|Medicine   Student    receive    +2    in|Intelligence.")
 -4 ATT WISDOM ALL ALL

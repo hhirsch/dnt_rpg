@@ -1,6 +1,6 @@
 47
 00 notused.ski ../data/skills/Img/na.png NOT_USED
-01 forca.ski   ../data/skills/Img/forca.png STRENGHT
+01 forca.ski   ../data/skills/Img/forca.png STRENGTH
 02 destreza.ski ../data/skills/Img/destreza.png DEXTERITY
 03 constituicao.ski ../data/skills/Img/constituicao.png CONSTITUTION
 04 inteligencia.ski ../data/skills/Img/inteligencia.png INTELLIGENCE

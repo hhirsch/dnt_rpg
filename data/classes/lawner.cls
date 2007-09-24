@@ -7,7 +7,7 @@ d6
 gettext("For usually  being stupids among anything|that  is  not  related  with  money, they|receive -2 in intelligence.")
 -1 ATT CHARISM ALL ALL
 gettext("For  their  hungry will to take the  last|copeck of their victims, they  receive -1|in charism.")
-2 ATT WISDOW ALL ALL
+2 ATT WISDOM ALL ALL
 gettext("By can modify any situation to make money|from it.")
 1 SKILL APPRAISE ALL ALL
 gettext("Since they know  anything  of  money, the|Law  Student  receives  +1 in Appraise on|their first level.")

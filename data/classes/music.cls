@@ -3,8 +3,8 @@ gettext("'Without you I sound nothing.'|(Typical commentary of  a Lyric-man  to 
 gettext("In  a  scientific   world,   few   people|adventure in a different  concept, follow|some art source, like  music.  The  Music|Student  is  a  creature   with   extreme|patience to learn all tecnics related  to|ternary  compass  atonalisms,  have   the|capacity to realize them and  a distorced|like to play one of the most bizarre  and|ocult musical instrument.|Note of the Creator: 'Based  on  the idea|that musical likes are distints  and only|the the most understood  ones  appreciate|distinct rhythms (obviously all ones that|aren't  atempts  to   kill,  for bad, the|musical theory), the class was made.  So,|the same sound, Bach for example, can  be|a beautifull music or  something  boring,|depending  from  the  ear   who   listen.|Probably a progressive fan will like Bach|but a fan of Tati-Quebra-Barraco, without|any musical sense, will think  Bach=shit.|So, the Music Student will be a  virtuous|misunderstood.'")
 d6
 7
--4 ATT STRENGHT ALL ALL
-gettext("-4 of  Strenght  by  the fact  that their|muscles atrophy for aren't used more than|the much needed to play their instrument.")
+-4 ATT STRENGTH ALL ALL
+gettext("-4 of  Strength  by  the fact  that their|muscles atrophy for aren't used more than|the much needed to play their instrument.")
 -1 ATT CONSTITUTION ALL ALL
 gettext("-1 of Constitution for hours  spent  in a|closed ambient, playing.")
 2 ATT DEXTERITY ALL ALL

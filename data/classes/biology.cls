@@ -5,8 +5,8 @@ d8
 5
 2 ATT DEXTERITY ALL ALL
 gettext("+2  in  Dexterity,   since  they   always|observe  and follow  in distinct terrains|the  ameivas (and also  to open its body,|counting how many worms it has).")
--1 ATT STRENGHT ALL ALL
-gettext("-1  in  Strenght,  since  their   muscles|atrophy   after  spent  12   hours  inert|observing the ameiva's coupling rituals.")
+-1 ATT STRENGTH ALL ALL
+gettext("-1  in  Strength,  since  their   muscles|atrophy   after  spent  12   hours  inert|observing the ameiva's coupling rituals.")
 6 SKILL DISGUISES CLASS HIPPIE
 gettext("Since  they  are   mistaken  as  hippies,|Biology  Students receive +6 in Disguises|when disguised as hippie (and when not of|this race)")
 -4 SKILL FREE_PASS ALL ALL
