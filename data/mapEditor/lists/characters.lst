@@ -1,6 +1,10 @@
-5
+9
 Logan(20lvl) ../data/characters/pcs/logan.pc
 Ameiva(7lvl) ../data/characters/npcs/ameiva.npc
 Ente(14lvl) ../data/characters/npcs/ente.npc
-Ratazana(10lvl) ../data/characters/npcs/ratazana.npc
+Ratazana(1lvl) ../data/characters/npcs/ratazana.npc
 Metaleiro(1lvl) ../data/characters/pcs/metaleiro.pc
+Coelho(1lvl) ../data/characters/npcs/bunny.npc
+Vaca(5lvl) ../data/characters/npcs/cow.npc
+Cerdo(8lvl) ../data/characters/npcs/deer.npc
+Spider(9lvl) ../data/characters/npcs/spider.npc
