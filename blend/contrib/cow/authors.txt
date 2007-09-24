@@ -1,0 +1,4 @@
+Title: Cow
+Authors: cow model originally provided by openfrag.org
+         modified by damien mcginnes
+License: GPL
