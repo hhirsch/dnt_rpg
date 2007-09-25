@@ -21,7 +21,8 @@ class skillWindow
 {
    public:
       /*! Skill Window constructor */
-      skillWindow(skills* sk, skills* savSkill, interface* inter);
+      skillWindow(skills* sk, skills* savSkill, interface* inter,
+                  int actualLevel);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
@@ -37,6 +38,7 @@ class skillWindow
       skills*      saveSkill;     /**< Pointer to the edited skill list */
       int          avaiblePoints; /**< Avaible points to distribute */
       int          curSkill;      /**< Actual Skill */
+      int          charLevel;     /**< Character Level */
       rolBar* desc;               /**< Description Text */
       textBox* txtAvaiblePoints;  /**< Avaible Points Text */
       textBox* skillName;         /**< Actual Skill Name */

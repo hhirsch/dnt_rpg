@@ -872,7 +872,7 @@ int engine::CharacterScreen(GLuint idTextura)
                delete(atWindow);
                activeCharacter->clearSkills();
                skWindow = new skillWindow(skillsList,&activeCharacter->sk,
-                                          gui);
+                                          gui, activeCharacter->getLevel());
              }
              else if(charCreation == ATTW_CANCEL)
              {
@@ -916,7 +916,7 @@ int engine::CharacterScreen(GLuint idTextura)
                status = 4;
                delete(aspWindow);
                skWindow = new skillWindow(skillsList,&activeCharacter->sk,
-                                          gui);
+                                          gui, activeCharacter->getLevel());
             }
          }         
       }

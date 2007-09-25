@@ -8,11 +8,14 @@
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter)
+skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
+                         int actualLevel)
 {
    char tmp[5];
    string saux;
    int aux;
+
+   charLevel = actualLevel;
 
    curSkill = ATT_SKILL_FIRST; //Set to first skill after attributes
    externalSkill = sk;
@@ -106,7 +109,8 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
    {
       if(object == (guiObject*) buttonSum)
       {
-         if( avaiblePoints - saveSkill->m_skills[curSkill].mod >=0 )
+         if( ( avaiblePoints - saveSkill->m_skills[curSkill].mod >=0 ) && 
+             (saveSkill->m_skills[curSkill].points+1 <= charLevel+3) )
          {
              saveSkill->m_skills[curSkill].points++;
              avaiblePoints -= saveSkill->m_skills[curSkill].mod;

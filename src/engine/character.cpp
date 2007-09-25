@@ -116,6 +116,23 @@ void character::getAttModifiers(int mods[6])
 }
 
 /*********************************************************************
+ *                             getLevel                              *
+ *********************************************************************/
+int character::getLevel()
+{
+   int lv = 0;
+   int i;
+   for(i = 0; i < MAX_DISTINCT_CLASSES; i++)
+   {
+      if(actualClass[i] != NULL)
+      {
+         lv += classLevels[i];
+      }
+   }
+   return(lv);
+}
+
+/*********************************************************************
  *                         getGeneralScript                          *
  *********************************************************************/
 void* character::getGeneralScript()
@@ -283,7 +300,17 @@ int character::getPoints(points pt)
    int total = 0;
    skill* att;
    att = sk.getSkillByString(pt.attID);
-   int aMod = attBonus(att);
+   int aMod = 0;
+
+   if(att)
+   {
+      aMod = attBonus(att);
+   }
+   else
+   {
+      cerr << "Unknow Base Attribute for Skill Points: " << pt.attID << endl;
+   }
+
    if(pt.signal == SIGNAL_DEC)
    {
       total = (pt.sum - aMod) * pt.mult;

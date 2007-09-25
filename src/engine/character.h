@@ -55,6 +55,11 @@ class character: public aniModel
        * \param mods -> vector that will contain the attribute modifiers */
       void getAttModifiers(int mods[6]);
 
+      /*! Get the total level of the character (AKA sum of all classes levels
+       * the character has.
+       * \return total level of the character */
+      int getLevel();
+
       /*! Define the image used as portrait
        * \param portraitFile -> file name of the image to use*/
       void definePortrait(string portraitFile);
