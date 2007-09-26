@@ -590,7 +590,7 @@ msgstr "Oxi! Não consegui ajustar o modo do vídeo!\n"
 #: src/ia/iascript.cpp:696
 #, c-format
 msgid "Mission Completed: %d XP!"
-msgstr "Missão Completada: %d XP!"
+msgstr "Missão Cumprida: %d XP!"
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"

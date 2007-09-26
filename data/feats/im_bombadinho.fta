@@ -2,7 +2,7 @@ gettext("I am Bombadinho")
 gettext("The Student, who had gone frequently to the academy, permanently receives +1 to strenght.")
 10
 EDFISICA
-ATTRIBUTE STRENGHT
+ATTRIBUTE STRENGTH
 NONE NONE
 NONE NONE
 0*d2+0

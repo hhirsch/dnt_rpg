@@ -2,6 +2,11 @@
 #include "defs.h"
 #include "../engine/util.h"
 #include <math.h>
+#include <string>
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
+using namespace std;
 
 /*************************************************************************
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
@@ -72,13 +77,30 @@ int thing::attBonus(int curAttribute)
  ******************************************************/
 int thing::getBonusValue(factor something)
 {
+   skill* s = NULL;
    if(something.type == "ATTRIBUTE")
    {
-      return(attBonus(sk.getSkillByString(something.id)));
+      s = sk.getSkillByString(something.id);
+      if(s)
+      {
+         return(attBonus(s));
+      }
+      else
+      {
+         cerr << "Unknow Attribute: " << something.id << endl;
+      }
    }
    else if(something.type == "SKILL")
    {
-      return(skillBonus(sk.getSkillByString(something.id)));
+      s = sk.getSkillByString(something.id);
+      if(s)
+      {
+         return(skillBonus(s));
+      }
+      else
+      {
+         cerr << "Unknow Skill: " << something.id << endl;
+      }
    }
    
    return(0);

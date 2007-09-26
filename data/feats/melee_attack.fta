@@ -2,7 +2,7 @@ gettext("Melee Attack")
 gettext("Character's melee attack.")
 1
 ALL ALL
-ATTRIBUTE STRENGHT
+ATTRIBUTE STRENGTH
 NONE NONE
 ALL ALL
 0*d0+0
