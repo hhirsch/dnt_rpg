@@ -84,6 +84,15 @@ class thing
 
       /*!
        **********************************************
+       *  Get the battle script of this thing
+       *  \return -> pointer to iaScript that 
+       *             controlls the battle mode
+       *             of this thing.
+       **********************************************/
+      void* getBattleScript();
+
+      /*!
+       **********************************************
        *  Set the thing as enemy to PC
        **********************************************/
       void setAsEnemy();
@@ -120,9 +129,11 @@ class thing
        **********************************************/
        virtual void callIdleAnimation()=0;
 
-
    protected:
       bool dead;           /**< Dead state or not (if dead is only a corpse) */
+
+      void* battleScript;          /**< Pointer to the battle iaScript */
+      string battleScriptFileName; /**< The Battle Script Filename */
 
 };
 

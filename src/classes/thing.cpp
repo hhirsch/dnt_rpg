@@ -36,6 +36,8 @@ thing::thing()
    cr = 1;
    xpPercent = 100;
    dead = false;
+   battleScript = NULL;
+   battleScriptFileName = "";
    walk_interval = 37.5 * WALK_ACTUALIZATION; //default value, if not
                                               //defined at the def file.
 }
@@ -104,6 +106,14 @@ int thing::getBonusValue(factor something)
    }
    
    return(0);
+}
+
+/******************************************************
+ *                   getBattleScript                  *
+ ******************************************************/
+void* thing::getBattleScript()
+{
+   return(battleScript);
 }
 
 /******************************************************
