@@ -83,7 +83,8 @@ bool isType(string s)
 bool isFunction(string s)
 {
    return( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
-           (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_TOTAL) ||
+           (s == IA_MOVE_TO_OBJECT) || (s == IA_SET_IDLE) ||
+           (s == IA_FEAT_TOTAL) ||
            (s == IA_FEAT_COST) || (s == IA_FEAT_USE_AT_CHARACTER) ||
            (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_SKILL_POINTS) ||
            (s == IA_SKILL_MODIFIER) || (s == IA_FIGHT_ENTER) ||

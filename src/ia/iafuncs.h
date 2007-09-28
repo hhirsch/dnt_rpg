@@ -84,6 +84,8 @@ using namespace std;
 #define IA_MOVE_TO_POSITION "moveToPosition"
 #define IA_MOVE_TO_CHARACTER "moveToCharacter"
 #define IA_MOVE_TO_OBJECT "moveToObject"
+/*! void setIdle(character* char) */
+#define IA_SET_IDLE "setIdle"
 
 ////////////////////////////////////////////////////
 //                Mission Functions               //

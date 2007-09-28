@@ -644,6 +644,31 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
 
+   /* Set Idle */
+   if(functionName == IA_SET_IDLE)
+   {
+      /* Syntax void setIdle(character* char) */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         character* c = (character*)iv->value;
+         if(c != NULL)
+         {
+            c->setState(STATE_IDLE);
+         }
+         else
+         {
+            cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
+         }
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+   }
+
+
    ////////////////////////////////////////////////////
    //                Mission Functions               //
    ////////////////////////////////////////////////////
