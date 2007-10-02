@@ -754,6 +754,16 @@ character* characterList::insertCharacter(string file, featsList* ft,
          /* Set the owner */
          isc->defineCharacterOwner(novo);
       }
+      /* Blood Position */
+      else if(buf == "bloodPosition")
+      {
+         sscanf(token2.c_str(), "%f", &novo->bloodPosition); 
+      }
+      /* Blood File Name */
+      else if(buf == "bloodFileName")
+      {
+         novo->bloodFileName = token2;
+      }
 
       //TODO
       /*else if (buf == "lifeDice")

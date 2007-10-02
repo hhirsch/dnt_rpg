@@ -38,6 +38,10 @@ thing::thing()
    dead = false;
    battleScript = NULL;
    battleScriptFileName = "";
+
+   /* Set Default Values */
+   bloodFileName = "../data/particles/blood3.par";
+   bloodPosition = 25;
    walk_interval = 37.5 * WALK_ACTUALIZATION; //default value, if not
                                               //defined at the def file.
 }

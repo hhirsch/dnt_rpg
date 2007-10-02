@@ -39,6 +39,8 @@ class thing
       float xPosition;        /**< Character's X Position */
       float yPosition;        /**< Character's Y Position (UP) */
       float zPosition;        /**< Character's Z Position */
+      float bloodPosition;    /**< Blood Z Orign*/
+      string bloodFileName;   /**< Blood Particle FileName to use */ 
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
       int xp;                 /**< The experience of the thing */

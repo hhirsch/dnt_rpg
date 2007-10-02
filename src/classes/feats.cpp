@@ -321,9 +321,9 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       GLfloat sn = sin(deg2Rad(target.orientation));
       partSystem* ps = (partSystem*)pSystem;
       ps->addParticle(PART_BLOOD, target.xPosition - (sn*2),
-                      target.yPosition + target.max[1]-5,
+                      target.yPosition + target.bloodPosition,
                       target.zPosition - (cs*2), 
-                      "../data/particles/blood3.par");
+                      target.bloodFileName);
 
       return(true);
    }
