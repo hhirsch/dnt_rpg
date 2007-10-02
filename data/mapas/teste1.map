@@ -4,9 +4,9 @@ npc ../data/mapas/teste1.map.npc
 MUSICA ../data/music/musica7.ogg
 Outdoor: 1
 o ../data/weapons/definitions/beretta92.wcc
-t ../data/texturas/floor_outdoor/rock.png ../data/texturas/floor_outdoor/rock.png 126 129 134
-t ../data/texturas/floor_outdoor/grass.png ../data/texturas/floor_outdoor/grass.png 54 102 49
 t ../data/texturas/floor_outdoor/stones.png ../data/texturas/floor_outdoor/stones.png 106 112 106
+t ../data/texturas/floor_outdoor/grass.png ../data/texturas/floor_outdoor/grass.png 54 102 49
+t ../data/texturas/floor_outdoor/rock.png ../data/texturas/floor_outdoor/rock.png 126 129 134
 #Z: 0
 p 0,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/floor_outdoor/grass.png

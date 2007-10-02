@@ -5,6 +5,7 @@ maxLifePoints = 75
 baseModifier = 12/25/17
 attackModifier = 13/8/3/0/0/0
 sizeModifier = 3
+generalScript = ../data/ia/script/general/test2.dsl
 ATT_LEVEL = 7
 ATT_STRENGHT = 10
 ATT_DEXTERY = 20

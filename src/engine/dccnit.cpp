@@ -1266,6 +1266,12 @@ void engine::treatScripts()
    else
    {
       //TODO
+      /* Treat Pending Combat Actions */
+      //treatPendingCombatActions();
+
+      /* Treat actual NPC script, if have one */
+      //TODO
+      
    }
 }
 
