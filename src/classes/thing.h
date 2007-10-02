@@ -95,6 +95,14 @@ class thing
 
       /*!
        **********************************************
+       *  Set the battle Script of the thing
+       * \param script -> pointer to the battle script
+       * \param scriptFileName -> filename of the script
+       **********************************************/
+      void setBattleScript(void* script, string scriptFileName);
+
+      /*!
+       **********************************************
        *  Set the thing as enemy to PC
        **********************************************/
       void setAsEnemy();

@@ -754,6 +754,15 @@ character* characterList::insertCharacter(string file, featsList* ft,
          /* Set the owner */
          isc->defineCharacterOwner(novo);
       }
+      /* Battle Script */
+      else if(buf == "battleScript")
+      {
+         /* Create the Script */
+         iaScript* isc = new iaScript(token2, pEngine);
+         novo->setBattleScript(isc, token2);
+         /* Set the owner */
+         isc->defineCharacterOwner(novo);
+      }
       /* Blood Position */
       else if(buf == "bloodPosition")
       {

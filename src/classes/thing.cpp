@@ -1,6 +1,7 @@
 #include "thing.h"
 #include "defs.h"
 #include "../engine/util.h"
+#include "../ia/iascript.h"
 #include <math.h>
 #include <string>
 #include <stdlib.h>
@@ -52,6 +53,12 @@ thing::thing()
 thing::~thing()
 {
    dead = true;
+   if(battleScript)
+   {
+      iaScript* isc = (iaScript*)battleScript;
+      delete(isc);
+      battleScript = NULL;
+   }
 }
 
 /******************************************************
@@ -118,6 +125,15 @@ int thing::getBonusValue(factor something)
 void* thing::getBattleScript()
 {
    return(battleScript);
+}
+
+/******************************************************
+ *                   getBattleScript                  *
+ ******************************************************/
+void thing::setBattleScript(void* script, string scriptFileName)
+{
+   battleScript = script;
+   battleScriptFileName = scriptFileName;
 }
 
 /******************************************************
