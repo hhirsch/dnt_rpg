@@ -21,7 +21,7 @@ script()
       character dude
       dude = getNearestEnemy(SELF_CHARACTER)
       if(!characterAtRange(dude))
-         moveToCharacterRange(dude)
+         moveToCharacter(SELF_CHARACTER, dude)
       end
 
       if(canAttack)
@@ -34,7 +34,7 @@ script()
    if(canMove)
       dude = getNearestEnemy(SELF_CHARACTER)
       if(!characterAtRange(dude))
-         moveToCharacterRange(dude)
+         moveToCharacter(SELF_CHARACTER, dude)
       end
    end
 end
