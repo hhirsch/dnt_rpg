@@ -1127,8 +1127,14 @@ bool engine::rangeAction(GLfloat posX, GLfloat posZ,
  *********************************************************************/
 void engine::exitBattleMode()
 {
+   /* Empty Fight */
    fight->empty();
+
+   /* Change Engine Mode */
    engineMode = ENGINE_MODE_REAL_TIME;
+
+   /* Abort All pending Actions */
+   actionControl->abortAllActions();
 }
 
 /*********************************************************************
@@ -1207,6 +1213,9 @@ void engine::enterBattleMode(bool surprisePC)
          canAttack = false;
       }
       attackFeat = activeCharacter->getActiveFeatRangeType();
+
+      /* Abort All pending Actions */
+      actionControl->abortAllActions();
       
    }
    else

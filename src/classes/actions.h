@@ -233,6 +233,10 @@ class actionController
       /*! Remove all Actions from the controller */
       void removeAllActions();
 
+      /*! Abort All actions at the controller (usefull when changing from
+       *  battle mode to real time mode). */
+      void abortAllActions();
+
       /*! Get the total actions on list
        * \return number of actions on the list */
       int getTotal();

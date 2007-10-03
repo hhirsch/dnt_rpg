@@ -228,6 +228,20 @@ actionController::~actionController()
 }
 
 /************************************************************
+ *                       abortAllActions                    *
+ ************************************************************/
+void actionController::abortAllActions()
+{
+   int i;
+   action* ac = first;
+   for(i = 0; i < total; i++)
+   {
+      ac->setAsEnded(false);
+      ac = ac->next;
+   }
+}
+
+/************************************************************
  *                      removeAllActions                    *
  ************************************************************/
 void actionController::removeAllActions()
