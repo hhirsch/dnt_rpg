@@ -935,12 +935,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    //                Skills Functions                //
    ////////////////////////////////////////////////////
 
-   /* SKILL_POINTS , ATT_MODIFIER */
+   /* Syntax int function(character c, string s) */
    else if((functionName == IA_SKILL_POINTS) || 
            (functionName == IA_ATT_MODIFIER) )
    {
-      /* Syntax int skillPoints(character c, string skillName)  */
-      /* Syntax int attModifier(character c, string attName) */
       character* c = NULL;
       string tmpName = "";
 
@@ -974,6 +972,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Run Function */
       if(c != NULL)
       {
+         /* Syntax int skillPoints(character c, string skillName)  */
          if(functionName == IA_SKILL_POINTS)
          {
             skill* skl = c->sk.getSkillByString(tmpName);
@@ -983,6 +982,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                assignValue(var, (void*)&i, IA_TYPE_INT);
             }
          }
+         /* Syntax int attModifier(character c, string attName) */
          else if(functionName == IA_ATT_MODIFIER)
          {
             skill* skl = c->sk.getSkillByString(tmpName);
@@ -1040,36 +1040,9 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    //                Character Functions             //
    ////////////////////////////////////////////////////
 
-
-   /* IA_CHARACTER_GET_PSYCHO */
-   else if(functionName == IA_CHARACTER_GET_PSYCHO)
-   {
-      /* Syntax int getPsycho(character c)  */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         character* c = (character*)iv->value;
-         if(c != NULL)
-         {
-            int i = c->psychoState;
-            assignValue(var, (void*)&i, IA_TYPE_INT);
-         }
-         else
-         {
-            cerr << "Error: Tried to access a NULL character at line " 
-                 << actualLine << " of the script: " << fileName << endl;
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
-   }
-
-   /* IA_CHARACTER_SET_PSYCHO */
+   /* Syntax void function(character c, int i) */
    else if(functionName == IA_CHARACTER_SET_PSYCHO)
    {
-      /* Syntax void setPsycho(character c, int psycho)  */
       character* dude = NULL;
       int psy = 0;
 
@@ -1098,6 +1071,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Set the things */
       if(dude != NULL)
       {
+         /* Syntax void setPsycho(character c, int psycho)  */
          dude->psychoState = psy;
       }
       else
@@ -1107,17 +1081,33 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
-   /* int getActualLife(character c) */
-   else if(functionName == IA_CHARACTER_GET_ACTUAL_LIFE)
+   /* Syntax int function(character c)  */
+   else if( (functionName == IA_CHARACTER_GET_ACTUAL_LIFE) ||
+            (functionName == IA_CHARACTER_GET_MAX_LIFE) ||
+            (functionName == IA_CHARACTER_GET_PSYCHO) )
    {
-      /* Syntax int getActualLife(character c)  */
       iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
       if(iv != NULL)
       {
          character* c = (character*)iv->value;
          if(c != NULL)
          {
-            int i = c->lifePoints;
+            int i = 0;
+            /* Syntax int getActualLife(character c)  */
+            if(functionName == IA_CHARACTER_GET_ACTUAL_LIFE)
+            {
+               i = c->lifePoints;
+            }
+            /* Syntax int getMaxLife(character c)  */
+            else if(functionName == IA_CHARACTER_GET_MAX_LIFE)
+            {
+               i = c->maxLifePoints;
+            }
+            /* Syntax int getPsycho(character c)  */
+            else if(functionName == IA_CHARACTER_GET_PSYCHO)
+            {
+               i = c->psychoState;
+            }
             assignValue(var, (void*)&i, IA_TYPE_INT);
          }
          else
@@ -1131,34 +1121,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
    }
-
-   /* int getMaxLife(character c) */
-   else if(functionName == IA_CHARACTER_GET_MAX_LIFE)
-   {
-      /* Syntax int getMaxLife(character c)  */
-      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
-      if(iv != NULL)
-      {
-         character* c = (character*)iv->value;
-         if(c != NULL)
-         {
-            int i = c->maxLifePoints;
-            assignValue(var, (void*)&i, IA_TYPE_INT);
-         }
-         else
-         {
-            cerr << "Error: Tried to access a NULL character at line " 
-                 << actualLine << " of the script: " << fileName << endl;
-         }
-         if(isFunction(token))
-         {
-            delete(iv);
-         }
-      }
-   }
-
-
-
+   
    ////////////////////////////////////////////////////
    //                Inventory Functions             //
    ////////////////////////////////////////////////////
