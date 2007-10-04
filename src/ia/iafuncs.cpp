@@ -89,7 +89,9 @@ bool isFunction(string s)
            (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_SKILL_POINTS) ||
            (s == IA_SKILL_MODIFIER) || (s == IA_FIGHT_ENTER) ||
            (s == IA_FIGHT_EXIT) || (s == IA_CHARACTER_GET_PSYCHO) ||
-           (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_SELF_OBJECT) ||
+           (s == IA_CHARACTER_SET_PSYCHO) || 
+           (s == IA_CHARACTER_GET_ACTUAL_LIFE) ||
+           (s == IA_CHARACTER_GET_MAX_LIFE) || (s == IA_SELF_OBJECT) ||
            (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
            (s == IA_ACTUAL_MAP) || (s == IA_TRUE) || (s == IA_FALSE) ||
            (s == IA_MISSION_ADD) || (s == IA_MISSION_COMPLETE) ||
@@ -103,6 +105,7 @@ bool isFunction(string s)
  ***********************************************************************/
 string functionType(string s)
 {
+   /* Boolean Functions */
    if( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
        (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_USE_AT_CHARACTER) ||
        (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_TRUE) || (s == IA_FALSE) ||
@@ -110,24 +113,31 @@ string functionType(string s)
    {
       return(IA_TYPE_BOOL);
    }
+   /* Integer Functions */
    else if( (s == IA_FEAT_TOTAL) || (s == IA_FEAT_COST) || 
             (s == IA_SKILL_POINTS) || (s == IA_SKILL_MODIFIER) ||
-            (s == IA_CHARACTER_GET_PSYCHO) || (s == IA_MISSION_GET_TEMP) )
+            (s == IA_CHARACTER_GET_PSYCHO) || (s == IA_MISSION_GET_TEMP) ||
+            (s == IA_CHARACTER_GET_ACTUAL_LIFE) || 
+            (s == IA_CHARACTER_GET_MAX_LIFE ) )
    {
       return(IA_TYPE_INT);
    }
+   /* Object Functions */
    else if(s == IA_SELF_OBJECT)
    {
       return(IA_TYPE_OBJECT);
    }
+   /* Character Functions */
    else if((s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) )
    {
       return(IA_TYPE_CHARACTER);
    }
+   /* Map Functions */
    else if(s == IA_ACTUAL_MAP)
    {
       return(IA_TYPE_MAP);
    }
+   /* Void Functions */
    return(IA_TYPE_VOID);
 }
 

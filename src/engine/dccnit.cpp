@@ -1274,13 +1274,20 @@ void engine::treatScripts()
    }
    else
    {
-      //TODO
       /* Treat Pending Combat Actions */
-      //treatPendingCombatActions();
+      treatPendingActions();
 
       /* Treat actual NPC script, if have one */
-      //TODO
-      
+      character* npc = fight->actualCharacterTurn();
+      if(npc)
+      {
+         iaScript* script = (iaScript*) npc->getBattleScript();
+         if( (script) && (npc->isAlive()))
+         {
+            script->defineMap(actualMap);
+            script->run(MAX_SCRIPT_LINES);
+         }
+      }
    }
 }
 

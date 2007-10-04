@@ -110,6 +110,8 @@ using namespace std;
 #define IA_FEAT_COST  "featCost"
 #define IA_FEAT_USE_AT_CHARACTER "featUseAtCharacter"
 #define IA_FEAT_USE_AT_OBJECT "featUseAtObject"
+#define IA_FEAT_GET_RANDOM_ATTACK "getRandomAttackFeat"
+#define IA_FEAT_GET_POWERFULL_ATTACK "getPowerfullAttackFeat"
 
 ////////////////////////////////////////////////////
 //                Skills Functions                //
@@ -123,6 +125,8 @@ using namespace std;
 /*! void combatEnter() */
 #define IA_FIGHT_ENTER "combatEnter"
 #define IA_FIGHT_EXIT "combatExit"
+#define IA_FIGHT_RUN_AWAY_FROM_BATTLE "runAwayFromBattle"
+#define IA_FIGHT_GET_NEAREST_ENEMY "getNearestEnemy"
 
 ////////////////////////////////////////////////////
 //                Character Functions             //
@@ -131,6 +135,14 @@ using namespace std;
 #define IA_CHARACTER_GET_PSYCHO "getPsycho"
 /*! void setPsycho(character c, int psychoState)  */
 #define IA_CHARACTER_SET_PSYCHO "setPsycho"
+/*! int getActualLife(character c) */
+#define IA_CHARACTER_GET_ACTUAL_LIFE "getActualLife"
+/*! int getMaxLife(character c) */
+#define IA_CHARACTER_GET_MAX_LIFE "getMaxLife"
+#define IA_CHARACTER_HAVE_HEAL_FUNCTION "haveHealFunction"
+#define IA_CHARACTER_HEAL_CHARACTER "healCharacter"
+#define IA_CHARACTER_AT_RANGE "characterAtRange"
+
 
 ////////////////////////////////////////////////////
 //                Inventory Functions             //

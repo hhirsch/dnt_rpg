@@ -1016,8 +1016,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
-
-
    /* IA_CHARACTER_SET_PSYCHO */
    else if(functionName == IA_CHARACTER_SET_PSYCHO)
    {
@@ -1058,6 +1056,57 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                  << actualLine << " of the script: " << fileName << endl;
       }
    }
+
+   /* int getActualLife(character c) */
+   else if(functionName == IA_CHARACTER_GET_ACTUAL_LIFE)
+   {
+      /* Syntax int getActualLife(character c)  */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         character* c = (character*)iv->value;
+         if(c != NULL)
+         {
+            int i = c->lifePoints;
+            assignValue(var, (void*)&i, IA_TYPE_INT);
+         }
+         else
+         {
+            cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
+         }
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+   }
+
+   /* int getMaxLife(character c) */
+   else if(functionName == IA_CHARACTER_GET_MAX_LIFE)
+   {
+      /* Syntax int getMaxLife(character c)  */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         character* c = (character*)iv->value;
+         if(c != NULL)
+         {
+            int i = c->maxLifePoints;
+            assignValue(var, (void*)&i, IA_TYPE_INT);
+         }
+         else
+         {
+            cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
+         }
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+   }
+
 
 
    ////////////////////////////////////////////////////
