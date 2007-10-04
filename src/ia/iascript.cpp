@@ -935,14 +935,64 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    //                Skills Functions                //
    ////////////////////////////////////////////////////
 
+   /* SKILL_POINTS , ATT_MODIFIER */
+   else if((functionName == IA_SKILL_POINTS) || 
+           (functionName == IA_ATT_MODIFIER) )
+   {
+      /* Syntax int skillPoints(character c, string skillName)  */
+      /* Syntax int attModifier(character c, string attName) */
+      character* c = NULL;
+      string tmpName = "";
 
-   else if(functionName == IA_SKILL_POINTS)
-   {
-      //TODO
-   }
-   else if(functionName == IA_SKILL_MODIFIER)
-   {
-      //TODO
+      /* Get Character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         character* c = (character*)iv->value;
+         if(c == NULL)
+         {
+            cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
+         }
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get Name */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         tmpName = *(string*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Run Function */
+      if(c != NULL)
+      {
+         if(functionName == IA_SKILL_POINTS)
+         {
+            skill* skl = c->sk.getSkillByString(tmpName);
+            if(skl != NULL)
+            {
+               int i = skl->points;
+               assignValue(var, (void*)&i, IA_TYPE_INT);
+            }
+         }
+         else if(functionName == IA_ATT_MODIFIER)
+         {
+            skill* skl = c->sk.getSkillByString(tmpName);
+            if(skl != NULL)
+            {
+               int i = c->attBonus(skl);
+               assignValue(var, (void*)&i, IA_TYPE_INT);
+            }
+         }
+      }
    }
 
 

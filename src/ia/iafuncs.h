@@ -116,8 +116,10 @@ using namespace std;
 ////////////////////////////////////////////////////
 //                Skills Functions                //
 ////////////////////////////////////////////////////
+/*! int skillPoints(character c, string skillID) */
 #define IA_SKILL_POINTS "skillPoints"
-#define IA_SKILL_MODIFIER "skillModifier"
+/*! int attModifier(character c, string attID) */
+#define IA_ATT_MODIFIER "attModifier"
 
 ////////////////////////////////////////////////////
 //                  Fight Functions               //
