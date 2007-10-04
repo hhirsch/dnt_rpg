@@ -75,7 +75,8 @@ class missionsController
       void addNewMission(string scriptFile);
 
       /*! Complete the mission (remove from current and put at completed)
-       * \param m -> mission completed. */
+       * \param m -> mission completed.
+       * \param type -> type of completion */
       void completeMission(mission* m, int type);
 
       /*! Search for a mission on the current list
