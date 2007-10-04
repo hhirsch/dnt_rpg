@@ -13,17 +13,18 @@ using namespace std;
 
 /*! The individual skill definition.
  */
-typedef struct _skill
+class skill
 {
-   int points;             /**< Total skill points */
-   int prevPoints;         /**< Previous skill points, when adding and cancel */
-   int mod;                /**< Needed points to add +1 on points */
-   string name;            /**< Skill Name */
-   string description;     /**< Skill Description */
-   string idString;        /**< String Identificator of the Skill */
-   int baseAttribute;      /**< Base Attibute */
-   SDL_Surface* image;     /**< Skill Image */
-}skill;
+   public:
+      int points;             /**< Total skill points */
+      int prevPoints;         /**< Previous points, when adding and cancel */
+      int mod;                /**< Needed points to add +1 on points */
+      string name;            /**< Skill Name */
+      string description;     /**< Skill Description */
+      string idString;        /**< String Identificator of the Skill */
+      int baseAttribute;      /**< Base Attibute */
+      SDL_Surface* image;     /**< Skill Image */
+};
 
 /*! The group skill definitions. All game skills are here.
   */

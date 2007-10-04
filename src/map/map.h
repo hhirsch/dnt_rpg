@@ -38,60 +38,64 @@ using namespace std;
  ****************************************************
  *               Map's Connections                  *
  ****************************************************/
-typedef struct _conection
+class conection
 {
-   bool active;          /**< Active Conection */
-   GLfloat x1,z1,x2,z2;  /**< Map Position */
-   string mapName;       /**< Map filename */ 
-}conection;
+   public:
+      bool active;          /**< Active Conection */
+      GLfloat x1,z1,x2,z2;  /**< Map Position */
+      string mapName;       /**< Map filename */ 
+};
 
 /*!
  ****************************************************
  *                  Map's Walls                     *
  ****************************************************/
-typedef struct _wall
+class wall
 {
-   GLfloat x1,   /**< X min coordinates */
-           z1,   /**< Z min coordinates */
-           x2,   /**< X max Coordinates */
-           z2;   /**< Z max Coordinates */
-   GLuint dX,    /**< Delta X of texture cycle */
-          dY,    /**< Delta Y of texture cycle */
-          dZ;    /**< Delta Z of texture cycle */
-   int texture;  /**< Texture ID */
-   struct _wall* next; /**< Next on list */
-}wall;
+   public:
+      GLfloat x1,   /**< X min coordinates */
+              z1,   /**< Z min coordinates */
+              x2,   /**< X max Coordinates */
+              z2;   /**< Z max Coordinates */
+      GLuint dX,    /**< Delta X of texture cycle */
+             dY,    /**< Delta Y of texture cycle */
+             dZ;    /**< Delta Z of texture cycle */
+      int texture;  /**< Texture ID */
+      wall* next; /**< Next on list */
+};
 
 /*!
  ****************************************************
  *               Map's Textures                     *
  ****************************************************/
-typedef struct _texture
+class texture
 {
-   string name;              /**< Name */
-   string fileName;          /**< File Name */
-   GLuint index;             /**< Texture ID */
-   GLuint w,h;               /**< Dimmensions */
-   GLuint R,G,B;             /**< Colors to MINIMAP */
-   GLuint alphaTexture;      /**< The Alpha Texture */
-   int count;                /**< The count of the texture */
-   float** alphaValues;      /**< The Alpha Values Matrix */
-   bool definedAlpha;        /**< If the alpha is defined */
-   struct _texture* next;    /**< Next on List */
-}texture;
+   public:
+      string name;              /**< Name */
+      string fileName;          /**< File Name */
+      GLuint index;             /**< Texture ID */
+      GLuint w,h;               /**< Dimmensions */
+      GLuint R,G,B;             /**< Colors to MINIMAP */
+      GLuint alphaTexture;      /**< The Alpha Texture */
+      int count;                /**< The count of the texture */
+      float** alphaValues;      /**< The Alpha Values Matrix */
+      bool definedAlpha;        /**< If the alpha is defined */
+      texture* next;    /**< Next on List */
+};
 
 /*!
  ****************************************************
  *                  Map's Doors                     *
  ****************************************************/
-typedef struct _door
+class door
 {
-  object* obj;             /**< pointer to door object */
-  GLfloat x,z;             /**< position on map */
-  GLint status;            /**< actual status (opened, closed) */
-  GLint orientation;       /**< orientation */
-  struct _door* next;      /**< pointer to next door on map */
-}door;
+   public:
+      object* obj;             /**< pointer to door object */
+      GLfloat x,z;             /**< position on map */
+      GLint status;            /**< actual status (opened, closed) */
+      GLint orientation;       /**< orientation */
+      door* next;      /**< pointer to next door on map */
+};
 
 /*!
  *****************************************************

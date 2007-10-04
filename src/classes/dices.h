@@ -17,13 +17,14 @@
  ******************************************************************/
 /*! This Struct defines the internal dice, with value
        correspondent to \e numberOfDices*random(diceID)+sumNumber.*/
-typedef struct _dice
+class dice
 {
-   int diceID;             /**< ID of Dice. Represents the number of faces.*/
-   int numberOfDices;      /**< Number of Dices to roll. */
-   int sumNumber;          /**< Base Number to Sum to value.*/
-   int criticalMultiplier; /**< The critical Multiplier Value */
-}dice;
+   public:
+      int diceID;             /**< ID of Dice. Represents the number of faces.*/
+      int numberOfDices;      /**< Number of Dices to roll. */
+      int sumNumber;          /**< Base Number to Sum to value.*/
+      int criticalMultiplier; /**< The critical Multiplier Value */
+};
 
 /*! 
   This is the dice Thing struct, with all things to know about one dice. 
@@ -32,13 +33,14 @@ typedef struct _dice
     And Level can be anything that is needed, from level itself to 
     skills and base attributes.
 */
-typedef struct _diceThing
+class diceThing
 {
-   dice baseDice;         /**< Basic Dice. */
-   dice aditionalDice;    /**< Aditional Dice per Level. */
-   int aditionalLevels;   /**< Number of Levels per Aditional Dices. */
-   int initialLevel;      /**< Initial Level to use this diceThing. */
-}diceThing;
+   public:
+      dice baseDice;         /**< Basic Dice. */
+      dice aditionalDice;    /**< Aditional Dice per Level. */
+      int aditionalLevels;   /**< Number of Levels per Aditional Dices. */
+      int initialLevel;      /**< Initial Level to use this diceThing. */
+};
 
 
 #endif
