@@ -22,7 +22,7 @@ inventWindow::inventWindow(int xa, int ya, string title,
  **************************************************************/
 inventWindow::inventWindow(inventory *invent, interface* inter)
 {
-   init(0,0, gettext("Inventory"), invent, inter);
+   init(0,1, gettext("Inventory"), invent, inter);
 }
 
 /**************************************************************
