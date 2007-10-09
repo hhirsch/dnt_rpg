@@ -128,7 +128,7 @@ void* thing::getBattleScript()
 }
 
 /******************************************************
- *                   getBattleScript                  *
+ *                   setBattleScript                  *
  ******************************************************/
 void thing::setBattleScript(void* script, string scriptFileName)
 {

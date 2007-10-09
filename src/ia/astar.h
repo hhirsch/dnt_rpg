@@ -141,6 +141,9 @@ class aStar
        * \param ori -> new orientation value */
       void setOrientation(GLfloat ori);
 
+      /*! Clear the a* state */
+      void clear();
+
    private:
       Map* actualMap;           /**< Pointer to opened Map */
       GLfloat destinyX,         /**< Destiny X position */

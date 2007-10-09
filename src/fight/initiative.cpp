@@ -109,7 +109,7 @@ character* initiative::nextCharacter()
 }
 
 /***************************************************************
- *                       nextCharacter                         *
+ *                      actualCharacter                        *
  ***************************************************************/
 character* initiative::actualCharacter()
 {
@@ -135,6 +135,7 @@ void initiative::clear()
       first = aux->next;
       delete(aux);
    }
+   actual = NULL;
    first = NULL;
    next = NULL;
 }

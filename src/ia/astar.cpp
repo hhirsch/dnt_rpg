@@ -145,6 +145,18 @@ void aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
    }
 }
 
+void aStar::clear()
+{
+   lock();
+   delete(patt);
+   patt = new pattAgent(true);
+   patt->defineDestiny(0, 0);
+   patt->defineStepSize(0);
+   patt->defineOrientation(0);
+   patt->defineSight(0, 0);
+   unLock();
+}
+
 /****************************************************************
  *                        findPathInternal                      *
  ****************************************************************/
@@ -154,17 +166,10 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
                              GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
                              GLfloat perX2, GLfloat perY2, GLfloat perZ2)
 {
-   lock();
-
    /* To avoid previous path, delete the existed one! */
-      delete(patt);
-      patt = new pattAgent(true);
-      patt->defineDestiny(0, 0);
-      patt->defineStepSize(0);
-      patt->defineOrientation(0);
-      patt->defineSight(0, 0);
-
-   
+   clear();   
+  
+ lock();
    int i;
    GLfloat varHeight = 0, nx = 0, nz = 0;
    Square* perQuad = NULL;
