@@ -1286,7 +1286,6 @@ void engine::treatScripts()
          iaScript* script = (iaScript*) npc->getBattleScript();
          if( (script) && (npc->isAlive()))
          {
-            printf("%s: %p %p\n", npc->nome.c_str(), npc, script);
             script->defineMap(actualMap);
             script->run(MAX_SCRIPT_LINES);
          }
