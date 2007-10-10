@@ -97,7 +97,7 @@ bool isFunction(string s)
            (s == IA_MISSION_ADD) || (s == IA_MISSION_COMPLETE) ||
            (s == IA_MISSION_IS_ACTIVE) || (s == IA_MISSION_SET_TEMP) ||
            (s == IA_MISSION_GET_TEMP) || (s == IA_MISSION_SET_XP) ||
-           (s == IA_INVENTORY_HAVE) );
+           (s == IA_INVENTORY_HAVE) || (s == IA_FIGHT_GET_NEAREST_ENEMY) );
 }
 
 /***********************************************************************
@@ -128,7 +128,8 @@ string functionType(string s)
       return(IA_TYPE_OBJECT);
    }
    /* Character Functions */
-   else if((s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) )
+   else if( (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
+            (s == IA_FIGHT_GET_NEAREST_ENEMY) )
    {
       return(IA_TYPE_CHARACTER);
    }

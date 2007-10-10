@@ -277,9 +277,18 @@ int fightSystem::doTurn(string& brief)
             sprintf(buffer, "%s's turn.", actualActor->nome.c_str());
             brief += buffer;
             brief += "|";
-            doNPCAction(actualActor,tmp);
-            pendingAnimation = true;
-            brief += "|" + tmp;
+            /* If NPC hasn't script, run from here */
+            if(actualActor->getBattleScript() == NULL)
+            {
+               doNPCAction(actualActor,tmp);
+               pendingAnimation = true;
+               brief += "|" + tmp;
+            }
+            else
+            {
+               /* Run the script from the engine */
+               return(FIGHT_NPC_TURN);
+            }
          }
 
          if(!hasEnemies(actualActor, brief))

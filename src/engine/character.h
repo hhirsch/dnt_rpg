@@ -104,6 +104,11 @@ class character: public aniModel
       /*! Clear Skills */
       void clearSkills();
 
+      /*! Get the nearest enemy to the character
+       * \param fSystem -> pointer to the active fightSystem
+       * \return -> pointer to the nearest enemy character (NULL if none) */
+      character* getNearestEnemy(void* fSystem);
+
       classe* actualClass[MAX_DISTINCT_CLASSES]; /**< Pointer to each class */
       int classLevels[MAX_DISTINCT_CLASSES]; /**< Current level of each class */
       race* actualRace;         /**< Pointer to Race */

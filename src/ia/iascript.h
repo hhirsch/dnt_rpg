@@ -35,6 +35,9 @@ class iaScript
       /*! Destructor */
       ~iaScript();
 
+      /*! Init the script for use (open file, create structs, etc) */
+      void init();
+
       /*! Close the iaScript. A closed iaScript can't run. */
       void close();
    
@@ -58,6 +61,10 @@ class iaScript
       /*! Verify if the script is finished or not
        * \return -> if the end of the script is found. False otherwise. */
       bool finished();
+
+      /*! restart the script to the initial status (for example, to run 
+       *  another time)  */
+      void restart();
 
    protected:
       ifstream file;             /**< The script's file */

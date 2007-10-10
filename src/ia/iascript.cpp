@@ -8,26 +8,43 @@
 iaScript::iaScript(string scriptFile, void* usedEngine)
 {
    fileName = scriptFile;
-   file.open(scriptFile.c_str(), ios::in | ios::binary);
-   if(!file)
-   {
-      cerr << "Failed to open the script: " << scriptFile << endl;
-   }
+
+   init();
+
    objectOwner = NULL;
    characterOwner = NULL;
    actualMap = NULL;
    pendingAction = NULL;
+   actualEngine = usedEngine;
+   type = IASCRIPT_TYPE_DEFAULT;
+}
+
+/***********************************************************************
+ *                               init                                  *
+ ***********************************************************************/
+void iaScript::init()
+{
+   file.open(fileName.c_str(), ios::in | ios::binary);
+   if(!file)
+   {
+      cerr << "Failed to open the script: " << fileName << endl;
+   }
 
    symbols = new iaSymbolsTable();
    jumpStack = new iaStack();
 
-   actualLine = 0;
-
-   actualEngine = usedEngine;
-
    context = "";
+   actualLine = 0;
+}
 
-   type = IASCRIPT_TYPE_DEFAULT;
+/***********************************************************************
+ *                             restart                                 *
+ ***********************************************************************/
+void iaScript::restart()
+{
+   actualLine = 0;
+   close();
+   init();
 }
 
 
@@ -1032,6 +1049,35 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          cerr << "Error: " << IA_FIGHT_EXIT << " don't return any value!" 
               << " at " << strLine << " on script: " << fileName << endl;
+      }
+   }
+
+   /* getNearestEnemy */
+   else if(functionName == IA_FIGHT_GET_NEAREST_ENEMY)
+   {
+      character* dude = NULL;
+
+      /* Get character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         dude = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      if(dude != NULL)
+      {
+         /* syntax character getNearestEnemy(character dude) */
+         character* enemy = dude->getNearestEnemy(eng->getFightSystem());
+         assignValue(var, (void*)enemy, IA_TYPE_CHARACTER);
+      }
+      else
+      {
+         cerr << "Error: Tried to access a NULL character at line " 
+                 << actualLine << " of the script: " << fileName << endl;
       }
    }
 

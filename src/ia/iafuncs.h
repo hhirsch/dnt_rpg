@@ -128,6 +128,7 @@ using namespace std;
 #define IA_FIGHT_ENTER "combatEnter"
 #define IA_FIGHT_EXIT "combatExit"
 #define IA_FIGHT_RUN_AWAY_FROM_BATTLE "runAwayFromBattle"
+/*! character getNearestEnemy(character dude) */
 #define IA_FIGHT_GET_NEAREST_ENEMY "getNearestEnemy"
 
 ////////////////////////////////////////////////////

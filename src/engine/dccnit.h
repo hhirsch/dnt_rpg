@@ -221,6 +221,13 @@ class engine
        **************************************************************/
       void exitBattleMode();
 
+      /*!
+       ***************************************************************
+       * Get the engine fightSystem
+       * \return pointer to the fightSystem
+       ***************************************************************/
+      fightSystem* getFightSystem();
+
    private:
 
       /*!

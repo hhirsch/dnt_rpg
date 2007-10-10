@@ -23,7 +23,8 @@
 
 #define FIGHT_END 0
 #define FIGHT_PC_TURN 1
-#define FIGHT_CONTINUE 2
+#define FIGHT_NPC_TURN 2
+#define FIGHT_CONTINUE 3
 
 #define FIGHT_ANIMATION_DELAY  2000  /**< Delay for animations */
 
@@ -92,6 +93,23 @@ class fightSystem
       **************************************************************/
       void verifyDeads(string& brief);
 
+    /*!
+     ***************************************************************
+     * Verify if character is PC (and is on pcList).  
+     * \param pers -> Pointer to Character
+     * \return true if character is a PC.
+     ***************************************************************/
+     bool isPC(character* pers);
+
+    /*!
+     ***************************************************************
+     * Verifies if character has enemies.
+     * \param pers -> pointer to character to verify.
+     * \param brief -> briefing to print, lines separed by '|' .
+     * \return true if has enemies, false otherwise.
+     *************************************************************/
+     bool hasEnemies(character* pers, string& brief);
+
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
      fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /**< NPCs groups */
@@ -101,14 +119,7 @@ class fightSystem
      bool pendingAnimation;     /**< If some animation is pending */
      messageController* msgController; /**< World message control */
      partSystem* particleSystem; /**< The particle system control */
-
-     /*!
-     ***************************************************************
-     * Verify if character is PC (and is on pcList).  
-     * \param pers -> Pointer to Character
-     * \return true if character is a PC.
-     ***************************************************************/
-     bool isPC(character* pers);
+   
      /*!
      *************************************************************** 
      * Do a complete turn on game.  
@@ -147,14 +158,6 @@ class fightSystem
      ***************************************************************/
      void doNPCMovimentation(character* pers, int when);
 
-     /*!
-     ***************************************************************
-     * Verifies if character has enemies.
-     * \param pers -> pointer to character to verify.
-     * \param brief -> briefing to print, lines separed by '|' .
-     * \return true if has enemies, false otherwise.
-     *************************************************************/
-     bool hasEnemies(character* pers, string& brief);
 };
 
 #endif

@@ -1241,6 +1241,11 @@ void engine::endTurn()
    {
       fightStatus = FIGHT_CONTINUE;
    }
+   else if( (engineMode == ENGINE_MODE_TURN_BATTLE) &&
+            (fightStatus == FIGHT_NPC_TURN) )
+   {
+      fightStatus = FIGHT_CONTINUE;
+   }
 }
 
 /*********************************************************************
@@ -1280,14 +1285,24 @@ void engine::treatScripts()
       treatPendingActions();
 
       /* Treat actual NPC script, if have one */
-      character* npc = fight->actualCharacterTurn();
-      if(npc)
+      if(fightStatus == FIGHT_NPC_TURN)
       {
-         iaScript* script = (iaScript*) npc->getBattleScript();
-         if( (script) && (npc->isAlive()))
+         character* npc = fight->actualCharacterTurn();
+         if(npc)
          {
-            script->defineMap(actualMap);
-            script->run(MAX_SCRIPT_LINES);
+            iaScript* script = (iaScript*) npc->getBattleScript();
+            if( (script) && (npc->isAlive()))
+            {
+               script->defineMap(actualMap);
+               script->run(MAX_SCRIPT_LINES);
+
+               /* End turn when script finished */
+               if(script->finished())
+               {
+                  endTurn();
+                  script->restart();
+               }
+            }
          }
       }
    }
@@ -1453,7 +1468,10 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
            } 
            else if(object == (guiObject*) buttonEndTurn)
            {
-              endTurn(); 
+              if(fightStatus == FIGHT_PC_TURN)
+              {
+                 endTurn(); 
+              }
            }
            else if(object == (guiObject*) buttonInventory)
            {
@@ -1937,7 +1955,7 @@ int engine::treatIO(SDL_Surface *screen)
             {
                enterBattleMode(true);
             }
-            else
+            else if(fightStatus == FIGHT_PC_TURN)
             {
                endTurn();
             }
@@ -2736,8 +2754,13 @@ void engine::renderNoShadowThings()
 
    /* Draw Combat Mode Things */
    if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
-       (fightStatus == FIGHT_PC_TURN))
+       ( (fightStatus == FIGHT_PC_TURN) || (fightStatus == FIGHT_NPC_TURN) ) )
    {
+        character* turnCharacter = fight->actualCharacterTurn();
+        if(!turnCharacter)
+        {
+           turnCharacter = activeCharacter;
+        }
        /* Draw Movimentation Circles */
           /* Full Circle */
           actualMap->drawSurfaceOnMap(fullMoveCircle,
@@ -2756,10 +2779,10 @@ void engine::renderNoShadowThings()
           /* Feat Range Circle */
           float rangeValue=activeCharacter->getActiveFeatRange()*METER_TO_DNT;
           actualMap->drawSurfaceOnMap(featRangeCircle, 
-                                      activeCharacter->xPosition-rangeValue,
-                                      activeCharacter->zPosition-rangeValue, 
-                                      activeCharacter->xPosition+rangeValue, 
-                                      activeCharacter->zPosition+rangeValue, 
+                                      turnCharacter->xPosition-rangeValue,
+                                      turnCharacter->zPosition-rangeValue, 
+                                      turnCharacter->xPosition+rangeValue, 
+                                      turnCharacter->zPosition+rangeValue, 
                                       0.3,20);
                                        
    }
@@ -3203,6 +3226,14 @@ void engine::showImage(string fileName)
 }
 
 /*********************************************************************
+ *                          getFightSystem                           *
+ *********************************************************************/
+fightSystem* engine::getFightSystem()
+{
+   return(fight);
+}
+
+/*********************************************************************
  *                          Runs the Engine                          *
  *********************************************************************/
 int engine::Run(SDL_Surface *surface)
@@ -3258,7 +3289,7 @@ int engine::Run(SDL_Surface *surface)
               }
               pers = (character*) pers->next;
            }
-           if(!alive)
+           if(!alive) 
            {
               /* All Pcs are Dead, so Death Screen! */
               snd->loadMusic("../data/music/musica8.ogg");
@@ -3306,8 +3337,8 @@ int engine::Run(SDL_Surface *surface)
            {
                if(fight->actualCharacterTurn()) 
                {
-                  character* activeCharacter = PCs->getActiveCharacter();
                   PCs->setActiveCharacter(fight->actualCharacterTurn());
+                  character* activeCharacter = PCs->getActiveCharacter();
                   fullMovePCAction = false;
                   canMove = true;
                   attackFeat = activeCharacter->getActiveFeatRangeType();
@@ -3321,6 +3352,13 @@ int engine::Run(SDL_Surface *surface)
                { //FIXME
                   fightStatus = FIGHT_CONTINUE;
                }
+           }
+           else if(fightStatus == FIGHT_NPC_TURN)
+           {
+              character* activeCharacter = fight->actualCharacterTurn();
+              moveCircleX = activeCharacter->xPosition;
+              moveCircleY = activeCharacter->yPosition;
+              moveCircleZ = activeCharacter->zPosition;
            }
  
         }
