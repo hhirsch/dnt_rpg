@@ -86,47 +86,41 @@ bool fightGroup::isCharacterIn(character* pers)
 }
 
 /***************************************************************
- *                        getNPCEnemy                          *
+ *                     getNearestEnemy                         *
  ***************************************************************/
-character* fightGroup::getNPCEnemy(character* pers)
+character* fightGroup::getNearestEnemy(character* pers)
 {
-   /* FIXME For now, get a random enemy on list, better 
-      make this in a more expert way */
-   if(actualCharacters > 1)
+   character* enemy = NULL;
+   float dist = 0;
+   float acDist = 0;
+   int ch;
+   for(ch=0;ch<actualCharacters;ch++)
    {
-      srand(SDL_GetTicks());
-      int ch = ((rand() % actualCharacters));
-      if( (characters[ch]->isAlive()) && (characters[ch] != pers) )
+      if( (characters[ch]->isAlive()) && (characters[ch] != pers))
       {
-         return(characters[ch]);
-      }
-      else
-      {
-         for(ch=0;ch<actualCharacters;ch++)
+         if(enemy == NULL)
          {
-            if( (characters[ch]->isAlive()) && (characters[ch] != pers))
+            enemy = characters[ch];
+            acDist = sqrt( (characters[ch]->xPosition - pers->xPosition) *
+                           (characters[ch]->xPosition - pers->xPosition) +
+                           (characters[ch]->zPosition - pers->zPosition) *
+                           (characters[ch]->zPosition - pers->zPosition) );
+         }
+         else
+         {
+            dist = sqrt( (characters[ch]->xPosition - pers->xPosition) *
+                         (characters[ch]->xPosition - pers->xPosition) +
+                         (characters[ch]->zPosition - pers->zPosition) *
+                         (characters[ch]->zPosition - pers->zPosition) );
+            if(dist < acDist)
             {
-               return(characters[ch]);
+               acDist = dist;
+               enemy = characters[ch];
             }
          }
-         return(NULL);
       }
    }
-   else if(actualCharacters == 1)
-   {
-      if( (characters[0]->isAlive()) && (characters[0] != pers))
-      {
-         return(characters[0]);
-      }
-      else
-      {
-         return(NULL);
-      }
-   }
-   else
-   {
-      return(NULL);
-   }
+   return(enemy);
 }
 
 /***************************************************************

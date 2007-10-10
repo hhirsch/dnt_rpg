@@ -1071,7 +1071,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(dude != NULL)
       {
          /* syntax character getNearestEnemy(character dude) */
-         character* enemy = dude->getNearestEnemy(eng->getFightSystem());
+         character* enemy = eng->getFightSystem()->getNearestEnemy(dude);
          assignValue(var, (void*)enemy, IA_TYPE_CHARACTER);
       }
       else

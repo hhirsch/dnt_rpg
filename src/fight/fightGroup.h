@@ -43,11 +43,11 @@ class fightGroup
      bool anyoneIsAliveAndInRange(bool onlyHostile);
      /*!
      *************************************************************** 
-     * Get better to attack character enemy to pers.  
+     * Get nearest character enemy to pers.  
      * \param pers -> character pointer.
      * \return an character pointer, enemy to this one.
      ***************************************************************/
-     character* getNPCEnemy(character* pers);
+     character* getNearestEnemy(character* pers);
 
      /*!
      *************************************************************** 

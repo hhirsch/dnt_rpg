@@ -110,6 +110,14 @@ class fightSystem
      *************************************************************/
      bool hasEnemies(character* pers, string& brief);
 
+     /*!
+     *************************************************************** 
+     * Get the nearest ememy character to attack.  
+     * \param pers -> Pointer to Character that will act
+     * \return enemy character target.
+     ***************************************************************/
+     character* getNearestEnemy(character* pers);
+
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
      fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /**< NPCs groups */
@@ -142,13 +150,6 @@ class fightSystem
      * \return feat number to use.
      ***************************************************************/
      int getNPCAttackFeat(character* pers, character* target);
-     /*!
-     *************************************************************** 
-     * Get an ememy character to attack.  
-     * \param pers -> Pointer to Character that will act
-     * \return enemy character target.
-     ***************************************************************/
-     character* getNPCEnemy(character* pers);
      /*!
      *************************************************************** 
      * Do, if wanted, NPC movimentation  

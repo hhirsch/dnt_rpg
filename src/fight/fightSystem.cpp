@@ -322,7 +322,7 @@ void fightSystem::doNPCAction(character* pers, string& brief)
    /* Determine the target of the character */
    if( (pers->actualEnemy == NULL) || (!pers->actualEnemy->isAlive()))
    {
-      pers->actualEnemy =  getNPCEnemy(pers);
+      pers->actualEnemy =  getNearestEnemy(pers);
    }
    
    //doMovimentation, if wanted, before
@@ -366,35 +366,78 @@ int fightSystem::getNPCAttackFeat(character* pers, character* target)
 }
 
 /***************************************************************
- *                       getNPCEnemy                           *
+ *                      getNearestEnemy                        *
  ***************************************************************/
-character* fightSystem::getNPCEnemy(character* pers)
+character* fightSystem::getNearestEnemy(character* pers)
 {
-   /*FIXME For now, get the enemy on first enemy list. 
-     better make this in a more expert way */
-
    character *ch = NULL;
    int group = 0;
+   character* enemy = NULL;
+   float dist = 0, 
+         acDist = 0;
 
    //Take enemy on PCGroups
-   while( (ch == NULL) && (group < FIGHT_MAX_PC_GROUPS))
+   if(!isPC(pers))
    {
-      ch = pcGroups[group].getNPCEnemy(pers);
-      group++;
+      while(group < FIGHT_MAX_PC_GROUPS)
+      {
+         ch = pcGroups[group].getNearestEnemy(pers);
+         if( (enemy == NULL) && (ch != NULL) )
+         {
+            acDist = sqrt( (ch->xPosition - pers->xPosition) *
+                           (ch->xPosition - pers->xPosition) +
+                           (ch->zPosition - pers->zPosition) *
+                           (ch->zPosition - pers->zPosition) );
+            enemy = ch;
+         }
+         else if(ch != NULL)
+         {
+            dist = sqrt( (ch->xPosition - pers->xPosition) *
+                         (ch->xPosition - pers->xPosition) +
+                         (ch->zPosition - pers->zPosition) *
+                         (ch->zPosition - pers->zPosition) );
+            if(dist < acDist)
+            {
+               acDist = dist;
+               enemy = ch;
+            }
+         }
+         group++;
+      }
    }
    
    group = 0;
    //OtherWise, take on NPCGroups
-   while( (ch == NULL) && (group < FIGHT_MAX_NPC_GROUPS))
+   while(group < FIGHT_MAX_NPC_GROUPS)
    {
       if(group != pers->actualFightGroup)
       {
-         ch = npcGroups[group].getNPCEnemy(pers);
+         ch = npcGroups[group].getNearestEnemy(pers);
+         if( (enemy == NULL) && (ch != NULL) )
+         {
+            acDist = sqrt( (ch->xPosition - pers->xPosition) *
+                           (ch->xPosition - pers->xPosition) +
+                           (ch->zPosition - pers->zPosition) *
+                           (ch->zPosition - pers->zPosition) );
+            enemy = ch;
+         }
+         else if(ch != NULL)
+         {
+            dist = sqrt( (ch->xPosition - pers->xPosition) *
+                         (ch->xPosition - pers->xPosition) +
+                         (ch->zPosition - pers->zPosition) *
+                         (ch->zPosition - pers->zPosition) );
+            if(dist < acDist)
+            {
+               acDist = dist;
+              enemy = ch;
+            }
+         }
       }
       group++;
    }
 
-   return(ch);
+   return(enemy);
 }
 
 /***************************************************************
