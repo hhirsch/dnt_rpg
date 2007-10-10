@@ -77,6 +77,7 @@ aStar::aStar()
    searchThread = NULL;
    searchMutex = SDL_CreateMutex();
    lastCallTime = SDL_GetTicks();
+   abort = false;
 }
 
 /****************************************************************
@@ -98,8 +99,10 @@ aStar::~aStar()
    actualMap = NULL;
    if(state == ASTAR_STATE_RUNNING)
    {
-      /* Kills the running thread */
-      SDL_KillThread(searchThread);
+      /* Stops the running thread */
+      lock();
+         abort = true;
+      unLock();
    }
    SDL_DestroyMutex(searchMutex);
 }
@@ -134,17 +137,22 @@ void aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
 
       if(state == ASTAR_STATE_RUNNING)
       {
-         /* Kills the running thread */
+         /* End the running thread */
          lock();
-         SDL_KillThread(searchThread);
+            abort = true;
          unLock();
+         SDL_Delay(50);
       }
       /* Creates the Search Thread */
+      abort = false;
       state = ASTAR_STATE_RUNNING;
       searchThread  = SDL_CreateThread((&runParalelSearch), dt);
    }
 }
 
+/****************************************************************
+ *                              clear                           *
+ ****************************************************************/
 void aStar::clear()
 {
    lock();
@@ -202,6 +210,12 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
 
    while((!opened.isEmpty()) && (closed.size() <= SEARCH_LIMIT))
    {
+      /* Verify Abort */
+      if(abort)
+      {
+         return(false);
+      }
+
       if((closed.size() != 0) && (closed.size() % SEARCH_INTERVAL == 0))
       {
          /* Sleep */

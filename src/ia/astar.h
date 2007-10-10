@@ -155,6 +155,8 @@ class aStar
       GLuint lastCallTime;      /**< Last Time when Called Search */
 
 
+      bool abort;               /**< Flag to abort the execution of the a* */
+
       /*! lock Mutex */
       void lock();
       /*! unLock Mutex */
