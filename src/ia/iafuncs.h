@@ -144,6 +144,7 @@ using namespace std;
 #define IA_CHARACTER_GET_MAX_LIFE "getMaxLife"
 #define IA_CHARACTER_HAVE_HEAL_FUNCTION "haveHealFunction"
 #define IA_CHARACTER_HEAL_CHARACTER "healCharacter"
+/*! bool characterAtRange(character ref, character target) */
 #define IA_CHARACTER_AT_RANGE "characterAtRange"
 
 

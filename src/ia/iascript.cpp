@@ -1167,6 +1167,53 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          }
       }
    }
+
+   /* syntax bool function(character ref, character target) */
+   else if(functionName == IA_CHARACTER_AT_RANGE)
+   {
+      character* ref = NULL;
+      character* tgt = NULL;
+
+      /* get ref character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         ref = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* get target character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         tgt = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      if( (tgt != NULL) && (ref != NULL) )
+      {
+         /* syntax characterArRange(character ref, character tgt) */
+         bool atRange = actionInRange(ref->xPosition, ref->zPosition,  
+                                      tgt->xPosition, tgt->zPosition,
+                                      ref->getActiveFeatRange() * METER_TO_DNT);
+         assignValue(var, (void*)&atRange, IA_TYPE_BOOL);
+      }
+      else
+      {
+         cerr << "Error: Tried to access a NULL character at line " 
+              << actualLine << " of the script: " << fileName << endl;
+      }
+
+
+
+      //TODO
+   }
    
    ////////////////////////////////////////////////////
    //                Inventory Functions             //

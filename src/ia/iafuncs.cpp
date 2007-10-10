@@ -89,7 +89,7 @@ bool isFunction(string s)
            (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_SKILL_POINTS) ||
            (s == IA_ATT_MODIFIER) || (s == IA_FIGHT_ENTER) ||
            (s == IA_FIGHT_EXIT) || (s == IA_CHARACTER_GET_PSYCHO) ||
-           (s == IA_CHARACTER_SET_PSYCHO) || 
+           (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_CHARACTER_AT_RANGE) || 
            (s == IA_CHARACTER_GET_ACTUAL_LIFE) ||
            (s == IA_CHARACTER_GET_MAX_LIFE) || (s == IA_SELF_OBJECT) ||
            (s == IA_SELF_CHARACTER) || (s == IA_ACTIVE_CHARACTER) ||
@@ -109,7 +109,8 @@ string functionType(string s)
    if( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
        (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_USE_AT_CHARACTER) ||
        (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_TRUE) || (s == IA_FALSE) ||
-       (s == IA_MISSION_IS_ACTIVE) || (s == IA_INVENTORY_HAVE) )
+       (s == IA_MISSION_IS_ACTIVE) || (s == IA_INVENTORY_HAVE) ||
+       (s == IA_CHARACTER_AT_RANGE) )
    {
       return(IA_TYPE_BOOL);
    }
