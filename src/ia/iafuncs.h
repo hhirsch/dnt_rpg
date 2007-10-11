@@ -80,11 +80,13 @@ using namespace std;
 ////////////////////////////////////////////////////
 //             Movimentation Functions            //
 ////////////////////////////////////////////////////
-/*! bool moveToPosition(character* char, int x, int z) */
+/*! bool moveToPosition(character char, int x, int z) */
 #define IA_MOVE_TO_POSITION "moveToPosition"
+/*! bool moveToCharacter(character char, character tgt) */
 #define IA_MOVE_TO_CHARACTER "moveToCharacter"
+/*! bool moveToObject(character char, object obj) */
 #define IA_MOVE_TO_OBJECT "moveToObject"
-/*! void setIdle(character* char) */
+/*! void setIdle(character char) */
 #define IA_SET_IDLE "setIdle"
 
 ////////////////////////////////////////////////////
@@ -112,6 +114,8 @@ using namespace std;
 #define IA_FEAT_USE_AT_OBJECT "featUseAtObject"
 #define IA_FEAT_GET_RANDOM_ATTACK "getRandomAttackFeat"
 #define IA_FEAT_GET_POWERFULL_ATTACK "getPowerfullAttackFeat"
+#define IA_FEAT_GET_RANDOM_HEAL "getRandomHealFeat"
+#define IA_FEAT_GET_POWERFULL_HEAL "getPowerfullHealFeat"
 
 ////////////////////////////////////////////////////
 //                Skills Functions                //

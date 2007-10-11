@@ -2268,3 +2268,22 @@ void Map::defineCommonTexture()
    commonTexture = tex->index;
 }
 
+/********************************************************************
+ *                         defineThingHeight                        *
+ ********************************************************************/
+bool Map::defineThingHeight(thing* c, GLfloat nx, GLfloat nz)
+{
+   GLfloat altura_atual = c->yPosition;
+
+   GLfloat res = getHeight(nx, nz);
+
+   if( res - altura_atual > c->walk_interval)
+   {
+       c->yPosition = altura_atual;
+       return(false);
+   }
+
+   c->yPosition = res;
+   return(true);
+}
+

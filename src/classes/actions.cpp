@@ -315,7 +315,28 @@ action* actionController::addAction(action* act)
          }
          else
          {
-            //TODO
+            //FIXME: Move to a position not ON the target!
+
+            /* Save the target value to move (to get changes of 
+             *                                target position ) */
+            act->targetX = act->target->xPosition;
+            act->targetZ = act->target->zPosition;
+
+            /* It's a move to a target */
+            act->actor->pathFind.findPath(act->actor->xPosition, 
+                                          act->actor->zPosition,
+                                          act->target->xPosition - 
+                                          ACT_MOVE_DELTA, 
+                                          act->target->zPosition - 
+                                          ACT_MOVE_DELTA, 
+                                          act->actor->walk_interval, 
+                                          act->actor->orientation,
+                                          act->actor->min[0],
+                                          act->actor->min[1],
+                                          act->actor->min[2],
+                                          act->actor->max[0],
+                                          act->actor->max[1],
+                                          act->actor->max[2]);
          }
       }
       else
@@ -371,5 +392,116 @@ int actionController::getTotal()
 action* actionController::getFirst()
 {
    return(first);
+}
+
+/************************************************************
+ *                      treatActions                        *
+ ************************************************************/
+void actionController::treatActions(Map* actualMap)
+{
+   int i;
+   action* act = getFirst();
+
+   for(i = 0; i < getTotal(); i++)
+   {
+      if(!act->isRunning())
+      {
+         //do nothing.
+      }
+      else if(act->getType() == ACT_MOVE)
+      {
+         if(act->getTargetThing() != NULL)
+         {
+            /* Verify if the target moves */
+            thing* tgt = act->getTargetThing();
+            GLfloat tX = 0, tZ = 0;
+            act->getTargetPosition(tX, tZ);
+            if( ( (tgt->xPosition <= tX - ACT_MOVE_DELTA) || 
+                  (tgt->xPosition >= tX + ACT_MOVE_DELTA) ) || 
+                ( (tgt->zPosition <= tZ - ACT_MOVE_DELTA) || 
+                  (tgt->zPosition >= tZ + ACT_MOVE_DELTA) ) )
+            {
+               /* Rerun the pathFind */
+               act->targetX = tgt->xPosition;
+               act->targetZ = tgt->zPosition;
+
+               act->setToggle(false);
+               act->actor->pathFind.forceNextCall();
+
+               //FIXME Move not ON character but TO character
+               act->actor->pathFind.findPath(act->actor->xPosition, 
+                                          act->actor->zPosition,
+                                          act->target->xPosition - 
+                                          ACT_MOVE_DELTA, 
+                                          act->target->zPosition - 
+                                          ACT_MOVE_DELTA, 
+                                          act->actor->walk_interval, 
+                                          act->actor->orientation,
+                                          act->actor->min[0],
+                                          act->actor->min[1],
+                                          act->actor->min[2],
+                                          act->actor->max[0],
+                                          act->actor->max[1],
+                                          act->actor->max[2]);
+            }
+         }
+         character* actor = act->getActor();
+         if( (actor->isAlive()) && (!actor->isConversationOpened()) )
+         {
+            actor->setState(STATE_WALK);
+            if(actor->pathFind.getState() == ASTAR_STATE_FOUND)
+            {
+               act->setToggle(true);
+            }
+            else if(actor->pathFind.getState() == ASTAR_STATE_NOT_FOUND)
+            {
+               /* The move ended, since not found a path */
+               act->setAsEnded(false);
+               actor->setState(STATE_IDLE);
+            }
+
+            /* If the toggle is seted, the path was found */
+            if(act->getToggle())
+            {
+               if(!actor->pathFind.getNewPosition(actor->xPosition,
+                                                  actor->zPosition,
+                                                  actor->orientation))
+               {  
+                  /* The move ended */
+                  act->setAsEnded(true);
+                  actor->setState(STATE_IDLE);
+               }
+               else
+               {
+                  /* Define New Occuped Square */
+                  int posX =(int)floor(actor->xPosition / 
+                                       actualMap->squareSize());
+                  int posZ =(int)floor(actor->zPosition / 
+                                       actualMap->squareSize());
+                  actor->ocupaQuad = actualMap->relativeSquare(posX,posZ);
+
+                  /* Define New Height */
+                  actualMap->defineThingHeight(actor, actor->xPosition,
+                                               actor->zPosition);
+               }
+            }
+         }
+         else if(!actor->isAlive())
+         {
+            /* Dead Characters can't walk. */
+            act->setAsEnded(false);
+         }
+         else
+         {
+            /* Talk window is opened, so Idle. */
+            actor->setState(STATE_IDLE);
+         }
+      }
+      else
+      {
+         //TODO
+      }
+      act = act->next;
+   }
 }
 

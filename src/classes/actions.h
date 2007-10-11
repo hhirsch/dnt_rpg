@@ -60,6 +60,8 @@ using namespace std;
 #define ACT_TYPE_STR_SECUNDARY_ACTION  "ACT_TYPE_SECUNDARY_ACTION"
 #define ACT_TYPE_STR_NO_ACTION         "ACT_TYPE_NO_ACTION"
 
+#define ACT_MOVE_DELTA 5
+
 /*!
  ************************************************************* 
  * Return the number of the action with name buffer  
@@ -244,6 +246,9 @@ class actionController
       /*! Get the first action on the list
        * \return pointer to the first action on the list */
       action* getFirst();
+
+      /*! Treat the actions on the controller */
+      void treatActions(Map* actualMap);
    private:
       action* first;    /**< First action on the list */
       int total;        /**< Total actions on the list */

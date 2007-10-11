@@ -451,6 +451,16 @@ class Map
 
       /*!
        ***************************************************************
+       * Define Thing new Height, based on Thing position
+       * \param c -> pointer to the thing
+       * \param nx -> thing new X position
+       * \param nz -> thing new Z position
+       * \return -> true if can define new heigh, false if can't move.
+       ***************************************************************/
+      bool defineThingHeight(thing* c, GLfloat nx, GLfloat nz);
+
+      /*!
+       ***************************************************************
        * Create all the splats vertexes related to splatting, if map
        * is outdoor. If is indoor, only create splats to any of the
        * textures, without merging them with alpha things.

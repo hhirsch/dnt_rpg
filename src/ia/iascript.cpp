@@ -583,7 +583,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* Move to Position */
    if(functionName == IA_MOVE_TO_POSITION)
    {
-      /* Syntax bool moveToPosition(character* char, int x, int z) */
+      /* Syntax bool moveToPosition(character char, int x, int z) */
       varName = symbols->addTempSymbol(IA_TYPE_BOOL);
 
       string line = changeFrom(strLine, functionName, 2, varName);
@@ -650,21 +650,89 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    /* Move to Character */
    else if(functionName == IA_MOVE_TO_CHARACTER)
    {
-      //TODO
+      /* Syntax bool moveToCharacter(character char, character tgt) */
+      varName = symbols->addTempSymbol(IA_TYPE_BOOL);
+
+      string line = changeFrom(strLine, functionName, 2, varName);
+      character* dude = NULL;
+      character* tgt = NULL;
+
+      /* Get the character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         dude = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get the Target Character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         tgt = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      if( (dude) && (tgt) )
+      {
+         dude->pathFind.defineMap(actualMap);
+         pendingAction = eng->actionControl->addAction(line, ACT_MOVE, 
+                                                       dude, tgt);
+      }
    }
 
 
    /* Move to Object */
    else if(functionName == IA_MOVE_TO_OBJECT)
    {
-      //TODO
+      /* Syntax bool moveToObject(character char, object obj) */
+      varName = symbols->addTempSymbol(IA_TYPE_BOOL);
+
+      string line = changeFrom(strLine, functionName, 2, varName);
+      character* dude = NULL;
+      object* obj = NULL;
+
+      /* Get the character */
+      iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
+      if(iv != NULL)
+      {
+         dude = (character*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get the Object */
+      iv = getParameter(token, strLine, IA_TYPE_OBJECT, pos);
+      if(iv != NULL)
+      {
+         obj = (object*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      if( (dude) && (obj) )
+      {
+         dude->pathFind.defineMap(actualMap);
+         pendingAction = eng->actionControl->addAction(line, ACT_MOVE, 
+                                                       dude, obj);
+      }
    }
 
 
    /* Set Idle */
    if(functionName == IA_SET_IDLE)
    {
-      /* Syntax void setIdle(character* char) */
+      /* Syntax void setIdle(character char) */
       iv = getParameter(token, strLine, IA_TYPE_CHARACTER, pos);
       if(iv != NULL)
       {
@@ -1210,9 +1278,6 @@ void iaScript::callFunction(iaVariable* var, string strLine,
               << actualLine << " of the script: " << fileName << endl;
       }
 
-
-
-      //TODO
    }
    
    ////////////////////////////////////////////////////

@@ -2,6 +2,7 @@
 #define _astar_h
 
 #include "../map/map.h"
+#include "../engine/character.h"
 #include "pattAgent.h"
 #include <SDL/SDL_opengl.h>
 
@@ -143,6 +144,9 @@ class aStar
 
       /*! Clear the a* state */
       void clear();
+
+      /*! Toggle the a* to force the next call */
+      void forceNextCall();
 
    private:
       Map* actualMap;           /**< Pointer to opened Map */

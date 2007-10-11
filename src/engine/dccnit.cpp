@@ -1313,82 +1313,7 @@ void engine::treatScripts()
  *********************************************************************/
 void engine::treatPendingActions()
 {
-   int i;
-   action* act = actionControl->getFirst();
-
-   for(i = 0; i < actionControl->getTotal(); i++)
-   {
-      if(!act->isRunning())
-      {
-         //do nothing.
-      }
-      else if(act->getType() == ACT_MOVE)
-      {
-         if(act->getTargetThing() == NULL)
-         {
-            character* actor = act->getActor();
-            if( (actor->isAlive()) && (!actor->isConversationOpened()) )
-            {
-               actor->setState(STATE_WALK);
-               if(actor->pathFind.getState() == ASTAR_STATE_FOUND)
-               {
-                  act->setToggle(true);
-               }
-               else if(actor->pathFind.getState() == ASTAR_STATE_NOT_FOUND)
-               {
-                  /* The move ended, since not found a path */
-                  act->setAsEnded(false);
-                  actor->setState(STATE_IDLE);
-               }
-   
-               /* If the toggle is seted, the path was found */
-               if(act->getToggle())
-               {
-                  if(!actor->pathFind.getNewPosition(actor->xPosition,
-                                                     actor->zPosition,
-                                                     actor->orientation))
-                  {  
-                     /* The move ended */
-                     act->setAsEnded(true);
-                     actor->setState(STATE_IDLE);
-                  }
-                  else
-                  {
-                     /* Define New Occuped Square */
-                     int posX =(int)floor(actor->xPosition / 
-                                          actualMap->squareSize());
-                     int posZ =(int)floor(actor->zPosition / 
-                                          actualMap->squareSize());
-                     actor->ocupaQuad = actualMap->relativeSquare(posX,posZ);
-   
-                     /* Define New Height */
-                     defineCharacterHeight(actor, actor->xPosition,
-                                           actor->zPosition);
-                  }
-               }
-            }
-            else if(!actor->isAlive())
-            {
-               /* Dead Characters can't walk. */
-               act->setAsEnded(false);
-            }
-            else
-            {
-               /* Talk window is opened, so Idle. */
-               actor->setState(STATE_IDLE);
-            }
-         }
-         else
-         {
-            //TODO
-         }
-      }
-      else
-      {
-         //TODO
-      }
-      act = act->next;
-   }
+   actionControl->treatActions(actualMap);
 }
 
 /*********************************************************************
@@ -3057,18 +2982,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
  *********************************************************************/
 bool engine::defineCharacterHeight(character* c, GLfloat nx, GLfloat nz)
 {
-   GLfloat altura_atual = c->yPosition;
-
-   GLfloat res = actualMap->getHeight(nx, nz);
-
-   if( res - altura_atual > c->walk_interval)
-   {
-       c->yPosition = altura_atual;
-       return(false);
-   }
-
-   c->yPosition = res;
-   return(true);
+   return(actualMap->defineThingHeight(c, nx, nz));
 }
 
 /*********************************************************************
