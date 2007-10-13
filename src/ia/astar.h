@@ -2,7 +2,6 @@
 #define _astar_h
 
 #include "../map/map.h"
-#include "../engine/character.h"
 #include "pattAgent.h"
 #include <SDL/SDL_opengl.h>
 

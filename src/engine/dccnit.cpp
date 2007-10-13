@@ -294,7 +294,7 @@ void engine::loadPCs()
                               features, this);
    /*per = PCs->insertCharacter("../data/characters/pcs/logan.pc",
                               features, this);*/
-   /*per = PCs->insertCharacter("../data/characters/npcs/ratazana.npc",
+   /*per = PCs->insertCharacter("../data/characters/npcs/spider.npc",
                               features, this);*/
 }
 
@@ -446,9 +446,6 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
        showLoading(img,&texturaTexto,texturaCarga,
                    gettext("Loading Character"),
                  proj, modl, viewPort);
-       /*PCs->InserirPersonagem(7,6,9,7,"../data/pics/logan/portrait.jpg",
-                              "Gushm",
-                       "../data/models/personagens/Gushm/modelo.cfg");*/
    }
 
    /* Loading Internal Windows */
