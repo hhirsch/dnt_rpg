@@ -21,8 +21,9 @@ cal3D files are at the same license of the blend that originated them.
 *******************************************************************************
 ******************************  WorldForge Models  ****************************
 *******************************************************************************
-**  blend/contrib/cow/*      **      openfrag.org &&     **        GPL       **
-**                           **      Damien McGinnes     **                  **
+**                           **       openfrag.org       **                  **
+**  blend/contrib/cow/*      **      Damien McGinnes     **        GPL       **
+**                           **          DNTeam          **                  **
 *******************************************************************************
 **  blend/contrib/deer/*     **                          **                  **
 **  blend/contrib/bunny/*    **      Damien McGinnes     **       GPLv2      **
