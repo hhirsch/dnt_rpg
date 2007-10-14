@@ -108,8 +108,12 @@ using namespace std;
 ////////////////////////////////////////////////////
 //                 Feats Functions                //
 ////////////////////////////////////////////////////
-#define IA_FEAT_TOTAL "featTotal"
+/*! int featActualQuantity(string featID) */
+#define IA_FEAT_ACTUAL_QUANTITY "featActualQuantity"
+/*! int featCost(string featID) */
 #define IA_FEAT_COST  "featCost"
+/*! int featQuantityPerDay(string featID) */
+#define IA_FEAT_QUANTITY_PER_DAY "featQuantityPerDay"
 #define IA_FEAT_USE_AT_CHARACTER "featUseAtCharacter"
 #define IA_FEAT_USE_AT_OBJECT "featUseAtObject"
 #define IA_FEAT_GET_RANDOM_ATTACK "getRandomAttackFeat"

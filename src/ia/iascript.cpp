@@ -997,15 +997,61 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    //                 Feats Functions                //
    ////////////////////////////////////////////////////
 
-   /* Feat Total */
-   else if(functionName == IA_FEAT_TOTAL)
+   /* int function(string featID) */
+   else if( (functionName == IA_FEAT_ACTUAL_QUANTITY) ||
+            (functionName == IA_FEAT_COST) ||
+            (functionName == IA_FEAT_QUANTITY_PER_DAY) )
    {
-      //TODO
+      string featID = "";
+      feat* ft = NULL;
+
+      /* Get feat */
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv)
+      {
+         featID = *(string*)iv->value;
+         if(characterOwner)
+         {
+            /* Get really the feat */
+            ft = characterOwner->actualFeats.featByString(featID);
+         }
+         else
+         {
+            cerr << "Error: No character owner defined for function: " << 
+                    functionName << " at " << strLine << " on Script " << 
+                    fileName << endl;
+         }
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      if(ft)
+      {
+         int i = 0;
+         if(functionName == IA_FEAT_ACTUAL_QUANTITY)
+         {
+            i = (int)ft->actualQuantity;
+         }
+         else if(functionName == IA_FEAT_COST)
+         {
+            i = ft->costToUse;
+         }
+         else if(functionName == IA_FEAT_QUANTITY_PER_DAY)
+         {
+            i = ft->quantityPerDay;
+         }
+         /* Assign the result value */
+         assignValue(var, (void*)&i, IA_TYPE_INT);
+      }
+      else
+      {
+         cerr << "Error: Unknow feat " << featID << " at " << strLine << " on script "
+              << fileName << endl;
+      }
    }
-   else if(functionName == IA_FEAT_COST)
-   {
-      //TODO
-   }
+
    else if(functionName == IA_FEAT_USE_AT_CHARACTER)
    {
       //TODO

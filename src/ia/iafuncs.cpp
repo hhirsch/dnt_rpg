@@ -84,7 +84,7 @@ bool isFunction(string s)
 {
    return( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
            (s == IA_MOVE_TO_OBJECT) || (s == IA_SET_IDLE) ||
-           (s == IA_FEAT_TOTAL) ||
+           (s == IA_FEAT_ACTUAL_QUANTITY) || (s == IA_FEAT_QUANTITY_PER_DAY) ||
            (s == IA_FEAT_COST) || (s == IA_FEAT_USE_AT_CHARACTER) ||
            (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_SKILL_POINTS) ||
            (s == IA_ATT_MODIFIER) || (s == IA_FIGHT_ENTER) ||
@@ -115,10 +115,11 @@ string functionType(string s)
       return(IA_TYPE_BOOL);
    }
    /* Integer Functions */
-   else if( (s == IA_FEAT_TOTAL) || (s == IA_FEAT_COST) || 
+   else if( (s == IA_FEAT_ACTUAL_QUANTITY) || (s == IA_FEAT_COST) || 
             (s == IA_SKILL_POINTS) || (s == IA_ATT_MODIFIER) ||
             (s == IA_CHARACTER_GET_PSYCHO) || (s == IA_MISSION_GET_TEMP) ||
             (s == IA_CHARACTER_GET_ACTUAL_LIFE) || 
+            (s == IA_FEAT_QUANTITY_PER_DAY) ||
             (s == IA_CHARACTER_GET_MAX_LIFE ) )
    {
       return(IA_TYPE_INT);

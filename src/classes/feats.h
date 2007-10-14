@@ -45,22 +45,22 @@ class depFeat
 class featDescription
 {
    public:
-      int internalListNumber;         /**< Number on List */
-      int requeridedLevel;            /**< Requerided Character class level */
-      factor requeridedFactor;        /**< Requerided Factor (class, race, etc) */
-      int quantityPerDay;             /**< Quantity avaible to use per day*/
-      int aditionalQuantity;          /**< Quantity Added per AditionalLevel */
-      int aditionalLevels;            /**< Number of Levels to AditionalQuantity */
-      int costToUse;                  /**< Cost, in PP to use the feat */
-      int actionType;                 /**< Action Type of the feat */
-      int action;                     /**< Defined Action of the feat */
-      int range;                      /**< Range action of the feat */
-      factor conceptBonus;            /**< The concept that bonus the feat */
-      factor conceptAgainst;          /**< Define the concept against the feat */
-      factor conceptTarget;           /**< Define the valid target of feat */
-      diceThing diceInfo;             /**< Defined Dice*/
-      string name;                    /**< Feat Name */
-      string idString;                /**< Feat ID String */
+      int internalListNumber;      /**< Number on List */
+      int requeridedLevel;         /**< Requerided Character class level */
+      factor requeridedFactor;     /**< Requerided Factor (class, race, etc) */
+      int quantityPerDay;          /**< Quantity avaible to use per day*/
+      int aditionalQuantity;       /**< Quantity Added per AditionalLevel */
+      int aditionalLevels;         /**< Number of Levels to AditionalQuantity */
+      int costToUse;               /**< Cost, in PP to use the feat */
+      int actionType;              /**< Action Type of the feat */
+      int action;                  /**< Defined Action of the feat */
+      int range;                   /**< Range action of the feat */
+      factor conceptBonus;         /**< The concept that bonus the feat */
+      factor conceptAgainst;       /**< Define the concept against the feat */
+      factor conceptTarget;        /**< Define the valid target of feat */
+      diceThing diceInfo;          /**< Defined Dice*/
+      string name;                 /**< Feat Name */
+      string idString;             /**< Feat ID String */
       string description;             /**< Feat Description */
       depFeat depFeats[MAX_DEP_FEATS];/**< Feat Dependency */
       SDL_Surface* image;             /**< Feat Image */
@@ -78,14 +78,14 @@ class feat
       int internalListNumber;          /**< Number on List */
       int requeridedLevel;             /**< Requerided Level to use */
       int quantityPerDay;              /**< Quantity avaible to use per day*/
-      int aditionalQuantity;           /**< Quantity Added per Aditional Level */
-      int aditionalLevels;             /**< Number of Levels to AditionalQuantity*/
+      int aditionalQuantity;       /**< Quantity Added per Aditional Level */
+      int aditionalLevels;         /**< Number of Levels to AditionalQuantity*/
       int costToUse;                   /**< Cost, in PP to use */
       int actionType;                  /**< Action Type of the feat */
       int action;                      /**< Action of the feat */
       int range;                       /**< Range of Action of the feat */
       factor conceptBonus;             /**< Concept that bonus the feat */
-      factor conceptAgainst;           /**< Define the concept against the feat */
+      factor conceptAgainst;       /**< Define the concept against the feat */
       factor conceptTarget;            /**< Define the valid target of feat */
       float actualQuantity;            /**< Actual quantity to use */
       diceThing diceInfo;              /**< Defined Dice*/
