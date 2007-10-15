@@ -18,9 +18,10 @@ public:
        * \param cX2 -> center X2 position
        * \param cZ2 -> center Z2 position
        * \param total -> total number of particles
+       * \param scale -> scale of the grass
        * \param fileName -> file name of the file to load */
       grass(float cX1,float cZ1, float cX2, float cZ2, int total,
-            string fileName);
+            float scale, string fileName);
       ~grass();
 
       /*!
@@ -101,14 +102,22 @@ public:
        ***************************************************************/
       string getGrassFileName();
 
+      /*!
+       ***************************************************************
+       * Get the scale factor of the grass
+       * \return the scale factor of the grass
+       ***************************************************************/
+      GLfloat getScaleFactor();
+
    private:
-      float seconds;        /**< Seconds, not used anymore. */
-      float centerX1,       /**< Grass Area X1 */
+      GLfloat seconds;      /**< Seconds, not used anymore. */
+      GLfloat centerX1,     /**< Grass Area X1 */
             centerX2,       /**< Grass Area X2 */
             centerZ1,       /**< Grass Area Z1 */
             centerZ2;       /**< Grass Area Z2 */
       string grassFileName; /**< Name of the grass file texture */
       GLuint grassTexture;  /**< Load Texture used to grass */
+      GLfloat scaleFactor;  /**< Scale factor of the grass */
       void* usedMap;        /**< Actual Openned Map */
 };
 

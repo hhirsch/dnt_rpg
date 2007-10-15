@@ -238,13 +238,13 @@ void partSystem::actualizeAll(float PCposX, float PCposY, float PCposZ,
  **********************************************************************/
 particleSystem* partSystem::addParticle(int type, GLfloat x1, GLfloat z1,
                                         GLfloat x2, GLfloat z2, int total,
-                                        string fileName)
+                                        GLfloat scale, string fileName)
 {
    switch(type)
    {
       case PART_GRASS:
       {
-         grass* gr = new grass(x1,z1,x2,z2,total, fileName);
+         grass* gr = new grass(x1,z1,x2,z2,total, scale, fileName);
          grassParticles->addSystem(gr);
          return(gr);
       }
@@ -571,10 +571,10 @@ void partSystem::loadFromFile(string fileName)
       }
       else if(type == PART_GRASS)
       {
-         GLfloat x2, z2;
+         GLfloat x2, z2, scale;
          int total;
-         fscanf(file, "%f %f %d",&x2, &z2, &total);
-         addParticle(type, X, Z, x2, z2, total, buffer);
+         fscanf(file, "%f %f %d %f",&x2, &z2, &total, &scale);
+         addParticle(type, X, Z, x2, z2, total, scale, buffer);
       }
       else
       {
@@ -683,7 +683,8 @@ void partSystem::saveToFile(string fileName)
       gr->getPosition(x1,z1,x2,z2);
       string name = gr->getGrassFileName();
       fprintf(file,"%d %f %f %f %s\n",PART_GRASS, x1, 0.0, z1, name.c_str());
-      fprintf(file,"%f %f %d\n", x2, z2, gr->getMaxParticles());
+      fprintf(file,"%f %f %f %d\n", x2, z2, gr->getScaleFactor(),
+                                    gr->getMaxParticles());
       gr = (grass*)gr->next;
    }
    

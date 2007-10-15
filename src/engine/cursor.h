@@ -5,6 +5,9 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+#include <string>
+using namespace std;
+
 /*************************************************************************
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
@@ -51,7 +54,7 @@ class cursor
       /*! Load Cursor file to textures 
        * \param fileName -> file name of cursor
        * \return pointer to SDL_Surface with the cursor image. */
-      SDL_Surface* loadCursor(char* fileName);
+      SDL_Surface* loadCursor(string fileName);
 
       
 };

@@ -65,7 +65,7 @@ class partSystem
                                   string fileName );
       particleSystem* addParticle(int type, GLfloat x1, GLfloat z1,
                                   GLfloat x2, GLfloat z2, int total,
-                                  string fileName);
+                                  GLfloat scale, string fileName);
       meteor* addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
                           GLfloat varX, GLfloat varY, GLfloat varZ,
                           GLfloat targX, GLfloat targY, GLfloat targZ,

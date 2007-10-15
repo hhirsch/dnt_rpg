@@ -75,7 +75,7 @@ class part7: public particleSystem
        * Load the particle texture file
        * \param fileName -> texture file name;
        ***************************************************************/
-      GLuint LoadTexture(char* fileName);
+      GLuint LoadTexture(string fileName);
 
 
    private:

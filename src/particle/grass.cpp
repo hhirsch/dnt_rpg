@@ -7,13 +7,15 @@
  *                             Constructor                                *
  **************************************************************************/
 grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total, 
-             string fileName):particleSystem(total,PARTICLE_DRAW_INDIVIDUAL)
+             float scale, string fileName)
+                                :particleSystem(total,PARTICLE_DRAW_INDIVIDUAL)
 {
    SDL_Surface* img;
    centerX1 = cX1;
    centerX2 = cX2;
    centerZ1 = cZ1;
    centerZ2 = cZ2;
+   scaleFactor = scale;
    usedMap = NULL;
    grassFileName = fileName;
    img = IMG_Load(fileName.c_str());
@@ -59,6 +61,7 @@ void grass::Render(particle* part)
       //FIXME the X rotation when grass is on different height!
       glRotatef(part->R,1,0,0);
       glRotatef(part->B,0,0,1);*/
+      glScalef(scaleFactor,scaleFactor,scaleFactor);
       
          glTexCoord2f(0.0,0.0);
          glVertex3f(part->posX - part->velX,
@@ -242,6 +245,13 @@ string grass::getGrassFileName()
    return(grassFileName);
 }
 
+/**************************************************************************
+ *                            getScaleFactor                              *
+ **************************************************************************/
+GLfloat grass::getScaleFactor()
+{
+   return(scaleFactor);
+}
 /**************************************************************************
  *                              defineMap                                 *
  **************************************************************************/

@@ -204,10 +204,10 @@ int part2::numParticles()
 /****************************************************************************
  *                               LoadTexture                                *
  ****************************************************************************/
-GLuint part2::LoadTexture(char* fileName)
+GLuint part2::LoadTexture(string fileName)
 {
    GLuint indice;
-   SDL_Surface* img = IMG_Load(fileName);
+   SDL_Surface* img = IMG_Load(fileName.c_str());
 
    glGenTextures(1, &(indice));
    glBindTexture(GL_TEXTURE_2D, indice);

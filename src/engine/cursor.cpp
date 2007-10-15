@@ -34,9 +34,9 @@ cursor::~cursor()
 /*****************************************************************
  *                         Load Cursor                           *
  *****************************************************************/
-SDL_Surface* cursor::loadCursor(char* fileName)
+SDL_Surface* cursor::loadCursor(string fileName)
 {
-   SDL_Surface* img = IMG_Load(fileName);
+   SDL_Surface* img = IMG_Load(fileName.c_str());
    return(img);
 }
 

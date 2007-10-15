@@ -78,7 +78,7 @@ class part5: public particleSystem
        * Load the particle texture file
        * \param fileName -> texture file name;
        ***************************************************************/
-      GLuint LoadTexture(char* fileName);
+      GLuint LoadTexture(string fileName);
 
       GLuint getLivingTime();
 
