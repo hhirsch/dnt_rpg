@@ -109,7 +109,21 @@ public:
        ***************************************************************/
       GLfloat getScaleFactor();
 
+      /*!
+       ***************************************************************
+       * Set the scale factor of the grass
+       * \param scale -> the scale factor of the grass
+       ***************************************************************/
+      void setScaleFactor(GLfloat scale);
+
    private:
+      /*!
+       ***************************************************************
+       * Set the size and Y position of the grass particle
+       * \param part -> the particle to set
+       ***************************************************************/
+      void defineSize(particle* part);
+
       GLfloat seconds;      /**< Seconds, not used anymore. */
       GLfloat centerX1,     /**< Grass Area X1 */
             centerX2,       /**< Grass Area X2 */

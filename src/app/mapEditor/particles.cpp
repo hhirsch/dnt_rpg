@@ -57,7 +57,8 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                              Uint8 mButton, Uint8* keys, int tool, 
                              partSystem* pS, GLdouble proj[16],
                              GLdouble modl[16], GLint viewPort[4],
-                             string selectedText)
+                             string selectedText,
+                             grassWindow* grWindow)
 {
    int i;
 
@@ -110,17 +111,11 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                z1 = tmp;
             }
 
-            string pov = getStringFromUser("Povoation Value", "20.0",
-                                           proj, modl, viewPort);
             GLfloat povValue = 20.0;
-            sscanf(pov.c_str(),"%f", &povValue);
-            if(povValue <= 0)
-            {
-               povValue = 20.0;
-            }
             int total = (int)floor((z2-z1)*(x2-x1) / povValue);
-            pS->addParticle(PART_GRASS, x1, z1, x2, z2, total, 3.0, 
-                            selectedText); 
+            grass* gr = (grass*) pS->addParticle(PART_GRASS, x1, z1, x2, z2, 
+                                                 total, 3.0, selectedText); 
+            grWindow->setGrass(gr);
             state = TOOL_PARTICLE_GRASS;
          }
          x2 = mouseX;

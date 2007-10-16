@@ -25,7 +25,7 @@ OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)texture.o $(ENDETC)message3d.o $(ENDETC)modellist.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)barterwindow.o $(ENDENGINE)camera.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)dialog.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)character.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)shadow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
-OBJS = area.o editor.o guiIO.o listWindow.o mapEditor.o message.o npcs.o objects.o particles.o portal.o terrain.o wall.o
+OBJS = area.o editor.o grasswindow.o guiIO.o listwindow.o mapEditor.o message.o npcs.o objects.o particles.o portal.o terrain.o wall.o
 
 BIN = ../../../bin/
 
@@ -41,14 +41,19 @@ editor.o: editor.cpp editor.h
 	@$(CC) $(CFLAGS) editor.cpp -o editor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+grasswindow.o: grasswindow.cpp grasswindow.h
+	@printf "Making grasswindow.o... "
+	@$(CC) $(CFLAGS) grasswindow.cpp -o grasswindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"	
+
 guiIO.o: guiIO.cpp guiIO.h
 	@printf "Making guiIO.o... "
 	@$(CC) $(CFLAGS) guiIO.cpp -o guiIO.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-listWindow.o: listwindow.cpp listwindow.h
-	@printf "Making listWindow.o... "
-	@$(CC) $(CFLAGS) listwindow.cpp -o listWindow.o
+listwindow.o: listwindow.cpp listwindow.h
+	@printf "Making listwindow.o... "
+	@$(CC) $(CFLAGS) listwindow.cpp -o listwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"	
 
 mapEditor.o: mapEditor.cpp mapEditor.h

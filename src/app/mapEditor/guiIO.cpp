@@ -20,6 +20,7 @@ guiIO::guiIO()
    gameCamera.defineMinZoom(2*ZOOM_MIN);
 
    /* Open Windows */
+   grWindow = new grassWindow(gui);
    ltWindow = new listWindow(gui);
    ltWindow->setState(0);
    openFileWindow();
@@ -39,8 +40,17 @@ guiIO::guiIO()
  ****************************************************************/
 guiIO::~guiIO()
 {
-   delete(ltWindow);
    delete(gui);
+   delete(grWindow);
+   delete(ltWindow);
+}
+
+/****************************************************************
+ *                        getGrassWindow                        *
+ ****************************************************************/
+grassWindow* guiIO::getGrassWindow()
+{
+   return(grWindow);
 }
 
 /****************************************************************

@@ -403,7 +403,7 @@ void options::DisplayOptionsScreen(interface* interf)
    intWindow->getObjectsList()->insertTextBox(5,231,250,258,2,"");
 
    
-   /* Open Skill Window */
+   /* Open Window */
    intWindow->setExternPointer(&intWindow);
    intWindow->setAttributes(false,true,false,false);
    interf->openWindow(intWindow);

@@ -1,6 +1,7 @@
 #ifndef _particles_h
 #define _particles_h
 
+#include "grasswindow.h"
 #include "message.h"
 #include "../../map/map.h"
 #include "../../particle/partSystem.h"
@@ -20,11 +21,12 @@ class particles
        * \param mouseY -> mouse Y coordinate 
        * \param mouseZ -> mouse Z coordinate 
        * \param mButton -> mouse button state
-       * \param tool -> current Tool*/
+       * \param tool -> current Tool
+       * \param grWindow -> the grassWindow Used*/
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                         Uint8 mButton, Uint8* keys, int tool, partSystem* pS,
                         GLdouble proj[16],GLdouble modl[16],GLint viewPort[4],
-                        string selectedText);
+                        string selectedText, grassWindow* grWindow);
 
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary(GLfloat matriz[6][4]);

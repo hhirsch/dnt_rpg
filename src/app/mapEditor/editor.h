@@ -20,7 +20,6 @@
 #include <SDL/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
-//#include <unistd.h>
 
 /*! The Editor Class */
 class editor

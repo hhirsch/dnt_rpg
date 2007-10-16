@@ -156,22 +156,9 @@ void grass::createParticle(particle* part)
    part->posZ = ((centerZ2-centerZ1)*(rand() / ((double)RAND_MAX + 1)))
                 + centerZ1;
 
-   if(usedMap)
-   {
-      Map* map = (Map*) usedMap;
-      part->posY = map->getHeight(part->posX - 8.0, part->posZ) + 10;
-      part->prvX = map->getHeight(part->posX + 8.0, part->posZ) + 10;
-      part->prvY = map->getHeight(part->posX + 8.0, part->posZ);
-      part->prvZ = map->getHeight(part->posX - 8.0, part->posZ);
-   }
-   else
-   {
-      part->posY = 10*scaleFactor; /* Used as Height on First Vertex */
-      part->prvX = 10*scaleFactor; /* Used as Height on Second Vertex */
-      part->prvY = 0; /* Used as Height on Third Vertex */
-      part->prvZ = 0; /* Used as Height on Forth Vertex */
-   }
-   
+   /* Define Particle Size and Y Position */
+   defineSize(part);
+      
    /* Define all Rotations */
    part->R = 75*(rand() / ((double)RAND_MAX + 1));
    part->G = 90*(rand() / ((double)RAND_MAX + 1));
@@ -240,6 +227,44 @@ GLfloat grass::getScaleFactor()
 {
    return(scaleFactor);
 }
+
+/**************************************************************************
+ *                            setScaleFactor                              *
+ **************************************************************************/
+void grass::setScaleFactor(GLfloat scale)
+{
+   int i;
+   scaleFactor = scaleFactor;
+
+   /* Actualize All Particles */
+   for(i = 0; i < maxParticles; i++)
+   {
+      defineSize(&particles[i]);
+   }
+}
+
+/**************************************************************************
+ *                              defineSize                                *
+ **************************************************************************/
+void grass::defineSize(particle* part)
+{
+   if(usedMap)
+   {
+      Map* map = (Map*) usedMap;
+      part->posY = map->getHeight(part->posX - 8.0, part->posZ) + 10*scaleFactor;
+      part->prvX = map->getHeight(part->posX + 8.0, part->posZ) + 10*scaleFactor;
+      part->prvY = map->getHeight(part->posX + 8.0, part->posZ);
+      part->prvZ = map->getHeight(part->posX - 8.0, part->posZ);
+   }
+   else
+   {
+      part->posY = 10*scaleFactor; /* Used as Height on First Vertex */
+      part->prvX = 10*scaleFactor; /* Used as Height on Second Vertex */
+      part->prvY = 0; /* Used as Height on Third Vertex */
+      part->prvZ = 0; /* Used as Height on Forth Vertex */
+   }
+}
+
 /**************************************************************************
  *                              defineMap                                 *
  **************************************************************************/

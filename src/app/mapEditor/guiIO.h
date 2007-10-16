@@ -6,6 +6,7 @@
 #include "portal.h"
 #include "terrain.h"
 #include "listwindow.h"
+#include "grasswindow.h"
 
 /* Return Constants */
 #define GUI_IO_NOTHING              0
@@ -83,9 +84,15 @@ class guiIO
       /*! Apply the fog! */
       void applyFog();
 
+      /*! Get the grass Window
+       * \return pointer to the grass window */
+      grassWindow* getGrassWindow();
+
       camera gameCamera;               /**< The Game Camera */
 
    private:
+      
+      grassWindow* grWindow;/**< the grass window */  
 
       listWindow* ltWindow; /**< The List Window */
 
