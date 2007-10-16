@@ -43,17 +43,23 @@ string messageForTool(int tool)
       case TOOL_WALL_TEXTURE:
          return("Select a Wall to Change Texture");
       break;
-      case TOOL_WALL_LESS_VER_TEXTURE:
-         return("Select a Wall to Less Vertical Texture Repeat");
+      case TOOL_WALL_LESS_Y_TEXTURE:
+         return("Select a Wall to Less Y Texture Repeat");
       break;
-      case TOOL_WALL_MORE_VER_TEXTURE:
-         return("Select a Wall to More Vertical Texture Repeat");
+      case TOOL_WALL_MORE_Y_TEXTURE:
+         return("Select a Wall to More Y Texture Repeat");
       break;
-      case TOOL_WALL_LESS_HOR_TEXTURE:
-         return("Select a Wall to Less Horizontal Texture Repeat");
+      case TOOL_WALL_LESS_X_TEXTURE:
+         return("Select a Wall to Less X Texture Repeat");
       break;
-      case TOOL_WALL_MORE_HOR_TEXTURE:
-         return("Select a Wall to More Horizontal Texture Repeat");
+      case TOOL_WALL_MORE_X_TEXTURE:
+         return("Select a Wall to More X Texture Repeat");
+      break;
+      case TOOL_WALL_LESS_Z_TEXTURE:
+         return("Select a Wall to Less Z Texture Repeat");
+      break;
+      case TOOL_WALL_MORE_Z_TEXTURE:
+         return("Select a Wall to More Z Texture Repeat");
       break;
       case TOOL_OBSTACLE_ADD:
          return("Put Object on Map with Left Mouse Button. Right and Middle Buttons rotate");

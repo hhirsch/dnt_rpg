@@ -48,6 +48,10 @@ class guiIO
        * \return actual selected Tool */
       int getTool();
 
+      /*! Set actual selected tool
+       * \param toolID -> id of the new tool */
+      void setTool(int toolID);
+
 
       /*! Do the GUI IO */
       int doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys);
@@ -135,12 +139,12 @@ class guiIO
       void openMainWindow();
 
       /*********************Texture*Window*******************************/
-      window* textureWindow;
-      button* texturePreviousButton;
-      button* textureNextButton;
-      button* textureInsertButton;
-      textBar* textureText;
-      void openTextureWindow();
+      window* textureWindow;           /**< Texture Window */
+      button* texturePreviousButton;   /**< Previous Texture Button */
+      button* textureNextButton;       /**< Next Texture Button */
+      button* textureInsertButton;     /**< Insert Texture Button */
+      textBar* textureText;            /**< Texture Text */
+      void openTextureWindow();        /**< Open The texture Window */
 
       /*********************Terrain*Window*******************************/
       window* terrainWindow;               /**< Terrain Window */
@@ -158,11 +162,16 @@ class guiIO
       oneTabButton* wallZButton;          /**< Z Wall Button */
       oneTabButton* wallX2Button;         /**< X Meio Fio Button */
       oneTabButton* wallZ2Button;         /**< Z Meio Fio Button */
+      oneTabButton* wallPreviousButton;   /**< Wall Previous button */
+      oneTabButton* wallDestroyButton;    /**< Wall Destroy Button */
+      oneTabButton* wallNextButton;       /**< Wall Next Button */
       oneTabButton* wallTextureButton;    /**< Wall Texture Button */
-      oneTabButton* wallLessVerTexture;   /**< Texture Vertical Less Button */
-      oneTabButton* wallMoreVerTexture;   /**< Texture Vertical More Button */
-      oneTabButton* wallLessHorTexture;   /**< Texture Horizontal Less Button */
-      oneTabButton* wallMoreHorTexture;   /**< Texture Horizontal More Button */
+      oneTabButton* wallLessYTexture;     /**< Texture Y Less Button */
+      oneTabButton* wallMoreYTexture;     /**< Texture Y More Button */
+      oneTabButton* wallLessXTexture;     /**< Texture X Less Button */
+      oneTabButton* wallMoreXTexture;     /**< Texture X More Button */
+      oneTabButton* wallLessZTexture;     /**< Texture Z Less Button */
+      oneTabButton* wallMoreZTexture;     /**< Texture Z More Button */
       void openWallWindow();
       /*********************Portal*Window*******************************/
       window* portalWindow;               /**< Portal Window */

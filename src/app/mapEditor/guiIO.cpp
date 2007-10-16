@@ -167,18 +167,23 @@ void guiIO::openMainWindow()
  ****************************************************************/
 void guiIO::openWallWindow()
 {
-   wallWindow = gui->insertWindow(0,599-123,112,599-62,"Wall");
+   wallWindow = gui->insertWindow(0,599-123,152,599-62,"Wall");
    wallTabButton = wallWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                                   "../data/mapEditor/wall.png");
    wallXButton = wallTabButton->insertButton(0,0,19,19);          /* Wall X */
    wallZButton = wallTabButton->insertButton(20,0,39,19);         /* Wall Z */
    wallX2Button = wallTabButton->insertButton(40,0,59,19);        /* Wall X */
    wallZ2Button = wallTabButton->insertButton(60,0,79,19);        /* Wall Z */
+   wallPreviousButton = wallTabButton->insertButton(80,0,99,19);  /* Previous */
+   wallDestroyButton = wallTabButton->insertButton(100,0,119,19); /* Destroy */
+   wallNextButton = wallTabButton->insertButton(120,0,139,19);    /* Next */
    wallTextureButton = wallTabButton->insertButton(0,20,19,39);   /* Texture */
-   wallLessHorTexture = wallTabButton->insertButton(20,20,39,39); /* Less H */
-   wallMoreHorTexture = wallTabButton->insertButton(40,20,59,39); /* More H */
-   wallLessVerTexture = wallTabButton->insertButton(60,20,79,39); /* Less V */
-   wallMoreVerTexture = wallTabButton->insertButton(80,20,99,39); /* Less V */
+   wallLessXTexture = wallTabButton->insertButton(20,20,39,39);   /* Less X */
+   wallMoreXTexture = wallTabButton->insertButton(40,20,59,39);   /* More X */
+   wallLessYTexture = wallTabButton->insertButton(60,20,79,39);   /* Less Y */
+   wallMoreYTexture = wallTabButton->insertButton(80,20,99,39);   /* Less Y */
+   wallLessZTexture = wallTabButton->insertButton(100,20,119,39);   /* Less Z */
+   wallMoreZTexture = wallTabButton->insertButton(120,20,139,39);   /* Less Z */
 
    wallWindow->setExternPointer(&wallWindow);
    gui->openWindow(wallWindow);
@@ -362,6 +367,14 @@ int guiIO::getState()
 int guiIO::getTool()
 {
    return(tool);
+}
+
+/****************************************************************
+ *                           setTool                            *
+ ****************************************************************/
+void guiIO::setTool(int toolID)
+{
+   tool = toolID;
 }
 
 
@@ -571,7 +584,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
       break;
       
       case PRESSED_TAB_BUTTON:
-      
+
          /*  Terrain Buttons  */
          if(object == (guiObject*) terrainUpButton)
          {
@@ -646,30 +659,61 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             tool = TOOL_WALL_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallLessVerTexture)
+         else if(object == (guiObject*) wallLessYTexture)
          {
             state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL_LESS_VER_TEXTURE;
+            tool = TOOL_WALL_LESS_Y_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallMoreVerTexture)
+         else if(object == (guiObject*) wallMoreYTexture)
          {
             state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL_MORE_VER_TEXTURE;
+            tool = TOOL_WALL_MORE_Y_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallLessHorTexture)
+         else if(object == (guiObject*) wallLessXTexture)
          {
             state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL_LESS_HOR_TEXTURE;
+            tool = TOOL_WALL_LESS_X_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallMoreHorTexture)
+         else if(object == (guiObject*) wallMoreXTexture)
          {
             state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL_MORE_HOR_TEXTURE;
+            tool = TOOL_WALL_MORE_X_TEXTURE;
             return(GUI_IO_NEW_STATE);
          }
+         else if(object == (guiObject*) wallLessZTexture)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_LESS_Z_TEXTURE;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (guiObject*) wallMoreZTexture)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_MORE_Z_TEXTURE;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (guiObject*) wallNextButton)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_NEXT;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (guiObject*) wallPreviousButton)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_PREVIOUS;
+            return(GUI_IO_NEW_STATE);
+         }
+         else if(object == (guiObject*) wallDestroyButton)
+         {
+            state = GUI_IO_STATE_WALL;
+            tool = TOOL_WALL_DESTROY;
+            return(GUI_IO_NEW_STATE);
+         }
+
          /* Objects Buttons */
          else if(object == (guiObject*) objectCommonButton)
          {

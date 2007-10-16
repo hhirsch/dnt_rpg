@@ -105,8 +105,10 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
    }
    else if( (tool == TOOL_PORTAL_DOOR) && (actualDoor))
    {
-      //Pega Muro Mais Proximo
-      wall* m = actualMap->walls;
+      /* Take nearest wall */
+      wall* m = actualMap->getFirstWall();
+      int wNum,  wTotal;
+      wTotal = actualMap->getTotalWalls();
       doorWall = m;
 
       if(!doorWall)
@@ -114,7 +116,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          return;
       }
       
-      while( m != NULL )
+      for( wNum = 0; wNum < wTotal; wNum++ )
       {
            if( inner(mX,mZ,m->x1,m->z1,m->x2,m->z2) ||
                inner(mX-2,mZ,m->x1,m->z1,m->x2,m->z2) ||
@@ -190,12 +192,10 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          mz1 = doorWall->z1;
          mz2 = doorWall->z2;
          wall* novoMuro;
-         novoMuro = new(wall);
+         novoMuro = actualMap->addWall(0,0,0,0);
          novoMuro->dX = doorWall->dX;
          novoMuro->dY = doorWall->dY;
          novoMuro->dZ = doorWall->dZ;
-         wall* maux;
-         //GLMmodel* modelo = (GLMmodel*)actualDoor->modelo3d;
          boundingBox bounds = actualDoor->getBoundingBox();
          if( doorOrientation == 0 )
          {
@@ -214,10 +214,6 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
             novoMuro->z2 = mz2;
          }
          novoMuro->texture = doorWall->texture;
-         maux = actualMap->walls;
-         actualMap->walls = novoMuro;
-         novoMuro->next = maux;
-         
          //Coloca a Porta no Mapa
          /*inserirObjetoMapa(doorX, doorZ, doorOrientation, porta, 
                             (int)(doorX / actualMap->squareSize()), 

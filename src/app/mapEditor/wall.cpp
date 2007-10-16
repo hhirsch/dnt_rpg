@@ -3,6 +3,8 @@
 #define WALL_STATE_OTHER     0
 #define WALL_STATE_ADD_INIT  1
 
+#define MARK_SIZE 10
+
 /******************************************************
  *                      Constructor                   *
  ******************************************************/
@@ -10,8 +12,13 @@ wallController::wallController(Map* acMap)
 {
    actualMap = acMap;
    state = WALL_STATE_OTHER;
-   actualWall = NULL;
+   actualWall = actualMap->getFirstWall();
    limitSquare = false;
+
+   /* Load Mark Texture */
+   SDL_Surface* img = IMG_Load("../data/cursors/Walk.png");
+   setTextureRGBA(img, &markTexture);
+   SDL_FreeSurface(img);
 }
 
 /******************************************************
@@ -19,6 +26,7 @@ wallController::wallController(Map* acMap)
  ******************************************************/
 wallController::~wallController()
 {
+   glDeleteTextures(1,&markTexture);
    actualMap = NULL;
 }
 
@@ -27,20 +35,14 @@ wallController::~wallController()
  ******************************************************/
 wall* wallController::getWall()
 {
+   //FIXME do the search on curbs too!
    wall* aux;
-   bool doneWalls2 = false;
+   int wNum;
 
    /* Search on Walls */
-   aux = actualMap->walls;
+   aux = actualMap->getFirstWall();
    
-   if( (!doneWalls2) && (aux == NULL) )
-   {
-      /* Not Found, So Search on 1/2 Walls */
-      aux = actualMap->curbs;
-      doneWalls2 = true;
-   }
-
-   while(aux != NULL)
+   for(wNum = 0; wNum < actualMap->getTotalWalls(); wNum++)
    {
       if( ( ((mX >= aux->x1) && (mX <= aux->x2))  ||
             ((mX-1 >= aux->x1) && (mX-1 <= aux->x2)) ||
@@ -52,13 +54,6 @@ wall* wallController::getWall()
          return(aux);
       }
       aux = aux->next;
-
-      if( (!doneWalls2) && (aux == NULL) )
-      {
-         /* Not Found, So Search on 1/2 Walls */
-         aux = actualMap->curbs;
-         doneWalls2 = true;
-      }
    }
    return(NULL);
 }
@@ -66,9 +61,9 @@ wall* wallController::getWall()
 /******************************************************
  *                      verifyAction                  *
  ******************************************************/
-void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                        Uint8 mButton, Uint8* keys,
-                        int tool, GLuint actualTexture)
+void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY, 
+                                  GLfloat mouseZ, Uint8 mButton, 
+                                  Uint8* keys, int& tool, GLuint actualTexture)
 {
    actualTool = tool;
    texture = actualTexture;
@@ -76,6 +71,8 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ
    mY = mouseY;
    mZ = mouseZ;
    mB = mButton;
+
+   wall* tmpWall = NULL;
 
    if(keys[SDLK_b])
    {
@@ -100,24 +97,66 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ
    }
    else if(tool == TOOL_WALL_TEXTURE)
    {
-      actualWall = getWall();
-      doTexture();
+      tmpWall = getWall();
+      if(tmpWall)
+      {
+         actualWall = tmpWall;
+         doTexture();
+      }
    }
-   else if( (tool == TOOL_WALL_LESS_VER_TEXTURE) || 
-            (tool == TOOL_WALL_MORE_VER_TEXTURE) ||
-            (tool == TOOL_WALL_LESS_HOR_TEXTURE) ||
-            (tool == TOOL_WALL_MORE_HOR_TEXTURE))
+   else if( (tool == TOOL_WALL_LESS_Y_TEXTURE) || 
+            (tool == TOOL_WALL_MORE_Y_TEXTURE) ||
+            (tool == TOOL_WALL_LESS_X_TEXTURE) ||
+            (tool == TOOL_WALL_MORE_X_TEXTURE) ||
+            (tool == TOOL_WALL_LESS_Z_TEXTURE) || 
+            (tool == TOOL_WALL_MORE_Z_TEXTURE) )
    {
-      actualWall = getWall();
-      doModifyVerHorTexture();
+      tmpWall = getWall();
+      if(tmpWall)
+      {
+         actualWall = tmpWall;
+         doModifyVerHorTexture();
+      }
+   }
+   else if(tool == TOOL_WALL_NEXT)
+   {
+      if(actualWall)
+      {
+         actualWall = actualWall->next;
+      }
+      state = WALL_STATE_OTHER;
+      tool = TOOL_NONE;
+   }
+   else if(tool == TOOL_WALL_PREVIOUS)
+   {
+      if(actualWall)
+      {
+         actualWall = actualWall->previous;
+      }
+      state = WALL_STATE_OTHER;
+      tool = TOOL_NONE;
+   }
+   else if(tool == TOOL_WALL_DESTROY)
+   {
+      if(actualWall)
+      {
+         actualMap->removeWall(actualWall);
+         actualWall = actualMap->getFirstWall();
+      }
+      state = WALL_STATE_OTHER;
+      tool = TOOL_NONE;
    }
 }
 
 /******************************************************
  *                      drawTemporary                 *
  ******************************************************/
-void wallController::drawTemporary()
+void wallController::drawTemporary(GLdouble modelView[16], 
+                                   GLfloat camX, GLfloat camY, GLfloat camZ)
 {
+   GLfloat scale = 1.0;
+   GLfloat dist = 0;
+
    glDisable(GL_LIGHTING);
    if(state == WALL_STATE_OTHER)
    {
@@ -129,8 +168,48 @@ void wallController::drawTemporary()
       glVertex3f(mX+1, 0.5, mZ-1);
       glEnd();
    }
+
+   if(actualWall)
+   {
+      /* Draw the indicator of actualWall */
+      GLfloat px = (actualWall->x2+actualWall->x1) / 2.0;
+      GLfloat pz = (actualWall->z2+actualWall->z1) / 2.0;
+
+      /* Calculate scale factor */
+      dist = sqrt( (camX-px)*(camX-px) +
+                   (camY-WALL_HEIGHT)*(camY-WALL_HEIGHT) +
+                   (camZ-pz)*(camZ-pz) );
+      scale = dist / 500.0;
+
+      glColor4f(1,1,1,1);
+      glEnable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+      glPushMatrix();
+         glTranslatef(px, WALL_HEIGHT, pz);
+         glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, markTexture );
+      glBegin(GL_QUADS);
+         glTexCoord2f(0,0);
+         glVertex3f(-MARK_SIZE*modelView[0]*scale,0.0f,
+                    -MARK_SIZE*modelView[8]*scale);
+         glTexCoord2f(1,0);
+         glVertex3f(MARK_SIZE*modelView[0]*scale,0.0f,
+                    MARK_SIZE*modelView[8]*scale);
+         glTexCoord2f(1,1);
+         glVertex3f(MARK_SIZE*modelView[0]*scale + scale*16*modelView[1], 
+                    scale*16*modelView[5] + scale*MARK_SIZE*modelView[4], 
+                    scale*MARK_SIZE*modelView[8] + scale*16*modelView[9]);
+         glTexCoord2f(0,1);
+         glVertex3f(-MARK_SIZE*modelView[0]*scale + scale*16*modelView[1], 
+                    scale*16*modelView[5] - MARK_SIZE*modelView[4]*scale,
+                    -MARK_SIZE*modelView[8]*scale + 16*modelView[9]*scale);
+      glEnd();
+      glDisable(GL_TEXTURE_2D);
+      glDisable(GL_BLEND);
+      glPopMatrix();
+   }
+
    glEnable(GL_LIGHTING);
-   glColor3f(1.0,1.0,1.0);
 }
 
 /******************************************************
@@ -143,17 +222,23 @@ void wallController::doModifyVerHorTexture()
    {
       switch(actualTool)
       {
-         case TOOL_WALL_LESS_VER_TEXTURE:
+         case TOOL_WALL_LESS_Y_TEXTURE:
             actualWall->dY--;
          break;
-         case TOOL_WALL_MORE_VER_TEXTURE:
+         case TOOL_WALL_MORE_Y_TEXTURE:
             actualWall->dY++;
          break;
-         case TOOL_WALL_LESS_HOR_TEXTURE:
+         case TOOL_WALL_LESS_X_TEXTURE:
             actualWall->dX--;
          break;
-         case TOOL_WALL_MORE_HOR_TEXTURE:
+         case TOOL_WALL_MORE_X_TEXTURE:
             actualWall->dX++;
+         break;
+         case TOOL_WALL_LESS_Z_TEXTURE:
+            actualWall->dZ--;
+         break;
+         case TOOL_WALL_MORE_Z_TEXTURE:
+            actualWall->dZ++;
          break;
       }
    }
@@ -180,18 +265,16 @@ void wallController::doWall(bool X, bool Z, bool full)
    {
       state = WALL_STATE_ADD_INIT;
       limitSquare = false;
-      actualWall = new(wall);
-      actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       if(full)
       {
-         actualWall->next = actualMap->walls;
-         actualMap->walls = actualWall;
+         actualWall = actualMap->addWall(0,0,0,0);
       }
       else
       {
-         actualWall->next = actualMap->curbs;
-         actualMap->curbs = actualWall;
+         //FIXME Curbs add!
+         cerr << "Error: Removed the curbs! FIXME!" << endl;
       }
+      actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->x1 = mX;
       actualWall->z1 = mZ;
       actualWall->texture = texture;
@@ -297,6 +380,5 @@ void wallController::doWall(bool X, bool Z, bool full)
          actualWall->z2 = aux;
       }
       
-      actualWall = NULL;
    }
 }

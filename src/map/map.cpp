@@ -405,6 +405,72 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
 }
 
 /********************************************************************
+ *                             addWall                              *
+ ********************************************************************/
+wall* Map::addWall(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
+{
+   wall* maux = new(wall);
+   maux->x1 = x1;
+   maux->x2 = x2;
+   maux->z1 = z1;
+   maux->z2 = z2;
+   if(walls)
+   {
+      maux->next = walls;
+      maux->previous = walls->previous;
+      maux->next->previous = maux;
+      maux->previous->next = maux;
+   }
+   else
+   {
+      maux->next = maux;
+      maux->previous = maux;
+   }
+   maux->texture = -1;
+   totalWalls++;
+   walls = maux;
+   return(maux);
+}
+
+/********************************************************************
+ *                          getFirstWall                            *
+ ********************************************************************/
+wall* Map::getFirstWall()
+{
+   return(walls);
+}
+
+/********************************************************************
+ *                          getTotalWalls                           *
+ ********************************************************************/
+int Map::getTotalWalls()
+{
+   return(totalWalls);
+}
+
+/********************************************************************
+ *                           removeWall                             *
+ ********************************************************************/
+void Map::removeWall(wall* w)
+{
+   if(w)
+   {
+      if(walls == w)
+      {
+         walls = w->next;
+      }
+      w->next->previous = w->previous;
+      w->previous->next = w->next;
+      delete(w);
+      totalWalls--;
+      if(totalWalls == 0)
+      {
+         walls = NULL;
+      }
+   }
+}
+
+/********************************************************************
  *                            drawQuad                              *
  ********************************************************************/
 void drawQuad(GLfloat x1, GLfloat z1,
@@ -670,6 +736,7 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
    wall* maux = walls;
    int texture = -1;
    bool visible = false;
+   int wNum;
         int fezMeioFio = 0;
         GLfloat altura = WALL_HEIGHT;
         if(!maux)
@@ -679,7 +746,7 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
             altura = CURB_HEIGHT;
         }
         glBegin(GL_QUADS);
-        while( (maux != NULL) )
+        for(wNum=0;wNum<totalWalls;wNum++ )
         {
            
            if((texture!= -1) && (maux->texture == -1))
@@ -867,7 +934,9 @@ Map::Map(lObject* lObjects)
    name = "oxi!";
    squareInic = NULL;
    walls = NULL;
+   totalWalls = 0;
    curbs = NULL; 
+   totalCurbs = 0;
    MapSquares = NULL;
    doors = NULL;
    music = "";
@@ -1302,7 +1371,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             {
                case 'a': /* Define Wall */
                {
-                  maux = new(wall);
+                  maux = addWall(0,0,0,0);
                   fgets(buffer, sizeof(buffer),arq);
                   sscanf(buffer,"%f,%f,%f,%f:%d,%d,%d",&maux->x1,&maux->z1,
                                               &maux->x2,&maux->z2,
@@ -1319,10 +1388,8 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      tmp = maux->z2;
                      maux->z2 = maux->z1;
                      maux->z1 = tmp;
-                  }  
-                  maux->next = walls;
+                  }
                   maux->texture = -1;
-                  walls = maux;
                   break;
                }
                case 't': /* Define Wall texture */
@@ -1357,6 +1424,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                   maux->next = curbs;
                   maux->texture = -1;
                   curbs = maux;
+                  totalCurbs++;
                   break;
                }
             }
@@ -1508,12 +1576,13 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    
    /* Now, actualize pointers to the walls */
    maux = walls;
+   int wNum;
    int inix,iniz,maxx,maxz;
    int indexMuro;
    Square* aux;
    float ssize = squareSize();
    
-   while(maux)
+   for(wNum = 0; wNum < totalWalls; wNum++)
    {
       inix = (int)floor(maux->x1 / ssize);
       iniz = (int)floor(maux->z1 / ssize);
@@ -1626,10 +1695,11 @@ void Map::optimize()
 {
     /* Verify Wall Superposition */
     wall* maux = walls;
-    while(maux != NULL)
+    int wNum, wNum2;
+    for(wNum = 0; wNum < totalWalls; wNum++)
     {
         wall* maux2 = walls;
-        while(maux2 !=NULL)
+        for(wNum2 = 0; wNum2 < totalWalls; wNum2++)
         {
             if(maux != maux2)
             {
@@ -1805,8 +1875,8 @@ int Map::save(string arquivo)
    
    /* Write Walls */
    wall* maux = (wall*)walls;
-   int x1,z1,x2,z2;
-   while(maux)
+   int x1,z1,x2,z2,wNum;
+   for(wNum=0; wNum < totalWalls; wNum++)
    {
       fprintf(arq,"wall %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
                                                 maux->z2,maux->dX,maux->dY,
@@ -1911,7 +1981,8 @@ Map::~Map()
    /* Delete all Walls */
    wall* m = walls;
    wall* am =NULL;
-   while(m)
+   int wNum;
+   for(wNum = 0; wNum < totalWalls; wNum++)
    {
       am = m;
       m = m->next;
@@ -2009,7 +2080,8 @@ void Map::drawMinimap(SDL_Surface* img)
    rectangle_2Colors(img,0,0,sX*SQUAREMINISIZE-1,sZ*SQUAREMINISIZE-1,0,0,0);
    
    wall* maux = walls;
-   while(maux!=NULL)
+   int wNum;
+   for(wNum = 0; wNum < totalWalls; wNum++)
    {
       //FIXME walls values when outdoor!
        x1 = (int) ( ((float)maux->x1 / (float)SQUAREMINIDIV ));

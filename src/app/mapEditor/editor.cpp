@@ -375,42 +375,23 @@ void editor::newMap()
    {
       map->newMap(sizeX,sizeZ);
       /* Insert walls */
-      wall* actualWall = new(wall);
-      actualWall->next = map->walls;
-      map->walls = actualWall;
+      wall* actualWall = map->addWall(0,0,(sizeX)*map->squareSize(),10);
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->texture = map->textures->index;
-      actualWall->x1 = 0;
-      actualWall->z1 = 0;
-      actualWall->x2 = (sizeX)*map->squareSize();
-      actualWall->z2 = 10;
-      actualWall = new(wall);
-      actualWall->next = map->walls;
-      map->walls = actualWall;
+
+      actualWall = map->addWall(0,0,10,(sizeZ)*map->squareSize());
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->texture = map->textures->index;
-      actualWall->x1 = 0;
-      actualWall->z1 = 0;
-      actualWall->x2 = 10;
-      actualWall->z2 = (sizeZ)*map->squareSize();
-      actualWall = new(wall);
-      actualWall->next = map->walls;
-      map->walls = actualWall;
+
+      actualWall = map->addWall((sizeX)*map->squareSize()-10,0,
+                                (sizeX)*map->squareSize(), (sizeZ)*map->squareSize());
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->texture = map->textures->index;
-      actualWall->x1 = (sizeX)*map->squareSize()-10;
-      actualWall->z1 = 0;
-      actualWall->x2 = ((sizeX)*map->squareSize());
-      actualWall->z2 = (sizeZ)*map->squareSize();
-      actualWall = new(wall);
-      actualWall->next = map->walls;
-      map->walls = actualWall;
+
+      actualWall = map->addWall(0,(sizeZ)*map->squareSize()-10,
+                                (sizeX)*map->squareSize(),(sizeZ)*map->squareSize());
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->texture = map->textures->index;
-      actualWall->x1 = 0;
-      actualWall->z1 = (sizeZ)*map->squareSize()-10;
-      actualWall->x2 = (sizeX)*map->squareSize();
-      actualWall->z2 = (sizeZ)*map->squareSize();
       /* Define Position */
       map->setInitialPosition( ((sizeX)*map->squareSize() / 2.0),
                             ((sizeZ)*map->squareSize() / 2.0));
@@ -682,7 +663,9 @@ void editor::draw()
          }
          else if(gui->getState() == GUI_IO_STATE_WALL)
          {
-            wallEditor->drawTemporary();
+            wallEditor->drawTemporary(modl,gui->gameCamera.getCameraX(),
+                                      gui->gameCamera.getCameraY(),
+                                      gui->gameCamera.getCameraZ());
          }
          else if(gui->getState() == GUI_IO_STATE_OBJECTS)
          {
@@ -854,8 +837,10 @@ void editor::doEditorIO()
    }
    else if( (gui->getState() == GUI_IO_STATE_WALL) && (mapOpened))
    {
+      int tl = gui->getTool();
       wallEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
-                               gui->getTool(), actualTexture);
+                               tl, actualTexture);
+      gui->setTool(tl);
    }
    else if( (gui->getState() == GUI_IO_STATE_OBJECTS) && (mapOpened))
    {

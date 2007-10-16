@@ -109,7 +109,8 @@ guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
             }
             else
             {
-               return(NULL);
+               /* Still in focus, but no action done */
+               return((guiObject*) &Buttons[i]);
             }
          }
       }

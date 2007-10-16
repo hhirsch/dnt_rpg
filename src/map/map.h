@@ -53,15 +53,16 @@ class conection
 class wall
 {
    public:
-      GLfloat x1,   /**< X min coordinates */
-              z1,   /**< Z min coordinates */
-              x2,   /**< X max Coordinates */
-              z2;   /**< Z max Coordinates */
-      GLuint dX,    /**< Delta X of texture cycle */
-             dY,    /**< Delta Y of texture cycle */
-             dZ;    /**< Delta Z of texture cycle */
-      int texture;  /**< Texture ID */
-      wall* next; /**< Next on list */
+      GLfloat x1,     /**< X min coordinates */
+              z1,     /**< Z min coordinates */
+              x2,     /**< X max Coordinates */
+              z2;     /**< Z max Coordinates */
+      GLuint dX,      /**< Delta X of texture cycle */
+             dY,      /**< Delta Y of texture cycle */
+             dZ;      /**< Delta Z of texture cycle */
+      int texture;    /**< Texture ID */
+      wall* next;     /**< Next on list */
+      wall* previous; /**< Previous on List */
 };
 
 /*!
@@ -467,16 +468,91 @@ class Map
        ***************************************************************/
       void createSplats();
 
+      /*!
+       ***************************************************************
+       * Create the alpha for texture splatting
+       * \param x1 -> X size of texture
+       * \param z1 -> Z size of texture 
+       ***************************************************************/
       void createAlpha(int x1, int z1);
 
+      /*! 
+       ***************************************************************
+       * Actualize the Alpha Textures 
+       ***************************************************************/
       void actualizeAlphaTextures();
 
+      /*!
+       **************************************************************
+       * Get the integer ID value of the texture
+       * \param textureName -> Name of the texture
+       * \param R -> the texture Red Color got
+       * \param G -> the texture Green Color got
+       * \param B -> the texture Blue Color got
+       * \return integer with the texture ID, or -1 if not found.
+       **************************************************************/
       int getTextureID(string textureName, GLuint* R, GLuint* G, GLuint* B);
+
+      /*!
+       **************************************************************
+       * Get the texture name
+       * \param ID -> integer ID of the texture
+       * \return texture Name
+       **************************************************************/
       string getTextureName(GLuint ID);
+      /*!
+       **************************************************************
+       * Get the texture
+       * \param id -> integer ID of the texture
+       * \return texture pointer
+       **************************************************************/
       texture* getTexture(GLuint id);
+      /*!
+       **************************************************************
+       * Insert the texture on the map
+       * \param arq -> fileName of the texture
+       * \param name -> Name of the texture
+       * \param R -> Red Color of the texture
+       * \param G -> Green Color of the texture
+       * \param B -> Blue Color of the texture
+       **************************************************************/
       GLuint insertTexture(string arq, string name, 
                            GLuint R, GLuint G, GLuint B);
+
+      /*!
+       **************************************************************
+       * Define the common texture for the texture splatting
+       **************************************************************/
       void defineCommonTexture();
+
+      /*!
+       **************************************************************
+       * Add Wall to the map
+       * \param x1 -> wall X1
+       * \param z1 -> wall Z1
+       * \param x2 -> wall X2
+       * \param z2 -> wall Z2
+       * \return pointer to the added wall
+       **************************************************************/
+      wall* addWall(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2); 
+      /*!
+       **************************************************************
+       * Get the first wall on the map
+       * \return pointer to the first wall on map
+       **************************************************************/
+      wall* getFirstWall();
+      /*!
+       **************************************************************
+       * Remove an wall from the map
+       * \param w -> pointer to wall to remove
+       **************************************************************/
+      void removeWall(wall* w);
+      /*!
+       **************************************************************
+       * Get total Number of walls on map
+       * \return total number of walls on map
+       **************************************************************/
+      int getTotalWalls();
 
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
@@ -484,14 +560,14 @@ class Map
       int numTextures;      /**< Number of distinct Textures on Map */
       texture* textures;    /**< List of textures on Map */
       Square* squareInic;   /**< Square where PCs starts */
-      wall* walls;          /**< Map Walls */
-      wall* curbs;          /**< Map Meio Fios (how translate this?) */
+      wall* curbs;          /**< Map Curbs */
+      int totalCurbs;       /**< Total Curbs */
       door* doors;          /**< Map Doors */
 
       int SQUAREMINISIZE;   /**< Minimap square size */
       int SQUAREMINIDIV;    /**< MiniMap square division relation */
 
-      protected:
+   protected:
 
 
       /*!
@@ -519,6 +595,8 @@ class Map
                            GLfloat matriz[6][4]);
 
 
+         wall* walls;          /**< Map Walls */
+         int totalWalls;       /**< Total Map Walls */
          int x,                /**< Map X dimension (in squares) */
              z;                /**< Map Z Dimension (in squares) */
          bool outdoor;         /**< If it's an outdoor or indoor map */

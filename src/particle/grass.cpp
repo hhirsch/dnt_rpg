@@ -55,32 +55,23 @@ grass::~grass()
  **************************************************************************/
 void grass::Render(particle* part)
 {
-   glPushMatrix();
-      /*glTranslatef(part->posX, 0 ,part->posZ);
-      glRotatef(part->G,0,1,0);
-      //FIXME the X rotation when grass is on different height!
-      glRotatef(part->R,1,0,0);
-      glRotatef(part->B,0,0,1);*/
-      glScalef(scaleFactor,scaleFactor,scaleFactor);
-      
-         glTexCoord2f(0.0,0.0);
-         glVertex3f(part->posX - part->velX,
-                    part->posY,
-                    part->posZ + (part->velZ  * part->velY));
-         glTexCoord2f(1.0,0.0);
-         glVertex3f(part->posX + part->velX,
-                    part->prvX,
-                    part->posZ - (part->velZ * part->velY));
-         glTexCoord2f(1.0,1.0);
-         glVertex3f(part->posX + part->velX,
-                    part->prvY,
-                    (part->posZ - part->velZ));
-         glTexCoord2f(0.0,1.0);
-         glVertex3f(part->posX - part->velX,
-                    part->prvZ,
-                    (part->posZ + part->velZ));
-      
-  glPopMatrix();
+   //FIXME the X rotation when grass is on different height!
+   glTexCoord2f(0.0,0.0);
+   glVertex3f(part->posX - (part->velX * scaleFactor),
+              part->posY,
+              part->posZ + (part->velZ  * part->velY * scaleFactor));
+   glTexCoord2f(1.0,0.0);
+   glVertex3f(part->posX + (part->velX * scaleFactor),
+              part->prvX,
+              part->posZ - (part->velZ * part->velY * scaleFactor));
+   glTexCoord2f(1.0,1.0);
+   glVertex3f(part->posX + (part->velX * scaleFactor),
+              part->prvY,
+              part->posZ - (part->velZ * scaleFactor));
+   glTexCoord2f(0.0,1.0);
+   glVertex3f(part->posX - (part->velX * scaleFactor),
+              part->prvZ,
+              part->posZ + (part->velZ * scaleFactor));
 }
 
 /**************************************************************************
@@ -175,8 +166,8 @@ void grass::createParticle(particle* part)
    }
    else
    {
-      part->posY = 10; /* Used as Height on First Vertex */
-      part->prvX = 10; /* Used as Height on Second Vertex */
+      part->posY = 10*scaleFactor; /* Used as Height on First Vertex */
+      part->prvX = 10*scaleFactor; /* Used as Height on Second Vertex */
       part->prvY = 0; /* Used as Height on Third Vertex */
       part->prvZ = 0; /* Used as Height on Forth Vertex */
    }
@@ -204,9 +195,6 @@ void grass::createParticle(particle* part)
 
    /* Define previous value of actualized rotation */
    part->prvR = part->R;
-   
-   /* Define Particle Size -> not Used! */
-   part->size = 1; 
 }
 
 /**************************************************************************

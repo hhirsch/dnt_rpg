@@ -2,6 +2,7 @@
 #define _wall_h
 
 #include "../../map/map.h"
+#include "../../gui/draw.h"
 #include "message.h"
 
 
@@ -22,11 +23,12 @@ class wallController
        * \param tool -> current Tool
        * \param actualTexture -> current Texture */
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                        Uint8 mButton, Uint8* keys, int tool, 
+                        Uint8 mButton, Uint8* keys, int& tool, 
                         GLuint actualTexture);
 
       /*! If have some temporary things to draw, draw it! */
-      void drawTemporary();
+      void drawTemporary(GLdouble modelView[16], 
+                         GLfloat camX, GLfloat camY, GLfloat camZ);
 
    private:
       Map* actualMap;         /**< Actual Internal Map */
@@ -42,6 +44,8 @@ class wallController
       Uint8 mB;               /**< Mouse Buttons */
 
       GLfloat initmX, initmZ; /**< Mouse Initial Positions on some States */
+
+      GLuint markTexture;     /**< Actual Wall mark Texture */
 
       /*! Gets wall on actual Mouse Position */
       wall* getWall();

@@ -79,9 +79,9 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     }
 
     /* Mouse move to change focus */
-    if( (x != mouseX || y != mouseY) && 
-        (focus == FOCUS_GAME) )
-    {
+    /*if( (x != mouseX || y != mouseY) && 
+        (focus == FOCUS_GAME) )*/
+    //{
         mouseX = x;
         mouseY = y;
         
@@ -89,8 +89,11 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
             /* Verify All objects */
-            guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
-            for(aux=0;aux<ljan->getActiveWindow()->getObjectsList()->getTotal();aux++)
+            guiObject *obj = 
+                    ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+            for(aux=0; aux < 
+                       ljan->getActiveWindow()->getObjectsList()->getTotal();
+                aux++)
             {
                /* Test selTexto */
                if(obj->type == GUI_SEL_TEXT) 
@@ -118,7 +121,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                obj = obj->next;
             }
         }
-    }
+    //}
 
     /* Verify mouse button for focus change */
     if((Mbotao & SDL_BUTTON(1)) &&  (focus == FOCUS_GAME))
@@ -416,58 +419,61 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
        int actType = 0;
        tabButton* tb = (tabButton*) objAtivo;
        guiObject* object = tb->verifyPosition(x,y,Mbotao,
-                                            ljan->getActiveWindow()->getX1(),
-                                            ljan->getActiveWindow()->getY1(),
-                                            ljan->getActiveWindow()->getSurface(),
-                                            actType);
+                                         ljan->getActiveWindow()->getX1(),
+                                         ljan->getActiveWindow()->getY1(),
+                                         ljan->getActiveWindow()->getSurface(),
+                                         actType);
        if( object != NULL )
        {
-            //selectObject = &object;
-            if(actType == TABBUTTON_PRESSED)
+         //selectObject = &object;
+         if(actType == TABBUTTON_PRESSED)
+         {
+            bool verified = false;
+            /* Verify List Text */
+            guiObject *obj = 
+                    ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+            int aux;
+            for(aux=0; aux <
+                       ljan->getActiveWindow()->getObjectsList()->getTotal(); 
+                aux++)
             {
-               bool verified = false;
-               /* Verify List Text */
-               guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
-               int aux;
-               for(aux=0; aux<ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
+               if(obj->type == GUI_LIST_TEXT)
                {
-                  if(obj->type == GUI_LIST_TEXT)
+                  listText* lt = (listText*)obj;
+                  if(lt->eventGot(PRESSED_TAB_BUTTON, object))
                   {
-                     listText* lt = (listText*)obj;
-                     if(lt->eventGot(PRESSED_TAB_BUTTON, object))
-                     {
-                        ljan->getActiveWindow()->draw(0,0);
-                        verified = true;
-                        *eventInfo = SELECTED_LIST_TEXT;
-                        focus = FOCUS_GAME;
-                        return(lt);
-                     }
+                     ljan->getActiveWindow()->draw(0,0);
+                     verified = true;
+                     *eventInfo = SELECTED_LIST_TEXT;
+                     focus = FOCUS_GAME;
+                     return(lt);
                   }
-                  obj = obj->next;
                }
-               
-               /* Is not a list text pressed, so return calling for treat 
-                * the event! */
-               if(!verified)
-               {
-                  focus = FOCUS_GAME;
-                  *eventInfo = PRESSED_TAB_BUTTON;
-                  return(object);
-               }
+               obj = obj->next;
             }
-            else if(actType == TABBUTTON_ON_PRESS)
+            
+            /* Is not a list text pressed, so return calling for treat 
+             * the event! */
+            if(!verified)
             {
-               *eventInfo = ON_PRESS_TAB_BUTTON;
+               focus = FOCUS_GAME;
+               *eventInfo = PRESSED_TAB_BUTTON;
                return(object);
-            }  
+            }
+         }
+         else if(actType == TABBUTTON_ON_PRESS)
+         {
+            *eventInfo = ON_PRESS_TAB_BUTTON;
+            return(object);
+         }  
        }
        else
        {
-            if(!tb->isMouseIn(x-ljan->getActiveWindow()->getX1(),
-                              y-ljan->getActiveWindow()->getY1()))
-            {
-               focus = FOCUS_GAME;
-            }
+          if(!tb->isMouseIn(x-ljan->getActiveWindow()->getX1(),
+                            y-ljan->getActiveWindow()->getY1()))
+          {
+             focus = FOCUS_GAME;
+          }
        }
     }
          

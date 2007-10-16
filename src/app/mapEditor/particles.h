@@ -40,7 +40,10 @@ class particles
 
       string previousText;             /**< Previous selectedText */
 
-      GLfloat x1,z1,x2,z2;
+      GLfloat x1,                      /**< X1 coordinate for grass */
+              z1,                      /**< Z1 Coordinate for grass */
+              x2,                      /**< X2 coordinate for grass */
+              z2;                      /**< Z2 coordinate for grass */
 
       interPlane* actualPlane;         /**< actual Plane */
 };

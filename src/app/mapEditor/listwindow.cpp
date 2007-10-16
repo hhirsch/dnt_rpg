@@ -134,7 +134,7 @@ void listWindow::setState(int st)
  ********************************************************************/
 void listWindow::open()
 {
-   intWindow = intGui->insertWindow(113,599-247,363,599-37,"Select");
+   intWindow = intGui->insertWindow(153,599-247,403,599-37,"Select");
    list = intWindow->getObjectsList()->insertListText(5,15,245,190,
                                                       intWindow->getSurface());
    intWindow->setExternPointer(&intWindow);
