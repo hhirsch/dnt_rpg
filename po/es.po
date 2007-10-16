@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-09-24 14:51-0300\n"
+"POT-Creation-Date: 2007-10-14 08:50-0300\n"
 "PO-Revision-Date: 2007-09-14 17:53-0300\n"
 "Last-Translator: DNTeam <dnt@dnteam.org>\n"
 "Language-Team: DNTeam <dnt@dnteam.org>\n"
@@ -70,14 +70,14 @@ msgstr "Alineamiento"
 #: src/engine/alignwindow.cpp:48 src/engine/aspectwindow.cpp:62
 #: src/engine/attwindow.cpp:200 src/engine/options.cpp:391
 #: src/engine/racewindow.cpp:65 src/engine/classwindow.cpp:66
-#: src/engine/skillwindow.cpp:88
+#: src/engine/skillwindow.cpp:91
 msgid "Confirm"
 msgstr "Aceptar"
 
 #: src/engine/alignwindow.cpp:52 src/engine/aspectwindow.cpp:66
 #: src/engine/attwindow.cpp:204 src/engine/barterwindow.cpp:34
 #: src/engine/options.cpp:395 src/engine/racewindow.cpp:69
-#: src/engine/classwindow.cpp:70 src/engine/skillwindow.cpp:92
+#: src/engine/classwindow.cpp:70 src/engine/skillwindow.cpp:95
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -93,11 +93,11 @@ msgstr "Nuevo"
 msgid "Continue"
 msgstr "Volver"
 
-#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3077
+#: src/engine/initial.cpp:50 src/engine/dccnit.cpp:3035
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3081
+#: src/engine/initial.cpp:52 src/engine/dccnit.cpp:3039
 msgid "Load"
 msgstr "Cargar"
 
@@ -372,19 +372,19 @@ msgstr "Habilidades de la Clase||"
 msgid "Class Skills||"
 msgstr "Dotes de la Clase||"
 
-#: src/engine/skillwindow.cpp:33
+#: src/engine/skillwindow.cpp:36
 msgid "Skills"
 msgstr "Dotes"
 
-#: src/engine/skillwindow.cpp:39
+#: src/engine/skillwindow.cpp:42
 msgid "Total Free Points:"
 msgstr "Puntos Libres:"
 
-#: src/engine/skillwindow.cpp:69
+#: src/engine/skillwindow.cpp:72
 msgid "Points:"
 msgstr "Puntos:"
 
-#: src/engine/skillwindow.cpp:80
+#: src/engine/skillwindow.cpp:83
 msgid "Cost"
 msgstr "Coste"
 
@@ -411,73 +411,73 @@ msgstr "Cargando NPC: %s"
 msgid "Loading Character"
 msgstr "Cargando Personaje"
 
-#: src/engine/dccnit.cpp:456
+#: src/engine/dccnit.cpp:453
 msgid "Putting GUI on Screen"
 msgstr "Cargando Ventanas"
 
-#: src/engine/dccnit.cpp:494
+#: src/engine/dccnit.cpp:491
 msgid "Loading Particles"
 msgstr "Cargando Partículas"
 
-#: src/engine/dccnit.cpp:521
+#: src/engine/dccnit.cpp:518
 msgid "Loading Changes..."
 msgstr "Cargando Modificaciones..."
 
-#: src/engine/dccnit.cpp:539
+#: src/engine/dccnit.cpp:536
 msgid "Done!"
 msgstr "Hecho!"
 
-#: src/engine/dccnit.cpp:1117
+#: src/engine/dccnit.cpp:1114
 msgid "Too far away for the action!"
 msgstr "Demasiado lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1151 src/engine/dccnit.cpp:1214
+#: src/engine/dccnit.cpp:1154 src/engine/dccnit.cpp:1222
 msgid "No NPCs in the area."
 msgstr "Sin NPCs en la área."
 
-#: src/engine/dccnit.cpp:1199
+#: src/engine/dccnit.cpp:1204
 msgid "Surprise Attack Turn."
 msgstr "Turno de golpe sorpresa."
 
-#: src/engine/dccnit.cpp:1559
+#: src/engine/dccnit.cpp:1523
 #, c-format
 msgid "%s taken."
 msgstr "Recogido %s."
 
-#: src/engine/dccnit.cpp:1618
+#: src/engine/dccnit.cpp:1582
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:1750 src/fight/fightSystem.cpp:331
+#: src/engine/dccnit.cpp:1714 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/engine/dccnit.cpp:1825 src/engine/dccnit.cpp:3074
+#: src/engine/dccnit.cpp:1789 src/engine/dccnit.cpp:3032
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:3045
+#: src/engine/dccnit.cpp:3003
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/dccnit.cpp:3067
+#: src/engine/dccnit.cpp:3025
 msgid "Shortcuts"
 msgstr "Atajos"
 
-#: src/engine/dccnit.cpp:3069
+#: src/engine/dccnit.cpp:3027
 msgid "FPS:"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3071
+#: src/engine/dccnit.cpp:3029
 msgid "Press F1 for Help"
 msgstr "Presione F1 para Ayuda"
 
-#: src/engine/dccnit.cpp:3079
+#: src/engine/dccnit.cpp:3037
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3224
+#: src/engine/dccnit.cpp:3190
 msgid "|Exit Battle Mode"
 msgstr "|Sale del Modo de Batalla"
 
@@ -587,7 +587,7 @@ msgstr ""
 msgid "Oxi! Can't ajust video mode!\n"
 msgstr ""
 
-#: src/ia/iascript.cpp:696
+#: src/ia/iascript.cpp:806
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr ""
