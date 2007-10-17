@@ -39,12 +39,12 @@ void grassWindow::openWindow()
    actualWindow = gui->insertWindow(184,599-345,403,599-248,"Grass");
    
    actualWindow->getObjectsList()->insertTextBox(7,23,87,40,0,"Povoation:");
-   buttonPovoationMore = actualWindow->getObjectsList()->insertButton(88,23,
+   buttonPovoationLess = actualWindow->getObjectsList()->insertButton(88,23,
                                                                       98,40,
                                                                       "<",0);
    textPovoation = actualWindow->getObjectsList()->insertTextBox(99,23,150,40,
                                                                  1,"20.0");
-   buttonPovoationLess = actualWindow->getObjectsList()->insertButton(151,23,
+   buttonPovoationMore = actualWindow->getObjectsList()->insertButton(151,23,
                                                                       161,40,
                                                                       ">",0);
    actualWindow->getObjectsList()->insertTextBox(7,43,87,60,0,"ScaleFactor:");
@@ -98,14 +98,19 @@ void grassWindow::drawTemporary()
  **********************************************************/
 bool grassWindow::eventGot(int type, guiObject* object)
 {
+   float size;
+   float pov;
+   bool treated = false;
+   int total;
+   int actualTime = SDL_GetTicks();
+   GLfloat pX1=0, pX2=0, pZ1=0, pZ2=0;
+
+   /* If no window open, for sure the event is not from here */
    if(!actualWindow)
    {
       return(false);
    }
-   float size;
-   float pov;
-   bool treated = false;
-   int actualTime = SDL_GetTicks();
+
    if( (type == ON_PRESS_BUTTON) && 
        (actualTime - lastTime > 100) )
    {  
@@ -141,11 +146,32 @@ bool grassWindow::eventGot(int type, guiObject* object)
          /* Inc the povoation of actual grass */
          if(actualGrass)
          {
+            actualGrass->getPosition(pX1,pZ1,pX2,pZ2);
+            pov = ((pZ2-pZ1)*(pX2-pX1)/(float)actualGrass->getMaxParticles());
+            if(pov < 500)
+            {
+               pov += 1;
+               total = (int)floor((pZ2-pZ1)*(pX2-pX1) / pov);
+               actualGrass->setTotal(total);
+            }
          }
          treated = true;
       }
       else if(object == (guiObject*)buttonPovoationLess)
       {
+         /* Dec the povoation of actual grass */
+         if(actualGrass)
+         {
+            actualGrass->getPosition(pX1,pZ1,pX2,pZ2);
+            pov = ((pZ2-pZ1)*(pX2-pX1)/(float)actualGrass->getMaxParticles());
+            if(pov > 2)
+            {
+               pov -= 1;
+               total = (int)floor((pZ2-pZ1)*(pX2-pX1) / pov);
+               actualGrass->setTotal(total);
+            }
+         }
+         treated = true;
       }
 
       /* Actualize Window, if needed */

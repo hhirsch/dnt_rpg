@@ -241,6 +241,18 @@ void grass::setScaleFactor(GLfloat scale)
 }
 
 /**************************************************************************
+ *                                setTotal                                *
+ **************************************************************************/
+void grass::setTotal(int total)
+{
+   /* Delete the alloced structs */
+   delete []particles;
+
+   /* Reinit the system with the new total */
+   init(total,PARTICLE_DRAW_INDIVIDUAL);
+}
+
+/**************************************************************************
  *                              defineSize                                *
  **************************************************************************/
 void grass::defineSize(particle* part)

@@ -15,12 +15,16 @@ particleSystem::particleSystem(int total, int mode)
 {
    init(total, mode);
    strFileName = "";
+   next = NULL;
+   previous = NULL;
 }
 
 particleSystem::particleSystem()
 {
    init(1,PARTICLE_DRAW_INDIVIDUAL);
    strFileName = "";
+   next = NULL;
+   previous = NULL;
 }
 
 /***************************************************************
@@ -31,6 +35,9 @@ particleSystem::particleSystem(string fileName, int mode)
    std::ifstream file;
    string aux;
    char aux2[20];
+
+   next = NULL;
+   previous = NULL;
 
    strFileName = fileName;
    file.open(fileName.c_str(), ios::in | ios::binary);
@@ -105,8 +112,6 @@ particleSystem::particleSystem(string fileName, int mode)
  ***************************************************************/
 void particleSystem::init(int total, int mode)
 {
-   next = NULL;
-   previous = NULL;
    actualParticles = 0;
    particles = (particle*) new particle[total];
    maxParticles = total;
