@@ -81,9 +81,11 @@ void grass::InitRender()
 {
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
-   glDepthMask(GL_FALSE);
+   glDepthMask(GL_TRUE);
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, grassTexture);
+   glEnable(GL_ALPHA_TEST);
+   glAlphaFunc(GL_GREATER,0.1f);
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    glBegin(GL_QUADS);
@@ -100,6 +102,8 @@ void grass::EndRender()
    glDepthFunc(GL_LESS);
    glDepthMask(GL_TRUE);
    glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
+   glEnable(GL_ALPHA_TEST);
+   glAlphaFunc(GL_ALWAYS,0.0f);
    glDisable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
    glEnable(GL_LIGHTING);
@@ -149,14 +153,7 @@ int grass::needCreate()
  **************************************************************************/
 void grass::createParticle(particle* part)
 {
-   /* Define Position X on Map */
-   part->posX = ((centerX2-centerX1)*(rand() / ((double)RAND_MAX + 1)))
-                + centerX1;
-   /* Define Position Z on Map */
-   part->posZ = ((centerZ2-centerZ1)*(rand() / ((double)RAND_MAX + 1)))
-                + centerZ1;
-
-   /* Define Particle Size and Y Position */
+   /* Define Particle Size and Position */
    defineSize(part);
       
    /* Define all Rotations */
@@ -234,7 +231,7 @@ GLfloat grass::getScaleFactor()
 void grass::setScaleFactor(GLfloat scale)
 {
    int i;
-   scaleFactor = scaleFactor;
+   scaleFactor = scale;
 
    /* Actualize All Particles */
    for(i = 0; i < maxParticles; i++)
@@ -248,6 +245,13 @@ void grass::setScaleFactor(GLfloat scale)
  **************************************************************************/
 void grass::defineSize(particle* part)
 {
+   /* Define Position X on Map */
+   part->posX = ((centerX2-centerX1)*(rand() / ((double)RAND_MAX + 1)))
+                + (centerX1);
+   /* Define Position Z on Map */
+   part->posZ = ((centerZ2-centerZ1)*(rand() / ((double)RAND_MAX + 1)))
+                + (centerZ1);
+
    if(usedMap)
    {
       Map* map = (Map*) usedMap;

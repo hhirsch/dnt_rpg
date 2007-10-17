@@ -515,6 +515,9 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          return(GUI_IO_NEW_STATE);
       }
    }
+   else if(grWindow->eventGot(eventInfo, object))
+   {
+   }
 
    switch(eventInfo)
    {

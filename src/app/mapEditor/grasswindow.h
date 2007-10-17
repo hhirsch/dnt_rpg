@@ -35,7 +35,9 @@ class grassWindow
 
       grass* actualGrass;     /**< the actual on edition grass */
       interface* gui;         /**< the actual used GUI */
-      
+     
+      int lastTime;           /**< Last time checked ON_PRESS events */
+
       window* actualWindow;         /**< the actual opened window pointer */
       textBox* textPovoation;       /**< the povoation text */
       textBox* textSize;            /**< The size text */
