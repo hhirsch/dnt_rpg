@@ -2451,11 +2451,3 @@ msgstr ""
 msgid "Bye Ente!"
 msgstr ""
 
-#~ msgid "%s is dead."
-#~ msgstr "%s estás muerto!"
-
-#~ msgid "|Critical Miss!"
-#~ msgstr "|Falla Crítica!"
-
-#~ msgid "|Critical Hit!"
-#~ msgstr "|Golpe Crítico!"

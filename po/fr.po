@@ -2451,8 +2451,3 @@ msgstr ""
 msgid "Bye Ente!"
 msgstr ""
 
-#~ msgid "|Critical Miss!"
-#~ msgstr "|Manque Critique!"
-
-#~ msgid "|Critical Hit!"
-#~ msgstr "|Coup Critique!"

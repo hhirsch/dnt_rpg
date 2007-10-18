@@ -3093,11 +3093,3 @@ msgstr "Adeus Árvore"
 msgid "Bye Ente!"
 msgstr "Adeus Ente!"
 
-#~ msgid "%s is dead."
-#~ msgstr "%s morreu."
-
-#~ msgid "|Critical Miss!"
-#~ msgstr "|Erro Crítico!"
-
-#~ msgid "|Critical Hit!"
-#~ msgstr "|Dano Crítico!"
