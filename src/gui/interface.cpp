@@ -143,9 +143,11 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                   (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
             /* Here are the internal windows clicks verification */
-            guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+            guiObject *obj = 
+                    ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
             int aux;
-            for(aux=0; aux<ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
+            for(aux=0; aux < 
+                   ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
             {
                if(obj->type == GUI_BUTTON)
                {
@@ -241,7 +243,8 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     {
         int pronto;
         button* bot = (button*)objAtivo;
-        if (bot->press(ljan->getActiveWindow()->getX1(), ljan->getActiveWindow()->getY1(), x, y, 
+        if (bot->press(ljan->getActiveWindow()->getX1(), 
+                       ljan->getActiveWindow()->getY1(), x, y, 
                        Mbotao, &pronto, ljan->getActiveWindow()->getSurface()))
         {
            if(pronto)
@@ -283,9 +286,11 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
            else
            {
               /* Verify RolBar */
-              guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+              guiObject *obj = 
+                    ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
               int aux;
-              for(aux=0; aux<ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
+              for(aux=0; aux < 
+                  ljan->getActiveWindow()->getObjectsList()->getTotal(); aux++)
               {
                  if(obj->type == GUI_ROL_BAR)
                  {
@@ -318,7 +323,8 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
         textBar* bart = (textBar*)objAtivo;
            if((bart->doWrite(x - ljan->getActiveWindow()->getX1(),
                            y - ljan->getActiveWindow()->getY1(),
-                           ljan->getActiveWindow()->getSurface(), Mbotao,tecla)))
+                           ljan->getActiveWindow()->getSurface(), 
+                           Mbotao,tecla)))
            {
                focus = FOCUS_GAME;
                *eventInfo = WROTE_TEXT_BAR;
@@ -458,6 +464,9 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
             {
                focus = FOCUS_GAME;
                *eventInfo = PRESSED_TAB_BUTTON;
+               /* Change the saved mouse position to can take that it is
+                * inner on a tabButton again. */
+               mouseX = -1;
                return(object);
             }
          }
