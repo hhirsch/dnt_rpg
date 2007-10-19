@@ -39,8 +39,8 @@ interface::~interface()
 /*********************************************************************
  *                   Take care of GUI I/O Events                     *
  *********************************************************************/
-guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
-                                     int* eventInfo)
+guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, 
+                                       Uint8* tecla, int* eventInfo)
 {
     int aux;
 
