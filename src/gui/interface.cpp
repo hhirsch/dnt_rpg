@@ -79,9 +79,9 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
     }
 
     /* Mouse move to change focus */
-    /*if( (x != mouseX || y != mouseY) && 
-        (focus == FOCUS_GAME) )*/
-    //{
+    if( (x != mouseX || y != mouseY) && 
+        (focus == FOCUS_GAME) )
+    {
         mouseX = x;
         mouseY = y;
         
@@ -121,7 +121,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                obj = obj->next;
             }
         }
-    //}
+    }
 
     /* Verify mouse button for focus change */
     if((Mbotao & SDL_BUTTON(1)) &&  (focus == FOCUS_GAME))
