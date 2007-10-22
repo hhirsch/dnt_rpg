@@ -1491,7 +1491,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             MapSquares[posX][posZ].posZ = posZ;
             if(pisavel) 
             {
-               MapSquares[posX][posZ].flags = PISAVEL;
+               MapSquares[posX][posZ].flags = SQUARE_CAN_WALK;
             }
             break;
          }
@@ -1666,7 +1666,7 @@ void Map::newMap(int X, int Z)
           saux->z2 = saux->z1+squareSize(); 
           saux->posX = auxX;
           saux->posZ = auxZ;
-          saux->flags = PISAVEL;
+          saux->flags = SQUARE_CAN_WALK;
           saux->texture = IDtexture;
           saux->R = 130;
           saux->G = 148;

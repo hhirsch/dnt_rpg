@@ -13,7 +13,7 @@
 using namespace std;
 
 /* Flag masks */
-#define PISAVEL 1   /**< If a Square is walkable or not. */
+#define SQUARE_CAN_WALK 1   /**< If a Square is walkable or not. */
 
 /* Constraints */
 #define OUTDOOR_SQUARE_SIZE      256      /**< Size of the Outdoor Square */
