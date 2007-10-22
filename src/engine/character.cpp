@@ -692,7 +692,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
       /* Character Name */
       if(buf == "name")
       {
-         novo->nome = token2;
+         novo->name = token2;
       }
       /* Character FileName */
       else if(buf == "model")

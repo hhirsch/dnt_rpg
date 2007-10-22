@@ -35,7 +35,7 @@ void initiative::insertCharacter(character* pers, string& brief)
    initiativeStruct *cmp, *aux, *oth;
    srand(SDL_GetTicks());
 
-   sprintf(buffer, gettext("%s rolls initiative: "),pers->nome.c_str()); 
+   sprintf(buffer, gettext("%s rolls initiative: "),pers->name.c_str()); 
    brief = buffer;
 
    /* Insertion on List, orded by initiativeValue (decrescent order) */

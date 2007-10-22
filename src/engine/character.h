@@ -110,14 +110,14 @@ class character: public aniModel
       align* actualAlign;       /**< Pointer to Align */
       feats actualFeats;        /**< Feats owned by character */
 
-      string nome;              /**< Character's name */
+      string name;              /**< Character's name */
 
       int actualFightGroup;     /**< fightGroup of character, used on battles*/
       character* actualEnemy;   /**< Pointer to actual fight enemy (target) */
       healthBar* lifeBar;       /**< Character's Life Bar */
 
       aStar pathFind;           /**< The A* pathFind to the character */
-      Square* ocupaQuad;        /**< Square occuped by character */
+      Square* ocSquare;         /**< Square occuped by character */
 
       inventory* inventories;   /**< Inventory */
 

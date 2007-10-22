@@ -415,14 +415,14 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
          NPCs = new (characterList);
          int total;
          int npc;
-         char nome[30];
+         char name[30];
          char arquivo[255];
          GLfloat posX, posZ;
          fscanf(arq,"%d",&total);
          for(npc = 0; npc < total; npc++)
          {
-           fscanf(arq,"%s %s %f %f",&nome[0],&arquivo[0],&posX,&posZ);
-           sprintf(texto, gettext("Loading NPC: %s"), nome);
+           fscanf(arq,"%s %s %f %f",&name[0],&arquivo[0],&posX,&posZ);
+           sprintf(texto, gettext("Loading NPC: %s"), name);
            showLoading(img,&texturaTexto,texturaCarga,
                          texto,
                          proj, modl, viewPort);
@@ -433,7 +433,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
            /* Define Occuped Square */
            int posX =(int)floor(per->xPosition / actualMap->squareSize());
            int posZ =(int)floor(per->zPosition / actualMap->squareSize());
-           per->ocupaQuad = actualMap->relativeSquare(posX,posZ);
+           per->ocSquare = actualMap->relativeSquare(posX,posZ);
          }
          fclose(arq);
       }  
@@ -512,7 +512,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                               activeCharacter->yPosition,
                               activeCharacter->zPosition,
                               activeCharacter->orientation);
-   activeCharacter->ocupaQuad = actualMap->squareInic;
+   activeCharacter->ocSquare = actualMap->squareInic;
 
    showLoading(img,&texturaTexto,texturaCarga,
                gettext("Loading Changes..."),
@@ -1628,7 +1628,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             cursors->setActual(CURSOR_INVENTORY);
             if(shortCutsWindow)
             {
-               ObjTxt->setText(pers->nome); 
+               ObjTxt->setText(pers->name); 
                shortCutsWindow->draw(mouseX, mouseY);
             }
 
@@ -1686,7 +1686,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   }
                   if(shortCutsWindow)
                   {
-                     ObjTxt->setText(pers->nome); 
+                     ObjTxt->setText(pers->name); 
                      shortCutsWindow->draw(mouseX, mouseY);
                   }
                   pronto = 1;
@@ -1700,7 +1700,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   cursors->setActual(CURSOR_ATTACK);
                   if(shortCutsWindow)
                   {
-                     ObjTxt->setText(pers->nome); 
+                     ObjTxt->setText(pers->name); 
                      shortCutsWindow->draw(mouseX, mouseY);
                   }
 
@@ -1712,7 +1712,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                    METER_TO_DNT) ) )
                   {
                      sprintf(buf, gettext("%s attacks %s|"),
-                             activeCharacter->nome.c_str(), pers->nome.c_str());
+                             activeCharacter->name.c_str(), pers->name.c_str());
                      brief = buf;
                      canAttack = !activeCharacter->actualFeats.
                                                         applyAttackAndBreakFeat(
@@ -2278,7 +2278,7 @@ int engine::treatIO(SDL_Surface *screen)
                                     actualMap->squareSize());
                int posZ =(int)floor(activeCharacter->zPosition / 
                                     actualMap->squareSize());
-               activeCharacter->ocupaQuad = 
+               activeCharacter->ocSquare = 
                                          actualMap->relativeSquare(posX,posZ);
                /* Define New Height */
                defineCharacterHeight(activeCharacter, 
@@ -2935,7 +2935,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
                                    activeCharacter->max[1],
                                    activeCharacter->max[2],
                                    activeCharacter->orientation + varAlpha, 
-                                   activeCharacter->ocupaQuad, varHeight,
+                                   activeCharacter->ocSquare, varHeight,
                                    nx, nz);
 
    if(result)
@@ -2943,7 +2943,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
       /* Define New Occuped Square */
       int posX =(int)floor( nx / (actualMap->squareSize()));
       int posZ =(int)floor( nz / (actualMap->squareSize()));
-      activeCharacter->ocupaQuad = actualMap->relativeSquare(posX,posZ);
+      activeCharacter->ocSquare = actualMap->relativeSquare(posX,posZ);
 
       /* Define New Heigh */
       if(!defineCharacterHeight(activeCharacter, nx, nz))

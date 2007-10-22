@@ -150,7 +150,7 @@ void fightSystem::verifyDeads(string& brief)
 
       brief += "|";
       sprintf(buf, gettext("%s is dead!"), 
-              actualActor->actualEnemy->nome.c_str());
+              actualActor->actualEnemy->name.c_str());
       brief += buf;
 
       if(isPC(actualActor))
@@ -182,7 +182,7 @@ void fightSystem::verifyDeads(string& brief)
                p->xp += xp;
                brief += "|";
                sprintf(buf, gettext("%s receive %d XP for killing"), 
-                       p->nome.c_str(), xp);
+                       p->name.c_str(), xp);
                brief += buf;
             }
          }
@@ -267,14 +267,14 @@ int fightSystem::doTurn(string& brief)
                 /* There's no more enemies, so no more battle */
                 return(FIGHT_END);
              }
-             sprintf(buffer, "%s's turn.", actualActor->nome.c_str());
+             sprintf(buffer, "%s's turn.", actualActor->name.c_str());
              brief += buffer;
              brief += "|";
              return(FIGHT_PC_TURN);
          }
          else
          { 
-            sprintf(buffer, "%s's turn.", actualActor->nome.c_str());
+            sprintf(buffer, "%s's turn.", actualActor->name.c_str());
             brief += buffer;
             brief += "|";
             /* If NPC hasn't script, run from here */
@@ -337,8 +337,8 @@ void fightSystem::doNPCAction(character* pers, string& brief)
 
    if( (pers->actualEnemy != NULL) && (attackFeat != -1))
    {
-      sprintf(buffer, gettext("%s attacks %s|"), pers->nome.c_str(),
-              pers->actualEnemy->nome.c_str());
+      sprintf(buffer, gettext("%s attacks %s|"), pers->name.c_str(),
+              pers->actualEnemy->name.c_str());
       brief += buffer;
       pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
                                                 *pers->actualEnemy, brief,

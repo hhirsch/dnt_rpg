@@ -136,7 +136,7 @@ int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
             usedCharacter->sexType = SEX_OTHER;
          }
          /* Define Name */
-         usedCharacter->nome = textName->getText();
+         usedCharacter->name = textName->getText();
          /* Define Age */
          sscanf(textAge->getText().c_str(),"%d", &usedCharacter->age);
 

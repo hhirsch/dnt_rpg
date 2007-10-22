@@ -478,7 +478,7 @@ void actionController::treatActions(Map* actualMap)
                                        actualMap->squareSize());
                   int posZ =(int)floor(actor->zPosition / 
                                        actualMap->squareSize());
-                  actor->ocupaQuad = actualMap->relativeSquare(posX,posZ);
+                  actor->ocSquare = actualMap->relativeSquare(posX,posZ);
 
                   /* Define New Height */
                   actualMap->defineThingHeight(actor, actor->xPosition,
