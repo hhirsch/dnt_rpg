@@ -2849,7 +2849,7 @@ void engine::drawWithoutShadows()
    glLoadIdentity();
 
    /* Redefine camera position */
-   gameCamera.lookAt();
+   gameCamera.lookAt(actualMap);
 
    snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
                             gameCamera.getCameraZ(), gameCamera.getTheta(),

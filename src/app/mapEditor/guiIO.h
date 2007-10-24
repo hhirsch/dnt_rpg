@@ -60,8 +60,9 @@ class guiIO
       /*! Draw The GUI */
       void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
-      /*! Redefine Camera Position */
-      void cameraPos();
+      /*! Redefine Camera Position
+       * \acMap -> actual opened Map */
+      void cameraPos(Map* acMap);
 
       /*! Gets the FileName */
       string getFileName();

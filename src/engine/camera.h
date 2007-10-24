@@ -8,6 +8,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 
+#include "../map/map.h"
+
 #define CAMERA_TYPE_NORMAL 1  /**< Normal Camera Mode */
 #define CAMERA_TYPE_DRIVE  2  /**< Drive Camera Mode */
 
@@ -72,8 +74,10 @@ class camera
        * \return Camera Center Z position */
       GLfloat getCenterZ();
 
-      /*! Do the camera Look At */
-      void lookAt();
+      /*! Do the camera Look At
+       * \param acMap -> pointer to the opened map, toa void the
+       *                 camera go inner on the terrain, etc. */
+      void lookAt(Map* acMap);
 
       /*! Define new Camera Type
        * \param value -> value of the new camera type */

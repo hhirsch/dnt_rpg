@@ -9,6 +9,7 @@
  - Messages on world map;
  - Smooth Camera Moves;
  - Indoor Reflexions;
+ - Don't let camera inner terrain;
  - Better Dynamic Lights Implementation;
  - More 3D Objects;
  - More Characters;

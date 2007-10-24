@@ -904,13 +904,13 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 /****************************************************************
  *                             camera                           *
  ****************************************************************/
-void guiIO::cameraPos()
+void guiIO::cameraPos(Map* acMap)
 {
    /*cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centerY + deltaY + (float) d * sin(deg2Rad(theta));
    cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
    gluLookAt(cameraX,cameraY,cameraZ, centerX,centerY,centerZ,0,1,0);*/
-   gameCamera.lookAt();
+   gameCamera.lookAt(acMap);
 }
 
 /****************************************************************

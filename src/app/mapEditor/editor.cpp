@@ -563,7 +563,7 @@ void editor::draw()
 
 
    /* Redefine camera position */
-   gui->cameraPos();
+   gui->cameraPos(map);
    actualizeFrustum( visibleMatrix, proj, modl);
    gameSun->actualizeHourOfDay(hour, 0.0, 0.0);
    gameSun->setLight();

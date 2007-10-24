@@ -212,11 +212,24 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
 /******************************************************************
  *                           lookAt                               *
  ******************************************************************/
-void camera::lookAt()
+void camera::lookAt(Map* acMap)
 {
+   GLfloat height = 0;
+
    cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centerY + deltaY + (float) d * sin(deg2Rad(theta));
    cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
+
+   if(acMap != NULL)
+   {
+      height = acMap->getHeight(cameraX, cameraZ);
+
+      if(cameraY < (height+10))
+      {
+         cameraY = height+10;
+      }
+   }
+
    gluLookAt(cameraX,cameraY,cameraZ, centerX, centerY, centerZ, 0,1,0);
 }
 
