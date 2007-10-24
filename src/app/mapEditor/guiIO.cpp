@@ -138,7 +138,7 @@ void guiIO::openNavWindow()
  ****************************************************************/
 void guiIO::openMessageWindow()
 {
-   messageWindow = gui->insertWindow(113,599-36,799-68,599,"Messages");
+   messageWindow = gui->insertWindow(153,599-36,799-68,599,"Messages");
    messageText = messageWindow->getObjectsList()->insertTextBox(7,16,610,31,0,
                  "Welcome to DccNiTghtmare Map Editor!");
    messageWindow->setAttributes(false,true,false,false);
@@ -204,7 +204,7 @@ void guiIO::openWallWindow()
  ****************************************************************/
 void guiIO::openPortalWindow()
 {
-   portalWindow = gui->insertWindow(0,599-185,112,599-124,"Portal");
+   portalWindow = gui->insertWindow(0,599-185,152,599-124,"Portal");
    portalTabButton = portalWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                                 "../data/mapEditor/portal.png");
    portalAddButton = portalTabButton->insertButton(0,0,19,19); /* Add */
@@ -220,7 +220,7 @@ void guiIO::openPortalWindow()
  ****************************************************************/
 void guiIO::openTerrainWindow()
 {
-   terrainWindow = gui->insertWindow(0,599-61,112,599,"Terrain");
+   terrainWindow = gui->insertWindow(0,599-61,152,599,"Terrain");
    terrainTabButton = terrainWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                                "../data/mapEditor/terrain.png");
    terrainUpButton = terrainTabButton->insertButton(0,0,19,19);    
@@ -237,7 +237,7 @@ void guiIO::openTerrainWindow()
  ****************************************************************/
 void guiIO::openParticleWindow()
 {
-   particleWindow = gui->insertWindow(0,599-247,112,599-186,"Particle");
+   particleWindow = gui->insertWindow(0,599-247,152,599-186,"Particle");
    particleTabButton = particleWindow->getObjectsList()->insertTabButton(7,17,
                                                                          0,0,
                                               "../data/mapEditor/particle.png");
@@ -259,7 +259,7 @@ void guiIO::openFogWindow()
  if(actualFog != NULL)
  {
    char buf[10];
-   fogWindow = gui->insertWindow(185,100,288,255,"Fog");
+   fogWindow = gui->insertWindow(185,98,288,253,"Fog");
    fogWindow->getObjectsList()->insertTextBox(5,17,45,30,0,"Red");
    sprintf(buf,"%.4f",actualFog->color[0]);
    fogColor[0] = fogWindow->getObjectsList()->insertTextBar(48,17,98,30,buf,1);
