@@ -346,10 +346,9 @@ void feats::newDay()
 /***************************************************************
  *                      getNPCAttackFeat                       *
  ***************************************************************/
-int feats::getNPCAttackFeat(thing* pers, thing* target)
+int feats::getRandomNPCAttackFeat(thing* pers, thing* target)
 {
    int ft;
-   //FIXME do in a better way than that random stuff;
 
    if( (target != NULL) && (pers != NULL))
    {

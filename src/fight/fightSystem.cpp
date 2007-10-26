@@ -359,7 +359,7 @@ int fightSystem::getNPCAttackFeat(character* pers, character* target)
 {
    if( (target != NULL) && (pers != NULL))
    { 
-       return(pers->actualFeats.getNPCAttackFeat(pers,target));
+       return(pers->actualFeats.getRandomNPCAttackFeat(pers,target));
    }
    
    return(-1);

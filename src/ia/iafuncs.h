@@ -116,6 +116,7 @@ using namespace std;
 #define IA_FEAT_QUANTITY_PER_DAY "featQuantityPerDay"
 #define IA_FEAT_USE_AT_CHARACTER "featUseAtCharacter"
 #define IA_FEAT_USE_AT_OBJECT "featUseAtObject"
+/*! string getRandomAttackFeat() */
 #define IA_FEAT_GET_RANDOM_ATTACK "getRandomAttackFeat"
 #define IA_FEAT_GET_POWERFULL_ATTACK "getPowerfullAttackFeat"
 #define IA_FEAT_GET_RANDOM_HEAL "getRandomHealFeat"

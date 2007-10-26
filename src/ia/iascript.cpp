@@ -1047,9 +1047,33 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
       else
       {
-         cerr << "Error: Unknow feat " << featID << " at " << strLine << " on script "
-              << fileName << endl;
+         cerr << "Error: Unknow feat " << featID << " at " << strLine 
+              << " on script " << fileName << endl;
       }
+   }
+
+   /* string function() */
+   else if( (functionName == IA_FEAT_GET_RANDOM_ATTACK) )
+   {
+      string res = "";
+
+      /* Syntax: string getRandomAttackFeat() */
+      if( (functionName == IA_FEAT_GET_RANDOM_ATTACK) && (characterOwner) )
+      {
+         int ft = -1;
+         feat* ftp = NULL;
+         ft = characterOwner->actualFeats.getRandomNPCAttackFeat(characterOwner,
+                                                   characterOwner->actualEnemy);
+         if(ft != -1)
+         {
+            ftp = characterOwner->actualFeats.featByNumber(ft);
+            if(ftp)
+            {
+               res = ftp->idString;
+            }
+         }
+      }
+      assignValue(var, (void*)&res, IA_TYPE_STRING);
    }
 
    else if(functionName == IA_FEAT_USE_AT_CHARACTER)

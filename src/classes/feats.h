@@ -191,12 +191,12 @@ class feats
 
       /*!
        **************************************************************** 
-       * Test if an attack feat can be used.
+       * Get a random attack feat that can be used.
        * \param pers -> character that will use the feat
        * \param target -> thing that will receive the feat.
-       * \return \c true if can use the feat.
+       * \return \c number of the feat got
        ***************************************************************/
-      int getNPCAttackFeat(thing* pers, thing* target);
+      int getRandomNPCAttackFeat(thing* pers, thing* target);
 
       /*!
        **************************************************************** 
