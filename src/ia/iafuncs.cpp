@@ -87,7 +87,8 @@ bool isFunction(string s)
            (s == IA_FEAT_ACTUAL_QUANTITY) || (s == IA_FEAT_QUANTITY_PER_DAY) ||
            (s == IA_FEAT_COST) || (s == IA_FEAT_USE_AT_CHARACTER) ||
            (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_FEAT_GET_RANDOM_ATTACK) ||
-           (s == IA_FEAT_GET_POWERFULL_ATTACK) || (s == IA_SKILL_POINTS) ||
+           (s == IA_FEAT_GET_POWERFULL_ATTACK) || (s == IA_FEAT_GET_RANDOM_HEAL) ||
+           (s == IA_FEAT_GET_POWERFULL_HEAL) || (s == IA_SKILL_POINTS) ||
            (s == IA_ATT_MODIFIER) || (s == IA_FIGHT_ENTER) ||
            (s == IA_FIGHT_EXIT) || (s == IA_CHARACTER_GET_PSYCHO) ||
            (s == IA_CHARACTER_SET_PSYCHO) || (s == IA_CHARACTER_AT_RANGE) || 
@@ -127,7 +128,9 @@ string functionType(string s)
    }
    /* String Functions */
    else if( (s == IA_FEAT_GET_RANDOM_ATTACK) ||
-            (s == IA_FEAT_GET_POWERFULL_ATTACK) )
+            (s == IA_FEAT_GET_POWERFULL_ATTACK) ||
+            (s == IA_FEAT_GET_RANDOM_HEAL) ||
+            (s == IA_FEAT_GET_POWERFULL_HEAL) )
    {
       return(IA_TYPE_STRING);
    }

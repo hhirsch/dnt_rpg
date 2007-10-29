@@ -124,7 +124,9 @@ using namespace std;
  * This function get the powerfull attack feat that the characterOwner
  * of the script can use at its defined target */
 #define IA_FEAT_GET_POWERFULL_ATTACK "getPowerfullAttackFeat"
+/*! string getRandomHealFeat() */
 #define IA_FEAT_GET_RANDOM_HEAL "getRandomHealFeat"
+/*! string getPowerfullHealFeat() */
 #define IA_FEAT_GET_POWERFULL_HEAL "getPowerfullHealFeat"
 
 ////////////////////////////////////////////////////

@@ -1053,7 +1053,10 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    }
 
    /* string function() */
-   else if( (functionName == IA_FEAT_GET_RANDOM_ATTACK) )
+   else if( (functionName == IA_FEAT_GET_RANDOM_ATTACK) ||
+            (functionName == IA_FEAT_GET_POWERFULL_ATTACK) ||
+            (functionName == IA_FEAT_GET_RANDOM_HEAL) ||
+            (functionName == IA_FEAT_GET_POWERFULL_HEAL) )
    {
       string res = "";
 
@@ -1075,6 +1078,16 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             ft = characterOwner->actualFeats.getPowerfullAttackFeat(
                                                   characterOwner,
                                                   characterOwner->actualEnemy);
+         }
+         /* Syntax: string getRandomHealFeat() */
+         else if(functionName == IA_FEAT_GET_RANDOM_HEAL)
+         {
+            ft = characterOwner->actualFeats.getRandomHealFeat(characterOwner);
+         }
+         /* Syntax: string getPowerfullHealFeat() */
+         else if(functionName == IA_FEAT_GET_POWERFULL_HEAL)
+         {
+            ft=characterOwner->actualFeats.getPowerfullHealFeat(characterOwner);
          }
 
          /* Get the feat name */
