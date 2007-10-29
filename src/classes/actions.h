@@ -27,7 +27,7 @@ using namespace std;
 #define ACT_MODIFY_OTHER_CONCEPT 11
 #define ACT_CONJURE              12
 #define ACT_MODIFY_OBJECT        13
-#define ACT_CURE                 14
+#define ACT_HEAL                 14
 #define ACT_FIX                  15
 #define ACT_BREAK                16
 
@@ -45,7 +45,7 @@ using namespace std;
 #define ACT_STR_MODIFY_OTHER_CONCEPT "ACT_MODIFY_OTHER_CONCEPT"
 #define ACT_STR_CONJURE              "ACT_CONJURE"
 #define ACT_STR_MODIFY_OBJECT        "ACT_MODIFY_OBJECT"
-#define ACT_STR_CURE                 "ACT_CURE"
+#define ACT_STR_HEAL                 "ACT_HEAL"
 #define ACT_STR_FIX                  "ACT_FIX"
 #define ACT_STR_BREAK                "ACT_BREAK"
 

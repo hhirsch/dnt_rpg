@@ -207,6 +207,13 @@ class feats
        ***************************************************************/
       int getPowerfullAttackFeat(thing* pers, thing* target);
 
+
+      int getFirstHealFeat(thing* pers);
+
+      int getRandomHealFeat(thing* pers);
+
+      int getPowerfullHealFeat(thing* feat);
+
       /*!
        **************************************************************** 
        * Define the active character's base attack to be a melee one.

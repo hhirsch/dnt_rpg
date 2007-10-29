@@ -34,8 +34,8 @@ int numberAction(string buffer)
      ret = ACT_CONJURE;
    else if(buffer.compare(ACT_STR_MODIFY_OBJECT) == 0)
      ret = ACT_MODIFY_OBJECT;
-   else if(buffer.compare(ACT_STR_CURE) == 0)
-     ret = ACT_CURE;
+   else if(buffer.compare(ACT_STR_HEAL) == 0)
+     ret = ACT_HEAL;
    else if(buffer.compare(ACT_STR_FIX) == 0)
      ret = ACT_FIX;
    else if(buffer.compare(ACT_STR_BREAK) == 0)

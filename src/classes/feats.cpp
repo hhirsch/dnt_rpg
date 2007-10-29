@@ -436,6 +436,93 @@ int feats::getPowerfullAttackFeat(thing* pers, thing* target)
 }
 
 /***************************************************************
+ *                       getFirstHealFeat                      *
+ ***************************************************************/
+int feats::getFirstHealFeat(thing* pers)
+{
+   int i = -1;
+
+   if(pers)
+   {
+      /* Run over all feats searching for a heal one */
+      for(i = 0; i < totalFeats; i++)
+      {
+         /* Verify if is an attack feat and is avaible */
+         if( (m_feats[i].action == ACT_HEAL) && 
+             ( (m_feats[i].actualQuantity >= m_feats[i].costToUse)
+             || (m_feats[i].costToUse) == 0 ))
+         {
+            return(i);
+         }
+      }
+   }
+
+   return(-1);
+}
+
+/***************************************************************
+ *                     getRandomHealFeat                       *
+ ***************************************************************/
+int feats::getRandomHealFeat(thing* pers)
+{
+   int ft;
+
+   if((pers != NULL))
+   {
+      srand(SDL_GetTicks());
+      ft = (rand() % totalFeats);
+
+      if( (m_feats[ft].action == ACT_HEAL)  && 
+          ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
+          || (m_feats[ft].costToUse) == 0 ))
+      {
+          /* is avaible */
+          return(ft);
+      }
+   }
+   return(getFirstHealFeat(pers));
+}
+
+/***************************************************************
+ *                     getPowerfullHealFeat                    *
+ ***************************************************************/
+int feats::getPowerfullHealFeat(thing* pers)
+{
+   int ft = getFirstHealFeat(pers);
+   int i = 0;
+
+   if( (pers) && (ft != -1) )
+   {
+      int tmpPower = 0;
+      int power = m_feats[ft].diceInfo.baseDice.diceID * 
+                  m_feats[ft].diceInfo.baseDice.numberOfDices +
+                  m_feats[ft].diceInfo.baseDice.sumNumber;
+
+      /* Run over all feats searching for a powerfull heal one */
+      for(i = 0; i < totalFeats; i++)
+      {
+         /* Verify if is an attack feat and is avaible */
+         if( (i != ft) && (m_feats[i].action == ACT_HEAL) && 
+             ( (m_feats[i].actualQuantity >= m_feats[i].costToUse)
+             || (m_feats[i].costToUse) == 0 ))
+         {
+            /* Verify if is powerfull */
+            tmpPower = m_feats[i].diceInfo.baseDice.diceID * 
+                       m_feats[i].diceInfo.baseDice.numberOfDices +
+                       m_feats[i].diceInfo.baseDice.sumNumber;
+            if(tmpPower > power)
+            {
+               power = tmpPower;
+               ft = i;
+            }
+         }
+      }
+   }
+
+   return(ft);
+}
+
+/***************************************************************
  *                   getAttackFeatRangeType                    *
  ***************************************************************/
 int feats::getAttackFeatRangeType()
