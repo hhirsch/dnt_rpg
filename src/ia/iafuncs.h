@@ -116,8 +116,13 @@ using namespace std;
 #define IA_FEAT_QUANTITY_PER_DAY "featQuantityPerDay"
 #define IA_FEAT_USE_AT_CHARACTER "featUseAtCharacter"
 #define IA_FEAT_USE_AT_OBJECT "featUseAtObject"
-/*! string getRandomAttackFeat() */
+/*! string getRandomAttackFeat()
+ * This function get a random attack feat that can be used by
+ * the characterOwner of the script on its defined target. */
 #define IA_FEAT_GET_RANDOM_ATTACK "getRandomAttackFeat"
+/*! string getPowerfullAttackFeat()
+ * This function get the powerfull attack feat that the characterOwner
+ * of the script can use at its defined target */
 #define IA_FEAT_GET_POWERFULL_ATTACK "getPowerfullAttackFeat"
 #define IA_FEAT_GET_RANDOM_HEAL "getRandomHealFeat"
 #define IA_FEAT_GET_POWERFULL_HEAL "getPowerfullHealFeat"

@@ -1057,13 +1057,27 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    {
       string res = "";
 
-      /* Syntax: string getRandomAttackFeat() */
-      if( (functionName == IA_FEAT_GET_RANDOM_ATTACK) && (characterOwner) )
+      if(characterOwner)
       {
          int ft = -1;
          feat* ftp = NULL;
-         ft = characterOwner->actualFeats.getRandomNPCAttackFeat(characterOwner,
+
+         /* Syntax: string getRandomAttackFeat() */
+         if(functionName == IA_FEAT_GET_RANDOM_ATTACK)
+         {
+            ft = characterOwner->actualFeats.getRandomNPCAttackFeat(
+                                                   characterOwner,
                                                    characterOwner->actualEnemy);
+         }
+         /* Syntax: string getPowerfullAttackFeat() */
+         else if(functionName == IA_FEAT_GET_POWERFULL_ATTACK)
+         {
+            ft = characterOwner->actualFeats.getPowerfullAttackFeat(
+                                                  characterOwner,
+                                                  characterOwner->actualEnemy);
+         }
+
+         /* Get the feat name */
          if(ft != -1)
          {
             ftp = characterOwner->actualFeats.featByNumber(ft);
@@ -1073,6 +1087,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             }
          }
       }
+
+      /* Assign the result */
       assignValue(var, (void*)&res, IA_TYPE_STRING);
    }
 

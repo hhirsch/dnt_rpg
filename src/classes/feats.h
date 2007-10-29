@@ -200,6 +200,15 @@ class feats
 
       /*!
        **************************************************************** 
+       * Get the powerfull attack feat that can be used.
+       * \param pers -> character that will use the feat
+       * \param target -> thing that will receive the feat.
+       * \return \c number of the feat got
+       ***************************************************************/
+      int getPowerfullAttackFeat(thing* pers, thing* target);
+
+      /*!
+       **************************************************************** 
        * Define the active character's base attack to be a melee one.
        * \param weaponDice -> the dice of the weapon used.
        * \param rangeValue -> range of action

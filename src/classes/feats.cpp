@@ -355,6 +355,8 @@ int feats::getRandomNPCAttackFeat(thing* pers, thing* target)
       srand(SDL_GetTicks());
       ft = (rand() % totalFeats);
 
+      //FIXME verify if the feat is in range to use!
+
       if( (ft != FEAT_RANGED_ATTACK) && (ft != FEAT_MELEE_ATTACK) &&
           (m_feats[ft].action == ACT_ATTACK)  && 
           ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
@@ -378,6 +380,59 @@ int feats::getRandomNPCAttackFeat(thing* pers, thing* target)
    }
    
    return(-1);
+}
+
+/***************************************************************
+ *                   getPowerFullAttackFeat                    *
+ ***************************************************************/
+int feats::getPowerfullAttackFeat(thing* pers, thing* target)
+{
+   int ft = -1;
+   int power = 0;
+   int tmpPower = 0;
+   int i;
+
+   /* FIXME test range of the feats! */
+
+   /* FIXME calculate the power with the level of the user and the
+    * aditional levels dices! */
+
+   /* Take the initial feat */
+   if(m_feats[FEAT_RANGED_ATTACK].diceInfo.initialLevel == 0)
+   {
+      ft = FEAT_MELEE_ATTACK;
+   }
+   else
+   {
+      ft = FEAT_RANGED_ATTACK;
+   }
+   power = m_feats[ft].diceInfo.baseDice.diceID * 
+           m_feats[ft].diceInfo.baseDice.numberOfDices +
+           m_feats[ft].diceInfo.baseDice.sumNumber;
+
+   /* Run over all feats searching for a powerfull one */
+   for(i = 0; i < totalFeats; i++)
+   {
+      /* Verify if is an attack feat and is avaible */
+      if( (i != ft) && (i != FEAT_RANGED_ATTACK) && 
+          (i != FEAT_MELEE_ATTACK) && (m_feats[i].action == ACT_ATTACK) && 
+          ( (m_feats[i].actualQuantity >= m_feats[i].costToUse)
+          || (m_feats[i].costToUse) == 0 ))
+      {
+         /* verify if is powerfull */
+         tmpPower = m_feats[i].diceInfo.baseDice.diceID * 
+                    m_feats[i].diceInfo.baseDice.numberOfDices +
+                    m_feats[i].diceInfo.baseDice.sumNumber;
+         if(tmpPower > power)
+         {
+            /* Is powerfull, take the feat */
+            ft = i;
+            power = tmpPower;
+         }
+      }
+   }
+
+   return(ft);
 }
 
 /***************************************************************
