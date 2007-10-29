@@ -219,6 +219,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                     focus = FOCUS_GAME;
                     jaux->activate();
                     *eventInfo = ACTIVATED_WINDOW;
+                    mouseX = -1;
                     return((guiObject*) jaux);
                }
                jaux = (window*) jaux->next;
