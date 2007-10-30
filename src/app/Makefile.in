@@ -94,4 +94,5 @@ partEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJSMAPA) partEditor.o
 clean:
 	@printf "Cleaning App Bin Files... "
 	@\rm -rf *.o *.e ./mapEditor/*.o ./iaEditor/*.o $(BIN)DlgEditor $(BIN)mapEditor $(BIN)fntEditor $(BIN)partEditor $(BIN)iaEditor $(BIN)dlgCompiler
+	@cd ./mapEditor; make clean;
 	@printf "\e[0;32mDone.\e[0;0m\n"
