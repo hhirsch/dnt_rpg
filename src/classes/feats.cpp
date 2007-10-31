@@ -223,14 +223,25 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       }
 
       /* Put Dice Values on Briefing */
-      if(criticalRoll != -1)
+      char txtBonus[32];
+      if(bonus >= 0)
       {
-         sprintf(texto,"%d(+%d) & (%d+%d) x %d : ",diceValue,bonus,criticalRoll,
-                                         bonus,targetValue);
+         sprintf(txtBonus,"+%d",bonus);
       }
       else
       {
-         sprintf(texto,"%d(+%d) x %d : ",diceValue,bonus,targetValue);
+         sprintf(txtBonus,"%d",bonus);
+      }
+
+      if(criticalRoll != -1)
+      {
+         sprintf(texto,"%d(%s) & (%d%s) x %d : ",diceValue,txtBonus,
+                                                 criticalRoll,
+                                                 txtBonus,targetValue);
+      }
+      else
+      {
+         sprintf(texto,"%d(%s) x %d : ",diceValue,txtBonus,targetValue);
       }
       brief += texto;
       brief += "|";
