@@ -30,7 +30,7 @@ void Farso_Init(SDL_Surface **screen, string title)
 
     *screen = SDL_SetVideoMode(800, 600, 24, /*SDL_FULLSCREEN |*/ 
                                SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_OPENGL);
-    if ( screen == NULL ) 
+    if ( *screen == NULL ) 
     {
        printf(gettext("Oxi! Can't ajust video mode!\n"));
        exit(2);
