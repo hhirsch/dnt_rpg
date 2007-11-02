@@ -494,6 +494,10 @@ SOURCE=.\src\classes\weapon.cpp
 
 SOURCE=.\src\gui\window.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\xp.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -917,6 +921,10 @@ SOURCE=.\src\classes\weapon.h
 # Begin Source File
 
 SOURCE=.\src\gui\window.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\xp.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

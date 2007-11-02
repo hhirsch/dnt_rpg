@@ -247,6 +247,10 @@ SOURCE=.\src\particle\grass.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\app\mapEditor\grasswindow.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\app\mapEditor\guiIO.cpp
 # End Source File
 # Begin Source File
@@ -537,6 +541,10 @@ SOURCE=.\src\classes\weapon.cpp
 
 SOURCE=.\src\gui\window.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\xp.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -656,6 +664,10 @@ SOURCE=.\src\ia\fuzzyvariable.h
 # Begin Source File
 
 SOURCE=.\src\particle\grass.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\app\mapEditor\grasswindow.h
 # End Source File
 # Begin Source File
 
@@ -880,6 +892,10 @@ SOURCE=.\src\app\mapEditor\wall.h
 # Begin Source File
 
 SOURCE=.\src\particle\wave.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\xp.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
