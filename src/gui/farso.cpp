@@ -28,11 +28,11 @@ void Farso_Init(SDL_Surface **screen, string title)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );*/
 
-    *screen = SDL_SetVideoMode(800, 600, 24, /*SDL_FULLSCREEN |*/ 
-                               SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_OPENGL);
+    *screen = SDL_SetVideoMode(800, 600, 32, /*SDL_FULLSCREEN | */
+                               /*SDL_SWSURFACE |*/ SDL_DOUBLEBUF | SDL_OPENGL);
     if ( *screen == NULL ) 
     {
-       printf(gettext("Oxi! Can't ajust video mode!\n"));
+       printf(gettext("Oxi! Can't ajust video mode: %s!\n"),SDL_GetError());
        exit(2);
     }
 
