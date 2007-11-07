@@ -282,7 +282,11 @@ void options::DisplayOptionsScreen(interface* interf)
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
-   intWindow = interf->insertWindow(276,169,531,434,gettext("Options"));
+   int xPos = (int)(SCREEN_X / 2.0);
+   int yPos = (int)(SCREEN_Y / 2.0);
+
+   intWindow = interf->insertWindow(xPos-128,yPos-133,xPos+128,yPos+133,
+                                    gettext("Options"));
 
    /* Music Things */
    sprintf(tmp,"%d",musicVolume);

@@ -34,7 +34,11 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
    done = false;
    guiObject* object = NULL;
    int eventInfo = NOTHING;
-   window* jan = gui->insertWindow(335,235,462,362, gettext("0.2"));  
+
+   int xPos = (int)(SCREEN_X / 2.0);
+   int yPos = (int)(SCREEN_Y / 2.0);
+
+   window* jan = gui->insertWindow(xPos-64,yPos-64,xPos+64,yPos+64, gettext("0.2"));  
    jan->setAttributes(false,true,false,false);
    if(Status == ON_INIT)
    {
@@ -75,7 +79,7 @@ int initialScreen::Execute(int Status,GLdouble proj[16],
          glClearColor(0,0,0,1);
          glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         textureToScreen(tituloID,proj,modl,viewPort,0,0,799,599,0.012);
+         textureToScreen(tituloID,proj,modl,viewPort,0,0,SCREEN_X-1,SCREEN_Y-1,0.012);
          object = gui->manipulateEvents(x,y,Mbotao,keys, &eventInfo);
          if(eventInfo != NOTHING)
          {
