@@ -518,7 +518,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    {
       if(jan != ljan->getActiveWindow())
       {
-         glRasterPos2f(jan->getX1(), 600-jan->getY1());
+         glRasterPos2f(jan->getX1(), SCREEN_Y-jan->getY1());
          glPixelZoom(1.0, -1.0);
          glDrawPixels((jan->getX2()-jan->getX1())+1,
                       (jan->getY2()-jan->getY1())+1, 
@@ -530,7 +530,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 
    /* Draw Active Window */
    glRasterPos2f(ljan->getActiveWindow()->getX1(), 
-                 600-ljan->getActiveWindow()->getY1());
+                 SCREEN_Y-ljan->getActiveWindow()->getY1());
    glPixelZoom(1.0, -1.0);
    glDrawPixels((ljan->getActiveWindow()->getX2() - 
                  ljan->getActiveWindow()->getX1())+1, 

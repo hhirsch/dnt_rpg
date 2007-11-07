@@ -617,7 +617,7 @@ void engine::SplashScreen()
    SDL_FreeSurface(img);
 
    /* Fade In Screen */
-   fadeInTexture(id,0,0,799,599);
+   fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1);
 
    /* Wait until Mouse Button pressed or time passed */
    while( (!(mButton & SDL_BUTTON(1))) && 
@@ -636,7 +636,7 @@ void engine::SplashScreen()
       SDL_Delay(50);
    }
 
-   fadeOutTexture(id,0,0,799,599);
+   fadeOutTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
@@ -694,7 +694,7 @@ int engine::OptionsScreen(GLuint idTextura)
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbutton = SDL_GetMouseState(&x,&y);
          object = interf->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
-         textureToScreen(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
+         textureToScreen(idTextura,proj,modl,viewPort,0,0,SCREEN_X-1,SCREEN_Y-1,0.012);
          glPushMatrix();
             draw2DMode();
             interf->draw(proj,modl,viewPort);
@@ -789,7 +789,7 @@ int engine::CharacterScreen(GLuint idTextura)
          Uint8 Mbutton = SDL_GetMouseState(&x,&y);
          object = gui->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
 
-         textureToScreen(idTextura,proj,modl,viewPort,0,0,799,599,0.012);
+         textureToScreen(idTextura,proj,modl,viewPort,0,0,SCREEN_X-1,SCREEN_Y-1,0.012);
          glPushMatrix();
             draw2DMode();
             gui->draw(proj,modl,viewPort);
@@ -2384,7 +2384,7 @@ int engine::treatIO(SDL_Surface *screen)
             sprintf(name,"img/teste0%d.tga",imgNumber);
          else
             sprintf(name,"img/teste%d.tga",imgNumber);
-         ScreenDump(name,800,600);
+         ScreenDump(name,SCREEN_X,SCREEN_Y);
          imgNumber++;
       }
 #endif
@@ -3000,7 +3000,8 @@ void engine::OpenMiniMapWindow()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   miniMapWindow = gui->insertWindow(512,472,799,599,gettext("Map"));
+   miniMapWindow = gui->insertWindow(SCREEN_X-188,SCREEN_Y-128,SCREEN_X-1,SCREEN_Y-1,
+                                     gettext("Map"));
 
    botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,x+2,z+2,
                                                                  "",0);
@@ -3022,7 +3023,8 @@ void engine::OpenMiniMapWindow()
  *********************************************************************/
 void engine::OpenShortcutsWindow()
 {
-   shortCutsWindow = gui->insertWindow(0,472,511,599,gettext("Shortcuts"));
+   shortCutsWindow = gui->insertWindow(0,SCREEN_Y-128,511,SCREEN_Y-1,
+                                       gettext("Shortcuts"));
    FPS = shortCutsWindow->getObjectsList()->insertTextBox(8,20,150/*100*/,35,2,
                                   gettext("FPS:"));
    briefTxt = shortCutsWindow->getObjectsList()->insertRolBar(8,36,249,100,
@@ -3118,7 +3120,7 @@ void engine::showImage(string fileName)
    setTextureRGBA(img,&id);
    SDL_FreeSurface(img);
 
-   fadeInTexture(id,0,0,799,599);
+   fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1);
 
    /* Wait until Mouse Button pressed */
    while(!(mButton & SDL_BUTTON(1)))
@@ -3130,7 +3132,7 @@ void engine::showImage(string fileName)
       SDL_Delay(50);
    }
 
-   fadeOutTexture(id,0,0,799,599);
+   fadeOutTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);

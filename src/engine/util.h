@@ -57,13 +57,6 @@
 #define HALFFARVIEW2   HALFFARVIEW * HALFFARVIEW /**< Square Half Farview */
 
 /********************************************************************
- *                      Screen's constants                          *
- ********************************************************************/
-
-#define SCREEN_X        800     /**< Screen Width */
-#define SCREEN_Y        600     /**< Screen Height */
-
-/********************************************************************
  *                      Shadow's constants                          *
  ********************************************************************/
 #define SHADOW_MAP_SIZE      512     /**< The Shadow Map Size */

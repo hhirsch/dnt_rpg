@@ -286,7 +286,7 @@ void character::defineActualLifePoints(int newLife)
  *********************************************************************/
 void character::drawMainPortrait()
 {
-   glRasterPos2f(799-portraitImage->w, 599);
+   glRasterPos2f(SCREEN_X-1-portraitImage->w, SCREEN_Y-1);
    glPixelZoom(1.0, -1.0);
    glDrawPixels(portraitImage->w, portraitImage->h, GL_RGBA, GL_UNSIGNED_BYTE, 
                 portraitImage->pixels);
@@ -845,7 +845,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
 } 
 
 /*********************************************************************
- *                          RetiraPersonagem                         *
+ *                          removeCharacter                          *
  *********************************************************************/
 void characterList::removeCharacter(character* persona)
 {

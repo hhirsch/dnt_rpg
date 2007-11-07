@@ -11,7 +11,9 @@
 #include "menu.h"
 #include "guilist.h"
 
-/* Return Constants */
+/********************************************************************
+ *                      Return's constants                          *
+ ********************************************************************/
 #define NOTHING             -1
 #define EXIT                 0
 #define MODIFIED_SEL_TEXT    1
@@ -31,7 +33,9 @@
 #define SELECTED_SEL_TEXT   15
 #define SELECTED_LIST_TEXT  16
 
-/* Constantes de Foco */
+/********************************************************************
+ *                       Focus's constants                          *
+ ********************************************************************/
 #define FOCUS_WINDOW         1
 #define FOCUS_TEXT_BAR       2
 #define FOCUS_BUTTON         3
@@ -42,6 +46,13 @@
 #define FOCUS_WINDOW_MENU    8
 #define FOCUS_TAB_BUTTON     9
 #define FOCUS_GAME         100
+
+
+/********************************************************************
+ *                      Screen's constants                          *
+ ********************************************************************/
+#define SCREEN_X         800     /**< Screen Width */
+#define SCREEN_Y         600     /**< Screen Height */
 
 /*! Interface is the GUI upper level class. Is from it that all GUI events
  * are treated, and all actions maybe be takken. */

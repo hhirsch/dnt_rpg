@@ -28,7 +28,7 @@ void Farso_Init(SDL_Surface **screen, string title)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );*/
 
-    *screen = SDL_SetVideoMode(800, 600, 32, /*SDL_FULLSCREEN | */
+    *screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, 32, /*SDL_FULLSCREEN | */
                                /*SDL_SWSURFACE |*/ SDL_DOUBLEBUF | SDL_OPENGL);
     if ( *screen == NULL ) 
     {
