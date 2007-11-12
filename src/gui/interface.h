@@ -48,12 +48,6 @@
 #define FOCUS_GAME         100
 
 
-/********************************************************************
- *                      Screen's constants                          *
- ********************************************************************/
-#define SCREEN_X          800     /**< Screen Width */
-#define SCREEN_Y          600     /**< Screen Height */
-
 /*! Interface is the GUI upper level class. Is from it that all GUI events
  * are treated, and all actions maybe be takken. */
 class interface

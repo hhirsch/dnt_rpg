@@ -334,18 +334,18 @@ int smallestPowerOfTwo(int num)
  ******************************************************************/
 void textureToScreen(GLuint texturaID, GLdouble proj[16],GLdouble modl[16], 
                      GLint viewPort[4],int xa, int ya, int xb, int yb, 
-                     double depth)
+                     int width, int height, double depth)
 {
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
-   GLfloat xOverlay = (GLfloat) (xb-xa+1)/(GLfloat)smallestPowerOfTwo(xb-xa+1);
-   GLfloat yOverlay = (GLfloat) (yb-ya+1)/(GLfloat)smallestPowerOfTwo(yb-ya+1);
+   GLfloat xOverlay = (GLfloat) (width)/(GLfloat)smallestPowerOfTwo(width);
+   GLfloat yOverlay = (GLfloat) (height)/(GLfloat)smallestPowerOfTwo(height);
    
-   gluUnProject(xa,(599-ya), depth, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject(xa,(599-yb-1),depth, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject(xb+1, (599-yb-1), depth, modl, proj, viewPort, 
+   gluUnProject(xa,(SCREEN_Y-1-ya), depth, modl, proj, viewPort, &x1, &y1, &z1);
+   gluUnProject(xa,(SCREEN_Y-2-yb),depth, modl, proj, viewPort, &x2, &y2, &z2);
+   gluUnProject(xb+1, (SCREEN_Y-2-yb), depth, modl, proj, viewPort, 
                 &x3, &y3, &z3);
-   gluUnProject(xb+1,(599-ya),depth, modl, proj, viewPort, &x4, &y4, &z4);
+   gluUnProject(xb+1,(SCREEN_Y-1-ya),depth, modl,proj,viewPort, &x4, &y4, &z4);
 
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texturaID);

@@ -239,7 +239,8 @@ void engine::InformationScreen()
 
    glDisable(GL_LIGHTING);
    actualizeFrustum(visibleMatrix,proj,modl);
-   textureToScreen(texturaInfo,proj,modl,viewPort,272,44,527,555,0.0001);
+   textureToScreen(texturaInfo,proj,modl,viewPort,272,44,527,555,256,213,
+                   0.0001);
    glEnable(GL_LIGHTING);
    glFlush();
    SDL_GL_SwapBuffers();
@@ -335,8 +336,10 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    fadeInTexture(texturaCarga, 272,236,527,363);
 
    actualizeFrustum(visibleMatrix,proj,modl);
-   textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
-   textureToScreen(texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
+   textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,256,128,
+                   0.01);
+   textureToScreen(texturaTexto,proj,modl,viewPort,272,365,527,396,256,128,
+                   0.01);
    glFlush();
    SDL_GL_SwapBuffers();
 
@@ -571,7 +574,7 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2)
               | GL_STENCIL_BUFFER_BIT);
       actualizeFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
-      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
+      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,800,600,0.012);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -591,7 +594,7 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2)
               | GL_STENCIL_BUFFER_BIT);
       actualizeFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
-      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,0.012);
+      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,800,600,0.012);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -657,7 +660,7 @@ int engine::InitialScreen(int Status, GLuint idTextura, bool reloadMusic)
    /* Executes Initial Screen */
    actualizeFrustum(visibleMatrix,proj,modl);
    initialScreen* inic = new(initialScreen);
-   int result = inic->Execute(Status, proj, modl, viewPort, idTextura, snd);
+   int result = inic->run(Status, proj, modl, viewPort, idTextura, snd);
    delete(inic);
    return(result);
 }
@@ -694,7 +697,8 @@ int engine::OptionsScreen(GLuint idTextura)
          keys = SDL_GetKeyState(NULL);
          Uint8 Mbutton = SDL_GetMouseState(&x,&y);
          object = interf->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
-         textureToScreen(idTextura,proj,modl,viewPort,0,0,SCREEN_X-1,SCREEN_Y-1,0.012);
+         textureToScreen(idTextura,proj,modl,viewPort,
+                         0,0,SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
          glPushMatrix();
             draw2DMode();
             interf->draw(proj,modl,viewPort);
@@ -789,7 +793,8 @@ int engine::CharacterScreen(GLuint idTextura)
          Uint8 Mbutton = SDL_GetMouseState(&x,&y);
          object = gui->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
 
-         textureToScreen(idTextura,proj,modl,viewPort,0,0,SCREEN_X-1,SCREEN_Y-1,0.012);
+         textureToScreen(idTextura,proj,modl,viewPort,0,0,
+                         SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
          glPushMatrix();
             draw2DMode();
             gui->draw(proj,modl,viewPort);
@@ -940,10 +945,10 @@ int engine::CharacterScreen(GLuint idTextura)
  *********************************************************************/
 void engine::redmensionateWindow(SDL_Surface *screen, int actualFarView)
 {
-   glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
+   glViewport (0, 0, SCREEN_X, SCREEN_Y);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, 
+   gluPerspective(45.0, SCREEN_X / SCREEN_Y, 1.0, 
                   actualFarView);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glGetFloatv(GL_MODELVIEW_MATRIX, camProj);

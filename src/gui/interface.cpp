@@ -84,7 +84,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
     {
         mouseX = x;
         mouseY = y;
-        
+
         if ((ljan->getActiveWindow() != NULL) &&
             (ljan->getActiveWindow()->isMouseIn(x,y)))
         {
@@ -512,7 +512,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    glDisable(GL_DEPTH_TEST);
 
    glDisable(GL_BLEND);
-   
+
    /* Draw Inative Windows */
    for(aux = 0;aux<ljan->getTotal();aux++)
    {
@@ -599,7 +599,7 @@ void interface::openWindow(window* jan)
  *********************************************************************/
 bool interface::mouseOnGui(int mouseX, int mouseY)
 {
-   int aux; 
+   int aux;
    window *jaux=(window*)ljan->getFirst()->next;
    for(aux=0;aux<ljan->getTotal();aux++)
    {

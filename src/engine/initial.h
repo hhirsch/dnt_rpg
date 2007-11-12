@@ -29,7 +29,7 @@ class initialScreen
      /*! initialScreen Destructor */
      ~initialScreen();
 
-     /*! Execute the initialScreen.
+     /*! Run the initialScreen.
       * \param Status -> game status when called screen 
       *                  ( \c ON_INIT or \c IN_GAME )
       * \param proj -> projection Matrix
@@ -38,9 +38,9 @@ class initialScreen
       * \param idTextura -> loaded initial screen texture id.
       * \param snd -> sound engine to use
       * \return initialScreen Return values correspondent to action made */
-     int Execute(int Status, GLdouble proj[16],
-                           GLdouble modl[16], GLint viewPort[4],
-                           GLuint idTextura, sound* snd);
+     int run(int Status, GLdouble proj[16],
+             GLdouble modl[16], GLint viewPort[4],
+             GLuint idTextura, sound* snd);
    private:
       interface* gui;  /**< GUI for Windows */
 

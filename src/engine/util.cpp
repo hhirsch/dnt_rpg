@@ -18,8 +18,10 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    write(img,128,0,texto);
    setTextureRGBA(img,texturaTexto);
    
-   textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,0.01);
-   textureToScreen(*texturaTexto,proj,modl,viewPort,272,365,527,396,0.01);
+   textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,256,128,
+                   0.01);
+   textureToScreen(*texturaTexto,proj,modl,viewPort,272,365,527,396,256,128,
+                   0.01);
    glFlush();
    SDL_GL_SwapBuffers();
 }
@@ -244,7 +246,7 @@ void draw2DMode()
 {
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   gluOrtho2D(0.0, (GLdouble) 800, 0.0, (GLdouble) 600);
+   gluOrtho2D(0.0, (GLdouble) SCREEN_X, 0.0, (GLdouble) SCREEN_Y);
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
 }
@@ -256,7 +258,7 @@ void draw3DMode(int actualFarView)
 {
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, 800 / 600, 1.0, actualFarView);
+   gluPerspective(45.0, SCREEN_X / SCREEN_Y, 1.0, actualFarView);
    glMatrixMode (GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }

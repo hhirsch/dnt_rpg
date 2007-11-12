@@ -315,13 +315,13 @@ int window::doMove(SDL_Surface* backGround, int xinic, int yinic, int Mbotao)
       {
          x = xinic - difx; 
          y = yinic - dify;
-         if(x + dx > 800-1)
+         if(x + dx > SCREEN_X-1)
          { 
-             x -= (x + dx) - (800-1);
+             x -= (x + dx) - (SCREEN_X-1);
          }
-         if(y + dy > 600-1) 
+         if(y + dy > SCREEN_Y-1) 
          {
-             y -= (y+dy) - (600-1);
+             y -= (y+dy) - (SCREEN_Y-1);
          }
          if(x < 0)
             x = 0;

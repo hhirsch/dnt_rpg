@@ -15,6 +15,14 @@
 
 #define RAIZ3D2  0.8660254 /**< Sqrt(3) / 2 */
 
+
+/********************************************************************
+ *                      Screen's constants                          *
+ ********************************************************************/
+#define SCREEN_X          800     /**< Screen Width */
+#define SCREEN_Y          600     /**< Screen Height */
+
+
 /*! \note All Draws are made if activeColor */
 
 /*! Define active Color
@@ -121,10 +129,12 @@ void circle_Draw(SDL_Surface *screen, int xC, int yC, int r);
  * \param ya -> y1 screen coordinate
  * \param xb -> x2 screen coordinate
  * \param yb -> y2 screen coordinate
+ * \param width -> texture width
+ * \param height -> texture height
  * \param depth -> screen depth of the texture */
 void textureToScreen(GLuint texturaID, GLdouble proj[16],GLdouble modl[16], 
                      GLint viewPort[4], int xa, int ya,int xb, int yb,
-                     double depth);
+                     int width, int height, double depth);
 
 /*! Return the smallest power of two greater or equal to the number
  * \param num -> bases number 
