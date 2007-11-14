@@ -184,9 +184,14 @@ void grass::createParticle(particle* part)
 /**************************************************************************
  *                               NextStep                                 *
  **************************************************************************/
-void grass::NextStep(GLfloat matriz[6][4])
+void grass::NextStep(GLfloat matriz[6][4], 
+                     GLfloat pcPosX, GLfloat pcPosY, GLfloat pcPosZ,
+                     wind& affectWind)
 {
    seconds = 0.02;
+
+   //TODO get wind and character position
+
    DoStep(matriz);
 }
 

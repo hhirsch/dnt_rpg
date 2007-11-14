@@ -116,13 +116,16 @@ void partSystem::actualizeAll(float PCposX, float PCposY, float PCposZ,
 {
    int i;
 
+   //FIXME remove it from here!
+   wind wd;
+
    /* Grass */
    if(enableGrass)
    {
       grass* gr = (grass*)grassParticles->getFirst();
       for(i = 0; i < grassParticles->getTotal(); i++)
       {
-         gr->NextStep(matriz);
+         gr->NextStep(matriz, PCposX, PCposY, PCposZ, wd);
          gr = (grass*)gr->next;
       }
    }

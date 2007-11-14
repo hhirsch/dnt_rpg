@@ -4,7 +4,7 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJS = grass.o meteor.o particle.o part1.o part2.o part3.o part4.o part5.o part6.o part7.o partlist.o partSystem.o wave.o
+OBJS = grass.o meteor.o particle.o part1.o part2.o part3.o part4.o part5.o part6.o part7.o partlist.o partSystem.o wave.o wind.o
 
 all: $(OBJS)
 
@@ -61,6 +61,11 @@ part7.o: part7.cpp part7.h
 wave.o: wave.cpp wave.h
 	@printf "Making wave.o (Waves)... "
 	@$(CC) $(CFLAGS) wave.cpp -o wave.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+wind.o: wind.h wind.cpp
+	@printf "Making wind.o (Wind)... "
+	@$(CC) $(CFLAGS) wind.cpp -o wind.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 partlist.o: partlist.cpp partlist.h

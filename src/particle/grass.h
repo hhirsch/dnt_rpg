@@ -4,6 +4,7 @@
 #define _grass_h
 
 #include "particle.h"
+#include "wind.h"
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 #include <string>
@@ -70,8 +71,14 @@ public:
        ***************************************************************
        * Do Next Step on System, rendering and actualizing
        * \param matriz -> view frustum Matrix
+       * \param pcPosX -> PC X position
+       * \param pcPosY -> PC Y position
+       * \param pcPosZ -> PC Z position
+       * \param affectWind ->the wind that affect the system
        ***************************************************************/
-      void NextStep(GLfloat matriz[6][4]);
+      void NextStep(GLfloat matriz[6][4],
+                    GLfloat pcPosX, GLfloat pcPosY, GLfloat pcPosZ,
+                    wind& affectWind);
       /*!
        ***************************************************************
        * Gets total living particles.
