@@ -10,6 +10,13 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
              float scale, string fileName)
                                 :particleSystem(total,PARTICLE_DRAW_INDIVIDUAL)
 {
+   
+   /* NOTE: althought the constructor says PARTICLE_DRAW_INDIVIDUAL,
+    * the grass is rendered as glArrays, at the endRender() function.
+    * It was done at this way since the arrays sizes of the grass is
+    * distinct of the normal particles array sizes (grass = 4 points,
+    * normal particles = 1 point). */
+
    SDL_Surface* img;
    centerX1 = cX1;
    centerX2 = cX2;
@@ -79,23 +86,6 @@ void grass::Render(particle* part)
 {
    int n = part->internalNumber;
 
-   /*glTexCoord2f(0.0,0.0);
-   glVertex3f(partPosition[n].x1 + part->posX, 
-              partPosition[n].y1,
-              partPosition[n].z1 + part->posZ);
-   glTexCoord2f(1.0,0.0);
-   glVertex3f(partPosition[n].x2 + part->posX, 
-              partPosition[n].y2,
-              partPosition[n].z2 + part->posZ);
-   glTexCoord2f(1.0,1.0);
-   glVertex3f(partPosition[n].x3 + part->posX, 
-              partPosition[n].y3,
-              partPosition[n].z3 + part->posZ);
-   glTexCoord2f(0.0,1.0);
-   glVertex3f(partPosition[n].x4 + part->posX, 
-              partPosition[n].y4,
-              partPosition[n].z4 + part->posZ);*/
-
    textureArray[tArrayPos] = 0.0;
    textureArray[tArrayPos+1] = 0.0;
    vertexArray[vArrayPos] = partPosition[n].x1 + part->posX;
@@ -123,22 +113,6 @@ void grass::Render(particle* part)
    vArrayPos += 12;
    tArrayPos += 8;
 
-   /*glTexCoord2f(0.0,0.0);
-   glVertex3f(part->posX - (part->velX * scaleFactor),
-              part->posY,
-              part->posZ + (part->velZ  * part->velY * scaleFactor));
-   glTexCoord2f(1.0,0.0);
-   glVertex3f(part->posX + (part->velX * scaleFactor),
-              part->prvX,
-              part->posZ - (part->velZ * part->velY * scaleFactor));
-   glTexCoord2f(1.0,1.0);
-   glVertex3f(part->posX + (part->velX * scaleFactor),
-              part->prvY,
-              part->posZ - (part->velZ * scaleFactor));
-   glTexCoord2f(0.0,1.0);
-   glVertex3f(part->posX - (part->velX * scaleFactor),
-              part->prvZ,
-              part->posZ + (part->velZ * scaleFactor));*/
 }
 
 /**************************************************************************
@@ -157,7 +131,6 @@ void grass::InitRender()
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    vArrayPos = 0;
    tArrayPos = 0;
-   //glBegin(GL_QUADS);
 }
 
 /**************************************************************************
@@ -165,9 +138,6 @@ void grass::InitRender()
  **************************************************************************/
 void grass::EndRender()
 {
-   //glEnd();
-
-
    /* Draw as arrays */
    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
    glTexCoordPointer(2, GL_FLOAT, 0, textureArray);
