@@ -191,6 +191,50 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
 }
 
 /*********************************************************************
+ *                               rotatePoint                         *
+ *********************************************************************/
+void rotatePoint(GLfloat srcX, GLfloat srcY, GLfloat srcZ, GLfloat theta,
+                 GLfloat p1X, GLfloat p1Y, GLfloat p1Z, 
+                 GLfloat p2X, GLfloat p2Y, GLfloat p2Z, 
+                 GLfloat& resX, GLfloat& resY, GLfloat& resZ)
+{
+   GLfloat costheta,sintheta;
+   GLfloat rX, rY, rZ;
+
+   /* Calculate the axys vector */
+   resX = 0; resY = 0; resZ = 0;
+   rX = p2X - p1X;
+   rY = p2Y - p1Y;
+   rZ = p2Z - p1Z;
+   srcX -= p1X;
+   srcY -= p1Y;
+   srcZ -= p1Z;
+
+   /* Normalize the vector */
+   normalize(rX, rY, rZ);
+
+   /* Define the in and cos, to avoid calculating it all the time */
+   costheta = cos(theta);
+   sintheta = sin(theta);
+
+   resX += (costheta + (1 - costheta) * rX * rX) * srcX;
+   resX += ((1 - costheta) * rX * rY - rZ * sintheta) * srcY;
+   resX += ((1 - costheta) * rX * rZ + rY * sintheta) * srcZ;
+
+   resY += ((1 - costheta) * rX * rY + rZ * sintheta) * srcX;
+   resY += (costheta + (1 - costheta) * rY * rY) * srcY;
+   resY += ((1 - costheta) * rY * rZ - rX * sintheta) * srcZ;
+
+   resZ += ((1 - costheta) * rX * rZ - rY * sintheta) * srcX;
+   resZ += ((1 - costheta) * rY * rZ + rX * sintheta) * srcY;
+   resZ += (costheta + (1 - costheta) * rZ * rZ) * srcZ;
+
+   resX += p1X;
+   resY += p1Y;
+   resZ += p1Z;
+}
+
+/*********************************************************************
  *                               normalize                           *
  *********************************************************************/
 void normalize (GLfloat& nx, GLfloat& ny, GLfloat& nz)

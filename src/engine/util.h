@@ -174,4 +174,19 @@ void draw2DMode();
  * \param actualFarView -> the actual value of farView to set */
 void draw3DMode(int actualFarView);
 
+/*! Normalize a vector
+ * \param nx -> vector X 
+ * \param ny -> vector Y
+ * \param nz -> vector Z */
+void normalize (GLfloat& nx, GLfloat& ny, GLfloat& nz);
+
+/*! Rotate a point p by angle theta around an arbitrary line segment p1-p2
+    Return the rotated point.
+    Positive angles are anticlockwise looking down the axis towards the origin.
+    Assume right hand coordinate system. */
+void rotatePoint(GLfloat srcX, GLfloat srcY, GLfloat srcZ, GLfloat theta,
+                 GLfloat p1X, GLfloat p1Y, GLfloat p1Z, 
+                 GLfloat p2X, GLfloat p2Y, GLfloat p2Z, 
+                 GLfloat& resX, GLfloat& resY, GLfloat& resZ);
+
 #endif

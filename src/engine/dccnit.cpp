@@ -1468,11 +1468,16 @@ int engine::verifyMouseActions(Uint8 Mbutton)
    Uint32 tempo = SDL_GetTicks();
    character* activeCharacter = PCs->getActiveCharacter();
 
+   /* Define Mouse OpenGL Window Coordinate */
    wx = mouseX; wy = SCREEN_Y - mouseY; 
-            
+   
+   /* Get the Z position of the mouse */
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
+
+   /* Get the world coordinate of the mouse position */
    gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal); 
 
+   /* Create a bounding box for the mouse position */
    GLfloat minMouse[3], maxMouse[3];
    minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
    minMouse[1] = 0.0;      maxMouse[1] = 0.0;

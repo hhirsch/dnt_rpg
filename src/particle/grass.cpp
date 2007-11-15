@@ -17,6 +17,9 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
    centerZ2 = cZ2;
    scaleFactor = scale;
    usedMap = NULL;
+
+
+   /* Load Texture */
    grassFileName = fileName;
    img = IMG_Load(fileName.c_str());
    if(!img)
@@ -39,6 +42,11 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
                      img->pixels );*/
    
    SDL_FreeSurface(img);
+
+   /* Alloc Structs */
+   partPosition = (quadPos*) new quadPos[total];
+   vertexArray = (float*) new float[total*3*4];
+   textureArray = (float*) new float[total*2*4];
 }
 
 /**************************************************************************
@@ -48,6 +56,20 @@ grass::~grass()
 {
    glDeleteTextures(1, &grassTexture);
    usedMap = NULL;
+
+   /* Dealloc structs */
+   if(partPosition)
+   {
+      delete[] partPosition;
+   }
+   if(vertexArray)
+   {
+      delete[] vertexArray;
+   }
+   if(textureArray)
+   {
+      delete[] textureArray;
+   }
 }
 
 /**************************************************************************
@@ -55,8 +77,53 @@ grass::~grass()
  **************************************************************************/
 void grass::Render(particle* part)
 {
-   //FIXME the X rotation when grass is on different height!
-   glTexCoord2f(0.0,0.0);
+   int n = part->internalNumber;
+
+   /*glTexCoord2f(0.0,0.0);
+   glVertex3f(partPosition[n].x1 + part->posX, 
+              partPosition[n].y1,
+              partPosition[n].z1 + part->posZ);
+   glTexCoord2f(1.0,0.0);
+   glVertex3f(partPosition[n].x2 + part->posX, 
+              partPosition[n].y2,
+              partPosition[n].z2 + part->posZ);
+   glTexCoord2f(1.0,1.0);
+   glVertex3f(partPosition[n].x3 + part->posX, 
+              partPosition[n].y3,
+              partPosition[n].z3 + part->posZ);
+   glTexCoord2f(0.0,1.0);
+   glVertex3f(partPosition[n].x4 + part->posX, 
+              partPosition[n].y4,
+              partPosition[n].z4 + part->posZ);*/
+
+   textureArray[tArrayPos] = 0.0;
+   textureArray[tArrayPos+1] = 0.0;
+   vertexArray[vArrayPos] = partPosition[n].x1 + part->posX;
+   vertexArray[vArrayPos+1] = partPosition[n].y1;
+   vertexArray[vArrayPos+2] = partPosition[n].z1 + part->posZ;
+
+   textureArray[tArrayPos+2] = 1.0;
+   textureArray[tArrayPos+3] = 0.0;
+   vertexArray[vArrayPos+3] = partPosition[n].x2 + part->posX;
+   vertexArray[vArrayPos+4] = partPosition[n].y2;
+   vertexArray[vArrayPos+5] = partPosition[n].z2 + part->posZ;
+
+   textureArray[tArrayPos+4] = 1.0;
+   textureArray[tArrayPos+5] = 1.0;
+   vertexArray[vArrayPos+6] = partPosition[n].x3 + part->posX;
+   vertexArray[vArrayPos+7] = partPosition[n].y3;
+   vertexArray[vArrayPos+8] = partPosition[n].z3 + part->posZ;
+
+   textureArray[tArrayPos+6] = 0.0;
+   textureArray[tArrayPos+7] = 1.0;
+   vertexArray[vArrayPos+9] = partPosition[n].x4 + part->posX;
+   vertexArray[vArrayPos+10] = partPosition[n].y4;
+   vertexArray[vArrayPos+11] = partPosition[n].z4 + part->posZ;
+
+   vArrayPos += 12;
+   tArrayPos += 8;
+
+   /*glTexCoord2f(0.0,0.0);
    glVertex3f(part->posX - (part->velX * scaleFactor),
               part->posY,
               part->posZ + (part->velZ  * part->velY * scaleFactor));
@@ -71,7 +138,7 @@ void grass::Render(particle* part)
    glTexCoord2f(0.0,1.0);
    glVertex3f(part->posX - (part->velX * scaleFactor),
               part->prvZ,
-              part->posZ + (part->velZ * scaleFactor));
+              part->posZ + (part->velZ * scaleFactor));*/
 }
 
 /**************************************************************************
@@ -88,7 +155,9 @@ void grass::InitRender()
    glAlphaFunc(GL_GREATER,0.1f);
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-   glBegin(GL_QUADS);
+   vArrayPos = 0;
+   tArrayPos = 0;
+   //glBegin(GL_QUADS);
 }
 
 /**************************************************************************
@@ -96,7 +165,19 @@ void grass::InitRender()
  **************************************************************************/
 void grass::EndRender()
 {
-   glEnd();
+   //glEnd();
+
+
+   /* Draw as arrays */
+   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+   glTexCoordPointer(2, GL_FLOAT, 0, textureArray);
+   glEnableClientState(GL_VERTEX_ARRAY);
+   glVertexPointer(3, GL_FLOAT, 0, vertexArray);
+   glDrawArrays(GL_QUADS, 0, tArrayPos / 2);
+   glDisableClientState(GL_VERTEX_ARRAY);
+   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+   /* Undo the changes on the GL state */
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
@@ -107,6 +188,7 @@ void grass::EndRender()
    glDisable(GL_TEXTURE_2D);
    glDisable(GL_BLEND);
    glEnable(GL_LIGHTING);
+
 }
 
 /**************************************************************************
@@ -153,18 +235,10 @@ int grass::needCreate()
  **************************************************************************/
 void grass::createParticle(particle* part)
 {
-   /* Define Particle Size and Position */
-   defineSize(part);
-      
    /* Define all Rotations */
    part->R = 75*(rand() / ((double)RAND_MAX + 1));
-   part->G = 90*(rand() / ((double)RAND_MAX + 1));
    part->B = 15*(rand() / ((double)RAND_MAX + 1));
 
-   /* Define fixed Rotations */
-     /* Around Y axis */
-   part->velZ = 8*cos(deg2Rad(part->G));
-   part->velX = 8*sin(deg2Rad(part->G));
    part->velY = sin(deg2Rad(part->R));
    
    /* Define Rotation variation */
@@ -179,6 +253,9 @@ void grass::createParticle(particle* part)
 
    /* Define previous value of actualized rotation */
    part->prvR = part->R;
+
+   /* Define Particle Size and Position */
+   defineSize(part);
 }
 
 /**************************************************************************
@@ -269,6 +346,33 @@ void grass::defineSize(particle* part)
    part->posZ = ((centerZ2-centerZ1)*(rand() / ((double)RAND_MAX + 1)))
                 + (centerZ1);
 
+   /* Define the grass orientation */
+   GLfloat orientation = 90*(rand() / ((double)RAND_MAX + 1));
+
+   /* Define fixed Rotations */
+     /* Around Y axis */
+   GLfloat cosOri = 8 * scaleFactor * cos(deg2Rad(orientation));
+   GLfloat sinOri = 8 * scaleFactor * sin(deg2Rad(orientation));
+
+   int n = part->internalNumber;
+
+   /* Do the initial rotation around Y axys */
+   partPosition[n].x1 = -cosOri;
+   partPosition[n].z1 = -sinOri;
+   partPosition[n].x2 = +cosOri;
+   partPosition[n].z2 = +sinOri;
+   partPosition[n].x3 = +cosOri;
+   partPosition[n].z3 = +sinOri;
+   partPosition[n].x4 = -cosOri;
+   partPosition[n].z4 = -sinOri;
+
+   /* Define Height  */
+   partPosition[n].y1 = 10*scaleFactor;
+   partPosition[n].y2 = 10*scaleFactor;
+   partPosition[n].y3 = 0;
+   partPosition[n].y4 = 0;
+
+#if 0
    if(usedMap)
    {
       Map* map = (Map*) usedMap;
@@ -284,6 +388,7 @@ void grass::defineSize(particle* part)
       part->prvY = 0; /* Used as Height on Third Vertex */
       part->prvZ = 0; /* Used as Height on Forth Vertex */
    }
+#endif
 }
 
 /**************************************************************************

@@ -19,8 +19,8 @@
 /********************************************************************
  *                      Screen's constants                          *
  ********************************************************************/
-#define SCREEN_X          800     /**< Screen Width */
-#define SCREEN_Y          600     /**< Screen Height */
+#define SCREEN_X           800     /**< Screen Width */
+#define SCREEN_Y           600     /**< Screen Height */
 
 
 /*! \note All Draws are made if activeColor */

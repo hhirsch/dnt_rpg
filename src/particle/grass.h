@@ -10,6 +10,16 @@
 #include <string>
 using namespace std;
 
+
+class quadPos
+{
+   public:
+      GLfloat x1, y1, z1,
+              x2, y2, z2,
+              x3, y3, z3,
+              x4, y4, z4;
+};
+
 class grass:public particleSystem
 {
 public:
@@ -146,6 +156,13 @@ public:
       string grassFileName; /**< Name of the grass file texture */
       GLuint grassTexture;  /**< Load Texture used to grass */
       GLfloat scaleFactor;  /**< Scale factor of the grass */
+
+      quadPos* partPosition; /**< Each particle position after the
+                                  initial rotation around the Y axys */
+      float* textureArray;   /**< The texture coordinates array */ 
+      int vArrayPos;         /**< Actual Vertex Array Position */
+      int tArrayPos;         /**< Actual Texture Array Position */
+
       void* usedMap;        /**< Actual Openned Map */
 };
 
