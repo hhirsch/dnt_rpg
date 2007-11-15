@@ -193,7 +193,7 @@ void grass::EndRender()
  **************************************************************************/
 void grass::actualize(particle* part)
 {
-   part->R += part->size;
+   part->R += deg2Rad(part->size);
 
    if(part->R <= part->prvR-5)
    {
