@@ -371,10 +371,24 @@ void grass::defineSize(particle* part)
    partPosition[n].z4 = -sinOri;
 
    /* Define Height  */
-   partPosition[n].y1 = 10*scaleFactor;
-   partPosition[n].y2 = 10*scaleFactor;
-   partPosition[n].y3 = 0;
-   partPosition[n].y4 = 0;
+   if(usedMap)
+   {
+      Map* map = (Map*) usedMap;
+      GLfloat ha = map->getHeight(-cosOri + part->posX, -sinOri + part->posZ);
+      GLfloat hb = map->getHeight(cosOri + part->posX, sinOri + part->posZ);
+
+      partPosition[n].y1 = ha + 10*scaleFactor;
+      partPosition[n].y2 = hb + 10*scaleFactor;
+      partPosition[n].y3 = ha;
+      partPosition[n].y4 = hb;
+   }
+   else
+   {
+      partPosition[n].y1 = 10*scaleFactor;
+      partPosition[n].y2 = 10*scaleFactor;
+      partPosition[n].y3 = 0;
+      partPosition[n].y4 = 0;
+   }
 
 #if 0
    if(usedMap)
