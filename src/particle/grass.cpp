@@ -302,6 +302,14 @@ void grass::setTotal(int total)
 
    /* Reinit the system with the new total */
    init(total,PARTICLE_DRAW_INDIVIDUAL);
+
+   /* Realloc structs */
+   delete[] partPosition;
+   partPosition = (quadPos*) new quadPos[total];
+   delete[] vertexArray;
+   vertexArray = (float*) new float[total*3*4];
+   delete[] textureArray;
+   textureArray = (float*) new float[total*2*4];
 }
 
 /**************************************************************************
