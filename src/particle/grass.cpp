@@ -3,6 +3,8 @@
 #include "../map/map.h"
 #include "../engine/util.h"
 
+#define ROT_STEP 0.05
+
 /**************************************************************************
  *                             Constructor                                *
  **************************************************************************/
@@ -86,29 +88,54 @@ void grass::Render(particle* part)
 {
    int n = part->internalNumber;
 
+   rotatePoint(partPosition[n].x1, partPosition[n].y1, partPosition[n].z1, 
+               part->R,
+               partPosition[n].x3, partPosition[n].y3, partPosition[n].z3, 
+               partPosition[n].x4, partPosition[n].y4, partPosition[n].z4,
+               resX, resY, resZ);
+
    textureArray[tArrayPos] = 0.0;
    textureArray[tArrayPos+1] = 0.0;
-   vertexArray[vArrayPos] = partPosition[n].x1 + part->posX;
-   vertexArray[vArrayPos+1] = partPosition[n].y1;
-   vertexArray[vArrayPos+2] = partPosition[n].z1 + part->posZ;
+   vertexArray[vArrayPos] = resX + part->posX;
+   vertexArray[vArrayPos+1] = resY;
+   vertexArray[vArrayPos+2] = resZ + part->posZ;
+
+
+   rotatePoint(partPosition[n].x2, partPosition[n].y2, partPosition[n].z2, 
+               part->R,
+               partPosition[n].x3, partPosition[n].y3, partPosition[n].z3, 
+               partPosition[n].x4, partPosition[n].y4, partPosition[n].z4,
+               resX, resY, resZ);
 
    textureArray[tArrayPos+2] = 1.0;
    textureArray[tArrayPos+3] = 0.0;
-   vertexArray[vArrayPos+3] = partPosition[n].x2 + part->posX;
-   vertexArray[vArrayPos+4] = partPosition[n].y2;
-   vertexArray[vArrayPos+5] = partPosition[n].z2 + part->posZ;
+   vertexArray[vArrayPos+3] = resX + part->posX;
+   vertexArray[vArrayPos+4] = resY;
+   vertexArray[vArrayPos+5] = resZ + part->posZ;
+
+   rotatePoint(partPosition[n].x3, partPosition[n].y3, partPosition[n].z3, 
+               part->R,
+               partPosition[n].x3, partPosition[n].y3, partPosition[n].z3, 
+               partPosition[n].x4, partPosition[n].y4, partPosition[n].z4,
+               resX, resY, resZ);
 
    textureArray[tArrayPos+4] = 1.0;
    textureArray[tArrayPos+5] = 1.0;
-   vertexArray[vArrayPos+6] = partPosition[n].x3 + part->posX;
-   vertexArray[vArrayPos+7] = partPosition[n].y3;
-   vertexArray[vArrayPos+8] = partPosition[n].z3 + part->posZ;
+   vertexArray[vArrayPos+6] = resX + part->posX;
+   vertexArray[vArrayPos+7] = resY;
+   vertexArray[vArrayPos+8] = resZ + part->posZ;
+
+   rotatePoint(partPosition[n].x4, partPosition[n].y4, partPosition[n].z4, 
+               part->R,
+               partPosition[n].x3, partPosition[n].y3, partPosition[n].z3, 
+               partPosition[n].x4, partPosition[n].y4, partPosition[n].z4,
+               resX, resY, resZ);
 
    textureArray[tArrayPos+6] = 0.0;
    textureArray[tArrayPos+7] = 1.0;
-   vertexArray[vArrayPos+9] = partPosition[n].x4 + part->posX;
-   vertexArray[vArrayPos+10] = partPosition[n].y4;
-   vertexArray[vArrayPos+11] = partPosition[n].z4 + part->posZ;
+   vertexArray[vArrayPos+9] = resX + part->posX;
+   vertexArray[vArrayPos+10] = resY;
+   vertexArray[vArrayPos+11] = resZ + part->posZ;
 
    vArrayPos += 12;
    tArrayPos += 8;
@@ -167,16 +194,14 @@ void grass::EndRender()
 void grass::actualize(particle* part)
 {
    part->R += part->size;
-   part->velY = sin(deg2Rad(part->R));
 
-
-   if(part->R <= part->prvR-40)
+   if(part->R <= part->prvR-5)
    {
-      part->size = 0.75;
+      part->size = ROT_STEP;
    }
-   else if(part->R >= part->prvR+40)
+   else if(part->R >= part->prvR+5)
    {
-      part->size = -0.75;
+      part->size = -ROT_STEP;
    }
 }
 
@@ -206,7 +231,7 @@ int grass::needCreate()
 void grass::createParticle(particle* part)
 {
    /* Define all Rotations */
-   part->R = 75*(rand() / ((double)RAND_MAX + 1));
+   part->R = deg2Rad(20*(rand() / ((double)RAND_MAX + 1)));
    part->B = 15*(rand() / ((double)RAND_MAX + 1));
 
    part->velY = sin(deg2Rad(part->R));
@@ -214,14 +239,13 @@ void grass::createParticle(particle* part)
    /* Define Rotation variation */
    if(rand() > 0.5)
    {
-      part->size = -0.75;
+      part->size = -ROT_STEP;
    }
    else
    {
-      part->size = 0.75;
+      part->size = ROT_STEP;
    }
 
-   /* Define previous value of actualized rotation */
    part->prvR = part->R;
 
    /* Define Particle Size and Position */
@@ -299,16 +323,17 @@ void grass::setTotal(int total)
 {
    /* Delete the alloced structs */
    delete []particles;
+   delete[] partPosition;
+   delete[] vertexArray;
+   delete[] textureArray;
 
    /* Reinit the system with the new total */
    init(total,PARTICLE_DRAW_INDIVIDUAL);
 
    /* Realloc structs */
-   delete[] partPosition;
+   
    partPosition = (quadPos*) new quadPos[total];
-   delete[] vertexArray;
    vertexArray = (float*) new float[total*3*4];
-   delete[] textureArray;
    textureArray = (float*) new float[total*2*4];
 }
 

@@ -157,6 +157,10 @@ public:
       GLuint grassTexture;  /**< Load Texture used to grass */
       GLfloat scaleFactor;  /**< Scale factor of the grass */
 
+      GLfloat resX, 
+              resY, 
+              resZ;
+
       quadPos* partPosition; /**< Each particle position after the
                                   initial rotation around the Y axys */
       float* textureArray;   /**< The texture coordinates array */ 
