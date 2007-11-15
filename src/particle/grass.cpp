@@ -4,6 +4,7 @@
 #include "../engine/util.h"
 
 #define ROT_STEP 0.05
+#define ROT_MAX  deg2Rad(10)
 
 /**************************************************************************
  *                             Constructor                                *
@@ -195,11 +196,11 @@ void grass::actualize(particle* part)
 {
    part->R += deg2Rad(part->size);
 
-   if(part->R <= part->prvR-5)
+   if(part->R <= part->prvR - ROT_MAX)
    {
       part->size = ROT_STEP;
    }
-   else if(part->R >= part->prvR+5)
+   else if(part->R >= part->prvR + ROT_MAX)
    {
       part->size = -ROT_STEP;
    }
@@ -237,7 +238,7 @@ void grass::createParticle(particle* part)
    part->velY = sin(deg2Rad(part->R));
    
    /* Define Rotation variation */
-   if(rand() > 0.5)
+   if((rand()/ ((double)RAND_MAX + 1)) > 0.5)
    {
       part->size = -ROT_STEP;
    }
