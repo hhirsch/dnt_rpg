@@ -95,7 +95,7 @@ void waterWindow::openWindow()
    /* Plane Move Y */
    intWindow->getObjectsList()->insertTextBox(10,123,65,136,0,"Plane y");
    movYTab = intWindow->getObjectsList()->insertTabButton(6,136,0,0,
-                                             "../data/mapEditor/plane_move_y.png");
+                                          "../data/mapEditor/plane_move_y.png");
    buttonMoveYMore = movYTab->insertButton(5,1,15,15);
    buttonMoveYLess = movYTab->insertButton(5,24,15,38);
    buttonMoveY1More = movYTab->insertButton(20,1,30,15);
@@ -105,10 +105,23 @@ void waterWindow::openWindow()
    intWindow->getObjectsList()->insertTextBox(3,121,69,180,1,"");
 
    /* Plane Scale */
-   intWindow->getObjectsList()->insertTextBox(75,123,130,136,0,"Plane Scale");
+   intWindow->getObjectsList()->insertTextBox(75,123,130,136,0,"P Scale");
    scaleTab = intWindow->getObjectsList()->insertTabButton(73,136,0,0,
-                                             "../data/mapEditor/plane_scale.png");
+                                          "../data/mapEditor/plane_scale.png");
+   buttonScaleXMore = scaleTab->insertButton(0,0,19,19);
+   buttonScaleXLess = scaleTab->insertButton(0,20,19,39);
+   buttonScaleYMore = scaleTab->insertButton(20,0,39,19);
+   buttonScaleYLess = scaleTab->insertButton(20,20,39,39);
+   buttonScaleZMore = scaleTab->insertButton(40,0,59,19);
+   buttonScaleZLess = scaleTab->insertButton(40,20,59,39);
    intWindow->getObjectsList()->insertTextBox(70,121,138,180,1,"");
+
+   /* Waterflow Direction */
+   intWindow->getObjectsList()->insertTextBox(110,55,245,68,0,"Waterflow");
+   intWindow->getObjectsList()->insertTextBox(49,53,246,120,1,"");
+
+   /* Unused Space */
+   intWindow->getObjectsList()->insertTextBox(139,121,246,180,1,"");
 
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
