@@ -3,6 +3,7 @@
 
 #include "../../particle/grass.h"
 #include "../../gui/farso.h"
+#include "../../particle/partSystem.h"
 
 /*! The Grass Controller Window */
 class grassWindow
@@ -21,6 +22,11 @@ class grassWindow
       /*! Draw the temporary things. */
       void drawTemporary();
 
+      /*! Set the used particle system contoller
+       * \param pS -> the particle system controller
+       */
+      void setPartSystem(partSystem* pS);
+
       /*! Verify if some event is related to the window
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
@@ -34,6 +40,7 @@ class grassWindow
       void defineValues();
 
       grass* actualGrass;     /**< the actual on edition grass */
+      partSystem* pSystem;    /**< actual particle system controller */
       interface* gui;         /**< the actual used GUI */
      
       int lastTime;           /**< Last time checked ON_PRESS events */

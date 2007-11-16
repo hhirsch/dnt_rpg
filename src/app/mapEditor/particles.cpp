@@ -62,6 +62,10 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 {
    int i;
 
+   if(grWindow)
+   {
+      grWindow->setPartSystem(pS);
+   }
 
    if( ( (tool != state) || (selectedText != previousText) ) && 
        (state != STATE_PLANES) && (state != TOOL_PARTICLE_GRASS))

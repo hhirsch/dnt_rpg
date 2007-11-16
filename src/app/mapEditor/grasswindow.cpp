@@ -7,6 +7,7 @@ grassWindow::grassWindow(interface* actualGui)
 {
    actualWindow = NULL;
    actualGrass = NULL;
+   pSystem = NULL;
    gui = actualGui;
    lastTime = 0;
 }
@@ -38,7 +39,7 @@ void grassWindow::openWindow()
 {
    actualWindow = gui->insertWindow(184,599-345,403,599-248,"Grass");
    
-   actualWindow->getObjectsList()->insertTextBox(7,23,87,40,0,"Povoation:");
+   actualWindow->getObjectsList()->insertTextBox(7,24,87,41,0,"Emptiness:");
    buttonPovoationLess = actualWindow->getObjectsList()->insertButton(88,23,
                                                                       98,40,
                                                                       "<",0);
@@ -47,13 +48,19 @@ void grassWindow::openWindow()
    buttonPovoationMore = actualWindow->getObjectsList()->insertButton(151,23,
                                                                       161,40,
                                                                       ">",0);
-   actualWindow->getObjectsList()->insertTextBox(7,43,87,60,0,"ScaleFactor:");
+   actualWindow->getObjectsList()->insertTextBox(7,44,87,61,0,"ScaleFactor:");
    buttonSizeLess = actualWindow->getObjectsList()->insertButton(88,43,98,60,
                                                                  "<",0);
    textSize = actualWindow->getObjectsList()->insertTextBox(99,43,150,60,
                                                             1,"1.0");
    buttonSizeMore = actualWindow->getObjectsList()->insertButton(151,43,161,60,
                                                                  ">",0);
+
+   navigationTab = actualWindow->getObjectsList()->insertTabButton(65,70,0,0,
+                                              "../data/mapEditor/nav2.png");
+   buttonPrevious = navigationTab->insertButton(0,0,19,19);
+   buttonDestroy = navigationTab->insertButton(20,0,39,19);
+   buttonNext = navigationTab->insertButton(40,0,59,19);
 
    /* Open Window */
    actualWindow->setExternPointer(&actualWindow);
@@ -70,7 +77,7 @@ void grassWindow::defineValues()
    GLfloat pX1=0, pX2=0, pZ1=0, pZ2=0;
    float povValue;
 
-   if(actualWindow)
+   if( (actualWindow) && (actualGrass) )
    {
       /* Write povoation */
       actualGrass->getPosition(pX1,pZ1,pX2,pZ2);
@@ -90,7 +97,28 @@ void grassWindow::defineValues()
  **********************************************************/
 void grassWindow::drawTemporary()
 {
-   //TODO
+   if(actualGrass)
+   {
+      GLfloat x1, z1, x2, z2;
+      actualGrass->getPosition(x1,z1,x2,z2);
+      glDisable(GL_LIGHTING);
+         glColor3f(0.1,0.4,0.8);
+         glBegin(GL_QUADS);
+            glVertex3f(x1, 1, z1);
+            glVertex3f(x2, 1, z1);
+            glVertex3f(x2, 1, z2);
+            glVertex3f(x1, 1, z2);
+         glEnd();
+      glEnable(GL_LIGHTING);
+   }
+}
+
+/**********************************************************
+ *                    setPartSystem                       *
+ **********************************************************/
+void grassWindow::setPartSystem(partSystem* pS)
+{
+   pSystem = pS;
 }
 
 /**********************************************************
@@ -178,6 +206,42 @@ bool grassWindow::eventGot(int type, guiObject* object)
       if(treated)
       {
          defineValues();
+      }
+   }
+   else if(type == PRESSED_TAB_BUTTON)
+   {
+      if(object == (guiObject*)buttonPrevious)
+      {
+         if(actualGrass)
+         {
+            actualGrass = (grass*)actualGrass->previous;
+            defineValues();
+         }
+         treated = true;
+      }
+      else if(object == (guiObject*)buttonNext)
+      {
+         if(actualGrass)
+         {
+            actualGrass = (grass*)actualGrass->next;
+            defineValues();
+         }
+         treated = true;
+      }
+      else if(object == (guiObject*)buttonDestroy)
+      {
+         if( (pSystem) && (actualGrass) )
+         {
+            grass* tmpGrass = NULL;
+            if(actualGrass != (grass*)actualGrass->previous)
+            {
+               tmpGrass = (grass*)actualGrass->previous;
+            }
+            pSystem->removeParticle(PART_GRASS, actualGrass);
+            actualGrass = tmpGrass;
+            defineValues();
+         }
+         treated = true;
       }
    }
 

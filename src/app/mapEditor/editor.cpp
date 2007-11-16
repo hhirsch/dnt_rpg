@@ -675,6 +675,11 @@ void editor::draw()
          else if(gui->getState() == GUI_IO_STATE_PARTICLES)
          {
             particleEditor->drawTemporary(visibleMatrix);
+            grassWindow* gr = gui->getGrassWindow();
+            if(gr)
+            {
+               gr->drawTemporary();
+            }
          }
          else if(gui->getState() == GUI_IO_STATE_NPCS)
          {
@@ -813,7 +818,6 @@ void editor::doEditorIO()
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
    gluUnProject( wx, wy, wz, modl, proj, viewPort, &xReal, &yReal, &zReal);
 
-   
    if( (gui->getState() == GUI_IO_STATE_TERRAIN) && (mapOpened))
    {
       terrainEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(), 

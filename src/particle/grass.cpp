@@ -389,24 +389,6 @@ void grass::defineSize(particle* part)
       partPosition[n].y3 = 0;
       partPosition[n].y4 = 0;
    }
-
-#if 0
-   if(usedMap)
-   {
-      Map* map = (Map*) usedMap;
-      part->posY = map->getHeight(part->posX - 8.0, part->posZ) + 10*scaleFactor;
-      part->prvX = map->getHeight(part->posX + 8.0, part->posZ) + 10*scaleFactor;
-      part->prvY = map->getHeight(part->posX + 8.0, part->posZ);
-      part->prvZ = map->getHeight(part->posX - 8.0, part->posZ);
-   }
-   else
-   {
-      part->posY = 10*scaleFactor; /* Used as Height on First Vertex */
-      part->prvX = 10*scaleFactor; /* Used as Height on Second Vertex */
-      part->prvY = 0; /* Used as Height on Third Vertex */
-      part->prvZ = 0; /* Used as Height on Forth Vertex */
-   }
-#endif
 }
 
 /**************************************************************************
