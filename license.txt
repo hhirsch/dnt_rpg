@@ -29,3 +29,8 @@ cal3D files are at the same license of the blend that originated them.
 **  blend/contrib/bunny/*    **      Damien McGinnes     **       GPLv2      **
 **  blend/contrib/spider/*   **                          **                  **
 *******************************************************************************
+******************************   Tiziana Models   *****************************
+*******************************************************************************
+** blend/contrib/letto/*     **    Tiziana aka TiZeta    **     Creative     **
+**                           **                          **    Commons 2.0   **
+*******************************************************************************

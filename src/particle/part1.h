@@ -14,18 +14,19 @@
 #define PLANE_INCLINATION_Z  2 /**< Inclination on Z axis */
 
 /*! Intersection Plane */
-typedef struct 
+class interPlane
 {
-   float x1,        /**< X coordinate of plane */
-         x2;        /**< X coordinate of plane */
-   float y1,        /**< Y coordinate of plane */
-         y2;        /**< Y coordinate of plane */
-   float z1,        /**< Z coordinate of plane */
-         z2;        /**< Z coordinate of plane */
-   float dX,        /**< Variation X of water on plane */
-         dZ;        /**< Variation Z of water on plane */
-   int inclination; /**< Inclination Type of plane */
-}interPlane; 
+   public:
+      float x1,        /**< X coordinate of plane */
+            x2;        /**< X coordinate of plane */
+      float y1,        /**< Y coordinate of plane */
+            y2;        /**< Y coordinate of plane */
+      float z1,        /**< Z coordinate of plane */
+            z2;        /**< Z coordinate of plane */
+      float dX,        /**< Variation X of water on plane */
+            dZ;        /**< Variation Z of water on plane */
+      int inclination; /**< Inclination Type of plane */
+}; 
 
 /*! WaterFalls Particle */
 class part1: public particleSystem

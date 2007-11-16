@@ -7,6 +7,7 @@
 #include "terrain.h"
 #include "listwindow.h"
 #include "grasswindow.h"
+#include "waterwindow.h"
 
 /* Return Constants */
 #define GUI_IO_NOTHING              0
@@ -88,13 +89,17 @@ class guiIO
       /*! Get the grass Window
        * \return pointer to the grass window */
       grassWindow* getGrassWindow();
+      
+      /*! Get the water Window
+       * \return pointer to the water window */
+      waterWindow* getWaterWindow();
 
       camera gameCamera;               /**< The Game Camera */
 
    private:
       
       grassWindow* grWindow;/**< the grass window */  
-
+      waterWindow* wtWindow;/**< the waterfall window */
       listWindow* ltWindow; /**< The List Window */
 
       mapFog* actualFog;    /**< The actual fog */

@@ -23,8 +23,7 @@ class grassWindow
       void drawTemporary();
 
       /*! Set the used particle system contoller
-       * \param pS -> the particle system controller
-       */
+       * \param pS -> the particle system controller */
       void setPartSystem(partSystem* pS);
 
       /*! Verify if some event is related to the window

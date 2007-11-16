@@ -58,7 +58,8 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                              partSystem* pS, GLdouble proj[16],
                              GLdouble modl[16], GLint viewPort[4],
                              string selectedText,
-                             grassWindow* grWindow)
+                             grassWindow* grWindow, 
+                             waterWindow* wtWindow)
 {
    int i;
 
@@ -194,6 +195,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             actualParticle = NULL;
             return;
          }
+         wtWindow->setWater(tmpPart);
          actualParticle = (particleSystem*) tmpPart;
       }
       else

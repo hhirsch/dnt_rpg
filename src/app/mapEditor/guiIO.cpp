@@ -21,6 +21,7 @@ guiIO::guiIO()
 
    /* Open Windows */
    grWindow = new grassWindow(gui);
+   wtWindow = new waterWindow(gui);
    ltWindow = new listWindow(gui);
    ltWindow->setState(0);
    openFileWindow();
@@ -43,6 +44,7 @@ guiIO::~guiIO()
    delete(gui);
    delete(grWindow);
    delete(ltWindow);
+   delete(wtWindow);
 }
 
 /****************************************************************
@@ -51,6 +53,14 @@ guiIO::~guiIO()
 grassWindow* guiIO::getGrassWindow()
 {
    return(grWindow);
+}
+
+/****************************************************************
+ *                        getWaterWindow                        *
+ ****************************************************************/
+waterWindow* guiIO::getWaterWindow()
+{
+   return(wtWindow);
 }
 
 /****************************************************************
