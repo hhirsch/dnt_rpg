@@ -89,8 +89,10 @@ class waterWindow
       oneTabButton* buttonScaleYLess;     /**< Scale less on Y */
 
       button* dxWaterflowMore;            /**< More dX flow */
+      textBox* dxWaterflowText;           /**< dx flow text */
       button* dxWaterflowLess;            /**< Less dX flow */
       button* dzWaterflowMore;            /**< More dZ flow */
+      textBox* dzWaterflowText;           /**< dz flow text */
       button* dzWaterflowLess;            /**< Less dZ flow */
 };
 

@@ -117,7 +117,22 @@ void waterWindow::openWindow()
    intWindow->getObjectsList()->insertTextBox(70,121,138,180,1,"");
 
    /* Waterflow Direction */
-   intWindow->getObjectsList()->insertTextBox(110,55,245,68,0,"Waterflow");
+   intWindow->getObjectsList()->insertTextBox(110,55,245,68,0,
+                                              "Plane Waterflow");
+   intWindow->getObjectsList()->insertTextBox(50,73,100,88,0,"deltaX:");
+   dxWaterflowLess = intWindow->getObjectsList()->insertButton(101,71,111,88,
+                                                               "<",0);
+   dxWaterflowText = intWindow->getObjectsList()->insertTextBox(112,71,162,88,
+                                                                 1,"1.0");
+   dxWaterflowMore = intWindow->getObjectsList()->insertButton(163,71,173,88,
+                                                               ">",0);
+   intWindow->getObjectsList()->insertTextBox(50,93,100,108,0,"deltaZ:");
+   dzWaterflowLess = intWindow->getObjectsList()->insertButton(101,91,111,108,
+                                                               "<",0);
+   dzWaterflowText = intWindow->getObjectsList()->insertTextBox(112,91,162,108,
+                                                                 1,"1.0");
+   dzWaterflowMore = intWindow->getObjectsList()->insertButton(163,91,173,108,
+                                                               ">",0);
    intWindow->getObjectsList()->insertTextBox(49,53,246,120,1,"");
 
    /* Unused Space */
