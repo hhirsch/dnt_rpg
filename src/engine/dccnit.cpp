@@ -3010,7 +3010,7 @@ void engine::OpenMiniMapWindow()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   miniMapWindow = gui->insertWindow(SCREEN_X-188,SCREEN_Y-128,SCREEN_X-1,SCREEN_Y-1,
+   miniMapWindow = gui->insertWindow(SCREEN_X-288,SCREEN_Y-128,SCREEN_X-1,SCREEN_Y-1,
                                      gettext("Map"));
 
    botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,x+2,z+2,
