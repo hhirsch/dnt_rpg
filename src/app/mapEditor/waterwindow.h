@@ -41,6 +41,9 @@ class waterWindow
       /*! Open the water window */
       void openWindow();
 
+      /*! Define the Values amd put on the boxes */
+      void defineValues();
+
       part1* activeWater;                 /**< The active Water */
       interPlane* activePlane;            /**< The active Plane */
       partSystem* pSystem;                /**< The active Controller */

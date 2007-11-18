@@ -375,6 +375,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          {
             activeWater = (part1*)activeWater->next;
             activePlane = activeWater->getPlane(0);
+            defineValues();
          }
          return(true);
       }
@@ -384,6 +385,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          {
             activeWater = (part1*)activeWater->previous;
             activePlane = activeWater->getPlane(0);
+            defineValues();
          }
          return(true);
       }
@@ -395,9 +397,15 @@ bool waterWindow::eventGot(int type, guiObject* object)
             if(activeWater != (part1*)activeWater->previous)
             {
                tmpWater = (part1*)activeWater->previous;
+               activePlane = tmpWater->getPlane(0);
+            }
+            else
+            {
+               activePlane = NULL;
             }
             pSystem->removeParticle(PART_WATERFALL, activeWater);
             activeWater = tmpWater;
+            defineValues();
          }
          return(true);
       }
@@ -411,14 +419,59 @@ bool waterWindow::eventGot(int type, guiObject* object)
                                       wX+2, wY-1, wZ+2,
                                       1, 0, PLANE_NO_INCLINATION);
             activePlane = activeWater->getPlane(i);
+            defineValues();
          }
          return(true);
       }
+
       //TODO others controllers
 
    }
+   else if(type == ON_PRESS_BUTTON)
+   {
+      if(object == (guiObject*)dxWaterflowMore)
+      {
+         activePlane->dX += 0.1;
+         defineValues();
+         return(true);
+      }
+      else if(object == (guiObject*)dxWaterflowLess)
+      {
+         activePlane->dX -= 0.1;
+         defineValues();
+         return(true);
+      }
+      else if(object == (guiObject*)dzWaterflowMore)
+      {
+         activePlane->dZ += 0.1;
+         defineValues();
+         return(true);
+      }
+      else if(object == (guiObject*)dzWaterflowLess)
+      {
+         activePlane->dZ -= 0.1;
+         defineValues();
+         return(true);
+      }
+   }
 
    return(false);
+}
+
+/***********************************************************************
+ *                           defineValues                              *
+ ***********************************************************************/
+void waterWindow::defineValues()
+{
+   char tmp[8];
+   if(activePlane)
+   {
+      sprintf(tmp,"%.2f",activePlane->dX);
+      dxWaterflowText->setText(tmp);
+      sprintf(tmp,"%.2f",activePlane->dZ);
+      dzWaterflowText->setText(tmp);
+      intWindow->draw(0,0);
+   }
 }
 
 /***********************************************************************
