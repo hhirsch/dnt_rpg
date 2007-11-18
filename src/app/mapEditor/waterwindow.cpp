@@ -44,6 +44,14 @@ void waterWindow::setPlane(interPlane* pl)
 }
 
 /***********************************************************************
+ *                              setPlane                               *
+ ***********************************************************************/
+void waterWindow::setPartSystem(partSystem* pS) 
+{
+   pSystem = pS;
+}
+
+/***********************************************************************
  *                             openWindow                              *
  ***********************************************************************/
 void waterWindow::openWindow()
@@ -55,7 +63,7 @@ void waterWindow::openWindow()
    waterTab = intWindow->getObjectsList()->insertTabButton(6,30,0,0,
                                                  "../data/mapEditor/nav2.png");
    waterMoveTab = intWindow->getObjectsList()->insertTabButton(67,30,0,0,
-                                               "../data/mapEditor/water_move.png");
+                                           "../data/mapEditor/water_move.png");
    buttonPreviousWater = waterTab->insertButton(0,0,19,19);
    buttonDestroyWater = waterTab->insertButton(20,0,39,19);
    buttonNextWater = waterTab->insertButton(40,0,59,19);
@@ -66,7 +74,7 @@ void waterWindow::openWindow()
    /* Plane Navigators */
    intWindow->getObjectsList()->insertTextBox(112,17,152,36,0,"Planes");
    planesTab = intWindow->getObjectsList()->insertTabButton(94,30,0,0,
-                                               "../data/mapEditor/plane_nav.png");
+                                           "../data/mapEditor/plane_nav.png");
    buttonAddPlane = planesTab->insertButton(0,0,19,19);
    buttonPreviousPlane = planesTab->insertButton(20,0,39,19);
    buttonDestroyPlane = planesTab->insertButton(40,0,59,19);
@@ -76,7 +84,7 @@ void waterWindow::openWindow()
    /* Plane Inclination */
    intWindow->getObjectsList()->insertTextBox(181,17,245,36,0,"Plane Inc");
    incTypeTab = intWindow->getObjectsList()->insertTabButton(181,30,0,0,
-                                        "../data/mapEditor/plane_inclination.png");
+                                     "../data/mapEditor/plane_inclination.png");
    buttonNoInclination = incTypeTab->insertButton(0,0,19,19);
    buttonInclinationX = incTypeTab->insertButton(20,0,39,19);
    buttonInclinationZ = incTypeTab->insertButton(40,0,59,19);
@@ -85,7 +93,7 @@ void waterWindow::openWindow()
    /* Plane Move X_Z */
    intWindow->getObjectsList()->insertTextBox(5,55,45,68,0,"Plane  Move");
    movXZTab = intWindow->getObjectsList()->insertTabButton(5,78,0,0,
-                                             "../data/mapEditor/plane_move.png");
+                                          "../data/mapEditor/plane_move.png");
    buttonMoveZMore = movXZTab->insertButton(14,0,26,14);
    buttonMoveZLess = movXZTab->insertButton(14,24,26,39);
    buttonMoveXLess = movXZTab->insertButton(2,12,15,26);
@@ -144,4 +152,12 @@ void waterWindow::openWindow()
    gui->openWindow(intWindow);
 }
 
+/***********************************************************************
+ *                              eventGot                               *
+ ***********************************************************************/
+bool waterWindow::eventGot(int type, guiObject* object)
+{
+   //TODO
+   return(false);
+}
 
