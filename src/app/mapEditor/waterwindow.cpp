@@ -157,7 +157,74 @@ void waterWindow::openWindow()
  ***********************************************************************/
 bool waterWindow::eventGot(int type, guiObject* object)
 {
-   //TODO
+   GLfloat wX = 0, wY = 0, wZ = 0;
+
+   if(!intWindow)
+   {
+      return(false);
+   }
+
+   if(activeWater)
+   {
+      activeWater->getPosition(wX, wY, wZ);
+   }
+
+   if(type == ON_PRESS_TAB_BUTTON)
+   {
+      /* Waterfall Navigators */
+      if(object == (guiObject*)buttonNextWater)
+      {
+         if(activeWater)
+         {
+            activeWater = (part1*)activeWater->next;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonPreviousWater)
+      {
+         if(activeWater)
+         {
+            activeWater = (part1*)activeWater->previous;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonDestroyWater)
+      {
+         if((activeWater) && (pSystem))
+         {
+            part1* tmpWater = NULL;
+            if(activeWater != (part1*)activeWater->previous)
+            {
+               tmpWater = (part1*)activeWater->previous;
+            }
+            pSystem->removeParticle(PART_WATERFALL, activeWater);
+            activeWater = tmpWater;
+         }
+         return(true);
+      }
+
+
+      /* Waterfall Up/Down */
+      else if(object == (guiObject*)buttonMoveWaterUp)
+      {
+         if(activeWater)
+         {
+            wY += 0.5;
+            activeWater->definePosition(wX, wY, wZ);
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonMoveWaterDown)
+      {
+         if(activeWater)
+         {
+            wY -= 0.5;
+            activeWater->definePosition(wX, wY, wZ);
+         }
+         return(true);
+      }
+   }
+
    return(false);
 }
 

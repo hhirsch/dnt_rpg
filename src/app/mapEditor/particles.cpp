@@ -54,24 +54,29 @@ void particles::deleteParticle()
  *                          verifyAction                         *
  *****************************************************************/
 void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                             Uint8 mButton, Uint8* keys, int tool, 
+                             Uint8 mButton, Uint8* keys, guiIO* gui, 
                              partSystem* pS, GLdouble proj[16],
                              GLdouble modl[16], GLint viewPort[4],
                              string selectedText,
                              grassWindow* grWindow, 
                              waterWindow* wtWindow)
 {
-   int i;
+   int tool = gui->getTool();
 
+   /* Set the system controller to the windows */
    if(grWindow)
    {
       grWindow->setPartSystem(pS);
+   }
+   if(wtWindow)
+   {
+      wtWindow->setPartSystem(pS);
    }
 
    if( ( (tool != state) || (selectedText != previousText) ) && 
        (state != STATE_PLANES) && (state != TOOL_PARTICLE_GRASS))
    {
-      deleteParticle(); 
+      deleteParticle();
    }
 
    previousText = selectedText;
@@ -195,7 +200,6 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             actualParticle = NULL;
             return;
          }
-         wtWindow->setWater(tmpPart);
          actualParticle = (particleSystem*) tmpPart;
       }
       else
@@ -215,9 +219,11 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          height -= 1;
       }
 
+      actualParticle->definePosition(mouseX, height, mouseZ);
+
       if(mButton & SDL_BUTTON(1))
       {
-         if( state == STATE_PLANES )
+         /*if( state == STATE_PLANES )
          {
             part1* tmp;
             tmp = (part1*) actualParticle;
@@ -240,10 +246,21 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                               1, 0, PLANE_NO_INCLINATION);
             actualPlane = tmp->getPlane(i);
          }
-         else if(tool != TOOL_PARTICLE_GRASS)
+         else*/ 
+         if(tool != TOOL_PARTICLE_GRASS)
          {
-            pS->addParticle(particleType, mouseX, height, mouseZ,
-                            actualParticle->getFileName());
+            particleSystem* p = pS->addParticle(particleType, mouseX, height, mouseZ,
+                                                actualParticle->getFileName());
+
+            /* Set the waterfall window */
+            if(tool == TOOL_PARTICLE_WATERFALL)
+            {
+               wtWindow->setWater((part1*)p);
+            }
+            deleteParticle();
+            gui->setTool(TOOL_NONE);
+            actualParticle = NULL;
+
          }
          while(mButton & SDL_BUTTON(1))
          {
@@ -254,6 +271,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          }
       }
 
+#if 0
       /* Verify Planes Keys */
       if(state == STATE_PLANES)
       {
@@ -435,10 +453,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             actualParticle = NULL;
          }
       }
-      else
-      {
-         actualParticle->definePosition(mouseX, height, mouseZ);
-      }
+#endif 
    }
 }
 

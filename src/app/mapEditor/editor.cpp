@@ -862,7 +862,7 @@ void editor::doEditorIO()
    else if( (gui->getState() == GUI_IO_STATE_PARTICLES) && (mapOpened))
    {
       particleEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
-                                   gui->getTool(), particleSystem, proj, 
+                                   gui, particleSystem, proj, 
                                    modl, viewPort, gui->getSelectedText(),
                                    gui->getGrassWindow(), 
                                    gui->getWaterWindow());

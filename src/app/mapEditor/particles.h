@@ -4,6 +4,7 @@
 #include "grasswindow.h"
 #include "waterwindow.h"
 #include "message.h"
+#include "guiIO.h"
 #include "../../map/map.h"
 #include "../../particle/partSystem.h"
 
@@ -22,10 +23,9 @@ class particles
        * \param mouseY -> mouse Y coordinate 
        * \param mouseZ -> mouse Z coordinate 
        * \param mButton -> mouse button state
-       * \param tool -> current Tool
        * \param grWindow -> the grassWindow Used*/
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                        Uint8 mButton, Uint8* keys, int tool, partSystem* pS,
+                        Uint8 mButton, Uint8* keys, guiIO* gui, partSystem* pS,
                         GLdouble proj[16],GLdouble modl[16],GLint viewPort[4],
                         string selectedText, grassWindow* grWindow,
                         waterWindow* wtWindow);
