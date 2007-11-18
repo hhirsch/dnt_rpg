@@ -171,41 +171,8 @@ bool waterWindow::eventGot(int type, guiObject* object)
 
    if(type == ON_PRESS_TAB_BUTTON)
    {
-      /* Waterfall Navigators */
-      if(object == (guiObject*)buttonNextWater)
-      {
-         if(activeWater)
-         {
-            activeWater = (part1*)activeWater->next;
-         }
-         return(true);
-      }
-      else if(object == (guiObject*)buttonPreviousWater)
-      {
-         if(activeWater)
-         {
-            activeWater = (part1*)activeWater->previous;
-         }
-         return(true);
-      }
-      else if(object == (guiObject*)buttonDestroyWater)
-      {
-         if((activeWater) && (pSystem))
-         {
-            part1* tmpWater = NULL;
-            if(activeWater != (part1*)activeWater->previous)
-            {
-               tmpWater = (part1*)activeWater->previous;
-            }
-            pSystem->removeParticle(PART_WATERFALL, activeWater);
-            activeWater = tmpWater;
-         }
-         return(true);
-      }
-
-
       /* Waterfall Up/Down */
-      else if(object == (guiObject*)buttonMoveWaterUp)
+      if(object == (guiObject*)buttonMoveWaterUp)
       {
          if(activeWater)
          {
@@ -223,8 +190,272 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
+
+      /* Plane Inclination Type */
+      else if(object == (guiObject*)buttonNoInclination)
+      {
+         if(activePlane)
+         {
+            activePlane->inclination = PLANE_NO_INCLINATION;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonInclinationX)
+      {
+         if(activePlane)
+         {
+            activePlane->inclination = PLANE_INCLINATION_X;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonInclinationZ)
+      {
+         if(activePlane)
+         {
+            activePlane->inclination = PLANE_INCLINATION_Z;
+         }
+         return(true);
+      }
+
+      /* Plane Move X/Z */
+      else if(object == (guiObject*)buttonMoveZMore)
+      {
+         if(activePlane)
+         {
+            activePlane->z1 += 0.1;
+            activePlane->z2 += 0.1;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonMoveZLess)
+      {
+         if(activePlane)
+         {
+            activePlane->z1 -= 0.1;
+            activePlane->z2 -= 0.1;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonMoveXMore)
+      {
+         if(activePlane)
+         {
+            activePlane->x1 += 0.1;
+            activePlane->x2 += 0.1;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonMoveXLess)
+      {
+         if(activePlane)
+         {
+            activePlane->x1 -= 0.1;
+            activePlane->x2 -= 0.1;
+         }
+         return(true);
+      }
+
+      /* Move Plane Y */
+      else if(object == (guiObject*)buttonMoveYMore)
+      {
+         if(activePlane)
+         {
+            activePlane->y1 += 0.1;
+            activePlane->y2 += 0.1;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonMoveYLess)
+      {
+         if(activePlane)
+         {
+            activePlane->y1 -= 0.1;
+            activePlane->y2 -= 0.1;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonMoveY1More)
+      {
+         if(activePlane)
+         {
+            activePlane->y1 += 0.1;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonMoveY1Less)
+      {
+         if(activePlane)
+         {
+            activePlane->y1 -= 0.1;
+         }
+         return(true);
+      }
+
+      else if(object == (guiObject*)buttonMoveY2More)
+      {
+         if(activePlane)
+         {
+            activePlane->y2 += 0.1;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonMoveY2Less)
+      {
+         if(activePlane)
+         {
+            activePlane->y2 -= 0.1;
+         }
+         return(true);
+      }
+
+      /* Scale Plane */
+      else if(object == (guiObject*)buttonScaleXMore)
+      {
+         if(activePlane)
+         {
+            activePlane->x1 -= 0.05;
+            activePlane->x2 += 0.05;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonScaleXLess)
+      {
+         if(activePlane)
+         {
+            activePlane->x1 += 0.05;
+            activePlane->x2 -= 0.05;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonScaleYMore)
+      {
+         if(activePlane)
+         {
+            activePlane->y1 -= 0.05;
+            activePlane->y2 += 0.05;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonScaleYLess)
+      {
+         if(activePlane)
+         {
+            activePlane->y1 += 0.05;
+            activePlane->y2 -= 0.05;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonScaleZMore)
+      {
+         if(activePlane)
+         {
+            activePlane->z1 -= 0.05;
+            activePlane->z2 += 0.05;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonScaleZLess)
+      {
+         if(activePlane)
+         {
+            activePlane->z1 += 0.05;
+            activePlane->z2 -= 0.05;
+         }
+         return(true);
+      }
+
+   }
+
+   else if(type == PRESSED_TAB_BUTTON)
+   {
+      /* Waterfall Controller */
+      if(object == (guiObject*)buttonNextWater)
+      {
+         if(activeWater)
+         {
+            activeWater = (part1*)activeWater->next;
+            activePlane = activeWater->getPlane(0);
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonPreviousWater)
+      {
+         if(activeWater)
+         {
+            activeWater = (part1*)activeWater->previous;
+            activePlane = activeWater->getPlane(0);
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonDestroyWater)
+      {
+         if((activeWater) && (pSystem))
+         {
+            part1* tmpWater = NULL;
+            if(activeWater != (part1*)activeWater->previous)
+            {
+               tmpWater = (part1*)activeWater->previous;
+            }
+            pSystem->removeParticle(PART_WATERFALL, activeWater);
+            activeWater = tmpWater;
+         }
+         return(true);
+      }
+      /* Plane Controller */
+      else if(object == (guiObject*)buttonAddPlane)
+      {
+         if(activeWater)
+         {  
+            int i;
+            i = activeWater->addPlane(wX-2, wY-1, wZ-2, 
+                                      wX+2, wY-1, wZ+2,
+                                      1, 0, PLANE_NO_INCLINATION);
+            activePlane = activeWater->getPlane(i);
+         }
+         return(true);
+      }
+      //TODO others controllers
+
    }
 
    return(false);
+}
+
+/***********************************************************************
+ *                           drawTemporary                             *
+ ***********************************************************************/
+void waterWindow::drawTemporary()
+{
+   if(activePlane != NULL)
+   {
+      glDisable(GL_LIGHTING);
+      glColor3f(0,0,0);
+      glBegin(GL_QUADS);
+      if(activePlane->inclination == PLANE_NO_INCLINATION)
+      {
+         glVertex3f(activePlane->x1, activePlane->y1, activePlane->z1);
+         glVertex3f(activePlane->x2, activePlane->y1, activePlane->z1);
+         glVertex3f(activePlane->x2, activePlane->y1, activePlane->z2);
+         glVertex3f(activePlane->x1, activePlane->y1, activePlane->z2);
+      }
+      else if(activePlane->inclination == PLANE_INCLINATION_X)
+      {
+         glVertex3f(activePlane->x1, activePlane->y1, activePlane->z1);
+         glVertex3f(activePlane->x2, activePlane->y2, activePlane->z1);
+         glVertex3f(activePlane->x2, activePlane->y2, activePlane->z2);
+         glVertex3f(activePlane->x1, activePlane->y1, activePlane->z2);
+      }
+      else if(activePlane->inclination == PLANE_INCLINATION_Z)
+      {
+         glVertex3f(activePlane->x1, activePlane->y1, activePlane->z1);
+         glVertex3f(activePlane->x2, activePlane->y1, activePlane->z1);
+         glVertex3f(activePlane->x2, activePlane->y2, activePlane->z2);
+         glVertex3f(activePlane->x1, activePlane->y2, activePlane->z2);
+      }
+
+      glEnd();
+      glEnable(GL_LIGHTING);
+   }
+
 }
 

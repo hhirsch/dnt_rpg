@@ -32,6 +32,9 @@ class waterWindow
        * \param object -> object of the event 
        * \return -> true if event is related (and treated) by the window */
       bool eventGot(int type, guiObject* object);
+
+      /*! Draw the temporary things to the screen */
+      void drawTemporary();
       
    protected:
 

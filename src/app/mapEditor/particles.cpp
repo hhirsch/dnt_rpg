@@ -462,37 +462,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
  *****************************************************************/
 void particles::drawTemporary(GLfloat matriz[6][4])
 {
-   if( state == STATE_PLANES )
-   {
-      glDisable(GL_LIGHTING);
-      glColor3f(0,0,0);
-      glBegin(GL_QUADS);
-      if(actualPlane->inclination == PLANE_NO_INCLINATION)
-      {
-         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z1);
-         glVertex3f(actualPlane->x2, actualPlane->y1, actualPlane->z1);
-         glVertex3f(actualPlane->x2, actualPlane->y1, actualPlane->z2);
-         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z2);
-      }
-      else if(actualPlane->inclination == PLANE_INCLINATION_X)
-      {
-         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z1);
-         glVertex3f(actualPlane->x2, actualPlane->y2, actualPlane->z1);
-         glVertex3f(actualPlane->x2, actualPlane->y2, actualPlane->z2);
-         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z2);
-      }
-      else if(actualPlane->inclination == PLANE_INCLINATION_Z)
-      {
-         glVertex3f(actualPlane->x1, actualPlane->y1, actualPlane->z1);
-         glVertex3f(actualPlane->x2, actualPlane->y1, actualPlane->z1);
-         glVertex3f(actualPlane->x2, actualPlane->y2, actualPlane->z2);
-         glVertex3f(actualPlane->x1, actualPlane->y2, actualPlane->z2);
-      }
-
-      glEnd();
-      glEnable(GL_LIGHTING);
-   }
-   else if(state == STATE_GRASS_INIT)
+   if(state == STATE_GRASS_INIT)
    {
       glDisable(GL_LIGHTING);
       glColor3f(0.01,0.1,0.8);

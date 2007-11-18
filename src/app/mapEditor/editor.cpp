@@ -680,6 +680,11 @@ void editor::draw()
             {
                gr->drawTemporary();
             }
+            waterWindow* wt = gui->getWaterWindow();
+            if(wt)
+            {
+               wt->drawTemporary();
+            }
          }
          else if(gui->getState() == GUI_IO_STATE_NPCS)
          {
