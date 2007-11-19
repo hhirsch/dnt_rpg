@@ -196,7 +196,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus) + 
               attacker.sizeModifier + attacker.baseAttackModifier;
 
-      diceValue = 1 + (int)DICE_D20*(rand() / (RAND_MAX + 1.0)); 
+      diceValue = 1 + (int)(DICE_D20*(rand() / (RAND_MAX + 1.0))); 
 
       //TODO apply reflexes bonus, esquive bonus, etc, to target 
       targetValue = target.armatureClass;
@@ -204,7 +204,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       /* verify critical Hit */
       if(diceValue == DICE_D20)
       {
-          criticalRoll = 1 + (int)DICE_D20*(rand() / (RAND_MAX + 1.0));
+          criticalRoll = 1 + (int)(DICE_D20*(rand() / (RAND_MAX + 1.0)));
           if( (criticalRoll + bonus - targetValue) > 0)
           {
               criticalHit = true;
@@ -215,7 +215,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       if( diceValue == 1)  
       {
           miss = true;
-          criticalRoll = 1 + (int)DICE_D20*(rand() / (RAND_MAX + 1.0));
+          criticalRoll = 1 + (int)(DICE_D20*(rand() / (RAND_MAX + 1.0)));
           if( (criticalRoll + bonus - targetValue) <= 0 )
           {
              criticalMiss = true;
@@ -278,8 +278,8 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       /* Apply Base Damage Dices */
       for(i = 0; i < m_feats[featNumber].diceInfo.baseDice.numberOfDices; i++)
       {
-          damage += (1 + (int)m_feats[featNumber].diceInfo.baseDice.diceID *
-                        (rand() / (RAND_MAX + 1.0)));
+          damage += (1 + (int)(m_feats[featNumber].diceInfo.baseDice.diceID *
+                        (rand() / (RAND_MAX + 1.0))));
       }
       /* Sum Dice Damage Number */
       damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
@@ -296,8 +296,8 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
                 i++)
             {
                 damage += (1 + 
-                           (int)m_feats[featNumber].diceInfo.baseDice.diceID *
-                           (rand() / (RAND_MAX + 1.0)));
+                           (int)(m_feats[featNumber].diceInfo.baseDice.diceID *
+                           (rand() / (RAND_MAX + 1.0))));
             }
             /* Sum Dice Damage Number */
             damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
@@ -367,7 +367,7 @@ int feats::getRandomNPCAttackFeat(thing* pers, thing* target)
    if( (target != NULL) && (pers != NULL))
    {
       srand(SDL_GetTicks());
-      ft = (int)totalFeats*(rand() / (RAND_MAX + 1.0));
+      ft = (int)(totalFeats*(rand() / (RAND_MAX + 1.0)));
 
       //FIXME verify if the feat is in range to use!
 
@@ -484,7 +484,7 @@ int feats::getRandomHealFeat(thing* pers)
    if((pers != NULL))
    {
       srand(SDL_GetTicks());
-      ft = (int)totalFeats*(rand() / (RAND_MAX + 1.0));
+      ft = (int)(totalFeats*(rand() / (RAND_MAX + 1.0)));
 
       if( (m_feats[ft].action == ACT_HEAL)  && 
           ( (m_feats[ft].actualQuantity >= m_feats[ft].costToUse)
