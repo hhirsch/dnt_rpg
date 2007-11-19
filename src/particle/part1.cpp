@@ -150,8 +150,10 @@ bool part1::continueLive(particle* part)
  ****************************************************************************/
 int part1::needCreate()
 {
-   return((int) ((maxParticles / maxLive)*0.8) + 
-          (rand() % (int) ((maxParticles / maxLive))));
+   /*return((int) ((maxParticles / maxLive)*0.8) + 
+          (rand() % (int) ((maxParticles / maxLive))));*/
+
+   return( (int)( 1+(maxParticles / maxLive)*(rand() / (RAND_MAX + 1.0)) ));
 }
 
 /****************************************************************************
