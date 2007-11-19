@@ -7,8 +7,6 @@
  ******************************************
  *            Max Planes Number           *
  ******************************************/
-#define PART1_MAX_PLANES 10
-
 #define PLANE_NO_INCLINATION 0 /**< No Inclination on Plane */
 #define PLANE_INCLINATION_X  1 /**< Inclination on X axis */
 #define PLANE_INCLINATION_Z  2 /**< Inclination on Z axis */
@@ -26,19 +24,28 @@ class interPlane
       float dX,        /**< Variation X of water on plane */
             dZ;        /**< Variation Z of water on plane */
       int inclination; /**< Inclination Type of plane */
+
+      interPlane* next;       /**< Next Plane on List */
+      interPlane* previous;   /**< Previous Plane on List */
 }; 
 
 /*! WaterFalls Particle */
 class part1: public particleSystem
 {
    public:
-      /*! Contructor
+      /*!
+       ***************************************************************
+       * Contructor
        * \param cX -> center X position
        * \param cY -> center Y position
        * \param cZ -> center Z position 
-       * \param fileName -> file name of the file to load */
+       * \param fileName -> file name of the file to load 
+       ***************************************************************/
       part1(float cX,float cY,float cZ, string fileName); 
-      /*! Destructor */
+      /*! 
+       ***************************************************************
+       * Destructor 
+       ***************************************************************/
       ~part1();
 
       /*!
@@ -108,9 +115,17 @@ class part1: public particleSystem
        * \param dZ -> particle Z variation when plane contact
        * \param inclination -> plane inclination type
        ***************************************************************/
-      int addPlane(float x1, float y1, float z1, 
-                   float x2, float y2, float z2, 
-                   float dX, float dZ, int inclination);
+      interPlane* addPlane(float x1, float y1, float z1, 
+                           float x2, float y2, float z2, 
+                           float dX, float dZ, int inclination);
+
+      /*!
+       ***************************************************************
+       * Removes a Plane
+       * \param ip -> pointer to the interPlane to remove
+       ***************************************************************/
+      void removePlane(interPlane* ip);
+
       /*!
        ***************************************************************
        * Removes The Character's Planes
@@ -126,17 +141,31 @@ class part1: public particleSystem
        ***************************************************************/
       bool intersectPlanes(particle* part, float* dX, float* dZ); 
 
-      int getTotalPlanes(){return(actualPlanes);};
+      /*!
+       ***************************************************************
+       * Get the total number of planes on the waterfall
+       * \return number of planes
+       ***************************************************************/
+      int getTotalPlanes();
 
-      interPlane* getPlane(int i){return(&intersections[i]);};
+      /*!
+       ***************************************************************
+       * Get the last plane on the waterfall
+       * \return -> pointer to the last plane
+       ***************************************************************/
+      interPlane* getLastPlane();
 
+      /*!
+       ***************************************************************
+       * Remove the last added plane of the waterfall
+       ***************************************************************/
       void removeLastPlane();
 
 
    private:
       float seconds;         /**< Actual Time on particle */
       GLuint partTexture;    /**< Current particle texture */
-      interPlane intersections[PART1_MAX_PLANES]; /**< The internal Planes */
+      interPlane* intersections; /**< The internal Planes */
       int actualPlanes;      /**< actual number of planes */
 
       /*!

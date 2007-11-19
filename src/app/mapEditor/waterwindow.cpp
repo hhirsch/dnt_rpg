@@ -374,7 +374,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          if(activeWater)
          {
             activeWater = (part1*)activeWater->next;
-            activePlane = activeWater->getPlane(0);
+            activePlane = activeWater->getLastPlane();
             defineValues();
          }
          return(true);
@@ -384,7 +384,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
          if(activeWater)
          {
             activeWater = (part1*)activeWater->previous;
-            activePlane = activeWater->getPlane(0);
+            activePlane = activeWater->getLastPlane();
             defineValues();
          }
          return(true);
@@ -397,7 +397,7 @@ bool waterWindow::eventGot(int type, guiObject* object)
             if(activeWater != (part1*)activeWater->previous)
             {
                tmpWater = (part1*)activeWater->previous;
-               activePlane = tmpWater->getPlane(0);
+               activePlane = tmpWater->getLastPlane();
             }
             else
             {
@@ -414,11 +414,9 @@ bool waterWindow::eventGot(int type, guiObject* object)
       {
          if(activeWater)
          {  
-            int i;
-            i = activeWater->addPlane(wX-2, wY-1, wZ-2, 
-                                      wX+2, wY-1, wZ+2,
-                                      1, 0, PLANE_NO_INCLINATION);
-            activePlane = activeWater->getPlane(i);
+            activePlane = activeWater->addPlane(wX-2, wY-1, wZ-2, 
+                                                wX+2, wY-1, wZ+2,
+                                                1, 0, PLANE_NO_INCLINATION);
             defineValues();
          }
          return(true);
@@ -482,7 +480,7 @@ void waterWindow::drawTemporary()
    if(activePlane != NULL)
    {
       glDisable(GL_LIGHTING);
-      glColor3f(0,0,0);
+      glColor3f(1.0,0.0,0.0);
       glBegin(GL_QUADS);
       if(activePlane->inclination == PLANE_NO_INCLINATION)
       {

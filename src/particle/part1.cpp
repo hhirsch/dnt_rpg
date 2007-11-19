@@ -16,6 +16,7 @@ part1::part1(float cX,float cY,float cZ, string fileName):
    centerZ = cZ;
    actualParticles = 0;
    actualPlanes = 0;
+   intersections = NULL;
    partTexture = LoadTexture("../data/particles/water.png");
 }
 
@@ -218,25 +219,37 @@ GLuint part1::LoadTexture(string fileName)
 /****************************************************************************
  *                               addPlane                                   *
  ****************************************************************************/
-int part1::addPlane(float x1, float y1, float z1, 
-                    float x2, float y2, float z2,
-                    float dX, float dZ, int inclination)
+interPlane* part1::addPlane(float x1, float y1, float z1, 
+                            float x2, float y2, float z2,
+                            float dX, float dZ, int inclination)
 {
-   if(actualPlanes < PART1_MAX_PLANES)
+   interPlane* ip = new interPlane;
+   ip->x1 = x1;
+   ip->y1 = y1;
+   ip->z1 = z1;
+   ip->x2 = x2;
+   ip->y2 = y2;
+   ip->z2 = z2;
+   ip->dX = dX;
+   ip->dZ = dZ;
+   ip->inclination = inclination;
+
+   if(actualPlanes == 0)
    {
-      intersections[actualPlanes].x1 = x1;
-      intersections[actualPlanes].y1 = y1;
-      intersections[actualPlanes].z1 = z1;
-      intersections[actualPlanes].x2 = x2;
-      intersections[actualPlanes].y2 = y2;
-      intersections[actualPlanes].z2 = z2;
-      intersections[actualPlanes].dX = dX;
-      intersections[actualPlanes].dZ = dZ;
-      intersections[actualPlanes].inclination = inclination;
-      actualPlanes++;
-      return(actualPlanes-1);
+      ip->next = ip;
+      ip->previous = ip;
    }
-   return(-1);
+   else
+   {
+      ip->next = intersections;
+      ip->previous = intersections->previous;
+      ip->next->previous = ip;
+      ip->previous->next = ip;
+   }
+
+   intersections = ip;
+   actualPlanes++;
+   return(ip);
 }
 
 /****************************************************************************
@@ -247,57 +260,77 @@ bool part1::intersectPlanes(particle* part, float* dX, float* dZ)
    int i;
    float yOnPlane = 0;
    float size;
+   interPlane* ip = intersections;
    for(i = 0; i < actualPlanes; i++)
    {
-      if( (part->posX <= intersections[i].x2) && 
-          (part->posX >= intersections[i].x1) &&
-          (part->posZ <= intersections[i].z2) && 
-          (part->posZ >= intersections[i].z1) )
+      if( (part->posX <= ip->x2) && 
+          (part->posX >= ip->x1) &&
+          (part->posZ <= ip->z2) && 
+          (part->posZ >= ip->z1) )
       {
-         switch(intersections[i].inclination)
+         switch(ip->inclination)
          { 
              case PLANE_NO_INCLINATION: 
-                   yOnPlane = intersections[i].y1;
+                   yOnPlane = ip->y1;
              break;
              case PLANE_INCLINATION_X:
              {
-                size = (intersections[i].x2 - intersections[i].x1);
-                yOnPlane = ((intersections[i].x2 - part->posX) / size) * 
-                             intersections[i].y1 +
-                           ((part->posX - intersections[i].x1) / size) * 
-                             intersections[i].y2;
+                size = (ip->x2 - ip->x1);
+                yOnPlane = ((ip->x2 - part->posX) / size) * ip->y1 +
+                           ((part->posX - ip->x1) / size) * ip->y2;
              }
              break;
              case PLANE_INCLINATION_Z:
              {
-                size = (intersections[i].z2 - intersections[i].z1);
-                yOnPlane = ((intersections[i].z2 - part->posZ) / size) * 
-                             intersections[i].y1 +
-                           ((part->posZ - intersections[i].z1) / size) * 
-                             intersections[i].y2;
+                size = (ip->z2 - ip->z1);
+                yOnPlane = ((ip->z2 - part->posZ) / size) * ip->y1 +
+                           ((part->posZ - ip->z1) / size) * ip->y2;
              }
              break;
          }
          if( ((part->posY >= yOnPlane - 1) && (part->posY <= yOnPlane + 1)) )
              
          {
-            *dX = intersections[i].dX;
-            *dZ = intersections[i].dZ;
+            *dX = ip->dX;
+            *dZ = ip->dZ;
             return(true);
          }
          /*else if (((part->posY <= yOnPlane +1) && (part->prvY >= yOnPlane -1) ))
          {
             printf("Alguem\n");
             part->posY = yOnPlane;
-            *dX = intersections[i].dX;
-            *dZ = intersections[i].dZ;
+            *dX = ip->dX;
+            *dZ = ip->dZ;
             return(true);
          }*/
          /*else
          { printf("prv: %.3f act: %.3f onP: %.3f",part->prvY,part->posY,yOnPlane); }*/
       }
+      ip = ip->next;
    }
    return(false);
+}
+
+/****************************************************************************
+ *                              removePlane                                 *
+ ****************************************************************************/
+void part1::removePlane(interPlane* ip)
+{
+   if(ip)
+   {
+      if(intersections == ip)
+      {
+         intersections = ip->next;
+      }
+      ip->next->previous = ip->previous;
+      ip->previous->next = ip->next;
+      delete(ip);
+      actualPlanes--;
+      if(actualPlanes == 0)
+      {
+         intersections = NULL;
+      }
+   }
 }
 
 /****************************************************************************
@@ -305,7 +338,11 @@ bool part1::intersectPlanes(particle* part, float* dX, float* dZ)
  ****************************************************************************/
 void part1::removeCharacterPlanes()
 {
-   actualPlanes -= 4;
+   int i;
+   for(i=0; i < 4; i++)
+   {
+      removePlane(intersections);
+   }
 }
 
 /****************************************************************************
@@ -313,6 +350,23 @@ void part1::removeCharacterPlanes()
  ****************************************************************************/
 void part1::removeLastPlane()
 {
-   actualPlanes--;
+   removePlane(intersections);
 }
+
+/****************************************************************************
+ *                             getTotalPlanes                               *
+ ****************************************************************************/
+int part1::getTotalPlanes()
+{
+   return(actualPlanes);
+}
+
+/****************************************************************************
+ *                              getLastPlane                                *
+ ****************************************************************************/
+interPlane* part1::getLastPlane()
+{
+   return(intersections);
+}
+
 

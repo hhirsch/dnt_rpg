@@ -616,12 +616,13 @@ void partSystem::saveToFile(string fileName)
       {
          fprintf(file,"%d\n",wt->getTotalPlanes());
       }
+      plane = wt->getLastPlane();
       for(p = 0; p < wt->getTotalPlanes(); p++)
       {
-         plane = wt->getPlane(p);
          fprintf(file,"%f %f %f %f %f %f %f %f %d\n", plane->x1, plane->y1, 
                  plane->z1, plane->x2, plane->y2, plane->z2, plane->dX, 
                  plane->dZ, plane->inclination);
+         plane = plane->next;
       }
       wt = (part1*)wt->next;
    }
