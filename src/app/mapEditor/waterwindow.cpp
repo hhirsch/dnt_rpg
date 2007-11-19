@@ -421,9 +421,37 @@ bool waterWindow::eventGot(int type, guiObject* object)
          }
          return(true);
       }
-
-      //TODO others controllers
-
+      else if(object == (guiObject*)buttonNextPlane)
+      {
+         if(activePlane)
+         {
+            activePlane = activePlane->next;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonPreviousPlane)
+      {
+         if(activePlane)
+         {
+            activePlane = activePlane->previous;
+         }
+         return(true);
+      }
+      else if(object == (guiObject*)buttonDestroyPlane)
+      {
+         if((activeWater) && (activePlane))
+         {
+            interPlane* tmpPlane = NULL;
+            if(activePlane != activePlane->previous)
+            {
+               tmpPlane = activePlane->previous;
+            }
+            activeWater->removePlane(activePlane);
+            activePlane = tmpPlane;
+            defineValues();
+         }
+         return(true);
+      }
    }
    else if(type == ON_PRESS_BUTTON)
    {
