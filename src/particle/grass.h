@@ -11,6 +11,8 @@
 using namespace std;
 
 
+#define GRASS_INFLUENCE_AREA    30   /**< The Influence area */
+
 class quadPos
 {
    public:
@@ -20,6 +22,7 @@ class quadPos
               x4, y4, z4;
 };
 
+/*! The Grass Particle System */
 class grass:public particleSystem
 {
 public:
@@ -88,7 +91,7 @@ public:
        ***************************************************************/
       void NextStep(GLfloat matriz[6][4],
                     GLfloat pcPosX, GLfloat pcPosY, GLfloat pcPosZ,
-                    wind& affectWind);
+                    wind* affectWind);
       /*!
        ***************************************************************
        * Gets total living particles.
@@ -157,9 +160,16 @@ public:
       GLuint grassTexture;  /**< Load Texture used to grass */
       GLfloat scaleFactor;  /**< Scale factor of the grass */
 
-      GLfloat resX, 
-              resY, 
-              resZ;
+      wind* internalWind;   /**< Internal wind */
+
+
+      GLfloat resX,         /**< Result X position after first rotation */
+              resY,         /**< Result Y Position after first rotation */
+              resZ;         /**< Result Z position after first rotation */
+
+      GLfloat pcX,          /**< PC X position */
+              pcY,          /**< PC Y Position */
+              pcZ;          /**< PC Z Position */
 
       quadPos* partPosition; /**< Each particle position after the
                                   initial rotation around the Y axys */

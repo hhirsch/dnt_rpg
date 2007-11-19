@@ -747,7 +747,7 @@ void editor::draw()
 
    /* Draw Particles */
    glPushMatrix();
-     particleSystem->actualizeAll(0,0,0,visibleMatrix, true);
+     particleSystem->actualizeAll(xReal,yReal,zReal,visibleMatrix, true);
    glPopMatrix();
    glDisable(GL_FOG);
 
@@ -815,7 +815,6 @@ void editor::draw()
  *********************************************************************/
 void editor::doEditorIO()
 {
-   GLdouble xReal,yReal,zReal;
    GLfloat wx, wy, wz;
 
    wx = mouseX; wy = 600-mouseY; 

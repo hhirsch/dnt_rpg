@@ -64,6 +64,8 @@ class editor
           mouseY;                    /**< Mouse Y position */
       bool quit;                     /**< Quit Editor Flag */
 
+      GLdouble xReal,yReal,zReal;
+
       sun* gameSun;                  /**< The Sun on Game */
       sky* gameSky;                  /**< The Sky on Game */
       GLfloat hour;                  /**< Current Sun Hour */

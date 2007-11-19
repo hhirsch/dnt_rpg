@@ -28,6 +28,10 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
    scaleFactor = scale;
    usedMap = NULL;
 
+   pcX = -1;
+   pcY = -1;
+   pcZ = -1;
+
 
    /* Load Texture */
    grassFileName = fileName;
@@ -194,7 +198,36 @@ void grass::EndRender()
  **************************************************************************/
 void grass::actualize(particle* part)
 {
-   part->R += deg2Rad(part->size);
+   bool done = false;
+   /* Verify the PC Influence */
+   if( (pcX > 0) && /*(pcY > 0) &&*/ (pcZ > 0) )
+   {
+      /* Verify if is inner the influence area */
+      if( (part->posX >= pcX - GRASS_INFLUENCE_AREA) &&
+          (part->posX <= pcX + GRASS_INFLUENCE_AREA) && 
+          /*(part->posY >= pcY - GRASS_INFLUENCE_AREA) &&
+          (part->posY <= pcY + GRASS_INFLUENCE_AREA) &&*/
+          (part->posZ >= pcZ - GRASS_INFLUENCE_AREA) &&
+          (part->posZ <= pcZ + GRASS_INFLUENCE_AREA)
+        )
+      {
+         done =true;
+         /* Verify if is left or right */
+         /*if(part->posX <= pcX)
+         {*/
+            part->R = deg2Rad(-85);
+         /*}
+         else
+         {  
+            part->R = deg2Rad(85);
+         }*/
+      }
+   }
+
+   if(!done)
+   {
+      part->R += deg2Rad(part->size);
+   }
 
    if(part->R <= part->prvR - ROT_MAX)
    {
@@ -258,11 +291,14 @@ void grass::createParticle(particle* part)
  **************************************************************************/
 void grass::NextStep(GLfloat matriz[6][4], 
                      GLfloat pcPosX, GLfloat pcPosY, GLfloat pcPosZ,
-                     wind& affectWind)
+                     wind* affectWind)
 {
    seconds = 0.02;
 
-   //TODO get wind and character position
+   internalWind = affectWind;
+   pcX = pcPosX;
+   pcY = pcPosY;
+   pcZ = pcPosZ;
 
    DoStep(matriz);
 }
