@@ -39,9 +39,6 @@ bool potentAgent::defineNextPosition()
    GLfloat fZ = 0;
    GLfloat dX;
    GLfloat dZ;
-   GLfloat dist;
-   GLfloat cosA, senA;
-   GLfloat force;
 
    min1[0] = x1+actualX;
    min1[1] = 0;
@@ -63,35 +60,23 @@ bool potentAgent::defineNextPosition()
       dX = obstacles[aux].x - actualX;
       dZ = obstacles[aux].z - actualZ;
       
-      dist = sqrt( (dX*dX) + (dZ*dZ));
-      cosA = dX / dist;
-      senA = dZ / dist;
-
       if(intercepts(min1, max1, min2, max2, 1))
       {
-         force = -kc*dist;
+         fX += -kc*dX;
+         fZ += -kc*dZ;
       }
       else
       {
-         force = -kr / dist;
+         fX += -kr/dX;
+         fZ += -kr/dZ;
       }
-      fX += force*cosA;
-      fZ += force*senA;
-      //printf("force: %.3f dist: %.3f\n",force, dist);
    }
 
    //Sum Goal
    dX = (destinyX - actualX);
    dZ = (destinyZ - actualZ);
-   dist = sqrt( (dX*dX) + (dZ*dZ));
-   cosA = dX / dist;
-   senA = dZ / dist;
-   force = ka * dist;
-   fX += force*cosA;
-   fZ += force*senA;
-
-   //printf("KA: force: %.3f dist: %.3f\n",force, dist);
-   //printf("fx: %.3f fz:%.3f\n",fX, fZ);
+   fX += ka*dX;
+   fZ += ka*dX;
 
    dX = 0;
    dZ = 0;

@@ -118,7 +118,7 @@ bool pattAgent::defineNextPosition()
    }
 
   
-   /* Actualize position, making sure that goes exactly to the waypoint */
+   /* Update position, making sure that goes exactly to the waypoint */
    if( ((xInc > 0) && (actualX + xInc > actualWayPoint->x)) ||
        ((xInc < 0) && (actualX + xInc < actualWayPoint->x)) ||
        (xInc == 0))
