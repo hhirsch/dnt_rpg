@@ -531,6 +531,10 @@ SOURCE=.\src\app\mapEditor\wall.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\app\mapEditor\waterwindow.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\particle\wave.cpp
 # End Source File
 # Begin Source File
@@ -888,6 +892,10 @@ SOURCE=.\src\engine\util.h
 # Begin Source File
 
 SOURCE=.\src\app\mapEditor\wall.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\app\mapEditor\waterwindow.h
 # End Source File
 # Begin Source File
 
