@@ -954,6 +954,10 @@ void engine::redmensionateWindow(SDL_Surface *screen, int actualFarView)
    glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
    glMatrixMode (GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
+   glEnable (GL_LINE_SMOOTH);
+   glHint (GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
+   glLineWidth (1.5);
 }
 
 /*********************************************************************
