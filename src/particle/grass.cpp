@@ -3,8 +3,8 @@
 #include "../map/map.h"
 #include "../engine/util.h"
 
-#define ROT_STEP 0.05
-#define ROT_MAX  deg2Rad(10)
+#define ROT_STEP 0.5
+#define ROT_MAX  deg2Rad(4)
 
 /**************************************************************************
  *                             Constructor                                *
