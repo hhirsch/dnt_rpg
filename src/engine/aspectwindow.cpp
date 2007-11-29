@@ -9,6 +9,9 @@
  **************************************************************/
 aspectWindow::aspectWindow(character* dude, interface* inter)
 {
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
+
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
 
@@ -17,7 +20,8 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    loadImages();
 
    usedCharacter = dude;
-   intWindow = inter->insertWindow(275,206,532,315,gettext("Aspect"));
+   intWindow = inter->insertWindow(centerX-129,centerY-55,centerX+129,centerY+55,
+                                   gettext("Aspect"));
 
    /* Portrait Figure */
    figurePortrait = intWindow->getObjectsList()->insertPicture(5,18,0,0,NULL);

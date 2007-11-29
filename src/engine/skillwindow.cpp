@@ -11,6 +11,9 @@
 skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
                          int actualLevel)
 {
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
+
    char tmp[5];
    string saux;
    int aux;
@@ -33,7 +36,8 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
    }
    
    /* Create Skill Window */
-   intWindow = inter->insertWindow(276,186,539,441, gettext("Skills"));
+   intWindow = inter->insertWindow(centerX-132,centerY-128,centerX+132,centerY+128,
+                                   gettext("Skills"));
 
    /* Free Points */
    sprintf(tmp,"%d",avaiblePoints);

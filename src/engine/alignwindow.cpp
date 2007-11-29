@@ -9,6 +9,9 @@
  ************************************************************************/
 alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
 {
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
+
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
    
@@ -24,7 +27,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(270,186,537,444,
+   intWindow = inter->insertWindow(centerX-134,centerY-129,centerX+134,centerY+129,
                                   gettext("Tendency & Alignment"));
 
    /* Align Image */

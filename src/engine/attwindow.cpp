@@ -13,6 +13,8 @@
 attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                      int modifiers[6],bool usePreviousValues)
 {
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
    int i;
    string saux;
    char tmp[16];
@@ -34,7 +36,8 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    }
 
    /* create intWindow */
-   intWindow = inter->insertWindow(140,166,665,444,gettext("Attributes"));
+   intWindow = inter->insertWindow(centerX-263,centerY-139,centerX+263,centerY+139,
+                                   gettext("Attributes"));
 
    /* roll and write all rolled dices to string */
    if(!usePreviousValues)
