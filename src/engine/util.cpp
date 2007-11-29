@@ -302,7 +302,7 @@ void draw3DMode(int actualFarView)
 {
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, SCREEN_X / SCREEN_Y, 1.0, actualFarView);
+   gluPerspective(45.0, SCREEN_X / (float)SCREEN_Y, 1.0, actualFarView);
    glMatrixMode (GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }

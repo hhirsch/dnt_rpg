@@ -552,11 +552,11 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    /* Set the Farview to indoor or outdoor */
    if(actualMap->isOutdoor())
    {
-      redmensionateWindow(actualScreen, FARVIEW);
+      redefineWindow(actualScreen, FARVIEW);
    }
    else
    {
-      redmensionateWindow(actualScreen, INDOOR_FARVIEW);
+      redefineWindow(actualScreen, INDOOR_FARVIEW);
    }
 
    glEnable(GL_LIGHTING);
@@ -943,14 +943,14 @@ int engine::CharacterScreen(GLuint idTextura)
 
 
 /*********************************************************************
- *                  redmensionate Window to Screen                   *
+ *                     redefine Window to Screen                     *
  *********************************************************************/
-void engine::redmensionateWindow(SDL_Surface *screen, int actualFarView)
+void engine::redefineWindow(SDL_Surface *screen, int actualFarView)
 {
    glViewport (0, 0, SCREEN_X, SCREEN_Y);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, SCREEN_X / SCREEN_Y, 1.0, 
+   gluPerspective(45.0, SCREEN_X / (float)SCREEN_Y, 1.0, 
                   actualFarView);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glGetFloatv(GL_MODELVIEW_MATRIX, camProj);
@@ -968,7 +968,7 @@ void engine::redmensionateWindow(SDL_Surface *screen, int actualFarView)
 void engine::Init(SDL_Surface *screen)
 {
    actualScreen = screen;  
-   redmensionateWindow(screen, FARVIEW);
+   redefineWindow(screen, FARVIEW);
    
    /* Clear */
    glClearColor (0.0, 0.0, 0.0, 0.0);
@@ -1822,6 +1822,10 @@ int engine::treatIO(SDL_Surface *screen)
    Uint32 tempo;             // Actual Time
    GLfloat varX, varZ;        // to avoid GLfloat calculate
    character* activeCharacter = PCs->getActiveCharacter();
+   Uint8 *keys;
+   int x,y;
+   int guiEvent;
+   Uint8 Mbutton;
 
    GLfloat varTempo;  // Time Variation
    
@@ -1841,23 +1845,22 @@ int engine::treatIO(SDL_Surface *screen)
          hour = 0.0;
       }
       hourToTxt();
+      lastRead = tempo;
+      guiEvent = 0;
 
       SDL_PumpEvents();
-      lastRead = tempo;
+      
         
       /* Keyboard Events */
-      Uint8 *keys;
       keys = SDL_GetKeyState(NULL);
 
-      int x,y;
-      int guiEvent = 0;
-      Uint8 Mbutton = SDL_GetMouseState(&x,&y);
+      Mbutton = SDL_GetMouseState(&x,&y);
       mouseX = x;
       mouseY = y;
-      
-      if( (tempo-lastMouse>=  REFRESH_RATE ) || 
-          ( (Mbutton & SDL_BUTTON(1)) && 
-	    (tempo-lastMousePression >= REFRESH_RATE)) )
+
+      if( (tempo-lastMouse >=  REFRESH_RATE ) || 
+          ( (Mbutton & SDL_BUTTON(1) ) && 
+	       (tempo-lastMousePression >= REFRESH_RATE)) )
       {
          cursors->setActual(CURSOR_WALK);
          lastMouse = tempo;

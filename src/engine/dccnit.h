@@ -236,7 +236,7 @@ class engine
        * \param screen -> Pointer to the Screen's Surface
        * \param actualFarView -> FarView Value
        ***************************************************************/
-      void redmensionateWindow(SDL_Surface *screen, int actualFarView);
+      void redefineWindow(SDL_Surface *screen, int actualFarView);
 
       /*!
        *************************************************************** 

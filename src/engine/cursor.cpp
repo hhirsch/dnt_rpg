@@ -70,7 +70,7 @@ SDL_Surface* cursor::getActual()
  *****************************************************************/
 void cursor::draw(int mouseX, int mouseY)
 {
-   glRasterPos2f(mouseX, 600 - mouseY);
+   glRasterPos2f(mouseX, SCREEN_Y - mouseY);
    glPixelZoom(1.0, -1.0);
    glDrawPixels(actualCursor->w, actualCursor->h, GL_RGBA, GL_UNSIGNED_BYTE, 
                 actualCursor->pixels);
