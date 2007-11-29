@@ -6,6 +6,9 @@
 raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
                        race** retRace)
 {
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
+
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
 
@@ -24,7 +27,8 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(90,100,710,499, gettext("Race"));
+   intWindow = inter->insertWindow(centerX-310,centerY-200,centerX+310,centerY+200,
+                                   gettext("Race"));
 
    /* Race Image */
    intWindow->getObjectsList()->insertTextBox(278,18,344,345,2,"");

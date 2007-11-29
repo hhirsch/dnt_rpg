@@ -8,6 +8,9 @@
 classWindow::classWindow(classes* cls, skills* sk, interface* inter, 
                          classe** retClass)
 {
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
+
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
    
@@ -26,7 +29,9 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(90,100,710,499,gettext("Class"));
+   intWindow = inter->insertWindow(centerX-310,centerY-200,centerX+310,centerY+200,
+                                   gettext("Class"));
+
    /* Class Image */
    intWindow->getObjectsList()->insertTextBox(5,18,73,364,2,"");
    classImage = intWindow->getObjectsList()->insertPicture(7,20,0,0,NULL);   
