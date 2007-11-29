@@ -304,6 +304,9 @@ void engine::loadPCs()
  *********************************************************************/
 int engine::LoadMap(string arqMapa, int RecarregaPCs)
 {
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
+
    char texto[512];
    string arqVelho = "nada";
    curConection = NULL;
@@ -330,18 +333,13 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    color_Set(200,20,20);
    defineFont(FMINI,ALIGN_CENTER,1);
    sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
-   write(img,128,0,texto);
    GLuint texturaTexto;
-   setTextureRGBA(img,&texturaTexto);
-   fadeInTexture(texturaCarga, 272,236,527,363);
+   fadeInTexture(texturaCarga, centerX-128,centerY-64,centerX+127,centerY+63,256,128);
 
    actualizeFrustum(visibleMatrix,proj,modl);
-   textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,256,128,
-                   0.01);
-   textureToScreen(texturaTexto,proj,modl,viewPort,272,365,527,396,256,128,
-                   0.01);
-   glFlush();
-   SDL_GL_SwapBuffers();
+   showLoading(img,&texturaTexto,texturaCarga,
+                         texto,
+                         proj, modl, viewPort);
 
    /* Loading Map */
    if(actualMap) 
@@ -542,7 +540,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                  proj, modl, viewPort);
 
    glDisable(GL_LIGHTING);
-   fadeOutTexture(texturaCarga, 272,236,527,363);
+   fadeOutTexture(texturaCarga,centerX-128,centerY-64,centerX+127,centerY+63, 256,128);
 
    /* Free Loading Textures */
    SDL_FreeSurface(img);
@@ -567,7 +565,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 /*********************************************************************
  *                            fadeInTexture                          *
  *********************************************************************/
-void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2)
+void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2,
+                           int sizeX, int sizeY)
 {
    int i;
    for(i=0; i < 50; i++)
@@ -576,7 +575,7 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2)
               | GL_STENCIL_BUFFER_BIT);
       actualizeFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
-      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,800,600,0.012);
+      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,sizeX,sizeY,0.012);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -587,7 +586,8 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2)
 /*********************************************************************
  *                            fadeOutTexture                         *
  *********************************************************************/
-void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2)
+void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2,
+                            int sizeX, int sizeY)
 {
    int i;
    for(i=49; i >= 0; i--)
@@ -596,7 +596,7 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2)
               | GL_STENCIL_BUFFER_BIT);
       actualizeFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
-      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,800,600,0.012);
+      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,sizeX,sizeY,0.012);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -622,7 +622,7 @@ void engine::SplashScreen()
    SDL_FreeSurface(img);
 
    /* Fade In Screen */
-   fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1);
+   fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
 
    /* Wait until Mouse Button pressed or time passed */
    while( (!(mButton & SDL_BUTTON(1))) && 
@@ -641,7 +641,7 @@ void engine::SplashScreen()
       SDL_Delay(50);
    }
 
-   fadeOutTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1);
+   fadeOutTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);
@@ -3139,7 +3139,7 @@ void engine::showImage(string fileName)
    setTextureRGBA(img,&id);
    SDL_FreeSurface(img);
 
-   fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1);
+   fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
 
    /* Wait until Mouse Button pressed */
    while(!(mButton & SDL_BUTTON(1)))
@@ -3151,7 +3151,7 @@ void engine::showImage(string fileName)
       SDL_Delay(50);
    }
 
-   fadeOutTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1);
+   fadeOutTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
    
    glEnable(GL_LIGHTING);
    glDeleteTextures(1,&id);

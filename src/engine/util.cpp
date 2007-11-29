@@ -8,9 +8,11 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
                  GLuint texturaCarga, const char* texto,
                  GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
 {
+   int centerY = SCREEN_Y / 2;
+   int centerX = SCREEN_X / 2;
+
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-   glDeleteTextures(1,texturaTexto);
    color_Set(0,0,0);
    rectangle_Fill(img,0,0,255,31);
    color_Set(200,20,20);
@@ -18,12 +20,15 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    write(img,128,0,texto);
    setTextureRGBA(img,texturaTexto);
    
-   textureToScreen(texturaCarga,proj,modl,viewPort,272,236,527,363,256,128,
+   textureToScreen(texturaCarga,proj,modl,viewPort,
+                   centerX-128,centerY-64,centerX+127,centerY+63,256,128,
                    0.01);
-   textureToScreen(*texturaTexto,proj,modl,viewPort,272,365,527,396,256,128,
+   textureToScreen(*texturaTexto,proj,modl,viewPort,
+                   centerX-128,centerY+65,centerX+127,centerY+96,256,128,
                    0.01);
    glFlush();
    SDL_GL_SwapBuffers();
+   glDeleteTextures(1,texturaTexto);
 }
 
 /*********************************************************************

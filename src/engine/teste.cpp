@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 
    /* Call Initial Screen */
    glDisable(GL_LIGHTING);
-   Engine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1);
+   Engine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
    int result = Engine->InitialScreen(ON_INIT,tituloID,true);
    int estado = ON_INIT;
    int charCreation = 0;
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
           if( charCreation == CHAR_CONFIRM)
           {
              glDisable(GL_LIGHTING);
-             Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1);
+             Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
              Engine->LoadMap("../data/mapas/teste1.map",0);
           }
        }
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
          if(result == CONTINUE_GAME)
          {
             glDisable(GL_LIGHTING);
-            Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1);
+            Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
          }
          if(Engine->Run(screen) == 1)
          {
@@ -105,7 +105,7 @@ int main(int argc, char **argv)
          reloadMusic = true;
          glDisable(GL_LIGHTING);
 	      glDisable(GL_FOG);
-         Engine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1);
+         Engine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
          result = Engine->InitialScreen(estado,tituloID,reloadMusic);
       }
       else
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
    }
 
    glDisable(GL_LIGHTING);
-   Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1);
+   Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
 
    glDeleteTextures(1,&tituloID); 
 
