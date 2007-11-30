@@ -544,7 +544,6 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Free Loading Textures */
    SDL_FreeSurface(img);
-   glDeleteTextures(1,&texturaCarga);
    glDeleteTextures(1,&texturaTexto);
 
    /* Set the Farview to indoor or outdoor */
