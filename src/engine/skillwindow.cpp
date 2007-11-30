@@ -65,7 +65,7 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
                                                           ">",0);
    skillName = intWindow->getObjectsList()->insertTextBox(67,175,233,193,1,
                                 externalSkill->m_skills[curSkill].name.c_str());
-   skillName->setFont(FMINI,1,ALIGN_LEFT);
+   skillName->setFont(DNT_FONT_ARIAL, 10, 0);
 
    /* Skill Image */
    skFig = intWindow->getObjectsList()->insertPicture(13,175,0,0,NULL);
@@ -78,7 +78,7 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
    saux = tmp;
    txtPoints = intWindow->getObjectsList()->insertTextBox(111,198,133,216,1,
                                                    saux.c_str());
-   txtPoints->setFont(FMINI,1,ALIGN_LEFT);
+   txtPoints->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonSum = intWindow->getObjectsList()->insertButton(134,198,144,216,">",0);
    buttonDec = intWindow->getObjectsList()->insertButton(100,198,110,216,"<",0);
 

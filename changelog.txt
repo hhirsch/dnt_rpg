@@ -2,13 +2,14 @@
 |                Version 0.2                   |
 ================================================
  - Terrain texture splatting;
- - Meteors and FireSpheres;
  - Script Language for AI;
+ - Using SDL_ttf to write;
  - Workspace for compiling at M$ Visual C++ 6;
  - More Engine Optimizations;
  - Messages on world map;
  - Smooth Camera Moves;
  - Indoor Reflexions;
+ - Option to set screen resolution;
  - Don't let camera inner terrain;
  - Better Dynamic Lights Implementation;
  - More 3D Objects;
@@ -16,6 +17,7 @@
  - Rewrite the GUI Renderer;
  - Fully and scalable collision for the 3D models;
  - GNU gettext used for internationalization;
+ - Meteors and FireSpheres;
  - Put the code fully on English (instead of some
    places on english, others on portuguese);
  - New Sound Effects;

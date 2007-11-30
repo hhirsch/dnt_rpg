@@ -5,7 +5,7 @@
 #include "button.h"
 #include "draw.h"
 #include "window.h"
-#include "fonte.h"
+#include "dntfont.h"
 
 /***********************************************************
  *                       Constructor                       *
@@ -34,6 +34,7 @@ button::~button()
  ***********************************************************/
 void button::draw(bool pres, SDL_Surface* screen )
 {
+   dntFont font;
    int R1,R2,G1,G2,B1,B2; 
    if(pres) 
    {
@@ -77,16 +78,15 @@ void button::draw(bool pres, SDL_Surface* screen )
      ya++;
      xa+=2;
    }
-   defineFont(FFARSO,ALIGN_CENTER,1);
-   xa = ((xa+x2) /2);
+   font.defineFont(DNT_FONT_ARIAL, 12);
+   //xa = ((xa+x2) /2);
    
    /* Verify the arrows buttons */
    if(!getText().compare("\36") || !getText().compare("\37"))
    {
      ya -= 6;
    }
-   write(screen,xa,ya,getText().c_str());
-   defineFont(FFARSO,ALIGN_LEFT,1);
+   font.write(screen,xa,ya,getText().c_str());
 }
 
 /***********************************************************

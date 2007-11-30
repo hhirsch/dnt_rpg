@@ -56,7 +56,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    }
    rolledPoints = intWindow->getObjectsList()->insertTextBox(8,19,320,32,0,
                                                              saux.c_str());
-   rolledPoints->setFont(FFARSO, 2, ALIGN_CENTER);
+   rolledPoints->setFont(DNT_FONT_ARIAL, 14, 0);
    /* reroll button */
    rerollButton = intWindow->getObjectsList()->insertButton(323,17,386,34,
                                                   gettext("Roll"),0);
@@ -72,14 +72,14 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    intWindow->getObjectsList()->insertTextBox(9,50,85,63,0,gettext("Strength"));
    attPoints[0] = intWindow->getObjectsList()->insertTextBox(103,48,122,65,
                                                              1,"");
-   attPoints[0]->setFont(FMINI, 1, ALIGN_LEFT);
+   attPoints[0]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[0] = intWindow->getObjectsList()->insertButton(92,48,102,65,
                                                                 "<",0);
    attButtonNext[0] = intWindow->getObjectsList()->insertButton(123,48,133,65,
                                                                 ">",0);
    attTotals[0] = intWindow->getObjectsList()->insertTextBox(165,50,195,65,0,
                                                              "");
-   attTotals[0]->setFont(FTIMES, 1, ALIGN_LEFT);
+   attTotals[0]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[0] = intWindow->getObjectsList()->insertTextBox(196,47,226,62,0,
                                                     "");
    intWindow->getObjectsList()->insertPicture(135,41,0,0,
@@ -90,14 +90,14 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                               gettext("Dexterity"));
    attPoints[1] = intWindow->getObjectsList()->insertTextBox(103,82,123,99,
                                                              1,"");
-   attPoints[1]->setFont(FMINI, 1, ALIGN_LEFT);
+   attPoints[1]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[1] = intWindow->getObjectsList()->insertButton(92,82,102,99,
                                                                 "<",0);
    attButtonNext[1] = intWindow->getObjectsList()->insertButton(123,82,133,99,
                                                                 ">",0);
    attTotals[1] = intWindow->getObjectsList()->insertTextBox(165,84,195,99, 
                                                              0,"");
-   attTotals[1]->setFont(FTIMES, 1, ALIGN_LEFT);
+   attTotals[1]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[1] = intWindow->getObjectsList()->insertTextBox(196,81,226,96,0,
                                                     "");
    intWindow->getObjectsList()->insertPicture(135,75,0,0,
@@ -108,14 +108,14 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                               gettext("Constitution"));
    attPoints[2] = intWindow->getObjectsList()->insertTextBox(103,118,123,135,1,
                                                              "");
-   attPoints[2]->setFont(FMINI, 1, ALIGN_LEFT);
+   attPoints[2]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[2] = intWindow->getObjectsList()->insertButton(92,118,102,135,
                                                                 "<",0);
    attButtonNext[2] = intWindow->getObjectsList()->insertButton(123,118,133,135
                                                                 ,">",0);
    attTotals[2] = intWindow->getObjectsList()->insertTextBox(165,120,195,135,
                                                              0,"");
-   attTotals[2]->setFont(FTIMES, 1, ALIGN_LEFT);
+   attTotals[2]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[2] = intWindow->getObjectsList()->insertTextBox(196,117,226,132,0,
                                                     "");
    intWindow->getObjectsList()->insertPicture(135,109,0,0,
@@ -126,14 +126,14 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                               gettext("Intelligence"));
    attPoints[3] = intWindow->getObjectsList()->insertTextBox(103,152,122,169,
                                                              1,"");
-   attPoints[3]->setFont(FMINI, 1, ALIGN_LEFT);
+   attPoints[3]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[3] = intWindow->getObjectsList()->insertButton(92,152,102,169,
                                                                 "<",0);
    attButtonNext[3] = intWindow->getObjectsList()->insertButton(123,152,
                                                                 133,169,">",0);
    attTotals[3] = intWindow->getObjectsList()->insertTextBox(165,154,195,169,
                                                              0,"");
-   attTotals[3]->setFont(FTIMES, 1, ALIGN_LEFT);
+   attTotals[3]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[3] = intWindow->getObjectsList()->insertTextBox(196,151,226,166,0,
                                                     "");
    intWindow->getObjectsList()->insertPicture(135,143,0,0,
@@ -144,14 +144,14 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                               gettext("Wisdom"));
    attPoints[4] = intWindow->getObjectsList()->insertTextBox(103,186,123,203,
                                                              1,"");
-   attPoints[4]->setFont(FMINI, 1, ALIGN_LEFT);
+   attPoints[4]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[4] = intWindow->getObjectsList()->insertButton(92,186,102,203,
                                                                 "<",0);
    attButtonNext[4] = intWindow->getObjectsList()->insertButton(123,186,
                                                                 133,203,">",0);
    attTotals[4] = intWindow->getObjectsList()->insertTextBox(165,188,195,203,
                                                              0,"");
-   attTotals[4]->setFont(FTIMES, 1, ALIGN_LEFT);
+   attTotals[4]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[4] = intWindow->getObjectsList()->insertTextBox(196,185,226,200,
                                                            0,"");
    intWindow->getObjectsList()->insertPicture(135,177,0,0,
@@ -162,14 +162,14 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                               gettext("Charism"));
    attPoints[5] = intWindow->getObjectsList()->insertTextBox(103,220,123,237,1,
                                                              "");
-   attPoints[5]->setFont(FMINI, 1, ALIGN_LEFT);
+   attPoints[5]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[5] = intWindow->getObjectsList()->insertButton(92,220,102,237,
                                                                 "<",0);
    attButtonNext[5] = intWindow->getObjectsList()->insertButton(123,220,
                                                                 133,237,">",0);
    attTotals[5] = intWindow->getObjectsList()->insertTextBox(165,221,195,237,
                                                              0,"");
-   attTotals[5]->setFont(FTIMES, 1, ALIGN_LEFT);
+   attTotals[5]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[5] = intWindow->getObjectsList()->insertTextBox(196,219,226,234,
                                                            0,"");
    intWindow->getObjectsList()->insertPicture(135,211,0,0,
@@ -189,7 +189,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    /* Attribute Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(248,38,519,53,1,
                                              gettext("Attribute Description"));
-   textDescTitle->setFont(FMINI, 2, ALIGN_CENTER);
+   textDescTitle->setFont(DNT_FONT_ARIAL, 14, 0);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(248,54,519,245,
                       (externalSkill->m_skills[1].name + "||" +
@@ -453,7 +453,7 @@ int attWindow::assignAttMod(int att)
 
    attTotals[att]->setText(total);
    attMods[att]->setText(tmpMod);
-   attMods[att]->setFont(FFARSO,2,ALIGN_LEFT);
+   attMods[att]->setFont(DNT_FONT_ARIAL,14,0);
 
    return(attBonus);
 }

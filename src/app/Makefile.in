@@ -34,7 +34,7 @@ BIN = ../../bin/
 
 OBJSFNT = $(OBJSGUI) $(ENDENGINE)culling.o $(ENDENGINE)util.o
 
-all: parts fntEditor #partEditor DlgEditor dlgCompiler
+all: parts #fntEditor partEditor DlgEditor dlgCompiler
 
 fntEditor.o: fntEditor.cpp fntEditor.h
 	@printf "Making fntEditor.o... "

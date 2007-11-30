@@ -8,6 +8,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
                  GLuint texturaCarga, const char* texto,
                  GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
 {
+   dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
@@ -16,8 +17,8 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    color_Set(0,0,0);
    rectangle_Fill(img,0,0,255,31);
    color_Set(200,20,20);
-   defineFont(FMINI,ALIGN_CENTER,1);
-   write(img,128,0,texto);
+   fnt.defineFont(DNT_FONT_TIMES,12);
+   fnt.write(img,128,0,texto);
    setTextureRGBA(img,texturaTexto);
    
    textureToScreen(texturaCarga,proj,modl,viewPort,

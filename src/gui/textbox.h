@@ -7,7 +7,7 @@
 
 #include "color.h"
 #include "draw.h"
-#include "fonte.h"
+#include "dntfont.h"
 #include "guiobject.h"
 #include <string>
 using namespace std;

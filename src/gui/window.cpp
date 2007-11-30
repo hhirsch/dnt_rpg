@@ -246,12 +246,13 @@ void window::draw(int mouseX, int mouseY)
  *********************************************************************/
 void window::drawInactiveBar()
 {
+   dntFont fnt;
    int dx = x2-x1;
    color_Set(Colors.colorWindow.R,Colors.colorWindow.G,Colors.colorWindow.B);
    rectangle_Fill(surface,36,3,dx-3,12);
    color_Set(0,0,0);
-   defineFont(FFARSO,ALIGN_LEFT,1);
-   write(surface,39,-2,text.c_str());
+   fnt.defineFont(DNT_FONT_ARIAL,12);
+   fnt.write(surface,39,-2,text);
 }
 
 /*********************************************************************
@@ -259,12 +260,13 @@ void window::drawInactiveBar()
  *********************************************************************/
 void window::drawActiveBar()
 {
+   dntFont fnt;
    int dx = x2-x1;
    color_Set(Colors.colorBar.R,Colors.colorBar.G,Colors.colorBar.B);
    rectangle_Fill(surface,36,3,dx-3,12);
    color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
-   defineFont(FFARSO,ALIGN_LEFT,1);
-   write(surface,39,-2,text.c_str());
+   fnt.defineFont(DNT_FONT_ARIAL,12);
+   fnt.write(surface,39,-2,text);
 }
 
 /*********************************************************************

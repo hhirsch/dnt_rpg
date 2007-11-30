@@ -38,8 +38,9 @@ textBar::~textBar()
  ********************************************************************/
 void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
 {
-   defineFont(FFARSO,ALIGN_LEFT,1);
-   unsigned int maxCarac = ((x2-3)-(x1+3)) / (font_incCP()+1);
+   dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL,12);
+   unsigned int maxCarac = ((x2-3)-(x1+3)) / (fnt.getIncCP()+1);
    color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,
                Colors.colorCont[2].B);
    rectangle_Fill(screen,x1+1, y1+1, x2-1, y2-1);
@@ -64,8 +65,8 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
      end = text.length()-1;
    }
 
-   write(screen, x1+3, y1-2, text.c_str(), init, end);
-   int x = (x1+2)+ ((pos-init)*(font_incCP()));
+   fnt.write(screen, x1+3, y1-2, text.c_str(), init, end);
+   int x = (x1+2)+ ((pos-init)*(fnt.getIncCP()));
    if (marca)
    {
       line_Draw(screen,x,y1+3,x,y2-3);
@@ -89,7 +90,8 @@ void textBar::draw(SDL_Surface *screen)
  ********************************************************************/
 void textBar::defineCursorPosition(int mouseX, int mouseY)
 {
-   pos = (mouseX-(x1+2)) / (font_incCP());
+   dntFont fnt;
+   pos = (mouseX-(x1+2)) / (fnt.getIncCP());
    if(pos > text.length()) 
    {
       pos = text.length();

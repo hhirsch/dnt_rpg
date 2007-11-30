@@ -3,7 +3,7 @@
  */
 
 #include "rolbar.h"
-#include "fonte.h"
+#include "dntfont.h"
 #include "guilist.h"
 #include "interface.h"
 
@@ -15,6 +15,7 @@
 rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
                SDL_Surface* surface)
 {
+   dntFont fnt;
    wSurface = surface;
    lastActualized = SDL_GetTicks();
    if(!list)
@@ -24,14 +25,14 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    }
    intList = list;
 
-   defineFont(FMINI, ALIGN_LEFT, 1);
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
    type = GUI_ROL_BAR;
    x1 = xa;
    y1 = ya;
    x2 = xb;
    y2 = yb;
    maxLines = ((yb-ya) / 11)-1;
-   charPerLine = (xb-xa) / font_incCP();
+   charPerLine = (xb-xa) / fnt.getIncCP();
    
    guiList* l = (guiList*)list;
 
@@ -45,7 +46,7 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
 
    /* Texto */
    scrollText = l->insertTextBox(xa,ya,xb-13,yb,2,""); 
-   scrollText->setFont(FMINI, 1, ALIGN_LEFT);
+   scrollText->setFont(DNT_FONT_ARIAL, 10, 0);
    scrollText->setColor(246, 190, 190);
 
    actualPressed = NULL;
@@ -66,6 +67,7 @@ rolBar::~rolBar()
  *********************************************************************/
 bool rolBar::eventGot(int type, guiObject* object)
 {
+   dntFont fnt;
    if((SDL_GetTicks() - lastActualized) >= ACTUALIZE_RATE)
    {
       lastActualized = SDL_GetTicks();
@@ -79,7 +81,7 @@ bool rolBar::eventGot(int type, guiObject* object)
                actualEnd = actualInit + maxLines -1;
             }
             
-            scrollText->setText(copyLines(fullText, actualInit,actualEnd));
+            scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd));
             actualPressed = up;
             return(true);
          }
@@ -95,7 +97,7 @@ bool rolBar::eventGot(int type, guiObject* object)
                }
             }
 
-            scrollText->setText(copyLines(fullText, actualInit,actualEnd));
+            scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd));
             actualPressed = down;
             return(true);
          }
@@ -140,8 +142,9 @@ void rolBar::redraw()
  *********************************************************************/
 void rolBar::setText(string txt)
 {
+   dntFont fnt;
    fullText = txt;
-   totalLines = getTotalLines(fullText);
+   totalLines = fnt.getTotalLines(fullText);
    actualInit = 0;
    actualEnd = maxLines - 1;
    if(maxLines <= totalLines)
@@ -160,7 +163,7 @@ void rolBar::setText(string txt)
       position->setCoordinate(position->getX1(), y1+2,
                               position->getX2(), y2-26);
    }
-   scrollText->setText(copyLines(fullText, actualInit,actualEnd));
+   scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd));
 }
 
 /*********************************************************************
@@ -168,6 +171,7 @@ void rolBar::setText(string txt)
  *********************************************************************/
 void rolBar::addText(string txt)
 {
+   dntFont fnt;
    /* Add Text */
    fullText += txt;
    /* Set the new scrollText */
@@ -179,7 +183,7 @@ void rolBar::addText(string txt)
    {
       actualInit = 0;
    }
-   scrollText->setText(copyLines(fullText, actualInit,actualEnd));
+   scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd));
    redraw();
 }
 

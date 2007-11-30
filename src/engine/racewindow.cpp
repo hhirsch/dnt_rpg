@@ -38,7 +38,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    /* Race Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(6,18,277,35,1,
                                             gettext("Race Description"));
-   textDescTitle->setFont(FMINI,2,ALIGN_CENTER);
+   textDescTitle->setFont(DNT_FONT_COURRIER,14,0);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,
               (actualRace->citation + "||" + actualRace->description).c_str(),
@@ -47,7 +47,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    /* Race Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(345,18,615,35,1,
                                        gettext("Race Characteristcs"));
-   textCharacTitle->setFont(FMINI,2,ALIGN_CENTER);
+   textCharacTitle->setFont(DNT_FONT_COURRIER,14,0);
 
    textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,
                                               getCharacteristics().c_str(),
@@ -60,7 +60,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
                                                           ">",0);
    textName = intWindow->getObjectsList()->insertTextBox(22,346,599,364,1, 
                                                   actualRace->name.c_str());
-   textName->setFont(FMINI,1,ALIGN_CENTER);
+   textName->setFont(DNT_FONT_ARIAL,12,0);
 
    intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
 

@@ -16,7 +16,7 @@
 #include "cxsel.h"
 #include "window.h"
 #include "interface.h"
-#include "fonte.h"
+#include "dntfont.h"
 #include "healthBar.h"
 #include "textbox.h"
 #include "rolbar.h"

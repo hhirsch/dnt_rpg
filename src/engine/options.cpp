@@ -293,12 +293,12 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = tmp;
    qt = intWindow->getObjectsList()->insertTextBox(8,27,145,44,0,
                                          gettext("Music Volume:"));
-   qt->setFont(FMINI,1,ALIGN_LEFT);
+   qt->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonMusDec = intWindow->getObjectsList()->insertButton(146,27,156,44,
                                                             "<",0);
    txtMusicVolume = intWindow->getObjectsList()->insertTextBox(157,27,197,44,
                                                                1,saux.c_str());
-   txtMusicVolume->setFont(FMINI,1,ALIGN_LEFT);
+   txtMusicVolume->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonMusSum = intWindow->getObjectsList()->insertButton(198,27,208,44,
                                                             ">",0);
    intWindow->getObjectsList()->insertPicture(212,27,40,112,
@@ -310,12 +310,12 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = tmp;
    qt = intWindow->getObjectsList()->insertTextBox(8,52,145,69,0,
                                          gettext("Effects Volume:"));
-   qt->setFont(FMINI,1,ALIGN_LEFT);
+   qt->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonSndDec = intWindow->getObjectsList()->insertButton(146,52,156,69,
                                                             "<",0);
    txtSndfxVolume = intWindow->getObjectsList()->insertTextBox(157,52,197,69,1,
                                  saux.c_str());
-   txtSndfxVolume->setFont(FMINI,1,ALIGN_LEFT);
+   txtSndfxVolume->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonSndSum = intWindow->getObjectsList()->insertButton(198,52,208,69,
                                                             ">",0);
    intWindow->getObjectsList()->insertPicture(212,52,40,112,
@@ -327,12 +327,12 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = languageName();
    qt = intWindow->getObjectsList()->insertTextBox(8,88,145,105,0,
                                                    gettext("Language:"));
-   qt->setFont(FMINI,1,ALIGN_LEFT);
+   qt->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonLangDec = intWindow->getObjectsList()->insertButton(121,88,131,105,
                                                              "<",0);
    txtLanguage = intWindow->getObjectsList()->insertTextBox(132,88,197,105,1,
                                  saux.c_str());
-   txtLanguage->setFont(FMINI,1,ALIGN_LEFT);
+   txtLanguage->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonLangSum = intWindow->getObjectsList()->insertButton(198,88,208,105,
                                                              ">",0);
    intWindow->getObjectsList()->insertPicture(212,88,40,112,
@@ -343,12 +343,12 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = cameraName();
    qt = intWindow->getObjectsList()->insertTextBox(8,126,145,143,0,
                                             gettext("Camera Mode:"));
-   qt->setFont(FMINI,1,ALIGN_LEFT);
+   qt->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonCamDec = intWindow->getObjectsList()->insertButton(121,126,131,143,
                                                             "<",0);
    txtCamera = intWindow->getObjectsList()->insertTextBox(132,126,197,143,1,
                                  saux.c_str());
-   txtCamera->setFont(FMINI,1,ALIGN_LEFT);
+   txtCamera->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonCamSum = intWindow->getObjectsList()->insertButton(198,126,208,143,
                                                             ">",0);
    intWindow->getObjectsList()->insertPicture(214,126,40,112,
@@ -358,7 +358,7 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Grass Enabled or Not */
    qt = intWindow->getObjectsList()->insertTextBox(20,156,200,173,0,
                           gettext("Enable Grass Effects (need particles)"));
-   qt->setFont(FMINI,1,ALIGN_LEFT);
+   qt->setFont(DNT_FONT_ARIAL, 10, 0);
    cxSelGrass = intWindow->getObjectsList()->insertCxSel(8,160, enableGrass);
    intWindow->getObjectsList()->insertPicture(214,156,40,112,
                                   "../data/texturas/options/grass.png");
@@ -367,7 +367,7 @@ void options::DisplayOptionsScreen(interface* interf)
    /* Particle System Enabled or Not */
    qt = intWindow->getObjectsList()->insertTextBox(20,174,200,191,0,
                                          gettext("Enable Particles Effects"));
-   qt->setFont(FMINI,1,ALIGN_LEFT);
+   qt->setFont(DNT_FONT_ARIAL, 10, 0);
    cxSelParticles = intWindow->getObjectsList()->insertCxSel(8,178, 
                                                              enableParticles);
    intWindow->getObjectsList()->insertPicture(214,174,40,112,
@@ -378,12 +378,12 @@ void options::DisplayOptionsScreen(interface* interf)
    saux = reflexionName();
    qt = intWindow->getObjectsList()->insertTextBox(8,203,145,220,0,
                                             gettext("Reflections:"));
-   qt->setFont(FMINI,1,ALIGN_LEFT);
+   qt->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonReflDec = intWindow->getObjectsList()->insertButton(121,203,131,220,
                                                              "<",0);
    txtReflexion = intWindow->getObjectsList()->insertTextBox(132,203,197,220,1,
                                  saux.c_str());
-   txtReflexion->setFont(FMINI,1,ALIGN_LEFT);
+   txtReflexion->setFont(DNT_FONT_ARIAL, 10, 0);
    buttonReflSum = intWindow->getObjectsList()->insertButton(198,203,208,220,
                                                              ">",0);
    intWindow->getObjectsList()->insertPicture(212,203,40,220,

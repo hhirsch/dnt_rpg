@@ -53,7 +53,9 @@ void Farso_Init(SDL_Surface **screen, string title)
     SDL_EventState(SDL_VIDEORESIZE, SDL_IGNORE);
     SDL_EventState(SDL_VIDEOEXPOSE, SDL_IGNORE);
     SDL_EventState(SDL_USEREVENT, SDL_IGNORE);
-    
+
+    dntFont fnt;
+    fnt.init();
 }
 
 /************************************************************
@@ -61,6 +63,8 @@ void Farso_Init(SDL_Surface **screen, string title)
  ************************************************************/
 void Farso_End(SDL_Surface *screen)
 {
+   dntFont fnt;
+   fnt.end();
 }
 
 

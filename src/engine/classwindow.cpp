@@ -40,7 +40,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    /* Class Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(74,18,345,35,1,
                                            gettext("Class Description"));
-   textDescTitle->setFont(FMINI,2,ALIGN_CENTER);
+   textDescTitle->setFont(DNT_FONT_COURRIER, 10, 0);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(74,36,345,345,
              (actualClass->citation + "||" + actualClass->description).c_str(),
@@ -49,7 +49,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    /* Race Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(346,18,615,35,1,
                                        gettext("Class Characteristics"));
-   textCharacTitle->setFont(FMINI,2,ALIGN_CENTER);
+   textCharacTitle->setFont(DNT_FONT_COURRIER, 10, 0);
 
    textCharac = intWindow->getObjectsList()->insertRolBar(346,36,615,345,
                                               getCharacteristics().c_str(),
@@ -62,7 +62,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
                                                           ">",0);
    textName = intWindow->getObjectsList()->insertTextBox(90,346,599,364,1, 
                                                   actualClass->name.c_str());
-   textName->setFont(FMINI,1,ALIGN_CENTER);
+   textName->setFont(DNT_FONT_COURRIER,12,0);
 
    intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
 

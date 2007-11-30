@@ -6,7 +6,7 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJSPP = button.o color.o cxsel.o draw.o farso.o fonte.o guilist.o healthBar.o interface.o listtext.o menu.o messages.o mouse.o picture.o rolbar.o seltext.o tabbutton.o textbar.o textbox.o window.o
+OBJSPP = button.o color.o cxsel.o draw.o farso.o dntfont.o guilist.o healthBar.o interface.o listtext.o menu.o messages.o mouse.o picture.o rolbar.o seltext.o tabbutton.o textbar.o textbox.o window.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -63,9 +63,9 @@ picture.o: picture.h picture.cpp
 	@$(CC) $(CFLAGS) picture.cpp -o picture.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-fonte.o: fonte.h fonte.cpp
-	@printf "Making fonte.o... "
-	@$(CC) $(CFLAGS) fonte.cpp -o fonte.o
+dntfont.o: dntfont.h dntfont.cpp
+	@printf "Making dntfont.o... "
+	@$(CC) $(CFLAGS) dntfont.cpp -o dntfont.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 healthBar.o: healthBar.h healthBar.cpp

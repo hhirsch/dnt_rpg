@@ -63,7 +63,8 @@ void selText::draw(int selectedItem, SDL_Surface *screen)
 {
    int ya = y1+3;
    int aux;
-   defineFont(FHELVETICA,ALIGN_LEFT,1); 
+   dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL,10); 
    for(aux = 0; aux<5;aux++)
    {
       if(!optText[aux].empty())
@@ -77,7 +78,7 @@ void selText::draw(int selectedItem, SDL_Surface *screen)
             color_Set(Cores.colorSelText.R,Cores.colorSelText.G,
                         Cores.colorSelText.B);
          }
-         ya = write(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
+         ya = fnt.write(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
      }
      y[aux] = ya;
      ya += 11;
@@ -93,6 +94,7 @@ void selText::draw(int selectedItem, SDL_Surface *screen)
  ***************************************************************************/
 void selText::writeSelected(int selectedItem, SDL_Surface *screen)
 {
+   dntFont fnt;
    int ya;
    int aux;
    if(selectedItem != -1)
@@ -115,8 +117,8 @@ void selText::writeSelected(int selectedItem, SDL_Surface *screen)
          ya = y[selec-1]+11;
       color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    }
-   defineFont(FHELVETICA,ALIGN_LEFT,1);
-   write(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
+   fnt.defineFont(DNT_FONT_ARIAL,10);
+   fnt.write(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
    selec = selectedItem;
 }
 

@@ -9,7 +9,7 @@
 using namespace std;
 
 #include "draw.h"
-#include "fonte.h"
+#include "dntfont.h"
 #include "color.h"
 #include "mouse.h"
 #include "guiobject.h"

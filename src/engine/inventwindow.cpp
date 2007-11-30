@@ -129,6 +129,7 @@ void inventWindow::reDraw()
  **************************************************************/
 void inventWindow::openMenu(int x, int y, int type)
 {
+   dntFont fnt;
    int xSize;
    menuType = type;
    objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
@@ -148,9 +149,9 @@ void inventWindow::openMenu(int x, int y, int type)
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(gettext("Get"),1);
 
-   defineFont(FFARSO,ALIGN_LEFT,1);
+   fnt.defineFont(DNT_FONT_ARIAL,12);
 
-   xSize = objectMenu->getMaxCharac()*(font_incCP()+1)+6;
+   xSize = objectMenu->getMaxCharac()*(fnt.getIncCP()+1)+6;
 
    /* Make Sure all Menu is in Window */
    if(y+94 >= intWindow->getY2())

@@ -44,7 +44,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    buttonNext = intWindow->getObjectsList()->insertButton(248,19,262,37,">",0);
    textName = intWindow->getObjectsList()->insertTextBox(20,19,247,37,1, 
                                                   actualAlign->name.c_str());
-   textName->setFont(FMINI,1,ALIGN_LEFT);
+   textName->setFont(DNT_FONT_TIMES,10,0);
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(188,229,258,248, 

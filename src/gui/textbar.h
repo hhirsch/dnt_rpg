@@ -10,7 +10,7 @@
 #include <string.h>
 #include "color.h"
 #include "draw.h"
-#include "fonte.h"
+#include "dntfont.h"
 #include "mouse.h"
 #include "guiobject.h"
 

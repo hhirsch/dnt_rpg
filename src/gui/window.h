@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "draw.h"
 #include "color.h"
-#include "fonte.h"
+#include "dntfont.h"
 #include "guiobject.h"
 #include "guilist.h"
 

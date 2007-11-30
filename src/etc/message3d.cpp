@@ -1,5 +1,5 @@
 #include "message3d.h"
-#include "../gui/fonte.h"
+#include "../gui/dntfont.h"
 #include "../gui/draw.h"
 
 
@@ -26,6 +26,7 @@ message3d::message3d(GLfloat x, GLfloat y, GLfloat z, string msg,
 void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
                      GLfloat R, GLfloat G, GLfloat B)
 {
+   dntFont fnt;
    previous = NULL;
    next = NULL;
    posX = x;
@@ -34,11 +35,10 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    live = 0;
    message = msg;
 
-   int size = message.length()*(font_incCP()+1);
-   halfSize = (size / 2.0);
-
    /* Define the font and sizes */
-   defineFont(FTIMES, ALIGN_LEFT, 1);
+   fnt.defineFont(DNT_FONT_TIMES, 12);
+   int size = message.length()*(fnt.getIncCP()+1);
+   halfSize = (size / 2.0);
    color_Alpha(0);
    color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255));
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
@@ -48,7 +48,7 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    rectangle_Fill(s, 0, 0, smallestPowerOfTwo(size)-1, 32-1);
    color_Alpha(255);
    
-   write(s, 0, 0, message.c_str());
+   fnt.write(s, 0, 0, message.c_str());
 
    setTextureRGBA(s, &messageTexture);
 

@@ -304,6 +304,7 @@ void engine::loadPCs()
  *********************************************************************/
 int engine::LoadMap(string arqMapa, int RecarregaPCs)
 {
+   dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
@@ -331,7 +332,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    color_Set(0,0,0);
    rectangle_Fill(img,0,0,255,31);
    color_Set(200,20,20);
-   defineFont(FMINI,ALIGN_CENTER,1);
+   fnt.defineFont(DNT_FONT_TIMES,10);
    sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
    GLuint texturaTexto;
    fadeInTexture(texturaCarga, centerX-128,centerY-64,centerX+127,centerY+63,256,128);
@@ -3059,7 +3060,7 @@ void engine::OpenShortcutsWindow()
                                                gettext("Load"),0);
    hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,249,120,2,
                                                           "00:00");
-   hourTxt->setFont(FMINI,1,ALIGN_LEFT);
+   hourTxt->setFont(DNT_FONT_TIMES,10,0);
    hourToTxt();
 
    tabButton* tb;
