@@ -43,6 +43,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                                        Uint8* tecla, int* eventInfo)
 {
     int aux;
+    dntFont fnt;
 
     if(!objAtivo)
     {
@@ -256,7 +257,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                  objAtivo = (guiObject*) bot->men;
                  menu* men = (menu*)objAtivo;
                  men->setPosition(bot->getX1(),bot->getY2()+1);
-                 if (!bot->getText().compare("_"))
+                 if (!bot->getText().compare("-"))
                  {
                     focus = FOCUS_WINDOW_MENU;
                  }
@@ -265,7 +266,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                     focus = FOCUS_MENU;
                  }                 
               }
-              else if (!bot->getText().compare("*"))
+              else if (!bot->getText().compare(fnt.createUnicode(0x25CF)))
               {
                    /* Close Window */
                   if(ljan->getActiveWindow()->canCloseWindow())
