@@ -54,6 +54,7 @@ bool dntFont::defineFont(string fileName, int size)
       {
          activeFontName = "";
          activeFontSize = 0;
+         printf("Can't open font file: %s\n", fileName.c_str());
          return(false);
       }
    }
@@ -96,13 +97,16 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
          TTF_SizeUTF8(activeFont, strLine.c_str(), &w, &h);
          if(w >= maxWidth)
          {
-            /* So, if the width is bigger, write the string without the character */
-            writeSurface = TTF_RenderUTF8_Blended(activeFont, prvStr.c_str(), color);
+            /* So, if the width is bigger, write the string without 
+             * the character */
+            writeSurface = TTF_RenderUTF8_Blended(activeFont, prvStr.c_str(), 
+                                                  color);
 
-            /* Blit the result surface to the desired one on the desired position  */
+            /* Blit the result surface to the desired one on the desired 
+             * position  */
             strLine = text[aux];
             rect.y = curY;
-            SDL_BlitSurface(screen, NULL, writeSurface, &rect);
+            SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
             /* Avoid memory leacks */
             SDL_FreeSurface(writeSurface);
@@ -115,12 +119,14 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       {
          TTF_SizeUTF8(activeFont, prvStr.c_str(), &w, &h);
          /* | breaks a line */
-         writeSurface = TTF_RenderUTF8_Blended(activeFont, prvStr.c_str(), color);
+         writeSurface = TTF_RenderUTF8_Blended(activeFont, prvStr.c_str(),
+                                               color);
 
-         /* Blit the result surface to the desired one on the desired position  */
+         /* Blit the result surface to the desired one on the desired
+          * position  */
          strLine = text[aux];
          rect.y = curY;
-         SDL_BlitSurface(screen, NULL, writeSurface, &rect);
+         SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
          /* Avoid memory leacks */
          SDL_FreeSurface(writeSurface);
@@ -131,16 +137,16 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       }
    }
 
-   if(strLine != "")
+   if(!strLine.empty())
    {
       TTF_SizeUTF8(activeFont, prvStr.c_str(), &w, &h);
       /* Remaining things to write */
-      writeSurface = TTF_RenderUTF8_Blended(activeFont, prvStr.c_str(), color);
+      writeSurface = TTF_RenderUTF8_Blended(activeFont, strLine.c_str(), color);
 
       /* Blit the result surface to the desired one on the desired position  */
       strLine = text[aux];
       rect.y = curY;
-      SDL_BlitSurface(screen, NULL, writeSurface, &rect);
+      SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
       /* Avoid memory leacks */
       SDL_FreeSurface(writeSurface);
