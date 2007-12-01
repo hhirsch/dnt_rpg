@@ -39,6 +39,11 @@ class dntFont
       /*! Get the max width of the font (in a "gambiarra")  */
       int getIncCP();
 
+      /*! Get the string width
+       * \param s -> string to calculate width
+       * \return string width */
+      int getStringWidth(string s);
+
       /*! Write the Text on the Surface
        * \param screen -> surface where write the text
        * \param x -> X coordinate of the text

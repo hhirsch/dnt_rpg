@@ -40,7 +40,10 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
 {
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL,12);
-   unsigned int maxCarac = ((x2-3)-(x1+3)) / (fnt.getIncCP()+1);
+
+   //FIXME maxCaract calculation!
+
+   unsigned int maxCarac = ((x2-3)-(x1+3)) / (fnt.getIncCP());
    color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,
                Colors.colorCont[2].B);
    rectangle_Fill(screen,x1+1, y1+1, x2-1, y2-1);
@@ -65,10 +68,13 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
      end = text.length()-1;
    }
 
-   fnt.write(screen, x1+3, y1-2, text.c_str(), init, end);
-   int x = (x1+2)+ ((pos-init)*(fnt.getIncCP()));
+   fnt.write(screen, x1+3, y1+1, text.c_str(), init, end);
+
    if (marca)
    {
+      /* Calculate mark position */
+      string s = text.substr(init,init+pos);
+      int x = x1 + 2 + fnt.getStringWidth(s);
       line_Draw(screen,x,y1+3,x,y2-3);
    }
 }
@@ -91,6 +97,8 @@ void textBar::draw(SDL_Surface *screen)
 void textBar::defineCursorPosition(int mouseX, int mouseY)
 {
    dntFont fnt;
+   string s = text.substr(init,end);
+
    pos = (mouseX-(x1+2)) / (fnt.getIncCP());
    if(pos > text.length()) 
    {
@@ -405,7 +413,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = ';';
       }
       else 
-      if( teclas[SDLK_0])
+      if( (teclas[SDLK_0]) || (teclas[SDLK_KP0]) )
       {
           if (maiuscula)
             c = ')';
@@ -413,7 +421,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = '0';
       }
       else 
-      if( teclas[SDLK_1])
+      if( (teclas[SDLK_1])  || (teclas[SDLK_KP1]) )
       {
           if (maiuscula)
             c = '!';
@@ -421,7 +429,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = '1';
       }
       else 
-      if( teclas[SDLK_2])
+      if( (teclas[SDLK_2])  || (teclas[SDLK_KP2]) )
       {
           if (maiuscula)
             c = '@';
@@ -429,7 +437,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = '2';
       }
       else 
-      if( teclas[SDLK_3])
+      if( (teclas[SDLK_3])  || (teclas[SDLK_KP3]) )
       {
           if (maiuscula)
             c = '#';
@@ -437,7 +445,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = '3';
       }
       else 
-      if( teclas[SDLK_4])
+      if( (teclas[SDLK_4])  || (teclas[SDLK_KP4]) )
       {
           if (maiuscula)
             c = '$';
@@ -445,7 +453,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = '4';
       }
       else 
-      if( teclas[SDLK_5])
+      if( (teclas[SDLK_5])  || (teclas[SDLK_KP5]) )
       {
           if (maiuscula)
             c = '%';
@@ -453,7 +461,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = '5';
       }
       else 
-      if( teclas[SDLK_6])
+      if( (teclas[SDLK_6])  || (teclas[SDLK_KP6]) )
       {
           if (maiuscula)
             c = '"';
@@ -461,7 +469,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = '6';
       }
       else 
-      if( teclas[SDLK_7])
+      if( (teclas[SDLK_7])  || (teclas[SDLK_KP7]) )
       {
           if (maiuscula)
             c = '&';
@@ -469,7 +477,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = '7';
       }
       else 
-      if( teclas[SDLK_8])
+      if( (teclas[SDLK_8])  || (teclas[SDLK_KP8]) )
       {
           if (maiuscula)
             c = '*';
@@ -477,7 +485,7 @@ int textBar::doWrite(int mouseX, int mouseY, SDL_Surface *screen,
             c = '8';
       }
       else 
-      if( teclas[SDLK_9])
+      if( (teclas[SDLK_9])  || (teclas[SDLK_KP9]) )
       {
           if (maiuscula)
             c = '(';

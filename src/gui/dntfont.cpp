@@ -269,6 +269,19 @@ void dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
 }
 
 /***********************************************************************
+ *                          getStringWidth                             *
+ ***********************************************************************/
+int dntFont::getStringWidth(string s)
+{
+   int w;
+   convertToUnicode(curUnicode, s.c_str(), s.length());
+   //FIXME!
+   Uint16* uniStr = curUnicode;
+   TTF_SizeUNICODE(activeFont, uniStr, &w, NULL);
+   return(w);
+}
+
+/***********************************************************************
  *                              getincCP                               *
  ***********************************************************************/
 int dntFont::getIncCP()
