@@ -15,6 +15,7 @@ void dntFont::init()
     activeFont = NULL;
     activeFontName = "";
     activeFontSize = 0;
+    activeFontAlign = DNT_FONT_ALIGN_LEFT;
     defineFont(DNT_FONT_ARIAL,12);
 }
 
@@ -61,25 +62,54 @@ bool dntFont::defineFont(string fileName, int size)
    return(true);
 }
 
+/**********************************************************************
+ *                          defineFontAlign                           *
+ **********************************************************************/
+void dntFont::defineFontAlign(int align)
+{
+   activeFontAlign = align;
+}
+
 /***********************************************************************
  *                               write                                 *
  ***********************************************************************/
 int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
-          int end, int x1,int y1,int x2,int y2)
+                   int end, int x1,int y1,int x2,int y2)
 {
    int aux, curY, w = 0, h = 0;
    int maxWidth = x2 - x1;
-   string strLine = "";
-   string prvStr = "";
+   int uni = 0;
+   strLine[0] = 0;
+
+   Uint16* unicodeText;
 
    SDL_Color color;
    SDL_Rect rect;
    SDL_Surface* writeSurface = NULL;
 
    /* Verify if avaible */
-   if( (text[0]=='\0') || (!activeFont) )
+   if(!activeFont)
    {
       return(-1);
+   }
+
+   /* Convert to unicode */
+   //FIXME -> if already on unicode, don't need to do this!
+   convertToUnicode(curUnicode, text.c_str(), text.length());
+   unicodeText = curUnicode;
+
+   /* Verify if is already on unicode */
+   if( (text[0] == '\\') )
+   {
+      text.erase(0,1);
+      unicodeText = (Uint16*)text.c_str();
+   }
+
+   /* Verify Alignment */
+   if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
+   {
+      TTF_SizeUNICODE(activeFont, unicodeText, &w, &h);
+      x = ((x2 + x1) / 2) - (w / 2)-1;
    }
 
    /* Init things */
@@ -90,21 +120,29 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
 
    for(aux=init;(aux<=end);aux++)
    {
-      prvStr = strLine;
-      if(text[aux] != '|')
+      if(unicodeText[aux] != '|')
       {
-         strLine += text[aux];
-         TTF_SizeText(activeFont, strLine.c_str(), &w, &h);
+         strLine[uni] = unicodeText[aux];
+         strLine[uni+1] = 0;
+         uni++;
+         TTF_SizeUNICODE(activeFont, strLine, &w, &h);
          if(w >= maxWidth)
          {
             /* So, if the width is bigger, write the string without 
              * the character */
-            writeSurface = TTF_RenderText_Blended(activeFont, prvStr.c_str(), 
+            uni--;
+            strLine[uni] = 0;
+            writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine, 
                                                   color);
+
+            /* Put the character */
+            uni = 0;
+            strLine[uni] = unicodeText[aux];
+            uni++;
+            strLine[uni] = 0;
 
             /* Blit the result surface to the desired one on the desired 
              * position  */
-            strLine = text[aux];
             rect.y = curY;
             SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
@@ -117,14 +155,15 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       }
       else
       {
-         TTF_SizeText(activeFont, prvStr.c_str(), &w, &h);
+         TTF_SizeUNICODE(activeFont, strLine, &w, &h);
          /* | breaks a line */
-         writeSurface = TTF_RenderText_Blended(activeFont, prvStr.c_str(),
-                                               color);
+         writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine,
+                                                  color);
 
          /* Blit the result surface to the desired one on the desired
           * position  */
-         strLine = text[aux];
+         uni = 0;
+         strLine[uni] = 0;
          rect.y = curY;
          SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
@@ -132,19 +171,16 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
          SDL_FreeSurface(writeSurface);
 
          curY += h;
-
-         strLine = "";
       }
    }
 
-   if(!strLine.empty())
+   if(uni != 0)
    {
-      TTF_SizeText(activeFont, prvStr.c_str(), &w, &h);
+      TTF_SizeUNICODE(activeFont, strLine, &w, &h);
       /* Remaining things to write */
-      writeSurface = TTF_RenderText_Blended(activeFont, strLine.c_str(), color);
+      writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine, color);
 
       /* Blit the result surface to the desired one on the desired position  */
-      strLine = text[aux];
       rect.y = curY;
       SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
@@ -179,6 +215,57 @@ void dntFont::write(SDL_Surface *screen,int x,int y,string text,
                     int init,int end)
 {
    write(screen,x,y,text,init,end,0,0,screen->w-1,screen->h-1);
+}
+
+/***********************************************************************
+ *                            writeUnicode                             *
+ ***********************************************************************/
+void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text)
+{
+   SDL_Color color;
+   SDL_Rect rect;
+   SDL_Surface* writeSurface;
+
+   /* Get Color */
+   color_Get(&color.r,&color.g, &color.b);
+
+   /* Write Unicode Text */
+   writeSurface = TTF_RenderUNICODE_Blended(activeFont, (Uint16*)text.c_str(), 
+                                            color);
+
+   /* Blit the result surface to the desired one on the desired position  */
+   rect.x = x;
+   rect.y = y;
+   SDL_BlitSurface(writeSurface, NULL, screen, &rect);
+
+   /* Avoid memory leacks */
+   SDL_FreeSurface(writeSurface);
+}
+
+/***********************************************************************
+ *                           createUnicode                             *
+ ***********************************************************************/
+string dntFont::createUnicode(Uint16 character)
+{
+   Uint16 c[2];
+   c[0] = character;
+   c[1] = 0;
+   string ret = "\\";
+   ret += (char*)&c;
+   return(ret);
+}
+
+/***********************************************************************
+ *                         convertToUnicode                            *
+ ***********************************************************************/
+void dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
+{
+   int i;
+   for( i=0; i < len; ++i ) 
+   {
+      unicode[i] = ((const unsigned char *)text)[i];
+   }
+   unicode[i] = 0;
 }
 
 /***********************************************************************
@@ -256,4 +343,5 @@ string dntFont::copyLines(string source, int firstLine, int lastLine)
 TTF_Font*  dntFont::activeFont;
 string     dntFont::activeFontName;
 int        dntFont::activeFontSize;
+int        dntFont::activeFontAlign;
 

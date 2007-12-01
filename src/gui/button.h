@@ -49,12 +49,20 @@ class button: public guiObject
        bool press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto,
                   SDL_Surface* screen);
 
+
+      /*! Define the font to use for the button
+       * \param fileName -> fileName of the font to use
+       * \param size -> size of the font to use */
+      void defineFont(string fileName, int size);
+
       void* men;        /**< Button Menu (buttons can have a menu to be 
                                           activated when button presses) */
 
    protected:
       bool oval;            /**< Oval Button?  */
       farso_colors Colors;  /**< Colors */
+      string fontName;      /**< Font Name */
+      int fontSize;         /**< Font Size */
 };
 
 #endif

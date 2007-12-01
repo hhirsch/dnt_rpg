@@ -10,6 +10,11 @@ using namespace std;
 #define DNT_FONT_TIMES     "../data/fnt/times.ttf"
 #define DNT_FONT_COURRIER  "../data/fnt/courrier.ttf"
 
+#define DNT_FONT_ALIGN_LEFT    0
+#define DNT_FONT_ALIGN_CENTER  1
+
+#define MAX_TEXT  8192
+
 /*! The DNT font class. Used to write texts on surfaces with ttf fonts. */
 class dntFont
 {
@@ -26,6 +31,10 @@ class dntFont
        * \param size -> font size
        * \return -> true if success. */
       bool defineFont(string fileName, int size);
+
+      /*! Define the font align
+       * \param align -> the new font align */
+      void defineFontAlign(int align);
 
       /*! Get the max width of the font (in a "gambiarra")  */
       int getIncCP();
@@ -60,9 +69,32 @@ class dntFont
       int write(SDL_Surface *screen,int x, int y, string text,int x1,int y1,
                 int x2,int y2);
 
+      /*! Write the Text on the Surface, with limit area
+       * \param screen -> surface where write the text
+       * \param x -> X coordinate of the text
+       * \param y -> Y coordinate of the text
+       * \param init -> init text position to write
+       * \param end  -> end text position to write
+       * \param text -> text to write
+       * \param x1 -> X1 limit
+       * \param y1 -> Y1 limit
+       * \param x2 -> X2 limit
+       * \param y2 -> Y2 limit
+       * \return -> Y where ends the write.*/
       int write(SDL_Surface *screen,int x,int y,string text,int init,
                 int end, int x1,int y1,int x2,int y2);
 
+      /*! Write the Text on the Surface
+       * \param screen -> surface where write the text
+       * \param x -> X coordinate of the text
+       * \param y -> Y coordinate of the text
+       * \param text -> text to write, coded on unicode mode */
+      void writeUnicode(SDL_Surface* screen, int x, int y, string text);
+
+      /*! Create a special unicode character (beginning with \\)
+       * \param character -> unicode character code
+       * \return -> string with the unicode character begining with \\*/
+      string createUnicode(Uint16 character);
 
       /*! Copies lines from source, based on | dividers
        * \param source -> Source String
@@ -76,10 +108,16 @@ class dntFont
        * \return total lines of the source string */
       int getTotalLines(string source);
 
+      void convertToUnicode(Uint16 *unicode, const char *text, int len);
+
    protected:
       static TTF_Font* activeFont;  /**< The active Font */
       static string activeFontName; /**< The active font file name */
       static int activeFontSize;    /**< The active font size */
+      static int activeFontAlign;   /**< The active Font Align */
+
+      Uint16 curUnicode[MAX_TEXT];
+      Uint16 strLine[MAX_TEXT];
 };
 
 

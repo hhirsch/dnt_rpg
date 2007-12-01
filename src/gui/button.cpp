@@ -19,6 +19,7 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval )
    text = txt;
    oval = isOval;
    men = NULL;
+   defineFont(DNT_FONT_ARIAL, 12);
    type = GUI_BUTTON;
 }
 
@@ -78,15 +79,28 @@ void button::draw(bool pres, SDL_Surface* screen )
      ya++;
      xa+=2;
    }
-   font.defineFont(DNT_FONT_ARIAL, 12);
+   font.defineFont(fontName, fontSize);
+   font.defineFontAlign(DNT_FONT_ALIGN_CENTER);
+
    //xa = ((xa+x2) /2);
    
-   /* Verify the arrows buttons */
-   if(!getText().compare("\36") || !getText().compare("\37"))
+   if(text == font.createUnicode(0x25B2))
    {
-     ya -= 6;
+      font.write(screen,xa+1,ya,getText().c_str(),xa+1,y1,x2,y2);
    }
-   font.write(screen,xa,ya,getText().c_str());
+   else if(text == font.createUnicode(0x25CF))
+   {
+      font.write(screen,xa+1,ya-2,getText().c_str(),xa+1,y1,x2,y2);
+   }
+   else if(text == "-")
+   {
+      font.write(screen,xa+2,ya-2,getText().c_str(),xa+2,y1,x2,y2);
+   }
+   else
+   {
+      font.write(screen,xa,ya+3,getText().c_str(),xa,y1,x2,y2);
+   }
+   font.defineFontAlign(DNT_FONT_ALIGN_LEFT);
 }
 
 /***********************************************************
@@ -111,4 +125,12 @@ bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto,
    return(pres);
 }
 
+/***********************************************************
+ *                        defineFont                       *
+ ***********************************************************/
+void button::defineFont(string fileName, int size)
+{
+   fontName = fileName;
+   fontSize = size;
+}
 
