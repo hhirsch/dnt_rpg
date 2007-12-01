@@ -118,7 +118,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    y1 = ya;
    y2 = yb;
    minY = 15;
-   minX = 50; //a calcular ainda,assim q tiver redmensonamento(se tiver)
+   minX = 50; 
    text = title;
    canMaximize = true;
    canScale = true;
@@ -251,8 +251,8 @@ void window::drawInactiveBar()
    color_Set(Colors.colorWindow.R,Colors.colorWindow.G,Colors.colorWindow.B);
    rectangle_Fill(surface,36,3,dx-3,12);
    color_Set(0,0,0);
-   fnt.defineFont(DNT_FONT_ARIAL,12);
-   fnt.write(surface,39,-2,text);
+   fnt.defineFont(DNT_FONT_ARIAL,10);
+   fnt.write(surface,39,1,text);
 }
 
 /*********************************************************************
@@ -265,8 +265,8 @@ void window::drawActiveBar()
    color_Set(Colors.colorBar.R,Colors.colorBar.G,Colors.colorBar.B);
    rectangle_Fill(surface,36,3,dx-3,12);
    color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
-   fnt.defineFont(DNT_FONT_ARIAL,12);
-   fnt.write(surface,39,-2,text);
+   fnt.defineFont(DNT_FONT_ARIAL,10);
+   fnt.write(surface,39,1,text);
 }
 
 /*********************************************************************

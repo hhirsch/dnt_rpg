@@ -94,12 +94,12 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       if(text[aux] != '|')
       {
          strLine += text[aux];
-         TTF_SizeUTF8(activeFont, strLine.c_str(), &w, &h);
+         TTF_SizeText(activeFont, strLine.c_str(), &w, &h);
          if(w >= maxWidth)
          {
             /* So, if the width is bigger, write the string without 
              * the character */
-            writeSurface = TTF_RenderUTF8_Blended(activeFont, prvStr.c_str(), 
+            writeSurface = TTF_RenderText_Blended(activeFont, prvStr.c_str(), 
                                                   color);
 
             /* Blit the result surface to the desired one on the desired 
@@ -117,9 +117,9 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       }
       else
       {
-         TTF_SizeUTF8(activeFont, prvStr.c_str(), &w, &h);
+         TTF_SizeText(activeFont, prvStr.c_str(), &w, &h);
          /* | breaks a line */
-         writeSurface = TTF_RenderUTF8_Blended(activeFont, prvStr.c_str(),
+         writeSurface = TTF_RenderText_Blended(activeFont, prvStr.c_str(),
                                                color);
 
          /* Blit the result surface to the desired one on the desired
@@ -139,9 +139,9 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
 
    if(!strLine.empty())
    {
-      TTF_SizeUTF8(activeFont, prvStr.c_str(), &w, &h);
+      TTF_SizeText(activeFont, prvStr.c_str(), &w, &h);
       /* Remaining things to write */
-      writeSurface = TTF_RenderUTF8_Blended(activeFont, strLine.c_str(), color);
+      writeSurface = TTF_RenderText_Blended(activeFont, strLine.c_str(), color);
 
       /* Blit the result surface to the desired one on the desired position  */
       strLine = text[aux];
