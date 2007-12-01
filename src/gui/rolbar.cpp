@@ -36,15 +36,17 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    
    guiList* l = (guiList*)list;
 
-   /* Contorno */
+   /* Edges */
    position = l->insertTextBox(xb-10, ya+2, xb-2, yb-26, 1, "");
    contorn = l->insertTextBox(xb-12, ya, xb, yb-24, 1, "");
    
-   /* Botoes */
-   up = l->insertButton(xb-12,yb-23,xb,yb-12, "\36",0);
-   down = l->insertButton(xb-12,yb-11,xb,yb, "\37",0);
+   /* Buttons */
+   up = l->insertButton(xb-12,yb-23,xb,yb-12, fnt.createUnicode(0x25B2),0);
+   up->defineFont(DNT_FONT_ARIAL, 8);
+   down = l->insertButton(xb-12,yb-11,xb,yb, fnt.createUnicode(0x25BC),0);
+   down->defineFont(DNT_FONT_ARIAL, 8);
 
-   /* Texto */
+   /* Text */
    scrollText = l->insertTextBox(xa,ya,xb-13,yb,2,""); 
    scrollText->setFont(DNT_FONT_ARIAL, 10, 0);
    scrollText->setColor(246, 190, 190);

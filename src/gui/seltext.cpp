@@ -78,7 +78,7 @@ void selText::draw(int selectedItem, SDL_Surface *screen)
             color_Set(Cores.colorSelText.R,Cores.colorSelText.G,
                         Cores.colorSelText.B);
          }
-         ya = fnt.write(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
+         ya=fnt.write(screen,4+x1,ya,optText[aux].c_str(),x1+1,y1+1,x2-1,y2-1);
      }
      y[aux] = ya;
      ya += 11;

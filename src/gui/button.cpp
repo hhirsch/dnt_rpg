@@ -84,7 +84,8 @@ void button::draw(bool pres, SDL_Surface* screen )
 
    //xa = ((xa+x2) /2);
    
-   if(text == font.createUnicode(0x25B2))
+   if( (text == font.createUnicode(0x25B2)) ||
+       (text == font.createUnicode(0x25BC)) )
    {
       font.write(screen,xa+1,ya,getText().c_str(),xa+1,y1,x2,y2);
    }
