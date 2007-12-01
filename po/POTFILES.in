@@ -74,7 +74,7 @@ src/gui/textbar.cpp
 src/gui/farso.cpp
 src/gui/messages.cpp
 src/gui/textbox.cpp
-src/gui/fonte.cpp
+src/gui/dntfont.cpp
 src/gui/mouse.cpp
 src/gui/window.cpp
 src/gui/guilist.cpp
