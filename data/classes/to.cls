@@ -1,24 +1,24 @@
 gettext("Occupational Therapy Student")
-gettext("'- Hey,  girls  from  OT,  answer  me   a|question   I   have   since   enter   the|university...|- No,  We  also  don't  know to  what our|faculty is made for and are bored  by the|others asking us about it!'|(Turmalina,  Computer  Science   Student,|asking three OT Students)")
-gettext("Usually   little    and    fragile,   the|Occupational Therapy Students can be high|emoted  watching  the   most   previsible|mexican novel. Known by the 'hard'  group|therapies  they  call 'Academic Classes',|and for the hours spent painting a little|paper like a three years child (and FOR a|three   years    child),    calling    it|'Scientific  Project',  the  OT  Students|can't  explain  to  what  their course is|(it's one  of  the  universe's  secrets),|their  life  is,  their  clients,   their|friends,   their   bass,  the  Anamabeka,|their..., finally... but sure  know  what|happened at the previous  chapter  of the|midday television novel.")
+gettext("'- Hey, girls from OT, answer me a question I have since entered the University...|- No, we also don't know to what our graduation is made for and are bored by others asking us about it!'|(Turmalina, Computer Science Student, asking three OT Students)")
+gettext("Usually little and fragile, the Occupational Therapy Students can be high emoted watching the most previsible mexican novel. Knowledge by their 'hard'  group therapies, called 'Academic Classes', and for the hours spent painting a little paper like a three years old child (and FOR a three years old child), calling it 'Scientific  Project', the OT Students can't explain to what their graduation is (it's one of the universe's secrets not answered by 42), their life is, their clients, their friends, their bass, the Anamabeka, their..., finally... but sure know what happened at the previous chapter of the midday television novel.")
 d4
 8
 -2 ATT INTELLIGENCE ALL ALL
-gettext("Receive -2 of Intelligence, for spent too|much time watching TV novels.")
+gettext("Receive -2 of Intelligence, for spent too much time watching TV novels.")
 1 ATT WISDOM ALL ALL
-gettext("+1 of Wisdom, for the inutiles knowledges|obtained watching TV novels.")
+gettext("+1 of Wisdom, for the inutiles knowledges obtained watching TV novels.")
 3 ATT CHARISM ALL ALL
-gettext("+3 of Charism,  for  not  study  at   the|Exacts Sciences Institute (ICEX), usually|being pleasants.")
+gettext("+3 of Charism, for not study at the Exacts Sciences Institute (ICEX), usually being pleasants.")
 10 SOCIAL_TESTS ALL CLASS ICEX
-gettext("For usually have some rare  beauty to the|ICEX, the OT Students receive +10 in  all|social tests against Students  from  that|Institute.")
+gettext("For usually have some rare  beauty to the ICEX, the OT Students receive +10 on all social tests against Students from that Institute.")
 -12 SKILL FURTIVE CLASS ICEX
-gettext("-12 in furtive when in a radius of 30m of|at least one ICEX Student.")
+gettext("-12 of Furtive when in a radius of 30 meters of at least one ICEX Student.")
 -12 SKILL HIDE CLASS ICEX
-gettext("-12 in hide in the same circunstances.")
+gettext("-12 of Hide at the same circunstances.")
 5 SKILL INTIMIDATE CLASS ICEX
-gettext("And +5 in Intimidate for the same reason.")
+gettext("And +5 of Intimidate for the same reason.")
 -4 SKILL OBSERVE ALL ALL
-gettext("OT Students have  the  tendency  to  play|that  musical  instrument  someone  calls|bass  (and  maybe  for  this,  forgot  by|Anamabeka), receiving -4 in observe.")
+gettext("OT Students have the tendency to play that musical instrument someone call bass, receiving -4 of Observe.")
 6
 1 GROUP_THERAPY_I
 3 CROCODILE_TEARS

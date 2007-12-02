@@ -1,20 +1,20 @@
 gettext("Administration Student")
 gettext("'Steel with steel is bad...'|(Zamboy, future Administration Student)")
-gettext("Also  knowledged as Taylor's  little boys|Administration        Students        are|frequently found  in self-help shelves of|commercial bookstores. They enter in this|course  since  they not  really know what|want to their   lifes  (exacts   science,|human science,   group  dynamics??)  and,|although  in  most   of  the cases  don't|possess  NOTHING  to   administer,   they|think,   vehemently,  that  are doing the|helpful and certain thing to their lives.")
+gettext("Also knowledged as Taylor's little boys Administration Students are frequently found  in self-help shelves of commercial bookstores. They enter in this course  since they not really know what want to their lifes (exacts science, human science, group  dynamics?) and, although in the most of the cases don't possess NOTHING to administer, they think, vehemently, that are doing the helpful and certain thing to their lives.")
 d4
 6
 -2 ATT INTELLIGENCE ALL ALL
-gettext("Administration   Students,  definitively,|aren't   know   by   their    intelectual|(Am I wrong Elis Regina???)")
+gettext("Administration Students, definitively, aren't knowledge by their intelectual attributes. (Am I wrong Elis Regina?). So, they receive -2 of Intelligence.")
 -4 ATT CHARISM ALL ALL
-gettext("Charismatics???  Nor  a little.  A really|dumb ass to find some of them in group.")
+gettext("It's a really dumb ass to find some of them in group. -4 of Charism.")
 2 ATT CONSTITUTION ALL ALL
-gettext("The Taylor's Knowledges are a common part|of the  Administration Students, so their|Taylor's Bovinice is always inerent.")
+gettext("The Taylor's Knowledges are a common part of the Administration Students, +2 to their constitution.")
 4 SKILL BOVINICE ALL ALL
-gettext("Since  they  are Taylor's fiel disciples,|they  receive  +4  in  Taylor's  Bovinice|Skill")
+gettext("Since they are Taylor's fiel disciples, they receive +4 of Taylor's Vialty Skill")
 4 SKILL BIZARRE_CLOTHES ALL ALL
-gettext("They  receive  +4   em  Bizarre  Clothes,|because in their dogmatic cult  to Taylor|they  found  bizarre  things  (and   with|maximun financial efficiency) to be their|'clothes'.")
+gettext("In their dogmatic cult to Taylor they found bizarre things (with maximun financial efficiency) to be their 'clothes', receiving +4 of Bizarre Clothes.")
 -6 SKILL LISTEN ALL ALL 
-gettext("Everyone knows  that  the  Administration|Students  have  a  lot  of  difficulty in|assimilate other's opinions, and  also to|ask in a  concise way  some question,  so|they receive -6 in Listen.")
+gettext("Everyone knows that Administration Students have a lot of difficulty in the assimilation of other's opinions, and also to ask in a concise way some question, so they receive -6 of Listen.")
 8
 1 ESTHETIC_SHOCK_I
 3 STUN_ATTACK

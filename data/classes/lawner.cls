@@ -1,16 +1,16 @@
 gettext("Law Student")
 gettext("'- Are we going to the bar taking one?|- Yes, from whose?'|(Typical dialog between two law students)")
-gettext("Living  at   the   Campus   disguised  as|penguins,  the Law Students are organisms|that, when perceive the minor possibility|to  make profits  by  some situation they|judge  'juridic',  will  use of all their|verborragy,  deturpations  and sofisms to|make  it.  Is  always important to have a|Law Student in your group (party), be for|avoiding  other  Law  Students  knowledge|(and policial aparate) to take advantages|on  you, or  for taking  advantages  from|others and avoid that iminent punition.")
+gettext("Living at the Campus disguised as penguins, Law Students are organisms that, when perceive the minor possibility to make profits by some situation they judge 'juridic', will use of all their verborragy, deturpations and sofisms to make it. Is always important to have a Law Student on your group (party), be for avoiding other Law Students knowledge (and policial aparate) take advantages from you, or for taking advantages from others and avoid that iminent punition.")
 d6
 4
 -2 ATT INTELLIGENCE ALL ALL
-gettext("For usually  being stupids among anything|that  is  not  related  with  money, they|receive -2 in intelligence.")
+gettext("For usually being stupids among anything that isn't related with money, they receive -2 of Intelligence.")
 -1 ATT CHARISM ALL ALL
-gettext("For  their  hungry will to take the  last|copeck of their victims, they  receive -1|in charism.")
+gettext("For their hungry to take the last copeck of their victims, they receive -1 of Charism.")
 2 ATT WISDOM ALL ALL
-gettext("By can modify any situation to make money|from it.")
+gettext("By can modify any situation to make money from it, receive +2 of Wisdom.")
 1 SKILL APPRAISE ALL ALL
-gettext("Since they know  anything  of  money, the|Law  Student  receives  +1 in Appraise on|their first level.")
+gettext("Since they know everything about money, the Law Student receives  +1 of Appraise on their first level.")
 4
 1 LAWNER_APRENDICE
 4 I_AM_WRONG

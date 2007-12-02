@@ -1,20 +1,20 @@
 gettext("Journalism Student")
-gettext("'The judge thinks he is  God,  the  Medic|plays God.  The  journalist,  if he isn't|God, convinces you that he is'|(Matheus de Paula, ex-Journalism student)")
-gettext("Graduating  in  the   arts  of  deceit  a|cheating, the  journalism  student  is  a|writing master. With words, he can create|events,  stun  his  enemies, swindle  his|audience towards other habilities.|Despite of being college  friends,  these|malicious organisms can  be  very rude to|each other, not being common  to see them|in large groups. But they can easily join|the masses, to gather as much information|as possible.")
+gettext("'The judge thinks he is God, the Medic plays God. The journalist, if he isn't God, convinces you that he is'|(Matheus de Paula, ex-Journalism student)")
+gettext("Graduating in the arts of deceit a cheating, the journalism student is a writing master. With words, he can create events, stun his enemies, swindle his audience, towards other habilities. Despite of being college friends, these malicious creatures can be very rude to each other, not being common to see them on large groups. But they can easily join the masses, to gather as much information as possible.")
 d6
 6
 -2 ATT STRENGTH ALL ALL
-gettext("As they  are  usually  deep  involved  in|mental work,  these  organisms don't find|time or will to  exercise  their muscles,|receive -2 of Strength.")
+gettext("As they usually are deep involved on mental work, these organisms don't find time or will to exercise their muscles, receiving -2 of Strength.")
 2 ATT INTELLIGENCE ALL ALL
-gettext("Journalism students have a  'know it all'|need, increasing by 2 their intelligence.")
+gettext("Journalism students have a 'know it all' need, increasing by 2 their intelligence.")
 1 ATT CHARISM ALL ALL
-gettext("Despite of being extemely hard criticals,|these organisms  can  dissimulate   their|true nature,  being very  kind  to  their|audience    and    information   sources,|receiving +1 in Charism.")
+gettext("Despite of being extemely hard criticals, these organisms can dissimulate their true nature, being very kind to their audience and informations sources, receiving +1 of Charism.")
 1 TEST d100 TENDENCY NEUTRAL
-gettext("Impartiality: Before choosing this class,|the Journalism student rolls  a  d100. If|the result is between  1 and 99, he can't|be neutral. Else, he can  be a Journalism|Student with any alingment.")
+gettext("Impartiality: Before choosing this class, the Journalism student rolls  a d100. If the result is between 1 and 99, he can't be neutral. Else, he can be a Journalism Student of any alingment.")
 1 IGNORE PENALTY TESTS SOCIAL
-gettext("Journalism    students    neglects    any|penalties  to  their  social  tests,  for|being  able  to  survive   in   turbulent|environments.")
+gettext("Journalism students neglects any penalties to their social tests, for being able to survive in turbulent environments.")
 0 DIALOG IGNORED NEVER ALL
-gettext("As  long as the Journalism Student speaks|the  targets  language,  he will never be|ignored.")
+gettext("As long as the Journalism Student speaks the targets language, he'll never be ignored.")
 10
 1 CONTACTS
 2 ADITIONAL_LANGUAGE

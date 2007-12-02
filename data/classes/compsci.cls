@@ -1,16 +1,16 @@
 gettext("Computer Science Student")
-gettext("'-I really don't know why I'm making this|graduation...|- How  not??  For  the womans,  obvious!'|(Gushm,    that    time    CS    Student,|answering the CS dilema)")
-gettext("Computes  Science  Student  is  the  most|bizarre  class  in  DccNiTghtmare   (and,|paradoxically, the most common). They are|know by their suicidal choices (the first|one  is  the  graduation  they  choosed),|their  little patience to view what their|masters    denominate    'classes',   the|infinity time spent in Pratical Exercises|(TP) and  the hate when they percept that|it works perfectly,  but  their   masters|won't  look  and  appraise  it,  since CS|teachers  are displicents and without any|compromise with the graduation.")
+gettext("'-I really don't know why I'm making this graduation...|- How  not? For the womans, obviously!'|(Gushm, that time CS Student, answering the CS dilema)")
+gettext("Computer Science Student is the most bizarre class in DccNiTghtmare (and, paradoxically, the most common). They are knowledge by their suicidal choices (the first one is the graduation they choosed), their little patience to view what their masters call 'classes', the infinity time spent on Pratical Exercises (TPs) and the hate when they percept that it works perfectly, but their masters won't  look  and  appraise  it, since CS teachers are displicents and without any compromise with the graduation.")
 d8
 4
 2 ATT WISDOM ALL ALL
-gettext("Since all they are auto-teachers, because|they can't  count  with  theirs teachers,|they receive +2 in Wisdom.")
+gettext("Since they have to be self-teachers, they receive +2 of Wisdom.")
 -1 ATT CHARISM ALL ALL
-gettext("By their natural tendency to be qualified|as Nerd, being one or not,  they  receive|-1 in Charism.")
+gettext("By their natural tendency to be qualified as Geeks, being one or not, they receive -1 of Charism.")
 5 SAVE FORTITUDE ALL ALL
-gettext("Computer Science Students  receive  +5 in|fortitute  by support the hoax and boring|that are their course.")
+gettext("Computer Science Students receive +5 of fortitute by survive to their hoax and boring graduation.")
 -2 SAVE REFLEX ALL ALL
-gettext("Also  receive -2 in reflexes for a lot of|time they spent in front of the computer.")
+gettext("Also receive -2 of reflexes for the lot of time spent in front of a computer.")
 11
 1 SUICIDAL_CHOICES
 2 SUFFER_RESISTANCE
