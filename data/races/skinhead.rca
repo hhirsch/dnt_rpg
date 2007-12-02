@@ -1,12 +1,12 @@
 gettext("Skinhead Maniac")
-gettext("' -  Is  'cause  ther'are  some  peopl'in|front  of  my house that puts a pagode in|high volume on the weekends...|- There is, so? Give me R$500,00 and I'll|five you a fragmentation granade to throw|up there and end with their party!'|(Corrente,  Skinhead  Maniac,   answering|Gordo, Mechanical  engineering frustrated|studant)")
-gettext("Skinhead  Maniacs  are a rare race in the|campus. Without  any  comon  sense, these|creatures  don't  lose  time  to finalize|their  objectives  in  the  more directly|possible way. Walking alone in the world,|they aren't  capable to make friends with|any  other  race,  always  wanting to end|those they dislike.")
+gettext("' - Is 'cause ther'are some peopl'in front of my house that puts a pagode in high volume on the weekends...|- There is, so? Give me R$500,00 and I'll five you a fragmentation granade to throw up there and end with their party!'|(Corrente, Skinhead Maniac, answering Gordo, Mechanical engineering frustrated studant)")
+gettext("Skinhead Maniacs are a rare race in the campus. Without any comon sense, these creatures don't lose time to get their objectives by the more directly possible way. Walking alone in the world, they aren't able to make friends with any other race, always wanting to end those they dislike.")
 1
 1 RESTRICTION TENDENCY PROPERTY ALL
-gettext("Since   they  don't  have  common  sense,|Skinhead Maniacs have to be of Alignment/|Tendency  Capitalist Proprietary-Software|or Chaotic Proprietary-Software")
+gettext("Since they don't have common sense, Skinhead Maniacs have to be of Alignment / Tendency Capitalist Proprietary Software or Chaotic Proprietary Software")
 2
 INSANE_FURY
 CALL_HORDES
 1
 FREE_PASS
-gettext("Skinhead  Maniacs, since they have army's|friends, can get  any  kind of heavy guns|and  walk  freely  with  them.  So,  they|receive  the  skill  Free-pass for  class|skill for any choosed class;")
+gettext("Skinhead Maniacs, since they have army's friends, can get any kind of heavy guns and walk freely with them. So, they receive the skill Free-pass as class skill for any choosed class")

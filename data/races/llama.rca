@@ -1,11 +1,11 @@
 gettext("Human Llama")
-gettext("'Is he insane??'|(Oktober Fest's Queen,  while  looking at|Farrer, the llama)")
-gettext("Human  llamas  are  humans  that  believe|earnestly  they are nearly descendants of|the Andes llamas.  Usually they walk with|a  bolivian poncho, drink a  lot of water|and think exactly like a llama.")
+gettext("'Is he insane??'|(Oktober Fest's Queen, while looking to a human llama)")
+gettext("Human llamas are humans that believe earnestly they are nearly descendants of the Andes llamas. Usually they walk with a bolivian poncho, drink a lot of water and think exactly like a llama.")
 2
 -4 SOCIAL_TESTS ALL ALL ALL
-gettext("For  having   sociopats  tendencies,  the|Human  Llammas receive -4  in  all social|tests.")
+gettext("For having sociopats tendencies, the Human Llammas receive -4 on all social tests.")
 2 ATT INTELLIGENCE ALL ALL
-gettext("Human llamas receive +2 in Intelligence.")
+gettext("Human llamas receive +2 of Intelligence.")
 2
 NEED_WATER
 I_DISLIKE_YOU
