@@ -1,3 +1,3 @@
 gettext("Heal")
-gettext("   The organism  with  points in  this|skill  is  capable  to heal  by normal|ways. He can from stop an hemorragy to|treat a sickness.|Base Attibute: Wisdom")
+gettext("The organism with points at this skill is capable to heal by normal ways, from stop an hemorragy to treat a sickness.")
 5
