@@ -24,8 +24,9 @@ hardware. São eles:
    LibVorbis - http://www.vorbis.com/
    OpenGL
    SDL       - Versão 1.2.12, www.libsdl.org
-   SDLImage  - Versão 1.2.6, www.libsdl.org/projects/SDL_image/
-   OpenAL    - Version 0.0.8, www.openal.org
+   SDL_image - Versão 1.2.6, www.libsdl.org/projects/SDL_image/
+   SDL_ttf   - Versão 2.0.7 www.libsdl.org/projects/SDL_ttf/
+   OpenAL    - Versão 0.0.8, www.openal.org
 
    Hardware:
    Placa de Vídeo com aceleração 3D compatível  com  OpenGl no

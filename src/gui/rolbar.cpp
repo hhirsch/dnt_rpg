@@ -32,7 +32,6 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    x2 = xb;
    y2 = yb;
    maxLines = ((yb-ya) / 11)-1;
-   charPerLine = (xb-xa) / fnt.getIncCP();
    
    guiList* l = (guiList*)list;
 
@@ -146,7 +145,7 @@ void rolBar::setText(string txt)
 {
    dntFont fnt;
    fullText = txt;
-   totalLines = fnt.getTotalLines(fullText);
+   totalLines = fnt.getTotalLines(fullText,x1,x2);
    actualInit = 0;
    actualEnd = maxLines - 1;
    if(maxLines <= totalLines)

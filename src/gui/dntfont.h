@@ -110,10 +110,12 @@ class dntFont
 
       /*! Count total lines of the source, based on | dividers
        * \param source -> Source String
+       * \param x1 -> first X coordinate
+       * \param x2 -> last X coordinate
        * \return total lines of the source string */
-      int getTotalLines(string source);
+      int getTotalLines(string source, int x1, int x2);
 
-      void convertToUnicode(Uint16 *unicode, const char *text, int len);
+      Uint16* convertToUnicode(Uint16 *unicode, const char *text, int len);
 
    protected:
       static TTF_Font* activeFont;  /**< The active Font */

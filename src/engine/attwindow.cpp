@@ -36,7 +36,8 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    }
 
    /* create intWindow */
-   intWindow = inter->insertWindow(centerX-263,centerY-139,centerX+263,centerY+139,
+   intWindow = inter->insertWindow(centerX-263,centerY-139,
+                                   centerX+263,centerY+139,
                                    gettext("Attributes"));
 
    /* roll and write all rolled dices to string */
@@ -72,7 +73,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    intWindow->getObjectsList()->insertTextBox(9,50,85,63,0,gettext("Strength"));
    attPoints[0] = intWindow->getObjectsList()->insertTextBox(103,48,122,65,
                                                              1,"");
-   attPoints[0]->setFont(DNT_FONT_ARIAL, 10, 0);
+   attPoints[0]->setFont(DNT_FONT_ARIAL, 11, 0);
    attButtonPrev[0] = intWindow->getObjectsList()->insertButton(92,48,102,65,
                                                                 "<",0);
    attButtonNext[0] = intWindow->getObjectsList()->insertButton(123,48,133,65,
@@ -90,7 +91,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                               gettext("Dexterity"));
    attPoints[1] = intWindow->getObjectsList()->insertTextBox(103,82,123,99,
                                                              1,"");
-   attPoints[1]->setFont(DNT_FONT_ARIAL, 10, 0);
+   attPoints[1]->setFont(DNT_FONT_ARIAL, 11, 0);
    attButtonPrev[1] = intWindow->getObjectsList()->insertButton(92,82,102,99,
                                                                 "<",0);
    attButtonNext[1] = intWindow->getObjectsList()->insertButton(123,82,133,99,

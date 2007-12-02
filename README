@@ -22,7 +22,8 @@ software and hardware. They are:
    LibVorbis - http://www.vorbis.com/
    OpenGL    
    SDL       - Version 1.2.12, www.libsdl.org
-   SDLimage  - Version 1.2.6, www.libsdl.org/projects/SDL_image/
+   SDL_image - Version 1.2.6, www.libsdl.org/projects/SDL_image/
+   SDL_ttf   - Version 2.0.7 www.libsdl.org/projects/SDL_ttf/
    OpenAL    - Version 0.0.8, www.openal.org
    
    Hardware:

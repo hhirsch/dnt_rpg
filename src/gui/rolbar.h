@@ -67,8 +67,7 @@ class rolBar: public guiObject
       int    actualInit,      /**< Actual Initial Line of the Text */
              actualEnd;       /**< Actual End Line of The Text */
       Uint32 lastActualized;  /**< Last Time when actualized */
-      int maxLines;           /**< Max Number of Text Lines */
-      int charPerLine;        /**< Number of Characters per Line of Text */
+      int maxLines;           /**< Max Number of Visible Text Lines */
       int totalLines;         /**< Total Full Text Lines */
       void* intList;          /**< Internal GUI Objects List */
 };

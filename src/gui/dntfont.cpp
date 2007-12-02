@@ -76,9 +76,10 @@ void dntFont::defineFontAlign(int align)
 int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
                    int end, int x1,int y1,int x2,int y2)
 {
-   int aux, curY, w = 0, h = 0;
+   int aux, k, curY, w = 0, h = 0;
    int maxWidth = x2 - x1;
    int uni = 0;
+   int last, lastSpace = -1;
    strLine[0] = 0;
 
    Uint16* unicodeText;
@@ -93,12 +94,10 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       return(-1);
    }
 
-   /* Convert to unicode */
-   //FIXME -> if already on unicode, don't need to do this!
-   convertToUnicode(curUnicode, text.c_str(), text.length());
-   unicodeText = curUnicode;
+   /* Convert to unicode, if needed */
+   unicodeText = convertToUnicode(curUnicode, text.c_str(), text.length());
 
-   /* Verify if is already on unicode */
+   /* Verify if is on unicode special DNT button */
    if( (text[0] == '\\') )
    {
       text.erase(0,1);
@@ -122,6 +121,10 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    {
       if(unicodeText[aux] != '|')
       {
+         if(unicodeText[aux] == ' ')
+         {
+            lastSpace = uni;
+         }
          strLine[uni] = unicodeText[aux];
          strLine[uni+1] = 0;
          uni++;
@@ -129,17 +132,43 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
          if(w >= maxWidth)
          {
             /* So, if the width is bigger, write the string without 
-             * the character */
-            uni--;
-            strLine[uni] = 0;
+             * the characters after the last space, or without the last 
+             * character */
+            if(lastSpace != -1)
+            {
+               last = uni;
+               strLine[lastSpace] = 0;
+            }
+            else
+            {
+               /* Ignore the last character */
+               strLine[uni] = 0;
+            }
+
+            /* Write with the font */
             writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine, 
                                                   color);
 
             /* Put the character */
-            uni = 0;
-            strLine[uni] = unicodeText[aux];
-            uni++;
-            strLine[uni] = 0;
+            if(lastSpace != -1)
+            {
+               /* Copy all characters from the last space to the position */
+               uni = 0;
+               for(k=lastSpace+1; k < last; k++)
+               {
+                  strLine[uni] = strLine[k];
+                  uni++;
+               }
+               strLine[uni] = 0;
+            }
+            else
+            {
+               /* Copy only the last character */
+               strLine[0] = unicodeText[aux];
+               uni = 1;
+               strLine[uni] = 0;
+            }
+            lastSpace = -1;
 
             /* Blit the result surface to the desired one on the desired 
              * position  */
@@ -258,14 +287,17 @@ string dntFont::createUnicode(Uint16 character)
 /***********************************************************************
  *                         convertToUnicode                            *
  ***********************************************************************/
-void dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
+Uint16* dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
 {
    int i;
+   //FIXME -> this is the LATIN1 to unicode. Put the others convertions
    for( i=0; i < len; ++i ) 
    {
       unicode[i] = ((const unsigned char *)text)[i];
    }
    unicode[i] = 0;
+   //FIXME the size of the string returned!
+   return(unicode);
 }
 
 /***********************************************************************
@@ -274,9 +306,7 @@ void dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
 int dntFont::getStringWidth(string s)
 {
    int w;
-   convertToUnicode(curUnicode, s.c_str(), s.length());
-   //FIXME!
-   Uint16* uniStr = curUnicode;
+   Uint16* uniStr = convertToUnicode(curUnicode, s.c_str(), s.length());
    TTF_SizeUNICODE(activeFont, uniStr, &w, NULL);
    return(w);
 }
@@ -298,25 +328,71 @@ int dntFont::getIncCP()
 /***********************************************************************
  *                           getTotalLines                             *
  ***********************************************************************/
-int dntFont::getTotalLines(string source)
+int dntFont::getTotalLines(string source, int x1, int x2)
 {
-   int i;
-   char c = 0;
-   int line = -1;
-   for(i=0; (i < (int)source.length()) ; i++)
+   int i,k,last;
+   int lines = -1;
+
+   int maxWidth = x2 - x1;
+   int w;
+
+   Uint16* uniStr = convertToUnicode(curUnicode,source.c_str(),source.length());
+   int uni = 0;
+   int lastSpace = -1;
+   strLine[0] = 0;
+
+   //FIXME the size!
+   int size = (int)source.length();
+
+   for(i=0; (i < size) ; i++)
    {
-      c = source.at(i);
-      if(c == '|')
+      if(uniStr[i] == '|')
       {
-         line++;
+         lines++;
+      }
+      else
+      {
+         if(uniStr[i] == ' ')
+         {
+            lastSpace = uni;
+         }
+         strLine[uni] = uniStr[i];
+         uni++;
+         strLine[uni] = 0;
+         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
+         if(w >= maxWidth)
+         {
+            lines++;
+            if(lastSpace != -1)
+            {
+               /* Copy all characters from the last space to the position */
+               last = uni;
+               uni = 0;
+               for(k=lastSpace+1; k < last; k++)
+               {
+                  uniStr[uni] = uniStr[k];
+                  uni++;
+               }
+               uniStr[uni] = 0;
+            }
+            else
+            {
+               /* Copy only the last character */
+               uni = 0;
+               strLine[uni] = uniStr[i];
+               uni++;
+               strLine[uni] = 0;
+            }
+            lastSpace = -1;
+         }
       }
    }
    /* If last character is different of |, theres a remanescent line */
-   if(c != '|')
+   if(uni > 0)
    {
-      line++;
+      lines++;
    }
-   return(line);
+   return(lines);
 }
 
 /***********************************************************************

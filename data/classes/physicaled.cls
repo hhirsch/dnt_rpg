@@ -1,6 +1,6 @@
 gettext("Physical Education Student")
 gettext("'No! The swimming class is too complex!'|(Typical Physical Education Student thought)")
-gettext("Usually having "Soccer" and "Basketball" as classes, the dedicated (in the physical sense of the word) Students of Physical Education are things that value the muscular force above all. With too muscles in the brain, those Students possess nothing less than a supernatural resistance in the head - in change of some points of Intelligence, really. Finally, these boys are stars in the soccer but aren't distinguished students of mathematics (hardly knowing number's fundamentals).")
+gettext("Usually having 'Soccer' and 'Basketball' as classes, the dedicated (in the physical sense of the word) Students of Physical Education are things that value the muscular force above all. With too muscles in the brain, those Students possess nothing less than a supernatural resistance in the head - in change of some points of Intelligence, really. Finally, these boys are stars in the soccer but aren't distinguished students of mathematics (hardly knowing number's fundamentals).")
 d12
 17
 3 ATT STRENGTH ALL ALL
