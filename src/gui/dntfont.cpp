@@ -76,7 +76,7 @@ void dntFont::defineFontAlign(int align)
 int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
                    int end, int x1,int y1,int x2,int y2)
 {
-   int aux, k, curY, w = 0, h = 0;
+   int aux, k, curY, w = 0;
    int maxWidth = x2 - x1;
    int uni = 0;
    int last, lastSpace = -1;
@@ -87,6 +87,8 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    SDL_Color color;
    SDL_Rect rect;
    SDL_Surface* writeSurface = NULL;
+
+   int height = getHeight();
 
    /* Verify if avaible */
    if(!activeFont)
@@ -107,7 +109,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    /* Verify Alignment */
    if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
    {
-      TTF_SizeUNICODE(activeFont, unicodeText, &w, &h);
+      TTF_SizeUNICODE(activeFont, unicodeText, &w, NULL);
       x = ((x2 + x1) / 2) - (w / 2)-1;
    }
 
@@ -128,7 +130,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
          strLine[uni] = unicodeText[aux];
          strLine[uni+1] = 0;
          uni++;
-         TTF_SizeUNICODE(activeFont, strLine, &w, &h);
+         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
          if(w >= maxWidth)
          {
             /* So, if the width is bigger, write the string without 
@@ -178,13 +180,13 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
             /* Avoid memory leacks */
             SDL_FreeSurface(writeSurface);
 
-            curY += h;
+            curY += height;
          }
          
       }
       else
       {
-         TTF_SizeUNICODE(activeFont, strLine, &w, &h);
+         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
          /* | breaks a line */
          writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine,
                                                   color);
@@ -199,13 +201,13 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
          /* Avoid memory leacks */
          SDL_FreeSurface(writeSurface);
 
-         curY += h;
+         curY += height;
       }
    }
 
    if(uni != 0)
    {
-      TTF_SizeUNICODE(activeFont, strLine, &w, &h);
+      TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
       /* Remaining things to write */
       writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine, color);
 
@@ -326,6 +328,17 @@ int dntFont::getIncCP()
 }
 
 /***********************************************************************
+ *                             getHeight                               *
+ ***********************************************************************/
+int dntFont::getHeight()
+{
+   if(activeFont)
+   {
+      return(TTF_FontHeight(activeFont));
+   }
+   return(0);
+}
+/***********************************************************************
  *                           getTotalLines                             *
  ***********************************************************************/
 int dntFont::getTotalLines(string source, int x1, int x2)
@@ -398,30 +411,124 @@ int dntFont::getTotalLines(string source, int x1, int x2)
 /***********************************************************************
  *                             copyLines                               *
  ***********************************************************************/
-string dntFont::copyLines(string source, int firstLine, int lastLine)
+string dntFont::copyLines(string source, int firstLine, int lastLine, 
+                          int x1, int x2)
 {
    string result = "";
-   char c;
-   Uint32 i;
+   int i, k, last;
    int line = 0;
+
+   int maxWidth = x2 - x1;
+
+   int w;
+
+   Uint16* uniStr = convertToUnicode(curUnicode,source.c_str(),source.length());
+   int uni = 0;
+   int lastSpace = -1;
+   strLine[0] = 0;
+
+   //FIXME the size!
+   int size = (int)source.length();
+
    /* Positionate the string to the first desired line */
-   for(i=0; ( (i < source.length()) && (line < firstLine)) ; i++)
+   for(i=0; ( (i < size) && (line < firstLine)) ; i++)
    {
-      c = source.at(i);
-      if(c == '|')
+      if(uniStr[i] == '|')
       {
          line++;
+         uni = 0;
+         strLine[uni] = 0;
+         lastSpace = -1;
+      }
+      else
+      {
+         if(uniStr[i] == ' ')
+         {
+            lastSpace = uni;
+         }
+         strLine[uni] = uniStr[i];
+         uni++;
+         strLine[uni] = 0;
+         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
+         if(w >= maxWidth)
+         {
+            line++;
+            if(lastSpace != -1)
+            {
+               /* Copy all characters from the last space to the position */
+               last = uni;
+               uni = 0;
+               for(k=lastSpace+1; k < last; k++)
+               {
+                  uniStr[uni] = uniStr[k];
+                  uni++;
+               }
+               uniStr[uni] = 0;
+            }
+            else
+            {
+               /* Copy only the last character */
+               uni = 0;
+               strLine[uni] = uniStr[i];
+               uni++;
+               strLine[uni] = 0;
+            }
+            lastSpace = -1;
+         }
       }
    }
    
+   //FIXME correct the size!
+   uni = 0;
+   lastSpace = -1;
+   strLine[0] = 0;
+
    /* Copy to the desired line (or end of the string, witch occurs first) */
-   for(; ( (i<source.length()) && (line <= lastLine)); i++)
+   for(; ( (i < size) && (line <= lastLine)); i++)
    {
-      c = source.at(i);
-      result += c;
-      if(c == '|')
+      result += source[i];
+      if(uniStr[i] == '|')
       {
          line++;
+         uni = 0;
+         strLine[uni] = 0;
+         lastSpace = -1;
+      }
+      else
+      {
+         if(uniStr[i] == ' ')
+         {
+            lastSpace = uni;
+         }
+         strLine[uni] = uniStr[i];
+         uni++;
+         strLine[uni] = 0;
+         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
+         if(w >= maxWidth)
+         {
+            line++;
+            if(lastSpace != -1)
+            {
+               /* Copy all characters from the last space to the position */
+               last = uni;
+               uni = 0;
+               for(k=lastSpace+1; k < last; k++)
+               {
+                  uniStr[uni] = uniStr[k];
+                  uni++;
+               }
+               uniStr[uni] = 0;
+            }
+            else
+            {
+               /* Copy only the last character */
+               uni = 0;
+               strLine[uni] = uniStr[i];
+               uni++;
+               strLine[uni] = 0;
+            }
+            lastSpace = -1;
+         }
       }
    }
 

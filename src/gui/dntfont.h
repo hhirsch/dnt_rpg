@@ -39,6 +39,10 @@ class dntFont
       /*! Get the max width of the font (in a "gambiarra")  */
       int getIncCP();
 
+      /*! Get the normal height of the font
+       * \return normal height of the font */
+      int getHeight();
+
       /*! Get the string width
        * \param s -> string to calculate width
        * \return string width */
@@ -105,8 +109,11 @@ class dntFont
        * \param source -> Source String
        * \param firstLine -> first line to be copied
        * \param lastLine -> last line to be copied
+       * \param x1 -> first X coordinate
+       * \param x2 -> last X coordinate
        * \return -> copied string */
-      string copyLines(string source, int firstLine, int lastLine);
+      string copyLines(string source, int firstLine, int lastLine, 
+                       int x1, int x2);
 
       /*! Count total lines of the source, based on | dividers
        * \param source -> Source String
