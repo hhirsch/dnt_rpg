@@ -28,7 +28,7 @@ end_dialog
 ############################################################
 dialog(1)
    npc_begin
-      text = gettext("DccNiTghtmare is a project|to make a post-apocalyptic|realtime RPG  with battles|in turns. Actually, it  is|on    early    stage    of|development,    so   don't|expect too much here.")
+      text = gettext("DccNiTghtmare (for short DNT) is a project to make a post-apocalyptic realtime RPG with battles in turns. Actually, it is on early stage of development, so don't expect too much here.")
    npc_end
    pc_begin
       option
@@ -50,7 +50,7 @@ end_dialog
 ############################################################
 dialog(2)
    npc_begin
-      text = gettext("Use    our    foruns    at|dnt.dnteam.org  to contact|us!")
+      text = gettext("Use our foruns at dnt.dnteam.org to contact us!")
    npc_end
    pc_begin
       option
@@ -72,7 +72,7 @@ end_dialog
 ############################################################
 dialog(3)
    npc_begin
-      text = gettext("Tree?   Where   are    you|seeing a talking tree? I??|I  am  an ENTE! (Ok that a|Ente  was   a  tree  on  a|remote  past,  but  it's a|too long history for a 0.1|techdemo of DccNiTghtmare)")
+      text = gettext("Tree? Where are you seeing a talking tree? I?? I am an ENTE! (Ok that a Ente was a tree on a remote past, but it's a too long history for a 0.2 techdemo of DccNiTghtmare)")
    npc_end
    pc_begin
       option

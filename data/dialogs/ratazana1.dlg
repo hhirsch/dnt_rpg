@@ -3,14 +3,14 @@
 ############################################################
 dialog(0)
    npc_begin
-      text = gettext("Cri... If you  wanna  know|about  DccNiTghtmare, talk|to  the  Ente  outside!  I|don't know anything.")
+      text = gettext("Cri... If you wanna know about DccNiTghtmare, talk to the Ente outside! I don't know anything.")
    npc_end
    pc_begin
       option
-         text = gettext("Calm down little one. I'll look for|the Ente.")
+         text = gettext("Calm down little one. I'll look for the Ente.")
          action = finish_dialog()
       option
-         text = gettext("Ja, ja, ja. A weak animal! Die!")
+         text = gettext("Ha, ha, ha. A weak animal! Die!")
          action = init_fight()
       option
          text = gettext("Who are you?")
@@ -22,7 +22,7 @@ end_dialog
 ############################################################
 dialog(1)
    npc_begin
-      text = gettext("I'm   only   a   Ratazana.|Please, human  that  come|from  nowhere   here,  I'm|afraid, go out, please!")
+      text = gettext("I'm only a Ratazana. Please, human that come from nowhere here, I'm afraid, go out, please!")
    npc_end
    pc_begin
       option
