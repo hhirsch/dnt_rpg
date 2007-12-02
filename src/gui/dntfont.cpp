@@ -383,10 +383,10 @@ int dntFont::getTotalLines(string source, int x1, int x2)
                uni = 0;
                for(k=lastSpace+1; k < last; k++)
                {
-                  uniStr[uni] = uniStr[k];
+                  strLine[uni] = strLine[k];
                   uni++;
                }
-               uniStr[uni] = 0;
+               strLine[uni] = 0;
             }
             else
             {
@@ -430,6 +430,8 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
    //FIXME the size!
    int size = (int)source.length();
 
+   printf("Init: %d End: %d\n", firstLine, lastLine);
+
    /* Positionate the string to the first desired line */
    for(i=0; ( (i < size) && (line < firstLine)) ; i++)
    {
@@ -460,10 +462,10 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
                uni = 0;
                for(k=lastSpace+1; k < last; k++)
                {
-                  uniStr[uni] = uniStr[k];
+                  strLine[uni] = strLine[k];
                   uni++;
                }
-               uniStr[uni] = 0;
+               strLine[uni] = 0;
             }
             else
             {
@@ -514,10 +516,10 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
                uni = 0;
                for(k=lastSpace+1; k < last; k++)
                {
-                  uniStr[uni] = uniStr[k];
+                  strLine[uni] = strLine[k];
                   uni++;
                }
-               uniStr[uni] = 0;
+               strLine[uni] = 0;
             }
             else
             {
