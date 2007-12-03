@@ -33,8 +33,6 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    y2 = yb;
    maxLines = ((yb-ya) / fnt.getHeight());
 
-   printf("Max Lines: %d\n", maxLines);
-   
    guiList* l = (guiList*)list;
 
    /* Edges */

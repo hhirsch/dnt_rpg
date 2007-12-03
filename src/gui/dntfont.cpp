@@ -408,6 +408,19 @@ int dntFont::getTotalLines(string source, int x1, int x2)
    return(lines);
 }
 
+string unicodeToString(Uint16* unicode, int size)
+{
+   int i;
+   string res = "";
+   //FIXME, when is UTF8, not Latin!
+   for(i = 0; i < size; i++)
+   {
+      res += (char)unicode[i];
+   }
+   //printf("res: %s\n",res.c_str());
+   return(res);
+}
+
 /***********************************************************************
  *                             copyLines                               *
  ***********************************************************************/
@@ -429,8 +442,6 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
 
    //FIXME the size!
    int size = (int)source.length();
-
-   printf("Init: %d End: %d\n", firstLine, lastLine);
 
    /* Positionate the string to the first desired line */
    for(i=0; ( (i < size) && (line < firstLine)) ; i++)
@@ -488,9 +499,12 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
    /* Copy to the desired line (or end of the string, witch occurs first) */
    for(; ( (i < size) && (line <= lastLine)); i++)
    {
-      result += source[i];
+      strLine[uni] = uniStr[i];
+      uni++;
+      strLine[uni] = 0;
       if(uniStr[i] == '|')
       {
+         result += unicodeToString(strLine,uni);
          line++;
          uni = 0;
          strLine[uni] = 0;
@@ -500,11 +514,8 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
       {
          if(uniStr[i] == ' ')
          {
-            lastSpace = uni;
+            lastSpace = uni-1;
          }
-         strLine[uni] = uniStr[i];
-         uni++;
-         strLine[uni] = 0;
          TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
          if(w >= maxWidth)
          {
@@ -512,8 +523,11 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
             if(lastSpace != -1)
             {
                /* Copy all characters from the last space to the position */
+               strLine[lastSpace] = 0;
+               result += unicodeToString(strLine,lastSpace);
                last = uni;
                uni = 0;
+               //result += " ";
                for(k=lastSpace+1; k < last; k++)
                {
                   strLine[uni] = strLine[k];
@@ -524,6 +538,8 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
             else
             {
                /* Copy only the last character */
+               strLine[uni] = 0;
+               result += unicodeToString(strLine, uni);
                uni = 0;
                strLine[uni] = uniStr[i];
                uni++;
@@ -532,6 +548,11 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
             lastSpace = -1;
          }
       }
+   }
+
+   if( (line <= lastLine) && (uni > 0) )
+   {
+      result += unicodeToString(strLine, uni);
    }
 
    return(result);
