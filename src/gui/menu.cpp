@@ -85,13 +85,13 @@ void menu::setPosition(int xa, int ya)
 void menu::draw(int pos, SDL_Surface *screen)
 {
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 12);
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
 
    /* Define Coordinates */
    int x1 = x;
    int x2 = x1 + (maxCharac)*(fnt.getIncCP()+1)+4; 
    int y1 = y;
-   int y2 = (total*11) + y1  + 5; /* bizarre thing from DOS version */
+   int y2 = (total*11) + y1 + 5; /* bizarre thing from DOS version */
    
    /* Verify Sides */
    if (x2 > screen->w-1)
@@ -126,16 +126,16 @@ void menu::draw(int pos, SDL_Surface *screen)
       {
           if (item->isAvaible()) 
           {
-            fnt.write(screen,x1+4,ya-3,item->getText());
+            fnt.write(screen,x1+4,ya,item->getText());
           }
           else
           {
               color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,
                           Colors.colorCont[2].B);
-              fnt.write(screen,x1+5,ya-2,item->getText());
+              fnt.write(screen,x1+5,ya+1,item->getText());
               color_Set(Colors.colorCont[1].R,Colors.colorCont[1].G,
                           Colors.colorCont[1].B);
-              fnt.write(screen,x1+4,ya-3,item->getText());
+              fnt.write(screen,x1+4,ya,item->getText());
           }
       } 
       else 
@@ -175,7 +175,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
               SDL_Surface *screen, int *pronto, int Xjan, int Yjan)
 {
    dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 12);
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
 
    /* Draws */
    draw(0,screen);
