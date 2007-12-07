@@ -24,6 +24,21 @@ iaStack::~iaStack()
 }
 
 /***********************************************************
+ *                          print                          *
+ ***********************************************************/
+void iaStack::print()
+{
+   cerr << "IA Stack Top " << endl;
+   int i;
+   iaJumpPos* jmp = top;
+   for(i=0; i < total; i++)
+   {
+      cerr << "Command: " << jmp->command << endl;
+      jmp = jmp->previous;
+   }
+}
+
+/***********************************************************
  *                            pop                          *
  ***********************************************************/
 iaJumpPos* iaStack::pop()

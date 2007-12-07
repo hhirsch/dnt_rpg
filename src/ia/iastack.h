@@ -35,6 +35,9 @@ class iaStack
        * \param jmp -> jump struct to be put. */
       void push(iaJumpPos* jmp);
 
+      /*! Print the stack to the cerr for debug */
+      void print();
+
    private:
       iaJumpPos* top;      /**< The pointer to the top of the stack */
       int total;           /**< The total of the stack */

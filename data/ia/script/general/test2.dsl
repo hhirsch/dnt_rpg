@@ -19,17 +19,13 @@ script()
          fuzzyHungry = fuzzyHungry + 1
          if(fuzzyHungry >= 1)
             control = false
-            fuzzyHungry = 200
-         else
-            control = true
+            fuzzyHungry = 2
          end
       else
          setIdle(SELF_CHARACTER)
          fuzzyHungry = fuzzyHungry - 1
          if(fuzzyHungry < 0)
             control = true
-         else
-            control = false
          end
       end
    end

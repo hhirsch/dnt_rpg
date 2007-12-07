@@ -169,6 +169,7 @@ void iaScript::run(int maxLines)
    unsigned int pos = 0;
    unsigned int p = 0;
 
+   int numBegins = 0;
    int lines = 0;
 
    bool interpret = false;
@@ -254,7 +255,8 @@ void iaScript::run(int maxLines)
                      * If true, just put it at the stack and continue */
                     if( (*(bool*)ifCond->value) == false)
                     {
-                      while( (token != IA_SETENCE_END) )
+                      numBegins = 1;
+                      while( (numBegins > 0) )
                       {
                          lastPos = file.tellg();
                          getline(file, strBuffer);
@@ -266,18 +268,30 @@ void iaScript::run(int maxLines)
                            done = true;
                            cerr << "if without end or else on script " << 
                                    fileName << endl;
-                           token = "end";
+                           token = IA_SETENCE_END;
                          }
                          else
                          {
                            token = nextToken(strBuffer, pos);
-                           if(token == IA_SETENCE_ELSE)
+
+                           /* The numBegins is to avoid ENDs not related to the
+                            * IF itself */
+                           if(token == IA_SETENCE_END)
+                           {
+                              numBegins--;
+                           }
+                           else if( (token == IA_SETENCE_IF) ||
+                                    (token == IA_SETENCE_WHILE) )
+                           {
+                              numBegins++;
+                           }
+                           else if(token == IA_SETENCE_ELSE)
                            {
                               token = nextToken(strBuffer, pos);
                               if(token.empty())
                               {
                                  /* It's an pure else thing, so run it! */
-                                 token = "end";
+                                 token = IA_SETENCE_END;
                                  /* Put the else at the stack */
                                  iaJumpPos* jmp = new iaJumpPos;
                                  jmp->begin = lastPos;
@@ -287,11 +301,12 @@ void iaScript::run(int maxLines)
                               }
                               else if(token == IA_SETENCE_IF)
                               {
+                                 /* It's an else if */
                                  evaluateExpression(ifCond, strBuffer, false);
                                  if( (*(bool*)ifCond->value) == true)
                                  {
                                     /* It's an valid else if, so run it! */
-                                    token = "end";
+                                    token = IA_SETENCE_END;
                                     /* Put the else if at the stack */
                                     iaJumpPos* jmp = new iaJumpPos;
                                     jmp->begin = lastPos;
@@ -340,7 +355,7 @@ void iaScript::run(int maxLines)
                               done = true;
                               cerr << "if without end or else on script " << 
                                       fileName << endl;
-                              token = "end";
+                              token = IA_SETENCE_END;
                            }
                            else
                            {
@@ -358,6 +373,8 @@ void iaScript::run(int maxLines)
                         {
                            /* Push Back the jump  */
                            jumpStack->push(jmp);
+
+                           jumpStack->print();
                         }
                      }
                   }
@@ -390,7 +407,7 @@ void iaScript::run(int maxLines)
                               done = true;
                               cerr << "while without end on script "
                                    << fileName << endl;
-                              token = "end";
+                              token = IA_SETENCE_END;
                            }
                            else
                            {
