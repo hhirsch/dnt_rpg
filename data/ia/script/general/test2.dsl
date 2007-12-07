@@ -11,22 +11,26 @@ script()
    while(true)
       if(control)
          posX = 200
-         posZ = 200
+         posZ = 120
          moveToPosition(SELF_CHARACTER, posX, posZ)
-         posX = 400 
-         posZ = 400
+         posX = 30
+         posZ = 295
          moveToPosition(SELF_CHARACTER, posX, posZ)
          fuzzyHungry = fuzzyHungry + 1
-         if(fuzzyHungry > 2)
+         if(fuzzyHungry >= 1)
             control = false
-            fuzzyHungry = 40
-         end   
+            fuzzyHungry = 200
+         else
+            control = true
+         end
       else
          setIdle(SELF_CHARACTER)
          fuzzyHungry = fuzzyHungry - 1
          if(fuzzyHungry < 0)
             control = true
-         end   
+         else
+            control = false
+         end
       end
    end
 end

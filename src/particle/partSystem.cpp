@@ -574,7 +574,7 @@ void partSystem::loadFromFile(string fileName)
       {
          GLfloat x2, z2, scale;
          int total;
-         fscanf(file, "%f %f %d %f",&x2, &z2, &total, &scale);
+         fscanf(file, "%f %f %f %d",&x2, &z2, &scale, &total);
          addParticle(type, X, Z, x2, z2, total, scale, buffer);
       }
       else

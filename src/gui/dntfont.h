@@ -53,7 +53,8 @@ class dntFont
        * \param x -> X coordinate of the text
        * \param y -> Y coordinate of the text
        * \param text -> text to write*/
-      void write(SDL_Surface *screen,int x,int y, string text);
+      void write(SDL_Surface *screen,int x,int y, string text, 
+                 bool solid=false);
 
       /*! Write the Text on the Surface From init to end
        * \param screen -> surface where write the text
@@ -63,7 +64,7 @@ class dntFont
        * \param init -> init text position to write
        * \param end  -> end text position to write */
       void write(SDL_Surface *screen,int x,int y, string text,
-                 int init, int end);
+                 int init, int end, bool solid=false);
 
       /*! Write the Text on the Surface, with limit area
        * \param screen -> surface where write the text
@@ -76,7 +77,7 @@ class dntFont
        * \param y2 -> Y2 limit
        * \return -> Y where ends the write. */
       int write(SDL_Surface *screen,int x, int y, string text,int x1,int y1,
-                int x2,int y2);
+                int x2,int y2, bool solid=false);
 
       /*! Write the Text on the Surface, with limit area
        * \param screen -> surface where write the text
@@ -91,14 +92,15 @@ class dntFont
        * \param y2 -> Y2 limit
        * \return -> Y where ends the write.*/
       int write(SDL_Surface *screen,int x,int y,string text,int init,
-                int end, int x1,int y1,int x2,int y2);
+                int end, int x1,int y1,int x2,int y2, bool solid=false);
 
       /*! Write the Text on the Surface
        * \param screen -> surface where write the text
        * \param x -> X coordinate of the text
        * \param y -> Y coordinate of the text
        * \param text -> text to write, coded on unicode mode */
-      void writeUnicode(SDL_Surface* screen, int x, int y, string text);
+      void writeUnicode(SDL_Surface* screen, int x, int y, string text,
+                        bool solid=false);
 
       /*! Create a special unicode character (beginning with \\)
        * \param character -> unicode character code

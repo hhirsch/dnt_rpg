@@ -74,12 +74,12 @@ void dntFont::defineFontAlign(int align)
  *                               write                                 *
  ***********************************************************************/
 int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
-                   int end, int x1,int y1,int x2,int y2)
+                   int end, int x1,int y1,int x2,int y2, bool solid)
 {
    int aux, k, curY, w = 0;
    int maxWidth = x2 - x1;
    int uni = 0;
-   int last, lastSpace = -1;
+   int last = -1, lastSpace = -1;
    strLine[0] = 0;
 
    Uint16* unicodeText;
@@ -148,8 +148,16 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
             }
 
             /* Write with the font */
-            writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine, 
-                                                  color);
+            if(solid)
+            {
+               writeSurface = TTF_RenderUNICODE_Solid(activeFont, strLine, 
+                                                      color);
+            }
+            else
+            {
+               writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine, 
+                                                        color);
+            }
 
             /* Put the character */
             if(lastSpace != -1)
@@ -188,8 +196,17 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       {
          TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
          /* | breaks a line */
-         writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine,
-                                                  color);
+
+         if(solid)
+         {
+            writeSurface = TTF_RenderUNICODE_Solid(activeFont, strLine,
+                                                   color);
+         }
+         else
+         {
+            writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine,
+                                                     color);
+         }
 
          /* Blit the result surface to the desired one on the desired
           * position  */
@@ -209,7 +226,16 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    {
       TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
       /* Remaining things to write */
-      writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine, color);
+      if(solid)
+      {
+         writeSurface = TTF_RenderUNICODE_Solid(activeFont, strLine,
+                                                color);
+      }
+      else
+      {
+         writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine,
+                                                  color);
+      }
 
       /* Blit the result surface to the desired one on the desired position  */
       rect.y = curY;
@@ -225,33 +251,34 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
 /***********************************************************************
  *                               write                                 *
  ***********************************************************************/
-void dntFont::write(SDL_Surface *screen,int x,int y,string text)
+void dntFont::write(SDL_Surface *screen,int x,int y,string text, bool solid)
 {
-   write(screen,x,y,text,0,text.length()-1,0,0,screen->w-1,screen->h-1);
+   write(screen,x,y,text,0,text.length()-1,0,0,screen->w-1,screen->h-1,solid);
 }
 
 /***********************************************************************
  *                               write                                 *
  ***********************************************************************/
 int dntFont::write(SDL_Surface *screen,int x, int y,string text,int x1,int y1,
-                   int x2,int y2)
+                   int x2,int y2,bool solid)
 {
-   return(write(screen,x,y,text,0,text.length()-1,x1,y1,x2,y2));
+   return(write(screen,x,y,text,0,text.length()-1,x1,y1,x2,y2,solid));
 }
 
 /***********************************************************************
  *                                write                                *
  ***********************************************************************/
 void dntFont::write(SDL_Surface *screen,int x,int y,string text,
-                    int init,int end)
+                    int init,int end,bool solid)
 {
-   write(screen,x,y,text,init,end,0,0,screen->w-1,screen->h-1);
+   write(screen,x,y,text,init,end,0,0,screen->w-1,screen->h-1,solid);
 }
 
 /***********************************************************************
  *                            writeUnicode                             *
  ***********************************************************************/
-void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text)
+void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text,
+                           bool solid)
 {
    SDL_Color color;
    SDL_Rect rect;
@@ -261,8 +288,18 @@ void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text)
    color_Get(&color.r,&color.g, &color.b);
 
    /* Write Unicode Text */
-   writeSurface = TTF_RenderUNICODE_Blended(activeFont, (Uint16*)text.c_str(), 
-                                            color);
+   if(solid)
+   {
+      writeSurface = TTF_RenderUNICODE_Solid(activeFont,
+                                             (Uint16*)text.c_str(), 
+                                             color);
+   }
+   else
+   {
+      writeSurface = TTF_RenderUNICODE_Blended(activeFont,
+                                               (Uint16*)text.c_str(), 
+                                                color);
+   }
 
    /* Blit the result surface to the desired one on the desired position  */
    rect.x = x;

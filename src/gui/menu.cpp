@@ -188,7 +188,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
 
       /* Verify Mouse Moviments */
       if(isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan,
-                      y+altura+Yjan-3, mouseX, mouseY)) 
+                   y+altura+Yjan-3, mouseX, mouseY)) 
       {
           actualItem = ((mouseY - (y+Yjan)-4) / 11) + 1;
       }

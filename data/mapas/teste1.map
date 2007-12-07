@@ -1,13 +1,14 @@
 T 26X24
 # Made by DccNiTghtmare's MapEditor, v0.0.3
+npc ../data/mapas/teste1.map.npc
 PS ../data/mapas/teste1.map.par
 Outdoor: 1
-t ../data/texturas/floor_outdoor/asfalt.png ../data/texturas/floor_outdoor/asfalt.png 78 78 78
-t ../data/texturas/floor_outdoor/stones2.png ../data/texturas/floor_outdoor/stones2.png 72 66 52
-t ../data/texturas/floor_outdoor/grass.png ../data/texturas/floor_outdoor/grass.png 54 102 49
-t ../data/texturas/floor_outdoor/grass2.png ../data/texturas/floor_outdoor/grass2.png 129 133 65
-t ../data/texturas/floor_outdoor/grass3.png ../data/texturas/floor_outdoor/grass3.png 100 101 61
 t ../data/texturas/floor_outdoor/rock.png ../data/texturas/floor_outdoor/rock.png 126 129 134
+t ../data/texturas/floor_outdoor/grass3.png ../data/texturas/floor_outdoor/grass3.png 100 101 61
+t ../data/texturas/floor_outdoor/grass2.png ../data/texturas/floor_outdoor/grass2.png 129 133 65
+t ../data/texturas/floor_outdoor/grass.png ../data/texturas/floor_outdoor/grass.png 54 102 49
+t ../data/texturas/floor_outdoor/stones2.png ../data/texturas/floor_outdoor/stones2.png 72 66 52
+t ../data/texturas/floor_outdoor/asfalt.png ../data/texturas/floor_outdoor/asfalt.png 78 78 78
 #Z: 0
 p 0,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/floor_outdoor/grass.png

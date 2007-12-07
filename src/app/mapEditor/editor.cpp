@@ -220,6 +220,7 @@ void editor::openMap()
          sizeX = map->getSizeX();
          sizeZ = map->getSizeZ();
       }
+
       gui->showMessage("Map opened.");
    }
    else

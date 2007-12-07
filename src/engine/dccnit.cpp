@@ -108,7 +108,7 @@ engine::engine()
    missions->addNewMission("../data/missions/tutorial/mission1.dsl");
 
    hour = 9.0;
-   gameSun = new sun(hour , HALFFARVIEW, HALFFARVIEW);
+   gameSun = new sun(hour, HALFFARVIEW, HALFFARVIEW);
 
    engineMode = ENGINE_MODE_REAL_TIME;
 
@@ -291,7 +291,7 @@ void engine::loadPCs()
       delete(PCs);
    }
    PCs  = new (characterList);
-   per = PCs->insertCharacter("../data/characters/pcs/metaleiro.pc",
+   per = PCs->insertCharacter("../data/characters/pcs/logan.pc",
                               features, this);
    /*per = PCs->insertCharacter("../data/characters/pcs/logan.pc",
                               features, this);*/
@@ -1100,7 +1100,7 @@ void engine::Init(SDL_Surface *screen)
 void ScreenDump(char *destFile, short W, short H) 
 {
   FILE   *out = fopen(destFile, "w");
-  char   pixel_data[3*W*H];
+  char   pixel_data[3*SCREEN_X*SCREEN_Y];
   short  TGAhead[] = {0, 2, 0, 0, 0, 0, W, H, 24};
   glReadBuffer(GL_FRONT);
   glReadPixels(0, 0, W, H, GL_BGR, GL_UNSIGNED_BYTE, pixel_data);

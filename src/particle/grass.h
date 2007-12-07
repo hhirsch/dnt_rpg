@@ -11,7 +11,7 @@
 using namespace std;
 
 
-#define GRASS_INFLUENCE_AREA    30   /**< The Influence area */
+#define GRASS_INFLUENCE_AREA    10   /**< The Influence area */
 
 class quadPos
 {

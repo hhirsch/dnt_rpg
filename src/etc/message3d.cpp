@@ -36,18 +36,18 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    message = msg;
 
    /* Define the font and sizes */
-   fnt.defineFont(DNT_FONT_TIMES, 12);
-   int size = message.length()*(fnt.getIncCP()+1);
+   fnt.defineFont(DNT_FONT_TIMES, 20);
+   int size = fnt.getStringWidth(message);
    halfSize = (size / 2.0);
-   color_Alpha(0);
-   color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255));
+   //color_Alpha(0);
+   color_Set(255,255,255);
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        smallestPowerOfTwo(size),
                        32,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    rectangle_Fill(s, 0, 0, smallestPowerOfTwo(size)-1, 32-1);
-   color_Alpha(255);
-   
+   //color_Alpha(255);
+   color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255));
    fnt.write(s, 0, 0, message.c_str());
 
    setTextureRGBA(s, &messageTexture);
