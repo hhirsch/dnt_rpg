@@ -65,6 +65,7 @@ void selText::draw(int selectedItem, SDL_Surface *screen)
    int aux;
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL,10); 
+   int height = fnt.getHeight();
    for(aux = 0; aux<5;aux++)
    {
       if(!optText[aux].empty())
@@ -81,7 +82,7 @@ void selText::draw(int selectedItem, SDL_Surface *screen)
          ya=fnt.write(screen,4+x1,ya,optText[aux].c_str(),x1+1,y1+1,x2-1,y2-1);
      }
      y[aux] = ya;
-     ya += 11;
+     ya += height;
    }
    color_Set(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
    rectangle_2Colors(screen,x1,y1,x2,y2,Cores.colorCont[0].R,
@@ -97,6 +98,8 @@ void selText::writeSelected(int selectedItem, SDL_Surface *screen)
    dntFont fnt;
    int ya;
    int aux;
+   fnt.defineFont(DNT_FONT_ARIAL,10);
+   int height = fnt.getHeight();
    if(selectedItem != -1)
    {
       aux = selectedItem;
@@ -105,7 +108,7 @@ void selText::writeSelected(int selectedItem, SDL_Surface *screen)
       if(selectedItem == 0)
          ya = y1+3;
       else
-         ya = y[selectedItem-1]+11; 
+         ya = y[selectedItem-1]+height; 
    }
    else
    {
@@ -114,10 +117,10 @@ void selText::writeSelected(int selectedItem, SDL_Surface *screen)
       if(selec == 0)
          ya = y1+3;
       else
-         ya = y[selec-1]+11;
+         ya = y[selec-1]+height;
       color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
    }
-   fnt.defineFont(DNT_FONT_ARIAL,10);
+   
    fnt.write(screen,4+x1,ya,optText[aux].c_str(), x1+1,y1+1,x2-1,y2-1);
    selec = selectedItem;
 }
@@ -127,12 +130,15 @@ void selText::writeSelected(int selectedItem, SDL_Surface *screen)
  ***************************************************************************/
 int selText::getSelectedItem(int ya )
 {
+   dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL,10);
+   int height = fnt.getHeight();
    int aux;
    int selaux = -1;
    for(aux=0;aux<5;aux++)
    {
         if( (aux>0) && (aux<4) && 
-            (ya > (+y[aux-1]+11)) && 
+            (ya > (+y[aux-1]+height)) && 
             (ya < (+y[aux+1]) ) )
         {
               selaux = aux;
@@ -141,7 +147,7 @@ int selText::getSelectedItem(int ya )
         {
            selaux = aux;
         }
-        else if( (aux==4) && (ya >=  + y[aux-1]+11) )
+        else if( (aux==4) && (ya >=  + y[aux-1]+height) )
         {
            selaux = aux;
         }
