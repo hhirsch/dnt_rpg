@@ -103,7 +103,15 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    if( (text[0] == '\\') )
    {
       text.erase(0,1);
-      unicodeText = (Uint16*)text.c_str();
+      end--;
+      /*unicodeText = (Uint16*)text.c_str();
+
+      if(end > (int)((text.length() / 2)-1))
+      {
+         end = (text.length() / 2)-1;
+      }*/
+      writeUnicode(screen, x, y, text, solid);
+      return(1);
    }
 
    /* Verify Alignment */

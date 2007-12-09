@@ -275,6 +275,8 @@ string options::cameraName()
  ****************************************************************/
 void options::DisplayOptionsScreen(interface* interf)
 {
+   dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
    char tmp[5];
    string saux;
    textBox* qt;
@@ -295,12 +297,14 @@ void options::DisplayOptionsScreen(interface* interf)
                                          gettext("Music Volume:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonMusDec = intWindow->getObjectsList()->insertButton(146,27,156,44,
-                                                            "<",0);
+                                                  fnt.createUnicode(0x25C4),0);
+   buttonMusDec->defineFont(DNT_FONT_ARIAL, 9);
    txtMusicVolume = intWindow->getObjectsList()->insertTextBox(157,27,197,44,
                                                                1,saux.c_str());
    txtMusicVolume->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    buttonMusSum = intWindow->getObjectsList()->insertButton(198,27,208,44,
-                                                            ">",0);
+                                                  fnt.createUnicode(0x25BA),0);
+   buttonMusSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(212,27,40,112,
                                   "../data/texturas/options/music.png");
    
@@ -312,12 +316,14 @@ void options::DisplayOptionsScreen(interface* interf)
                                          gettext("Effects Volume:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonSndDec = intWindow->getObjectsList()->insertButton(146,52,156,69,
-                                                            "<",0);
+                                                  fnt.createUnicode(0x25C4),0);
+   buttonSndDec->defineFont(DNT_FONT_ARIAL, 9);
    txtSndfxVolume = intWindow->getObjectsList()->insertTextBox(157,52,197,69,1,
                                  saux.c_str());
    txtSndfxVolume->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    buttonSndSum = intWindow->getObjectsList()->insertButton(198,52,208,69,
-                                                            ">",0);
+                                                  fnt.createUnicode(0x25BA),0);
+   buttonSndSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(212,52,40,112,
                                   "../data/texturas/options/sndfx.png");
 
@@ -329,12 +335,14 @@ void options::DisplayOptionsScreen(interface* interf)
                                                    gettext("Language:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonLangDec = intWindow->getObjectsList()->insertButton(121,88,131,105,
-                                                             "<",0);
+                                                   fnt.createUnicode(0x25C4),0);
+   buttonLangDec->defineFont(DNT_FONT_ARIAL, 9);
    txtLanguage = intWindow->getObjectsList()->insertTextBox(132,88,197,105,1,
                                  saux.c_str());
    txtLanguage->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    buttonLangSum = intWindow->getObjectsList()->insertButton(198,88,208,105,
-                                                             ">",0);
+                                                   fnt.createUnicode(0x25BA),0);
+   buttonLangSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(212,88,40,112,
                                   "../data/texturas/options/language.png");
 
@@ -345,12 +353,14 @@ void options::DisplayOptionsScreen(interface* interf)
                                             gettext("Camera Mode:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonCamDec = intWindow->getObjectsList()->insertButton(121,126,131,143,
-                                                            "<",0);
+                                                  fnt.createUnicode(0x25C4),0);
+   buttonCamDec->defineFont(DNT_FONT_ARIAL, 9);
    txtCamera = intWindow->getObjectsList()->insertTextBox(132,126,197,143,1,
                                  saux.c_str());
    txtCamera->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    buttonCamSum = intWindow->getObjectsList()->insertButton(198,126,208,143,
-                                                            ">",0);
+                                                  fnt.createUnicode(0x25BA),0);
+   buttonCamSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(214,126,40,112,
                                   "../data/texturas/options/camera.png");
 
@@ -380,12 +390,14 @@ void options::DisplayOptionsScreen(interface* interf)
                                             gettext("Reflections:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    buttonReflDec = intWindow->getObjectsList()->insertButton(121,203,131,220,
-                                                             "<",0);
+                                                  fnt.createUnicode(0x25C4),0);
+   buttonReflDec->defineFont(DNT_FONT_ARIAL, 9);
    txtReflexion = intWindow->getObjectsList()->insertTextBox(132,203,197,220,1,
                                  saux.c_str());
    txtReflexion->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    buttonReflSum = intWindow->getObjectsList()->insertButton(198,203,208,220,
-                                                             ">",0);
+                                                  fnt.createUnicode(0x25BA),0);
+   buttonReflSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(212,203,40,220,
                                   "../data/texturas/options/reflexions.png");
 
