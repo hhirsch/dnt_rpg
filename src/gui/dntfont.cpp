@@ -696,6 +696,10 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
       result += unicodeToString(strLine, uni);
    }
 
+   /*printf("result: %s\n", result.c_str());
+
+   printf("line : %d, first: %d, last: %d\n", line, firstLine, lastLine);*/
+
    return(result);
 }
 

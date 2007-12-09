@@ -19,6 +19,9 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    totalElements = 0;
    selectedText = "";   
 
+   dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
+
    /* Init things */
    type = GUI_LIST_TEXT;
    x1 = xa;
@@ -28,7 +31,7 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    windowSurface = surface;
 
    /* Alloc tabButtons pointers */
-   maxButtons = ((yb-ya) / 11);
+   maxButtons = ((yb-ya-2) / fnt.getHeight());
    listButtons = new oneTabButton*[maxButtons];
 
 
@@ -43,8 +46,9 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    table = l->insertTabButton(x1, y1, x2-x1, y2-y1, NULL);
    for(i = 0; i<maxButtons; i++)
    {
-      listButtons[i] = table->insertButton(1, (i*11)+4,  (x2-x1)-14, 
-                                           ((i+1)*11)+3);
+      listButtons[i] = table->insertButton(1, (i*fnt.getHeight())+3,
+                                              (x2-x1)-14, 
+                                              ((i+1)*fnt.getHeight())+2);
    }
 
 }

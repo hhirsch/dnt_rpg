@@ -31,7 +31,7 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    y1 = ya;
    x2 = xb;
    y2 = yb;
-   maxLines = ((yb-ya) / fnt.getHeight());
+   maxLines = ((yb-ya-2) / fnt.getHeight());
 
    guiList* l = (guiList*)list;
 
@@ -83,7 +83,7 @@ bool rolBar::eventGot(int type, guiObject* object)
             }
             
             scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd,
-                                              x1,x2));
+                                              x1+2,x2-13));
             actualPressed = up;
             return(true);
          }
@@ -100,7 +100,7 @@ bool rolBar::eventGot(int type, guiObject* object)
             }
 
             scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd,
-                                              x1,x2));
+                                              x1+2,x2-13));
             actualPressed = down;
             return(true);
          }
@@ -147,7 +147,7 @@ void rolBar::setText(string txt)
 {
    dntFont fnt;
    fullText = txt;
-   totalLines = fnt.getTotalLines(fullText,x1,x2);
+   totalLines = fnt.getTotalLines(fullText,x1,x2-13);
    actualInit = 0;
    actualEnd = maxLines - 1;
    if(maxLines <= totalLines)
@@ -166,7 +166,7 @@ void rolBar::setText(string txt)
       position->setCoordinate(position->getX1(), y1+2,
                               position->getX2(), y2-26);
    }
-   scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd,x1,x2));
+   scrollText->setText(fnt.copyLines(fullText,actualInit,actualEnd,x1+2,x2-13));
 }
 
 /*********************************************************************
@@ -186,7 +186,7 @@ void rolBar::addText(string txt)
    {
       actualInit = 0;
    }
-   scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd,x1,x2));
+   scrollText->setText(fnt.copyLines(fullText,actualInit,actualEnd,x1+2,x2-13));
    redraw();
 }
 
