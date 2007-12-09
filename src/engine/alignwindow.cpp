@@ -9,6 +9,7 @@
  ************************************************************************/
 alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
 {
+   dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
@@ -27,8 +28,9 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(centerX-134,centerY-129,centerX+134,centerY+129,
-                                  gettext("Tendency & Alignment"));
+   intWindow = inter->insertWindow(centerX-134,centerY-129,
+                                   centerX+134,centerY+129,
+                                   gettext("Tendency & Alignment"));
 
    /* Align Image */
    alignImage = intWindow->getObjectsList()->insertPicture(103,185,0,0,NULL);   
@@ -40,11 +42,13 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
                                             intWindow->getSurface());
       
    /* Name and Selectors */
-   buttonPrevious = intWindow->getObjectsList()->insertButton(5,19,19,37,"<",0);
-   buttonNext = intWindow->getObjectsList()->insertButton(248,19,262,37,">",0);
+   buttonPrevious = intWindow->getObjectsList()->insertButton(5,19,19,37,
+                                                 fnt.createUnicode(0x25C4),0);
+   buttonNext = intWindow->getObjectsList()->insertButton(248,19,262,37,
+                                                 fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(20,19,247,37,1, 
                                                   actualAlign->name.c_str());
-   textName->setFont(DNT_FONT_TIMES,10,0);
+   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER);
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(188,229,258,248, 

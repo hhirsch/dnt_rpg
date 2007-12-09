@@ -126,6 +126,8 @@ class dntFont
 
       Uint16* convertToUnicode(Uint16 *unicode, const char *text, int len);
 
+      Uint16* copyUnicode(Uint16 *uni, int len);
+
    protected:
       static TTF_Font* activeFont;  /**< The active Font */
       static string activeFontName; /**< The active font file name */

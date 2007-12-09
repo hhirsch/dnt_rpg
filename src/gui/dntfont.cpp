@@ -104,14 +104,15 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    {
       text.erase(0,1);
       end--;
-      /*unicodeText = (Uint16*)text.c_str();
 
       if(end > (int)((text.length() / 2)-1))
       {
          end = (text.length() / 2)-1;
-      }*/
-      writeUnicode(screen, x, y, text, solid);
-      return(1);
+      }
+
+      unicodeText = copyUnicode((Uint16*)text.c_str(), end+1);
+      //writeUnicode(screen, x, y, text, solid);
+      //return(1);
    }
 
    /* Verify Alignment */
@@ -346,6 +347,21 @@ Uint16* dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
    //FIXME the size of the string returned!
    return(unicode);
 }
+
+/***********************************************************************
+ *                             copyUnicode                             *
+ ***********************************************************************/
+Uint16* dntFont::copyUnicode(Uint16 *uni, int len)
+{
+   int i;
+   for( i=0; i < len; ++i ) 
+   {
+      curUnicode[i] = uni[i];
+   }
+   curUnicode[i] = 0;
+   return(curUnicode);
+}
+
 
 /***********************************************************************
  *                          getStringWidth                             *

@@ -6,6 +6,7 @@
 raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
                        race** retRace)
 {
+   dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
@@ -38,7 +39,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    /* Race Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(6,18,277,35,1,
                                             gettext("Race Description"));
-   textDescTitle->setFont(DNT_FONT_COURRIER,14,0);
+   textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,
               (actualRace->citation + "||" + actualRace->description).c_str(),
@@ -47,7 +48,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    /* Race Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(345,18,615,35,1,
                                        gettext("Race Characteristcs"));
-   textCharacTitle->setFont(DNT_FONT_COURRIER,14,0);
+   textCharacTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER);
 
    textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,
                                               getCharacteristics().c_str(),
@@ -55,12 +56,14 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
 
    /* Name and Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(6,346,21,364,
-                                                              "<",0);
+                                             fnt.createUnicode(0x25C4),0);
+   buttonPrevious->defineFont(DNT_FONT_ARIAL,9);
    buttonNext = intWindow->getObjectsList()->insertButton(600,346,615,364,
-                                                          ">",0);
+                                             fnt.createUnicode(0x25BA),0);
+   buttonNext->defineFont(DNT_FONT_ARIAL,9);
    textName = intWindow->getObjectsList()->insertTextBox(22,346,599,364,1, 
                                                   actualRace->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,12,0);
+   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_LEFT);
 
    intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
 

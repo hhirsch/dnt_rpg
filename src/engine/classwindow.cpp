@@ -8,6 +8,7 @@
 classWindow::classWindow(classes* cls, skills* sk, interface* inter, 
                          classe** retClass)
 {
+   dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
@@ -29,7 +30,8 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(centerX-310,centerY-200,centerX+310,centerY+200,
+   intWindow = inter->insertWindow(centerX-310,centerY-200,
+                                   centerX+310,centerY+200,
                                    gettext("Class"));
 
    /* Class Image */
@@ -40,7 +42,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    /* Class Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(74,18,345,35,1,
                                            gettext("Class Description"));
-   textDescTitle->setFont(DNT_FONT_COURRIER, 10, 0);
+   textDescTitle->setFont(DNT_FONT_TIMES, 12, DNT_FONT_ALIGN_CENTER);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(74,36,345,345,
              (actualClass->citation + "||" + actualClass->description).c_str(),
@@ -49,7 +51,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    /* Race Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(346,18,615,35,1,
                                        gettext("Class Characteristics"));
-   textCharacTitle->setFont(DNT_FONT_COURRIER, 10, 0);
+   textCharacTitle->setFont(DNT_FONT_TIMES, 12, DNT_FONT_ALIGN_CENTER);
 
    textCharac = intWindow->getObjectsList()->insertRolBar(346,36,615,345,
                                               getCharacteristics().c_str(),
@@ -57,12 +59,12 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
 
    /* Name and Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(74,346,89,364,
-                                                              "<",0);
+                                                  fnt.createUnicode(0x25C4),0);
    buttonNext = intWindow->getObjectsList()->insertButton(600,346,615,364,
-                                                          ">",0);
+                                                  fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(90,346,599,364,1, 
                                                   actualClass->name.c_str());
-   textName->setFont(DNT_FONT_COURRIER,12,0);
+   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_LEFT);
 
    intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
 
