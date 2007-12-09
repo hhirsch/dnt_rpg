@@ -18,6 +18,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    rectangle_Fill(img,0,0,255,31);
    color_Set(200,20,20);
    fnt.defineFont(DNT_FONT_TIMES,12);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    fnt.write(img,128,0,texto);
    setTextureRGBA(img,texturaTexto);
    
@@ -30,6 +31,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    glFlush();
    SDL_GL_SwapBuffers();
    glDeleteTextures(1,texturaTexto);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
 }
 
 /*********************************************************************

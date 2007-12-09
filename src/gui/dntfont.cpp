@@ -659,8 +659,9 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
                strLine[lastSpace] = 0;
                result += unicodeToString(strLine,lastSpace);
                last = uni;
-               uni = 0;
-               //result += " ";
+               /* Do not remove the space, since we'll use it when writing */
+               strLine[0] = ' ';
+               uni = 1;
                for(k=lastSpace+1; k < last; k++)
                {
                   strLine[uni] = strLine[k];

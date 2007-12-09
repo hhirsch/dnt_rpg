@@ -152,7 +152,8 @@ class dntFont
       /*! Search for a font on the list
        * \param fontName -> file name of the font to load
        * \param fontSize -> size of the font to load
-       * \return -> loadedFont pointer with the founded font, or NULL, if not found. */
+       * \return -> loadedFont pointer with the founded font, 
+       *             or NULL, if not found. */
       loadedFont* findFont(string fontName, int fontSize);
       
 

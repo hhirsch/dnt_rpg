@@ -11,6 +11,7 @@
 skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
                          int actualLevel)
 {
+   dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
@@ -36,7 +37,8 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
    }
    
    /* Create Skill Window */
-   intWindow = inter->insertWindow(centerX-132,centerY-128,centerX+132,centerY+128,
+   intWindow = inter->insertWindow(centerX-132,centerY-128,
+                                   centerX+132,centerY+128,
                                    gettext("Skills"));
 
    /* Free Points */
@@ -60,12 +62,12 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
  
    /* Skill Name & Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(52,175,66,193,
-                                                              "<",0);
+                                              fnt.createUnicode(0x25C4),0);
    buttonNext = intWindow->getObjectsList()->insertButton(234,175,248,193,
-                                                          ">",0);
+                                              fnt.createUnicode(0x25BA),0);
    skillName = intWindow->getObjectsList()->insertTextBox(67,175,233,193,1,
                                 externalSkill->m_skills[curSkill].name.c_str());
-   skillName->setFont(DNT_FONT_ARIAL, 10, 0);
+   skillName->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
 
    /* Skill Image */
    skFig = intWindow->getObjectsList()->insertPicture(13,175,0,0,NULL);
@@ -73,14 +75,18 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
  
    /* Skill Points */
    intWindow->getObjectsList()->insertTextBox(52,200,101,214,0,
-                                       gettext("Points:"));
+                                              gettext("Points:"));
    sprintf(tmp,"%d",saveSkill->m_skills[curSkill].points);
    saux = tmp;
    txtPoints = intWindow->getObjectsList()->insertTextBox(111,198,133,216,1,
                                                    saux.c_str());
-   txtPoints->setFont(DNT_FONT_ARIAL, 10, 0);
-   buttonSum = intWindow->getObjectsList()->insertButton(134,198,144,216,">",0);
-   buttonDec = intWindow->getObjectsList()->insertButton(100,198,110,216,"<",0);
+   txtPoints->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   buttonSum = intWindow->getObjectsList()->insertButton(134,198,144,216,
+                                            fnt.createUnicode(0x25BA),0);
+   buttonSum->defineFont(DNT_FONT_ARIAL, 9);
+   buttonDec = intWindow->getObjectsList()->insertButton(100,198,110,216,
+                                            fnt.createUnicode(0x25C4),0);
+   buttonDec->defineFont(DNT_FONT_ARIAL, 9);
 
    /* Skill Costs */
    intWindow->getObjectsList()->insertTextBox(160,200,215,214,0,

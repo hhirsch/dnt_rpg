@@ -9,6 +9,7 @@
  **************************************************************/
 aspectWindow::aspectWindow(character* dude, interface* inter)
 {
+   dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
@@ -20,7 +21,8 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    loadImages();
 
    usedCharacter = dude;
-   intWindow = inter->insertWindow(centerX-129,centerY-55,centerX+129,centerY+55,
+   intWindow = inter->insertWindow(centerX-129,centerY-55,centerX+129,
+                                   centerY+55,
                                    gettext("Aspect"));
 
    /* Portrait Figure */
@@ -29,10 +31,11 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
 
    /* Previous Image Button */
    buttonPreviousImage = intWindow->getObjectsList()->insertButton(5,83,
-                                                                  19,101,"<",0);
+                                                                  19,101,
+                                                  fnt.createUnicode(0x25C4),0);
    /* Next Image Button */
    buttonNextImage = intWindow->getObjectsList()->insertButton(55,83,69,101,
-                                                                 ">",0);
+                                                  fnt.createUnicode(0x25BA),0);
    /* Contorn to the previous and next buttons */
    intWindow->getObjectsList()->insertTextBox(20,83,54,101,1,"");
 

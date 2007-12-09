@@ -58,7 +58,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    }
    rolledPoints = intWindow->getObjectsList()->insertTextBox(8,19,320,32,0,
                                                              saux.c_str());
-   rolledPoints->setFont(DNT_FONT_ARIAL, 14, DNT_FONT_ALIGN_CENTER);
+   rolledPoints->setFont(DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER);
    /* reroll button */
    rerollButton = intWindow->getObjectsList()->insertButton(323,17,386,34,
                                                   gettext("Roll"),0);
@@ -76,9 +76,11 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                                              1,"");
    attPoints[0]->setFont(DNT_FONT_ARIAL, 11, 0);
    attButtonPrev[0] = intWindow->getObjectsList()->insertButton(92,48,102,65,
-                                                                fnt.createUnicode(0x25C4),0);
+                                                  fnt.createUnicode(0x25C4),0);
+   attButtonPrev[0]->defineFont(DNT_FONT_ARIAL, 9);
    attButtonNext[0] = intWindow->getObjectsList()->insertButton(123,48,133,65,
-                                                                fnt.createUnicode(0x25BA),0);
+                                                  fnt.createUnicode(0x25BA),0);
+   attButtonNext[0]->defineFont(DNT_FONT_ARIAL, 9);
    attTotals[0] = intWindow->getObjectsList()->insertTextBox(165,50,195,65,0,
                                                              "");
    attTotals[0]->setFont(DNT_FONT_TIMES, 12, 0);
@@ -112,14 +114,14 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                                              "");
    attPoints[2]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[2] = intWindow->getObjectsList()->insertButton(92,118,102,135,
-                                                                fnt.createUnicode(0x25C4),0);
-   attButtonNext[2] = intWindow->getObjectsList()->insertButton(123,118,133,135
-                                                                ,fnt.createUnicode(0x25BA),0);
+                                                   fnt.createUnicode(0x25C4),0);
+   attButtonNext[2] = intWindow->getObjectsList()->insertButton(123,118,133,135,
+                                                   fnt.createUnicode(0x25BA),0);
    attTotals[2] = intWindow->getObjectsList()->insertTextBox(165,120,195,135,
                                                              0,"");
    attTotals[2]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[2] = intWindow->getObjectsList()->insertTextBox(196,117,226,132,0,
-                                                    "");
+                                                           "");
    intWindow->getObjectsList()->insertPicture(135,109,0,0,
                                          "../data/skills/Img/constituicao.png");
 
@@ -191,7 +193,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    /* Attribute Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(248,38,519,53,1,
                                              gettext("Attribute Description"));
-   textDescTitle->setFont(DNT_FONT_ARIAL, 14, 0);
+   textDescTitle->setFont(DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(248,54,519,245,
                       (externalSkill->m_skills[1].name + "||" +
@@ -206,7 +208,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    
    /* Cancel Button */
    buttonCancel = intWindow->getObjectsList()->insertButton(10,249,80,268,
-                                               gettext("Cancel"),1);
+                                                          gettext("Cancel"),1);
 
    /* Define Previous Values, if needed */
    if(usePreviousValues)
