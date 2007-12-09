@@ -12,6 +12,7 @@
 #include "guiobject.h"
 #include "guilist.h"
 
+#include <libintl.h>
 #include <string>
 using namespace std;
 

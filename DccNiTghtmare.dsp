@@ -53,7 +53,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib SDL.lib SDL_image.lib opengl32.lib openal32.lib cal3d.lib ogg.lib glu32.lib vorbis.lib vorbisenc.lib vorbisfile.lib sdlmain.lib intl.lib /nologo /subsystem:windows /machine:I386 /out:"bin/DccNiTghtmare.exe"
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib SDL.lib SDL_image.lib opengl32.lib openal32.lib cal3d.lib ogg.lib glu32.lib vorbis.lib vorbisenc.lib vorbisfile.lib sdlmain.lib intl.lib SDL_ttf.lib /nologo /subsystem:windows /machine:I386 /out:"bin/DccNiTghtmare.exe"
 
 !ELSEIF  "$(CFG)" == "DccNiTghtmare - Win32 Debug"
 
@@ -188,6 +188,10 @@ SOURCE=.\src\etc\distance.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\gui\dntfont.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\draw.cpp
 # End Source File
 # Begin Source File
@@ -213,10 +217,6 @@ SOURCE=.\src\fight\fightGroup.cpp
 # Begin Source File
 
 SOURCE=.\src\fight\fightSystem.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\gui\fonte.cpp
 # End Source File
 # Begin Source File
 
@@ -601,6 +601,10 @@ SOURCE=.\src\classes\dices.h
 # Begin Source File
 
 SOURCE=.\src\etc\distance.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\dntfont.h
 # End Source File
 # Begin Source File
 
