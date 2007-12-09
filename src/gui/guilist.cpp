@@ -201,7 +201,6 @@ textBox* guiList::insertTextBox(int xa,int ya,int xb,int yb,
    textBox* novo;
    novo = new textBox(xa,ya,xb,yb,frameType);
    novo->setText(text);
-   novo->setFont(DNT_FONT_COURRIER, 0,12);
    insertObject(novo);
    return(novo);
 } 

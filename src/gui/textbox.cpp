@@ -17,7 +17,7 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType)
    framed = frameType;
    fontAlign = DNT_FONT_ALIGN_LEFT;
    fontName = DNT_FONT_ARIAL;
-   fontSize = 12;
+   fontSize = 10;
 }
 
 /*******************************************************
@@ -49,7 +49,7 @@ void textBox::draw(SDL_Surface *screen)
                        Colors.colorCont[1].B);
    }
    color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
-   fnt.defineFont(fontName.c_str(), fontSize);
+   fnt.defineFont(fontName, fontSize);
    fnt.defineFontAlign(fontAlign);
    fnt.write(screen, x1+2, y1+2, text.c_str(), x1+2, y1+2, x2, y2);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);

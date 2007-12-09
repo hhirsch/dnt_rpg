@@ -64,7 +64,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
                                                   fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(90,346,599,364,1, 
                                                   actualClass->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_LEFT);
+   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER);
 
    intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
 

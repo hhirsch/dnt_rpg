@@ -57,13 +57,11 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    /* Name and Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(6,346,21,364,
                                              fnt.createUnicode(0x25C4),0);
-   buttonPrevious->defineFont(DNT_FONT_ARIAL,9);
    buttonNext = intWindow->getObjectsList()->insertButton(600,346,615,364,
                                              fnt.createUnicode(0x25BA),0);
-   buttonNext->defineFont(DNT_FONT_ARIAL,9);
    textName = intWindow->getObjectsList()->insertTextBox(22,346,599,364,1, 
                                                   actualRace->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_LEFT);
+   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER);
 
    intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
 
