@@ -162,16 +162,23 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    if( (text[0] == '\\') )
    {
       text.erase(0,1);
-      end--;
+      /*end--;
 
       if(end > (int)((text.length() / 2)-1))
       {
          end = (text.length() / 2)-1;
       }
 
-      unicodeText = copyUnicode((Uint16*)text.c_str(), end+1);
-      //writeUnicode(screen, x, y, text, solid);
-      //return(1);
+      unicodeText = copyUnicode((Uint16*)text.c_str(), end+1);*/
+      //FIXME Put it to work at this function, not calling another one!
+      unicodeText = (Uint16*)text.c_str();
+      if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
+      {
+         TTF_SizeUNICODE(activeFont->font, unicodeText, &w, NULL);
+         x = ((x2 + x1) / 2) - (w / 2)-1;
+      }
+      writeUnicode(screen, x, y, text, solid);
+      return(1);
    }
 
    /* Verify Alignment */

@@ -33,11 +33,11 @@ class loadedFont
 class dntFont
 {
    public:
-      /*! Init the font system to use. \note Only needed to be called one time at 
-       * the init of the engine. */
+      /*! Init the font system to use. \note Only needed to be called one 
+       * time at the init of the engine. */
       void init();
-      /*! End the font system. \note Only needed to be called at the exit of the
-       * engine. */
+      /*! End the font system. \note Only needed to be called at 
+       * the exit of the engine. */
       void end();
 
       /*! Define the Active Font

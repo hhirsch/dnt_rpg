@@ -92,13 +92,15 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    /* Dextery */
    intWindow->getObjectsList()->insertTextBox(9,84,85,97,0,
                                               gettext("Dexterity"));
-   attPoints[1] = intWindow->getObjectsList()->insertTextBox(103,82,123,99,
+   attPoints[1] = intWindow->getObjectsList()->insertTextBox(103,82,122,99,
                                                              1,"");
    attPoints[1]->setFont(DNT_FONT_ARIAL, 11, 0);
    attButtonPrev[1] = intWindow->getObjectsList()->insertButton(92,82,102,99,
-                                                                fnt.createUnicode(0x25C4),0);
+                                                  fnt.createUnicode(0x25C4),0);
+   attButtonPrev[1]->defineFont(DNT_FONT_ARIAL, 9);
    attButtonNext[1] = intWindow->getObjectsList()->insertButton(123,82,133,99,
-                                                                fnt.createUnicode(0x25BA),0);
+                                                  fnt.createUnicode(0x25BA),0);
+   attButtonNext[1]->defineFont(DNT_FONT_ARIAL, 9);
    attTotals[1] = intWindow->getObjectsList()->insertTextBox(165,84,195,99, 
                                                              0,"");
    attTotals[1]->setFont(DNT_FONT_TIMES, 12, 0);
@@ -110,13 +112,15 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    /* Constitution */
    intWindow->getObjectsList()->insertTextBox(9,120,87,133,0,
                                               gettext("Constitution"));
-   attPoints[2] = intWindow->getObjectsList()->insertTextBox(103,118,123,135,1,
+   attPoints[2] = intWindow->getObjectsList()->insertTextBox(103,118,122,135,1,
                                                              "");
    attPoints[2]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[2] = intWindow->getObjectsList()->insertButton(92,118,102,135,
                                                    fnt.createUnicode(0x25C4),0);
    attButtonNext[2] = intWindow->getObjectsList()->insertButton(123,118,133,135,
                                                    fnt.createUnicode(0x25BA),0);
+   attButtonPrev[2]->defineFont(DNT_FONT_ARIAL, 9);
+   attButtonNext[2]->defineFont(DNT_FONT_ARIAL, 9);
    attTotals[2] = intWindow->getObjectsList()->insertTextBox(165,120,195,135,
                                                              0,"");
    attTotals[2]->setFont(DNT_FONT_TIMES, 12, 0);
@@ -132,9 +136,12 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                                              1,"");
    attPoints[3]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[3] = intWindow->getObjectsList()->insertButton(92,152,102,169,
-                                                                fnt.createUnicode(0x25C4),0);
+                                                  fnt.createUnicode(0x25C4),0);
    attButtonNext[3] = intWindow->getObjectsList()->insertButton(123,152,
-                                                                133,169,fnt.createUnicode(0x25BA),0);
+                                                                133,169,
+                                                  fnt.createUnicode(0x25BA),0);
+   attButtonPrev[3]->defineFont(DNT_FONT_ARIAL, 9);
+   attButtonNext[3]->defineFont(DNT_FONT_ARIAL, 9);
    attTotals[3] = intWindow->getObjectsList()->insertTextBox(165,154,195,169,
                                                              0,"");
    attTotals[3]->setFont(DNT_FONT_TIMES, 12, 0);
@@ -146,13 +153,16 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    /* Wisdow */
    intWindow->getObjectsList()->insertTextBox(9,188,87,201,0,
                                               gettext("Wisdom"));
-   attPoints[4] = intWindow->getObjectsList()->insertTextBox(103,186,123,203,
+   attPoints[4] = intWindow->getObjectsList()->insertTextBox(103,186,122,203,
                                                              1,"");
    attPoints[4]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[4] = intWindow->getObjectsList()->insertButton(92,186,102,203,
-                                                                fnt.createUnicode(0x25C4),0);
+                                                  fnt.createUnicode(0x25C4),0);
    attButtonNext[4] = intWindow->getObjectsList()->insertButton(123,186,
-                                                                133,203,fnt.createUnicode(0x25BA),0);
+                                                                133,203,
+                                                  fnt.createUnicode(0x25BA),0);
+   attButtonPrev[4]->defineFont(DNT_FONT_ARIAL, 9);
+   attButtonNext[4]->defineFont(DNT_FONT_ARIAL, 9);
    attTotals[4] = intWindow->getObjectsList()->insertTextBox(165,188,195,203,
                                                              0,"");
    attTotals[4]->setFont(DNT_FONT_TIMES, 12, 0);
@@ -164,13 +174,16 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    /* Charism */
    intWindow->getObjectsList()->insertTextBox(9,222,87,235,0,
                                               gettext("Charism"));
-   attPoints[5] = intWindow->getObjectsList()->insertTextBox(103,220,123,237,1,
+   attPoints[5] = intWindow->getObjectsList()->insertTextBox(103,220,122,237,1,
                                                              "");
    attPoints[5]->setFont(DNT_FONT_ARIAL, 10, 0);
    attButtonPrev[5] = intWindow->getObjectsList()->insertButton(92,220,102,237,
-                                                                fnt.createUnicode(0x25C4),0);
+                                                  fnt.createUnicode(0x25C4),0);
    attButtonNext[5] = intWindow->getObjectsList()->insertButton(123,220,
-                                                                133,237,fnt.createUnicode(0x25BA),0);
+                                                                133,237,
+                                                  fnt.createUnicode(0x25BA),0);
+   attButtonPrev[5]->defineFont(DNT_FONT_ARIAL, 9);
+   attButtonNext[5]->defineFont(DNT_FONT_ARIAL, 9);
    attTotals[5] = intWindow->getObjectsList()->insertTextBox(165,221,195,237,
                                                              0,"");
    attTotals[5]->setFont(DNT_FONT_TIMES, 12, 0);
