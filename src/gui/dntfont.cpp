@@ -12,9 +12,9 @@ void dntFont::init()
        printf("Can't init SDL_ttf : %s\n", TTF_GetError());
        exit(3);
     }
+    fontsList = NULL;
+    totalFonts = 0;
     activeFont = NULL;
-    activeFontName = "";
-    activeFontSize = 0;
     activeFontAlign = DNT_FONT_ALIGN_LEFT;
     defineFont(DNT_FONT_ARIAL,12);
 }
@@ -24,13 +24,87 @@ void dntFont::init()
  **********************************************************************/
 void dntFont::end()
 {
-   /* Close the active Font, if is opened */
-   if(activeFont)
+   int i;
+   loadedFont* fnt = fontsList;
+   loadedFont* tmp;
+
+   /* Close and delete all fonts on the list */
+   for(i = 0; i < totalFonts; i++)
    {
-      TTF_CloseFont(activeFont);
+      tmp = fnt;
+      fnt = fnt->next;
+      if(tmp->font)
+      {
+         TTF_CloseFont(tmp->font);
+      }
+      delete(tmp);
    }
    /* Quit SDL_ttf */
    TTF_Quit();
+}
+
+/**********************************************************************
+ *                            findFont                                *
+ **********************************************************************/
+loadedFont* dntFont::findFont(string fontName, int fontSize)
+{
+   int i;
+   loadedFont* fnt = fontsList;
+   for(i = 0; i < totalFonts; i++)
+   {
+      if( (fontName == fnt->fontName) && (fontSize == fnt->fontSize) )
+      {
+         /* Found */
+         return(fnt);
+      }
+      fnt = fnt->next;
+   }
+   /* Not found */
+   return(NULL);
+}
+
+/**********************************************************************
+ *                             loadFont                               *
+ **********************************************************************/
+loadedFont* dntFont::loadFont(string fontName, int fontSize)
+{
+   loadedFont* fnt = NULL;
+
+   fnt = findFont(fontName, fontSize);
+
+   if(!fnt)
+   {
+      /* Not found the font, so open it! */
+      fnt = new loadedFont();
+      fnt->fontName = fontName;
+      fnt->fontSize = fontSize;
+      fnt->font = TTF_OpenFont(fontName.c_str(), fontSize);
+
+      if(!fnt->font)
+      {
+         printf("Can't open font file: %s\n", fontName.c_str());
+         return(NULL);
+      }
+
+      if(fontsList == NULL)
+      {
+         fontsList = fnt;
+         fnt->next = fnt;
+         fnt->previous = fnt;
+      }
+      else
+      {
+         fnt->next = fontsList;
+         fnt->previous = fontsList->previous;
+         fnt->next->previous = fnt;
+         fnt->previous->next = fnt;
+         fontsList = fnt;
+      }
+
+      totalFonts++;
+   }
+
+   return(fnt);
 }
 
 /**********************************************************************
@@ -38,26 +112,11 @@ void dntFont::end()
  **********************************************************************/
 bool dntFont::defineFont(string fileName, int size)
 {
-   if( (activeFontName != fileName) || (size != activeFontSize) )
+   if( (!activeFont) ||
+       (activeFont->fontName != fileName) || 
+       (activeFont->fontSize != size) )
    {
-      if(activeFont)
-      {
-         TTF_CloseFont(activeFont);
-      }
-      activeFont = TTF_OpenFont(fileName.c_str(), size);
-      if(activeFont)
-      {
-         activeFontName = fileName;
-         activeFontSize = size;
-         return(true);
-      }
-      else
-      {
-         activeFontName = "";
-         activeFontSize = 0;
-         printf("Can't open font file: %s\n", fileName.c_str());
-         return(false);
-      }
+      activeFont = loadFont(fileName.c_str(), size);
    }
    return(true);
 }
@@ -118,7 +177,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    /* Verify Alignment */
    if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
    {
-      TTF_SizeUNICODE(activeFont, unicodeText, &w, NULL);
+      TTF_SizeUNICODE(activeFont->font, unicodeText, &w, NULL);
       x = ((x2 + x1) / 2) - (w / 2)-1;
    }
 
@@ -139,7 +198,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
          strLine[uni] = unicodeText[aux];
          strLine[uni+1] = 0;
          uni++;
-         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
+         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
          if(w >= maxWidth)
          {
             /* So, if the width is bigger, write the string without 
@@ -159,13 +218,13 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
             /* Write with the font */
             if(solid)
             {
-               writeSurface = TTF_RenderUNICODE_Solid(activeFont, strLine, 
+               writeSurface = TTF_RenderUNICODE_Solid(activeFont->font,strLine, 
                                                       color);
             }
             else
             {
-               writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine, 
-                                                        color);
+               writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,
+                                                        strLine, color);
             }
 
             /* Put the character */
@@ -203,17 +262,17 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       }
       else
       {
-         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
+         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
          /* | breaks a line */
 
          if(solid)
          {
-            writeSurface = TTF_RenderUNICODE_Solid(activeFont, strLine,
+            writeSurface = TTF_RenderUNICODE_Solid(activeFont->font,strLine,
                                                    color);
          }
          else
          {
-            writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine,
+            writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,strLine,
                                                      color);
          }
 
@@ -233,16 +292,16 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
 
    if(uni != 0)
    {
-      TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
+      TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
       /* Remaining things to write */
       if(solid)
       {
-         writeSurface = TTF_RenderUNICODE_Solid(activeFont, strLine,
+         writeSurface = TTF_RenderUNICODE_Solid(activeFont->font, strLine,
                                                 color);
       }
       else
       {
-         writeSurface = TTF_RenderUNICODE_Blended(activeFont, strLine,
+         writeSurface = TTF_RenderUNICODE_Blended(activeFont->font, strLine,
                                                   color);
       }
 
@@ -299,13 +358,13 @@ void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text,
    /* Write Unicode Text */
    if(solid)
    {
-      writeSurface = TTF_RenderUNICODE_Solid(activeFont,
+      writeSurface = TTF_RenderUNICODE_Solid(activeFont->font,
                                              (Uint16*)text.c_str(), 
                                              color);
    }
    else
    {
-      writeSurface = TTF_RenderUNICODE_Blended(activeFont,
+      writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,
                                                (Uint16*)text.c_str(), 
                                                 color);
    }
@@ -368,9 +427,12 @@ Uint16* dntFont::copyUnicode(Uint16 *uni, int len)
  ***********************************************************************/
 int dntFont::getStringWidth(string s)
 {
-   int w;
+   int w = 0;
    Uint16* uniStr = convertToUnicode(curUnicode, s.c_str(), s.length());
-   TTF_SizeUNICODE(activeFont, uniStr, &w, NULL);
+   if(activeFont != NULL)
+   {
+      TTF_SizeUNICODE(activeFont->font, uniStr, &w, NULL);
+   }
    return(w);
 }
 
@@ -382,7 +444,7 @@ int dntFont::getIncCP()
    int adv = 0;
    if(activeFont)
    {
-      TTF_GlyphMetrics(activeFont, 'm', NULL, NULL, NULL, NULL, &adv);
+      TTF_GlyphMetrics(activeFont->font, 'm', NULL, NULL, NULL, NULL, &adv);
       return(adv);
    }
    return(0);
@@ -395,7 +457,7 @@ int dntFont::getHeight()
 {
    if(activeFont)
    {
-      return(TTF_FontHeight(activeFont));
+      return(TTF_FontHeight(activeFont->font));
    }
    return(0);
 }
@@ -418,6 +480,11 @@ int dntFont::getTotalLines(string source, int x1, int x2)
    //FIXME the size!
    int size = (int)source.length();
 
+   if(!activeFont)
+   {
+      return(0);
+   }
+
    for(i=0; (i < size) ; i++)
    {
       if(uniStr[i] == '|')
@@ -433,7 +500,7 @@ int dntFont::getTotalLines(string source, int x1, int x2)
          strLine[uni] = uniStr[i];
          uni++;
          strLine[uni] = 0;
-         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
+         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
          if(w >= maxWidth)
          {
             lines++;
@@ -504,6 +571,11 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
    //FIXME the size!
    int size = (int)source.length();
 
+   if(!activeFont)
+   {
+      return("");
+   }
+
    /* Positionate the string to the first desired line */
    for(i=0; ( (i < size) && (line < firstLine)) ; i++)
    {
@@ -523,7 +595,7 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
          strLine[uni] = uniStr[i];
          uni++;
          strLine[uni] = 0;
-         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
+         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
          if(w >= maxWidth)
          {
             line++;
@@ -577,7 +649,7 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
          {
             lastSpace = uni-1;
          }
-         TTF_SizeUNICODE(activeFont, strLine, &w, NULL);
+         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
          if(w >= maxWidth)
          {
             line++;
@@ -620,8 +692,8 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
 }
 
 /* Static Variables */
-TTF_Font*  dntFont::activeFont;
-string     dntFont::activeFontName;
-int        dntFont::activeFontSize;
-int        dntFont::activeFontAlign;
+loadedFont*  dntFont::activeFont;
+loadedFont*  dntFont::fontsList;
+int          dntFont::totalFonts;
+int          dntFont::activeFontAlign;
 

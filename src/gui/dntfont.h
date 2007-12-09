@@ -15,6 +15,20 @@ using namespace std;
 
 #define MAX_TEXT  8192
 
+/*! Single loaded font */
+class loadedFont
+{
+   public:
+      string fontName;        /**< The font Name */
+      int fontSize;           /**< The font size */
+
+      TTF_Font* font;         /**< The loaded TTF font */
+
+      loadedFont* next;       /**< Next font on the chain list */
+      loadedFont* previous;   /**< Previous font on the chain list */
+
+};
+
 /*! The DNT font class. Used to write texts on surfaces with ttf fonts. */
 class dntFont
 {
@@ -129,10 +143,23 @@ class dntFont
       Uint16* copyUnicode(Uint16 *uni, int len);
 
    protected:
-      static TTF_Font* activeFont;  /**< The active Font */
-      static string activeFontName; /**< The active font file name */
-      static int activeFontSize;    /**< The active font size */
-      static int activeFontAlign;   /**< The active Font Align */
+
+      /*! Load a font to the list, if it not already there
+       * \param fontName -> file name of the font to load
+       * \param fontSize -> size of the font to load
+       * \return -> loadedFont pointer */
+      loadedFont* loadFont(string fontName, int fontSize);
+      /*! Search for a font on the list
+       * \param fontName -> file name of the font to load
+       * \param fontSize -> size of the font to load
+       * \return -> loadedFont pointer with the founded font, or NULL, if not found. */
+      loadedFont* findFont(string fontName, int fontSize);
+      
+
+      static loadedFont* fontsList;  /**< The active Font List */
+      static int totalFonts;         /**< Total Opened fonts on list */
+      static int activeFontAlign;    /**< The active font alignment */
+      static loadedFont* activeFont; /**< The active font */
 
       Uint16 curUnicode[MAX_TEXT];
       Uint16 strLine[MAX_TEXT];

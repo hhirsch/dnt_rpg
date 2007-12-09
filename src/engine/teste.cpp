@@ -64,7 +64,7 @@ int main(int argc, char **argv)
              glDisable(GL_LIGHTING);
              Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 
                                     800, 600);
-             Engine->LoadMap("../data/mapas/teste2.map",0);
+             Engine->LoadMap("../data/mapas/teste1.map",0);
           }
        }
        
