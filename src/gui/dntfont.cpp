@@ -1,5 +1,6 @@
 #include "dntfont.h"
 #include "draw.h"
+#include <libintl.h>
 
 /**********************************************************************
  *                               init                                 *
@@ -9,7 +10,7 @@ void dntFont::init()
    /* Init SDL_ttf */
     if(TTF_Init() == -1)
     {
-       printf("Can't init SDL_ttf : %s\n", TTF_GetError());
+       printf(gettext("Can't init SDL_ttf : %s\n"), TTF_GetError());
        exit(3);
     }
     fontsList = NULL;
@@ -82,7 +83,7 @@ loadedFont* dntFont::loadFont(string fontName, int fontSize)
 
       if(!fnt->font)
       {
-         printf("Can't open font file: %s\n", fontName.c_str());
+         printf(gettext("Can't open font file: %s\n"), fontName.c_str());
          return(NULL);
       }
 
@@ -563,53 +564,60 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
                           int x1, int x2)
 {
    string result = "";
-   int i, k, last;
-   int line = 0;
-
+   int aux, k, curY, w = 0;
    int maxWidth = x2 - x1;
-
-   int w;
-
-   Uint16* uniStr = convertToUnicode(curUnicode,source.c_str(),source.length());
    int uni = 0;
-   int lastSpace = -1;
+   int last = -1, lastSpace = -1;
    strLine[0] = 0;
 
-   //FIXME the size!
-   int size = (int)source.length();
+   Uint16* unicodeText;
 
+   int height = getHeight();
+
+   /* Verify if avaible */
    if(!activeFont)
    {
-      return("");
+      return(-1);
    }
 
-   /* Positionate the string to the first desired line */
-   for(i=0; ( (i < size) && (line < firstLine)) ; i++)
+   /* Convert to unicode, if needed */
+   unicodeText = convertToUnicode(curUnicode, text.c_str(), text.length());
+
+   for(aux=init;(aux<=end);aux++)
    {
-      if(uniStr[i] == '|')
+      if(unicodeText[aux] != '|')
       {
-         line++;
-         uni = 0;
-         strLine[uni] = 0;
-         lastSpace = -1;
-      }
-      else
-      {
-         if(uniStr[i] == ' ')
+         if(unicodeText[aux] == ' ')
          {
             lastSpace = uni;
          }
-         strLine[uni] = uniStr[i];
+         strLine[uni] = unicodeText[aux];
+         strLine[uni+1] = 0;
          uni++;
-         strLine[uni] = 0;
          TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
          if(w >= maxWidth)
          {
-            line++;
+            /* So, if the width is bigger, write the string without 
+             * the characters after the last space, or without the last 
+             * character */
+            if(lastSpace != -1)
+            {
+               last = uni;
+               strLine[lastSpace] = 0;
+               result += " ";
+               result += unicodeToString(strLine, lastSpace);
+            }
+            else
+            {
+               /* Ignore the last character */
+               strLine[uni] = 0;
+               result += unicodeToString(strLine, uni);
+            }
+
+            /* Put the character */
             if(lastSpace != -1)
             {
                /* Copy all characters from the last space to the position */
-               last = uni;
                uni = 0;
                for(k=lastSpace+1; k < last; k++)
                {
@@ -621,84 +629,30 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
             else
             {
                /* Copy only the last character */
-               uni = 0;
-               strLine[uni] = uniStr[i];
-               uni++;
+               strLine[0] = unicodeText[aux];
+               uni = 1;
                strLine[uni] = 0;
             }
             lastSpace = -1;
          }
-      }
-   }
-   
-   //FIXME correct the size!
-   uni = 0;
-   lastSpace = -1;
-   strLine[0] = 0;
-
-   /* Copy to the desired line (or end of the string, witch occurs first) */
-   for(; ( (i < size) && (line <= lastLine)); i++)
-   {
-      strLine[uni] = uniStr[i];
-      uni++;
-      strLine[uni] = 0;
-      if(uniStr[i] == '|')
-      {
-         result += unicodeToString(strLine,uni);
-         line++;
-         uni = 0;
-         strLine[uni] = 0;
-         lastSpace = -1;
+         
       }
       else
       {
-         if(uniStr[i] == ' ')
-         {
-            lastSpace = uni-1;
-         }
          TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-         if(w >= maxWidth)
-         {
-            line++;
-            if(lastSpace != -1)
-            {
-               /* Copy all characters from the last space to the position */
-               strLine[lastSpace] = 0;
-               result += unicodeToString(strLine,lastSpace);
-               last = uni;
-               /* Do not remove the space, since we'll use it when writing */
-               strLine[0] = ' ';
-               uni = 1;
-               for(k=lastSpace+1; k < last; k++)
-               {
-                  strLine[uni] = strLine[k];
-                  uni++;
-               }
-               strLine[uni] = 0;
-            }
-            else
-            {
-               /* Copy only the last character */
-               strLine[uni] = 0;
-               result += unicodeToString(strLine, uni);
-               uni = 0;
-               strLine[uni] = uniStr[i];
-               uni++;
-               strLine[uni] = 0;
-            }
-            lastSpace = -1;
-         }
+         /* | breaks a line */
+
+         result += unicodeToString(strLine, uni);
+         uni = 0;
+         strLine[uni] = 0;
       }
    }
 
-   if( (line <= lastLine) && (uni > 0) )
+   if(uni != 0)
    {
+      TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
       result += unicodeToString(strLine, uni);
    }
-
-   /*printf("result: %s\n", result.c_str());
-
-   printf("line : %d, first: %d, last: %d\n", line, firstLine, lastLine);*/
 
    return(result);
 }

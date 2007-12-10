@@ -7,7 +7,7 @@
 #include "guilist.h"
 #include "interface.h"
 
-#define ACTUALIZE_RATE 50
+#define UPDATE_RATE 50
 
 /*********************************************************************
  *                            Constructor                            *
@@ -17,7 +17,7 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
 {
    dntFont fnt;
    wSurface = surface;
-   lastActualized = SDL_GetTicks();
+   lastUpdated = SDL_GetTicks();
    if(!list)
    {
       printf("Unknow Objects List when inserting rolBar!\n");
@@ -69,9 +69,9 @@ rolBar::~rolBar()
 bool rolBar::eventGot(int type, guiObject* object)
 {
    dntFont fnt;
-   if((SDL_GetTicks() - lastActualized) >= ACTUALIZE_RATE)
+   if((SDL_GetTicks() - lastUpdated) >= UPDATE_RATE)
    {
-      lastActualized = SDL_GetTicks();
+      lastUpdated = SDL_GetTicks();
       if(type == ON_PRESS_BUTTON)
       {
          if(object == (guiObject*)up)
@@ -147,7 +147,7 @@ void rolBar::setText(string txt)
 {
    dntFont fnt;
    fullText = txt;
-   totalLines = fnt.getTotalLines(fullText,x1,x2-13);
+   totalLines = fnt.getTotalLines(fullText,x1+2,x2-13);
    actualInit = 0;
    actualEnd = maxLines - 1;
    if(maxLines <= totalLines)
