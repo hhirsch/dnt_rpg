@@ -126,7 +126,7 @@ void particleSystem::init(int total, int mode)
    if(drawMode == PARTICLE_DRAW_GROUPS)
    {
       vertexArray = (float*) new float[total*3];
-      colorArray = (float*) new float[total*4];
+      colorArray = (float*) new float[total*3];
    }
    else
    {
