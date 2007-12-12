@@ -564,7 +564,7 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
                           int x1, int x2)
 {
    string result = "";
-   int aux, k, curY, w = 0;
+   int aux, k, w = 0;
    int maxWidth = x2 - x1;
    int uni = 0;
    int last = -1, lastSpace = -1;
@@ -572,18 +572,16 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
 
    Uint16* unicodeText;
 
-   int height = getHeight();
-
    /* Verify if avaible */
    if(!activeFont)
    {
-      return(-1);
+      return("");
    }
 
    /* Convert to unicode, if needed */
-   unicodeText = convertToUnicode(curUnicode, text.c_str(), text.length());
+   unicodeText = convertToUnicode(curUnicode, source.c_str(), source.length());
 
-   for(aux=init;(aux<=end);aux++)
+   for(aux=0;(aux <= (int)source.length());aux++)
    {
       if(unicodeText[aux] != '|')
       {
