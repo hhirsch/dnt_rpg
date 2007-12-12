@@ -602,7 +602,7 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
             {
                last = uni;
                strLine[lastSpace] = 0;
-               result += " ";
+               //result += " ";
                result += unicodeToString(strLine, lastSpace);
             }
             else
@@ -616,7 +616,8 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
             if(lastSpace != -1)
             {
                /* Copy all characters from the last space to the position */
-               uni = 0;
+               uni = 1;
+               strLine[0] = ' ';
                for(k=lastSpace+1; k < last; k++)
                {
                   strLine[uni] = strLine[k];
@@ -640,7 +641,7 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
          TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
          /* | breaks a line */
 
-         result += unicodeToString(strLine, uni);
+         result += unicodeToString(strLine, uni) + '|';
          uni = 0;
          strLine[uni] = 0;
       }
