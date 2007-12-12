@@ -564,6 +564,7 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
                           int x1, int x2)
 {
    string result = "";
+   int line = 0;
    int aux, k, w = 0;
    int maxWidth = x2 - x1;
    int uni = 0;
@@ -581,7 +582,7 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
    /* Convert to unicode, if needed */
    unicodeText = convertToUnicode(curUnicode, source.c_str(), source.length());
 
-   for(aux=0;(aux <= (int)source.length());aux++)
+   for(aux=0;( (aux <= (int)source.length()) && (line < lastLine));aux++)
    {
       if(unicodeText[aux] != '|')
       {
@@ -603,14 +604,21 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
                last = uni;
                strLine[lastSpace] = 0;
                //result += " ";
-               result += unicodeToString(strLine, lastSpace);
+               if(line >= firstLine)
+               {
+                  result += unicodeToString(strLine, lastSpace);
+               }
             }
             else
             {
                /* Ignore the last character */
                strLine[uni] = 0;
-               result += unicodeToString(strLine, uni);
+               if(line >= firstLine)
+               {
+                  result += unicodeToString(strLine, uni);
+               }
             }
+            line++;
 
             /* Put the character */
             if(lastSpace != -1)
@@ -641,17 +649,21 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
          TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
          /* | breaks a line */
 
-         result += unicodeToString(strLine, uni) + '|';
+         if(line >= firstLine)
+         {
+            result += unicodeToString(strLine, uni) + '|';
+         }
+         line++;
          uni = 0;
          strLine[uni] = 0;
       }
    }
 
-   if(uni != 0)
+   /*if( (line >= firstLine) && (line <= lastLine) && (uni != 0))
    {
       TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
       result += unicodeToString(strLine, uni);
-   }
+   }*/
 
    return(result);
 }
