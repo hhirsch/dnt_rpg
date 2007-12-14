@@ -69,6 +69,7 @@ rolBar::~rolBar()
 bool rolBar::eventGot(int type, guiObject* object)
 {
    dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
    if((SDL_GetTicks() - lastUpdated) >= UPDATE_RATE)
    {
       lastUpdated = SDL_GetTicks();
@@ -146,6 +147,7 @@ void rolBar::redraw()
 void rolBar::setText(string txt)
 {
    dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
    fullText = txt;
    totalLines = fnt.getTotalLines(fullText,x1+2,x2-13);
    actualInit = 0;
@@ -175,6 +177,7 @@ void rolBar::setText(string txt)
 void rolBar::addText(string txt)
 {
    dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
    /* Add Text */
    fullText += txt;
    /* Set the new scrollText */

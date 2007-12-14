@@ -553,7 +553,6 @@ string unicodeToString(Uint16* unicode, int size)
    {
       res += (char)unicode[i];
    }
-   //printf("res: %s\n",res.c_str());
    return(res);
 }
 
@@ -582,7 +581,7 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
    /* Convert to unicode, if needed */
    unicodeText = convertToUnicode(curUnicode, source.c_str(), source.length());
 
-   for(aux=0;( (aux <= (int)source.length()) && (line < lastLine));aux++)
+   for(aux=0;( (aux <= (int)source.length()) && (line <= lastLine));aux++)
    {
       if(unicodeText[aux] != '|')
       {
@@ -659,11 +658,11 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
       }
    }
 
-   /*if( (line >= firstLine) && (line <= lastLine) && (uni != 0))
+   if( (line >= firstLine) && (line <= lastLine) && (uni != 0))
    {
       TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
       result += unicodeToString(strLine, uni);
-   }*/
+   }
 
    return(result);
 }
