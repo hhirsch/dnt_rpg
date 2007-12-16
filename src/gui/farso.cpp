@@ -9,7 +9,8 @@
 /************************************************************
  *                        Farso_Init                        *
  ************************************************************/
-void Farso_Init(SDL_Surface **screen, string title)
+void Farso_Init(SDL_Surface **screen, string title, int width, int height,
+                bool fullScreen)
 {
     /* Start Openning the screen  */
     if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
@@ -19,25 +20,9 @@ void Farso_Init(SDL_Surface **screen, string title)
     }
     atexit(SDL_Quit);
 
-    SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
-    SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8);
-   
-    /*SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5 );
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );*/
-
-    *screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, 32, /*SDL_FULLSCREEN |*/
-                               /*SDL_SWSURFACE |*/ SDL_DOUBLEBUF | SDL_OPENGL);
-    if ( *screen == NULL ) 
-    {
-       printf(gettext("Oxi! Can't ajust video mode: %s!\n"),SDL_GetError());
-       exit(2);
-    }
-
-    SDL_WM_SetCaption(title.c_str(),"");
-
+    /* Define the resolution */
+    Farso_DefineResolution(screen, title, width, height, fullScreen);
+    
     /* Define ignored events */
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
     SDL_EventState(SDL_ACTIVEEVENT, SDL_IGNORE);
@@ -56,6 +41,42 @@ void Farso_Init(SDL_Surface **screen, string title)
 
     dntFont fnt;
     fnt.init();
+}
+
+/************************************************************
+ *                  Farso_DefineResolution                  *
+ ************************************************************/
+void Farso_DefineResolution(SDL_Surface **screen, string title, 
+                            int width, int height,
+                            bool fullScreen)
+{
+   SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+    SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8);
+   
+    /*SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5 );
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16 );
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1 );*/
+
+    int flags = SDL_DOUBLEBUF | SDL_OPENGL;
+
+    if(fullScreen)
+    {
+      flags |= SDL_FULLSCREEN;
+    }
+    
+    SCREEN_X = width;
+    SCREEN_Y = height;
+
+    *screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, 32, flags);
+    if ( *screen == NULL ) 
+    {
+       printf(gettext("Oxi! Can't ajust video mode: %s!\n"),SDL_GetError());
+       exit(2);
+    }
+
+    SDL_WM_SetCaption(title.c_str(),"");
 }
 
 /************************************************************

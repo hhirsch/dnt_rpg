@@ -25,11 +25,37 @@
 /****************************************************************
  *                          Constructor                         *
  ****************************************************************/
-options::options(string file)
+options::options()
+{
+   reflexionType = REFLEXIONS_NONE;
+   timeLastOperation = SDL_GetTicks();
+}
+
+/****************************************************************
+ *                             Destructor                       *
+ ****************************************************************/
+options::~options()
+{
+}
+
+/****************************************************************
+ *                     getAvaibleResolutions                    *
+ ****************************************************************/
+void options::getAvaibleResolutions()
+{
+   /* Get available fullscreen/hardware modes */
+   resolutions=SDL_ListModes(NULL,SDL_FULLSCREEN | SDL_DOUBLEBUF | SDL_OPENGL);
+}
+
+/****************************************************************
+ *                              Load                            *
+ ****************************************************************/
+bool options::load(string file)
 {
    FILE* arq;
    char buffer[256];
    int aux;
+   string s = "";
 
    reflexionType = REFLEXIONS_NONE;
   
@@ -37,48 +63,63 @@ options::options(string file)
 
    if(!(arq = fopen(file.c_str(),"r")))
    {
-      printf("Error while opening Options: %s\n",file.c_str());
-      return;
+      return(false);
    }
-   fileName = file;
 
    while(fscanf(arq, "%s", buffer) != EOF)
    {
-      switch(buffer[0])
+      s = buffer;
+      if(s == "Sound:")
       {
-         case 'S':
-           /* Read Sound and Music Options */
-           fgets(buffer, sizeof(buffer), arq);
-           sscanf(buffer,"%d %d",&musicVolume,&sndfxVolume);
-         break;
-         case 'L':
-           /* Read Language Options */
-           fgets(buffer, sizeof(buffer), arq); 
-           sscanf(buffer,"%d",&langNumber);
-         break;
-         case 'C':
-           /* Read Camera Options */
-           fgets(buffer, sizeof(buffer), arq); 
-           sscanf(buffer,"%d",&cameraNumber);
-         break;
-         case 'P':
-           /* Read Particles Options */
-           fgets(buffer, sizeof(buffer), arq); 
-           sscanf(buffer,"%d",&aux);
-           enableParticles = (aux == 1);
-         break;
-         case 'G':
-           /* Read Grass Options */
-           fgets(buffer, sizeof(buffer), arq); 
-           sscanf(buffer,"%d",&aux);
-           enableGrass = (aux == 1);
-         break;
-         case 'R':
-            /* Read Reflexions Options */
-            fgets(buffer, sizeof(buffer), arq);
-            sscanf(buffer,"%d",&aux);
-            reflexionType = aux;
-         break;
+         /* Read Sound and Music Options */
+         fgets(buffer, sizeof(buffer), arq);
+         sscanf(buffer,"%d %d",&musicVolume,&sndfxVolume);
+      }
+      else if(s == "Language:")
+      {
+         /* Read Language Options */
+         fgets(buffer, sizeof(buffer), arq); 
+         sscanf(buffer,"%d",&langNumber);
+      }
+      else if(s == "Camera:")
+      {
+         /* Read Camera Options */
+         fgets(buffer, sizeof(buffer), arq); 
+         sscanf(buffer,"%d",&cameraNumber);
+      }
+      else if(s == "Particles:")
+      {
+         /* Read Particles Options */
+         fgets(buffer, sizeof(buffer), arq); 
+         sscanf(buffer,"%d",&aux);
+         enableParticles = (aux == 1);
+      }
+      else if(s == "Grass:")
+      {
+         /* Read Grass Options */
+         fgets(buffer, sizeof(buffer), arq); 
+         sscanf(buffer,"%d",&aux);
+         enableGrass = (aux == 1);
+      }
+      else if(s == "Reflexions:")
+      {
+         /* Read Reflexions Options */
+         fgets(buffer, sizeof(buffer), arq);
+         sscanf(buffer,"%d",&aux);
+         reflexionType = aux;
+      }
+      else if(s == "Resolution:")
+      {
+         /* Read the resolution informations */
+         fgets(buffer, sizeof(buffer), arq);
+         sscanf(buffer,"%d %d", &screenWidth, &screenHeight);
+      }
+      else if(s == "FullScreen:")
+      {
+         /* Read Grass Options */
+         fgets(buffer, sizeof(buffer), arq); 
+         sscanf(buffer,"%d",&aux);
+         enableFullScreen = (aux == 1);
       }
    }
    if(musicVolume > SDL_MIX_MAXVOLUME)
@@ -91,20 +132,15 @@ options::options(string file)
    }
 
    fclose(arq);
+   
+   return(true);
 
-}
-
-/****************************************************************
- *                             Destructor                       *
- ****************************************************************/
-options::~options()
-{
 }
 
 /****************************************************************
  *                               Save                           *
  ****************************************************************/
-void options::Save()
+void options::save(string fileName)
 {
    FILE* arq;
    if(!(arq = fopen(fileName.c_str(),"w")))
@@ -144,6 +180,19 @@ void options::Save()
 
    /* Reflexion */
    fprintf(arq, "Reflexions: %d\n", reflexionType);
+
+   /* Resolution */
+   fprintf(arq, "Resolution: %d %d\n",screenWidth, screenHeight);
+
+   /* Fullscreen */
+   if(enableFullScreen)
+   {
+      fprintf(arq, "FullScreen: 1\n");
+   }
+   else
+   {
+      fprintf(arq, "FullScreen: 0\n");
+   }
 
    fclose(arq);
 }
@@ -273,7 +322,7 @@ string options::cameraName()
 /****************************************************************
  *                    Open Options Screen                       *
  ****************************************************************/
-void options::DisplayOptionsScreen(interface* interf)
+void options::displayOptionsScreen(interface* interf)
 {
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL, 10);
@@ -428,7 +477,7 @@ void options::DisplayOptionsScreen(interface* interf)
 /****************************************************************
  *                             Treat                            *
  ****************************************************************/
-int options::Treat(guiObject* object, int eventInfo, interface* interf)
+int options::treat(guiObject* object, int eventInfo, interface* interf)
 {
    if( (eventInfo == ON_PRESS_BUTTON) && 
          (SDL_GetTicks() - timeLastOperation > 100) )
@@ -519,7 +568,8 @@ int options::Treat(guiObject* object, int eventInfo, interface* interf)
       {
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
-         Save();
+         //FIXME -> the save fileName must be at the users home!
+         save("dcc.opc");
          interf->closeWindow(intWindow);
          return(OPTIONSW_CONFIRM);
       }
@@ -563,4 +613,16 @@ int options::Treat(guiObject* object, int eventInfo, interface* interf)
    intWindow->draw(0,0);
    return(OPTIONSW_OTHER);
 } 
+
+
+int  options::musicVolume;      /**< Actual Music Volume */
+int  options::sndfxVolume;      /**< Actual Sound Effects Volume */
+int  options::langNumber;       /**< Actual Language Number */
+int  options::cameraNumber;     /**< Actual Camera Mode */
+bool options::enableParticles;  /**< Enable/Disable Particles */
+bool options::enableGrass;      /**< Enable/Disable Grass */
+int  options::reflexionType;    /**< Reflexion Type */
+int  options::screenWidth;      /**< Screen Height */
+int  options::screenHeight;     /**< Screen Width */
+bool options::enableFullScreen; /**< If fullscreen is defined */
 

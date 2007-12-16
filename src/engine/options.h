@@ -19,35 +19,46 @@ using namespace std;
 class options
 {
    public:
-      /*! options Constructor that will load options from file.
-       * \param file -> filename with the options file to be loaded. */
-      options(string file);
+      /*! Constructor */
+      options();
       /*! options destructor */
       ~options();
 
       /*! Display the Options Screen 
        * \param interf -> GUI interface to be used.*/
-      void DisplayOptionsScreen(interface* interf);
-      /*! Save actual options on file. */
-      void Save();
+      void displayOptionsScreen(interface* interf);
+      /*! Save actual options on file.
+       * \param fileName -> name of the file to save */
+      void save(string fileName);
+      /*! Load options from file
+       * \param file -> filename with the options file to be loaded.
+       * \return true if can load the options, false otherwise */
+      bool load(string file);
       /*! Treat options Window Events */
-      int Treat(guiObject* object, int eventInfo, interface* interf);
+      int treat(guiObject* object, int eventInfo, interface* interf);
 
       /*! Set language to one defined at the option's file */
       void setLanguage();
 
-      int     musicVolume;     /**< Actual Music Volume */
-      int     sndfxVolume;     /**< Actual Sound Effects Volume */
-      int     langNumber;      /**< Actual Language Number */
-      int     cameraNumber;    /**< Actual Camera Mode */
-      bool    enableParticles; /**< Enable/Disable Particles */
-      bool    enableGrass;     /**< Enable/Disable Grass */
-      int     reflexionType;   /**< Reflexion Type */
+      /*! Get all avaible resolutions at fullscreen mode */
+      void getAvaibleResolutions();
+
+      static int     musicVolume;     /**< Actual Music Volume */
+      static int     sndfxVolume;     /**< Actual Sound Effects Volume */
+      static int     langNumber;      /**< Actual Language Number */
+      static int     cameraNumber;    /**< Actual Camera Mode */
+      static bool    enableParticles; /**< Enable/Disable Particles */
+      static bool    enableGrass;     /**< Enable/Disable Grass */
+      static int     reflexionType;   /**< Reflexion Type */
+      static int     screenWidth;     /**< Screen Height */
+      static int     screenHeight;    /**< Screen Width */
+      static bool    enableFullScreen;/**< If fullscreen is defined */
+
       window* intWindow;       /**< Options Window Pointer */
 
 
    private:
-      string       fileName;       /**< options fileName to be used */
+      SDL_Rect**   resolutions;    /**< the avaible resolutions */
       textBox* txtMusicVolume;     /**< Music Volume Text on Window*/
       textBox* txtSndfxVolume;     /**< Sound Effects Volume Text on Window*/
       textBox* txtLanguage;        /**< Language Text on Window */

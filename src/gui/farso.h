@@ -32,8 +32,22 @@
 
 /*! Init the SDL/OpenGL Context
  * \param screen -> pointer to the pointer to the surface used as screen
- * \param title -> title of the screen */
-void Farso_Init(SDL_Surface **screen, string title);
+ * \param title -> title of the screen
+ * \param width -> screen width
+ * \param height -> screen height
+ * \param fullScreen -> true if is fullscreen */
+void Farso_Init(SDL_Surface **screen, string title, int width, int height,
+                bool fullScreen);
+
+/*! Define the SDL/OpenGL Context Resolution
+ * \param screen -> pointer to the pointer to the surface used as screen
+ * \param title -> title of the screen
+ * \param width -> screen width
+ * \param height -> screen height
+ * \param fullScreen -> true if is fullscreen */
+void Farso_DefineResolution(SDL_Surface **screen, string title, 
+                            int width, int height,
+                            bool fullScreen);
 
 /*! End the SDL/OpenGL Context
  * \param screen -> surface used as screen */

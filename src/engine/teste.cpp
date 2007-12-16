@@ -24,6 +24,12 @@ int main(int argc, char **argv)
    textdomain (PACKAGE);
 
    SDL_Surface *screen;
+
+   options opt;
+
+   //FIXME -> the locations of the options file, must be, first a per user one,
+   //and, if not exists, the system one.
+   opt.load("dcc.opc");
    
    #ifdef REDE
       printf("Server IP or Name: ");
@@ -31,7 +37,8 @@ int main(int argc, char **argv)
       scanf("%s",server);
       printf("I'll conect to %s\n",server);
    #endif   
-   Farso_Init(&screen,"DccNiTghtmare");
+   Farso_Init(&screen,"DccNiTghtmare", opt.screenWidth, opt.screenHeight,
+              opt.enableFullScreen);
    engine* Engine = new engine();
    
    Engine->Init(screen);

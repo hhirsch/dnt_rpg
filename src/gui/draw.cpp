@@ -8,6 +8,8 @@
 #include <GL/glu.h>
 
 
+int SCREEN_X; /**< Current Screen Width */
+int SCREEN_Y; /**< Scurrent Screen Height */
 int R;  /**< Active Red color */
 int G;  /**< Active Green Color */
 int B;  /**< Active Blue Color */

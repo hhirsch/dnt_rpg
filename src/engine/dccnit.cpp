@@ -42,7 +42,7 @@ engine::engine()
    walkSound = NULL;
 
    /* Load Options */
-   option = new options("dcc.opc");
+   option = new options();
 
    /* Set sound and music volume, based on options */
    snd->changeVolume(option->musicVolume, option->sndfxVolume);
@@ -698,7 +698,7 @@ int engine::OptionsScreen(GLuint idTextura)
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
 
-   option->DisplayOptionsScreen(interf);
+   option->displayOptionsScreen(interf);
 
    while( (optionW != OPTIONSW_CANCEL) && 
           (optionW != OPTIONSW_CONFIRM))
@@ -722,7 +722,7 @@ int engine::OptionsScreen(GLuint idTextura)
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
-         optionW = option->Treat(object, eventInfo, interf);
+         optionW = option->treat(object, eventInfo, interf);
       }
       else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
       {

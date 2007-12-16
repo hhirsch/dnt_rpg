@@ -11,7 +11,7 @@ editor::editor()
    NPCs = NULL;
    particleSystem = new partSystem();
    features = new featsList("../data/feats/","../data/feats/feats.ftl");
-   Farso_Init(&screen,"DccNiTghtmare Map Editor 0.2");
+   Farso_Init(&screen,"DccNiTghtmare Map Editor 0.2", 800, 600, false);
 
    init();
 
