@@ -182,13 +182,6 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       return(1);
    }
 
-   /* Verify Alignment */
-   if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
-   {
-      TTF_SizeUNICODE(activeFont->font, unicodeText, &w, NULL);
-      x = ((x2 + x1) / 2) - (w / 2)-1;
-   }
-
    /* Init things */
    color_Get(&color.r,&color.g, &color.b);
    curY = y;
@@ -235,6 +228,18 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
                                                         strLine, color);
             }
 
+            /* Define Position */
+            if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
+            {
+               TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
+               rect.x = ((x2 + x1) / 2) - (w / 2)-1;
+            }
+            else
+            {
+               rect.x = x;
+            }
+            rect.y = curY;
+
             /* Put the character */
             if(lastSpace != -1)
             {
@@ -258,7 +263,6 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
 
             /* Blit the result surface to the desired one on the desired 
              * position  */
-            rect.y = curY;
             SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
             /* Avoid memory leacks */
@@ -284,11 +288,22 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
                                                      color);
          }
 
+         /* Define Align */
+         if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
+         {
+            TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
+            rect.x = ((x2 + x1) / 2) - (w / 2)-1;
+         }
+         else
+         {
+            rect.x = x;
+         }
+         rect.y = curY;
+
          /* Blit the result surface to the desired one on the desired
           * position  */
          uni = 0;
          strLine[uni] = 0;
-         rect.y = curY;
          SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
          /* Avoid memory leacks */
@@ -315,6 +330,15 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
 
       /* Blit the result surface to the desired one on the desired position  */
       rect.y = curY;
+      if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
+      {
+         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
+         rect.x = ((x2 + x1) / 2) - (w / 2)-1;
+      }
+      else
+      {
+         rect.x = x;
+      }
       SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
       /* Avoid memory leacks */
