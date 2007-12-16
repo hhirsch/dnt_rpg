@@ -722,7 +722,7 @@ int engine::OptionsScreen(GLuint idTextura)
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
-         optionW = option->treat(object, eventInfo, interf);
+         optionW = option->treat(object, eventInfo, interf, proj,modl,viewPort);
       }
       else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
       {

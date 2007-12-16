@@ -66,7 +66,7 @@ string getStringFromUser(string title, string previous,
       glPushMatrix();
         draw2DMode();
         gui->draw(proj,modl,viewPort);
-	draw3DMode(FARVIEW);
+        draw3DMode(FARVIEW);
       glPopMatrix();
       glEnable(GL_FOG);
       glEnable(GL_LIGHTING);
@@ -116,6 +116,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
                                                  
    quadText = getWindow->getObjectsList()->insertTextBox(10,17,sizeX-10,33,0,
                                                       message.c_str());
+   quadText->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    getWindow->setAttributes(true, false, false, false);
    getWindow->setExternPointer(&getWindow);
    gui->openWindow(getWindow);
@@ -197,6 +198,7 @@ void showMessage(string title, string message,
                                                         "Ok",1);
    quadText = getWindow->getObjectsList()->insertTextBox(10,17,sizeX-10,33,0,
                                                       message.c_str());
+   quadText->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    getWindow->setAttributes(true, false, false, false);
    getWindow->setExternPointer(&getWindow);
    gui->openWindow(getWindow);
@@ -232,7 +234,7 @@ void showMessage(string title, string message,
       glPushMatrix();
         draw2DMode();
         gui->draw(proj,modl,viewPort);
-	draw3DMode(FARVIEW);
+        draw3DMode(FARVIEW);
       glPopMatrix();
       glEnable(GL_FOG);
       glEnable(GL_LIGHTING);

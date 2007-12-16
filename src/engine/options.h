@@ -35,7 +35,8 @@ class options
        * \return true if can load the options, false otherwise */
       bool load(string file);
       /*! Treat options Window Events */
-      int treat(guiObject* object, int eventInfo, interface* interf);
+      int treat(guiObject* object, int eventInfo, interface* interf,
+                GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       /*! Set language to one defined at the option's file */
       void setLanguage();
@@ -64,11 +65,16 @@ class options
       textBox* txtLanguage;        /**< Language Text on Window */
       textBox* txtCamera;          /**< Camera Mode Text on Window */
       textBox* txtReflexion;       /**< Reflexion Type Text on Window */
+      textBox* txtResolution;      /**< Resolution Text on Window */
+
       int          prevCamera;     /**< Previous used Camera Mode */
       int          prevMusicVolume;/**< Previous used Music Volume */
       int          prevSndfxVolume;/**< Previous Used Sound Effects Volume */
       int          prevLanguage;   /**< Previous Used Language */
       int          prevReflexion;  /**< Previous Used Reflexion */
+      int          prevWidth;      /**< Previous Used Resolution Width */
+      int          prevHeight;     /**< Previous Used Resolution Height */
+      int          resPosition;    /**< Resolution Position on Vector */
 
       int timeLastOperation;       /**< Ticks when done last operation */
 
@@ -87,9 +93,14 @@ class options
       button* buttonReflSum;
       button* buttonReflDec;
 
+      button* buttonResSum;
+      button* buttonResDec;
+
+      cxSel* cxSelFullScreen;
+
       cxSel* cxSelGrass;
       cxSel* cxSelParticles;
-      
+
       button* buttonConfirm;
       button* buttonCancel;
 
@@ -104,6 +115,10 @@ class options
       /*! Get the Actual Reflexion Type Name
        * \return the name of the reflexion type */
       string reflexionName();
+
+      /*! Get the current resolution name
+       * \return the name of the resolution */
+      string resolutionName();
 
 };
 

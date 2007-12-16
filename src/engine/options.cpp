@@ -27,7 +27,6 @@
  ****************************************************************/
 options::options()
 {
-   reflexionType = REFLEXIONS_NONE;
    timeLastOperation = SDL_GetTicks();
 }
 
@@ -120,6 +119,10 @@ bool options::load(string file)
          fgets(buffer, sizeof(buffer), arq); 
          sscanf(buffer,"%d",&aux);
          enableFullScreen = (aux == 1);
+      }
+      else 
+      {
+         printf(gettext("Unknow option: %s\n"), buffer);
       }
    }
    if(musicVolume > SDL_MIX_MAXVOLUME)
@@ -319,6 +322,31 @@ string options::cameraName()
    }
    return(saux);
 }
+
+/****************************************************************
+ *                        resolutionName                        *
+ ****************************************************************/
+string options::resolutionName()
+{
+   string saux = "";
+   char buf[16];
+   sprintf(buf,"%dx%d",screenWidth, screenHeight);
+   saux = buf;
+
+   int i;
+
+   resPosition = 0;
+   for(i = 0; resolutions[i]; i++)
+   {
+      if( (resolutions[i]->w == screenWidth) &&
+          (resolutions[i]->h == screenHeight) )
+      {
+         resPosition = i;
+      }
+   }
+   return(saux);
+}
+
 /****************************************************************
  *                    Open Options Screen                       *
  ****************************************************************/
@@ -330,13 +358,15 @@ void options::displayOptionsScreen(interface* interf)
    string saux;
    textBox* qt;
 
+   getAvaibleResolutions();
+
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
 
-   intWindow = interf->insertWindow(xPos-128,yPos-133,xPos+128,yPos+133,
+   intWindow = interf->insertWindow(xPos-128,yPos-163,xPos+128,yPos+163,
                                     gettext("Options"));
 
    /* Music Things */
@@ -354,7 +384,7 @@ void options::displayOptionsScreen(interface* interf)
    buttonMusSum = intWindow->getObjectsList()->insertButton(198,27,208,44,
                                                   fnt.createUnicode(0x25BA),0);
    buttonMusSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(212,27,40,112,
+   intWindow->getObjectsList()->insertPicture(220,27,40,112,
                                   "../data/texturas/options/music.png");
    
   
@@ -373,7 +403,7 @@ void options::displayOptionsScreen(interface* interf)
    buttonSndSum = intWindow->getObjectsList()->insertButton(198,52,208,69,
                                                   fnt.createUnicode(0x25BA),0);
    buttonSndSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(212,52,40,112,
+   intWindow->getObjectsList()->insertPicture(220,52,40,112,
                                   "../data/texturas/options/sndfx.png");
 
 
@@ -392,7 +422,7 @@ void options::displayOptionsScreen(interface* interf)
    buttonLangSum = intWindow->getObjectsList()->insertButton(198,88,208,105,
                                                    fnt.createUnicode(0x25BA),0);
    buttonLangSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(212,88,40,112,
+   intWindow->getObjectsList()->insertPicture(220,88,40,112,
                                   "../data/texturas/options/language.png");
 
    /* Camera Mode Things */
@@ -410,7 +440,7 @@ void options::displayOptionsScreen(interface* interf)
    buttonCamSum = intWindow->getObjectsList()->insertButton(198,126,208,143,
                                                   fnt.createUnicode(0x25BA),0);
    buttonCamSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(214,126,40,112,
+   intWindow->getObjectsList()->insertPicture(220,126,40,112,
                                   "../data/texturas/options/camera.png");
 
 
@@ -419,7 +449,7 @@ void options::displayOptionsScreen(interface* interf)
                           gettext("Enable Grass Effects (need particles)"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    cxSelGrass = intWindow->getObjectsList()->insertCxSel(8,160, enableGrass);
-   intWindow->getObjectsList()->insertPicture(214,156,40,112,
+   intWindow->getObjectsList()->insertPicture(220,156,40,112,
                                   "../data/texturas/options/grass.png");
 
 
@@ -429,7 +459,7 @@ void options::displayOptionsScreen(interface* interf)
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    cxSelParticles = intWindow->getObjectsList()->insertCxSel(8,178, 
                                                              enableParticles);
-   intWindow->getObjectsList()->insertPicture(214,174,40,112,
+   intWindow->getObjectsList()->insertPicture(220,174,40,112,
                                   "../data/texturas/options/particles.png");
 
    /* Reflexions */
@@ -447,16 +477,44 @@ void options::displayOptionsScreen(interface* interf)
    buttonReflSum = intWindow->getObjectsList()->insertButton(198,203,208,220,
                                                   fnt.createUnicode(0x25BA),0);
    buttonReflSum->defineFont(DNT_FONT_ARIAL, 9);
-   intWindow->getObjectsList()->insertPicture(212,203,40,220,
+   intWindow->getObjectsList()->insertPicture(220,203,40,220,
                                   "../data/texturas/options/reflexions.png");
 
+   /* Resolution */
+   prevHeight = screenHeight;
+   prevWidth = screenWidth;
+   saux = resolutionName();
+   qt = intWindow->getObjectsList()->insertTextBox(8,240,145,257,0,
+                                            gettext("Screen Resolution:"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   buttonResDec = intWindow->getObjectsList()->insertButton(121,240,131,257,
+                                                  fnt.createUnicode(0x25C4),0);
+   buttonResDec->defineFont(DNT_FONT_ARIAL, 9);
+   txtResolution = intWindow->getObjectsList()->insertTextBox(132,240,197,257,1,
+                                 saux.c_str());
+   txtResolution->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   buttonResSum = intWindow->getObjectsList()->insertButton(198,240,208,257,
+                                                  fnt.createUnicode(0x25BA),0);
+   buttonResSum->defineFont(DNT_FONT_ARIAL, 9);
+   intWindow->getObjectsList()->insertPicture(220,240,40,220,
+                                  "../data/texturas/options/resolution.png");
+
+   /* Fullscreen */
+   qt = intWindow->getObjectsList()->insertTextBox(20,265,200,282,0,
+                                               gettext("Enable FullScreen"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   cxSelFullScreen = intWindow->getObjectsList()->insertCxSel(8,269, 
+                                                              enableFullScreen);
+
+   intWindow->getObjectsList()->insertPicture(220,265,40,220,
+                                  "../data/texturas/options/fullscreen.png");
 
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(177,235,247,254,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(177,295,247,314,
                                               gettext("Confirm"),1);
    
    /* Cancel Button */
-   buttonCancel = intWindow->getObjectsList()->insertButton(8,235,78,254,
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,295,78,314,
                                               gettext("Cancel"),1);
 
    /* borders */
@@ -465,7 +523,8 @@ void options::displayOptionsScreen(interface* interf)
    intWindow->getObjectsList()->insertTextBox(5,116,250,153,2,"");
    intWindow->getObjectsList()->insertTextBox(5,154,250,192,2,"");
    intWindow->getObjectsList()->insertTextBox(5,193,250,230,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,231,250,258,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,231,250,290,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,291,250,318,2,"");
 
    
    /* Open Window */
@@ -477,7 +536,8 @@ void options::displayOptionsScreen(interface* interf)
 /****************************************************************
  *                             Treat                            *
  ****************************************************************/
-int options::treat(guiObject* object, int eventInfo, interface* interf)
+int options::treat(guiObject* object, int eventInfo, interface* interf,
+                   GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    if( (eventInfo == ON_PRESS_BUTTON) && 
          (SDL_GetTicks() - timeLastOperation > 100) )
@@ -544,7 +604,7 @@ int options::treat(guiObject* object, int eventInfo, interface* interf)
             cameraNumber--;
          }
       }
-      /* Reflexin */
+      /* Reflexion */
       if(object == (guiObject*) buttonReflSum)
       {
          if(reflexionType < REFLEXIONS_ALL)
@@ -559,6 +619,36 @@ int options::treat(guiObject* object, int eventInfo, interface* interf)
             reflexionType--;
          }
       }
+      /* Resolution */
+      if(object == (guiObject*) buttonResSum)
+      {
+         if(resPosition > 0)
+         {
+            resPosition--;
+            
+            /* Only accept resolutions >= 800x600 */
+            if( (resolutions[resPosition]->w >= 800) && 
+                (resolutions[resPosition]->h >= 600) )
+            {
+               screenWidth = resolutions[resPosition]->w;
+               screenHeight = resolutions[resPosition]->h;
+            }
+         }
+      }
+      if(object == (guiObject*) buttonResDec)
+      {
+         if(resolutions[resPosition+1])
+         {
+            resPosition++;
+            /* Only accept resolutions >= 800x600 */
+            if( (resolutions[resPosition]->w >= 800) && 
+                (resolutions[resPosition]->h >= 600) )
+            {
+               screenWidth = resolutions[resPosition]->w;
+               screenHeight = resolutions[resPosition]->h;
+            }
+         }
+      }
 
    }
    else if(eventInfo == PRESSED_BUTTON) 
@@ -568,9 +658,24 @@ int options::treat(guiObject* object, int eventInfo, interface* interf)
       {
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
+
+         bool prevFullScreen = enableFullScreen;
+         enableFullScreen = cxSelFullScreen->isSelected();
          //FIXME -> the save fileName must be at the users home!
          save("dcc.opc");
          interf->closeWindow(intWindow);
+
+         /* Verify if need to show advise of reinit */
+         if( (screenWidth != prevWidth) || (screenHeight != prevHeight) ||
+             (prevFullScreen != enableFullScreen) )
+         {
+            showMessage(gettext("Warning"), 
+                  gettext("Some changes will only take effect upon restart."),
+                  proj, modl, viewPort);
+            /* Disable things */
+            glDisable(GL_FOG);
+            glDisable(GL_LIGHTING);
+         }
          return(OPTIONSW_CONFIRM);
       }
       /* Cancel */
@@ -581,6 +686,8 @@ int options::treat(guiObject* object, int eventInfo, interface* interf)
          langNumber  = prevLanguage;
          cameraNumber = prevCamera;
          reflexionType = prevReflexion;
+         screenWidth = prevWidth;
+         screenHeight = prevHeight;
          interf->closeWindow(intWindow);
          return(OPTIONSW_CANCEL);
       }
@@ -609,6 +716,7 @@ int options::treat(guiObject* object, int eventInfo, interface* interf)
    txtLanguage->setText(languageName());
    txtCamera->setText(cameraName());
    txtReflexion->setText(reflexionName());
+   txtResolution->setText(resolutionName());
 
    intWindow->draw(0,0);
    return(OPTIONSW_OTHER);
