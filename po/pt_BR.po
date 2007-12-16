@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-12-15 15:00-0200\n"
+"POT-Creation-Date: 2007-12-16 18:52-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -68,7 +68,7 @@ msgid "Tendency & Alignment"
 msgstr "Tendência e Alinhamento"
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:69
-#: src/engine/attwindow.cpp:220 src/engine/options.cpp:407
+#: src/engine/attwindow.cpp:220 src/engine/options.cpp:514
 #: src/engine/racewindow.cpp:70 src/engine/classwindow.cpp:73
 #: src/engine/skillwindow.cpp:101
 msgid "Confirm"
@@ -76,7 +76,7 @@ msgstr "Confirmar"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:73
 #: src/engine/attwindow.cpp:224 src/engine/barterwindow.cpp:34
-#: src/engine/options.cpp:411 src/engine/racewindow.cpp:74
+#: src/engine/options.cpp:518 src/engine/racewindow.cpp:74
 #: src/engine/classwindow.cpp:77 src/engine/skillwindow.cpp:105
 msgid "Cancel"
 msgstr "Cancelar"
@@ -93,15 +93,15 @@ msgstr "Novo"
 msgid "Continue"
 msgstr "Continuar"
 
-#: src/engine/initial.cpp:63 src/engine/dccnit.cpp:3068
+#: src/engine/initial.cpp:63 src/engine/dccnit.cpp:3070
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/initial.cpp:65 src/engine/dccnit.cpp:3072
+#: src/engine/initial.cpp:65 src/engine/dccnit.cpp:3074
 msgid "Load"
 msgstr "Carregar"
 
-#: src/engine/initial.cpp:67 src/engine/options.cpp:291
+#: src/engine/initial.cpp:67 src/engine/options.cpp:370
 msgid "Options"
 msgstr "Opções"
 
@@ -203,7 +203,7 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
-#: src/engine/attwindow.cpp:502
+#: src/engine/attwindow.cpp:502 src/engine/options.cpp:672
 msgid "Warning"
 msgstr "Aviso"
 
@@ -239,58 +239,75 @@ msgstr "Francês"
 msgid "Spanish"
 msgstr "Espanhol"
 
-#: src/engine/options.cpp:112
+#: src/engine/options.cpp:125
+#, c-format
+msgid "Unknow option: %s\n"
+msgstr "Opção desconhecida: %s\n"
+
+#: src/engine/options.cpp:151
 #, c-format
 msgid "Error while writing Options: %s\n"
 msgstr "Erro ao abrir as opções: %s\n"
 
-#: src/engine/options.cpp:239
+#: src/engine/options.cpp:291
 msgid "None"
 msgstr "Nenhuma"
 
-#: src/engine/options.cpp:244
+#: src/engine/options.cpp:296
 msgid "Characters"
 msgstr "Personagens"
 
-#: src/engine/options.cpp:249
+#: src/engine/options.cpp:301
 msgid "All"
 msgstr "Todas"
 
-#: src/engine/options.cpp:265
+#: src/engine/options.cpp:317
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:268
+#: src/engine/options.cpp:320
 msgid "Pursue"
 msgstr "Perseguir"
 
-#: src/engine/options.cpp:297
+#: src/engine/options.cpp:376
 msgid "Music Volume:"
 msgstr "Volume da Música:"
 
-#: src/engine/options.cpp:316
+#: src/engine/options.cpp:395
 msgid "Effects Volume:"
 msgstr "Volume dos Efeitos:"
 
-#: src/engine/options.cpp:335
+#: src/engine/options.cpp:414
 msgid "Language:"
 msgstr "Língua:"
 
-#: src/engine/options.cpp:353
+#: src/engine/options.cpp:432
 msgid "Camera Mode:"
 msgstr "Modo da Câmera:"
 
-#: src/engine/options.cpp:370
+#: src/engine/options.cpp:449
 msgid "Enable Grass Effects (need particles)"
 msgstr "Habilitar Vegetação"
 
-#: src/engine/options.cpp:379
+#: src/engine/options.cpp:458
 msgid "Enable Particles Effects"
 msgstr "Habilitar Partículas"
 
-#: src/engine/options.cpp:390
+#: src/engine/options.cpp:469
 msgid "Reflections:"
 msgstr "Reflexões:"
+
+#: src/engine/options.cpp:488
+msgid "Screen Resolution:"
+msgstr "Resolução da Tela:"
+
+#: src/engine/options.cpp:504
+msgid "Enable FullScreen"
+msgstr "Habilitar Tela Cheia"
+
+#: src/engine/options.cpp:673
+msgid "Some changes will only take effect upon restart."
+msgstr "Algumas alterações só terão efeito após o reinício do programa."
 
 #: src/engine/racewindow.cpp:32
 msgid "Race"
@@ -427,7 +444,7 @@ msgstr "Carregando Mudanças..."
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:625
+#: src/engine/dccnit.cpp:626
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -439,57 +456,57 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1137
+#: src/engine/dccnit.cpp:1139
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1177 src/engine/dccnit.cpp:1245
+#: src/engine/dccnit.cpp:1179 src/engine/dccnit.cpp:1247
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1227
+#: src/engine/dccnit.cpp:1229
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1551
+#: src/engine/dccnit.cpp:1553
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1610
+#: src/engine/dccnit.cpp:1612
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1742 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1744 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/engine/dccnit.cpp:1817 src/engine/dccnit.cpp:3065
+#: src/engine/dccnit.cpp:1819 src/engine/dccnit.cpp:3067
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:3035
+#: src/engine/dccnit.cpp:3037
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/dccnit.cpp:3058
+#: src/engine/dccnit.cpp:3060
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: src/engine/dccnit.cpp:3060
+#: src/engine/dccnit.cpp:3062
 msgid "FPS:"
 msgstr "FPS:"
 
-#: src/engine/dccnit.cpp:3062
+#: src/engine/dccnit.cpp:3064
 msgid "Press F1 for Help"
 msgstr "Pressione F1 para Ajuda"
 
-#: src/engine/dccnit.cpp:3070
+#: src/engine/dccnit.cpp:3072
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3223
+#: src/engine/dccnit.cpp:3225
 msgid "|Exit Battle Mode"
 msgstr "|Sai do Modo de Batalha"
 
@@ -589,12 +606,12 @@ msgstr "Erro: Sem Personagens!"
 msgid "%s rolls initiative: "
 msgstr "%s rola iniciativa: "
 
-#: src/gui/farso.cpp:17
+#: src/gui/farso.cpp:18
 #, c-format
 msgid "Argh! Can't init SDL!\n"
 msgstr "Argh! Não consegui iniciar a SDL!\n"
 
-#: src/gui/farso.cpp:35
+#: src/gui/farso.cpp:75
 #, c-format
 msgid "Oxi! Can't ajust video mode: %s!\n"
 msgstr "Oxi! Não consegui ajustar o modo do vídeo: %s!\n"
