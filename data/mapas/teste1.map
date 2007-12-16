@@ -1,6 +1,5 @@
 T 26X24
 # Made by DccNiTghtmare's MapEditor, v0.0.3
-npc ../data/mapas/teste1.map.npc
 PS ../data/mapas/teste1.map.par
 Outdoor: 1
 t ../data/texturas/floor_outdoor/rock.png ../data/texturas/floor_outdoor/rock.png 126 129 134

@@ -618,6 +618,20 @@ void engine::SplashScreen()
    actualizeFrustum(visibleMatrix,proj,modl);
    SDL_Surface* img = IMG_Load("../data/texturas/general/inicio1.png"); 
    glDisable(GL_LIGHTING);
+
+   dntFont fnt;
+   fnt.defineFont(DNT_FONT_TIMES, 20);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
+   color_Set(48,3,3);
+   fnt.write(img, 52, 424, gettext("DccNiTghtmare is developed under Public "
+                                   "Domain: Feel free to use its source code "
+                                   "and data the way you want (or to blame us "
+                                   "the same way). DccNiTghtmare is thankful "
+                                   "to the people who developed those "
+                                   "libraries: OpenAL, Cal3D, OpenGL, SDL, "
+                                   "SDL_image, SDL_ttf, libVorbis."), 
+              52, 424, 745, 511);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    setTextureRGBA(img,&id);
    SDL_FreeSurface(img);
 
