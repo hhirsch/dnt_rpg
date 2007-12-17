@@ -99,22 +99,26 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    bool quit = false;
    Uint8 mButton;
    Uint8* keys;
+   dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
    int mouseX, mouseY;
-   int sizeX = message.length()*7;
+   int sizeX = fnt.getStringWidth(message);
    if(sizeX < 180)
    {
       sizeX = 180;
    }
    int med = sizeX / 2;
+   int sX = SCREEN_X / 2;
+   int sY = SCREEN_Y / 2;
    int ret = -1;
 
-   getWindow = gui->insertWindow(300,200,300+sizeX,262, title.c_str());
+   getWindow = gui->insertWindow(sX-med-10,sY-31,sX+med+10,sY+31, title.c_str());
    opt1Button = getWindow->getObjectsList()->insertButton(med-80,37,med-10,55,
                                                  opt1.c_str(),1);
    opt2Button = getWindow->getObjectsList()->insertButton(med+10,37,med+80,55,
                                                  opt2.c_str(),1);                  
                                                  
-   quadText = getWindow->getObjectsList()->insertTextBox(10,17,sizeX-10,33,0,
+   quadText = getWindow->getObjectsList()->insertTextBox(5,17,sizeX+10,33,0,
                                                       message.c_str());
    quadText->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    getWindow->setAttributes(true, false, false, false);
@@ -190,13 +194,17 @@ void showMessage(string title, string message,
    Uint8 mButton;
    Uint8* keys;
    int mouseX, mouseY;
-   int sizeX = message.length()*7;
+   dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL, 10);
+   int sizeX = fnt.getStringWidth(message);
+   int sX = SCREEN_X / 2;
+   int sY = SCREEN_Y / 2;
    int med = sizeX / 2;
 
-   getWindow = gui->insertWindow(300,200,300+sizeX,262,title.c_str());
+   getWindow = gui->insertWindow(sX-med-10,sY-31,sX+med+10,sY+31,title.c_str());
    okButton = getWindow->getObjectsList()->insertButton(med-28,37,med+28,55,
                                                         "Ok",1);
-   quadText = getWindow->getObjectsList()->insertTextBox(10,17,sizeX-10,33,0,
+   quadText = getWindow->getObjectsList()->insertTextBox(5,17,sizeX+10,33,0,
                                                       message.c_str());
    quadText->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
    getWindow->setAttributes(true, false, false, false);
