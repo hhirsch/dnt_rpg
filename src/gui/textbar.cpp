@@ -73,7 +73,7 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
 
    if (marca)
    {
-      /* Calculate mark position */
+      /* Define mark position */
       string s = text.substr(init,init+pos);
       int x = x1 + 2 + fnt.getStringWidth(s);
       line_Draw(screen,x,y1+3,x,y2-3);
@@ -98,13 +98,19 @@ void textBar::draw(SDL_Surface *screen)
 void textBar::defineCursorPosition(int mouseX, int mouseY)
 {
    dntFont fnt;
+   fnt.defineFont(DNT_FONT_ARIAL,12);
    string s = text.substr(init,end);
 
-   //FIXME define correct position
-   pos = (mouseX-(x1+2)) / (fnt.getIncCP());
-   if(pos > text.length()) 
+   string saux = "";
+   pos = init;
+   int i = 0;
+   int xPos = mouseX-(x1+2);
+
+   while( (i < (int)s.length()) && (fnt.getStringWidth(saux) < xPos) )
    {
-      pos = text.length();
+      pos++;
+      saux += s[i];
+      i++;
    }
 }
 
