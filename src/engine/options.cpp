@@ -8,12 +8,15 @@
 #define NM_ENGLISH    gettext("English")
 #define NM_FRENCH     gettext("French")
 #define NM_SPANISH    gettext("Spanish")
+#define NM_RUSSIAN    gettext("Russian")
 
 #define FL_PORTUGUESE "pt_BR"
 #define FL_ENGLISH    "en"
 #define FL_FRENCH     "fr"
 #define FL_SPANISH    "es"
+#define FL_RUSSIAN    "ru"
 
+#define DNT_LANG_RUSSIAN    4 /**< Russian Language */
 #define DNT_LANG_PORTUGUESE 3 /**< Portuguese Language */
 #define DNT_LANG_SPANISH    2 /**< Spanish Language */
 #define DNT_LANG_FRENCH     1 /**< French Language */
@@ -208,6 +211,11 @@ string options::languageName()
    string saux;
    switch(langNumber)
    {
+      case DNT_LANG_RUSSIAN:
+      {
+         saux = NM_RUSSIAN;
+         break;
+      }
       case DNT_LANG_PORTUGUESE:
       {
          saux = NM_PORTUGUESE;
@@ -233,34 +241,19 @@ string options::languageName()
 }
 
 /****************************************************************
+ *                      isLanguageUnicode                       *
+ ****************************************************************/
+bool options::isLanguageUnicode()
+{
+   return( (langNumber == DNT_LANG_RUSSIAN) );
+}
+
+/****************************************************************
  *                         setLanguage                          *
  ****************************************************************/
 void options::setLanguage()
 {
-   string saux = "";
-   switch(langNumber)
-   {
-      case DNT_LANG_PORTUGUESE:
-      {
-         saux = FL_PORTUGUESE;
-         break;
-      }
-      case DNT_LANG_SPANISH:
-      {
-         saux = FL_SPANISH;
-         break;
-      }
-      case DNT_LANG_FRENCH: 
-      {
-         saux = FL_FRENCH;
-         break;
-      }
-      case DNT_LANG_ENGLISH:
-      {
-         saux = FL_ENGLISH;
-         break;
-      }
-   }
+   string saux = languageName();
 
    if(!saux.empty())
    {

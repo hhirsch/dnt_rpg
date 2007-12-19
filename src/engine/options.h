@@ -44,6 +44,10 @@ class options
       /*! Get all avaible resolutions at fullscreen mode */
       void getAvaibleResolutions();
 
+      /*! Verify if the current language is an Unicode One (like russian,
+       * japanese, chinese, etc.) */
+      bool isLanguageUnicode();
+
       static int     musicVolume;     /**< Actual Music Volume */
       static int     sndfxVolume;     /**< Actual Sound Effects Volume */
       static int     langNumber;      /**< Actual Language Number */

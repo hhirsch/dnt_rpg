@@ -1,5 +1,6 @@
 #include "dntfont.h"
 #include "draw.h"
+#include "../engine/options.h"
 #include <libintl.h>
 
 /**********************************************************************
@@ -429,12 +430,26 @@ string dntFont::createUnicode(Uint16 character)
 Uint16* dntFont::convertToUnicode(Uint16 *unicode, const char *text, int len)
 {
    int i;
-   //FIXME -> this is the LATIN1 to unicode. Put the others convertions
-   for( i=0; i < len; ++i ) 
+
+   options opt;
+   if(opt.isLanguageUnicode())
    {
-      unicode[i] = ((const unsigned char *)text)[i];
+      for( i=0; i < (len / 2); ++i ) 
+      {
+         unicode[i] = text[i];
+      }
+      unicode[i] = 0;
    }
-   unicode[i] = 0;
+   else
+   {
+       // this is the LATIN1 to unicode. Put the others convertions
+      for( i=0; i < len; ++i ) 
+      {
+         unicode[i] = ((const unsigned char *)text)[i];
+      }
+      unicode[i] = 0;
+   }
+
    //FIXME the size of the string returned!
    return(unicode);
 }
