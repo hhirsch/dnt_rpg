@@ -3213,8 +3213,43 @@ int engine::Run(SDL_Surface *surface)
    while(treatIO(surface))
    {
 
+      /* Wait Die Animation */
+      if( (engineMode == ENGINE_MODE_WAIT_DIE_ANIMATION) && 
+          ( (SDL_GetTicks() - waitDieTimer) >= ENGINE_WAIT_DIE_DELAY) )
+      {
+         /* All Pcs are Dead, so Death Screen! */
+         snd->loadMusic("../data/music/musica8.ogg");
+         showImage("../data/texturas/fightMode/death.png");
+
+         /* Clear Modifications */
+         modifState.clear();
+         engineMode = ENGINE_MODE_REAL_TIME;
+         gui->closeAllWindows();
+
+         /* Clear the Inventory */
+         PCs->getActiveCharacter()->newInventory();
+
+         /* Clear the Actual Map */
+         if(actualMap)
+         {
+            delete(actualMap);
+            actualMap = NULL;
+         }
+
+         /* Clear the Models List */
+         if(models)
+         {
+            delete(models);
+            models = new modelList();
+         }
+              
+         /* Put the animation state on normal */
+         PCs->getActiveCharacter()->setState(STATE_IDLE);
+         return(0);
+     }
+
      /* Verify battle events */
-     if(engineMode == ENGINE_MODE_TURN_BATTLE) 
+     else if(engineMode == ENGINE_MODE_TURN_BATTLE) 
      {
         time = SDL_GetTicks();
         if(fightStatus == FIGHT_END)
@@ -3237,35 +3272,9 @@ int engine::Run(SDL_Surface *surface)
            }
            if(!alive) 
            {
-              /* All Pcs are Dead, so Death Screen! */
-              snd->loadMusic("../data/music/musica8.ogg");
-              showImage("../data/texturas/fightMode/death.png");
-
-              /* Clear Modifications */
-              modifState.clear();
-              engineMode = ENGINE_MODE_REAL_TIME;
-              gui->closeAllWindows();
-
-              /* Clear the Inventory */
-              PCs->getActiveCharacter()->newInventory();
-
-              /* Clear the Actual Map */
-              if(actualMap)
-              {
-                 delete(actualMap);
-                 actualMap = NULL;
-              }
-
-              /* Clear the Models List */
-              if(models)
-              {
-                 delete(models);
-                 models = new modelList();
-              }
-              
-              /* Put the animation state on normal */
-              PCs->getActiveCharacter()->setState(STATE_IDLE);
-              return(0);
+              /* All Pcs are Dead wait the dying animation */
+              engineMode = ENGINE_MODE_WAIT_DIE_ANIMATION;
+              waitDieTimer = SDL_GetTicks();
            }
         }
         /* Continue the fight */

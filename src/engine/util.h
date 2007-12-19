@@ -18,13 +18,14 @@
  *                           Engine's Constants                     *
  ********************************************************************/
 
-#define ENGINE_MODE_REAL_TIME   1  /**< Real Time Mode, not in battle */
-#define ENGINE_MODE_TURN_BATTLE 2  /**< Turn Mode, in battles */
+#define ENGINE_MODE_REAL_TIME           1  /**< Real Time Mode, not in battle */
+#define ENGINE_MODE_TURN_BATTLE         2  /**< Turn Mode, in battles */
+#define ENGINE_MODE_WAIT_DIE_ANIMATION  3  /**< Wait Die Animation Mode */
 
 #define ENGINE_WALK_KEYS        1  /**< Engine Keyboard Walk Status */
 #define ENGINE_WALK_MOUSE       2  /**< Engine Mouse Walk Status */
 
-//#define ENGINE_ANIMATION_DELAY 4000 /**< Value to delay for end animation */
+#define ENGINE_WAIT_DIE_DELAY  4000 /**< Value to delay for end  die animation */
 
 #define DNT_TO_METER   0.5 /**< Constant to multiply to convert meter to DNT.*/
 #define METER_TO_DNT   1.0 / DNT_TO_METER /**< Constant to DNT to Meter value*/

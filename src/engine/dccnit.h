@@ -383,6 +383,7 @@ class engine
       Uint32 lastMouse;            /**< Last read from mouse */
       Uint32 lastMousePression;    /**< Last mouse pressure */
       Uint32 lastFPS;              /**< Last obtained FPS */
+      Uint32 waitDieTimer;         /**< Timer for wait die animation */
       double actualFPS;            /**< Actual FPS */
 
       Uint32 lastKeyb;             /**< Last time read from keyboard */
