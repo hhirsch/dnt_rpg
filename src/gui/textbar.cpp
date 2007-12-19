@@ -41,34 +41,35 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL,12);
 
-   //FIXME maxCaract calculation!
-
-   unsigned int maxCarac = ((x2-3)-(x1+3)) / (fnt.getIncCP());
    color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,
                Colors.colorCont[2].B);
    rectangle_Fill(screen,x1+1, y1+1, x2-1, y2-1);
    color_Set(Colors.colorCont[1].R,Colors.colorCont[1].G,
                Colors.colorCont[1].B);
+
    init = 0;
-   if(pos+1>maxCarac) 
+   end = text.length()-1;
+   string writeText = text;
+
+   int maxWidth = ((x2-1) - (x1+3));
+
+   while( fnt.getStringWidth(writeText) > maxWidth )
    {
-      init = pos-maxCarac;
-      if (init < 0)
+      if(end > (int)pos)
       {
-         init = 0;
+         end--;
+         writeText.erase(writeText.length()-1);
       }
-      end = pos-1;
-   }
-   else if (text.length()-1 >= maxCarac)
-   {
-      end = init + maxCarac-1;
-   }
-   else
-   {
-     end = text.length()-1;
+      else
+      {
+         init++;
+         writeText.erase(0,1);
+      }
    }
 
-   fnt.write(screen, x1+3, y1+1, text.c_str(), init, end);
+
+
+   fnt.write(screen, x1+3, y1+1, writeText);
 
    if (marca)
    {
@@ -99,6 +100,7 @@ void textBar::defineCursorPosition(int mouseX, int mouseY)
    dntFont fnt;
    string s = text.substr(init,end);
 
+   //FIXME define correct position
    pos = (mouseX-(x1+2)) / (fnt.getIncCP());
    if(pos > text.length()) 
    {
