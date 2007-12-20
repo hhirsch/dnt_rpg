@@ -202,6 +202,29 @@ bool modState::saveState(string file)
 }
 
 /************************************************************
+ *                         addAction                        *
+ ************************************************************/
+void modState::addAction(modAction* act)
+{
+   if(!modActionsList)
+   {
+      /* Add the only one! */
+      modActionsList = act;
+      modActionsList->setNext(modActionsList);
+      modActionsList->setPrevious(modActionsList);
+   }
+   else
+   {
+      /* Add at first */
+      act->setNext(modActionsList);
+      act->setPrevious(modActionsList->getPrevious());
+      modActionsList->setPrevious((modAction*)act);
+      act->getPrevious()->setNext((modAction*)act);
+   }
+   totalModActions++;
+}
+
+/************************************************************
  *                    mapObjectAddAction                    *
  ************************************************************/
 void modState::mapObjectAddAction(int action, string target, 
@@ -221,30 +244,33 @@ void modState::mapObjectAddAction(int action, string target,
    }
    else
    {
-      if(!modActionsList)
-      {
-         /* Add the only one! */
-         modActionsList = (modAction*) new mapObjectModAction(action, target, 
-                                                              mapFileName, xPos, zPos);
-         modActionsList->setNext(modActionsList);
-         modActionsList->setPrevious(modActionsList);
-      }
-      else
-      {
-         /* Add at first */
-         mapObjectModAction* n;
-         n = new mapObjectModAction(action, target, mapFileName, xPos, zPos);
-         n->setNext(modActionsList);
-         n->setPrevious(modActionsList->getPrevious());
-         modActionsList->setPrevious((modAction*)n);
-         n->getPrevious()->setNext((modAction*)n);
-      }
-      totalModActions++;
+      mapObjectModAction* n;
+      n = new mapObjectModAction(action, target, mapFileName, xPos, zPos);
+      addAction(n);
    }
 }
 
 /************************************************************
- *                    mapObjectAddAction                    *
+ *                  mapCharacterAddAction                   *
+ ************************************************************/
+void modState::mapCharacterAddAction(int act, string character, string mapFile,
+                                     GLfloat xPos, GLfloat zPos, GLfloat orientation,
+                                     GLfloat initialX, GLfloat initialZ)
+{
+   if( (act != MODSTATE_ACTION_CHARACTER_DEAD) && 
+       (act != MODSTATE_ACTION_CHARACTER_MOVE) )
+   {
+      cerr << "Invalid modification character action: " <<  act << endl;
+   }
+
+   mapCharacterModAction* n;
+   n = new mapCharacterModAction(act, character, mapFile, xPos, zPos,
+                                 orientation, initialX, initialZ);
+   addAction(n);
+}
+
+/************************************************************
+ *                   removeInverseAction                    *
  ************************************************************/
 bool modState::removeInverseObjectAction(int action, string target, 
                                          string mapFileName, 

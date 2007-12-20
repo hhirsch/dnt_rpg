@@ -140,6 +140,19 @@ class modState
       void mapObjectAddAction(int action, string target, string mapFileName,
                               GLfloat xPos, GLfloat zPos);
 
+      /*! Add action to the list (or remove inverse action from)
+       * \param act -> action type
+       * \param character -> character fileName
+       * \param mapFile -> name of the map file where action occurs 
+       * \param xPos -> x position
+       * \param zPos -> z position
+       * \param orientation -> character orientation angle
+       * \param initialX -> initial X position when loaded the map
+       * \param initialZ -> initial Z position when loaded the map */
+      void mapCharacterAddAction(int act, string character, string mapFile,
+                                 GLfloat xPos, GLfloat zPos, GLfloat orientation,
+                                 GLfloat initialX, GLfloat initialZ);
+
       /*! Do All saved modifications to the map (those that are for them,
        * usually when you return to the map and want it to appears exactly 
        * like when you left it). 
@@ -150,6 +163,11 @@ class modState
       void clear();
 
    protected:
+
+      /*! Add Action to the list
+       * \param act -> pointer to the action to add */
+      void addAction(modAction* act);
+
       /*! remove inverse action, if it exists in list. 
        * \param action -> action type
        * \param target -> pointer to object
