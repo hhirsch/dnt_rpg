@@ -1556,7 +1556,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                       shortCutsWindow->draw(mouseX,mouseY);
 
                       /* Log State to the modState */
-                      modifState.mapObjectAddAction(MODSTATE_ACTION_MAP_REMOVE,
+                      modifState.mapObjectAddAction(MODSTATE_ACTION_OBJECT_REMOVE,
                                                     sobj->obj->getFileName(),
                                                     actualMap->getFileName(),
                                                     sobj->x, sobj->z);

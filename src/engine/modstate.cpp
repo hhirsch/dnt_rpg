@@ -231,8 +231,8 @@ void modState::mapObjectAddAction(int action, string target,
                                   string mapFileName, 
                                   GLfloat xPos, GLfloat zPos)
 {
-   if( (action != MODSTATE_ACTION_MAP_REMOVE) && 
-       (action != MODSTATE_ACTION_MAP_ADD) )
+   if( (action != MODSTATE_ACTION_OBJECT_REMOVE) && 
+       (action != MODSTATE_ACTION_OBJECT_ADD) )
    {
       cerr << "Invalid modification object action: " <<  action << endl;
    }
@@ -277,7 +277,8 @@ bool modState::removeInverseObjectAction(int action, string target,
                                          GLfloat xPos, GLfloat zPos)
 {
 
-   if((action != MODSTATE_ACTION_MAP_REMOVE) && (action != MODSTATE_ACTION_MAP_ADD) )
+   if( (action != MODSTATE_ACTION_OBJECT_REMOVE) && 
+       (action != MODSTATE_ACTION_OBJECT_ADD) )
    {
       /* Invalid action: not an object one! */
       return(false);
@@ -331,11 +332,11 @@ void modState::doMapModifications(Map* actualMap)
       if(tmpMobj->getMapFileName() == actualMap->getFileName())
       {
          tmpMobj->getPosition(x,z);
-         if(tmpMobj->getAction() == MODSTATE_ACTION_MAP_REMOVE)
+         if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_REMOVE)
          {
             actualMap->removeObject(x, z, tmpMobj->getTarget());
          }
-         else if(tmpMobj->getAction() == MODSTATE_ACTION_MAP_ADD)
+         else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_ADD)
          {
             //TODO
          }
@@ -372,8 +373,8 @@ void modState::clear()
    {
       tmpMobj = modActionsList;
       modActionsList = modActionsList->getNext();
-      if( (tmpMobj->getAction() == MODSTATE_ACTION_MAP_REMOVE) ||
-          (tmpMobj->getAction() == MODSTATE_ACTION_MAP_ADD))
+      if( (tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_REMOVE) ||
+          (tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_ADD))
       {
          /* Object One */
          delete((mapObjectModAction*)tmpMobj);

@@ -8,8 +8,8 @@
 #include "../classes/inventory.h"
 #include "../map/map.h"
 
-#define MODSTATE_ACTION_MAP_REMOVE  0  /**< Removed object from map */
-#define MODSTATE_ACTION_MAP_ADD     1  /**< Added object to the map */
+#define MODSTATE_ACTION_OBJECT_REMOVE  0  /**< Removed object from map */
+#define MODSTATE_ACTION_OBJECT_ADD     1  /**< Added object to the map */
 
 #define MODSTATE_ACTION_CHARACTER_DEAD   3  /**< Killed Character on map */
 #define MODSTATE_ACTION_CHARACTER_MOVE   4  /**< The character moved to a new positon */

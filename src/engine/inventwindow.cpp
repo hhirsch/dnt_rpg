@@ -500,7 +500,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                                                       currentInventory);
                      /* Add it to the map */
                      actualMap->insertObject(X,Z,0,activeObject,0);
-                     modifState->mapObjectAddAction(MODSTATE_ACTION_MAP_ADD,
+                     modifState->mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
                                                     activeObject->getFileName(),
                                                     actualMap->getFileName(),
                                                     X,Z);
