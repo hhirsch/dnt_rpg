@@ -338,7 +338,16 @@ void modState::doMapModifications(Map* actualMap)
          }
          else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_ADD)
          {
-            //TODO
+            object* obj = actualMap->getObject(tmpMobj->getTarget());
+            if(obj != NULL)
+            {
+               actualMap->insertObject(x,z, 0, obj, 0);
+            }
+            else
+            {
+               cerr << "Warn: Unknow object on map with filename: " << 
+                       tmpMobj->getTarget() << endl;
+            }
          }
          else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
          {

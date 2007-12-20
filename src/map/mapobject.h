@@ -60,8 +60,8 @@ class lObject
        /*! Remove all unused objects */
        void removeUnusedObjects();
 
-       object* first;
-       int total;
+       object* first;  /**<  First object on the list */
+       int total;      /**< Total objects on the list */
 
 }; 
 

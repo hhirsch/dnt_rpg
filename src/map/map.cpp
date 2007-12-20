@@ -1231,6 +1231,15 @@ void Map::setOutdoor(bool val)
 /********************************************************************
  *                       insertMapObject                            *
  ********************************************************************/
+object* Map::getObject(string fileName)
+{
+   return(objects->getObject(fileName));
+}
+
+
+/********************************************************************
+ *                       insertMapObject                            *
+ ********************************************************************/
 object* Map::insertObject(string arquivo, modelList& mdlList, 
                           weaponTypes& wTypes)
 {

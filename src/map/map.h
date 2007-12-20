@@ -347,6 +347,14 @@ class Map
       object* insertObject(string arquivo, modelList& mdlList, 
                            weaponTypes& wTypes);
 
+      /*!
+       *************************************************************
+       * Get object from the list (if exists)
+       * \param fileName -> file name of the object
+       * \return pointer to the founded object or NULL
+       *************************************************************/
+      object* getObject(string fileName);
+
       /*! 
        **************************************************************
        * Get Map File Name
