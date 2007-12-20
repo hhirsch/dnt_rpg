@@ -270,6 +270,28 @@ void modState::mapCharacterAddAction(int act, string character, string mapFile,
 }
 
 /************************************************************
+ *                       removeAction                       *
+ ************************************************************/
+void modState::removeAction(modAction* act)
+{
+   if(act != NULL)
+   {
+      if(modActionsList == act)
+      {
+         modActionsList = act->getNext();
+      }
+      act->getNext()->setPrevious(act->getPrevious());
+      act->getPrevious()->setNext(act->getNext());
+      delete((mapObjectModAction*)act);
+      totalModActions--;
+      if(totalModActions <= 0)
+      {
+         modActionsList = NULL;
+      }
+   }
+}
+
+/************************************************************
  *                   removeInverseAction                    *
  ************************************************************/
 bool modState::removeInverseObjectAction(int action, string target, 
@@ -298,18 +320,7 @@ bool modState::removeInverseObjectAction(int action, string target,
          if( (pX == xPos) && (pZ == zPos))
          {
             /* Found the Inverse, so remove it */
-            if(modActionsList == tmp)
-            {
-               modActionsList = tmp->getNext();
-            }
-            tmp->getNext()->setPrevious(tmp->getPrevious());
-            tmp->getPrevious()->setNext(tmp->getNext());
-            delete((mapObjectModAction*)tmp);
-            totalModActions--;
-            if(totalModActions <= 0)
-            {
-               modActionsList = NULL;
-            }
+            removeAction(tmp);
             return(true);
          }
       }

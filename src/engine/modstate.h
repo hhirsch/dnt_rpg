@@ -164,6 +164,10 @@ class modState
 
    protected:
 
+      /*! Remove Action from the list
+       * \param act -> action to remove */
+      void removeAction(modAction* act);
+
       /*! Add Action to the list
        * \param act -> pointer to the action to add */
       void addAction(modAction* act);
