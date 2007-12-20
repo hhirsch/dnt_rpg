@@ -4,11 +4,18 @@
 
 #include "modstate.h"
 
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                               modAction                                //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
 /************************************************************
  *                       Constructor                        *
  ************************************************************/
-mapObjectModAction::mapObjectModAction(int act, string obj, string mapFile,
-                                       GLfloat xPos, GLfloat zPos)
+modAction::modAction(int act, string obj, string mapFile,
+                     GLfloat xPos, GLfloat zPos)
 {
    next = NULL;
    previous = NULL;
@@ -22,14 +29,14 @@ mapObjectModAction::mapObjectModAction(int act, string obj, string mapFile,
 /************************************************************
  *                        Destructor                        *
  ************************************************************/
-mapObjectModAction::~mapObjectModAction()
+modAction::~modAction()
 {
 }
 
 /************************************************************
  *                         getTarget                        *
  ************************************************************/
-string mapObjectModAction::getTarget()
+string modAction::getTarget()
 {
    return(target);
 }
@@ -37,7 +44,7 @@ string mapObjectModAction::getTarget()
 /************************************************************
  *                      getMapFileName                      *
  ************************************************************/
-string mapObjectModAction::getMapFileName()
+string modAction::getMapFileName()
 {
    return(mapFileName);
 }
@@ -45,7 +52,7 @@ string mapObjectModAction::getMapFileName()
 /************************************************************
  *                         getAction                        *
  ************************************************************/
-int mapObjectModAction::getAction()
+int modAction::getAction()
 {
    return(action);
 }
@@ -53,7 +60,7 @@ int mapObjectModAction::getAction()
 /************************************************************
  *                        getPostion                        *
  ************************************************************/
-void mapObjectModAction::getPosition(GLfloat &posX, GLfloat& posZ)
+void modAction::getPosition(GLfloat &posX, GLfloat& posZ)
 {
    posX = x;
    posZ = z;
@@ -62,7 +69,7 @@ void mapObjectModAction::getPosition(GLfloat &posX, GLfloat& posZ)
 /************************************************************
  *                          getNext                         *
  ************************************************************/
-mapObjectModAction* mapObjectModAction::getNext()
+modAction* modAction::getNext()
 {
    return(next);
 }
@@ -70,7 +77,7 @@ mapObjectModAction* mapObjectModAction::getNext()
 /************************************************************
  *                        getPrevious                       *
  ************************************************************/
-mapObjectModAction* mapObjectModAction::getPrevious()
+modAction* modAction::getPrevious()
 {
    return(previous);
 }
@@ -78,7 +85,7 @@ mapObjectModAction* mapObjectModAction::getPrevious()
 /************************************************************
  *                          setNext                         *
  ************************************************************/
-void mapObjectModAction::setNext(mapObjectModAction* act)
+void modAction::setNext(modAction* act)
 {
    next = act;
 }
@@ -86,20 +93,73 @@ void mapObjectModAction::setNext(mapObjectModAction* act)
 /************************************************************
  *                        setPrevious                       *
  ************************************************************/
-void mapObjectModAction::setPrevious(mapObjectModAction* act)
+void modAction::setPrevious(modAction* act)
 {
    previous = act;
 }
 
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                         mapCharacterModAction                          //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
 
+/************************************************************
+ *                       Constructor                        *
+ ************************************************************/
+mapCharacterModAction::mapCharacterModAction(int act, string character, string mapFile,
+                                             GLfloat xPos, GLfloat zPos, 
+                                             GLfloat orientation,  GLfloat initialX, 
+                                             GLfloat initialZ):
+                        modAction(act, character, mapFile, xPos, zPos)
+{
+   oriAngle = orientation;
+   initX = initialX;
+   initZ = initialZ;
+}
+
+/************************************************************
+ *                        Destructor                        *
+ ************************************************************/
+mapCharacterModAction::~mapCharacterModAction()
+{
+}
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                         mapObjectModAction                             //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+/************************************************************
+ *                       Constructor                        *
+ ************************************************************/
+mapObjectModAction::mapObjectModAction(int act, string obj, string mapFile,
+                                       GLfloat xPos, GLfloat zPos): 
+                    modAction(act, obj, mapFile, xPos, zPos)
+{
+}
+
+/************************************************************
+ *                        Destructor                        *
+ ************************************************************/
+mapObjectModAction::~mapObjectModAction()
+{
+}
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                               modState                                 //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
 
 /************************************************************
  *                       Constructor                        *
  ************************************************************/
 modState::modState()
 {
-   mapObjectsList = NULL;
-   totalMapObjects = 0;
+   modActionsList = NULL;
+   totalModActions = 0;
 }
 
 /************************************************************
@@ -128,14 +188,14 @@ bool modState::saveState(string file)
    //TODO. For now is only printing on screen for debug!
    int i;
    GLfloat x=0, z=0;
-   mapObjectModAction* tmpMobj = mapObjectsList;
-   for(i = 0; i < totalMapObjects; i++)
+   modAction* tmpMod = modActionsList;
+   for(i = 0; i < totalModActions; i++)
    {
-      tmpMobj->getPosition(x,z);
-      printf("Map: %s, Action: %d\n\tobject: %s\n\tx:%.3f z:%.3f\n",
-             tmpMobj->getMapFileName().c_str(), tmpMobj->getAction(),
-             tmpMobj->getTarget().c_str(), x, z);
-      tmpMobj = tmpMobj->getNext();
+      tmpMod->getPosition(x,z);
+      printf("Map: %s, Action: %d\n\ttarget: %s\n\tx:%.3f z:%.3f\n",
+             tmpMod->getMapFileName().c_str(), tmpMod->getAction(),
+             tmpMod->getTarget().c_str(), x, z);
+      tmpMod = tmpMod->getNext();
    }
 
    return(true);
@@ -148,6 +208,12 @@ void modState::mapObjectAddAction(int action, string target,
                                   string mapFileName, 
                                   GLfloat xPos, GLfloat zPos)
 {
+   if( (action != MODSTATE_ACTION_MAP_REMOVE) && 
+       (action != MODSTATE_ACTION_MAP_ADD) )
+   {
+      cerr << "Invalid modification object action: " <<  action << endl;
+   }
+
    if(removeInverseObjectAction(action, target, mapFileName, xPos, zPos))
    {
       /*! Add is similar to remove inverse, so it is added! */
@@ -155,25 +221,25 @@ void modState::mapObjectAddAction(int action, string target,
    }
    else
    {
-      if(!mapObjectsList)
+      if(!modActionsList)
       {
          /* Add the only one! */
-         mapObjectsList = new mapObjectModAction(action, target, mapFileName,
-                                                 xPos, zPos);
-         mapObjectsList->setNext(mapObjectsList);
-         mapObjectsList->setPrevious(mapObjectsList);
+         modActionsList = (modAction*) new mapObjectModAction(action, target, 
+                                                              mapFileName, xPos, zPos);
+         modActionsList->setNext(modActionsList);
+         modActionsList->setPrevious(modActionsList);
       }
       else
       {
          /* Add at first */
          mapObjectModAction* n;
          n = new mapObjectModAction(action, target, mapFileName, xPos, zPos);
-         n->setNext(mapObjectsList);
-         n->setPrevious(mapObjectsList->getPrevious());
-         mapObjectsList->setPrevious(n);
-         n->getPrevious()->setNext(n);
+         n->setNext(modActionsList);
+         n->setPrevious(modActionsList->getPrevious());
+         modActionsList->setPrevious((modAction*)n);
+         n->getPrevious()->setNext((modAction*)n);
       }
-      totalMapObjects++;
+      totalModActions++;
    }
 }
 
@@ -184,9 +250,16 @@ bool modState::removeInverseObjectAction(int action, string target,
                                          string mapFileName, 
                                          GLfloat xPos, GLfloat zPos)
 {
+
+   if((action != MODSTATE_ACTION_MAP_REMOVE) && (action != MODSTATE_ACTION_MAP_ADD) )
+   {
+      /* Invalid action: not an object one! */
+      return(false);
+   }
+
    int i;
-   mapObjectModAction* tmp = mapObjectsList;
-   for(i = 0; i < totalMapObjects; i++)
+   modAction* tmp = modActionsList;
+   for(i = 0; i < totalModActions; i++)
    {
       if( (tmp->getMapFileName() == mapFileName) &&
           (tmp->getAction() == !action) &&
@@ -198,17 +271,17 @@ bool modState::removeInverseObjectAction(int action, string target,
          if( (pX == xPos) && (pZ == zPos))
          {
             /* Found the Inverse, so remove it */
-            if(mapObjectsList == tmp)
+            if(modActionsList == tmp)
             {
-               mapObjectsList = tmp->getNext();
+               modActionsList = tmp->getNext();
             }
             tmp->getNext()->setPrevious(tmp->getPrevious());
             tmp->getPrevious()->setNext(tmp->getNext());
-            delete(tmp);
-            totalMapObjects--;
-            if(totalMapObjects <= 0)
+            delete((mapObjectModAction*)tmp);
+            totalModActions--;
+            if(totalModActions <= 0)
             {
-               mapObjectsList = NULL;
+               modActionsList = NULL;
             }
             return(true);
          }
@@ -225,8 +298,8 @@ void modState::doMapModifications(Map* actualMap)
 {
    int i;
    GLfloat x=0, z=0;
-   mapObjectModAction* tmpMobj = mapObjectsList;
-   for(i = 0; i < totalMapObjects; i++)
+   modAction* tmpMobj = modActionsList;
+   for(i = 0; i < totalModActions; i++)
    {
       /* If the information is from the loaded map, apply it! */
       if(tmpMobj->getMapFileName() == actualMap->getFileName())
@@ -237,6 +310,14 @@ void modState::doMapModifications(Map* actualMap)
             actualMap->removeObject(x, z, tmpMobj->getTarget());
          }
          else if(tmpMobj->getAction() == MODSTATE_ACTION_MAP_ADD)
+         {
+            //TODO
+         }
+         else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
+         {
+            //TODO
+         }
+         else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_MOVE)
          {
             //TODO
          }
@@ -260,14 +341,30 @@ void modState::clear()
    int i;
 
    /* Free all map objects from list */
-   mapObjectModAction* tmpMobj;
-   for(i = 0; i < totalMapObjects; i++)
+   modAction* tmpMobj;
+   for(i = 0; i < totalModActions; i++)
    {
-      tmpMobj = mapObjectsList;
-      mapObjectsList = mapObjectsList->getNext();
-      delete(tmpMobj);
+      tmpMobj = modActionsList;
+      modActionsList = modActionsList->getNext();
+      if( (tmpMobj->getAction() == MODSTATE_ACTION_MAP_REMOVE) ||
+          (tmpMobj->getAction() == MODSTATE_ACTION_MAP_ADD))
+      {
+         /* Object One */
+         delete((mapObjectModAction*)tmpMobj);
+      }
+      else if( (tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD) ||
+               (tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_MOVE))
+      {
+         /* Character One */
+         delete((mapCharacterModAction*)tmpMobj);
+      }
+      else
+      {
+         /* Generic One */
+         delete(tmpMobj);
+      }
    }
-   mapObjectsList = NULL;
-   totalMapObjects = 0;
+   modActionsList = NULL;
+   totalModActions = 0;
 }
 

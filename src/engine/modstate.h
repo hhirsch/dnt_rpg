@@ -11,20 +11,24 @@
 #define MODSTATE_ACTION_MAP_REMOVE  0  /**< Removed object from map */
 #define MODSTATE_ACTION_MAP_ADD     1  /**< Added object to the map */
 
-/*! An Modification Action made to objects in map */
-class mapObjectModAction
+#define MODSTATE_ACTION_CHARACTER_DEAD   3  /**< Killed Character on map */
+#define MODSTATE_ACTION_CHARACTER_MOVE   4  /**< The character moved to a new positon */
+
+/*! The Generic Modification Action Class */
+class modAction
 {
    public:
       /*! Constructor
        * \param act -> action type
-       * \param obj -> pointer to object
+       * \param tgt -> actor target fileName
        * \param mapFile - name of the map file where action occurs 
        * \param xPos -> x position
        * \param zPos -> z position */
-      mapObjectModAction(int act, string obj, string mapFile,
+      modAction(int act, string tgt, string mapFile,
                          GLfloat xPos, GLfloat zPos);
+
       /*! Destructor */
-      ~mapObjectModAction();
+      ~modAction();
 
       /*! Get the target of the action
        * \return pointer to object of the action */
@@ -43,26 +47,70 @@ class mapObjectModAction
 
       /*! Get next action on list 
        * \return pointer to next action on list */
-      mapObjectModAction* getNext();
+      modAction* getNext();
       /*! Get previous action on list 
        * \return pointer to previous action on list */
-      mapObjectModAction* getPrevious();
+      modAction* getPrevious();
 
       /*! Set next action on list
        * \param act -> pointer to next action */
-      void setNext(mapObjectModAction* act);
+      void setNext(modAction* act);
       /*! Set Previous action on list
        * \param act -> pointer to previous action */
-      void setPrevious(mapObjectModAction* act);
+      void setPrevious(modAction* act);
 
    protected:
       string mapFileName;       /**< name of the map file where action occurs */
       int action;               /**< type of the action */
       GLfloat x;                /**< X position on map */
       GLfloat z;                /**< Z position on map */
-      string target;           /**< object target of the action */
-      mapObjectModAction* next;     /**< next action on list */
-      mapObjectModAction* previous; /**< previous action on list */
+      string target;            /**< target of the action (fileName) */
+      modAction* next;          /**< next action on list */
+      modAction* previous;      /**< previous action on list */
+};
+
+/*! A Modification Action made to (or by) a character on map */
+class mapCharacterModAction : public modAction
+{
+   public:
+      /*! Constructor
+       * \param act -> action type
+       * \param character -> character fileName
+       * \param mapFile -> name of the map file where action occurs 
+       * \param xPos -> x position
+       * \param zPos -> z position
+       * \param orientation -> character orientation angle
+       * \param initialX -> initial X position when loaded the map
+       * \param initialZ -> initial Z position when loaded the map */
+      mapCharacterModAction(int act, string character, string mapFile,
+                            GLfloat xPos, GLfloat zPos, GLfloat orientation,
+                            GLfloat initialX, GLfloat initialZ);
+      /*! Destructor */                      
+      ~mapCharacterModAction();
+
+   protected:
+      GLfloat initX;                   /**< X initial position on map */
+      GLfloat initZ;                   /**< Z initial position on map */
+      GLfloat oriAngle;                /**< Orientation Angle */
+};
+
+/*! A Modification Action made to objects in map */
+class mapObjectModAction: public modAction
+{
+   public:
+      /*! Constructor
+       * \param act -> action type
+       * \param obj -> object fileName
+       * \param mapFile - name of the map file where action occurs 
+       * \param xPos -> x position
+       * \param zPos -> z position */
+      mapObjectModAction(int act, string obj, string mapFile,
+                         GLfloat xPos, GLfloat zPos);
+      /*! Destructor */
+      ~mapObjectModAction();
+
+   protected:
+
 };
 
 /*! The Modifications made by users on game are armazened here. It is also
@@ -113,8 +161,8 @@ class modState
                                      string mapFileName, GLfloat xPos, 
                                      GLfloat zPos);
       
-      mapObjectModAction* mapObjectsList; /**< List of mod action mapObjects */
-      int totalMapObjects;               /**< Total mapObjects on list */
+      modAction* modActionsList;   /**< List of modification actions */
+      int totalModActions;         /**< Total modActions on list */
 };
 
 #endif
