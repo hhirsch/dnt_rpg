@@ -282,7 +282,28 @@ void modState::removeAction(modAction* act)
       }
       act->getNext()->setPrevious(act->getPrevious());
       act->getPrevious()->setNext(act->getNext());
-      delete((mapObjectModAction*)act);
+
+
+      /* Delete the correct struct */
+      if( (act->getAction() == MODSTATE_ACTION_OBJECT_REMOVE) ||
+          (act->getAction() == MODSTATE_ACTION_OBJECT_ADD))
+      {
+         /* Object One */
+         delete((mapObjectModAction*)act);
+      }
+      else if( (act->getAction() == MODSTATE_ACTION_CHARACTER_DEAD) ||
+               (act->getAction() == MODSTATE_ACTION_CHARACTER_MOVE))
+      {
+         /* Character One */
+         delete((mapCharacterModAction*)act);
+      }
+      else
+      {
+         /* Generic One */
+         delete(act);
+      }
+
+
       totalModActions--;
       if(totalModActions <= 0)
       {
@@ -386,30 +407,12 @@ void modState::doMapModifications(Map* actualMap)
 void modState::clear()
 {
    int i;
+   int total = totalModActions;
 
    /* Free all map objects from list */
-   modAction* tmpMobj;
-   for(i = 0; i < totalModActions; i++)
+   for(i = 0; i < total; i++)
    {
-      tmpMobj = modActionsList;
-      modActionsList = modActionsList->getNext();
-      if( (tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_REMOVE) ||
-          (tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_ADD))
-      {
-         /* Object One */
-         delete((mapObjectModAction*)tmpMobj);
-      }
-      else if( (tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD) ||
-               (tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_MOVE))
-      {
-         /* Character One */
-         delete((mapCharacterModAction*)tmpMobj);
-      }
-      else
-      {
-         /* Generic One */
-         delete(tmpMobj);
-      }
+      removeAction(modActionsList);
    }
    modActionsList = NULL;
    totalModActions = 0;
