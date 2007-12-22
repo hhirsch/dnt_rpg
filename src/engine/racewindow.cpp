@@ -28,7 +28,8 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    }
    
    /* create intWindow */
-   intWindow = inter->insertWindow(centerX-310,centerY-200,centerX+310,centerY+200,
+   intWindow = inter->insertWindow(centerX-310,centerY-200,
+                                   centerX+310,centerY+200,
                                    gettext("Race"));
 
    /* Race Image */
