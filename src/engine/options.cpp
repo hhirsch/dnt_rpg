@@ -253,7 +253,37 @@ bool options::isLanguageUnicode()
  ****************************************************************/
 void options::setLanguage()
 {
-   string saux = languageName();
+   string saux = "";
+
+   switch(langNumber)
+   {
+      case DNT_LANG_RUSSIAN:
+      {
+         saux = FL_RUSSIAN;
+         break;
+      }
+      case DNT_LANG_PORTUGUESE:
+      {
+         saux = FL_PORTUGUESE;
+         break;
+      }
+      case DNT_LANG_SPANISH:
+      {
+         saux = FL_SPANISH;
+         break;
+      }
+      case DNT_LANG_FRENCH: 
+      {
+         saux = FL_FRENCH;
+         break;
+      }
+      case DNT_LANG_ENGLISH:
+      {
+         saux = FL_ENGLISH;
+         break;
+      }
+   }
+
 
    if(!saux.empty())
    {
