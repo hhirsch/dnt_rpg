@@ -17,8 +17,10 @@ string getStringFromUser(string title, string previous,
    Uint8 mButton;
    Uint8* keys;
    int mouseX, mouseY;
+   int sX = SCREEN_X / 2;
+   int sY = SCREEN_Y / 2;
 
-   getWindow = gui->insertWindow(300,200,500,262,title.c_str());
+   getWindow = gui->insertWindow(sX-100,sY-31,sX+100,sY+31,title.c_str());
    okButton = getWindow->getObjectsList()->insertButton(40,37,95,55,"Ok",1);
    cancelButton = getWindow->getObjectsList()->insertButton(100,37,155,55,
                                                             "Cancel",1);
