@@ -399,17 +399,20 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
         mouseX = x;
         mouseY = y;
         selText *st = (selText*)objAtivo;
-        int res = st->threat(x-ljan->getActiveWindow()->getX1(),
+        int res = st->treat(x-ljan->getActiveWindow()->getX1(),
                              y-ljan->getActiveWindow()->getY1(),
                              Mbotao,ljan->getActiveWindow()->getSurface());
         if(res == -1)
         {
             focus = FOCUS_GAME;
-            *eventInfo = NOTHING; 
+            *eventInfo = NOTHING;
+            /* Redraw, since the last selected now is -1! */
+            ljan->getActiveWindow()->draw(0,0);
         }
         else if(res < 0)
         {
           *eventInfo = MODIFIED_SEL_TEXT;
+          ljan->getActiveWindow()->draw(0,0);
         }
         else
         {

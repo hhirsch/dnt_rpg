@@ -36,14 +36,14 @@ class selText: public guiObject
       /*! Destructor */
       ~selText();
 
-      /*! Set the SelTexto coordinates
+      /*! Set the SelText coordinates
        * \param xa -> x1 coordinate
        * \param xb -> x2 coordinate
        * \param ya -> y1 coordinate
        * \param yb -> y2 coordinate */
       void setCoordinate(int xa,int ya,int xb,int yb);
 
-      /*! Get the SelTexto coordinates
+      /*! Get the selText coordinates
        * \param xa -> x1 coordinate
        * \param xb -> x2 coordinate
        * \param ya -> y1 coordinate
@@ -52,16 +52,15 @@ class selText: public guiObject
 
 
       /*! Draw the seltext on a surface
-       * \param selectedItem -> number of the selected text
        * \param screen -> surface to draw */
-      void draw(int selectedItem, SDL_Surface *screen);
+      void draw(SDL_Surface *screen);
 
-      /*! Threat the selTexto
-       * \param screen  -> surface where the selTexto is
+      /*! Treat the selText
+       * \param screen  -> surface where the selText is
        * \param xa -> mouse X coordinate
        * \param ya -> mouse Y coordinate
        * \param Mbotao -> mouse button state*/
-      int threat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen);
+      int treat(int xa,int ya, Uint8 Mbotao, SDL_Surface *screen);
 
       /*! Get the last selected item 
        * \return -> last selected item */

@@ -220,7 +220,7 @@ void window::draw(int mouseX, int mouseY)
          }
          case GUI_SEL_TEXT:{
               selText *st = (selText*) obj;
-              st->draw(-1,surface);
+              st->draw(surface);
               break;
          }
          case GUI_PICTURE:{
