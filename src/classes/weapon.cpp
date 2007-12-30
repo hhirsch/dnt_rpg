@@ -1,4 +1,5 @@
 #include "weapon.h"
+#include "../lang/translate.h"
 
 /************************************************************
  *                        Constructor                       *
@@ -37,7 +38,7 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
       /* Tokenize the first token */
       if(token == "name")
       {
-         name = token2;
+         name = translateDataString(token2);
       }
       else if(token == "cal3d")
       {
