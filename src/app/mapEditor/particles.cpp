@@ -3,6 +3,7 @@
 
 #define STATE_PLANES     800
 #define STATE_GRASS_INIT 801
+#define STATE_LAKE_INIT  802
 
 /*****************************************************************
  *                          Constructor                          *
@@ -59,7 +60,8 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                              GLdouble modl[16], GLint viewPort[4],
                              string selectedText,
                              grassWindow* grWindow, 
-                             waterWindow* wtWindow)
+                             waterWindow* wtWindow,
+                             Map* actualMap)
 {
    int tool = gui->getTool();
 
@@ -81,6 +83,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 
    previousText = selectedText;
 
+   /* Set Position */
    GLfloat posX = mouseX;
    GLfloat posZ = mouseZ;
    if( (mouseX < 0) || (mouseX > actualMap->getSizeX()*actualMap->squareSize()))
@@ -92,6 +95,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       posZ = 0;
    }
 
+   /* Grass TOOL */
    if( tool == TOOL_PARTICLE_GRASS )
    {
       if(state == TOOL_PARTICLE_GRASS)
@@ -138,6 +142,53 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       }
       
    }
+
+   /* Lake TOOL */
+   else if(tool == TOOL_PARTICLE_LAKE)
+   {
+      if(state == TOOL_PARTICLE_LAKE)
+      {
+         if(mButton & SDL_BUTTON(1))
+         {
+            x1 = mouseX;
+            z1 = mouseZ;
+            state = STATE_LAKE_INIT;
+         }
+      }
+      else if(state == STATE_LAKE_INIT)
+      {
+         if(!(mButton & SDL_BUTTON(1)))
+         {
+            GLfloat tmp;
+            if(x2 < x1)
+            {
+               tmp = x2;
+               x2 = x1;
+               x1 = tmp;
+            }
+            if(z2 < z1)
+            {
+               tmp = z2;
+               z2 = z1;
+               z1 = tmp;
+            }
+
+            /* Add the lake */
+            actualMap->addLake(x1,z1,x2,z2);
+
+            state = TOOL_PARTICLE_LAKE;
+         }
+         x2 = mouseX;
+         z2 = mouseZ;
+      }
+      else
+      {
+         state = TOOL_PARTICLE_LAKE;
+         particleType = -1;
+      }
+   }
+
+   /* fire TOOL */
    else if( (tool == TOOL_PARTICLE_FIRE) && (!actualParticle) )
    {
       state = TOOL_PARTICLE_FIRE; 
@@ -161,6 +212,8 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          actualParticle = NULL;
       }
    }
+
+   /* Smoke */
    else if( (tool == TOOL_PARTICLE_SMOKE) && (!actualParticle) )
    {
       state = TOOL_PARTICLE_SMOKE; 
@@ -184,6 +237,8 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          actualParticle = NULL;
       }
    }
+
+   /* Waterfall */
    else if( (tool == TOOL_PARTICLE_WATERFALL) && (!actualParticle) )
    {
       particleType = PART_WATERFALL;
@@ -223,9 +278,10 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 
       if(mButton & SDL_BUTTON(1))
       {
-         if(tool != TOOL_PARTICLE_GRASS)
+         if( (tool != TOOL_PARTICLE_GRASS) && (tool != TOOL_PARTICLE_LAKE))
          {
-            particleSystem* p = pS->addParticle(particleType, mouseX, height, mouseZ,
+            particleSystem* p = pS->addParticle(particleType, 
+                                                mouseX, height, mouseZ,
                                                 actualParticle->getFileName());
 
             /* Set the waterfall window */
@@ -263,6 +319,18 @@ void particles::drawTemporary(GLfloat matriz[6][4])
          glVertex3f(x2, 1, z1);
          glVertex3f(x2, 1, z2);
          glVertex3f(x1, 1, z2);
+      glEnd();
+      glEnable(GL_LIGHTING);
+   }
+   else if(state == STATE_LAKE_INIT)
+   {
+      glDisable(GL_LIGHTING);
+      glColor3f(0.5,0.4,0.9);
+      glBegin(GL_QUADS);
+         glVertex3f(x1, -1, z1);
+         glVertex3f(x2, -1, z1);
+         glVertex3f(x2, -1, z2);
+         glVertex3f(x1, -1, z2);
       glEnd();
       glEnable(GL_LIGHTING);
    }

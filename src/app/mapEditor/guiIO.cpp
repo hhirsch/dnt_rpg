@@ -796,9 +796,8 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          }
          else if(object == (guiObject*) waterSurfaceButton)
          {
-            //TODO
             state = GUI_IO_STATE_PARTICLES;
-            tool = TOOL_PARTICLE_WATER_SURFACE;
+            tool = TOOL_PARTICLE_LAKE;
          }
          else if(object == (guiObject*) grassButton)
          {

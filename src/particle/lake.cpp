@@ -80,24 +80,24 @@ void lake::definePosition(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
       for(z = 0; z < vZ; z++)
       {
          /* Vertex 1 */
-         vertexBuffer[vPos] = x*VERT_POV;
+         vertexBuffer[vPos] = x1 + x*VERT_POV;
          vertexBuffer[vPos+1] = -1;
-         vertexBuffer[vPos+2] = z*VERT_POV; 
+         vertexBuffer[vPos+2] = z1 + z*VERT_POV; 
 
          /* Vertex 2 */
-         vertexBuffer[vPos+3] = (x+1)*VERT_POV;
+         vertexBuffer[vPos+3] = x1 + (x+1)*VERT_POV;
          vertexBuffer[vPos+4] = -1;
-         vertexBuffer[vPos+5] = z*VERT_POV;
+         vertexBuffer[vPos+5] = z1 + z*VERT_POV;
 
          /* Vertex 3 */
-         vertexBuffer[vPos+6] = (x+1)*VERT_POV;
+         vertexBuffer[vPos+6] = x1 + (x+1)*VERT_POV;
          vertexBuffer[vPos+7] = -1;
-         vertexBuffer[vPos+8] = (z+1)*VERT_POV;
+         vertexBuffer[vPos+8] = z1 + (z+1)*VERT_POV;
 
          /* Vertex 4 */
-         vertexBuffer[vPos+9] = x*VERT_POV;
+         vertexBuffer[vPos+9] = x1 + x*VERT_POV;
          vertexBuffer[vPos+10] = -1;
-         vertexBuffer[vPos+11] = (z+1)*VERT_POV;
+         vertexBuffer[vPos+11] = z1 + (z+1)*VERT_POV;
 
          /* Increment buffer position */
          vPos += 12;

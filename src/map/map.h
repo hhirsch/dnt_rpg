@@ -21,16 +21,11 @@ using namespace std;
 #define INDOOR_SQUARE_SIZE        64      /**< Size of the indoor square */
 
 
-//#define HALF_SQUARE_SIZE SQUARE_SIZE / 2 /**< Half size of the square */
-//#define QUARTER_SQUARE_SIZE SQUARE_SIZE / 4 /**< Quarter size of the square */
-//#define SQUARE_DIAGONAL_SIZE SQUARE_SIZE * 1.4142136 /**< Diagonal squaresize */
-
 #define MAX_WALLS             15       /**< Max number of walls per square */
 #define WALL_HEIGHT           50       /**< Walls height */
 #define CURB_HEIGHT            2       /**< Curbs height */
 #define MAX_HEIGHT           150       /**< Max square height */
 
-#define SQUARE_DIVISIONS_INC  256 /**< Difference heigh to inc the square divisions. NOT used anymore. */ 
 #define TEXTURE_REPEATS (OUTDOOR_SQUARE_SIZE / 256) /**< Number of Repeats */ 
 #define ALPHA_TEXTURE_INC       4 /**< Points per square on each alpha texture*/
 
@@ -563,6 +558,8 @@ class Map
        **************************************************************/
       int getTotalWalls();
 
+      lake* addLake(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2);
+
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
       //mapRoad* roads;     /**< Map's Roads */
@@ -572,6 +569,8 @@ class Map
       wall* curbs;          /**< Map Curbs */
       int totalCurbs;       /**< Total Curbs */
       door* doors;          /**< Map Doors */
+      lake* lakes;          /**< Chain list of lakes on map */
+      int totalLakes;       /**< Total lakes on map */
 
       int SQUAREMINISIZE;   /**< Minimap square size */
       int SQUAREMINIDIV;    /**< MiniMap square division relation */
@@ -624,7 +623,6 @@ class Map
          int totalVertex;
          GLuint commonTexture;   /**< The most common texture on the map */
 
-         lake* lakes;            /**< Chain list of lakes on map */
 };
 
 #endif

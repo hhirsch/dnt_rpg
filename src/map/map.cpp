@@ -678,7 +678,7 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 void Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
                     GLfloat matriz[6][4])
 {
-  
+   /* Draw Terrain */
    if(outdoor)
    {
       drawFloorOutdoor(cameraX, cameraY, cameraZ, matriz);
@@ -686,6 +686,15 @@ void Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    else
    {
       drawFloorIndoor(cameraX, cameraY, cameraZ, matriz);
+   }
+
+   /* Draw Lakes */
+   lake* l = lakes;
+   int i;
+   for(i = 0; i < totalLakes; i++)
+   {
+      l->draw();
+      l = l->next;
    }
 
    return;
@@ -950,11 +959,39 @@ Map::Map(lObject* lObjects)
    uvBuffer = NULL;
    uvAlphaBuffer = NULL;
    commonTexture = 0;
+
+   lakes = NULL;
+   totalLakes = 0;
    
    /* Initialize Structs */
    objects = lObjects;
    x = z = 0;
    xInic = zInic = 0;
+}
+
+/********************************************************************
+ *                                addLake                           *
+ ********************************************************************/
+lake* Map::addLake(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
+{
+   lake* l = new lake();
+   l->definePosition(x1,z1,x2,z2);
+
+   if(lakes == NULL)
+   {
+      l->next = l;
+      l->previous = l;
+   }
+   else
+   {
+      l->next = lakes;
+      l->previous = lakes->previous;
+      l->next->previous = l;
+      l->previous->next = l;
+   }
+   lakes = l;
+   totalLakes++;
+   return(l);
 }
 
 /********************************************************************
@@ -2032,6 +2069,9 @@ Map::~Map()
       delete[](MapSquares[x1]);
    }
    delete[] (MapSquares);
+
+   /* Deleting Lakes */
+   //TODO
 
    /* Deleting Roads */
    /*if(roads)

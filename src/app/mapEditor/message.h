@@ -38,7 +38,7 @@ using namespace std;
 #define TOOL_PARTICLE_FIRE          151
 #define TOOL_PARTICLE_SMOKE         152
 #define TOOL_PARTICLE_WATERFALL     153
-#define TOOL_PARTICLE_WATER_SURFACE 154
+#define TOOL_PARTICLE_LAKE          154
 #define TOOL_PARTICLE_SNOW          155
 #define TOOL_PARTICLE_GRASS         156
 
