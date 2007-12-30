@@ -9,6 +9,7 @@
 #include "mapfog.h"
 #include "maplights.h"
 #include "maproad.h"
+#include "../particle/lake.h"
 #include <string>
 using namespace std;
 
@@ -622,6 +623,8 @@ class Map
          float* uvAlphaBuffer;
          int totalVertex;
          GLuint commonTexture;   /**< The most common texture on the map */
+
+         lake* lakes;            /**< Chain list of lakes on map */
 };
 
 #endif
