@@ -1,6 +1,6 @@
 10
 Axe ../data/models/objetos/armas/axe.dcc
-Dagger ../data/models/objetos/armas/adaga.dcc
+Dagger ../data/weapons/definitions/dagger.wcc
 Beretta92 ../data/weapons/definitions/beretta92.wcc
 Kalashnikov ../data/models/objetos/armas/kalashnikov.dcc
 Kalashnikov_2 ../data/models/objetos/armas/kalashnikov_pequena.dcc
