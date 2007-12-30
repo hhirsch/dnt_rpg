@@ -86,6 +86,31 @@ void lake::definePosition(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
    pos[2] = x2;
    pos[3] = z2;
 
+   numVertex = 4;
+   vertexBuffer = new GLfloat[numVertex*3];
+   int vPos = 0;
+
+         /* Vertex 1 */
+         vertexBuffer[vPos] = x1;
+         vertexBuffer[vPos+1] = -4;
+         vertexBuffer[vPos+2] = z1; 
+
+         /* Vertex 2 */
+         vertexBuffer[vPos+3] = x2;
+         vertexBuffer[vPos+4] = -4;
+         vertexBuffer[vPos+5] = z1;
+
+         /* Vertex 3 */
+         vertexBuffer[vPos+6] = x2;
+         vertexBuffer[vPos+7] = -4;
+         vertexBuffer[vPos+8] = z2;
+
+         /* Vertex 4 */
+         vertexBuffer[vPos+9] = x1;
+         vertexBuffer[vPos+10] = -4;
+         vertexBuffer[vPos+11] = z2;
+
+#if 0 
    /* Calculate number of vertex */
    int vX = ceil((x2 - x1) / VERT_POV);
    int vZ = ceil((z2 - z1) / VERT_POV);
@@ -125,6 +150,7 @@ void lake::definePosition(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
          vPos += 12;
       }
    }
+#endif   
 }
 
 /***************************************************************
