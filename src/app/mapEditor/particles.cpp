@@ -327,10 +327,10 @@ void particles::drawTemporary(GLfloat matriz[6][4])
       glDisable(GL_LIGHTING);
       glColor3f(0.5,0.4,0.9);
       glBegin(GL_QUADS);
-         glVertex3f(x1, -1, z1);
-         glVertex3f(x2, -1, z1);
-         glVertex3f(x2, -1, z2);
-         glVertex3f(x1, -1, z2);
+         glVertex3f(x1, -4, z1);
+         glVertex3f(x2, -4, z1);
+         glVertex3f(x2, -4, z2);
+         glVertex3f(x1, -4, z2);
       glEnd();
       glEnable(GL_LIGHTING);
    }

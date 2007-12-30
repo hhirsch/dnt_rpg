@@ -1,5 +1,5 @@
 name = Cerdo
-model = ../data/models/personagens/deer/model.cfg
+model = ../data/models/personagens/deer/cal3d.cfg
 portrait = ../data/characters/portraits/ameiva.png
 maxLifePoints = 75
 baseModifier = 12/25/17
