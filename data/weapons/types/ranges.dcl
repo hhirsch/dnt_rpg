@@ -1,3 +1,3 @@
 2
-00 meele
+00 melee
 01 ranged
