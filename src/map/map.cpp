@@ -1357,13 +1357,35 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    {
       switch(buffer[0])
       {
-         case 'l':/* Define Light File */
+         case 'l':
+         
+         switch(buffer[1])
          {
-            fgets(buffer, sizeof(buffer),arq);
-            sscanf(buffer,"%s",nome);
-            lights.Load(nome);
-            break;
+            
+            /* Define Light File */
+            case 'i':
+            {
+               fgets(buffer, sizeof(buffer),arq);
+               sscanf(buffer,"%s",nome);
+               lights.Load(nome);
+               break;
+            }
+            /* Add Lake to Map */
+            case 'a':
+            {
+               fgets(buffer, sizeof(buffer),arq);
+               float xa=0, za=0, xb=0, zb=0;
+               float r=0,g=0,b=0,a=0;
+               sscanf(buffer,"%f,%f,%f,%f:%f,%f,%f,%f", 
+                              &xa, &za, &xb, &zb,
+                              &r, &g, &b, &a);
+               lake* l = addLake(xa,za,xb,zb);
+               l->defineColor(r,g,b,a);
+               break;
+            }
          }
+         break;
+
          case 'f':/* Define Fog File */
          {
             fgets(buffer, sizeof(buffer),arq);
@@ -1881,8 +1903,22 @@ int Map::save(string arquivo)
    /* Write if is outdoor or not */
    fprintf(arq,"Outdoor: %d\n", outdoor);
 
-   /* Write used objects */
+   /* Write lakes */
    int i;
+   float xa=0,za=0,xb=0,zb=0;
+   float r=0,g=0,b=0,a=0;
+
+   lake* l = lakes;
+   for(i = 0; i < totalLakes; i++)
+   {
+      l->getPosition(xa,za,xb,zb);
+      l->getColor(r,g,b,a);
+      fprintf(arq,"lake %.3f,%.3f,%.3f,%.3f:%.3f,%.3f,%.3f,%.3f\n",
+                        xa,  za,  xb,  zb,  r,   g,   b,   a);
+      l = l->next;
+   }
+
+   /* Write used objects */
    if(objects->total>0)
    {
       object* objAux = objects->first;

@@ -37,6 +37,28 @@ lake::~lake()
 }
 
 /***************************************************************
+ *                          getColor                           *
+ ***************************************************************/
+void lake::getColor(GLfloat &r, GLfloat &g, GLfloat &b, GLfloat &a)
+{
+   r = color[0];
+   g = color[1];
+   b = color[2];
+   a = color[3];
+}
+
+/***************************************************************
+ *                        getPosition                          *
+ ***************************************************************/
+void lake::getPosition(GLfloat &x1, GLfloat &z1, GLfloat &x2, GLfloat &z2)
+{
+   x1 = pos[0];
+   z1 = pos[1];
+   x2 = pos[2];
+   z2 = pos[3];
+}
+
+/***************************************************************
  *                        defineColor                          *
  ***************************************************************/
 void lake::defineColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a)

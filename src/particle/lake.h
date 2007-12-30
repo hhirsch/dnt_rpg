@@ -22,7 +22,14 @@ class lake
        * \param z1 -> z first coordinate
        * \param x2 -> x last coordinate
        * \param z2 -> z last coordinate */
-      void definePosition(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2);     
+      void definePosition(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2); 
+
+      /*! Get Lake Position
+       * \param x1 -> x first coordinate
+       * \param z1 -> z first coordinate
+       * \param x2 -> x last coordinate
+       * \param z2 -> z last coordinate */
+      void getPosition(GLfloat &x1, GLfloat &z1, GLfloat &x2, GLfloat &z2);
 
       /*! Define Color
        * \param r -> red
@@ -30,6 +37,13 @@ class lake
        * \param b -> blue
        * \param a -> alpha */
       void defineColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+
+      /* Get Color
+       * \param r -> red
+       * \param g -> green 
+       * \param b -> blue
+       * \param a -> alpha */
+      void getColor(GLfloat &r, GLfloat &g, GLfloat &b, GLfloat &a);
    
       /*! Draw the lake */
       void draw();
