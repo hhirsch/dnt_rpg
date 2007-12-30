@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-12-16 18:52-0200\n"
+"POT-Creation-Date: 2007-12-30 16:44-0200\n"
 "PO-Revision-Date: 2007-11-29 15:32+0000\n"
 "Last-Translator: MATHIEU Yves <EMAIL@ADDRESS>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -72,15 +72,15 @@ msgid "Tendency & Alignment"
 msgstr ""
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:69
-#: src/engine/attwindow.cpp:220 src/engine/options.cpp:514
-#: src/engine/racewindow.cpp:70 src/engine/classwindow.cpp:73
+#: src/engine/attwindow.cpp:220 src/engine/options.cpp:537
+#: src/engine/racewindow.cpp:71 src/engine/classwindow.cpp:73
 #: src/engine/skillwindow.cpp:101
 msgid "Confirm"
 msgstr "Confirmer"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:73
 #: src/engine/attwindow.cpp:224 src/engine/barterwindow.cpp:34
-#: src/engine/options.cpp:518 src/engine/racewindow.cpp:74
+#: src/engine/options.cpp:541 src/engine/racewindow.cpp:75
 #: src/engine/classwindow.cpp:77 src/engine/skillwindow.cpp:105
 msgid "Cancel"
 msgstr "Annuler"
@@ -105,7 +105,7 @@ msgstr "Enregistrer"
 msgid "Load"
 msgstr "Charger"
 
-#: src/engine/initial.cpp:67 src/engine/options.cpp:370
+#: src/engine/initial.cpp:67 src/engine/options.cpp:393
 msgid "Options"
 msgstr "Options"
 
@@ -207,7 +207,7 @@ msgstr "Charisme"
 msgid "Attribute Description"
 msgstr "Description des attributs"
 
-#: src/engine/attwindow.cpp:502 src/engine/options.cpp:672
+#: src/engine/attwindow.cpp:502 src/engine/options.cpp:695
 msgid "Warning"
 msgstr "Avertissement"
 
@@ -243,109 +243,113 @@ msgstr "Français"
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: src/engine/options.cpp:125
+#: src/engine/options.cpp:11
+msgid "Russian"
+msgstr ""
+
+#: src/engine/options.cpp:128
 #, c-format
 msgid "Unknow option: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:151
+#: src/engine/options.cpp:154
 #, c-format
 msgid "Error while writing Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:291
+#: src/engine/options.cpp:314
 msgid "None"
 msgstr "Aucun"
 
-#: src/engine/options.cpp:296
+#: src/engine/options.cpp:319
 msgid "Characters"
 msgstr "Caractères"
 
-#: src/engine/options.cpp:301
+#: src/engine/options.cpp:324
 msgid "All"
 msgstr "Tous"
 
-#: src/engine/options.cpp:317
+#: src/engine/options.cpp:340
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:320
+#: src/engine/options.cpp:343
 msgid "Pursue"
 msgstr "Poursuite"
 
-#: src/engine/options.cpp:376
+#: src/engine/options.cpp:399
 msgid "Music Volume:"
 msgstr "Volume de la musique :"
 
-#: src/engine/options.cpp:395
+#: src/engine/options.cpp:418
 msgid "Effects Volume:"
 msgstr "Volume des effets :"
 
-#: src/engine/options.cpp:414
+#: src/engine/options.cpp:437
 msgid "Language:"
 msgstr "Langue :"
 
-#: src/engine/options.cpp:432
+#: src/engine/options.cpp:455
 msgid "Camera Mode:"
 msgstr "Mode de la caméra :"
 
-#: src/engine/options.cpp:449
+#: src/engine/options.cpp:472
 msgid "Enable Grass Effects (need particles)"
 msgstr ""
 
-#: src/engine/options.cpp:458
+#: src/engine/options.cpp:481
 msgid "Enable Particles Effects"
 msgstr "Activer les effets de particules"
 
-#: src/engine/options.cpp:469
+#: src/engine/options.cpp:492
 msgid "Reflections:"
 msgstr "Réflections :"
 
-#: src/engine/options.cpp:488
+#: src/engine/options.cpp:511
 msgid "Screen Resolution:"
 msgstr ""
 
-#: src/engine/options.cpp:504
+#: src/engine/options.cpp:527
 msgid "Enable FullScreen"
 msgstr ""
 
-#: src/engine/options.cpp:673
+#: src/engine/options.cpp:696
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
-#: src/engine/racewindow.cpp:32
+#: src/engine/racewindow.cpp:33
 msgid "Race"
 msgstr "Race"
 
-#: src/engine/racewindow.cpp:41
+#: src/engine/racewindow.cpp:42
 msgid "Race Description"
 msgstr "Description de la Race"
 
-#: src/engine/racewindow.cpp:50
+#: src/engine/racewindow.cpp:51
 msgid "Race Characteristcs"
 msgstr "Caractéristique de la Race"
 
-#: src/engine/racewindow.cpp:89
+#: src/engine/racewindow.cpp:90
 msgid "Race Modifiers||"
 msgstr "Modificateur de la Race||"
 
-#: src/engine/racewindow.cpp:97
+#: src/engine/racewindow.cpp:98
 msgid "No Modifiers.||"
 msgstr ""
 
-#: src/engine/racewindow.cpp:101
+#: src/engine/racewindow.cpp:102
 msgid "Race Feats||"
 msgstr "Déplacements de la Race||"
 
-#: src/engine/racewindow.cpp:109 src/engine/classwindow.cpp:168
+#: src/engine/racewindow.cpp:110 src/engine/classwindow.cpp:168
 msgid "No Feats.|"
 msgstr "Pas de Déplacements.|"
 
-#: src/engine/racewindow.cpp:114
+#: src/engine/racewindow.cpp:115
 msgid "|Race Skills||"
 msgstr "|Compétences de la Race||"
 
-#: src/engine/racewindow.cpp:130 src/engine/classwindow.cpp:189
+#: src/engine/racewindow.cpp:131 src/engine/classwindow.cpp:189
 msgid "No Skills."
 msgstr "Pas de Compétences."
 
@@ -506,7 +510,7 @@ msgstr "Tapez F1 pour l'Aide"
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3225
+#: src/engine/dccnit.cpp:3260
 msgid "|Exit Battle Mode"
 msgstr "|Sortir du mode de Bataille"
 
@@ -616,12 +620,12 @@ msgstr "Impossible d'initialiser SDL !\n"
 msgid "Oxi! Can't ajust video mode: %s!\n"
 msgstr "Impossible d'ajuster le mode vidéo: %s !\n"
 
-#: src/gui/dntfont.cpp:13
+#: src/gui/dntfont.cpp:14
 #, c-format
 msgid "Can't init SDL_ttf : %s\n"
 msgstr ""
 
-#: src/gui/dntfont.cpp:86
+#: src/gui/dntfont.cpp:87
 #, c-format
 msgid "Can't open font file: %s\n"
 msgstr ""
@@ -2461,4 +2465,12 @@ msgstr ""
 
 #: data/dialogs/initial.dlg:88
 msgid "Bye Ente!"
+msgstr ""
+
+#: data/weapons/definitions/adaga.wcc:1
+msgid "Dagger"
+msgstr ""
+
+#: data/weapons/definitions/beretta92.wcc:1
+msgid "Beretta 92"
 msgstr ""

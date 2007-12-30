@@ -222,3 +222,7 @@ data/dialogs/ameiva1.dlg
 data/dialogs/ratazana1.dlg
 data/dialogs/initial.dlg
 
+#weapons
+data/weapons/definitions/adaga.wcc
+data/weapons/definitions/beretta92.wcc
+
