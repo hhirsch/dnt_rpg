@@ -221,6 +221,10 @@ void editor::openMap()
          sizeZ = map->getSizeZ();
       }
 
+      float x=0,z=0;
+      map->getInitialPosition(x,z);
+      gui->gameCamera.actualizeCamera(x,0,z,0);
+
       gui->showMessage("Map opened.");
    }
    else
