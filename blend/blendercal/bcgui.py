@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: t -*-
-# $Id: bcgui.py,v 1.1 2007/07/12 13:36:35 farpro Exp $
+# $Id: bcgui.py,v 1.2 2007/12/31 12:30:17 farpro Exp $
 
 import Blender
 import os
@@ -176,8 +176,8 @@ def InterfaceDraw():
 	global IMAGE
 	if not IMAGE:
 		# Don't load the logo if used in non-GUI mode
-		IMAGE = Blender.Image.Load("/usr/lib/python2.4/blendercal/logo.png")
-	#Blender.Draw.Image(IMAGE, 145, 65)
+		IMAGE = Blender.Image.Load(os.path.join(Blender.Get("scriptsdir"), "blendercal", "logo.png"))
+	Blender.Draw.Image(IMAGE, 145, 65)
 
 	Blender.BGL.glDisable(Blender.BGL.GL_BLEND)
 

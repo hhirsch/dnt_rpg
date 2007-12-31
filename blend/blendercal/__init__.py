@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: t -*-
-# $Id: __init__.py,v 1.1 2007/07/12 13:36:35 farpro Exp $
+# $Id: __init__.py,v 1.2 2007/12/31 12:30:17 farpro Exp $
 
 import bcconf
 import Blender.Mathutils
@@ -37,8 +37,8 @@ code is entirely original by Jeremy Moles and Palle Raabjerg, with a bit of
 influence from Loic Dachary, especially in the bcdata.AnimationData().
 """
 
-# A decorator to catch any exception semi-gracefully. Sometiem later
-# this will create a Blender panel to show the exception.
+## A decorator to catch any exception semi-gracefully. Sometiem later
+## this will create a Blender panel to show the exception.
 def exception(function):
 	return function
 
@@ -53,7 +53,6 @@ def exception(function):
 
 # A function that will parse the passed-in sequences and set the appropriate
 # values in bcconf.
-@exception
 def ParseArgs(parse):
 	args  = []
 	strip = lambda s: s.rstrip().lstrip().replace("\t", "").replace("\n", "")
@@ -90,3 +89,5 @@ def ParseArgs(parse):
 	# Return args; since this will be False by default, we'll use this
 	# to determine if the user passed a --blendercal argument.
 	return args
+
+ParseArgs = exception(ParseArgs)

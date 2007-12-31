@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: t -*-
-# $Id: bcdata.py,v 1.1 2007/07/12 13:36:35 farpro Exp $
+# $Id: bcdata.py,v 1.2 2007/12/31 12:30:17 farpro Exp $
 
 # The purpose of this module is to provide methods by which the caller can easily
 # create sequences of bcobject instances for their own use. These don't necessarily
@@ -25,7 +25,6 @@ def __yieldBlenderObj(t, objlist=None):
 		if obj.getType() == t and not obj.getName().startswith("_"):
 			yield obj, obj.getData()
 
-@blendercal.exception
 def SkeletonData():
 	# This function returns a single blendercal.bcobject.Skeleton instance
 	# and sets blendercal.bcobject.Skeleton.ARMATURE to the appropriate Blender
@@ -54,7 +53,9 @@ def SkeletonData():
 	
 	return skeleton
 
-@blendercal.exception
+SkeletonData = blendercal.exception(SkeletonData)
+
+#@blendercal.exception
 def MeshData():
 	# This function returns a list of blender.bcobject.Mesh objects, one for
 	# each mesh in your Blender scene. The Cal3D notion of a Mesh is actually more
@@ -174,28 +175,23 @@ def MeshData():
 			for m in data.materials:
 				if not m.name in bcobject.Material.MATERIALS:
 					mapnames = []
-					ambient  = [
-						int(round(m.R * 255,0)),
-						int(round(m.G * 255,0)),
-						int(round(m.B * 255,0)),
-						255
-					]
+					ambient  = [255] * 3
 					
 					diffuse = [
-						int(round(m.R * 255,0)),
-						int(round(m.G * 255,0)),
-						int(round(m.B * 255,0)),
-						255
+						m.R * 255,
+						m.G * 255,
+						m.B * 255,
+						m.getRef() * 255
 					]
 					
 					specular = [
-						int(round(m.specR * 255,0)),
-						int(round(m.specG * 255,0)),
-						int(round(m.specB * 255,0)),
-						255
+						m.specR * 255,
+						m.specG * 255,
+						m.specB * 255,
+						m.spec  * 127.5
 					]
 
-					#ambient.append(m.getAmb() * 255)
+					ambient.append(m.getAmb() * 255)
 					
 					for mtex in m.getTextures():
 						if mtex and mtex.tex.getType() == "Image":
@@ -214,7 +210,7 @@ def MeshData():
 				else:
 					material = bcobject.Material.MATERIALS[m.name]
 
-				if firstmaterial: 
+				if firstmaterial:
 					submeshmaterial = material
 					
 				firstmaterial = False
@@ -261,7 +257,7 @@ def MeshData():
 			# preventing another iteration of all the vertices here.
 			for i, v in enumerate(vlist):
 				weights = data.getVertexInfluences(v.index)
-				total   = sum(w for b, w in weights)
+				total   = sum([w for b, w in weights])
 			
 				for b, w in weights:
 					vertices[i].influences.append(bcobject.Influence(
@@ -305,7 +301,8 @@ def MeshData():
 
 	return meshes
 
-@blendercal.exception
+MeshData = blendercal.exception(MeshData)
+
 def AnimationData():
 	# This function demonstrates a new way of parsing and retrieving animation
 	# data in Blender. With version 242 and above, users can call the the
@@ -374,7 +371,8 @@ def AnimationData():
 
 	return animations
 
-@blendercal.exception
+AnimationData = blendercal.exception(AnimationData)
+
 def ExportData(filename, skeldata, meshdata, animdata, prefixfiles=False):
 	dirname  = os.path.dirname(filename)
 	basename = os.path.splitext(os.path.basename(filename))[0]
@@ -424,3 +422,5 @@ def ExportData(filename, skeldata, meshdata, animdata, prefixfiles=False):
 		print >> file(os.path.join(dirname, matfile), "w"), material
 		
 		print >> cfg, "material=%s" % matfile
+
+ExportData = blendercal.exception(ExportData)

@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: t -*-
-# $Id: bcconf.py,v 1.1 2007/07/12 13:36:35 farpro Exp $
+# $Id: bcconf.py,v 1.2 2007/12/31 12:30:17 farpro Exp $
 
 # Rather than ask the user to change these variables directly, the user
 # of this script can either change them in sys.argv or use the GUI
