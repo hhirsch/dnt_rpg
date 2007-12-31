@@ -1,11 +1,11 @@
 10
 Axe ../data/weapons/definitions/axe.wcc
-Dagger ../data/weapons/definitions/dagger.wcc
 Beretta92 ../data/weapons/definitions/beretta92.wcc
-Kalashnikov ../data/models/objetos/armas/kalashnikov.dcc
-Kalashnikov_2 ../data/models/objetos/armas/kalashnikov_pequena.dcc
-Katana ../data/models/objetos/armas/dark_katana.dcc
-Knife ../data/models/objetos/armas/faca.dcc
-Scimitar ../data/models/objetos/armas/scimitar.dcc
-Sw39 ../data/models/objetos/armas/sw39.dcc
-Uzi ../data/models/objetos/armas/uzi.dcc
+Dagger ../data/weapons/definitions/dagger.wcc
+Kalashnikov ../data/weapons/definitions/kalashnikov.wcc
+Kalashnikov_2 ../data/weapons/definitions/kalashnikov_small.wcc
+Katana ../data/weapons/definitions/katana.wcc
+Knife ../data/weapons/definitions/knife.wcc
+Scimitar ../data/weapons/definitions/scimitar.wcc
+Sw39 ../data/weapons/definitions/sw39.wcc
+Uzi ../data/weapons/definitions/uzi.wcc
