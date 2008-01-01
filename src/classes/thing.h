@@ -47,6 +47,7 @@ class thing
       float cr;               /**< The Challenge Rating */
       int xpPercent;          /**< The percentual Left of XP to give */
       float cost;             /**< Cost Value */
+      float weight;           /**< Weight Value */
       float walk_interval;    /**< The interval of walking (for multiply per
                                    WALK_ACTUALIZATION value. This is for 
                                    temporize the walk animation of the thing) */

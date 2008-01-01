@@ -128,7 +128,6 @@ class weapon: public object
       int weightType;         /**< Weight Type (Ex: Light) */
       diceThing damageDice;   /**< Damage Dices */
       int rangeValue;         /**< Range Value */
-      float weightValue;      /**< Weight Value */
       int damageType[2];      /**< Damage Type Vector (Ex: Slashing) */
       string attackSound[2];  /**< Damage Type Sounds Files */
 

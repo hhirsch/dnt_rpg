@@ -116,7 +116,7 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
       }
       else if((token == "weight_value") || (token == "weight"))
       {
-         sscanf(token2.c_str(),"%f",&weightValue);
+         sscanf(token2.c_str(),"%f",&weight);
       }
       else if(token == "munition_type")
       {
@@ -220,7 +220,7 @@ int weapon::getRangeType()
  ************************************************************/
 float weapon::getWeight()
 {
-   return(weightValue);
+   return(weight);
 }
 
 //////////////////////////////////////////////////////////////////////////////
