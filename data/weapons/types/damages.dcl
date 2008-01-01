@@ -1,4 +1,4 @@
 3
-00 piercing
-01 slashing
-02 bludgeoning
+00 piercing gettext("Piercing")
+01 slashing gettext("Slashing")
+02 bludgeoning gettext("Bludgeoning")

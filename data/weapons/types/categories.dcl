@@ -1,8 +1,8 @@
 7
-00 martial
-01 exotic
-02 throw
-03 simple
-04 two_handed
-05 gun
-06 rifle
+00 martial gettext("Martial")
+01 exotic gettext("Exotic")
+02 throw gettext("Throw")
+03 simple gettext("Simple")
+04 two_handed gettext("Two Handed")
+05 gun gettext("Gun")
+06 rifle gettext("Rifle")

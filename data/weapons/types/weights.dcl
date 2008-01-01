@@ -1,4 +1,4 @@
 03
-00 light
-01 normal
-02 heavy
+00 light gettext("Light")
+01 normal gettext("Normal")
+02 heavy gettext("Heavy")

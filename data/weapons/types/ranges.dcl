@@ -1,3 +1,3 @@
 2
-00 melee
-01 ranged
+00 melee gettext("Melee")
+01 ranged gettext("Ranged")

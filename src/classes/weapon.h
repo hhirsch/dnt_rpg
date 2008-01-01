@@ -10,6 +10,7 @@ class wInfo
    public:
       string name;   /**< Name of the info */
       int index;     /**< Index of the info */
+      string title;  /**< Title of the info (text) */
 };
 
 /*! The Weapon Types Class. This class receives all informations about

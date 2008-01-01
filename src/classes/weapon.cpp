@@ -276,6 +276,7 @@ void weaponTypes::readFile(string fileName)
    FILE* file;
    int i, index;
    char buffer[255];
+   char buffer2[255];
 
    int totals;
    wInfo* names = NULL;
@@ -334,9 +335,10 @@ void weaponTypes::readFile(string fileName)
    /* Read All definitions */
    for(i=0; i < totals; i++)
    {
-      fscanf(file, "%d %s", &index, &buffer[0]);
+      fscanf(file, "%d %s %s", &index, &buffer[0], &buffer2[0]);
       names[index].name = buffer;
       names[index].index = index;
+      names[index].title = translateDataString(buffer2);
    }
 
    /* Close the file */
