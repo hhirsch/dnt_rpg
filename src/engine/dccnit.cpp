@@ -65,7 +65,8 @@ engine::engine()
    features = new featsList("../data/feats/","../data/feats/feats.ftl");
 
    /* Load Alignments & Tendecies */
-   alignList = new aligns("../data/alignment/", "../data/alignment/alignment.lst");
+   alignList = new aligns("../data/alignment/",
+                          "../data/alignment/alignment.lst");
 
    /* Load Races */
    raceList = new races("../data/races/", "../data/races/races.lst");
@@ -1091,7 +1092,7 @@ void engine::Init(SDL_Surface *screen)
    img = IMG_Load("../data/texturas/walk/destino.png");
    if(!img)
    {
-      printf("Error: can't Load Texure: destino.png\n");
+      printf("Error: can't Load Texture: destino.png\n");
    }
 
    glGenTextures(1, &destinyImage);
@@ -2123,8 +2124,8 @@ int engine::treatIO(SDL_Surface *screen)
                                        activeCharacter->orientation);
             andou = true;
          }
-         else if( ((varZ > 0) && canWalk(0,activeCharacter->walk_interval,0)) ||
-                  ((varZ < 0) && canWalk(0,-activeCharacter->walk_interval,0)) )
+         else if(((varZ > 0) && canWalk(0,activeCharacter->walk_interval,0)) ||
+                 ((varZ < 0) && canWalk(0,-activeCharacter->walk_interval,0)) )
          {
             if(varZ < 0)
             {
@@ -2334,12 +2335,14 @@ int engine::treatIO(SDL_Surface *screen)
       /* Redraw the needed GUI */
       if(miniMapWindow)
       {
-         GLint x = (int)(((activeCharacter->xPosition) / (actualMap->squareSize())));
+         GLint x = (int)( activeCharacter->xPosition / 
+                          actualMap->squareSize() );
          if(x > actualMap->getSizeX()-1)
          {
             x = actualMap->getSizeX()-1;
          }
-         GLint z = (int)(((activeCharacter->zPosition) / (actualMap->squareSize())));
+         GLint z = (int)( activeCharacter->zPosition / 
+                          actualMap->squareSize() );
          if( z > actualMap->getSizeZ()-1)
          {
             z = actualMap->getSizeZ()-1;
