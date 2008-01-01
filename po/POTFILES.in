@@ -223,6 +223,20 @@ data/dialogs/ratazana1.dlg
 data/dialogs/initial.dlg
 
 #weapons
-data/weapons/definitions/adaga.wcc
+data/weapons/definitions/axe.wcc
+data/weapons/definitions/dagger.wcc
 data/weapons/definitions/beretta92.wcc
+data/weapons/definitions/kalashnikov_small.wcc
+data/weapons/definitions/kalashnikov.wcc
+data/weapons/definitions/katana.wcc
+data/weapons/definitions/knife.wcc
+data/weapons/definitions/scimitar.wcc
+data/weapons/definitions/sw39.wcc
+data/weapons/definitions/uzi.wcc
+data/weapons/types/categories.dcl  
+data/weapons/types/damages.dcl
+data/weapons/types/munitions.dcl
+data/weapons/types/ranges.dcl
+data/weapons/types/sizes.dcl
+data/weapons/types/weights.dcl
 

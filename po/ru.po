@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2007-12-30 16:44-0200\n"
+"POT-Creation-Date: 2008-01-01 13:57-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -97,11 +97,11 @@ msgstr "Новый"
 msgid "Continue"
 msgstr "Продолжить"
 
-#: src/engine/initial.cpp:63 src/engine/dccnit.cpp:3070
+#: src/engine/initial.cpp:63 src/engine/dccnit.cpp:3073
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/engine/initial.cpp:65 src/engine/dccnit.cpp:3074
+#: src/engine/initial.cpp:65 src/engine/dccnit.cpp:3077
 msgid "Load"
 msgstr "Загрузка"
 
@@ -257,7 +257,7 @@ msgstr ""
 msgid "Error while writing Options: %s\n"
 msgstr "Произошла ошибка пока записывались опции: %s\n"
 
-#: src/engine/options.cpp:314
+#: src/engine/options.cpp:314 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Нет"
 
@@ -269,7 +269,8 @@ msgstr "Характеристики"
 msgid "All"
 msgstr "Все"
 
-#: src/engine/options.cpp:340
+#: src/engine/options.cpp:340 data/weapons/types/sizes.dcl:3
+#: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Обычный"
 
@@ -413,46 +414,46 @@ msgstr "Очки:"
 msgid "Cost"
 msgstr "Цена"
 
-#: src/engine/dccnit.cpp:235
+#: src/engine/dccnit.cpp:236
 msgid "../data/texturas/general/info.png"
 msgstr "../data/texturas/general/info.png"
 
-#: src/engine/dccnit.cpp:336
+#: src/engine/dccnit.cpp:337
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Загрузка карты: %s"
 
-#: src/engine/dccnit.cpp:412
+#: src/engine/dccnit.cpp:413
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Ох, не могу загрузить файл NPC: %s.\n"
 
-#: src/engine/dccnit.cpp:427
+#: src/engine/dccnit.cpp:428
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Загрузка NPC: %s"
 
-#: src/engine/dccnit.cpp:449
+#: src/engine/dccnit.cpp:450
 msgid "Loading Character"
 msgstr "Загрузка характера"
 
-#: src/engine/dccnit.cpp:455
+#: src/engine/dccnit.cpp:456
 msgid "Putting GUI on Screen"
 msgstr "Помещение GUI на экран"
 
-#: src/engine/dccnit.cpp:493
+#: src/engine/dccnit.cpp:494
 msgid "Loading Particles"
 msgstr "Загрузка частиц"
 
-#: src/engine/dccnit.cpp:522
+#: src/engine/dccnit.cpp:523
 msgid "Loading Changes..."
 msgstr "Загрузка изменений..."
 
-#: src/engine/dccnit.cpp:540
+#: src/engine/dccnit.cpp:541
 msgid "Done!"
 msgstr "Готово!"
 
-#: src/engine/dccnit.cpp:626
+#: src/engine/dccnit.cpp:627
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -460,57 +461,57 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1139
+#: src/engine/dccnit.cpp:1140
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1179 src/engine/dccnit.cpp:1247
+#: src/engine/dccnit.cpp:1180 src/engine/dccnit.cpp:1248
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов на арене"
 
-#: src/engine/dccnit.cpp:1229
+#: src/engine/dccnit.cpp:1230
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1553
+#: src/engine/dccnit.cpp:1554
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:1612
+#: src/engine/dccnit.cpp:1613
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:1744 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1745 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s атаковал %s|"
 
-#: src/engine/dccnit.cpp:1819 src/engine/dccnit.cpp:3067
+#: src/engine/dccnit.cpp:1820 src/engine/dccnit.cpp:3070
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:3037
+#: src/engine/dccnit.cpp:3040
 msgid "Map"
 msgstr "Карта"
 
-#: src/engine/dccnit.cpp:3060
+#: src/engine/dccnit.cpp:3063
 msgid "Shortcuts"
 msgstr "Мелочь"
 
-#: src/engine/dccnit.cpp:3062
+#: src/engine/dccnit.cpp:3065
 msgid "FPS:"
 msgstr "PS:"
 
-#: src/engine/dccnit.cpp:3064
+#: src/engine/dccnit.cpp:3067
 msgid "Press F1 for Help"
 msgstr "Нажмите F1 для помощи"
 
-#: src/engine/dccnit.cpp:3072
+#: src/engine/dccnit.cpp:3075
 msgid "Menu"
 msgstr "Меню:"
 
-#: src/engine/dccnit.cpp:3260
+#: src/engine/dccnit.cpp:3263
 msgid "|Exit Battle Mode"
 msgstr "|Покинуть режим сражения"
 
@@ -2464,10 +2465,119 @@ msgstr ""
 msgid "Bye Ente!"
 msgstr ""
 
-#: data/weapons/definitions/adaga.wcc:1
+#: data/weapons/definitions/axe.wcc:1
+msgid "Great Axe"
+msgstr ""
+
+#: data/weapons/definitions/dagger.wcc:1
 msgid "Dagger"
 msgstr ""
 
 #: data/weapons/definitions/beretta92.wcc:1
 msgid "Beretta 92"
+msgstr ""
+
+#: data/weapons/definitions/kalashnikov_small.wcc:1
+#: data/weapons/definitions/kalashnikov.wcc:1
+msgid "Kalashnikov"
+msgstr ""
+
+#: data/weapons/definitions/katana.wcc:1
+msgid "Katana"
+msgstr ""
+
+#: data/weapons/definitions/knife.wcc:1
+msgid "Knife"
+msgstr ""
+
+#: data/weapons/definitions/scimitar.wcc:1
+msgid "Scimitar"
+msgstr ""
+
+#: data/weapons/definitions/sw39.wcc:1
+msgid "S&W 39"
+msgstr ""
+
+#: data/weapons/definitions/uzi.wcc:1
+msgid "Uzi"
+msgstr ""
+
+#: data/weapons/types/categories.dcl:2
+msgid "Martial"
+msgstr ""
+
+#: data/weapons/types/categories.dcl:3
+msgid "Exotic"
+msgstr ""
+
+#: data/weapons/types/categories.dcl:4
+msgid "Throw"
+msgstr ""
+
+#: data/weapons/types/categories.dcl:5
+msgid "Simple"
+msgstr ""
+
+#: data/weapons/types/categories.dcl:6
+msgid "Two Handed"
+msgstr ""
+
+#: data/weapons/types/categories.dcl:7
+msgid "Gun"
+msgstr ""
+
+#: data/weapons/types/categories.dcl:8
+msgid "Rifle"
+msgstr ""
+
+#: data/weapons/types/damages.dcl:2
+msgid "Piercing"
+msgstr ""
+
+#: data/weapons/types/damages.dcl:3
+msgid "Slashing"
+msgstr ""
+
+#: data/weapons/types/damages.dcl:4
+msgid "Bludgeoning"
+msgstr ""
+
+#: data/weapons/types/munitions.dcl:3
+msgid "9mm"
+msgstr ""
+
+#: data/weapons/types/munitions.dcl:4
+msgid ".223"
+msgstr ""
+
+#: data/weapons/types/munitions.dcl:5
+msgid "M74"
+msgstr ""
+
+#: data/weapons/types/munitions.dcl:6
+msgid "M43"
+msgstr ""
+
+#: data/weapons/types/ranges.dcl:2
+msgid "Melee"
+msgstr ""
+
+#: data/weapons/types/ranges.dcl:3
+msgid "Ranged"
+msgstr ""
+
+#: data/weapons/types/sizes.dcl:2
+msgid "Tiny"
+msgstr ""
+
+#: data/weapons/types/sizes.dcl:4
+msgid "Large"
+msgstr ""
+
+#: data/weapons/types/weights.dcl:2
+msgid "Light"
+msgstr ""
+
+#: data/weapons/types/weights.dcl:4
+msgid "Heavy"
 msgstr ""
