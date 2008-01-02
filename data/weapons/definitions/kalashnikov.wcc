@@ -20,4 +20,4 @@ weight_type = normal
 weight_value = 3.8
 main_damage_type = piercing
 main_attack_sound = ../data/sndfx/guns/rifles/rifle_2.ogg
-damage_dice = 1*d6+0*2
+damage_dice = 1*d8+0x2

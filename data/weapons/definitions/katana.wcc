@@ -21,4 +21,4 @@ main_damage_type = piercing
 main_attack_sound = ../data/sndfx/weapons/piercing_normal.ogg
 second_damage_type = slashing
 second_attack_sound = ../data/sndfx/weapons/slashing_normal.ogg
-damage_dice = 1*d6+0*2
+damage_dice = 1*d6+0x2

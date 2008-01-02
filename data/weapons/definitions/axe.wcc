@@ -18,4 +18,4 @@ size_type = large
 weight_value = 9
 main_damage_type = slashing
 main_attack_sound = ../data/sndfx/weapons/slashing_large.ogg
-damage_dice = 1*1d10+0*3
+damage_dice = 1*1d10+0x3
