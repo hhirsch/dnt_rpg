@@ -335,7 +335,10 @@ void weaponTypes::readFile(string fileName)
    /* Read All definitions */
    for(i=0; i < totals; i++)
    {
-      fscanf(file, "%d %s %s", &index, &buffer[0], &buffer2[0]);
+      fscanf(file, "%d %s ", &index, &buffer[0]);
+      /* eat up the rest of line */
+      fgets(buffer2, sizeof(buffer2), file);
+
       names[index].name = buffer;
       names[index].index = index;
       names[index].title = translateDataString(buffer2);
