@@ -26,7 +26,6 @@ engine::engine()
    shortCutsWindow = NULL;
    inventoryWindow = NULL;
    tradeWindow = NULL;
-   infoWindow = new itemWindow(gui);
 
    imgNumber = 0;
    actualScreen = NULL;
@@ -83,6 +82,9 @@ engine::engine()
 
    /* Create 3D Models List */
    models = new modelList();
+
+   /* Create Special Windows */
+   infoWindow = new itemWindow(gui);
 
    /* Initialize readModes variables */
    lastRead = SDL_GetTicks();

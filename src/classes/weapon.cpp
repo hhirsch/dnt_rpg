@@ -4,6 +4,26 @@
 /************************************************************
  *                        Constructor                       *
  ************************************************************/
+wInfo::wInfo()
+{
+   name = "";
+   index = -1;
+   title = "";
+};
+
+/************************************************************
+ *                          Assign                          *
+ ************************************************************/
+void wInfo::operator=(wInfo& v)
+{
+   name = v.name;
+   index = v.index;
+   title = v.title;
+};
+
+/************************************************************
+ *                        Constructor                       *
+ ************************************************************/
 weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
 {
    FILE* file;
@@ -11,6 +31,12 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
    string token, token2;
 
    cleanValues();
+   categoryType = NULL;
+   rangeType = NULL;
+   sizeType = NULL;
+   weightType = NULL;
+   damageType[0] = NULL;
+   damageType[1] = NULL;
 
    type = OBJECT_TYPE_WEAPON;
 
@@ -180,15 +206,38 @@ weapon::~weapon()
 /************************************************************
  *                           getType                        *
  ************************************************************/
-void weapon::getType(int& category, int& range, int& size, int& weight,
-                     int& damageA, int& damageB)
+void weapon::getType(wInfo& category, wInfo& range, wInfo& size, wInfo& weight,
+                     wInfo& damageA, wInfo& damageB)
 {
-   category = categoryType;
-   range = rangeType;
-   size = sizeType;
-   weight = weightType;
-   damageA = damageType[0];
-   damageB = damageType[1];
+   if(categoryType)
+   {
+      category = *categoryType;
+   }
+
+   if(rangeType)
+   {
+      range = *rangeType;
+   }
+
+   if(sizeType)
+   {
+      size = *sizeType;
+   }
+
+   if(weightType)
+   {
+      weight = *weightType;
+   }
+
+   if(damageType[0])
+   {
+      damageA = *damageType[0];
+   }
+
+   if(damageType[1])
+   {
+      damageB = *damageType[1];
+   }
 }
 
 /************************************************************
@@ -210,7 +259,7 @@ int weapon::getRange()
 /************************************************************
  *                          getRange                        *
  ************************************************************/
-int weapon::getRangeType()
+wInfo* weapon::getRangeType()
 {
    return(rangeType);
 }
@@ -351,7 +400,7 @@ void weaponTypes::readFile(string fileName)
 /************************************************************
  *                        getCategory                       *
  ************************************************************/
-int weaponTypes::getCategory(string name)
+wInfo* weaponTypes::getCategory(string name)
 {
    return(getThing(categories, totalCategories, name));
 }
@@ -359,7 +408,7 @@ int weaponTypes::getCategory(string name)
 /************************************************************
  *                         getSize                          *
  ************************************************************/
-int weaponTypes::getSize(string name)
+wInfo* weaponTypes::getSize(string name)
 {
    return(getThing(sizes, totalSizes, name));
 }
@@ -367,7 +416,7 @@ int weaponTypes::getSize(string name)
 /************************************************************
  *                         getRage                          *
  ************************************************************/
-int weaponTypes::getRange(string name)
+wInfo* weaponTypes::getRange(string name)
 {
    return(getThing(ranges, totalRanges, name));
 }
@@ -376,7 +425,7 @@ int weaponTypes::getRange(string name)
 /************************************************************
  *                         getWeight                        *
  ************************************************************/
-int weaponTypes::getWeight(string name)
+wInfo* weaponTypes::getWeight(string name)
 {
    return(getThing(weights, totalWeights, name));
 }
@@ -384,7 +433,7 @@ int weaponTypes::getWeight(string name)
 /************************************************************
  *                         getDamage                        *
  ************************************************************/
-int weaponTypes::getDamage(string name)
+wInfo* weaponTypes::getDamage(string name)
 {
    return(getThing(damages, totalDamages, name));
 }
@@ -392,7 +441,7 @@ int weaponTypes::getDamage(string name)
 /************************************************************
  *                        getMunition                       *
  ************************************************************/
-int weaponTypes::getMunition(string name)
+wInfo* weaponTypes::getMunition(string name)
 {
    return(getThing(munitions, totalMunitions, name));
 }
@@ -401,17 +450,17 @@ int weaponTypes::getMunition(string name)
 /************************************************************
  *                          getThing                        *
  ************************************************************/
-int weaponTypes::getThing(wInfo* thing, int total, string name)
+wInfo* weaponTypes::getThing(wInfo* thing, int total, string name)
 {
    int i;
    for(i=0; i<total; i++)
    {
       if(thing[i].name == name)
       {
-         return(thing[i].index);
+         return(&thing[i]);
       }
    }
    printf("Can't found weapon definition type of: %s\n", name.c_str());
-   return(-1);
+   return(NULL);
 }
 

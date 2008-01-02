@@ -8,6 +8,12 @@
 class wInfo
 {
    public:
+      /*! Constructor */
+      wInfo();
+
+      /*! Assign Operator */
+      void operator=(wInfo& v);
+
       string name;   /**< Name of the info */
       int index;     /**< Index of the info */
       string title;  /**< Title of the info (text) */
@@ -25,33 +31,33 @@ class weaponTypes
 
       /*! Get the category number
        * \param name -> name of the category
-       * \return -> the category internal number. -1 on error. */
-      int getCategory(string name);
+       * \return -> the category pointer. NULL on error.. */
+      wInfo* getCategory(string name);
 
       /*! Get the size number
        * \param name -> name of the size
-       * \return -> the size internal number. -1 on error. */
-      int getSize(string name);
+       * \return -> the size pointer. NULL on error.. */
+      wInfo* getSize(string name);
 
       /*! Get the weight number
        * \param name -> name of the weight
-       * \return -> the weight internal number. -1 on error. */
-      int getWeight(string name);
+       * \return -> the weight pointer. NULL on error.. */
+      wInfo* getWeight(string name);
 
       /*! Get the damage number
        * \param name -> name of the damage
-       * \return -> the damage internal number. -1 on error. */
-      int getDamage(string name);
+       * \return -> the damage pointer. NULL on error.. */
+      wInfo* getDamage(string name);
 
       /*! Get the range number
        * \param name -> name of the range
-       * \return -> the range internal number. -1 on error. */
-      int getRange(string name);
+       * \return -> the range pointer. NULL on error.. */
+      wInfo* getRange(string name);
 
       /*! Get the munition type number
        * \param name -> name of the munition
-       * \return -> the munition internal number. -1 on error. */
-      int getMunition(string name);
+       * \return -> the munition pointer. NULL on error.. */
+      wInfo* getMunition(string name);
 
    private:
       /*! Read A definition file
@@ -63,7 +69,7 @@ class weaponTypes
        * \param total -> the total elements on the thing
        * \param name -> thing name to get
        * \return -> the thing internal number . -1 on error. */
-      int getThing(wInfo* thing, int total, string name);
+      wInfo* getThing(wInfo* thing, int total, string name);
 
 
       int totalCategories;    /**< Total number of categories */
@@ -100,11 +106,11 @@ class weapon: public object
        * \param weight -> weight type of the weapon
        * \param damageA -> first damage type
        * \param damageB -> second damage type */
-      void getType(int& category, int& range, int& size, int& weight,
-                   int& damageA, int& damageB);
+      void getType(wInfo& category, wInfo& range, wInfo& size, wInfo& weight,
+                   wInfo& damageA, wInfo& damageB);
 
       /*! Gets the range type of the weapon (usually, meele or ranged) */
-      int getRangeType();
+      wInfo* getRangeType();
 
       /*! Get the weapon's damage dice
        * \return the weapons damage dice */
@@ -119,16 +125,16 @@ class weapon: public object
       float getWeight();
 
    protected:
-      int munitionType;       /**< Weapon Munition Type (ex: 9mm) */
+      wInfo* munitionType;    /**< Weapon Munition Type (ex: 9mm) */
       int munitionCapacity;   /**< Weapon Max Munition */
       int actualMunition;     /**< Weapon actual munition */
-      int categoryType;       /**< Weapon Category (Ex: Exotic)  */
-      int rangeType;          /**< Range Type (Ex: Meele) */
-      int sizeType;           /**< Size Type (Ex: Small) */
-      int weightType;         /**< Weight Type (Ex: Light) */
+      wInfo* categoryType;    /**< Weapon Category (Ex: Exotic)  */
+      wInfo* rangeType;       /**< Range Type (Ex: Meele) */
+      wInfo* sizeType;        /**< Size Type (Ex: Small) */
+      wInfo* weightType;      /**< Weight Type (Ex: Light) */
       diceThing damageDice;   /**< Damage Dices */
       int rangeValue;         /**< Range Value */
-      int damageType[2];      /**< Damage Type Vector (Ex: Slashing) */
+      wInfo* damageType[2];   /**< Damage Type Vector (Ex: Slashing) */
       string attackSound[2];  /**< Damage Type Sounds Files */
 
       /*! TODO /todo Special things on weapons! It's, for example a 

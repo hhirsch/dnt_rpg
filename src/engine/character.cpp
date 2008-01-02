@@ -443,17 +443,17 @@ void character::defineWeapon()
 
          /* Define the weapon */
          dc = wp->getDice();
-         if(wp->getRangeType() == FEAT_MELEE_ATTACK)
+         if(wp->getRangeType()->index == FEAT_MELEE_ATTACK)
          {
             actualFeats.defineMeleeWeapon(dc, wp->getRange());
          }
-         else if(wp->getRangeType() == FEAT_RANGED_ATTACK)
+         else if(wp->getRangeType()->index == FEAT_RANGED_ATTACK)
          {
             actualFeats.defineRangedWeapon(dc, wp->getRange());
          }
          else
          {
-            printf("Warn: Unknow Range Type: %d\n", wp->getRangeType());
+            printf("Warn: Unknow Range Type: %d\n", wp->getRangeType()->index);
          }
       }
    }
@@ -508,17 +508,17 @@ void character::defineWeapon()
 
          /* Define the weapon */
          dc = wp->getDice();
-         if(wp->getRangeType() == FEAT_MELEE_ATTACK)
+         if(wp->getRangeType()->index == FEAT_MELEE_ATTACK)
          {
             actualFeats.defineMeleeWeapon(dc, wp->getRange());
          }
-         else if(wp->getRangeType() == FEAT_RANGED_ATTACK)
+         else if(wp->getRangeType()->index == FEAT_RANGED_ATTACK)
          {
             actualFeats.defineRangedWeapon(dc, wp->getRange());
          }
          else
          {
-            printf("Warn: Unknow Range Type: %d\n", wp->getRangeType());
+            printf("Warn: Unknow Range Type: %d\n", wp->getRangeType()->index);
          }
       }
    }

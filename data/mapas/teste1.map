@@ -5,12 +5,14 @@ PS ../data/mapas/teste1.map.par
 MUSICA ../data/music/musica12.ogg
 Outdoor: 1
 lake 3014.040,3084.347,6655.147,4682.077:0.710,0.850,0.960,0.400
-t ../data/texturas/floor_outdoor/rock.png ../data/texturas/floor_outdoor/rock.png 126 129 134
-t ../data/texturas/floor_outdoor/grass3.png ../data/texturas/floor_outdoor/grass3.png 100 101 61
-t ../data/texturas/floor_outdoor/grass2.png ../data/texturas/floor_outdoor/grass2.png 129 133 65
-t ../data/texturas/floor_outdoor/grass.png ../data/texturas/floor_outdoor/grass.png 54 102 49
-t ../data/texturas/floor_outdoor/stones2.png ../data/texturas/floor_outdoor/stones2.png 72 66 52
+o ../data/weapons/definitions/beretta92.wcc
+o ../data/weapons/definitions/kalashnikov.wcc
 t ../data/texturas/floor_outdoor/asfalt.png ../data/texturas/floor_outdoor/asfalt.png 78 78 78
+t ../data/texturas/floor_outdoor/stones2.png ../data/texturas/floor_outdoor/stones2.png 72 66 52
+t ../data/texturas/floor_outdoor/grass.png ../data/texturas/floor_outdoor/grass.png 54 102 49
+t ../data/texturas/floor_outdoor/grass2.png ../data/texturas/floor_outdoor/grass2.png 129 133 65
+t ../data/texturas/floor_outdoor/grass3.png ../data/texturas/floor_outdoor/grass3.png 100 101 61
+t ../data/texturas/floor_outdoor/rock.png ../data/texturas/floor_outdoor/rock.png 126 129 134
 #Z: 0
 p 0,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/floor_outdoor/grass.png
@@ -676,6 +678,8 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/floor_outdoor/grass2.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/floor_outdoor/grass3.png
+uo ../data/weapons/definitions/beretta92.wcc 1:14,13:3502.928467,3252.101074:0:0
+uo ../data/weapons/definitions/kalashnikov.wcc 1:14,13:3489.882812,3253.674072:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut ../data/texturas/floor_outdoor/grass3.png
 p 1,0.000000,0.000000,14.000000,0.000000
