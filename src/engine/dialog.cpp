@@ -591,7 +591,7 @@ void conversation::closeWindow(interface* gui)
  *                                treat                                  *
  *************************************************************************/
 bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui,
-                         barterWindow** tradeWindow)
+                         barterWindow** tradeWindow, itemWindow* infoW)
 {
    if(eventInfo == SELECTED_SEL_TEXT)
    {
@@ -615,7 +615,7 @@ bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui,
             *tradeWindow = NULL;
          }
          *tradeWindow = new barterWindow(actualNPC->inventories, 
-                                         actualPC->inventories, gui);
+                                         actualPC->inventories, gui, infoW);
 
       }
    }

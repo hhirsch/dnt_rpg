@@ -1,15 +1,17 @@
 #include "barterwindow.h"
 
+
 /***************************************************************
  *                         Constructor                         *
  ***************************************************************/ 
 barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
-                           interface* inter)
+                           interface* inter, itemWindow* infoW)
 {
    /* Init Values */
    curSellSlot = 0;
    curBuySlot = 0;
    gui = inter;
+   infoWindow = infoW;
 
    /* Create Barter */
    barterInventory = new barter(inventSeller, inventBuyer);
@@ -63,7 +65,7 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    if(!inventSeller->openedWindow)
    {
       sellerWindow = new inventWindow(536,0,gettext("Inventory"),
-                                      inventSeller, inter);
+                                      inventSeller, inter, infoWindow);
    }
    else
    {
@@ -73,7 +75,7 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    if(!inventBuyer->openedWindow)
    {
       buyerWindow = new inventWindow(0,0,gettext("Inventory"),
-                                     inventBuyer, inter);
+                                     inventBuyer, inter, infoWindow);
    }
    else
    {

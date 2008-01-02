@@ -34,6 +34,7 @@
 #include "dialog.h"
 #include "initial.h"
 #include "inventwindow.h"
+#include "itemwindow.h"
 #include "modstate.h"
 #include "options.h"
 #include "racewindow.h"
@@ -378,6 +379,7 @@ class engine
 
       inventWindow* inventoryWindow; /**< Inventory Window */
       barterWindow* tradeWindow;     /**< The Barter Window */
+      itemWindow* infoWindow;        /**< The info Window */
    
       Uint32 lastRead;             /**< Last Verification of I/O */
       Uint32 lastMouse;            /**< Last read from mouse */

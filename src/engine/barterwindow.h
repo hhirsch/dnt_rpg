@@ -5,6 +5,7 @@
 #include "../gui/farso.h"
 #include "../classes/barter.h"
 #include "inventwindow.h"
+#include "itemwindow.h"
 
 /*! The Barter Window Class. In the barter window, objects to sell and buy 
  * are inserted, and you can offer the barter, impose the barter or cancel. */
@@ -16,7 +17,7 @@ class barterWindow
        * \param inventBuyer -> pointer to the buyer inventory 
        * \param inter -> GUI interface used */
       barterWindow(inventory *inventSeller, inventory* inventBuyer,
-                   interface* inter);
+                   interface* inter, itemWindow* infoW);
 
       /*! Destructor */
       ~barterWindow();
@@ -69,6 +70,8 @@ class barterWindow
       oneTabButton* buyerInv;    /**< The actual Inventory */
       inventWindow* buyerWindow; /**< Pointer to the buyer inventory window,
                                       if it is opened here. */
+
+      itemWindow* infoWindow;    /**< Pointer to the item window used */
 };
 
 

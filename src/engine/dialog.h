@@ -116,9 +116,10 @@ class conversation
        * \param eventInfo -> last GUI Event 
        * \param gui -> window interface used
        * \param tradeWindow -> pointer to the pointer the barter window
+       * \param infoW -> pointer to the used itemWindow
        * \return true if event is threated, false otherwise. */
       bool treat(guiObject* guiObj, int eventInfo, interface* gui,
-                 barterWindow** tradeWindow);
+                 barterWindow** tradeWindow, itemWindow* infoW);
 
       /*! Verify if the dialog is open or not 
        * \return true if the window is opened */

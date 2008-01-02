@@ -5,12 +5,41 @@
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-itemWindow::itemWindow(object* item, interface* interf)
+itemWindow::itemWindow(interface* interf)
 {
+   inter = interf;
+}
+
+/********************************************************************
+ *                            Destructor                            *
+ ********************************************************************/
+itemWindow::~itemWindow()
+{
+   if(fig)
+   {
+      /* To avoid delete the item image */
+      fig->set(NULL);
+   }
+   //TODO
+}
+
+/********************************************************************
+ *                              open                                *
+ ********************************************************************/
+void itemWindow::open(object* item)
+{
+   /* Set open position */
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
-   inter = interf;
+   /* Close the window, if it is openned */
+   if(isOpen())
+   {
+      centerX = intWindow->getX1();
+      centerY = intWindow->getY1();
+      close();
+   }
+
    /* Create Window */
    intWindow = inter->insertWindow(centerX-128,centerY-128,
                                    centerX+128,centerY+128,
@@ -43,21 +72,23 @@ itemWindow::itemWindow(object* item, interface* interf)
 }
 
 /********************************************************************
- *                            Destructor                            *
+ *                             close                                *
  ********************************************************************/
-itemWindow::~itemWindow()
+void itemWindow::close()
 {
-   if(fig)
-   {
-      /* To avoid delete the item image */
-      fig->set(NULL);
-   }
    if(intWindow)
    {
       inter->closeWindow(intWindow);
       intWindow = NULL;
    }
-   //TODO
+}
+
+/********************************************************************
+ *                             isOpen                               *
+ ********************************************************************/
+bool itemWindow::isOpen()
+{
+   return(intWindow != NULL);
 }
 
 /********************************************************************
@@ -70,7 +101,7 @@ int itemWindow::treat(guiObject* object, int eventInfo)
    {
       if(object == (guiObject*) okButton)
       {
-         fig->set(NULL); //to not delete skill images
+         fig->set(NULL); //to not delete item image
          inter->closeWindow(intWindow);
          intWindow = NULL;
          return(1);

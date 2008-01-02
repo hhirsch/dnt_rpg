@@ -1,4 +1,4 @@
-#ifndef _itemindow_h
+#ifndef _itemwindow_h
 #define _itemwindow_h
 
 #include "../gui/farso.h"
@@ -9,12 +9,18 @@ class itemWindow
 {
    public:
       /*! Constructor
-       * \param item -> objct to show info
        * \param interf -> gui interface to open the window */
-      itemWindow(object* item, interface* interf);
+      itemWindow(interface* interf);
 
       /*! Destructor */
       ~itemWindow();
+
+      /*! Open the Item info window
+       * \param item -> object to show info */
+      void open(object* item);
+
+      /*! Close the item info window */
+      void close();
 
       /*! Treat Events on Window. 
        * \param object -> last GUI object
@@ -22,9 +28,12 @@ class itemWindow
        * \return != 0 if event is gathered */
       int treat(guiObject* object, int eventInfo);
 
-      window* intWindow;         /**< Pointer to the internal window */
+      /*! Verify if the window is openned
+       * \return true if opened, false otherwise. */
+      bool isOpen();
 
    protected:
+      window* intWindow;         /**< Pointer to the internal window */
       object* curObject;         /**< Pointer to current object */
 
       interface* inter;          /**< Current GUI interface */

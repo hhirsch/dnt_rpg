@@ -11,6 +11,7 @@
 #include "cursor.h"
 #include "modstate.h"
 #include "util.h"
+#include "itemwindow.h"
 
 #define INVENTORY_ACTION_NONE           0
 #define INVENTORY_ACTION_INTERNAL       1
@@ -28,17 +29,20 @@ class inventWindow
    public:
       /*! Constructor
        * \param invent -> inventories to show
-       * \param inter -> GUI interface to use */
-      inventWindow(inventory *invent,interface* inter);
+       * \param inter -> GUI interface to use 
+       * \param itemWindow -> pointer to the info window used */
+      inventWindow(inventory *invent,interface* inter, itemWindow* infoW);
 
       /*! Constructor
        * \param xa -> position X to open the window
        * \param ya -> y position to open the window
        * \param title -> title of the inventory window
        * \param invent -> inventories to show
-       * \param inter -> GUI interface to use */
+       * \param inter -> GUI interface to use 
+       * \param itemWindow -> pointer to the info window used */
       inventWindow(int xa, int ya, string title, 
-                   inventory *invent,interface* inter);
+                   inventory *invent,interface* inter,
+                   itemWindow* infoW);
 
       /*! Destructor */
       ~inventWindow();
@@ -67,10 +71,12 @@ class inventWindow
 
       /*! Init the window */
       void init(int xa, int ya, string title, inventory *invent,
-                interface* inter);
+                interface* inter, itemWindow* infoW);
 
       /*! Open the Inventory Object Menu  */
       void openMenu(int x, int y, int type);
+
+      itemWindow* infoWindow;
 
       inventory *inventories;         /**< Extern Inventories*/
 

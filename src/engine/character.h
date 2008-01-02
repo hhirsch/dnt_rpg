@@ -141,9 +141,10 @@ class character: public aniModel
        * \param eventInfo -> last GUI Event 
        * \param gui -> window interface used
        * \param tradeWindow -> pointer to the pointer of the barterWindow
+       * \param infoW -> pointer to the used itemWindow 
        * \return true if event is threated, false otherwise. */
       bool treatConversation(guiObject* guiObj, int eventInfo, interface* gui,
-                             barterWindow** tradeWindow);
+                             barterWindow** tradeWindow, itemWindow* infoW);
 
       /*! Call the thing dead animation */
       void callDeadAnimation();

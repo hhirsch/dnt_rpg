@@ -12,30 +12,36 @@
  *                          Constructor                       *
  **************************************************************/
 inventWindow::inventWindow(int xa, int ya, string title, 
-                           inventory *invent,interface* inter)
+                           inventory *invent,interface* inter,
+                           itemWindow* infoW)
 {
-   init(xa,ya,title,invent,inter);
+   init(xa,ya,title,invent,inter, infoW);
 }
 
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-inventWindow::inventWindow(inventory *invent, interface* inter)
+inventWindow::inventWindow(inventory *invent, interface* inter,
+                           itemWindow* infoW)
 {
-   init(0,1, gettext("Inventory"), invent, inter);
+   init(0,1, gettext("Inventory"), invent, inter, infoW);
 }
 
 /**************************************************************
  *                              init                          *
  **************************************************************/
 void inventWindow::init(int xa, int ya, string title, 
-                       inventory *invent,interface* inter)
+                       inventory *invent,interface* inter,
+                       itemWindow* infoW)
 {
    objectMenu = NULL;
    previousCursor = NULL;
 
    /* Copy Interface Pointer */
    interf = inter;
+
+   /* Copy ItemWindow Pointer */
+   infoWindow = infoW;
 
    /* Copy Inventories Pointers */
    inventories = invent;
@@ -450,6 +456,10 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                   state = INVENTORY_STATE_OBJECT;
                break;
                case 3: /* Info */
+                  if(infoWindow)
+                  {
+                     infoWindow->open(activeObject);
+                  }
                break;
                case 5: /* Use */
                {

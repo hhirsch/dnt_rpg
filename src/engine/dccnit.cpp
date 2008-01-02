@@ -21,10 +21,13 @@ engine::engine()
    actualMap = NULL;
    PCs = NULL;
    NPCs = NULL;
+
    miniMapWindow = NULL;
    shortCutsWindow = NULL;
    inventoryWindow = NULL;
    tradeWindow = NULL;
+   infoWindow = new itemWindow(gui);
+
    imgNumber = 0;
    actualScreen = NULL;
 
@@ -194,6 +197,12 @@ engine::~engine()
    if(inventoryWindow)
    {
       delete(inventoryWindow);
+   }
+
+   /* Clear InfoWindow */
+   if(infoWindow)
+   {
+      delete(infoWindow);
    }
 
    /* Clear GUI */
@@ -1374,7 +1383,8 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
       character* ch =(character*) NPCs->first->next;
       while(ch != NPCs->first)
       {
-         ch->treatConversation(object, eventInfo, gui, &tradeWindow);
+         ch->treatConversation(object, eventInfo, gui, &tradeWindow, 
+                               infoWindow);
          ch = (character*) ch->next;
       }
    }
@@ -3122,7 +3132,7 @@ void engine::OpenCloseInventoryWindow()
    if(!inventoryWindow)
    {
       inventoryWindow = new inventWindow(PCs->getActiveCharacter()->inventories,
-                                         gui); 
+                                         gui, infoWindow); 
    }
    else
    {
