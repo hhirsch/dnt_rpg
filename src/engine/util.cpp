@@ -6,6 +6,7 @@
  *********************************************************************/
 void showLoading(SDL_Surface* img, GLuint* texturaTexto, 
                  GLuint texturaCarga, const char* texto,
+                 healthBar* progress,
                  GLdouble proj[16], GLdouble modl[16],GLint viewPort[4])
 {
    dntFont fnt;
@@ -20,6 +21,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    fnt.defineFont(DNT_FONT_TIMES,12);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    fnt.write(img,128,0,texto);
+   progress->draw(img);
    setTextureRGBA(img,texturaTexto);
    
    textureToScreen(texturaCarga,proj,modl,viewPort,

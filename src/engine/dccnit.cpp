@@ -316,6 +316,10 @@ void engine::loadPCs()
  *********************************************************************/
 int engine::LoadMap(string arqMapa, int RecarregaPCs)
 {
+   healthBar* progress = new healthBar(2,20,253,30);
+   progress->defineMaxHealth(10);
+   progress->defineActualHealth(0);
+
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
@@ -347,12 +351,14 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    fnt.defineFont(DNT_FONT_TIMES,10);
    sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
    GLuint texturaTexto;
-   fadeInTexture(texturaCarga, centerX-128,centerY-64,centerX+127,centerY+63,256,128);
+   fadeInTexture(texturaCarga, centerX-128, centerY-64, 
+                 centerX+127, centerY+63, 256,128);
 
    actualizeFrustum(visibleMatrix,proj,modl);
    showLoading(img,&texturaTexto,texturaCarga,
-                         texto,
-                         proj, modl, viewPort);
+               texto, progress,
+               proj, modl, viewPort);
+   progress->defineActualHealth(3);
 
    /* Loading Map */
    if(actualMap) 
@@ -438,7 +444,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
            fscanf(arq,"%s %s %f %f",&name[0],&arquivo[0],&posX,&posZ);
            sprintf(texto, gettext("Loading NPC: %s"), name);
            showLoading(img,&texturaTexto,texturaCarga,
-                         texto,
+                         texto, progress,
                          proj, modl, viewPort);
            per = NPCs->insertCharacter(arquivo,features, this);
            per->xPosition = posX;
@@ -452,20 +458,24 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
          fclose(arq);
       }  
    }
+   progress->defineActualHealth(6);
 
    /* Loading PCs */
    if(RecarregaPCs)
    {
        loadPCs(); 
        showLoading(img,&texturaTexto,texturaCarga,
-                   gettext("Loading Character"),
+                   gettext("Loading Character"), progress,
                  proj, modl, viewPort);
    }
+   progress->defineActualHealth(7);
 
    /* Loading Internal Windows */
    showLoading(img,&texturaTexto,texturaCarga,
-               gettext("Putting GUI on Screen"),
+               gettext("Putting GUI on Screen"), progress,
                  proj, modl, viewPort);
+
+   progress->defineActualHealth(8);
 
    if(miniMapWindow)
    {
@@ -502,8 +512,9 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Update  particle System to a stable state */
    showLoading(img,&texturaTexto,texturaCarga,
-               gettext("Loading Particles"),
+               gettext("Loading Particles"), progress,
                  proj, modl, viewPort);
+   progress->defineActualHealth(9);
    if(!actualMap->getParticlesFileName().empty())
    {
        particleSystem->loadFromFile(actualMap->getParticlesFileName());
@@ -522,8 +533,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    character* activeCharacter = PCs->getActiveCharacter();
    actualMap->getInitialPosition(activeCharacter->xPosition,
                                  activeCharacter->zPosition);
-   activeCharacter->yPosition = actualMap->getHeight(activeCharacter->xPosition, 
-                                                     activeCharacter->zPosition);
+   activeCharacter->yPosition=actualMap->getHeight(activeCharacter->xPosition,
+                                                   activeCharacter->zPosition);
    gameCamera.actualizeCamera(activeCharacter->xPosition,
                               activeCharacter->yPosition,
                               activeCharacter->zPosition,
@@ -531,8 +542,9 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    activeCharacter->ocSquare = actualMap->squareInic;
 
    showLoading(img,&texturaTexto,texturaCarga,
-               gettext("Loading Changes..."),
+               gettext("Loading Changes..."), progress,
                  proj, modl, viewPort);
+   progress->defineActualHealth(10);
 
    /* Do Modifications */
    modifState.doMapModifications(actualMap);
@@ -549,7 +561,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Done */
    showLoading(img,&texturaTexto,texturaCarga,
-               gettext("Done!"),
+               gettext("Done!"), progress,
                  proj, modl, viewPort);
 
    glDisable(GL_LIGHTING);
