@@ -15,12 +15,7 @@ itemWindow::itemWindow(interface* interf)
  ********************************************************************/
 itemWindow::~itemWindow()
 {
-   if(fig)
-   {
-      /* To avoid delete the item image */
-      fig->set(NULL);
-   }
-   //TODO
+   close();
 }
 
 /********************************************************************
@@ -35,8 +30,8 @@ void itemWindow::open(object* item)
    /* Close the window, if it is openned */
    if(isOpen())
    {
-      centerX = intWindow->getX1();
-      centerY = intWindow->getY1();
+      centerX = intWindow->getX1()+128;
+      centerY = intWindow->getY1()+128;
       close();
    }
 
@@ -67,7 +62,7 @@ void itemWindow::open(object* item)
 
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
-   intWindow->setAttributes(false,true,false,false);
+   intWindow->setAttributes(true,true,false,false);
    inter->openWindow(intWindow);
 }
 
@@ -78,6 +73,11 @@ void itemWindow::close()
 {
    if(intWindow)
    {
+      if(fig)
+      {
+         /* To avoid delete the item image */
+         fig->set(NULL);
+      }
       inter->closeWindow(intWindow);
       intWindow = NULL;
    }

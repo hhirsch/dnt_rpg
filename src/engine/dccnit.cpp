@@ -1404,6 +1404,12 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
       }
    }
 
+   /* Verify Item Window */
+   if( infoWindow->isOpen() )
+   {
+      infoWindow->treat(object, eventInfo);
+   }
+
    /* Verify ShortCutsWindow */
    switch(eventInfo)
    {

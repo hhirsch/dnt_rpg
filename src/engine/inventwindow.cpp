@@ -151,7 +151,7 @@ void inventWindow::openMenu(int x, int y, int type)
       objectMenu->insertItem(gettext("Remove"),1);
    }
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem(gettext("Info"),0);
+   objectMenu->insertItem(gettext("Info"),1);
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(gettext("Get"),1);
 
