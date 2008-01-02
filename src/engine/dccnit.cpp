@@ -2500,6 +2500,15 @@ void engine::renderScene()
 
    bool shadow = false;//actualMap->isOutdoor();
 
+   /* SKY */
+   if(actualMap->isOutdoor())
+   {
+      glPushMatrix();
+         glTranslatef(gameCamera.getCameraX(), 0.0, gameCamera.getCameraZ());
+         gameSky->draw(actualMap, gameSun->getRotation());
+      glPopMatrix();
+   }
+
    glPushMatrix();
    /* Draw The Floor with Stencil Buffer */
    if( ((option->reflexionType != REFLEXIONS_NONE) && (!actualMap->isOutdoor()))
@@ -2696,14 +2705,6 @@ void engine::renderNoShadowThings()
 {
 
    character* activeCharacter = PCs->getActiveCharacter(); 
-   /* SKY */
-   if(actualMap->isOutdoor())
-   {
-      glPushMatrix();
-         glTranslatef(gameCamera.getCameraX(), 0.0, gameCamera.getCameraZ());
-         gameSky->draw(actualMap, gameSun->getRotation());
-      glPopMatrix();
-   }
 
    /* Draw Path */
    /*if(walkStatus == ENGINE_WALK_MOUSE)

@@ -27,6 +27,8 @@ void itemWindow::open(object* item)
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
+   char buf[128];
+
    /* Close the window, if it is openned */
    if(isOpen())
    {
@@ -44,15 +46,21 @@ void itemWindow::open(object* item)
     * Common Object Things 
     ***********************/
    
+   /* Name */
+   sprintf(buf,gettext("Name: %s"), item->getName().c_str());
+   intWindow->getObjectsList()->insertTextBox(70,15,250,32,1,buf);
+
    /* Cost */
+   sprintf(buf,gettext("Cost: %.2f"), item->cost);
+   intWindow->getObjectsList()->insertTextBox(70,33,250,51,1,buf);
 
    /* Weight */
-
-
-   //TODO
+   sprintf(buf,gettext("Weight: %.2f Kg"), item->weight);
+   intWindow->getObjectsList()->insertTextBox(70,52,250,69,1,buf);
 
    /* Item Image */
-   fig = intWindow->getObjectsList()->insertPicture(8,15,0,0,NULL);
+   intWindow->getObjectsList()->insertTextBox(5,15,69,92,1,"");
+   fig = intWindow->getObjectsList()->insertPicture(8,16,0,0,NULL);
    fig->set(item->get2dModel());
 
    /* Ok Button */
