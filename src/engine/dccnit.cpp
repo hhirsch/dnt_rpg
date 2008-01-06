@@ -1409,18 +1409,24 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
       }
    }
 
-   /* Verify Inventory Window */
+   /* Verify Inventory Window Actions */
    if( (inventoryWindow) )
    {
-      if(inventoryWindow->treat(object, eventInfo, cursors, actualMap,
-                                PCs->getActiveCharacter()->xPosition,
-                                PCs->getActiveCharacter()->zPosition,
-                                &modifState))
+      if( ( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
+            (fightStatus == FIGHT_PC_TURN) ) ||
+          (engineMode == ENGINE_MODE_REAL_TIME) )
       {
-         /* Redefine, if need, the weapons */
-         PCs->getActiveCharacter()->defineWeapon();
+         if(inventoryWindow->treat(object, eventInfo, cursors, actualMap,
+                                   PCs->getActiveCharacter()->xPosition,
+                                   PCs->getActiveCharacter()->zPosition,
+                                   &modifState))
+         {
+            /* Redefine, if need, the weapons */
+            PCs->getActiveCharacter()->defineWeapon();
+            canAttack = false;
 
-         /* TODO redefine the armors! */
+            /* TODO redefine the armors! */
+         }
       }
    }
 
@@ -2771,14 +2777,19 @@ void engine::renderNoShadowThings()
                                       moveCircleX+WALK_PER_MOVE_ACTION, 
                                       moveCircleZ+WALK_PER_MOVE_ACTION,
                                       0.2,20);
-          /* Feat Range Circle */
-          float rangeValue=activeCharacter->getActiveFeatRange()*METER_TO_DNT;
-          actualMap->drawSurfaceOnMap(featRangeCircle, 
-                                      turnCharacter->xPosition-rangeValue,
-                                      turnCharacter->zPosition-rangeValue, 
-                                      turnCharacter->xPosition+rangeValue, 
-                                      turnCharacter->zPosition+rangeValue, 
-                                      0.3,20);
+
+          if( (canAttack) || (fightStatus == FIGHT_NPC_TURN) )
+          {
+             /* Feat Range Circle */
+             float rangeValue = activeCharacter->getActiveFeatRange() *
+                                METER_TO_DNT;
+             actualMap->drawSurfaceOnMap(featRangeCircle, 
+                                         turnCharacter->xPosition-rangeValue,
+                                         turnCharacter->zPosition-rangeValue, 
+                                         turnCharacter->xPosition+rangeValue, 
+                                         turnCharacter->zPosition+rangeValue, 
+                                         0.3,20);
+          }
                                        
    }
 
