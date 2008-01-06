@@ -1167,9 +1167,7 @@ bool engine::rangeAction(GLfloat posX, GLfloat posZ,
    {
       if(shortCutsWindow != NULL)
       {
-         string txt = "|";
-         txt += gettext("Too far away for the action!");
-         briefTxt->addText(txt);
+         briefTxt->setText(gettext("Too far away for the action!"));
       }
       return(false);
    }
