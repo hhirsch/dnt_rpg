@@ -29,6 +29,7 @@ void itemWindow::open(object* item)
    int centerX = SCREEN_X / 2;
 
    int curY = 0;
+   int prvY = 0;
 
    char buf[256];
 
@@ -36,44 +37,39 @@ void itemWindow::open(object* item)
    if(isOpen())
    {
       centerX = intWindow->getX1()+128;
-      centerY = intWindow->getY1()+128;
+      centerY = intWindow->getY1()+108;
       close();
    }
 
    /* Create Window */
-   intWindow = inter->insertWindow(centerX-128,centerY-128,
-                                   centerX+128,centerY+128,
+   intWindow = inter->insertWindow(centerX-128,centerY-108,
+                                   centerX+128,centerY+108,
                                    item->getName());
 
    /***********************
     * Common Object Things 
     ***********************/
    
+   curY = 15;
+   prvY = curY;
+
    /* Name */
    sprintf(buf,gettext("Name: %s"), item->getName().c_str());
-   intWindow->getObjectsList()->insertTextBox(70,15,250,32,1,buf);
+   intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
+   curY += 18;
 
    /* Cost */
    sprintf(buf,gettext("Cost: %.2f"), item->cost);
-   intWindow->getObjectsList()->insertTextBox(70,33,250,51,1,buf);
+   intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
+   curY += 18;
 
    /* Weight */
    sprintf(buf,gettext("Weight: %.2f Kg"), item->weight);
-   intWindow->getObjectsList()->insertTextBox(70,52,250,69,1,buf);
+   intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
+   curY += 18;
 
-   /* Item Image */
-   int remainX = (64 - item->get2dModel()->w) / 2;
-   int remainY = (77 - item->get2dModel()->h) / 2;
-   fig = intWindow->getObjectsList()->insertPicture(8+remainX,16+remainY,
-                                                    0,0,NULL);
-   fig->set(item->get2dModel());
-   intWindow->getObjectsList()->insertTextBox(5,15,69,92,1,"");
-
-   /* Ok Button */
-   okButton = intWindow->getObjectsList()->insertButton(88,228,158,247,
-                                                        gettext("Ok"),1);
-
-   curY = 70;
+   /* General Contorn */
+   intWindow->getObjectsList()->insertTextBox(70,prvY,250,curY-1,1,"");
 
    /***********************
     * Weapons Things 
@@ -93,15 +89,16 @@ void itemWindow::open(object* item)
       curY += 18;
 
       /* Damage Dice */
+      prvY = curY;
       sprintf(buf,"%s %dd%d+%d (x%d)", gettext("Damage Dice: "),  
               dam.baseDice.numberOfDices, dam.baseDice.diceID, 
               dam.baseDice.sumNumber, dam.baseDice.criticalMultiplier);
-      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,1,buf);
+      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
       curY += 18;
 
       /* Primary Damage */
       sprintf(buf,"%s %s", gettext("Primary Damage: "), damageA.title.c_str());
-      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,1,buf);
+      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
       curY += 18;
 
       /* Secondary Damage */
@@ -109,22 +106,44 @@ void itemWindow::open(object* item)
       {
          sprintf(buf,"%s %s", gettext("Secondary Damage: "), 
                  damageB.title.c_str());
-         intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,1,buf);
+         intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
          curY += 18;
       }
 
+      /* Damage Contorn */
+      intWindow->getObjectsList()->insertTextBox(70,prvY,250,curY-1,1,"");
+
+
+      prvY = curY;
       /* Range */
       sprintf(buf,"%s %s", gettext("Range: "), range.title.c_str());
-      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,1,buf);
+      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
       curY += 18;
 
       /* Size */
       sprintf(buf,"%s %s", gettext("Size: "), size.title.c_str());
-      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,1,buf);
+      intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
       curY += 18;
 
+      /* Contorn to range and size */
+      intWindow->getObjectsList()->insertTextBox(70,prvY,250,curY-1,1,"");
    }
 
+   /* Item Image */
+   int remainX = (64 - item->get2dModel()->w) / 2;
+   int remainY = ((curY-15) - item->get2dModel()->h) / 2;
+   fig = intWindow->getObjectsList()->insertPicture(8+remainX,16+remainY,
+                                                    0,0,NULL);
+   fig->set(item->get2dModel());
+   intWindow->getObjectsList()->insertTextBox(5,15,69,curY-1,1,"");
+
+   /* Ok Button */
+   okButton = intWindow->getObjectsList()->insertButton(88,188,158,207,
+                                                        gettext("Ok"),1);
+
+   /* Remaining Contorn */
+   intWindow->getObjectsList()->insertTextBox(5,curY,250,211,1,"");
+   
 
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
