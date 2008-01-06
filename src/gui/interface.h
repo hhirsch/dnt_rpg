@@ -32,6 +32,7 @@
 #define MODIFIED_MENU       14
 #define SELECTED_SEL_TEXT   15
 #define SELECTED_LIST_TEXT  16
+#define ON_FOCUS_TAB_BUTTON 17
 
 /********************************************************************
  *                       Focus's constants                          *

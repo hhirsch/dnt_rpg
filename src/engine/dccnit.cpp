@@ -1423,6 +1423,8 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
          {
             /* Redefine, if need, the weapons */
             PCs->getActiveCharacter()->defineWeapon();
+
+            /* Use of Menu count as an action */
             canAttack = false;
 
             /* TODO redefine the armors! */
@@ -1439,6 +1441,54 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    /* Verify ShortCutsWindow */
    switch(eventInfo)
    {
+       case ON_FOCUS_TAB_BUTTON:
+       {
+          if(object == (guiObject*) buttonAttackMode)
+          {
+             if(engineMode != ENGINE_MODE_TURN_BATTLE)
+             {
+                briefTxt->setText(gettext("Enter Battle Mode"));
+             }
+             else
+             {
+                briefTxt->setText(gettext("Select Normal Attack"));
+             }
+          }
+          else if(object == (guiObject*) buttonMap)
+          {
+             if(!miniMapWindow)
+             {
+                briefTxt->setText(gettext("Open Map Window"));
+             }
+             else
+             {
+                briefTxt->setText(gettext("Map Window already opened!"));
+             }
+          }
+          else if(object == (guiObject*) buttonEndTurn)
+          {
+             if(engineMode == ENGINE_MODE_TURN_BATTLE)
+             {
+                briefTxt->setText(gettext("End Character's Turn"));
+             }
+             else
+             {
+                briefTxt->setText(gettext("Only Avaible on Battle Mode"));
+             }
+          }
+          else if(object == (guiObject*) buttonInventory)
+          {
+             if(!inventoryWindow)
+             {
+                briefTxt->setText(gettext("Open Inventory Window"));
+             }
+             else
+             {
+                briefTxt->setText(gettext("Inventory already opened!"));
+             }
+          }
+       }
+       break;
        case PRESSED_TAB_BUTTON:
        {
            if(object == (guiObject*) buttonAttackMode)
@@ -1446,6 +1496,10 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
               if( engineMode != ENGINE_MODE_TURN_BATTLE )
               {
                  enterBattleMode(true);
+              }
+              else
+              {
+                 //TODO -> set the attack as base one.
               }
            }
            else if( object == (guiObject*) buttonMap)
@@ -1599,10 +1653,11 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                       shortCutsWindow->draw(mouseX,mouseY);
 
                       /* Log State to the modState */
-                      modifState.mapObjectAddAction(MODSTATE_ACTION_OBJECT_REMOVE,
-                                                    sobj->obj->getFileName(),
-                                                    actualMap->getFileName(),
-                                                    sobj->x, sobj->z);
+                      modifState.mapObjectAddAction(
+                                              MODSTATE_ACTION_OBJECT_REMOVE,
+                                              sobj->obj->getFileName(),
+                                              actualMap->getFileName(),
+                                              sobj->x, sobj->z);
                          
                       /* Remove object from Map */
                       actualMap->removeObject(sobj->x, sobj->z, sobj->obj);

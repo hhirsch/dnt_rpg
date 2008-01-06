@@ -480,6 +480,12 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
             *eventInfo = ON_PRESS_TAB_BUTTON;
             return(object);
          }  
+         else
+         {
+            /* Still in focus, but no pressed */
+            *eventInfo = ON_FOCUS_TAB_BUTTON;
+            return(object);
+         }
        }
        else
        {
