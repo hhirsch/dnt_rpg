@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-01-06 15:07-0200\n"
+"POT-Creation-Date: 2008-01-06 18:44-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -286,53 +286,85 @@ msgstr "Нет NPC'ов на арене"
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1590
+#: src/engine/dccnit.cpp:1450
+msgid "Enter Battle Mode"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1454
+msgid "Select Normal Attack"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1461
+msgid "Open Map Window"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1465
+msgid "Map Window already opened!"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1472
+msgid "End Character's Turn"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1476
+msgid "Only Avaible on Battle Mode"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1483
+msgid "Open Inventory Window"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1487
+msgid "Inventory already opened!"
+msgstr ""
+
+#: src/engine/dccnit.cpp:1650
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:1649
+#: src/engine/dccnit.cpp:1710
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:1781 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1842 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s атаковал %s|"
 
-#: src/engine/dccnit.cpp:1856 src/engine/dccnit.cpp:3107
+#: src/engine/dccnit.cpp:1917 src/engine/dccnit.cpp:3173
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:3077
+#: src/engine/dccnit.cpp:3143
 msgid "Map"
 msgstr "Карта"
 
-#: src/engine/dccnit.cpp:3100
+#: src/engine/dccnit.cpp:3166
 msgid "Shortcuts"
 msgstr "Мелочь"
 
-#: src/engine/dccnit.cpp:3102
+#: src/engine/dccnit.cpp:3168
 msgid "FPS:"
 msgstr "PS:"
 
-#: src/engine/dccnit.cpp:3104
+#: src/engine/dccnit.cpp:3170
 msgid "Press F1 for Help"
 msgstr "Нажмите F1 для помощи"
 
-#: src/engine/dccnit.cpp:3110 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3176 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/engine/dccnit.cpp:3112
+#: src/engine/dccnit.cpp:3178
 msgid "Menu"
 msgstr "Меню:"
 
-#: src/engine/dccnit.cpp:3114 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3180 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Загрузка"
 
-#: src/engine/dccnit.cpp:3300
+#: src/engine/dccnit.cpp:3366
 msgid "|Exit Battle Mode"
 msgstr "|Покинуть режим сражения"
 
