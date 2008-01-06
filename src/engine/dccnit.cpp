@@ -555,7 +555,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       snd->loadMusic(actualMap->getMusicFileName());
    }
 
-   /* Actualize the Particle System */
+   /* Define Map */
    particleSystem->setActualMap(actualMap, &colisionDetect);
    colisionDetect.defineMap(actualMap, NPCs);
 
@@ -636,6 +636,8 @@ void engine::SplashScreen()
 {
    GLuint id;
    Uint32 mButton = 0;
+   Uint8* keys;
+   bool done = false;
    int x,y;
    Uint32 time = SDL_GetTicks();
    glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -663,11 +665,17 @@ void engine::SplashScreen()
    fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
 
    /* Wait until Mouse Button pressed or time passed */
-   while( (!(mButton & SDL_BUTTON(1))) && 
-          ( (SDL_GetTicks() - time) <= 5000) )
+   while( !done )
    {
       SDL_PumpEvents();
       mButton = SDL_GetMouseState(&x,&y);
+      keys = SDL_GetKeyState(NULL);
+
+      done = ( (mButton & SDL_BUTTON(1)) || 
+               (keys[SDLK_ESCAPE]) ||
+               (keys[SDLK_RETURN]) ||
+               ( (SDL_GetTicks() - time) > 5000) );
+
       SDL_Delay(50);
    }
 
