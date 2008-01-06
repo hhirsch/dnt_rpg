@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-01-06 09:43-0200\n"
+"POT-Creation-Date: 2008-01-06 15:07-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -262,7 +262,7 @@ msgstr "Carregando Mudanças..."
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:650
+#: src/engine/dccnit.cpp:652
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -274,65 +274,65 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1163
+#: src/engine/dccnit.cpp:1170
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1203 src/engine/dccnit.cpp:1271
+#: src/engine/dccnit.cpp:1209 src/engine/dccnit.cpp:1277
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1253
+#: src/engine/dccnit.cpp:1259
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1584
+#: src/engine/dccnit.cpp:1590
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1643
+#: src/engine/dccnit.cpp:1649
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1775 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1781 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/engine/dccnit.cpp:1850 src/engine/dccnit.cpp:3101
+#: src/engine/dccnit.cpp:1856 src/engine/dccnit.cpp:3107
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:3071
+#: src/engine/dccnit.cpp:3077
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/dccnit.cpp:3094
+#: src/engine/dccnit.cpp:3100
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: src/engine/dccnit.cpp:3096
+#: src/engine/dccnit.cpp:3102
 msgid "FPS:"
 msgstr "FPS:"
 
-#: src/engine/dccnit.cpp:3098
+#: src/engine/dccnit.cpp:3104
 msgid "Press F1 for Help"
 msgstr "Pressione F1 para Ajuda"
 
-#: src/engine/dccnit.cpp:3104 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3110 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/dccnit.cpp:3106
+#: src/engine/dccnit.cpp:3112
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3108 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3114 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Carregar"
 
-#: src/engine/dccnit.cpp:3294
+#: src/engine/dccnit.cpp:3300
 msgid "|Exit Battle Mode"
 msgstr "|Sai do Modo de Batalha"
 
@@ -449,48 +449,48 @@ msgstr "Info"
 msgid "Get"
 msgstr "Pegar"
 
-#: src/engine/itemwindow.cpp:53
+#: src/engine/itemwindow.cpp:57
 #, c-format
 msgid "Name: %s"
 msgstr "Nome: %s"
 
-#: src/engine/itemwindow.cpp:57
+#: src/engine/itemwindow.cpp:62
 #, c-format
 msgid "Cost: %.2f"
 msgstr "Custo: %.2f"
 
-#: src/engine/itemwindow.cpp:61
+#: src/engine/itemwindow.cpp:67
 #, c-format
 msgid "Weight: %.2f Kg"
 msgstr "Peso: %.2f Kg"
 
-#: src/engine/itemwindow.cpp:74
-msgid "Ok"
-msgstr "Ok"
-
-#: src/engine/itemwindow.cpp:91
+#: src/engine/itemwindow.cpp:87
 msgid "Category: "
 msgstr "Categoria: "
 
-#: src/engine/itemwindow.cpp:96
+#: src/engine/itemwindow.cpp:93
 msgid "Damage Dice: "
 msgstr "Dado de Dano: "
 
-#: src/engine/itemwindow.cpp:103
+#: src/engine/itemwindow.cpp:100
 msgid "Primary Damage: "
 msgstr "Dano Primário: "
 
-#: src/engine/itemwindow.cpp:110
+#: src/engine/itemwindow.cpp:107
 msgid "Secondary Damage: "
 msgstr "Dano Secundário: "
 
-#: src/engine/itemwindow.cpp:117
+#: src/engine/itemwindow.cpp:119
 msgid "Range: "
 msgstr "Alcance: "
 
-#: src/engine/itemwindow.cpp:122
+#: src/engine/itemwindow.cpp:124
 msgid "Size: "
 msgstr "Tamanho: "
+
+#: src/engine/itemwindow.cpp:142
+msgid "Ok"
+msgstr "Ok"
 
 #: src/engine/options.cpp:7
 msgid "Portuguese"
@@ -843,7 +843,7 @@ msgid ""
 "attributes. (Am I wrong Elis Regina?). So, they receive -2 of Intelligence."
 msgstr ""
 "Os Estudantes de Administração definitivamente não são conhecidos por seus "
-"dotes intelectuais (não é mesmo Élis|Régina?). Logo recebem -2 de "
+"dotes intelectuais (não é mesmo Élis Régina?). Logo recebem -2 de "
 "Inteligência."
 
 #: data/classes/administration.cls:9
@@ -911,7 +911,7 @@ msgid ""
 msgstr ""
 "O Estudante de medicina é o organismo que abdicou de sua vida social em "
 "troca de uma dedicação fora do comum aos estudos, acreditando se tornar "
-"alguém na vida. Estes organismos são desprovidos de|qualquer esperteza, "
+"alguém na vida. Estes organismos são desprovidos de qualquer esperteza, "
 "tendo em vista que baseiam suas vidas de pseudo-médicos em teorias e mais "
 "teorias. Para pertencer a esta classe, o personagem deve já ter-se submetido "
 "a algum tipo de atitude hedionda, como afogar coleguinhas, perversão "
@@ -1328,7 +1328,7 @@ msgid ""
 "Journalism students have a 'know it all' need, increasing by 2 their "
 "intelligence."
 msgstr ""
-"Pela constante pressão em 'saber  de|tudo', o Estudante de Jornalismo "
+"Pela constante pressão em 'saber  de tudo', o Estudante de Jornalismo "
 "desenvolve esse atributo (+2 inteligência)."
 
 #: data/classes/journalism.cls:11
@@ -1447,7 +1447,7 @@ msgstr "-2 em ouvir, pois os músculos tomaram conta dos orifícios auriculares.
 
 #: data/classes/physicaled.cls:25
 msgid "The Student receives +1 of Natural Armor."
-msgstr "O Estudante de  Ed.  Física também recebe|+1 de Armadura Natural."
+msgstr "O Estudante de  Ed.  Física também recebe +1 de Armadura Natural."
 
 #: data/classes/physicaled.cls:27
 msgid ""
@@ -1766,7 +1766,7 @@ msgstr ""
 "denominando  'Projeto Científico', as  Estudantes de Terapia Ocupacional, "
 "salvo raras exceções, são incapazes de dizer de maneira concisa para que "
 "serve seu curso, sua vida, seus pacientes, seus colegas, seus professores, "
-"sua|faculdade, seu baixo, a Anamabeka, seu..., enfim..., mas sabem de cor "
+"sua faculdade, seu baixo, a Anamabeka, seu..., enfim..., mas sabem de cor "
 "qual foi o capítulo de ontem da novela reprisada à tarde."
 
 #: data/classes/to.cls:7
@@ -2136,7 +2136,7 @@ msgstr ""
 "insetos saltitantes, costumam ter atitudes canibais (por comerem grilos, "
 "seus parentes próximos) e, por isso, são extremamente mal vistos (e temidos) "
 "pelos insetos. O habitat natural de um mutante é o famigerado Tyrol, próximo "
-"ao|barreiro, no qual normalmente vive com sua família."
+"ao barreiro, no qual normalmente vive com sua família."
 
 #: data/races/mutante.rca:6
 msgid ""
@@ -2849,7 +2849,7 @@ msgstr "Porque não consigo vencer o Ente numa batalha?"
 
 #: data/dialogs/ameiva1.dlg:13
 msgid "I am a brutal killing machine. Die!"
-msgstr "Eu sou uma máquina brutal da morte!|Morra!"
+msgstr "Eu sou uma máquina brutal da morte! Morra!"
 
 #: data/dialogs/ameiva1.dlg:16
 msgid "What are you?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-01-06 09:43-0200\n"
+"POT-Creation-Date: 2008-01-06 15:07-0200\n"
 "PO-Revision-Date: 2007-11-29 15:32+0000\n"
 "Last-Translator: MATHIEU Yves <EMAIL@ADDRESS>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -266,7 +266,7 @@ msgstr ""
 msgid "Done!"
 msgstr "Terminé !"
 
-#: src/engine/dccnit.cpp:650
+#: src/engine/dccnit.cpp:652
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -274,65 +274,65 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1163
+#: src/engine/dccnit.cpp:1170
 msgid "Too far away for the action!"
 msgstr "Trop loin pour cette action !"
 
-#: src/engine/dccnit.cpp:1203 src/engine/dccnit.cpp:1271
+#: src/engine/dccnit.cpp:1209 src/engine/dccnit.cpp:1277
 msgid "No NPCs in the area."
 msgstr "Pas de PNJ dans la zone"
 
-#: src/engine/dccnit.cpp:1253
+#: src/engine/dccnit.cpp:1259
 msgid "Surprise Attack Turn."
 msgstr "Tour des attaques surprises."
 
-#: src/engine/dccnit.cpp:1584
+#: src/engine/dccnit.cpp:1590
 #, c-format
 msgid "%s taken."
 msgstr "%s pris."
 
-#: src/engine/dccnit.cpp:1643
+#: src/engine/dccnit.cpp:1649
 msgid "Door"
 msgstr "Porte"
 
-#: src/engine/dccnit.cpp:1775 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1781 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s attaque %s|"
 
-#: src/engine/dccnit.cpp:1850 src/engine/dccnit.cpp:3101
+#: src/engine/dccnit.cpp:1856 src/engine/dccnit.cpp:3107
 msgid "Nothing"
 msgstr "Rien"
 
-#: src/engine/dccnit.cpp:3071
+#: src/engine/dccnit.cpp:3077
 msgid "Map"
 msgstr "Carte"
 
-#: src/engine/dccnit.cpp:3094
+#: src/engine/dccnit.cpp:3100
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
-#: src/engine/dccnit.cpp:3096
+#: src/engine/dccnit.cpp:3102
 msgid "FPS:"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3098
+#: src/engine/dccnit.cpp:3104
 msgid "Press F1 for Help"
 msgstr "Tapez F1 pour l'Aide"
 
-#: src/engine/dccnit.cpp:3104 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3110 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/engine/dccnit.cpp:3106
+#: src/engine/dccnit.cpp:3112
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3108 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3114 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Charger"
 
-#: src/engine/dccnit.cpp:3294
+#: src/engine/dccnit.cpp:3300
 msgid "|Exit Battle Mode"
 msgstr "|Sortir du mode de Bataille"
 
@@ -449,47 +449,47 @@ msgstr "Informations"
 msgid "Get"
 msgstr "Obtenir"
 
-#: src/engine/itemwindow.cpp:53
+#: src/engine/itemwindow.cpp:57
 #, c-format
 msgid "Name: %s"
 msgstr ""
 
-#: src/engine/itemwindow.cpp:57
+#: src/engine/itemwindow.cpp:62
 #, c-format
 msgid "Cost: %.2f"
 msgstr ""
 
-#: src/engine/itemwindow.cpp:61
+#: src/engine/itemwindow.cpp:67
 #, c-format
 msgid "Weight: %.2f Kg"
 msgstr ""
 
-#: src/engine/itemwindow.cpp:74
-msgid "Ok"
-msgstr ""
-
-#: src/engine/itemwindow.cpp:91
+#: src/engine/itemwindow.cpp:87
 msgid "Category: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:96
+#: src/engine/itemwindow.cpp:93
 msgid "Damage Dice: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:103
+#: src/engine/itemwindow.cpp:100
 msgid "Primary Damage: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:110
+#: src/engine/itemwindow.cpp:107
 msgid "Secondary Damage: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:117
+#: src/engine/itemwindow.cpp:119
 msgid "Range: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:122
+#: src/engine/itemwindow.cpp:124
 msgid "Size: "
+msgstr ""
+
+#: src/engine/itemwindow.cpp:142
+msgid "Ok"
 msgstr ""
 
 #: src/engine/options.cpp:7
