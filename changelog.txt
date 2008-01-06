@@ -4,25 +4,42 @@
  - Terrain texture splatting;
  - Script Language for AI;
  - Using SDL_ttf to write;
+ - Load/Save Functions;
  - Workspace for compiling at M$ Visual C++ 6;
  - More Engine Optimizations;
  - Messages on world map;
- - Smooth Camera Moves;
+ - Smooth Camera Movements;
  - Indoor Reflexions;
+ - Initial stage story;
  - Option to set screen resolution;
  - Don't let camera inner terrain;
  - Better Dynamic Lights Implementation;
- - More 3D Objects;
- - More Characters;
- - Rewrite the GUI Renderer;
+ - Missions;
+ - Receive XP on killing, trickering and completing 
+   missions;
+ - Finish the implementation of combats on fight 
+   system;
+ - Rewrote the GUI Renderer;
  - Fully and scalable collision for the 3D models;
  - GNU gettext used for internationalization;
  - Meteors and FireSpheres;
+ - Merchants;
+ - Use of some items;
+ - Use of some weapons;
+ - Capacity to use Feats;
+ - Capacity to use Skills;
+ - Item Information Window;
+ - Apply Race and Class Skills Costs and level limits;
  - Put the code fully on English (instead of some
    places on english, others on portuguese);
  - New Sound Effects;
+ - More 3D Objects;
+ - More Characters;
+ - Some Adjusts on A*;
  - Objects are now only in cal3D, no more .obj;
- - Fixed Bug on Remove no more used Models;
+ - First real-game maps;
+ - Fixed Bug on remove no more used Models and 
+   dead with items;
  - Fixed Bug on NPCs Fight Animations;
  - Fixed Bug on configures;
  - Other minor bugs fixes;
