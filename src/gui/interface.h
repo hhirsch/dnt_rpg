@@ -105,6 +105,10 @@ class interface
        * \return focus constant of the current focus*/
       int getFocus(){return(focus);};
 
+      /*! Get active Window
+       * \return -> pointer to the active Window */
+      window* getActiveWindow();
+
    private:
       int focus;              /**< Current GUI focus */
       SDL_Surface* fundo;     /**< background surface, if has one */

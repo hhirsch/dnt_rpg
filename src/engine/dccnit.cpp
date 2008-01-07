@@ -1634,7 +1634,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                 if(shortCutsWindow)
                 {
                    ObjTxt->setText(sobj->obj->getName()); 
-                   shortCutsWindow->draw(mouseX,mouseY);
                 }
                 if( (Mbutton & SDL_BUTTON(1)) && 
                     (rangeAction(activeCharacter->xPosition, 
@@ -1650,7 +1649,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                       sprintf(buf,gettext("%s taken."),
                               sobj->obj->getName().c_str());
                       briefTxt->addText(buf);
-                      shortCutsWindow->draw(mouseX,mouseY);
 
                       /* Log State to the modState */
                       modifState.mapObjectAddAction(
@@ -1672,7 +1670,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                       if(shortCutsWindow)
                       {
                          briefTxt->addText("Inventory Full!"); 
-                         shortCutsWindow->draw(mouseX,mouseY);
                       }
                    }
                 }
@@ -1708,7 +1705,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             if(shortCutsWindow)
             {
                ObjTxt->setText(gettext("Door")); 
-               shortCutsWindow->draw(mouseX, mouseY);
             }
             if( (Mbutton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->xPosition, 
@@ -1757,7 +1753,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             if(shortCutsWindow)
             {
                ObjTxt->setText(pers->name); 
-               shortCutsWindow->draw(mouseX, mouseY);
             }
 
             /* Open Inventory when button pressed */
@@ -1815,7 +1810,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   if(shortCutsWindow)
                   {
                      ObjTxt->setText(pers->name); 
-                     shortCutsWindow->draw(mouseX, mouseY);
                   }
                   pronto = 1;
                }
@@ -1829,7 +1823,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   if(shortCutsWindow)
                   {
                      ObjTxt->setText(pers->name); 
-                     shortCutsWindow->draw(mouseX, mouseY);
                   }
 
                   if( (Mbutton & SDL_BUTTON(1)) &&
@@ -1891,7 +1884,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             if(shortCutsWindow)
             {
                ObjTxt->setText(quaux->mapConection.mapName); 
-               shortCutsWindow->draw(mouseX, mouseY);
             }
             curConection = &quaux->mapConection;
             cursors->setActual(CURSOR_MAPTRAVEL);
@@ -1915,7 +1907,6 @@ int engine::verifyMouseActions(Uint8 Mbutton)
       if( (shortCutsWindow) && (!pronto) )
       {
          ObjTxt->setText(gettext("Nothing")); 
-         shortCutsWindow->draw(mouseX, mouseY);
       }
    }
    return(0);
@@ -2459,7 +2450,14 @@ int engine::treatIO(SDL_Surface *screen)
       }
       if(shortCutsWindow)
       {
-         shortCutsWindow->draw(mouseX, mouseY);
+         if(shortCutsWindow == gui->getActiveWindow())
+         {
+            shortCutsWindow->draw(mouseX, mouseY);
+         }
+         else
+         {
+            shortCutsWindow->draw(-1,-1);
+         }
       }
       guiObject* object;
       object = gui->manipulateEvents(x,y,Mbutton,keys, &guiEvent);

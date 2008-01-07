@@ -557,6 +557,18 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 /*********************************************************************
  *                          clearActiveObject                        *
  *********************************************************************/
+window* interface::getActiveWindow()
+{
+   if(ljan)
+   {
+      return(ljan->getActiveWindow());
+   }
+   return(NULL);
+}
+
+/*********************************************************************
+ *                          clearActiveObject                        *
+ *********************************************************************/
 void interface::clearActiveObject()
 {
    focus = FOCUS_GAME;
