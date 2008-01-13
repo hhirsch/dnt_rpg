@@ -1447,45 +1447,65 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
           {
              if(engineMode != ENGINE_MODE_TURN_BATTLE)
              {
-                briefTxt->setText(gettext("Enter Battle Mode"));
+                objTxt->setText(gettext("Enter Battle Mode"));
              }
              else
              {
-                briefTxt->setText(gettext("Select Normal Attack"));
+                objTxt->setText(gettext("Select Normal Attack"));
              }
+          }
+          else if(object == (guiObject*) buttonQuest)
+          {
+            //TODO Do the quest window
+            objTxt->setText(gettext("Open Quests Window"));
           }
           else if(object == (guiObject*) buttonMap)
           {
              if(!miniMapWindow)
              {
-                briefTxt->setText(gettext("Open Map Window"));
+                objTxt->setText(gettext("Open Map Window"));
              }
              else
              {
-                briefTxt->setText(gettext("Map Window already opened!"));
+                objTxt->setText(gettext("Map Window already opened!"));
              }
           }
           else if(object == (guiObject*) buttonEndTurn)
           {
              if(engineMode == ENGINE_MODE_TURN_BATTLE)
              {
-                briefTxt->setText(gettext("End Character's Turn"));
+                objTxt->setText(gettext("End Character's Turn"));
              }
              else
              {
-                briefTxt->setText(gettext("Only Avaible on Battle Mode"));
+                objTxt->setText(gettext("Only Avaible on Battle Mode"));
              }
           }
           else if(object == (guiObject*) buttonInventory)
           {
              if(!inventoryWindow)
              {
-                briefTxt->setText(gettext("Open Inventory Window"));
+                objTxt->setText(gettext("Open Inventory Window"));
              }
              else
              {
-                briefTxt->setText(gettext("Inventory already opened!"));
+                objTxt->setText(gettext("Inventory already opened!"));
              }
+          }
+          else if(object == (guiObject*) buttonAssign)
+          {
+            //TODO Do the assign window
+            objTxt->setText(gettext("Open Assign Attacks Window"));
+          }
+          else if(object == (guiObject*) buttonCharacter)
+          {
+            //TODO Do the character window
+            objTxt->setText(gettext("View Character Informations"));
+          }
+          else if(object == (guiObject*) buttonGroup)
+          {
+            //TODO Do the group/party window
+            objTxt->setText(gettext("Open Group/Party Window"));
           }
        }
        break;
@@ -1633,7 +1653,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                 cursors->setActual(CURSOR_GET);
                 if(shortCutsWindow)
                 {
-                   ObjTxt->setText(sobj->obj->getName()); 
+                   objTxt->setText(sobj->obj->getName()); 
                 }
                 if( (Mbutton & SDL_BUTTON(1)) && 
                     (rangeAction(activeCharacter->xPosition, 
@@ -1704,7 +1724,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             cursors->setActual(CURSOR_DOOR);
             if(shortCutsWindow)
             {
-               ObjTxt->setText(gettext("Door")); 
+               objTxt->setText(gettext("Door")); 
             }
             if( (Mbutton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->xPosition, 
@@ -1752,7 +1772,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             cursors->setActual(CURSOR_INVENTORY);
             if(shortCutsWindow)
             {
-               ObjTxt->setText(pers->name); 
+               objTxt->setText(pers->name); 
             }
 
             /* Open Inventory when button pressed */
@@ -1809,7 +1829,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   }
                   if(shortCutsWindow)
                   {
-                     ObjTxt->setText(pers->name); 
+                     objTxt->setText(pers->name); 
                   }
                   pronto = 1;
                }
@@ -1822,7 +1842,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   cursors->setActual(CURSOR_ATTACK);
                   if(shortCutsWindow)
                   {
-                     ObjTxt->setText(pers->name); 
+                     objTxt->setText(pers->name); 
                   }
 
                   if( (Mbutton & SDL_BUTTON(1)) &&
@@ -1833,10 +1853,11 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                                    METER_TO_DNT) ) )
                   {
                      sprintf(buf, gettext("%s attacks %s|"),
-                             activeCharacter->name.c_str(), pers->name.c_str());
+                             activeCharacter->name.c_str(),
+                             pers->name.c_str());
                      brief = buf;
                      canAttack = !activeCharacter->actualFeats.
-                                                        applyAttackAndBreakFeat(
+                                                   applyAttackAndBreakFeat(
                                                           *activeCharacter,
                                                           attackFeat, *pers, 
                                                           brief, 
@@ -1883,7 +1904,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
          {
             if(shortCutsWindow)
             {
-               ObjTxt->setText(quaux->mapConection.mapName); 
+               objTxt->setText(quaux->mapConection.mapName); 
             }
             curConection = &quaux->mapConection;
             cursors->setActual(CURSOR_MAPTRAVEL);
@@ -1906,7 +1927,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
 
       if( (shortCutsWindow) && (!pronto) )
       {
-         ObjTxt->setText(gettext("Nothing")); 
+         objTxt->setText(gettext("Nothing")); 
       }
    }
    return(0);
@@ -3137,7 +3158,8 @@ void engine::OpenMiniMapWindow()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   miniMapWindow = gui->insertWindow(SCREEN_X-288,SCREEN_Y-128,SCREEN_X-1,SCREEN_Y-1,
+   miniMapWindow = gui->insertWindow(SCREEN_X-288,SCREEN_Y-128,
+                                     SCREEN_X-1,SCREEN_Y-1,
                                      gettext("Map"));
 
    botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,x+2,z+2,
@@ -3145,6 +3167,9 @@ void engine::OpenMiniMapWindow()
    picture* fig = miniMapWindow->getObjectsList()->insertPicture(8,20,240,95,
                                                                  NULL);
    actualMap->drawMinimap(fig->get());
+
+   FPS = miniMapWindow->getObjectsList()->insertTextBox(3,108,150/*100*/,123,2,
+                                  gettext("FPS:"));
 
    miniMapWindow->getObjectsList()->insertPicture(3,15,252,120,
                                              "../data/texturas/mapw/map.png");
@@ -3162,12 +3187,10 @@ void engine::OpenShortcutsWindow()
 {
    shortCutsWindow = gui->insertWindow(0,SCREEN_Y-128,511,SCREEN_Y-1,
                                        gettext("Shortcuts"));
-   FPS = shortCutsWindow->getObjectsList()->insertTextBox(8,20,150/*100*/,35,2,
-                                  gettext("FPS:"));
    briefTxt = shortCutsWindow->getObjectsList()->insertRolBar(8,36,249,100,
                                   gettext("Press F1 for Help"),
                                   shortCutsWindow->getSurface());
-   ObjTxt = shortCutsWindow->getObjectsList()->insertTextBox(151,20,249,35,2,
+   objTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,20,249,35,2,
                                   gettext("Nothing"));
 
    buttonSave = shortCutsWindow->getObjectsList()->insertButton(8,102,76,120,
@@ -3188,7 +3211,7 @@ void engine::OpenShortcutsWindow()
    tb->insertButton(7,40,43,72);/* Attack 1 */
    tb->insertButton(7,75,43,107);/* Attack 7 */
 
-   tb->insertButton(53,4,89,36);/* Guard/Sleep Mode */
+   buttonQuest = tb->insertButton(53,4,89,36);/* Quest Window */
    tb->insertButton(53,40,89,72);/* Attack 2 */
    tb->insertButton(53,75,89,107);/* Attack 8 */
 
@@ -3200,11 +3223,11 @@ void engine::OpenShortcutsWindow()
    tb->insertButton(141,40,177,72);/* Attack 4 */
    tb->insertButton(141,75,177,107);/* Attack 10 */
    
-   tb->insertButton(180,4,216,36);/* Party */
+   buttonGroup = tb->insertButton(180,4,216,36);/* Party/Group */
    tb->insertButton(180,40,216,72);/* Attack 5 */
-   tb->insertButton(180,75,216,107);/* Assign Attacks */
+   buttonAssign = tb->insertButton(180,75,216,107);/* Assign Attacks */
 
-   tb->insertButton(220,4,256,36);/* Get */
+   buttonCharacter = tb->insertButton(220,4,256,36);/* Character */
    tb->insertButton(220,40,256,72);/* Attack 6 */
    buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 

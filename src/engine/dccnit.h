@@ -362,7 +362,7 @@ class engine
              yReal;                /**< Actual mouse Y coordinates on World */
 
       textBox* FPS;                /**< Text that shows FPS */
-      textBox* ObjTxt;             /**< Text that shows actual pointed object */
+      textBox* objTxt;             /**< Text that shows actual pointed object */
       rolBar* briefTxt;            /**< Briefing Text */
       textBox* hourTxt;            /**< Text for Hour */
       window* shortCutsWindow;     /**< ShortCuts Window */
@@ -373,8 +373,12 @@ class engine
       button* buttonSave;            /**< Button to call Save Function */
       button* buttonLoad;            /**< Button to call Load Function */
       oneTabButton* buttonAttackMode;/**< Button to Enter on Attack Mode */
+      oneTabButton* buttonQuest;     /**< Button to Open Quest Window */
       oneTabButton* buttonMap;       /**< Call MiniMap Button */
       oneTabButton* buttonInventory; /**< Call Inventory Button */
+      oneTabButton* buttonAssign;    /**< Button to assign attack */
+      oneTabButton* buttonGroup;     /**< Button to open group window */
+      oneTabButton* buttonCharacter; /**< Button to open Character Window */
       oneTabButton* buttonEndTurn;   /**< End Turn Button */
 
       inventWindow* inventoryWindow; /**< Inventory Window */
