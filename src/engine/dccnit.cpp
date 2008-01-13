@@ -1374,6 +1374,8 @@ void engine::treatPendingActions()
  *********************************************************************/
 void engine::treatGuiEvents(guiObject* object, int eventInfo)
 {
+   bool defined = false;
+
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
    {
@@ -1454,11 +1456,13 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
              {
                 objTxt->setText(gettext("Select Normal Attack"));
              }
+             defined = true;
           }
           else if(object == (guiObject*) buttonQuest)
           {
             //TODO Do the quest window
             objTxt->setText(gettext("Open Quests Window"));
+            defined = true;
           }
           else if(object == (guiObject*) buttonMap)
           {
@@ -1470,6 +1474,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
              {
                 objTxt->setText(gettext("Map Window already opened!"));
              }
+             defined = true;
           }
           else if(object == (guiObject*) buttonEndTurn)
           {
@@ -1481,6 +1486,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
              {
                 objTxt->setText(gettext("Only Avaible on Battle Mode"));
              }
+             defined = true;
           }
           else if(object == (guiObject*) buttonInventory)
           {
@@ -1492,21 +1498,25 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
              {
                 objTxt->setText(gettext("Inventory already opened!"));
              }
+             defined = true;
           }
           else if(object == (guiObject*) buttonAssign)
           {
             //TODO Do the assign window
             objTxt->setText(gettext("Open Assign Attacks Window"));
+            defined = true;
           }
           else if(object == (guiObject*) buttonCharacter)
           {
             //TODO Do the character window
             objTxt->setText(gettext("View Character Informations"));
+            defined = true;
           }
           else if(object == (guiObject*) buttonGroup)
           {
             //TODO Do the group/party window
             objTxt->setText(gettext("Open Group/Party Window"));
+            defined = true;
           }
        }
        break;
@@ -1564,6 +1574,13 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
          break;
        }
    }
+
+   if( (!defined) && (gui->mouseOnGui(mouseX, mouseY)) )
+   {
+      objTxt->setText(gettext("Nothing"));
+   }
+
+
 }
 
 /*********************************************************************
@@ -2379,7 +2396,8 @@ int engine::treatIO(SDL_Surface *screen)
          {
             if(dist > WALK_PER_MOVE_ACTION)
             {
-               /* Disable attack move on round if move more than one move act */
+               /* Disable attack move on round if move more than 
+                * one move act */
                canAttack = false;
             }
             activeCharacter->pathFind.defineMap(actualMap);
