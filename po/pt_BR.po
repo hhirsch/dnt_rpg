@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-01-06 18:44-0200\n"
+"POT-Creation-Date: 2008-01-13 15:46-0200\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -262,7 +262,7 @@ msgstr "Carregando Mudanças..."
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:652
+#: src/engine/dccnit.cpp:653
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -274,97 +274,114 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1170
+#: src/engine/dccnit.cpp:1171
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1209 src/engine/dccnit.cpp:1277
+#: src/engine/dccnit.cpp:1210 src/engine/dccnit.cpp:1278
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1259
+#: src/engine/dccnit.cpp:1260
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1450
+#: src/engine/dccnit.cpp:1453
 msgid "Enter Battle Mode"
 msgstr "Entra no Modo de Batalha"
 
-#: src/engine/dccnit.cpp:1454
+#: src/engine/dccnit.cpp:1457
 msgid "Select Normal Attack"
 msgstr "Seleciona Ataque Normal"
 
-#: src/engine/dccnit.cpp:1461
+#: src/engine/dccnit.cpp:1464
+msgid "Open Quests Window"
+msgstr "Abre Janela de Missões"
+
+#: src/engine/dccnit.cpp:1471
 msgid "Open Map Window"
 msgstr "Abre Janela de Mapa"
 
-#: src/engine/dccnit.cpp:1465
+#: src/engine/dccnit.cpp:1475
 msgid "Map Window already opened!"
 msgstr "Janela de Mapa já aberta!"
 
-#: src/engine/dccnit.cpp:1472
+#: src/engine/dccnit.cpp:1483
 msgid "End Character's Turn"
 msgstr "Termina Turno do Personagem"
 
-#: src/engine/dccnit.cpp:1476
+#: src/engine/dccnit.cpp:1487
 msgid "Only Avaible on Battle Mode"
 msgstr "Somente disponível no Modo de Batalha"
 
-#: src/engine/dccnit.cpp:1483
+#: src/engine/dccnit.cpp:1495
 msgid "Open Inventory Window"
 msgstr "Abre Janela de Inventário"
 
-#: src/engine/dccnit.cpp:1487
+#: src/engine/dccnit.cpp:1499
 msgid "Inventory already opened!"
 msgstr "Inventário já aberto!"
 
-#: src/engine/dccnit.cpp:1650
+#: src/engine/dccnit.cpp:1506
+msgid "Open Assign Attacks Window"
+msgstr "Abre Janela de Definir Ataques Rápidos"
+
+#: src/engine/dccnit.cpp:1512
+msgid "View Character Informations"
+msgstr "Ver Informações do Personagem"
+
+#: src/engine/dccnit.cpp:1518
+msgid "Open Group/Party Window"
+msgstr "Abre Janela de Grupo"
+
+#: src/engine/dccnit.cpp:1580 src/engine/dccnit.cpp:1948
+#: src/engine/dccnit.cpp:3213
+msgid "Nothing"
+msgstr "Nada"
+
+#: src/engine/dccnit.cpp:1687
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1710
+#: src/engine/dccnit.cpp:1745
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1842 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1873 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/engine/dccnit.cpp:1917 src/engine/dccnit.cpp:3173
-msgid "Nothing"
-msgstr "Nada"
-
-#: src/engine/dccnit.cpp:3143
+#: src/engine/dccnit.cpp:3182
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/dccnit.cpp:3166
-msgid "Shortcuts"
-msgstr "Atalhos"
-
-#: src/engine/dccnit.cpp:3168
+#: src/engine/dccnit.cpp:3191
 msgid "FPS:"
 msgstr "FPS:"
 
-#: src/engine/dccnit.cpp:3170
+#: src/engine/dccnit.cpp:3208
+msgid "Shortcuts"
+msgstr "Atalhos"
+
+#: src/engine/dccnit.cpp:3210
 msgid "Press F1 for Help"
 msgstr "Pressione F1 para Ajuda"
 
-#: src/engine/dccnit.cpp:3176 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3216 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/dccnit.cpp:3178
+#: src/engine/dccnit.cpp:3218
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3180 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3221 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Carregar"
 
-#: src/engine/dccnit.cpp:3366
+#: src/engine/dccnit.cpp:3408
 msgid "|Exit Battle Mode"
 msgstr "|Sai do Modo de Batalha"
 
