@@ -3178,7 +3178,7 @@ void engine::OpenShortcutsWindow()
                                                gettext("Load"),0);
    hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,249,120,2,
                                                           "00:00");
-   hourTxt->setFont(DNT_FONT_TIMES,10,0);
+   hourTxt->setFont(DNT_FONT_TIMES,11,DNT_FONT_ALIGN_CENTER);
    hourToTxt();
 
    tabButton* tb;
