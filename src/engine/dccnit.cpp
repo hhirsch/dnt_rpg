@@ -428,7 +428,7 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
       if(!(arq = fopen(actualMap->getNpcFileName().c_str(),"r")))
       {
          printf(gettext("Ouch, can't load NPC's file: %s.\n"),
-                                           actualMap->getNpcFileName().c_str());
+                actualMap->getNpcFileName().c_str());
       }
       else
       {
@@ -565,7 +565,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
                  proj, modl, viewPort);
 
    glDisable(GL_LIGHTING);
-   fadeOutTexture(texturaCarga,centerX-128,centerY-64,centerX+127,centerY+63, 256,128);
+   fadeOutTexture(texturaCarga,centerX-128,centerY-64,
+                  centerX+127,centerY+63, 256,128);
 
    /* Free Loading Textures */
    SDL_FreeSurface(img);
@@ -754,7 +755,7 @@ int engine::OptionsScreen(GLuint idTextura)
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
-         optionW = option->treat(object, eventInfo, interf, proj,modl,viewPort);
+         optionW = option->treat(object,eventInfo,interf,proj,modl,viewPort);
       }
       else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
       {
@@ -3191,22 +3192,24 @@ void engine::OpenShortcutsWindow()
                                   gettext("Press F1 for Help"),
                                   shortCutsWindow->getSurface());
    objTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,20,249,35,2,
-                                  gettext("Nothing"));
+                                                           gettext("Nothing"));
 
    buttonSave = shortCutsWindow->getObjectsList()->insertButton(8,102,76,120,
-                                               gettext("Save"),0);
+                                                            gettext("Save"),0);
    buttonMenu = shortCutsWindow->getObjectsList()->insertButton(77,102,140,120,
-                                                      gettext("Menu"),0);
-   buttonLoad = shortCutsWindow->getObjectsList()->insertButton(141,102,209,120,
-                                               gettext("Load"),0);
-   hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,249,120,2,
-                                                          "00:00");
+                                                            gettext("Menu"),0);
+   buttonLoad = shortCutsWindow->getObjectsList()->insertButton(141,102,
+                                                                209,120,
+                                                            gettext("Load"),0);
+   hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,
+                                                              249,120,2,
+                                                              "00:00");
    hourTxt->setFont(DNT_FONT_TIMES,11,DNT_FONT_ALIGN_CENTER);
    hourToTxt();
 
    tabButton* tb;
    tb = shortCutsWindow->getObjectsList()->insertTabButton(252,15,0,0,
-                                   "../data/texturas/shortcutsw/shortcuts.png");
+                                  "../data/texturas/shortcutsw/shortcuts.png");
    buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
    tb->insertButton(7,40,43,72);/* Attack 1 */
    tb->insertButton(7,75,43,107);/* Attack 7 */
@@ -3232,7 +3235,7 @@ void engine::OpenShortcutsWindow()
    buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 
    shortCutsWindow->getObjectsList()->insertPicture(3,15,252,120,
-                                   "../data/texturas/shortcutsw/shortcut2.png");
+                                  "../data/texturas/shortcutsw/shortcut2.png");
    
    shortCutsWindow->setExternPointer(&shortCutsWindow);
    gui->openWindow(shortCutsWindow);
@@ -3245,8 +3248,8 @@ void engine::OpenCloseInventoryWindow()
 {
    if(!inventoryWindow)
    {
-      inventoryWindow = new inventWindow(PCs->getActiveCharacter()->inventories,
-                                         gui, infoWindow); 
+      inventoryWindow=new inventWindow(PCs->getActiveCharacter()->inventories,
+                                       gui, infoWindow); 
    }
    else
    {
@@ -3461,7 +3464,8 @@ int engine::Run(SDL_Surface *surface)
                 character* per;
                 per = NPCs->InserirPersonagem(6,8,3,8,
                              "../data/pics/logan/cara.bmp",0,0,
-               "LoganNPC","../data/models/personagens/logan_completo_final.obj",
+                             "LoganNPC",
+                             "???",
                   "../data/pics/logan/",features);
                 per->xPosition = eventoRede->x;
                 per->zPosition = eventoRede->y; 
