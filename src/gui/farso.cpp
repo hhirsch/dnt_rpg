@@ -50,7 +50,7 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
                             int width, int height,
                             bool fullScreen)
 {
-   SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+    SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
     SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8);
    
     /*SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);

@@ -11,19 +11,11 @@ EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
 
-
-# Comente a linha abaixo se quiser movimento transparente das windows
-# POR ENQUANTO, MOVIMENTO TRANSPARENTE NAO FUNCIONA!!!!! (e provavelmente, nunca funcionara!!!)
-MOVOPACO =  -DMOVIMENTO_OPACO
-
 all: guiobject  
 
-textbar.o: textbar.h textbar.cpp
-	@printf "Making textbar.o... "
-	@$(CC) $(CFLAGS) textbar.cpp -o textbar.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
+guiobject: $(OBJSPP)
 
-button.o: button.h button.cpp
+button.o: button.h button.cpp color.h draw.h mouse.h guiobject.h
 	@printf "Making button.o... "
 	@$(CC) $(CFLAGS) button.cpp -o button.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -33,34 +25,9 @@ color.o: color.h color.cpp
 	@$(CC) $(CFLAGS) color.cpp -o color.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-cxsel.o: cxsel.h cxsel.cpp
+cxsel.o: cxsel.h cxsel.cpp color.h draw.h guiobject.h
 	@printf "Making cxsel.o... "
 	@$(CC) $(CFLAGS) cxsel.cpp -o cxsel.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-draw.o: draw.h draw.cpp
-	@printf "Making draw.o... "
-	@$(CC) $(CFLAGS) draw.cpp -o draw.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-erro.o: erro.cpp erro.h
-	@printf "Making erro.o... "
-	@$(CC) $(CFLAGS) erro.cpp -o erro.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-interface.o: interface.h interface.cpp
-	@printf "Making interface.o... "
-	@$(CC) $(CFLAGS) interface.cpp -o interface.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-farso.o: farso.h farso.cpp
-	@printf "Making farso.o... "
-	@$(CC) $(CFLAGS) farso.cpp -o farso.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-picture.o: picture.h picture.cpp
-	@printf "Making picture.o... "
-	@$(CC) $(CFLAGS) picture.cpp -o picture.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 dntfont.o: dntfont.h dntfont.cpp
@@ -68,32 +35,42 @@ dntfont.o: dntfont.h dntfont.cpp
 	@$(CC) $(CFLAGS) dntfont.cpp -o dntfont.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+draw.o: draw.h draw.cpp
+	@printf "Making draw.o... "
+	@$(CC) $(CFLAGS) draw.cpp -o draw.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+farso.o: farso.h farso.cpp draw.h button.h color.h cxsel.h window.h interface.h dntfont.h healthBar.h textbox.h rolbar.h seltext.h textbar.h guiobject.h guilist.h picture.h menu.h mouse.h tabbutton.h messages.h
+	@printf "Making farso.o... "
+	@$(CC) $(CFLAGS) farso.cpp -o farso.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+guilist.o: guilist.h guilist.cpp guiobject.h button.h cxsel.h picture.h textbox.h seltext.h tabbutton.h textbar.h rolbar.h listtext.h
+	@printf "Making guilist.o... "
+	@$(CC) $(CFLAGS) guilist.cpp -o guilist.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 healthBar.o: healthBar.h healthBar.cpp
 	@printf "Making healthBar.o... "
 	@$(CC) $(CFLAGS) healthBar.cpp -o healthBar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-window.o: window.h window.cpp
-	@printf "Making window.o... "
-	@$(CC) $(CFLAGS) $(MOVOPACO) window.cpp -o window.o
+interface.o: interface.h interface.cpp window.h mouse.h menu.h guilist.h
+	@printf "Making interface.o... "
+	@$(CC) $(CFLAGS) interface.cpp -o interface.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-guilist.o: guilist.h guilist.cpp guiobject.h
-	@printf "Making guilist.o... "
-	@$(CC) $(CFLAGS) guilist.cpp -o guilist.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-listtext.o: listtext.h listtext.cpp
+listtext.o: listtext.h listtext.cpp rolbar.h tabbutton.h
 	@printf "Making listtext.o... "
 	@$(CC) $(CFLAGS) listtext.cpp -o listtext.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-menu.o: menu.h menu.cpp
+menu.o: menu.h menu.cpp color.h draw.h dntfont.h mouse.h guiobject.h guilist.h
 	@printf "Making menu.o... "
 	@$(CC) $(CFLAGS) menu.cpp -o menu.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-messages.o: messages.h messages.cpp
+messages.o: messages.h messages.cpp farso.h
 	@printf "Making messages.o... "
 	@$(CC) $(CFLAGS) messages.cpp -o messages.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -103,28 +80,40 @@ mouse.o: mouse.h mouse.cpp
 	@$(CC) $(CFLAGS) mouse.cpp -o mouse.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-textbox.o: textbox.h textbox.cpp
-	@printf "Making textbox.o... "
-	@$(CC) $(CFLAGS) textbox.cpp -o textbox.o
+picture.o: picture.h picture.cpp draw.h guiobject.h
+	@printf "Making picture.o... "
+	@$(CC) $(CFLAGS) picture.cpp -o picture.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-rolbar.o: rolbar.h rolbar.cpp
+rolbar.o: rolbar.h rolbar.cpp guiobject.h color.h draw.h mouse.h button.h textbox.h
 	@printf "Making rolbar.o... "
 	@$(CC) $(CFLAGS) rolbar.cpp -o rolbar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-seltext.o: seltext.h seltext.cpp
+seltext.o: seltext.h seltext.cpp draw.h dntfont.h color.h mouse.h guiobject.h
 	@printf "Making seltext.o... "
 	@$(CC) $(CFLAGS) seltext.cpp -o seltext.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-tabbutton.o: tabbutton.h tabbutton.cpp
+tabbutton.o: tabbutton.h tabbutton.cpp picture.h color.h guiobject.h
 	@printf "Making tabbutton.o... "
 	@$(CC) $(CFLAGS) tabbutton.cpp -o tabbutton.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+textbar.o: textbar.h textbar.cpp color.h draw.h dntfont.h mouse.h guiobject.h
+	@printf "Making textbar.o... "
+	@$(CC) $(CFLAGS) textbar.cpp -o textbar.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
-guiobject: $(OBJSPP)
+textbox.o: textbox.h textbox.cpp color.h draw.h dntfont.h guiobject.h
+	@printf "Making textbox.o... "
+	@$(CC) $(CFLAGS) textbox.cpp -o textbox.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+window.o: window.h window.cpp draw.h color.h dntfont.h guiobject.h guilist.h
+	@printf "Making window.o... "
+	@$(CC) $(CFLAGS) $(MOVOPACO) window.cpp -o window.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
 	@printf "Cleaning Gui Bin Files... "

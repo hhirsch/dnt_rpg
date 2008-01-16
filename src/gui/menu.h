@@ -11,7 +11,6 @@ using namespace std;
 #include "color.h"
 #include "draw.h"
 #include "dntfont.h"
-#include "string.h"
 #include "mouse.h"
 #include "guiobject.h"
 #include "guilist.h"
