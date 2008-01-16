@@ -8,13 +8,16 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
 BINDIR = ../../bin/
 ENDGUI = ../gui/
-DIRENGINE = ../engine/
+ENDENGINE = ../engine/
+ENDPART=../particle/
+ENDETC=../etc/
+ENDCLASSES=../classes/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)nstring.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o
 #DEPENDENCIAS = map.o $(OBJSGUI) mapobject.o ../etc/glm.o ../etc/texture.o $(DIRENGINE)culling.o
 
 all: objetos
 
-map.o: map.cpp map.h
+map.o: map.cpp map.h mapobject.h mapfog.h maplights.h maproad.h $(ENDPART)lake.h
 	@printf "Making map.o... "
 	@$(CPP) $(CFLAGS) map.cpp -o map.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -29,12 +32,12 @@ maplights.o: maplights.cpp maplights.h
 	@$(CC) $(CFLAGS) maplights.cpp -o maplights.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-mapobject.o: mapobject.cpp mapobject.h
+mapobject.o: mapobject.cpp mapobject.h $(ENDETC)modellist.h $(ENDCLASSES)object.h $(ENDCLASSES)weapon.h
 	@printf "Making mapobject.o... "
 	@$(CC) $(CFLAGS) mapobject.cpp -o mapobject.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	
-maproad.o: maproad.cpp maproad.h
+maproad.o: maproad.cpp maproad.h $(ENDENGINE)util.h
 	@printf "Making maproad.o... "
 	@$(CC) $(CFLAGS) maproad.cpp -o maproad.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
