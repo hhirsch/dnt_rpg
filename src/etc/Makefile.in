@@ -7,9 +7,11 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-all: animodel.o distance.o extensions.o fifo.o message3d.o modellist.o texture.o
+ENDCLASSES=../classes/
 
-animodel.o: animodel.h animodel.cpp
+all: animodel.o distance.o extensions.o message3d.o modellist.o
+
+animodel.o: animodel.h animodel.cpp $(ENDCLASSES)thing.h
 	@printf "Making animodel.o... "
 	@$(CPP) $(CFLAGS) -c animodel.cpp -o animodel.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -24,25 +26,12 @@ extensions.o: extensions.h extensions.cpp
 	@$(CPP) $(CFLAGS) -c extensions.cpp -o extensions.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-texture.o: texture.h texture.cpp
-	@printf "Making texture.o... "
-	@$(CPP) $(CFLAGS) -c texture.cpp -o texture.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-fifo.o: fifo.cpp fifo.h
-	@printf "Making fifo.o... "
-	@$(CPP) $(CFLAGS) -c fifo.cpp -o fifo.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-fifo: fifo.cpp fifo.h
-	$(CPP) $(CFLAGS) -DFIFO_TEST fifo.cpp -o fifo
-
 message3d.o: message3d.cpp message3d.h
 	@printf "Making message3d.o... "
 	@$(CPP) $(CFLAGS) -c message3d.cpp -o message3d.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-modellist.o: modellist.h modellist.cpp
+modellist.o: modellist.h modellist.cpp animodel.h
 	@printf "Making modellist.o... "
 	@$(CPP) $(CFLAGS) -c modellist.cpp -o modellist.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
