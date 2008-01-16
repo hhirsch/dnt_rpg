@@ -14,7 +14,7 @@ LIBS = @LIBS@
 
 ENDGUI = ../gui/
 ENDENGINE = ../engine/
-ENDMAPA = ../map/
+ENDMAP = ../map/
 ENDNET = ../net/
 ENDIA = ../ia/
 ENDCLASSES = ../classes/
@@ -23,7 +23,7 @@ ENDLANG = ../lang/
 ENDPART = ../particle/
 ENDFIGHT = ../fight/
 ENDETC = ../etc/
-OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobject.o $(ENDMAPA)maproad.o
+OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o $(ENDMAP)mapobject.o $(ENDMAP)maproad.o
 OBJSGUI = $(ENDGUI)textbar.o $(ENDGUI)button.o $(ENDGUI)color.o $(ENDGUI)cxsel.o $(ENDGUI)draw.o $(ENDGUI)messages.o $(ENDGUI)interface.o $(ENDGUI)farso.o $(ENDGUI)picture.o $(ENDGUI)dntfont.o $(ENDGUI)healthBar.o $(ENDGUI)window.o $(ENDGUI)guilist.o $(ENDGUI)listtext.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)textbox.o $(ENDGUI)rolbar.o $(ENDGUI)seltext.o $(ENDGUI)tabbutton.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o $(ENDIA)astar.o $(ENDIA)fuzzy.o $(ENDIA)fuzzyvariable.o $(ENDIA)fuzzyfunction.o $(ENDIA)fuzzyrule.o  $(ENDIA)iafuncs.o $(ENDIA)iascript.o $(ENDIA)iastack.o $(ENDIA)iavariable.o
@@ -33,53 +33,52 @@ OBJSLANG = $(ENDLANG)translate.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o $(ENDPART)partlist.o $(ENDPART)wind.o $(ENDPART)lake.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)texture.o $(ENDETC)message3d.o $(ENDETC)modellist.o
-OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o camera.o character.o classwindow.o collision.o dialog.o culling.o cursor.o dccnit.o initial.o inventwindow.o itemwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
+OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o camera.o character.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = ../etc/fifo.o
 
 all: teste
 
-alignwindow.o: alignwindow.h alignwindow.cpp
+alignwindow.o: alignwindow.h alignwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)align.h
 	@printf "Making alignwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) alignwindow.cpp -o alignwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-aspectwindow.o: aspectwindow.h aspectwindow.cpp
+aspectwindow.o: aspectwindow.h aspectwindow.cpp $(ENDGUI)farso.h character.h
 	@printf "Making aspectwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) aspectwindow.cpp -o aspectwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-attwindow.o: attwindow.h attwindow.cpp
+attwindow.o: attwindow.h attwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)skills.h
 	@printf "Making attwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) attwindow.cpp -o attwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-barterwindow.o: barterwindow.h barterwindow.cpp
+barterwindow.o: barterwindow.h barterwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)barter.h inventwindow.h itemwindow.h
 	@printf "Making barterwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) barterwindow.cpp -o barterwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-camera.o: camera.cpp camera.h
+camera.o: camera.cpp camera.h $(ENDMAP)map.h
 	@printf "Making camera.o... "
 	@$(CC) $(CFLAGS) camera.cpp -o camera.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-classwindow.o: classwindow.h classwindow.cpp
+character.o: character.cpp character.h $(ENDGUI)draw.h $(ENDGUI)picture.h $(ENDGUI)healthBar.h $(ENDCLASSES)thing.h $(ENDCLASSES)feats.h $(ENDCLASSES)classes.h $(ENDCLASSES)race.h $(ENDCLASSES)inventory.h $(ENDIA)astar.h $(ENDETC)animodel.h $(ENDMAP)map.h barterwindow.h
+	@printf "Making character.o... "
+	@$(CC) $(CFLAGS) character.cpp -o character.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+classwindow.o: classwindow.h classwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)classes.h
 	@printf "Making classwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) classwindow.cpp -o classwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-dialog.o: dialog.cpp dialog.h
-	@printf "Making dialog.o... "
-	@$(CC) $(CFLAGS) dialog.cpp -o dialog.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-collision.o: collision.cpp collision.h
+collision.o: collision.cpp collision.h $(ENDMAP)map.h character.h
 	@printf "Making collision.o... "
 	@$(CC) $(CFLAGS) collision.cpp -o collision.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
-
 
 culling.o: culling.cpp culling.h
 	@printf "Making culling.o... "
@@ -91,57 +90,57 @@ cursor.o: cursor.cpp cursor.h
 	@$(CC) $(CFLAGS) cursor.cpp -o cursor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-dccnit.o: dccnit.h dccnit.cpp util.h
+dialog.o: dialog.cpp dialog.h $(ENDGUI)farso.h character.h barterwindow.h
+	@printf "Making dialog.o... "
+	@$(CC) $(CFLAGS) dialog.cpp -o dialog.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+dccnit.o: dccnit.h dccnit.cpp util.h $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h $(ENDCLASSES)race.h $(ENDCLASSES)classes.h $(ENDCLASSES)weapon.h $(ENDCLASSES)actions.h $(ENDCLASSES)mission.h $(ENDETC)message3d.h $(ENDFIGHT)fightSystem.h $(ENDGUI)farso.h $(ENDMAP)map.h $(ENDPART)partSystem.h $(ENDPART)wave.h $(ENDSOUND)sound.h $(ENDIA)iascript.h alignwindow.h aspectwindow.h attwindow.h camera.h character.h classwindow.h collision.h cursor.h dialog.h initial.h inventwindow.h itemwindow.h modstate.h options.h racewindow.h shadow.h skillwindow.h sun.h util.h
 	@printf "Making dccnit.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-initial.o: initial.h initial.cpp
+initial.o: initial.h initial.cpp $(ENDGUI)farso.h $(ENDSOUND)sound.h
 	@printf "Making initial.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) initial.cpp -o initial.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-inventwindow.o: inventwindow.h inventwindow.cpp
+inventwindow.o: inventwindow.h inventwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)inventory.h $(ENDMAP)map.h cursor.h modstate.h util.h itemwindow.h
 	@printf "Making inventwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) inventwindow.cpp -o inventwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-itemwindow.o: itemwindow.h itemwindow.cpp
+itemwindow.o: itemwindow.h itemwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)object.h
 	@printf "Making itemwindow.o... "
 	@$(CC) $(CFLAGS) itemwindow.cpp -o itemwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-modstate.o: modstate.h modstate.cpp
+modstate.o: modstate.h modstate.cpp $(ENDCLASSES)inventory.h $(ENDMAP)map.h
 	@printf "Making modstate.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) modstate.cpp -o modstate.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-options.o: options.h options.cpp
+options.o: options.h options.cpp $(ENDGUI)farso.h
 	@printf "Making options.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) options.cpp -o options.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-character.o: character.cpp character.h
-	@printf "Making character.o... "
-	@$(CC) $(CFLAGS) character.cpp -o character.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-racewindow.o: racewindow.h racewindow.cpp
+racewindow.o: racewindow.h racewindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)race.h
 	@printf "Making racewindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) racewindow.cpp -o racewindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-skillwindow.o: skillwindow.h skillwindow.cpp
+skillwindow.o: skillwindow.h skillwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)skills.h
 	@printf "Making skillwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) skillwindow.cpp -o skillwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-shadow.o: shadow.h shadow.cpp
+shadow.o: shadow.h shadow.cpp camera.h
 	@printf "Making shadow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) shadow.cpp -o shadow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-sky.o: sky.h sky.cpp
+sky.o: sky.h sky.cpp $(ENDMAP)map.h
 	@printf "Making sky.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) sky.cpp -o sky.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -151,12 +150,12 @@ sun.o: sun.h sun.cpp
 	@$(CC) $(CFLAGS) $(SUPREDE) sun.cpp -o sun.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste.o: teste.cpp ../config.h
+teste.o: teste.cpp ../config.h dccnit.h $(ENDGUI)farso.h
 	@printf "Making teste.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o teste.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-util.o: util.cpp util.h
+util.o: util.cpp util.h $(ENDGUI)farso.h
 	@printf "Making util.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) util.cpp -o util.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
