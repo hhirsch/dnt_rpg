@@ -12,12 +12,12 @@ ogg_stream.o: ogg_stream.cpp ogg_stream.h
 	@$(CC) $(CFLAGS) ogg_stream.cpp -o ogg_stream.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-sound.o: sound.cpp sound.h
+sound.o: sound.cpp sound.h sndfx.h ogg_stream.h
 	@printf "Making sound.o... "
 	@$(CC) $(CFLAGS) sound.cpp -o sound.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-sndfx.o: sndfx.cpp sndfx.h
+sndfx.o: sndfx.cpp sndfx.h ogg_stream.h
 	@printf "Making sndfx.o... "
 	@$(CC) $(CFLAGS) sndfx.cpp -o sndfx.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

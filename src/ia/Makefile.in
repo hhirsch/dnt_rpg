@@ -9,7 +9,7 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
 ENDGUI = ../gui/
 ENDENGINE = ../engine/
-ENDMAPA = ../map/
+ENDMAP = ../map/
 ENDETC = ../etc/
 ENDIA = ../ia/
 ENDPART = ../particle/
@@ -17,7 +17,7 @@ ENDCLASSES = ../classes/
 ENDFIGHT = ../fight/
 ENDSOUND = ../sound/
 ENDLANG = ../lang/
-OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobjeto.o $(ENDMAPA)maproad.o
+OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o $(ENDMAP)mapobjeto.o $(ENDMAP)maproad.o
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)messages.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)healthBar.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)listtext.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)rolbar.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o $(ENDCLASSES)skills.o $(ENDCLASSES)align.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o $(ENDCLASSES)object.o $(ENDCLASSES)itemslot.o $(ENDCLASSES)inventory.o $(ENDCLASSES)barter.o
@@ -31,22 +31,17 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)at
 OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o iafuncs.o iascript.o iastack.o iavariable.o pattAgent.o potentAgent.o  
 all: $(OBJS)
 
-teste: fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o teste.cpp
-	@printf "Making teste... "
-	@$(CPP) $(EFLAGS) fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o teste.cpp -o teste
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-agent.o: agent.cpp agent.h
+agent.o: agent.cpp agent.h $(ENDENGINE)util.o
 	@printf "Making agent.o... "
 	@$(CPP) $(CFLAGS) agent.cpp -o agent.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-astar.o: astar.cpp astar.h
+astar.o: astar.cpp astar.h pattAgent.h $(ENDMAP)map.h
 	@printf "Making astar.o... "
 	@$(CPP) $(CFLAGS) astar.cpp -o astar.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-fuzzy.o: fuzzy.cpp fuzzy.h
+fuzzy.o: fuzzy.cpp fuzzy.h fuzzyrule.h fuzzyfunction.h fuzzyvariable.h
 	@printf "Making fuzzy.o... "
 	@$(CPP) $(CFLAGS) fuzzy.cpp -o fuzzy.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -56,12 +51,12 @@ fuzzyfunction.o: fuzzyfunction.cpp fuzzyfunction.h
 	@$(CPP) $(CFLAGS) fuzzyfunction.cpp -o fuzzyfunction.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-fuzzyrule.o: fuzzyrule.cpp fuzzyrule.h
+fuzzyrule.o: fuzzyrule.cpp fuzzyrule.h fuzzyfunction.h fuzzyvariable.h
 	@printf "Making fuzzyrule.o... "
 	@$(CPP) $(CFLAGS) fuzzyrule.cpp -o fuzzyrule.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-fuzzyvariable.o: fuzzyvariable.cpp fuzzyvariable.h
+fuzzyvariable.o: fuzzyvariable.cpp fuzzyvariable.h fuzzyfunction.h
 	@printf "Making fuzzyvariable.o... "
 	@$(CPP) $(CFLAGS) fuzzyvariable.cpp -o fuzzyvariable.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -71,7 +66,7 @@ iafuncs.o: iafuncs.cpp iafuncs.h
 	@$(CPP) $(CFLAGS) iafuncs.cpp -o iafuncs.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-iascript.o: iascript.cpp iascript.h iafuncs.h
+iascript.o: iascript.cpp iascript.h iafuncs.h iavariable.h iastack.h $(ENDENGINE)character.h $(ENDCLASSES)object.h $(ENDCLASSES)feats.h $(ENDCLASSES)skills.h $(ENDCLASSES)actions.h $(ENDMAP)map.h
 	@printf "Making iascript.o... "
 	@$(CPP) $(CFLAGS) iascript.cpp -o iascript.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -86,24 +81,14 @@ iavariable.o: iavariable.cpp iavariable.h iafuncs.h
 	@$(CPP) $(CFLAGS) iavariable.cpp -o iavariable.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-pattAgent.o: pattAgent.cpp pattAgent.h
+pattAgent.o: pattAgent.cpp pattAgent.h agent.h
 	@printf "Making pattAgent.o... "
 	@$(CPP) $(CFLAGS) pattAgent.cpp -o pattAgent.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-potentAgent.o: potentAgent.cpp potentAgent.h
+potentAgent.o: potentAgent.cpp potentAgent.h agent.h
 	@printf "Making potentAgent.o... "
 	@$(CPP) $(CFLAGS) potentAgent.cpp -o potentAgent.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-test.o: test.cpp
-	@printf "Making test.o... "
-	@$(CPP) $(CFLAGS) test.cpp -o test.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-test: $(OBJS) $(OBJSGUI) $(OBJSMAPA) $(OBJS) test.o
-	@printf "Linking test... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJS) test.o -o test
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
