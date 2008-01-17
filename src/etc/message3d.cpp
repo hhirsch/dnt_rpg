@@ -39,14 +39,13 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    fnt.defineFont(DNT_FONT_TIMES, 20);
    int size = fnt.getStringWidth(message);
    halfSize = (size / 2.0);
-   color_Alpha(0);
-   color_Set(255,255,255);
+   color_Set(0,0,0);
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       smallestPowerOfTwo(size),
-                       32,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+                                         smallestPowerOfTwo(size),
+                                        32,32,
+                                        0x000000FF, 0x0000FF00,
+                                        0x00FF0000, 0xFF000000);
    rectangle_Fill(s, 0, 0, smallestPowerOfTwo(size)-1, 32-1);
-   color_Alpha(255);
    color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255));
    fnt.write(s, 0, 0, message.c_str());
 
@@ -170,7 +169,8 @@ void messageController::draw(GLdouble modelView[16],
    glDisable(GL_LIGHTING);
    glDisable(GL_FOG);
    glEnable(GL_TEXTURE_2D);
-   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   glBlendFunc(GL_ONE, GL_ONE);
+   //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_BLEND);
    for(i = 0; i < tot; i++)
    {
@@ -200,7 +200,7 @@ void messageController::draw(GLdouble modelView[16],
          glVertex3f(-msg->halfSize*modelView[0]*scale + scale*16*modelView[1], 
                     scale*16*modelView[5] - msg->halfSize*modelView[4]*scale,
                     -msg->halfSize*modelView[8]*scale + 16*modelView[9]*scale);
-       glEnd();
+      glEnd();
       glPopMatrix();
       msg->live++;
       msg->posY += 0.5;
@@ -213,6 +213,7 @@ void messageController::draw(GLdouble modelView[16],
       }
    }
    glDisable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glDisable(GL_TEXTURE_2D);
    glEnable(GL_LIGHTING);
    glEnable(GL_FOG);
