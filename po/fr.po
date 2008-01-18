@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-01-18 09:36-0200\n"
+"POT-Creation-Date: 2008-01-18 13:24-0200\n"
 "PO-Revision-Date: 2007-11-29 15:32+0000\n"
 "Last-Translator: MATHIEU Yves <EMAIL@ADDRESS>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -2114,7 +2114,7 @@ msgstr ""
 #: data/skills/falsificar.ski:2
 msgid ""
 "Is used to make false copies of something, like director's signatures or "
-"teacher's points notebook."
+"teacher's points notes."
 msgstr ""
 
 #: data/skills/forca.ski:2
@@ -2173,7 +2173,7 @@ msgstr ""
 #: data/skills/nadar.ski:2
 msgid ""
 "This skill measures how good the thing is on sports, without any kind of "
-"distinction; Surelly, who is good on sports, usually aren't good on any more "
+"distinction; Surelly, those good on sports, usually aren't good on any more "
 "thing."
 msgstr ""
 
