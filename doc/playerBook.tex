@@ -1633,10 +1633,12 @@ The previous table is a Base Bonus one, so they are without the {\it feats varia
 \subsection{Acrobatics}
 \includegraphics{../data/skills/Img/acrobacias.png}
  The acrobatic organism is able to do trully exploits, like capers, twirling or play capoeira. With this skill, he is able to cross enemy's areas without taking damage or {\it Coward Attacks}, fall from high places without taking damage and also make an impression to little girls.
-{\bf Test}\\
-{\it Cross areas}: Rolls an {\it Acrobatics} test with difficulty 16 for 6 meters of acrobatics without {\it Coward Attacks}. The difficulty up to 26 when the area is occupied by an enemy.\\
-{\it Decrease fall}: Rolls an {\it Acrobatics} test with difficulty 16 for each 3 fallen meters to be deaden.\\
-{\it Impress little girls}: Rolls an {\it Acrobatics} test with difficult (5 + girl's age).\\
+{\bf Test}
+\begin{itemize}
+\item{{\it Cross areas}: Rolls an {\it Acrobatics} test with difficulty 16 for 6 meters of acrobatics without {\it Coward Attacks}. The difficulty up to 26 when the area is occupied by an enemy.}
+\item{{\it Decrease fall}: Rolls an {\it Acrobatics} test with difficulty 16 for each 3 fallen meters to be deaden.}
+\item{{\it Impress little girls}: Rolls an {\it Acrobatics} test with difficult (5 + girl's age).}
+\end{itemize}
 {\bf Training}: Needed\\
 {\bf Key Attribute}: Dexterity\\
 {\bf Special}: For each 5 {\it Acrobatics} graduations the creature receives +1 bonus on his AC.
@@ -1655,9 +1657,11 @@ Rolls {\it Appraise} agains't the {\it goods difficulty (DC)}. If fail, the esti
 The Art of the Escape's perit is able to escape from the most diverse normal ways that can imprision him.\\
 {\bf Test}\\
 Depending from how the creature was imprisioned, it rolls a test of difficulty:\\
-{\it Cords}: The difficulty is the result of the "Operate Mechanic Objects" of the creature that tied him;\\
-{\it Handcuffs}: Difficulty of 25 to 35, depending of how the creature was tied and of handcuff's quality;\\
-{\it Super Trolley Glue}: Difficulty 50. If fail by 5 or more, the target will receive 1d6 physical damage. If there's hot water near, the test will have a +2 bonus.\\
+\begin{itemize}
+\item{{\it Cords}: The difficulty is the result of the "Operate Mechanic Objects" of the creature that tied him;}
+\item{{\it Handcuffs}: Difficulty of 25 to 35, depending of how the creature was tied and of handcuff's quality;}
+\item{{\it Super Trolley Glue}: Difficulty 50. If fail by 5 or more, the target will receive 1d6 physical damage. If there's hot water near, the test will have a +2 bonus.}
+\end{itemize}
 {\bf Training}: Not\\
 {\bf Key Attribute}: Dexterity
 
@@ -1676,6 +1680,18 @@ Rolls {\it Balance} against the difficulty:\\
 {\bf Training}: Not Needed\\
 {\bf Key Attribute}: Dexterity
 
+\subsection{Bizarre Cloths}
+\includegraphics{../data/skills/Img/roupasbizarras.png}
+It measure the capacity of a creature to wear the most bizarre things and call it 'Cloth'.\\
+{\bf Test}\\
+Rolls {\it Bizarre Clothes} against the difficulty varing from the bizarrity of the cloth. Some types of clothes only can be used by high skilled creatures.\\
+\begin{itemize}
+\item{Rags: Difficulty 20}
+\item{Bag of Potatos: Difficulty 18}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: (-1)*Intelligence\\
+
 \subsection{Bluff} 
 \includegraphics{../data/skills/Img/blefar.png}
 The organism mastered at this skill is capable to fool the expertest teacher.\\
@@ -1693,17 +1709,42 @@ Rolls the creature's {\it Bohemia} level against how cantankerous it is the loca
 {\bf Key Attribute}: Charism\\
 {\bf Special}: A creature with some {\it Bohemia} graduation don't need train to gain level at Drink.
 
+\subsection{Bribe}
+\includegraphics{../data/skills/Img/suborno.png}
+This skill measures how good you are to 'buy' people, getting some favors in exchange of money or other material stuff.\\
+{\bf Test}\\
+Rolls {\it Bribe} against the target's {\it See Lies}. If success, he can bribe the target at a rational quantity depending of the situation (you can't bribe a Federal Police Agent with a candy).\\
+{\bf Training}: Needed\\
+{\bf Key Attribute}: Inteligence\\
+{\bf Special}: Greater the offered bribe, lesser is the difficulty of the test.
+
 \subsection{Burglarize}
 \includegraphics{../data/skills/Img/arrombar.png}
 The organism graduated in this skill is able to burglarize locks, unlock doors, safes and similars.\\
 {\bf Test}\\
-The organism rolls against the dificulty of the target object.\\
-{\it Sister's Quest Book: 5\\
-Coat Rooms: 10\\
-Room's Door: 15\\
-Federal Strong Chest: 90}\\
+The organism rolls against the dificulty of the target object:\\
+\begin{itemize}
+\item{Sister's Quest Book: 5}
+\item{Coat Rooms: 10}
+\item{Room's Door: 15}
+\item{Federal Strong Chest: 90}
+\end{itemize}
 {\bf Training}: Needed\\
 {\bf Key Attribute}: Dexterity\\
+
+\subsection{Climb}
+\includegraphics{../data/skills/Img/escalar.png}
+Measure the organism's capacity to climb accented surfaces.\\
+{\bf Test}
+Rolls a {\it Climb} test against the difficulty:\\
+\begin{itemize}
+\item{An easy climb wall: Difficulty 5}
+\item{A rock with cavities that can serve as support: Difficulty 15}
+\item{A plain wall with rare and small cracks: Difficulty 25}
+\end{itemize}
+For each number greater than the difficulty, the creature can climb 1 meter, can't climbing more than his displacement. If the creature fail the test for less than 5 numbers, he'll remains at the same place. If fails for more than 5, he'll fall as ripe mango on the ground, but may do a test of {\it reflexes} to attempt to hold for each drop of 3 meters. If he had a critical fail, will fall his head on the ground without any {\it reflexes} check.
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Strength\\
 
 \subsection{Conduction(Vehicle)}
 \includegraphics{../data/skills/Img/conducao.png}
@@ -1713,11 +1754,24 @@ Rolls the conduction level, against the maneuver difficulty.\\
 \begin{itemize}
 \item{Drive alone on the road: Difficulty 10}
 \item{Drive at rush hour: Difficulty 15}
-\item{Narrow Park: Dificuldade 25 (decreasing 1 at each fail)}
+\item{Narrow Park: Difficulty 25 (decreasing 1 at each fail)}
 \end{itemize}
 {\bf Training}: Needed\\
 {\bf Key Attribute}: Wisdow\\
 {\bf Special}: The creature can take this skill many times, adding a vehicle each time.
+
+\subsection{Counterfeit}
+\includegraphics{../data/skills/Img/falsificar.png}
+Is used to make false copies of something, like director's signatures or teacher's points notes.\\
+{\bf Test}
+Rolls a {\it Counterfeit} test (when the copy is made) against the {\it Counterfeit} of the target to be tricked. Some modifiers apply:\\
+\begin{itemize}
+\item{Document unknown by the reader: -3}
+\item{Document somewhat known by the reader: 0}
+\item{Document known by the reader: +3}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Intelligence\\
 
 \subsection{Diplomacy}
 \includegraphics{../data/skills/Img/diplomacia.png}
@@ -1748,6 +1802,50 @@ Rolls drink against a difficulty of 10 + alcoholic content of the beverage perce
 {\bf Key Attribute}: Constitution\\
 {\bf Special}: For each 3 success swallowed "doses", add 1 point to all social tests with other drunk creatures. If he fail on a test, will vomit, increasing the diffuculty of social tests by 5 points (per vomit).
 
+\subsection{Foot on Man's Genitals}
+\includegraphics{../data/skills/Img/penosaco.png}
+People who have the capacity to make you feel, while talking to them, like if a foot was put at your genitals.\\
+{\bf Test}\\
+Rolls a {\it Foot on Man's Genitals} against the {\it Difficulty 10 + Creature's Level + Creature's Wisdow Modifier}. At success, the creature was so boring, that someone near him is too far away now.\\
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: (-1)*Charism\\
+
+\subsection{Free-Pass}
+\includegraphics{../data/skills/Img/passelivre.png}
+Is the hability to realize any ilegal thing without suffer retaliations from the responsibles authorities. Free-Pass serves to walk on restricted areas or walk with heavy guns.\\
+{\bf Test}\\
+Rolls {\it Free-Pass} against the difficulty to how much out-of-law the creature is:
+\begin{itemize}
+\item{Enter the staff room to eat their food: Difficulty 15}
+\item{Walk to the class with a rocket launcher: Difficulty 25}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Charism
+
+\subsection{Furtive}
+\includegraphics{../data/skills/Img/furtividade.png}
+Is the organism's capacity to pass at some areas without making sounds.\\
+{\bf Test}
+Rolls {\it Furtive} against the {\it Listen} of the target. In case of success, the target won't percept the creature by sounds. Is obvious that walk in silence at the front of a person isn't the most clever atitude. This skill is well used with {\it Hide}. Also, some modifiers apply:
+\begin{itemize}
+\item{Walk on pieces of glass: -4}
+\item{Walk on a rubber surface: +2}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Dexterity
+
+\subsection{Get Information}
+\includegraphics{../data/skills/Img/obterinf.png}
+This skill is used to gain restricted informations. It's not so strange to understand.\\
+{\bf Test}\\
+Rolls {\it Get Information} against the difficulty to get the desired information:\\
+\begin{itemize}
+\item{Discover what means anamabeka: Difficulty 10}
+\item{Discover what is Anamabeka: Difficulty 15}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Wisdow\\
+
 \subsection{Heal}
 \includegraphics{../data/skills/Img/curar.png}
 The organism with points at this skill is capable to heal by normal ways, from stop an hemorragy to treat a sickness.\\
@@ -1763,71 +1861,26 @@ Rolls a {\it Heal} test against the difficulty:\\
 {\bf Key Attribute}: Wisdow\\
 {\bf Special}: The heal needs curative material to be done.
 
-\subsection{Escalar}
-\includegraphics{../data/skills/Img/escalar.png}Mede a capacidade do organismo de escalar superfícies íngremes.\\
-{\bf Teste}
-Rola-se um teste de {\it Escalar} contra {\it Dificuldade variável:}\\
-{\it 
-Uma parede propria para escalada:                      Dificuldade 5\\
-Um rochedo com frestas que podem servir de apoio:      Dificuldade 15\\
-Um paredão liso com raras e pequenas rachaduras:       Dificuldade 25}\\
-A cada número que o alvo superar a Dificuldade, ele subirá 1 metro, não podendo subir mais que a metade do seu deslocamento normal. Caso o organismo falhe no teste por menos que 5 números, ele se manterá imóvel, caso falhe por mais que 5 números, ele despencará como manga madura no chão, mas poderá realizar um teste de reflexos para cada 3m de queda para tentar se segurar. Caso tenha uma falha crítica, cairá de cabeça no chão sem direito a teste de reflexos.\\
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Força\\
-                                       
+\subsection{Hide}
+\includegraphics{../data/skills/Img/esconder.png}
+Is the skill to put yourself on a buch or hide at the shadows, with the aim to not be spoted.\\
+{\bf Test}\\
+Rolls a {\it Hide} test against the {\it Observe} of the target creature. In case of succes, the target can hide from that target. Some bonus and penalties can apply:\\
+\begin{itemize}
+\item{Dark Alley:  +5}
+\item{Under the midday sunlight: -5}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Dexterity\\
 
-\subsection{Esconder-se}
-\includegraphics{../data/skills/Img/esconder.png}É a habilidade do organismo de se meter em muitas ou esconder-se nas sombras, com o propósito de não ser notado.\\
-{\bf Teste}\\
-Rola-se um teste de {\it Esconder-se} contra um teste de {\it Observar} do organismo alvo. Caso obtenha sucesso, o alvo conseguiu se esconder daquele alvo. Bônus e penalidades são aplicados de acordo com a situação\\
-{\it 
-Beco escuro:                    +5\\
-Debaixo do sol do meio dia:     -5}\\
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Destreza\\
-
-\subsection{Esportes}
-\includegraphics{../data/skills/Img/nadar.png}Essa perícia mede o quão bom o organismo é em todos os esportes, sem distinção; afinal de contas, quem é muito bom em esportes, tende a não ser bom em mais nada.\\
-{\bf Teste}: Teste-se Esportes contra o nível de dificuldade variando de acordo com a tarefa. Atividades relacionadas também podem utilizar-se desse teste (por exemplo, um teste de salto, uma vez que basquete utiliza-se de saltos).\\
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Destreza
-
-
-\subsection {Falar Idioma}
-\includegraphics{../data/skills/Img/falaridioma.png}O organismo graduado em Falar Idioma é capaz de falar um idioma adicional. Isto vale para cada ponto de graduação obtido na perícia.\\
-{\bf Teste}
-Testes são raros, apenas aplicados caso o organismo queira identificar o sotaque(variação de regiões de determinado país) ou entender o que o alvo disse caso ele fale rápido ou emboladamente.\\
-{\bf Treinamento}: Necessário\\
-{\bf Habilidade Chave}: Inteligência\\
-
-
-\subsection {Falsificar}
-\includegraphics{../data/skills/Img/falsificar.png}É usado para criar cópias falsas de alguma coisa, como a assinatura do reitor ou o caderno de notas de um professor.\\
-{\bf Teste}
-Realiza-se um teste de {\it Falsificar} (assim que a cópia falsa é produzida) contra o {\it Falsificar do alvo} a ser enganado. Caso obtenha sucesso, a cópia será dada como original por aquele alvo. Alguns modificadores se aplicam:\\
-{\it Documento desconhecido pelo leitor             -3\\
-Documento pouco conhecido pelo leitor         0\\
-Documento conhecido pelo leitor                   +3\\}
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Inteligência\\
-
-
-\subsection{Furtividade}
-\includegraphics{../data/skills/Img/furtividade.png}É a capacidade do organismo de passar por determinadas áreas sem emitir nenhum tipo de som.\\
-{\bf Teste}
-Rola-se {\it Furtividade} contra um teste de {\it Ouvir} da pessoa do qual o organismo deseja passar despercebida. Caso obtenha sucesso, o alvo não notará a sua presença através de ruídos. É óbvio que passar silenciosamente na frente de um monitor não é muito inteligente. Esta perícia é bem utilizada em conjunto com {\it Esconder-se}. Modificadores se aplicam dependendo da situação:\\
-{\it Caminhar sobre cacos de vidro                       -4\\
-Caminhar sobre chão de borracha                   +2\\}
-{\bf Treinamento}: Não necessário\\
-{\bf Habilidade Chave}: Destreza
-
-\subsection{Intimidar}
-\includegraphics{../data/skills/Img/intimidar.png} Mede a capacidade do organismo de, através de gestos, palavras ou exibição de Força bruta, obrigar um alvo a agir de acordo com suas ordens por um turno. Esta habilidade, porém, não serve para controlar diretamente a Não Sou Bobo do alvo, sendo utilizada apenas para se conseguir pequenas regalias, como por exemplo fazer um aluno te dar o exercício para copiar ou a dona da lanchonete dar um desconto no cachorro quente.\\
-{\bf Teste}
-Testa-se {\it Intimidar} contra o {\it Não Sou Bobo} do alvo. Caso obtido for um sucesso, o alvo agirá no próximo turno de acordo com o desejado, dentro dos padrões da perícia.\\
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Carisma\\
-{\bf Especial}: Caso o organismo deseje utilizar-se de seus dotes físicos, o modificador de {\it Força} é aplicado ao invés do de {\it Carisma}.\\
+\subsection{Intimidate}
+\includegraphics{../data/skills/Img/intimidar.png}
+Measures the capacity to, throught gestures, words or strenght exhibition, compel the target to act in accordance with yours orders. This skill don't let you directally control the will of a target. It's only used to assure exemptions, like make a student let you copy its exercises or make the snack-barwoman give a discount on a hot-dog.\\
+{\bf Test}
+Rolls a {\it Intimidate} test against the {\it I Am Not A Fool} of the target. If success, the target will act at next turn according the desired.\\
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Charism\\
+{\bf Special}: If the creature desires to intimidate by his strength, the {\it strength} modifier is used instead of the {\it Charism} one.
 
 \subsection{Knowledge: (General)}
 \includegraphics{../data/skills/Img/cnhgeral.png}
@@ -1845,133 +1898,139 @@ People who has this knows everything about suffer (but in the normal case don't 
 {\bf Key Attribute}: (-1)*(Charism)\\
 {\bf Special}: For each 4 graduations on this skill, the creature receives +1 on {\it foritude}.
 
-\subsection{Montar} \includegraphics{../data/skills/Img/montar.png}Quem sabe montar dificilmente cairá de um ente de guerra quando estiver sobre ele. Esta perícia é utilizada para montar qualquer criatura.\\
-{\bf Teste}
-Rola-se o teste de montar contra a Dificuldade necessária para realizar ações sobre o animal montado:\\
-{\it 
-Fazer o Animal Mover-se: Dificuldade 6\\
-Empinar o Animal: Dificuldade 15\\
-Controlar o Animal em Combate: Dificuldade 19\\
-Controlar o Animal com os Joelhos: Dificuldade 6\\
-Saltar: Dificuldade 16\\
-Montar ou Desmontar Velozmente: Dificuldade 19\\}
-{\bf Especial}: Montar sem sela dá -5 nos testes em Montar. Animais menores são mais fáceis de montar e controlá-los em combate, com modificações a encargo do mestre. Os exemplos dados são para o organismo montando um cavalo. Exemplos de modificadores que se aplicam a todos os testes:\\
-{\it Ameiva - Dificuldades diminuem em 5\\
-Ente - Dificuldades aumentam em 5}
-
-\subsection{Observar}
-\includegraphics{../data/skills/Img/observar.png}
- É a acuidade visual possuida pelo organismo, tanto para conseguir enxergar a longas distâncias quanto para discernir detalhes específicos em um objeto ou uma cena. É a perícia utilizada como contra-perícia para {\it Esconder-se}.\\
-{\bf Teste}\\
-Testa-se {\it Observar} contra {\it Esconder-se}. Em caso de sucesso, o organismo enxergou aquele que tentava se esconder. Em situações normais, testa-se {\it Observar} contra a {\it Dificuldade em questão}.\\
-{\it Notar que a puta da Afonso Pena é homem:    Dificuldade 10\\
-Ler os lábios de alguem falando seu idioma:  Dificuldade 20\\
-Enxergar uma ameiva ladina caminhando discretamente:  Dificuldade 35}\\
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Sabedoria\\
-{\bf Especial}: Quando o organismo entrar em faixa etária avançada, este receberá -5 em seus testes de {\it Observar}.\\
-
-\subsection{Obter Informações}
-\includegraphics{../data/skills/Img/obterinf.png}
- Esta é a perícia usada para o organismo conseguir obter informações. Não é tão complicado assim entendê-la...\\
-{\bf Teste}\\
-Testa-se {\it Obter Informações} contra a {\it dificuldade} adequada de acordo com a informação desejada.\\
-{\it Descobrir o que é anamabeka              Dificuldade 10\\
-Descobrir o que é a Anamabeka           Dificuldade 15}\\
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Sabedoria\\
-
-
-\subsection{Operar Objetos Eletrônicos}
-\includegraphics{../data/skills/Img/opobjele.png}
- É a capacidade do organismo operar ou consertar mecanismos eletrônicos(ou que, de alguma forma, consumam energia elétrica) sem tomar um choque e perder 70\% do seu cérebro ou explodir o objeto em questão.\\
-{\bf Teste}\\
-Testa-se {\it Operar Objetos Eletrônicos} contra uma {\it dificuldade relativa ao objeto} em questão.\\
-{\it Trocar uma lâmpada     Dificuldade 5\\
-Programar o relógio do VCR  Dificuldade 18\\
-Arrumar um microondas       Dificuldade 20\\
-Consertar o anamabaixo de modo que ele fique tocável          Dificuldade 79}\\
-{\bf Treinamento}: Necessário\\
-{\bf Habilidade Chave}: Inteligência\\
-
-\subsection{Operar Objetos Mecânicos}
-\includegraphics{../data/skills/Img/opobjmec.png}
- É a capacidade do organismo operar ou consertar objetos mecânicos sem perder um dedo ou a mão.\\
-{\bf Teste}\\
-Testa-se {\it Operar Objetos Mecânicos} contra uma dificuldade relativa ao objeto em questão.\\
-{\it Consertar uma porta emperrada            Dificuldade 5\\
-Consertar um motor                        Dificuldade 20\\}
-{\bf Treinamento}: Necessário\\
-{\bf Habilidade Chave}: Inteligência\\
-
-\subsection{Ouvir}
+\subsection{Listen}
 \includegraphics{../data/skills/Img/ouvir.png}
- É quão bem o organismo é capaz de ouvir e discernir sons. É também a contra-perícia de {\it Furtividade}.\\
-{\bf Teste}\\
-Testa-se {\it Ouvir contra Furtividade} do alvo. Caso resulte em um sucesso, o organismo furtivo terá sido descoberto. Em situações normais, testa-se {\it Ouvir} contra a dificuldade da situação.\\
-{\it Escutar um trio-elétrico a um quarteirão      Dificuldade 2\\
-Discernir 3 músicas tocadas ao mesmo tempo         Dificuldade 10\\
-Escutar o baixo em Canção do Caos                  Dificuldade 47\\}
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Sabedoria\\
-{\bf Especial}: Ao atingir idade avançada ele receberá -5 em seus testes de {\it Ouvir}.
+The so good that an organism can listen and discern sounds. It is the counter-skill to {\it Furtive}.\\
+{\bf Test}\\
+Rolls a {\it Listen} test against the target's {\it Furtive}. If success, the furtive creature is discovered. At usual situations, rolls {\it Listen} against the difficulty:\\
+\begin{itemize}
+\item{Listen to a sound truck at the quarter: Difficulty 2}
+\item{Undestand 3 musics played at the same time: Difficulty 10}
+\item{Listen to the bass at Chaos Song: Difficulty 47}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Wisdow\\
+{\bf Special}: At high ages, the creature will receive -5 penalty at all {\it Listen} tests.
+
+\subsection{Medical 'Loud Mouth'}
+\includegraphics{../data/skills/Img/tagarelice.png}
+The character can talk in an way fully unrecognizable to those that not know this skill, making use only from words deriving from the 'Little medician dictionary'.\\
+{\bf Test}\\
+The creature rolls a {\it Medical 'Loud Mouth'} test against the target's {\it Intelligence}. If success, the target can't talk about anything else to the rest of the round.\\
+{\bf Training}: Needed\\
+{\bf Key Attribute}: Intelligence\\
+
+\subsection{Observe}
+\includegraphics{../data/skills/Img/observar.png}
+Is the visual acuidate of an organism to view far  distances or to discern details from an object or scene. It's the counter-skill of {\it Hide}.\\
+{\bf Test}\\
+Rolls {\it Observe} against {\it Hide}. In success, the creature see those that tried to hide.  At normal situations, rolls {\it Observe} against dificulties:\\
+\begin{itemize}
+\item{Discover that that Afonso Penna bitch is a man: Difficulty 10}
+\item{Read the lips of someone speaking your language:  Difficulty 20}
+\item{See an rogue ameiva walking on the shadows: Difficulty 35}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Wisdow\\
+{\bf Special}: When the creature is at high age, will receive -5 at all {\it observe} tests.\\
+
+\subsection{Operate Eletronic Object}
+\includegraphics{../data/skills/Img/opobjele.png}
+Is the capacity to operate or fix eletronic objects without taking eletric shocks and lose 70 percent of your brain or explode the object (and yourself).\\
+{\bf Test}\\
+Rolls a {\it Operate Eletronic Object} against the object/action difficulty:
+\begin{itemize}
+\item{Change a Lamp: Difficulty 5}
+\item{Program the VCR clock: Difficulty 18}
+\item{Fix a microwave: Difficulty 20}
+\item{Fix the anamabass to a playable state: Difficulty 79}
+\end{itemize}
+{\bf Training}: Needed\\
+{\bf Key Attribute}: Intelligence\\
+
+\subsection{Operate Mechanic Object}
+\includegraphics{../data/skills/Img/opobjmec.png}
+Is the capacity to operate or fix mechanical objects without loss a finger or a hand.\\
+{\bf Test}\\
+Rolls a {\it Operate Mechanic Object} test against the relative difficulty to the action.\\
+\begin{itemize}
+\item{Fix a blocked door: Difficulty 5}
+\item{Fix a motor: Difficulty 20}
+\end{itemize}
+{\bf Training}: Needed\\
+{\bf Key Attribute}: Intelligence\\
+
+\subsection{Out of Time}
+\includegraphics{../data/skills/Img/semtempo.png}
+People with it can't make all normal things in live, 'cause their graduation don't let! (Can be a glorious excuse to not to something).\\
+{\bf Test}\\
+Rolls {\it Out of Time} against the difficulty according to the importance level of the out of time excuse. In case of success, the creature don't need to do the undesirable thing.\\
+\begin{itemize}
+\item{Don't do a boring work: Difficulty 15}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Wisdow\\
+{\bf Special}: Only creatures above level 2 can take points at this skill.\\
+
+\subsection{Perform} 
+\includegraphics{../data/skills/Img/performar.png}
+Those who knows the art to perform is able to participate on little theaters at the street or join a lot of vacated persons to see they make something banal. Perform perits DON'T know how to play musical instruments.\\
+{\bf Test}\\
+Rola-se um teste de perícia contra uma Difficulty Variável, dependendo da ação desejada:
+\begin{itemize}
+\item{Perform Reasonably: Difficulty 15}
+\item{Attract a group of idle people to see you: Difficulty 20}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Charism\\
+{\bf Special}: For any successm the creature will receive R\$1,00 of the audience for impressing them. For each people at a 6 meters radius, the difficulty to attract the group of idle people is decreased by 1.
+
+\subsection{Play Instrument}
+\includegraphics{../data/skills/Img/tocarinst.png}
+Is the capacity to play a musical instrument. The instrument is anything that can produce at last 7 distinct notes.\\
+{\it Test}
+Rolls a {\it Play Instrument} against a difficulty 20. Each number above 20 is equal to a {\it presentation above the mean}. Each number bellow 20 means a {\it presentation bellow expectatives}.\\
+{\bf Training}: Needed\\
+{\bf Key Attribute}: Dexterity\\
+
+\subsection{Prestidigitation}
+\includegraphics{../data/skills/Img/prestidig.png}
+Is the  skill used to steal little objects that are with someone or at somewhere observed by a lot of people.\\
+{\bf Test}\\
+Rolls {\it Prestidigitation} against the {\it Observe} of the object's owner to be stoled or the observer. The success will depend of the object's localization.\\
+\begin{itemize}
+\item{Steal a book at someone's table: Difficulty Owner's {\it Observe}}
+\item{Roubar uma carteira do bolso traseiro: Difficulty 15}
+\end{itemize}
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Dexterity\\
 
 \subsection{Professional Speech}
 \includegraphics{../data/skills/Img/discursoprof.png}
 Measures the fluency and eloquency of the character's usual words.\\
 {\bf Test}\\
-Rolss a {\it Professional Speech} test against a test of {\it I Am Not A Fool} of the rookie in question. If obtain a success by 25 or more, the rookie   Caso obtenha um sucesso por 25 ou mais, o calouro se sentirá impelido a pegar pelo menos um nível de classe equivalente à classe do organismo que realizou o Discurso Profissional.\\
-{\bf Treinamento}:Necessário\\
-{\bf Habilidade Chave}:Sabedoria\\
+Rolls a {\it Professional Speech} test against a test of {\it I Am Not A Fool} of the rookie in question. If obtain a success by 25 or more, the rookie   Caso obtenha um sucesso por 25 ou mais, o calouro se sentirá impelido a pegar pelo menos um nível de classe equivalente à classe do organismo que realizou o Discurso Profissional.\\
+{\bf Training}:Needed\\
+{\bf Key Attribute}:Sabedoria\\
 
-\subsection{Passe Livre}
-\includegraphics{../data/skills/Img/passelivre.png}
- É a habilidade de realizar quaisquer atitudes ilegais sem sofrer represália das autoridades responsáveis. Passe livre serve tanto para andar em áreas restritas a funcionários sem que uma autoridade o impeça como para carregar visivelmente armas que possam causar pânico ou tumulto, como lança mísseis ou granadas.\\
-{\bf Teste}\\
-Rola-se {\it Passe Livre} contra a {\it dificuldade} equivalente ao quão errado o organismo possa estar;\\
-{\it 
-Enterar na sala dos professores pra comer seu lanche:   Dificuldade 15\\
-Carregar uma bazuca para a sala de aula:               Dificuldade 25\\
-}
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Carisma
-
-\subsection{Pé-No-Saco}
-\includegraphics{../data/skills/Img/penosaco.png}Capacidade de uma pessoa ser um porre, verdadeiro espírito de porco.\\
-{\bf Teste}\\
-Rola-se {\it Pé-No-Saco} contra a {\it Dificuldade 10 + Nível do Perseguidor + Modificador de Sabedoria do Perseguidor}. Caso obtenha um sucesso, o organismo foi tão esparrento que quem estava atrás dele por qualquer razão que fosse, desistiu da idéia.\\
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: (-1)*Carisma\\
-
-\subsection{Performar} 
-\includegraphics{../data/skills/Img/performar.png}Quem sabe a arte de performar é capaz de participar de teatrinhos por aí ou juntar um aglomerado de àtoas para vê-lo realizar algo banal e idiota. Peritos em Performar NÃO sabem tocar instrumentos músicais, necessitando da perícia Usar Instrumento Musical para tal.\\
-{\bf Teste}\\
-Rola-se um teste de perícia contra uma Dificuldade Variável, dependendo da ação desejada:\\
-{\it Atuar Descentemente: Dificuldade 15\\
-Reunir um Grupo de Atoas Para te Olhar: Dificuldade 20\\}
-{\bf Treinamento}: Não\\
-{\bf Habilidade Chave}: Carisma\\
-{\bf Especial} A cada número que o sucesso for superado, o organismo receberá 1 real de sua platéia por impressioná-los. A cada pessoa acima de 10 que estiverem presentes em um raio de 6m do organismo, a dificuldade para Reunir um Grupo de Atoas é diminuída em 1.
-
-\subsection{Prestidigitação}
-\includegraphics{../data/skills/Img/prestidig.png}
- É a perícia usada para surrupiar pequenos objetos, estando eles sendo portados por alguém ou dando bobeira em um local observado por pessoas.\\
-{\bf Teste}\\
-Testa-se {\it Prestidigitação} contra o {\it Observar} do dono do objeto a ser surrupiado ou observador do mesmo. Caso não esteja sendo visto, o sucesso dependerá da localização do objeto.\\
-{\it Surrupiar um livro sobre a mesa de alguem       Dificuldade Observar do dono do livro\\
-Roubar uma carteira do bolso traseiro              Dificuldade 15\\}
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Destreza\\
-
-\subsection{Roupas Bizarras}
-\includegraphics{../data/skills/Img/roupasbizarras.png}Mede a capacidade de um personagem em vestir as coisas mais bizarras e chamá-las de "Roupas".\\
-{\bf Teste}\\
-Rola-se {\it Roupas Bizarras} contra a {\it Dificuldade variável} de acordo com a bizarrice da roupa. Alguns tipos de roupas só podem ser usados por organismos com altos níveis nesta perícia.\\
-{\it
-Trapos:                Dificuldade 20\\
-Saco de Batatas:       Dificuldade 18}\\
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: (-1)*Inteligência\\
+\subsection{Ride Animals}
+\includegraphics{../data/skills/Img/montar.png}
+Those who knows how to ride animals, hardly will fall from an War Ente. This  skill is used to ride any creature.\\
+{\bf Test}
+Rolls a {\it Ride Animals} test against the difficulty to ride the animal to:\\
+\begin{itemize}
+\item{Make the Animal move: Difficulty 6}
+\item{Raise the Animal: Difficulty 15}
+\item{Control the Animal in Battle: Difficulty 19}
+\item{Control the Anmial with your knees: Difficulty 6}
+\item{Jump: Difficulty 16}
+\item{Ride or Unhide quickly: Difficulty 19}
+\end{itemize}
+{\bf Special}: Ride without saddle gives -5 to the {\it Ride Animals} tests. Little animals are usually easy to ride. The above examples are to a creature riding a horse, for other animals, modifiers to the above difficulties aplly:\\
+\begin{itemize}
+\item{Ameiva - Difficulties decrease by 5}
+\item{Ente - Difficulties increase by 5}
+\end{itemize}
 
 \subsection{See Lies}
 \includegraphics{../data/skills/Img/desmentir.png}
@@ -1979,38 +2038,21 @@ This skill is tested when the creature is being cheated. You can resist a Bluff 
 {\bf Training}: Not Needed\\
 {\bf Key Attribute}: Wisdow\\
 
-\subsection{Sem Tempo}
-\includegraphics{../data/skills/Img/semtempo.png}Pessoas com isto não podem fazer coisas normais da vida porque seu curso não deixa tempo hábil. (Pode ser uma gloriosa desculpa para não se fazer algo que não se estaja a fim de fazer).\\
-{\bf Teste}\\
-Rola-se Sem Tempo contra a dificuldade variável com o nível de importância da questão proposta ao organismo. Caso obtenha sucesso, este não precisará realizar o feito.\\
-{\it
-Deixar de fazer um trabalho chato:   Dificuldade 15}\\
-{\bf Treinamento}: Não Necessário\\
-{\bf Habilidade Chave}: Sabedoria\\
-{\bf Especial}: Apenas organismos acima do nível 2 poderão comprar pontos nesta perícia\\
+\subsection{Speak Language}
+\includegraphics{../data/skills/Img/falaridioma.png}
+The organism with this skill is able to talk an aditional language for each point on it.\\
+{\bf Test}
+Tests are rare, only when the creature desires to identify the accent or if the target talks quickly or strangely.\\
+{\bf Training}: Needed\\
+{\bf Key Attribute}: Intelligence\\
 
-\subsection{Suborno}
-\includegraphics{../data/skills/Img/suborno.png}É quão bom o organismo é em "comprar" os demais, conseguindo algumas regalias em troca de dinheiro ou outros bens materiais.\\
-{\bf Teste}\\
-Testa-se o nível de Suborno contra o Desmentir do alvo. Caso o organismo tenha sucesso, ele conseguirá subornar o alvo, em uma quantia racional, que depende da situação (você não subornaria um Policial Federal com uma bala).\\
-{\bf Treinamento}: Necessário\\
-{\bf Habilidade Chave}: Inteligência\\
-{\bf Especial}: Quanto maior o valor oferecido no suborno, menor será a dificuldade do teste.
-
-\subsection{Tagarelice Medicinal}
-\includegraphics{../data/skills/Img/tagarelice.png}O personagem pode falar de maneira completamente irreconhecível aos que não possuam esta perícia, utilizando-se apenas de palavras oriundas do "Dicionário do Pequeno Médico e afins".\\
-{\bf Teste}\\
-O organismo em questão rola um teste de {\it Tagarelice Medicinal} contra um teste de {\it Inteligência} do alvo. Caso resulte em um sucesso, o alvo estará impedido de introduzir qualquer outro assunto durante o restante da rodada.\\
-{\bf Treinamento}:Necessário\\
-{\bf Habilidade Chave}: Inteligência\\
-
-\subsection{Tocar Instrumento(Instrumento em Questão)}
-\includegraphics{../data/skills/Img/tocarinst.png}
- É quão bem o organismo é capaz de tocar um instrumento musical. O instrumento em questão pode ser qualquer coisa que seja capaz de produzir pelo menos 7 notas distintas.\\
-{\it Teste}
-Testa-se {\it Tocar Instrumento(Instrumento em Questão)} contra uma dificuldade 20. Cada número acima de 20 equivale a uma {\it apresentação acima do mediano}, cada número abaixo equivale a uma apresentação abaixo das espectativas.\\
-{\bf Treinamento}: Necessário\\
-{\bf Habilidade Chave}: Destreza\\
+\subsection{Sports}
+\includegraphics{../data/skills/Img/nadar.png}
+This skill measures how good the thing is on sports, without any kind of distinction; Surelly, those good on sports, usually aren't good on any more thing.\\
+{\bf Test}
+Rolls a {\it Sports} test against the difficulty of the action. Related activities also can use this test (for example a jump test, since basketball use jumps).\\
+{\bf Training}: Not Needed\\
+{\bf Key Attribute}: Dexterity
 
 \subsection{Taylor's Vealty}
 \includegraphics{../data/skills/Img/bovinice.png}
@@ -2024,20 +2066,26 @@ Rolls {\it Taylor's Vealty} against the {\it Difficulty of the har work}. If suc
 \includegraphics{../data/skills/Img/adestrar.png}
 The organism graduated with this skill is able to teach and be likeable with
 animals and/or similars.\\
-{\bf Test}\\
-{\it Teach Little Animals}: It takes some time to teach an animal do something.
+{\bf Test}
+\begin{itemize}
+\item{{\it Teach Little Animals}: It takes some time to teach an animal do something.
 The creature need to make tests until exceed the {\it Teach Difficulty}. A
 critial fail will arouse the animal to do insane acts of violence up to its
-death.\\
-{\it Ameiva: Difficulty 50\\
-Ratazana: Difficulty 60\\
-Ente: Difficulty 80\\}
-{\it Calm down Maniacs}: This skill can be used to calm down Skinhead Maniacs at {\it Insane Fury} effects. The difficulty to it is: 25 + Skinhead Maniac's {\it Life Dice}.\\
-{\it Calm down Little Animals}: This skill also can be used to calm down animals that, for some reason, is desperate. For example, animals not used to battles can panic at some situations.\\
-{\it Ameiva: Difficulty 15\\
-Ratazana: Difficulty 20\\
-Ente: Difficulty 30}\\
-*Ameivas of War, Ratazanas of War and Entes of War don't suffer from panic effects, one time they born at blood and chaos places. Also, for the other {\bf "of War"} animals versions.\\
+death.}
+\begin{itemize}
+\item{Ameiva: Difficulty 50}
+\item{Ratazana: Difficulty 60}
+\item{Ente: Difficulty 80}
+\end{itemize}
+\item{{\it Calm down Maniacs}: This skill can be used to calm down Skinhead Maniacs at {\it Insane Fury} effects. The difficulty to it is: 25 + Skinhead Maniac's {\it Life Dice}.}
+\item{{\it Calm down Little Animals}: This skill also can be used to calm down animals that, for some reason, is desperate. For example, animals not used to battles can panic at some situations.}
+\begin{itemize}
+\item{\it Ameiva: Difficulty 15}
+\item{Ratazana: Difficulty 20}
+\item{Ente: Difficulty 30}
+\end{itemize}
+{\it *Ameivas of War, Ratazanas of War and Entes of War don't suffer from panic effects, one time they born at blood and chaos places. Also, for the other "of War" animals versions.}
+\end{itemize}
 {\bf Training}: Needed\\
 {\bf Key Attribute}: Charism
 
