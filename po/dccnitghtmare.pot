@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-01-13 15:46-0200\n"
+"POT-Creation-Date: 2008-01-18 09:36-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2074,11 +2074,11 @@ msgid ""
 msgstr ""
 
 #: data/skills/escalar.ski:1
-msgid "Scale"
+msgid "Climb"
 msgstr ""
 
 #: data/skills/escalar.ski:2
-msgid "Measure the organism's capacity to scale accented surfaces."
+msgid "Measure the organism's capacity to climb accented surfaces."
 msgstr ""
 
 #: data/skills/esconder.ski:1
