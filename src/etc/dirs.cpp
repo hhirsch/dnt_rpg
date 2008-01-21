@@ -43,7 +43,13 @@ void dirs::findDataDirectories()
 
 }
 
-
+/*********************************************************************
+ *                             getRealFile                           *
+ *********************************************************************/
+string dirs::getRealFile(string file)
+{
+   return(dataPath + file);
+}
 
 string dirs::dataPath = "";
 

@@ -15,10 +15,10 @@ class dirs
        *  state, so try at the DATADIR, if still not found, we must have an error) */
       void findDataDirectories();
 
-      /*! Get the real path of an internal file path
+      /*! Get the real path and file of an internal file path
        * \param directory -> internal file path
        * \return -> string with the real path of the file */
-      string getPath(string fileName);
+      string getRealFile(string fileName);
 
    protected:
       static string dataPath; /**< Current Data Path */
