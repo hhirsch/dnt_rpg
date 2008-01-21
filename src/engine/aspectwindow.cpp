@@ -3,6 +3,7 @@
  *************************************************************************/
 
 #include "aspectwindow.h"
+#include "../etc/userinfo.h"
 
 /**************************************************************
  *                          Constructor                       *
@@ -40,9 +41,10 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    intWindow->getObjectsList()->insertTextBox(20,83,54,101,1,"");
 
    /* Name Text */
+   userInfo user;
    intWindow->getObjectsList()->insertTextBox(72,20,112,34,1,gettext("Name:"));
    textName = intWindow->getObjectsList()->insertTextBar(113,20,251,34,
-                                                                  "",0);
+                                                         user.getUserName(),0);
 
    /* Age Text */
    intWindow->getObjectsList()->insertTextBox(72,35,112,49,1,gettext("Age:"));

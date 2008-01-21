@@ -8,6 +8,7 @@
 #include <math.h>
 #include <SDL/SDL_image.h>
 #include "../etc/extensions.h"
+#include "../etc/userinfo.h"
 
 
 /*********************************************************************
@@ -35,6 +36,10 @@ engine::engine()
    objectsList = new(lObject);
 
    walkStatus = ENGINE_WALK_KEYS;
+
+   /* Load User Info */
+   userInfo user;
+   user.getValuesFromSystem();
 
    /* Initialize the Cursor */
    cursors = new(cursor);
