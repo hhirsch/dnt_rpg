@@ -3,6 +3,16 @@
 #include "../sound/sound.h"
 #include "camera.h"
 #include "util.h"
+#include "../etc/userinfo.h"
+
+#ifdef _MSC_VER
+   #include "../config_win.h"
+#else
+   #include "../config.h"
+   #include <sys/stat.h>
+   #include <sys/types.h>
+   #include <errno.h>
+#endif
 
 #define NM_PORTUGUESE gettext("Portuguese")
 #define NM_ENGLISH    gettext("English")
@@ -47,6 +57,48 @@ void options::getAvaibleResolutions()
 {
    /* Get available fullscreen/hardware modes */
    resolutions=SDL_ListModes(NULL,SDL_FULLSCREEN | SDL_DOUBLEBUF | SDL_OPENGL);
+}
+
+/****************************************************************
+ *                              Load                            *
+ ****************************************************************/
+bool options::load()
+{
+   string file;
+   /* Try to Load From Users Directory */
+   userInfo info;
+   file  = info.getUserHome()+"options.cfg";
+   if(!load(file))
+   {
+      printf(gettext("Can't Open the options file: %s\n"), file.c_str());
+      /* Try to Load from Default Installed Data Dir */
+      file = DATADIR;
+      file += "/dcc.opc";
+      if(!load(file))
+      {
+         printf(gettext("Can't Open the options file: %s\n"), file.c_str());
+         /* Load from default executable path */
+         if(!load("./dcc.opc"))
+         {
+            printf(gettext("No Options File Avaible!\n"));
+            return(false);
+         }
+      }
+
+      #ifndef _MSC_VER
+         fileName = info.getUserHome() + "options.cfg";
+         printf(gettext("Creating Directory: %s : "), info.getUserHome().c_str());
+         /* Create the User directory */
+         mkdir(info.getUserHome().c_str(),0755);
+         printf("%s\n", strerror(errno));
+
+         /* Save the options file */
+         printf(gettext("Creating Options: %s\n"), fileName.c_str());
+         save();
+      #endif
+
+   }
+   return(true);
 }
 
 /****************************************************************
@@ -138,6 +190,8 @@ bool options::load(string file)
    }
 
    fclose(arq);
+
+   fileName = file;
    
    return(true);
 
@@ -146,7 +200,7 @@ bool options::load(string file)
 /****************************************************************
  *                               Save                           *
  ****************************************************************/
-void options::save(string fileName)
+void options::save()
 {
    FILE* arq;
    if(!(arq = fopen(fileName.c_str(),"w")))
@@ -684,8 +738,7 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
 
          bool prevFullScreen = enableFullScreen;
          enableFullScreen = cxSelFullScreen->isSelected();
-         //FIXME -> the save fileName must be at the users home!
-         save("dcc.opc");
+         save();
          interf->closeWindow(intWindow);
 
          /* Verify if need to show advise of reinit */
@@ -756,4 +809,6 @@ int  options::reflexionType;    /**< Reflexion Type */
 int  options::screenWidth;      /**< Screen Height */
 int  options::screenHeight;     /**< Screen Width */
 bool options::enableFullScreen; /**< If fullscreen is defined */
+
+string options::fileName = "";
 

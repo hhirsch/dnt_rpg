@@ -20,6 +20,7 @@ void userInfo::getValuesFromSystem()
       info = getpwuid(getuid());
       userName = info->pw_name;
       userHome = info->pw_dir;
+      userHome += "/.dccnitghtmare/";
    #endif
 }
 

@@ -1,5 +1,11 @@
 
+#ifndef _config_h
+#define _config_h
 
 #define PACKAGE @PACKAGE@
 #define VERSION @VERSION@
+
+#define DATADIR @datadir@
+
+#endif
 

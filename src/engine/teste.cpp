@@ -10,7 +10,13 @@
 #include <stdlib.h>
 #include <libintl.h>
 
-#include "../config.h"
+#include "../etc/userinfo.h"
+
+#ifdef _MSC_VER
+   #include "../config_win.h"
+#else
+   #include "../config.h"
+#endif
 
 /*********************************************************************
  *                           Main Code                               *
@@ -25,11 +31,13 @@ int main(int argc, char **argv)
 
    SDL_Surface *screen;
 
-   options opt;
+   /* Load User Info */
+   userInfo user;
+   user.getValuesFromSystem();
 
-   //FIXME -> the locations of the options file, must be, first a per user one,
-   //and, if not exists, the system one.
-   opt.load("dcc.opc");
+   /* Load Options */
+   options opt;
+   opt.load();
    
    #ifdef REDE
       printf("Server IP or Name: ");

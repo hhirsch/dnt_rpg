@@ -91,6 +91,8 @@ AC_TYPE_SIZE_T
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([atexit floor sqrt strrchr strstr])
 
+AC_DEFINE_DIR([DATADIR], [datadir], [Where data are placed to.])
+
 AC_CONFIG_FILES([Makefile  
                  po/Makefile.in
                  src/Makefile

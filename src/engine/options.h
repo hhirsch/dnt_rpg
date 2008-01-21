@@ -27,9 +27,13 @@ class options
       /*! Display the Options Screen 
        * \param interf -> GUI interface to be used.*/
       void displayOptionsScreen(interface* interf);
-      /*! Save actual options on file.
-       * \param fileName -> name of the file to save */
-      void save(string fileName);
+      /*! Save actual options on file. */
+      void save();
+
+      /*! Load the Options File from default dirs
+       * (first try from user home, next from installed one, 
+       *  and if can't any of those, from the ./ dir )*/
+      bool load();
       /*! Load options from file
        * \param file -> filename with the options file to be loaded.
        * \return true if can load the options, false otherwise */
@@ -81,6 +85,8 @@ class options
       int          resPosition;    /**< Resolution Position on Vector */
 
       int timeLastOperation;       /**< Ticks when done last operation */
+
+      static string fileName;      /**< The current options fileName */            
 
       button* buttonMusSum;
       button* buttonMusDec;
