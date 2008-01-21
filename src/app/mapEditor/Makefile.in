@@ -103,10 +103,10 @@ waterwindow.o: waterwindow.cpp waterwindow.h $(ENDPART)partSystem.h $(ENDGUI)far
 
 mapEditor: $(OBJSGUI) $(OBJSMAPA) $(OBJS)
 	@printf "Linking mapEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJS) -o $(BIN)mapEditor
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) $(OBJS) -o $(BIN)dntMapEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
 	@printf "Cleaning mapEditor Bin Files... "
-	@\rm -rf *.o *.e $(BIN)mapEditor
+	@\rm -rf *.o *.e $(BIN)dntMapEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"

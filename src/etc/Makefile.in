@@ -9,7 +9,7 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
 ENDCLASSES=../classes/
 
-all: animodel.o distance.o extensions.o message3d.o modellist.o userinfo.o
+all: animodel.o distance.o dirs.o extensions.o message3d.o modellist.o userinfo.o
 
 animodel.o: animodel.h animodel.cpp $(ENDCLASSES)thing.h
 	@printf "Making animodel.o... "
@@ -19,6 +19,11 @@ animodel.o: animodel.h animodel.cpp $(ENDCLASSES)thing.h
 distance.o: distance.h distance.cpp
 	@printf "Making distance.o... "
 	@$(CPP) $(CFLAGS) -c distance.cpp -o distance.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+dirs.o: dirs.h dirs.cpp
+	@printf "Making dirs.o... "
+	@$(CPP) $(CFLAGS) -c dirs.cpp -o dirs.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 extensions.o: extensions.h extensions.cpp
