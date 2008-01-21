@@ -26,6 +26,8 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
     /* Define ignored events */
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
     SDL_EventState(SDL_ACTIVEEVENT, SDL_IGNORE);
+    SDL_EventState(SDL_KEYDOWN, SDL_IGNORE);
+    SDL_EventState(SDL_KEYUP, SDL_IGNORE);
     SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
     SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
     SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
@@ -37,6 +39,7 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
     SDL_EventState(SDL_SYSWMEVENT, SDL_IGNORE);
     SDL_EventState(SDL_VIDEORESIZE, SDL_IGNORE);
     SDL_EventState(SDL_VIDEOEXPOSE, SDL_IGNORE);
+    SDL_EventState(SDL_QUIT, SDL_IGNORE);
     SDL_EventState(SDL_USEREVENT, SDL_IGNORE);
 
     dntFont fnt;
