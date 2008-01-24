@@ -73,6 +73,8 @@ bool options::load()
       printf(gettext("Can't Open the options file: %s\n"), file.c_str());
       /* Try to Load from Default Installed Data Dir */
       file = DATADIR;
+      file += "/";
+      file += PACKAGE;
       file += "/dcc.opc";
       if(!load(file))
       {
