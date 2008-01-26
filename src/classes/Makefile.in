@@ -28,7 +28,7 @@ align.o: align.cpp align.h
 	@$(CC) $(CFLAGS) align.cpp -o align.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-barter.o: barter.cpp barter.h object.h itemslot.h inventory.h
+barter.o: barter.cpp barter.h object.h itemslot.h inventory.h $(ENDETC)dirs.h
 	@printf "Making barter.o... "
 	@$(CC) $(CFLAGS) barter.cpp -o barter.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -48,7 +48,7 @@ feats.o: feats.cpp feats.h actions.h defs.h dices.h thing.h modifier.h $(ENDETC)
 	@$(CC) $(CFLAGS) feats.cpp -o feats.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-inventory.o: inventory.cpp inventory.h object.h itemslot.h
+inventory.o: inventory.cpp inventory.h object.h itemslot.h $(ENDETC)dirs.h
 	@printf "Making inventory.o... "
 	@$(CC) $(CFLAGS) inventory.cpp -o inventory.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -73,17 +73,17 @@ race.o: race.cpp race.h modifier.h feats.h skills.h
 	@$(CC) $(CFLAGS) race.cpp -o race.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-skills.o: skills.cpp skills.h
+skills.o: skills.cpp skills.h $(ENDETC)dirs.h
 	@printf "Making skills.o... "
 	@$(CC) $(CFLAGS) skills.cpp -o skills.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-thing.o: thing.cpp thing.h skills.h align.h modifier.h
+thing.o: thing.cpp thing.h skills.h align.h modifier.h $(ENDETC)dirs.h
 	@printf "Making thing.o... "
 	@$(CC) $(CFLAGS) thing.cpp -o thing.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-weapon.o: weapon.cpp weapon.h dices.h object.h
+weapon.o: weapon.cpp weapon.h dices.h object.h $(ENDETC)dirs.h
 	@printf "Making weapon.o... "
 	@$(CC) $(CFLAGS) weapon.cpp -o weapon.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

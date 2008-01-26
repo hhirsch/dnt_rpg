@@ -42,12 +42,15 @@ inventory::inventory()
    equippedSlots[INVENTORY_BODY]->setAsOneItemPerTime();
 
    /* Load Images */
-   inventoryImage = IMG_Load("../data/texturas/inventory/inventory.png");
+   dirs dir;
+   inventoryImage = IMG_Load(
+                   dir.getRealFile("texturas/inventory/inventory.png").c_str());
    if(!inventoryImage)
    {
       printf("Can't Load Inventory Image!\n");
    }
-   equipedImage = IMG_Load("../data/texturas/inventory/equip.png");
+   equipedImage = IMG_Load(
+                       dir.getRealFile("texturas/inventory/equip.png").c_str());
    if(!inventoryImage)
    {
       printf("Can't Load Equiped Inventory Image!\n");

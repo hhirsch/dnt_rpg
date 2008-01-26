@@ -33,7 +33,9 @@ barter::barter(inventory* seller, inventory* buyer)
    }
 
    /* Load Images */
-   barterImage = IMG_Load("../data/texturas/inventory/trade.png");
+   dirs dir;
+   barterImage = IMG_Load(
+                       dir.getRealFile("texturas/inventory/trade.png").c_str());
    if(!barterImage)
    {
       printf("Can't Load Barter Image!\n");

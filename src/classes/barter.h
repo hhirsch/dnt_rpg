@@ -7,6 +7,7 @@
 #include "object.h"
 #include "itemslot.h"
 #include "inventory.h"
+#include "../etc/dirs.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 

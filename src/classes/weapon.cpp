@@ -278,12 +278,12 @@ float weapon::getWeight()
 //                                                                          //
 //////////////////////////////////////////////////////////////////////////////
 
-#define FILE_CATEGORIES "../data/weapons/types/categories.dcl"
-#define FILE_RANGES "../data/weapons/types/ranges.dcl"
-#define FILE_SIZES "../data/weapons/types/sizes.dcl"
-#define FILE_WEIGHTS "../data/weapons/types/weights.dcl"
-#define FILE_DAMAGES "../data/weapons/types/damages.dcl"
-#define FILE_MUNITIONS "../data/weapons/types/munitions.dcl"
+#define FILE_CATEGORIES "weapons/types/categories.dcl"
+#define FILE_RANGES "weapons/types/ranges.dcl"
+#define FILE_SIZES "weapons/types/sizes.dcl"
+#define FILE_WEIGHTS "weapons/types/weights.dcl"
+#define FILE_DAMAGES "weapons/types/damages.dcl"
+#define FILE_MUNITIONS "weapons/types/munitions.dcl"
 
 /************************************************************
  *                        Constructor                       *
@@ -331,7 +331,8 @@ void weaponTypes::readFile(string fileName)
    wInfo* names = NULL;
 
    /* Open the file */
-   if(!(file=fopen(fileName.c_str(),"r")))
+   dirs dir;
+   if(!(file=fopen(dir.getRealFile(fileName).c_str(),"r")))
    {
        printf("Error while opening definitions file: %s\n",fileName.c_str());
        return;

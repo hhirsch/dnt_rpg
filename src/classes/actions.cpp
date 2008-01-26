@@ -430,19 +430,19 @@ void actionController::treatActions(Map* actualMap)
 
                //FIXME Move not ON character but TO character
                act->actor->pathFind.findPath(act->actor->xPosition, 
-                                          act->actor->zPosition,
-                                          act->target->xPosition - 
-                                          ACT_MOVE_DELTA, 
-                                          act->target->zPosition - 
-                                          ACT_MOVE_DELTA, 
-                                          act->actor->walk_interval, 
-                                          act->actor->orientation,
-                                          act->actor->min[0],
-                                          act->actor->min[1],
-                                          act->actor->min[2],
-                                          act->actor->max[0],
-                                          act->actor->max[1],
-                                          act->actor->max[2]);
+                                             act->actor->zPosition,
+                                             act->target->xPosition - 
+                                             ACT_MOVE_DELTA, 
+                                             act->target->zPosition - 
+                                             ACT_MOVE_DELTA, 
+                                             act->actor->walk_interval, 
+                                             act->actor->orientation,
+                                             act->actor->min[0],
+                                             act->actor->min[1],
+                                             act->actor->min[2],
+                                             act->actor->max[0],
+                                             act->actor->max[1],
+                                             act->actor->max[2]);
             }
          }
          character* actor = act->getActor();

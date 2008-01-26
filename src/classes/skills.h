@@ -11,6 +11,8 @@
 #include <string>
 using namespace std;
 
+#include "../etc/dirs.h"
+
 /*! The individual skill definition.
  */
 class skill

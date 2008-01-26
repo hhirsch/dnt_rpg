@@ -8,6 +8,7 @@
 #include "skills.h"
 #include "align.h"
 #include "modifier.h"
+#include "../etc/dirs.h"
 
 #define PSYCHO_HOSTILE 0
 #define PSYCHO_NEUTRAL 1
