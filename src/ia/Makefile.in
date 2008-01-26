@@ -31,7 +31,7 @@ OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)at
 OBJS = agent.o astar.o fuzzy.o fuzzyfunction.o fuzzyrule.o fuzzyvariable.o iafuncs.o iascript.o iastack.o iavariable.o pattAgent.o potentAgent.o  
 all: $(OBJS)
 
-agent.o: agent.cpp agent.h $(ENDENGINE)util.o
+agent.o: agent.cpp agent.h $(ENDENGINE)util.h
 	@printf "Making agent.o... "
 	@$(CPP) $(CFLAGS) agent.cpp -o agent.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
