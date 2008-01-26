@@ -15,6 +15,7 @@
 #include "../classes/actions.h"
 #include "../classes/mission.h"
 #include "../etc/message3d.h"
+#include "../etc/dirs.h"
 #include "../fight/fightSystem.h"
 #include "../gui/farso.h"
 #include "../map/map.h"
@@ -341,6 +342,8 @@ class engine
        * Load All PCs
        ***************************************************************/  
       void loadPCs();
+
+      dirs dir;                    /**< Data directories finder */
 
       Map* actualMap;              /**< Actual Engine Map */
       lObject* objectsList;        /**< The list of loaded objects */

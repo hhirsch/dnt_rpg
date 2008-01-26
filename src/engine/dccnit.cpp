@@ -59,22 +59,24 @@ engine::engine()
    ext.defineAllExtensions();
 
    /* Load Skills List */
-   skillsList = new skills("../data/skills/",
-                           "../data/skills/skills.skl");
+   skillsList = new skills(dir.getRealFile("skills/"),
+                           dir.getRealFile("skills/skills.skl"));
   
    /* Load Features List */
-   features = new featsList("../data/feats/","../data/feats/feats.ftl");
+   features = new featsList(dir.getRealFile("feats/"),
+                            dir.getRealFile("feats/feats.ftl"));
 
    /* Load Alignments & Tendecies */
-   alignList = new aligns("../data/alignment/",
-                          "../data/alignment/alignment.lst");
+   alignList = new aligns(dir.getRealFile("alignment/"),
+                          dir.getRealFile("alignment/alignment.lst"));
 
    /* Load Races */
-   raceList = new races("../data/races/", "../data/races/races.lst");
+   raceList = new races(dir.getRealFile("races/"), 
+                        dir.getRealFile("races/races.lst"));
 
    /* Load Classes */
-   classList = new classes("../data/classes/",
-                           "../data/classes/classes.lst");
+   classList = new classes(dir.getRealFile("classes/"),
+                           dir.getRealFile("classes/classes.lst"));
 
    /* Load Weapons Types */
    weaponsTypes = new weaponTypes();
@@ -110,7 +112,7 @@ engine::engine()
    missions = new missionsController(this);
 
    /* FIXME remove from here the addMission */
-   missions->addNewMission("../data/missions/tutorial/mission1.dsl");
+   missions->addNewMission(dir.getRealFile("missions/tutorial/mission1.dsl"));
 
    hour = 9.0;
    gameSun = new sun(hour, HALFFARVIEW, HALFFARVIEW);
@@ -243,7 +245,8 @@ engine::~engine()
 void engine::InformationScreen()
 {
    Uint8 *keys;
-   SDL_Surface* img = IMG_Load(gettext("../data/texturas/general/info.png"));
+   SDL_Surface* img;
+   img = IMG_Load(dir.getRealFile("/texturas/general/info.png").c_str());
 
    GLuint texturaInfo;
    setTextureRGBA(img,&texturaInfo);
@@ -302,12 +305,8 @@ void engine::loadPCs()
       delete(PCs);
    }
    PCs  = new (characterList);
-   /*per = PCs->insertCharacter("../data/characters/pcs/logan.pc",
-                              features, this);*/
-   per = PCs->insertCharacter("../data/characters/pcs/metaleiro.pc",
+   per = PCs->insertCharacter(dir.getRealFile("characters/pcs/metaleiro.pc"),
                               features, this);
-   /*per = PCs->insertCharacter("../data/characters/npcs/spider.npc",
-                              features, this);*/
 }
 
 /*********************************************************************
@@ -332,7 +331,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
-   SDL_Surface* fig = IMG_Load("../data/texturas/general/carregar.png");
+   SDL_Surface* fig;
+   fig = IMG_Load(dir.getRealFile("texturas/general/carregar.png").c_str());
 
    /* Initializing Load Screen*/
    GLuint texturaCarga;
@@ -642,7 +642,8 @@ void engine::SplashScreen()
    Uint32 time = SDL_GetTicks();
    glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
    actualizeFrustum(visibleMatrix,proj,modl);
-   SDL_Surface* img = IMG_Load("../data/texturas/general/inicio1.png"); 
+   SDL_Surface* img;
+   img = IMG_Load(dir.getRealFile("texturas/general/inicio1.png").c_str()); 
    glDisable(GL_LIGHTING);
 
    dntFont fnt;
@@ -702,7 +703,7 @@ int engine::InitialScreen(int Status, GLuint idTextura, bool reloadMusic)
    if(reloadMusic)
    {
       /*music =*/
-      snd->loadMusic("../data/music/musica1.ogg");
+      snd->loadMusic(dir.getRealFile("music/musica1.ogg"));
    }
 
    /* Executes Initial Screen */
@@ -771,14 +772,16 @@ int engine::OptionsScreen(GLuint idTextura)
    }
 
    delete(alignList);
-   alignList = new aligns("../data/alignment/",
-                          "../data/alignment/alignment.lst");
+   alignList = new aligns(dir.getRealFile("alignment/"),
+                          dir.getRealFile("alignment/alignment.lst"));
 
    delete(features);
-   features = new featsList("../data/feats/","../data/feats/feats.ftl");
+   features = new featsList(dir.getRealFile("feats/"),
+                            dir.getRealFile("feats/feats.ftl"));
 
    delete(raceList);
-   raceList = new races("../data/races/", "../data/races/races.lst");
+   raceList = new races(dir.getRealFile("races/"), 
+                        dir.getRealFile("races/races.lst"));
 
    glEnable(GL_LIGHTING);
    SDL_ShowCursor(SDL_DISABLE);
@@ -1049,7 +1052,8 @@ void engine::Init(SDL_Surface *screen)
    SDL_Surface* img;
 
    /* Battle Circle Textures */
-   img = IMG_Load("../data/texturas/fightMode/normalMovCircle.png");
+   img = IMG_Load(
+             dir.getRealFile("texturas/fightMode/normalMovCircle.png").c_str());
    if(!img)
    {
       printf("Error: can't Load Texure: fightMode/normalMovCircle.png\n");
@@ -1065,7 +1069,8 @@ void engine::Init(SDL_Surface *screen)
 
    SDL_FreeSurface(img);
 
-   img = IMG_Load("../data/texturas/fightMode/fullMovCircle.png");
+   img = IMG_Load(
+               dir.getRealFile("texturas/fightMode/fullMovCircle.png").c_str());
    if(!img)
    {
       printf("Error: can't Load Texure: fightMode/fullMovCircle.png\n");
@@ -1083,7 +1088,8 @@ void engine::Init(SDL_Surface *screen)
    SDL_FreeSurface(img);
 
    /* feat range circle */
-   img = IMG_Load("../data/texturas/fightMode/featRangeCircle.png");
+   img = IMG_Load(
+             dir.getRealFile("texturas/fightMode/featRangeCircle.png").c_str());
    if(!img)
    {
       printf("Error: can't Load Texure: fightMode/featRangeCircle.png\n");
@@ -1101,7 +1107,7 @@ void engine::Init(SDL_Surface *screen)
    SDL_FreeSurface(img);
 
    /* range circle */
-   img = IMG_Load("../data/texturas/walk/range.png");
+   img = IMG_Load(dir.getRealFile("texturas/walk/range.png").c_str());
    if(!img)
    {
       printf("Error: can't Load Texure: walk/range.png\n");
@@ -1120,7 +1126,7 @@ void engine::Init(SDL_Surface *screen)
 
 
    /* Move Destiny */
-   img = IMG_Load("../data/texturas/walk/destino.png");
+   img = IMG_Load(dir.getRealFile("texturas/walk/destino.png").c_str());
    if(!img)
    {
       printf("Error: can't Load Texture: destino.png\n");
@@ -1230,7 +1236,7 @@ void engine::enterBattleMode(bool surprisePC)
                  
   if(numEnemies > 0)
   {
-      snd->addSoundEffect(false,"../data/sndfx/battleMode.ogg");
+      snd->addSoundEffect(false,dir.getRealFile("sndfx/battleMode.ogg"));
       engineMode = ENGINE_MODE_TURN_BATTLE;
       moveCircleX = activeCharacter->xPosition;
       moveCircleY = activeCharacter->yPosition;
@@ -2120,7 +2126,7 @@ int engine::treatIO(SDL_Surface *screen)
                                       "80");
          }
 
-         /* FIXME Temporariamente, para visualizar o efeito de sangue */
+         /* FIXME Remove all temporary tests from here */
          if( (keys[SDLK_y]) && 
              ( (tempo-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_y) ) )
@@ -2132,7 +2138,7 @@ int engine::treatIO(SDL_Surface *screen)
                effect = (part2*)particleSystem->addParticle(PART_FIRE,
                                           activeCharacter->xPosition,0,
                                           activeCharacter->zPosition,
-                                          "../data/particles/effect1.par");
+                                      dir.getRealFile("particles/effect1.par"));
                if(effect)
                {
                   effect->followPC = true;
@@ -2160,7 +2166,7 @@ int engine::treatIO(SDL_Surface *screen)
                                                 activeCharacter->xPosition,
                                                 activeCharacter->zPosition),
                                                 activeCharacter->zPosition,
-                                                "../data/particles/fire1.par");
+                                        dir.getRealFile("particles/fire1.par"));
          }
          if( (keys[SDLK_u]) && 
              ( (tempo-lastKeyb >= REFRESH_RATE) || 
@@ -2177,7 +2183,7 @@ int engine::treatIO(SDL_Surface *screen)
                                        activeCharacter->xPosition + 800*incX,
                                        activeCharacter->yPosition + 15,
                                        activeCharacter->zPosition + 800*incZ,
-                                       "../data/particles/fire1.par");
+                                       dir.getRealFile("particles/fire1.par"));
          }
          if( (keys[SDLK_l]) && 
              ( (tempo-lastKeyb >= REFRESH_RATE) || 
@@ -2188,7 +2194,7 @@ int engine::treatIO(SDL_Surface *screen)
             particleSystem->addParticle(PART_LIGHTNING,
                                         activeCharacter->xPosition,250,
                                         activeCharacter->zPosition,
-                                        "../data/particles/lightning1.par");
+                                   dir.getRealFile("particles/lightning1.par"));
          }
 
          if( (keys[SDLK_0]) && 
@@ -2566,7 +2572,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
             walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,
                                             activeCharacter->zPosition,true,
-                                            "../data/sndfx/passos.ogg" );
+                                           dir.getRealFile("sndfx/passos.ogg"));
          }
          else
          {
@@ -3190,7 +3196,7 @@ void engine::OpenMiniMapWindow()
                                   gettext("FPS:"));
 
    miniMapWindow->getObjectsList()->insertPicture(3,15,252,120,
-                                             "../data/texturas/mapw/map.png");
+                              dir.getRealFile("texturas/mapw/map.png").c_str());
 
    
                    
@@ -3226,7 +3232,7 @@ void engine::OpenShortcutsWindow()
 
    tabButton* tb;
    tb = shortCutsWindow->getObjectsList()->insertTabButton(252,15,0,0,
-                                  "../data/texturas/shortcutsw/shortcuts.png");
+                  dir.getRealFile("texturas/shortcutsw/shortcuts.png").c_str());
    buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
    tb->insertButton(7,40,43,72);/* Attack 1 */
    tb->insertButton(7,75,43,107);/* Attack 7 */
@@ -3252,7 +3258,7 @@ void engine::OpenShortcutsWindow()
    buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 
    shortCutsWindow->getObjectsList()->insertPicture(3,15,252,120,
-                                  "../data/texturas/shortcutsw/shortcut2.png");
+                  dir.getRealFile("texturas/shortcutsw/shortcut2.png").c_str());
    
    shortCutsWindow->setExternPointer(&shortCutsWindow);
    gui->openWindow(shortCutsWindow);
@@ -3365,8 +3371,8 @@ int engine::Run(SDL_Surface *surface)
           ( (SDL_GetTicks() - waitDieTimer) >= ENGINE_WAIT_DIE_DELAY) )
       {
          /* All Pcs are Dead, so Death Screen! */
-         snd->loadMusic("../data/music/musica8.ogg");
-         showImage("../data/texturas/fightMode/death.png");
+         snd->loadMusic(dir.getRealFile("music/musica8.ogg"));
+         showImage(dir.getRealFile("texturas/fightMode/death.png"));
 
          /* Clear Modifications */
          modifState.clear();
@@ -3480,10 +3486,10 @@ int engine::Run(SDL_Surface *surface)
              {
                 character* per;
                 per = NPCs->InserirPersonagem(6,8,3,8,
-                             "../data/pics/logan/cara.bmp",0,0,
-                             "LoganNPC",
-                             "???",
-                  "../data/pics/logan/",features);
+                             dir.getRealFile("pics/logan/cara.bmp"),0,0,
+                                             "LoganNPC",
+                                              "???",
+                             dir.getRealFile("pics/logan/"),features);
                 per->xPosition = eventoRede->x;
                 per->zPosition = eventoRede->y; 
                 per->orientation = eventoRede->teta;

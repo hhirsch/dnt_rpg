@@ -12,7 +12,8 @@ class dirs
    public:
       /*! Find Where on the system data current is:
        * (first try to find at ../data, if not found, isn´t running the local
-       *  state, so try at the DATADIR, if still not found, we must have an error) */
+       *  state, so try at the DATADIR, if still not found, we must have an 
+       *  error) */
       void findDataDirectories();
 
       /*! Get the real path and file of an internal file path

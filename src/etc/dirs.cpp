@@ -32,6 +32,8 @@ void dirs::findDataDirectories()
       file += "/fnt/arial.ttf";
       if((arq = fopen(file.c_str(),"r")))
       {
+         dataPath = PACKAGE;
+         dataPath += DATADIR;
          fclose(arq);
       }
       else
@@ -40,7 +42,6 @@ void dirs::findDataDirectories()
          exit(-3);
       }
    }
-
 }
 
 /*********************************************************************

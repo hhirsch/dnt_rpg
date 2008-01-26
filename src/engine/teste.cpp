@@ -11,6 +11,7 @@
 #include <libintl.h>
 
 #include "../etc/userinfo.h"
+#include "../etc/dirs.h"
 
 #ifdef _MSC_VER
    #include "../config_win.h"
@@ -35,6 +36,10 @@ int main(int argc, char **argv)
    userInfo user;
    user.getValuesFromSystem();
 
+   /* Get current data directorie */
+   dirs dir;
+   dir.findDataDirectories();
+
    /* Load Options */
    options opt;
    opt.load();
@@ -56,7 +61,8 @@ int main(int argc, char **argv)
    Engine->SplashScreen();
 
    /* Load backImage */
-   SDL_Surface* img = IMG_Load("../data/texturas/general/inicio.png");
+   SDL_Surface* img = IMG_Load(
+                        dir.getRealFile("texturas/general/inicio.png").c_str());
    setTexture(img,&tituloID);
    SDL_FreeSurface(img);
 
@@ -79,7 +85,7 @@ int main(int argc, char **argv)
              glDisable(GL_LIGHTING);
              Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 
                                     800, 600);
-             Engine->LoadMap("../data/mapas/teste1.map",0);
+             Engine->LoadMap(dir.getRealFile("mapas/teste1.map"),0);
           }
        }
        
