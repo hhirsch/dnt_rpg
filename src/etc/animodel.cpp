@@ -4,6 +4,7 @@
 
 #include "animodel.h"
 #include "../engine/util.h"
+#include "dirs.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_opengl.h>
@@ -138,7 +139,8 @@ void aniModel::calculateBoundingBox()
  *********************************************************************/
 bool aniModel::loadModel(const string& strFilename)
 {
-   /* CAL3D Load Model  */  
+   /* CAL3D Load Model  */
+   dirs dir;
 
    // open the model configuration file
   std::ifstream file;
@@ -171,7 +173,8 @@ bool aniModel::loadModel(const string& strFilename)
     // check if an error happend while reading from the file
     if(!file)
     {
-      std::cerr << "Error while reading from the model configuration file '" << strFilename << "'." << std::endl;
+      std::cerr << "Error while reading from the model configuration file '" 
+                << strFilename << "'." << std::endl;
       return false;
     }
 
@@ -180,21 +183,24 @@ bool aniModel::loadModel(const string& strFilename)
     pos = strBuffer.find_first_not_of(" \t");
 
     // check for empty lines
-    if((pos == std::string::npos) || (strBuffer[pos] == '\n') || (strBuffer[pos] == '\r') || (strBuffer[pos] == 0)) continue;
+    if((pos == std::string::npos) || (strBuffer[pos] == '\n') || 
+       (strBuffer[pos] == '\r') || (strBuffer[pos] == 0)) continue;
 
     // check for comment lines
     if(strBuffer[pos] == '#') continue;
 
     // get the key
     std::string strKey;
-    strKey = strBuffer.substr(pos, strBuffer.find_first_of(" =\t\n\r", pos) - pos);
+    strKey = strBuffer.substr(pos, 
+                              strBuffer.find_first_of(" =\t\n\r", pos) - pos);
     pos += strKey.size();
 
     // get the '=' character
     pos = strBuffer.find_first_not_of(" \t", pos);
     if((pos == std::string::npos) || (strBuffer[pos] != '='))
     {
-      std::cerr << strFilename << "(" << line << "): Invalid syntax." << std::endl;
+      std::cerr << strFilename << "(" << line << "): Invalid syntax." 
+                << std::endl;
       return false;
     }
 
@@ -214,7 +220,7 @@ bool aniModel::loadModel(const string& strFilename)
     else if(strKey == "path")
     {
       // set the new path for the data files if one hasn't been set already
-      if (m_path == "") strPath = strData;
+      if (m_path == "") strPath = dir.getRealFile(strData);
     }
     else if(strKey == "skeleton")
     {
@@ -229,8 +235,10 @@ bool aniModel::loadModel(const string& strFilename)
     else if(strKey == "animation")
     {
       // load core animation
-      //std::cout << "Loading animation '" << strData << animationCount <<"'..." << std::endl;
-      m_animationId[animationCount] = m_calCoreModel->loadCoreAnimation(strPath + strData);
+      //std::cout << "Loading animation '" << strData << animationCount 
+      //          <<"'..." << std::endl;
+      m_animationId[animationCount] = m_calCoreModel->loadCoreAnimation(strPath
+                                                                     + strData);
       if(m_animationId[animationCount] == -1)
       {
         CalError::printLastError();
@@ -262,7 +270,8 @@ bool aniModel::loadModel(const string& strFilename)
     }
     else
     {
-      std::cerr << strFilename << "(" << line << "): Invalid Syntax." << std::endl;
+      std::cerr << strFilename << "(" << line << "): Invalid Syntax." 
+                << std::endl;
       return false;
     }
   }
@@ -270,9 +279,12 @@ bool aniModel::loadModel(const string& strFilename)
   // explicitely close the file
   file.close();
 
-  // load all textures and store the opengl texture id in the corresponding map in the material
+  // load all textures and store the opengl texture id in the 
+  // corresponding map in the material
   int materialId;
-  for(materialId = 0; materialId < m_calCoreModel->getCoreMaterialCount(); materialId++)
+  for( materialId = 0; 
+       materialId < m_calCoreModel->getCoreMaterialCount(); 
+       materialId++)
   {
     // get the core material
     CalCoreMaterial *pCoreMaterial;

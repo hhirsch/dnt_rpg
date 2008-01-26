@@ -14,18 +14,20 @@ void extensions::defineAllExtensions()
    if(strstr( ext, "GL_ARB_point_sprite" ) != NULL)
    {
       PointParameterf = (PFNGLPOINTPARAMETERFARBPROC)
-                                     SDL_GL_GetProcAddress("glPointParameterfARB");
+                                  SDL_GL_GetProcAddress("glPointParameterfARB");
       PointParameterfv = (PFNGLPOINTPARAMETERFVARBPROC) 
-                                    SDL_GL_GetProcAddress("glPointParameterfvARB");
+                                 SDL_GL_GetProcAddress("glPointParameterfvARB");
 
       if( (PointParameterfv == NULL) || (PointParameterf == NULL) )
       {
-         printf("Not found glPointParameterfARB: DNT will be in worse quality :^(\n");
+         printf("Warn: Not found glPointParameterfARB: "
+                "DNT will be in worse quality :^( \n");
       }
    }
    else
    {
-      printf("Not Found GL_ARB_point_sprite extension. DNT will be in worse quality.\n");
+      printf("Warn: Not Found GL_ARB_point_sprite extension. "
+             "DNT will be in worse quality =^( .\n");
    }
 
    /* Multi Texture */
@@ -41,7 +43,8 @@ void extensions::defineAllExtensions()
                                   SDL_GL_GetProcAddress("glActiveTextureARB");
       if(!ARBActiveTexture)
       {
-         printf("Not Found glActiveTextureARB. DNT will be in worse quality.\n");
+         printf("Not Found glActiveTextureARB. "
+                "DNT will be in worse quality :^( .\n");
       }
       ARBClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREPROC) 
                               SDL_GL_GetProcAddress("glClientActiveTextureARB");
