@@ -1,20 +1,26 @@
 #include "cursor.h"
 #include "util.h"
+#include "../etc/dirs.h"
+
 
 /*****************************************************************
  *                         Constructor                           *
  *****************************************************************/
 cursor::cursor()
 {
-   textura[CURSOR_WALK] = loadCursor("../data/cursors/Walk.png");
-   textura[CURSOR_ATTACK] = loadCursor("../data/cursors/Attack.png");
-   textura[CURSOR_DEFEND] = loadCursor("../data/cursors/Defend.png");
-   textura[CURSOR_MAPTRAVEL] = loadCursor("../data/cursors/MapTravel.png");
-   textura[CURSOR_TALK] = loadCursor("../data/cursors/talk.png");
-   textura[CURSOR_GET] = loadCursor("../data/cursors/Get.png");
-   textura[CURSOR_INVENTORY] = loadCursor("../data/cursors/Inventory.png");
-   textura[CURSOR_DOOR] = loadCursor("../data/cursors/Door.png");
-   textura[CURSOR_FORBIDDEN] = loadCursor("../data/cursors/forbidden.png");
+   dirs dir;
+   textura[CURSOR_WALK] = loadCursor(dir.getRealFile("cursors/Walk.png"));
+   textura[CURSOR_ATTACK] = loadCursor(dir.getRealFile("cursors/Attack.png"));
+   textura[CURSOR_DEFEND] = loadCursor(dir.getRealFile("cursors/Defend.png"));
+   textura[CURSOR_MAPTRAVEL] = loadCursor(
+                                      dir.getRealFile("cursors/MapTravel.png"));
+   textura[CURSOR_TALK] = loadCursor(dir.getRealFile("cursors/talk.png"));
+   textura[CURSOR_GET] = loadCursor(dir.getRealFile("cursors/Get.png"));
+   textura[CURSOR_INVENTORY] = loadCursor(
+                                      dir.getRealFile("cursors/Inventory.png"));
+   textura[CURSOR_DOOR] = loadCursor(dir.getRealFile("cursors/Door.png"));
+   textura[CURSOR_FORBIDDEN] = loadCursor(
+                                      dir.getRealFile("cursors/forbidden.png"));
    actualCursor = CURSOR_WALK;
 }
 

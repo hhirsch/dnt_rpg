@@ -95,8 +95,6 @@ int initialScreen::run(int Status,GLdouble proj[16],
          {
              if(eventInfo == PRESSED_BUTTON)
              {
-                 //snd->addSoundEffect(false, "../data/sndfx/menu/click.ogg");
-
                  if(object == (guiObject*) buttonNew)
                  {
                     result = NEW_GAME;

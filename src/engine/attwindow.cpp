@@ -6,6 +6,7 @@
 #include "../classes/skills.h"
 #include "../classes/dices.h"
 #include "../gui/messages.h"
+#include "../etc/dirs.h"
 
 /**************************************************************
  *                      Constructor                           *
@@ -13,6 +14,7 @@
 attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                      int modifiers[6],bool usePreviousValues)
 {
+   dirs dir;
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
@@ -87,7 +89,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attMods[0] = intWindow->getObjectsList()->insertTextBox(196,47,226,62,0,
                                                     "");
    intWindow->getObjectsList()->insertPicture(135,41,0,0,
-                                              "../data/skills/Img/forca.png");
+                               dir.getRealFile("skills/Img/forca.png").c_str());
 
    /* Dextery */
    intWindow->getObjectsList()->insertTextBox(9,84,85,97,0,
@@ -107,7 +109,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attMods[1] = intWindow->getObjectsList()->insertTextBox(196,81,226,96,0,
                                                     "");
    intWindow->getObjectsList()->insertPicture(135,75,0,0,
-                                             "../data/skills/Img/destreza.png");
+                            dir.getRealFile("skills/Img/destreza.png").c_str());
 
    /* Constitution */
    intWindow->getObjectsList()->insertTextBox(9,120,87,133,0,
@@ -127,7 +129,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attMods[2] = intWindow->getObjectsList()->insertTextBox(196,117,226,132,0,
                                                            "");
    intWindow->getObjectsList()->insertPicture(135,109,0,0,
-                                         "../data/skills/Img/constituicao.png");
+                        dir.getRealFile("skills/Img/constituicao.png").c_str());
 
    /* Inteligency */
    intWindow->getObjectsList()->insertTextBox(9,154,87,167,0,
@@ -148,7 +150,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attMods[3] = intWindow->getObjectsList()->insertTextBox(196,151,226,166,0,
                                                     "");
    intWindow->getObjectsList()->insertPicture(135,143,0,0,
-                                         "../data/skills/Img/inteligencia.png");
+                        dir.getRealFile("skills/Img/inteligencia.png").c_str());
 
    /* Wisdow */
    intWindow->getObjectsList()->insertTextBox(9,188,87,201,0,
@@ -169,7 +171,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attMods[4] = intWindow->getObjectsList()->insertTextBox(196,185,226,200,
                                                            0,"");
    intWindow->getObjectsList()->insertPicture(135,177,0,0,
-                                            "../data/skills/Img/sabedoria.png");
+                           dir.getRealFile("skills/Img/sabedoria.png").c_str());
 
    /* Charism */
    intWindow->getObjectsList()->insertTextBox(9,222,87,235,0,
@@ -190,7 +192,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attMods[5] = intWindow->getObjectsList()->insertTextBox(196,219,226,234,
                                                            0,"");
    intWindow->getObjectsList()->insertPicture(135,211,0,0,
-                                              "../data/skills/Img/carisma.png");
+                             dir.getRealFile("skills/Img/carisma.png").c_str());
                                               
 
    /* Contorns */

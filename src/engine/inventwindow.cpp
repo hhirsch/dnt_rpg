@@ -3,6 +3,7 @@
  *************************************************************************/
 
 #include "inventwindow.h"
+#include "../etc/dirs.h"
 
 #define INVENTORY_STATE_NONE   0
 #define INVENTORY_STATE_OBJECT 1
@@ -34,6 +35,7 @@ void inventWindow::init(int xa, int ya, string title,
                        inventory *invent,interface* inter,
                        itemWindow* infoW)
 {
+   dirs dir;
    objectMenu = NULL;
    previousCursor = NULL;
 
@@ -53,7 +55,7 @@ void inventWindow::init(int xa, int ya, string title,
    /* Add Character (equip) Tab Button */
    characterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,
                                                                      256,256,
-                                        "../data/texturas/inventory/equip.png");
+                       dir.getRealFile("texturas/inventory/equip.png").c_str());
    headButton = characterTabButton->insertButton(109,3,147,41);
    footButton = characterTabButton->insertButton(109,214,147,252);
    bodyButton = characterTabButton->insertButton(99,100,156,176);
@@ -66,7 +68,7 @@ void inventWindow::init(int xa, int ya, string title,
    /* Add Inventory Tab Button */
    inventoryTabButton = intWindow->getObjectsList()->insertTabButton(4,271,
                                                                      256,128,
-                                   "../data/texturas/inventory/inventory.png");
+                   dir.getRealFile("texturas/inventory/inventory.png").c_str());
    inventoryButton = inventoryTabButton->insertButton(4,13,251,127);
    inv1Button = inventoryTabButton->insertButton(4,0,64,13);
    inv2Button = inventoryTabButton->insertButton(64,0,127,13);

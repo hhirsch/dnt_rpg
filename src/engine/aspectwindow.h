@@ -6,6 +6,7 @@
  *************************************************************************/
 
 #include "../gui/farso.h"
+#include "../etc/dirs.h"
 #include "character.h"
 
 #define ASPECTW_CANCEL  0 /**< Cancel return from Aspect Window */

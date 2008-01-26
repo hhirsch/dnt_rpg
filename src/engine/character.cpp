@@ -7,6 +7,7 @@
 #include "dialog.h"
 #include "../gui/draw.h"
 #include "../ia/iascript.h"
+#include "../etc/dirs.h"
 #include <SDL/SDL_image.h>
 
 /*********************************************************************
@@ -173,11 +174,12 @@ string character::getConversationFile()
  *********************************************************************/
 void character::createConversation(void* pEngine)
 {
+   dirs dir;
    if(conversationFile != "")
    {
       conv = (void*) new conversation(pEngine);
       conversation* cs = (conversation*)conv;
-      cs->loadFile(conversationFile);
+      cs->loadFile(dir.getRealFile(conversationFile));
    }
 }
 
@@ -238,7 +240,8 @@ void character::definePortrait(string portraitFile)
       SDL_FreeSurface(portraitImage);
    }
 
-   SDL_Surface* img = IMG_Load(portraitFile.c_str());
+   dirs dir;
+   SDL_Surface* img = IMG_Load(dir.getRealFile(portraitFile).c_str());
    if(!img)
    {
       printf("Can't Load Portrait File: %s\n", portraitFile.c_str());

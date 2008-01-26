@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "util.h"
 #include "../etc/userinfo.h"
+#include "../etc/dirs.h"
 
 #ifdef _MSC_VER
    #include "../config_win.h"
@@ -431,6 +432,7 @@ string options::resolutionName()
  ****************************************************************/
 void options::displayOptionsScreen(interface* interf)
 {
+   dirs dir;
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL, 10);
    char tmp[5];
@@ -464,7 +466,7 @@ void options::displayOptionsScreen(interface* interf)
                                                   fnt.createUnicode(0x25BA),0);
    buttonMusSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(220,27,40,112,
-                                  "../data/texturas/options/music.png");
+                         dir.getRealFile("texturas/options/music.png").c_str());
    
   
    /* Sound Effects Things */
@@ -483,7 +485,7 @@ void options::displayOptionsScreen(interface* interf)
                                                   fnt.createUnicode(0x25BA),0);
    buttonSndSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(220,52,40,112,
-                                  "../data/texturas/options/sndfx.png");
+                         dir.getRealFile("texturas/options/sndfx.png").c_str());
 
 
    /* Language Things */
@@ -502,7 +504,7 @@ void options::displayOptionsScreen(interface* interf)
                                                    fnt.createUnicode(0x25BA),0);
    buttonLangSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(220,88,40,112,
-                                  "../data/texturas/options/language.png");
+                      dir.getRealFile("texturas/options/language.png").c_str());
 
    /* Camera Mode Things */
    prevCamera = cameraNumber;
@@ -520,7 +522,7 @@ void options::displayOptionsScreen(interface* interf)
                                                   fnt.createUnicode(0x25BA),0);
    buttonCamSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(220,126,40,112,
-                                  "../data/texturas/options/camera.png");
+                        dir.getRealFile("texturas/options/camera.png").c_str());
 
 
    /* Grass Enabled or Not */
@@ -529,7 +531,7 @@ void options::displayOptionsScreen(interface* interf)
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
    cxSelGrass = intWindow->getObjectsList()->insertCxSel(8,160, enableGrass);
    intWindow->getObjectsList()->insertPicture(220,156,40,112,
-                                  "../data/texturas/options/grass.png");
+                         dir.getRealFile("texturas/options/grass.png").c_str());
 
 
    /* Particle System Enabled or Not */
@@ -539,7 +541,7 @@ void options::displayOptionsScreen(interface* interf)
    cxSelParticles = intWindow->getObjectsList()->insertCxSel(8,178, 
                                                              enableParticles);
    intWindow->getObjectsList()->insertPicture(220,174,40,112,
-                                  "../data/texturas/options/particles.png");
+                     dir.getRealFile("texturas/options/particles.png").c_str());
 
    /* Reflexions */
    prevReflexion = reflexionType;
@@ -557,7 +559,7 @@ void options::displayOptionsScreen(interface* interf)
                                                   fnt.createUnicode(0x25BA),0);
    buttonReflSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(220,203,40,220,
-                                  "../data/texturas/options/reflexions.png");
+                    dir.getRealFile("texturas/options/reflexions.png").c_str());
 
    /* Resolution */
    prevHeight = screenHeight;
@@ -576,7 +578,7 @@ void options::displayOptionsScreen(interface* interf)
                                                   fnt.createUnicode(0x25BA),0);
    buttonResSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(220,240,40,220,
-                                  "../data/texturas/options/resolution.png");
+                    dir.getRealFile("texturas/options/resolution.png").c_str());
 
    /* Fullscreen */
    qt = intWindow->getObjectsList()->insertTextBox(20,265,200,282,0,
@@ -586,7 +588,7 @@ void options::displayOptionsScreen(interface* interf)
                                                               enableFullScreen);
 
    intWindow->getObjectsList()->insertPicture(220,265,40,220,
-                                  "../data/texturas/options/fullscreen.png");
+                    dir.getRealFile("texturas/options/fullscreen.png").c_str());
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(177,295,247,314,

@@ -1,5 +1,5 @@
 #include "barterwindow.h"
-
+#include "../etc/dirs.h"
 
 /***************************************************************
  *                         Constructor                         *
@@ -7,6 +7,7 @@
 barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
                            interface* inter, itemWindow* infoW)
 {
+   dirs dir;
    /* Init Values */
    curSellSlot = 0;
    curBuySlot = 0;
@@ -37,11 +38,11 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
 
    /* Create the botton figure */
    intWindow->getObjectsList()->insertPicture(4,232,256,39,
-                              "../data/texturas/inventory/trade_inf.png");
+                   dir.getRealFile("texturas/inventory/trade_inf.png").c_str());
 
    /* Create the TabButton */
    barterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,256,217,
-                                        "../data/texturas/inventory/trade.png");
+                       dir.getRealFile("texturas/inventory/trade.png").c_str());
 
    /* Buyer Buttons */
    buyer1 = barterTabButton->insertButton(4,13,42,26);

@@ -2,6 +2,7 @@
 #include "util.h"
 #include "../map/map.h"
 #include "../gui/draw.h"
+#include "../etc/dirs.h"
 #include <math.h>
 
 /*********************************************************************
@@ -9,10 +10,12 @@
  *********************************************************************/
 sky::sky()
 {
+   dirs dir;
    color[0] = 1.0;
    color[1] = 1.0;
    color[2] = 1.0;
-   SDL_Surface* img = IMG_Load("../data/texturas/sky/skymap.png");
+   SDL_Surface* img;
+   img = IMG_Load(dir.getRealFile("texturas/sky/skymap.png").c_str());
    if(img != NULL)
    {
       setTextureRGBA(img, &skyMap);

@@ -45,17 +45,17 @@ alignwindow.o: alignwindow.h alignwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)align
 	@$(CC) $(CFLAGS) $(SUPREDE) alignwindow.cpp -o alignwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-aspectwindow.o: aspectwindow.h aspectwindow.cpp $(ENDGUI)farso.h character.h $(ENDETC)userinfo.h
+aspectwindow.o: aspectwindow.h aspectwindow.cpp $(ENDGUI)farso.h character.h $(ENDETC)userinfo.h $(ENDETC)dirs.h
 	@printf "Making aspectwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) aspectwindow.cpp -o aspectwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-attwindow.o: attwindow.h attwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)skills.h
+attwindow.o: attwindow.h attwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)skills.h $(ENDETC)dirs.h
 	@printf "Making attwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) attwindow.cpp -o attwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-barterwindow.o: barterwindow.h barterwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)barter.h inventwindow.h itemwindow.h
+barterwindow.o: barterwindow.h barterwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)barter.h inventwindow.h itemwindow.h $(ENDETC)dirs.h
 	@printf "Making barterwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) barterwindow.cpp -o barterwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -65,7 +65,7 @@ camera.o: camera.cpp camera.h $(ENDMAP)map.h
 	@$(CC) $(CFLAGS) camera.cpp -o camera.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-character.o: character.cpp character.h $(ENDGUI)draw.h $(ENDGUI)picture.h $(ENDGUI)healthBar.h $(ENDCLASSES)thing.h $(ENDCLASSES)feats.h $(ENDCLASSES)classes.h $(ENDCLASSES)race.h $(ENDCLASSES)inventory.h $(ENDIA)astar.h $(ENDETC)animodel.h $(ENDMAP)map.h barterwindow.h
+character.o: character.cpp character.h $(ENDGUI)draw.h $(ENDGUI)picture.h $(ENDGUI)healthBar.h $(ENDCLASSES)thing.h $(ENDCLASSES)feats.h $(ENDCLASSES)classes.h $(ENDCLASSES)race.h $(ENDCLASSES)inventory.h $(ENDIA)astar.h $(ENDETC)animodel.h $(ENDMAP)map.h barterwindow.h $(ENDETC)dirs.h
 	@printf "Making character.o... "
 	@$(CC) $(CFLAGS) character.cpp -o character.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -85,7 +85,7 @@ culling.o: culling.cpp culling.h
 	@$(CC) $(CFLAGS) culling.cpp -o culling.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-cursor.o: cursor.cpp cursor.h
+cursor.o: cursor.cpp cursor.h $(ENDETC)dirs.h
 	@printf "Making cursor.o... "
 	@$(CC) $(CFLAGS) cursor.cpp -o cursor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -95,7 +95,7 @@ dialog.o: dialog.cpp dialog.h $(ENDGUI)farso.h character.h barterwindow.h
 	@$(CC) $(CFLAGS) dialog.cpp -o dialog.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h $(ENDCLASSES)race.h $(ENDCLASSES)classes.h $(ENDCLASSES)weapon.h $(ENDCLASSES)actions.h $(ENDCLASSES)mission.h $(ENDETC)message3d.h $(ENDFIGHT)fightSystem.h $(ENDGUI)farso.h $(ENDMAP)map.h $(ENDPART)partSystem.h $(ENDPART)wave.h $(ENDSOUND)sound.h $(ENDIA)iascript.h alignwindow.h aspectwindow.h attwindow.h camera.h character.h classwindow.h collision.h cursor.h dialog.h initial.h inventwindow.h itemwindow.h modstate.h options.h racewindow.h shadow.h skillwindow.h sun.h util.h
+dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h $(ENDCLASSES)race.h $(ENDCLASSES)classes.h $(ENDCLASSES)weapon.h $(ENDCLASSES)actions.h $(ENDCLASSES)mission.h $(ENDETC)message3d.h $(ENDETC)dirs.h $(ENDFIGHT)fightSystem.h $(ENDGUI)farso.h $(ENDMAP)map.h $(ENDPART)partSystem.h $(ENDPART)wave.h $(ENDSOUND)sound.h $(ENDIA)iascript.h alignwindow.h aspectwindow.h attwindow.h camera.h character.h classwindow.h collision.h cursor.h dialog.h initial.h inventwindow.h itemwindow.h modstate.h options.h racewindow.h shadow.h skillwindow.h sun.h util.h
 	@printf "Making dccnit.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -105,7 +105,7 @@ initial.o: initial.h initial.cpp $(ENDGUI)farso.h $(ENDSOUND)sound.h
 	@$(CC) $(CFLAGS) $(SUPREDE) initial.cpp -o initial.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-inventwindow.o: inventwindow.h inventwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)inventory.h $(ENDMAP)map.h cursor.h modstate.h util.h itemwindow.h
+inventwindow.o: inventwindow.h inventwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)inventory.h $(ENDMAP)map.h cursor.h modstate.h util.h itemwindow.h $(ENDETC)dirs.h
 	@printf "Making inventwindow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) inventwindow.cpp -o inventwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -120,7 +120,7 @@ modstate.o: modstate.h modstate.cpp $(ENDCLASSES)inventory.h $(ENDMAP)map.h
 	@$(CC) $(CFLAGS) $(SUPREDE) modstate.cpp -o modstate.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-options.o: options.h options.cpp $(ENDGUI)farso.h $(ENDETC)userinfo.h
+options.o: options.h options.cpp $(ENDGUI)farso.h $(ENDETC)userinfo.h $(ENDETC)dirs.h
 	@printf "Making options.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) options.cpp -o options.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -140,17 +140,17 @@ shadow.o: shadow.h shadow.cpp camera.h
 	@$(CC) $(CFLAGS) $(SUPREDE) shadow.cpp -o shadow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-sky.o: sky.h sky.cpp $(ENDMAP)map.h
+sky.o: sky.h sky.cpp $(ENDMAP)map.h $(ENDETC)dirs.h
 	@printf "Making sky.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) sky.cpp -o sky.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	
-sun.o: sun.h sun.cpp
+sun.o: sun.h sun.cpp $(ENDETC)dirs.h
 	@printf "Making sun.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) sun.cpp -o sun.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-teste.o: teste.cpp ../config.h dccnit.h $(ENDGUI)farso.h
+teste.o: teste.cpp ../config.h dccnit.h $(ENDGUI)farso.h $(ENDETC)dirs.h
 	@printf "Making teste.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) teste.cpp -o teste.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

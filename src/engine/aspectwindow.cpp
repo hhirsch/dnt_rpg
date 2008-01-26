@@ -10,6 +10,7 @@
  **************************************************************/
 aspectWindow::aspectWindow(character* dude, interface* inter)
 {
+   dirs dir;
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
@@ -54,13 +55,13 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
    intWindow->getObjectsList()->insertTextBox(72,50,112,64,1,gettext("Sex:"));
    cxSelSexF = intWindow->getObjectsList()->insertCxSel(113, 52, false);
    intWindow->getObjectsList()->insertPicture(125,50,0,0,
-                                  "../data/texturas/aspectw/sex_f.png");
+                         dir.getRealFile("texturas/aspectw/sex_f.png").c_str());
    cxSelSexM = intWindow->getObjectsList()->insertCxSel(143, 52, true);
    intWindow->getObjectsList()->insertPicture(155,50,0,0,
-                                  "../data/texturas/aspectw/sex_m.png");
+                         dir.getRealFile("texturas/aspectw/sex_m.png").c_str());
    cxSelSexO = intWindow->getObjectsList()->insertCxSel(173, 52, false);
    intWindow->getObjectsList()->insertPicture(185,50,0,0,
-                                  "../data/texturas/aspectw/sex_o.png");
+                         dir.getRealFile("texturas/aspectw/sex_o.png").c_str());
 
    /* Contorns */
    intWindow->getObjectsList()->insertTextBox(70,18,254,74,2,"");
@@ -102,7 +103,9 @@ void aspectWindow::loadImages()
 
    totalImages = 0;
 
-   if( !(f = fopen("../data/characters/portraits/portraits.lst", "r")) )
+   dirs dir;
+   if( !(f=fopen(dir.getRealFile("characters/portraits/portraits.lst").c_str(),
+                 "r")) )
    {
       printf(gettext("Can't open the list with portraits: portraits.lst!\n"));
       return;
@@ -115,7 +118,7 @@ void aspectWindow::loadImages()
    {
       fscanf(f,"%s", &buffer[0]);
       images[i].imageFile = buffer;
-      images[i].image = IMG_Load(images[i].imageFile.c_str());
+      images[i].image = IMG_Load(dir.getRealFile(images[i].imageFile).c_str());
    }
 }
 

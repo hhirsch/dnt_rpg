@@ -3,6 +3,7 @@
 #include "sun.h"
 #include "util.h"
 #include "../gui/draw.h"
+#include "../etc/dirs.h"
 #include <stdio.h>
 
 /*********************************************************************
@@ -22,7 +23,8 @@ sun::sun(float hour, float farViewX, float farViewZ)
    
    positionOnHour(0.0,0.0);
 
-   SDL_Surface* img = IMG_Load("../data/texturas/sky/sun.png");
+   dirs dir;
+   SDL_Surface* img = IMG_Load(dir.getRealFile("texturas/sky/sun.png").c_str());
    if(!img)
    {
       printf("Failed to open Sun Texture!\n");
@@ -33,7 +35,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
       SDL_FreeSurface(img);
    }
 
-   img = IMG_Load("../data/texturas/sky/moon.png");
+   img = IMG_Load(dir.getRealFile("texturas/sky/moon.png").c_str());
    if(!img)
    {
       printf("Failed to open Moon Texture!\n");
