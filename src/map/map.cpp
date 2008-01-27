@@ -6,6 +6,7 @@
 #include "../engine/culling.h"
 #include "../engine/util.h"
 #include "../etc/extensions.h"
+#include "../etc/dirs.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -209,14 +210,16 @@ texture* Map::getTexture(GLuint id)
  ********************************************************************/
 GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
 {
+   dirs dir;
    texture* tex;
    int aux;
 
    /* Load Texture Images */
-   SDL_Surface* img = IMG_Load(arq.c_str());
+   SDL_Surface* img = IMG_Load(dir.getRealFile(arq).c_str());
    if(!img)
    {
-      printf("Error Opening Texture: %s\n",arq.c_str());
+      printf("Error Opening Texture: %s\n",
+             dir.getRealFile(arq).c_str());
       return(0);
    }
 
@@ -1300,11 +1303,12 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    int pisavel=0;
    GLuint R,G,B;
    GLuint Ratual,Gatual,Batual;
-  
+   dirs dir; 
    
-   if(!(arq = fopen(arquivo.c_str(),"r")))
+   if(!(arq = fopen(dir.getRealFile(arquivo).c_str(),"r")))
    {
-      printf("Error while opening map file: %s\n",arquivo.c_str());
+      printf("Error while opening map file: %s\n",
+             dir.getRealFile(arquivo).c_str());
 	return(0);
    }
 

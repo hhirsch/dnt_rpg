@@ -112,7 +112,7 @@ engine::engine()
    missions = new missionsController(this);
 
    /* FIXME remove from here the addMission */
-   missions->addNewMission(dir.getRealFile("missions/tutorial/mission1.dsl"));
+   missions->addNewMission("missions/tutorial/mission1.dsl");
 
    hour = 9.0;
    gameSun = new sun(hour, HALFFARVIEW, HALFFARVIEW);
@@ -305,7 +305,7 @@ void engine::loadPCs()
       delete(PCs);
    }
    PCs  = new (characterList);
-   per = PCs->insertCharacter(dir.getRealFile("characters/pcs/metaleiro.pc"),
+   per = PCs->insertCharacter("characters/pcs/metaleiro.pc",
                               features, this);
 }
 
@@ -424,10 +424,11 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    if(!actualMap->getNpcFileName().empty())
    {
       FILE* arq;
-      if(!(arq = fopen(actualMap->getNpcFileName().c_str(),"r")))
+      if(!(arq = fopen(dir.getRealFile(actualMap->getNpcFileName()).c_str(),
+                       "r")))
       {
          printf(gettext("Ouch, can't load NPC's file: %s.\n"),
-                actualMap->getNpcFileName().c_str());
+               dir.getRealFile(actualMap->getNpcFileName()).c_str());
       }
       else
       {
@@ -703,7 +704,7 @@ int engine::InitialScreen(int Status, GLuint idTextura, bool reloadMusic)
    if(reloadMusic)
    {
       /*music =*/
-      snd->loadMusic(dir.getRealFile("music/musica1.ogg"));
+      snd->loadMusic("music/musica1.ogg");
    }
 
    /* Executes Initial Screen */
@@ -1236,7 +1237,7 @@ void engine::enterBattleMode(bool surprisePC)
                  
   if(numEnemies > 0)
   {
-      snd->addSoundEffect(false,dir.getRealFile("sndfx/battleMode.ogg"));
+      snd->addSoundEffect(false,"sndfx/battleMode.ogg");
       engineMode = ENGINE_MODE_TURN_BATTLE;
       moveCircleX = activeCharacter->xPosition;
       moveCircleY = activeCharacter->yPosition;
@@ -2138,7 +2139,7 @@ int engine::treatIO(SDL_Surface *screen)
                effect = (part2*)particleSystem->addParticle(PART_FIRE,
                                           activeCharacter->xPosition,0,
                                           activeCharacter->zPosition,
-                                      dir.getRealFile("particles/effect1.par"));
+                                          "particles/effect1.par");
                if(effect)
                {
                   effect->followPC = true;
@@ -2166,7 +2167,7 @@ int engine::treatIO(SDL_Surface *screen)
                                                 activeCharacter->xPosition,
                                                 activeCharacter->zPosition),
                                                 activeCharacter->zPosition,
-                                        dir.getRealFile("particles/fire1.par"));
+                                        "particles/fire1.par");
          }
          if( (keys[SDLK_u]) && 
              ( (tempo-lastKeyb >= REFRESH_RATE) || 
@@ -2183,7 +2184,7 @@ int engine::treatIO(SDL_Surface *screen)
                                        activeCharacter->xPosition + 800*incX,
                                        activeCharacter->yPosition + 15,
                                        activeCharacter->zPosition + 800*incZ,
-                                       dir.getRealFile("particles/fire1.par"));
+                                       "particles/fire1.par");
          }
          if( (keys[SDLK_l]) && 
              ( (tempo-lastKeyb >= REFRESH_RATE) || 
@@ -2194,7 +2195,7 @@ int engine::treatIO(SDL_Surface *screen)
             particleSystem->addParticle(PART_LIGHTNING,
                                         activeCharacter->xPosition,250,
                                         activeCharacter->zPosition,
-                                   dir.getRealFile("particles/lightning1.par"));
+                                        "particles/lightning1.par");
          }
 
          if( (keys[SDLK_0]) && 
@@ -2572,7 +2573,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
             walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,
                                             activeCharacter->zPosition,true,
-                                           dir.getRealFile("sndfx/passos.ogg"));
+                                            "sndfx/passos.ogg");
          }
          else
          {
@@ -3371,7 +3372,7 @@ int engine::Run(SDL_Surface *surface)
           ( (SDL_GetTicks() - waitDieTimer) >= ENGINE_WAIT_DIE_DELAY) )
       {
          /* All Pcs are Dead, so Death Screen! */
-         snd->loadMusic(dir.getRealFile("music/musica8.ogg"));
+         snd->loadMusic("music/musica8.ogg");
          showImage(dir.getRealFile("texturas/fightMode/death.png"));
 
          /* Clear Modifications */

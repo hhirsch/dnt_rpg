@@ -6,12 +6,14 @@
 #include "skills.h"
 #include "defs.h"
 #include "../lang/translate.h"
+#include "../etc/dirs.h"
 
 /*************************************************************
  *                      Constructor                          *
  *************************************************************/
 skills::skills(string dir, string arq)
 {
+   dirs dirInfo;
    FILE* file;
    string arqDescricao;
    string arqImagem;
@@ -63,7 +65,12 @@ skills::skills(string dir, string arq)
       m_skills[aux].points = 0;
       m_skills[aux].mod = 2;
       m_skills[aux].prevPoints = 0;
-      m_skills[aux].image = IMG_Load(arqImagem.c_str());
+      m_skills[aux].image = IMG_Load(dirInfo.getRealFile(arqImagem).c_str());
+      if(!m_skills[aux].image)
+      {
+         printf(gettext("Can't open skill image: %s\n"),
+                dirInfo.getRealFile(arqImagem).c_str() );
+      }
       fclose(desc);
    }
 
@@ -110,6 +117,7 @@ skills::skills(skills* sk)
  *************************************************************/
 skills::skills()
 {
+   dirs dir;
    FILE* file;
    string arqDescricao;
    string arqImagem;
@@ -119,10 +127,10 @@ skills::skills()
    char buf4[128];
    int num;
    string fName = "";
-   if(!(file=fopen("../data/skills/skills.skl","r")))
+   if(!(file=fopen(dir.getRealFile("skills/skills.skl").c_str(),"r")))
    {
        printf(gettext("Error while opening skills list:"
-                      "../data/skills/skills.skl\n"));
+                      "skills/skills.skl\n"));
        return;
    }
 
@@ -147,7 +155,7 @@ skills::skills()
       sscanf(buffer,"%d %s %s %s",&num, &buf2[0],&buf3[0], &buf4[0]);
       arqImagem = buf3;
       arqDescricao = buf2;
-      arqDescricao = "../data/skills/" + arqDescricao;
+      arqDescricao = dir.getRealFile("skills/") + arqDescricao;
       m_skills[aux].idString = buf4;
 
       FILE* desc;

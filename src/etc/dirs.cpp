@@ -27,18 +27,22 @@ void dirs::findDataDirectories()
    else
    {
       /* Try to open at defined datadir */
-      file = PACKAGE;
-      file += DATADIR;
+      file = DATADIR;
+      file += "/";
+      file += PACKAGE;
       file += "/fnt/arial.ttf";
       if((arq = fopen(file.c_str(),"r")))
       {
-         dataPath = PACKAGE;
-         dataPath += DATADIR;
+         dataPath = DATADIR;
+         dataPath += "/";
+         dataPath += PACKAGE;
+         dataPath += "/";
          fclose(arq);
       }
       else
       {
          printf("Error: Couldn't define the data directories!\n");
+         printf("Tried: %s and %s\n","../data/", file.c_str());
          exit(-3);
       }
    }

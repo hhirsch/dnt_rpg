@@ -11,13 +11,14 @@
 part1::part1(float cX,float cY,float cZ, string fileName):
                               particleSystem(fileName, PARTICLE_DRAW_GROUPS)
 {
+   dirs dir;
    centerX = cX; 
    centerY = cY; 
    centerZ = cZ;
    actualParticles = 0;
    actualPlanes = 0;
    intersections = NULL;
-   partTexture = LoadTexture("../data/particles/water.png");
+   partTexture = LoadTexture(dir.getRealFile("particles/water.png"));
 }
 
 /****************************************************************************

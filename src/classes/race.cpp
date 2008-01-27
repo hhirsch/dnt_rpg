@@ -1,5 +1,6 @@
 #include "race.h"
 #include "../lang/translate.h"
+#include "../etc/dirs.h"
 #include <iostream>
 #include <fstream>
 
@@ -169,6 +170,7 @@ races::~races()
  ******************************************************************/
 void races::insertRace(string fileName,string imgFile,string idString,int idInt)
 {
+   dirs dir;
    std::ifstream file;
    string str;
    int i;
@@ -200,10 +202,10 @@ void races::insertRace(string fileName,string imgFile,string idString,int idInt)
    ins->description = translateDataString(ins->description);
 
    /* Image */
-   ins->image = IMG_Load(imgFile.c_str());
+   ins->image = IMG_Load(dir.getRealFile(imgFile).c_str());
    if(!ins->image)
    {
-      printf("Error while opening image racement file: %s\n",str.c_str());
+      printf("Error while opening image race image file: %s\n",imgFile.c_str());
    }
 
    /* Modifiers */

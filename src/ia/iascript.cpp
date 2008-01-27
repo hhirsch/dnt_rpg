@@ -1,6 +1,7 @@
 
 #include "iascript.h"
 #include "../engine/dccnit.h"
+#include "../etc/dirs.h"
 
 /***********************************************************************
  *                           Constructor                               *
@@ -24,10 +25,13 @@ iaScript::iaScript(string scriptFile, void* usedEngine)
  ***********************************************************************/
 void iaScript::init()
 {
-   file.open(fileName.c_str(), ios::in | ios::binary);
+   dirs dir;
+   file.open(dir.getRealFile(fileName).c_str(), 
+             ios::in | ios::binary);
    if(!file)
    {
-      cerr << "Failed to open the script: " << fileName << endl;
+      cerr << "Failed to open the script: "
+           << dir.getRealFile(fileName) << endl;
    }
 
    symbols = new iaSymbolsTable();

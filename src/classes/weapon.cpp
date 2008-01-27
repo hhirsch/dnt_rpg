@@ -1,5 +1,6 @@
 #include "weapon.h"
 #include "../lang/translate.h"
+#include "../etc/dirs.h"
 
 /************************************************************
  *                        Constructor                       *
@@ -26,6 +27,7 @@ void wInfo::operator=(wInfo& v)
  ************************************************************/
 weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
 {
+   dirs dir;
    FILE* file;
    char buffer[512];
    string token, token2;
@@ -40,9 +42,10 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
 
    type = OBJECT_TYPE_WEAPON;
 
-   if(!(file=fopen(path.c_str(),"r")))
+   if(!(file=fopen(dir.getRealFile(path).c_str(),"r")))
    {
-       printf("Error on open object %s\n", path.c_str());
+       printf("Error on open object %s\n",
+              dir.getRealFile(path).c_str());
        return;
    }
 
@@ -78,11 +81,11 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
       else if(token == "inventory_texture")
       {
          model2dName = token2;
-         model2d = IMG_Load(model2dName.c_str());
+         model2d = IMG_Load(dir.getRealFile(model2dName).c_str());
          if(!model2d)
          {
-            printf("Can't open image: %s\n"
-                   "Will Crash Soon!\n", model2dName.c_str());
+            printf("Can't open image: %s\nWill Crash Soon!\n", 
+                   dir.getRealFile(model2dName).c_str());
          }
       }
       else if(token == "life_points")

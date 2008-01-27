@@ -1,5 +1,6 @@
 #include "classes.h"
 #include "../lang/translate.h"
+#include "../etc/dirs.h"
 #include <iostream>
 #include <fstream>
 
@@ -170,6 +171,7 @@ classes::~classes()
 void classes::insertClass(string fileName, string imgFile, string idString,
                           int idInt)
 {
+   dirs dir;
    std::ifstream file;
    string str;
    int i;
@@ -210,10 +212,10 @@ void classes::insertClass(string fileName, string imgFile, string idString,
    getline(file, str);
    sscanf(str.c_str(), "d%d",&ins->lifeDiceID);
 
-   ins->image = IMG_Load(imgFile.c_str());
+   ins->image = IMG_Load(dir.getRealFile(imgFile).c_str());
    if(!ins->image)
    {
-      printf("Error while opening image class file: %s\n",str.c_str());
+      printf("Error while opening image class file: %s\n",imgFile.c_str());
    }
 
    /* Modifiers */

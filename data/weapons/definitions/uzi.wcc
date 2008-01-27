@@ -1,7 +1,7 @@
 name = gettext("Uzi")
-cal3d = ../data/models/objetos/armas/uzi/model.cfg
+cal3d = models/objetos/armas/uzi/model.cfg
 inventory_sizes = 2 2
-inventory_texture = ../data/models/objetos/armas/uzi/uzi_inv.png
+inventory_texture = models/objetos/armas/uzi/uzi_inv.png
 life_points = 35
 fortitude = 12
 reflex = 0
@@ -19,5 +19,5 @@ size_type = tiny
 weight_type = light
 weight_value = 3.5
 main_damage_type = piercing
-main_attack_sound = ../data/sndfx/guns/machine_guns/metralha_1.ogg
+main_attack_sound = sndfx/guns/machine_guns/metralha_1.ogg
 damage_dice = 1*d5+0x2

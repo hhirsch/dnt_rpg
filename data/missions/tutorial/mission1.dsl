@@ -5,11 +5,11 @@ script()
 
    # create the object fileName, since can't have a literal parameter
    string objFile
-   objFile = "../data/weapons/definitions/beretta92.wcc"
+   objFile = "weapons/definitions/beretta92.wcc"
 
    #create the mission filename too
    string missionFile
-   missionFile = "../data/missions/tutorial/mission1.dsl"
+   missionFile = "missions/tutorial/mission1.dsl"
 
    int xpValue
    xpValue = 100

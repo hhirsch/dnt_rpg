@@ -3,6 +3,133 @@
 PACKAGE = @PACKAGE@
 VERSION = @VERSION@
 
+prefix = @prefix@
+datadir = @datarootdir@
+localedir = $(datadir)/locale
+DEFS = -DLOCALEDIR=\"$(localedir)\"
+
+INSTALL = install
+
+BIN=./bin/
+
+PREVDATADIR = ./data
+DATADIRECTORIES = alignment/ \
+						alignment/Img/ \
+						characters/ \
+						characters/npcs/ \
+						characters/pcs/ \
+						characters/portraits/ \
+						classes/ \
+						classes/Img/ \
+						cursors/ \
+						dialogs/ \
+						feats/ \
+						feats/Img/ \
+						fnt/ \
+						ia/ \
+						ia/scripts/ \
+						ia/scripts/fight/ \
+						ia/scripts/general/ \
+						mapas/ \
+						mapas/tutorial/ \
+						mapEditor/ \
+						mapEditor/lists/ \
+						missions/ \
+						missions/tutorial/ \
+						models/ \
+						models/building/ \
+						models/natural/ \
+						models/natural/arvores/ \
+						models/natural/arvores/jacaranda/ \
+						models/natural/arvores/tree1/ \
+						models/objetos/ \
+						models/objetos/armas/ \
+						models/objetos/armas/adaga/ \
+						models/objetos/armas/axe/ \
+						models/objetos/armas/beretta92/ \
+						models/objetos/armas/dark_katana/ \
+						models/objetos/armas/faca/ \
+						models/objetos/armas/kalashnikov/ \
+						models/objetos/armas/kalashnikov_small/ \
+						models/objetos/armas/scimitar/ \
+						models/objetos/armas/sw39/ \
+						models/objetos/armas/uzi/ \
+						models/objetos/banho/ \
+						models/objetos/banho/mictorio/ \
+						models/objetos/banho/privada/ \
+						models/objetos/geral/ \
+						models/objetos/geral/barrel/ \
+						models/objetos/geral/cap/ \
+						models/objetos/geral/colarinho_e_oculos/ \
+						models/objetos/geral/computador/ \
+						models/objetos/geral/et/ \
+						models/objetos/geral/exclamacao/ \
+						models/objetos/geral/guitarra/ \
+						models/objetos/geral/mala/ \
+						models/objetos/geral/placa_pare/ \
+						models/objetos/geral/porta/ \
+						models/objetos/geral/porta2/ \
+						models/objetos/geral/porta3/ \
+						models/objetos/geral/refmachine/ \
+						models/objetos/icex/ \
+						models/objetos/icex/cadeira/ \
+						models/objetos/icex/lixo/ \
+						models/objetos/icex/mesa/ \
+						models/objetos/icex/mesa_braco/ \
+						models/objetos/icex/mesa_redonda/ \
+						models/objetos/icex/nes/ \
+						models/objetos/icex/quadro/ \
+						models/objetos/icex/snes/ \
+						models/objetos/icex/snes/contra/ \
+						models/objetos/icex/snes/mario/ \
+						models/objetos/icex/snes/sf2/ \
+						models/objetos/tumbas/ \
+						models/objetos/tumbas/cruz/ \
+						models/objetos/tumbas/lapide/ \
+						models/objetos/tumbas/tomb1/ \
+						models/objetos/tumbas/tomb_column/ \
+						models/personagens/ \
+						models/personagens/Ameiva/ \
+						models/personagens/Arvore/ \
+						models/personagens/bunny/ \
+						models/personagens/cow/ \
+						models/personagens/deer/ \
+						models/personagens/Logan/ \
+						models/personagens/metaleiro/ \
+						models/personagens/Ratazana/ \
+						models/personagens/spider/ \
+						models/personagens/toywolf/ \
+						music/ \
+						particles/ \
+						races/ \
+						races/Img/ \
+						skills/ \
+						skills/Img/ \
+						sndfx/ \
+						sndfx/animal/ \
+						sndfx/menu/ \
+						sndfx/missions/ \
+						sndfx/natural/ \
+						texturas/ \
+                  texturas/aspectw/ \
+						texturas/dialogw/ \
+						texturas/fightMode/ \
+						texturas/floor_indoor/ \
+						texturas/floor_outdoor/ \
+						texturas/general/ \
+						texturas/inventory/ \
+						texturas/mapw/ \
+						texturas/options/ \
+						texturas/posters/ \
+						texturas/roads/ \
+						texturas/shortcutsw/ \
+						texturas/sky/ \
+						texturas/walk/ \
+						texturas/wall/ \
+						weapons/ \
+						weapons/definitions/ \
+						weapons/types/
+
 all: buildparts
 
 buildparts:
@@ -12,3 +139,33 @@ buildparts:
 clean:
 	cd ./src && ${MAKE} clean;
 	cd ./po && ${MAKE} clean;
+
+install: $(BIN)dccnitghtmare
+	@printf "Installing DccNiTghtmare bin files... "
+	@$(INSTALL) -c -m 755 $(BIN)dccnitghtmare $(prefix)/bin/
+	@$(INSTALL) -c -m 755 $(BIN)dntMapEditor $(prefix)/bin/
+	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Installing DccNiTghtmare data files... "
+	@$(INSTALL) -d $(datadir)/$(PACKAGE)
+	@$(INSTALL) -c -m 644 $(BIN)dcc.opc $(datadir)/$(PACKAGE)/dcc.opc
+	@for dir in $(DATADIRECTORIES);do \
+	  $(INSTALL) -d $(datadir)/$(PACKAGE)/$$dir ; \
+	  for fichier in $(PREVDATADIR)/$$dir/*.*; do\
+	  		if [ "$$fichier" != "$(PREVDATADIR)/$$dir/*.*" ] ; then\
+	      	$(INSTALL) -c -m 644 $$fichier $(datadir)/$(PACKAGE)/$$dir ; \
+			fi \
+		done \
+	done
+	@printf "\e[0;32mDone.\e[0;0m\n"
+	@printf "Installing DccNiTghtmare Language files... "
+	@cd ./po && ${MAKE} install;
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+uninstall:
+	@printf "Uninstalling DccNiTghtmare files... "
+	@rm -f $(prefix)/bin/dccnitghtmare
+	@rm -f $(prefix)/bin/dntMapEditor
+	@rm -rf $(datadir)/$(PACKAGE)
+	@printf "\e[0;32mDone.\e[0;0m\n"
+	
+

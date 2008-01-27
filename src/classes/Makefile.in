@@ -23,7 +23,7 @@ actions.o: actions.cpp actions.h thing.h $(ENDENGINE)character.h
 	@$(CC) $(CFLAGS) actions.cpp -o actions.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-align.o: align.cpp align.h
+align.o: align.cpp align.h $(ENDETC)dirs.h
 	@printf "Making align.o... "
 	@$(CC) $(CFLAGS) align.cpp -o align.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -33,7 +33,7 @@ barter.o: barter.cpp barter.h object.h itemslot.h inventory.h $(ENDETC)dirs.h
 	@$(CC) $(CFLAGS) barter.cpp -o barter.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-classes.o: classes.cpp classes.h actions.h skills.h feats.h dices.h defs.h
+classes.o: classes.cpp classes.h actions.h skills.h feats.h dices.h defs.h $(ENDETC)dirs.h
 	@printf "Making classes.o... "
 	@$(CPP) $(CFLAGS) classes.cpp -o classes.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -43,7 +43,7 @@ defs.o: defs.h defs.cpp dices.h
 	@$(CPP) $(CFLAGS) defs.cpp -o defs.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-feats.o: feats.cpp feats.h actions.h defs.h dices.h thing.h modifier.h $(ENDETC)message3d.h
+feats.o: feats.cpp feats.h actions.h defs.h dices.h thing.h modifier.h $(ENDETC)message3d.h $(ENDETC)dirs.h
 	@printf "Making feats.o... "
 	@$(CC) $(CFLAGS) feats.cpp -o feats.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -68,7 +68,7 @@ object.o: object.cpp object.h thing.h $(ENDETC)modellist.h
 	@$(CC) $(CFLAGS) object.cpp -o object.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-race.o: race.cpp race.h modifier.h feats.h skills.h
+race.o: race.cpp race.h modifier.h feats.h skills.h $(ENDETC)dirs.h
 	@printf "Making race.o... "
 	@$(CC) $(CFLAGS) race.cpp -o race.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

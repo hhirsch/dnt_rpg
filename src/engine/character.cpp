@@ -174,12 +174,11 @@ string character::getConversationFile()
  *********************************************************************/
 void character::createConversation(void* pEngine)
 {
-   dirs dir;
    if(conversationFile != "")
    {
       conv = (void*) new conversation(pEngine);
       conversation* cs = (conversation*)conv;
-      cs->loadFile(dir.getRealFile(conversationFile));
+      cs->loadFile(conversationFile);
    }
 }
 
@@ -663,6 +662,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
                                            void* pEngine)
 
 {
+   dirs dir;
    FILE* arq;
    char buffer[128];
    string buf; 
@@ -675,9 +675,10 @@ character* characterList::insertCharacter(string file, featsList* ft,
    novo->zPosition = 0.0;
    novo->yPosition = 0.0;
 
-   if(!(arq = fopen(file.c_str(),"r")))
+   if(!(arq = fopen(dir.getRealFile(file).c_str(),"r")))
    {
-      printf("Error while opening character file: %s\n",file.c_str());
+      printf("Error while opening character file: %s\n",
+             dir.getRealFile(file).c_str());
 	return(0);
    }
 

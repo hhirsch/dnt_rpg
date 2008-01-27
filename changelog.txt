@@ -38,6 +38,7 @@
  - Some Adjusts on A*;
  - Objects are now only in cal3D, no more .obj;
  - First real-game maps;
+ - Make Install now works;
  - Fixed Bug on remove no more used Models and 
    dead with items;
  - Fixed Bug on NPCs Fight Animations;

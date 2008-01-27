@@ -61,6 +61,7 @@ aligns::~aligns()
  ******************************************************************/
 void aligns::insertAlign(string fileName, string idString, int idInt)
 {
+   dirs dir;
    std::ifstream file;
    string str;
    align* ins = new(align);
@@ -92,7 +93,7 @@ void aligns::insertAlign(string fileName, string idString, int idInt)
    /* Image */
    getline(file, str);
 
-   ins->image = IMG_Load(str.c_str());
+   ins->image = IMG_Load(dir.getRealFile(str).c_str());
    if(!ins->image)
    {
       printf("Error while opening image alignment file: %s\n",str.c_str());

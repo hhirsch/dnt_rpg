@@ -1,5 +1,6 @@
 #include "maplights.h"
 #include "../engine/util.h"
+#include "../etc/dirs.h"
 #include <math.h>
 
 /************************************************************
@@ -52,10 +53,12 @@ void mapLights::Load(string arq)
    GLfloat aux0,aux1,aux2,aux3;
    char tipo;
    FILE* file;
+   dirs dir;
 
-   if(!(file=fopen(arq.c_str(),"r")))
+   if(!(file=fopen(dir.getRealFile(arq).c_str(),"r")))
    {
-       printf("Error while opening lights: %s\n",arq.c_str());
+       printf("Error while opening lights: %s\n",
+              dir.getRealFile(arq).c_str());
        return;
    }
 

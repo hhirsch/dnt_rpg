@@ -3,6 +3,7 @@
  *************************************************************************/
 
 #include "partSystem.h"
+#include "../etc/dirs.h"
 
 /**********************************************************************
  *                             Constructor                            *
@@ -537,6 +538,7 @@ int partSystem::numParticles()
  **********************************************************************/
 void partSystem::loadFromFile(string fileName)
 {
+   dirs dir;
    FILE* file; 
    int type; GLfloat X,Y,Z;
    char buffer[150];
@@ -549,9 +551,10 @@ void partSystem::loadFromFile(string fileName)
 
    deleteAll();
 
-   if(!(file=fopen(fileName.c_str(),"r")))
+   if(!(file=fopen(dir.getRealFile(fileName).c_str(),"r")))
    {
-       printf("Error while opening Map particle file: %s\n",fileName.c_str());
+       printf("Error while opening Map particle file: %s\n",
+              dir.getRealFile(fileName).c_str());
        return;
    }
    while(fscanf(file,"%d %f %f %f %s",&type,&X,&Y,&Z,&buffer[0]) != EOF)

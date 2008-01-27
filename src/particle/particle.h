@@ -7,6 +7,7 @@
 using namespace std;
 
 #include "../etc/extensions.h"
+#include "../etc/dirs.h"
 
 #define PARTICLE_STATUS_DEAD   0  /**< Say that a particle is dead */
 #define PARTICLE_STATUS_ALIVE  1  /**< Say that a particle is alive */

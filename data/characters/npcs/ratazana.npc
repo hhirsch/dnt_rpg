@@ -1,12 +1,12 @@
 name = Ratazana
-model = ../data/models/personagens/Ratazana/modelo.cfg
-portrait = ../data/characters/portraits/ratazana.png
+model = models/personagens/Ratazana/modelo.cfg
+portrait = characters/portraits/ratazana.png
 maxLifePoints = 12
 baseModifier = 2/2/2
 attackModifier = 5/0/0/0/0/0
 sizeModifier = 2
-conversationFile = ratazana1.dlg
-generalScript = ../data/ia/script/general/test2.dsl
+conversationFile = dialogs/ratazana1.dlg
+generalScript = ia/script/general/test2.dsl
 ATT_STRENGHT = 10
 ATT_DEXTERY = 18
 ATT_CONSTITUTION = 12

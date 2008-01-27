@@ -1,188 +1,188 @@
 T 8X8
 # Made by DccNiTghtmare's MapEditor, v0.0.3
-npc ../data/mapas/teste2.map.npc
-light ../data/mapas/teste3.map.lgh
+npc mapas/teste2.map.npc
+light mapas/teste3.map.lgh
 Outdoor: 0
-o ../data/weapons/definitions/beretta92.wcc
-o ../data/models/objetos/geral/porta2/porta2.dcc
-o ../data/models/objetos/geral/porta3/porta3.dcc
-o ../data/models/objetos/icex/quadro/quadro.dcc
-o ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc
-o ../data/models/objetos/icex/lixo/lixo.dcc
-o ../data/models/objetos/icex/snes/contra/snes_contra.dcc
-o ../data/models/objetos/icex/snes/snes.dcc
-o ../data/models/objetos/icex/snes/sf2/snes_sf2.dcc
-t ../data/texturas/floor_indoor/carpete.png ../data/texturas/floor_indoor/carpete.png 186 161 126
-t ../data/texturas/floor_indoor/wood.png ../data/texturas/floor_indoor/wood.png 102 57 29
-t ../data/texturas/floor_outdoor/grass.png ../data/texturas/floor_outdoor/grass.png 54 102 49
-d ../data/models/objetos/geral/porta3/porta3.dcc 138.000000,394.518433:90
+o weapons/definitions/beretta92.wcc
+o models/objetos/geral/porta2/porta2.dcc
+o models/objetos/geral/porta3/porta3.dcc
+o models/objetos/icex/quadro/quadro.dcc
+o models/objetos/icex/mesa_braco/mesa_braco.dcc
+o models/objetos/icex/lixo/lixo.dcc
+o models/objetos/icex/snes/contra/snes_contra.dcc
+o models/objetos/icex/snes/snes.dcc
+o models/objetos/icex/snes/sf2/snes_sf2.dcc
+t texturas/floor_indoor/carpete.png texturas/floor_indoor/carpete.png 186 161 126
+t texturas/floor_indoor/wood.png texturas/floor_indoor/wood.png 102 57 29
+t texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png 54 102 49
+d models/objetos/geral/porta3/porta3.dcc 138.000000,394.518433:90
 wall 10.000000,0.000000,502.000000,10.000000:16,16,16
-wt ../data/texturas/floor_indoor/carpete.png
+wt texturas/floor_indoor/carpete.png
 wall 0.000000,0.000000,10.000000,512.000000:16,16,16
-wt ../data/texturas/floor_indoor/carpete.png
+wt texturas/floor_indoor/carpete.png
 wall 502.000000,0.000000,512.000000,512.000000:26,47,65
-wt ../data/texturas/floor_indoor/carpete.png
+wt texturas/floor_indoor/carpete.png
 wall 10.000000,502.000000,502.000000,512.000000:16,16,16
-wt ../data/texturas/floor_indoor/carpete.png
+wt texturas/floor_indoor/carpete.png
 wall 10.000000,320.000000,128.000000,330.000000:16,16,16
-wt ../data/texturas/floor_indoor/carpete.png
+wt texturas/floor_indoor/carpete.png
 wall 128.000000,320.000000,138.000000,372.680634:16,16,16
-wt ../data/texturas/floor_indoor/carpete.png
+wt texturas/floor_indoor/carpete.png
 wall 128.000000,394.518433,138.000000,502.000000:16,16,16
-wt ../data/texturas/floor_indoor/carpete.png
+wt texturas/floor_indoor/carpete.png
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 #Z: 1
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 #Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 #Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
-uo ../data/weapons/definitions/beretta92.wcc 1:4,4:196.726929,205.411621:0:0
+ut texturas/floor_indoor/wood.png
+uo weapons/definitions/beretta92.wcc 1:4,4:196.726929,205.411621:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 #Z: 4
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
-uo ../data/models/objetos/icex/snes/contra/snes_contra.dcc 1:1,5:17.309919,289.683899:-89:0
-uo ../data/models/objetos/icex/snes/snes.dcc 1:1,5:24.752115,291.838654:-89:0
-uo ../data/models/objetos/icex/snes/sf2/snes_sf2.dcc 1:1,5:30.833654,296.970581:53:0
-uo ../data/models/objetos/icex/snes/sf2/snes_sf2.dcc 1:1,5:18.924198,298.788422:-24:0
+ut texturas/floor_indoor/wood.png
+uo models/objetos/icex/snes/contra/snes_contra.dcc 1:1,5:17.309919,289.683899:-89:0
+uo models/objetos/icex/snes/snes.dcc 1:1,5:24.752115,291.838654:-89:0
+uo models/objetos/icex/snes/sf2/snes_sf2.dcc 1:1,5:30.833654,296.970581:53:0
+uo models/objetos/icex/snes/sf2/snes_sf2.dcc 1:1,5:18.924198,298.788422:-24:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 #Z: 5
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 1:1,6:24.723875,355.233856:-174:0
+ut texturas/floor_indoor/wood.png
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:1,6:24.723875,355.233856:-174:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,6:108.338249,348.868500:-208:0
+ut texturas/floor_indoor/wood.png
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,6:108.338249,348.868500:-208:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 #Z: 6
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 0:1,8:63.051373,452.176544:-187:0
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 1:1,7:46.989552,413.964874:-183:0
+ut texturas/floor_indoor/wood.png
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 0:1,8:63.051373,452.176544:-187:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:1,7:46.989552,413.964874:-183:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 0:1,8:63.051373,452.176544:-187:0
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,7:102.098915,416.970154:-213:0
+ut texturas/floor_indoor/wood.png
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 0:1,8:63.051373,452.176544:-187:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,7:102.098915,416.970154:-213:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 #Z: 7
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
-uo ../data/models/objetos/icex/quadro/quadro.dcc 0:2,8:73.680305,502.818787:0:0
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 1:1,8:30.824583,453.038788:-148:0
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 1:1,8:63.051373,452.176544:-187:0
-uo ../data/models/objetos/icex/lixo/lixo.dcc 1:1,8:14.172882,498.358765:-190:0
+ut texturas/floor_indoor/wood.png
+uo models/objetos/icex/quadro/quadro.dcc 0:2,8:73.680305,502.818787:0:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:1,8:30.824583,453.038788:-148:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:1,8:63.051373,452.176544:-187:0
+uo models/objetos/icex/lixo/lixo.dcc 1:1,8:14.172882,498.358765:-190:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
-uo ../data/models/objetos/icex/quadro/quadro.dcc 1:2,8:73.680305,502.818787:0:0
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 0:1,8:63.051373,452.176544:-187:0
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,8:106.857513,459.671387:-229:0
-uo ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,8:82.071236,465.901001:-190:0
+ut texturas/floor_indoor/wood.png
+uo models/objetos/icex/quadro/quadro.dcc 1:2,8:73.680305,502.818787:0:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 0:1,8:63.051373,452.176544:-187:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,8:106.857513,459.671387:-229:0
+uo models/objetos/icex/mesa_braco/mesa_braco.dcc 1:2,8:82.071236,465.901001:-190:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut ../data/texturas/floor_indoor/wood.png
+ut texturas/floor_indoor/wood.png
 i 256.000000,256.000000

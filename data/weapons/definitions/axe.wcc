@@ -1,7 +1,7 @@
 name = gettext("Great Axe")
-cal3d = ../data/models/objetos/armas/axe/model.cfg
+cal3d = models/objetos/armas/axe/model.cfg
 inventory_sizes = 2 4
-inventory_texture = ../data/models/objetos/armas/axe/axe_inv.png
+inventory_texture = models/objetos/armas/axe/axe_inv.png
 life_points = 40
 fortitude = 30
 reflex = 1
@@ -17,5 +17,5 @@ range_value = 30
 size_type = large
 weight_value = 9
 main_damage_type = slashing
-main_attack_sound = ../data/sndfx/weapons/slashing_large.ogg
+main_attack_sound = sndfx/weapons/slashing_large.ogg
 damage_dice = 1*1d10+0x3

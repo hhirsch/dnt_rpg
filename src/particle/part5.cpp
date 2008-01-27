@@ -12,11 +12,12 @@
 part5::part5(float cX,float cY,float cZ, string fileName):
                                particleSystem(fileName,PARTICLE_DRAW_GROUPS)
 {
+   dirs dir;
    centerX = cX; 
    alpha=cY; 
    centerZ=cZ;
    actualParticles = 0;
-   partTexture = LoadTexture("../data/particles/part2.png");
+   partTexture = LoadTexture(dir.getRealFile("particles/part2.png"));
    livingTime = 0;
    doneCreation = false;
 }

@@ -182,7 +182,7 @@ bool sound::loadMusic(string fileName)
 
    if(!backMusic->playback())
    {
-      printf("Can't Play Ogg File: %s\n", fileName.c_str());
+      printf("Can't Play Ogg File: %s\n",fileName.c_str());
       delete(backMusic);
       backMusic = NULL;
       return(false);

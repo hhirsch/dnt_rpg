@@ -7,6 +7,7 @@
 
 #include "../gui/farso.h"
 #include "../classes/skills.h"
+#include "../etc/dirs.h"
 
 #define CHAR_CANCEL  0 /**< Cancel Character Edition Return TODO not here*/
 #define CHAR_CONFIRM 1 /**< Confirm Character Edition Return TODO not here */

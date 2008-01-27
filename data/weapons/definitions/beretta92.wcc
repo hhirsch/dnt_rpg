@@ -1,7 +1,7 @@
 name = gettext("Beretta 92")
-cal3d = ../data/models/objetos/armas/beretta92/model.cfg
+cal3d = models/objetos/armas/beretta92/model.cfg
 inventory_sizes = 2 2
-inventory_texture = ../data/models/objetos/armas/beretta92/beretta_inv.png
+inventory_texture = models/objetos/armas/beretta92/beretta_inv.png
 life_points = 35
 fortitude = 12
 reflex = 0
@@ -19,5 +19,5 @@ size_type = tiny
 weight_type = light
 weight_value = 0.960
 main_damage_type = piercing
-main_attack_sound = ../data/sndfx/guns/pistols/leve_1.ogg
+main_attack_sound = sndfx/guns/pistols/leve_1.ogg
 damage_dice = 1*d6+0x2

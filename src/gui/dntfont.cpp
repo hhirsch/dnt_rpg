@@ -1,6 +1,7 @@
 #include "dntfont.h"
 #include "draw.h"
 #include "../engine/options.h"
+#include "../etc/dirs.h"
 #include <libintl.h>
 
 /**********************************************************************
@@ -72,6 +73,8 @@ loadedFont* dntFont::loadFont(string fontName, int fontSize)
 {
    loadedFont* fnt = NULL;
 
+   dirs dir;
+
    fnt = findFont(fontName, fontSize);
 
    if(!fnt)
@@ -80,11 +83,12 @@ loadedFont* dntFont::loadFont(string fontName, int fontSize)
       fnt = new loadedFont();
       fnt->fontName = fontName;
       fnt->fontSize = fontSize;
-      fnt->font = TTF_OpenFont(fontName.c_str(), fontSize);
+      fnt->font = TTF_OpenFont(dir.getRealFile(fontName).c_str(), fontSize);
 
       if(!fnt->font)
       {
-         printf(gettext("Can't open font file: %s\n"), fontName.c_str());
+         printf(gettext("Can't open font file: %s\n"), 
+                dir.getRealFile(fontName).c_str());
          return(NULL);
       }
 

@@ -1,6 +1,6 @@
-name = Metal
-model = ../data/models/personagens/metaleiro/model.cfg
-portrait = ../data/characters/portraits/metaleiro.png
+name = Metaleiro
+model = models/personagens/metaleiro/model.cfg
+portrait = characters/portraits/metaleiro.png
 maxLifePoints = 10
 baseModifier = 2/1/2
 attackModifier = 1/0/0/0/0/0

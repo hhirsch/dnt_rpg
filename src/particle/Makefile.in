@@ -25,7 +25,7 @@ meteor.o: meteor.cpp meteor.h part2.h $(ENDENGINE)collision.h
 	@$(CC) $(CFLAGS) meteor.cpp -o meteor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-particle.o: particle.cpp particle.h $(ENDETC)extensions.h
+particle.o: particle.cpp particle.h $(ENDETC)extensions.h $(ENDETC)dirs.h
 	@printf "Making particle.o... "
 	@$(CC) $(CFLAGS) particle.cpp -o particle.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

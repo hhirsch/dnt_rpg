@@ -5,6 +5,7 @@
 #include <SDL/SDL_image.h>
 #include <string>
 using namespace std;
+#include "../etc/dirs.h"
 
 /*! Single Alignment Definition */
 class align

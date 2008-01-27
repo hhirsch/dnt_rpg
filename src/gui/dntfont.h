@@ -6,9 +6,9 @@
 #include <string>
 using namespace std;
 
-#define DNT_FONT_ARIAL     "../data/fnt/arial.ttf"
-#define DNT_FONT_TIMES     "../data/fnt/times.ttf"
-#define DNT_FONT_COURRIER  "../data/fnt/courrier.ttf"
+#define DNT_FONT_ARIAL     "fnt/arial.ttf"
+#define DNT_FONT_TIMES     "fnt/times.ttf"
+#define DNT_FONT_COURRIER  "fnt/courrier.ttf"
 
 #define DNT_FONT_ALIGN_LEFT    0
 #define DNT_FONT_ALIGN_CENTER  1

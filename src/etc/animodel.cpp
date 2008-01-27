@@ -144,7 +144,8 @@ bool aniModel::loadModel(const string& strFilename)
 
    // open the model configuration file
   std::ifstream file;
-  file.open(strFilename.c_str(), std::ios::in | std::ios::binary);
+  file.open(dir.getRealFile(strFilename).c_str(), 
+            std::ios::in | std::ios::binary);
   if(!file)
   {
     std::cerr << "Failed to open model configuration file '" << 

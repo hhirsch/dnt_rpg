@@ -3,6 +3,7 @@
 #include "../engine/util.h"
 #include "../particle/partSystem.h"
 #include "../lang/translate.h"
+#include "../etc/dirs.h"
 #include <SDL/SDL_image.h>
 
 /**************************************************************************
@@ -596,6 +597,7 @@ void feats::defineRangedWeapon(diceThing& weaponDice, int rangeValue)
  ***************************************************************/
 featsList::featsList(string dir, string arq)
 {
+   dirs dirInfo;
    FILE* file;
    string arqDescricao;
    string arqImagem;
@@ -606,8 +608,6 @@ featsList::featsList(string dir, string arq)
    int num;
    int i;
    int aux;
-
-//   srand(SDL_GetTicks());
 
    if(!(file=fopen(arq.c_str(),"r")))
    {
@@ -685,7 +685,7 @@ featsList::featsList(string dir, string arq)
          m_feats[aux].depFeats[i].featIDString = buf2;
          m_feats[aux].depFeats[i].used = num == 1;
       }
-      m_feats[aux].image = IMG_Load(arqImagem.c_str());
+      m_feats[aux].image = IMG_Load(dirInfo.getRealFile(arqImagem).c_str());
       fclose(desc);
    }
 

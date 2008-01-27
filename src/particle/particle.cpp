@@ -32,6 +32,7 @@ particleSystem::particleSystem()
  ***************************************************************/
 particleSystem::particleSystem(string fileName, int mode)
 {
+   dirs dir;
    std::ifstream file;
    string aux;
    char aux2[20];
@@ -40,13 +41,15 @@ particleSystem::particleSystem(string fileName, int mode)
    previous = NULL;
 
    strFileName = fileName;
-   file.open(fileName.c_str(), ios::in | ios::binary);
+   file.open(dir.getRealFile(fileName).c_str(),
+             ios::in | ios::binary);
 
 
    if(!file)
    {
       init(maxParticles, mode);
-      printf("Error while opening particle file: %s\n",fileName.c_str());
+      printf("Error while opening particle file: %s\n",
+             dir.getRealFile(fileName).c_str());
       return;
    }
 

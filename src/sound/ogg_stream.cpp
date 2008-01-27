@@ -1,4 +1,5 @@
 #include "ogg_stream.h"
+#include "../etc/dirs.h"
 
 #define BUFFER_SIZE (4096 * 16) /**< Size of the Ogg Buffer */
 
@@ -7,11 +8,13 @@
  *************************************************************************/
 void ogg_stream::open(string path)
 {
+   dirs dir;
    int result;
     
-   if(!(oggFile = fopen(path.c_str(), "rb")))
+   if(!(oggFile = fopen(dir.getRealFile(path).c_str(), "rb")))
    {
-       printf("Could not open Ogg file: %s\n",path.c_str());
+       printf("Could not open Ogg file: %s\n",
+               dir.getRealFile(path).c_str());
        return;
    }
  

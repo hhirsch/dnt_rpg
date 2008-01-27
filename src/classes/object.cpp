@@ -6,6 +6,7 @@
 #include <SDL/SDL_opengl.h>
 #include "object.h"
 #include "../engine/util.h"
+#include "../etc/dirs.h"
 
 /**************************************************************
  *                        getAfterEqual                       *
@@ -47,15 +48,17 @@ string object::getAfterEqual(string s)
  **************************************************************/
 object::object(string path, modelList& mdlList): thing()
 {
+   dirs dir;
    FILE* file;
    char buffer[512];
    string token, token2;
 
    cleanValues();
 
-   if(!(file=fopen(path.c_str(),"r")))
+   if(!(file=fopen(dir.getRealFile(path).c_str(),"r")))
    {
-       printf("Error on open object %s\n", path.c_str());
+       printf("Error on open object %s\n", 
+              dir.getRealFile(path).c_str());
        return;
    }
 
@@ -91,11 +94,11 @@ object::object(string path, modelList& mdlList): thing()
       else if(token == "inventory_texture")
       {
          model2dName = token2;
-         model2d = IMG_Load(model2dName.c_str());
+         model2d = IMG_Load(dir.getRealFile(model2dName).c_str());
          if(!model2d)
          {
-            printf("Can't open image: %s\n"
-                   "Will Crash Soon!\n", model2dName.c_str());
+            printf("Can't open image: %s\nWill Crash Soon!\n", 
+                   dir.getRealFile(model2dName).c_str());
          }
       }
       else if(token == "life_points")

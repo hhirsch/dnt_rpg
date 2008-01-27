@@ -1,11 +1,11 @@
 name = Logan
-model = ../data/models/personagens/Logan/modelo.cfg
-portrait = ../data/characters/portraits/logan.png
+model = models/personagens/Logan/modelo.cfg
+portrait = characters/portraits/logan.png
 maxLifePoints = 87
 baseModifier  = 14/11/12
 attackModifier = 12/7/2/0/0/0
 sizeModifier = 0
-conversationFile = logan.dlg
+conversationFile = dialogs/logan.dlg
 ATT_STRENGHT = 14
 ATT_DEXTERY = 10
 ATT_CONSTITUTION = 16
