@@ -1,7 +1,7 @@
 name = Cross
-cal3d = ../data/models/objetos/tumbas/cruz/model.cfg
+cal3d = models/objetos/tumbas/cruz/model.cfg
 inventory_sizes = 0 0
-inventory_texture = ../data/texturas/na.png
+inventory_texture = texturas/na.png
 life_points = 400
 fortitude = 5
 reflex = 2

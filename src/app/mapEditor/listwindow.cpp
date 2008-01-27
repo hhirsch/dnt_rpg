@@ -1,28 +1,29 @@
 #include "listwindow.h"
+#include "../../etc/dirs.h"
 
 /* NPCs */
-#define FILE_CHARACTERS "../data/mapEditor/lists/characters.lst"
+#define FILE_CHARACTERS "mapEditor/lists/characters.lst"
 
 /* Objects */
-#define FILE_BUILDING   "../data/mapEditor/lists/building.lst"
-#define FILE_CARS       "../data/mapEditor/lists/cars.lst" 
-#define FILE_COMMON     "../data/mapEditor/lists/common.lst"
-#define FILE_DOORS      "../data/mapEditor/lists/doors.lst"
-#define FILE_GUNS       "../data/mapEditor/lists/guns.lst"
-#define FILE_ICEX       "../data/mapEditor/lists/icex.lst"
-#define FILE_NATURE     "../data/mapEditor/lists/nature.lst"
-#define FILE_MACABRE    "../data/mapEditor/lists/macabre.lst"
-#define FILE_BATH       "../data/mapEditor/lists/bath.lst"
+#define FILE_BUILDING   "mapEditor/lists/building.lst"
+#define FILE_CARS       "mapEditor/lists/cars.lst" 
+#define FILE_COMMON     "mapEditor/lists/common.lst"
+#define FILE_DOORS      "mapEditor/lists/doors.lst"
+#define FILE_GUNS       "mapEditor/lists/guns.lst"
+#define FILE_ICEX       "mapEditor/lists/icex.lst"
+#define FILE_NATURE     "mapEditor/lists/nature.lst"
+#define FILE_MACABRE    "mapEditor/lists/macabre.lst"
+#define FILE_BATH       "mapEditor/lists/bath.lst"
 
 /* Particles */
-#define FILE_FIRE       "../data/mapEditor/lists/fire.lst"
-#define FILE_GRASS      "../data/mapEditor/lists/grass.lst"
-#define FILE_SMOKE      "../data/mapEditor/lists/smoke.lst"
-#define FILE_SNOW       "../data/mapEditor/lists/snow.lst"
-#define FILE_WATERFALL  "../data/mapEditor/lists/waterfall.lst"
+#define FILE_FIRE       "mapEditor/lists/fire.lst"
+#define FILE_GRASS      "mapEditor/lists/grass.lst"
+#define FILE_SMOKE      "mapEditor/lists/smoke.lst"
+#define FILE_SNOW       "mapEditor/lists/snow.lst"
+#define FILE_WATERFALL  "mapEditor/lists/waterfall.lst"
 
 /* Musics */
-#define FILE_MUSIC      "../data/mapEditor/lists/music.lst"
+#define FILE_MUSIC      "mapEditor/lists/music.lst"
 
 /********************************************************************
  *                             Constructor                          *
@@ -59,6 +60,7 @@ int listWindow::getState()
  ********************************************************************/
 void listWindow::setState(int st)
 {
+   dirs dir;
    string fileName = "";
    if( (state != st) || (intWindow == NULL))
    {
@@ -123,7 +125,7 @@ void listWindow::setState(int st)
       /* Load file */
       if(!fileName.empty())
       {
-         loadFromFile(fileName);
+         loadFromFile(dir.getRealFile(fileName));
       }
       intWindow->draw(0,0);
    }

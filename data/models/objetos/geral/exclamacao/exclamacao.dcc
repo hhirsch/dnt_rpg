@@ -1,7 +1,7 @@
 name = Exclamation
-cal3d = ../data/models/objetos/geral/exclamacao/model.cfg
+cal3d = models/objetos/geral/exclamacao/model.cfg
 inventory_sizes = 0 0
-inventory_texture = ../data/texturas/na.png
+inventory_texture = texturas/na.png
 life_points = 400
 fortitude = 5
 reflex = 2

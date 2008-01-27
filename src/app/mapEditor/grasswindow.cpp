@@ -1,4 +1,5 @@
 #include "grasswindow.h"
+#include "../../etc/dirs.h"
 
 /**********************************************************
  *                      constructor                       *
@@ -36,7 +37,8 @@ void grassWindow::setGrass(grass* gr)
  *                      openWindow                        *
  **********************************************************/
 void grassWindow::openWindow()
-{
+{  
+   dirs dir;
    actualWindow = gui->insertWindow(184,599-345,403,599-248,"Grass");
    
    actualWindow->getObjectsList()->insertTextBox(7,24,87,41,0,"Emptiness:");
@@ -57,7 +59,7 @@ void grassWindow::openWindow()
                                                                  ">",0);
 
    navigationTab = actualWindow->getObjectsList()->insertTabButton(65,70,0,0,
-                                              "../data/mapEditor/nav2.png");
+                                 dir.getRealFile("mapEditor/nav2.png").c_str());
    buttonPrevious = navigationTab->insertButton(0,0,19,19);
    buttonDestroy = navigationTab->insertButton(20,0,39,19);
    buttonNext = navigationTab->insertButton(40,0,59,19);

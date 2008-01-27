@@ -1,7 +1,7 @@
 name = Lixo
-cal3d = ../data/models/objetos/icex/lixo/lixo.cfg
+cal3d = models/objetos/icex/lixo/lixo.cfg
 inventory_sizes = 0 0
-inventory_texture = ../data/texturas/na.png
+inventory_texture = texturas/na.png
 life_points = 50
 fortitude = 10
 reflex = 0

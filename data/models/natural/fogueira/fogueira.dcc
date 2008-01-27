@@ -1,6 +1,6 @@
 name = Fireplace
-cal3d = ../data/models/natural/fogueira/model.cfg
-inventory_texture = ../data/texturas/na.png
+cal3d = models/natural/fogueira/model.cfg
+inventory_texture = texturas/na.png
 inventory_sizes = 0 0
 life_points = 300
 fortitude = 5

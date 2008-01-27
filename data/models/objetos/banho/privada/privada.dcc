@@ -1,7 +1,7 @@
 name = Privada
-cal3d = ../data/models/objetos/banho/privada/model.cfg
+cal3d = models/objetos/banho/privada/model.cfg
 inventory_sizes = 0 0
-inventory_texture = ../data/texturas/na.png
+inventory_texture = texturas/na.png
 life_points = 800
 fortitude = 10
 reflex = 0

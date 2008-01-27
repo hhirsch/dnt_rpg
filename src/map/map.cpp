@@ -1699,6 +1699,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
  ************************************************************************/
 void Map::newMap(int X, int Z)
 {
+   dirs dir;
    int auxX, auxZ;
    int i;
 
@@ -1723,8 +1724,8 @@ void Map::newMap(int X, int Z)
 
 
    /* add a first default texture */
-   int IDtexture = insertTexture("../data/texturas/floor_outdoor/grass.png", 
-                                 "../data/texturas/floor_outdoor/grass.png",
+   int IDtexture = insertTexture("texturas/floor_outdoor/grass.png", 
+                                 "texturas/floor_outdoor/grass.png",
                                  54,102,49);
 
    for(auxZ = 0; auxZ < z; auxZ++)

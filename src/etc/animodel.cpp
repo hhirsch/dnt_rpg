@@ -149,7 +149,7 @@ bool aniModel::loadModel(const string& strFilename)
   if(!file)
   {
     std::cerr << "Failed to open model configuration file '" << 
-                  strFilename << "'." << std::endl;
+                  dir.getRealFile(strFilename) << "'." << std::endl;
     return false;
   }
 

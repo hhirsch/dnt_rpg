@@ -1,5 +1,5 @@
 4
-House_1 ../data/models/building/house1.dcc
-House_2 ../data/models/building/house2.dcc
-House_3 ../data/models/building/house3.dcc
-House_4 ../data/models/building/house4.dcc
+House_1 models/building/house1.dcc
+House_2 models/building/house2.dcc
+House_3 models/building/house3.dcc
+House_4 models/building/house4.dcc

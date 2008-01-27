@@ -1,3 +1,3 @@
 2
-Toilet ../data/models/objetos/banho/privada/privada.dcc
-Toilet_2 ../data/models/objetos/banho/mictorio/mictorio.dcc
+Toilet models/objetos/banho/privada/privada.dcc
+Toilet_2 models/objetos/banho/mictorio/mictorio.dcc

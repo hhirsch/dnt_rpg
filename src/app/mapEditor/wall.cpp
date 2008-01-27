@@ -10,13 +10,19 @@
  ******************************************************/
 wallController::wallController(Map* acMap)
 {
+   dirs dir;
    actualMap = acMap;
    state = WALL_STATE_OTHER;
    actualWall = actualMap->getFirstWall();
    limitSquare = false;
 
    /* Load Mark Texture */
-   SDL_Surface* img = IMG_Load("../data/cursors/Walk.png");
+   SDL_Surface* img = IMG_Load(dir.getRealFile("cursors/Walk.png").c_str());
+   if(!img)
+   {
+      printf("Can't open cursors/Walk.png !\n");
+      return;
+   }
    setTextureRGBA(img, &markTexture);
    SDL_FreeSurface(img);
 }

@@ -2,6 +2,7 @@
 #include "../gui/draw.h"
 #include "../map/map.h"
 #include "../engine/util.h"
+#include "../etc/dirs.h"
 
 #define ROT_STEP 0.5
 #define ROT_MAX  deg2Rad(4)
@@ -13,6 +14,8 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
              float scale, string fileName)
                                 :particleSystem(total,PARTICLE_DRAW_INDIVIDUAL)
 {
+
+   dirs dir;
    
    /* NOTE: althought the constructor says PARTICLE_DRAW_INDIVIDUAL,
     * the grass is rendered as glArrays, at the endRender() function.
@@ -35,11 +38,11 @@ grass::grass(float cX1,float cZ1, float cX2, float cZ2, int total,
 
    /* Load Texture */
    grassFileName = fileName;
-   img = IMG_Load(fileName.c_str());
+   img = IMG_Load(dir.getRealFile(fileName).c_str());
    if(!img)
    {
       printf("Error when loading grass! Maybe Crash Soon!\n File: %s\n",
-             fileName.c_str());
+             dir.getRealFile(fileName).c_str());
    }
    glGenTextures(1, &(grassTexture));
    glBindTexture(GL_TEXTURE_2D, grassTexture);

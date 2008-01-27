@@ -1,7 +1,7 @@
 name = Chair
-cal3d = ../data/models/objetos/icex/mesa_braco/model.cfg
+cal3d = models/objetos/icex/mesa_braco/model.cfg
 inventory_sizes = 0 0
-inventory_texture = ../data/texturas/na.png
+inventory_texture = texturas/na.png
 life_points = 75
 fortitude = 5
 reflex = 2

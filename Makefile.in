@@ -42,6 +42,8 @@ DATADIRECTORIES = alignment/ \
 						models/natural/arvores/ \
 						models/natural/arvores/jacaranda/ \
 						models/natural/arvores/tree1/ \
+						models/natural/fogueira/ \
+						models/natural/matos/ \
 						models/objetos/ \
 						models/objetos/armas/ \
 						models/objetos/armas/adaga/ \
@@ -94,6 +96,7 @@ DATADIRECTORIES = alignment/ \
 						models/personagens/bunny/ \
 						models/personagens/cow/ \
 						models/personagens/deer/ \
+						models/personagens/Jacaranda/ \
 						models/personagens/Logan/ \
 						models/personagens/metaleiro/ \
 						models/personagens/Ratazana/ \

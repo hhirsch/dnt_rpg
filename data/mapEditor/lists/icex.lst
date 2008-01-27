@@ -1,11 +1,11 @@
 10
-Black_Board ../data/models/objetos/icex/quadro/quadro.dcc
-Chair ../data/models/objetos/icex/cadeira/cadeira.dcc
-Chair_Table ../data/models/objetos/icex/mesa_braco/mesa_braco.dcc
-Scavenger ../data/models/objetos/icex/lixo/lixo.dcc
-Icex_Table ../data/models/objetos/icex/mesa_redonda/mesa_redonda.dcc
-Snes ../data/models/objetos/icex/snes/snes.dcc
-Snes_Contra ../data/models/objetos/icex/snes/contra/snes_contra.dcc
-Snes_Mario ../data/models/objetos/icex/snes/mario/snes_mario.dcc
-Snes_SF2 ../data/models/objetos/icex/snes/sf2/snes_sf2.dcc
-Table ../data/models/objetos/icex/mesa/mesa.dcc
+Black_Board models/objetos/icex/quadro/quadro.dcc
+Chair models/objetos/icex/cadeira/cadeira.dcc
+Chair_Table models/objetos/icex/mesa_braco/mesa_braco.dcc
+Scavenger models/objetos/icex/lixo/lixo.dcc
+Icex_Table models/objetos/icex/mesa_redonda/mesa_redonda.dcc
+Snes models/objetos/icex/snes/snes.dcc
+Snes_Contra models/objetos/icex/snes/contra/snes_contra.dcc
+Snes_Mario models/objetos/icex/snes/mario/snes_mario.dcc
+Snes_SF2 models/objetos/icex/snes/sf2/snes_sf2.dcc
+Table models/objetos/icex/mesa/mesa.dcc

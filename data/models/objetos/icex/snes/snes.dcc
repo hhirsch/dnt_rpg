@@ -1,7 +1,7 @@
 name = snes
-cal3d = ../data/models/objetos/icex/snes/snes.cfg
+cal3d = models/objetos/icex/snes/snes.cfg
 inventory_sizes = 0 0
-inventory_texture = ../data/texturas/na.png
+inventory_texture = texturas/na.png
 life_points = 55
 fortitude = 10
 reflex = 0

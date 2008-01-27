@@ -1,7 +1,7 @@
 name = Tomb
-cal3d = ../data/models/objetos/tumbas/tomb_column/model.cfg
+cal3d = models/objetos/tumbas/tomb_column/model.cfg
 inventory_sizes = 0 0
-inventory_texture = ../data/texturas/na.png
+inventory_texture = texturas/na.png
 life_points = 1000
 fortitude = 9
 reflex = 0

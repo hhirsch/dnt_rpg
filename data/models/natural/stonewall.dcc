@@ -1,8 +1,8 @@
 Cachoeira
 0
-../data/models/natural/stonewall.obj
-../data/models/natural/
+models/natural/stonewall.obj
+models/natural/
 0 0
-../data/texturas/na.png
+texturas/na.png
 95000
 500 500 -10

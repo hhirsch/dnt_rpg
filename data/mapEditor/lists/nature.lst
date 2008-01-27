@@ -1,7 +1,7 @@
 6
-StoneWall ../data/models/natural/stonewall.dcc
-Tree_1 ../data/models/natural/arvores/tree1/tree1.dcc
-Tree_2 ../data/models/natural/arvores/tree2.dcc
-Tree_3 ../data/models/natural/arvores/tree3.dcc
-Tree_4 ../data/models/natural/arvores/tree4.dcc
-Wood_Fire ../data/models/natural/fogueira/fogueira.dcc
+StoneWall models/natural/stonewall.dcc
+Tree_1 models/natural/arvores/tree1/tree1.dcc
+Tree_2 models/natural/arvores/tree2.dcc
+Tree_3 models/natural/arvores/tree3.dcc
+Tree_4 models/natural/arvores/tree4.dcc
+Wood_Fire models/natural/fogueira/fogueira.dcc

@@ -1,16 +1,19 @@
 #include "editor.h"
 #include "../../etc/extensions.h"
+#include "../../etc/dirs.h"
 
 /*********************************************************************
  *                            Constructor                             *
  *********************************************************************/
 editor::editor()
 {
+   dirs dir;
    mapOpened = false;
    map = NULL;
    NPCs = NULL;
    particleSystem = new partSystem();
-   features = new featsList("../data/feats/","../data/feats/feats.ftl");
+   features = new featsList(dir.getRealFile("feats/"),
+                            dir.getRealFile("feats/feats.ftl"));
    Farso_Init(&screen,"DccNiTghtmare Map Editor 0.2", 800, 600, false);
 
    init();
@@ -431,9 +434,11 @@ void editor::verifyPosition()
 {
    if(mapOpened)
    {
-       if(gui->gameCamera.getCenterX() > ((map->getSizeX() * map->squareSize())+20))
+       if(gui->gameCamera.getCenterX() > 
+          ((map->getSizeX() * map->squareSize())+20))
        {
-          gui->gameCamera.actualizeCamera( ((map->getSizeX() * map->squareSize())+20),
+          gui->gameCamera.actualizeCamera( ((map->getSizeX() * 
+                                             map->squareSize())+20),
                                           gui->gameCamera.getCenterY()-30,
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
@@ -445,11 +450,13 @@ void editor::verifyPosition()
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
        }
-       if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * map->squareSize())+20))
+       if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * 
+                                           map->squareSize())+20))
        {
           gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
-                                          gui->gameCamera.getCenterY()-30,
-                                          ((map->getSizeZ() * map->squareSize())+20), 
+                                           gui->gameCamera.getCenterY()-30,
+                                          ((map->getSizeZ() * 
+                                            map->squareSize())+20), 
                                           0.0);
        }
        else if(gui->gameCamera.getCenterZ() < -20)
@@ -518,10 +525,12 @@ int editor::nextTexture()
  ************************************************************************/
 int editor::insertTexture()
 {
-   SDL_Surface* img = IMG_Load(gui->getTextureFileName().c_str());
+   dirs dir;
+   SDL_Surface* img;
+   img = IMG_Load(dir.getRealFile(gui->getTextureFileName()).c_str());
    if(!img)
    {
-      gui->showMessage("Error on open texture");
+      gui->showMessage("Error opening texture!");
       return(-1);
    }
 
