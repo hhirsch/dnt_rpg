@@ -1629,6 +1629,9 @@ int engine::verifyMouseActions(Uint8 Mbutton)
    Uint32 tempo = SDL_GetTicks();
    character* activeCharacter = PCs->getActiveCharacter();
 
+   /* Atualize to culling and to GUI */
+   actualizeFrustum(visibleMatrix,proj,modl);
+
    /* Define Mouse OpenGL Window Coordinate */
    wx = mouseX; wy = SCREEN_Y - mouseY; 
    
@@ -3051,9 +3054,6 @@ void engine::drawWithoutShadows()
       gameSun->disableLight();
    }
    
-   /* Atualize to culling and to GUI */
-   actualizeFrustum(visibleMatrix,proj,modl);
-
    /* Render all things */
    renderScene();
    renderNoShadowThings();
