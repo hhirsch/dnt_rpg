@@ -10,7 +10,7 @@
  *                        Farso_Init                        *
  ************************************************************/
 void Farso_Init(SDL_Surface **screen, string title, int width, int height,
-                bool fullScreen)
+                bool fullScreen, int antiAliasingSamples)
 {
     /* Start Openning the screen  */
     if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) 
@@ -21,7 +21,8 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
     atexit(SDL_Quit);
 
     /* Define the resolution */
-    Farso_DefineResolution(screen, title, width, height, fullScreen);
+    Farso_DefineResolution(screen, title, width, height, fullScreen,
+                           antiAliasingSamples);
     
     /* Define ignored events */
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
@@ -51,10 +52,16 @@ void Farso_Init(SDL_Surface **screen, string title, int width, int height,
  ************************************************************/
 void Farso_DefineResolution(SDL_Surface **screen, string title, 
                             int width, int height,
-                            bool fullScreen)
+                            bool fullScreen, int antiAliasingSamples)
 {
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
     SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8);
+
+    if(antiAliasingSamples > 0)
+    {
+       SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+       SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, antiAliasingSamples);
+    }
    
     /*SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);

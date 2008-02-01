@@ -3037,6 +3037,9 @@ void engine::drawWithoutShadows()
    /* Redefine camera position */
    gameCamera.lookAt(actualMap);
 
+   //FIXME verify if the antialiasing is enabled before!
+   glEnable(GL_MULTISAMPLE);
+
    snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
                             gameCamera.getCameraZ(), gameCamera.getTheta(),
                             gameCamera.getPhi(), gameCamera.getD(),

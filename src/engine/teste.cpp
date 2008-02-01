@@ -49,9 +49,11 @@ int main(int argc, char **argv)
       char* server = (char*) malloc(55*sizeof(char));
       scanf("%s",server);
       printf("I'll conect to %s\n",server);
-   #endif   
+   #endif
+
+   //FIXME put AntialisingSamples at OPTIONS!!!
    Farso_Init(&screen,"DccNiTghtmare", opt.screenWidth, opt.screenHeight,
-              opt.enableFullScreen);
+              opt.enableFullScreen, 4);
    engine* Engine = new engine();
    
    Engine->Init(screen);

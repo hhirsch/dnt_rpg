@@ -14,7 +14,9 @@ editor::editor()
    particleSystem = new partSystem();
    features = new featsList(dir.getRealFile("feats/"),
                             dir.getRealFile("feats/feats.ftl"));
-   Farso_Init(&screen,"DccNiTghtmare Map Editor 0.2", 800, 600, false);
+
+   //FIXME, verifyif the antialising is disable or not!
+   Farso_Init(&screen,"DccNiTghtmare Map Editor 0.2", 800, 600, false, 0);
 
    init();
 
