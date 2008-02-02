@@ -51,9 +51,8 @@ int main(int argc, char **argv)
       printf("I'll conect to %s\n",server);
    #endif
 
-   //FIXME put AntialisingSamples at OPTIONS!!!
    Farso_Init(&screen,"DccNiTghtmare", opt.screenWidth, opt.screenHeight,
-              opt.enableFullScreen, 4);
+              opt.enableFullScreen, opt.antiAliasing);
    engine* Engine = new engine();
    
    Engine->Init(screen);
@@ -116,7 +115,7 @@ int main(int argc, char **argv)
          if(result == CONTINUE_GAME)
          {
             glDisable(GL_LIGHTING);
-            Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
+            Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
          }
          if(Engine->Run(screen) == 1)
          {

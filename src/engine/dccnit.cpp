@@ -1043,6 +1043,11 @@ void engine::Init(SDL_Surface *screen)
    glEnable(GL_LIGHTING);
    glEnable(GL_NORMALIZE);
 
+   if(option->antiAliasing)
+   {
+      glEnable(GL_MULTISAMPLE);
+   }
+
    /* Culling */
    /*glCullFace(GL_BACK);
    glEnable(GL_CULL_FACE);*/
@@ -3036,9 +3041,6 @@ void engine::drawWithoutShadows()
 
    /* Redefine camera position */
    gameCamera.lookAt(actualMap);
-
-   //FIXME verify if the antialiasing is enabled before!
-   glEnable(GL_MULTISAMPLE);
 
    snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
                             gameCamera.getCameraZ(), gameCamera.getTheta(),

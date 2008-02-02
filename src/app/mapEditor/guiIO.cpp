@@ -68,7 +68,6 @@ waterWindow* guiIO::getWaterWindow()
  ****************************************************************/
 void guiIO::openFileWindow()
 {
-   dirs dir;
    fileWindow = gui->insertWindow(0,1,184,63,"File");
    newButton = fileWindow->getObjectsList()->insertButton(10,37,50,55,"New",1);
    openButton = fileWindow->getObjectsList()->insertButton(51,37,91,55,
@@ -78,7 +77,7 @@ void guiIO::openFileWindow()
    exitButton = fileWindow->getObjectsList()->insertButton(133,37,173,55,
                                                            "Exit",1);
    fileText = fileWindow->getObjectsList()->insertTextBar(10,17,173,33,
-                                                   dir.getRealFile("mapas/"),0);
+                                                          "mapas/",0);
    fileWindow->setAttributes(false,true,false,false);
    fileWindow->setExternPointer(&fileWindow);
    gui->openWindow(fileWindow);
@@ -89,7 +88,6 @@ void guiIO::openFileWindow()
  ****************************************************************/
 void guiIO::openTextureWindow()
 {
-   dirs dir;
    textureWindow = gui->insertWindow(0,164,184,244,"Texture");
    texturePreviousButton = textureWindow->getObjectsList()->insertButton(7,56,
                                                                          74,74,
@@ -101,7 +99,7 @@ void guiIO::openTextureWindow()
                                                                        153,53,
                                                                     "Insert",1);
    textureText = textureWindow->getObjectsList()->insertTextBar(10,17,173,33,
-                                                dir.getRealFile("texturas/"),0);
+                                                                "texturas/",0);
    textureWindow->setAttributes(false,true,false,false);
    textureWindow->setExternPointer(&textureWindow);
    gui->openWindow(textureWindow);

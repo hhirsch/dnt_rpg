@@ -27,7 +27,7 @@ class options
       /*! Display the Options Screen 
        * \param interf -> GUI interface to be used.*/
       void displayOptionsScreen(interface* interf);
-      /*! Save actual options on file. */
+      /*! Save current options on file. */
       void save();
 
       /*! Load the Options File from default dirs
@@ -52,16 +52,17 @@ class options
        * japanese, chinese, etc.) */
       bool isLanguageUnicode();
 
-      static int     musicVolume;     /**< Actual Music Volume */
-      static int     sndfxVolume;     /**< Actual Sound Effects Volume */
-      static int     langNumber;      /**< Actual Language Number */
-      static int     cameraNumber;    /**< Actual Camera Mode */
+      static int     musicVolume;     /**< Current Music Volume */
+      static int     sndfxVolume;     /**< Current Sound Effects Volume */
+      static int     langNumber;      /**< Current Language Number */
+      static int     cameraNumber;    /**< Current Camera Mode */
       static bool    enableParticles; /**< Enable/Disable Particles */
       static bool    enableGrass;     /**< Enable/Disable Grass */
       static int     reflexionType;   /**< Reflexion Type */
       static int     screenWidth;     /**< Screen Height */
       static int     screenHeight;    /**< Screen Width */
       static bool    enableFullScreen;/**< If fullscreen is defined */
+      static int     antiAliasing;    /**< Current Anti-Aliasing */
 
       window* intWindow;       /**< Options Window Pointer */
 
@@ -74,15 +75,17 @@ class options
       textBox* txtCamera;          /**< Camera Mode Text on Window */
       textBox* txtReflexion;       /**< Reflexion Type Text on Window */
       textBox* txtResolution;      /**< Resolution Text on Window */
+      textBox* txtAntiAliasing;    /**< AntiAliasing Text on Window */
 
-      int          prevCamera;     /**< Previous used Camera Mode */
-      int          prevMusicVolume;/**< Previous used Music Volume */
-      int          prevSndfxVolume;/**< Previous Used Sound Effects Volume */
-      int          prevLanguage;   /**< Previous Used Language */
-      int          prevReflexion;  /**< Previous Used Reflexion */
-      int          prevWidth;      /**< Previous Used Resolution Width */
-      int          prevHeight;     /**< Previous Used Resolution Height */
-      int          resPosition;    /**< Resolution Position on Vector */
+      int      prevCamera;         /**< Previous used Camera Mode */
+      int      prevMusicVolume;    /**< Previous used Music Volume */
+      int      prevSndfxVolume;    /**< Previous Used Sound Effects Volume */
+      int      prevLanguage;       /**< Previous Used Language */
+      int      prevReflexion;      /**< Previous Used Reflexion */
+      int      prevWidth;          /**< Previous Used Resolution Width */
+      int      prevHeight;         /**< Previous Used Resolution Height */
+      int      prevAntiAliasing;   /**< Previous Used AntiAliasing */
+      int      resPosition;        /**< Resolution Position on Vector */
 
       int timeLastOperation;       /**< Ticks when done last operation */
 
@@ -106,6 +109,9 @@ class options
       button* buttonResSum;
       button* buttonResDec;
 
+      button* buttonAliasSum;
+      button* buttonAliasDec;
+
       cxSel* cxSelFullScreen;
 
       cxSel* cxSelGrass;
@@ -114,21 +120,25 @@ class options
       button* buttonConfirm;
       button* buttonCancel;
 
-      /*! Get the Actual Language Name
+      /*! Get the Current Language Name
        * \return the name of the language. */
       string languageName();
 
-      /*! Get the Actual Camera Name
+      /*! Get the Current Camera Name
        * \return the name of the camera. */
       string cameraName();
 
-      /*! Get the Actual Reflexion Type Name
+      /*! Get the Current Reflexion Type Name
        * \return the name of the reflexion type */
       string reflexionName();
 
       /*! Get the current resolution name
        * \return the name of the resolution */
       string resolutionName();
+
+      /*! Get the Current antiAliasing Name
+       * \return name of the antiAliasing */
+      string antiAliasingName();
 
 };
 

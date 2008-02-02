@@ -173,10 +173,16 @@ bool options::load(string file)
       }
       else if(s == "FullScreen:")
       {
-         /* Read Grass Options */
+         /* Read FullScreen Options */
          fgets(buffer, sizeof(buffer), arq); 
          sscanf(buffer,"%d",&aux);
          enableFullScreen = (aux == 1);
+      }
+      else if(s == "AntiAliasing:")
+      {
+         /* Read Antialising Options */
+         fgets(buffer, sizeof(buffer), arq); 
+         sscanf(buffer,"%d",&antiAliasing);
       }
       else 
       {
@@ -256,6 +262,9 @@ void options::save()
    {
       fprintf(arq, "FullScreen: 0\n");
    }
+
+   /* AntiAliasing */
+   fprintf(arq, "AntiAliasing: %d\n",antiAliasing);
 
    fclose(arq);
 }
@@ -386,7 +395,7 @@ string options::reflexionName()
 }
 
 /****************************************************************
- *                         languageName                         *
+ *                          CameraName                          *
  ****************************************************************/
 string options::cameraName()
 {
@@ -402,6 +411,28 @@ string options::cameraName()
    }
    return(saux);
 }
+
+/****************************************************************
+ *                       AntiAliasingName                       *
+ ****************************************************************/
+string options::antiAliasingName()
+{
+   string saux;
+   switch(antiAliasing)
+   {
+      case 0:
+         saux = gettext("Disabled");
+      break;
+      case 2:
+         saux = gettext("2x");
+      break;
+      case 4:
+         saux = gettext("4x");
+      break;
+   }
+   return(saux);
+}
+
 
 /****************************************************************
  *                        resolutionName                        *
@@ -444,10 +475,12 @@ void options::displayOptionsScreen(interface* interf)
    prevMusicVolume = musicVolume;
    prevSndfxVolume = sndfxVolume;
 
+   prevAntiAliasing = antiAliasing;
+
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
 
-   intWindow = interf->insertWindow(xPos-128,yPos-163,xPos+128,yPos+163,
+   intWindow = interf->insertWindow(xPos-128,yPos-173,xPos+128,yPos+173,
                                     gettext("Options"));
 
    /* Music Things */
@@ -590,12 +623,30 @@ void options::displayOptionsScreen(interface* interf)
    intWindow->getObjectsList()->insertPicture(220,265,40,220,
                     dir.getRealFile("texturas/options/fullscreen.png").c_str());
 
+   /* AntiAliasing */                 
+   saux = antiAliasingName();
+   qt = intWindow->getObjectsList()->insertTextBox(8,288,145,305,0,
+                                            gettext("Anti-Aliasing:"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   buttonAliasDec = intWindow->getObjectsList()->insertButton(121,288,131,305,
+                                                  fnt.createUnicode(0x25C4),0);
+   buttonAliasDec->defineFont(DNT_FONT_ARIAL, 9);
+   txtAntiAliasing = intWindow->getObjectsList()->insertTextBox(132,288,
+                                                                197,305,1,
+                                                                saux.c_str());
+   txtAntiAliasing->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   buttonAliasSum = intWindow->getObjectsList()->insertButton(198,288,208,305,
+                                                  fnt.createUnicode(0x25BA),0);
+   buttonAliasSum->defineFont(DNT_FONT_ARIAL, 9);
+   intWindow->getObjectsList()->insertPicture(220,288,40,220,
+                 dir.getRealFile("texturas/options/antialiasing.png").c_str());
+
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(177,295,247,314,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(177,315,247,334,
                                               gettext("Confirm"),1);
    
    /* Cancel Button */
-   buttonCancel = intWindow->getObjectsList()->insertButton(8,295,78,314,
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,315,78,334,
                                               gettext("Cancel"),1);
 
    /* borders */
@@ -604,8 +655,8 @@ void options::displayOptionsScreen(interface* interf)
    intWindow->getObjectsList()->insertTextBox(5,116,250,153,2,"");
    intWindow->getObjectsList()->insertTextBox(5,154,250,192,2,"");
    intWindow->getObjectsList()->insertTextBox(5,193,250,230,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,231,250,290,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,291,250,318,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,231,250,310,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,311,250,338,2,"");
 
    
    /* Open Window */
@@ -633,7 +684,7 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
              musicVolume++;
          }
       }
-      if(object == (guiObject*) buttonMusDec) 
+      else if(object == (guiObject*) buttonMusDec) 
       {
          if(musicVolume > 0)
          {
@@ -641,14 +692,14 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
          }
       }
       /* Sound Effects */
-      if(object == (guiObject*) buttonSndSum) 
+      else if(object == (guiObject*) buttonSndSum) 
       {
          if(sndfxVolume < SDL_MIX_MAXVOLUME)
          {
              sndfxVolume++;
          }
       }
-      if(object == (guiObject*) buttonSndDec) 
+      else if(object == (guiObject*) buttonSndDec) 
       {
          if(sndfxVolume > 0)
          {
@@ -656,14 +707,14 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
          }
       }
       /* Language */
-      if(object == (guiObject*) buttonLangSum)
+      else if(object == (guiObject*) buttonLangSum)
       {
          if(langNumber < DNT_LANG_LAST)
          {
             langNumber++;
          }
       }
-      if(object == (guiObject*) buttonLangDec)
+      else if(object == (guiObject*) buttonLangDec)
       {
          if(langNumber > DNT_LANG_FIRST)
          {
@@ -671,14 +722,14 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
          }
       }
       /* Camera */
-      if(object == (guiObject*) buttonCamSum)
+      else if(object == (guiObject*) buttonCamSum)
       {
          if(cameraNumber < CAMERA_TYPE_DRIVE)
          {
             cameraNumber++;
          }
       }
-      if(object == (guiObject*) buttonCamDec)
+      else if(object == (guiObject*) buttonCamDec)
       {
          if(cameraNumber > CAMERA_TYPE_NORMAL)
          {
@@ -686,14 +737,14 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
          }
       }
       /* Reflexion */
-      if(object == (guiObject*) buttonReflSum)
+      else if(object == (guiObject*) buttonReflSum)
       {
          if(reflexionType < REFLEXIONS_ALL)
          {
             reflexionType++;
          }
       }
-      if(object == (guiObject*) buttonReflDec)
+      else if(object == (guiObject*) buttonReflDec)
       {
          if(reflexionType > REFLEXIONS_NONE)
          {
@@ -701,7 +752,7 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
          }
       }
       /* Resolution */
-      if(object == (guiObject*) buttonResSum)
+      else if(object == (guiObject*) buttonResSum)
       {
          if(resPosition > 0)
          {
@@ -716,7 +767,7 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
             }
          }
       }
-      if(object == (guiObject*) buttonResDec)
+      else if(object == (guiObject*) buttonResDec)
       {
          if(resolutions[resPosition+1])
          {
@@ -730,6 +781,23 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
             }
          }
       }
+
+      /* Anti Aliasing */
+      else if(object == (guiObject*) buttonAliasSum) 
+      {
+         if(antiAliasing < 4)
+         {
+             antiAliasing += 2;
+         }
+      }
+      else if(object == (guiObject*) buttonAliasDec) 
+      {
+         if(antiAliasing > 0)
+         {
+             antiAliasing -= 2;
+         }
+      }
+
 
    }
    else if(eventInfo == PRESSED_BUTTON) 
@@ -747,7 +815,8 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
 
          /* Verify if need to show advise of reinit */
          if( (screenWidth != prevWidth) || (screenHeight != prevHeight) ||
-             (prevFullScreen != enableFullScreen) )
+             (prevFullScreen != enableFullScreen) || 
+             (antiAliasing != prevAntiAliasing) )
          {
             showMessage(gettext("Warning"), 
                   gettext("Some changes will only take effect upon restart."),
@@ -768,6 +837,7 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
          reflexionType = prevReflexion;
          screenWidth = prevWidth;
          screenHeight = prevHeight;
+         antiAliasing = prevAntiAliasing;
          interf->closeWindow(intWindow);
          return(OPTIONSW_CANCEL);
       }
@@ -797,6 +867,7 @@ int options::treat(guiObject* object, int eventInfo, interface* interf,
    txtCamera->setText(cameraName());
    txtReflexion->setText(reflexionName());
    txtResolution->setText(resolutionName());
+   txtAntiAliasing->setText(antiAliasingName());
 
    intWindow->draw(0,0);
    return(OPTIONSW_OTHER);
@@ -813,6 +884,7 @@ int  options::reflexionType;    /**< Reflexion Type */
 int  options::screenWidth;      /**< Screen Height */
 int  options::screenHeight;     /**< Screen Width */
 bool options::enableFullScreen; /**< If fullscreen is defined */
+int  options::antiAliasing;     /**< Current Anti-Aliasing */
 
 string options::fileName = "";
 
