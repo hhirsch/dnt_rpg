@@ -1,5 +1,6 @@
-    DccNiTghmare is a  program registered in public domain, do
-whatever  you  want  with  its  code  and  data.
+  For information about DccNiTghtmare's license, see the file
+                         license.txt
+
 
 ==============================================================
 |                         DccNiTghtmare                      |
@@ -7,31 +8,32 @@ whatever  you  want  with  its  code  and  data.
 
 I   - Requeriments
 II  - Instalation
-III - Execution (and Keys)
-IV  - Contacts
+III - Execution
+IV  - Input
+V   - Contacts
 
 ==============================================================
 |                      I - Requeriments                      |
 ==============================================================
 
-   The DccNiTghtmare's compilation and execution needs some 
+   The DccNiTghtmare's compilation and execution needs  some 
 software and hardware. They are:
 
    Software:
-   Cal3D     - Version 0.11, http://home.gna.org/cal3d/
-   LibVorbis - http://www.vorbis.com/
-   OpenGL    
-   SDL       - Version 1.2.12, www.libsdl.org
-   SDL_image - Version 1.2.6, www.libsdl.org/projects/SDL_image/
-   SDL_ttf   - Version 2.0.7 www.libsdl.org/projects/SDL_ttf/
-   OpenAL    - Version 0.0.8, www.openal.org
+      Cal3D     - http://home.gna.org/cal3d/
+      LibVorbis - http://www.vorbis.com/
+      OpenGL    
+      SDL       - www.libsdl.org
+      SDL_image - www.libsdl.org/projects/SDL_image/
+      SDL_ttf   - www.libsdl.org/projects/SDL_ttf/
+      OpenAL    - www.openal.org
    
    Hardware:
-   Video Card with 3D aceleration, OpenGl compatible (minimun 
-   of a NVidia 6200 - Recommended: Nvidia 6800 GS).
+      Video  Card  with  3D  aceleration, OpenGL  compatible 
+(minimun of a NVidia 6200 - Recommended: Nvidia 6800).
 
-     We don't recommend to use it on Window$:  the  render is 
-   slower and the quality is worst. 
+      We don't recommend to use DNT on Window$: the renderer
+is slower and the quality is worst. 
 
 ==============================================================
 |                      II - Instalation                      |
@@ -39,16 +41,17 @@ software and hardware. They are:
 
 1) Source-Code Distribution
 
-   a) LINUX   
+   a) LINUX, BSD, *NIX
 
    To   "install"   dccnitghtmare,   decompact   the  tar.bz2,  
-go to the directory dccnitghtmare, run ./configure and run
-"make".
+go to the directory dccnitghtmare, run ./configure , run
+"make" and "make install".
    Example:
    farrer@anamabeka:~/$ tar -xvjf dccnitghtmare.tar.bz2
    farrer@anamabeka:~/$ cd dccnitghtmare
    farrer@snamabeka:~/dccnitghtmare/$ ./configure
    farrer@anamabeka:~/dccnitghtmare/$ make
+   farrer@anamabeka:~/dccnitghtmare/$ sudo make install
 
    b) WINDOWS (We hope you're not using it on Ruindow$).
 
@@ -60,13 +63,24 @@ the workspace DccNiTghtmare.dsw at it and compile.
    Don't blame us. Blame Microsoft!
 
 ==============================================================
-|                       III - Execution                       |
+|                       III - Execution                      |
 ==============================================================
 
-   To execute  the  program,  go to directory ./bin and run the 
-file dccnitghtmare. It's needed  to be on X. We really hope the
-game  will  open in  this case, and  the  interation-navigation 
-follows:
+[*nix note: We'll need to be on X.]
+
+1) Normal Execution (with "make install")
+
+   Just run "dccnitghtmare" command. Or, to run the map editor
+just run "dntMapEditor" command.
+
+2) Local Execution (without "make install")
+
+   To   execute  the  program  without  "make install",  go to 
+directory ./bin and run the file dccnitghtmare.
+
+==============================================================
+|                        IV - Input                          |
+==============================================================
 
                  ========================
                  | Camera Movimentation |
@@ -100,7 +114,6 @@ q          =  move left                       (0-?)
 e          =  move right                      (0-?)
 tab        =  make active next character 
 lctrl+tab  =  make active previous character
-o, p       =  blood effect
 y          =  protect effect
 space      =  enter battle mode
 r          =  show range of action
@@ -118,7 +131,7 @@ i      =  Open Inventory window
 button exit.
 
 ==============================================================
-|                       IV - Contacts                        |
+|                        V - Contacts                        |
 ==============================================================
 
 =========================
