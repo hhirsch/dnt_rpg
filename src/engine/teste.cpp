@@ -53,13 +53,13 @@ int main(int argc, char **argv)
 
    Farso_Init(&screen,"DccNiTghtmare", opt.screenWidth, opt.screenHeight,
               opt.enableFullScreen, opt.antiAliasing);
-   engine* Engine = new engine();
+   engine* gameEngine = new engine();
    
-   Engine->Init(screen);
+   gameEngine->init(screen);
 
    GLuint tituloID;
    /* Call Splash Screen  */
-   Engine->SplashScreen();
+   gameEngine->splashScreen();
 
    /* Load backImage */
    SDL_Surface* img = IMG_Load(
@@ -69,8 +69,8 @@ int main(int argc, char **argv)
 
    /* Call Initial Screen */
    glDisable(GL_LIGHTING);
-   Engine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
-   int result = Engine->InitialScreen(ON_INIT,tituloID,true);
+   gameEngine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+   int result = gameEngine->menuScreen(ON_INIT,tituloID,true);
    int estado = ON_INIT;
    int charCreation = 0;
    bool reloadMusic;
@@ -80,32 +80,32 @@ int main(int argc, char **argv)
        reloadMusic = false;
        if(result == NEW_GAME)
        {
-          charCreation = Engine->CharacterScreen(tituloID);
+          charCreation = gameEngine->characterScreen(tituloID);
           if( charCreation == CHAR_CONFIRM)
           {
              glDisable(GL_LIGHTING);
-             Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 
+             gameEngine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 
                                     800, 600);
-             Engine->LoadMap("mapas/teste1.map",0);
+             gameEngine->loadMap("mapas/teste1.map",0);
           }
        }
        
        if( (result == SAVE_GAME) && (estado == IN_GAME))
        {
-          Engine->save();
+          gameEngine->saveGame();
        }
 
        if(result == LOAD_GAME)
        {
-          Engine->load();
+          gameEngine->loadGame();
        }
        
        if(result == OPTIONS)
        {
-          Engine->OptionsScreen(tituloID);
+          gameEngine->optionsScreen(tituloID);
        }
        #ifdef REDE
-          Engine->server = server;
+          gameEngine->server = server;
        #endif
       //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
@@ -115,9 +115,9 @@ int main(int argc, char **argv)
          if(result == CONTINUE_GAME)
          {
             glDisable(GL_LIGHTING);
-            Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+            gameEngine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
          }
-         if(Engine->Run(screen) == 1)
+         if(gameEngine->run(screen) == 1)
          {
             estado = IN_GAME;
          }
@@ -128,26 +128,26 @@ int main(int argc, char **argv)
          reloadMusic = true;
          glDisable(GL_LIGHTING);
 	      glDisable(GL_FOG);
-         Engine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
-         result = Engine->InitialScreen(estado,tituloID,reloadMusic);
+         gameEngine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
+         result = gameEngine->menuScreen(estado,tituloID,reloadMusic);
       }
       else
       {
-         result = Engine->InitialScreen(estado,tituloID,reloadMusic);
+         result = gameEngine->menuScreen(estado,tituloID,reloadMusic);
       }
       charCreation = CHAR_OTHER;
        
        #ifdef REDE
-          free(Engine->server); 
+          free(gameEngine->server); 
        #endif
    }
 
    glDisable(GL_LIGHTING);
-   Engine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+   gameEngine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
 
    glDeleteTextures(1,&tituloID); 
 
-   delete(Engine);
+   delete(gameEngine);
 
    Farso_End(screen);
 

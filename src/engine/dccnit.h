@@ -84,7 +84,7 @@ class engine
        * Init Engine to utilization  
        * \param screen -> Pointer to the Screen's Surface
        ***************************************************************/
-      void Init(SDL_Surface *screen);
+      void init(SDL_Surface *screen);
 
       /*!
        **************************************************************** 
@@ -92,7 +92,7 @@ class engine
        * \param surface -> Pointer to the Screen's Surface
        * \return 0 when stop running the main loop in engine.
        ***************************************************************/
-      int  Run(SDL_Surface *surface);    
+      int  run(SDL_Surface *surface);    
 
       /*!
        **************************************************************** 
@@ -134,13 +134,13 @@ class engine
        * \param RecarregaPCs -> 1 to reload PCs 0 to not.
        * \return 0 if can't load file .
        ***************************************************************/
-      int LoadMap(string arqMapa, int RecarregaPCs);
+      int loadMap(string arqMapa, int RecarregaPCs);
 
       /*!
        ****************************************************************
        * Load Splash Screen
        ****************************************************************/
-       void SplashScreen();
+       void splashScreen();
 
        /*! Fade in Some Texture on screen */
        void fadeInTexture(GLuint id, int x1, int y1, int x2, int y2,
@@ -158,7 +158,7 @@ class engine
        * \param reloadMusic -> true to reload the music
        * \return initialScreen return Values
        ***************************************************************/
-      int InitialScreen(int Status, GLuint idTextura, bool reloadMusic);
+      int menuScreen(int Status, GLuint idTextura, bool reloadMusic);
 
       /*!
        **************************************************************** 
@@ -166,7 +166,7 @@ class engine
        * \param idTextura -> loaded initial screen texture
        * \return CharacterScreens return values
        ***************************************************************/
-      int CharacterScreen(GLuint idTextura);
+      int characterScreen(GLuint idTextura);
 
       /*!
        *************************************************************** 
@@ -174,43 +174,43 @@ class engine
        * \param idTextura -> loaded initial screen texture
        * \return Options Screen Return Value.
        ***************************************************************/
-      int OptionsScreen(GLuint idTextura);
+      int optionsScreen(GLuint idTextura);
 
       /*!
        *************************************************************** 
        * Load Informations Screen
        ***************************************************************/
-      void InformationScreen();
+      void informationScreen();
 
       /*!
        *************************************************************** 
        * Load MiniMap Window
        ***************************************************************/
-      void OpenMiniMapWindow();
+      void openMiniMapWindow();
 
       /*!
        *************************************************************** 
        * Load ShortCuts Window
        ***************************************************************/
-      void OpenShortcutsWindow();
+      void openShortcutsWindow();
 
       /*!
        *************************************************************** 
        * Load/UnLoad Inventory Window
        ***************************************************************/
-      void OpenCloseInventoryWindow();
+      void openCloseInventoryWindow();
       
       /*!
        *************************************************************** 
-       * Load Function (and window)
+       * Load Game Function (and window)
        ***************************************************************/
-      void load();
+      void loadGame();
       
       /*!
        *************************************************************** 
-       * Save Function (and window)
+       * Save Game Function (and window)
        ***************************************************************/
-      void save();
+      void saveGame();
 
       /*!
        **************************************************************
@@ -307,9 +307,9 @@ class engine
 
       /*!
        ************************************************************** 
-       * actualize all PCs health bars to the current pcs life
+       * update all PCs health bars to the current pcs life
        ***************************************************************/
-      void actualizeAllHealthBars();
+      void updateAllHealthBars();
 
       /*!
        ************************************************************** 

@@ -242,7 +242,7 @@ engine::~engine()
 /*********************************************************************
  *                       Informations Screen                         *
  *********************************************************************/
-void engine::InformationScreen()
+void engine::informationScreen()
 {
    Uint8 *keys;
    SDL_Surface* img;
@@ -277,18 +277,18 @@ void engine::InformationScreen()
 }
 
 /*********************************************************************
- *                                 load                              *
+ *                               loadGame                            *
  *********************************************************************/
-void engine::load()
+void engine::loadGame()
 {
    //TODO
    modifState.loadState("");
 }
 
 /*********************************************************************
- *                                 save                              *
+ *                               saveGame                            *
  *********************************************************************/
-void engine::save()
+void engine::saveGame()
 {
    //TODO
    modifState.saveState("");
@@ -312,7 +312,7 @@ void engine::loadPCs()
 /*********************************************************************
  *                         Load Map to Engine                        *
  *********************************************************************/
-int engine::LoadMap(string arqMapa, int RecarregaPCs)
+int engine::loadMap(string arqMapa, int RecarregaPCs)
 {
    healthBar* progress = new healthBar(2,20,253,30);
    progress->defineMaxHealth(10);
@@ -372,6 +372,9 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
 
    /* Remove All Pending Actions */
    actionControl->removeAllActions();
+
+   /* Remove All Sound Effects */
+   snd->removeAllSoundEffects();
 
    actualMap = new Map(objectsList);
    actualMap->setFileName(arqVelho);
@@ -485,8 +488,8 @@ int engine::LoadMap(string arqMapa, int RecarregaPCs)
    {
      gui->closeWindow(shortCutsWindow);
    }
-   OpenMiniMapWindow();
-   OpenShortcutsWindow();
+   openMiniMapWindow();
+   openShortcutsWindow();
 
    /* Updating the BoundingBoxes for PCs */
    int aux;
@@ -633,7 +636,7 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2,
 /*********************************************************************
  *                             SplashScreen                          *
  *********************************************************************/
-void engine::SplashScreen()
+void engine::splashScreen()
 {
    GLuint id;
    Uint32 mButton = 0;
@@ -698,7 +701,7 @@ void engine::SplashScreen()
 /*********************************************************************
  *                       Call Initial Game Menu                      *
  *********************************************************************/
-int engine::InitialScreen(int Status, GLuint idTextura, bool reloadMusic)
+int engine::menuScreen(int Status, GLuint idTextura, bool reloadMusic)
 {
    /* Reload Music, if needed */
    if(reloadMusic)
@@ -718,7 +721,7 @@ int engine::InitialScreen(int Status, GLuint idTextura, bool reloadMusic)
 /*********************************************************************
  *                       Call Options Game Screen                    *
  *********************************************************************/
-int engine::OptionsScreen(GLuint idTextura)
+int engine::optionsScreen(GLuint idTextura)
 {
    interface* interf = new interface(NULL);
    int optionW = OPTIONSW_OTHER;
@@ -795,7 +798,7 @@ int engine::OptionsScreen(GLuint idTextura)
 /*********************************************************************
  *              Call Screens to Create, Evolute Character            *
  *********************************************************************/
-int engine::CharacterScreen(GLuint idTextura)
+int engine::characterScreen(GLuint idTextura)
 {
    int charCreation = CHAR_OTHER;
    int tempo = SDL_GetTicks();
@@ -1015,7 +1018,7 @@ void engine::redefineWindow(SDL_Surface *screen, int actualFarView)
 /*********************************************************************
  *                       Init Engine Function                        *
  *********************************************************************/
-void engine::Init(SDL_Surface *screen)
+void engine::init(SDL_Surface *screen)
 {
    actualScreen = screen;  
    redefineWindow(screen, FARVIEW);
@@ -1155,7 +1158,7 @@ void engine::Init(SDL_Surface *screen)
  *                              ScreenDump                           *
  *********************************************************************/
 #ifdef VIDEO_MODE
-void ScreenDump(char *destFile, short W, short H) 
+void screenDump(char *destFile, short W, short H) 
 {
   FILE   *out = fopen(destFile, "w");
   char   pixel_data[3*SCREEN_X*SCREEN_Y];
@@ -1393,7 +1396,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
       if(!inventoryWindow->isOpen())
       {
          /* window is no more opened, so free structs */
-         OpenCloseInventoryWindow();
+         openCloseInventoryWindow();
       }  
    }
 
@@ -1549,7 +1552,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
               /* Open, if not opened, the minimap window */
               if(!miniMapWindow)
               {
-                  OpenMiniMapWindow();
+                  openMiniMapWindow();
               }
            } 
            else if(object == (guiObject*) buttonEndTurn)
@@ -1563,7 +1566,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
            {
               if(!inventoryWindow)
               {
-                 OpenCloseInventoryWindow();
+                 openCloseInventoryWindow();
               }
            }
            break;
@@ -1576,11 +1579,11 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
          }
          else if(object == (guiObject*) buttonSave)
          {
-            save();
+            saveGame();
          }
          else if(object == (guiObject*) buttonLoad)
          {
-            load();
+            loadGame();
          }
          break;
        }
@@ -1602,22 +1605,9 @@ void engine::hourToTxt()
    char htmp[32];
    int ihour = (int)hour;
    int imin = (int) (( hour - ihour ) * 60 );
-   if( (imin >= 10) && (ihour >= 10))
-   {
-      sprintf(&htmp[0],"%d:%d", ihour, imin);
-   }
-   else if(imin >= 10)
-   {
-      sprintf(&htmp[0],"0%d:%d", ihour, imin);
-   }
-   else if(ihour >= 10)
-   {
-      sprintf(&htmp[0],"%d:0%d", ihour, imin);
-   }
-   else
-   {
-      sprintf(&htmp[0],"0%d:0%d", ihour, imin);
-   }
+   
+   sprintf(&htmp[0],"%2d:%2d", ihour, imin);
+
    if(shortCutsWindow)
    {
       hourTxt->setText(htmp);
@@ -1810,7 +1800,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             /* Open Inventory when button pressed */
             if( (Mbutton & SDL_BUTTON(1)) && (!inventoryWindow))
             {
-               OpenCloseInventoryWindow();
+               openCloseInventoryWindow();
             }
             pronto = 1;
          }
@@ -1947,7 +1937,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                              xReal, zReal,
                              WALK_PER_MOVE_ACTION) ) )
             {
-               LoadMap(quaux->mapConection.mapName, 0);
+               loadMap(quaux->mapConection.mapName, 0);
                return(1);
             }
          }
@@ -2087,7 +2077,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
              if(!miniMapWindow)
              {
-               OpenMiniMapWindow();
+               openMiniMapWindow();
              }
              lastKey = SDLK_m;
              lastKeyb = tempo;
@@ -2100,7 +2090,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
              if(!shortCutsWindow)
              {
-                 OpenShortcutsWindow();
+                 openShortcutsWindow();
              }
              lastKey = SDLK_n;
              lastKeyb = tempo;
@@ -2111,14 +2101,14 @@ int engine::treatIO(SDL_Surface *screen)
              ( (tempo-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_i) ) )
          {
-            OpenCloseInventoryWindow(); 
+            openCloseInventoryWindow(); 
             lastKey = SDLK_i;
             lastKeyb = tempo;
          }
 
          if(keys[SDLK_F1]) //Call Information Screen
          {
-            InformationScreen();
+            informationScreen();
          }
 
          /* FIXME only to test */
@@ -2569,7 +2559,7 @@ int engine::treatIO(SDL_Surface *screen)
             sprintf(name,"img/teste0%d.tga",imgNumber);
          else
             sprintf(name,"img/teste%d.tga",imgNumber);
-         ScreenDump(name,SCREEN_X,SCREEN_Y);
+         screenDump(name,SCREEN_X,SCREEN_Y);
          imgNumber++;
       }
 #endif
@@ -3173,7 +3163,7 @@ bool engine::defineCharacterHeight(character* c, GLfloat nx, GLfloat nz)
 /*********************************************************************
  *                       Load MiniMap Window                         *
  *********************************************************************/
-void engine::OpenMiniMapWindow()
+void engine::openMiniMapWindow()
 {
    character* activeCharacter = PCs->getActiveCharacter();
    GLint x = (int)(((activeCharacter->xPosition) / (actualMap->squareSize())));
@@ -3213,7 +3203,7 @@ void engine::OpenMiniMapWindow()
 /*********************************************************************
  *                         Load ShortCuts Window                     *
  *********************************************************************/
-void engine::OpenShortcutsWindow()
+void engine::openShortcutsWindow()
 {
    shortCutsWindow = gui->insertWindow(0,SCREEN_Y-128,511,SCREEN_Y-1,
                                        gettext("Shortcuts"));
@@ -3273,7 +3263,7 @@ void engine::OpenShortcutsWindow()
 /*********************************************************************
  *                      OpenCloseInventoryWindow                     *
  *********************************************************************/
-void engine::OpenCloseInventoryWindow()
+void engine::openCloseInventoryWindow()
 {
    if(!inventoryWindow)
    {
@@ -3288,9 +3278,9 @@ void engine::OpenCloseInventoryWindow()
 }
 
 /*********************************************************************
- *                    Actualize Actual Health Bars                   *
+ *                        updateAllHealthBars                        *
  *********************************************************************/
-void engine::actualizeAllHealthBars()
+void engine::updateAllHealthBars()
 {
    character* pers = (character*) PCs->first->next;
    while(pers != PCs->first)
@@ -3341,7 +3331,7 @@ fightSystem* engine::getFightSystem()
 /*********************************************************************
  *                          Runs the Engine                          *
  *********************************************************************/
-int engine::Run(SDL_Surface *surface)
+int engine::run(SDL_Surface *surface)
 {
    string brief;
    
@@ -3445,7 +3435,7 @@ int engine::Run(SDL_Surface *surface)
            {
               briefTxt->setText(brief);
            }
-           actualizeAllHealthBars();
+           updateAllHealthBars();
 
            if(fightStatus == FIGHT_PC_TURN)
            {
