@@ -1,7 +1,7 @@
    The known tested Operating Systens are described bellow. DNT will probably
 run on any system where you can use/compile the sdl+opengl+cal3d+openal. If
 you tested DNT on a system not listed bellow, just say us at the email:
-dnt@dnteam.org and it will be put here.
+dnt@dnteam.org and it'll be here.
 
 ======================================================
 |      Operating System       |          Arch        |

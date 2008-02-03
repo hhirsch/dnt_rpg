@@ -9,28 +9,12 @@ the use or non-use of DccNiTghtmare and derivates.
 all copyrights. Everyone is free to use, modify, republish, sell or give
 away it without prior consent from anybody.
 
-   All DccNiTghtmare's data files that are made by the DNTeam are also at
-Public Domain. The data that aren't made by the DNTeam is listed bellow,
-with autor's names and license (those not listed here are in Public Domain).
+   All DccNiTghtmare's data files that were made by the DNTeam are also at
+Public Domain. Each data file that weren't made by the DNTeam is have a 
+license.txt file at its .blend directory, usually at "blend/contrib/", 
+with autor's names and license.
    
-   Just as a reminder, if the .blend file is described here, the correspondents
-cal3D files are at the same license of the blend that originated them.
+   Just as a reminder, if the .blend file is described there, 
+the correspondents cal3D files are at the same license of the blend that 
+originated them.
 
-*******************************************************************************
-**           File            **         Authors          **      License     **
-*******************************************************************************
-******************************  WorldForge Models  ****************************
-*******************************************************************************
-**                           **       openfrag.org       **                  **
-**  blend/contrib/cow/*      **      Damien McGinnes     **        GPL       **
-**                           **          DNTeam          **                  **
-*******************************************************************************
-**  blend/contrib/deer/*     **                          **                  **
-**  blend/contrib/bunny/*    **      Damien McGinnes     **       GPLv2      **
-**  blend/contrib/spider/*   **                          **                  **
-*******************************************************************************
-******************************   Tiziana Models   *****************************
-*******************************************************************************
-** blend/contrib/letto/*     **    Tiziana aka TiZeta    **     Creative     **
-**                           **                          **    Commons 2.0   **
-*******************************************************************************
