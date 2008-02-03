@@ -95,8 +95,6 @@ sound::sound()
  *************************************************************************/
 sound::~sound()
 {
-   sndfx* snd, *tmp;
-   
    if(enabled)
    {
       /* Clear the Opened Music */
@@ -108,14 +106,7 @@ sound::~sound()
       }
 
       /* Clear all opened Sound Effects */
-      snd = sndfxList.next;
-      while(totalSndfx > 0)
-      {
-         tmp = snd;
-         snd = snd->previous;
-         removeSoundEffect(tmp);
-         snd= snd->next;
-      }
+      removeAllSoundEffects();
    
       /* End the Thread */
       lock();
@@ -295,6 +286,22 @@ void sound::removeSoundEffect(sndfx* snd)
    }
 }
 
+/*************************************************************************
+ *                        removeAllSoundEffects                          *
+ *************************************************************************/
+void sound::removeAllSoundEffects()
+{
+   /* Clear all opened Sound Effects */
+   sndfx* snd = sndfxList.next;
+   sndfx* tmp;
+   while(totalSndfx > 0)
+   {
+      tmp = snd;
+      snd = snd->previous;
+      removeSoundEffect(tmp);
+      snd= snd->next;
+   }
+}
 
 
 /*************************************************************************

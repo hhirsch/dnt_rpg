@@ -59,9 +59,14 @@ class sound
       /*! Remove sound effect from list
        *  \param snd -> pointer to sound effect to remove */
       void removeSoundEffect(sndfx* snd);
+
+      /*! Remove All sound Effects from list */
+      void removeAllSoundEffects();
       
+      /*! Lock the sound mutex */
       void lock();
 
+      /*! Unlock the sound mutex */
       void unLock();
 
       /*! Change Overall Volume.
