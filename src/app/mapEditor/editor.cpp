@@ -228,7 +228,7 @@ void editor::openMap()
 
       float x=0,z=0;
       map->getInitialPosition(x,z);
-      gui->gameCamera.actualizeCamera(x,0,z,0);
+      gui->gameCamera.updateCamera(x,0,z,0);
 
       gui->showMessage("Map opened.");
    }
@@ -379,7 +379,7 @@ void editor::newMap()
       }
       map->setInitialPosition( ((sizeX+12)*map->squareSize() / 2.0),
                             ((sizeZ+12)*map->squareSize() / 2.0));
-      gui->gameCamera.actualizeCamera(((sizeX+14)*map->squareSize() / 2.0), 0.0, 
+      gui->gameCamera.updateCamera(((sizeX+14)*map->squareSize() / 2.0), 0.0, 
                                       ((sizeZ+14)*map->squareSize() / 2.0), 0.0);
    }
    else
@@ -439,7 +439,7 @@ void editor::verifyPosition()
        if(gui->gameCamera.getCenterX() > 
           ((map->getSizeX() * map->squareSize())+20))
        {
-          gui->gameCamera.actualizeCamera( ((map->getSizeX() * 
+          gui->gameCamera.updateCamera( ((map->getSizeX() * 
                                              map->squareSize())+20),
                                           gui->gameCamera.getCenterY()-30,
                                           gui->gameCamera.getCenterZ(), 
@@ -447,7 +447,7 @@ void editor::verifyPosition()
        }
        else if(gui->gameCamera.getCenterX() < -20)
        {
-          gui->gameCamera.actualizeCamera( -20 ,
+          gui->gameCamera.updateCamera( -20 ,
                                           gui->gameCamera.getCenterY()-30,
                                           gui->gameCamera.getCenterZ(), 
                                           0.0);
@@ -455,7 +455,7 @@ void editor::verifyPosition()
        if(gui->gameCamera.getCenterZ() > ((map->getSizeZ() * 
                                            map->squareSize())+20))
        {
-          gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
+          gui->gameCamera.updateCamera( gui->gameCamera.getCenterX(),
                                            gui->gameCamera.getCenterY()-30,
                                           ((map->getSizeZ() * 
                                             map->squareSize())+20), 
@@ -463,7 +463,7 @@ void editor::verifyPosition()
        }
        else if(gui->gameCamera.getCenterZ() < -20)
        {
-          gui->gameCamera.actualizeCamera( gui->gameCamera.getCenterX(),
+          gui->gameCamera.updateCamera( gui->gameCamera.getCenterX(),
                                           gui->gameCamera.getCenterY()-30,
                                           -20, 
                                           0.0);
@@ -581,8 +581,8 @@ void editor::draw()
 
    /* Redefine camera position */
    gui->cameraPos(map);
-   actualizeFrustum( visibleMatrix, proj, modl);
-   gameSun->actualizeHourOfDay(hour, 0.0, 0.0);
+   updateFrustum( visibleMatrix, proj, modl);
+   gameSun->updateHourOfDay(hour, 0.0, 0.0);
    gameSun->setLight();
    /* Draw Things */
    if(mapOpened)
@@ -763,7 +763,7 @@ void editor::draw()
 
    /* Draw Particles */
    glPushMatrix();
-     particleSystem->actualizeAll(xReal,yReal,zReal,visibleMatrix, true);
+     particleSystem->updateAll(xReal,yReal,zReal,visibleMatrix, true);
    glPopMatrix();
    glDisable(GL_FOG);
 

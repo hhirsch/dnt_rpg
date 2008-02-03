@@ -252,7 +252,7 @@ void engine::informationScreen()
    setTextureRGBA(img,&texturaInfo);
 
    glDisable(GL_LIGHTING);
-   actualizeFrustum(visibleMatrix,proj,modl);
+   updateFrustum(visibleMatrix,proj,modl);
    textureToScreen(texturaInfo,proj,modl,viewPort,272,44,527,555,256,213,
                    0.0001);
    glEnable(GL_LIGHTING);
@@ -353,7 +353,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    fadeInTexture(texturaCarga, centerX-128, centerY-64, 
                  centerX+127, centerY+63, 256,128);
 
-   actualizeFrustum(visibleMatrix,proj,modl);
+   updateFrustum(visibleMatrix,proj,modl);
    showLoading(img,&texturaTexto,texturaCarga,
                texto, progress,
                proj, modl, viewPort);
@@ -538,10 +538,10 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
                                  activeCharacter->zPosition);
    activeCharacter->yPosition=actualMap->getHeight(activeCharacter->xPosition,
                                                    activeCharacter->zPosition);
-   gameCamera.actualizeCamera(activeCharacter->xPosition,
-                              activeCharacter->yPosition,
-                              activeCharacter->zPosition,
-                              activeCharacter->orientation);
+   gameCamera.updateCamera(activeCharacter->xPosition,
+                           activeCharacter->yPosition,
+                           activeCharacter->zPosition,
+                           activeCharacter->orientation);
    activeCharacter->ocSquare = actualMap->squareInic;
 
    showLoading(img,&texturaTexto,texturaCarga,
@@ -601,7 +601,7 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2,
    {
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
-      actualizeFrustum(visibleMatrix,proj,modl);
+      updateFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
       textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,sizeX,sizeY,0.012);
       glFlush();
@@ -622,7 +622,7 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2,
    {
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
-      actualizeFrustum(visibleMatrix,proj,modl);
+      updateFrustum(visibleMatrix,proj,modl);
       glColor3f(i/50.0, i/50.0, i/50.0);
       textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,sizeX,sizeY,0.012);
       glFlush();
@@ -645,7 +645,7 @@ void engine::splashScreen()
    int x,y;
    Uint32 time = SDL_GetTicks();
    glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-   actualizeFrustum(visibleMatrix,proj,modl);
+   updateFrustum(visibleMatrix,proj,modl);
    SDL_Surface* img;
    img = IMG_Load(dir.getRealFile("texturas/general/inicio1.png").c_str()); 
    glDisable(GL_LIGHTING);
@@ -711,7 +711,7 @@ int engine::menuScreen(int Status, GLuint idTextura, bool reloadMusic)
    }
 
    /* Executes Initial Screen */
-   actualizeFrustum(visibleMatrix,proj,modl);
+   updateFrustum(visibleMatrix,proj,modl);
    initialScreen* inic = new(initialScreen);
    int result = inic->run(Status, proj, modl, viewPort, idTextura, snd);
    delete(inic);
@@ -725,8 +725,8 @@ int engine::optionsScreen(GLuint idTextura)
 {
    interface* interf = new interface(NULL);
    int optionW = OPTIONSW_OTHER;
-   int tempo = SDL_GetTicks();
-   int tempoAnterior = 0;
+   int time = SDL_GetTicks();
+   int timeAnterior = 0;
    Uint8* keys;
    int x,y;
    guiObject* object = NULL;
@@ -740,16 +740,16 @@ int engine::optionsScreen(GLuint idTextura)
    while( (optionW != OPTIONSW_CANCEL) && 
           (optionW != OPTIONSW_CONFIRM))
    {
-      tempo = SDL_GetTicks();
-      if(tempo - tempoAnterior >= ACTUALIZATION_RATE) 
+      time = SDL_GetTicks();
+      if(time - timeAnterior >= ACTUALIZATION_RATE) 
       {
-         tempoAnterior = tempo;
+         timeAnterior = time;
          SDL_PumpEvents();
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          glClearColor(0,0,0,1);
          keys = SDL_GetKeyState(NULL);
-         Uint8 Mbutton = SDL_GetMouseState(&x,&y);
-         object = interf->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
+         Uint8 mButton = SDL_GetMouseState(&x,&y);
+         object = interf->manipulateEvents(x,y,mButton,keys,&eventInfo);
          textureToScreen(idTextura,proj,modl,viewPort,
                          0,0,SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
          glPushMatrix();
@@ -761,9 +761,9 @@ int engine::optionsScreen(GLuint idTextura)
          SDL_GL_SwapBuffers();
          optionW = option->treat(object,eventInfo,interf,proj,modl,viewPort);
       }
-      else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
+      else if((ACTUALIZATION_RATE-1) - (time - timeAnterior) > 0 ) 
       {
-         SDL_Delay((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) );
+         SDL_Delay((ACTUALIZATION_RATE-1) - (time - timeAnterior) );
       }
    }
   
@@ -801,8 +801,8 @@ int engine::optionsScreen(GLuint idTextura)
 int engine::characterScreen(GLuint idTextura)
 {
    int charCreation = CHAR_OTHER;
-   int tempo = SDL_GetTicks();
-   int tempoAnterior = 0;
+   int time = SDL_GetTicks();
+   int timeAnterior = 0;
    Uint8* keys;
    int x,y;
    guiObject* object = NULL;
@@ -837,16 +837,16 @@ int engine::characterScreen(GLuint idTextura)
 
    while( (status != 6) )
    {
-      tempo = SDL_GetTicks();
-      if(tempo - tempoAnterior >= ACTUALIZATION_RATE) 
+      time = SDL_GetTicks();
+      if(time - timeAnterior >= ACTUALIZATION_RATE) 
       {
-         tempoAnterior = tempo;
+         timeAnterior = time;
          SDL_PumpEvents();
          glClearColor(0,0,0,1);
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
-         Uint8 Mbutton = SDL_GetMouseState(&x,&y);
-         object = gui->manipulateEvents(x,y,Mbutton,keys,&eventInfo);
+         Uint8 mButton = SDL_GetMouseState(&x,&y);
+         object = gui->manipulateEvents(x,y,mButton,keys,&eventInfo);
 
          textureToScreen(idTextura,proj,modl,viewPort,0,0,
                          SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
@@ -977,9 +977,9 @@ int engine::characterScreen(GLuint idTextura)
             }
          }         
       }
-      else if((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) > 0 ) 
+      else if((ACTUALIZATION_RATE-1) - (time - timeAnterior) > 0 ) 
       {
-         SDL_Delay((ACTUALIZATION_RATE-1) - (tempo - tempoAnterior) );
+         SDL_Delay((ACTUALIZATION_RATE-1) - (time - timeAnterior) );
       }
    }
 
@@ -1617,15 +1617,15 @@ void engine::hourToTxt()
 /*********************************************************************
  *                         verifyMouseActions                        *
  *********************************************************************/
-int engine::verifyMouseActions(Uint8 Mbutton)
+int engine::verifyMouseActions(Uint8 mButton)
 {
    char buf[1024];
    GLfloat wx,wy,wz;
-   Uint32 tempo = SDL_GetTicks();
+   Uint32 time = SDL_GetTicks();
    character* activeCharacter = PCs->getActiveCharacter();
 
-   /* Atualize to culling and to GUI */
-   actualizeFrustum(visibleMatrix,proj,modl);
+   /* Update to culling and to GUI */
+   updateFrustum(visibleMatrix,proj,modl);
 
    /* Define Mouse OpenGL Window Coordinate */
    wx = mouseX; wy = SCREEN_Y - mouseY; 
@@ -1677,14 +1677,14 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                 {
                    objTxt->setText(sobj->obj->getName()); 
                 }
-                if( (Mbutton & SDL_BUTTON(1)) && 
+                if( (mButton & SDL_BUTTON(1)) && 
                     (rangeAction(activeCharacter->xPosition, 
                                  activeCharacter->zPosition,
                                  sobj->x, sobj->z,
                                  WALK_PER_MOVE_ACTION) ) )
                 {
                    /* Get Object */
-                   lastMousePression = tempo;
+                   lastMousePression = time;
                    briefTxt->addText("|");
                    if(activeCharacter->inventories->addObject(sobj->obj))
                    {
@@ -1715,7 +1715,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                       }
                    }
                 }
-                if(Mbutton & SDL_BUTTON(2))
+                if(mButton & SDL_BUTTON(2))
                 {
                    /* TODO Open Menu of choices */
                 }
@@ -1748,13 +1748,13 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             {
                objTxt->setText(gettext("Door")); 
             }
-            if( (Mbutton & SDL_BUTTON(1)) && 
+            if( (mButton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->xPosition, 
                              activeCharacter->zPosition,
                              porta->x, porta->z,
                              WALK_PER_MOVE_ACTION) ) )
             {
-               lastMousePression = tempo;
+               lastMousePression = time;
                if(porta->status)
                {
                   porta->orientation -= 90;
@@ -1798,7 +1798,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             }
 
             /* Open Inventory when button pressed */
-            if( (Mbutton & SDL_BUTTON(1)) && (!inventoryWindow))
+            if( (mButton & SDL_BUTTON(1)) && (!inventoryWindow))
             {
                openCloseInventoryWindow();
             }
@@ -1840,7 +1840,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                   else if(pers->getConversationFile() != "")
                   {
                      cursors->setActual(CURSOR_TALK);
-                     if( (Mbutton & SDL_BUTTON(1)) && 
+                     if( (mButton & SDL_BUTTON(1)) && 
                          (rangeAction(activeCharacter->xPosition, 
                                       activeCharacter->zPosition,
                                       pers->xPosition, pers->zPosition,
@@ -1867,7 +1867,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
                      objTxt->setText(pers->name); 
                   }
 
-                  if( (Mbutton & SDL_BUTTON(1)) &&
+                  if( (mButton & SDL_BUTTON(1)) &&
                       (rangeAction(activeCharacter->xPosition, 
                                    activeCharacter->zPosition,
                                    pers->xPosition, pers->zPosition,
@@ -1931,7 +1931,7 @@ int engine::verifyMouseActions(Uint8 Mbutton)
             curConection = &quaux->mapConection;
             cursors->setActual(CURSOR_MAPTRAVEL);
             pronto = 1;
-            if( (Mbutton & SDL_BUTTON(1)) && 
+            if( (mButton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->xPosition, 
                              activeCharacter->zPosition,
                              xReal, zReal,
@@ -1963,24 +1963,24 @@ int engine::verifyMouseActions(Uint8 Mbutton)
 int engine::treatIO(SDL_Surface *screen)
 {
    exitEngine = 0;           // Exit the engine ?
-   bool andou = false;       // Character Walk ?
-   bool passouTempo = false; // The time to actualize passes ?
-   Uint32 tempo;             // Actual Time
-   GLfloat varX, varZ;        // to avoid GLfloat calculate
+   bool walked = false;      // Character Walk ?
+   bool timePass = false;    // The time to update passes ?
+   Uint32 time;              // Actual Time
+   GLfloat varX, varZ;       // to avoid GLfloat calculate
    character* activeCharacter = PCs->getActiveCharacter();
    Uint8 *keys;
    int x,y;
    int guiEvent;
-   Uint8 Mbutton;
+   Uint8 mButton;
 
    GLfloat varTempo;  // Time Variation
    
-   tempo = SDL_GetTicks();
-   srand(tempo);
-   varTempo = (tempo-lastRead);
+   time = SDL_GetTicks();
+   srand(time);
+   varTempo = (time-lastRead);
    if( ((varTempo)) >= ACTUALIZATION_RATE)
    {
-      passouTempo = true;
+      timePass = true;
 
       /* Actualize Time */
       seconds = varTempo / 1000.0;
@@ -1991,7 +1991,7 @@ int engine::treatIO(SDL_Surface *screen)
          hour = 0.0;
       }
       hourToTxt();
-      lastRead = tempo;
+      lastRead = time;
       guiEvent = 0;
 
       SDL_PumpEvents();
@@ -2000,20 +2000,20 @@ int engine::treatIO(SDL_Surface *screen)
       /* Keyboard Events */
       keys = SDL_GetKeyState(NULL);
 
-      Mbutton = SDL_GetMouseState(&x,&y);
+      mButton = SDL_GetMouseState(&x,&y);
       mouseX = x;
       mouseY = y;
 
-      if( (tempo-lastMouse >=  REFRESH_RATE ) || 
-          ( (Mbutton & SDL_BUTTON(1) ) && 
-	       (tempo-lastMousePression >= REFRESH_RATE)) )
+      if( (time-lastMouse >=  REFRESH_RATE ) || 
+          ( (mButton & SDL_BUTTON(1) ) && 
+	       (time-lastMousePression >= REFRESH_RATE)) )
       {
          cursors->setActual(CURSOR_WALK);
-         lastMouse = tempo;
+         lastMouse = time;
 
          if(!gui->mouseOnGui(mouseX, mouseY))
          {
-            if(verifyMouseActions(Mbutton) == 1)
+            if(verifyMouseActions(mButton) == 1)
             {
                /* Changed Map, so */
                return(1);
@@ -2025,17 +2025,17 @@ int engine::treatIO(SDL_Surface *screen)
 
          /* Exit Engine */
          if( ( keys[SDLK_ESCAPE] ) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_ESCAPE) ) )
          {
             lastKey = SDLK_ESCAPE;
-            lastKeyb = tempo;
+            lastKeyb = time;
             return(0);
          }
 
          /* Enter Attack Mode or End Turn */
          if( (keys[SDLK_SPACE]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_SPACE) ) )
          {
             if(engineMode != ENGINE_MODE_TURN_BATTLE)
@@ -2047,32 +2047,32 @@ int engine::treatIO(SDL_Surface *screen)
                endTurn();
             }
             lastKey = SDLK_SPACE;
-            lastKeyb = tempo;
+            lastKeyb = time;
          }
 
          /* Enable / Disable The Range Draw */
          if( (keys[SDLK_r]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_r) ) )
          {
             showRange = !showRange;
             lastKey = SDLK_r;
-            lastKeyb = tempo;
+            lastKeyb = time;
          }
 
          /* Print All Models on List */
          if( (keys[SDLK_F2]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_F2) ) )
          {
             lastKey = SDLK_F2;
-            lastKeyb = tempo;
+            lastKeyb = time;
             models->printAll();
          }
 
          /* Open Minimap */
          if( (keys[SDLK_m]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_m) ) )
          {
              if(!miniMapWindow)
@@ -2080,12 +2080,12 @@ int engine::treatIO(SDL_Surface *screen)
                openMiniMapWindow();
              }
              lastKey = SDLK_m;
-             lastKeyb = tempo;
+             lastKeyb = time;
          }
 
          /* Open ShortCuts */
          if( (keys[SDLK_n]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_n) ) )
          {
              if(!shortCutsWindow)
@@ -2093,17 +2093,17 @@ int engine::treatIO(SDL_Surface *screen)
                  openShortcutsWindow();
              }
              lastKey = SDLK_n;
-             lastKeyb = tempo;
+             lastKeyb = time;
          }
 
          /* Open Inventory */
          if( (keys[SDLK_i]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_i) ) )
          {
             openCloseInventoryWindow(); 
             lastKey = SDLK_i;
-            lastKeyb = tempo;
+            lastKeyb = time;
          }
 
          if(keys[SDLK_F1]) //Call Information Screen
@@ -2113,11 +2113,11 @@ int engine::treatIO(SDL_Surface *screen)
 
          /* FIXME only to test */
          if( (keys[SDLK_c])&& 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_c) ) )
          {
             lastKey = SDLK_c;
-            lastKeyb = tempo;
+            lastKeyb = time;
             msgController->addMessage(PCs->getActiveCharacter()->xPosition,
                                       PCs->getActiveCharacter()->yPosition +
                                       PCs->getActiveCharacter()->max[1],
@@ -2125,13 +2125,13 @@ int engine::treatIO(SDL_Surface *screen)
                                       "80");
          }
 
-         /* FIXME Remove all temporary tests from here */
+         /* FIXME Remove all timerary tests from here */
          if( (keys[SDLK_y]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_y) ) )
          {
             lastKey = SDLK_y;
-            lastKeyb = tempo;
+            lastKeyb = time;
             if(!effect)
             {
                effect = (part2*)particleSystem->addParticle(PART_FIRE,
@@ -2150,11 +2150,11 @@ int engine::treatIO(SDL_Surface *screen)
             }
          }
          if( (keys[SDLK_t]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_t) ) )
          {
             lastKey = SDLK_t;
-            lastKeyb = tempo;
+            lastKeyb = time;
             particleSystem->addParticle(PART_METEOR,
                                         activeCharacter->xPosition,
                                         MAX_HEIGHT+100,
@@ -2168,7 +2168,7 @@ int engine::treatIO(SDL_Surface *screen)
                                         "particles/fire1.par");
          }
          if( (keys[SDLK_u]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_u) ) )
          {
             lastKey = SDLK_u;
@@ -2185,11 +2185,11 @@ int engine::treatIO(SDL_Surface *screen)
                                        "particles/fire1.par");
          }
          if( (keys[SDLK_l]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_l) ) )
          {
             lastKey = SDLK_l;
-            lastKeyb = tempo;
+            lastKeyb = time;
             particleSystem->addParticle(PART_LIGHTNING,
                                         activeCharacter->xPosition,250,
                                         activeCharacter->zPosition,
@@ -2197,11 +2197,11 @@ int engine::treatIO(SDL_Surface *screen)
          }
 
          if( (keys[SDLK_0]) && 
-             ( (tempo-lastKeyb >= REFRESH_RATE) || 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_0) ) )
          {
             lastKey = SDLK_0;
-            lastKeyb = tempo;
+            lastKeyb = time;
             hour += 0.1;
          }
 
@@ -2232,11 +2232,11 @@ int engine::treatIO(SDL_Surface *screen)
          {
             activeCharacter->xPosition += varX;
             activeCharacter->zPosition += varZ;
-            gameCamera.actualizeCamera(activeCharacter->xPosition,
-                                       activeCharacter->yPosition,
-                                       activeCharacter->zPosition,
-                                       activeCharacter->orientation);
-            andou = true;
+            gameCamera.updateCamera(activeCharacter->xPosition,
+                                    activeCharacter->yPosition,
+                                    activeCharacter->zPosition,
+                                    activeCharacter->orientation);
+            walked = true;
          }
          else if(((varX > 0)&&(canWalk(activeCharacter->walk_interval,0,0))) ||
                  ((varX < 0)&&(canWalk(-activeCharacter->walk_interval,0,0))) )
@@ -2249,11 +2249,11 @@ int engine::treatIO(SDL_Surface *screen)
             {
                activeCharacter->xPosition += activeCharacter->walk_interval;
             }
-            gameCamera.actualizeCamera(activeCharacter->xPosition,
-                                       activeCharacter->yPosition,
-                                       activeCharacter->zPosition,
-                                       activeCharacter->orientation);
-            andou = true;
+            gameCamera.updateCamera(activeCharacter->xPosition,
+                                    activeCharacter->yPosition,
+                                    activeCharacter->zPosition,
+                                    activeCharacter->orientation);
+            walked = true;
          }
          else if(((varZ > 0) && canWalk(0,activeCharacter->walk_interval,0)) ||
                  ((varZ < 0) && canWalk(0,-activeCharacter->walk_interval,0)) )
@@ -2267,11 +2267,11 @@ int engine::treatIO(SDL_Surface *screen)
                activeCharacter->zPosition += activeCharacter->walk_interval;
             }
 
-            gameCamera.actualizeCamera(activeCharacter->xPosition,
-                                       activeCharacter->yPosition,
-                                       activeCharacter->zPosition,
-                                       activeCharacter->orientation);
-            andou = true;
+            gameCamera.updateCamera(activeCharacter->xPosition,
+                                    activeCharacter->yPosition,
+                                    activeCharacter->zPosition,
+                                    activeCharacter->orientation);
+            walked = true;
          }
         
       }
@@ -2291,11 +2291,11 @@ int engine::treatIO(SDL_Surface *screen)
          {
              activeCharacter->xPosition += varX;
              activeCharacter->zPosition += varZ;
-             gameCamera.actualizeCamera(activeCharacter->xPosition,
-                                        activeCharacter->yPosition,
-                                        activeCharacter->zPosition,
-                                        activeCharacter->orientation);
-             andou  = true;
+             gameCamera.updateCamera(activeCharacter->xPosition,
+                                     activeCharacter->yPosition,
+                                     activeCharacter->zPosition,
+                                     activeCharacter->orientation);
+             walked  = true;
          }
          else if(((varX > 0)&&(canWalk(activeCharacter->walk_interval,0,0))) ||
                  ((varX < 0)&&(canWalk(-activeCharacter->walk_interval,0,0))) ) 
@@ -2309,11 +2309,11 @@ int engine::treatIO(SDL_Surface *screen)
               {
                  activeCharacter->xPosition += activeCharacter->walk_interval;
               }
-              gameCamera.actualizeCamera(activeCharacter->xPosition,
-                              activeCharacter->yPosition,
-                              activeCharacter->zPosition,
-                              activeCharacter->orientation);
-              andou = true;
+              gameCamera.updateCamera(activeCharacter->xPosition,
+                                      activeCharacter->yPosition,
+                                      activeCharacter->zPosition,
+                                      activeCharacter->orientation);
+              walked = true;
          }
          else if(((varZ > 0)&&(canWalk(0,activeCharacter->walk_interval,0))) ||
                  ((varZ < 0)&&(canWalk(0,-activeCharacter->walk_interval,0))))
@@ -2326,11 +2326,11 @@ int engine::treatIO(SDL_Surface *screen)
               {
                  activeCharacter->zPosition += activeCharacter->walk_interval;
               }
-              gameCamera.actualizeCamera(activeCharacter->xPosition,
-                              activeCharacter->yPosition,
-                              activeCharacter->zPosition,
-                              activeCharacter->orientation);
-              andou = true;
+              gameCamera.updateCamera(activeCharacter->xPosition,
+                                      activeCharacter->yPosition,
+                                      activeCharacter->zPosition,
+                                      activeCharacter->orientation);
+              walked = true;
          }
 
       }
@@ -2348,7 +2348,7 @@ int engine::treatIO(SDL_Surface *screen)
                ori -= 360.0;
             }
             activeCharacter->setOrientation(ori);
-            andou = true;
+            walked = true;
          }
          // Clockwise Character Turn
          if((keys[SDLK_d]) && (canWalk(0,0,-TURN_VALUE)) )
@@ -2360,7 +2360,7 @@ int engine::treatIO(SDL_Surface *screen)
             }
             activeCharacter->setOrientation(ori);
          }
-         andou = true;
+         walked = true;
       }
       if(keys[SDLK_TAB]) //Activate Character
       {
@@ -2374,7 +2374,7 @@ int engine::treatIO(SDL_Surface *screen)
             PCs->setActiveCharacter((character*)activeCharacter->next);
          }
          activeCharacter = PCs->getActiveCharacter();
-         gameCamera.actualizeCamera(activeCharacter->xPosition,
+         gameCamera.updateCamera(activeCharacter->xPosition,
                                     activeCharacter->yPosition,
                                     activeCharacter->zPosition,
                                     activeCharacter->orientation);
@@ -2382,10 +2382,10 @@ int engine::treatIO(SDL_Surface *screen)
       }
 
       /* Camera Verification */
-      gameCamera.doIO(keys, Mbutton, x, y, DELTA_CAMERA );
+      gameCamera.doIO(keys, mButton, x, y, DELTA_CAMERA );
 
       /* Path Verification */
-      if( (Mbutton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)))
+      if( (mButton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)))
       {
          GLfloat dist;
          dist = sqrt( (xReal - moveCircleX) *
@@ -2452,11 +2452,11 @@ int engine::treatIO(SDL_Surface *screen)
                                      activeCharacter->zPosition);
             }
 
-            gameCamera.actualizeCamera(activeCharacter->xPosition,
-                                       activeCharacter->yPosition,
-                                       activeCharacter->zPosition,
-                                       activeCharacter->orientation);
-            andou = true;
+            gameCamera.updateCamera(activeCharacter->xPosition,
+                                    activeCharacter->yPosition,
+                                    activeCharacter->zPosition,
+                                    activeCharacter->orientation);
+            walked = true;
       }
 
       /* IA cycle */
@@ -2504,7 +2504,7 @@ int engine::treatIO(SDL_Surface *screen)
          }
       }
       guiObject* object;
-      object = gui->manipulateEvents(x,y,Mbutton,keys, &guiEvent);
+      object = gui->manipulateEvents(x,y,mButton,keys, &guiEvent);
       /* Threat the GUI */
       treatGuiEvents(object, guiEvent);
 
@@ -2536,9 +2536,9 @@ int engine::treatIO(SDL_Surface *screen)
 
       /* Actualize FPS */
       actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
-      if( (shortCutsWindow) && (tempo-lastFPS >= 500))
+      if( (shortCutsWindow) && (time-lastFPS >= 500))
       {
-         lastFPS = tempo;
+         lastFPS = time;
          char texto[32];
          sprintf(texto,"FPS: %3.2f",actualFPS);
          FPS->setText(texto);
@@ -2565,7 +2565,7 @@ int engine::treatIO(SDL_Surface *screen)
 #endif
  
       /* Verify Sounds FIXME -> for npc sounds! */
-      if( (andou) && (activeCharacter->isAlive()) )
+      if( (walked) && (activeCharacter->isAlive()) )
       {
          if(!walkSound)
          {
@@ -2585,7 +2585,7 @@ int engine::treatIO(SDL_Surface *screen)
              activeCharacter->orientation );
          #endif
       }
-      else if( (passouTempo) && (activeCharacter->isAlive()))
+      else if( (timePass) && (activeCharacter->isAlive()))
       { 
          if( (activeCharacter->getState() == STATE_WALK) &&
              (engineMode == ENGINE_MODE_TURN_BATTLE) && 
@@ -2956,10 +2956,10 @@ void engine::renderNoShadowThings()
    if(option->enableParticles)
    {
       glPushMatrix();
-         particleSystem->actualizeAll(activeCharacter->xPosition,
-                                      activeCharacter->yPosition,
-                                      activeCharacter->zPosition, 
-                                      visibleMatrix, option->enableGrass);
+         particleSystem->updateAll(activeCharacter->xPosition,
+                                   activeCharacter->yPosition,
+                                   activeCharacter->zPosition, 
+                                   visibleMatrix, option->enableGrass);
       glPopMatrix();
    }
 
@@ -3040,8 +3040,8 @@ void engine::drawWithoutShadows()
    /* Sun Definition */
    if(actualMap->isOutdoor())
    {
-      gameSun->actualizeHourOfDay(hour, PCs->getActiveCharacter()->xPosition,
-                                  PCs->getActiveCharacter()->zPosition);
+      gameSun->updateHourOfDay(hour, PCs->getActiveCharacter()->xPosition,
+                               PCs->getActiveCharacter()->zPosition);
       gameSun->setLight();
    }
    else

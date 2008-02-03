@@ -448,7 +448,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
 
    if(keys[SDLK_KP8])
    {
-      gameCamera.actualizeCamera(gameCamera.getCenterX() -
+      gameCamera.updateCamera(gameCamera.getCenterX() -
                                  4.0 * sin(deg2Rad(gameCamera.getPhi())),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() - 
@@ -457,7 +457,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
    }
    if(keys[SDLK_KP2])
    {
-      gameCamera.actualizeCamera(gameCamera.getCenterX() +
+      gameCamera.updateCamera(gameCamera.getCenterX() +
                                  4.0 * sin(deg2Rad(gameCamera.getPhi())),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() + 
@@ -466,7 +466,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
    }
    if(keys[SDLK_KP4])
    {
-      gameCamera.actualizeCamera(gameCamera.getCenterX() -
+      gameCamera.updateCamera(gameCamera.getCenterX() -
                             4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                       gameCamera.getCenterY()-30,
                                       gameCamera.getCenterZ() - 
@@ -475,7 +475,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
    }
    if(keys[SDLK_KP6])
    {
-      gameCamera.actualizeCamera(gameCamera.getCenterX() +
+      gameCamera.updateCamera(gameCamera.getCenterX() +
                            4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                      gameCamera.getCenterY()-30,
                                      gameCamera.getCenterZ() +
@@ -562,7 +562,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          /*  Navigation Buttons  */
          if(object == (guiObject*) upButton)
          {
-            gameCamera.actualizeCamera(gameCamera.getCenterX() -
+            gameCamera.updateCamera(gameCamera.getCenterX() -
                                        4.0 * sin(deg2Rad(gameCamera.getPhi())),
                                        gameCamera.getCenterY()-30,
                                        gameCamera.getCenterZ() - 
@@ -572,7 +572,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          }
          else if (object == (guiObject*) downButton)
          {
-            gameCamera.actualizeCamera(gameCamera.getCenterX() +
+            gameCamera.updateCamera(gameCamera.getCenterX() +
                                        4.0 * sin(deg2Rad(gameCamera.getPhi())),
                                        gameCamera.getCenterY()-30,
                                        gameCamera.getCenterZ() + 
@@ -582,7 +582,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          }
          else if (object == (guiObject*) leftButton)
          {
-            gameCamera.actualizeCamera(gameCamera.getCenterX() -
+            gameCamera.updateCamera(gameCamera.getCenterX() -
                             4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                       gameCamera.getCenterY()-30,
                                       gameCamera.getCenterZ() - 
@@ -592,7 +592,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          }
          else if (object == (guiObject*) rightButton)
          {
-            gameCamera.actualizeCamera(gameCamera.getCenterX() +
+            gameCamera.updateCamera(gameCamera.getCenterX() +
                            4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
                                      gameCamera.getCenterY()-30,
                                      gameCamera.getCenterZ() +

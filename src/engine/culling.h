@@ -8,11 +8,11 @@
 #include <SDL/SDL_opengl.h>
 #include <math.h>
 
-/*! Actualize the actual view frustum
+/*! Update the actual view frustum
  * \param matriz -> view frustum matrix (actualized)
  * \param proj -> projection view matrix
  * \param modl -> model view matrix */
-void actualizeFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16]);
+void updateFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16]);
 
 /*!
  * Verify if the square is in frustum or not.

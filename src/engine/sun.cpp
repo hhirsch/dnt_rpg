@@ -155,9 +155,9 @@ void sun::colorOnHour()
 }
 
 /*********************************************************************
- *                        actualizeHourOfDay                         *
+ *                          updateHourOfDay                          *
  *********************************************************************/
-void sun::actualizeHourOfDay(float hour, float posX, float posZ)
+void sun::updateHourOfDay(float hour, float posX, float posZ)
 {
    curHour = hour;
    positionOnHour(posX, posZ);

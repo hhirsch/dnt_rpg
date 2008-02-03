@@ -1,9 +1,9 @@
 #include "culling.h"
 
 /*********************************************************
- *                    actualizeFrustum                   *
+ *                      updateFrustum                    *
  *********************************************************/
-void actualizeFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16])
+void updateFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16])
 {
       GLfloat clip[16];
 	GLfloat t;

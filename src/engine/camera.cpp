@@ -381,10 +381,10 @@ void camera::defineMinZoom(GLfloat value)
 }
 
 /******************************************************************
- *                        actualizeCamera                         *
+ *                          updateCamera                          *
  ******************************************************************/
-void camera::actualizeCamera(GLfloat characterX, GLfloat characterY, 
-                             GLfloat characterZ, GLfloat characterOrientation)
+void camera::updateCamera(GLfloat characterX, GLfloat characterY, 
+                          GLfloat characterZ, GLfloat characterOrientation)
 {
    centerX = characterX;
    centerZ = characterZ;

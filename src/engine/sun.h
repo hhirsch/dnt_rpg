@@ -19,11 +19,11 @@ class sun
       /*! Destructor*/
       ~sun();
 
-      /*! Actualize Sun Itensity, based on hour of the day 
+      /*! Update Sun Itensity, based on hour of the day 
        * \param hour -> current hour of day
        * \param posX -> character X position
        * \param posZ -> character Z position */
-      void actualizeHourOfDay(float hour, float posX, float posZ);
+      void updateHourOfDay(float hour, float posX, float posZ);
 
       /*! Draw the Sun to its position */
       void drawSun();

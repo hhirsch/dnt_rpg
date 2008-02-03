@@ -83,12 +83,12 @@ class camera
        * \param value -> value of the new camera type */
       void defineCameraType(int value);
 
-      /*! Actualize Camera Position
+      /*! Update Camera Position
        * \param characterX -> character X position 
        * \param characterY -> character Y position
        * \param characterZ -> character Z position
        * \param characterOrientation -> character Orientation */
-      void actualizeCamera(GLfloat characterX, GLfloat characterY, 
+      void updateCamera(GLfloat characterX, GLfloat characterY, 
                            GLfloat characterZ, GLfloat characterOrientation);
 
       /*! Change the minimun zoom value. Usefull for other applications,

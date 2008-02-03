@@ -1699,7 +1699,6 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
  ************************************************************************/
 void Map::newMap(int X, int Z)
 {
-   dirs dir;
    int auxX, auxZ;
    int i;
 

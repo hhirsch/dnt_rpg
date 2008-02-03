@@ -110,9 +110,9 @@ void partSystem::deleteAll()
 }
 
 /**********************************************************************
- *                             actualizeAll                           *
+ *                               updateAll                            *
  **********************************************************************/
-void partSystem::actualizeAll(float PCposX, float PCposY, float PCposZ, 
+void partSystem::updateAll(float PCposX, float PCposY, float PCposZ, 
                               GLfloat matriz[6][4], bool enableGrass)
 {
    int i;
@@ -426,7 +426,7 @@ void partSystem::stabilizeAll()
    for(i=0; i< PART_STABILIZE_LOOP;i++)
    {
       /* Actualize All, except the grass, whose isn't need to stabilize */
-      actualizeAll(0,0,0,matriz, false);
+      updateAll(0,0,0,matriz, false);
    }
 }
 
