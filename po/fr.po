@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-01-21 13:11-0200\n"
+"POT-Creation-Date: 2008-02-04 10:27-0200\n"
 "PO-Revision-Date: 2007-11-29 15:32+0000\n"
 "Last-Translator: MATHIEU Yves <EMAIL@ADDRESS>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -17,161 +17,166 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-12-01 19:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: src/classes/classes.cpp:104 src/classes/race.cpp:104
+#: src/classes/classes.cpp:105 src/classes/race.cpp:105
 msgid "Unknow Attribute:"
 msgstr ""
 
-#: src/classes/feats.cpp:166
+#: src/classes/feats.cpp:167
 msgid "Invalid Feat"
 msgstr "Déplacement non valide"
 
-#: src/classes/feats.cpp:174
+#: src/classes/feats.cpp:175
 msgid "Too far away for action!"
 msgstr "Trop loin pour cette action !"
 
-#: src/classes/feats.cpp:256 src/classes/feats.cpp:272
+#: src/classes/feats.cpp:257 src/classes/feats.cpp:273
 msgid "Miss."
 msgstr "Loupé."
 
-#: src/classes/feats.cpp:260 src/classes/feats.cpp:264
+#: src/classes/feats.cpp:261 src/classes/feats.cpp:265
 msgid "Critical Miss!"
 msgstr "Loupé critique !"
 
-#: src/classes/feats.cpp:311
+#: src/classes/feats.cpp:312
 #, c-format
 msgid "Hit for %d points."
 msgstr "Touche de %d points."
 
-#: src/classes/feats.cpp:320 src/classes/feats.cpp:324
+#: src/classes/feats.cpp:321 src/classes/feats.cpp:325
 msgid "Critical Hit!"
 msgstr "Touche Critique !"
 
-#: src/classes/feats.cpp:344
+#: src/classes/feats.cpp:345
 msgid "Not enought points to use!"
 msgstr "Pas assez de points pour utiliser !"
 
-#: src/classes/skills.cpp:25
+#: src/classes/skills.cpp:27
 #, c-format
 msgid "Error while opening skills list: %s\n"
 msgstr "Erreur lors de l'ouverture de la liste des compétence : %s\n"
 
-#: src/classes/skills.cpp:55 src/classes/skills.cpp:156
+#: src/classes/skills.cpp:57 src/classes/skills.cpp:164
 #, c-format
 msgid "Can't open skill file: %s \n"
 msgstr "Impossible d'ouvrir le fichier des compétences : %s \n"
 
-#: src/classes/skills.cpp:124
+#: src/classes/skills.cpp:71
 #, c-format
-msgid "Error while opening skills list:../data/skills/skills.skl\n"
+msgid "Can't open skill image: %s\n"
 msgstr ""
-"Erreur lors de l'ouverture de la liste des compétences : ../data/skills/"
+
+#: src/classes/skills.cpp:132
+#, c-format
+msgid "Error while opening skills list:skills/skills.skl\n"
+msgstr ""
+"Erreur lors de l'ouverture de la liste des compétences : skills/"
 "skills.skl\n"
 
 #: src/engine/alignwindow.cpp:33
 msgid "Tendency & Alignment"
 msgstr ""
 
-#: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:71
-#: src/engine/attwindow.cpp:220 src/engine/classwindow.cpp:73
-#: src/engine/options.cpp:591 src/engine/racewindow.cpp:71
+#: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:72
+#: src/engine/attwindow.cpp:222 src/engine/classwindow.cpp:73
+#: src/engine/options.cpp:646 src/engine/racewindow.cpp:71
 #: src/engine/skillwindow.cpp:101
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:75
-#: src/engine/attwindow.cpp:224 src/engine/barterwindow.cpp:36
-#: src/engine/classwindow.cpp:77 src/engine/options.cpp:595
+#: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:76
+#: src/engine/attwindow.cpp:226 src/engine/barterwindow.cpp:37
+#: src/engine/classwindow.cpp:77 src/engine/options.cpp:650
 #: src/engine/racewindow.cpp:75 src/engine/skillwindow.cpp:105
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/engine/aspectwindow.cpp:27
+#: src/engine/aspectwindow.cpp:28
 msgid "Aspect"
 msgstr "Aspect"
 
-#: src/engine/aspectwindow.cpp:45
+#: src/engine/aspectwindow.cpp:46
 msgid "Name:"
 msgstr "Nom :"
 
-#: src/engine/aspectwindow.cpp:50
+#: src/engine/aspectwindow.cpp:51
 msgid "Age:"
 msgstr "Age :"
 
-#: src/engine/aspectwindow.cpp:54
+#: src/engine/aspectwindow.cpp:55
 msgid "Sex:"
 msgstr "Sexe :"
 
-#: src/engine/aspectwindow.cpp:107
+#: src/engine/aspectwindow.cpp:110
 #, c-format
 msgid "Can't open the list with portraits: portraits.lst!\n"
 msgstr "Impossible d'ouvrir la liste des portraits : portraits.lst !\n"
 
-#: src/engine/attwindow.cpp:42
+#: src/engine/attwindow.cpp:44
 msgid "Attributes"
 msgstr "Attributs"
 
-#: src/engine/attwindow.cpp:64
+#: src/engine/attwindow.cpp:66
 msgid "Roll"
 msgstr "Lancer les dés"
 
-#: src/engine/attwindow.cpp:67
+#: src/engine/attwindow.cpp:69
 msgid "Clear"
 msgstr "Effacer"
 
-#: src/engine/attwindow.cpp:71
+#: src/engine/attwindow.cpp:73
 msgid "Auto"
 msgstr "Automatique"
 
-#: src/engine/attwindow.cpp:74 data/skills/forca.ski:1
+#: src/engine/attwindow.cpp:76 data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Force"
 
-#: src/engine/attwindow.cpp:94 data/skills/destreza.ski:1
+#: src/engine/attwindow.cpp:96 data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Dextérité"
 
-#: src/engine/attwindow.cpp:114 data/skills/constituicao.ski:1
+#: src/engine/attwindow.cpp:116 data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Constitution"
 
-#: src/engine/attwindow.cpp:134 data/skills/inteligencia.ski:1
+#: src/engine/attwindow.cpp:136 data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Intelligence"
 
-#: src/engine/attwindow.cpp:155 data/skills/sabedoria.ski:1
+#: src/engine/attwindow.cpp:157 data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr ""
 
-#: src/engine/attwindow.cpp:176 data/skills/carisma.ski:1
+#: src/engine/attwindow.cpp:178 data/skills/carisma.ski:1
 msgid "Charism"
 msgstr "Charisme"
 
-#: src/engine/attwindow.cpp:208
+#: src/engine/attwindow.cpp:210
 msgid "Attribute Description"
 msgstr "Description des attributs"
 
-#: src/engine/attwindow.cpp:502 src/engine/options.cpp:748
+#: src/engine/attwindow.cpp:504 src/engine/options.cpp:821
 msgid "Warning"
 msgstr "Avertissement"
 
-#: src/engine/attwindow.cpp:503
+#: src/engine/attwindow.cpp:505
 msgid "You Need to Assign All Attributes."
 msgstr "Vous devez assigner tous les attributs."
 
-#: src/engine/barterwindow.cpp:20 src/engine/dialog.cpp:471
+#: src/engine/barterwindow.cpp:21 src/engine/dialog.cpp:473
 msgid "Barter"
 msgstr ""
 
-#: src/engine/barterwindow.cpp:32
+#: src/engine/barterwindow.cpp:33
 msgid "Offer"
 msgstr "Offrir"
 
-#: src/engine/barterwindow.cpp:34
+#: src/engine/barterwindow.cpp:35
 msgid "Impose"
 msgstr "Imposer"
 
-#: src/engine/barterwindow.cpp:67 src/engine/barterwindow.cpp:77
-#: src/engine/inventwindow.cpp:27
+#: src/engine/barterwindow.cpp:68 src/engine/barterwindow.cpp:78
+#: src/engine/inventwindow.cpp:28
 msgid "Inventory"
 msgstr "Inventaire"
 
@@ -227,46 +232,42 @@ msgstr ""
 msgid "No Skills."
 msgstr "Pas de Compétences."
 
-#: src/engine/dccnit.cpp:246
-msgid "../data/texturas/general/info.png"
-msgstr "../data/texturas/general/info.png"
-
 #: src/engine/dccnit.cpp:351
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Chargement de la Carte : %s"
 
-#: src/engine/dccnit.cpp:429
+#: src/engine/dccnit.cpp:433
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Impossible de charger le fichier PNJ : %s\n"
 
-#: src/engine/dccnit.cpp:444
+#: src/engine/dccnit.cpp:448
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Chargement du PNJ : %s"
 
-#: src/engine/dccnit.cpp:467
+#: src/engine/dccnit.cpp:471
 msgid "Loading Character"
 msgstr "Chargement du Caractère"
 
-#: src/engine/dccnit.cpp:474
+#: src/engine/dccnit.cpp:478
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:514
+#: src/engine/dccnit.cpp:518
 msgid "Loading Particles"
 msgstr "Chargement des Particules"
 
-#: src/engine/dccnit.cpp:544
+#: src/engine/dccnit.cpp:548
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:563
+#: src/engine/dccnit.cpp:567
 msgid "Done!"
 msgstr "Terminé !"
 
-#: src/engine/dccnit.cpp:652
+#: src/engine/dccnit.cpp:657
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -274,183 +275,183 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1170
+#: src/engine/dccnit.cpp:1185
 msgid "Too far away for the action!"
 msgstr "Trop loin pour cette action !"
 
-#: src/engine/dccnit.cpp:1209 src/engine/dccnit.cpp:1277
+#: src/engine/dccnit.cpp:1224 src/engine/dccnit.cpp:1292
 msgid "No NPCs in the area."
 msgstr "Pas de PNJ dans la zone"
 
-#: src/engine/dccnit.cpp:1259
+#: src/engine/dccnit.cpp:1274
 msgid "Surprise Attack Turn."
 msgstr "Tour des attaques surprises."
 
-#: src/engine/dccnit.cpp:1452
+#: src/engine/dccnit.cpp:1467
 msgid "Enter Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1456
+#: src/engine/dccnit.cpp:1471
 msgid "Select Normal Attack"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1463
+#: src/engine/dccnit.cpp:1478
 msgid "Open Quests Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1470
+#: src/engine/dccnit.cpp:1485
 msgid "Open Map Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1474
+#: src/engine/dccnit.cpp:1489
 msgid "Map Window already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1482
+#: src/engine/dccnit.cpp:1497
 msgid "End Character's Turn"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1486
+#: src/engine/dccnit.cpp:1501
 msgid "Only Avaible on Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1494
+#: src/engine/dccnit.cpp:1509
 msgid "Open Inventory Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1498
+#: src/engine/dccnit.cpp:1513
 msgid "Inventory already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1505
+#: src/engine/dccnit.cpp:1520
 msgid "Open Assign Attacks Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1511
+#: src/engine/dccnit.cpp:1526
 msgid "View Character Informations"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1517
+#: src/engine/dccnit.cpp:1532
 msgid "Open Group/Party Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1579 src/engine/dccnit.cpp:1947
-#: src/engine/dccnit.cpp:3212
+#: src/engine/dccnit.cpp:1594 src/engine/dccnit.cpp:1952
+#: src/engine/dccnit.cpp:3214
 msgid "Nothing"
 msgstr "Rien"
 
-#: src/engine/dccnit.cpp:1686
+#: src/engine/dccnit.cpp:1691
 #, c-format
 msgid "%s taken."
 msgstr "%s pris."
 
-#: src/engine/dccnit.cpp:1744
+#: src/engine/dccnit.cpp:1749
 msgid "Door"
 msgstr "Porte"
 
-#: src/engine/dccnit.cpp:1872 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1877 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s attaque %s|"
 
-#: src/engine/dccnit.cpp:3181
+#: src/engine/dccnit.cpp:3183
 msgid "Map"
 msgstr "Carte"
 
-#: src/engine/dccnit.cpp:3190
+#: src/engine/dccnit.cpp:3192
 msgid "FPS:"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3207
+#: src/engine/dccnit.cpp:3209
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
-#: src/engine/dccnit.cpp:3209
+#: src/engine/dccnit.cpp:3211
 msgid "Press F1 for Help"
 msgstr "Tapez F1 pour l'Aide"
 
-#: src/engine/dccnit.cpp:3215 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3217 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/engine/dccnit.cpp:3217
+#: src/engine/dccnit.cpp:3219
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3220 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3222 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Charger"
 
-#: src/engine/dccnit.cpp:3407
+#: src/engine/dccnit.cpp:3409
 msgid "|Exit Battle Mode"
 msgstr "|Sortir du mode de Bataille"
 
-#: src/engine/dialog.cpp:213
+#: src/engine/dialog.cpp:214
 msgid "Cannot open File!\n"
 msgstr "Impossible d'ouvrir le fichier !\n"
 
-#: src/engine/dialog.cpp:236
+#: src/engine/dialog.cpp:237
 msgid "Tried to define dialog before end last one!"
 msgstr "Vous tentez de définir un dialogue avant de fini le précédent !"
 
-#: src/engine/dialog.cpp:252
+#: src/engine/dialog.cpp:253
 msgid "Tried to end an undefined dialog!"
 msgstr "Vous tentez de finir un dialague indéfini !"
 
-#: src/engine/dialog.cpp:263
+#: src/engine/dialog.cpp:264
 msgid "Tried to begin NPC before end something!"
 msgstr ""
 
-#: src/engine/dialog.cpp:272
+#: src/engine/dialog.cpp:273
 msgid "Tried to end NPC before begin it!"
 msgstr ""
 
-#: src/engine/dialog.cpp:281
+#: src/engine/dialog.cpp:282
 msgid "Tried to begin PC before end something!"
 msgstr ""
 
-#: src/engine/dialog.cpp:291
+#: src/engine/dialog.cpp:292
 msgid "Tried to end PC before begin it!"
 msgstr ""
 
-#: src/engine/dialog.cpp:318
+#: src/engine/dialog.cpp:319
 msgid "Option Text without option!"
 msgstr ""
 
-#: src/engine/dialog.cpp:322 src/engine/dialog.cpp:372
+#: src/engine/dialog.cpp:323 src/engine/dialog.cpp:373
 msgid "Options overflow!"
 msgstr ""
 
-#: src/engine/dialog.cpp:328
+#: src/engine/dialog.cpp:329
 msgid "Text without any relation!"
 msgstr ""
 
-#: src/engine/dialog.cpp:340
+#: src/engine/dialog.cpp:341
 msgid "Option without begin PC!"
 msgstr ""
 
-#: src/engine/dialog.cpp:348
+#: src/engine/dialog.cpp:349
 msgid "Action isn't yet defined to NPC!"
 msgstr "Cette action n'est pas encore définie pour les PNJ !"
 
-#: src/engine/dialog.cpp:367
+#: src/engine/dialog.cpp:368
 msgid "Option Action without option!"
 msgstr ""
 
-#: src/engine/dialog.cpp:378
+#: src/engine/dialog.cpp:379
 msgid "Action without any relation!\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:384
+#: src/engine/dialog.cpp:385
 msgid "Unknow Token!"
 msgstr ""
 
-#: src/engine/dialog.cpp:448
+#: src/engine/dialog.cpp:449
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:469
+#: src/engine/dialog.cpp:471
 msgid "Dialog"
 msgstr "Dialogue"
 
@@ -466,7 +467,7 @@ msgstr "Nouveau"
 msgid "Continue"
 msgstr "Continuer"
 
-#: src/engine/initial.cpp:67 src/engine/options.cpp:447
+#: src/engine/initial.cpp:67 src/engine/options.cpp:484
 msgid "Options"
 msgstr "Options"
 
@@ -474,27 +475,27 @@ msgstr "Options"
 msgid "Exit"
 msgstr "Quitter"
 
-#: src/engine/inventwindow.cpp:142
+#: src/engine/inventwindow.cpp:144
 msgid "Drop"
 msgstr "Lâcher"
 
-#: src/engine/inventwindow.cpp:144
+#: src/engine/inventwindow.cpp:146
 msgid "Sell"
 msgstr "Vendre"
 
-#: src/engine/inventwindow.cpp:147
+#: src/engine/inventwindow.cpp:149
 msgid "Use"
 msgstr "Utiliser"
 
-#: src/engine/inventwindow.cpp:151
+#: src/engine/inventwindow.cpp:153
 msgid "Remove"
 msgstr "Retirer"
 
-#: src/engine/inventwindow.cpp:154
+#: src/engine/inventwindow.cpp:156
 msgid "Info"
 msgstr "Informations"
 
-#: src/engine/inventwindow.cpp:156
+#: src/engine/inventwindow.cpp:158
 msgid "Get"
 msgstr "Obtenir"
 
@@ -541,114 +542,130 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-#: src/engine/options.cpp:17
+#: src/engine/options.cpp:18
 msgid "Portuguese"
 msgstr "Portugais"
 
-#: src/engine/options.cpp:18
+#: src/engine/options.cpp:19
 msgid "English"
 msgstr "Anglais"
 
-#: src/engine/options.cpp:19
+#: src/engine/options.cpp:20
 msgid "French"
 msgstr "Français"
 
-#: src/engine/options.cpp:20
+#: src/engine/options.cpp:21
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: src/engine/options.cpp:21
+#: src/engine/options.cpp:22
 msgid "Russian"
 msgstr ""
 
-#: src/engine/options.cpp:73 src/engine/options.cpp:79
+#: src/engine/options.cpp:74 src/engine/options.cpp:82
 #, c-format
 msgid "Can't Open the options file: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:83
+#: src/engine/options.cpp:86
 #, c-format
 msgid "No Options File Avaible!\n"
 msgstr ""
 
-#: src/engine/options.cpp:90
+#: src/engine/options.cpp:93
 #, c-format
 msgid "Creating Directory: %s : "
 msgstr ""
 
-#: src/engine/options.cpp:96
+#: src/engine/options.cpp:99
 #, c-format
 msgid "Creating Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:180
+#: src/engine/options.cpp:189
 #, c-format
 msgid "Unknow option: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:208
+#: src/engine/options.cpp:217
 #, c-format
 msgid "Error while writing Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:368 data/weapons/types/munitions.dcl:2
+#: src/engine/options.cpp:380 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Aucun"
 
-#: src/engine/options.cpp:373
+#: src/engine/options.cpp:385
 msgid "Characters"
 msgstr "Caractères"
 
-#: src/engine/options.cpp:378
+#: src/engine/options.cpp:390
 msgid "All"
 msgstr "Tous"
 
-#: src/engine/options.cpp:394 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:406 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:397
+#: src/engine/options.cpp:409
 msgid "Pursue"
 msgstr "Poursuite"
 
-#: src/engine/options.cpp:453
+#: src/engine/options.cpp:424
+msgid "Disabled"
+msgstr ""
+
+#: src/engine/options.cpp:427
+msgid "2x"
+msgstr ""
+
+#: src/engine/options.cpp:430
+msgid "4x"
+msgstr ""
+
+#: src/engine/options.cpp:490
 msgid "Music Volume:"
 msgstr "Volume de la musique :"
 
-#: src/engine/options.cpp:472
+#: src/engine/options.cpp:509
 msgid "Effects Volume:"
 msgstr "Volume des effets :"
 
-#: src/engine/options.cpp:491
+#: src/engine/options.cpp:528
 msgid "Language:"
 msgstr "Langue :"
 
-#: src/engine/options.cpp:509
+#: src/engine/options.cpp:546
 msgid "Camera Mode:"
 msgstr "Mode de la caméra :"
 
-#: src/engine/options.cpp:526
+#: src/engine/options.cpp:563
 msgid "Enable Grass Effects (need particles)"
 msgstr ""
 
-#: src/engine/options.cpp:535
+#: src/engine/options.cpp:572
 msgid "Enable Particles Effects"
 msgstr "Activer les effets de particules"
 
-#: src/engine/options.cpp:546
+#: src/engine/options.cpp:583
 msgid "Reflections:"
 msgstr "Réflections :"
 
-#: src/engine/options.cpp:565
+#: src/engine/options.cpp:602
 msgid "Screen Resolution:"
 msgstr ""
 
-#: src/engine/options.cpp:581
+#: src/engine/options.cpp:618
 msgid "Enable FullScreen"
 msgstr ""
 
-#: src/engine/options.cpp:749
+#: src/engine/options.cpp:629
+msgid "Anti-Aliasing:"
+msgstr ""
+
+#: src/engine/options.cpp:822
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
@@ -728,17 +745,17 @@ msgstr "Jet d'initiative de %s : "
 msgid "Argh! Can't init SDL!\n"
 msgstr "Impossible d'initialiser SDL !\n"
 
-#: src/gui/farso.cpp:75
+#: src/gui/farso.cpp:85
 #, c-format
 msgid "Oxi! Can't ajust video mode: %s!\n"
 msgstr "Impossible d'ajuster le mode vidéo: %s !\n"
 
-#: src/gui/dntfont.cpp:14
+#: src/gui/dntfont.cpp:15
 #, c-format
 msgid "Can't init SDL_ttf : %s\n"
 msgstr ""
 
-#: src/gui/dntfont.cpp:87
+#: src/gui/dntfont.cpp:90
 #, c-format
 msgid "Can't open font file: %s\n"
 msgstr ""
@@ -755,7 +772,7 @@ msgstr ""
 msgid "Move"
 msgstr ""
 
-#: src/ia/iascript.cpp:823
+#: src/ia/iascript.cpp:827
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Mission complété : %d XP !"
@@ -2696,3 +2713,6 @@ msgstr ""
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr ""
+
+#~ msgid "../data/texturas/general/info.png"
+#~ msgstr "../data/texturas/general/info.png"
