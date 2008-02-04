@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-02-04 10:27-0200\n"
+"POT-Creation-Date: 2008-02-04 16:19-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,32 +20,41 @@ msgstr ""
 msgid "Unknow Attribute:"
 msgstr ""
 
-#: src/classes/feats.cpp:167
+#: src/classes/feats.cpp:133
 msgid "Invalid Feat"
 msgstr ""
 
-#: src/classes/feats.cpp:175
+#: src/classes/feats.cpp:141
 msgid "Too far away for action!"
 msgstr ""
 
-#: src/classes/feats.cpp:257 src/classes/feats.cpp:273
+#: src/classes/feats.cpp:229 src/classes/feats.cpp:253
 msgid "Miss."
 msgstr ""
 
-#: src/classes/feats.cpp:261 src/classes/feats.cpp:265
+#: src/classes/feats.cpp:233 src/classes/feats.cpp:237
 msgid "Critical Miss!"
 msgstr ""
 
-#: src/classes/feats.cpp:312
+#: src/classes/feats.cpp:294
+#, c-format
+msgid "Healed %d points."
+msgstr ""
+
+#: src/classes/feats.cpp:298
 #, c-format
 msgid "Hit for %d points."
 msgstr ""
 
-#: src/classes/feats.cpp:321 src/classes/feats.cpp:325
+#: src/classes/feats.cpp:323 src/classes/feats.cpp:326
+msgid "Critical Heal!"
+msgstr ""
+
+#: src/classes/feats.cpp:331 src/classes/feats.cpp:335
 msgid "Critical Hit!"
 msgstr ""
 
-#: src/classes/feats.cpp:345
+#: src/classes/feats.cpp:375
 msgid "Not enought points to use!"
 msgstr ""
 

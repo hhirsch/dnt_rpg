@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-02-04 10:27-0200\n"
+"POT-Creation-Date: 2008-02-04 16:19-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -21,32 +21,41 @@ msgstr ""
 msgid "Unknow Attribute:"
 msgstr ""
 
-#: src/classes/feats.cpp:167
+#: src/classes/feats.cpp:133
 msgid "Invalid Feat"
 msgstr "Неправильный подвиг"
 
-#: src/classes/feats.cpp:175
+#: src/classes/feats.cpp:141
 msgid "Too far away for action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/classes/feats.cpp:257 src/classes/feats.cpp:273
+#: src/classes/feats.cpp:229 src/classes/feats.cpp:253
 msgid "Miss."
 msgstr "Промах."
 
-#: src/classes/feats.cpp:261 src/classes/feats.cpp:265
+#: src/classes/feats.cpp:233 src/classes/feats.cpp:237
 msgid "Critical Miss!"
 msgstr "Критическая ошибка!"
 
-#: src/classes/feats.cpp:312
+#: src/classes/feats.cpp:294
+#, c-format
+msgid "Healed %d points."
+msgstr ""
+
+#: src/classes/feats.cpp:298
 #, c-format
 msgid "Hit for %d points."
 msgstr "Хит %d очков!"
 
-#: src/classes/feats.cpp:321 src/classes/feats.cpp:325
+#: src/classes/feats.cpp:323 src/classes/feats.cpp:326
+msgid "Critical Heal!"
+msgstr ""
+
+#: src/classes/feats.cpp:331 src/classes/feats.cpp:335
 msgid "Critical Hit!"
 msgstr "Критический хит!"
 
-#: src/classes/feats.cpp:345
+#: src/classes/feats.cpp:375
 msgid "Not enought points to use!"
 msgstr "Недостаточно очков для использования!"
 
@@ -69,8 +78,7 @@ msgstr ""
 #, c-format
 msgid "Error while opening skills list:skills/skills.skl\n"
 msgstr ""
-"Произошла ошибка пока открывается список со скиллами: skills/skills."
-"skl\n"
+"Произошла ошибка пока открывается список со скиллами: skills/skills.skl\n"
 
 #: src/engine/alignwindow.cpp:33
 msgid "Tendency & Alignment"

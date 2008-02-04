@@ -157,11 +157,13 @@ class feats
        * \param target -> target to use the Feat
        * \param brief -> string that will have briefing
        * \param controller -> the world message controller
+       * \param pSystem -> the particle system controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyHealAndFixFeat(thing& attacker, int featNumber, 
                                thing& target, string& brief,
-                               messageController* controller);
+                               messageController* controller,
+                               void* pSystem);
       /*!
        **************************************************************** 
        * Apply a psycho feat.
@@ -245,6 +247,7 @@ class feats
 
 
    private:
+
       feat m_feats[MAX_FEATS];  /**< Internal Feats Struct */
       int  totalFeats;          /**< Actual Number of Feats */
 
@@ -255,6 +258,24 @@ class feats
        * \param featNumber -> feat to use
        ***************************************************************/
        void useFeat(int featNumber);
+
+       /*!
+       **************************************************************** 
+       * Apply feats that will afect the Life Points of the Target
+       * \param attacker -> thing that will attack
+       * \param featNumber -> Number of Feat on List
+       * \param target -> target to use the Feat
+       * \param brief -> string that will have briefing
+       * \param controller -> the world message controller
+       * \param pSystem -> the particle system controller
+       * \param heal -> true if is a heal/fix feat, 
+       *                false if is an attack/break one.
+       * \return \c true if the feat was used.
+       ***************************************************************/
+       bool applyHealOrAttackFeat(thing& actor, int featNumber, 
+                                  thing& target, string& brief,
+                                  messageController* controller,
+                                  void* pSystem, bool heal);
 };
 
 /*! List of All Feats on Game */

@@ -82,7 +82,7 @@ bool feats::insertFeat(featDescription featInsert)
       {
          m_feats[totalFeats].depFeats[i].reason = featInsert.depFeats[i].reason;
          m_feats[totalFeats].depFeats[i].featIDString = 
-                                             featInsert.depFeats[i].featIDString;
+                                            featInsert.depFeats[i].featIDString;
          m_feats[totalFeats].depFeats[i].used = featInsert.depFeats[i].used;
       }
       totalFeats++;
@@ -110,46 +110,12 @@ void feats::useFeat(int featNumber)
 }
 
 /***************************************************************
- *                   applyHealAndFixFeat                       *
+ *                   applyHealOrAttackFeat                     *
  ***************************************************************/
-bool feats::applyHealAndFixFeat(thing& attacker, int featNumber, 
-                                thing& target, string& brief,
-                                messageController* controller)
-{
-   //TODO
-   return(false);
-}
-
-/***************************************************************
- *                     applyPsychoFeat                         *
- ***************************************************************/
-bool feats::applyPsychoFeat(thing& attacker, int featNumber, 
-                            thing& target, string& brief,
-                            messageController* controller)
-{
-   //TODO
-   return(false);
-}
-
-/***************************************************************
- *                   applyInvocationFeat                       *
- ***************************************************************/
-bool feats::applyInvocationFeat(thing& attacker, int featNumber, 
-                                thing& target, string& brief,
-                                messageController* controller)
-{
-   //TODO
-   return(false);
-}
-
-
-/***************************************************************
- *                 applyAttackAndBreakFeat                     *
- ***************************************************************/
-bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                    thing& target, string& brief,
-                                    messageController* controller,
-                                    void* pSystem)
+bool feats::applyHealOrAttackFeat(thing& actor, int featNumber, 
+                                  thing& target, string& brief,
+                                  messageController* controller,
+                                  void* pSystem, bool heal)
 {
    int diceValue;
    int criticalRoll = -1;
@@ -168,7 +134,7 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
       return(false);
    }
 
-   if(!actionInRange(attacker.xPosition, attacker.zPosition, 
+   if(!actionInRange(actor.xPosition, actor.zPosition, 
                      target.xPosition, target.zPosition,
                      m_feats[featNumber].range*METER_TO_DNT))
    {
@@ -189,13 +155,19 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       /* Call the animation */
       //TODO call other animation, if is defined
-      attacker.callAttackAnimation();
+      if(!heal)
+      {
+         actor.callAttackAnimation();
+      }
+      //TODO -> create an heal animation!
+
 
       //TODO verify if can use or not based on target thing
 
+
       //verify Bonus
-      bonus = attacker.getBonusValue(m_feats[featNumber].conceptBonus) + 
-              attacker.sizeModifier + attacker.baseAttackModifier;
+      bonus = actor.getBonusValue(m_feats[featNumber].conceptBonus) + 
+              actor.sizeModifier + actor.baseAttackModifier;
 
       diceValue = 1 + (int)(DICE_D20*(rand() / (RAND_MAX + 1.0))); 
 
@@ -259,18 +231,26 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
          {
              brief += "|";
              brief += gettext("Critical Miss!");
-             controller->addMessage(attacker.xPosition,
-                                    attacker.yPosition+attacker.max[1],
-                                    attacker.zPosition,
+             controller->addMessage(actor.xPosition,
+                                    actor.yPosition+actor.max[1],
+                                    actor.zPosition,
                                     gettext("Critical Miss!"),
                                     0.92,0.41,0.14);
-             //TODO lose weapon;
+             if(heal)
+             {
+                 /* Damage the target with ??? ! */
+                 //TODO
+             }
+             else
+             {
+                //TODO lose weapon;
+             }
          }
          else
          {
-            controller->addMessage(attacker.xPosition,
-                                   attacker.yPosition+attacker.max[1],
-                                   attacker.zPosition,gettext("Miss."),
+            controller->addMessage(actor.xPosition,
+                                   actor.yPosition+actor.max[1],
+                                   actor.zPosition,gettext("Miss."),
                                    0.92,0.41,0.14);
          }
          return(true);
@@ -309,41 +289,140 @@ bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber,
 
       /*TODO apply aditional dices */
 
-      sprintf(texto,gettext("Hit for %d points."),damage);
+      if(heal)
+      {
+         sprintf(texto,gettext("Healed %d points."),damage);
+      }
+      else
+      {
+         sprintf(texto,gettext("Hit for %d points."),damage);
+      }
       brief += texto;
 
-      /* apply damage on thing */
-      target.lifePoints -= damage;
+      if(heal)
+      {
+         /* apply the heal */
+         target.lifePoints += damage;
+         /* Verify Limits */
+         if(target.lifePoints > target.maxLifePoints)
+         {
+            target.lifePoints = target.maxLifePoints;
+         }
+      }
+      else
+      {
+         /* apply damage on thing */
+         target.lifePoints -= damage;
+      }
 
       if( criticalHit)
       {
           brief += "|";
-          brief += gettext("Critical Hit!");
-          /* Show critical hit */
-          controller->addMessage(attacker.xPosition,
-                                 attacker.yPosition+attacker.max[1],
-                                 attacker.zPosition,gettext("Critical Hit!"),
-                                 0.01,0.04,0.52);
+          if(heal)
+          {
+             brief += gettext("Critical Heal!");
+             controller->addMessage(actor.xPosition,
+                                    actor.yPosition+actor.max[1],
+                                    actor.zPosition,gettext("Critical Heal!"),
+                                    0.06,0.04,0.56);
+          }
+          else
+          {
+             brief += gettext("Critical Hit!");
+             /* Show critical hit */
+             controller->addMessage(actor.xPosition,
+                                    actor.yPosition+actor.max[1],
+                                    actor.zPosition,gettext("Critical Hit!"),
+                                    0.54,0.0,0.0);
+          }
       }
       /* Show Damage */
       sprintf(texto,"%d",damage);
-      controller->addMessage(target.xPosition, target.yPosition + target.max[1],
-                             target.zPosition, texto,
-                             0.4, 0.01,0.03);
+      if(heal)
+      {
+         controller->addMessage(target.xPosition, 
+                                target.yPosition + target.max[1],
+                                target.zPosition, texto,
+                                0.21, 0.15, 0.7);
+      } 
+      else
+      {
+         controller->addMessage(target.xPosition, 
+                                target.yPosition + target.max[1],
+                                target.zPosition, texto,
+                                0.4, 0.01, 0.03);
+      }
 
-      /* Add Blood */
-      GLfloat cs = cos(deg2Rad(target.orientation));
-      GLfloat sn = sin(deg2Rad(target.orientation));
-      partSystem* ps = (partSystem*)pSystem;
-      ps->addParticle(PART_BLOOD, target.xPosition - (sn*2),
-                      target.yPosition + target.bloodPosition,
-                      target.zPosition - (cs*2), 
-                      target.bloodFileName);
+      if(heal)
+      {
+         /* Add Some Effect to the healed creature! */
+         //TODO!
+      }
+      else
+      {
+         /* Add Blood */
+         GLfloat cs = cos(deg2Rad(target.orientation));
+         GLfloat sn = sin(deg2Rad(target.orientation));
+         partSystem* ps = (partSystem*)pSystem;
+         ps->addParticle(PART_BLOOD, target.xPosition - (sn*2),
+                         target.yPosition + target.bloodPosition,
+                         target.zPosition - (cs*2), 
+                         target.bloodFileName);
+      }
 
       return(true);
    }
    brief += gettext("Not enought points to use!");
    return(false);
+}
+
+/***************************************************************
+ *                   applyHealAndFixFeat                       *
+ ***************************************************************/
+bool feats::applyHealAndFixFeat(thing& attacker, int featNumber, 
+                                thing& target, string& brief,
+                                messageController* controller,
+                                void* pSystem)
+{
+   return(applyHealOrAttackFeat(attacker, featNumber, target,
+                                brief, controller, pSystem,
+                                true));
+}
+
+/***************************************************************
+ *                     applyPsychoFeat                         *
+ ***************************************************************/
+bool feats::applyPsychoFeat(thing& attacker, int featNumber, 
+                            thing& target, string& brief,
+                            messageController* controller)
+{
+   //TODO
+   return(false);
+}
+
+/***************************************************************
+ *                   applyInvocationFeat                       *
+ ***************************************************************/
+bool feats::applyInvocationFeat(thing& attacker, int featNumber, 
+                                thing& target, string& brief,
+                                messageController* controller)
+{
+   //TODO
+   return(false);
+}
+
+
+/***************************************************************
+ *                 applyAttackAndBreakFeat                     *
+ ***************************************************************/
+bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
+                                    thing& target, string& brief,
+                                    messageController* controller,
+                                    void* pSystem)
+{
+   return(applyHealOrAttackFeat(attacker, featNumber, target,
+                                brief, controller, pSystem,
+                                false));
 }
 
 /***************************************************************
