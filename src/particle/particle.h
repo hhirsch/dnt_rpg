@@ -45,6 +45,10 @@ class particleSystem
        * \param mode -> draw mode                                    *
        ***************************************************************/
       particleSystem(int total, int mode);
+      /*!
+       ***************************************************************
+       * Construct internal structs with default values              *
+       ***************************************************************/
       particleSystem();
       /*!
        ***************************************************************
@@ -167,16 +171,25 @@ class particleSystem
        ***************************************************************/
       void setFollowPC(bool follow);
 
+      /*!
+       *************************************************************** 
+       * Set the duration time to the system be deleted 
+       * from controller
+       * \param time -> duration time in ms. 0 for infinity duration  
+       ***************************************************************/
+      void setDurationTime(int time);
+
+
       particleSystem* next;     /**< Next Particle System on the List */
       particleSystem* previous; /**< Previous Particle System on the list */
 
-      friend class partController;
-      friend class particleList;
+      friend class partController;  /**< The controller is our friend */
+      friend class particleList;    /**< The list is our friend too */
 
    protected:
 
-      int initialLiveTime;      /**< Time the Particle start live  */
-      int maxLiveTime;          /**< Max living time, in ms. 0 is infinity */
+      int systemInitialLiveTime; /**< Time the Particle start live  */
+      int systemMaxLiveTime;     /**< Max living time, in ms. 0 is infinity */
 
       int actualParticles;     /**< Number of actual alive particles */
       int drawMode;            /**< DrawMode of the system */

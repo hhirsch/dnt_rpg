@@ -6,6 +6,11 @@
 #include <math.h>
 #include <SDL/SDL_image.h>
 
+#define MAX_BLOOD_LIVING  1200 /**< Max Iterations that the blood continues */
+#define BLOOD_REMOVING     200 /**< Time for removing blood particles */
+#define MAX_BLOOD_LIVING_TIME MAX_BLOOD_LIVING * 30
+#define MAX_BLOOD_REMOVING (MAX_BLOOD_LIVING - BLOOD_REMOVING)
+
 /****************************************************************************
  *                             Constructor                                  *
  ****************************************************************************/
@@ -18,8 +23,8 @@ part5::part5(float cX,float cY,float cZ, string fileName):
    centerZ=cZ;
    actualParticles = 0;
    partTexture = LoadTexture(dir.getRealFile("particles/part2.png"));
-   livingTime = 0;
    doneCreation = false;
+   setDurationTime(MAX_BLOOD_LIVING_TIME);
 }
 
 /****************************************************************************
@@ -43,7 +48,6 @@ void part5::Render(particle* part)
  ****************************************************************************/
 void part5::InitRender()
 {
-   livingTime++;
    glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
@@ -134,15 +138,15 @@ void part5::actualize(particle* part)
       part->prvZ = part->posZ;
    
 
-      part->velY += seconds*gravity*(rand() / ((double)RAND_MAX + 1));
-      part->velX += seconds*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
+      part->velY += 0.02*gravity*(rand() / ((double)RAND_MAX + 1));
+      part->velX += 0.02*(dMultVel[0]*((rand() / ((double)RAND_MAX + 1))) 
                       + dSumVel[0]);
-      part->velZ += seconds*(dMultVel[2]*((rand() / ((double)RAND_MAX + 1))) 
+      part->velZ += 0.02*(dMultVel[2]*((rand() / ((double)RAND_MAX + 1))) 
                       + dSumVel[2]);
 
-      part->posY += part->velY*seconds;
-      part->posX += part->velX*seconds;
-      part->posZ += part->velZ*seconds;
+      part->posY += 0.02*part->velY;
+      part->posX += 0.02*part->velX;
+      part->posZ += 0.02*part->velZ;
    }
 }
 
@@ -201,7 +205,6 @@ void part5::createParticle(particle* part)
  ****************************************************************************/
 void part5::NextStep(GLfloat matriz[6][4])
 {
-   seconds = 0.02;
    DoStep(matriz);
 }
 
@@ -231,13 +234,5 @@ GLuint part5::LoadTexture(string fileName)
 
    SDL_FreeSurface(img);
    return(indice);
-}
-
-/****************************************************************************
- *                            getLivingTime                                 *
- ****************************************************************************/
-GLuint part5::getLivingTime()
-{
-   return(livingTime);
 }
 

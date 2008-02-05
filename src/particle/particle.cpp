@@ -115,7 +115,8 @@ particleSystem::particleSystem(string fileName, int mode)
  ***************************************************************/
 void particleSystem::init(int total, int mode)
 {
-   initialLiveTime = SDL_GetTicks();
+   systemInitialLiveTime = SDL_GetTicks();
+   systemMaxLiveTime = 0;
    actualParticles = 0;
    particles = (particle*) new particle[total];
    maxParticles = total;
@@ -396,5 +397,13 @@ int particleSystem::getMaxParticles()
 void particleSystem::setFollowPC(bool follow)
 {
    followPC = follow;
+}
+
+/***********************************************************
+ *                     setDurationTime                     *
+ ***********************************************************/
+void particleSystem::setDurationTime(int time)
+{
+   systemMaxLiveTime = time;
 }
 

@@ -4,8 +4,6 @@
 #include "part2.h"
 #include "../engine/collision.h"
 
-#define METEOR_STATIC_LIVING  50   /**< Static living time of the meteor */
-
 /*! The meteor class. It is just a fire particles, 
  * that have their orign translated, and when reach
  * target, stop the motion, for MAX_STATIC_LIVING iterations */

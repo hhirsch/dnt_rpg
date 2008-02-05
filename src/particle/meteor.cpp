@@ -1,6 +1,8 @@
 #include "meteor.h"
 #include "../engine/util.h"
 
+#define METEOR_STATIC_LIVING_TIME  1500 /**< Static living time of the meteor */
+
 /*****************************************************************
  *                          Constructor                          *
  *****************************************************************/
@@ -25,6 +27,8 @@ meteor::meteor(float cX, float cY, float cZ, float vX, float vY, float vZ,
    targX = tX;
    targY = tY;
    targZ = tZ;
+
+   setDurationTime(METEOR_STATIC_LIVING_TIME);
 
    /* Init Variables */
    actualLiving = 0;
@@ -53,13 +57,12 @@ void meteor::defineCollision(collision* col)
  *****************************************************************/
 void meteor::InitRender()
 {
-   if(dead)
+   if(!dead)
    {
-      actualLiving++;
-   }
-   else
-   {
-      /* Actualize Position */
+      /* Clear the timer, since not dead */
+      systemInitialLiveTime = SDL_GetTicks();
+
+      /* Update Position */
       curPosY += varY;
       curPosX += varX;
       curPosZ += varZ;
@@ -102,7 +105,14 @@ void meteor::EndRender()
  *****************************************************************/
 bool meteor::isLiving()
 {
-   return((!dead) || (actualLiving <= METEOR_STATIC_LIVING));
+   int time = SDL_GetTicks();
+
+   if( (systemMaxLiveTime != 0) && 
+       (time - systemInitialLiveTime >= systemMaxLiveTime) )
+   {
+      return(false);
+   }
+   return(true);
 }
 
 /****************************************************************************

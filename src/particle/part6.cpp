@@ -6,6 +6,8 @@
 #include <math.h>
 #include <SDL/SDL_image.h>
 
+#define LIGHTINING_DURATION 120 /**< Duration of the Lightning */
+
 /****************************************************************************
  *                             Constructor                                  *
  ****************************************************************************/
@@ -19,6 +21,7 @@ part6::part6(float cX,float cY,float cZ, string fileName):
    actualY = centerY;
    actualParticles = 0;
    partTexture = LoadTexture(dir.getRealFile("particles/part2.png"));
+   setDurationTime(LIGHTINING_DURATION);
 }
 
 /****************************************************************************

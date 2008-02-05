@@ -115,121 +115,223 @@ void partController::deleteAll()
 void partController::updateAll(float PCposX, float PCposY, float PCposZ, 
                               GLfloat matriz[6][4], bool enableGrass)
 {
-   int i;
+   int i, total;
+
+   int time = SDL_GetTicks();
 
    /* Grass */
    if(enableGrass)
    {
       grass* gr = (grass*)grassParticles->getFirst();
-      for(i = 0; i < grassParticles->getTotal(); i++)
+      total = grassParticles->getTotal();
+      for(i = 0; i < total; i++)
       {
          /* FIXME -> set the Wind! */
          gr->NextStep(matriz, PCposX, PCposY, PCposZ, NULL);
-         gr = (grass*)gr->next;
+
+         /* Verify Living */
+         if( (gr->systemMaxLiveTime != 0) && 
+             (time - gr->systemInitialLiveTime >= gr->systemMaxLiveTime) )
+         {
+            gr = (grass*)gr->next;
+            removeParticle(PART_GRASS, gr->previous);
+         }
+         else
+         {
+            gr = (grass*)gr->next;
+         }
       }
    }
 
    /* Waterfall */ 
    part1* wt = (part1*)waterfall->getFirst();
-   for(i = 0; i < waterfall->getTotal(); i++)
+   total = waterfall->getTotal();
+   for(i = 0; i < total; i++)
    {
       if(wt->followPC)
       {
          wt->definePosition(PCposX, PCposY, PCposZ);
       }
       wt->NextStep(matriz);
-      wt = (part1*) wt->next;
+
+      /* Verify Live */
+      if( (wt->systemMaxLiveTime != 0) && 
+          (time - wt->systemInitialLiveTime >= wt->systemMaxLiveTime) )
+      {
+         wt = (part1*)wt->next;
+         removeParticle(PART_WATERFALL, wt->previous);
+      }
+      else
+      {
+         wt = (part1*)wt->next;
+      }
    }
 
    glDisable(GL_FOG);
 
    /* Fire */
    part2* fr = (part2*)fire->getFirst();
-   for(i = 0; i < fire->getTotal(); i++)
+   total = fire->getTotal();
+   for(i = 0; i < total; i++)
    {
       if(fr->followPC)
       {
          fr->definePosition(PCposX, PCposY, PCposZ);
       }
       fr->NextStep(matriz);
-      fr = (part2*) fr->next;
+   
+      /* Verify Live */
+      if( (fr->systemMaxLiveTime != 0) && 
+          (time - fr->systemInitialLiveTime >= fr->systemMaxLiveTime) )
+      {
+         fr = (part2*)fr->next;
+         removeParticle(PART_FIRE, fr->previous);
+      }
+      else
+      {
+         fr = (part2*)fr->next;
+      }
    }
 
    /* Meteor */
    meteor* mt = (meteor*)meteorParticles->getFirst();
-   for(i = 0; i < meteorParticles->getTotal(); i++)
+   total = meteorParticles->getTotal();
+   for(i = 0; i < total; i++)
    {
       mt->NextStep(matriz);
+
+
+      /* Verify Live */
       if(!mt->isLiving())
       {
-         removeParticle(PART_METEOR, mt);
+         mt = (meteor*)mt->next;
+         removeParticle(PART_METEOR, mt->previous);
       }
-      mt = (meteor*)mt->next;
+      else
+      {
+         mt = (meteor*)mt->next;
+      }
    }
    glEnable(GL_FOG);
 
    /* WaterSurface */
    part3* ws = (part3*)waterSurface->getFirst();
-   for(i = 0; i < waterSurface->getTotal(); i++)
+   total = waterSurface->getTotal();
+   for(i = 0; i < total; i++)
    {
       if(ws->followPC)
       {
          ws->definePosition(PCposX, PCposY, PCposZ);
       }
       ws->NextStep(matriz);
-      ws = (part3*) ws->next;
+
+      /* Verify Live */
+      if( (ws->systemMaxLiveTime != 0) && 
+          (time - ws->systemInitialLiveTime >= ws->systemMaxLiveTime) )
+      {
+         ws = (part3*)ws->next;
+         removeParticle(PART_WATER_SURFACE, ws->previous);
+      }
+      else
+      {
+         ws = (part3*)ws->next;
+      }
    }
 
    /* Smoke */
    part4* sm = (part4*)smoke->getFirst();
-   for(i = 0; i < smoke->getTotal(); i++)
+   total = smoke->getTotal();
+   for(i = 0; i < total; i++)
    {
       if(sm->followPC)
       {
          sm->definePosition(PCposX, PCposY, PCposZ);
       }
       sm->NextStep(matriz);
-      sm = (part4*)sm->next;
+
+      /* Verify Live */
+      if( (sm->systemMaxLiveTime != 0) && 
+          (time - sm->systemInitialLiveTime >= sm->systemMaxLiveTime) )
+      {
+         sm = (part4*)sm->next;
+         removeParticle(PART_SMOKE, sm->previous);
+      }
+      else
+      {
+         sm = (part4*)sm->next;
+      }
    }
 
    /* Blood */
    part5* bl = (part5*)blood->getFirst();
-   for(i = 0; i < blood->getTotal(); i++)
+   total = blood->getTotal();
+   for(i = 0; i < total; i++)
    {
       if(bl->followPC)
       {
          bl->definePosition(PCposX, PCposY, PCposZ);
       }
       bl->NextStep(matriz);
-      if(bl->getLivingTime() >= MAX_BLOOD_LIVING)
+
+      /* Verify Live */
+      if( (bl->systemMaxLiveTime != 0) && 
+          (time - bl->systemInitialLiveTime >= bl->systemMaxLiveTime) )
       {
-         removeParticle(PART_BLOOD, bl);
+         bl = (part5*)bl->next;
+         removeParticle(PART_BLOOD, bl->previous);
       }
-      bl = (part5*)bl->next;
+      else
+      {
+         bl = (part5*)bl->next;
+      }
    }
 
    /* Lightning */
    part6* lt = (part6*)lightning->getFirst();
-   for(i = 0; i < lightning->getTotal(); i++)
+   total = lightning->getTotal();
+   for(i = 0; i < total; i++)
    {
       if(lt->followPC)
       {
          lt->definePosition(PCposX, PCposY, PCposZ);
       }
       lt->NextStep(matriz);
-      lt = (part6*) lt->next;
+
+      /* Verify Live */
+      if( (lt->systemMaxLiveTime != 0) && 
+          (time - lt->systemInitialLiveTime >= lt->systemMaxLiveTime) )
+      {
+         lt = (part6*)lt->next;
+         removeParticle(PART_LIGHTNING, lt->previous);
+      }
+      else
+      {
+         lt = (part6*)lt->next;
+      }
    }
 
    /* Snow */
    part7* sn = (part7*)snow->getFirst();
-   for(i = 0; i < snow->getTotal(); i++)
+   total = snow->getTotal();
+   for(i = 0; i < total; i++)
    {
       if(sn->followPC)
       {
          sn->definePosition(PCposX, PCposY, PCposZ);
       }
       sn->NextStep(matriz);
-      sn = (part7*)sn->next;
+
+      /* Verify Live */
+      if( (sn->systemMaxLiveTime != 0) && 
+          (time - sn->systemInitialLiveTime >= sn->systemMaxLiveTime) )
+      {
+         sn = (part7*)sn->next;
+         removeParticle(PART_SNOW, sn->previous);
+      }
+      else
+      {
+         sn = (part7*)sn->next;
+      }
    }
 
    glColor3f(1.0,1.0,1.0);
