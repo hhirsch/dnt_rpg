@@ -38,8 +38,9 @@
  - More Characters;
  - Some Adjusts on A*;
  - Objects are now only in cal3D, no more .obj;
+ - Some Adjusts to the Particle Controller;
  - First real-game maps;
- - Make Install now works;
+ - 'make install' now works;
  - Fixed Bug on remove no more used Models and 
    dead with items;
  - Fixed Bug on NPCs Fight Animations;
