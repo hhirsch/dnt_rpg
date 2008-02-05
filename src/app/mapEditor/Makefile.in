@@ -21,7 +21,7 @@ OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o $(ENDIA)astar
 OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o $(ENDCLASSES)skills.o $(ENDCLASSES)align.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o $(ENDCLASSES)object.o $(ENDCLASSES)itemslot.o $(ENDCLASSES)inventory.o $(ENDCLASSES)barter.o $(ENDCLASSES)weapon.o $(ENDCLASSES)mission.o $(ENDCLASSES)xp.o
 OBJSSOUND = $(ENDSOUND)ogg_stream.o  $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
 OBJSLANG = $(ENDLANG)translate.o
-OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o $(ENDPART)partlist.o $(ENDPART)wind.o $(ENDPART)lake.o
+OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partcontroller.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o $(ENDPART)partlist.o $(ENDPART)wind.o $(ENDPART)lake.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)barterwindow.o $(ENDENGINE)camera.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)dialog.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)itemwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)character.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)shadow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
@@ -36,17 +36,22 @@ area.o: area.cpp area.h
 	@$(CC) $(CFLAGS) area.cpp -o area.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-editor.o: editor.cpp editor.h guiIO.h terrain.h portal.h wall.h message.h objects.h particles.h npcs.h $(ENDENGINE)sun.h $(ENDENGINE)sky.h $(ENDENGINE)character.h $(ENDENGINE)culling.h $(ENDENGINE)util.h $(ENDETC)modellist.h $(ENDPART)partSystem.h $(ENDMAP)map.h
+editor.o: editor.cpp editor.h guiIO.h terrain.h portal.h wall.h message.h\
+          objects.h particles.h npcs.h $(ENDENGINE)sun.h $(ENDENGINE)sky.h\
+          $(ENDENGINE)character.h $(ENDENGINE)culling.h $(ENDENGINE)util.h\
+          $(ENDETC)modellist.h $(ENDPART)partcontroller.h $(ENDMAP)map.h
 	@printf "Making editor.o... "
 	@$(CC) $(CFLAGS) editor.cpp -o editor.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-grasswindow.o: grasswindow.cpp grasswindow.h $(ENDGUI)farso.h $(ENDPART)grass.h $(ENDPART)partSystem.h
+grasswindow.o: grasswindow.cpp grasswindow.h $(ENDGUI)farso.h $(ENDPART)grass.h\
+               $(ENDPART)partcontroller.h
 	@printf "Making grasswindow.o... "
 	@$(CC) $(CFLAGS) grasswindow.cpp -o grasswindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"	
 
-guiIO.o: guiIO.cpp guiIO.h portal.h terrain.h listwindow.h grasswindow.h waterwindow.h $(ENDGUI)farso.h $(ENDENGINE)camera.h
+guiIO.o: guiIO.cpp guiIO.h portal.h terrain.h listwindow.h grasswindow.h\
+         waterwindow.h $(ENDGUI)farso.h $(ENDENGINE)camera.h
 	@printf "Making guiIO.o... "
 	@$(CC) $(CFLAGS) guiIO.cpp -o guiIO.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -66,22 +71,26 @@ message.o: message.cpp message.h $(ENDGUI)farso.h
 	@$(CC) $(CFLAGS) message.cpp -o message.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-npcs.o: npcs.cpp npcs.h message.h $(ENDMAP)map.h $(ENDETC)modellist.h $(ENDENGINE)util.h $(ENDENGINE)character.h $(ENDCLASSES)feats.h
+npcs.o: npcs.cpp npcs.h message.h $(ENDMAP)map.h $(ENDETC)modellist.h\
+        $(ENDENGINE)util.h $(ENDENGINE)character.h $(ENDCLASSES)feats.h
 	@printf "Making npcs.o... "
 	@$(CC) $(CFLAGS) npcs.cpp -o npcs.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-objects.o: objects.cpp objects.h message.h $(ENDMAP)map.h $(ENDMAP)mapobject.h $(ENDETC)modellist.h $(ENDENGINE)util.h
+objects.o: objects.cpp objects.h message.h $(ENDMAP)map.h\
+          $(ENDMAP)mapobject.h $(ENDETC)modellist.h $(ENDENGINE)util.h
 	@printf "Making objects.o... "
 	@$(CC) $(CFLAGS) objects.cpp -o objects.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-particles.o: particles.cpp particles.h grasswindow.h waterwindow.h message.h guiIO.h $(ENDMAP)map.h $(ENDPART)partSystem.h
+particles.o: particles.cpp particles.h grasswindow.h waterwindow.h message.h\
+             guiIO.h $(ENDMAP)map.h $(ENDPART)partcontroller.h
 	@printf "Making particles.o... "
 	@$(CC) $(CFLAGS) particles.cpp -o particles.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-portal.o: portal.cpp portal.h area.h message.h $(ENDMAP)map.h $(ENDMAP)mapobject.h $(ENDENGINE)util.h
+portal.o: portal.cpp portal.h area.h message.h $(ENDMAP)map.h\
+          $(ENDMAP)mapobject.h $(ENDENGINE)util.h
 	@printf "Making portal.o... "
 	@$(CC) $(CFLAGS) portal.cpp -o portal.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -96,7 +105,8 @@ wall.o: wall.cpp wall.h $(ENDMAP)map.h $(ENDGUI)draw.h message.h
 	@$(CC) $(CFLAGS) wall.cpp -o wall.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-waterwindow.o: waterwindow.cpp waterwindow.h $(ENDPART)partSystem.h $(ENDGUI)farso.h
+waterwindow.o: waterwindow.cpp waterwindow.h $(ENDPART)partcontroller.h\
+               $(ENDGUI)farso.h
 	@printf "Making waterwindow.o... "
 	@$(CC) $(CFLAGS) waterwindow.cpp -o waterwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

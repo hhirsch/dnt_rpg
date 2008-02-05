@@ -1,7 +1,7 @@
 #ifndef _waterwindow_h
 #define _waterwindow_h
 
-#include "../../particle/partSystem.h"
+#include "../../particle/partcontroller.h"
 #include "../../gui/farso.h"
 
 /*! The water controller window */
@@ -25,7 +25,7 @@ class waterWindow
 
       /*! Set the used particle system contoller
        * \param pS -> the particle system controller */
-      void setPartSystem(partSystem* pS);
+      void setPartSystem(partController* pS);
 
       /*! Verify if some event is related to the window
        * \param type -> Type of the occurred event
@@ -46,7 +46,7 @@ class waterWindow
 
       part1* activeWater;                 /**< The active Water */
       interPlane* activePlane;            /**< The active Plane */
-      partSystem* pSystem;                /**< The active Controller */
+      partController* pSystem;                /**< The active Controller */
       interface* gui;                     /**< The used Interface */
    
 

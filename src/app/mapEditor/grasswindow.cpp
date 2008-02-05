@@ -118,7 +118,7 @@ void grassWindow::drawTemporary()
 /**********************************************************
  *                    setPartSystem                       *
  **********************************************************/
-void grassWindow::setPartSystem(partSystem* pS)
+void grassWindow::setPartSystem(partController* pS)
 {
    pSystem = pS;
 }

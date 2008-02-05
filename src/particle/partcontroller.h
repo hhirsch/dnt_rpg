@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-#ifndef _partSystem_h
-#define _partSystem_h
+#ifndef _partController_h
+#define _partController_h
 
 #include "particle.h"
 #include "part1.h"
@@ -29,15 +29,15 @@ using namespace std;
 #define PART_GRASS         8  /**< Grass ID */
 #define PART_METEOR        9  /**< Meteor ID */
 
-/*! The patSytem class controls all particles systens, 
-    make their atualizations, renderizations, etc. */
-class partSystem
+/*! The partController class controls all particles systens, 
+    make their updates, renders, deaths, etc. */
+class partController
 {
    public:
       /*! Constructor */
-      partSystem();
+      partController();
       /*! Destructor */
-      ~partSystem();
+      ~partController();
 
       /*!
        *************************************************************** 

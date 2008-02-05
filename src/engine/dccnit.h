@@ -19,7 +19,7 @@
 #include "../fight/fightSystem.h"
 #include "../gui/farso.h"
 #include "../map/map.h"
-#include "../particle/partSystem.h"
+#include "../particle/partcontroller.h"
 #include "../particle/wave.h"
 #include "../sound/sound.h"
 #include "../ia/iascript.h"
@@ -411,7 +411,7 @@ class engine
       skills* skillsList;          /**< List of Skills */
       weaponTypes* weaponsTypes;   /**< List of Types of Weapons */
 
-      partSystem* particleSystem;  /**< The Particle System */
+      partController* particleController;/**< The Particle System Controller */
       GLfloat seconds;             /**< Seconds from last actualization */
       
       int imgNumber;               /**< Used on exporting images to make video*/

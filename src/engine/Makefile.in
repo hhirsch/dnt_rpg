@@ -30,7 +30,7 @@ OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o $(ENDIA)astar
 OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o $(ENDCLASSES)skills.o $(ENDCLASSES)align.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o $(ENDCLASSES)object.o $(ENDCLASSES)itemslot.o $(ENDCLASSES)inventory.o $(ENDCLASSES)barter.o $(ENDCLASSES)weapon.o $(ENDCLASSES)mission.o $(ENDCLASSES)xp.o
 OBJSSOUND = $(ENDSOUND)ogg_stream.o  $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
 OBJSLANG = $(ENDLANG)translate.o
-OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o $(ENDPART)partlist.o $(ENDPART)wind.o $(ENDPART)lake.o
+OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partcontroller.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o $(ENDPART)partlist.o $(ENDPART)wind.o $(ENDPART)lake.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o
 OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o camera.o character.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
@@ -95,7 +95,7 @@ dialog.o: dialog.cpp dialog.h $(ENDGUI)farso.h character.h barterwindow.h
 	@$(CC) $(CFLAGS) dialog.cpp -o dialog.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h $(ENDCLASSES)race.h $(ENDCLASSES)classes.h $(ENDCLASSES)weapon.h $(ENDCLASSES)actions.h $(ENDCLASSES)mission.h $(ENDETC)message3d.h $(ENDETC)dirs.h $(ENDFIGHT)fightSystem.h $(ENDGUI)farso.h $(ENDMAP)map.h $(ENDPART)partSystem.h $(ENDPART)wave.h $(ENDSOUND)sound.h $(ENDIA)iascript.h alignwindow.h aspectwindow.h attwindow.h camera.h character.h classwindow.h collision.h cursor.h dialog.h initial.h inventwindow.h itemwindow.h modstate.h options.h racewindow.h shadow.h skillwindow.h sun.h util.h
+dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h $(ENDCLASSES)race.h $(ENDCLASSES)classes.h $(ENDCLASSES)weapon.h $(ENDCLASSES)actions.h $(ENDCLASSES)mission.h $(ENDETC)message3d.h $(ENDETC)dirs.h $(ENDFIGHT)fightSystem.h $(ENDGUI)farso.h $(ENDMAP)map.h $(ENDPART)partcontroller.h $(ENDPART)wave.h $(ENDSOUND)sound.h $(ENDIA)iascript.h alignwindow.h aspectwindow.h attwindow.h camera.h character.h classwindow.h collision.h cursor.h dialog.h initial.h inventwindow.h itemwindow.h modstate.h options.h racewindow.h shadow.h skillwindow.h sun.h util.h
 	@printf "Making dccnit.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

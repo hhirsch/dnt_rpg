@@ -115,6 +115,7 @@ particleSystem::particleSystem(string fileName, int mode)
  ***************************************************************/
 void particleSystem::init(int total, int mode)
 {
+   initialLiveTime = SDL_GetTicks();
    actualParticles = 0;
    particles = (particle*) new particle[total];
    maxParticles = total;
@@ -352,6 +353,7 @@ void particleSystem::definePosition(float cX, float cZ)
    centerX = cX;
    centerZ = cZ;
 }
+
 /***********************************************************
  *                    definePosition                       *
  ***********************************************************/
@@ -361,3 +363,38 @@ void particleSystem::definePosition(float cX, float cY, float cZ)
    centerY = cY;
    centerZ = cZ;
 }
+
+/***********************************************************
+ *                      getFileName                        *
+ ***********************************************************/
+string particleSystem::getFileName()
+{
+   return(strFileName);
+}
+
+/***********************************************************
+ *                      getPosition                        *
+ ***********************************************************/
+void particleSystem::getPosition(GLfloat& x, GLfloat &y, GLfloat& z)
+{
+   x=centerX;
+   y=centerY;
+   z=centerZ;
+}
+
+/***********************************************************
+ *                    getMaxParticles                      *
+ ***********************************************************/
+int particleSystem::getMaxParticles()
+{
+   return(maxParticles);
+}
+
+/***********************************************************
+ *                      setFollowPC                        *
+ ***********************************************************/
+void particleSystem::setFollowPC(bool follow)
+{
+   followPC = follow;
+}
+

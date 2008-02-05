@@ -6,7 +6,8 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 ENDENGINE=../engine/
 ENDETC=../etc/
 
-OBJS = grass.o lake.o meteor.o particle.o part1.o part2.o part3.o part4.o part5.o part6.o part7.o partlist.o partSystem.o wave.o wind.o
+OBJS = grass.o lake.o meteor.o particle.o part1.o part2.o part3.o part4.o\
+       part5.o part6.o part7.o partcontroller.o partlist.o wave.o wind.o
 
 all: $(OBJS)
 
@@ -80,9 +81,9 @@ partlist.o: partlist.cpp partlist.h particle.h
 	@$(CC) $(CFLAGS) partlist.cpp -o partlist.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-partSystem.o: partSystem.cpp partSystem.h particle.h part1.h part2.h part3.h part4.h part5.h part6.h part7.h grass.h meteor.h partlist.h
-	@printf "Making partSystem.o..."
-	@$(CC) $(CFLAGS) partSystem.cpp -o partSystem.o
+partcontroller.o: partcontroller.cpp partcontroller.h particle.h part1.h part2.h part3.h part4.h part5.h part6.h part7.h grass.h meteor.h partlist.h
+	@printf "Making partcontroller.o..."
+	@$(CC) $(CFLAGS) partcontroller.cpp -o partcontroller.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean: 

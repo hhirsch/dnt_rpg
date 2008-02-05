@@ -137,20 +137,51 @@ class particleSystem
        ***************************************************************/
       void definePosition(float cX, float cY, float cZ);
 
-      string getFileName(){return(strFileName);};
-      void getPosition(GLfloat& x, GLfloat &y, GLfloat& z){x=centerX;y=centerY;z=centerZ;};
+      /*!
+       *************************************************************** 
+       * Get the FileName of the particleSystem
+       * \return -> particleSystem fileName 
+       ***************************************************************/
+      string getFileName();
 
-      int actualParticles;   /**< Number of actual alive particles */
-      int drawMode;          /**< DrawMode of the system */
-      bool followPC;         /**< If the orign of System Follows PC */
-      bool windAffect;       /**< If Wind Affects the System */
+      /*!
+       *************************************************************** 
+       * Get the current position of the particleSystem
+       * \param x -> current X position
+       * \param y -> current Y position
+       * \param z -> current Z position  
+       ***************************************************************/      
+      void getPosition(GLfloat& x, GLfloat &y, GLfloat& z);
+      
+      /*!
+       *************************************************************** 
+       * Get the max number of particles on the system
+       * \return -> max number of particles on the system 
+       ***************************************************************/
+      int getMaxParticles();
 
-      int getMaxParticles(){return(maxParticles);};
+      /*!
+       *************************************************************** 
+       * Set if the particleSystem will follow the PC or not
+       * \param follow -> true to follow pc, false to not follow  
+       ***************************************************************/
+      void setFollowPC(bool follow);
 
       particleSystem* next;     /**< Next Particle System on the List */
       particleSystem* previous; /**< Previous Particle System on the list */
-      
+
+      friend class partController;
+      friend class particleList;
+
    protected:
+
+      int initialLiveTime;      /**< Time the Particle start live  */
+      int maxLiveTime;          /**< Max living time, in ms. 0 is infinity */
+
+      int actualParticles;     /**< Number of actual alive particles */
+      int drawMode;            /**< DrawMode of the system */
+      bool followPC;           /**< If the orign of System Follows PC */
+      bool windAffect;         /**< If Wind Affects the System */
 
       string strFileName;      /**< Name of the File */
       int maxLive;             /**< Max live of a particle  */

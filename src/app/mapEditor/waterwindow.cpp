@@ -46,7 +46,7 @@ void waterWindow::setPlane(interPlane* pl)
 /***********************************************************************
  *                              setPlane                               *
  ***********************************************************************/
-void waterWindow::setPartSystem(partSystem* pS) 
+void waterWindow::setPartSystem(partController* pS) 
 {
    pSystem = pS;
 }

@@ -2,13 +2,13 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-#include "partSystem.h"
+#include "partcontroller.h"
 #include "../etc/dirs.h"
 
 /**********************************************************************
  *                             Constructor                            *
  **********************************************************************/
-partSystem::partSystem()
+partController::partController()
 {
    waterfall = new particleList();
    fire = new particleList();
@@ -25,7 +25,7 @@ partSystem::partSystem()
 /**********************************************************************
  *                              Destructor                            *
  **********************************************************************/
-partSystem::~partSystem()
+partController::~partController()
 {
    deleteAll();
    delete(waterfall);
@@ -42,7 +42,7 @@ partSystem::~partSystem()
 /**********************************************************************
  *                              deleteAll                             *
  **********************************************************************/
-void partSystem::deleteAll()
+void partController::deleteAll()
 {
    while(waterfall->getTotal() > 0)
    {
@@ -112,7 +112,7 @@ void partSystem::deleteAll()
 /**********************************************************************
  *                               updateAll                            *
  **********************************************************************/
-void partSystem::updateAll(float PCposX, float PCposY, float PCposZ, 
+void partController::updateAll(float PCposX, float PCposY, float PCposZ, 
                               GLfloat matriz[6][4], bool enableGrass)
 {
    int i;
@@ -238,7 +238,7 @@ void partSystem::updateAll(float PCposX, float PCposY, float PCposZ,
 /**********************************************************************
  *                            addParticle                             *
  **********************************************************************/
-particleSystem* partSystem::addParticle(int type, GLfloat x1, GLfloat z1,
+particleSystem* partController::addParticle(int type, GLfloat x1, GLfloat z1,
                                         GLfloat x2, GLfloat z2, int total,
                                         GLfloat scale, string fileName)
 {
@@ -258,7 +258,7 @@ particleSystem* partSystem::addParticle(int type, GLfloat x1, GLfloat z1,
 /**********************************************************************
  *                            addParticle                             *
  **********************************************************************/
-meteor* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
+meteor* partController::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
                                 GLfloat varX, GLfloat varY, GLfloat varZ,
                                 GLfloat targX, GLfloat targY, GLfloat targZ,
                                 string fileName)
@@ -281,7 +281,7 @@ meteor* partSystem::addParticle(int type, GLfloat X, GLfloat Y, GLfloat Z,
 /**********************************************************************
  *                            addParticle                             *
  **********************************************************************/
-particleSystem* partSystem::addParticle(int type, GLfloat X, GLfloat Y, 
+particleSystem* partController::addParticle(int type, GLfloat X, GLfloat Y, 
                                         GLfloat Z, string fileName )
 { 
    switch(type)
@@ -343,7 +343,7 @@ particleSystem* partSystem::addParticle(int type, GLfloat X, GLfloat Y,
 /**********************************************************************
  *                             removeParticle                         *
  **********************************************************************/
-void partSystem::removeParticle(int type, void* part)
+void partController::removeParticle(int type, void* part)
 { 
    switch(type)
    {
@@ -418,7 +418,7 @@ void partSystem::removeParticle(int type, void* part)
 /**********************************************************************
  *                             stabilizeAll                           *
  **********************************************************************/
-void partSystem::stabilizeAll()
+void partController::stabilizeAll()
 {
    int i;
    GLfloat matriz[6][4];  //not needed to draw, so...
@@ -433,7 +433,7 @@ void partSystem::stabilizeAll()
 /**********************************************************************
  *                                setMap                              *
  **********************************************************************/
-void partSystem::setActualMap(void* acMap, collision* col)
+void partController::setActualMap(void* acMap, collision* col)
 {
    int i;
 
@@ -461,7 +461,7 @@ void partSystem::setActualMap(void* acMap, collision* col)
 /**********************************************************************
  *                             numParticles                           *
  **********************************************************************/
-int partSystem::numParticles()
+int partController::numParticles()
 {
    int i;
    int total = 0;
@@ -536,7 +536,7 @@ int partSystem::numParticles()
 /**********************************************************************
  *                             loadFromfile                           *
  **********************************************************************/
-void partSystem::loadFromFile(string fileName)
+void partController::loadFromFile(string fileName)
 {
    dirs dir;
    FILE* file; 
@@ -591,7 +591,7 @@ void partSystem::loadFromFile(string fileName)
 /**********************************************************************
  *                             saveToFile                             *
  **********************************************************************/
-void partSystem::saveToFile(string fileName)
+void partController::saveToFile(string fileName)
 {
    FILE* file; 
    GLfloat X,Y,Z;

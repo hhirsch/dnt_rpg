@@ -1,7 +1,7 @@
 #include "feats.h" 
 #include "actions.h"
 #include "../engine/util.h"
-#include "../particle/partSystem.h"
+#include "../particle/partcontroller.h"
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
 #include <SDL/SDL_image.h>
@@ -363,7 +363,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
          /* Add Blood */
          GLfloat cs = cos(deg2Rad(target.orientation));
          GLfloat sn = sin(deg2Rad(target.orientation));
-         partSystem* ps = (partSystem*)pSystem;
+         partController* ps = (partController*)pSystem;
          ps->addParticle(PART_BLOOD, target.xPosition - (sn*2),
                          target.yPosition + target.bloodPosition,
                          target.zPosition - (cs*2), 

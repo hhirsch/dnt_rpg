@@ -12,7 +12,7 @@
 #include "../../engine/sun.h"
 #include "../../engine/sky.h"
 #include "../../engine/character.h"
-#include "../../particle/partSystem.h"
+#include "../../particle/partcontroller.h"
 #include "../../map/map.h"
 #include "../../engine/culling.h"
 #include "../../engine/util.h"
@@ -79,7 +79,7 @@ class editor
       characterList *NPCs;             /**< List of NPCs On Map */
       featsList* features;           /**< NPCs Geral Features */
       
-      partSystem* particleSystem;    /**< Particles on Map */
+      partController* particleSystem;    /**< Particles on Map */
       
       guiIO* gui;                    /**< The Editor's GUI */
       terrain* terrainEditor;        /**< The terrain Editor Module */

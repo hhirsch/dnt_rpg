@@ -7,7 +7,7 @@
 /***************************************************************
  *                       CONSTRUCTOR                           *
  ***************************************************************/
-fightSystem::fightSystem(messageController* controller, partSystem* pSystem)
+fightSystem::fightSystem(messageController* controller, partController* pSystem)
 {
    lastTime = 0;
    actualActor = NULL;

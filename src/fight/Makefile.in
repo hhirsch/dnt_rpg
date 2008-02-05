@@ -19,7 +19,8 @@ fightGroup.o: fightGroup.cpp fightGroup.h $(ENDENGINE)character.h
 	@$(CC) $(CFLAGS) fightGroup.cpp -o fightGroup.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-fightSystem.o: fightSystem.cpp fightSystem.h fightGroup.h initiative.h $(ENDETC)message3d.h $(ENDPART)partSystem.h
+fightSystem.o: fightSystem.cpp fightSystem.h fightGroup.h initiative.h\
+               $(ENDETC)message3d.h $(ENDPART)partcontroller.h
 	@printf "Making fightSystem.o... "
 	@$(CC) $(CFLAGS) fightSystem.cpp -o fightSystem.o
 	@printf "\e[0;32mDone.\e[0;0m\n"

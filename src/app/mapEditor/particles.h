@@ -6,7 +6,7 @@
 #include "message.h"
 #include "guiIO.h"
 #include "../../map/map.h"
-#include "../../particle/partSystem.h"
+#include "../../particle/partcontroller.h"
 
 
 class particles
@@ -25,7 +25,8 @@ class particles
        * \param mButton -> mouse button state
        * \param grWindow -> the grassWindow Used*/
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
-                        Uint8 mButton, Uint8* keys, guiIO* gui, partSystem* pS,
+                        Uint8 mButton, Uint8* keys, guiIO* gui, 
+                        partController* pS,
                         GLdouble proj[16],GLdouble modl[16],GLint viewPort[4],
                         string selectedText, grassWindow* grWindow,
                         waterWindow* wtWindow, Map* actualMap);

@@ -11,7 +11,7 @@
 #include "initiative.h"
 #include <libintl.h>
 #include "../etc/message3d.h"
-#include "../particle/partSystem.h"
+#include "../particle/partcontroller.h"
 #include <SDL/SDL.h>
 
 
@@ -35,7 +35,7 @@ class fightSystem
      /*! Constructor 
       * \param controller -> the world messages controller
       * \param pSystem -> the particle system controller */
-     fightSystem(messageController* controller, partSystem* pSystem);
+     fightSystem(messageController* controller, partController* pSystem);
      /*! Destructor */
      ~fightSystem();
   
@@ -126,7 +126,7 @@ class fightSystem
      character* actualActor;         /**< Actual Character Acting */
      bool pendingAnimation;     /**< If some animation is pending */
      messageController* msgController; /**< World message control */
-     partSystem* particleSystem; /**< The particle system control */
+     partController* particleSystem; /**< The particle system control */
    
      /*!
      *************************************************************** 

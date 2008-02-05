@@ -11,7 +11,7 @@ editor::editor()
    mapOpened = false;
    map = NULL;
    NPCs = NULL;
-   particleSystem = new partSystem();
+   particleSystem = new partController();
    features = new featsList(dir.getRealFile("feats/"),
                             dir.getRealFile("feats/feats.ftl"));
 
