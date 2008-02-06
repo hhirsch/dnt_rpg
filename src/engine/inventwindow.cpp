@@ -4,6 +4,7 @@
 
 #include "inventwindow.h"
 #include "../etc/dirs.h"
+#include "../gui/dntfont.h"
 
 #define INVENTORY_STATE_NONE   0
 #define INVENTORY_STATE_OBJECT 1
@@ -122,13 +123,33 @@ bool inventWindow::isOpen()
  **************************************************************/
 void inventWindow::reDraw()
 {
+   int i;
+   dntFont fnt;
+   int x = 32;
+   char buf[8];
+   fnt.defineFont(DNT_FONT_TIMES, 13);
    if(isOpen())
    {
       inventories->draw(0,0, inventoryTabButton->get(), currentInventory);
       inventories->drawEquiped(0,0,characterTabButton->get());
+
+      /* Write Inventory Numbers */
+      for(i=0; i < 4; i++)
+      {
+         if(currentInventory == i)
+         {
+            color_Set(255,255,255);
+         }
+         else
+         {
+            color_Set(0,0,0);
+         }
+         sprintf(buf,"%d", i);
+         fnt.write(inventoryTabButton->get(), x, 0, buf);
+         x += 61;
+      }
       intWindow->draw(0,0);
 
-      //TODO Mark on actual Inventory!
    }
 }
 
