@@ -18,7 +18,7 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    barterInventory = new barter(inventSeller, inventBuyer);
    
    /* Create Window */
-   intWindow = gui->insertWindow(268,0,531,274,gettext("Barter"));
+   intWindow = gui->insertWindow(268,0,531,288,gettext("Barter"));
 
    /* Totals */
    buyerTotals = intWindow->getObjectsList()->insertTextBox(27,234,118,250,
@@ -29,19 +29,19 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    sellerTotals->setColor(255,10,10);
 
    /* Actions Buttons */
-   offerButton = intWindow->getObjectsList()->insertButton(173,252,251,270,
+   offerButton = intWindow->getObjectsList()->insertButton(173,265,251,283,
                                              gettext("Offer"),0);
-   imposeButton = intWindow->getObjectsList()->insertButton(91,252,168,270,
+   imposeButton = intWindow->getObjectsList()->insertButton(91,265,168,283,
                                              gettext("Impose"),0);
-   cancelButton = intWindow->getObjectsList()->insertButton(9,252,87,270,
+   cancelButton = intWindow->getObjectsList()->insertButton(9,265,87,283,
                                              gettext("Cancel"),0);
 
    /* Create the botton figure */
-   intWindow->getObjectsList()->insertPicture(4,232,256,39,
+   intWindow->getObjectsList()->insertPicture(4,235,256,50,
                    dir.getRealFile("texturas/inventory/trade_inf.png").c_str());
 
    /* Create the TabButton */
-   barterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,256,217,
+   barterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,256,220,
                        dir.getRealFile("texturas/inventory/trade.png").c_str());
 
    /* Buyer Buttons */
