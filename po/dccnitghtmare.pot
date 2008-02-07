@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-02-04 16:19-0200\n"
+"POT-Creation-Date: 2008-02-07 16:46-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,7 +182,7 @@ msgid "Impose"
 msgstr ""
 
 #: src/engine/barterwindow.cpp:68 src/engine/barterwindow.cpp:78
-#: src/engine/inventwindow.cpp:28
+#: src/engine/inventwindow.cpp:29
 msgid "Inventory"
 msgstr ""
 
@@ -481,27 +481,27 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:144
+#: src/engine/inventwindow.cpp:165
 msgid "Drop"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:146
+#: src/engine/inventwindow.cpp:167
 msgid "Sell"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:149
+#: src/engine/inventwindow.cpp:170
 msgid "Use"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:153
+#: src/engine/inventwindow.cpp:174
 msgid "Remove"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:156
+#: src/engine/inventwindow.cpp:177
 msgid "Info"
 msgstr ""
 
-#: src/engine/inventwindow.cpp:158
+#: src/engine/inventwindow.cpp:179
 msgid "Get"
 msgstr ""
 

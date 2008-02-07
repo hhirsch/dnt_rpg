@@ -115,7 +115,7 @@ src/particle/part6.cpp
 src/particle/part7.cpp
 src/particle/particle.cpp
 src/particle/partlist.cpp
-src/particle/partSystem.cpp
+src/particle/partcontroller.cpp
 src/particle/wave.cpp
 src/particle/wind.cpp
 

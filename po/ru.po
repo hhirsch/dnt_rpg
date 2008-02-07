@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-02-04 16:19-0200\n"
+"POT-Creation-Date: 2008-02-07 16:46-0200\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -184,7 +184,7 @@ msgid "Impose"
 msgstr "Обманывать"
 
 #: src/engine/barterwindow.cpp:68 src/engine/barterwindow.cpp:78
-#: src/engine/inventwindow.cpp:28
+#: src/engine/inventwindow.cpp:29
 msgid "Inventory"
 msgstr "Инвентарь"
 
@@ -483,27 +483,27 @@ msgstr "Настройки"
 msgid "Exit"
 msgstr "Выход"
 
-#: src/engine/inventwindow.cpp:144
+#: src/engine/inventwindow.cpp:165
 msgid "Drop"
 msgstr "Бросить"
 
-#: src/engine/inventwindow.cpp:146
+#: src/engine/inventwindow.cpp:167
 msgid "Sell"
 msgstr "Продать"
 
-#: src/engine/inventwindow.cpp:149
+#: src/engine/inventwindow.cpp:170
 msgid "Use"
 msgstr "Использовать"
 
-#: src/engine/inventwindow.cpp:153
+#: src/engine/inventwindow.cpp:174
 msgid "Remove"
 msgstr "Удалить"
 
-#: src/engine/inventwindow.cpp:156
+#: src/engine/inventwindow.cpp:177
 msgid "Info"
 msgstr "Информация"
 
-#: src/engine/inventwindow.cpp:158
+#: src/engine/inventwindow.cpp:179
 msgid "Get"
 msgstr "Получить"
 
