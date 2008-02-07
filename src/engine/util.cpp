@@ -43,92 +43,18 @@ int intercepts(GLfloat min1[3], GLfloat max1[3],
                GLfloat min2[3], GLfloat max2[3],
                int inverso)
 {
-   //testa o mínimo X do 2
-   if( (min1[0] < min2[0]) && (max1[0] > min2[0]  ) )
+   for (int i=0; i<3; i++)
    {
-      //testa minimo Y
-      //if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
-      //{
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      //}
-      //testa maximo Y
-      /*if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
+      if (! ((min1[i]<=min2[i] && min2[i]<=max1[i]) || 
+             (min1[i]<=max2[i] && max2[i]<=max1[i]) ||
+             (min2[i]<=min1[i] && min1[i]<=max2[i]) || 
+             (min2[i]<=max1[i] && max1[i]<=max2[i])))
       {
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      }*/
+         return 0;
+      }
    }
    
-   //testa com o máximo X do 2
-   if( (min1[0] < max2[0]) && (max1[0] > max2[0]) )
-   {
-      //testa minimo Y
-      if( (min1[1] < min2[1]) && (max1[1] > min2[1]) )
-      {
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      }
-      //testa maximo Y
-      if( (min1[1] < max2[1]) && (max1[1] > max2[1]) )
-      {
-         //testa minimoZ
-         if( (min1[2] < min2[2]) && (max1[2] > min2[2]) )
-         {
-            return(1);
-         }
-         //testa maximoZ
-         if( (min1[2] < max2[2]) && (max1[2] > max2[2]) )
-         {
-            return(1);
-         }
-      }
-   }
-
-   //testa casos de cruz + 
-   if( (min2[0] < min1[0]) && (max2[0] > max1[0]) &&
-       (min2[2] > min1[2]) && (min2[2] < max1[2]))
-   {
-      return(1);
-   }
-   if( (min2[2] < min1[2]) && (max2[2] > max1[2]) &&
-       (min2[0] > min1[0]) && (min2[0] < max1[0]))
-   {
-      return(1);
-   }
-
-   if(inverso)
-   {
-      return( intercepts(min2, max2, min1, max1, 0));
-   }
-   else 
-   {
-      return(0);
-   }
+   return 1;
 }
 
 /*********************************************************************
