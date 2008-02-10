@@ -7,7 +7,7 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 PROGFLAGS = 
 ENDGUI = ../gui/
 ENDENGINE = ../engine/
-ENDMAPA = ../map/
+ENDMAP = ../map/
 ENDETC = ../etc/
 ENDPART = ../particle/
 ENDCLASSES = ../classes/
@@ -15,17 +15,17 @@ ENDLANG = ../lang/
 ENDSOUND = ../sound/
 ENDIA = ../ia/
 ENDFIGHT = ../fight/
-OBJSMAPA = $(ENDMAPA)map.o $(ENDMAPA)mapfog.o $(ENDMAPA)maplights.o $(ENDMAPA)mapobject.o $(ENDMAPA)maproad.o
-OBJSGUI = $(ENDGUI)textbar.o $(ENDGUI)button.o $(ENDGUI)color.o $(ENDGUI)cxsel.o $(ENDGUI)draw.o $(ENDGUI)messages.o $(ENDGUI)interface.o $(ENDGUI)farso.o $(ENDGUI)picture.o $(ENDGUI)fonte.o $(ENDGUI)healthBar.o $(ENDGUI)window.o $(ENDGUI)guilist.o $(ENDGUI)listtext.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)textbox.o $(ENDGUI)rolbar.o $(ENDGUI)seltext.o $(ENDGUI)tabbutton.o
+OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o $(ENDMAP)mapobject.o $(ENDMAP)maproad.o
+OBJSGUI = $(ENDGUI)textbar.o $(ENDGUI)button.o $(ENDGUI)color.o $(ENDGUI)cxsel.o $(ENDGUI)draw.o $(ENDGUI)messages.o $(ENDGUI)interface.o $(ENDGUI)farso.o $(ENDGUI)picture.o $(ENDGUI)dntfont.o $(ENDGUI)healthBar.o $(ENDGUI)window.o $(ENDGUI)guilist.o $(ENDGUI)listtext.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)textbox.o $(ENDGUI)rolbar.o $(ENDGUI)seltext.o $(ENDGUI)tabbutton.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o $(ENDIA)astar.o $(ENDIA)fuzzy.o $(ENDIA)fuzzyvariable.o $(ENDIA)fuzzyfunction.o $(ENDIA)fuzzyrule.o $(ENDIA)iafuncs.o $(ENDIA)iascript.o $(ENDIA)iastack.o $(ENDIA)iavariable.o
-OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o $(ENDCLASSES)skills.o $(ENDCLASSES)align.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o $(ENDCLASSES)object.o $(ENDCLASSES)itemslot.o $(ENDCLASSES)inventory.o $(ENDCLASSES)barter.o $(ENDCLASSES)weapon.o $(ENDCLASSES)mission.o
+OBJSCLASSES = $(ENDCLASSES)classes.o $(ENDCLASSES)race.o $(ENDCLASSES)skills.o $(ENDCLASSES)align.o $(ENDCLASSES)feats.o $(ENDCLASSES)defs.o $(ENDCLASSES)actions.o $(ENDCLASSES)thing.o $(ENDCLASSES)object.o $(ENDCLASSES)itemslot.o $(ENDCLASSES)inventory.o $(ENDCLASSES)barter.o $(ENDCLASSES)weapon.o $(ENDCLASSES)mission.o $(ENDCLASSES)xp.o
 OBJSSOUND = $(ENDSOUND)ogg_stream.o  $(ENDSOUND)sound.o $(ENDSOUND)sndfx.o
 OBJSLANG = $(ENDLANG)translate.o
-OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partSystem.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o $(ENDPART)partlist.o
+OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partcontroller.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o $(ENDPART)partlist.o $(ENDPART)wind.o $(ENDPART)lake.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
-OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)texture.o $(ENDETC)message3d.o $(ENDETC)modellist.o
-OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)barterwindow.o $(ENDENGINE)camera.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)dialog.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)character.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)shadow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
+OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o
+OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)barterwindow.o $(ENDENGINE)camera.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)dialog.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)itemwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)character.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)shadow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 OBJS = area.o editor.o guiIO.o listWindow.o mapEditor.o message.o npcs.o objects.o particles.o portal.o terrain.o wall.o
 SUBSYSTEMS = mapEditor/ #iaEditor/
 
@@ -34,7 +34,7 @@ BIN = ../../bin/
 
 OBJSFNT = $(OBJSGUI) $(ENDENGINE)culling.o $(ENDENGINE)util.o
 
-all: parts #fntEditor partEditor DlgEditor dlgCompiler
+all: parts partEditor #DlgEditor dlgCompiler
 
 fntEditor.o: fntEditor.cpp fntEditor.h
 	@printf "Making fntEditor.o... "
@@ -88,11 +88,11 @@ partEditor.o: partEditor.cpp
 
 partEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJSMAPA) partEditor.o
 	@printf "Linking partEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) partEditor.o -o $(BIN)partEditor
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) partEditor.o -o $(BIN)dntPartEditor
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
 	@printf "Cleaning App Bin Files... "
-	@\rm -rf *.o *.e ./mapEditor/*.o ./iaEditor/*.o $(BIN)DlgEditor $(BIN)mapEditor $(BIN)fntEditor $(BIN)partEditor $(BIN)iaEditor $(BIN)dlgCompiler
+	@\rm -rf *.o *.e ./mapEditor/*.o ./iaEditor/*.o $(BIN)DlgEditor $(BIN)mapEditor $(BIN)fntEditor $(BIN)dntPartEditor $(BIN)iaEditor $(BIN)dlgCompiler
 	@cd ./mapEditor; make clean;
 	@printf "\e[0;32mDone.\e[0;0m\n"

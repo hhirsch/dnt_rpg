@@ -1,6 +1,6 @@
 #include "partEditor.h"
-
-inline double deg2Rad(double x){return 3.1415927 * x/180.0;}
+#include "../etc/dirs.h"
+#include "../engine/camera.h"
 
 bool sair = false;
 int tipo = 1;
@@ -438,57 +438,6 @@ void erro()
 /************************************************************************
  *                     Trata Botao Sair                                 *
  ************************************************************************/
-int botaoSair(void *jan,void *ljan, SDL_Surface *screen)
-{
-   sair = true;
-   return(1);
-}
-
-int botaoSalvar(void *jan,void *ljan, SDL_Surface *screen)
-{
-   switch(tipo)
-   {
-      case 1:
-             { 
-                p1->Save(bartSalvar->texto);
-                break;
-             }
-      case 2:
-             {
-                p2->Save(bartSalvar->texto);
-                break;
-             }
-      case 3:
-             {
-                p3->Save(bartSalvar->texto);
-                break;
-             }
-      case 4:
-             {
-                p4->Save(bartSalvar->texto);
-                break;
-             }
-      case 5:
-             {
-               p5->Save(bartSalvar->texto);
-               break;
-             }
-      case 6:
-             {
-               p6->Save(bartSalvar->texto);
-               break;
-             }
-      case 7:
-             {
-               p7->Save(bartSalvar->texto);
-               break;
-             }
-   }
-   printf("With a lot of hope, i've saved as: %s\n",bartSalvar->texto.c_str());
-   return(1);
-}
-
-
 void deleteParticle()
 {
    switch(tipo)
@@ -531,9 +480,9 @@ void deleteParticle()
    }
 }
 
-void createParticle(char* entrada)
+void createParticle(string entrada)
 {
-    switch(tipo)
+   switch(tipo)
    {
       case 1:
              { 
@@ -634,265 +583,265 @@ void actualizeParticle(double segundos)
 /*                   O TRECO DE MUDAR BARRA TEXTO                       */
 /************************************************************************/
 
-void editedMaxLive(textBar* bart,SDL_Surface *screen)
+void editedMaxLive(textBar* bart)
 {
    int i;
-   sscanf(bart->texto.c_str(),"%d",&i);
+   sscanf(bart->getText().c_str(),"%d",&i);
    p->updateMaxLive(i);
 }
 
-void editedMaxParticles(textBar* bart,SDL_Surface *screen)
+void editedMaxParticles(textBar* bart)
 {
    int i;
-   sscanf(bart->texto.c_str(),"%d",&i);
+   sscanf(bart->getText().c_str(),"%d",&i);
    p->updateMaxParticles(i);
    p->Save("temp.tmp");
    deleteParticle();
    createParticle("temp.tmp");
 }
 
-void editedCenterX(textBar* bart,SDL_Surface *screen)
+void editedCenterX(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateCenterX(i);
 }
 
-void editedCenterY(textBar* bart,SDL_Surface *screen)
+void editedCenterY(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateCenterY(i);
 }
 
-void editedCenterZ(textBar* bart,SDL_Surface *screen)
+void editedCenterZ(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateCenterZ(i);
 }
 
-void editedGravity(textBar* bart,SDL_Surface *screen)
+void editedGravity(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateGravity(i);
 }
 
-void editedInitR(textBar* bart,SDL_Surface *screen)
+void editedInitR(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateInitR(i);
 }
 
-void editedInitG(textBar* bart,SDL_Surface *screen)
+void editedInitG(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateInitG(i);
 }
 
-void editedInitB(textBar* bart,SDL_Surface *screen)
+void editedInitB(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateInitB(i);
 }
 
-void editedFinalR(textBar* bart,SDL_Surface *screen)
+void editedFinalR(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateFinalR(i);
 }
 
-void editedFinalG(textBar* bart,SDL_Surface *screen)
+void editedFinalG(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateFinalG(i);
 }
 
-void editedFinalB(textBar* bart,SDL_Surface *screen)
+void editedFinalB(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateFinalB(i);
 }
 
-void editedAlpha(textBar* bart,SDL_Surface *screen)
+void editedAlpha(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateAlpha(i);
 }
 
-void editedDMultCenterX(textBar* bart,SDL_Surface *screen)
+void editedDMultCenterX(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultCenterX(i);
 }
 
-void editedDMultCenterY(textBar* bart,SDL_Surface *screen)
+void editedDMultCenterY(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultCenterY(i);
 }
 
-void editedDMultCenterZ(textBar* bart,SDL_Surface *screen)
+void editedDMultCenterZ(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultCenterZ(i);
 }
 
-void editedDSumCenterX(textBar* bart,SDL_Surface *screen)
+void editedDSumCenterX(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumCenterX(i);
 }
 
-void editedDSumCenterY(textBar* bart,SDL_Surface *screen)
+void editedDSumCenterY(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumCenterY(i);
 }
 
-void editedDSumCenterZ(textBar* bart,SDL_Surface *screen)
+void editedDSumCenterZ(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumCenterZ(i);
 }
 
-void editedDMultPosX(textBar* bart,SDL_Surface *screen)
+void editedDMultPosX(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultPosX(i);
 }
 
-void editedDMultPosY(textBar* bart,SDL_Surface *screen)
+void editedDMultPosY(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultPosY(i);
 }
 
-void editedDMultPosZ(textBar* bart,SDL_Surface *screen)
+void editedDMultPosZ(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultPosZ(i);
 }
 
-void editedDSumPosX(textBar* bart,SDL_Surface *screen)
+void editedDSumPosX(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumPosX(i);
 }
 
-void editedDSumPosY(textBar* bart,SDL_Surface *screen)
+void editedDSumPosY(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumPosY(i);
 }
 
-void editedDSumPosZ(textBar* bart,SDL_Surface *screen)
+void editedDSumPosZ(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumPosZ(i);
 }
 
-void editedDMultVelX(textBar* bart,SDL_Surface *screen)
+void editedDMultVelX(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultVelX(i);
 }
 
-void editedDMultVelY(textBar* bart,SDL_Surface *screen)
+void editedDMultVelY(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultVelY(i);
 }
 
-void editedDMultVelZ(textBar* bart,SDL_Surface *screen)
+void editedDMultVelZ(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultVelZ(i);
 }
 
-void editedDSumVelX(textBar* bart,SDL_Surface *screen)
+void editedDSumVelX(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumVelX(i);
 }
 
-void editedDSumVelY(textBar* bart,SDL_Surface *screen)
+void editedDSumVelY(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumVelY(i);
 }
 
-void editedDSumVelZ(textBar* bart,SDL_Surface *screen)
+void editedDSumVelZ(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumVelZ(i);
 }
 
-void editedDMultColorR(textBar* bart,SDL_Surface *screen)
+void editedDMultColorR(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultColorR(i);
 }
 
-void editedDMultColorG(textBar* bart,SDL_Surface *screen)
+void editedDMultColorG(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultColorG(i);
 }
 
-void editedDMultColorB(textBar* bart,SDL_Surface *screen)
+void editedDMultColorB(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDMultColorB(i);
 }
 
-void editedDSumColorR(textBar* bart,SDL_Surface *screen)
+void editedDSumColorR(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumColorR(i);
 }
 
-void editedDSumColorG(textBar* bart,SDL_Surface *screen)
+void editedDSumColorG(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumColorG(i);
 }
 
-void editedDSumColorB(textBar* bart,SDL_Surface *screen)
+void editedDSumColorB(textBar* bart)
 {
    float i;
-   sscanf(bart->texto.c_str(),"%f",&i);
+   sscanf(bart->getText().c_str(),"%f",&i);
    p->updateDSumColorB(i);
 }
 
@@ -904,25 +853,10 @@ int main(int argc, char **argv)
 {
    printf(" DccNitghtmare - Particle Editor 0.1\n");
    /* Inicia ou abre mapa Existente */
-   char* entrada = ""; /*Arquivo de entrada*/
+   string entrada = ""; /*Arquivo de entrada*/
    int chamadaCorreta=0;
    char c;
-   
-   /* Cosntantes de CAMERA */
-      double theta=37;
-      double phi=0;
-      double d=210;
-      double centroX = 70;
-      double centroZ = 208;
-      double centroY = 30;
-      double cameraX = centroX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-      double cameraY = centroY + (float) d * sin(deg2Rad(theta));
-      double cameraZ = centroZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-      
-
    int novo = 0;
-
-   
 
    while((c=getopt(argc,argv,"e:a:l:n")) != -1){
       switch(c){
@@ -943,10 +877,21 @@ int main(int argc, char **argv)
    printf("Type of System ( 1 .. 7 ): ");
    scanf("%d",&tipo);
 
+   /* Get current data directorie */
+   dirs dir;
+   dir.findDataDirectories();
+
    /* Inicia o Sistema Bizarro */ 
    SDL_Surface* screen;
-   Farso_Iniciar(&screen,"DccNiTghtmare's Particle Editor");
+   Farso_Init(&screen,"DccNiTghtmare's Particle Editor", 800, 600, false, 0);
    Iniciar(screen);
+   extensions ext;
+   ext.defineAllExtensions();
+
+   camera* gameCamera = new camera();
+
+   button *buttonExit,
+          *buttonSave;
 
    createParticle(entrada);
 
@@ -955,189 +900,179 @@ int main(int argc, char **argv)
    int mouseX,mouseY;
 
    interface* gui = new interface(NULL);
-   janela* janSalvar, *janEditar;
+   window* janSalvar, *janEditar;
 
    char aux[10];
 
-   janSalvar = gui->insertWindow(0,0,127,63,"Actions",1,1);
-   janSalvar->objects->InserirBotao(10,37,50,55,janSalvar->Cores.corBot.R,
-                                                janSalvar->Cores.corBot.G,
-                                                janSalvar->Cores.corBot.B,
-                                                "Save",1,&botaoSalvar);
-   janSalvar->objects->InserirBotao(77,37,117,55,janSalvar->Cores.corBot.R,
-                                                janSalvar->Cores.corBot.G,
-                                                janSalvar->Cores.corBot.B,
-                                                "Exit",1,&botaoSair);
-   bartSalvar = janSalvar->objects->InserirBarraTexto(10,17,118,33,
-                                         entrada,
-                                         0,NULL);
-
-   janSalvar->fechavel = 0;
+   janSalvar = gui->insertWindow(0,0,127,63,"Actions");
+   buttonSave = janSalvar->getObjectsList()->insertButton(10,37,50,55,
+                                                         "Save",1);
+   buttonExit = janSalvar->getObjectsList()->insertButton(77,37,117,55,
+                                                          "Exit",1);
+   bartSalvar = janSalvar->getObjectsList()->insertTextBar(10,17,118,33,
+                                         entrada, 0);
    gui->openWindow(janSalvar);
 
-   janEditar = gui->insertWindow(0,64,127,575,"Edit",1,1);
+   janEditar = gui->insertWindow(0,64,127,575,"Edit");
    
-   janEditar->objects->InserirQuadroTexto(3,17,60,33,0,"MaxLive");
+   janEditar->getObjectsList()->insertTextBox(3,17,60,33,0,"MaxLive");
    sprintf(aux, "%d", p->getMaxLive());
-   janEditar->objects->InserirBarraTexto(60,17,123,33,aux,0,&editedMaxLive);
+   janEditar->getObjectsList()->insertTextBar(60,17,123,33,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,37,60,53,0,"MaxParts");
+   janEditar->getObjectsList()->insertTextBox(3,37,60,53,0,"MaxParts");
    sprintf(aux, "%d", p->getMaxParticles());
-   janEditar->objects->InserirBarraTexto(60,37,123,53,aux,0,&editedMaxParticles);
+   janEditar->getObjectsList()->insertTextBar(60,37,123,53,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,57,60,73,0,"CenterX");
+   janEditar->getObjectsList()->insertTextBox(3,57,60,73,0,"CenterX");
    sprintf(aux, "%.3f", p->getCenterX());
-   janEditar->objects->InserirBarraTexto(60,57,123,73,aux,0,&editedCenterX);
+   janEditar->getObjectsList()->insertTextBar(60,57,123,73,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,77,60,93,0,"CenterY");
+   janEditar->getObjectsList()->insertTextBox(3,77,60,93,0,"CenterY");
    sprintf(aux, "%.3f", p->getCenterY());
-   janEditar->objects->InserirBarraTexto(60,77,123,93,aux,0,&editedCenterY);
+   janEditar->getObjectsList()->insertTextBar(60,77,123,93,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,97,60,113,0,"CenterZ");
+   janEditar->getObjectsList()->insertTextBox(3,97,60,113,0,"CenterZ");
    sprintf(aux, "%.3f", p->getCenterZ());
-   janEditar->objects->InserirBarraTexto(60,97,123,113,aux,0,&editedCenterZ);
+   janEditar->getObjectsList()->insertTextBar(60,97,123,113,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,117,60,133,0,"Gravity");
+   janEditar->getObjectsList()->insertTextBox(3,117,60,133,0,"Gravity");
    sprintf(aux, "%.3f", p->getGravity());
-   janEditar->objects->InserirBarraTexto(60,117,123,133,aux,0,&editedGravity);
+   janEditar->getObjectsList()->insertTextBar(60,117,123,133,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,137,60,153,0,"InitR");
+   janEditar->getObjectsList()->insertTextBox(3,137,60,153,0,"InitR");
    sprintf(aux, "%.3f", p->getInitR());
-   janEditar->objects->InserirBarraTexto(60,137,123,153,aux,0,&editedInitR);
+   janEditar->getObjectsList()->insertTextBar(60,137,123,153,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,157,60,173,0,"InitG");
+   janEditar->getObjectsList()->insertTextBox(3,157,60,173,0,"InitG");
    sprintf(aux, "%.3f", p->getInitG());
-   janEditar->objects->InserirBarraTexto(60,157,123,173,aux,0,&editedInitG);
+   janEditar->getObjectsList()->insertTextBar(60,157,123,173,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,177,60,193,0,"InitB");
+   janEditar->getObjectsList()->insertTextBox(3,177,60,193,0,"InitB");
    sprintf(aux, "%.3f", p->getInitB());
-   janEditar->objects->InserirBarraTexto(60,177,123,193,aux,0,&editedInitB);
+   janEditar->getObjectsList()->insertTextBar(60,177,123,193,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,197,60,213,0,"FinalR");
+   janEditar->getObjectsList()->insertTextBox(3,197,60,213,0,"FinalR");
    sprintf(aux, "%.3f", p->getFinalR());
-   janEditar->objects->InserirBarraTexto(60,197,123,213,aux,0,&editedFinalR);
+   janEditar->getObjectsList()->insertTextBar(60,197,123,213,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,217,60,233,0,"FinalG");
+   janEditar->getObjectsList()->insertTextBox(3,217,60,233,0,"FinalG");
    sprintf(aux, "%.3f", p->getFinalG());
-   janEditar->objects->InserirBarraTexto(60,217,123,233,aux,0,&editedFinalG);
+   janEditar->getObjectsList()->insertTextBar(60,217,123,233,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,237,60,253,0,"FinalB");
+   janEditar->getObjectsList()->insertTextBox(3,237,60,253,0,"FinalB");
    sprintf(aux, "%.3f", p->getFinalB());
-   janEditar->objects->InserirBarraTexto(60,237,123,253,aux,0,&editedFinalB);
+   janEditar->getObjectsList()->insertTextBar(60,237,123,253,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,257,60,273,0,"Alpha");
+   janEditar->getObjectsList()->insertTextBox(3,257,60,273,0,"Alpha");
    sprintf(aux, "%.3f", p->getAlpha());
-   janEditar->objects->InserirBarraTexto(60,257,123,273,aux,0,&editedAlpha);
+   janEditar->getObjectsList()->insertTextBar(60,257,123,273,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,277,60,293,0,"MCntX");
+   janEditar->getObjectsList()->insertTextBox(3,277,60,293,0,"MCntX");
    sprintf(aux, "%.3f", p->getDMultCenterX());
-   janEditar->objects->InserirBarraTexto(60,277,123,293,aux,0,&editedDMultCenterX);
-   janEditar->objects->InserirQuadroTexto(3,297,60,313,0,"MCntY");
+   janEditar->getObjectsList()->insertTextBar(60,277,123,293,aux,0);
+   janEditar->getObjectsList()->insertTextBox(3,297,60,313,0,"MCntY");
    sprintf(aux, "%.3f", p->getDMultCenterY());
-   janEditar->objects->InserirBarraTexto(60,297,123,313,aux,0,&editedDMultCenterY);
-   janEditar->objects->InserirQuadroTexto(3,317,60,333,0,"MCntZ");
+   janEditar->getObjectsList()->insertTextBar(60,297,123,313,aux,0);
+   janEditar->getObjectsList()->insertTextBox(3,317,60,333,0,"MCntZ");
    sprintf(aux, "%.3f", p->getDMultCenterZ());
-   janEditar->objects->InserirBarraTexto(60,317,123,333,aux,0,&editedDMultCenterZ);
+   janEditar->getObjectsList()->insertTextBar(60,317,123,333,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,337,60,353,0,"SCntX");
+   janEditar->getObjectsList()->insertTextBox(3,337,60,353,0,"SCntX");
    sprintf(aux, "%.3f", p->getDSumCenterX());
-   janEditar->objects->InserirBarraTexto(60,337,123,353,aux,0,&editedDSumCenterX);
-   janEditar->objects->InserirQuadroTexto(3,357,60,373,0,"SCntY");
+   janEditar->getObjectsList()->insertTextBar(60,337,123,353,aux,0);
+   janEditar->getObjectsList()->insertTextBox(3,357,60,373,0,"SCntY");
    sprintf(aux, "%.3f", p->getDSumCenterY());
-   janEditar->objects->InserirBarraTexto(60,357,123,373,aux,0,&editedDSumCenterY);
-   janEditar->objects->InserirQuadroTexto(3,377,60,393,0,"SCntZ");
+   janEditar->getObjectsList()->insertTextBar(60,357,123,373,aux,0);
+   janEditar->getObjectsList()->insertTextBox(3,377,60,393,0,"SCntZ");
    sprintf(aux, "%.3f", p->getDSumCenterZ());
-   janEditar->objects->InserirBarraTexto(60,377,123,393,aux,0,&editedDSumCenterZ);
+   janEditar->getObjectsList()->insertTextBar(60,377,123,393,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,397,60,413,0,"MPosX");
+   janEditar->getObjectsList()->insertTextBox(3,397,60,413,0,"MPosX");
    sprintf(aux, "%.3f", p->getDMultPosX());
-   janEditar->objects->InserirBarraTexto(60,397,123,413,aux,0,&editedDMultPosX);
-   janEditar->objects->InserirQuadroTexto(3,417,60,433,0,"MPosY");
+   janEditar->getObjectsList()->insertTextBar(60,397,123,413,aux,0);
+   janEditar->getObjectsList()->insertTextBox(3,417,60,433,0,"MPosY");
    sprintf(aux, "%.3f", p->getDMultPosY());
-   janEditar->objects->InserirBarraTexto(60,417,123,433,aux,0,&editedDMultPosY);
-   janEditar->objects->InserirQuadroTexto(3,437,60,453,0,"MPosZ");
+   janEditar->getObjectsList()->insertTextBar(60,417,123,433,aux,0);
+   janEditar->getObjectsList()->insertTextBox(3,437,60,453,0,"MPosZ");
    sprintf(aux, "%.3f", p->getDMultPosZ());
-   janEditar->objects->InserirBarraTexto(60,437,123,453,aux,0,&editedDMultPosZ);
+   janEditar->getObjectsList()->insertTextBar(60,437,123,453,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,457,60,473,0,"SPosX");
+   janEditar->getObjectsList()->insertTextBox(3,457,60,473,0,"SPosX");
    sprintf(aux, "%.3f", p->getDSumPosX());
-   janEditar->objects->InserirBarraTexto(60,457,123,473,aux,0,&editedDSumPosX);
-   janEditar->objects->InserirQuadroTexto(3,474,60,490,0,"SPosY");
+   janEditar->getObjectsList()->insertTextBar(60,457,123,473,aux,0);
+   janEditar->getObjectsList()->insertTextBox(3,474,60,490,0,"SPosY");
    sprintf(aux, "%.3f", p->getDSumPosY());
-   janEditar->objects->InserirBarraTexto(60,474,123,490,aux,0,&editedDSumPosY);
-   janEditar->objects->InserirQuadroTexto(3,491,60,505,0,"SPosZ");
+   janEditar->getObjectsList()->insertTextBar(60,474,123,490,aux,0);
+   janEditar->getObjectsList()->insertTextBox(3,491,60,505,0,"SPosZ");
    sprintf(aux, "%.3f", p->getDSumPosZ());
-   janEditar->objects->InserirBarraTexto(60,491,123,505,aux,0,&editedDSumPosZ);
+   janEditar->getObjectsList()->insertTextBar(60,491,123,505,aux,0);
 
-   janEditar->fechavel = 0;
    gui->openWindow(janEditar);
 
-   janEditar = gui->insertWindow(672,64,799,575,"Edit-2",1,1);
+   janEditar = gui->insertWindow(672,64,799,575,"Edit-2");
 
-   janEditar->objects->InserirQuadroTexto(3,17,60,33,0,"DMColorR");
+   janEditar->getObjectsList()->insertTextBox(3,17,60,33,0,"DMColorR");
    sprintf(aux, "%d", p->getMaxLive());
-   janEditar->objects->InserirBarraTexto(60,17,123,33,aux,0,&editedDMultColorR);
+   janEditar->getObjectsList()->insertTextBar(60,17,123,33,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,37,60,53,0,"DMColorG");
+   janEditar->getObjectsList()->insertTextBox(3,37,60,53,0,"DMColorG");
    sprintf(aux, "%d", p->getMaxParticles());
-   janEditar->objects->InserirBarraTexto(60,37,123,53,aux,0,&editedDMultColorG);
+   janEditar->getObjectsList()->insertTextBar(60,37,123,53,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,57,60,73,0,"DMColorB");
+   janEditar->getObjectsList()->insertTextBox(3,57,60,73,0,"DMColorB");
    sprintf(aux, "%.3f", p->getCenterX());
-   janEditar->objects->InserirBarraTexto(60,57,123,73,aux,0,&editedDMultColorB);
+   janEditar->getObjectsList()->insertTextBar(60,57,123,73,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,77,60,93,0,"DSColorR");
+   janEditar->getObjectsList()->insertTextBox(3,77,60,93,0,"DSColorR");
    sprintf(aux, "%.3f", p->getCenterY());
-   janEditar->objects->InserirBarraTexto(60,77,123,93,aux,0,&editedDSumColorR);
+   janEditar->getObjectsList()->insertTextBar(60,77,123,93,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,97,60,113,0,"DSColorG");
+   janEditar->getObjectsList()->insertTextBox(3,97,60,113,0,"DSColorG");
    sprintf(aux, "%.3f", p->getCenterZ());
-   janEditar->objects->InserirBarraTexto(60,97,123,113,aux,0,&editedDSumColorG);
+   janEditar->getObjectsList()->insertTextBar(60,97,123,113,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,117,60,133,0,"DSColorB");
+   janEditar->getObjectsList()->insertTextBox(3,117,60,133,0,"DSColorB");
    sprintf(aux, "%.3f", p->getGravity());
-   janEditar->objects->InserirBarraTexto(60,117,123,133,aux,0,&editedDSumColorB);
+   janEditar->getObjectsList()->insertTextBar(60,117,123,133,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,137,60,153,0,"DMVelX");
+   janEditar->getObjectsList()->insertTextBox(3,137,60,153,0,"DMVelX");
    sprintf(aux, "%.3f", p->getInitR());
-   janEditar->objects->InserirBarraTexto(60,137,123,153,aux,0,&editedDMultVelX);
+   janEditar->getObjectsList()->insertTextBar(60,137,123,153,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,157,60,173,0,"DMVelY");
+   janEditar->getObjectsList()->insertTextBox(3,157,60,173,0,"DMVelY");
    sprintf(aux, "%.3f", p->getInitG());
-   janEditar->objects->InserirBarraTexto(60,157,123,173,aux,0,&editedDMultVelY);
+   janEditar->getObjectsList()->insertTextBar(60,157,123,173,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,177,60,193,0,"DMVelZ");
+   janEditar->getObjectsList()->insertTextBox(3,177,60,193,0,"DMVelZ");
    sprintf(aux, "%.3f", p->getInitB());
-   janEditar->objects->InserirBarraTexto(60,177,123,193,aux,0,&editedDMultVelZ);
+   janEditar->getObjectsList()->insertTextBar(60,177,123,193,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,197,60,213,0,"DSVelX");
+   janEditar->getObjectsList()->insertTextBox(3,197,60,213,0,"DSVelX");
    sprintf(aux, "%.3f", p->getFinalR());
-   janEditar->objects->InserirBarraTexto(60,197,123,213,aux,0,&editedDSumVelX);
+   janEditar->getObjectsList()->insertTextBar(60,197,123,213,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,217,60,233,0,"DSVelY");
+   janEditar->getObjectsList()->insertTextBox(3,217,60,233,0,"DSVelY");
    sprintf(aux, "%.3f", p->getFinalG());
-   janEditar->objects->InserirBarraTexto(60,217,123,233,aux,0,&editedDSumVelY);
+   janEditar->getObjectsList()->insertTextBar(60,217,123,233,aux,0);
 
-   janEditar->objects->InserirQuadroTexto(3,237,60,253,0,"DSVelZ");
+   janEditar->getObjectsList()->insertTextBox(3,237,60,253,0,"DSVelZ");
    sprintf(aux, "%.3f", p->getFinalB());
-   janEditar->objects->InserirBarraTexto(60,237,123,253,aux,0,&editedDSumVelZ);
+   janEditar->getObjectsList()->insertTextBar(60,237,123,253,aux,0);
 
-   janEditar->fechavel = 0;
    gui->openWindow(janEditar);
 
    float wx,wy;
-   double varX, varZ;
 
    double varTempo, segundos;
    double ultimaLeitura = 0;
-   Tobjeto* object = NULL;
+   guiObject* obj = NULL;
    
 
    while(!sair)
    {
 
       varTempo = (SDL_GetTicks() - ultimaLeitura);
-      if(varTempo >= 20)
+      if(varTempo >= ACTUALIZATION_RATE)
       {
          ultimaLeitura = SDL_GetTicks();
          segundos = varTempo / 1000.0;
@@ -1152,71 +1087,67 @@ int main(int argc, char **argv)
         // glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
         // gluUnProject(wx,wy,wz,modl,proj,viewPort, &xReal, &yReal, &zReal);
 
-         int eventInfo = NADA;
-         object = gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,&eventInfo);
-         if(eventInfo == NADA)
+         int eventInfo = NOTHING;
+         obj = gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,&eventInfo);
+         if(eventInfo == NOTHING)
          {
-            if(teclas[SDLK_UP] || teclas[SDLK_DOWN])
-            {
-               varX = 2.0 * sin(deg2Rad(phi));
-               varZ = 2.0 * cos(deg2Rad(phi));
-               if(teclas[SDLK_UP]) 
-               {
-                    varX *= -1;
-                    varZ *= -1;
-               }
-               centroX += varX;
-               centroZ += varZ;
-            }
-            if(teclas[SDLK_RIGHT] || teclas[SDLK_LEFT])
-            {
-               varX = 2.0 * sin(deg2Rad(phi)+deg2Rad(90));
-               varZ = 2.0 * cos(deg2Rad(phi)+deg2Rad(90));
-               if(teclas[SDLK_LEFT])
-               {
-                   varX *= -1;
-                   varZ *= -1;
-               }
-               centroX += varX;
-               centroZ += varZ;
-            }
-            if(teclas[SDLK_PAGEUP]) // Sobe com a camera ate visao de cima
-            {
-               theta += 1;
-               if(theta > 89) 
-                  theta = 89;
-            }
-            if(teclas[SDLK_PAGEDOWN]) // desce com a camera ate visao em 1ª pessoa
-            {
-               theta -= 1;
-               if(theta < 0)
-                  theta = 0;
-            }
-            if(teclas[SDLK_HOME])
-            {
-               d -= 1;
-               if (d<1) d = 1;
-            }
-            if(teclas[SDLK_END])
-            {
-               d += 1;
-               if (d>300) d = 300;
-            }
-            if(teclas[SDLK_PERIOD])
-            {
-               phi -= 1;
-            }
-            if(teclas[SDLK_COMMA])
-            {
-               phi += 1;
-            }
+            gameCamera->doIO(teclas, Mbotao, mouseX, mouseY, DELTA_CAMERA);
 
             if(teclas[SDLK_r])
             {
                deleteParticle();
                createParticle(entrada);
             }
-
+         }
+         else if(eventInfo == PRESSED_BUTTON)
+         {
+            if(obj == buttonExit)
+            {
+               sair = true;
+            }
+            else if(obj == buttonSave)
+            {
+               switch(tipo)
+               {
+                  case 1:
+                  { 
+                     p1->Save(bartSalvar->getText());
+                     break;
+                  }
+                  case 2:
+                  {
+                     p2->Save(bartSalvar->getText());
+                     break;
+                  }
+                  case 3:
+                  {
+                     p3->Save(bartSalvar->getText());
+                     break;
+                  }
+                  case 4:
+                  {
+                     p4->Save(bartSalvar->getText());
+                     break;
+                  }
+                  case 5:
+                  {
+                     p5->Save(bartSalvar->getText());
+                     break;
+                  }
+                  case 6:
+                  {
+                     p6->Save(bartSalvar->getText());
+                     break;
+                  }
+                  case 7:
+                  {
+                     p7->Save(bartSalvar->getText());
+                     break;
+                  }
+               }
+               printf("With a lot of hope, i've saved as: %s\n",
+                      bartSalvar->getText().c_str());
+            }
          }
 
          /* Draw */
@@ -1226,11 +1157,8 @@ int main(int argc, char **argv)
 
          glLoadIdentity();
          /* Redefine a posicao dinamica da camera */
-         cameraX = centroX+(float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
-         cameraY = centroY+(float) d * sin(deg2Rad(theta));
-         cameraZ = centroZ+(float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
-         gluLookAt(cameraX,cameraY,cameraZ, centroX,centroY,centroZ,0,1,0);
-         AtualizaFrustum(matrizVisivel,proj,modl);
+         gameCamera->lookAt(NULL);
+         updateFrustum(matrizVisivel,proj,modl);
  
          
          /* Part Draw */
@@ -1242,12 +1170,10 @@ int main(int argc, char **argv)
          glDisable(GL_LIGHTING);
          glDisable(GL_DEPTH_TEST);
          glDisable(GL_BLEND);
-/*         glDisable(GL_TEXTURE_2D);
-         glDisable(GL_BLEND);
-         glDisable(GL_COLOR_MATERIAL);*/
-         //glPushMatrix();
-           
+          
+         draw2DMode(); 
             gui->draw(proj,modl,viewPort);
+         draw3DMode(FARVIEW);
             
          //glPopMatrix();
 
@@ -1259,6 +1185,7 @@ int main(int argc, char **argv)
 
    }
 
+   delete(gameCamera);
    delete(gui);
 
    deleteParticle(); 
