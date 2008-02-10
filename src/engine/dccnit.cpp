@@ -3165,6 +3165,22 @@ bool engine::defineCharacterHeight(character* c, GLfloat nx, GLfloat nz)
  *********************************************************************/
 void engine::openMiniMapWindow()
 {
+
+   int winX=0, winY=0;
+
+   if( (SCREEN_X == 800) && (SCREEN_Y == 600) )
+   {
+      /* Align at side of Shortcuts */
+      winX = SCREEN_X-288;
+      winY = SCREEN_Y-128;
+   }
+   else
+   {
+      /* Align Up of Shortcuts */
+      winX = 0;
+      winY = SCREEN_Y-256;
+   }
+   
    character* activeCharacter = PCs->getActiveCharacter();
    GLint x = (int)(((activeCharacter->xPosition) / (actualMap->squareSize())));
    if(x > actualMap->getSizeX()-1)
@@ -3178,8 +3194,7 @@ void engine::openMiniMapWindow()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   miniMapWindow = gui->insertWindow(SCREEN_X-288,SCREEN_Y-128,
-                                     SCREEN_X-1,SCREEN_Y-1,
+   miniMapWindow = gui->insertWindow(winX, winY, winX+287, winY+127,
                                      gettext("Map"));
 
    botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,x+2,z+2,
