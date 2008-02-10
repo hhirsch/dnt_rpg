@@ -1670,7 +1670,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             Z[3] = bound.z1;
             rotTransBoundingBox(sobj->orientation, X, Z, sobj->x, 0.0, 
                                 0.0, sobj->z, minObj, maxObj);
-            if(intercepts( minObj, maxObj, minMouse, maxMouse, 1))
+            if(intercepts( minObj, maxObj, minMouse, maxMouse))
             {
                 cursors->setActual(CURSOR_GET);
                 if(shortCutsWindow)
@@ -1741,7 +1741,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          Z[3] = bound.z1;
          rotTransBoundingBox(porta->orientation, X, Z,porta->x, 
                              0.0,0.0,porta->z, minObj, maxObj);
-         if(intercepts( minObj, maxObj, minMouse, maxMouse, 1))
+         if(intercepts( minObj, maxObj, minMouse, maxMouse))
          {
             cursors->setActual(CURSOR_DOOR);
             if(shortCutsWindow)
@@ -1789,7 +1789,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          rotTransBoundingBox(pers->orientation, x, z,pers->xPosition,0.0, 0.0,
                              pers->zPosition, min, max );
 
-         if(intercepts( min, max, minMouse, maxMouse, 1))
+         if(intercepts( min, max, minMouse, maxMouse))
          {
             cursors->setActual(CURSOR_INVENTORY);
             if(shortCutsWindow)
@@ -1829,7 +1829,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                                 pers->xPosition, 0.0, 0.0, 
                                 pers->zPosition, min, max );
 
-            if(intercepts( min, max, minMouse, maxMouse, 1))
+            if(intercepts( min, max, minMouse, maxMouse))
             {
                if( engineMode == ENGINE_MODE_REAL_TIME )
                {
@@ -1922,7 +1922,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          minMouse[0] = xReal-2;  maxMouse[0] = xReal+2;
          minMouse[1] = 0.0;      maxMouse[1] = 0.0;
          minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
-         if( intercepts( minCon, maxCon, minMouse, maxMouse, 1 ) )
+         if( intercepts( minCon, maxCon, minMouse, maxMouse ) )
          {
             if(shortCutsWindow)
             {

@@ -40,8 +40,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
  *                Verify if two bounding boxes intercepts            *
  *********************************************************************/
 int intercepts(GLfloat min1[3], GLfloat max1[3],
-               GLfloat min2[3], GLfloat max2[3],
-               int inverso)
+               GLfloat min2[3], GLfloat max2[3])
 {
    for (int i=0; i<3; i++)
    {

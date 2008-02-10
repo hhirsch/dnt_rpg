@@ -60,7 +60,7 @@ bool potentAgent::defineNextPosition()
       dX = obstacles[aux].x - actualX;
       dZ = obstacles[aux].z - actualZ;
       
-      if(intercepts(min1, max1, min2, max2, 1))
+      if(intercepts(min1, max1, min2, max2))
       {
          fX += -kc*dX;
          fZ += -kc*dZ;

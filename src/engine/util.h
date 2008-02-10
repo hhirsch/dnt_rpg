@@ -131,12 +131,9 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
  * \param max1 -> max values of first bounding box
  * \param min2 -> min values of second bounding box
  * \param max2 -> max values of second bounding box
- * \param inverso -> OR verifies too if second bounding box is inner to one 
- * \return 1 if bounding 1 is inner to bounding 2. if inverso, return 1 if
- *     bounding 2 is inner to bounding 2 or bounding 2 is inner to bounding 1.*/
+ * \return 1 if bounding 1 collides with bounding 2. */
 int intercepts(GLfloat min1[3], GLfloat max1[3],
-               GLfloat min2[3], GLfloat max2[3],
-               int inverso);
+               GLfloat min2[3], GLfloat max2[3]);
 
 /*!
  * Rotate and translate to position the bounding box
