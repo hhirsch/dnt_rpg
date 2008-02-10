@@ -114,11 +114,11 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
    int sY = SCREEN_Y / 2;
    int ret = -1;
 
-   getWindow = gui->insertWindow(sX-med-10,sY-31,sX+med+10,sY+31, title.c_str());
+   getWindow=gui->insertWindow(sX-med-10,sY-31,sX+med+10,sY+31, title.c_str());
    opt1Button = getWindow->getObjectsList()->insertButton(med-80,37,med-10,55,
                                                  opt1.c_str(),1);
    opt2Button = getWindow->getObjectsList()->insertButton(med+10,37,med+80,55,
-                                                 opt2.c_str(),1);                  
+                                                 opt2.c_str(),1);
                                                  
    quadText = getWindow->getObjectsList()->insertTextBox(5,17,sizeX+10,33,0,
                                                       message.c_str());
@@ -204,7 +204,8 @@ void showMessage(string title, string message,
    int med = sizeX / 2;
 
    getWindow = gui->insertWindow(sX-med-10,sY-31,sX+med+10,sY+31,title.c_str());
-   okButton = getWindow->getObjectsList()->insertButton(med-28,37,med+28,55,
+   okButton = getWindow->getObjectsList()->insertButton(med-28+10,37,
+                                                        med+28+10,55,
                                                         "Ok",1);
    quadText = getWindow->getObjectsList()->insertTextBox(5,17,sizeX+10,33,0,
                                                       message.c_str());
