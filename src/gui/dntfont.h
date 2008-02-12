@@ -121,6 +121,13 @@ class dntFont
        * \return -> string with the unicode character begining with \\*/
       string createUnicode(Uint16 character);
 
+      /*! Get Next line of the string.
+       * \param source -> string to get line from
+       * \param lastLinePos -> last position read (at init = 0)
+       * \param maxWidth -> max width of the line
+       * \return -> the desired line got. */
+      string getNextLine(string source, int& lastLinePos, int maxWidth);
+
       /*! Copies lines from source, based on | dividers
        * \param source -> Source String
        * \param firstLine -> first line to be copied

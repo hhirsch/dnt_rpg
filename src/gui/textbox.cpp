@@ -18,6 +18,8 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType)
    fontAlign = DNT_FONT_ALIGN_LEFT;
    fontName = DNT_FONT_ARIAL;
    fontSize = 10;
+   fullText = NULL;
+   totalLines = 0;
 }
 
 /*******************************************************
@@ -25,14 +27,118 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType)
  *******************************************************/
 textBox::~textBox()
 {
+   clear();
 }
+
+/*******************************************************
+ *                        clear                        *
+ *******************************************************/
+void textBox::clear()
+{
+   int i;
+   textLine* tmp;
+   for(i = 0; i < totalLines; i++)
+   {
+      tmp = fullText;
+      fullText = fullText->next;
+      delete(tmp);
+   }
+   fullText = NULL;
+   totalLines = 0;
+}
+
+/*******************************************************
+ *                        setText                      *
+ *******************************************************/
+void textBox::setText(string txt)
+{
+   clear();
+   text = txt;
+   createLines(txt, fontName, fontSize, fontAlign, 
+               Colors.colorText.R, Colors.colorText.G,
+               Colors.colorText.B);
+}
+
+/*******************************************************
+ *                        addText                      *
+ *******************************************************/
+void textBox::addText(string txt, string font, int size,
+                      int align, int R, int G, int B)
+{
+   text += txt;
+   createLines(txt, font, size, align, R, G, B);
+}
+
+/*******************************************************
+ *                        addText                      *
+ *******************************************************/
+void textBox::addText(string txt, string font, int size,
+                      int align)
+{
+   addText(txt, font, size, align, 
+               Colors.colorText.R, Colors.colorText.G,
+               Colors.colorText.B);
+}
+
+/*******************************************************
+ *                        addText                      *
+ *******************************************************/
+void textBox::addText(string txt)
+{
+   addText(txt, fontName, fontSize, fontAlign, 
+               Colors.colorText.R, Colors.colorText.G,
+               Colors.colorText.B);
+}
+
+/*******************************************************
+ *                  lastDrawableLines                  *
+ *******************************************************/
+int textBox::lastDrawableLine(int firstLine)
+{
+   int i;
+   textLine* line;
+   int lastLine = 0;
+   int height = 0;
+
+   /* Get first text line */
+   line = fullText;
+   for(i = 0; i < firstLine; i++)
+   {
+      line = line->next;
+   }
+   
+   int y = y1+2;
+   /* Draw the text lines */
+   for(i = firstLine; ( (y+height < y2)) ; i++)
+   {
+      lastLine = i;
+      if( i < totalLines)
+      {
+         y += line->height;
+         height = line->height;
+      }
+      else
+      {
+         y+= height;
+      }
+      line = line->next;
+   }
+   return(lastLine);
+}
+
 
 /*******************************************************
  *                          draw                       *
  *******************************************************/
-void textBox::draw(SDL_Surface *screen)
+int textBox::draw(SDL_Surface *screen, int firstLine)
 {
+   int i;
+   textLine* line;
    dntFont fnt;
+   int lastLine = 0;
+   int height = 0;
+
+   /* Draw Background */
    if(framed)
    {
       if(framed == 1)
@@ -48,11 +154,46 @@ void textBox::draw(SDL_Surface *screen)
                        Colors.colorCont[1].R,Colors.colorCont[1].G,
                        Colors.colorCont[1].B);
    }
-   color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
-   fnt.defineFont(fontName, fontSize);
-   fnt.defineFontAlign(fontAlign);
-   fnt.write(screen, x1+2, y1+2, text.c_str(), x1+2, y1+2, x2, y2);
+
+   /* Get first text line */
+   line = fullText;
+   for(i = 0; i < firstLine; i++)
+   {
+      line = line->next;
+   }
+   
+   int y = y1+2;
+   /* Draw the text lines */
+   for(i = firstLine; 
+       ( (y+height < y2) && (i < totalLines) ) ; i++)
+   {
+      lastLine = i;
+      color_Set(line->R,line->G,line->B);
+      fnt.defineFont(line->fontName, line->fontSize);
+      fnt.defineFontAlign(line->fontAlign);
+      fnt.write(screen, x1+2, y, line->text, x1+2, y, x2, y2);
+      y += line->height;
+      height = line->height;
+      line = line->next;
+   }
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   return(lastLine);
+}
+
+/*******************************************************
+ *                          draw                       *
+ *******************************************************/
+int textBox::draw(SDL_Surface *screen)
+{
+   return(draw(screen, 0));
+}
+
+/*******************************************************
+ *                     getTotalLines                   *
+ *******************************************************/
+int textBox::getTotalLines()
+{
+   return(totalLines);
 }
 
 /*******************************************************
@@ -85,4 +226,52 @@ void textBox::setBackColor(int R, int G, int B)
    Colors.colorButton.B = B;
 }
 
+/*******************************************************
+ *                     insertLine                      *
+ *******************************************************/
+void textBox::insertLine(textLine* line)
+{
+   if(totalLines == 0)
+   {
+      line->next = line;
+      line->previous = line;
+      fullText = line;
+   }
+   else
+   {
+      line->next = fullText;
+      line->previous = fullText->previous;
+      line->next->previous = line;
+      line->previous->next = line;
+   }
+   totalLines++;
+}
+
+/*******************************************************
+ *                     createLines                     *
+ *******************************************************/
+void textBox::createLines(string txt, string font, int size,
+                          int align, int R, int G, int B)
+{
+   dntFont fnt;
+   fnt.defineFont(font, size);
+   fnt.defineFontAlign(align);
+
+   textLine* line = NULL;
+   int lastPos = 0;
+
+   while(lastPos < (int)txt.length())
+   {
+      line = new textLine();
+      line->R = R; 
+      line->G = G;
+      line->B = B;
+      line->fontName = font;
+      line->fontSize = size;
+      line->fontAlign = align;
+      line->text = fnt.getNextLine(txt, lastPos, x2-x1);
+      line->height = fnt.getHeight();
+      insertLine(line);
+   }
+}
 

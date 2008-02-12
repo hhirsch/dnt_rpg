@@ -40,11 +40,12 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    /* Race Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(6,18,277,35,1,
                                             gettext("Race Description"));
-   textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER);
+   textDescTitle->setFont(DNT_FONT_TIMES,18,DNT_FONT_ALIGN_CENTER);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,
               (actualRace->citation + "||" + actualRace->description).c_str(),
               intWindow->getSurface());
+   //textDesc->setFont("fnt/DejaVuSans.ttf",10,DNT_FONT_ALIGN_LEFT);
 
    /* Race Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(345,18,615,35,1,

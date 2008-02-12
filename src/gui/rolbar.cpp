@@ -7,7 +7,7 @@
 #include "guilist.h"
 #include "interface.h"
 
-#define UPDATE_RATE 50
+#define ROLBAR_UPDATE_RATE 50
 
 /*********************************************************************
  *                            Constructor                            *
@@ -15,7 +15,6 @@
 rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
                SDL_Surface* surface)
 {
-   dntFont fnt;
    wSurface = surface;
    lastUpdated = SDL_GetTicks();
    if(!list)
@@ -25,13 +24,13 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    }
    intList = list;
 
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
    type = GUI_ROL_BAR;
    x1 = xa;
    y1 = ya;
    x2 = xb;
    y2 = yb;
-   maxLines = ((yb-ya-2) / fnt.getHeight());
+   maxHeight = (yb-ya-2);
+   actualInit = 0;
 
    guiList* l = (guiList*)list;
 
@@ -40,9 +39,10 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    contorn = l->insertTextBox(xb-12, ya, xb, yb-24, 1, "");
    
    /* Buttons */
-   up = l->insertButton(xb-12,yb-23,xb,yb-12, fnt.createUnicode(0x25B2),0);
+   dntFont font;
+   up = l->insertButton(xb-12,yb-23,xb,yb-12, font.createUnicode(0x25B2),0);
    up->defineFont(DNT_FONT_ARIAL, 8);
-   down = l->insertButton(xb-12,yb-11,xb,yb, fnt.createUnicode(0x25BC),0);
+   down = l->insertButton(xb-12,yb-11,xb,yb, font.createUnicode(0x25BC),0);
    down->defineFont(DNT_FONT_ARIAL, 8);
 
    /* Text */
@@ -52,7 +52,7 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
 
    actualPressed = NULL;
 
-   setText(txt);
+   scrollText->setText(txt);
 
 }
 
@@ -68,9 +68,7 @@ rolBar::~rolBar()
  *********************************************************************/
 bool rolBar::eventGot(int type, guiObject* object)
 {
-   dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
-   if((SDL_GetTicks() - lastUpdated) >= UPDATE_RATE)
+   if((SDL_GetTicks() - lastUpdated) >= ROLBAR_UPDATE_RATE)
    {
       lastUpdated = SDL_GetTicks();
       if(type == ON_PRESS_BUTTON)
@@ -80,28 +78,18 @@ bool rolBar::eventGot(int type, guiObject* object)
             if(actualInit > 0)
             {
                actualInit -= 1;
-               actualEnd = actualInit + maxLines -1;
             }
-            
-            scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd,
-                                              x1+2,x2-13));
             actualPressed = up;
             return(true);
          }
          else if(object == (guiObject*)down)
          {
-            if(actualEnd < totalLines)
+            actualInit += 1;
+            if(scrollText->lastDrawableLine(actualInit) >= 
+               scrollText->getTotalLines())
             {
-               actualEnd += 1;
-               actualInit = (actualEnd - maxLines) +1;
-               if(actualInit < 0)
-               {
-                  actualInit = 0;
-               }
+               actualInit--;
             }
-
-            scrollText->setText(fnt.copyLines(fullText, actualInit,actualEnd,
-                                              x1+2,x2-13));
             actualPressed = down;
             return(true);
          }
@@ -120,19 +108,17 @@ bool rolBar::eventGot(int type, guiObject* object)
 void rolBar::redraw()
 {
    contorn->draw(wSurface);
-   if(maxLines <= totalLines)
-   {
-      position->setCoordinate(position->getX1(), 
+   int end = scrollText->draw(wSurface, actualInit);
+
+   position->setCoordinate(position->getX1(), 
                               (int) ((y1+2) + ((float)actualInit/
-                                               (float)totalLines)*
+                                     (float)scrollText->getTotalLines())*
                                     (y2-28-y1)),
                               position->getX2(),
-                              (int) ((y1+2) + ((float)(actualEnd)/
-                                               (float)totalLines)*
+                              (int) ((y1+2) + ((float)(end+1)/
+                                     (float)scrollText->getTotalLines())*
                                     (y2-28-y1)));
-   }
-   position->draw(wSurface);   
-   scrollText->draw(wSurface);
+   position->draw(wSurface);
 
    /* Mantain the draw of button pressed */
    if(actualPressed)
@@ -146,29 +132,9 @@ void rolBar::redraw()
  *********************************************************************/
 void rolBar::setText(string txt)
 {
-   dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
-   fullText = txt;
-   totalLines = fnt.getTotalLines(fullText,x1+2,x2-13);
+   scrollText->setText(txt);
    actualInit = 0;
-   actualEnd = maxLines - 1;
-   if(maxLines <= totalLines)
-   {
-      position->setCoordinate(position->getX1(), 
-                              (int) ((y1+2) + ((float)actualInit/
-                                               (float)totalLines)*
-                                    (y2-28-y1)),
-                              position->getX2(),
-                              (int) ((y1+2) + ((float)(actualEnd)/
-                                               (float)totalLines)*
-                                    (y2-28-y1)));
-   }
-   else
-   {
-      position->setCoordinate(position->getX1(), y1+2,
-                              position->getX2(), y2-26);
-   }
-   scrollText->setText(fnt.copyLines(fullText,actualInit,actualEnd,x1+2,x2-13));
+   redraw();
 }
 
 /*********************************************************************
@@ -176,20 +142,8 @@ void rolBar::setText(string txt)
  *********************************************************************/
 void rolBar::addText(string txt)
 {
-   dntFont fnt;
-   fnt.defineFont(DNT_FONT_ARIAL, 10);
-   /* Add Text */
-   fullText += txt;
-   /* Set the new scrollText */
-   setText(fullText);
-   /* Put the rolling bar to the end */
-   actualEnd = totalLines+1;
-   actualInit = (actualEnd - maxLines) +1;
-   if(actualInit < 0)
-   {
-      actualInit = 0;
-   }
-   scrollText->setText(fnt.copyLines(fullText,actualInit,actualEnd,x1+2,x2-13));
+   scrollText->addText(txt);
+   actualInit = scrollText->getTotalLines();
    redraw();
 }
 

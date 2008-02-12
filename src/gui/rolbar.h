@@ -16,6 +16,9 @@ using namespace std;
 #include "button.h"
 #include "textbox.h"
 
+/* /todo TODO -> support for different font sizes type and colors
+ * trought text! */
+
 /*! Rolling Text Bar Definition */
 class rolBar: public guiObject
 {
@@ -50,8 +53,6 @@ class rolBar: public guiObject
       /*! Redraw the bar when scrolling text */
       void redraw();
 
-      /*! Get the actual init of text displayed
-       * \return actualInit */
       int getActualInit(){return(actualInit);};
 
    private:
@@ -63,12 +64,10 @@ class rolBar: public guiObject
       textBox* contorn;        /**< Contorn of the Scroll */
       textBox* position;       /**< Contorn Text Position */
 
-      string fullText;        /**< Full Text of the rolBar */
-      int    actualInit,      /**< Actual Initial Line of the Text */
-             actualEnd;       /**< Actual End Line of The Text */
       Uint32 lastUpdated;     /**< Last Time when updated */
-      int maxLines;           /**< Max Number of Visible Text Lines */
-      int totalLines;         /**< Total Full Text Lines */
+      int maxHeight;          /**< Max Height */
+      int actualInit;
+      int actualEnd;
       void* intList;          /**< Internal GUI Objects List */
 };
 

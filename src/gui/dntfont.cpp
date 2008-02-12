@@ -600,6 +600,93 @@ string unicodeToString(Uint16* unicode, int size)
 }
 
 /***********************************************************************
+ *                            getNextLine                              *
+ ***********************************************************************/
+string dntFont::getNextLine(string source, int& lastLinePos,
+                            int maxWidth)
+{
+   string result = "";
+   Uint16* unicodeText;
+   int w, uni = 0;
+   int last = -1, lastSpace = -1;
+   int lastRealSpacePos = -1;
+   bool lineGot = false;
+
+   /* Verify if avaible */
+   if(!activeFont)
+   {
+      return("");
+   }
+
+   /* Convert to unicode, if needed */
+   unicodeText = convertToUnicode(curUnicode, source.c_str(), source.length());
+
+   int aux;
+   for(aux=lastLinePos; 
+       ( (aux < (int)source.length()) && (!lineGot) ); aux++)
+   {
+      if(unicodeText[aux] != '|')
+      {
+         if(unicodeText[aux] == ' ')
+         {
+            lastSpace = uni;
+            lastRealSpacePos = aux;
+         }
+         strLine[uni] = unicodeText[aux];
+         strLine[uni+1] = 0;
+         uni++;
+         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
+         if(w >= maxWidth)
+         {
+            /* So, if the width is bigger, write the string without 
+             * the characters after the last space, or without the last 
+             * character */
+            if(lastSpace != -1)
+            {
+               lastLinePos = lastRealSpacePos+1;
+               last = uni;
+               strLine[lastSpace] = 0;
+               result += unicodeToString(strLine, lastSpace);
+            }
+            else
+            {
+               lastLinePos = aux;
+               /* Ignore the last character */
+               strLine[uni] = 0;
+               result += unicodeToString(strLine, uni);
+            }
+            lineGot = true;
+
+            lastSpace = -1;
+         }
+         
+      }
+      else
+      {
+         TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
+         /* | breaks a line */
+
+         result += unicodeToString(strLine, uni);
+         /* Jump the | */
+         lastLinePos = aux+1;
+         lineGot = true;
+         uni = 0;
+         //strLine[uni] = 0;
+      }
+   }
+
+   if( (!lineGot) && (uni != 0))
+   {
+      TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
+      result += unicodeToString(strLine, uni);
+      lastLinePos = aux;
+   }
+
+
+   return(result);
+}
+
+/***********************************************************************
  *                             copyLines                               *
  ***********************************************************************/
 string dntFont::copyLines(string source, int firstLine, int lastLine, 
@@ -624,7 +711,7 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
    /* Convert to unicode, if needed */
    unicodeText = convertToUnicode(curUnicode, source.c_str(), source.length());
 
-   for(aux=0;( (aux <= (int)source.length()) && (line <= lastLine));aux++)
+   for(aux=0;( (aux < (int)source.length()) && (line <= lastLine));aux++)
    {
       if(unicodeText[aux] != '|')
       {

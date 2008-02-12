@@ -256,6 +256,7 @@ void window::drawInactiveBar()
    rectangle_Fill(surface,36,3,dx-3,12);
    color_Set(0,0,0);
    fnt.defineFont(DNT_FONT_ARIAL,10);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.write(surface,39,1,text);
 }
 
@@ -270,6 +271,7 @@ void window::drawActiveBar()
    rectangle_Fill(surface,36,3,dx-3,12);
    color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
    fnt.defineFont(DNT_FONT_ARIAL,10);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.write(surface,39,1,text);
 }
 
