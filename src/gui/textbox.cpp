@@ -20,6 +20,7 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType)
    fontSize = 10;
    fullText = NULL;
    totalLines = 0;
+   firstLine = 0;
 }
 
 /*******************************************************
@@ -93,7 +94,7 @@ void textBox::addText(string txt)
 /*******************************************************
  *                  lastDrawableLines                  *
  *******************************************************/
-int textBox::lastDrawableLine(int firstLine)
+int textBox::lastDrawableLine()
 {
    int i;
    textLine* line;
@@ -130,7 +131,7 @@ int textBox::lastDrawableLine(int firstLine)
 /*******************************************************
  *                          draw                       *
  *******************************************************/
-int textBox::draw(SDL_Surface *screen, int firstLine)
+int textBox::draw(SDL_Surface *screen)
 {
    int i;
    textLine* line;
@@ -181,20 +182,29 @@ int textBox::draw(SDL_Surface *screen, int firstLine)
 }
 
 /*******************************************************
- *                          draw                       *
- *******************************************************/
-int textBox::draw(SDL_Surface *screen)
-{
-   return(draw(screen, 0));
-}
-
-/*******************************************************
  *                     getTotalLines                   *
  *******************************************************/
 int textBox::getTotalLines()
 {
    return(totalLines);
 }
+
+/*******************************************************
+ *                      getFirstLine                   *
+ *******************************************************/
+int textBox::getFirstLine()
+{
+   return(firstLine);
+}
+
+/*******************************************************
+ *                      setFirstLine                   *
+ *******************************************************/
+void textBox::setFirstLine(int line)
+{
+   firstLine = line;
+}
+
 
 /*******************************************************
  *                        setFont                      *

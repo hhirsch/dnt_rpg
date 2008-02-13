@@ -30,7 +30,6 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    x2 = xb;
    y2 = yb;
    maxHeight = (yb-ya-2);
-   actualInit = 0;
 
    guiList* l = (guiList*)list;
 
@@ -75,20 +74,19 @@ bool rolBar::eventGot(int type, guiObject* object)
       {
          if(object == (guiObject*)up)
          {
-            if(actualInit > 0)
+            if(scrollText->getFirstLine() > 0)
             {
-               actualInit -= 1;
+               scrollText->setFirstLine(scrollText->getFirstLine() - 1);
             }
             actualPressed = up;
             return(true);
          }
          else if(object == (guiObject*)down)
          {
-            actualInit += 1;
-            if(scrollText->lastDrawableLine(actualInit) >= 
-               scrollText->getTotalLines())
+            scrollText->setFirstLine(scrollText->getFirstLine() + 1);
+            if(scrollText->lastDrawableLine() >= scrollText->getTotalLines())
             {
-               actualInit--;
+               scrollText->setFirstLine(scrollText->getFirstLine() - 1);
             }
             actualPressed = down;
             return(true);
@@ -107,8 +105,10 @@ bool rolBar::eventGot(int type, guiObject* object)
  *********************************************************************/
 void rolBar::redraw()
 {
+   int actualInit = scrollText->getFirstLine();
+
    contorn->draw(wSurface);
-   int end = scrollText->draw(wSurface, actualInit);
+   int end = scrollText->draw(wSurface);
 
    position->setCoordinate(position->getX1(), 
                               (int) ((y1+2) + ((float)actualInit/
@@ -133,7 +133,7 @@ void rolBar::redraw()
 void rolBar::setText(string txt)
 {
    scrollText->setText(txt);
-   actualInit = 0;
+   scrollText->setFirstLine(0);
    redraw();
 }
 
@@ -143,7 +143,7 @@ void rolBar::setText(string txt)
 void rolBar::addText(string txt)
 {
    scrollText->addText(txt);
-   actualInit = scrollText->getTotalLines();
+   scrollText->setFirstLine(scrollText->getTotalLines());
    redraw();
 }
 

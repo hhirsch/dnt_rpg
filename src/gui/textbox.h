@@ -50,15 +50,9 @@ class textBox: public guiObject
 
       /*! Draw in the Surface the text bar
        * \param screen -> surface where will draw
-       * \param firstLine -> firstLine to draw
-       * \return -> number of the last writed line */
-      int draw(SDL_Surface *screen, int firstLine);
-      
-      /*! Draw in the Surface the text bar
-       * \param screen -> surface where will draw
        * \return -> number of the last writed line */
       int draw(SDL_Surface *screen);
-
+      
       /*! Define the Font
        * \param name -> font file name
        * \param align -> font aligment
@@ -81,7 +75,11 @@ class textBox: public guiObject
        * \param txt -> new text */
       void setText(string txt);
 
-      int lastDrawableLine(int firstLine);
+      int lastDrawableLine();
+
+      void setFirstLine(int line);
+
+      int getFirstLine();
 
       /*! Add the string to the textBox
        * \param txt -> text screen to add */
@@ -108,6 +106,7 @@ class textBox: public guiObject
       
       textLine* fullText;  /**< The full text */
       int totalLines;      /**< Total Text Lines */
+      int firstLine;       /**< Actual Init Line Draw */
 
       int framed;          /**< Type of the frame. 0 for none */
       string fontName;     /**< Font FileName */

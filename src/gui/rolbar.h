@@ -53,7 +53,7 @@ class rolBar: public guiObject
       /*! Redraw the bar when scrolling text */
       void redraw();
 
-      int getActualInit(){return(actualInit);};
+      int getActualInit(){return(scrollText->getFirstLine());};
 
    private:
       SDL_Surface* wSurface;   /**< Window Surface */
@@ -66,8 +66,7 @@ class rolBar: public guiObject
 
       Uint32 lastUpdated;     /**< Last Time when updated */
       int maxHeight;          /**< Max Height */
-      int actualInit;
-      int actualEnd;
+      
       void* intList;          /**< Internal GUI Objects List */
 };
 
