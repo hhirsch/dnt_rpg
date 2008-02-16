@@ -96,6 +96,7 @@ void textBox::addText(string txt)
  *******************************************************/
 int textBox::lastDrawableLine()
 {
+   printf("firstLine: %d\n", firstLine);
    int i;
    textLine* line;
    int lastLine = 0;
@@ -105,24 +106,25 @@ int textBox::lastDrawableLine()
    line = fullText;
    for(i = 0; i < firstLine; i++)
    {
+      height = line->height;
       line = line->next;
    }
    
    int y = y1+2;
    /* Draw the text lines */
-   for(i = firstLine; ( (y+height < y2)) ; i++)
+   for(i = firstLine; ( (y+height) < y2) ; i++)
    {
       lastLine = i;
       if( i < totalLines)
       {
          y += line->height;
          height = line->height;
+         line = line->next;
       }
       else
       {
          y+= height;
       }
-      line = line->next;
    }
    return(lastLine);
 }
