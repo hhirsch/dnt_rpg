@@ -64,7 +64,8 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
                                              fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(22,346,599,364,1, 
                                                   actualRace->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER);
+   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
+                     DNT_FONT_STYLE_BOLD);
 
    intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
 
@@ -90,7 +91,7 @@ void raceWindow::setDescription()
    textDesc->setText("");
    textDesc->addText(actualRace->citation + "||", DNT_FONT_ARIAL,
                      10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
-                     255,255,255);
+                     66,4,13);
    textDesc->addText(actualRace->description);
    textDesc->setFirstLine(0);
 }
@@ -113,7 +114,10 @@ void raceWindow::setCharacteristics()
 
    if(actualRace->totalModifiers == 0)
    {
-      textCharac->addText(string(gettext("No Modifiers.")) + "||");
+      textCharac->addText(string(gettext("No Modifiers.")) + "||",
+                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          DNT_FONT_STYLE_NORMAL,
+                          27, 20, 99);
    }
 
    textCharac->addText(string(gettext("Race Feats")) + "||",
@@ -128,12 +132,18 @@ void raceWindow::setCharacteristics()
 
    if(actualRace->totalFeats == 0)
    {
-      textCharac->addText(string(gettext("No Feats.")) + "|");
+      textCharac->addText(string(gettext("No Feats.")) + "|",
+                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          DNT_FONT_STYLE_NORMAL,
+                          27, 20, 99);
    }
 
    /* Race Skills */
    skill* skTmp;
-   textCharac->addText(string("|") + string(gettext("Race Skills")) + "||");
+   textCharac->addText(string("|") + string(gettext("Race Skills")) + "||",
+                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       33, 65, 10);
    for(i=0; i<actualRace->totalSkills; i++)
    {
       skTmp = externalSkills->getSkillByString(actualRace->raceSkills[i]);
@@ -149,7 +159,10 @@ void raceWindow::setCharacteristics()
 
    if(actualRace->totalSkills == 0)
    {
-      textCharac->addText(gettext("No Skills."));
+      textCharac->addText(gettext("No Skills."),
+                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          DNT_FONT_STYLE_NORMAL,
+                          27, 20, 99);
    }
 
    textCharac->setFirstLine(0);
