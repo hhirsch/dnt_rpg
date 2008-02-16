@@ -40,7 +40,8 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    /* Race Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(6,18,277,35,1,
                                             gettext("Race Description"));
-   textDescTitle->setFont(DNT_FONT_TIMES,18,DNT_FONT_ALIGN_CENTER);
+   textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
+                          DNT_FONT_STYLE_BOLD);
    
    textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,"",
                                                        intWindow->getSurface());
@@ -49,7 +50,8 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    /* Race Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(345,18,615,35,1,
                                        gettext("Race Characteristcs"));
-   textCharacTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER);
+   textCharacTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
+                            DNT_FONT_STYLE_BOLD);
 
    textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,"",
                                               intWindow->getSurface());
@@ -99,7 +101,6 @@ void raceWindow::setDescription()
 void raceWindow::setCharacteristics()
 {
    int i;
-   //char mod[5];
    textCharac->setText("");
    textCharac->addText(string(gettext("Race Modifiers")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
@@ -115,8 +116,10 @@ void raceWindow::setCharacteristics()
       textCharac->addText(string(gettext("No Modifiers.")) + "||");
    }
 
-   //TODO get race Name
-   textCharac->addText(string(gettext("Race Feats")) + "||");
+   textCharac->addText(string(gettext("Race Feats")) + "||",
+                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       33, 65, 10);
 
    for(i=0; i<actualRace->totalFeats; i++)
    {

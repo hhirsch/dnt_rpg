@@ -213,10 +213,7 @@ void textBox::setFirstLine(int line)
  *******************************************************/
 void textBox::setFont(string name, int size, int align)
 {
-   fontName = name;
-   fontAlign = align;
-   fontSize = size;
-   fontStyle = DNT_FONT_STYLE_NORMAL;
+   setFont(name, size, align, DNT_FONT_STYLE_NORMAL);
 }
 
 /*******************************************************
@@ -228,6 +225,18 @@ void textBox::setFont(string name, int size, int align, int style)
    fontAlign = align;
    fontSize = size;
    fontStyle = style;
+
+   /* Change all current Lines */
+   int i;
+   textLine* line = fullText;
+   for(i = 0; i < totalLines; i++)
+   {
+      line->fontName = fontName;
+      line->fontAlign = fontAlign;
+      line->fontSize = fontSize;
+      line->fontStyle = fontStyle;
+      line = line->next;
+   }
 }
 
 /*******************************************************

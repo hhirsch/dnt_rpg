@@ -81,6 +81,7 @@ void button::draw(bool pres, SDL_Surface* screen )
    }
    font.defineFont(fontName, fontSize);
    font.defineFontAlign(DNT_FONT_ALIGN_CENTER);
+   font.defineFontStyle(DNT_FONT_STYLE_NORMAL);
 
    //xa = ((xa+x2) /2);
    
@@ -101,7 +102,6 @@ void button::draw(bool pres, SDL_Surface* screen )
    {
       font.write(screen,xa,ya+3,getText().c_str(),xa,y1,x2,y2);
    }
-   font.defineFontAlign(DNT_FONT_ALIGN_LEFT);
 }
 
 /***********************************************************
