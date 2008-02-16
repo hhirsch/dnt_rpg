@@ -180,7 +180,6 @@ int textBox::draw(SDL_Surface *screen)
       height = line->height;
       line = line->next;
    }
-   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    return(lastLine);
 }
 
@@ -296,7 +295,7 @@ void textBox::createLines(string txt, string font, int size,
       line->fontSize = size;
       line->fontAlign = align;
       line->fontStyle = style;
-      line->text = fnt.getNextLine(txt, lastPos, x2-x1);
+      line->text = fnt.getNextLine(txt, lastPos, x2-x1-2);
       line->height = fnt.getHeight();
       insertLine(line);
    }

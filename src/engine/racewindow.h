@@ -57,7 +57,9 @@ class raceWindow
       picture* nextRaceImage;
       picture* next2RaceImage;*/
 
-      string getCharacteristics();
+      void setCharacteristics();
+
+      void setDescription();
 
 };
 

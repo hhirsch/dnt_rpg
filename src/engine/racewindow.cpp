@@ -42,19 +42,18 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
                                             gettext("Race Description"));
    textDescTitle->setFont(DNT_FONT_TIMES,18,DNT_FONT_ALIGN_CENTER);
    
-   textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,
-              (actualRace->citation + "||" + actualRace->description).c_str(),
-              intWindow->getSurface());
-   //textDesc->setFont("fnt/DejaVuSans.ttf",10,DNT_FONT_ALIGN_LEFT);
+   textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,"",
+                                                       intWindow->getSurface());
+   setDescription();
 
    /* Race Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(345,18,615,35,1,
                                        gettext("Race Characteristcs"));
    textCharacTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER);
 
-   textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,
-                                              getCharacteristics().c_str(),
+   textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,"",
                                               intWindow->getSurface());
+   setCharacteristics();
 
    /* Name and Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(6,346,21,364,
@@ -82,57 +81,75 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
 }
 
 /********************************************************************
- *                       getCharacteristics                         *
+ *                         setDescription                           *
  ********************************************************************/
-string raceWindow::getCharacteristics()
+void raceWindow::setDescription()
+{
+   textDesc->setText("");
+   textDesc->addText(actualRace->citation + "||", DNT_FONT_ARIAL,
+                     10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                     255,255,255);
+   textDesc->addText(actualRace->description);
+   textDesc->setFirstLine(0);
+}
+
+/********************************************************************
+ *                       setCharacteristics                         *
+ ********************************************************************/
+void raceWindow::setCharacteristics()
 {
    int i;
    //char mod[5];
-   string text = gettext("Race Modifiers||");
+   textCharac->setText("");
+   textCharac->addText(string(gettext("Race Modifiers")) + "||",
+                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       33, 65, 10);
    for(i=0; i<actualRace->totalModifiers; i++)
    {
-      text += actualRace->raceModifiers[i].description + "||";
+      textCharac->addText(actualRace->raceModifiers[i].description + "||");
    }
 
    if(actualRace->totalModifiers == 0)
    {
-      text += gettext("No Modifiers.||");
+      textCharac->addText(string(gettext("No Modifiers.")) + "||");
    }
 
    //TODO get race Name
-   text += gettext("Race Feats||");
+   textCharac->addText(string(gettext("Race Feats")) + "||");
+
    for(i=0; i<actualRace->totalFeats; i++)
    {
-      text += actualRace->raceFeats[i] + "|";
+      textCharac->addText(actualRace->raceFeats[i] + "|");
    }
 
    if(actualRace->totalFeats == 0)
    {
-      text += gettext("No Feats.|");
+      textCharac->addText(string(gettext("No Feats.")) + "|");
    }
 
    /* Race Skills */
    skill* skTmp;
-   text += gettext("|Race Skills||");
+   textCharac->addText(string("|") + string(gettext("Race Skills")) + "||");
    for(i=0; i<actualRace->totalSkills; i++)
    {
       skTmp = externalSkills->getSkillByString(actualRace->raceSkills[i]);
       if(skTmp)
       {
-         text += skTmp->name + "|";
+         textCharac->addText(skTmp->name + "|");
       }
       else
       {
-         text += actualRace->raceSkills[i] + "|";
+         textCharac->addText(actualRace->raceSkills[i] + "|");
       }
    }
 
    if(actualRace->totalSkills == 0)
    {
-      text += gettext("No Skills.");
+      textCharac->addText(gettext("No Skills."));
    }
 
-   return(text);
+   textCharac->setFirstLine(0);
 }
 
 /********************************************************************
@@ -155,13 +172,8 @@ int raceWindow::treat(guiObject* object, int eventInfo,
             actualRace = actualRace->previous;
          }
          textName->setText(actualRace->name);
-         textDesc->setText("");
-         textDesc->addText(actualRace->citation + "||", DNT_FONT_SANS,
-                           12, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
-                           255,255,255);
-         textDesc->addText(actualRace->description);
-         textDesc->setFirstLine(0);
-         textCharac->setText(getCharacteristics());
+         setDescription();
+         setCharacteristics();
          raceImage->set(actualRace->image);
          intWindow->draw(0,0);
       }
