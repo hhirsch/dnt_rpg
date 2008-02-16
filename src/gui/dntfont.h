@@ -146,24 +146,6 @@ class dntFont
 
    protected:
 
-      /*! Copies lines from source, based on | dividers
-       * \param source -> Source String
-       * \param firstLine -> first line to be copied
-       * \param lastLine -> last line to be copied
-       * \param x1 -> first X coordinate
-       * \param x2 -> last X coordinate
-       * \return -> copied string */
-      string copyLines(string source, int firstLine, int lastLine, 
-                       int x1, int x2);
-
-      /*! Count total lines of the source, based on | dividers
-       * \param source -> Source String
-       * \param x1 -> first X coordinate
-       * \param x2 -> last X coordinate
-       * \return total lines of the source string */
-      int getTotalLines(string source, int x1, int x2);
-
-
       /*! Load a font to the list, if it not already there
        * \param fontName -> file name of the font to load
        * \param fontSize -> size of the font to load
