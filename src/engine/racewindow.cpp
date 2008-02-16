@@ -155,8 +155,12 @@ int raceWindow::treat(guiObject* object, int eventInfo,
             actualRace = actualRace->previous;
          }
          textName->setText(actualRace->name);
-         textDesc->setText(actualRace->citation + "||" +
-                           actualRace->description);
+         textDesc->setText("");
+         textDesc->addText(actualRace->citation + "||", DNT_FONT_SANS,
+                           12, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                           255,255,255);
+         textDesc->addText(actualRace->description);
+         textDesc->setFirstLine(0);
          textCharac->setText(getCharacteristics());
          raceImage->set(actualRace->image);
          intWindow->draw(0,0);

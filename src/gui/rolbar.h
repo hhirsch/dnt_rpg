@@ -50,6 +50,37 @@ class rolBar: public guiObject
        * \param txt -> text to add*/
       void addText(string txt);
 
+      /*! Add the string to the rolBar
+       * \param txt -> text screen to add
+       * \param font -> font file to use
+       * \param size -> size of the font to use
+       * \param align -> alignment of the font to use
+       * \param style -> style of the font to use  */
+      void addText(string txt, string font, int size, int style,
+                   int align);
+
+      /*! Add the string to the rolBar
+       * \param txt -> text screen to add
+       * \param font -> font file to use
+       * \param size -> size of the font to use
+       * \param align -> alignment of the font to use
+       * \param style -> style of the font to use
+       * \param R -> red color of the font
+       * \param G -> green color of the font
+       * \param B -> blue color of the font */
+      void addText(string txt, string font, int size, int style,
+                   int align, int R, int G, int B);
+
+      /*! Set the first displayed line of the rolBar
+       * \param line -> line number (from 0 to totalLines) */
+      void setFirstLine(int line);
+
+      /*! Get the current first displayed line on the rolBar
+       * \return -> first displayed line */
+      int getFirstLine();
+
+
+
       /*! Redraw the bar when scrolling text */
       void redraw();
 

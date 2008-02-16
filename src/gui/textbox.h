@@ -24,6 +24,7 @@ class textLine
       string fontName;     /**< Name of the Font Used */
       int fontSize;        /**< Size of the font */
       int fontAlign;       /**< Align of the font */
+      int fontStyle;       /**< Style of the font */
       int height;          /**< Height of the line */
 
       textLine* next;      /**< Next line */
@@ -59,6 +60,13 @@ class textBox: public guiObject
        * \param size -> font size */
       void setFont(string name, int size, int align);
 
+      /*! Define the Font
+       * \param name -> font file name
+       * \param align -> font aligment
+       * \param size -> font size
+       * \param style -> style constant */
+      void setFont(string name, int size, int align, int style);
+
       /*! Set the text color
        * \param R -> red color
        * \param G -> green color
@@ -75,21 +83,43 @@ class textBox: public guiObject
        * \param txt -> new text */
       void setText(string txt);
 
+      /*! Get the number of the last drawable line
+       * \return -> number of the potentially last drawable line
+       * \note -> potentially, since it may not really exists. */
       int lastDrawableLine();
 
+      /*! Set the first displayed line of the textBox
+       * \param line -> line number (from 0 to totalLines) */
       void setFirstLine(int line);
 
+      /*! Get the current first displayed line on the textBox
+       * \return -> first displayed line */
       int getFirstLine();
 
       /*! Add the string to the textBox
        * \param txt -> text screen to add */
       void addText(string txt);
 
+      /*! Add the string to the textBox
+       * \param txt -> text screen to add
+       * \param font -> font file to use
+       * \param size -> size of the font to use
+       * \param align -> alignment of the font to use
+       * \param style -> style of the font to use  */
       void addText(string txt, string font, int size,
-                   int align);
+                   int align, int style);
 
+      /*! Add the string to the textBox
+       * \param txt -> text screen to add
+       * \param font -> font file to use
+       * \param size -> size of the font to use
+       * \param align -> alignment of the font to use
+       * \param style -> style of the font to use
+       * \param R -> red color of the font
+       * \param G -> green color of the font
+       * \param B -> blue color of the font */
       void addText(string txt, string font, int size,
-                   int align, int R, int G, int B);
+                   int align, int style, int R, int G, int B);
    private:
 
       /*! Clear the lines list */
@@ -98,7 +128,7 @@ class textBox: public guiObject
       /*! Create the text lines
        * \param txt -> string base to create the lines */
       void createLines(string txt, string font, int size,
-                       int align, int R, int G, int B);
+                       int align, int style, int R, int G, int B);
 
       /*! Insert textLine to the list
        * \param line -> line to insert to the list */
@@ -112,6 +142,7 @@ class textBox: public guiObject
       string fontName;     /**< Font FileName */
       int fontAlign;       /**< Font Align */
       int fontSize;        /**< Font Size */
+      int fontStyle;       /**< Font Style */
       farso_colors Colors; /**< Colors */
 };
 

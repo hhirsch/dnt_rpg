@@ -17,6 +17,7 @@ textBox::textBox(int xa, int ya, int xb, int yb, int frameType)
    framed = frameType;
    fontAlign = DNT_FONT_ALIGN_LEFT;
    fontName = DNT_FONT_ARIAL;
+   fontStyle = DNT_FONT_STYLE_NORMAL;
    fontSize = 10;
    fullText = NULL;
    totalLines = 0;
@@ -55,7 +56,7 @@ void textBox::setText(string txt)
 {
    clear();
    text = txt;
-   createLines(txt, fontName, fontSize, fontAlign, 
+   createLines(txt, fontName, fontSize, fontAlign, fontStyle,
                Colors.colorText.R, Colors.colorText.G,
                Colors.colorText.B);
 }
@@ -64,19 +65,19 @@ void textBox::setText(string txt)
  *                        addText                      *
  *******************************************************/
 void textBox::addText(string txt, string font, int size,
-                      int align, int R, int G, int B)
+                      int align, int style, int R, int G, int B)
 {
    text += txt;
-   createLines(txt, font, size, align, R, G, B);
+   createLines(txt, font, size, align, style, R, G, B);
 }
 
 /*******************************************************
  *                        addText                      *
  *******************************************************/
 void textBox::addText(string txt, string font, int size,
-                      int align)
+                      int align, int style)
 {
-   addText(txt, font, size, align, 
+   addText(txt, font, size, align, style,
                Colors.colorText.R, Colors.colorText.G,
                Colors.colorText.B);
 }
@@ -86,7 +87,7 @@ void textBox::addText(string txt, string font, int size,
  *******************************************************/
 void textBox::addText(string txt)
 {
-   addText(txt, fontName, fontSize, fontAlign, 
+   addText(txt, fontName, fontSize, fontAlign, fontStyle, 
                Colors.colorText.R, Colors.colorText.G,
                Colors.colorText.B);
 }
@@ -173,6 +174,7 @@ int textBox::draw(SDL_Surface *screen)
       color_Set(line->R,line->G,line->B);
       fnt.defineFont(line->fontName, line->fontSize);
       fnt.defineFontAlign(line->fontAlign);
+      fnt.defineFontStyle(line->fontStyle);
       fnt.write(screen, x1+2, y, line->text, x1+2, y, x2, y2);
       y += line->height;
       height = line->height;
@@ -215,6 +217,18 @@ void textBox::setFont(string name, int size, int align)
    fontName = name;
    fontAlign = align;
    fontSize = size;
+   fontStyle = DNT_FONT_STYLE_NORMAL;
+}
+
+/*******************************************************
+ *                        setFont                      *
+ *******************************************************/
+void textBox::setFont(string name, int size, int align, int style)
+{
+   fontName = name;
+   fontAlign = align;
+   fontSize = size;
+   fontStyle = style;
 }
 
 /*******************************************************
@@ -262,11 +276,12 @@ void textBox::insertLine(textLine* line)
  *                     createLines                     *
  *******************************************************/
 void textBox::createLines(string txt, string font, int size,
-                          int align, int R, int G, int B)
+                          int align, int style, int R, int G, int B)
 {
    dntFont fnt;
    fnt.defineFont(font, size);
    fnt.defineFontAlign(align);
+   fnt.defineFontStyle(style);
 
    textLine* line = NULL;
    int lastPos = 0;
@@ -280,6 +295,7 @@ void textBox::createLines(string txt, string font, int size,
       line->fontName = font;
       line->fontSize = size;
       line->fontAlign = align;
+      line->fontStyle = style;
       line->text = fnt.getNextLine(txt, lastPos, x2-x1);
       line->height = fnt.getHeight();
       insertLine(line);

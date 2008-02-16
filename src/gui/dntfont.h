@@ -9,9 +9,16 @@ using namespace std;
 #define DNT_FONT_ARIAL     "fnt/arial.ttf"
 #define DNT_FONT_TIMES     "fnt/times.ttf"
 #define DNT_FONT_COURRIER  "fnt/courrier.ttf"
+#define DNT_FONT_SANS      "fnt/DejaVuSans.ttf"
+#define DNT_FONT_SHEER     "fnt/sheer.ttf"
 
 #define DNT_FONT_ALIGN_LEFT    0
 #define DNT_FONT_ALIGN_CENTER  1
+
+#define DNT_FONT_STYLE_NORMAL TTF_STYLE_NORMAL
+#define DNT_FONT_STYLE_BOLD   TTF_STYLE_BOLD
+#define DNT_FONT_STYLE_ITALIC TTF_STYLE_ITALIC
+#define DNT_FONT_STYLE_UNDERLINE TTF_STYLE_UNDERLINE
 
 #define MAX_TEXT  8192
 
@@ -49,6 +56,10 @@ class dntFont
       /*! Define the font align
        * \param align -> the new font align */
       void defineFontAlign(int align);
+
+      /*! Define the current font style (normal, bold or italic)
+       * \param style -> font style constant (and combinations) */
+      void defineFontStyle(int style);
 
       /*! Get the max width of the font (in a "gambiarra")  */
       int getIncCP();
@@ -128,6 +139,13 @@ class dntFont
        * \return -> the desired line got. */
       string getNextLine(string source, int& lastLinePos, int maxWidth);
 
+      
+      Uint16* convertToUnicode(Uint16 *unicode, const char *text, int len);
+
+      Uint16* copyUnicode(Uint16 *uni, int len);
+
+   protected:
+
       /*! Copies lines from source, based on | dividers
        * \param source -> Source String
        * \param firstLine -> first line to be copied
@@ -145,11 +163,6 @@ class dntFont
        * \return total lines of the source string */
       int getTotalLines(string source, int x1, int x2);
 
-      Uint16* convertToUnicode(Uint16 *unicode, const char *text, int len);
-
-      Uint16* copyUnicode(Uint16 *uni, int len);
-
-   protected:
 
       /*! Load a font to the list, if it not already there
        * \param fontName -> file name of the font to load
@@ -167,6 +180,7 @@ class dntFont
       static loadedFont* fontsList;  /**< The active Font List */
       static int totalFonts;         /**< Total Opened fonts on list */
       static int activeFontAlign;    /**< The active font alignment */
+      static int activeFontStyle;    /**< The active Font Style */
       static loadedFont* activeFont; /**< The active font */
 
       Uint16 curUnicode[MAX_TEXT];

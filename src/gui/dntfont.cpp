@@ -19,6 +19,7 @@ void dntFont::init()
     totalFonts = 0;
     activeFont = NULL;
     activeFontAlign = DNT_FONT_ALIGN_LEFT;
+    activeFontStyle = DNT_FONT_STYLE_NORMAL;
     defineFont(DNT_FONT_ARIAL,12);
 }
 
@@ -135,6 +136,15 @@ void dntFont::defineFontAlign(int align)
    activeFontAlign = align;
 }
 
+/**********************************************************************
+ *                          defineFontStyle                           *
+ **********************************************************************/
+void dntFont::defineFontStyle(int style)
+{
+   activeFontStyle = style;
+}
+
+
 /***********************************************************************
  *                               write                                 *
  ***********************************************************************/
@@ -160,6 +170,15 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    {
       return(-1);
    }
+   else
+   {
+      if(TTF_GetFontStyle(activeFont->font) != activeFontStyle)
+      {
+         TTF_SetFontStyle(activeFont->font, activeFontStyle);
+      }
+   }
+
+   //TTF_SetFontStyle(activeFont->font, TTF_STYLE_UNDERLINE );
 
    /* Convert to unicode, if needed */
    unicodeText = convertToUnicode(curUnicode, text.c_str(), text.length());
@@ -535,6 +554,13 @@ int dntFont::getTotalLines(string source, int x1, int x2)
    {
       return(0);
    }
+   else
+   {
+      if(TTF_GetFontStyle(activeFont->font) != activeFontStyle)
+      {
+         TTF_SetFontStyle(activeFont->font, activeFontStyle);
+      }
+   } 
 
    for(i=0; (i < size) ; i++)
    {
@@ -617,6 +643,15 @@ string dntFont::getNextLine(string source, int& lastLinePos,
    {
       return("");
    }
+   else
+   {
+      if(TTF_GetFontStyle(activeFont->font) != activeFontStyle)
+      {
+         TTF_SetFontStyle(activeFont->font, activeFontStyle);
+      }
+   }    
+
+
 
    /* Convert to unicode, if needed */
    unicodeText = convertToUnicode(curUnicode, source.c_str(), source.length());
@@ -707,6 +742,13 @@ string dntFont::copyLines(string source, int firstLine, int lastLine,
    {
       return("");
    }
+   else
+   {
+      if(TTF_GetFontStyle(activeFont->font) != activeFontStyle)
+      {
+         TTF_SetFontStyle(activeFont->font, activeFontStyle);
+      }
+   } 
 
    /* Convert to unicode, if needed */
    unicodeText = convertToUnicode(curUnicode, source.c_str(), source.length());
@@ -802,4 +844,5 @@ loadedFont*  dntFont::activeFont;
 loadedFont*  dntFont::fontsList;
 int          dntFont::totalFonts;
 int          dntFont::activeFontAlign;
+int          dntFont::activeFontStyle;
 
