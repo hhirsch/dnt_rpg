@@ -42,20 +42,23 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    /* Class Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(74,18,345,35,1,
                                            gettext("Class Description"));
-   textDescTitle->setFont(DNT_FONT_TIMES, 12, DNT_FONT_ALIGN_CENTER);
+   textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
+                          DNT_FONT_STYLE_BOLD);
    
-   textDesc = intWindow->getObjectsList()->insertRolBar(74,36,345,345,
-             (actualClass->citation + "||" + actualClass->description).c_str(),
-             intWindow->getSurface());
+   textDesc = intWindow->getObjectsList()->insertRolBar(74,36,345,345,"",
+                                                       intWindow->getSurface());
 
-   /* Race Characteristics */
+   setDescription();
+   
+   /* Class Characteristics */
    textCharacTitle = intWindow->getObjectsList()->insertTextBox(346,18,615,35,1,
                                        gettext("Class Characteristics"));
-   textCharacTitle->setFont(DNT_FONT_TIMES, 12, DNT_FONT_ALIGN_CENTER);
+   textCharacTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
+                            DNT_FONT_STYLE_BOLD);
 
-   textCharac = intWindow->getObjectsList()->insertRolBar(346,36,615,345,
-                                              getCharacteristics().c_str(),
-                                              intWindow->getSurface());
+   textCharac = intWindow->getObjectsList()->insertRolBar(346,36,615,345,"",
+                                                       intWindow->getSurface());
+   setCharacteristics();
 
    /* Name and Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(74,346,89,364,
@@ -64,7 +67,8 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
                                                   fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(90,346,599,364,1, 
                                                   actualClass->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER);
+   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
+                     DNT_FONT_STYLE_BOLD);
 
    intWindow->getObjectsList()->insertTextBox(6,365,615,394,2,"");
 
@@ -83,20 +87,28 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
 }
 
 /********************************************************************
- *                       getCharacteristics                         *
+ *                       setCharacteristics                         *
  ********************************************************************/
-string classWindow::getCharacteristics()
+void classWindow::setCharacteristics()
 {
    int i;
    char tmp[1024];
    char c;
    skill* skTmp;
    sprintf(tmp,": d%d||",actualClass->lifeDiceID);
-   string text = gettext("Life Dice");
-   text += tmp;
 
-   text += gettext("Skill Points|");
 
+   textCharac->setText("|");
+   textCharac->addText(string(gettext("Life Dice")) + tmp, DNT_FONT_ARIAL,
+                       10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                       66,4,13);
+
+   textCharac->addText(string(gettext("Skill Points")) + "||",
+                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       33, 65, 10);
+
+   /* Skill Points for First Level */
    if(actualClass->firstLevelSP.signal == SIGNAL_DEC)
    {
       c = '-';
@@ -108,18 +120,21 @@ string classWindow::getCharacteristics()
    skTmp = externalSkills->getSkillByString(actualClass->firstLevelSP.attID);
    if(skTmp)
    {
-      sprintf(tmp,": ( %d %c %s)x%d|",actualClass->firstLevelSP.sum, 
+      sprintf(tmp,": ( %d %c %s) x %d|",actualClass->firstLevelSP.sum, 
               c, skTmp->name.c_str(), 
               actualClass->firstLevelSP.mult);
    }
    else
    {
-      sprintf(tmp,": ( %d %c %s)x%d|",actualClass->firstLevelSP.sum, 
+      sprintf(tmp,": ( %d %c %s) x %d|",actualClass->firstLevelSP.sum, 
               c, actualClass->firstLevelSP.attID.c_str(), 
               actualClass->firstLevelSP.mult);
    }
-   text += gettext("First Level");
-   text += tmp;
+   textCharac->addText(string(gettext("First Level")) + tmp, DNT_FONT_ARIAL,
+                       10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                       66,4,13);
+
+   /* Other Levels Points */
    if(actualClass->otherLevelsSP.signal == SIGNAL_DEC)
    {
       c = '-';
@@ -131,65 +146,99 @@ string classWindow::getCharacteristics()
    skTmp = externalSkills->getSkillByString(actualClass->otherLevelsSP.attID);
    if(skTmp)
    {
-      sprintf(tmp,": ( %d %c %s)x%d||",
+      sprintf(tmp,": ( %d %c %s) x %d||",
               actualClass->otherLevelsSP.sum,
               c, skTmp->name.c_str(), 
               actualClass->otherLevelsSP.mult);
    }
    else
    {
-      sprintf(tmp,": ( %d %c %s)x%d||",
+      sprintf(tmp,": ( %d %c %s) x %d||",
               actualClass->otherLevelsSP.sum,
               c, actualClass->otherLevelsSP.attID.c_str(), 
               actualClass->otherLevelsSP.mult);
    }
-   text += gettext("Other Levels");
-   text += tmp;
-   text += gettext("Class Modifiers||");
+   textCharac->addText(string(gettext("Other Levels")) + tmp, DNT_FONT_ARIAL,
+                       10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                       66,4,13);
+
+   /* Modifiers */
+   textCharac->addText(string(gettext("Class Modifiers")) + "||", 
+                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       33, 65, 10);
    for(i=0; i<actualClass->totalModifiers; i++)
    {
-      text += actualClass->classModifiers[i].description + "||";
+      textCharac->addText(actualClass->classModifiers[i].description + "||");
    }
 
    if(actualClass->totalModifiers == 0)
    {
-      text += gettext("No Modifiers||");
+      textCharac->addText(string(gettext("No Modifiers")) + "||",
+                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          DNT_FONT_STYLE_NORMAL,
+                          27, 20, 99);
    }
 
    //TODO get Feat Name
-   text += gettext("Class Feats||");
+   textCharac->addText(string(gettext("Class Feats")) + "||",
+                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       33, 65, 10);
    for(i=0; i<actualClass->totalFeats; i++)
    {
-      text += actualClass->classFeats[i] + "|";
+      textCharac->addText(actualClass->classFeats[i] + "|");
    }
 
    if(actualClass->totalFeats == 0)
    {
-      text += gettext("No Feats.|");
+      textCharac->addText(string(gettext("No Feats.")) + "||",
+                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          DNT_FONT_STYLE_NORMAL,
+                          27, 20, 99);
    }
 
-   //Print Skills
-   text += "|";
-   text += gettext("Class Skills||");
+   /* Skills */
+   textCharac->addText("|");
+   textCharac->addText(string(gettext("Class Skills")) + "||",
+                       DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
+                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       33, 65, 10);
    for(i=0; i<actualClass->totalSkills; i++)
    {
       skTmp = externalSkills->getSkillByString(actualClass->classSkills[i]);
       if(skTmp != NULL)
       {
-         text += skTmp->name + "|";
+         textCharac->addText(skTmp->name + "|");
       }
       else
       {
-         text += actualClass->classSkills[i] + "|";
+         textCharac->addText(actualClass->classSkills[i] + "|");
       }
    }
 
    if(actualClass->totalSkills == 0)
    {
-      text += gettext("No Skills.");
+      textCharac->addText(gettext("No Skills."), 
+                          DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                          DNT_FONT_STYLE_NORMAL,
+                          27, 20, 99);
    }
 
-   return(text);
+   textCharac->setFirstLine(0);
+}
+
+/********************************************************************
+ *                         setDescription                           *
+ ********************************************************************/
+void classWindow::setDescription()
+{
+   textDesc->setText("");
+   textDesc->addText(actualClass->citation + "||", DNT_FONT_ARIAL,
+                     10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
+                     66,4,13);
+   textDesc->addText(actualClass->description);
+   textDesc->setFirstLine(0);
 }
 
 /********************************************************************
@@ -211,9 +260,8 @@ int classWindow::treat(guiObject* object, int eventInfo, interface* inter)
             actualClass = actualClass->previous;
          }
          textName->setText(actualClass->name);
-         textDesc->setText(actualClass->citation + "||" +
-                           actualClass->description);
-         textCharac->setText(getCharacteristics());
+         setDescription();
+         setCharacteristics();
          classImage->set(actualClass->image);
          intWindow->draw(0,0);
       }

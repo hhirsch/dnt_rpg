@@ -54,7 +54,10 @@ class classWindow
 
       picture* classImage;
 
-      string getCharacteristics();
+      /*! Draw the characteritics */
+      void setCharacteristics();
+      /*! Draw the descriptions */
+      void setDescription();
 
 };
 
