@@ -96,7 +96,6 @@ void textBox::addText(string txt)
  *******************************************************/
 int textBox::lastDrawableLine()
 {
-   printf("firstLine: %d\n", firstLine);
    int i;
    textLine* line;
    int lastLine = 0;
