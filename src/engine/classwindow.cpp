@@ -174,7 +174,7 @@ void classWindow::setCharacteristics()
 
    if(actualClass->totalModifiers == 0)
    {
-      textCharac->addText(string(gettext("No Modifiers")) + "||",
+      textCharac->addText(string(gettext("No Modifiers.")) + "||",
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
                           27, 20, 99);
