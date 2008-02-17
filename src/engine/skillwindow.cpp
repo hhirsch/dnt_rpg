@@ -81,7 +81,9 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
    saux = tmp;
    txtPoints = intWindow->getObjectsList()->insertTextBox(111,198,133,216,1,
                                                    saux.c_str());
-   txtPoints->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   txtPoints->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER,
+                      DNT_FONT_STYLE_NORMAL);
+   txtPoints->setColor(255,255,255);
    buttonSum = intWindow->getObjectsList()->insertButton(134,198,144,216,
                                             fnt.createUnicode(0x25BA),0);
    buttonSum->defineFont(DNT_FONT_ARIAL, 9);
@@ -232,17 +234,11 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
    if( saveSkill->m_skills[curSkill].points > 
        saveSkill->m_skills[curSkill].prevPoints )
    {
-      /*txtPoints->Cores.corTexto.R = 13;
-      txtPoints->Cores.corTexto.G = 250;
-      txtPoints->Cores.corTexto.B = 85; */
+      txtPoints->setColor(13, 250, 85);
    }
    else
    {
-      /*
-      txtPoints->Cores.corTexto.R = 255;
-      txtPoints->Cores.corTexto.G = 255;
-      txtPoints->Cores.corTexto.B = 255;
-      */
+      txtPoints->setColor(255,255,255);
    }
    
    intWindow->draw(0,0);

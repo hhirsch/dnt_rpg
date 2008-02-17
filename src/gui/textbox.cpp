@@ -247,6 +247,17 @@ void textBox::setColor(int R, int G, int B)
    Colors.colorText.R = R;
    Colors.colorText.G = G;
    Colors.colorText.B = B;
+
+   /* Change all current Lines */
+   int i;
+   textLine* line = fullText;
+   for(i = 0; i < totalLines; i++)
+   {
+      line->R = R;
+      line->G = G;
+      line->B = B;
+      line = line->next;
+   }
 }
 
 /*******************************************************
