@@ -40,6 +40,8 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
 {
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL,12);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
 
    color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,
                Colors.colorCont[2].B);
@@ -99,6 +101,8 @@ void textBar::defineCursorPosition(int mouseX, int mouseY)
 {
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL,12);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    string s = text.substr(init,end);
 
    string saux = "";

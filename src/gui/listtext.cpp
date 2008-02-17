@@ -122,8 +122,9 @@ void listText::insertText(string text)
       first->previous = tel;
       tel->previous->next = tel;
    }
-   roll->addText(text+"|");
+   roll->addText(text);
    totalElements++;
+   roll->setFirstLine(0);
 }
 
 /**************************************************************
