@@ -105,7 +105,7 @@ void raceWindow::setCharacteristics()
    textCharac->setText("");
    textCharac->addText(string(gettext("Race Modifiers")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
    for(i=0; i<actualRace->totalModifiers; i++)
    {
@@ -122,7 +122,7 @@ void raceWindow::setCharacteristics()
 
    textCharac->addText(string(gettext("Race Feats")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
 
    for(i=0; i<actualRace->totalFeats; i++)
@@ -142,7 +142,7 @@ void raceWindow::setCharacteristics()
    skill* skTmp;
    textCharac->addText(string("|") + string(gettext("Race Skills")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
    for(i=0; i<actualRace->totalSkills; i++)
    {

@@ -235,7 +235,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    
    /* Open Attribute Window */
    intWindow->setExternPointer(&intWindow);
-   intWindow->setAttributes(false,false,false,false);
+   intWindow->setAttributes(false,true,false,false);
    inter->openWindow(intWindow);
 }
 
@@ -247,7 +247,7 @@ void attWindow::setDescription()
    textDesc->setText("");
    textDesc->addText(externalSkill->m_skills[1].name + "||", 
                      DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
-                     DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                     DNT_FONT_STYLE_UNDERLINE,
                      33, 65, 10);
    textDesc->addText(externalSkill->m_skills[1].description);
    textDesc->setFirstLine(0);

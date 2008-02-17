@@ -67,7 +67,8 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
                                               fnt.createUnicode(0x25BA),0);
    skillName = intWindow->getObjectsList()->insertTextBox(67,175,233,193,1,
                                 externalSkill->m_skills[curSkill].name.c_str());
-   skillName->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   skillName->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER,
+                      DNT_FONT_STYLE_BOLD);
 
    /* Skill Image */
    skFig = intWindow->getObjectsList()->insertPicture(13,175,0,0,NULL);

@@ -82,7 +82,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
 
    /* Open Class Window */
    intWindow->setExternPointer(&intWindow);
-   intWindow->setAttributes(false,false,false,false);
+   intWindow->setAttributes(false,true,false,false);
    inter->openWindow(intWindow);
 }
 
@@ -105,7 +105,7 @@ void classWindow::setCharacteristics()
 
    textCharac->addText(string(gettext("Skill Points")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
 
    /* Skill Points for First Level */
@@ -165,7 +165,7 @@ void classWindow::setCharacteristics()
    /* Modifiers */
    textCharac->addText(string(gettext("Class Modifiers")) + "||", 
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
    for(i=0; i<actualClass->totalModifiers; i++)
    {
@@ -183,7 +183,7 @@ void classWindow::setCharacteristics()
    //TODO get Feat Name
    textCharac->addText(string(gettext("Class Feats")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
    for(i=0; i<actualClass->totalFeats; i++)
    {
@@ -202,7 +202,7 @@ void classWindow::setCharacteristics()
    textCharac->addText("|");
    textCharac->addText(string(gettext("Class Skills")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
-                       DNT_FONT_STYLE_BOLD | DNT_FONT_STYLE_UNDERLINE,
+                       DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
    for(i=0; i<actualClass->totalSkills; i++)
    {
