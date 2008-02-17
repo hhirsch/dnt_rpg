@@ -192,7 +192,11 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
       if(isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan,
                    y+altura+Yjan-3, mouseX, mouseY)) 
       {
-          actualItem = ((mouseY - (y+Yjan)-4) / 11) + 1;
+         actualItem = ((mouseY - (y+Yjan)-4) / 11) + 1;
+         if(actualItem < 0)
+         {
+            actualItem = 0;
+         }
       }
       /* Verify Mouse Button */
       if(Mbotao & SDL_BUTTON(1))
