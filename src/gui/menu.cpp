@@ -86,6 +86,8 @@ void menu::draw(int pos, SDL_Surface *screen)
 {
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL, 10);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
 
    /* Define Coordinates */
    int x1 = x;
@@ -109,8 +111,8 @@ void menu::draw(int pos, SDL_Surface *screen)
    color_Set(Colors.colorMenu.R,Colors.colorMenu.G,Colors.colorMenu.B);
    rectangle_Fill(screen,x1+1,y1+1,x2-1,y2-1);
    color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,Colors.colorCont[2].B);
-   rectangle_Oval(screen,x1,y1,x2,y2,Colors.colorCont[1].R,Colors.colorCont[1].G,
-                  Colors.colorCont[1].B);
+   rectangle_Oval(screen,x1,y1,x2,y2,Colors.colorCont[1].R,
+                  Colors.colorCont[1].G, Colors.colorCont[1].B);
    
       /*itens*/  
    int xa = x1+4;

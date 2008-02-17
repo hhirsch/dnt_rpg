@@ -80,7 +80,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    buttonCancel = intWindow->getObjectsList()->insertButton(10,370,80,389,
                                                gettext("Cancel"),1);
 
-   /* Open Skill Window */
+   /* Open Class Window */
    intWindow->setExternPointer(&intWindow);
    intWindow->setAttributes(false,false,false,false);
    inter->openWindow(intWindow);

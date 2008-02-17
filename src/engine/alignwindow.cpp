@@ -38,8 +38,12 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
 
    /* Align Description */
    textDesc = intWindow->getObjectsList()->insertRolBar(5,38,262,180, 
-                                            actualAlign->description.c_str(),
-                                            intWindow->getSurface());
+                                                        "",
+                                                     intWindow->getSurface());
+   textDesc->addText(actualAlign->description.c_str(),
+                     DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                     DNT_FONT_STYLE_NORMAL, 33, 65, 10); 
+   textDesc->setFirstLine(0);
       
    /* Name and Selectors */
    buttonPrevious = intWindow->getObjectsList()->insertButton(5,19,19,37,
@@ -48,7 +52,8 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
                                                  fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(20,19,247,37,1, 
                                                   actualAlign->name.c_str());
-   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER);
+   textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
+                     DNT_FONT_STYLE_BOLD);
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(188,229,258,248, 
@@ -90,7 +95,11 @@ int alignWindow::treat(guiObject* object, int eventInfo, interface* inter)
             actualAlign = actualAlign->previous;
          }
          textName->setText(actualAlign->name);
-         textDesc->setText(actualAlign->description);
+         textDesc->setText("");
+         textDesc->addText(actualAlign->description.c_str(),
+                     DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
+                     DNT_FONT_STYLE_NORMAL, 33, 65, 10);
+         textDesc->setFirstLine(0);
          alignImage->set(actualAlign->image);
          intWindow->draw(0,0);
       }

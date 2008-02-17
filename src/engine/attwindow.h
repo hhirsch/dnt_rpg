@@ -63,6 +63,9 @@ class attWindow
       button* buttonConfirm;       /**< Confirm Button */
       button* buttonCancel;        /**< Cancel Button */
 
+      /*! Set the description text */
+      void setDescription();
+
       /*! Roll one Att Dices */
       int rollDices();
       /*! Roll All Att Dices */
