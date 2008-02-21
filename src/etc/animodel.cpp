@@ -5,6 +5,7 @@
 #include "animodel.h"
 #include "../engine/util.h"
 #include "dirs.h"
+#include "overlaps.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_opengl.h>
@@ -495,22 +496,18 @@ void aniModel::render()
         glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &shininess);
 
         // get the transformed vertices of the submesh
-        static float meshVertices[30000][3];
         int vertexCount;
         vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
 
         // get the transformed normals of the submesh
-        static float meshNormals[30000][3];
         pCalRenderer->getNormals(&meshNormals[0][0]);
 
         // get the texture coordinates of the submesh
-        static float meshTextureCoordinates[30000][2];
         int textureCoordinateCount;
         textureCoordinateCount = pCalRenderer->getTextureCoordinates(0,
                                          &meshTextureCoordinates[0][0]);
 
         // get the faces of the submesh
-        static CalIndex meshFaces[50000][3];
         int faceCount;
         faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
 
@@ -611,16 +608,13 @@ void aniModel::renderShadow()
       {
         
         // get the transformed vertices of the submesh
-        static float meshVertices[30000][3];
         int vertexCount;
         vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
 
         // get the transformed normals of the submesh
-        static float meshNormals[30000][3];
         pCalRenderer->getNormals(&meshNormals[0][0]);
 
         // get the faces of the submesh
-        static CalIndex meshFaces[50000][3];
         int faceCount;
         faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
 
@@ -702,69 +696,307 @@ void aniModel::update(GLfloat pos)
 bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
                               GLfloat colMin[3],GLfloat colMax[3])
 {
-  /* Calculate the sin and cos of the angle */
-  float angleSin = sin(deg2Rad(angle));
-  float angleCos = cos(deg2Rad(angle));
+   /* Calculate the sin and cos of the angle */
+   float angleSin = sin(deg2Rad(angle));
+   float angleCos = cos(deg2Rad(angle));
 
-  /* get the renderer of the model */
-  CalRenderer *pCalRenderer;
-  pCalRenderer = m_calModel->getRenderer();
+   GLushort* facesShort = NULL;
+   GLuint* facesInt = NULL;
 
-  /* get the number of meshes */
-  int meshCount;
-  meshCount = pCalRenderer->getMeshCount();
+   /* get the renderer of the model */
+   CalRenderer *pCalRenderer;
+   pCalRenderer = m_calModel->getRenderer();
 
-  /* verify all meshes of the model */
-  int meshId;
-  for(meshId = 0; meshId < meshCount; meshId++)
-  {
-    /* get the number of submeshes */
-    int submeshCount;
-    submeshCount = pCalRenderer->getSubmeshCount(meshId);
+   /* get the number of meshes */
+   int meshCount;
+   meshCount = pCalRenderer->getMeshCount();
 
-    /* verify all submeshes of the mesh */
-    int submeshId;
-    for(submeshId = 0; submeshId < submeshCount; submeshId++)
-    {
-      /* select mesh and submesh for further data access */
-      if(pCalRenderer->selectMeshSubmesh(meshId, submeshId))
+   /* verify all meshes of the model */
+   int meshId;
+   for(meshId = 0; meshId < meshCount; meshId++)
+   {
+      /* get the number of submeshes */
+      int submeshCount;
+      submeshCount = pCalRenderer->getSubmeshCount(meshId);
+
+      /* verify all submeshes of the mesh */
+      int submeshId;
+      for(submeshId = 0; submeshId < submeshCount; submeshId++)
       {
-        
-        /* get the transformed vertices of the submesh */
-        static float meshVertices[30000][3];
-        int vertexCount;
-        vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
+         /* select mesh and submesh for further data access */
+         if(pCalRenderer->selectMeshSubmesh(meshId, submeshId))
+         {
+            /* get the transformed vertices of the submesh */
+            int vertexCount;
+            vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
 
-        int v;
-        float x,y,z;
-
-        /* NOTE: Do not forget that if the blender coordinate system is
-         * (x,y,z), the DNT system is (-x,z,y) */
-
-        /* Verify, finally, all vertices of the model */
-        for(v = 0; v < vertexCount; v++)
-        {
-            /* Rotate and translate the point */
-            x = pX + ( (-meshVertices[v][0])*angleCos) + 
-                     ( (meshVertices[v][1])*angleSin);
-            y = pY + meshVertices[v][2]; /* Since no angle */
-            z = pZ + ( (-meshVertices[v][0]*angleSin)) +
-                     ( (meshVertices[v][1]*angleCos));
-
-            /* Verify interception */
-            if( (x >= colMin[0]) && (x <= colMax[0]) &&
-                (y >= colMin[1]) && (y <= colMax[1]) &&
-                (z >= colMin[2]) && (z <= colMax[2]) )
+            /* get faces */
+            int faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
+         
+            /* Transform faces pointer to the desired one */
+            if(sizeof(CalIndex)==2)
             {
-               /* If is in, the colision is true. */
-               return(true);
+               facesShort = (GLushort*)(void*)&meshFaces[0][0];
             }
-        }
-      }
-    }
-  }
+            else
+            {
+               facesInt = (GLuint*)(void*)&meshFaces[0][0];
+            }
 
-  /* If got here, the collision is false */
+            /* Verify each model face with each bounding box face */
+            int f;
+            float V0[3], V1[3], V2[3];
+            float U0[3], U1[3], U2[3];
+            int index0=0, index1=0, index2=0;
+            for(f = 0; f < faceCount*3; f+=3)
+            {
+
+               /* Define Triangle Vertex index */
+               if(sizeof(CalIndex)==2)
+               {
+                  index0 = facesShort[f];
+                  index1 = facesShort[f+1];
+                  index2 = facesShort[f+2];
+               }
+               else
+               {
+                  index0 = facesInt[f];
+                  index1 = facesInt[f+1];
+                  index2 = facesInt[f+2];
+               }
+
+               /* Translate and rotate the coordinates.
+                * NOTE: Do not forget that if the blender coordinate system is
+                * (x,y,z), the DNT system is (-x,z,y) */
+               V0[0] = pX+((-meshVertices[index0][0])*angleCos*m_renderScale) +
+                          ((meshVertices[index0][1])*angleSin*m_renderScale);
+               V0[1] = pY + meshVertices[index0][2]*m_renderScale;
+               V0[2] = pZ+((-meshVertices[index0][0]*angleSin*m_renderScale)) +
+                          ((meshVertices[index0][1]*angleCos*m_renderScale));
+
+               V1[0] = pX+((-meshVertices[index1][0])*angleCos*m_renderScale) +
+                          ((meshVertices[index1][1])*angleSin*m_renderScale);
+               V1[1] = pY + meshVertices[index1][2]*m_renderScale;
+               V1[2] = pZ+((-meshVertices[index1][0]*angleSin*m_renderScale)) +
+                          ((meshVertices[index1][1]*angleCos*m_renderScale));
+
+               V2[0] = pX+((-meshVertices[index2][0])*angleCos*m_renderScale) +
+                          ((meshVertices[index2][1])*angleSin*m_renderScale);
+               V2[1] = pY + meshVertices[index2][2]*m_renderScale;
+               V2[2] = pZ+((-meshVertices[index2][0]*angleSin*m_renderScale)) +
+                          ((meshVertices[index2][1]*angleCos*m_renderScale));
+
+               /* Bounding Box Faces */
+
+               /* Upper Face A */
+               U0[0] = colMin[0];
+               U0[1] = colMax[1];   
+               U0[2] = colMin[2];
+               
+               U1[0] = colMax[0];
+               U1[1] = colMax[1];
+               U1[2] = colMin[2];
+
+               U2[0] = colMin[0];
+               U2[1] = colMax[1];
+               U2[2] = colMax[2];
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Upper Face A! */
+                  return(true);
+               }
+
+               /* Upper Face B */
+               U0[0] = colMax[0];
+               U0[1] = colMax[1];
+               U0[2] = colMax[2];
+               //U1 = same as upper face A
+               //U2 = same as upper face A
+               
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Upper Face B! */
+                  return(true);
+               }
+
+               /* Lower Face A */
+               U0[0] = colMin[0];
+               U0[1] = colMin[1];   
+               U0[2] = colMin[2];
+               
+               U1[0] = colMax[0];
+               U1[1] = colMin[1];
+               U1[2] = colMin[2];
+
+               U2[0] = colMin[0];
+               U2[1] = colMin[1];
+               U2[2] = colMax[2];
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Lower Face A! */
+                  return(true);
+               }
+
+               /* Lower Face B */
+               U0[0] = colMax[0];
+               U0[1] = colMin[1];
+               U0[2] = colMax[2];
+               //U1 = same as lower face A
+               //U2 = same as lower face A
+               
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Lower Face B! */
+                  return(true);
+               }
+
+               
+               /* Left Face A */
+               U0[0] = colMin[0];
+               U0[1] = colMin[1];   
+               U0[2] = colMin[2];
+               
+               U1[0] = colMin[0];
+               U1[1] = colMin[1];
+               U1[2] = colMax[2];
+
+               U2[0] = colMin[0];
+               U2[1] = colMax[1];
+               U2[2] = colMin[2];
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Left Face A! */  
+                  return(true);
+               }
+
+               /* Left Face B */
+               U0[0] = colMin[0];
+               U0[1] = colMax[1];
+               U0[2] = colMax[2];
+               //U1 = same as left face A
+               //U2 = same as left face A
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Left Face B! */
+                  return(true);
+               }
+
+               /* Right Face A */
+               U0[0] = colMax[0];
+               U0[1] = colMin[1];   
+               U0[2] = colMin[2];
+               
+               U1[0] = colMax[0];
+               U1[1] = colMin[1];
+               U1[2] = colMax[2];
+
+               U2[0] = colMax[0];
+               U2[1] = colMax[1];
+               U2[2] = colMin[2];
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Right Face A! */
+                  return(true);
+               }
+
+               /* Right Face B */
+               U0[0] = colMax[0];
+               U0[1] = colMax[1];
+               U0[2] = colMax[2];
+               //U1 = same as right face A
+               //U2 = same as right face A
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Right Face B! */
+                  return(true);
+               }
+
+            
+               /* Front Face A */
+               U0[0] = colMin[0];
+               U0[1] = colMin[1];   
+               U0[2] = colMin[2];
+               
+               U1[0] = colMax[0];
+               U1[1] = colMin[1];
+               U1[2] = colMin[2];
+
+               U2[0] = colMin[0];
+               U2[1] = colMax[1];
+               U2[2] = colMin[2];
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Front Face A! */
+                  return(true);
+               }
+
+               /* Front Face B */
+               U0[0] = colMax[0];
+               U0[1] = colMax[1];
+               U0[2] = colMin[2];
+               //U1 = same as front face A
+               //U2 = same as front face A
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Front Face B! */
+                  return(true);
+               }
+
+               /* Back Face A */
+               U0[0] = colMin[0];
+               U0[1] = colMin[1];   
+               U0[2] = colMax[2];
+               
+               U1[0] = colMax[0];
+               U1[1] = colMin[1];
+               U1[2] = colMax[2];
+
+               U2[0] = colMin[0];
+               U2[1] = colMax[1];
+               U2[2] = colMax[2];
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Back Face A! */
+                  return(true);
+               }
+
+               /* Back Face B */
+               U0[0] = colMax[0];
+               U0[1] = colMax[1];
+               U0[2] = colMax[2];
+               //U1 = same as back face A
+               //U2 = same as back face A
+
+               if(NoDivTriTriIsect(V0, V1, V2, U0, U1, U2))
+               {
+                  /* Detected Collision at Back Face B! */
+                  return(true);
+               }
+            }
+         }
+      }
+   }
+
+  /* If got here, no collision occurs */
   return(false);
 }
+
+/*********************************************************************
+ *                          Static Variables                         *
+ *********************************************************************/
+float aniModel::meshVertices[30000][3];
+float aniModel::meshNormals[30000][3];
+float aniModel::meshTextureCoordinates[30000][2];
+CalIndex aniModel::meshFaces[50000][3];
 

@@ -79,6 +79,11 @@ class aniModel:public thing
       float m_lodLevel;              /**< Cal3D Level of Detail to render */
       string m_path;                 /**< Path to cal3D model */
 
+      static float meshVertices[30000][3];   /**< Model Vertices */
+      static float meshNormals[30000][3];    /**< Model Normals */
+      static float meshTextureCoordinates[30000][2];/**< Model Texture Coords */
+      static CalIndex meshFaces[50000][3];   /**< Model Faces */
+
       /*! Load the a texture to the model.
        * \param strFilename -> \c string with the texture file name.
        * \return the \c GLuint with the GL texture ID. */
