@@ -2984,21 +2984,21 @@ void engine::renderGUI()
       draw2DMode();
 
 
-   /* Player's Portrait */
-   PCs->getActiveCharacter()->drawMainPortrait();
+      /* Player's Portrait */
+      PCs->getActiveCharacter()->drawMainPortrait();
 
-   glPushMatrix();
-      gui->draw(proj,modl,viewPort);
-   glPopMatrix();
+      glPushMatrix();
+         gui->draw(proj,modl,viewPort);
+      glPopMatrix();
 
-   glEnable(GL_BLEND);
-   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+      glEnable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
    
-   /* Mouse Cursor */
-   glPushMatrix();
+      /* Mouse Cursor */
+      glPushMatrix();
          cursors->draw(mouseX, mouseY);
-   glPopMatrix();
+      glPopMatrix();
       if(actualMap->isOutdoor())
       {
          draw3DMode(FARVIEW);
@@ -3007,6 +3007,7 @@ void engine::renderGUI()
       {
          draw3DMode(INDOOR_FARVIEW);
       }
+
    glPopMatrix();
    
    glEnable(GL_LIGHTING);
@@ -3019,6 +3020,7 @@ void engine::renderGUI()
  *********************************************************************/
 void engine::drawWithShadows()
 {
+   //FIXME TODO!
 }
 
 /*********************************************************************
