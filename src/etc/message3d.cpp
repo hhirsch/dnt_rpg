@@ -51,13 +51,14 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    message = msg;
 
    /* Define the font and sizes */
-   fnt.defineFont(DNT_FONT_TIMES, 20);
-   int size = fnt.getStringWidth(message);
+   fnt.defineFont(DNT_FONT_ARIAL, 20);
+   size = fnt.getStringWidth(message) + 8;
    halfSize = (size / 2.0);
    color_Set(0,0,0);
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
                                          smallestPowerOfTwo(size),
-                                        32,32, rmask, gmask, bmask, amask);
+                                         32,
+                                         32, rmask, gmask, bmask, amask);
    color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255));
    fnt.write(s, 0, 0, message.c_str(), true);
 
@@ -177,6 +178,7 @@ void messageController::draw(GLdouble modelView[16],
    message3d* msg = first;
    GLfloat scale = 1.0;
    GLfloat dist = 0;
+   GLfloat factor = 1.0;
 
    glDisable(GL_LIGHTING);
    glDisable(GL_FOG);
@@ -185,6 +187,9 @@ void messageController::draw(GLdouble modelView[16],
    glEnable(GL_BLEND);
    for(i = 0; i < tot; i++)
    {
+      /* Calculate Texture factor */
+      factor = (float)(msg->size) / (float)(smallestPowerOfTwo(msg->size));
+
       /* Calculate scale factor */
       dist = sqrt( (camX-msg->posX)*(camX-msg->posX) +
                    (camY-msg->posY)*(camY-msg->posY) +
@@ -200,10 +205,10 @@ void messageController::draw(GLdouble modelView[16],
          glTexCoord2f(0,1);
          glVertex3f(-msg->halfSize*modelView[0]*scale,0.0f,
                     -msg->halfSize*modelView[8]*scale);
-         glTexCoord2f(1,1);
+         glTexCoord2f(factor,1);
          glVertex3f(msg->halfSize*modelView[0]*scale,0.0f,
                     msg->halfSize*modelView[8]*scale);
-         glTexCoord2f(1,0);
+         glTexCoord2f(factor,0);
          glVertex3f(msg->halfSize*modelView[0]*scale + scale*16*modelView[1], 
                     scale*16*modelView[5] + scale*msg->halfSize*modelView[4], 
                     scale*msg->halfSize*modelView[8] + scale*16*modelView[9]);

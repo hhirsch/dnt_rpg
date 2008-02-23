@@ -223,6 +223,9 @@ void normal (GLfloat x1, GLfloat y1, GLfloat z1,
  *********************************************************************/
 void draw2DMode()
 {
+   /* Save the current 3D one */
+   glPushMatrix();
+
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
    gluOrtho2D(0.0, (GLdouble) SCREEN_X, 0.0, (GLdouble) SCREEN_Y);
@@ -240,6 +243,8 @@ void draw3DMode(int actualFarView)
    gluPerspective(45.0, SCREEN_X / (float)SCREEN_Y, 1.0, actualFarView);
    glMatrixMode (GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+   /* Reload the saved 3D One */
+   glPopMatrix();
 }
 
 

@@ -53,6 +53,7 @@ class message3d
       GLfloat posX,          /**< X position */
               posY,          /**< Y position */
               posZ;          /**< Z position */
+      int size;              /**< Message Size (in pixels) */
       GLfloat halfSize;      /**< Half size */
       string message;        /**< the message to show */
       GLuint messageTexture; /**< The texture load by the message */
