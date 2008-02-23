@@ -374,6 +374,20 @@ void textureToScreen(GLuint texturaID, GLdouble proj[16],GLdouble modl[16],
  *********************************************************************/
 void setTexture(SDL_Surface* img, GLuint* textID)
 {
+   /* Define Machine Bit Order */
+   Uint32 rmask, gmask, bmask, amask;
+   #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+      rmask = 0xff000000;
+      gmask = 0x00ff0000;
+      bmask = 0x0000ff00;
+      amask = 0x000000ff;
+   #else
+      rmask = 0x000000ff;
+      gmask = 0x0000ff00;
+      bmask = 0x00ff0000;
+      amask = 0xff000000;
+   #endif
+
    glGenTextures(1,textID);
    glBindTexture(GL_TEXTURE_2D,*textID);
 
@@ -384,7 +398,7 @@ void setTexture(SDL_Surface* img, GLuint* textID)
       SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        smallestPowerOfTwo(img->w),
                        smallestPowerOfTwo(img->h),32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+                       rmask, gmask, bmask, amask);
       
       SDL_BlitSurface(img, NULL, tmp, NULL);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
@@ -409,6 +423,20 @@ void setTexture(SDL_Surface* img, GLuint* textID)
  ******************************************************************/
 void setTextureRGBA(SDL_Surface* img, GLuint* textID)
 {
+   /* Define Machine Bit Order */
+   Uint32 rmask, gmask, bmask, amask;
+   #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+      rmask = 0xff000000;
+      gmask = 0x00ff0000;
+      bmask = 0x0000ff00;
+      amask = 0x000000ff;
+   #else
+      rmask = 0x000000ff;
+      gmask = 0x0000ff00;
+      bmask = 0x00ff0000;
+      amask = 0xff000000;
+   #endif
+
    glGenTextures(1,textID);
    glBindTexture(GL_TEXTURE_2D,*textID);
 
@@ -419,7 +447,7 @@ void setTextureRGBA(SDL_Surface* img, GLuint* textID)
       SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        smallestPowerOfTwo(img->w),
                        smallestPowerOfTwo(img->h),32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+                       rmask, gmask, bmask, amask);
       
       SDL_BlitSurface(img, NULL, tmp, NULL);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
