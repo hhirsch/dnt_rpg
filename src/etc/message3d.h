@@ -73,11 +73,10 @@ class messageController
 
       /*! Actualize and draw all messages
        * \param modelView -> the model view matrix
-       * \param camX -> camera X position 
-       * \param camY -> camera Y position
-       * \param camZ -> camera Z position */
-      void draw(GLdouble modelView[16], GLfloat camX, GLfloat camY, 
-                GLfloat camZ);
+       * \param projection -> projection matrix 
+       * \param viewport -> viewport vector */
+      void draw(GLdouble modelView[16], GLdouble projection[16], 
+                GLint viewPort[4]);
 
       /* Add a message
        * \param x -> x position
