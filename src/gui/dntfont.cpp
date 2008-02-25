@@ -164,10 +164,9 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    Uint16* unicodeText;
 
    SDL_Color color;
-   SDL_Color bgColor;
-   bgColor.r = DNT_FONT_BG_COLOR_R;
-   bgColor.g = DNT_FONT_BG_COLOR_G;
-   bgColor.b = DNT_FONT_BG_COLOR_B;
+   SDL_Color bgColor = {DNT_FONT_BG_COLOR_R, 
+                        DNT_FONT_BG_COLOR_G, 
+                        DNT_FONT_BG_COLOR_B};
 
    SDL_Rect rect;
    SDL_Surface* writeSurface = NULL;
@@ -443,13 +442,9 @@ void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text,
    SDL_Color color;
    SDL_Rect rect;
    SDL_Surface* writeSurface;
-   SDL_Color bgColor;
-
-   /* Set BG Color */
-   bgColor.r = DNT_FONT_BG_COLOR_R;
-   bgColor.g = DNT_FONT_BG_COLOR_G;
-   bgColor.b = DNT_FONT_BG_COLOR_B;
-
+   SDL_Color bgColor = {DNT_FONT_BG_COLOR_R, 
+                        DNT_FONT_BG_COLOR_G, 
+                        DNT_FONT_BG_COLOR_B};
 
    /* Get Color */
    color_Get(&color.r,&color.g, &color.b);
