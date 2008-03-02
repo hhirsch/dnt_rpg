@@ -141,13 +141,17 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
       amask = 0xff000000;
    #endif
 
-   alpha = 1.0;
+   alpha = 0.5;
    /* Create Surface And generate texture */
    glGenTextures(1,&texture);
    surface = SDL_CreateRGBSurface(SDL_HWSURFACE,
                                   smallestPowerOfTwo(xb-xa),
                                   smallestPowerOfTwo(yb-ya),32,
                                   rmask,gmask,bmask,amask);
+   color_Alpha(255);
+   color_Set(255, 255, 255);
+   rectangle_Fill(surface, 0,0, smallestPowerOfTwo(xb-xa)-1,
+                  smallestPowerOfTwo(yb-ya)-1);
 
    propX = (float)(xb-xa) / (float)smallestPowerOfTwo(xb-xa);
    propY = (float)(yb-ya) / (float)smallestPowerOfTwo(yb-ya);

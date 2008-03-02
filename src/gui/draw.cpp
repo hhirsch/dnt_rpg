@@ -49,7 +49,17 @@ void color_Get(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi)
 void pixel_Set(SDL_Surface* screen, int x, int y, 
                int red, int green, int blue, int alpha)
 {
-   Uint32 color = SDL_MapRGBA(screen->format, red, green, blue, alpha);
+   int bpp = screen->format->BytesPerPixel;
+   Uint32 color;
+
+   if(bpp == 4)
+   {
+      color = SDL_MapRGBA(screen->format, red, green, blue, alpha);
+   }
+   else 
+   {
+      color = SDL_MapRGB(screen->format, red, green, blue);
+   }
 
    if((x>screen->w-1) || (y>screen->h-1) || (x<0) || (y<0))
    {
@@ -64,7 +74,6 @@ void pixel_Set(SDL_Surface* screen, int x, int y,
       }
    }
 
-   int bpp = screen->format->BytesPerPixel;
    /* Here p is the address to the pixel we want to set */
    Uint8 *p = (Uint8 *)screen->pixels + y * screen->pitch + x * bpp;
 
@@ -220,18 +229,32 @@ void rectangle_Fill(SDL_Surface *screen, int x1, int y1, int x2, int y2)
    ret.y = y1;
    ret.w = (x2 - x1)+1;
    ret.h = (y2 - y1)+1;
-   Uint32 cor = SDL_MapRGBA(screen->format,R,G,B,A);
+
+   int bpp = screen->format->BytesPerPixel;
+   Uint32 color;
+
+   if(bpp == 4)
+   {
+      color = SDL_MapRGBA(screen->format, R, G, B, A);
+   }
+   else 
+   {
+      color = SDL_MapRGB(screen->format, R, G, B);
+   }
+
    if ( SDL_MUSTLOCK(screen) ) 
    {
-        if ( SDL_LockSurface(screen) < 0 ) 
-        {
-            return;
-        }
-    }
-      SDL_FillRect(screen,&ret,cor);
+      if ( SDL_LockSurface(screen) < 0 ) 
+      {
+         return;
+      }
+   }
+
+   SDL_FillRect(screen,&ret,color);
+
    if ( SDL_MUSTLOCK(screen) ) 
    {
-        SDL_UnlockSurface(screen);
+      SDL_UnlockSurface(screen);
    }
 }
 

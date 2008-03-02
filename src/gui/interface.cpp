@@ -515,13 +515,9 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    if(ljan->getActiveWindow() == NULL)
      return;
 
-   //glColor4f(1.0,1.0,0.0,0.9);
-
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    glDisable(GL_DEPTH_TEST);
-
-   glDisable(GL_BLEND);
 
    /* Draw Inative Windows */
    for(aux = 0;aux<ljan->getTotal();aux++)
@@ -529,11 +525,6 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
       if(jan != ljan->getActiveWindow())
       {
          jan->render(depth);
-         /*glRasterPos2f(jan->getX1(), SCREEN_Y-jan->getY1());
-         glPixelZoom(1.0, -1.0);
-         glDrawPixels((jan->getX2()-jan->getX1())+1,
-                      (jan->getY2()-jan->getY1())+1, 
-                      GL_RGBA, GL_UNSIGNED_BYTE, jan->getSurface()->pixels);*/
           depth += 0.001;
       }
       jan = (window*) jan->next;
@@ -541,15 +532,6 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 
    /* Draw Active Window */
    ljan->getActiveWindow()->render(depth);
-   /*glRasterPos2f(ljan->getActiveWindow()->getX1(), 
-                 SCREEN_Y-ljan->getActiveWindow()->getY1());
-   glPixelZoom(1.0, -1.0);
-   glDrawPixels((ljan->getActiveWindow()->getX2() - 
-                 ljan->getActiveWindow()->getX1())+1, 
-                (ljan->getActiveWindow()->getY2() - 
-                 ljan->getActiveWindow()->getY1())+1, 
-                GL_RGBA, GL_UNSIGNED_BYTE, 
-                ljan->getActiveWindow()->getSurface()->pixels);*/
 
    glEnable(GL_DEPTH_TEST);
 

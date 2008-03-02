@@ -2358,7 +2358,6 @@ void Map::actualizeAlphaTextures()
                                      smallestPowerOfTwo(z*ALPHA_TEXTURE_INC),
                                      32,0x000000FF,0x0000FF00,
                                      0x00FF0000,0xFF000000);
-
    while(aux < numTextures)
    {
       if(tex->definedAlpha)
