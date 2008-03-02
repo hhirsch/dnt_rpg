@@ -127,6 +127,7 @@ guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
    if(!atButton)
    {
       current = -1;
+      draw(screen);
    }
 
    return(NULL);

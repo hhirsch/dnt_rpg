@@ -141,7 +141,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
       amask = 0xff000000;
    #endif
 
-   alpha = 0.5;
+   alpha = 0.75;
    /* Create Surface And generate texture */
    glGenTextures(1,&texture);
    surface = SDL_CreateRGBSurface(SDL_SWSURFACE,

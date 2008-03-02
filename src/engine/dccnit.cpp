@@ -2974,14 +2974,14 @@ void engine::renderNoShadowThings()
 void engine::renderGUI()
 {
    /* Draw the GUI */   
-   glDisable(GL_LIGHTING);
-   glDisable(GL_FOG);
-
    glPushMatrix();
       draw2DMode();
 
       /* World Messages */
       msgController->draw(modl, proj, viewPort);
+
+      glDisable(GL_LIGHTING);
+      glDisable(GL_FOG);
 
       glDisable(GL_DEPTH_TEST);
       glDisable(GL_BLEND);
