@@ -128,6 +128,8 @@ void inventWindow::reDraw()
    int x = 32;
    char buf[8];
    fnt.defineFont(DNT_FONT_TIMES, 13);
+   fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    if(isOpen())
    {
       inventories->draw(0,0, inventoryTabButton->get(), currentInventory);

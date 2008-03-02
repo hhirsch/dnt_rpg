@@ -144,7 +144,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    alpha = 0.5;
    /* Create Surface And generate texture */
    glGenTextures(1,&texture);
-   surface = SDL_CreateRGBSurface(SDL_HWSURFACE,
+   surface = SDL_CreateRGBSurface(SDL_SWSURFACE,
                                   smallestPowerOfTwo(xb-xa),
                                   smallestPowerOfTwo(yb-ya),32,
                                   rmask,gmask,bmask,amask);
@@ -268,6 +268,7 @@ void window::draw(int mouseX, int mouseY)
       } //case
       obj = obj->next;
    }
+   setChanged();
 }
 
 /*********************************************************************
@@ -283,6 +284,7 @@ void window::drawInactiveBar()
    fnt.defineFont(DNT_FONT_ARIAL,10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.write(surface,39,1,text);
+   setChanged();
 }
 
 /*********************************************************************
@@ -298,6 +300,15 @@ void window::drawActiveBar()
    fnt.defineFont(DNT_FONT_ARIAL,10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.write(surface,39,1,text);
+   setChanged();
+}
+
+/*********************************************************************
+ *                               flush                               *
+ *********************************************************************/
+void window::flush()
+{
+   setTextureRGBA(surface, texture);
 }
 
 /*********************************************************************
@@ -305,7 +316,13 @@ void window::drawActiveBar()
  *********************************************************************/
 void window::render(float depth)
 {
-   setTextureRGBA(surface, texture);
+   /* Update the Texture if needed */
+   if(hasChanged)
+   {
+      hasChanged = false;
+      flush();
+   }
+
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -349,6 +366,7 @@ void window::open()
 {
    activate();
    draw(0,0);
+   setChanged();
 }
 
 /*********************************************************************
@@ -360,6 +378,22 @@ void window::setAttributes(bool close, bool move, bool scale, bool maximize)
    canMove = move;
    canScale = scale;
    canMaximize = maximize;
+}
+
+/*********************************************************************
+ *                             setChanged                            *
+ *********************************************************************/
+void window::setChanged()
+{
+   hasChanged = true;
+}
+
+/*********************************************************************
+ *                              changed                              *
+ *********************************************************************/
+bool window::changed()
+{
+   return(hasChanged);
 }
 
 /*********************************************************************

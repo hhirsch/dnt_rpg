@@ -79,11 +79,21 @@ class window: public guiObject
       /*! Set the mouse click difference, usually for move the window */
       void setDiff(int x, int y){difx = x; dify = y;};
 
+      /*! Flush the surface to the texture */
+      void flush();
+
       /*! Render the current window "face" to the screen
        * \param depth -> depth to render the window */
       void render(float depth);
 
+      /*! Verify if the window face changes */
+      bool changed();
+
+      /*! Set the window as changed */
+      void setChanged();
+
    protected:
+      bool hasChanged;           /**< Flag if the surface had changed or not */
       void* intList;             /**< Pointer to the list where the window is */
       int minX,                  /**< Min Size of X axys */
           minY;                  /**< Min Size of the Y axys */
