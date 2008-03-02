@@ -50,41 +50,66 @@ void pixel_Set(SDL_Surface* screen, int x, int y,
                int red, int green, int blue, int alpha)
 {
    Uint32 color = SDL_MapRGBA(screen->format, red, green, blue, alpha);
+
    if((x>screen->w-1) || (y>screen->h-1) || (x<0) || (y<0))
-       return;
-   switch (screen->format->BytesPerPixel) 
    {
-        case 1: 
-        { /* 8-bpp */
-            Uint8 *bufp;
-            bufp = (Uint8 *)screen->pixels + y*screen->pitch + x;
-            *bufp = color;
-        }
-        break;
-        case 2: 
-        { /* 15-bpp or 16-bpp */
-            Uint16 *bufp;
-            bufp = (Uint16 *)screen->pixels + y*screen->pitch/2 + x;
-            *bufp = color;
-        }
-        break;
-        case 3: 
-        { /* mode 24-bpp lento,normalmente não usado */
-            Uint8 *bufp;
-            bufp = (Uint8 *)screen->pixels + y*screen->pitch + x;
-            *(bufp+screen->format->Rshift/8) = R;
-            *(bufp+screen->format->Gshift/8) = G;
-            *(bufp+screen->format->Bshift/8) = B;
-        }
-        break;
-        case 4: 
-        { /* Provavelmente 32-bpp */
-            Uint32 *bufp;
-            bufp = (Uint32 *)screen->pixels + y*screen->pitch/4 + x;
-            *bufp = color;
-        }
-        break;
-    }
+       return;
+   }
+
+   if ( SDL_MUSTLOCK(screen) ) 
+   {
+      if ( SDL_LockSurface(screen) < 0 ) 
+      {
+         return;
+      }
+   }
+
+   int bpp = screen->format->BytesPerPixel;
+   /* Here p is the address to the pixel we want to set */
+   Uint8 *p = (Uint8 *)screen->pixels + y * screen->pitch + x * bpp;
+
+   switch(bpp) 
+   {
+      case 1:
+      {
+         *p = color;
+      }
+      break;
+
+      case 2:
+      {
+         *(Uint16 *)p = color;
+      }
+      break;
+
+      case 3:
+      {
+         if(SDL_BYTEORDER == SDL_BIG_ENDIAN) 
+         {
+            p[0] = (color >> 16) & 0xff;
+            p[1] = (color >> 8) & 0xff;
+            p[2] = color & 0xff;
+         } 
+         else 
+         {
+            p[0] = color & 0xff;
+            p[1] = (color >> 8) & 0xff;
+            p[2] = (color >> 16) & 0xff;
+         }
+      }
+      break;
+
+      case 4:
+      {
+         *(Uint32 *)p = color;
+      }
+      break;
+   }
+
+   if ( SDL_MUSTLOCK(screen) ) 
+   {
+      SDL_UnlockSurface(screen);
+   }
 }
 
 /******************************************************************
@@ -92,55 +117,7 @@ void pixel_Set(SDL_Surface* screen, int x, int y,
  ******************************************************************/
 void pixel_Set(SDL_Surface *screen, int x, int y)
 {
-    Uint32 color = SDL_MapRGBA(screen->format, R, G, B, A);
-
-    if((x>screen->w-1) || (y>screen->h-1) || (x<0) || (y<0))
-       return;
-
-    if ( SDL_MUSTLOCK(screen) ) {
-        if ( SDL_LockSurface(screen) < 0 ) {
-            return;
-        }
-    }
-    switch (screen->format->BytesPerPixel) {
-        case 1: { /* Assumindo 8-bpp */
-            Uint8 *bufp;
-
-            bufp = (Uint8 *)screen->pixels + y*screen->pitch + x;
-            *bufp = color;
-        }
-        break;
-
-        case 2: { /* Provavelmente 15-bpp ou 16-bpp */
-            Uint16 *bufp;
-
-            bufp = (Uint16 *)screen->pixels + y*screen->pitch/2 + x;
-            *bufp = color;
-        }
-        break;
-
-        case 3: { /* mode 24-bpp lento,normalmente não usado */
-            Uint8 *bufp;
-
-            bufp = (Uint8 *)screen->pixels + y*screen->pitch + x;
-            *(bufp+screen->format->Rshift/8) = R;
-            *(bufp+screen->format->Gshift/8) = G;
-            *(bufp+screen->format->Bshift/8) = B;
-        }
-        break;
-
-        case 4: { /* Provavelmente 32-bpp */
-            Uint32 *bufp;
-
-            bufp = (Uint32 *)screen->pixels + y*screen->pitch/4 + x;
-            *bufp = color;
-        }
-        break;
-    }
-    if ( SDL_MUSTLOCK(screen) ) 
-    {
-       SDL_UnlockSurface(screen);
-    }
+    pixel_Set(screen, x, y, R, G, B, A);
 }
 
 /******************************************************************
