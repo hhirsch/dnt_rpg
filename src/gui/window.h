@@ -86,14 +86,12 @@ class window: public guiObject
        * \param depth -> depth to render the window */
       void render(float depth);
 
-      /*! Verify if the window face changes */
+      /*! Verify if the window face changes
+       * \return true if some object changed its draw state (or the window
+       * itself)  */
       bool changed();
 
-      /*! Set the window as changed */
-      void setChanged();
-
    protected:
-      bool hasChanged;           /**< Flag if the surface had changed or not */
       void* intList;             /**< Pointer to the list where the window is */
       int minX,                  /**< Min Size of X axys */
           minY;                  /**< Min Size of the Y axys */

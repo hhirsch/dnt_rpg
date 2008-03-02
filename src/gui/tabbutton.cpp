@@ -12,6 +12,7 @@ tabButton::tabButton(int x,int y,const char* arquivo):picture(x,y,0,0,arquivo)
    numButtons = 0;
    pressed = false;
    type = GUI_TAB_BUTTON;
+   current = - 1;
 }
 
 /***********************************************************
@@ -26,6 +27,7 @@ tabButton::tabButton(int x, int y, int w, int h):picture(x,y,0,0, NULL)
    x2 = x+w;
    y2 = y+h;
    pressed = false;
+   current = -1;
 }
 
 /***********************************************************
@@ -48,8 +50,7 @@ oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
 /***********************************************************
  *                           draw                          *
  ***********************************************************/
-void tabButton::draw(int mouseX, int mouseY, 
-                     int Xjan,int Yjan,SDL_Surface *screen)
+void tabButton::draw(SDL_Surface *screen)
 { 
    int i;
    picture* fig;
@@ -57,9 +58,7 @@ void tabButton::draw(int mouseX, int mouseY,
    fig->draw(screen);
    for(i=0;i<numButtons;i++)
    {
-      if(isMouseAt(x1+Buttons[i].x1+Xjan,y1+Buttons[i].y1+Yjan,
-                   x1+Buttons[i].x2+Xjan,y1+Buttons[i].y2+Yjan,
-                   mouseX, mouseY))
+      if(i == current)
       {
           color_Set(cor.colorCont[0].R,cor.colorCont[0].G,cor.colorCont[0].B);
           rectangle_2Colors(screen,x1+Buttons[i].x1,y1+Buttons[i].y1,
@@ -74,6 +73,7 @@ void tabButton::draw(int mouseX, int mouseY,
                         x1+Buttons[i].x2,y1+Buttons[i].y2);
       }
    }
+   setChanged();
 }
 
 /***********************************************************
@@ -84,14 +84,22 @@ guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
                                    int &actionType)
 {
    int i;
+   bool atButton = false;
    actionType = TABBUTTON_NONE;
-   draw(mouseX, mouseY, Xjan, Yjan, screen);
    for(i=0;i<numButtons;i++)
    {
       if(isMouseAt(x1+Buttons[i].x1+Xjan,y1+Buttons[i].y1+Yjan,
                    x1+Buttons[i].x2+Xjan,y1+Buttons[i].y2+Yjan,
                    mouseX, mouseY))
       {
+
+         if(i != current)
+         {
+            current = i;
+            atButton = true;
+            draw(screen);
+         }
+
          if(Mbuttons & SDL_BUTTON(1))
          {
             /* Only return when released the mouse button! */
@@ -115,6 +123,12 @@ guiObject* tabButton::verifyPosition(int mouseX, int mouseY, Uint8 Mbuttons,
          }
       }
    }
+
+   if(!atButton)
+   {
+      current = -1;
+   }
+
    return(NULL);
 }
 

@@ -86,6 +86,7 @@ void picture::draw(SDL_Surface *screen)
 void picture::set(SDL_Surface* newPicture)
 {
    fig = newPicture;
+   setChanged();
 }
 
 /******************************************************

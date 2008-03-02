@@ -32,9 +32,8 @@ class button: public guiObject
       ~button();
 
       /*!Draws the Button on Surface
-       * \param pres -> if button is pressed
        * \param screen -> surface where will draw the button */
-      void draw(bool pres, SDL_Surface* screen );
+      void draw(SDL_Surface* screen );
 
       /*! Do the press proccess of the button.
        * \param Xjan -> window x1 coordinate 
@@ -59,6 +58,7 @@ class button: public guiObject
                                           activated when button presses) */
 
    protected:
+      bool pressed;         /**< If the button is pressed or not */
       bool oval;            /**< Oval Button?  */
       farso_colors Colors;  /**< Colors */
       string fontName;      /**< Font Name */

@@ -47,6 +47,7 @@ void textBox::clear()
    }
    fullText = NULL;
    totalLines = 0;
+   setChanged();
 }
 
 /*******************************************************
@@ -59,6 +60,7 @@ void textBox::setText(string txt)
    createLines(txt, fontName, fontSize, fontAlign, fontStyle,
                Colors.colorText.R, Colors.colorText.G,
                Colors.colorText.B);
+   setChanged();
 }
 
 /*******************************************************
@@ -69,6 +71,7 @@ void textBox::addText(string txt, string font, int size,
 {
    text += txt;
    createLines(txt, font, size, align, style, R, G, B);
+   setChanged();
 }
 
 /*******************************************************
@@ -180,6 +183,7 @@ int textBox::draw(SDL_Surface *screen)
       height = line->height;
       line = line->next;
    }
+   setChanged();
    return(lastLine);
 }
 

@@ -19,6 +19,7 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval )
    text = txt;
    oval = isOval;
    men = NULL;
+   pressed = false;
    defineFont(DNT_FONT_ARIAL, 12);
    type = GUI_BUTTON;
 }
@@ -33,11 +34,11 @@ button::~button()
 /***********************************************************
  *                           draw                          *
  ***********************************************************/
-void button::draw(bool pres, SDL_Surface* screen )
+void button::draw(SDL_Surface* screen )
 {
    dntFont font;
    int R1,R2,G1,G2,B1,B2; 
-   if(pres) 
+   if(pressed) 
    {
       R1 = Colors.colorCont[1].R;
       G1 = Colors.colorCont[1].G;
@@ -74,7 +75,7 @@ void button::draw(bool pres, SDL_Surface* screen )
    color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
    int ya=y1;
    int xa=x1;
-   if(pres) 
+   if(pressed) 
    {
      ya++;
      xa+=2;
@@ -102,6 +103,7 @@ void button::draw(bool pres, SDL_Surface* screen )
    {
       font.write(screen,xa,ya+3,getText().c_str(),xa,y1,x2,y2);
    }
+   setChanged();
 }
 
 /***********************************************************
@@ -111,18 +113,20 @@ bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto,
                   SDL_Surface* screen)
 {
    *pronto = 0;
-   int pres;
+   bool pres;
 
    pres = (isMouseIn(x-Xjan,y-Yjan));
 
    /* Verify if the mouse Button is left */
    *pronto = !(Mbotao & SDL_BUTTON(1));
-      
-   draw(pres,screen);
-   if(*pronto)
+
+   /* Verify if Must Redraw */
+   if( (pres && (Mbotao & SDL_BUTTON(1))) != pressed)
    {
-      draw(0, screen);
+      pressed = pres && (Mbotao & SDL_BUTTON(1));
+      draw(screen);
    }
+
    return(pres);
 }
 

@@ -79,12 +79,19 @@ class guiObject
        * \param av -> true if is avaible, false otherwise */
       void setAvaible(bool av){avaible = av;};
 
+      /*! Verify if the draw state changes */
+      bool changed(){bool prev = hadChanged; hadChanged = false;return(prev);};
+
+      /*! Set the window as changed */
+      void setChanged(){hadChanged = true;};
+
    protected:
       int x1,              /**< Coordinate on Window */
           y1,              /**< Coordinate on Window */
           x2,              /**< Coordinate on Window */
           y2;              /**< Coordinate on Window */
       bool avaible;        /**< Avaible? */
+      bool hadChanged;           /**< Flag if the had changed its draw state */
       string text;         /**< Text on the bar */
 };
 

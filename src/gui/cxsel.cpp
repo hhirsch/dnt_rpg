@@ -59,6 +59,7 @@ void cxSel::invertSelection()
    GLuint actualTime = SDL_GetTicks();
    if((actualTime - lastChangeTime) >= 100)
    {
+      setChanged();
       selected = !selected;
       lastChangeTime = actualTime;
    }
@@ -69,6 +70,7 @@ void cxSel::invertSelection()
  **********************************************************/
 void cxSel::setSelection(bool value)
 {
+   setChanged();
    selected = value;
 }
 

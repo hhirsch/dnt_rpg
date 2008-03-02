@@ -228,39 +228,46 @@ void window::draw(int mouseX, int mouseY)
    {
       switch(obj->type)
       {
-         case GUI_BUTTON:{
+         case GUI_BUTTON:
+         {
               button *b = (button*) obj;   
-              b->draw(0,surface);
+              b->draw(surface);
               break;
          }
-         case GUI_TEXT_BAR:{
+         case GUI_TEXT_BAR:
+         {
               textBar *bart = (textBar*) obj; 
               bart->draw(surface);
               break;
          }
-         case GUI_SEL_BOX:{
+         case GUI_SEL_BOX:
+         {
               cxSel *cx = (cxSel*) obj;
               cx->draw(surface);
               break;
          }
-         case GUI_SEL_TEXT:{
+         case GUI_SEL_TEXT:
+         {
               selText *st = (selText*) obj;
               st->draw(surface);
               break;
          }
-         case GUI_PICTURE:{
+         case GUI_PICTURE:
+         {
               picture* fig = (picture*) obj;
               fig->draw(surface);
               break;
          }
-         case GUI_TEXT_BOX:{
+         case GUI_TEXT_BOX:
+         {
               textBox *quad = (textBox*) obj;
               quad->draw(surface);
               break;
          }
-         case GUI_TAB_BUTTON:{
+         case GUI_TAB_BUTTON:
+         {
               tabButton *bt = (tabButton*) obj; 
-              bt->draw(mouseX, mouseY, x1, y1, surface);
+              bt->draw(surface);
               break;
          }
          default:break;
@@ -283,6 +290,7 @@ void window::drawInactiveBar()
    color_Set(0,0,0);
    fnt.defineFont(DNT_FONT_ARIAL,10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    fnt.write(surface,39,1,text);
    setChanged();
 }
@@ -299,6 +307,7 @@ void window::drawActiveBar()
    color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
    fnt.defineFont(DNT_FONT_ARIAL,10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
+   fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    fnt.write(surface,39,1,text);
    setChanged();
 }
@@ -317,9 +326,8 @@ void window::flush()
 void window::render(float depth)
 {
    /* Update the Texture if needed */
-   if(hasChanged)
+   if(changed())
    {
-      hasChanged = false;
       flush();
    }
 
@@ -381,19 +389,28 @@ void window::setAttributes(bool close, bool move, bool scale, bool maximize)
 }
 
 /*********************************************************************
- *                             setChanged                            *
- *********************************************************************/
-void window::setChanged()
-{
-   hasChanged = true;
-}
-
-/*********************************************************************
  *                              changed                              *
  *********************************************************************/
 bool window::changed()
 {
-   return(hasChanged);
+   bool result = false;
+
+   /* Verify the Window */
+   result |= hadChanged;
+
+   /* Verify some Object Change. Must verify all to avoid
+    * not needed redraws at next frame.  */
+   guiObject *obj=objects->getFirst()->next;
+   int aux;
+   for(aux=0; (aux < objects->getTotal()) ;aux++)
+   {
+      result |= obj->changed();
+      obj = obj->next;
+   }
+
+   /* Reset the Flag */
+   hadChanged = false;
+   return(result);
 }
 
 /*********************************************************************

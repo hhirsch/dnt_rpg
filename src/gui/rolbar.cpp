@@ -119,12 +119,7 @@ void rolBar::redraw()
                                      (float)scrollText->getTotalLines())*
                                     (y2-28-y1)));
    position->draw(wSurface);
-
-   /* Mantain the draw of button pressed */
-   if(actualPressed)
-   {
-      actualPressed->draw(1, wSurface);
-   }
+   setChanged();
 }
 
 /*********************************************************************

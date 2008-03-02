@@ -49,14 +49,9 @@ class tabButton: public picture
        * \return Pointer to the oneTableButton Created */
       oneTabButton* insertButton(int x1, int y1, int x2, int y2); 
       /*! Draws the table button to the surface
-       * \param mouseX -> mouse X position
-       * \param mouseY -> mouse Y position
-       * \param Xjan -> window X position
-       * \param Yjan -> window Y position
        * \param screen -> pointer to the surface where the table will be 
        *                  draw (usually an window).  */
-      void draw(int mouseX, int mouseY, int Xjan, int Yjan,
-                    SDL_Surface *screen);
+      void draw(SDL_Surface *screen);
       /*! Verify Mouse Press on Buttons 
        * \param mouseX -> mouse X position
        * \param mouseY -> mouse Y position
@@ -74,6 +69,7 @@ class tabButton: public picture
       int numButtons;                       /**< Number of active buttons */
       oneTabButton Buttons[MAX_TABBUTTONS]; /**< Buttons Vector */
       bool pressed;                         /**< Internal Verifier on Treat */
+      int current;                          /**< Current Button selected */
       farso_colors cor;
 };
 
