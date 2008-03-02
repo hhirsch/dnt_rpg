@@ -1675,7 +1675,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                                 0.0, sobj->z, minObj, maxObj);
             if(intercepts( minObj, maxObj, minMouse, maxMouse))
             {
-                cursors->setActual(CURSOR_GET);
+                cursors->set(CURSOR_GET);
                 if(shortCutsWindow)
                 {
                    objTxt->setText(sobj->obj->getName()); 
@@ -1746,7 +1746,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                              0.0,0.0,porta->z, minObj, maxObj);
          if(intercepts( minObj, maxObj, minMouse, maxMouse))
          {
-            cursors->setActual(CURSOR_DOOR);
+            cursors->set(CURSOR_DOOR);
             if(shortCutsWindow)
             {
                objTxt->setText(gettext("Door")); 
@@ -1794,7 +1794,7 @@ int engine::verifyMouseActions(Uint8 mButton)
 
          if(intercepts( min, max, minMouse, maxMouse))
          {
-            cursors->setActual(CURSOR_INVENTORY);
+            cursors->set(CURSOR_INVENTORY);
             if(shortCutsWindow)
             {
                objTxt->setText(pers->name); 
@@ -1838,11 +1838,11 @@ int engine::verifyMouseActions(Uint8 mButton)
                {
                   if(!pers->isAlive())
                   {
-                     cursors->setActual(CURSOR_GET);
+                     cursors->set(CURSOR_GET);
                   }
                   else if(pers->getConversationFile() != "")
                   {
-                     cursors->setActual(CURSOR_TALK);
+                     cursors->set(CURSOR_TALK);
                      if( (mButton & SDL_BUTTON(1)) && 
                          (rangeAction(activeCharacter->xPosition, 
                                       activeCharacter->zPosition,
@@ -1864,7 +1864,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                    (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
                {
                   string brief = "";
-                  cursors->setActual(CURSOR_ATTACK);
+                  cursors->set(CURSOR_ATTACK);
                   if(shortCutsWindow)
                   {
                      objTxt->setText(pers->name); 
@@ -1932,7 +1932,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                objTxt->setText(quaux->mapConection.mapName); 
             }
             curConection = &quaux->mapConection;
-            cursors->setActual(CURSOR_MAPTRAVEL);
+            cursors->set(CURSOR_MAPTRAVEL);
             pronto = 1;
             if( (mButton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->xPosition, 
@@ -2011,7 +2011,7 @@ int engine::treatIO(SDL_Surface *screen)
           ( (mButton & SDL_BUTTON(1) ) && 
 	       (time-lastMousePression >= REFRESH_RATE)) )
       {
-         cursors->setActual(CURSOR_WALK);
+         cursors->set(CURSOR_WALK);
          lastMouse = time;
 
          if(!gui->mouseOnGui(mouseX, mouseY))
@@ -2521,7 +2521,7 @@ int engine::treatIO(SDL_Surface *screen)
          Square* sq = actualMap->relativeSquare(posX, posZ);
          if( (sq == NULL) || (sq->flags == 0))
          {
-            cursors->setActual(CURSOR_FORBIDDEN);
+            cursors->set(CURSOR_FORBIDDEN);
          }
       }
    

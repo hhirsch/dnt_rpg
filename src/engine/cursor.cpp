@@ -9,19 +9,20 @@
 cursor::cursor()
 {
    dirs dir;
-   textura[CURSOR_WALK] = loadCursor(dir.getRealFile("cursors/Walk.png"));
-   textura[CURSOR_ATTACK] = loadCursor(dir.getRealFile("cursors/Attack.png"));
-   textura[CURSOR_DEFEND] = loadCursor(dir.getRealFile("cursors/Defend.png"));
-   textura[CURSOR_MAPTRAVEL] = loadCursor(
-                                      dir.getRealFile("cursors/MapTravel.png"));
-   textura[CURSOR_TALK] = loadCursor(dir.getRealFile("cursors/talk.png"));
-   textura[CURSOR_GET] = loadCursor(dir.getRealFile("cursors/Get.png"));
-   textura[CURSOR_INVENTORY] = loadCursor(
-                                      dir.getRealFile("cursors/Inventory.png"));
-   textura[CURSOR_DOOR] = loadCursor(dir.getRealFile("cursors/Door.png"));
-   textura[CURSOR_FORBIDDEN] = loadCursor(
-                                      dir.getRealFile("cursors/forbidden.png"));
-   actualCursor = CURSOR_WALK;
+   /* Generate OpenGL Textures */
+   glGenTextures(CURSOR_TOTAL, texture);
+
+   /* Load Cursors */
+   loadCursor(dir.getRealFile("cursors/Walk.png"), CURSOR_WALK);
+   loadCursor(dir.getRealFile("cursors/Attack.png"), CURSOR_ATTACK);
+   loadCursor(dir.getRealFile("cursors/Defend.png"), CURSOR_DEFEND);
+   loadCursor(dir.getRealFile("cursors/MapTravel.png"), CURSOR_MAPTRAVEL);
+   loadCursor(dir.getRealFile("cursors/talk.png"), CURSOR_TALK);
+   loadCursor(dir.getRealFile("cursors/Get.png"), CURSOR_GET);
+   loadCursor(dir.getRealFile("cursors/Inventory.png"), CURSOR_INVENTORY);
+   loadCursor(dir.getRealFile("cursors/Door.png"), CURSOR_DOOR);
+   loadCursor(dir.getRealFile("cursors/forbidden.png"), CURSOR_FORBIDDEN);
+   currentCursor = CURSOR_WALK;
 }
 
 /*****************************************************************
@@ -29,45 +30,55 @@ cursor::cursor()
  *****************************************************************/
 cursor::~cursor()
 {
-   int aux;
-   for(aux = 0; aux < CURSOR_TOTAL;aux++)
-   {
-      ///glDeleteTextures(1,&(textura[aux]));
-      SDL_FreeSurface(textura[aux]);
-   }
+   /* Free Cursors Textures */
+   glDeleteTextures(CURSOR_TOTAL,texture);
 }
 
 /*****************************************************************
  *                         Load Cursor                           *
  *****************************************************************/
-SDL_Surface* cursor::loadCursor(string fileName)
+void cursor::loadCursor(string fileName, int index)
 {
    SDL_Surface* img = IMG_Load(fileName.c_str());
-   return(img);
+   if(img)
+   {
+      setTextureRGBA(img, texture[index]);
+      sizeX[index] = img->w;
+      sizeY[index] = img->h;
+      SDL_FreeSurface(img);
+   }
+   else
+   {
+      printf(gettext("Can't load mouse cursor: %s\n"), fileName.c_str());
+   }
 }
 
 /*****************************************************************
- *                          set Actual                           *
+ *                               set                             *
  *****************************************************************/
-void cursor::setActual(int nCursor)
+void cursor::set(int nCursor)
 {
-   actualCursor = textura[nCursor];
+   currentCursor = nCursor;
 }
 
 /*****************************************************************
- *                          set Actual                           *
+ *                              set                              *
  *****************************************************************/
-void cursor::setActual(SDL_Surface* img)
+void cursor::set(SDL_Surface* img)
 {
-   actualCursor = img;
+   /* Load the image to a texture */
+   setTextureRGBA(img, texture[CURSOR_USER_IMAGE]);
+   sizeX[CURSOR_USER_IMAGE] = img->w;
+   sizeY[CURSOR_USER_IMAGE] = img->h;
+   currentCursor = CURSOR_USER_IMAGE;
 }
 
 /*****************************************************************
- *                          get Actual                           *
+ *                               get                             *
  *****************************************************************/
-SDL_Surface* cursor::getActual()
+int cursor::get()
 {
-   return(actualCursor);
+   return(currentCursor);
 }
 
 
@@ -76,9 +87,20 @@ SDL_Surface* cursor::getActual()
  *****************************************************************/
 void cursor::draw(int mouseX, int mouseY)
 {
-   glRasterPos2f(mouseX, SCREEN_Y - mouseY);
-   glPixelZoom(1.0, -1.0);
-   glDrawPixels(actualCursor->w, actualCursor->h, GL_RGBA, GL_UNSIGNED_BYTE, 
-                actualCursor->pixels);
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, texture[currentCursor]);
+   glPushMatrix();
+      glTranslatef(mouseX, SCREEN_Y - mouseY, 0);
+      glBegin(GL_QUADS);
+         glTexCoord2f(0.0, 1.0);
+         glVertex2f(0,0);
+         glTexCoord2f(0.0, 0.0);
+         glVertex2f(0, sizeY[currentCursor]);
+         glTexCoord2f(1.0, 0.0);
+         glVertex2f(sizeX[currentCursor], sizeY[currentCursor]);
+         glTexCoord2f(1.0, 1.0);
+         glVertex2f(sizeX[currentCursor], 0.0);
+      glEnd();
+   glPopMatrix();
 }
 

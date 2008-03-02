@@ -12,16 +12,17 @@ using namespace std;
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-#define CURSOR_WALK      0 /**< Walk Mouse Cursor */
-#define CURSOR_ATTACK    1 /**< Attack Mouse Cursor */
-#define CURSOR_DEFEND    2 /**< Defend Mouse Cursor */
-#define CURSOR_MAPTRAVEL 3 /**< Map Travel Mouse Cursor */
-#define CURSOR_TALK      4 /**< Talk Mouse Cursor */
-#define CURSOR_GET       5 /**< Get Mouse Cursor */
-#define CURSOR_INVENTORY 6 /**< Inventory Mouse Cursor */
-#define CURSOR_DOOR      7 /**< Door Mouse Cursor */
-#define CURSOR_FORBIDDEN 8 /**< Forbidden Mouse Cursor */
-#define CURSOR_TOTAL     9 /**< Total number of mouse cursors */
+#define CURSOR_WALK       0 /**< Walk Mouse Cursor */
+#define CURSOR_ATTACK     1 /**< Attack Mouse Cursor */
+#define CURSOR_DEFEND     2 /**< Defend Mouse Cursor */
+#define CURSOR_MAPTRAVEL  3 /**< Map Travel Mouse Cursor */
+#define CURSOR_TALK       4 /**< Talk Mouse Cursor */
+#define CURSOR_GET        5 /**< Get Mouse Cursor */
+#define CURSOR_INVENTORY  6 /**< Inventory Mouse Cursor */
+#define CURSOR_DOOR       7 /**< Door Mouse Cursor */
+#define CURSOR_FORBIDDEN  8 /**< Forbidden Mouse Cursor */
+#define CURSOR_USER_IMAGE 9 /**< Any user image seted as cursor */
+#define CURSOR_TOTAL     10 /**< Total number of mouse cursors */
 
 /*! A mouse cursor class.*/
 class cursor
@@ -32,29 +33,31 @@ class cursor
       /*! cursor Destructor */
       ~cursor();  
 
-      /*! Set actual mouse Cursor 
+      /*! Set current mouse Cursor 
        * \param nCursor -> cursor Number to use.*/
-      void setActual(int nCursor);
+      void set(int nCursor);
 
-      /*! Set the actual mouse Cursor to an image
+      /*! Set the current mouse Cursor to an image
        * \param img -> sdl surface to set as cursor */
-      void setActual(SDL_Surface* img);
+      void set(SDL_Surface* img);
 
       /*! Draw th Cursor to screen */
       void draw(int mouseX, int mouseY);
 
       /*! Gets the actual mouse cursor
        * \return -> pointer to the surface of the mouse cursor */
-      SDL_Surface* getActual();
+      int get();
       
    private:
-      SDL_Surface* textura[CURSOR_TOTAL]; /**< internal Surfaces of cursors */
-      SDL_Surface* actualCursor;          /**< Pointer to Actual Used Cursor */
+      GLuint texture[CURSOR_TOTAL]; /**< Cursors Textures */
+      float sizeX[CURSOR_TOTAL];    /**< Cursors Widths */
+      float sizeY[CURSOR_TOTAL];    /**< Cursors Heights */
+      int currentCursor;            /**< Current Cursor Index */
       
-      /*! Load Cursor file to textures 
+      /*! Load Cursor file 
        * \param fileName -> file name of cursor
-       * \return pointer to SDL_Surface with the cursor image. */
-      SDL_Surface* loadCursor(string fileName);
+       * \param index -> internal cursor index */
+      void loadCursor(string fileName, int index);
 
       
 };

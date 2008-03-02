@@ -215,11 +215,11 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
 
    if((state == INVENTORY_STATE_OBJECT) && (activeObject))
    {
-      if(mouseCursor->getActual() != activeObject->get2dModel())
+      if(mouseCursor->get() != CURSOR_USER_IMAGE)
       {
-         previousCursor = mouseCursor->getActual();
+         previousCursor = mouseCursor->get();
       }
-      mouseCursor->setActual(activeObject->get2dModel());
+      mouseCursor->set(activeObject->get2dModel());
 
       if( x < intWindow->getX1())
       {
@@ -243,7 +243,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
    {
       if(previousCursor)
       {
-         mouseCursor->setActual(previousCursor);
+         mouseCursor->set(previousCursor);
          previousCursor = NULL;
       }
    }

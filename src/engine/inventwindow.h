@@ -109,7 +109,7 @@ class inventWindow
 
       object* activeObject;           /**< Active Object */
 
-      SDL_Surface* previousCursor;    /**< The previous mouse Cursor */
+      int previousCursor;             /**< The previous mouse Cursor */
 
 };
 
