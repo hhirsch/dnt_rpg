@@ -45,6 +45,8 @@ void cursor::loadCursor(string fileName, int index)
       setTextureRGBA(img, texture[index]);
       sizeX[index] = img->w;
       sizeY[index] = img->h;
+      propX[index] = (float)(img->w) / (float)smallestPowerOfTwo(img->w);
+      propY[index] = (float)(img->h) / (float)smallestPowerOfTwo(img->h);
       SDL_FreeSurface(img);
    }
    else
@@ -70,6 +72,8 @@ void cursor::set(SDL_Surface* img)
    setTextureRGBA(img, texture[CURSOR_USER_IMAGE]);
    sizeX[CURSOR_USER_IMAGE] = img->w;
    sizeY[CURSOR_USER_IMAGE] = img->h;
+   propX[CURSOR_USER_IMAGE] = (float)(img->w) / (float)smallestPowerOfTwo(img->w);
+   propY[CURSOR_USER_IMAGE] = (float)(img->h) / (float)smallestPowerOfTwo(img->h);
    currentCursor = CURSOR_USER_IMAGE;
 }
 
@@ -87,20 +91,25 @@ int cursor::get()
  *****************************************************************/
 void cursor::draw(int mouseX, int mouseY)
 {
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texture[currentCursor]);
    glPushMatrix();
       glTranslatef(mouseX, SCREEN_Y - mouseY, 0);
       glBegin(GL_QUADS);
-         glTexCoord2f(0.0, 1.0);
-         glVertex2f(0,0);
          glTexCoord2f(0.0, 0.0);
-         glVertex2f(0, sizeY[currentCursor]);
-         glTexCoord2f(1.0, 0.0);
-         glVertex2f(sizeX[currentCursor], sizeY[currentCursor]);
-         glTexCoord2f(1.0, 1.0);
+         glVertex2f(0,0);
+         glTexCoord2f(0.0, propY[currentCursor]);
+         glVertex2f(0, -sizeY[currentCursor]);
+         glTexCoord2f(propX[currentCursor], propY[currentCursor]);
+         glVertex2f(sizeX[currentCursor], -sizeY[currentCursor]);
+         glTexCoord2f(propX[currentCursor], 0.0);
          glVertex2f(sizeX[currentCursor], 0.0);
       glEnd();
    glPopMatrix();
+
+   glDisable(GL_BLEND);
 }
 

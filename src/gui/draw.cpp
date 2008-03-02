@@ -394,7 +394,7 @@ void setTexture(SDL_Surface* img, GLuint textID)
        ( (img->h & (img->h - 1)) != 0 )  )
    {
       /* Convert to Power of Two */
-      SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_HWSURFACE,
+      SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_SWSURFACE,
                        smallestPowerOfTwo(img->w),
                        smallestPowerOfTwo(img->h),32,
                        rmask, gmask, bmask, amask);
@@ -438,20 +438,32 @@ void setTextureRGBA(SDL_Surface* img, GLuint textID)
 
    glBindTexture(GL_TEXTURE_2D,textID);
 
+   /* Convert to Power of Two */
    if( ( (img->w & (img->w - 1)) != 0 ) ||
        ( (img->h & (img->h - 1)) != 0 )  )
    {
-      /* Convert to Power of Two */
-      SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_HWSURFACE,
+      /* Gamb is needed to copy the alpha channel from source to destiny
+       * disabling the SRC_ALPHA from the source (but not really from the
+       * source to avoid colatheral effects on latter blits with img.) */
+      SDL_Surface* gamb = SDL_CreateRGBSurfaceFrom(img->pixels, 
+                                                   img->w, img->h, 
+                                                   img->format->BitsPerPixel,
+                                                   img->pitch, 
+                                                   rmask, gmask, bmask,amask);
+
+      SDL_Surface* tmp = SDL_CreateRGBSurface(SDL_SWSURFACE,
                        smallestPowerOfTwo(img->w),
                        smallestPowerOfTwo(img->h),32,
                        rmask, gmask, bmask, amask);
-      
-      SDL_BlitSurface(img, NULL, tmp, NULL);
+
+      SDL_SetAlpha(gamb, 0, 0);
+      SDL_BlitSurface(gamb, NULL, tmp, NULL);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tmp->w, tmp->h, 
                                   0, GL_RGBA, GL_UNSIGNED_BYTE, 
                                   tmp->pixels);
+
       SDL_FreeSurface(tmp);
+      SDL_FreeSurface(gamb);
    }
    else
    {

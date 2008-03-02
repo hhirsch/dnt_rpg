@@ -2992,10 +2992,6 @@ void engine::renderGUI()
          gui->draw(proj,modl,viewPort);
       glPopMatrix();
 
-      glEnable(GL_BLEND);
-      glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
-   
       /* Mouse Cursor */
       glPushMatrix();
          cursors->draw(mouseX, mouseY);

@@ -52,6 +52,8 @@ class cursor
       GLuint texture[CURSOR_TOTAL]; /**< Cursors Textures */
       float sizeX[CURSOR_TOTAL];    /**< Cursors Widths */
       float sizeY[CURSOR_TOTAL];    /**< Cursors Heights */
+      float propX[CURSOR_TOTAL];    /**< X Proportion */
+      float propY[CURSOR_TOTAL];    /**< Y Proportion */
       int currentCursor;            /**< Current Cursor Index */
       
       /*! Load Cursor file 
