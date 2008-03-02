@@ -145,9 +145,12 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    /* Create Surface And generate texture */
    glGenTextures(1,&texture);
    surface = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                                  /*smallestPowerOfTwo*/(xb-xa+1),
-                                  /*smallestPowerOfTwo*/(yb-ya+1),32,
+                                  smallestPowerOfTwo(xb-xa),
+                                  smallestPowerOfTwo(yb-ya),32,
                                   rmask,gmask,bmask,amask);
+
+   propX = (float)(xb-xa) / (float)smallestPowerOfTwo(xb-xa);
+   propY = (float)(yb-ya) / (float)smallestPowerOfTwo(yb-ya);
 
    objects = new guiList;
 
@@ -186,8 +189,8 @@ window::~window()
  *********************************************************************/
 void window::draw(int mouseX, int mouseY)
 {
-   int dx = x2 - x1 + 1;
-   int dy = y2 - y1 + 1;
+   int dx = x2 - x1;
+   int dy = y2 - y1;
 
    color_Set(Colors.colorWindow.R,Colors.colorWindow.G,
              Colors.colorWindow.B);
@@ -261,7 +264,6 @@ void window::draw(int mouseX, int mouseY)
       } //case
       obj = obj->next;
    }
-   setTextureRGBA(surface, texture);
 }
 
 /*********************************************************************
@@ -292,6 +294,34 @@ void window::drawActiveBar()
    fnt.defineFont(DNT_FONT_ARIAL,10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.write(surface,39,1,text);
+}
+
+/*********************************************************************
+ *                              render                               *
+ *********************************************************************/
+void window::render(float depth)
+{
+   setTextureRGBA(surface, texture);
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, texture);
+
+   glColor4f(1.0, 1.0, 1.0, alpha);
+
+   glPushMatrix();
+      glBegin(GL_QUADS);
+         glTexCoord2f(0.0, 0.0);
+         glVertex3f(x1, SCREEN_Y-y1, depth);
+         glTexCoord2f(0.0, propY);
+         glVertex3f(x1, SCREEN_Y-y2, depth);
+         glTexCoord2f(propX, propY);
+         glVertex3f(x2, SCREEN_Y-y2, depth);
+         glTexCoord2f(propX, 0.0);
+         glVertex3f(x2, SCREEN_Y-y1, depth);
+      glEnd();
+   glPopMatrix();
+
+   glColor4f(1.0,1.0,1.0,1.0);
+   glDisable(GL_TEXTURE_2D);
 }
 
 /*********************************************************************

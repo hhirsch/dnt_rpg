@@ -509,7 +509,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
 void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int aux;
-   double profundidade = 0.012;
+   double depth = 0.012;
    window* jan = (window*) ljan->getFirst()->next;
 
    if(ljan->getActiveWindow() == NULL)
@@ -528,18 +528,20 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    {
       if(jan != ljan->getActiveWindow())
       {
-         glRasterPos2f(jan->getX1(), SCREEN_Y-jan->getY1());
+         jan->render(depth);
+         /*glRasterPos2f(jan->getX1(), SCREEN_Y-jan->getY1());
          glPixelZoom(1.0, -1.0);
          glDrawPixels((jan->getX2()-jan->getX1())+1,
                       (jan->getY2()-jan->getY1())+1, 
-                      GL_RGBA, GL_UNSIGNED_BYTE, jan->getSurface()->pixels);
-          profundidade += 0.001;
+                      GL_RGBA, GL_UNSIGNED_BYTE, jan->getSurface()->pixels);*/
+          depth += 0.001;
       }
       jan = (window*) jan->next;
    }
 
    /* Draw Active Window */
-   glRasterPos2f(ljan->getActiveWindow()->getX1(), 
+   ljan->getActiveWindow()->render(depth);
+   /*glRasterPos2f(ljan->getActiveWindow()->getX1(), 
                  SCREEN_Y-ljan->getActiveWindow()->getY1());
    glPixelZoom(1.0, -1.0);
    glDrawPixels((ljan->getActiveWindow()->getX2() - 
@@ -547,7 +549,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
                 (ljan->getActiveWindow()->getY2() - 
                  ljan->getActiveWindow()->getY1())+1, 
                 GL_RGBA, GL_UNSIGNED_BYTE, 
-                ljan->getActiveWindow()->getSurface()->pixels);
+                ljan->getActiveWindow()->getSurface()->pixels);*/
 
    glEnable(GL_DEPTH_TEST);
 

@@ -3181,7 +3181,7 @@ void engine::openMiniMapWindow()
    {
       /* Align Up of Shortcuts */
       winX = 0;
-      winY = SCREEN_Y-256;
+      winY = SCREEN_Y-255;
    }
    
    character* activeCharacter = PCs->getActiveCharacter();

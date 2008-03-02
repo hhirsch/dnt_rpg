@@ -79,6 +79,10 @@ class window: public guiObject
       /*! Set the mouse click difference, usually for move the window */
       void setDiff(int x, int y){difx = x; dify = y;};
 
+      /*! Render the current window "face" to the screen
+       * \param depth -> depth to render the window */
+      void render(float depth);
+
    protected:
       void* intList;             /**< Pointer to the list where the window is */
       int minX,                  /**< Min Size of X axys */
@@ -89,8 +93,10 @@ class window: public guiObject
       bool canMove;              /**< If can move the window */
       guiList* objects;          /**< Objects on the Window */
       SDL_Surface *surface;      /**< Window Surface */
-      GLuint texture;
-      GLfloat alpha;
+      GLuint texture;            /**< GL texture for the window */
+      GLfloat alpha;             /**< Alpha Value of the texture \fixme! */
+      GLfloat propX,             /**< Texture X proportion */
+              propY;             /**< Texture Y proportion */
       int difx;                  /**< Difference of X where mouse clicked */
       int dify;                  /**< Difference of Y where mouse clicked */
       window **externPointer;    /**< Pointer to the extern window pointer */
