@@ -89,6 +89,8 @@ class window: public guiObject
       bool canMove;              /**< If can move the window */
       guiList* objects;          /**< Objects on the Window */
       SDL_Surface *surface;      /**< Window Surface */
+      GLuint texture;
+      GLfloat alpha;
       int difx;                  /**< Difference of X where mouse clicked */
       int dify;                  /**< Difference of Y where mouse clicked */
       window **externPointer;    /**< Pointer to the extern window pointer */

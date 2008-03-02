@@ -249,7 +249,8 @@ void engine::informationScreen()
    img = IMG_Load(dir.getRealFile("/texturas/general/info.png").c_str());
 
    GLuint texturaInfo;
-   setTextureRGBA(img,&texturaInfo);
+   glGenTextures(1,&texturaInfo);
+   setTextureRGBA(img,texturaInfo);
 
    glDisable(GL_LIGHTING);
    updateFrustum(visibleMatrix,proj,modl);
@@ -336,7 +337,8 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    /* Initializing Load Screen*/
    GLuint texturaCarga;
-   setTexture(fig,&texturaCarga);
+   glGenTextures(1,&texturaCarga);
+   setTexture(fig,texturaCarga);
    SDL_FreeSurface(fig);
    
 
@@ -663,7 +665,8 @@ void engine::splashScreen()
                                    "SDL_image, SDL_ttf, libVorbis."), 
               52, 424, 745, 511);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
-   setTextureRGBA(img,&id);
+   glGenTextures(1,&id);
+   setTextureRGBA(img,id);
    SDL_FreeSurface(img);
 
    /* Fade In Screen */
@@ -3314,7 +3317,8 @@ void engine::showImage(string fileName)
    Uint8 mButton = 0;
    SDL_Surface* img = IMG_Load(fileName.c_str()); 
    glDisable(GL_LIGHTING);
-   setTextureRGBA(img,&id);
+   glGenTextures(1,&id);
+   setTextureRGBA(img,id);
    SDL_FreeSurface(img);
 
    fadeInTexture(id,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);

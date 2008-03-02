@@ -64,7 +64,8 @@ int main(int argc, char **argv)
    /* Load backImage */
    SDL_Surface* img = IMG_Load(
                         dir.getRealFile("texturas/general/inicio.png").c_str());
-   setTexture(img,&tituloID);
+   glGenTextures(1,&tituloID);
+   setTexture(img,tituloID);
    SDL_FreeSurface(img);
 
    /* Call Initial Screen */

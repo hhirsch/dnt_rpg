@@ -63,7 +63,8 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255));
    fnt.write(s, 0, 0, message.c_str(), true);
 
-   setTextureRGBA(s, &messageTexture);
+   glGenTextures(1,&messageTexture);
+   setTextureRGBA(s, messageTexture);
 
    SDL_FreeSurface(s);
 }

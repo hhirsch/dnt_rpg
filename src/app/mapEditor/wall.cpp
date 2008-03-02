@@ -23,7 +23,8 @@ wallController::wallController(Map* acMap)
       printf("Can't open cursors/Walk.png !\n");
       return;
    }
-   setTextureRGBA(img, &markTexture);
+   glGenTextures(1,&markTexture);
+   setTextureRGBA(img, markTexture);
    SDL_FreeSurface(img);
 }
 

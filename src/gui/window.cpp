@@ -119,7 +119,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    y1 = ya;
    y2 = yb;
    minY = 15;
-   minX = 50; 
+   minX = 50;
    text = title;
    canMaximize = true;
    canScale = true;
@@ -141,7 +141,9 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
       amask = 0xff000000;
    #endif
 
-
+   alpha = 1.0;
+   /* Create Surface And generate texture */
+   glGenTextures(1,&texture);
    surface = SDL_CreateRGBSurface(SDL_HWSURFACE,
                                   /*smallestPowerOfTwo*/(xb-xa+1),
                                   /*smallestPowerOfTwo*/(yb-ya+1),32,
@@ -174,6 +176,7 @@ window::~window()
    {
       *externPointer = NULL;
    }
+   glDeleteTextures(1,&texture);
    SDL_FreeSurface(surface);
    delete(objects);
 }
@@ -258,6 +261,7 @@ void window::draw(int mouseX, int mouseY)
       } //case
       obj = obj->next;
    }
+   setTextureRGBA(surface, texture);
 }
 
 /*********************************************************************

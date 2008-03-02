@@ -22,7 +22,8 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    fnt.write(img,128,0,texto);
    progress->draw(img);
-   setTextureRGBA(img,texturaTexto);
+   glGenTextures(1,texturaTexto);
+   setTextureRGBA(img,*texturaTexto);
    
    textureToScreen(texturaCarga,proj,modl,viewPort,
                    centerX-128,centerY-64,centerX+127,centerY+63,256,128,

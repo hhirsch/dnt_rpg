@@ -14,13 +14,14 @@ sky::sky()
    color[0] = 1.0;
    color[1] = 1.0;
    color[2] = 1.0;
+   glGenTextures(1,&skyMap);
    SDL_Surface* img;
    img = IMG_Load(dir.getRealFile("texturas/sky/skymap.png").c_str());
    if(img != NULL)
    {
-      setTextureRGBA(img, &skyMap);
+      setTextureRGBA(img, skyMap);
+      SDL_FreeSurface(img);
    }
-   SDL_FreeSurface(img);
 }
 
 /*********************************************************************

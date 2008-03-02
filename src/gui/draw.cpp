@@ -372,7 +372,7 @@ void textureToScreen(GLuint texturaID, GLdouble proj[16],GLdouble modl[16],
 /*********************************************************************
  *                             setTexture                            *
  *********************************************************************/
-void setTexture(SDL_Surface* img, GLuint* textID)
+void setTexture(SDL_Surface* img, GLuint textID)
 {
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
@@ -388,8 +388,7 @@ void setTexture(SDL_Surface* img, GLuint* textID)
       amask = 0xff000000;
    #endif
 
-   glGenTextures(1,textID);
-   glBindTexture(GL_TEXTURE_2D,*textID);
+   glBindTexture(GL_TEXTURE_2D,textID);
 
    if( ( (img->w & (img->w - 1)) != 0 ) ||
        ( (img->h & (img->h - 1)) != 0 )  )
@@ -421,7 +420,7 @@ void setTexture(SDL_Surface* img, GLuint* textID)
 /******************************************************************
  *                          setTextureRGBA                        *
  ******************************************************************/
-void setTextureRGBA(SDL_Surface* img, GLuint* textID)
+void setTextureRGBA(SDL_Surface* img, GLuint textID)
 {
    /* Define Machine Bit Order */
    Uint32 rmask, gmask, bmask, amask;
@@ -437,8 +436,7 @@ void setTextureRGBA(SDL_Surface* img, GLuint* textID)
       amask = 0xff000000;
    #endif
 
-   glGenTextures(1,textID);
-   glBindTexture(GL_TEXTURE_2D,*textID);
+   glBindTexture(GL_TEXTURE_2D,textID);
 
    if( ( (img->w & (img->w - 1)) != 0 ) ||
        ( (img->h & (img->h - 1)) != 0 )  )

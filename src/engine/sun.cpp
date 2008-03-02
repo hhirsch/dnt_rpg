@@ -24,6 +24,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
    positionOnHour(0.0,0.0);
 
    dirs dir;
+   glGenTextures(1,&sunTexture);
    SDL_Surface* img = IMG_Load(dir.getRealFile("texturas/sky/sun.png").c_str());
    if(!img)
    {
@@ -31,10 +32,11 @@ sun::sun(float hour, float farViewX, float farViewZ)
    }
    else
    {
-      setTextureRGBA(img,&sunTexture);
+      setTextureRGBA(img,sunTexture);
       SDL_FreeSurface(img);
    }
 
+   glGenTextures(1,&moonTexture);
    img = IMG_Load(dir.getRealFile("texturas/sky/moon.png").c_str());
    if(!img)
    {
@@ -42,7 +44,7 @@ sun::sun(float hour, float farViewX, float farViewZ)
    }
    else
    {
-      setTextureRGBA(img,&moonTexture);
+      setTextureRGBA(img,moonTexture);
       SDL_FreeSurface(img);
    }
 
