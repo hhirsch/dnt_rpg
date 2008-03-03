@@ -3171,13 +3171,13 @@ void engine::openMiniMapWindow()
    {
       /* Align at side of Shortcuts */
       winX = SCREEN_X-288;
-      winY = SCREEN_Y-128;
+      winY = SCREEN_Y-129;
    }
    else
    {
       /* Align Up of Shortcuts */
       winX = 0;
-      winY = SCREEN_Y-255;
+      winY = SCREEN_Y-257;
    }
    
    character* activeCharacter = PCs->getActiveCharacter();
@@ -3193,7 +3193,7 @@ void engine::openMiniMapWindow()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   miniMapWindow = gui->insertWindow(winX, winY, winX+287, winY+127,
+   miniMapWindow = gui->insertWindow(winX, winY, winX+288, winY+128,
                                      gettext("Map"));
 
    botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,x+2,z+2,
@@ -3219,7 +3219,7 @@ void engine::openMiniMapWindow()
  *********************************************************************/
 void engine::openShortcutsWindow()
 {
-   shortCutsWindow = gui->insertWindow(0,SCREEN_Y-128,511,SCREEN_Y-1,
+   shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,512,SCREEN_Y-1,
                                        gettext("Shortcuts"));
    briefTxt = shortCutsWindow->getObjectsList()->insertRolBar(8,36,249,100,
                                   gettext("Press F1 for Help"),
