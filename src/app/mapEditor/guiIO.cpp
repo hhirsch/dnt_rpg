@@ -68,7 +68,7 @@ waterWindow* guiIO::getWaterWindow()
  ****************************************************************/
 void guiIO::openFileWindow()
 {
-   fileWindow = gui->insertWindow(0,1,184,63,"File");
+   fileWindow = gui->insertWindow(0,0,185,63,"File");
    newButton = fileWindow->getObjectsList()->insertButton(10,37,50,55,"New",1);
    openButton = fileWindow->getObjectsList()->insertButton(51,37,91,55,
                                                            "Open",1);
@@ -88,7 +88,7 @@ void guiIO::openFileWindow()
  ****************************************************************/
 void guiIO::openTextureWindow()
 {
-   textureWindow = gui->insertWindow(0,164,184,244,"Texture");
+   textureWindow = gui->insertWindow(0,163,185,244,"Texture");
    texturePreviousButton = textureWindow->getObjectsList()->insertButton(7,56,
                                                                          74,74,
                                                                   "Previous",1);
@@ -111,7 +111,7 @@ void guiIO::openTextureWindow()
 void guiIO::openObjectWindow()
 {
    dirs dir;
-   objectWindow = gui->insertWindow(0,245,184,599-248,"Objects");
+   objectWindow = gui->insertWindow(0,244,185,599-248,"Objects");
    objectTabButton = objectWindow->getObjectsList()->insertTabButton(7,17,0,0,
                               dir.getRealFile("mapEditor/objects.png").c_str());
    objectCommonButton = objectTabButton->insertButton(0,0,24,19);
@@ -133,7 +133,7 @@ void guiIO::openObjectWindow()
 void guiIO::openNavWindow()
 {
    dirs dir;
-   navWindow = gui->insertWindow(799-67,599-74,799,599,"Nav");
+   navWindow = gui->insertWindow(799-68,599-75,799,599,"Nav");
    navTabButton = navWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                   dir.getRealFile("mapEditor/nav.png").c_str());
    moreZoomButton = navTabButton->insertButton(0,0,8,8);    /* More Zoom */
@@ -156,7 +156,7 @@ void guiIO::openNavWindow()
  ****************************************************************/
 void guiIO::openMessageWindow()
 {
-   messageWindow = gui->insertWindow(153,599-36,799-68,599,"Messages");
+   messageWindow = gui->insertWindow(153,599-37,799-67,599,"Messages");
    messageText = messageWindow->getObjectsList()->insertTextBox(7,16,610,31,0,
                  "Welcome to DccNiTghtmare Map Editor!");
    messageWindow->setAttributes(false,true,false,false);
@@ -170,7 +170,7 @@ void guiIO::openMessageWindow()
  ****************************************************************/
 void guiIO::openMainWindow()
 {
-   mainWindow = gui->insertWindow(0,64,184,163,"Main");
+   mainWindow = gui->insertWindow(0,63,185,163,"Main");
    terrainButton = mainWindow->getObjectsList()->insertButton(5,17,59,35,
                                                               "Terrain",0);
    wallButton = mainWindow->getObjectsList()->insertButton(60,17,123,35,
@@ -207,7 +207,7 @@ void guiIO::openMainWindow()
 void guiIO::openWallWindow()
 {
    dirs dir;
-   wallWindow = gui->insertWindow(0,599-123,152,599-62,"Wall");
+   wallWindow = gui->insertWindow(0,599-124,153,599-62,"Wall");
    wallTabButton = wallWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                  dir.getRealFile("mapEditor/wall.png").c_str());
    wallXButton = wallTabButton->insertButton(0,0,19,19);          /* Wall X */
@@ -235,7 +235,7 @@ void guiIO::openWallWindow()
 void guiIO::openPortalWindow()
 {
    dirs dir;
-   portalWindow = gui->insertWindow(0,599-185,152,599-124,"Portal");
+   portalWindow = gui->insertWindow(0,599-186,153,599-124,"Portal");
    portalTabButton = portalWindow->getObjectsList()->insertTabButton(7,17,0,0,
                                dir.getRealFile("mapEditor/portal.png").c_str());
    portalAddButton = portalTabButton->insertButton(0,0,19,19); /* Add */
@@ -252,7 +252,7 @@ void guiIO::openPortalWindow()
 void guiIO::openTerrainWindow()
 {
    dirs dir;
-   terrainWindow = gui->insertWindow(0,599-61,152,599,"Terrain");
+   terrainWindow = gui->insertWindow(0,599-62,153,599,"Terrain");
    terrainTabButton = terrainWindow->getObjectsList()->insertTabButton(7,17,0,0,
                               dir.getRealFile("mapEditor/terrain.png").c_str());
    terrainUpButton = terrainTabButton->insertButton(0,0,19,19);    
@@ -270,7 +270,7 @@ void guiIO::openTerrainWindow()
 void guiIO::openParticleWindow()
 {
    dirs dir;
-   particleWindow = gui->insertWindow(0,599-247,152,599-186,"Particle");
+   particleWindow = gui->insertWindow(0,599-248,153,599-186,"Particle");
    particleTabButton = particleWindow->getObjectsList()->insertTabButton(7,17,
                                                                          0,0,
                              dir.getRealFile("mapEditor/particle.png").c_str());
@@ -292,7 +292,7 @@ void guiIO::openFogWindow()
  if(actualFog != NULL)
  {
    char buf[10];
-   fogWindow = gui->insertWindow(185,98,288,253,"Fog");
+   fogWindow = gui->insertWindow(185,97,289,253,"Fog");
    fogWindow->getObjectsList()->insertTextBox(5,17,45,30,0,"Red");
    sprintf(buf,"%.4f",actualFog->color[0]);
    fogColor[0] = fogWindow->getObjectsList()->insertTextBar(48,17,98,30,buf,1);
