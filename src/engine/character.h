@@ -198,9 +198,12 @@ class character: public aniModel
        * \return points */
       int getPoints(points pt);
 
-      string retratoConversa;     /**< Portrait talk file name */
+      string talkPortrait;        /**< Portrait talk file name */
       string characterFile;       /**< Name of the character file */
+      float portraitPropX;        /**< X proportion for portrait texture */
+      float portraitPropY;        /**< Y proportion for portrait texture */
       SDL_Surface* portraitImage; /**< Character's portrait image */
+      GLuint portraitTexture;     /**< The Portrait Texture */
       string conversationFile;    /**< Name of the Conversation File */
       void* conv;                 /**< Pointer to the conversation */
       bool convPressed;           /**< To avoid do some conversation action

@@ -81,6 +81,7 @@ character::~character()
    }
    if(portraitImage)
    {
+     glDeleteTextures(1, &portraitTexture);
      SDL_FreeSurface(portraitImage);
    }
    if(inventories)
@@ -238,6 +239,10 @@ void character::definePortrait(string portraitFile)
    {
       SDL_FreeSurface(portraitImage);
    }
+   else
+   {
+      glGenTextures(1, &portraitTexture);
+   }
 
    dirs dir;
    SDL_Surface* img = IMG_Load(dir.getRealFile(portraitFile).c_str());
@@ -249,11 +254,19 @@ void character::definePortrait(string portraitFile)
    portraitImage = SDL_CreateRGBSurface(SDL_HWSURFACE,img->w,img->h+10,32,
                                         0x000000FF,0x0000FF00,
                                         0x00FF0000,0xFF000000);
+   /* Fix to the blit get the alpha from source! */
+   SDL_SetAlpha(img, 0, 0);
    SDL_BlitSurface(img,NULL,portraitImage,NULL);
    SDL_FreeSurface(img);
 
+   setTextureRGBA(portraitImage, portraitTexture);
+   portraitPropX = portraitImage->w /
+                   (float)smallestPowerOfTwo(portraitImage->w);
+   portraitPropY = portraitImage->h /
+                   (float)smallestPowerOfTwo(portraitImage->h);
+
    /* Define fileName */
-   retratoConversa = portraitFile;
+   talkPortrait = portraitFile;
 }
 
 /*********************************************************************
@@ -261,7 +274,7 @@ void character::definePortrait(string portraitFile)
  *********************************************************************/
 string character::getPortraitFileName()
 {
-   return(retratoConversa);
+   return(talkPortrait);
 }
 
 /*********************************************************************
@@ -282,6 +295,7 @@ void character::defineActualLifePoints(int newLife)
    lifePoints = newLife;
    lifeBar->defineActualHealth(newLife);
    lifeBar->draw(portraitImage);
+   setTextureRGBA(portraitImage, portraitTexture);
 }
 
 /*********************************************************************
@@ -289,10 +303,23 @@ void character::defineActualLifePoints(int newLife)
  *********************************************************************/
 void character::drawMainPortrait()
 {
-   glRasterPos2f(SCREEN_X-1-portraitImage->w, SCREEN_Y-1);
-   glPixelZoom(1.0, -1.0);
-   glDrawPixels(portraitImage->w, portraitImage->h, GL_RGBA, GL_UNSIGNED_BYTE, 
-                portraitImage->pixels);
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, portraitTexture);
+
+   glBegin(GL_QUADS);
+      glTexCoord2f(0.0, 0.0);
+      glVertex2f(SCREEN_X-portraitImage->w-1, SCREEN_Y-1);
+      glTexCoord2f(0.0, portraitPropY);
+      glVertex2f(SCREEN_X-portraitImage->w-1, SCREEN_Y-portraitImage->h-1);
+      glTexCoord2f(portraitPropX, portraitPropY);
+      glVertex2f(SCREEN_X-1, SCREEN_Y-portraitImage->h-1);
+      glTexCoord2f(portraitPropX, 0);
+      glVertex2f(SCREEN_X-1, SCREEN_Y-1);
+   glEnd();
+
+   glDisable(GL_TEXTURE_2D);
 }
 
 /******************************************************************
