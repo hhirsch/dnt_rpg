@@ -4,10 +4,6 @@
 #include "../etc/dirs.h"
 #include <libintl.h>
 
-#define DNT_FONT_BG_COLOR_R  0
-#define DNT_FONT_BG_COLOR_G  0
-#define DNT_FONT_BG_COLOR_B  0
-
 /**********************************************************************
  *                               init                                 *
  **********************************************************************/
@@ -164,9 +160,6 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    Uint16* unicodeText;
 
    SDL_Color color;
-   SDL_Color bgColor = {DNT_FONT_BG_COLOR_R, 
-                        DNT_FONT_BG_COLOR_G, 
-                        DNT_FONT_BG_COLOR_B};
 
    SDL_Rect rect;
    SDL_Surface* writeSurface = NULL;
@@ -186,8 +179,6 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       }
    }
 
-   //TTF_SetFontStyle(activeFont->font, TTF_STYLE_UNDERLINE );
-
    /* Convert to unicode, if needed */
    unicodeText = convertToUnicode(curUnicode, text.c_str(), text.length());
 
@@ -195,14 +186,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    if( (text[0] == '\\') )
    {
       text.erase(0,1);
-      /*end--;
 
-      if(end > (int)((text.length() / 2)-1))
-      {
-         end = (text.length() / 2)-1;
-      }
-
-      unicodeText = copyUnicode((Uint16*)text.c_str(), end+1);*/
       //FIXME Put it to work at this function, not calling another one!
       unicodeText = (Uint16*)text.c_str();
       if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
@@ -248,17 +232,8 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
                strLine[uni] = 0;
             }
 
-            /* Write with the font */
-            if(solid)
-            {
-               writeSurface = TTF_RenderUNICODE_Shaded(activeFont->font,
-                                                       strLine, color, bgColor);
-            }
-            else
-            {
-               writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,
-                                                        strLine, color);
-            }
+            writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,
+                                                     strLine, color);
 
             /* Define Position */
             if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
@@ -297,12 +272,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
              * position  */
             if(solid)
             {
-               SDL_FillRect(screen, NULL,
-               SDL_MapRGBA(screen->format,
-                           bgColor.r, bgColor.g, bgColor.b, 0));
-               SDL_SetColorKey(writeSurface, SDL_SRCCOLORKEY,
-               SDL_MapRGBA(writeSurface->format,
-                           bgColor.r, bgColor.g, bgColor.b, 0));
+               SDL_SetAlpha(writeSurface, 0, 0);
             }
             SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
@@ -318,16 +288,8 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
          TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
          /* | breaks a line */
 
-         if(solid)
-         {
-            writeSurface = TTF_RenderUNICODE_Shaded(activeFont->font,strLine,
-                                                    color, bgColor);
-         }
-         else
-         {
-            writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,strLine,
-                                                     color);
-         }
+         writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,strLine,
+                                                  color);
 
          /* Define Align */
          if(activeFontAlign == DNT_FONT_ALIGN_CENTER)
@@ -345,12 +307,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
           * position  */
          if(solid)
          {
-            SDL_FillRect(screen, NULL,
-            SDL_MapRGBA(screen->format,
-                        bgColor.r, bgColor.g, bgColor.b, 0));
-            SDL_SetColorKey(writeSurface, SDL_SRCCOLORKEY,
-            SDL_MapRGBA(writeSurface->format,
-                        bgColor.r, bgColor.g, bgColor.b, 0));
+            SDL_SetAlpha(writeSurface, 0, 0);
          }
          uni = 0;
          strLine[uni] = 0;
@@ -366,17 +323,8 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    if(uni != 0)
    {
       TTF_SizeUNICODE(activeFont->font, strLine, &w, NULL);
-      /* Remaining things to write */
-      if(solid)
-      {
-         writeSurface = TTF_RenderUNICODE_Shaded(activeFont->font, strLine,
-                                                 color, bgColor);
-      }
-      else
-      {
-         writeSurface = TTF_RenderUNICODE_Blended(activeFont->font, strLine,
-                                                  color);
-      }
+      writeSurface = TTF_RenderUNICODE_Blended(activeFont->font, strLine,
+                                               color);
 
       /* Blit the result surface to the desired one on the desired position  */
       rect.y = curY;
@@ -391,12 +339,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
       }
       if(solid)
       {
-         SDL_FillRect(screen, NULL,
-         SDL_MapRGBA(screen->format,
-                     bgColor.r, bgColor.g, bgColor.b, 0));
-         SDL_SetColorKey(writeSurface, SDL_SRCCOLORKEY,
-         SDL_MapRGBA(writeSurface->format,
-                     bgColor.r, bgColor.g, bgColor.b, 0));
+         SDL_SetAlpha(writeSurface, 0, 0);
       }
       SDL_BlitSurface(writeSurface, NULL, screen, &rect);
 
@@ -442,36 +385,18 @@ void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text,
    SDL_Color color;
    SDL_Rect rect;
    SDL_Surface* writeSurface;
-   SDL_Color bgColor = {DNT_FONT_BG_COLOR_R, 
-                        DNT_FONT_BG_COLOR_G, 
-                        DNT_FONT_BG_COLOR_B};
 
    /* Get Color */
    color_Get(&color.r,&color.g, &color.b);
 
-   /* Write Unicode Text */
-   if(solid)
-   {
-      writeSurface = TTF_RenderUNICODE_Shaded(activeFont->font,
-                                              (Uint16*)text.c_str(), 
-                                              color, bgColor);
-   }
-   else
-   {
-      writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,
-                                               (Uint16*)text.c_str(), 
-                                                color);
-   }
+   writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,
+                                            (Uint16*)text.c_str(), 
+                                             color);
 
    /* Blit the result surface to the desired one on the desired position  */
    if(solid)
    {
-      SDL_FillRect(screen, NULL,
-      SDL_MapRGBA(screen->format,
-                  bgColor.r, bgColor.g, bgColor.b, 0));
-      SDL_SetColorKey(writeSurface, SDL_SRCCOLORKEY,
-      SDL_MapRGBA(writeSurface->format,
-                  bgColor.r, bgColor.g, bgColor.b, 0));
+      SDL_SetAlpha(writeSurface, 0, 0);
    }
    rect.x = x;
    rect.y = y;
