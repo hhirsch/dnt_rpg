@@ -84,7 +84,7 @@ bool rolBar::eventGot(int type, guiObject* object)
          else if(object == (guiObject*)down)
          {
             scrollText->setFirstLine(scrollText->getFirstLine() + 1);
-            if(scrollText->lastDrawableLine() >= scrollText->getTotalLines())
+            if(scrollText->lastDrawableLine() > scrollText->getTotalLines())
             {
                scrollText->setFirstLine(scrollText->getFirstLine() - 1);
             }
