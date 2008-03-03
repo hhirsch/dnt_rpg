@@ -110,7 +110,9 @@ void rolBar::redraw()
    contorn->draw(wSurface);
    int end = scrollText->draw(wSurface);
 
-   position->setCoordinate(position->getX1(), 
+   if(scrollText->getTotalLines() != 0)
+   {
+      position->setCoordinate(position->getX1(), 
                               (int) ((y1+2) + ((float)actualInit/
                                      (float)scrollText->getTotalLines())*
                                     (y2-28-y1)),
@@ -118,6 +120,12 @@ void rolBar::redraw()
                               (int) ((y1+2) + ((float)(end+1)/
                                      (float)scrollText->getTotalLines())*
                                     (y2-28-y1)));
+   }
+   else
+   {
+      position->setCoordinate(position->getX1(), y1+2, 
+                              position->getX2(), y2-26);
+   }
    position->draw(wSurface);
    setChanged();
 }
