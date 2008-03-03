@@ -63,8 +63,9 @@ class attWindow
       button* buttonConfirm;       /**< Confirm Button */
       button* buttonCancel;        /**< Cancel Button */
 
-      /*! Set the description text */
-      void setDescription();
+      /*! Set the description text
+       * \param sk -> skill number */
+      void setDescription(int sk);
 
       /*! Roll one Att Dices */
       int rollDices();

@@ -215,7 +215,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                                         "",
                                                        intWindow->getSurface());
 
-   setDescription();
+   setDescription(1);
 
    intWindow->getObjectsList()->insertTextBox(6,246,519,273,2,"");
 
@@ -242,14 +242,14 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
 /**************************************************************
  *                      setDescription                        *
  **************************************************************/
-void attWindow::setDescription()
+void attWindow::setDescription(int sk)
 {
    textDesc->setText("");
-   textDesc->addText(externalSkill->m_skills[1].name + "||", 
+   textDesc->addText(externalSkill->m_skills[sk].name + "||", 
                      DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_UNDERLINE,
                      33, 65, 10);
-   textDesc->addText(externalSkill->m_skills[1].description);
+   textDesc->addText(externalSkill->m_skills[sk].description);
    textDesc->setFirstLine(0);
 }
 
@@ -569,7 +569,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
                 sprintf(tmp,"%d", points[attPointsIndex[i]]);
                 attPoints[i]->setText(tmp);
                 assignAttMod(i);
-                setDescription();
+                setDescription(i+1);
                 intWindow->draw(0,0);
             }
             else if(object == (guiObject*) attButtonPrev[i])
@@ -578,7 +578,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
                 sprintf(tmp,"%d", points[attPointsIndex[i]]);
                 attPoints[i]->setText(tmp);
                 assignAttMod(i);
-                setDescription();
+                setDescription(i+1);
                 intWindow->draw(0,0);
             }
          }
