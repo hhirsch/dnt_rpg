@@ -180,15 +180,7 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
    message3d* msg = first;
    options option;
 
-   if(option.antiAliasing)
-   {
-      glDisable(GL_MULTISAMPLE);
-   }
-
    GLdouble winX=0, winY=0, winZ=0;
-
-   /*GLfloat scale = 1.0;
-   GLfloat dist = 0;*/
 
    GLfloat factor = 1.0;
 
@@ -236,11 +228,6 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
       {
          removeMessage(msg->previous);
       }
-   }
-
-   if(option.antiAliasing)
-   {
-      glEnable(GL_MULTISAMPLE);
    }
 
    glDisable(GL_BLEND);
