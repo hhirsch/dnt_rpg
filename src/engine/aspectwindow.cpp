@@ -76,7 +76,7 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
                                                   gettext("Cancel"),1);
 
    intWindow->setExternPointer(&intWindow);
-   intWindow->setAttributes(false,false, false, false);
+   intWindow->setAttributes(false, true, false, false);
    inter->openWindow(intWindow);
 }
 

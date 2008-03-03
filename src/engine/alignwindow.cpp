@@ -72,7 +72,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
 
    /* Open Skill Window */
    intWindow->setExternPointer(&intWindow);
-   intWindow->setAttributes(false, false, false, false);
+   intWindow->setAttributes(false, true, false, false);
    inter->openWindow(intWindow);
 }
 
