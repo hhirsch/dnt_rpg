@@ -79,6 +79,7 @@ bool rolBar::eventGot(int type, guiObject* object)
                scrollText->setFirstLine(scrollText->getFirstLine() - 1);
             }
             actualPressed = up;
+            setChanged();
             return(true);
          }
          else if(object == (guiObject*)down)
@@ -89,6 +90,7 @@ bool rolBar::eventGot(int type, guiObject* object)
                scrollText->setFirstLine(scrollText->getFirstLine() - 1);
             }
             actualPressed = down;
+            setChanged();
             return(true);
          }
          else

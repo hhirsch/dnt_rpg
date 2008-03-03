@@ -79,8 +79,6 @@ class rolBar: public guiObject
        * \return -> first displayed line */
       int getFirstLine();
 
-
-
       /*! Redraw the bar when scrolling text */
       void redraw();
 
