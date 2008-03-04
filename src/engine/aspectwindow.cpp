@@ -28,7 +28,7 @@ aspectWindow::aspectWindow(character* dude, interface* inter)
                                    gettext("Aspect"));
 
    /* Portrait Figure */
-   figurePortrait = intWindow->getObjectsList()->insertPicture(5,18,0,0,NULL);
+   figurePortrait = intWindow->getObjectsList()->insertPicture(10,23,0,0,NULL);
    figurePortrait->set(images[curImage].image);
 
    /* Previous Image Button */

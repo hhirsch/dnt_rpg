@@ -10,6 +10,9 @@
 #include "../etc/dirs.h"
 #include <SDL/SDL_image.h>
 
+#define BORDER_FILE "characters/portraits/borda.png"
+#define BORDER_SIZE 5
+
 /*********************************************************************
  *                             constructor                           *
  *********************************************************************/
@@ -245,20 +248,43 @@ void character::definePortrait(string portraitFile)
    }
 
    dirs dir;
+
+   /* Open Portrait Image */
    SDL_Surface* img = IMG_Load(dir.getRealFile(portraitFile).c_str());
    if(!img)
    {
       printf("Can't Load Portrait File: %s\n", portraitFile.c_str());
+      return;
    }
-   /* Convert to used style */
-   portraitImage = SDL_CreateRGBSurface(SDL_HWSURFACE,img->w,img->h+10,32,
+
+   /* Load Border */
+   SDL_Surface* border = IMG_Load(dir.getRealFile(BORDER_FILE).c_str());
+   if(!border)
+   {
+      SDL_FreeSurface(img);
+      printf("Can't Load Border File: %s\n", BORDER_FILE);
+      return;
+   }
+
+   /* Blit Image With Border */
+   SDL_Rect rect;
+   rect.x = BORDER_SIZE;
+   rect.y = BORDER_SIZE;
+   SDL_BlitSurface(img, NULL, border, &rect);
+
+   /* Put With space for health bar */
+   portraitImage = SDL_CreateRGBSurface(SDL_HWSURFACE,border->w,border->h+10,32,
                                         0x000000FF,0x0000FF00,
                                         0x00FF0000,0xFF000000);
    /* Fix to the blit get the alpha from source! */
-   SDL_SetAlpha(img, 0, 0);
-   SDL_BlitSurface(img,NULL,portraitImage,NULL);
-   SDL_FreeSurface(img);
+   SDL_SetAlpha(border, 0, 0);
+   SDL_BlitSurface(border,NULL,portraitImage,NULL);
 
+   /* Free Things */
+   SDL_FreeSurface(img);
+   SDL_FreeSurface(border);
+
+   /* Load Texture */
    setTextureRGBA(portraitImage, portraitTexture);
    portraitPropX = portraitImage->w /
                    (float)smallestPowerOfTwo(portraitImage->w);
