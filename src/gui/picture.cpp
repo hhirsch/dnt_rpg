@@ -39,6 +39,7 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
       fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
                        img->w,img->h,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+      SDL_SetAlpha(img, 0,0);
       SDL_BlitSurface(img,NULL,fig,NULL);
       SDL_FreeSurface(img);
       if ( fig == NULL )
