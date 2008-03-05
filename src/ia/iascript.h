@@ -18,7 +18,7 @@
 #include <iostream>
 using namespace std;
 
-#define MAX_SCRIPT_LINES 8 /**< Max interpreted script lines per cycle */
+#define MAX_SCRIPT_LINES 2 /**< Max interpreted script lines per cycle */
 
 #define IASCRIPT_TYPE_DEFAULT   0  /**< Default type */
 #define IASCRIPT_TYPE_MISSION   1  /**< Mission type */
