@@ -221,6 +221,8 @@ void iaScript::run(int maxLines)
             }
             else
             {
+               //printf("Interpreting: %s\n", strBuffer.c_str());
+
                /* get the first token */
                token = nextToken(strBuffer, pos);
 
@@ -280,7 +282,8 @@ void iaScript::run(int maxLines)
 
                            /* The numBegins is to avoid ENDs not related to the
                             * IF itself */
-                           if(token == IA_SETENCE_END)
+                           if( (token == IA_SETENCE_END) || 
+                               ((token == IA_SETENCE_ELSE) && (numBegins != 1)))
                            {
                               numBegins--;
                            }
@@ -289,8 +292,11 @@ void iaScript::run(int maxLines)
                            {
                               numBegins++;
                            }
-                           else if(token == IA_SETENCE_ELSE)
+                           else if( (token == IA_SETENCE_ELSE) &&
+                                    (numBegins == 1) )
                            {
+                              numBegins = 0; // To exit the while
+                              /* It's an else for its if! */
                               token = nextToken(strBuffer, pos);
                               if(token.empty())
                               {
