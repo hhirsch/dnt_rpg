@@ -675,6 +675,15 @@ void engine::splashScreen()
    /* Wait until Mouse Button pressed or time passed */
    while( !done )
    {
+
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
+              | GL_STENCIL_BUFFER_BIT);
+      updateFrustum(visibleMatrix,proj,modl);
+      glColor3f(1.0, 1.0, 1.0);
+      textureToScreen(id,proj,modl,viewPort,0,0,SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
+      glFlush();
+      SDL_GL_SwapBuffers();
+
       SDL_PumpEvents();
       mButton = SDL_GetMouseState(&x,&y);
       keys = SDL_GetKeyState(NULL);
@@ -3326,6 +3335,15 @@ void engine::showImage(string fileName)
       SDL_PumpEvents();
       int x,y;
       mButton = SDL_GetMouseState(&x,&y);
+
+      glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
+              | GL_STENCIL_BUFFER_BIT);
+      updateFrustum(visibleMatrix,proj,modl);
+      glColor3f(1.0, 1.0, 1.0);
+      textureToScreen(id,proj,modl,viewPort,0,0,SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
+      glFlush();
+      SDL_GL_SwapBuffers();
+
       SDL_Delay(50);
    }
 
