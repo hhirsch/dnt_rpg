@@ -780,6 +780,31 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       }
    }
 
+   ////////////////////////////////////////////////////
+   //                  Time Functions                //
+   ////////////////////////////////////////////////////
+   /* wait */
+   else if(functionName == IA_WAIT)
+   {
+      /* Syntax bool wait(int seconds) */
+      varName = symbols->addTempSymbol(IA_TYPE_BOOL);
+      string line = changeFrom(strLine, functionName, 2, varName);
+
+      int seconds = 0;
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv != NULL)
+      {
+         seconds = *(int*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+         /* Set the pending action (note: time is in mseconds) */
+         pendingAction = eng->actionControl->addAction(line, ACT_WAIT, 
+                                                       seconds*1000);
+      }
+   }
+
 
    ////////////////////////////////////////////////////
    //                Mission Functions               //

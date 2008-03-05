@@ -30,6 +30,7 @@ using namespace std;
 #define ACT_HEAL                 14
 #define ACT_FIX                  15
 #define ACT_BREAK                16
+#define ACT_WAIT                 17
 
 #define ACT_STR_OPEN                 "ACT_OPEN"
 #define ACT_STR_ATTACK               "ACT_ATTACK"
@@ -48,6 +49,7 @@ using namespace std;
 #define ACT_STR_HEAL                 "ACT_HEAL"
 #define ACT_STR_FIX                  "ACT_FIX"
 #define ACT_STR_BREAK                "ACT_BREAK"
+#define ACT_STR_WAIT                 "ACT_WAIT"
 
 
 #define ACT_TYPE_FREE_ACTION       0
@@ -106,6 +108,11 @@ class action
        * \param tgtZ -> target Z position */
       action(string strLine, int type, character* act, thing* tgt,
              GLfloat tgtX, GLfloat tgtZ);
+      /*! Constructor
+       * \param strLine -> the line of the script the action was
+       * \param type -> type of the action
+       * \param v -> integer value to pass */
+      action(string strLine, int type, int v);
       /*! Destructor */
       ~action();
 
@@ -115,9 +122,10 @@ class action
        * \param act -> the character actor
        * \param tgt -> the target thing
        * \param tgtX -> target X position
-       * \param tgtZ -> target Z position */
+       * \param tgtZ -> target Z position
+       * \param v -> integer value */
       void init(string strLine, int type, character* act, thing* tgt,
-                GLfloat tgtX, GLfloat tgtZ);
+                GLfloat tgtX, GLfloat tgtZ, int v);
 
       /*! Verify if the action is still running
        * \return true if is still running */
@@ -180,10 +188,14 @@ class action
       GLfloat targetZ;     /**< The target Z position. Usually used when
                                 target thing is NULL */
 
+      int value;           /**< Another value */
+
       bool done;          /**< Will be true when the action is done */
       bool returnValue;   /**< All pending actions always return a boolean
                                value. */
       int actionType;     /**< The type of the action */
+
+      Uint32 initedTime;  /**< Time when inited */
 
       bool toggle;        /**< The state of the action */
 };
@@ -223,6 +235,11 @@ class actionController
        * \return pointer to the action added */
       action* addAction(string strLine, int type, character* act, thing* tgt,
                         GLfloat tgtX, GLfloat tgtZ);
+      /*! Constructor
+       * \param strLine -> the line of the script the action was
+       * \param type -> type of the action
+       * \param v -> integer value to pass */
+      action* addAction(string strLine, int type, int v);
       /*! add action to the controller
        * \param act -> pointer to the action to add
        * \return -> action pointer. the same of the parameter. */

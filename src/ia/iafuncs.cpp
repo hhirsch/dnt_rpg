@@ -84,6 +84,7 @@ bool isFunction(string s)
 {
    return( (s == IA_MOVE_TO_POSITION) || (s == IA_MOVE_TO_CHARACTER) ||
            (s == IA_MOVE_TO_OBJECT) || (s == IA_SET_IDLE) ||
+           (s == IA_WAIT) ||
            (s == IA_FEAT_ACTUAL_QUANTITY) || (s == IA_FEAT_QUANTITY_PER_DAY) ||
            (s == IA_FEAT_COST) || (s == IA_FEAT_USE_AT_CHARACTER) ||
            (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_FEAT_GET_RANDOM_ATTACK) ||
@@ -112,7 +113,7 @@ string functionType(string s)
        (s == IA_MOVE_TO_OBJECT) || (s == IA_FEAT_USE_AT_CHARACTER) ||
        (s == IA_FEAT_USE_AT_OBJECT) || (s == IA_TRUE) || (s == IA_FALSE) ||
        (s == IA_MISSION_IS_ACTIVE) || (s == IA_INVENTORY_HAVE) ||
-       (s == IA_CHARACTER_AT_RANGE) )
+       (s == IA_CHARACTER_AT_RANGE) || (s == IA_WAIT) )
    {
       return(IA_TYPE_BOOL);
    }

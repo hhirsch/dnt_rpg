@@ -6,6 +6,7 @@ baseModifier  = 14/11/12
 attackModifier = 12/7/2/0/0/0
 sizeModifier = 0
 conversationFile = dialogs/logan.dlg
+generalScript = ia/script/general/test2.dsl
 ATT_STRENGHT = 14
 ATT_DEXTERY = 10
 ATT_CONSTITUTION = 16

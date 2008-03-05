@@ -40,6 +40,8 @@ int numberAction(string buffer)
      ret = ACT_FIX;
    else if(buffer.compare(ACT_STR_BREAK) == 0)
      ret = ACT_BREAK;
+   else if(buffer.compare(ACT_STR_WAIT) == 0)
+     ret = ACT_WAIT;
 
    return(ret);
 }
@@ -76,7 +78,7 @@ int numberActionType(string buffer)
  ************************************************************/
 action::action(string strLine, int type, character* act, thing* tgt)
 {
-   init(strLine, type, act, tgt, -1, -1);
+   init(strLine, type, act, tgt, -1, -1, -1);
 }
 
 /************************************************************
@@ -85,7 +87,7 @@ action::action(string strLine, int type, character* act, thing* tgt)
 action::action(string strLine, int type, character* act, thing* tgt,
                GLfloat tgtX, GLfloat tgtZ)
 {
-   init(strLine, type, act, tgt, tgtX, tgtZ);
+   init(strLine, type, act, tgt, tgtX, tgtZ, -1);
 }
 
 /************************************************************
@@ -94,14 +96,22 @@ action::action(string strLine, int type, character* act, thing* tgt,
 action::action(string strLine, int type, character* act, 
                GLfloat tgtX, GLfloat tgtZ)
 {
-   init(strLine, type, act, NULL, tgtX, tgtZ);
+   init(strLine, type, act, NULL, tgtX, tgtZ, -1);
+}
+
+/************************************************************
+ *                        Constructor                       *
+ ************************************************************/
+action::action(string strLine, int type, int v)
+{
+   init(strLine, type, NULL, NULL, -1, -1, v);
 }
 
 /************************************************************
  *                           init                           *
  ************************************************************/
 void action::init(string strLine, int type, character* act, thing* tgt,
-                  GLfloat tgtX, GLfloat tgtZ)
+                  GLfloat tgtX, GLfloat tgtZ, int v)
 {
    scriptLine = strLine;
    actionType = type;
@@ -111,6 +121,8 @@ void action::init(string strLine, int type, character* act, thing* tgt,
    targetZ = tgtZ;
    next = NULL;
    previous = NULL;
+   value = v;
+   initedTime = SDL_GetTicks();
 }
 
 /************************************************************
@@ -379,6 +391,15 @@ action* actionController::addAction(string strLine, int type, character* act,
 }
 
 /************************************************************
+ *                        addAction                         *
+ ************************************************************/
+action* actionController::addAction(string strLine, int type, int v)
+{
+   action* a = new action(strLine, type, v);
+   return(addAction(a));
+}
+
+/************************************************************
  *                        getTotal                          *
  ************************************************************/
 int actionController::getTotal()
@@ -401,12 +422,21 @@ void actionController::treatActions(Map* actualMap)
 {
    int i;
    action* act = getFirst();
+   Uint32 curTime = SDL_GetTicks();
 
    for(i = 0; i < getTotal(); i++)
    {
       if(!act->isRunning())
       {
          //do nothing.
+      }
+      else if(act->getType() == ACT_WAIT)
+      {
+         /* Verify if the wait period ended */
+         if(curTime - act->initedTime >= (Uint32)act->value)
+         {
+            act->setAsEnded(true);
+         }
       }
       else if(act->getType() == ACT_MOVE)
       {
