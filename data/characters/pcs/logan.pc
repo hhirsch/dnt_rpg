@@ -1,5 +1,5 @@
 name = Logan
-model = models/personagens/Logan/modelo.cfg
+model = models/personagens/Logan/model.cfg
 portrait = characters/portraits/logan.png
 maxLifePoints = 87
 baseModifier  = 14/11/12
