@@ -92,10 +92,12 @@ class aStar
        * \param perX2 -> per X final Bounding position
        * \param perY2 -> per Y final Bounding position
        * \param perZ2 -> per Z final Bounding position */
-      void findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
+      /*void findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
                     GLfloat stepSize, GLfloat orientation,
                     GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
-                    GLfloat perX2, GLfloat perY2, GLfloat perZ2);
+                    GLfloat perX2, GLfloat perY2, GLfloat perZ2);*/
+      void findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
+                    void* NPCs, void* PCs);
 
       /*! A* to find path INTERNAL
        * \param actualX -> current x position
@@ -111,12 +113,13 @@ class aStar
        * \param perY2 -> per Y final Bounding position
        * \param perZ2 -> per Z final Bounding position
        * \return true if found path, false otherwise. */
-      bool findPathInternal(GLfloat actualX, GLfloat actualZ, 
+      /*bool findPathInternal(GLfloat actualX, GLfloat actualZ, 
                             GLfloat x, GLfloat z,
                             GLfloat stepSize, GLfloat orientation,
                             GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
-                            GLfloat perX2, GLfloat perY2, GLfloat perZ2);
-
+                            GLfloat perX2, GLfloat perY2, GLfloat perZ2);*/
+      bool findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
+                            void* NPCs, void* PCs);
 
       /*! Get the New Character Position, based on Path Found previously 
        * \param posX -> new X position

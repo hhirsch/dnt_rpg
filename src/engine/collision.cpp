@@ -8,6 +8,8 @@
 collision::collision()
 {
    actualMap = NULL;
+   NPCs = NULL;
+   PCs = NULL;
 }
 
 /*********************************************************************
@@ -16,16 +18,19 @@ collision::collision()
 collision::~collision()
 {
    actualMap = NULL;
+   NPCs = NULL;
+   PCs = NULL;
 }
-
 
 /*********************************************************************
  *                             defineMap                             *
  *********************************************************************/
-void collision::defineMap(Map* usedMap, characterList* npcs)
+void collision::defineMap(Map* usedMap, characterList* npcs,
+                          characterList* pcs)
 {
    actualMap = usedMap;
    NPCs = npcs;
+   PCs = pcs;
 }
 
 /*********************************************************************
@@ -106,7 +111,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
 
 
 /*********************************************************************
- *                           verifyMeioFio                           *
+ *                             verifyCurb                            *
  *********************************************************************/
 bool collision::verifyCurb(GLfloat min[3],GLfloat max[3], wall* curb)
 {
@@ -133,14 +138,33 @@ bool collision::verifyCurb(GLfloat min[3],GLfloat max[3], wall* curb)
 /*********************************************************************
  *                              canWalk                              *
  *********************************************************************/
-bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ, 
-                        GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
-                        GLfloat perX2, GLfloat perY2, GLfloat perZ2, 
-                        GLfloat perOrientation, Square* perQuad,
-                        GLfloat& varHeight, GLfloat& nx, GLfloat& nz)
+bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY ,GLfloat varZ,
+                        GLfloat varAlpha, GLfloat& varHeight, GLfloat& nx, 
+                        GLfloat& nz, bool usePosition)
 {
    bool result = true;
    Square* saux;
+
+   /* Verify if there is an actor!  */
+   if(!actor)
+   {
+      return(false);
+   }
+
+   /* set Character Positions */
+   GLfloat perX = varX;
+   GLfloat perY = varY;
+   GLfloat perZ = varZ;
+   GLfloat perOrientation = actor->orientation + varAlpha;
+   Square* perQuad = NULL;
+
+   if(usePosition)
+   {
+      perX += actor->xPosition;
+      perY += actor->yPosition;
+      perZ += actor->zPosition;
+      perQuad = actor->ocSquare;
+   }
 
    GLfloat min[3],min2[3];
    GLfloat max[3],max2[3];
@@ -165,21 +189,21 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
    }
 
 
-   x[0] = perX1;
-   z[0] = perZ1;
+   x[0] = actor->min[0];
+   z[0] = actor->min[2];
 
-   x[1] = perX1;
-   z[1] = perZ2; 
+   x[1] = actor->min[0];
+   z[1] = actor->max[2]; 
 
-   x[2] = perX2;
-   z[2] = perZ2;
+   x[2] = actor->max[0];
+   z[2] = actor->max[2];
 
-   x[3] = perX2;
-   z[3] = perZ1;
+   x[3] = actor->max[0];
+   z[3] = actor->min[2];
 
    /* Rotate and translate the Bounding Box */
-   rotTransBoundingBox(perOrientation, x, z, perX, perY1 + perY, 
-                       perY2 + perY, perZ, min, max );
+   rotTransBoundingBox(perOrientation, x, z, perX, actor->min[1] + perY, 
+                       actor->max[1] + perY, perZ, min, max );
 
    /* Test map limits */
    if( (min[0]<2) || (min[2]<2) || 
@@ -379,45 +403,52 @@ bool collision::canWalk(GLfloat perX, GLfloat perY, GLfloat perZ,
       }
    }
 
-   /* Test colision with npcs */
-   if(NPCs)
+   /* Test colision with npcs and pcs */
+   int i;
+   characterList* list = NPCs;
+   for(i = 0; i <=1; i++)
    {
-      character* pers = NPCs->first->next;
-      while( (pers != NPCs->first) )
+      if(list)
       {
-         x[0] = pers->min[0];
-         z[0] = pers->min[2];
-
-         x[1] = pers->min[0];
-         z[1] = pers->max[2]; 
-
-         x[2] = pers->max[0];
-         z[2] = pers->max[2];
- 
-         x[3] = pers->max[0];
-         z[3] = pers->min[2];
-
-
-         //FIXME put the map height here!
-         rotTransBoundingBox(pers->orientation, x, z,
-                          pers->xPosition, 
-                          pers->min[1]+pers->yPosition,
-                          pers->max[1]+pers->yPosition, 
-                          pers->zPosition, min2, max2 );
-
-         if(intercepts( min, max, min2, max2))
+         character* pers = list->first->next;
+         while( (pers != list->first) )
          {
-            /* Do a more depth colision verify */
-            if(pers->depthCollision(pers->orientation, pers->xPosition, 
-                                    pers->yPosition,
-                                    pers->zPosition, min, max))
+            if(pers != actor)
             {
-               return(false);
+               x[0] = pers->min[0];
+               z[0] = pers->min[2];
+
+               x[1] = pers->min[0];
+               z[1] = pers->max[2]; 
+
+               x[2] = pers->max[0];
+               z[2] = pers->max[2];
+ 
+               x[3] = pers->max[0];
+               z[3] = pers->min[2];
+
+               rotTransBoundingBox(pers->orientation, x, z,
+                                   pers->xPosition, 
+                                   pers->min[1]+pers->yPosition,
+                                   pers->max[1]+pers->yPosition, 
+                                   pers->zPosition, min2, max2 );
+
+               if(intercepts( min, max, min2, max2))
+               {
+                  /* Do a more depth colision verify */
+                  if(pers->depthCollision(pers->orientation, pers->xPosition, 
+                                          pers->yPosition,
+                                          pers->zPosition, min, max))
+                  {
+                     return(false);
+                  }
+               }
             }
+            pers = pers->next;
          }
-    
-         pers = pers->next;
       }
+      /* Change from NPC List to PC list */
+      list = PCs;
    }
 
    /* Test Curb */

@@ -22,8 +22,9 @@ class collision
 
       /*! Define Current Map
        * \param usedMap -> pointer to current Map
-       * \param npcs -> list of NPCs */
-      void defineMap(Map* usedMap, characterList* npcs);
+       * \param npcs -> list of NPCs
+       * \param pcs -> list of PCs */
+      void defineMap(Map* usedMap, characterList* npcs, characterList* pcs);
 
       /*! Verify if character can occupy position on Square
        * \param min -> min positions of Bounding Box (translated & rotated)
@@ -54,15 +55,20 @@ class collision
        *  \param nz -> value of the center new Z Character
        *  \return true if the character can occupy the position, 
        *          false otherwise.*/
-      bool canWalk(GLfloat perX, GLfloat perY, GLfloat perZ, 
+      /*bool canWalk(GLfloat perX, GLfloat perY, GLfloat perZ, 
                    GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
                    GLfloat perX2, GLfloat perY2, GLfloat perZ2, 
                    GLfloat perOrientation, Square* perQuad,
-                   GLfloat& varHeight, GLfloat& nx, GLfloat& nz);
+                   GLfloat& varHeight, GLfloat& nx, GLfloat& nz);*/
+      bool canWalk(character* actor, GLfloat varX, GLfloat varY ,GLfloat varZ,
+                   GLfloat varAlpha, GLfloat& varHeight, GLfloat& nx, 
+                   GLfloat& nz, bool usePosition=true);
+                   
       
    private:
-      Map* actualMap;         /**< Pointer to actual opened map */
-      characterList* NPCs;      /**< Pointer to the actual NPC List */
+      Map* actualMap;         /**< Pointer to current opened map */
+      characterList* NPCs;    /**< Pointer to the current NPC List */
+      characterList* PCs;     /**< Pointer to the current PC List */
 };
 
 

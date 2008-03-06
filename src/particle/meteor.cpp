@@ -78,13 +78,13 @@ void meteor::InitRender()
       if( (colDetect) && (!dead))
       {
          /* Not Used Variables */
-         GLfloat varHeight=0, 
-                 nX = 0, 
-                 nZ = 0;
-         /* Verify Collisions */
-         dead = !colDetect->canWalk(curPosX, curPosY, curPosZ, 
-                                    -0.5,-0.5,-0.5, 0.5,0.5,0.5,
-                                     0.0, NULL, varHeight, nX, nZ);
+         //GLfloat varHeight=0, 
+         //        nX = 0, 
+         //        nZ = 0;
+         /* FIXME Verify Collisions */
+         //dead = !colDetect->canWalk(curPosX, curPosY, curPosZ, 
+         //                           -0.5,-0.5,-0.5, 0.5,0.5,0.5,
+         //                            0.0, NULL, varHeight, nX, nZ);
       }
    }
    

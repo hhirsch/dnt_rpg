@@ -562,7 +562,8 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    /* Define Map */
    particleController->setActualMap(actualMap, &colisionDetect);
-   colisionDetect.defineMap(actualMap, NPCs);
+   colisionDetect.defineMap(actualMap, NPCs, PCs);
+   actionControl->setCharacterLists(NPCs, PCs);
 
    /* Done */
    showLoading(img,&texturaTexto,texturaCarga,
@@ -2418,18 +2419,10 @@ int engine::treatIO(SDL_Surface *screen)
             }
             activeCharacter->pathFind.defineMap(actualMap);
        
-            activeCharacter->pathFind.findPath(
-                                             activeCharacter->xPosition,
-                                             activeCharacter->zPosition,
-                                             xReal, zReal, 
-                                             activeCharacter->walk_interval, 
-                                             activeCharacter->orientation,
-                                             activeCharacter->min[0],
-                                             activeCharacter->min[1],
-                                             activeCharacter->min[2],
-                                             activeCharacter->max[0],
-                                             activeCharacter->max[1],
-                                             activeCharacter->max[2]);
+            activeCharacter->pathFind.findPath(activeCharacter,
+                                               xReal, zReal, 
+                                               activeCharacter->walk_interval, 
+                                               NPCs, PCs );
          }
       }
 
@@ -3110,19 +3103,9 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
    }
 
 
-   colisionDetect.defineMap(actualMap, NPCs);
-   result = colisionDetect.canWalk(activeCharacter->xPosition + varX,
-                                   activeCharacter->yPosition,
-                                   activeCharacter->zPosition + varZ,
-                                   activeCharacter->min[0],
-                                   activeCharacter->min[1],
-                                   activeCharacter->min[2],
-                                   activeCharacter->max[0],
-                                   activeCharacter->max[1],
-                                   activeCharacter->max[2],
-                                   activeCharacter->orientation + varAlpha, 
-                                   activeCharacter->ocSquare, varHeight,
-                                   nx, nz);
+   colisionDetect.defineMap(actualMap, NPCs, PCs);
+   result = colisionDetect.canWalk(activeCharacter, varX, 0, varZ, varAlpha, 
+                                   varHeight, nx, nz);
 
    if(result)
    {

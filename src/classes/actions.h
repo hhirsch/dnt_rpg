@@ -266,9 +266,16 @@ class actionController
 
       /*! Treat the actions on the controller */
       void treatActions(Map* actualMap);
+
+      /*! Set the character Lists of the action controller */
+      void setCharacterLists(characterList* npcs, characterList* pcs);
+
    private:
       action* first;    /**< First action on the list */
       int total;        /**< Total actions on the list */
+
+      characterList* NPCs;    /**< Current PCs List */
+      characterList* PCs;     /**< Current NPCs List */
 };
 
 #endif

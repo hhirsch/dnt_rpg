@@ -11,18 +11,12 @@
 typedef struct 
 {
    aStar* as;
-   GLfloat actualX;
-   GLfloat actualZ;
+   void* actor;
+   void* PCs;
+   void* NPCs;
    GLfloat x;
    GLfloat z;
    GLfloat stepSize;
-   GLfloat orientation;
-   GLfloat perX1;
-   GLfloat perY1;
-   GLfloat perZ1; 
-   GLfloat perX2; 
-   GLfloat perY2;
-   GLfloat perZ2;
 }dataThread;
 
 /*************************************************************************
@@ -31,10 +25,8 @@ typedef struct
 int runParalelSearch(void* data)
 {
    dataThread* dt = (dataThread*)data;
-   dt->as->findPathInternal(dt->actualX, dt->actualZ, dt->x, dt->z, 
-                            dt->stepSize, dt->orientation, 
-                            dt->perX1, dt->perY1, dt->perZ1,
-                            dt->perX2, dt->perY2, dt->perZ2);
+   dt->as->findPathInternal(dt->actor, dt->x, dt->z, 
+                            dt->stepSize, dt->NPCs, dt->PCs);
    /* Delete the dt */
    delete(dt);
    return(1);
@@ -97,12 +89,14 @@ aStar::~aStar()
 {
    delete(patt);
    actualMap = NULL;
-   if(state == ASTAR_STATE_RUNNING)
+   if(searchThread)
    {
       /* Stops the running thread */
       lock();
          abort = true;
       unLock();
+      SDL_WaitThread(searchThread, NULL);
+      searchThread = NULL;
    }
    SDL_DestroyMutex(searchMutex);
 }
@@ -120,10 +114,8 @@ void aStar::forceNextCall()
 /****************************************************************
  *                            findPath                          *
  ****************************************************************/
-void aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
-                     GLfloat stepSize, GLfloat orientation,
-                     GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
-                     GLfloat perX2, GLfloat perY2, GLfloat perZ2)
+void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
+                     void* NPCs, void* PCs)
 {
    GLuint actualTime = SDL_GetTicks();
 
@@ -132,26 +124,21 @@ void aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
       lastCallTime = actualTime;
       dataThread* dt = new(dataThread);
       dt->as = this;
-      dt->actualX = actualX;
-      dt->actualZ = actualZ;
+      dt->actor = actor;
       dt->x = x;
       dt->z = z;
       dt->stepSize = stepSize;
-      dt->orientation = orientation;
-      dt->perX1 = perX1;
-      dt->perY1 = perY1;
-      dt->perZ1 = perZ1;
-      dt->perX2 = perX2;
-      dt->perY2 = perY2;
-      dt->perZ2 = perZ2;
+      dt->NPCs = NPCs;
+      dt->PCs = PCs;
 
-      if(state == ASTAR_STATE_RUNNING)
+      if(searchThread)
       {
          /* End the running thread */
          lock();
             abort = true;
          unLock();
-         SDL_Delay(50);
+         SDL_WaitThread(searchThread, NULL);
+         searchThread = NULL;
       }
       /* Creates the Search Thread */
       abort = false;
@@ -166,31 +153,31 @@ void aStar::findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
 void aStar::clear()
 {
    lock();
-   delete(patt);
-   patt = new pattAgent(true);
-   patt->defineDestiny(0, 0);
-   patt->defineStepSize(0);
-   patt->defineOrientation(0);
-   patt->defineSight(0, 0);
+      delete(patt);
+      patt = new pattAgent(true);
+      /*patt->defineDestiny(0, 0);
+      patt->defineStepSize(0);
+      patt->defineOrientation(0);
+      patt->defineSight(0, 0);*/
    unLock();
 }
 
 /****************************************************************
  *                        findPathInternal                      *
  ****************************************************************/
-bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ, 
-                             GLfloat x, GLfloat z,
-                             GLfloat stepSize, GLfloat orientation,
-                             GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
-                             GLfloat perX2, GLfloat perY2, GLfloat perZ2)
+bool aStar::findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
+                             void* NPCs, void* PCs)
 {
    /* To avoid previous path, delete the existed one! */
-   clear();   
-  
+   clear();  
+
  lock();
    int i;
+   character* c = (character*)actor;
+   GLfloat actualX = c->xPosition;
+   GLfloat actualZ = c->zPosition;
+   //Square* perQuad = NULL;
    GLfloat varHeight = 0, nx = 0, nz = 0;
-   Square* perQuad = NULL;
    GLfloat posX=0, posZ=0;
    GLfloat newg=0, heuristic, dX, dZ, diagonal, orthogonal;
    pointStar* node, *node2, *node3;
@@ -200,8 +187,9 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
    destinyZ = z;
    collision collisionDetect;
 
-   /* FIXME use the NPCs pointer, instead of NULL */
-   collisionDetect.defineMap(actualMap, NULL);
+   /* Set the colision variables */
+   collisionDetect.defineMap(actualMap, (characterList*)NPCs, 
+                             (characterList*)PCs);
 
    GLfloat ssize = actualMap->squareSize();
 
@@ -223,6 +211,7 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
       /* Verify Abort */
       if(abort)
       {
+         unLock();
          return(false);
       }
 
@@ -253,7 +242,7 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
          patt = new pattAgent(true);
          patt->defineDestiny(node->x, node->z);
          patt->defineStepSize(stepSize);
-         patt->defineOrientation(orientation);
+         patt->defineOrientation(c->orientation);
          patt->defineSight(stepSize*10, 360);
          destinyX = node->x;
          destinyZ = node->z;
@@ -325,15 +314,9 @@ bool aStar::findPathInternal(GLfloat actualX, GLfloat actualZ,
         
         heuristic = diagonal + orthogonal + dX + dZ;
 
-        perQuad = actualMap->relativeSquare((int)floor( posX / (ssize)),
-                                            (int)floor( posZ / (ssize)));
         if( (node2 != NULL) || (node3 != NULL) || 
-            (perQuad == NULL) ||
-            (!collisionDetect.canWalk(posX, 0, posZ, 
-                                      perX1, perY1, perZ1, 
-                                      perX2, perY2, perZ2, 
-                                      orientation, perQuad,
-                                      varHeight, nx, nz)) )
+            (!collisionDetect.canWalk(c, posX, 0, posZ, 0, 
+                                      varHeight, nx, nz, false)) )
         {
            if( (node2 != NULL) && (node2->gone > newg))
            {
@@ -378,12 +361,15 @@ void aStar::setOrientation(GLfloat ori)
  ****************************************************************/
 bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori)
 {
-   if(patt->defineNextPosition())
-   {
-      patt->getPosition(posX, posZ);
-      ori = patt->orientationValue();
-      return((posX != destinyX) || (posZ != destinyZ));
-   }
+   lock();
+      if(patt->defineNextPosition())
+      {
+         patt->getPosition(posX, posZ);
+         ori = patt->orientationValue();
+         unLock();
+         return((posX != destinyX) || (posZ != destinyZ));
+      }
+   unLock();
    return(false);
 }
 
@@ -392,8 +378,38 @@ bool aStar::getNewPosition(GLfloat& posX, GLfloat& posZ, GLfloat& ori)
  ****************************************************************/
 void aStar::drawPath()
 {
-   patt->drawWayPointsLinear();
+   lock();
+      patt->drawWayPointsLinear();
+   unLock();
 }
+
+/****************************************************************
+ *                            getDestiny                        *
+ ****************************************************************/
+void aStar::getDestiny(GLfloat& destX, GLfloat& destZ)
+{
+   lock();
+      destX = destinyX;
+      destZ = destinyZ;
+   unLock();
+}
+
+/****************************************************************
+ *                             getState                         *
+ ****************************************************************/
+int aStar::getState()
+{
+   int st = -1;
+   lock();
+      st = state;
+      if(state != ASTAR_STATE_RUNNING)
+      {
+         state = ASTAR_STATE_OTHER;
+      }
+   unLock();
+   return(st);
+}
+
 
 /****************************************************************************/
 /****************************************************************************/
@@ -521,27 +537,5 @@ pointStar* listStar::findLowest()
       tmp = tmp->next;
    }
    return(lowest);
-}
-
-/****************************************************************
- *                            getDestiny                        *
- ****************************************************************/
-void aStar::getDestiny(GLfloat& destX, GLfloat& destZ)
-{
-   destX = destinyX;
-   destZ = destinyZ;
-}
-
-/****************************************************************
- *                             getState                         *
- ****************************************************************/
-int aStar::getState()
-{
-   int st = state;
-   if(state != ASTAR_STATE_RUNNING)
-   {
-      state = ASTAR_STATE_OTHER;
-   }
-   return(st);
 }
 

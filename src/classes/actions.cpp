@@ -229,6 +229,8 @@ actionController::actionController()
 {
    first = NULL;
    total = 0;
+   NPCs = NULL;
+   PCs = NULL;
 }
 
 /************************************************************
@@ -237,6 +239,16 @@ actionController::actionController()
 actionController::~actionController()
 {
    removeAllActions();
+}
+
+/************************************************************
+ *                    setCharactersLists                    *
+ ************************************************************/
+void actionController::setCharacterLists(characterList* npcs, 
+                                         characterList* pcs)
+{
+   NPCs = npcs;
+   PCs = pcs;
 }
 
 /************************************************************
@@ -313,17 +325,10 @@ action* actionController::addAction(action* act)
          if(act->target == NULL)
          {
             /* It's a move to position */
-            act->actor->pathFind.findPath(act->actor->xPosition, 
-                                          act->actor->zPosition,
+            act->actor->pathFind.findPath(act->actor,
                                           act->targetX, act->targetZ, 
                                           act->actor->walk_interval, 
-                                          act->actor->orientation,
-                                          act->actor->min[0],
-                                          act->actor->min[1],
-                                          act->actor->min[2],
-                                          act->actor->max[0],
-                                          act->actor->max[1],
-                                          act->actor->max[2]);
+                                          NPCs, PCs);
          }
          else
          {
@@ -335,20 +340,13 @@ action* actionController::addAction(action* act)
             act->targetZ = act->target->zPosition;
 
             /* It's a move to a target */
-            act->actor->pathFind.findPath(act->actor->xPosition, 
-                                          act->actor->zPosition,
+            act->actor->pathFind.findPath(act->actor,
                                           act->target->xPosition - 
                                           ACT_MOVE_DELTA, 
                                           act->target->zPosition - 
                                           ACT_MOVE_DELTA, 
                                           act->actor->walk_interval, 
-                                          act->actor->orientation,
-                                          act->actor->min[0],
-                                          act->actor->min[1],
-                                          act->actor->min[2],
-                                          act->actor->max[0],
-                                          act->actor->max[1],
-                                          act->actor->max[2]);
+                                          NPCs, PCs);
          }
       }
       else
@@ -459,20 +457,13 @@ void actionController::treatActions(Map* actualMap)
                act->actor->pathFind.forceNextCall();
 
                //FIXME Move not ON character but TO character
-               act->actor->pathFind.findPath(act->actor->xPosition, 
-                                             act->actor->zPosition,
+               act->actor->pathFind.findPath(act->actor,
                                              act->target->xPosition - 
                                              ACT_MOVE_DELTA, 
                                              act->target->zPosition - 
                                              ACT_MOVE_DELTA, 
                                              act->actor->walk_interval, 
-                                             act->actor->orientation,
-                                             act->actor->min[0],
-                                             act->actor->min[1],
-                                             act->actor->min[2],
-                                             act->actor->max[0],
-                                             act->actor->max[1],
-                                             act->actor->max[2]);
+                                             NPCs, PCs);
             }
          }
          character* actor = act->getActor();
