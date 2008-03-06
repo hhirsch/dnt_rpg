@@ -112,6 +112,7 @@ sound::~sound()
       lock();
       running = false;
       unLock();
+      SDL_WaitThread(soundThread, NULL);
 
       /* Destroy the Mutex */
       SDL_DestroyMutex(soundMutex);
