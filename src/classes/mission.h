@@ -103,6 +103,7 @@ class missionsController
       void addCompleted(mission* m);
 
       mission* completed;  /**< The List of Completed Missions */
+      mission* curTreat;   /**< Pointer to the mission to treat next  */
       int totalCompleted;  /**< Total number of Completed Missions */
 
       mission* current;    /**< The list of Current Missions */

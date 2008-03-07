@@ -112,7 +112,7 @@ engine::engine()
    missions = new missionsController(this);
 
    /* FIXME remove from here the addMission */
-   //missions->addNewMission("missions/tutorial/mission1.dsl");
+   missions->addNewMission("missions/tutorial/mission1.dsl");
 
    hour = 9.0;
    gameSun = new sun(hour, HALFFARVIEW, HALFFARVIEW);

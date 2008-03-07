@@ -1,6 +1,8 @@
 #include "mission.h"
 #include "../engine/dccnit.h"
 
+#define MISSION_CONTROLLER_TOTAL_TREAT  5
+
 /************************************************************
  *                        Constructor                       *
  ************************************************************/
@@ -87,6 +89,7 @@ missionsController::missionsController(void* usedEngine)
    completed = NULL;
    totalCurrent = 0;
    current = NULL;
+   curTreat = NULL;
    pEngine = usedEngine;
 }
 
@@ -146,6 +149,12 @@ void missionsController::completeMission(mission* m, int type)
    /* Close the script, since it won't run anymore */
    m->close();
    m->completed = type;
+
+   /* Verify if it isn't the curTreat Mission */
+   if(m == curTreat)
+   {
+      curTreat = NULL;
+   }
 
    /* type < 0 means failed. > 0 success */
    if(type > 0)
@@ -261,20 +270,35 @@ mission* missionsController::getCurrentMission(string scriptFile)
 void missionsController::treat(Map* acMap)
 {
    int i;
-   int total = totalCurrent;
-   mission* m = current;
-   /* Only have to treat current missions */
-   for(i=0; i < total; i++)
-   {
-      /* Run Script */
-      m->defineMap(acMap);
-      m->run(MAX_SCRIPT_LINES);
-      m = m->next;
 
-      /* Verify if finished the script file. */
-      if(m->previous->finished())
+   /* Only have to treat current missions */
+   for(i=0; i < MISSION_CONTROLLER_TOTAL_TREAT; i++)
+   {
+      /* Set the curTreat, if needed */
+      if(!curTreat)
       {
-         completeMission(m->previous, MISSION_COMPLETION_FINISHED);
+         curTreat = current;
+         if(!curTreat)
+         {
+            /* No current missions -> nothing to do! */
+            return;
+         }
+      }
+
+      /* Run Script */
+      curTreat->defineMap(acMap);
+      curTreat->run(MAX_SCRIPT_LINES);
+   
+      /* Since it can be completed at run with complete mission function */
+      if(curTreat)
+      {
+         curTreat = curTreat->next;
+
+         /* Verify if finished the script file. */
+         if(curTreat->previous->finished())
+         {
+            completeMission(curTreat->previous, MISSION_COMPLETION_FINISHED);
+         }
       }
    }
 }
