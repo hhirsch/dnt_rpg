@@ -262,13 +262,21 @@ class characterList
        * \param dude -> pointer to the new active character */
       void setActiveCharacter(character* dude);
 
+      /*! Get the total number of characters on list
+       * \return current number of characters on list */
       int getTotal(){return(total);};
+
+      /*! Treat Character's general scripts
+       * \apram actualMap -> current opened map */
+      void treatGeneralScripts(Map* actualMap);
 
       character* first;         /**< List Node Pointer */
 
    protected:
       character* activeCharacter;  /**< Active Character's on list */
-      int total;                    /**< Total Elements on List */
+      int total;                   /**< Total Elements on List */
+
+      character* curTreat;         /**< Current NPC To treat Scripts */
 
 };
 

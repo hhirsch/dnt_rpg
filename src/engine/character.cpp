@@ -13,6 +13,8 @@
 #define BORDER_FILE "characters/portraits/borda.png"
 #define BORDER_SIZE 5
 
+#define CHARACTER_TREAT_SCRIPTS  5
+
 /*********************************************************************
  *                             constructor                           *
  *********************************************************************/
@@ -652,6 +654,7 @@ void character::applySkillCosts()
 characterList::characterList()
 {
    total = 0;
+   curTreat = NULL;
    first = new character(NULL);
    first->next = first;
    first->previous = first;
@@ -907,9 +910,18 @@ character* characterList::insertCharacter(string file, featsList* ft,
  *********************************************************************/
 void characterList::removeCharacter(character* persona)
 {
+   /* Remove the character from list */
    persona->previous->next = persona->next;
    persona->next->previous = persona->previous;
    total--;
+
+   /* Make shure curTreat still exits */
+   if(persona == curTreat)
+   {
+      curTreat = NULL;
+   }
+
+   /* Delete the Character */
    delete(persona);
 }
 
@@ -952,5 +964,41 @@ void characterList::setActiveCharacter(character* dude)
    }
 }
 
+/*********************************************************************
+ *                           treatGeneralScripts                     *
+ *********************************************************************/
+void characterList::treatGeneralScripts(Map* actualMap)
+{
+   int i;
+   iaScript* script;
+   for(i=0; i < CHARACTER_TREAT_SCRIPTS; i++)
+   {
+      if(total <= 0)
+      {
+         /* No characters -> Nothing to treat */
+         return;
+      }
+      
+      /* Set, if needed the current character to treat */
+      if(!curTreat)
+      {
+         curTreat = first->next;
+      }
+            
+      /* Get and treat script */
+      script = (iaScript*) curTreat->getGeneralScript();
+      if( (script) && (curTreat->isAlive()))
+      {
+         script->defineMap(actualMap);
+         script->run(MAX_SCRIPT_LINES);
+      }
 
+      /* forward on the list */
+      curTreat = curTreat->next;
+      if(curTreat == first)
+      {
+         curTreat = curTreat->next;
+      }
+   }
+}
 

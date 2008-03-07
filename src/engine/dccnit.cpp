@@ -1344,19 +1344,7 @@ void engine::treatScripts()
       /* Treat NPCs scripts */
       if(NPCs)
       {
-         int i;
-         character* npc = NPCs->first;
-         iaScript* script;
-         for(i=0; i < NPCs->getTotal(); i++)
-         {
-            npc = npc->next;
-            script = (iaScript*) npc->getGeneralScript();
-            if( (script) && (npc->isAlive()))
-            {
-               script->defineMap(actualMap);
-               script->run(MAX_SCRIPT_LINES);
-            }
-         }
+         NPCs->treatGeneralScripts(actualMap);
       }
    }
    else
