@@ -80,6 +80,7 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
       int x = x1 + 2 + fnt.getStringWidth(s);
       line_Draw(screen,x,y1+3,x,y2-3);
    }
+   setChanged();
 }
 
 /********************************************************************
@@ -92,6 +93,7 @@ void textBar::draw(SDL_Surface *screen)
    rectangle_2Colors(screen,x1,y1,x2,y2, Colors.colorCont[1].R,
                      Colors.colorCont[1].G,Colors.colorCont[1].B);
    putText(0,0,screen);
+   setChanged();
 }
 
 /********************************************************************

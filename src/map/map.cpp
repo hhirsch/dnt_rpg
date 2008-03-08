@@ -1871,7 +1871,7 @@ int Map::save(string arquivo)
    
    /* Write Dimensions */
    fprintf(arq,"T %dX%d\n",x,z);
-   fprintf(arq,"# Made by DccNiTghtmare's MapEditor, v0.0.3\n");
+   fprintf(arq,"# Made by DccNiTghtmare's MapEditor, v0.2\n");
 
    /* Write fog file name, if exists */
    if( !fog.fileName.empty())

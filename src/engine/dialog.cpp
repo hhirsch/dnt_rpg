@@ -11,7 +11,7 @@
 
 #define BUFFER_SIZE 512
 
-/* Geral Tokens */
+/* General Tokens */
 #define TK_TRUE "true"
 #define TK_FALSE "false"
 #define TK_DIALOG "dialog"

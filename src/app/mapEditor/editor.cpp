@@ -15,7 +15,7 @@ editor::editor()
    features = new featsList(dir.getRealFile("feats/"),
                             dir.getRealFile("feats/feats.ftl"));
 
-   //FIXME, verifyif the antialising is disable or not!
+   //FIXME, verify if the antialising is disable or not!
    Farso_Init(&screen,"DccNiTghtmare Map Editor 0.2", 800, 600, false, 0);
 
    init();
