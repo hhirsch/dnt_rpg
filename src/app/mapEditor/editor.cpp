@@ -117,6 +117,7 @@ void editor::init()
  *********************************************************************/
 void editor::openMap()
 {
+   dirs dir;
    if(mapOpened)
    {
       //Close Actual Map
@@ -152,7 +153,7 @@ void editor::openMap()
       if(!map->getNpcFileName().empty())
       {
          FILE* arq;
-         if(!(arq = fopen(map->getNpcFileName().c_str(),"r")))
+         if(!(arq = fopen(dir.getRealFile(map->getNpcFileName()).c_str(),"r")))
          {
             gui->showMessage("Ouch, can't load NPC's file");
          }

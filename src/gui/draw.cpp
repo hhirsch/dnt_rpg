@@ -388,6 +388,12 @@ void setTexture(SDL_Surface* img, GLuint textID)
       amask = 0xff000000;
    #endif
 
+   if(img->format->BytesPerPixel == 4)
+   {
+      setTextureRGBA(img, textID);
+      return;
+   }
+
    glBindTexture(GL_TEXTURE_2D,textID);
 
    if( ( (img->w & (img->w - 1)) != 0 ) ||
