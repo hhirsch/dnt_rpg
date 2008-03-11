@@ -229,7 +229,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
     }
 
     /*  FOCUS ON WINDOW MOVIMENTATION  */
-    if (focus == FOCUS_WINDOW_MOVE)
+    if(focus == FOCUS_WINDOW_MOVE)
     {
         if(!(ljan->getActiveWindow()->doMove(fundo,x,y,Mbotao)))
         {
@@ -364,7 +364,8 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
        ljan->getActiveWindow()->setChanged();
 
         
-       if((focus == FOCUS_WINDOW_MENU) && (res==4) && (pronto))
+       if( (focus == FOCUS_WINDOW_MENU) && 
+           (res == WINDOW_MENU_CLOSE) && (pronto))
        {
            if(ljan->getActiveWindow()->canCloseWindow())
            {

@@ -16,6 +16,10 @@
 #include <string>
 using namespace std;
 
+
+#define WINDOW_MENU_MIN_MAX  1
+#define WINDOW_MENU_CLOSE    3
+
 /*! The Window Object */
 class window: public guiObject
 {
