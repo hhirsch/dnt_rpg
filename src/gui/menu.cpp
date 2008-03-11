@@ -58,17 +58,30 @@ guiObject* menu::getItem(int i)
 }
 
 /*********************************************************
- *                      Constructor                      *
+ *                      itemAvaible                      *
  *********************************************************/
 bool menu::itemAvaible(int item)
 {
    guiObject* it = getItem(item);
    if(!it)
    {
-      return(0);
+      return(false);
    }
    return(it->isAvaible());
 }
+
+/*********************************************************
+ *                     setItemAvaible                    *
+ *********************************************************/
+void menu::setItemAvaible(int item, bool avaible)
+{
+   guiObject* it = getItem(item);
+   if(it)
+   {
+      it->setAvaible(avaible);
+   }
+}
+
 
 /*********************************************************
  *                      setCoordinate                    *

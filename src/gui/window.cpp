@@ -158,19 +158,17 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
 
    objects = new guiList;
 
-   button* tmp;
-   tmp = objects->insertButton(3,3,13,12,"-",0);
-   tmp->men = new menu(0,0);
-   menu* men = (menu*) tmp->men;
+   menuButton = objects->insertButton(3,3,13,12,"-",0);
+   menuButton->men = new menu(0,0);
+   menu* men = (menu*) menuButton->men;
    men->insertItem(gettext("Close"),1);
    men->insertItem("-",0);
    men->insertItem(gettext("Maximize"),0);
-   men->insertItem(gettext("Move"),0); 
-   button* b;
-   b = objects->insertButton(14,3,24,12,fnt.createUnicode(0x25CF),0);
-   b->defineFont(DNT_FONT_ARIAL, 10);
-   b = objects->insertButton(25,3,35,12,fnt.createUnicode(0x25B2),0);
-   b->defineFont(DNT_FONT_ARIAL, 8);
+   men->insertItem(gettext("Move"),1); 
+   closeButton = objects->insertButton(14,3,24,12,fnt.createUnicode(0x25CF),0);
+   closeButton->defineFont(DNT_FONT_ARIAL, 10);
+   minMaxButton = objects->insertButton(25,3,35,12,fnt.createUnicode(0x25B2),0);
+   minMaxButton->defineFont(DNT_FONT_ARIAL, 8);
    type = GUI_WINDOW;
 }
 
@@ -382,8 +380,11 @@ void window::open()
  *********************************************************************/
 void window::setAttributes(bool close, bool move, bool scale, bool maximize)
 {
+   menu* men = (menu*)menuButton->men;
    canClose = close;
+   men->setItemAvaible(4, canClose);
    canMove = move;
+   men->setItemAvaible(1, canMove);
    canScale = scale;
    canMaximize = maximize;
 }

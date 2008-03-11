@@ -109,6 +109,9 @@ class window: public guiObject
       int dify;                  /**< Difference of Y where mouse clicked */
       window **externPointer;    /**< Pointer to the extern window pointer */
       farso_colors Colors;       /**< Colors Used */
+      button* closeButton;    /**< Button to close Window */
+      button* menuButton;     /**< Button to open Window Menu */
+      button* minMaxButton;   /**< Button to minimize, maximize the window */
 
       /*! Draw the Title Bar as Inactive */
       void drawInactiveBar();
