@@ -146,7 +146,6 @@ clean:
 install: $(BIN)dccnitghtmare
 	@printf "Installing DccNiTghtmare bin files... "
 	@$(INSTALL) -c -m 755 $(BIN)dccnitghtmare $(prefix)/bin/
-	@$(INSTALL) -c -m 755 $(BIN)dntMapEditor $(prefix)/bin/
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	@printf "Installing DccNiTghtmare data files... "
 	@$(INSTALL) -d $(datadir)/$(PACKAGE)
@@ -167,7 +166,6 @@ install: $(BIN)dccnitghtmare
 uninstall:
 	@printf "Uninstalling DccNiTghtmare files... "
 	@rm -f $(prefix)/bin/dccnitghtmare
-	@rm -f $(prefix)/bin/dntMapEditor
 	@rm -rf $(datadir)/$(PACKAGE)
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	

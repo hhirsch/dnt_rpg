@@ -32,7 +32,7 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
       SDL_Surface* img = IMG_Load(arquivo);
       if(!img)
       {
-         printf("Can't Open Image file: %s\n DNT should crash soon.\n",arquivo);
+         printf(gettext("Can't open image: %s\n"),arquivo);
          return;
       }
       //fig = img;
@@ -44,7 +44,7 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
       SDL_FreeSurface(img);
       if ( fig == NULL )
       {
-         printf("Warn: Can't Load Picture, may crash soon (out of memory)!\n");
+         printf(gettext("Warn: Can't Load Picture, may crash soon (out of memory)!\n"));
       }
       else
       {
