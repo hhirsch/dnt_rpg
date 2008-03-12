@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
-"Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-02-17 15:25-0300\n"
+"Report-Msgid-Bugs-To: dnt@dnteam.org\n"
+"POT-Creation-Date: 2008-03-12 08:04-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -237,42 +237,47 @@ msgstr "Perícias da Classe"
 msgid "No Skills."
 msgstr "Sem Perícias"
 
-#: src/engine/dccnit.cpp:351
+#: src/engine/cursor.cpp:54
+#, c-format
+msgid "Can't load mouse cursor: %s\n"
+msgstr "Não consegui carregar o cursor do mouse: %s\n"
+
+#: src/engine/dccnit.cpp:353
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Carregando Mapa: %s"
 
-#: src/engine/dccnit.cpp:433
+#: src/engine/dccnit.cpp:435
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Ops, não consegui abrir arquivo de NPCs: %s.\n"
 
-#: src/engine/dccnit.cpp:448
+#: src/engine/dccnit.cpp:450
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregando NPC: %s"
 
-#: src/engine/dccnit.cpp:471
+#: src/engine/dccnit.cpp:473
 msgid "Loading Character"
 msgstr "Carregando Personagem"
 
-#: src/engine/dccnit.cpp:478
+#: src/engine/dccnit.cpp:480
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:518
+#: src/engine/dccnit.cpp:520
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:548
+#: src/engine/dccnit.cpp:550
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:567
+#: src/engine/dccnit.cpp:570
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:657
+#: src/engine/dccnit.cpp:660
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -284,114 +289,114 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1185
+#: src/engine/dccnit.cpp:1198
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1224 src/engine/dccnit.cpp:1292
+#: src/engine/dccnit.cpp:1237 src/engine/dccnit.cpp:1305
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1274
+#: src/engine/dccnit.cpp:1287
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1467
+#: src/engine/dccnit.cpp:1468
 msgid "Enter Battle Mode"
 msgstr "Entra no Modo de Batalha"
 
-#: src/engine/dccnit.cpp:1471
+#: src/engine/dccnit.cpp:1472
 msgid "Select Normal Attack"
 msgstr "Seleciona Ataque Normal"
 
-#: src/engine/dccnit.cpp:1478
+#: src/engine/dccnit.cpp:1479
 msgid "Open Quests Window"
 msgstr "Abre Janela de Missões"
 
-#: src/engine/dccnit.cpp:1485
+#: src/engine/dccnit.cpp:1486
 msgid "Open Map Window"
 msgstr "Abre Janela de Mapa"
 
-#: src/engine/dccnit.cpp:1489
+#: src/engine/dccnit.cpp:1490
 msgid "Map Window already opened!"
 msgstr "Janela de Mapa já aberta!"
 
-#: src/engine/dccnit.cpp:1497
+#: src/engine/dccnit.cpp:1498
 msgid "End Character's Turn"
 msgstr "Termina Turno do Personagem"
 
-#: src/engine/dccnit.cpp:1501
+#: src/engine/dccnit.cpp:1502
 msgid "Only Avaible on Battle Mode"
 msgstr "Somente disponível no Modo de Batalha"
 
-#: src/engine/dccnit.cpp:1509
+#: src/engine/dccnit.cpp:1510
 msgid "Open Inventory Window"
 msgstr "Abre Janela de Inventário"
 
-#: src/engine/dccnit.cpp:1513
+#: src/engine/dccnit.cpp:1514
 msgid "Inventory already opened!"
 msgstr "Inventário já aberto!"
 
-#: src/engine/dccnit.cpp:1520
+#: src/engine/dccnit.cpp:1521
 msgid "Open Assign Attacks Window"
 msgstr "Abre Janela de Definir Ataques Rápidos"
 
-#: src/engine/dccnit.cpp:1526
+#: src/engine/dccnit.cpp:1527
 msgid "View Character Informations"
 msgstr "Ver Informações do Personagem"
 
-#: src/engine/dccnit.cpp:1532
+#: src/engine/dccnit.cpp:1533
 msgid "Open Group/Party Window"
 msgstr "Abre Janela de Grupo"
 
-#: src/engine/dccnit.cpp:1594 src/engine/dccnit.cpp:1952
-#: src/engine/dccnit.cpp:3229
+#: src/engine/dccnit.cpp:1595 src/engine/dccnit.cpp:1953
+#: src/engine/dccnit.cpp:3208
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1691
+#: src/engine/dccnit.cpp:1692
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1749
+#: src/engine/dccnit.cpp:1750
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1877 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1878 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/engine/dccnit.cpp:3198
+#: src/engine/dccnit.cpp:3177
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/dccnit.cpp:3207
+#: src/engine/dccnit.cpp:3186
 msgid "FPS:"
 msgstr "FPS:"
 
-#: src/engine/dccnit.cpp:3224
+#: src/engine/dccnit.cpp:3203
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: src/engine/dccnit.cpp:3226
+#: src/engine/dccnit.cpp:3205
 msgid "Press F1 for Help"
 msgstr "Pressione F1 para Ajuda"
 
-#: src/engine/dccnit.cpp:3232 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3211 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/dccnit.cpp:3234
+#: src/engine/dccnit.cpp:3213
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3237 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3216 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Carregar"
 
-#: src/engine/dccnit.cpp:3424
+#: src/engine/dccnit.cpp:3413
 msgid "|Exit Battle Mode"
 msgstr "|Sai do Modo de Batalha"
 
@@ -484,27 +489,27 @@ msgstr "Opções"
 msgid "Exit"
 msgstr "Sair"
 
-#: src/engine/inventwindow.cpp:165
+#: src/engine/inventwindow.cpp:167
 msgid "Drop"
 msgstr "Descartar"
 
-#: src/engine/inventwindow.cpp:167
+#: src/engine/inventwindow.cpp:169
 msgid "Sell"
 msgstr "Vender"
 
-#: src/engine/inventwindow.cpp:170
+#: src/engine/inventwindow.cpp:172
 msgid "Use"
 msgstr "Usar"
 
-#: src/engine/inventwindow.cpp:174
+#: src/engine/inventwindow.cpp:176
 msgid "Remove"
 msgstr "Remover"
 
-#: src/engine/inventwindow.cpp:177
+#: src/engine/inventwindow.cpp:179
 msgid "Info"
 msgstr "Info"
 
-#: src/engine/inventwindow.cpp:179
+#: src/engine/inventwindow.cpp:181
 msgid "Get"
 msgstr "Pegar"
 
@@ -765,19 +770,25 @@ msgstr "Não consegui iniciar a SDL_ttf: %s\n"
 msgid "Can't open font file: %s\n"
 msgstr "Erro ao abrir arquivo de fonte: %s\n"
 
-#: src/gui/window.cpp:141
+#: src/gui/window.cpp:164
 msgid "Close"
 msgstr "Fechar"
 
-#: src/gui/window.cpp:143
+#: src/gui/window.cpp:166
 msgid "Maximize"
 msgstr "Maximizar"
 
-#: src/gui/window.cpp:144
-msgid "Move"
-msgstr "Mover"
+#: src/gui/picture.cpp:35
+#, c-format
+msgid "Can't open image: %s\n"
+msgstr "Erro ao abrir imagem: %s \n"
 
-#: src/ia/iascript.cpp:827
+#: src/gui/picture.cpp:47
+#, c-format
+msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
+msgstr "Aviso: Não pude carregar imagem (sem memória)!\n"
+
+#: src/ia/iascript.cpp:858
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missão Cumprida: %d XP!"

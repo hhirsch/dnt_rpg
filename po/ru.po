@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
-"Report-Msgid-Bugs-To: \"http://dccnitghtmare.sf.net\"\n"
-"POT-Creation-Date: 2008-02-17 15:25-0300\n"
+"Report-Msgid-Bugs-To: dnt@dnteam.org\n"
+"POT-Creation-Date: 2008-03-12 08:04-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -240,42 +240,47 @@ msgstr "Скиллы класса"
 msgid "No Skills."
 msgstr "Нет умений."
 
-#: src/engine/dccnit.cpp:351
+#: src/engine/cursor.cpp:54
+#, c-format
+msgid "Can't load mouse cursor: %s\n"
+msgstr ""
+
+#: src/engine/dccnit.cpp:353
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Загрузка карты: %s"
 
-#: src/engine/dccnit.cpp:433
+#: src/engine/dccnit.cpp:435
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Ох, не могу загрузить файл NPC: %s.\n"
 
-#: src/engine/dccnit.cpp:448
+#: src/engine/dccnit.cpp:450
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Загрузка NPC: %s"
 
-#: src/engine/dccnit.cpp:471
+#: src/engine/dccnit.cpp:473
 msgid "Loading Character"
 msgstr "Загрузка характера"
 
-#: src/engine/dccnit.cpp:478
+#: src/engine/dccnit.cpp:480
 msgid "Putting GUI on Screen"
 msgstr "Помещение GUI на экран"
 
-#: src/engine/dccnit.cpp:518
+#: src/engine/dccnit.cpp:520
 msgid "Loading Particles"
 msgstr "Загрузка частиц"
 
-#: src/engine/dccnit.cpp:548
+#: src/engine/dccnit.cpp:550
 msgid "Loading Changes..."
 msgstr "Загрузка изменений..."
 
-#: src/engine/dccnit.cpp:567
+#: src/engine/dccnit.cpp:570
 msgid "Done!"
 msgstr "Готово!"
 
-#: src/engine/dccnit.cpp:657
+#: src/engine/dccnit.cpp:660
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -283,114 +288,114 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1185
+#: src/engine/dccnit.cpp:1198
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1224 src/engine/dccnit.cpp:1292
+#: src/engine/dccnit.cpp:1237 src/engine/dccnit.cpp:1305
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов на арене"
 
-#: src/engine/dccnit.cpp:1274
+#: src/engine/dccnit.cpp:1287
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1467
+#: src/engine/dccnit.cpp:1468
 msgid "Enter Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1471
+#: src/engine/dccnit.cpp:1472
 msgid "Select Normal Attack"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1478
+#: src/engine/dccnit.cpp:1479
 msgid "Open Quests Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1485
+#: src/engine/dccnit.cpp:1486
 msgid "Open Map Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1489
+#: src/engine/dccnit.cpp:1490
 msgid "Map Window already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1497
+#: src/engine/dccnit.cpp:1498
 msgid "End Character's Turn"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1501
+#: src/engine/dccnit.cpp:1502
 msgid "Only Avaible on Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1509
+#: src/engine/dccnit.cpp:1510
 msgid "Open Inventory Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1513
+#: src/engine/dccnit.cpp:1514
 msgid "Inventory already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1520
+#: src/engine/dccnit.cpp:1521
 msgid "Open Assign Attacks Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1526
+#: src/engine/dccnit.cpp:1527
 msgid "View Character Informations"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1532
+#: src/engine/dccnit.cpp:1533
 msgid "Open Group/Party Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1594 src/engine/dccnit.cpp:1952
-#: src/engine/dccnit.cpp:3229
+#: src/engine/dccnit.cpp:1595 src/engine/dccnit.cpp:1953
+#: src/engine/dccnit.cpp:3208
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:1691
+#: src/engine/dccnit.cpp:1692
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:1749
+#: src/engine/dccnit.cpp:1750
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:1877 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1878 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s атаковал %s|"
 
-#: src/engine/dccnit.cpp:3198
+#: src/engine/dccnit.cpp:3177
 msgid "Map"
 msgstr "Карта"
 
-#: src/engine/dccnit.cpp:3207
+#: src/engine/dccnit.cpp:3186
 msgid "FPS:"
 msgstr "PS:"
 
-#: src/engine/dccnit.cpp:3224
+#: src/engine/dccnit.cpp:3203
 msgid "Shortcuts"
 msgstr "Мелочь"
 
-#: src/engine/dccnit.cpp:3226
+#: src/engine/dccnit.cpp:3205
 msgid "Press F1 for Help"
 msgstr "Нажмите F1 для помощи"
 
-#: src/engine/dccnit.cpp:3232 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3211 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/engine/dccnit.cpp:3234
+#: src/engine/dccnit.cpp:3213
 msgid "Menu"
 msgstr "Меню:"
 
-#: src/engine/dccnit.cpp:3237 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3216 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Загрузка"
 
-#: src/engine/dccnit.cpp:3424
+#: src/engine/dccnit.cpp:3413
 msgid "|Exit Battle Mode"
 msgstr "|Покинуть режим сражения"
 
@@ -483,27 +488,27 @@ msgstr "Настройки"
 msgid "Exit"
 msgstr "Выход"
 
-#: src/engine/inventwindow.cpp:165
+#: src/engine/inventwindow.cpp:167
 msgid "Drop"
 msgstr "Бросить"
 
-#: src/engine/inventwindow.cpp:167
+#: src/engine/inventwindow.cpp:169
 msgid "Sell"
 msgstr "Продать"
 
-#: src/engine/inventwindow.cpp:170
+#: src/engine/inventwindow.cpp:172
 msgid "Use"
 msgstr "Использовать"
 
-#: src/engine/inventwindow.cpp:174
+#: src/engine/inventwindow.cpp:176
 msgid "Remove"
 msgstr "Удалить"
 
-#: src/engine/inventwindow.cpp:177
+#: src/engine/inventwindow.cpp:179
 msgid "Info"
 msgstr "Информация"
 
-#: src/engine/inventwindow.cpp:179
+#: src/engine/inventwindow.cpp:181
 msgid "Get"
 msgstr "Получить"
 
@@ -764,19 +769,25 @@ msgstr ""
 msgid "Can't open font file: %s\n"
 msgstr ""
 
-#: src/gui/window.cpp:141
+#: src/gui/window.cpp:164
 msgid "Close"
 msgstr ""
 
-#: src/gui/window.cpp:143
+#: src/gui/window.cpp:166
 msgid "Maximize"
 msgstr ""
 
-#: src/gui/window.cpp:144
-msgid "Move"
+#: src/gui/picture.cpp:35
+#, c-format
+msgid "Can't open image: %s\n"
 msgstr ""
 
-#: src/ia/iascript.cpp:827
+#: src/gui/picture.cpp:47
+#, c-format
+msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
+msgstr ""
+
+#: src/ia/iascript.cpp:858
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Миссия завершена: %d XP!"
