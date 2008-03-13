@@ -1712,7 +1712,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                    {
                       if(shortCutsWindow)
                       {
-                         briefTxt->addText("Inventory Full!"); 
+                         briefTxt->addText(gettext("Inventory is full!")); 
                       }
                    }
                 }

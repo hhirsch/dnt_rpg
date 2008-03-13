@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-03-12 08:04-0300\n"
+"POT-Creation-Date: 2008-03-12 08:14-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -358,6 +358,10 @@ msgstr "Nada"
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
+
+#: src/engine/dccnit.cpp:1715
+msgid "Inventory is full!"
+msgstr "O inventário está cheio!"
 
 #: src/engine/dccnit.cpp:1750
 msgid "Door"
