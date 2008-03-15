@@ -495,7 +495,7 @@ class Map
        * \param B -> the texture Blue Color got
        * \return integer with the texture ID, or -1 if not found.
        **************************************************************/
-      int getTextureID(string textureName, GLuint* R, GLuint* G, GLuint* B);
+      int getTextureID(string textureName, GLuint& R, GLuint& G, GLuint& B);
 
       /*!
        **************************************************************

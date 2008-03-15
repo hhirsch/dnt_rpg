@@ -943,19 +943,30 @@ void editor::verifyIO()
    }
    else if(guiEvent == GUI_IO_TEXTURE_PREVIOUS)
    {
-     if(mapOpened)
-        previousTexture();
+      if(mapOpened)
+      {
+         previousTexture();
+      }
    }
    else if(guiEvent == GUI_IO_TEXTURE_NEXT)
    {
-     if(mapOpened)
-        nextTexture();
+      if(mapOpened)
+      {
+         nextTexture();
+      }
    }
    else if(guiEvent == GUI_IO_TEXTURE_INSERT)
    {
       if(mapOpened)
       {
-        insertTexture();
+         if(insertTexture())
+         {
+            gui->showMessage(gettext("Texture inserted!"));
+         }
+         else
+         {
+            gui->showMessage(gettext("Can't insert texture!"));
+         }
       }
    }
    else if(guiEvent == GUI_IO_NOTHING)

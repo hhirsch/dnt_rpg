@@ -149,7 +149,7 @@ void Square::setDivisions()
 /********************************************************************
  *                             Texture ID                           *
  ********************************************************************/
-int Map::getTextureID(string textureName, GLuint* R, GLuint* G, GLuint* B)
+int Map::getTextureID(string textureName, GLuint& R, GLuint& G, GLuint& B)
 {
    /* procura pela texture */
    int aux=0;
@@ -158,7 +158,7 @@ int Map::getTextureID(string textureName, GLuint* R, GLuint* G, GLuint* B)
    {
       if(!(tex->name.compare(textureName)) )
       {
-         *R = tex->R; *G = tex->G; *B = tex->B;
+         R = tex->R; G = tex->G; B = tex->B;
          return(tex->index); //a texture ja esta presente 
       }
       tex = tex->next;
@@ -213,6 +213,13 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    dirs dir;
    texture* tex;
    int aux;
+
+   /* Verify if the texture is already inserted */
+   int id = getTextureID(arq, R, G, B);
+   if(id != -1)
+   {
+      return(id);
+   }
 
    /* Load Texture Images */
    SDL_Surface* img = IMG_Load(dir.getRealFile(arq).c_str());
@@ -1469,7 +1476,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
                      nameMuroTexturaAtual = nome;
-                     IDwallTexturaAtual = getTextureID(nome,&R,&G,&B);
+                     IDwallTexturaAtual = getTextureID(nome,R,G,B);
                   maux->texture = IDwallTexturaAtual;
                   break;
                }
@@ -1598,7 +1605,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                {
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                  IDtextureAtual = getTextureID(nome,&Ratual,&Gatual,&Batual);
+                  IDtextureAtual = getTextureID(nome,Ratual,Gatual,Batual);
                   MapSquares[posX][posZ].texture = IDtextureAtual;
                   MapSquares[posX][posZ].R = Ratual;
                   MapSquares[posX][posZ].G = Gatual;
