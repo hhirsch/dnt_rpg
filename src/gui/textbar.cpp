@@ -50,7 +50,7 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
                Colors.colorCont[1].B);
 
    init = 0;
-   end = text.length()-1;
+   end = text.length();
    string writeText = text;
 
    int maxWidth = ((x2-1) - (x1+3));
