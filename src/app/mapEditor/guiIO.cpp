@@ -443,47 +443,53 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
    int eventInfo;
    guiObject* object;
 
-   /* Camera Verification */
-   gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA );
+   /* Get Events */
+   object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
 
-   if(keys[SDLK_KP8])
+
+   /* Do Camera IO */
+   if(eventInfo != WROTE_TEXT_BAR)
    {
-      gameCamera.updateCamera(gameCamera.getCenterX() -
+      gameCamera.doIO(keys, mButton, mouseX, mouseY, DELTA_CAMERA );
+
+      if(keys[SDLK_KP8])
+      {
+         gameCamera.updateCamera(gameCamera.getCenterX() -
                                  4.0 * sin(deg2Rad(gameCamera.getPhi())),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() - 
                                  4.0 * cos(deg2Rad(gameCamera.getPhi())), 
                                  0.0);
-   }
-   if(keys[SDLK_KP2])
-   {
-      gameCamera.updateCamera(gameCamera.getCenterX() +
+      }
+      if(keys[SDLK_KP2])
+      {
+         gameCamera.updateCamera(gameCamera.getCenterX() +
                                  4.0 * sin(deg2Rad(gameCamera.getPhi())),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() + 
                                  4.0 * cos(deg2Rad(gameCamera.getPhi())), 
                                  0.0);
-   }
-   if(keys[SDLK_KP4])
-   {
-      gameCamera.updateCamera(gameCamera.getCenterX() -
-                            4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
-                                      gameCamera.getCenterY()-30,
-                                      gameCamera.getCenterZ() - 
-                            4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
-                                       0.0);
-   }
-   if(keys[SDLK_KP6])
-   {
-      gameCamera.updateCamera(gameCamera.getCenterX() +
-                           4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
-                                     gameCamera.getCenterY()-30,
-                                     gameCamera.getCenterZ() +
-                           4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
-                                     0.0);
+      }
+      if(keys[SDLK_KP4])
+      {
+         gameCamera.updateCamera(gameCamera.getCenterX() -
+                                 4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                 gameCamera.getCenterY()-30,
+                                 gameCamera.getCenterZ() - 
+                                 4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                 0.0);
+      }
+      if(keys[SDLK_KP6])
+      {
+         gameCamera.updateCamera(gameCamera.getCenterX() +
+                                 4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                 gameCamera.getCenterY()-30,
+                                 gameCamera.getCenterZ() +
+                                 4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                 0.0);
+      }
    }
 
-   object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
 
    if(ltWindow->eventGot(eventInfo, object))
    {
