@@ -33,13 +33,13 @@ string getStringFromUser(string title, string previous,
 
    while(!quit)
    {
-      int eventInfo;
+      int eventInfo = NOTHING;
       SDL_PumpEvents();
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
       guiObject* object;
-      object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
+      object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, eventInfo);
 
       if(eventInfo == PRESSED_BUTTON)
       {
@@ -129,13 +129,13 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
 
    while(!quit)
    {
-      int eventInfo;
+      int eventInfo = NOTHING;
       SDL_PumpEvents();
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
       guiObject* object;
-      object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
+      object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, eventInfo);
 
       if(eventInfo == PRESSED_BUTTON)
       {
@@ -216,13 +216,13 @@ void showMessage(string title, string message,
 
    while(!quit)
    {
-      int eventInfo;
+      int eventInfo = NOTHING;
       SDL_PumpEvents();
       keys = SDL_GetKeyState(NULL);
       mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
       guiObject* object;
-      object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, &eventInfo);
+      object = gui->manipulateEvents(mouseX, mouseY, mButton, keys, eventInfo);
 
       if(eventInfo == PRESSED_BUTTON)
       {

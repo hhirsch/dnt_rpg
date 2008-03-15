@@ -1088,7 +1088,7 @@ int main(int argc, char **argv)
         // gluUnProject(wx,wy,wz,modl,proj,viewPort, &xReal, &yReal, &zReal);
 
          int eventInfo = NOTHING;
-         obj = gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,&eventInfo);
+         obj = gui->manipulateEvents(mouseX,mouseY,Mbotao,teclas,eventInfo);
          if(eventInfo == NOTHING)
          {
             gameCamera->doIO(teclas, Mbotao, mouseX, mouseY, DELTA_CAMERA);

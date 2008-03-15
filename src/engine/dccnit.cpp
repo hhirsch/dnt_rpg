@@ -762,7 +762,7 @@ int engine::optionsScreen(GLuint idTextura)
          glClearColor(0,0,0,1);
          keys = SDL_GetKeyState(NULL);
          Uint8 mButton = SDL_GetMouseState(&x,&y);
-         object = interf->manipulateEvents(x,y,mButton,keys,&eventInfo);
+         object = interf->manipulateEvents(x,y,mButton,keys, eventInfo);
          textureToScreen(idTextura,proj,modl,viewPort,
                          0,0,SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
          glPushMatrix();
@@ -859,7 +859,7 @@ int engine::characterScreen(GLuint idTextura)
          glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
          keys = SDL_GetKeyState(NULL);
          Uint8 mButton = SDL_GetMouseState(&x,&y);
-         object = gui->manipulateEvents(x,y,mButton,keys,&eventInfo);
+         object = gui->manipulateEvents(x,y,mButton,keys, eventInfo);
 
          textureToScreen(idTextura,proj,modl,viewPort,0,0,
                          SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
@@ -2497,7 +2497,7 @@ int engine::treatIO(SDL_Surface *screen)
          }
       }
       guiObject* object;
-      object = gui->manipulateEvents(x,y,mButton,keys, &guiEvent);
+      object = gui->manipulateEvents(x,y,mButton,keys, guiEvent);
       /* Threat the GUI */
       treatGuiEvents(object, guiEvent);
 

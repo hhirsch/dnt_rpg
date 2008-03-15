@@ -90,7 +90,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
          textureToScreen(tituloID,proj,modl,viewPort,0,0,
                          SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
-         object = gui->manipulateEvents(x,y,Mbotao,keys, &eventInfo);
+         object = gui->manipulateEvents(x,y,Mbotao,keys, eventInfo);
          if(eventInfo != NOTHING)
          {
              if(eventInfo == PRESSED_BUTTON)

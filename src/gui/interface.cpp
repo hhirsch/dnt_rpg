@@ -40,7 +40,7 @@ interface::~interface()
  *                   Take care of GUI I/O Events                     *
  *********************************************************************/
 guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, 
-                                       Uint8* tecla, int* eventInfo)
+                                       Uint8* tecla, int& eventInfo)
 {
     int aux;
     dntFont fnt;
@@ -52,7 +52,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
 
     if(ljan->getActiveWindow() == NULL)
     {
-       *eventInfo = NOTHING;
+       eventInfo = NOTHING;
        focus = FOCUS_GAME;
        return(NULL);
     }
@@ -61,7 +61,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
     if ( (tecla[SDLK_ESCAPE]) && (focus != FOCUS_GAME))
     {
        focus = FOCUS_GAME;
-       *eventInfo = EXIT;
+       eventInfo = EXIT;
        return(NULL);
     }
 
@@ -204,7 +204,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                }
                obj = obj->next;
             }
-            *eventInfo = CLICKED_WINDOW;
+            eventInfo = CLICKED_WINDOW;
             return((guiObject*) ljan->getActiveWindow());
         }
         else /*if( (ljan->getActiveWindow() != NULL))*/
@@ -219,7 +219,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                {
                     focus = FOCUS_GAME;
                     jaux->activate();
-                    *eventInfo = ACTIVATED_WINDOW;
+                    eventInfo = ACTIVATED_WINDOW;
                     mouseX = -1;
                     return((guiObject*) jaux);
                }
@@ -235,7 +235,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
         {
            focus = FOCUS_GAME;
         }
-        *eventInfo = MOVED_WINDOW;
+        eventInfo = MOVED_WINDOW;
         return(objAtivo);
     }
 
@@ -274,7 +274,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                      ljan->removeWindow(ljan->getActiveWindow());
                   }
                   focus = FOCUS_GAME;
-                  *eventInfo = CLOSED_WINDOW;
+                  eventInfo = CLOSED_WINDOW;
                   return(NULL);
               }
               else
@@ -282,7 +282,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                   focus = FOCUS_GAME;
               }
               
-              *eventInfo = PRESSED_BUTTON;
+              eventInfo = PRESSED_BUTTON;
               return(objAtivo);
            }
            else
@@ -306,7 +306,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                  obj = obj->next;
               }
 
-              *eventInfo = ON_PRESS_BUTTON;
+              eventInfo = ON_PRESS_BUTTON;
               return(objAtivo);
            }
         }
@@ -314,7 +314,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
         {
            focus = FOCUS_GAME;
         }
-        *eventInfo = ON_PRESS_BUTTON;
+        eventInfo = ON_PRESS_BUTTON;
         return(objAtivo);
     }
  
@@ -329,10 +329,10 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                           Mbotao,tecla)))
         {
            focus = FOCUS_GAME;
-           *eventInfo = WROTE_TEXT_BAR;
+           eventInfo = WROTE_TEXT_BAR;
            return(objAtivo);
         }
-       *eventInfo = WROTE_TEXT_BAR; 
+       eventInfo = WROTE_TEXT_BAR; 
        return(objAtivo);
     }
     
@@ -344,7 +344,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
        cx->invertSelection();
        cx->draw(ljan->getActiveWindow()->getSurface());
        focus = FOCUS_GAME;
-       *eventInfo = MODIFIED_CX_SEL;
+       eventInfo = MODIFIED_CX_SEL;
        return(objAtivo);
     }
 
@@ -360,7 +360,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                           ljan->getActiveWindow()->getX1(),
                           ljan->getActiveWindow()->getY1());
 
-       *eventInfo = MODIFIED_MENU;
+       eventInfo = MODIFIED_MENU;
        ljan->getActiveWindow()->setChanged();
 
         
@@ -376,20 +376,20 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
               ljan->getActiveWindow()->draw(x,y);
            }
            focus = FOCUS_GAME;
-           *eventInfo = CLOSED_WINDOW;
+           eventInfo = CLOSED_WINDOW;
            return(NULL);
        }
        else if((res) && (pronto)) 
        {
           ljan->getActiveWindow()->draw(x,y);
-          *eventInfo = SELECTED_MENU;
+          eventInfo = SELECTED_MENU;
           focus = FOCUS_GAME;
        }
        else if(pronto)
        {
           ljan->getActiveWindow()->draw(x,y);
           focus = FOCUS_GAME;
-          *eventInfo = SELECTED_MENU;
+          eventInfo = SELECTED_MENU;
        }
        return(objAtivo);
     }
@@ -407,18 +407,18 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
         if(res == -1)
         {
             focus = FOCUS_GAME;
-            *eventInfo = NOTHING;
+            eventInfo = NOTHING;
             /* Redraw, since the last selected now is -1! */
             ljan->getActiveWindow()->draw(0,0);
         }
         else if(res < 0)
         {
-          *eventInfo = MODIFIED_SEL_TEXT;
+          eventInfo = MODIFIED_SEL_TEXT;
           ljan->getActiveWindow()->draw(0,0);
         }
         else
         {
-          *eventInfo = SELECTED_SEL_TEXT;
+          eventInfo = SELECTED_SEL_TEXT;
         }
 
         return(objAtivo);
@@ -456,7 +456,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                   {
                      ljan->getActiveWindow()->draw(0,0);
                      verified = true;
-                     *eventInfo = SELECTED_LIST_TEXT;
+                     eventInfo = SELECTED_LIST_TEXT;
                      focus = FOCUS_GAME;
                      return(lt);
                   }
@@ -469,7 +469,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
             if(!verified)
             {
                focus = FOCUS_GAME;
-               *eventInfo = PRESSED_TAB_BUTTON;
+               eventInfo = PRESSED_TAB_BUTTON;
                /* Change the saved mouse position to can take that it is
                 * inner on a tabButton again. */
                mouseX = -1;
@@ -478,13 +478,13 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
          }
          else if(actType == TABBUTTON_ON_PRESS)
          {
-            *eventInfo = ON_PRESS_TAB_BUTTON;
+            eventInfo = ON_PRESS_TAB_BUTTON;
             return(object);
          }  
          else
          {
             /* Still in focus, but no pressed */
-            *eventInfo = ON_FOCUS_TAB_BUTTON;
+            eventInfo = ON_FOCUS_TAB_BUTTON;
             return(object);
          }
        }
@@ -500,7 +500,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
          
 
     /* If here, no actions were made on GUI */
-    *eventInfo = NOTHING;
+    eventInfo = NOTHING;
     return(NULL);
 }
 

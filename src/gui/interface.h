@@ -70,7 +70,7 @@ class interface
        *                     on the event that occurs
        * \return -> pointer to the active objet of the action */
       guiObject* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
-                                int* eventInfo);
+                                  int& eventInfo);
       /*! Draw all the interface (all windows and objects)
        * \param proj -> project view matrix
        * \param modl -> model view matrix
