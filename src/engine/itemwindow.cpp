@@ -9,6 +9,7 @@
 itemWindow::itemWindow(interface* interf)
 {
    inter = interf;
+   intWindow = NULL;
 }
 
 /********************************************************************
@@ -185,9 +186,7 @@ int itemWindow::treat(guiObject* object, int eventInfo)
    {
       if(object == (guiObject*) okButton)
       {
-         fig->set(NULL); //to not delete item image
-         inter->closeWindow(intWindow);
-         intWindow = NULL;
+         close();
          return(1);
       }
    }

@@ -86,6 +86,7 @@ engine::engine()
 
    /* Create Special Windows */
    infoWindow = new itemWindow(gui);
+   charInfoWindow = new charWindow(gui);
 
    /* Initialize readModes variables */
    lastRead = SDL_GetTicks();
@@ -206,6 +207,12 @@ engine::~engine()
    if(infoWindow)
    {
       delete(infoWindow);
+   }
+
+   /* Clear CharInfoWindow */
+   if(charInfoWindow)
+   {
+      delete(charInfoWindow);
    }
 
    /* Clear GUI */
@@ -1456,6 +1463,12 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
       infoWindow->treat(object, eventInfo);
    }
 
+   /* Verify Character Window */
+   if( charInfoWindow->isOpen() )
+   {
+      charInfoWindow->treat(object, eventInfo);
+   }
+
    /* Verify ShortCutsWindow */
    switch(eventInfo)
    {
@@ -1523,7 +1536,6 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
           }
           else if(object == (guiObject*) buttonCharacter)
           {
-            //TODO Do the character window
             objTxt->setText(gettext("View Character Informations"));
             defined = true;
           }
@@ -1568,6 +1580,13 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
               if(!inventoryWindow)
               {
                  openCloseInventoryWindow();
+              }
+           }
+           else if(object == (guiObject*) buttonCharacter)
+           {
+              if(charInfoWindow)
+              {
+                 charInfoWindow->open(PCs->getActiveCharacter());
               }
            }
            break;
@@ -2097,7 +2116,7 @@ int engine::treatIO(SDL_Surface *screen)
              lastKeyb = time;
          }
 
-         /* Open Inventory */
+         /* Open Close Inventory */
          if( (keys[SDLK_i]) && 
              ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_i) ) )
@@ -2107,23 +2126,19 @@ int engine::treatIO(SDL_Surface *screen)
             lastKeyb = time;
          }
 
+         /* Open Character Info Window */
+         if( (keys[SDLK_c]) )
+         {
+            if(charInfoWindow)
+            {
+               charInfoWindow->open(PCs->getActiveCharacter());
+            }
+         }
+
+
          if(keys[SDLK_F1]) //Call Information Screen
          {
             informationScreen();
-         }
-
-         /* FIXME only to test */
-         if( (keys[SDLK_c])&& 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_c) ) )
-         {
-            lastKey = SDLK_c;
-            lastKeyb = time;
-            msgController->addMessage(PCs->getActiveCharacter()->xPosition,
-                                      PCs->getActiveCharacter()->yPosition +
-                                      PCs->getActiveCharacter()->max[1],
-                                      PCs->getActiveCharacter()->zPosition,
-                                      "80");
          }
 
          /* FIXME Remove all timerary tests from here */

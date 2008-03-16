@@ -29,6 +29,7 @@
 #include "attwindow.h"
 #include "camera.h"
 #include "character.h"
+#include "charwindow.h"
 #include "classwindow.h"
 #include "collision.h"
 #include "cursor.h"
@@ -387,6 +388,7 @@ class engine
       inventWindow* inventoryWindow; /**< Inventory Window */
       barterWindow* tradeWindow;     /**< The Barter Window */
       itemWindow* infoWindow;        /**< The info Window */
+      charWindow* charInfoWindow;    /**< The character info Window */
    
       Uint32 lastRead;             /**< Last Verification of I/O */
       Uint32 lastMouse;            /**< Last read from mouse */

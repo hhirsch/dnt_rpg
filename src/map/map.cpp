@@ -151,7 +151,7 @@ void Square::setDivisions()
  ********************************************************************/
 int Map::getTextureID(string textureName, GLuint& R, GLuint& G, GLuint& B)
 {
-   /* procura pela texture */
+   /* search for texture */
    int aux=0;
    texture* tex = textures;
    while(aux < numTextures)
@@ -159,7 +159,7 @@ int Map::getTextureID(string textureName, GLuint& R, GLuint& G, GLuint& B)
       if(!(tex->name.compare(textureName)) )
       {
          R = tex->R; G = tex->G; B = tex->B;
-         return(tex->index); //a texture ja esta presente 
+         return(tex->index); //texture found 
       }
       tex = tex->next;
       aux++;

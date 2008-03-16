@@ -34,7 +34,7 @@ OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
 $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o $(ENDETC)overlaps.o
-OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o camera.o character.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
+OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o camera.o character.o charwindow.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = #../etc/fifo.o
@@ -71,9 +71,14 @@ character.o: character.cpp character.h $(ENDGUI)draw.h $(ENDGUI)picture.h $(ENDG
 	@$(CC) $(CFLAGS) character.cpp -o character.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
+charwindow.o: charwindow.h charwindow.cpp character.h $(ENDGUI)farso.h
+	@printf "Making charwindow.o... "
+	@$(CC) $(CFLAGS) charwindow.cpp -o charwindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 classwindow.o: classwindow.h classwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)classes.h
 	@printf "Making classwindow.o... "
-	@$(CC) $(CFLAGS) $(SUPREDE) classwindow.cpp -o classwindow.o
+	@$(CC) $(CFLAGS) classwindow.cpp -o classwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 collision.o: collision.cpp collision.h $(ENDMAP)map.h character.h
