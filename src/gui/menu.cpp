@@ -134,9 +134,9 @@ void menu::draw(int pos, SDL_Surface *screen)
    guiObject* item = (guiObject*) first->next;
    for (k=0;k<total;k++)
    {
-      color_Set(Colors.colorCont[1].R,
-                Colors.colorCont[1].G,
-                Colors.colorCont[1].B);
+      color_Set(Colors.colorCont[0].R,
+                Colors.colorCont[0].G,
+                Colors.colorCont[0].B);
       if (item->getText().compare("-"))
       {
           if (item->isAvaible()) 
