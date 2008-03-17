@@ -61,9 +61,17 @@ oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)
 void tabButton::draw(SDL_Surface *screen)
 { 
    int i;
+
+   /* Clear Below */
+   color_Set(cor.colorWindow.R, cor.colorWindow.G, cor.colorWindow.B);
+   rectangle_Fill(screen, x1,y1, x2, y2);
+
+   /* Draw Picture (if one) */
    picture* fig;
    fig = this;
    fig->draw(screen);
+
+   /* Draw Button Contorns */
    for(i=0;i<numButtons;i++)
    {
       if(i == current)
@@ -73,12 +81,6 @@ void tabButton::draw(SDL_Surface *screen)
                             x1+Buttons[i].x2,y1+Buttons[i].y2,
                             cor.colorCont[1].R,cor.colorCont[1].G,
                             cor.colorCont[1].B);
-      }
-      else if(fig->get() == NULL)
-      {
-         color_Set(cor.colorWindow.R, cor.colorWindow.G, cor.colorWindow.B);
-         rectangle_Draw(screen, x1+Buttons[i].x1,y1+Buttons[i].y1,
-                        x1+Buttons[i].x2,y1+Buttons[i].y2);
       }
    }
    setChanged();

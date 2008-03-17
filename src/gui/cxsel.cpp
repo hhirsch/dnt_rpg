@@ -32,8 +32,8 @@ void cxSel::draw(SDL_Surface *screen)
    rectangle_Fill(screen, x1+1, y1+1, x1+9, y1+9);
    if(selected)
    {
-      color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G, 
-                Colors.colorCont[0].B);
+      color_Set(Colors.colorBar.R, Colors.colorBar.G, 
+                Colors.colorBar.B);
       line_Draw(screen, x1+2, y1+2, x1+8, y1+8);
       line_Draw(screen, x1+1, y1+2, x1+7, y1+8);
       line_Draw(screen, x1+3, y1+2, x1+9, y1+8);

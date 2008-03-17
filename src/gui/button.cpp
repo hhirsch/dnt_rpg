@@ -89,15 +89,15 @@ void button::draw(SDL_Surface* screen )
    if( (text == font.createUnicode(0x25B2)) ||
        (text == font.createUnicode(0x25BC)) )
    {
-      font.write(screen,xa+1,ya,getText().c_str(),xa+1,y1,x2,y2);
+      font.write(screen,xa+1,ya,getText().c_str(),xa+1,y1,x2+1,y2);
    }
    else if(text == font.createUnicode(0x25CF))
    {
-      font.write(screen,xa+1,ya-2,getText().c_str(),xa+1,y1,x2,y2);
+      font.write(screen,xa+2,ya-2,getText().c_str(),xa+2,y1,x2+2,y2);
    }
    else if(text == "-")
    {
-      font.write(screen,xa+2,ya-2,getText().c_str(),xa+2,y1,x2,y2);
+      font.write(screen,xa+2,ya-2,getText().c_str(),xa+2,y1,x2+2,y2);
    }
    else
    {

@@ -3200,8 +3200,8 @@ void engine::openMiniMapWindow()
    FPS = miniMapWindow->getObjectsList()->insertTextBox(3,108,150/*100*/,123,2,
                                   gettext("FPS:"));
 
-   miniMapWindow->getObjectsList()->insertPicture(3,15,252,120,
-                              dir.getRealFile("texturas/mapw/map.png").c_str());
+   /*miniMapWindow->getObjectsList()->insertPicture(3,15,252,120,
+                              dir.getRealFile("texturas/mapw/map.png").c_str());*/
 
    
                    
@@ -3261,8 +3261,8 @@ void engine::openShortcutsWindow()
    tb->insertButton(220,40,256,72);/* Attack 6 */
    buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 
-   shortCutsWindow->getObjectsList()->insertPicture(3,15,252,120,
-                  dir.getRealFile("texturas/shortcutsw/shortcut2.png").c_str());
+   /*shortCutsWindow->getObjectsList()->insertPicture(3,15,252,120,
+                  dir.getRealFile("texturas/shortcutsw/shortcut2.png").c_str());*/
    
    shortCutsWindow->setExternPointer(&shortCutsWindow);
    gui->openWindow(shortCutsWindow);
