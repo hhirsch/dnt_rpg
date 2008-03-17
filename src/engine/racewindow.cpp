@@ -43,8 +43,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
                           DNT_FONT_STYLE_BOLD);
    
-   textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,"",
-                                                       intWindow->getSurface());
+   textDesc = intWindow->getObjectsList()->insertRolBar(6,36,277,345,"");
    setDescription();
 
    /* Race Characteristics */
@@ -53,8 +52,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    textCharacTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
                             DNT_FONT_STYLE_BOLD);
 
-   textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,"",
-                                              intWindow->getSurface());
+   textCharac = intWindow->getObjectsList()->insertRolBar(345,36,615,345,"");
    setCharacteristics();
 
    /* Name and Selectors */

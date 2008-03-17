@@ -110,20 +110,16 @@ class guiList
        * \param xb -> x2 coordinate
        * \param yb -> y2 coordinate
        * \param txt -> text on the rolbar
-       * \param surface -> pointer to the screen surface
        * \return rolBar inserted */
-      rolBar* insertRolBar(int xa,int ya,int xb,int yb,string txt,
-                           SDL_Surface* surface);
+      rolBar* insertRolBar(int xa,int ya,int xb,int yb,string txt);
 
       /*! Insert a listText on the List
        * \param xa -> x1 position
        * \param ya -> y1 position
        * \param xb -> x2 position
        * \param yb -> y2 position
-       * \param surface -> window surface to draw
        * \return listText inserted */
-      listText* insertListText(int xa,int ya,int xb,int yb,
-                               SDL_Surface* surface);
+      listText* insertListText(int xa,int ya,int xb,int yb);
 
       /*! Add a internal Menu to the list
        * \return menu Inserted */
@@ -135,6 +131,9 @@ class guiList
 
       /*! Remove Internal Menu, if exists one. */
       void removeMenu();
+
+      /*! Set the window Surface to use */
+      void setSurface(SDL_Surface* surface){wSurface=surface;};
 
       /*! Get the first object on the list
        * \return pointer to first object on list */
@@ -148,6 +147,8 @@ class guiList
       /*! Insert the object on the list, actualizing the pointers
        * \param obj -> pointer to guiObject to insert */
       void insertObject(guiObject* obj);
+
+      SDL_Surface* wSurface;  /**< window surface used */
 
       int total;         /**< Total Itens on List */
       guiObject *first;  /**< Head Node */

@@ -38,8 +38,9 @@ class window: public guiObject
       
       /*! Draw the Window to its internal surface
        * \param mouseX -> mouse X position
-       * \param mouseY -> mouse Y position */
-      void draw(int mouseX, int mouseY);
+       * \param mouseY -> mouse Y position
+       * \param drawBar -> if will draw the bar or not */
+      void draw(int mouseX, int mouseY, bool drawBar=true);
 
       /*! Activate the Window */
       void activate();

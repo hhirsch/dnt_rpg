@@ -113,6 +113,8 @@ void windowList::removeMenu()
 window::window(int xa, int ya, int xb, int yb, string title, void* list)
 {
    dntFont fnt;
+
+   /* Set Variables */
    intList = list;
    x1 = xa;
    x2 = xb;
@@ -156,18 +158,27 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    propX = (float)(xb-xa) / (float)smallestPowerOfTwo(xb-xa);
    propY = (float)(yb-ya) / (float)smallestPowerOfTwo(yb-ya);
 
+   /* Create Objects List */
    objects = new guiList;
+   objects->setSurface(surface);
 
+   /* Create Menu Button */
    menuButton = objects->insertButton(3,3,13,12,"-",0);
    menuButton->men = new menu(0,0);
    menu* men = (menu*) menuButton->men;
    men->insertItem(gettext("Close"),1);
    men->insertItem("-",0);
    men->insertItem(gettext("Maximize"),0);
+
+   /* Create Close Button */
    closeButton = objects->insertButton(14,3,24,12,fnt.createUnicode(0x25CF),0);
    closeButton->defineFont(DNT_FONT_ARIAL, 10);
+
+   /* Create Minimize Maximize Button */
    minMaxButton = objects->insertButton(25,3,35,12,fnt.createUnicode(0x25B2),0);
    minMaxButton->defineFont(DNT_FONT_ARIAL, 8);
+
+   /* Set the object type as WINDOW! */
    type = GUI_WINDOW;
 }
 
@@ -188,7 +199,7 @@ window::~window()
 /*********************************************************************
  *                                draw                               *
  *********************************************************************/
-void window::draw(int mouseX, int mouseY)
+void window::draw(int mouseX, int mouseY, bool drawBar)
 {
    int dx = x2 - x1;
    int dy = y2 - y1;
@@ -209,13 +220,17 @@ void window::draw(int mouseX, int mouseY)
 
    /* Draw the bar */
    windowList* lst = (windowList*)intList;
-   if(this == lst->getActiveWindow())
+
+   if(drawBar)
    {
-      drawActiveBar();
-   }
-   else
-   {
-      drawInactiveBar();
+      if(this == lst->getActiveWindow())
+      {
+         drawActiveBar();
+      }
+      else
+      {
+         drawInactiveBar();
+      }
    }
 
    /* Objects Draw */
@@ -258,12 +273,13 @@ void window::draw(int mouseX, int mouseY)
          case GUI_TEXT_BOX:
          {
               textBox *quad = (textBox*) obj;
-              quad->draw(surface);
+              quad->draw();
               break;
          }
          case GUI_TAB_BUTTON:
          {
               tabButton *bt = (tabButton*) obj; 
+              bt->setCurrent(-1);
               bt->draw(surface);
               break;
          }
@@ -282,6 +298,11 @@ void window::drawInactiveBar()
 {
    dntFont fnt;
    int dx = x2-x1;
+
+   /* Redraw All window, removing the mouse from it */
+   draw(-1,-1, false);
+
+   /* Redraw the Inactive Bar */
    color_Set(Colors.colorWindow.R,Colors.colorWindow.G,Colors.colorWindow.B);
    rectangle_Fill(surface,36,3,dx-3,12);
    color_Set(0,0,0);
@@ -293,7 +314,7 @@ void window::drawInactiveBar()
 }
 
 /*********************************************************************
- *                          drawInactiveBar                          *
+ *                           drawActiveBar                           *
  *********************************************************************/
 void window::drawActiveBar()
 {

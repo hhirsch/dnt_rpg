@@ -52,8 +52,7 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
 
    /* Skill Description */
    desc = intWindow->getObjectsList()->insertRolBar(8,38,256,170,
-                         externalSkill->m_skills[curSkill].description.c_str(),
-                         intWindow->getSurface());
+                         externalSkill->m_skills[curSkill].description.c_str());
 
    /* Contorns */
    intWindow->getObjectsList()->insertTextBox(8,171,256,224,2,"");

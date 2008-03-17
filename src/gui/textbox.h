@@ -12,6 +12,10 @@
 #include <string>
 using namespace std;
 
+#define TEXT_BOX_NOT_FRAMED          0   /**< Text without frames */
+#define TEXT_BOX_FRAMED_FILLED       1   /**< Text with frames and BG color */
+#define TEXT_BOX_FRAMED_TRANSPARENT  2   /**< Text with frames and transparent */
+
 /*! The textLine represents each line of text in the
  * textBox, with his own font parameters and colors */
 class textLine
@@ -40,8 +44,10 @@ class textBox: public guiObject
        * \param ya -> y1 coordinate
        * \param xb -> x2 coordinate
        * \param yb -> y2 coordinate
-       * \param framedType -> type of the frame. 0 for no frames. */
-      textBox(int xa, int ya, int xb, int yb, int framedType);
+       * \param framedType -> type of the frame. 0 for no frames.
+       * \param screen -> surface to draw to */
+      textBox(int xa, int ya, int xb, int yb, int framedType,
+              SDL_Surface *screen);
       /*! Destructor */
       ~textBox();
 
@@ -50,9 +56,8 @@ class textBox: public guiObject
       int getTotalLines();
 
       /*! Draw in the Surface the text bar
-       * \param screen -> surface where will draw
        * \return -> number of the last writed line */
-      int draw(SDL_Surface *screen);
+      int draw();
       
       /*! Define the Font
        * \param name -> font file name
@@ -78,6 +83,11 @@ class textBox: public guiObject
        * \param G -> green color
        * \param B -> blue color */
       void setBackColor(int R, int G, int B);
+
+      /*! Get the text from the line number
+       * \param line -> number of line to get text from 
+       * \note -> first line is 0. */
+      string getTextLine(int line);
 
       /*! Set the object text
        * \param txt -> new text */
@@ -133,6 +143,8 @@ class textBox: public guiObject
       /*! Insert textLine to the list
        * \param line -> line to insert to the list */
       void insertLine(textLine* line);
+
+      SDL_Surface* wSurface; /**< Window Surface */
       
       textLine* fullText;  /**< The full text */
       int totalLines;      /**< Total Text Lines */

@@ -211,9 +211,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
                           DNT_FONT_STYLE_BOLD);
    
-   textDesc = intWindow->getObjectsList()->insertRolBar(248,54,519,245,
-                                                        "",
-                                                       intWindow->getSurface());
+   textDesc = intWindow->getObjectsList()->insertRolBar(248,54,519,245,"");
 
    setDescription(1);
 

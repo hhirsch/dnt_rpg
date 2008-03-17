@@ -31,6 +31,14 @@ tabButton::tabButton(int x, int y, int w, int h):picture(x,y,0,0, NULL)
 }
 
 /***********************************************************
+ *                       setCurrent                        *
+ ***********************************************************/
+void tabButton::setCurrent(int i)
+{
+   current = i;
+}
+
+/***********************************************************
  *                       insertButton                      *
  ***********************************************************/
 oneTabButton* tabButton::insertButton(int x1, int y1, int x2, int y2)

@@ -7,8 +7,10 @@
 /*******************************************************
  *                       Constructor                   *
  *******************************************************/
-textBox::textBox(int xa, int ya, int xb, int yb, int frameType)
+textBox::textBox(int xa, int ya, int xb, int yb, int frameType,
+                 SDL_Surface *screen)
 {
+   wSurface = screen;
    type = GUI_TEXT_BOX;
    x1 = xa;
    y1 = ya;
@@ -47,7 +49,28 @@ void textBox::clear()
    }
    fullText = NULL;
    totalLines = 0;
-   setChanged();
+}
+
+/*******************************************************
+ *                      getTextLine                    *
+ *******************************************************/
+string textBox::getTextLine(int line)
+{
+   int i;
+   if(line < totalLines)
+   {
+      /* Get the line */
+      textLine* tmp = fullText;
+      for(i = 0; i < line; i++)
+      {
+         tmp = fullText;
+         tmp = tmp->next;
+      }
+      /* Get the text from line */
+      return(tmp->text);
+   }
+
+   return("");
 }
 
 /*******************************************************
@@ -55,12 +78,15 @@ void textBox::clear()
  *******************************************************/
 void textBox::setText(string txt)
 {
-   clear();
-   text = txt;
-   createLines(txt, fontName, fontSize, fontAlign, fontStyle,
-               Colors.colorText.R, Colors.colorText.G,
-               Colors.colorText.B);
-   setChanged();
+   if(text != txt)
+   {
+      clear();
+      text = txt;
+      createLines(txt, fontName, fontSize, fontAlign, fontStyle,
+                  Colors.colorText.R, Colors.colorText.G,
+                  Colors.colorText.B);
+      draw();
+   }
 }
 
 /*******************************************************
@@ -71,7 +97,7 @@ void textBox::addText(string txt, string font, int size,
 {
    text += txt;
    createLines(txt, font, size, align, style, R, G, B);
-   setChanged();
+   draw();
 }
 
 /*******************************************************
@@ -136,7 +162,7 @@ int textBox::lastDrawableLine()
 /*******************************************************
  *                          draw                       *
  *******************************************************/
-int textBox::draw(SDL_Surface *screen)
+int textBox::draw()
 {
    int i;
    textLine* line;
@@ -152,11 +178,11 @@ int textBox::draw(SDL_Surface *screen)
          color_Set(Colors.colorButton.R,
                    Colors.colorButton.G,
                    Colors.colorButton.B);
-         rectangle_Fill(screen,x1+1,y1+1,x2-1,y2-1);
+         rectangle_Fill(wSurface,x1+1,y1+1,x2-1,y2-1);
       }
       color_Set(Colors.colorCont[0].R,Colors.colorCont[0].G,
                 Colors.colorCont[0].B);
-      rectangle_2Colors(screen,x1,y1,x2,y2,
+      rectangle_2Colors(wSurface,x1,y1,x2,y2,
                        Colors.colorCont[1].R,Colors.colorCont[1].G,
                        Colors.colorCont[1].B);
    }
@@ -178,7 +204,7 @@ int textBox::draw(SDL_Surface *screen)
       fnt.defineFont(line->fontName, line->fontSize);
       fnt.defineFontAlign(line->fontAlign);
       fnt.defineFontStyle(line->fontStyle);
-      fnt.write(screen, x1+2, y, line->text, x1+2, y, x2, y2);
+      fnt.write(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
       y += line->height;
       height = line->height;
       line = line->next;

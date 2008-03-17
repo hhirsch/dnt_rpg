@@ -45,7 +45,7 @@ rolBar::rolBar(int xa, int ya, int xb, int yb, string txt, void* list,
    down->defineFont(DNT_FONT_ARIAL, 8);
 
    /* Text */
-   scrollText = l->insertTextBox(xa,ya,xb-13,yb,2,""); 
+   scrollText = l->insertTextBox(xa,ya,xb-13,yb,1,""); 
    scrollText->setFont(DNT_FONT_ARIAL, 10, 0);
    scrollText->setColor(246, 190, 190);
 
@@ -109,8 +109,8 @@ void rolBar::redraw()
 {
    int actualInit = scrollText->getFirstLine();
 
-   contorn->draw(wSurface);
-   int end = scrollText->draw(wSurface);
+   contorn->draw();
+   int end = scrollText->draw();
 
    if(scrollText->getTotalLines() != 0)
    {
@@ -128,7 +128,7 @@ void rolBar::redraw()
       position->setCoordinate(position->getX1(), y1+2, 
                               position->getX2(), y2-26);
    }
-   position->draw(wSurface);
+   position->draw();
    setChanged();
 }
 

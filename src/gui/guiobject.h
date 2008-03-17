@@ -17,6 +17,7 @@
 #define GUI_ROL_BAR       9
 #define GUI_LIST_TEXT    10
 
+#include <SDL/SDL.h>
 #include <string>
 using namespace std;
 

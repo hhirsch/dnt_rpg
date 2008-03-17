@@ -45,8 +45,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    textDescTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
                           DNT_FONT_STYLE_BOLD);
    
-   textDesc = intWindow->getObjectsList()->insertRolBar(74,36,345,345,"",
-                                                       intWindow->getSurface());
+   textDesc = intWindow->getObjectsList()->insertRolBar(74,36,345,345,"");
 
    setDescription();
    
@@ -56,8 +55,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    textCharacTitle->setFont(DNT_FONT_TIMES,12,DNT_FONT_ALIGN_CENTER,
                             DNT_FONT_STYLE_BOLD);
 
-   textCharac = intWindow->getObjectsList()->insertRolBar(346,36,615,345,"",
-                                                       intWindow->getSurface());
+   textCharac = intWindow->getObjectsList()->insertRolBar(346,36,615,345,"");
    setCharacteristics();
 
    /* Name and Selectors */

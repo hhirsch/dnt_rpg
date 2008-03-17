@@ -22,28 +22,38 @@ charWindow::~charWindow()
  ********************************************************************/
 void charWindow::open(character* pers)
 {
+   dirs dir;
    /* Set open position */
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
-
-   //FIXME
-   fig = NULL;
+   int posY = 1;
+   int posX = 0;
 
    //char buf[256];
 
    /* Close the window, if it is openned */
    if(isOpen())
    {
-      centerX = intWindow->getX1()+128;
-      centerY = intWindow->getY1()+108;
+      posX = intWindow->getX1();
+      posY = intWindow->getY1();
       close();
    }
 
    /* Create Window */
-   intWindow = inter->insertWindow(centerX-128,centerY-108,
-                                   centerX+128,centerY+108,
+   intWindow = inter->insertWindow(posX, posY, posX+288, posY+330,
                                    pers->name);
 
+   /* Character Image */
+   picture* fig;
+   fig = intWindow->getObjectsList()->insertPicture(8,18,
+                                                    0,0,
+                   dir.getRealFile(pers->getPortraitFileName()).c_str());
+   intWindow->getObjectsList()->insertTextBox(5,15,65,75,1,"");
+
+   /* Character Classes */
+
+
+   /* Ok Button */
+   okButton = intWindow->getObjectsList()->insertButton(88,188,158,207,
+                                                        gettext("Ok"),1);                                   
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
    intWindow->setAttributes(true,true,false,false);
@@ -57,11 +67,6 @@ void charWindow::close()
 {
    if(intWindow)
    {
-      if(fig)
-      {
-         /* To avoid delete the item image */
-         fig->set(NULL);
-      }
       inter->closeWindow(intWindow);
       intWindow = NULL;
    }

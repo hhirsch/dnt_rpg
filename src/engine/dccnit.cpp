@@ -2500,7 +2500,7 @@ int engine::treatIO(SDL_Surface *screen)
 
          miniMapWindow->draw(mouseX, mouseY);
       }
-      if(shortCutsWindow)
+      /*if(shortCutsWindow)
       {
          if(shortCutsWindow == gui->getActiveWindow())
          {
@@ -2510,7 +2510,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
             shortCutsWindow->draw(-1,-1);
          }
-      }
+      }*/
       guiObject* object;
       object = gui->manipulateEvents(x,y,mButton,keys, guiEvent);
       /* Threat the GUI */
@@ -3216,10 +3216,9 @@ void engine::openShortcutsWindow()
 {
    shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,512,SCREEN_Y-1,
                                        gettext("Shortcuts"));
-   briefTxt = shortCutsWindow->getObjectsList()->insertRolBar(8,36,249,100,
-                                  gettext("Press F1 for Help"),
-                                  shortCutsWindow->getSurface());
-   objTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,20,249,35,2,
+   briefTxt = shortCutsWindow->getObjectsList()->insertRolBar(8,36,249,101,
+                                  gettext("Press F1 for Help"));
+   objTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,20,249,35,1,
                                                            gettext("Nothing"));
 
    buttonSave = shortCutsWindow->getObjectsList()->insertButton(8,102,76,120,
@@ -3230,7 +3229,7 @@ void engine::openShortcutsWindow()
                                                                 209,120,
                                                             gettext("Load"),0);
    hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,
-                                                              249,120,2,
+                                                              249,120,1,
                                                               "00:00");
    hourTxt->setFont(DNT_FONT_TIMES,11,DNT_FONT_ALIGN_CENTER);
    hourToTxt();

@@ -37,9 +37,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
    alignImage->set(actualAlign->image);
 
    /* Align Description */
-   textDesc = intWindow->getObjectsList()->insertRolBar(5,38,262,180, 
-                                                        "",
-                                                     intWindow->getSurface());
+   textDesc = intWindow->getObjectsList()->insertRolBar(5,38,262,180,"");
    textDesc->addText(actualAlign->description.c_str(),
                      DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
                      DNT_FONT_STYLE_NORMAL, 33, 65, 10); 

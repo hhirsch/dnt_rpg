@@ -38,7 +38,6 @@ class charWindow
       object* curObject;         /**< Pointer to current object */
 
       interface* inter;          /**< Current GUI interface */
-      picture* fig;              /**< The item figure */
       button* okButton;          /**< The ok Button */
       button* levelUpButton;     /**< The Level Up Button */
 };

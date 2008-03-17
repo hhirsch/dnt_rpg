@@ -65,6 +65,11 @@ class tabButton: public picture
                                 int Xjan, int Yjan, SDL_Surface *screen,
                                 int& actionType);
 
+
+      /*! Set the current button
+       * \param i -> current button number */
+      void setCurrent(int i);
+
    private:
       int numButtons;                       /**< Number of active buttons */
       oneTabButton Buttons[MAX_TABBUTTONS]; /**< Buttons Vector */

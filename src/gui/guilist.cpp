@@ -18,6 +18,7 @@ guiList::guiList()
    first->next = first;
    first->previous = first;
    intMenu = NULL;
+   wSurface = NULL;
 }
 
 /**************************************************************
@@ -199,7 +200,7 @@ textBox* guiList::insertTextBox(int xa,int ya,int xb,int yb,
                                    int frameType, string text)
 {
    textBox* novo;
-   novo = new textBox(xa,ya,xb,yb,frameType);
+   novo = new textBox(xa,ya,xb,yb,frameType,wSurface);
    novo->setText(text);
    insertObject(novo);
    return(novo);
@@ -222,11 +223,10 @@ selText* guiList::insertSelText(int xa,int ya,int xb,int yb,
 /**************************************************************
  *                         insertRolBar                       *
  **************************************************************/
-rolBar* guiList::insertRolBar(int xa,int ya,int xb,int yb,string txt,
-                             SDL_Surface* surface)
+rolBar* guiList::insertRolBar(int xa,int ya,int xb,int yb,string txt)
 {
    rolBar* novo;
-   novo = new rolBar(xa,ya,xb,yb,txt, this, surface);
+   novo = new rolBar(xa,ya,xb,yb,txt, this, wSurface);
    insertObject(novo);
    return(novo);
 }
@@ -234,11 +234,10 @@ rolBar* guiList::insertRolBar(int xa,int ya,int xb,int yb,string txt,
 /**************************************************************
  *                        insertListText                      *
  **************************************************************/
-listText* guiList::insertListText(int xa,int ya,int xb,int yb,
-                                 SDL_Surface* surface)
+listText* guiList::insertListText(int xa,int ya,int xb,int yb)
 {
    listText* novo;
-   novo = new listText(xa,ya,xb,yb, surface, this);
+   novo = new listText(xa,ya,xb,yb, wSurface, this);
    insertObject(novo);
    return(novo);
 }
