@@ -1,4 +1,5 @@
 #include "charwindow.h"
+#include "../classes/xp.h"
 
 /********************************************************************
  *                           Constructor                            *
@@ -27,7 +28,8 @@ void charWindow::open(character* pers)
    int posY = 1;
    int posX = 0;
 
-   //char buf[256];
+   char buf[512];
+   string tmpStr = "";
 
    /* Close the window, if it is openned */
    if(isOpen())
@@ -47,6 +49,43 @@ void charWindow::open(character* pers)
                                                     0,0,
                    dir.getRealFile(pers->getPortraitFileName()).c_str());
    intWindow->getObjectsList()->insertTextBox(5,15,65,75,1,"");
+
+   /* General Things */
+
+      /* name */
+   sprintf(buf,"%s %s", gettext("Name: "), pers->name.c_str());
+   intWindow->getObjectsList()->insertTextBox(68,15,283,25,0,buf);
+      /* age */
+   sprintf(buf,"%s %d", gettext("Age: "), pers->age);
+   intWindow->getObjectsList()->insertTextBox(68,26,128,36,0,buf);
+      /* sex */
+   switch(pers->sexType)
+   {
+      case SEX_FEMALE:
+         tmpStr = gettext("Female");
+      break;
+      case SEX_MALE:
+         tmpStr = gettext("Male");
+      break;
+      default:
+         tmpStr = gettext("Undefined");
+      break;
+   }
+   sprintf(buf,"%s %s", gettext("Sex: "), tmpStr.c_str());
+   intWindow->getObjectsList()->insertTextBox(130,26,283,36,0,buf);
+      /* Race */
+   sprintf(buf,"%s %s", gettext("Race: "), pers->actualRace->name.c_str());
+   intWindow->getObjectsList()->insertTextBox(68,37,283,47,0,buf);
+      /* Alignment */
+   sprintf(buf,"%s %s", gettext("Alignment: "), 
+                        pers->actualAlign->name.c_str());
+   intWindow->getObjectsList()->insertTextBox(68,48,283,58,0,buf);
+      /* XP */
+   sprintf(buf,"%s %d %s %d", gettext("XP: "), pers->xp,
+                              gettext("Next Level: "), nextLevelXP(pers->xp));
+   intWindow->getObjectsList()->insertTextBox(68,59,283,69,0,buf);
+   intWindow->getObjectsList()->insertTextBox(66,15,283,75,2,"");
+
 
    /* Character Classes */
 

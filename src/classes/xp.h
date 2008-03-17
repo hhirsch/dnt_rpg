@@ -10,6 +10,12 @@
  * \return total amount of XP. */
 int getXP(character* actualActor, float targetCR);
 
+/*! Get the next number of Experience Points needed to advance
+ * a level, based on the current XP level.
+ * \param curXP -> current number of experience points
+ * \return -> needed experience points to advance to next level */
+int nextLevelXP(int curXP);
+
 
 #endif
 

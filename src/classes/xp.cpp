@@ -1,5 +1,12 @@
 #include "xp.h"
 
+/*! Amount of XP needed per Level */
+int xpPerLevelTable[20] =
+{100, 1100, 3100, 6100, 10100, 15100, 21100, 28100, 36100, 45100,
+ 55100, 66100, 78100, 91100, 105100, 121100, 136100, 153100, 171100, 
+ 190100
+};
+
 /*! The XP table for CR (x->CR y->actorLevel)*/
 int xpTable[20][20] = 
 {
@@ -117,5 +124,29 @@ int getXP(character* actualActor, float targetCR)
    }
 
    return(0);
+}
+
+/************************************************************
+ *                     nextLevelXP                          *
+ ************************************************************/
+int nextLevelXP(int curXP)
+{
+   int i = 0;
+   while( (curXP > xpPerLevelTable[i]) && (i < 19) )
+   {
+      i++;
+   }
+
+   if(i < 19)
+   {
+      return(xpPerLevelTable[i]);
+   }
+   else
+   {
+      /* TODO epical levels! */
+   }
+
+   return(0);
+
 }
 
