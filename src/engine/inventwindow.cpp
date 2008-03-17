@@ -51,7 +51,7 @@ void inventWindow::init(int xa, int ya, string title,
    inventories->openedWindow = true;
 
    /* Add Window */
-   intWindow = inter->insertWindow(xa,ya,xa+263,ya+402,title.c_str());
+   intWindow = inter->insertWindow(xa,ya,xa+266,ya+407,title.c_str());
 
    /* Add Character (equip) Tab Button */
    characterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,
@@ -67,7 +67,7 @@ void inventWindow::init(int xa, int ya, string title,
    leftFingerButton = characterTabButton->insertButton(200,169,219,188);
 
    /* Add Inventory Tab Button */
-   inventoryTabButton = intWindow->getObjectsList()->insertTabButton(4,271,
+   inventoryTabButton = intWindow->getObjectsList()->insertTabButton(4,272,
                                                                      256,128,
                    dir.getRealFile("texturas/inventory/inventory.png").c_str());
    inventoryButton = inventoryTabButton->insertButton(4,13,251,127);
