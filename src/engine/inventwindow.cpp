@@ -127,7 +127,8 @@ void inventWindow::reDraw()
    dntFont fnt;
    int x = 32;
    char buf[8];
-   fnt.defineFont(DNT_FONT_TIMES, 13);
+   farso_colors colors;
+   fnt.defineFont(DNT_FONT_TIMES, 10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    if(isOpen())
@@ -140,14 +141,16 @@ void inventWindow::reDraw()
       {
          if(currentInventory == i)
          {
-            color_Set(255,255,255);
+            color_Set(colors.colorText.R,
+                      colors.colorText.G,
+                      colors.colorText.B);
          }
          else
          {
             color_Set(0,0,0);
          }
          sprintf(buf,"%d", i);
-         fnt.write(inventoryTabButton->get(), x, 0, buf);
+         fnt.write(inventoryTabButton->get(), x, 1, buf, true);
          x += 61;
       }
       intWindow->draw(0,0);

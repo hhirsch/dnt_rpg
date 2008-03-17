@@ -663,7 +663,7 @@ void engine::splashScreen()
    dntFont fnt;
    fnt.defineFont(DNT_FONT_TIMES, 20);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
-   color_Set(48,3,3);
+   color_Set(130,3,3);
    fnt.write(img, 52, 424, gettext("DccNiTghtmare is developed under Public "
                                    "Domain: Feel free to use its source code "
                                    "and data the way you want (or to blame us "
