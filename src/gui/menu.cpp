@@ -134,9 +134,9 @@ void menu::draw(int pos, SDL_Surface *screen)
    guiObject* item = (guiObject*) first->next;
    for (k=0;k<total;k++)
    {
-      color_Set(Colors.colorCont[0].R,
-                Colors.colorCont[0].G,
-                Colors.colorCont[0].B);
+      color_Set(Colors.colorText.R,
+                Colors.colorText.G,
+                Colors.colorText.B);
       if (item->getText().compare("-"))
       {
           if (item->isAvaible()) 
@@ -243,13 +243,16 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
          tecla = 0;
       }
 
-      color_Set(Colors.colorCont[1].R,
-                Colors.colorCont[1].G,
-                Colors.colorCont[1].B);
-      rectangle_Oval(screen,x+2,(actualItem-1)*11+y+4,
-                     x+largura-2,(actualItem)*11+y+4,
-                     Colors.colorCont[2].R,Colors.colorCont[2].G,
-                     Colors.colorCont[2].B);
+      if(actualItem > 0)
+      {
+         color_Set(Colors.colorCont[1].R,
+                   Colors.colorCont[1].G,
+                   Colors.colorCont[1].B);
+         rectangle_Oval(screen,x+2,(actualItem-1)*11+y+4,
+                        x+largura-2,(actualItem)*11+y+4,
+                        Colors.colorCont[2].R,Colors.colorCont[2].G,
+                        Colors.colorCont[2].B);
+      }
 
    /* Define the Return */
    if(isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3,
