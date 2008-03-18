@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-03-12 08:14-0300\n"
+"POT-Creation-Date: 2008-03-18 14:12-0300\n"
 "PO-Revision-Date: 2007-11-29 15:32+0000\n"
 "Last-Translator: MATHIEU Yves <EMAIL@ADDRESS>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -84,17 +84,17 @@ msgstr ""
 msgid "Tendency & Alignment"
 msgstr ""
 
-#: src/engine/alignwindow.cpp:60 src/engine/aspectwindow.cpp:72
-#: src/engine/attwindow.cpp:224 src/engine/classwindow.cpp:77
-#: src/engine/options.cpp:646 src/engine/racewindow.cpp:74
-#: src/engine/skillwindow.cpp:104
+#: src/engine/alignwindow.cpp:58 src/engine/aspectwindow.cpp:72
+#: src/engine/attwindow.cpp:222 src/engine/classwindow.cpp:75
+#: src/engine/options.cpp:646 src/engine/racewindow.cpp:72
+#: src/engine/skillwindow.cpp:103
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: src/engine/alignwindow.cpp:64 src/engine/aspectwindow.cpp:76
-#: src/engine/attwindow.cpp:228 src/engine/barterwindow.cpp:37
-#: src/engine/classwindow.cpp:81 src/engine/options.cpp:650
-#: src/engine/racewindow.cpp:78 src/engine/skillwindow.cpp:108
+#: src/engine/alignwindow.cpp:62 src/engine/aspectwindow.cpp:76
+#: src/engine/attwindow.cpp:226 src/engine/barterwindow.cpp:37
+#: src/engine/classwindow.cpp:79 src/engine/options.cpp:650
+#: src/engine/racewindow.cpp:76 src/engine/skillwindow.cpp:107
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -102,15 +102,15 @@ msgstr "Annuler"
 msgid "Aspect"
 msgstr "Aspect"
 
-#: src/engine/aspectwindow.cpp:46
+#: src/engine/aspectwindow.cpp:46 src/engine/charwindow.cpp:72
 msgid "Name:"
 msgstr "Nom :"
 
-#: src/engine/aspectwindow.cpp:51
+#: src/engine/aspectwindow.cpp:51 src/engine/charwindow.cpp:75
 msgid "Age:"
 msgstr "Age :"
 
-#: src/engine/aspectwindow.cpp:55
+#: src/engine/aspectwindow.cpp:55 src/engine/charwindow.cpp:90
 msgid "Sex:"
 msgstr "Sexe :"
 
@@ -135,27 +135,33 @@ msgstr "Effacer"
 msgid "Auto"
 msgstr "Automatique"
 
-#: src/engine/attwindow.cpp:76 data/skills/forca.ski:1
+#: src/engine/attwindow.cpp:76 src/engine/charwindow.cpp:129
+#: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Force"
 
-#: src/engine/attwindow.cpp:96 data/skills/destreza.ski:1
+#: src/engine/attwindow.cpp:96 src/engine/charwindow.cpp:134
+#: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Dextérité"
 
-#: src/engine/attwindow.cpp:116 data/skills/constituicao.ski:1
+#: src/engine/attwindow.cpp:116 src/engine/charwindow.cpp:139
+#: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Constitution"
 
-#: src/engine/attwindow.cpp:136 data/skills/inteligencia.ski:1
+#: src/engine/attwindow.cpp:136 src/engine/charwindow.cpp:144
+#: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Intelligence"
 
-#: src/engine/attwindow.cpp:157 data/skills/sabedoria.ski:1
+#: src/engine/attwindow.cpp:157 src/engine/charwindow.cpp:149
+#: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr ""
 
-#: src/engine/attwindow.cpp:178 data/skills/carisma.ski:1
+#: src/engine/attwindow.cpp:178 src/engine/charwindow.cpp:154
+#: data/skills/carisma.ski:1
 msgid "Charism"
 msgstr "Charisme"
 
@@ -163,11 +169,11 @@ msgstr "Charisme"
 msgid "Attribute Description"
 msgstr "Description des attributs"
 
-#: src/engine/attwindow.cpp:520 src/engine/options.cpp:821
+#: src/engine/attwindow.cpp:518 src/engine/options.cpp:821
 msgid "Warning"
 msgstr "Avertissement"
 
-#: src/engine/attwindow.cpp:521
+#: src/engine/attwindow.cpp:519
 msgid "You Need to Assign All Attributes."
 msgstr "Vous devez assigner tous les attributs."
 
@@ -188,6 +194,94 @@ msgstr "Imposer"
 msgid "Inventory"
 msgstr "Inventaire"
 
+#: src/engine/charwindow.cpp:81
+msgid "Female"
+msgstr ""
+
+#: src/engine/charwindow.cpp:84
+msgid "Male"
+msgstr ""
+
+#: src/engine/charwindow.cpp:87
+msgid "Undefined"
+msgstr ""
+
+#: src/engine/charwindow.cpp:93
+msgid "Race:"
+msgstr ""
+
+#: src/engine/charwindow.cpp:96
+msgid "Alignment:"
+msgstr ""
+
+#: src/engine/charwindow.cpp:100
+msgid "XP"
+msgstr ""
+
+#: src/engine/charwindow.cpp:101
+msgid "Next Level"
+msgstr ""
+
+#: src/engine/charwindow.cpp:106
+msgid "HP"
+msgstr ""
+
+#: src/engine/charwindow.cpp:108
+msgid "AC"
+msgstr ""
+
+#: src/engine/charwindow.cpp:168
+msgid "Fortitude"
+msgstr ""
+
+#: src/engine/charwindow.cpp:172
+msgid "Reflex"
+msgstr ""
+
+#: src/engine/charwindow.cpp:176
+msgid "I am Not a Fool"
+msgstr ""
+
+#: src/engine/charwindow.cpp:180
+msgid "Base Attack Modifier"
+msgstr ""
+
+#: src/engine/charwindow.cpp:184
+msgid "Size Modifier"
+msgstr ""
+
+#: src/engine/charwindow.cpp:195
+msgid "Feats"
+msgstr ""
+
+#: src/engine/charwindow.cpp:199 src/engine/skillwindow.cpp:42
+msgid "Skills"
+msgstr "Compétences"
+
+#: src/engine/charwindow.cpp:203 src/gui/window.cpp:169
+msgid "Close"
+msgstr ""
+
+#: src/engine/charwindow.cpp:261
+msgid "Main Weapon"
+msgstr ""
+
+#: src/engine/charwindow.cpp:265
+msgid "Secondary Weapon"
+msgstr ""
+
+#: src/engine/charwindow.cpp:269
+msgid "Weapon"
+msgstr ""
+
+#: src/engine/charwindow.cpp:281
+msgid "Unarmed"
+msgstr ""
+
+#: src/engine/charwindow.cpp:287
+msgid "Not Applicable"
+msgstr ""
+
 #: src/engine/classwindow.cpp:35
 msgid "Class"
 msgstr "Classe"
@@ -196,47 +290,47 @@ msgstr "Classe"
 msgid "Class Description"
 msgstr "Description de la Classe"
 
-#: src/engine/classwindow.cpp:55
+#: src/engine/classwindow.cpp:54
 msgid "Class Characteristics"
 msgstr "Caractéristiques de la Classe"
 
-#: src/engine/classwindow.cpp:102
+#: src/engine/classwindow.cpp:100
 msgid "Life Dice"
 msgstr "Dés de Vie"
 
-#: src/engine/classwindow.cpp:106
+#: src/engine/classwindow.cpp:104
 msgid "Skill Points"
 msgstr "Points de compétence"
 
-#: src/engine/classwindow.cpp:133
+#: src/engine/classwindow.cpp:131
 msgid "First Level"
 msgstr "Premier niveau"
 
-#: src/engine/classwindow.cpp:161
+#: src/engine/classwindow.cpp:159
 msgid "Other Levels"
 msgstr "Autres niveaux"
 
-#: src/engine/classwindow.cpp:166
+#: src/engine/classwindow.cpp:164
 msgid "Class Modifiers"
 msgstr "Modificateur de Classe"
 
-#: src/engine/classwindow.cpp:177 src/engine/racewindow.cpp:117
+#: src/engine/classwindow.cpp:175 src/engine/racewindow.cpp:115
 msgid "No Modifiers."
 msgstr "Pas de modificateurs"
 
-#: src/engine/classwindow.cpp:184
+#: src/engine/classwindow.cpp:182
 msgid "Class Feats"
 msgstr "Déplacements de la Classe"
 
-#: src/engine/classwindow.cpp:195 src/engine/racewindow.cpp:135
+#: src/engine/classwindow.cpp:193 src/engine/racewindow.cpp:133
 msgid "No Feats."
 msgstr "Pas de Déplacements."
 
-#: src/engine/classwindow.cpp:203
+#: src/engine/classwindow.cpp:201
 msgid "Class Skills"
 msgstr "Compétences"
 
-#: src/engine/classwindow.cpp:222 src/engine/racewindow.cpp:162
+#: src/engine/classwindow.cpp:220 src/engine/racewindow.cpp:160
 msgid "No Skills."
 msgstr "Pas de Compétences."
 
@@ -245,42 +339,42 @@ msgstr "Pas de Compétences."
 msgid "Can't load mouse cursor: %s\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:353
+#: src/engine/dccnit.cpp:360
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Chargement de la Carte : %s"
 
-#: src/engine/dccnit.cpp:435
+#: src/engine/dccnit.cpp:442
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Impossible de charger le fichier PNJ : %s\n"
 
-#: src/engine/dccnit.cpp:450
+#: src/engine/dccnit.cpp:457
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Chargement du PNJ : %s"
 
-#: src/engine/dccnit.cpp:473
+#: src/engine/dccnit.cpp:480
 msgid "Loading Character"
 msgstr "Chargement du Caractère"
 
-#: src/engine/dccnit.cpp:480
+#: src/engine/dccnit.cpp:487
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:520
+#: src/engine/dccnit.cpp:527
 msgid "Loading Particles"
 msgstr "Chargement des Particules"
 
-#: src/engine/dccnit.cpp:550
+#: src/engine/dccnit.cpp:557
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:570
+#: src/engine/dccnit.cpp:577
 msgid "Done!"
 msgstr "Terminé !"
 
-#: src/engine/dccnit.cpp:660
+#: src/engine/dccnit.cpp:667
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -288,118 +382,118 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1198
+#: src/engine/dccnit.cpp:1205
 msgid "Too far away for the action!"
 msgstr "Trop loin pour cette action !"
 
-#: src/engine/dccnit.cpp:1237 src/engine/dccnit.cpp:1305
+#: src/engine/dccnit.cpp:1244 src/engine/dccnit.cpp:1312
 msgid "No NPCs in the area."
 msgstr "Pas de PNJ dans la zone"
 
-#: src/engine/dccnit.cpp:1287
+#: src/engine/dccnit.cpp:1294
 msgid "Surprise Attack Turn."
 msgstr "Tour des attaques surprises."
 
-#: src/engine/dccnit.cpp:1468
+#: src/engine/dccnit.cpp:1481
 msgid "Enter Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1472
+#: src/engine/dccnit.cpp:1485
 msgid "Select Normal Attack"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1479
+#: src/engine/dccnit.cpp:1492
 msgid "Open Quests Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1486
+#: src/engine/dccnit.cpp:1499
 msgid "Open Map Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1490
+#: src/engine/dccnit.cpp:1503
 msgid "Map Window already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1498
+#: src/engine/dccnit.cpp:1511
 msgid "End Character's Turn"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1502
+#: src/engine/dccnit.cpp:1515
 msgid "Only Avaible on Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1510
+#: src/engine/dccnit.cpp:1523
 msgid "Open Inventory Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1514
+#: src/engine/dccnit.cpp:1527
 msgid "Inventory already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1521
+#: src/engine/dccnit.cpp:1534
 msgid "Open Assign Attacks Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1527
+#: src/engine/dccnit.cpp:1539
 msgid "View Character Informations"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1533
+#: src/engine/dccnit.cpp:1545
 msgid "Open Group/Party Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1595 src/engine/dccnit.cpp:1953
-#: src/engine/dccnit.cpp:3208
+#: src/engine/dccnit.cpp:1614 src/engine/dccnit.cpp:1972
+#: src/engine/dccnit.cpp:3222
 msgid "Nothing"
 msgstr "Rien"
 
-#: src/engine/dccnit.cpp:1692
+#: src/engine/dccnit.cpp:1711
 #, c-format
 msgid "%s taken."
 msgstr "%s pris."
 
-#: src/engine/dccnit.cpp:1715
+#: src/engine/dccnit.cpp:1734
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1750
+#: src/engine/dccnit.cpp:1769
 msgid "Door"
 msgstr "Porte"
 
-#: src/engine/dccnit.cpp:1878 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1897 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s attaque %s|"
 
-#: src/engine/dccnit.cpp:3177
+#: src/engine/dccnit.cpp:3192
 msgid "Map"
 msgstr "Carte"
 
-#: src/engine/dccnit.cpp:3186
+#: src/engine/dccnit.cpp:3201
 msgid "FPS:"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3203
+#: src/engine/dccnit.cpp:3218
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
-#: src/engine/dccnit.cpp:3205
+#: src/engine/dccnit.cpp:3220
 msgid "Press F1 for Help"
 msgstr "Tapez F1 pour l'Aide"
 
-#: src/engine/dccnit.cpp:3211 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3225 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/engine/dccnit.cpp:3213
+#: src/engine/dccnit.cpp:3227
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3216 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3230 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Charger"
 
-#: src/engine/dccnit.cpp:3413
+#: src/engine/dccnit.cpp:3427
 msgid "|Exit Battle Mode"
 msgstr "|Sortir du mode de Bataille"
 
@@ -492,70 +586,70 @@ msgstr "Options"
 msgid "Exit"
 msgstr "Quitter"
 
-#: src/engine/inventwindow.cpp:167
+#: src/engine/inventwindow.cpp:172
 msgid "Drop"
 msgstr "Lâcher"
 
-#: src/engine/inventwindow.cpp:169
+#: src/engine/inventwindow.cpp:174
 msgid "Sell"
 msgstr "Vendre"
 
-#: src/engine/inventwindow.cpp:172
+#: src/engine/inventwindow.cpp:177
 msgid "Use"
 msgstr "Utiliser"
 
-#: src/engine/inventwindow.cpp:176
+#: src/engine/inventwindow.cpp:181
 msgid "Remove"
 msgstr "Retirer"
 
-#: src/engine/inventwindow.cpp:179
+#: src/engine/inventwindow.cpp:184
 msgid "Info"
 msgstr "Informations"
 
-#: src/engine/inventwindow.cpp:181
+#: src/engine/inventwindow.cpp:186
 msgid "Get"
 msgstr "Obtenir"
 
-#: src/engine/itemwindow.cpp:57
+#: src/engine/itemwindow.cpp:58
 #, c-format
 msgid "Name: %s"
 msgstr ""
 
-#: src/engine/itemwindow.cpp:62
+#: src/engine/itemwindow.cpp:63
 #, c-format
 msgid "Cost: %.2f"
 msgstr ""
 
-#: src/engine/itemwindow.cpp:67
+#: src/engine/itemwindow.cpp:68
 #, c-format
 msgid "Weight: %.2f Kg"
 msgstr ""
 
-#: src/engine/itemwindow.cpp:87
+#: src/engine/itemwindow.cpp:88
 msgid "Category: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:93
+#: src/engine/itemwindow.cpp:94
 msgid "Damage Dice: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:100
+#: src/engine/itemwindow.cpp:101
 msgid "Primary Damage: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:107
+#: src/engine/itemwindow.cpp:108
 msgid "Secondary Damage: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:119
+#: src/engine/itemwindow.cpp:120
 msgid "Range: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:124
+#: src/engine/itemwindow.cpp:125
 msgid "Size: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:142
+#: src/engine/itemwindow.cpp:143
 msgid "Ok"
 msgstr ""
 
@@ -694,35 +788,31 @@ msgstr "Race"
 msgid "Race Description"
 msgstr "Description de la Race"
 
-#: src/engine/racewindow.cpp:52
+#: src/engine/racewindow.cpp:51
 msgid "Race Characteristcs"
 msgstr "Caractéristique de la Race"
 
-#: src/engine/racewindow.cpp:106
+#: src/engine/racewindow.cpp:104
 msgid "Race Modifiers"
 msgstr "Modificateur de la Race"
 
-#: src/engine/racewindow.cpp:123
+#: src/engine/racewindow.cpp:121
 msgid "Race Feats"
 msgstr "Déplacements de la Race"
 
-#: src/engine/racewindow.cpp:143
+#: src/engine/racewindow.cpp:141
 msgid "Race Skills"
 msgstr "Compétences de la Race"
-
-#: src/engine/skillwindow.cpp:42
-msgid "Skills"
-msgstr "Compétences"
 
 #: src/engine/skillwindow.cpp:48
 msgid "Total Free Points:"
 msgstr "Total des points restant"
 
-#: src/engine/skillwindow.cpp:79
+#: src/engine/skillwindow.cpp:78
 msgid "Points:"
 msgstr "Points"
 
-#: src/engine/skillwindow.cpp:96
+#: src/engine/skillwindow.cpp:95
 msgid "Cost"
 msgstr "Coût"
 
@@ -773,11 +863,7 @@ msgstr ""
 msgid "Can't open font file: %s\n"
 msgstr ""
 
-#: src/gui/window.cpp:164
-msgid "Close"
-msgstr ""
-
-#: src/gui/window.cpp:166
+#: src/gui/window.cpp:171
 msgid "Maximize"
 msgstr ""
 

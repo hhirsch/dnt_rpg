@@ -34,13 +34,14 @@
  - Put the code fully on English (instead of some
    places on english, others on portuguese);
  - New Sound Effects;
+ - Playable Character Information Window;
  - More 3D Objects;
  - More Characters;
  - Some Adjusts on A*;
  - Objects are now only in cal3D, no more .obj;
  - Some Adjusts to the Particle Controller;
  - First real-game maps;
- - 'make install' now works;
+ - 'make install';
  - Fixed Bug on remove no more used Models and 
    dead with items;
  - Fixed Bug on NPCs Fight Animations;

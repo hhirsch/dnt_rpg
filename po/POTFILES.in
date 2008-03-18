@@ -28,6 +28,7 @@ src/engine/attwindow.cpp
 src/engine/barterwindow.cpp
 src/engine/camera.cpp
 src/engine/character.cpp
+src/engine/charwindow.cpp
 src/engine/classwindow.cpp
 src/engine/collision.cpp
 src/engine/culling.cpp
