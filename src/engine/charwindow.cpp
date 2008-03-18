@@ -45,7 +45,7 @@ void charWindow::open(character* pers)
 
    /* Character Image */
    picture* fig;
-   fig = intWindow->getObjectsList()->insertPicture(8,18,
+   fig = intWindow->getObjectsList()->insertPicture(9,19,
                                                     0,0,
                    dir.getRealFile(pers->getPortraitFileName()).c_str());
    intWindow->getObjectsList()->insertTextBox(5,15,65,75,1,"");
@@ -53,10 +53,10 @@ void charWindow::open(character* pers)
    /* General Things */
 
       /* name */
-   sprintf(buf,"%s %s", gettext("Name: "), pers->name.c_str());
+   sprintf(buf,"%s %s", gettext("Name:"), pers->name.c_str());
    intWindow->getObjectsList()->insertTextBox(68,15,283,25,0,buf);
       /* age */
-   sprintf(buf,"%s %d", gettext("Age: "), pers->age);
+   sprintf(buf,"%s %d", gettext("Age:"), pers->age);
    intWindow->getObjectsList()->insertTextBox(68,26,128,36,0,buf);
       /* sex */
    switch(pers->sexType)
@@ -71,20 +71,27 @@ void charWindow::open(character* pers)
          tmpStr = gettext("Undefined");
       break;
    }
-   sprintf(buf,"%s %s", gettext("Sex: "), tmpStr.c_str());
+   sprintf(buf,"%s %s", gettext("Sex:"), tmpStr.c_str());
    intWindow->getObjectsList()->insertTextBox(130,26,283,36,0,buf);
       /* Race */
-   sprintf(buf,"%s %s", gettext("Race: "), pers->actualRace->name.c_str());
+   sprintf(buf,"%s %s", gettext("Race:"), pers->actualRace->name.c_str());
    intWindow->getObjectsList()->insertTextBox(68,37,283,47,0,buf);
       /* Alignment */
-   sprintf(buf,"%s %s", gettext("Alignment: "), 
+   sprintf(buf,"%s %s", gettext("Alignment:"), 
                         pers->actualAlign->name.c_str());
    intWindow->getObjectsList()->insertTextBox(68,48,283,58,0,buf);
       /* XP */
-   sprintf(buf,"%s %d %s %d", gettext("XP: "), pers->xp,
-                              gettext("Next Level: "), nextLevelXP(pers->xp));
+   sprintf(buf,"%s %d %s %d", gettext("XP:"), pers->xp,
+                              gettext("Next Level:"), nextLevelXP(pers->xp));
    intWindow->getObjectsList()->insertTextBox(68,59,283,69,0,buf);
    intWindow->getObjectsList()->insertTextBox(66,15,283,75,2,"");
+
+   /* Life Points And AC */
+   sprintf(buf,"%s %d/%d", gettext("HP:"), pers->lifePoints, pers->maxLifePoints);
+   intWindow->getObjectsList()->insertTextBox(8,77,62,87,0,buf);
+   sprintf(buf,"%s %d", gettext("AC:"), pers->armatureClass);
+   intWindow->getObjectsList()->insertTextBox(8,88,62,98,0,buf);
+   intWindow->getObjectsList()->insertTextBox(5,76,65,104,2,"");
 
 
    /* Character Classes */

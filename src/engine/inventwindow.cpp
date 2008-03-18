@@ -147,7 +147,9 @@ void inventWindow::reDraw()
          }
          else
          {
-            color_Set(0,0,0);
+            color_Set(colors.colorCont[1].R,
+                      colors.colorCont[1].G,
+                      colors.colorCont[1].B);
          }
          sprintf(buf,"%d", i);
          fnt.write(inventoryTabButton->get(), x, 1, buf, true);

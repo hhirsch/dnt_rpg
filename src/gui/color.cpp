@@ -10,9 +10,9 @@
  ***************************************************************/
 farso_colors::farso_colors()
 {
-   colorCont[0].R = 164;
-   colorCont[0].G = 164;
-   colorCont[0].B = 164;
+   colorCont[0].R = 134;
+   colorCont[0].G = 134;
+   colorCont[0].B = 134;
    colorCont[1].R = 58;
    colorCont[1].G = 58;
    colorCont[1].B = 58;
