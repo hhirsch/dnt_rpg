@@ -131,7 +131,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    intWindow->getObjectsList()->insertPicture(135,109,0,0,
                         dir.getRealFile("skills/Img/constituicao.png").c_str());
 
-   /* Inteligency */
+   /* Intelligence */
    intWindow->getObjectsList()->insertTextBox(9,154,87,167,0,
                                               gettext("Intelligence"));
    attPoints[3] = intWindow->getObjectsList()->insertTextBox(103,152,122,169,

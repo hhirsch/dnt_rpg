@@ -13,11 +13,11 @@ using namespace std;
  *                        ATTRIBUTES CONSTANTS                    *
  ******************************************************************/
 #define ATT_LEVEL        0
-#define ATT_STRENGHT     1
-#define ATT_DEXTERY      2
+#define ATT_STRENGTH     1
+#define ATT_DEXTERITY    2
 #define ATT_CONSTITUTION 3
-#define ATT_INTELIGENCY  4
-#define ATT_WISDOW       5
+#define ATT_INTELLIGENCE 4
+#define ATT_WISDOM       5
 #define ATT_CHARISM      6
 #define ATT_SKILL_FIRST  7
 #define ATT_SKILL_LAST   46
