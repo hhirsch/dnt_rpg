@@ -881,15 +881,10 @@ character* characterList::insertCharacter(string file, featsList* ft,
          //TODO FEATS.
       }
 
-      /*else if ( (buf == ATT_STR_LEVEL) || (buf == ATT_STR_STRENGHT) ||
-                (buf == ATT_STR_DEXTERY) || (buf == ATT_STR_CONSTITUTION) ||
-                (buf == ATT_STR_INTELIGENCY) || (buf == ATT_STR_WISDOW) ||
-                (buf == ATT_STR_CHARISM) )*/
-
    }
   
-   /* Define CA TODO others values to sum here*/ 
-   novo->armatureClass = 10 + novo->sizeModifier + novo->attBonus(ATT_DEXTERY);
+   /* Define AC TODO others values to sum here*/ 
+   novo->armatureClass = 10 + novo->sizeModifier + novo->attBonus(ATT_DEXTERITY);
    
    /* Load The 3D Model */ 
    novo->loadModel(arqModelo);

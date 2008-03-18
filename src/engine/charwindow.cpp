@@ -1,6 +1,11 @@
 #include "charwindow.h"
 #include "../classes/xp.h"
 
+//TODO -> LEVEL UP BUTTON!
+//
+//TODO -> TREAT BUTTONS!
+
+
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
@@ -8,6 +13,7 @@ charWindow::charWindow(interface* interf)
 {
    inter = interf;
    intWindow = NULL;
+   current = NULL;
 }
 
 /********************************************************************
@@ -36,10 +42,18 @@ void charWindow::open(character* pers)
    /* Close the window, if it is openned */
    if(isOpen())
    {
+      if(pers == current)
+      {
+         /* Do not need to reopen the window with the same character! */
+         return;
+      }
       posX = intWindow->getX1();
       posY = intWindow->getY1();
       close();
    }
+
+   /* Set Current */
+   current = pers;
 
    /* Create Window */
    intWindow = inter->insertWindow(posX, posY, posX+288, posY+258,
@@ -145,7 +159,10 @@ void charWindow::open(character* pers)
    intWindow->getObjectsList()->insertTextBox(5,117,125,191,2,"");
 
    /* Infos at RolBar */
-   rolBar* rol = intWindow->getObjectsList()->insertRolBar(126,117,283,251,"");
+   infoBar = intWindow->getObjectsList()->insertRolBar(126,117,283,251,"");
+      /* Main Weapon */
+      writeAboutWeapon(INVENTORY_RIGHT_HAND);
+      writeAboutWeapon(INVENTORY_LEFT_HAND);
 
    /* Feats Button */
    intWindow->getObjectsList()->insertButton(5,192,125,211,
@@ -157,7 +174,8 @@ void charWindow::open(character* pers)
 
    /* Close Button */
    okButton = intWindow->getObjectsList()->insertButton(5,232,125,251,
-                                                        gettext("Close"),1);                                   
+                                                        gettext("Close"),1); 
+
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
    intWindow->setAttributes(true,true,false,false);
@@ -173,6 +191,7 @@ void charWindow::close()
    {
       inter->closeWindow(intWindow);
       intWindow = NULL;
+      current = NULL;
    }
 }
 
@@ -198,6 +217,53 @@ int charWindow::treat(guiObject* object, int eventInfo)
       }
    }
    return(0);
+}
+
+/********************************************************************
+ *                        Write About Weapon                        *
+ ********************************************************************/
+void charWindow::writeAboutWeapon(int inventoryPlace)
+{
+   weapon* wp;
+   char buf[512];
+
+   wp = (weapon*)current->inventories->getFromPlace(inventoryPlace);
+
+   /* Define of what type of weapon talking */
+   if(inventoryPlace == INVENTORY_RIGHT_HAND)
+   {
+      sprintf(buf, "%s", gettext("Main Weapon"));
+   }
+   else if(inventoryPlace == INVENTORY_LEFT_HAND)
+   {
+      sprintf(buf, "%s", gettext("Secondary Weapon"));
+   }
+   else
+   {
+      sprintf(buf, "%s", gettext("Weapon"));
+   }
+
+   if(wp)
+   {
+      /* Write about the weapon */
+      sprintf(buf, "%s: %s", buf, wp->getName().c_str());
+      infoBar->addText(buf);
+   }
+   else if(inventoryPlace == INVENTORY_RIGHT_HAND)
+   {
+      /* Write about unarmed */
+      sprintf(buf, "%s: %s", buf, gettext("Unarmed"));
+      infoBar->addText(buf);
+   }
+   else
+   {
+      /* Not Applicable */
+      sprintf(buf, "%s: %s", buf, gettext("Not Applicable"));
+      infoBar->addText(buf);
+   }
+
+   /* Put bar at init */
+   infoBar->setFirstLine(0);
 }
 
 

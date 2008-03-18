@@ -148,7 +148,7 @@ void rolBar::setText(string txt)
 void rolBar::addText(string txt)
 {
    scrollText->addText(txt);
-   scrollText->setFirstLine(scrollText->getTotalLines());
+   scrollText->setFirstLine(scrollText->getTotalLines()-1);
    redraw();
 }
 
@@ -159,7 +159,7 @@ void rolBar::addText(string txt, string font, int size,
                      int align, int style)
 {
    scrollText->addText(txt, font, size, align, style);
-   scrollText->setFirstLine(scrollText->getTotalLines());
+   scrollText->setFirstLine(scrollText->getTotalLines()-1);
    redraw();
 
 }

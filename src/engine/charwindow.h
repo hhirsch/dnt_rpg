@@ -34,12 +34,21 @@ class charWindow
       bool isOpen();
 
    protected:
+
+      /*! Write at the infoBar about the weapon from the inventory place
+       * \param inventoryPlace -> place where the weapon is (usually 
+       *        INVENTORY_LEFT_HAND and INVENTORY_RIGHT_HAND)*/
+      void writeAboutWeapon(int inventoryPlace);
+
       window* intWindow;         /**< Pointer to the internal window */
       object* curObject;         /**< Pointer to current object */
+
+      character* current;        /**< Current character */
 
       interface* inter;          /**< Current GUI interface */
       button* okButton;          /**< The ok Button */
       button* levelUpButton;     /**< The Level Up Button */
+      rolBar* infoBar;           /**< The Info Bar */
 };
 
 #endif
