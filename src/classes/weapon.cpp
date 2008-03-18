@@ -99,7 +99,7 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
       }
       else if(token == "reflex")
       {
-         sscanf(token2.c_str(),"%d",&reflexes);
+         sscanf(token2.c_str(),"%d",&reflex);
       }
       else if(token == "will")
       {

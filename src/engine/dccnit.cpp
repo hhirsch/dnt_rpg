@@ -1626,7 +1626,7 @@ void engine::hourToTxt()
    int ihour = (int)hour;
    int imin = (int) (( hour - ihour ) * 60 );
    
-   sprintf(&htmp[0],"%2d:%2d", ihour, imin);
+   sprintf(&htmp[0],"%.2d:%.2d", ihour, imin);
 
    if(shortCutsWindow)
    {

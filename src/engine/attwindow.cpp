@@ -55,7 +55,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    saux = "";
    for(i = 0; i < 6; i++)
    {
-      sprintf(tmp,"%d ", points[i]); 
+      sprintf(tmp,"%.2d ", points[i]); 
       saux += tmp;
    }
    rolledPoints = intWindow->getObjectsList()->insertTextBox(8,19,320,32,0,
@@ -83,7 +83,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attButtonNext[0] = intWindow->getObjectsList()->insertButton(123,48,133,65,
                                                   fnt.createUnicode(0x25BA),0);
    attButtonNext[0]->defineFont(DNT_FONT_ARIAL, 9);
-   attTotals[0] = intWindow->getObjectsList()->insertTextBox(165,50,195,65,0,
+   attTotals[0] = intWindow->getObjectsList()->insertTextBox(170,50,195,65,0,
                                                              "");
    attTotals[0]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[0] = intWindow->getObjectsList()->insertTextBox(196,47,226,62,0,
@@ -103,7 +103,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
    attButtonNext[1] = intWindow->getObjectsList()->insertButton(123,82,133,99,
                                                   fnt.createUnicode(0x25BA),0);
    attButtonNext[1]->defineFont(DNT_FONT_ARIAL, 9);
-   attTotals[1] = intWindow->getObjectsList()->insertTextBox(165,84,195,99, 
+   attTotals[1] = intWindow->getObjectsList()->insertTextBox(170,84,195,99, 
                                                              0,"");
    attTotals[1]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[1] = intWindow->getObjectsList()->insertTextBox(196,81,226,96,0,
@@ -123,7 +123,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                                    fnt.createUnicode(0x25BA),0);
    attButtonPrev[2]->defineFont(DNT_FONT_ARIAL, 9);
    attButtonNext[2]->defineFont(DNT_FONT_ARIAL, 9);
-   attTotals[2] = intWindow->getObjectsList()->insertTextBox(165,120,195,135,
+   attTotals[2] = intWindow->getObjectsList()->insertTextBox(170,120,195,135,
                                                              0,"");
    attTotals[2]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[2] = intWindow->getObjectsList()->insertTextBox(196,117,226,132,0,
@@ -144,7 +144,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                                   fnt.createUnicode(0x25BA),0);
    attButtonPrev[3]->defineFont(DNT_FONT_ARIAL, 9);
    attButtonNext[3]->defineFont(DNT_FONT_ARIAL, 9);
-   attTotals[3] = intWindow->getObjectsList()->insertTextBox(165,154,195,169,
+   attTotals[3] = intWindow->getObjectsList()->insertTextBox(170,154,195,169,
                                                              0,"");
    attTotals[3]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[3] = intWindow->getObjectsList()->insertTextBox(196,151,226,166,0,
@@ -165,7 +165,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                                   fnt.createUnicode(0x25BA),0);
    attButtonPrev[4]->defineFont(DNT_FONT_ARIAL, 9);
    attButtonNext[4]->defineFont(DNT_FONT_ARIAL, 9);
-   attTotals[4] = intWindow->getObjectsList()->insertTextBox(165,188,195,203,
+   attTotals[4] = intWindow->getObjectsList()->insertTextBox(170,188,195,203,
                                                              0,"");
    attTotals[4]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[4] = intWindow->getObjectsList()->insertTextBox(196,185,226,200,
@@ -186,7 +186,7 @@ attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
                                                   fnt.createUnicode(0x25BA),0);
    attButtonPrev[5]->defineFont(DNT_FONT_ARIAL, 9);
    attButtonNext[5]->defineFont(DNT_FONT_ARIAL, 9);
-   attTotals[5] = intWindow->getObjectsList()->insertTextBox(165,221,195,237,
+   attTotals[5] = intWindow->getObjectsList()->insertTextBox(170,221,195,237,
                                                              0,"");
    attTotals[5]->setFont(DNT_FONT_TIMES, 12, 0);
    attMods[5] = intWindow->getObjectsList()->insertTextBox(196,219,226,234,
@@ -302,7 +302,7 @@ void attWindow::assignPreviousValues()
    char tmp[10];
    for(i = 0; i < 6; i++)
    {
-      sprintf(tmp,"%d", saveSkill->m_skills[i+1].points);
+      sprintf(tmp,"%.2d", saveSkill->m_skills[i+1].points);
       attPoints[i]->setText(tmp);
       attPointsIndex[i] = i;
       assignAttMod(i);
@@ -319,7 +319,7 @@ void attWindow::autoAssign()
    for(i = 0; i < 6; i++)
    {
       nextAvaiblePoints(i);
-      sprintf(tmp,"%d", points[attPointsIndex[i]]);
+      sprintf(tmp,"%.2d", points[attPointsIndex[i]]);
       attPoints[i]->setText(tmp);
       assignAttMod(i);
    }
@@ -461,26 +461,21 @@ int attWindow::assignAttMod(int att)
    /* Get the bonus */
    attBonus = (int)floor((saveSkill->m_skills[att+1].points-10) / 2.0);
 
-   if(saveSkill->m_skills[att+1].points < 10)
-   {
-      total = "0";
-   }
-   sprintf(tmpTotal,"%d",saveSkill->m_skills[att+1].points);
+   sprintf(tmpTotal,"%.2d",saveSkill->m_skills[att+1].points);
    total += tmpTotal;
+   sprintf(tmpMod,"%+.2d",attBonus);
 
+   /* Define Color */
    if(attBonus > 0)
    {
-      sprintf(tmpMod,"+%d",attBonus);
       attMods[att]->setColor(12,43,143);
    }
    else if(attBonus == 0)
    {
-      sprintf(tmpMod,"+%d",attBonus);
       attMods[att]->setColor(232,174,16);
    }
    else
    {
-      sprintf(tmpMod,"%d",attBonus);
       attMods[att]->setColor(255,55,0);
    }
 
@@ -541,7 +536,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
           rolledPoints->setText("");
           for(i = 0; i < 6; i++)
           {
-              sprintf(tmp,"%d ", points[i]); 
+              sprintf(tmp,"%.2d ", points[i]); 
               rolledPoints->setText(rolledPoints->getText() + tmp);
           }
           intWindow->draw(0,0);
@@ -564,7 +559,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
             if(object == (guiObject*) attButtonNext[i])
             {
                 nextAvaiblePoints(i);
-                sprintf(tmp,"%d", points[attPointsIndex[i]]);
+                sprintf(tmp,"%.2d", points[attPointsIndex[i]]);
                 attPoints[i]->setText(tmp);
                 assignAttMod(i);
                 setDescription(i+1);
@@ -573,7 +568,7 @@ int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
             else if(object == (guiObject*) attButtonPrev[i])
             {
                 previousAvaiblePoints(i);
-                sprintf(tmp,"%d", points[attPointsIndex[i]]);
+                sprintf(tmp,"%.2d", points[attPointsIndex[i]]);
                 attPoints[i]->setText(tmp);
                 assignAttMod(i);
                 setDescription(i+1);

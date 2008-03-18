@@ -126,32 +126,32 @@ void charWindow::open(character* pers)
 
    /* Character Attributes */
       /* Strength */
-   sprintf(buf,"%s: %2d (%d)", gettext("Strength"), 
+   sprintf(buf,"%s: %.2d (%d)", gettext("Strength"), 
                               pers->sk.m_skills[ATT_STRENGTH].points,
                   (int)floor((pers->sk.m_skills[ATT_STRENGTH].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,117,125,127,0,buf);
       /* Dexterity */
-   sprintf(buf,"%s: %2d (%d)", gettext("Dexterity"), 
+   sprintf(buf,"%s: %.2d (%d)", gettext("Dexterity"), 
                               pers->sk.m_skills[ATT_DEXTERITY].points,
                   (int)floor((pers->sk.m_skills[ATT_DEXTERITY].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,128,125,138,0,buf);
       /* Constitution */
-   sprintf(buf,"%s: %2d (%d)", gettext("Constitution"), 
+   sprintf(buf,"%s: %.2d (%d)", gettext("Constitution"), 
                               pers->sk.m_skills[ATT_CONSTITUTION].points,
                   (int)floor((pers->sk.m_skills[ATT_CONSTITUTION].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,139,125,149,0,buf);
       /* Intelligence */
-   sprintf(buf,"%s: %2d (%d)", gettext("Intelligence"), 
+   sprintf(buf,"%s: %.2d (%d)", gettext("Intelligence"), 
                               pers->sk.m_skills[ATT_INTELLIGENCE].points,
                   (int)floor((pers->sk.m_skills[ATT_INTELLIGENCE].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,150,125,160,0,buf);
       /* Wisdow */
-   sprintf(buf,"%s: %2d (%d)", gettext("Wisdom"), 
+   sprintf(buf,"%s: %.2d (%d)", gettext("Wisdom"), 
                               pers->sk.m_skills[ATT_WISDOM].points,
                   (int)floor((pers->sk.m_skills[ATT_WISDOM].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,161,125,171,0,buf);
       /* Charism */
-   sprintf(buf,"%s: %2d (%d)", gettext("Charism"), 
+   sprintf(buf,"%s: %.2d (%d)", gettext("Charism"), 
                               pers->sk.m_skills[ATT_CHARISM].points,
                   (int)floor((pers->sk.m_skills[ATT_CHARISM].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,172,125,182,0,buf);
