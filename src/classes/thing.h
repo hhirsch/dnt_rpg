@@ -29,7 +29,7 @@ class thing
       int lifePoints;         /**< Thing's Life points */
       int maxLifePoints;      /**< Thing's Max Life Points */
       int fortitude;          /**< Thing's Fortitude */
-      int reflexes;           /**< Thing's Reflexes */
+      int reflex;             /**< Thing's Reflexes */
       int will;               /**< Thing's Will */
       int armatureClass;      /**< Thing's Armature Class (AC) */
       int displacement;       /**< Thing's Displacement (in meters) */

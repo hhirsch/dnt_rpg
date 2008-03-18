@@ -112,7 +112,7 @@ object::object(string path, modelList& mdlList): thing()
       }
       else if(token == "reflex")
       {
-         sscanf(token2.c_str(),"%d",&reflexes);
+         sscanf(token2.c_str(),"%d",&reflex);
       }
       else if(token == "will")
       {

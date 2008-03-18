@@ -775,7 +775,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
       /* Base Modifier */
       else if (buf == "baseModifier")
       {
-         sscanf(token2.c_str(),"%d/%d/%d", &novo->fortitude, &novo->reflexes, 
+         sscanf(token2.c_str(),"%d/%d/%d", &novo->fortitude, &novo->reflex, 
                                            &novo->will); 
       }
       /* Attack Modifier */

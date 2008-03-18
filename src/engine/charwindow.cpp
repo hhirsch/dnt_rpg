@@ -56,7 +56,7 @@ void charWindow::open(character* pers)
    current = pers;
 
    /* Create Window */
-   intWindow = inter->insertWindow(posX, posY, posX+288, posY+258,
+   intWindow = inter->insertWindow(posX, posY, posX+340, posY+258,
                                    pers->name);
 
    /* Character Image */
@@ -70,7 +70,7 @@ void charWindow::open(character* pers)
 
       /* name */
    sprintf(buf,"%s %s", gettext("Name:"), pers->name.c_str());
-   intWindow->getObjectsList()->insertTextBox(68,15,283,25,0,buf);
+   intWindow->getObjectsList()->insertTextBox(68,15,335,25,0,buf);
       /* age */
    sprintf(buf,"%s %d", gettext("Age:"), pers->age);
    intWindow->getObjectsList()->insertTextBox(68,26,128,36,0,buf);
@@ -88,19 +88,19 @@ void charWindow::open(character* pers)
       break;
    }
    sprintf(buf,"%s %s", gettext("Sex:"), tmpStr.c_str());
-   intWindow->getObjectsList()->insertTextBox(130,26,283,36,0,buf);
+   intWindow->getObjectsList()->insertTextBox(130,26,335,36,0,buf);
       /* Race */
    sprintf(buf,"%s %s", gettext("Race:"), pers->actualRace->name.c_str());
-   intWindow->getObjectsList()->insertTextBox(68,37,283,47,0,buf);
+   intWindow->getObjectsList()->insertTextBox(68,37,335,47,0,buf);
       /* Alignment */
    sprintf(buf,"%s %s", gettext("Alignment:"), 
                         pers->actualAlign->name.c_str());
-   intWindow->getObjectsList()->insertTextBox(68,48,283,58,0,buf);
+   intWindow->getObjectsList()->insertTextBox(68,48,335,58,0,buf);
       /* XP */
    sprintf(buf,"%s %d      %s %d", gettext("XP:"), pers->xp,
                                    gettext("Next Level:"), nextLevelXP(pers->xp));
-   intWindow->getObjectsList()->insertTextBox(68,59,283,69,0,buf);
-   intWindow->getObjectsList()->insertTextBox(66,15,283,75,2,"");
+   intWindow->getObjectsList()->insertTextBox(68,59,335,69,0,buf);
+   intWindow->getObjectsList()->insertTextBox(66,15,335,75,2,"");
 
    /* Life Points And AC */
    sprintf(buf,"%s %d/%d", gettext("HP:"), pers->lifePoints, pers->maxLifePoints);
@@ -118,11 +118,11 @@ void charWindow::open(character* pers)
       {
          sprintf(buf,"%s(%d)", pers->actualClass[i]->name.c_str(),
                                pers->classLevels[i]);
-         intWindow->getObjectsList()->insertTextBox(68,posY,283,posY+10,0,buf);
+         intWindow->getObjectsList()->insertTextBox(68,posY,335,posY+10,0,buf);
          posY += 11;
       }
    }
-   intWindow->getObjectsList()->insertTextBox(65,76,283,116,2,"");
+   intWindow->getObjectsList()->insertTextBox(65,76,335,116,2,"");
 
    /* Character Attributes */
       /* Strength */
@@ -159,10 +159,36 @@ void charWindow::open(character* pers)
    intWindow->getObjectsList()->insertTextBox(5,117,125,191,2,"");
 
    /* Infos at RolBar */
-   infoBar = intWindow->getObjectsList()->insertRolBar(126,117,283,251,"");
+   infoBar = intWindow->getObjectsList()->insertRolBar(126,117,335,251,"");
       /* Main Weapon */
       writeAboutWeapon(INVENTORY_RIGHT_HAND);
       writeAboutWeapon(INVENTORY_LEFT_HAND);
+
+      /* Fortitude */
+      sprintf(buf,"%s: %d", gettext("Fortitude"), pers->fortitude);
+      infoBar->addText(buf);
+
+      /* Reflex */
+      sprintf(buf,"%s: %d", gettext("Reflex"), pers->reflex);
+      infoBar->addText(buf);
+
+      /* Will */
+      sprintf(buf,"%s: %d", gettext("I am Not a Fool"), pers->will);
+      infoBar->addText(buf);
+
+      /* Base Attack Modifier */
+      sprintf(buf,"%s: %d", gettext("Base Attack Modifier"), pers->baseAttackModifier);
+      infoBar->addText(buf);
+
+      /* Size Modifier */
+      sprintf(buf,"%s: %d", gettext("Size Modifier"), pers->sizeModifier);
+      infoBar->addText(buf);
+
+      /* TODO List all Effects affecting the character */
+
+      /* Put bar at init */
+      infoBar->setFirstLine(0);
+
 
    /* Feats Button */
    intWindow->getObjectsList()->insertButton(5,192,125,211,
@@ -262,8 +288,6 @@ void charWindow::writeAboutWeapon(int inventoryPlace)
       infoBar->addText(buf);
    }
 
-   /* Put bar at init */
-   infoBar->setFirstLine(0);
 }
 
 
