@@ -132,7 +132,7 @@ int getXP(character* actualActor, float targetCR)
 int nextLevelXP(int curXP)
 {
    int i = 0;
-   while( (curXP > xpPerLevelTable[i]) && (i < 19) )
+   while( (curXP >= xpPerLevelTable[i]) && (i < 19) )
    {
       i++;
    }
