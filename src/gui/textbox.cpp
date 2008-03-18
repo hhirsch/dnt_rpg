@@ -131,6 +131,12 @@ int textBox::lastDrawableLine()
    int lastLine = 0;
    int height = 0;
 
+   /* Verify if exist lines */
+   if(!fullText)
+   {
+      return(0);
+   }
+
    /* Get first text line */
    line = fullText;
    for(i = 0; i < firstLine; i++)
@@ -187,29 +193,32 @@ int textBox::draw()
                        Colors.colorCont[1].B);
    }
 
-   /* Get first text line */
-   line = fullText;
-   for(i = 0; i < firstLine; i++)
+   if(fullText)
    {
-      line = line->next;
-   }
+      /* Get first text line */
+      line = fullText;
+      for(i = 0; i < firstLine; i++)
+      {
+         line = line->next;
+      }
    
-   int y = y1+2;
-   /* Draw the text lines */
-   for(i = firstLine; 
-       ( (y+height < y2) && (i < totalLines) ) ; i++)
-   {
-      lastLine = i;
-      color_Set(line->R,line->G,line->B);
-      fnt.defineFont(line->fontName, line->fontSize);
-      fnt.defineFontAlign(line->fontAlign);
-      fnt.defineFontStyle(line->fontStyle);
-      fnt.write(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
-      y += line->height;
-      height = line->height;
-      line = line->next;
+      int y = y1+2;
+      /* Draw the text lines */
+      for(i = firstLine; 
+          ( (y+height < y2) && (i < totalLines) ) ; i++)
+      {
+         lastLine = i;
+         color_Set(line->R,line->G,line->B);
+         fnt.defineFont(line->fontName, line->fontSize);
+         fnt.defineFontAlign(line->fontAlign);
+         fnt.defineFontStyle(line->fontStyle);
+         fnt.write(wSurface, x1+2, y, line->text, x1+2, y, x2, y2);
+         y += line->height;
+         height = line->height;
+         line = line->next;
+      }
+      setChanged();
    }
-   setChanged();
    return(lastLine);
 }
 
