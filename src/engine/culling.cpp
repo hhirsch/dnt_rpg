@@ -1,5 +1,9 @@
 #include "culling.h"
 
+/*! Delta value to render, since antialiasing
+ * will do "glitch" effects if only render when visible */
+#define ANTI_ALIASING_DELTA  20  
+
 /*********************************************************
  *                      updateFrustum                    *
  *********************************************************/
@@ -122,7 +126,15 @@ int visibleCube(GLfloat x1, GLfloat y1, GLfloat z1,
                 GLfloat x2, GLfloat y2, GLfloat z2,
                 GLfloat matriz[6][4])
 {
-   /* Se todos os pontos estao fora de algum plano, esta fora */
+   /* Apply AntiAliasing Delta */
+   x1 = x1 - ANTI_ALIASING_DELTA;
+   y1 = y1 - ANTI_ALIASING_DELTA;
+   z1 = z1 - ANTI_ALIASING_DELTA;
+   x2 = x2 + ANTI_ALIASING_DELTA;
+   y2 = y2 + ANTI_ALIASING_DELTA;
+   z2 = z2 + ANTI_ALIASING_DELTA;
+
+   /* If all points are outter planes, is out! */
    if(((matriz[0][0]*x1+matriz[0][1]*y1+matriz[0][2]*z1+matriz[0][3] <= 0) &&
        (matriz[0][0]*x1+matriz[0][1]*y1+matriz[0][2]*z2+matriz[0][3] <= 0) &&
        (matriz[0][0]*x1+matriz[0][1]*y2+matriz[0][2]*z1+matriz[0][3] <= 0) &&
