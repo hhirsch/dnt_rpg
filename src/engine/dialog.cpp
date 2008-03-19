@@ -472,13 +472,11 @@ void conversation::openDialog(int numDialog, interface* gui, character* pers,
    barterButton = jan->getObjectsList()->insertButton(5,86,69,104,
                                             gettext("Barter"),1);
    jan->getObjectsList()->insertPicture(10,25,0,0,
-                                 dir.getRealFile(pers->getPortraitFileName()).c_str());
+                        dir.getRealFile(pers->getPortraitFileName()).c_str());
    npcText = jan->getObjectsList()->insertRolBar(71,20,250,115,"");
    //npcText->fonte = FMINI;
    pcSelText = jan->getObjectsList()->insertSelText(5,116,250,250,"","","",
                                                     "","");
-   jan->getObjectsList()->insertPicture(3,15,0,0,
-                        dir.getRealFile("texturas/dialogw/dialog.png").c_str());
    jan->setExternPointer(&jan);
    gui->openWindow(jan);
 
