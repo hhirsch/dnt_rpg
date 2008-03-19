@@ -2127,8 +2127,12 @@ int engine::treatIO(SDL_Surface *screen)
          }
 
          /* Open Character Info Window */
-         if( (keys[SDLK_c]) )
+         if( (keys[SDLK_c]) && 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_c) ) ) 
          {
+            lastKey = SDLK_c;
+            lastKeyb = time;
             if(charInfoWindow)
             {
                charInfoWindow->open(PCs->getActiveCharacter());

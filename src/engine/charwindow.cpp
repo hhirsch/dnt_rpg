@@ -44,7 +44,8 @@ void charWindow::open(character* pers)
    {
       if(pers == current)
       {
-         /* Do not need to reopen the window with the same character! */
+         /* Called to open again with the same character, so close window */
+         close();
          return;
       }
       posX = intWindow->getX1();
@@ -98,12 +99,14 @@ void charWindow::open(character* pers)
    intWindow->getObjectsList()->insertTextBox(68,48,335,58,0,buf);
       /* XP */
    sprintf(buf,"%s: %d      %s: %d", gettext("XP"), pers->xp,
-                                   gettext("Next Level"), nextLevelXP(pers->xp));
+                                     gettext("Next Level"), 
+                                     nextLevelXP(pers->xp));
    intWindow->getObjectsList()->insertTextBox(68,59,335,69,0,buf);
    intWindow->getObjectsList()->insertTextBox(66,15,335,75,2,"");
 
    /* Life Points And AC */
-   sprintf(buf,"%s: %d/%d", gettext("HP"), pers->lifePoints, pers->maxLifePoints);
+   sprintf(buf,"%s: %d/%d", gettext("HP"), pers->lifePoints, 
+                            pers->maxLifePoints);
    intWindow->getObjectsList()->insertTextBox(8,77,62,87,0,buf);
    sprintf(buf,"%s: %d", gettext("AC"), pers->armatureClass);
    intWindow->getObjectsList()->insertTextBox(8,88,62,98,0,buf);
@@ -128,22 +131,22 @@ void charWindow::open(character* pers)
       /* Strength */
    sprintf(buf,"%s: %.2d (%d)", gettext("Strength"), 
                               pers->sk.m_skills[ATT_STRENGTH].points,
-                  (int)floor((pers->sk.m_skills[ATT_STRENGTH].points-10) / 2.0));
+                 (int)floor((pers->sk.m_skills[ATT_STRENGTH].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,117,125,127,0,buf);
       /* Dexterity */
    sprintf(buf,"%s: %.2d (%d)", gettext("Dexterity"), 
                               pers->sk.m_skills[ATT_DEXTERITY].points,
-                  (int)floor((pers->sk.m_skills[ATT_DEXTERITY].points-10) / 2.0));
+                (int)floor((pers->sk.m_skills[ATT_DEXTERITY].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,128,125,138,0,buf);
       /* Constitution */
    sprintf(buf,"%s: %.2d (%d)", gettext("Constitution"), 
                               pers->sk.m_skills[ATT_CONSTITUTION].points,
-                  (int)floor((pers->sk.m_skills[ATT_CONSTITUTION].points-10) / 2.0));
+             (int)floor((pers->sk.m_skills[ATT_CONSTITUTION].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,139,125,149,0,buf);
       /* Intelligence */
    sprintf(buf,"%s: %.2d (%d)", gettext("Intelligence"), 
                               pers->sk.m_skills[ATT_INTELLIGENCE].points,
-                  (int)floor((pers->sk.m_skills[ATT_INTELLIGENCE].points-10) / 2.0));
+             (int)floor((pers->sk.m_skills[ATT_INTELLIGENCE].points-10) / 2.0));
    intWindow->getObjectsList()->insertTextBox(8,150,125,160,0,buf);
       /* Wisdow */
    sprintf(buf,"%s: %.2d (%d)", gettext("Wisdom"), 
@@ -177,7 +180,8 @@ void charWindow::open(character* pers)
       infoBar->addText(buf);
 
       /* Base Attack Modifier */
-      sprintf(buf,"%s: %d", gettext("Base Attack Modifier"), pers->baseAttackModifier);
+      sprintf(buf,"%s: %d", gettext("Base Attack Modifier"), 
+                            pers->baseAttackModifier);
       infoBar->addText(buf);
 
       /* Size Modifier */
