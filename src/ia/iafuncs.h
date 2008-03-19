@@ -173,7 +173,7 @@ using namespace std;
 ////////////////////////////////////////////////////
 //                Inventory Functions             //
 ////////////////////////////////////////////////////
-/*! bool inventoryHave(character* owner, string objectFile) */
+/*! bool inventoryHave(character owner, string objectFile) */
 #define IA_INVENTORY_HAVE "inventoryHave"
 
 /*! Convert the infix string to a postfix one

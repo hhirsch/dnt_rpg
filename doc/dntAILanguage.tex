@@ -1,0 +1,670 @@
+\documentclass[ letterpaper,12pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{epsfig}
+
+\begin{document}
+
+\title{\textbf{DNT AI Language}}
+
+\author
+{
+DNTeam
+}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Overview}
+
+   The DNT AI Language was created to write AI and mission scripts for the
+DccNiTghtmare computer game. 
+
+   Why write a new language instead of using an existed one? Simple: first we
+have tried {\it LUA} as a language, but its integration with C++ language and poor
+compatibility between versions forced us to abandon the use. In the other hand,
+a language implemented at the core of the game engine can be much more optimized
+and extensible than a generic one.
+
+\section{Restrictions}
+
+\subsection{Expressions/Lines}
+A expression must be at the same line. So,
+
+\begin{verbatim}
+a = 25 + 45 + b * (d + e);
+\end{verbatim}
+
+{\bf is valid}, but
+
+\begin{verbatim}
+a = 25 + 45 + b 
+    * (d + e);
+\end{verbatim}
+
+{\bf isn't}.
+
+\subsection{Function Parameters}
+
+Function parameters must be variables. So, you can't pass constants to funcions.
+For Example:
+
+\begin{verbatim}
+   posX = 3500
+   posZ = 3200
+   moveToPosition(SELF_CHARACTER, posX, posZ)
+\end{verbatim}
+
+{\bf will work}, but:
+
+\begin{verbatim}
+   moveToPosition(SELF_CHARACTER, 3500, 3200)
+\end{verbatim}
+
+{\bf won't}.
+
+\section{Comments}
+ 
+   A comment is a line with its first valid character equal to '\#'. For example:
+
+\begin{verbatim}
+   # This script is a test to the DNT script language
+   # actually, it don't do anything util.
+\end{verbatim}
+
+\section{Separators}
+
+The separators, as its names suggests, separates terms on the language. They are:
+
+\begin{itemize}
+\item{Comma: ','}
+\item{Semi Colon: ';'}
+\item{Space: ' '}
+\item{Tab: '/t'}
+\item{New Line: '/n'}
+\item{Null: '/0'}
+\end{itemize}
+
+Any separator is valid at any time. {\it For example:}
+
+\begin{verbatim}
+int posX posZ
+\end{verbatim}
+
+{\it is the same of:}
+
+\begin{verbatim}
+int posX,posZ;
+\end{verbatim}
+
+\section{Variables}
+
+\subsection{Declaration}
+
+To declare a variable the expression is:
+
+\begin{verbatim}
+type separator name [separator name]
+\end{verbatim}
+
+For example, some valid definitions:
+
+\begin{verbatim}
+bool control
+int posX posZ
+int time, value
+float dist; mean, sum;
+\end{verbatim}
+
+\subsection{Types}
+
+\subsubsection{void}
+
+The void type is as in C/C++: a representation of an empty set of values.
+
+\subsubsection{bool}
+
+The bool type is a boolean, taking values {\it true} or {\it false}.
+
+\subsubsection{int}
+
+The integer type represents a discret number.
+
+\subsubsection{float}
+
+The float type represents a float point number.
+
+\subsubsection{string}
+
+The string type represents a character string. String constants must begin and
+end with ``. For Example:
+
+\begin{verbatim}
+"This is a string constant!"
+\end{verbatim}
+
+\subsubsection{character}
+
+The character type represents a game character, playable or non-playable.
+
+\subsubsection{object}
+
+The object type represents an object in the game. This object can be mapObjects,
+weapons, etc.
+
+\subsubsection{map}
+
+The map type represents a game map.
+
+\section{Operations}
+
+An operation must be done with compatible types.
+
+\subsection{Parenthesis}
+
+Parenthesis can be used to group operations, just keeping in mind that any open
+paranthesis '(' must have a close ')' one. And {\it vice-versa}.
+
+\subsection{Math Operators}
+
+\begin{itemize}
+\item{Addition: '+'}
+\item{Subtraction: '-'}
+\item{Multiplication: '*'}
+\item{Division: '/'}
+\item{Modulus: '\%'}
+\item{Assign: '='}
+\end{itemize}
+
+\subsection{Logical Operators}
+
+\begin{itemize}
+\item{Equal: "=="}
+\item{Not Equal: "!="}
+\item{Lesser: "<"}
+\item{Greater: ">"}
+\item{Greater Equal: ">="}
+\item{Lesser Equal: "<="}
+\item{And: "\&\&"}
+\item{Or: "||"}
+\item{Not: '!'}
+\end{itemize}
+
+\section{Flux Control}
+
+\subsection{Script Declaration}
+
+All scripts must have a {\it script()} marking its begining. A {\it script()}
+must has an {\it end}.
+
+\begin{verbatim}
+script()
+
+   #its a multiple variable definition. Each variable
+   #is separated with spaces.
+   int a b
+
+   #some maths
+   a = 2
+   b = 10
+   a=b + a
+end
+\end{verbatim}
+
+\subsection{Conditional}
+
+The conditional flux control is an {\it 'if'}. An {\it 'if'} must have an {\it
+end} or {\it else}. An {\it else} must have an {\it end} or {\it else}. {\it
+else if} is valid. Examples:
+
+\begin{verbatim}
+   if( (c > 40) && (a > 10) && (!variavel) )
+      c = 12;
+      if(c < 40)
+         c = 40
+      else
+         c = c*2+20
+      end
+   else
+      c = d
+   end
+\end{verbatim}
+
+\begin{verbatim}
+   if(a >= 2)
+      b = 1
+   else 
+   if(a <= 0)
+      b = 2
+   else
+      b = 3;
+   end
+\end{verbatim}
+
+\subsection{Iterational}
+
+The iterational flux control is an {\it while}. Each {\it while} must have an
+{\it end}. Examples:
+
+\begin{verbatim}
+   while(count <= 5)
+      count = count + 1
+      c = c + (count * 2)
+   end
+\end{verbatim}
+
+\begin{verbatim}
+   while(true)
+      if(control)
+         posX = 3500
+         posZ = 3200
+         moveToPosition(SELF_CHARACTER, posX, posZ)
+         posX = 3600
+         posZ = 3200
+         moveToPosition(SELF_CHARACTER, posX, posZ)
+         control = false
+      else
+         setIdle(SELF_CHARACTER)
+         time = 10
+         wait(time)
+         control = true
+      end
+   end
+\end{verbatim}
+
+
+\section{Functions}
+
+At this time, you can't implement functions at the script. This is a feature
+that we plan to put latter on the language if we need it.
+
+\subsection{Pending Actions}
+
+   There are two types of functions, those that can be done in a time lesser to
+a render cycle, and those that remains for more than one cycle. For example,
+verify the current position of the character is done in a time lesser than the
+render cycle, but make a character move from its current position to another is 
+an operation that requers more than one render cycle to be done.
+   For the functions that requires more than one render cycle, the interpreter puts
+them at an {\it Action Controller} and wait for the action end (with success or
+not) to continue the script interpretation. So this kind of functions {\bf must} be
+{\bf boolean} ones.
+
+Next, we'll describe the functions implemented to the script use.
+
+\subsection{Quick Pointers}
+
+The quick pointer are pointers to somethings in game that can be used as a
+global variable {\it (but can't have his value directly changed)}.
+
+\subsubsection{SELF\_OBJECT}
+{\bf type:} object
+
+The {\it SELF\_OBJECT} is the representation of the object owner of the script
+(if one exists). This variable is available when the script is one that
+controls some object behaviour.
+
+\subsubsection{SELF\_CHARACTER}
+{\bf type:} character
+
+The {\it SELF\_CHARACTER} is the representation of the character owner of the script
+(if one exists). This variable is available when the script is one that
+controls some character behaviour (in combat or not).
+
+\subsubsection{ACTIVE\_CHARACTER}
+{\bf type:} character
+
+The {\it ACTIVE\_CHARACTER} represents the current character controlled by the
+user.
+
+\subsubsection{ACTUAL\_MAP}
+{\bf type:} map
+
+The {\it ACTUAL\_MAP} represents the current opened map.
+
+
+\subsection{Imediate Expressions}
+
+\subsubsection{true}
+{\bf type:} bool
+
+Represents the true value.
+
+\subsubsection{false}
+{\bf type:} bool
+
+Represents the false value.
+
+\subsection{Time}
+
+\subsubsection{wait}
+{\bf definition:} bool wait(int s)
+
+The wait function made the script waits for {\it s} seconds before continue to be
+interpreted. {\bf Returns:} {\it true} if wait, {\it false} if was interrupted.
+
+{\bf Will generate a Pending Action}
+
+\subsection{Movimentation}
+
+\subsubsection{moveToPosition}
+{\bf definition:} bool moveToPosition(character char, int x, int z)
+
+Will move the character {\it char} to the map position {\it x,z}. {\bf Returns:} 
+{\it true} if moved, {\it false} if can't move or was interrupted.
+
+{\bf Will generate a Pending Action}
+
+\subsubsection{moveToCharacter}
+{\bf definition:} bool moveToCharacter(character char, character tgt)
+
+Will move the character {\it char} near to the character {\it tgt}. {\bf Returns:} 
+{\it true} if moved, {\it false} if can't move or was interrupted.
+
+{\bf Will generate a Pending Action}
+
+\subsubsection{moveToObject}
+{\bf definition:} bool moveToObject(character char, object obj)
+
+Will move the character {\it char} near to the object {\it obj}. {\bf Returns:} 
+{\it true} if moved, {\it false} if can't move or was interrupted.
+
+{\bf Will generate a Pending Action}
+
+\subsection{Character}
+
+\subsubsection{setIdle}
+{\bf definition:} void setIdle(character char)
+
+Puts the character {\it char} at idle state.
+
+\subsubsection{getPsycho}
+{\bf definition:} int getPsycho(character c)
+
+Gets the psycho state of the character {\it c}. {\bf Returns} psycho state of
+the character.
+
+\subsubsection{setPsycho}
+{\bf definition:} void setPsycho(character c, int psychoState)
+
+Set the psycho state of the character {\it c} to {\it psychoState}.
+
+\subsubsection{getActualLife}
+{\bf definition:} int getActualLife(character c)
+
+Gets the current life points of the character {\it c}. {\bf Returns} current
+life points of the character.
+
+\subsubsection{getMaxLife}
+{\bf definition:} int getMaxLife(character c)
+
+Gets the max life points of the character {\it c}. {\bf Returns} max
+life points of the character.
+
+\subsubsection{characterAtRange}
+{\bf definition:} characterAtRange(character ref, character target)
+
+Verify if the character {\it target} is at the range of the character {\it ref}.
+{\bf Returns:} true if at range, false if isn't.
+
+
+\subsection{Inventory}
+
+\subsubsection{inventoryHave}
+{\bf definition:} bool inventoryHave(character owner, string objectFile)
+
+Verify if the inventory of character {\it owner} have the object with fileName
+{\it objectFile}. {\bf Returns: } true if have the object, false otherwise.
+
+\subsection{Feat}
+
+\subsubsection{featActualQuantity}
+{\bf definition:} int featActualQuantity(string featID)
+
+Get current quantity of the feat {\it featID}.
+
+\subsubsection{featCost}
+{\bf definition:} int featCost(string featID)
+
+Get current cost to use the feat {\it featID}.
+
+\subsubsection{featQuantityPerDay}
+{\bf definition:} int featQuantityPerDay(string featID)
+
+Get the quantity per day of the feat {\it featID}.
+
+\subsubsection{getRandomAttackFeat}
+{\bf definition:} string getRandomAttackFeat()
+
+This function get a random attack feat that can be used by
+the characterOwner of the script on its defined target.
+
+\subsubsection{getPowerfullAttackFeat}
+{\bf definition:} string getPowerfullAttackFeat()
+
+This function get the powerfull attack feat that the characterOwner
+of the script can use at its defined target.
+
+\subsubsection{getRandomHealFeat}
+{\bf definition:} string getRandomHealFeat()
+
+This function get a random heal feat that can be used by
+the characterOwner of the script on its defined target.
+
+\subsubsection{getPowerfullHealFeat}
+{\bf definition:} string getPowerfullHealFeat()
+
+This function get the powerfull heal feat that the characterOwner
+of the script can use at its defined target.
+
+\subsection{Skill}
+
+\subsubsection{skillPoints}
+{\bf definition:} int skillPoints(character c, string skillID)
+
+Get the number of points to the skill {\it skillID} of character {\it c}.
+
+\subsubsection{attModifier}
+{\bf definition:} int attModifier(character c, string attID)
+
+Get the Attribute Modifier of attribute {\it attID} of character {\it c}.
+
+\subsection{Fight}
+
+\subsubsection{combatEnter}
+{\bf definition:} void combatEnter()
+
+Put the engine at combat mode.
+
+\subsubsection{getNearestEnemy}
+{\bf definition:} character getNearestEnemy(character dude)
+
+Get the nearest enemy character from the character {\it dude}
+
+
+\subsection{Missions}
+
+\subsubsection{missionAdd}
+{\bf definition:} void missionAdd(string missionFile)
+
+Add a mission {\it missionFile} to the mission Controller.
+
+\subsubsection{missionComplete}
+{\bf definition:} void missionComplete(string missionFile, int completeType)
+
+Complete the mission {\it missionFile} with the {\it completeType} solution.
+
+\subsubsection{missionIsActive}
+{\bf definition:} bool missionIsActive(string missionFile)
+
+Verify if the mission is still active {\it (aka: inited and not failed or
+completed)}. {\bf Returns: } true if the mission is active.
+
+\subsubsection{missionSetTemp}
+{\bf definition:} void missionSetTemp(string missionfile, int tmpNumber, int value)
+
+Set the value of a temporary mission variable {\it tmpNumber}, of mission {\it
+missionFile} to {\it value}.
+
+
+\subsubsection{missionGetTemp}
+{\bf definition:} int missionGetTemp(string missionFile, int tmpNumber)
+
+Get the value of the temporary mission variable {\it tmpNumber}, of mission {\it
+missionFile};
+
+\subsubsection{missionSetXp}
+{\bf definition:} void missionSetXp(string missionFile, int xpValue)
+
+Set the ammount of xp to complete the mission {\it missionFile} to {\it
+xpValue}.
+
+
+\section{Uses}
+
+The DNT scripts have some specific uses, described bellow.
+
+\subsection{NPC Normal Behaviour}
+
+The script can control a NPC behaviour. This type of scripts, usually, are
+{\it infinite loop} ones, controlling all the actions the NPC do when not on
+battle mode.
+
+For example, a script tha will made a character walk to two positions and stay
+idle for 10 seconds.
+
+\begin{verbatim}
+# A general movimentation script to test
+# the NPC movimentation controlled by scripts.
+
+script()
+   bool control
+   int posX posZ
+   int time
+
+   control = true
+   while(true)
+      if(control)
+         posX = 3500
+         posZ = 3200
+         moveToPosition(SELF_CHARACTER, posX, posZ)
+         posX = 3600
+         posZ = 3200
+         moveToPosition(SELF_CHARACTER, posX, posZ)
+         control = false
+      else
+         setIdle(SELF_CHARACTER)
+         time = 10
+         wait(time)
+         control = true
+      end
+   end
+end
+\end{verbatim}
+
+\subsection{NPC Combat Controller}
+The script can control the combat behaviour of the NPC. They are one pass
+scripts types, controlling the character {\bf per turn}. For example:
+
+\begin{verbatim}
+#An NPC behaviour for a turn on the combat mode
+#It's our first test for the NPC combat IA scripts
+
+script()
+   int actualLife
+
+   # Get the actual life of the character
+   actualLife = getActualLife(SELF_CHARACTER)
+   if(actualLife < 10)
+      if(haveHealFunction)
+         #if can cure itself, cure
+         healCharacter(SELF_CHARACTER)
+      end
+      else
+         #if can't cure itself, try to run away
+         runAwayFromBattle();
+      end
+   end
+
+   if(canAttack)
+      character dude
+      dude = getNearestEnemy(SELF_CHARACTER)
+      if(!characterAtRange(dude))
+         moveToCharacter(SELF_CHARACTER, dude)
+      end
+
+      if(canAttack)
+         feat at
+         at = getRandomAttackFeat()
+         featUseAtCharacter(at, dude)
+      end
+   end
+
+   if(canMove)
+      dude = getNearestEnemy(SELF_CHARACTER)
+      if(!characterAtRange(dude))
+         moveToCharacter(SELF_CHARACTER, dude)
+      end
+   end
+end
+\end{verbatim}
+
+{\it Note that the above script isn't fully implemented on the language yet.}
+
+\subsection{Missions}
+
+The scripts can control a mission. Mission scripts must define itselves the
+ammount of XP characters receive by completing them (with {\it missionSetXp}
+function). When {\it missionComplete} or {\it missionAbort} is called, the
+script is ended. 
+
+For example, a mission that is completed when the character have a {\it Beretta
+92} with him. 
+
+\begin{verbatim}
+# TUTORIAL - I
+# The first tutorial mission
+
+script()
+
+   # create the object fileName, since can't have a literal parameter
+   string objFile
+   objFile = "weapons/definitions/beretta92.wcc"
+
+   #create the mission filename too
+   string missionFile
+   missionFile = "missions/tutorial/mission1.dsl"
+
+   int xpValue
+   xpValue = 100
+   missionSetXp(missionFile, xpValue)
+
+   while(true)
+      if(inventoryHave(ACTIVE_CHARACTER,objFile))
+         int compType
+         compType = 1
+         missionComplete(missionFile, compType)
+      end
+   end
+
+end
+
+\end{verbatim}
+
+\subsection{Triggers}
+
+Scripts can controll some trigger events, for example, when you open a box, a
+trigger script can be called, making a trap or other things. This type of
+scripts isn't fully implemented yet.
+
+\end{document}
+
+
