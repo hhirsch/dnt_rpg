@@ -247,44 +247,6 @@ engine::~engine()
 }
 
 /*********************************************************************
- *                       Informations Screen                         *
- *********************************************************************/
-void engine::informationScreen()
-{
-   Uint8 *keys;
-   SDL_Surface* img;
-   img = IMG_Load(dir.getRealFile("/texturas/general/info.png").c_str());
-
-   GLuint texturaInfo;
-   glGenTextures(1,&texturaInfo);
-   setTextureRGBA(img,texturaInfo);
-
-   glDisable(GL_LIGHTING);
-   updateFrustum(visibleMatrix,proj,modl);
-   textureToScreen(texturaInfo,proj,modl,viewPort,272,44,527,555,256,213,
-                   0.0001);
-   glEnable(GL_LIGHTING);
-   glFlush();
-   SDL_GL_SwapBuffers();
-
-   SDL_Delay(100);
-   SDL_PumpEvents();
-   keys = SDL_GetKeyState(NULL);
-
-   /* Wait user requests to exit from this screen */
-   while(!(keys[SDLK_F1] || keys[SDLK_ESCAPE] || keys[SDLK_RETURN]) )
-   {
-       SDL_Delay(40);
-       SDL_PumpEvents();
-       keys = SDL_GetKeyState(NULL);
-   }
-
-   glDeleteTextures(1,&texturaInfo);
-   SDL_Delay(100);
-   lastRead = SDL_GetTicks();
-}
-
-/*********************************************************************
  *                               loadGame                            *
  *********************************************************************/
 void engine::loadGame()
@@ -2140,11 +2102,6 @@ int engine::treatIO(SDL_Surface *screen)
          }
 
 
-         if(keys[SDLK_F1]) //Call Information Screen
-         {
-            informationScreen();
-         }
-
          /* FIXME Remove all timerary tests from here */
          if( (keys[SDLK_y]) && 
              ( (time-lastKeyb >= REFRESH_RATE) || 
@@ -3221,7 +3178,7 @@ void engine::openShortcutsWindow()
    shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,512,SCREEN_Y-1,
                                        gettext("Shortcuts"));
    briefTxt = shortCutsWindow->getObjectsList()->insertRolBar(8,36,249,101,
-                                  gettext("Press F1 for Help"));
+                                  gettext("Welcome to DNT!"));
    objTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,20,249,35,1,
                                                            gettext("Nothing"));
 
