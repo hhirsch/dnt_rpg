@@ -1432,8 +1432,10 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    }
 
    /* Verify ShortCutsWindow */
-   switch(eventInfo)
+   if(shortCutsWindow)
    {
+     switch(eventInfo)
+     {
        case ON_FOCUS_TAB_BUTTON:
        {
           if(object == (guiObject*) buttonAttackMode)
@@ -1569,12 +1571,12 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
          }
          break;
        }
-   }
-
-   if( (!defined) && (gui->mouseOnGui(mouseX, mouseY)) )
-   {
-      objTxt->setText(gettext("Nothing"));
-   }
+     }
+     if( (!defined) && (gui->mouseOnGui(mouseX, mouseY)) )
+     {
+        objTxt->setText(gettext("Nothing"));
+     }
+  }  
 
 
 }
@@ -1667,12 +1669,20 @@ int engine::verifyMouseActions(Uint8 mButton)
                 {
                    /* Get Object */
                    lastMousePression = time;
-                   briefTxt->addText("|");
+
+                   if(shortCutsWindow)
+                   {
+                     briefTxt->addText("|");
+                   }
                    if(activeCharacter->inventories->addObject(sobj->obj))
                    {
                       sprintf(buf,gettext("%s taken."),
                               sobj->obj->getName().c_str());
-                      briefTxt->addText(buf);
+                     
+                      if(shortCutsWindow)
+                      {
+                        briefTxt->addText(buf);
+                      }
 
                       /* Log State to the modState */
                       modifState.mapObjectAddAction(
@@ -2505,7 +2515,7 @@ int engine::treatIO(SDL_Surface *screen)
 
       /* Actualize FPS */
       actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
-      if( (shortCutsWindow) && (time-lastFPS >= 500))
+      if( (miniMapWindow) && (time-lastFPS >= 500))
       {
          lastFPS = time;
          char texto[32];
