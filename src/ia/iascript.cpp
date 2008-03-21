@@ -190,6 +190,8 @@ void iaScript::run(int maxLines)
             strBuffer = pendingAction->getScriptLine();
             interpret = true;
 
+            //printf("Action Ended: %s\n", strBuffer.c_str());
+
             /* Remove the action from the controller */
             engine* eng = (engine*)actualEngine;
             eng->actionControl->removeAction(pendingAction);
@@ -613,7 +615,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       /* Syntax bool moveToPosition(character char, int x, int z) */
       varName = symbols->addTempSymbol(IA_TYPE_BOOL);
 
-      string line = changeFrom(strLine, functionName, 2, varName);
+      string line = changeFrom(strLine, functionName, 3, varName);
       character* dude = NULL;
       GLfloat X = 0;
       GLfloat Z = 0;
@@ -788,7 +790,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
    {
       /* Syntax bool wait(int seconds) */
       varName = symbols->addTempSymbol(IA_TYPE_BOOL);
-      string line = changeFrom(strLine, functionName, 2, varName);
+      string line = changeFrom(strLine, functionName, 1, varName);
 
       int seconds = 0;
       iv = getParameter(token, strLine, IA_TYPE_INT, pos);
