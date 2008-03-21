@@ -190,7 +190,8 @@ void iaScript::run(int maxLines)
             strBuffer = pendingAction->getScriptLine();
             interpret = true;
 
-            //printf("Action Ended: %s\n", strBuffer.c_str());
+            //printf("Action Type ""%d"" ended: %s\n", 
+            //       pendingAction->getType(), strBuffer.c_str());
 
             /* Remove the action from the controller */
             engine* eng = (engine*)actualEngine;

@@ -80,24 +80,17 @@ class aStar
       void defineMap(Map* acMap);
 
       /*! Calls A* thread to find path
-       * \param actualX -> current x position
-       * \param actualZ -> current z position 
+       * \param actor -> the character that will search for path
        * \param x -> destiny x position
        * \param z -> desired z position
-       * \param stepSize -> size of the Step
-       * \param orientation -> character orientation
-       * \param perX1 -> per X initial Bounding position
-       * \param perY1 -> per Y initial Bounding position
-       * \param perZ1 -> per Z initial Bounding position
-       * \param perX2 -> per X final Bounding position
-       * \param perY2 -> per Y final Bounding position
-       * \param perZ2 -> per Z final Bounding position */
-      /*void findPath(GLfloat actualX, GLfloat actualZ, GLfloat x, GLfloat z,
-                    GLfloat stepSize, GLfloat orientation,
-                    GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
-                    GLfloat perX2, GLfloat perY2, GLfloat perZ2);*/
+       * \param stepSize -> size of the Step 
+       * \param NPCs -> list of NPCs 
+       * \param PCs -> list of PCs
+       * \param forceCall -> true to force the call (there's a counter inner
+       *                      the function that don't allow too often calls)
+       * */
       void findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
-                    void* NPCs, void* PCs);
+                    void* NPCs, void* PCs, bool forceCall=false);
 
       /*! A* to find path INTERNAL
        * \param actualX -> current x position

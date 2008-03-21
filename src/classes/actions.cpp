@@ -328,7 +328,7 @@ action* actionController::addAction(action* act)
             act->actor->pathFind.findPath(act->actor,
                                           act->targetX, act->targetZ, 
                                           act->actor->walk_interval, 
-                                          NPCs, PCs);
+                                          NPCs, PCs, true);
          }
          else
          {
@@ -346,7 +346,7 @@ action* actionController::addAction(action* act)
                                           act->target->zPosition - 
                                           ACT_MOVE_DELTA, 
                                           act->actor->walk_interval, 
-                                          NPCs, PCs);
+                                          NPCs, PCs, true);
          }
       }
       else
@@ -469,12 +469,13 @@ void actionController::treatActions(Map* actualMap)
          character* actor = act->getActor();
          if( (actor->isAlive()) && (!actor->isConversationOpened()) )
          {
-            actor->setState(STATE_WALK);
-            if(actor->pathFind.getState() == ASTAR_STATE_FOUND)
+            int state = actor->pathFind.getState();
+            if(state == ASTAR_STATE_FOUND)
             {
+               actor->setState(STATE_WALK);
                act->setToggle(true);
             }
-            else if(actor->pathFind.getState() == ASTAR_STATE_NOT_FOUND)
+            else if(state == ASTAR_STATE_NOT_FOUND)
             {
                /* The move ended, since not found a path */
                act->setAsEnded(false);

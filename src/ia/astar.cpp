@@ -115,11 +115,11 @@ void aStar::forceNextCall()
  *                            findPath                          *
  ****************************************************************/
 void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
-                     void* NPCs, void* PCs)
+                     void* NPCs, void* PCs, bool forceCall)
 {
    GLuint actualTime = SDL_GetTicks();
 
-   if(actualTime-lastCallTime >= MIN_CALL)
+   if( (actualTime-lastCallTime >= MIN_CALL) || (forceCall))
    {
       lastCallTime = actualTime;
       dataThread* dt = new(dataThread);
@@ -144,6 +144,16 @@ void aStar::findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
       abort = false;
       state = ASTAR_STATE_RUNNING;
       searchThread  = SDL_CreateThread((&runParalelSearch), dt);
+   }
+   else
+   {
+      /* Note: Verify if isn't running, since sometimes come here
+       * when already searching for the same path. */
+      if(state != ASTAR_STATE_RUNNING)
+      {
+         /* Don't search, so don't found =^D */
+         state = ASTAR_STATE_NOT_FOUND;
+      }
    }
 }
 
@@ -193,9 +203,14 @@ bool aStar::findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize
 
    GLfloat ssize = actualMap->squareSize();
 
+   /* Verify the distance to the target. If too near, no need to walk. */
+   GLfloat dist = sqrt( ((x - actualX) * (x - actualX)) +
+                        ((z - actualZ) * (z - actualZ)) );
+
    if( (destinyX < 0) || (destinyZ < 0) || 
        (destinyX >= actualMap->getSizeX()*ssize) ||
-       (destinyZ >= actualMap->getSizeZ()*ssize) )
+       (destinyZ >= actualMap->getSizeZ()*ssize) ||
+       (dist < stepSize*10 ) )
    {
       state = ASTAR_STATE_NOT_FOUND;
       unLock();
