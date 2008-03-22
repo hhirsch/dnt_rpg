@@ -1,8 +1,11 @@
-Tree
-0
-../data/models/natural/arvores/tree1/model.cfg
-../data/models/natural/arvores/
-0 0
-../data/texturas/na.png
-5000
-40 40 -1
+name = Tree
+cal3d = models/natural/arvores/tree1/model.cfg
+inventory_texture = texturas/na.png
+inventory_sizes = 0 0
+life_points = 600
+fortitude = 8
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 25
+cost = 40
