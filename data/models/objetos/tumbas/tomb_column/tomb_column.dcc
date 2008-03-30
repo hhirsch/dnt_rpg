@@ -10,3 +10,4 @@ displacement = 0
 armature_class = 18
 size_modifier = 0
 cost = 3500
+static_scenery = 1
