@@ -51,6 +51,8 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
                                               ((i+1)*fnt.getHeight())+2);
    }
 
+   table->setObjectBelow(roll);
+
 }
 
 /**************************************************************
@@ -159,7 +161,7 @@ void listText::removeText(string text)
 /**************************************************************
  *                            draw                            *
  **************************************************************/
-void listText::draw()
+void listText::draw(SDL_Surface* screen)
 {
    //Actually nothing to do here
 }
@@ -171,6 +173,8 @@ bool listText::eventGot(int type, guiObject* object)
 {
    int i;
    selectedText = "";
+
+   /* Verify Events */
    if(type == PRESSED_TAB_BUTTON)
    {
       for(i = 0; i<maxButtons; i++)

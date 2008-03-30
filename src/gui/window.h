@@ -42,6 +42,10 @@ class window: public guiObject
        * \param drawBar -> if will draw the bar or not */
       void draw(int mouseX, int mouseY, bool drawBar=true);
 
+      /*! Draw, from guiObject
+       * \param screen -> ignored. */
+      void draw(SDL_Surface* screen);
+
       /*! Activate the Window */
       void activate();
 

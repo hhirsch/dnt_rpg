@@ -58,6 +58,10 @@ class textBox: public guiObject
       /*! Draw in the Surface the text bar
        * \return -> number of the last writed line */
       int draw();
+
+      /*! Draw the textbar (from guiObject)
+       * \param screen -> ignored. */
+      void draw(SDL_Surface* screen);
       
       /*! Define the Font
        * \param name -> font file name

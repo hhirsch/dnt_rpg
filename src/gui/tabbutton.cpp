@@ -13,6 +13,7 @@ tabButton::tabButton(int x,int y,const char* arquivo):picture(x,y,0,0,arquivo)
    pressed = false;
    type = GUI_TAB_BUTTON;
    current = - 1;
+   objectBelow = NULL;
 }
 
 /***********************************************************
@@ -28,6 +29,15 @@ tabButton::tabButton(int x, int y, int w, int h):picture(x,y,0,0, NULL)
    y2 = y+h;
    pressed = false;
    current = -1;
+   objectBelow = NULL;
+}
+
+/***********************************************************
+ *                     setObjectBelow                      *
+ ***********************************************************/
+void tabButton::setObjectBelow(guiObject* obj)
+{
+   objectBelow = obj;
 }
 
 /***********************************************************
@@ -66,10 +76,22 @@ void tabButton::draw(SDL_Surface *screen)
    color_Set(cor.colorWindow.R, cor.colorWindow.G, cor.colorWindow.B);
    rectangle_Fill(screen, x1,y1, x2, y2);
 
+   /* Draw below Object, if exists */
+   if(objectBelow)
+   {
+      objectBelow->draw(screen);
+   }
+
    /* Draw Picture (if one) */
-   picture* fig;
-   fig = this;
-   fig->draw(screen);
+   if(fig)
+   {
+      SDL_Rect Ret;
+      Ret.x = x1;
+      Ret.y = y1;
+      Ret.w = fig->w;
+      Ret.h = fig->h;
+      SDL_BlitSurface(fig,NULL,screen,&Ret);
+   }
 
    /* Draw Button Contorns */
    for(i=0;i<numButtons;i++)

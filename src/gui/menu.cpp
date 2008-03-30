@@ -29,16 +29,13 @@ menu::menu(int xa, int ya): guiList()
  *********************************************************/
 void menu::insertItem(string text, bool avaible)
 {
-   guiObject* novo;
-   novo = new guiObject;
-   novo->setText(text);
+   textBox* novo;
+   novo = insertTextBox(x,y,x+200,y+200,0,text);
    novo->setAvaible(avaible);
    if(text.length() > maxCharac)
    {
       maxCharac = text.length();
    }
-   novo->type = GUI_MENU_ITEM;
-   insertObject(novo);
 } 
 
 /*********************************************************

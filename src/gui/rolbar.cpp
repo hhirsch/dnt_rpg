@@ -103,6 +103,19 @@ bool rolBar::eventGot(int type, guiObject* object)
 }
 
 /*********************************************************************
+ *                                draw                               *
+ *********************************************************************/
+void rolBar::draw(SDL_Surface* screen)
+{
+   /* Redraw the TextBox and Bar */
+   redraw();
+
+   /* Redraw Buttons */
+   up->draw(screen);
+   down->draw(screen);
+}
+
+/*********************************************************************
  *                               redraw                              *
  *********************************************************************/
 void rolBar::redraw()

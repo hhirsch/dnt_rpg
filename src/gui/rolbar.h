@@ -16,9 +16,6 @@ using namespace std;
 #include "button.h"
 #include "textbox.h"
 
-/* /todo TODO -> support for different font sizes type and colors
- * trought text! */
-
 /*! Rolling Text Bar Definition */
 class rolBar: public guiObject
 {
@@ -81,6 +78,10 @@ class rolBar: public guiObject
 
       /*! Redraw the bar when scrolling text */
       void redraw();
+
+      /*! Draw the RolBar (from guiObject)
+       * \param screen -> window surface */
+      void draw(SDL_Surface* screen);
 
       int getActualInit(){return(scrollText->getFirstLine());};
 

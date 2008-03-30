@@ -29,6 +29,13 @@ class guiObject
       guiObject* next;     /**< Next Object On List */
       guiObject* previous; /**< Previous Object On List */
 
+      /*! Virtual Destructor */
+      virtual ~guiObject(){};
+
+      /*! Virtual Draw Function
+       * \param screen -> screen to draw the object to. */
+      virtual void draw(SDL_Surface* screen)=0;
+
       /*! Verify if the mouse is in the object or not
        * \param mouseX -> mouse X Coordinate
        * \param mouseY -> mouse Y Coordinate */

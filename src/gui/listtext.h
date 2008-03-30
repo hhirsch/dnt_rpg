@@ -45,7 +45,7 @@ class listText: public guiObject
       void removeText(string text);
 
       /*! Draw the listText to the surface */
-      void draw();
+      void draw(SDL_Surface* screen);
 
       /*! Verify if some event is related to the listText
        * \param type -> Type of the occurred event

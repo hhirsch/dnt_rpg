@@ -13,7 +13,8 @@
 guiList::guiList()
 {
    total = 0;
-   first = new guiObject;
+   /* Head Node. Of button type, since guiObject is virtual! */
+   first = (guiObject*)new button(0,0, 0,0, "", false);
    first->type = -1;
    first->next = first;
    first->previous = first;
@@ -34,7 +35,7 @@ guiList::~guiList()
    }
    if (first != NULL)
    {
-      delete first;
+      delete((button*)first);
    }
    if(intMenu)
    {

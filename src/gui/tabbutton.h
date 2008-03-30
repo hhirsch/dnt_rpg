@@ -17,6 +17,9 @@
 class oneTabButton :guiObject
 {
    public:
+      /*! From guiObject. Not used. */
+      void draw(SDL_Surface* screen){};
+
       int x1,  /**< X Coordinate */
           y1,  /**< Y Coordinate */
           x2,  /**< X Coordinate */
@@ -70,11 +73,16 @@ class tabButton: public picture
        * \param i -> current button number */
       void setCurrent(int i);
 
+      /*! Set the object below the tabbuton (this object will always draw
+       * before draw the tabButton) */
+      void setObjectBelow(guiObject* obj);
+
    private:
       int numButtons;                       /**< Number of active buttons */
       oneTabButton Buttons[MAX_TABBUTTONS]; /**< Buttons Vector */
       bool pressed;                         /**< Internal Verifier on Treat */
       int current;                          /**< Current Button selected */
+      guiObject* objectBelow;               /**< Object Below */
       farso_colors cor;
 };
 
