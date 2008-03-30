@@ -359,6 +359,171 @@ bool aniModel::loadModel(const string& strFilename)
 }
 
 /*********************************************************************
+ *                        loadToGraphicMemory                        *
+ *********************************************************************/
+void aniModel::loadToGraphicMemory(bool useTexture)
+{
+  m_calModel->getSkeleton()->calculateBoundingBoxes();
+  // get the renderer of the model
+  pCalRenderer = m_calModel->getRenderer();
+
+  if(!pCalRenderer->beginRendering()) return;
+
+  // set the global OpenGL states
+  glShadeModel(GL_SMOOTH);
+  glDisable(GL_COLOR_MATERIAL);
+
+  // we will use vertex arrays, so enable them
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_NORMAL_ARRAY);
+
+  // get the number of meshes
+  int meshCount;
+  meshCount = pCalRenderer->getMeshCount();
+
+  /* Load the ONLY ONE mesh of the model */
+  int meshId = 0;
+  if(meshId < meshCount)
+  {
+    // get the number of submeshes
+    int submeshCount;
+    submeshCount = pCalRenderer->getSubmeshCount(meshId);
+
+    // Load the ONLY ONE submesh of the mesh
+    int submeshId = 0;
+    if(submeshId < submeshCount)
+    {
+      // select mesh and submesh for further data access
+      if(pCalRenderer->selectMeshSubmesh(meshId, submeshId))
+      {
+        unsigned char meshColor[4];
+        GLfloat materialColor[4];
+
+        // set the material ambient color
+        pCalRenderer->getAmbientColor(&meshColor[0]);
+        materialColor[0] = meshColor[0] / 255.0f;  
+        materialColor[1] = meshColor[1] / 255.0f; 
+        materialColor[2] = meshColor[2] / 255.0f; 
+        materialColor[3] = meshColor[3] / 255.0f;
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, materialColor);
+
+        // set the material diffuse color
+        pCalRenderer->getDiffuseColor(&meshColor[0]);
+        materialColor[0] = meshColor[0] / 255.0f;  
+        materialColor[1] = meshColor[1] / 255.0f; 
+        materialColor[2] = meshColor[2] / 255.0f; 
+        materialColor[3] = meshColor[3] / 255.0f;
+        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, materialColor);
+
+        // set the material specular color
+        pCalRenderer->getSpecularColor(&meshColor[0]);
+        materialColor[0] = meshColor[0] / 255.0f;  
+        materialColor[1] = meshColor[1] / 255.0f; 
+        materialColor[2] = meshColor[2] / 255.0f; 
+        materialColor[3] = meshColor[3] / 255.0f;
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, materialColor);
+
+        // set the material shininess factor
+        float shininess;
+        shininess = 50.0f;// pCalRenderer->getShininess();
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &shininess);
+
+        // get the transformed vertices of the submesh
+        
+        int vertexCount;
+        vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
+
+        // get the transformed normals of the submesh
+        pCalRenderer->getNormals(&meshNormals[0][0]);
+
+        // get the texture coordinates of the submesh
+        textureCoordinateCount = pCalRenderer->getTextureCoordinates(0,
+                                         &meshTextureCoordinates[0][0]);
+
+        // get the faces of the submesh
+        faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
+
+        // set the vertex and normal buffers
+        glVertexPointer(3, GL_FLOAT, 0, &meshVertices[0][0]);
+        glNormalPointer(GL_FLOAT, 0, &meshNormals[0][0]);
+
+        // set the texture coordinate buffer and state if necessary
+        if( (pCalRenderer->getMapCount() > 0) && 
+            (textureCoordinateCount > 0))
+        {
+          glEnable(GL_TEXTURE_2D);
+          glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+          glEnable(GL_COLOR_MATERIAL);
+
+          if(useTexture)
+          {
+             // set the texture id we stored in the map user data
+             glBindTexture(GL_TEXTURE_2D, 
+                           (unsigned long)pCalRenderer->getMapUserData(0));
+          }
+
+          // set the texture coordinate buffer
+          glTexCoordPointer(2, GL_FLOAT, 0, &meshTextureCoordinates[0][0]);
+          glColor3f(1.0f, 1.0f, 1.0f);
+        }
+      }
+    }
+  }
+}
+
+/*********************************************************************
+ *                       renderFromGraphicMemory                     *
+ *********************************************************************/
+void aniModel::renderFromGraphicMemory()
+{
+  glPushMatrix();
+   /* Correct from blender to dnt coordinates */
+   glRotatef(180,0,1,0);
+   glRotatef(-90,1,0,0);
+   /* Scale, if needed */
+   if(m_renderScale != 1.0)
+   {
+      glScalef(m_renderScale,m_renderScale,m_renderScale);
+   }
+
+   // draw the loaded thing
+   if(sizeof(CalIndex)==2)
+   {
+      glDrawElements(GL_TRIANGLES, faceCount * 3, 
+                     GL_UNSIGNED_SHORT, &meshFaces[0][0]);
+   }
+   else
+   {
+	   glDrawElements(GL_TRIANGLES, faceCount * 3, 
+                     GL_UNSIGNED_INT, &meshFaces[0][0]);
+   }
+
+  glPopMatrix();
+
+  glColor3f(1.0, 1.0, 1.0);
+
+}
+
+/*********************************************************************
+ *                       removeFromgraphicMemory                     *
+ *********************************************************************/
+void aniModel::removeFromGraphicMemory()
+{
+   if( (pCalRenderer->getMapCount() > 0) &&
+       (textureCoordinateCount > 0) )
+   {
+      glDisable(GL_COLOR_MATERIAL);
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+      glDisable(GL_TEXTURE_2D);
+  }
+  // clear vertex array state
+  glDisableClientState(GL_NORMAL_ARRAY);
+  glDisableClientState(GL_VERTEX_ARRAY);
+
+  pCalRenderer->endRendering();
+}
+
+/*********************************************************************
  *                       renderBoundingBox                           *
  *********************************************************************/
 void aniModel::renderBoundingBox()
@@ -510,12 +675,10 @@ void aniModel::render()
         pCalRenderer->getNormals(&meshNormals[0][0]);
 
         // get the texture coordinates of the submesh
-        int textureCoordinateCount;
         textureCoordinateCount = pCalRenderer->getTextureCoordinates(0,
                                          &meshTextureCoordinates[0][0]);
 
         // get the faces of the submesh
-        int faceCount;
         faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
 
         // set the vertex and normal buffers
@@ -582,7 +745,6 @@ void aniModel::renderShadow()
       glRotatef(orientation,0,1,0);
 
   // get the renderer of the model
-  CalRenderer *pCalRenderer;
   pCalRenderer = m_calModel->getRenderer();
 
   glDisable(GL_TEXTURE);
@@ -622,7 +784,6 @@ void aniModel::renderShadow()
         pCalRenderer->getNormals(&meshNormals[0][0]);
 
         // get the faces of the submesh
-        int faceCount;
         faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
 
         // set the vertex and normal buffers
@@ -711,7 +872,6 @@ bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
    GLuint* facesInt = NULL;
 
    /* get the renderer of the model */
-   CalRenderer *pCalRenderer;
    pCalRenderer = m_calModel->getRenderer();
 
    /* get the number of meshes */
@@ -738,7 +898,7 @@ bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
             vertexCount = pCalRenderer->getVertices(&meshVertices[0][0]);
 
             /* get faces */
-            int faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
+            faceCount = pCalRenderer->getFaces(&meshFaces[0][0]);
          
             /* Transform faces pointer to the desired one */
             if(sizeof(CalIndex)==2)

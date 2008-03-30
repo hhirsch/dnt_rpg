@@ -30,7 +30,7 @@ class object: public thing
       /*! Constructor
        * \param obj -> some object to be the source of actual */
       object(object* obj);
-      /*! Constructor withou parameter. Do not load nothing */
+      /*! Constructor withou parameter. Do not load anyhing */
       object();
       /*! Destructor */
       ~object();
@@ -92,6 +92,18 @@ class object: public thing
        * \return usedFlag Number. If is 0, the object can be deleted */
       int getUsedFlag(){return(usedFlag);};
 
+      /*! Verify if the object is a Scenery one */
+      bool isStaticScenery(){return(staticScenery);};
+
+      /*! Add render position to the object.
+       * \note -> this function ios only valid if the object is a 
+       *          static scenery one. 
+       * \param x -> x coordinate
+       * \param y -> y coordinate
+       * \param z -> z coordinate 
+       * \param angle -> object angle */
+      void addRenderPosition(float x, float y, float z, float angle);
+
       /*! Get the 2D image of the object
        * \return the pointer to the surface */
       SDL_Surface* get2dModel(){return(model2d);};
@@ -115,6 +127,8 @@ class object: public thing
       int usedFlag;         /**< The used flag of an object */
       int inventSizeX,      /**< Size on inventory X axis */
           inventSizeY;      /**< Size on inventory Y axis */
+
+      bool staticScenery;   /**< True if is static scenery */
 
       int type;             /**< Type of the object */
 

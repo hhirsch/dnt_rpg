@@ -116,6 +116,13 @@ class engine
       void renderScene();
 
       /*!
+       **************************************************************** 
+       * Render all the Scenery Objects 
+       * \param inverted -> if invert axys Y. Usefull for reflexion.
+       ****************************************************************/
+      void renderSceneryObjects(bool inverted);
+
+      /*!
        ****************************************************************
        * Render no "shadownable" things, like walk circles, 
        * particles, etc. 

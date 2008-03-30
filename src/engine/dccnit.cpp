@@ -2593,6 +2593,24 @@ int engine::treatIO(SDL_Surface *screen)
 }
 
 /********************************************************************
+ *                        RenderSceneryObjects                      *
+ ********************************************************************/
+void engine::renderSceneryObjects(bool inverted)
+{
+   model3d* mdl = models->getFirst();
+   int i;
+   for(i = 0; i< models->getTotalModels(); i++)
+   {
+      /* Only Render here the Static Scenery Objects */
+      if(mdl->isStaticScenery())
+      {
+         mdl->draw(visibleMatrix, inverted);
+      }
+      mdl = mdl->next;
+   }
+}
+
+/********************************************************************
  *                            RenderScene                           *
  ********************************************************************/
 void engine::renderScene()
@@ -2790,6 +2808,9 @@ void engine::renderScene()
       glDisable(GL_NORMALIZE);
       glDisable(GL_STENCIL_TEST);
    }
+
+   renderSceneryObjects( (option->reflexionType >= REFLEXIONS_ALL) && 
+                         (!actualMap->isOutdoor()) );
 
    glPushMatrix();
    actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),

@@ -71,7 +71,8 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
       }
       else if(token == "cal3d")
       {
-         model3D = mdlList.addModel(token2,"");
+         /* Add the model. The weapon is never a scenery. */
+         model3D = mdlList.addModel(token2,"", false);
          model3D->incUsed();
       }
       else if( (token == "inventory_sizes") || (token == "sizeValue"))

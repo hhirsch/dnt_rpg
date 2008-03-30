@@ -32,7 +32,8 @@ lObject::~lObject()
 /*********************************************************************
  *                           insertMapObject                         *
  *********************************************************************/
-object* lObject::insertObject(string arquivo, modelList& mdlList, weaponTypes& wTypes)
+object* lObject::insertObject(string arquivo, modelList& mdlList, 
+                              weaponTypes& wTypes)
 {
    object* novo = NULL;
 

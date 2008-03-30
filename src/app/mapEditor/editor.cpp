@@ -567,6 +567,24 @@ int editor::insertTexture()
    
 }
 
+/********************************************************************
+ *                        RenderSceneryObjects                      *
+ ********************************************************************/
+void editor::renderSceneryObjects()
+{
+   model3d* mdl = models->getFirst();
+   int i;
+   for(i = 0; i< models->getTotalModels(); i++)
+   {
+      /* Only Render here the Static Scenery Objects */
+      if(mdl->isStaticScenery())
+      {
+         mdl->draw(visibleMatrix, false);
+      }
+      mdl = mdl->next;
+   }
+}
+
 /*********************************************************************
  *                                Draw                               *
  *********************************************************************/
@@ -648,11 +666,15 @@ void editor::draw()
       }
       glColor4f(1.0,1.0,1.0,1.0);
 
+      /* Render Map */
       glPushMatrix();
          map->draw(gui->gameCamera.getCameraX(), gui->gameCamera.getCameraY(), 
                    gui->gameCamera.getCameraZ(), visibleMatrix,
                    gui->gameCamera.getCameraX(), gui->gameCamera.getCameraZ());
       glPopMatrix();
+
+      /* Render All Static Scenery Objects */
+      renderSceneryObjects();
 
       if(!map->isOutdoor())
       {

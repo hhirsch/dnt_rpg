@@ -56,6 +56,8 @@ class editor
       int nextTexture();
       /*! Insert Texture on Map List */
       int insertTexture();
+      /*! Render All Static Scenery Objects */
+      void renderSceneryObjects();
 
       SDL_Surface *screen;           /**< SDL Screen */
       Uint8* keys;                   /**< Keyboard State */

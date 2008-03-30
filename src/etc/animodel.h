@@ -40,6 +40,20 @@ class aniModel:public thing
        * \return state ID of the current animation */
       int getState();
 
+      /*! Load the model to video card memory
+       * \param useTexture -> true to use the model texture, false otherwise
+       *                      (if false, user must bind the desired texture by
+       *                        himself)
+       * \note -> must be called before all renderFromGraphicMemory */
+      void loadToGraphicMemory(bool useTexture=true);
+
+      /*! Render the loaded Graphic Memory to screen */
+      void renderFromGraphicMemory();
+
+      /*! End the renderer State (unLoad the model from videocard).
+       * \note -> must be called after all renderFromGraphicMemory */
+      void removeFromGraphicMemory();
+
       /*! Render the model to the current frame state on screen. */
       void render();
 
@@ -79,10 +93,13 @@ class aniModel:public thing
       float m_lodLevel;              /**< Cal3D Level of Detail to render */
       string m_path;                 /**< Path to cal3D model */
 
-      static float meshVertices[30000][3];   /**< Model Vertices */
-      static float meshNormals[30000][3];    /**< Model Normals */
-      static float meshTextureCoordinates[30000][2];/**< Model Texture Coords */
-      static CalIndex meshFaces[50000][3];   /**< Model Faces */
+      CalRenderer *pCalRenderer;     /**< Pointer to themodel renderer */
+      static float meshVertices[30000][3]; /**< Model Vertices */
+      static float meshNormals[30000][3];  /**< Model Normals */
+      static float meshTextureCoordinates[30000][2]; /**< Texture Coords */
+      static CalIndex meshFaces[50000][3]; /**< Model Faces */
+      int faceCount;                       /**< Number of Faces */
+      int textureCoordinateCount;          /**< Number of Texture Coordinates */
 
       /*! Load the a texture to the model.
        * \param strFilename -> \c string with the texture file name.

@@ -104,6 +104,10 @@ void Square::removeObject(objSquare* obj)
       /* If mark as draw, dec the used flag of the object, since it
        * is no more used here. */
       obj->obj->decUsedFlag();
+      if(obj->obj->isStaticScenery())
+      {
+         //TODO Remove Position
+      }
    }
    delete(obj);
 
@@ -407,6 +411,12 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
      }
      /* Mark the object as used */
      obj->incUsedFlag();
+
+     /* If is a scenery one, the render is controlled by model3d, so..  */
+     if(obj->isStaticScenery())
+     {
+        obj->addRenderPosition(xReal, getHeight(xReal, zReal, saux), zReal, orObj);
+     }
    }
    else
    {
@@ -882,6 +892,8 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
    float ssize = squareSize();
    float hsize = squareSize() / 2.0;
 
+   float height = 0;
+
    for(Xaux = 0; Xaux < x; Xaux++)
    for(Zaux = 0; Zaux < z; Zaux++)
    {
@@ -889,10 +901,14 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
       deltaZ = (cameraZ-MapSquares[Xaux][Zaux].z1+hsize);
       distancia = sqrt(deltaX*deltaX+deltaY2+deltaZ*deltaZ) / ssize;
       obj = MapSquares[Xaux][Zaux].getFirstObject();
+
+      /* Draw All Needed Square Objects */
       for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
       {
-          if( (obj != NULL) && (obj->draw))
+          if( (obj != NULL) && (obj->draw) && 
+              (!obj->obj->isStaticScenery()))
           {
+            height = getHeight(obj->x,obj->z);
             /* Do the Rotation of the Bounding Box */
             bound = obj->obj->getBoundingBox();
             X[0] = bound.x1;
@@ -905,22 +921,23 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
             Z[3] = bound.z1;
             if(inverted)
             {
-               rotTransBoundingBox(obj->orientation, X, Z, obj->x, -bound.y2, 
-                                   -bound.y1, obj->z, min, max);
+               rotTransBoundingBox(obj->orientation, X, Z, obj->x, 
+                                   height-bound.y2, height-bound.y1, 
+                                   obj->z, min, max);
             }
             else
             {
-               rotTransBoundingBox(obj->orientation, X, Z, obj->x, bound.y1, 
-                                   bound.y2, obj->z, min, max );
+               rotTransBoundingBox(obj->orientation, X, Z, obj->x, 
+                                   height+bound.y1, height+bound.y2, 
+                                   obj->z, min, max );
             }
 
             /* Verify ViewFrustum Culling */
             if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
-                               matriz))
+                           matriz))
             {
                glPushMatrix();
-                glTranslatef(0.0, getHeight(obj->x,obj->z) +
-                             obj->obj->yPosition, 0.0);
+                glTranslatef(0.0, height + obj->obj->yPosition, 0.0);
                 obj->obj->draw(obj->x, obj->z, distancia, obj->orientation, 
                                inverted);
                glPopMatrix();
@@ -1276,7 +1293,7 @@ void Map::setOutdoor(bool val)
 }
 
 /********************************************************************
- *                       insertMapObject                            *
+ *                           getObject                              *
  ********************************************************************/
 object* Map::getObject(string fileName)
 {
@@ -1626,6 +1643,12 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                   if(oObj->draw)
                   {
                      oObj->obj->incUsedFlag();
+                     if(oObj->obj->isStaticScenery())
+                     {
+                        oObj->obj->addRenderPosition(oX, getHeight(oX,oZ,
+                                                       &MapSquares[posX][posZ]),
+                                                     oZ, oOri);
+                     }
                   }
                   break;
                }

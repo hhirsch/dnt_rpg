@@ -52,6 +52,8 @@ object::object(string path, modelList& mdlList): thing()
    FILE* file;
    char buffer[512];
    string token, token2;
+   int aux;
+   string cal3DFile = "";
 
    cleanValues();
 
@@ -84,8 +86,7 @@ object::object(string path, modelList& mdlList): thing()
       }
       else if(token == "cal3d")
       {
-         model3D = mdlList.addModel(token2,"");
-         model3D->incUsed();
+         cal3DFile = token2;
       }
       else if(token == "inventory_sizes")
       {
@@ -134,6 +135,11 @@ object::object(string path, modelList& mdlList): thing()
       {
          sscanf(token2.c_str(),"%f",&cost);
       }
+      else if(token == "static_scenery")
+      {
+         sscanf(token2.c_str(),"%d", &aux);
+         staticScenery = (aux);
+      }
       else
       {
          printf("Warning: Unknow token '%s' at %s\n", token.c_str(), 
@@ -142,6 +148,17 @@ object::object(string path, modelList& mdlList): thing()
    }
 
    fclose(file);
+
+   /* Load/Get Cal3D Model */
+   if(!cal3DFile.empty())
+   {
+      model3D = mdlList.addModel(cal3DFile,"", staticScenery);
+      model3D->incUsed();
+   }
+   else
+   {
+      printf("Error: 3D Model not defined for %s!\n", name.c_str());
+   }
 }
 
 /**************************************************************
@@ -149,16 +166,27 @@ object::object(string path, modelList& mdlList): thing()
  **************************************************************/
 object::object(object* obj): thing()
 {
+   /* Define type */
    usedFlag = 0;
    type = obj->type;
+
+   /* Define Inventory things */
    inventSizeX = obj->inventSizeX;
    inventSizeY = obj->inventSizeY;
+
+   /* Define Object Things */
    name = obj->name;
    fileName = obj->fileName;
+
+   /* Define 2D model things */
    model2dName = obj->model2dName;
    model2d = IMG_Load(model2dName.c_str());
+
+   /* Define 3D Model */
    model3D = obj->model3D;
    model3D->incUsed();
+
+   /* Define some Points */
    maxLifePoints = obj->maxLifePoints;
    lifePoints = maxLifePoints;
    fortitude = obj->fortitude;
@@ -196,6 +224,7 @@ void object::cleanValues()
    armatureClass = 0;
    sizeModifier = 0;
    cost = 0;
+   staticScenery = false;
 }
 
 /**************************************************************
@@ -284,7 +313,18 @@ bool object::canGet()
 {
    int x, y;
    getInventorySize(x,y);
-   return( (x != 0) && (y != 0));
+   return( (x != 0) && (y != 0) && (!staticScenery));
+}
+
+/*********************************************************************
+ *                         addRenderPosition                         *
+ *********************************************************************/
+void object::addRenderPosition(float x, float y, float z, float angle)
+{
+   if( (staticScenery) && (model3D))
+   {
+      model3D->addPosition(x,y,z,angle);
+   }
 }
 
 /*********************************************************************
