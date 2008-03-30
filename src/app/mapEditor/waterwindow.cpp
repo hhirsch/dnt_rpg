@@ -57,6 +57,7 @@ void waterWindow::setPartSystem(partController* pS)
 void waterWindow::openWindow()
 {
    dirs dir;
+   dntFont fnt;
    intWindow = gui->insertWindow(403,599-247,653,599-37,"Waterfall");
 
    /* Waterfall Navigators */
@@ -130,18 +131,18 @@ void waterWindow::openWindow()
                                               "Plane Waterflow");
    intWindow->getObjectsList()->insertTextBox(50,73,100,88,0,"deltaX:");
    dxWaterflowLess = intWindow->getObjectsList()->insertButton(101,71,111,88,
-                                                               "<",0);
+                                                      fnt.createUnicode(0x25C4),0);
    dxWaterflowText = intWindow->getObjectsList()->insertTextBox(112,71,162,88,
                                                                  1,"1.0");
    dxWaterflowMore = intWindow->getObjectsList()->insertButton(163,71,173,88,
-                                                               ">",0);
+                                                      fnt.createUnicode(0x25BA),0);
    intWindow->getObjectsList()->insertTextBox(50,93,100,108,0,"deltaZ:");
    dzWaterflowLess = intWindow->getObjectsList()->insertButton(101,91,111,108,
-                                                               "<",0);
+                                                      fnt.createUnicode(0x25C4),0);
    dzWaterflowText = intWindow->getObjectsList()->insertTextBox(112,91,162,108,
                                                                  1,"1.0");
    dzWaterflowMore = intWindow->getObjectsList()->insertButton(163,91,173,108,
-                                                               ">",0);
+                                                      fnt.createUnicode(0x25BA),0);
    intWindow->getObjectsList()->insertTextBox(49,53,246,120,1,"");
 
    /* Unused Space */
