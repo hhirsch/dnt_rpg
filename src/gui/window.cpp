@@ -150,8 +150,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
                                   smallestPowerOfTwo(xb-xa),
                                   smallestPowerOfTwo(yb-ya),32,
                                   rmask,gmask,bmask,amask);
-   color_Alpha(255);
-   color_Set(255, 255, 255);
+   color_Set(255, 255, 255, 255);
    rectangle_Fill(surface, 0,0, smallestPowerOfTwo(xb-xa)-1,
                   smallestPowerOfTwo(yb-ya)-1);
 
@@ -212,18 +211,23 @@ void window::draw(int mouseX, int mouseY, bool drawBar)
    int dx = x2 - x1;
    int dy = y2 - y1;
 
-   color_Set(Colors.colorWindow.R,Colors.colorWindow.G,
-             Colors.colorWindow.B);
+   color_Set(Colors.colorWindow.R, Colors.colorWindow.G,
+             Colors.colorWindow.B, Colors.colorWindow.A);
    rectangle_Fill(surface, 3,3,dx-3,dy-3);
-   color_Set(Colors.colorCont[0].R,Colors.colorCont[0].G,Colors.colorCont[0].B);
+   color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
+             Colors.colorCont[0].B, Colors.colorCont[0].A);
    rectangle_Draw(surface,0,0,dx-1,dy-1);
-   color_Set(Colors.colorButton.R,Colors.colorButton.G,Colors.colorButton.B);
+   color_Set(Colors.colorButton.R, Colors.colorButton.G, 
+             Colors.colorButton.B, Colors.colorButton.A);
    rectangle_Draw(surface,1,1,dx-2,dy-2);
-   color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,Colors.colorCont[2].B);
+   color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
+             Colors.colorCont[2].B, Colors.colorCont[2].A);
    line_Draw(surface,2,13,dx-4,13);
-   color_Set(Colors.colorCont[0].R,Colors.colorCont[0].G,Colors.colorCont[0].B);
+   color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
+             Colors.colorCont[0].B, Colors.colorCont[0].A);
    rectangle_2Colors(surface,2,2,dx-3,dy-3,Colors.colorCont[2].R,
-                     Colors.colorCont[2].G,Colors.colorCont[2].B);
+                     Colors.colorCont[2].G,Colors.colorCont[2].B,
+                     Colors.colorCont[2].A);
 
 
    /* Draw the bar */
@@ -311,9 +315,10 @@ void window::drawInactiveBar()
    draw(-1,-1, false);
 
    /* Redraw the Inactive Bar */
-   color_Set(Colors.colorWindow.R,Colors.colorWindow.G,Colors.colorWindow.B);
+   color_Set(Colors.colorWindow.R, Colors.colorWindow.G,
+             Colors.colorWindow.B, Colors.colorWindow.A);
    rectangle_Fill(surface,36,3,dx-3,12);
-   color_Set(0,0,0);
+   color_Set(0,0,0,255);
    fnt.defineFont(DNT_FONT_ARIAL,10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
@@ -328,9 +333,11 @@ void window::drawActiveBar()
 {
    dntFont fnt;
    int dx = x2-x1;
-   color_Set(Colors.colorBar.R,Colors.colorBar.G,Colors.colorBar.B);
+   color_Set(Colors.colorBar.R, Colors.colorBar.G,
+             Colors.colorBar.B, Colors.colorBar.A);
    rectangle_Fill(surface,36,3,dx-3,12);
-   color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
+   color_Set(Colors.colorText.R, Colors.colorText.G,
+             Colors.colorText.B, Colors.colorText.A);
    fnt.defineFont(DNT_FONT_ARIAL,10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
@@ -360,7 +367,7 @@ void window::render(float depth)
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texture);
 
-   glColor4f(1.0, 1.0, 1.0, alpha);
+   glColor4f(1.0, 1.0, 1.0, /*alpha*/ 1.0);
 
    glPushMatrix();
       glBegin(GL_QUADS);

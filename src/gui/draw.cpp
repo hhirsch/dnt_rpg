@@ -18,29 +18,23 @@ int A;  /**< Active Alpha Color */
 /******************************************************************
  *                            color_Set                           *
  ******************************************************************/
-void color_Set(Uint8 Ri, Uint8 Gi, Uint8 Bi)
+void color_Set(Uint8 Ri, Uint8 Gi, Uint8 Bi, Uint8 Ai)
 {
    R = Ri;
    G = Gi;
    B = Bi;
-}
-
-/******************************************************************
- *                           color_Alpha                          *
- ******************************************************************/
-void color_Alpha(Uint8 Ai)
-{
    A = Ai;
 }
 
 /******************************************************************
  *                            color_Get                           *
  ******************************************************************/
-void color_Get(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi)
+void color_Get(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi, Uint8* Ai)
 {
    *Ri = R;
    *Gi = G;
    *Bi = B;
+   *Ai = A;
 }
 
 /******************************************************************
@@ -177,16 +171,16 @@ void rectangle_Draw(SDL_Surface *screen, int x1, int y1, int x2, int y2)
  *                        rectangle_2Colors                       *
  ******************************************************************/
 void rectangle_2Colors(SDL_Surface *screen, int x1, int y1, int x2, int y2, 
-                       int Ri,int Gi, int Bi)
+                       int Ri,int Gi, int Bi, int Ai)
 {
-    Uint8 Ra,Ga,Ba;
-    color_Get(&Ra,&Ga,&Ba);
+    Uint8 Ra,Ga,Ba, Aa;
+    color_Get(&Ra,&Ga,&Ba, &Aa);
     line_Draw(screen,x1,y1,x2,y1);
     line_Draw(screen,x1,y1,x1,y2);
-    color_Set(Ri,Gi,Bi);
+    color_Set(Ri,Gi,Bi,Ai);
     line_Draw(screen,x1,y2,x2,y2);
     line_Draw(screen,x2,y1,x2,y2);
-    color_Set(Ra,Ga,Ba);
+    color_Set(Ra,Ga,Ba,Aa);
 }
 
 /******************************************************************
@@ -262,10 +256,10 @@ void rectangle_Fill(SDL_Surface *screen, int x1, int y1, int x2, int y2)
  *                         rectangle_Oval                         *
  ******************************************************************/
 void rectangle_Oval(SDL_Surface *screen, int x1, int y1, int x2, int y2, 
-                    int Ri, int Gi, int Bi)
+                    int Ri, int Gi, int Bi, int Ai)
 {
-   Uint8 Ra,Ga,Ba;
-   color_Get(&Ra,&Ga,&Ba);
+   Uint8 Ra,Ga,Ba,Aa;
+   color_Get(&Ra,&Ga,&Ba,&Aa);
    if (x2<x1)
    { 
       int aux = x1;
@@ -281,13 +275,13 @@ void rectangle_Oval(SDL_Surface *screen, int x1, int y1, int x2, int y2,
    line_Draw(screen,x1,y1+2,x1+2,y1);
    line_Draw(screen,x1+2,y1,x2-2,y1);
    line_Draw(screen,x1,y1+2,x1,y2-2);
-   color_Set(Ri,Gi,Bi);
+   color_Set(Ri,Gi,Bi,Ai);
    line_Draw(screen,x1,y2-2,x1+2,y2);
    line_Draw(screen,x1+2,y2,x2-2,y2);
    line_Draw(screen,x2-2,y2,x2,y2-2);
    line_Draw(screen,x2,y2-2,x2,y1+2);
    line_Draw(screen,x2-2,y1,x2,y1+2);
-   color_Set(Ra,Ga,Ba);
+   color_Set(Ra,Ga,Ba,Aa);
 }
 
 /******************************************************************

@@ -55,12 +55,12 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    fnt.defineFont(DNT_FONT_ARIAL, 12);
    size = fnt.getStringWidth(message) + 8;
    halfSize = (size / 2.0);
-   color_Set(0,0,0);
+   color_Set(0,0,0,255);
    SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
                                          smallestPowerOfTwo(size),
                                          32,
                                          32, rmask, gmask, bmask, amask);
-   color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255));
+   color_Set((int)floor(R*255),(int)floor(G*255),(int)floor(B*255),255);
    fnt.write(s, 0, 0, message.c_str(), true);
 
    glGenTextures(1,&messageTexture);

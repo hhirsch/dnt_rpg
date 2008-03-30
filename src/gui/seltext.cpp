@@ -73,12 +73,13 @@ void selText::draw(SDL_Surface *screen)
       {
          if(aux != selec)
          {
-            color_Set(Cores.colorText.R,Cores.colorText.G,Cores.colorText.B);
+            color_Set(Cores.colorText.R, Cores.colorText.G,
+                      Cores.colorText.B, Cores.colorText.A);
          }
          else
          {
-            color_Set(Cores.colorSelText.R,Cores.colorSelText.G,
-                        Cores.colorSelText.B);
+            color_Set(Cores.colorSelText.R, Cores.colorSelText.G,
+                      Cores.colorSelText.B, Cores.colorSelText.A);
          }
          ya=fnt.write(screen,4+x1,ya,optText[aux].c_str(),x1+1,y1+1,x2-1,y2-1);
      }
@@ -86,9 +87,11 @@ void selText::draw(SDL_Surface *screen)
      ya += height;
    }
    //y2 = ya+2;
-   color_Set(Cores.colorCont[1].R,Cores.colorCont[1].G,Cores.colorCont[1].B);
-   rectangle_2Colors(screen,x1,y1,x2,y2,Cores.colorCont[0].R,
-                     Cores.colorCont[0].G,Cores.colorCont[0].B);
+   color_Set(Cores.colorCont[1].R, Cores.colorCont[1].G,
+             Cores.colorCont[1].B, Cores.colorCont[1].A);
+   rectangle_2Colors(screen,x1,y1,x2,y2, Cores.colorCont[0].R,
+                     Cores.colorCont[0].G, Cores.colorCont[0].B,
+                     Cores.colorCont[0].A);
 }
 
 /***************************************************************************

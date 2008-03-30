@@ -118,11 +118,14 @@ void menu::draw(int pos, SDL_Surface *screen)
    }
 
    /* Draw the Menu */
-   color_Set(Colors.colorMenu.R,Colors.colorMenu.G,Colors.colorMenu.B);
+   color_Set(Colors.colorMenu.R, Colors.colorMenu.G,
+             Colors.colorMenu.B, Colors.colorMenu.A);
    rectangle_Fill(screen,x1+1,y1+1,x2-1,y2-1);
-   color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,Colors.colorCont[2].B);
+   color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
+             Colors.colorCont[2].B, Colors.colorCont[2].A);
    rectangle_Oval(screen,x1,y1,x2,y2,Colors.colorCont[1].R,
-                  Colors.colorCont[1].G, Colors.colorCont[1].B);
+                  Colors.colorCont[1].G, Colors.colorCont[1].B,
+                  Colors.colorCont[1].A);
    
       /*itens*/  
    int xa = x1+4;
@@ -133,7 +136,8 @@ void menu::draw(int pos, SDL_Surface *screen)
    {
       color_Set(Colors.colorText.R,
                 Colors.colorText.G,
-                Colors.colorText.B);
+                Colors.colorText.B,
+                Colors.colorText.A);
       if (item->getText().compare("-"))
       {
           if (item->isAvaible()) 
@@ -142,20 +146,21 @@ void menu::draw(int pos, SDL_Surface *screen)
           }
           else
           {
-              color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,
-                          Colors.colorCont[2].B);
+              color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
+                        Colors.colorCont[2].B, Colors.colorCont[2].A);
               fnt.write(screen,x1+5,ya+1,item->getText());
-              color_Set(Colors.colorCont[1].R,Colors.colorCont[1].G,
-                          Colors.colorCont[1].B);
+              color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
+                        Colors.colorCont[1].B, Colors.colorCont[1].A);
               fnt.write(screen,x1+4,ya,item->getText());
           }
       } 
       else 
       {
-        color_Set(Colors.colorCont[1].R,Colors.colorCont[1].G,
-                  Colors.colorCont[1].B);
+        color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
+                  Colors.colorCont[1].B, Colors.colorCont[1].A);
         rectangle_2Colors(screen,xa-2,ya+6,x2-2,ya+7,Colors.colorCont[0].R,
-                         Colors.colorCont[0].G,Colors.colorCont[0].B);
+                          Colors.colorCont[0].G,Colors.colorCont[0].B,
+                          Colors.colorCont[0].A);
       }
       ya += 11;
       item = (guiObject*)item->next;
@@ -244,11 +249,12 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
       {
          color_Set(Colors.colorCont[1].R,
                    Colors.colorCont[1].G,
-                   Colors.colorCont[1].B);
+                   Colors.colorCont[1].B,
+                   Colors.colorCont[1].A);
          rectangle_Oval(screen,x+2,(actualItem-1)*11+y+4,
                         x+largura-2,(actualItem)*11+y+4,
-                        Colors.colorCont[2].R,Colors.colorCont[2].G,
-                        Colors.colorCont[2].B);
+                        Colors.colorCont[2].R, Colors.colorCont[2].G,
+                        Colors.colorCont[2].B, Colors.colorCont[2].A);
       }
 
    /* Define the Return */

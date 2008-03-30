@@ -190,14 +190,15 @@ int textBox::draw()
       {
          color_Set(Colors.colorButton.R,
                    Colors.colorButton.G,
-                   Colors.colorButton.B);
+                   Colors.colorButton.B,
+                   Colors.colorButton.A);
          rectangle_Fill(wSurface,x1+1,y1+1,x2-1,y2-1);
       }
-      color_Set(Colors.colorCont[0].R,Colors.colorCont[0].G,
-                Colors.colorCont[0].B);
+      color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
+                Colors.colorCont[0].B, Colors.colorCont[0].A);
       rectangle_2Colors(wSurface,x1,y1,x2,y2,
-                       Colors.colorCont[1].R,Colors.colorCont[1].G,
-                       Colors.colorCont[1].B);
+                       Colors.colorCont[1].R, Colors.colorCont[1].G,
+                       Colors.colorCont[1].B, Colors.colorCont[1].A);
    }
 
    if(fullText)
@@ -215,7 +216,7 @@ int textBox::draw()
           ( (y+height < y2) && (i < totalLines) ) ; i++)
       {
          lastLine = i;
-         color_Set(line->R,line->G,line->B);
+         color_Set(line->R,line->G,line->B,255);
          fnt.defineFont(line->fontName, line->fontSize);
          fnt.defineFontAlign(line->fontAlign);
          fnt.defineFontStyle(line->fontStyle);

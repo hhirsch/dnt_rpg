@@ -315,9 +315,9 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
                        256,32,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    
-   color_Set(0,0,0);
+   color_Set(0,0,0,255);
    rectangle_Fill(img,0,0,255,31);
-   color_Set(200,20,20);
+   color_Set(200,20,20,255);
    fnt.defineFont(DNT_FONT_TIMES,10);
    sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
    GLuint texturaTexto;
@@ -625,7 +625,7 @@ void engine::splashScreen()
    dntFont fnt;
    fnt.defineFont(DNT_FONT_TIMES, 20);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
-   color_Set(130,3,3);
+   color_Set(130,3,3,255);
    fnt.write(img, 52, 424, gettext("DccNiTghtmare is developed under Public "
                                    "Domain: Feel free to use its source code "
                                    "and data the way you want (or to blame us "

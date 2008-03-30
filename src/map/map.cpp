@@ -2191,8 +2191,7 @@ void Map::drawMinimap(SDL_Surface* img)
       {
           color_Set(MapSquares[X][Z].R,
                     MapSquares[X][Z].G,
-                    MapSquares[X][Z].B);
-          color_Alpha(255);
+                    MapSquares[X][Z].B, 255);
           rectangle_Fill(img, x1,y1,x1+SQUAREMINISIZE-1,y1+SQUAREMINISIZE-1);
           x1+=SQUAREMINISIZE;
       }
@@ -2200,8 +2199,8 @@ void Map::drawMinimap(SDL_Surface* img)
       y1+=SQUAREMINISIZE;
    }
 
-   color_Set(1, 1, 1);
-   rectangle_2Colors(img,0,0,sX*SQUAREMINISIZE-1,sZ*SQUAREMINISIZE-1,0,0,0);
+   color_Set(1, 1, 1, 255);
+   rectangle_2Colors(img,0,0,sX*SQUAREMINISIZE-1,sZ*SQUAREMINISIZE-1,0,0,0,255);
    
    wall* maux = walls;
    int wNum;
@@ -2216,7 +2215,7 @@ void Map::drawMinimap(SDL_Surface* img)
           x2 = x1;
        else 
           y2 = y1;
-       color_Set(255,40,30);
+       color_Set(255,40,30,255);
        line_Draw(img, x1,y1,x2,y2);
        maux = maux->next;
    }

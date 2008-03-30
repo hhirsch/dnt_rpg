@@ -42,9 +42,9 @@ void healthBar::defineActualHealth(int health)
  ****************************************************************/
 void healthBar::draw(SDL_Surface* surface)
 {
-   color_Set(223,223,223);
+   color_Set(223,223,223,255);
    rectangle_Fill(surface, x1,y1,x2,y2);
-   color_Set(153,51,51);
+   color_Set(153,51,51,255);
 
    /* Defines the percentual colored of the bar */
    double perc = actualHealth / (double) maxHealth;

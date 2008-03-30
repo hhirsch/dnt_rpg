@@ -28,18 +28,16 @@ extern int SCREEN_Y;     /**< Current Screen Height */
 /*! Define active Color
  * \param Ri -> Red, from 0 to 255
  * \param Gi -> Green, from 0 to 255
- * \param Bi -> Blue, from 0 to 255 */
-void color_Set(Uint8 Ri, Uint8 Gi, Uint8 Bi);
-
-/*! Define the active alpha
+ * \param Bi -> Blue, from 0 to 255 
  * \param Ai -> Alpha, from 0 to 255 */
-void color_Alpha(Uint8 Ai);
+void color_Set(Uint8 Ri, Uint8 Gi, Uint8 Bi, Uint8 Ai);
 
-/*! Gets the Active Color
+/*! Get the Active Color
  * \param Ri -> Red
  * \param Gi -> Green
- * \param Bi -> Blue */
-void color_Get(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi);
+ * \param Bi -> Blue
+ * \param Ai -> Alpha */
+void color_Get(Uint8 *Ri, Uint8 *Gi, Uint8 *Bi, Uint8 *Ai);
 
 /*! Set the surface (x,y) pixel color
  * \param screen -> surface to draw
@@ -97,9 +95,10 @@ void rectangle_Fill(SDL_Surface *screen, int x1, int y1, int x2, int y2);
  * \param y2 -> y final coordinate
  * \param Ri -> second Red Color
  * \param Gi -> second Green Color
- * \param Bi -> second Blue Color */
+ * \param Bi -> second Blue Color
+ * \param Ai -> second Alpha Color */
 void rectangle_Oval(SDL_Surface *screen, int x1, int y1, int x2, int y2, 
-                    int Ri, int Gi, int Bi);
+                    int Ri, int Gi, int Bi, int Ai);
 
 /*! Draws a 2 colors rectangle on the surface (usefull for buttons)  
  * \param screen -> surface to draw to
@@ -109,9 +108,10 @@ void rectangle_Oval(SDL_Surface *screen, int x1, int y1, int x2, int y2,
  * \param y2 -> y final coordinate
  * \param Ri -> second Red Color
  * \param Gi -> second Green Color
- * \param Bi -> second Blue Color */
+ * \param Bi -> second Blue Color 
+ * \param Ai -> second Alpha Color */
 void rectangle_2Colors(SDL_Surface *screen, int x1, int y1, int x2, int y2, 
-                      int Ri,int Gi, int Bi);
+                      int Ri,int Gi, int Bi, int Ai);
 
 /*! Draw a Circle to the surface
  * \param screen -> surface where draw the cricle

@@ -43,11 +43,11 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
 
-   color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,
-               Colors.colorCont[2].B);
+   color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
+             Colors.colorCont[2].B, Colors.colorCont[2].A);
    rectangle_Fill(screen,x1+1, y1+1, x2-1, y2-1);
-   color_Set(Colors.colorCont[1].R,Colors.colorCont[1].G,
-               Colors.colorCont[1].B);
+   color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
+             Colors.colorCont[1].B, Colors.colorCont[1].A);
 
    init = 0;
    end = text.length();
@@ -88,10 +88,11 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
  ********************************************************************/
 void textBar::draw(SDL_Surface *screen)
 {
-   color_Set(Colors.colorCont[0].R,Colors.colorCont[0].G,
-               Colors.colorCont[0].B);
+   color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
+             Colors.colorCont[0].B, Colors.colorCont[0].A);
    rectangle_2Colors(screen,x1,y1,x2,y2, Colors.colorCont[1].R,
-                     Colors.colorCont[1].G,Colors.colorCont[1].B);
+                     Colors.colorCont[1].G,Colors.colorCont[1].B,
+                     Colors.colorCont[1].A);
    putText(0,0,screen);
    setChanged();
 }

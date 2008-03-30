@@ -15,9 +15,9 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
 
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-   color_Set(0,0,0);
+   color_Set(0,0,0,255);
    rectangle_Fill(img,0,0,255,31);
-   color_Set(200,20,20);
+   color_Set(200,20,20,255);
    fnt.defineFont(DNT_FONT_TIMES,12);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
    fnt.write(img,128,0,texto);

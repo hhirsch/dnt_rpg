@@ -143,13 +143,15 @@ void inventWindow::reDraw()
          {
             color_Set(colors.colorText.R,
                       colors.colorText.G,
-                      colors.colorText.B);
+                      colors.colorText.B,
+                      colors.colorText.A);
          }
          else
          {
             color_Set(colors.colorCont[1].R,
                       colors.colorCont[1].G,
-                      colors.colorCont[1].B);
+                      colors.colorCont[1].B,
+                      colors.colorCont[1].A);
          }
          sprintf(buf,"%d", i);
          fnt.write(inventoryTabButton->get(), x, 1, buf, true);

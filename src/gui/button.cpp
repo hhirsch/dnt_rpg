@@ -37,42 +37,48 @@ button::~button()
 void button::draw(SDL_Surface* screen )
 {
    dntFont font;
-   int R1,R2,G1,G2,B1,B2; 
+   int R1,R2,G1,G2,B1,B2,A1,A2; 
    if(pressed) 
    {
       R1 = Colors.colorCont[1].R;
       G1 = Colors.colorCont[1].G;
       B1 = Colors.colorCont[1].B;
+      A1 = Colors.colorCont[1].A;
       R2 = Colors.colorCont[0].R;
       G2 = Colors.colorCont[0].G;
       B2 = Colors.colorCont[0].B;
+      A2 = Colors.colorCont[0].A;
    }
    else
    {
       R2 = Colors.colorCont[1].R;
       G2 = Colors.colorCont[1].G;
       B2 = Colors.colorCont[1].B;
+      A2 = Colors.colorCont[1].A;
       R1 = Colors.colorCont[0].R;
       G1 = Colors.colorCont[0].G;
       B1 = Colors.colorCont[0].B; 
+      A1 = Colors.colorCont[0].A;
    }
    
    color_Set(Colors.colorButton.R, 
              Colors.colorButton.G,
-             Colors.colorButton.B);
+             Colors.colorButton.B,
+             Colors.colorButton.A);
    rectangle_Fill(screen,x1+1,y1+1,x2-1,y2-1);
-   color_Set(R1,G1,B1);
+   color_Set(R1,G1,B1,A1);
    if(oval)
    {
-      rectangle_Oval(screen,x1,y1,x2,y2,R2,B2,G2);
+      rectangle_Oval(screen,x1,y1,x2,y2,R2,B2,G2,A2);
    }
    else
    {
-      rectangle_2Colors(screen,x1,y1,x2,y2,R2,B2,G2);
+      rectangle_2Colors(screen,x1,y1,x2,y2,R2,B2,G2,A2);
    }
 
    /* Write the Text */
-   color_Set(Colors.colorText.R,Colors.colorText.G,Colors.colorText.B);
+   color_Set(Colors.colorText.R, Colors.colorText.G,
+             Colors.colorText.B, Colors.colorText.A);
    int ya=y1;
    int xa=x1;
    if(pressed) 

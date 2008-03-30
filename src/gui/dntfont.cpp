@@ -160,6 +160,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    Uint16* unicodeText;
 
    SDL_Color color;
+   Uint8 a=0;
 
    SDL_Rect rect;
    SDL_Surface* writeSurface = NULL;
@@ -199,7 +200,7 @@ int dntFont::write(SDL_Surface *screen,int x,int y,string text,int init,
    }
 
    /* Init things */
-   color_Get(&color.r,&color.g, &color.b);
+   color_Get(&color.r,&color.g, &color.b, &a);
    curY = y;
    rect.x = x;
    rect.y = y;
@@ -383,11 +384,12 @@ void dntFont::writeUnicode(SDL_Surface* screen, int x, int y, string text,
                            bool solid)
 {
    SDL_Color color;
+   Uint8 a = 0;
    SDL_Rect rect;
    SDL_Surface* writeSurface;
 
    /* Get Color */
-   color_Get(&color.r,&color.g, &color.b);
+   color_Get(&color.r,&color.g, &color.b, &a);
 
    writeSurface = TTF_RenderUNICODE_Blended(activeFont->font,
                                             (Uint16*)text.c_str(), 
