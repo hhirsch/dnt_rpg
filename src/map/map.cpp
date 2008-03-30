@@ -14,6 +14,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+#define VIS_DELTA 64  /**< Delta to Visible Culling */
+
 //////////////////////////////////////////////////////////////////////////////
 //                                  SQUARE                                  //
 //////////////////////////////////////////////////////////////////////////////
@@ -550,11 +552,11 @@ void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
          for(z1=0; z1 < z; z1++)
          {
             if( (MapSquares[x1][z1].texture == (int)tex->index) &&
-                (visibleCube(MapSquares[x1][z1].x1,0,
-                                 MapSquares[x1][z1].z1,
-                                 MapSquares[x1][z1].x2,
-                                 MAX_HEIGHT,
-                                 MapSquares[x1][z1].z2, matriz)))
+                (visibleCube(MapSquares[x1][z1].x1 - VIS_DELTA,0,
+                             MapSquares[x1][z1].z1 - VIS_DELTA,
+                             MapSquares[x1][z1].x2 + VIS_DELTA,
+                             MAX_HEIGHT,
+                             MapSquares[x1][z1].z2 + VIS_DELTA, matriz)))
             {
                drawQuad(MapSquares[x1][z1].x1, MapSquares[x1][z1].z1,
                         MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
@@ -796,13 +798,16 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
            }
            if(inverted)
            {
-              visible = visibleCube(maux->x1,-altura,maux->z1,maux->x2,
-                                        0,maux->z2,matriz);
+              visible = visibleCube(maux->x1-VIS_DELTA,
+                                    -altura-VIS_DELTA,maux->z1-VIS_DELTA,
+                                    maux->x2+VIS_DELTA,
+                                    VIS_DELTA,maux->z2+VIS_DELTA,matriz);
            }
            else
            {
-              visible = visibleCube(maux->x1,0,maux->z1,maux->x2,
-                                        altura,maux->z2,matriz);
+              visible = visibleCube(maux->x1-VIS_DELTA,-VIS_DELTA,
+                                    maux->z1-VIS_DELTA,maux->x2+VIS_DELTA,
+                                    altura+VIS_DELTA,maux->z2+VIS_DELTA,matriz);
            }
            if(visible)
            {
