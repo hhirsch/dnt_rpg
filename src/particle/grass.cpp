@@ -155,6 +155,8 @@ void grass::Render(particle* part)
  **************************************************************************/
 void grass::InitRender()
 {
+   glColor4f(1.0,1.0,1.0, 1.0);
+   glEnable(GL_COLOR_MATERIAL);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
    glDepthMask(GL_TRUE);
@@ -183,6 +185,7 @@ void grass::EndRender()
    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
    /* Undo the changes on the GL state */
+   glDisable(GL_COLOR_MATERIAL);
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
