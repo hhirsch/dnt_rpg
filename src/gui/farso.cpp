@@ -91,7 +91,7 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
        else
        {
           printf(gettext("Something must be wrong! "
-                         "Try editing ~/.dccnitghtmare/options.cfg"));
+                         "Try editing ~/.dccnitghtmare/options.cfg\n"));
           exit(2);
        }
     }

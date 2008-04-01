@@ -250,7 +250,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
    }
    else
    {
-      if(previousCursor)
+      if(previousCursor != -1)
       {
          mouseCursor->set(previousCursor);
          previousCursor = -1;
