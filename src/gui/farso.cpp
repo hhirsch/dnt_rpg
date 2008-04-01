@@ -82,7 +82,18 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
     if ( *screen == NULL ) 
     {
        printf(gettext("Oxi! Can't ajust video mode: %s!\n"),SDL_GetError());
-       exit(2);
+
+       if(antiAliasingSamples > 0)
+       {
+          printf(gettext("Trying again without AntiAliasing.\n"));
+          Farso_DefineResolution(screen, title, width, height, fullScreen, 0);
+       }
+       else
+       {
+          printf(gettext("Something must be wrong! "
+                         "Try editing ~/.dccnitghtmare/options.cfg"));
+          exit(2);
+       }
     }
 
     SDL_WM_SetCaption(title.c_str(),"");
