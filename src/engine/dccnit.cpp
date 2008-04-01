@@ -2649,16 +2649,21 @@ void engine::renderScene()
    /* Draw Playable Characters (PCs) */
       character* per = (character*) PCs->first->next;
       int aux;
+
       for(aux=0;aux < PCs->getTotal();aux++)
       {
-         /* Actualize the model */
+         /* Update the model */
          per->update(WALK_ACTUALIZATION);
+
+         /* Load the Model */
+         per->loadToGraphicMemory();
+
          /* Draw Character */
          glPushMatrix();
            glTranslatef(per->xPosition, per->yPosition,
                         per->zPosition);
            glRotatef(per->orientation,0,1,0);
-           per->render();
+           per->renderFromGraphicMemory();
          glPopMatrix();
 
            //per->renderBoundingBox();
@@ -2688,7 +2693,7 @@ void engine::renderScene()
                               per->zPosition);
                  glRotatef(per->orientation,0,1,0);
                  glScalef(1.0, -1.0, 1.0);
-                 per->render();
+                 per->renderFromGraphicMemory();
               glPopMatrix();
               glDisable(GL_NORMALIZE);
               //glCullFace(GL_FRONT);
@@ -2707,6 +2712,8 @@ void engine::renderScene()
               glDisable(GL_LIGHTING);  
               glColor4f(0.0, 0.0, 0.0, 0.5);
               glPushMatrix();
+                 // FIXME -> fix shadow draw, 
+                 // FIXME -> use the already loaded model
                  gameSun->mulShadowMatrix();
                  per->renderShadow();
               glPopMatrix();
@@ -2716,6 +2723,8 @@ void engine::renderScene()
               glDisable(GL_STENCIL_TEST);
            }
 
+           /* Unload Model Graphics Memory */
+           per->removeFromGraphicMemory();
 
            per = (character*) per->next;
       }
@@ -2727,8 +2736,12 @@ void engine::renderScene()
       per = (character*) NPCs->first->next;
       for(aux=0;aux < NPCs->getTotal();aux++)
       {
-         /* Actualize the model */
+         /* Update the model */
          per->update(WALK_ACTUALIZATION);
+
+         /* Load the Model */
+         per->loadToGraphicMemory();
+
          /* Verify Bounding Box */
          x[0] = per->min[0];
          z[0] = per->min[2];
@@ -2751,7 +2764,7 @@ void engine::renderScene()
               glTranslatef(per->xPosition, per->yPosition,
                            per->zPosition);
               glRotatef(per->orientation,0,1,0);
-              per->render();
+              per->renderFromGraphicMemory();
             glPopMatrix();
 
               //per->RenderBoundingBox();
@@ -2779,13 +2792,16 @@ void engine::renderScene()
                                  per->zPosition);
                     glRotatef(per->orientation,0,1,0);
                     glScalef(1.0, -1.0, 1.0);
-                    per->render();
+                    per->renderFromGraphicMemory();
                  glPopMatrix();
                  glDisable(GL_NORMALIZE);
                  //glCullFace(GL_FRONT);
                  glDisable(GL_STENCIL_TEST);
               }
          }
+         /* Remove the Model From Graphic Memory */
+         per->removeFromGraphicMemory();
+
          per = (character*) per->next;
       }
    }
