@@ -2659,6 +2659,7 @@ void engine::renderScene()
                         per->zPosition);
            glRotatef(per->orientation,0,1,0);
            per->render();
+         glPopMatrix();
 
            //per->renderBoundingBox();
            /*glColor3f(1.0,0.1,0.1);
@@ -2676,22 +2677,23 @@ void engine::renderScene()
                (!actualMap->isOutdoor()) )
            {
               glEnable(GL_STENCIL_TEST);
-              glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
-              glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-              glCullFace(GL_FRONT);
-              glEnable(GL_NORMALIZE);
+               glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+               glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+               glEnable(GL_NORMALIZE);
+
+              //glCullFace(GL_FRONT);
+
               glPushMatrix();
                  glTranslatef(per->xPosition, per->yPosition,
-                        per->zPosition);
+                              per->zPosition);
                  glRotatef(per->orientation,0,1,0);
                  glScalef(1.0, -1.0, 1.0);
                  per->render();
               glPopMatrix();
               glDisable(GL_NORMALIZE);
-              glCullFace(GL_FRONT);
+              //glCullFace(GL_FRONT);
               glDisable(GL_STENCIL_TEST);
            }
-         glPopMatrix();
 
            /* Draw Projective Shadow */
            if(shadow)
@@ -2737,7 +2739,7 @@ void engine::renderScene()
          x[3] = per->max[0];
          z[3] = per->min[2];
          rotTransBoundingBox(per->orientation, x, z,per->xPosition, 
-                             per->min[1] + per->yPosition, 
+                             -per->max[1] + per->yPosition, //To get reflection
                              per->max[1] + per->yPosition,
                              per->zPosition, min, max );
 
@@ -2750,6 +2752,7 @@ void engine::renderScene()
                            per->zPosition);
               glRotatef(per->orientation,0,1,0);
               per->render();
+            glPopMatrix();
 
               //per->RenderBoundingBox();
               /*glDisable(GL_LIGHTING);
@@ -2769,7 +2772,7 @@ void engine::renderScene()
                  glEnable(GL_STENCIL_TEST);
                  glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
                  glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-                 glCullFace(GL_FRONT);
+                 //glCullFace(GL_FRONT);
                  glEnable(GL_NORMALIZE);
                  glPushMatrix();
                     glTranslatef(per->xPosition, per->yPosition,
@@ -2779,11 +2782,9 @@ void engine::renderScene()
                     per->render();
                  glPopMatrix();
                  glDisable(GL_NORMALIZE);
-                 glCullFace(GL_FRONT);
+                 //glCullFace(GL_FRONT);
                  glDisable(GL_STENCIL_TEST);
               }
-
-              glPopMatrix();
          }
          per = (character*) per->next;
       }
