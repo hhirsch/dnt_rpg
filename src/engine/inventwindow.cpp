@@ -38,7 +38,7 @@ void inventWindow::init(int xa, int ya, string title,
 {
    dirs dir;
    objectMenu = NULL;
-   previousCursor = NULL;
+   previousCursor = -1;
 
    /* Copy Interface Pointer */
    interf = inter;
@@ -253,7 +253,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
       if(previousCursor)
       {
          mouseCursor->set(previousCursor);
-         previousCursor = NULL;
+         previousCursor = -1;
       }
    }
 
