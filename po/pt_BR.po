@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-03-18 14:12-0300\n"
+"POT-Creation-Date: 2008-04-01 18:59-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -99,15 +99,15 @@ msgstr "Cancelar"
 msgid "Aspect"
 msgstr "Aspecto"
 
-#: src/engine/aspectwindow.cpp:46 src/engine/charwindow.cpp:72
+#: src/engine/aspectwindow.cpp:46 src/engine/charwindow.cpp:73
 msgid "Name:"
 msgstr "Nome:"
 
-#: src/engine/aspectwindow.cpp:51 src/engine/charwindow.cpp:75
+#: src/engine/aspectwindow.cpp:51 src/engine/charwindow.cpp:76
 msgid "Age:"
 msgstr "Idade:"
 
-#: src/engine/aspectwindow.cpp:55 src/engine/charwindow.cpp:90
+#: src/engine/aspectwindow.cpp:55 src/engine/charwindow.cpp:91
 msgid "Sex:"
 msgstr "Sexo:"
 
@@ -132,32 +132,32 @@ msgstr "Limpar"
 msgid "Auto"
 msgstr "Auto"
 
-#: src/engine/attwindow.cpp:76 src/engine/charwindow.cpp:129
+#: src/engine/attwindow.cpp:76 src/engine/charwindow.cpp:132
 #: data/skills/forca.ski:1
 msgid "Strength"
 msgstr "Força"
 
-#: src/engine/attwindow.cpp:96 src/engine/charwindow.cpp:134
+#: src/engine/attwindow.cpp:96 src/engine/charwindow.cpp:137
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
 msgstr "Destreza"
 
-#: src/engine/attwindow.cpp:116 src/engine/charwindow.cpp:139
+#: src/engine/attwindow.cpp:116 src/engine/charwindow.cpp:142
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
 msgstr "Constituição"
 
-#: src/engine/attwindow.cpp:136 src/engine/charwindow.cpp:144
+#: src/engine/attwindow.cpp:136 src/engine/charwindow.cpp:147
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
 msgstr "Inteligência"
 
-#: src/engine/attwindow.cpp:157 src/engine/charwindow.cpp:149
+#: src/engine/attwindow.cpp:157 src/engine/charwindow.cpp:152
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
 msgstr "Sabedoria"
 
-#: src/engine/attwindow.cpp:178 src/engine/charwindow.cpp:154
+#: src/engine/attwindow.cpp:178 src/engine/charwindow.cpp:157
 #: data/skills/carisma.ski:1
 msgid "Charism"
 msgstr "Carisma"
@@ -166,11 +166,11 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descrição do Atributo"
 
-#: src/engine/attwindow.cpp:518 src/engine/options.cpp:821
+#: src/engine/attwindow.cpp:513 src/engine/options.cpp:821
 msgid "Warning"
 msgstr "Aviso"
 
-#: src/engine/attwindow.cpp:519
+#: src/engine/attwindow.cpp:514
 msgid "You Need to Assign All Attributes."
 msgstr "Você precisa definir todos atributos."
 
@@ -191,91 +191,91 @@ msgstr "Impor"
 msgid "Inventory"
 msgstr "Inventário"
 
-#: src/engine/charwindow.cpp:81
+#: src/engine/charwindow.cpp:82
 msgid "Female"
 msgstr "Feminino"
 
-#: src/engine/charwindow.cpp:84
+#: src/engine/charwindow.cpp:85
 msgid "Male"
 msgstr "Masculino"
 
-#: src/engine/charwindow.cpp:87
+#: src/engine/charwindow.cpp:88
 msgid "Undefined"
 msgstr "Indefinido"
 
-#: src/engine/charwindow.cpp:93
+#: src/engine/charwindow.cpp:94
 msgid "Race:"
 msgstr "Raça:"
 
-#: src/engine/charwindow.cpp:96
+#: src/engine/charwindow.cpp:97
 msgid "Alignment:"
 msgstr "Alinhamento:"
 
-#: src/engine/charwindow.cpp:100
+#: src/engine/charwindow.cpp:101
 msgid "XP"
 msgstr "XP"
 
-#: src/engine/charwindow.cpp:101
+#: src/engine/charwindow.cpp:102
 msgid "Next Level"
 msgstr "Próximo Nível"
 
-#: src/engine/charwindow.cpp:106
+#: src/engine/charwindow.cpp:108
 msgid "HP"
 msgstr "PV"
 
-#: src/engine/charwindow.cpp:108
+#: src/engine/charwindow.cpp:111
 msgid "AC"
 msgstr "CA"
 
-#: src/engine/charwindow.cpp:168
+#: src/engine/charwindow.cpp:171
 msgid "Fortitude"
 msgstr "Fortaleza"
 
-#: src/engine/charwindow.cpp:172
+#: src/engine/charwindow.cpp:175
 msgid "Reflex"
 msgstr "Reflexos"
 
-#: src/engine/charwindow.cpp:176
+#: src/engine/charwindow.cpp:179
 msgid "I am Not a Fool"
 msgstr "Não Sou Bobo"
 
-#: src/engine/charwindow.cpp:180
+#: src/engine/charwindow.cpp:183
 msgid "Base Attack Modifier"
 msgstr "Modificador de Ataque Base"
 
-#: src/engine/charwindow.cpp:184
+#: src/engine/charwindow.cpp:188
 msgid "Size Modifier"
 msgstr "Modificador de Tamanho"
 
-#: src/engine/charwindow.cpp:195
+#: src/engine/charwindow.cpp:199
 msgid "Feats"
 msgstr "Habilidades"
 
-#: src/engine/charwindow.cpp:199 src/engine/skillwindow.cpp:42
+#: src/engine/charwindow.cpp:203 src/engine/skillwindow.cpp:42
 msgid "Skills"
 msgstr "Perícias"
 
-#: src/engine/charwindow.cpp:203 src/gui/window.cpp:169
+#: src/engine/charwindow.cpp:207 src/gui/window.cpp:168
 msgid "Close"
 msgstr "Fechar"
 
-#: src/engine/charwindow.cpp:261
+#: src/engine/charwindow.cpp:265
 msgid "Main Weapon"
 msgstr "Arma Principal"
 
-#: src/engine/charwindow.cpp:265
+#: src/engine/charwindow.cpp:269
 msgid "Secondary Weapon"
 msgstr "Arma Secundária"
 
-#: src/engine/charwindow.cpp:269
+#: src/engine/charwindow.cpp:273
 msgid "Weapon"
 msgstr "Arma"
 
-#: src/engine/charwindow.cpp:281
+#: src/engine/charwindow.cpp:285
 msgid "Unarmed"
 msgstr "Desarmado"
 
-#: src/engine/charwindow.cpp:287
+#: src/engine/charwindow.cpp:291
 msgid "Not Applicable"
 msgstr "Não Aplicável"
 
@@ -336,42 +336,42 @@ msgstr "Sem Perícias"
 msgid "Can't load mouse cursor: %s\n"
 msgstr "Não consegui carregar o cursor do mouse: %s\n"
 
-#: src/engine/dccnit.cpp:360
+#: src/engine/dccnit.cpp:322
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Carregando Mapa: %s"
 
-#: src/engine/dccnit.cpp:442
+#: src/engine/dccnit.cpp:404
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Ops, não consegui abrir arquivo de NPCs: %s.\n"
 
-#: src/engine/dccnit.cpp:457
+#: src/engine/dccnit.cpp:419
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregando NPC: %s"
 
-#: src/engine/dccnit.cpp:480
+#: src/engine/dccnit.cpp:442
 msgid "Loading Character"
 msgstr "Carregando Personagem"
 
-#: src/engine/dccnit.cpp:487
+#: src/engine/dccnit.cpp:449
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:527
+#: src/engine/dccnit.cpp:489
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:557
+#: src/engine/dccnit.cpp:519
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:577
+#: src/engine/dccnit.cpp:539
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:667
+#: src/engine/dccnit.cpp:629
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -383,118 +383,118 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1205
+#: src/engine/dccnit.cpp:1167
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1244 src/engine/dccnit.cpp:1312
+#: src/engine/dccnit.cpp:1206 src/engine/dccnit.cpp:1274
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1294
+#: src/engine/dccnit.cpp:1256
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1481
+#: src/engine/dccnit.cpp:1445
 msgid "Enter Battle Mode"
 msgstr "Entra no Modo de Batalha"
 
-#: src/engine/dccnit.cpp:1485
+#: src/engine/dccnit.cpp:1449
 msgid "Select Normal Attack"
 msgstr "Seleciona Ataque Normal"
 
-#: src/engine/dccnit.cpp:1492
+#: src/engine/dccnit.cpp:1456
 msgid "Open Quests Window"
 msgstr "Abre Janela de Missões"
 
-#: src/engine/dccnit.cpp:1499
+#: src/engine/dccnit.cpp:1463
 msgid "Open Map Window"
 msgstr "Abre Janela de Mapa"
 
-#: src/engine/dccnit.cpp:1503
+#: src/engine/dccnit.cpp:1467
 msgid "Map Window already opened!"
 msgstr "Janela de Mapa já aberta!"
 
-#: src/engine/dccnit.cpp:1511
+#: src/engine/dccnit.cpp:1475
 msgid "End Character's Turn"
 msgstr "Termina Turno do Personagem"
 
-#: src/engine/dccnit.cpp:1515
+#: src/engine/dccnit.cpp:1479
 msgid "Only Avaible on Battle Mode"
 msgstr "Somente disponível no Modo de Batalha"
 
-#: src/engine/dccnit.cpp:1523
+#: src/engine/dccnit.cpp:1487
 msgid "Open Inventory Window"
 msgstr "Abre Janela de Inventário"
 
-#: src/engine/dccnit.cpp:1527
+#: src/engine/dccnit.cpp:1491
 msgid "Inventory already opened!"
 msgstr "Inventário já aberto!"
 
-#: src/engine/dccnit.cpp:1534
+#: src/engine/dccnit.cpp:1498
 msgid "Open Assign Attacks Window"
 msgstr "Abre Janela de Definir Ataques Rápidos"
 
-#: src/engine/dccnit.cpp:1539
+#: src/engine/dccnit.cpp:1503
 msgid "View Character Informations"
 msgstr "Ver Informações do Personagem"
 
-#: src/engine/dccnit.cpp:1545
+#: src/engine/dccnit.cpp:1509
 msgid "Open Group/Party Window"
 msgstr "Abre Janela de Grupo"
 
-#: src/engine/dccnit.cpp:1614 src/engine/dccnit.cpp:1972
-#: src/engine/dccnit.cpp:3222
+#: src/engine/dccnit.cpp:1577 src/engine/dccnit.cpp:1944
+#: src/engine/dccnit.cpp:3214
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1711
+#: src/engine/dccnit.cpp:1679
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1734
+#: src/engine/dccnit.cpp:1706
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:1769
+#: src/engine/dccnit.cpp:1741
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1897 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1869 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/engine/dccnit.cpp:3192
+#: src/engine/dccnit.cpp:3184
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/dccnit.cpp:3201
+#: src/engine/dccnit.cpp:3193
 msgid "FPS:"
 msgstr "FPS:"
 
-#: src/engine/dccnit.cpp:3218
+#: src/engine/dccnit.cpp:3210
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: src/engine/dccnit.cpp:3220
-msgid "Press F1 for Help"
-msgstr "Pressione F1 para Ajuda"
+#: src/engine/dccnit.cpp:3212
+msgid "Welcome to DNT!"
+msgstr "Bem-Vindo ao DccNiTghtmare!"
 
-#: src/engine/dccnit.cpp:3225 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3217 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/dccnit.cpp:3227
+#: src/engine/dccnit.cpp:3219
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3230 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3222 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Carregar"
 
-#: src/engine/dccnit.cpp:3427
+#: src/engine/dccnit.cpp:3419
 msgid "|Exit Battle Mode"
 msgstr "|Sai do Modo de Batalha"
 
@@ -587,27 +587,27 @@ msgstr "Opções"
 msgid "Exit"
 msgstr "Sair"
 
-#: src/engine/inventwindow.cpp:172
+#: src/engine/inventwindow.cpp:174
 msgid "Drop"
 msgstr "Descartar"
 
-#: src/engine/inventwindow.cpp:174
+#: src/engine/inventwindow.cpp:176
 msgid "Sell"
 msgstr "Vender"
 
-#: src/engine/inventwindow.cpp:177
+#: src/engine/inventwindow.cpp:179
 msgid "Use"
 msgstr "Usar"
 
-#: src/engine/inventwindow.cpp:181
+#: src/engine/inventwindow.cpp:183
 msgid "Remove"
 msgstr "Remover"
 
-#: src/engine/inventwindow.cpp:184
+#: src/engine/inventwindow.cpp:186
 msgid "Info"
 msgstr "Info"
 
-#: src/engine/inventwindow.cpp:186
+#: src/engine/inventwindow.cpp:188
 msgid "Get"
 msgstr "Pegar"
 
@@ -844,15 +844,25 @@ msgstr "Erro: Sem Personagens!"
 msgid "%s rolls initiative: "
 msgstr "%s rola iniciativa: "
 
-#: src/gui/farso.cpp:18
+#: src/gui/farso.cpp:17
 #, c-format
 msgid "Argh! Can't init SDL!\n"
 msgstr "Argh! Não consegui iniciar a SDL!\n"
 
-#: src/gui/farso.cpp:85
+#: src/gui/farso.cpp:84
 #, c-format
 msgid "Oxi! Can't ajust video mode: %s!\n"
 msgstr "Oxi! Não consegui ajustar o modo do vídeo: %s!\n"
+
+#: src/gui/farso.cpp:88
+#, c-format
+msgid "Trying again without AntiAliasing.\n"
+msgstr "Tentando novamente sem o AntiAliasing.\n"
+
+#: src/gui/farso.cpp:93
+#, c-format
+msgid "Something must be wrong! Try editing ~/.dccnitghtmare/options.cfg\n"
+msgstr "Algo deve estar errado! Tente editar ~/dccnitghtmare/options.cfg\n"
 
 #: src/gui/dntfont.cpp:15
 #, c-format
@@ -864,7 +874,7 @@ msgstr "Não consegui iniciar a SDL_ttf: %s\n"
 msgid "Can't open font file: %s\n"
 msgstr "Erro ao abrir arquivo de fonte: %s\n"
 
-#: src/gui/window.cpp:171
+#: src/gui/window.cpp:170
 msgid "Maximize"
 msgstr "Maximizar"
 
@@ -878,7 +888,7 @@ msgstr "Erro ao abrir imagem: %s \n"
 msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
 msgstr "Aviso: Não pude carregar imagem (sem memória)!\n"
 
-#: src/ia/iascript.cpp:858
+#: src/ia/iascript.cpp:861
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Missão Cumprida: %d XP!"
@@ -3406,3 +3416,6 @@ msgstr "Leve"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Pesada"
+
+#~ msgid "Press F1 for Help"
+#~ msgstr "Pressione F1 para Ajuda"
