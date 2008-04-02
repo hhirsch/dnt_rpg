@@ -217,7 +217,9 @@ engine::~engine()
 
    /* Clear GUI */
    if(gui)
+   {
       delete(gui);
+   }
 
    /* Clear Maps */
    if(actualMap)
@@ -650,7 +652,8 @@ void engine::splashScreen()
               | GL_STENCIL_BUFFER_BIT);
       updateFrustum(visibleMatrix,proj,modl);
       glColor3f(1.0, 1.0, 1.0);
-      textureToScreen(id,proj,modl,viewPort,0,0,SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
+      textureToScreen(id, proj, modl, viewPort, 0, 0,
+                      SCREEN_X-1, SCREEN_Y-1, 800, 600, 0.012);
       glFlush();
       SDL_GL_SwapBuffers();
 
@@ -966,7 +969,7 @@ int engine::characterScreen(GLuint idTextura)
    }
 
 
-   /* Actualize and calculate things related to the character */
+   /* Apdate and calculate things related to character */
    if(charCreation == CHAR_CONFIRM)
    {
       /* Calculate Life Points */
@@ -1411,7 +1414,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
             /* Redefine, if need, the weapons */
             PCs->getActiveCharacter()->defineWeapon();
 
-            /* Use of Menu count as an action */
+            /* Menu Use count as an action */
             canAttack = false;
 
             /* TODO redefine the armors! */
@@ -2387,7 +2390,7 @@ int engine::treatIO(SDL_Surface *screen)
          {
             if(dist > WALK_PER_MOVE_ACTION)
             {
-               /* Disable attack move on round if move more than 
+               /* Disable attack action on round if move more than 
                 * one move act */
                canAttack = false;
             }
@@ -2471,17 +2474,8 @@ int engine::treatIO(SDL_Surface *screen)
 
          miniMapWindow->draw(mouseX, mouseY);
       }
-      /*if(shortCutsWindow)
-      {
-         if(shortCutsWindow == gui->getActiveWindow())
-         {
-            shortCutsWindow->draw(mouseX, mouseY);
-         }
-         else
-         {
-            shortCutsWindow->draw(-1,-1);
-         }
-      }*/
+     
+      /* Get GUI Event */ 
       guiObject* object;
       object = gui->manipulateEvents(x,y,mButton,keys, guiEvent);
       /* Threat the GUI */
@@ -2513,7 +2507,7 @@ int engine::treatIO(SDL_Surface *screen)
       SDL_GL_SwapBuffers();
 
 
-      /* Actualize FPS */
+      /* Update FPS */
       actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
       if( (miniMapWindow) && (time-lastFPS >= 500))
       {
@@ -3206,14 +3200,10 @@ void engine::openMiniMapWindow()
                                                                  NULL);
    actualMap->drawMinimap(fig->get());
 
+   //FIXME remove FPS counter from here
    FPS = miniMapWindow->getObjectsList()->insertTextBox(3,108,150/*100*/,123,2,
                                   gettext("FPS:"));
 
-   /*miniMapWindow->getObjectsList()->insertPicture(3,15,252,120,
-                              dir.getRealFile("texturas/mapw/map.png").c_str());*/
-
-   
-                   
    miniMapWindow->setExternPointer(&miniMapWindow);
    gui->openWindow(miniMapWindow);
 }
@@ -3270,9 +3260,6 @@ void engine::openShortcutsWindow()
    tb->insertButton(220,40,256,72);/* Attack 6 */
    buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
 
-   /*shortCutsWindow->getObjectsList()->insertPicture(3,15,252,120,
-                  dir.getRealFile("texturas/shortcutsw/shortcut2.png").c_str());*/
-   
    shortCutsWindow->setExternPointer(&shortCutsWindow);
    gui->openWindow(shortCutsWindow);
 }
@@ -3334,7 +3321,8 @@ void engine::showImage(string fileName)
               | GL_STENCIL_BUFFER_BIT);
       updateFrustum(visibleMatrix,proj,modl);
       glColor3f(1.0, 1.0, 1.0);
-      textureToScreen(id,proj,modl,viewPort,0,0,SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
+      textureToScreen(id, proj, modl, viewPort, 0, 0,
+                      SCREEN_X-1, SCREEN_Y-1, 800, 600, 0.012);
       glFlush();
       SDL_GL_SwapBuffers();
 
@@ -3411,6 +3399,13 @@ int engine::run(SDL_Surface *surface)
             delete(actualMap);
             actualMap = NULL;
          }
+
+         /* Clear Objects List */
+         if(objectsList)
+         {
+            delete(objectsList);
+         }
+ 
 
          /* Clear the Models List */
          if(models)
