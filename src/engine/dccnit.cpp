@@ -3404,6 +3404,7 @@ int engine::run(SDL_Surface *surface)
          if(objectsList)
          {
             delete(objectsList);
+            objectsList = new (lObject);
          }
  
 
