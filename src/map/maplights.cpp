@@ -32,7 +32,7 @@ mapLights::mapLights()
    fileName = "";
    for(i=0; i < 3; i++)
    {
-      activeLights[i].lightNumber = (-1*i)-1;
+      activeLights[i].lightNumber = -1;
       activeLights[i].distance = (-1*i)-1;
    }
 }
@@ -210,6 +210,7 @@ void mapLights::actualize(GLfloat posX, GLfloat posZ)
          break;
       }
       if( (activeLights[i].lightNumber >= 0) && 
+          (light[activeLights[i].lightNumber].enableLight) &&
           (activeLights[i].distance <= 2*INDOOR_FARVIEW))
       {
          l = activeLights[i].lightNumber;
