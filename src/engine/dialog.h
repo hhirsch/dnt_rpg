@@ -114,20 +114,18 @@ class conversation
       /*! Treat Events on Window. 
        * \param guiObj -> active GUI object
        * \param eventInfo -> last GUI Event 
-       * \param gui -> window interface used
        * \param tradeWindow -> pointer to the pointer the barter window
        * \param infoW -> pointer to the used itemWindow
        * \return true if event is threated, false otherwise. */
-      bool treat(guiObject* guiObj, int eventInfo, interface* gui,
+      bool treat(guiObject* guiObj, int eventInfo,
                  barterWindow** tradeWindow, itemWindow* infoW);
 
       /*! Verify if the dialog is open or not 
        * \return true if the window is opened */
       bool windowOpened();
 
-      /*! Close, if opened, the dialog window
-       * \param gui -> the GUI interface where the window is */
-      void closeWindow(interface* gui);
+      /*! Close, if opened, the dialog window */
+      void closeWindow();
 
       protected:
          window* jan;          /**< Pointer to window used to show */
@@ -145,9 +143,8 @@ class conversation
          /*!
           * Computates the action on dialog, based on selected option.
           * \param numDialog -> dialog number 
-          * \param opcao -> option selected
-          * \param gui -> window interface used */
-         void proccessAction(int numDialog, int opcao,interface* gui);
+          * \param opcao -> option selected */
+         void proccessAction(int numDialog, int opcao);
 
          /*! 
           * Change dialog

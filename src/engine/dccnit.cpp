@@ -1201,7 +1201,10 @@ void engine::enterBattleMode(bool surprisePC)
   
   character* activeCharacter = PCs->getActiveCharacter();
   
+  /* clear fight status */
   fight->empty();
+
+  /* Verify if there are NPCs */
   if(!NPCs)
   {
      if(shortCutsWindow != NULL)
@@ -1210,6 +1213,8 @@ void engine::enterBattleMode(bool surprisePC)
      }
      return;
   }
+
+  /* Add NPCs to Fight */
   ch =(character*) NPCs->first->next;
   while(ch != NPCs->first)
   {
@@ -1223,6 +1228,8 @@ void engine::enterBattleMode(bool surprisePC)
          ch->callIdleAnimation();
          /* Remove Move, if it is moving */
          ch->pathFind.clear();
+         /* Close Dialog window, if openned */
+         ch->closeConversation();
       }
       ch = (character*) ch->next; 
       SDL_Delay(1);
@@ -1230,6 +1237,7 @@ void engine::enterBattleMode(bool surprisePC)
                  
   if(numEnemies > 0)
   {
+      /* Really Init the Battle */
       snd->addSoundEffect(false,"sndfx/battleMode.ogg");
       engineMode = ENGINE_MODE_TURN_BATTLE;
       moveCircleX = activeCharacter->xPosition;
@@ -1245,6 +1253,10 @@ void engine::enterBattleMode(bool surprisePC)
          ch = (character*) ch->next; 
          /* Set the state to Idle */
          ch->callIdleAnimation();
+         /* Remove Move, if it is moving */
+         ch->pathFind.clear();
+         /* Close Dialog window, if openned */
+         ch->closeConversation();
          SDL_Delay(1);
       }
                    
@@ -1270,7 +1282,7 @@ void engine::enterBattleMode(bool surprisePC)
 
       /* Abort All pending Actions */
       actionControl->abortAllActions();
-      
+
    }
    else
    {
@@ -1393,8 +1405,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
       character* ch =(character*) NPCs->first->next;
       while(ch != NPCs->first)
       {
-         ch->treatConversation(object, eventInfo, gui, &tradeWindow, 
-                               infoWindow);
+         ch->treatConversation(object, eventInfo, &tradeWindow, infoWindow);
          ch = (character*) ch->next;
       }
    }

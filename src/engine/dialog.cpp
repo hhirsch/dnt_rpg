@@ -486,7 +486,7 @@ void conversation::openDialog(int numDialog, interface* gui, character* pers,
 /*************************************************************************
  *                            proccessAction                             *
  *************************************************************************/
-void conversation::proccessAction(int numDialog, int opcao, interface* gui)
+void conversation::proccessAction(int numDialog, int opcao)
 {
    dialog* dlg = first->next;
    while( (dlg != first) && (dlg->id != numDialog))
@@ -512,11 +512,11 @@ void conversation::proccessAction(int numDialog, int opcao, interface* gui)
          engine* eng = (engine*)actualEngine;
          actualNPC->setAsEnemy();
          eng->enterBattleMode(false);
-         closeWindow(gui);
+         closeWindow();
       }
       break;
       case TALK_ACTION_CLOSE:
-         closeWindow(gui);
+         closeWindow();
       break;
       case TALK_ACTION_MODPC:
          //TODO
@@ -579,24 +579,27 @@ void conversation::changeDialog(int numDialog)
 /*************************************************************************
  *                             closeWindow                               *
  *************************************************************************/
-void conversation::closeWindow(interface* gui)
+void conversation::closeWindow()
 {
-   gui->closeWindow(jan);
-   jan = NULL;
-   usedGui = NULL;
+   if((usedGui) && (jan))
+   {
+      usedGui->closeWindow(jan);
+      jan = NULL;
+      usedGui = NULL;
+   }
 }
 
 /*************************************************************************
  *                                treat                                  *
  *************************************************************************/
-bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui,
+bool conversation::treat(guiObject* guiObj, int eventInfo,
                          barterWindow** tradeWindow, itemWindow* infoW)
 {
    if(eventInfo == SELECTED_SEL_TEXT)
    {
       if(guiObj == (guiObject*)pcSelText)
       {
-         proccessAction(actual, pcSelText->getLastSelectedItem(), gui);
+         proccessAction(actual, pcSelText->getLastSelectedItem());
          return(true);
       }
    }
@@ -605,7 +608,7 @@ bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui,
       if(guiObj == (guiObject*)barterButton)
       {
          /* Closes the dialog window  */
-         closeWindow(gui);
+         closeWindow();
 
          /* If exists a barter, delete it! */
          if( (*tradeWindow) != NULL)
@@ -614,7 +617,7 @@ bool conversation::treat(guiObject* guiObj, int eventInfo, interface* gui,
             *tradeWindow = NULL;
          }
          *tradeWindow = new barterWindow(actualNPC->inventories, 
-                                         actualPC->inventories, gui, infoW);
+                                         actualPC->inventories, usedGui, infoW);
 
       }
    }

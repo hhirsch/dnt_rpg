@@ -136,14 +136,16 @@ class character: public aniModel
        * \return true if the conversation dialog is opened */
       bool isConversationOpened();
 
+      /*! Close the conversation dialog */
+      void closeConversation();
+
       /*! Treat Events on Conversation Window. 
        * \param guiObj -> active GUI object
        * \param eventInfo -> last GUI Event 
-       * \param gui -> window interface used
        * \param tradeWindow -> pointer to the pointer of the barterWindow
        * \param infoW -> pointer to the used itemWindow 
        * \return true if event is threated, false otherwise. */
-      bool treatConversation(guiObject* guiObj, int eventInfo, interface* gui,
+      bool treatConversation(guiObject* guiObj, int eventInfo,
                              barterWindow** tradeWindow, itemWindow* infoW);
 
       /*! Call the thing dead animation */

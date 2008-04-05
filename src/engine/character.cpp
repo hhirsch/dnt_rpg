@@ -198,6 +198,18 @@ bool character::isConversationOpened()
 }
 
 /*********************************************************************
+ *                         closeConversation                         *
+ *********************************************************************/
+void character::closeConversation()
+{
+   conversation* cs = (conversation*) conv;
+   if( (cs) && (cs->windowOpened()) )
+   {
+      cs->closeWindow();
+   }
+}
+
+/*********************************************************************
  *                      openConversationDialog                       *
  *********************************************************************/
 void character::openConversationDialog(interface* gui, character * PC)
@@ -215,7 +227,7 @@ void character::openConversationDialog(interface* gui, character * PC)
  *                         treatConversation                         *
  *********************************************************************/
 bool character::treatConversation(guiObject* guiObj, int eventInfo, 
-                                  interface* gui, barterWindow** tradeWindow,
+                                  barterWindow** tradeWindow,
                                   itemWindow* infoW)
 {
    if(convPressed)
@@ -229,7 +241,7 @@ bool character::treatConversation(guiObject* guiObj, int eventInfo,
       conversation* cs = (conversation*) conv;
       if( (cs != NULL) && (cs->windowOpened()) )
       {
-         return(cs->treat(guiObj, eventInfo, gui, tradeWindow, infoW));
+         return(cs->treat(guiObj, eventInfo, tradeWindow, infoW));
       }
    }
    return(false);
