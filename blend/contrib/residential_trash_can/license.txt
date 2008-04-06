@@ -1,0 +1,5 @@
+Authors: Andrew Kator & Jennifer Legaz
+Site: http://www.katorlegaz.com
+License: Creative Commons Attribution 3.0 United States License
+
+Modifications on model done by DNTeam.
