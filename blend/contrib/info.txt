@@ -1,2 +1,3 @@
-  Here are the models not done by the DNTeam. For information about the license
-of them, take a read at the file licenses.txt at the ../../ directory.
+  Here are the models not made by the DNTeam (or only modified by DNTeam). 
+  For information about their license, just read license.txt file at model's
+directory.
