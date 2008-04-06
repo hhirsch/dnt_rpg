@@ -1,0 +1,13 @@
+name = Notebook
+cal3d = models/objetos/geral/notebook/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 200
+fortitude = 8
+reflex = -2
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = 0
+cost = 7200
+static_scenery = 1
