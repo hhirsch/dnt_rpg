@@ -70,8 +70,8 @@ class mapLights
        * \param posZ -> Z position */
       void setNearLights(GLfloat posX, GLfloat posZ);
 
-
-      mapLight light[MAX_LIGHTS_PER_MAP];    /**< Total lights */
+      int totalLights;                       /**< Total Lights on Map */
+      mapLight light[MAX_LIGHTS_PER_MAP];    /**< lights on Map */
       string fileName;                       /**< FileName */
       lightDist activeLights[3];             /**< Current Active Lights */
 };
