@@ -99,7 +99,7 @@ void classWindow::setCharacteristics()
    textCharac->setText("|");
    textCharac->addText(string(gettext("Life Dice")) + tmp, DNT_FONT_ARIAL,
                        10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
-                       66,4,13);
+                       157,18,18);
 
    textCharac->addText(string(gettext("Skill Points")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
@@ -130,7 +130,7 @@ void classWindow::setCharacteristics()
    }
    textCharac->addText(string(gettext("First Level")) + tmp, DNT_FONT_ARIAL,
                        10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
-                       66,4,13);
+                       147,18,18);
 
    /* Other Levels Points */
    if(actualClass->otherLevelsSP.signal == SIGNAL_DEC)
@@ -158,7 +158,7 @@ void classWindow::setCharacteristics()
    }
    textCharac->addText(string(gettext("Other Levels")) + tmp, DNT_FONT_ARIAL,
                        10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
-                       66,4,13);
+                       147,18,18);
 
    /* Modifiers */
    textCharac->addText(string(gettext("Class Modifiers")) + "||", 
@@ -234,7 +234,7 @@ void classWindow::setDescription()
    textDesc->setText("");
    textDesc->addText(actualClass->citation + "||", DNT_FONT_ARIAL,
                      10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
-                     66,4,13);
+                     147,18,18);
    textDesc->addText(actualClass->description);
    textDesc->setFirstLine(0);
 }

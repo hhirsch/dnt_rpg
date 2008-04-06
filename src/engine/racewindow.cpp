@@ -89,7 +89,7 @@ void raceWindow::setDescription()
    textDesc->setText("");
    textDesc->addText(actualRace->citation + "||", DNT_FONT_ARIAL,
                      10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
-                     66,4,13);
+                     147,18,18);
    textDesc->addText(actualRace->description);
    textDesc->setFirstLine(0);
 }
