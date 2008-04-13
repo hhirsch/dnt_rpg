@@ -25,6 +25,10 @@
 /* Musics */
 #define FILE_MUSIC      "mapEditor/lists/music.lst"
 
+/* Textures */
+#define FILE_INDOOR_TEXTURE   "mapEditor/lists/floor_indoor.lst"
+#define FILE_OUTDOOR_TEXTURE  "mapEditor/lists/floor_outdoor.lst"
+
 /********************************************************************
  *                             Constructor                          *
  ********************************************************************/
@@ -120,6 +124,12 @@ void listWindow::setState(int st)
          break;
          case STATE_MUSIC:
             fileName = FILE_MUSIC;
+         break;
+         case STATE_INDOOR_TEXTURE:
+            fileName = FILE_INDOOR_TEXTURE;
+         break;
+         case STATE_OUTDOOR_TEXTURE:
+            fileName = FILE_OUTDOOR_TEXTURE;
          break;
       }
       /* Load file */

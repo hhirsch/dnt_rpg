@@ -27,6 +27,10 @@
 /* Music */
 #define STATE_MUSIC       40
 
+/* Texture */
+#define STATE_INDOOR_TEXTURE   50
+#define STATE_OUTDOOR_TEXTURE  51
+
 /*! Element on the list */
 class listElement
 {

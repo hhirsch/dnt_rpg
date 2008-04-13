@@ -56,7 +56,8 @@ class guiIO
 
 
       /*! Do the GUI IO */
-      int doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys);
+      int doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
+               bool outdoor);
 
       /*! Draw The GUI */
       void draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
@@ -156,7 +157,6 @@ class guiIO
       button* texturePreviousButton;   /**< Previous Texture Button */
       button* textureNextButton;       /**< Next Texture Button */
       button* textureInsertButton;     /**< Insert Texture Button */
-      textBar* textureText;            /**< Texture Text */
       void openTextureWindow();        /**< Open The texture Window */
 
       /*********************Terrain*Window*******************************/

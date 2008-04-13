@@ -98,8 +98,6 @@ void guiIO::openTextureWindow()
    textureInsertButton = textureWindow->getObjectsList()->insertButton(20,35,
                                                                        153,53,
                                                                     "Insert",1);
-   textureText = textureWindow->getObjectsList()->insertTextBar(10,17,173,33,
-                                                                "texturas/",0);
    textureWindow->setAttributes(false,true,false,false);
    textureWindow->setExternPointer(&textureWindow);
    gui->openWindow(textureWindow);
@@ -438,7 +436,8 @@ void guiIO::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 /****************************************************************
  *                             DoIO                             *
  ****************************************************************/
-int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
+int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
+                bool outdoor)
 {
    int eventInfo=NOTHING;
    guiObject* object;
@@ -473,19 +472,23 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
       if(keys[SDLK_KP4])
       {
          gameCamera.updateCamera(gameCamera.getCenterX() -
-                                 4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                 4.0 * sin(deg2Rad(gameCamera.getPhi()) + 
+                                       deg2Rad(90)),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() - 
-                                 4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                 4.0 * cos(deg2Rad(gameCamera.getPhi()) + 
+                                       deg2Rad(90)),
                                  0.0);
       }
       if(keys[SDLK_KP6])
       {
          gameCamera.updateCamera(gameCamera.getCenterX() +
-                                 4.0 * sin(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                 4.0 * sin(deg2Rad(gameCamera.getPhi()) + 
+                                        deg2Rad(90)),
                                  gameCamera.getCenterY()-30,
                                  gameCamera.getCenterZ() +
-                                 4.0 * cos(deg2Rad(gameCamera.getPhi())+deg2Rad(90)),
+                                 4.0 * cos(deg2Rad(gameCamera.getPhi()) +
+                                       deg2Rad(90)),
                                  0.0);
       }
    }
@@ -549,6 +552,11 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
             case STATE_MUSIC:
                state = GUI_IO_STATE_MUSIC;
                tool = TOOL_NONE;
+            break;
+
+            case STATE_INDOOR_TEXTURE:
+            case STATE_OUTDOOR_TEXTURE:
+               return(GUI_IO_TEXTURE_INSERT);
             break;
          }
          return(GUI_IO_NEW_STATE);
@@ -921,7 +929,14 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys)
          }
          else if(object == (guiObject*) textureInsertButton)
          {
-            return(GUI_IO_TEXTURE_INSERT);
+            if(outdoor)
+            {
+               ltWindow->setState(STATE_OUTDOOR_TEXTURE);
+            }
+            else
+            {
+               ltWindow->setState(STATE_INDOOR_TEXTURE);
+            }
          }
          /*Fog Buttons */
          else if(object == (guiObject*) fogApplyButton)
@@ -976,7 +991,7 @@ string guiIO::getFileName()
  ****************************************************************/
 string guiIO::getTextureFileName()
 {
-   return(textureText->getText());
+   return(selectedText);
 }
 
 /****************************************************************

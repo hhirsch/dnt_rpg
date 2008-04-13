@@ -379,9 +379,9 @@ void editor::newMap()
          }
       }
       map->setInitialPosition( ((sizeX+12)*map->squareSize() / 2.0),
-                            ((sizeZ+12)*map->squareSize() / 2.0));
+                               ((sizeZ+12)*map->squareSize() / 2.0));
       gui->gameCamera.updateCamera(((sizeX+14)*map->squareSize() / 2.0), 0.0, 
-                                      ((sizeZ+14)*map->squareSize() / 2.0), 0.0);
+                                   ((sizeZ+14)*map->squareSize() / 2.0), 0.0);
    }
    else
    {
@@ -396,18 +396,22 @@ void editor::newMap()
       actualWall->texture = map->textures->index;
 
       actualWall = map->addWall((sizeX)*map->squareSize()-10,0,
-                                (sizeX)*map->squareSize(), (sizeZ)*map->squareSize());
+                                (sizeX)*map->squareSize(), 
+                                (sizeZ)*map->squareSize());
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->texture = map->textures->index;
 
       actualWall = map->addWall(0,(sizeZ)*map->squareSize()-10,
-                                (sizeX)*map->squareSize(),(sizeZ)*map->squareSize());
+                                (sizeX)*map->squareSize(),
+                                (sizeZ)*map->squareSize());
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->texture = map->textures->index;
       /* Define Position */
       map->setInitialPosition( ((sizeX)*map->squareSize() / 2.0),
                             ((sizeZ)*map->squareSize() / 2.0));
    }
+
+   /* Create Editor Controller */
    terrainEditor = new terrain(map);
    portalEditor = new portal(map);
    wallEditor = new wallController(map);
@@ -526,11 +530,11 @@ int editor::nextTexture()
 /************************************************************************
  *             Insere Textura na Lista de textures                      *
  ************************************************************************/
-int editor::insertTexture()
+int editor::insertTexture(string textureFile)
 {
    dirs dir;
    SDL_Surface* img;
-   img = IMG_Load(dir.getRealFile(gui->getTextureFileName()).c_str());
+   img = IMG_Load(dir.getRealFile(textureFile).c_str());
    if(!img)
    {
       gui->showMessage("Error opening texture!");
@@ -941,12 +945,18 @@ void editor::doEditorIO()
 void editor::verifyIO()
 {
    int guiEvent;
+   bool outdoor = false;
 
    SDL_PumpEvents();
    keys = SDL_GetKeyState(NULL);
    mButton = SDL_GetMouseState(&mouseX,&mouseY);
 
-   guiEvent = gui->doIO(mouseX, mouseY, mButton, keys);
+   if(mapOpened)
+   {
+      outdoor = map->isOutdoor();
+   }
+
+   guiEvent = gui->doIO(mouseX, mouseY, mButton, keys, outdoor);
    if(guiEvent == GUI_IO_EXIT)
    {
       quit = true;
@@ -981,7 +991,7 @@ void editor::verifyIO()
    {
       if(mapOpened)
       {
-         if(insertTexture())
+         if(insertTexture(gui->getTextureFileName()))
          {
             gui->showMessage(gettext("Texture inserted!"));
          }

@@ -55,7 +55,7 @@ class editor
       /*! Gets Next Texture on Map List */
       int nextTexture();
       /*! Insert Texture on Map List */
-      int insertTexture();
+      int insertTexture(string textureFile);
       /*! Render All Static Scenery Objects */
       void renderSceneryObjects();
 
