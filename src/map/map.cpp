@@ -241,11 +241,15 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    if(numTextures == 0)
    {
       textures = tex;
-      tex->next = NULL;
+      tex->next = tex;
+      tex->previous = tex;
    }
    else
    {
       tex->next = textures;
+      tex->previous = textures->previous;
+      tex->next->previous = tex;
+      tex->previous->next = tex;
       textures = tex;
    }
 
@@ -292,6 +296,57 @@ GLuint Map::insertTexture(string arq, string name, GLuint R, GLuint G, GLuint B)
    SDL_FreeSurface(img);
 
    return(tex->index);
+}
+
+/********************************************************************
+ *                      removeUnusedTextures                        *
+ ********************************************************************/
+void Map::removeUnusedTextures()
+{
+   /* For Each texture, verify if some square is using it. */
+   int aux=0;
+   int x1,z1;
+   texture* tex = textures;
+   texture* rmTex = NULL;
+   bool used = false;
+   int total = numTextures;
+   for(aux = 0; aux < total; aux++)
+   {
+      /* Look on all squares if one is using it */
+      used = false;
+
+      /* Verify the use of each texture */
+      for(x1 = 0; ((x1 < x) & (!used)); x1++)
+      {
+         for(z1 = 0; ((z1 < z) && (!used)) ;z1++)
+         {
+            used = (getTexture(MapSquares[x1][z1].texture) == tex);
+         }
+      }
+
+      if(!used)
+      {
+         /* Remove it from the linked list */
+         rmTex = tex;
+         tex = tex->next;
+         rmTex->next->previous = rmTex->previous;
+         rmTex->previous->next = rmTex->next;
+         numTextures--;
+         if(rmTex == textures)
+         {
+            textures = rmTex->next;
+         }
+         if(numTextures == 0)
+         {
+            textures = NULL;
+         }
+         delete(rmTex);
+      }
+      else
+      {
+         tex = tex->next;
+      }
+   }
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1903,13 +1958,16 @@ int Map::save(string arquivo)
       printf("Error while creating: %s to save\n",arquivo.c_str());
 	return(0);
    }
+
+   /* Remove Unused Textures */
+   removeUnusedTextures();
    
    /* Write Dimensions */
    fprintf(arq,"T %dX%d\n",x,z);
    fprintf(arq,"# Made by DccNiTghtmare's MapEditor, v0.2\n");
 
    /* Write fog file name, if exists */
-   if( !fog.fileName.empty())
+   if( !fog.fileName.empty() )
    {
      fprintf(arq,"f %s\n",fog.fileName.c_str());
    }

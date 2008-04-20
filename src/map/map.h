@@ -77,7 +77,8 @@ class texture
       int count;                /**< The count of the texture */
       float** alphaValues;      /**< The Alpha Values Matrix */
       bool definedAlpha;        /**< If the alpha is defined */
-      texture* next;    /**< Next on List */
+      texture* next;            /**< Next on List */
+      texture* previous;        /**< Previous on List */
 };
 
 /*!
@@ -557,6 +558,12 @@ class Map
        * \return total number of walls on map
        **************************************************************/
       int getTotalWalls();
+
+      /*!
+       **************************************************************
+       *  Remove all unused textures from the list
+       **************************************************************/
+      void removeUnusedTextures();
 
       lake* addLake(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2);
 
