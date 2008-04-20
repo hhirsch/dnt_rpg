@@ -289,6 +289,10 @@ void editor::saveMap()
       tmp = "Map Saved as:";
       tmp += gui->getFileName();
       gui->showMessage(tmp);
+
+      /* To make sure the selected texture isn't one that was removed */
+      nextTexture();
+      previousTexture();
    }
    else
    {
@@ -484,12 +488,12 @@ int editor::previousTexture()
 {
    int aux=0;
    texture* tex = map->textures;
-   while(aux < map->numTextures-1)
+   while(aux < map->numTextures)
    {
-      if(tex->next->index == actualTexture)
+      if(tex->index == actualTexture)
       {
-         actualTexture = tex->index;
-         return(tex->index);
+         actualTexture = tex->previous->index;
+         return(tex->previous->index);
       }
       tex = tex->next;
       aux++;
@@ -509,22 +513,14 @@ int editor::nextTexture()
    {
       if(tex->index == actualTexture)
       {
-         if(tex->next)
-         {
-           actualTexture = tex->next->index;
-           return(tex->next->index);
-         }
-         else
-         {
-            actualTexture = tex->index;
-           return(tex->index);
-         }
+         actualTexture = tex->next->index;
+         return(tex->next->index);
       }
       tex = tex->next;
       aux++;
    }
-   actualTexture = 0;
-   return(-1);
+   actualTexture = map->textures->index;
+   return(map->textures->index);
 }
 
 /************************************************************************

@@ -310,18 +310,27 @@ void Map::removeUnusedTextures()
    texture* rmTex = NULL;
    bool used = false;
    int total = numTextures;
+   wall* w;
    for(aux = 0; aux < total; aux++)
    {
       /* Look on all squares if one is using it */
       used = false;
 
-      /* Verify the use of each texture */
-      for(x1 = 0; ((x1 < x) & (!used)); x1++)
+      /* Verify the use of texture At Squares */
+      for(x1 = 0; ((x1 < x) && (!used)); x1++)
       {
          for(z1 = 0; ((z1 < z) && (!used)) ;z1++)
          {
-            used = (getTexture(MapSquares[x1][z1].texture) == tex);
+            used |= (getTexture(MapSquares[x1][z1].texture) == tex);
          }
+      }
+
+      /* Verify use of texture at Walls  */
+      w = walls;
+      for(x1 = 0; ((x1 < totalWalls) && (!used)); x1++)
+      {
+         used |= (getTexture(w->texture) == tex);
+         w = w->next;
       }
 
       if(!used)
@@ -340,6 +349,7 @@ void Map::removeUnusedTextures()
          {
             textures = NULL;
          }
+         printf("Removed: %s\n", rmTex->name.c_str());
          delete(rmTex);
       }
       else
@@ -1952,10 +1962,12 @@ int Map::save(string arquivo)
 {
    optimize();
    FILE* arq;
+   dirs dir;
 
-   if(!(arq = fopen(arquivo.c_str(),"w")))
+   if(!(arq = fopen(dir.getRealFile(arquivo).c_str(),"w")))
    {
-      printf("Error while creating: %s to save\n",arquivo.c_str());
+      printf("Error while creating: %s to save\n",
+             dir.getRealFile(arquivo).c_str());
 	return(0);
    }
 
@@ -2035,7 +2047,8 @@ int Map::save(string arquivo)
 
    /* Write used Textures */
    texture* tex = (texture*)textures;
-   while(tex)
+   int t;
+   for(t = 0; t < numTextures; t++)
    {
       fprintf(arq,"t %s %s %d %d %d\n",tex->name.c_str(),tex->fileName.c_str(),
                                        tex->R,tex->G,tex->B);
