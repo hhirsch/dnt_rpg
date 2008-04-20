@@ -387,7 +387,7 @@ void guiIO::applyFog()
             glFogf(GL_FOG_DENSITY, 0.10);
             glHint(GL_FOG_HINT, GL_DONT_CARE);
             glFogf(GL_FOG_START, 100);
-            glFogf(GL_FOG_END, HALFFARVIEW);
+            glFogf(GL_FOG_END, FARVIEW / 2.0);
          }
       }
    }

@@ -1072,7 +1072,7 @@ int main(int argc, char **argv)
    {
 
       varTempo = (SDL_GetTicks() - ultimaLeitura);
-      if(varTempo >= ACTUALIZATION_RATE)
+      if(varTempo >= UPDATE_RATE)
       {
          ultimaLeitura = SDL_GetTicks();
          segundos = varTempo / 1000.0;

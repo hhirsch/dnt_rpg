@@ -44,8 +44,8 @@ thing::thing()
    dirs dir;
    bloodFileName = dir.getRealFile("particles/blood3.par");
    bloodPosition = 25;
-   walk_interval = 37.5 * WALK_ACTUALIZATION; //default value, if not
-                                              //defined at the def file.
+   walk_interval = 37.5 * WALK_UPDATE; //default value, if not
+                                       //defined at the def file.
 }
 
 /******************************************************

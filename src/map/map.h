@@ -483,9 +483,9 @@ class Map
 
       /*! 
        ***************************************************************
-       * Actualize the Alpha Textures 
+       * Update the Alpha Textures 
        ***************************************************************/
-      void actualizeAlphaTextures();
+      void updateAlphaTextures();
 
       /*!
        **************************************************************

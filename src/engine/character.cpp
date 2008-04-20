@@ -805,7 +805,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if (buf == "walk_interval")
       {
          sscanf(token2.c_str(), "%f", &novo->walk_interval);
-         novo->walk_interval *= WALK_ACTUALIZATION;
+         novo->walk_interval *= WALK_UPDATE;
       }
       /* Conversation File */
       else if (buf == "conversationFile")

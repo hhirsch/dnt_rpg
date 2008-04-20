@@ -116,7 +116,7 @@ engine::engine()
    missions->addNewMission("missions/tutorial/mission1.dsl");
 
    hour = 9.0;
-   gameSun = new sun(hour, HALFFARVIEW, HALFFARVIEW);
+   gameSun = new sun(hour, FARVIEW / 2.0, FARVIEW / 2.0);
 
    engineMode = ENGINE_MODE_REAL_TIME;
 
@@ -368,7 +368,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    }
    else
    {
-      GLdouble fogEnd = HALFFARVIEW+200;
+      GLdouble fogEnd = (FARVIEW / 2.0)+200;
       GLdouble fogStart = 200;
       GLdouble fogDensity = 0.001;
       GLfloat color[3] = {0.8,0.8,0.8};
@@ -726,7 +726,7 @@ int engine::optionsScreen(GLuint idTextura)
           (optionW != OPTIONSW_CONFIRM))
    {
       time = SDL_GetTicks();
-      if(time - timeAnterior >= ACTUALIZATION_RATE) 
+      if(time - timeAnterior >= UPDATE_RATE) 
       {
          timeAnterior = time;
          SDL_PumpEvents();
@@ -746,9 +746,9 @@ int engine::optionsScreen(GLuint idTextura)
          SDL_GL_SwapBuffers();
          optionW = option->treat(object,eventInfo,interf,proj,modl,viewPort);
       }
-      else if((ACTUALIZATION_RATE-1) - (time - timeAnterior) > 0 ) 
+      else if((UPDATE_RATE-1) - (time - timeAnterior) > 0 ) 
       {
-         SDL_Delay((ACTUALIZATION_RATE-1) - (time - timeAnterior) );
+         SDL_Delay((UPDATE_RATE-1) - (time - timeAnterior) );
       }
    }
   
@@ -823,7 +823,7 @@ int engine::characterScreen(GLuint idTextura)
    while( (status != 6) )
    {
       time = SDL_GetTicks();
-      if(time - timeAnterior >= ACTUALIZATION_RATE) 
+      if(time - timeAnterior >= UPDATE_RATE) 
       {
          timeAnterior = time;
          SDL_PumpEvents();
@@ -962,9 +962,9 @@ int engine::characterScreen(GLuint idTextura)
             }
          }         
       }
-      else if((ACTUALIZATION_RATE-1) - (time - timeAnterior) > 0 ) 
+      else if((UPDATE_RATE-1) - (time - timeAnterior) > 0 ) 
       {
-         SDL_Delay((ACTUALIZATION_RATE-1) - (time - timeAnterior) );
+         SDL_Delay((UPDATE_RATE-1) - (time - timeAnterior) );
       }
    }
 
@@ -1984,7 +1984,7 @@ int engine::treatIO(SDL_Surface *screen)
    time = SDL_GetTicks();
    srand(time);
    varTempo = (time-lastRead);
-   if( ((varTempo)) >= ACTUALIZATION_RATE)
+   if( ((varTempo)) >= UPDATE_RATE)
    {
       timePass = true;
 
@@ -2587,8 +2587,8 @@ int engine::treatIO(SDL_Surface *screen)
    }
    else
    {
-      int tmp = (int) ((ACTUALIZATION_RATE-1) - varTempo);
-      if( (tmp > 0) && (tmp < ACTUALIZATION_RATE))
+      int tmp = (int) ((UPDATE_RATE-1) - varTempo);
+      if( (tmp > 0) && (tmp < UPDATE_RATE))
       {
          SDL_Delay(tmp);
       }
@@ -2658,7 +2658,7 @@ void engine::renderScene()
       for(aux=0;aux < PCs->getTotal();aux++)
       {
          /* Update the model */
-         per->update(WALK_ACTUALIZATION);
+         per->update(WALK_UPDATE);
 
          /* Load the Model */
          per->loadToGraphicMemory();
@@ -2742,7 +2742,7 @@ void engine::renderScene()
       for(aux=0;aux < NPCs->getTotal();aux++)
       {
          /* Update the model */
-         per->update(WALK_ACTUALIZATION);
+         per->update(WALK_UPDATE);
 
          /* Load the Model */
          per->loadToGraphicMemory();

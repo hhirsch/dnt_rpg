@@ -78,7 +78,7 @@ void npcs::drawTemporary()
 {
    if(actualNpc)
    {
-      actualNpc->update(WALK_ACTUALIZATION/*seconds*/);   
+      actualNpc->update(WALK_UPDATE/*seconds*/);   
       actualNpc->calculateBoundingBox();
       glPushMatrix();
          glTranslatef(actualNpc->xPosition, 

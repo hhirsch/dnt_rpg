@@ -2343,7 +2343,7 @@ void Map::createSplats()
      alphaCoordZ += ALPHA_TEXTURE_INC;
   }
 
-   actualizeAlphaTextures();
+   updateAlphaTextures();
    defineCommonTexture();
 }
 
@@ -2438,9 +2438,9 @@ void Map::createAlpha(int x1, int z1)
 }
 
 /********************************************************************
- *                      actualizeAlphaTextures                      *
+ *                        updateAlphaTextures                       *
  ********************************************************************/
-void Map::actualizeAlphaTextures()
+void Map::updateAlphaTextures()
 {
    int aux = 0;
    texture* tex = textures;

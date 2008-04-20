@@ -201,7 +201,7 @@ void editor::openMap()
             glFogf(GL_FOG_DENSITY, 0.0010);
             glHint(GL_FOG_HINT, GL_DONT_CARE);
             glFogf(GL_FOG_START, 200);
-            glFogf(GL_FOG_END, HALFFARVIEW+200);
+            glFogf(GL_FOG_END, (FARVIEW / 2.0) + 200);
          }
       }
       gui->setFog(&map->fog);
@@ -429,7 +429,7 @@ void editor::newMap()
       glFogf(GL_FOG_DENSITY, 0.0010);
       glHint(GL_FOG_HINT, GL_DONT_CARE);
       glFogf(GL_FOG_START, 200);
-      glFogf(GL_FOG_END, HALFFARVIEW+200);
+      glFogf(GL_FOG_END, (FARVIEW / 2.0)+200);
    }
    gui->setFog(&map->fog); 
 }
@@ -748,7 +748,7 @@ void editor::draw()
       for(aux=0;aux < NPCs->getTotal();aux++)
       {
          /* Actualize NPCs */
-         per->update(WALK_ACTUALIZATION/*seconds*/);   
+         per->update(WALK_UPDATE/*seconds*/);   
          per->calculateBoundingBox();
          /* Verify Bounding Box */
          x[0] = per->min[0];
@@ -1022,7 +1022,7 @@ void editor::run()
    
    while(!quit)
    {
-      if(SDL_GetTicks() - time >= ACTUALIZATION_RATE)
+      if(SDL_GetTicks() - time >= UPDATE_RATE)
       {
          time = SDL_GetTicks();
 
@@ -1034,8 +1034,8 @@ void editor::run()
       else
       {
          int t = SDL_GetTicks();
-         if(ACTUALIZATION_RATE - (t - time) > 5)
-            SDL_Delay(ACTUALIZATION_RATE - (t - time));
+         if(UPDATE_RATE - (t - time) > 5)
+            SDL_Delay(UPDATE_RATE - (t - time));
       }
    }
 

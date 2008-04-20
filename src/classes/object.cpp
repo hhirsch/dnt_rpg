@@ -254,7 +254,7 @@ void object::draw(float x, float z, GLfloat dist, float orientation,
       {
          glScalef(1.0, -1.0, 1.0);
       }
-      model3D->update(WALK_ACTUALIZATION);
+      model3D->update(WALK_UPDATE);
       model3D->draw();
    glPopMatrix();
    glDisable(GL_COLOR_MATERIAL);

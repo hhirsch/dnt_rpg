@@ -35,27 +35,24 @@
  ********************************************************************/
 #define REFRESH_RATE 200.0  /**< Keyboard Refresh Rate for the Engine */
 #define NORMAL_FPS 35       /**< Minimun FPS to the engine runs smooth */
-#define ACTUALIZATION_RATE (1000/NORMAL_FPS) /**< Actualization Rate in ms */
-#define WALK_ACTUALIZATION (1.0/NORMAL_FPS)  /**< Walk Actualization */
+#define UPDATE_RATE (1000 / NORMAL_FPS) /**< Update Rate in ms */
+#define WALK_UPDATE (1.0 / NORMAL_FPS)  /**< Walk Update Rate */
 
 /********************************************************************
  *                Character's moviments constants                   *
  ********************************************************************/
-#define TURN_VALUE (WALK_ACTUALIZATION * 125.0) /**< The turn velocity */
+#define TURN_VALUE (WALK_UPDATE * 125.0) /**< The turn velocity */
 #define WALK_PER_MOVE_ACTION  60 /**< Distance that can be walked per move */
 
 /********************************************************************
  *                      Camera's constants                          *
  ********************************************************************/
 
-#define DELTA_CAMERA  WALK_ACTUALIZATION * 75 /**<  The camera velocity */
+#define DELTA_CAMERA  WALK_UPDATE * 75  /**<  The camera velocity */
 #define ZOOM_MAX          80            /**< Max value of Zoom */
 #define ZOOM_MIN         500            /**< Min value of Zoom */
 #define FARVIEW         4096            /**< FarView constant */
 #define INDOOR_FARVIEW   768            /**< Indoor FarView */
-
-#define HALFFARVIEW    FARVIEW / 2.0  /**< Half FarView Value */
-#define HALFFARVIEW2   HALFFARVIEW * HALFFARVIEW /**< Square Half Farview */
 
 /********************************************************************
  *                      Shadow's constants                          *
@@ -96,7 +93,7 @@
 	#define M_PI 3.1415926     /**< Usually on math.h, but not allways */
 #endif
 
-#define TWOPI  2 * M_PI     /**< 2* PI definition */
+#define TWOPI 2 * M_PI      /**< 2* PI definition */
 #define PI     M_PI         /**< PI definition */
 #define PID4   M_PI / 4.0   /**< PI / 4 definition */ 
 #define PID2   M_PI / 2.0   /**< PI / 2 definition */
