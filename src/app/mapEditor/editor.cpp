@@ -534,7 +534,7 @@ int editor::insertTexture(string textureFile)
    if(!img)
    {
       gui->showMessage("Error opening texture!");
-      return(-1);
+      return(0);
    }
 
    Uint8 R,G,B,tR,tG,tB;
