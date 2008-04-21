@@ -21,19 +21,16 @@ software and hardware. They are:
 
    Software:
       Cal3D     - http://home.gna.org/cal3d/
-      LibVorbis - http://www.vorbis.com/
+      OpenAL    - www.openal.org
       OpenGL    
       SDL       - www.libsdl.org
       SDL_image - www.libsdl.org/projects/SDL_image/
       SDL_ttf   - www.libsdl.org/projects/SDL_ttf/
-      OpenAL    - www.openal.org
+      LibVorbis - http://www.vorbis.com/
+
    
    Hardware:
-      Video  Card  with  3D  aceleration, OpenGL  compatible 
-(minimun of a NVidia 6200 - Recommended: Nvidia 6800).
-
-      We don't recommend to use DNT on Window$: the renderer
-is slower and the quality is worst. 
+      Video  Card  with  3D  aceleration, OpenGL  compatible.
 
 ==============================================================
 |                      II - Instalation                      |
@@ -52,6 +49,9 @@ go to the directory dccnitghtmare, run ./configure , run
    farrer@snamabeka:~/dccnitghtmare/$ ./configure
    farrer@anamabeka:~/dccnitghtmare/$ make
    farrer@anamabeka:~/dccnitghtmare/$ sudo make install
+
+   NOTE: the 'make install' isn't necessary: you can run the game
+         at its local folder.
 
    b) WINDOWS (We hope you're not using it on Ruindow$).
 
@@ -126,6 +126,7 @@ F1     =  Display Informations
 m      =  Open MiniMap window
 n      =  Open ShortCut window
 i      =  Open Inventory window
+c      =  Open Character Window
 
    To  end  the  game,  simple  press  ESC key,  and  click on 
 button exit.

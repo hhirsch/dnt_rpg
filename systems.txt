@@ -8,13 +8,32 @@ dnt@dnteam.org and it'll be here.
 ======================================================
 |         FreeBSD 6.2         |          x86         |
 |      Linux Debian 4.0       |       x86,x86_64     |
-|        Linux Gentoo         |       x86,amd64      |
+|        Linux Gentoo         |       x86,x86_64     |
 |      Linux Mandriva 7       |          x86         |
-|     Linux OpenSuse 10.2     |          x86         |
+|     Linux OpenSuse 10.X     |          x86         |
 |     Linux Slackware 12      |          x86         |
 |       Linux Ubuntu 7        |          x86         |
 |         Windows XP          |       x86,x86_64     |
 ======================================================
+
+   The Video Cards described bellow were tested with DNT. If you know of any
+card not described here, just email us.
+
+=================================================================
+|         Video Card          |             Result              |
+=================================================================
+|         Intel i915          | The game runs, without particle |
+|                             | effects (card doesn't support   |
+|                             | GL_ARB_point_sprite extensions) | 
+=================================================================
+|     NVIDIA GeForce 6200     | The game runs perfectly         |
+=================================================================
+|   NVIDIA GeForce 6800 GS    | The game runs perfectly         |
+=================================================================
+|   NVIDIA GeForce 8800 GTS   | The game runs perfectly         |
+=================================================================
+|   NVIDIA GeForce 8800 GT    | The game runs perfectly         |
+=================================================================
 
 =========================
 |     DccNiTghtmare     |

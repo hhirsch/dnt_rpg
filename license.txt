@@ -1,20 +1,20 @@
 License
 
-   DccNiTghtmare is provided on an "as is" basis, without warranty of any
-kind.  Use at your own risk! Under no circumstances shall the author(s) or
-contributor(s) be liable for damages resulting directly or indirectly from
-the use or non-use of DccNiTghtmare and derivates. 
+  DccNiTghtmare is provided on an "as is" basis, without warranty of any kind.
+Use at your own risk! Under no circumstances shall the author(s) or
+contributor(s) be liable for damages resulting directly or indirectly from the
+use or non-use of DccNiTghtmare and derivates. 
 
-   The DccNiTghtmare's source code is all in the Public Domain, relinquishing
-all copyrights. Everyone is free to use, modify, republish, sell or give
-away it without prior consent from anybody.
+  The DccNiTghtmare's source code is all in the Public Domain, relinquishing all
+copyrights. Everyone is free to use, modify, republish, sell or give away it
+without prior consent from anybody.
 
-   All DccNiTghtmare's data files that were made by the DNTeam are also at
-Public Domain. Each data file that weren't made by the DNTeam is have a 
-license.txt file at its .blend directory, usually at "blend/contrib/", 
-with autor's names and license.
+  All DccNiTghtmare's data files that were made by the DNTeam are also at Public
+Domain. Each data file that wasn't made by the DNTeam has a license.txt file
+at its .blend directory, usually at "blend/contrib/", with autor's names and
+license. All models are free, with licenses compatible with GNU General Public
+License (GPL).
    
-   Just as a reminder, if the .blend file is described there, 
-the correspondents cal3D files are at the same license of the blend that 
-originated them.
+  Just as a reminder, the correspondents cal3D files are at the same license of
+the blend that originated them.
 
