@@ -1,4 +1,4 @@
-11
+13
 Barrel models/objetos/geral/barrel/barrel.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Cap models/objetos/geral/cap/cap.dcc
@@ -6,7 +6,9 @@ Colarinho models/objetos/geral/colarinho_e_oculos/colarinho_e_oculos.dcc
 Computer models/objetos/geral/computador/computador.dcc
 Et models/objetos/geral/et/et.dcc
 Exclamation models/objetos/geral/exclamacao/exclamacao.dcc
+Fridge models/objetos/geral/fridge/fridge.dcc
 Guitar models/objetos/geral/guitarra/guitarra.dcc
+Letto models/objetos/geral/letto/letto.dcc
 Notebook models/objetos/geral/notebook/notebook.dcc
 RefMachine models/objetos/geral/refmachine/refmachine.dcc
 Stop_Sign models/objetos/geral/placa_pare/placa_pare.dcc
