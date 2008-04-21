@@ -56,7 +56,7 @@ Square::~Square()
  *                           addObject                              *
  ********************************************************************/
 objSquare* Square::addObject(bool draw, int squareX, int squareZ, 
-                             int orientation, float x, float z, 
+                             int orientation, float x, float y, float z, 
                              bool colision, object* obj)
 {
    objSquare* n = new objSquare;
@@ -66,6 +66,7 @@ objSquare* Square::addObject(bool draw, int squareX, int squareZ,
    n->squareZ = squareZ;
    n->orientation = orientation;
    n->x = x;
+   n->y = y;
    n->z = z;
    n->colision = colision;
    n->obj = obj;
@@ -403,25 +404,25 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
 /******************************************************************
  *                          insertObject                          *
  ******************************************************************/
-void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
+void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
                         object* obj, bool collision)
 {
    int qx = (int)xReal / squareSize();
    int qz = (int)zReal / squareSize();
-   insertObject(xReal, zReal, orObj, obj, qx, qz, collision);
+   insertObject(xReal, yReal, zReal, orObj, obj, qx, qz, collision);
 }
 
 /******************************************************************
  *                          insertObject                          *
  ******************************************************************/
-void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
+void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
                        object* obj, int qx, int qz, bool collision)
 {
    Square* saux = relativeSquare(qx,qz);
    int ob=0;
    if(saux)
    {
-      saux->addObject(true, qx, qz, orObj, xReal, zReal, collision, obj);
+      saux->addObject(true, qx, qz, orObj, xReal, yReal, zReal, collision, obj);
       boundingBox  bounds = obj->getBoundingBox();
 
       float X[2], Z[2];
@@ -472,7 +473,8 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
            if((qaux) && (qaux != saux))
            {
               ob =0;
-              qaux->addObject(false,qx,qz,orObj,xReal,zReal,collision,obj);
+              qaux->addObject(false,qx,qz,orObj,xReal,yReal,zReal,
+                              collision,obj);
            }
         }
      }
@@ -482,7 +484,7 @@ void Map::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
      /* If is a scenery one, the render is controlled by model3d, so..  */
      if(obj->isStaticScenery())
      {
-        obj->addRenderPosition(xReal, getHeight(xReal, zReal, saux), zReal, orObj);
+        obj->addRenderPosition(xReal, yReal, zReal, orObj);
      }
    }
    else
@@ -962,8 +964,6 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
    float ssize = squareSize();
    float hsize = squareSize() / 2.0;
 
-   float height = 0;
-
    for(Xaux = 0; Xaux < x; Xaux++)
    for(Zaux = 0; Zaux < z; Zaux++)
    {
@@ -978,7 +978,6 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
           if( (obj != NULL) && (obj->draw) && 
               (!obj->obj->isStaticScenery()))
           {
-            height = getHeight(obj->x,obj->z);
             /* Do the Rotation of the Bounding Box */
             bound = obj->obj->getBoundingBox();
             X[0] = bound.x1;
@@ -992,13 +991,13 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
             if(inverted)
             {
                rotTransBoundingBox(obj->orientation, X, Z, obj->x, 
-                                   height-bound.y2, height-bound.y1, 
+                                   obj->y - bound.y2, obj->y - bound.y1, 
                                    obj->z, min, max);
             }
             else
             {
                rotTransBoundingBox(obj->orientation, X, Z, obj->x, 
-                                   height+bound.y1, height+bound.y2, 
+                                   obj->y + bound.y1, obj->y + bound.y2, 
                                    obj->z, min, max );
             }
 
@@ -1007,7 +1006,7 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
                            matriz))
             {
                glPushMatrix();
-                glTranslatef(0.0, height + obj->obj->yPosition, 0.0);
+                glTranslatef(0.0, obj->y + obj->obj->yPosition, 0.0);
                 obj->obj->draw(obj->x, obj->z, distancia, obj->orientation, 
                                inverted);
                glPopMatrix();
@@ -1702,13 +1701,13 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                case 'o': /* Insert Object on Square */
                {
                   int des, quadX, quadZ, oOri, oPis;
-                  float oX, oZ;
+                  float oX, oY, oZ;
                   objSquare* oObj;
                   fgets(buffer, sizeof(buffer), arq);
-                  sscanf(buffer,"%s %d:%d,%d:%f,%f:%d:%d",nome,
-                         &des, &quadX, &quadZ, &oX, &oZ, &oOri, &oPis);
+                  sscanf(buffer,"%s %d:%d,%d:%f,%f,%f:%d:%d",nome,
+                         &des, &quadX, &quadZ, &oX, &oY, &oZ, &oOri, &oPis);
                   oObj = MapSquares[posX][posZ].addObject(des==1, quadX,quadZ,
-                                                          oOri,oX,oZ,oPis!=1,
+                                                          oOri,oX,oY,oZ,oPis!=1,
                                                     objects->getObject(nome));
                   if(oObj->draw)
                   {
@@ -2118,10 +2117,11 @@ int Map::save(string arquivo)
             {
                x2 = (int)obj->x / squareSize();
                z2 = (int)obj->z / squareSize();
-               fprintf(arq,"uo %s %d:%d,%d:%f,%f:%d:%d\n",
+               fprintf(arq,"uo %s %d:%d,%d:%f,%f,%f:%d:%d\n",
                        obj->obj->getFileName().c_str(),
                        obj->draw, x2 + 1, z2 + 1,
-                       obj->x, obj->z, obj->orientation, !obj->colision);
+                       obj->x, obj->y, obj->z, obj->orientation, 
+                       !obj->colision);
             }
             obj = obj->next;
           }

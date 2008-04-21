@@ -899,7 +899,7 @@ void editor::doEditorIO()
                                                          *wTypes);
          objectEditor->defineActualObject(obj, objFile);
       }
-      objectEditor->verifyAction(xReal, yReal, zReal, mButton, mouseX, mouseY,
+      objectEditor->verifyAction(keys, xReal, yReal, zReal, mButton, mouseX, mouseY,
                                  gui->getTool(), proj, modl, viewPort);
    }
    else if( (gui->getState() == GUI_IO_STATE_PARTICLES) && (mapOpened))

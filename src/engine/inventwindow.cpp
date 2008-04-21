@@ -541,7 +541,8 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                      inventories->removeFromInventory(objX,objY, 
                                                       currentInventory);
                      /* Add it to the map */
-                     actualMap->insertObject(X,Z,0,activeObject,0);
+                     actualMap->insertObject(X, actualMap->getHeight(X,Z), Z,
+                                             0, activeObject, 0);
                      modifState->mapObjectAddAction(MODSTATE_ACTION_OBJECT_ADD,
                                                     activeObject->getFileName(),
                                                     actualMap->getFileName(),

@@ -112,6 +112,7 @@ class objSquare
       int squareZ;         /**< The square Z coordinate of the object */
       int orientation;     /**< The orientation angle of the object */
       float x;             /**< The X position of the object on the map */
+      float y;             /**< The Y position of the object on the map */
       float z;             /**< The Z position of the object on the map */
       int status;          /**< The status of the object */
       bool colision;       /**< If the collision is enable to this object */
@@ -147,7 +148,8 @@ class Square
 
       /*! Add object to the square */
       objSquare* addObject(bool draw, int squareX, int squareZ, int orientation,
-                           float x, float z, bool colision, object* obj);
+                           float x, float y, float z, bool colision,
+                           object* obj);
 
       /*! Remove Object from the square */
       void removeObject(objSquare* obj);
@@ -321,6 +323,7 @@ class Map
        **************************************************************
        * Insert Object on Map
        * \param xReal -> xPosition to insert
+       * \param yReal -> yPosition to insert
        * \param zReal -> zPosition to insert
        * \param orObj -> object orientation value
        * \param obj -> pointer to mapObject
@@ -328,9 +331,9 @@ class Map
        * \param qz -> square internal Z (in squares)
        * \param collision -> true if has collision with object, false otherwise
        **************************************************************/
-      void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
+      void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
                         object* obj, int qx, int qz, bool collision);
-      void insertObject(GLfloat xReal, GLfloat zReal, int orObj,
+      void insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
                         object* obj, bool collision);
 
       /*!

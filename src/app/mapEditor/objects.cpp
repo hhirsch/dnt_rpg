@@ -19,6 +19,7 @@ objects::objects(Map* acMap, modelList* usedModels)
    actualObstacle = NULL;
    objectFile = "";
    obstacleX = 0;
+   obstacleY = 0;
    obstacleZ = 0;
    obstacleOrientation = 0;
 }
@@ -35,7 +36,8 @@ objects::~objects()
 /******************************************************
  *                      verifyAction                  *
  ******************************************************/
-void objects::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
+void objects::verifyAction(Uint8* keys, 
+                           GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                            Uint8 mButton, int mouseXw, int mouseYw,
                            int tool, GLdouble proj[16], 
                            GLdouble modl[16], GLint viewPort[4])
@@ -53,6 +55,7 @@ void objects::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
          obstacleZ = mouseZ;
       }
       
+      /* Insert it on map */
       if(mButton & SDL_BUTTON(1))
       {
          insertObject(mouseX, mouseZ, obstacleOrientation, actualMap, 
@@ -67,6 +70,8 @@ void objects::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
             mButton = SDL_GetMouseState(&x,&y);
          }
       }
+
+      /* Rotate Left/Right object */
       else if(mButton & SDL_BUTTON(2))
       {
          obstacleOrientation += 1;
@@ -74,6 +79,28 @@ void objects::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       else if(mButton & SDL_BUTTON(3))
       {
          obstacleOrientation -= 1;
+      }
+
+      /* Up/Down Object */
+      if(keys[SDLK_w])
+      {
+         obstacleY += 0.1;
+      }
+      if(keys[SDLK_s])
+      {
+         obstacleY -= 0.1;
+      }
+      if(keys[SDLK_t])
+      {
+         obstacleY += 1.0;
+      }
+      if(keys[SDLK_g])
+      {
+         obstacleY -= 1.0;
+      }
+      if(keys[SDLK_0])
+      {
+         obstacleY = 0;
       }
    }
    else
@@ -92,7 +119,9 @@ void objects::drawTemporary()
    if( (state == OBJECTS_STATE_ADD) && (actualObstacle != NULL))
    {
       glPushMatrix();
-      glTranslatef(0.0, actualMap->getHeight(obstacleX, obstacleZ), 0.0);
+      glTranslatef(0.0, 
+                   obstacleY + actualMap->getHeight(obstacleX, obstacleZ), 
+                   0.0);
       actualObstacle->draw(obstacleX, obstacleZ, 0, obstacleOrientation, false);
       glPopMatrix();
    }
@@ -105,7 +134,9 @@ void objects::insertObject(GLfloat xReal, GLfloat zReal, int orObj,
                           Map* acMap, mapObject* obj, int qx, int qz)
 {
    //TODO, mark with no collision some pickable objects
-   acMap->insertObject(xReal, zReal, orObj, obj, qx, qz, 1); 
+   acMap->insertObject(xReal, 
+                       obstacleY + actualMap->getHeight(xReal, zReal), 
+                       zReal, orObj, obj, qx, qz, 1); 
 }
 
 /******************************************************************

@@ -373,7 +373,8 @@ void modState::doMapModifications(Map* actualMap)
             object* obj = actualMap->getObject(tmpMobj->getTarget());
             if(obj != NULL)
             {
-               actualMap->insertObject(x,z, 0, obj, 0);
+               actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
+                                       0, obj, 0);
             }
             else
             {
