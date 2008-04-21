@@ -2,7 +2,7 @@
 #include "../engine/collision.h"
 #include <math.h>
 
-#define SEARCH_LIMIT  10000  /**< Max Nodes the aStar will search */
+#define SEARCH_LIMIT   1000  /**< Max Nodes the aStar will search */
 #define SEARCH_INTERVAL 200  /**< Interval of Nodes when aStar will sleep */
 #define MIN_CALL        200  /**< Minimun time interval to call search again */
 
