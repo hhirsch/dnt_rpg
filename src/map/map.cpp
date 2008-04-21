@@ -1706,6 +1706,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s %d:%d,%d:%f,%f,%f:%d:%d",nome,
                          &des, &quadX, &quadZ, &oX, &oY, &oZ, &oOri, &oPis);
+
                   oObj = MapSquares[posX][posZ].addObject(des==1, quadX,quadZ,
                                                           oOri,oX,oY,oZ,oPis!=1,
                                                     objects->getObject(nome));
@@ -1714,9 +1715,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      oObj->obj->incUsedFlag();
                      if(oObj->obj->isStaticScenery())
                      {
-                        oObj->obj->addRenderPosition(oX, getHeight(oX,oZ,
-                                                       &MapSquares[posX][posZ]),
-                                                     oZ, oOri);
+                        oObj->obj->addRenderPosition(oX, oY, oZ, oOri);
                      }
                   }
                   break;
