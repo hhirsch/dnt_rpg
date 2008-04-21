@@ -3,3 +3,4 @@ Site: (http://www.katorlegaz.com/3d_models/transport_sidewalks/0206/index.php)
 License: Creative Commons Attribution 3.0 United States License
 
 Modifications on model done by DNTeam.
+Textures done by DNTeam.
