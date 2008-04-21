@@ -1,4 +1,4 @@
-14
+16
 Barrel models/objetos/geral/barrel/barrel.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Cap models/objetos/geral/cap/cap.dcc
@@ -14,3 +14,4 @@ Letto models/objetos/geral/letto/letto.dcc
 Notebook models/objetos/geral/notebook/notebook.dcc
 RefMachine models/objetos/geral/refmachine/refmachine.dcc
 Stop_Sign models/objetos/geral/placa_pare/placa_pare.dcc
+Wardrobe models/objetos/geral/wardrobe/wardrobe.dcc
