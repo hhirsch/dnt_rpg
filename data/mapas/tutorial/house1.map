@@ -194,4 +194,4 @@ uo models/objetos/geral/fridge/fridge.dcc 1:5,8:279.388062,0.000000,493.749054:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
 uo models/objetos/icex/lixo/lixo.dcc 1:6,8:368.803131,0.000000,496.931427:0:0
-i 192.000000,256.000000
+i 212.000000,422.000000
