@@ -1,6 +1,7 @@
 T 6X8
 # Made by DccNiTghtmare's MapEditor, v0.2
 Outdoor: 0
+o models/objetos/geral/pillow/pillow.dcc
 o models/objetos/geral/notebook/notebook.dcc
 o models/objetos/geral/letto/letto.dcc
 o models/objetos/icex/lixo/lixo.dcc
@@ -11,6 +12,7 @@ o models/objetos/geral/dinner_table/dinner_table.dcc
 o models/objetos/geral/dinner_chair/dinner_chair.dcc
 o models/objetos/banho/privada/privada.dcc
 o models/objetos/geral/wardrobe/wardrobe.dcc
+o models/objetos/geral/sofa/sofa.dcc
 t texturas/floor_indoor/wood5.png texturas/floor_indoor/wood5.png 94 47 31
 t texturas/floor_indoor/steel3.png texturas/floor_indoor/steel3.png 163 158 163
 t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
@@ -97,6 +99,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
+uo models/objetos/geral/sofa/sofa.dcc 1:6,2:355.099823,0.000000,127.699722:89:0
 #Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
@@ -109,8 +112,16 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
+uo models/objetos/geral/sofa/sofa.dcc 1:5,3:317.456543,0.000000,172.117813:0:0
+uo models/objetos/geral/pillow/pillow.dcc 1:5,3:304.600220,11.700008,175.096085:212:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
+uo models/objetos/geral/pillow/pillow.dcc 1:6,3:357.498627,0.000000,186.759644:-133:0
+uo models/objetos/geral/pillow/pillow.dcc 1:6,3:367.406097,0.000000,177.163132:-38:0
+uo models/objetos/geral/pillow/pillow.dcc 1:6,3:368.486572,0.000000,186.981873:0:0
+uo models/objetos/geral/sofa/sofa.dcc 0:5,3:317.456543,0.000000,172.117813:0:0
+uo models/objetos/geral/sofa/sofa.dcc 0:6,2:355.099823,0.000000,127.699722:89:0
+uo models/objetos/geral/pillow/pillow.dcc 1:6,3:330.517761,12.600012,173.340698:-13:0
 #Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
