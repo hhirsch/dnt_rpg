@@ -1,4 +1,4 @@
-16
+18
 Barrel models/objetos/geral/barrel/barrel.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Cap models/objetos/geral/cap/cap.dcc
@@ -12,6 +12,8 @@ Fridge models/objetos/geral/fridge/fridge.dcc
 Guitar models/objetos/geral/guitarra/guitarra.dcc
 Letto models/objetos/geral/letto/letto.dcc
 Notebook models/objetos/geral/notebook/notebook.dcc
+Pillow models/objetos/geral/pillow/pillow.dcc
 RefMachine models/objetos/geral/refmachine/refmachine.dcc
+Sofa models/objetos/geral/sofa/sofa.dcc
 Stop_Sign models/objetos/geral/placa_pare/placa_pare.dcc
 Wardrobe models/objetos/geral/wardrobe/wardrobe.dcc
