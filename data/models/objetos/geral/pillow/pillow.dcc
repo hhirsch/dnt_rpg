@@ -1,0 +1,13 @@
+name = Pillow
+cal3d = models/objetos/geral/pillow/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 10
+fortitude = 7
+reflex = -1
+will = 2
+displacement = 0
+armature_class = 12
+size_modifier = 0
+cost = 20
+static_scenery = 1
