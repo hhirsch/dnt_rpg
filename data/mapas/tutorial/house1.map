@@ -80,10 +80,10 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uc 252.961548,1.257226,272.297028,8.570818:tutorial/mapas/tyrol.map
+uc 252.961548,1.257226,272.297028,8.570818:mapas/tutorial/tyrol.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uc 252.961548,1.257226,272.297028,8.570818:tutorial/mapas/tyrol.map
+uc 252.961548,1.257226,272.297028,8.570818:mapas/tutorial/tyrol.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 #Z: 1
