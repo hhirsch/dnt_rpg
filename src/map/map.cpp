@@ -903,21 +903,21 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
               glVertex3f(maux->x1,0,maux->z2);
            /* Left Face */
               glNormal3i(-1,0,0);
-              glTexCoord2f(Y,0);
+              glTexCoord2f(0,Y);
               glVertex3f(maux->x1,altura,maux->z1);
-              glTexCoord2f(Y,Z);
+              glTexCoord2f(Z,Y);
               glVertex3f(maux->x1,altura,maux->z2);
-              glTexCoord2f(0,Z);
+              glTexCoord2f(Z,0);
               glVertex3f(maux->x1,0,maux->z2);
               glTexCoord2f(0,0);
               glVertex3f(maux->x1,0,maux->z1);
            /* Right Face */
               glNormal3i(1,0,0);
-              glTexCoord2f(Y,0);
+              glTexCoord2f(0,Y);
               glVertex3f(maux->x2,altura,maux->z1);
-              glTexCoord2f(Y,Z);
+              glTexCoord2f(Z,Y);
               glVertex3f(maux->x2,altura,maux->z2);
-              glTexCoord2f(0,Z);
+              glTexCoord2f(Z,0);
               glVertex3f(maux->x2,0,maux->z2);
               glTexCoord2f(0,0);
               glVertex3f(maux->x2,0,maux->z1);
