@@ -6,7 +6,11 @@ LDFLAGS = @LDFLAGS@
 LIBS= @LIBS@
 EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
-OBJSPP = button.o color.o cxsel.o draw.o farso.o dntfont.o guilist.o healthBar.o interface.o listtext.o menu.o messages.o mouse.o picture.o rolbar.o seltext.o tabbutton.o textbar.o textbox.o window.o
+OBJSPP = button.o color.o cxsel.o dntfont.o draw.o \
+         farso.o filesel.o guilist.o healthBar.o \
+			interface.o listtext.o menu.o messages.o \
+			mouse.o picture.o rolbar.o seltext.o \
+			tabbutton.o textbar.o textbox.o window.o
 EFLAGSGL = -L/usr/X11R6/lib -lGLU -lGL -lSDL -lSDL_image
 PROGFLAGs = 
 BIN = ../../bin/
@@ -43,6 +47,11 @@ draw.o: draw.h draw.cpp
 farso.o: farso.h farso.cpp draw.h button.h color.h cxsel.h window.h interface.h dntfont.h healthBar.h textbox.h rolbar.h seltext.h textbar.h guiobject.h guilist.h picture.h menu.h mouse.h tabbutton.h messages.h
 	@printf "Making farso.o... "
 	@$(CC) $(CFLAGS) farso.cpp -o farso.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+filesel.o: filesel.h filesel.cpp color.h draw.h guiobject.h textbar.h button.h listtext.h
+	@printf "Making filesel.o... "
+	@$(CC) $(CFLAGS) filesel.cpp -o filesel.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 guilist.o: guilist.h guilist.cpp guiobject.h button.h cxsel.h picture.h textbox.h seltext.h tabbutton.h textbar.h rolbar.h listtext.h
