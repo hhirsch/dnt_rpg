@@ -12,6 +12,7 @@ using namespace std;
 #include "mouse.h"
 #include "listtext.h"
 #include "textbar.h"
+#include "textbox.h"
 
 
 /*! The fileSel class implements a file seector/navigator (usefull for
@@ -23,11 +24,19 @@ class fileSel: public guiObject
       /*! Constructor
        * \param x -> x coordinate
        * \param y -> y coordinate
-       * \param dir -> directory to display */
-      fileSel(int x, int y, string dir) ;
+       * \param dir -> directory to display
+       * \param list -> pointer to the GUI objects list */
+      fileSel(int x, int y, string dir, void* list);
 
       /*! Destructor */
       ~fileSel();
+
+      /*! Verify if some event is related to the listText
+       * \param type -> Type of the occurred event
+       * \param object -> object of the event 
+       * \return -> true if event is related (and treated) by the listText */
+      bool eventGot(int type, guiObject* object);
+
 
    protected:
 
@@ -37,10 +46,12 @@ class fileSel: public guiObject
 
       button* cancelButton;    /**< The cancel Button */
       button* acceptButton;    /**< The accept Button */
-      textBar* fileText;       /**< The current file name text */
       listText* textFiles;     /**< The files selector (as text) */
+      textBox* textCurFile;    /**< The current file display */
 
       string curDir;           /**< Current Opened directory */
+
+      void* intList;           /**< Internal Gui List used */
 
 };
 
