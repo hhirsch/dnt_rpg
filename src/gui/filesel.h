@@ -14,6 +14,11 @@ using namespace std;
 #include "textbar.h"
 #include "textbox.h"
 
+#define FILE_SEL_ACTION_NONE    0
+#define FILE_SEL_ACTION_SELECT  1
+#define FILE_SEL_ACTION_ACCEPT  2
+#define FILE_SEL_ACTION_CANCEL  3
+
 
 /*! The fileSel class implements a file seector/navigator (usefull for
  *  open/close dialogs) */
@@ -41,6 +46,10 @@ class fileSel: public guiObject
        * \return -> true if event is related (and treated) by the listText */
       bool eventGot(int type, guiObject* object);
 
+      /*! Get last action occurred on the file selector
+       * \return -> last action occurred */
+      int getLastAction();
+
 
    protected:
 
@@ -56,6 +65,8 @@ class fileSel: public guiObject
       string curDir;           /**< Current Opened directory */
 
       void* intList;           /**< Internal Gui List used */
+
+      int lastAction;          /**< Last action occurred  */
 
 };
 

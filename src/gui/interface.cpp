@@ -68,17 +68,39 @@ guiObject* interface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
       if(obj->type == GUI_LIST_TEXT)
       {
          listText* lt = (listText*)obj;
-         if(lt->eventGot(PRESSED_TAB_BUTTON, actObj))
+         if(lt->eventGot(eventInfo, actObj))
          {
             ljan->getActiveWindow()->draw(0,0);
             eventInfo = SELECTED_LIST_TEXT;
             focus = FOCUS_GAME;
+            actObj = obj;
             return(lt);
          }
       }
       /* Verify GUI_FILE_SEL */
       else if(obj->type == GUI_FILE_SEL)
       {
+         fileSel* fs = (fileSel*)obj;
+         if(fs->eventGot(eventInfo, actObj))
+         {
+            actObj = obj;
+            switch(fs->getLastAction())
+            {
+               case FILE_SEL_ACTION_ACCEPT:
+                  eventInfo = FILE_SEL_ACCEPT;
+               break;
+               case FILE_SEL_ACTION_CANCEL:
+                  eventInfo = FILE_SEL_CANCEL;
+               break;
+               case FILE_SEL_ACTION_SELECT:
+                  eventInfo = FILE_SEL_CHANGED;
+               break;
+               default:
+                  eventInfo = NOTHING;
+               break;
+            }
+            focus = FOCUS_GAME;
+         }
       }
       obj = obj->next;
    }

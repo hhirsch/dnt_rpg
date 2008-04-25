@@ -17,6 +17,7 @@ fileSel::fileSel(int x, int y, string dir, void* list)
    y2 = y+155;
    type = GUI_FILE_SEL;
    curDir = dir;
+   lastAction = FILE_SEL_ACTION_NONE;
 
    intList = list;
 
@@ -137,32 +138,45 @@ void fileSel::changeCurDir(string newDir)
    }
 }
 
+/***********************************************************************
+ *                            getLastAction                            *
+ ***********************************************************************/
+int fileSel::getLastAction()
+{
+   return(lastAction);
+}
 
 /***********************************************************************
- *                                eventGot                             *
+ *                              eventGot                               *
  ***********************************************************************/
 bool fileSel::eventGot(int type, guiObject* object)
 {
+   lastAction = FILE_SEL_ACTION_NONE;
    switch(type)
    { 
       case PRESSED_BUTTON:
       {
          if(object == acceptButton)
          {
-            //TODO done!
+            lastAction = FILE_SEL_ACTION_ACCEPT;
+            return(true);
          }
          else if(object == cancelButton)
          {
-            //TODO cancel!
+            lastAction = FILE_SEL_ACTION_CANCEL;
+            return(true);
          }
       }
       break;
       case SELECTED_LIST_TEXT:
       {
+         //TODO
          //if(is dir)
          /* Change the directory to the new one */
          //else if(is file)
          /* Change the selected file */
+         lastAction = FILE_SEL_ACTION_SELECT;
+         return(true);
       }
       break;
    }

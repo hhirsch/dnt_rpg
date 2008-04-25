@@ -33,7 +33,9 @@
 #define SELECTED_SEL_TEXT   15
 #define SELECTED_LIST_TEXT  16
 #define ON_FOCUS_TAB_BUTTON 17
-#define SELECTED_FILE       18
+#define FILE_SEL_ACCEPT     18
+#define FILE_SEL_CANCEL     19
+#define FILE_SEL_CHANGED    20
 
 /********************************************************************
  *                       Focus's constants                          *
