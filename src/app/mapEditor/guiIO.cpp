@@ -70,7 +70,7 @@ waterWindow* guiIO::getWaterWindow()
  ****************************************************************/
 void guiIO::openFileWindow()
 {
-   fileWindow = gui->insertWindow(200,200,460,385,"File");
+   fileWindow = gui->insertWindow(200,100,460,285,"File");
    fileSelector = fileWindow->getObjectsList()->insertFileSel(5,18,
                                                               "../data/mapas/");
    fileSelector->setFilter(".map");
