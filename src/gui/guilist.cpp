@@ -106,6 +106,12 @@ void guiList::removeObject(guiObject *obj)
          delete(lt);
          break;
       }
+      case GUI_FILE_SEL:
+      {
+         fileSel* fs = (fileSel*)obj;
+         delete(fs);
+         break;
+      }
       default: 
       {
         delete(obj);
@@ -241,6 +247,16 @@ listText* guiList::insertListText(int xa,int ya,int xb,int yb)
    novo = new listText(xa,ya,xb,yb, wSurface, this);
    insertObject(novo);
    return(novo);
+}
+
+/**************************************************************
+ *                        insertFileSel                       *
+ **************************************************************/
+fileSel* guiList::insertFileSel(int xa, int ya, string dir)
+{
+   fileSel* n = new fileSel(xa, ya, dir, this);
+   insertObject(n);
+   return(n);
 }
 
 /**************************************************************

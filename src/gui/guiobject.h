@@ -16,7 +16,7 @@
 #define GUI_TAB_BUTTON    8
 #define GUI_ROL_BAR       9
 #define GUI_LIST_TEXT    10
-#define GUI_SEL_FILE     11
+#define GUI_FILE_SEL     11
 
 #include <SDL/SDL.h>
 #include <string>

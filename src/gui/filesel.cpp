@@ -15,7 +15,7 @@ fileSel::fileSel(int x, int y, string dir, void* list)
    x2 = x+250;
    y1 = y;
    y2 = y+155;
-   type = GUI_SEL_FILE;
+   type = GUI_FILE_SEL;
    curDir = dir;
 
    intList = list;
@@ -39,6 +39,13 @@ fileSel::fileSel(int x, int y, string dir, void* list)
  *                              Destructor                             *
  ***********************************************************************/
 fileSel::~fileSel()
+{
+}
+
+/***********************************************************************
+ *                                draw                                 *
+ ***********************************************************************/
+void fileSel::draw(SDL_Surface* s)
 {
 }
 

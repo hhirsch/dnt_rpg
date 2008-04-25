@@ -33,6 +33,7 @@
 #define SELECTED_SEL_TEXT   15
 #define SELECTED_LIST_TEXT  16
 #define ON_FOCUS_TAB_BUTTON 17
+#define SELECTED_FILE       18
 
 /********************************************************************
  *                       Focus's constants                          *
@@ -110,6 +111,25 @@ class interface
       window* getActiveWindow();
 
    private:
+
+      /*! Verify events occured on gui at single components
+       * \param x -> current mouse x
+       * \param y -> current mouse y
+       * \param Mbotao -> current mouse button state
+       * \param tecla -> current keyboard state
+       * \param eventInfo -> return event information got
+       * \return -> pointer tot he active object */
+      guiObject* verifySingleEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
+                                    int& eventInfo);
+
+      /*! Verify events occureed on gui at composite components (those composed
+       *  by more than one gui component)
+       *  \param actObj -> active object got from verifySingleEvents 
+       *  \param event info -> current event info from verifySingleEvents (will
+       *  have the new one, if something occurs)
+       *  \return -> new active object or the current one. */
+      guiObject* verifyCompositeEvents(guiObject* actObj, int& eventInfo);
+
       int focus;              /**< Current GUI focus */
       SDL_Surface* fundo;     /**< background surface, if has one */
       guiList* objects;       /**< some no window objects */

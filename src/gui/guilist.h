@@ -18,6 +18,7 @@ using namespace std;
 #include "textbar.h"
 #include "rolbar.h"
 #include "listtext.h"
+#include "filesel.h"
 
 /*! The guiList Class: a list for guiObjects. */
 class guiList
@@ -120,6 +121,13 @@ class guiList
        * \param yb -> y2 position
        * \return listText inserted */
       listText* insertListText(int xa,int ya,int xb,int yb);
+
+      /*! Insert a fileSel on the list
+       * \param xa -> x coordinate
+       * \param ya -> y coordinate
+       * \param dir -> current dir to browse
+       * \return -> pointer to the fileSel inserted */
+      fileSel* insertFileSel(int xa, int ya, string dir);
 
       /*! Add a internal Menu to the list
        * \return menu Inserted */

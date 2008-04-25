@@ -42,6 +42,59 @@ interface::~interface()
 guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, 
                                        Uint8* tecla, int& eventInfo)
 {
+   eventInfo = NOTHING;
+   objAtivo = verifySingleEvents(x,y,Mbotao,tecla, eventInfo);
+
+   if(eventInfo != NOTHING)
+   {
+      objAtivo = verifyCompositeEvents(objAtivo, eventInfo);
+   }
+
+   return(objAtivo);
+}
+
+/*********************************************************************
+ *                      verifyCompositeEvents                        *
+ *********************************************************************/
+guiObject* interface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
+{
+   int aux;
+   guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+
+   printf("Entered\n");
+
+   /* pass all objects, treating those composited */
+   for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
+         aux++)
+   {
+      /* Verify GUI_LIST_TEXT */
+      if(obj->type == GUI_LIST_TEXT)
+      {
+         listText* lt = (listText*)obj;
+         if(lt->eventGot(PRESSED_TAB_BUTTON, actObj))
+         {
+            ljan->getActiveWindow()->draw(0,0);
+            eventInfo = SELECTED_LIST_TEXT;
+            focus = FOCUS_GAME;
+            return(lt);
+         }
+      }
+      /* Verify GUI_FILE_SEL */
+      else if(obj->type == GUI_FILE_SEL)
+      {
+      }
+      obj = obj->next;
+   }
+
+   return(actObj);
+}
+
+/*********************************************************************
+ *                        verifySingleEvents                         *
+ *********************************************************************/
+guiObject* interface::verifySingleEvents(int x, int y, Uint8 Mbotao, 
+                                         Uint8* tecla, int& eventInfo)
+{
     int aux;
     dntFont fnt;
 
@@ -441,6 +494,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
          if(actType == TABBUTTON_PRESSED)
          {
             bool verified = false;
+#if 0
             /* Verify List Text */
             guiObject *obj = 
                     ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
@@ -463,7 +517,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
                }
                obj = obj->next;
             }
-            
+#endif            
             /* Is not a list text pressed, so return calling for treat 
              * the event! */
             if(!verified)

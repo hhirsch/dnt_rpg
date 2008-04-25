@@ -31,6 +31,10 @@ class fileSel: public guiObject
       /*! Destructor */
       ~fileSel();
 
+      /*! Not used, only for compatibility with guiObject
+       * \param s -> ignored */
+      void draw(SDL_Surface* s);
+
       /*! Verify if some event is related to the listText
        * \param type -> Type of the occurred event
        * \param object -> object of the event 
