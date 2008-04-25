@@ -20,6 +20,7 @@ fileSel::fileSel(int x, int y, string dir, void* list)
    curDir = dir;
    lastAction = FILE_SEL_ACTION_NONE;
    lastDir = -1;
+   filter = "";
 
    intList = list;
 
@@ -35,6 +36,9 @@ fileSel::fileSel(int x, int y, string dir, void* list)
 
    /* Create the current file text */
    textCurFile = l->insertTextBox(x,y, x+220, y+16, 1, "");
+
+   /* Create the current filter text */
+   textFilter = l->insertTextBox(x+220, y, x+250, y+16, 1, "*");
 
    /* Put it at initial dir */
    changeCurDir(dir);
@@ -56,6 +60,17 @@ void fileSel::draw(SDL_Surface* s)
 }
 
 /***********************************************************************
+ *                              setFilter                              *
+ ***********************************************************************/
+void fileSel::setFilter(string newFilter)
+{
+   filter = newFilter;
+   textFilter->setText(filter);
+   /* Update the current dir with the new filter */
+   changeCurDir(curDir);
+}
+
+/***********************************************************************
  *                             cmpFunction                             *
  ***********************************************************************/
 static int cmpFunction(const void *p1,  const void *p2)
@@ -73,6 +88,7 @@ void fileSel::changeCurDir(string newDir)
 {
    int j, total;
 
+   string aux = "";
    string* s = NULL;
    DIR* dir = NULL;
    struct dirent* dirEnt = NULL;
@@ -146,15 +162,29 @@ void fileSel::changeCurDir(string newDir)
          s[j].erase(0,1);
 
          /* Insert at list */
-         textFiles->insertText(s[j], 20,20,240);
+         textFiles->insertText(s[j], 255,20,20);
       }
       else
       {
-          /* Remove the "group" char */
+         /* Remove the "group" char */
          s[j].erase(0,1);
 
-         /* Insert at list */
-         textFiles->insertText(s[j], 240,240,240);
+         if(filter != "")
+         {
+            /* Verify if pass */
+            aux = s[j];
+            aux.erase(0,aux.length()-filter.length());
+            if(aux == filter)
+            {
+                /* No filter, so Insert at list */
+                textFiles->insertText(s[j], 240,240,240);
+            }
+         }
+         else
+         {
+            /* No filter, so Insert at list */
+            textFiles->insertText(s[j], 240,240,240);
+         }
       }
    }
 

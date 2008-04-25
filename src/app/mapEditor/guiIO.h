@@ -99,7 +99,7 @@ class guiIO
 
    private:
       
-      grassWindow* grWindow;/**< the grass window */  
+      grassWindow* grWindow;/**< the grass window */ 
       waterWindow* wtWindow;/**< the waterfall window */
       listWindow* ltWindow; /**< The List Window */
 

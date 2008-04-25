@@ -54,6 +54,10 @@ class fileSel: public guiObject
        * \param -> complete selected fileName path (if one) */
       string getFileName();
 
+      /*! Set the current filter
+       * \param newFilter -> new filter to set */
+      void setFilter(string newFilter);
+
    protected:
 
       /*! Change the current displayed dir
@@ -64,8 +68,11 @@ class fileSel: public guiObject
       button* acceptButton;    /**< The accept Button */
       listText* textFiles;     /**< The files selector (as text) */
       textBox* textCurFile;    /**< The current file display */
+      textBox* textFilter;     /**< The current filter display */
 
       string curDir;           /**< Current Opened directory */
+
+      string filter;           /**< Files Filter */
 
       int lastDir;             /**< Last element on selector that is a 
                                     directory (this used to separate 
