@@ -42,15 +42,14 @@ interface::~interface()
 guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, 
                                        Uint8* tecla, int& eventInfo)
 {
-   eventInfo = NOTHING;
-   objAtivo = verifySingleEvents(x,y,Mbotao,tecla, eventInfo);
+   guiObject* actObj = verifySingleEvents(x,y,Mbotao,tecla, eventInfo);
 
    if(eventInfo != NOTHING)
    {
-      objAtivo = verifyCompositeEvents(objAtivo, eventInfo);
+      actObj = verifyCompositeEvents(actObj, eventInfo);
    }
 
-   return(objAtivo);
+   return(actObj);
 }
 
 /*********************************************************************
@@ -60,8 +59,6 @@ guiObject* interface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
 {
    int aux;
    guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
-
-   printf("Entered\n");
 
    /* pass all objects, treating those composited */
    for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
