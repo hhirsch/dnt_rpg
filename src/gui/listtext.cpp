@@ -109,6 +109,15 @@ void listText::clear()
  **************************************************************/
 void listText::insertText(string text)
 {
+   /* Insert with default color */
+   insertText(text, -1, -1, -1);
+}
+
+/**************************************************************
+ *                         insertText                         *
+ **************************************************************/
+void listText::insertText(string text, int r, int g, int b)
+{
    textElement* tel = new textElement();
    tel->text = text;
    if(totalElements == 0)
@@ -124,7 +133,15 @@ void listText::insertText(string text)
       first->previous = tel;
       tel->previous->next = tel;
    }
-   roll->addText(text);
+   if(r == -1)
+   {
+      roll->addText(text);
+   }
+   else
+   {
+      roll->addText(text, DNT_FONT_ARIAL, 10, DNT_FONT_STYLE_NORMAL,
+                    DNT_FONT_ALIGN_LEFT, r,g,b);
+   }
    totalElements++;
    roll->setFirstLine(0);
 }

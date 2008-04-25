@@ -142,12 +142,20 @@ void fileSel::changeCurDir(string newDir)
       if(s[j][0] == 'd')
       {
          lastDir = j;
-      }
-      /* Remove the "group" char */
-      s[j].erase(0,1);
+         /* Remove the "group" char */
+         s[j].erase(0,1);
 
-      /* Insert at list */
-      textFiles->insertText(s[j]);
+         /* Insert at list */
+         textFiles->insertText(s[j], 20,20,240);
+      }
+      else
+      {
+          /* Remove the "group" char */
+         s[j].erase(0,1);
+
+         /* Insert at list */
+         textFiles->insertText(s[j], 240,240,240);
+      }
    }
 
    /* clear strings */

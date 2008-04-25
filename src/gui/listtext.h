@@ -40,6 +40,13 @@ class listText: public guiObject
        * \param text -> string to insert */
       void insertText(string text);
 
+      /*! Insert Text element, with color on the list
+       * \param text -> string to insert 
+       * \param r -> red 
+       * \param g -> green
+       * \param b -> blue */
+      void insertText(string text, int r, int g, int b);
+
       /*! Remove text from list
        * \param text -> string to remove */
       void removeText(string text);
