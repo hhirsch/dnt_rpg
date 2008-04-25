@@ -50,6 +50,9 @@ class fileSel: public guiObject
        * \return -> last action occurred */
       int getLastAction();
 
+      /*! Get the current selected fileName
+       * \param -> complete selected fileName path (if one) */
+      string getFileName();
 
    protected:
 
@@ -63,6 +66,10 @@ class fileSel: public guiObject
       textBox* textCurFile;    /**< The current file display */
 
       string curDir;           /**< Current Opened directory */
+
+      int lastDir;             /**< Last element on selector that is a 
+                                    directory (this used to separate 
+                                    strings directories of  strings files)*/
 
       void* intList;           /**< Internal Gui List used */
 

@@ -57,6 +57,10 @@ class listText: public guiObject
        * \return selected text */
       string getSelectedText();
 
+      /*! Get the selected text position on list
+       * \return selected text position */
+      int getSelectedPos();
+
       rolBar* roll;           /**< RolBar of the list */
       tabButton* table;       /**< TabButton of the list */
 
@@ -67,6 +71,7 @@ class listText: public guiObject
       int totalElements;          /**< Total Elements on list */
       oneTabButton** listButtons; /**< Buttons of the List*/
       string selectedText;        /**< Text selected */
+      int selectedPos;            /**< Position on list of the selected */
       int maxButtons;             /**< Max number of buttons */
 };
 

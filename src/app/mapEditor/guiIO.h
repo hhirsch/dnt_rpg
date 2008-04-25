@@ -108,17 +108,24 @@ class guiIO
       int state;            /**< Internal State */
       int tool;             /**< Selected Tool */
       string selectedText;  /**< Last selected text with list window */
+      string curFileName;   /**< Current File Name */
 
       interface* gui; /**< Internal GUI */
 
-      /*********************File*Window*******************************/
-      window* fileWindow;   /**< File Window */
+      /**********************File*Window*******************************/
+      window* fileWindow;      /**< File Selector Window (for load/save) */
+      fileSel* fileSelector;   /**< The file selector itself */
+      void openFileWindow();
+
+
+      /**********************Act*Window*******************************/
+      window* actWindow;     /**< Act Window */
       button* openButton;    /**< Open Button */
       button* saveButton;    /**< Save Button */
       button* exitButton;    /**< Exit Button */
       button* newButton;     /**< New Button */
       textBar* fileText; /**< FileName Text */
-      void openFileWindow();
+      void openActWindow();
 
 
       /*********************Navigate*Window***************************/

@@ -12,9 +12,11 @@ guiIO::guiIO()
    tool = TOOL_NONE;
 
    selectedText = "";
+   curFileName = "";
 
    fogWindow = NULL;
    actualFog = NULL;
+   fileWindow = NULL;
 
    /* Change the minimun Zoom */
    gameCamera.defineMinZoom(2*ZOOM_MIN);
@@ -24,7 +26,7 @@ guiIO::guiIO()
    wtWindow = new waterWindow(gui);
    ltWindow = new listWindow(gui);
    ltWindow->setState(0);
-   openFileWindow();
+   openActWindow();
    openNavWindow();
    openMainWindow();
    openWallWindow();
@@ -64,23 +66,36 @@ waterWindow* guiIO::getWaterWindow()
 }
 
 /****************************************************************
- *                       Open File Window                       *
+ *                      Open File  Window                       *
  ****************************************************************/
 void guiIO::openFileWindow()
 {
-   fileWindow = gui->insertWindow(0,0,185,63,"File");
-   newButton = fileWindow->getObjectsList()->insertButton(10,37,50,55,"New",1);
-   openButton = fileWindow->getObjectsList()->insertButton(51,37,91,55,
-                                                           "Open",1);
-   saveButton = fileWindow->getObjectsList()->insertButton(92,37,132,55,
-                                                           "Save",1);
-   exitButton = fileWindow->getObjectsList()->insertButton(133,37,173,55,
-                                                           "Exit",1);
-   fileText = fileWindow->getObjectsList()->insertTextBar(10,17,173,33,
-                                                          "mapas/",0);
+   fileWindow = gui->insertWindow(200,200,460,385,"File");
+   fileSelector = fileWindow->getObjectsList()->insertFileSel(5,18,
+                                                              "../data/mapas/");
    fileWindow->setAttributes(false,true,false,false);
    fileWindow->setExternPointer(&fileWindow);
    gui->openWindow(fileWindow);
+}
+
+/****************************************************************
+ *                       Open Act  Window                       *
+ ****************************************************************/
+void guiIO::openActWindow()
+{
+   actWindow = gui->insertWindow(0,0,185,63,"Main Actions");
+   newButton = actWindow->getObjectsList()->insertButton(10,37,50,55,"New",1);
+   openButton = actWindow->getObjectsList()->insertButton(51,37,91,55,
+                                                           "Open",1);
+   saveButton = actWindow->getObjectsList()->insertButton(92,37,132,55,
+                                                           "Save",1);
+   exitButton = actWindow->getObjectsList()->insertButton(133,37,173,55,
+                                                           "Exit",1);
+   fileText = actWindow->getObjectsList()->insertTextBar(10,17,173,33,
+                                                          "mapas/",0);
+   actWindow->setAttributes(false,true,false,false);
+   actWindow->setExternPointer(&actWindow);
+   gui->openWindow(actWindow);
 }
 
 /****************************************************************
@@ -843,6 +858,34 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          break;
       }
 
+      /* File Selectors Things */
+      case FILE_SEL_ACCEPT:
+      {
+         if(fileWindow)
+         {
+            if(object == (guiObject*)fileSelector) 
+            {
+               curFileName = fileSelector->getFileName();
+               gui->closeWindow(fileWindow);
+            }
+            return(GUI_IO_OPEN_MAP);
+         }
+         break;
+      }
+       case FILE_SEL_CANCEL:
+      {
+         if(fileWindow)
+         {
+            if(object == (guiObject*)fileSelector) 
+            {
+               gui->closeWindow(fileWindow);
+            }
+            return(GUI_IO_OTHER);
+         }
+         break;
+      }
+
+
       /* Buttons */
       case PRESSED_BUTTON:
       {
@@ -856,7 +899,9 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
          else if(object == (guiObject*) openButton)
          {
-            return(GUI_IO_OPEN_MAP);
+            //return(GUI_IO_OPEN_MAP);
+            openFileWindow();
+            return(GUI_IO_OTHER);
          }
          else if(object == (guiObject*) saveButton)
          {
@@ -983,7 +1028,7 @@ string guiIO::getSelectedText()
  ****************************************************************/
 string guiIO::getFileName()
 {
-   return(fileText->getText());
+   return(curFileName);
 }
 
 /****************************************************************

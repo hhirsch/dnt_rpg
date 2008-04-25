@@ -132,6 +132,12 @@ class interface
        *  \return -> new active object or the current one. */
       guiObject* verifyCompositeEvents(guiObject* actObj, int& eventInfo);
 
+      /*! Verify events occureed on gui at file selectors (its an special case)
+       *  \param actObj -> active object 
+       *  \param event info -> current event
+       *  \return -> new active object or the current one. */
+      guiObject* verifyFileSelectorsEvents(guiObject* actObj, int& eventInfo);
+
       int focus;              /**< Current GUI focus */
       SDL_Surface* fundo;     /**< background surface, if has one */
       guiList* objects;       /**< some no window objects */

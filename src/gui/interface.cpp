@@ -47,38 +47,27 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
    if(eventInfo != NOTHING)
    {
       actObj = verifyCompositeEvents(actObj, eventInfo);
+      actObj = verifyFileSelectorsEvents(actObj, eventInfo);
    }
 
    return(actObj);
 }
 
 /*********************************************************************
- *                      verifyCompositeEvents                        *
+ *                   verifyFileSelectorsEvents                       *
  *********************************************************************/
-guiObject* interface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
+guiObject* interface::verifyFileSelectorsEvents(guiObject* actObj, 
+                                                int& eventInfo)
 {
    int aux;
    guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
 
-   /* pass all objects, treating those composited */
+   /* pass all objects, treating file selectors */
    for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
-         aux++)
+       aux++)
    {
-      /* Verify GUI_LIST_TEXT */
-      if(obj->type == GUI_LIST_TEXT)
-      {
-         listText* lt = (listText*)obj;
-         if(lt->eventGot(eventInfo, actObj))
-         {
-            ljan->getActiveWindow()->draw(0,0);
-            eventInfo = SELECTED_LIST_TEXT;
-            focus = FOCUS_GAME;
-            actObj = obj;
-            return(lt);
-         }
-      }
       /* Verify GUI_FILE_SEL */
-      else if(obj->type == GUI_FILE_SEL)
+      if(obj->type == GUI_FILE_SEL)
       {
          fileSel* fs = (fileSel*)obj;
          if(fs->eventGot(eventInfo, actObj))
@@ -100,6 +89,36 @@ guiObject* interface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
                break;
             }
             focus = FOCUS_GAME;
+         }
+      }
+      obj = obj->next;
+   }
+   return(actObj);
+}
+
+/*********************************************************************
+ *                      verifyCompositeEvents                        *
+ *********************************************************************/
+guiObject* interface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
+{
+   int aux;
+   guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
+
+   /* pass all objects, treating those composited */
+   for(aux=0; aux < ljan->getActiveWindow()->getObjectsList()->getTotal(); 
+       aux++)
+   {
+      /* Verify GUI_LIST_TEXT */
+      if(obj->type == GUI_LIST_TEXT)
+      {
+         listText* lt = (listText*)obj;
+         if(lt->eventGot(eventInfo, actObj))
+         {
+            ljan->getActiveWindow()->draw(0,0);
+            eventInfo = SELECTED_LIST_TEXT;
+            focus = FOCUS_GAME;
+            actObj = obj;
+            return(lt);
          }
       }
       obj = obj->next;

@@ -173,6 +173,7 @@ bool listText::eventGot(int type, guiObject* object)
 {
    int i;
    selectedText = "";
+   selectedPos = -1;
 
    /* Verify Events */
    if(type == PRESSED_TAB_BUTTON)
@@ -191,6 +192,7 @@ bool listText::eventGot(int type, guiObject* object)
                   tel = tel->next;
                }
                selectedText = tel->text;
+               selectedPos = pos;
             }
             return(true);
          }
@@ -205,5 +207,13 @@ bool listText::eventGot(int type, guiObject* object)
 string listText::getSelectedText()
 {
    return(selectedText);
+}
+
+/**************************************************************
+ *                      getSelectedPos                        *
+ **************************************************************/
+int listText::getSelectedPos()
+{
+   return(selectedPos);
 }
 

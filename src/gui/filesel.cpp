@@ -1,6 +1,7 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <stdlib.h>
+#include <iostream>
 
 #include "filesel.h"
 #include "guilist.h"
@@ -18,6 +19,7 @@ fileSel::fileSel(int x, int y, string dir, void* list)
    type = GUI_FILE_SEL;
    curDir = dir;
    lastAction = FILE_SEL_ACTION_NONE;
+   lastDir = -1;
 
    intList = list;
 
@@ -33,6 +35,9 @@ fileSel::fileSel(int x, int y, string dir, void* list)
 
    /* Create the current file text */
    textCurFile = l->insertTextBox(x,y, x+220, y+16, 1, "");
+
+   /* Put it at initial dir */
+   changeCurDir(dir);
 
 }
 
@@ -77,7 +82,11 @@ void fileSel::changeCurDir(string newDir)
 
    /* Change to dir */
    curDir = newDir;
-   opendir(newDir.c_str());
+   if(curDir[curDir.length()-1] != '/')
+   {
+      curDir += "/";
+   }
+   dir = opendir(newDir.c_str());
 
    total = 0;
    if(dir)
@@ -114,6 +123,11 @@ void fileSel::changeCurDir(string newDir)
          j++;
       }
    }
+   else
+   {
+      cerr << "Can't open dir: " << newDir << " : ";
+      perror("");
+   }
 
    /* Sort the result */
    if(total > 0)
@@ -124,6 +138,11 @@ void fileSel::changeCurDir(string newDir)
    /* Put at selectors */
    for (j = 0; j < total; j++)
    {
+      /* Up the last dir if needed */
+      if(s[j][0] == 'd')
+      {
+         lastDir = j;
+      }
       /* Remove the "group" char */
       s[j].erase(0,1);
 
@@ -147,6 +166,14 @@ int fileSel::getLastAction()
 }
 
 /***********************************************************************
+ *                             getFileName                             *
+ ***********************************************************************/
+string fileSel::getFileName()
+{
+   return(curDir + textCurFile->getText());
+}
+
+/***********************************************************************
  *                              eventGot                               *
  ***********************************************************************/
 bool fileSel::eventGot(int type, guiObject* object)
@@ -156,7 +183,7 @@ bool fileSel::eventGot(int type, guiObject* object)
    { 
       case PRESSED_BUTTON:
       {
-         if(object == acceptButton)
+         if( (object == acceptButton) && (textCurFile->getText() != "") )
          {
             lastAction = FILE_SEL_ACTION_ACCEPT;
             return(true);
@@ -170,13 +197,54 @@ bool fileSel::eventGot(int type, guiObject* object)
       break;
       case SELECTED_LIST_TEXT:
       {
-         //TODO
-         //if(is dir)
-         /* Change the directory to the new one */
-         //else if(is file)
-         /* Change the selected file */
-         lastAction = FILE_SEL_ACTION_SELECT;
-         return(true);
+         if(object == textFiles)
+         {
+            string sel = textFiles->getSelectedText();
+
+            if(textFiles->getSelectedPos() <= lastDir)
+            {
+               /* It's a dir, change the directory to the new one */
+               textCurFile->setText(""); 
+               string newDir = "";
+               if(sel == ".")
+               {
+                  /* The new dir is the same */
+                  newDir = curDir;
+               }
+               else if(sel == "..")
+               {
+                  /* The new dir is without the last one, if not ../  */
+                  if( (curDir.length() >= 3) && 
+                      (curDir[curDir.length()-1] == '/') &&
+                      (curDir[curDir.length()-2] == '.') &&
+                      (curDir[curDir.length()-3] == '.') )
+                  {
+                     /* Continue to adding ../ */
+                     newDir = curDir + "../";
+                  }
+                  else
+                  {
+                     /* Is without the last one */
+                     newDir = curDir;
+                     newDir.erase(newDir.length()-1, 1); //remove the last"/"
+                     newDir.erase( newDir.find_last_of("/"));
+                  }
+               }
+               else
+               {
+                  /* The new one is appended  */
+                  newDir = curDir + sel; 
+               }
+               changeCurDir(newDir);
+            }
+            else
+            {
+               /* It's a file, change the selected file */
+               textCurFile->setText(sel);
+            }
+            lastAction = FILE_SEL_ACTION_SELECT;
+            return(true);
+         }
       }
       break;
    }
