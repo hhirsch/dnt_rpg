@@ -115,7 +115,8 @@ class guiIO
       /**********************File*Window*******************************/
       window* fileWindow;      /**< File Selector Window (for load/save) */
       fileSel* fileSelector;   /**< The file selector itself */
-      void openFileWindow();
+      bool fileLoading;        /**< If is loading or saving */
+      void openFileWindow(bool load);
 
 
       /**********************Act*Window*******************************/
@@ -124,7 +125,6 @@ class guiIO
       button* saveButton;    /**< Save Button */
       button* exitButton;    /**< Exit Button */
       button* newButton;     /**< New Button */
-      textBar* fileText; /**< FileName Text */
       void openActWindow();
 
 

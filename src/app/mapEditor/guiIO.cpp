@@ -68,10 +68,11 @@ waterWindow* guiIO::getWaterWindow()
 /****************************************************************
  *                      Open File  Window                       *
  ****************************************************************/
-void guiIO::openFileWindow()
+void guiIO::openFileWindow(bool load)
 {
+   fileLoading = load;
    fileWindow = gui->insertWindow(200,100,460,285,"File");
-   fileSelector = fileWindow->getObjectsList()->insertFileSel(5,18,
+   fileSelector = fileWindow->getObjectsList()->insertFileSel(5,18,load,
                                                               "../data/mapas/");
    fileSelector->setFilter(".map");
    fileWindow->setAttributes(false,true,false,false);
@@ -92,8 +93,6 @@ void guiIO::openActWindow()
                                                            "Save",1);
    exitButton = actWindow->getObjectsList()->insertButton(133,37,173,55,
                                                            "Exit",1);
-   fileText = actWindow->getObjectsList()->insertTextBar(10,17,173,33,
-                                                          "mapas/",0);
    actWindow->setAttributes(false,true,false,false);
    actWindow->setExternPointer(&actWindow);
    gui->openWindow(actWindow);
@@ -869,11 +868,18 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
                curFileName = fileSelector->getFileName();
                gui->closeWindow(fileWindow);
             }
-            return(GUI_IO_OPEN_MAP);
+            if(fileLoading)
+            {
+               return(GUI_IO_OPEN_MAP);
+            }
+            else
+            {
+               return(GUI_IO_SAVE_MAP);
+            }
          }
          break;
       }
-       case FILE_SEL_CANCEL:
+      case FILE_SEL_CANCEL:
       {
          if(fileWindow)
          {
@@ -900,13 +906,15 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          }
          else if(object == (guiObject*) openButton)
          {
-            //return(GUI_IO_OPEN_MAP);
-            openFileWindow();
+            /* Open File Window for Load */
+            openFileWindow(true);
             return(GUI_IO_OTHER);
          }
          else if(object == (guiObject*) saveButton)
          {
-            return(GUI_IO_SAVE_MAP);
+            /* Open File Window for Save */
+            openFileWindow(false);
+            return(GUI_IO_OTHER);
          }
          else if(object == (guiObject*) terrainButton)
          {
