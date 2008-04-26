@@ -125,9 +125,11 @@ class guiList
       /*! Insert a fileSel on the list
        * \param xa -> x coordinate
        * \param ya -> y coordinate
+       * \param load -> true if the selector is a loading one, false if it
+       *                is a saving one.
        * \param dir -> current dir to browse
        * \return -> pointer to the fileSel inserted */
-      fileSel* insertFileSel(int xa, int ya, string dir);
+      fileSel* insertFileSel(int xa, int ya, bool load, string dir);
 
       /*! Add a internal Menu to the list
        * \return menu Inserted */

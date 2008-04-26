@@ -195,7 +195,7 @@ textBar* guiList::insertTextBar(int xa,int ya,int xb,int yb, string text,
                                 int cript)
 {
    textBar* novo;
-   novo = new textBar(xa,ya,xb,yb, text, cript);
+   novo = new textBar(xa,ya,xb,yb, text, cript, wSurface);
    insertObject(novo);
    return(novo);
 } 
@@ -252,9 +252,9 @@ listText* guiList::insertListText(int xa,int ya,int xb,int yb)
 /**************************************************************
  *                        insertFileSel                       *
  **************************************************************/
-fileSel* guiList::insertFileSel(int xa, int ya, string dir)
+fileSel* guiList::insertFileSel(int xa, int ya, bool load, string dir)
 {
-   fileSel* n = new fileSel(xa, ya, dir, this);
+   fileSel* n = new fileSel(xa, ya, load, dir, this);
    insertObject(n);
    return(n);
 }
