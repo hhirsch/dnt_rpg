@@ -55,6 +55,10 @@ class fileSel: public guiObject
       /*! Get the current selected fileName
        * \param -> complete selected fileName path (if one) */
       string getFileName();
+ 
+      /*! Set the current file and dir to the one defined at the fileName
+       * \param fileName -> full fileName to set new file and dir. */
+      void setFileName(string fileName);
 
       /*! Set the current filter
        * \param newFilter -> new filter to set */

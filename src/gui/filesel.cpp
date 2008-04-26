@@ -233,6 +233,33 @@ string fileSel::getFileName()
 }
 
 /***********************************************************************
+ *                             setFileName                             *
+ ***********************************************************************/
+void fileSel::setFileName(string fileName)
+{
+   string newDir, file;
+
+   /* get directory from it */
+   newDir = fileName;
+   newDir.erase( newDir.find_last_of("/"));
+
+   /* change the current displayed directory */
+   changeCurDir(newDir);
+
+   /* set the file from it */
+   file = fileName;
+   file.erase(0, newDir.length()+1); //+1 to remove the "/"
+   if(loading)
+   {
+      textCurFile->setText(file);
+   }
+   else
+   {
+      editCurFile->setText(file);
+   }
+}
+
+/***********************************************************************
  *                              eventGot                               *
  ***********************************************************************/
 bool fileSel::eventGot(int type, guiObject* object)
