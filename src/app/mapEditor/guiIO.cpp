@@ -75,6 +75,10 @@ void guiIO::openFileWindow(bool load)
    fileSelector = fileWindow->getObjectsList()->insertFileSel(5,18,load,
                                                               "../data/mapas/");
    fileSelector->setFilter(".map");
+   if( (!fileLoading) && (!curFileName.empty()) )
+   {
+      fileSelector->setFileName(curFileName);
+   }
    fileWindow->setAttributes(false,true,false,false);
    fileWindow->setExternPointer(&fileWindow);
    gui->openWindow(fileWindow);
