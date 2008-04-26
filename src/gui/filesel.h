@@ -29,9 +29,11 @@ class fileSel: public guiObject
       /*! Constructor
        * \param x -> x coordinate
        * \param y -> y coordinate
+       * \param load -> true if the selector is a loading one, false if it
+       *                is a saving one. 
        * \param dir -> directory to display
        * \param list -> pointer to the GUI objects list */
-      fileSel(int x, int y, string dir, void* list);
+      fileSel(int x, int y, bool load, string dir, void* list);
 
       /*! Destructor */
       ~fileSel();
@@ -67,8 +69,12 @@ class fileSel: public guiObject
       button* cancelButton;    /**< The cancel Button */
       button* acceptButton;    /**< The accept Button */
       listText* textFiles;     /**< The files selector (as text) */
-      textBox* textCurFile;    /**< The current file display */
+      textBox* textCurFile;    /**< The current file display (for load) */
+      textBar* editCurFile;    /**< The current file edit (for save) */
       textBox* textFilter;     /**< The current filter display */
+
+      bool loading;            /**< If selector is a loading one, 
+                                    or a saving one */
 
       string curDir;           /**< Current Opened directory */
 

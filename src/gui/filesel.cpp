@@ -10,7 +10,7 @@
 /***********************************************************************
  *                             Constructor                             *
  ***********************************************************************/
-fileSel::fileSel(int x, int y, string dir, void* list)
+fileSel::fileSel(int x, int y, bool load, string dir, void* list)
 {
    x1 = x;
    x2 = x+250;
@@ -21,6 +21,7 @@ fileSel::fileSel(int x, int y, string dir, void* list)
    lastAction = FILE_SEL_ACTION_NONE;
    lastDir = -1;
    filter = "";
+   loading = load;
 
    intList = list;
 
@@ -35,7 +36,16 @@ fileSel::fileSel(int x, int y, string dir, void* list)
                                   gettext("Confirm"), 1);
 
    /* Create the current file text */
-   textCurFile = l->insertTextBox(x,y, x+220, y+16, 1, "");
+   if(loading)
+   {
+      textCurFile = l->insertTextBox(x,y, x+220, y+16, 1, "");
+      editCurFile = NULL;
+   }
+   else
+   {
+      textCurFile = NULL;
+      editCurFile = l->insertTextBar(x,y,x+220, y+16, "", 0);
+   }
 
    /* Create the current filter text */
    textFilter = l->insertTextBox(x+220, y, x+250, y+16, 1, "*");
@@ -154,7 +164,7 @@ void fileSel::changeCurDir(string newDir)
    /* Put at selectors */
    for (j = 0; j < total; j++)
    {
-      /* Up the last dir if needed */
+      /* Directories */
       if(s[j][0] == 'd')
       {
          lastDir = j;
@@ -164,6 +174,8 @@ void fileSel::changeCurDir(string newDir)
          /* Insert at list */
          textFiles->insertText(s[j], 255,20,20);
       }
+
+      /* Files */
       else
       {
          /* Remove the "group" char */
@@ -176,7 +188,7 @@ void fileSel::changeCurDir(string newDir)
             aux.erase(0,aux.length()-filter.length());
             if(aux == filter)
             {
-                /* No filter, so Insert at list */
+                /* Passed filter, so Insert at list */
                 textFiles->insertText(s[j], 240,240,240);
             }
          }
@@ -208,7 +220,16 @@ int fileSel::getLastAction()
  ***********************************************************************/
 string fileSel::getFileName()
 {
-   return(curDir + textCurFile->getText());
+   string fileName = curDir;
+   if(loading)
+   {
+      fileName += textCurFile->getText();
+   }
+   else
+   {
+      fileName += editCurFile->getText();
+   }
+   return(fileName);
 }
 
 /***********************************************************************
@@ -221,11 +242,13 @@ bool fileSel::eventGot(int type, guiObject* object)
    { 
       case PRESSED_BUTTON:
       {
+         /* Pressed Accept Button */
          if( (object == acceptButton) && (textCurFile->getText() != "") )
          {
             lastAction = FILE_SEL_ACTION_ACCEPT;
             return(true);
          }
+         /* Pressed Cancel Button */
          else if(object == cancelButton)
          {
             lastAction = FILE_SEL_ACTION_CANCEL;
@@ -235,6 +258,7 @@ bool fileSel::eventGot(int type, guiObject* object)
       break;
       case SELECTED_LIST_TEXT:
       {
+         /* Selected a file of a directory */
          if(object == textFiles)
          {
             string sel = textFiles->getSelectedText();
@@ -242,7 +266,6 @@ bool fileSel::eventGot(int type, guiObject* object)
             if(textFiles->getSelectedPos() <= lastDir)
             {
                /* It's a dir, change the directory to the new one */
-               textCurFile->setText(""); 
                string newDir = "";
                if(sel == ".")
                {
@@ -274,11 +297,24 @@ bool fileSel::eventGot(int type, guiObject* object)
                   newDir = curDir + sel; 
                }
                changeCurDir(newDir);
+               /* Change the file text if is loading (since at saving 
+                * we hope to keep the one got from user) */
+               if(loading)
+               {
+                  textCurFile->setText("");
+               }
             }
             else
             {
                /* It's a file, change the selected file */
-               textCurFile->setText(sel);
+               if(loading)
+               {
+                  textCurFile->setText(sel);
+               }
+               else
+               {
+                  editCurFile->setText(sel);
+               }
             }
             lastAction = FILE_SEL_ACTION_SELECT;
             return(true);
