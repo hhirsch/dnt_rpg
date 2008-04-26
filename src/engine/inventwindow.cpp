@@ -5,6 +5,7 @@
 #include "inventwindow.h"
 #include "../etc/dirs.h"
 #include "../gui/dntfont.h"
+#include "../sound/sound.h"
 
 #define INVENTORY_STATE_NONE   0
 #define INVENTORY_STATE_OBJECT 1
@@ -214,6 +215,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                          Map* actualMap, GLfloat X, GLfloat Z, 
                          modState* modifState)
 {
+   sound snd;
    if(!isOpen())
    {
       /* Window is no more opened */
@@ -551,6 +553,9 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                      activeObject = NULL;
                      state = INVENTORY_STATE_NONE;
                      reDraw();
+                     /* Play Drop Sound */
+                     snd.addSoundEffect(X, actualMap->getHeight(X,Z), Z, false,
+                                        "sndfx/objects/drop_item.ogg");
                   }
                break;
             }
