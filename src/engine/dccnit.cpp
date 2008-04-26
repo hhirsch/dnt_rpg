@@ -40,6 +40,7 @@ engine::engine()
 
    /* Initialize sounds and musics */
    snd = new(sound);
+   snd->init();
    walkSound = NULL;
 
    /* Load Options */
@@ -145,7 +146,11 @@ engine::engine()
 engine::~engine()
 {
    /* Stops and free music & sounds */
-   delete(snd);
+   if(snd)
+   {
+      snd->finish();
+      delete(snd);
+   }
 
    /* Delete particles */
    if(particleController != NULL)
