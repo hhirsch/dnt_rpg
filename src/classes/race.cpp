@@ -335,3 +335,11 @@ race* races::getRaceByString(string id)
    return(NULL);
 }
 
+/******************************************************************
+ *                          getTotalRaces                         *
+ ******************************************************************/
+int races::getTotalRaces()
+{
+   return(totalRaces);
+}
+

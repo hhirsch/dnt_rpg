@@ -74,6 +74,10 @@ class races
        * \return race found, if found one. */
       race* getRaceByString(string id);
 
+      /*! Get total races avaible
+       * \return number of races avaible */
+      int getTotalRaces();
+
    private:
       int totalRaces;              /**< Total Races on List */
       race* first;                 /**< First Race on List */
