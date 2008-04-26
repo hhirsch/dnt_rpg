@@ -10,7 +10,8 @@
 /********************************************************************
  *                          Constructor                             *
  ********************************************************************/
-textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto)
+textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto,
+                 SDL_Surface* screen)
 {
    lastWrite = 0;
    x1 = xa;
@@ -24,6 +25,7 @@ textBar::textBar(int xa,int ya,int xb,int yb, string text1, bool cripto)
    cript = cripto;
    type = GUI_TEXT_BAR;
    text = text1;
+   wSurface = screen;
 }
 
 /********************************************************************
@@ -81,6 +83,15 @@ void textBar::putText(unsigned int pos, int marca, SDL_Surface *screen)
       line_Draw(screen,x,y1+3,x,y2-3);
    }
    setChanged();
+}
+
+/********************************************************************
+ *                              setText                             *
+ ********************************************************************/
+void textBar::setText(string txt)
+{
+   text = txt;
+   draw(wSurface);
 }
 
 /********************************************************************
