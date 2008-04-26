@@ -290,7 +290,10 @@ bool fileSel::eventGot(int type, guiObject* object)
       case PRESSED_BUTTON:
       {
          /* Pressed Accept Button */
-         if( (object == acceptButton) && (textCurFile->getText() != "") )
+         if( (object == acceptButton) && 
+             ( ((loading) && (textCurFile->getText() != "")) ||
+             ( ((!loading) && (editCurFile->getText() != "")) ) )
+           )
          {
             lastAction = FILE_SEL_ACTION_ACCEPT;
             return(true);
