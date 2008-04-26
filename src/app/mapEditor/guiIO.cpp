@@ -90,12 +90,12 @@ void guiIO::openFileWindow(bool load)
 void guiIO::openActWindow()
 {
    actWindow = gui->insertWindow(0,0,185,63,"Main Actions");
-   newButton = actWindow->getObjectsList()->insertButton(10,37,50,55,"New",1);
-   openButton = actWindow->getObjectsList()->insertButton(51,37,91,55,
+   newButton = actWindow->getObjectsList()->insertButton(10,27,50,45,"New",1);
+   openButton = actWindow->getObjectsList()->insertButton(51,27,91,45,
                                                            "Open",1);
-   saveButton = actWindow->getObjectsList()->insertButton(92,37,132,55,
+   saveButton = actWindow->getObjectsList()->insertButton(92,27,132,45,
                                                            "Save",1);
-   exitButton = actWindow->getObjectsList()->insertButton(133,37,173,55,
+   exitButton = actWindow->getObjectsList()->insertButton(133,27,173,45,
                                                            "Exit",1);
    actWindow->setAttributes(false,true,false,false);
    actWindow->setExternPointer(&actWindow);
@@ -871,14 +871,14 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             {
                curFileName = fileSelector->getFileName();
                gui->closeWindow(fileWindow);
-            }
-            if(fileLoading)
-            {
-               return(GUI_IO_OPEN_MAP);
-            }
-            else
-            {
-               return(GUI_IO_SAVE_MAP);
+               if(fileLoading)
+               {
+                  return(GUI_IO_OPEN_MAP);
+               }
+               else
+               {
+                  return(GUI_IO_SAVE_MAP);
+               }
             }
          }
          break;
