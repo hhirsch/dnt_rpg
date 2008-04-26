@@ -1,5 +1,7 @@
 #include "mission.h"
 #include "../engine/dccnit.h"
+#include "../sound/sound.h"
+#include "../etc/dirs.h"
 
 #define MISSION_CONTROLLER_TOTAL_TREAT  5
 
@@ -140,6 +142,9 @@ void missionsController::addNewMission(string scriptFile)
  ************************************************************/
 void missionsController::completeMission(mission* m, int type)
 {
+   sound snd;
+   dirs dir;
+
    /* First, remove from the current list, without deleting it. */
    removeFromCurrent(m, false);
 
@@ -156,7 +161,7 @@ void missionsController::completeMission(mission* m, int type)
       curTreat = NULL;
    }
 
-   /* type < 0 means failed. > 0 success */
+   /* type <= 0 means failed. > 0 success */
    if(type > 0)
    {
       engine* eng = (engine*)pEngine;
@@ -167,7 +172,16 @@ void missionsController::completeMission(mission* m, int type)
          dude->xp += m->xpValue;
          dude = dude->next;
       }
-      
+
+      /* Play Completion Sound Effect */
+      snd.addSoundEffect(false, dir.getRealFile("sndfx/missions/"
+                                                "mission_complete.ogg"));
+   }
+   else 
+   {
+      /* Play Failure Sound Effect */
+      snd.addSoundEffect(false, dir.getRealFile("sndfx/missions/"
+                                                "mission_failed.ogg"));
    }
 }
 
