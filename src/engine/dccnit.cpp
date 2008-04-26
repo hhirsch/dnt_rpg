@@ -1695,7 +1695,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                    }
                    if(activeCharacter->inventories->addObject(sobj->obj))
                    {
-                      snd->addSoundEffect(false,"sndfx/objects/take_item.ogg");
+                      snd->addSoundEffect(sobj->x, sobj->y, sobj->z, 
+                                          false,"sndfx/objects/take_item.ogg");
                                      
                       sprintf(buf,gettext("%s taken."),
                               sobj->obj->getName().c_str());
