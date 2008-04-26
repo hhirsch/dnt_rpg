@@ -19,6 +19,12 @@ class sound
       /*! Destructor */
       ~sound();
 
+      /*! Init the sound system to use (must be called at program's init) */
+      void init();
+
+      /*! Finish the use of sound system (must be called at program's end) */
+      void finish();
+
       /*! Define the Listener 3D Position (usually the Camera Position)
        *  \param centerX -> X position of the listener
        *  \param centerY -> Y position of the listener 
@@ -75,20 +81,20 @@ class sound
       void changeVolume(int music, int sndV); 
 
    private:
-      ALCdevice* device;            /**< Active AL device */
-      ALCcontext* context;          /**< Active AL context */
-      ogg_stream* backMusic;        /**< Active BackGround Music */
+      static ALCdevice* device;         /**< Active AL device */
+      static ALCcontext* context;       /**< Active AL context */
+      static ogg_stream* backMusic;     /**< Active BackGround Music */
 
-      bool enabled;                 /**< If Sound is Enabled or Not */
+      static bool enabled;              /**< If Sound is Enabled or Not */
 
-      SDL_Thread* soundThread;      /**< The Sound Paralel Thread */
-      SDL_mutex* soundMutex;        /**< The Sound Mutex */
+      static SDL_Thread* soundThread;   /**< The Sound Paralel Thread */
+      static SDL_mutex* soundMutex;     /**< The Sound Mutex */
 
-      sndfx sndfxList;              /**< Head Node of sndFx List */
-      int totalSndfx;               /**< Total Sound Effects on List */
+      static sndfx sndfxList;           /**< Head Node of sndFx List */
+      static int totalSndfx;            /**< Total Sound Effects on List */
 
-      int musicVolume;              /**< The Music volume */
-      int sndfxVolume;              /**< The SndFxVolume */
+      static int musicVolume;           /**< The Music volume */
+      static int sndfxVolume;           /**< The SndFxVolume */
 };
 
 #endif

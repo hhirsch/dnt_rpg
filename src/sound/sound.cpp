@@ -48,6 +48,13 @@ void sound::unLock()
  *************************************************************************/
 sound::sound()
 {
+}
+
+/*************************************************************************
+ *                                Init                                   *
+ *************************************************************************/
+void sound::init()
+{
    // Initialize Open AL
    device = alcOpenDevice(NULL); 
    enabled = false;
@@ -94,6 +101,13 @@ sound::sound()
  *                              Destructor                               *
  *************************************************************************/
 sound::~sound()
+{
+}
+
+/*************************************************************************
+ *                               Finish                                  *
+ *************************************************************************/
+void sound::finish()
 {
    if(enabled)
    {
@@ -333,4 +347,21 @@ void sound::changeVolume(int music, int sndV)
    }
 }
 
+/*************************************************************************
+ *                             static members                            *
+ *************************************************************************/
+ALCdevice* sound::device;         /**< Active AL device */
+ALCcontext* sound::context;       /**< Active AL context */
+ogg_stream* sound::backMusic;     /**< Active BackGround Music */
+
+bool sound::enabled;              /**< If Sound is Enabled or Not */
+
+SDL_Thread* sound::soundThread;   /**< The Sound Paralel Thread */
+SDL_mutex* sound::soundMutex;     /**< The Sound Mutex */
+
+sndfx sound::sndfxList;           /**< Head Node of sndFx List */
+int sound::totalSndfx;            /**< Total Sound Effects on List */
+
+int sound::musicVolume;           /**< The Music volume */
+int sound::sndfxVolume;           /**< The SndFxVolume */
 
