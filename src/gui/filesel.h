@@ -70,6 +70,11 @@ class fileSel: public guiObject
        * \param newDir -> dir to change the display to */
       void changeCurDir(string newDir);
 
+      /*! Verify if the string pass the current filter
+       * \param s -> string to verify
+       * \return -> true if passed*/
+      bool passFilter(string s);
+
       button* cancelButton;    /**< The cancel Button */
       button* acceptButton;    /**< The accept Button */
       listText* textFiles;     /**< The files selector (as text) */

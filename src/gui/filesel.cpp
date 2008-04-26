@@ -181,20 +181,10 @@ void fileSel::changeCurDir(string newDir)
          /* Remove the "group" char */
          s[j].erase(0,1);
 
-         if(filter != "")
+         /* Verify if pass */
+         if(passFilter(s[j]))
          {
-            /* Verify if pass */
-            aux = s[j];
-            aux.erase(0,aux.length()-filter.length());
-            if(aux == filter)
-            {
-                /* Passed filter, so Insert at list */
-                textFiles->insertText(s[j], 240,240,240);
-            }
-         }
-         else
-         {
-            /* No filter, so Insert at list */
+            /* Passed filter, so Insert at list */
             textFiles->insertText(s[j], 240,240,240);
          }
       }
@@ -205,6 +195,26 @@ void fileSel::changeCurDir(string newDir)
    {
       delete[]s;
    }
+}
+
+/***********************************************************************
+ *                             passFilter                              *
+ ***********************************************************************/
+bool fileSel::passFilter(string s)
+{
+   string aux = s;
+
+   if(filter.empty())
+   {
+      /* No filter defined! */
+      return(true);
+   }
+
+   /* Get the remaining string (with the same size of filter) */
+   aux.erase(0,aux.length()-filter.length());
+
+   /* If it is equal to filter, passed */
+   return(aux == filter);
 }
 
 /***********************************************************************
@@ -220,7 +230,10 @@ int fileSel::getLastAction()
  ***********************************************************************/
 string fileSel::getFileName()
 {
+   /* Get the current directory */
    string fileName = curDir;
+
+   /* Get the current file */
    if(loading)
    {
       fileName += textCurFile->getText();
@@ -229,6 +242,13 @@ string fileSel::getFileName()
    {
       fileName += editCurFile->getText();
    }
+
+   /* Add the filter if the file hasn't it */
+   if(!passFilter(fileName))
+   {
+      fileName += filter;
+   }
+
    return(fileName);
 }
 
