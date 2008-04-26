@@ -143,7 +143,6 @@ void missionsController::addNewMission(string scriptFile)
 void missionsController::completeMission(mission* m, int type)
 {
    sound snd;
-   dirs dir;
 
    /* First, remove from the current list, without deleting it. */
    removeFromCurrent(m, false);
@@ -174,14 +173,12 @@ void missionsController::completeMission(mission* m, int type)
       }
 
       /* Play Completion Sound Effect */
-      snd.addSoundEffect(false, dir.getRealFile("sndfx/missions/"
-                                                "mission_complete.ogg"));
+      snd.addSoundEffect(false, "sndfx/missions/mission_complete.ogg");
    }
    else 
    {
       /* Play Failure Sound Effect */
-      snd.addSoundEffect(false, dir.getRealFile("sndfx/missions/"
-                                                "mission_failed.ogg"));
+      snd.addSoundEffect(false, "sndfx/missions/mission_failed.ogg");
    }
 }
 
