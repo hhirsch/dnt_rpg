@@ -355,16 +355,22 @@ model3d* modelList::getFirst()
 void modelList::removeUnusedModels()
 {
    model3d* mdl = first;
+   model3d* aux = NULL;
    int i, total;
 
    total = totalModels;
    
-   for(i = 0; i < totalModels; i++)
+   for(i = 0; i < total; i++)
    {
-      mdl = mdl->next;
-      if(mdl->previous->getUsedFlag() <= 0)
+      if(mdl->getUsedFlag() <= 0)
       {
-         removeModel(mdl->previous);
+         aux = mdl;
+         mdl = mdl->next;
+         removeModel(aux);
+      }
+      else
+      {
+         mdl = mdl->next;
       }
    }
    printAll();
