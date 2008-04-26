@@ -23,6 +23,9 @@ class raceWindow
        * \param retRace -> pointer where will be the choosed race */
       raceWindow(races* rc, skills* sk, interface* inter, race** retRace);
 
+      /*! Destructor */
+      ~raceWindow();
+
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
@@ -33,9 +36,10 @@ class raceWindow
       window*      intWindow;      /**< Pointer to the internal window */
 
    private:
-      races*      externalRaces;   /**< Pointer to the Aligns List */
-      race*       actualRace;      /**< Pointer to actual aligned */
+      int         curRace;         /**< Position of current race on ordered */
+      int         totalRaces;      /**< total Races */
       race**      choosedRace;     /**< Pointer to the choosed pointer race */
+      race**      racesOrder;      /**< Vector with races ordered by name */
       skills*     externalSkills;  /**< Pointer to External Skills List */
 
       button* buttonConfirm;

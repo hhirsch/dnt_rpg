@@ -1,5 +1,17 @@
 #include "racewindow.h"
 
+/***********************************************************************
+ *                           cmpRaceFunction                           *
+ ***********************************************************************/
+static int cmpRaceFunction(const void *p1,  const void *p2)
+{
+   /* Compare Function for the quicksort */
+   race** r1 = (race**) p1;
+   race** r2 = (race**) p2;
+
+   return((*r1)->name.compare((*r2)->name));
+}
+
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
@@ -7,6 +19,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
                        race** retRace)
 {
    dntFont fnt;
+   int i;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
@@ -14,17 +27,37 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    SDL_ShowCursor(SDL_ENABLE);
 
    externalSkills = sk;
-
    choosedRace = retRace;
+   curRace = -1;
+
+   /* Alphabetical Order Races */
+   totalRaces = rc->getTotalRaces();
+   racesOrder = new race*[totalRaces];
+   for(i = 0; i < totalRaces; i++)
+   {
+      racesOrder[i] = rc->getRaceByInteger(i);
+   }
+   qsort(&racesOrder[0], totalRaces, sizeof(race**), cmpRaceFunction);
    
-   externalRaces = rc;
    if(*choosedRace != NULL)
    {
-      actualRace = *choosedRace;
+      /* Find it on vector */
+      for(i = 0; ((i < totalRaces) && (curRace == -1)); i++)
+      {
+         if((*choosedRace)->name == racesOrder[i]->name)
+         {
+            curRace = i;
+         }
+      }
+      if(curRace == -1)
+      {
+         /* Not found */
+         curRace = 0;
+      }
    }
    else
    {
-      actualRace = externalRaces->getRaceByInteger(0);
+      curRace = 0;
    }
    
    /* create intWindow */
@@ -35,7 +68,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    /* Race Image */
    intWindow->getObjectsList()->insertTextBox(278,18,344,345,2,"");
    raceImage = intWindow->getObjectsList()->insertPicture(279,152,0,0,NULL);   
-   raceImage->set(actualRace->image);
+   raceImage->set(racesOrder[curRace]->image);
 
    /* Race Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(6,18,277,35,1,
@@ -61,7 +94,7 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
    buttonNext = intWindow->getObjectsList()->insertButton(600,346,615,364,
                                              fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(22,346,599,364,1, 
-                                                  actualRace->name.c_str());
+                                                  racesOrder[curRace]->name.c_str());
    textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
@@ -82,15 +115,23 @@ raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
 }
 
 /********************************************************************
+ *                           Destructor                             *
+ ********************************************************************/
+raceWindow::~raceWindow()
+{
+   delete[]racesOrder;
+}
+
+/********************************************************************
  *                         setDescription                           *
  ********************************************************************/
 void raceWindow::setDescription()
 {
    textDesc->setText("");
-   textDesc->addText(actualRace->citation + "||", DNT_FONT_ARIAL,
+   textDesc->addText(racesOrder[curRace]->citation + "||", DNT_FONT_ARIAL,
                      10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
                      147,18,18);
-   textDesc->addText(actualRace->description);
+   textDesc->addText(racesOrder[curRace]->description);
    textDesc->setFirstLine(0);
 }
 
@@ -105,12 +146,12 @@ void raceWindow::setCharacteristics()
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
-   for(i=0; i<actualRace->totalModifiers; i++)
+   for(i=0; i<racesOrder[curRace]->totalModifiers; i++)
    {
-      textCharac->addText(actualRace->raceModifiers[i].description + "||");
+      textCharac->addText(racesOrder[curRace]->raceModifiers[i].description + "||");
    }
 
-   if(actualRace->totalModifiers == 0)
+   if(racesOrder[curRace]->totalModifiers == 0)
    {
       textCharac->addText(string(gettext("No Modifiers.")) + "||",
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
@@ -123,12 +164,12 @@ void raceWindow::setCharacteristics()
                        DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
 
-   for(i=0; i<actualRace->totalFeats; i++)
+   for(i=0; i<racesOrder[curRace]->totalFeats; i++)
    {
-      textCharac->addText(actualRace->raceFeats[i] + "|");
+      textCharac->addText(racesOrder[curRace]->raceFeats[i] + "|");
    }
 
-   if(actualRace->totalFeats == 0)
+   if(racesOrder[curRace]->totalFeats == 0)
    {
       textCharac->addText(string(gettext("No Feats.")) + "|",
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
@@ -142,20 +183,20 @@ void raceWindow::setCharacteristics()
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
-   for(i=0; i<actualRace->totalSkills; i++)
+   for(i=0; i<racesOrder[curRace]->totalSkills; i++)
    {
-      skTmp = externalSkills->getSkillByString(actualRace->raceSkills[i]);
+      skTmp = externalSkills->getSkillByString(racesOrder[curRace]->raceSkills[i]);
       if(skTmp)
       {
          textCharac->addText(skTmp->name + "|");
       }
       else
       {
-         textCharac->addText(actualRace->raceSkills[i] + "|");
+         textCharac->addText(racesOrder[curRace]->raceSkills[i] + "|");
       }
    }
 
-   if(actualRace->totalSkills == 0)
+   if(racesOrder[curRace]->totalSkills == 0)
    {
       textCharac->addText(gettext("No Skills."),
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
@@ -179,22 +220,26 @@ int raceWindow::treat(guiObject* object, int eventInfo,
       {
          if(object == (guiObject*) buttonNext)
          {
-            actualRace = actualRace->next;
+            curRace = (curRace + 1) % totalRaces;
          }
          else
          {
-            actualRace = actualRace->previous;
+            curRace--;
+            if(curRace < 0)
+            {
+              curRace = totalRaces-1;
+            }
          }
-         textName->setText(actualRace->name);
+         textName->setText(racesOrder[curRace]->name);
          setDescription();
          setCharacteristics();
-         raceImage->set(actualRace->image);
+         raceImage->set(racesOrder[curRace]->image);
          intWindow->draw(0,0);
       }
       else if(object == (guiObject*) buttonConfirm)
       {
          raceImage->set(NULL);
-         *choosedRace = actualRace;
+         *choosedRace = racesOrder[curRace];
          inter->closeWindow(intWindow);
          intWindow = NULL;
          glEnable(GL_LIGHTING);
