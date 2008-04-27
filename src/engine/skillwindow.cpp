@@ -5,6 +5,18 @@
 #include "skillwindow.h"
 #include "../classes/defs.h"
 
+/***********************************************************************
+ *                          cmpSkillFunction                           *
+ ***********************************************************************/
+static int cmpSkillFunction(const void *p1,  const void *p2)
+{
+   /* Compare Function for the quicksort */
+   skill** s1 = (skill**) p1;
+   skill** s2 = (skill**) p2;
+
+   return((*s1)->name.compare((*s2)->name));
+}
+
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
@@ -17,25 +29,30 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
 
    char tmp[5];
    string saux;
-   int aux;
+   int i;
 
    charLevel = actualLevel;
-
-   curSkill = ATT_SKILL_FIRST; //Set to first skill after attributes
-   externalSkill = sk;
    saveSkill = savSkill;
-   avaiblePoints = saveSkill->getAvaiblePoints();
 
+   curSkill = 0; 
+   avaiblePoints = savSkill->getAvaiblePoints();
+
+   /* Alphabetical Order Skills */
+   totalSkills = (ATT_SKILL_LAST - ATT_SKILL_FIRST)+1;
+   skillsOrder = new skill*[totalSkills];
+   skillsDesc = new skill*[totalSkills];
+   for(i = 0; i < totalSkills; i++)
+   {
+      skillsOrder[i] = &savSkill->m_skills[i+ATT_SKILL_FIRST];
+      skillsOrder[i]->prevPoints = skillsOrder[i]->points;
+      skillsDesc[i] = &sk->m_skills[i+ATT_SKILL_FIRST];
+   }
+   qsort(&skillsOrder[0], totalSkills, sizeof(skill**), cmpSkillFunction);
+   qsort(&skillsDesc[0], totalSkills, sizeof(skill**), cmpSkillFunction);
 
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
 
-   /* Define previous points, for undo */
-   for(aux = curSkill; aux < ATT_SKILL_LAST; aux++)
-   { 
-     saveSkill->m_skills[aux].prevPoints = saveSkill->m_skills[aux].points;
-   }
-   
    /* Create Skill Window */
    intWindow = inter->insertWindow(centerX-132,centerY-128,
                                    centerX+132,centerY+128,
@@ -52,7 +69,7 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
 
    /* Skill Description */
    desc = intWindow->getObjectsList()->insertRolBar(8,38,256,170,
-                         externalSkill->m_skills[curSkill].description.c_str());
+                         skillsDesc[curSkill]->description.c_str());
 
    /* Contorns */
    intWindow->getObjectsList()->insertTextBox(8,171,256,224,2,"");
@@ -65,18 +82,18 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
    buttonNext = intWindow->getObjectsList()->insertButton(234,175,248,193,
                                               fnt.createUnicode(0x25BA),0);
    skillName = intWindow->getObjectsList()->insertTextBox(67,175,233,193,1,
-                                externalSkill->m_skills[curSkill].name.c_str());
+                                skillsDesc[curSkill]->name.c_str());
    skillName->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER,
                       DNT_FONT_STYLE_BOLD);
 
    /* Skill Image */
    skFig = intWindow->getObjectsList()->insertPicture(13,175,0,0,NULL);
-   skFig->set(externalSkill->m_skills[curSkill].image);
+   skFig->set(skillsDesc[curSkill]->image);
  
    /* Skill Points */
    intWindow->getObjectsList()->insertTextBox(52,200,101,214,0,
                                               gettext("Points:"));
-   sprintf(tmp,"%d",saveSkill->m_skills[curSkill].points);
+   sprintf(tmp,"%d",skillsOrder[curSkill]->points);
    saux = tmp;
    txtPoints = intWindow->getObjectsList()->insertTextBox(111,198,133,216,1,
                                                    saux.c_str());
@@ -93,7 +110,7 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
    /* Skill Costs */
    intWindow->getObjectsList()->insertTextBox(160,200,215,214,0,
                                        gettext("Cost"));
-   sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
+   sprintf(tmp,"%d",skillsOrder[curSkill]->mod);
    saux = tmp;
    txtCosts = intWindow->getObjectsList()->insertTextBox(216,200,256,214,0,
                                                   saux.c_str());
@@ -113,6 +130,16 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
 }
 
 /**************************************************************
+ *                          Destructor                        *
+ **************************************************************/
+skillWindow::~skillWindow()
+{
+   delete[] skillsOrder;
+   delete[] skillsDesc;
+}
+
+
+/**************************************************************
  *                             treat                          *
  **************************************************************/
 int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
@@ -121,18 +148,18 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
    {
       if(object == (guiObject*) buttonSum)
       {
-         if( ( avaiblePoints - saveSkill->m_skills[curSkill].mod >=0 ) && 
-             (saveSkill->m_skills[curSkill].points+1 <= charLevel+3) )
+         if( ( avaiblePoints - skillsOrder[curSkill]->mod >=0 ) && 
+             (skillsOrder[curSkill]->points+1 <= charLevel+3) )
          {
-             saveSkill->m_skills[curSkill].points++;
-             avaiblePoints -= saveSkill->m_skills[curSkill].mod;
+             skillsOrder[curSkill]->points++;
+             avaiblePoints -= skillsOrder[curSkill]->mod;
              
              char tmp[5];
              sprintf(tmp,"%d",avaiblePoints);
              string saux = tmp;
              txtAvaiblePoints->setText(saux);
         
-             sprintf(tmp,"%d",saveSkill->m_skills[curSkill].points);
+             sprintf(tmp,"%d",skillsOrder[curSkill]->points);
              saux = tmp;
              txtPoints->setText(saux);
 
@@ -140,64 +167,56 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
       }
       else if(object == (guiObject*) buttonDec)
       {
-         if(saveSkill->m_skills[curSkill].points - 1 >= 
-            saveSkill->m_skills[curSkill].prevPoints)
+         if(skillsOrder[curSkill]->points - 1 >= 
+            skillsOrder[curSkill]->prevPoints)
          {
-            saveSkill->m_skills[curSkill].points--;
-            avaiblePoints += saveSkill->m_skills[curSkill].mod;
+            skillsOrder[curSkill]->points--;
+            avaiblePoints += skillsOrder[curSkill]->mod;
 
             char tmp[5];
             sprintf(tmp,"%d",avaiblePoints);
             string saux = tmp;
             txtAvaiblePoints->setText(saux);
 
-            sprintf(tmp,"%d",saveSkill->m_skills[curSkill].points);
+            sprintf(tmp,"%d",skillsOrder[curSkill]->points);
             saux = tmp;
             txtPoints->setText(saux);
          }
       }
       else if(object == (guiObject*) buttonNext)
       {
-         if(curSkill < ATT_SKILL_LAST)
-         {
-            curSkill++;
-         }
-         else
-         {
-            curSkill = ATT_SKILL_FIRST;
-         } 
-         skillName->setText(externalSkill->m_skills[curSkill].name.c_str());
-         desc->setText(externalSkill->m_skills[curSkill].description.c_str());
-         skFig->set(externalSkill->m_skills[curSkill].image);
+         curSkill = (curSkill+1) % totalSkills;
+         skillName->setText(skillsDesc[curSkill]->name.c_str());
+         desc->setText(skillsDesc[curSkill]->description.c_str());
+         skFig->set(skillsDesc[curSkill]->image);
           
          char tmp[5];
-         sprintf(tmp,"%d",saveSkill->m_skills[curSkill].points);
+         sprintf(tmp,"%d",skillsOrder[curSkill]->points);
          string saux = tmp;
          txtPoints->setText(saux);
-         sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
+         sprintf(tmp,"%d",skillsOrder[curSkill]->mod);
          saux = tmp;
          txtCosts->setText(saux);
-
       }
       else if(object == (guiObject*) buttonPrevious)
       {
-         if(curSkill > ATT_SKILL_FIRST)
+         if(curSkill > 0)
          {
             curSkill--;
          }
          else
          {
-            curSkill = ATT_SKILL_LAST;
+            curSkill = totalSkills-1;
          }
-         skillName->setText(externalSkill->m_skills[curSkill].name.c_str());
-         desc->setText(externalSkill->m_skills[curSkill].description.c_str());
-         skFig->set(externalSkill->m_skills[curSkill].image);
+         skillName->setText(skillsDesc[curSkill]->name.c_str());
+         desc->setText(skillsDesc[curSkill]->description.c_str());
+         skFig->set(skillsDesc[curSkill]->image);
 
          char tmp[5];
-         sprintf(tmp,"%d",saveSkill->m_skills[curSkill].points);
+         sprintf(tmp,"%d",skillsOrder[curSkill]->points);
          string saux = tmp;
          txtPoints->setText(saux);
-         sprintf(tmp,"%d",saveSkill->m_skills[curSkill].mod);
+         sprintf(tmp,"%d",skillsOrder[curSkill]->mod);
          saux = tmp;
          txtCosts->setText(saux);
 
@@ -216,10 +235,9 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
       {
          /* Undo */
          int aux;
-         for(aux = curSkill; aux < VAR_AUX1; aux++)
+         for(aux = 0; aux < totalSkills; aux++)
          { 
-            saveSkill->m_skills[aux].points = 
-                                            saveSkill->m_skills[aux].prevPoints;
+            skillsOrder[aux]->points = skillsOrder[aux]->prevPoints;
           }
           skFig->set(NULL); //to not delete skill images
           inter->closeWindow(intWindow);
@@ -230,8 +248,8 @@ int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
       }
    }
 
-   if( saveSkill->m_skills[curSkill].points > 
-       saveSkill->m_skills[curSkill].prevPoints )
+   if( skillsOrder[curSkill]->points > 
+       skillsOrder[curSkill]->prevPoints )
    {
       txtPoints->setColor(13, 250, 85);
    }

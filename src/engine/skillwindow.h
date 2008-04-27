@@ -25,6 +25,9 @@ class skillWindow
       skillWindow(skills* sk, skills* savSkill, interface* inter,
                   int actualLevel);
 
+      /*! Destructor */
+      ~skillWindow();
+
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
@@ -35,8 +38,10 @@ class skillWindow
       window*   intWindow;           /**< Pointer to the internal window */
 
    private:
-      skills*      externalSkill; /**< Pointer to SkillList with descriptions */
       skills*      saveSkill;     /**< Pointer to the edited skill list */
+      skill**      skillsOrder;   /**< Sorted skills */
+      skill**      skillsDesc;    /**< Skill Descriptions Sorted */
+      int          totalSkills;   /**< Total avaible skills */
       int          avaiblePoints; /**< Avaible points to distribute */
       int          curSkill;      /**< Actual Skill */
       int          charLevel;     /**< Character Level */
