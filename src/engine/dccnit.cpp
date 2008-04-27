@@ -1771,13 +1771,23 @@ int engine::verifyMouseActions(Uint8 mButton)
                lastMousePression = time;
                if(porta->status)
                {
+                  /* Is Closing Door */
                   porta->orientation -= 90;
                   porta->status = 0;
+                  snd->addSoundEffect(porta->x, 
+                                      actualMap->getHeight(porta->x, porta->z),
+                                      porta->z, false, 
+                                      "sndfx/objects/door_close.ogg");
                }
                else
                {
+                  /* Is Openning Door */
                   porta->orientation += 90;
                   porta->status = 1;
+                  snd->addSoundEffect(porta->x, 
+                                      actualMap->getHeight(porta->x, porta->z),
+                                      porta->z, false, 
+                                      "sndfx/objects/door_open.ogg");
                }
             }
             pronto = 1;
