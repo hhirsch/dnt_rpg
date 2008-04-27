@@ -16,10 +16,7 @@
  - Don't let camera inner terrain;
  - Better Dynamic Lights Implementation;
  - Missions;
- - Receive XP on killing, trickering and completing 
-   missions;
- - Finish the implementation of combats on fight 
-   system;
+ - Sorting Classes, Races and Skills by Name;
  - Rewrote the GUI Renderer;
  - Fully and scalable collision for the 3D models;
  - GNU gettext used for internationalization;
@@ -42,6 +39,7 @@
  - Some Adjusts to the Particle Controller;
  - First real-game maps;
  - 'make install';
+ - MapEditor: Open/Save Dialog;
  - Fixed Bug on remove no more used Models and 
    dead with items;
  - Fixed Bug on NPCs Fight Animations;
