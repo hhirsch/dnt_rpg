@@ -2,6 +2,18 @@
 
 #include "classwindow.h"
 
+/***********************************************************************
+ *                          cmpClassFunction                           *
+ ***********************************************************************/
+static int cmpClassFunction(const void *p1,  const void *p2)
+{
+   /* Compare Function for the quicksort */
+   classe** c1 = (classe**) p1;
+   classe** c2 = (classe**) p2;
+
+   return((*c1)->name.compare((*c2)->name));
+}
+
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
@@ -11,22 +23,45 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
+   int i;
 
    glDisable(GL_LIGHTING);
    SDL_ShowCursor(SDL_ENABLE);
    
    externalSkills = sk;
    
-   externalClasses = cls;
    choosedClass = retClass;
+   curClass = -1;
 
+   /* Alphabetical Order Races */
+   totalClasses = cls->getTotalClasses();
+   classesOrder = new classe*[totalClasses];
+   for(i = 0; i < totalClasses; i++)
+   {
+      classesOrder[i] = cls->getClassByInteger(i);
+   }
+   qsort(&classesOrder[0], totalClasses, sizeof(classe**), cmpClassFunction);
+
+   /* Define the previous one, if needed */
    if(*choosedClass != NULL)
    {
-      actualClass = *choosedClass;
+      /* Find it on vector */
+      for(i = 0; ((i < totalClasses) && (curClass == -1)); i++)
+      {
+         if((*choosedClass)->name == classesOrder[i]->name)
+         {
+            curClass = i;
+         }
+      }
+      if(curClass == -1)
+      {
+         /* Not found */
+         curClass = 0;
+      }
    }
    else
    {
-      actualClass = externalClasses->getClassByInteger(0);
+      curClass = 0;
    }
    
    /* create intWindow */
@@ -37,7 +72,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    /* Class Image */
    intWindow->getObjectsList()->insertTextBox(5,18,73,364,2,"");
    classImage = intWindow->getObjectsList()->insertPicture(7,20,0,0,NULL);   
-   classImage->set(actualClass->image);
+   classImage->set(classesOrder[curClass]->image);
 
    /* Class Description */
    textDescTitle = intWindow->getObjectsList()->insertTextBox(74,18,345,35,1,
@@ -64,7 +99,7 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
    buttonNext = intWindow->getObjectsList()->insertButton(600,346,615,364,
                                                   fnt.createUnicode(0x25BA),0);
    textName = intWindow->getObjectsList()->insertTextBox(90,346,599,364,1, 
-                                                  actualClass->name.c_str());
+                                          classesOrder[curClass]->name.c_str());
    textName->setFont(DNT_FONT_ARIAL,12,DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_BOLD);
 
@@ -85,6 +120,14 @@ classWindow::classWindow(classes* cls, skills* sk, interface* inter,
 }
 
 /********************************************************************
+ *                           Destructor                             *
+ ********************************************************************/
+classWindow::~classWindow()
+{
+   delete[]classesOrder;
+}
+
+/********************************************************************
  *                       setCharacteristics                         *
  ********************************************************************/
 void classWindow::setCharacteristics()
@@ -93,7 +136,7 @@ void classWindow::setCharacteristics()
    char tmp[1024];
    char c;
    skill* skTmp;
-   sprintf(tmp,": d%d||",actualClass->lifeDiceID);
+   sprintf(tmp,": d%d||",classesOrder[curClass]->lifeDiceID);
 
 
    textCharac->setText("|");
@@ -107,7 +150,7 @@ void classWindow::setCharacteristics()
                        33, 65, 10);
 
    /* Skill Points for First Level */
-   if(actualClass->firstLevelSP.signal == SIGNAL_DEC)
+   if(classesOrder[curClass]->firstLevelSP.signal == SIGNAL_DEC)
    {
       c = '-';
    }
@@ -115,25 +158,25 @@ void classWindow::setCharacteristics()
    {
       c = '+';
    }
-   skTmp = externalSkills->getSkillByString(actualClass->firstLevelSP.attID);
+   skTmp = externalSkills->getSkillByString(classesOrder[curClass]->firstLevelSP.attID);
    if(skTmp)
    {
-      sprintf(tmp,": ( %d %c %s) x %d|",actualClass->firstLevelSP.sum, 
+      sprintf(tmp,": ( %d %c %s) x %d|",classesOrder[curClass]->firstLevelSP.sum, 
               c, skTmp->name.c_str(), 
-              actualClass->firstLevelSP.mult);
+              classesOrder[curClass]->firstLevelSP.mult);
    }
    else
    {
-      sprintf(tmp,": ( %d %c %s) x %d|",actualClass->firstLevelSP.sum, 
-              c, actualClass->firstLevelSP.attID.c_str(), 
-              actualClass->firstLevelSP.mult);
+      sprintf(tmp,": ( %d %c %s) x %d|",classesOrder[curClass]->firstLevelSP.sum, 
+              c, classesOrder[curClass]->firstLevelSP.attID.c_str(), 
+              classesOrder[curClass]->firstLevelSP.mult);
    }
    textCharac->addText(string(gettext("First Level")) + tmp, DNT_FONT_ARIAL,
                        10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
                        147,18,18);
 
    /* Other Levels Points */
-   if(actualClass->otherLevelsSP.signal == SIGNAL_DEC)
+   if(classesOrder[curClass]->otherLevelsSP.signal == SIGNAL_DEC)
    {
       c = '-';
    }
@@ -141,20 +184,20 @@ void classWindow::setCharacteristics()
    {
       c = '+';
    }
-   skTmp = externalSkills->getSkillByString(actualClass->otherLevelsSP.attID);
+   skTmp = externalSkills->getSkillByString(classesOrder[curClass]->otherLevelsSP.attID);
    if(skTmp)
    {
       sprintf(tmp,": ( %d %c %s) x %d||",
-              actualClass->otherLevelsSP.sum,
+              classesOrder[curClass]->otherLevelsSP.sum,
               c, skTmp->name.c_str(), 
-              actualClass->otherLevelsSP.mult);
+              classesOrder[curClass]->otherLevelsSP.mult);
    }
    else
    {
       sprintf(tmp,": ( %d %c %s) x %d||",
-              actualClass->otherLevelsSP.sum,
-              c, actualClass->otherLevelsSP.attID.c_str(), 
-              actualClass->otherLevelsSP.mult);
+              classesOrder[curClass]->otherLevelsSP.sum,
+              c, classesOrder[curClass]->otherLevelsSP.attID.c_str(), 
+              classesOrder[curClass]->otherLevelsSP.mult);
    }
    textCharac->addText(string(gettext("Other Levels")) + tmp, DNT_FONT_ARIAL,
                        10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
@@ -165,12 +208,12 @@ void classWindow::setCharacteristics()
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
-   for(i=0; i<actualClass->totalModifiers; i++)
+   for(i=0; i<classesOrder[curClass]->totalModifiers; i++)
    {
-      textCharac->addText(actualClass->classModifiers[i].description + "||");
+      textCharac->addText(classesOrder[curClass]->classModifiers[i].description + "||");
    }
 
-   if(actualClass->totalModifiers == 0)
+   if(classesOrder[curClass]->totalModifiers == 0)
    {
       textCharac->addText(string(gettext("No Modifiers.")) + "||",
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
@@ -183,12 +226,12 @@ void classWindow::setCharacteristics()
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
-   for(i=0; i<actualClass->totalFeats; i++)
+   for(i=0; i<classesOrder[curClass]->totalFeats; i++)
    {
-      textCharac->addText(actualClass->classFeats[i] + "|");
+      textCharac->addText(classesOrder[curClass]->classFeats[i] + "|");
    }
 
-   if(actualClass->totalFeats == 0)
+   if(classesOrder[curClass]->totalFeats == 0)
    {
       textCharac->addText(string(gettext("No Feats.")) + "||",
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
@@ -202,20 +245,20 @@ void classWindow::setCharacteristics()
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
                        33, 65, 10);
-   for(i=0; i<actualClass->totalSkills; i++)
+   for(i=0; i<classesOrder[curClass]->totalSkills; i++)
    {
-      skTmp = externalSkills->getSkillByString(actualClass->classSkills[i]);
+      skTmp = externalSkills->getSkillByString(classesOrder[curClass]->classSkills[i]);
       if(skTmp != NULL)
       {
          textCharac->addText(skTmp->name + "|");
       }
       else
       {
-         textCharac->addText(actualClass->classSkills[i] + "|");
+         textCharac->addText(classesOrder[curClass]->classSkills[i] + "|");
       }
    }
 
-   if(actualClass->totalSkills == 0)
+   if(classesOrder[curClass]->totalSkills == 0)
    {
       textCharac->addText(gettext("No Skills."), 
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
@@ -232,10 +275,10 @@ void classWindow::setCharacteristics()
 void classWindow::setDescription()
 {
    textDesc->setText("");
-   textDesc->addText(actualClass->citation + "||", DNT_FONT_ARIAL,
+   textDesc->addText(classesOrder[curClass]->citation + "||", DNT_FONT_ARIAL,
                      10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
                      147,18,18);
-   textDesc->addText(actualClass->description);
+   textDesc->addText(classesOrder[curClass]->description);
    textDesc->setFirstLine(0);
 }
 
@@ -248,25 +291,30 @@ int classWindow::treat(guiObject* object, int eventInfo, interface* inter)
    {
       if( (object == (guiObject*) buttonNext) || 
           (object == (guiObject*) buttonPrevious))
-      {
+      { 
          if(object == (guiObject*) buttonNext)
          {
-            actualClass = actualClass->next;
+            curClass = (curClass + 1) % totalClasses;
          }
          else
          {
-            actualClass = actualClass->previous;
+            curClass--;
+            if(curClass < 0)
+            {
+              curClass = totalClasses-1;
+            }
          }
-         textName->setText(actualClass->name);
+
+         textName->setText(classesOrder[curClass]->name);
          setDescription();
          setCharacteristics();
-         classImage->set(actualClass->image);
+         classImage->set(classesOrder[curClass]->image);
          intWindow->draw(0,0);
       }
       else if(object == (guiObject*) buttonConfirm)
       {
          classImage->set(NULL);
-         *choosedClass = actualClass;
+         *choosedClass = classesOrder[curClass];
          inter->closeWindow(intWindow);
          glEnable(GL_LIGHTING);
          SDL_ShowCursor(SDL_DISABLE);

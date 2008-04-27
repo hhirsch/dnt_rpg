@@ -24,6 +24,9 @@ class classWindow
       classWindow(classes* cls, skills* sk, interface* inter, 
                   classe** retClass);
 
+      /*! Destructor */
+      ~classWindow();
+
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
@@ -34,10 +37,11 @@ class classWindow
       window*      intWindow;           /**< Pointer to the internal window */
 
    private:
-      classes*      externalClasses;  /**< Pointer to the Classes List */
-      classe*       actualClass;      /**< Pointer to actual Class */
+      int           curClass;         /**< Pointer to current Class */
+      classe**      classesOrder;     /**< Alphabetical ordered classes */
       classe**      choosedClass;     /**< Pointer to choosed pointer class */
       skills*       externalSkills;   /**< Pointer to actual Skill List */
+      int           totalClasses;     /**< Total Avaible classes */
 
       button* buttonConfirm;
       button* buttonCancel;
