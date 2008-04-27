@@ -370,7 +370,7 @@ classe* classes::getClassByInteger(int id)
 }
 
 /******************************************************************
- *                          getClassByString                       *
+ *                          getClassByString                      *
  ******************************************************************/
 classe* classes::getClassByString(string id)
 {
@@ -388,4 +388,11 @@ classe* classes::getClassByString(string id)
    return(NULL);
 }
 
+/******************************************************************
+ *                          getTotalClasses                       *
+ ******************************************************************/
+int classes::getTotalClasses()
+{
+   return(totalClasses);
+}
 

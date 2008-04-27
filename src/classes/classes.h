@@ -81,6 +81,9 @@ class classes
        * \param id -> string ID of the class
        * \return class found, if found one. */
       classe* getClassByString(string id);
+
+      /*! Get total classes avaible */
+      int getTotalClasses();
       
    private:
       int totalClasses;        /**< Total Classes on List */
