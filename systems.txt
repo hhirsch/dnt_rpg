@@ -25,6 +25,7 @@ card not described here, just email us.
 |         Intel i915          | The game runs, without particle |
 |                             | effects (card doesn't support   |
 |                             | GL_ARB_point_sprite extensions) | 
+|                             | and without antialiasing.       |
 =================================================================
 |     NVIDIA GeForce 6200     | The game runs perfectly         |
 =================================================================
