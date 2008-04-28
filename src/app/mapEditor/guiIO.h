@@ -110,7 +110,7 @@ class guiIO
       string selectedText;  /**< Last selected text with list window */
       string curFileName;   /**< Current File Name */
 
-      interface* gui; /**< Internal GUI */
+      guiInterface* gui;    /**< Internal GUI */
 
       /**********************File*Window*******************************/
       window* fileWindow;      /**< File Selector Window (for load/save) */

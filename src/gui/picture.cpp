@@ -6,6 +6,7 @@
 #include "picture.h"
 #include <stdio.h>
 #include <SDL/SDL_image.h>
+#include <libintl.h>
 
 /******************************************************
  *                    Destructor                      *

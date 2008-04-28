@@ -461,7 +461,7 @@ string options::resolutionName()
 /****************************************************************
  *                    Open Options Screen                       *
  ****************************************************************/
-void options::displayOptionsScreen(interface* interf)
+void options::displayOptionsScreen(guiInterface* interf)
 {
    dirs dir;
    dntFont fnt;
@@ -668,7 +668,7 @@ void options::displayOptionsScreen(interface* interf)
 /****************************************************************
  *                             Treat                            *
  ****************************************************************/
-int options::treat(guiObject* object, int eventInfo, interface* interf,
+int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
                    GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    if( (eventInfo == ON_PRESS_BUTTON) && 

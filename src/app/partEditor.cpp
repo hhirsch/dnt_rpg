@@ -899,7 +899,7 @@ int main(int argc, char **argv)
    Uint8 *teclas;
    int mouseX,mouseY;
 
-   interface* gui = new interface(NULL);
+   guiInterface* gui = new guiInterface(NULL);
    window* janSalvar, *janEditar;
 
    char aux[10];

@@ -17,7 +17,7 @@ class barterWindow
        * \param inventBuyer -> pointer to the buyer inventory 
        * \param inter -> GUI interface used */
       barterWindow(inventory *inventSeller, inventory* inventBuyer,
-                   interface* inter, itemWindow* infoW);
+                   guiInterface* inter, itemWindow* infoW);
 
       /*! Destructor */
       ~barterWindow();
@@ -50,7 +50,7 @@ class barterWindow
       int curBuySlot;            /**< Index of the actual buy slot */
 
       barter* barterInventory;   /**< The barter inventory */
-      interface* gui;            /**< The used GUI */
+      guiInterface* gui;         /**< The used GUI */
       textBox* sellerTotals;     /**< The Seller Totals */
       textBox* buyerTotals;      /**< The Buyer Totals */
       window* intWindow;         /**< The window used */

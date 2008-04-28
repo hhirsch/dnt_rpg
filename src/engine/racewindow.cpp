@@ -15,7 +15,7 @@ static int cmpRaceFunction(const void *p1,  const void *p2)
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-raceWindow::raceWindow(races* rc, skills* sk, interface* inter,
+raceWindow::raceWindow(races* rc, skills* sk, guiInterface* inter,
                        race** retRace)
 {
    dntFont fnt;
@@ -211,7 +211,7 @@ void raceWindow::setCharacteristics()
  *                              treat                               *
  ********************************************************************/
 int raceWindow::treat(guiObject* object, int eventInfo, 
-                      interface* inter)
+                      guiInterface* inter)
 {
    if(eventInfo == PRESSED_BUTTON)
    {

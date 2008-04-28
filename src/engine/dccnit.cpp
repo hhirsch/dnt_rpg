@@ -16,7 +16,7 @@ engine::engine()
 {
    effect = NULL;
    /* Initialize internal lists */
-   gui  = new interface(NULL);
+   gui  = new guiInterface(NULL);
    actualMap = NULL;
    PCs = NULL;
    NPCs = NULL;
@@ -713,7 +713,7 @@ int engine::menuScreen(int Status, GLuint idTextura, bool reloadMusic)
  *********************************************************************/
 int engine::optionsScreen(GLuint idTextura)
 {
-   interface* interf = new interface(NULL);
+   guiInterface* interf = new guiInterface(NULL);
    int optionW = OPTIONSW_OTHER;
    int time = SDL_GetTicks();
    int timeAnterior = 0;

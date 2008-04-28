@@ -23,7 +23,7 @@ class attWindow
        * \param inter -> GUI interface to be used
        * \param modifiers -> race and class Modifiers
        * \param usePreviousValues -> if will use previous values or new ones */
-      attWindow(skills* sk, skills* savSkill, interface* inter, 
+      attWindow(skills* sk, skills* savSkill, guiInterface* inter, 
                 int modifiers[6], bool usePreviousValues);
 
       /*! Treat Events on Window. 
@@ -34,7 +34,7 @@ class attWindow
        * \param modl -> Model Viewn matrix
        * \param viewPort -> ViewPort Vector
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo, interface* inter,
+      int treat(guiObject* object, int eventInfo, guiInterface* inter,
                 GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
       window*      intWindow;     /**< Pointer to the internal window */

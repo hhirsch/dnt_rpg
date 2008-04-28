@@ -75,7 +75,7 @@ class guiIO
       int state;      /**< Internal State */
       int tool;       /**< Selected Tool */
 
-      interface* gui; /**< Internal GUI */
+      guiInterface* gui; /**< Internal GUI */
 
       /*********************File*Window*******************************/
       janela* fileWindow;   /**< File Window */

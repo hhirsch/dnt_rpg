@@ -10,7 +10,7 @@ class itemWindow
    public:
       /*! Constructor
        * \param interf -> gui interface to open the window */
-      itemWindow(interface* interf);
+      itemWindow(guiInterface* interf);
 
       /*! Destructor */
       ~itemWindow();
@@ -36,7 +36,7 @@ class itemWindow
       window* intWindow;         /**< Pointer to the internal window */
       object* curObject;         /**< Pointer to current object */
 
-      interface* inter;          /**< Current GUI interface */
+      guiInterface* inter;       /**< Current GUI interface */
       picture* fig;              /**< The item figure */
       button* okButton;          /**< The ok Button */
 

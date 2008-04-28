@@ -15,7 +15,7 @@
  *                          Constructor                       *
  **************************************************************/
 inventWindow::inventWindow(int xa, int ya, string title, 
-                           inventory *invent,interface* inter,
+                           inventory *invent,guiInterface* inter,
                            itemWindow* infoW)
 {
    init(xa,ya,title,invent,inter, infoW);
@@ -24,7 +24,7 @@ inventWindow::inventWindow(int xa, int ya, string title,
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-inventWindow::inventWindow(inventory *invent, interface* inter,
+inventWindow::inventWindow(inventory *invent, guiInterface* inter,
                            itemWindow* infoW)
 {
    init(0,1, gettext("Inventory"), invent, inter, infoW);
@@ -34,7 +34,7 @@ inventWindow::inventWindow(inventory *invent, interface* inter,
  *                              init                          *
  **************************************************************/
 void inventWindow::init(int xa, int ya, string title, 
-                       inventory *invent,interface* inter,
+                       inventory *invent,guiInterface* inter,
                        itemWindow* infoW)
 {
    dirs dir;

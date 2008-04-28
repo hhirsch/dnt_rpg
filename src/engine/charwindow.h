@@ -11,7 +11,7 @@ class charWindow
    public:
       /*! Constructor
        * \param interf -> gui interface to open the window */
-      charWindow(interface* interf);
+      charWindow(guiInterface* interf);
 
       /*! Destructor */
       ~charWindow();
@@ -45,7 +45,7 @@ class charWindow
 
       character* current;        /**< Current character */
 
-      interface* inter;          /**< Current GUI interface */
+      guiInterface* inter;       /**< Current GUI interface */
       button* okButton;          /**< The ok Button */
       button* levelUpButton;     /**< The Level Up Button */
       rolBar* infoBar;           /**< The Info Bar */

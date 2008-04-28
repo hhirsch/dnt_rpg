@@ -4,7 +4,7 @@
 /**********************************************************
  *                      constructor                       *
  **********************************************************/
-grassWindow::grassWindow(interface* actualGui)
+grassWindow::grassWindow(guiInterface* actualGui)
 {
    actualWindow = NULL;
    actualGrass = NULL;

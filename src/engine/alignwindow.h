@@ -21,14 +21,14 @@ class alignWindow
        * \param alg -> alignmnet list
        * \param inter -> GUI interface to use
        * \param actual -> pointer to the actual alignent */
-      alignWindow(aligns* alg, interface* inter, align** actual);
+      alignWindow(aligns* alg, guiInterface* inter, align** actual);
 
       /*! Treat Events on Window. 
        * \param inter -> pointer to GUI interface
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo,interface* inter );
+      int treat(guiObject* object, int eventInfo, guiInterface* inter );
 
       window*      intWindow;        /**< Pointer to the internal window */
 

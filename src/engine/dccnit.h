@@ -74,7 +74,7 @@ class engine
       #endif
 
       camera gameCamera;               /**< The Game Camera */
-      interface* gui;                  /**< GUI used on Engine */
+      guiInterface* gui;               /**< GUI used on Engine */
       GLdouble proj[16];               /**< Projection Matrix */
       GLdouble modl[16];               /**< ModelView Matrix  */
       GLfloat camProj[16];             /**< Camera Projection */

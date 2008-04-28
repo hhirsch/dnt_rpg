@@ -108,7 +108,7 @@ class conversation
        * \param gui -> window interface used
        * \param pers -> character to talk to
        * \param PC -> player's character */
-      void openDialog(int numDialog, interface* gui, character* pers,
+      void openDialog(int numDialog, guiInterface* gui, character* pers,
                       character* PC);
 
       /*! Treat Events on Window. 
@@ -129,7 +129,7 @@ class conversation
 
       protected:
          window* jan;          /**< Pointer to window used to show */
-         interface* usedGui;   /**< Pointer to the used interface */
+         guiInterface* usedGui;/**< Pointer to the used interface */
          dialog* first;        /**< Head Node */
          int total;            /**< Total Dialogs */
          int actual;           /**< Actual active Dialog */

@@ -12,7 +12,7 @@
  ***************************************************************/
 initialScreen::initialScreen()
 {
-   gui  = new interface(NULL);
+   gui  = new guiInterface(NULL);
    buttonNew = NULL;
    buttonContinue = NULL;
    buttonSave = NULL;

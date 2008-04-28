@@ -10,7 +10,7 @@ class waterWindow
    public:
       /*! Constructor
        * \param actualGui -> actual used interface */
-      waterWindow(interface* actualGui);
+      waterWindow(guiInterface* actualGui);
 
       /*! Destructor */
       ~waterWindow();
@@ -46,8 +46,8 @@ class waterWindow
 
       part1* activeWater;                 /**< The active Water */
       interPlane* activePlane;            /**< The active Plane */
-      partController* pSystem;                /**< The active Controller */
-      interface* gui;                     /**< The used Interface */
+      partController* pSystem;            /**< The active Controller */
+      guiInterface* gui;                  /**< The used Interface */
    
 
       window* intWindow;                  /**< The internal window pointer */

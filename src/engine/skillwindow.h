@@ -22,7 +22,7 @@ class skillWindow
 {
    public:
       /*! Skill Window constructor */
-      skillWindow(skills* sk, skills* savSkill, interface* inter,
+      skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
                   int actualLevel);
 
       /*! Destructor */
@@ -33,7 +33,7 @@ class skillWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo, interface* inter);
+      int treat(guiObject* object, int eventInfo, guiInterface* inter);
 
       window*   intWindow;           /**< Pointer to the internal window */
 

@@ -7,7 +7,7 @@
 /************************************************************************
  *                           Constructor                                *
  ************************************************************************/
-alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
+alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
 {
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
@@ -77,7 +77,7 @@ alignWindow::alignWindow(aligns* alg, interface* inter, align** actual)
 /************************************************************************
  *                              treat                                   *
  ************************************************************************/
-int alignWindow::treat(guiObject* object, int eventInfo, interface* inter)
+int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
 {
    if(eventInfo == PRESSED_BUTTON)
    {

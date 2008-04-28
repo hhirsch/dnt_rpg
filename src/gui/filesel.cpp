@@ -1,11 +1,27 @@
-#include <dirent.h>
-#include <sys/types.h>
+
+#ifndef _MSC_VER
+   #include <dirent.h>
+   #include <sys/types.h>
+#else
+   #include <windows.h>
+#endif
+
 #include <stdlib.h>
 #include <iostream>
+#include <string>
+using namespace std;
 
 #include "filesel.h"
 #include "guilist.h"
 #include "interface.h"
+
+
+#ifndef _MSC_VER
+   #define FILE_SEL_SLASH '/'
+#else
+   #define FILE_SEL_SLASH '\\'
+#endif
+
 
 /***********************************************************************
  *                             Constructor                             *
@@ -100,28 +116,50 @@ void fileSel::changeCurDir(string newDir)
 
    string aux = "";
    string* s = NULL;
+
+#ifndef _MSC_VER
    DIR* dir = NULL;
    struct dirent* dirEnt = NULL;
+#else
+   WIN32_FIND_DATA dir;
+   HANDLE hSearch;
+   string fullDir;
+#endif
 
    /* Clear current displayed */
    textFiles->clear();
 
    /* Change to dir */
    curDir = newDir;
-   if(curDir[curDir.length()-1] != '/')
+   if(curDir[curDir.length()-1] != FILE_SEL_SLASH)
    {
-      curDir += "/";
+      curDir += FILE_SEL_SLASH;
    }
+
+#ifndef _MSC_VER
    dir = opendir(newDir.c_str());
+#else
+   fullDir = curDir+"*.*";
+   hSearch = FindFirstFile((const char*)fullDir.c_str(), &dir);
+#endif
 
    total = 0;
+
+#ifndef _MSC_VER
    if(dir)
+#else
+   if(hSearch != INVALID_HANDLE_VALUE)
+#endif
    {
       /* first pass to define the size */
+#ifndef _MSC_VER
       for(dirEnt = readdir(dir); dirEnt != NULL; dirEnt = readdir(dir) )
       {
          total++;
       }
+#else
+      for(total=1; (FindNextFile(hSearch,&dir)); total++);
+#endif
 
       if(total > 0)
       {
@@ -129,10 +167,16 @@ void fileSel::changeCurDir(string newDir)
       }
 
       /* rewind for next pass */
+#ifndef _MSC_VER
       rewinddir(dir);
+#else
+      hSearch = FindFirstFile((const char*)fullDir.c_str(), &dir);
+#endif
 
       /* now save each directory/file name */
       j = 0;
+
+#ifndef _MSC_VER
       for(dirEnt = readdir(dir); dirEnt != NULL; dirEnt = readdir(dir) )
       {
          s[j] = dirEnt->d_name;
@@ -148,6 +192,21 @@ void fileSel::changeCurDir(string newDir)
          }
          j++;
       }
+#else
+      for(; (FindNextFile(hSearch,&dir)); )
+      {
+         s[j] = dir.cFileName;
+         if(dir.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+         {
+            s[j] = "d" + s[j];
+         }
+         else
+         {
+            s[j] = "f" + s[j];
+         }
+         j++;
+      }
+#endif
    }
    else
    {

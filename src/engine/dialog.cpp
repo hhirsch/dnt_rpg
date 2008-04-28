@@ -460,7 +460,7 @@ void conversation::removeDialog(int num)
 /*************************************************************************
  *                              openDialog                               *
  *************************************************************************/
-void conversation::openDialog(int numDialog, interface* gui, character* pers,
+void conversation::openDialog(int numDialog, guiInterface* gui, character* pers,
                               character* PC)
 {
    dirs dir;

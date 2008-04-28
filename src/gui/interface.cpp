@@ -10,7 +10,7 @@ int mouseX=0,mouseY=0;
 /*********************************************************************
  *                             GUI Constructor                       *
  *********************************************************************/
-interface::interface(char* arqfundo)
+guiInterface::guiInterface(char* arqfundo)
 {
    ljan = new windowList;
    objects = new guiList;
@@ -29,7 +29,7 @@ interface::interface(char* arqfundo)
 /*********************************************************************
  *                           GUI Destructor                          *
  *********************************************************************/
-interface::~interface()
+guiInterface::~guiInterface()
 {
    delete(ljan);
    delete(objects);
@@ -39,7 +39,7 @@ interface::~interface()
 /*********************************************************************
  *                   Take care of GUI I/O Events                     *
  *********************************************************************/
-guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao, 
+guiObject* guiInterface::manipulateEvents(int x, int y, Uint8 Mbotao, 
                                        Uint8* tecla, int& eventInfo)
 {
    guiObject* actObj = verifySingleEvents(x,y,Mbotao,tecla, eventInfo);
@@ -56,7 +56,7 @@ guiObject* interface::manipulateEvents(int x, int y, Uint8 Mbotao,
 /*********************************************************************
  *                   verifyFileSelectorsEvents                       *
  *********************************************************************/
-guiObject* interface::verifyFileSelectorsEvents(guiObject* actObj, 
+guiObject* guiInterface::verifyFileSelectorsEvents(guiObject* actObj, 
                                                 int& eventInfo)
 {
    int aux;
@@ -99,7 +99,7 @@ guiObject* interface::verifyFileSelectorsEvents(guiObject* actObj,
 /*********************************************************************
  *                      verifyCompositeEvents                        *
  *********************************************************************/
-guiObject* interface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
+guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
 {
    int aux;
    guiObject *obj = ljan->getActiveWindow()->getObjectsList()->getFirst()->next;
@@ -130,7 +130,7 @@ guiObject* interface::verifyCompositeEvents(guiObject* actObj, int& eventInfo)
 /*********************************************************************
  *                        verifySingleEvents                         *
  *********************************************************************/
-guiObject* interface::verifySingleEvents(int x, int y, Uint8 Mbotao, 
+guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao, 
                                          Uint8* tecla, int& eventInfo)
 {
     int aux;
@@ -597,9 +597,9 @@ guiObject* interface::verifySingleEvents(int x, int y, Uint8 Mbotao,
 }
 
 /*********************************************************************
- *                   Draw Graphic User Interface                     *
+ *                   Draw Graphic User guiInterface                     *
  *********************************************************************/
-void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
+void guiInterface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    int aux;
    double depth = 0.012;
@@ -635,7 +635,7 @@ void interface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 /*********************************************************************
  *                          clearActiveObject                        *
  *********************************************************************/
-window* interface::getActiveWindow()
+window* guiInterface::getActiveWindow()
 {
    if(ljan)
    {
@@ -647,7 +647,7 @@ window* interface::getActiveWindow()
 /*********************************************************************
  *                          clearActiveObject                        *
  *********************************************************************/
-void interface::clearActiveObject()
+void guiInterface::clearActiveObject()
 {
    focus = FOCUS_GAME;
    objAtivo = NULL;
@@ -656,7 +656,7 @@ void interface::clearActiveObject()
 /*********************************************************************
  *                             closeWindow                           *
  *********************************************************************/
-void interface::closeWindow(window *jan)
+void guiInterface::closeWindow(window *jan)
 {
    clearActiveObject();
    ljan->removeWindow(jan);
@@ -665,7 +665,7 @@ void interface::closeWindow(window *jan)
 /*********************************************************************
  *                           closeAllWindows                         *
  *********************************************************************/
-void interface::closeAllWindows()
+void guiInterface::closeAllWindows()
 {
    window* j = (window*)ljan->getFirst()->next;
    window* tmp;
@@ -681,7 +681,7 @@ void interface::closeAllWindows()
 /*********************************************************************
  *                            insertWindow                           *
  *********************************************************************/
-window* interface::insertWindow(int xa,int ya,int xb,int yb, string text)
+window* guiInterface::insertWindow(int xa,int ya,int xb,int yb, string text)
 {
    return(ljan->insertWindow(xa,ya,xb,yb,text));
 }
@@ -689,7 +689,7 @@ window* interface::insertWindow(int xa,int ya,int xb,int yb, string text)
 /*********************************************************************
  *                              openWindow                           *
  *********************************************************************/
-void interface::openWindow(window* jan)
+void guiInterface::openWindow(window* jan)
 {
    jan->open();
 }
@@ -697,7 +697,7 @@ void interface::openWindow(window* jan)
 /*********************************************************************
  *                              mouseOnGui                           *
  *********************************************************************/
-bool interface::mouseOnGui(int mouseX, int mouseY)
+bool guiInterface::mouseOnGui(int mouseX, int mouseY)
 {
    int aux;
    window *jaux=(window*)ljan->getFirst()->next;

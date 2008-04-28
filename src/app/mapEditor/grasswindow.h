@@ -11,7 +11,7 @@ class grassWindow
    public:
       /*! Constructor
        * \param actualGui -> the actual GUI interface*/
-      grassWindow(interface* actualGui);
+      grassWindow(guiInterface* actualGui);
       /*! Destructor */
       ~grassWindow();
 
@@ -40,7 +40,7 @@ class grassWindow
 
       grass* actualGrass;     /**< the actual on edition grass */
       partController* pSystem;/**< actual particle system controller */
-      interface* gui;         /**< the actual used GUI */
+      guiInterface* gui;      /**< the actual used GUI */
      
       int lastTime;           /**< Last time checked ON_PRESS events */
 

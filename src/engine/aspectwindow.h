@@ -30,7 +30,7 @@ class aspectWindow
       /*! Constructor
        * \param dude -> pointer to the edited character
        * \param inter -> pointer to the GUI used interface */
-      aspectWindow(character* dude, interface* inter);
+      aspectWindow(character* dude, guiInterface* inter);
       /*! Destructor */
       ~aspectWindow();
 
@@ -39,7 +39,7 @@ class aspectWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo, interface* inter);
+      int treat(guiObject* object, int eventInfo, guiInterface* inter);
 
    private:
       /*! Load All Portrait Images */

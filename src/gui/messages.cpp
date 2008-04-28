@@ -7,7 +7,7 @@
 string getStringFromUser(string title, string previous,
                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   interface* gui = new interface(NULL);
+   guiInterface* gui = new guiInterface(NULL);
    window* getWindow;
    button* okButton;
    button* cancelButton;
@@ -93,7 +93,7 @@ string getStringFromUser(string title, string previous,
 int getOptionFromUser(string title, string message, string opt1, string opt2,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   interface* gui = new interface(NULL);
+   guiInterface* gui = new guiInterface(NULL);
    window* getWindow;
    button* opt1Button;
    button* opt2Button;
@@ -188,7 +188,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
 void showMessage(string title, string message,
                  GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
-   interface* gui = new interface(NULL);
+   guiInterface* gui = new guiInterface(NULL);
    window* getWindow;
    button* okButton;
    textBox* quadText = NULL;

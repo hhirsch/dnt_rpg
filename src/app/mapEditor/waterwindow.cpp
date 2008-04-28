@@ -4,7 +4,7 @@
 /***********************************************************************
  *                            Constructor                              *
  ***********************************************************************/
-waterWindow::waterWindow(interface* actualGui)
+waterWindow::waterWindow(guiInterface* actualGui)
 {
    gui = actualGui;
    activeWater = NULL;

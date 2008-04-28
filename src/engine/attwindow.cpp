@@ -11,7 +11,7 @@
 /**************************************************************
  *                      Constructor                           *
  **************************************************************/
-attWindow::attWindow(skills* sk, skills* savSkill, interface* inter,
+attWindow::attWindow(skills* sk, skills* savSkill, guiInterface* inter,
                      int modifiers[6],bool usePreviousValues)
 {
    dirs dir;
@@ -489,7 +489,7 @@ int attWindow::assignAttMod(int att)
 /**************************************************************
  *                            treat                           *
  **************************************************************/
-int attWindow::treat(guiObject* object, int eventInfo, interface* inter,
+int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
                      GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
    char tmp[5];

@@ -5,7 +5,7 @@
  *                         Constructor                         *
  ***************************************************************/ 
 barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
-                           interface* inter, itemWindow* infoW)
+                           guiInterface* inter, itemWindow* infoW)
 {
    dirs dir;
    /* Init Values */

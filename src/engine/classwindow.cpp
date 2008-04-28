@@ -17,7 +17,7 @@ static int cmpClassFunction(const void *p1,  const void *p2)
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-classWindow::classWindow(classes* cls, skills* sk, interface* inter, 
+classWindow::classWindow(classes* cls, skills* sk, guiInterface* inter, 
                          classe** retClass)
 {
    dntFont fnt;
@@ -285,7 +285,7 @@ void classWindow::setDescription()
 /********************************************************************
  *                              treat                               *
  ********************************************************************/
-int classWindow::treat(guiObject* object, int eventInfo, interface* inter)
+int classWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
 {
    if(eventInfo == PRESSED_BUTTON)
    {

@@ -9,7 +9,7 @@
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-charWindow::charWindow(interface* interf)
+charWindow::charWindow(guiInterface* interf)
 {
    inter = interf;
    intWindow = NULL;

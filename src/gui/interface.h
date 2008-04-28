@@ -2,8 +2,8 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code.
  */
 
-#ifndef _interface_h
-#define _interface_h
+#ifndef _guiInterface_h
+#define _guiInterface_h
 
 #include <string.h>
 #include "window.h"
@@ -52,17 +52,17 @@
 #define FOCUS_GAME         100
 
 
-/*! Interface is the GUI upper level class. Is from it that all GUI events
+/*! guiInterface is the GUI upper level class. Is from it that all GUI events
  * are treated, and all actions maybe be takken. */
-class interface
+class guiInterface
 {
    public:
       /*! Constructor
        * \param arqFundo -> name of a image file to be the background. 
        *                    NULL if no background is used*/
-      interface(char* arqFundo);
+      guiInterface(char* arqFundo);
       /*! Destructor  */
-      ~interface();
+      ~guiInterface();
 
       /*! Manipulate Events on Gui.
        * \param x -> mouseX position
@@ -74,7 +74,7 @@ class interface
        * \return -> pointer to the active objet of the action */
       guiObject* manipulateEvents(int x, int y, Uint8 Mbotao, Uint8* tecla,
                                   int& eventInfo);
-      /*! Draw all the interface (all windows and objects)
+      /*! Draw all the guiInterface (all windows and objects)
        * \param proj -> project view matrix
        * \param modl -> model view matrix
        * \param viewPort -> the viewport vector*/
@@ -85,14 +85,14 @@ class interface
       /*! Close a window
        * \param jan -> pointer to the window */
       void closeWindow(window *jan);
-      /*! Close all interface openned windows */
+      /*! Close all guiInterface openned windows */
       void closeAllWindows();
       /*! Verify if the mouse is on some window or not
        * \param mouseX -> mouse x position
        * \param mouseY -> mouse y position
        * \return true if mouse is in some window, false otherwise. */
       bool mouseOnGui(int mouseX, int mouseY);
-      /*! Insert a window on the interface
+      /*! Insert a window on the guiInterface
        * \param xa -> x1 window position
        * \param ya -> y1 window position
        * \param xb -> x2 window posiiton 
@@ -104,7 +104,7 @@ class interface
        * \param jan -> pointer to the window opened */
       void openWindow(window* jan);
       
-      /*! Get the interface focus
+      /*! Get the guiInterface focus
        * \return focus constant of the current focus*/
       int getFocus(){return(focus);};
 

@@ -42,9 +42,9 @@ class initialScreen
              GLdouble modl[16], GLint viewPort[4],
              GLuint idTextura, sound* snd);
    private:
-      interface* gui;  /**< GUI for Windows */
+      guiInterface* gui; /**< GUI for Windows */
 
-      int result;      /**< Result of the initial Screen */
+      int result;        /**< Result of the initial Screen */
       bool done;
       
       button* buttonNew;

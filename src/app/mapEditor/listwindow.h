@@ -45,7 +45,7 @@ class listWindow
    public:
       /*! Constructor
        * \param gui -> pointer to the interface used */
-      listWindow(interface* gui);
+      listWindow(guiInterface* gui);
       /*! Destructor */
       ~listWindow();
 
@@ -83,7 +83,7 @@ class listWindow
 
       int state;                 /**< Internal State */
       window* intWindow;         /**< Pointer to the window */
-      interface* intGui;         /**< Pointer to the interface */
+      guiInterface* intGui;      /**< Pointer to the interface */
       listText* list;            /**< Pointer to the listText */
       listElement* listElements; /**< Elements on the list */
       int total;                 /**< Total elements on list */

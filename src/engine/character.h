@@ -126,7 +126,7 @@ class character: public aniModel
       void setOrientation(GLfloat ori);
 
       /*! Open, if exists and not opened, the conversation dialog */
-      void openConversationDialog(interface* gui, character *PC);
+      void openConversationDialog(guiInterface* gui, character *PC);
 
       /*! Create the conversation (load all things, but not open the dialog)
        * \param pEngine -> pointer to current engine */

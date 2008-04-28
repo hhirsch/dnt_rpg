@@ -20,7 +20,7 @@ static int cmpSkillFunction(const void *p1,  const void *p2)
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-skillWindow::skillWindow(skills* sk, skills* savSkill, interface* inter,
+skillWindow::skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
                          int actualLevel)
 {
    dntFont fnt;
@@ -142,7 +142,7 @@ skillWindow::~skillWindow()
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-int skillWindow::treat(guiObject* object, int eventInfo, interface* inter)
+int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
 {
    if(eventInfo == PRESSED_BUTTON)
    {

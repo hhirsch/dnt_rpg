@@ -32,7 +32,7 @@
 /********************************************************************
  *                             Constructor                          *
  ********************************************************************/
-listWindow::listWindow(interface* gui)
+listWindow::listWindow(guiInterface* gui)
 {
    intGui = gui;
    state = -1;

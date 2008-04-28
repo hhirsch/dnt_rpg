@@ -31,7 +31,7 @@ class inventWindow
        * \param invent -> inventories to show
        * \param inter -> GUI interface to use 
        * \param itemWindow -> pointer to the info window used */
-      inventWindow(inventory *invent,interface* inter, itemWindow* infoW);
+      inventWindow(inventory *invent, guiInterface* inter, itemWindow* infoW);
 
       /*! Constructor
        * \param xa -> position X to open the window
@@ -41,7 +41,7 @@ class inventWindow
        * \param inter -> GUI interface to use 
        * \param itemWindow -> pointer to the info window used */
       inventWindow(int xa, int ya, string title, 
-                   inventory *invent,interface* inter,
+                   inventory *invent, guiInterface* inter,
                    itemWindow* infoW);
 
       /*! Destructor */
@@ -71,7 +71,7 @@ class inventWindow
 
       /*! Init the window */
       void init(int xa, int ya, string title, inventory *invent,
-                interface* inter, itemWindow* infoW);
+                guiInterface* inter, itemWindow* infoW);
 
       /*! Open the Inventory Object Menu  */
       void openMenu(int x, int y, int type);
@@ -80,7 +80,7 @@ class inventWindow
 
       inventory *inventories;         /**< Extern Inventories*/
 
-      interface* interf;              /**< Pointer to Interface */
+      guiInterface* interf;           /**< Pointer to Interface */
       window* intWindow;              /**< Internal Window */
       tabButton* inventoryTabButton;  /**< Inventory Tab Button */
       oneTabButton* inventoryButton;  /**< Inventory Spaces Button */

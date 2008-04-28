@@ -21,7 +21,7 @@ class classWindow
        * \param sk -> list of skills 
        * \param inter -> pointer to the GUI
        * \param retClass -> pointer to the choosed class */
-      classWindow(classes* cls, skills* sk, interface* inter, 
+      classWindow(classes* cls, skills* sk, guiInterface* inter, 
                   classe** retClass);
 
       /*! Destructor */
@@ -32,7 +32,7 @@ class classWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo,interface* inter); 
+      int treat(guiObject* object, int eventInfo,guiInterface* inter); 
 
       window*      intWindow;           /**< Pointer to the internal window */
 

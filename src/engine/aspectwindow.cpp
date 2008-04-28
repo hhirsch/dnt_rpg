@@ -8,7 +8,7 @@
 /**************************************************************
  *                          Constructor                       *
  **************************************************************/
-aspectWindow::aspectWindow(character* dude, interface* inter)
+aspectWindow::aspectWindow(character* dude, guiInterface* inter)
 {
    dirs dir;
    dntFont fnt;
@@ -125,7 +125,7 @@ void aspectWindow::loadImages()
 /**************************************************************
  *                             treat                          *
  **************************************************************/
-int aspectWindow::treat(guiObject* object, int eventInfo, interface* inter)
+int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
 {
    if(eventInfo == PRESSED_BUTTON)
    {

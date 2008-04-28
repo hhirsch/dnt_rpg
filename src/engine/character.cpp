@@ -212,7 +212,7 @@ void character::closeConversation()
 /*********************************************************************
  *                      openConversationDialog                       *
  *********************************************************************/
-void character::openConversationDialog(interface* gui, character * PC)
+void character::openConversationDialog(guiInterface* gui, character * PC)
 {
    conversation* cs = (conversation*) conv;
    if( (cs != NULL) && (!cs->windowOpened()) )

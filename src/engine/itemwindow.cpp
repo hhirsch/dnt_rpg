@@ -6,7 +6,7 @@
 /********************************************************************
  *                           Constructor                            *
  ********************************************************************/
-itemWindow::itemWindow(interface* interf)
+itemWindow::itemWindow(guiInterface* interf)
 {
    inter = interf;
    intWindow = NULL;

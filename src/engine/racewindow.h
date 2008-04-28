@@ -21,7 +21,7 @@ class raceWindow
        * \param rc -> races list
        * \param inter -> GUI interface
        * \param retRace -> pointer where will be the choosed race */
-      raceWindow(races* rc, skills* sk, interface* inter, race** retRace);
+      raceWindow(races* rc, skills* sk, guiInterface* inter, race** retRace);
 
       /*! Destructor */
       ~raceWindow();
@@ -31,7 +31,7 @@ class raceWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return 0 on close, 1 otherwise */
-      int treat(guiObject* object, int eventInfo,interface* inter);
+      int treat(guiObject* object, int eventInfo, guiInterface* inter);
 
       window*      intWindow;      /**< Pointer to the internal window */
 
