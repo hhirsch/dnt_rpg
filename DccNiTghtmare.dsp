@@ -144,6 +144,10 @@ SOURCE=.\src\engine\character.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\charwindow.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\classes\classes.cpp
 # End Source File
 # Begin Source File
@@ -184,6 +188,10 @@ SOURCE=.\src\engine\dialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\dirs.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\etc\distance.cpp
 # End Source File
 # Begin Source File
@@ -208,15 +216,15 @@ SOURCE=.\src\classes\feats.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\etc\fifo.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\fight\fightGroup.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\fight\fightSystem.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\filesel.cpp
 # End Source File
 # Begin Source File
 
@@ -288,6 +296,14 @@ SOURCE=.\src\classes\itemslot.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\itemwindow.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\particle\lake.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\listtext.cpp
 # End Source File
 # Begin Source File
@@ -356,6 +372,10 @@ SOURCE=.\src\engine\options.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\overlaps.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\particle\part1.cpp
 # End Source File
 # Begin Source File
@@ -384,15 +404,15 @@ SOURCE=.\src\particle\part7.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\particle\partcontroller.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\particle\particle.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\particle\partlist.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\particle\partSystem.cpp
 # End Source File
 # Begin Source File
 
@@ -468,15 +488,15 @@ SOURCE=.\src\gui\textbox.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\etc\texture.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\classes\thing.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\lang\translate.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\userinfo.cpp
 # End Source File
 # Begin Source File
 
@@ -489,6 +509,10 @@ SOURCE=.\src\particle\wave.cpp
 # Begin Source File
 
 SOURCE=.\src\classes\weapon.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\particle\wind.cpp
 # End Source File
 # Begin Source File
 
@@ -556,6 +580,10 @@ SOURCE=.\src\engine\character.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\charwindow.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\classes\classes.h
 # End Source File
 # Begin Source File
@@ -600,6 +628,10 @@ SOURCE=.\src\classes\dices.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\dirs.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\etc\distance.h
 # End Source File
 # Begin Source File
@@ -624,15 +656,15 @@ SOURCE=.\src\classes\feats.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\etc\fifo.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\fight\fightGroup.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\fight\fightSystem.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\filesel.h
 # End Source File
 # Begin Source File
 
@@ -704,7 +736,15 @@ SOURCE=.\src\engine\inventwindow.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\itemwindow.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\janela.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\particle\lake.h
 # End Source File
 # Begin Source File
 
@@ -792,6 +832,10 @@ SOURCE=.\src\engine\options.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\overlaps.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\particle\part1.h
 # End Source File
 # Begin Source File
@@ -820,15 +864,15 @@ SOURCE=.\src\particle\part7.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\particle\partcontroller.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\particle\particle.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\particle\partlist.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\particle\partSystem.h
 # End Source File
 # Begin Source File
 
@@ -900,15 +944,15 @@ SOURCE=.\src\gui\textbox.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\etc\texture.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\classes\thing.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\lang\translate.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\userinfo.h
 # End Source File
 # Begin Source File
 
@@ -921,6 +965,10 @@ SOURCE=.\src\particle\wave.h
 # Begin Source File
 
 SOURCE=.\src\classes\weapon.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\particle\wind.h
 # End Source File
 # Begin Source File
 

@@ -187,6 +187,10 @@ SOURCE=.\src\engine\dialog.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\dirs.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\etc\distance.cpp
 # End Source File
 # Begin Source File
@@ -215,15 +219,15 @@ SOURCE=.\src\classes\feats.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\etc\fifo.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\fight\fightGroup.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\fight\fightSystem.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\gui\filesel.cpp
 # End Source File
 # Begin Source File
 
@@ -300,6 +304,10 @@ SOURCE=.\src\engine\inventwindow.cpp
 # Begin Source File
 
 SOURCE=.\src\classes\itemslot.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\particle\lake.cpp
 # End Source File
 # Begin Source File
 
@@ -391,6 +399,10 @@ SOURCE=.\src\engine\options.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\overlaps.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\particle\part1.cpp
 # End Source File
 # Begin Source File
@@ -419,6 +431,10 @@ SOURCE=.\src\particle\part7.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\particle\partcontroller.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\particle\particle.cpp
 # End Source File
 # Begin Source File
@@ -428,10 +444,6 @@ SOURCE=.\src\app\mapEditor\particles.cpp
 # Begin Source File
 
 SOURCE=.\src\particle\partlist.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\particle\partSystem.cpp
 # End Source File
 # Begin Source File
 
@@ -511,15 +523,15 @@ SOURCE=.\src\gui\textbox.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\etc\texture.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\classes\thing.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\lang\translate.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\userinfo.cpp
 # End Source File
 # Begin Source File
 
@@ -540,6 +552,10 @@ SOURCE=.\src\particle\wave.cpp
 # Begin Source File
 
 SOURCE=.\src\classes\weapon.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\particle\wind.cpp
 # End Source File
 # Begin Source File
 
@@ -636,10 +652,6 @@ SOURCE=.\src\gui\farso.h
 # Begin Source File
 
 SOURCE=.\src\classes\feats.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\etc\fifo.h
 # End Source File
 # Begin Source File
 
@@ -823,10 +835,6 @@ SOURCE=.\src\app\mapEditor\particles.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\particle\partSystem.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\ia\pattAgent.h
 # End Source File
 # Begin Source File
@@ -872,10 +880,6 @@ SOURCE=.\src\engine\sun.h
 # Begin Source File
 
 SOURCE=.\src\app\mapEditor\terrain.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\etc\texture.h
 # End Source File
 # Begin Source File
 
