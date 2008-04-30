@@ -1,4 +1,4 @@
-18
+20
 Barrel models/objetos/geral/barrel/barrel.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Cap models/objetos/geral/cap/cap.dcc
@@ -11,9 +11,11 @@ Exclamation models/objetos/geral/exclamacao/exclamacao.dcc
 Fridge models/objetos/geral/fridge/fridge.dcc
 Guitar models/objetos/geral/guitarra/guitarra.dcc
 Letto models/objetos/geral/letto/letto.dcc
+Meuble models/objetos/geral/meuble/meuble.dcc
 Notebook models/objetos/geral/notebook/notebook.dcc
 Pillow models/objetos/geral/pillow/pillow.dcc
 RefMachine models/objetos/geral/refmachine/refmachine.dcc
 Sofa models/objetos/geral/sofa/sofa.dcc
 Stop_Sign models/objetos/geral/placa_pare/placa_pare.dcc
+TV_42 models/objetos/geral/tv42/tv42.dcc
 Wardrobe models/objetos/geral/wardrobe/wardrobe.dcc
