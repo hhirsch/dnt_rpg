@@ -29,6 +29,9 @@ using namespace std;
 #define TEXTURE_REPEATS (OUTDOOR_SQUARE_SIZE / 256) /**< Number of Repeats */ 
 #define ALPHA_TEXTURE_INC       4 /**< Points per square on each alpha texture*/
 
+#define DOOR_STATUS_CLOSED      0      /**< If door is closed */
+#define DOOR_STATUS_OPENED      1      /**< If door is opened */
+
 
 /*!
  ****************************************************
@@ -92,6 +95,9 @@ class door
       GLfloat x,z;             /**< position on map */
       GLint status;            /**< actual status (opened, closed) */
       GLint orientation;       /**< orientation */
+      GLfloat delta;           /**< current orientation delta
+                                    (is inc or dec by the current status,
+                                     from 0 to 90) */
       door* next;      /**< pointer to next door on map */
 };
 

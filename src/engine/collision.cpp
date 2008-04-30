@@ -231,7 +231,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY ,GLfloat va
 
       XA[3] = boundPorta.x2;
       ZA[3] = boundPorta.z1;
-      rotTransBoundingBox(door1->orientation, XA, ZA,
+      rotTransBoundingBox(door1->orientation+door1->delta, XA, ZA,
                           door1->x, 0.0,0.0,door1->z, 
                           minObj, maxObj);
       if(intercepts( min, max, minObj, maxObj))

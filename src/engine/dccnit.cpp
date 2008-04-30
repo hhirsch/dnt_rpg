@@ -1753,7 +1753,8 @@ int engine::verifyMouseActions(Uint8 mButton)
          Z[2] = bound.z2;
          X[3] = bound.x2;
          Z[3] = bound.z1;
-         rotTransBoundingBox(porta->orientation, X, Z,porta->x, 
+         rotTransBoundingBox(porta->orientation + porta->delta, 
+                             X, Z,porta->x, 
                              0.0,0.0,porta->z, minObj, maxObj);
          if(intercepts( minObj, maxObj, minMouse, maxMouse))
          {
@@ -1772,8 +1773,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                if(porta->status)
                {
                   /* Is Closing Door */
-                  porta->orientation -= 90;
-                  porta->status = 0;
+                  //porta->orientation -= 90;
+                  porta->status = DOOR_STATUS_CLOSED;
                   snd->addSoundEffect(porta->x, 
                                       actualMap->getHeight(porta->x, porta->z),
                                       porta->z, false, 
@@ -1782,8 +1783,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                else
                {
                   /* Is Openning Door */
-                  porta->orientation += 90;
-                  porta->status = 1;
+                  //porta->orientation += 90;
+                  porta->status = DOOR_STATUS_OPENED;
                   snd->addSoundEffect(porta->x, 
                                       actualMap->getHeight(porta->x, porta->z),
                                       porta->z, false, 

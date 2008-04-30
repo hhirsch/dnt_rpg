@@ -1023,7 +1023,19 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
    {
       if(door->obj != NULL)
       {
-         door->obj->draw(door->x,door->z,0,door->orientation, inverted);
+         /* Do the "animation" */
+         if( (door->status == DOOR_STATUS_OPENED) && (door->delta < 90))
+         {
+            door->delta += 5;
+         }
+         else if( (door->status == DOOR_STATUS_CLOSED) && (door->delta > 0) )
+         {
+            door->delta -= 5;
+         }
+
+         /* Draw it */
+         door->obj->draw(door->x,door->z,0,
+                         door->delta + door->orientation, inverted);
       }
       door = door->next;
    }
