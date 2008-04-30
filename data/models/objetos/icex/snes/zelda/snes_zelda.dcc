@@ -1,0 +1,13 @@
+name = Snes Zelda
+cal3d = models/objetos/icex/snes/zelda/model.cfg
+inventory_sizes = 1 1
+inventory_texture = models/objetos/icex/snes/zelda/snes_zelda_inv.png
+life_points = 55
+fortitude = 10
+reflex = 0
+will = 0
+weight_value = 0.02
+displacement = 0
+armature_class = 12
+size_modifier = -1
+cost = 80
