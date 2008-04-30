@@ -1018,26 +1018,26 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
    }
 
    /* Draw Doors */
-   door* door = doors;
-   while(door != NULL)
+   door* dor = doors;
+   while(dor != NULL)
    {
-      if(door->obj != NULL)
+      if(dor->obj != NULL)
       {
          /* Do the "animation" */
-         if( (door->status == DOOR_STATUS_OPENED) && (door->delta < 90))
+         if( (dor->status == DOOR_STATUS_OPENED) && (dor->delta < 90))
          {
-            door->delta += 5;
+            dor->delta += 5;
          }
-         else if( (door->status == DOOR_STATUS_CLOSED) && (door->delta > 0) )
+         else if( (dor->status == DOOR_STATUS_CLOSED) && (dor->delta > 0) )
          {
-            door->delta -= 5;
+            dor->delta -= 5;
          }
 
          /* Draw it */
-         door->obj->draw(door->x,door->z,0,
-                         door->delta + door->orientation, inverted);
+         dor->obj->draw(dor->x,dor->z,0,
+                        dor->delta + dor->orientation, inverted);
       }
-      door = door->next;
+      dor = dor->next;
    }
 }
 
@@ -1522,6 +1522,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             fgets(buffer, sizeof(buffer),arq);
             sscanf(buffer,"%s %f,%f:%d",nome,&doorAux->x,&doorAux->z,
                                         &doorAux->orientation);
+            doorAux->delta = 0;
             doorAux->obj = objects->getObject(nome);
             if(doorAux->obj == NULL)
             {
