@@ -44,7 +44,7 @@ guiObject* guiInterface::manipulateEvents(int x, int y, Uint8 Mbotao,
 {
    guiObject* actObj = verifySingleEvents(x,y,Mbotao,tecla, eventInfo);
 
-   if(eventInfo != NOTHING)
+   if( (eventInfo != NOTHING) && (ljan->getActiveWindow() != NULL) )
    {
       actObj = verifyCompositeEvents(actObj, eventInfo);
       actObj = verifyFileSelectorsEvents(actObj, eventInfo);
