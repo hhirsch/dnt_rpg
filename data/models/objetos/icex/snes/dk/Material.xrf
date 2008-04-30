@@ -5,6 +5,6 @@
     <DIFFUSE>204 204 204 255</DIFFUSE>
     <SPECULAR>255 255 255 255</SPECULAR>
     <SHININESS>1.0</SHININESS>
-    <MAP>snes_contra.png</MAP>
+    <MAP>snes_dk.png</MAP>
 </MATERIAL>
 
