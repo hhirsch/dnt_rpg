@@ -218,7 +218,7 @@ void classWindow::setCharacteristics()
       textCharac->addText(string(gettext("No Modifiers.")) + "||",
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
-                          27, 20, 99);
+                          75,147,207);
    }
 
    //TODO get Feat Name
@@ -236,7 +236,7 @@ void classWindow::setCharacteristics()
       textCharac->addText(string(gettext("No Feats.")) + "||",
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
-                          27, 20, 99);
+                          75,147,207);
    }
 
    /* Skills */
@@ -263,7 +263,7 @@ void classWindow::setCharacteristics()
       textCharac->addText(gettext("No Skills."), 
                           DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
                           DNT_FONT_STYLE_NORMAL,
-                          27, 20, 99);
+                          75,147,207);
    }
 
    textCharac->setFirstLine(0);
