@@ -140,6 +140,10 @@ object::object(string path, modelList& mdlList): thing()
          sscanf(token2.c_str(),"%d", &aux);
          staticScenery = (aux);
       }
+      else if((token == "weight_value") || (token == "weight"))
+      {
+         sscanf(token2.c_str(),"%f",&weight);
+      }
       else
       {
          printf("Warning: Unknow token '%s' at %s\n", token.c_str(), 
