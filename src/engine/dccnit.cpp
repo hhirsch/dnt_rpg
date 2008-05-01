@@ -180,6 +180,9 @@ engine::~engine()
    glDeleteTextures(1, &rangeCircle);
    glDeleteTextures(1, &featRangeCircle);
 
+   /* Clear ModState */
+   modifState.clear();
+
    /* Clear Characters */
    if(NPCs)
    {
@@ -1424,8 +1427,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
       {
          if(inventoryWindow->treat(object, eventInfo, cursors, actualMap,
                                    PCs->getActiveCharacter()->xPosition,
-                                   PCs->getActiveCharacter()->zPosition,
-                                   &modifState))
+                                   PCs->getActiveCharacter()->zPosition))
          {
             /* Redefine, if need, the weapons */
             PCs->getActiveCharacter()->defineWeapon();
