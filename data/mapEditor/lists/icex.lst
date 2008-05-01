@@ -1,10 +1,11 @@
-15
+16
 Black_Board models/objetos/icex/quadro/quadro.dcc
 Chair models/objetos/icex/cadeira/cadeira.dcc
 Chair_Table models/objetos/icex/mesa_braco/mesa_braco.dcc
 Scavenger models/objetos/icex/lixo/lixo.dcc
 Icex_Table models/objetos/icex/mesa_redonda/mesa_redonda.dcc
 Snes models/objetos/icex/snes/snes.dcc
+Snes_Chrono models/objetos/icex/snes/chrono/snes_chrono.dcc
 Snes_Contra models/objetos/icex/snes/contra/snes_contra.dcc
 Snes_DK models/objetos/icex/snes/dk/snes_dk.dcc
 Snes_Mario models/objetos/icex/snes/mario/snes_mario.dcc
