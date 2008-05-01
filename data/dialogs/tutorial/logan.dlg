@@ -1,0 +1,177 @@
+############################################################
+#                          Dialog                          #
+############################################################
+dialog(0)
+   npc_begin
+      text = gettext("Ah, so finally you awake!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Who are you?")
+         action = go_to_dialog(1)
+      option 
+         text = gettext("Bye!")
+         action = go_to_dialog()
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(1)
+   npc_begin
+      text = gettext("I am Logan, maintainer of this occupation.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Occupation? Is this, the cleanest house I've ever seen, an occupation?")
+         action = go_to_dialog(3)
+      option
+         text = gettext("What am I doing here?")
+         action = go_to_dialog(2)
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(2)
+   npc_begin
+      text = gettext("We found you bleeding unconscious near the waterfall. For the sake of our ideals, Mattar, <the Forgotten>, healed all your wounds. (You're lucky: the scalpel he used went out yesterday with your faeces!)")
+   npc_end
+   pc_begin
+      option
+         text = gettext("For the sake of your ideals? What ideals?!")
+         action = go_to_dialog(4)
+      option
+         text = gettext("What do you want of me?")
+         action = go_to_dialog(5)
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(3)
+   npc_begin
+      text = gettext("Yes, occupation. A clean and sweet ocupation that also serves as heal clinic for people with big tongue and no gratitude!")
+   npc_end
+   pc_begin
+      option
+         text = gettext("What am I doing here?")
+         action = go_to_dialog(2)
+      option
+         text = gettext("What do you want of me?")
+         action = go_to_dialog(5)
+      option
+         text = gettext("Shut up and die!")
+         action = init_fight()
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(4)
+   npc_begin
+      text = gettext("Our ideal? It's not the time to tell you about that.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("What do you want of me?")
+         action = go_to_dialog(5)
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(5)
+   npc_begin
+      text = gettext("Ah, some time ago I've lost our Chrono Trigger Snes cartridge, just find it for us.")
+   npc_end
+   pc_begin
+      option
+         text = gettext("Ok, I'll search it")
+         action = add_mission("missions/tutorial/mission1.dsl")
+         action = dialog_init(6)
+         action = finish_dialog()
+      option
+         text = gettext("Oh, Chrono Trigger! This name resounds good memories in my head.")
+         action = add_mission("missions/tutorial/mission1.dsl")
+         action = dialog_init(6)
+         action = finish_dialog()
+      option
+         text = gettext("Never! Chrono taked me 3 years! Die!")
+         action = init_fight()
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(6)
+   npc_begin
+      text = gettext("You still haven't found our Chrono Trigger Snes cartridge!")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("I'm still looking...")
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(7)
+   npc_begin
+      text = gettext("Here! Chrono is here! Let me play it!")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("Its all yours...")
+         action = give_item("models/objetos/icex/snes/chrono/chrono.dcc")
+         action = complete_mission("missions/tutorial/mission1.dsl", 200)
+         action = go_to_dialog(9)
+       option
+         text = gettext("Its yours, but I want some money!")
+         action = give_item("models/objetos/icex/snes/chrono/chrono.dcc")
+         action = receive_money(30);
+         action = complete_mission("missions/tutorial/mission1.dsl", 150)
+         action = go_to_dialog(8)
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(8)
+   npc_begin
+      text = gettext("Money, money! All you want is money!! But... it's Chrono... take these coins...")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("Thanks.")
+         action = go_to_dialog(9)
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(9)
+   npc_begin
+      text = gettext("So, for this DNT 0.2 version, I haven't any more missions for you. Go take a walk (it's an open world game) and wait for DNT 0.3 release.")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("Bye!")
+         action = dialog_init(10)
+         action = finish_dialog()
+   pc_end
+end_dialog
+############################################################
+#                         Dialog                           #
+############################################################
+dialog(10)
+   npc_begin
+      text = gettext("Chrono... Chrono... Chrono!")
+   npc_end
+   pc_begin
+      option 
+         text = gettext("Bye!")
+         action = finish_dialog()
+   pc_end
+end_dialog
