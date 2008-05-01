@@ -226,6 +226,7 @@ data/skills/tocarinst.ski
 data/dialogs/ameiva1.dlg  
 data/dialogs/ratazana1.dlg
 data/dialogs/initial.dlg
+data/dialogs/tutorial/logan.dlg
 
 #weapons
 data/weapons/definitions/axe.wcc

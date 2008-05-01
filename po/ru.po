@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-04-01 18:59-0300\n"
+"POT-Creation-Date: 2008-05-01 15:03-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -85,16 +85,16 @@ msgid "Tendency & Alignment"
 msgstr "Стремление и Равнение"
 
 #: src/engine/alignwindow.cpp:58 src/engine/aspectwindow.cpp:72
-#: src/engine/attwindow.cpp:222 src/engine/classwindow.cpp:75
-#: src/engine/options.cpp:646 src/engine/racewindow.cpp:72
-#: src/engine/skillwindow.cpp:103
+#: src/engine/attwindow.cpp:222 src/engine/classwindow.cpp:110
+#: src/engine/options.cpp:646 src/engine/racewindow.cpp:105
+#: src/engine/skillwindow.cpp:120
 msgid "Confirm"
 msgstr "Подтвердить"
 
 #: src/engine/alignwindow.cpp:62 src/engine/aspectwindow.cpp:76
 #: src/engine/attwindow.cpp:226 src/engine/barterwindow.cpp:37
-#: src/engine/classwindow.cpp:79 src/engine/options.cpp:650
-#: src/engine/racewindow.cpp:76 src/engine/skillwindow.cpp:107
+#: src/engine/classwindow.cpp:114 src/engine/options.cpp:650
+#: src/engine/racewindow.cpp:109 src/engine/skillwindow.cpp:124
 msgid "Cancel"
 msgstr "Отменить"
 
@@ -190,7 +190,7 @@ msgid "Impose"
 msgstr "Обманывать"
 
 #: src/engine/barterwindow.cpp:68 src/engine/barterwindow.cpp:78
-#: src/engine/inventwindow.cpp:29
+#: src/engine/inventwindow.cpp:30
 msgid "Inventory"
 msgstr "Инвентарь"
 
@@ -254,7 +254,7 @@ msgstr ""
 msgid "Feats"
 msgstr ""
 
-#: src/engine/charwindow.cpp:203 src/engine/skillwindow.cpp:42
+#: src/engine/charwindow.cpp:203 src/engine/skillwindow.cpp:59
 msgid "Skills"
 msgstr "Скиллы"
 
@@ -282,55 +282,55 @@ msgstr ""
 msgid "Not Applicable"
 msgstr ""
 
-#: src/engine/classwindow.cpp:35
+#: src/engine/classwindow.cpp:70
 msgid "Class"
 msgstr "Класс"
 
-#: src/engine/classwindow.cpp:44
+#: src/engine/classwindow.cpp:79
 msgid "Class Description"
 msgstr "Описание класса"
 
-#: src/engine/classwindow.cpp:54
+#: src/engine/classwindow.cpp:89
 msgid "Class Characteristics"
 msgstr "Характеристики класса"
 
-#: src/engine/classwindow.cpp:100
+#: src/engine/classwindow.cpp:143
 msgid "Life Dice"
 msgstr ""
 
-#: src/engine/classwindow.cpp:104
+#: src/engine/classwindow.cpp:147
 msgid "Skill Points"
 msgstr "Очки умения"
 
-#: src/engine/classwindow.cpp:131
+#: src/engine/classwindow.cpp:174
 msgid "First Level"
 msgstr "Первый уровень"
 
-#: src/engine/classwindow.cpp:159
+#: src/engine/classwindow.cpp:202
 msgid "Other Levels"
 msgstr "Другие уровни"
 
-#: src/engine/classwindow.cpp:164
+#: src/engine/classwindow.cpp:207
 msgid "Class Modifiers"
 msgstr "Модификаторы класса"
 
-#: src/engine/classwindow.cpp:175 src/engine/racewindow.cpp:115
+#: src/engine/classwindow.cpp:218 src/engine/racewindow.cpp:156
 msgid "No Modifiers."
 msgstr "Нет модификаторов."
 
-#: src/engine/classwindow.cpp:182
+#: src/engine/classwindow.cpp:225
 msgid "Class Feats"
 msgstr "Подвиги классов"
 
-#: src/engine/classwindow.cpp:193 src/engine/racewindow.cpp:133
+#: src/engine/classwindow.cpp:236 src/engine/racewindow.cpp:174
 msgid "No Feats."
 msgstr "Нет подвигов."
 
-#: src/engine/classwindow.cpp:201
+#: src/engine/classwindow.cpp:244
 msgid "Class Skills"
 msgstr "Скиллы класса"
 
-#: src/engine/classwindow.cpp:220 src/engine/racewindow.cpp:160
+#: src/engine/classwindow.cpp:263 src/engine/racewindow.cpp:201
 msgid "No Skills."
 msgstr "Нет умений."
 
@@ -339,42 +339,42 @@ msgstr "Нет умений."
 msgid "Can't load mouse cursor: %s\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:322
+#: src/engine/dccnit.cpp:332
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Загрузка карты: %s"
 
-#: src/engine/dccnit.cpp:404
+#: src/engine/dccnit.cpp:414
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Ох, не могу загрузить файл NPC: %s.\n"
 
-#: src/engine/dccnit.cpp:419
+#: src/engine/dccnit.cpp:429
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Загрузка NPC: %s"
 
-#: src/engine/dccnit.cpp:442
+#: src/engine/dccnit.cpp:452
 msgid "Loading Character"
 msgstr "Загрузка характера"
 
-#: src/engine/dccnit.cpp:449
+#: src/engine/dccnit.cpp:459
 msgid "Putting GUI on Screen"
 msgstr "Помещение GUI на экран"
 
-#: src/engine/dccnit.cpp:489
+#: src/engine/dccnit.cpp:499
 msgid "Loading Particles"
 msgstr "Загрузка частиц"
 
-#: src/engine/dccnit.cpp:519
+#: src/engine/dccnit.cpp:529
 msgid "Loading Changes..."
 msgstr "Загрузка изменений..."
 
-#: src/engine/dccnit.cpp:539
+#: src/engine/dccnit.cpp:549
 msgid "Done!"
 msgstr "Готово!"
 
-#: src/engine/dccnit.cpp:629
+#: src/engine/dccnit.cpp:639
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -382,118 +382,118 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1167
+#: src/engine/dccnit.cpp:1178
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1206 src/engine/dccnit.cpp:1274
+#: src/engine/dccnit.cpp:1220 src/engine/dccnit.cpp:1297
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов на арене"
 
-#: src/engine/dccnit.cpp:1256
+#: src/engine/dccnit.cpp:1279
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1445
+#: src/engine/dccnit.cpp:1466
 msgid "Enter Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1449
+#: src/engine/dccnit.cpp:1470
 msgid "Select Normal Attack"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1456
+#: src/engine/dccnit.cpp:1477
 msgid "Open Quests Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1463
+#: src/engine/dccnit.cpp:1484
 msgid "Open Map Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1467
+#: src/engine/dccnit.cpp:1488
 msgid "Map Window already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1475
+#: src/engine/dccnit.cpp:1496
 msgid "End Character's Turn"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1479
+#: src/engine/dccnit.cpp:1500
 msgid "Only Avaible on Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1487
+#: src/engine/dccnit.cpp:1508
 msgid "Open Inventory Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1491
+#: src/engine/dccnit.cpp:1512
 msgid "Inventory already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1498
+#: src/engine/dccnit.cpp:1519
 msgid "Open Assign Attacks Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1503
+#: src/engine/dccnit.cpp:1524
 msgid "View Character Informations"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1509
+#: src/engine/dccnit.cpp:1530
 msgid "Open Group/Party Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1577 src/engine/dccnit.cpp:1944
-#: src/engine/dccnit.cpp:3214
+#: src/engine/dccnit.cpp:1598 src/engine/dccnit.cpp:1979
+#: src/engine/dccnit.cpp:3253
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:1679
+#: src/engine/dccnit.cpp:1703
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:1706
+#: src/engine/dccnit.cpp:1730
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1741
+#: src/engine/dccnit.cpp:1766
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:1869 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1904 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s атаковал %s|"
 
-#: src/engine/dccnit.cpp:3184
+#: src/engine/dccnit.cpp:3227
 msgid "Map"
 msgstr "Карта"
 
-#: src/engine/dccnit.cpp:3193
+#: src/engine/dccnit.cpp:3237
 msgid "FPS:"
 msgstr "PS:"
 
-#: src/engine/dccnit.cpp:3210
+#: src/engine/dccnit.cpp:3249
 msgid "Shortcuts"
 msgstr "Мелочь"
 
-#: src/engine/dccnit.cpp:3212
+#: src/engine/dccnit.cpp:3251
 msgid "Welcome to DNT!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3217 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3256 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/engine/dccnit.cpp:3219
+#: src/engine/dccnit.cpp:3258
 msgid "Menu"
 msgstr "Меню:"
 
-#: src/engine/dccnit.cpp:3222 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3261 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Загрузка"
 
-#: src/engine/dccnit.cpp:3419
+#: src/engine/dccnit.cpp:3464
 msgid "|Exit Battle Mode"
 msgstr "|Покинуть режим сражения"
 
@@ -586,27 +586,27 @@ msgstr "Настройки"
 msgid "Exit"
 msgstr "Выход"
 
-#: src/engine/inventwindow.cpp:174
+#: src/engine/inventwindow.cpp:175
 msgid "Drop"
 msgstr "Бросить"
 
-#: src/engine/inventwindow.cpp:176
+#: src/engine/inventwindow.cpp:177
 msgid "Sell"
 msgstr "Продать"
 
-#: src/engine/inventwindow.cpp:179
+#: src/engine/inventwindow.cpp:180
 msgid "Use"
 msgstr "Использовать"
 
-#: src/engine/inventwindow.cpp:183
+#: src/engine/inventwindow.cpp:184
 msgid "Remove"
 msgstr "Удалить"
 
-#: src/engine/inventwindow.cpp:186
+#: src/engine/inventwindow.cpp:187
 msgid "Info"
 msgstr "Информация"
 
-#: src/engine/inventwindow.cpp:188
+#: src/engine/inventwindow.cpp:189
 msgid "Get"
 msgstr "Получить"
 
@@ -780,39 +780,39 @@ msgstr ""
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
-#: src/engine/racewindow.cpp:33
+#: src/engine/racewindow.cpp:66
 msgid "Race"
 msgstr "Раса"
 
-#: src/engine/racewindow.cpp:42
+#: src/engine/racewindow.cpp:75
 msgid "Race Description"
 msgstr "Описание расы"
 
-#: src/engine/racewindow.cpp:51
+#: src/engine/racewindow.cpp:84
 msgid "Race Characteristcs"
 msgstr "Характеристики расы"
 
-#: src/engine/racewindow.cpp:104
+#: src/engine/racewindow.cpp:145
 msgid "Race Modifiers"
 msgstr "Модификаторы расы"
 
-#: src/engine/racewindow.cpp:121
+#: src/engine/racewindow.cpp:162
 msgid "Race Feats"
 msgstr "Подвиги расы"
 
-#: src/engine/racewindow.cpp:141
+#: src/engine/racewindow.cpp:182
 msgid "Race Skills"
 msgstr "Умения расы"
 
-#: src/engine/skillwindow.cpp:48
+#: src/engine/skillwindow.cpp:65
 msgid "Total Free Points:"
 msgstr "Все свободные очки:"
 
-#: src/engine/skillwindow.cpp:78
+#: src/engine/skillwindow.cpp:95
 msgid "Points:"
 msgstr "Очки:"
 
-#: src/engine/skillwindow.cpp:95
+#: src/engine/skillwindow.cpp:112
 msgid "Cost"
 msgstr "Цена"
 
@@ -877,12 +877,12 @@ msgstr ""
 msgid "Maximize"
 msgstr ""
 
-#: src/gui/picture.cpp:35
+#: src/gui/picture.cpp:36
 #, c-format
 msgid "Can't open image: %s\n"
 msgstr ""
 
-#: src/gui/picture.cpp:47
+#: src/gui/picture.cpp:48
 #, c-format
 msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
 msgstr ""
@@ -2612,7 +2612,7 @@ msgstr ""
 msgid "Ha, ha, ha. A weak animal! Die!"
 msgstr ""
 
-#: data/dialogs/ratazana1.dlg:16
+#: data/dialogs/ratazana1.dlg:16 data/dialogs/tutorial/logan.dlg:10
 msgid "Who are you?"
 msgstr ""
 
@@ -2651,7 +2651,8 @@ msgstr ""
 msgid "Die!"
 msgstr ""
 
-#: data/dialogs/initial.dlg:22
+#: data/dialogs/initial.dlg:22 data/dialogs/tutorial/logan.dlg:13
+#: data/dialogs/tutorial/logan.dlg:160 data/dialogs/tutorial/logan.dlg:174
 msgid "Bye!"
 msgstr ""
 
@@ -2707,6 +2708,110 @@ msgstr ""
 
 #: data/dialogs/initial.dlg:88
 msgid "Bye Ente!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:6
+msgid "Ah, so finally you awake!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:22
+msgid "I am Logan, maintainer of this occupation."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:26
+msgid "Occupation? Is this, the cleanest house I've ever seen, an occupation?"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:29 data/dialogs/tutorial/logan.dlg:58
+msgid "What am I doing here?"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:38
+msgid ""
+"We found you bleeding unconscious near the waterfall. For the sake of our "
+"ideals, Mattar, <the Forgotten>, healed all your wounds. (You're lucky: the "
+"scalpel he used went out yesterday with your faeces!)"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:42
+msgid "For the sake of your ideals? What ideals?!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:45 data/dialogs/tutorial/logan.dlg:61
+#: data/dialogs/tutorial/logan.dlg:77
+msgid "What do you want of me?"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:54
+msgid ""
+"Yes, occupation. A clean and sweet ocupation that also serves as heal clinic "
+"for people with big tongue and no gratitude!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:64
+msgid "Shut up and die!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:73
+msgid "Our ideal? It's not the time to tell you about that."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:86
+msgid ""
+"Ah, some time ago I've lost our Chrono Trigger Snes cartridge, just find it "
+"for us."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:90
+msgid "Ok, I'll search it"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:95
+msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:100
+msgid "Never! Chrono taked me 3 years! Die!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:109
+msgid "You still haven't found our Chrono Trigger Snes cartridge!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:113
+msgid "I'm still looking..."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:122
+msgid "Here! Chrono is here! Let me play it!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:126
+msgid "Its all yours..."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:131
+msgid "Its yours, but I want some money!"
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:143
+msgid ""
+"Money, money! All you want is money!! But... it's Chrono... take these "
+"coins..."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:147
+msgid "Thanks."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:156
+msgid ""
+"So, for this DNT 0.2 version, I haven't any more missions for you. Go take a "
+"walk (it's an open world game) and wait for DNT 0.3 release."
+msgstr ""
+
+#: data/dialogs/tutorial/logan.dlg:170
+msgid "Chrono... Chrono... Chrono!"
 msgstr ""
 
 #: data/weapons/definitions/axe.wcc:1
