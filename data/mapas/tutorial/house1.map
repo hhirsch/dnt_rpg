@@ -1,81 +1,83 @@
 T 6X8
 # Made by DccNiTghtmare's MapEditor, v0.2
 Outdoor: 0
-o models/objetos/icex/snes/sf2/snes_sf2.dcc
-o models/objetos/icex/snes/mario/snes_mario.dcc
-o models/objetos/icex/snes/contra/snes_contra.dcc
-o models/objetos/icex/snes/snes.dcc
-o models/objetos/geral/tv42/tv42.dcc
-o models/objetos/geral/meuble/meuble.dcc
-o models/objetos/geral/pillow/pillow.dcc
-o models/objetos/geral/notebook/notebook.dcc
-o models/objetos/geral/letto/letto.dcc
-o models/objetos/icex/lixo/lixo.dcc
-o models/objetos/geral/porta2/porta2.dcc
-o models/objetos/geral/porta4/porta4.dcc
-o models/objetos/geral/fridge/fridge.dcc
-o models/objetos/geral/dinner_table/dinner_table.dcc
-o models/objetos/geral/dinner_chair/dinner_chair.dcc
-o models/objetos/banho/privada/privada.dcc
-o models/objetos/geral/wardrobe/wardrobe.dcc
-o models/objetos/geral/sofa/sofa.dcc
+o models/objetos/geral/guitarra/guitarra.dcc
+o models/objetos/geral/mala/mala.dcc
 o weapons/definitions/knife.wcc
-t texturas/floor_indoor/wood5.png texturas/floor_indoor/wood5.png 94 47 31
-t texturas/floor_indoor/steel3.png texturas/floor_indoor/steel3.png 163 158 163
-t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
-t texturas/floor_indoor/stonetile.png texturas/floor_indoor/stonetile.png 176 180 178
-t texturas/floor_indoor/tile2.png texturas/floor_indoor/tile2.png 249 250 249
-t texturas/floor_indoor/wood4.png texturas/floor_indoor/wood4.png 99 49 26
+o models/objetos/geral/sofa/sofa.dcc
+o models/objetos/geral/wardrobe/wardrobe.dcc
+o models/objetos/banho/privada/privada.dcc
+o models/objetos/geral/dinner_chair/dinner_chair.dcc
+o models/objetos/geral/dinner_table/dinner_table.dcc
+o models/objetos/geral/fridge/fridge.dcc
+o models/objetos/geral/porta4/porta4.dcc
+o models/objetos/geral/porta2/porta2.dcc
+o models/objetos/icex/lixo/lixo.dcc
+o models/objetos/geral/letto/letto.dcc
+o models/objetos/geral/notebook/notebook.dcc
+o models/objetos/geral/pillow/pillow.dcc
+o models/objetos/geral/meuble/meuble.dcc
+o models/objetos/geral/tv42/tv42.dcc
+o models/objetos/icex/snes/snes.dcc
+o models/objetos/icex/snes/contra/snes_contra.dcc
+o models/objetos/icex/snes/mario/snes_mario.dcc
+o models/objetos/icex/snes/sf2/snes_sf2.dcc
 t texturas/floor_indoor/carpete.png texturas/floor_indoor/carpete.png 186 161 126
-d models/objetos/geral/porta4/porta4.dcc 252.283615,0.000000:0
-d models/objetos/geral/porta4/porta4.dcc 217.007645,192.000000:0
-d models/objetos/geral/porta4/porta4.dcc 256.000000,302.913300:90
-d models/objetos/geral/porta4/porta4.dcc 256.000000,365.776184:90
-d models/objetos/geral/porta4/porta4.dcc 86.247314,384.000000:0
-d models/objetos/geral/porta4/porta4.dcc 87.167473,320.000000:0
-d models/objetos/geral/porta2/porta2.dcc 14.707561,384.000000:0
+t texturas/floor_indoor/wood4.png texturas/floor_indoor/wood4.png 99 49 26
+t texturas/floor_indoor/tile2.png texturas/floor_indoor/tile2.png 249 250 249
+t texturas/floor_indoor/stonetile.png texturas/floor_indoor/stonetile.png 176 180 178
+t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
+t texturas/floor_indoor/steel3.png texturas/floor_indoor/steel3.png 163 158 163
+t texturas/floor_indoor/wood5.png texturas/floor_indoor/wood5.png 94 47 31
 d models/objetos/geral/porta2/porta2.dcc 21.686077,138.000000:0
-wall 10.000000,0.000000,252.283615,10.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 0.000000,0.000000,10.000000,512.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 374.000000,0.000000,384.000000,512.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 10.000000,502.000000,374.000000,512.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 128.000000,192.000000,217.007645,202.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 128.000000,10.000000,138.000000,192.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 256.000000,202.000000,266.000000,281.075500:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 192.000000,202.000000,202.000000,330.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 266.000000,320.000000,374.000000,330.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 10.000000,384.000000,14.707561,394.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 10.000000,320.000000,87.167473,330.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 10.000000,128.000000,21.686077,138.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 64.000000,394.000000,74.000000,502.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 274.121429,0.000000,374.000000,10.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 238.845444,192.000000,374.000000,202.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 256.000000,302.913300,266.000000,343.938385:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 256.000000,365.776184,266.000000,502.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 108.085114,384.000000,256.000000,394.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 109.005272,320.000000,192.000000,330.000000:16,16,16
+d models/objetos/geral/porta2/porta2.dcc 14.707561,384.000000:0
+d models/objetos/geral/porta4/porta4.dcc 87.167473,320.000000:0
+d models/objetos/geral/porta4/porta4.dcc 86.247314,384.000000:0
+d models/objetos/geral/porta4/porta4.dcc 256.000000,365.776184:90
+d models/objetos/geral/porta4/porta4.dcc 256.000000,302.913300:90
+d models/objetos/geral/porta4/porta4.dcc 217.007645,192.000000:0
+d models/objetos/geral/porta4/porta4.dcc 252.283615,0.000000:0
+wall 43.523880,128.000000,128.000000,138.000000:16,16,16
 wt texturas/floor_indoor/carpete.png
 wall 36.545364,384.000000,86.247314,394.000000:16,16,16
 wt texturas/floor_indoor/carpete.png
-wall 43.523880,128.000000,128.000000,138.000000:16,16,16
+wall 109.005272,320.000000,192.000000,330.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 108.085114,384.000000,256.000000,394.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 256.000000,365.776184,266.000000,502.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 256.000000,302.913300,266.000000,343.938385:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 238.845444,192.000000,374.000000,202.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 274.121429,0.000000,374.000000,10.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 64.000000,394.000000,74.000000,502.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 10.000000,128.000000,21.686077,138.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 10.000000,320.000000,87.167473,330.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 10.000000,384.000000,14.707561,394.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 266.000000,320.000000,374.000000,330.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 192.000000,202.000000,202.000000,330.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 256.000000,202.000000,266.000000,281.075500:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 128.000000,10.000000,138.000000,192.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 128.000000,192.000000,217.007645,202.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 10.000000,502.000000,374.000000,512.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 374.000000,0.000000,384.000000,512.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 0.000000,0.000000,10.000000,512.000000:16,16,16
+wt texturas/floor_indoor/carpete.png
+wall 10.000000,0.000000,252.283615,10.000000:16,16,16
 wt texturas/floor_indoor/carpete.png
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -85,17 +87,17 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/stonetile.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uo models/objetos/icex/snes/sf2/snes_sf2.dcc 1:3,1:183.468048,8.599997,20.711985:-164:0
-uo models/objetos/icex/snes/mario/snes_mario.dcc 1:3,1:184.824173,8.599997,23.149963:-119:0
-uo models/objetos/icex/snes/contra/snes_contra.dcc 1:3,1:180.380508,8.599997,24.172890:-228:0
-uo models/objetos/icex/snes/snes.dcc 1:3,1:174.566055,8.599997,24.095177:-270:0
-uo models/objetos/geral/tv42/tv42.dcc 1:3,1:190.477097,8.599997,18.081791:-180:0
 uo models/objetos/geral/meuble/meuble.dcc 1:3,1:190.503998,0.000000,17.168974:-180:0
+uo models/objetos/geral/tv42/tv42.dcc 1:3,1:190.477097,8.599997,18.081791:-180:0
+uo models/objetos/icex/snes/snes.dcc 1:3,1:174.566055,8.599997,24.095177:-270:0
+uo models/objetos/icex/snes/contra/snes_contra.dcc 1:3,1:180.380508,8.599997,24.172890:-228:0
+uo models/objetos/icex/snes/mario/snes_mario.dcc 1:3,1:184.824173,8.599997,23.149963:-119:0
+uo models/objetos/icex/snes/sf2/snes_sf2.dcc 1:3,1:183.468048,8.599997,20.711985:-164:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 uc 252.961548,1.257226,272.297028,8.570818:mapas/tutorial/tyrol.map
-uo models/objetos/geral/tv42/tv42.dcc 0:3,1:190.477097,8.599997,18.081791:-180:0
 uo models/objetos/geral/meuble/meuble.dcc 0:3,1:190.503998,0.000000,17.168974:-180:0
+uo models/objetos/geral/tv42/tv42.dcc 0:3,1:190.477097,8.599997,18.081791:-180:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 uc 252.961548,1.257226,272.297028,8.570818:mapas/tutorial/tyrol.map
@@ -127,16 +129,16 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uo models/objetos/geral/sofa/sofa.dcc 1:5,3:317.456543,0.000000,172.117813:0:0
 uo models/objetos/geral/pillow/pillow.dcc 1:5,3:304.600220,11.700008,175.096085:212:0
+uo models/objetos/geral/sofa/sofa.dcc 1:5,3:317.456543,0.000000,172.117813:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uo models/objetos/geral/pillow/pillow.dcc 1:6,3:357.498627,0.000000,186.759644:-133:0
-uo models/objetos/geral/pillow/pillow.dcc 1:6,3:367.406097,0.000000,177.163132:-38:0
-uo models/objetos/geral/pillow/pillow.dcc 1:6,3:368.486572,0.000000,186.981873:0:0
-uo models/objetos/geral/sofa/sofa.dcc 0:5,3:317.456543,0.000000,172.117813:0:0
-uo models/objetos/geral/sofa/sofa.dcc 0:6,2:355.099823,0.000000,127.699722:89:0
 uo models/objetos/geral/pillow/pillow.dcc 1:6,3:330.517761,12.600012,173.340698:-13:0
+uo models/objetos/geral/sofa/sofa.dcc 0:6,2:355.099823,0.000000,127.699722:89:0
+uo models/objetos/geral/sofa/sofa.dcc 0:5,3:317.456543,0.000000,172.117813:0:0
+uo models/objetos/geral/pillow/pillow.dcc 1:6,3:368.486572,0.000000,186.981873:0:0
+uo models/objetos/geral/pillow/pillow.dcc 1:6,3:367.406097,0.000000,177.163132:-38:0
+uo models/objetos/geral/pillow/pillow.dcc 1:6,3:357.498627,0.000000,186.759644:-133:0
 #Z: 3
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
@@ -145,15 +147,16 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
-uo models/objetos/geral/letto/letto.dcc 0:3,5:165.429840,0.000000,263.912933:90:0
-uo models/objetos/geral/letto/letto.dcc 1:3,4:165.925919,0.000000,240.160187:90:0
 uo models/objetos/geral/letto/letto.dcc 1:3,4:165.783813,0.000000,216.642349:90:0
+uo models/objetos/geral/letto/letto.dcc 1:3,4:165.925919,0.000000,240.160187:90:0
+uo models/objetos/geral/letto/letto.dcc 0:3,5:165.429840,0.000000,263.912933:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood5.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel3.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel3.png
+uo models/objetos/geral/guitarra/guitarra.dcc 1:6,4:369.907288,0.000000,209.596542:125:0
 #Z: 4
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
@@ -162,14 +165,15 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
-uo models/objetos/geral/letto/letto.dcc 1:3,5:165.381821,0.000000,288.426422:90:0
 uo models/objetos/geral/letto/letto.dcc 1:3,5:165.429840,0.000000,263.912933:90:0
+uo models/objetos/geral/letto/letto.dcc 1:3,5:165.381821,0.000000,288.426422:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood5.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel3.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/steel3.png
+uo models/objetos/geral/mala/mala.dcc 1:6,5:365.962433,0.000000,311.887909:49:0
 #Z: 5
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood5.png
@@ -183,19 +187,19 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
-uo models/objetos/geral/notebook/notebook.dcc 1:6,6:349.118866,17.399988,383.820984:0:0
-uo models/objetos/geral/dinner_table/dinner_table.dcc 0:6,7:347.737183,0.000000,398.303467:0:0
-uo models/objetos/geral/dinner_chair/dinner_chair.dcc 0:6,7:364.083191,0.000000,388.047455:0:0
-uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,6:347.492218,0.000000,370.749054:90:0
 uo models/objetos/geral/dinner_chair/dinner_chair.dcc 0:6,7:331.639038,0.000000,387.137634:151:0
+uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,6:347.492218,0.000000,370.749054:90:0
+uo models/objetos/geral/dinner_chair/dinner_chair.dcc 0:6,7:364.083191,0.000000,388.047455:0:0
+uo models/objetos/geral/dinner_table/dinner_table.dcc 0:6,7:347.737183,0.000000,398.303467:0:0
+uo models/objetos/geral/notebook/notebook.dcc 1:6,6:349.118866,17.399988,383.820984:0:0
 #Z: 6
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/stonetile.png
 uo models/objetos/banho/privada/privada.dcc 1:1,7:57.783699,0.000000,402.041321:91:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
-uo models/objetos/geral/letto/letto.dcc 0:3,7:145.112274,0.000000,405.523560:90:0
 uo models/objetos/banho/privada/privada.dcc 0:1,7:57.783699,0.000000,402.041321:91:0
+uo models/objetos/geral/letto/letto.dcc 0:3,7:145.112274,0.000000,405.523560:90:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
 uo models/objetos/geral/letto/letto.dcc 1:3,7:145.112274,0.000000,405.523560:90:0
@@ -206,14 +210,14 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
-uo models/objetos/geral/notebook/notebook.dcc 0:6,6:349.118866,17.399988,383.820984:0:0
-uo models/objetos/geral/dinner_table/dinner_table.dcc 1:6,7:347.737183,0.000000,398.303467:0:0
-uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:359.657135,0.000000,406.422760:0:0
-uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:364.083191,0.000000,388.047455:0:0
-uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:331.639038,0.000000,387.137634:151:0
-uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:335.305908,0.000000,405.520538:179:0
-uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:345.320648,0.000000,422.182373:256:0
 uo weapons/definitions/knife.wcc 1:6,7:345.850708,18.000000,405.642914:-143:0
+uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:345.320648,0.000000,422.182373:256:0
+uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:335.305908,0.000000,405.520538:179:0
+uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:331.639038,0.000000,387.137634:151:0
+uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:364.083191,0.000000,388.047455:0:0
+uo models/objetos/geral/dinner_chair/dinner_chair.dcc 1:6,7:359.657135,0.000000,406.422760:0:0
+uo models/objetos/geral/dinner_table/dinner_table.dcc 1:6,7:347.737183,0.000000,398.303467:0:0
+uo models/objetos/geral/notebook/notebook.dcc 0:6,6:349.118866,17.399988,383.820984:0:0
 #Z: 7
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/stonetile.png
@@ -222,8 +226,8 @@ ut texturas/floor_indoor/wood4.png
 uo models/objetos/geral/letto/letto.dcc 0:3,8:128.454529,0.000000,475.735260:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
-uo models/objetos/geral/letto/letto.dcc 1:3,8:128.454529,0.000000,475.735260:0:0
 uo models/objetos/geral/letto/letto.dcc 1:3,8:181.819458,0.000000,477.971954:0:0
+uo models/objetos/geral/letto/letto.dcc 1:3,8:128.454529,0.000000,475.735260:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood4.png
 uo models/objetos/geral/letto/letto.dcc 1:4,8:234.820328,0.000000,479.128387:0:0
