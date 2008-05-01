@@ -14,6 +14,8 @@
 #define MODSTATE_ACTION_CHARACTER_DEAD   3  /**< Killed Character on map */
 #define MODSTATE_ACTION_CHARACTER_MOVE   4  /**< The character moved to a new positon */
 
+#define MODSTATE_TALK_ENTER_VALUE        5  /*< New enter value for a talk */
+
 /*! The Generic Modification Action Class */
 class modAction
 {
@@ -150,7 +152,8 @@ class modState
        * \param initialX -> initial X position when loaded the map
        * \param initialZ -> initial Z position when loaded the map */
       void mapCharacterAddAction(int act, string character, string mapFile,
-                                 GLfloat xPos, GLfloat zPos, GLfloat orientation,
+                                 GLfloat xPos, GLfloat zPos, 
+                                 GLfloat orientation,
                                  GLfloat initialX, GLfloat initialZ);
 
       /*! Do All saved modifications to the map (those that are for them,
@@ -183,8 +186,8 @@ class modState
                                      string mapFileName, GLfloat xPos, 
                                      GLfloat zPos);
       
-      modAction* modActionsList;   /**< List of modification actions */
-      int totalModActions;         /**< Total modActions on list */
+      static modAction* modActionsList;   /**< List of modification actions */
+      static int totalModActions;         /**< Total modActions on list */
 };
 
 #endif

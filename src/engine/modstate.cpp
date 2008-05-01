@@ -158,8 +158,6 @@ mapObjectModAction::~mapObjectModAction()
  ************************************************************/
 modState::modState()
 {
-   modActionsList = NULL;
-   totalModActions = 0;
 }
 
 /************************************************************
@@ -167,7 +165,6 @@ modState::modState()
  ************************************************************/
 modState::~modState()
 {
-   clear();
 }
 
 /************************************************************
@@ -418,4 +415,10 @@ void modState::clear()
    modActionsList = NULL;
    totalModActions = 0;
 }
+
+/************************************************************
+ *                      static fields                       *
+ ************************************************************/
+modAction* modState::modActionsList = NULL;
+int modState::totalModActions = 0;
 
