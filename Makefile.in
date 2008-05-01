@@ -4,6 +4,7 @@ PACKAGE = @PACKAGE@
 VERSION = @VERSION@
 
 prefix = @prefix@
+exec_prefix = @exec_prefix@
 datadir = @datarootdir@
 datarootdir = @datarootdir@
 bindir = @bindir@
@@ -195,7 +196,7 @@ install: $(BIN)dccnitghtmare
 
 uninstall:
 	@printf "Uninstalling DccNiTghtmare files... "
-	@rm -f $(prefix)/bin/dccnitghtmare
+	@rm -f $(bindir)/dccnitghtmare
 	@rm -rf $(datadir)/$(PACKAGE)
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	
