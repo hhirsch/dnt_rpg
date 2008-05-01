@@ -5,7 +5,9 @@ VERSION = @VERSION@
 
 prefix = @prefix@
 datadir = @datarootdir@
-localedir = $(datadir)/locale
+datarootdir = @datarootdir@
+bindir = @bindir@
+localedir = @localedir@
 DEFS = -DLOCALEDIR=\"$(localedir)\"
 
 INSTALL = install
@@ -38,10 +40,18 @@ DATADIRECTORIES = alignment/ \
 						missions/tutorial/ \
 						models/ \
 						models/building/ \
+						models/building/house1/ \
+						models/building/house2/ \
+						models/building/house3/ \
+						models/building/house4/ \
 						models/natural/ \
 						models/natural/arvores/ \
+						models/natural/matos/ \
 						models/natural/arvores/jacaranda/ \
 						models/natural/arvores/tree1/ \
+						models/natural/arvores/tree2/ \
+						models/natural/arvores/tree3/ \
+						models/natural/arvores/tree4/ \
 						models/natural/fogueira/ \
 						models/natural/matos/ \
 						models/objetos/ \
@@ -64,15 +74,27 @@ DATADIRECTORIES = alignment/ \
 						models/objetos/geral/cap/ \
 						models/objetos/geral/colarinho_e_oculos/ \
 						models/objetos/geral/computador/ \
+						models/objetos/geral/dinner_chair/ \
+						models/objetos/geral/dinner_table/ \
 						models/objetos/geral/et/ \
 						models/objetos/geral/exclamacao/ \
+						models/objetos/geral/fridge/ \
 						models/objetos/geral/guitarra/ \
+						models/objetos/geral/letto/ \
 						models/objetos/geral/mala/ \
+						models/objetos/geral/meuble/ \
+						models/objetos/geral/notebook/ \
+						models/objetos/geral/pillow/ \
 						models/objetos/geral/placa_pare/ \
 						models/objetos/geral/porta/ \
 						models/objetos/geral/porta2/ \
 						models/objetos/geral/porta3/ \
+						models/objetos/geral/porta4/ \
+						models/objetos/geral/porta5/ \
 						models/objetos/geral/refmachine/ \
+						models/objetos/geral/sofa/ \
+						models/objetos/geral/tv42/ \
+						models/objetos/geral/wardrobe/ \
 						models/objetos/icex/ \
 						models/objetos/icex/cadeira/ \
 						models/objetos/icex/lixo/ \
@@ -83,8 +105,14 @@ DATADIRECTORIES = alignment/ \
 						models/objetos/icex/quadro/ \
 						models/objetos/icex/snes/ \
 						models/objetos/icex/snes/contra/ \
+						models/objetos/icex/snes/dk/ \
 						models/objetos/icex/snes/mario/ \
+						models/objetos/icex/snes/mariokart/ \
+						models/objetos/icex/snes/rrr/ \
 						models/objetos/icex/snes/sf2/ \
+						models/objetos/icex/snes/starfox/ \
+						models/objetos/icex/snes/topgear/ \
+						models/objetos/icex/snes/zelda/ \
 						models/objetos/tumbas/ \
 						models/objetos/tumbas/cruz/ \
 						models/objetos/tumbas/lapide/ \
@@ -110,9 +138,11 @@ DATADIRECTORIES = alignment/ \
 						skills/Img/ \
 						sndfx/ \
 						sndfx/animal/ \
+						sndfx/guns/ \
 						sndfx/menu/ \
 						sndfx/missions/ \
 						sndfx/natural/ \
+						sndfx/objects/ \
 						texturas/ \
                   texturas/aspectw/ \
 						texturas/dialogw/ \
@@ -145,7 +175,7 @@ clean:
 
 install: $(BIN)dccnitghtmare
 	@printf "Installing DccNiTghtmare bin files... "
-	@$(INSTALL) -c -m 755 $(BIN)dccnitghtmare $(prefix)/bin/
+	@$(INSTALL) -c -m 755 $(BIN)dccnitghtmare $(bindir)/
 	@printf "\e[0;32mDone.\e[0;0m\n"
 	@printf "Installing DccNiTghtmare data files... "
 	@$(INSTALL) -d $(datadir)/$(PACKAGE)
