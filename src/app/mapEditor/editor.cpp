@@ -129,6 +129,8 @@ void editor::openMap()
       delete(objectEditor);
       delete(particleEditor);
       delete(npcController);
+      delete(objectsList);
+      objectsList = new lObject();
       mapOpened = false;
    }
    gui->showMessage("Opening actual Map...");
