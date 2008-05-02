@@ -9,9 +9,6 @@ dialog(0)
       option
          text = gettext("Who are you?")
          action = go_to_dialog(1)
-      option 
-         text = gettext("Bye!")
-         action = go_to_dialog()
    pc_end
 end_dialog
 ############################################################
@@ -125,13 +122,13 @@ dialog(7)
       option 
          text = gettext("Its all yours...")
          action = give_item("models/objetos/icex/snes/chrono/chrono.dcc")
-         action = complete_mission("missions/tutorial/mission1.dsl", 200)
+         action = complete_mission("missions/tutorial/mission1.dsl", 200, 1)
          action = go_to_dialog(9)
        option
          text = gettext("Its yours, but I want some money!")
          action = give_item("models/objetos/icex/snes/chrono/chrono.dcc")
          action = receive_money(30);
-         action = complete_mission("missions/tutorial/mission1.dsl", 150)
+         action = complete_mission("missions/tutorial/mission1.dsl", 150, 2)
          action = go_to_dialog(8)
    pc_end
 end_dialog
