@@ -698,6 +698,9 @@ bool conversation::treat(guiObject* guiObj, int eventInfo,
    {
       if(guiObj == (guiObject*)barterButton)
       {
+         //FIXME barter is disabled for now....
+
+#if 0
          /* Closes the dialog window  */
          closeWindow();
 
@@ -710,6 +713,7 @@ bool conversation::treat(guiObject* guiObj, int eventInfo,
          *tradeWindow = new barterWindow(actualNPC->inventories, 
                                          actualPC->inventories, usedGui, infoW);
 
+#endif
       }
    }
    return(false);
