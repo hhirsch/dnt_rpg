@@ -64,11 +64,17 @@ class mission: public iaScript
 class missionsController
 {
    public:
-      /*! Constructor 
-       * \param usedEngine -> pointer to the used engine */
-      missionsController(void* usedEngine);
+      /*! Constructor */
+      missionsController();
       /*! Destructor */
       ~missionsController();
+
+      /*! Init the mission controller state to use
+       * \param usedEngine -> pointer to the used engine */
+      void init(void* usedEngine);
+
+      /*! finish the use of the mission controller (cleaning it) */
+      void finish();
 
       /*! A a new mission to the current list
        * \param scriptFile -> fileName of the script */
@@ -102,14 +108,14 @@ class missionsController
        * \param m -> new completed mission */
       void addCompleted(mission* m);
 
-      mission* completed;  /**< The List of Completed Missions */
-      mission* curTreat;   /**< Pointer to the mission to treat next  */
-      int totalCompleted;  /**< Total number of Completed Missions */
+      static mission* completed;  /**< The List of Completed Missions */
+      static mission* curTreat;   /**< Pointer to the mission to treat next  */
+      static int totalCompleted;  /**< Total number of Completed Missions */
 
-      mission* current;    /**< The list of Current Missions */
-      int totalCurrent;    /**< Total number of current missions */
+      static mission* current;    /**< The list of Current Missions */
+      static int totalCurrent;    /**< Total number of current missions */
 
-      void* pEngine;       /**< Pointer to the current engine */
+      static void* pEngine;       /**< Pointer to the current engine */
 };
 
 #endif

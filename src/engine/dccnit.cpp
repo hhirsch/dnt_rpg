@@ -111,7 +111,8 @@ engine::engine()
    actionControl = new actionController();
 
    /* Create the missions controller */
-   missions = new missionsController(this);
+   missions = new missionsController();
+   missions->init(this);
 
    /* FIXME remove from here the addMission */
    missions->addNewMission("missions/tutorial/mission1.dsl");
@@ -168,6 +169,7 @@ engine::~engine()
    delete(msgController);
 
    /* Delete missions controller */
+   missions->finish();
    delete(missions);
 
    /* Delete fight system */
@@ -3438,7 +3440,6 @@ int engine::run(SDL_Surface *surface)
             delete(objectsList);
             objectsList = new (lObject);
          }
- 
 
          /* Clear the Models List */
          if(models)
@@ -3446,6 +3447,10 @@ int engine::run(SDL_Surface *surface)
             delete(models);
             models = new modelList();
          }
+
+         /* Clear all missions */
+         missions->finish();
+         missions->init(this);
               
          /* Put the animation state on normal */
          PCs->getActiveCharacter()->setState(STATE_IDLE);

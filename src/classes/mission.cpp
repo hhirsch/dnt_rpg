@@ -85,7 +85,14 @@ void mission::setXp(int xp)
 /************************************************************
  *                        Constructor                       *
  ************************************************************/
-missionsController::missionsController(void* usedEngine)
+missionsController::missionsController()
+{
+}
+
+/************************************************************
+ *                           init                           *
+ ************************************************************/
+void missionsController::init(void* usedEngine)
 {
    totalCompleted = 0;
    completed = NULL;
@@ -99,6 +106,13 @@ missionsController::missionsController(void* usedEngine)
  *                         Destructor                       *
  ************************************************************/
 missionsController::~missionsController()
+{
+}
+
+/************************************************************
+ *                           finish                         *
+ ************************************************************/
+void missionsController::finish()
 {
    /* Empty current list */
    while(current)
@@ -314,4 +328,13 @@ void missionsController::treat(Map* acMap)
    }
 }
 
+/*************************************************************************
+ *                            Static Members                             *
+ *************************************************************************/
+mission* missionsController::completed = NULL;
+mission* missionsController::curTreat = NULL;
+int missionsController::totalCompleted = 0;
+mission* missionsController::current = NULL;
+int missionsController::totalCurrent = 0;   
+void* missionsController::pEngine = NULL;
 
