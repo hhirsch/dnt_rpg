@@ -217,8 +217,7 @@ void character::openConversationDialog(guiInterface* gui, character * PC)
    conversation* cs = (conversation*) conv;
    if( (cs != NULL) && (!cs->windowOpened()) )
    {
-      //TODO get number of dialog if it is != 0
-      cs->openDialog(0, gui, this, PC);
+      cs->openDialog(gui, this, PC);
       convPressed = true;
    }
 }
