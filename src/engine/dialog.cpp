@@ -7,6 +7,7 @@
 #include "dccnit.h"
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
+#include "../classes/mission.h"
 
 
 #define BUFFER_SIZE 512
@@ -28,6 +29,11 @@
 #define TK_ACTION_GO_TO_DIALOG "go_to_dialog"
 #define TK_ACTION_INIT_FIGHT "init_fight"
 #define TK_ACTION_FINISH_DIALOG "finish_dialog"
+#define TK_ACTION_DIALOG_INIT "dialog_init"
+#define TK_ACTION_ADD_MISSION "add_mission"
+#define TK_ACTION_COMPLETE_MISSION "complete_mission"
+#define TK_ACTION_GIVE_ITEM "give_item"
+#define TK_ACTION_RECEIVE_MONEY "receive_money"
 
 //TODO If-else tokens
 #define TK_IF_CONDITION "if_condition"
@@ -50,6 +56,7 @@ conversation::conversation(void* pEngine)
    actualPC = NULL;
    actualNPC = NULL;
    actual = -1;
+   initialDialog = 0;
    actualEngine = pEngine;
 }
 
@@ -140,7 +147,8 @@ string conversation::getString(int& initialPosition, string buffer,
          }
          else if(buffer[i] == '"')
          {
-            considerSpace = true;
+            /* Mark the init/end of the "string" */
+            considerSpace = !considerSpace;
          }
          else if( ( ( buffer[i] != ' ') || considerSpace) && 
                   (buffer[i] != '"') )
@@ -172,16 +180,29 @@ int conversation::getActionID(string token, string fileName, int line)
    
    if(token == TK_ACTION_GO_TO_DIALOG)
    {
-     return(TALK_ACTION_GOTO);
+     return(TALK_ACTION_GO_TO_DIALOG);
    }
    else if(token == TK_ACTION_INIT_FIGHT)
    {
-      return(TALK_ACTION_FIGHT);
+      return(TALK_ACTION_INIT_FIGHT);
    }
    else if(token == TK_ACTION_FINISH_DIALOG)
    {
-      return(TALK_ACTION_CLOSE);
+      return(TALK_ACTION_FINISH_DIALOG);
    }
+   else if(token == TK_ACTION_DIALOG_INIT)
+   {
+      return(TALK_ACTION_DIALOG_INIT);
+   }
+   else if(token == TK_ACTION_ADD_MISSION)
+   {
+      return(TALK_ACTION_ADD_MISSION);
+   }
+   else if(token == TK_ACTION_COMPLETE_MISSION)
+   {
+      return(TALK_ACTION_COMPLETE_MISSION);
+   }
+
    printError(fileName, "Unknow action!", line);
    return(-1);
 }
@@ -201,6 +222,7 @@ int conversation::loadFile(string name)
   bool endDialog = true;
   int line = 0;
   int option = -1;
+  int curAct = -1;
 
   bool npcBegin = false;
   bool pcBegin = false;
@@ -335,6 +357,7 @@ int conversation::loadFile(string name)
          if(pcBegin)
          {
             option++;
+            curAct = -1;
          }
          else
          {
@@ -352,13 +375,44 @@ int conversation::loadFile(string name)
          {
             if( (option >= 0) && (option < MAX_OPTIONS))
             {
-               token = getString(position, buffer, separator);
-               dlg->options[option].ifAction.id = getActionID(token,name,line);
-               if(dlg->options[option].ifAction.id == TALK_ACTION_GOTO)
+               curAct++;
+               if(curAct < MAX_ACTIONS)
                {
-                  //get dialog number
+                  dlg->options[option].totalIfActions++;
                   token = getString(position, buffer, separator);
-                  dlg->options[option].ifAction.att = atoi(token.c_str());
+                  talkAction* tact = &dlg->options[option].ifAction[curAct];
+                  tact->id = getActionID(token, name,line);
+
+                  /* Parse Action Parameters */
+                  if( (tact->id == TALK_ACTION_GO_TO_DIALOG) ||
+                      (tact->id == TALK_ACTION_DIALOG_INIT) )
+                  {
+                     //get dialog number
+                     token = getString(position, buffer, separator);
+                     tact->att = atoi(token.c_str());
+                  }
+                  else if( (tact->id == TALK_ACTION_ADD_MISSION) ||
+                           (tact->id == TALK_ACTION_COMPLETE_MISSION) )
+                  {
+                     //get mission
+                     token = getString(position, buffer, separator);
+                     tact->satt = token;
+
+                     //get xp, if needed
+                     if(tact->id == TALK_ACTION_COMPLETE_MISSION)
+                     {
+                        token = getString(position, buffer, separator);
+                        tact->att =  atoi(token.c_str());
+
+                        //and get completion type
+                        token = getString(position, buffer, separator);
+                        tact->qty =  atoi(token.c_str());
+                     }
+                  }
+               }
+               else
+               {
+                  printError(name, gettext("Actions List overflow!"), line);
                }
             }
             else
@@ -416,8 +470,8 @@ dialog* conversation::insertDialog()
    dlg->npc.attribute = -1;
    dlg->npc.elseText = "";
    dlg->npc.operation = -1;
-   dlg->npc.ifAction.id = -1;
-   dlg->npc.elseAction.id = -1;
+   dlg->npc.totalIfActions = 0;
+   dlg->npc.totalElseActions = 0;
 
    int aux;
    for(aux = 0; aux< 5; aux++)
@@ -426,8 +480,8 @@ dialog* conversation::insertDialog()
       dlg->options[aux].attribute = -1;
       dlg->options[aux].elseText = "";
       dlg->options[aux].operation = -1;
-      dlg->options[aux].ifAction.id = -1;
-      dlg->options[aux].elseAction.id = -1;
+      dlg->options[aux].totalIfActions = 0;
+      dlg->options[aux].totalElseActions = 0;
    }
 
    total++;
@@ -458,10 +512,17 @@ void conversation::removeDialog(int num)
 }
 
 /*************************************************************************
+ *                           setInitialDialog                            *
+ *************************************************************************/
+void conversation::setInitialDialog(int numDialog)
+{
+   initialDialog = numDialog;
+}
+
+/*************************************************************************
  *                              openDialog                               *
  *************************************************************************/
-void conversation::openDialog(int numDialog, guiInterface* gui, character* pers,
-                              character* PC)
+void conversation::openDialog(guiInterface* gui, character* pers, character* PC)
 {
    dirs dir;
    usedGui = gui;
@@ -480,7 +541,7 @@ void conversation::openDialog(int numDialog, guiInterface* gui, character* pers,
    jan->setExternPointer(&jan);
    gui->openWindow(jan);
 
-   changeDialog(numDialog);
+   changeDialog(initialDialog);
 }
 
 /*************************************************************************
@@ -488,6 +549,7 @@ void conversation::openDialog(int numDialog, guiInterface* gui, character* pers,
  *************************************************************************/
 void conversation::proccessAction(int numDialog, int opcao)
 {
+   /* Get dialog on list */
    dialog* dlg = first->next;
    while( (dlg != first) && (dlg->id != numDialog))
    {
@@ -499,31 +561,60 @@ void conversation::proccessAction(int numDialog, int opcao)
    }
 
    //FIXME else too
-   int action  = dlg->options[opcao].ifAction.id;
 
-   switch(action)
+   int i;
+   int action;
+
+   /* Take all actions */
+   for(i = 0; i < dlg->options[opcao].totalIfActions; i++)
    {
-      case TALK_ACTION_GOTO:
-         /* change dialog */
-         changeDialog(dlg->options[opcao].ifAction.att);
-      break;
-      case TALK_ACTION_FIGHT:
+      action  = dlg->options[opcao].ifAction[i].id;
+
+      switch(action)
       {
-         engine* eng = (engine*)actualEngine;
-         actualNPC->setAsEnemy();
-         eng->enterBattleMode(false);
-         closeWindow();
+         case TALK_ACTION_GO_TO_DIALOG:
+            /* change dialog */
+            changeDialog(dlg->options[opcao].ifAction[i].att);
+         break;
+         case TALK_ACTION_INIT_FIGHT:
+         {
+            engine* eng = (engine*)actualEngine;
+            actualNPC->setAsEnemy();
+            eng->enterBattleMode(false);
+            closeWindow();
+         }
+         break;
+         case TALK_ACTION_FINISH_DIALOG:
+            closeWindow();
+         break;
+         case TALK_ACTION_MOD_PC:
+            //TODO
+         break;
+         case TALK_ACTION_MOD_NPC:
+            //TODO
+         break;
+         case TALK_ACTION_DIALOG_INIT:
+            initialDialog = dlg->options[opcao].ifAction[i].att;
+         break;
+         case TALK_ACTION_ADD_MISSION:
+         {
+            missionsController missions;
+            missions.addNewMission(dlg->options[opcao].ifAction[i].satt);
+         }
+         break;
+         case TALK_ACTION_COMPLETE_MISSION:
+         {
+            missionsController missions;
+            mission* m;
+            m=missions.getCurrentMission(dlg->options[opcao].ifAction[i].satt);
+            if(m)
+            {
+               m->setXp(dlg->options[opcao].ifAction[i].att);
+               missions.completeMission(m, dlg->options[opcao].ifAction[i].qty);
+            }
+         }
+         break;
       }
-      break;
-      case TALK_ACTION_CLOSE:
-         closeWindow();
-      break;
-      case TALK_ACTION_MODPC:
-         //TODO
-      break;
-      case TALK_ACTION_MODNPC:
-         //TODO
-      break;
    }
 }
 

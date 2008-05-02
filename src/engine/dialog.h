@@ -7,11 +7,16 @@
 
 /*! \file dialog.h Define conversations options.*/
 
-#define TALK_ACTION_GOTO   0 /**< Go To some conversation point */
-#define TALK_ACTION_FIGHT  1 /**< End talk and initiate a fight */
-#define TALK_ACTION_CLOSE  2 /**< End Talk */
-#define TALK_ACTION_MODPC  3 /**< Modify PC attribute */
-#define TALK_ACTION_MODNPC 4 /**< Modify NPC attribute */
+#define TALK_ACTION_GO_TO_DIALOG   0 /**< Go To some conversation point */
+#define TALK_ACTION_INIT_FIGHT     1 /**< End talk and initiate a fight */
+#define TALK_ACTION_FINISH_DIALOG  2 /**< End Talk */
+#define TALK_ACTION_MOD_PC         3 /**< Modify PC attribute */
+#define TALK_ACTION_MOD_NPC        4 /**< Modify NPC attribute */
+#define TALK_ACTION_DIALOG_INIT    5 /**< Set the new initial dialog */
+#define TALK_ACTION_ADD_MISSION    6 /**< Add a mission */
+#define TALK_ACTION_COMPLETE_MISSION 7 /**< Complete Mission */
+#define TALK_ACTION_GIVE_ITEM      8 /**< Give an item */
+#define TALK_ACTION_RECEIVE_MONEY  9 /**< Receive some money */
 
 #define TALK_OPER_EQUAL        0 /**< Operation Equal */
 #define TALK_OPER_GREATER      1 /**< Operation Greater */
@@ -27,6 +32,8 @@
 
 #define MAX_OPTIONS 5 /**< Max number of options per dialog */
 
+#define MAX_ACTIONS 5 /**< Max number of actions per option */
+
 #include "../gui/farso.h"
 #include "barterwindow.h"
 #include "character.h"
@@ -37,10 +44,11 @@ using namespace std;
 class talkAction
 {
   public:
-   int id;   /**< Talk Action Identificator */
-   int oper; /**< Operator used */
-   int qty;  /**< Quantity */
-   int att;  /**< Attribute to modify */
+     int id;   /**< Talk Action Identificator */
+     int oper; /**< Operator used */
+     int qty;  /**< Quantity */
+     int att;  /**< Attribute to modify */
+     string satt; /**< String Attribute */
 };
 
 /*! If else struct on conversations */
@@ -54,8 +62,10 @@ class ifElse
    
    string elseText;       /**< Else */ 
 
-   talkAction ifAction;   /**< If action */
-   talkAction elseAction; /**< Else Action */
+   talkAction ifAction[MAX_ACTIONS];   /**< If action */
+   int totalIfActions;                 /**< Number of if actions */
+   talkAction elseAction[MAX_ACTIONS]; /**< Else Action */
+   int totalElseActions;               /**< Number of else actions */
     
 };
 
@@ -100,16 +110,18 @@ class conversation
       /*!
        * Delete dialog from conversation
        * \param num -> number of the dialog to be removed */
-      void removeDialog(int num);     
+      void removeDialog(int num); 
+
+      /*! Set the initial dialog (the one displayed at a click on character)
+       * \param numDialog -> new init dialog number */
+      void setInitialDialog(int numDialog);
 
       /*!
        * Opens the conversation on window
-       * \param numDialog -> dialog number to open 
        * \param gui -> window interface used
        * \param pers -> character to talk to
        * \param PC -> player's character */
-      void openDialog(int numDialog, guiInterface* gui, character* pers,
-                      character* PC);
+      void openDialog(guiInterface* gui, character* pers, character* PC);
 
       /*! Treat Events on Window. 
        * \param guiObj -> active GUI object
@@ -133,6 +145,7 @@ class conversation
          dialog* first;        /**< Head Node */
          int total;            /**< Total Dialogs */
          int actual;           /**< Actual active Dialog */
+         int initialDialog;    /**< First dialog to show */
          rolBar* npcText;      /**< The NPC text quad */
          selText* pcSelText;   /**< The PC selection text */
          button* barterButton; /**< The Barter Button */
