@@ -131,6 +131,8 @@ void editor::openMap()
       delete(npcController);
       delete(objectsList);
       objectsList = new lObject();
+      delete(models);
+      models = new modelList();
       mapOpened = false;
    }
    gui->showMessage("Opening actual Map...");
