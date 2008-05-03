@@ -113,14 +113,12 @@ void editor::init()
 }
 
 /*********************************************************************
- *                               Open Map                            *
+ *                              Close Map                            *
  *********************************************************************/
-void editor::openMap()
+void editor::closeMap()
 {
-   dirs dir;
    if(mapOpened)
    {
-      //Close Actual Map
       gui->showMessage("Closing actual Map...");
       delete(map);
       delete(terrainEditor);
@@ -134,6 +132,19 @@ void editor::openMap()
       delete(models);
       models = new modelList();
       mapOpened = false;
+   }
+}
+
+/*********************************************************************
+ *                               Open Map                            *
+ *********************************************************************/
+void editor::openMap()
+{
+   dirs dir;
+   if(mapOpened)
+   {
+      //Close Actual Map
+      closeMap();
    }
    gui->showMessage("Opening actual Map...");
    draw();
@@ -311,20 +322,7 @@ void editor::newMap()
 {
    if(mapOpened)
    {
-      //Close Actual Map
-      delete(map);
-      delete(terrainEditor);
-      delete(portalEditor);
-      delete(wallEditor);
-      delete(objectEditor);
-      delete(particleEditor);
-      delete(npcController);
-      particleSystem->deleteAll();
-      if(NPCs)
-      {
-         delete(NPCs);
-      }
-      mapOpened = false;
+      closeMap();
    }
 
    mapOpened = true;

@@ -38,6 +38,8 @@ class editor
       void init();
       /*! Open Active Editor Map */
       void openMap();
+      /*! Cloase Active Editor Map */
+      void closeMap();
       /*! Save Active Editor Map */
       void saveMap();
       /*! Make a new Active Editor Map */
