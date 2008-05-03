@@ -425,44 +425,28 @@ void Map::insertObject(GLfloat xReal, GLfloat yReal, GLfloat zReal, int orObj,
       saux->addObject(true, qx, qz, orObj, xReal, yReal, zReal, collision, obj);
       boundingBox  bounds = obj->getBoundingBox();
 
-      float X[2], Z[2];
+      float X[4], Z[4];
+      GLfloat min2[3];
+      GLfloat max2[3];
+
       X[0] = bounds.x1;
-      X[1] = bounds.x2;
       Z[0] = bounds.z1;
+      X[1] = bounds.x1;
       Z[1] = bounds.z2;
-      if(orObj!=0)
-      {
-         GLfloat oldX, oldZ;
-         GLfloat cosseno = cos(deg2Rad(orObj));
-         GLfloat seno = sin(deg2Rad(orObj));
-         int aux;
-         for(aux = 0;aux<=1;aux++)
-         {
-            oldX = X[aux];
-            oldZ = Z[aux];
-            X[aux] = (oldZ*seno) + (oldX*cosseno);
-            Z[aux] = (oldZ*cosseno) - (oldX*seno);
-         }
-         if(X[0]>X[1])
-         {
-            oldX = X[0];
-            X[0] = X[1];
-            X[1] = oldX;
-         }
-         if(Z[0]>Z[1])
-         {
-            oldZ = Z[0];
-            Z[0] = Z[1];
-            Z[1] = oldZ;
-         }
-     }
+      X[2] = bounds.x2;
+      Z[2] = bounds.z2;
+      X[3] = bounds.x2;
+      Z[3] = bounds.z1;
+      rotTransBoundingBox(orObj, X, Z, xReal, bounds.y1+yReal, 
+                          bounds.y2+yReal, zReal, min2, max2);
+
 
      int minqx, minqz, maxqx, maxqz;
      int ssize = squareSize();
-     minqx = (int)(X[0] + xReal) / ssize;
-     minqz = (int)(Z[0] + zReal) / ssize;
-     maxqx = (int)(X[1] + xReal) / ssize;
-     maxqz = (int)(Z[1] + zReal) / ssize; 
+     minqx = (int)(min2[0]) / ssize;
+     minqz = (int)(min2[2]) / ssize;
+     maxqx = (int)(max2[0]) / ssize;
+     maxqz = (int)(max2[2]) / ssize; 
      int X1, Z1;
      Square* qaux;
      for(X1 = minqx; X1<=maxqx; X1++)
