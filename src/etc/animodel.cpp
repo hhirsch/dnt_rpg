@@ -938,19 +938,19 @@ bool aniModel::depthCollision(GLfloat angle, GLfloat pX, GLfloat pY, GLfloat pZ,
                V0[0] = pX+((-meshVertices[index0][0])*angleCos*m_renderScale) +
                           ((meshVertices[index0][1])*angleSin*m_renderScale);
                V0[1] = pY + meshVertices[index0][2]*m_renderScale;
-               V0[2] = pZ+((-meshVertices[index0][0]*angleSin*m_renderScale)) +
+               V0[2] = pZ+((meshVertices[index0][0]*angleSin*m_renderScale)) +
                           ((meshVertices[index0][1]*angleCos*m_renderScale));
 
                V1[0] = pX+((-meshVertices[index1][0])*angleCos*m_renderScale) +
                           ((meshVertices[index1][1])*angleSin*m_renderScale);
                V1[1] = pY + meshVertices[index1][2]*m_renderScale;
-               V1[2] = pZ+((-meshVertices[index1][0]*angleSin*m_renderScale)) +
+               V1[2] = pZ+((meshVertices[index1][0]*angleSin*m_renderScale)) +
                           ((meshVertices[index1][1]*angleCos*m_renderScale));
 
                V2[0] = pX+((-meshVertices[index2][0])*angleCos*m_renderScale) +
                           ((meshVertices[index2][1])*angleSin*m_renderScale);
                V2[1] = pY + meshVertices[index2][2]*m_renderScale;
-               V2[2] = pZ+((-meshVertices[index2][0]*angleSin*m_renderScale)) +
+               V2[2] = pZ+((meshVertices[index2][0]*angleSin*m_renderScale)) +
                           ((meshVertices[index2][1]*angleCos*m_renderScale));
 
                /* Bounding Box Faces */

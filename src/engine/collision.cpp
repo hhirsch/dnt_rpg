@@ -92,7 +92,7 @@ bool collision::verifySquare(GLfloat min[3], GLfloat max[3], Square* quad)
              /* If the bounding boxes intercepts, we'll need to do a more 
               * depth collision verify, so it is */
              if(sobj->obj->depthCollision(sobj->orientation, sobj->x, 
-                                          sobj->obj->yPosition +
+                                          sobj->y +
                                           actualMap->getHeight(sobj->x,sobj->z),
                                           sobj->z,min,max))
              {
