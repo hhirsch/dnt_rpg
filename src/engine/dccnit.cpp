@@ -1320,6 +1320,36 @@ void engine::endTurn()
 }
 
 /*********************************************************************
+ *                         do A* search cycle                        *
+ *********************************************************************/
+void engine::doAStar()
+{
+   int aux = 0;
+   character* per = NULL;
+
+   if(NPCs)
+   {
+      per = (character*) NPCs->first->next;
+      for(aux=0; aux < NPCs->getTotal(); aux++)
+      {
+         per->pathFind.doCycle();
+         per = per->next;
+      }
+   }
+
+   if(PCs)
+   {
+      per = (character*) PCs->first->next;
+      for(aux=0; aux < PCs->getTotal(); aux++)
+      {
+         per->pathFind.doCycle();
+         per = per->next;
+      }
+
+   }
+}
+
+/*********************************************************************
  *                        treat all scripts                          *
  *********************************************************************/
 void engine::treatScripts()
@@ -2475,6 +2505,9 @@ int engine::treatIO(SDL_Surface *screen)
       /* IA cycle */
       treatScripts();
 
+      /* A* cycle */
+      doAStar();
+
       /* GUI Events */
 
       /* Redraw the needed GUI */
@@ -2571,13 +2604,13 @@ int engine::treatIO(SDL_Surface *screen)
       /* Verify Sounds FIXME -> for npc sounds! */
       if( (walked) && (activeCharacter->isAlive()) )
       {
-         if(!walkSound)
+         if( (!walkSound) && (snd) )
          {
             walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,
                                             activeCharacter->zPosition,true,
                                             "sndfx/passos.ogg");
          }
-         else
+         else if(walkSound)
          {
             walkSound->redefinePosition(activeCharacter->xPosition, 0.0,
                                         activeCharacter->zPosition);

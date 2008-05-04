@@ -64,8 +64,8 @@ class listStar
 #define ASTAR_STATE_FOUND     2  /**< A* Found Path State */   
 #define ASTAR_STATE_NOT_FOUND 3  /**< A* Not Found Path State */
 
-/*! A* implementation. The A* will be search in paralel when called with 
- *  findPath. When running, state is RUNNING. When end running, state is
+/*! A* implementation. The A* will be searching few nodes per cycle. 
+ *  When running, state is RUNNING. When end running, state is
  *  FOUND or NOT_FOUND, based on the result of the search. */
 class aStar
 {
@@ -92,27 +92,8 @@ class aStar
       void findPath(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
                     void* NPCs, void* PCs, bool forceCall=false);
 
-      /*! A* to find path INTERNAL
-       * \param actualX -> current x position
-       * \param actualZ -> current z position 
-       * \param x -> destiny x position
-       * \param z -> desired z position
-       * \param stepSize -> size of the Step
-       * \param orientation -> character orientation
-       * \param perX1 -> per X initial Bounding position
-       * \param perY1 -> per Y initial Bounding position
-       * \param perZ1 -> per Z initial Bounding position
-       * \param perX2 -> per X final Bounding position
-       * \param perY2 -> per Y final Bounding position
-       * \param perZ2 -> per Z final Bounding position
-       * \return true if found path, false otherwise. */
-      /*bool findPathInternal(GLfloat actualX, GLfloat actualZ, 
-                            GLfloat x, GLfloat z,
-                            GLfloat stepSize, GLfloat orientation,
-                            GLfloat perX1, GLfloat perY1, GLfloat perZ1, 
-                            GLfloat perX2, GLfloat perY2, GLfloat perZ2);*/
-      bool findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize,
-                            void* NPCs, void* PCs);
+      /* Do the a* cycle (if is current searching for something) */
+      void doCycle();
 
       /*! Get the New Character Position, based on Path Found previously 
        * \param posX -> new X position
@@ -144,24 +125,30 @@ class aStar
       void forceNextCall();
 
    private:
+
+      /*! Clear search structures */
+      void clearSearch();
+
       Map* actualMap;           /**< Pointer to opened Map */
       GLfloat destinyX,         /**< Destiny X position */
               destinyZ;         /**< Destiny Z position */
       pattAgent* patt;          /**< The Pattern Agent to Follow created path */
       int state;                /**< Internal State of the aStar */
-      SDL_Thread* searchThread; /**< The Search Paralel Thread */
-      SDL_mutex* searchMutex;   /**< The Search Mutex */
+      void* curActor;           /**< Current Actor */
+      void* pcs;                /**< PCs list */
+      void* npcs;               /**< NPCs list */
+      GLfloat curStepSize;      /**< Current Step Size */
+
+      listStar* opened;         /**< Opened nodes list */
+      listStar* closed;         /**< Closed nodes list */
+
+      GLfloat dX, 
+              dZ, 
+              diagonal, 
+              orthogonal, 
+              heuristic;
+
       GLuint lastCallTime;      /**< Last Time when Called Search */
-
-
-      bool abort;               /**< Flag to abort the execution of the a* */
-
-      /*! lock Mutex */
-      void lock();
-      /*! unLock Mutex */
-      void unLock();
-
-
 };
 
 

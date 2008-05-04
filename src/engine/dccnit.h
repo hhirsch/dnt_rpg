@@ -272,6 +272,12 @@ class engine
       void treatScripts();
 
       /*!
+       **************************************************************
+       * Do all characters A* cycles
+       **************************************************************/
+      void doAStar();
+
+      /*!
        ***********************************************************************
        * Verify and treat the actions made by mouse on the game (not on gui!)
        * \param Mbutton -> mouse Button State
