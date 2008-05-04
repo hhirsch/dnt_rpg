@@ -3,7 +3,7 @@
 #include <math.h>
 
 #define SEARCH_LIMIT   1000  /**< Max Nodes the aStar will search */
-#define SEARCH_INTERVAL 200  /**< Interval of Nodes when aStar will sleep */
+#define SEARCH_INTERVAL  10  /**< Interval of Nodes when aStar will sleep */
 #define MIN_CALL        200  /**< Minimun time interval to call search again */
 
 
@@ -217,9 +217,13 @@ bool aStar::findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize
       return(false);
    }
    
-   opened.insert(actualX, actualZ, 0, 
-                 sqrt((actualX-destinyX)*(actualX-destinyX) + 
-                 (actualZ-destinyZ)*(actualZ-destinyZ)), -1, -1);
+   dX = fabs(destinyX - actualX);
+   dZ = fabs(destinyZ - actualZ);
+   orthogonal = fabs(dX - dZ);
+   diagonal = fabs(((dX + dZ) - orthogonal)/2);
+   heuristic = diagonal + orthogonal + dX + dZ;
+
+   opened.insert(actualX, actualZ, 0, heuristic, -1, -1);
 
    while((!opened.isEmpty()) && (closed.size() <= SEARCH_LIMIT))
    {
@@ -227,6 +231,7 @@ bool aStar::findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize
       if(abort)
       {
          unLock();
+         state = ASTAR_STATE_NOT_FOUND;
          return(false);
       }
 
@@ -234,7 +239,7 @@ bool aStar::findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize
       {
          /* Sleep */
          unLock();
-         SDL_Delay(50);
+         SDL_Delay(100);
          lock();
       }
       
@@ -248,10 +253,10 @@ bool aStar::findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize
       }
      
        /* Verify if arrived at destiny */
-      if( (node->x>=destinyX-(stepSize*10)) &&
-          (node->x<=destinyX+(stepSize*10)) && 
-          (node->z>=destinyZ-(stepSize*10)) &&
-          (node->z<=destinyZ+(stepSize*10)) )
+      if( (node->x >= destinyX-(stepSize*10)) &&
+          (node->x <= destinyX+(stepSize*10)) && 
+          (node->z >= destinyZ-(stepSize*10)) &&
+          (node->z <= destinyZ+(stepSize*10)) )
       {
          delete(patt);
          patt = new pattAgent(true);
@@ -276,12 +281,13 @@ bool aStar::findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize
       }
 
       GLfloat pass = stepSize*10;
-      GLfloat passMid = ((stepSize*10) / sqrt(2.0));
+      GLfloat passMid = ((stepSize*10) * sqrt(2.0));
       /* Visit all Adjacents Positions */
       for(i=0; i<9; i++)
       {
          
-         switch(i) {
+         switch(i) 
+         {
            case 1:
               posX = node->x;
               posZ = node->z - pass;
@@ -316,10 +322,23 @@ bool aStar::findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize
            break;
         }
        
-        newg = node->gone + sqrt((posX - node->x) * (posX - node->x) + 
-                                 (posZ - node->z) * (posZ - node->z));
+        if(collisionDetect.canWalk(c, posX, 0, posZ, 0, 
+                                   varHeight, nx, nz, false) )
+        {
+           /* New Gone is the current gone + distance to this one */
+           newg = node->gone + sqrt((posX - node->x) * (posX - node->x) + 
+                                    (posZ - node->z) * (posZ - node->z));
+        }
+        else
+        {
+           /* New Gone is infinity */
+           newg = INFINITY;
+        }
         
+        /* search it at closed */
         node2 = closed.find(posX, posZ);
+
+        /* search it at opened */
         node3 = opened.find(posX, posZ);
 
         dX = fabs(destinyX - posX);
@@ -329,28 +348,38 @@ bool aStar::findPathInternal(void* actor, GLfloat x, GLfloat z, GLfloat stepSize
         
         heuristic = diagonal + orthogonal + dX + dZ;
 
-        if( (node2 != NULL) || (node3 != NULL) || 
-            (!collisionDetect.canWalk(c, posX, 0, posZ, 0, 
-                                      varHeight, nx, nz, false)) )
+        /* If is in open or closed and n.g <= new g */
+        if( ((node2 != NULL) && (node2->gone <= newg)) || 
+            ((node3 != NULL) && (node3->gone <= newg)) )
         {
-           if( (node2 != NULL) && (node2->gone > newg))
-           {
-              closed.remove(node2);
-              opened.insert(posX, posZ, newg, heuristic, node->x, node->z);
-           }
-           
-           if( (node3 != NULL) && (node3->gone > newg))
-           {
-              opened.remove(node3);
-              opened.insert(posX, posZ, newg, heuristic, node->x, node->z);
-           }
+           //skip
         }
         else
         {
-           opened.insert(posX, posZ, newg, heuristic, node->x, node->z);
+           /* Remove it from closed */
+           if(node2 != NULL)
+           {
+              closed.remove(node2);
+           }
+ 
+           /* If is at open list */
+           if(node3)
+           {
+              /* Just update it */
+              node3->parentX = node->x;
+              node3->parentZ = node->z;
+              node3->gone = newg;
+              node3->heuristic = heuristic;
+           }
+           else
+           {
+              /* Insert it */
+              opened.insert(posX, posZ, newg, heuristic, node->x, node->z);
+           }
         }
       }
 
+      /* Push n onto closed */
       closed.insert(node->x, node->z, node->gone, node->heuristic, 
                     node->parentX, node->parentZ);
       opened.remove(node);
