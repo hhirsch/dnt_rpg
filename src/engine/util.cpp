@@ -86,8 +86,9 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
    GLfloat seno = sin(deg2Rad(orientacao));
    for(aux = 0;aux<4;aux++)
    {
-      x[aux] = -(Z[aux]*seno) + (X[aux]*cosseno);
-      z[aux] = (Z[aux]*cosseno) + (X[aux]*seno);
+      /* Inverting, because is X and Z, not x and z */
+      x[aux] = (Z[aux]*seno) + (X[aux]*cosseno);
+      z[aux] = (Z[aux]*cosseno) - (X[aux]*seno);
    }
 
    
