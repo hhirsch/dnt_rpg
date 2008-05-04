@@ -16,6 +16,7 @@
 #define STATE_NATURE      16
 #define STATE_MACABRE     17
 #define STATE_BATH        18
+#define STATE_STREET      19
 
 /* Particles */
 #define STATE_FIRE        30

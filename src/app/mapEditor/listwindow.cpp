@@ -14,6 +14,7 @@
 #define FILE_NATURE     "mapEditor/lists/nature.lst"
 #define FILE_MACABRE    "mapEditor/lists/macabre.lst"
 #define FILE_BATH       "mapEditor/lists/bath.lst"
+#define FILE_STREET     "mapEditor/lists/street.lst"
 
 /* Particles */
 #define FILE_FIRE       "mapEditor/lists/fire.lst"
@@ -106,6 +107,9 @@ void listWindow::setState(int st)
          break;
          case STATE_BATH:
             fileName = FILE_BATH;
+         break;
+         case STATE_STREET:
+            fileName = FILE_STREET;
          break;
          case STATE_FIRE:
             fileName = FILE_FIRE;
