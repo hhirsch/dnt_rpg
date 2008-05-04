@@ -9,12 +9,15 @@ use or non-use of DccNiTghtmare and derivates.
 copyrights. Everyone is free to use, modify, republish, sell or give away it
 without prior consent from anybody.
 
-  All DccNiTghtmare's data files that were made by the DNTeam are also at Public
-Domain. Each data file that wasn't made by the DNTeam has a license.txt file
-at its .blend directory, usually at "blend/contrib/", with autor's names and
-license. All models are free, with licenses compatible with GNU General Public
-License (GPL).
+   All DccNiTghtmare's data files that were created by the DNTeam are also at
+Public Domain. Each data file that wasn't created by the DNTeam has a
+license.txt file at its .blend directory, usually at "./blend/contrib/", with
+autor's names and license. All models are free, with licenses compatible with
+GNU General Public License (GPL). If your DNT distribution came without the
+"blend" directory, take a look at our CVS: 
+
+http://dccnitghtmare.cvs.sourceforge.net/dccnitghtmare/dccnightmare/blend/
    
   Just as a reminder, the correspondents cal3D files are at the same license of
-the blend that originated them.
+the .blend that originated them.
 
