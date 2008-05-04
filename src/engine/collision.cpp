@@ -138,8 +138,9 @@ bool collision::verifyCurb(GLfloat min[3],GLfloat max[3], wall* curb)
 /*********************************************************************
  *                              canWalk                              *
  *********************************************************************/
-bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY ,GLfloat varZ,
-                        GLfloat varAlpha, GLfloat& varHeight, GLfloat& nx, 
+bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
+                        GLfloat varZ, GLfloat varAlpha, 
+                        GLfloat& varHeight, GLfloat& nx, 
                         GLfloat& nz, bool usePosition)
 {
    bool result = true;
