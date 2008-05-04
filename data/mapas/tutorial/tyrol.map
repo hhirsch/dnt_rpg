@@ -1,10 +1,14 @@
 T 26X30
 # Made by DccNiTghtmare's MapEditor, v0.2
+PS ../data/mapas/tutorial/tyrol.map.par
 Outdoor: 1
+o models/objetos/geral/barrel/barrel.dcc
+o models/street/lightpole/lightpole.dcc
+o models/street/fountain2/fountain2.dcc
 o models/building/house5/house5.dcc
-t texturas/floor_outdoor/rock.png texturas/floor_outdoor/rock.png 126 129 134
-t texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png 54 102 49
 t texturas/floor_outdoor/streetng.png texturas/floor_outdoor/streetng.png 103 103 49
+t texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png 54 102 49
+t texturas/floor_outdoor/rock.png texturas/floor_outdoor/rock.png 126 129 134
 #Z: 0
 p 0,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/rock.png
@@ -685,6 +689,10 @@ ut texturas/floor_outdoor/streetng.png
 uo models/building/house5/house5.dcc 0:18,12:4501.390625,0.200000,2968.506348:127:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/streetng.png
+uo models/objetos/geral/barrel/barrel.dcc 1:18,13:4413.765137,0.000000,3109.797607:0:0
+uo models/street/lightpole/lightpole.dcc 1:18,13:4382.418457,0.000000,3133.369629:0:0
+uo models/street/lightpole/lightpole.dcc 1:18,13:4574.493164,0.000000,3099.563477:0:0
+uo models/street/fountain2/fountain2.dcc 1:18,13:4442.779785,0.000000,3286.112793:0:0
 uo models/building/house5/house5.dcc 0:18,12:4501.390625,0.200000,2968.506348:127:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/streetng.png
@@ -740,6 +748,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/streetng.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/streetng.png
+uo models/street/fountain2/fountain2.dcc 0:18,13:4442.779785,0.000000,3286.112793:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/streetng.png
 p 0,0.000000,0.000000,0.000000,0.000000
