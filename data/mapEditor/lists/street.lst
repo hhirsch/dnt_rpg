@@ -1,5 +1,7 @@
-7
+9
 Barrel models/objetos/geral/barrel/barrel.dcc
+Fountain1 models/street/fountain1/fountain1.dcc
+Fountain2 models/street/fountain2/fountain2.dcc
 Hydrant models/street/hydrant/hydrant.dcc
 LightPole models/street/lightpole/lightpole.dcc
 Stop_Sign models/objetos/geral/placa_pare/placa_pare.dcc
