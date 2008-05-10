@@ -2023,7 +2023,7 @@ int Map::save(string arquivo)
    }
 
    /* Write used objects */
-   if(objects->total>0)
+   if( (objects) && (objects->total > 0))
    {
       object* objAux = objects->first;
       for(i = 0; i < objects->total; i++)
