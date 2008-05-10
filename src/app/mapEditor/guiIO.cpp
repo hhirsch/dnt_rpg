@@ -70,6 +70,12 @@ waterWindow* guiIO::getWaterWindow()
  ****************************************************************/
 void guiIO::openFileWindow(bool load)
 {
+   if(fileWindow)
+   {
+       /* Close the current opened */
+       gui->closeWindow(fileWindow);
+   }
+
    fileLoading = load;
    fileWindow = gui->insertWindow(200,100,460,285,"File");
    fileSelector = fileWindow->getObjectsList()->insertFileSel(5,18,load,
@@ -82,6 +88,7 @@ void guiIO::openFileWindow(bool load)
    fileWindow->setAttributes(false,true,false,false);
    fileWindow->setExternPointer(&fileWindow);
    gui->openWindow(fileWindow);
+
 }
 
 /****************************************************************
