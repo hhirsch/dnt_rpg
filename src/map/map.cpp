@@ -1779,7 +1779,20 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    }
 
    /* Define minimap sizes */
-   SQUAREMINISIZE = 2;
+   if(isOutdoor())
+   {
+      SQUAREMINISIZE = 70 / (z-14);
+   }
+   else
+   {
+      SQUAREMINISIZE = 70 / z;
+   }
+
+   if(SQUAREMINISIZE < 1)
+   {
+     SQUAREMINISIZE = 1;
+   }
+
    SQUAREMINIDIV = (squareSize() / SQUAREMINISIZE);
 
    /* And create the splats */

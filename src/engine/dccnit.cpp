@@ -2531,10 +2531,12 @@ int engine::treatIO(SDL_Surface *screen)
             x -= 7;
             z -= 7;
          }
-         x = 8 + (x*2);
-         z = 20 + (z*2);
+         x = 8 + (x*actualMap->SQUAREMINISIZE);
+         z = 20 + (z*actualMap->SQUAREMINISIZE);
 
-         botPerMiniMap->setCoordinate(x, z, x+1, z+1);
+         int div2 = actualMap->SQUAREMINISIZE / 2;
+
+         botPerMiniMap->setCoordinate(x+div2, z+div2, x+div2+1, z+div2+1);
 
          miniMapWindow->draw(mouseX, mouseY);
       }
@@ -3258,7 +3260,8 @@ void engine::openMiniMapWindow()
    miniMapWindow = gui->insertWindow(winX, winY, winX+288, winY+128,
                                      gettext("Map"));
 
-   botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,x+2,z+2,
+   botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,
+                                                                 x+1,z+1,
                                                                  "",0);
    picture* fig = miniMapWindow->getObjectsList()->insertPicture(8,20,240,95,
                                                                  NULL);
