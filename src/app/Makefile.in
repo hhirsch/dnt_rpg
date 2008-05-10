@@ -35,7 +35,7 @@ BIN = ../../bin/
 
 OBJSFNT = $(OBJSGUI) $(ENDENGINE)culling.o $(ENDENGINE)util.o
 
-all: parts partEditor #DlgEditor dlgCompiler
+all: parts partEditor heightmap2dnt #DlgEditor dlgCompiler
 
 fntEditor.o: fntEditor.cpp fntEditor.h
 	@printf "Making fntEditor.o... "
@@ -45,6 +45,16 @@ fntEditor.o: fntEditor.cpp fntEditor.h
 fntEditor: $(OBJSFNT) fntEditor.o
 	@printf "Linking fntEditor... "
 	@$(CC) $(EFLAGS) $(OBJSFNT) fntEditor.o -o $(BIN)fntEditor
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+heightmap2dnt.o: heightmap2dnt.cpp
+	@printf "Making heightmap2dnt.o... "
+	@$(CC) $(CFLAGS) heightmap2dnt.cpp -o heightmap2dnt.o
+	@printf "\e[0;32mDone.\e[0;0m\n"	
+
+heightmap2dnt: $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o
+	@printf "Linking heightmap2dnt... "
+	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) heightmap2dnt.o -o $(BIN)heightmap2dnt
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 parts:
