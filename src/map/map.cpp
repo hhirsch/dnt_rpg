@@ -2538,7 +2538,7 @@ bool Map::defineThingHeight(thing* c, GLfloat nx, GLfloat nz)
 
    GLfloat res = getHeight(nx, nz);
 
-   if( res - altura_atual > c->walk_interval)
+   if( (res - altura_atual) > 0.35)
    {
        c->yPosition = altura_atual;
        return(false);
