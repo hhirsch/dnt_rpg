@@ -43,21 +43,24 @@ object* lObject::insertObject(string arquivo, modelList& mdlList,
       /* Is a map Object *.dcc */
       novo = (object*) new mapObject(arquivo, mdlList);
    }
-
-   loc = arquivo.find( ".wcc", 0 );
-   if( loc != string::npos )
+   else
    {
-      /* Is a weapon Object *.wcc */
-      novo = (object*) new weapon(arquivo, mdlList, wTypes);
+      loc = arquivo.find( ".wcc", 0 );
+      if( loc != string::npos )
+      {
+         /* Is a weapon Object *.wcc */
+         novo = (object*) new weapon(arquivo, mdlList, wTypes);
+      }
    }
 
+   /* verify if created the pointer */
    if(novo == NULL)
    {
       printf("Error, cannot define the type of %s\n",arquivo.c_str());
       return(NULL);
    }
 
-
+   /* Insert the pointer at list */
    if(first == NULL)
    {
       first = novo;
@@ -85,21 +88,21 @@ void lObject::removeUnusedObjects()
    object* mdl;
    object* oth;
 
-   if(first)
+   int numObjs = total, i;
+
+   /* Removel all models with usedFlag <= 0 */
+   mdl = first;
+   for(i = 0; i < numObjs; i++)
    {
-      mdl = first->next;
-      while( (first != NULL) && (mdl != first) )
+      if(mdl->getUsedFlag() <= 0)
       {
          oth = mdl;
          mdl = mdl->next;
-         if(oth->getUsedFlag() <= 0)
-         {
-            removeObject(oth);
-         }
+         removeObject(oth);
       }
-      if((first != NULL) && (first->getUsedFlag() <= 0))
+      else
       {
-         removeObject(first);
+         mdl = mdl->next;
       }
    }
 }
@@ -109,9 +112,16 @@ void lObject::removeUnusedObjects()
  *********************************************************************/
 void lObject::removeObject(object* obj)
 {
+   /* Redefine pointers */
    obj->previous->next = obj->next;
    obj->next->previous = obj->previous;
 
+   if(obj == first)
+   {
+      first = obj->next;
+   }
+
+   /* Delete object memory */
    switch(obj->getType())
    {
       case OBJECT_TYPE_MAPOBJECT:
@@ -132,6 +142,8 @@ void lObject::removeObject(object* obj)
          break;
       }
    }
+
+   /* Decrement the counter */
    total--;
    if(total == 0)
    {
