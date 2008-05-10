@@ -318,7 +318,7 @@ void window::drawInactiveBar()
    color_Set(Colors.colorWindow.R, Colors.colorWindow.G,
              Colors.colorWindow.B, Colors.colorWindow.A);
    rectangle_Fill(surface,36,3,dx-3,12);
-   color_Set(Colors.colorBar.R, Colors.colorBar.G,
+   color_Set(Colors.colorBar.R+100, Colors.colorBar.G,
              Colors.colorBar.B, Colors.colorBar.A);
    fnt.defineFont(DNT_FONT_ARIAL,10);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);

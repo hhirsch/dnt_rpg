@@ -22,9 +22,9 @@ farso_colors::farso_colors()
    colorCont[2].G = 169;
    colorCont[2].B = 169;
    colorCont[2].A = 255;
-   colorWindow.R = 20;
-   colorWindow.G = 20;
-   colorWindow.B = 20;
+   colorWindow.R = 30;
+   colorWindow.G = 30;
+   colorWindow.B = 30;
    colorWindow.A = 190;
    colorText.R = 255;
    colorText.G = 255;
