@@ -375,10 +375,10 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    }
    else
    {
-      GLdouble fogEnd = (FARVIEW / 2.0)+200;
+      GLdouble fogEnd = (FARVIEW) + 4000;
       GLdouble fogStart = 200;
-      GLdouble fogDensity = 0.001;
-      GLfloat color[3] = {0.8,0.8,0.8};
+      GLdouble fogDensity = 5.0;
+      GLfloat color[3] = {1.0,1.0,1.0};
       if(!actualMap->isOutdoor())
       {
          color[0] = 0.0;

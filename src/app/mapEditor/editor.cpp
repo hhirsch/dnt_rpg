@@ -210,13 +210,13 @@ void editor::openMap()
       {
          glEnable(GL_FOG);
          {
-            GLfloat color[3]={0.8,0.8,0.8};
+            GLfloat color[3]={1.0,1.0,1.0};
             glFogi(GL_FOG_MODE,GL_LINEAR);
             glFogfv(GL_FOG_COLOR, color);
-            glFogf(GL_FOG_DENSITY, 0.0010);
+            glFogf(GL_FOG_DENSITY, 5.00);
             glHint(GL_FOG_HINT, GL_DONT_CARE);
             glFogf(GL_FOG_START, 200);
-            glFogf(GL_FOG_END, (FARVIEW / 2.0) + 200);
+            glFogf(GL_FOG_END, (FARVIEW) + 4000);
          }
       }
       gui->setFog(&map->fog);
