@@ -6,6 +6,17 @@
 \usepackage{graphicx}
 \usepackage{epsfig}
 \usepackage{times}
+\usepackage{fancyheadings}
+
+\pagestyle{fancyplain}
+
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\lhead[\fancyplain{}{}] {\fancyplain{}{DNT: Player Book}}
+\chead[\fancyplain{}{}] {\fancyplain{}{}}
+\rhead[\fancyplain{}{}] {\fancyplain{}{\thepage}}
+\lfoot[\fancyplain{}{}] {\fancyplain{}{}}
+\cfoot[\fancyplain{}{}] {\fancyplain{}{\includegraphics{logo.png}}}
+\rfoot[\fancyplain{}{}] {\fancyplain{}{}}
 
 \begin{document}
 
@@ -16,7 +27,8 @@ DNTeam
 }
 
 \maketitle
-\abstract{This document describes every (and some more) things about playable races and classes of DccNiTghtmare.}
+\abstract{\begin{center}This document describes every (and some more) things
+about playable races and classes of DccNiTghtmare.\end{center}}
 
 \newpage
 

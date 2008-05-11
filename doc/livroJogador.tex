@@ -6,6 +6,17 @@
 \usepackage{graphicx}
 \usepackage{epsfig}
 \usepackage{times}
+\usepackage{fancyheadings}
+
+\pagestyle{fancyplain}
+
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\lhead[\fancyplain{}{}] {\fancyplain{}{DNT: Livro do Estudante}}
+\chead[\fancyplain{}{}] {\fancyplain{}{}}
+\rhead[\fancyplain{}{}] {\fancyplain{}{\thepage}}
+\lfoot[\fancyplain{}{}] {\fancyplain{}{}}
+\cfoot[\fancyplain{}{}] {\fancyplain{}{\includegraphics{logo.png}}}
+\rfoot[\fancyplain{}{}] {\fancyplain{}{}}
 
 \begin{document}
 
@@ -18,10 +29,10 @@ DccNiTghtmare\\
 }
 
 \maketitle
-\begin{abstract}
-\noindent
+\abstract{
+\begin{center}
 Esse documento descreve tudo (e mais um pouco) sobre as classes e raças jogáveis de DccNiTghtmare.
-\end{abstract}
+\end{center} }
 
 \newpage
 
