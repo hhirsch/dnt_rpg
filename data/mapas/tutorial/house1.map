@@ -1,8 +1,9 @@
 T 6X8
 # Made by DccNiTghtmare's MapEditor, v0.2
-npc ../data/mapas/tutorial/house1.map.npc
+npc mapas/tutorial/house1.map.npc
 MUSICA music/musica12.ogg
 Outdoor: 0
+light: mapas/tutorial/house1.map.lgh
 o models/objetos/icex/snes/sf2/snes_sf2.dcc
 o models/objetos/icex/snes/mario/snes_mario.dcc
 o models/objetos/icex/snes/contra/snes_contra.dcc
