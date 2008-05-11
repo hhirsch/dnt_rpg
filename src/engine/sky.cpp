@@ -92,11 +92,6 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
 {
    solarTime = (sunRot * 24) / 360.0;
 
-   if(!actualMap->fog.enabled)
-   {
-      glDisable(GL_FOG);
-   }
-   
    glDisable(GL_COLOR);
    glEnable(GL_COLOR_MATERIAL);
    glPushMatrix();
@@ -106,10 +101,5 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
       glScalef(SKY_SIZE,SKY_SIZE,SKY_SIZE);
       drawDome(15,15);
    glPopMatrix();
-
-   if(!actualMap->fog.enabled)
-   {
-      glEnable(GL_FOG);
-   }
 }
 
