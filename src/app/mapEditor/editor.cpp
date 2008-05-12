@@ -184,7 +184,7 @@ void editor::openMap()
             {
                 fscanf(arq,"%s %s %f %f",&name[0],&arquivo[0],
                        &posX,&posZ);
-                per = NPCs->insertCharacter(arquivo,features, NULL);
+                per = NPCs->insertCharacter(arquivo,features, NULL, "");
                 per->xPosition = posX;
                 per->zPosition = posZ;
                 per->update(0); 

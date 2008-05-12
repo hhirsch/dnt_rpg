@@ -97,7 +97,7 @@ void npcs::insertNpc(GLfloat xReal, GLfloat zReal,
                      character* npc, int qx, int qz)
 {
    character* per;
-   per = NPCs->insertCharacter(npcFile,features, NULL);
+   per = NPCs->insertCharacter(npcFile,features, NULL, "");
    per->xPosition = xReal;
    per->zPosition = zReal;
    per->yPosition = actualMap->getHeight(xReal, zReal);
@@ -114,7 +114,7 @@ void npcs::defineActualNpc(string fileName)
    {
       delete(intList);
       intList = new(characterList);
-      actualNpc = intList->insertCharacter(fileName, features, NULL);
+      actualNpc = intList->insertCharacter(fileName, features, NULL, "");
       actualNpc->update(0); 
       actualNpc->calculateBoundingBox();
       npcFile = fileName;
