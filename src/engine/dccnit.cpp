@@ -285,7 +285,7 @@ void engine::loadPCs()
    }
    PCs  = new (characterList);
    per = PCs->insertCharacter("characters/pcs/metaleiro.pc",
-                              features, this);
+                              features, this, "PC");
 }
 
 /*********************************************************************
@@ -429,7 +429,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
            showLoading(img,&texturaTexto,texturaCarga,
                          texto, progress,
                          proj, modl, viewPort);
-           per = NPCs->insertCharacter(arquivo,features, this);
+           per = NPCs->insertCharacter(arquivo,features, this, arqMapa);
            per->xPosition = posX;
            per->zPosition = posZ;
            per->yPosition = actualMap->getHeight(posX, posZ);

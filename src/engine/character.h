@@ -129,8 +129,9 @@ class character: public aniModel
       void openConversationDialog(guiInterface* gui, character *PC);
 
       /*! Create the conversation (load all things, but not open the dialog)
-       * \param pEngine -> pointer to current engine */
-      void createConversation(void* pEngine);
+       * \param pEngine -> pointer to current engine
+       * \param curMap -> string with the map character is in */
+      void createConversation(void* pEngine, string curMap);
 
       /*! Set the initial dialog to the character conversation
        * \param i -> initial dialog number */
@@ -245,8 +246,10 @@ class characterList
        * \param file -> file name of the character to insert
        * \param ft -> featsList of all feats on game 
        * \param pEngine -> pointer to current engine
+       * \param curMap -> fileName of the current map
        * \return pointer to opened character*/
-      character* insertCharacter(string file, featsList* ft, void* pEngine);
+      character* insertCharacter(string file, featsList* ft, 
+                                 void* pEngine, string curMap);
                                     
       /*!
        * Remove one character from list

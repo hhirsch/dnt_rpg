@@ -54,7 +54,8 @@ conversation::conversation(void* pEngine)
    jan = NULL;
    usedGui = NULL;
    actualPC = NULL;
-   actualNPC = NULL;
+   ownerNPC = NULL;
+   ownerMap = "";
    actual = -1;
    initialDialog = 0;
    actualEngine = pEngine;
@@ -517,23 +518,38 @@ void conversation::removeDialog(int num)
 void conversation::setInitialDialog(int numDialog)
 {
    initialDialog = numDialog;
+   if(ownerNPC)
+   {
+      modState mod;
+      mod.mapTalkAddAction(MODSTATE_TALK_ENTER_VALUE, 
+                           ownerNPC->getCharacterFile(),
+                           ownerMap, numDialog);
+   }
+}
+
+/*************************************************************************
+ *                               setOwner                                *
+ *************************************************************************/
+void conversation::setOwner(character* pers, string mapFile)
+{
+   ownerNPC = pers;
+   ownerMap = mapFile;
 }
 
 /*************************************************************************
  *                              openDialog                               *
  *************************************************************************/
-void conversation::openDialog(guiInterface* gui, character* pers, character* PC)
+void conversation::openDialog(guiInterface* gui, character* PC)
 {
    dirs dir;
    usedGui = gui;
-   actualNPC = pers;
    actualPC = PC;
    actual = -1;
    jan = gui->insertWindow(330,100,585,355,gettext("Dialog"));
    barterButton = jan->getObjectsList()->insertButton(5,86,69,104,
                                             gettext("Barter"),1);
    jan->getObjectsList()->insertPicture(10,25,0,0,
-                        dir.getRealFile(pers->getPortraitFileName()).c_str());
+                      dir.getRealFile(ownerNPC->getPortraitFileName()).c_str());
    npcText = jan->getObjectsList()->insertRolBar(71,20,250,115,"");
    //npcText->fonte = FMINI;
    pcSelText = jan->getObjectsList()->insertSelText(5,116,250,250,"","","",
@@ -579,7 +595,7 @@ void conversation::proccessAction(int numDialog, int opcao)
          case TALK_ACTION_INIT_FIGHT:
          {
             engine* eng = (engine*)actualEngine;
-            actualNPC->setAsEnemy();
+            ownerNPC->setAsEnemy();
             eng->enterBattleMode(false);
             closeWindow();
          }

@@ -178,18 +178,19 @@ string character::getConversationFile()
 /*********************************************************************
  *                        createConversation                         *
  *********************************************************************/
-void character::createConversation(void* pEngine)
+void character::createConversation(void* pEngine, string curMap)
 {
    if(conversationFile != "")
    {
       conv = (void*) new conversation(pEngine);
       conversation* cs = (conversation*)conv;
       cs->loadFile(conversationFile);
+      cs->setOwner(this, curMap);
    }
 }
 
 /*********************************************************************
- *                        createConversation                         *
+ *                      setInitialConversation                       *
  *********************************************************************/
 void character::setInitialConversation(int i)
 {
@@ -229,7 +230,7 @@ void character::openConversationDialog(guiInterface* gui, character * PC)
    conversation* cs = (conversation*) conv;
    if( (cs != NULL) && (!cs->windowOpened()) )
    {
-      cs->openDialog(gui, this, PC);
+      cs->openDialog(gui, PC);
       convPressed = true;
    }
 }
@@ -738,7 +739,7 @@ string getAfterEqual(string s)
  *                           insertCharacter                         *
  *********************************************************************/
 character* characterList::insertCharacter(string file, featsList* ft,
-                                           void* pEngine)
+                                          void* pEngine, string curMap)
 
 {
    dirs dir;
@@ -824,7 +825,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
          novo->setConversationFile(token2);
          if(pEngine != NULL)
          {
-            novo->createConversation(pEngine);
+            novo->createConversation(pEngine, curMap);
          }
       }
       /* General Script */

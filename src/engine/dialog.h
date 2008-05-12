@@ -115,13 +115,18 @@ class conversation
       /*! Set the initial dialog (the one displayed at a click on character)
        * \param numDialog -> new init dialog number */
       void setInitialDialog(int numDialog);
+      
+      /*! Set the owner of the conversation
+       * \param pers -> pointer to NPC owner
+       * \param mapFile -> fileName where the NPC is */
+      void setOwner(character* pers, string mapFile);
 
       /*!
        * Opens the conversation on window
        * \param gui -> window interface used
        * \param pers -> character to talk to
        * \param PC -> player's character */
-      void openDialog(guiInterface* gui, character* pers, character* PC);
+      void openDialog(guiInterface* gui, character* PC);
 
       /*! Treat Events on Window. 
        * \param guiObj -> active GUI object
@@ -150,7 +155,8 @@ class conversation
          selText* pcSelText;   /**< The PC selection text */
          button* barterButton; /**< The Barter Button */
          character* actualPC;  /**< The Actual PC */
-         character* actualNPC; /**< The actual NPC */
+         character* ownerNPC;  /**< The NPC owner of the conversation */
+         string ownerMap;      /**< The Map Owner */
          void* actualEngine;   /**< The actual Engine */
 
          /*!
