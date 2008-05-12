@@ -153,6 +153,10 @@ class character: public aniModel
       bool treatConversation(guiObject* guiObj, int eventInfo,
                              barterWindow** tradeWindow, itemWindow* infoW);
 
+      /*! Kill the character without calling dead animation
+       * \note this is usually used at modState  */
+      void instantKill();
+
       /*! Call the thing dead animation */
       void callDeadAnimation();
 
