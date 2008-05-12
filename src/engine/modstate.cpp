@@ -3,7 +3,7 @@
  *************************************************************************/
 
 #include "modstate.h"
-
+   #include "character.h"
 
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
@@ -107,9 +107,11 @@ void modAction::setPrevious(modAction* act)
 /************************************************************
  *                       Constructor                        *
  ************************************************************/
-mapCharacterModAction::mapCharacterModAction(int act, string character, string mapFile,
+mapCharacterModAction::mapCharacterModAction(int act, string character, 
+                                             string mapFile,
                                              GLfloat xPos, GLfloat zPos, 
-                                             GLfloat orientation,  GLfloat initialX, 
+                                             GLfloat orientation,  
+                                             GLfloat initialX, 
                                              GLfloat initialZ):
                         modAction(act, character, mapFile, xPos, zPos)
 {
@@ -145,6 +147,45 @@ mapObjectModAction::mapObjectModAction(int act, string obj, string mapFile,
  ************************************************************/
 mapObjectModAction::~mapObjectModAction()
 {
+}
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                          mapTalkModAction                              //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+/************************************************************
+ *                       Constructor                        *
+ ************************************************************/
+mapTalkModAction::mapTalkModAction(int act, string character, string mapFile,
+                                   int talkValue): 
+                  modAction(act, character, mapFile, 0, 0)
+{
+   value = talkValue;
+}
+
+/************************************************************
+ *                        Destructor                        *
+ ************************************************************/
+mapTalkModAction::~mapTalkModAction()
+{
+}
+
+/************************************************************
+ *                          getValue                        *
+ ************************************************************/
+int mapTalkModAction::getValue()
+{
+   return(value);
+}
+
+/************************************************************
+ *                          setValue                        *
+ ************************************************************/
+void mapTalkModAction::setValue(int v)
+{
+   value = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -255,7 +296,7 @@ void modState::mapCharacterAddAction(int act, string character, string mapFile,
                                      GLfloat initialX, GLfloat initialZ)
 {
    if( (act != MODSTATE_ACTION_CHARACTER_DEAD) && 
-       (act != MODSTATE_ACTION_CHARACTER_MOVE) )
+       (act != MODSTATE_ACTION_CHARACTER_MOVE))
    {
       cerr << "Invalid modification character action: " <<  act << endl;
    }
@@ -264,6 +305,47 @@ void modState::mapCharacterAddAction(int act, string character, string mapFile,
    n = new mapCharacterModAction(act, character, mapFile, xPos, zPos,
                                  orientation, initialX, initialZ);
    addAction(n);
+}
+
+/************************************************************
+ *                      mapTalkAddAction                    *
+ ************************************************************/
+void modState::mapTalkAddAction(int act, string character, string mapFile,
+                                int value)
+{
+   if(act == MODSTATE_TALK_ENTER_VALUE)
+   {
+      /* Search List for a previous value */
+      int i;
+      mapTalkModAction* n = NULL;
+      modAction* mod = modActionsList;
+      for(i = 0; ( (i < totalModActions) && (n == NULL)); i++)
+      {
+         if( (mod->getAction() == act) && 
+             (mod->getTarget() == character) && 
+             (mod->getMapFileName() == mapFile) )
+         {
+            n = (mapTalkModAction*)mod;
+         }
+         mod = mod->getNext();
+      }
+
+      if(n != NULL)
+      {
+         /* Use the one found */
+         n->setValue(value);
+      }
+      else
+      {
+         /* Create a new one */
+         n = new mapTalkModAction(act, character, mapFile, value);
+         addAction(n);
+      }
+   }
+   else
+   {
+      cerr << "Invalid Talk Action: " << act << endl;
+   }
 }
 
 /************************************************************
@@ -293,6 +375,11 @@ void modState::removeAction(modAction* act)
       {
          /* Character One */
          delete((mapCharacterModAction*)act);
+      }
+      else if( (act->getAction() == MODSTATE_TALK_ENTER_VALUE) )
+      {
+         /* Talk One */
+         delete((mapTalkModAction*)act);
       }
       else
       {
@@ -350,9 +437,12 @@ bool modState::removeInverseObjectAction(int action, string target,
 /************************************************************
  *                    doMapModifications                    *
  ************************************************************/
-void modState::doMapModifications(Map* actualMap)
+void modState::doMapModifications(Map* actualMap, 
+                                  void* NPCs)
 {
    int i;
+   characterList* npcs = (characterList*) NPCs;
+   character* ch  = NULL;
    GLfloat x=0, z=0;
    modAction* tmpMobj = modActionsList;
    for(i = 0; i < totalModActions; i++)
@@ -386,6 +476,16 @@ void modState::doMapModifications(Map* actualMap)
          else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_MOVE)
          {
             //TODO
+         }
+         else if(tmpMobj->getAction() == MODSTATE_TALK_ENTER_VALUE)
+         {
+           /* Get the character pointer */
+           ch = npcs->getCharacter(tmpMobj->getTarget());
+           if(ch)
+           {
+              mapTalkModAction* mTalk = (mapTalkModAction*)tmpMobj;
+              ch->setInitialConversation(mTalk->getValue());
+           }
          }
          else
          {

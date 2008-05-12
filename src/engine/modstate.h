@@ -115,6 +115,33 @@ class mapObjectModAction: public modAction
 
 };
 
+/*! A modification to a talk on map */
+class mapTalkModAction: public modAction
+{
+   public:
+      /*! Constructor
+       * \param act -> action type
+       * \param tgt -> actor target fileName
+       * \param mapFile - name of the map file where action occurs 
+       * \param talkValue -> value position */
+      mapTalkModAction(int act, string tgt, string mapFile,
+                       int talkValue);
+
+      /*! Destructor */
+      ~mapTalkModAction();
+
+      /*! Get the talk action value
+       * \return -> talk action value */
+      int getValue();
+
+      /*! Set the talk action value
+       * \param v -> new talk action value */
+      void setValue(int v);
+
+   protected:
+       int value;   /**< Some talk Value Information */
+};
+
 /*! The Modifications made by users on game are armazened here. It is also
  * the class to load/save states. */
 class modState
@@ -156,11 +183,20 @@ class modState
                                  GLfloat orientation,
                                  GLfloat initialX, GLfloat initialZ);
 
+      /*! Add action to the list (or remove inverse action from)
+       * \param act -> action type
+       * \param character -> character fileName
+       * \param mapFile -> fileName of the map
+       * \param value -> the action talk value */
+      void mapTalkAddAction(int act, string character, string mapFile,
+                            int value);
+
       /*! Do All saved modifications to the map (those that are for them,
        * usually when you return to the map and want it to appears exactly 
        * like when you left it). 
-       * \param actualMap -> pointer to actual opened map */
-      void doMapModifications(Map* actualMap);
+       * \param actualMap -> pointer to actual opened map
+       * \param NPCs -> current NPCs list */
+      void doMapModifications(Map* actualMap, void* NPCs);
 
       /*! Clear All the modifications states (usually called after death) */
       void clear();

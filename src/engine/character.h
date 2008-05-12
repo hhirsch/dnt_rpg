@@ -131,6 +131,10 @@ class character: public aniModel
       /*! Create the conversation (load all things, but not open the dialog)
        * \param pEngine -> pointer to current engine */
       void createConversation(void* pEngine);
+
+      /*! Set the initial dialog to the character conversation
+       * \param i -> initial dialog number */
+      void setInitialConversation(int i);
    
       /*! Verify if the conversation dialog is opened
        * \return true if the conversation dialog is opened */
@@ -259,6 +263,11 @@ class characterList
       /*! Get the active character
        * \return pointer to the active character */
       character* getActiveCharacter();
+
+      /*! Get the first character with fileName on the list
+       * \param fileName -> fileName of the character to get
+       * \return -> characte pointer or NULL */
+      character* getCharacter(string fileName);
 
       /*! Set the active character
        * \param dude -> pointer to the new active character */

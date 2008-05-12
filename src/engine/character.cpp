@@ -189,6 +189,18 @@ void character::createConversation(void* pEngine)
 }
 
 /*********************************************************************
+ *                        createConversation                         *
+ *********************************************************************/
+void character::setInitialConversation(int i)
+{
+   if(conv != NULL)
+   {
+      conversation* cs = (conversation*)conv;
+      cs->setInitialDialog(i);
+   }
+}
+
+/*********************************************************************
  *                       isConversationOpenned                       *
  *********************************************************************/
 bool character::isConversationOpened()
@@ -953,6 +965,27 @@ character* characterList::getEnemyCharacter(character* last)
 character* characterList::getActiveCharacter()
 {
    return(activeCharacter);
+}
+
+/*********************************************************************
+ *                              getCharacter                         *
+ *********************************************************************/
+character* characterList::getCharacter(string fileName)
+{
+   character* ch = first->next;
+   int i;
+
+   /* Search the list for it */
+   for(i = 0; i < total; i++)
+   {
+      if(ch->getCharacterFile() == fileName)
+      {
+         return(ch);
+      }
+      ch = ch->next;
+   }
+
+   return(NULL);
 }
 
 /*********************************************************************
