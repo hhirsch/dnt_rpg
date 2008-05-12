@@ -479,13 +479,13 @@ void modState::doMapModifications(Map* actualMap,
          }
          else if(tmpMobj->getAction() == MODSTATE_TALK_ENTER_VALUE)
          {
-           /* Get the character pointer */
-           ch = npcs->getCharacter(tmpMobj->getTarget());
-           if(ch)
-           {
-              mapTalkModAction* mTalk = (mapTalkModAction*)tmpMobj;
-              ch->setInitialConversation(mTalk->getValue());
-           }
+            /* Get the character pointer */
+            ch = npcs->getCharacter(tmpMobj->getTarget());
+            if(ch)
+            {
+               mapTalkModAction* mTalk = (mapTalkModAction*)tmpMobj;
+               ch->setInitialConversation(mTalk->getValue());
+            }
          }
          else
          {
