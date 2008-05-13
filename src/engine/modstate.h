@@ -90,6 +90,18 @@ class mapCharacterModAction : public modAction
       /*! Destructor */                      
       ~mapCharacterModAction();
 
+      /*! Get the initial X position of the character
+       * return inital X position of the character */
+      GLfloat getInitialX();
+
+      /*! Get the initial Z position of the character
+       * return inital Z position of the character */
+      GLfloat getInitialZ();
+
+      /*! Get the orientation of the character at action's instant
+       * \return character orientation */
+      GLfloat getOrientation();
+
    protected:
       GLfloat initX;                   /**< X initial position on map */
       GLfloat initZ;                   /**< Z initial position on map */

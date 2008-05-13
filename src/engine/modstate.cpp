@@ -127,6 +127,29 @@ mapCharacterModAction::~mapCharacterModAction()
 {
 }
 
+/************************************************************
+ *                      getOrientation                      *
+ ************************************************************/
+GLfloat mapCharacterModAction::getOrientation()
+{
+   return(oriAngle);
+}
+
+/************************************************************
+ *                       getInitialX                        *
+ ************************************************************/
+GLfloat mapCharacterModAction::getInitialX()
+{
+   return(initX);
+}
+
+/************************************************************
+ *                       getInitialZ                        *
+ ************************************************************/
+GLfloat mapCharacterModAction::getInitialZ()
+{
+   return(initZ);
+}
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
 //                         mapObjectModAction                             //
@@ -471,7 +494,27 @@ void modState::doMapModifications(Map* actualMap,
          }
          else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
          {
-            //TODO
+            /* Get The character Pointer */
+            mapCharacterModAction* charAct = (mapCharacterModAction*)tmpMobj;
+            ch = npcs->getCharacter(charAct->getTarget());
+            bool done = false;
+            while( (ch != NULL) && (!done) )
+            {
+               if( (ch->xPosition == charAct->getInitialX()) &&
+                   (ch->zPosition == charAct->getInitialZ()) )
+               {
+                  /* Put it as dead at the position */
+                  ch->instantKill();
+                  ch->orientation = charAct->getOrientation();
+                  charAct->getPosition(ch->xPosition, ch->zPosition);
+                  done = true;
+               }
+               else
+               {
+                  /* Not the one, get the next */
+                  ch = npcs->getNextSameCharacter(ch);
+               }
+            }
          }
          else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_MOVE)
          {
