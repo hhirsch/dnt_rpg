@@ -999,6 +999,26 @@ character* characterList::getCharacter(string fileName)
 }
 
 /*********************************************************************
+ *                         getNextSameCharacter                      *
+ *********************************************************************/
+character* characterList::getNextSameCharacter(character* ch)
+{
+   character* cur = ch->next;
+
+   /* Search the list for it */
+   while( (cur != ch) && (cur != first) )
+   {
+      if(cur->getCharacterFile() == ch->getCharacterFile())
+      {
+         return(cur);
+      }
+      cur = cur->next;
+   }
+
+   return(NULL);
+}
+
+/*********************************************************************
  *                           setActiveCharacter                      *
  *********************************************************************/
 void characterList::setActiveCharacter(character* dude)

@@ -276,6 +276,12 @@ class characterList
        * \return -> characte pointer or NULL */
       character* getCharacter(string fileName);
 
+      /*! Get the next character with the same model from the list
+       * \param ch -> character to get next witg same model
+       * \return -> next character with same model or NULL if
+       *            end of the list was reached. */
+      character* getNextSameCharacter(character* ch);
+
       /*! Set the active character
        * \param dude -> pointer to the new active character */
       void setActiveCharacter(character* dude);
