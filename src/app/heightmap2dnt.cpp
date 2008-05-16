@@ -57,19 +57,19 @@ bool doConversion(string imgFile, string mapFile)
 
          color = pixel_Get(img, x, z);
          SDL_GetRGB(color, img->format, &R, &G, &B);
-         saux->h1 = (R+G+B);
+         saux->h1 = (R+G+B) / 2.0;
 
          color = pixel_Get(img, x, z+10);
          SDL_GetRGB(color, img->format, &R, &G, &B);
-         saux->h2 = (R+G+B);
+         saux->h2 = (R+G+B) / 2.0;
 
          color = pixel_Get(img, x+10, z+10);
          SDL_GetRGB(color, img->format, &R, &G, &B);
-         saux->h3 = (R+G+B);
+         saux->h3 = (R+G+B) / 2.0;
 
          color = pixel_Get(img, x+10, z);
          SDL_GetRGB(color, img->format, &R, &G, &B);
-         saux->h4 = (R+G+B);
+         saux->h4 = (R+G+B) / 2.0;
       }
    }
    dntMap->setInitialPosition((sizeX*dntMap->squareSize() / 2.0),
@@ -181,7 +181,7 @@ int main(int argc, char** argv)
    }
    else
    {
-      printf("Conversio Failed\n");
+      printf("Conversion Failed\n");
    }
 
 
