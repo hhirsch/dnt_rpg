@@ -27,6 +27,7 @@ the .blend that originated them.
 ==============================================================================
 || DNTeam (ourselves)        || http://dnt.dnteam.org                       ||
 || Kator & Legaz             || http://www.katorlegaz.com/3d_models         ||
+|| OpenFrag                  || http://www.openfrag.org                     ||
 || Scopia's Resources        || http://resources.blogscopia.com             ||
 || The Low Poly Cooperative  || http://www.lowpolycoop.com                  ||
 || Tiziana (aka TiZeta)      || http://www.unbruco.it/offcircle             ||

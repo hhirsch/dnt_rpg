@@ -31,6 +31,8 @@ card not described here, just email us.
 =================================================================
 |   NVIDIA GeForce 6800 GS    | The game runs perfectly         |
 =================================================================
+|   NVIDIA GeForce 6600M GT   | The game runs perfectly         |
+=================================================================
 |   NVIDIA GeForce 8800 GTS   | The game runs perfectly         |
 =================================================================
 |   NVIDIA GeForce 8800 GT    | The game runs perfectly         |
