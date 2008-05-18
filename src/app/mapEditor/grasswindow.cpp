@@ -179,7 +179,7 @@ bool grassWindow::eventGot(int type, guiObject* object)
          {
             actualGrass->getPosition(pX1,pZ1,pX2,pZ2);
             pov = ((pZ2-pZ1)*(pX2-pX1)/(float)actualGrass->getMaxParticles());
-            if(pov < 2000)
+            if(pov < 7000)
             {
                pov += 1;
                total = (int)floor((pZ2-pZ1)*(pX2-pX1) / pov);
