@@ -176,6 +176,7 @@ void sun::drawSun()
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_TEXTURE_2D);
+   glDisable(GL_FOG);
    //glEnable(GL_COLOR_MATERIAL);
    //glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
    if(visibleTime())
@@ -208,6 +209,7 @@ void sun::drawSun()
    glEnable(GL_DEPTH_TEST);
    glColor4f(1,1,1,1);
    glEnable(GL_LIGHTING);
+   glEnable(GL_FOG);
 }
 
 /*********************************************************************
