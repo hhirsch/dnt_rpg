@@ -119,10 +119,10 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uo models/objetos/geral/rug/rug.dcc 0:5,3:312.691498,0.300000,140.936493:0:0
+uo models/objetos/geral/rug/rug.dcc 0:5,3:312.691498,0.500000,140.936493:0:1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uo models/objetos/geral/rug/rug.dcc 0:5,3:312.691498,0.300000,140.936493:0:0
+uo models/objetos/geral/rug/rug.dcc 0:5,3:312.691498,0.500000,140.936493:0:1
 uo models/objetos/geral/sofa/sofa.dcc 1:6,2:355.099823,0.000000,127.699722:89:0
 #Z: 2
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -136,12 +136,12 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uo models/objetos/geral/rug/rug.dcc 1:5,3:312.691498,0.300000,140.936493:0:0
+uo models/objetos/geral/rug/rug.dcc 1:5,3:312.691498,0.500000,140.936493:0:1
 uo models/objetos/geral/pillow/pillow.dcc 1:5,3:304.600220,11.700008,175.096085:212:0
 uo models/objetos/geral/sofa/sofa.dcc 1:5,3:317.456543,0.000000,172.117813:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uo models/objetos/geral/rug/rug.dcc 0:5,3:312.691498,0.300000,140.936493:0:0
+uo models/objetos/geral/rug/rug.dcc 0:5,3:312.691498,0.500000,140.936493:0:1
 uo models/objetos/geral/pillow/pillow.dcc 1:6,3:330.517761,12.600012,173.340698:-13:0
 uo models/objetos/geral/sofa/sofa.dcc 0:6,2:355.099823,0.000000,127.699722:89:0
 uo models/objetos/geral/sofa/sofa.dcc 0:5,3:317.456543,0.000000,172.117813:0:0
