@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<HEADER MAGIC="XMF" VERSION="1200"/>
+<MESH NUMSUBMESH="1">
+    <SUBMESH
+        NUMVERTICES="4"
+        NUMFACES="2"
+        MATERIAL="0"
+        NUMLODSTEPS="0"
+        NUMSPRINGS="0"
+        NUMTEXCOORDS="1"
+    >
+        <VERTEX ID="0" NUMINFLUENCES="1">
+            <POS>5.61639 3.72615 0.00000</POS>
+            <NORM>0.00000 0.00000 1.00000</NORM>
+            <TEXCOORD>0.99640 0.00415</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="1" NUMINFLUENCES="1">
+            <POS>-5.61639 3.72615 0.00000</POS>
+            <NORM>0.00000 0.00000 1.00000</NORM>
+            <TEXCOORD>0.00360 0.00415</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="2" NUMINFLUENCES="1">
+            <POS>-5.61639 -3.72615 0.00000</POS>
+            <NORM>0.00000 0.00000 1.00000</NORM>
+            <TEXCOORD>0.00360 0.99585</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <VERTEX ID="3" NUMINFLUENCES="1">
+            <POS>5.61639 -3.72615 0.00000</POS>
+            <NORM>0.00000 0.00000 1.00000</NORM>
+            <TEXCOORD>0.99640 0.99585</TEXCOORD>
+            <INFLUENCE ID="0">1.00000</INFLUENCE>
+        </VERTEX>
+        <FACE VERTEXID="0 1 2"/>
+        <FACE VERTEXID="2 3 0"/>
+    </SUBMESH>
+</MESH>
+
