@@ -47,7 +47,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
    int yPos = (int)(SCREEN_Y / 2.0);
 
    window* jan = gui->insertWindow(xPos-64,yPos-64,xPos+64,yPos+64, 
-                                   gettext("0.2"));  
+                                   "DNT - 0.2");  
    jan->setAttributes(false,true,false,false);
    if(Status == ON_INIT)
    {
