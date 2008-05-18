@@ -71,6 +71,12 @@ class messageController
       /*! Destructor */
       ~messageController();
 
+      /*! Init the message controller to use */
+      void init();
+
+      /*! Finish the use of the image controller, cleaning it */
+      void finish();
+
       /*! Actualize and draw all messages
        * \param modelView -> the model view matrix
        * \param projection -> projection matrix 
@@ -106,8 +112,8 @@ class messageController
        * \param m -> pointer to the message to add */
       void addMessage(message3d* m);
 
-      message3d* first;    /**< The first message on the list */
-      int total;           /**< Total messages on the list */
+      static message3d* first;    /**< The first message on the list */
+      static int total;           /**< Total messages on the list */
 };
 
 #endif

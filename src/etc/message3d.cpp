@@ -85,14 +85,28 @@ message3d::~message3d()
  ***********************************************************/
 messageController::messageController()
 {
-   first = NULL;
-   total = 0;
 }
 
 /***********************************************************
  *                        Destructor                       *
  ***********************************************************/
 messageController::~messageController()
+{
+}
+
+/***********************************************************
+ *                            init                         *
+ ***********************************************************/
+void messageController::init()
+{
+   first = NULL;
+   total = 0;
+}
+
+/***********************************************************
+ *                          finish                         *
+ ***********************************************************/
+void messageController::finish()
 {
    while(total > 0)
    {
@@ -239,5 +253,9 @@ void messageController::draw(GLdouble modelView[16], GLdouble projection[16],
    glEnable(GL_FOG);
 }
 
-
+/***********************************************************
+ *                   static members                        *
+ ***********************************************************/
+message3d* messageController::first = NULL;
+int messageController::total = 0;
 
