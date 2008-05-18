@@ -3,6 +3,9 @@ T 25X25
 npc ../data/mapas/tutorial/tyrol.map.npc
 PS ../data/mapas/tutorial/tyrol.map.par
 Outdoor: 1
+o models/natural/fogueira/fogueira.dcc
+o models/natural/arvores/tree1/tree1.dcc
+o models/natural/arvores/tree3/tree3.dcc
 o models/street/hydrant/hydrant.dcc
 o models/building/house5/house5.dcc
 o models/objetos/geral/barrel/barrel.dcc
@@ -597,6 +600,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
+uo models/natural/arvores/tree1/tree1.dcc 1:11,12:2780.249268,0.000000,2883.908936:109:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass3.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -702,8 +706,10 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/rock2.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
+uo models/natural/arvores/tree3/tree3.dcc 0:10,14:2308.098633,0.000000,3476.691650:31:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
+uo models/natural/arvores/tree3/tree3.dcc 1:10,14:2308.098633,0.000000,3476.691650:31:0
 uo models/building/house5/house5.dcc 0:11,14:2623.974854,0.200000,3343.420654:-36:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
@@ -869,8 +875,12 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass8.png
+uo models/natural/fogueira/fogueira.dcc 0:14,17:3331.779785,0.000000,4280.018555:0:0
+uo models/natural/arvores/tree3/tree3.dcc 0:14,17:3351.727295,0.000000,4296.784180:123:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass3.png
+uo models/natural/fogueira/fogueira.dcc 1:14,17:3331.779785,0.000000,4280.018555:0:0
+uo models/natural/arvores/tree3/tree3.dcc 1:14,17:3351.727295,0.000000,4296.784180:123:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
