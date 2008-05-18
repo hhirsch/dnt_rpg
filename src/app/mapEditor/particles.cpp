@@ -125,7 +125,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
                z1 = tmp;
             }
 
-            GLfloat povValue = 20.0;
+            GLfloat povValue = 700.0;
             int total = (int)floor((z2-z1)*(x2-x1) / povValue);
             grass* gr = (grass*) pS->addParticle(PART_GRASS, x1, z1, x2, z2, 
                                                  total, 3.0, selectedText); 
