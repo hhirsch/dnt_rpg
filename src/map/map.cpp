@@ -976,7 +976,7 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
             if(inverted)
             {
                rotTransBoundingBox(obj->orientation, X, Z, obj->x, 
-                                   obj->y - bound.y2, obj->y - bound.y1, 
+                                   obj->y - bound.y2, -obj->y - bound.y1, 
                                    obj->z, min, max);
             }
             else
@@ -991,7 +991,14 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
                            matriz))
             {
                glPushMatrix();
-                glTranslatef(0.0, obj->y + obj->obj->yPosition, 0.0);
+                if(inverted)
+                {
+                   glTranslatef(0.0, -obj->y - obj->obj->yPosition, 0.0);
+                }
+                else
+                {
+                   glTranslatef(0.0, obj->y + obj->obj->yPosition, 0.0);
+                }
                 obj->obj->draw(obj->x, obj->z, distancia, obj->orientation, 
                                inverted);
                glPopMatrix();
