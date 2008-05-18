@@ -822,7 +822,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          string st = *(string*)iv->value;
          /* Add the mission to the engine */
-         eng->missions->addNewMission(st);
+         missionsController missions;
+         missions.addNewMission(st);
          if(isFunction(token))
          {
             delete(iv);
@@ -840,7 +841,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          string st = *(string*)iv->value;
          /* Add the mission to the engine */
-         mission* m = eng->missions->getCurrentMission(st);
+         missionsController missions;
+         mission* m = missions.getCurrentMission(st);
          if(m)
          {
             int cType = 1;
@@ -859,12 +861,13 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             character* dude = eng->PCs->getActiveCharacter();
             char vstr[200];
             sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp()); 
-            eng->msgController->addMessage(dude->xPosition,
-                                           dude->max[1]+dude->yPosition,
-                                           dude->zPosition, vstr,
-                                           0.94, 0.8, 0.0);
+            messageController msgController;
+            msgController.addMessage(dude->xPosition,
+                                     dude->max[1]+dude->yPosition,
+                                     dude->zPosition, vstr,
+                                     0.94, 0.8, 0.0);
             /*! Do the Completion */
-            eng->missions->completeMission(m, cType);
+            missions.completeMission(m, cType);
          }
          else
          {
@@ -888,7 +891,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          string st = *(string*)iv->value;
          /* Add the mission to the engine */
-         mission* m = eng->missions->getCurrentMission(st);
+         missionsController missions;
+         mission* m = missions.getCurrentMission(st);
          bool bl = (m != NULL);
 
          assignValue(var, (void*)&bl, IA_TYPE_BOOL);
@@ -916,7 +920,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          missionFile = *(string*)iv->value;
          /* get the mission */
-         m = eng->missions->getCurrentMission(missionFile);
+         missionsController missions;
+         m = missions.getCurrentMission(missionFile);
          if(isFunction(token))
          {
             delete(iv);
@@ -971,7 +976,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          missionFile = *(string*)iv->value;
          /* get the mission */
-         m = eng->missions->getCurrentMission(missionFile);
+         missionsController missions;
+         m = missions.getCurrentMission(missionFile);
          if(isFunction(token))
          {
             delete(iv);
@@ -1017,7 +1023,8 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       {
          missionFile = *(string*)iv->value;
          /* get the mission */
-         m = eng->missions->getCurrentMission(missionFile);
+         missionsController missions;
+         m = missions.getCurrentMission(missionFile);
          if(isFunction(token))
          {
             delete(iv);
@@ -1478,6 +1485,64 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          cerr << "Error: Tried to access a NULL character at line " 
                  << actualLine << " of the script: " << fileName << endl;
       }
+   }
+
+   ////////////////////////////////////////////////////
+   //                  Dialog Functions              //
+   ////////////////////////////////////////////////////
+
+   /* dialogSetInitial */
+   else if(functionName == IA_DIALOG_SET_INITIAL)
+   {
+      /* Get Character FileName */
+      string charFile = "";
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv != NULL)
+      {
+         charFile = *(string*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get Map FileName */
+      string mapFile = "";
+      iv = getParameter(token, strLine, IA_TYPE_STRING, pos);
+      if(iv != NULL)
+      {
+         mapFile = *(string*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      /* Get Dialog Number */
+      int dialogNum = -1;
+      iv = getParameter(token, strLine, IA_TYPE_INT, pos);
+      if(iv != NULL)
+      {
+         dialogNum = *(int*)iv->value;
+         if(isFunction(token))
+         {
+            delete(iv);
+         }
+      }
+
+      if( (dialogNum != -1) && (!charFile.empty()) &&
+          (!mapFile.empty()) )
+      {
+         modState modif;
+         modif.mapTalkAddAction(MODSTATE_TALK_ENTER_VALUE,
+                                charFile, mapFile, dialogNum);
+      }
+      else
+      {
+         cerr << "Error: Undefined Parameter at line " 
+              << actualLine << " of the script: " << fileName << endl;
+      }
+
    }
 
 

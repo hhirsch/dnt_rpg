@@ -176,6 +176,12 @@ using namespace std;
 /*! bool inventoryHave(character owner, string objectFile) */
 #define IA_INVENTORY_HAVE "inventoryHave"
 
+////////////////////////////////////////////////////
+//                  Dialog Functions              //
+////////////////////////////////////////////////////
+/*! void dialogSetInitial(character owner, string map, int dialogNumber) */
+#define IA_DIALOG_SET_INITIAL "dialogSetInitial"
+
 /*! Convert the infix string to a postfix one
  * \param infix -> infix expression 
  * \return -> postfix expression */
