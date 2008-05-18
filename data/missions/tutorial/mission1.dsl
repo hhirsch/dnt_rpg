@@ -1,26 +1,39 @@
 # TUTORIAL - I
 # The first tutorial mission
+# - Found a Chrono Trigger Game for Logan
 
 script()
 
    # create the object fileName, since can't have a literal parameter
    string objFile
-   objFile = "weapons/definitions/beretta92.wcc"
+   objFile = "models/objetos/icex/snes/chrono/snes_chrono.dcc"
 
-   #create the mission filename too
-   string missionFile
-   missionFile = "missions/tutorial/mission1.dsl"
+   # define logan character
+   string logan
+   logan = "characters/pcs/logan.pc"
 
-   int xpValue
-   xpValue = 100
-   missionSetXp(missionFile, xpValue)
+   # define map where logan is
+   string mapa
+   mapa = "mapas/tutorial/house1.map"
 
+   # the dialog number
+   int dialog
+   dialog = 6
+   
    while(true)
+
       if(inventoryHave(ACTIVE_CHARACTER,objFile))
-         int compType
-         compType = 1
-         missionComplete(missionFile, compType)
+         # Have the cartridge, set logan talk to get it!
+         dialog = 7
+         dialogSetInitial(logan, mapa, dialog)
+      else
+         # Have't the cartridge, set the logan talk to wait.
+         dialog = 6
+         dialogSetInitial(logan, mapa, dialog)
       end
+
+      
+
    end
 
 end
