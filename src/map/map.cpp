@@ -960,7 +960,8 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
       for(o=0; o < MapSquares[Xaux][Zaux].getTotalObjects(); o++)
       {
           if( (obj != NULL) && (obj->draw) && 
-              (!obj->obj->isStaticScenery()))
+              (!obj->obj->isStaticScenery()) &&
+              ( (!inverted) || ((inverted) && (obj->colision)) ) )
           {
             /* Do the Rotation of the Bounding Box */
             bound = obj->obj->getBoundingBox();
