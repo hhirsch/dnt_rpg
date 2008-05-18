@@ -65,9 +65,7 @@ class engine
       characterList *PCs;              /**< PC's List */
 
       actionController* actionControl; /**< The action controller */
-      messageController* msgController;/**< The message controller */
-      missionsController* missions;    /**< The missions controller */
-
+      
       #ifdef REDE
          char *server;                 /**< Server to Connect \b NOTUSED */
          clientdata_t clientData;      /**< Client Data \b NOTUSED */
@@ -419,6 +417,9 @@ class engine
       classes* classList;          /**< Classes List */
       skills* skillsList;          /**< List of Skills */
       weaponTypes* weaponsTypes;   /**< List of Types of Weapons */
+
+      messageController* msgController;/**< The message controller */
+      missionsController* missions;    /**< The missions controller */
 
       partController* particleController;/**< The Particle System Controller */
       GLfloat seconds;             /**< Seconds from last actualization */

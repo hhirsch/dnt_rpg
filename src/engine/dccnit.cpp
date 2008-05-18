@@ -103,6 +103,7 @@ engine::engine()
 
    /* Create the message controller */
    msgController = new messageController();
+   msgController->init();
 
    /* Create the fight system */
    fight = new fightSystem(msgController, particleController);
@@ -163,6 +164,7 @@ engine::~engine()
    delete(gameSky);
 
    /* Delete message Controller */
+   msgController->finish();
    delete(msgController);
 
    /* Delete missions controller */

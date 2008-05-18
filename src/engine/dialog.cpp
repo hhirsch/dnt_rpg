@@ -633,6 +633,13 @@ void conversation::proccessAction(int numDialog, int opcao)
             {
                m->setXp(dlg->options[opcao].ifAction[i].att);
                missions.completeMission(m, dlg->options[opcao].ifAction[i].qty);
+               char vstr[200];
+               sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp());
+               messageController msgController;
+               msgController.addMessage(actualPC->xPosition,
+                                        actualPC->max[1]+actualPC->yPosition,
+                                        actualPC->zPosition, vstr,
+                                        0.94, 0.8, 0.0);
             }
          }
          break;
