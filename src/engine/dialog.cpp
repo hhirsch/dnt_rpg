@@ -8,7 +8,7 @@
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
 #include "../classes/mission.h"
-
+#include "modstate.h"
 
 #define BUFFER_SIZE 512
 
@@ -610,7 +610,13 @@ void conversation::proccessAction(int numDialog, int opcao)
             //TODO
          break;
          case TALK_ACTION_DIALOG_INIT:
+         {
+            modState modif;
             initialDialog = dlg->options[opcao].ifAction[i].att;
+            modif.mapTalkAddAction(MODSTATE_TALK_ENTER_VALUE, 
+                                   ownerNPC->getCharacterFile(),
+                                   ownerMap, initialDialog);
+         }
          break;
          case TALK_ACTION_ADD_MISSION:
          {

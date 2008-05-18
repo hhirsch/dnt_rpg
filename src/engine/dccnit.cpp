@@ -518,6 +518,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
                                  activeCharacter->zPosition);
    activeCharacter->yPosition=actualMap->getHeight(activeCharacter->xPosition,
                                                    activeCharacter->zPosition);
+   activeCharacter->orientation = 0.0;
    gameCamera.updateCamera(activeCharacter->xPosition,
                            activeCharacter->yPosition,
                            activeCharacter->zPosition,
