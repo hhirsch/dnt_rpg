@@ -86,7 +86,10 @@ void Farso_DefineResolution(SDL_Surface **screen, string title,
        if(antiAliasingSamples > 0)
        {
           printf(gettext("Trying again without AntiAliasing.\n"));
-          Farso_DefineResolution(screen, title, width, height, fullScreen, 0);
+          /* Quit the SDL  */
+          SDL_Quit();
+          /* Restart it  */
+          Farso_Init(screen, title, width, height, fullScreen, 0);
        }
        else
        {
