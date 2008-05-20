@@ -42,7 +42,7 @@ class modAction
        * \return name of the map file */
       string getMapFileName();
 
-      /*! Get thje position where action occurs
+      /*! Get the position where action occurs
        * \param posX -> X position
        * \param posZ -> Z position */
       void getPosition(GLfloat &posX, GLfloat& posZ);
