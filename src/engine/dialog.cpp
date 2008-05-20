@@ -203,6 +203,14 @@ int conversation::getActionID(string token, string fileName, int line)
    {
       return(TALK_ACTION_COMPLETE_MISSION);
    }
+   else if(token == TK_ACTION_GIVE_ITEM)
+   {
+      return(TALK_ACTION_GIVE_ITEM);
+   }
+   else if(token == TK_ACTION_RECEIVE_MONEY)
+   {
+      return(TALK_ACTION_RECEIVE_MONEY);
+   }
 
    printError(fileName, "Unknow action!", line);
    return(-1);
@@ -642,6 +650,12 @@ void conversation::proccessAction(int numDialog, int opcao)
                                         0.94, 0.8, 0.0);
             }
          }
+         break;
+         case TALK_ACTION_GIVE_ITEM:
+            //TODO
+         break;
+         case TALK_ACTION_RECEIVE_MONEY:
+            //TODO
          break;
       }
    }
