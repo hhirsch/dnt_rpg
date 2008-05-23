@@ -65,7 +65,6 @@ void mapLights::Load(string arq)
 
    while(fscanf(file,"%c %f %f %f %f",&tipo,&aux0,&aux1,&aux2,&aux3) != EOF)
    {
-      totalLights++;
       switch(tipo)
       {
          case 'L':/* new light */
@@ -120,6 +119,7 @@ void mapLights::Load(string arq)
       }
    }
 
+   totalLights = curLight+1;
    if(totalLights <= 3 )
    {
       /* Only set the lights one time */
