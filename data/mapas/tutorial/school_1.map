@@ -101,11 +101,11 @@ uo models/objetos/geral/computador/computador.dcc 1:5,1:279.949188,0.100000,16.9
 uo models/objetos/geral/computador/computador.dcc 1:5,1:276.141174,0.100000,27.413450:-134:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/gold2.png
-uo models/objetos/geral/rug/rug.dcc 0:6,2:365.284088,0.100000,69.979729:1:0
+uo models/objetos/geral/rug/rug.dcc 0:6,2:365.284088,0.100000,69.979729:1:1
 uo models/objetos/geral/tv42/tv42.dcc 0:6,2:341.071198,0.100000,71.897453:-92:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/gold2.png
-uo models/objetos/geral/rug/rug.dcc 0:6,2:365.284088,0.100000,69.979729:1:0
+uo models/objetos/geral/rug/rug.dcc 0:6,2:365.284088,0.100000,69.979729:1:1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/mosaic.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -144,14 +144,14 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/gold2.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/gold2.png
-uo models/objetos/geral/rug/rug.dcc 1:6,2:365.284088,0.100000,69.979729:1:0
+uo models/objetos/geral/rug/rug.dcc 1:6,2:365.284088,0.100000,69.979729:1:1
 uo models/objetos/icex/snes/chrono/snes_chrono.dcc 1:6,2:346.452972,0.100000,82.072021:-51:0
 uo models/objetos/icex/snes/snes.dcc 1:6,2:347.531555,0.100000,77.775169:-179:0
 uo models/objetos/icex/snes/dk/snes_dk.dcc 1:6,2:350.530365,0.100000,82.759117:-53:0
 uo models/objetos/geral/tv42/tv42.dcc 1:6,2:341.071198,0.100000,71.897453:-92:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/gold2.png
-uo models/objetos/geral/rug/rug.dcc 0:6,2:365.284088,0.100000,69.979729:1:0
+uo models/objetos/geral/rug/rug.dcc 0:6,2:365.284088,0.100000,69.979729:1:1
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/mosaic2.png
 p 1,0.000000,0.000000,0.000000,0.000000
