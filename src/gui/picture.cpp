@@ -77,8 +77,6 @@ void picture::draw(SDL_Surface *screen)
    SDL_Rect Ret;
    Ret.x = x1;
    Ret.y = y1;
-   Ret.w = fig->w;
-   Ret.h = fig->h;
    SDL_BlitSurface(fig,NULL,screen,&Ret);
 }
 
