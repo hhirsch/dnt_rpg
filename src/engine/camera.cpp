@@ -83,12 +83,12 @@ bool camera::doIO(Uint8 *keys, Uint8 mBotao, int x, int y, GLfloat varCamera)
    /* Mouse to move Camera */
 
    /* Left Edge */
-   if(x == 0)  // Turn Clockwise
+   if(x <= 5)  // Turn Clockwise
    {
       phiAc = varCamera; 
    }
    /* Right Edge */
-   if(x == SCREEN_X-1) // Turn CounterClockWise
+   if(x >= SCREEN_X-5) // Turn CounterClockWise
    {
       phiAc = -varCamera; 
    }
