@@ -306,12 +306,12 @@ void aStar::doCycle()
            /* search it at opened */
            node3 = opened->find(posX, posZ);
 
+           /* Heuristic calculation with diagonal.  */
            dX = fabs(destinyX - posX);
            dZ = fabs(destinyZ - posZ);
-           orthogonal = fabs(dX - dZ);
-           diagonal = fabs(((dX + dZ) - orthogonal)/2);
-
-           heuristic = diagonal + orthogonal + dX + dZ;
+           diagonal = (dX < dZ) ? dX : dZ;
+           orthogonal = dX + dZ;
+           heuristic = 1.41 * diagonal + (orthogonal - 2*diagonal);
 
            /* If is in open or closed and n.g <= new g */
            if( ((node2 != NULL) && (node2->gone <= newg)) || 
