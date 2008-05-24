@@ -180,6 +180,7 @@ void aStar::doCycle()
    pointStar* node, *node2, *node3; /* auxiliar nodes */
    GLfloat posX=0, posZ=0;          /* positions */
    int i, j;                        /* counters */
+   bool directionChange;            /* direction verification */
 
    GLfloat varHeight=0, nx=0, nz=0; /* collision returns (ignored) */
 
@@ -257,39 +258,69 @@ void aStar::doCycle()
       /* Visit all Adjacents Positions */
       for(i=0; i<9; i++)
       {
+         /* Get current direction  */
+         directionChange = false;
+         dX = node->x - node->parentX;
+         dZ = node->z - node->parentZ;
+
+         /* Get next potential node  */
          switch(i) 
          {
            case 1:
+           {
               posX = node->x;
               posZ = node->z - pass;
+              directionChange = !( (dX == 0) && (dZ < 0) ); 
+           }
            break;
            case 2:
+           {
               posX = node->x + passMid;
               posZ = node->z - passMid;
+              directionChange = !( (dX > 0) && (dZ < 0) );
+           }
            break;
            case 3:
+           {
               posX = node->x + pass;
               posZ = node->z;
+              directionChange = !( (dX > 0) && (dZ == 0) );
+           }
            break;
            case 4:
+           {
               posX = node->x + passMid;
               posZ = node->z + passMid;
+              directionChange = !( (dX > 0) && (dZ > 0) );
+           }
            break;
            case 5:
+           {
               posX = node->x;
               posZ = node->z + pass;
+              directionChange = !( (dX == 0) && (dZ > 0) );
+           }
            break;
            case 6:
+           {
               posX = node->x - passMid;
               posZ = node->z + passMid;
+              directionChange = !( (dX <  0) && (dZ > 0) );
+           }
            break;
            case 7:
+           {
               posX = node->x - pass;
               posZ = node->z;
+              directionChange = !( (dX <  0) && (dZ == 0) );
+           }
            break;
            case 8:
+           {
               posX = node->x - passMid;
               posZ = node->z - passMid;
+              directionChange = !( (dX <  0) && (dZ < 0) );
+           }
            break;
         }
 
@@ -300,6 +331,13 @@ void aStar::doCycle()
            /* New Gone is the current gone + distance to this one */
            newg = node->gone + sqrt((posX - node->x) * (posX - node->x) + 
                  (posZ - node->z) * (posZ - node->z));
+
+           /* Apply direction change penalty, if needed  */
+           if(directionChange)
+           {
+              newg += 2;
+           }
+
            /* search it at closed */
            node2 = closed->find(posX, posZ);
 
