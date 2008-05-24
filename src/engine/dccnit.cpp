@@ -3304,7 +3304,7 @@ void engine::openShortcutsWindow()
    hourToTxt();
 
    tabButton* tb;
-   tb = shortCutsWindow->getObjectsList()->insertTabButton(252,15,0,0,
+   tb = shortCutsWindow->getObjectsList()->insertTabButton(252,14,0,0,
                   dir.getRealFile("texturas/shortcutsw/shortcuts.png").c_str());
    buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
    tb->insertButton(7,40,43,72);/* Attack 1 */
