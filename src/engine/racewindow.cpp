@@ -130,7 +130,7 @@ void raceWindow::setDescription()
    textDesc->setText("");
    textDesc->addText(racesOrder[curRace]->citation + "||", DNT_FONT_ARIAL,
                      10, DNT_FONT_ALIGN_LEFT, DNT_FONT_STYLE_ITALIC,
-                     147,18,18);
+                     220,0,0);
    textDesc->addText(racesOrder[curRace]->description);
    textDesc->setFirstLine(0);
 }
