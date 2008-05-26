@@ -246,7 +246,7 @@ void attWindow::setDescription(int sk)
    textDesc->addText(externalSkill->m_skills[sk].name + "||", 
                      DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                      DNT_FONT_STYLE_UNDERLINE,
-                     33, 65, 10);
+                     86, 161, 32);
    textDesc->addText(externalSkill->m_skills[sk].description);
    textDesc->setFirstLine(0);
 }

@@ -145,7 +145,7 @@ void raceWindow::setCharacteristics()
    textCharac->addText(string(gettext("Race Modifiers")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
-                       33, 65, 10);
+                       86, 161, 32);
    for(i=0; i<racesOrder[curRace]->totalModifiers; i++)
    {
       textCharac->addText(racesOrder[curRace]->raceModifiers[i].description + "||");
@@ -162,7 +162,7 @@ void raceWindow::setCharacteristics()
    textCharac->addText(string(gettext("Race Feats")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
-                       33, 65, 10);
+                       86, 161, 32);
 
    for(i=0; i<racesOrder[curRace]->totalFeats; i++)
    {
@@ -182,10 +182,11 @@ void raceWindow::setCharacteristics()
    textCharac->addText(string("|") + string(gettext("Race Skills")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
-                       33, 65, 10);
+                       86, 161, 32);
    for(i=0; i<racesOrder[curRace]->totalSkills; i++)
    {
-      skTmp = externalSkills->getSkillByString(racesOrder[curRace]->raceSkills[i]);
+      skTmp = externalSkills->getSkillByString(racesOrder[curRace]->
+                                                                 raceSkills[i]);
       if(skTmp)
       {
          textCharac->addText(skTmp->name + "|");

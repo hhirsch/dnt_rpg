@@ -40,7 +40,7 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
    textDesc = intWindow->getObjectsList()->insertRolBar(5,38,262,180,"");
    textDesc->addText(actualAlign->description.c_str(),
                      DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
-                     DNT_FONT_STYLE_NORMAL, 33, 65, 10); 
+                     DNT_FONT_STYLE_NORMAL, 86, 161, 32); 
    textDesc->setFirstLine(0);
       
    /* Name and Selectors */
@@ -96,7 +96,7 @@ int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          textDesc->setText("");
          textDesc->addText(actualAlign->description.c_str(),
                      DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT,
-                     DNT_FONT_STYLE_NORMAL, 33, 65, 10);
+                     DNT_FONT_STYLE_NORMAL, 86, 161, 132);
          textDesc->setFirstLine(0);
          alignImage->set(actualAlign->image);
          intWindow->draw(0,0);

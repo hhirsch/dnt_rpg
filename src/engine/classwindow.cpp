@@ -147,7 +147,7 @@ void classWindow::setCharacteristics()
    textCharac->addText(string(gettext("Skill Points")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
-                       33, 65, 10);
+                       86, 161, 32);
 
    /* Skill Points for First Level */
    if(classesOrder[curClass]->firstLevelSP.signal == SIGNAL_DEC)
@@ -207,7 +207,7 @@ void classWindow::setCharacteristics()
    textCharac->addText(string(gettext("Class Modifiers")) + "||", 
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
-                       33, 65, 10);
+                       86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalModifiers; i++)
    {
       textCharac->addText(classesOrder[curClass]->classModifiers[i].description + "||");
@@ -225,7 +225,7 @@ void classWindow::setCharacteristics()
    textCharac->addText(string(gettext("Class Feats")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
-                       33, 65, 10);
+                       86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalFeats; i++)
    {
       textCharac->addText(classesOrder[curClass]->classFeats[i] + "|");
@@ -244,7 +244,7 @@ void classWindow::setCharacteristics()
    textCharac->addText(string(gettext("Class Skills")) + "||",
                        DNT_FONT_ARIAL, 12, DNT_FONT_ALIGN_CENTER,
                        DNT_FONT_STYLE_UNDERLINE,
-                       33, 65, 10);
+                       86, 161, 32);
    for(i=0; i<classesOrder[curClass]->totalSkills; i++)
    {
       skTmp = externalSkills->getSkillByString(classesOrder[curClass]->classSkills[i]);
