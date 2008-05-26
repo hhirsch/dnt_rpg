@@ -152,25 +152,25 @@ bool agent::doAngle()
       if(d1 < d2)
       {
          //Sub Value
-         if(d1 < MAX_ROTATION)
+         if(d1 < 2*MAX_ROTATION)
          {
             orientation = desiredAngle;
          }
          else
          {
-            orientation -= MAX_ROTATION;
+            orientation -= 2*MAX_ROTATION;
          }
       }
       else
       {
          //Sum Value
-         if(d2 < MAX_ROTATION)
+         if(d2 < 2*MAX_ROTATION)
          {
             orientation = desiredAngle;
          }
          else
          {
-            orientation += MAX_ROTATION;
+            orientation += 2*MAX_ROTATION;
          }
 
       }
