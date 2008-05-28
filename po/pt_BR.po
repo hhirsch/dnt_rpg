@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DccNiTghtmare 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-05-01 15:03-0300\n"
+"POT-Creation-Date: 2008-05-28 12:38-0300\n"
 "PO-Revision-Date: 2007-09-12 09:00+00000\n"
 "Last-Translator: farrer <farrer@gmail.com>\n"
 "Language-Team: BRAZILIAN PORTUGUESE <pt_BR@li.org>\n"
@@ -174,7 +174,7 @@ msgstr "Aviso"
 msgid "You Need to Assign All Attributes."
 msgstr "Você precisa definir todos atributos."
 
-#: src/engine/barterwindow.cpp:21 src/engine/dialog.cpp:473
+#: src/engine/barterwindow.cpp:21 src/engine/dialog.cpp:558
 msgid "Barter"
 msgstr "Barganha"
 
@@ -327,7 +327,7 @@ msgstr "Sem Habilidades."
 msgid "Class Skills"
 msgstr "Perícias da Classe"
 
-#: src/engine/classwindow.cpp:263 src/engine/racewindow.cpp:201
+#: src/engine/classwindow.cpp:263 src/engine/racewindow.cpp:202
 msgid "No Skills."
 msgstr "Sem Perícias"
 
@@ -336,42 +336,42 @@ msgstr "Sem Perícias"
 msgid "Can't load mouse cursor: %s\n"
 msgstr "Não consegui carregar o cursor do mouse: %s\n"
 
-#: src/engine/dccnit.cpp:332
+#: src/engine/dccnit.cpp:333
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Carregando Mapa: %s"
 
-#: src/engine/dccnit.cpp:414
+#: src/engine/dccnit.cpp:415
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Ops, não consegui abrir arquivo de NPCs: %s.\n"
 
-#: src/engine/dccnit.cpp:429
+#: src/engine/dccnit.cpp:430
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Carregando NPC: %s"
 
-#: src/engine/dccnit.cpp:452
+#: src/engine/dccnit.cpp:453
 msgid "Loading Character"
 msgstr "Carregando Personagem"
 
-#: src/engine/dccnit.cpp:459
+#: src/engine/dccnit.cpp:460
 msgid "Putting GUI on Screen"
 msgstr "Colocando as janelas na tela"
 
-#: src/engine/dccnit.cpp:499
+#: src/engine/dccnit.cpp:500
 msgid "Loading Particles"
 msgstr "Carregando Partículas"
 
-#: src/engine/dccnit.cpp:529
+#: src/engine/dccnit.cpp:531
 msgid "Loading Changes..."
 msgstr "Carregando Mudanças..."
 
-#: src/engine/dccnit.cpp:549
+#: src/engine/dccnit.cpp:551
 msgid "Done!"
 msgstr "Pronto!"
 
-#: src/engine/dccnit.cpp:639
+#: src/engine/dccnit.cpp:641
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -383,193 +383,198 @@ msgstr ""
 "mesmos). DccNiTghtmare agradece aos que desenvolveram as bibliotecas: "
 "OpenAL, Cal3D, OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 
-#: src/engine/dccnit.cpp:1178
+#: src/engine/dccnit.cpp:1180
 msgid "Too far away for the action!"
 msgstr "Muito distante para realizar a ação!"
 
-#: src/engine/dccnit.cpp:1220 src/engine/dccnit.cpp:1297
+#: src/engine/dccnit.cpp:1222 src/engine/dccnit.cpp:1299
 msgid "No NPCs in the area."
 msgstr "Sem NPCs na área."
 
-#: src/engine/dccnit.cpp:1279
+#: src/engine/dccnit.cpp:1281
 msgid "Surprise Attack Turn."
 msgstr "Turno de ataque surpresa."
 
-#: src/engine/dccnit.cpp:1466
+#: src/engine/dccnit.cpp:1498
 msgid "Enter Battle Mode"
 msgstr "Entra no Modo de Batalha"
 
-#: src/engine/dccnit.cpp:1470
+#: src/engine/dccnit.cpp:1502
 msgid "Select Normal Attack"
 msgstr "Seleciona Ataque Normal"
 
-#: src/engine/dccnit.cpp:1477
+#: src/engine/dccnit.cpp:1509
 msgid "Open Quests Window"
 msgstr "Abre Janela de Missões"
 
-#: src/engine/dccnit.cpp:1484
+#: src/engine/dccnit.cpp:1516
 msgid "Open Map Window"
 msgstr "Abre Janela de Mapa"
 
-#: src/engine/dccnit.cpp:1488
+#: src/engine/dccnit.cpp:1520
 msgid "Map Window already opened!"
 msgstr "Janela de Mapa já aberta!"
 
-#: src/engine/dccnit.cpp:1496
+#: src/engine/dccnit.cpp:1528
 msgid "End Character's Turn"
 msgstr "Termina Turno do Personagem"
 
-#: src/engine/dccnit.cpp:1500
+#: src/engine/dccnit.cpp:1532
 msgid "Only Avaible on Battle Mode"
 msgstr "Somente disponível no Modo de Batalha"
 
-#: src/engine/dccnit.cpp:1508
+#: src/engine/dccnit.cpp:1540
 msgid "Open Inventory Window"
 msgstr "Abre Janela de Inventário"
 
-#: src/engine/dccnit.cpp:1512
+#: src/engine/dccnit.cpp:1544
 msgid "Inventory already opened!"
 msgstr "Inventário já aberto!"
 
-#: src/engine/dccnit.cpp:1519
+#: src/engine/dccnit.cpp:1551
 msgid "Open Assign Attacks Window"
 msgstr "Abre Janela de Definir Ataques Rápidos"
 
-#: src/engine/dccnit.cpp:1524
+#: src/engine/dccnit.cpp:1556
 msgid "View Character Informations"
 msgstr "Ver Informações do Personagem"
 
-#: src/engine/dccnit.cpp:1530
+#: src/engine/dccnit.cpp:1562
 msgid "Open Group/Party Window"
 msgstr "Abre Janela de Grupo"
 
-#: src/engine/dccnit.cpp:1598 src/engine/dccnit.cpp:1979
-#: src/engine/dccnit.cpp:3253
+#: src/engine/dccnit.cpp:1630 src/engine/dccnit.cpp:2011
+#: src/engine/dccnit.cpp:3291
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1703
+#: src/engine/dccnit.cpp:1735
 #, c-format
 msgid "%s taken."
 msgstr "Pegou %s."
 
-#: src/engine/dccnit.cpp:1730
+#: src/engine/dccnit.cpp:1762
 msgid "Inventory is full!"
 msgstr "O inventário está cheio!"
 
-#: src/engine/dccnit.cpp:1766
+#: src/engine/dccnit.cpp:1798
 msgid "Door"
 msgstr "Porta"
 
-#: src/engine/dccnit.cpp:1904 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1936 src/fight/fightSystem.cpp:340
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/engine/dccnit.cpp:3227
+#: src/engine/dccnit.cpp:3264
 msgid "Map"
 msgstr "Mapa"
 
-#: src/engine/dccnit.cpp:3237
+#: src/engine/dccnit.cpp:3275
 msgid "FPS:"
 msgstr "FPS:"
 
-#: src/engine/dccnit.cpp:3249
+#: src/engine/dccnit.cpp:3287
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: src/engine/dccnit.cpp:3251
+#: src/engine/dccnit.cpp:3289
 msgid "Welcome to DNT!"
 msgstr "Bem-Vindo ao DccNiTghtmare!"
 
-#: src/engine/dccnit.cpp:3256 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3294 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Salvar"
 
-#: src/engine/dccnit.cpp:3258
+#: src/engine/dccnit.cpp:3296
 msgid "Menu"
 msgstr "Menu"
 
-#: src/engine/dccnit.cpp:3261 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3299 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Carregar"
 
-#: src/engine/dccnit.cpp:3464
+#: src/engine/dccnit.cpp:3505
 msgid "|Exit Battle Mode"
 msgstr "|Sai do Modo de Batalha"
 
-#: src/engine/dialog.cpp:214
+#: src/engine/dialog.cpp:245
 msgid "Cannot open File!\n"
 msgstr "Não pude abrir arquivo!\n"
 
-#: src/engine/dialog.cpp:237
+#: src/engine/dialog.cpp:268
 msgid "Tried to define dialog before end last one!"
 msgstr "Tentou-se definir um diálogo antes de terminar o anterior!"
 
-#: src/engine/dialog.cpp:253
+#: src/engine/dialog.cpp:284
 msgid "Tried to end an undefined dialog!"
 msgstr "Tentou-se terminar um diálogo não definido!"
 
-#: src/engine/dialog.cpp:264
+#: src/engine/dialog.cpp:295
 msgid "Tried to begin NPC before end something!"
 msgstr "Tentou-se começar um NPC antes de terminar algo!"
 
-#: src/engine/dialog.cpp:273
+#: src/engine/dialog.cpp:304
 msgid "Tried to end NPC before begin it!"
 msgstr "Tentou-se terminar um NPC antes de começá-lo!"
 
-#: src/engine/dialog.cpp:282
+#: src/engine/dialog.cpp:313
 msgid "Tried to begin PC before end something!"
 msgstr "Tentou-se começar um PC antes de terminar algo!"
 
-#: src/engine/dialog.cpp:292
+#: src/engine/dialog.cpp:323
 msgid "Tried to end PC before begin it!"
 msgstr "Tentou-se terminar um PC sem tê-lo começado!"
 
-#: src/engine/dialog.cpp:319
+#: src/engine/dialog.cpp:350
 msgid "Option Text without option!"
 msgstr "Option Text sem option!"
 
-#: src/engine/dialog.cpp:323 src/engine/dialog.cpp:373
+#: src/engine/dialog.cpp:354 src/engine/dialog.cpp:436
 msgid "Options overflow!"
 msgstr "Estouro no número de opções!"
 
-#: src/engine/dialog.cpp:329
+#: src/engine/dialog.cpp:360
 msgid "Text without any relation!"
 msgstr "Texto sem nenhuma relação!"
 
-#: src/engine/dialog.cpp:341
+#: src/engine/dialog.cpp:373
 msgid "Option without begin PC!"
 msgstr "Opção sem começar PC"
 
-#: src/engine/dialog.cpp:349
+#: src/engine/dialog.cpp:381
 msgid "Action isn't yet defined to NPC!"
 msgstr "Ação não foi ainda definida para o NPC!"
 
-#: src/engine/dialog.cpp:368
+#: src/engine/dialog.cpp:424
+msgid "Actions List overflow!"
+msgstr "Estouro no número de ações na lista!"
+
+#: src/engine/dialog.cpp:431
 msgid "Option Action without option!"
 msgstr "Ação de Opção sem opção!"
 
-#: src/engine/dialog.cpp:379
+#: src/engine/dialog.cpp:442
 msgid "Action without any relation!\n"
 msgstr "Ação sem nenhuma relação!\n"
 
-#: src/engine/dialog.cpp:385
+#: src/engine/dialog.cpp:448
 msgid "Unknow Token!"
 msgstr "Token Desconhecido!"
 
-#: src/engine/dialog.cpp:449
+#: src/engine/dialog.cpp:512
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr "Não achou o diálogo: %d\n"
 
-#: src/engine/dialog.cpp:471
+#: src/engine/dialog.cpp:556
 msgid "Dialog"
 msgstr "Diálogo"
 
-#: src/engine/initial.cpp:50
-msgid "0.2"
-msgstr "0.2"
+#: src/engine/dialog.cpp:645 src/ia/iascript.cpp:863
+#, c-format
+msgid "Mission Completed: %d XP!"
+msgstr "Missão Cumprida: %d XP!"
 
 #: src/engine/initial.cpp:55
 msgid "New"
@@ -859,7 +864,7 @@ msgstr "Oxi! Não consegui ajustar o modo do vídeo: %s!\n"
 msgid "Trying again without AntiAliasing.\n"
 msgstr "Tentando novamente sem o AntiAliasing.\n"
 
-#: src/gui/farso.cpp:93
+#: src/gui/farso.cpp:96
 #, c-format
 msgid "Something must be wrong! Try editing ~/.dccnitghtmare/options.cfg\n"
 msgstr "Algo deve estar errado! Tente editar ~/dccnitghtmare/options.cfg\n"
@@ -887,11 +892,6 @@ msgstr "Erro ao abrir imagem: %s \n"
 #, c-format
 msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
 msgstr "Aviso: Não pude carregar imagem (sem memória)!\n"
-
-#: src/ia/iascript.cpp:861
-#, c-format
-msgid "Mission Completed: %d XP!"
-msgstr "Missão Cumprida: %d XP!"
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"
@@ -3236,8 +3236,8 @@ msgstr "Diabos! Uma árvore falando?"
 msgid "Die!"
 msgstr "Morra!"
 
-#: data/dialogs/initial.dlg:22 data/dialogs/tutorial/logan.dlg:13
-#: data/dialogs/tutorial/logan.dlg:160 data/dialogs/tutorial/logan.dlg:174
+#: data/dialogs/initial.dlg:22 data/dialogs/tutorial/logan.dlg:157
+#: data/dialogs/tutorial/logan.dlg:171
 msgid "Bye!"
 msgstr "Adeus!"
 
@@ -3305,38 +3305,38 @@ msgstr "Adeus Ente!"
 msgid "Ah, so finally you awake!"
 msgstr "Ah, então você finalmente acordou!"
 
-#: data/dialogs/tutorial/logan.dlg:22
+#: data/dialogs/tutorial/logan.dlg:19
 msgid "I am Logan, maintainer of this occupation."
 msgstr "Eu sou Logan, controlador desta ocupação."
 
-#: data/dialogs/tutorial/logan.dlg:26
+#: data/dialogs/tutorial/logan.dlg:23
 msgid "Occupation? Is this, the cleanest house I've ever seen, an occupation?"
 msgstr "Ocupação? Esta, a casa mais limpa que já ví, é uma ocupação?"
 
-#: data/dialogs/tutorial/logan.dlg:29 data/dialogs/tutorial/logan.dlg:58
+#: data/dialogs/tutorial/logan.dlg:26 data/dialogs/tutorial/logan.dlg:55
 msgid "What am I doing here?"
 msgstr "O que estou fazendo aqui?"
 
-#: data/dialogs/tutorial/logan.dlg:38
+#: data/dialogs/tutorial/logan.dlg:35
 msgid ""
 "We found you bleeding unconscious near the waterfall. For the sake of our "
 "ideals, Mattar, <the Forgotten>, healed all your wounds. (You're lucky: the "
-"scalpel he used went out yesterday with your faeces!)"
+"scalpel was expelled with your faeces yesterday!)"
 msgstr ""
 "Nós o encontramos inconsciente e ferido perto da cachoeira. Para o bem de "
 "nossos ideais, Mattar, <o Esquecido>, tratou seus ferimentos. (Você teve "
 "sorte: o bisturi que ele utilizou saiu ontem junto a suas fezes). "
 
-#: data/dialogs/tutorial/logan.dlg:42
+#: data/dialogs/tutorial/logan.dlg:39
 msgid "For the sake of your ideals? What ideals?!"
 msgstr "Pelo o bem de seus ideais? Que ideais?!"
 
-#: data/dialogs/tutorial/logan.dlg:45 data/dialogs/tutorial/logan.dlg:61
-#: data/dialogs/tutorial/logan.dlg:77
+#: data/dialogs/tutorial/logan.dlg:42 data/dialogs/tutorial/logan.dlg:58
+#: data/dialogs/tutorial/logan.dlg:74
 msgid "What do you want of me?"
 msgstr "O que você deseja de mim?"
 
-#: data/dialogs/tutorial/logan.dlg:54
+#: data/dialogs/tutorial/logan.dlg:51
 msgid ""
 "Yes, occupation. A clean and sweet ocupation that also serves as heal clinic "
 "for people with big tongue and no gratitude!"
@@ -3344,15 +3344,15 @@ msgstr ""
 "Sim, ocupação. Uma limpa de bonita ocupação que também serve de clínica de "
 "reabilitação para tagarelas sem gratidão!"
 
-#: data/dialogs/tutorial/logan.dlg:64
+#: data/dialogs/tutorial/logan.dlg:61
 msgid "Shut up and die!"
 msgstr "Cala a boca e morra!"
 
-#: data/dialogs/tutorial/logan.dlg:73
+#: data/dialogs/tutorial/logan.dlg:70
 msgid "Our ideal? It's not the time to tell you about that."
 msgstr "Nosso ideal? Não é hora de te contar sobre eles."
 
-#: data/dialogs/tutorial/logan.dlg:86
+#: data/dialogs/tutorial/logan.dlg:83
 msgid ""
 "Ah, some time ago I've lost our Chrono Trigger Snes cartridge, just find it "
 "for us."
@@ -3360,39 +3360,39 @@ msgstr ""
 "Ah, algum tempo atrás eu perdi o nosso cartucho do Chrono Trigger. Ache-o "
 "para nós."
 
-#: data/dialogs/tutorial/logan.dlg:90
+#: data/dialogs/tutorial/logan.dlg:87
 msgid "Ok, I'll search it"
 msgstr "Está bem, vou procurar."
 
-#: data/dialogs/tutorial/logan.dlg:95
+#: data/dialogs/tutorial/logan.dlg:92
 msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
 msgstr "Oh, Chrono Trigger! Este nome ressoa boas memórias em minha mente."
 
-#: data/dialogs/tutorial/logan.dlg:100
+#: data/dialogs/tutorial/logan.dlg:97
 msgid "Never! Chrono taked me 3 years! Die!"
 msgstr "Nunca! Chrono roubou 3 anos de minha vida! Morra!"
 
-#: data/dialogs/tutorial/logan.dlg:109
+#: data/dialogs/tutorial/logan.dlg:106
 msgid "You still haven't found our Chrono Trigger Snes cartridge!"
 msgstr "Você ainda não encontrou nosso cartucho do Chrono Trigger!"
 
-#: data/dialogs/tutorial/logan.dlg:113
+#: data/dialogs/tutorial/logan.dlg:110
 msgid "I'm still looking..."
 msgstr "Eu ainda estou procurando..."
 
-#: data/dialogs/tutorial/logan.dlg:122
+#: data/dialogs/tutorial/logan.dlg:119
 msgid "Here! Chrono is here! Let me play it!"
 msgstr "Aqui! Chrono está aqui! Deixe-me jogar!"
 
-#: data/dialogs/tutorial/logan.dlg:126
+#: data/dialogs/tutorial/logan.dlg:123
 msgid "Its all yours..."
 msgstr "É todo seu..."
 
-#: data/dialogs/tutorial/logan.dlg:131
+#: data/dialogs/tutorial/logan.dlg:128
 msgid "Its yours, but I want some money!"
 msgstr "É seu, mas eu quero dinheiro!"
 
-#: data/dialogs/tutorial/logan.dlg:143
+#: data/dialogs/tutorial/logan.dlg:140
 msgid ""
 "Money, money! All you want is money!! But... it's Chrono... take these "
 "coins..."
@@ -3400,11 +3400,11 @@ msgstr ""
 "Dinheiro, dinheiro! tudo que vocês desejam é dinheiro! Mas... é Chrono... "
 "tome essas moedas..."
 
-#: data/dialogs/tutorial/logan.dlg:147
+#: data/dialogs/tutorial/logan.dlg:144
 msgid "Thanks."
 msgstr "Obrigado."
 
-#: data/dialogs/tutorial/logan.dlg:156
+#: data/dialogs/tutorial/logan.dlg:153
 msgid ""
 "So, for this DNT 0.2 version, I haven't any more missions for you. Go take a "
 "walk (it's an open world game) and wait for DNT 0.3 release."
@@ -3413,7 +3413,7 @@ msgstr ""
 "você. Vá dar uma volta (esté é um jogo de ações livres) e espere pelo "
 "lançamento da versão 0.3 do DNT."
 
-#: data/dialogs/tutorial/logan.dlg:170
+#: data/dialogs/tutorial/logan.dlg:167
 msgid "Chrono... Chrono... Chrono!"
 msgstr "Chrono... Chrono... Chrono!"
 
@@ -3533,3 +3533,6 @@ msgstr "Leve"
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
 msgstr "Pesada"
+
+#~ msgid "0.2"
+#~ msgstr "0.2"
