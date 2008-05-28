@@ -52,7 +52,7 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    message = msg;
 
    /* Define the font and sizes */
-   fnt.defineFont(DNT_FONT_ARIAL, 12);
+   fnt.defineFont(DNT_FONT_ARIAL, 18);
    fnt.defineFontAlign(DNT_FONT_ALIGN_LEFT);
    fnt.defineFontStyle(DNT_FONT_STYLE_NORMAL);
    size = fnt.getStringWidth(message) + 8;
