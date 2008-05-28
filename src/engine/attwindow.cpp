@@ -468,7 +468,7 @@ int attWindow::assignAttMod(int att)
    /* Define Color */
    if(attBonus > 0)
    {
-      attMods[att]->setColor(12,43,143);
+      attMods[att]->setColor(52,200,12);
    }
    else if(attBonus == 0)
    {
