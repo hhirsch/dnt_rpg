@@ -515,11 +515,11 @@ ut texturas/floor_outdoor/grass3.png
 uo models/building/house6/house6.dcc 0:13,9:3299.341797,0.200000,2092.407471:-179:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass3.png
-uc 3323.117188,2363.160400,3355.524658,2385.669434:mapas/tutorial/school_1,map
+uc 3323.117188,2363.160400,3355.524658,2385.669434:mapas/tutorial/school_1.map
 uo models/building/house6/house6.dcc 0:13,9:3299.341797,0.200000,2092.407471:-179:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
-uc 3323.117188,2363.160400,3355.524658,2385.669434:mapas/tutorial/school_1,map
+uc 3323.117188,2363.160400,3355.524658,2385.669434:mapas/tutorial/school_1.map
 uo models/building/house6/house6.dcc 0:13,9:3299.341797,0.200000,2092.407471:-179:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
