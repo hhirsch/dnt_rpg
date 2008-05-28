@@ -1036,7 +1036,7 @@ void characterList::setActiveCharacter(character* dude)
 /*********************************************************************
  *                           treatGeneralScripts                     *
  *********************************************************************/
-void characterList::treatGeneralScripts(Map* actualMap)
+void characterList::treatGeneralScripts(Map* actualMap, characterList* NPCs)
 {
    int i;
    iaScript* script;
@@ -1058,7 +1058,7 @@ void characterList::treatGeneralScripts(Map* actualMap)
       script = (iaScript*) curTreat->getGeneralScript();
       if( (script) && (curTreat->isAlive()))
       {
-         script->defineMap(actualMap);
+         script->defineMap(actualMap, NPCs);
          script->run(MAX_SCRIPT_LINES);
       }
 

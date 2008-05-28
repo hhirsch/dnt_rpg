@@ -15,6 +15,7 @@ iaScript::iaScript(string scriptFile, void* usedEngine)
    objectOwner = NULL;
    characterOwner = NULL;
    actualMap = NULL;
+   npcs = NULL;
    pendingAction = NULL;
    actualEngine = usedEngine;
    type = IASCRIPT_TYPE_DEFAULT;
@@ -61,6 +62,7 @@ iaScript::~iaScript()
    objectOwner = NULL;
    characterOwner = NULL;
    actualMap = NULL;
+   npcs = NULL;
 }
 
 /***********************************************************************
@@ -111,9 +113,10 @@ void iaScript::defineCharacterOwner(character* owner)
 /***********************************************************************
  *                            defineMap                                *
  ***********************************************************************/
-void iaScript::defineMap(Map* acMap)
+void iaScript::defineMap(Map* acMap, characterList* NPCs)
 {
    actualMap = acMap;
+   npcs = NPCs;
 }
 
 /***********************************************************************
@@ -1536,6 +1539,17 @@ void iaScript::callFunction(iaVariable* var, string strLine,
          modState modif;
          modif.mapTalkAddAction(MODSTATE_TALK_ENTER_VALUE,
                                 charFile, mapFile, dialogNum);
+         /* Directly apply, if at the same map  */
+         if( (actualMap) && (npcs) && (actualMap->getFileName() == mapFile))
+         {
+            /* apply it!  */
+            character* ch = npcs->getCharacter(charFile);
+            if(ch)
+            {
+               ch->setInitialConversation(dialogNum);
+            }
+         }
+
       }
       else
       {

@@ -291,8 +291,9 @@ class characterList
       int getTotal(){return(total);};
 
       /*! Treat Character's general scripts
-       * \apram actualMap -> current opened map */
-      void treatGeneralScripts(Map* actualMap);
+       * \param actualMap -> current opened map
+       * \param NPCs -> current NPCs list  */
+      void treatGeneralScripts(Map* actualMap, characterList* NPCs);
 
       character* first;         /**< List Node Pointer */
 

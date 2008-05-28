@@ -49,8 +49,9 @@ class iaScript
       void defineCharacterOwner(character* owner);
 
       /*! Define the actual openned Map
-       * \param acMap -> pointer to the opened map */
-      void defineMap(Map* acMap);
+       * \param acMap -> pointer to the opened map
+       * \param NPCs -> pointer to the current npcs list */
+      void defineMap(Map* acMap, characterList* NPCs);
 
       /*! run the Script to the point of a more than one cicle action,
        * that will be marked as pending or at the end of the script.
@@ -75,6 +76,7 @@ class iaScript
       void* actualEngine;        /**< The actual Engine */
 
       Map* actualMap;            /**< Actual Opened Map */
+      characterList* npcs;       /**< Current NPCs List */
 
       int actualLine;            /**< The actual Line */
 

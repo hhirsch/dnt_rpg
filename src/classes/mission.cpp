@@ -292,7 +292,7 @@ mission* missionsController::getCurrentMission(string scriptFile)
 /************************************************************
  *                           Treat                          *
  ************************************************************/
-void missionsController::treat(Map* acMap)
+void missionsController::treat(Map* acMap, characterList* NPCs)
 {
    int i;
 
@@ -311,7 +311,7 @@ void missionsController::treat(Map* acMap)
       }
 
       /* Run Script */
-      curTreat->defineMap(acMap);
+      curTreat->defineMap(acMap, NPCs);
       curTreat->run(MAX_SCRIPT_LINES);
    
       /* Since it can be completed at run with complete mission function */

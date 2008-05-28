@@ -91,8 +91,9 @@ class missionsController
       mission* getCurrentMission(string scriptFile);
 
       /*! Treat all current missions scripts
-       * \param acMap -> pointer to current opened map */
-      void treat(Map* acMap);
+       * \param acMap -> pointer to current opened map
+       * \param NPCs -> pointer to the current NPCs list*/
+      void treat(Map* acMap, characterList* NPCs);
 
    protected:
       /*! Remove misssion from current

@@ -1363,12 +1363,12 @@ void engine::treatScripts()
       treatPendingActions();
 
       /* Treat missions scripts */
-      missions->treat(actualMap);
+      missions->treat(actualMap, NPCs);
 
       /* Treat NPCs scripts */
       if(NPCs)
       {
-         NPCs->treatGeneralScripts(actualMap);
+         NPCs->treatGeneralScripts(actualMap, NPCs);
       }
    }
    else
@@ -1385,7 +1385,7 @@ void engine::treatScripts()
             iaScript* script = (iaScript*) npc->getBattleScript();
             if( (script) && (npc->isAlive()))
             {
-               script->defineMap(actualMap);
+               script->defineMap(actualMap, NPCs);
                script->run(MAX_SCRIPT_LINES);
 
                /* End turn when script finished */
