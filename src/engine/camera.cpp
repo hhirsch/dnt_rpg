@@ -216,10 +216,12 @@ void camera::lookAt(Map* acMap)
 {
    GLfloat height = 0;
 
+   /* Calculate Current Camera Position  */
    cameraX = centerX + (float) d * cos(deg2Rad(theta)) * sin(deg2Rad(phi));
    cameraY = centerY + deltaY + (float) d * sin(deg2Rad(theta));
    cameraZ = centerZ + (float) d * cos(deg2Rad(theta)) * cos(deg2Rad(phi));
 
+   /* Verify if it is inner terrain  */
    if(acMap != NULL)
    {
       height = acMap->getHeight(cameraX, cameraZ);
@@ -228,8 +230,64 @@ void camera::lookAt(Map* acMap)
       {
          cameraY = height+10;
       }
+      
+      /* Verify if it is inner object's bounding box  */
+      int sqX = (int)floor(cameraX / acMap->squareSize());
+      int sqZ = (int)floor(cameraZ / acMap->squareSize());
+      Square* ocSquare = acMap->relativeSquare(sqX, sqZ);
+      if(ocSquare)
+      {
+         float sumY = 0;
+         int ob = 0;
+         boundingBox bounding;
+         GLfloat min[3], max[3], min2[3], max2[3];
+         min[0] = cameraX-4;
+         max[0] = cameraX+4;
+         min[1] = cameraY-4;
+         max[1] = cameraY+4;
+         min[2] = cameraZ-4;
+         max[2] = cameraZ+4;
+         GLfloat X[4], Z[4];
+         objSquare* sobj = ocSquare->getFirstObject();
+         while( (ob < ocSquare->getTotalObjects()))
+         {
+            if(sobj->colision)
+            {
+               bounding = sobj->obj->getBoundingBox();
+               X[0] = bounding.x1;
+               Z[0] = bounding.z1;
+               X[1] = bounding.x1;
+               Z[1] = bounding.z2;
+               X[2] = bounding.x2;
+               Z[2] = bounding.z2;
+               X[3] = bounding.x2;
+               Z[3] = bounding.z1;
+               /* TODO +Yobjects */
+               rotTransBoundingBox(sobj->orientation, X, Z, 
+                                   sobj->x, bounding.y1,
+                                   bounding.y2, sobj->z, min2, max2);
+               if(intercepts(min,max,min2,max2))
+               {
+                  if(bounding.y2 > sumY)
+                  {
+                     sumY = bounding.y2;
+                  }
+               }
+            }
+            ob++;
+            sobj = sobj->next;
+         }
+
+         /* Put the camera at the maximun SumY got, if one  */
+         if(sumY != 0)
+         {
+            cameraY = sumY;
+         }
+      }
+
    }
 
+   /* Finnaly, look to the defined position  */
    gluLookAt(cameraX,cameraY,cameraZ, centerX, centerY, centerZ, 0,1,0);
 }
 
