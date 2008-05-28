@@ -32,7 +32,7 @@ end_dialog
 ############################################################
 dialog(2)
    npc_begin
-      text = gettext("We found you bleeding unconscious near the waterfall. For the sake of our ideals, Mattar, <the Forgotten>, healed all your wounds. (You're lucky: the scalpel he used went out yesterday with your faeces!)")
+      text = gettext("We found you bleeding unconscious near the waterfall. For the sake of our ideals, Mattar, <the Forgotten>, healed all your wounds. (You're lucky: the scalpel was expelled with your faeces yesterday!)")
    npc_end
    pc_begin
       option
