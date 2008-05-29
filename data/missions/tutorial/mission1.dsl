@@ -22,10 +22,12 @@ script()
    
    while(true)
 
-      if( (inventoryHave(ACTIVE_CHARACTER,objFile)) && (dialog == 6) )
-         # Have the cartridge, set logan talk to get it!
-         dialog = 7
-         dialogSetInitial(logan, mapa, dialog)
+      if(inventoryHave(ACTIVE_CHARACTER,objFile)) 
+         if(dialog == 6)
+            # Have the cartridge, set logan talk to get it!
+            dialog = 7
+            dialogSetInitial(logan, mapa, dialog)
+         end   
       else 
          if(dialog != 6)
             # Have't the cartridge, set the logan talk to wait.
