@@ -1,7 +1,7 @@
 [Project]
 FileName=DccNiTghtmare.dev
 Name=DccNiTghtmare
-UnitCount=200
+UnitCount=217
 Type=0
 Ver=1
 ObjFiles=
@@ -12,7 +12,7 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=-D_MSC_VER_@@_
 CppCompiler=-D_MSC_VER_@@_
-Linker=-g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_image -lcal3d -logg -lvorbis -lvorbisfile -lopenal32 -lintl_@@_
+Linker=-g -Wall -lm -lmingw32 -lGLU32 -lOPENGL32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lcal3d -logg -lvorbis -lvorbisfile -lopenal32 -lintl_@@_
 IsCpp=1
 Icon=
 ExeOutput=bin\
@@ -80,16 +80,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=src\etc\fifo.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit7]
 FileName=src\gui\cxsel.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -99,7 +89,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit8]
+[Unit7]
 FileName=src\gui\cxsel.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -109,7 +99,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit9]
+[Unit8]
 FileName=src\gui\farso.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -119,17 +109,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit10]
-FileName=src\gui\fonte.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit11]
+[Unit9]
 FileName=src\gui\menu.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -139,7 +119,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit12]
+[Unit10]
 FileName=src\gui\menu.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -149,7 +129,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit13]
+[Unit11]
 FileName=src\gui\mouse.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -159,7 +139,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit14]
+[Unit12]
 FileName=src\map\map.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -169,7 +149,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit15]
+[Unit13]
 FileName=src\map\map.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -179,7 +159,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit16]
+[Unit14]
 FileName=src\engine\initial.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -189,7 +169,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit17]
+[Unit15]
 FileName=src\engine\cursor.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -199,7 +179,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit18]
+[Unit16]
 FileName=src\engine\cursor.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -209,7 +189,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit19]
+[Unit17]
 FileName=src\engine\skillwindow.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -219,7 +199,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit20]
+[Unit18]
 FileName=src\engine\skillwindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -229,7 +209,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit21]
+[Unit19]
 FileName=src\classes\skills.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -239,7 +219,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit22]
+[Unit20]
 FileName=src\classes\skills.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -249,7 +229,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit23]
+[Unit21]
 FileName=src\map\maplights.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -259,7 +239,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit24]
+[Unit22]
 FileName=src\map\mapfog.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -269,7 +249,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit25]
+[Unit23]
 FileName=src\map\mapfog.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -279,7 +259,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit26]
+[Unit24]
 FileName=src\map\maplights.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -289,7 +269,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit27]
+[Unit25]
 FileName=src\sound\sound.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -299,7 +279,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit28]
+[Unit26]
 FileName=src\sound\sound.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -309,7 +289,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit29]
+[Unit27]
 FileName=src\engine\options.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -319,7 +299,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit30]
+[Unit28]
 FileName=src\engine\options.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -329,7 +309,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit31]
+[Unit29]
 FileName=src\classes\actions.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -339,7 +319,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit32]
+[Unit30]
 FileName=src\classes\feats.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -349,7 +329,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit33]
+[Unit31]
 FileName=src\engine\util.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -359,7 +339,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit34]
+[Unit32]
 FileName=src\engine\util.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -369,7 +349,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit35]
+[Unit33]
 FileName=src\particle\particle.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -379,7 +359,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit36]
+[Unit34]
 FileName=src\particle\part1.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -389,7 +369,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit37]
+[Unit35]
 FileName=src\particle\part1.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -399,7 +379,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit38]
+[Unit36]
 FileName=src\particle\part2.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -409,7 +389,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit39]
+[Unit37]
 FileName=src\particle\part2.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -419,7 +399,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit40]
+[Unit38]
 FileName=src\particle\part3.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -429,7 +409,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit41]
+[Unit39]
 FileName=src\particle\part3.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -439,7 +419,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit42]
+[Unit40]
 FileName=src\particle\part4.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -449,7 +429,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit43]
+[Unit41]
 FileName=src\particle\part4.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -459,7 +439,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit44]
+[Unit42]
 FileName=src\particle\part5.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -469,7 +449,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit45]
+[Unit43]
 FileName=src\particle\part5.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -479,7 +459,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit46]
+[Unit44]
 FileName=src\particle\part6.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -489,7 +469,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit47]
+[Unit45]
 FileName=src\particle\part6.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -499,7 +479,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit48]
+[Unit46]
 FileName=src\particle\part7.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -509,7 +489,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit49]
+[Unit47]
 FileName=src\particle\part7.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -519,7 +499,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit50]
+[Unit48]
 FileName=src\particle\particle.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -529,7 +509,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit51]
+[Unit49]
 FileName=src\classes\thing.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -539,7 +519,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit52]
+[Unit50]
 FileName=src\classes\defs.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -549,7 +529,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit53]
+[Unit51]
 FileName=src\classes\defs.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -559,7 +539,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit54]
+[Unit52]
 FileName=src\classes\dices.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -569,7 +549,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit55]
+[Unit53]
 FileName=src\classes\feats.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -579,8 +559,28 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit56]
+[Unit54]
 FileName=src\classes\thing.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit55]
+FileName=src\fight\fightGroup.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit56]
+FileName=src\fight\fightGroup.h
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
@@ -608,26 +608,6 @@ ProductVersion=
 AutoIncBuildNr=0
 
 [Unit57]
-FileName=src\fight\fightGroup.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit58]
-FileName=src\fight\fightGroup.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit59]
 FileName=src\fight\fightSystem.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -637,7 +617,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit60]
+[Unit58]
 FileName=src\fight\fightSystem.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -647,7 +627,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit61]
+[Unit59]
 FileName=src\fight\initiative.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -657,7 +637,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit62]
+[Unit60]
 FileName=src\fight\initiative.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -667,7 +647,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit63]
+[Unit61]
 FileName=src\gui\healthBar.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -677,7 +657,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit64]
+[Unit62]
 FileName=src\gui\healthBar.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -687,27 +667,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit65]
-FileName=src\particle\partSystem.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit66]
-FileName=src\particle\partSystem.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit67]
+[Unit63]
 FileName=src\classes\actions.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -717,7 +677,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit68]
+[Unit64]
 FileName=src\engine\sun.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -727,7 +687,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit69]
+[Unit65]
 FileName=src\engine\sun.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -737,7 +697,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit70]
+[Unit66]
 FileName=src\engine\attwindow.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -747,7 +707,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit71]
+[Unit67]
 FileName=src\engine\attwindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -757,7 +717,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit72]
+[Unit68]
 FileName=src\classes\align.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -767,7 +727,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit73]
+[Unit69]
 FileName=src\classes\align.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -777,7 +737,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit74]
+[Unit70]
 FileName=src\engine\collision.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -787,7 +747,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit75]
+[Unit71]
 FileName=src\engine\alignwindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -797,7 +757,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit76]
+[Unit72]
 FileName=src\engine\alignwindow.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -807,7 +767,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit77]
+[Unit73]
 FileName=src\engine\camera.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -817,7 +777,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit78]
+[Unit74]
 FileName=src\engine\camera.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -827,7 +787,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit79]
+[Unit75]
 FileName=src\engine\collision.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -837,7 +797,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit80]
+[Unit76]
 FileName=src\ia\astar.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -847,7 +807,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit81]
+[Unit77]
 FileName=src\ia\astar.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -857,7 +817,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit82]
+[Unit78]
 FileName=src\particle\wave.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -867,7 +827,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit83]
+[Unit79]
 FileName=src\particle\wave.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -877,7 +837,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit84]
+[Unit80]
 FileName=src\ia\agent.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -887,7 +847,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit85]
+[Unit81]
 FileName=src\ia\agent.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -897,7 +857,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit86]
+[Unit82]
 FileName=src\ia\pattAgent.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -907,7 +867,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit87]
+[Unit83]
 FileName=src\ia\pattAgent.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -917,7 +877,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit88]
+[Unit84]
 FileName=src\ia\potentAgent.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -927,7 +887,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit89]
+[Unit85]
 FileName=src\ia\potentAgent.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -937,7 +897,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit90]
+[Unit86]
 FileName=src\ia\fuzzyvariable.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -947,7 +907,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit91]
+[Unit87]
 FileName=src\ia\fuzzy.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -957,7 +917,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit92]
+[Unit88]
 FileName=src\ia\fuzzy.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -967,7 +927,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit93]
+[Unit89]
 FileName=src\ia\fuzzyfunction.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -977,7 +937,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit94]
+[Unit90]
 FileName=src\ia\fuzzyfunction.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -987,7 +947,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit95]
+[Unit91]
 FileName=src\ia\fuzzyrule.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -997,7 +957,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit96]
+[Unit92]
 FileName=src\ia\fuzzyrule.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1007,7 +967,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit97]
+[Unit93]
 FileName=src\ia\fuzzyvariable.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1017,7 +977,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit98]
+[Unit94]
 FileName=src\particle\grass.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1027,7 +987,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit99]
+[Unit95]
 FileName=src\particle\grass.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1037,7 +997,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit100]
+[Unit96]
 FileName=src\classes\race.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1047,7 +1007,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit101]
+[Unit97]
 FileName=src\classes\race.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1057,7 +1017,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit102]
+[Unit98]
 FileName=src\engine\racewindow.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1067,7 +1027,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit103]
+[Unit99]
 FileName=src\engine\racewindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1077,7 +1037,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit104]
+[Unit100]
 FileName=src\sound\sndfx.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1087,7 +1047,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit105]
+[Unit101]
 FileName=src\sound\ogg_stream.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1097,7 +1057,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit106]
+[Unit102]
 FileName=src\sound\ogg_stream.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1107,7 +1067,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit107]
+[Unit103]
 FileName=src\sound\sndfx.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1117,7 +1077,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit108]
+[Unit104]
 FileName=src\gui\messages.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1127,7 +1087,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit109]
+[Unit105]
 FileName=src\gui\messages.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1137,7 +1097,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit110]
+[Unit106]
 FileName=src\engine\sky.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1147,7 +1107,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit111]
+[Unit107]
 FileName=src\engine\sky.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1157,7 +1117,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit112]
+[Unit108]
 FileName=src\classes\object.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1167,7 +1127,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit113]
+[Unit109]
 FileName=src\classes\inventory.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1177,7 +1137,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit114]
+[Unit110]
 FileName=src\classes\inventory.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1187,7 +1147,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit115]
+[Unit111]
 FileName=src\classes\object.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1197,7 +1157,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit116]
+[Unit112]
 FileName=src\etc\modellist.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1207,7 +1167,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit117]
+[Unit113]
 FileName=src\etc\modellist.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1217,7 +1177,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit118]
+[Unit114]
 FileName=src\engine\inventwindow.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1227,7 +1187,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit119]
+[Unit115]
 FileName=src\engine\inventwindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1237,7 +1197,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit120]
+[Unit116]
 FileName=src\gui\rolbar.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1247,7 +1207,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit121]
+[Unit117]
 FileName=src\gui\rolbar.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1257,7 +1217,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit122]
+[Unit118]
 FileName=src\map\maproad.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1267,7 +1227,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit123]
+[Unit119]
 FileName=src\map\maproad.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1277,7 +1237,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit124]
+[Unit120]
 FileName=src\classes\classes.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1287,7 +1247,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit125]
+[Unit121]
 FileName=src\classes\classes.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1297,7 +1257,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit126]
+[Unit122]
 FileName=src\engine\classwindow.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1307,7 +1267,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit127]
+[Unit123]
 FileName=src\engine\classwindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1317,7 +1277,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit128]
+[Unit124]
 FileName=src\etc\animodel.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1327,7 +1287,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit129]
+[Unit125]
 FileName=src\etc\animodel.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1337,7 +1297,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit130]
+[Unit126]
 FileName=src\engine\modstate.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1347,7 +1307,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit131]
+[Unit127]
 FileName=src\engine\modstate.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1357,7 +1317,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit132]
+[Unit128]
 FileName=src\engine\aspectwindow.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1367,7 +1327,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit133]
+[Unit129]
 FileName=src\engine\aspectwindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1377,7 +1337,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit134]
+[Unit130]
 FileName=src\gui\button.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1387,7 +1347,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit135]
+[Unit131]
 FileName=src\gui\button.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1397,7 +1357,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit136]
+[Unit132]
 FileName=src\gui\color.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1407,7 +1367,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit137]
+[Unit133]
 FileName=src\gui\color.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1417,7 +1377,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit138]
+[Unit134]
 FileName=src\gui\draw.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1427,7 +1387,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit139]
+[Unit135]
 FileName=src\gui\draw.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1437,7 +1397,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit140]
+[Unit136]
 FileName=src\gui\farso.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1447,17 +1407,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit141]
-FileName=src\gui\fonte.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit142]
+[Unit137]
 FileName=src\gui\guilist.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1467,7 +1417,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit143]
+[Unit138]
 FileName=src\gui\guilist.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1477,7 +1427,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit144]
+[Unit139]
 FileName=src\gui\guiobject.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1487,7 +1437,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit145]
+[Unit140]
 FileName=src\gui\interface.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1497,7 +1447,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit146]
+[Unit141]
 FileName=src\gui\interface.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1507,7 +1457,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit147]
+[Unit142]
 FileName=src\gui\listtext.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1517,7 +1467,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit148]
+[Unit143]
 FileName=src\gui\listtext.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1527,7 +1477,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit149]
+[Unit144]
 FileName=src\gui\mouse.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1537,7 +1487,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit150]
+[Unit145]
 FileName=src\gui\picture.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1547,7 +1497,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit151]
+[Unit146]
 FileName=src\gui\picture.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1557,7 +1507,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit152]
+[Unit147]
 FileName=src\gui\seltext.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1567,7 +1517,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit153]
+[Unit148]
 FileName=src\gui\seltext.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1577,7 +1527,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit154]
+[Unit149]
 FileName=src\gui\tabbutton.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1587,7 +1537,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit155]
+[Unit150]
 FileName=src\gui\tabbutton.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1597,7 +1547,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit156]
+[Unit151]
 FileName=src\gui\textbar.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1607,7 +1557,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit157]
+[Unit152]
 FileName=src\gui\textbar.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1617,7 +1567,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit158]
+[Unit153]
 FileName=src\gui\textbox.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1627,7 +1577,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit159]
+[Unit154]
 FileName=src\gui\textbox.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1637,7 +1587,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit160]
+[Unit155]
 FileName=src\gui\window.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1647,7 +1597,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit161]
+[Unit156]
 FileName=src\gui\window.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1657,7 +1607,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit162]
+[Unit157]
 FileName=src\classes\barter.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1667,7 +1617,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit163]
+[Unit158]
 FileName=src\classes\barter.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1677,7 +1627,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit164]
+[Unit159]
 FileName=src\classes\itemslot.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1687,7 +1637,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit165]
+[Unit160]
 FileName=src\classes\itemslot.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1697,7 +1647,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit166]
+[Unit161]
 FileName=src\classes\modifier.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1707,7 +1657,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit167]
+[Unit162]
 FileName=src\classes\weapon.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1717,7 +1667,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit168]
+[Unit163]
 FileName=src\classes\weapon.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1727,187 +1677,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit170]
-FileName=src\engine\barterwindow.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit171]
-FileName=src\engine\character.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit172]
-FileName=src\engine\character.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit173]
-FileName=src\engine\dialog.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit174]
-FileName=src\engine\dialog.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit175]
-FileName=src\engine\initial.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit176]
-FileName=src\engine\shadow.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit177]
-FileName=src\engine\shadow.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit178]
-FileName=src\map\mapobject.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit179]
-FileName=src\map\mapobject.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit180]
-FileName=src\particle\meteor.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit181]
-FileName=src\particle\meteor.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit182]
-FileName=src\ia\iafuncs.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit183]
-FileName=src\ia\iafuncs.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit184]
-FileName=src\ia\iascript.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit185]
-FileName=src\ia\iascript.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit186]
-FileName=src\ia\iastack.cpp
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit187]
-FileName=src\ia\iastack.h
-CompileCpp=1
-Folder=DccNiTghtmare
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit169]
+[Unit164]
 FileName=src\engine\barterwindow.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1917,7 +1687,177 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit188]
+[Unit165]
+FileName=src\engine\barterwindow.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit166]
+FileName=src\engine\character.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit167]
+FileName=src\engine\character.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit168]
+FileName=src\engine\dialog.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit170]
+FileName=src\engine\initial.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit171]
+FileName=src\engine\shadow.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit172]
+FileName=src\engine\shadow.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit173]
+FileName=src\map\mapobject.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit174]
+FileName=src\map\mapobject.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit175]
+FileName=src\particle\meteor.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit176]
+FileName=src\particle\meteor.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit177]
+FileName=src\ia\iafuncs.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit178]
+FileName=src\ia\iafuncs.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit179]
+FileName=src\ia\iascript.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit180]
+FileName=src\ia\iascript.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit181]
+FileName=src\ia\iastack.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit182]
+FileName=src\ia\iastack.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit183]
 FileName=src\ia\iavariable.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1927,7 +1867,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit189]
+[Unit184]
 FileName=src\ia\iavariable.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1937,7 +1877,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit190]
+[Unit185]
 FileName=src\etc\extensions.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1947,7 +1887,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit191]
+[Unit186]
 FileName=src\etc\extensions.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1957,7 +1897,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit192]
+[Unit187]
 FileName=src\particle\partlist.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1967,7 +1907,17 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit193]
+[Unit169]
+FileName=src\engine\dialog.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit188]
 FileName=src\particle\partlist.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1977,7 +1927,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit194]
+[Unit189]
 FileName=src\classes\mission.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1987,7 +1937,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit195]
+[Unit190]
 FileName=src\classes\mission.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -1997,7 +1947,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit196]
+[Unit191]
 FileName=src\etc\message3d.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -2007,7 +1957,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit197]
+[Unit192]
 FileName=src\etc\message3d.cpp
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -2017,7 +1967,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit198]
+[Unit193]
 FileName=src\config_win.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -2027,7 +1977,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit199]
+[Unit194]
 FileName=src\lang\translate.h
 CompileCpp=1
 Folder=DccNiTghtmare
@@ -2037,8 +1987,228 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit200]
+[Unit195]
 FileName=src\lang\translate.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit196]
+FileName=src\gui\filesel.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit197]
+FileName=src\gui\filesel.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit198]
+FileName=src\etc\overlaps.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit199]
+FileName=src\etc\userinfo.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit200]
+FileName=src\etc\userinfo.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit201]
+FileName=src\etc\dirs.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit202]
+FileName=src\etc\dirs.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit203]
+FileName=src\etc\overlaps.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit204]
+FileName=src\particle\partcontroller.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit205]
+FileName=src\particle\partcontroller.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit206]
+FileName=src\particle\wind.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit207]
+FileName=src\particle\wind.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit208]
+FileName=src\engine\itemwindow.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit209]
+FileName=src\engine\charwindow.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit210]
+FileName=src\engine\charwindow.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit211]
+FileName=src\engine\itemwindow.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit212]
+FileName=src\gui\dntfont.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit213]
+FileName=src\gui\dntfont.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit214]
+FileName=src\particle\lake.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit215]
+FileName=src\particle\lake.h
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit216]
+FileName=src\classes\xp.cpp
+CompileCpp=1
+Folder=DccNiTghtmare
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit217]
+FileName=src\classes\xp.h
 CompileCpp=1
 Folder=DccNiTghtmare
 Compile=1
