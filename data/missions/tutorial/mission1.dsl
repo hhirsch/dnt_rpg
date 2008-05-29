@@ -26,10 +26,12 @@ script()
          # Have the cartridge, set logan talk to get it!
          dialog = 7
          dialogSetInitial(logan, mapa, dialog)
-      else if(dialog != 6)
-         # Have't the cartridge, set the logan talk to wait.
-         dialog = 6
-         dialogSetInitial(logan, mapa, dialog)
+      else 
+         if(dialog != 6)
+            # Have't the cartridge, set the logan talk to wait.
+            dialog = 6
+            dialogSetInitial(logan, mapa, dialog)
+         end   
       end
 
    end
