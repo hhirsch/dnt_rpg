@@ -56,8 +56,8 @@ sound::sound()
 void sound::init()
 {
    // Initialize Open AL
-   device = alcOpenDevice(NULL); 
    enabled = false;
+   device = alcOpenDevice(NULL); 
    
    if (device != NULL) 
    {
@@ -172,6 +172,7 @@ bool sound::loadMusic(string fileName)
    }
    
    lock();
+   
    if(backMusic)
    {
       /* Delete Active Music, if one is */
@@ -198,6 +199,7 @@ bool sound::loadMusic(string fileName)
    backMusic->defineAsMusic();
 
    unLock();
+   
    return(true);
 }
 

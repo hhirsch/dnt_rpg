@@ -17,11 +17,19 @@ void ogg_stream::open(string path)
                dir.getRealFile(path).c_str());
        return;
    }
+   
+   #ifdef _MSC_VER
+      result = ov_open_callbacks(oggFile, &oggStream, 
+                                 NULL, 0, OV_CALLBACKS_DEFAULT);
+   #else
+      result = ov_open(oggFile, &oggStream, NULL, 0);
+   #endif
  
-   if((result = ov_open(oggFile, &oggStream, NULL, 0)) < 0)
+   if(result < 0)
    {
        fclose(oggFile);
        printf("Could not open Ogg stream: %s\n", errorString(result).c_str());
+       return;
    }
 
    vorbisInfo = ov_info(&oggStream, -1);
@@ -42,7 +50,6 @@ void ogg_stream::open(string path)
    check();
    alGenSources(1, &source);
    check();
-
 }
 
 /*************************************************************************
