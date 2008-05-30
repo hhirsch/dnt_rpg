@@ -90,7 +90,8 @@ bool options::load()
 
       #ifndef _MSC_VER
          fileName = info.getUserHome() + "options.cfg";
-         printf(gettext("Creating Directory: %s : "), info.getUserHome().c_str());
+         printf(gettext("Creating Directory: %s : "), 
+                info.getUserHome().c_str());
          /* Create the User directory */
          mkdir(info.getUserHome().c_str(),0755);
          printf("%s\n", strerror(errno));
@@ -354,15 +355,17 @@ void options::setLanguage()
    if(!saux.empty())
    {
       /* Change language.  */
-	  #ifdef _MSC_VER
-	     SetEnvironmentVariable( "LANGUAGE", saux.c_str() );
+      #ifdef _MSC_VER
+         SetEnvironmentVariable("LANGUAGE", saux.c_str());
+         SetEnvironmentVariable("LANG", saux.c_str());
+         //putenv("LANG=pt_BR");
       #else
-         setenv ("LANGUAGE", saux.c_str(), 1);
-		 /* Make change known.  */
-		 {
+         setenv("LANGUAGE", saux.c_str(), 1);
+         /* Make change known.  */
+         {
             extern int  _nl_msg_cat_cntr;
             ++_nl_msg_cat_cntr;
-		 }
+         }
       #endif
    }
 }
