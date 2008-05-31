@@ -264,13 +264,13 @@ void camera::lookAt(Map* acMap)
                Z[3] = bounding.z1;
                /* TODO +Yobjects */
                rotTransBoundingBox(sobj->orientation, X, Z, 
-                                   sobj->x, bounding.y1,
-                                   bounding.y2, sobj->z, min2, max2);
+                                   sobj->x, bounding.y1 + sobj->y,
+                                   bounding.y2 + sobj->y, sobj->z, min2, max2);
                if(intercepts(min,max,min2,max2))
                {
                   if(bounding.y2 > sumY)
                   {
-                     sumY = bounding.y2;
+                     sumY = bounding.y2 + sobj->y;
                   }
                }
             }
