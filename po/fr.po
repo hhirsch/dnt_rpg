@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-05-28 12:38-0300\n"
+"POT-Creation-Date: 2008-05-29 20:21-0300\n"
 "PO-Revision-Date: 2007-11-29 15:32+0000\n"
 "Last-Translator: MATHIEU Yves <EMAIL@ADDRESS>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -570,7 +570,7 @@ msgstr ""
 msgid "Dialog"
 msgstr "Dialogue"
 
-#: src/engine/dialog.cpp:645 src/ia/iascript.cpp:863
+#: src/engine/dialog.cpp:645 src/ia/iascript.cpp:866
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Mission complété : %d XP !"
