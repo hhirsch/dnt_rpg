@@ -576,6 +576,22 @@ void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    int x1, z1;
    texture* tex;
 
+   /* Draw a big plane bellow to make easy mouse-world map */
+   glColor4f(0.0, 0.0, 0.0, 1.0);
+   glPushMatrix();
+      glDisable(GL_LIGHTING);
+      glDisable(GL_FOG);
+      glBegin(GL_QUADS);
+         glVertex3f(-100, -5, -100);
+         glVertex3f(-100, -5, getSizeZ()*squareSize()+100);
+         glVertex3f(getSizeX()*squareSize()+100, -5,
+                    getSizeZ()*squareSize()+100);
+         glVertex3f(getSizeX()*squareSize()+100, -5, -100);
+      glEnd();
+      glEnable(GL_FOG);
+      glEnable(GL_LIGHTING);
+   glPopMatrix();
+
    glColor4f(1.0, 1.0, 1.0, 0.9);
 
    /* For Reflexions */

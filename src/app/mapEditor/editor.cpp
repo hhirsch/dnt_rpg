@@ -678,22 +678,6 @@ void editor::draw()
       /* Render All Static Scenery Objects */
       renderSceneryObjects();
 
-      if(!map->isOutdoor())
-      {
-         glPushMatrix();
-            glDisable(GL_LIGHTING);
-            glBegin(GL_QUADS);
-            glVertex3f(-10, -5, -10);
-            glVertex3f(-10, -5, map->getSizeZ()*map->squareSize()+10);
-            glVertex3f(map->getSizeX()*map->squareSize()+10, -5,
-                       map->getSizeZ()*map->squareSize()+10);
-            glVertex3f(map->getSizeX()*map->squareSize()+10, -5, -10);
-            glEnd();
-            glEnable(GL_LIGHTING);
-         glPopMatrix();
-      }
-
-
       glPushMatrix();   
          if(gui->getState() == GUI_IO_STATE_TERRAIN)
          {
