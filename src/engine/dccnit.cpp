@@ -352,6 +352,12 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
      models->removeUnusedModels();
    }
 
+   /* Remove all NPCS  */
+   if(NPCs)
+   {
+     delete(NPCs);
+   }
+
    /* Remove All Pending Actions */
    actionControl->removeAllActions();
 
@@ -402,8 +408,6 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    }
 
    /* Loading NPCs */
-   if(NPCs)
-     delete(NPCs);
    NPCs = NULL;
    character* per;
    if(!actualMap->getNpcFileName().empty())
