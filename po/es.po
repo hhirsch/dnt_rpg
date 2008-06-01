@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-05-29 20:21-0300\n"
+"POT-Creation-Date: 2008-06-01 08:23-0300\n"
 "PO-Revision-Date: 2007-09-14 17:53-0300\n"
 "Last-Translator: DNTeam <dnt@dnteam.org>\n"
 "Language-Team: DNTeam <dnt@dnteam.org>\n"
@@ -83,14 +83,14 @@ msgstr "Alineamiento"
 
 #: src/engine/alignwindow.cpp:58 src/engine/aspectwindow.cpp:72
 #: src/engine/attwindow.cpp:222 src/engine/classwindow.cpp:110
-#: src/engine/options.cpp:646 src/engine/racewindow.cpp:105
+#: src/engine/options.cpp:649 src/engine/racewindow.cpp:105
 #: src/engine/skillwindow.cpp:120
 msgid "Confirm"
 msgstr "Aceptar"
 
 #: src/engine/alignwindow.cpp:62 src/engine/aspectwindow.cpp:76
 #: src/engine/attwindow.cpp:226 src/engine/barterwindow.cpp:37
-#: src/engine/classwindow.cpp:114 src/engine/options.cpp:650
+#: src/engine/classwindow.cpp:114 src/engine/options.cpp:653
 #: src/engine/racewindow.cpp:109 src/engine/skillwindow.cpp:124
 msgid "Cancel"
 msgstr "Cancelar"
@@ -166,7 +166,7 @@ msgstr "Carisma"
 msgid "Attribute Description"
 msgstr "Descripción de la Característica"
 
-#: src/engine/attwindow.cpp:513 src/engine/options.cpp:821
+#: src/engine/attwindow.cpp:513 src/engine/options.cpp:824
 msgid "Warning"
 msgstr "Aviso"
 
@@ -580,7 +580,7 @@ msgstr "Nuevo"
 msgid "Continue"
 msgstr "Volver"
 
-#: src/engine/initial.cpp:67 src/engine/options.cpp:484
+#: src/engine/initial.cpp:67 src/engine/options.cpp:487
 msgid "Options"
 msgstr "Opciones"
 
@@ -690,95 +690,95 @@ msgstr ""
 msgid "Creating Directory: %s : "
 msgstr ""
 
-#: src/engine/options.cpp:99
+#: src/engine/options.cpp:100
 #, c-format
 msgid "Creating Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:189
+#: src/engine/options.cpp:190
 #, c-format
 msgid "Unknow option: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:217
+#: src/engine/options.cpp:218
 #, c-format
 msgid "Error while writing Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:380 data/weapons/types/munitions.dcl:2
+#: src/engine/options.cpp:383 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Nada"
 
-#: src/engine/options.cpp:385
+#: src/engine/options.cpp:388
 msgid "Characters"
 msgstr "Personajes"
 
-#: src/engine/options.cpp:390
+#: src/engine/options.cpp:393
 msgid "All"
 msgstr "Todos"
 
-#: src/engine/options.cpp:406 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:409 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Normal"
 
-#: src/engine/options.cpp:409
+#: src/engine/options.cpp:412
 msgid "Pursue"
 msgstr "Perseguir"
 
-#: src/engine/options.cpp:424
+#: src/engine/options.cpp:427
 msgid "Disabled"
 msgstr ""
 
-#: src/engine/options.cpp:427
+#: src/engine/options.cpp:430
 msgid "2x"
 msgstr ""
 
-#: src/engine/options.cpp:430
+#: src/engine/options.cpp:433
 msgid "4x"
 msgstr ""
 
-#: src/engine/options.cpp:490
+#: src/engine/options.cpp:493
 msgid "Music Volume:"
 msgstr "Volumen de Música:"
 
-#: src/engine/options.cpp:509
+#: src/engine/options.cpp:512
 msgid "Effects Volume:"
 msgstr "Volumen de Efectos:"
 
-#: src/engine/options.cpp:528
+#: src/engine/options.cpp:531
 msgid "Language:"
 msgstr "Lengua"
 
-#: src/engine/options.cpp:546
+#: src/engine/options.cpp:549
 msgid "Camera Mode:"
 msgstr "Modo de la Cámara:"
 
-#: src/engine/options.cpp:563
+#: src/engine/options.cpp:566
 msgid "Enable Grass Effects (need particles)"
 msgstr "Permitir la Hierba"
 
-#: src/engine/options.cpp:572
+#: src/engine/options.cpp:575
 msgid "Enable Particles Effects"
 msgstr "Permitir las Partículas"
 
-#: src/engine/options.cpp:583
+#: src/engine/options.cpp:586
 msgid "Reflections:"
 msgstr "Reflejos:"
 
-#: src/engine/options.cpp:602
+#: src/engine/options.cpp:605
 msgid "Screen Resolution:"
 msgstr ""
 
-#: src/engine/options.cpp:618
+#: src/engine/options.cpp:621
 msgid "Enable FullScreen"
 msgstr ""
 
-#: src/engine/options.cpp:629
+#: src/engine/options.cpp:632
 msgid "Anti-Aliasing:"
 msgstr ""
 
-#: src/engine/options.cpp:822
+#: src/engine/options.cpp:825
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
