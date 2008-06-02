@@ -207,8 +207,11 @@ class modState
        * usually when you return to the map and want it to appears exactly 
        * like when you left it). 
        * \param actualMap -> pointer to actual opened map
-       * \param NPCs -> current NPCs list */
-      void doMapModifications(Map* actualMap, void* NPCs);
+       * \param NPCs -> current NPCs list
+       * \param mdlList -> current model list
+       * \param wTypes -> current weapon types */
+      void doMapModifications(Map* actualMap, void* NPCs, modelList& mdlList, 
+                              weaponTypes& wTypes);
 
       /*! Clear All the modifications states (usually called after death) */
       void clear();

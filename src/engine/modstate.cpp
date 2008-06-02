@@ -461,7 +461,8 @@ bool modState::removeInverseObjectAction(int action, string target,
  *                    doMapModifications                    *
  ************************************************************/
 void modState::doMapModifications(Map* actualMap, 
-                                  void* NPCs)
+                                  void* NPCs, modelList& mdlList, 
+                                  weaponTypes& wTypes)
 {
    int i;
    characterList* npcs = (characterList*) NPCs;
@@ -481,16 +482,16 @@ void modState::doMapModifications(Map* actualMap,
          else if(tmpMobj->getAction() == MODSTATE_ACTION_OBJECT_ADD)
          {
             object* obj = actualMap->getObject(tmpMobj->getTarget());
-            if(obj != NULL)
+            if(obj == NULL)
             {
-               actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
-                                       0, obj, 0);
+               /* Load it to the map */
+               obj = actualMap->insertObject(tmpMobj->getTarget(), mdlList, 
+                                             wTypes);
+
             }
-            else
-            {
-               cerr << "Warn: Unknow object on map with filename: " << 
-                       tmpMobj->getTarget() << endl;
-            }
+            /* Insert the Object  */
+            actualMap->insertObject(x, actualMap->getHeight(x,z), z, 
+                                    0, obj, 0);
          }
          else if(tmpMobj->getAction() == MODSTATE_ACTION_CHARACTER_DEAD)
          {
