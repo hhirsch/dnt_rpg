@@ -436,6 +436,9 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
                          texto, progress,
                          proj, modl, viewPort);
            per = NPCs->insertCharacter(arquivo,features, this, arqMapa);
+           /* Define Initial Position */
+           per->initialXPosition = posX;
+           per->initialZPosition = posZ;
            per->xPosition = posX;
            per->zPosition = posZ;
            per->yPosition = actualMap->getHeight(posX, posZ);

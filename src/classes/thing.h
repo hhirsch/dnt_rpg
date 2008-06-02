@@ -36,10 +36,12 @@ class thing
       int baseAttackModifier; /**< Thing's Base Attack Modifier */
       int sizeModifier;       /**< Thing's Size Modifier */
       int psychoState;        /**< Thing's Psycho State */
-      float orientation;      /**< Character's orientation (angle) */
-      float xPosition;        /**< Character's X Position */
-      float yPosition;        /**< Character's Y Position (UP) */
-      float zPosition;        /**< Character's Z Position */
+      float orientation;      /**< Thing's orientation (angle) */
+      float xPosition;        /**< Thing's X Position */
+      float yPosition;        /**< Thing's Y Position (UP) */
+      float zPosition;        /**< Thing's Z Position */
+      float initialXPosition; /**< Thing's initial X Position */
+      float initialZPosition; /**< Thing's Initial Z Position */
       float bloodPosition;    /**< Blood Z Orign*/
       string bloodFileName;   /**< Blood Particle FileName to use */ 
       int sexType;            /**< Thing's Sex Type */

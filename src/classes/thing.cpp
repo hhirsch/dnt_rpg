@@ -33,6 +33,8 @@ thing::thing()
    xPosition = 0;
    yPosition = 0;
    zPosition = 0;
+   initialXPosition = 0;
+   initialZPosition = 0;
    xp = 0;
    cr = 1;
    xpPercent = 100;
