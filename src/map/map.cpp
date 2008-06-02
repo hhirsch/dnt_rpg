@@ -369,7 +369,7 @@ void Map::removeUnusedTextures()
  ********************************************************************/
 void Map::removeObject(GLfloat xObj, GLfloat zObj, object* obj)
 {
-    removeObject(xObj, zObj, obj->getName());
+    removeObject(xObj, zObj, obj->getFileName());
 }
 
 /********************************************************************
@@ -390,7 +390,7 @@ void Map::removeObject(GLfloat xObj, GLfloat zObj, string fileName)
            next = obj->next;
            if( (obj != NULL) && (obj->x == xObj) && (obj->z == zObj) )
            {
-              if(obj->obj->getName() == fileName)
+              if(obj->obj->getFileName() == fileName)
               {
                  MapSquares[Xaux][Zaux].removeObject(obj);
               }
