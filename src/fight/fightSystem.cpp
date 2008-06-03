@@ -14,6 +14,7 @@ fightSystem::fightSystem(messageController* controller, partController* pSystem)
    pendingAnimation = true;
    msgController = controller;
    particleSystem = pSystem;
+   mapFileName = "";
 }
 
 /***************************************************************
@@ -21,6 +22,14 @@ fightSystem::fightSystem(messageController* controller, partController* pSystem)
  ***************************************************************/
 fightSystem::~fightSystem()
 {
+}
+
+/***************************************************************
+ *                          setMap                             *
+ ***************************************************************/
+void fightSystem::setMap(string fileName)
+{
+   mapFileName = fileName;
 }
 
 /***************************************************************
@@ -152,6 +161,17 @@ void fightSystem::verifyDeads(string& brief)
       sprintf(buf, gettext("%s is dead!"), 
               actualActor->actualEnemy->name.c_str());
       brief += buf;
+
+      /* Add to the modstate the 'dead character' */
+      modState modif;
+      modif.mapCharacterAddAction(MODSTATE_ACTION_CHARACTER_DEAD,
+                                  actualActor->actualEnemy->getCharacterFile(),
+                                  mapFileName, 
+                                  actualActor->actualEnemy->xPosition,
+                                  actualActor->actualEnemy->zPosition,
+                                  actualActor->actualEnemy->orientation,
+                                  actualActor->actualEnemy->initialXPosition,
+                                  actualActor->actualEnemy->initialZPosition);
 
       if(isPC(actualActor))
       {

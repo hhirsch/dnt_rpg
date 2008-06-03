@@ -552,6 +552,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    particleController->setActualMap(actualMap, &colisionDetect);
    colisionDetect.defineMap(actualMap, NPCs, PCs);
    actionControl->setCharacterLists(NPCs, PCs);
+   fight->setMap(actualMap->getFileName());
 
    /* Done */
    showLoading(img,&texturaTexto,texturaCarga,

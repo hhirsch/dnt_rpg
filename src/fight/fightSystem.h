@@ -118,6 +118,10 @@ class fightSystem
      ***************************************************************/
      character* getNearestEnemy(character* pers);
 
+     /*! Set the current openned map file name
+      * \param fileName -> current openned map filename */
+     void setMap(string fileName);
+
    private:
      fightGroup npcGroups[FIGHT_MAX_NPC_GROUPS];  /**< PCs groups */
      fightGroup pcGroups[FIGHT_MAX_PC_GROUPS];   /**< NPCs groups */
@@ -127,6 +131,7 @@ class fightSystem
      bool pendingAnimation;     /**< If some animation is pending */
      messageController* msgController; /**< World message control */
      partController* particleSystem; /**< The particle system control */
+     string mapFileName;        /**< Current Openned Map filename */
    
      /*!
      *************************************************************** 
