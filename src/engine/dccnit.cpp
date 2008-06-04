@@ -1672,6 +1672,9 @@ int engine::verifyMouseActions(Uint8 mButton)
    /* Update to culling and to GUI */
    updateFrustum(visibleMatrix,proj,modl);
 
+   glGetDoublev(GL_MODELVIEW_MATRIX, modl);
+   glGetDoublev(GL_PROJECTION_MATRIX, proj);
+
    /* Define Mouse OpenGL Window Coordinate */
    wx = mouseX; wy = SCREEN_Y - mouseY; 
    
