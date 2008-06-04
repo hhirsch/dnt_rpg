@@ -45,6 +45,8 @@ DATADIRECTORIES = alignment/ \
 						models/building/house2/ \
 						models/building/house3/ \
 						models/building/house4/ \
+						models/building/house5/ \
+						models/building/house6/ \
 						models/natural/ \
 						models/natural/arvores/ \
 						models/natural/matos/ \
