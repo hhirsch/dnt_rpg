@@ -356,9 +356,7 @@ void options::setLanguage()
    {
       /* Change language.  */
       #ifdef _MSC_VER
-         SetEnvironmentVariable("LANGUAGE", saux.c_str());
-         SetEnvironmentVariable("LANG", saux.c_str());
-         //putenv("LANG=pt_BR");
+         putenv((string("LANG=" + saux)).c_str());
       #else
          setenv("LANGUAGE", saux.c_str(), 1);
          /* Make change known.  */
