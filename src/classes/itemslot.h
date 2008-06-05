@@ -64,8 +64,9 @@ class itemSlot
       object* getFirstItem(int& x, int& y);
 
       /*! Remove All references to the object from the itemSlot
-       * \param obj -> pointer to object to remove */
-      void removeObject(object* obj);
+       * \param obj -> pointer to object to remove
+       * \return -> true if can remove (object existed there) */
+      bool removeObject(object* obj);
       /*! Remove Object from the itemSlot position x,y
        * \param x -> x itemSlot position
        * \param y -> y itemSlot position */

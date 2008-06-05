@@ -418,6 +418,12 @@ int conversation::loadFile(string name)
                         tact->qty =  atoi(token.c_str());
                      }
                   }
+                  else if( (tact->id == TALK_ACTION_GIVE_ITEM) )
+                  {
+                     //get item name
+                     token = getString(position, buffer, separator);
+                     tact->satt = token;
+                  }
                }
                else
                {
@@ -652,7 +658,24 @@ void conversation::proccessAction(int numDialog, int opcao)
          }
          break;
          case TALK_ACTION_GIVE_ITEM:
-            //TODO
+         {
+            /* Search for the item at actor's inventory */
+            object* obj = actualPC->inventories->getItemByFileName(
+                                          dlg->options[opcao].ifAction[i].satt);
+            if(obj)
+            {
+               /* Remove it from there */
+               actualPC->inventories->removeFromInventory(obj);
+
+               /* Add it to the Owner NPC inventory */
+               //TODO (a modState to have item put at NPC inventory)
+            }
+            else
+            {
+               cerr << "Error: No object to give at character inventory!" 
+                    << endl;
+            }
+         }
          break;
          case TALK_ACTION_RECEIVE_MONEY:
             //TODO

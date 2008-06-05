@@ -177,9 +177,12 @@ void inventory::removeFromPlace(int where)
 void inventory::removeFromInventory(object* obj)
 {
    int i;
-   for(i=0; i<INVENTORY_PER_CHARACTER; i++)
+   bool removed = false;
+
+   /* Remove the first object equal to this one */
+   for(i=0; ((i < INVENTORY_PER_CHARACTER) && (!removed)); i++)
    {
-      slots[i]->removeObject(obj);
+      removed = slots[i]->removeObject(obj);
    }
 }
 

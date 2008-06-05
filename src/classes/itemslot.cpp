@@ -167,33 +167,32 @@ object* itemSlot::getFromPosition(int x, int y)
 /**************************************************************
  *                         removeObject                       *
  **************************************************************/
-void itemSlot::removeObject(object* obj)
+bool itemSlot::removeObject(object* obj)
 {
    int x,y;
    
    if(obj == NULL)
    {
-      return;
+      return(true);
    }
-   
+  
+   /* Search for the object */
    for(x=0; x < sizeX; x++)
    {
       for(y=0; y < sizeY; y++)
       {
+         /* Found it */
          if(spaces[x][y].obj == obj)
          {
-            if( (spaces[x][y].origX == x) && 
-                (spaces[x][y].origY == y))
-            {
-               // Free use of the Object
-               spaces[x][y].obj->decUsedFlag();
-            }
-            spaces[x][y].obj = NULL;
-            spaces[x][y].origX = x;
-            spaces[x][y].origY = y;
+            /* Remove only it from the inventory */
+            removeObject(spaces[x][y].origX, spaces[x][y].origY);
+            return(true);
          }
       }
    }
+
+   /* Not Found */
+   return(false);
 }
 
 /**************************************************************
