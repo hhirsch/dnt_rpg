@@ -106,6 +106,11 @@ class textBox: public guiObject
        * \param line -> line number (from 0 to totalLines) */
       void setFirstLine(int line);
 
+      /*! Set the last displayed line of the textbox, showing as many lines
+       * as possible
+       * \param line -> number of the line to be the last one */
+      void setLastLine(int line);
+
       /*! Get the current first displayed line on the textBox
        * \return -> first displayed line */
       int getFirstLine();

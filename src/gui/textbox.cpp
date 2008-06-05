@@ -254,6 +254,29 @@ void textBox::setFirstLine(int line)
    firstLine = line;
 }
 
+/*******************************************************
+ *                      setFirstLine                   *
+ *******************************************************/
+void textBox::setLastLine(int line)
+{
+   int cur = line;
+   
+   /* Find the lesser first line that the last one is
+    * still the desired. */
+   setFirstLine(line);
+   while( (lastDrawableLine() >= line) && (cur > 0) )
+   {
+      setFirstLine(cur);
+      cur--;
+   }
+
+   if(cur < line) //to avoid can't write the last!
+   {
+      /* So, it's the previous one  */
+      cur--;
+      setFirstLine(cur);
+   }
+}
 
 /*******************************************************
  *                        setFont                      *
