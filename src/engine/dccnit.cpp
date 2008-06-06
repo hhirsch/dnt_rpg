@@ -1308,7 +1308,8 @@ void engine::enterBattleMode(bool surprisePC)
    }
    if( (shortCutsWindow != NULL) && (!brief.empty()))
    {
-      briefTxt->setText(brief);
+      briefTxt->setText("");
+      briefTxt->addText(brief);
    }
 }
 
@@ -3513,7 +3514,7 @@ int engine::run(SDL_Surface *surface)
            engineMode = ENGINE_MODE_REAL_TIME;
            if(shortCutsWindow)
            {
-              briefTxt->setText( gettext("|Exit Battle Mode"));
+              briefTxt->addText( gettext("|Exit Battle Mode"));
            }
            /* Verify if any PC is alive. */
            character* pers = (character*) PCs->first->next;
@@ -3540,7 +3541,7 @@ int engine::run(SDL_Surface *surface)
            fightStatus = fight->doBattleCicle(brief);
            if( (shortCutsWindow) && (!brief.empty()))
            {
-              briefTxt->setText(brief);
+              briefTxt->addText(brief);
            }
            updateAllHealthBars();
 
