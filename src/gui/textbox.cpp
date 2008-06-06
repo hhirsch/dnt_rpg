@@ -147,7 +147,7 @@ int textBox::lastDrawableLine()
    
    int y = y1+2;
    /* Draw the text lines */
-   for(i = firstLine; ( (y+height) < y2) ; i++)
+   for(i = firstLine; ( ( (y+height) < y2) && (i < totalLines) ) ; i++)
    {
       lastLine = i;
       if( i < totalLines)
@@ -155,10 +155,6 @@ int textBox::lastDrawableLine()
          y += line->height;
          height = line->height;
          line = line->next;
-      }
-      else
-      {
-         y+= height;
       }
    }
    return(lastLine);
@@ -255,7 +251,7 @@ void textBox::setFirstLine(int line)
 }
 
 /*******************************************************
- *                      setFirstLine                   *
+ *                      setLastLine                   *
  *******************************************************/
 void textBox::setLastLine(int line)
 {
@@ -266,14 +262,14 @@ void textBox::setLastLine(int line)
    setFirstLine(line);
    while( (lastDrawableLine() >= line) && (cur > 0) )
    {
-      setFirstLine(cur);
       cur--;
+      setFirstLine(cur);
    }
 
-   if(cur < line) //to avoid can't write the last!
+   if( (cur > 0) && (cur < line)) //to avoid can't write the last!
    {
       /* So, it's the previous one  */
-      cur--;
+      cur++;
       setFirstLine(cur);
    }
 }

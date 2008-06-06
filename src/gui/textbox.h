@@ -98,8 +98,7 @@ class textBox: public guiObject
       void setText(string txt);
 
       /*! Get the number of the last drawable line
-       * \return -> number of the potentially last drawable line
-       * \note -> potentially, since it may not really exists. */
+       * \return -> number of the last drawable line */
       int lastDrawableLine();
 
       /*! Set the first displayed line of the textBox
