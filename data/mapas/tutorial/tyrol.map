@@ -766,7 +766,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
-uc 2675.547363,3606.817383,2724.055176,3659.983154:mapas/tutorial/house1.map
+uc 2675.547363,3606.817383,2724.055176,3659.983154:0.0:mapas/tutorial/house1.map
 uo models/objetos/geral/barrel/barrel.dcc 1:11,15:2661.061768,0.000000,3674.812012:-3:0
 uo models/building/house5/house5.dcc 1:11,15:2771.966064,0.000000,3730.547852:-3:0
 uo models/street/lightpole/lightpole.dcc 1:11,15:2650.590820,0.000000,3777.164062:0:0
@@ -819,12 +819,12 @@ ut texturas/floor_outdoor/grass.png
 uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
-uc 2279.709229,3948.469238,2322.955322,3984.088867:mapas/tutorial/school_1.map
+uc 2279.709229,3948.469238,2322.955322,3984.088867:0.0:mapas/tutorial/school_1.map
 uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:0
 uo models/street/hydrant/hydrant.dcc 1:9,16:2193.512451,0.000000,3859.427734:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
-uc 2279.709229,3948.469238,2322.955322,3984.088867:mapas/tutorial/school_1.map
+uc 2279.709229,3948.469238,2322.955322,3984.088867:0.0:mapas/tutorial/school_1.map
 uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:0
 uo models/street/lightpole/lightpole.dcc 1:10,16:2495.253174,0.000000,3929.457031:0:0
 uo models/street/lightpole/lightpole.dcc 1:10,16:2369.581055,0.000000,3929.022461:0:0

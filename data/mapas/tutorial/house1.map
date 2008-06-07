@@ -103,12 +103,12 @@ uo models/objetos/geral/tv42/tv42.dcc 1:3,1:190.477097,8.599997,18.081791:-180:0
 uo models/objetos/geral/meuble/meuble.dcc 1:3,1:190.503998,0.000000,17.168974:-180:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uc 252.923920,1.635967,273.325958,18.706526:mapas/tutorial/tyrol.map
+uc 252.923920,1.635967,273.325958,18.706526:180.0:mapas/tutorial/tyrol.map
 uo models/objetos/geral/tv42/tv42.dcc 0:3,1:190.477097,8.599997,18.081791:-180:0
 uo models/objetos/geral/meuble/meuble.dcc 0:3,1:190.503998,0.000000,17.168974:-180:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
-uc 252.923920,1.635967,273.325958,18.706526:mapas/tutorial/tyrol.map
+uc 252.923920,1.635967,273.325958,18.706526:180.0:mapas/tutorial/tyrol.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/burl.png
 #Z: 1

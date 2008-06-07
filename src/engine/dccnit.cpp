@@ -521,13 +521,13 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    }
    
 
-   /* Put Active Party on Init Position */
+   /* Put Active Party at initial Position */
    character* activeCharacter = PCs->getActiveCharacter();
    actualMap->getInitialPosition(activeCharacter->xPosition,
-                                 activeCharacter->zPosition);
+                                 activeCharacter->zPosition,
+                                 activeCharacter->orientation);
    activeCharacter->yPosition=actualMap->getHeight(activeCharacter->xPosition,
                                                    activeCharacter->zPosition);
-   activeCharacter->orientation = 0.0;
    gameCamera.updateCamera(activeCharacter->xPosition,
                            activeCharacter->yPosition,
                            activeCharacter->zPosition,

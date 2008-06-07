@@ -42,6 +42,7 @@ class conection
    public:
       bool active;          /**< Active Conection */
       GLfloat x1,z1,x2,z2;  /**< Map Position */
+      GLfloat angle;        /**< Connection Angle */
       string mapName;       /**< Map filename */ 
 };
 
@@ -446,8 +447,9 @@ class Map
        * get Initial Position
        * \param iX -> initial X position
        * \param iZ -> initial Z position
+       * \param iAngle -> initial angle
        ***************************************************************/
-      void getInitialPosition(float& iX, float& iZ);
+      void getInitialPosition(float& iX, float& iZ, float& iAngle);
       void setInitialPosition(GLfloat iX, GLfloat iZ);
 
       /*!
@@ -632,6 +634,7 @@ class Map
          string npcFileName;   /**< Static NPC's on map filename */
          float xInic,            /**< X coordinate where PCs starts */
                zInic;            /**< Z Coordinate where PCs starts */
+         float angleInic;        /**< Angle for PC at initial position */
 
          float* vertexBuffer;
          float* uvBuffer;

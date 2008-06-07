@@ -29,6 +29,7 @@ Square::Square()
    h1 = h2 = h3 = h4 = 0;
    mapConection.active = false;
    mapConection.mapName = "Nothing";
+   mapConection.angle = 0.0;
    divisions = 1;
    int aux;
    for(aux=0; aux < MAX_WALLS; aux++)
@@ -1334,10 +1335,11 @@ void Map::setSizeZ(int sizeZ)
 /********************************************************************
  *                        getInitialPosition                        *
  ********************************************************************/
-void Map::getInitialPosition(float& iX, float& iZ)
+void Map::getInitialPosition(float& iX, float& iZ, float& iAngle)
 {
    iX = xInic;
    iZ = zInic;
+   iAngle = angleInic;
 }
 
 /********************************************************************
@@ -1606,6 +1608,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             if(xInic == -1)
             {
                sscanf(buffer, "%f,%f",&xInic,&zInic);
+               angleInic = 0;
                int posX =(int)floor( xInic / (squareSize()));
                int posZ =(int)floor( zInic / (squareSize()));
                squareInic = relativeSquare(posX,posZ);
@@ -1672,15 +1675,18 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                case 'c': /* define conection on square */
                {
                  fgets(buffer, sizeof(buffer), arq);
-                 sscanf(buffer,"%f,%f,%f,%f:%s",
+                 sscanf(buffer,"%f,%f,%f,%f:%f:%s",
                         &MapSquares[posX][posZ].mapConection.x1,
                         &MapSquares[posX][posZ].mapConection.z1,
                         &MapSquares[posX][posZ].mapConection.x2,
                         &MapSquares[posX][posZ].mapConection.z2,
+                        &MapSquares[posX][posZ].mapConection.angle,
                         nome );
                  MapSquares[posX][posZ].mapConection.mapName = nome;
                  MapSquares[posX][posZ].mapConection.active = true;
 
+                 /* If going from a previous file, the initial position
+                  * may be the connection itself */
                  if(arqVelho == (MapSquares[posX][posZ].mapConection.mapName))
                  {
                      squareInic = &MapSquares[posX][posZ];
@@ -1688,6 +1694,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                               MapSquares[posX][posZ].mapConection.x2) / 2.0;
                      zInic = (MapSquares[posX][posZ].mapConection.z1 + 
                               MapSquares[posX][posZ].mapConection.z2) / 2.0;
+                     angleInic = MapSquares[posX][posZ].mapConection.angle;
                  }
 
                  break;
@@ -2119,11 +2126,12 @@ int Map::save(string arquivo)
                   getTextureName(MapSquares[x1][z1].texture).c_str());
           if( MapSquares[x1][z1].mapConection.active )
           {
-              fprintf(arq,"uc %f,%f,%f,%f:%s\n",
+              fprintf(arq,"uc %f,%f,%f,%f:%f:%s\n",
                       MapSquares[x1][z1].mapConection.x1,
                       MapSquares[x1][z1].mapConection.z1,
                       MapSquares[x1][z1].mapConection.x2,
                       MapSquares[x1][z1].mapConection.z2,
+                      MapSquares[x1][z1].mapConection.angle,
                       MapSquares[x1][z1].mapConection.mapName.c_str());
           }
           int aux;
