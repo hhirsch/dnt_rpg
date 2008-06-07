@@ -121,12 +121,12 @@ dialog(7)
    pc_begin
       option 
          text = gettext("Its all yours...")
-         action = give_item("models/objetos/icex/snes/chrono/chrono.dcc")
+         action = give_item("models/objetos/icex/snes/chrono/snes_chrono.dcc")
          action = complete_mission("missions/tutorial/mission1.dsl", 200, 1)
          action = go_to_dialog(9)
        option
          text = gettext("Its yours, but I want some money!")
-         action = give_item("models/objetos/icex/snes/chrono/chrono.dcc")
+         action = give_item("models/objetos/icex/snes/chrono/snes_chrono.dcc")
          action = receive_money(30);
          action = complete_mission("missions/tutorial/mission1.dsl", 150, 2)
          action = go_to_dialog(8)
