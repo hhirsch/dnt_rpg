@@ -26,13 +26,14 @@ DATADIRECTORIES = alignment/ \
 						classes/Img/ \
 						cursors/ \
 						dialogs/ \
+						dialogs/tutorial/ \
 						feats/ \
 						feats/Img/ \
 						fnt/ \
 						ia/ \
-						ia/scripts/ \
-						ia/scripts/fight/ \
-						ia/scripts/general/ \
+						ia/script/ \
+						ia/script/fight/ \
+						ia/script/general/ \
 						mapas/ \
 						mapas/tutorial/ \
 						mapEditor/ \
@@ -72,6 +73,7 @@ DATADIRECTORIES = alignment/ \
 						models/objetos/banho/ \
 						models/objetos/banho/mictorio/ \
 						models/objetos/banho/privada/ \
+						models/objetos/banho/broom/ \
 						models/objetos/geral/ \
 						models/objetos/geral/barrel/ \
 						models/objetos/geral/cap/ \
@@ -95,6 +97,7 @@ DATADIRECTORIES = alignment/ \
 						models/objetos/geral/porta4/ \
 						models/objetos/geral/porta5/ \
 						models/objetos/geral/refmachine/ \
+						models/objetos/geral/rug/ \
 						models/objetos/geral/sofa/ \
 						models/objetos/geral/tv42/ \
 						models/objetos/geral/wardrobe/ \
@@ -107,6 +110,7 @@ DATADIRECTORIES = alignment/ \
 						models/objetos/icex/nes/ \
 						models/objetos/icex/quadro/ \
 						models/objetos/icex/snes/ \
+						models/objetos/icex/snes/chrono/ \
 						models/objetos/icex/snes/contra/ \
 						models/objetos/icex/snes/dk/ \
 						models/objetos/icex/snes/mario/ \
@@ -133,6 +137,14 @@ DATADIRECTORIES = alignment/ \
 						models/personagens/Ratazana/ \
 						models/personagens/spider/ \
 						models/personagens/toywolf/ \
+						models/street/ \
+						models/street/fountain1/ \
+						models/street/fountain2/ \
+						models/street/hydrant/ \
+						models/street/lightpole/ \
+						models/street/streetlight1/ \
+                  models/street/streetlight2/ \
+						models/street/streetlight3/ \
 						music/ \
 						particles/ \
 						races/ \
