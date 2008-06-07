@@ -1,6 +1,6 @@
 T 6X8
 # Made by DccNiTghtmare's MapEditor, v0.2
-npc ../data/mapas/tutorial/house1.map.npc
+npc mapas/tutorial/house1.map.npc
 MUSICA music/musica12.ogg
 light mapas/tutorial/house1.map.lgh
 Outdoor: 0

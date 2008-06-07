@@ -1,7 +1,7 @@
 name = Quadro Negro
-cal3d = ../data/models/objetos/icex/quadro/model.cfg
+cal3d = models/objetos/icex/quadro/model.cfg
 inventory_sizes = 0 0
-inventory_texture = ../data/texturas/na.png
+inventory_texture = texturas/na.png
 life_points = 250
 fortitude = 8
 reflex = 0
