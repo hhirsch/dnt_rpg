@@ -672,7 +672,9 @@ void conversation::proccessAction(int numDialog, int opcao)
             }
             else
             {
-               cerr << "Error: No object to give at character inventory!" 
+               cerr << "Error: No object '" 
+                    << dlg->options[opcao].ifAction[i].satt 
+                    << "' to give at character inventory!" 
                     << endl;
             }
          }
