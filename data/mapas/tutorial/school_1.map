@@ -123,7 +123,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood.png
-uc 917.737000,-0.449979,939.801453,20.665478:180.0:mapas/tutorial/tyrol.map
+uc 918.737000,0.449979,938.801453,20.665478:180.0:mapas/tutorial/tyrol.map
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood.png
 #Z: 1
