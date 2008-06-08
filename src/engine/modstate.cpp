@@ -554,7 +554,10 @@ void modState::clear()
    /* Free all map objects from list */
    for(i = 0; i < total; i++)
    {
-      removeAction(modActionsList);
+      if(modActionsList)
+      {
+         removeAction(modActionsList);
+      }
    }
    modActionsList = NULL;
    totalModActions = 0;
