@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-06-01 08:23-0300\n"
+"POT-Creation-Date: 2008-06-15 09:30-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
-"Last-Translator: Sergei Zivukov <EMAIL@ADDRESS>\n"
+"Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2007-12-01 19:04+0000\n"
+"X-Launchpad-Export-Date: 2008-06-15 12:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/classes.cpp:105 src/classes/race.cpp:105
@@ -78,7 +78,6 @@ msgstr ""
 #, c-format
 msgid "Error while opening skills list:skills/skills.skl\n"
 msgstr ""
-"Произошла ошибка пока открывается список со скиллами: skills/skills.skl\n"
 
 #: src/engine/alignwindow.cpp:33
 msgid "Tendency & Alignment"
@@ -86,14 +85,14 @@ msgstr "Стремление и Равнение"
 
 #: src/engine/alignwindow.cpp:58 src/engine/aspectwindow.cpp:72
 #: src/engine/attwindow.cpp:222 src/engine/classwindow.cpp:110
-#: src/engine/options.cpp:649 src/engine/racewindow.cpp:105
+#: src/engine/options.cpp:647 src/engine/racewindow.cpp:105
 #: src/engine/skillwindow.cpp:120
 msgid "Confirm"
 msgstr "Подтвердить"
 
 #: src/engine/alignwindow.cpp:62 src/engine/aspectwindow.cpp:76
 #: src/engine/attwindow.cpp:226 src/engine/barterwindow.cpp:37
-#: src/engine/classwindow.cpp:114 src/engine/options.cpp:653
+#: src/engine/classwindow.cpp:114 src/engine/options.cpp:651
 #: src/engine/racewindow.cpp:109 src/engine/skillwindow.cpp:124
 msgid "Cancel"
 msgstr "Отменить"
@@ -169,7 +168,7 @@ msgstr "Харизма"
 msgid "Attribute Description"
 msgstr "Описание атрибута"
 
-#: src/engine/attwindow.cpp:513 src/engine/options.cpp:824
+#: src/engine/attwindow.cpp:513 src/engine/options.cpp:822
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -177,7 +176,7 @@ msgstr "Предупреждение"
 msgid "You Need to Assign All Attributes."
 msgstr ""
 
-#: src/engine/barterwindow.cpp:21 src/engine/dialog.cpp:558
+#: src/engine/barterwindow.cpp:21 src/engine/dialog.cpp:564
 msgid "Barter"
 msgstr ""
 
@@ -300,7 +299,7 @@ msgstr ""
 
 #: src/engine/classwindow.cpp:147
 msgid "Skill Points"
-msgstr "Очки умения"
+msgstr ""
 
 #: src/engine/classwindow.cpp:174
 msgid "First Level"
@@ -312,23 +311,23 @@ msgstr "Другие уровни"
 
 #: src/engine/classwindow.cpp:207
 msgid "Class Modifiers"
-msgstr "Модификаторы класса"
+msgstr ""
 
 #: src/engine/classwindow.cpp:218 src/engine/racewindow.cpp:156
 msgid "No Modifiers."
-msgstr "Нет модификаторов."
+msgstr ""
 
 #: src/engine/classwindow.cpp:225
 msgid "Class Feats"
-msgstr "Подвиги классов"
+msgstr ""
 
 #: src/engine/classwindow.cpp:236 src/engine/racewindow.cpp:174
 msgid "No Feats."
-msgstr "Нет подвигов."
+msgstr ""
 
 #: src/engine/classwindow.cpp:244
 msgid "Class Skills"
-msgstr "Скиллы класса"
+msgstr ""
 
 #: src/engine/classwindow.cpp:263 src/engine/racewindow.cpp:202
 msgid "No Skills."
@@ -344,37 +343,37 @@ msgstr ""
 msgid "Loading Map: %s"
 msgstr "Загрузка карты: %s"
 
-#: src/engine/dccnit.cpp:415
+#: src/engine/dccnit.cpp:419
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Ох, не могу загрузить файл NPC: %s.\n"
 
-#: src/engine/dccnit.cpp:430
+#: src/engine/dccnit.cpp:434
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Загрузка NPC: %s"
 
-#: src/engine/dccnit.cpp:453
+#: src/engine/dccnit.cpp:460
 msgid "Loading Character"
 msgstr "Загрузка характера"
 
-#: src/engine/dccnit.cpp:460
+#: src/engine/dccnit.cpp:467
 msgid "Putting GUI on Screen"
 msgstr "Помещение GUI на экран"
 
-#: src/engine/dccnit.cpp:500
+#: src/engine/dccnit.cpp:507
 msgid "Loading Particles"
 msgstr "Загрузка частиц"
 
-#: src/engine/dccnit.cpp:531
+#: src/engine/dccnit.cpp:538
 msgid "Loading Changes..."
 msgstr "Загрузка изменений..."
 
-#: src/engine/dccnit.cpp:551
+#: src/engine/dccnit.cpp:559
 msgid "Done!"
 msgstr "Готово!"
 
-#: src/engine/dccnit.cpp:641
+#: src/engine/dccnit.cpp:649
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -382,118 +381,118 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1180
+#: src/engine/dccnit.cpp:1188
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1222 src/engine/dccnit.cpp:1299
+#: src/engine/dccnit.cpp:1230 src/engine/dccnit.cpp:1307
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов на арене"
 
-#: src/engine/dccnit.cpp:1281
+#: src/engine/dccnit.cpp:1289
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1498
+#: src/engine/dccnit.cpp:1507
 msgid "Enter Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1502
+#: src/engine/dccnit.cpp:1511
 msgid "Select Normal Attack"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1509
+#: src/engine/dccnit.cpp:1518
 msgid "Open Quests Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1516
+#: src/engine/dccnit.cpp:1525
 msgid "Open Map Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1520
+#: src/engine/dccnit.cpp:1529
 msgid "Map Window already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1528
+#: src/engine/dccnit.cpp:1537
 msgid "End Character's Turn"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1532
+#: src/engine/dccnit.cpp:1541
 msgid "Only Avaible on Battle Mode"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1540
+#: src/engine/dccnit.cpp:1549
 msgid "Open Inventory Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1544
+#: src/engine/dccnit.cpp:1553
 msgid "Inventory already opened!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1551
+#: src/engine/dccnit.cpp:1560
 msgid "Open Assign Attacks Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1556
+#: src/engine/dccnit.cpp:1565
 msgid "View Character Informations"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1562
+#: src/engine/dccnit.cpp:1571
 msgid "Open Group/Party Window"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1630 src/engine/dccnit.cpp:2011
-#: src/engine/dccnit.cpp:3291
+#: src/engine/dccnit.cpp:1639 src/engine/dccnit.cpp:2023
+#: src/engine/dccnit.cpp:3303
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:1735
+#: src/engine/dccnit.cpp:1747
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:1762
+#: src/engine/dccnit.cpp:1774
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1798
+#: src/engine/dccnit.cpp:1810
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:1936 src/fight/fightSystem.cpp:340
+#: src/engine/dccnit.cpp:1948 src/fight/fightSystem.cpp:360
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s атаковал %s|"
 
-#: src/engine/dccnit.cpp:3264
+#: src/engine/dccnit.cpp:3276
 msgid "Map"
 msgstr "Карта"
 
-#: src/engine/dccnit.cpp:3275
+#: src/engine/dccnit.cpp:3287
 msgid "FPS:"
 msgstr "PS:"
 
-#: src/engine/dccnit.cpp:3287
+#: src/engine/dccnit.cpp:3299
 msgid "Shortcuts"
 msgstr "Мелочь"
 
-#: src/engine/dccnit.cpp:3289
+#: src/engine/dccnit.cpp:3301
 msgid "Welcome to DNT!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3294 src/engine/initial.cpp:63
+#: src/engine/dccnit.cpp:3306 src/engine/initial.cpp:63
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/engine/dccnit.cpp:3296
+#: src/engine/dccnit.cpp:3308
 msgid "Menu"
 msgstr "Меню:"
 
-#: src/engine/dccnit.cpp:3299 src/engine/initial.cpp:65
+#: src/engine/dccnit.cpp:3311 src/engine/initial.cpp:65
 msgid "Load"
 msgstr "Загрузка"
 
-#: src/engine/dccnit.cpp:3505
+#: src/engine/dccnit.cpp:3517
 msgid "|Exit Battle Mode"
 msgstr "|Покинуть режим сражения"
 
@@ -529,7 +528,7 @@ msgstr "Попытка PC начать до конца!"
 msgid "Option Text without option!"
 msgstr "Опции текста без опций!"
 
-#: src/engine/dialog.cpp:354 src/engine/dialog.cpp:436
+#: src/engine/dialog.cpp:354 src/engine/dialog.cpp:442
 msgid "Options overflow!"
 msgstr ""
 
@@ -545,32 +544,32 @@ msgstr "Опции без начала PC!"
 msgid "Action isn't yet defined to NPC!"
 msgstr "Действие еще не определено NPC!"
 
-#: src/engine/dialog.cpp:424
+#: src/engine/dialog.cpp:430
 msgid "Actions List overflow!"
 msgstr ""
 
-#: src/engine/dialog.cpp:431
+#: src/engine/dialog.cpp:437
 msgid "Option Action without option!"
 msgstr "Опции действия без опции!"
 
-#: src/engine/dialog.cpp:442
+#: src/engine/dialog.cpp:448
 msgid "Action without any relation!\n"
 msgstr "Действие без какой-либо связи!\n"
 
-#: src/engine/dialog.cpp:448
+#: src/engine/dialog.cpp:454
 msgid "Unknow Token!"
 msgstr "Неизвестный признак!"
 
-#: src/engine/dialog.cpp:512
+#: src/engine/dialog.cpp:518
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr "Не найдено в диалоге: %d\n"
 
-#: src/engine/dialog.cpp:556
+#: src/engine/dialog.cpp:562
 msgid "Dialog"
 msgstr "Диалог"
 
-#: src/engine/dialog.cpp:645 src/ia/iascript.cpp:866
+#: src/engine/dialog.cpp:651 src/ia/iascript.cpp:866
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Миссия завершена: %d XP!"
@@ -583,7 +582,7 @@ msgstr "Новый"
 msgid "Continue"
 msgstr "Продолжить"
 
-#: src/engine/initial.cpp:67 src/engine/options.cpp:487
+#: src/engine/initial.cpp:67 src/engine/options.cpp:485
 msgid "Options"
 msgstr "Настройки"
 
@@ -708,80 +707,80 @@ msgstr ""
 msgid "Error while writing Options: %s\n"
 msgstr "Произошла ошибка пока записывались опции: %s\n"
 
-#: src/engine/options.cpp:383 data/weapons/types/munitions.dcl:2
+#: src/engine/options.cpp:381 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Нет"
 
-#: src/engine/options.cpp:388
+#: src/engine/options.cpp:386
 msgid "Characters"
 msgstr "Характеристики"
 
-#: src/engine/options.cpp:393
+#: src/engine/options.cpp:391
 msgid "All"
 msgstr "Все"
 
-#: src/engine/options.cpp:409 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:407 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Обычный"
 
-#: src/engine/options.cpp:412
+#: src/engine/options.cpp:410
 msgid "Pursue"
 msgstr "Следовать"
 
-#: src/engine/options.cpp:427
+#: src/engine/options.cpp:425
 msgid "Disabled"
 msgstr ""
 
-#: src/engine/options.cpp:430
+#: src/engine/options.cpp:428
 msgid "2x"
 msgstr ""
 
-#: src/engine/options.cpp:433
+#: src/engine/options.cpp:431
 msgid "4x"
 msgstr ""
 
-#: src/engine/options.cpp:493
+#: src/engine/options.cpp:491
 msgid "Music Volume:"
 msgstr "Громкость музыки:"
 
-#: src/engine/options.cpp:512
+#: src/engine/options.cpp:510
 msgid "Effects Volume:"
 msgstr "Громкость эффектов:"
 
-#: src/engine/options.cpp:531
+#: src/engine/options.cpp:529
 msgid "Language:"
 msgstr "Язык:"
 
-#: src/engine/options.cpp:549
+#: src/engine/options.cpp:547
 msgid "Camera Mode:"
 msgstr "Режим камеры:"
 
-#: src/engine/options.cpp:566
+#: src/engine/options.cpp:564
 msgid "Enable Grass Effects (need particles)"
 msgstr "Включить Grass-эффекты (должно быть partcles)"
 
-#: src/engine/options.cpp:575
+#: src/engine/options.cpp:573
 msgid "Enable Particles Effects"
 msgstr "Включить Particles-эффекты"
 
-#: src/engine/options.cpp:586
+#: src/engine/options.cpp:584
 msgid "Reflections:"
 msgstr "Образы:"
 
-#: src/engine/options.cpp:605
+#: src/engine/options.cpp:603
 msgid "Screen Resolution:"
 msgstr ""
 
-#: src/engine/options.cpp:621
+#: src/engine/options.cpp:619
 msgid "Enable FullScreen"
 msgstr ""
 
-#: src/engine/options.cpp:632
+#: src/engine/options.cpp:630
 msgid "Anti-Aliasing:"
 msgstr ""
 
-#: src/engine/options.cpp:825
+#: src/engine/options.cpp:823
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
@@ -799,15 +798,15 @@ msgstr "Характеристики расы"
 
 #: src/engine/racewindow.cpp:145
 msgid "Race Modifiers"
-msgstr "Модификаторы расы"
+msgstr ""
 
 #: src/engine/racewindow.cpp:162
 msgid "Race Feats"
-msgstr "Подвиги расы"
+msgstr ""
 
 #: src/engine/racewindow.cpp:182
 msgid "Race Skills"
-msgstr "Умения расы"
+msgstr ""
 
 #: src/engine/skillwindow.cpp:65
 msgid "Total Free Points:"
@@ -821,25 +820,25 @@ msgstr "Очки:"
 msgid "Cost"
 msgstr "Цена"
 
-#: src/fight/fightSystem.cpp:123
+#: src/fight/fightSystem.cpp:132
 msgid "|No more enemies."
 msgstr "|Нет больше врагов."
 
-#: src/fight/fightSystem.cpp:152
+#: src/fight/fightSystem.cpp:161
 #, c-format
 msgid "%s is dead!"
 msgstr "%s мертв!"
 
-#: src/fight/fightSystem.cpp:184
+#: src/fight/fightSystem.cpp:204
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr "%s принял %d XP для убийства"
 
-#: src/fight/fightSystem.cpp:232 src/fight/fightSystem.cpp:251
+#: src/fight/fightSystem.cpp:252 src/fight/fightSystem.cpp:271
 msgid "New Round|"
 msgstr "Новая дорога|"
 
-#: src/fight/fightSystem.cpp:237 src/fight/fightSystem.cpp:256
+#: src/fight/fightSystem.cpp:257 src/fight/fightSystem.cpp:276
 msgid "Error: No Characters!"
 msgstr "Ошибка: Нет характеристик!"
 
@@ -856,7 +855,7 @@ msgstr "Аргх! Не могу инициализировать SDL!\n"
 #: src/gui/farso.cpp:84
 #, c-format
 msgid "Oxi! Can't ajust video mode: %s!\n"
-msgstr "Окси! Не могу запустить видеорежим %s!\n"
+msgstr ""
 
 #: src/gui/farso.cpp:88
 #, c-format
@@ -873,7 +872,7 @@ msgstr ""
 msgid "Can't init SDL_ttf : %s\n"
 msgstr ""
 
-#: src/gui/dntfont.cpp:91
+#: src/gui/dntfont.cpp:93
 #, c-format
 msgid "Can't open font file: %s\n"
 msgstr ""
@@ -2933,6 +2932,3 @@ msgstr ""
 
 #~ msgid "0.2"
 #~ msgstr "0.2"
-
-#~ msgid "Press F1 for Help"
-#~ msgstr "Нажмите F1 для помощи"
