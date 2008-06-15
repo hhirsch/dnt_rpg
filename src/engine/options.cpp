@@ -18,22 +18,26 @@
 #define NM_PORTUGUESE gettext("Portuguese")
 #define NM_ENGLISH    gettext("English")
 #define NM_FRENCH     gettext("French")
+#define NM_GERMAN     gettext("German")
 #define NM_SPANISH    gettext("Spanish")
 #define NM_RUSSIAN    gettext("Russian")
 
 #define FL_PORTUGUESE "pt_BR"
 #define FL_ENGLISH    "en"
 #define FL_FRENCH     "fr"
+#define FL_GERMAN     "de"
 #define FL_SPANISH    "es"
 #define FL_RUSSIAN    "ru"
 
-#define DNT_LANG_RUSSIAN    4 /**< Russian Language */
+
+#define DNT_LANG_RUSSIAN    5 /**< Russian Language */
+#define DNT_LANG_GERMAN     4 /**< German Language */
 #define DNT_LANG_PORTUGUESE 3 /**< Portuguese Language */
 #define DNT_LANG_SPANISH    2 /**< Spanish Language */
 #define DNT_LANG_FRENCH     1 /**< French Language */
 #define DNT_LANG_ENGLISH    0 /**< English Language */
 
-#define DNT_LANG_LAST  3
+#define DNT_LANG_LAST  4
 #define DNT_LANG_FIRST 0
 
 /****************************************************************
@@ -303,6 +307,11 @@ string options::languageName()
          saux = NM_ENGLISH;
          break;
       }
+      case DNT_LANG_GERMAN:
+      {
+         saux = NM_GERMAN;
+         break;
+      }
    }
    return(saux);
 }
@@ -347,6 +356,11 @@ void options::setLanguage()
       case DNT_LANG_ENGLISH:
       {
          saux = FL_ENGLISH;
+         break;
+      }
+      case DNT_LANG_GERMAN:
+      {
+         saux = FL_GERMAN;
          break;
       }
    }
