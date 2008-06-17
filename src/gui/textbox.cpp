@@ -63,7 +63,6 @@ string textBox::getTextLine(int line)
       textLine* tmp = fullText;
       for(i = 0; i < line; i++)
       {
-         tmp = fullText;
          tmp = tmp->next;
       }
       /* Get the text from line */
