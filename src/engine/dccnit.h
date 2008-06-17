@@ -373,7 +373,6 @@ class engine
 
       textBox* FPS;                /**< Text that shows FPS */
       textBox* objTxt;             /**< Text that shows actual pointed object */
-      rolBar* briefTxt;            /**< Briefing Text */
       textBox* hourTxt;            /**< Text for Hour */
       window* shortCutsWindow;     /**< ShortCuts Window */
       window* miniMapWindow;       /**< MiniMap Window */

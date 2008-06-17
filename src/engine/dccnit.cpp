@@ -1191,7 +1191,7 @@ bool engine::rangeAction(GLfloat posX, GLfloat posZ,
    {
       if(shortCutsWindow != NULL)
       {
-         briefTxt->setText(gettext("Too far away for the action!"));
+         brief->addText(gettext("Too far away for the action!"), 220, 20, 20);
       }
       return(false);
    }
@@ -1220,7 +1220,7 @@ void engine::enterBattleMode(bool surprisePC)
 {
   int numEnemies = 0;
   character* ch;
-  string brief = "";
+  string briefText = "";
   string briefInit = "";
   
   character* activeCharacter = PCs->getActiveCharacter();
@@ -1233,7 +1233,7 @@ void engine::enterBattleMode(bool surprisePC)
   {
      if(shortCutsWindow != NULL)
      {
-        briefTxt->setText(gettext("No NPCs in the area."));
+        brief->addText(gettext("No NPCs in the area."), 220, 20, 20);
      }
      return;
   }
@@ -1244,7 +1244,7 @@ void engine::enterBattleMode(bool surprisePC)
   {
       //TODO put enemies on groups, when enemy from enemy
       fight->insertNPC(ch, 0, briefInit);
-      brief += briefInit + "|";
+      briefText += briefInit + "|";
       numEnemies++;
       /* Set the state to Idle, if the character is alive */
       if(ch->isAlive())
@@ -1273,7 +1273,7 @@ void engine::enterBattleMode(bool surprisePC)
       while(ch != PCs->first)
       {
          fight->insertPC(ch, 0, briefInit);
-         brief += briefInit + "|";
+         briefText += briefInit + "|";
          ch = (character*) ch->next; 
          /* Set the state to Idle */
          ch->callIdleAnimation();
@@ -1292,8 +1292,8 @@ void engine::enterBattleMode(bool surprisePC)
          canMove = true;
          canAttack = true;
          fight->setActualActor(PCs->getActiveCharacter());
-         brief += gettext("Surprise Attack Turn.");
-         brief += "|";
+         briefText += gettext("Surprise Attack Turn.");
+         briefText += "|";
       }
       else
       {
@@ -1310,12 +1310,11 @@ void engine::enterBattleMode(bool surprisePC)
    }
    else
    {
-      brief = gettext("No NPCs in the area.");
+      briefText = gettext("No NPCs in the area.");
    }
-   if( (shortCutsWindow != NULL) && (!brief.empty()))
+   if( (shortCutsWindow != NULL) && (!briefText.empty()))
    {
-      briefTxt->setText("");
-      briefTxt->addText(brief);
+      brief->addText(briefText);
    }
 }
 
@@ -1741,10 +1740,10 @@ int engine::verifyMouseActions(Uint8 mButton)
                    /* Get Object */
                    lastMousePression = time;
 
-                   if(shortCutsWindow)
+                   /*if(shortCutsWindow)
                    {
                      briefTxt->addText("|");
-                   }
+                   }*/
                    if(activeCharacter->inventories->addObject(sobj->obj))
                    {
                       snd->addSoundEffect(sobj->x, sobj->y, sobj->z, 
@@ -1755,7 +1754,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                      
                       if(shortCutsWindow)
                       {
-                        briefTxt->addText(buf);
+                        brief->addText(buf);
                       }
 
                       /* Log State to the modState */
@@ -1777,7 +1776,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                    {
                       if(shortCutsWindow)
                       {
-                         briefTxt->addText(gettext("Inventory is full!")); 
+                         brief->addText(gettext("Inventory is full!"),
+                                        220,20,20); 
                       }
                    }
                 }
@@ -1937,7 +1937,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                if( (engineMode == ENGINE_MODE_TURN_BATTLE) && (canAttack) &&
                    (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
                {
-                  string brief = "";
+                  string briefText = "";
                   cursors->set(CURSOR_ATTACK);
                   if(shortCutsWindow)
                   {
@@ -1954,25 +1954,25 @@ int engine::verifyMouseActions(Uint8 mButton)
                      sprintf(buf, gettext("%s attacks %s|"),
                              activeCharacter->name.c_str(),
                              pers->name.c_str());
-                     brief = buf;
+                     briefText = buf;
                      canAttack = !activeCharacter->actualFeats.
                                                    applyAttackAndBreakFeat(
                                                           *activeCharacter,
                                                           attackFeat, *pers, 
-                                                          brief, 
+                                                          briefText, 
                                                           msgController,
                                                           particleController);
 
                      activeCharacter->actualEnemy = pers;
-                     fight->verifyDeads(brief);
+                     fight->verifyDeads(briefText);
 
                      if( pers->psychoState != PSYCHO_HOSTILE)
                      {
                         pers->psychoState = PSYCHO_HOSTILE;
                      }
-                     if( (shortCutsWindow != NULL) && (!brief.empty()))
+                     if( (shortCutsWindow != NULL) && (!briefText.empty()))
                      {
-                        briefTxt->addText(brief);
+                        brief->addText(briefText);
                      }
 
                   }
@@ -3303,8 +3303,6 @@ void engine::openShortcutsWindow()
 {
    shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,512,SCREEN_Y-1,
                                        gettext("Shortcuts"));
-   briefTxt = shortCutsWindow->getObjectsList()->insertRolBar(8,36,249,101,
-                                  gettext("Welcome to DNT!"));
    objTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,20,249,35,1,
                                                            gettext("Nothing"));
 
@@ -3438,7 +3436,7 @@ fightSystem* engine::getFightSystem()
  *********************************************************************/
 int engine::run(SDL_Surface *surface)
 {
-   string brief;
+   string briefText;
    
    if(!actualMap->getMusicFileName().empty())
    {
@@ -3522,7 +3520,7 @@ int engine::run(SDL_Surface *surface)
            engineMode = ENGINE_MODE_REAL_TIME;
            if(shortCutsWindow)
            {
-              briefTxt->addText( gettext("|Exit Battle Mode"));
+              brief->addText( gettext("|Exit Battle Mode"));
            }
            /* Verify if any PC is alive. */
            character* pers = (character*) PCs->first->next;
@@ -3546,10 +3544,10 @@ int engine::run(SDL_Surface *surface)
         else if( (fightStatus == FIGHT_CONTINUE) ) 
         {
            lastTurnTime = time;
-           fightStatus = fight->doBattleCicle(brief);
-           if( (shortCutsWindow) && (!brief.empty()))
+           fightStatus = fight->doBattleCicle(briefText);
+           if( (shortCutsWindow) && (!briefText.empty()))
            {
-              briefTxt->addText(brief);
+              brief->addText(briefText);
            }
            updateAllHealthBars();
 

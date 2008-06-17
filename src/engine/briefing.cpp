@@ -49,7 +49,11 @@ void briefing::addText(string text)
 {
    if(briefWindow != NULL)
    {
-      briefTxt->addText(text);
+      /* To avoid same last line */
+      if(briefTxt->getLastLine() != text)
+      {
+         briefTxt->addText(text);
+      }
    }
 }
 
@@ -70,7 +74,11 @@ void briefing::addText(string text, string font, int size, int style,
 {
    if(briefWindow != NULL)
    {
-      briefTxt->addText(text, font, size, style, align, R, G, B);
+      /* To avoid same last line */
+      if(briefTxt->getLastLine() != text)
+      {
+         briefTxt->addText(text, font, size, style, align, R, G, B);
+      }
    }
 }
 
