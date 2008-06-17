@@ -12,6 +12,7 @@
 #include <libintl.h>
 #include "../etc/message3d.h"
 #include "../particle/partcontroller.h"
+#include "../engine/briefing.h"
 #include <SDL/SDL.h>
 
 
@@ -44,27 +45,24 @@ class fightSystem
      * Insert Character on PCs List.  
      * \param pers -> Pointer to Character
      * \param group -> PC group Number
-     * \param brief -> briefing string
      * \return true if success.
      ***************************************************************/
-     bool insertPC(character* pers, int group, string& brief);
+     bool insertPC(character* pers, int group);
      /*!
      *************************************************************** 
      * Insert Character on NPCs List.  
      * \param pers -> Pointer to Character
      * \param group -> NPC group Number
-     * \param brief -> briefing string
      * \return true if success.
      ***************************************************************/
-     bool insertNPC(character* pers, int group, string& brief);
+     bool insertNPC(character* pers, int group);
 
      /*!
      *************************************************************** 
      * Do Battle Events. Returns false when battle ends.
-     * \param brief -> briefing to print, lines separed by '|' .
      * \return true if battle continue, false otherwise.
      ***************************************************************/
-     int doBattleCicle(string& brief);
+     int doBattleCicle();
  
      /*!
      *************************************************************** 
@@ -89,9 +87,8 @@ class fightSystem
      /*!
       **************************************************************
       * Verify all Deads that occurs on the turn.
-      * \param brief -> briefing to print
       **************************************************************/
-      void verifyDeads(string& brief);
+      void verifyDeads();
 
     /*!
      ***************************************************************
@@ -105,10 +102,9 @@ class fightSystem
      ***************************************************************
      * Verifies if character has enemies.
      * \param pers -> pointer to character to verify.
-     * \param brief -> briefing to print, lines separed by '|' .
      * \return true if has enemies, false otherwise.
      *************************************************************/
-     bool hasEnemies(character* pers, string& brief);
+     bool hasEnemies(character* pers);
 
      /*!
      *************************************************************** 
@@ -132,21 +128,20 @@ class fightSystem
      messageController* msgController; /**< World message control */
      partController* particleSystem; /**< The particle system control */
      string mapFileName;        /**< Current Openned Map filename */
-   
+     briefing* brief;                           /**< The briefing */
+
      /*!
      *************************************************************** 
      * Do a complete turn on game.  
-     * \param brief -> briefing to print, lines separed by '|' .
      * \return true if battle continue, false otherwise.
      ***************************************************************/
-     int doTurn(string& brief);
+     int doTurn();
      /*!
      *************************************************************** 
      * Do a npc action for character.  
      * \param pers -> Pointer to Character that will act
-     * \param brief -> briefing to print, lines separed by '|' .
      ***************************************************************/
-     void doNPCAction(character* pers, string& brief);
+     void doNPCAction(character* pers);
      /*!
      *************************************************************** 
      * Get the attack feat for NPC to use  

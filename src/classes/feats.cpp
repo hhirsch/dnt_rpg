@@ -113,7 +113,7 @@ void feats::useFeat(int featNumber)
  *                   applyHealOrAttackFeat                     *
  ***************************************************************/
 bool feats::applyHealOrAttackFeat(thing& actor, int featNumber, 
-                                  thing& target, string& brief,
+                                  thing& target, 
                                   messageController* controller,
                                   void* pSystem, bool heal)
 {
@@ -127,10 +127,11 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
    bool criticalMiss = false;
    bool miss = false;
    char texto[1024];
+   briefing brief;
 
    if( (featNumber < 0) || (featNumber >= totalFeats) )
    {
-      brief += gettext("Invalid Feat");
+      brief.addText(gettext("Invalid Feat"), 255, 0, 0);
       return(false);
    }
 
@@ -138,12 +139,12 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
                      target.xPosition, target.zPosition,
                      m_feats[featNumber].range*METER_TO_DNT))
    {
-      brief += gettext("Too far away for action!");
+      brief.addText(gettext("Too far away for action!"), 225, 20, 20);
       return(false);
    }
 
    sprintf(texto,"%s ",m_feats[featNumber].name.c_str());
-   brief += texto;
+   brief.addText(texto);
 
    srand(SDL_GetTicks());
 
@@ -216,8 +217,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       {
          sprintf(texto,"%d(%s) x %d : ",diceValue,txtBonus,targetValue);
       }
-      brief += texto;
-      brief += "|";
+      brief.addText(texto);
 
       //apply bonus (skill bonus)
       diceValue += bonus;
@@ -226,11 +226,10 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
 
       if( (diceValue - targetValue <= 0) || (criticalMiss) || (miss) )
       {
-         brief += gettext("Miss.");
+         brief.addText(gettext("Miss."));
          if( criticalMiss )
          {
-             brief += "|";
-             brief += gettext("Critical Miss!");
+             brief.addText(gettext("Critical Miss!"), 220, 0, 0);
              controller->addMessage(actor.xPosition,
                                     actor.yPosition+actor.max[1],
                                     actor.zPosition,
@@ -297,7 +296,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       {
          sprintf(texto,gettext("Hit for %d points."),damage);
       }
-      brief += texto;
+      brief.addText(texto);
 
       if(heal)
       {
@@ -317,10 +316,9 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
 
       if( criticalHit)
       {
-          brief += "|";
           if(heal)
           {
-             brief += gettext("Critical Heal!");
+             brief.addText(gettext("Critical Heal!"), 12, 10, 128);
              controller->addMessage(actor.xPosition,
                                     actor.yPosition+actor.max[1],
                                     actor.zPosition,gettext("Critical Heal!"),
@@ -328,7 +326,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
           }
           else
           {
-             brief += gettext("Critical Hit!");
+             brief.addText(gettext("Critical Hit!"), 12, 10, 128);
              /* Show critical hit */
              controller->addMessage(actor.xPosition,
                                     actor.yPosition+actor.max[1],
@@ -372,7 +370,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
 
       return(true);
    }
-   brief += gettext("Not enought points to use!");
+   brief.addText(gettext("Not enought points to use!"), 255, 10, 10);
    return(false);
 }
 
@@ -380,12 +378,12 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
  *                   applyHealAndFixFeat                       *
  ***************************************************************/
 bool feats::applyHealAndFixFeat(thing& attacker, int featNumber, 
-                                thing& target, string& brief,
+                                thing& target, 
                                 messageController* controller,
                                 void* pSystem)
 {
    return(applyHealOrAttackFeat(attacker, featNumber, target,
-                                brief, controller, pSystem,
+                                controller, pSystem,
                                 true));
 }
 
@@ -393,7 +391,7 @@ bool feats::applyHealAndFixFeat(thing& attacker, int featNumber,
  *                     applyPsychoFeat                         *
  ***************************************************************/
 bool feats::applyPsychoFeat(thing& attacker, int featNumber, 
-                            thing& target, string& brief,
+                            thing& target,
                             messageController* controller)
 {
    //TODO
@@ -404,7 +402,7 @@ bool feats::applyPsychoFeat(thing& attacker, int featNumber,
  *                   applyInvocationFeat                       *
  ***************************************************************/
 bool feats::applyInvocationFeat(thing& attacker, int featNumber, 
-                                thing& target, string& brief,
+                                thing& target,
                                 messageController* controller)
 {
    //TODO
@@ -416,12 +414,12 @@ bool feats::applyInvocationFeat(thing& attacker, int featNumber,
  *                 applyAttackAndBreakFeat                     *
  ***************************************************************/
 bool feats::applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                    thing& target, string& brief,
+                                    thing& target,
                                     messageController* controller,
                                     void* pSystem)
 {
    return(applyHealOrAttackFeat(attacker, featNumber, target,
-                                brief, controller, pSystem,
+                                controller, pSystem,
                                 false));
 }
 

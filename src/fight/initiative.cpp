@@ -27,16 +27,17 @@ initiative::~initiative()
 /***************************************************************
  *                     insertCharacter                        *
  ***************************************************************/
-void initiative::insertCharacter(character* pers, string& brief)
+void initiative::insertCharacter(character* pers)
 {
-   char text[20];
    char buffer[1024];
+   string text;
+   briefing brief;
 
    initiativeStruct *cmp, *aux, *oth;
    srand(SDL_GetTicks());
 
    sprintf(buffer, gettext("%s rolls initiative: "),pers->name.c_str()); 
-   brief = buffer;
+   text = buffer;
 
    /* Insertion on List, orded by initiativeValue (decrescent order) */
    if(first == NULL)
@@ -45,8 +46,9 @@ void initiative::insertCharacter(character* pers, string& brief)
       first->next = NULL;
       first->initiativeValue = (int)(1+DICE_D20*(rand() / (RAND_MAX + 1.0)) +  
                                 pers->attBonus(ATT_DEXTERITY));
-      sprintf(text,"%d.",first->initiativeValue);
-      brief += text;
+      sprintf(buffer, "%d.",first->initiativeValue);
+      text += buffer;
+      brief.addText(text);
       first->dude = pers;
    }
    else
@@ -54,8 +56,9 @@ void initiative::insertCharacter(character* pers, string& brief)
       aux = new initiativeStruct;
       aux->initiativeValue = (int)(1+DICE_D20*(rand() / (RAND_MAX + 1.0)) +
                              pers->attBonus(ATT_DEXTERITY));
-      sprintf(text,"%d.",aux->initiativeValue);
-      brief += text;
+      sprintf(buffer,"%d.",aux->initiativeValue);
+      text += buffer;
+      brief.addText(text);
       aux->dude = pers;
       cmp = first; 
       oth = NULL;

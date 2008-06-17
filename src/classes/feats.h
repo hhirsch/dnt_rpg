@@ -14,6 +14,7 @@ using namespace std;
 #include "thing.h"
 #include "modifier.h"
 #include "../etc/message3d.h"
+#include "../engine/briefing.h"
 
 #define MAX_FEATS          30 /**< Max number of Feats per Character */
 #define MAX_DEP_FEATS       5 /**< Max number of cost this, cost that feats */
@@ -140,13 +141,12 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param brief -> string that will have briefing
        * \param controller -> the world message controller
        * \param pSystem -> the particle system controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyAttackAndBreakFeat(thing& attacker, int featNumber, 
-                                   thing& target, string& brief,
+                                   thing& target,
                                    messageController* controller,
                                    void* pSystem);
       /*!
@@ -155,13 +155,12 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param brief -> string that will have briefing
        * \param controller -> the world message controller
        * \param pSystem -> the particle system controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyHealAndFixFeat(thing& attacker, int featNumber, 
-                               thing& target, string& brief,
+                               thing& target,
                                messageController* controller,
                                void* pSystem);
       /*!
@@ -170,12 +169,11 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param brief -> string that will have briefing
        * \param controller -> the world message controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyPsychoFeat(thing& attacker, int featNumber, 
-                           thing& target, string& brief,
+                           thing& target,
                            messageController* controller);
       /*!
        **************************************************************** 
@@ -183,12 +181,11 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param brief -> string that will have briefing
        * \param controller -> the world message controller
        * \return \c true if the feat was used.
        ***************************************************************/
       bool applyInvocationFeat(thing& attacker, int featNumber, 
-                               thing& target, string& brief,
+                               thing& target,
                                messageController* controller);
 
       /*!
@@ -265,7 +262,6 @@ class feats
        * \param attacker -> thing that will attack
        * \param featNumber -> Number of Feat on List
        * \param target -> target to use the Feat
-       * \param brief -> string that will have briefing
        * \param controller -> the world message controller
        * \param pSystem -> the particle system controller
        * \param heal -> true if is a heal/fix feat, 
@@ -273,7 +269,7 @@ class feats
        * \return \c true if the feat was used.
        ***************************************************************/
        bool applyHealOrAttackFeat(thing& actor, int featNumber, 
-                                  thing& target, string& brief,
+                                  thing& target, 
                                   messageController* controller,
                                   void* pSystem, bool heal);
 };

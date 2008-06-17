@@ -9,6 +9,7 @@
 #include <string>
 using namespace std;
 #include "../engine/character.h"
+#include "../engine/briefing.h"
 #include <libintl.h>
 
 /*! Implementation of the Struct of Initiative */
@@ -38,9 +39,8 @@ class initiative
      *************************************************************** 
      * Insert Character on Initiative.  
      * \param pers -> Pointer to Character
-     * \param brief -> briefing string
      ***************************************************************/
-     void insertCharacter(character* pers, string& brief);
+     void insertCharacter(character* pers);
      /*!
      *************************************************************** 
      * Actualize the pointers to a new Round.  

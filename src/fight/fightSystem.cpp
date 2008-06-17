@@ -15,6 +15,7 @@ fightSystem::fightSystem(messageController* controller, partController* pSystem)
    msgController = controller;
    particleSystem = pSystem;
    mapFileName = "";
+   brief = new briefing();
 }
 
 /***************************************************************
@@ -22,6 +23,7 @@ fightSystem::fightSystem(messageController* controller, partController* pSystem)
  ***************************************************************/
 fightSystem::~fightSystem()
 {
+   delete(brief);
 }
 
 /***************************************************************
@@ -35,14 +37,14 @@ void fightSystem::setMap(string fileName)
 /***************************************************************
  *                         insertPC                            *
  ***************************************************************/
-bool fightSystem::insertPC(character* pers, int group,  string& brief)
+bool fightSystem::insertPC(character* pers, int group)
 {
    if( (group >= 0) && (group < FIGHT_MAX_PC_GROUPS))
    {
       if(pcGroups[group].insertCharacter(pers))
       {
           pers->actualFightGroup = group;
-          charsInitiatives.insertCharacter(pers,brief);
+          charsInitiatives.insertCharacter(pers);
           return(true);
       }
       else
@@ -59,14 +61,14 @@ bool fightSystem::insertPC(character* pers, int group,  string& brief)
 /***************************************************************
  *                         insertNPC                           *
  ***************************************************************/
-bool fightSystem::insertNPC(character* pers, int group, string& brief)
+bool fightSystem::insertNPC(character* pers, int group)
 {
    if( (group >= 0) && (group < FIGHT_MAX_NPC_GROUPS))
    {
       if(npcGroups[group].insertCharacter(pers))
       {
          pers->actualFightGroup = group;
-         charsInitiatives.insertCharacter(pers,brief);
+         charsInitiatives.insertCharacter(pers);
          pers->actualEnemy = NULL;
          return(true);
       }
@@ -100,7 +102,7 @@ bool fightSystem::isPC(character* pers)
 /***************************************************************
  *                           hasEnemies                        *
  ***************************************************************/
-bool fightSystem::hasEnemies(character* pers, string& brief)
+bool fightSystem::hasEnemies(character* pers)
 {
    int i;
    bool isNPC = !isPC(pers);
@@ -129,7 +131,7 @@ bool fightSystem::hasEnemies(character* pers, string& brief)
        }
    }
 
-   brief += gettext("|No more enemies.");
+   brief->addText(gettext("No more enemies."), 27, 208, 23);
    return(false);
 }
 
@@ -144,7 +146,7 @@ void fightSystem::setActualActor(character* actor)
 /***************************************************************
  *                         verifyDeads                         *
  ***************************************************************/ 
-void fightSystem::verifyDeads(string& brief)
+void fightSystem::verifyDeads()
 {
    char buf[512];
    //TODO verify other deads than the target one (for example for a feat
@@ -157,10 +159,9 @@ void fightSystem::verifyDeads(string& brief)
       //FIXME Other states, like partial death to be implemented
       actualActor->actualEnemy->kill();
 
-      brief += "|";
       sprintf(buf, gettext("%s is dead!"), 
               actualActor->actualEnemy->name.c_str());
-      brief += buf;
+      brief->addText(buf, 255, 144, 0);
 
       /* Add to the modstate the 'dead character' */
       modState modif;
@@ -200,10 +201,9 @@ void fightSystem::verifyDeads(string& brief)
                      getXP(actualActor, actualActor->actualEnemy->cr)) / 
                      pcGroups[pcg].total();
                p->xp += xp;
-               brief += "|";
                sprintf(buf, gettext("%s receive %d XP for killing"), 
                        p->name.c_str(), xp);
-               brief += buf;
+               brief->addText(buf, 255, 144, 0);
             }
          }
 
@@ -221,12 +221,10 @@ void fightSystem::verifyDeads(string& brief)
 /***************************************************************
  *                           doRound                           *
  ***************************************************************/ 
-int fightSystem::doTurn(string& brief)
+int fightSystem::doTurn()
 {
-   string tmp;
    char buffer[512];
    Uint32 time = SDL_GetTicks();
-   brief = "";
 
    if(time - lastTime >= FIGHT_ANIMATION_DELAY)
    {
@@ -239,7 +237,7 @@ int fightSystem::doTurn(string& brief)
          pendingAnimation = false;
          actualActor->setState(STATE_IDLE);
 
-         verifyDeads(brief);
+         verifyDeads();
 
       }
       else
@@ -249,12 +247,12 @@ int fightSystem::doTurn(string& brief)
          if(actualActor == NULL)
          {
             /* Begin new Round */
-            brief += gettext("New Round|");
+            brief->addText(gettext("New Round"));
             charsInitiatives.newRound(); 
             actualActor = charsInitiatives.nextCharacter();
             if(actualActor == NULL)
             {
-               brief += gettext("Error: No Characters!");
+               brief->addText(gettext("Error: No Characters!"), 255,0,0);
                return(FIGHT_END);
             }
          }
@@ -268,41 +266,38 @@ int fightSystem::doTurn(string& brief)
             if(actualActor == NULL)
             {
                /* Begin new Round */
-               brief += gettext("New Round|");
+               brief->addText(gettext("New Round"));
                charsInitiatives.newRound(); 
                actualActor = charsInitiatives.nextCharacter();
                if(actualActor == NULL)
                {
-                  brief += gettext("Error: No Characters!");
+                  brief->addText(gettext("Error: No Characters!"), 255,0,0);
                   return(FIGHT_END);
                }
             } 
          }
 
-         tmp = "";
          if(isPC(actualActor))
          {
-             if(!hasEnemies(actualActor, brief))
+             if(!hasEnemies(actualActor))
              {
                 /* There's no more enemies, so no more battle */
                 return(FIGHT_END);
              }
              sprintf(buffer, "%s's turn.", actualActor->name.c_str());
-             brief += buffer;
-             brief += "|";
+             brief->addText(buffer);
              return(FIGHT_PC_TURN);
          }
          else
          { 
             sprintf(buffer, "%s's turn.", actualActor->name.c_str());
-            brief += buffer;
-            brief += "|";
+            brief->addText(buffer);
+            
             /* If NPC hasn't script, run from here */
             if(actualActor->getBattleScript() == NULL)
             {
-               doNPCAction(actualActor,tmp);
+               doNPCAction(actualActor);
                pendingAnimation = true;
-               brief += "|" + tmp;
             }
             else
             {
@@ -311,7 +306,7 @@ int fightSystem::doTurn(string& brief)
             }
          }
 
-         if(!hasEnemies(actualActor, brief))
+         if(!hasEnemies(actualActor))
          {
             /* There's no more enemies, so no more battle */
             return(FIGHT_END);
@@ -326,15 +321,15 @@ int fightSystem::doTurn(string& brief)
 /***************************************************************
  *                       doBattleCicle                         *
  ***************************************************************/
-int fightSystem::doBattleCicle(string& brief)
+int fightSystem::doBattleCicle()
 {
-   return(doTurn(brief));
+   return(doTurn());
 }
 
 /***************************************************************
  *                       doNPCAction                           *
  ***************************************************************/
-void fightSystem::doNPCAction(character* pers, string& brief)
+void fightSystem::doNPCAction(character* pers)
 {
    int attackFeat;
    char buffer[1024];
@@ -359,12 +354,12 @@ void fightSystem::doNPCAction(character* pers, string& brief)
    {
       sprintf(buffer, gettext("%s attacks %s|"), pers->name.c_str(),
               pers->actualEnemy->name.c_str());
-      brief += buffer;
+      brief->addText(buffer);
       pers->actualFeats.applyAttackAndBreakFeat(*pers,attackFeat,
-                                                *pers->actualEnemy, brief,
+                                                *pers->actualEnemy,
                                                 msgController,
                                                 particleSystem);
-      verifyDeads(brief);   
+      verifyDeads();   
    }
 
    //TODO call the animations and sound effects.
