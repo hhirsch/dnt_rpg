@@ -21,7 +21,7 @@ void briefing::openWindow(guiInterface* gui)
 {
    if(briefWindow == NULL)
    {
-      briefWindow = gui->insertWindow(0,SCREEN_Y-258, 326, SCREEN_Y-130,
+      briefWindow = gui->insertWindow(186,SCREEN_Y-257, 512, SCREEN_Y-129,
                                       gettext("Briefing"));
       briefTxt = briefWindow->getObjectsList()->insertRolBar(8,18,318,121,
                                      gettext("Welcome to DNT!"));

@@ -27,6 +27,7 @@
 #include "alignwindow.h"
 #include "aspectwindow.h"
 #include "attwindow.h"
+#include "briefing.h"
 #include "camera.h"
 #include "character.h"
 #include "charwindow.h"
@@ -395,6 +396,8 @@ class engine
       itemWindow* infoWindow;        /**< The info Window */
       charWindow* charInfoWindow;    /**< The character info Window */
    
+      briefing* brief;               /**< The briefing controller */
+
       Uint32 lastRead;             /**< Last Verification of I/O */
       Uint32 lastMouse;            /**< Last read from mouse */
       Uint32 lastMousePression;    /**< Last mouse pressure */

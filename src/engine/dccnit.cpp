@@ -89,6 +89,9 @@ engine::engine()
    infoWindow = new itemWindow(gui);
    charInfoWindow = new charWindow(gui);
 
+   /* Initialize Briefing */
+   brief = new briefing();
+
    /* Initialize readModes variables */
    lastRead = SDL_GetTicks();
    lastMouse = lastRead;
@@ -173,6 +176,9 @@ engine::~engine()
 
    /* Delete fight system */
    delete(fight);
+
+   /* Bye briefing! */
+   delete(brief);
 
    /* Clear Other Textures */
    glDeleteTextures(1, &normalMoveCircle);
@@ -3272,7 +3278,7 @@ void engine::openMiniMapWindow()
    }
    x = 8 + (x*3);
    z = 20 + (z*3);
-   miniMapWindow = gui->insertWindow(winX, winY, winX+288, winY+128,
+   miniMapWindow = gui->insertWindow(winX, winY, winX+185, winY+128,
                                      gettext("Map"));
 
    botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,
@@ -3344,6 +3350,8 @@ void engine::openShortcutsWindow()
 
    shortCutsWindow->setExternPointer(&shortCutsWindow);
    gui->openWindow(shortCutsWindow);
+
+   brief->openWindow(gui);
 }
 
 /*********************************************************************
