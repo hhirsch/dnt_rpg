@@ -127,6 +127,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
    bool criticalMiss = false;
    bool miss = false;
    char texto[1024];
+   string diceText;
    briefing brief;
 
    if( (featNumber < 0) || (featNumber >= totalFeats) )
@@ -217,7 +218,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       {
          sprintf(texto,"%d(%s) x %d : ",diceValue,txtBonus,targetValue);
       }
-      brief.addText(texto);
+      diceText = texto;
 
       //apply bonus (skill bonus)
       diceValue += bonus;
@@ -226,7 +227,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
 
       if( (diceValue - targetValue <= 0) || (criticalMiss) || (miss) )
       {
-         brief.addText(gettext("Miss."));
+         brief.addText(diceText + gettext("Miss."));
          if( criticalMiss )
          {
              brief.addText(gettext("Critical Miss!"), 220, 0, 0);
@@ -296,7 +297,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       {
          sprintf(texto,gettext("Hit for %d points."),damage);
       }
-      brief.addText(texto);
+      brief.addText(diceText + texto);
 
       if(heal)
       {
