@@ -203,3 +203,11 @@ int rolBar::getFirstLine()
    return(scrollText->getFirstLine());
 }
 
+/*********************************************************************
+ *                            getLastLine                            *
+ *********************************************************************/
+string rolBar::getLastLine()
+{
+   return(scrollText->getTextLine(scrollText->getTotalLines()-1));
+}
+

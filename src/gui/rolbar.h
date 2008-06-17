@@ -83,6 +83,10 @@ class rolBar: public guiObject
        * \param screen -> window surface */
       void draw(SDL_Surface* screen);
 
+      /*! Get last line text on the rolbar
+       * /param -> text of the last line */
+      string getLastLine();
+
       int getActualInit(){return(scrollText->getFirstLine());};
 
    private:
