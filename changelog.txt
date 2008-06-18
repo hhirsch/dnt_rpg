@@ -1,42 +1,54 @@
 ================================================
+|                Version 0.3                   |
+================================================
+ - Briefing now has its own window; 
+ - Fixed a bug when inserting a completed mission
+   on mission controller;
+
+================================================
 |                Version 0.2                   |
 ================================================
- - Terrain texture splatting;
- - Script Language for AI;
- - Using SDL_ttf to write;
- - Load/Save Functions;
- - Workspace for compiling at M$ Visual C++ 6;
- - More Engine Optimizations;
- - Scene Antialising;
- - Messages on world map;
- - Smooth Camera Movements;
- - Indoor Reflexions;
- - Initial stage story;
- - Option to set screen resolution;
- - Don't let camera inner terrain;
- - Don't let camera inner large objects;
- - Better Dynamic Lights Implementation;
- - Missions;
- - Sorting Classes, Races and Skills by Name;
- - Rewrote the GUI Renderer;
- - Fully and scalable collision for the 3D models;
- - GNU gettext used for internationalization;
- - Meteors and FireSpheres;
- - Use of some weapons;
- - Item Information Window;
- - Apply Race and Class Skills Costs and level limits;
- - Put the code fully on English (instead of some
-   places on english, others on portuguese);
- - New Sound Effects;
- - Playable Character Information Window;
- - More 3D Objects;
- - More Characters;
- - Some Adjusts on A*;
- - Objects are now only in cal3D, no more .obj;
- - Some Adjusts to the Particle Controller;
- - First real-game maps;
- - 'make install';
- - MapEditor: Open/Save Dialog;
+ - Meteors and FireSpheres
+ - Indoor Reflections
+ - Apply Race and Class Skills Costs (1), not (2), 
+   and Skill Level Limits
+ - Some adjusts to the A*
+ - Smooth Camera Movements
+ - Workspace for compiling at M$ Visual C++ 6
+ - Use of some weapons
+ - First Tutorial game maps
+ - Missions
+ - Initial stage story put on game
+ - More objects
+ - More characters
+ - More possible actions
+ - Script thing to rule the NPC behavior when not 
+   in battle mode
+ - Make some Tutorial Missions
+ - Terrain texture splatting
+ - Finished the scalable collision detection system
+ - Messages on 3D world
+ - Converted all objects from .obj to cal3D
+ - Script Language Implementation
+ - New optimized GUI Renderer
+ - Translated the code fully to English
+ - GNU gettext for internationalization
+ - Applying Race and Classes Attributes Modifiers
+ - Don't letting camera inner terrain or large 
+   objects
+ - SDL_ttf for text fonts
+ - Option to set screen resolution
+ - Item Information Window
+ - Better dynamic lights
+ - Added make install
+ - TextBox display text of various sizes,	fonts
+   and colors at same time 
+ - Anti-Aliasing
+ - Playable Character Information Window
+ - Optimized Static Scenery Objects Render
+ - MapEditor: File Browser
+ - Showing races/classes/alignments in alphabetical 
+   order for any language
  - Fixed Bug on remove no more used Models and 
    dead with items;
  - Fixed Bug on NPCs Fight Animations;
