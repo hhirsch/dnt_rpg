@@ -34,7 +34,7 @@ OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
 $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o $(ENDETC)overlaps.o
-OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o camera.o character.o charwindow.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
+OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o camera.o character.o charwindow.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o minimapwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = #../etc/fifo.o
@@ -124,6 +124,11 @@ inventwindow.o: inventwindow.h inventwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)in
 itemwindow.o: itemwindow.h itemwindow.cpp $(ENDGUI)farso.h $(ENDCLASSES)object.h
 	@printf "Making itemwindow.o... "
 	@$(CC) $(CFLAGS) itemwindow.cpp -o itemwindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+minimapwindow.o: minimapwindow.h minimapwindow.cpp $(ENDGUI)farso.h $(ENDMAP)map.h
+	@printf "Making minimapwindow.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) minimapwindow.cpp -o minimapwindow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 modstate.o: modstate.h modstate.cpp $(ENDCLASSES)inventory.h $(ENDMAP)map.h
