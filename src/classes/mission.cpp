@@ -260,7 +260,7 @@ void missionsController::addCompleted(mission* m)
       m->previous = m;
    }
    completed  = m;
-   totalCompleted--;
+   totalCompleted++;
 }
 
 /************************************************************

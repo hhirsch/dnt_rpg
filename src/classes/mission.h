@@ -49,12 +49,12 @@ class mission: public iaScript
       friend class missionsController;
 
    protected:
-      mission* next;       /**< Next mission list */
-      mission* previous;   /**< Previous mission on list */
+      mission* next;    /**< Next mission list */
+      mission* previous;/**< Previous mission on list */
 
-      int xpValue;         /**< XP received on complete the mission */
+      int xpValue;      /**< XP received on complete the mission */
 
-      int completed;       /**< 0 if isn't completed. < 0 means failed. > 0 success */
+      int completed; /**< 0 if isn't completed. < 0 means failed. > 0 success */
 
       int tempFlag[MISSION_TEMP_FLAGS];  /**< Temporary flags to controll
                                                the mission at script. */
