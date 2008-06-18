@@ -1,7 +1,9 @@
 #include "mission.h"
+#include "../engine/briefing.h"
 #include "../engine/dccnit.h"
 #include "../sound/sound.h"
 #include "../etc/dirs.h"
+#include "../etc/message3d.h"
 
 #define MISSION_CONTROLLER_TOTAL_TREAT  5
 
@@ -157,6 +159,8 @@ void missionsController::addNewMission(string scriptFile)
 void missionsController::completeMission(mission* m, int type)
 {
    sound snd;
+   briefing brief;
+   messageController msgController;
 
    /* First, remove from the current list, without deleting it. */
    removeFromCurrent(m, false);
@@ -186,11 +190,24 @@ void missionsController::completeMission(mission* m, int type)
          dude = dude->next;
       }
 
+      /* Add 3D Message of success */
+      dude = eng->PCs->getActiveCharacter();
+      char vstr[200];
+      sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp()); 
+      msgController.addMessage(dude->xPosition, dude->max[1]+dude->yPosition,
+                               dude->zPosition, vstr, 0.94, 0.8, 0.0);
+
+      /* Add Briefing message of success */
+      brief.addText(vstr);
+
       /* Play Completion Sound Effect */
       snd.addSoundEffect(false, "sndfx/missions/mission_complete.ogg");
    }
    else 
    {
+      /*Add Briefing message of failure */
+      brief.addText(gettext("Mission Failure!"));
+
       /* Play Failure Sound Effect */
       snd.addSoundEffect(false, "sndfx/missions/mission_failed.ogg");
    }

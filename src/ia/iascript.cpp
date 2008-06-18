@@ -860,15 +860,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
                   delete(iav);
                }
             }
-            /*! Create a "completed" message on the world */
-            character* dude = eng->PCs->getActiveCharacter();
-            char vstr[200];
-            sprintf(vstr,gettext("Mission Completed: %d XP!"),m->getXp()); 
-            messageController msgController;
-            msgController.addMessage(dude->xPosition,
-                                     dude->max[1]+dude->yPosition,
-                                     dude->zPosition, vstr,
-                                     0.94, 0.8, 0.0);
+            
             /*! Do the Completion */
             missions.completeMission(m, cType);
          }
