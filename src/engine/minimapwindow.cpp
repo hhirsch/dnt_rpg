@@ -67,6 +67,14 @@ void miniMapWindow::close(guiInterface* gui)
 }
 
 /***********************************************************************
+ *                             isOpened                                *
+ ***********************************************************************/
+bool miniMapWindow::isOpened()
+{
+   return(mapWindow != NULL);
+}
+
+/***********************************************************************
  *                      updateCharacterPosition                        *
  ***********************************************************************/
 void miniMapWindow::updateCharacterPosition(float posX, float posZ)

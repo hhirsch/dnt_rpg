@@ -21,7 +21,6 @@ engine::engine()
    PCs = NULL;
    NPCs = NULL;
 
-   miniMapWindow = NULL;
    shortCutsWindow = NULL;
    inventoryWindow = NULL;
    tradeWindow = NULL;
@@ -88,6 +87,7 @@ engine::engine()
    /* Create Special Windows */
    infoWindow = new itemWindow(gui);
    charInfoWindow = new charWindow(gui);
+   mapWindow = new miniMapWindow();
 
    /* Initialize Briefing */
    brief = new briefing();
@@ -228,6 +228,12 @@ engine::~engine()
    if(charInfoWindow)
    {
       delete(charInfoWindow);
+   }
+
+   /* Clear MiniMap Window */
+   if(mapWindow)
+   {
+      delete(mapWindow);
    }
 
    /* Clear GUI */
@@ -475,15 +481,15 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    progress->defineActualHealth(8);
 
-   if(miniMapWindow)
-   {
-     gui->closeWindow(miniMapWindow);
-   }
+   /* Close MiniMap and ShortCuts Windows */
+   mapWindow->close(gui);
    if(shortCutsWindow)
    {
      gui->closeWindow(shortCutsWindow);
    }
-   openMiniMapWindow();
+
+   /* Reopen them */
+   mapWindow->open(gui,0,0, actualMap);
    openShortcutsWindow();
 
    /* Updating the BoundingBoxes for PCs */
@@ -1510,7 +1516,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
           }
           else if(object == (guiObject*) buttonMap)
           {
-             if(!miniMapWindow)
+             if(!mapWindow->isOpened())
              {
                 objTxt->setText(gettext("Open Map Window"));
              }
@@ -1579,10 +1585,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
            else if( object == (guiObject*) buttonMap)
            {
               /* Open, if not opened, the minimap window */
-              if(!miniMapWindow)
-              {
-                  openMiniMapWindow();
-              }
+              mapWindow->open(gui,0,0,actualMap);
            } 
            else if(object == (guiObject*) buttonEndTurn)
            {
@@ -2120,10 +2123,15 @@ int engine::treatIO(SDL_Surface *screen)
              ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_m) ) )
          {
-             if(!miniMapWindow)
+             if(!mapWindow->isOpened())
              {
-               openMiniMapWindow();
+                mapWindow->open(gui, 0,0, actualMap);
              }
+             else
+             {
+                mapWindow->close(gui);
+             }
+
              lastKey = SDLK_m;
              lastKeyb = time;
          }
@@ -2499,37 +2507,10 @@ int engine::treatIO(SDL_Surface *screen)
 
       /* GUI Events */
 
-      /* Redraw the needed GUI */
-      if(miniMapWindow)
-      {
-         GLint x = (int)( activeCharacter->xPosition / 
-                          actualMap->squareSize() );
-         if(x > actualMap->getSizeX()-1)
-         {
-            x = actualMap->getSizeX()-1;
-         }
-         GLint z = (int)( activeCharacter->zPosition / 
-                          actualMap->squareSize() );
-         if( z > actualMap->getSizeZ()-1)
-         {
-            z = actualMap->getSizeZ()-1;
-         }
+      /* Update MiniMap */
+      mapWindow->updateCharacterPosition(activeCharacter->xPosition,
+                                         activeCharacter->zPosition);
 
-         if(actualMap->isOutdoor())
-         {
-            x -= 7;
-            z -= 7;
-         }
-         x = 8 + (x*actualMap->SQUAREMINISIZE);
-         z = 20 + (z*actualMap->SQUAREMINISIZE);
-
-         int div2 = actualMap->SQUAREMINISIZE / 2;
-
-         botPerMiniMap->setCoordinate(x+div2, z+div2, x+div2+1, z+div2+1);
-
-         miniMapWindow->draw(mouseX, mouseY);
-      }
-     
       /* Get GUI Event */ 
       guiObject* object;
       object = gui->manipulateEvents(x,y,mButton,keys, guiEvent);
@@ -2563,7 +2544,7 @@ int engine::treatIO(SDL_Surface *screen)
 
 
       /* Update FPS */
-      actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
+      /*actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
       if( (miniMapWindow) && (time-lastFPS >= 500))
       {
          lastFPS = time;
@@ -2572,7 +2553,7 @@ int engine::treatIO(SDL_Surface *screen)
          FPS->setText(texto);
          sprintf(texto," Part: %d",particleController->numParticles());
          FPS->setText(FPS->getText()+texto);
-      }
+      }*/
       
 #ifdef VIDEO_MODE
       if(startVideo)
@@ -3210,58 +3191,6 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 bool engine::defineCharacterHeight(character* c, GLfloat nx, GLfloat nz)
 {
    return(actualMap->defineThingHeight(c, nx, nz));
-}
-
-/*********************************************************************
- *                       Load MiniMap Window                         *
- *********************************************************************/
-void engine::openMiniMapWindow()
-{
-
-   int winX=0, winY=0;
-
-   if( (SCREEN_X == 800) && (SCREEN_Y == 600) )
-   {
-      /* Align at side of Shortcuts */
-      winX = SCREEN_X-288;
-      winY = SCREEN_Y-129;
-   }
-   else
-   {
-      /* Align Up of Shortcuts */
-      winX = 0;
-      winY = SCREEN_Y-257;
-   }
-   
-   character* activeCharacter = PCs->getActiveCharacter();
-   GLint x = (int)(((activeCharacter->xPosition) / (actualMap->squareSize())));
-   if(x > actualMap->getSizeX()-1)
-   {
-      x = actualMap->getSizeX()-1;
-   }
-   GLint z = (int)(((activeCharacter->zPosition) / (actualMap->squareSize())));
-   if( z > actualMap->getSizeZ()-1)
-   {
-      z = actualMap->getSizeZ()-1;
-   }
-   x = 8 + (x*3);
-   z = 20 + (z*3);
-   miniMapWindow = gui->insertWindow(winX, winY, winX+185, winY+128,
-                                     gettext("Map"));
-
-   botPerMiniMap = miniMapWindow->getObjectsList()->insertButton(x,z,
-                                                                 x+1,z+1,
-                                                                 "",0);
-   picture* fig = miniMapWindow->getObjectsList()->insertPicture(8,20,240,95,
-                                                                 NULL);
-   actualMap->drawMinimap(fig->get());
-
-   //FIXME remove FPS counter from here
-   FPS = miniMapWindow->getObjectsList()->insertTextBox(3,108,150/*100*/,123,2,
-                                  gettext("FPS:"));
-
-   miniMapWindow->setExternPointer(&miniMapWindow);
-   gui->openWindow(miniMapWindow);
 }
 
 /*********************************************************************

@@ -38,6 +38,7 @@
 #include "initial.h"
 #include "inventwindow.h"
 #include "itemwindow.h"
+#include "minimapwindow.h"
 #include "modstate.h"
 #include "options.h"
 #include "racewindow.h"
@@ -182,12 +183,6 @@ class engine
        * \return Options Screen Return Value.
        ***************************************************************/
       int optionsScreen(GLuint idTextura);
-
-      /*!
-       *************************************************************** 
-       * Load MiniMap Window
-       ***************************************************************/
-      void openMiniMapWindow();
 
       /*!
        *************************************************************** 
@@ -375,8 +370,6 @@ class engine
       textBox* objTxt;             /**< Text that shows actual pointed object */
       textBox* hourTxt;            /**< Text for Hour */
       window* shortCutsWindow;     /**< ShortCuts Window */
-      window* miniMapWindow;       /**< MiniMap Window */
-      button* botPerMiniMap;       /**< Character MiniMap Button */
 
       button* buttonMenu;            /**< Button to call Menu */
       button* buttonSave;            /**< Button to call Save Function */
@@ -394,6 +387,7 @@ class engine
       barterWindow* tradeWindow;     /**< The Barter Window */
       itemWindow* infoWindow;        /**< The info Window */
       charWindow* charInfoWindow;    /**< The character info Window */
+      miniMapWindow* mapWindow;      /**< The miniMap window */
    
       briefing* brief;               /**< The briefing controller */
 

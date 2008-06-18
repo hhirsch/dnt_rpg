@@ -30,6 +30,10 @@ class miniMapWindow
        * \param posZ -> character Z position */
       void updateCharacterPosition(float posX, float posZ);
 
+      /*! Verify if the minimap window is opened
+       * \return -> true if is opened, false otherwise */
+      bool isOpened();
+
    protected:
       static window* mapWindow;     /**< MiniMap Window */
       static button* charPosition;  /**< Character MiniMap Button */
