@@ -20,6 +20,10 @@ class briefing
        * \param gui -> interface where window is opened */
       void closeWindow(guiInterface* gui);
 
+      /*! Verify if the briefing window is opened
+       * \return -> true if the window is opened */
+      bool isOpened();
+
        /*! Add the string to the briefing (with default font and colors) 
        * \param text -> text to add */
       void addText(string text);
