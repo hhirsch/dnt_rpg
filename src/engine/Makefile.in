@@ -34,7 +34,7 @@ OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
 $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o $(ENDETC)overlaps.o
-OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o camera.o character.o charwindow.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o minimapwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o sky.o sun.o teste.o util.o
+OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o camera.o character.o charwindow.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o minimapwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o shortcutswindow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
 FIFO = #../etc/fifo.o
@@ -106,7 +106,7 @@ dialog.o: dialog.cpp dialog.h $(ENDGUI)farso.h character.h barterwindow.h
 	@$(CC) $(CFLAGS) dialog.cpp -o dialog.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h $(ENDCLASSES)race.h $(ENDCLASSES)classes.h $(ENDCLASSES)weapon.h $(ENDCLASSES)actions.h $(ENDCLASSES)mission.h $(ENDETC)message3d.h $(ENDETC)dirs.h $(ENDFIGHT)fightSystem.h $(ENDGUI)farso.h $(ENDMAP)map.h $(ENDPART)partcontroller.h $(ENDPART)wave.h $(ENDSOUND)sound.h $(ENDIA)iascript.h alignwindow.h aspectwindow.h attwindow.h camera.h character.h classwindow.h collision.h cursor.h dialog.h initial.h inventwindow.h itemwindow.h modstate.h options.h racewindow.h shadow.h skillwindow.h sun.h util.h
+dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h $(ENDCLASSES)skills.h $(ENDCLASSES)feats.h $(ENDCLASSES)race.h $(ENDCLASSES)classes.h $(ENDCLASSES)weapon.h $(ENDCLASSES)actions.h $(ENDCLASSES)mission.h $(ENDETC)message3d.h $(ENDETC)dirs.h $(ENDFIGHT)fightSystem.h $(ENDGUI)farso.h $(ENDMAP)map.h $(ENDPART)partcontroller.h $(ENDPART)wave.h $(ENDSOUND)sound.h $(ENDIA)iascript.h alignwindow.h aspectwindow.h attwindow.h camera.h character.h classwindow.h collision.h cursor.h dialog.h initial.h inventwindow.h itemwindow.h modstate.h options.h racewindow.h shadow.h shortcutswindow.h skillwindow.h sun.h util.h
 	@printf "Making dccnit.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
@@ -155,6 +155,12 @@ shadow.o: shadow.h shadow.cpp camera.h
 	@printf "Making shadow.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) shadow.cpp -o shadow.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
+
+shortcutswindow.o: shortcutswindow.h shortcutswindow.cpp $(ENDGUI)farso.h
+	@printf "Making shortcutswindow.o... "
+	@$(CC) $(CFLAGS) $(SUPREDE) shortcutswindow.cpp -o shortcutswindow.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
 
 sky.o: sky.h sky.cpp $(ENDMAP)map.h $(ENDETC)dirs.h
 	@printf "Making sky.o... "

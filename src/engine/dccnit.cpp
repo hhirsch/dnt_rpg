@@ -21,7 +21,6 @@ engine::engine()
    PCs = NULL;
    NPCs = NULL;
 
-   shortCutsWindow = NULL;
    inventoryWindow = NULL;
    tradeWindow = NULL;
 
@@ -88,6 +87,7 @@ engine::engine()
    infoWindow = new itemWindow(gui);
    charInfoWindow = new charWindow(gui);
    mapWindow = new miniMapWindow();
+   shortcuts = new shortcutsWindow();
 
    /* Initialize Briefing */
    brief = new briefing();
@@ -234,6 +234,12 @@ engine::~engine()
    if(mapWindow)
    {
       delete(mapWindow);
+   }
+
+   /* Clear ShortcutsWindow */
+   if(shortcuts)
+   {
+      delete(shortcuts);
    }
 
    /* Clear GUI */
@@ -481,16 +487,22 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    progress->defineActualHealth(8);
 
-   /* Close MiniMap and ShortCuts Windows */
-   mapWindow->close(gui);
-   if(shortCutsWindow)
+   /* Reopen, if already opened, some game Windows */
+   if(mapWindow->isOpened())
    {
-     gui->closeWindow(shortCutsWindow);
+      mapWindow->close(gui);
+      mapWindow->open(gui,0,0, actualMap);
    }
-
-   /* Reopen them */
-   mapWindow->open(gui,0,0, actualMap);
-   openShortcutsWindow();
+   if(shortcuts->isOpened())
+   {
+      shortcuts->close(gui);
+      shortcuts->open(gui);
+   }
+   if(brief->isOpened())
+   {
+      brief->closeWindow(gui);
+      brief->openWindow(gui);
+   }
 
    /* Updating the BoundingBoxes for PCs */
    int aux;
@@ -1418,8 +1430,6 @@ void engine::treatPendingActions()
  *********************************************************************/
 void engine::treatGuiEvents(guiObject* object, int eventInfo)
 {
-   bool defined = false;
-
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
    {
@@ -1490,147 +1500,83 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    }
 
    /* Verify ShortCutsWindow */
-   if(shortCutsWindow)
+   if(shortcuts->isOpened())
    {
-     switch(eventInfo)
-     {
-       case ON_FOCUS_TAB_BUTTON:
-       {
-          if(object == (guiObject*) buttonAttackMode)
-          {
-             if(engineMode != ENGINE_MODE_TURN_BATTLE)
-             {
-                objTxt->setText(gettext("Enter Battle Mode"));
-             }
-             else
-             {
-                objTxt->setText(gettext("Select Normal Attack"));
-             }
-             defined = true;
-          }
-          else if(object == (guiObject*) buttonQuest)
-          {
-            //TODO Do the quest window
-            objTxt->setText(gettext("Open Quests Window"));
-            defined = true;
-          }
-          else if(object == (guiObject*) buttonMap)
-          {
-             if(!mapWindow->isOpened())
-             {
-                objTxt->setText(gettext("Open Map Window"));
-             }
-             else
-             {
-                objTxt->setText(gettext("Map Window already opened!"));
-             }
-             defined = true;
-          }
-          else if(object == (guiObject*) buttonEndTurn)
-          {
-             if(engineMode == ENGINE_MODE_TURN_BATTLE)
-             {
-                objTxt->setText(gettext("End Character's Turn"));
-             }
-             else
-             {
-                objTxt->setText(gettext("Only Avaible on Battle Mode"));
-             }
-             defined = true;
-          }
-          else if(object == (guiObject*) buttonInventory)
-          {
-             if(!inventoryWindow)
-             {
-                objTxt->setText(gettext("Open Inventory Window"));
-             }
-             else
-             {
-                objTxt->setText(gettext("Inventory already opened!"));
-             }
-             defined = true;
-          }
-          else if(object == (guiObject*) buttonAssign)
-          {
-            //TODO Do the assign window
-            objTxt->setText(gettext("Open Assign Attacks Window"));
-            defined = true;
-          }
-          else if(object == (guiObject*) buttonCharacter)
-          {
-            objTxt->setText(gettext("View Character Informations"));
-            defined = true;
-          }
-          else if(object == (guiObject*) buttonGroup)
-          {
-            //TODO Do the group/party window
-            objTxt->setText(gettext("Open Group/Party Window"));
-            defined = true;
-          }
-       }
-       break;
-       case PRESSED_TAB_BUTTON:
-       {
-           if(object == (guiObject*) buttonAttackMode)
-           {
-              if( engineMode != ENGINE_MODE_TURN_BATTLE )
-              {
-                 enterBattleMode(true);
-              }
-              else
-              {
-                 //TODO -> set the attack as base one.
-              }
-           }
-           else if( object == (guiObject*) buttonMap)
-           {
-              /* Open, if not opened, the minimap window */
-              mapWindow->open(gui,0,0,actualMap);
-           } 
-           else if(object == (guiObject*) buttonEndTurn)
-           {
-              if(fightStatus == FIGHT_PC_TURN)
-              {
-                 endTurn(); 
-              }
-           }
-           else if(object == (guiObject*) buttonInventory)
-           {
-              if(!inventoryWindow)
-              {
-                 openCloseInventoryWindow();
-              }
-           }
-           else if(object == (guiObject*) buttonCharacter)
-           {
-              if(charInfoWindow)
-              {
-                 charInfoWindow->open(PCs->getActiveCharacter());
-              }
-           }
-           break;
-       }
-       case PRESSED_BUTTON:
-       {
-         if(object == (guiObject*) buttonMenu)
+      int res = shortcuts->treat(object, eventInfo, engineMode);
+      if( (res == SHORTCUTS_WINDOW_NONE) && (gui->mouseOnGui(mouseX, mouseY)) )
+      {
+         shortcuts->setThing(gettext("Nothing"));
+      }
+      /* Now call the functions */
+      switch(res)
+      {
+         case SHORTCUTS_WINDOW_MENU:
          {
+            /* Go back to the game menu */
             exitEngine = 1;
          }
-         else if(object == (guiObject*) buttonSave)
+         break;
+         case SHORTCUTS_WINDOW_SAVE:
          {
+            /* Go to the save dialog */
             saveGame();
          }
-         else if(object == (guiObject*) buttonLoad)
+         break;
+         case SHORTCUTS_WINDOW_LOAD:
          {
+            /* Go to the load dialog */
             loadGame();
          }
          break;
-       }
-     }
-     if( (!defined) && (gui->mouseOnGui(mouseX, mouseY)) )
-     {
-        objTxt->setText(gettext("Nothing"));
-     }
+         case SHORTCUTS_WINDOW_ATTACK_MODE:
+         {
+            if( engineMode != ENGINE_MODE_TURN_BATTLE )
+            {
+               /* Enter the battle mode! */
+               enterBattleMode(true);
+            }
+            else
+            {
+               // TODO -> set the attack to base one.
+            }
+         }
+         break;
+         case SHORTCUTS_WINDOW_MAP:
+         {
+            /* Open, if not opened the minimap window */
+            mapWindow->open(gui, 0,0, actualMap);
+         }
+         break;
+         case SHORTCUTS_WINDOW_END_TURN:
+         {
+            if(fightStatus == FIGHT_PC_TURN)
+            {
+               /* End the Playable Character turn */
+               endTurn();
+            }
+         }
+         break;
+         case SHORTCUTS_WINDOW_INVENTORY:
+         {
+            /* Open, if not already opened, the invetory window */
+            if(!inventoryWindow)
+            {
+               openCloseInventoryWindow();
+            }
+         }
+         break;
+         case SHORTCUTS_WINDOW_CHARACTER:
+         {
+            /* Open, if not Opened, the character window */
+            if(charInfoWindow)
+            {
+               charInfoWindow->open(PCs->getActiveCharacter());
+            }
+         }
+         break;
+
+         //TODO other results!
+      }
   }  
 
 
@@ -1647,10 +1593,7 @@ void engine::hourToTxt()
    
    sprintf(&htmp[0],"%.2d:%.2d", ihour, imin);
 
-   if(shortCutsWindow)
-   {
-      hourTxt->setText(htmp);
-   }
+   shortcuts->setThing(htmp);
 }
 
 /*********************************************************************
@@ -1715,10 +1658,7 @@ int engine::verifyMouseActions(Uint8 mButton)
             if(intercepts( minObj, maxObj, minMouse, maxMouse))
             {
                 cursors->set(CURSOR_GET);
-                if(shortCutsWindow)
-                {
-                   objTxt->setText(sobj->obj->getName()); 
-                }
+                shortcuts->setThing(sobj->obj->getName()); 
                 if( (mButton & SDL_BUTTON(1)) && 
                     (rangeAction(activeCharacter->xPosition, 
                                  activeCharacter->zPosition,
@@ -1789,10 +1729,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          if(intercepts( minObj, maxObj, minMouse, maxMouse))
          {
             cursors->set(CURSOR_DOOR);
-            if(shortCutsWindow)
-            {
-               objTxt->setText(gettext("Door")); 
-            }
+            shortcuts->setThing(gettext("Door")); 
             if( (mButton & SDL_BUTTON(1)) && 
                 (rangeAction(activeCharacter->xPosition, 
                              activeCharacter->zPosition,
@@ -1847,10 +1784,7 @@ int engine::verifyMouseActions(Uint8 mButton)
          if(intercepts( min, max, minMouse, maxMouse))
          {
             cursors->set(CURSOR_INVENTORY);
-            if(shortCutsWindow)
-            {
-               objTxt->setText(pers->name); 
-            }
+            shortcuts->setThing(pers->name); 
 
             /* Open Inventory when button pressed */
             if( (mButton & SDL_BUTTON(1)) && (!inventoryWindow))
@@ -1904,10 +1838,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                         pers->openConversationDialog(gui,activeCharacter);
                      }
                   }
-                  if(shortCutsWindow)
-                  {
-                     objTxt->setText(pers->name); 
-                  }
+                  shortcuts->setThing(pers->name); 
                   pronto = 1;
                }
                else
@@ -1916,10 +1847,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                    (fightStatus == FIGHT_PC_TURN) && (!fullMovePCAction))
                {
                   cursors->set(CURSOR_ATTACK);
-                  if(shortCutsWindow)
-                  {
-                     objTxt->setText(pers->name); 
-                  }
+                  shortcuts->setThing(pers->name); 
 
                   if( (mButton & SDL_BUTTON(1)) &&
                       (rangeAction(activeCharacter->xPosition, 
@@ -1972,10 +1900,8 @@ int engine::verifyMouseActions(Uint8 mButton)
          minMouse[2] = zReal-2;  maxMouse[2] = zReal+2;
          if( intercepts( minCon, maxCon, minMouse, maxMouse ) )
          {
-            if(shortCutsWindow)
-            {
-               objTxt->setText(quaux->mapConection.mapName); 
-            }
+            shortcuts->setThing(quaux->mapConection.mapName); 
+
             curConection = &quaux->mapConection;
             cursors->set(CURSOR_MAPTRAVEL);
             pronto = 1;
@@ -1995,9 +1921,9 @@ int engine::verifyMouseActions(Uint8 mButton)
          curConection = NULL;
       }
 
-      if( (shortCutsWindow) && (!pronto) )
+      if( (!pronto) )
       {
-         objTxt->setText(gettext("Nothing")); 
+         shortcuts->setThing(gettext("Nothing")); 
       }
    }
    return(0);
@@ -2141,11 +2067,18 @@ int engine::treatIO(SDL_Surface *screen)
              ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_n) ) )
          {
-             if(!shortCutsWindow)
-             {
-                 openShortcutsWindow();
-             }
+             shortcuts->open(gui);
              lastKey = SDLK_n;
+             lastKeyb = time;
+         }
+
+         /* Open Briefing */
+         if( (keys[SDLK_l]) && 
+             ( (time-lastKeyb >= REFRESH_RATE) || 
+               (lastKey != SDLK_n) ) )
+         {
+             brief->openWindow(gui);
+             lastKey = SDLK_l;
              lastKeyb = time;
          }
 
@@ -2544,16 +2477,13 @@ int engine::treatIO(SDL_Surface *screen)
 
 
       /* Update FPS */
-      /*actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
-      if( (miniMapWindow) && (time-lastFPS >= 500))
+      actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
+      if( time-lastFPS >= 500 )
       {
          lastFPS = time;
-         char texto[32];
-         sprintf(texto,"FPS: %3.2f",actualFPS);
-         FPS->setText(texto);
-         sprintf(texto," Part: %d",particleController->numParticles());
-         FPS->setText(FPS->getText()+texto);
-      }*/
+         shortcuts->setFPS(actualFPS);
+         shortcuts->setParticlesNumber(particleController->numParticles());
+      }
       
 #ifdef VIDEO_MODE
       if(startVideo)
@@ -3191,62 +3121,6 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
 bool engine::defineCharacterHeight(character* c, GLfloat nx, GLfloat nz)
 {
    return(actualMap->defineThingHeight(c, nx, nz));
-}
-
-/*********************************************************************
- *                         Load ShortCuts Window                     *
- *********************************************************************/
-void engine::openShortcutsWindow()
-{
-   shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,512,SCREEN_Y-1,
-                                       gettext("Shortcuts"));
-   objTxt = shortCutsWindow->getObjectsList()->insertTextBox(8,20,249,35,1,
-                                                           gettext("Nothing"));
-
-   buttonSave = shortCutsWindow->getObjectsList()->insertButton(8,102,76,120,
-                                                            gettext("Save"),0);
-   buttonMenu = shortCutsWindow->getObjectsList()->insertButton(77,102,140,120,
-                                                            gettext("Menu"),0);
-   buttonLoad = shortCutsWindow->getObjectsList()->insertButton(141,102,
-                                                                209,120,
-                                                            gettext("Load"),0);
-   hourTxt = shortCutsWindow->getObjectsList()->insertTextBox(210,102,
-                                                              249,120,1,
-                                                              "00:00");
-   hourTxt->setFont(DNT_FONT_TIMES,11,DNT_FONT_ALIGN_CENTER);
-   hourToTxt();
-
-   tabButton* tb;
-   tb = shortCutsWindow->getObjectsList()->insertTabButton(252,14,0,0,
-                  dir.getRealFile("texturas/shortcutsw/shortcuts.png").c_str());
-   buttonAttackMode = tb->insertButton(7,4,43,36);/* Attack Mode */
-   tb->insertButton(7,40,43,72);/* Attack 1 */
-   tb->insertButton(7,75,43,107);/* Attack 7 */
-
-   buttonQuest = tb->insertButton(53,4,89,36);/* Quest Window */
-   tb->insertButton(53,40,89,72);/* Attack 2 */
-   tb->insertButton(53,75,89,107);/* Attack 8 */
-
-   buttonInventory = tb->insertButton(99,4,135,36);/* Inventory */
-   tb->insertButton(99,40,135,72);/* Attack 3 */
-   tb->insertButton(99,75,135,107);/* Attack 9 */
-
-   buttonMap = tb->insertButton(141,4,177,36);/* Map */
-   tb->insertButton(141,40,177,72);/* Attack 4 */
-   tb->insertButton(141,75,177,107);/* Attack 10 */
-   
-   buttonGroup = tb->insertButton(180,4,216,36);/* Party/Group */
-   tb->insertButton(180,40,216,72);/* Attack 5 */
-   buttonAssign = tb->insertButton(180,75,216,107);/* Assign Attacks */
-
-   buttonCharacter = tb->insertButton(220,4,256,36);/* Character */
-   tb->insertButton(220,40,256,72);/* Attack 6 */
-   buttonEndTurn = tb->insertButton(220,75,256,107);/* End Turn */
-
-   shortCutsWindow->setExternPointer(&shortCutsWindow);
-   gui->openWindow(shortCutsWindow);
-
-   brief->openWindow(gui);
 }
 
 /*********************************************************************

@@ -43,6 +43,7 @@
 #include "options.h"
 #include "racewindow.h"
 #include "shadow.h"
+#include "shortcutswindow.h"
 #include "skillwindow.h"
 #include "sun.h"
 #include "sky.h"
@@ -183,12 +184,6 @@ class engine
        * \return Options Screen Return Value.
        ***************************************************************/
       int optionsScreen(GLuint idTextura);
-
-      /*!
-       *************************************************************** 
-       * Load ShortCuts Window
-       ***************************************************************/
-      void openShortcutsWindow();
 
       /*!
        *************************************************************** 
@@ -366,28 +361,14 @@ class engine
              zReal,                /**< Actual mouse Z coordinates on World */
              yReal;                /**< Actual mouse Y coordinates on World */
 
-      textBox* FPS;                /**< Text that shows FPS */
-      textBox* objTxt;             /**< Text that shows actual pointed object */
-      textBox* hourTxt;            /**< Text for Hour */
-      window* shortCutsWindow;     /**< ShortCuts Window */
-
-      button* buttonMenu;            /**< Button to call Menu */
-      button* buttonSave;            /**< Button to call Save Function */
-      button* buttonLoad;            /**< Button to call Load Function */
-      oneTabButton* buttonAttackMode;/**< Button to Enter on Attack Mode */
-      oneTabButton* buttonQuest;     /**< Button to Open Quest Window */
-      oneTabButton* buttonMap;       /**< Call MiniMap Button */
-      oneTabButton* buttonInventory; /**< Call Inventory Button */
-      oneTabButton* buttonAssign;    /**< Button to assign attack */
-      oneTabButton* buttonGroup;     /**< Button to open group window */
-      oneTabButton* buttonCharacter; /**< Button to open Character Window */
-      oneTabButton* buttonEndTurn;   /**< End Turn Button */
+      
 
       inventWindow* inventoryWindow; /**< Inventory Window */
       barterWindow* tradeWindow;     /**< The Barter Window */
       itemWindow* infoWindow;        /**< The info Window */
       charWindow* charInfoWindow;    /**< The character info Window */
       miniMapWindow* mapWindow;      /**< The miniMap window */
+      shortcutsWindow* shortcuts;    /**< The shortcuts window */
    
       briefing* brief;               /**< The briefing controller */
 
