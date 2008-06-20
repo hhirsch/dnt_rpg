@@ -3229,7 +3229,12 @@ int engine::run(SDL_Surface *surface)
      }
      entergame( &clientData );
    #endif
-  
+
+   /* Open Needed windows */
+   mapWindow->open(gui,0,0, actualMap);
+   shortcuts->open(gui);
+   brief->openWindow(gui);
+
    /* Main Things Run */
    while(treatIO(surface))
    {
