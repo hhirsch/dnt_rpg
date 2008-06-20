@@ -1593,7 +1593,7 @@ void engine::hourToTxt()
    
    sprintf(&htmp[0],"%.2d:%.2d", ihour, imin);
 
-   shortcuts->setThing(htmp);
+   shortcuts->setHour(htmp);
 }
 
 /*********************************************************************
