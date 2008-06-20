@@ -124,12 +124,12 @@ void shortcutsWindow::setParticlesNumber(int total)
 /***********************************************************************
  *                               setFPS                                *
  ***********************************************************************/
-void shortcutsWindow::setFPS(int fps)
+void shortcutsWindow::setFPS(float fps)
 {
    char txt[32];
    if(shortCutsWindow != NULL)
    {
-      sprintf(txt, "%s: %d", gettext("FPS"), fps);
+      sprintf(txt, "%s: %.2f", gettext("FPS"), fps);
       fpsTxt->setText(txt);
    }
 }

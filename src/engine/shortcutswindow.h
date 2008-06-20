@@ -52,7 +52,7 @@ class shortcutsWindow
       void setParticlesNumber(int total);
       /*! Set the current FPS value
        * \param fps -> current FPS value */
-      void setFPS(int fps);
+      void setFPS(float fps);
       /*! Set the hour text
        * \param hour -> new hour text */
       void setHour(string hour);
