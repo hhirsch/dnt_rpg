@@ -1,5 +1,5 @@
 name = Ente
-model = models/personagens/Jacaranda/modelo.cfg
+model = models/personagens/Jacaranda/model.cfg
 portrait = characters/portraits/ente.png
 maxLifePoints = 187
 baseModifier = 18/3/18
