@@ -213,7 +213,8 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
             novoMuro->x1 = mx1;
             novoMuro->z2 = mz2;
          }
-         novoMuro->texture = doorWall->texture;
+         novoMuro->frontTexture = doorWall->frontTexture;
+         novoMuro->backTexture = doorWall->backTexture;
          //Coloca a Porta no Mapa
          /*inserirObjetoMapa(doorX, doorZ, doorOrientation, porta, 
                             (int)(doorX / actualMap->squareSize()), 

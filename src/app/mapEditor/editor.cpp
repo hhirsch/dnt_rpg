@@ -395,23 +395,28 @@ void editor::newMap()
       /* Insert walls */
       wall* actualWall = map->addWall(0,0,(sizeX)*map->squareSize(),10);
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
-      actualWall->texture = map->textures->index;
+      actualWall->frontTexture = map->textures->index;
+      actualWall->backTexture = map->textures->index;
 
       actualWall = map->addWall(0,0,10,(sizeZ)*map->squareSize());
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
-      actualWall->texture = map->textures->index;
+      actualWall->frontTexture = map->textures->index;
+      actualWall->backTexture = map->textures->index;
 
       actualWall = map->addWall((sizeX)*map->squareSize()-10,0,
                                 (sizeX)*map->squareSize(), 
                                 (sizeZ)*map->squareSize());
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
-      actualWall->texture = map->textures->index;
-
+      actualWall->frontTexture = map->textures->index;
+      actualWall->backTexture = map->textures->index;
+      
       actualWall = map->addWall(0,(sizeZ)*map->squareSize()-10,
                                 (sizeX)*map->squareSize(),
                                 (sizeZ)*map->squareSize());
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
-      actualWall->texture = map->textures->index;
+      actualWall->frontTexture = map->textures->index;
+      actualWall->backTexture = map->textures->index;
+
       /* Define Position */
       map->setInitialPosition( ((sizeX)*map->squareSize() / 2.0),
                             ((sizeZ)*map->squareSize() / 2.0));

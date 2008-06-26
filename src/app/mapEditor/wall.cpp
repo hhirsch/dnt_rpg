@@ -259,7 +259,8 @@ void wallController::doTexture()
    state =  WALL_STATE_OTHER;
    if( (actualWall) && ((mB & SDL_BUTTON(1))))
    {
-      actualWall->texture = texture;
+      actualWall->frontTexture = texture;
+      actualWall->backTexture = texture;
    }
 }
 
@@ -284,7 +285,8 @@ void wallController::doWall(bool X, bool Z, bool full)
       actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->x1 = mX;
       actualWall->z1 = mZ;
-      actualWall->texture = texture;
+      actualWall->frontTexture = texture;
+      actualWall->backTexture = texture;
       if( X )
       {
           actualWall->x2 = mX;

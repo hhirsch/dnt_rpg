@@ -53,16 +53,17 @@ class conection
 class wall
 {
    public:
-      GLfloat x1,     /**< X min coordinates */
-              z1,     /**< Z min coordinates */
-              x2,     /**< X max Coordinates */
-              z2;     /**< Z max Coordinates */
-      GLuint dX,      /**< Delta X of texture cycle */
-             dY,      /**< Delta Y of texture cycle */
-             dZ;      /**< Delta Z of texture cycle */
-      int texture;    /**< Texture ID */
-      wall* next;     /**< Next on list */
-      wall* previous; /**< Previous on List */
+      GLfloat x1,          /**< X min coordinates */
+              z1,          /**< Z min coordinates */
+              x2,          /**< X max Coordinates */
+              z2;          /**< Z max Coordinates */
+      GLuint dX,           /**< Delta X of texture cycle */
+             dY,           /**< Delta Y of texture cycle */
+             dZ;           /**< Delta Z of texture cycle */
+      int frontTexture;    /**< Front Texture ID */
+      int backTexture;     /**< Back Texture ID */
+      wall* next;          /**< Next on list */
+      wall* previous;      /**< Previous on List */
 };
 
 /*!

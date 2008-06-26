@@ -331,7 +331,8 @@ void Map::removeUnusedTextures()
       w = walls;
       for(x1 = 0; ((x1 < totalWalls) && (!used)); x1++)
       {
-         used |= (getTexture(w->texture) == tex);
+         used |= (getTexture(w->frontTexture) == tex);
+         used |= (getTexture(w->backTexture) == tex);
          w = w->next;
       }
 
@@ -500,7 +501,8 @@ wall* Map::addWall(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
       maux->next = maux;
       maux->previous = maux;
    }
-   maux->texture = -1;
+   maux->frontTexture = -1;
+   maux->backTexture = -1;
    totalWalls++;
    walls = maux;
    return(maux);
@@ -832,15 +834,15 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
         for(wNum=0;wNum<totalWalls;wNum++ )
         {
            
-           if((texture!= -1) && (maux->texture == -1))
+           if((texture != -1) && (maux->frontTexture == -1))
            {
                glDisable(GL_TEXTURE_2D); 
                texture = -1;
            }
-           else if(texture != maux->texture)
+           else if(texture != maux->frontTexture)
            {
               glEnd();
-              texture = maux->texture;
+              texture = maux->frontTexture;
               glEnable(GL_TEXTURE_2D);
               glBindTexture(GL_TEXTURE_2D, texture);
               glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
@@ -1561,7 +1563,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      maux->z2 = maux->z1;
                      maux->z1 = tmp;
                   }
-                  maux->texture = -1;
+                  maux->frontTexture = -1;
                   break;
                }
                case 't': /* Define Wall texture */
@@ -1570,10 +1572,10 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                   sscanf(buffer,"%s",nome);
                      nameMuroTexturaAtual = nome;
                      IDwallTexturaAtual = getTextureID(nome,R,G,B);
-                  maux->texture = IDwallTexturaAtual;
+                  maux->frontTexture = IDwallTexturaAtual;
                   break;
                }
-               case 'e': /* Define Half Wall */
+               case 'e': /* Define Curb */
                {
                   maux = new(wall);
                   fgets(buffer, sizeof(buffer),arq);
@@ -1594,7 +1596,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      maux->z1 = tmp;
                   }  
                   maux->next = curbs;
-                  maux->texture = -1;
+                  maux->frontTexture = -1;
                   curbs = maux;
                   totalCurbs++;
                   break;
@@ -2096,7 +2098,7 @@ int Map::save(string arquivo)
       fprintf(arq,"wall %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
                                                 maux->z2,maux->dX,maux->dY,
                                                 maux->dZ);
-      fprintf(arq,"wt %s\n",getTextureName(maux->texture).c_str());
+      fprintf(arq,"wt %s\n",getTextureName(maux->frontTexture).c_str());
       maux = (wall*)maux->next;
    }
 
@@ -2105,7 +2107,7 @@ int Map::save(string arquivo)
    while(maux)
    {
       fprintf(arq,"we %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
-      fprintf(arq,"wt %s\n",getTextureName(maux->texture).c_str());
+      fprintf(arq,"wt %s\n",getTextureName(maux->frontTexture).c_str());
       maux = (wall*)maux->next;
    }
 
