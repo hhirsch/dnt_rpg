@@ -193,14 +193,14 @@ void inventWindow::openMenu(int x, int y, int type)
    xSize = objectMenu->getMaxCharac()*(fnt.getIncCP()+1)+6;
 
    /* Make Sure all Menu is in Window */
-   if(y+94 >= intWindow->getY2())
+   if( (y + 96) >= (intWindow->getY2() - intWindow->getY1()) )
    {
-       y = intWindow->getY2()-94;
+       y = intWindow->getY2()-intWindow->getY1()-96;
    }
 
-   if(x+xSize >= intWindow->getX2())
+   if( (x + xSize) >= (intWindow->getX2() - intWindow->getX1()) )
    {
-      x = intWindow->getX2() - xSize;
+      x = intWindow->getX2() - intWindow->getX1()  - xSize;
    }
    
    objectMenu->setPosition(x,y);
