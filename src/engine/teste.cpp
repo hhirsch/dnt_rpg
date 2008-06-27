@@ -51,8 +51,10 @@ int main(int argc, char **argv)
       printf("I'll conect to %s\n",server);
    #endif
 
-   Farso_Init(&screen,"DccNiTghtmare", opt.screenWidth, opt.screenHeight,
-              opt.enableFullScreen, opt.antiAliasing);
+   Farso_Init(&screen,"DccNiTghtmare", opt.getScreenWidth(), 
+              opt.getScreenHeight(),  opt.getEnableFullScreen(), 
+              opt.getAntiAliasing());
+
    engine* gameEngine = new engine();
    
    gameEngine->init(screen);

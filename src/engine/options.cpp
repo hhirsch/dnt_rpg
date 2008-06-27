@@ -5,6 +5,7 @@
 #include "util.h"
 #include "../etc/userinfo.h"
 #include "../etc/dirs.h"
+#include "../etc/extensions.h"
 
 #ifdef _MSC_VER
    #include "../config_win.h"
@@ -888,7 +889,106 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
    return(OPTIONSW_OTHER);
 } 
 
+/****************************************************************
+ *                             Treat                            *
+ ****************************************************************/
+int options::getMusicVolume()
+{
+   return(musicVolume);
+}
+/****************************************************************
+ *                             Treat                            *
+ ****************************************************************/
+int options::getSndFxVolume()
+{
+   return(sndfxVolume);
+}
+/****************************************************************
+ *                             Treat                            *
+ ****************************************************************/
+int options::getLanguage()
+{
+   return(langNumber);
+}
+ /****************************************************************
+ *                             Treat                            *
+ ****************************************************************/     
+int options::getCameraNumber()
+{
+   return(cameraNumber);
+}
 
+/****************************************************************
+ *                        getEnableParticles                    *
+ ****************************************************************/
+bool options::getEnableParticles()
+{
+   extensions ext;
+   enableParticles &= (ext.PointParameterf != NULL) && 
+                      (ext.PointParameterfv != NULL); 
+
+   return(enableParticles);
+}
+
+/****************************************************************
+ *                        getEnableGrass                        *
+ ****************************************************************/
+bool options::getEnableGrass()
+{
+   return(enableParticles && enableGrass);
+}
+
+/****************************************************************
+ *                         getReflexionType                     *
+ ****************************************************************/
+int options::getReflexionType()
+{
+   return(reflexionType);
+}
+
+/****************************************************************
+ *                        getScreenWidth                        *
+ ****************************************************************/
+int options::getScreenWidth()
+{
+   return(screenWidth);
+}
+
+/****************************************************************
+ *                        getScreenHeight                       *
+ ****************************************************************/
+int options::getScreenHeight()
+{
+   return(screenHeight);
+}
+
+/****************************************************************
+ *                     getEnableFullScreen                      *
+ ****************************************************************/
+bool options::getEnableFullScreen()
+{
+   return(enableFullScreen);
+}
+
+/****************************************************************
+ *                        getAntiAliasing                       *
+ ****************************************************************/
+int options::getAntiAliasing()
+{
+   return(antiAliasing);
+}
+
+/****************************************************************
+ *                        setAntiAliasing                       *
+ ****************************************************************/
+void options::setAntiAliasing(int alias)
+{
+   antiAliasing = alias;
+}
+
+/****************************************************************
+ *                         Static Members                       *
+ ****************************************************************/
 int  options::musicVolume;      /**< Actual Music Volume */
 int  options::sndfxVolume;      /**< Actual Sound Effects Volume */
 int  options::langNumber;       /**< Actual Language Number */

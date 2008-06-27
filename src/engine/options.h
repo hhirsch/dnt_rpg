@@ -52,6 +52,53 @@ class options
        * japanese, chinese, etc.) */
       bool isLanguageUnicode();
 
+      /*! Get the Music Volume
+       * \return -> current music volume */
+      int getMusicVolume();
+      /*! Get the Sound Effects Volume
+       * \return -> current sound effects volume */
+      int getSndFxVolume();
+      /*! Get the Language Number
+       * \return -> current language */
+      int getLanguage();
+      /*! Get the current camera mode
+       * \return -> current camera mode number */
+      int getCameraNumber();
+      /*! Verify if the particles are enabled
+       * \return -> true if enabled */
+      bool getEnableParticles();
+      /*! Verify if grass is enabled
+       * \return -> true if enabled */
+      bool getEnableGrass();
+      /*! Get the reflexion type
+       * \return -> current reflextion type */
+      int getReflexionType();
+      /*! Get the screen width
+       * \return -> current screen width */
+      int getScreenWidth();
+      /*! Get the screen height
+       * \return -> current screen height */
+      int getScreenHeight();
+      /*! Verify if the fullscreen is enabled
+       * \return -> true if fullscreen is enabled */
+      bool getEnableFullScreen();
+      /*! Get the current antialiasing
+       * \return -> current antialiasing*/
+      int getAntiAliasing();
+      /*! set the current antialiasing
+       * \param alias -> new antialiasing*/
+      void setAntiAliasing(int alias);
+
+   private:
+      SDL_Rect**   resolutions;    /**< the avaible resolutions */
+      textBox* txtMusicVolume;     /**< Music Volume Text on Window*/
+      textBox* txtSndfxVolume;     /**< Sound Effects Volume Text on Window*/
+      textBox* txtLanguage;        /**< Language Text on Window */
+      textBox* txtCamera;          /**< Camera Mode Text on Window */
+      textBox* txtReflexion;       /**< Reflexion Type Text on Window */
+      textBox* txtResolution;      /**< Resolution Text on Window */
+      textBox* txtAntiAliasing;    /**< AntiAliasing Text on Window */
+
       static int     musicVolume;     /**< Current Music Volume */
       static int     sndfxVolume;     /**< Current Sound Effects Volume */
       static int     langNumber;      /**< Current Language Number */
@@ -65,17 +112,6 @@ class options
       static int     antiAliasing;    /**< Current Anti-Aliasing */
 
       window* intWindow;       /**< Options Window Pointer */
-
-
-   private:
-      SDL_Rect**   resolutions;    /**< the avaible resolutions */
-      textBox* txtMusicVolume;     /**< Music Volume Text on Window*/
-      textBox* txtSndfxVolume;     /**< Sound Effects Volume Text on Window*/
-      textBox* txtLanguage;        /**< Language Text on Window */
-      textBox* txtCamera;          /**< Camera Mode Text on Window */
-      textBox* txtReflexion;       /**< Reflexion Type Text on Window */
-      textBox* txtResolution;      /**< Resolution Text on Window */
-      textBox* txtAntiAliasing;    /**< AntiAliasing Text on Window */
 
       int      prevCamera;         /**< Previous used Camera Mode */
       int      prevMusicVolume;    /**< Previous used Music Volume */

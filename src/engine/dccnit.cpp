@@ -45,10 +45,10 @@ engine::engine()
    option = new options();
 
    /* Set sound and music volume, based on options */
-   snd->changeVolume(option->musicVolume, option->sndfxVolume);
+   snd->changeVolume(option->getMusicVolume(), option->getSndFxVolume());
 
    /* Set Camera, based on options */
-   gameCamera.defineCameraType(option->cameraNumber);
+   gameCamera.defineCameraType(option->getCameraNumber());
 
    /* Set Language, base on options */
    option->setLanguage();
@@ -534,7 +534,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    if(!actualMap->getParticlesFileName().empty())
    {
        particleController->loadFromFile(actualMap->getParticlesFileName());
-       if(option->enableParticles)
+       if(option->getEnableParticles())
        {
           particleController->stabilizeAll();
        }
@@ -796,8 +796,8 @@ int engine::optionsScreen(GLuint idTextura)
   
    if(optionW == OPTIONSW_CONFIRM)
    {
-      snd->changeVolume(option->musicVolume, option->sndfxVolume);
-      gameCamera.defineCameraType(option->cameraNumber);
+      snd->changeVolume(option->getMusicVolume(), option->getSndFxVolume());
+      gameCamera.defineCameraType(option->getCameraNumber());
       /* Change the language */
       option->setLanguage();
    }
@@ -1073,7 +1073,7 @@ void engine::init(SDL_Surface *screen)
    glEnable(GL_LIGHTING);
    glEnable(GL_NORMALIZE);
 
-   if(option->antiAliasing)
+   if(option->getAntiAliasing())
    {
       glEnable(GL_MULTISAMPLE);
    }
@@ -2591,8 +2591,8 @@ void engine::renderScene()
 
    glPushMatrix();
    /* Draw The Floor with Stencil Buffer */
-   if( ((option->reflexionType != REFLEXIONS_NONE) && (!actualMap->isOutdoor()))
-       || (shadow))
+   if( ((option->getReflexionType() != REFLEXIONS_NONE) && 
+        (!actualMap->isOutdoor()))  || (shadow))
    {
       glDisable(GL_DEPTH_TEST);
       glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
@@ -2638,7 +2638,7 @@ void engine::renderScene()
 
 
            /* Draw Reflection */
-           if( (option->reflexionType >= REFLEXIONS_CHARACTERS) && 
+           if( (option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
                (!actualMap->isOutdoor()) )
            {
               glEnable(GL_STENCIL_TEST);
@@ -2739,7 +2739,7 @@ void engine::renderScene()
               glEnable(GL_LIGHTING);*/
 
               /* Draw Reflection */
-              if( (option->reflexionType >= REFLEXIONS_CHARACTERS) && 
+              if( (option->getReflexionType() >= REFLEXIONS_CHARACTERS) && 
                   (!actualMap->isOutdoor()) )
               {
                  glEnable(GL_STENCIL_TEST);
@@ -2767,7 +2767,8 @@ void engine::renderScene()
    }
 
    /* Draw the Map Objects && Walls with Reflexions */
-   if( (option->reflexionType >= REFLEXIONS_ALL) && (!actualMap->isOutdoor()) )
+   if( (option->getReflexionType() >= REFLEXIONS_ALL) && 
+       (!actualMap->isOutdoor()) )
    {
       glEnable(GL_STENCIL_TEST);
       glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
@@ -2786,7 +2787,7 @@ void engine::renderScene()
       glDisable(GL_STENCIL_TEST);
    }
 
-   renderSceneryObjects( (option->reflexionType >= REFLEXIONS_ALL) && 
+   renderSceneryObjects( (option->getReflexionType() >= REFLEXIONS_ALL) && 
                          (!actualMap->isOutdoor()) );
 
    glPushMatrix();
@@ -2930,13 +2931,13 @@ void engine::renderNoShadowThings()
 
    
    /* Draw Particles */
-   if(option->enableParticles)
+   if(option->getEnableParticles())
    {
       glPushMatrix();
          particleController->updateAll(activeCharacter->xPosition,
                                    activeCharacter->yPosition,
                                    activeCharacter->zPosition, 
-                                   visibleMatrix, option->enableGrass);
+                                   visibleMatrix, option->getEnableGrass());
       glPopMatrix();
    }
 

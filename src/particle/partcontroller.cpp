@@ -4,6 +4,7 @@
 
 #include "partcontroller.h"
 #include "../etc/dirs.h"
+#include "../etc/extensions.h"
 
 /**********************************************************************
  *                             Constructor                            *
