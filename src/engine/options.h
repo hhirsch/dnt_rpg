@@ -64,6 +64,9 @@ class options
       /*! Get the current camera mode
        * \return -> current camera mode number */
       int getCameraNumber();
+      /*! Verify if the particles are avaible 
+       * \return -> true if avaible */
+      bool getAvaibleParticles();
       /*! Verify if the particles are enabled
        * \return -> true if enabled */
       bool getEnableParticles();

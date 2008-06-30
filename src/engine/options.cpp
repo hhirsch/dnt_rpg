@@ -591,6 +591,10 @@ void options::displayOptionsScreen(guiInterface* interf)
                                                              enableParticles);
    intWindow->getObjectsList()->insertPicture(220,174,40,112,
                      dir.getRealFile("texturas/options/particles.png").c_str());
+   cxSelParticles->setAvaible(getAvaibleParticles());
+   cxSelGrass->setAvaible(getAvaibleParticles() && 
+                          cxSelParticles->isSelected());
+
 
    /* Reflexions */
    prevReflexion = reflexionType;
@@ -865,10 +869,8 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
           (object == (guiObject*) cxSelGrass))
       {
          /* When disable particles, disable the grass */
-         if(!cxSelParticles->isSelected())
-         {
-            cxSelGrass->setSelection(false);
-         }
+         cxSelGrass->setAvaible(getAvaibleParticles() &&
+                                cxSelParticles->isSelected());
       }
    }
 
@@ -919,13 +921,22 @@ int options::getCameraNumber()
 }
 
 /****************************************************************
+ *                       getAvaibleParticles                    *
+ ****************************************************************/
+bool options::getAvaibleParticles()
+{
+   extensions ext;
+
+   return( (ext.PointParameterf != NULL) && 
+           (ext.PointParameterfv != NULL) );
+}
+
+/****************************************************************
  *                        getEnableParticles                    *
  ****************************************************************/
 bool options::getEnableParticles()
 {
-   extensions ext;
-   enableParticles &= (ext.PointParameterf != NULL) && 
-                      (ext.PointParameterfv != NULL); 
+   enableParticles &= getAvaibleParticles(); 
 
    return(enableParticles);
 }

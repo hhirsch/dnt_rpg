@@ -32,7 +32,7 @@ void cxSel::draw(SDL_Surface *screen)
    color_Set(Colors.colorCont[2].R,Colors.colorCont[2].G,Colors.colorCont[2].B,
              Colors.colorButton.A);
    rectangle_Fill(screen, x1+1, y1+1, x1+9, y1+9);
-   if(selected)
+   if( (avaible) && (selected) )
    {
       color_Set(Colors.colorBar.R, Colors.colorBar.G, 
                 Colors.colorBar.B, Colors.colorCont[0].A);
