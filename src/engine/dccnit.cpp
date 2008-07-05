@@ -1597,15 +1597,12 @@ void engine::hourToTxt()
 }
 
 /*********************************************************************
- *                         verifyMouseActions                        *
+ *                         updateMouseWorldPos                       *
  *********************************************************************/
-int engine::verifyMouseActions(Uint8 mButton)
+void engine::updateMouseWorldPos()
 {
-   char buf[1024];
    GLfloat wx,wy,wz;
-   Uint32 time = SDL_GetTicks();
-   character* activeCharacter = PCs->getActiveCharacter();
-
+   
    /* Update to culling and to GUI */
    updateFrustum(visibleMatrix,proj,modl);
 
@@ -1619,7 +1616,18 @@ int engine::verifyMouseActions(Uint8 mButton)
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
 
    /* Get the world coordinate of the mouse position */
-   gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal); 
+   gluUnProject(wx,wy,wz,modl,proj,viewPort,&xReal,&yReal,&zReal);
+}
+
+/*********************************************************************
+ *                         verifyMouseActions                        *
+ *********************************************************************/
+int engine::verifyMouseActions(Uint8 mButton)
+{
+   char buf[1024];
+
+   Uint32 time = SDL_GetTicks();
+   character* activeCharacter = PCs->getActiveCharacter();
 
    /* Create a bounding box for the mouse position */
    GLfloat minMouse[3], maxMouse[3];
@@ -3026,6 +3034,7 @@ void engine::drawWithoutShadows()
    /* Render all things */
    renderScene();
    renderNoShadowThings();
+   updateMouseWorldPos();
    renderGUI();
    
    /* Flush */
@@ -3069,7 +3078,7 @@ bool engine::canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha)
                    (activeCharacter->zPosition + varZ - moveCircleZ) *
                    (activeCharacter->zPosition + varZ - moveCircleZ) );
       if( ( (canAttack) && (dist > 2*WALK_PER_MOVE_ACTION)) || 
-            (!canAttack) && (dist > WALK_PER_MOVE_ACTION))
+            ( (!canAttack) && (dist > WALK_PER_MOVE_ACTION) ))
       {
          return(false);
       }
