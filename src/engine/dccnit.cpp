@@ -1601,17 +1601,11 @@ void engine::hourToTxt()
  *********************************************************************/
 void engine::updateMouseWorldPos()
 {
-   GLfloat wx,wy,wz;
+   GLfloat wx,wy,wz=1;
    
-   /* Update to culling and to GUI */
-   updateFrustum(visibleMatrix,proj,modl);
-
-   glGetDoublev(GL_MODELVIEW_MATRIX, modl);
-   glGetDoublev(GL_PROJECTION_MATRIX, proj);
-
    /* Define Mouse OpenGL Window Coordinate */
    wx = mouseX; wy = SCREEN_Y - mouseY; 
-   
+  
    /* Get the Z position of the mouse */
    glReadPixels((int)wx,(int)wy,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz); 
 
@@ -1979,12 +1973,16 @@ int engine::treatIO(SDL_Surface *screen)
       SDL_PumpEvents();
       
         
-      /* Keyboard Events */
+      /* Get Keyboard State */
       keys = SDL_GetKeyState(NULL);
 
+      /* Get Mouse State */
       mButton = SDL_GetMouseState(&x,&y);
       mouseX = x;
       mouseY = y;
+
+      /* Get Mouse Coordinates at world system */
+      updateMouseWorldPos();
 
       if( (time-lastMouse >=  REFRESH_RATE ) || 
           ( (mButton & SDL_BUTTON(1) ) && 
@@ -2608,7 +2606,7 @@ void engine::renderScene()
       glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
       glStencilFunc(GL_ALWAYS, 1, 0xffffffff);
       actualMap->drawFloor(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                           gameCamera.getCameraZ(),visibleMatrix);
+                           gameCamera.getCameraZ(),visibleMatrix, true);
       glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
       glEnable(GL_DEPTH_TEST);
       glDisable(GL_STENCIL_TEST);
@@ -3013,6 +3011,7 @@ void engine::drawWithoutShadows()
 
    /* Redefine camera position */
    gameCamera.lookAt(actualMap);
+   updateFrustum(visibleMatrix,proj,modl);
 
    snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
                             gameCamera.getCameraZ(), gameCamera.getTheta(),
@@ -3034,7 +3033,6 @@ void engine::drawWithoutShadows()
    /* Render all things */
    renderScene();
    renderNoShadowThings();
-   updateMouseWorldPos();
    renderGUI();
    
    /* Flush */
