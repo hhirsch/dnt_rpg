@@ -573,30 +573,44 @@ void drawQuad(GLfloat x1, GLfloat z1,
  *                       drawFloorIndoor                            *
  ********************************************************************/
 void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                          GLfloat matriz[6][4])
+                          GLfloat matriz[6][4], bool selectionRender)
 {
    int aux = 0;
    int x1, z1;
    texture* tex;
 
-   glColor4f(1.0, 1.0, 1.0, 0.9);
+   if(selectionRender)
+   {
+      /* At Selection Mode, no need for textures */
+      aux = numTextures - 1;
+      glColor4f(1.0,1.0,1.0,1.0);
+   }
+   else
+   {
+      aux = 0;
+      glColor4f(1.0, 1.0, 1.0, 0.9);
 
-   /* For Reflexions */
-   glEnable(GL_BLEND);
-   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   glEnable(GL_TEXTURE_2D);
+      /* For Reflexions */
+      glEnable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      glEnable(GL_TEXTURE_2D);
+   }
 
    tex = textures;
    while(aux < numTextures)
    {
       /* Bind the texture */
-      glBindTexture(GL_TEXTURE_2D, tex->index);
-      glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                      GL_LINEAR_MIPMAP_LINEAR );
-      glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
-      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+      if(!selectionRender)
+      {
+         glBindTexture(GL_TEXTURE_2D, tex->index);
+         glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+               GL_LINEAR_MIPMAP_LINEAR );
+         glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      }
 
       /* Draw all vertex with this texture */
       glBegin(GL_QUADS);
@@ -605,7 +619,8 @@ void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       {
          for(z1=0; z1 < z; z1++)
          {
-            if( (MapSquares[x1][z1].texture == (int)tex->index) &&
+            if( ( (MapSquares[x1][z1].texture == (int)tex->index) ||
+                  (selectionRender) )                             &&
                 (visibleCube(MapSquares[x1][z1].x1 - VIS_DELTA,0,
                              MapSquares[x1][z1].z1 - VIS_DELTA,
                              MapSquares[x1][z1].x2 + VIS_DELTA,
@@ -627,15 +642,18 @@ void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
       aux++;
    }
 
-   glDisable(GL_TEXTURE_2D);
-   glDisable(GL_BLEND);
+   if(!selectionRender)
+   {
+      glDisable(GL_TEXTURE_2D);
+      glDisable(GL_BLEND);
+   }
 }
 
 /********************************************************************
  *                      drawFloorOutdoor                            *
  ********************************************************************/
 void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                           GLfloat matriz[6][4])
+                           GLfloat matriz[6][4], bool selectionRender)
 {
    extensions ext;
    int aux = 0;
@@ -643,6 +661,15 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
    glEnableClientState(GL_VERTEX_ARRAY);
    glVertexPointer(3, GL_FLOAT, 0, vertexBuffer);
+
+   if(selectionRender)
+   {
+      /* At selection mode, only need to draw it one time, 
+       * without textures */
+      glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
+      glDisableClientState(GL_VERTEX_ARRAY);
+      return;
+  }
 
    /* First Draw with the common texture. */
    glTexCoordPointer(2, GL_FLOAT, 0, uvBuffer);
@@ -752,25 +779,29 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
  *                            DrawFloor                             *
  ********************************************************************/
 void Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                    GLfloat matriz[6][4])
+                    GLfloat matriz[6][4], bool selectionRender)
 {
    /* Draw Terrain */
    if(outdoor)
    {
-      drawFloorOutdoor(cameraX, cameraY, cameraZ, matriz);
+      drawFloorOutdoor(cameraX, cameraY, cameraZ, matriz, selectionRender);
    }
    else
    {
-      drawFloorIndoor(cameraX, cameraY, cameraZ, matriz);
+      drawFloorIndoor(cameraX, cameraY, cameraZ, matriz, selectionRender);
    }
 
-   /* Draw Lakes */
-   lake* l = lakes;
-   int i;
-   for(i = 0; i < totalLakes; i++)
+
+   if(!selectionRender)
    {
-      l->draw();
-      l = l->next;
+      /* Draw Lakes */
+      lake* l = lakes;
+      int i;
+      for(i = 0; i < totalLakes; i++)
+      {
+         l->draw();
+         l = l->next;
+      }
    }
 
    return;
@@ -1901,8 +1932,8 @@ void Map::optimize()
             if(maux != maux2)
             {
                 if( (maux->x1 == maux2->x1) && 
-                    ( (maux->z1 >= maux2->z1) && (maux->z2 <= maux2->z2) ||
-                      (maux->z1 <= maux2->z1) && (maux->z2 >= maux2->z2) ))
+                    ( ((maux->z1 >= maux2->z1) && (maux->z2 <= maux2->z2)) ||
+                      ((maux->z1 <= maux2->z1) && (maux->z2 >= maux2->z2)) ))
                 {
                     if(maux->x2 != maux->x1+10)
                     {
@@ -1918,8 +1949,8 @@ void Map::optimize()
                     }
                 }
                 else if( (maux->x2 == maux2->x2) && 
-                    ( (maux->z1 >= maux2->z1) && (maux->z2 <= maux2->z2) ||
-                      (maux->z1 <= maux2->z1) && (maux->z2 >= maux2->z2) ))
+                    ( ((maux->z1 >= maux2->z1) && (maux->z2 <= maux2->z2)) ||
+                      ((maux->z1 <= maux2->z1) && (maux->z2 >= maux2->z2)) ))
                 {
                     if(maux->x2 != maux->x1+10)
                     {
@@ -1935,8 +1966,8 @@ void Map::optimize()
                     }
                 }
                 else if( (maux->z1 == maux2->z1) && 
-                    ( (maux->x1 >= maux2->x1) && (maux->x2 <= maux2->x2) ||
-                      (maux->x1 <= maux2->x1) && (maux->x2 >= maux2->x2) ))
+                    ( ((maux->x1 >= maux2->x1) && (maux->x2 <= maux2->x2)) ||
+                      ((maux->x1 <= maux2->x1) && (maux->x2 >= maux2->x2)) ))
                 {
                     if(maux->z2 != maux->z1+10)
                     {
@@ -1952,8 +1983,8 @@ void Map::optimize()
                     }
                 }
                 else if( (maux->z2 == maux2->z2) && 
-                    ( (maux->x1 >= maux2->x1) && (maux->x2 <= maux2->x2) ||
-                      (maux->x1 <= maux2->x1) && (maux->x2 >= maux2->x2) ))
+                    ( ((maux->x1 >= maux2->x1) && (maux->x2 <= maux2->x2)) ||
+                      ((maux->x1 <= maux2->x1) && (maux->x2 >= maux2->x2)) ))
                 {
                     if(maux->z2 != maux->z1+10)
                     {

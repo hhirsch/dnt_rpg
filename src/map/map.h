@@ -213,10 +213,11 @@ class Map
        * \param cameraY -> Y coordinate of camera
        * \param cameraZ -> Z coordinate of camera
        * \param matriz  -> view frustum matriz 
+       * \param selectionRender -> true if renderng at SELECTION mode
        * \return 1 if success.
        ***************************************************************/
       void drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                     GLfloat matriz[6][4]);
+                     GLfloat matriz[6][4], bool selectionRender=false);
       /*!
        *************************************************************** 
        * Draw the map objects on screen (using view culling)  
@@ -603,11 +604,12 @@ class Map
        * \param cameraX -> X coordinate of camera
        * \param cameraY -> Y coordinate of camera
        * \param cameraZ -> Z coordinate of camera
-       * \param matriz  -> view frustum matriz 
+       * \param matriz  -> view frustum matriz
+       * \param selectionRender -> true if renderng at SELECTION mode
        * \return 1 if success.
        ***************************************************************/
       void drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                            GLfloat matriz[6][4]);
+                            GLfloat matriz[6][4], bool selectionRender=false);
 
       /*!
        *************************************************************** 
@@ -616,10 +618,11 @@ class Map
        * \param cameraY -> Y coordinate of camera
        * \param cameraZ -> Z coordinate of camera
        * \param matriz  -> view frustum matriz 
+       * \param selectionRender -> true if renderng at SELECTION mode
        * \return 1 if success.
        ***************************************************************/
       void drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                           GLfloat matriz[6][4]);
+                           GLfloat matriz[6][4], bool selectionRender=false);
 
 
          wall* walls;          /**< Map Walls */
