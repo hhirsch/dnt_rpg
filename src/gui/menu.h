@@ -32,6 +32,13 @@ class menu: public guiList
        * \param avaible -> if the item is avaible or not */
       void insertItem(string text, bool avaible);
 
+      /*! Insert a Item on the Menu
+       * \param text -> item Text
+       * \param imageFile -> item Image
+       * \note imageFile must be of Size: 10x10 pixels
+       * \param avaible -> if the item is avaible or not */
+      void insertItem(string text, string imageFile, bool avaible);
+
       /*! Set the Position of the Menu
        * \param xa -> x coordinate
        * \param ya -> y coordinate */
@@ -80,6 +87,7 @@ class menu: public guiList
           y;                   /**< Menu Y Coordinate */   
       unsigned int maxCharac;  /**< Size of the bigger string on menu */
       farso_colors Colors;     /**< Colors */
+      int numPictures;         /**< Number of pictures at the menu */
       int actualItem;          /**< Actual Selected item */
       bool pressed;            /**< Control to take the release button press */
 

@@ -169,24 +169,32 @@ void inventWindow::reDraw()
 void inventWindow::openMenu(int x, int y, int type)
 {
    dntFont fnt;
+   dirs dir;
    int xSize;
    menuType = type;
    objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
-   objectMenu->insertItem(gettext("Drop"),menuType==MENU_TYPE_INVENTORY);
+   objectMenu->insertItem(gettext("Drop"),
+                          dir.getRealFile("icons/drop.png"),
+                          menuType==MENU_TYPE_INVENTORY);
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem(gettext("Sell"),0);
+   objectMenu->insertItem(gettext("Sell"), 
+                          dir.getRealFile("icons/sell.png"),0);
    if(menuType == MENU_TYPE_INVENTORY)
    {
-      objectMenu->insertItem(gettext("Use"),1);
+      objectMenu->insertItem(gettext("Use"),
+                             dir.getRealFile("icons/use.png"),1);
    }
    else
    {
-      objectMenu->insertItem(gettext("Remove"),1);
+      objectMenu->insertItem(gettext("Remove"),
+                             dir.getRealFile("icons/remove.png"),1);
    }
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem(gettext("Info"),1);
+   objectMenu->insertItem(gettext("Info"),
+                          dir.getRealFile("icons/info.png"),1);
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem(gettext("Get"),1);
+   objectMenu->insertItem(gettext("Get"),
+                          dir.getRealFile("icons/get.png"),1);
 
    fnt.defineFont(DNT_FONT_ARIAL,12);
 
