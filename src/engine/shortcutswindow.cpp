@@ -24,6 +24,7 @@ void shortcutsWindow::open(guiInterface* gui)
 {
    dirs dir;
    if(shortCutsWindow == NULL)
+   {
   
       shortCutsWindow = gui->insertWindow(0,SCREEN_Y-129,512,SCREEN_Y-1,
                                           gettext("Shortcuts"));
@@ -76,6 +77,7 @@ void shortcutsWindow::open(guiInterface* gui)
       shortCutsWindow->setExternPointer(&shortCutsWindow);
       gui->openWindow(shortCutsWindow);
    }
+}
 
 /***********************************************************************
  *                               close                                 *
@@ -151,7 +153,7 @@ void shortcutsWindow::setHour(string hour)
 int shortcutsWindow::treat(guiObject* object, int eventInfo, int engineMode)
 {
    /* No opened window => No Events */
-   if(shortCutsWindow != NULL)
+   if(shortCutsWindow == NULL)
    {
       return(SHORTCUTS_WINDOW_NONE);
    }
