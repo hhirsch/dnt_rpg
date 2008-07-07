@@ -3037,6 +3037,12 @@ void engine::drawWithoutShadows()
    
    /* Flush */
    glFlush();
+
+   GLenum errorCode;
+   while( (errorCode = glGetError()) != GL_NO_ERROR)
+   {
+      cerr << "OpenGL Error: " << gluErrorString(errorCode) << endl;
+   }
 }
 
 /*********************************************************************

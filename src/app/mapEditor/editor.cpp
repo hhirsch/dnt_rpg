@@ -597,7 +597,7 @@ void editor::renderSceneryObjects()
  *********************************************************************/
 void editor::draw()
 {
-
+   GLenum errorCode;
    GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
 
    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -837,6 +837,12 @@ void editor::draw()
 
    glEnable(GL_FOG);
    glFlush();
+
+   while( (errorCode = glGetError()) != GL_NO_ERROR)
+   {
+      cerr << "OpenGL Error: " << gluErrorString(errorCode) << endl;
+   }
+
    SDL_GL_SwapBuffers();
 }
 
