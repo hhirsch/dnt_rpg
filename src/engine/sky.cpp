@@ -91,8 +91,8 @@ void sky::drawDome(int lats, int longs)
 void sky::draw(Map* actualMap, GLfloat sunRot)
 {
    solarTime = (sunRot * 24) / 360.0;
-
-   glDisable(GL_COLOR);
+   
+   glDisable(GL_FOG);
    glEnable(GL_COLOR_MATERIAL);
    glPushMatrix();
       glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
@@ -101,5 +101,7 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
       glScalef(SKY_SIZE,SKY_SIZE,SKY_SIZE);
       drawDome(15,15);
    glPopMatrix();
+
+   glEnable(GL_FOG);
 }
 
