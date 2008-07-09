@@ -329,36 +329,32 @@ int smallestPowerOfTwo(int num)
 /******************************************************************
  *                         textureToScreen                        *
  ******************************************************************/
-void textureToScreen(GLuint texturaID, GLdouble proj[16],GLdouble modl[16], 
-                     GLint viewPort[4],int xa, int ya, int xb, int yb, 
-                     int width, int height, double depth)
+void textureToScreen(GLuint texturaID, int xa, int ya, int xb, int yb, 
+                     int width, int height)
 {
-   GLdouble x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4;
-
+   /* Calculate texture overlay */
    GLfloat xOverlay = (GLfloat) (width)/(GLfloat)smallestPowerOfTwo(width);
    GLfloat yOverlay = (GLfloat) (height)/(GLfloat)smallestPowerOfTwo(height);
    
-   gluUnProject(xa,(SCREEN_Y-1-ya), depth, modl, proj, viewPort, &x1, &y1, &z1);
-   gluUnProject(xa,(SCREEN_Y-2-yb),depth, modl, proj, viewPort, &x2, &y2, &z2);
-   gluUnProject(xb+1, (SCREEN_Y-2-yb), depth, modl, proj, viewPort, 
-                &x3, &y3, &z3);
-   gluUnProject(xb+1,(SCREEN_Y-1-ya),depth, modl,proj,viewPort, &x4, &y4, &z4);
+   /* Set as GL 2D Coordinates */
+   ya = SCREEN_Y - ya;
+   yb = SCREEN_Y - yb;
 
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texturaID);
 
    glBegin(GL_QUADS);
       glTexCoord2f(0,0);
-      glVertex3f(x1, y1, z1);
+      glVertex3f(xa, ya, 0);
 	
       glTexCoord2f(xOverlay,0);
-      glVertex3f(x4, y4, z4);
+      glVertex3f(xb, ya, 0);
 	
       glTexCoord2f(xOverlay,yOverlay);
-      glVertex3f(x3, y3, z3);
+      glVertex3f(xb, yb, 0);
 	
       glTexCoord2f(0,yOverlay);
-      glVertex3f(x2, y2, z2);
+      glVertex3f(xa, yb, 0);
    glEnd();
 
    glDisable(GL_TEXTURE_2D);

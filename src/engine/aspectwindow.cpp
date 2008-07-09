@@ -16,7 +16,6 @@ aspectWindow::aspectWindow(character* dude, guiInterface* inter)
    int centerX = SCREEN_X / 2;
 
    glDisable(GL_LIGHTING);
-   SDL_ShowCursor(SDL_ENABLE);
 
    curImage = 0;
    images = NULL;
@@ -157,7 +156,6 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          inter->closeWindow(intWindow);
          intWindow = NULL;
          glEnable(GL_LIGHTING);
-         SDL_ShowCursor(SDL_DISABLE);
          return(ASPECTW_CONFIRM);
       }
       /* Cancel */
@@ -167,7 +165,6 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          inter->closeWindow(intWindow);
          intWindow = NULL;
          glEnable(GL_LIGHTING);
-         SDL_ShowCursor(SDL_DISABLE);
          return(ASPECTW_CANCEL);
       }
       /* Previous Image */

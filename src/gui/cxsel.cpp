@@ -14,6 +14,7 @@ cxSel::cxSel(int x, int y):guiObject()
    y1 = y;
    x2 = x+10;
    y2 = y+10;
+   avaible = true;
    selected = false;
    lastChangeTime = SDL_GetTicks();
    type = GUI_SEL_BOX;

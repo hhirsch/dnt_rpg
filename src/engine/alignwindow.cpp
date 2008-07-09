@@ -14,7 +14,6 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
    int centerX = SCREEN_X / 2;
 
    glDisable(GL_LIGHTING);
-   SDL_ShowCursor(SDL_ENABLE);
    
    externalAligns = alg;
    choosedAlign = actual;
@@ -107,7 +106,6 @@ int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          *choosedAlign = actualAlign;
          inter->closeWindow(intWindow);
          glEnable(GL_LIGHTING);
-         SDL_ShowCursor(SDL_DISABLE);
          return(ALIGNW_CONFIRM);
       }
       else if(object == (guiObject*) buttonCancel) 
@@ -117,7 +115,6 @@ int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          *choosedAlign = NULL;
          intWindow = NULL;
          glEnable(GL_LIGHTING);
-         SDL_ShowCursor(SDL_DISABLE);
          return(ALIGNW_CANCEL);
       }
    }

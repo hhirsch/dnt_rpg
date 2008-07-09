@@ -51,7 +51,6 @@ skillWindow::skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
    qsort(&skillsDesc[0], totalSkills, sizeof(skill**), cmpSkillFunction);
 
    glDisable(GL_LIGHTING);
-   SDL_ShowCursor(SDL_ENABLE);
 
    /* Create Skill Window */
    intWindow = inter->insertWindow(centerX-132,centerY-128,
@@ -228,7 +227,6 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          intWindow = NULL;
          saveSkill->setAvaiblePoints(avaiblePoints);
          glEnable(GL_LIGHTING);
-         SDL_ShowCursor(SDL_DISABLE);
          return(SKILLW_CONFIRM);
       }
       else if(object == (guiObject*) buttonCancel) 
@@ -243,7 +241,6 @@ int skillWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
           inter->closeWindow(intWindow);
           intWindow = NULL;
           glEnable(GL_LIGHTING);
-          SDL_ShowCursor(SDL_DISABLE);
          return(SKILLW_CANCEL);
       }
    }

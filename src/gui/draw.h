@@ -122,19 +122,14 @@ void circle_Draw(SDL_Surface *screen, int xC, int yC, int r);
 
 /*! Draw the Texture to the Screen Coordinates 
  * \param texturaID -> GL Identifier of the texture
- * \param proj -> the projection matrix
- * \param modl -> the model view matrix
- * \param viewPort -> the viewPort vector
  * \param xa -> x1 screen coordinate
  * \param ya -> y1 screen coordinate
  * \param xb -> x2 screen coordinate
  * \param yb -> y2 screen coordinate
  * \param width -> texture width
- * \param height -> texture height
- * \param depth -> screen depth of the texture */
-void textureToScreen(GLuint texturaID, GLdouble proj[16],GLdouble modl[16], 
-                     GLint viewPort[4], int xa, int ya,int xb, int yb,
-                     int width, int height, double depth);
+ * \param height -> texture height */
+void textureToScreen(GLuint texturaID, int xa, int ya,int xb, int yb,
+                     int width, int height);
 
 /*! Return the smallest power of two greater or equal to the number
  * \param num -> bases number 

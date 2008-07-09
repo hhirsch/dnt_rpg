@@ -59,6 +59,8 @@ int main(int argc, char **argv)
    
    gameEngine->init(screen);
 
+   SDL_ShowCursor(SDL_DISABLE);
+
    GLuint tituloID;
    /* Call Splash Screen  */
    gameEngine->splashScreen();

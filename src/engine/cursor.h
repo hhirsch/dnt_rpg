@@ -31,7 +31,14 @@ class cursor
       /*! cursor Constructor */
       cursor();
       /*! cursor Destructor */
-      ~cursor();  
+      ~cursor();
+
+      /*! init the cursor use 
+       * \note musr be called at engine init */
+      void init();
+      /*! Finish the cursor use
+       * \note must be called at engine end*/
+      void finish();
 
       /*! Set current mouse Cursor 
        * \param nCursor -> cursor Number to use.*/
@@ -49,12 +56,12 @@ class cursor
       int get();
       
    private:
-      GLuint texture[CURSOR_TOTAL]; /**< Cursors Textures */
-      float sizeX[CURSOR_TOTAL];    /**< Cursors Widths */
-      float sizeY[CURSOR_TOTAL];    /**< Cursors Heights */
-      float propX[CURSOR_TOTAL];    /**< X Proportion */
-      float propY[CURSOR_TOTAL];    /**< Y Proportion */
-      int currentCursor;            /**< Current Cursor Index */
+      static GLuint texture[CURSOR_TOTAL]; /**< Cursors Textures */
+      static float sizeX[CURSOR_TOTAL];    /**< Cursors Widths */
+      static float sizeY[CURSOR_TOTAL];    /**< Cursors Heights */
+      static float propX[CURSOR_TOTAL];    /**< X Proportion */
+      static float propY[CURSOR_TOTAL];    /**< Y Proportion */
+      static int currentCursor;            /**< Current Cursor Index */
       
       /*! Load Cursor file 
        * \param fileName -> file name of cursor

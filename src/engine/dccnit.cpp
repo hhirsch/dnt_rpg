@@ -35,13 +35,14 @@ engine::engine()
 
    /* Initialize the Cursor */
    cursors = new(cursor);
+   cursors->init();
 
    /* Initialize sounds and musics */
    snd = new(sound);
    snd->init();
    walkSound = NULL;
 
-   /* Load Options */
+   /* Create Options */
    option = new options();
 
    /* Set sound and music volume, based on options */
@@ -255,6 +256,7 @@ engine::~engine()
    }
  
    /* Clear Cursors */
+   cursors->finish();
    delete(cursors);
 
    /* Delete the action controller */
@@ -353,10 +355,8 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    fadeInTexture(texturaCarga, centerX-128, centerY-64, 
                  centerX+127, centerY+63, 256,128);
 
-   updateFrustum(visibleMatrix,proj,modl);
    showLoading(img,&texturaTexto,texturaCarga,
-               texto, progress,
-               proj, modl, viewPort);
+               texto, progress);
    progress->defineActualHealth(3);
 
    /* Loading Map */
@@ -451,8 +451,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
            fscanf(arq,"%s %s %f %f",&name[0],&arquivo[0],&posX,&posZ);
            sprintf(texto, gettext("Loading NPC: %s"), name);
            showLoading(img,&texturaTexto,texturaCarga,
-                         texto, progress,
-                         proj, modl, viewPort);
+                       texto, progress);
            per = NPCs->insertCharacter(arquivo,features, this, arqMapa);
            /* Define Initial Position */
            per->initialXPosition = posX;
@@ -475,15 +474,13 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    {
        loadPCs(); 
        showLoading(img,&texturaTexto,texturaCarga,
-                   gettext("Loading Character"), progress,
-                 proj, modl, viewPort);
+                   gettext("Loading Character"), progress);
    }
    progress->defineActualHealth(7);
 
    /* Loading Internal Windows */
    showLoading(img,&texturaTexto,texturaCarga,
-               gettext("Putting GUI on Screen"), progress,
-                 proj, modl, viewPort);
+               gettext("Putting GUI on Screen"), progress);
 
    progress->defineActualHealth(8);
 
@@ -528,8 +525,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    /* Update  particle System to a stable state */
    showLoading(img,&texturaTexto,texturaCarga,
-               gettext("Loading Particles"), progress,
-                 proj, modl, viewPort);
+               gettext("Loading Particles"), progress);
    progress->defineActualHealth(9);
    if(!actualMap->getParticlesFileName().empty())
    {
@@ -559,8 +555,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    activeCharacter->ocSquare = actualMap->squareInic;
 
    showLoading(img,&texturaTexto,texturaCarga,
-               gettext("Loading Changes..."), progress,
-                 proj, modl, viewPort);
+               gettext("Loading Changes..."), progress);
    progress->defineActualHealth(10);
 
    /* Do Modifications */
@@ -580,8 +575,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    /* Done */
    showLoading(img,&texturaTexto,texturaCarga,
-               gettext("Done!"), progress,
-                 proj, modl, viewPort);
+               gettext("Done!"), progress);
 
    glDisable(GL_LIGHTING);
    fadeOutTexture(texturaCarga,centerX-128,centerY-64,
@@ -617,9 +611,10 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2,
    {
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
-      updateFrustum(visibleMatrix,proj,modl);
+      draw2DMode();
       glColor3f(i/50.0, i/50.0, i/50.0);
-      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,sizeX,sizeY,0.012);
+      textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
+      draw3DMode(FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -638,9 +633,10 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2,
    {
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
-      updateFrustum(visibleMatrix,proj,modl);
+      draw2DMode();
       glColor3f(i/50.0, i/50.0, i/50.0);
-      textureToScreen(id,proj,modl,viewPort,x1,y1,x2,y2,sizeX,sizeY,0.012);
+      textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
+      draw3DMode(FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -692,10 +688,10 @@ void engine::splashScreen()
 
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
-      updateFrustum(visibleMatrix,proj,modl);
+      draw2DMode();
       glColor3f(1.0, 1.0, 1.0);
-      textureToScreen(id, proj, modl, viewPort, 0, 0,
-                      SCREEN_X-1, SCREEN_Y-1, 800, 600, 0.012);
+      textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
+      draw3DMode(FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
 
@@ -760,7 +756,6 @@ int engine::optionsScreen(GLuint idTextura)
    int eventInfo = NOTHING;
 
    glDisable(GL_LIGHTING);
-   SDL_ShowCursor(SDL_ENABLE);
 
    option->displayOptionsScreen(interf);
 
@@ -777,11 +772,16 @@ int engine::optionsScreen(GLuint idTextura)
          keys = SDL_GetKeyState(NULL);
          Uint8 mButton = SDL_GetMouseState(&x,&y);
          object = interf->manipulateEvents(x,y,mButton,keys, eventInfo);
-         textureToScreen(idTextura,proj,modl,viewPort,
-                         0,0,SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
+         
          glPushMatrix();
             draw2DMode();
+            textureToScreen(idTextura,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
             interf->draw(proj,modl,viewPort);
+
+            glPushMatrix();
+               cursors->draw(x, y);
+            glPopMatrix();
+
             draw3DMode(FARVIEW);
          glPopMatrix();
          glFlush();
@@ -815,7 +815,6 @@ int engine::optionsScreen(GLuint idTextura)
                         dir.getRealFile("races/races.lst"));
 
    glEnable(GL_LIGHTING);
-   SDL_ShowCursor(SDL_DISABLE);
 
    delete(interf);
 
@@ -875,11 +874,16 @@ int engine::characterScreen(GLuint idTextura)
          Uint8 mButton = SDL_GetMouseState(&x,&y);
          object = gui->manipulateEvents(x,y,mButton,keys, eventInfo);
 
-         textureToScreen(idTextura,proj,modl,viewPort,0,0,
-                         SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
+         
          glPushMatrix();
             draw2DMode();
+            textureToScreen(idTextura,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
             gui->draw(proj,modl,viewPort);
+
+            glPushMatrix();
+               cursors->draw(x, y);
+            glPopMatrix();
+
             draw3DMode(FARVIEW);
          glPopMatrix();
          glFlush();
@@ -3192,10 +3196,10 @@ void engine::showImage(string fileName)
 
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT
               | GL_STENCIL_BUFFER_BIT);
-      updateFrustum(visibleMatrix,proj,modl);
+      draw2DMode();
       glColor3f(1.0, 1.0, 1.0);
-      textureToScreen(id, proj, modl, viewPort, 0, 0,
-                      SCREEN_X-1, SCREEN_Y-1, 800, 600, 0.012);
+      textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
+      draw3DMode(FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
 

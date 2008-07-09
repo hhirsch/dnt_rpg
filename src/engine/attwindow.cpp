@@ -27,7 +27,6 @@ attWindow::attWindow(skills* sk, skills* savSkill, guiInterface* inter,
 
    /* Disable lighting */
    glDisable(GL_LIGHTING);
-   SDL_ShowCursor(SDL_ENABLE);
 
    /* clear internal informations */
    for( i = 0; i < 6; i++)
@@ -505,7 +504,6 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
             inter->closeWindow(intWindow);
             intWindow = NULL;
             glEnable(GL_LIGHTING);
-            SDL_ShowCursor(SDL_DISABLE);
             return(ATTW_CONFIRM);
          }
          else
@@ -524,7 +522,6 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
           inter->closeWindow(intWindow);
           intWindow = NULL;
           glEnable(GL_LIGHTING);
-          SDL_ShowCursor(SDL_DISABLE);
          return(ATTW_CANCEL);
       }
       /* Reroll */

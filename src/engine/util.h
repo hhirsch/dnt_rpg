@@ -114,14 +114,10 @@ inline double deg2Rad(double x){return PID180 * x;}
  * \param texturaTexto -> text texture
  * \param texturaCarga -> Loading image texture 
  * \param texto -> text to be put on loading
- * \param progress -> progress bar
- * \param proj -> projection matrix
- * \param modl -> model view matrix
- * \param viewPort -> view port matrix. */
+ * \param progress -> progress bar */
 void showLoading(SDL_Surface* img, GLuint* texturaTexto, 
                  GLuint texturaCarga, const char* texto,
-                 healthBar* progress, 
-                 GLdouble proj[16], GLdouble modl[16],GLint viewPort[4]);
+                 healthBar* progress);
 
 /*! Verifies if some bounding box is inner on another
  * \param min1 -> min values of first bounding box 

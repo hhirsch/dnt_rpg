@@ -2,11 +2,24 @@
 #include "util.h"
 #include "../etc/dirs.h"
 
-
 /*****************************************************************
  *                         Constructor                           *
  *****************************************************************/
 cursor::cursor()
+{
+}
+
+/*****************************************************************
+ *                          Destructor                           *
+ *****************************************************************/
+cursor::~cursor()
+{
+}
+
+/*****************************************************************
+ *                             init                              *
+ *****************************************************************/
+void cursor::init()
 {
    dirs dir;
    /* Generate OpenGL Textures */
@@ -26,9 +39,9 @@ cursor::cursor()
 }
 
 /*****************************************************************
- *                          Destructor                           *
+ *                              end                              *
  *****************************************************************/
-cursor::~cursor()
+void cursor::finish()
 {
    /* Free Cursors Textures */
    glDeleteTextures(CURSOR_TOTAL,texture);
@@ -97,7 +110,7 @@ void cursor::draw(int mouseX, int mouseY)
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texture[currentCursor]);
    glPushMatrix();
-      glTranslatef(mouseX, SCREEN_Y - mouseY, 0);
+      glTranslatef(mouseX, SCREEN_Y - mouseY, 0.0);
       glBegin(GL_QUADS);
          glTexCoord2f(0.0, 0.0);
          glVertex2f(0,0);
@@ -112,4 +125,14 @@ void cursor::draw(int mouseX, int mouseY)
 
    glDisable(GL_BLEND);
 }
+
+/*****************************************************************
+ *                         Static Members                        *
+ *****************************************************************/
+GLuint cursor::texture[CURSOR_TOTAL]; /**< Cursors Textures */
+float cursor::sizeX[CURSOR_TOTAL];    /**< Cursors Widths */
+float cursor::sizeY[CURSOR_TOTAL];    /**< Cursors Heights */
+float cursor::propX[CURSOR_TOTAL];    /**< X Proportion */
+float cursor::propY[CURSOR_TOTAL];    /**< Y Proportion */
+int cursor::currentCursor;
 

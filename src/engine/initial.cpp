@@ -42,6 +42,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
    done = false;
    guiObject* object = NULL;
    int eventInfo = NOTHING;
+   cursor cursors;
 
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
@@ -76,7 +77,6 @@ int initialScreen::run(int Status,GLdouble proj[16],
    Uint8 *keys;
    int x,y;
 
-   SDL_ShowCursor(SDL_ENABLE);
    while (!done)
    {
       tempo = SDL_GetTicks();
@@ -88,8 +88,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
          glClearColor(0,0,0,1);
          glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
          Uint8 Mbotao = SDL_GetMouseState(&x,&y);
-         textureToScreen(tituloID,proj,modl,viewPort,0,0,
-                         SCREEN_X-1,SCREEN_Y-1,800,600,0.012);
+         
          object = gui->manipulateEvents(x,y,Mbotao,keys, eventInfo);
          if(eventInfo != NOTHING)
          {
@@ -129,7 +128,14 @@ int initialScreen::run(int Status,GLdouble proj[16],
          }
          glPushMatrix();
             draw2DMode();
+            
+            textureToScreen(tituloID, 0,0, SCREEN_X-1,SCREEN_Y-1, 800,600);
             gui->draw(proj,modl,viewPort);
+
+            glPushMatrix();
+               cursors.draw(x, y);
+            glPopMatrix();
+
             draw3DMode(FARVIEW);
          glPopMatrix();
          glFlush();
@@ -144,7 +150,6 @@ int initialScreen::run(int Status,GLdouble proj[16],
    gui->closeWindow(jan);
 
    glEnable(GL_LIGHTING);
-   SDL_ShowCursor(SDL_DISABLE);
    return(result);
 }
 

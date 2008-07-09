@@ -24,7 +24,6 @@ raceWindow::raceWindow(races* rc, skills* sk, guiInterface* inter,
    int centerX = SCREEN_X / 2;
 
    glDisable(GL_LIGHTING);
-   SDL_ShowCursor(SDL_ENABLE);
 
    externalSkills = sk;
    choosedRace = retRace;
@@ -244,7 +243,6 @@ int raceWindow::treat(guiObject* object, int eventInfo,
          inter->closeWindow(intWindow);
          intWindow = NULL;
          glEnable(GL_LIGHTING);
-         SDL_ShowCursor(SDL_DISABLE);
          return(RACEW_CONFIRM);
       }
       else if(object == (guiObject*) buttonCancel) 
@@ -254,7 +252,6 @@ int raceWindow::treat(guiObject* object, int eventInfo,
          *choosedRace = NULL;
          intWindow = NULL;
          glEnable(GL_LIGHTING);
-         SDL_ShowCursor(SDL_DISABLE);
          return(RACEW_CANCEL);
       }
    }

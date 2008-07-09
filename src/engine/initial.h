@@ -7,6 +7,7 @@
 
 #include "../gui/farso.h"
 #include "../sound/sound.h"
+#include "cursor.h"
 
 /* initialScreen Returns Values */
 #define EXIT_GAME     0   /**< Exit Game Return Value */
