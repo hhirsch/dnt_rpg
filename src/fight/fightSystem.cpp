@@ -156,6 +156,7 @@ void fightSystem::verifyDeads()
    if( (actualActor->actualEnemy->lifePoints <= 0) && 
        (actualActor->actualEnemy->isAlive()) )
    {
+
       //FIXME Other states, like partial death to be implemented
       actualActor->actualEnemy->kill();
 

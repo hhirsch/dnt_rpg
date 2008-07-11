@@ -733,6 +733,8 @@ int engine::menuScreen(int Status, GLuint idTextura, bool reloadMusic)
       snd->loadMusic("music/musica1.ogg");
    }
 
+   cursors->set(CURSOR_WALK);
+
    /* Executes Initial Screen */
    updateFrustum(visibleMatrix,proj,modl);
    initialScreen* inic = new(initialScreen);
@@ -3234,7 +3236,6 @@ int engine::run(SDL_Surface *surface)
    actualFPS = 10.0;
    lastFPS = 0;
 
-   
    #ifdef REDE
      /* if using network. FIXME abandoned code, almost for now. */
      netevent_p_t eventoRede;
@@ -3300,6 +3301,8 @@ int engine::run(SDL_Surface *surface)
               
          /* Put the animation state on normal */
          PCs->getActiveCharacter()->setState(STATE_IDLE);
+
+         cursors->set(CURSOR_WALK);
          return(0);
      }
 
