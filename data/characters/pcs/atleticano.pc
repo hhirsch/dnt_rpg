@@ -1,0 +1,15 @@
+name = Atleticano
+model = models/personagens/atleticano/model.cfg
+portrait = characters/portraits/metaleiro.png
+maxLifePoints = 10
+baseModifier = 2/1/2
+attackModifier = 1/0/0/0/0/0
+sizeModifier = 0
+psychoState = 2
+walk_interval = 32
+ATT_STRENGHT     =  1
+ATT_DEXTERY      =  1
+ATT_CONSTITUTION =  1
+ATT_INTELIGENCY  =  1
+ATT_WISDOW       =  1
+ATT_CHARISM      =  1
