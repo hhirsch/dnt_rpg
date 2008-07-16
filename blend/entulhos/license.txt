@@ -1,0 +1,6 @@
+All files here (./blend/entulhos) are at Public Domain, except:
+
+madeira1_texture.png
+
+Derived from OpenFrag Texture Pack, licensed at CC-BY.
+
