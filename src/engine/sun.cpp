@@ -72,12 +72,13 @@ bool sun::visibleTime()
  *********************************************************************/
 void sun::positionOnHour(float posX, float posZ)
 {
+   float halfFarView = (OUTDOOR_FARVIEW / 2.0)-1;
    if(visibleTime())
    {
       rotation = SUN_EQU_B * curHour + SUN_EQU_C;
-      where[1] = (sin(deg2Rad(rotation / 4.0)))*((FARVIEW / 2.0)-1);
+      where[1] = (sin(deg2Rad(rotation / 4.0))) * (halfFarView);
 
-      where[0] = (sin(deg2Rad(rotation-90))*((FARVIEW / 2.0)-1)) + posX;
+      where[0] = (sin(deg2Rad(rotation-90)) * (halfFarView) + posX);
       where[2] = posZ;
       /*if( ( (rotation > 90) && (where[0] > 0) ) ||
           ( (rotation < 90) && (where[0] < 0) ) )
@@ -97,13 +98,13 @@ void sun::positionOnHour(float posX, float posZ)
          /* Past MidNight, equation consider hour as 24+curHour */
          rotation = SUN_EQN_B * (curHour+24) + SUN_EQN_C;
       }
-      where[1] = (sin(deg2Rad((rotation-180) / 4.0)))*((FARVIEW / 2.0)-1);
+      where[1] = (sin(deg2Rad((rotation-180) / 4.0)))*(halfFarView);
 
-      where[0] = (sin(deg2Rad(rotation-270))*((FARVIEW / 2.0)-1)) + posX;
+      where[0] = (sin(deg2Rad(rotation-270))*(halfFarView) + posX);
       where[2] = posZ;
 
       /*
-      where[1] = (sin(deg2Rad((rotation-180) / 4.0)))*((FARVIEW / 2.0)-1);
+      where[1] = (sin(deg2Rad((rotation-180) / 4.0)))*(halfFarView);
       if( ( ((rotation-180) > 90) && (where[0] > 0) ) ||
           ( ((rotation-180) < 90) && (where[0] < 0) ) )
       {

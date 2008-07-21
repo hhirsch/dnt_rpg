@@ -26,7 +26,7 @@ editor::editor()
 
    gui = new(guiIO);
    hour = 12.0;
-   gameSun = new sun(hour , FARVIEW, FARVIEW);
+   gameSun = new sun(hour , OUTDOOR_FARVIEW, OUTDOOR_FARVIEW);
    gameSky = new(sky);
    models = new modelList();
    wTypes = new weaponTypes();
@@ -81,7 +81,8 @@ void editor::redmensionateWindow()
    glViewport (0, 0, (GLsizei) screen->w, (GLsizei) screen->h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, FARVIEW);
+   gluPerspective(45.0, (GLsizei)screen->w / (GLsizei)screen->h, 1.0, 
+                  OUTDOOR_FARVIEW);
    glGetIntegerv(GL_VIEWPORT, viewPort);
    glMatrixMode (GL_MODELVIEW);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -216,7 +217,7 @@ void editor::openMap()
             glFogf(GL_FOG_DENSITY, 5.00);
             glHint(GL_FOG_HINT, GL_DONT_CARE);
             glFogf(GL_FOG_START, 200);
-            glFogf(GL_FOG_END, (FARVIEW) + 4000);
+            glFogf(GL_FOG_END, (OUTDOOR_FARVIEW) + 4000);
          }
       }
       gui->setFog(&map->fog);
@@ -440,7 +441,7 @@ void editor::newMap()
       glFogf(GL_FOG_DENSITY, 0.0010);
       glHint(GL_FOG_HINT, GL_DONT_CARE);
       glFogf(GL_FOG_START, 200);
-      glFogf(GL_FOG_END, (FARVIEW / 2.0)+200);
+      glFogf(GL_FOG_END, (OUTDOOR_FARVIEW / 2.0)+200);
    }
    gui->setFog(&map->fog); 
 }
@@ -792,7 +793,7 @@ void editor::draw()
    glPushMatrix();
       draw2DMode();
       gui->draw(proj, modl, viewPort);
-      draw3DMode(FARVIEW);
+      draw3DMode(OUTDOOR_FARVIEW);
    glPopMatrix();
    glEnable(GL_FOG);
    glEnable(GL_LIGHTING);

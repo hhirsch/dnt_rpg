@@ -32,7 +32,7 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
                                   centerX+127, centerY+96,
                    256,128);
 
-   draw3DMode(FARVIEW);
+   draw3DMode(OUTDOOR_FARVIEW);
    glFlush();
    SDL_GL_SwapBuffers();
    glDeleteTextures(1,texturaTexto);

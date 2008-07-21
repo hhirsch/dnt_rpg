@@ -1173,7 +1173,7 @@ int main(int argc, char **argv)
           
          draw2DMode(); 
             gui->draw(proj,modl,viewPort);
-         draw3DMode(FARVIEW);
+         draw3DMode(INDOOR_FARVIEW);
             
          //glPopMatrix();
 

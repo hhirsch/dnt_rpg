@@ -48,11 +48,11 @@
  *                      Camera's constants                          *
  ********************************************************************/
 
-#define DELTA_CAMERA  WALK_UPDATE * 75  /**<  The camera velocity */
-#define ZOOM_MAX          80            /**< Max value of Zoom */
-#define ZOOM_MIN         500            /**< Min value of Zoom */
-#define FARVIEW         8192            /**< FarView constant */
-#define INDOOR_FARVIEW   768            /**< Indoor FarView */
+#define DELTA_CAMERA  WALK_UPDATE * 75    /**<  The camera velocity */
+#define ZOOM_MAX            80            /**< Max value of Zoom */
+#define ZOOM_MIN           500            /**< Min value of Zoom */
+#define OUTDOOR_FARVIEW   8192            /**< FarView constant */
+#define INDOOR_FARVIEW     768            /**< Indoor FarView */
 
 /********************************************************************
  *                      Shadow's constants                          *
@@ -65,7 +65,6 @@
 /********************************************************************
  *                        Sun's constants                           *
  ********************************************************************/
-#define SKY_SIZE       FARVIEW-256    /**< Sky Size */
 #define SUN_HOUR_BORN          4.2    /**< Sun Hour to born */
 #define SUN_HOUR_DEATH         20.0   /**< Sun hour to die */
 #define SUN_HOUR_INITIAL_TOTAL 8.5    /**< Initial hour of Total Light */

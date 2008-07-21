@@ -998,19 +998,36 @@ void options::setAntiAliasing(int alias)
 }
 
 /****************************************************************
+ *                       getFarViewFactor                       *
+ ****************************************************************/
+float options::getFarViewFactor()
+{
+   return(farViewFactor);
+}
+
+/****************************************************************
+ *                       setFarViewFactor                       *
+ ****************************************************************/
+void options::setFarViewFactor(float factor)
+{
+   farViewFactor = factor;
+}
+
+/****************************************************************
  *                         Static Members                       *
  ****************************************************************/
-int  options::musicVolume;      /**< Actual Music Volume */
-int  options::sndfxVolume;      /**< Actual Sound Effects Volume */
-int  options::langNumber;       /**< Actual Language Number */
-int  options::cameraNumber;     /**< Actual Camera Mode */
-bool options::enableParticles;  /**< Enable/Disable Particles */
-bool options::enableGrass;      /**< Enable/Disable Grass */
-int  options::reflexionType;    /**< Reflexion Type */
-int  options::screenWidth;      /**< Screen Height */
-int  options::screenHeight;     /**< Screen Width */
-bool options::enableFullScreen; /**< If fullscreen is defined */
-int  options::antiAliasing;     /**< Current Anti-Aliasing */
+int    options::musicVolume = 0;
+int    options::sndfxVolume = 0;
+int    options::langNumber = 0;
+int    options::cameraNumber = 0;
+bool   options::enableParticles = false;
+bool   options::enableGrass = false;
+int    options::reflexionType = 0;
+int    options::screenWidth = 800;
+int    options::screenHeight = 600; 
+bool   options::enableFullScreen = false;
+int    options::antiAliasing = 0;
+float  options::farViewFactor = 0.5;
 
 string options::fileName = "";
 

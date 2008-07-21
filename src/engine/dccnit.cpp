@@ -120,7 +120,8 @@ engine::engine()
    missions->init(this);
 
    hour = 9.0;
-   gameSun = new sun(hour, FARVIEW / 2.0, FARVIEW / 2.0);
+   float sunPos = (OUTDOOR_FARVIEW * option->getFarViewFactor()) / 2.0;
+   gameSun = new sun(hour, sunPos, sunPos);
 
    engineMode = ENGINE_MODE_REAL_TIME;
 
@@ -401,7 +402,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    }
    else
    {
-      GLdouble fogEnd = (FARVIEW) + 4000;
+      GLdouble fogEnd = (option->getFarViewFactor()*OUTDOOR_FARVIEW) + 4000;
       GLdouble fogStart = 200;
       GLdouble fogDensity = 5.0;
       GLfloat color[3] = {1.0,1.0,1.0};
@@ -412,7 +413,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
          color[2] = 0.0;
          fogStart = 40;
          fogDensity = 1.0;
-         fogEnd = INDOOR_FARVIEW-2;
+         fogEnd = (option->getFarViewFactor()*INDOOR_FARVIEW)-2;
       }
       glEnable(GL_FOG);
       {
@@ -588,11 +589,11 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    /* Set the Farview to indoor or outdoor */
    if(actualMap->isOutdoor())
    {
-      redefineWindow(actualScreen, FARVIEW);
+      redefineWindow(actualScreen, option->getFarViewFactor()*OUTDOOR_FARVIEW);
    }
    else
    {
-      redefineWindow(actualScreen, INDOOR_FARVIEW);
+      redefineWindow(actualScreen, option->getFarViewFactor()*INDOOR_FARVIEW);
    }
 
    glEnable(GL_LIGHTING);
@@ -614,7 +615,7 @@ void engine::fadeInTexture(GLuint id, int x1, int y1, int x2, int y2,
       draw2DMode();
       glColor3f(i/50.0, i/50.0, i/50.0);
       textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
-      draw3DMode(FARVIEW);
+      draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -636,7 +637,7 @@ void engine::fadeOutTexture(GLuint id, int x1, int y1, int x2, int y2,
       draw2DMode();
       glColor3f(i/50.0, i/50.0, i/50.0);
       textureToScreen(id,x1,y1,x2,y2,sizeX,sizeY);
-      draw3DMode(FARVIEW);
+      draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
       SDL_Delay(10);
@@ -691,7 +692,7 @@ void engine::splashScreen()
       draw2DMode();
       glColor3f(1.0, 1.0, 1.0);
       textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
-      draw3DMode(FARVIEW);
+      draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
 
@@ -784,7 +785,7 @@ int engine::optionsScreen(GLuint idTextura)
                cursors->draw(x, y);
             glPopMatrix();
 
-            draw3DMode(FARVIEW);
+            draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
@@ -886,7 +887,7 @@ int engine::characterScreen(GLuint idTextura)
                cursors->draw(x, y);
             glPopMatrix();
 
-            draw3DMode(FARVIEW);
+            draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
@@ -1054,7 +1055,7 @@ void engine::redefineWindow(SDL_Surface *screen, int actualFarView)
 void engine::init(SDL_Surface *screen)
 {
    actualScreen = screen;  
-   redefineWindow(screen, FARVIEW);
+   redefineWindow(screen, option->getFarViewFactor()*OUTDOOR_FARVIEW);
    
    /* Clear */
    glClearColor (0.0, 0.0, 0.0, 0.0);
@@ -2981,11 +2982,11 @@ void engine::renderGUI()
       glPopMatrix();
       if(actualMap->isOutdoor())
       {
-         draw3DMode(FARVIEW);
+         draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       }
       else
       {
-         draw3DMode(INDOOR_FARVIEW);
+         draw3DMode(option->getFarViewFactor()*INDOOR_FARVIEW);
       }
 
    glPopMatrix();
@@ -3197,7 +3198,7 @@ void engine::showImage(string fileName)
       draw2DMode();
       glColor3f(1.0, 1.0, 1.0);
       textureToScreen(id, 0, 0, SCREEN_X-1, SCREEN_Y-1, 800, 600);
-      draw3DMode(FARVIEW);
+      draw3DMode(option->getFarViewFactor()*OUTDOOR_FARVIEW);
       glFlush();
       SDL_GL_SwapBuffers();
 

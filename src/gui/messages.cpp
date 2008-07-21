@@ -68,7 +68,7 @@ string getStringFromUser(string title, string previous,
       glPushMatrix();
         draw2DMode();
         gui->draw(proj,modl,viewPort);
-        draw3DMode(FARVIEW);
+        draw3DMode(OUTDOOR_FARVIEW);
       glPopMatrix();
       glEnable(GL_FOG);
       glEnable(GL_LIGHTING);
@@ -164,7 +164,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
       glPushMatrix();
         draw2DMode();
         gui->draw(proj,modl,viewPort);
-	draw3DMode(FARVIEW);
+        draw3DMode(OUTDOOR_FARVIEW);
       glPopMatrix();
       glEnable(GL_FOG);
       glEnable(GL_LIGHTING);
@@ -245,7 +245,7 @@ void showMessage(string title, string message,
       glPushMatrix();
         draw2DMode();
         gui->draw(proj,modl,viewPort);
-        draw3DMode(FARVIEW);
+        draw3DMode(OUTDOOR_FARVIEW);
       glPopMatrix();
       glEnable(GL_FOG);
       glEnable(GL_LIGHTING);

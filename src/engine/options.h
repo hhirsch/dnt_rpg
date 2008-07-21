@@ -88,9 +88,15 @@ class options
       /*! Get the current antialiasing
        * \return -> current antialiasing*/
       int getAntiAliasing();
-      /*! set the current antialiasing
+      /*! Set the current antialiasing
        * \param alias -> new antialiasing*/
       void setAntiAliasing(int alias);
+      /*! Get the current farView Factor
+       * \return -> current farView Factor */
+      float getFarViewFactor();
+      /*! Set the current farview factor
+       * \param factor -> new farview factor */
+      void setFarViewFactor(float factor);
 
    private:
       SDL_Rect**   resolutions;    /**< the avaible resolutions */
@@ -113,6 +119,7 @@ class options
       static int     screenHeight;    /**< Screen Width */
       static bool    enableFullScreen;/**< If fullscreen is defined */
       static int     antiAliasing;    /**< Current Anti-Aliasing */
+      static float   farViewFactor;   /**< Current FarView Factor */
 
       window* intWindow;       /**< Options Window Pointer */
 

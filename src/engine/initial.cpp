@@ -136,7 +136,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
                cursors.draw(x, y);
             glPopMatrix();
 
-            draw3DMode(FARVIEW);
+            draw3DMode(OUTDOOR_FARVIEW);
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();

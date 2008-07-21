@@ -3,6 +3,7 @@
 #include "../map/map.h"
 #include "../gui/draw.h"
 #include "../etc/dirs.h"
+#include "options.h"
 #include <math.h>
 
 /*********************************************************************
@@ -90,6 +91,11 @@ void sky::drawDome(int lats, int longs)
  *********************************************************************/
 void sky::draw(Map* actualMap, GLfloat sunRot)
 {
+   options opt;
+   float skySize = (opt.getFarViewFactor()*OUTDOOR_FARVIEW) *
+                   (opt.getFarViewFactor()*256);
+
+
    solarTime = (sunRot * 24) / 360.0;
    
    glDisable(GL_FOG);
@@ -98,7 +104,7 @@ void sky::draw(Map* actualMap, GLfloat sunRot)
       glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
       glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
       glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
-      glScalef(SKY_SIZE,SKY_SIZE,SKY_SIZE);
+      glScalef(skySize, skySize, skySize);
       drawDome(15,15);
    glPopMatrix();
 
