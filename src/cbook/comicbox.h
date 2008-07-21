@@ -44,6 +44,20 @@ class comicBox
       /*! Render the box at its current state and effect */
       void render();
 
+      /*! Set the next box 
+       * \param box -> next box */
+      void setNext(comicBox* box);
+      /*! Set the previous box
+       * \param page -> previous box */
+      void setPrevious(comicBox* box);
+
+      /*! Get the next box 
+       * \return next box */
+      comicBox* getNext();
+      /*! Get the previous box
+       * \return previous box */
+      comicBox* getPrevious();
+
    protected:
 
       /*! Update the comic box */
@@ -59,6 +73,9 @@ class comicBox
 
       int effectType;        /**< The effect type */
       int status;            /**< Current quad status */
+
+      comicBox* next;        /**< Next Box on list */
+      comicBox* previous;    /**< Previous Box on list */
 };
 
 #endif

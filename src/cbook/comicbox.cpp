@@ -9,6 +9,8 @@ comicBox::comicBox()
    int i;
 
    /* Set some default values */
+   next = NULL;
+   previous = NULL;
    scaleFactorX = 1.0;
    scaleFactorY = 1.0;
    status = COMIC_BOX_STATUS_INACTIVE;
@@ -47,6 +49,38 @@ void comicBox::setVertex(int vertNumber, GLfloat x, GLfloat y)
       vertex[vertNumber][0] = x;
       vertex[vertNumber][1] = y;
    }
+}
+
+/***********************************************************************
+ *                                setNext                              *
+ ***********************************************************************/
+void comicBox::setNext(comicBox* box)
+{
+   next = box;
+}
+ 
+/***********************************************************************
+ *                              setPrevious                            *
+ ***********************************************************************/
+void comicBox::setPrevious(comicBox* box)
+{
+   previous = box;
+}
+
+/***********************************************************************
+ *                                getNext                              *
+ ***********************************************************************/
+comicBox* comicBox::getNext()
+{
+   return(next);
+}
+
+/***********************************************************************
+ *                              getPrevious                            *
+ ***********************************************************************/
+comicBox* comicBox::getPrevious()
+{
+   return(previous);
 }
 
 /***********************************************************************
@@ -118,3 +152,4 @@ void comicBox::render()
    /* Now Render it at the desired one */
    //TODO
 }
+
