@@ -659,6 +659,9 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    int aux = 0;
    texture* tex;
 
+   /* Create the buffers with visible squares */
+   createBuffers(matriz);
+
    glEnableClientState(GL_VERTEX_ARRAY);
    glVertexPointer(3, GL_FLOAT, 0, vertexBuffer);
 
@@ -2352,9 +2355,9 @@ void Map::drawMinimap(SDL_Surface* img)
 }
 
 /********************************************************************
- *                              createSplats                        *
+ *                           createBuffers                          *
  ********************************************************************/
-void Map::createSplats()
+void Map::createBuffers(GLfloat matriz[6][4])
 {
    int x1, z1;
    int actualTexture = 0;
@@ -2372,46 +2375,73 @@ void Map::createSplats()
       alphaCoordX = 0;
       for(x1=0;x1<x;x1++)
       {
-         uvBuffer[actualTexture] = 0.0;
-         uvBuffer[actualTexture+1] = 0.0;
-         uvAlphaBuffer[actualTexture] = alphaCoordX / modX;
-         uvAlphaBuffer[actualTexture+1] = alphaCoordZ / modZ;
-         vertexBuffer[totalVertex] = MapSquares[x1][z1].x1;
-         vertexBuffer[totalVertex+1] = MapSquares[x1][z1].h1;
-         vertexBuffer[totalVertex+2] = MapSquares[x1][z1].z1;
+         /* Only add to the buffer if the square is potentially visible */
+         if(visibleCube(MapSquares[x1][z1].x1 - VIS_DELTA,0,
+                        MapSquares[x1][z1].z1 - VIS_DELTA,
+                        MapSquares[x1][z1].x2 + VIS_DELTA,
+                        MAX_HEIGHT,
+                        MapSquares[x1][z1].z2 + VIS_DELTA, matriz))
+         {
+            uvBuffer[actualTexture] = 0.0;
+            uvBuffer[actualTexture+1] = 0.0;
+            uvAlphaBuffer[actualTexture] = alphaCoordX / modX;
+            uvAlphaBuffer[actualTexture+1] = alphaCoordZ / modZ;
+            vertexBuffer[totalVertex] = MapSquares[x1][z1].x1;
+            vertexBuffer[totalVertex+1] = MapSquares[x1][z1].h1;
+            vertexBuffer[totalVertex+2] = MapSquares[x1][z1].z1;
 
-         uvBuffer[actualTexture+2] = 0.0;
-         uvBuffer[actualTexture+3] = TEXTURE_REPEATS;
-         uvAlphaBuffer[actualTexture+2] = alphaCoordX / modX;
-         uvAlphaBuffer[actualTexture+3] = (alphaCoordZ+ALPHA_TEXTURE_INC)/modZ;
-         vertexBuffer[totalVertex+3] = MapSquares[x1][z1].x1;
-         vertexBuffer[totalVertex+4] = MapSquares[x1][z1].h2;
-         vertexBuffer[totalVertex+5] = MapSquares[x1][z1].z2;
+            uvBuffer[actualTexture+2] = 0.0;
+            uvBuffer[actualTexture+3] = TEXTURE_REPEATS;
+            uvAlphaBuffer[actualTexture+2] = alphaCoordX / modX;
+            uvAlphaBuffer[actualTexture+3] = (alphaCoordZ + ALPHA_TEXTURE_INC)
+                                             / modZ;
+            vertexBuffer[totalVertex+3] = MapSquares[x1][z1].x1;
+            vertexBuffer[totalVertex+4] = MapSquares[x1][z1].h2;
+            vertexBuffer[totalVertex+5] = MapSquares[x1][z1].z2;
 
-         uvBuffer[actualTexture+4] = TEXTURE_REPEATS;
-         uvBuffer[actualTexture+5] = TEXTURE_REPEATS;
-         uvAlphaBuffer[actualTexture+4] = (alphaCoordX+ALPHA_TEXTURE_INC)/modX; 
-         uvAlphaBuffer[actualTexture+5] = (alphaCoordZ+ALPHA_TEXTURE_INC)/modZ;
-         vertexBuffer[totalVertex+6] = MapSquares[x1][z1].x2;
-         vertexBuffer[totalVertex+7] = MapSquares[x1][z1].h3;
-         vertexBuffer[totalVertex+8] = MapSquares[x1][z1].z2;
+            uvBuffer[actualTexture+4] = TEXTURE_REPEATS;
+            uvBuffer[actualTexture+5] = TEXTURE_REPEATS;
+            uvAlphaBuffer[actualTexture+4] = (alphaCoordX + ALPHA_TEXTURE_INC)
+                                             / modX; 
+            uvAlphaBuffer[actualTexture+5] = (alphaCoordZ + ALPHA_TEXTURE_INC)
+                                             / modZ;
+            vertexBuffer[totalVertex+6] = MapSquares[x1][z1].x2;
+            vertexBuffer[totalVertex+7] = MapSquares[x1][z1].h3;
+            vertexBuffer[totalVertex+8] = MapSquares[x1][z1].z2;
 
-         uvBuffer[actualTexture+6] = TEXTURE_REPEATS;
-         uvBuffer[actualTexture+7] = 0.0;
-         uvAlphaBuffer[actualTexture+6] = (alphaCoordX+ALPHA_TEXTURE_INC)/modX; 
-         uvAlphaBuffer[actualTexture+7] = alphaCoordZ / modZ;
-         vertexBuffer[totalVertex+9] = MapSquares[x1][z1].x2;
-         vertexBuffer[totalVertex+10] = MapSquares[x1][z1].h4;
-         vertexBuffer[totalVertex+11] = MapSquares[x1][z1].z1;
+            uvBuffer[actualTexture+6] = TEXTURE_REPEATS;
+            uvBuffer[actualTexture+7] = 0.0;
+            uvAlphaBuffer[actualTexture+6] = (alphaCoordX + ALPHA_TEXTURE_INC)
+                                             / modX; 
+            uvAlphaBuffer[actualTexture+7] = alphaCoordZ / modZ;
+            vertexBuffer[totalVertex+9] = MapSquares[x1][z1].x2;
+            vertexBuffer[totalVertex+10] = MapSquares[x1][z1].h4;
+            vertexBuffer[totalVertex+11] = MapSquares[x1][z1].z1;
 
-         /* Create The Alphas */
-         createAlpha(x1,z1);
-         
-         totalVertex += 12;
-         actualTexture += 8;
+            totalVertex += 12;
+            actualTexture += 8;
+         }
          alphaCoordX += ALPHA_TEXTURE_INC;
      }
      alphaCoordZ += ALPHA_TEXTURE_INC;
+  }
+}
+
+/********************************************************************
+ *                              createSplats                        *
+ ********************************************************************/
+void Map::createSplats()
+{
+   int x1, z1;
+   
+   /* Create the alpha channel, for each square */
+   for(z1=0;z1<z;z1++)
+   {
+      for(x1=0;x1<x;x1++)
+      {
+         /* Create The Alphas */
+         createAlpha(x1,z1);
+     }
   }
 
    updateAlphaTextures();

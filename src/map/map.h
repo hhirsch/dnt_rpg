@@ -597,6 +597,12 @@ class Map
 
    protected:
 
+      /*!
+       ***************************************************************
+       * Fill all buffers needed to render (doing culling)
+       * \param matriz -> current view frustum matrix
+       ***************************************************************/
+      void createBuffers(GLfloat matriz[6][4]);
 
       /*!
        *************************************************************** 
