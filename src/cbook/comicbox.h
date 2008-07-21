@@ -4,6 +4,8 @@
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
 
+#include <string>
+using namespace std;
 
 /* Status  */
 #define COMIC_BOX_STATUS_INACTIVE  0  /**< The box is inactive */

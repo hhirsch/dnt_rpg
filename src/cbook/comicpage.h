@@ -2,6 +2,8 @@
 #ifndef _dnt_comic_page_h
 #define _dnt_comic_page_h
 
+#include "comicbox.h"
+
 /*! The Comic Page is the representation of a page,
  * including all comic boxes and its effects */
 class comicPage

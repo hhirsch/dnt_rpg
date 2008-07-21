@@ -1,6 +1,12 @@
 #ifndef _dnt_comicbook_h
 #define _dnt_comicbook_h
 
+#include <SDL/SDL.h>
+#include <SDL/SDL_opengl.h>
+
+#include "comicpage.h"
+#include "comicbox.h"
+
 /*! The comic book class is the DNT cutscene abstraction */
 class comicBook
 {

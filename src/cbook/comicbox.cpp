@@ -133,7 +133,7 @@ void comicBox::update()
       /* No Effect */
       case COMIC_BOX_EFFECT_NONE:
       default:
-         status = COMIC_STATUS_DONE;
+         status = COMIC_BOX_STATUS_DONE;
       break;
    }
 }

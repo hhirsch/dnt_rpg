@@ -1,4 +1,4 @@
-#include "cbook.h"
+#include "comicbook.h"
 
 /***********************************************************************
  *                              Constructor                            *
@@ -28,7 +28,7 @@ void comicBook::empty()
    for(i = 0; i < totalPages; i++)
    {
       pag = pages;
-      pages = pages->next;
+      pages = pages->getNext();
       delete(pag);
    }
 }
@@ -42,6 +42,7 @@ bool comicBook::load(string bookFile)
    empty();
 
    /* TODO Load it! */
+   return(true);
 };
 
 /***********************************************************************

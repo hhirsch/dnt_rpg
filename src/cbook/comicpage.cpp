@@ -16,12 +16,13 @@ comicPage::comicPage()
  ***********************************************************************/
 comicPage::~comicPage()
 {
+   int i;
    /* Free All Boxes */
    comicBox* box;
    for(i = 0; i < totalBoxes; i++)
    {
       box = boxes;
-      boxes = boxes->next;
+      boxes = boxes->getNext();
 
       delete(box);
    }

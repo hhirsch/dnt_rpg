@@ -1,0 +1,30 @@
+# DccNiTghtmare is public domain. Do whatever you want with this code.
+
+CFLAGS = @CPPFLAGS@ -g -c -Wall -O2
+CC = @CXX@
+CPP= @CXX@
+LDFLAGS = @LDFLAGS@
+LIBS= @LIBS@
+EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
+
+all: comicbook.o comicbox.o comicpage.o
+
+comicbook.o: comicbook.h comicbook.cpp
+	@printf "Making comicbook.o... "
+	@$(CPP) $(CFLAGS) -c comicbook.cpp -o comicbook.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+comicbox.o: comicbox.h comicbox.cpp
+	@printf "Making comicbox.o... "
+	@$(CPP) $(CFLAGS) -c comicbox.cpp -o comicbox.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+comicpage.o: comicpage.h comicpage.cpp
+	@printf "Making comicpage.o... "
+	@$(CPP) $(CFLAGS) -c comicpage.cpp -o comicpage.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+clean:
+	@printf "Cleaning cbook Bin Files... "
+	@\rm -rf *.o fifo
+	@printf "\e[0;32mDone.\e[0;0m\n"
