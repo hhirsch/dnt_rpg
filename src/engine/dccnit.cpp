@@ -1084,10 +1084,6 @@ void engine::init(SDL_Surface *screen)
       glEnable(GL_MULTISAMPLE);
    }
 
-   /* Culling */
-   /*glCullFace(GL_BACK);
-   glEnable(GL_CULL_FACE);*/
-
    /* Sky Creation */
    gameSky = new(sky);
 
