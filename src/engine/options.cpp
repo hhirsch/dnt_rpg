@@ -1027,7 +1027,7 @@ int    options::screenWidth = 800;
 int    options::screenHeight = 600; 
 bool   options::enableFullScreen = false;
 int    options::antiAliasing = 0;
-float  options::farViewFactor = 0.5;
+float  options::farViewFactor = 1.0;
 
 string options::fileName = "";
 

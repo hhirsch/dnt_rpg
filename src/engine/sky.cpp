@@ -92,7 +92,7 @@ void sky::drawDome(int lats, int longs)
 void sky::draw(Map* actualMap, GLfloat sunRot)
 {
    options opt;
-   float skySize = (opt.getFarViewFactor()*OUTDOOR_FARVIEW) *
+   float skySize = (opt.getFarViewFactor()*OUTDOOR_FARVIEW) - 
                    (opt.getFarViewFactor()*256);
 
 
