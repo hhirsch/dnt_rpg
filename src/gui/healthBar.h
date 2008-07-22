@@ -1,10 +1,11 @@
 #ifndef _healthBar_h
 #define _healthBar_h
 
+#include "guiobject.h"
 #include <SDL/SDL.h>
 
 /*! The Health Bar Class */
-class healthBar
+class healthBar: public guiObject
 {
    public:
   
@@ -33,11 +34,6 @@ class healthBar
 
       int actualHealth; /**< The Actual life on bar */
       int maxHealth;    /**< The Maximun life on bar */
-
-      int x1,           /**< Coordinate on Surface */
-          x2,           /**< Coordinate on Surface */
-          y1,           /**< Coordinate on Surface */
-          y2;           /**< Coordinate on Surface */
 
 };
 

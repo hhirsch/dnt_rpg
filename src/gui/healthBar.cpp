@@ -12,6 +12,7 @@ healthBar::healthBar(int x1, int y1, int x2, int y2)
    this->y2 = y2;
    this->maxHealth = 1;
    this->actualHealth = 1;
+   this->type = GUI_HEALTH_BAR;
 }
 
 /****************************************************************
@@ -55,5 +56,6 @@ void healthBar::draw(SDL_Surface* surface)
    }
    int mx2 = (int) (perc * (x2-x1-4)) + x1+2;
    rectangle_Fill(surface, x1+2, y1+2, mx2, y2-2);
+   setChanged();
 }
 

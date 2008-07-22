@@ -19,6 +19,7 @@ using namespace std;
 #include "rolbar.h"
 #include "listtext.h"
 #include "filesel.h"
+#include "healthBar.h"
 
 /*! The guiList Class: a list for guiObjects. */
 class guiList
@@ -130,6 +131,14 @@ class guiList
        * \param dir -> current dir to browse
        * \return -> pointer to the fileSel inserted */
       fileSel* insertFileSel(int xa, int ya, bool load, string dir);
+
+      /*! Insert a healthBar (a progress bar) on the list
+       * \param xa -> x1 coordinate 
+       * \param ya -> y1 coordinate 
+       * \param xb -> x2 coordinate
+       * \param yb -> y2 coordinate
+       * \param max -> max health value */
+      healthBar* insertHealthBar(int xa, int ya, int xb, int yb, int max);
 
       /*! Add a internal Menu to the list
        * \return menu Inserted */

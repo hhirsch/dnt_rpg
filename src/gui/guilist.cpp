@@ -112,6 +112,12 @@ void guiList::removeObject(guiObject *obj)
          delete(fs);
          break;
       }
+      case GUI_HEALTH_BAR:
+      {
+         healthBar* hb = (healthBar*)obj;
+         delete(hb);
+         break;
+      }
       default: 
       {
         delete(obj);
@@ -256,6 +262,17 @@ fileSel* guiList::insertFileSel(int xa, int ya, bool load, string dir)
 {
    fileSel* n = new fileSel(xa, ya, load, dir, this);
    insertObject(n);
+   return(n);
+}
+
+/**************************************************************
+ *                      insertHealthBar                       *
+ **************************************************************/
+healthBar* guiList::insertHealthBar(int xa, int ya, int xb, int yb, int max)
+{
+   healthBar* n = new healthBar(xa, ya, xb, yb);
+   insertObject(n);
+   n->defineMaxHealth(max);
    return(n);
 }
 
