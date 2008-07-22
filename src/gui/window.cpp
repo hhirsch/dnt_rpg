@@ -298,6 +298,12 @@ void window::draw(int mouseX, int mouseY, bool drawBar)
               bt->draw(surface);
               break;
          }
+         case GUI_HEALTH_BAR:
+         {
+              healthBar* hb = (healthBar*) obj;
+              hb->draw(surface);
+              break;
+         }
          default:break;
        
       } //case
