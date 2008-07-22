@@ -512,17 +512,15 @@ void options::displayOptionsScreen(guiInterface* interf)
                                     gettext("Options"));
 
    /* Music Things */
-   sprintf(tmp,"%d",musicVolume);
-   saux = tmp;
    qt = intWindow->getObjectsList()->insertTextBox(8,27,145,44,0,
                                          gettext("Music Volume:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonMusDec = intWindow->getObjectsList()->insertButton(146,27,156,44,
+   buttonMusDec = intWindow->getObjectsList()->insertButton(121,27,131,44,
                                                   fnt.createUnicode(0x25C4),0);
    buttonMusDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtMusicVolume = intWindow->getObjectsList()->insertTextBox(157,27,197,44,
-                                                               1,saux.c_str());
-   txtMusicVolume->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   barMusicVolume = intWindow->getObjectsList()->insertHealthBar(133,27,
+                                                                 196,44,255);
+   barMusicVolume->defineActualHealth(musicVolume);
    buttonMusSum = intWindow->getObjectsList()->insertButton(198,27,208,44,
                                                   fnt.createUnicode(0x25BA),0);
    buttonMusSum->defineFont(DNT_FONT_ARIAL, 9);
@@ -536,12 +534,12 @@ void options::displayOptionsScreen(guiInterface* interf)
    qt = intWindow->getObjectsList()->insertTextBox(8,52,145,69,0,
                                          gettext("Effects Volume:"));
    qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
-   buttonSndDec = intWindow->getObjectsList()->insertButton(146,52,156,69,
+   buttonSndDec = intWindow->getObjectsList()->insertButton(121,52,131,69,
                                                   fnt.createUnicode(0x25C4),0);
    buttonSndDec->defineFont(DNT_FONT_ARIAL, 9);
-   txtSndfxVolume = intWindow->getObjectsList()->insertTextBox(157,52,197,69,1,
-                                 saux.c_str());
-   txtSndfxVolume->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_CENTER);
+   barSndfxVolume = intWindow->getObjectsList()->insertHealthBar(133,52,
+                                                                 196,69,255);
+   barSndfxVolume->defineActualHealth(sndfxVolume);
    buttonSndSum = intWindow->getObjectsList()->insertButton(198,52,208,69,
                                                   fnt.createUnicode(0x25BA),0);
    buttonSndSum->defineFont(DNT_FONT_ARIAL, 9);
@@ -680,8 +678,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    buttonFarViewDec = intWindow->getObjectsList()->insertButton(121,311,131,328,
                                                   fnt.createUnicode(0x25C4),0);
    buttonFarViewDec->defineFont(DNT_FONT_ARIAL, 9);
-   barFarView = intWindow->getObjectsList()->insertHealthBar(133,311,
-                                                             196,328,9);
+   barFarView = intWindow->getObjectsList()->insertHealthBar(133,311,196,328,9);
    barFarView->defineActualHealth((int)floor(farViewFactor*9));                                                          
    buttonFarViewSum = intWindow->getObjectsList()->insertButton(198,311,208,328,
                                                   fnt.createUnicode(0x25BA),0);
@@ -729,14 +726,14 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       {
          if(musicVolume < 255)
          {
-             musicVolume++;
+             musicVolume += 10;
          }
       }
       else if(object == (guiObject*) buttonMusDec) 
       {
          if(musicVolume > 0)
          {
-             musicVolume--;
+             musicVolume -= 10;
          }
       }
       /* Sound Effects */
@@ -744,14 +741,14 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       {
          if(sndfxVolume < 255)
          {
-             sndfxVolume++;
+             sndfxVolume += 10;
          }
       }
       else if(object == (guiObject*) buttonSndDec) 
       {
          if(sndfxVolume > 0)
          {
-             sndfxVolume--;
+             sndfxVolume -= 10;
          }
       }
       /* Language */
@@ -918,19 +915,14 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       }
    }
 
-   char tmp[5];
-   sprintf(tmp,"%d",musicVolume);
-   txtMusicVolume->setText(tmp);
-
-   sprintf(tmp,"%d",sndfxVolume);
-   txtSndfxVolume->setText(tmp);
-
    txtLanguage->setText(languageName());
    txtCamera->setText(cameraName());
    txtReflexion->setText(reflexionName());
    txtResolution->setText(resolutionName());
    txtAntiAliasing->setText(antiAliasingName());
 
+   barMusicVolume->defineActualHealth(musicVolume);
+   barSndfxVolume->defineActualHealth(sndfxVolume);
    barFarView->defineActualHealth((int)floor(farViewFactor*9));                                                          
 
    intWindow->draw(0,0);

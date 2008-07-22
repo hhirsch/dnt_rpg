@@ -100,14 +100,14 @@ class options
 
    private:
       SDL_Rect**   resolutions;    /**< the avaible resolutions */
-      textBox* txtMusicVolume;     /**< Music Volume Text on Window*/
-      textBox* txtSndfxVolume;     /**< Sound Effects Volume Text on Window*/
       textBox* txtLanguage;        /**< Language Text on Window */
       textBox* txtCamera;          /**< Camera Mode Text on Window */
       textBox* txtReflexion;       /**< Reflexion Type Text on Window */
       textBox* txtResolution;      /**< Resolution Text on Window */
       textBox* txtAntiAliasing;    /**< AntiAliasing Text on Window */
       
+      healthBar* barMusicVolume;   /**< Music Volume Text on Window*/
+      healthBar* barSndfxVolume;   /**< Sound Effects Volume Text on Window*/
       healthBar* barFarView;       /**< FarViewFactor Text on Window */
 
       static int     musicVolume;     /**< Current Music Volume */
