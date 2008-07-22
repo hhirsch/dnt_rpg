@@ -413,7 +413,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
          color[2] = 0.0;
          fogStart = 40;
          fogDensity = 1.0;
-         fogEnd = (option->getFarViewFactor()*INDOOR_FARVIEW)-2;
+         fogEnd = (INDOOR_FARVIEW)-2;
       }
       glEnable(GL_FOG);
       {
@@ -593,7 +593,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    }
    else
    {
-      redefineWindow(actualScreen, option->getFarViewFactor()*INDOOR_FARVIEW);
+      redefineWindow(actualScreen, INDOOR_FARVIEW);
    }
 
    glEnable(GL_LIGHTING);
@@ -2986,7 +2986,7 @@ void engine::renderGUI()
       }
       else
       {
-         draw3DMode(option->getFarViewFactor()*INDOOR_FARVIEW);
+         draw3DMode(INDOOR_FARVIEW);
       }
 
    glPopMatrix();
