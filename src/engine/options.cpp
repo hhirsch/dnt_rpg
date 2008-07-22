@@ -727,6 +727,10 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          if(musicVolume < 255)
          {
              musicVolume += 10;
+             if(musicVolume > 255)
+             {
+                musicVolume = 255;
+             }
          }
       }
       else if(object == (guiObject*) buttonMusDec) 
@@ -734,6 +738,10 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          if(musicVolume > 0)
          {
              musicVolume -= 10;
+             if(musicVolume < 0)
+             {
+                musicVolume = 0;
+             }
          }
       }
       /* Sound Effects */
@@ -742,6 +750,10 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          if(sndfxVolume < 255)
          {
              sndfxVolume += 10;
+             if(sndfxVolume > 255)
+             {
+                sndfxVolume = 255;
+             }
          }
       }
       else if(object == (guiObject*) buttonSndDec) 
@@ -749,6 +761,10 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          if(sndfxVolume > 0)
          {
              sndfxVolume -= 10;
+             if(sndfxVolume < 0)
+             {
+                sndfxVolume = 0;
+             }
          }
       }
       /* Language */
