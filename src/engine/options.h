@@ -107,6 +107,8 @@ class options
       textBox* txtReflexion;       /**< Reflexion Type Text on Window */
       textBox* txtResolution;      /**< Resolution Text on Window */
       textBox* txtAntiAliasing;    /**< AntiAliasing Text on Window */
+      
+      healthBar* barFarView;       /**< FarViewFactor Text on Window */
 
       static int     musicVolume;     /**< Current Music Volume */
       static int     sndfxVolume;     /**< Current Sound Effects Volume */
@@ -131,6 +133,7 @@ class options
       int      prevWidth;          /**< Previous Used Resolution Width */
       int      prevHeight;         /**< Previous Used Resolution Height */
       int      prevAntiAliasing;   /**< Previous Used AntiAliasing */
+      int      prevFarViewFactor;  /**< Previous FarViewFactor */
       int      resPosition;        /**< Resolution Position on Vector */
 
       int timeLastOperation;       /**< Ticks when done last operation */
@@ -157,6 +160,9 @@ class options
 
       button* buttonAliasSum;
       button* buttonAliasDec;
+
+      button* buttonFarViewSum;
+      button* buttonFarViewDec;
 
       cxSel* cxSelFullScreen;
 

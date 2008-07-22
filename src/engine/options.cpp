@@ -190,18 +190,26 @@ bool options::load(string file)
          fgets(buffer, sizeof(buffer), arq); 
          sscanf(buffer,"%d",&antiAliasing);
       }
+      else if(s == "FarViewFactor:")
+      {
+         /* Read FarViewFactor Options */
+         fgets(buffer, sizeof(buffer), arq); 
+         sscanf(buffer,"%f",&farViewFactor);
+      }
       else 
       {
          printf(gettext("Unknow option: %s\n"), buffer);
       }
    }
-   if(musicVolume > SDL_MIX_MAXVOLUME)
+
+   /* Limits */
+   if(farViewFactor > 1.0)
    {
-      musicVolume = SDL_MIX_MAXVOLUME;
+      farViewFactor = 1.0;
    }
-   if(sndfxVolume > SDL_MIX_MAXVOLUME)
+   else if(farViewFactor < 0.2)
    {
-      sndfxVolume = SDL_MIX_MAXVOLUME;
+      farViewFactor = 0.2;
    }
 
    fclose(arq);
@@ -271,6 +279,9 @@ void options::save()
 
    /* AntiAliasing */
    fprintf(arq, "AntiAliasing: %d\n",antiAliasing);
+
+   /* FarViewFactor */
+   fprintf(arq, "FarViewFactor: %.2f\n", farViewFactor);
 
    fclose(arq);
 }
@@ -482,7 +493,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    dirs dir;
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL, 10);
-   char tmp[5];
+   char tmp[8];
    string saux;
    textBox* qt;
 
@@ -492,11 +503,12 @@ void options::displayOptionsScreen(guiInterface* interf)
    prevSndfxVolume = sndfxVolume;
 
    prevAntiAliasing = antiAliasing;
+   prevFarViewFactor = farViewFactor;
 
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
 
-   intWindow = interf->insertWindow(xPos-128,yPos-173,xPos+128,yPos+173,
+   intWindow = interf->insertWindow(xPos-128,yPos-185,xPos+128,yPos+185,
                                     gettext("Options"));
 
    /* Music Things */
@@ -661,12 +673,28 @@ void options::displayOptionsScreen(guiInterface* interf)
    intWindow->getObjectsList()->insertPicture(220,288,40,220,
                  dir.getRealFile("texturas/options/antialiasing.png").c_str());
 
+   /* FarViewFactor */
+   qt = intWindow->getObjectsList()->insertTextBox(8,311,145,328,0,
+                                                   gettext("FarView:"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   buttonFarViewDec = intWindow->getObjectsList()->insertButton(121,311,131,328,
+                                                  fnt.createUnicode(0x25C4),0);
+   buttonFarViewDec->defineFont(DNT_FONT_ARIAL, 9);
+   barFarView = intWindow->getObjectsList()->insertHealthBar(133,311,
+                                                             196,328,9);
+   barFarView->defineActualHealth((int)floor(farViewFactor*9));                                                          
+   buttonFarViewSum = intWindow->getObjectsList()->insertButton(198,311,208,328,
+                                                  fnt.createUnicode(0x25BA),0);
+   buttonFarViewSum->defineFont(DNT_FONT_ARIAL, 9);
+   intWindow->getObjectsList()->insertPicture(220,311,40,328,
+                 dir.getRealFile("texturas/options/antialiasing.png").c_str());
+
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(177,315,247,334,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(177,338,247,357,
                                               gettext("Confirm"),1);
    
    /* Cancel Button */
-   buttonCancel = intWindow->getObjectsList()->insertButton(8,315,78,334,
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,338,78,357,
                                               gettext("Cancel"),1);
 
    /* borders */
@@ -675,8 +703,8 @@ void options::displayOptionsScreen(guiInterface* interf)
    intWindow->getObjectsList()->insertTextBox(5,116,250,153,2,"");
    intWindow->getObjectsList()->insertTextBox(5,154,250,192,2,"");
    intWindow->getObjectsList()->insertTextBox(5,193,250,230,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,231,250,310,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,311,250,338,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,231,250,333,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,334,250,361,2,"");
 
    
    /* Open Window */
@@ -699,7 +727,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       /* Music */
       if(object == (guiObject*) buttonMusSum)
       {
-         if(musicVolume < SDL_MIX_MAXVOLUME)
+         if(musicVolume < 255)
          {
              musicVolume++;
          }
@@ -714,7 +742,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       /* Sound Effects */
       else if(object == (guiObject*) buttonSndSum) 
       {
-         if(sndfxVolume < SDL_MIX_MAXVOLUME)
+         if(sndfxVolume < 255)
          {
              sndfxVolume++;
          }
@@ -817,6 +845,21 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
              antiAliasing -= 2;
          }
       }
+      /* FarView Factor */
+      else if(object == (guiObject*) buttonFarViewSum) 
+      {
+         if(farViewFactor < 1.0)
+         {
+            farViewFactor += 0.1;
+         }
+      }
+      else if(object == (guiObject*) buttonFarViewDec) 
+      {
+         if(farViewFactor > 0.2)
+         {
+            farViewFactor -= 0.1;
+         }
+      }
 
 
    }
@@ -858,6 +901,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
          screenWidth = prevWidth;
          screenHeight = prevHeight;
          antiAliasing = prevAntiAliasing;
+         farViewFactor = prevFarViewFactor;
          interf->closeWindow(intWindow);
          return(OPTIONSW_CANCEL);
       }
@@ -886,6 +930,8 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
    txtReflexion->setText(reflexionName());
    txtResolution->setText(resolutionName());
    txtAntiAliasing->setText(antiAliasingName());
+
+   barFarView->defineActualHealth((int)floor(farViewFactor*9));                                                          
 
    intWindow->draw(0,0);
    return(OPTIONSW_OTHER);
