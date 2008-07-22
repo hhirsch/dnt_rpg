@@ -684,7 +684,7 @@ void options::displayOptionsScreen(guiInterface* interf)
                                                   fnt.createUnicode(0x25BA),0);
    buttonFarViewSum->defineFont(DNT_FONT_ARIAL, 9);
    intWindow->getObjectsList()->insertPicture(220,311,40,328,
-                 dir.getRealFile("texturas/options/antialiasing.png").c_str());
+                      dir.getRealFile("texturas/options/farview.png").c_str());
 
    /* Confirm Button */
    buttonConfirm = intWindow->getObjectsList()->insertButton(177,338,247,357,
