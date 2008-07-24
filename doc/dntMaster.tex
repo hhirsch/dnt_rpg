@@ -5,6 +5,7 @@
 \usepackage{a4wide}
 \usepackage{graphicx}
 \usepackage{epsfig}
+\usepackage{times}
 
 \begin{document}
 
@@ -12,8 +13,7 @@
 
 \author
 {
-DccNiTghtmare\\
-\& Anamabeka
+DNTeam
 }
 
 \maketitle
@@ -168,10 +168,18 @@ não avaliados. Caso a criatura que é alvo da barganha (aquela que não fez a
 proposta) encontrar um valor favorável para a troca (o valor dos ítens
 oferecidos supera o valor de seus ítens), a barganha será imediatamente aceita.
 Caso o valor não seja favorável, a criatura alvo rola um teste {\it Não Sou
-Bobo} contra a diferença de valores em questão: resultando em falha a barganha
-não será aceita.
+Bobo} contra a diferença de valores em questão divida por 100: resultando em
+falha a barganha não será aceita.
 
 \subsection{Imposições}
+
+A criatura que propõe a barganha pode optar por utilizar seus dotes físicos
+para impô-la à criatura alvo. Neste caso rola-se um teste de {\it Força} e um
+teste de {\it Constituição} contra {\it Não Sou Bobo} do alvo. Obtendo-se
+sucesso em ambos os testes, a barganha será aceita. Em caso de falha em um
+deles, a imposição será negada e a criatura alvo não mais barganhará nada com o
+proponente. Se a falha ocorrer e ambos os testes, a criatura alvo tornar-se-á
+hostil e entrará imediatamente em modo de combate. 
 
 \end{document}
 
