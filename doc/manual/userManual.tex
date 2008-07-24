@@ -8,17 +8,15 @@
 
 \begin{document}
 
-\title{\textbf{DccNiTghtmare User's Documentation - 0.1}}
+\title{\textbf{DccNiTghtmare User's Documentation - 0.2}}
 
 \author{
-DccNiTghtmare
+DNTeam
 }
 
 \maketitle
 
 \abstract{This document is the User's manual of the DccNiTghtmare Game.}
-
-
 
 \newpage
 
@@ -32,14 +30,6 @@ Welcome to the user's manual of DccNiTghtmare. Here you'll find all the
 DccNiTghtmare's computer game related things that you need to know to play
 DccNiTghtmare on your machine. 
 
-DccNiTghtmare is in {\it public domain}, what means that you can use in any way
-you want the source code and data of the game: copy it, redistribute it, make a
-fork of it, modify it, burn it, delete it, blame it, like it, love it, hate
-it, ... , the only thing that you can't do is to make it your property: it's
-not an individual property, it's everybody property (our way to understand the
-public domain), it's ideologically for us more free (libre, livre) than the GPL
-licensing. That's it.
-
 \section{Compiling}
 
 \subsection{Requeriments}
@@ -49,34 +39,41 @@ The compilation and execution of DccNiTghtmare requires the follow librarys and 
 \subsubsection{Software}
 \begin{itemize}
 \item{OpenGL (and the OpenGL drivers for your videocard)}
-\item{SDL - Version 1.2.11, www.libsdl.org}
-\item{SDLImage - Version 1.2.5, www.libsdl.org/projects/SDL\_image}
-\item{OpenAL - Version 1.1, www.openal.org }
+\item{SDL - Version 1.2.13, www.libsdl.org}
+\item{SDL\_image - Version 1.2.6, www.libsdl.org/projects/SDL\_image}
+\item{SDL\_ttf - Version 2.0.9, http://www.libsdl.org/projects/SDL\_ttf}
+\item{OpenAL - Version 0.0.8, www.openal.org }
 \item{Cal3D - Version 0.11, http://cal3d.sf.net}
-\item{LibVorbis - www.vorbis.com}
+\item{libogg - Version 1.1.3, http://xiph.org/ogg/}
+\item{libvorbis - Version 1.2.1, http://xiph.org/vorbis}
 \end{itemize}
 
 \subsubsection{Hardware}
-A video card with 3d aceleration enabled in Linux, compatible with OpenGL (something better than a Geforce 6200 is recommended).
+A video card with 3d aceleration enabled in Linux, compatible with OpenGL
+(something better than a Geforce 6200 is recommended).
 
 \subsection{Process}
 
-Untar the bzip2 ball with command "tar -xvjf dccnitghtmare-src-01.tar.bz2";\\
+Untar the bzip2 ball with command "tar -xvjf dccnitghtmare-src-02.tar.bz2";\\
 Go to the dccnitghtmare folder with "cd dccnitghtmare";\\
 Execute the command "make" to make the source code.
 
-\section{Executing}
+\section{Executing Without Installing}
 
 To run DccNiTghtmare, go to the subfolder bin, in the directory dccnitghtmare, and run the dccnitghtmare binary:\\
 " cd dccnitghtmare/bin "\\
 " ./dccnitghtmare "
+
+\section{Installing}
+
+Just do a make install at dccnitghtmare folder, as root.
 
 \subsection{Main Menu}
 
 The main menu window appears on the screen, looking like the bellow {\it figure}. There are five buttons, and the title of the window describes the dccnitghtmare's version.
 
 \begin{center}
-  \includegraphics{pics/mainMenuWindow.png}
+  \includegraphics{mainMenuWindow.png}
 \\{\bf Figure} - Main Menu Window
 \end{center}
 
@@ -99,7 +96,7 @@ we offer full support to Portuguese and English languages and partial support
 to French and Spanish.
 
 \begin{center}
-  \includegraphics{pics/optionsWindow.png}
+  \includegraphics{optionsWindow.png}
 \\{\bf Figure} - Options Window
 \end{center}
 
@@ -121,8 +118,8 @@ understand all character's things here.
 \subsection{Race}
 
 \begin{center}
-  \includegraphics{pics/raceWindow.png}
-\\{\bf Figure} - Race Window
+%\includegraphics{raceWindow.png}\\
+{\bf Figure} - Race Window
 \end{center}
 
 In the race window you select the race of your character. The race affects how
@@ -145,8 +142,8 @@ Your character class is its desired Career. Choose them carefully, since each
 of them have distinct abilities.
 
 \begin{center}
-  \includegraphics{pics/classWindow.png}
-\\{\bf Figure} - Class Window
+%%  \includegraphics{classWindow.png}
+{\bf Figure} - Class Window
 \end{center}
 
 
@@ -156,8 +153,8 @@ Just choose the "Software-License-Thought-Like" your character have at the
 Alignment \& Tendency window.
 
 \begin{center}
-  \includegraphics{pics/alignWindow.png}
-\\{\bf Figure} - Alignment \& Tendency Window
+%%  \includegraphics{alignWindow.png}
+{\bf Figure} - Alignment \& Tendency Window
 \end{center}
 
 \subsection{Gender}
@@ -169,7 +166,7 @@ The gender is the sex tendency of your character.
 \subsection{Attributes}
 
 \begin{center}
-  \includegraphics{pics/attWindow.png}
+  \includegraphics{attWindow.png}
 \\{\bf Figure} - Attributes Window
 \end{center}
 
@@ -185,7 +182,7 @@ assignment again. After define all attributes, just hit the button "Confirm".
 \subsection{Skills}
 
 \begin{center}
-  \includegraphics{pics/skillWindow.png}
+  \includegraphics{skillWindow.png}
 \\{\bf Figure} - Skills Window
 \end{center}
 
@@ -202,14 +199,14 @@ The number of avaible skill points vary based on character's class and race, and
 The main game window is composed by 2 basic windows, the visualization of the world and the player's portrait. Bellow we'll describe them.
 
 \begin{center}
-  \includegraphics{pics/mainGame.png}
+  \includegraphics{mainGame.png}
 \\{\bf Figure} - Main Game Window
 \end{center}
 
 \subsection{ShortCuts Window}
 
 \begin{center}
-  \includegraphics{pics/shortcutsWindow.png}
+  \includegraphics{shortcutsWindow.png}
 \\{\bf Figure} - ShortCuts Window
 \end{center}
 
@@ -241,7 +238,7 @@ This window can be opened by the keyboard 'n' key.
 \subsection{Map Window}
 
 \begin{center}
-  \includegraphics{pics/mapWindow.png}
+  \includegraphics{mapWindow.png}
 \\{\bf Figure} - Map Window
 \end{center}
 
@@ -252,7 +249,7 @@ This window can be opened by the keyboard 'm' key, or by the map button on Short
 \subsection{Character's Portrait}
 
 \begin{center}
-  \includegraphics{pics/portrait.png}
+  \includegraphics{portrait.png}
 \\{\bf Figure} - Character's Portrait
 \end{center}
 
@@ -304,17 +301,17 @@ Delete & Move Camera to Floor\\
 
 \begin{tabular}{|c|c|}
 \hline
- \includegraphics{pics/Get.png} & Get, if posible, an object\\
+ \includegraphics{Get.png} & Get, if posible, an object\\
 \hline
- \includegraphics{pics/Door.png} & Open, if possible, a door\\
+ \includegraphics{Door.png} & Open, if possible, a door\\
 \hline
- \includegraphics{pics/MapTravel.png} & Travel to another map\\
+ \includegraphics{MapTravel.png} & Travel to another map\\
 \hline
- \includegraphics{pics/Walk.png} & Walk with the character to some map point\\
+ \includegraphics{Walk.png} & Walk with the character to some map point\\
 \hline
- \includegraphics{pics/talk.png} & In normal mode, talk to a character\\
+ \includegraphics{talk.png} & In normal mode, talk to a character\\
 \hline
- \includegraphics{pics/Attack.png} & If in attack mode, attack a character\\
+ \includegraphics{Attack.png} & If in attack mode, attack a character\\
 \hline
 \end{tabular}
 
@@ -333,7 +330,7 @@ When you want to init by yourself the fight mode, you can use the button of figh
 \subsubsection{Player Character's Turn}
 
 \begin{center}
-  \includegraphics{pics/fightMode.png}
+  \includegraphics{fightMode.png}
 \\{\bf Figure} - Fight Mode
 \end{center}
 
@@ -347,7 +344,9 @@ When you done all things that you want (and that you can) in your turn, you can 
 
 \subsection{Talking}
 
-To talk to a NPC you need to be on normal game mode, put your mouse cursor in the target NPC, showing the talk mouse cursor \includegraphics{pics/talk.png}, and press the left mouse button.
+To talk to a NPC you need to be on normal game mode, put your mouse cursor in
+the target NPC, showing the talk mouse cursor \includegraphics{talk.png},
+and press the left mouse button.
 
 The talk window will open, showing the things npc talked and the options your character can talk to him. You need do be in range to can talk, with your character get out of range, the conversation will be stop, like you abandoned it.
 
