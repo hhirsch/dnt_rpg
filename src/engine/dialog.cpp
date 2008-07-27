@@ -774,7 +774,7 @@ bool conversation::treat(guiObject* guiObj, int eventInfo,
             delete(*tradeWindow);
             *tradeWindow = NULL;
          }
-         *tradeWindow = new barterWindow(ownerNPC->inventories, 
+         *tradeWindow = new barterWindow(actualPC->inventories, 
                                          ownerNPC->inventories, usedGui, infoW);
 
       }

@@ -21,27 +21,30 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    intWindow = gui->insertWindow(268,0,531,288,gettext("Barter"));
 
    /* Totals */
-   buyerTotals = intWindow->getObjectsList()->insertTextBox(27,234,118,250,
+   buyerTotals = intWindow->getObjectsList()->insertTextBox(30,236,128,252,
                                                             0,"0,00");
-   sellerTotals = intWindow->getObjectsList()->insertTextBox(160,234,251,250,
+   sellerTotals = intWindow->getObjectsList()->insertTextBox(162,236,251,252,
                                                              0,"0,00");
    buyerTotals->setColor(255,10,10);
    sellerTotals->setColor(255,10,10);
 
    /* Actions Buttons */
-   offerButton = intWindow->getObjectsList()->insertButton(173,265,251,283,
+   offerButton = intWindow->getObjectsList()->insertButton(173,262,251,280,
                                              gettext("Offer"),0);
-   imposeButton = intWindow->getObjectsList()->insertButton(91,265,168,283,
+   imposeButton = intWindow->getObjectsList()->insertButton(91,262,168,280,
                                              gettext("Impose"),0);
-   cancelButton = intWindow->getObjectsList()->insertButton(9,265,87,283,
+   cancelButton = intWindow->getObjectsList()->insertButton(9,262,87,280,
                                              gettext("Cancel"),0);
 
-   /* Create the botton figure */
-   intWindow->getObjectsList()->insertPicture(4,235,256,50,
-                   dir.getRealFile("texturas/inventory/trade_inf.png").c_str());
+   /* Money Images */
+   intWindow->getObjectsList()->insertPicture(4,234,0,0,
+                       dir.getRealFile("texturas/inventory/moeda.png").c_str());
+   intWindow->getObjectsList()->insertPicture(136,234,0,0,
+                       dir.getRealFile("texturas/inventory/moeda.png").c_str());
+
 
    /* Create the TabButton */
-   barterTabButton = intWindow->getObjectsList()->insertTabButton(4,15,256,220,
+   barterTabButton = intWindow->getObjectsList()->insertTabButton(3,15,256,220,
                        dir.getRealFile("texturas/inventory/trade.png").c_str());
 
    /* Buyer Buttons */
