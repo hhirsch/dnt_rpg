@@ -110,7 +110,7 @@ void cursor::draw(int mouseX, int mouseY)
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texture[currentCursor]);
    glPushMatrix();
-      glTranslatef(mouseX, SCREEN_Y - mouseY, 0.1);
+      glTranslatef(mouseX+2, SCREEN_Y - (mouseY+2), 0.1);
       glBegin(GL_QUADS);
          glTexCoord2f(0.0, 0.0);
          glVertex2f(0,0);
