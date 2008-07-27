@@ -35,7 +35,6 @@
 #define MAX_ACTIONS 5 /**< Max number of actions per option */
 
 #include "../gui/farso.h"
-#include "barterwindow.h"
 #include "character.h"
 #include <string>
 using namespace std;
@@ -131,11 +130,10 @@ class conversation
       /*! Treat Events on Window. 
        * \param guiObj -> active GUI object
        * \param eventInfo -> last GUI Event 
-       * \param tradeWindow -> pointer to the pointer the barter window
        * \param infoW -> pointer to the used itemWindow
        * \return true if event is threated, false otherwise. */
       bool treat(guiObject* guiObj, int eventInfo,
-                 barterWindow** tradeWindow, itemWindow* infoW);
+                 itemWindow* infoW);
 
       /*! Verify if the dialog is open or not 
        * \return true if the window is opened */

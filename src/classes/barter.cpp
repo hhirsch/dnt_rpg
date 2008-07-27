@@ -12,13 +12,13 @@
 /*******************************************************************
  *                           Constructor                           *
  *******************************************************************/
-barter::barter(inventory* seller, inventory* buyer)
+barter::barter(character* s, character* b)
 {
    int i;
 
    /* Define the Inventories */
-   sellerInventory = seller;
-   buyerInventory = buyer;
+   seller = s;
+   buyer = b;
 
    /* Create Buy Slots */
    for(i=0; i < BARTER_BUY_SLOTS; i++)
@@ -68,8 +68,8 @@ barter::~barter()
          delete(sellSlot[i]);
       }
    }
-   sellerInventory = NULL;
-   buyerInventory = NULL;
+   seller = NULL;
+   buyer = NULL;
 }
 
 /*******************************************************************
@@ -87,9 +87,9 @@ void barter::cancelBarter()
       obj=buySlot[i]->getFirstItem(oX, oY);
       while(obj != NULL)
       {
-         sellerInventory->addObject(obj);
+         seller->inventories->addObject(obj);
          buySlot[i]->removeObject(oX, oY);
-         obj=buySlot[i]->getFirstItem(oX, oY);
+         obj = buySlot[i]->getFirstItem(oX, oY);
       }
    }
 
@@ -99,7 +99,7 @@ void barter::cancelBarter()
       obj = sellSlot[i]->getFirstItem(oX, oY);
       while(obj != NULL)
       {
-         buyerInventory->addObject(obj);
+         buyer->inventories->addObject(obj);
          sellSlot[i]->removeObject(oX, oY);
          obj = sellSlot[i]->getFirstItem(oX, oY);
       }
@@ -124,9 +124,9 @@ bool barter::doBarter()
       obj=buySlot[i]->getFirstItem(oX, oY);
       while(obj != NULL)
       {
-         buyerInventory->addObject(obj);
+         buyer->inventories->addObject(obj);
          buySlot[i]->removeObject(oX, oY);
-         obj=buySlot[i]->getFirstItem(oX, oY);
+         obj = buySlot[i]->getFirstItem(oX, oY);
       }
    }
 
@@ -136,7 +136,7 @@ bool barter::doBarter()
       obj = sellSlot[i]->getFirstItem(oX, oY);
       while(obj != NULL)
       {
-         sellerInventory->addObject(obj);
+         seller->inventories->addObject(obj);
          sellSlot[i]->removeObject(oX, oY);
          obj = sellSlot[i]->getFirstItem(oX, oY);
       }

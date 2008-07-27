@@ -8,7 +8,9 @@
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
 #include "../classes/mission.h"
+#include "barterwindow.h"
 #include "modstate.h"
+
 
 #define BUFFER_SIZE 512
 
@@ -750,9 +752,10 @@ void conversation::closeWindow()
 /*************************************************************************
  *                                treat                                  *
  *************************************************************************/
-bool conversation::treat(guiObject* guiObj, int eventInfo,
-                         barterWindow** tradeWindow, itemWindow* infoW)
+bool conversation::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
 {
+   barterWindow tradeWindow;
+
    if(eventInfo == SELECTED_SEL_TEXT)
    {
       if(guiObj == (guiObject*)pcSelText)
@@ -769,13 +772,11 @@ bool conversation::treat(guiObject* guiObj, int eventInfo,
          closeWindow();
 
          /* If exists a barter, delete it! */
-         if( (*tradeWindow) != NULL)
+         if( (tradeWindow.isOpen()))
          {
-            delete(*tradeWindow);
-            *tradeWindow = NULL;
+            tradeWindow.close();
          }
-         *tradeWindow = new barterWindow(actualPC->inventories, 
-                                         ownerNPC->inventories, usedGui, infoW);
+         tradeWindow.open(actualPC, ownerNPC, usedGui, infoW);
 
       }
    }

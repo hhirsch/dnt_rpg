@@ -8,6 +8,7 @@
 #include "itemslot.h"
 #include "inventory.h"
 #include "../etc/dirs.h"
+#include "../engine/character.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
@@ -20,9 +21,9 @@ class barter
 {
    public:
       /*! Constructor
-       * \param seller -> pointer to the seller inventory
-       * \param buyer -> pointer to the buyer inventory */
-      barter(inventory* seller, inventory* buyer);
+       * \param s -> pointer to the seller inventory
+       * \param b -> pointer to the buyer inventory */
+      barter(character* s, character* b);
       /*! Destructor */
       ~barter();
 
@@ -74,9 +75,10 @@ class barter
       void removeSellItem(int x, int y, int curSellSlot);
 
    private:
-      inventory* sellerInventory;   /**< Pointer to the Seller Inventory */
-      inventory* buyerInventory;    /**< Pointer to the Buyer Inventory */
-
+     
+      character* buyer;             /**< The buyer character */
+      character* seller;            /**< The Seller character */
+       
       itemSlot* buySlot[BARTER_BUY_SLOTS];  /**< The itemSlot of Buy things */
       itemSlot* sellSlot[BARTER_SELL_SLOTS];/**< The itemSlot of Sell things */
 

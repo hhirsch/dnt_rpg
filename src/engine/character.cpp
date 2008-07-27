@@ -9,6 +9,7 @@
 #include "../ia/iascript.h"
 #include "../etc/dirs.h"
 #include <SDL/SDL_image.h>
+#include "barterwindow.h"
 
 #define BORDER_FILE "characters/portraits/borda.png"
 #define BORDER_SIZE 5
@@ -239,7 +240,6 @@ void character::openConversationDialog(guiInterface* gui, character * PC)
  *                         treatConversation                         *
  *********************************************************************/
 bool character::treatConversation(guiObject* guiObj, int eventInfo, 
-                                  barterWindow** tradeWindow,
                                   itemWindow* infoW)
 {
    if(convPressed)
@@ -253,7 +253,7 @@ bool character::treatConversation(guiObject* guiObj, int eventInfo,
       conversation* cs = (conversation*) conv;
       if( (cs != NULL) && (cs->windowOpened()) )
       {
-         return(cs->treat(guiObj, eventInfo, tradeWindow, infoW));
+         return(cs->treat(guiObj, eventInfo, infoW));
       }
    }
    return(false);

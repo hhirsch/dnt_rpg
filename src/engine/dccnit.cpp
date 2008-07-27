@@ -22,7 +22,6 @@ engine::engine()
    NPCs = NULL;
 
    inventoryWindow = NULL;
-   tradeWindow = NULL;
 
    imgNumber = 0;
    actualScreen = NULL;
@@ -208,11 +207,9 @@ engine::~engine()
       delete(gameSun);
    }
 
-   /* Clear the Barter Window */
-   if(tradeWindow)
-   {
-      delete(tradeWindow);
-   }
+   /* Close the barter window, if needed */
+   barterWindow tradeWindow;
+   tradeWindow.close();
 
    /* Clear the Inventory too */
    if(inventoryWindow)
@@ -1433,6 +1430,7 @@ void engine::treatPendingActions()
  *********************************************************************/
 void engine::treatGuiEvents(guiObject* object, int eventInfo)
 {
+   barterWindow tradeWindow;
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
    {
@@ -1444,18 +1442,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    }
 
    /* Verify if Barter Window is Opened */
-   if(tradeWindow)
-   {
-      if(!tradeWindow->isOpen())
-      {
-         delete(tradeWindow);
-         tradeWindow = NULL;
-      }
-      else
-      {
-         tradeWindow->treat(object, eventInfo);
-      }
-   }
+   tradeWindow.treat(object, eventInfo);
 
    /* Verify Dialog Windows */
    if(NPCs != NULL)
@@ -1463,7 +1450,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
       character* ch =(character*) NPCs->first->next;
       while(ch != NPCs->first)
       {
-         ch->treatConversation(object, eventInfo, &tradeWindow, infoWindow);
+         ch->treatConversation(object, eventInfo, infoWindow);
          ch = (character*) ch->next;
       }
    }

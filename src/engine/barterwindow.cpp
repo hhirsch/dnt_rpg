@@ -4,8 +4,15 @@
 /***************************************************************
  *                         Constructor                         *
  ***************************************************************/ 
-barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
-                           guiInterface* inter, itemWindow* infoW)
+barterWindow::barterWindow()
+{
+}
+
+/***************************************************************
+ *                             open                            *
+ ***************************************************************/
+void barterWindow::open(character* seller, character* buyer,
+                        guiInterface* inter, itemWindow* infoW)
 {
    dirs dir;
    /* Init Values */
@@ -15,7 +22,7 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    infoWindow = infoW;
 
    /* Create Barter */
-   barterInventory = new barter(inventSeller, inventBuyer);
+   barterInventory = new barter(seller, buyer);
    
    /* Create Window */
    intWindow = gui->insertWindow(268,0,531,288,gettext("Barter"));
@@ -59,27 +66,26 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
    seller3 = barterTabButton->insertButton(213,13,251,26);
    sellerInv = barterTabButton->insertButton(137,26,251,216);
 
-   
-
    /* Open Window */
    intWindow->setExternPointer(&intWindow);
    gui->openWindow(intWindow);
 
    /* Verify if the buyer and seller windows are opened. If not open them */
-   if(!inventSeller->openedWindow)
+   if(!seller->inventories->openedWindow)
    {
       sellerWindow = new inventWindow(536,0,gettext("Inventory"),
-                                      inventSeller, inter, infoWindow);
+                                      seller->inventories, inter, 
+                                      infoWindow);
    }
    else
    {
       sellerWindow = false;
    }
 
-   if(!inventBuyer->openedWindow)
+   if(!buyer->inventories->openedWindow)
    {
       buyerWindow = new inventWindow(0,0,gettext("Inventory"),
-                                     inventBuyer, inter, infoWindow);
+                                     buyer->inventories, inter, infoWindow);
    }
    else
    {
@@ -92,6 +98,13 @@ barterWindow::barterWindow(inventory* inventSeller, inventory* inventBuyer,
  ***************************************************************/
 barterWindow::~barterWindow()
 {
+}
+
+/***************************************************************
+ *                            close                            *
+ ***************************************************************/
+void barterWindow::close()
+{
    /* Cancel the barter if the window is opened */
    if(isOpen())
    {
@@ -102,14 +115,20 @@ barterWindow::~barterWindow()
    if(buyerWindow)
    {
       delete(buyerWindow);
+      buyerWindow = NULL;
    }
    if(sellerWindow)
    {
       delete(sellerWindow);
+      sellerWindow = NULL;
    }
 
    /* Delete the barter inventory */
-   delete(barterInventory);
+   if(barterInventory)
+   {
+      delete(barterInventory);
+      barterInventory = NULL;
+   }
 }
 
 /**************************************************************
@@ -164,7 +183,46 @@ bool barterWindow::impose()
  **************************************************************/
 bool barterWindow::treat(guiObject* guiObj, int eventInfo)
 {
+   if(!isOpen() && (barterInventory != NULL))
+   {
+      /* No more window, so free the structures! */
+      close();
+      return(true);
+   }
+
    //TODO
    return(false);
 }
+
+
+
+/**********************************************************************
+ *                            Static Members                          *
+ **********************************************************************/
+int barterWindow::curSellSlot = 0;
+int barterWindow::curBuySlot = 0;
+
+barter* barterWindow::barterInventory = NULL;
+guiInterface* barterWindow::gui = NULL;
+textBox* barterWindow::sellerTotals = NULL;
+textBox* barterWindow::buyerTotals = NULL;
+window* barterWindow::intWindow = NULL;
+button* barterWindow::imposeButton = NULL;
+button* barterWindow::offerButton = NULL;
+button* barterWindow::cancelButton = NULL;
+
+tabButton* barterWindow::barterTabButton = NULL;
+oneTabButton* barterWindow::seller1 = NULL;
+oneTabButton* barterWindow::seller2 = NULL;
+oneTabButton* barterWindow::seller3 = NULL;
+oneTabButton* barterWindow::sellerInv = NULL;
+inventWindow* barterWindow::sellerWindow = NULL;
+
+oneTabButton* barterWindow::buyer1 = NULL;
+oneTabButton* barterWindow::buyer2 = NULL;
+oneTabButton* barterWindow::buyer3 = NULL;
+oneTabButton* barterWindow::buyerInv = NULL;
+inventWindow* barterWindow::buyerWindow = NULL;
+
+itemWindow* barterWindow::infoWindow = NULL;
 

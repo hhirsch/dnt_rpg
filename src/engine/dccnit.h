@@ -27,6 +27,7 @@
 #include "alignwindow.h"
 #include "aspectwindow.h"
 #include "attwindow.h"
+#include "barterwindow.h"
 #include "briefing.h"
 #include "camera.h"
 #include "character.h"
@@ -370,7 +371,6 @@ class engine
       
 
       inventWindow* inventoryWindow; /**< Inventory Window */
-      barterWindow* tradeWindow;     /**< The Barter Window */
       itemWindow* infoWindow;        /**< The info Window */
       charWindow* charInfoWindow;    /**< The character info Window */
       miniMapWindow* mapWindow;      /**< The miniMap window */
