@@ -54,9 +54,10 @@ class inventWindow
        * \param actualMap -> pointer to the opened map
        * \param X -> character that ownes the inventory X position
        * \param Z ->     "       "    "    "      "     Z    "  
+       * \param seller -> if is the seller inventory
        * \return true if event is threated, false otherwise. */
       bool treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
-                 Map* actualMap, GLfloat X, GLfloat Z);
+                 Map* actualMap, GLfloat X, GLfloat Z, bool seller=false);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */
@@ -72,7 +73,7 @@ class inventWindow
                 guiInterface* inter, itemWindow* infoW);
 
       /*! Open the Inventory Object Menu  */
-      void openMenu(int x, int y, int type);
+      void openMenu(int x, int y, int type, bool seller);
 
       itemWindow* infoWindow;
 

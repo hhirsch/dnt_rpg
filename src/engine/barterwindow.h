@@ -19,10 +19,10 @@ class barterWindow
       ~barterWindow();
 
       /*! Open the barter window 
-       * \param seller -> pointer to the seller character
-       * \param buyer -> pointer to the buyer character 
+       * \param s -> pointer to the seller character
+       * \param b -> pointer to the buyer character 
        * \param inter -> GUI interface used */
-      void open(character *seller, character* buyer,
+      void open(character *s, character* b,
                 guiInterface* inter, itemWindow* infoW);
 
       /*! Close / Remove structures from the barter window */
@@ -30,9 +30,12 @@ class barterWindow
 
       /*! Treat Events on Window. 
        * \param guiObj -> last GUI object
-       * \param eventInfo -> last GUI Event 
+       * \param eventInfo -> last GUI Event
+       * \param mouseCursor -> the mouse cursor
+       * \param actualMap -> pointer to the opened map
        * \return true if event is threated, false otherwise. */
-      bool treat(guiObject* guiObj, int eventInfo);
+      bool treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
+                 Map* actualMap);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */
@@ -51,6 +54,9 @@ class barterWindow
       /*! Impose the Barter
        * \return -> true if the imposition is accepted */
       bool impose();
+
+      static character* buyer;          /**< Buyer character */
+      static character* seller;         /**< Seller character */
 
       static int curSellSlot;           /**< Index of the actual sell slot */
       static int curBuySlot;            /**< Index of the actual buy slot */

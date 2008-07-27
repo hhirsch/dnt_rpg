@@ -776,7 +776,7 @@ bool conversation::treat(guiObject* guiObj, int eventInfo, itemWindow* infoW)
          {
             tradeWindow.close();
          }
-         tradeWindow.open(actualPC, ownerNPC, usedGui, infoW);
+         tradeWindow.open(ownerNPC, actualPC, usedGui, infoW);
 
       }
    }

@@ -6,6 +6,7 @@
 #include "../etc/dirs.h"
 #include "../gui/dntfont.h"
 #include "../sound/sound.h"
+#include "barterwindow.h"
 
 #define INVENTORY_STATE_NONE   0
 #define INVENTORY_STATE_OBJECT 1
@@ -166,8 +167,9 @@ void inventWindow::reDraw()
 /**************************************************************
  *                          openMenu                          *
  **************************************************************/
-void inventWindow::openMenu(int x, int y, int type)
+void inventWindow::openMenu(int x, int y, int type, bool seller)
 {
+   barterWindow tradeWindow;
    dntFont fnt;
    dirs dir;
    int xSize;
@@ -175,26 +177,32 @@ void inventWindow::openMenu(int x, int y, int type)
    objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
    objectMenu->insertItem(gettext("Drop"),
                           dir.getRealFile("icons/drop.png"),
-                          menuType==MENU_TYPE_INVENTORY);
+                          (menuType == MENU_TYPE_INVENTORY) && 
+                          (!seller) );
+
    objectMenu->insertItem("-",0);
-   objectMenu->insertItem(gettext("Sell"), 
-                          dir.getRealFile("icons/sell.png"),0);
+
+   objectMenu->insertItem(seller ? gettext("Buy") : gettext("Sell"), 
+                          dir.getRealFile("icons/sell.png"),
+                          tradeWindow.isOpen());
+
    if(menuType == MENU_TYPE_INVENTORY)
    {
       objectMenu->insertItem(gettext("Use"),
-                             dir.getRealFile("icons/use.png"),1);
+                             dir.getRealFile("icons/use.png"), !seller);
    }
    else
    {
       objectMenu->insertItem(gettext("Remove"),
-                             dir.getRealFile("icons/remove.png"),1);
+                             dir.getRealFile("icons/remove.png"), seller);
    }
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(gettext("Info"),
-                          dir.getRealFile("icons/info.png"),1);
+                          dir.getRealFile("icons/info.png"), 1);
    objectMenu->insertItem("-",0);
+
    objectMenu->insertItem(gettext("Get"),
-                          dir.getRealFile("icons/get.png"),1);
+                          dir.getRealFile("icons/get.png"), !seller);
 
    fnt.defineFont(DNT_FONT_ARIAL,12);
 
@@ -220,7 +228,7 @@ void inventWindow::openMenu(int x, int y, int type)
  *                             treat                          *
  **************************************************************/
 bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
-                         Map* actualMap, GLfloat X, GLfloat Z)
+                         Map* actualMap, GLfloat X, GLfloat Z, bool seller)
 {
    modState modifState;
 
@@ -305,7 +313,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                   objY = posY;
                   objWhere = INVENTORY_INVENTORY;
                   openMenu((x-intWindow->getX1()),(y-intWindow->getY1()),
-                           MENU_TYPE_INVENTORY); 
+                           MENU_TYPE_INVENTORY, seller); 
                }
                return(true);
             }
@@ -400,7 +408,7 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
             {
                activeObject = aObject;
                openMenu((x-intWindow->getX1()),(y-intWindow->getY1()),
-                        MENU_TYPE_EQUIPED);
+                        MENU_TYPE_EQUIPED, seller);
                state = INVENTORY_STATE_MENU;
                return(true);
             }

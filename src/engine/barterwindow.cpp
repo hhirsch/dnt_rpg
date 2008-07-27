@@ -11,7 +11,7 @@ barterWindow::barterWindow()
 /***************************************************************
  *                             open                            *
  ***************************************************************/
-void barterWindow::open(character* seller, character* buyer,
+void barterWindow::open(character* s, character* b,
                         guiInterface* inter, itemWindow* infoW)
 {
    dirs dir;
@@ -20,6 +20,10 @@ void barterWindow::open(character* seller, character* buyer,
    curBuySlot = 0;
    gui = inter;
    infoWindow = infoW;
+
+   /* Set characters */
+   seller = s;
+   buyer = b;
 
    /* Create Barter */
    barterInventory = new barter(seller, buyer);
@@ -79,7 +83,7 @@ void barterWindow::open(character* seller, character* buyer,
    }
    else
    {
-      sellerWindow = false;
+      sellerWindow = NULL;
    }
 
    if(!buyer->inventories->openedWindow)
@@ -89,7 +93,7 @@ void barterWindow::open(character* seller, character* buyer,
    }
    else
    {
-      buyerWindow = false;
+      buyerWindow = NULL;
    }
 }
 
@@ -181,13 +185,26 @@ bool barterWindow::impose()
 /**************************************************************
  *                            treat                           *
  **************************************************************/
-bool barterWindow::treat(guiObject* guiObj, int eventInfo)
+bool barterWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
+                         Map* actualMap)
 {
    if(!isOpen() && (barterInventory != NULL))
    {
       /* No more window, so free the structures! */
       close();
       return(true);
+   }
+
+   /* Treat Inventory windows openned here */
+   if(buyerWindow)
+   {
+      buyerWindow->treat(guiObj, eventInfo, mouseCursor, actualMap, 
+                         buyer->xPosition, buyer->zPosition);
+   }
+   if(sellerWindow)
+   {
+      sellerWindow->treat(guiObj, eventInfo, mouseCursor, actualMap, 
+                          seller->xPosition, seller->zPosition);
    }
 
    //TODO
@@ -199,6 +216,9 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo)
 /**********************************************************************
  *                            Static Members                          *
  **********************************************************************/
+character* barterWindow::buyer = NULL;
+character* barterWindow::seller = NULL;
+
 int barterWindow::curSellSlot = 0;
 int barterWindow::curBuySlot = 0;
 
