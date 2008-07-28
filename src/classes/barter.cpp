@@ -16,6 +16,10 @@ barter::barter(character* s, character* b)
 {
    int i;
 
+   /* Empty the Values */
+   totalBuyValue = 0;
+   totalSellValue = 0;
+
    /* Define the Inventories */
    seller = s;
    buyer = b;
@@ -92,6 +96,7 @@ void barter::cancelBarter()
          obj = buySlot[i]->getFirstItem(oX, oY);
       }
    }
+   totalBuyValue = 0;
 
    /* Next, reput all sell items to the buyer */
    for(i=0; i < BARTER_SELL_SLOTS; i++)
@@ -104,6 +109,7 @@ void barter::cancelBarter()
          obj = sellSlot[i]->getFirstItem(oX, oY);
       }
    }
+   totalSellValue = 0;
 }
 
 /*******************************************************************
@@ -192,6 +198,7 @@ bool barter::addSellItem(object* obj)
    {
       if(sellSlot[i]->addObject(obj))
       {
+         totalSellValue += obj->cost;
          return(true);
       }
    }
@@ -208,6 +215,7 @@ bool barter::addBuyItem(object* obj)
    {
       if(buySlot[i]->addObject(obj))
       {
+         totalBuyValue += obj->cost;
          return(true);
       }
    }
@@ -219,6 +227,7 @@ bool barter::addBuyItem(object* obj)
  *******************************************************************/
 void barter::removeBuyItem(int x, int y, int curBuySlot)
 {
+   /* TODO remove total Value! */
    buySlot[curBuySlot]->removeObject(x,y);
 }
 
@@ -227,7 +236,7 @@ void barter::removeBuyItem(int x, int y, int curBuySlot)
  *******************************************************************/
 void barter::removeSellItem(int x, int y, int curSellSlot)
 {
+   /* TODO remove total Value */
    sellSlot[curSellSlot]->removeObject(x,y);
 }
-
 

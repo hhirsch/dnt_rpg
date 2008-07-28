@@ -78,6 +78,9 @@ class barter
      
       character* buyer;             /**< The buyer character */
       character* seller;            /**< The Seller character */
+
+      float totalBuyValue;          /**< The total value at the buy slot */
+      float totalSellValue;         /**< The total value at the sell slot */
        
       itemSlot* buySlot[BARTER_BUY_SLOTS];  /**< The itemSlot of Buy things */
       itemSlot* sellSlot[BARTER_SELL_SLOTS];/**< The itemSlot of Sell things */
