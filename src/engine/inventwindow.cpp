@@ -558,11 +558,13 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                   {
                      if(seller)
                      {
-                        tradeWindow.addSellItem(activeObject);
+                        /* The Pc is buying from the seller */
+                        tradeWindow.addBuyItem(activeObject);
                      }
                      else
                      {
-                        tradeWindow.addBuyItem(activeObject);
+                        /* The PC is selling to the seller */
+                        tradeWindow.addSellItem(activeObject);
                      }
                      inventories->removeFromInventory(objX,objY, 
                            currentInventory);

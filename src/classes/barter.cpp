@@ -174,13 +174,11 @@ void barter::draw(int x, int y, SDL_Surface* surface,
    ret.h = barterImage->h;
    SDL_BlitSurface(barterImage, NULL, surface, &ret);
 
-   //FIXME draw at correct positions
-
    /* Draw the SellSlot */
-   sellSlot[curSellSlot]->draw(x,y, surface);
+   sellSlot[curSellSlot]->draw(x+4,y+13, surface);
 
    /* Draw the BuySlot */
-   buySlot[curBuySlot]->draw(x,y,surface);
+   buySlot[curBuySlot]->draw(x+137,y+13,surface);
 
 }
 
