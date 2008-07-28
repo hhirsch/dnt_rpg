@@ -155,6 +155,10 @@ engine::~engine()
       delete(snd);
    }
 
+   /* Close the barter window, if needed */
+   barterWindow tradeWindow;
+   tradeWindow.close();
+
    /* Delete particles */
    if(particleController != NULL)
    {
@@ -207,9 +211,7 @@ engine::~engine()
       delete(gameSun);
    }
 
-   /* Close the barter window, if needed */
-   barterWindow tradeWindow;
-   tradeWindow.close();
+   
 
    /* Clear the Inventory too */
    if(inventoryWindow)

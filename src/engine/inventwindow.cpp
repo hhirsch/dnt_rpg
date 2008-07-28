@@ -550,8 +550,26 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                   }
                }
                break;
-               case 6: /* Sell */
-                  //TODO
+               case 6: /* Buy /  Sell */
+               {
+                  barterWindow tradeWindow;
+
+                  if(activeObject)
+                  {
+                     if(seller)
+                     {
+                        tradeWindow.addSellItem(activeObject);
+                     }
+                     else
+                     {
+                        tradeWindow.addBuyItem(activeObject);
+                     }
+                     inventories->removeFromInventory(objX,objY, 
+                           currentInventory);
+                     reDraw();
+                     activeObject = NULL;
+                  }
+               }
                break;
                case 8: /* Drop */
                   if(objWhere == INVENTORY_INVENTORY)

@@ -35,7 +35,7 @@ class barterWindow
        * \param actualMap -> pointer to the opened map
        * \return true if event is threated, false otherwise. */
       bool treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
-                 Map* actualMap);
+            Map* actualMap);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */
@@ -43,7 +43,35 @@ class barterWindow
 
       /*! Redraw the Inventory Window, to actualize things on it. */
       void reDraw();
+
+      /*! Add Item for Sell
+       * \note You need to remove the item from where it came from
+       *       after call this function.
+       * \param obj -> pointer to the item to include 
+       * \return true if can add for sell, false otherwise */
+      bool addSellItem(object* obj);
+
+      /*! Add Item for Buy
+       * \note You need to remove the item from where it came from
+       *       after call this function.
+       * \param obj -> pointer to the item to include 
+       * \return true ii can add for buy, false otherwise */
+      bool addBuyItem(object* obj);
+
+      /*! Remove a Item of Buy Slots
+       * \param x -> x coordinate
+       * \param y -> y coordinate
+       * \param curBuySlot -> current buy Slot */
+      void removeBuyItem(int x, int y, int curBuySlot);
+
+      /*! Remove a Item of Sell Slots
+       * \param x -> x coordinate
+       * \param y -> y coordinate
+       * \param curSellSlot -> current sell Slot */
+      void removeSellItem(int x, int y, int curSellSlot);
+
    private:
+
       /*! Cancel the barter */
       void cancel();
 

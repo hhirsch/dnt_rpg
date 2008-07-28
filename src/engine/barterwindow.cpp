@@ -144,14 +144,71 @@ bool barterWindow::isOpen()
 }
 
 /**************************************************************
+ *                         addSellItem                        *
+ **************************************************************/
+bool barterWindow::addSellItem(object* obj)
+{
+   bool result = false;
+   if(barterInventory)
+   {
+      result = barterInventory->addSellItem(obj);
+      reDraw();
+   }
+   return(result);
+}
+
+/**************************************************************
+ *                          addBuyItem                        *
+ **************************************************************/
+bool barterWindow::addBuyItem(object* obj)
+{
+   bool result = false;
+   if(barterInventory)
+   {
+      result = barterInventory->addBuyItem(obj);
+      reDraw();
+   }
+   return(result);
+}
+
+/**************************************************************
+ *                       removeSellItem                       *
+ **************************************************************/
+void barterWindow::removeSellItem(int x, int y, int curSellSlot)
+{
+   if(barterInventory)
+   {
+      barterInventory->removeSellItem(x,y, curSellSlot);
+      reDraw();
+   }
+}
+
+/**************************************************************
+ *                       removeBuyItem                       *
+ **************************************************************/
+void barterWindow::removeBuyItem(int x, int y, int curBuySlot)
+{
+   if(barterInventory)
+   {
+      barterInventory->removeBuyItem(x,y, curBuySlot);
+      reDraw();
+   }
+}
+
+/**************************************************************
  *                            reDraw                          *
  **************************************************************/
 void barterWindow::reDraw()
 {
    if(isOpen())
    {
+      /* Draw the barter inventory */
       barterInventory->draw(0,0, barterTabButton->get(), 
                             curSellSlot, curBuySlot);
+
+      /* Draw the Prices Text */
+      buyerTotals->setText("TODO");
+      sellerTotals->setText("TODO");
       intWindow->draw(0,0);
    }
 }

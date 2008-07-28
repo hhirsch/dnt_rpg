@@ -49,17 +49,17 @@ class barter
                  int curSellSlot, int curBuySlot);
 
       /*! Add Item for Sell
-       * \note You need to remove the item from where it comes from
+       * \note You need to remove the item from where it came from
        *       after call this function.
        * \param obj -> pointer to the item to include 
-       * \return true fi can add for sell, false otherwise */
+       * \return true if can add for sell, false otherwise */
       bool addSellItem(object* obj);
 
       /*! Add Item for Buy
-       * \note You need to remove the item from where it comes from
+       * \note You need to remove the item from where it came from
        *       after call this function.
        * \param obj -> pointer to the item to include 
-       * \return true fi can add for buy, false otherwise */
+       * \return true if can add for buy, false otherwise */
       bool addBuyItem(object* obj);
 
       /*! Remove a Item of Buy Slots
