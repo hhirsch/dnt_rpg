@@ -241,7 +241,7 @@ bool barterWindow::offer()
 
    if(res)
    {
-      /* The barter was accept, so close all barter related windows */
+      /* The barter was accepted, so close all barter related windows */
       close();
       brief.addText(gettext("The barter was accepted."),67,92,215);
    }
@@ -259,8 +259,24 @@ bool barterWindow::offer()
  **************************************************************/
 bool barterWindow::impose()
 {
-   /* TODO: verify imposition */
-   return(barterInventory->imposeBarter());
+   briefing brief;
+   bool res = barterInventory->imposeBarter();
+
+   //FIXME -> enter battle mode
+
+   if(res)
+   {
+      /* The imposition was accepted, so close all barter related windows */
+      close();
+      brief.addText(gettext("The barter imposition was accepted."),67,92,215);
+   }
+   else
+   {
+      /* Tell the user it was rejected */
+      brief.addText(gettext("The barter imposition was rejected."),190,13,18);
+   }
+
+   return(res);
 }
 
 /**************************************************************

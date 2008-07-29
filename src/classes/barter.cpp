@@ -174,13 +174,24 @@ bool barter::doBarter()
  *******************************************************************/
 bool barter::imposeBarter()
 {
-   //TODO, verify if the seller will accept the imposition
-   //if(accept)
-   //{
-   //   doBarter();
-   //   return(true);
-   //}
-   //TODO, it rejects, verify if will enter battle mode.
+   dice d20;
+   int stTest = (d20.roll()+buyer->attBonus(ATT_STRENGTH)) - 
+                (d20.roll()+seller->iAmNotAFool);
+   int coTest = (d20.roll()+buyer->attBonus(ATT_CONSTITUTION)) - 
+                (d20.roll()+seller->iAmNotAFool);
+
+   if( (stTest > 0) && (coTest > 0) )
+   {
+      /* Both Tests Pass, so accept */
+      doBarter();
+      return(true);
+   }
+   else if( (stTest <= 0) && (coTest <= 0) )
+   {
+      /* Both Tests Fails, so battle */
+      //TODO
+   }
+
    return(false);
 }
 
