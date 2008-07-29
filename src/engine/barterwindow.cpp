@@ -200,6 +200,7 @@ void barterWindow::removeBuyItem(int x, int y, int curBuySlot)
  **************************************************************/
 void barterWindow::reDraw()
 {
+   char value[32];
    if(isOpen())
    {
       /* Draw the barter inventory */
@@ -207,8 +208,15 @@ void barterWindow::reDraw()
                             curSellSlot, curBuySlot);
 
       /* Draw the Prices Text */
-      buyerTotals->setText("TODO");
-      sellerTotals->setText("TODO");
+
+      /* The PC (buyer) is selling to the seller */
+      sprintf(value, "%.2f", barterInventory->getTotalSellValue());
+      buyerTotals->setText(value);
+
+      /* The PC is buying from the seller */
+      sprintf(value, "%.2f", barterInventory->getTotalBuyValue());
+      sellerTotals->setText(value);
+
       intWindow->draw(0,0);
    }
 }

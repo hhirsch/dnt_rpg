@@ -74,6 +74,14 @@ class barter
        * \param curSellSlot -> current sell Slot */
       void removeSellItem(int x, int y, int curSellSlot);
 
+      /*! Get the current buy goods value
+       * \return -> total value of goods on the buy inventory */
+      float getTotalBuyValue();
+      
+      /*! Get the current sell goods value
+       * \return -> total value of goods on the sell inventory */
+      float getTotalSellValue();
+
    private:
      
       character* buyer;             /**< The buyer character */

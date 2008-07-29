@@ -227,8 +227,14 @@ bool barter::addBuyItem(object* obj)
  *******************************************************************/
 void barter::removeBuyItem(int x, int y, int curBuySlot)
 {
-   /* TODO remove total Value! */
-   buySlot[curBuySlot]->removeObject(x,y);
+   /* Get the desired object */
+   object* obj = buySlot[curBuySlot]->getFromPosition(x,y);
+   if(obj)
+   {
+      /* Dec the total value and remove from inventory */
+      totalBuyValue -= obj->cost;
+      buySlot[curBuySlot]->removeObject(x,y);
+   }
 }
 
 /*******************************************************************
@@ -236,7 +242,29 @@ void barter::removeBuyItem(int x, int y, int curBuySlot)
  *******************************************************************/
 void barter::removeSellItem(int x, int y, int curSellSlot)
 {
-   /* TODO remove total Value */
-   sellSlot[curSellSlot]->removeObject(x,y);
+   /* Get the desired object */
+   object* obj = sellSlot[curSellSlot]->getFromPosition(x,y);
+   if(obj)
+   {
+      /* Dec from the total value and remove from inventory */
+      totalSellValue -= obj->cost;
+      sellSlot[curSellSlot]->removeObject(x,y);
+   }
+}
+
+/*******************************************************************
+ *                         getTotalBuyValue                        *
+ *******************************************************************/
+float barter::getTotalBuyValue()
+{
+   return(totalBuyValue);
+}
+
+/*******************************************************************
+ *                        getTotalSellValue                        *
+ *******************************************************************/
+float barter::getTotalSellValue()
+{
+   return(totalSellValue);
 }
 
