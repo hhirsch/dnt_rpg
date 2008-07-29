@@ -332,6 +332,32 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
          }
       }
       break;
+
+      case PRESSED_TAB_BUTTON:
+      {
+         /* Inventory Spaces Selected */
+#if 0
+         if(guiObj == (guiObject*) inventoryButton)
+         {
+            /* Open Menu For Object if one is avaible */
+            if(inventories->getFromPosition(posX, posY,currentInventory))
+            {
+               activeObject = inventories->getFromPosition(posX, posY,
+                                                           currentInventory);
+               objX = posX;
+               objY = posY;
+
+               objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
+               objectMenu->insertItem(gettext("Drop"),
+                          dir.getRealFile("icons/drop.png"),
+                          (menuType == MENU_TYPE_INVENTORY) && 
+                          (!seller) );
+            }
+            return(true);
+         }
+#endif
+      }
+      break;
    }
 
    return(res);
@@ -369,6 +395,8 @@ oneTabButton* barterWindow::buyer2 = NULL;
 oneTabButton* barterWindow::buyer3 = NULL;
 oneTabButton* barterWindow::buyerInv = NULL;
 inventWindow* barterWindow::buyerWindow = NULL;
+
+menu* barterWindow::objectMenu = NULL;
 
 itemWindow* barterWindow::infoWindow = NULL;
 

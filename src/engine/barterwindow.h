@@ -111,6 +111,8 @@ class barterWindow
       static inventWindow* buyerWindow; /**< Pointer to the buyer inventory 
                                              window, if it is opened here. */
 
+      static menu* objectMenu;          /**< The object menu */
+
       static itemWindow* infoWindow;    /**< Pointer to the item window used */
 };
 
