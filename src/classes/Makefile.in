@@ -13,7 +13,7 @@ ENDIA = ../ia/
 ENDETC=../etc/
 OBJSGUI = $(ENDGUI)bartexto.o $(ENDGUI)botao.o $(ENDGUI)cores.o $(ENDGUI)cxsel.o $(ENDGUI)desenho.o $(ENDGUI)erro.o $(ENDGUI)eventos.o $(ENDGUI)farso.o $(ENDGUI)figura.o $(ENDGUI)fonte.o $(ENDGUI)janela.o $(ENDGUI)lista.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)quadtexto.o $(ENDGUI)seltexto.o $(ENDGUI)tabbotao.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o $(ENDENGINE)personagens.o $(OBJSGUI)
-objetos = actions.o align.o barter.o classes.o defs.o feats.o inventory.o itemslot.o mission.o object.o race.o skills.o thing.o weapon.o xp.o
+objetos = actions.o align.o barter.o classes.o defs.o dices.o feats.o inventory.o itemslot.o mission.o object.o race.o skills.o thing.o weapon.o xp.o
 
 
 all: $(objetos)
@@ -41,6 +41,11 @@ classes.o: classes.cpp classes.h actions.h skills.h feats.h dices.h defs.h $(END
 defs.o: defs.h defs.cpp dices.h
 	@printf "Making defs.o... "
 	@$(CPP) $(CFLAGS) defs.cpp -o defs.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+dices.o: dices.cpp dices.h
+	@printf "Making dices.o... "
+	@$(CPP) $(CFLAGS) dices.cpp -o dices.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 feats.o: feats.cpp feats.h actions.h defs.h dices.h thing.h modifier.h $(ENDETC)message3d.h $(ENDETC)dirs.h

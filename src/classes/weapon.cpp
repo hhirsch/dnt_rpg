@@ -175,15 +175,21 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
       }
       else if(token == "damage_dice")
       {
-         sscanf(token2.c_str(),
-                "%d*d%d+%dx%d",&damageDice.baseDice.numberOfDices,
-                               &damageDice.baseDice.diceID,
-                               &damageDice.baseDice.sumNumber,
-                               &damageDice.baseDice.criticalMultiplier);
-         damageDice.aditionalDice.numberOfDices = 0;
-         damageDice.aditionalDice.diceID = 2;
-         damageDice.aditionalDice.sumNumber = 0;
-         damageDice.aditionalDice.criticalMultiplier = 0;
+         int numberOfDices=0, diceID=0, sumNumber=0, criticalMultiplier=0;
+
+         /* Read base dice information */
+         sscanf(token2.c_str(), "%d*d%d+%dx%d",
+                &numberOfDices, &diceID, &sumNumber, &criticalMultiplier);
+         damageDice.baseDice.setType(diceID);
+         damageDice.baseDice.setNumberOfDices(numberOfDices);
+         damageDice.baseDice.setSumNumber(sumNumber);
+         damageDice.baseDice.setCriticalMultiplier(criticalMultiplier);
+
+         /* Aditional Dice not used */
+         damageDice.aditionalDice.setNumberOfDices(0);
+         damageDice.aditionalDice.setType(DICE_D2);
+         damageDice.aditionalDice.setSumNumber(0);
+         damageDice.aditionalDice.setCriticalMultiplier(0);
          damageDice.initialLevel = 1;
          damageDice.aditionalLevels = 0;
       }

@@ -122,7 +122,6 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
    int damage = 0;
    int targetValue; 
    int bonus;
-   int i,j;
    bool criticalHit = false;
    bool criticalMiss = false;
    bool miss = false;
@@ -171,7 +170,8 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       bonus = actor.getBonusValue(m_feats[featNumber].conceptBonus) + 
               actor.sizeModifier + actor.baseAttackModifier;
 
-      diceValue = 1 + (int)(DICE_D20*(rand() / (RAND_MAX + 1.0))); 
+      dice d20;
+      diceValue = d20.roll();
 
       //TODO apply reflexes bonus, esquive bonus, etc, to target 
       targetValue = target.armatureClass;
@@ -179,7 +179,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       /* verify critical Hit */
       if(diceValue == DICE_D20)
       {
-          criticalRoll = 1 + (int)(DICE_D20*(rand() / (RAND_MAX + 1.0)));
+          criticalRoll = d20.roll();
           if( (criticalRoll + bonus - targetValue) > 0)
           {
               criticalHit = true;
@@ -190,7 +190,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       if( diceValue == 1)  
       {
           miss = true;
-          criticalRoll = 1 + (int)(DICE_D20*(rand() / (RAND_MAX + 1.0)));
+          criticalRoll = d20.roll();
           if( (criticalRoll + bonus - targetValue) <= 0 )
           {
              criticalMiss = true;
@@ -257,35 +257,7 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       }
 
       /* Apply Base Damage Dices */
-      for(i = 0; i < m_feats[featNumber].diceInfo.baseDice.numberOfDices; i++)
-      {
-          damage += (1 + (int)(m_feats[featNumber].diceInfo.baseDice.diceID *
-                        (rand() / (RAND_MAX + 1.0))));
-      }
-      /* Sum Dice Damage Number */
-      damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
-
-      /* Apply Critical Hit */
-      if(criticalHit)
-      {
-         /* Throws the dice by the number of critical multipliers */
-         for(j = 0; j<m_feats[featNumber].diceInfo.baseDice.criticalMultiplier; 
-             j++)
-         {
-            /* Double Base Damage Dices */
-            for(i = 0; i<m_feats[featNumber].diceInfo.baseDice.numberOfDices; 
-                i++)
-            {
-                damage += (1 + 
-                           (int)(m_feats[featNumber].diceInfo.baseDice.diceID *
-                           (rand() / (RAND_MAX + 1.0))));
-            }
-            /* Sum Dice Damage Number */
-            damage += m_feats[featNumber].diceInfo.baseDice.sumNumber;
-         }
-      }
-
-      
+      damage += m_feats[featNumber].diceInfo.baseDice.roll(criticalHit);
 
       /*TODO apply aditional dices */
 
@@ -499,9 +471,9 @@ int feats::getPowerfullAttackFeat(thing* pers, thing* target)
    {
       ft = FEAT_RANGED_ATTACK;
    }
-   power = m_feats[ft].diceInfo.baseDice.diceID * 
-           m_feats[ft].diceInfo.baseDice.numberOfDices +
-           m_feats[ft].diceInfo.baseDice.sumNumber;
+   power = m_feats[ft].diceInfo.baseDice.getType() * 
+           m_feats[ft].diceInfo.baseDice.getNumberOfDices() +
+           m_feats[ft].diceInfo.baseDice.getSumNumber();
 
    /* Run over all feats searching for a powerfull one */
    for(i = 0; i < totalFeats; i++)
@@ -513,9 +485,9 @@ int feats::getPowerfullAttackFeat(thing* pers, thing* target)
           || (m_feats[i].costToUse) == 0 ))
       {
          /* verify if is powerfull */
-         tmpPower = m_feats[i].diceInfo.baseDice.diceID * 
-                    m_feats[i].diceInfo.baseDice.numberOfDices +
-                    m_feats[i].diceInfo.baseDice.sumNumber;
+         tmpPower = m_feats[i].diceInfo.baseDice.getType() * 
+                    m_feats[i].diceInfo.baseDice.getNumberOfDices() +
+                    m_feats[i].diceInfo.baseDice.getSumNumber();
          if(tmpPower > power)
          {
             /* Is powerfull, take the feat */
@@ -587,9 +559,9 @@ int feats::getPowerfullHealFeat(thing* pers)
    if( (pers) && (ft != -1) )
    {
       int tmpPower = 0;
-      int power = m_feats[ft].diceInfo.baseDice.diceID * 
-                  m_feats[ft].diceInfo.baseDice.numberOfDices +
-                  m_feats[ft].diceInfo.baseDice.sumNumber;
+      int power = m_feats[ft].diceInfo.baseDice.getType() * 
+                  m_feats[ft].diceInfo.baseDice.getNumberOfDices() +
+                  m_feats[ft].diceInfo.baseDice.getSumNumber();
 
       /* Run over all feats searching for a powerfull heal one */
       for(i = 0; i < totalFeats; i++)
@@ -600,9 +572,9 @@ int feats::getPowerfullHealFeat(thing* pers)
              || (m_feats[i].costToUse) == 0 ))
          {
             /* Verify if is powerfull */
-            tmpPower = m_feats[i].diceInfo.baseDice.diceID * 
-                       m_feats[i].diceInfo.baseDice.numberOfDices +
-                       m_feats[i].diceInfo.baseDice.sumNumber;
+            tmpPower = m_feats[i].diceInfo.baseDice.getType() * 
+                       m_feats[i].diceInfo.baseDice.getNumberOfDices() +
+                       m_feats[i].diceInfo.baseDice.getSumNumber();
             if(tmpPower > power)
             {
                power = tmpPower;
@@ -739,13 +711,23 @@ featsList::featsList(string dir, string arq)
       fscanf(desc,"%s %s",&buffer[0], &buf2[0]);
       m_feats[aux].conceptTarget.type = buffer;
       m_feats[aux].conceptTarget.id = buf2;
-      fscanf(desc,"%d*d%d+%d",&m_feats[aux].diceInfo.baseDice.numberOfDices,
-                              &m_feats[aux].diceInfo.baseDice.diceID,
-                              &m_feats[aux].diceInfo.baseDice.sumNumber);
-      fscanf(desc,"%d*d%d+%d",
-                             &m_feats[aux].diceInfo.aditionalDice.numberOfDices,
-                             &m_feats[aux].diceInfo.aditionalDice.diceID,
-                             &m_feats[aux].diceInfo.aditionalDice.sumNumber);
+
+      /* Get Dices */
+      int numberOfDices=0, diceID=0, sumNumber=0;
+
+      /* Base Dice */
+      fscanf(desc,"%d*d%d+%d",&numberOfDices, &diceID, &sumNumber);
+      m_feats[aux].diceInfo.baseDice.setType(diceID);
+      m_feats[aux].diceInfo.baseDice.setNumberOfDices(numberOfDices);
+      m_feats[aux].diceInfo.baseDice.setSumNumber(sumNumber);
+
+      /* Aditional dice */
+      fscanf(desc,"%d*d%d+%d", &numberOfDices, &diceID, &sumNumber);
+      m_feats[aux].diceInfo.aditionalDice.setType(diceID);
+      m_feats[aux].diceInfo.aditionalDice.setNumberOfDices(numberOfDices);
+      m_feats[aux].diceInfo.aditionalDice.setSumNumber(sumNumber);
+
+      /* Aditional Quantity */
       fscanf(desc,"%d,%d,%d",&m_feats[aux].quantityPerDay,
                              &m_feats[aux].aditionalQuantity,
                              &m_feats[aux].aditionalLevels);

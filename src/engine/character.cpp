@@ -558,11 +558,11 @@ void character::defineWeapon()
             //TODO
       
             /* Define the weapon to bare hands */
-            dc.baseDice.diceID = DICE_D2;
-            dc.baseDice.numberOfDices = 1;
-            dc.baseDice.sumNumber = 0;
+            dc.baseDice.setType(DICE_D2);
+            dc.baseDice.setNumberOfDices(1);
+            dc.baseDice.setSumNumber(0);
+            dc.baseDice.setCriticalMultiplier(1);
             dc.initialLevel = 1;
-            dc.baseDice.criticalMultiplier = 2;
             actualFeats.defineMeleeWeapon(dc, 
                                     (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER));
          }
@@ -623,11 +623,11 @@ void character::defineWeapon()
          rightHandModel.modelName = "Bare Hands";
          if(!inventories->getFromPlace(INVENTORY_LEFT_HAND))
          {
-            dc.baseDice.diceID = DICE_D2;
-            dc.baseDice.numberOfDices = 1;
-            dc.baseDice.sumNumber = 0;
+            dc.baseDice.setType(DICE_D2);
+            dc.baseDice.setNumberOfDices(1);
+            dc.baseDice.setSumNumber(0);
+            dc.baseDice.setCriticalMultiplier(2);
             dc.initialLevel = 1;
-            dc.baseDice.criticalMultiplier = 2;
             actualFeats.defineMeleeWeapon(dc, 
                                     (int)(WALK_PER_MOVE_ACTION * DNT_TO_METER));
          }

@@ -92,8 +92,9 @@ void itemWindow::open(object* item)
       /* Damage Dice */
       prvY = curY;
       sprintf(buf,"%s %dd%d+%d (x%d)", gettext("Damage Dice: "),  
-              dam.baseDice.numberOfDices, dam.baseDice.diceID, 
-              dam.baseDice.sumNumber, dam.baseDice.criticalMultiplier);
+              dam.baseDice.getNumberOfDices(), dam.baseDice.getType(), 
+              dam.baseDice.getSumNumber(), 
+              dam.baseDice.getCriticalMultiplier());
       intWindow->getObjectsList()->insertTextBox(70,curY,250,curY+17,0,buf);
       curY += 18;
 
