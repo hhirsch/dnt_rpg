@@ -1,5 +1,6 @@
 #include "messages.h"
 #include "../engine/util.h"
+#include "../engine/cursor.h"
 
 /******************************************************************
  *                        getStringForUser                        *
@@ -7,6 +8,9 @@
 string getStringFromUser(string title, string previous,
                          GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
+   cursor cursors;
+   cursors.set(CURSOR_WALK);
+
    guiInterface* gui = new guiInterface(NULL);
    window* getWindow;
    button* okButton;
@@ -68,6 +72,7 @@ string getStringFromUser(string title, string previous,
       glPushMatrix();
         draw2DMode();
         gui->draw(proj,modl,viewPort);
+        cursors.draw(mouseX, mouseY);
         draw3DMode(OUTDOOR_FARVIEW);
       glPopMatrix();
       glEnable(GL_FOG);
@@ -93,6 +98,9 @@ string getStringFromUser(string title, string previous,
 int getOptionFromUser(string title, string message, string opt1, string opt2,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
+   cursor cursors;
+   cursors.set(CURSOR_WALK);
+
    guiInterface* gui = new guiInterface(NULL);
    window* getWindow;
    button* opt1Button;
@@ -164,6 +172,7 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
       glPushMatrix();
         draw2DMode();
         gui->draw(proj,modl,viewPort);
+        cursors.draw(mouseX, mouseY);
         draw3DMode(OUTDOOR_FARVIEW);
       glPopMatrix();
       glEnable(GL_FOG);
@@ -188,6 +197,9 @@ int getOptionFromUser(string title, string message, string opt1, string opt2,
 void showMessage(string title, string message,
                  GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
 {
+   cursor cursors;
+   cursors.set(CURSOR_WALK);
+   
    guiInterface* gui = new guiInterface(NULL);
    window* getWindow;
    button* okButton;
@@ -245,6 +257,7 @@ void showMessage(string title, string message,
       glPushMatrix();
         draw2DMode();
         gui->draw(proj,modl,viewPort);
+        cursors.draw(mouseX, mouseY);
         draw3DMode(OUTDOOR_FARVIEW);
       glPopMatrix();
       glEnable(GL_FOG);
