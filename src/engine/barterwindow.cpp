@@ -113,6 +113,8 @@ void barterWindow::close()
    if(isOpen())
    {
       cancel();
+      gui->closeWindow(intWindow);
+      intWindow = NULL;
    }
 
    /* Close the Inventory windows, if them are opened here. */
@@ -227,8 +229,6 @@ void barterWindow::reDraw()
 void barterWindow::cancel()
 {
    barterInventory->cancelBarter();
-   gui->closeWindow(intWindow);
-   intWindow = NULL;
 }
 
 /**************************************************************
@@ -236,7 +236,22 @@ void barterWindow::cancel()
  **************************************************************/
 bool barterWindow::offer()
 {
-   return(barterInventory->doBarter());
+   bool res = (barterInventory->doBarter());
+   briefing brief;
+
+   if(res)
+   {
+      /* The barter was accept, so close all barter related windows */
+      close();
+      brief.addText(gettext("The barter was accepted."),67,92,215);
+   }
+   else
+   {
+      /* Tell the user it was rejected */
+      brief.addText(gettext("The barter was rejected."),190,13,18);
+   }
+
+   return(res);
 }
 
 /**************************************************************
@@ -244,6 +259,7 @@ bool barterWindow::offer()
  **************************************************************/
 bool barterWindow::impose()
 {
+   /* TODO: verify imposition */
    return(barterInventory->imposeBarter());
 }
 
@@ -253,6 +269,8 @@ bool barterWindow::impose()
 bool barterWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                          Map* actualMap)
 {
+   bool res = false;
+
    if(!isOpen() && (barterInventory != NULL))
    {
       /* No more window, so free the structures! */
@@ -272,8 +290,35 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                           seller->xPosition, seller->zPosition);
    }
 
-   //TODO
-   return(false);
+   /* Gather GUI events */
+   switch(eventInfo)
+   {
+      case PRESSED_BUTTON:
+      {
+         /* Cancel the Barter */
+         if(guiObj == (guiObject*) cancelButton)
+         {
+            cancel();
+            close();
+            res = true;
+         }
+         /* Impose Barter */
+         else if(guiObj == (guiObject*) imposeButton)
+         {
+            impose();
+            res = true;
+         }
+         /* Offer Barter */
+         else if(guiObj == (guiObject*) offerButton)
+         {
+            offer();
+            res = true;
+         }
+      }
+      break;
+   }
+
+   return(res);
 }
 
 

@@ -122,33 +122,39 @@ bool barter::doBarter()
    int oX = 0, 
        oY = 0;
 
-   //TODO verify if the transaction is good for the seller
-   
-   /* First, put all buy items to the buyer */
-   for(i=0; i<BARTER_BUY_SLOTS; i++)
-   {
-      obj=buySlot[i]->getFirstItem(oX, oY);
-      while(obj != NULL)
-      {
-         buyer->inventories->addObject(obj);
-         buySlot[i]->removeObject(oX, oY);
-         obj = buySlot[i]->getFirstItem(oX, oY);
-      }
-   }
+   // FIXME -> implement the appraise skill here for both
+   // as the DNT Master Book describes!
 
-   /* Next, put all sell items to the seller */
-   for(i=0; i<BARTER_SELL_SLOTS; i++)
+   if(totalSellValue > totalBuyValue)
    {
-      obj = sellSlot[i]->getFirstItem(oX, oY);
-      while(obj != NULL)
+      /* First, put all buy items to the buyer */
+      for(i=0; i<BARTER_BUY_SLOTS; i++)
       {
-         seller->inventories->addObject(obj);
-         sellSlot[i]->removeObject(oX, oY);
+         obj=buySlot[i]->getFirstItem(oX, oY);
+         while(obj != NULL)
+         {
+            buyer->inventories->addObject(obj);
+            buySlot[i]->removeObject(oX, oY);
+            obj = buySlot[i]->getFirstItem(oX, oY);
+         }
+      }
+
+      /* Next, put all sell items to the seller */
+      for(i=0; i<BARTER_SELL_SLOTS; i++)
+      {
          obj = sellSlot[i]->getFirstItem(oX, oY);
+         while(obj != NULL)
+         {
+            seller->inventories->addObject(obj);
+            sellSlot[i]->removeObject(oX, oY);
+            obj = sellSlot[i]->getFirstItem(oX, oY);
+         }
       }
+
+      return(true);
    }
 
-   return(true);
+   return(false);
 }
 
 /*******************************************************************
