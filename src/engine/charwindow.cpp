@@ -175,8 +175,8 @@ void charWindow::open(character* pers)
       sprintf(buf,"%s: %d", gettext("Reflex"), pers->reflex);
       infoBar->addText(buf);
 
-      /* Will */
-      sprintf(buf,"%s: %d", gettext("I am Not a Fool"), pers->will);
+      /* IAmNotAFool */
+      sprintf(buf,"%s: %d", gettext("I am Not a Fool"), pers->iAmNotAFool);
       infoBar->addText(buf);
 
       /* Base Attack Modifier */

@@ -121,11 +121,25 @@ bool barter::doBarter()
    object* obj;
    int oX = 0, 
        oY = 0;
+   bool accept = false;
 
    // FIXME -> implement the appraise skill here for both
    // as the DNT Master Book describes!
 
    if(totalSellValue > totalBuyValue)
+   {
+      /* The trade is good to the seller, so always accept */
+      accept = true;
+   }
+   else
+   {
+      /* Isn't clearly good. Must do an accept check */
+      dice d20;
+      int sellDiff = (totalSellValue - totalBuyValue) / 100;
+      accept = ( ((d20.roll()+seller->iAmNotAFool) - sellDiff) < 0);
+   }
+
+   if(accept)
    {
       /* First, put all buy items to the buyer */
       for(i=0; i<BARTER_BUY_SLOTS; i++)
@@ -150,11 +164,9 @@ bool barter::doBarter()
             obj = sellSlot[i]->getFirstItem(oX, oY);
          }
       }
-
-      return(true);
    }
 
-   return(false);
+   return(accept);
 }
 
 /*******************************************************************

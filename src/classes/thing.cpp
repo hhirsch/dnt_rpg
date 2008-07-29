@@ -24,7 +24,7 @@ thing::thing()
    maxLifePoints = 0;
    fortitude = 0;
    reflex = 0;
-   will = 0;
+   iAmNotAFool = 0;
    armatureClass = 0;
    displacement = 0;
    baseAttackModifier = 0;

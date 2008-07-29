@@ -115,9 +115,9 @@ object::object(string path, modelList& mdlList): thing()
       {
          sscanf(token2.c_str(),"%d",&reflex);
       }
-      else if(token == "will")
+      else if((token == "will") || (token == "i_am_not_a_fool") )
       {
-         sscanf(token2.c_str(),"%d",&will);
+         sscanf(token2.c_str(),"%d",&iAmNotAFool);
       }
       else if(token == "displacement")
       {

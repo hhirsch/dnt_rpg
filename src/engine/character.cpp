@@ -809,7 +809,7 @@ character* characterList::insertCharacter(string file, featsList* ft,
       else if (buf == "baseModifier")
       {
          sscanf(token2.c_str(),"%d/%d/%d", &novo->fortitude, &novo->reflex, 
-                                           &novo->will); 
+                                           &novo->iAmNotAFool); 
       }
       /* Attack Modifier */
       else if (buf == "attackModifier")
