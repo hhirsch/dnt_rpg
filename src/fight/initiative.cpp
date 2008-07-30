@@ -32,6 +32,7 @@ void initiative::insertCharacter(character* pers)
    char buffer[1024];
    string text;
    briefing brief;
+   dice d20;
 
    initiativeStruct *cmp, *aux, *oth;
    srand(SDL_GetTicks());
@@ -44,8 +45,7 @@ void initiative::insertCharacter(character* pers)
    {
       first = new(initiativeStruct);
       first->next = NULL;
-      first->initiativeValue = (int)(1+DICE_D20*(rand() / (RAND_MAX + 1.0)) +  
-                                pers->attBonus(ATT_DEXTERITY));
+      first->initiativeValue = d20.roll() + pers->attBonus(ATT_DEXTERITY);
       sprintf(buffer, "%d.",first->initiativeValue);
       text += buffer;
       brief.addText(text);
@@ -54,8 +54,7 @@ void initiative::insertCharacter(character* pers)
    else
    {
       aux = new initiativeStruct;
-      aux->initiativeValue = (int)(1+DICE_D20*(rand() / (RAND_MAX + 1.0)) +
-                             pers->attBonus(ATT_DEXTERITY));
+      aux->initiativeValue = d20.roll() + pers->attBonus(ATT_DEXTERITY);
       sprintf(buffer,"%d.",aux->initiativeValue);
       text += buffer;
       brief.addText(text);
