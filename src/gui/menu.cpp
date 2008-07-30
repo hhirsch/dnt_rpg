@@ -63,15 +63,21 @@ guiObject* menu::getItem(int i)
    guiObject* it= (guiObject*) first->next;
    if(i <= (total-numPictures))
    {
+      while(it->type == GUI_PICTURE)
+      {
+         /* Ignore Pictures */
+         it = (guiObject*) it->next;
+      }
+
       int aux;
       for(aux=1;((aux < i) && (it));aux++)
       {
-         if(it->type == GUI_PICTURE)
+         it = (guiObject*) it->next;
+         while(it->type == GUI_PICTURE)
          {
             /* Ignore Pictures */
-            aux--;
+            it = (guiObject*) it->next;
          }
-         it = (guiObject*) it->next;
       }
       return(it);  
    }
@@ -215,7 +221,11 @@ void menu::draw(int pos, SDL_Surface *screen)
  *********************************************************/
 int menu::getActualItem()
 {
-   return(actualItem);
+   if(itemAvaible(actualItem))
+   {
+      return(actualItem);
+   }
+   return(0);
 }
 
 /*********************************************************
@@ -300,19 +310,6 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
       }
 
    /* Define the Return */
-   if(isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3,
-                   mouseX,mouseY) && (!tecla) &&(*pronto))
-   {
-      if (!itemAvaible(actualItem))
-      {
-         actualItem = 0;
-      }
-   }
-   else if ( (!tecla) && (*pronto))
-   {
-      actualItem = 0;
-   }
-
    return(actualItem);
 }
 
