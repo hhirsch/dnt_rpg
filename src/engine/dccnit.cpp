@@ -1444,7 +1444,7 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    }
 
    /* Verify if Barter Window is Opened */
-   tradeWindow.treat(object, eventInfo, cursors, actualMap);
+   tradeWindow.treat(object, eventInfo, mouseX, mouseY, cursors, actualMap);
 
    /* Verify Dialog Windows */
    if(NPCs != NULL)

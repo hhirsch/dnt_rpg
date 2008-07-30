@@ -82,6 +82,14 @@ class barter
        * \return -> total value of goods on the sell inventory */
       float getTotalSellValue();
 
+      /*! Get an object (if exists) at inventory position
+       * \param posX -> X position
+       * \param posY -> Y position
+       * \param curInv -> current inventory number
+       * \param seller -> true if seller, false if buyer 
+       * \return -> pointer to object or NULL */
+      object* getFromPosition(int posX, int posY, int curInv, bool seller);
+
    private:
      
       character* buyer;             /**< The buyer character */

@@ -282,10 +282,11 @@ bool barterWindow::impose()
 /**************************************************************
  *                            treat                           *
  **************************************************************/
-bool barterWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
-                         Map* actualMap)
+bool barterWindow::treat(guiObject* guiObj, int eventInfo, int mouseX, 
+                         int mouseY, cursor* mouseCursor, Map* actualMap)
 {
    bool res = false;
+   dirs dir;
 
    if(!isOpen() && (barterInventory != NULL))
    {
@@ -293,6 +294,15 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
       close();
       return(true);
    }
+   else if(!isOpen())
+   {
+      /* Nothing to do here */
+      return(false);
+   }
+
+   /* Transform Mouse coordinate to window coordinate */
+   int posX = (int) floor((mouseX - (8 + intWindow->getX1())) / (19.0));
+   int posY = (int) floor((mouseY - (284 + intWindow->getY1())) / (19.0));
 
    /* Treat Inventory windows openned here */
    if(buyerWindow)
@@ -336,28 +346,51 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
       case PRESSED_TAB_BUTTON:
       {
          /* Inventory Spaces Selected */
-#if 0
-         if(guiObj == (guiObject*) inventoryButton)
+         if( (guiObj == (guiObject*) buyerInv) || 
+             (guiObj == (guiObject*) sellerInv) )
          {
+            sellerObj = (guiObj == (guiObject*) sellerInv);
+            int curInv = seller ? curBuySlot : curSellSlot;
+
             /* Open Menu For Object if one is avaible */
-            if(inventories->getFromPosition(posX, posY,currentInventory))
+            if(barterInventory->getFromPosition(posX, posY, curInv, sellerObj))
             {
-               activeObject = inventories->getFromPosition(posX, posY,
-                                                           currentInventory);
+               activeObject = barterInventory->getFromPosition(posX,posY,curInv,
+                                                               sellerObj);
                objX = posX;
                objY = posY;
 
                objectMenu = (menu*) intWindow->getObjectsList()->addMenu();
-               objectMenu->insertItem(gettext("Drop"),
-                          dir.getRealFile("icons/drop.png"),
-                          (menuType == MENU_TYPE_INVENTORY) && 
-                          (!seller) );
+               objectMenu->insertItem(gettext("Remove"),
+                          dir.getRealFile("icons/drop.png"), true);
             }
             return(true);
          }
-#endif
       }
       break;
+
+      case SELECTED_MENU:
+      {
+         if( (objectMenu) && (activeObject))
+         {
+            switch(objectMenu->getActualItem())
+            {
+               case 1: /* Remove */
+               {
+                  if(sellerObj)
+                  {
+                     removeBuyItem(objX, objY, curBuySlot);
+                  }
+                  else
+                  {
+                     removeSellItem(objX, objY, curSellSlot);
+                  }
+                  reDraw();
+               }
+               break;
+            }
+         }
+      }
    }
 
    return(res);
@@ -370,6 +403,11 @@ bool barterWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
  **********************************************************************/
 character* barterWindow::buyer = NULL;
 character* barterWindow::seller = NULL;
+
+object* barterWindow::activeObject = NULL;
+int barterWindow::objX = 0;
+int barterWindow::objY = 0;
+bool barterWindow::sellerObj = false;
 
 int barterWindow::curSellSlot = 0;
 int barterWindow::curBuySlot = 0;

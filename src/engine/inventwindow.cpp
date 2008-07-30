@@ -184,7 +184,8 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
 
    objectMenu->insertItem(seller ? gettext("Buy") : gettext("Sell"), 
                           dir.getRealFile("icons/sell.png"),
-                          tradeWindow.isOpen());
+                          tradeWindow.isOpen() && 
+                          (menuType == MENU_TYPE_INVENTORY));
 
    if(menuType == MENU_TYPE_INVENTORY)
    {

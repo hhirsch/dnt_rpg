@@ -136,7 +136,7 @@ bool barter::doBarter()
       /* Isn't clearly good. Must do an accept check */
       dice d20;
       int sellDiff = (totalSellValue - totalBuyValue) / 100;
-      accept = ( ((d20.roll()+seller->iAmNotAFool) - sellDiff) < 0);
+      accept = ( ((d20.roll()+seller->iAmNotAFool) - sellDiff) > 0);
    }
 
    if(accept)
@@ -215,6 +215,23 @@ void barter::draw(int x, int y, SDL_Surface* surface,
    /* Draw the BuySlot */
    buySlot[curBuySlot]->draw(x+137,y+13,surface);
 
+}
+
+/*******************************************************************
+ *                         getFromPosition                         *
+ *******************************************************************/
+object* barter::getFromPosition(int posX, int posY, int curInv, bool seller)
+{
+   if( (seller) && (curInv < BARTER_SELL_SLOTS))
+   {
+      return(buySlot[curInv]->getFromPosition(posX, posY));
+   }
+   else if( (!seller) && (curInv < BARTER_BUY_SLOTS))
+   {
+      return(sellSlot[curInv]->getFromPosition(posX, posY));
+   }
+
+   return(NULL);
 }
 
 /*******************************************************************

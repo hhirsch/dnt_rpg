@@ -31,11 +31,13 @@ class barterWindow
       /*! Treat Events on Window. 
        * \param guiObj -> last GUI object
        * \param eventInfo -> last GUI Event
+       * \param mouseX -> mouse X coordinate
+       * \param mouseY -> mouse Y coordinate
        * \param mouseCursor -> the mouse cursor
        * \param actualMap -> pointer to the opened map
        * \return true if event is threated, false otherwise. */
-      bool treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
-            Map* actualMap);
+      bool treat(guiObject* guiObj, int eventInfo, int mouseX, int mouseY,
+                 cursor* mouseCursor, Map* actualMap);
 
       /*! Verify if window is still opened
        * \return true if window is openned, false otherwise */
@@ -85,6 +87,12 @@ class barterWindow
 
       static character* buyer;          /**< Buyer character */
       static character* seller;         /**< Seller character */
+
+      static object* activeObject;      /**< Current active object */
+      static int objX;                  /**< Object X position */
+      static int objY;                  /**< Object Y position */
+
+      static bool sellerObj;            /**< True if object is from seller */
 
       static int curSellSlot;           /**< Index of the actual sell slot */
       static int curBuySlot;            /**< Index of the actual buy slot */
