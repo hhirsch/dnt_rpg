@@ -195,7 +195,7 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
    else
    {
       objectMenu->insertItem(gettext("Remove"),
-                             dir.getRealFile("icons/remove.png"), seller);
+                             dir.getRealFile("icons/remove.png"), !seller);
    }
    objectMenu->insertItem("-",0);
    objectMenu->insertItem(gettext("Info"),
