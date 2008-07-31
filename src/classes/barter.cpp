@@ -277,6 +277,9 @@ void barter::removeBuyItem(int x, int y, int curBuySlot)
    object* obj = buySlot[curBuySlot]->getFromPosition(x,y);
    if(obj)
    {
+      /* Put it back at the sellers inventory */
+      seller->inventories->addObject(obj);
+      
       /* Dec the total value and remove from inventory */
       totalBuyValue -= obj->cost;
       buySlot[curBuySlot]->removeObject(x,y);
@@ -292,6 +295,12 @@ void barter::removeSellItem(int x, int y, int curSellSlot)
    object* obj = sellSlot[curSellSlot]->getFromPosition(x,y);
    if(obj)
    {
+      /* Put it back at the buyer's inventory */
+      buyer->inventories->addObject(obj);
+      if(buyer->inventories->openedWindow)
+      {
+      }
+      
       /* Dec from the total value and remove from inventory */
       totalSellValue -= obj->cost;
       sellSlot[curSellSlot]->removeObject(x,y);

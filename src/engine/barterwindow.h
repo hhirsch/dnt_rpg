@@ -85,6 +85,11 @@ class barterWindow
        * \return -> true if the imposition is accepted */
       bool impose();
 
+      /*! Open the object Menu
+       * \param mouseX -> current mouse X coordinate
+       * \param mouseY -> current mouse Y coordinate */
+      void openMenu(int mouseX, int mouseY);
+
       static character* buyer;          /**< Buyer character */
       static character* seller;         /**< Seller character */
 
