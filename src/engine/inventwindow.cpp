@@ -50,7 +50,7 @@ void inventWindow::init(int xa, int ya, string title,
 
    /* Copy Inventories Pointers */
    inventories = invent;
-   inventories->openedWindow = true;
+   inventories->setOpenedWindow(this);
 
    /* Add Window */
    intWindow = inter->insertWindow(xa,ya,xa+266,ya+407,title.c_str());
@@ -109,7 +109,7 @@ inventWindow::~inventWindow()
    {
       interf->closeWindow(intWindow);
    }
-   inventories->openedWindow = false;
+   inventories->setOpenedWindow(NULL);
 }
 
 /**************************************************************

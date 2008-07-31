@@ -13,7 +13,7 @@ inventory::inventory()
 {
    int i;
    inventoryImage = NULL;
-   openedWindow = false;
+   openedWindow = NULL;
 
    /* Create Slots */
    slots = new itemSlot*[INVENTORY_PER_CHARACTER];
@@ -85,6 +85,22 @@ inventory::~inventory()
    {
       SDL_FreeSurface(equipedImage);
    }
+}
+
+/**************************************************************
+ *                       setOpenedWindow                      *
+ **************************************************************/
+void inventory::setOpenedWindow(void* window)
+{
+   openedWindow = window;
+}
+
+/**************************************************************
+ *                        getOpenedWindow                     *
+ **************************************************************/
+void* inventory::getOpenedWindow()
+{
+   return(openedWindow);
 }
 
 /**************************************************************

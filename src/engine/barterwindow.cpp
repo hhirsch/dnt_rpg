@@ -75,7 +75,7 @@ void barterWindow::open(character* s, character* b,
    gui->openWindow(intWindow);
 
    /* Verify if the buyer and seller windows are opened. If not open them */
-   if(!seller->inventories->openedWindow)
+   if(seller->inventories->getOpenedWindow() == NULL)
    {
       sellerWindow = new inventWindow(536,0,gettext("Inventory"),
                                       seller->inventories, inter, 
@@ -86,7 +86,7 @@ void barterWindow::open(character* s, character* b,
       sellerWindow = NULL;
    }
 
-   if(!buyer->inventories->openedWindow)
+   if(buyer->inventories->getOpenedWindow() == NULL)
    {
       buyerWindow = new inventWindow(0,0,gettext("Inventory"),
                                      buyer->inventories, inter, infoWindow);

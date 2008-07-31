@@ -111,15 +111,22 @@ class inventory
        * \return -> pointer to the found object of NULL */
       object* getItemByFileName(string fileName);
 
-      bool openedWindow;   /**< Flag to control if the inventory have a 
-                                openned window or not */
+      /*! Set the inventory Opened Window
+       * \param window -> pointer to an inventWindow */
+      void setOpenedWindow(void* window);
+
+      /*! Get the current inventory opened window
+       * \return -> pointer to the current inventory window or NULL */
+      void* getOpenedWindow();
 
    private:
       /*! For debug: print all names of inventory itens on terminal */
       void print();
 
-      itemSlot** slots;  /**< The Inventory */
-      itemSlot** equippedSlots; /**< The Equipped Slots */
+      void* openedWindow;          /**< Pointer to the opened window */
+
+      itemSlot** slots;            /**< The Inventory */
+      itemSlot** equippedSlots;    /**< The Equipped Slots */
 
       SDL_Surface* inventoryImage; /**< The Inventory Image */
       SDL_Surface* equipedImage;   /**< The Equiped Inventory Image */

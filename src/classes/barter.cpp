@@ -3,6 +3,8 @@
  *************************************************************************/
 
 #include "barter.h"
+#include "../engine/inventwindow.h"
+
 
 #define SELL_SIZE_X   6  /**< Size of Sell Slots */
 #define SELL_SIZE_Y  10  /**< Size of Sell Slots */
@@ -297,8 +299,11 @@ void barter::removeSellItem(int x, int y, int curSellSlot)
    {
       /* Put it back at the buyer's inventory */
       buyer->inventories->addObject(obj);
-      if(buyer->inventories->openedWindow)
+      if(buyer->inventories->getOpenedWindow() != NULL)
       {
+         inventWindow* i = (inventWindow*)
+                                          buyer->inventories->getOpenedWindow();
+         i->reDraw();
       }
       
       /* Dec from the total value and remove from inventory */
