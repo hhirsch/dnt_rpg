@@ -284,8 +284,8 @@ bool barterWindow::impose()
  **************************************************************/
 void barterWindow::openMenu(int mouseX, int mouseY)
 {
-   int x = mouseX;
-   int y = mouseY;
+   int x = mouseX - intWindow->getX1();
+   int y = mouseY - intWindow->getY1();
    int xSize = 0;
    dirs dir;
    dntFont fnt;
