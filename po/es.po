@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-07-22 16:16-0300\n"
+"POT-Creation-Date: 2008-07-31 10:43-0300\n"
 "PO-Revision-Date: 2007-09-14 17:53-0300\n"
 "Last-Translator: DNTeam <dnt@dnteam.org>\n"
 "Language-Team: DNTeam <dnt@dnteam.org>\n"
@@ -19,11 +19,11 @@ msgstr ""
 msgid "Unknow Attribute:"
 msgstr "Característica desconocida:"
 
-#: src/classes/feats.cpp:135
+#: src/classes/feats.cpp:134
 msgid "Invalid Feat"
 msgstr "Habilidad Inválida"
 
-#: src/classes/feats.cpp:143
+#: src/classes/feats.cpp:142
 msgid "Too far away for action!"
 msgstr "Demasiado lejos para la acción!"
 
@@ -35,29 +35,29 @@ msgstr "Falla."
 msgid "Critical Miss!"
 msgstr "Falla Crítica!"
 
-#: src/classes/feats.cpp:294
+#: src/classes/feats.cpp:266
 #, c-format
 msgid "Healed %d points."
 msgstr ""
 
-#: src/classes/feats.cpp:298
+#: src/classes/feats.cpp:270
 #, c-format
 msgid "Hit for %d points."
 msgstr "Cura en %d puntos."
 
-#: src/classes/feats.cpp:322 src/classes/feats.cpp:325
+#: src/classes/feats.cpp:294 src/classes/feats.cpp:297
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/feats.cpp:330 src/classes/feats.cpp:334
+#: src/classes/feats.cpp:302 src/classes/feats.cpp:306
 msgid "Critical Hit!"
 msgstr "Golpe Crítico!"
 
-#: src/classes/feats.cpp:374
+#: src/classes/feats.cpp:346
 msgid "Not enought points to use!"
 msgstr "Puntos no suficientes!"
 
-#: src/classes/mission.cpp:196 src/engine/dialog.cpp:651
+#: src/classes/mission.cpp:196 src/engine/dialog.cpp:653
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr ""
@@ -98,7 +98,7 @@ msgid "Confirm"
 msgstr "Aceptar"
 
 #: src/engine/alignwindow.cpp:61 src/engine/aspectwindow.cpp:75
-#: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:37
+#: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:48
 #: src/engine/classwindow.cpp:113 src/engine/options.cpp:695
 #: src/engine/racewindow.cpp:108 src/engine/skillwindow.cpp:123
 msgid "Cancel"
@@ -183,22 +183,42 @@ msgstr "Aviso"
 msgid "You Need to Assign All Attributes."
 msgstr "Se necesita asignar a todas Características."
 
-#: src/engine/barterwindow.cpp:21 src/engine/dialog.cpp:564
+#: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:566
 msgid "Barter"
 msgstr "Cambios"
 
-#: src/engine/barterwindow.cpp:33
+#: src/engine/barterwindow.cpp:44
 msgid "Offer"
 msgstr "Ofertar"
 
-#: src/engine/barterwindow.cpp:35
+#: src/engine/barterwindow.cpp:46
 msgid "Impose"
 msgstr "Imponer"
 
-#: src/engine/barterwindow.cpp:68 src/engine/barterwindow.cpp:78
-#: src/engine/inventwindow.cpp:30
+#: src/engine/barterwindow.cpp:80 src/engine/barterwindow.cpp:91
+#: src/engine/inventwindow.cpp:31
 msgid "Inventory"
 msgstr "Inventario"
+
+#: src/engine/barterwindow.cpp:246
+msgid "The barter was accepted."
+msgstr ""
+
+#: src/engine/barterwindow.cpp:251
+msgid "The barter was rejected."
+msgstr ""
+
+#: src/engine/barterwindow.cpp:271
+msgid "The barter imposition was accepted."
+msgstr ""
+
+#: src/engine/barterwindow.cpp:276
+msgid "The barter imposition was rejected."
+msgstr ""
+
+#: src/engine/barterwindow.cpp:295 src/engine/inventwindow.cpp:197
+msgid "Remove"
+msgstr "Quitar"
 
 #: src/engine/charwindow.cpp:82
 msgid "Female"
@@ -345,42 +365,42 @@ msgstr "Sin Dotes."
 msgid "Can't load mouse cursor: %s\n"
 msgstr "No pudo cargar el cursor: %s\n"
 
-#: src/engine/dccnit.cpp:354
+#: src/engine/dccnit.cpp:353
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Cargando Mapa: %s"
 
-#: src/engine/dccnit.cpp:438
+#: src/engine/dccnit.cpp:437
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:453
+#: src/engine/dccnit.cpp:452
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Cargando NPC: %s"
 
-#: src/engine/dccnit.cpp:478
+#: src/engine/dccnit.cpp:477
 msgid "Loading Character"
 msgstr "Cargando Personaje"
 
-#: src/engine/dccnit.cpp:484
+#: src/engine/dccnit.cpp:483
 msgid "Putting GUI on Screen"
 msgstr "Cargando Ventanas"
 
-#: src/engine/dccnit.cpp:529
+#: src/engine/dccnit.cpp:528
 msgid "Loading Particles"
 msgstr "Cargando Partículas"
 
-#: src/engine/dccnit.cpp:559
+#: src/engine/dccnit.cpp:558
 msgid "Loading Changes..."
 msgstr "Cargando Modificaciones..."
 
-#: src/engine/dccnit.cpp:579
+#: src/engine/dccnit.cpp:578
 msgid "Done!"
 msgstr "Hecho!"
 
-#: src/engine/dccnit.cpp:670
+#: src/engine/dccnit.cpp:669
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -388,118 +408,118 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1213
+#: src/engine/dccnit.cpp:1212
 msgid "Too far away for the action!"
 msgstr "Demasiado lejos para la acción!"
 
-#: src/engine/dccnit.cpp:1250
+#: src/engine/dccnit.cpp:1249
 msgid "No NPCs in the area."
 msgstr "Sin NPCs en la área."
 
-#: src/engine/dccnit.cpp:1306
+#: src/engine/dccnit.cpp:1305
 msgid "Surprise Attack Turn."
 msgstr "Turno de golpe sorpresa."
 
-#: src/engine/dccnit.cpp:1323
+#: src/engine/dccnit.cpp:1322
 msgid "No enemies in the area."
 msgstr "Sin enemigos en la área."
 
-#: src/engine/dccnit.cpp:1511 src/engine/dccnit.cpp:1931
+#: src/engine/dccnit.cpp:1500 src/engine/dccnit.cpp:1920
 msgid "Nothing"
 msgstr "Nada"
 
-#: src/engine/dccnit.cpp:1681
+#: src/engine/dccnit.cpp:1670
 #, c-format
 msgid "%s taken."
 msgstr "Recogido %s."
 
-#: src/engine/dccnit.cpp:1703
+#: src/engine/dccnit.cpp:1692
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1737
+#: src/engine/dccnit.cpp:1726
 msgid "Door"
 msgstr "Puerta"
 
-#: src/engine/dccnit.cpp:1864
+#: src/engine/dccnit.cpp:1853
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s ataca %s"
 
-#: src/engine/dccnit.cpp:3313
+#: src/engine/dccnit.cpp:3302
 msgid "Exit Battle Mode"
 msgstr "Sale del Modo de Batalla"
 
-#: src/engine/dialog.cpp:245
+#: src/engine/dialog.cpp:247
 msgid "Cannot open File!\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:268
+#: src/engine/dialog.cpp:270
 msgid "Tried to define dialog before end last one!"
 msgstr ""
 
-#: src/engine/dialog.cpp:284
+#: src/engine/dialog.cpp:286
 msgid "Tried to end an undefined dialog!"
 msgstr ""
 
-#: src/engine/dialog.cpp:295
+#: src/engine/dialog.cpp:297
 msgid "Tried to begin NPC before end something!"
 msgstr ""
 
-#: src/engine/dialog.cpp:304
+#: src/engine/dialog.cpp:306
 msgid "Tried to end NPC before begin it!"
 msgstr ""
 
-#: src/engine/dialog.cpp:313
+#: src/engine/dialog.cpp:315
 msgid "Tried to begin PC before end something!"
 msgstr ""
 
-#: src/engine/dialog.cpp:323
+#: src/engine/dialog.cpp:325
 msgid "Tried to end PC before begin it!"
 msgstr ""
 
-#: src/engine/dialog.cpp:350
+#: src/engine/dialog.cpp:352
 msgid "Option Text without option!"
 msgstr ""
 
-#: src/engine/dialog.cpp:354 src/engine/dialog.cpp:442
+#: src/engine/dialog.cpp:356 src/engine/dialog.cpp:444
 msgid "Options overflow!"
 msgstr ""
 
-#: src/engine/dialog.cpp:360
+#: src/engine/dialog.cpp:362
 msgid "Text without any relation!"
 msgstr ""
 
-#: src/engine/dialog.cpp:373
+#: src/engine/dialog.cpp:375
 msgid "Option without begin PC!"
 msgstr ""
 
-#: src/engine/dialog.cpp:381
+#: src/engine/dialog.cpp:383
 msgid "Action isn't yet defined to NPC!"
 msgstr ""
 
-#: src/engine/dialog.cpp:430
+#: src/engine/dialog.cpp:432
 msgid "Actions List overflow!"
 msgstr ""
 
-#: src/engine/dialog.cpp:437
+#: src/engine/dialog.cpp:439
 msgid "Option Action without option!"
 msgstr ""
 
-#: src/engine/dialog.cpp:448
+#: src/engine/dialog.cpp:450
 msgid "Action without any relation!\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:454
+#: src/engine/dialog.cpp:456
 msgid "Unknow Token!"
 msgstr ""
 
-#: src/engine/dialog.cpp:518
+#: src/engine/dialog.cpp:520
 #, c-format
 msgid "Not found on dialog: %d\n"
 msgstr ""
 
-#: src/engine/dialog.cpp:562
+#: src/engine/dialog.cpp:564
 msgid "Dialog"
 msgstr "Diálogo"
 
@@ -527,27 +547,27 @@ msgstr "Opciones"
 msgid "Exit"
 msgstr "Salir"
 
-#: src/engine/inventwindow.cpp:176
+#: src/engine/inventwindow.cpp:178
 msgid "Drop"
 msgstr "Descartar"
 
-#: src/engine/inventwindow.cpp:180
+#: src/engine/inventwindow.cpp:185
+msgid "Buy"
+msgstr ""
+
+#: src/engine/inventwindow.cpp:185
 msgid "Sell"
 msgstr "Vender"
 
-#: src/engine/inventwindow.cpp:184
+#: src/engine/inventwindow.cpp:192
 msgid "Use"
 msgstr "Utilizar"
 
-#: src/engine/inventwindow.cpp:189
-msgid "Remove"
-msgstr "Quitar"
-
-#: src/engine/inventwindow.cpp:193
+#: src/engine/inventwindow.cpp:201
 msgid "Info"
 msgstr "Info"
 
-#: src/engine/inventwindow.cpp:196
+#: src/engine/inventwindow.cpp:205
 msgid "Get"
 msgstr "Coger"
 
@@ -574,23 +594,23 @@ msgstr ""
 msgid "Damage Dice: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:101
+#: src/engine/itemwindow.cpp:102
 msgid "Primary Damage: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:108
+#: src/engine/itemwindow.cpp:109
 msgid "Secondary Damage: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:120
+#: src/engine/itemwindow.cpp:121
 msgid "Range: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:125
+#: src/engine/itemwindow.cpp:126
 msgid "Size: "
 msgstr ""
 
-#: src/engine/itemwindow.cpp:143
+#: src/engine/itemwindow.cpp:144
 msgid "Ok"
 msgstr ""
 
@@ -765,34 +785,34 @@ msgstr "Puntos:"
 msgid "Cost"
 msgstr "Coste"
 
-#: src/fight/fightSystem.cpp:134
+#: src/fight/fightSystem.cpp:135
 msgid "No more enemies."
 msgstr "No más enemigos."
 
-#: src/fight/fightSystem.cpp:163
+#: src/fight/fightSystem.cpp:164
 #, c-format
 msgid "%s is dead!"
 msgstr "|%s estás muerto!"
 
-#: src/fight/fightSystem.cpp:205
+#: src/fight/fightSystem.cpp:206
 #, c-format
 msgid "%s receive %d XP for killing"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:251 src/fight/fightSystem.cpp:270
+#: src/fight/fightSystem.cpp:252 src/fight/fightSystem.cpp:271
 msgid "New Round"
 msgstr "Nueva Ronda"
 
-#: src/fight/fightSystem.cpp:256 src/fight/fightSystem.cpp:275
+#: src/fight/fightSystem.cpp:257 src/fight/fightSystem.cpp:276
 msgid "Error: No Characters!"
 msgstr ""
 
-#: src/fight/fightSystem.cpp:356
+#: src/fight/fightSystem.cpp:357
 #, c-format
 msgid "%s attacks %s|"
 msgstr "%s ataca %s|"
 
-#: src/fight/initiative.cpp:39
+#: src/fight/initiative.cpp:40
 #, c-format
 msgid "%s rolls initiative: "
 msgstr "%s juega iniciativa: "
