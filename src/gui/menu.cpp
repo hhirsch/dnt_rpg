@@ -255,59 +255,67 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
    *pronto = 0;
    int tecla = 0;
 
-      /* Verify Mouse Moviments */
-      if(isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan,
-                   y+altura+Yjan-3, mouseX, mouseY)) 
+   /* Verify Mouse Moviments */
+   if(isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan,
+            y+altura+Yjan-3, mouseX, mouseY)) 
+   {
+      actualItem = ((mouseY - (y+Yjan)-4) / 11) + 1;
+      if(actualItem < 0)
       {
-         actualItem = ((mouseY - (y+Yjan)-4) / 11) + 1;
-         if(actualItem < 0)
-         {
-            actualItem = 0;
-         }
+         actualItem = 0;
       }
-      /* Verify Mouse Button */
-      if(Mbotao & SDL_BUTTON(1))
-      {
-         pressed = true; 
-      }
-      else if(pressed)
-      {
-         /* Got the release event! */
-         *pronto = 1;
-         pressed = false;
-      }
+   }
+   /* Verify Mouse Button */
+   if(Mbotao & SDL_BUTTON(1))
+   {
+      pressed = true; 
+   }
+   else if(pressed)
+   {
+      /* Got the release event! */
+      *pronto = 1;
+      pressed = false;
+   }
 
-      /* Verify Keyboard */
-      if(teclado[SDLK_UP] && (actualItem-1 > 0))
-      {
-         actualItem --;
-      }
-      else if(teclado[SDLK_DOWN] && (actualItem+1 <= total))
-      {
-         actualItem++;
-      }
-      else if( (teclado[SDLK_RETURN] || teclado[SDLK_KP_ENTER]) )
-      {
-         *pronto = 1;
-         tecla = 1;
-      }
-      else if( teclado[SDLK_ESCAPE])
-      {
-         *pronto = 1;
-         tecla = 0;
-      }
+   /* Verify Keyboard */
+   if(teclado[SDLK_UP] && (actualItem-1 > 0))
+   {
+      actualItem --;
+   }
+   else if(teclado[SDLK_DOWN] && (actualItem+1 <= total-numPictures))
+   {
+      actualItem++;
+   }
+   else if( (teclado[SDLK_RETURN] || teclado[SDLK_KP_ENTER]) )
+   {
+      *pronto = 1;
+      tecla = 1;
+   }
+   else if( teclado[SDLK_ESCAPE])
+   {
+      *pronto = 1;
+      tecla = 0;
+   }
 
-      if(actualItem > 0)
-      {
-         color_Set(Colors.colorCont[1].R,
-                   Colors.colorCont[1].G,
-                   Colors.colorCont[1].B,
-                   Colors.colorCont[1].A);
-         rectangle_Oval(screen,x+2,(actualItem-1)*11+y+4,
-                        x+largura-2,(actualItem)*11+y+4,
-                        Colors.colorCont[2].R, Colors.colorCont[2].G,
-                        Colors.colorCont[2].B, Colors.colorCont[2].A);
-      }
+   if(actualItem > 0)
+   {
+      color_Set(Colors.colorCont[1].R,
+            Colors.colorCont[1].G,
+            Colors.colorCont[1].B,
+            Colors.colorCont[1].A);
+      rectangle_Oval(screen,x+2,(actualItem-1)*11+y+4,
+            x+largura-2,(actualItem)*11+y+4,
+            Colors.colorCont[2].R, Colors.colorCont[2].G,
+            Colors.colorCont[2].B, Colors.colorCont[2].A);
+   }
+
+   /* Verify if the mouse is at menu */
+   if(!isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan, y+altura+Yjan-3, 
+                 mouseX, mouseY) && 
+      (!tecla) && (*pronto))
+   {
+      actualItem = 0;
+   }
 
    /* Define the Return */
    return(actualItem);
