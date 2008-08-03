@@ -7,94 +7,50 @@
 #include "object.h"
 #include "../engine/util.h"
 #include "../etc/dirs.h"
-
-/**************************************************************
- *                        getAfterEqual                       *
- **************************************************************/
-string object::getAfterEqual(string s)
-{
-   unsigned int i = 0;
-
-   /* First, delete the \n character at the end of the string,
-    * if there is one there. */
-   if(s[s.length()-1] == '\n')
-   {
-      s.erase(s.length()-1,1);
-   }
-
-   /* Goes to the equal character */
-   while( (i < s.length()) && (s[i] != '='))
-   {
-      i++;
-   }
-   i++;
-
-   /* Remove all spaces after the equal */
-   while( (i < s.length()) && (s[i] == ' '))
-   {
-      i++;
-   }
-
-   if(i < s.length())
-   {
-      return(s.substr(i));
-   }
-   printf("Error parsing %s\n", s.c_str());
-   return("");
-}
+#include "../etc/defparser.h"
 
 /**************************************************************
  *                         Constructor                        *
  **************************************************************/
 object::object(string path, modelList& mdlList): thing()
 {
-   dirs dir;
-   FILE* file;
-   char buffer[512];
-   string token, token2;
-   int aux;
    string cal3DFile = "";
+   int aux;
+   dirs dir;
 
+   /* Initial Values */
    cleanValues();
 
-   if(!(file=fopen(dir.getRealFile(path).c_str(),"r")))
+   /* Parse the values */
+   defParser parser;
+   if(!parser.load(path))
    {
-       printf("Error on open object %s\n", 
+       printf("Error loading object file '%s'\n", 
               dir.getRealFile(path).c_str());
-       return;
+      return;
    }
 
    fileName = path;
 
-   while(fscanf(file, "%s", buffer) != EOF)
+   /* Define each attribute */
+   string key = "", value = "";
+   while(parser.getNextTuple(key, value))
    {
-      token = buffer;
-
-      /* eat up the rest of line */
-      fgets(buffer, sizeof(buffer), file);
-      token2 = getAfterEqual(buffer);
-
-      if(token2 == "")
+      if(key == "name")
       {
-         printf("at file: %s\n",path.c_str());
+         name = value;
       }
-
-      /* Tokenize the first token */
-      if(token == "name")
+      else if(key == "cal3d")
       {
-         name = token2;
+         cal3DFile = value;
       }
-      else if(token == "cal3d")
+      else if(key == "inventory_sizes")
       {
-         cal3DFile = token2;
+         sscanf(value.c_str(),"%d %d",&inventSizeX, &inventSizeY);
       }
-      else if(token == "inventory_sizes")
+      else if(key == "inventory_texture")
       {
-         sscanf(token2.c_str(),"%d %d",&inventSizeX, &inventSizeY);
-      }
-      else if(token == "inventory_texture")
-      {
-         model2dName = token2;
+         model2dName = value;
          model2d = IMG_Load(dir.getRealFile(model2dName).c_str());
          if(!model2d)
          {
@@ -102,56 +58,54 @@ object::object(string path, modelList& mdlList): thing()
                    dir.getRealFile(model2dName).c_str());
          }
       }
-      else if(token == "life_points")
+      else if(key == "life_points")
       {
-         sscanf(token2.c_str(),"%d",&maxLifePoints);
+         sscanf(value.c_str(),"%d",&maxLifePoints);
          lifePoints = maxLifePoints;
       }
-      else if(token == "fortitude")
+      else if(key == "fortitude")
       {
-         sscanf(token2.c_str(),"%d",&fortitude);
+         sscanf(value.c_str(),"%d",&fortitude);
       }
-      else if(token == "reflex")
+      else if(key == "reflex")
       {
-         sscanf(token2.c_str(),"%d",&reflex);
+         sscanf(value.c_str(),"%d",&reflex);
       }
-      else if((token == "will") || (token == "i_am_not_a_fool") )
+      else if((key == "will") || (key == "i_am_not_a_fool") )
       {
-         sscanf(token2.c_str(),"%d",&iAmNotAFool);
+         sscanf(value.c_str(),"%d",&iAmNotAFool);
       }
-      else if(token == "displacement")
+      else if(key == "displacement")
       {
-         sscanf(token2.c_str(),"%d",&displacement);
+         sscanf(value.c_str(),"%d",&displacement);
       }
-      else if(token == "armature_class")
+      else if(key == "armature_class")
       {
-         sscanf(token2.c_str(),"%d",&armatureClass);
+         sscanf(value.c_str(),"%d",&armatureClass);
       }
-      else if(token == "size_modifier")
+      else if(key == "size_modifier")
       {
-         sscanf(token2.c_str(),"%d",&sizeModifier);
+         sscanf(value.c_str(),"%d",&sizeModifier);
       }
-      else if(token =="cost") 
+      else if(key =="cost") 
       {
-         sscanf(token2.c_str(),"%f",&cost);
+         sscanf(value.c_str(),"%f",&cost);
       }
-      else if(token == "static_scenery")
+      else if(key == "static_scenery")
       {
-         sscanf(token2.c_str(),"%d", &aux);
+         sscanf(value.c_str(),"%d", &aux);
          staticScenery = (aux);
       }
-      else if((token == "weight_value") || (token == "weight"))
+      else if((key == "weight_value") || (key == "weight"))
       {
-         sscanf(token2.c_str(),"%f",&weight);
+         sscanf(value.c_str(),"%f",&weight);
       }
       else
       {
-         printf("Warning: Unknow token '%s' at %s\n", token.c_str(), 
-                                                      path.c_str());
+         printf("Warning: Unknow key '%s' at %s\n", key.c_str(), 
+                                                    path.c_str());
       }
    }
-
-   fclose(file);
 
    /* Load/Get Cal3D Model */
    if(!cal3DFile.empty())

@@ -1,6 +1,7 @@
 #include "weapon.h"
 #include "../lang/translate.h"
 #include "../etc/dirs.h"
+#include "../etc/defparser.h"
 
 /************************************************************
  *                        Constructor                       *
@@ -28,10 +29,9 @@ void wInfo::operator=(wInfo& v)
 weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
 {
    dirs dir;
-   FILE* file;
-   char buffer[512];
-   string token, token2;
+   string key="", value="";
 
+   /* Empty Values */
    cleanValues();
    categoryType = NULL;
    rangeType = NULL;
@@ -42,46 +42,41 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
 
    type = OBJECT_TYPE_WEAPON;
 
-   if(!(file=fopen(dir.getRealFile(path).c_str(),"r")))
+   /* Load Parser */
+   defParser parser;
+   if(!parser.load(path))
    {
        printf("Error on open object %s\n",
               dir.getRealFile(path).c_str());
        return;
    }
-
    fileName = path;
 
-   while(fscanf(file, "%s", buffer) != EOF)
+   while(parser.getNextTuple(key,value))
    {
-      token = buffer;
-
-      /* eat up the rest of line */
-      fgets(buffer, sizeof(buffer), file);
-      token2 = getAfterEqual(buffer);
-
-      if(token2 == "")
+      if(value == "")
       {
          printf("at file: %s\n",path.c_str());
       }
 
-      /* Tokenize the first token */
-      if(token == "name")
+      /* Tokenize the first key */
+      if(key == "name")
       {
-         name = translateDataString(token2);
+         name = translateDataString(value);
       }
-      else if(token == "cal3d")
+      else if(key == "cal3d")
       {
          /* Add the model. The weapon is never a scenery. */
-         model3D = mdlList.addModel(token2,"", false);
+         model3D = mdlList.addModel(value,"", false);
          model3D->incUsed();
       }
-      else if( (token == "inventory_sizes") || (token == "sizeValue"))
+      else if( (key == "inventory_sizes") || (key == "sizeValue"))
       {
-         sscanf(token2.c_str(),"%d %d",&inventSizeX, &inventSizeY);
+         sscanf(value.c_str(),"%d %d",&inventSizeX, &inventSizeY);
       }
-      else if(token == "inventory_texture")
+      else if(key == "inventory_texture")
       {
-         model2dName = token2;
+         model2dName = value;
          model2d = IMG_Load(dir.getRealFile(model2dName).c_str());
          if(!model2d)
          {
@@ -89,96 +84,96 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
                    dir.getRealFile(model2dName).c_str());
          }
       }
-      else if(token == "life_points")
+      else if(key == "life_points")
       {
-         sscanf(token2.c_str(),"%d",&maxLifePoints);
+         sscanf(value.c_str(),"%d",&maxLifePoints);
          lifePoints = maxLifePoints;
       }
-      else if(token == "fortitude")
+      else if(key == "fortitude")
       {
-         sscanf(token2.c_str(),"%d",&fortitude);
+         sscanf(value.c_str(),"%d",&fortitude);
       }
-      else if(token == "reflex")
+      else if(key == "reflex")
       {
-         sscanf(token2.c_str(),"%d",&reflex);
+         sscanf(value.c_str(),"%d",&reflex);
       }
-      else if( (token == "will") || (token == "i_am_not_a_fool") )
+      else if( (key == "will") || (key == "i_am_not_a_fool") )
       {
-         sscanf(token2.c_str(),"%d",&iAmNotAFool);
+         sscanf(value.c_str(),"%d",&iAmNotAFool);
       }
-      else if(token == "displacement")
+      else if(key == "displacement")
       {
-         sscanf(token2.c_str(),"%d",&displacement);
+         sscanf(value.c_str(),"%d",&displacement);
       }
-      else if(token == "armature_class")
+      else if(key == "armature_class")
       {
-         sscanf(token2.c_str(),"%d",&armatureClass);
+         sscanf(value.c_str(),"%d",&armatureClass);
       }
-      else if(token == "size_modifier")
+      else if(key == "size_modifier")
       {
-         sscanf(token2.c_str(),"%d",&sizeModifier);
+         sscanf(value.c_str(),"%d",&sizeModifier);
       }
-      else if(token =="cost") 
+      else if(key =="cost") 
       {
-         sscanf(token2.c_str(),"%f",&cost);
+         sscanf(value.c_str(),"%f",&cost);
       }
 
       /* The weapons definitions */
-      else if( (token == "category") || (token == "category_type"))
+      else if( (key == "category") || (key == "category_type"))
       {
-         categoryType = wTypes.getCategory(token2);
+         categoryType = wTypes.getCategory(value);
       }
-      else if(token == "range_type")
+      else if(key == "range_type")
       {
-         rangeType = wTypes.getRange(token2);
+         rangeType = wTypes.getRange(value);
       }
-      else if(token == "range_value")
+      else if(key == "range_value")
       {
-         sscanf(token2.c_str(),"%d",&rangeValue);
+         sscanf(value.c_str(),"%d",&rangeValue);
       }
-      else if( (token == "size_type") || (token == "size"))
+      else if( (key == "size_type") || (key == "size"))
       {
-         sizeType = wTypes.getSize(token2);
+         sizeType = wTypes.getSize(value);
       }
-      else if(token == "weight_type")
+      else if(key == "weight_type")
       {
-         weightType = wTypes.getWeight(token2);
+         weightType = wTypes.getWeight(value);
       }
-      else if((token == "weight_value") || (token == "weight"))
+      else if((key == "weight_value") || (key == "weight"))
       {
-         sscanf(token2.c_str(),"%f",&weight);
+         sscanf(value.c_str(),"%f",&weight);
       }
-      else if(token == "munition_type")
+      else if(key == "munition_type")
       {
-         munitionType = wTypes.getMunition(token2);
+         munitionType = wTypes.getMunition(value);
       }
-      else if(token == "munition_capacity")
+      else if(key == "munition_capacity")
       {
-         sscanf(token2.c_str(),"%d",&munitionCapacity);
+         sscanf(value.c_str(),"%d",&munitionCapacity);
          actualMunition = munitionCapacity;
       }
-      else if(token == "main_damage_type")
+      else if(key == "main_damage_type")
       {
-         damageType[0] = wTypes.getDamage(token2);
+         damageType[0] = wTypes.getDamage(value);
       }
-      else if(token == "main_attack_sound")
+      else if(key == "main_attack_sound")
       {
-         attackSound[0] = token2;
+         attackSound[0] = value;
       }
-      else if(token == "second_damage_type")
+      else if(key == "second_damage_type")
       {
-         damageType[1] = wTypes.getDamage(token2);
+         damageType[1] = wTypes.getDamage(value);
       }
-      else if(token == "second_attack_sound")
+      else if(key == "second_attack_sound")
       {
-         attackSound[1] = token2;
+         attackSound[1] = value;
       }
-      else if(token == "damage_dice")
+      else if(key == "damage_dice")
       {
          int numberOfDices=0, diceID=0, sumNumber=0, criticalMultiplier=0;
 
          /* Read base dice information */
-         sscanf(token2.c_str(), "%d*d%d+%dx%d",
+         sscanf(value.c_str(), "%d*d%d+%dx%d",
                 &numberOfDices, &diceID, &sumNumber, &criticalMultiplier);
          damageDice.baseDice.setType(diceID);
          damageDice.baseDice.setNumberOfDices(numberOfDices);
@@ -195,12 +190,11 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
       }
       else
       {
-         printf("Warning: Unknow token '%s' at %s\n", token.c_str(), 
+         printf("Warning: Unknow key '%s' at %s\n", key.c_str(), 
                                                       path.c_str());
       }
    }
 
-   fclose(file);
 }
 
 /************************************************************
@@ -208,7 +202,7 @@ weapon::weapon(string path, modelList& mdlList, weaponTypes& wTypes): object()
  ************************************************************/
 weapon::~weapon()
 {
-   //Do not need to dec the model3D, since it is already done at the
+   //Do not need to dec the model3D, cause it is already done at the
    //destructor of the object. Also, do not need to free the model2D, since
    //is is done at the object destructor.
 }

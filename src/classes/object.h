@@ -142,11 +142,6 @@ class object: public thing
       /*! Init the values (all with null or zero). Usually called
        * at begining of the constructors. */
       void cleanValues();
-
-      /*! Gets a substring after the equal character.
-       * \param s -> source string
-       * \return -> the substring after the equal character */
-      string getAfterEqual(string s);
 };
 
 
