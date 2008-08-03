@@ -2,8 +2,52 @@
 |                Version 0.3                   |
 ================================================
  - Briefing now has its own window; 
+ - Added icons to menus;
+ - Fixed a bug for inventory menu limits;
  - Fixed a bug when inserting a completed mission
    on mission controller;
+ - Re-enabled the outdoor terrain view frustum culling;
+ - Put Farview Distance as a Game Option;
+ - Keep window state on map change (opened/closed);
+ - Fixed a bug at mouse coordinate (Screen->World);
+ - Disable particles if no GL_Point extensions found (it 
+   will fix a segfault at the outdoor map);
+
+
+Working on:
+ - Optimizations for outdoor rendering;
+ - Comic book cutscenes;
+ - Character level up;
+ - Weather effects;
+ - Shadows;
+ - New Models;
+ - Put sound effects on editor and maps;
+ - Initial approach to NPC select the target to attack;
+ - Initial approach to select better attack to NPC use;
+ - Initial approach to move NPC on battle;
+ - Initial approach to use other actions than attack actions at combat;
+ - Load/Save Functions;
+ - Barter;
+ - Receive XP on killing, trickering and completing missions;
+ - Use of some itens;
+
+Pending:
+ - Minimap Tags;
+ - Outdoor MiniMap rewrite;
+ - Extend walls to follow map height;
+ - Walls with different textures per side;
+ - MapEditor: tool to cut walls (knife);
+ - Define paths to improve the A* at outdoor maps;
+ - New Missions;
+ - New Maps;
+ - Put Lights on MapEditor;
+ - Make a tutorial to the battle system;
+ - Implement 5-15% of the feats defined on DNT Book;
+ - Score at Death Screen;
+ - Inventory to inventory changes;
+ - Capacity of using feats;
+ - Capacity of using skills;
+ - Finish the combat system implementation;
 
 ================================================
 |                Version 0.2                   |
