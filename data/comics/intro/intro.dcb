@@ -1,0 +1,48 @@
+book = "Introduction"
+
+# First Page
+page = "First Page"
+texture = comics/intro/page1.png
+
+# First Box
+box = "First Box"
+vertex = 0,0
+vertex = 0,328
+vertex = 734,328
+vertex = 734,0
+effect = 0
+textbox = 9,6,305,45
+text = gettext("Once Upon a time, there's a happy university called UFMG...")
+
+# Second Box
+box = "Second Box"
+vertex = 0,331
+vertex = 0,576
+vertex = 346,576
+vertex = 346,331
+effect = 0
+textbox = 6,340,293,266
+text = gettext("People there used to live peacefull lives")
+
+# Third Box
+box = "Third Box"
+vertex = 347,331
+vertex = 347,576
+vertex = 731,576
+vertex = 731,331
+effect = 0
+textbox = 356,531,653,568
+text = gettext("(except the medicine students, who had the habit of sacrifice one rookie per year)")
+
+# Forth Box
+box = "Forth Box"
+vertex = 0,586
+vertex = 0,1032
+vertex = 732,1032
+vertex = 732,586
+effect = 0
+textbox = 14,597,232,617
+text = gettext("When something happened...")
+textbox = 440,998,720,1018
+text = gettext("a big explosion, with unknow causes.")
+
