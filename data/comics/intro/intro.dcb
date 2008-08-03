@@ -11,7 +11,7 @@ vertex = 0,328
 vertex = 734,328
 vertex = 734,0
 effect = 0
-textbox = 9,6,305,45
+textbox = 9,8,305,45
 text = gettext("Once Upon a time, there's a happy university called UFMG...")
 
 # Second Box
@@ -21,7 +21,7 @@ vertex = 0,576
 vertex = 346,576
 vertex = 346,331
 effect = 0
-textbox = 6,340,293,266
+textbox = 6,341,293,266
 text = gettext("People there used to live peacefull lives")
 
 # Third Box
