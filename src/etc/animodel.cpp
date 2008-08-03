@@ -3,6 +3,7 @@
  */
 
 #include "animodel.h"
+#include "defparser.h"
 #include "../engine/util.h"
 #include "dirs.h"
 #include "overlaps.h"
@@ -151,146 +152,86 @@ void aniModel::calculateBoundingBox()
  *********************************************************************/
 bool aniModel::loadModel(const string& strFilename)
 {
-   /* CAL3D Load Model  */
    dirs dir;
+ 
+   /* initialize the data path */
+   string strPath = m_path;
 
-   // open the model configuration file
-  std::ifstream file;
-  file.open(dir.getRealFile(strFilename).c_str(), 
-            std::ios::in | std::ios::binary);
-  if(!file)
-  {
-    std::cerr << "Failed to open model configuration file '" << 
-                  dir.getRealFile(strFilename) << "'." << std::endl;
-    return false;
-  }
+   /* initialize the animation count */
+   int animationCount;
+   animationCount = 0;
 
-  // initialize the data path
-  std::string strPath = m_path;
+   /* Get the definitions */
+   defParser parser;
+   if(!parser.load(strFilename))
+   {
+      return(false);
+   }
 
-  // initialize the animation count
-  int animationCount;
-  animationCount = 0;
-
-  // parse all lines from the model configuration file
-  int line;
-  for(line = 1; ; line++)
-  {
-    // read the next model configuration line
-    std::string strBuffer;
-    std::getline(file, strBuffer);
-
-    // stop if we reached the end of file
-    if(file.eof()) break;
-
-    // check if an error happend while reading from the file
-    if(!file)
-    {
-      std::cerr << "Error while reading from the model configuration file '" 
-                << strFilename << "'." << std::endl;
-      return false;
-    }
-
-    // find the first non-whitespace character
-    std::string::size_type pos;
-    pos = strBuffer.find_first_not_of(" \t");
-
-    // check for empty lines
-    if((pos == std::string::npos) || (strBuffer[pos] == '\n') || 
-       (strBuffer[pos] == '\r') || (strBuffer[pos] == 0)) continue;
-
-    // check for comment lines
-    if(strBuffer[pos] == '#') continue;
-
-    // get the key
-    std::string strKey;
-    strKey = strBuffer.substr(pos, 
-                              strBuffer.find_first_of(" =\t\n\r", pos) - pos);
-    pos += strKey.size();
-
-    // get the '=' character
-    pos = strBuffer.find_first_not_of(" \t", pos);
-    if((pos == std::string::npos) || (strBuffer[pos] != '='))
-    {
-      std::cerr << strFilename << "(" << line << "): Invalid syntax." 
-                << std::endl;
-      return false;
-    }
-
-    // find the first non-whitespace character after the '=' character
-    pos = strBuffer.find_first_not_of(" \t", pos + 1);
-
-    // get the data
-    std::string strData;
-    strData = strBuffer.substr(pos, strBuffer.find_first_of("\n\r", pos) - pos);
-
-    // handle the model creation
-    if(strKey == "scale")
-    {
-      // set rendering scale factor
-      m_renderScale = atof(strData.c_str());
-    }
-    else if(strKey == "path")
-    {
-      // set the new path for the data files if one hasn't been set already
-      if (m_path == "") strPath = dir.getRealFile(strData);
-    }
-    else if(strKey == "skeleton")
-    {
-      // load core skeleton
-      //std::cout << "Loading skeleton '" << strData << "'..." << std::endl;
-      if(!m_calCoreModel->loadCoreSkeleton(strPath + strData))
+   string strKey = "", strData = "";
+   
+   /* Interpret each one */
+   while(parser.getNextTuple(strKey, strData))
+   {
+      // handle the model creation
+      if(strKey == "scale")
       {
-        CalError::printLastError();
-        return false;
+         // set rendering scale factor
+         m_renderScale = atof(strData.c_str());
       }
-    }
-    else if(strKey == "animation")
-    {
-      // load core animation
-      //std::cout << "Loading animation '" << strData << animationCount 
-      //          <<"'..." << std::endl;
-      m_animationId[animationCount] = m_calCoreModel->loadCoreAnimation(strPath
-                                                                     + strData);
-      if(m_animationId[animationCount] == -1)
+      else if(strKey == "path")
       {
-        CalError::printLastError();
-        return false;
+         // set the new path for the data files if one hasn't been set already
+         if (m_path == "") strPath = dir.getRealFile(strData);
       }
+      else if(strKey == "skeleton")
+      {
+         // load core skeleton
+         if(!m_calCoreModel->loadCoreSkeleton(strPath + strData))
+         {
+            CalError::printLastError();
+            return false;
+         }
+      }
+      else if(strKey == "animation")
+      {
+         // load core animation
+         m_animationId[animationCount] = 
+                           m_calCoreModel->loadCoreAnimation(strPath + strData);
+         if(m_animationId[animationCount] == -1)
+         {
+            CalError::printLastError();
+            return false;
+         }
 
-      animationCount++;
-    }
-    else if(strKey == "mesh")
-    {
-      // load core mesh
-      //std::cout << "Loading mesh '" << strData << "'..." << std::endl;
-      int meshID = m_calCoreModel->loadCoreMesh(strPath + strData);
-      if(meshID == -1)
-      {
-        CalError::printLastError();
-        return false;
+         animationCount++;
       }
-    }
-    else if(strKey == "material")
-    {
-      // load core material
-      //std::cout << "Loading material '" << strData << "'..." << std::endl;
-      if(m_calCoreModel->loadCoreMaterial(strPath + strData) == -1)
+      else if(strKey == "mesh")
       {
-        CalError::printLastError();
-        return false;
+         // load core mesh
+         int meshID = m_calCoreModel->loadCoreMesh(strPath + strData);
+         if(meshID == -1)
+         {
+            CalError::printLastError();
+            return false;
+         }
       }
-    }
-    else
-    {
-      std::cerr << strFilename << "(" << line << "): Invalid Syntax." 
-                << std::endl;
-      return false;
-    }
-  }
-
-  // explicitely close the file
-  file.close();
+      else if(strKey == "material")
+      {
+         // load core material
+         if(m_calCoreModel->loadCoreMaterial(strPath + strData) == -1)
+         {
+            CalError::printLastError();
+            return false;
+         }
+      }
+      else
+      {
+         cerr << strFilename << ": Unknow key '" << strKey
+              << "'" << endl;
+         return false;
+      }
+   }
 
   // load all textures and store the opengl texture id in the 
   // corresponding map in the material
@@ -333,7 +274,6 @@ bool aniModel::loadModel(const string& strFilename)
   }
 
   // Calculate Bounding Boxes
-
   m_calCoreModel->getCoreSkeleton()->calculateBoundingBoxes(m_calCoreModel);
 
   m_calModel = new CalModel(m_calCoreModel);

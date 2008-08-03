@@ -33,7 +33,8 @@ OBJSLANG = $(ENDLANG)translate.o
 OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4.o $(ENDPART)part5.o $(ENDPART)part6.o $(ENDPART)part7.o $(ENDPART)particle.o $(ENDPART)partcontroller.o $(ENDPART)wave.o $(ENDPART)grass.o $(ENDPART)meteor.o $(ENDPART)partlist.o $(ENDPART)wind.o $(ENDPART)lake.o
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
-$(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o $(ENDETC)overlaps.o
+$(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o $(ENDETC)overlaps.o \
+$(ENDETC)defparser.o
 OBJS = alignwindow.o aspectwindow.o attwindow.o barterwindow.o briefing.o camera.o character.o charwindow.o classwindow.o collision.o culling.o cursor.o dialog.o dccnit.o initial.o inventwindow.o itemwindow.o minimapwindow.o modstate.o options.o racewindow.o skillwindow.o shadow.o shortcutswindow.o sky.o sun.o teste.o util.o
 BIN = ../../bin/
 SUPREDE = #-DVIDEO_MODE #-DREDE #comente para nao ter suporte a rede na bagaca
