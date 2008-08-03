@@ -32,10 +32,47 @@ class comicPage
        * \param box -> comicBox to insert */
       void insertBox(comicBox* box);
 
+      /*! Insert (draw) a text to the page texture
+       * \param x1 -> x first coordinate 
+       * \param y1 -> y first coordinate
+       * \param x2 -> x last coordinate
+       * \param y2 -> y last coordinate
+       * \param text -> string with text to insert */
+      void insertText(int x1, int y1, int x2, int y2, string text); 
+
+      /*! Set the texture
+       * \textureFile -> image file to use as texture
+       * \return -> true if can load the image */
+      bool defineTexture(string textureFile);
+
+      /*! Flush the SDL texture to an openGL texture */
+      void flushTexture();
+
+      /*! Get the first box on the list
+       * \return -> pointer to the first box */
+      comicBox* getFirstBox();
+      /*! Get total boxes
+       * \return -> total number of boxes on page */
+      int getTotalBoxes();
+
+      /*! Render the page (updating the active box) */
+      void render();
+
+      /*! Get the current page texture width
+       * \return -> page width */
+      int getWidth();
+
+      /*! Get the current page texture height
+       * \return -> page height */
+      int getHeight();
+
    protected:
 
       comicPage* next;     /**< Next Page of the comic book */
       comicPage* previous; /**< Previous Page of the comic book */
+
+      SDL_Surface* texture; /**< Page SDL Texture */
+      GLuint tex;           /**< Page OpenGL Texture */
 
       comicBox* boxes;  /**< Boxes List */
       int totalBoxes;   /**< Total Boxes on the list */

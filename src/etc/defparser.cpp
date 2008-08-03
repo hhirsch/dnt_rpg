@@ -187,7 +187,7 @@ bool defParser::getNextTuple(string& key, string& value)
    /* Set the tuple */
    key = curTuple->getKey();
    value = curTuple->getValue();
-   
+  
    return(true);
 
 }

@@ -26,11 +26,17 @@ class comicBook
 
    protected:
 
+      /*! Insert a page at the book pages list
+       * \param t -> page title 
+       * \return -> pointer to the comic page created */
+      comicPage* insertPage(string t);
+
       /*! Empty the book, deleting all its pages */
       void empty();
 
       comicPage* pages;   /**< Each comic book page  */
       int totalPages;     /**< Total book pages */
+      string title;       /**< Book Title */
 };
 
 #endif

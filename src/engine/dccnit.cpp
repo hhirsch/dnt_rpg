@@ -5,6 +5,7 @@
 #include "dccnit.h"
 #include "culling.h"
 #include "util.h"
+
 #include <math.h>
 #include <SDL/SDL_image.h>
 #include "../etc/extensions.h"

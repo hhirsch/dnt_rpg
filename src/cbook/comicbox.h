@@ -20,8 +20,9 @@ using namespace std;
 class comicBox
 {
    public:
-      /*! Constructor */
-      comicBox();
+      /*! Constructor 
+       * \param t -> box title */
+      comicBox(string t);
       /*! Destructor */
       ~comicBox();
 
@@ -32,8 +33,10 @@ class comicBox
       /*! Set a box vertex
        * \param vertNumber -> the vertex number [0,3]
        * \param x -> x coordinate 
-       * \param y -> y coordinate */
-      void setVertex(int vertNumber, GLfloat x, GLfloat y);
+       * \param y -> y coordinate
+       * \param imgX -> current image width
+       * \param imgY -> current image height */
+      void setVertex(int vertNumber, GLfloat x, GLfloat y, int imgX, int imgY);
 
       /*! Init the box effects, displaying it
        * \note -> a box must need to be activated to be rendered */
@@ -60,14 +63,19 @@ class comicBox
        * \return previous box */
       comicBox* getPrevious();
 
+      /*! Get the box title
+       * \return -> title string */
+      string getTitle();
+
    protected:
 
       /*! Update the comic box */
       void update();
 
-      GLfloat vertex[4][2];  /**< The quad vertex */
-      GLfloat scaleFactorX;  /**< The quad scale factor for X axys */
-      GLfloat scaleFactorY;  /**< The quad scale factor for Y axys */
+      GLfloat vertex[4][2];    /**< The quad vertex */
+      GLfloat texCoord[4][2];  /**< The Vertex texture */
+      GLfloat scaleFactorX;    /**< The quad scale factor for X axys */
+      GLfloat scaleFactorY;    /**< The quad scale factor for Y axys */
 
       GLfloat pos[2];        /**< Current Translation */
       GLfloat angle[2];      /**< Current Rotation */
@@ -75,6 +83,10 @@ class comicBox
 
       int effectType;        /**< The effect type */
       int status;            /**< Current quad status */
+
+      Uint32 timer;          /**< a timer */
+
+      string title;          /**< title  */
 
       comicBox* next;        /**< Next Box on list */
       comicBox* previous;    /**< Previous Box on list */

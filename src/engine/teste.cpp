@@ -12,6 +12,7 @@
 
 #include "../etc/userinfo.h"
 #include "../etc/dirs.h"
+#include "../cbook/comicbook.h"
 
 #ifdef _MSC_VER
    #include "../config_win.h"
@@ -91,6 +92,11 @@ int main(int argc, char **argv)
              glDisable(GL_LIGHTING);
              gameEngine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 
                                     800, 600);
+
+             comicBook* cBook = new comicBook();
+             cBook->load("comics/intro/intro.dcb");
+             cBook->run();
+
              gameEngine->loadMap("mapas/tutorial/house1.map",0);
           }
        }
