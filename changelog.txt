@@ -12,6 +12,7 @@
  - Fixed a bug at mouse coordinate (Screen->World);
  - Disable particles if no GL_Point extensions found (it 
    will fix a segfault at the outdoor map);
+ - Ranged options now changeable with a fill bar; 
 
 
 Working on:
