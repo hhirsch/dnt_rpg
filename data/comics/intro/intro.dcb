@@ -46,3 +46,83 @@ text = gettext("When something happened...")
 textbox = 440,998,720,1018
 text = gettext("a big explosion, with unknow causes.")
 
+# Second Page
+page = "Second Page"
+texture = comics/intro/page2.png
+
+# First Box
+box = "First Box"
+vertex = 4,6
+vertex = 4,307
+vertex = 431,307
+vertex = 431,6
+effect = 0
+textbox = 18,17,283,72
+text = gettext("It made the happy and peacefull city called Belo Horizonte be know as Horrível Horizonte.")
+
+# Second Box
+box = "Second Box"
+vertex = 436,6
+vertex = 436,307
+vertex = 732,307
+vertex = 732,6
+effect = 0
+textbox = 446,18,592,34
+text = gettext("Trees became alive,")
+textbox = 526,42,728,64
+text = gettext("Ameivas became agressive")
+textbox = 458,278,672,294
+text = gettext("and rats became blood thirsty.")
+
+# Third Box
+box = "Thrid Box"
+vertex = 4,310
+vertex = 4,1044
+vertex = 732,1044
+vertex = 732,310
+effect = 0
+textbox = 11,320,304,352
+text = gettext("In this chaotic scene, emerged the main race that would dominate the land:")
+textbox = 85,370,190,408 
+text = gettext("UNIVERSITY STUDENTS!")
+textbox = 459,990,724,1030
+text = gettext("who desired, at all costs, obtain their legendary levels of knowledge.")
+
+# Third Page
+page = "Third Page"
+texture = comics/intro/page3.png
+
+# First Box
+box = "First Box"
+vertex = 9,7
+vertex = 9,376
+vertex = 358,376
+vertex = 358,7
+effect = 0
+textbox = 22,23,342,61
+text = gettext("On this doomed world, tells the tales spoken mouth by mouth by the risen journalists,")
+
+# Second Box
+box = "Second Box"
+vertex = 367,7
+vertex = 367,376
+vertex = 735,376
+vertex = 735,7
+effect = 0
+textbox = 405,332,703,367
+text = gettext("the first man who walked and claimed for his right of a graduation")
+
+# Third and Last Box
+box = "Phew, this is the last box"
+vertex = 9,390
+vertex = 9,1042
+vertex = 735,1042
+vertex = 735,390
+effect = 0
+textbox = 40,404,188,463
+text = gettext("was Logan.")
+textbox = 467,999,724,1027
+text = gettext("And that's how the tale began...")
+
+#
+
