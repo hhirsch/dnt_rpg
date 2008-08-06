@@ -77,6 +77,8 @@ class comicBox
       GLfloat scaleFactorX;    /**< The quad scale factor for X axys */
       GLfloat scaleFactorY;    /**< The quad scale factor for Y axys */
 
+      GLfloat center[2];       /**< The center Coordinates */
+
       GLfloat pos[2];        /**< Current Translation */
       GLfloat angle[2];      /**< Current Rotation */
       GLfloat scale[2];      /**< Current Scale (without scale Factor) */

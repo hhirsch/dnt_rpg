@@ -119,9 +119,22 @@ int comicBox::getStatus()
  ***********************************************************************/
 void comicBox::activate()
 {
+   int i;
+
    /* Set the current status to running */
    status = COMIC_BOX_STATUS_RUNNING;
    timer = SDL_GetTicks();
+
+   /* Calculate Center Positions */
+   center[0] = (vertex[3][0] - vertex[0][0]) / 2.0;
+   center[1] = (vertex[2][1] - vertex[0][1]) / 2.0;
+
+   /* Apply Center Positions */
+   for(i = 0; i < 4; i++)
+   {
+      vertex[i][0] -= center[0];
+      vertex[i][1] -= center[1];
+   }
 
    /* Set the initial Position, scales and angles, based on effect type */
    switch(effectType)
@@ -174,6 +187,7 @@ void comicBox::render()
    glPushMatrix();
       glScalef(scale[0],scale[1],1.0);
       glTranslatef(pos[0],pos[1],0.0);
+      glTranslatef(center[0], center[1], 0.0);
       glRotatef(angle[0],1,0,0);
       glRotatef(angle[1],0,1,0);
       glBegin(GL_QUADS);
