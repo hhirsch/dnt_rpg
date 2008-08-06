@@ -131,6 +131,9 @@ src/sound/sound.cpp
 #         Data Files         #
 ##############################
 
+#comic books
+data/comics/intro/intro.dcb
+
 #alignments
 data/alignment/neutrocaotico.ali
 data/alignment/sllibertario.ali

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-07-31 10:43-0300\n"
+"POT-Creation-Date: 2008-08-06 10:15-0300\n"
 "PO-Revision-Date: 2008-05-18 14:48+0000\n"
 "Last-Translator: pano <Pano_90@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -367,42 +367,42 @@ msgstr "Keine Fähigkeiten."
 msgid "Can't load mouse cursor: %s\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:353
+#: src/engine/dccnit.cpp:354
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Lade Karte: %s"
 
-#: src/engine/dccnit.cpp:437
+#: src/engine/dccnit.cpp:438
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:452
+#: src/engine/dccnit.cpp:453
 #, c-format
 msgid "Loading NPC: %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:477
+#: src/engine/dccnit.cpp:478
 msgid "Loading Character"
 msgstr "Lade Charakter"
 
-#: src/engine/dccnit.cpp:483
+#: src/engine/dccnit.cpp:484
 msgid "Putting GUI on Screen"
 msgstr ""
 
-#: src/engine/dccnit.cpp:528
+#: src/engine/dccnit.cpp:529
 msgid "Loading Particles"
 msgstr ""
 
-#: src/engine/dccnit.cpp:558
+#: src/engine/dccnit.cpp:559
 msgid "Loading Changes..."
 msgstr ""
 
-#: src/engine/dccnit.cpp:578
+#: src/engine/dccnit.cpp:579
 msgid "Done!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:669
+#: src/engine/dccnit.cpp:670
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -410,45 +410,45 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1212
+#: src/engine/dccnit.cpp:1213
 msgid "Too far away for the action!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1249
+#: src/engine/dccnit.cpp:1250
 msgid "No NPCs in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1305
+#: src/engine/dccnit.cpp:1306
 msgid "Surprise Attack Turn."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1322
+#: src/engine/dccnit.cpp:1323
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1500 src/engine/dccnit.cpp:1920
+#: src/engine/dccnit.cpp:1501 src/engine/dccnit.cpp:1921
 msgid "Nothing"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1670
+#: src/engine/dccnit.cpp:1671
 #, c-format
 msgid "%s taken."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1692
+#: src/engine/dccnit.cpp:1693
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1726
+#: src/engine/dccnit.cpp:1727
 msgid "Door"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1853
+#: src/engine/dccnit.cpp:1854
 #, c-format
 msgid "%s attacks %s"
 msgstr ""
 
-#: src/engine/dccnit.cpp:3302
+#: src/engine/dccnit.cpp:3303
 msgid "Exit Battle Mode"
 msgstr ""
 
@@ -858,9 +858,80 @@ msgstr ""
 msgid "Can't open image: %s\n"
 msgstr ""
 
-#: src/gui/picture.cpp:48
+#: src/gui/picture.cpp:49
 #, c-format
 msgid "Warn: Can't Load Picture, may crash soon (out of memory)!\n"
+msgstr ""
+
+#: data/comics/intro/intro.dcb:15
+msgid "Once Upon a time, there's a happy university called UFMG..."
+msgstr ""
+
+#: data/comics/intro/intro.dcb:25
+msgid "People there used to live peacefull lives"
+msgstr ""
+
+#: data/comics/intro/intro.dcb:35
+msgid ""
+"(except the medicine students, who had the habit of sacrifice one rookie per "
+"year)"
+msgstr ""
+
+#: data/comics/intro/intro.dcb:45
+msgid "When something happened..."
+msgstr ""
+
+#: data/comics/intro/intro.dcb:47
+msgid "a big explosion, with unknow causes."
+msgstr ""
+
+#: data/comics/intro/intro.dcb:61
+msgid ""
+"It made the happy and peacefull city called Belo Horizonte be know as "
+"Horrivel Horizonte."
+msgstr ""
+
+#: data/comics/intro/intro.dcb:71
+msgid "Trees became alive,"
+msgstr ""
+
+#: data/comics/intro/intro.dcb:73
+msgid "Ameivas became agressive"
+msgstr ""
+
+#: data/comics/intro/intro.dcb:75
+msgid "and rats became blood thirsty."
+msgstr ""
+
+#: data/comics/intro/intro.dcb:85
+msgid ""
+"In this chaotic scene, emerged the main race that would dominate the land:"
+msgstr ""
+
+#: data/comics/intro/intro.dcb:87
+msgid "UNIVERSITY STUDENTS!"
+msgstr ""
+
+#: data/comics/intro/intro.dcb:89
+msgid "who desired, at all costs, obtain their legendary levels of knowledge."
+msgstr ""
+
+#: data/comics/intro/intro.dcb:103
+msgid ""
+"On this doomed world, tells the tales spoken mouth by mouth by the risen "
+"journalists,"
+msgstr ""
+
+#: data/comics/intro/intro.dcb:113
+msgid "the first man who walked and claimed for his right of a graduation"
+msgstr ""
+
+#: data/comics/intro/intro.dcb:123
+msgid "was Logan."
+msgstr ""
+
+#: data/comics/intro/intro.dcb:125
+msgid "And that's how the tale began..."
 msgstr ""
 
 #: data/alignment/neutrocaotico.ali:1
