@@ -37,9 +37,10 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
          return;
       }
       //fig = img;
-      fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       img->w,img->h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+      fig = SDL_CreateRGBSurface(SDL_SWSURFACE,
+                                 img->w,img->h,32,
+                                 0x000000FF,0x0000FF00,
+                                 0x00FF0000,0xFF000000);
       SDL_SetAlpha(img, 0,0);
       SDL_BlitSurface(img,NULL,fig,NULL);
       SDL_FreeSurface(img);
@@ -55,9 +56,8 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
    }
    else if( (w > 0) && (h > 0) )
    {
-      fig = SDL_CreateRGBSurface(SDL_HWSURFACE,
-                       w,h,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+      fig = SDL_CreateRGBSurface(SDL_SWSURFACE,w,h,32,
+                                 0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    }
    else
    {

@@ -343,7 +343,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    SDL_FreeSurface(fig);
    
 
-   SDL_Surface* img = SDL_CreateRGBSurface(SDL_HWSURFACE,
+   SDL_Surface* img = SDL_CreateRGBSurface(SDL_SWSURFACE,
                        256,32,32,
                        0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    

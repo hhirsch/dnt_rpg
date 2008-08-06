@@ -58,7 +58,7 @@ void message3d::init(GLfloat x, GLfloat y, GLfloat z, string msg,
    size = fnt.getStringWidth(message) + 8;
    halfSize = (size / 2.0);
    color_Set(0,0,0,255);
-   SDL_Surface* s = SDL_CreateRGBSurface(SDL_HWSURFACE,
+   SDL_Surface* s = SDL_CreateRGBSurface(SDL_SWSURFACE,
                                          smallestPowerOfTwo(size),
                                          32,
                                          32, rmask, gmask, bmask, amask);

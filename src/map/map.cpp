@@ -2546,7 +2546,7 @@ void Map::updateAlphaTextures()
    int aux = 0;
    texture* tex = textures;
    int x1, z1;
-   SDL_Surface* img = SDL_CreateRGBSurface(SDL_HWSURFACE,
+   SDL_Surface* img = SDL_CreateRGBSurface(SDL_SWSURFACE,
                                      smallestPowerOfTwo(x*ALPHA_TEXTURE_INC),
                                      smallestPowerOfTwo(z*ALPHA_TEXTURE_INC),
                                      32,0x000000FF,0x0000FF00,

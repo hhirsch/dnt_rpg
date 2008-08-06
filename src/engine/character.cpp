@@ -299,7 +299,7 @@ void character::definePortrait(string portraitFile)
    SDL_BlitSurface(img, NULL, border, &rect);
 
    /* Put With space for health bar */
-   portraitImage = SDL_CreateRGBSurface(SDL_HWSURFACE,border->w,border->h+10,32,
+   portraitImage = SDL_CreateRGBSurface(SDL_SWSURFACE,border->w,border->h+10,32,
                                         0x000000FF,0x0000FF00,
                                         0x00FF0000,0xFF000000);
    /* Fix to the blit get the alpha from source! */
