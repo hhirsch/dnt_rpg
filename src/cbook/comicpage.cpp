@@ -135,7 +135,14 @@ int comicPage::getHeight()
 void comicPage::render()
 {
    int i;
-   comicBox *box = boxes; 
+   comicBox *box = boxes;
+
+   /* Calculate scale ratio */
+   GLfloat ratio = 1.0;
+   if(texture)
+   { 
+      ratio = (float)SCREEN_Y / (float)texture->h;
+   }
  
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, tex);
@@ -144,6 +151,14 @@ void comicPage::render()
 
 
    glPushMatrix();
+
+   /* Center the Page on screen */
+   if(texture)
+   {
+      glTranslatef(((SCREEN_X/2.0) - ratio*(texture->w/2.0)),0.0,0.0);
+   }
+
+   /* Render Page Boxes */
    for(i = 0; i < totalBoxes; i++)
    {
       if(box->getStatus() != COMIC_BOX_STATUS_INACTIVE)
