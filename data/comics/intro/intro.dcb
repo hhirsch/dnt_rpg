@@ -58,7 +58,7 @@ vertex = 431,307
 vertex = 431,6
 effect = 0
 textbox = 18,17,283,72
-text = gettext("It made the happy and peacefull city called Belo Horizonte be know as Horrível Horizonte.")
+text = gettext("It made the happy and peacefull city called Belo Horizonte be know as Horrivel Horizonte.")
 
 # Second Box
 box = "Second Box"
