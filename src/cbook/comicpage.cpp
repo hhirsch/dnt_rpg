@@ -204,7 +204,8 @@ void comicPage::insertText(int x1, int y1, int x2, int y2, string text)
    }
    else
    {
-      cerr << "Warning: tried to define comic text without texture!" << endl;
+      cerr << "Warning: tried to define comic text '" << text 
+           << "' without texture!" << endl;
    }
 }
 
