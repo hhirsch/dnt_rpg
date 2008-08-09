@@ -235,6 +235,31 @@ void comicBook::run()
          }
          curBox = curBox->getNext();
       }
+
+      /* Render the page with a scale-out effect */
+      float scale = 1.0;
+      while(scale > 0)
+      {
+         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | 
+                 GL_STENCIL_BUFFER_BIT);
+
+         draw2DMode();
+         
+         glPushMatrix();
+            glScalef(scale,scale,scale);
+            curPage->render();
+         glPopMatrix();
+
+         draw3DMode(OUTDOOR_FARVIEW);
+         
+         glFlush();
+         SDL_GL_SwapBuffers();
+
+         SDL_Delay(30);
+         
+         scale -= 0.04;
+      }
+
       curPage = curPage->getNext();
    }
 }
