@@ -7,6 +7,9 @@
 #include <string>
 using namespace std;
 
+/* Wait Time */
+#define COMIC_BOX_DEFAULT_TIMEOUT  5000 /**< Default Box Wait time (5 sec) */
+
 /* Status  */
 #define COMIC_BOX_STATUS_INACTIVE  0  /**< The box is inactive */
 #define COMIC_BOX_STATUS_DONE      1  /**< The box ended its effects */
@@ -14,6 +17,7 @@ using namespace std;
 
 /* Effects */
 #define COMIC_BOX_EFFECT_NONE      0  /**< No Effect */
+#define COMIC_BOX_EFFECT_SCALE     1  /**< Scale the Box to the size effect */
 
 /*! The comic box is a quad of the comic page, with its show effect,
  * sound and page position */
@@ -29,6 +33,10 @@ class comicBox
       /*! Set the effect type
        * \param type -> the new effect type to use */
       void setEffect(int type);
+
+      /*! Set the box timeout
+       * \param value -> timeout (in ms) */
+      void setTimeout(int value);
 
       /*! Set a box vertex
        * \param vertNumber -> the vertex number [0,3]
@@ -87,6 +95,8 @@ class comicBox
       int status;            /**< Current quad status */
 
       Uint32 timer;          /**< a timer */
+
+      Uint32 timeout;        /**< Box Wait time */
 
       string title;          /**< title  */
 

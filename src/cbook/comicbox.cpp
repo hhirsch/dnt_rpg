@@ -17,7 +17,8 @@ comicBox::comicBox(string t)
    scaleFactorY = 1.0;
    status = COMIC_BOX_STATUS_INACTIVE;
    effectType = COMIC_BOX_EFFECT_NONE;
-
+   timeout = COMIC_BOX_DEFAULT_TIMEOUT;
+ 
    title = t;
 
    for(i = 0; i < 4; i++)
@@ -107,6 +108,14 @@ void comicBox::setEffect(int type)
 }
 
 /***********************************************************************
+ *                             setTimeout                              *
+ ***********************************************************************/
+void comicBox::setTimeout(int value)
+{
+   timeout = value;
+}
+
+/***********************************************************************
  *                               getStatus                             *
  ***********************************************************************/
 int comicBox::getStatus()
@@ -164,7 +173,7 @@ void comicBox::update()
       /* No Effect */
       case COMIC_BOX_EFFECT_NONE:
       default:
-         if(now - timer > 5000)
+         if(now - timer > timeout)
          {
             status = COMIC_BOX_STATUS_DONE;
          }

@@ -165,6 +165,19 @@ bool comicBook::load(string bookFile)
                  << "' without a box for book: '" << bookFile << "'" << endl;
          }
       }
+      /* Define Comic Box WaitTime */
+      else if(key == "timeout")
+      {
+         if(curBox)
+         {
+            curBox->setTimeout(atoi(value.c_str()));
+         }
+         else
+         {
+            cerr << "Warning: timeout '" << value 
+                 << "' without a box for book: '" << bookFile << "'" << endl;
+         }
+      }
       /* Insert a text box at the comic Box */
       else if(key == "textbox")
       {
