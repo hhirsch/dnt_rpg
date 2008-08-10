@@ -144,8 +144,7 @@ void comicPage::render()
       ratio = (float)SCREEN_Y / (float)texture->h;
    }
  
-   glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, tex);
+   
 
    glColor4f(1.0,1.0,1.0,1.0);
 
@@ -156,9 +155,22 @@ void comicPage::render()
    if(texture)
    {
       glTranslatef(((SCREEN_X/2.0) - ratio*(texture->w/2.0)),0.0,0.0);
+
+      /* Render Blank Page */
+      GLfloat midX = ratio * texture->w;
+      GLfloat midY = ratio * texture->h;
+      glBegin(GL_QUADS);
+         glVertex2f(0, 0);
+         glVertex2f(midX, 0);
+         glVertex2f(midX, midY);
+         glVertex2f(0, midY);
+      glEnd();
+
    }
 
    /* Render Page Boxes */
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, tex);
    for(i = 0; i < totalBoxes; i++)
    {
       if(box->getStatus() != COMIC_BOX_STATUS_INACTIVE)
