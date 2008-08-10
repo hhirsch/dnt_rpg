@@ -39,6 +39,11 @@ class comicBook
       /*! Empty the book, deleting all its pages */
       void empty();
 
+      GLuint skipTexture; /**< The Skip Texture */
+      float skipScale;    /**< The skip scale factor */
+      float skipSum;      /**< The sum to the skip scale */
+
+
       comicPage* pages;   /**< Each comic book page  */
       int totalPages;     /**< Total book pages */
       string title;       /**< Book Title */

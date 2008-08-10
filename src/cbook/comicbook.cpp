@@ -2,16 +2,39 @@
 
 #include "../engine/util.h"
 #include "../etc/defparser.h" 
+#include "../etc/dirs.h"
+#include "../gui/draw.h"
 #include "../lang/translate.h"
+
+#include <iostream>
+using namespace std;
 
 /***********************************************************************
  *                              Constructor                            *
  ***********************************************************************/
 comicBook::comicBook()
 {
+   dirs dir;
+   /* Default Values */
    title = "";
    pages = NULL;
    totalPages = 0;
+   skipScale = 1.0;
+   skipSum = -0.05;
+
+   /* Create the Skip Texture */
+   glGenTextures(1, &skipTexture);
+   SDL_Surface* img;
+   img = IMG_Load(dir.getRealFile("texturas/cbook/skip.png").c_str());
+   if(img)
+   {
+      setTexture(img, skipTexture);
+      SDL_FreeSurface(img);
+   }
+   else
+   {
+      cerr << "Can't load skip image 'texturas/cbook/skip.png'" << endl;
+   }
 }
 
 /***********************************************************************
@@ -20,6 +43,8 @@ comicBook::comicBook()
 comicBook::~comicBook()
 {
    empty();
+
+   glDeleteTextures(1, &skipTexture);
 }
 
 /***********************************************************************
@@ -253,26 +278,61 @@ void comicBook::run()
 }
 
 /***********************************************************************
- *                                 draw                                *
+ *                               render                                *
  ***********************************************************************/
 void comicBook::render(comicPage* curPage, float scale)
 {
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | 
-            GL_STENCIL_BUFFER_BIT);
+   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | 
+           GL_STENCIL_BUFFER_BIT);
 
-    draw2DMode();
+   draw2DMode();
          
-    glPushMatrix();
-       glScalef(scale,scale,scale);
-       curPage->render();
-    glPopMatrix();
+   /* Render Page */
+   glPushMatrix();
+      glScalef(scale,scale,scale);
+      curPage->render();
+   glPopMatrix();
 
-    draw3DMode(OUTDOOR_FARVIEW);
 
-    glFlush();
-    SDL_GL_SwapBuffers();
+   /* Render Skip Texture */
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, skipTexture);
 
-    SDL_Delay(30);
+   glPushMatrix();
+      glTranslatef(SCREEN_X-23, 23, 0);
+      glScalef(skipScale, skipScale, skipScale);
+      glBegin(GL_QUADS);
+         glTexCoord2f(0, 0);
+         glVertex2f(-16, -16);
+         glTexCoord2f(1, 0);
+         glVertex2f(16, -16);
+         glTexCoord2f(1, 1);
+         glVertex2f(16, 16);
+         glTexCoord2f(0, 1);
+         glVertex2f(-16, 16);
+      glEnd();
+   glPopMatrix();
+   glDisable(GL_TEXTURE_2D);
+
+   /* Change Skip Button scale */
+   skipScale = skipScale + skipSum;
+   if(skipScale > 1.0)
+   {
+      skipScale = 1.0;
+      skipSum *= -1;
+   }
+   else if(skipScale < 0.5)
+   {
+      skipScale = 0.5;
+      skipSum *= -1;
+   }
+
+   draw3DMode(OUTDOOR_FARVIEW);
+
+   glFlush();
+   SDL_GL_SwapBuffers();
+
+   SDL_Delay(30);
 }
 
 /***********************************************************************
