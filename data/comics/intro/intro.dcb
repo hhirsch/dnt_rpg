@@ -6,44 +6,44 @@ texture = comics/intro/page1.png
 
 # First Box
 box = "First Box"
-vertex = 0,0
-vertex = 0,328
-vertex = 734,328
-vertex = 734,0
+vertex = 8,10
+vertex = 8,339
+vertex = 741,339
+vertex = 741,10
 effect = 0
-textbox = 9,8,305,45
+textbox = 21,21,315,57
 text = gettext("Once Upon a time, there's a happy university called UFMG...")
 
 # Second Box
 box = "Second Box"
-vertex = 0,331
-vertex = 0,576
-vertex = 346,576
-vertex = 346,331
+vertex = 8,341
+vertex = 8,587
+vertex = 353,587
+vertex = 353,341
 effect = 0
-textbox = 6,341,293,266
+textbox = 17,354,284,374
 text = gettext("People there used to live peacefull lives")
 
 # Third Box
 box = "Third Box"
-vertex = 347,331
-vertex = 347,576
-vertex = 731,576
-vertex = 731,331
+vertex = 356,341
+vertex = 356,588
+vertex = 739,588
+vertex = 739,341
 effect = 0
-textbox = 356,531,653,568
+textbox = 364,541,661,580
 text = gettext("(except the medicine students, who had the habit of sacrifice one rookie per year)")
 
 # Forth Box
 box = "Forth Box"
-vertex = 0,586
-vertex = 0,1032
-vertex = 732,1032
-vertex = 732,586
+vertex = 8,593
+vertex = 8,1045
+vertex = 740,1045
+vertex = 740,593
 effect = 0
-textbox = 14,597,232,617
+textbox = 21,607,239,628
 text = gettext("When something happened...")
-textbox = 440,998,720,1018
+textbox = 448,1009,728,1030
 text = gettext("a big explosion, with unknow causes.")
 
 # Second Page
@@ -64,8 +64,8 @@ text = gettext("It made the happy and peacefull city called Belo Horizonte be kn
 box = "Second Box"
 vertex = 436,6
 vertex = 436,307
-vertex = 732,307
-vertex = 732,6
+vertex = 734,307
+vertex = 734,6
 effect = 0
 textbox = 446,18,592,34
 text = gettext("Trees became alive,")
@@ -78,8 +78,8 @@ text = gettext("and rats became blood thirsty.")
 box = "Thrid Box"
 vertex = 4,310
 vertex = 4,1044
-vertex = 732,1044
-vertex = 732,310
+vertex = 734,1044
+vertex = 734,310
 effect = 0
 textbox = 11,320,304,352
 text = gettext("In this chaotic scene, emerged the main race that would dominate the land:")
@@ -115,8 +115,8 @@ text = gettext("the first man who walked and claimed for his right of a graduati
 # Third and Last Box
 box = "Phew, this is the last box"
 vertex = 9,390
-vertex = 9,1042
-vertex = 735,1042
+vertex = 9,1043
+vertex = 735,1043
 vertex = 735,390
 effect = 0
 textbox = 40,404,188,463

@@ -65,15 +65,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="368.75369"
-     inkscape:cy="907.237"
+     inkscape:cx="450.77644"
+     inkscape:cy="313.24237"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1360"
      inkscape:window-height="847"
-     inkscape:window-x="0"
-     inkscape:window-y="0" />
+     inkscape:window-x="2"
+     inkscape:window-y="2" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -98,7 +98,7 @@
        x="-1.0101526"
        y="-1.2269253" />
     <rect
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:2.942;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:2.94199991;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2383"
        width="731.258"
        height="325.78882"
@@ -142,30 +142,6 @@
        width="284.15009"
        id="rect3473"
        style="fill:#ffffff;stroke:#000000;stroke-width:2.70276666;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    <text
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       x="17.172594"
-       y="364.4483"
-       id="text3463"><tspan
-         sodipodi:role="line"
-         id="tspan3465"
-         x="17.172594"
-         y="364.4483">People there used to live peaceful lives</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       x="164.65486"
-       y="31.097961"
-       id="text3467"><tspan
-         sodipodi:role="line"
-         id="tspan3469"
-         x="166.88338"
-         y="31.097961">Once Upon a time, there was a happy </tspan><tspan
-         sodipodi:role="line"
-         x="164.65486"
-         y="48.597961"
-         id="tspan3471">university called UFMG...</tspan></text>
     <rect
        ry="0"
        y="341.21481"
@@ -189,20 +165,6 @@
        height="42.688038"
        x="359.92767"
        y="536.56885" />
-    <text
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       x="509.55344"
-       y="552.35699"
-       id="text3559"><tspan
-         sodipodi:role="line"
-         id="tspan3561"
-         x="511.78195"
-         y="552.35699">(except the medicine students, who had </tspan><tspan
-         sodipodi:role="line"
-         x="509.55344"
-         y="569.85699"
-         id="tspan3563">the habit of sacrifice one rookie per year)</tspan></text>
     <rect
        y="595.46777"
        x="7.0649552"
@@ -225,16 +187,6 @@
        width="222.49518"
        id="rect3736"
        style="fill:#ffffff;stroke:#000000;stroke-width:3.748523;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    <text
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       x="24.243662"
-       y="620.01691"
-       id="text3738"><tspan
-         sodipodi:role="line"
-         id="tspan3740"
-         x="24.243662"
-         y="620.01691">When something happened...</tspan></text>
     <rect
        style="fill:#ffffff;stroke:#000000;stroke-width:3.748523;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3746"
@@ -242,15 +194,5 @@
        height="25.515461"
        x="443.59259"
        y="1003.777" />
-    <text
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       x="453.23862"
-       y="1021.4637"
-       id="text3742"><tspan
-         sodipodi:role="line"
-         id="tspan3744"
-         x="453.23862"
-         y="1021.4637">a big explosion, with unknown causes.</tspan></text>
   </g>
 </svg>
