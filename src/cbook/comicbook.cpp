@@ -235,16 +235,7 @@ void comicBook::run()
          /* Wait it turn inactive */
          while(curBox->getStatus() != COMIC_BOX_STATUS_DONE)
          {
-            glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | 
-                    GL_STENCIL_BUFFER_BIT);
-
-            draw2DMode();
-            curPage->render();
-            draw3DMode(OUTDOOR_FARVIEW);
-            glFlush();
-            SDL_GL_SwapBuffers();
-
-            SDL_Delay(30);
+            render(curPage);
          }
          curBox = curBox->getNext();
       }
@@ -253,23 +244,7 @@ void comicBook::run()
       float scale = 1.0;
       while(scale > 0)
       {
-         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | 
-                 GL_STENCIL_BUFFER_BIT);
-
-         draw2DMode();
-         
-         glPushMatrix();
-            glScalef(scale,scale,scale);
-            curPage->render();
-         glPopMatrix();
-
-         draw3DMode(OUTDOOR_FARVIEW);
-         
-         glFlush();
-         SDL_GL_SwapBuffers();
-
-         SDL_Delay(30);
-         
+         render(curPage, scale); 
          scale -= 0.04;
       }
 
@@ -278,10 +253,30 @@ void comicBook::run()
 }
 
 /***********************************************************************
+ *                                 draw                                *
+ ***********************************************************************/
+void comicBook::render(comicPage* curPage, float scale)
+{
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | 
+            GL_STENCIL_BUFFER_BIT);
+
+    draw2DMode();
+         
+    glPushMatrix();
+       glScalef(scale,scale,scale);
+       curPage->render();
+    glPopMatrix();
+
+    draw3DMode(OUTDOOR_FARVIEW);
+
+    glFlush();
+    SDL_GL_SwapBuffers();
+
+    SDL_Delay(30);
+}
+
+/***********************************************************************
  *                              verifyInput                            *
  ***********************************************************************/
 
-/***********************************************************************
- *                                 draw                                *
- ***********************************************************************/
 

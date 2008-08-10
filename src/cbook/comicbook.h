@@ -26,6 +26,11 @@ class comicBook
 
    protected:
 
+      /*! Render the current page (with or without an scale effect)
+       * \param curPage -> current page to render
+       * \param scale -> scale factor to use */
+      void render(comicPage* curPage, float scale=1.0);
+
       /*! Insert a page at the book pages list
        * \param t -> page title 
        * \return -> pointer to the comic page created */
