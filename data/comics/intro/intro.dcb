@@ -10,7 +10,7 @@ vertex = 8,10
 vertex = 8,339
 vertex = 741,339
 vertex = 741,10
-effect = 0
+effect = 1 
 textbox = 21,21,315,57
 text = gettext("Once Upon a time, there's a happy university called UFMG...")
 
@@ -20,7 +20,7 @@ vertex = 8,341
 vertex = 8,587
 vertex = 353,587
 vertex = 353,341
-effect = 0
+effect = 1
 textbox = 17,354,284,374
 text = gettext("People there used to live peacefull lives")
 
@@ -30,7 +30,7 @@ vertex = 356,341
 vertex = 356,588
 vertex = 739,588
 vertex = 739,341
-effect = 0
+effect = 1
 textbox = 364,541,661,580
 text = gettext("(except the medicine students, who had the habit of sacrifice one rookie per year)")
 

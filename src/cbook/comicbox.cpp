@@ -135,8 +135,8 @@ void comicBox::activate()
    timer = SDL_GetTicks();
 
    /* Calculate Center Positions */
-   center[0] = (vertex[3][0] - vertex[0][0]) / 2.0;
-   center[1] = (vertex[2][1] - vertex[0][1]) / 2.0;
+   center[0] = vertex[0][0] + ((vertex[3][0] - vertex[0][0]) / 2.0);
+   center[1] = vertex[0][1] + ((vertex[2][1] - vertex[0][1]) / 2.0);
 
    /* Apply Center Positions */
    for(i = 0; i < 4; i++)
@@ -145,18 +145,26 @@ void comicBox::activate()
       vertex[i][1] -= center[1];
    }
 
+   /* Init Default Values */
+   pos[0] = 0;
+   pos[1] = 0;
+   angle[0] = 0;
+   angle[1] = 0;
+   scale[0] = 1.0;
+   scale[1] = 1.0;
+
    /* Set the initial Position, scales and angles, based on effect type */
    switch(effectType)
    {
+      /* Scale-in Effect */
+      case COMIC_BOX_EFFECT_SCALE:
+         scale[0] = 0.0;
+         scale[1] = 0.0;
+      break;
       /* No Effect */
       case COMIC_BOX_EFFECT_NONE:
       default:
-         pos[0] = 0;
-         pos[1] = 0;
-         angle[0] = 0;
-         angle[1] = 0;
-         scale[0] = 1.0;
-         scale[1] = 1.0;
+         /* No changes to the default */
       break;
    }
 }
@@ -170,6 +178,19 @@ void comicBox::update()
 
    switch(effectType)
    {
+      /* Scale-in Effect */
+      case COMIC_BOX_EFFECT_SCALE:
+         scale[0] += 0.1;
+         scale[1] += 0.1;
+         if( (scale[0] >= 1.0) || (scale[1] >= 1.0) )
+         {
+            scale[0] = 1.0;
+            scale[1] = 1.0;
+            /* Put the effect state at NONE, to count timeout */
+            timer = SDL_GetTicks(); 
+            effectType = COMIC_BOX_EFFECT_NONE;
+         }
+      break;
       /* No Effect */
       case COMIC_BOX_EFFECT_NONE:
       default:
@@ -194,11 +215,11 @@ void comicBox::render()
 
    /* Now Render it at the desired one */
    glPushMatrix();
-      glScalef(scale[0],scale[1],1.0);
       glTranslatef(pos[0],pos[1],0.0);
       glTranslatef(center[0], center[1], 0.0);
       glRotatef(angle[0],1,0,0);
       glRotatef(angle[1],0,1,0);
+      glScalef(scale[0],scale[1],1.0);
       glBegin(GL_QUADS);
          glTexCoord2fv(texCoord[0]);
          glVertex2fv(vertex[0]);
