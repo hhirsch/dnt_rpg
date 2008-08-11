@@ -900,7 +900,7 @@ msgstr ""
 
 #: data/comics/intro/intro.dcb:71
 msgid "Trees became alive,"
-msgstr "Árvores viraram seres animados,"
+msgstr "Árvores tornaram-se seres pensantes,"
 
 #: data/comics/intro/intro.dcb:73
 msgid "Ameivas became agressive"
@@ -908,7 +908,7 @@ msgstr "Ameivas ficaram agressivas"
 
 #: data/comics/intro/intro.dcb:75
 msgid "and rats became blood thirsty."
-msgstr "e Ratazanas tornaram-se sedentas por sangue."
+msgstr "e Ratazanas sedentas por sangue."
 
 #: data/comics/intro/intro.dcb:85
 msgid ""
