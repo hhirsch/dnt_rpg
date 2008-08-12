@@ -124,6 +124,7 @@ void cursor::draw(int mouseX, int mouseY)
    glPopMatrix();
 
    glDisable(GL_BLEND);
+   glDisable(GL_TEXTURE_2D);
 }
 
 /*****************************************************************
