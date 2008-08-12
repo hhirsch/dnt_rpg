@@ -26,7 +26,7 @@ class comicBook
 
    protected:
 
-      /*! Render the current page (with or without an scale effect)
+      /*! Render the current page (with or without a scale effect)
        * \param curPage -> current page to render
        * \param scale -> scale factor to use */
       void render(comicPage* curPage, float scale=1.0);
@@ -39,10 +39,20 @@ class comicBook
       /*! Empty the book, deleting all its pages */
       void empty();
 
+      /*! Verify User Input to the comic (skip for example) */
+      void verifyInput();
+
+      Uint8 mButton;      /**< Mouse Buttons State */
+      int mouseX,         /**< Current MouseX */
+          mouseY;         /**< Current MouseY */
+      Uint8* keys;        /**< Current Keyboard state */
+
       GLuint skipTexture; /**< The Skip Texture */
       float skipScale;    /**< The skip scale factor */
       float skipSum;      /**< The sum to the skip scale */
 
+      bool exit;          /**< True if pressed skip button o ESC key */
+      bool changeColor;   /**< True to change skip texture color */
 
       comicPage* pages;   /**< Each comic book page  */
       int totalPages;     /**< Total book pages */

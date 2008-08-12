@@ -1,9 +1,11 @@
 #include "comicbook.h"
 
 #include "../engine/util.h"
+#include "../engine/cursor.h"
 #include "../etc/defparser.h" 
 #include "../etc/dirs.h"
 #include "../gui/draw.h"
+#include "../gui/mouse.h"
 #include "../lang/translate.h"
 
 #include <iostream>
@@ -21,6 +23,8 @@ comicBook::comicBook()
    totalPages = 0;
    skipScale = 1.0;
    skipSum = -0.05;
+   exit = false;
+   changeColor = false;
 
    /* Create the Skip Texture */
    glGenTextures(1, &skipTexture);
@@ -246,21 +250,23 @@ void comicBook::run()
 {
    int p;
    comicPage *curPage = pages;
+   exit = false;
 
    /* Treat all book pages */
-   for(p = 0; p < totalPages; p++)
+   for(p = 0; ((p < totalPages) && (!exit)); p++)
    {
       int b;
       comicBox* curBox = curPage->getFirstBox();
-      for(b = 0; b < curPage->getTotalBoxes(); b++)
+      for(b = 0; ( (b < curPage->getTotalBoxes()) && (!exit) ); b++)
       {
          /* Activate the box */
          curBox->activate();
 
          /* Wait it turn inactive */
-         while(curBox->getStatus() != COMIC_BOX_STATUS_DONE)
+         while( (curBox->getStatus() != COMIC_BOX_STATUS_DONE) && (!exit))
          {
             render(curPage);
+            verifyInput();
          }
          curBox = curBox->getNext();
       }
@@ -282,17 +288,30 @@ void comicBook::run()
  ***********************************************************************/
 void comicBook::render(comicPage* curPage, float scale)
 {
+   /* Gather Keyboard and Mouse status */
+   SDL_PumpEvents();
+   keys = SDL_GetKeyState(NULL);
+   mButton = SDL_GetMouseState(&mouseX, &mouseY);
+
+   /* Clear screen */
    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | 
            GL_STENCIL_BUFFER_BIT);
 
    draw2DMode();
-         
+   
+   glColor3f(1.0,1.0,1.0);
+
    /* Render Page */
    glPushMatrix();
       glScalef(scale,scale,scale);
       curPage->render();
    glPopMatrix();
 
+   /* Change Skip Color, if needed */
+   if(changeColor)
+   {
+      glColor3f(1.0,0.0,0.0);
+   }
 
    /* Render Skip Texture */
    glEnable(GL_TEXTURE_2D);
@@ -314,6 +333,8 @@ void comicBook::render(comicPage* curPage, float scale)
    glPopMatrix();
    glDisable(GL_TEXTURE_2D);
 
+   glColor3f(1.0,1.0,1.0);
+
    /* Change Skip Button scale */
    skipScale = skipScale + skipSum;
    if(skipScale > 1.0)
@@ -327,8 +348,16 @@ void comicBook::render(comicPage* curPage, float scale)
       skipSum *= -1;
    }
 
+   /* Render Mouse cursor */
+   glPushMatrix();
+     cursor cursors;
+     cursors.draw(mouseX, mouseY);
+   glPopMatrix();
+
+   /* Back to 3D draw mode */
    draw3DMode(OUTDOOR_FARVIEW);
 
+   /* Flush it to screen! */
    glFlush();
    SDL_GL_SwapBuffers();
 
@@ -338,5 +367,27 @@ void comicBook::render(comicPage* curPage, float scale)
 /***********************************************************************
  *                              verifyInput                            *
  ***********************************************************************/
+void comicBook::verifyInput()
+{
+   /* Skip Comic Book if Esc key is pressed */
+   if(keys[SDLK_ESCAPE])
+   {
+      exit = true;
+   }
 
+   /* If Skip Texture Pressed, skip comic book too */
+   if(isMouseAt(SCREEN_X-55, SCREEN_Y-55, SCREEN_X, SCREEN_Y, mouseX, mouseY)) 
+
+   {
+      changeColor = true;
+      if(mButton & SDL_BUTTON(1))
+      {
+         exit = true;
+      }
+   }
+   else
+   {
+      changeColor = false;
+   }
+}
 
