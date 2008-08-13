@@ -11,7 +11,7 @@ vertex = 8,339
 vertex = 741,339
 vertex = 741,10
 effect = 1 
-textbox = 21,21,315,57
+textbox = 22,22,314,70
 text = gettext("Once Upon a time, there's a happy university called UFMG...")
 
 # Second Box
@@ -21,17 +21,17 @@ vertex = 8,587
 vertex = 353,587
 vertex = 353,341
 effect = 1
-textbox = 17,354,284,374
+textbox = 17,351,327,370
 text = gettext("People there used to live peacefull lives")
 
 # Third Box
 box = "Third Box"
-vertex = 356,341
-vertex = 356,588
+vertex = 354,341
+vertex = 354,588
 vertex = 739,588
 vertex = 739,341
 effect = 1
-textbox = 364,541,661,580
+textbox = 362,510,652,573
 text = gettext("(except the medicine students, who had the habit of sacrifice one rookie per year)")
 
 # Forth Box
@@ -40,10 +40,10 @@ vertex = 8,593
 vertex = 8,1045
 vertex = 740,1045
 vertex = 740,593
-effect = 0
-textbox = 21,607,239,628
+effect = 1
+textbox = 22,603,238,624
 text = gettext("When something happened...")
-textbox = 448,1009,728,1030
+textbox = 312,1002,721,1022
 text = gettext("a big explosion, with unknow causes.")
 
 # Second Page
@@ -56,8 +56,8 @@ vertex = 4,6
 vertex = 4,307
 vertex = 431,307
 vertex = 431,6
-effect = 0
-textbox = 18,17,283,72
+effect = 1
+textbox = 19,19,282,74
 text = gettext("It made the happy and peacefull city called Belo Horizonte be know as Horrivel Horizonte.")
 
 # Second Box
@@ -66,12 +66,12 @@ vertex = 436,6
 vertex = 436,307
 vertex = 734,307
 vertex = 734,6
-effect = 0
-textbox = 446,18,592,34
+effect = 1
+textbox = 447,18,690,36
 text = gettext("Trees became alive,")
-textbox = 526,42,728,64
+textbox = 475,44,725,66
 text = gettext("Ameivas became agressive")
-textbox = 458,278,672,294
+textbox = 448,260,722,297
 text = gettext("and rats became blood thirsty.")
 
 # Third Box
@@ -80,12 +80,12 @@ vertex = 4,310
 vertex = 4,1044
 vertex = 734,1044
 vertex = 734,310
-effect = 0
-textbox = 11,320,304,352
+effect = 1
+textbox = 13,319,377,353
 text = gettext("In this chaotic scene, emerged the main race that would dominate the land:")
-textbox = 85,370,190,408 
+textbox = 75,370,214,426 
 text = gettext("UNIVERSITY STUDENTS!")
-textbox = 459,990,724,1030
+textbox = 482,949,721,1029
 text = gettext("who desired, at all costs, obtain their legendary levels of knowledge.")
 
 # Third Page
@@ -98,8 +98,8 @@ vertex = 9,7
 vertex = 9,376
 vertex = 358,376
 vertex = 358,7
-effect = 0
-textbox = 22,23,342,61
+effect = 1
+textbox = 22,19,342,69
 text = gettext("On this doomed world, tells the tales spoken mouth by mouth by the risen journalists,")
 
 # Second Box
@@ -108,8 +108,8 @@ vertex = 367,7
 vertex = 367,376
 vertex = 735,376
 vertex = 735,7
-effect = 0
-textbox = 405,332,703,367
+effect = 1
+textbox = 382,329,711,368
 text = gettext("the first man who walked and claimed for his right of a graduation")
 
 # Third and Last Box
@@ -118,10 +118,10 @@ vertex = 9,390
 vertex = 9,1043
 vertex = 735,1043
 vertex = 735,390
-effect = 0
-textbox = 40,404,188,463
+effect = 1
+textbox = 70,420,155,460
 text = gettext("was Logan.")
-textbox = 467,999,724,1027
+textbox = 408,996,718,1022
 text = gettext("And that's how the tale began...")
 
 #
