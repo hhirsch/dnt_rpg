@@ -137,8 +137,11 @@ bool barter::doBarter()
    {
       /* Isn't clearly good. Must do an accept check */
       dice d20;
-      int sellDiff = (totalSellValue - totalBuyValue) / 100;
-      accept = ( ((d20.roll()+seller->iAmNotAFool) - sellDiff) > 0);
+      float roll = d20.roll() / 30.0;
+      float sellDiff = (totalSellValue - totalBuyValue);
+      float eqn = 1.0 / (seller->iAmNotAFool + fabs(sellDiff));
+
+      accept = eqn > roll;
    }
 
    if(accept)
