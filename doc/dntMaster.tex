@@ -167,9 +167,19 @@ Rola-se então {\it Avaliar} de ambas as criaturas para cada um dos ítens ainda
 não avaliados. Caso a criatura que é alvo da barganha (aquela que não fez a
 proposta) encontrar um valor favorável para a troca (o valor dos ítens
 oferecidos supera o valor de seus ítens), a barganha será imediatamente aceita.
-Caso o valor não seja favorável, a criatura alvo rola um teste {\it Não Sou
-Bobo} contra a diferença de valores em questão dividida por 100: resultando em
-falha, o alvo não é suficientemente tolo para que a barganha seja aceita.
+Caso o valor não seja favorável, a criatura alvo rola o seguinte teste:
+\begin{equation}
+d20 / 30
+\end{equation}
+
+caso o valor de:
+
+\begin{equation}
+1 / ( NSB + \| DifPrecos \| )
+\end{equation}
+
+seja maior do que o teste rolado, a transação será aceita. Em caso contrário, o
+alvo não é suficientemente tolo para aceitá-la. 
 
 \subsection{Imposições}
 
