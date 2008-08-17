@@ -57,7 +57,7 @@ void charWindow::open(character* pers)
    current = pers;
 
    /* Create Window */
-   intWindow = inter->insertWindow(posX, posY, posX+340, posY+258,
+   intWindow = inter->insertWindow(posX, posY, posX+340, posY+278,
                                    pers->name);
 
    /* Character Image */
@@ -162,7 +162,7 @@ void charWindow::open(character* pers)
    intWindow->getObjectsList()->insertTextBox(5,117,125,191,2,"");
 
    /* Infos at RolBar */
-   infoBar = intWindow->getObjectsList()->insertRolBar(126,117,335,251,"");
+   infoBar = intWindow->getObjectsList()->insertRolBar(126,117,335,271,"");
       /* Main Weapon */
       writeAboutWeapon(INVENTORY_RIGHT_HAND);
       writeAboutWeapon(INVENTORY_LEFT_HAND);
@@ -193,17 +193,22 @@ void charWindow::open(character* pers)
       /* Put bar at init */
       infoBar->setFirstLine(0);
 
+   /* Level Up Button */
+   levelUpButton = intWindow->getObjectsList()->insertButton(5,192,125,211,
+                                                            gettext("Level Up"),
+                                                             1);
+   levelUpButton->setAvaible(pers->getUpLevels() > 0);
 
    /* Feats Button */
-   intWindow->getObjectsList()->insertButton(5,192,125,211,
+   intWindow->getObjectsList()->insertButton(5,212,125,231,
                                              gettext("Feats"),1);
 
    /* Skill Button */
-   intWindow->getObjectsList()->insertButton(5,212,125,231,
+   intWindow->getObjectsList()->insertButton(5,232,125,251,
                                              gettext("Skills"),1);
 
    /* Close Button */
-   okButton = intWindow->getObjectsList()->insertButton(5,232,125,251,
+   okButton = intWindow->getObjectsList()->insertButton(5,252,125,271,
                                                         gettext("Close"),1); 
 
    /* Open Window */
