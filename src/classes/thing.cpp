@@ -227,3 +227,46 @@ void thing::decUpLevels()
    }
 }
 
+/******************************************************
+ *                    getLifePoints                   *
+ ******************************************************/
+int thing::getLifePoints()
+{
+   return(lifePoints);
+}
+
+/******************************************************
+ *                     addLifePoints                  *
+ ******************************************************/
+void thing::addLifePoints(int points)
+{
+   lifePoints += points;
+   if(lifePoints > maxLifePoints)
+   {
+      lifePoints = maxLifePoints;
+   }
+}
+
+/******************************************************
+ *                     setLifePoints                  *
+ ******************************************************/
+void thing::setLifePoints(int points)
+{
+   lifePoints = points;
+}
+
+/******************************************************
+ *                  getMaxLifePoints                  *
+ ******************************************************/
+int thing::getMaxLifePoints()
+{
+   return(maxLifePoints);
+}
+/******************************************************
+ *                  setMaxLifePoints                  *
+ ******************************************************/
+void thing::setMaxLifePoints(int points)
+{
+   maxLifePoints = points;
+}
+

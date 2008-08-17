@@ -105,8 +105,8 @@ void charWindow::open(character* pers)
    intWindow->getObjectsList()->insertTextBox(66,15,335,75,2,"");
 
    /* Life Points And AC */
-   sprintf(buf,"%s: %d/%d", gettext("HP"), pers->lifePoints, 
-                            pers->maxLifePoints);
+   sprintf(buf,"%s: %d/%d", gettext("HP"), pers->getLifePoints(), 
+                            pers->getMaxLifePoints());
    intWindow->getObjectsList()->insertTextBox(8,77,62,87,0,buf);
    sprintf(buf,"%s: %d", gettext("AC"), pers->armatureClass);
    intWindow->getObjectsList()->insertTextBox(8,88,62,98,0,buf);

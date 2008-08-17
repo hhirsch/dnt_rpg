@@ -26,8 +26,7 @@ class thing
 
       skills sk;             /**< skills without images and description */
 
-      int lifePoints;         /**< Thing's Life points */
-      int maxLifePoints;      /**< Thing's Max Life Points */
+      
       int fortitude;          /**< Thing's Fortitude */
       int reflex;             /**< Thing's Reflexes */
       int iAmNotAFool;        /**< Thing's I'm not a fool */
@@ -63,21 +62,35 @@ class thing
        * \return -> number of levels the thing can up
        * \note -> 0 means the thing can't advance an levels */
       int getUpLevels();
-
       /*! Decrement the number of levels the character can advance */
       void decUpLevels();
 
       /*! Get the number of eXperience Points of the thing
        * \return -> current XP */
       int getXP();
-
       /*! Add some experience points to the thing
        * \param points -> points to add to current XP */
       void addXP(int points);
-
       /*! Set the current XP of the thing
        * \param points -> new current experince */
       void setXP(int points);
+
+      /*! Get the current number of life points
+       * \return -> current life points */
+      int getLifePoints();
+      /*! Add some points to the current life
+       * \param points -> points to add */
+      void addLifePoints(int points);
+      /*! Set the current life points
+       * \param points -> new life value */
+      void setLifePoints(int points);
+
+      /*! Get the current max life points
+       * \return -> max life points */
+      int getMaxLifePoints();
+      /*! Set the current max life points
+       * \param points -> new max life points*/
+      void setMaxLifePoints(int points);
 
       /*!
        **********************************************
@@ -167,6 +180,10 @@ class thing
    protected:
       int upLevels;        /**< Number of levels the thing can advance */
       int xp;              /**< The experience of the thing */
+      
+      int lifePoints;         /**< Thing's Life points */
+      int maxLifePoints;      /**< Thing's Max Life Points */
+      
       bool dead;           /**< Dead state or not (if dead is only a corpse) */
 
       void* battleScript;          /**< Pointer to the battle iaScript */

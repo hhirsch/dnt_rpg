@@ -3155,7 +3155,7 @@ void engine::updateAllHealthBars()
    character* pers = (character*) PCs->first->next;
    while(pers != PCs->first)
    {
-      pers->defineActualLifePoints(pers->lifePoints);
+      pers->defineActualLifePoints(pers->getLifePoints());
       pers = (character*) pers->next;
    }
 }

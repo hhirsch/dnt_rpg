@@ -274,17 +274,12 @@ bool feats::applyHealOrAttackFeat(thing& actor, int featNumber,
       if(heal)
       {
          /* apply the heal */
-         target.lifePoints += damage;
-         /* Verify Limits */
-         if(target.lifePoints > target.maxLifePoints)
-         {
-            target.lifePoints = target.maxLifePoints;
-         }
+         target.addLifePoints(damage);
       }
       else
       {
          /* apply damage on thing */
-         target.lifePoints -= damage;
+         target.addLifePoints(-damage);
       }
 
       if( criticalHit)

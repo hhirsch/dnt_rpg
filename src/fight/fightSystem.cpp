@@ -154,7 +154,7 @@ void fightSystem::verifyDeads()
    // that affects an area instead of a target)!
 
    /* Kill the target, if it is dead and not marked as dead */
-   if( (actualActor->actualEnemy->lifePoints <= 0) && 
+   if( (actualActor->actualEnemy->getLifePoints() <= 0) && 
        (actualActor->actualEnemy->isAlive()) )
    {
 

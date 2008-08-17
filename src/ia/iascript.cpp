@@ -1366,12 +1366,12 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             /* Syntax int getActualLife(character c)  */
             if(functionName == IA_CHARACTER_GET_ACTUAL_LIFE)
             {
-               i = c->lifePoints;
+               i = c->getLifePoints();
             }
             /* Syntax int getMaxLife(character c)  */
             else if(functionName == IA_CHARACTER_GET_MAX_LIFE)
             {
-               i = c->maxLifePoints;
+               i = c->getMaxLifePoints();
             }
             /* Syntax int getPsycho(character c)  */
             else if(functionName == IA_CHARACTER_GET_PSYCHO)
