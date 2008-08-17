@@ -186,7 +186,7 @@ void missionsController::completeMission(mission* m, int type)
       /* Add XP to all PC characters */
       while(dude != eng->PCs->first)
       {
-         dude->xp += m->xpValue;
+         dude->addXP(m->xpValue);
          dude = dude->next;
       }
 

@@ -98,9 +98,9 @@ void charWindow::open(character* pers)
                         pers->actualAlign->name.c_str());
    intWindow->getObjectsList()->insertTextBox(68,48,335,58,0,buf);
       /* XP */
-   sprintf(buf,"%s: %d      %s: %d", gettext("XP"), pers->xp,
+   sprintf(buf,"%s: %d      %s: %d", gettext("XP"), pers->getXP(),
                                      gettext("Next Level"), 
-                                     nextLevelXP(pers->xp));
+                                     nextLevelXP(pers->getXP()));
    intWindow->getObjectsList()->insertTextBox(68,59,335,69,0,buf);
    intWindow->getObjectsList()->insertTextBox(66,15,335,75,2,"");
 

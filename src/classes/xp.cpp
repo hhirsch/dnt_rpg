@@ -150,3 +150,17 @@ int nextLevelXP(int curXP)
 
 }
 
+/************************************************************
+ *                       getXPLevel                         *
+ ************************************************************/
+int getXPLevel(int curXP)
+{
+   int i = 0;
+   while( (curXP >= xpPerLevelTable[i]) && (i < 19) )
+   {
+      i++;
+   }
+
+   return(i+1);
+}
+

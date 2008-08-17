@@ -202,7 +202,7 @@ void fightSystem::verifyDeads()
                xp = (int)(actualActor->actualEnemy->xpPercent/100.0 * 
                      getXP(actualActor, actualActor->actualEnemy->cr)) / 
                      pcGroups[pcg].total();
-               p->xp += xp;
+               p->addXP(xp);
                sprintf(buf, gettext("%s receive %d XP for killing"), 
                        p->name.c_str(), xp);
                brief->addText(buf, 255, 144, 0);

@@ -46,7 +46,7 @@ class thing
       string bloodFileName;   /**< Blood Particle FileName to use */ 
       int sexType;            /**< Thing's Sex Type */
       int age;                /**< Thing's Age */
-      int xp;                 /**< The experience of the thing */
+
       float cr;               /**< The Challenge Rating */
       float xpPercent;        /**< The percentual Left of XP to give */
       float cost;             /**< Cost Value */
@@ -57,6 +57,27 @@ class thing
 
       float min[3];           /**< Min points of static bounding box */
       float max[3];           /**< Max points of static bounding box */
+
+
+      /*! Get the number of levels pending to up
+       * \return -> number of levels the thing can up
+       * \note -> 0 means the thing can't advance an levels */
+      int getUpLevels();
+
+      /*! Decrement the number of levels the character can advance */
+      void decUpLevels();
+
+      /*! Get the number of eXperience Points of the thing
+       * \return -> current XP */
+      int getXP();
+
+      /*! Add some experience points to the thing
+       * \param points -> points to add to current XP */
+      void addXP(int points);
+
+      /*! Set the current XP of the thing
+       * \param points -> new current experince */
+      void setXP(int points);
 
       /*!
        **********************************************
@@ -144,6 +165,8 @@ class thing
        virtual void callIdleAnimation()=0;
 
    protected:
+      int upLevels;        /**< Number of levels the thing can advance */
+      int xp;              /**< The experience of the thing */
       bool dead;           /**< Dead state or not (if dead is only a corpse) */
 
       void* battleScript;          /**< Pointer to the battle iaScript */

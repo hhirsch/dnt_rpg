@@ -154,6 +154,33 @@ class mapTalkModAction: public modAction
        int value;   /**< Some talk Value Information */
 };
 
+//TODO
+#if 0
+/*! The modInventory class is a inventory state keeper,
+ * basically used for populate inventories when back at some map. */
+class modInventory
+{
+   public:
+      /*! Constructor
+       * \param -> inventory to keep status */
+      modInventory(inventory* inv);
+      /*! Destructor */
+      ~modInventory();
+
+      void flush(inventory* inv);
+
+      void populate(inventory* inv);
+
+   protected:
+     
+      void clear();
+
+      string mapFileName;  /**< The map FileName of where the inventory 
+                                 owner is */
+      string character;    /**< The inventory character name */
+};
+#endif 
+
 /*! The Modifications made by users on game are armazened here. It is also
  * the class to load/save states. */
 class modState
@@ -239,6 +266,9 @@ class modState
       
       static modAction* modActionsList;   /**< List of modification actions */
       static int totalModActions;         /**< Total modActions on list */
+
+      //static modInventory* modInventories; /**< List of inventories */
+      //static int totalModInventories;      /**< Total NPCs inventories */
 };
 
 #endif

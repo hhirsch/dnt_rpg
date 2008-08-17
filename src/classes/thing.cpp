@@ -1,7 +1,10 @@
 #include "thing.h"
+#include "xp.h"
 #include "defs.h"
+
 #include "../engine/util.h"
 #include "../ia/iascript.h"
+
 #include <math.h>
 #include <string>
 #include <stdlib.h>
@@ -36,6 +39,7 @@ thing::thing()
    initialXPosition = 0;
    initialZPosition = 0;
    xp = 0;
+   upLevels = 0;
    cr = 1;
    xpPercent = 100;
    dead = false;
@@ -162,5 +166,64 @@ void thing::kill()
 bool thing::isAlive()
 {
    return(!dead);
+}
+/******************************************************
+ *                        getXP                       *
+ ******************************************************/
+int thing::getXP()
+{
+   return(xp);
+}
+/******************************************************
+ *                        addXP                       *
+ ******************************************************/
+void thing::addXP(int points)
+{
+   int prevLevel=0, curLevel=0;
+
+   /* Get the level before new XP added */
+   prevLevel = getXPLevel(xp);
+
+   /* add the XP */
+   xp += points;
+
+   /* Get the level after new XP added */
+   curLevel = getXPLevel(xp);
+
+   /* Define number of levels to Up */
+   if(curLevel > prevLevel)
+   {
+      upLevels += curLevel - prevLevel;
+   }
+}
+
+/******************************************************
+ *                        setXP                       *
+ ******************************************************/
+void thing::setXP(int points)
+{
+   xp = points;
+}
+
+/******************************************************
+ *                     getUpLevels                    *
+ ******************************************************/
+int thing::getUpLevels()
+{
+   return(upLevels);
+}
+
+/******************************************************
+ *                     decUpLevels                    *
+ ******************************************************/
+void thing::decUpLevels()
+{
+   upLevels--;
+
+   /* Avoid underflow */
+   if(upLevels < 0)
+   {
+      upLevels = 0;
+   }
 }
 
