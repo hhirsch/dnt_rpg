@@ -62,8 +62,10 @@ int initialScreen::run(int Status,GLdouble proj[16],
    }
    buttonSave = jan->getObjectsList()->insertButton(30,40,98,58,
                                            gettext("Save"),1);
+   buttonSave->setAvaible(false);
    buttonLoad = jan->getObjectsList()->insertButton(30,60,98,78,
                                                gettext("Load"),1);
+   buttonLoad->setAvaible(false);
    buttonOptions = jan->getObjectsList()->insertButton(30,80,98,98,
                                             gettext("Options"),1);
    buttonExit = jan->getObjectsList()->insertButton(30,100,98,118,
