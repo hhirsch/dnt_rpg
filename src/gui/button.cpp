@@ -116,10 +116,10 @@ void button::draw(SDL_Surface* screen )
       {
          color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
                    Colors.colorCont[2].B, Colors.colorCont[2].A);
-         font.write(screen,xa+1,ya+4, getText());
+         font.write(screen,xa+1,ya+4, getText(),xa,y1,x2,y2);
          color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
                    Colors.colorCont[1].B, Colors.colorCont[1].A);
-         font.write(screen,xa,ya+3, getText());
+         font.write(screen,xa,ya+3, getText(), xa,y1,x2,y2);
       }
    }
    setChanged();
