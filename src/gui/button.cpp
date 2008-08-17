@@ -20,6 +20,7 @@ button::button(int xa,int ya,int xb,int yb, string txt, bool isOval )
    oval = isOval;
    men = NULL;
    pressed = false;
+   avaible = true;
    defineFont(DNT_FONT_ARIAL, 12);
    type = GUI_BUTTON;
 }
@@ -107,7 +108,19 @@ void button::draw(SDL_Surface* screen )
    }
    else
    {
-      font.write(screen,xa,ya+3,getText().c_str(),xa,y1,x2,y2);
+      if(isAvaible())
+      {
+         font.write(screen,xa,ya+3,getText().c_str(),xa,y1,x2,y2);
+      }
+      else
+      {
+         color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
+                   Colors.colorCont[2].B, Colors.colorCont[2].A);
+         font.write(screen,xa+1,ya+4, getText());
+         color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
+                   Colors.colorCont[1].B, Colors.colorCont[1].A);
+         font.write(screen,xa,ya+3, getText());
+      }
    }
    setChanged();
 }
@@ -133,7 +146,7 @@ bool button::press(int Xjan, int Yjan, int x, int y, Uint8 Mbotao, int* pronto,
       draw(screen);
    }
 
-   return(pres);
+   return(pres && isAvaible());
 }
 
 /***********************************************************
