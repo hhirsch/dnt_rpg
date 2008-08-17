@@ -2829,42 +2829,44 @@ void engine::renderNoShadowThings()
 
    /* Draw Combat Mode Things */
    if( (engineMode == ENGINE_MODE_TURN_BATTLE) && 
-       ( (fightStatus == FIGHT_PC_TURN) || (fightStatus == FIGHT_NPC_TURN) ) )
+         ( (fightStatus == FIGHT_PC_TURN) || (fightStatus == FIGHT_NPC_TURN) ) )
    {
-        character* turnCharacter = fight->actualCharacterTurn();
-        if(!turnCharacter)
-        {
-           turnCharacter = activeCharacter;
-        }
-       /* Draw Movimentation Circles */
-          /* Full Circle */
-          actualMap->drawSurfaceOnMap(fullMoveCircle,
-                                      moveCircleX-2*WALK_PER_MOVE_ACTION,
-                                      moveCircleZ-2*WALK_PER_MOVE_ACTION,
-                                      moveCircleX+2*WALK_PER_MOVE_ACTION, 
-                                      moveCircleZ+2*WALK_PER_MOVE_ACTION,
-                                      0.1,12);
-          /* Normal Circle */
-          actualMap->drawSurfaceOnMap(normalMoveCircle,
-                                      moveCircleX-WALK_PER_MOVE_ACTION,
-                                      moveCircleZ-WALK_PER_MOVE_ACTION,
-                                      moveCircleX+WALK_PER_MOVE_ACTION, 
-                                      moveCircleZ+WALK_PER_MOVE_ACTION,
-                                      0.2,20);
+      character* turnCharacter = fight->actualCharacterTurn();
+      if(!turnCharacter)
+      {
+         turnCharacter = activeCharacter;
+      }
+      /* Draw Movimentation Circles */
+      if(canMove)
+      {
+         /* Full Circle */
+         actualMap->drawSurfaceOnMap(fullMoveCircle,
+               moveCircleX-2*WALK_PER_MOVE_ACTION,
+               moveCircleZ-2*WALK_PER_MOVE_ACTION,
+               moveCircleX+2*WALK_PER_MOVE_ACTION, 
+               moveCircleZ+2*WALK_PER_MOVE_ACTION,
+               0.1,12);
+         /* Normal Circle */
+         actualMap->drawSurfaceOnMap(normalMoveCircle,
+               moveCircleX-WALK_PER_MOVE_ACTION,
+               moveCircleZ-WALK_PER_MOVE_ACTION,
+               moveCircleX+WALK_PER_MOVE_ACTION, 
+               moveCircleZ+WALK_PER_MOVE_ACTION,
+               0.2,20);
+      }
+      if( (canAttack) || (fightStatus == FIGHT_NPC_TURN) )
+      {
+         /* Feat Range Circle */
+         float rangeValue = activeCharacter->getActiveFeatRange() *
+            METER_TO_DNT;
+         actualMap->drawSurfaceOnMap(featRangeCircle, 
+               turnCharacter->xPosition-rangeValue,
+               turnCharacter->zPosition-rangeValue, 
+               turnCharacter->xPosition+rangeValue, 
+               turnCharacter->zPosition+rangeValue, 
+               0.3,20);
+      }
 
-          if( (canAttack) || (fightStatus == FIGHT_NPC_TURN) )
-          {
-             /* Feat Range Circle */
-             float rangeValue = activeCharacter->getActiveFeatRange() *
-                                METER_TO_DNT;
-             actualMap->drawSurfaceOnMap(featRangeCircle, 
-                                         turnCharacter->xPosition-rangeValue,
-                                         turnCharacter->zPosition-rangeValue, 
-                                         turnCharacter->xPosition+rangeValue, 
-                                         turnCharacter->zPosition+rangeValue, 
-                                         0.3,20);
-          }
-                                       
    }
 
    if(walkStatus == ENGINE_WALK_MOUSE)
