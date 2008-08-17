@@ -270,3 +270,17 @@ void thing::setMaxLifePoints(int points)
    maxLifePoints = points;
 }
 
+/******************************************************
+ *                   getPsychoState                   *
+ ******************************************************/
+int thing::getPsychoState()
+{
+   return(psychoState);
+}
+/******************************************************
+ *                   setPsychoState                   *
+ ******************************************************/
+void thing::setPsychoState(int state)
+{
+   psychoState = state;
+}

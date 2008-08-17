@@ -262,7 +262,7 @@ int fightSystem::doTurn()
          /* don't play with dead characters or not Hostile Ones */
          while( (!actualActor->isAlive()) || 
                 ( (!isPC(actualActor)) && 
-                  (actualActor->psychoState != PSYCHO_HOSTILE)) )
+                  (actualActor->getPsychoState() != PSYCHO_HOSTILE)) )
          {
             actualActor = charsInitiatives.nextCharacter();
             if(actualActor == NULL)

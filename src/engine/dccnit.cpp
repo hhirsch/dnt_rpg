@@ -1865,9 +1865,9 @@ int engine::verifyMouseActions(Uint8 mButton)
                      activeCharacter->actualEnemy = pers;
                      fight->verifyDeads();
 
-                     if( pers->psychoState != PSYCHO_HOSTILE)
+                     if( pers->getPsychoState() != PSYCHO_HOSTILE)
                      {
-                        pers->psychoState = PSYCHO_HOSTILE;
+                        pers->setPsychoState(PSYCHO_HOSTILE);
                      }
                   }
                   pronto = 1;

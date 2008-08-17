@@ -34,7 +34,7 @@ void fightGroup::empty()
       if(characters[i] != NULL)
       {
          /* Remove the enemy status and put as neutral */
-         characters[i]->psychoState = PSYCHO_NEUTRAL;
+         characters[i]->setPsychoState(PSYCHO_NEUTRAL);
       }
       characters[i] = NULL;
    }
@@ -133,7 +133,8 @@ bool fightGroup::anyoneIsAliveAndInRange(bool onlyHostile)
    for(i=0;i<actualCharacters;i++)
    {
       if( (characters[i]->isAlive()) && 
-          ( (!onlyHostile) || (characters[i]->psychoState == PSYCHO_HOSTILE)) )
+          ( (!onlyHostile) || 
+            (characters[i]->getPsychoState() == PSYCHO_HOSTILE)) )
       {
          return(true);
       }

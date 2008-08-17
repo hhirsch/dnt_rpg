@@ -1250,7 +1250,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
        * the PC's characters. */
       if(!var)
       {
-         characterOwner->psychoState = PSYCHO_HOSTILE;
+         characterOwner->setPsychoState(PSYCHO_HOSTILE);
          eng->enterBattleMode(false);
       }
       else
@@ -1342,7 +1342,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
       if(dude != NULL)
       {
          /* Syntax void setPsycho(character c, int psycho)  */
-         dude->psychoState = psy;
+         dude->setPsychoState(psy);
       }
       else
       {
@@ -1376,7 +1376,7 @@ void iaScript::callFunction(iaVariable* var, string strLine,
             /* Syntax int getPsycho(character c)  */
             else if(functionName == IA_CHARACTER_GET_PSYCHO)
             {
-               i = c->psychoState;
+               i = c->getPsychoState();
             }
             assignValue(var, (void*)&i, IA_TYPE_INT);
          }

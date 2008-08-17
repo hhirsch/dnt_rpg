@@ -10,9 +10,9 @@
 #include "modifier.h"
 #include "../etc/dirs.h"
 
-#define PSYCHO_HOSTILE 0
-#define PSYCHO_NEUTRAL 1
-#define PSYCHO_FRIENDLY 2
+#define PSYCHO_HOSTILE     0  /**< Thing is hostile to PCs */
+#define PSYCHO_NEUTRAL     1  /**< Thing is neutral to PCs */
+#define PSYCHO_FRIENDLY    2  /**< Thing is friendly to PCs */
 
 /*! Define what is a thing on game, in other words, what is the base fields
  * for characters and map objects.*/
@@ -34,7 +34,7 @@ class thing
       int displacement;       /**< Thing's Displacement (in meters) */
       int baseAttackModifier; /**< Thing's Base Attack Modifier */
       int sizeModifier;       /**< Thing's Size Modifier */
-      int psychoState;        /**< Thing's Psycho State */
+
       float orientation;      /**< Thing's orientation (angle) */
       float xPosition;        /**< Thing's X Position */
       float yPosition;        /**< Thing's Y Position (UP) */
@@ -92,6 +92,13 @@ class thing
        * \param points -> new max life points*/
       void setMaxLifePoints(int points);
 
+      /*! Get the current psycho state
+       * \return Psycho state constant */
+      int getPsychoState();
+      /*! Set the crrent psycho state
+       * \param state -> Psycho state constant */
+      void setPsychoState(int state);
+      
       /*!
        **********************************************
        *  Get the skill bonus (modifier or not).
@@ -184,6 +191,7 @@ class thing
       int lifePoints;         /**< Thing's Life points */
       int maxLifePoints;      /**< Thing's Max Life Points */
       
+      int psychoState;        /**< Thing's Psycho State */
       bool dead;           /**< Dead state or not (if dead is only a corpse) */
 
       void* battleScript;          /**< Pointer to the battle iaScript */
