@@ -132,6 +132,10 @@ SOURCE=.\src\engine\barterwindow.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\briefing.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\button.cpp
 # End Source File
 # Begin Source File
@@ -164,6 +168,18 @@ SOURCE=.\src\gui\color.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\cbook\comicbook.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\cbook\comicbox.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\cbook\comicpage.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\engine\culling.cpp
 # End Source File
 # Begin Source File
@@ -180,11 +196,19 @@ SOURCE=.\src\engine\dccnit.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\defparser.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\classes\defs.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\engine\dialog.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\classes\dices.cpp
 # End Source File
 # Begin Source File
 
@@ -344,6 +368,10 @@ SOURCE=.\src\particle\meteor.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\minimapwindow.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\classes\mission.cpp
 # End Source File
 # Begin Source File
@@ -445,6 +473,10 @@ SOURCE=.\src\gui\seltext.cpp
 # Begin Source File
 
 SOURCE=.\src\engine\shadow.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\engine\shortcutswindow.cpp
 # End Source File
 # Begin Source File
 
@@ -568,6 +600,10 @@ SOURCE=.\src\engine\barterwindow.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\briefing.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\button.h
 # End Source File
 # Begin Source File
@@ -600,6 +636,18 @@ SOURCE=.\src\gui\color.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\cbook\comicbook.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\cbook\comicbox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\cbook\comicpage.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\config_win.h
 # End Source File
 # Begin Source File
@@ -613,6 +661,10 @@ SOURCE=.\src\engine\cursor.h
 # Begin Source File
 
 SOURCE=.\src\engine\dccnit.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\defparser.h
 # End Source File
 # Begin Source File
 
@@ -796,6 +848,10 @@ SOURCE=.\src\particle\meteor.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\engine\minimapwindow.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\classes\mission.h
 # End Source File
 # Begin Source File
@@ -905,6 +961,10 @@ SOURCE=.\src\gui\seltext.h
 # Begin Source File
 
 SOURCE=.\src\engine\shadow.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\engine\shortcutswindow.h
 # End Source File
 # Begin Source File
 
