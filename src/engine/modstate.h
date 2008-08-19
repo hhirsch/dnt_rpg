@@ -156,9 +156,26 @@ class mapTalkModAction: public modAction
 
 //TODO
 #if 0
+/*! The modInvObj is just a structure to keep inventory objects
+ * status. It is only used for modInventory. */
+class modInvObj
+{
+   public:
+      string fileName;      /**< The Object Filename */
+      int x,                /**< X position on inventory */
+          y;                /**< Y position on inventory */
+      int invNumber;        /**< The inventory number */
+      modInvObj* next;      /**< Next Object */
+      modInvObj* previous;  /**< Previous Object */
+};
+
 /*! The modInventory class is a inventory state keeper,
- * basically used for populate inventories when back at some map. */
-class modInventory
+ * basically used for populate inventories when back at some map.
+ * \note -> basically, a modInventory is created (or modified, if 
+ *          already exists) for each NPC when the PC exits the map.
+ *          When the PC is back, each NPC's inventory is then populated
+ *          by its previously modInventory. */
+class modInventory: modAction
 {
    public:
       /*! Constructor
@@ -167,17 +184,25 @@ class modInventory
       /*! Destructor */
       ~modInventory();
 
-      void flush(inventory* inv);
+      /*! Flush the objects list to the inventory,
+       * loading needed models to the list
+       * \param inv -> inventory to populate 
+       * \param models -> models list */
+      void flush(inventory* inv, models);
 
-      void populate(inventory* inv);
+      /*! Create the modInventory list based on an inventory
+       * \param inv -> inventory to create the object list
+       * \note -> this function will clear the previous created list */
+      void create(inventory* inv);
 
-   protected:
-     
+      /*! Clear the Objects List */
       void clear();
 
-      string mapFileName;  /**< The map FileName of where the inventory 
-                                 owner is */
-      string character;    /**< The inventory character name */
+   protected:
+
+      modInvObj* objectsList;  /**< The objects on inventory list */
+      int totalObjects;        /**< Total Objects on the list */
+                                    owner is */
 };
 #endif 
 
