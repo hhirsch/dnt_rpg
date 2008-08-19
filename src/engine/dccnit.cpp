@@ -316,48 +316,77 @@ void engine::loadPCs()
  *********************************************************************/
 int engine::loadMap(string arqMapa, int RecarregaPCs)
 {
-   healthBar* progress = new healthBar(2,20,253,30);
-   progress->defineMaxHealth(10);
-   progress->defineActualHealth(0);
+   healthBar* progress = NULL; /* the progress bar */
 
-   dntFont fnt;
-   int centerY = SCREEN_Y / 2;
-   int centerX = SCREEN_X / 2;
+   dntFont fnt;                   /* DNT font controller */
+   int centerY = SCREEN_Y / 2;   /* Window Y middle */
+   int centerX = SCREEN_X / 2;   /* Window X middle */
+
+   int midW=128, /* Middle Width of load image */
+       midH=256; /* Middle Height of load image */
+   GLuint texturaCarga; /* Load texture */
+   SDL_Surface* fig;    /* Load image */
+   
+   SDL_Surface* img;    /* Text surface*/
+   GLuint texturaTexto; /* Text texture */
 
    char texto[512];
    string arqVelho = "nada";
-   curConection = NULL;
    
+   /* Set the some initial map-engine status */
+   curConection = NULL;
    walkStatus = ENGINE_WALK_KEYS;
-      
+   
+   /* Generate Loading image Texture */
+   glGenTextures(1,&texturaCarga);
+   
+   /* Clear things */
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    glDisable(GL_LIGHTING);
-   SDL_Surface* fig;
+
+   /* Load the loading image */
    fig = IMG_Load(dir.getRealFile("texturas/general/carregar.png").c_str());
+   if(!fig)
+   {
+      cerr << "Faled to load 'loading texture'!" << endl;
+      /* create default size progress bar */
+      progress = new healthBar(2,20,253,30);
+      progress->defineMaxHealth(10);
+      progress->defineActualHealth(0);
+   }
+   else
+   {
+      /* Set halfs */
+      midW = fig->w / 2;
+      midH = fig->h / 2;
+      
+      /* create the progress bar */
+      progress = new healthBar(2,20,fig->w-3,30);
+      progress->defineMaxHealth(10);
+      progress->defineActualHealth(0);
+      
+      /* Load the texture to opengl */
+      setTexture(fig,texturaCarga);
+      SDL_FreeSurface(fig);
+   }
 
-   /* Initializing Load Screen*/
-   GLuint texturaCarga;
-   glGenTextures(1,&texturaCarga);
-   setTexture(fig,texturaCarga);
-   SDL_FreeSurface(fig);
-   
-
-   SDL_Surface* img = SDL_CreateRGBSurface(SDL_SWSURFACE,
-                       256,32,32,
-                       0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
-   
+   /* Create the text surface/texture */
+   img = SDL_CreateRGBSurface(SDL_SWSURFACE, 2*midW,32,32,
+                              0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
    color_Set(0,0,0,255);
    rectangle_Fill(img,0,0,255,31);
+  
+
+   /* Fadein the loading image effect */
+   fadeInTexture(texturaCarga, centerX-midW, centerY-midH, 
+                 centerX+midW, centerY+midH, 256,128);
+
+   /* Show the "Loading Map" */
    color_Set(200,20,20,255);
    fnt.defineFont(DNT_FONT_TIMES,10);
    sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
-   GLuint texturaTexto;
-   fadeInTexture(texturaCarga, centerX-128, centerY-64, 
-                 centerX+127, centerY+63, 256,128);
-
-   showLoading(img,&texturaTexto,texturaCarga,
-               texto, progress);
+   showLoading(img,&texturaTexto,texturaCarga, texto, progress);
    progress->defineActualHealth(3);
 
    /* Loading Map */
@@ -578,9 +607,10 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    showLoading(img,&texturaTexto,texturaCarga,
                gettext("Done!"), progress);
 
+   /* Somw fadeout effect */
    glDisable(GL_LIGHTING);
-   fadeOutTexture(texturaCarga,centerX-128,centerY-64,
-                  centerX+127,centerY+63, 256,128);
+   fadeOutTexture(texturaCarga,centerX-midW,centerY-midH,
+                  centerX+midW,centerY+midH, 256,128);
 
    /* Free Loading Textures */
    SDL_FreeSurface(img);

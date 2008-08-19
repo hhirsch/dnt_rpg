@@ -11,11 +11,13 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    dntFont fnt;
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
+   int midW = img->w / 2;
+   int midH = midW / 2;
 
    glClearColor(0,0,0,1);
    glClear ((GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
    color_Set(0,0,0,255);
-   rectangle_Fill(img,0,0,255,31);
+   rectangle_Fill(img,0,0,img->w-1,img->h-1);
    color_Set(200,20,20,255);
    fnt.defineFont(DNT_FONT_TIMES,12);
    fnt.defineFontAlign(DNT_FONT_ALIGN_CENTER);
@@ -25,12 +27,12 @@ void showLoading(SDL_Surface* img, GLuint* texturaTexto,
    setTextureRGBA(img,*texturaTexto);
 
    draw2DMode();
-   textureToScreen(texturaCarga, centerX-128, centerY-64,
-                                 centerX+127, centerY+63,
-                   256,128);
-   textureToScreen(*texturaTexto, centerX-128, centerY+65,
-                                  centerX+127, centerY+96,
-                   256,128);
+   textureToScreen(texturaCarga, centerX-midW, centerY-midH,
+                                 centerX+midW, centerY+midH,
+                   2*midW,2*midH);
+   textureToScreen(*texturaTexto, centerX-midW, centerY+midH+1,
+                                  centerX+midW, centerY+midH+33,
+                   2*midW,128);
 
    draw3DMode(OUTDOOR_FARVIEW);
    glFlush();
