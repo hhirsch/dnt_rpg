@@ -266,7 +266,16 @@ void comicBook::run()
          while( (curBox->getStatus() != COMIC_BOX_STATUS_DONE) && (!exit))
          {
             render(curPage);
-            verifyInput();
+            if(verifyInput())
+            {
+               /* Skip Current Box */
+               curBox->skip();
+               /* Keep Redering it until the mouse button is released */
+               while(mButton & SDL_BUTTON(1))
+               {
+                  render(curPage);
+               }
+            }
          }
          curBox = curBox->getNext();
       }
@@ -367,7 +376,7 @@ void comicBook::render(comicPage* curPage, float scale)
 /***********************************************************************
  *                              verifyInput                            *
  ***********************************************************************/
-void comicBook::verifyInput()
+bool comicBook::verifyInput()
 {
    /* Skip Comic Book if Esc key is pressed */
    if(keys[SDLK_ESCAPE])
@@ -388,6 +397,13 @@ void comicBook::verifyInput()
    else
    {
       changeColor = false;
+      /* Skip ComicBox if Left Mouse Button is pressed */
+      if(mButton & SDL_BUTTON(1))
+      {
+         return(true);
+      }
    }
+
+   return(false);
 }
 

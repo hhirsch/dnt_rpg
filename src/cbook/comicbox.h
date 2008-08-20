@@ -50,6 +50,9 @@ class comicBox
        * \note -> a box must need to be activated to be rendered */
       void activate();
 
+      /*! Skip the box effect, putting it at COMIC_BOX_STATUS_DONE state */
+      void skip();
+
       /*! Get the current state of the box
        * \return -> comicBox state constant representing current status */
       int getStatus();

@@ -39,8 +39,9 @@ class comicBook
       /*! Empty the book, deleting all its pages */
       void empty();
 
-      /*! Verify User Input to the comic (skip for example) */
-      void verifyInput();
+      /*! Verify User Input to the comic (skip comic or box for example)
+       * \return -> true if is to skip current comicBox */
+      bool verifyInput();
 
       Uint8 mButton;      /**< Mouse Buttons State */
       int mouseX,         /**< Current MouseX */
