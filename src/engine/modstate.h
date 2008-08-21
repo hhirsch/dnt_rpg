@@ -11,10 +11,12 @@
 #define MODSTATE_ACTION_OBJECT_REMOVE  0  /**< Removed object from map */
 #define MODSTATE_ACTION_OBJECT_ADD     1  /**< Added object to the map */
 
-#define MODSTATE_ACTION_CHARACTER_DEAD   3  /**< Killed Character on map */
-#define MODSTATE_ACTION_CHARACTER_MOVE   4  /**< The character moved to a new positon */
+#define MODSTATE_ACTION_CHARACTER_DEAD 3  /**< Killed Character on map */
+#define MODSTATE_ACTION_CHARACTER_MOVE 4  /**< Character moved to positon */
 
-#define MODSTATE_TALK_ENTER_VALUE        5  /*< New enter value for a talk */
+#define MODSTATE_TALK_ENTER_VALUE      5  /*< New enter value for a talk */
+
+#define MODSTATE_INVENTORY             6  /**< Inventory "Snapshot" */
 
 /*! The Generic Modification Action Class */
 class modAction
@@ -27,7 +29,7 @@ class modAction
        * \param xPos -> x position
        * \param zPos -> z position */
       modAction(int act, string tgt, string mapFile,
-                         GLfloat xPos, GLfloat zPos);
+                GLfloat xPos, GLfloat zPos);
 
       /*! Destructor */
       ~modAction();
@@ -91,11 +93,11 @@ class mapCharacterModAction : public modAction
       ~mapCharacterModAction();
 
       /*! Get the initial X position of the character
-       * return inital X position of the character */
+       * \return inital X position of the character */
       GLfloat getInitialX();
 
       /*! Get the initial Z position of the character
-       * return inital Z position of the character */
+       * \return inital Z position of the character */
       GLfloat getInitialZ();
 
       /*! Get the orientation of the character at action's instant
@@ -154,8 +156,6 @@ class mapTalkModAction: public modAction
        int value;   /**< Some talk Value Information */
 };
 
-//TODO
-#if 0
 /*! The modInvObj is just a structure to keep inventory objects
  * status. It is only used for modInventory. */
 class modInvObj
@@ -179,8 +179,10 @@ class modInventory: modAction
 {
    public:
       /*! Constructor
-       * \param -> inventory to keep status */
-      modInventory(inventory* inv);
+       * \param inv -> inventory to keep status
+       * \param owner -> inventory owner
+       * \param mapFile -> mapFileName where the owner is */
+      modInventory(inventory* inv,string owner, string mapFile);
       /*! Destructor */
       ~modInventory();
 
@@ -188,7 +190,7 @@ class modInventory: modAction
        * loading needed models to the list
        * \param inv -> inventory to populate 
        * \param models -> models list */
-      void flush(inventory* inv, models);
+      void flush(inventory* inv, modelList* models);
 
       /*! Create the modInventory list based on an inventory
        * \param inv -> inventory to create the object list
@@ -202,9 +204,7 @@ class modInventory: modAction
 
       modInvObj* objectsList;  /**< The objects on inventory list */
       int totalObjects;        /**< Total Objects on the list */
-                                    owner is */
 };
-#endif 
 
 /*! The Modifications made by users on game are armazened here. It is also
  * the class to load/save states. */
