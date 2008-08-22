@@ -63,6 +63,16 @@ class itemSlot
        * \return -> pointer to the first founded item, or NULL. */
       object* getFirstItem(int& x, int& y);
 
+      /*! Get next item on the itemSlot.
+       * \note -> this function is usually called after a getFirstItem,
+       *          with the result x,y coordinate got from that 
+       * \param x -> x coordinate of the previous item got (will have 
+       *             the x coordinate of the current after the function)
+       * \param y -> y coordinate of the previos item got (will have the
+       *             y coordinate of the current after the function)
+       * \return -> pointer to the object found or NULL, if no more objects */
+      object* getNextItem(int& x, int& y);
+
       /*! Remove All references to the object from the itemSlot
        * \param obj -> pointer to object to remove
        * \return -> true if can remove (object existed there) */

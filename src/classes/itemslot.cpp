@@ -260,14 +260,24 @@ void itemSlot::setAsOneItemPerTime()
  **************************************************************/
 object* itemSlot::getFirstItem(int& x, int& y)
 {
+   x = 0;
+   y = 0;
+   return(getNextItem(x,y));
+}
+
+/**************************************************************
+ *                          getNextItem                       *
+ **************************************************************/
+object* itemSlot::getNextItem(int& x, int& y)
+{
    int j,k;
-   x = -1;
-   y = -1;
-   for(j=0; j < sizeX; j++)
+  
+   for(j = x; j < sizeX; j++)
    {
-      for(k=0; k < sizeY; k++)
+      for(k = y; k < sizeY; k++)
       {
-         if(spaces[j][k].obj != NULL)
+         if( (spaces[j][k].obj != NULL) && 
+             (spaces[j][k].origX == j) && (spaces[j][k].origY == k) )
          {
             x = j;
             y = k;
@@ -275,6 +285,8 @@ object* itemSlot::getFirstItem(int& x, int& y)
          }
       }
    }
+   x = -1;
+   y = -1;
    return(NULL);
 }
 
