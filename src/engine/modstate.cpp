@@ -243,9 +243,43 @@ modInventory::~modInventory()
 /************************************************************
  *                            flush                         *
  ************************************************************/
-void modInventory::flush(inventory* inv, modelList* models)
+void modInventory::flush(inventory* inv, lObject& objs, modelList& models, 
+                         weaponTypes& wTypes)
 {
-   //TODO
+   modInvObj* invObj = objectsList;
+   object* curObj = NULL;
+   int i;
+
+   /* Insert all objects at its previous positions */
+   for(i = 0; i < totalObjects; i++)
+   {
+      /* Try get object from map object list */
+      curObj = objs.getObject(invObj->fileName);
+      if(!curObj)
+      {
+         /* It's not on the list, so must insert it */
+         curObj = objs.insertObject(invObj->fileName, models, wTypes);
+      }
+
+      /* Now insert it at the inventory */
+      if(curObj)
+      {
+         if(!inv->addObject(curObj, invObj->x, invObj->y, invObj->invNumber))
+         {
+            cerr << "Error: Can't put object '" << invObj->fileName << "' "
+                 << "at inventory position '" << invObj->x << "," << invObj->y
+                 << "or invNumber: " << invObj->invNumber << endl;
+         }
+      }
+      else
+      {
+         /* Can't get the object, must show error */
+         cerr << "Error: Can't load object " << invObj->fileName << endl;
+      }
+
+      /* Let's do the next */
+      invObj = invObj->next;
+   }
 }
 
 /************************************************************
@@ -257,11 +291,45 @@ void modInventory::create(inventory* inv)
 }
 
 /************************************************************
- *                         Destructor                       *
+ *                           insert                         *
+ ************************************************************/
+void modInventory::insert(modInvObj* obj)
+{
+   /* Set next/previous pointers */
+   if(objectsList == NULL)
+   {
+      obj->next = obj;
+      obj->previous = obj;
+   }
+   else
+   {
+      obj->next = objectsList;
+      obj->previous = objectsList->previous;
+      obj->next->previous = obj;
+      obj->previous->next = obj;
+   }
+
+   /* Set it as the initial node on list */
+   objectsList = obj;
+   totalObjects++;
+}
+
+/************************************************************
+ *                            clear                         *
  ************************************************************/
 void modInventory::clear()
 {
-   //TODO
+   int i;
+   modInvObj* cur = objectsList;
+   modInvObj* aux = NULL;
+
+   /* Free all objects */
+   for(i = 0; i < totalObjects; i++)
+   {
+      aux = cur;
+      cur  = cur->next;
+      delete(aux);
+   }
 }
 
 

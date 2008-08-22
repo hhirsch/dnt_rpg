@@ -189,8 +189,11 @@ class modInventory: modAction
       /*! Flush the objects list to the inventory,
        * loading needed models to the list
        * \param inv -> inventory to populate 
-       * \param models -> models list */
-      void flush(inventory* inv, modelList* models);
+       * \param objs -> objects list
+       * \param models -> models list
+       * \param wType -> weapons type information */
+      void flush(inventory* inv, lObject& objs, modelList& models, 
+                 weaponTypes& wTypes);
 
       /*! Create the modInventory list based on an inventory
        * \param inv -> inventory to create the object list
@@ -201,6 +204,10 @@ class modInventory: modAction
       void clear();
 
    protected:
+    
+      /*! Insert a modInvObj on the list
+       * \param obj -> pointer of object to insert */
+      void insert(modInvObj* obj);
 
       modInvObj* objectsList;  /**< The objects on inventory list */
       int totalObjects;        /**< Total Objects on the list */
