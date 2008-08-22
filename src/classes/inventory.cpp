@@ -177,6 +177,22 @@ object* inventory::getFromPosition(int x, int y, int curInv)
 }
 
 /**************************************************************
+ *                        getFirstObject                      *
+ **************************************************************/
+object* inventory::getFirstObject(int& x, int& y, int curInv)
+{
+   return(slots[curInv]->getFirstItem(x,y));
+}
+
+/**************************************************************
+ *                         getNextObject                      *
+ **************************************************************/
+object* inventory::getNextObject(int& x, int& y, int curInv)
+{
+   return(slots[curInv]->getNextItem(x,y));
+}
+
+/**************************************************************
  *                       removeFromPlace                      *
  **************************************************************/
 void inventory::removeFromPlace(int where)

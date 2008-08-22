@@ -71,6 +71,24 @@ class inventory
        * \return -> pointer to object on position */
       object* getFromPlace(int where);
 
+      /*! Get the first object founded on the inventory. 
+       * \param x -> x position of the item got
+       * \param y -> y position of the item got
+       * \param curInv -> inventory number to get object from
+       * \return -> pointer to the first founded item, or NULL. */
+      object* getFirstObject(int& x, int& y, int curInv);
+
+      /*! Get next object on inventory.
+       * \note -> this function is usually called after a getFirstObject,
+       *          with the result x,y coordinate got from that 
+       * \param x -> x coordinate of the previous item got (will have 
+       *             the x coordinate of the current after the function)
+       * \param y -> y coordinate of the previos item got (will have the
+       *             y coordinate of the current after the function)
+       * \param curInv -> inventory number to get object from
+       * \return -> pointer to the object found or NULL, if no more objects */
+      object* getNextObject(int& x, int& y, int curInv);
+
       /*! Remove object from inventory
        * \param obj -> pointer to object to be removed */
       void removeFromInventory(object* obj);
