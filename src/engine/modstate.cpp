@@ -287,7 +287,25 @@ void modInventory::flush(inventory* inv, lObject& objs, modelList& models,
  ************************************************************/
 void modInventory::create(inventory* inv)
 {
-   //TODO
+   int x=0, y=0;
+   object* obj = NULL;
+   int curInv;
+   modInvObj* invObj = NULL;
+
+   /* For all inventories */
+   for(curInv = 0; curInv < INVENTORY_PER_CHARACTER; curInv++)
+   {
+      obj = inv->getFirstObject(x,y, curInv);
+      while(obj != NULL)
+      {
+         invObj = new modInvObj();
+         invObj->x = x;
+         invObj->y = y;
+         invObj->invNumber = curInv;
+         invObj->fileName = obj->getFileName();
+         obj = inv->getNextObject(x,y, curInv);
+      }
+   }
 }
 
 /************************************************************
