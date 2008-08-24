@@ -51,9 +51,31 @@ void dirs::findDataDirectories()
 /*********************************************************************
  *                             getRealFile                           *
  *********************************************************************/
-string dirs::getRealFile(string file)
+string dirs::getRealFile(string fileName)
 {
-   return(dataPath + file);
+   /* Only change if not already changed or if no dataPath */
+   if((dataPath != "") && (fileName.find(dataPath,0) == string::npos))
+   {
+      return(dataPath + fileName);
+   }
+   return(fileName);
+}
+
+/*********************************************************************
+ *                           getRelativeFile                         *
+ *********************************************************************/
+string dirs::getRelativeFile(string fileName)
+{
+   string::size_type pos = fileName.find(dataPath, 0);
+
+   /* Only need to change if the dataPath is in fileName's beginning */
+   if(pos == 0)
+   {
+      fileName.erase(0, dataPath.length());
+      return(fileName);
+   }
+
+   return(fileName);
 }
 
 string dirs::dataPath = "";

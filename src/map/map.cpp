@@ -2040,32 +2040,33 @@ int Map::save(string arquivo)
    /* Write fog file name, if exists */
    if( !fog.fileName.empty() )
    {
-     fprintf(arq,"f %s\n",fog.fileName.c_str());
+     fprintf(arq,"f %s\n",dir.getRelativeFile(fog.fileName).c_str());
    }
   
    /* Write NPC file name, if exists */
    if( !npcFileName.empty())
    {
-     fprintf(arq,"npc %s\n",npcFileName.c_str());
+     fprintf(arq,"npc %s\n",dir.getRelativeFile(npcFileName).c_str());
    }
 
    /* Write Particles file */
    if( !particlesFileName.empty())
    {
-     fprintf(arq,"PS %s\n",particlesFileName.c_str());
+     fprintf(arq,"PS %s\n",dir.getRelativeFile(particlesFileName).c_str());
    }
 
  
    /* Write music file name */
    if( !music.empty())
    {
-     fprintf(arq,"MUSICA %s\n",music.c_str());
+     fprintf(arq,"MUSICA %s\n",dir.getRelativeFile(music).c_str());
    }
 
    /* Write Lights file name */
    if(!lights.getFileName().empty())
    {
-      fprintf(arq,"light %s\n",lights.getFileName().c_str());
+      fprintf(arq,"light %s\n",
+              dir.getRelativeFile(lights.getFileName()).c_str());
    }
 
    /* Write if is outdoor or not */
@@ -2094,7 +2095,8 @@ int Map::save(string arquivo)
       {
          if(!objAux->getFileName().empty())
          {
-            fprintf(arq,"o %s\n",objAux->getFileName().c_str());
+            fprintf(arq,"o %s\n",
+                    dir.getRelativeFile(objAux->getFileName()).c_str());
          }
          else
          {
@@ -2109,8 +2111,9 @@ int Map::save(string arquivo)
    int t;
    for(t = 0; t < numTextures; t++)
    {
-      fprintf(arq,"t %s %s %d %d %d\n",tex->name.c_str(),tex->fileName.c_str(),
-                                       tex->R,tex->G,tex->B);
+      fprintf(arq,"t %s %s %d %d %d\n",tex->name.c_str(),
+              dir.getRelativeFile(tex->fileName).c_str(),
+              tex->R,tex->G,tex->B);
       tex = (texture*)tex->next;
    }
 
@@ -2118,9 +2121,9 @@ int Map::save(string arquivo)
    door* doorAux = (door*)doors;
    while(doorAux != NULL)
    {
-      fprintf(arq,"d %s %f,%f:%d\n",doorAux->obj->getFileName().c_str(),
-                                    doorAux->x,doorAux->z,
-                                    doorAux->orientation);
+      fprintf(arq,"d %s %f,%f:%d\n",
+              dir.getRelativeFile(doorAux->obj->getFileName()).c_str(),
+              doorAux->x,doorAux->z, doorAux->orientation);
       doorAux = doorAux->next;
    }
    
@@ -2168,7 +2171,8 @@ int Map::save(string arquivo)
                       MapSquares[x1][z1].mapConection.x2,
                       MapSquares[x1][z1].mapConection.z2,
                       MapSquares[x1][z1].mapConection.angle,
-                      MapSquares[x1][z1].mapConection.mapName.c_str());
+                      dir.getRelativeFile(
+                              MapSquares[x1][z1].mapConection.mapName).c_str());
           }
           int aux;
           objSquare* obj = MapSquares[x1][z1].getFirstObject();
@@ -2179,7 +2183,7 @@ int Map::save(string arquivo)
                x2 = (int)obj->x / squareSize();
                z2 = (int)obj->z / squareSize();
                fprintf(arq,"uo %s %d:%d,%d:%f,%f,%f:%d:%d\n",
-                       obj->obj->getFileName().c_str(),
+                       dir.getRelativeFile(obj->obj->getFileName()).c_str(),
                        obj->draw, x2 + 1, z2 + 1,
                        obj->x, obj->y, obj->z, obj->orientation, 
                        !obj->colision);
