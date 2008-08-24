@@ -1,0 +1,3 @@
+Originally from: Estrada Real Digital (http://sourceforge.net/projects/erd/)
+License: GPLv2
+Modifications by DNTeam
