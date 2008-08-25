@@ -23,14 +23,15 @@ the .blend that originated them.
 
   We use 3d Models and Textures originally created from:
 ==============================================================================
-||           GROUP           ||                   SITE                      ||
+||           GROUP            ||                   SITE                     ||
 ==============================================================================
-|| DNTeam (ourselves)        || http://dnt.dnteam.org                       ||
-|| Kator & Legaz             || http://www.katorlegaz.com/3d_models         ||
-|| OpenFrag                  || http://www.openfrag.org                     ||
-|| Scopia's Resources        || http://resources.blogscopia.com             ||
-|| The Low Poly Cooperative  || http://www.lowpolycoop.com                  ||
-|| Tiziana (aka TiZeta)      || http://www.unbruco.it/offcircle             ||
-|| UFO: Alien Invasion       || http://ufoai.sourceforge.net                ||
-|| WorldForge                || http://purple.worldforge.org/svn            ||
+|| DNTeam (ourselves)         || http://dnt.dnteam.org                      ||
+|| Estrada Real Digital (erd) || http://sourceforge.net/projects/erd        ||
+|| Kator & Legaz              || http://www.katorlegaz.com/3d_models        ||
+|| OpenFrag                   || http://www.openfrag.org                    ||
+|| Scopia's Resources         || http://resources.blogscopia.com            ||
+|| The Low Poly Cooperative   || http://www.lowpolycoop.com                 ||
+|| Tiziana (aka TiZeta)       || http://www.unbruco.it/offcircle            ||
+|| UFO: Alien Invasion        || http://ufoai.sourceforge.net               ||
+|| WorldForge                 || http://purple.worldforge.org/svn           ||
 ==============================================================================
