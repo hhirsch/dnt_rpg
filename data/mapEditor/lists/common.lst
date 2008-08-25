@@ -1,4 +1,4 @@
-24
+25
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Calendar models/objetos/geral/calendar/calendar.dcc
@@ -17,7 +17,7 @@ Meuble models/objetos/geral/meuble/meuble.dcc
 Notebook models/objetos/geral/notebook/notebook.dcc
 PC_Chair models/objetos/geral/pc_chair/pc_chair.dcc
 PC_Table models/objetos/geral/pc_table/pc_table.dcc
-Pillow models/objetos/geral/pillow/pillow.dcc
+Pia models/objetos/geral/pia/pia.dcc
 Pillow models/objetos/geral/pillow/pillow.dcc
 RefMachine models/objetos/geral/refmachine/refmachine.dcc
 Rug models/objetos/geral/rug/rug.dcc
