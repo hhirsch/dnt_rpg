@@ -4,6 +4,8 @@ npc mapas/tutorial/house1.map.npc
 MUSICA music/musica12.ogg
 light mapas/tutorial/house1.map.lgh
 Outdoor: 0
+o models/objetos/geral/pc_chair/pc_chair.dcc
+o models/objetos/geral/pc_table/pc_table.dcc
 o models/objetos/geral/et/et.dcc
 o weapons/definitions/scimitar.wcc
 o models/objetos/geral/rug/rug.dcc
@@ -30,6 +32,8 @@ o models/objetos/icex/snes/contra/snes_contra.dcc
 o models/objetos/icex/snes/mario/snes_mario.dcc
 o models/objetos/icex/snes/sf2/snes_sf2.dcc
 o models/objetos/icex/quadro/quadro.dcc
+o models/objetos/banho/papel_higienico/papel_higienico.dcc
+o models/objetos/geral/calendar/calendar.dcc
 t texturas/floor_indoor/carpete.png texturas/floor_indoor/carpete.png 186 161 126
 t texturas/floor_indoor/tile2.png texturas/floor_indoor/tile2.png 249 250 249
 t texturas/floor_indoor/stonetile.png texturas/floor_indoor/stonetile.png 176 180 178
@@ -167,6 +171,8 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood5.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
+uo models/objetos/geral/pc_chair/pc_chair.dcc 1:5,4:280.432709,0.000000,228.546036:-184:0
+uo models/objetos/geral/pc_table/pc_table.dcc 1:5,4:280.200775,0.000000,214.083252:-180:0
 uo models/objetos/geral/et/et.dcc 0:5,5:309.775421,12.400011,257.178986:15:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
@@ -211,6 +217,7 @@ uo models/objetos/geral/notebook/notebook.dcc 1:6,6:349.118866,17.399988,383.820
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/stonetile.png
 uo models/objetos/banho/privada/privada.dcc 1:1,7:57.783699,0.000000,402.041321:91:0
+uo models/objetos/banho/papel_higienico/papel_higienico.dcc 1:1,7:63.936378,5.399997,410.381226:-179:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
 uo models/objetos/banho/privada/privada.dcc 0:1,7:57.783699,0.000000,402.041321:91:0
@@ -221,6 +228,7 @@ uo models/objetos/geral/letto/letto.dcc 1:3,7:145.112274,0.000000,405.523560:90:
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood6.png
 uo models/objetos/geral/letto/letto.dcc 1:4,7:226.460541,0.000000,405.763611:90:0
+uo models/objetos/geral/calendar/calendar.dcc 1:4,7:255.958542,29.100075,438.424316:-359:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
 p 1,0.000000,0.000000,0.000000,0.000000
