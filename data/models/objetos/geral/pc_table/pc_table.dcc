@@ -1,0 +1,13 @@
+name = PC Table
+cal3d = models/objetos/geral/pc_table/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 50
+fortitude = 7
+reflex = -1
+will = 2
+displacement = 0
+armature_class = 12
+size_modifier = 0
+cost = 630
+static_scenery = 1
