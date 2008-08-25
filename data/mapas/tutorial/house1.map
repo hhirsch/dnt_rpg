@@ -4,6 +4,7 @@ npc mapas/tutorial/house1.map.npc
 MUSICA music/musica12.ogg
 light mapas/tutorial/house1.map.lgh
 Outdoor: 0
+o models/objetos/banho/papel_higienico/papel_higienico.dcc
 o models/objetos/geral/pc_chair/pc_chair.dcc
 o models/objetos/geral/pc_table/pc_table.dcc
 o models/objetos/geral/et/et.dcc
@@ -20,7 +21,7 @@ o models/objetos/geral/dinner_chair/dinner_chair.dcc
 o models/objetos/geral/dinner_table/dinner_table.dcc
 o models/objetos/geral/fridge/fridge.dcc
 o models/objetos/geral/porta4/porta4.dcc
-o models/objetos/geral/porta2/porta2.dcc
+o models/objetos/geral/porta5/porta5.dcc
 o models/objetos/icex/lixo/lixo.dcc
 o models/objetos/geral/letto/letto.dcc
 o models/objetos/geral/notebook/notebook.dcc
@@ -32,16 +33,16 @@ o models/objetos/icex/snes/contra/snes_contra.dcc
 o models/objetos/icex/snes/mario/snes_mario.dcc
 o models/objetos/icex/snes/sf2/snes_sf2.dcc
 o models/objetos/icex/quadro/quadro.dcc
-o models/objetos/banho/papel_higienico/papel_higienico.dcc
 o models/objetos/geral/calendar/calendar.dcc
+o models/objetos/geral/pia/pia.dcc
 t texturas/floor_indoor/carpete.png texturas/floor_indoor/carpete.png 186 161 126
 t texturas/floor_indoor/tile2.png texturas/floor_indoor/tile2.png 249 250 249
 t texturas/floor_indoor/stonetile.png texturas/floor_indoor/stonetile.png 176 180 178
 t texturas/floor_indoor/burl.png texturas/floor_indoor/burl.png 169 94 57
 t texturas/floor_indoor/wood5.png texturas/floor_indoor/wood5.png 94 47 31
 t texturas/floor_indoor/wood6.png texturas/floor_indoor/wood6.png 191 97 27
-d models/objetos/geral/porta2/porta2.dcc 21.686077,138.000000:0
-d models/objetos/geral/porta2/porta2.dcc 14.707561,384.000000:0
+d models/objetos/geral/porta5/porta5.dcc 21.686077,138.000000:0
+d models/objetos/geral/porta5/porta5.dcc 14.707561,384.000000:0
 d models/objetos/geral/porta4/porta4.dcc 87.167473,320.000000:0
 d models/objetos/geral/porta4/porta4.dcc 86.247314,384.000000:0
 d models/objetos/geral/porta4/porta4.dcc 256.000000,365.776184:90
@@ -93,6 +94,7 @@ wt texturas/floor_indoor/carpete.png
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/stonetile.png
+uo models/objetos/banho/papel_higienico/papel_higienico.dcc 1:1,1:27.379745,5.099998,10.080285:-90:0
 uo models/objetos/banho/privada/privada.dcc 1:1,1:18.399416,0.000000,16.503897:179:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/stonetile.png
@@ -259,7 +261,9 @@ uo models/objetos/geral/letto/letto.dcc 1:4,8:234.820328,0.000000,479.128387:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
 uo models/objetos/geral/fridge/fridge.dcc 1:5,8:279.388062,0.000000,493.749054:0:0
+uo models/objetos/geral/pia/pia.dcc 1:5,8:314.266846,0.000000,493.256653:-180:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile2.png
 uo models/objetos/icex/lixo/lixo.dcc 1:6,8:368.803131,0.000000,496.931427:0:0
+uo models/objetos/geral/pia/pia.dcc 0:5,8:314.266846,0.000000,493.256653:-180:0
 i 212.000000,422.000000
