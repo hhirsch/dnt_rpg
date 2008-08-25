@@ -1,4 +1,6 @@
-3
+5
 Broom models/objetos/banho/broom/broom.dcc
+Papel_Higienico models/objetos/banho/papel_higienico/papel_higienico.dcc
 Toilet models/objetos/banho/privada/privada.dcc
 Toilet_2 models/objetos/banho/mictorio/mictorio.dcc
+Toilet_3 models/objetos/banho/privada2/privada.dcc
