@@ -589,7 +589,8 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    progress->defineActualHealth(10);
 
    /* Do Modifications */
-   modifState.doMapModifications(actualMap, NPCs, *models, *weaponsTypes);
+   modifState.doMapModifications(actualMap, NPCs, *objectsList, 
+                                 *models, *weaponsTypes);
 
    /* Change Music, if needed */
    if(!actualMap->getMusicFileName().empty())

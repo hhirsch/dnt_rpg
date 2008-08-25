@@ -267,10 +267,11 @@ class modState
        * like when you left it). 
        * \param actualMap -> pointer to actual opened map
        * \param NPCs -> current NPCs list
+       * \param objList -> current map objects list
        * \param mdlList -> current model list
        * \param wTypes -> current weapon types */
-      void doMapModifications(Map* actualMap, void* NPCs, modelList& mdlList, 
-                              weaponTypes& wTypes);
+      void doMapModifications(Map* actualMap, void* NPCs, lObject& objs,
+                              modelList& mdlList, weaponTypes& wTypes);
 
       /*! Clear All the modifications states (usually called after death) */
       void clear();
@@ -298,9 +299,6 @@ class modState
       
       static modAction* modActionsList;   /**< List of modification actions */
       static int totalModActions;         /**< Total modActions on list */
-
-      //static modInventory* modInventories; /**< List of inventories */
-      //static int totalModInventories;      /**< Total NPCs inventories */
 };
 
 #endif

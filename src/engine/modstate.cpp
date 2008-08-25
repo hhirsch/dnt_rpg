@@ -544,6 +544,11 @@ void modState::removeAction(modAction* act)
          /* Talk One */
          delete((mapTalkModAction*)act);
       }
+      else if( (act->getAction() == MODSTATE_INVENTORY) )
+      {
+         /* Inventory One */
+         delete((modInventory*)act);
+      }
       else
       {
          /* Generic One */
@@ -601,7 +606,8 @@ bool modState::removeInverseObjectAction(int action, string target,
  *                    doMapModifications                    *
  ************************************************************/
 void modState::doMapModifications(Map* actualMap, 
-                                  void* NPCs, modelList& mdlList, 
+                                  void* NPCs, lObject& objs,
+                                  modelList& mdlList, 
                                   weaponTypes& wTypes)
 {
    int i;
@@ -669,6 +675,17 @@ void modState::doMapModifications(Map* actualMap,
             {
                mapTalkModAction* mTalk = (mapTalkModAction*)tmpMobj;
                ch->setInitialConversation(mTalk->getValue());
+            }
+         }
+         else if(tmpMobj->getAction() == MODSTATE_INVENTORY)
+         {
+            /* Get the modified inventory */
+            modInventory* mInv = (modInventory*)tmpMobj;
+            /* Get the character */
+            ch = npcs->getCharacter(tmpMobj->getTarget());
+            if(ch)
+            {
+               mInv->flush(ch->inventories, objs, mdlList, wTypes);
             }
          }
          else
