@@ -3,7 +3,7 @@
  *************************************************************************/
 
 #include "modstate.h"
-   #include "character.h"
+#include "character.h"
 
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
@@ -350,62 +350,95 @@ void modInventory::clear()
    }
 }
 
-
 ////////////////////////////////////////////////////////////////////////////
 //                                                                        //
-//                               modState                                 //
+//                                modMap                                  //
 //                                                                        //
 ////////////////////////////////////////////////////////////////////////////
 
 /************************************************************
  *                       Constructor                        *
  ************************************************************/
-modState::modState()
+modMap::modMap(string fileName)
 {
+   mapFileName = fileName;
+   next = NULL;
+   previous = NULL;
+   modActionsList = NULL;
+   totalModActions = 0;
 }
 
 /************************************************************
  *                        Destructor                        *
  ************************************************************/
-modState::~modState()
+modMap::~modMap()
 {
+   clear();
 }
 
 /************************************************************
- *                         loadState                        *
+ *                          getNext                         *
  ************************************************************/
-bool modState::loadState(string file)
+modMap* modMap::getNext()
 {
-   //TODO
-   printf("Not done yet!\n");
-   return(true);
+   return(next);
 }
 
 /************************************************************
- *                         saveState                        *
+ *                         getPrevious                      *
  ************************************************************/
-bool modState::saveState(string file)
+modMap* modMap::getPrevious()
 {
-   //TODO. For now is only printing on screen for debug!
+   return(previous);
+}
+
+/************************************************************
+ *                         setNext                          *
+ ************************************************************/
+void modMap::setNext(modMap* n)
+{
+   next = n;
+}
+
+/************************************************************
+ *                       setPrevious                        *
+ ************************************************************/
+void modMap::setPrevious(modMap* p)
+{
+   previous = p;
+}
+/************************************************************
+ *                      getMapFileName                      *
+ ************************************************************/
+string modMap::getMapFileName()
+{
+   return(mapFileName);
+}
+
+/************************************************************
+ *                           clear                          *
+ ************************************************************/
+void modMap::clear()
+{
    int i;
-   GLfloat x=0, z=0;
-   modAction* tmpMod = modActionsList;
-   for(i = 0; i < totalModActions; i++)
-   {
-      tmpMod->getPosition(x,z);
-      printf("Map: %s, Action: %d\n\ttarget: %s\n\tx:%.3f z:%.3f\n",
-             tmpMod->getMapFileName().c_str(), tmpMod->getAction(),
-             tmpMod->getTarget().c_str(), x, z);
-      tmpMod = tmpMod->getNext();
-   }
+   int total = totalModActions;
 
-   return(true);
+   /* Free all map objects from list */
+   for(i = 0; i < total; i++)
+   {
+      if(modActionsList)
+      {
+         removeAction(modActionsList);
+      }
+   }
+   modActionsList = NULL;
+   totalModActions = 0;
 }
 
 /************************************************************
  *                         addAction                        *
  ************************************************************/
-void modState::addAction(modAction* act)
+void modMap::addAction(modAction* act)
 {
    if(!modActionsList)
    {
@@ -428,7 +461,7 @@ void modState::addAction(modAction* act)
 /************************************************************
  *                    mapObjectAddAction                    *
  ************************************************************/
-void modState::mapObjectAddAction(int action, string target, 
+void modMap::mapObjectAddAction(int action, string target, 
                                   string mapFileName, 
                                   GLfloat xPos, GLfloat zPos)
 {
@@ -454,9 +487,10 @@ void modState::mapObjectAddAction(int action, string target,
 /************************************************************
  *                  mapCharacterAddAction                   *
  ************************************************************/
-void modState::mapCharacterAddAction(int act, string character, string mapFile,
-                                     GLfloat xPos, GLfloat zPos, GLfloat orientation,
-                                     GLfloat initialX, GLfloat initialZ)
+void modMap::mapCharacterAddAction(int act, string character, string mapFile,
+                                   GLfloat xPos, GLfloat zPos, 
+                                   GLfloat orientation, GLfloat initialX, 
+                                   GLfloat initialZ)
 {
    if( (act != MODSTATE_ACTION_CHARACTER_DEAD) && 
        (act != MODSTATE_ACTION_CHARACTER_MOVE))
@@ -473,8 +507,8 @@ void modState::mapCharacterAddAction(int act, string character, string mapFile,
 /************************************************************
  *                      mapTalkAddAction                    *
  ************************************************************/
-void modState::mapTalkAddAction(int act, string character, string mapFile,
-                                int value)
+void modMap::mapTalkAddAction(int act, string character, string mapFile,
+                              int value)
 {
    if(act == MODSTATE_TALK_ENTER_VALUE)
    {
@@ -514,7 +548,7 @@ void modState::mapTalkAddAction(int act, string character, string mapFile,
 /************************************************************
  *                       removeAction                       *
  ************************************************************/
-void modState::removeAction(modAction* act)
+void modMap::removeAction(modAction* act)
 {
    if(act != NULL)
    {
@@ -567,9 +601,9 @@ void modState::removeAction(modAction* act)
 /************************************************************
  *                   removeInverseAction                    *
  ************************************************************/
-bool modState::removeInverseObjectAction(int action, string target, 
-                                         string mapFileName, 
-                                         GLfloat xPos, GLfloat zPos)
+bool modMap::removeInverseObjectAction(int action, string target, 
+                                       string mapFileName, 
+                                       GLfloat xPos, GLfloat zPos)
 {
 
    if( (action != MODSTATE_ACTION_OBJECT_REMOVE) && 
@@ -605,10 +639,10 @@ bool modState::removeInverseObjectAction(int action, string target,
 /************************************************************
  *                    doMapModifications                    *
  ************************************************************/
-void modState::doMapModifications(Map* actualMap, 
-                                  void* NPCs, lObject& objs,
-                                  modelList& mdlList, 
-                                  weaponTypes& wTypes)
+void modMap::doMapModifications(Map* actualMap, 
+                                void* NPCs, lObject& objs,
+                                modelList& mdlList, 
+                                weaponTypes& wTypes)
 {
    int i;
    characterList* npcs = (characterList*) NPCs;
@@ -700,29 +734,187 @@ void modState::doMapModifications(Map* actualMap,
 
 }
 
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+//                               modState                                 //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+/************************************************************
+ *                       Constructor                        *
+ ************************************************************/
+modState::modState()
+{
+}
+
+/************************************************************
+ *                        Destructor                        *
+ ************************************************************/
+modState::~modState()
+{
+}
+
+/************************************************************
+ *                         loadState                        *
+ ************************************************************/
+bool modState::loadState(string file)
+{
+   //TODO
+   printf("Not done yet!\n");
+   return(true);
+}
+
+/************************************************************
+ *                         saveState                        *
+ ************************************************************/
+bool modState::saveState(string file)
+{
+   //TODO. For now is only printing on screen for debug!
+/*   int i;
+   GLfloat x=0, z=0;
+   modAction* tmpMod = modActionsList;
+   for(i = 0; i < totalModActions; i++)
+   {
+      tmpMod->getPosition(x,z);
+      printf("Map: %s, Action: %d\n\ttarget: %s\n\tx:%.3f z:%.3f\n",
+             tmpMod->getMapFileName().c_str(), tmpMod->getAction(),
+             tmpMod->getTarget().c_str(), x, z);
+      tmpMod = tmpMod->getNext();
+   }*/
+
+   return(true);
+}
+
+/************************************************************
+ *                        findModMap                        *
+ ************************************************************/
+modMap* modState::findModMap(string fileName)
+{
+  int i;
+  modMap* mod = modMapList;
+  for(i = 0; i < totalModMaps; i++)
+  {
+     if(mod->getMapFileName() == fileName)
+     {
+        /* Found it! */
+        return(mod);
+     }
+     mod = mod->getNext();
+  }
+  /* None found, must create one */
+  return(createModMap(fileName));
+}
+
+/************************************************************
+ *                       createModMap                       *
+ ************************************************************/
+modMap* modState::createModMap(string fileName)
+{
+   modMap* m = new modMap(fileName);
+
+   /* Set next/previous pointers */
+   if(modMapList == NULL)
+   {
+      m->setNext(m);
+      m->setPrevious(m);
+   }
+   else
+   {
+      m->setNext(modMapList);
+      m->setPrevious(modMapList->getPrevious());
+      m->getNext()->setPrevious(m);
+      m->getPrevious()->setNext(m);
+   }
+
+   /* Define as the list head */
+   modMapList = m;
+
+   /* And increment elements counter */
+   totalModMaps++;
+
+   return(m);
+}
+
+/************************************************************
+ *                    mapObjectAddAction                    *
+ ************************************************************/
+void modState::mapObjectAddAction(int action, string target, 
+                                  string mapFileName, 
+                                  GLfloat xPos, GLfloat zPos)
+{
+   modMap* mod = findModMap(mapFileName);
+
+   if(mod != NULL)
+   {
+      mod->mapObjectAddAction(action, target, mapFileName, xPos, zPos);
+   }
+}
+
+/************************************************************
+ *                  mapCharacterAddAction                   *
+ ************************************************************/
+void modState::mapCharacterAddAction(int act, string character, string mapFile,
+                                     GLfloat xPos, GLfloat zPos, 
+                                     GLfloat orientation,
+                                     GLfloat initialX, GLfloat initialZ)
+{
+   modMap* mod = findModMap(mapFile);
+   if(mod != NULL)
+   {
+      mod->mapCharacterAddAction(act, character, mapFile, xPos, zPos,
+                                 orientation, initialX, initialZ);
+   }
+}
+
+/************************************************************
+ *                      mapTalkAddAction                    *
+ ************************************************************/
+void modState::mapTalkAddAction(int act, string character, string mapFile,
+                                int value)
+{
+   modMap* mod = findModMap(mapFile);
+   if(mod != NULL)
+   {
+      mod->mapTalkAddAction(act, character, mapFile, value);
+   }
+}
+
+/************************************************************
+ *                    doMapModifications                    *
+ ************************************************************/
+void modState::doMapModifications(Map* actualMap, 
+                                  void* NPCs, lObject& objs,
+                                  modelList& mdlList, 
+                                  weaponTypes& wTypes)
+{
+   modMap* mod = findModMap(actualMap->getFileName());
+   if(mod != NULL)
+   {
+      mod->doMapModifications(actualMap, NPCs, objs, mdlList, wTypes);
+   } 
+}
+
 /************************************************************
  *                           clear                          *
  ************************************************************/
 void modState::clear()
 {
    int i;
-   int total = totalModActions;
+   modMap* m = modMapList;
+   modMap* aux = NULL;
 
-   /* Free all map objects from list */
-   for(i = 0; i < total; i++)
+   /* Delete each map List */
+   for(i = 0; i < totalModMaps; i++)
    {
-      if(modActionsList)
-      {
-         removeAction(modActionsList);
-      }
+      aux = m;
+      m = m->getNext();
+      delete(m);
    }
-   modActionsList = NULL;
-   totalModActions = 0;
 }
 
 /************************************************************
  *                      static fields                       *
  ************************************************************/
-modAction* modState::modActionsList = NULL;
-int modState::totalModActions = 0;
+modMap* modState::modMapList = NULL;
+int modState::totalModMaps = 0;
 

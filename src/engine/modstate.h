@@ -213,7 +213,106 @@ class modInventory: modAction
       int totalObjects;        /**< Total Objects on the list */
 };
 
-/*! The Modifications made by users on game are armazened here. It is also
+/*! modMap have all modifications done for a specified map */
+class modMap
+{
+   public:
+      /*! Constructor 
+       * \param fileName -> map file name */
+      modMap(string fileName);
+      /*! Destructor */
+      ~modMap();
+      
+      /*! Add action to the list (or remove some inverse action from)
+       * \param action -> action type
+       * \param target -> fileName of the object
+       * \param mapFileName - name of the map file where action occurs
+       * \param xPos -> x position
+       * \param zPos -> z position*/
+      void mapObjectAddAction(int action, string target, string mapFileName,
+                              GLfloat xPos, GLfloat zPos);
+
+      /*! Add action to the list (or remove inverse action from)
+       * \param act -> action type
+       * \param character -> character fileName
+       * \param mapFile -> name of the map file where action occurs 
+       * \param xPos -> x position
+       * \param zPos -> z position
+       * \param orientation -> character orientation angle
+       * \param initialX -> initial X position when loaded the map
+       * \param initialZ -> initial Z position when loaded the map */
+      void mapCharacterAddAction(int act, string character, string mapFile,
+                                 GLfloat xPos, GLfloat zPos, 
+                                 GLfloat orientation,
+                                 GLfloat initialX, GLfloat initialZ);
+
+      /*! Add action to the list (or remove inverse action from)
+       * \param act -> action type
+       * \param character -> character fileName
+       * \param mapFile -> fileName of the map
+       * \param value -> the action talk value */
+      void mapTalkAddAction(int act, string character, string mapFile,
+                            int value);
+
+      /*! Do All saved modifications to the map (those that are for them,
+       * usually when you return to the map and want it to appears exactly 
+       * like when you left it). 
+       * \param actualMap -> pointer to actual opened map
+       * \param NPCs -> current NPCs list
+       * \param objList -> current map objects list
+       * \param mdlList -> current model list
+       * \param wTypes -> current weapon types */
+      void doMapModifications(Map* actualMap, void* NPCs, lObject& objs,
+                              modelList& mdlList, weaponTypes& wTypes);
+
+      /*! Clear All the modifications states (usually called after death) */
+      void clear();
+
+      /*! Get the next modMap pointer
+       * \return -> next modMap */
+      modMap* getNext();
+      /*! Get the previous modMap pointer
+       * \return -> previous modMap */
+      modMap* getPrevious();
+      /*! Set the next modMap pointer
+       * \param n -> pointer to the next modMap */
+      void setNext(modMap* n);
+      /*! Set the previous modMap pointer
+       * \param p -> pointer to the previous modMap */
+      void setPrevious(modMap* p);
+      
+      /*! Get the mapFileName */
+      string getMapFileName();
+
+   protected:
+
+      /*! Remove Action from the list
+       * \param act -> action to remove */
+      void removeAction(modAction* act);
+
+      /*! Add Action to the list
+       * \param act -> pointer to the action to add */
+      void addAction(modAction* act);
+
+      /*! remove inverse action, if it exists in list. 
+       * \param action -> action type
+       * \param target -> pointer to object
+       * \param mapFileName - name of the map file where action occurs
+       * \param xPos -> x position
+       * \param zPos -> z position
+       * \return true if the inverse action is found and removed. */
+      bool removeInverseObjectAction(int action, string target, 
+                                     string mapFileName, GLfloat xPos, 
+                                     GLfloat zPos);
+
+      string mapFileName;          /**< The map file name */
+      modMap* next;                /**< Next modMap on list */
+      modMap* previous;            /**< Previous modMap on list */
+      modAction* modActionsList;   /**< List of map modification actions */
+      int totalModActions;         /**< Total Actions on the list */
+};
+
+/*! All modifications made by users on game are armazened here. It is also
  * the class to load/save states. */
 class modState
 {
@@ -278,27 +377,18 @@ class modState
 
    protected:
 
-      /*! Remove Action from the list
-       * \param act -> action to remove */
-      void removeAction(modAction* act);
+      /*! Create the ModMap related to the fileName 
+       * \param fileName -> map file name
+       * \return -> pointer to the created modMap */
+      modMap* createModMap(string fileName);
 
-      /*! Add Action to the list
-       * \param act -> pointer to the action to add */
-      void addAction(modAction* act);
-
-      /*! remove inverse action, if it exists in list. 
-       * \param action -> action type
-       * \param target -> pointer to object
-       * \param mapFileName - name of the map file where action occurs
-       * \param xPos -> x position
-       * \param zPos -> z position
-       * \return true if the inverse action is found and removed. */
-      bool removeInverseObjectAction(int action, string target, 
-                                     string mapFileName, GLfloat xPos, 
-                                     GLfloat zPos);
+      /*! Find the modMap on the list related to the fileName
+       * \param fileName -> map filename to search
+       * \return -> modMap pointer if found or NULL */
+      modMap* findModMap(string fileName);
       
-      static modAction* modActionsList;   /**< List of modification actions */
-      static int totalModActions;         /**< Total modActions on list */
+      static modMap* modMapList;   /**< List of maps */
+      static int totalModMaps;     /**< Total modMaps on list */
 };
 
 #endif
