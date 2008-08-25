@@ -1,0 +1,13 @@
+name = Bookshelf 
+cal3d = models/objetos/geral/bookshelf/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 320
+fortitude = 3
+reflex = -1
+will = 1
+displacement = 0
+armature_class = 12
+size_modifier = 0
+cost = 750
+static_scenery = 1
