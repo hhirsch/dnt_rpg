@@ -137,6 +137,10 @@ class inventory
        * \return -> pointer to the current inventory window or NULL */
       void* getOpenedWindow();
 
+      /*! Get total number of items at the inventory
+       * \return -> total number of items */
+      int getTotalItems();
+
    private:
       /*! For debug: print all names of inventory itens on terminal */
       void print();

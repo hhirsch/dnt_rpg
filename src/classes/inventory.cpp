@@ -104,6 +104,20 @@ void* inventory::getOpenedWindow()
 }
 
 /**************************************************************
+ *                         getTotalItems                      *
+ **************************************************************/
+int inventory::getTotalItems()
+{
+   int i;
+   int total = 0;
+   for(i=0; i<INVENTORY_PER_CHARACTER;i++)
+   {
+      total += slots[i]->getTotalItems();
+   }
+   return(total);
+}
+
+/**************************************************************
  *                           addObject                        *
  **************************************************************/
 bool inventory::addObject(object* obj, int x, int y, int curInv)

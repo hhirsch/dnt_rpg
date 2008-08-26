@@ -98,14 +98,20 @@ class itemSlot
        * \return -> pointer to the found object of NULL */
       object* getItemByFileName(string fileName);
 
+      /*! Get the number of items at the itemSlot
+       * \return -> number of items at the itemSlot */
+      int getTotalItems();
+
    private:
       int sizeX,  /**< Size X of the slot */
           sizeY;  /**< Size Y of the slot */
 
+      int totalItems;  /**< Number of Items at the itemSlot */
+
       space** spaces;  /**< Each Space of the Slot */
       bool oneItemPerTime; /**< If only accepts one item at the slot per time,
                                 usually used at the equipped objects slots.
-                                When only one item per time, it will ALWAYS
+                                When only one item per time, it will ALLWAYS
                                 at the 0,0 position of the slot. */
 
 };

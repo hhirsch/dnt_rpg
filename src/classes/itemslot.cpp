@@ -23,6 +23,7 @@ itemSlot::itemSlot(int xSize, int ySize)
    sizeX = xSize;
    sizeY = ySize;
    oneItemPerTime = false;
+   totalItems = 0;
 
    /* Alloc Spaces */
    spaces = new space*[sizeX];
@@ -89,6 +90,7 @@ bool itemSlot::addObject(object* obj, int x, int y)
          }
       }
       obj->incUsedFlag();
+      totalItems++;
       return(true);
    }
    return(false); 
@@ -112,6 +114,7 @@ bool itemSlot::addObject(object* obj)
       {
          if(addObject(obj, x, y))
          {
+            totalItems++;
             return(true);
          }
       }
@@ -186,6 +189,7 @@ bool itemSlot::removeObject(object* obj)
          {
             /* Remove only it from the inventory */
             removeObject(spaces[x][y].origX, spaces[x][y].origY);
+            totalItems--;
             return(true);
          }
       }
@@ -223,6 +227,7 @@ void itemSlot::removeObject(int x, int y)
          }
          /* Free obj from use here */
          obj->decUsedFlag();
+         totalItems--;
       }
    }
 }
@@ -309,5 +314,13 @@ object* itemSlot::getItemByFileName(string fileName)
       }
    }
    return(NULL);
+}
+
+/**************************************************************
+ *                         getTotalItems                      *
+ **************************************************************/
+int itemSlot::getTotalItems()
+{
+   return(totalItems);
 }
 
