@@ -143,7 +143,7 @@ bool npcs::saveFile(string fileName)
    {
       int npc;
       fprintf(arq,"%d\n",NPCs->getTotal());
-      character* per = (character*) NPCs->first->next;
+      character* per = (character*) NPCs->getFirst();
       for(npc = 0; npc < NPCs->getTotal(); npc++)
       {
          fprintf(arq,"%s %s %f %f\n",per->name.c_str(),

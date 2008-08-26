@@ -382,22 +382,26 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    fadeInTexture(texturaCarga, centerX-midW, centerY-midH, 
                  centerX+midW, centerY+midH, 256,128);
 
-   /* Show the "Loading Map" */
-   color_Set(200,20,20,255);
-   fnt.defineFont(DNT_FONT_TIMES,10);
-   sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
-   showLoading(img,&texturaTexto,texturaCarga, texto, progress);
-   progress->defineActualHealth(3);
-
    /* Loading Map */
    if(actualMap) 
    {
-     arqVelho = actualMap->getFileName();
-     delete(actualMap);
-     /* Remove All Unused Objects */
-     objectsList->removeUnusedObjects();
-     /* Remove All Unused 3D Models */
-     models->removeUnusedModels();
+      /* Show the "Saving Map Status" */
+      color_Set(200,20,20,255);
+      fnt.defineFont(DNT_FONT_TIMES,10);
+      sprintf(texto,gettext("Saving Current Map Modifications"));
+      showLoading(img,&texturaTexto,texturaCarga, texto, progress);
+      progress->defineActualHealth(1);
+
+      if(NPCs)
+      {
+         /* Save All Needed Inventory Status */
+      }
+      arqVelho = actualMap->getFileName();
+      delete(actualMap);
+      /* Remove All Unused Objects */
+      objectsList->removeUnusedObjects();
+      /* Remove All Unused 3D Models */
+      models->removeUnusedModels();
    }
 
    /* Remove all NPCS  */
@@ -411,6 +415,13 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    /* Remove All Sound Effects */
    snd->removeAllSoundEffects();
+
+   /* Show the "Loading Map" */
+   color_Set(200,20,20,255);
+   fnt.defineFont(DNT_FONT_TIMES,10);
+   sprintf(texto,gettext("Loading Map: %s"),arqMapa.c_str());
+   showLoading(img,&texturaTexto,texturaCarga, texto, progress);
+   progress->defineActualHealth(3);
 
    actualMap = new Map(objectsList);
    actualMap->setFileName(arqVelho);
@@ -533,7 +544,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    /* Updating the BoundingBoxes for PCs */
    int aux;
-   per = (character*) PCs->first->next;
+   per = (character*) PCs->getFirst();
    for(aux=0;aux < PCs->getTotal();aux++)
    {
       per->update(0); 
@@ -544,7 +555,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    /* Updating the BoundingBoxes for NPCs */
    if(NPCs)
    { 
-      per = (character*) NPCs->first->next;
+      per = (character*) NPCs->getFirst();
       for(aux=0; aux < NPCs->getTotal();aux++)
       {
          per->update(0); 
@@ -1269,6 +1280,7 @@ void engine::enterBattleMode(bool surprisePC)
 {
   int numEnemies = 0;
   character* ch;
+  int i;
   
   character* activeCharacter = PCs->getActiveCharacter();
   
@@ -1283,8 +1295,8 @@ void engine::enterBattleMode(bool surprisePC)
   }
 
   /* Add NPCs to Fight */
-  ch =(character*) NPCs->first->next;
-  while(ch != NPCs->first)
+  ch =(character*) NPCs->getFirst();
+  for(i = 0; i < NPCs->getTotal(); i++)
   {
       //TODO put enemies on groups, when enemy from enemy
       fight->insertNPC(ch, 0);
@@ -1312,8 +1324,8 @@ void engine::enterBattleMode(bool surprisePC)
       moveCircleZ = activeCharacter->zPosition;
 
       /* Put the PCs on group */
-      ch =(character*) PCs->first->next;
-      while(ch != PCs->first)
+      ch =(character*) PCs->getFirst();
+      for(i = 0; i < PCs->getTotal(); i++)
       {
          fight->insertPC(ch, 0);
          ch = (character*) ch->next; 
@@ -1383,7 +1395,7 @@ void engine::doAStar()
 
    if(NPCs)
    {
-      per = (character*) NPCs->first->next;
+      per = (character*) NPCs->getFirst();
       for(aux=0; aux < NPCs->getTotal(); aux++)
       {
          per->pathFind.doCycle();
@@ -1393,7 +1405,7 @@ void engine::doAStar()
 
    if(PCs)
    {
-      per = (character*) PCs->first->next;
+      per = (character*) PCs->getFirst();
       for(aux=0; aux < PCs->getTotal(); aux++)
       {
          per->pathFind.doCycle();
@@ -1464,6 +1476,7 @@ void engine::treatPendingActions()
  *********************************************************************/
 void engine::treatGuiEvents(guiObject* object, int eventInfo)
 {
+   int i;
    barterWindow tradeWindow;
    /* Verify if Inventory Window is opened */
    if(inventoryWindow)
@@ -1481,8 +1494,8 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    /* Verify Dialog Windows */
    if(NPCs != NULL)
    {
-      character* ch =(character*) NPCs->first->next;
-      while(ch != NPCs->first)
+      character* ch =(character*) NPCs->getFirst();
+      for(i = 0; i < NPCs->getTotal(); i++)
       {
          ch->treatConversation(object, eventInfo, infoWindow);
          ch = (character*) ch->next;
@@ -1790,8 +1803,9 @@ int engine::verifyMouseActions(Uint8 mButton)
       }
 
       /* Inventory Verification */
-      character* pers = (character*) PCs->first->next;
-      while( (pers != PCs->first) && (!pronto) )
+      int i;
+      character* pers = (character*) PCs->getFirst();
+      for(i = 0; ((i < PCs->getTotal()) && (!pronto)); i++)
       {
          GLfloat x[4],z[4];
          GLfloat min[3], max[3];
@@ -1825,8 +1839,8 @@ int engine::verifyMouseActions(Uint8 mButton)
       /* Talk And Attack Events Verification */
       if(NPCs)
       {
-         pers = (character*) NPCs->first->next;
-         while( (pers != NPCs->first) && (!pronto) )
+         pers = (character*) NPCs->getFirst();
+         for(i = 0; ((i < PCs->getTotal()) && (!pronto)); i++)
          {
             GLfloat x[4],z[4];
             GLfloat min[3], max[3];
@@ -2637,7 +2651,7 @@ void engine::renderScene()
    }
 
    /* Draw Playable Characters (PCs) */
-      character* per = (character*) PCs->first->next;
+      character* per = (character*) PCs->getFirst();
       int aux;
 
       for(aux=0;aux < PCs->getTotal();aux++)
@@ -2723,7 +2737,7 @@ void engine::renderScene()
    /* Draw the NPCs */
    if(NPCs)
    {
-      per = (character*) NPCs->first->next;
+      per = (character*) NPCs->getFirst();
       for(aux=0;aux < NPCs->getTotal();aux++)
       {
          /* Update the model */
@@ -3185,8 +3199,9 @@ void engine::openCloseInventoryWindow()
  *********************************************************************/
 void engine::updateAllHealthBars()
 {
-   character* pers = (character*) PCs->first->next;
-   while(pers != PCs->first)
+   int i;
+   character* pers = (character*) PCs->getFirst();
+   for(i = 0; i < PCs->getTotal(); i++)
    {
       pers->defineActualLifePoints(pers->getLifePoints());
       pers = (character*) pers->next;
@@ -3335,9 +3350,10 @@ int engine::run(SDL_Surface *surface)
            engineMode = ENGINE_MODE_REAL_TIME;
            brief->addText( gettext("Exit Battle Mode"));
            /* Verify if any PC is alive. */
-           character* pers = (character*) PCs->first->next;
+           character* pers = (character*) PCs->getFirst();
            bool alive = false;
-           while((!alive) && (pers != PCs->first))
+           int j;
+           for(j = 0; ( (j < PCs->getTotal()) && (!alive)); j++)
            {
               if(pers->isAlive())
               {

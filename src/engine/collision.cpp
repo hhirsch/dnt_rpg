@@ -405,14 +405,14 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    }
 
    /* Test colision with npcs and pcs */
-   int i;
+   int i,j;
    characterList* list = NPCs;
    for(i = 0; i <=1; i++)
    {
       if(list)
       {
-         character* pers = list->first->next;
-         while( (pers != list->first) )
+         character* pers = list->getFirst();
+         for(j = 0; j < list->getTotal(); j++)
          {
             if(pers != actor)
             {

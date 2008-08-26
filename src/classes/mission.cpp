@@ -161,6 +161,7 @@ void missionsController::completeMission(mission* m, int type)
    sound snd;
    briefing brief;
    messageController msgController;
+   int i;
 
    /* First, remove from the current list, without deleting it. */
    removeFromCurrent(m, false);
@@ -182,9 +183,10 @@ void missionsController::completeMission(mission* m, int type)
    if(type > 0)
    {
       engine* eng = (engine*)pEngine;
-      character* dude = eng->PCs->first->next;
+      character* dude = eng->PCs->getFirst();
+      
       /* Add XP to all PC characters */
-      while(dude != eng->PCs->first)
+      for(i = 0; i < eng->PCs->getTotal(); i++)
       {
          dude->addXP(m->xpValue);
          dude = dude->next;

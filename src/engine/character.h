@@ -295,9 +295,11 @@ class characterList
        * \param NPCs -> current NPCs list  */
       void treatGeneralScripts(Map* actualMap, characterList* NPCs);
 
-      character* first;         /**< List Node Pointer */
+      /*! Get the first character at the list */
+      character* getFirst();
 
    protected:
+      character* first;            /**< List Node Pointer */
       character* activeCharacter;  /**< Active Character's on list */
       int total;                   /**< Total Elements on List */
 

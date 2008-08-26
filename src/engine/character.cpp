@@ -970,6 +970,14 @@ character* characterList::getEnemyCharacter(character* last)
 }
 
 /*********************************************************************
+ *                                getFirst                           *
+ *********************************************************************/
+character* characterList::getFirst()
+{
+   return(first->next);
+}
+
+/*********************************************************************
  *                           getActiveCharacter                      *
  *********************************************************************/
 character* characterList::getActiveCharacter()

@@ -729,7 +729,7 @@ void editor::draw()
    /* Draw the NPCs */
    if(NPCs)
    {
-      character* per = NPCs->first->next;
+      character* per = NPCs->getFirst();
       int aux;
       GLfloat x[4]; GLfloat z[4];
       GLfloat min[3],max[3];
