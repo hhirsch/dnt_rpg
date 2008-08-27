@@ -513,19 +513,7 @@ void modMap::mapTalkAddAction(int act, string character, string mapFile,
    if(act == MODSTATE_TALK_ENTER_VALUE)
    {
       /* Search List for a previous value */
-      int i;
-      mapTalkModAction* n = NULL;
-      modAction* mod = modActionsList;
-      for(i = 0; ( (i < totalModActions) && (n == NULL)); i++)
-      {
-         if( (mod->getAction() == act) && 
-             (mod->getTarget() == character) && 
-             (mod->getMapFileName() == mapFile) )
-         {
-            n = (mapTalkModAction*)mod;
-         }
-         mod = mod->getNext();
-      }
+      mapTalkModAction* n = (mapTalkModAction*)search(act, character);
 
       if(n != NULL)
       {
@@ -543,6 +531,50 @@ void modMap::mapTalkAddAction(int act, string character, string mapFile,
    {
       cerr << "Invalid Talk Action: " << act << endl;
    }
+}
+
+/************************************************************
+ *                      mapInventoryAdd                     *
+ ************************************************************/
+void modMap::mapInventoryAdd(inventory* inv, string owner)
+{
+  /* Search for a previous modInventory here */
+  modInventory* modInv = (modInventory*)search(MODSTATE_INVENTORY, owner);
+
+  if(modInv != NULL)
+  {
+     /* Found, so just update this one */
+     modInv->create(inv);
+  }
+  else
+  {
+     /* None found, so must create a new one */
+     modInv = new modInventory(inv, owner, mapFileName);
+     modInv->create(inv);
+     addAction(modInv);
+  }
+}
+
+/************************************************************
+ *                           search                         *
+ ************************************************************/
+modAction* modMap::search(int action, string target)
+{
+   int i;
+   modAction* mod = modActionsList;
+   for(i = 0; (i < totalModActions); i++)
+   {
+      if( (mod->getAction() == action) && 
+          (mod->getTarget() == target) )
+      { 
+         /* Found it! */
+         return(mod);
+      }
+      mod = mod->getNext();
+   }
+
+   /* No ModActions found */
+   return(NULL);
 }
 
 /************************************************************
@@ -588,7 +620,6 @@ void modMap::removeAction(modAction* act)
          /* Generic One */
          delete(act);
       }
-
 
       totalModActions--;
       if(totalModActions <= 0)
@@ -876,6 +907,18 @@ void modState::mapTalkAddAction(int act, string character, string mapFile,
    if(mod != NULL)
    {
       mod->mapTalkAddAction(act, character, mapFile, value);
+   }
+}
+
+/************************************************************
+ *                       mapInventoryAdd                    *
+ ************************************************************/
+void modState::mapInventoryAdd(inventory* inv, string owner, string mapFile)
+{
+   modMap* mod = findModMap(mapFile);
+   if(mod != NULL)
+   {
+      mod->mapInventoryAdd(inv, owner);
    }
 }
 

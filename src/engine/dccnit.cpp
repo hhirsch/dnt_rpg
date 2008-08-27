@@ -395,6 +395,12 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
       if(NPCs)
       {
          /* Save All Needed Inventory Status */
+         character* dude = NPCs->getFirst();
+         int i;
+         for(i = 0; i < NPCs->getTotal(); i++)
+         {
+            dude = (character*)dude->next;
+         }
       }
       arqVelho = actualMap->getFileName();
       delete(actualMap);

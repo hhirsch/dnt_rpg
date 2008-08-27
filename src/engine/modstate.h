@@ -175,7 +175,7 @@ class modInvObj
  *          already exists) for each NPC when the PC exits the map.
  *          When the PC is back, each NPC's inventory is then populated
  *          by its previously modInventory. */
-class modInventory: modAction
+class modInventory: public modAction
 {
    public:
       /*! Constructor
@@ -254,6 +254,12 @@ class modMap
       void mapTalkAddAction(int act, string character, string mapFile,
                             int value);
 
+      /*! Add Inventory to the modifications list (or update respective 
+       *  modInv if one exists)
+       *  \param inv -> pointer to the inventory to update
+       *  \param owner -> inventory owner filename */ 
+      void mapInventoryAdd(inventory* inv, string owner);
+
       /*! Do All saved modifications to the map (those that are for them,
        * usually when you return to the map and want it to appears exactly 
        * like when you left it). 
@@ -304,6 +310,12 @@ class modMap
       bool removeInverseObjectAction(int action, string target, 
                                      string mapFileName, GLfloat xPos, 
                                      GLfloat zPos);
+
+      /*! Search for a modAction on the list
+       * \param action -> action number constant
+       * \param target -> target name
+       * \return -> pointer to the modAction found, or NULL if none */
+      modAction* search(int action, string target);
 
       string mapFileName;          /**< The map file name */
       modMap* next;                /**< Next modMap on list */
@@ -360,6 +372,13 @@ class modState
        * \param value -> the action talk value */
       void mapTalkAddAction(int act, string character, string mapFile,
                             int value);
+      
+      /*! Add Inventory to the modifications list (or update respective 
+       *  modInv if one exists)
+       *  \param inv -> pointer to the inventory to update
+       *  \param owner -> inventory owner filename 
+       *  \param mapFile -> map filename where the character is */
+      void mapInventoryAdd(inventory* inv, string owner, string mapFile);
 
       /*! Do All saved modifications to the map (those that are for them,
        * usually when you return to the map and want it to appears exactly 
