@@ -1,4 +1,4 @@
-26
+27
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Calendar models/objetos/geral/calendar/calendar.dcc
@@ -8,6 +8,7 @@ Colarinho models/objetos/geral/colarinho_e_oculos/colarinho_e_oculos.dcc
 Computer models/objetos/geral/computador/computador.dcc
 Dinner_Chair models/objetos/geral/dinner_chair/dinner_chair.dcc
 Dinner_Table models/objetos/geral/dinner_table/dinner_table.dcc
+Escrivaninha models/objetos/geral/escrivaninha/escrivaninha.dcc
 Et models/objetos/geral/et/et.dcc
 Exclamation models/objetos/geral/exclamacao/exclamacao.dcc
 Fridge models/objetos/geral/fridge/fridge.dcc
