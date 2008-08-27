@@ -399,6 +399,12 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
          int i;
          for(i = 0; i < NPCs->getTotal(); i++)
          {
+            if(dude->inventories->getTotalItems() > 0)
+            {
+               modifState.mapInventoryAdd(dude->inventories, 
+                                          dude->getCharacterFile(),
+                                          actualMap->getFileName());
+            }
             dude = (character*)dude->next;
          }
       }
