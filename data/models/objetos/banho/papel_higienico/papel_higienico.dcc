@@ -1,0 +1,13 @@
+name = PapelHigienico
+cal3d = models/objetos/banho/papel_higienico/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 30
+fortitude = 10
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 19
+size_modifier = 0
+cost = 50
+static_scenery = 1
