@@ -1,4 +1,4 @@
-27
+28
 Bookshelf models/objetos/geral/bookshelf/bookshelf.dcc
 Briefcase models/objetos/geral/mala/mala.dcc
 Calendar models/objetos/geral/calendar/calendar.dcc
@@ -12,6 +12,7 @@ Escrivaninha models/objetos/geral/escrivaninha/escrivaninha.dcc
 Et models/objetos/geral/et/et.dcc
 Exclamation models/objetos/geral/exclamacao/exclamacao.dcc
 Fridge models/objetos/geral/fridge/fridge.dcc
+Gabinete models/objetos/geral/gabinete/gabinete.dcc
 Guitar models/objetos/geral/guitarra/guitarra.dcc
 Letto models/objetos/geral/letto/letto.dcc
 Meuble models/objetos/geral/meuble/meuble.dcc
