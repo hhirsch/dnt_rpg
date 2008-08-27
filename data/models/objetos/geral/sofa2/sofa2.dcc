@@ -1,0 +1,13 @@
+name = Sofa
+cal3d = models/objetos/geral/sofa2/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 250
+fortitude = 7
+reflex = -1
+will = 2
+displacement = 0
+armature_class = 12
+size_modifier = 0
+cost = 450
+static_scenery = 1
