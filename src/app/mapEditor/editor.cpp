@@ -133,6 +133,7 @@ void editor::closeMap()
       delete(models);
       models = new modelList();
       mapOpened = false;
+      map = NULL;
    }
 }
 
