@@ -315,7 +315,8 @@ class modMap
        * \param action -> action number constant
        * \param target -> target name
        * \return -> pointer to the modAction found, or NULL if none */
-      modAction* search(int action, string target);
+      modAction* search(int action, string target, 
+                        GLfloat xPos=-1, GLfloat zPos=-1);
 
       string mapFileName;          /**< The map file name */
       modMap* next;                /**< Next modMap on list */

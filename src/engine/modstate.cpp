@@ -558,7 +558,8 @@ void modMap::mapInventoryAdd(inventory* inv, string owner)
 /************************************************************
  *                           search                         *
  ************************************************************/
-modAction* modMap::search(int action, string target)
+modAction* modMap::search(int action, string target, 
+                          GLfloat xPos, GLfloat zPos)
 {
    int i;
    modAction* mod = modActionsList;
@@ -566,9 +567,23 @@ modAction* modMap::search(int action, string target)
    {
       if( (mod->getAction() == action) && 
           (mod->getTarget() == target) )
-      { 
-         /* Found it! */
-         return(mod);
+      {
+         if((xPos != -1) && (zPos != -1))
+         {
+            /* verify the position */
+            GLfloat pX=0, pZ=0;
+            mod->getPosition(pX, pZ);
+            if( (pX == xPos) && (pZ == zPos))
+            {
+               /* Found it at the desired position */
+               return(mod);
+            }
+         }
+         else
+         {
+            /* No Position Verification, so found it! */
+            return(mod);
+         }
       }
       mod = mod->getNext();
    }
@@ -644,25 +659,12 @@ bool modMap::removeInverseObjectAction(int action, string target,
       return(false);
    }
 
-   int i;
-   modAction* tmp = modActionsList;
-   for(i = 0; i < totalModActions; i++)
+   modAction* tmp = search(!action, target, xPos, zPos);
+   if(tmp != NULL)
    {
-      if( (tmp->getMapFileName() == mapFileName) &&
-          (tmp->getAction() == !action) &&
-          (tmp->getTarget() == target) )
-      {
-         /* verify the position of the objects! */
-         GLfloat pX=0, pZ=0;
-         tmp->getPosition(pX, pZ);
-         if( (pX == xPos) && (pZ == zPos))
-         {
-            /* Found the Inverse, so remove it */
-            removeAction(tmp);
-            return(true);
-         }
-      }
-      tmp = tmp->getNext();
+      /* Found the Inverse, so remove it */
+      removeAction(tmp);
+      return(true);
    }
    return(false);
 }
