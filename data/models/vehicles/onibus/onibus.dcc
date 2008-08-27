@@ -1,0 +1,11 @@
+name = Bus
+cal3d = models/vehicles/onibus/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 5000
+fortitude = 40
+reflex = 0
+will = 0
+displacement = 0
+armature_class = 15
+cost = 5000
