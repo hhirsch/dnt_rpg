@@ -49,6 +49,11 @@ class modAction
        * \param posZ -> Z position */
       void getPosition(GLfloat &posX, GLfloat& posZ);
 
+      /*! Set the position where action occurs
+       * \param posX -> X position
+       * \param posZ -> Z position */
+      void setPosition(GLfloat posX, GLfloat posZ);
+
       /*! Get next action on list 
        * \return pointer to next action on list */
       modAction* getNext();

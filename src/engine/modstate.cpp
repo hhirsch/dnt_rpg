@@ -58,12 +58,21 @@ int modAction::getAction()
 }
 
 /************************************************************
- *                        getPostion                        *
+ *                       getPosition                        *
  ************************************************************/
 void modAction::getPosition(GLfloat &posX, GLfloat& posZ)
 {
    posX = x;
    posZ = z;
+}
+
+/************************************************************
+ *                       setPosition                        *
+ ************************************************************/
+void modAction::setPosition(GLfloat posX, GLfloat posZ)
+{
+   x = posX;
+   z = posZ;
 }
 
 /************************************************************
@@ -498,10 +507,21 @@ void modMap::mapCharacterAddAction(int act, string character, string mapFile,
       cerr << "Invalid modification character action: " <<  act << endl;
    }
 
-   mapCharacterModAction* n;
-   n = new mapCharacterModAction(act, character, mapFile, xPos, zPos,
-                                 orientation, initialX, initialZ);
-   addAction(n);
+   /* Search for a previous modAction with same info */
+   mapCharacterModAction* n=(mapCharacterModAction*)search(act, character,
+                                                           initialX, initialZ);
+   if(n != NULL)
+   {
+      /* Just update the one found */
+      n->setPosition(xPos, zPos);
+   }
+   else
+   {
+      /* None found, must create a new one */
+      n = new mapCharacterModAction(act, character, mapFile, xPos, zPos,
+                                    orientation, initialX, initialZ);
+      addAction(n);
+   }
 }
 
 /************************************************************
@@ -538,21 +558,21 @@ void modMap::mapTalkAddAction(int act, string character, string mapFile,
  ************************************************************/
 void modMap::mapInventoryAdd(inventory* inv, string owner)
 {
-  /* Search for a previous modInventory here */
-  modInventory* modInv = (modInventory*)search(MODSTATE_INVENTORY, owner);
+   /* Search for a previous modInventory here */
+   modInventory* modInv = (modInventory*)search(MODSTATE_INVENTORY, owner);
 
-  if(modInv != NULL)
-  {
-     /* Found, so just update this one */
-     modInv->create(inv);
-  }
-  else
-  {
-     /* None found, so must create a new one */
-     modInv = new modInventory(inv, owner, mapFileName);
-     modInv->create(inv);
-     addAction(modInv);
-  }
+   if(modInv != NULL)
+   {
+      /* Found, so just update this one */
+      modInv->create(inv);
+   }
+   else
+   {
+      /* None found, so must create a new one */
+      modInv = new modInventory(inv, owner, mapFileName);
+      modInv->create(inv);
+      addAction(modInv);
+   }
 }
 
 /************************************************************
@@ -570,9 +590,23 @@ modAction* modMap::search(int action, string target,
       {
          if((xPos != -1) && (zPos != -1))
          {
-            /* verify the position */
+            /* verify the initial or current position */
             GLfloat pX=0, pZ=0;
-            mod->getPosition(pX, pZ);
+
+
+            if( (action == MODSTATE_ACTION_CHARACTER_DEAD) ||
+                (action == MODSTATE_ACTION_CHARACTER_MOVE) )
+            {
+               /* For Character Ones, verify the initial position */
+               mapCharacterModAction* charAct = (mapCharacterModAction*)mod;
+               pX = charAct->getInitialX();
+               pZ = charAct->getInitialZ();
+            }
+            else
+            {
+               /* For all other types, verify the current position */
+               mod->getPosition(pX, pZ);
+            }
             if( (pX == xPos) && (pZ == zPos))
             {
                /* Found it at the desired position */
