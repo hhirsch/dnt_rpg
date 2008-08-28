@@ -277,7 +277,7 @@ void modInventory::flush(inventory* inv, lObject& objs, modelList& models,
          {
             cerr << "Error: Can't put object '" << invObj->fileName << "' "
                  << "at inventory position '" << invObj->x << "," << invObj->y
-                 << "or invNumber: " << invObj->invNumber << endl;
+                 << " of invNumber: " << invObj->invNumber << endl;
          }
       }
       else
@@ -301,17 +301,26 @@ void modInventory::create(inventory* inv)
    int curInv;
    modInvObj* invObj = NULL;
 
+   /* Clear the current one */
+   clear();
+
    /* For all inventories */
    for(curInv = 0; curInv < INVENTORY_PER_CHARACTER; curInv++)
    {
       obj = inv->getFirstObject(x,y, curInv);
       while(obj != NULL)
       {
+         /* Create the object representation */
          invObj = new modInvObj();
          invObj->x = x;
          invObj->y = y;
          invObj->invNumber = curInv;
          invObj->fileName = obj->getFileName();
+
+         /* Insert it at the modInventory */
+         insert(invObj);
+         
+         /* Try to get next object */
          obj = inv->getNextObject(x,y, curInv);
       }
    }
@@ -357,6 +366,8 @@ void modInventory::clear()
       cur  = cur->next;
       delete(aux);
    }
+
+   totalObjects = 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -570,7 +581,6 @@ void modMap::mapInventoryAdd(inventory* inv, string owner)
    {
       /* None found, so must create a new one */
       modInv = new modInventory(inv, owner, mapFileName);
-      modInv->create(inv);
       addAction(modInv);
    }
 }

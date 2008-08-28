@@ -277,9 +277,9 @@ object* itemSlot::getNextItem(int& x, int& y)
 {
    int j,k;
  
+   k = y+1; /* To get next element from previous */
    for(j = x; j < sizeX; j++)
    {
-      k = y+1; /* To get next element from previous */
       for(;k < sizeY; k++)
       {
          if( (spaces[j][k].obj != NULL) && 
@@ -293,7 +293,7 @@ object* itemSlot::getNextItem(int& x, int& y)
       k = 0; /* To continue the search at first y position */
    }
    x = -1;
-   y = -1;
+   y = -2;
    return(NULL);
 }
 
