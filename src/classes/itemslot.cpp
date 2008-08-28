@@ -266,7 +266,7 @@ void itemSlot::setAsOneItemPerTime()
 object* itemSlot::getFirstItem(int& x, int& y)
 {
    x = 0;
-   y = 0;
+   y = -1;
    return(getNextItem(x,y));
 }
 
@@ -276,10 +276,11 @@ object* itemSlot::getFirstItem(int& x, int& y)
 object* itemSlot::getNextItem(int& x, int& y)
 {
    int j,k;
-  
+ 
    for(j = x; j < sizeX; j++)
    {
-      for(k = y; k < sizeY; k++)
+      k = y+1; /* To get next element from previous */
+      for(;k < sizeY; k++)
       {
          if( (spaces[j][k].obj != NULL) && 
              (spaces[j][k].origX == j) && (spaces[j][k].origY == k) )
@@ -289,6 +290,7 @@ object* itemSlot::getNextItem(int& x, int& y)
             return(spaces[j][k].obj);
          }
       }
+      k = 0; /* To continue the search at first y position */
    }
    x = -1;
    y = -1;
