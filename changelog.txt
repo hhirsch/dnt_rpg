@@ -15,6 +15,7 @@
  - Ranged options now changeable with a fill bar; 
  - Only draw battle move circle if have move actions;
  - Comic book cutscenes;
+ - Barter;
 
 Working on:
  - Optimizations for outdoor rendering;
@@ -28,7 +29,6 @@ Working on:
  - Initial approach to move NPC on battle;
  - Initial approach to use other actions than attack actions at combat;
  - Load/Save Functions;
- - Barter;
  - Receive XP on killing, trickering and completing missions;
  - Use of some itens;
 
@@ -45,7 +45,6 @@ Pending:
  - Make a tutorial to the battle system;
  - Implement 5-15% of the feats defined on DNT Book;
  - Score at Death Screen;
- - Inventory to inventory changes;
  - Capacity of using feats;
  - Capacity of using skills;
  - Finish the combat system implementation;
