@@ -140,9 +140,9 @@ void model3d::draw(GLfloat matriz[6][4], bool inverted)
                glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
                glEnable(GL_NORMALIZE);
                glPushMatrix();
+                  glScalef(1.0,-1.0,1.0);
                   glTranslatef(pos->x, pos->y, pos->z);
                   glRotatef(pos->angle, 0,1,0);
-                  glScalef(1.0,-1.0,1.0);
                   renderFromGraphicMemory();
                glPopMatrix();
                glDisable(GL_NORMALIZE);
