@@ -133,7 +133,7 @@ void extensions::defineShader(string ext)
                                            getFunction("glUseProgramObjectARB");
       getShaderiv = (PFNGLGETSHADERIVPROC)getFunction("glGetShaderiv"); 
       arbGetProgramiv = (PFNGLGETPROGRAMIVARBPROC)
-                                               getFunction("glGetProgramivARB");
+                                               getFunction("glGetProgramiv");
 
       arbGetInfoLog = (PFNGLGETINFOLOGARBPROC)getFunction("glGetInfoLogARB");
       getProgramInfoLog = (PFNGLGETPROGRAMINFOLOGPROC)

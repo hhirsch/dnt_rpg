@@ -32,12 +32,12 @@ void shader::printInfoLog(GLuint obj, bool prog)
 
    if(ext.hasShader())
    {
-      if(prog)
+      /*if(prog)
       {
          ext.getProgramInfoLog(obj, 1024, NULL, infoLog);
          printOpenGLErrors("getProgramInfoLog");
       }
-      else
+      else*/
       {
          ext.arbGetInfoLog(obj, 1024, NULL, infoLog); 
          printOpenGLErrors("arbGetInfoLog");
@@ -99,8 +99,8 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       program = ext.arbCreateProgramObject();
 
       /* Create vertex and fragment shaders */
-      vertex = ext.arbCreateShaderObject(GL_VERTEX_SHADER);
-      fragment = ext.arbCreateShaderObject(GL_FRAGMENT_SHADER);
+      vertex = ext.arbCreateShaderObject(GL_VERTEX_SHADER_ARB);
+      fragment = ext.arbCreateShaderObject(GL_FRAGMENT_SHADER_ARB);
 
       /* Load Vertex and fragment shaders */
       str = parseFile(vShaderFileName).c_str();
@@ -134,14 +134,13 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       }
 
       /* Attach shaders to the program */
-      ext.arbAttachObject(program, vertex);
       ext.arbAttachObject(program, fragment);
+      ext.arbAttachObject(program, vertex);
 
       /* Finnaly, link them */
       ext.arbLinkProgram(program);
       printOpenGLErrors("arbLinkProgram");
-      linked = 1;
-      //ext.arbGetProgramiv(program, GL_OBJECT_LINK_STATUS_ARB, &linked);
+      ext.arbGetProgramiv(program, GL_LINK_STATUS, &linked);
       printOpenGLErrors("arbGetProgramiv");
       printInfoLog(program, true);
       if(!linked)
