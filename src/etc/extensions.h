@@ -30,7 +30,7 @@ class extensions
       static PFNGLATTACHOBJECTARBPROC arbAttachObject;
       static PFNGLLINKPROGRAMARBPROC arbLinkProgram;
       static PFNGLUSEPROGRAMOBJECTARBPROC arbUseProgram;
-      static PFNGLGETHANDLEARBPROC arbGetHandleObject;
+      static PFNGLGETHANDLEARBPROC arbGetHandle;
       static PFNGLGETUNIFORMLOCATIONARBPROC arbGetUniformLocation;
       static PFNGLGETOBJECTPARAMETERFVARBPROC arbGetObjectParameterfv;
       static PFNGLGETOBJECTPARAMETERIVARBPROC arbGetObjectParamenteriv;
@@ -63,6 +63,11 @@ class extensions
       /*! Define shader functions
        * \param ext -> extensions string */
       void defineShader(string ext);
+
+      /*! Get OpenGL Function
+       * \param functionName -> function to get
+       * \return -> pointer to the function found or NULL */
+      void* getFunction(string functionName);
 
       /*! Sow an warning about not found some extension function 
        * \param functionName -> string wit function name to displa warning of*/

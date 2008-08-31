@@ -33,6 +33,20 @@ void extensions::showWarning(string functionName)
 }
 
 /***********************************************************************
+ *                              getFunction                            *
+ ***********************************************************************/
+void* extensions::getFunction(string functionName)
+{
+   void* func = SDL_GL_GetProcAddress(functionName.c_str());
+   if(!func)
+   {
+      showWarning(functionName);
+   }
+
+   return(func);
+}
+
+/***********************************************************************
  *                          definePointTexture                         *
  ***********************************************************************/
 void extensions::definePointTexture(string ext)
@@ -40,14 +54,9 @@ void extensions::definePointTexture(string ext)
    if( ext.find("GL_ARB_point_sprite",0) != string::npos)
    {
       arbPointParameterf = (PFNGLPOINTPARAMETERFARBPROC)
-                                  SDL_GL_GetProcAddress("glPointParameterfARB");
+                                            getFunction("glPointParameterfARB");
       arbPointParameterfv = (PFNGLPOINTPARAMETERFVARBPROC) 
-                                 SDL_GL_GetProcAddress("glPointParameterfvARB");
-
-      if( (arbPointParameterfv == NULL) || (arbPointParameterf == NULL) )
-      {
-         showWarning("glPointParameterfARB");
-      }
+                                           getFunction("glPointParameterfvARB");
    }
    else
    {
@@ -64,30 +73,17 @@ void extensions::defineMultiTexture(string ext)
    if(ext.find("GL_ARB_multitexture") != string::npos)
    {
       arbActiveTexture = (PFNGLACTIVETEXTUREPROC) 
-                                  SDL_GL_GetProcAddress("glActiveTextureARB");
-      if(!arbActiveTexture)
-      {
-         showWarning("glActiveTextureARB");
-      }
+                                              getFunction("glActiveTextureARB");
       arbClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREPROC) 
-                              SDL_GL_GetProcAddress("glClientActiveTextureARB");
-      if(!arbClientActiveTexture)
-      {
-         showWarning("glClientActiveTextureARB");
-      }
+                                        getFunction("glClientActiveTextureARB");
       arbMultiTexCoord2d = (PFNGLMULTITEXCOORD2DPROC)
-                                SDL_GL_GetProcAddress("glMultiTexCoord2dARB");
+                                            getFunction("glMultiTexCoord2dARB");
       arbMultiTexCoord2f = (PFNGLMULTITEXCOORD2FPROC)
-                                SDL_GL_GetProcAddress("glMultiTexCoord2fARB");
+                                            getFunction("glMultiTexCoord2fARB");
       arbMultiTexCoord2dv = (PFNGLMULTITEXCOORD2DVPROC)
-                                SDL_GL_GetProcAddress("glMultiTexCoord2dvARB");
+                                           getFunction("glMultiTexCoord2dvARB");
       arbMultiTexCoord2fv = (PFNGLMULTITEXCOORD2FVPROC)
-                                SDL_GL_GetProcAddress("glMultiTexCoord2fvARB");
-      if( (!arbMultiTexCoord2d) || (!arbMultiTexCoord2f) || 
-          (!arbMultiTexCoord2dv) || (!arbMultiTexCoord2fv) )
-      {
-         showWarning("glMultiTextCoord*ARB");
-      }
+                                           getFunction("glMultiTexCoord2fvARB");
    }
    else
    {
@@ -100,6 +96,40 @@ void extensions::defineMultiTexture(string ext)
  ***********************************************************************/
 void extensions::defineShader(string ext)
 {
+   if( (ext.find("GL_ARB_fragment_shader") != string::npos) &&
+       (ext.find("GL_ARB_vertex_shader") != string::npos) )
+   {
+      arbCreateShaderObject = (PFNGLCREATESHADEROBJECTARBPROC)
+                                         getFunction("glCreateShaderObjectARB");
+      arbCreateProgramObject = (PFNGLCREATEPROGRAMOBJECTARBPROC)
+                                        getFunction("glCreateProgramObjectARB");
+      arbDeleteObject = (PFNGLDELETEOBJECTARBPROC)
+                                               getFunction("glDeleteObjectARB");
+      arbShaderSourceObject = (PFNGLSHADERSOURCEARBPROC)
+                                               getFunction("glShaderSourceARB");
+      arbCompileShader = (PFNGLCOMPILESHADERARBPROC)
+                                              getFunction("glCompileShaderARB");
+      arbAttachObject = (PFNGLATTACHOBJECTARBPROC)
+                                               getFunction("glAttachObjectARB");
+      arbLinkProgram = (PFNGLLINKPROGRAMARBPROC)
+                                                getFunction("glLinkProgramARB");
+      arbUseProgram = (PFNGLUSEPROGRAMOBJECTARBPROC)
+                                           getFunction("glUseProgramObjectARB");
+      arbGetHandle = (PFNGLGETHANDLEARBPROC)getFunction("glGetHandleARB");
+      arbGetUniformLocation = (PFNGLGETUNIFORMLOCATIONARBPROC)
+                                         getFunction("glGetUniformLocationARB");
+      arbGetObjectParameterfv = (PFNGLGETOBJECTPARAMETERFVARBPROC)
+                                       getFunction("glGetObjectParameterfvARB");
+      arbGetObjectParamenteriv = (PFNGLGETOBJECTPARAMETERIVARBPROC)
+                                       getFunction("glGetObjectParameterivARB");
+      arbUniform1f = (PFNGLUNIFORM1FARBPROC)getFunction("glUniform1fARB");
+      arbUniform2f = (PFNGLUNIFORM2FARBPROC)getFunction("glUniform2fARB");
+      arbUniform3f = (PFNGLUNIFORM1FARBPROC)getFunction("glUniform3fARB");
+   }
+   else
+   {
+      showWarning("GL_ARB_*_shader extension");
+   }
 }
 
 /***********************************************************************
@@ -136,7 +166,7 @@ bool extensions::hasShader()
            (arbAttachObject != NULL) &&
            (arbLinkProgram != NULL) &&
            (arbUseProgram != NULL) &&
-           (arbGetHandleObject != NULL) &&
+           (arbGetHandle != NULL) &&
            (arbGetUniformLocation != NULL) &&
            (arbGetObjectParameterfv != NULL) &&
            (arbGetObjectParamenteriv != NULL) &&
@@ -169,7 +199,7 @@ PFNGLCOMPILESHADERARBPROC extensions::arbCompileShader = NULL;
 PFNGLATTACHOBJECTARBPROC extensions::arbAttachObject = NULL;
 PFNGLLINKPROGRAMARBPROC extensions::arbLinkProgram = NULL;
 PFNGLUSEPROGRAMOBJECTARBPROC extensions::arbUseProgram = NULL;
-PFNGLGETHANDLEARBPROC extensions::arbGetHandleObject = NULL;
+PFNGLGETHANDLEARBPROC extensions::arbGetHandle = NULL;
 PFNGLGETUNIFORMLOCATIONARBPROC extensions::arbGetUniformLocation = NULL;
 PFNGLGETOBJECTPARAMETERFVARBPROC extensions::arbGetObjectParameterfv = NULL;
 PFNGLGETOBJECTPARAMETERIVARBPROC extensions::arbGetObjectParamenteriv = NULL;
