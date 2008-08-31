@@ -31,12 +31,14 @@ class extensions
       static PFNGLLINKPROGRAMARBPROC arbLinkProgram;
       static PFNGLUSEPROGRAMOBJECTARBPROC arbUseProgram;
       static PFNGLGETHANDLEARBPROC arbGetHandle;
+      static PFNGLGETSHADERIVPROC getShaderiv;
+      static PFNGLGETPROGRAMIVARBPROC arbGetProgramiv;
       static PFNGLGETUNIFORMLOCATIONARBPROC arbGetUniformLocation;
       static PFNGLGETOBJECTPARAMETERFVARBPROC arbGetObjectParameterfv;
       static PFNGLGETOBJECTPARAMETERIVARBPROC arbGetObjectParamenteriv;
       static PFNGLUNIFORM1FARBPROC arbUniform1f;
       static PFNGLUNIFORM2FARBPROC arbUniform2f;
-      static PFNGLUNIFORM1FARBPROC arbUniform3f;
+      static PFNGLUNIFORM3FARBPROC arbUniform3f;
 
 
       /*! Gets all Extended Functions that DNT uses. Usually call this after

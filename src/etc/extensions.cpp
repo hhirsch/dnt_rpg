@@ -115,6 +115,9 @@ void extensions::defineShader(string ext)
                                                 getFunction("glLinkProgramARB");
       arbUseProgram = (PFNGLUSEPROGRAMOBJECTARBPROC)
                                            getFunction("glUseProgramObjectARB");
+      getShaderiv = (PFNGLGETSHADERIVPROC)getFunction("glGetShaderiv"); 
+      arbGetProgramiv = (PFNGLGETPROGRAMIVARBPROC)
+                                               getFunction("glGetProgramivARB");
       arbGetHandle = (PFNGLGETHANDLEARBPROC)getFunction("glGetHandleARB");
       arbGetUniformLocation = (PFNGLGETUNIFORMLOCATIONARBPROC)
                                          getFunction("glGetUniformLocationARB");
@@ -124,7 +127,7 @@ void extensions::defineShader(string ext)
                                        getFunction("glGetObjectParameterivARB");
       arbUniform1f = (PFNGLUNIFORM1FARBPROC)getFunction("glUniform1fARB");
       arbUniform2f = (PFNGLUNIFORM2FARBPROC)getFunction("glUniform2fARB");
-      arbUniform3f = (PFNGLUNIFORM1FARBPROC)getFunction("glUniform3fARB");
+      arbUniform3f = (PFNGLUNIFORM3FARBPROC)getFunction("glUniform3fARB");
    }
    else
    {
@@ -167,6 +170,8 @@ bool extensions::hasShader()
            (arbLinkProgram != NULL) &&
            (arbUseProgram != NULL) &&
            (arbGetHandle != NULL) &&
+           (getShaderiv != NULL) &&
+           (arbGetProgramiv != NULL) &&
            (arbGetUniformLocation != NULL) &&
            (arbGetObjectParameterfv != NULL) &&
            (arbGetObjectParamenteriv != NULL) &&
@@ -200,10 +205,12 @@ PFNGLATTACHOBJECTARBPROC extensions::arbAttachObject = NULL;
 PFNGLLINKPROGRAMARBPROC extensions::arbLinkProgram = NULL;
 PFNGLUSEPROGRAMOBJECTARBPROC extensions::arbUseProgram = NULL;
 PFNGLGETHANDLEARBPROC extensions::arbGetHandle = NULL;
+PFNGLGETSHADERIVPROC extensions::getShaderiv = NULL;
+PFNGLGETPROGRAMIVARBPROC extensions::arbGetProgramiv = NULL;
 PFNGLGETUNIFORMLOCATIONARBPROC extensions::arbGetUniformLocation = NULL;
 PFNGLGETOBJECTPARAMETERFVARBPROC extensions::arbGetObjectParameterfv = NULL;
 PFNGLGETOBJECTPARAMETERIVARBPROC extensions::arbGetObjectParamenteriv = NULL;
 PFNGLUNIFORM1FARBPROC extensions::arbUniform1f = NULL;
 PFNGLUNIFORM2FARBPROC extensions::arbUniform2f = NULL;
-PFNGLUNIFORM1FARBPROC extensions::arbUniform3f = NULL;
+PFNGLUNIFORM3FARBPROC extensions::arbUniform3f = NULL;
 
