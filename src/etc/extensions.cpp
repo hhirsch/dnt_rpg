@@ -3,6 +3,22 @@
 using namespace std;
 #include "extensions.h"
 
+/***********************************************************************
+ *                         printOpenGLErrors                           *
+ ***********************************************************************/
+void printOpenGLErrors(string where)
+{
+   GLenum errorCode;
+   while( (errorCode = glGetError()) != GL_NO_ERROR)
+   {
+      cerr << "OpenGL Error: " << gluErrorString(errorCode);
+      if(!where.empty())
+      {
+         cerr << " at " << where;
+      }
+      cerr << endl;
+   }
+}
 
 /***********************************************************************
  *                        defineAllExtensions                          *
@@ -118,6 +134,10 @@ void extensions::defineShader(string ext)
       getShaderiv = (PFNGLGETSHADERIVPROC)getFunction("glGetShaderiv"); 
       arbGetProgramiv = (PFNGLGETPROGRAMIVARBPROC)
                                                getFunction("glGetProgramivARB");
+
+      arbGetInfoLog = (PFNGLGETINFOLOGARBPROC)getFunction("glGetInfoLogARB");
+      getProgramInfoLog = (PFNGLGETPROGRAMINFOLOGPROC)
+                                             getFunction("glGetProgramInfoLog");
       arbGetHandle = (PFNGLGETHANDLEARBPROC)getFunction("glGetHandleARB");
       arbGetUniformLocation = (PFNGLGETUNIFORMLOCATIONARBPROC)
                                          getFunction("glGetUniformLocationARB");
@@ -207,6 +227,8 @@ PFNGLUSEPROGRAMOBJECTARBPROC extensions::arbUseProgram = NULL;
 PFNGLGETHANDLEARBPROC extensions::arbGetHandle = NULL;
 PFNGLGETSHADERIVPROC extensions::getShaderiv = NULL;
 PFNGLGETPROGRAMIVARBPROC extensions::arbGetProgramiv = NULL;
+PFNGLGETINFOLOGARBPROC extensions::arbGetInfoLog = NULL;
+PFNGLGETPROGRAMINFOLOGPROC extensions::getProgramInfoLog = NULL;
 PFNGLGETUNIFORMLOCATIONARBPROC extensions::arbGetUniformLocation = NULL;
 PFNGLGETOBJECTPARAMETERFVARBPROC extensions::arbGetObjectParameterfv = NULL;
 PFNGLGETOBJECTPARAMETERIVARBPROC extensions::arbGetObjectParamenteriv = NULL;

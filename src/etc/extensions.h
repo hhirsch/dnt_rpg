@@ -4,6 +4,9 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 
+/*! Print all openGL errors on cache */
+void printOpenGLErrors(string where="");
+
 /*! The extensons class load, if avalaible, openGL extensions
  * functions used by DNT. */
 class extensions
@@ -32,6 +35,8 @@ class extensions
       static PFNGLUSEPROGRAMOBJECTARBPROC arbUseProgram;
       static PFNGLGETHANDLEARBPROC arbGetHandle;
       static PFNGLGETSHADERIVPROC getShaderiv;
+      static PFNGLGETINFOLOGARBPROC arbGetInfoLog;
+      static PFNGLGETPROGRAMINFOLOGPROC getProgramInfoLog;
       static PFNGLGETPROGRAMIVARBPROC arbGetProgramiv;
       static PFNGLGETUNIFORMLOCATIONARBPROC arbGetUniformLocation;
       static PFNGLGETOBJECTPARAMETERFVARBPROC arbGetObjectParameterfv;

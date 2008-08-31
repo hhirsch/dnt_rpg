@@ -61,6 +61,11 @@ class shader
        * \param variableName -> uniform variable name */
       GLint getUniformVariable(string variableName);
 
+      /*! Print the info log to the stdout
+       * \param obj -> object to print info log from
+       * \param prog -> if true obj is a program, if false is shader */
+      void printInfoLog(GLuint obj, bool prog=false);
+
       GLuint vertex;    /**< The vertex shader Identifier */
       GLuint fragment;  /**< The fragment shader Identifier */
       GLuint program;   /**< The program Identifier */

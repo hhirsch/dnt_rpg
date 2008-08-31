@@ -24,6 +24,30 @@ shader::~shader()
 }
 
 /***********************************************************************
+ *                       printShaderInfoLog                            *
+ ***********************************************************************/
+void shader::printInfoLog(GLuint obj, bool prog)
+{
+   GLchar infoLog[1024];
+
+   if(ext.hasShader())
+   {
+      if(prog)
+      {
+         ext.getProgramInfoLog(obj, 1024, NULL, infoLog);
+         printOpenGLErrors("getProgramInfoLog");
+      }
+      else
+      {
+         ext.arbGetInfoLog(obj, 1024, NULL, infoLog); 
+         printOpenGLErrors("arbGetInfoLog");
+      }
+
+      cout << "infoLog: " << infoLog << endl;
+   }
+}
+
+/***********************************************************************
  *                              clear                                  *
  ***********************************************************************/
 void shader::clear()
@@ -86,7 +110,9 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
 
       /* Compile Vertex Shader */
       ext.arbCompileShader(vertex);
-      ext.getShaderiv(vertex, GL_COMPILE_STATUS, &vertexCompiled);
+      printOpenGLErrors("arbCompileShader(vertex)");
+      ext.getShaderiv(vertex, GL_OBJECT_COMPILE_STATUS_ARB, &vertexCompiled);
+      printInfoLog(vertex);
       if(!vertexCompiled)
       {
          cout << "ERROR: Can't compile vertex shader: " 
@@ -96,7 +122,10 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
 
       /* Compile Fragment shader */
       ext.arbCompileShader(fragment);
-      ext.getShaderiv(fragment, GL_COMPILE_STATUS, &fragmentCompiled);
+      printOpenGLErrors("arbCompileShader(fragment)");
+      ext.getShaderiv(fragment, GL_OBJECT_COMPILE_STATUS_ARB, 
+                      &fragmentCompiled);
+      printInfoLog(fragment);
       if(!fragmentCompiled)
       {
          cout << "ERROR: Can't compile fragment shader: " 
@@ -106,19 +135,21 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
 
       /* Attach shaders to the program */
       ext.arbAttachObject(program, vertex);
-      ext.arbAttachObject(program, vertex);
+      ext.arbAttachObject(program, fragment);
 
       /* Finnaly, link them */
       ext.arbLinkProgram(program);
-      ext.arbGetProgramiv(program, GL_LINK_STATUS, &linked);
+      printOpenGLErrors("arbLinkProgram");
+      linked = 1;
+      //ext.arbGetProgramiv(program, GL_OBJECT_LINK_STATUS_ARB, &linked);
+      printOpenGLErrors("arbGetProgramiv");
+      printInfoLog(program, true);
       if(!linked)
       {
          cerr << "ERROR: Can't link shaders: " << vShaderFileName 
             << " , " << fShaderFileName << endl;
          return(false);
       }
-
-      ext.arbUseProgram(program);
 
       loaded = true;
 
