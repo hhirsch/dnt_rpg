@@ -691,12 +691,12 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 
    /* Next, define and draw all textures, with multitexture.
     * \FIXME -> when no multitexture is avaible! */
-   if(ext.ARBActiveTexture != NULL)
+   if(ext.hasMultiTexture())
    { 
-      ext.ARBClientActiveTexture(GL_TEXTURE0_ARB);
+      ext.arbClientActiveTexture(GL_TEXTURE0_ARB);
       glTexCoordPointer(2, GL_FLOAT, 0, uvAlphaBuffer);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-      ext.ARBClientActiveTexture(GL_TEXTURE1_ARB);
+      ext.arbClientActiveTexture(GL_TEXTURE1_ARB);
       glTexCoordPointer(2, GL_FLOAT, 0, uvBuffer);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
    }
@@ -705,7 +705,7 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    while(aux < numTextures)
    {
       /* Only Draw texture with floor count > 0 */
-      if( (ext.ARBActiveTexture != NULL) && (tex->count > 0))
+      if( (ext.hasMultiTexture()) && (tex->count > 0))
       {
          glEnable(GL_DEPTH_TEST);
          glDepthFunc(GL_LEQUAL);
@@ -715,7 +715,7 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
          glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
          /* Bind the Alpha Texture */
-         ext.ARBActiveTexture(GL_TEXTURE0);
+         ext.arbActiveTexture(GL_TEXTURE0);
          glBindTexture(GL_TEXTURE_2D, tex->alphaTexture);
          glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
          glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_ALPHA_ARB, GL_TEXTURE0);
@@ -723,7 +723,7 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
          glEnable(GL_TEXTURE_2D);
 
          /* Bind the Texture */ 
-         ext.ARBActiveTexture(GL_TEXTURE1);
+         ext.arbActiveTexture(GL_TEXTURE1);
          glBindTexture(GL_TEXTURE_2D, tex->index);
          glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
          glTexEnvf(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
@@ -747,10 +747,10 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
          glNormal3i(0,1,0);
          glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
          
-         ext.ARBActiveTexture(GL_TEXTURE1_ARB);
+         ext.arbActiveTexture(GL_TEXTURE1_ARB);
       	glDisable(GL_TEXTURE_2D);
 
-      	ext.ARBActiveTexture(GL_TEXTURE0_ARB);
+      	ext.arbActiveTexture(GL_TEXTURE0_ARB);
       	glDisable(GL_TEXTURE_2D);
          glBindTexture(GL_TEXTURE_2D, tex->alphaTexture);
          glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
@@ -767,11 +767,11 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    }
 
    /* So disable the multitexture state. */
-   if(ext.ARBActiveTexture != NULL)
+   if(ext.hasMultiTexture())
    { 
-      ext.ARBClientActiveTexture(GL_TEXTURE1_ARB);
+      ext.arbClientActiveTexture(GL_TEXTURE1_ARB);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-      ext.ARBClientActiveTexture(GL_TEXTURE0_ARB);
+      ext.arbClientActiveTexture(GL_TEXTURE0_ARB);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
    }
 

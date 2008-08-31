@@ -981,8 +981,7 @@ bool options::getAvaibleParticles()
 {
    extensions ext;
 
-   return( (ext.PointParameterf != NULL) && 
-           (ext.PointParameterfv != NULL) );
+   return( ext.hasPointTexture() );
 }
 
 /****************************************************************

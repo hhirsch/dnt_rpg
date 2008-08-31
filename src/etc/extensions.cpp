@@ -1,86 +1,179 @@
-#include <stdio.h>
-#include <string.h>
+#include <iostream>
+#include <string>
+using namespace std;
 #include "extensions.h"
 
 
+/***********************************************************************
+ *                        defineAllExtensions                          *
+ ***********************************************************************/
 void extensions::defineAllExtensions()
 {
-   /* Point Functions */
-   PointParameterf = NULL;
-   PointParameterfv = NULL;
+   /* Get Extension String */
+   string ext = (char*)glGetString( GL_EXTENSIONS );
+   
+   /* Get point texture functions */
+   definePointTexture(ext);
 
-   char *ext = (char*)glGetString( GL_EXTENSIONS );
+   /* Multi Texture */
+   defineMultiTexture(ext);
+  
+   /* Shaders */
+   defineShader(ext);
 
-   if(strstr( ext, "GL_ARB_point_sprite" ) != NULL)
+}
+
+/***********************************************************************
+ *                             showWarning                             *
+ ***********************************************************************/
+void extensions::showWarning(string functionName)
+{
+   cerr << "Warning: No " << functionName << " found!" << endl
+        << "DNT will be in worse quality =^( " << endl;
+}
+
+/***********************************************************************
+ *                          definePointTexture                         *
+ ***********************************************************************/
+void extensions::definePointTexture(string ext)
+{
+   if( ext.find("GL_ARB_point_sprite",0) != string::npos)
    {
-      PointParameterf = (PFNGLPOINTPARAMETERFARBPROC)
+      arbPointParameterf = (PFNGLPOINTPARAMETERFARBPROC)
                                   SDL_GL_GetProcAddress("glPointParameterfARB");
-      PointParameterfv = (PFNGLPOINTPARAMETERFVARBPROC) 
+      arbPointParameterfv = (PFNGLPOINTPARAMETERFVARBPROC) 
                                  SDL_GL_GetProcAddress("glPointParameterfvARB");
 
-      if( (PointParameterfv == NULL) || (PointParameterf == NULL) )
+      if( (arbPointParameterfv == NULL) || (arbPointParameterf == NULL) )
       {
-         printf("Warn: Not found glPointParameterfARB: "
-                "DNT will be in worse quality :^( \n");
+         showWarning("glPointParameterfARB");
       }
    }
    else
    {
-      printf("Warn: Not Found GL_ARB_point_sprite extension. "
-             "DNT will be in worse quality =^( .\n");
+      showWarning("GL_ARB_point_sprite extension");
    }
-
-   /* Multi Texture */
-   ARBActiveTexture = NULL;
-   ARBMultiTexCoord2d = NULL;
-   ARBMultiTexCoord2f = NULL;
-   ARBMultiTexCoord2dv = NULL;
-   ARBMultiTexCoord2fv = NULL;
-
-   if(strstr( ext, "GL_ARB_multitexture") != NULL)
-   {
-      ARBActiveTexture = (PFNGLACTIVETEXTUREPROC) 
-                                  SDL_GL_GetProcAddress("glActiveTextureARB");
-      if(!ARBActiveTexture)
-      {
-         printf("Not Found glActiveTextureARB. "
-                "DNT will be in worse quality :^( .\n");
-      }
-      ARBClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREPROC) 
-                              SDL_GL_GetProcAddress("glClientActiveTextureARB");
-      if(!ARBClientActiveTexture)
-      {
-         printf("Not Found glClientActiveTextureARB. "
-                "DNT will be in worse quality.\n");
-      }
-      ARBMultiTexCoord2d = (PFNGLMULTITEXCOORD2DPROC)
-                                SDL_GL_GetProcAddress("glMultiTexCoord2dARB");
-      ARBMultiTexCoord2f = (PFNGLMULTITEXCOORD2FPROC)
-                                SDL_GL_GetProcAddress("glMultiTexCoord2fARB");
-      ARBMultiTexCoord2dv = (PFNGLMULTITEXCOORD2DVPROC)
-                                SDL_GL_GetProcAddress("glMultiTexCoord2dvARB");
-      ARBMultiTexCoord2fv = (PFNGLMULTITEXCOORD2FVPROC)
-                                SDL_GL_GetProcAddress("glMultiTexCoord2fvARB");
-      if( (!ARBMultiTexCoord2d) || (!ARBMultiTexCoord2f) || 
-          (!ARBMultiTexCoord2dv) || (!ARBMultiTexCoord2fv) )
-      {
-         printf("Not found glMultiTextCoord*ARB. "
-                "DNT will be in worse quality!\n");
-      }
-   }
-
 }
 
 
+/***********************************************************************
+ *                         defineMultiTexture                          *
+ ***********************************************************************/
+void extensions::defineMultiTexture(string ext)
+{
+   if(ext.find("GL_ARB_multitexture") != string::npos)
+   {
+      arbActiveTexture = (PFNGLACTIVETEXTUREPROC) 
+                                  SDL_GL_GetProcAddress("glActiveTextureARB");
+      if(!arbActiveTexture)
+      {
+         showWarning("glActiveTextureARB");
+      }
+      arbClientActiveTexture = (PFNGLCLIENTACTIVETEXTUREPROC) 
+                              SDL_GL_GetProcAddress("glClientActiveTextureARB");
+      if(!arbClientActiveTexture)
+      {
+         showWarning("glClientActiveTextureARB");
+      }
+      arbMultiTexCoord2d = (PFNGLMULTITEXCOORD2DPROC)
+                                SDL_GL_GetProcAddress("glMultiTexCoord2dARB");
+      arbMultiTexCoord2f = (PFNGLMULTITEXCOORD2FPROC)
+                                SDL_GL_GetProcAddress("glMultiTexCoord2fARB");
+      arbMultiTexCoord2dv = (PFNGLMULTITEXCOORD2DVPROC)
+                                SDL_GL_GetProcAddress("glMultiTexCoord2dvARB");
+      arbMultiTexCoord2fv = (PFNGLMULTITEXCOORD2FVPROC)
+                                SDL_GL_GetProcAddress("glMultiTexCoord2fvARB");
+      if( (!arbMultiTexCoord2d) || (!arbMultiTexCoord2f) || 
+          (!arbMultiTexCoord2dv) || (!arbMultiTexCoord2fv) )
+      {
+         showWarning("glMultiTextCoord*ARB");
+      }
+   }
+   else
+   {
+      showWarning("GL_ARB_multitexture extension");
+   }
+}
+
+/***********************************************************************
+ *                            defineShader                             *
+ ***********************************************************************/
+void extensions::defineShader(string ext)
+{
+}
+
+/***********************************************************************
+ *                           hasPointTexture                           *
+ ***********************************************************************/
+bool extensions::hasPointTexture()
+{
+   return( (arbPointParameterf != NULL) && (arbPointParameterfv != NULL));
+}
+
+/***********************************************************************
+ *                           hastMultiTexture                          *
+ ***********************************************************************/
+bool extensions::hasMultiTexture()
+{
+   return( (arbActiveTexture != NULL) &&
+           (arbClientActiveTexture != NULL) &&
+           (arbMultiTexCoord2f != NULL) && 
+           (arbMultiTexCoord2fv != NULL) && 
+           (arbMultiTexCoord2d != NULL) &&
+           (arbMultiTexCoord2dv != NULL) );
+}
+
+/***********************************************************************
+ *                             hasShader                               *
+ ***********************************************************************/
+bool extensions::hasShader()
+{
+   return( (arbCreateShaderObject != NULL) &&
+           (arbCreateProgramObject != NULL) &&
+           (arbDeleteObject != NULL) &&
+           (arbShaderSourceObject != NULL) &&
+           (arbCompileShader != NULL) &&
+           (arbAttachObject != NULL) &&
+           (arbLinkProgram != NULL) &&
+           (arbUseProgram != NULL) &&
+           (arbGetHandleObject != NULL) &&
+           (arbGetUniformLocation != NULL) &&
+           (arbGetObjectParameterfv != NULL) &&
+           (arbGetObjectParamenteriv != NULL) &&
+           (arbUniform1f != NULL) &&
+           (arbUniform2f != NULL) &&
+           (arbUniform3f != NULL) );
+}
+
+/***********************************************************************
+ *                            Static Members                           *
+ ***********************************************************************/
 /* Texture per points functions */
-PFNGLPOINTPARAMETERFARBPROC extensions::PointParameterf;   
-PFNGLPOINTPARAMETERFVARBPROC extensions::PointParameterfv;
+PFNGLPOINTPARAMETERFARBPROC extensions::arbPointParameterf = NULL;   
+PFNGLPOINTPARAMETERFVARBPROC extensions::arbPointParameterfv = NULL;
 
 /* Multi Textures Functions */
-PFNGLACTIVETEXTUREPROC extensions::ARBActiveTexture;
-PFNGLCLIENTACTIVETEXTUREPROC extensions::ARBClientActiveTexture;
-PFNGLMULTITEXCOORD2FPROC extensions::ARBMultiTexCoord2f;
-PFNGLMULTITEXCOORD2FVPROC extensions::ARBMultiTexCoord2fv;
-PFNGLMULTITEXCOORD2DPROC extensions::ARBMultiTexCoord2d;
-PFNGLMULTITEXCOORD2DVPROC extensions::ARBMultiTexCoord2dv;
+PFNGLACTIVETEXTUREPROC extensions::arbActiveTexture = NULL;
+PFNGLCLIENTACTIVETEXTUREPROC extensions::arbClientActiveTexture = NULL;
+PFNGLMULTITEXCOORD2FPROC extensions::arbMultiTexCoord2f = NULL;
+PFNGLMULTITEXCOORD2FVPROC extensions::arbMultiTexCoord2fv = NULL;
+PFNGLMULTITEXCOORD2DPROC extensions::arbMultiTexCoord2d = NULL;
+PFNGLMULTITEXCOORD2DVPROC extensions::arbMultiTexCoord2dv = NULL;
+
+/* Shader Functions */
+PFNGLCREATESHADEROBJECTARBPROC extensions::arbCreateShaderObject = NULL;
+PFNGLCREATEPROGRAMOBJECTARBPROC extensions::arbCreateProgramObject = NULL;
+PFNGLDELETEOBJECTARBPROC extensions::arbDeleteObject = NULL;
+PFNGLSHADERSOURCEARBPROC extensions::arbShaderSourceObject = NULL;
+PFNGLCOMPILESHADERARBPROC extensions::arbCompileShader = NULL;
+PFNGLATTACHOBJECTARBPROC extensions::arbAttachObject = NULL;
+PFNGLLINKPROGRAMARBPROC extensions::arbLinkProgram = NULL;
+PFNGLUSEPROGRAMOBJECTARBPROC extensions::arbUseProgram = NULL;
+PFNGLGETHANDLEARBPROC extensions::arbGetHandleObject = NULL;
+PFNGLGETUNIFORMLOCATIONARBPROC extensions::arbGetUniformLocation = NULL;
+PFNGLGETOBJECTPARAMETERFVARBPROC extensions::arbGetObjectParameterfv = NULL;
+PFNGLGETOBJECTPARAMETERIVARBPROC extensions::arbGetObjectParamenteriv = NULL;
+PFNGLUNIFORM1FARBPROC extensions::arbUniform1f = NULL;
+PFNGLUNIFORM2FARBPROC extensions::arbUniform2f = NULL;
+PFNGLUNIFORM1FARBPROC extensions::arbUniform3f = NULL;
 

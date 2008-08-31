@@ -52,16 +52,16 @@ void part1::InitRender()
   float MaxPointSize = 0;
   float quadratic[] =  { 0.01f, 0.01f, 0.0f };
 
-  if( (ext.PointParameterf != NULL) && (ext.PointParameterfv != NULL) )
+  if( ext.hasPointTexture() )
   {
      glEnable(GL_TEXTURE_2D);
      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
      glEnable(GL_BLEND);
      glGetFloatv( GL_POINT_SIZE_MAX_ARB, &MaxPointSize );
-     ext.PointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
-     ext.PointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
-     ext.PointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
+     ext.arbPointParameterfv( GL_POINT_DISTANCE_ATTENUATION_ARB, quadratic );
+     ext.arbPointParameterf( GL_POINT_SIZE_MIN_ARB, 2.0f );
+     ext.arbPointParameterf( GL_POINT_SIZE_MAX_ARB, MaxPointSize);
    
      glPointSize(32);
 
@@ -88,7 +88,7 @@ void part1::EndRender()
    glDepthMask(GL_TRUE);
    glBlendFunc(GL_SRC_ALPHA,GL_SRC_ALPHA);
    glDisable(GL_TEXTURE_2D);
-   if( (ext.PointParameterf != NULL) && (ext.PointParameterfv != NULL) )
+   if( ext.hasPointTexture() )
    {
       glDisable(GL_POINT_SPRITE_ARB);
    }
