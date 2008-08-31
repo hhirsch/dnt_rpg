@@ -23,6 +23,8 @@
 #include "../particle/wave.h"
 #include "../sound/sound.h"
 #include "../ia/iascript.h"
+#include "../etc/shader.h"
+
 
 #include "alignwindow.h"
 #include "aspectwindow.h"
