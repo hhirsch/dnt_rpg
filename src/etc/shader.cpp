@@ -210,11 +210,12 @@ string shader::parseFile(string fileName)
    while(!file.eof())
    {
       getline(file, buffer);
-      res += buffer;
+      res += buffer + "\n";
    }
 
    /* Close it, before return */
    file.close();
+   
    return(res);
 }
 
