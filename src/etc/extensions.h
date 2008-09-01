@@ -34,10 +34,11 @@ class extensions
       static PFNGLLINKPROGRAMARBPROC arbLinkProgram;
       static PFNGLUSEPROGRAMOBJECTARBPROC arbUseProgram;
       static PFNGLGETHANDLEARBPROC arbGetHandle;
-      static PFNGLGETSHADERIVPROC getShaderiv;
+      static PFNGLGETOBJECTPARAMETERIVARBPROC arbGetObjectParameteriv;
+      //static PFNGLGETSHADERIVPROC getShaderiv;
       static PFNGLGETINFOLOGARBPROC arbGetInfoLog;
-      static PFNGLGETPROGRAMINFOLOGPROC getProgramInfoLog;
-      static PFNGLGETPROGRAMIVARBPROC arbGetProgramiv;
+      //static PFNGLGETPROGRAMINFOLOGPROC getProgramInfoLog;
+      //static PFNGLGETPROGRAMIVARBPROC arbGetProgramiv;
       static PFNGLGETUNIFORMLOCATIONARBPROC arbGetUniformLocation;
       static PFNGLGETOBJECTPARAMETERFVARBPROC arbGetObjectParameterfv;
       static PFNGLGETOBJECTPARAMETERIVARBPROC arbGetObjectParamenteriv;

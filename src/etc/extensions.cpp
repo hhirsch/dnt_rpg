@@ -131,13 +131,9 @@ void extensions::defineShader(string ext)
                                                 getFunction("glLinkProgramARB");
       arbUseProgram = (PFNGLUSEPROGRAMOBJECTARBPROC)
                                            getFunction("glUseProgramObjectARB");
-      getShaderiv = (PFNGLGETSHADERIVPROC)getFunction("glGetShaderiv"); 
-      arbGetProgramiv = (PFNGLGETPROGRAMIVARBPROC)
-                                               getFunction("glGetProgramiv");
-
+      arbGetObjectParameteriv = (PFNGLGETOBJECTPARAMETERIVARBPROC)
+                                       getFunction("glGetObjectParameterivARB");
       arbGetInfoLog = (PFNGLGETINFOLOGARBPROC)getFunction("glGetInfoLogARB");
-      getProgramInfoLog = (PFNGLGETPROGRAMINFOLOGPROC)
-                                             getFunction("glGetProgramInfoLog");
       arbGetHandle = (PFNGLGETHANDLEARBPROC)getFunction("glGetHandleARB");
       arbGetUniformLocation = (PFNGLGETUNIFORMLOCATIONARBPROC)
                                          getFunction("glGetUniformLocationARB");
@@ -190,8 +186,7 @@ bool extensions::hasShader()
            (arbLinkProgram != NULL) &&
            (arbUseProgram != NULL) &&
            (arbGetHandle != NULL) &&
-           (getShaderiv != NULL) &&
-           (arbGetProgramiv != NULL) &&
+           (arbGetObjectParamenteriv != NULL) &&
            (arbGetUniformLocation != NULL) &&
            (arbGetObjectParameterfv != NULL) &&
            (arbGetObjectParamenteriv != NULL) &&
@@ -225,10 +220,11 @@ PFNGLATTACHOBJECTARBPROC extensions::arbAttachObject = NULL;
 PFNGLLINKPROGRAMARBPROC extensions::arbLinkProgram = NULL;
 PFNGLUSEPROGRAMOBJECTARBPROC extensions::arbUseProgram = NULL;
 PFNGLGETHANDLEARBPROC extensions::arbGetHandle = NULL;
-PFNGLGETSHADERIVPROC extensions::getShaderiv = NULL;
-PFNGLGETPROGRAMIVARBPROC extensions::arbGetProgramiv = NULL;
+//PFNGLGETSHADERIVPROC extensions::getShaderiv = NULL;
+//PFNGLGETPROGRAMIVARBPROC extensions::arbGetProgramiv = NULL;
+PFNGLGETOBJECTPARAMETERIVARBPROC extensions::arbGetObjectParameteriv = NULL;
 PFNGLGETINFOLOGARBPROC extensions::arbGetInfoLog = NULL;
-PFNGLGETPROGRAMINFOLOGPROC extensions::getProgramInfoLog = NULL;
+//PFNGLGETPROGRAMINFOLOGPROC extensions::getProgramInfoLog = NULL;
 PFNGLGETUNIFORMLOCATIONARBPROC extensions::arbGetUniformLocation = NULL;
 PFNGLGETOBJECTPARAMETERFVARBPROC extensions::arbGetObjectParameterfv = NULL;
 PFNGLGETOBJECTPARAMETERIVARBPROC extensions::arbGetObjectParamenteriv = NULL;

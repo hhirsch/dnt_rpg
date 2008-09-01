@@ -111,20 +111,21 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       /* Compile Vertex Shader */
       ext.arbCompileShader(vertex);
       printOpenGLErrors("arbCompileShader(vertex)");
-      ext.getShaderiv(vertex, GL_OBJECT_COMPILE_STATUS_ARB, &vertexCompiled);
+      ext.arbGetObjectParameteriv(vertex, GL_OBJECT_COMPILE_STATUS_ARB, 
+                                  &vertexCompiled);
       printInfoLog(vertex);
       if(!vertexCompiled)
       {
          cout << "ERROR: Can't compile vertex shader: " 
-            << vShaderFileName << endl;
+              << vShaderFileName << endl;
          return(false);
       }
 
       /* Compile Fragment shader */
       ext.arbCompileShader(fragment);
       printOpenGLErrors("arbCompileShader(fragment)");
-      ext.getShaderiv(fragment, GL_OBJECT_COMPILE_STATUS_ARB, 
-                      &fragmentCompiled);
+      ext.arbGetObjectParameteriv(fragment, GL_OBJECT_COMPILE_STATUS_ARB, 
+                                  &fragmentCompiled);
       printInfoLog(fragment);
       if(!fragmentCompiled)
       {
@@ -140,7 +141,7 @@ bool shader::load(string vShaderFileName, string fShaderFileName)
       /* Finnaly, link them */
       ext.arbLinkProgram(program);
       printOpenGLErrors("arbLinkProgram");
-      ext.arbGetProgramiv(program, GL_LINK_STATUS, &linked);
+      ext.arbGetObjectParameteriv(program, GL_OBJECT_LINK_STATUS_ARB, &linked);
       printOpenGLErrors("arbGetProgramiv");
       printInfoLog(program, true);
       if(!linked)

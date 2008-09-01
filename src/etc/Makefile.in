@@ -51,7 +51,7 @@ overlaps.o: overlaps.cpp overlaps.h
 	@$(CC) $(CFLAGS) overlaps.cpp -o overlaps.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-shader.o: shader.cpp shader.h
+shader.o: shader.cpp shader.h dirs.h extensions.h
 	@printf "Making shader.o... "
 	@$(CC) $(CFLAGS) shader.cpp -o shader.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
