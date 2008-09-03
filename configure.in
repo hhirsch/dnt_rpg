@@ -1,12 +1,12 @@
 #AutoConf for DccNiTghtmare
 
 AC_PREREQ(2.61)
-AC_INIT("DccNiTghmare", "0.2", "http://sourceforge.net/projects/dccnitghtmare")
+AC_INIT("DccNiTghmare", "0.3", "http://sourceforge.net/projects/dccnitghtmare")
 #AC_CONFIG_SRCDIR([src/])
 AC_CONFIG_HEADER([src/config.h])
 
 PACKAGE=dccnitghtmare
-VERSION=
+VERSION=0.3
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 AC_SUBST(PACKAGE)
