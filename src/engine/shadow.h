@@ -37,20 +37,12 @@ class shadow
       /*! Save the shadow map to the texture */
       void saveShadowMap();
 
-      void beginShadowMap();
-      void endShadowMap();
-
    private:
       bool avaible;   /**< Flag if the shadow is avaible or not */
       bool enable;    /**< Enable the shadows or not */
 
-      void mulMatrix(GLfloat a[16], GLfloat b[16], GLfloat result[16]);
-
       GLuint shadowMapTexture;  /**< The ShadowMap Texture */
 
-      GLfloat lightProjectionMatrix[16], /**< Light Projection */
-              lightViewMatrix[16];       /**< Light ModelView */
-      GLfloat biasMatrix[16];            /**< The Bias Matrix */
 };
 
 
