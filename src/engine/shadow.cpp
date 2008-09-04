@@ -16,6 +16,10 @@ shadow::shadow()
  *******************************************************************/
 shadow::~shadow()
 {
+   if(avaible)
+   {
+      glDeleteTextures(1, &shadowMapTexture);
+   }
 }
 
 /*******************************************************************
@@ -43,27 +47,17 @@ void shadow::init()
  *******************************************************************/
 void shadow::defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ)
 {
-#if 0
    if(avaible)
    {
-      /*glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(lightProjectionMatrix);
-
-      glMatrixMode(GL_MODELVIEW);
-      glLoadMatrixf(lightViewMatrix);*/
+      /* Set the view to the light position */
+      glLoadIdentity();
+      gluPerspective(45.0f, 1.0f, 2.0f, OUTDOOR_FARVIEW);
 
       glLoadIdentity();
-         gluPerspective(45.0f, 1.0f, 2.0f, FARVIEW);
-         glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
-
-      glLoadIdentity();
-         gluLookAt(pX, pY, pZ,
-                   0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-         glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
+      gluLookAt(pX, pY, pZ, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
       glViewport(0, 0, SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
    }
-#endif
 }
 
 /*******************************************************************
@@ -71,7 +65,6 @@ void shadow::defineLightView(GLfloat pX, GLfloat pY, GLfloat pZ)
  *******************************************************************/
 void shadow::defineCameraView(camera& cam, GLdouble proj[16],GLdouble modl[16])
 {
-#if 0
    if(avaible)
    {
       glClear(GL_DEPTH_BUFFER_BIT);
@@ -83,7 +76,6 @@ void shadow::defineCameraView(camera& cam, GLdouble proj[16],GLdouble modl[16])
 
       glViewport(0, 0, SCREEN_X, SCREEN_Y);
    }
-#endif
 }
 
 /*******************************************************************
@@ -102,6 +94,9 @@ void shadow::setEnable(bool en)
    enable = ( (en) && (avaible));
 }
 
+/*******************************************************************
+ *                         saveShadorMap                           *
+ *******************************************************************/
 void shadow::saveShadowMap()
 {
    glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
