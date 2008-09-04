@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-08-06 10:15-0300\n"
+"POT-Creation-Date: 2008-09-04 10:49-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -47,24 +47,24 @@ msgstr ""
 msgid "Hit for %d points."
 msgstr "Хит %d очков!"
 
-#: src/classes/feats.cpp:294 src/classes/feats.cpp:297
+#: src/classes/feats.cpp:289 src/classes/feats.cpp:292
 msgid "Critical Heal!"
 msgstr ""
 
-#: src/classes/feats.cpp:302 src/classes/feats.cpp:306
+#: src/classes/feats.cpp:297 src/classes/feats.cpp:301
 msgid "Critical Hit!"
 msgstr "Критический хит!"
 
-#: src/classes/feats.cpp:346
+#: src/classes/feats.cpp:341
 msgid "Not enought points to use!"
 msgstr "Недостаточно очков для использования!"
 
-#: src/classes/mission.cpp:196 src/engine/dialog.cpp:653
+#: src/classes/mission.cpp:198 src/engine/dialog.cpp:653
 #, c-format
 msgid "Mission Completed: %d XP!"
 msgstr "Миссия завершена: %d XP!"
 
-#: src/classes/mission.cpp:209
+#: src/classes/mission.cpp:211
 msgid "Mission Failure!"
 msgstr ""
 
@@ -278,35 +278,39 @@ msgstr ""
 msgid "Size Modifier"
 msgstr ""
 
-#: src/engine/charwindow.cpp:199
+#: src/engine/charwindow.cpp:198
+msgid "Level Up"
+msgstr ""
+
+#: src/engine/charwindow.cpp:204
 msgid "Feats"
 msgstr ""
 
-#: src/engine/charwindow.cpp:203 src/engine/skillwindow.cpp:58
+#: src/engine/charwindow.cpp:208 src/engine/skillwindow.cpp:58
 msgid "Skills"
 msgstr "Скиллы"
 
-#: src/engine/charwindow.cpp:207 src/gui/window.cpp:170
+#: src/engine/charwindow.cpp:212 src/gui/window.cpp:170
 msgid "Close"
 msgstr ""
 
-#: src/engine/charwindow.cpp:265
+#: src/engine/charwindow.cpp:270
 msgid "Main Weapon"
 msgstr ""
 
-#: src/engine/charwindow.cpp:269
+#: src/engine/charwindow.cpp:274
 msgid "Secondary Weapon"
 msgstr ""
 
-#: src/engine/charwindow.cpp:273
+#: src/engine/charwindow.cpp:278
 msgid "Weapon"
 msgstr ""
 
-#: src/engine/charwindow.cpp:285
+#: src/engine/charwindow.cpp:290
 msgid "Unarmed"
 msgstr ""
 
-#: src/engine/charwindow.cpp:291
+#: src/engine/charwindow.cpp:296
 msgid "Not Applicable"
 msgstr ""
 
@@ -367,42 +371,47 @@ msgstr "Нет умений."
 msgid "Can't load mouse cursor: %s\n"
 msgstr ""
 
-#: src/engine/dccnit.cpp:354
+#: src/engine/dccnit.cpp:391
+#, c-format
+msgid "Saving Current Map Modifications"
+msgstr ""
+
+#: src/engine/dccnit.cpp:434
 #, c-format
 msgid "Loading Map: %s"
 msgstr "Загрузка карты: %s"
 
-#: src/engine/dccnit.cpp:438
+#: src/engine/dccnit.cpp:490
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
 msgstr "Ох, не могу загрузить файл NPC: %s.\n"
 
-#: src/engine/dccnit.cpp:453
+#: src/engine/dccnit.cpp:505
 #, c-format
 msgid "Loading NPC: %s"
 msgstr "Загрузка NPC: %s"
 
-#: src/engine/dccnit.cpp:478
+#: src/engine/dccnit.cpp:530
 msgid "Loading Character"
 msgstr "Загрузка характера"
 
-#: src/engine/dccnit.cpp:484
+#: src/engine/dccnit.cpp:536
 msgid "Putting GUI on Screen"
 msgstr "Помещение GUI на экран"
 
-#: src/engine/dccnit.cpp:529
+#: src/engine/dccnit.cpp:581
 msgid "Loading Particles"
 msgstr "Загрузка частиц"
 
-#: src/engine/dccnit.cpp:559
+#: src/engine/dccnit.cpp:611
 msgid "Loading Changes..."
 msgstr "Загрузка изменений..."
 
-#: src/engine/dccnit.cpp:579
+#: src/engine/dccnit.cpp:632
 msgid "Done!"
 msgstr "Готово!"
 
-#: src/engine/dccnit.cpp:670
+#: src/engine/dccnit.cpp:724
 msgid ""
 "DccNiTghtmare is developed under Public Domain: Feel free to use its source "
 "code and data the way you want (or to blame us the same way). DccNiTghtmare "
@@ -410,45 +419,45 @@ msgid ""
 "OpenGL, SDL, SDL_image, SDL_ttf, libVorbis."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1213
+#: src/engine/dccnit.cpp:1267
 msgid "Too far away for the action!"
 msgstr "Слишком далеко для действия!"
 
-#: src/engine/dccnit.cpp:1250
+#: src/engine/dccnit.cpp:1305
 msgid "No NPCs in the area."
 msgstr "Нет NPC'ов на арене"
 
-#: src/engine/dccnit.cpp:1306
+#: src/engine/dccnit.cpp:1361
 msgid "Surprise Attack Turn."
 msgstr "Неожиданное нападение."
 
-#: src/engine/dccnit.cpp:1323
+#: src/engine/dccnit.cpp:1378
 msgid "No enemies in the area."
 msgstr ""
 
-#: src/engine/dccnit.cpp:1501 src/engine/dccnit.cpp:1921
+#: src/engine/dccnit.cpp:1557 src/engine/dccnit.cpp:1978
 msgid "Nothing"
 msgstr "Ничего"
 
-#: src/engine/dccnit.cpp:1671
+#: src/engine/dccnit.cpp:1727
 #, c-format
 msgid "%s taken."
 msgstr "%s взят."
 
-#: src/engine/dccnit.cpp:1693
+#: src/engine/dccnit.cpp:1749
 msgid "Inventory is full!"
 msgstr ""
 
-#: src/engine/dccnit.cpp:1727
+#: src/engine/dccnit.cpp:1783
 msgid "Door"
 msgstr "Дверь"
 
-#: src/engine/dccnit.cpp:1854
+#: src/engine/dccnit.cpp:1911
 #, c-format
 msgid "%s attacks %s"
 msgstr "%s атаковал %s"
 
-#: src/engine/dccnit.cpp:3303
+#: src/engine/dccnit.cpp:3359
 msgid "Exit Battle Mode"
 msgstr "Покинуть режим сражения"
 
@@ -525,27 +534,27 @@ msgstr "Не найдено в диалоге: %d\n"
 msgid "Dialog"
 msgstr "Диалог"
 
-#: src/engine/initial.cpp:56
+#: src/engine/initial.cpp:64
 msgid "New"
 msgstr "Новый"
 
-#: src/engine/initial.cpp:61
+#: src/engine/initial.cpp:69
 msgid "Continue"
 msgstr "Продолжить"
 
-#: src/engine/initial.cpp:64
+#: src/engine/initial.cpp:72
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/engine/initial.cpp:66
+#: src/engine/initial.cpp:75
 msgid "Load"
 msgstr "Загрузка"
 
-#: src/engine/initial.cpp:68 src/engine/options.cpp:512
+#: src/engine/initial.cpp:78 src/engine/options.cpp:512
 msgid "Options"
 msgstr "Настройки"
 
-#: src/engine/initial.cpp:70
+#: src/engine/initial.cpp:80
 msgid "Exit"
 msgstr "Выход"
 
