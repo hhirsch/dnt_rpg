@@ -7,6 +7,12 @@
 #include "util.h"
 #include <SDL/SDL_image.h>
 
+#ifdef _MSC_VER
+   #include "../config_win.h"
+#else
+   #include "../config.h"
+#endif
+
 /***************************************************************
  *                     Constructor                             *
  ***************************************************************/
@@ -47,8 +53,10 @@ int initialScreen::run(int Status,GLdouble proj[16],
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
 
-   window* jan = gui->insertWindow(xPos-64,yPos-64,xPos+64,yPos+64, 
-                                   "DNT - 0.3");  
+   string dnt = "DNT - ";
+   dnt += VERSION;
+
+   window* jan = gui->insertWindow(xPos-64,yPos-64,xPos+64,yPos+64, dnt);  
    jan->setAttributes(false,true,false,false);
    if(Status == ON_INIT)
    {

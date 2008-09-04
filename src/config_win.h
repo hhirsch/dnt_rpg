@@ -4,7 +4,7 @@
 
 #define LOCALEDIR "../data/locale/"
 #define PACKAGE "dccnitghtmare"
-#define VERSION ""
+#define VERSION "0.3"
 
 #define DATADIR "../data/"
 

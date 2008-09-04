@@ -115,7 +115,7 @@ dccnit.o: dccnit.h dccnit.cpp util.h $(ENDETC)userinfo.h $(ENDCLASSES)skills.h $
 	@$(CC) $(CFLAGS) $(SUPREDE) dccnit.cpp -o dccnit.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
-initial.o: initial.h initial.cpp $(ENDGUI)farso.h $(ENDSOUND)sound.h
+initial.o: initial.h initial.cpp $(ENDGUI)farso.h $(ENDSOUND)sound.h ../config.h
 	@printf "Making initial.o... "
 	@$(CC) $(CFLAGS) $(SUPREDE) initial.cpp -o initial.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
