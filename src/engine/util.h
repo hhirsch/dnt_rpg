@@ -164,7 +164,7 @@ void draw2DMode();
 
 /*! Set the buffer to 3D draw mode
  * \param actualFarView -> the actual value of farView to set */
-void draw3DMode(int actualFarView);
+void draw3DMode(float actualFarView);
 
 /*! Normalize a vector
  * \param nx -> vector X 

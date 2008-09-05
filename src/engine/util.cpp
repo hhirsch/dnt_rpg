@@ -242,7 +242,7 @@ void draw2DMode()
 /*********************************************************************
  *                             draw3DMode                            *
  *********************************************************************/
-void draw3DMode(int actualFarView)
+void draw3DMode(float actualFarView)
 {
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();

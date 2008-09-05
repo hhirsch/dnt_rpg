@@ -133,7 +133,7 @@ class options
       int      prevWidth;          /**< Previous Used Resolution Width */
       int      prevHeight;         /**< Previous Used Resolution Height */
       int      prevAntiAliasing;   /**< Previous Used AntiAliasing */
-      int      prevFarViewFactor;  /**< Previous FarViewFactor */
+      float    prevFarViewFactor;  /**< Previous FarViewFactor */
       int      resPosition;        /**< Resolution Position on Vector */
 
       int timeLastOperation;       /**< Ticks when done last operation */

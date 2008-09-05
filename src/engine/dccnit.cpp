@@ -1086,7 +1086,7 @@ int engine::characterScreen(GLuint idTextura)
 /*********************************************************************
  *                     redefine Window to Screen                     *
  *********************************************************************/
-void engine::redefineWindow(SDL_Surface *screen, int actualFarView)
+void engine::redefineWindow(SDL_Surface *screen, float actualFarView)
 {
    glViewport (0, 0, SCREEN_X, SCREEN_Y);
    glMatrixMode (GL_PROJECTION);
