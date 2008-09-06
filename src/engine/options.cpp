@@ -184,6 +184,13 @@ bool options::load(string file)
          sscanf(buffer,"%d",&aux);
          enableFullScreen = (aux == 1);
       }
+      else if(s == "MultiTexture:")
+      {
+         /* Read Multitexture options */
+         fgets(buffer, sizeof(buffer), arq);
+         sscanf(buffer,"%d",&aux);
+         enableMultiTexture = (aux == 1);
+      }
       else if(s == "AntiAliasing:")
       {
          /* Read Antialising Options */
@@ -275,6 +282,16 @@ void options::save()
    else
    {
       fprintf(arq, "FullScreen: 0\n");
+   }
+   
+   /* Multi Texture */
+   if(enableMultiTexture)
+   {
+      fprintf(arq, "MultiTexture: 1\n");
+   }
+   else
+   {
+      fprintf(arq, "MultiTexture: 0\n");
    }
 
    /* AntiAliasing */
@@ -491,6 +508,7 @@ string options::resolutionName()
 void options::displayOptionsScreen(guiInterface* interf)
 {
    dirs dir;
+   extensions ext;
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL, 10);
    char tmp[8];
@@ -508,7 +526,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
 
-   intWindow = interf->insertWindow(xPos-128,yPos-185,xPos+128,yPos+185,
+   intWindow = interf->insertWindow(xPos-128,yPos-190,xPos+128,yPos+190,
                                     gettext("Options"));
 
    /* Music Things */
@@ -686,12 +704,23 @@ void options::displayOptionsScreen(guiInterface* interf)
    intWindow->getObjectsList()->insertPicture(220,311,40,328,
                       dir.getRealFile("texturas/options/farview.png").c_str());
 
+   /* MultiTexture Enable or Not */
+   qt = intWindow->getObjectsList()->insertTextBox(20,334,200,351,0,
+                                               gettext("Enable MultiTextures"));
+   qt->setFont(DNT_FONT_ARIAL, 10, DNT_FONT_ALIGN_LEFT);
+   cxSelMultiTexture = intWindow->getObjectsList()->insertCxSel(8,338, 
+                                                            enableMultiTexture);
+   intWindow->getObjectsList()->insertPicture(220,334,40,112,
+                  dir.getRealFile("texturas/options/multitexture.png").c_str());
+   cxSelMultiTexture->setAvaible(ext.hasMultiTexture());
+
+
    /* Confirm Button */
-   buttonConfirm = intWindow->getObjectsList()->insertButton(177,338,247,357,
+   buttonConfirm = intWindow->getObjectsList()->insertButton(177,356,247,375,
                                               gettext("Confirm"),1);
    
    /* Cancel Button */
-   buttonCancel = intWindow->getObjectsList()->insertButton(8,338,78,357,
+   buttonCancel = intWindow->getObjectsList()->insertButton(8,356,78,375,
                                               gettext("Cancel"),1);
 
    /* borders */
@@ -700,8 +729,8 @@ void options::displayOptionsScreen(guiInterface* interf)
    intWindow->getObjectsList()->insertTextBox(5,116,250,153,2,"");
    intWindow->getObjectsList()->insertTextBox(5,154,250,192,2,"");
    intWindow->getObjectsList()->insertTextBox(5,193,250,230,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,231,250,333,2,"");
-   intWindow->getObjectsList()->insertTextBox(5,334,250,361,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,231,250,352,2,"");
+   intWindow->getObjectsList()->insertTextBox(5,352,250,379,2,"");
 
    
    /* Open Window */
@@ -883,6 +912,7 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
       {
          enableParticles = cxSelParticles->isSelected();
          enableGrass = cxSelGrass->isSelected();
+         enableMultiTexture = cxSelMultiTexture->isSelected();
 
          bool prevFullScreen = enableFullScreen;
          enableFullScreen = cxSelFullScreen->isSelected();
@@ -1081,6 +1111,7 @@ int    options::screenHeight = 600;
 bool   options::enableFullScreen = false;
 int    options::antiAliasing = 0;
 float  options::farViewFactor = 1.0;
+bool   options::enableMultiTexture = false;
 
 string options::fileName = "";
 

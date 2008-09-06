@@ -122,6 +122,7 @@ class options
       static bool    enableFullScreen;/**< If fullscreen is defined */
       static int     antiAliasing;    /**< Current Anti-Aliasing */
       static float   farViewFactor;   /**< Current FarView Factor */
+      static bool    enableMultiTexture; /**< If terrain multi texture */
 
       window* intWindow;       /**< Options Window Pointer */
 
@@ -168,6 +169,8 @@ class options
 
       cxSel* cxSelGrass;
       cxSel* cxSelParticles;
+
+      cxSel* cxSelMultiTexture;
 
       button* buttonConfirm;
       button* buttonCancel;
