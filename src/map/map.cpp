@@ -702,68 +702,71 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    }
 
    tex = textures;
-   while(aux < numTextures)
+   if(ext.hasMultiTexture())
    {
-      /* Only Draw texture with floor count > 0 */
-      if( (ext.hasMultiTexture()) && (tex->count > 0))
+      /* Define Blend Status */
+      glEnable(GL_DEPTH_TEST);
+      glDepthFunc(GL_LEQUAL);
+      glDepthMask(GL_TRUE);
+      glEnable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      
+      while(aux < numTextures)
       {
-         glEnable(GL_DEPTH_TEST);
-         glDepthFunc(GL_LEQUAL);
-         glDepthMask(GL_TRUE);
+         /* Only Draw texture with floor count > 0 */
+         if(tex->count > 0)
+         {
+            /* Bind the Alpha Texture */
+            ext.arbActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, tex->alphaTexture);
+            glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+            glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_ALPHA_ARB, GL_TEXTURE0);
+            glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_ALPHA_ARB, GL_SRC_ALPHA);
+            glEnable(GL_TEXTURE_2D);
 
-         glEnable(GL_BLEND);
-         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            /* Bind the Texture */ 
+            ext.arbActiveTexture(GL_TEXTURE1);
+            glBindTexture(GL_TEXTURE_2D, tex->index);
+            glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+            glTexEnvf(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
+            glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_TEXTURE1);
+            glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
+            glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE1_RGB_ARB, GL_TEXTURE1);
+            glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND1_RGB_ARB, GL_SRC_COLOR);
+            glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_ALPHA_ARB, GL_PREVIOUS);
+            glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_ALPHA_ARB, GL_SRC_ALPHA);
+            glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE1_ALPHA_ARB, GL_PREVIOUS);
+            glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND1_ALPHA_ARB, GL_SRC_ALPHA);
+            glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
+                  GL_LINEAR_MIPMAP_LINEAR );
+            glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glEnable(GL_TEXTURE_2D);
 
-         /* Bind the Alpha Texture */
-         ext.arbActiveTexture(GL_TEXTURE0);
-         glBindTexture(GL_TEXTURE_2D, tex->alphaTexture);
-         glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_ALPHA_ARB, GL_TEXTURE0);
-         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_ALPHA_ARB, GL_SRC_ALPHA);
-         glEnable(GL_TEXTURE_2D);
-
-         /* Bind the Texture */ 
-         ext.arbActiveTexture(GL_TEXTURE1);
-         glBindTexture(GL_TEXTURE_2D, tex->index);
-         glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-         glTexEnvf(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
-         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_TEXTURE1);
-         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
-         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE1_RGB_ARB, GL_TEXTURE1);
-         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND1_RGB_ARB, GL_SRC_COLOR);
-         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_ALPHA_ARB, GL_PREVIOUS);
-         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_ALPHA_ARB, GL_SRC_ALPHA);
-         glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE1_ALPHA_ARB, GL_PREVIOUS);
-         glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND1_ALPHA_ARB, GL_SRC_ALPHA);
-         glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,
-                         GL_LINEAR_MIPMAP_LINEAR );
-         glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
-         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-         glEnable(GL_TEXTURE_2D);
+            /* Draw The Array */
+            glNormal3i(0,1,0);
+            glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
          
-         /* Draw The Array */
-         glNormal3i(0,1,0);
-         glDrawArrays(GL_QUADS, 0, (int)totalVertex / (int)3);
-         
-         ext.arbActiveTexture(GL_TEXTURE1_ARB);
-      	glDisable(GL_TEXTURE_2D);
-
-      	ext.arbActiveTexture(GL_TEXTURE0_ARB);
-      	glDisable(GL_TEXTURE_2D);
-         glBindTexture(GL_TEXTURE_2D, tex->alphaTexture);
-         glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-
-         glDisable(GL_BLEND);
-
-         glEnable(GL_DEPTH_TEST);
-         glDepthFunc(GL_LESS);
-         glDepthMask(GL_TRUE);
-
+         }
+         tex = tex->next;
+         aux++;
       }
-      tex = tex->next;
-      aux++;
+
+      /* Disable Textures */
+      ext.arbActiveTexture(GL_TEXTURE1_ARB);
+      glDisable(GL_TEXTURE_2D);
+      ext.arbActiveTexture(GL_TEXTURE0_ARB);
+      glDisable(GL_TEXTURE_2D);
+      //glBindTexture(GL_TEXTURE_2D, tex->alphaTexture);
+      glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+      /* Reset blend status */
+      glDisable(GL_BLEND);
+      glEnable(GL_DEPTH_TEST);
+      glDepthFunc(GL_LESS);
+      glDepthMask(GL_TRUE);
    }
 
    /* So disable the multitexture state. */
