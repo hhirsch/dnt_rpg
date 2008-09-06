@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
-"POT-Creation-Date: 2008-09-04 10:49-0300\n"
+"POT-Creation-Date: 2008-09-06 19:41-0300\n"
 "PO-Revision-Date: 2007-11-20 17:24+0000\n"
 "Last-Translator: Sergei Zivukov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -94,14 +94,14 @@ msgstr "Стремление и Равнение"
 
 #: src/engine/alignwindow.cpp:57 src/engine/aspectwindow.cpp:71
 #: src/engine/attwindow.cpp:221 src/engine/classwindow.cpp:109
-#: src/engine/options.cpp:691 src/engine/racewindow.cpp:104
+#: src/engine/options.cpp:720 src/engine/racewindow.cpp:104
 #: src/engine/skillwindow.cpp:119
 msgid "Confirm"
 msgstr "Подтвердить"
 
 #: src/engine/alignwindow.cpp:61 src/engine/aspectwindow.cpp:75
 #: src/engine/attwindow.cpp:225 src/engine/barterwindow.cpp:48
-#: src/engine/classwindow.cpp:113 src/engine/options.cpp:695
+#: src/engine/classwindow.cpp:113 src/engine/options.cpp:724
 #: src/engine/racewindow.cpp:108 src/engine/skillwindow.cpp:123
 msgid "Cancel"
 msgstr "Отменить"
@@ -177,7 +177,7 @@ msgstr "Харизма"
 msgid "Attribute Description"
 msgstr "Описание атрибута"
 
-#: src/engine/attwindow.cpp:511 src/engine/options.cpp:897
+#: src/engine/attwindow.cpp:511 src/engine/options.cpp:927
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -457,7 +457,7 @@ msgstr "Дверь"
 msgid "%s attacks %s"
 msgstr "%s атаковал %s"
 
-#: src/engine/dccnit.cpp:3359
+#: src/engine/dccnit.cpp:3364
 msgid "Exit Battle Mode"
 msgstr "Покинуть режим сражения"
 
@@ -550,7 +550,7 @@ msgstr "Сохранить"
 msgid "Load"
 msgstr "Загрузка"
 
-#: src/engine/initial.cpp:78 src/engine/options.cpp:512
+#: src/engine/initial.cpp:78 src/engine/options.cpp:530
 msgid "Options"
 msgstr "Настройки"
 
@@ -669,94 +669,98 @@ msgstr ""
 msgid "Creating Options: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:201
+#: src/engine/options.cpp:208
 #, c-format
 msgid "Unknow option: %s\n"
 msgstr ""
 
-#: src/engine/options.cpp:231
+#: src/engine/options.cpp:238
 #, c-format
 msgid "Error while writing Options: %s\n"
 msgstr "Произошла ошибка пока записывались опции: %s\n"
 
-#: src/engine/options.cpp:407 data/weapons/types/munitions.dcl:2
+#: src/engine/options.cpp:424 data/weapons/types/munitions.dcl:2
 msgid "None"
 msgstr "Нет"
 
-#: src/engine/options.cpp:412
+#: src/engine/options.cpp:429
 msgid "Characters"
 msgstr "Характеристики"
 
-#: src/engine/options.cpp:417
+#: src/engine/options.cpp:434
 msgid "All"
 msgstr "Все"
 
-#: src/engine/options.cpp:433 data/weapons/types/sizes.dcl:3
+#: src/engine/options.cpp:450 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
 msgstr "Обычный"
 
-#: src/engine/options.cpp:436
+#: src/engine/options.cpp:453
 msgid "Pursue"
 msgstr "Следовать"
 
-#: src/engine/options.cpp:451
+#: src/engine/options.cpp:468
 msgid "Disabled"
 msgstr ""
 
-#: src/engine/options.cpp:454
+#: src/engine/options.cpp:471
 msgid "2x"
 msgstr ""
 
-#: src/engine/options.cpp:457
+#: src/engine/options.cpp:474
 msgid "4x"
 msgstr ""
 
-#: src/engine/options.cpp:516
+#: src/engine/options.cpp:534
 msgid "Music Volume:"
 msgstr "Громкость музыки:"
 
-#: src/engine/options.cpp:535
+#: src/engine/options.cpp:553
 msgid "Effects Volume:"
 msgstr "Громкость эффектов:"
 
-#: src/engine/options.cpp:554
+#: src/engine/options.cpp:572
 msgid "Language:"
 msgstr "Язык:"
 
-#: src/engine/options.cpp:572
+#: src/engine/options.cpp:590
 msgid "Camera Mode:"
 msgstr "Режим камеры:"
 
-#: src/engine/options.cpp:589
+#: src/engine/options.cpp:607
 msgid "Enable Grass Effects (need particles)"
 msgstr "Включить Grass-эффекты (должно быть partcles)"
 
-#: src/engine/options.cpp:598
+#: src/engine/options.cpp:616
 msgid "Enable Particles Effects"
 msgstr "Включить Particles-эффекты"
 
-#: src/engine/options.cpp:613
+#: src/engine/options.cpp:631
 msgid "Reflections:"
 msgstr "Образы:"
 
-#: src/engine/options.cpp:632
+#: src/engine/options.cpp:650
 msgid "Screen Resolution:"
 msgstr ""
 
-#: src/engine/options.cpp:648
+#: src/engine/options.cpp:666
 msgid "Enable FullScreen"
 msgstr ""
 
-#: src/engine/options.cpp:659
+#: src/engine/options.cpp:677
 msgid "Anti-Aliasing:"
 msgstr ""
 
-#: src/engine/options.cpp:676
+#: src/engine/options.cpp:694
 msgid "FarView:"
 msgstr ""
 
-#: src/engine/options.cpp:898
+#: src/engine/options.cpp:709
+msgid "Enable MultiTextures"
+msgstr ""
+
+#: src/engine/options.cpp:928
 msgid "Some changes will only take effect upon restart."
 msgstr ""
 
