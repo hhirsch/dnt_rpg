@@ -5,21 +5,20 @@ PS mapas/tutorial/tyrol.map.par
 MUSICA music/musica13.ogg
 Outdoor: 1
 lake 4109.487,166.066,5302.500,2594.114:0.710,0.850,0.960,0.400
-o models/natural/fogueira/fogueira.dcc
-o models/natural/arvores/tree4/tree4.dcc
-o models/natural/arvores/tree3/tree3.dcc
-o models/objetos/geral/barrel/barrel.dcc
-o models/building/house5/house5.dcc
-o models/building/house6/house6.dcc
-o models/street/lightpole/lightpole.dcc
 o models/street/hydrant/hydrant.dcc
-t texturas/floor_outdoor/rock2.png texturas/floor_outdoor/rock2.png 154 105 72
-t texturas/floor_outdoor/grass3.png texturas/floor_outdoor/grass3.png 100 101 61
-t texturas/floor_outdoor/rock.png texturas/floor_outdoor/rock.png 126 129 134
-t texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png 54 102 49
-t texturas/floor_outdoor/rock3.png texturas/floor_outdoor/rock3.png 70 45 38
+o models/street/lightpole/lightpole.dcc
+o models/building/house6/house6.dcc
+o models/building/house5/house5.dcc
+o models/objetos/geral/barrel/barrel.dcc
+o models/natural/arvores/tree3/tree3.dcc
+o models/natural/arvores/tree4/tree4.dcc
+o models/natural/fogueira/fogueira.dcc
 t texturas/floor_outdoor/grass4.png texturas/floor_outdoor/grass4.png 74 74 35
-t texturas/floor_outdoor/grass8.png texturas/floor_outdoor/grass8.png 128 138 83
+t texturas/floor_outdoor/rock3.png texturas/floor_outdoor/rock3.png 70 45 38
+t texturas/floor_outdoor/grass.png texturas/floor_outdoor/grass.png 54 102 49
+t texturas/floor_outdoor/rock.png texturas/floor_outdoor/rock.png 126 129 134
+t texturas/floor_outdoor/grass3.png texturas/floor_outdoor/grass3.png 100 101 61
+t texturas/floor_outdoor/rock2.png texturas/floor_outdoor/rock2.png 154 105 72
 #Z: 0
 p 0,755.000000,692.000000,601.000000,696.000000
 ut texturas/floor_outdoor/rock2.png
@@ -195,7 +194,7 @@ ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
@@ -246,9 +245,9 @@ ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
@@ -301,7 +300,7 @@ ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
@@ -340,7 +339,7 @@ ut texturas/floor_outdoor/grass.png
 p 0,64.000000,52.000000,-6.000000,19.000000
 ut texturas/floor_outdoor/grass.png
 p 0,19.000000,-6.000000,0.000000,3.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 0,3.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
@@ -354,7 +353,7 @@ ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,6.000000,0.000000
@@ -391,23 +390,23 @@ ut texturas/floor_outdoor/grass.png
 p 0,52.000000,10.000000,0.000000,-6.000000
 ut texturas/floor_outdoor/grass.png
 p 0,-6.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
+p 1,0.000000,0.000000,0.000000,0.000000
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
-p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,6.000000
 ut texturas/floor_outdoor/grass.png
 p 1,6.000000,0.000000,-34.000000,-3.000000
@@ -430,7 +429,7 @@ p 0,606.000000,765.000000,765.000000,735.000000
 ut texturas/floor_outdoor/rock.png
 #Z: 8
 p 0,101.000000,12.000000,19.000000,95.000000
-ut texturas/floor_outdoor/grass.png
+ut texturas/floor_outdoor/rock2.png
 p 0,95.000000,19.000000,29.000000,69.000000
 ut texturas/floor_outdoor/rock2.png
 p 0,69.000000,29.000000,11.000000,6.000000
@@ -442,25 +441,25 @@ ut texturas/floor_outdoor/grass.png
 p 0,10.000000,4.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 0,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
-uo models/natural/fogueira/fogueira.dcc 1:9,9:2223.496094,0.000000,2185.840576:-313:0
-uo models/natural/arvores/tree4/tree4.dcc 1:9,9:2291.776611,0.000000,2170.808838:-250:0
 uo models/natural/arvores/tree3/tree3.dcc 1:9,9:2170.398438,0.000000,2214.147217:-169:0
+uo models/natural/arvores/tree4/tree4.dcc 1:9,9:2291.776611,0.000000,2170.808838:-250:0
+uo models/natural/fogueira/fogueira.dcc 1:9,9:2223.496094,0.000000,2185.840576:-313:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 uo models/natural/arvores/tree4/tree4.dcc 0:9,9:2291.776611,0.000000,2170.808838:-250:0
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass3.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,4.000000,0.000000
@@ -556,11 +555,11 @@ ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass3.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -627,7 +626,7 @@ ut texturas/floor_outdoor/rock.png
 p 0,210.000000,339.000000,492.000000,351.000000
 ut texturas/floor_outdoor/rock.png
 p 0,351.000000,492.000000,633.000000,426.000000
-ut texturas/floor_outdoor/grass.png
+ut texturas/floor_outdoor/rock.png
 p 0,426.000000,633.000000,735.000000,735.000000
 ut texturas/floor_outdoor/rock.png
 p 0,735.000000,735.000000,765.000000,765.000000
@@ -678,7 +677,7 @@ ut texturas/floor_outdoor/rock.png
 p 0,339.000000,391.000000,491.000000,492.000000
 ut texturas/floor_outdoor/rock.png
 p 0,492.000000,491.000000,684.000000,633.000000
-ut texturas/floor_outdoor/grass.png
+ut texturas/floor_outdoor/rock.png
 p 0,633.000000,684.000000,711.000000,735.000000
 ut texturas/floor_outdoor/rock.png
 p 0,735.000000,711.000000,645.000000,765.000000
@@ -701,7 +700,7 @@ ut texturas/floor_outdoor/rock2.png
 p 0,142.000000,143.000000,40.000000,63.000000
 ut texturas/floor_outdoor/grass.png
 p 0,63.000000,40.000000,16.000000,1.000000
-ut texturas/floor_outdoor/rock2.png
+ut texturas/floor_outdoor/grass.png
 p 1,1.000000,16.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -710,13 +709,13 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
-uo models/natural/arvores/tree3/tree3.dcc 1:11,14:2743.770996,0.000000,3529.141846:-24:0
-uo models/building/house5/house5.dcc 0:11,15:2771.966064,0.000000,3730.547852:-3:0
 uo models/street/lightpole/lightpole.dcc 1:11,14:2717.668457,0.000000,3566.902100:0:0
+uo models/building/house5/house5.dcc 0:11,15:2771.966064,0.000000,3730.547852:-3:0
+uo models/natural/arvores/tree3/tree3.dcc 1:11,14:2743.770996,0.000000,3529.141846:-24:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass3.png
-uo models/natural/arvores/tree3/tree3.dcc 0:11,14:2743.770996,0.000000,3529.141846:-24:0
 uo models/building/house5/house5.dcc 0:11,15:2771.966064,0.000000,3730.547852:-3:0
+uo models/natural/arvores/tree3/tree3.dcc 0:11,14:2743.770996,0.000000,3529.141846:-24:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass3.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -766,10 +765,10 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
-uc 2675.547363,3606.817383,2724.055176,3659.983154:0.0:mapas/tutorial/house1.map
-uo models/objetos/geral/barrel/barrel.dcc 1:11,15:2661.061768,0.000000,3674.812012:-3:0
-uo models/building/house5/house5.dcc 1:11,15:2771.966064,0.000000,3730.547852:-3:0
+uc 2675.547363,3606.817383,2724.055176,3659.983154:0.000000:mapas/tutorial/house1.map
 uo models/street/lightpole/lightpole.dcc 1:11,15:2650.590820,0.000000,3777.164062:0:0
+uo models/building/house5/house5.dcc 1:11,15:2771.966064,0.000000,3730.547852:-3:0
+uo models/objetos/geral/barrel/barrel.dcc 1:11,15:2661.061768,0.000000,3674.812012:-3:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 uo models/building/house5/house5.dcc 0:11,15:2771.966064,0.000000,3730.547852:-3:0
@@ -786,7 +785,7 @@ ut texturas/floor_outdoor/rock.png
 p 1,85.000000,42.000000,71.000000,230.000000
 ut texturas/floor_outdoor/rock.png
 p 1,230.000000,71.000000,131.000000,351.000000
-ut texturas/floor_outdoor/grass.png
+ut texturas/floor_outdoor/rock.png
 p 0,351.000000,131.000000,453.000000,480.000000
 ut texturas/floor_outdoor/rock.png
 p 0,480.000000,453.000000,696.000000,672.000000
@@ -819,19 +818,19 @@ ut texturas/floor_outdoor/grass.png
 uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
-uc 2279.709229,3948.469238,2322.955322,3984.088867:0.0:mapas/tutorial/school_1.map
-uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:0
+uc 2279.709229,3948.469238,2322.955322,3984.088867:0.000000:mapas/tutorial/school_1.map
 uo models/street/hydrant/hydrant.dcc 1:9,16:2193.512451,0.000000,3859.427734:0:0
+uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
-uc 2279.709229,3948.469238,2322.955322,3984.088867:0.0:mapas/tutorial/school_1.map
-uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:0
-uo models/street/lightpole/lightpole.dcc 1:10,16:2495.253174,0.000000,3929.457031:0:0
+uc 2279.709229,3948.469238,2322.955322,3984.088867:0.000000:mapas/tutorial/school_1.map
 uo models/street/lightpole/lightpole.dcc 1:10,16:2369.581055,0.000000,3929.022461:0:0
+uo models/street/lightpole/lightpole.dcc 1:10,16:2495.253174,0.000000,3929.457031:0:0
+uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
-uo models/building/house5/house5.dcc 0:11,15:2771.966064,0.000000,3730.547852:-3:0
 uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:0
+uo models/building/house5/house5.dcc 0:11,15:2771.966064,0.000000,3730.547852:-3:0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass4.png
 uo models/building/house5/house5.dcc 0:11,15:2771.966064,0.000000,3730.547852:-3:0
@@ -854,7 +853,7 @@ ut texturas/floor_outdoor/rock.png
 p 0,453.000000,480.000000,645.000000,696.000000
 ut texturas/floor_outdoor/rock.png
 p 0,696.000000,645.000000,765.000000,765.000000
-ut texturas/floor_outdoor/grass.png
+ut texturas/floor_outdoor/rock.png
 p 0,765.000000,765.000000,765.000000,747.000000
 ut texturas/floor_outdoor/rock.png
 p 0,747.000000,765.000000,765.000000,723.000000
@@ -891,7 +890,7 @@ uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_outdoor/grass3.png
 p 1,0.000000,0.000000,0.000000,0.000000
@@ -946,7 +945,7 @@ uo models/building/house6/house6.dcc 0:10,17:2337.515869,0.000000,4255.665527:0:
 p 1,0.000000,17.000000,4.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,4.000000,5.000000,0.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,0.000000,5.000000,14.000000,0.000000
 ut texturas/floor_outdoor/grass.png
 p 1,0.000000,14.000000,13.000000,0.000000
@@ -995,7 +994,7 @@ ut texturas/floor_outdoor/grass.png
 p 1,0.000000,44.000000,35.000000,17.000000
 ut texturas/floor_outdoor/grass.png
 p 1,17.000000,35.000000,30.000000,4.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 1,4.000000,30.000000,56.000000,5.000000
 ut texturas/floor_outdoor/grass.png
 p 1,5.000000,56.000000,55.000000,14.000000
@@ -1044,13 +1043,13 @@ ut texturas/floor_outdoor/grass.png
 p 0,56.000000,136.000000,119.000000,44.000000
 ut texturas/floor_outdoor/grass.png
 p 0,44.000000,119.000000,115.000000,35.000000
-ut texturas/floor_outdoor/grass8.png
+ut texturas/floor_outdoor/grass.png
 p 0,35.000000,115.000000,138.000000,30.000000
-ut texturas/floor_outdoor/grass.png
+ut texturas/floor_outdoor/rock.png
 p 0,30.000000,138.000000,149.591827,56.000000
-ut texturas/floor_outdoor/grass8.png
-p 0,56.000000,149.591827,152.591827,55.000000
 ut texturas/floor_outdoor/grass.png
+p 0,56.000000,149.591827,152.591827,55.000000
+ut texturas/floor_outdoor/rock.png
 p 0,55.000000,152.591827,148.591827,74.000000
 ut texturas/floor_outdoor/rock.png
 p 0,74.000000,148.591827,175.591827,73.000000
