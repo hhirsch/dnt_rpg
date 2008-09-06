@@ -625,10 +625,13 @@ class Map
        * \param cameraZ -> Z coordinate of camera
        * \param matriz  -> view frustum matriz 
        * \param selectionRender -> true if renderng at SELECTION mode
+       * \param outdoorCompatible -> true if is rendering an outdoor map
+       *                             at compatible mode (without multitextures)
        * \return 1 if success.
        ***************************************************************/
       void drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                           GLfloat matriz[6][4], bool selectionRender=false);
+                           GLfloat matriz[6][4], bool selectionRender=false,
+                           bool outdoorCompatible=false);
 
 
          wall* walls;          /**< Map Walls */

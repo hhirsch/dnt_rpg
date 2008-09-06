@@ -6,6 +6,7 @@
 #include "../engine/culling.h"
 #include "../engine/util.h"
 #include "../etc/extensions.h"
+#include "../engine/options.h"
 #include "../etc/dirs.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -573,7 +574,8 @@ void drawQuad(GLfloat x1, GLfloat z1,
  *                       drawFloorIndoor                            *
  ********************************************************************/
 void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                          GLfloat matriz[6][4], bool selectionRender)
+                          GLfloat matriz[6][4], bool selectionRender,
+                          bool outdoorCompatible)
 {
    int aux = 0;
    int x1, z1;
@@ -588,7 +590,15 @@ void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    else
    {
       aux = 0;
-      glColor4f(1.0, 1.0, 1.0, 0.9);
+
+      if(!outdoorCompatible)
+      {
+         glColor4f(1.0, 1.0, 1.0, 0.9);
+      }
+      else
+      {
+         glColor4f(1.0, 1.0, 1.0, 1.0);
+      }
 
       /* For Reflexions */
       glEnable(GL_BLEND);
@@ -788,13 +798,15 @@ void Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                     GLfloat matriz[6][4], bool selectionRender)
 {
    /* Draw Terrain */
-   if(outdoor)
+   options opt;
+   if( (outdoor) && (opt.getEnableMultiTexture()) )
    {
       drawFloorOutdoor(cameraX, cameraY, cameraZ, matriz, selectionRender);
    }
    else
    {
-      drawFloorIndoor(cameraX, cameraY, cameraZ, matriz, selectionRender);
+      drawFloorIndoor(cameraX, cameraY, cameraZ, matriz, selectionRender, 
+                      outdoor);
    }
 
 

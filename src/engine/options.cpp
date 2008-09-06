@@ -1033,6 +1033,15 @@ bool options::getEnableGrass()
 }
 
 /****************************************************************
+ *                     getEnableMultiTexture                    *
+ ****************************************************************/
+bool options::getEnableMultiTexture()
+{
+   extensions ext;
+   return(enableMultiTexture && ext.hasMultiTexture());
+}
+
+/****************************************************************
  *                         getReflexionType                     *
  ****************************************************************/
 int options::getReflexionType()

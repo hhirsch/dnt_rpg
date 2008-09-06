@@ -85,6 +85,9 @@ class options
       /*! Verify if the fullscreen is enabled
        * \return -> true if fullscreen is enabled */
       bool getEnableFullScreen();
+      /*! Verify if the multitexture is enabled (and avalaible) 
+       * \return true if enabled */
+      bool getEnableMultiTexture();
       /*! Get the current antialiasing
        * \return -> current antialiasing*/
       int getAntiAliasing();
