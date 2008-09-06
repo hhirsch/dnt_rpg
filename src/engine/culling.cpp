@@ -184,9 +184,14 @@ int visibleCube(GLfloat x1, GLfloat y1, GLfloat z1,
        (matriz[5][0]*x2+matriz[5][1]*y2+matriz[5][2]*z1+matriz[5][3] <= 0) &&
        (matriz[5][0]*x2+matriz[5][1]*y2+matriz[5][2]*z2+matriz[5][3] <= 0)))
 
-       return(0);
+   {
+      return(0);
+   }
    else
-     /* se teve algum ponto dentro, entao está dentro */
-     return(1);
+   {
+      /* if a point is inner, so its visible */
+      return(1);
+   }
+
 }
 
