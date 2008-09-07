@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-06-15 12:36+0000\n"
+"X-Launchpad-Export-Date: 2008-09-07 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: src/classes/classes.cpp:105 src/classes/race.cpp:105
@@ -81,7 +81,7 @@ msgstr "Kann die Fertigkeitendatei nicht öffnen: %s \n"
 #: src/classes/skills.cpp:71
 #, c-format
 msgid "Can't open skill image: %s\n"
-msgstr ""
+msgstr "Kann das Fertigkeitsabbild nicht öffnen: %s\n"
 
 #: src/classes/skills.cpp:132
 #, c-format
@@ -175,7 +175,7 @@ msgstr "Charisma"
 
 #: src/engine/attwindow.cpp:209
 msgid "Attribute Description"
-msgstr ""
+msgstr "Eigenschaftsbeschreibung"
 
 #: src/engine/attwindow.cpp:511 src/engine/options.cpp:927
 msgid "Warning"
@@ -183,7 +183,7 @@ msgstr "Warnung"
 
 #: src/engine/attwindow.cpp:512
 msgid "You Need to Assign All Attributes."
-msgstr ""
+msgstr "Sie müssen alle Eigenschaften vergeben"
 
 #: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:566
 msgid "Barter"
@@ -268,7 +268,7 @@ msgstr ""
 
 #: src/engine/charwindow.cpp:179
 msgid "I am Not a Fool"
-msgstr ""
+msgstr "Ich bin kein Narr"
 
 #: src/engine/charwindow.cpp:183
 msgid "Base Attack Modifier"
