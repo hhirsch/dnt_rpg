@@ -526,7 +526,7 @@ void options::displayOptionsScreen(guiInterface* interf)
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
 
-   intWindow = interf->insertWindow(xPos-128,yPos-190,xPos+128,yPos+190,
+   intWindow = interf->insertWindow(xPos-128,yPos-192,xPos+128,yPos+192,
                                     gettext("Options"));
 
    /* Music Things */
