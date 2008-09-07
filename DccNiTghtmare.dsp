@@ -472,6 +472,10 @@ SOURCE=.\src\gui\seltext.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\shader.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\engine\shadow.cpp
 # End Source File
 # Begin Source File
@@ -957,6 +961,10 @@ SOURCE=.\src\engine\racewindow.h
 # Begin Source File
 
 SOURCE=.\src\gui\seltext.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\shader.h
 # End Source File
 # Begin Source File
 
