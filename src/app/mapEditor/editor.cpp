@@ -1,6 +1,7 @@
 #include "editor.h"
 #include "../../etc/extensions.h"
 #include "../../etc/dirs.h"
+#include "../../engine/options.h"
 
 /*********************************************************************
  *                            Constructor                             *
@@ -15,8 +16,11 @@ editor::editor()
    features = new featsList(dir.getRealFile("feats/"),
                             dir.getRealFile("feats/feats.ftl"));
 
-   //FIXME, verify if the antialising is disable or not!
-   Farso_Init(&screen,"DccNiTghtmare Map Editor 0.2", 800, 600, false, 0);
+   /* Init things */
+   options opt;
+   Farso_Init(&screen,"DccNiTghtmare Map Editor", opt.getScreenWidth(),
+              opt.getScreenHeight(),  opt.getEnableFullScreen(),
+              opt.getAntiAliasing());
 
    init();
 
