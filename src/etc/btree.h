@@ -9,7 +9,9 @@ class bTree
    public:
       /*! Constructor
        * \param canMerge -> true if merge cells with same key,
-       *                    false if put it at right */
+       *                    false if put it at right
+       * \note -> the merge functionality is done every time where is 
+       *          inserted a cell that already is at the tree */
       bTree(bool canMerge=true);
 
       /*! Destructor
