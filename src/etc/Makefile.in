@@ -9,11 +9,21 @@ EFLAGS = @CPPFLAGS@ $(LDFLAGS) $(LIBS)
 
 ENDCLASSES=../classes/
 
-all: animodel.o defparser.o distance.o dirs.o extensions.o message3d.o modellist.o overlaps.o shader.o userinfo.o
+all: animodel.o btree.o btreecell.o defparser.o distance.o dirs.o extensions.o message3d.o modellist.o overlaps.o shader.o userinfo.o
 
 animodel.o: animodel.h animodel.cpp $(ENDCLASSES)thing.h dirs.h overlaps.h
 	@printf "Making animodel.o... "
 	@$(CPP) $(CFLAGS) -c animodel.cpp -o animodel.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+btree.o: btree.h btree.cpp
+	@printf "Making btree.o... "
+	@$(CPP) $(CFLAGS) -c btree.cpp -o btree.o
+	@printf "\e[0;32mDone.\e[0;0m\n"
+
+btreecell.o: btreecell.h btreecell.cpp
+	@printf "Making btreecell.o... "
+	@$(CPP) $(CFLAGS) -c btreecell.cpp -o btreecell.o
 	@printf "\e[0;32mDone.\e[0;0m\n"
 
 defparser.o: defparser.h defparser.cpp
