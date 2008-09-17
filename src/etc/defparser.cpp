@@ -195,7 +195,7 @@ bool defParser::getNextTuple(string& key, string& value)
 /***********************************************************************
  *                                load                                 *
  ***********************************************************************/
-bool defParser::load(string fileName)
+bool defParser::load(string fileName, bool fullPath)
 {
    ifstream file;
    string strBuffer, strKey, strData;
@@ -203,8 +203,16 @@ bool defParser::load(string fileName)
    int line;
    dirs dir;
 
-   /* Open the Book Definition File */
-   file.open(dir.getRealFile(fileName).c_str(), ios::in | ios::binary);
+   /* Open the Definition File */
+   if(fullPath)
+   {
+      file.open(fileName.c_str(), ios::in | ios::binary);
+   }
+   else 
+   {
+      file.open(dir.getRealFile(fileName).c_str(), ios::in | ios::binary);
+   }
+
    if(!file)
    {
       cerr << "Error Opening file: " << fileName << endl;

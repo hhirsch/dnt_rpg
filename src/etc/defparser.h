@@ -63,8 +63,10 @@ class defParser
       ~defParser();
 
       /*! Load File 
-       * \param -> fileName -> file name to load */
-      bool load(string fileName);
+       * \param fileName -> file name to load
+       * \param fullPath -> if the fileName is a fullPath or not
+       * \note -> if not full path, will get the path with dirs */
+      bool load(string fileName, bool fullPath=false);
 
       /*! Get the next tuple from the list
        * \param key -> string with the next key

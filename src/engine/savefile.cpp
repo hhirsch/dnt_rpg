@@ -138,8 +138,12 @@ bool saveFile::loadHeader(string fileName)
    defParser parser;
    string key, value;
 
-   //FIXME UserInfo Path, not RealPath at parser
-   if(parser.load(fileName))
+   /* Define Path */
+   userInfo uInfo;
+   string path = uInfo.getUserHome() + fileName;
+
+   /* Parse It! */
+   if(parser.load(path, true))
    {
       while(parser.getNextTuple(key, value))
       {
