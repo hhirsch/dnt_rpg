@@ -997,8 +997,11 @@ void modState::clear()
    {
       aux = m;
       m = m->getNext();
-      delete(m);
+      delete(aux);
    }
+
+   modMapList = NULL;
+   totalModMaps = 0;
 }
 
 /************************************************************
