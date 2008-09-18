@@ -1,7 +1,7 @@
-   The known tested Operating Systens are described bellow. DNT will probably
-run on any system where you can use/compile the sdl+opengl+cal3d+openal. If
-you tested DNT on a system not listed bellow, just say us at the email:
-dnt@dnteam.org and it'll be here.
+   The tested Operating Systens are described bellow. DNT will probably run on
+any system where you can use/compile the sdl+opengl+cal3d+openal. If you tested
+DNT on a system not listed bellow, just say us at the email: dnt@dnteam.org and
+it'll be here.
 
 ======================================================
 |      Operating System       |          Arch        |
@@ -22,20 +22,27 @@ card not described here, just email us.
 =================================================================
 |         Video Card          |             Result              |
 =================================================================
-|   Intel 82945G/GZ/P/PL      | The game runs, without particle |
-|                             | effects (card doesn't support   |
-|                             | GL_ARB_point_sprite extensions) | 
-|                             | and without antialiasing.       |
+|       ATI 200M Xpress       | Will not work (this card has a  |
+|                             | crappy OpenGL implementation)   |
 =================================================================
-|     NVIDIA GeForce 6200     | The game runs perfectly         |
+|   Intel 82945G/GZ/P/PL      | Must Disable Particle Effects   |
+|                             | and antialiasing.               |
 =================================================================
-|   NVIDIA GeForce 6800 GS    | The game runs perfectly         |
+|     NVIDIA GeForce 5200     | Must disable all optional things|
+|                             | (mainly Particles, AntiAliasing |
+|                             |  and MultiTexture).             |
 =================================================================
-|   NVIDIA GeForce 6600M GT   | The game runs perfectly         |
+|     NVIDIA GeForce 6200     | Must disable AntiAliasing.      |
+|                             | Better performance without      |
+|                             | multitexture support .          |
 =================================================================
-|   NVIDIA GeForce 8800 GTS   | The game runs perfectly         |
+|   NVIDIA GeForce 6800 GS    |                Ok               |
 =================================================================
-|   NVIDIA GeForce 8800 GT    | The game runs perfectly         |
+|   NVIDIA GeForce 8600M GT   |                Ok               |
+=================================================================
+|   NVIDIA GeForce 8800 GTS   |                Ok               |
+=================================================================
+|   NVIDIA GeForce 8800 GT    |                Ok               |
 =================================================================
 
 =========================
