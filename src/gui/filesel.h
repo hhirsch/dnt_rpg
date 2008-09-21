@@ -32,8 +32,9 @@ class fileSel: public guiObject
        * \param load -> true if the selector is a loading one, false if it
        *                is a saving one. 
        * \param dir -> directory to display
-       * \param list -> pointer to the GUI objects list */
-      fileSel(int x, int y, bool load, string dir, void* list);
+       * \param list -> pointer to the GUI objects list
+       * \param nav -> if will show directories to navigate or not */
+      fileSel(int x, int y, bool load, string dir, void* list, bool nav=true);
 
       /*! Destructor */
       ~fileSel();
@@ -82,6 +83,7 @@ class fileSel: public guiObject
       textBar* editCurFile;    /**< The current file edit (for save) */
       textBox* textFilter;     /**< The current filter display */
 
+      bool navDirs;            /**< True if will diplay (and navigate) dirs */
       bool loading;            /**< If selector is a loading one, 
                                     or a saving one */
 

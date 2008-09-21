@@ -26,7 +26,7 @@ using namespace std;
 /***********************************************************************
  *                             Constructor                             *
  ***********************************************************************/
-fileSel::fileSel(int x, int y, bool load, string dir, void* list)
+fileSel::fileSel(int x, int y, bool load, string dir, void* list, bool nav)
 {
    x1 = x;
    x2 = x+250;
@@ -38,6 +38,7 @@ fileSel::fileSel(int x, int y, bool load, string dir, void* list)
    lastDir = -1;
    filter = "";
    loading = load;
+   navDirs = nav;
 
    intList = list;
 
@@ -230,8 +231,11 @@ void fileSel::changeCurDir(string newDir)
          /* Remove the "group" char */
          s[j].erase(0,1);
 
-         /* Insert at list */
-         textFiles->insertText(s[j], 255,20,20);
+         /* Insert at list, if directory navigations is defined */
+         if(navDirs)
+         {
+            textFiles->insertText(s[j], 255,20,20);
+         }
       }
 
       /* Files */
