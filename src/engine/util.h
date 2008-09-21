@@ -65,7 +65,7 @@
 /********************************************************************
  *                        Sun's constants                           *
  ********************************************************************/
-#define SUN_HOUR_BORN          4.2    /**< Sun Hour to born */
+#define SUN_HOUR_BORN          4.0    /**< Sun Hour to born */
 #define SUN_HOUR_DEATH         20.0   /**< Sun hour to die */
 #define SUN_HOUR_INITIAL_TOTAL 8.5    /**< Initial hour of Total Light */
 #define SUN_HOUR_FINAL_TOTAL  16.5    /**< Final hour of Total Light */

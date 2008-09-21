@@ -4,7 +4,8 @@
 #include "util.h"
 #include "../gui/draw.h"
 #include "../etc/dirs.h"
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 
 /*********************************************************************
  *                            Constructor                            *
@@ -76,16 +77,10 @@ void sun::positionOnHour(float posX, float posZ)
    if(visibleTime())
    {
       rotation = SUN_EQU_B * curHour + SUN_EQU_C;
-      where[1] = (sin(deg2Rad(rotation / 4.0))) * (halfFarView);
+      where[1] = (sin(deg2Rad(rotation))) * (halfFarView);
 
       where[0] = (sin(deg2Rad(rotation-90)) * (halfFarView) + posX);
       where[2] = posZ;
-      /*if( ( (rotation > 90) && (where[0] > 0) ) ||
-          ( (rotation < 90) && (where[0] < 0) ) )
-      {
-         where[0] *= -1;
-         where[2] *= -1;
-      }*/
    }
    else
    {
@@ -98,22 +93,11 @@ void sun::positionOnHour(float posX, float posZ)
          /* Past MidNight, equation consider hour as 24+curHour */
          rotation = SUN_EQN_B * (curHour+24) + SUN_EQN_C;
       }
-      where[1] = (sin(deg2Rad((rotation-180) / 4.0)))*(halfFarView);
+      where[1] = (sin(deg2Rad((rotation-180))))*(halfFarView);
 
       where[0] = (sin(deg2Rad(rotation-270))*(halfFarView) + posX);
       where[2] = posZ;
-
-      /*
-      where[1] = (sin(deg2Rad((rotation-180) / 4.0)))*(halfFarView);
-      if( ( ((rotation-180) > 90) && (where[0] > 0) ) ||
-          ( ((rotation-180) < 90) && (where[0] < 0) ) )
-      {
-         where[0] *= -1;
-         where[2] *= -1;
-      }*/
-
    }
-   //printf("X: %.3f Y: %.3f Z: %.3f\n", where[0], where[1], where[2]);
    defineShadowMatrix();
 }
 
@@ -178,31 +162,33 @@ void sun::drawSun()
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glEnable(GL_TEXTURE_2D);
    glDisable(GL_FOG);
-   //glEnable(GL_COLOR_MATERIAL);
-   //glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-   if(visibleTime())
-   {
-      glColor4f(0.9,0.87,0.2,1.0);
-      glBindTexture(GL_TEXTURE_2D, sunTexture);
-      size = 160;
-   }
-   else
-   {
-      glColor4f(1.0,1.0,1.0,1.0);
-      glBindTexture(GL_TEXTURE_2D, moonTexture);
-      size = 200;
-   }
+
    glPushMatrix();
       glTranslatef(where[0], where[1], where[2]);
+
+      if(visibleTime())
+      {
+         glColor4f(0.9,0.87,0.2,1.0);
+         glBindTexture(GL_TEXTURE_2D, sunTexture);
+         glScalef(40,40,40);
+         size = 10;
+      }
+      else
+      {
+         glColor4f(1.0,1.0,1.0,1.0);
+         glBindTexture(GL_TEXTURE_2D, moonTexture);
+         glScalef(40,40,40);
+         size = 10;
+      }
       glBegin(GL_QUADS);
-      glTexCoord2f(0,0);
-      glVertex3f(0, size, -size);
-      glTexCoord2f(0,1);
-      glVertex3f(0, -size, -size);
-      glTexCoord2f(1,1);
-      glVertex3f(0, -size, size);
-      glTexCoord2f(1,0);
-      glVertex3f(0, +size, size);
+         glTexCoord2f(0,0);
+         glVertex3f(0, size, -size);
+         glTexCoord2f(0,1);
+         glVertex3f(0, -size, -size);
+         glTexCoord2f(1,1);
+         glVertex3f(0, -size, size);
+         glTexCoord2f(1,0);
+         glVertex3f(0, +size, size);
       glEnd();
    glPopMatrix();
    glDisable(GL_BLEND);
