@@ -24,8 +24,9 @@
 
 #define ENGINE_WALK_KEYS        1  /**< Engine Keyboard Walk Status */
 #define ENGINE_WALK_MOUSE       2  /**< Engine Mouse Walk Status */
+#define ENGINE_WALK_MOUSE_CONT  3  /**< Engine Continous Mouse Walk */
 
-#define ENGINE_WAIT_DIE_DELAY  4000 /**< Value to delay for end  die animation */
+#define ENGINE_WAIT_DIE_DELAY  4000 /**< Value to delay for end die animation */
 
 #define DNT_TO_METER   0.5 /**< Constant to multiply to convert meter to DNT.*/
 #define METER_TO_DNT   1.0 / DNT_TO_METER /**< Constant to DNT to Meter value*/
