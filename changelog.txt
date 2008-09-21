@@ -18,6 +18,7 @@
  - Barter;
  - Define multitexture as option (improve critically the outdoor rendering at
  old graphic cards, but disable the terrain texture splatting);
+ - Fixed sun/moon position;
 
 Working on:
  - Optimizations for outdoor rendering;
