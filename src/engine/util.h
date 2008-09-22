@@ -22,9 +22,12 @@
 #define ENGINE_MODE_TURN_BATTLE         2  /**< Turn Mode, in battles */
 #define ENGINE_MODE_WAIT_DIE_ANIMATION  3  /**< Wait Die Animation Mode */
 
-#define ENGINE_WALK_KEYS        1  /**< Engine Keyboard Walk Status */
-#define ENGINE_WALK_MOUSE       2  /**< Engine Mouse Walk Status */
-#define ENGINE_WALK_MOUSE_CONT  3  /**< Engine Continous Mouse Walk */
+#define ENGINE_WALK_KEYS         1  /**< Engine Keyboard Walk State */
+#define ENGINE_WALK_MOUSE        2  /**< Engine Mouse Walk State */
+#define ENGINE_WALK_MOUSE_ASTAR  3  /**< Engine A* Mouse Walk State */
+
+#define ENGINE_WALK_ACTION_DELAY 250 /**< Delay before define if is A* or
+                                           continuous mouse action */
 
 #define ENGINE_WAIT_DIE_DELAY  4000 /**< Value to delay for end die animation */
 
@@ -166,6 +169,14 @@ void draw2DMode();
 /*! Set the buffer to 3D draw mode
  * \param actualFarView -> the actual value of farView to set */
 void draw3DMode(float actualFarView);
+
+/*! Calculate the angle with two points
+ * \param prvX -> point A X
+ * \param prvZ -> point A Z
+ * \param curX -> point B X
+ * \param curZ -> point B Z
+ * \return -> angle in degrees */
+GLfloat getAngle(GLfloat prvX, GLfloat prvZ, GLfloat curX, GLfloat curZ);
 
 /*! Normalize a vector
  * \param nx -> vector X 

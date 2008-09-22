@@ -39,53 +39,7 @@ void pattAgent::calculateAngle(wayPoint* way, wayPoint* previous)
 {
    if(withOrientation)
    {
-      GLfloat ax;
-      GLfloat az;
-      ax = fabs(previous->x - way->x);
-      az = fabs(previous->z - way->z);
-      GLfloat alpha;
-      if( (ax != 0) )
-      {
-         alpha = ( (atan(fabs(az / ax)) / M_PI) * 180);
-         if( (previous->x > way->x) && (previous->z < way->z) )
-         {
-            alpha += 180;
-         }
-         if( (previous->x < way->x) && (previous->z < way->z) )
-         {
-            alpha = -alpha;
-         }
-         if( (previous->x > way->x) && (previous->z > way->z) )
-         {
-            alpha = 180-alpha;
-         }
-         if(az == 0)
-         {
-            if(previous->x < way->x)
-            {
-               alpha = 0;
-            }
-            else
-            {
-               alpha = 180;
-            }
-         }
-
-         way->angle = alpha-90; /* -90 to correct model orientation*/
-
-      }
-      else
-      {
-         //alpha == 0 or 180 or no one!;
-         if(previous->z < way->z)
-         {
-            way->angle = 180;
-         }
-         else
-         {
-            way->angle = 0;
-         }
-      }
+      way->angle = getAngle(previous->x, previous->z, way->x, way->z);
    }
 }
 

@@ -45,7 +45,6 @@ class pattAgent: public agent
       void drawWayPoints();
       void drawWayPointsLinear();
 
-
       /*! Return the number of Way Points  */
       int getTotalWayPoints(){return(totalWayPoints);};
 
@@ -72,7 +71,7 @@ class pattAgent: public agent
        * \param way-> the waypoint to calculate angle
        * \param previous -> previous wayPoint */
       void calculateAngle(wayPoint* way, wayPoint* previous);
-
+ 
 };
                    
 

@@ -131,6 +131,63 @@ void rotTransBoundingBox(GLfloat orientacao, GLfloat X[4], GLfloat Z[4],
    }
 }
 
+/********************************************************************
+ *                            getAngle                              *
+ ********************************************************************/
+GLfloat getAngle(GLfloat prvX, GLfloat prvZ, GLfloat curX, GLfloat curZ)
+{
+   GLfloat ax;
+   GLfloat az;
+   ax = fabs(prvX - curX);
+   az = fabs(prvZ - curZ);
+   GLfloat alpha;
+   if( (ax != 0) )
+   {
+      alpha = ( (atan(fabs(az / ax)) / M_PI) * 180);
+      if( (prvX > curX) && (prvZ < curZ) )
+      {
+         alpha += 180;
+      }
+      if( (prvX < curX) && (prvZ < curZ) )
+      {
+         alpha = -alpha;
+      }
+      if( (prvX > curX) && (prvZ > curZ) )
+      {
+         alpha = 180-alpha;
+      }
+      if(az == 0)
+      {
+         if(prvX < curX)
+         {
+            alpha = 0;
+         }
+         else
+         {
+            alpha = 180;
+         }
+      }
+
+      return(alpha-90); /* -90 to correct model orientation*/
+
+   }
+   else
+   {
+      //alpha == 0 or 180 or no one!;
+      if(prvZ < curZ)
+      {
+         return(180);
+      }
+      else
+      {
+         return(0);
+      }
+   }
+
+   /* Shouldn't here */
+   return(0);
+}
+
 /*********************************************************************
  *                               rotatePoint                         *
  *********************************************************************/

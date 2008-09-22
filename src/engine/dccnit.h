@@ -294,6 +294,14 @@ class engine
       bool canWalk(GLfloat varX, GLfloat varZ, GLfloat varAlpha);
 
       /*!
+       *************************************************************** 
+       * Try walk the character with the move variation
+       * \param varX -> Variation on X position
+       * \param varZ -> variation on Z position
+       ***************************************************************/
+      bool tryWalk(GLfloat varX, GLfloat varZ);
+
+      /*!
        ***************************************************************
        * Define New Character Height, based on character position
        * \param c -> pointer to the character
@@ -438,6 +446,8 @@ class engine
       int attackFeat;             /**< attack feat to use. */
 
       conection* curConection;    /**< Current Mouse Conection */
+
+      Uint32 walkPressTime;       /**< Ticks when pressed walk mouse button */
 
       part2* effect;
 

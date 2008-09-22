@@ -24,6 +24,8 @@ engine::engine()
 
    inventoryWindow = NULL;
 
+   walkPressTime = 0;
+
    imgNumber = 0;
    actualScreen = NULL;
 
@@ -1993,6 +1995,7 @@ int engine::treatIO(SDL_Surface *screen)
    bool timePass = false;    // The time to update passes ?
    Uint32 time;              // Actual Time
    GLfloat varX, varZ;       // to avoid GLfloat calculate
+   GLfloat dist;
    character* activeCharacter = PCs->getActiveCharacter();
    Uint8 *keys;
    int x,y;
@@ -2162,7 +2165,7 @@ int engine::treatIO(SDL_Surface *screen)
          }
 
 
-         /* FIXME Remove all timerary tests from here */
+         /* FIXME Remove all temporary tests from here */
          if( (keys[SDLK_y]) && 
              ( (time-lastKeyb >= REFRESH_RATE) || 
                (lastKey != SDLK_y) ) )
@@ -2265,51 +2268,7 @@ int engine::treatIO(SDL_Surface *screen)
              varZ *= -1;
          }
 
-         if(canWalk(varX,varZ,0)) 
-         {
-            activeCharacter->xPosition += varX;
-            activeCharacter->zPosition += varZ;
-            gameCamera.updateCamera(activeCharacter->xPosition,
-                                    activeCharacter->yPosition,
-                                    activeCharacter->zPosition,
-                                    activeCharacter->orientation);
-            walked = true;
-         }
-         else if(((varX > 0)&&(canWalk(activeCharacter->walk_interval,0,0))) ||
-                 ((varX < 0)&&(canWalk(-activeCharacter->walk_interval,0,0))) )
-         {
-            if(varX < 0)
-            {
-               activeCharacter->xPosition -= activeCharacter->walk_interval;
-            }
-            else
-            {
-               activeCharacter->xPosition += activeCharacter->walk_interval;
-            }
-            gameCamera.updateCamera(activeCharacter->xPosition,
-                                    activeCharacter->yPosition,
-                                    activeCharacter->zPosition,
-                                    activeCharacter->orientation);
-            walked = true;
-         }
-         else if(((varZ > 0) && canWalk(0,activeCharacter->walk_interval,0)) ||
-                 ((varZ < 0) && canWalk(0,-activeCharacter->walk_interval,0)) )
-         {
-            if(varZ < 0)
-            {
-               activeCharacter->zPosition -= activeCharacter->walk_interval;
-            }
-            else
-            {
-               activeCharacter->zPosition += activeCharacter->walk_interval;
-            }
-
-            gameCamera.updateCamera(activeCharacter->xPosition,
-                                    activeCharacter->yPosition,
-                                    activeCharacter->zPosition,
-                                    activeCharacter->orientation);
-            walked = true;
-         }
+         walked |= tryWalk(varX, varZ);
         
       }
       else if(keys[SDLK_w] || keys[SDLK_s])
@@ -2324,52 +2283,8 @@ int engine::treatIO(SDL_Surface *screen)
               varX *= -1;
               varZ *= -1;
          }
-         if((canWalk(varX,varZ,0)) ) 
-         {
-             activeCharacter->xPosition += varX;
-             activeCharacter->zPosition += varZ;
-             gameCamera.updateCamera(activeCharacter->xPosition,
-                                     activeCharacter->yPosition,
-                                     activeCharacter->zPosition,
-                                     activeCharacter->orientation);
-             walked  = true;
-         }
-         else if(((varX > 0)&&(canWalk(activeCharacter->walk_interval,0,0))) ||
-                 ((varX < 0)&&(canWalk(-activeCharacter->walk_interval,0,0))) ) 
-                   
-         {
-              if(varX < 0)
-              {
-                 activeCharacter->xPosition -= activeCharacter->walk_interval;
-              }
-              else
-              {
-                 activeCharacter->xPosition += activeCharacter->walk_interval;
-              }
-              gameCamera.updateCamera(activeCharacter->xPosition,
-                                      activeCharacter->yPosition,
-                                      activeCharacter->zPosition,
-                                      activeCharacter->orientation);
-              walked = true;
-         }
-         else if(((varZ > 0)&&(canWalk(0,activeCharacter->walk_interval,0))) ||
-                 ((varZ < 0)&&(canWalk(0,-activeCharacter->walk_interval,0))))
-         {
-              if(varZ < 0)
-              {
-                 activeCharacter->zPosition -= activeCharacter->walk_interval;
-              }
-              else
-              {
-                 activeCharacter->zPosition += activeCharacter->walk_interval;
-              }
-              gameCamera.updateCamera(activeCharacter->xPosition,
-                                      activeCharacter->yPosition,
-                                      activeCharacter->zPosition,
-                                      activeCharacter->orientation);
-              walked = true;
-         }
-
+         
+         walked |= tryWalk(varX, varZ);
       }
 
       if( (keys[SDLK_a]) || (keys[SDLK_d]))
@@ -2421,19 +2336,35 @@ int engine::treatIO(SDL_Surface *screen)
       /* Camera Verification */
       gameCamera.doIO(keys, mButton, x, y, DELTA_CAMERA );
 
-      /* Path Verification */
-      if( (mButton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)))
+      /* Set press time, if needed */
+      if( (mButton & SDL_BUTTON(3)) && (!gui->mouseOnGui(x,y)) && 
+          (walkPressTime == 0) && (walkStatus != ENGINE_WALK_MOUSE) )
       {
-         GLfloat dist;
+         walkPressTime = time;
+      }
+
+      /* Verify, if we got a continuous mouse action or a A* init */
+      if( ( time - walkPressTime >= ENGINE_WALK_ACTION_DELAY ) &&
+          ( walkPressTime != 0) && (mButton & SDL_BUTTON(3)) )
+      {
+            /* Continuous walk */
+            walkStatus = ENGINE_WALK_MOUSE;
+            walkPressTime = 0;
+      }
+      else if ( (walkPressTime != 0) && !(mButton & SDL_BUTTON(3)) )
+      {
+         /* Path Verification */
+         walkPressTime = 0;
          dist = sqrt( (xReal - moveCircleX) *
-                      (xReal - moveCircleX) +
-                      (zReal - moveCircleZ) *
-                      (zReal - moveCircleZ) );
+               (xReal - moveCircleX) +
+               (zReal - moveCircleZ) *
+               (zReal - moveCircleZ) );
 
          /* Only Find Path if move is avaible */
          if( (engineMode != ENGINE_MODE_TURN_BATTLE) || 
-             ( (canMove) && (dist <= WALK_PER_MOVE_ACTION)) ||
-             ( (canMove) && (canAttack) && (dist <= 2*WALK_PER_MOVE_ACTION )) )
+               ( (canMove) && (dist <= WALK_PER_MOVE_ACTION)) ||
+               ( (canMove) && (canAttack) && 
+                 (dist <= 2*WALK_PER_MOVE_ACTION )) )
          {
             if(dist > WALK_PER_MOVE_ACTION)
             {
@@ -2442,11 +2373,46 @@ int engine::treatIO(SDL_Surface *screen)
                canAttack = false;
             }
             activeCharacter->pathFind.defineMap(actualMap);
-       
+
             activeCharacter->pathFind.findPath(activeCharacter,
-                                               xReal, zReal, 
-                                               activeCharacter->walk_interval, 
-                                               NPCs, PCs );
+                  xReal, zReal, 
+                  activeCharacter->walk_interval, 
+                  NPCs, PCs );
+         }
+      }
+
+      /* Verify Continuous Walk with Mouse */
+      if(walkStatus == ENGINE_WALK_MOUSE)
+      {
+         cursors->set(CURSOR_WALK_CONT);
+         if(mButton & SDL_BUTTON(3))
+         {
+            /* Set character orientation (if mouse is far from character.
+             *  if it is too near, some weird angles appears) */
+            dist = sqrt( (xReal - activeCharacter->xPosition) *
+                         (xReal - activeCharacter->xPosition) +
+                         (zReal - activeCharacter->zPosition) *
+                         (zReal - activeCharacter->zPosition) );
+            if(dist > 8)
+            {
+               activeCharacter->orientation = 
+                                            getAngle(activeCharacter->xPosition,
+                                                     activeCharacter->zPosition,
+                                                     xReal, zReal);
+            }
+
+            /* Try to move it forward */
+             varX = -1 * activeCharacter->walk_interval * 
+                         sin(deg2Rad(activeCharacter->orientation));
+             varZ = -1 * activeCharacter->walk_interval * 
+                         cos(deg2Rad(activeCharacter->orientation));
+            walked |= tryWalk(varX, varZ);
+         }
+         else
+         {
+            /* Move Ends */
+            walkStatus = ENGINE_WALK_KEYS;
+            cursors->set(CURSOR_WALK);
          }
       }
 
@@ -2454,10 +2420,10 @@ int engine::treatIO(SDL_Surface *screen)
       if(activeCharacter->pathFind.getState() == ASTAR_STATE_FOUND)
       {
          //Found path to, so walk
-         walkStatus = ENGINE_WALK_MOUSE;
+         walkStatus = ENGINE_WALK_MOUSE_ASTAR;
       }
 
-      if(walkStatus == ENGINE_WALK_MOUSE)
+      if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
       {
             if(! activeCharacter->pathFind.getNewPosition(
                                              activeCharacter->xPosition,
@@ -2529,8 +2495,6 @@ int engine::treatIO(SDL_Surface *screen)
       {
          drawWithoutShadows();
       }
-      SDL_GL_SwapBuffers();
-
 
       /* Update FPS */
       actualFPS = (actualFPS + (1000.0 / (SDL_GetTicks() - lastRead))) / 2;
@@ -2864,7 +2828,7 @@ void engine::renderNoShadowThings()
    character* activeCharacter = PCs->getActiveCharacter(); 
 
    /* Draw Path */
-   /*if(walkStatus == ENGINE_WALK_MOUSE)
+   /*if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
    {
       activeCharacter->pathFind.drawPath();
    }*/
@@ -2926,7 +2890,7 @@ void engine::renderNoShadowThings()
 
    }
 
-   if(walkStatus == ENGINE_WALK_MOUSE)
+   if(walkStatus == ENGINE_WALK_MOUSE_ASTAR)
    {
       GLfloat destX =0, destZ=0;
       //activeCharacter->pathFind.drawPath();
@@ -3027,7 +2991,16 @@ void engine::renderGUI()
 
       /* Mouse Cursor */
       glPushMatrix();
-         cursors->draw(mouseX, mouseY);
+         if(walkStatus == ENGINE_WALK_MOUSE)
+         {
+            cursors->draw(mouseX, mouseY,
+                          getAngle(SCREEN_X / 2.0, SCREEN_Y / 2.0, 
+                                   mouseX, mouseY));
+         }
+         else
+         {
+            cursors->draw(mouseX, mouseY);
+         }
       glPopMatrix();
       if(actualMap->isOutdoor())
       {
@@ -3085,12 +3058,76 @@ void engine::drawWithoutShadows()
    /* Render all things */
    renderScene();
    renderNoShadowThings();
-   renderGUI();
    
+   renderGUI();
+
    /* Flush */
    glFlush();
+   SDL_GL_SwapBuffers();
 
    printOpenGLErrors();
+}
+
+/*********************************************************************
+ *                              tryWalk                              *
+ *********************************************************************/
+bool engine::tryWalk(GLfloat varX, GLfloat varZ)
+{
+   character* activeCharacter = PCs->getActiveCharacter();
+   
+   /* Try Normal Move */
+   if(canWalk(varX,varZ,0)) 
+   {
+      activeCharacter->xPosition += varX;
+      activeCharacter->zPosition += varZ;
+      gameCamera.updateCamera(activeCharacter->xPosition,
+            activeCharacter->yPosition,
+            activeCharacter->zPosition,
+            activeCharacter->orientation);
+      return(true);
+   }
+
+   /* Can't, so try only X move */
+   else if(((varX > 0)&&(canWalk(activeCharacter->walk_interval,0,0))) ||
+           ((varX < 0)&&(canWalk(-activeCharacter->walk_interval,0,0))) )
+   {
+      if(varX < 0)
+      {
+         activeCharacter->xPosition -= activeCharacter->walk_interval;
+      }
+      else
+      {
+         activeCharacter->xPosition += activeCharacter->walk_interval;
+      }
+      gameCamera.updateCamera(activeCharacter->xPosition,
+            activeCharacter->yPosition,
+            activeCharacter->zPosition,
+            activeCharacter->orientation);
+      return(true);
+   }
+
+   /* Can't too, so try only Z move */
+   else if(((varZ > 0) && canWalk(0,activeCharacter->walk_interval,0)) ||
+           ((varZ < 0) && canWalk(0,-activeCharacter->walk_interval,0)) )
+   {
+      if(varZ < 0)
+      {
+         activeCharacter->zPosition -= activeCharacter->walk_interval;
+      }
+      else
+      {
+         activeCharacter->zPosition += activeCharacter->walk_interval;
+      }
+
+      gameCamera.updateCamera(activeCharacter->xPosition,
+            activeCharacter->yPosition,
+            activeCharacter->zPosition,
+            activeCharacter->orientation);
+      return(true);
+   }
+
+   /* Can't move! */
+   return(false);
 }
 
 /*********************************************************************
