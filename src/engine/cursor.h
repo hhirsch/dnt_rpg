@@ -12,17 +12,18 @@ using namespace std;
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
-#define CURSOR_WALK       0 /**< Walk Mouse Cursor */
-#define CURSOR_ATTACK     1 /**< Attack Mouse Cursor */
-#define CURSOR_DEFEND     2 /**< Defend Mouse Cursor */
-#define CURSOR_MAPTRAVEL  3 /**< Map Travel Mouse Cursor */
-#define CURSOR_TALK       4 /**< Talk Mouse Cursor */
-#define CURSOR_GET        5 /**< Get Mouse Cursor */
-#define CURSOR_INVENTORY  6 /**< Inventory Mouse Cursor */
-#define CURSOR_DOOR       7 /**< Door Mouse Cursor */
-#define CURSOR_FORBIDDEN  8 /**< Forbidden Mouse Cursor */
-#define CURSOR_USER_IMAGE 9 /**< Any user image seted as cursor */
-#define CURSOR_TOTAL     10 /**< Total number of mouse cursors */
+#define CURSOR_WALK         0 /**< Walk Mouse Cursor */
+#define CURSOR_ATTACK       1 /**< Attack Mouse Cursor */
+#define CURSOR_DEFEND       2 /**< Defend Mouse Cursor */
+#define CURSOR_MAPTRAVEL    3 /**< Map Travel Mouse Cursor */
+#define CURSOR_TALK         4 /**< Talk Mouse Cursor */
+#define CURSOR_GET          5 /**< Get Mouse Cursor */
+#define CURSOR_INVENTORY    6 /**< Inventory Mouse Cursor */
+#define CURSOR_DOOR         7 /**< Door Mouse Cursor */
+#define CURSOR_FORBIDDEN    8 /**< Forbidden Mouse Cursor */
+#define CURSOR_WALK_CONT    9 /**< Continuous Walk Cursor */
+#define CURSOR_USER_IMAGE  10 /**< Any user image seted as cursor */
+#define CURSOR_TOTAL       11 /**< Total number of mouse cursors */
 
 /*! A mouse cursor class.*/
 class cursor
@@ -49,7 +50,7 @@ class cursor
       void set(SDL_Surface* img);
 
       /*! Draw th Cursor to screen */
-      void draw(int mouseX, int mouseY);
+      void draw(int mouseX, int mouseY, float angle=0.0);
 
       /*! Gets the actual mouse cursor
        * \return -> pointer to the surface of the mouse cursor */

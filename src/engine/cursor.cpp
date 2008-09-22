@@ -35,6 +35,7 @@ void cursor::init()
    loadCursor(dir.getRealFile("cursors/Inventory.png"), CURSOR_INVENTORY);
    loadCursor(dir.getRealFile("cursors/Door.png"), CURSOR_DOOR);
    loadCursor(dir.getRealFile("cursors/forbidden.png"), CURSOR_FORBIDDEN);
+   loadCursor(dir.getRealFile("cursors/walk_cont.png"), CURSOR_WALK_CONT);
    currentCursor = CURSOR_WALK;
 }
 
@@ -102,15 +103,18 @@ int cursor::get()
 /*****************************************************************
  *                             Draw                              *
  *****************************************************************/
-void cursor::draw(int mouseX, int mouseY)
+void cursor::draw(int mouseX, int mouseY, float angle)
 {
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+   glDisable(GL_DEPTH_TEST);
 
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texture[currentCursor]);
    glPushMatrix();
       glTranslatef(mouseX+2, SCREEN_Y - (mouseY+2), 0.1);
+      glRotatef(angle, 0, 0, 1);
       glBegin(GL_QUADS);
          glTexCoord2f(0.0, 0.0);
          glVertex2f(0,0);
@@ -122,6 +126,8 @@ void cursor::draw(int mouseX, int mouseY)
          glVertex2f(sizeX[currentCursor], 0.0);
       glEnd();
    glPopMatrix();
+
+   glEnable(GL_DEPTH_TEST);
 
    glDisable(GL_BLEND);
    glDisable(GL_TEXTURE_2D);
