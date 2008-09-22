@@ -5,6 +5,8 @@
 
 #include "menu.h"
 
+
+
 /*********************************************************
  *                       Destructor                      *
  *********************************************************/
@@ -133,7 +135,8 @@ void menu::draw(int pos, SDL_Surface *screen)
    int x1 = x;
    int x2 = x1 + (maxCharac)*(fnt.getIncCP()+1)+4; 
    int y1 = y;
-   int y2 = ((total-numPictures)*11) + y1 + 5; /* bizarre from DOS version */
+   int y2 = ((total-numPictures) * MENU_ITEM_HEIGHT) + 
+                                         y1 + 5; /* bizarre from DOS version */
    
    /* Verify Sides */
    if (x2 > screen->w-1)
@@ -161,6 +164,7 @@ void menu::draw(int pos, SDL_Surface *screen)
    int xa = x1+4;
    int ya = y1+3;
    int k;
+   int med = (MENU_ITEM_HEIGHT - 10) / 2;
    guiObject* item = (guiObject*) first->next;
    for (k=0; k < total; k++)
    {
@@ -168,7 +172,7 @@ void menu::draw(int pos, SDL_Surface *screen)
       if(item->type == GUI_PICTURE)
       {
          picture* pic = (picture*)item;
-         pic->setCoordinate(xa, ya, xa+10, ya+10);
+         pic->setCoordinate(xa, ya+med+1, xa+10, ya+10+med+1);
          pic->draw(screen);
          /* The next text will be translated right */
          xa = x1+15;
@@ -186,16 +190,16 @@ void menu::draw(int pos, SDL_Surface *screen)
          {
             if (item->isAvaible()) 
             {
-               fnt.write(screen,xa,ya,item->getText());
+               fnt.write(screen,xa,ya+med,item->getText());
             }
             else
             {
                color_Set(Colors.colorCont[2].R, Colors.colorCont[2].G,
                      Colors.colorCont[2].B, Colors.colorCont[2].A);
-               fnt.write(screen,xa+1,ya+1,item->getText());
+               fnt.write(screen,xa+1,ya+med+1,item->getText());
                color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
                      Colors.colorCont[1].B, Colors.colorCont[1].A);
-               fnt.write(screen,xa,ya,item->getText());
+               fnt.write(screen,xa,ya+med,item->getText());
             }
          } 
 
@@ -204,12 +208,13 @@ void menu::draw(int pos, SDL_Surface *screen)
          {
             color_Set(Colors.colorCont[1].R, Colors.colorCont[1].G,
                   Colors.colorCont[1].B, Colors.colorCont[1].A);
-            rectangle_2Colors(screen,xa-2,ya+6,x2-2,ya+7,Colors.colorCont[0].R,
+            rectangle_2Colors(screen,xa-2,ya+6,x2-2,ya+7,
+                  Colors.colorCont[0].R,
                   Colors.colorCont[0].G,Colors.colorCont[0].B,
                   Colors.colorCont[0].A);
          }
          xa = x1+4;
-         ya += 11;
+         ya += MENU_ITEM_HEIGHT;
       }
       item = (guiObject*)item->next;
    }
@@ -248,7 +253,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
 
    /* Draws */
    draw(0,screen);
-   int altura = ((total-numPictures)*11)+6;
+   int altura = ((total-numPictures)*MENU_ITEM_HEIGHT)+6;
    int largura = (maxCharac)*(fnt.getIncCP()+1)+5;
 
    /* Runs */
@@ -259,7 +264,7 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
    if(isMouseAt(x+Xjan, y+Yjan, x+largura+Xjan,
             y+altura+Yjan-3, mouseX, mouseY)) 
    {
-      actualItem = ((mouseY - (y+Yjan)-4) / 11) + 1;
+      actualItem = ((mouseY - (y+Yjan)-4) / MENU_ITEM_HEIGHT) + 1;
       if(actualItem < 0)
       {
          actualItem = 0;
@@ -303,8 +308,8 @@ int menu::run(int mouseX, int mouseY, Uint8 Mbotao, Uint8* teclado,
             Colors.colorCont[1].G,
             Colors.colorCont[1].B,
             Colors.colorCont[1].A);
-      rectangle_Oval(screen,x+2,(actualItem-1)*11+y+4,
-            x+largura-2,(actualItem)*11+y+4,
+      rectangle_Oval(screen,x+2,(actualItem-1)*MENU_ITEM_HEIGHT+y+4,
+            x+largura-2,(actualItem)*MENU_ITEM_HEIGHT+y+4,
             Colors.colorCont[2].R, Colors.colorCont[2].G,
             Colors.colorCont[2].B, Colors.colorCont[2].A);
    }

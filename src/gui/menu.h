@@ -15,6 +15,8 @@ using namespace std;
 #include "guiobject.h"
 #include "guilist.h"
 
+#define MENU_ITEM_HEIGHT  12
+
 /*! The Menu GUI class */
 class menu: public guiList
 {
