@@ -21,9 +21,14 @@
 class skillWindow
 {
    public:
-      /*! Skill Window constructor */
+      /*! Skill Window constructor 
+       * \param sk -> skills list (with images and description) 
+       * \param savSkill -> skills list to save/modify 
+       * \param inter -> interface used
+       * \actualLevel -> current character level
+       * \readOnlyMode -> if the windows is read only, or not */
       skillWindow(skills* sk, skills* savSkill, guiInterface* inter,
-                  int actualLevel);
+                  int actualLevel, bool readOnlyMode=false);
 
       /*! Destructor */
       ~skillWindow();
@@ -35,9 +40,22 @@ class skillWindow
        * \return 0 on close, 1 otherwise */
       int treat(guiObject* object, int eventInfo, guiInterface* inter);
 
-      window*   intWindow;           /**< Pointer to the internal window */
+      /*! Verify if the window is opened
+       * \return true if is opened, false otherwise */
+      bool isOpened();
+
+      /*! Close the window, if is opened
+       * \param inter -> guiInterface where the window is */
+      void close(guiInterface* inter);
 
    private:
+ 
+      /*! Set point colors, due to the changes */
+      void setColors();
+      /*! Update the info show of the current skill */
+      void updateSkillInfo();
+      
+      window*      intWindow;     /**< Pointer to the internal window */
       skills*      saveSkill;     /**< Pointer to the edited skill list */
       skill**      skillsOrder;   /**< Sorted skills */
       skill**      skillsDesc;    /**< Skill Descriptions Sorted */
@@ -45,18 +63,20 @@ class skillWindow
       int          avaiblePoints; /**< Avaible points to distribute */
       int          curSkill;      /**< Actual Skill */
       int          charLevel;     /**< Character Level */
+      bool         readOnly;      /**< True if read only window (no changes) */
+      
       rolBar* desc;               /**< Description Text */
       textBox* txtAvaiblePoints;  /**< Avaible Points Text */
       textBox* skillName;         /**< Actual Skill Name */
       textBox* txtPoints;         /**< Actual Points Text */
       textBox* txtCosts;          /**< Actual Cost Text */
 
-      button* buttonSum;
-      button* buttonDec;
-      button* buttonPrevious;
-      button* buttonNext;
-      button* buttonConfirm;
-      button* buttonCancel;
+      button* buttonSum;          /**< Inc Points Button */
+      button* buttonDec;          /**< Dec Points Button */
+      button* buttonPrevious;     /**< Previous Skill Button */
+      button* buttonNext;         /**< Next Skill Button */
+      button* buttonConfirm;      /**< Confirm Changes Button */
+      button* buttonCancel;       /**< Cancel Changes Button */
 
       picture*     skFig;         /**< Actual skill Image */
 
