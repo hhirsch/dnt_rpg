@@ -3,6 +3,7 @@
 
 #include "../gui/farso.h"
 #include "character.h"
+#include "skillwindow.h"
 
 /*! The character window displays information about a
  * character current states. */
@@ -27,11 +28,15 @@ class charWindow
        * \param object -> last GUI object
        * \param eventInfo -> last GUI Event
        * \return != 0 if event is gathered */
-      int treat(guiObject* object, int eventInfo);
+      int treat(guiObject* object, int eventInfo, skills* skillsList);
 
       /*! Verify if the window is openned
        * \return true if opened, false otherwise. */
       bool isOpen();
+
+      /*! Verify if it has some children window opened
+       * \return -> true if some children window is opened */
+      bool hasChildrenWindows();
 
    protected:
 
@@ -41,6 +46,7 @@ class charWindow
       void writeAboutWeapon(int inventoryPlace);
 
       window* intWindow;         /**< Pointer to the internal window */
+      skillWindow* skWindow;     /**< Skill Window used */
       object* curObject;         /**< Pointer to current object */
 
       character* current;        /**< Current character */
@@ -48,6 +54,7 @@ class charWindow
       guiInterface* inter;       /**< Current GUI interface */
       button* okButton;          /**< The ok Button */
       button* levelUpButton;     /**< The Level Up Button */
+      button* skillsButton;      /**< The Skills Button */
       rolBar* infoBar;           /**< The Info Bar */
 };
 

@@ -11,9 +11,13 @@
  ********************************************************************/
 charWindow::charWindow(guiInterface* interf)
 {
+   /* set interface */
    inter = interf;
+
+   /* Nullify pointers */
    intWindow = NULL;
    current = NULL;
+   skWindow = NULL;
 }
 
 /********************************************************************
@@ -210,8 +214,8 @@ void charWindow::open(character* pers)
                                              gettext("Feats"),1);
 
    /* Skill Button */
-   intWindow->getObjectsList()->insertButton(5,232,125,251,
-                                             gettext("Skills"),1);
+   skillsButton = intWindow->getObjectsList()->insertButton(5,232,125,251,
+                                                           gettext("Skills"),1);
 
    /* Close Button */
    okButton = intWindow->getObjectsList()->insertButton(5,252,125,271,
@@ -228,11 +232,23 @@ void charWindow::open(character* pers)
  ********************************************************************/
 void charWindow::close()
 {
+   /* Close Character Window */
    if(intWindow)
    {
       inter->closeWindow(intWindow);
       intWindow = NULL;
       current = NULL;
+   }
+
+   /* Close and delete Skill Window */
+   if(skWindow)
+   {
+     if(skWindow->isOpened())
+     {
+        skWindow->close(inter);
+     }
+     delete(skWindow);
+     skWindow = NULL;
    }
 }
 
@@ -245,16 +261,63 @@ bool charWindow::isOpen()
 }
 
 /********************************************************************
+ *                      hasChildrenWindows                          *
+ ********************************************************************/
+bool charWindow::hasChildrenWindows()
+{
+   return(skWindow != NULL);
+}
+
+/********************************************************************
  *                              treat                               *
  ********************************************************************/
-int charWindow::treat(guiObject* object, int eventInfo)
+int charWindow::treat(guiObject* object, int eventInfo, skills* skillsList)
 {
+   if(!isOpen())
+   {
+      /* No more open, must close children windows */
+      if(hasChildrenWindows())
+      {
+         close();
+      }
+      return(1);
+   }
+
+   /* Verify Skill Window */
+   if(skWindow)
+   {
+      int res = skWindow->treat(object, eventInfo, inter);
+
+      if( (res == SKILLW_CONFIRM) || (res == SKILLW_CANCEL) )
+      {
+         /* Done with skill window */
+         delete(skWindow);
+         skWindow = NULL;
+      }
+
+      /* If event treated by Skill Window, must return */
+      if(res != SKILLW_OTHER)
+      {
+         return(res);
+      }
+   }
+
    if(eventInfo == PRESSED_BUTTON)
    {
+      /* Ok Button */
       if(object == (guiObject*) okButton)
       {
          close();
          return(1);
+      }
+      /* Skills Button */
+      else if (object == (guiObject*) skillsButton)
+      {
+         if(skWindow == NULL)
+         {
+            skWindow = new skillWindow(skillsList, &current->sk,
+                                       inter, current->getLevel(), true );
+         }
       }
    }
    return(0);

@@ -915,6 +915,9 @@ int engine::characterScreen(GLuint idTextura)
    /* Aspect Window */
    aspectWindow* aspWindow = NULL;
 
+   /* Disable Lights and Fog */
+   glDisable(GL_LIGHTING);
+
    /* Race Window */
    character* activeCharacter = PCs->getActiveCharacter();
    raceWindow* rcWindow = new raceWindow(raceList,&activeCharacter->sk,gui,
@@ -1080,6 +1083,8 @@ int engine::characterScreen(GLuint idTextura)
       /* Calculate Life Points */
       activeCharacter->defineInitialLifePoints();
    }
+
+   glEnable(GL_LIGHTING);
    
    return(charCreation);
 }
@@ -1545,9 +1550,9 @@ void engine::treatGuiEvents(guiObject* object, int eventInfo)
    }
 
    /* Verify Character Window */
-   if( charInfoWindow->isOpen() )
+   if( (charInfoWindow->isOpen()) || (charInfoWindow->hasChildrenWindows()) )
    {
-      charInfoWindow->treat(object, eventInfo);
+      charInfoWindow->treat(object, eventInfo, skillsList);
    }
 
    /* Verify ShortCutsWindow */
