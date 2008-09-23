@@ -2999,7 +2999,8 @@ void engine::renderGUI()
          if(walkStatus == ENGINE_WALK_MOUSE)
          {
             cursors->draw(mouseX, mouseY,
-                          PCs->getActiveCharacter()->orientation-90);
+                          PCs->getActiveCharacter()->orientation -
+                          gameCamera.getPhi());
          }
          else
          {
