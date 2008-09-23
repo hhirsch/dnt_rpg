@@ -181,7 +181,7 @@ int textBox::draw()
    /* Draw Background */
    if(framed)
    {
-      if(framed == 1)
+      if( (framed == 1) || (framed == 3))
       {
          color_Set(Colors.colorButton.R,
                    Colors.colorButton.G,
@@ -189,11 +189,15 @@ int textBox::draw()
                    Colors.colorButton.A);
          rectangle_Fill(wSurface,x1+1,y1+1,x2-1,y2-1);
       }
-      color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
-                Colors.colorCont[0].B, Colors.colorCont[0].A);
-      rectangle_2Colors(wSurface,x1,y1,x2,y2,
-                       Colors.colorCont[1].R, Colors.colorCont[1].G,
-                       Colors.colorCont[1].B, Colors.colorCont[1].A);
+      
+      if(framed != 3)
+      {
+         color_Set(Colors.colorCont[0].R, Colors.colorCont[0].G,
+                   Colors.colorCont[0].B, Colors.colorCont[0].A);
+         rectangle_2Colors(wSurface,x1,y1,x2,y2,
+                          Colors.colorCont[1].R, Colors.colorCont[1].G,
+                          Colors.colorCont[1].B, Colors.colorCont[1].A);
+      }
    }
 
    if(fullText)

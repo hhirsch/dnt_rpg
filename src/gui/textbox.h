@@ -12,9 +12,10 @@
 #include <string>
 using namespace std;
 
-#define TEXT_BOX_NOT_FRAMED          0   /**< Text without frames */
-#define TEXT_BOX_FRAMED_FILLED       1   /**< Text with frames and BG color */
-#define TEXT_BOX_FRAMED_TRANSPARENT  2   /**< Text with frames and transparent */
+#define TEXT_BOX_NOT_FRAMED          0 /**< Text without frames */
+#define TEXT_BOX_FRAMED_FILLED       1 /**< Text with frames and BG color */
+#define TEXT_BOX_FRAMED_TRANSPARENT  2 /**< Text with frames and transparent */
+#define TEXT_BOX_NOT_FRAMED_FILLED   3 /**< Without frames, but filled */
 
 /*! The textLine represents each line of text in the
  * textBox, with his own font parameters and colors */
