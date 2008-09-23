@@ -140,10 +140,6 @@ engine::engine()
    defaultColor[3] = 1.0;
    blackColor[3] = 1.0;
 
-#ifdef VIDEO_MODE
-   startVideo = false;
-#endif
-
 }
 
 /*********************************************************************
@@ -1246,23 +1242,6 @@ void engine::init(SDL_Surface *screen)
 }
 
 /*********************************************************************
- *                              ScreenDump                           *
- *********************************************************************/
-#ifdef VIDEO_MODE
-void screenDump(char *destFile, short W, short H) 
-{
-  FILE   *out = fopen(destFile, "w");
-  char   pixel_data[3*SCREEN_X*SCREEN_Y];
-  short  TGAhead[] = {0, 2, 0, 0, 0, 0, W, H, 24};
-  glReadBuffer(GL_FRONT);
-  glReadPixels(0, 0, W, H, GL_BGR, GL_UNSIGNED_BYTE, pixel_data);
-  fwrite(&TGAhead, sizeof(TGAhead), 1, out);
-  fwrite(pixel_data, 3*W*H, 1, out);
-  fclose(out); 
-}
-#endif
-
-/*********************************************************************
  *                             rangeAction                           *
  *********************************************************************/
 bool engine::rangeAction(GLfloat posX, GLfloat posZ, 
@@ -2029,8 +2008,8 @@ int engine::treatIO(SDL_Surface *screen)
       guiEvent = 0;
 
       SDL_PumpEvents();
-      
-        
+
+
       /* Get Keyboard State */
       keys = SDL_GetKeyState(NULL);
 
@@ -2043,8 +2022,8 @@ int engine::treatIO(SDL_Surface *screen)
       updateMouseWorldPos();
 
       if( (time-lastMouse >=  REFRESH_RATE ) || 
-          ( (mButton & SDL_BUTTON(1) ) && 
-	       (time-lastMousePression >= REFRESH_RATE)) )
+            ( (mButton & SDL_BUTTON(1) ) && 
+              (time-lastMousePression >= REFRESH_RATE)) )
       {
          cursors->set(CURSOR_WALK);
          lastMouse = time;
@@ -2059,204 +2038,196 @@ int engine::treatIO(SDL_Surface *screen)
          }
       }
 
-               /* Keyboard Verification */
+      /* Keyboard Verification */
 
-         /* Exit Engine */
-         if( ( keys[SDLK_ESCAPE] ) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_ESCAPE) ) )
+      /* Exit Engine */
+      if( ( keys[SDLK_ESCAPE] ) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_ESCAPE) ) )
+      {
+         lastKey = SDLK_ESCAPE;
+         lastKeyb = time;
+         return(0);
+      }
+
+      /* Enter Attack Mode or End Turn */
+      if( (keys[SDLK_SPACE]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_SPACE) ) )
+      {
+         if(engineMode != ENGINE_MODE_TURN_BATTLE)
          {
-            lastKey = SDLK_ESCAPE;
-            lastKeyb = time;
-            return(0);
+            enterBattleMode(true);
+         }
+         else if(fightStatus == FIGHT_PC_TURN)
+         {
+            endTurn();
+         }
+         lastKey = SDLK_SPACE;
+         lastKeyb = time;
+      }
+
+      /* Enable / Disable The Range Draw */
+      if( (keys[SDLK_r]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_r) ) )
+      {
+         showRange = !showRange;
+         lastKey = SDLK_r;
+         lastKeyb = time;
+      }
+
+      /* Print All Models on List */
+      if( (keys[SDLK_F2]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_F2) ) )
+      {
+         lastKey = SDLK_F2;
+         lastKeyb = time;
+         models->printAll();
+      }
+
+      /* Open Minimap */
+      if( (keys[SDLK_m]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_m) ) )
+      {
+         if(!mapWindow->isOpened())
+         {
+            mapWindow->open(gui, 0,0, actualMap);
+         }
+         else
+         {
+            mapWindow->close(gui);
          }
 
-         /* Enter Attack Mode or End Turn */
-         if( (keys[SDLK_SPACE]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_SPACE) ) )
+         lastKey = SDLK_m;
+         lastKeyb = time;
+      }
+
+      /* Open ShortCuts */
+      if( (keys[SDLK_n]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_n) ) )
+      {
+         shortcuts->open(gui);
+         lastKey = SDLK_n;
+         lastKeyb = time;
+      }
+
+      /* Open Briefing */
+      if( (keys[SDLK_l]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_n) ) )
+      {
+         brief->openWindow(gui);
+         lastKey = SDLK_l;
+         lastKeyb = time;
+      }
+
+      /* Open Close Inventory */
+      if( (keys[SDLK_i]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_i) ) )
+      {
+         openCloseInventoryWindow(); 
+         lastKey = SDLK_i;
+         lastKeyb = time;
+      }
+
+      /* Open Character Info Window */
+      if( (keys[SDLK_c]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_c) ) ) 
+      {
+         lastKey = SDLK_c;
+         lastKeyb = time;
+         if(charInfoWindow)
          {
-            if(engineMode != ENGINE_MODE_TURN_BATTLE)
+            charInfoWindow->open(PCs->getActiveCharacter());
+         }
+      }
+
+
+      /* FIXME Remove all temporary tests from here */
+      if( (keys[SDLK_y]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_y) ) )
+      {
+         lastKey = SDLK_y;
+         lastKeyb = time;
+         if(!effect)
+         {
+            effect = (part2*)particleController->addParticle(PART_FIRE,
+                  activeCharacter->xPosition,0,
+                  activeCharacter->zPosition,
+                  "particles/effect1.par");
+            if(effect)
             {
-               enterBattleMode(true);
-            }
-            else if(fightStatus == FIGHT_PC_TURN)
-            {
-               endTurn();
-            }
-            lastKey = SDLK_SPACE;
-            lastKeyb = time;
-         }
-
-         /* Enable / Disable The Range Draw */
-         if( (keys[SDLK_r]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_r) ) )
-         {
-            showRange = !showRange;
-            lastKey = SDLK_r;
-            lastKeyb = time;
-         }
-
-         /* Print All Models on List */
-         if( (keys[SDLK_F2]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_F2) ) )
-         {
-            lastKey = SDLK_F2;
-            lastKeyb = time;
-            models->printAll();
-         }
-
-         /* Open Minimap */
-         if( (keys[SDLK_m]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_m) ) )
-         {
-             if(!mapWindow->isOpened())
-             {
-                mapWindow->open(gui, 0,0, actualMap);
-             }
-             else
-             {
-                mapWindow->close(gui);
-             }
-
-             lastKey = SDLK_m;
-             lastKeyb = time;
-         }
-
-         /* Open ShortCuts */
-         if( (keys[SDLK_n]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_n) ) )
-         {
-             shortcuts->open(gui);
-             lastKey = SDLK_n;
-             lastKeyb = time;
-         }
-
-         /* Open Briefing */
-         if( (keys[SDLK_l]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_n) ) )
-         {
-             brief->openWindow(gui);
-             lastKey = SDLK_l;
-             lastKeyb = time;
-         }
-
-         /* Open Close Inventory */
-         if( (keys[SDLK_i]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_i) ) )
-         {
-            openCloseInventoryWindow(); 
-            lastKey = SDLK_i;
-            lastKeyb = time;
-         }
-
-         /* Open Character Info Window */
-         if( (keys[SDLK_c]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_c) ) ) 
-         {
-            lastKey = SDLK_c;
-            lastKeyb = time;
-            if(charInfoWindow)
-            {
-               charInfoWindow->open(PCs->getActiveCharacter());
-            }
-         }
-
-
-         /* FIXME Remove all temporary tests from here */
-         if( (keys[SDLK_y]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_y) ) )
-         {
-            lastKey = SDLK_y;
-            lastKeyb = time;
-            if(!effect)
-            {
-               effect = (part2*)particleController->addParticle(PART_FIRE,
-                                          activeCharacter->xPosition,0,
-                                          activeCharacter->zPosition,
-                                          "particles/effect1.par");
-               if(effect)
-               {
-                  effect->setFollowPC(true);
-               }
-            }
-            else
-            {
-               particleController->removeParticle(PART_FIRE, effect);
-               effect = NULL;
+               effect->setFollowPC(true);
             }
          }
-         if( (keys[SDLK_t]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_t) ) )
+         else
          {
-            lastKey = SDLK_t;
-            lastKeyb = time;
-            particleController->addParticle(PART_METEOR,
-                                        activeCharacter->xPosition,
-                                        MAX_HEIGHT+100,
-                                        activeCharacter->zPosition,
-                                        0.0, -1.0, 0.0,
-                                        activeCharacter->xPosition,
-                                        actualMap->getHeight(
-                                                activeCharacter->xPosition,
-                                                activeCharacter->zPosition),
-                                                activeCharacter->zPosition,
-                                        "particles/fire1.par");
+            particleController->removeParticle(PART_FIRE, effect);
+            effect = NULL;
          }
-         if( (keys[SDLK_u]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_u) ) )
-         {
-            lastKey = SDLK_u;
-            GLfloat incZ = -cos(deg2Rad(activeCharacter->orientation));
-            GLfloat incX = -sin(deg2Rad(activeCharacter->orientation));
-            particleController->addParticle(PART_METEOR,
-                                       activeCharacter->xPosition,
-                                       activeCharacter->yPosition + 15,
-                                       activeCharacter->zPosition,
-                                       2*incX, 0.0, 2*incZ,
-                                       activeCharacter->xPosition + 800*incX,
-                                       activeCharacter->yPosition + 15,
-                                       activeCharacter->zPosition + 800*incZ,
-                                       "particles/fire1.par");
-         }
-         if( (keys[SDLK_l]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_l) ) )
-         {
-            lastKey = SDLK_l;
-            lastKeyb = time;
-            particleController->addParticle(PART_LIGHTNING,
-                                        activeCharacter->xPosition,250,
-                                        activeCharacter->zPosition,
-                                        "particles/lightning1.par");
-         }
+      }
+      if( (keys[SDLK_t]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_t) ) )
+      {
+         lastKey = SDLK_t;
+         lastKeyb = time;
+         particleController->addParticle(PART_METEOR,
+               activeCharacter->xPosition,
+               MAX_HEIGHT+100,
+               activeCharacter->zPosition,
+               0.0, -1.0, 0.0,
+               activeCharacter->xPosition,
+               actualMap->getHeight(
+                  activeCharacter->xPosition,
+                  activeCharacter->zPosition),
+               activeCharacter->zPosition,
+               "particles/fire1.par");
+      }
+      if( (keys[SDLK_u]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_u) ) )
+      {
+         lastKey = SDLK_u;
+         GLfloat incZ = -cos(deg2Rad(activeCharacter->orientation));
+         GLfloat incX = -sin(deg2Rad(activeCharacter->orientation));
+         particleController->addParticle(PART_METEOR,
+               activeCharacter->xPosition,
+               activeCharacter->yPosition + 15,
+               activeCharacter->zPosition,
+               2*incX, 0.0, 2*incZ,
+               activeCharacter->xPosition + 800*incX,
+               activeCharacter->yPosition + 15,
+               activeCharacter->zPosition + 800*incZ,
+               "particles/fire1.par");
+      }
+      if( (keys[SDLK_l]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_l) ) )
+      {
+         lastKey = SDLK_l;
+         lastKeyb = time;
+         particleController->addParticle(PART_LIGHTNING,
+               activeCharacter->xPosition,250,
+               activeCharacter->zPosition,
+               "particles/lightning1.par");
+      }
 
-         if( (keys[SDLK_0]) && 
-             ( (time-lastKeyb >= REFRESH_RATE) || 
-               (lastKey != SDLK_0) ) )
-         {
-            lastKey = SDLK_0;
-            lastKeyb = time;
-            hour += 0.1;
-         }
-
-#ifdef VIDEO_MODE
-   if(keys[SDLK_v])
-   {
-      startVideo = true;
-      printf("Started Video\n");
-   }
-#endif 
+      if( (keys[SDLK_0]) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_0) ) )
+      {
+         lastKey = SDLK_0;
+         lastKeyb = time;
+         hour += 0.1;
+      }
 
       /* Keys to character's movimentation */
       if(keys[SDLK_q] || keys[SDLK_e])
@@ -2398,15 +2369,16 @@ int engine::treatIO(SDL_Surface *screen)
                          (xReal - activeCharacter->xPosition) +
                          (zReal - activeCharacter->zPosition) *
                          (zReal - activeCharacter->zPosition) );
+            
+            float angle = getAngle(activeCharacter->xPosition,
+                                   activeCharacter->zPosition,
+                                   xReal, zReal);
             if(dist > 8)
             {
-               activeCharacter->orientation = 
-                                            getAngle(activeCharacter->xPosition,
-                                                     activeCharacter->zPosition,
-                                                     xReal, zReal);
+               activeCharacter->orientation = angle; 
             }
 
-            /* Try to move it forward */
+             /* Try to move it forward */
              varX = -1 * activeCharacter->walk_interval * 
                          sin(deg2Rad(activeCharacter->orientation));
              varZ = -1 * activeCharacter->walk_interval * 
@@ -2510,24 +2482,6 @@ int engine::treatIO(SDL_Surface *screen)
          shortcuts->setParticlesNumber(particleController->numParticles());
       }
       
-#ifdef VIDEO_MODE
-      if(startVideo)
-      {
-         /* Save frame images to compose demonstration video */
-         char name[50];
-         if(imgNumber < 10)
-            sprintf(name,"img/teste000%d.tga",imgNumber);
-         else if(imgNumber < 100)
-            sprintf(name,"img/teste00%d.tga",imgNumber);
-         else if(imgNumber < 1000)
-            sprintf(name,"img/teste0%d.tga",imgNumber);
-         else
-            sprintf(name,"img/teste%d.tga",imgNumber);
-         screenDump(name,SCREEN_X,SCREEN_Y);
-         imgNumber++;
-      }
-#endif
- 
       /* Verify Sounds FIXME -> for npc sounds! */
       if( (walked) && (activeCharacter->isAlive()) )
       {
@@ -2543,11 +2497,6 @@ int engine::treatIO(SDL_Surface *screen)
                                         activeCharacter->zPosition);
          }
          activeCharacter->setState(STATE_WALK);
-         #ifdef REDE
-           movchar(&clientData, activeCharacter->ID, 
-             activeCharacter->xPosition,activeCharacter->zPosition,
-             activeCharacter->orientation );
-         #endif
       }
       else if( (timePass) && (activeCharacter->isAlive()))
       { 
@@ -3321,19 +3270,6 @@ int engine::run(SDL_Surface *surface)
    actualFPS = 10.0;
    lastFPS = 0;
 
-   #ifdef REDE
-     /* if using network. FIXME abandoned code, almost for now. */
-     netevent_p_t eventoRede;
-     
-     initclientdata( &clientData );
-     if ( ( startconnection( &clientData, server, DEFAULTPORT )) == -1 )
-     {
-         printf("Can't connect!\nAborting...\n");
-         return(1);
-     }
-     entergame( &clientData );
-   #endif
-
    /* Open Needed windows */
    mapWindow->open(gui,0,0, actualMap);
    shortcuts->open(gui);
@@ -3455,78 +3391,6 @@ int engine::run(SDL_Surface *surface)
  
         }
      }
-
-     #ifdef REDE
-      /* Network Code. For now, we aren't using the network anymore, 
-       * it's not on the initial project scope, only being useful in
-       * an estable state. In other words, we hate MMORPG, and don't
-       * plain to do one. This will be a standalone RPG.
-       */
-      while( (eventoRede = pollnet( &clientData ) ) != NULL )
-      {
-         switch(eventoRede->type)
-         {
-             case MT_NEWCHAR: /* Insert new character */
-             {
-                character* per;
-                per = NPCs->InserirPersonagem(6,8,3,8,
-                             dir.getRealFile("pics/logan/cara.bmp"),0,0,
-                                             "LoganNPC",
-                                              "???",
-                             dir.getRealFile("pics/logan/"),features);
-                per->xPosition = eventoRede->x;
-                per->zPosition = eventoRede->y; 
-                per->orientation = eventoRede->teta;
-                per->ID = eventoRede->obj;
-                forcaAtualizacao = 1;
-                break; 
-             }
-             case MT_MOV: /* character movimentation */
-             {
-                character* per = (character*)NPCs->first->next;
-                if(per != NPCs->first) 
-                {
-                   while((per!=NPCs->first) && (eventoRede->obj!=per->ID))
-                   {
-                      per = (character*) per->next;
-                   }
-                   if(per!=NPCs->first)
-                   {
-                       per->xPosition = eventoRede->x;
-                       per->zPosition = eventoRede->y; 
-                       per->orientation = eventoRede->teta;
-                   }
-                }
-                break; 
-             }
-             case MT_ERROR:
-             {
-                 printf("Arrived error from server\n");
-                 return(1);
-             }
-             case MT_ENDSYNC:
-             {
-                 character* activeCharacter = PCs->getActiveCharacter();
-                 activeCharacter->ID = createchar( &clientData, 
-                 activeCharacter->xPosition, 
-                 activeCharacter->zPosition, 
-                 activeCharacter->orientation );
-                 if( activeCharacter->ID == -2 )
-                 {
-                     entergame( &clientData );
-                 }
-                 else if ( activeCharacter->ID == -1 )
-                 {
-                     printf("Server Full\n");
-                     return(1);
-                 }
-             }
-             default:break; /* By default, nothing! */
-         }
-      }
-    #endif
-
-
    }
 
    return(1);

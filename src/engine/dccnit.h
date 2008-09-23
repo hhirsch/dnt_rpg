@@ -52,10 +52,6 @@
 #include "sky.h"
 #include "util.h"
 
-#ifdef REDE
-  #include "../net/client.h"
-#endif
-
 /*!
     The Engine Class is where all things are "merged" on game.
  */
@@ -460,10 +456,6 @@ class engine
       GLfloat blackColor[4];
 
       SDL_Surface* actualScreen;  /**< Pointer to the actual screen */
-
-#ifdef VIDEO_MODE
-      bool startVideo;            /**< Used to start video making */
-#endif
 
 };
 
