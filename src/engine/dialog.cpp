@@ -670,7 +670,9 @@ void conversation::proccessAction(int numDialog, int opcao)
                actualPC->inventories->removeFromInventory(obj);
 
                /* Add it to the Owner NPC inventory */
-               //TODO (a modState to have item put at NPC inventory)
+               ownerNPC->inventories->addObject(obj);
+               /* NOTE: The NPC inventory is always saved at modstate when 
+                * the PC leaves the map, and reloaded when it come back */
             }
             else
             {
