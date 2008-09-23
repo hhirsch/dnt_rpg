@@ -39,6 +39,12 @@ void charWindow::open(character* pers)
    char buf[512];
    string tmpStr = "";
 
+   /* Ignore, if persnot defined */
+   if(!pers)
+   {
+      return;
+   }
+
    /* Close the window, if it is openned */
    if(isOpen())
    {
