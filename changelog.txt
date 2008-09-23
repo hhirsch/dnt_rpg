@@ -20,6 +20,7 @@
  old graphic cards, but disable the terrain texture splatting);
  - Fixed sun/moon position;
  - Continuous Walk with Mouse;
+ - Calling read-only skills window at character's window;
 
 Working on:
  - Optimizations for outdoor rendering;
