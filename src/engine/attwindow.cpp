@@ -25,9 +25,6 @@ attWindow::attWindow(skills* sk, skills* savSkill, guiInterface* inter,
    externalSkill = sk;
    saveSkill = savSkill;
 
-   /* Disable lighting */
-   glDisable(GL_LIGHTING);
-
    /* clear internal informations */
    for( i = 0; i < 6; i++)
    {
@@ -503,7 +500,6 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
          {
             inter->closeWindow(intWindow);
             intWindow = NULL;
-            glEnable(GL_LIGHTING);
             return(ATTW_CONFIRM);
          }
          else
@@ -511,8 +507,6 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
             showMessage(gettext("Warning"), 
                         gettext("You Need to Assign All Attributes."),
                         proj, modl,viewPort);
-            glDisable(GL_LIGHTING);
-            glDisable(GL_FOG);
             return(ATTW_OTHER);
          }
       }
@@ -521,7 +515,6 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
       {
           inter->closeWindow(intWindow);
           intWindow = NULL;
-          glEnable(GL_LIGHTING);
          return(ATTW_CANCEL);
       }
       /* Reroll */

@@ -25,8 +25,6 @@ classWindow::classWindow(classes* cls, skills* sk, guiInterface* inter,
    int centerX = SCREEN_X / 2;
    int i;
 
-   glDisable(GL_LIGHTING);
-   
    externalSkills = sk;
    
    choosedClass = retClass;
@@ -315,7 +313,6 @@ int classWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          classImage->set(NULL);
          *choosedClass = classesOrder[curClass];
          inter->closeWindow(intWindow);
-         glEnable(GL_LIGHTING);
          return(CLASSW_CONFIRM);
       }
       else if(object == (guiObject*) buttonCancel) 
@@ -324,7 +321,6 @@ int classWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          inter->closeWindow(intWindow);
          *choosedClass = NULL;
          intWindow = NULL;
-         glEnable(GL_LIGHTING);
          return(CLASSW_CANCEL);
       }
    }

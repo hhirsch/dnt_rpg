@@ -15,7 +15,6 @@ aspectWindow::aspectWindow(character* dude, guiInterface* inter)
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
-   glDisable(GL_LIGHTING);
 
    curImage = 0;
    images = NULL;
@@ -155,7 +154,6 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          figurePortrait->set(NULL);
          inter->closeWindow(intWindow);
          intWindow = NULL;
-         glEnable(GL_LIGHTING);
          return(ASPECTW_CONFIRM);
       }
       /* Cancel */
@@ -164,7 +162,6 @@ int aspectWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          figurePortrait->set(NULL);
          inter->closeWindow(intWindow);
          intWindow = NULL;
-         glEnable(GL_LIGHTING);
          return(ASPECTW_CANCEL);
       }
       /* Previous Image */

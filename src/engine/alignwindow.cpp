@@ -13,8 +13,6 @@ alignWindow::alignWindow(aligns* alg, guiInterface* inter, align** actual)
    int centerY = SCREEN_Y / 2;
    int centerX = SCREEN_X / 2;
 
-   glDisable(GL_LIGHTING);
-   
    externalAligns = alg;
    choosedAlign = actual;
    if(*choosedAlign != NULL)
@@ -105,7 +103,6 @@ int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          alignImage->set(NULL);
          *choosedAlign = actualAlign;
          inter->closeWindow(intWindow);
-         glEnable(GL_LIGHTING);
          return(ALIGNW_CONFIRM);
       }
       else if(object == (guiObject*) buttonCancel) 
@@ -114,7 +111,6 @@ int alignWindow::treat(guiObject* object, int eventInfo, guiInterface* inter)
          inter->closeWindow(intWindow);
          *choosedAlign = NULL;
          intWindow = NULL;
-         glEnable(GL_LIGHTING);
          return(ALIGNW_CANCEL);
       }
    }
