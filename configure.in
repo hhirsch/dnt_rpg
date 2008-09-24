@@ -98,6 +98,7 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  src/app/Makefile
                  src/app/mapEditor/Makefile
+                 src/app/partEditor/Makefile
                  src/cbook/Makefile
                  src/classes/Makefile
                  src/engine/Makefile
