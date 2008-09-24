@@ -39,17 +39,7 @@ BIN = ../../bin/
 
 OBJSFNT = $(OBJSGUI) $(ENDENGINE)culling.o $(ENDENGINE)util.o
 
-all: parts partEditor heightmap2dnt #DlgEditor dlgCompiler
-
-fntEditor.o: fntEditor.cpp fntEditor.h
-	@printf "Making fntEditor.o... "
-	@$(CC) $(CFLAGS) fntEditor.cpp -o fntEditor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-fntEditor: $(OBJSFNT) fntEditor.o
-	@printf "Linking fntEditor... "
-	@$(CC) $(EFLAGS) $(OBJSFNT) fntEditor.o -o $(BIN)fntEditor
-	@printf "\e[0;32mDone.\e[0;0m\n"
+all: parts heightmap2dnt
 
 heightmap2dnt.o: heightmap2dnt.cpp
 	@printf "Making heightmap2dnt.o... "
@@ -71,40 +61,6 @@ iaEditor:
 
 MapEditor: 
 	@cd ./mapEditor; make all;
-#$(OBJSGUI) $(OBJSMAPA) MapEditor.o
-#	@printf "Linking MapEditor... "
-#	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSMAPA) MapEditor.o -o $(BIN)MapEditor
-#	@printf "\e[0;32mDone.\e[0;0m\n"
-
-DlgEditor.o: DlgEditor.cpp
-	@printf "Making DlgEditor.o... "
-	@$(CC) $(CFLAGS) DlgEditor.cpp -o DlgEditor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-DlgEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJS) 
-	@printf "Linking DlgEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) $(OBJS) -o $(BIN)DlgEditor
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-dlgCompiler.o: dlgCompiler.cpp
-	@printf "Making dlgCompiler.o... "
-	@$(CC) $(CFLAGS) dlgCompiler.cpp -o dlgCompiler.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-dlgCompiler: $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o
-	@printf "Linking dlgCompiler... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSENGINE) dlgCompiler.o -o $(BIN)dlgCompiler
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-partEditor.o: partEditor.cpp
-	@printf "Making partEditor.o... "
-	@$(CC) $(CFLAGS) partEditor.cpp -o partEditor.o
-	@printf "\e[0;32mDone.\e[0;0m\n"
-
-partEditor: $(OBJSGUI) $(OBJSENGINE) $(OBJSMAPA) partEditor.o
-	@printf "Linking partEditor... "
-	@$(CC) $(EFLAGS) $(OBJSGUI) $(OBJSIA) $(OBJSMAPA) $(OBJSENGINE) $(OBJSPART) $(OBJSCLASSES) $(OBJSLANG) $(OBJSETC) $(OBJSSOUND) $(OBJSFIGHT) partEditor.o -o $(BIN)dntPartEditor
-	@printf "\e[0;32mDone.\e[0;0m\n"
 
 clean:
 	@printf "Cleaning App Bin Files... "
