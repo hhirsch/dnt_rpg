@@ -200,6 +200,8 @@ bool editor::createParticle(int partType)
          break;
       }
    }
+
+   updateTexts();
    return(true);
 }
 
@@ -422,7 +424,7 @@ void editor::treatTextBars(guiObject* obj)
 
    if(obj == maxLiveEdit)
    {
-      p->setMaxLive(value);
+      p->setMaxLive((int)value);
    }
    else if(obj == maxPartsEdit)
    {
@@ -573,6 +575,91 @@ void editor::treatTextBars(guiObject* obj)
 }
 
 /************************************************************************
+ *                            updateTexts                               *
+ ************************************************************************/
+void editor::updateTexts()
+{
+   char aux[10];
+  
+   sprintf(aux,"%d", p->getMaxLive());
+   maxLiveEdit->setText(aux);
+   sprintf(aux,"%d", p->getMaxParticles());
+   maxPartsEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getCenterX());
+   centerXEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getCenterY());
+   centerYEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getCenterZ());
+   centerZEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getGravity());
+   gravityEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getInitR());
+   initREdit->setText(aux);
+   sprintf(aux,"%.3f", p->getInitG());
+   initGEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getInitB());
+   initBEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getFinalR());
+   finalREdit->setText(aux);
+   sprintf(aux,"%.3f", p->getFinalG());
+   finalGEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getFinalB());
+   finalBEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getAlpha());
+   alphaEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDMultCenterX());
+   mCntXEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDMultCenterY());
+   mCntYEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDMultCenterZ());
+   mCntZEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumCenterX());
+   sCntXEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumCenterY());
+   sCntYEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumCenterZ());
+   sCntZEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDMultPosX());
+   mPosXEdit->setText(aux);  
+   sprintf(aux,"%.3f", p->getDMultPosY());
+   mPosYEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDMultPosZ());
+   mPosZEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumPosX());
+   sPosXEdit->setText(aux);  
+   sprintf(aux,"%.3f", p->getDSumPosY());
+   sPosYEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumPosZ());
+   sPosZEdit->setText(aux);
+
+   /**********************Edit*2*Window*****************************/ 
+   sprintf(aux,"%.3f", p->getDMultColorR());
+   dMColorREdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDMultColorG());
+   dMColorGEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDMultColorB());
+   dMColorBEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumColorR());
+   dSColorREdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumColorG());
+   dSColorGEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumColorB());
+   dSColorBEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDMultVelX());
+   dMVelXEdit->setText(aux); 
+   sprintf(aux,"%.3f", p->getDMultVelY());
+   dMVelYEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDMultVelZ());
+   dMVelZEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumVelX());
+   dSVelXEdit->setText(aux); 
+   sprintf(aux,"%.3f", p->getDSumVelY());
+   dSVelYEdit->setText(aux);
+   sprintf(aux,"%.3f", p->getDSumVelZ());
+   dSVelZEdit->setText(aux);
+}
+
+/************************************************************************
  *                           treatGuiEvents                             *
  ************************************************************************/
 void editor::treatGuiEvents()
@@ -698,10 +785,12 @@ void editor::run()
    /* Flux Control Variables */
    Uint32 lastUpdate = 0;
    Uint32 varTime = 0;
+   Uint32 time = 0;
 
    while(!done)
    {
-      varTime = (SDL_GetTicks() - lastUpdate);
+      time = SDL_GetTicks();
+      varTime = (time - lastUpdate);
       if(varTime >= UPDATE_RATE)
       {
          lastUpdate = SDL_GetTicks();
@@ -716,6 +805,12 @@ void editor::run()
 
          /* Render Things */
          render();
+      }
+      else
+      {
+         int t = SDL_GetTicks();
+         if(UPDATE_RATE - (t - time) > 5)
+            SDL_Delay(UPDATE_RATE - (t - time));
       }
    }
 }

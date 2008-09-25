@@ -64,6 +64,9 @@ class editor
       /*! Render things */
       void render();
 
+      /*! Update all text bars when loading a particle */
+      void updateTexts();
+
 
       int type;    /**< Current particle type */
       partAux* p;  /**< The Current Particle */
