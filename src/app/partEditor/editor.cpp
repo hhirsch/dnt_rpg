@@ -44,9 +44,10 @@ editor::editor()
    /* Create the GUI */
    gui = new guiInterface(NULL);
 
-   /* Nullify something */
+   /* Nullify elements */
    p = NULL;
-
+   fileWindow = NULL;
+   curFileName = "";
 }
 
 /************************************************************************
@@ -54,7 +55,14 @@ editor::editor()
  ************************************************************************/
 editor::~editor()
 {
+   /* Free Current Particle */
+   if(p)
+   {
+      deleteParticle();
+   }
+   /* Free GUI */
    delete(gui);
+   /* And free the camera */
    delete(gameCamera);
 }
 
@@ -136,7 +144,7 @@ void editor::deleteParticle()
 /************************************************************************
  *                          createParticle                              *
  ************************************************************************/
-bool editor::createParticle(string input, int partType)
+bool editor::createParticle(int partType)
 {
    if(p)
    {
@@ -151,12 +159,12 @@ bool editor::createParticle(string input, int partType)
    {
       case 1:
       { 
-         p = (partAux*) new part1(50,60,120,input);
+         p = (partAux*) new part1(50,60,120,curFileName);
          break;
       }
       case 2:
       {
-         p = (partAux*) new part2(50,0,120,input);
+         p = (partAux*) new part2(50,0,120,curFileName);
          break;
       }
       case 3:
@@ -166,22 +174,22 @@ bool editor::createParticle(string input, int partType)
       }
       case 4:
       {
-         p = (partAux*) new part4(50,0,120,input);
+         p = (partAux*) new part4(50,0,120,curFileName);
          break;
       }
       case 5:
       {
-         p = (partAux*) new part5(50,30,120,input);
+         p = (partAux*) new part5(50,30,120,curFileName);
          break;
       }
       case 6:
       {
-         p = (partAux*) new part6(50,250,120,input);
+         p = (partAux*) new part6(50,250,120,curFileName);
          break;
       }
       case 7:
       {
-         p = (partAux*) new part7(50,80,120,input);
+         p = (partAux*) new part7(50,80,120,curFileName);
          break;
       }
 
@@ -252,6 +260,32 @@ void editor::updateParticle()
          break;
       }
    }
+}
+
+/****************************************************************
+ *                      Open File  Window                       *
+ ****************************************************************/
+void editor::openFileWindow(bool load)
+{
+   if(fileWindow)
+   {
+       /* Close the current opened */
+       gui->closeWindow(fileWindow);
+   }
+
+   fileLoading = load;
+   fileWindow = gui->insertWindow(200,100,460,285,"File");
+   fileSelector = fileWindow->getObjectsList()->insertFileSel(5,18,load,
+                                                          "../data/particles/");
+   fileSelector->setFilter(".par");
+   if( (!fileLoading) && (!curFileName.empty()) )
+   {
+      fileSelector->setFileName(curFileName);
+   }
+   fileWindow->setAttributes(false,true,false,false);
+   fileWindow->setExternPointer(&fileWindow);
+   gui->openWindow(fileWindow);
+
 }
 
 /************************************************************************
@@ -375,9 +409,8 @@ void editor::treatGuiEvents()
          /* Reload Current Particle */
          if(p)
          {
-            //TODO
             //deleteParticle();
-            //createParticle(entrada);
+            //createParticle(currentFileName);
          }
       }
    }
@@ -390,7 +423,45 @@ void editor::treatGuiEvents()
       }
       else if(obj == buttonSave)
       {
-         //TODO call save Window, etc;
+         openFileWindow(false);
+      }
+      else if(obj == buttonLoad)
+      {
+         openFileWindow(true);
+      }
+   }
+   /* File Selectors Things */
+   else if(eventInfo == FILE_SEL_ACCEPT)
+   {
+      if(fileWindow)
+      {
+         if(obj == (guiObject*)fileSelector) 
+         {
+            curFileName = fileSelector->getFileName();
+            gui->closeWindow(fileWindow);
+            if(fileLoading)
+            {
+               /* Load the particle (with curFileName) */
+               //TODO Get Particle Type
+               createParticle(2);
+            }
+            else
+            {
+              /* TODO call Save Function */
+              //saveParticle();
+            }
+         }
+      }
+   }
+   else if(eventInfo == FILE_SEL_CANCEL)
+   {
+      if(fileWindow)
+      {
+         /* Just close the window */
+         if(obj == (guiObject*)fileSelector) 
+         {
+            gui->closeWindow(fileWindow);
+         }
       }
    }
 }
@@ -415,6 +486,8 @@ void editor::render()
    glPopMatrix();
 
    glColor3f(1.0,1.0,1.0);
+
+   glDisable(GL_BLEND);
 
    draw2DMode(); 
       gui->draw(proj,modl,viewPort);

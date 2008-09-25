@@ -49,7 +49,7 @@ class editor
        * \param input -> particle filename from input 
        * \param partType -> particle type
        * \return -> true if can create, false otherwise */
-      bool createParticle(string input, int partType);
+      bool createParticle(int partType);
 
       /*! Delete the current particle */
       void deleteParticle();
@@ -84,10 +84,18 @@ class editor
       button* buttonSave; /**< Save Button */
       button* buttonExit; /**< Exit Button */
 
-      GLfloat viewMatrix[6][4];
-      GLdouble proj[16];
-      GLdouble modl[16];
-      GLint viewPort[4];
+      /**********************File*Window*******************************/
+      window* fileWindow;      /**< File Selector Window (for load/save) */
+      fileSel* fileSelector;   /**< The file selector itself */
+      bool fileLoading;        /**< If is loading or saving */
+      void openFileWindow(bool load);
+
+      string curFileName;      /**< Filename of Current Particle Open */
+
+      GLfloat viewMatrix[6][4];  /**< Current Visible Matrix */
+      GLdouble proj[16];         /**< Current Projection Matrix */
+      GLdouble modl[16];         /**< Current Model View Matrix */
+      GLint viewPort[4];         /**< Current View Port Vector */
 };
 
 #endif
