@@ -128,7 +128,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       for(i = 0; i < total; i++)
       {
          /* FIXME -> set the Wind! */
-         gr->NextStep(matriz, PCposX, PCposY, PCposZ, NULL);
+         gr->nextStep(matriz, PCposX, PCposY, PCposZ, NULL);
 
          /* Verify Living */
          if( (gr->systemMaxLiveTime != 0) && 
@@ -153,7 +153,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       {
          wt->definePosition(PCposX, PCposY, PCposZ);
       }
-      wt->NextStep(matriz);
+      wt->nextStep(matriz);
 
       /* Verify Live */
       if( (wt->systemMaxLiveTime != 0) && 
@@ -179,7 +179,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       {
          fr->definePosition(PCposX, PCposY, PCposZ);
       }
-      fr->NextStep(matriz);
+      fr->nextStep(matriz);
    
       /* Verify Live */
       if( (fr->systemMaxLiveTime != 0) && 
@@ -199,7 +199,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
    total = meteorParticles->getTotal();
    for(i = 0; i < total; i++)
    {
-      mt->NextStep(matriz);
+      mt->nextStep(matriz);
 
 
       /* Verify Live */
@@ -224,7 +224,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       {
          ws->definePosition(PCposX, PCposY, PCposZ);
       }
-      ws->NextStep(matriz);
+      ws->nextStep(matriz);
 
       /* Verify Live */
       if( (ws->systemMaxLiveTime != 0) && 
@@ -248,7 +248,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       {
          sm->definePosition(PCposX, PCposY, PCposZ);
       }
-      sm->NextStep(matriz);
+      sm->nextStep(matriz);
 
       /* Verify Live */
       if( (sm->systemMaxLiveTime != 0) && 
@@ -272,7 +272,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       {
          bl->definePosition(PCposX, PCposY, PCposZ);
       }
-      bl->NextStep(matriz);
+      bl->nextStep(matriz);
 
       /* Verify Live */
       if( (bl->systemMaxLiveTime != 0) && 
@@ -296,7 +296,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       {
          lt->definePosition(PCposX, PCposY, PCposZ);
       }
-      lt->NextStep(matriz);
+      lt->nextStep(matriz);
 
       /* Verify Live */
       if( (lt->systemMaxLiveTime != 0) && 
@@ -320,7 +320,7 @@ void partController::updateAll(float PCposX, float PCposY, float PCposZ,
       {
          sn->definePosition(PCposX, PCposY, PCposZ);
       }
-      sn->NextStep(matriz);
+      sn->nextStep(matriz);
 
       /* Verify Live */
       if( (sn->systemMaxLiveTime != 0) && 

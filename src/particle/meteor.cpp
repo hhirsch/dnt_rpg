@@ -55,7 +55,7 @@ void meteor::defineCollision(collision* col)
 /*****************************************************************
  *                           initRender                          *
  *****************************************************************/
-void meteor::InitRender()
+void meteor::initRender()
 {
    if(!dead)
    {
@@ -95,7 +95,7 @@ void meteor::InitRender()
 /*****************************************************************
  *                            endRender                          *
  *****************************************************************/
-void meteor::EndRender()
+void meteor::endRender()
 {
    glPopMatrix();
 }
@@ -118,11 +118,11 @@ bool meteor::isLiving()
 /****************************************************************************
  *                                NextStep                                  *
  ****************************************************************************/
-void meteor::NextStep(GLfloat matriz[6][4])
+void meteor::nextStep(GLfloat matriz[6][4])
 {
-   InitRender();
-   intFire->NextStep(matriz);
-   EndRender();
+   initRender();
+   intFire->nextStep(matriz);
+   endRender();
 }
 
 int meteor::numParticles()
@@ -130,11 +130,11 @@ int meteor::numParticles()
    return(intFire->numParticles());
 }
 
-void meteor::Render(particle* p)
+void meteor::render(particle* p)
 {
 }
 
-void meteor::actualize(particle* p)
+void meteor::update(particle* p)
 {
 }
 

@@ -17,7 +17,7 @@ part7::part7(float cX,float cY,float cZ, string fileName):
    centerY=cY; 
    centerZ=cZ;
    actualParticles = 0;
-   partTexture = LoadTexture(dir.getRealFile("particles/snow.png"));
+   partTexture = loadTexture(dir.getRealFile("particles/snow.png"));
 }
 
 /****************************************************************************
@@ -31,7 +31,7 @@ part7::~part7()
 /****************************************************************************
  *                                Render                                    *
  ****************************************************************************/
-void part7::Render(particle* part)
+void part7::render(particle* part)
 {
    //Not Used!
 }
@@ -39,7 +39,7 @@ void part7::Render(particle* part)
 /****************************************************************************
  *                             InitRender                                   *
  ****************************************************************************/
-void part7::InitRender()
+void part7::initRender()
 {
   glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
@@ -74,7 +74,7 @@ void part7::InitRender()
 /****************************************************************************
  *                              EndRender                                   *
  ****************************************************************************/
-void part7::EndRender()
+void part7::endRender()
 {
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
@@ -96,9 +96,9 @@ void part7::EndRender()
 }
 
 /****************************************************************************
- *                              actualize                                   *
+ *                                update                                    *
  ****************************************************************************/
-void part7::actualize(particle* part)
+void part7::update(particle* part)
 {
    if(part->posY <= 0 )
    {
@@ -184,10 +184,10 @@ void part7::createParticle(particle* part)
 /****************************************************************************
  *                               NextStep                                   *
  ****************************************************************************/
-void part7::NextStep(GLfloat matriz[6][4])
+void part7::nextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
-   DoStep(matriz);
+   doStep(matriz);
 }
 
 /****************************************************************************
@@ -196,25 +196,5 @@ void part7::NextStep(GLfloat matriz[6][4])
 int part7::numParticles()
 {
    return(actualParticles);
-}
-
-/****************************************************************************
- *                             LoadTexture                                  *
- ****************************************************************************/
-GLuint part7::LoadTexture(string fileName)
-{
-   GLuint indice;
-   SDL_Surface* img = IMG_Load(fileName.c_str());
-
-   glGenTextures(1, &(indice));
-   glBindTexture(GL_TEXTURE_2D, indice);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
-
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-   SDL_FreeSurface(img);
-   return(indice);
 }
 

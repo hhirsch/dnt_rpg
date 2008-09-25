@@ -53,24 +53,24 @@ class part1: public particleSystem
        * Render one particle on screen
        * \param part -> particle to render
        ***************************************************************/
-      void Render(particle* part);
+      void render(particle* part);
       /*!
        ***************************************************************
        * Do things before render (like glBegin)
        ***************************************************************/ 
-      void InitRender();
+      void initRender();
       /*!
        ***************************************************************
        * Do things after render (like glEnd)
        ***************************************************************/ 
-      void EndRender();
+      void endRender();
       /*!
        ***************************************************************
-       * actualize particles attributes (with global independent
+       * Update particles attributes (with global independent
        *         forces and influentions).
        * \param part -> particle to actualize
        ***************************************************************/
-      void actualize(particle* part);
+      void update(particle* part);
       /*!
        ***************************************************************
        * Verifies if the particle continue live or not.
@@ -95,7 +95,7 @@ class part1: public particleSystem
        * Do a step on system after sec seconds
        * \param matriz -> View Frustum Matrix
        ***************************************************************/
-      void NextStep(GLfloat matriz[6][4]);
+      void nextStep(GLfloat matriz[6][4]);
       /*!
        ***************************************************************
        * Gets the number of actual active particles
@@ -164,16 +164,11 @@ class part1: public particleSystem
 
    private:
       float seconds;         /**< Actual Time on particle */
-      GLuint partTexture;    /**< Current particle texture */
+
       interPlane* intersections; /**< The internal Planes */
       int actualPlanes;      /**< actual number of planes */
 
-      /*!
-       **************************************************************
-       * Load the particle texture file
-       * \param fileName -> texture file name;
-       ***************************************************************/
-      GLuint LoadTexture(string fileName);
+      
 };
 
 

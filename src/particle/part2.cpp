@@ -18,7 +18,7 @@ part2::part2(float cX,float cY,float cZ, string fileName):
    centerY = cY; 
    centerZ = cZ;
    actualParticles = 0;
-   partTexture = LoadTexture(dir.getRealFile("particles/part2.png"));
+   partTexture = loadTexture(dir.getRealFile("particles/part2.png"));
 }
 
 /****************************************************************************
@@ -32,7 +32,7 @@ part2::~part2()
 /****************************************************************************
  *                                 Render                                   *
  ****************************************************************************/
-void part2::Render(particle* part)
+void part2::render(particle* part)
 {
    //Not Used
 }
@@ -40,7 +40,7 @@ void part2::Render(particle* part)
 /****************************************************************************
  *                               InitRender                                 *
  ****************************************************************************/
-void part2::InitRender()
+void part2::initRender()
 {
    glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
@@ -82,7 +82,7 @@ void part2::InitRender()
 /****************************************************************************
  *                               EndRenderer                                *
  ****************************************************************************/
-void part2::EndRender()
+void part2::endRender()
 {
    glDisable(GL_COLOR_MATERIAL);
    glDisable(GL_CULL_FACE);
@@ -105,9 +105,9 @@ void part2::EndRender()
 }
 
 /****************************************************************************
- *                                actualize                                 *
+ *                                 update                                   *
  ****************************************************************************/
-void part2::actualize(particle* part)
+void part2::update(particle* part)
 {
    float percent = (float) part->age / (float) (maxLive-1);
 
@@ -188,10 +188,10 @@ void part2::createParticle(particle* part)
 /****************************************************************************
  *                                NextStep                                  *
  ****************************************************************************/
-void part2::NextStep(GLfloat matriz[6][4])
+void part2::nextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
-   DoStep(matriz);
+   doStep(matriz);
 }
 
 /****************************************************************************
@@ -200,25 +200,5 @@ void part2::NextStep(GLfloat matriz[6][4])
 int part2::numParticles()
 {
    return(actualParticles);
-}
-
-/****************************************************************************
- *                               LoadTexture                                *
- ****************************************************************************/
-GLuint part2::LoadTexture(string fileName)
-{
-   GLuint indice;
-   SDL_Surface* img = IMG_Load(fileName.c_str());
-
-   glGenTextures(1, &(indice));
-   glBindTexture(GL_TEXTURE_2D, indice);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
-
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-   SDL_FreeSurface(img);
-   return(indice);
 }
 

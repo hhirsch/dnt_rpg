@@ -7,6 +7,11 @@
 //                                                                        //
 ////////////////////////////////////////////////////////////////////////////
 
+int partAux::getDrawMode()
+{
+   return(drawMode);
+}
+
 void partAux::setMaxLive(int mLive)
 {
    maxLive = mLive;

@@ -17,7 +17,7 @@ part4::part4(float cX,float cY,float cZ, string fileName):
    centerY = cY; 
    centerZ = cZ;
    actualParticles = 0;
-   partTexture = LoadTexture(dir.getRealFile("particles/smoke5.png"));
+   partTexture = loadTexture(dir.getRealFile("particles/smoke5.png"));
 }
 
 /****************************************************************************
@@ -31,7 +31,7 @@ part4::~part4()
 /****************************************************************************
  *                                 Render                                   *
  ****************************************************************************/
-void part4::Render(particle* part)
+void part4::render(particle* part)
 {
    //Not Used
 }
@@ -39,9 +39,9 @@ void part4::Render(particle* part)
 /****************************************************************************
  *                               InitRender                                 *
  ****************************************************************************/
-void part4::InitRender()
+void part4::initRender()
 {
-  glDisable(GL_LIGHTING);
+   glDisable(GL_LIGHTING);
    glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LESS);
    glDepthMask(GL_FALSE);
@@ -77,7 +77,7 @@ void part4::InitRender()
 /****************************************************************************
  *                               EndRender                                  *
  ****************************************************************************/
-void part4::EndRender()
+void part4::endRender()
 {
    glDisable(GL_CULL_FACE);
    glEnable(GL_DEPTH_TEST);
@@ -99,9 +99,9 @@ void part4::EndRender()
 }
 
 /****************************************************************************
- *                                actualize                                 *
+ *                                 update                                   *
  ****************************************************************************/
-void part4::actualize(particle* part)
+void part4::update(particle* part)
 {
    float percent = (float) part->age / (float) (maxLive-1);
 
@@ -180,10 +180,10 @@ void part4::createParticle(particle* part)
 /****************************************************************************
  *                                NextStep                                  *
  ****************************************************************************/
-void part4::NextStep(GLfloat matriz[6][4])
+void part4::nextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
-   DoStep(matriz);
+   doStep(matriz);
 }
 
 /****************************************************************************
@@ -192,25 +192,5 @@ void part4::NextStep(GLfloat matriz[6][4])
 int part4::numParticles()
 {
    return(actualParticles);
-}
-
-/****************************************************************************
- *                               LoadTexture                                *
- ****************************************************************************/
-GLuint part4::LoadTexture(string fileName)
-{
-   GLuint indice;
-   SDL_Surface* img = IMG_Load(fileName.c_str());
-
-   glGenTextures(1, &(indice));
-   glBindTexture(GL_TEXTURE_2D, indice);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
-
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-   SDL_FreeSurface(img);
-   return(indice);
 }
 

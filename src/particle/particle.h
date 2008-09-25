@@ -70,12 +70,19 @@ class particleSystem
        * \param mode -> draw mode
        ***************************************************************/
       void init(int total, int mode);
+      
+       /*!
+       ***************************************************************
+       * Finish the System                                             
+       ***************************************************************/
+      void finish();
+      
       /*!
        ***************************************************************
        * Save the system to a file
        * \param fileName -> name of file to save
        ***************************************************************/
-      void Save( string fileName);
+      void save( string fileName);
 
 
       /*!
@@ -83,24 +90,24 @@ class particleSystem
        * Render one particle on screen     
        *  \param part -> particle to render
        ***************************************************************/
-      virtual void Render(particle* part)=0;
+      virtual void render(particle* part)=0;
       /*!
        ***************************************************************
        * Do things before render (like glBegin)    
        ***************************************************************/ 
-      virtual void InitRender()=0;
+      virtual void initRender()=0;
       /*!
        ***************************************************************
        * Do things after render (like glEnd)  
        ***************************************************************/ 
-      virtual void EndRender()=0;
+      virtual void endRender()=0;
       /*!
        ***************************************************************
-       * actualize particles attributes (with global independent
+       * update particles attributes (with global independent
        *         forces and influentions). 
        * \param part -> particle to actualize
        ***************************************************************/
-      virtual void actualize(particle* part)=0;
+      virtual void update(particle* part)=0;
       /*!
        ***************************************************************
        * Vertifies if a particle continue live or not
@@ -124,7 +131,7 @@ class particleSystem
        * Actualize and render all particles  
        * \param matriz -> viewFrustum Matrix
        ***************************************************************/
-      void DoStep(GLfloat matriz[6][4]); 
+      void doStep(GLfloat matriz[6][4]); 
       /*!
        ***************************************************************
        * Define XZ position
@@ -236,6 +243,8 @@ class particleSystem
 
       particle* particles;     /**< Internal Particles Vector */
 
+      GLuint partTexture;      /**< Current particle texture */
+      
       extensions ext;          /**< The OpenGL Extensions */
 
 
@@ -244,6 +253,13 @@ class particleSystem
        * Reset The Bounding Box
        ***************************************************************/
       void resetBoundingBox();
+
+      /*!
+       **************************************************************
+       * Load the particle texture file
+       * \param fileName -> texture file name;
+       ***************************************************************/
+      GLuint loadTexture(string fileName);
 
 };
 

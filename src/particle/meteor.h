@@ -34,12 +34,12 @@ class meteor: public particleSystem
        ***************************************************************
        * Do things before render (like glBegin)
        ***************************************************************/  
-      void InitRender();
+      void initRender();
       /*!
        ***************************************************************
        * Do things after render (like glEnd)
        ***************************************************************/ 
-      void EndRender();
+      void endRender();
 
       /*!
        ****************************************************************
@@ -54,7 +54,7 @@ class meteor: public particleSystem
        * Do Next Step on System, rendering and actualizing
        * \param matriz -> View Frustum Matrix
        ***************************************************************/
-      void NextStep(GLfloat matriz[6][4]);
+      void nextStep(GLfloat matriz[6][4]);
 
       /*!
        ***************************************************************
@@ -72,10 +72,10 @@ class meteor: public particleSystem
 
       /*! Not Used
        * \param part -> not used */
-       void Render(particle* part);
+       void render(particle* part);
        /*! Not Used
        * \param part -> not used */
-       void actualize(particle* part);
+       void update(particle* part);
        /*! Not Used
        * \param part -> not used */
        bool continueLive(particle* part);

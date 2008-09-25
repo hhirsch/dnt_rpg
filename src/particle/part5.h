@@ -20,24 +20,24 @@ class part5: public particleSystem
        * Render one particle on screen
        * \param part -> particle to render
        ***************************************************************/
-      void Render(particle* part);
+      void render(particle* part);
       /*!
        ***************************************************************
        * Do things before render (like glBegin)
        ***************************************************************/  
-      void InitRender();
+      void initRender();
       /*!
        ***************************************************************
        * Do things after render (like glEnd)
        ***************************************************************/ 
-      void EndRender();
+      void endRender();
       /*!
        ****************************************************************
-       * Actualize particles attributes (with global independent
+       * Update particles attributes (with global independent
        *         forces and influentions).
        * \param part -> particle to actualize
        ***************************************************************/
-      void actualize(particle* part);
+      void update(particle* part);
       /*!
        ***************************************************************
        * Verifies if a particle continue live
@@ -62,22 +62,15 @@ class part5: public particleSystem
        * Do Next Step on System, rendering and actualizing
        * \param matriz -> view frustum Matrix
        ***************************************************************/
-      void NextStep(GLfloat matriz[6][4]);
+      void nextStep(GLfloat matriz[6][4]);
       /*!
        ***************************************************************
        * Gets total living particles.
        * \return number of living particles
        ***************************************************************/
       int numParticles();
-      /*!
-       **************************************************************
-       * Load the particle texture file
-       * \param fileName -> texture file name;
-       ***************************************************************/
-      GLuint LoadTexture(string fileName);
 
    private:
-      GLuint partTexture; /**< Particle Texture */
       bool doneCreation;  /**< Mark when finished the creation period */
 };
 

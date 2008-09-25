@@ -18,6 +18,8 @@ class partAux: public particleSystem
       /*! Destructor */
       ~partAux(){};
 
+      int getDrawMode();
+
       void setMaxLive(int mLive);
       int getMaxLive();
 

@@ -428,7 +428,12 @@ void editor::treatTextBars(guiObject* obj)
    }
    else if(obj == maxPartsEdit)
    {
+      if(value == 0)
+      {
+         value = 1;
+      }
       p->setMaxParticles((int)value);
+      p->init((int)value, p->getDrawMode());
    }
    else if(obj == centerXEdit)
    {
@@ -766,6 +771,8 @@ void editor::render()
    glColor3f(1.0,1.0,1.0);
 
    glDisable(GL_BLEND);
+   glDisable(GL_FOG);
+   glDisable(GL_LIGHTING);
 
    draw2DMode(); 
       gui->draw(proj,modl,viewPort);

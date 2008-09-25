@@ -43,24 +43,24 @@ public:
        * Render one particle on screen
        * \param part -> particle to render
        ***************************************************************/
-      void Render(particle* part);
+      void render(particle* part);
       /*!
        ***************************************************************
        * Do things before render (like glBegin)
        ***************************************************************/  
-      void InitRender();
+      void initRender();
       /*!
        ***************************************************************
        * Do things after render (like glEnd)
        ***************************************************************/ 
-      void EndRender();
+      void endRender();
       /*!
        ****************************************************************
        * Actualize particles attributes (with global independent
        *         forces and influentions).
        * \param part -> particle to actualize
        ***************************************************************/
-      void actualize(particle* part);
+      void update(particle* part);
       /*!
        ***************************************************************
        * Verifies if a particle continue live
@@ -89,7 +89,7 @@ public:
        * \param pcPosZ -> PC Z position
        * \param affectWind ->the wind that affect the system
        ***************************************************************/
-      void NextStep(GLfloat matriz[6][4],
+      void nextStep(GLfloat matriz[6][4],
                     GLfloat pcPosX, GLfloat pcPosY, GLfloat pcPosZ,
                     wind* affectWind);
       /*!

@@ -33,7 +33,7 @@ part3::~part3()
 /****************************************************************************
  *                                 Render                                   *
  ****************************************************************************/
-void part3::Render(particle* part)
+void part3::render(particle* part)
 {
    glColor4f(part->R,part->G,part->B,alpha);
    glVertex3f(part->posX,
@@ -45,7 +45,7 @@ void part3::Render(particle* part)
 /****************************************************************************
  *                               InitRender                                 *
  ****************************************************************************/
-void part3::InitRender()
+void part3::initRender()
 {
    glDisable(GL_LIGHTING);
    glEnable( GL_BLEND );
@@ -56,7 +56,7 @@ void part3::InitRender()
 /****************************************************************************
  *                               EndRender                                  *
  ****************************************************************************/
-void part3::EndRender()
+void part3::endRender()
 {
    glEnd();
    glDisable(GL_TEXTURE_2D);
@@ -65,9 +65,9 @@ void part3::EndRender()
 }
 
 /****************************************************************************
- *                                actualize                                 *
+ *                                 update                                   *
  ****************************************************************************/
-void part3::actualize(particle* part)
+void part3::update(particle* part)
 {
    int next = part->internalNumber+2 ;
    if(part->internalNumber == 0)
@@ -148,10 +148,10 @@ void part3::createParticle(particle* part)
 /****************************************************************************
  *                                NextStep                                  *
  ****************************************************************************/
-void part3::NextStep(GLfloat matriz[6][4])
+void part3::nextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
-   DoStep(matriz);
+   doStep(matriz);
 }
 
 /****************************************************************************
@@ -160,25 +160,5 @@ void part3::NextStep(GLfloat matriz[6][4])
 int part3::numParticles()
 {
    return(actualParticles);
-}
-
-/****************************************************************************
- *                               LoadTexture                                *
- ****************************************************************************/
-GLuint part3::LoadTexture(char* fileName)
-{
-   GLuint indice;
-   SDL_Surface* img = IMG_Load(fileName);
-
-   glGenTextures(1, &(indice));
-   glBindTexture(GL_TEXTURE_2D, indice);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
-
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-   SDL_FreeSurface(img);
-   return(indice);
 }
 

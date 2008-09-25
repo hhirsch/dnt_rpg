@@ -92,7 +92,7 @@ grass::~grass()
 /**************************************************************************
  *                                Render                                  *
  **************************************************************************/
-void grass::Render(particle* part)
+void grass::render(particle* part)
 {
    int n = part->internalNumber;
 
@@ -153,7 +153,7 @@ void grass::Render(particle* part)
 /**************************************************************************
  *                              InitRender                                *
  **************************************************************************/
-void grass::InitRender()
+void grass::initRender()
 {
    glColor4f(1.0,1.0,1.0, 1.0);
    glEnable(GL_COLOR_MATERIAL);
@@ -173,7 +173,7 @@ void grass::InitRender()
 /**************************************************************************
  *                              EndRender                                 *
  **************************************************************************/
-void grass::EndRender()
+void grass::endRender()
 {
    /* Draw as arrays */
    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -200,9 +200,9 @@ void grass::EndRender()
 }
 
 /**************************************************************************
- *                              actualize                                 *
+ *                                update                                  *
  **************************************************************************/
-void grass::actualize(particle* part)
+void grass::update(particle* part)
 {
    bool done = false;
    /* Verify the PC Influence */
@@ -295,7 +295,7 @@ void grass::createParticle(particle* part)
 /**************************************************************************
  *                               NextStep                                 *
  **************************************************************************/
-void grass::NextStep(GLfloat matriz[6][4], 
+void grass::nextStep(GLfloat matriz[6][4], 
                      GLfloat pcPosX, GLfloat pcPosY, GLfloat pcPosZ,
                      wind* affectWind)
 {
@@ -306,7 +306,7 @@ void grass::NextStep(GLfloat matriz[6][4],
    pcY = pcPosY;
    pcZ = pcPosZ;
 
-   DoStep(matriz);
+   doStep(matriz);
 }
 
 /**************************************************************************

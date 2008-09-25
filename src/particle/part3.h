@@ -20,24 +20,24 @@ class part3: public particleSystem
        * Render one particle on screen
        * \param part -> particle to render
        ***************************************************************/
-      void Render(particle* part);
+      void render(particle* part);
       /*!
        ***************************************************************
        * Do things before render (like glBegin)
        ***************************************************************/  
-      void InitRender();
+      void initRender();
       /*!
        ***************************************************************
        * Do things after render (like glEnd)
        ***************************************************************/ 
-      void EndRender();
+      void endRender();
       /*!
        ****************************************************************
-       * Actualize particles attributes (with global independent
+       * Update particles attributes (with global independent
        *         forces and influentions).
        * \param part -> particle to actualize
        ***************************************************************/
-      void actualize(particle* part);
+      void update(particle* part);
       /*!
        ***************************************************************
        * Verifies if a particle continue live
@@ -62,7 +62,7 @@ class part3: public particleSystem
        * Do Next Step on System, rendering and actualizing
        * \param matriz -> view Frustum Matrix 
        ***************************************************************/
-      void NextStep(GLfloat matriz[6][4]);
+      void nextStep(GLfloat matriz[6][4]);
       /*!
        ***************************************************************
        * Gets total living particles.
@@ -77,14 +77,6 @@ class part3: public particleSystem
       int time;      /**< Time passed (on frames) from particle creation */
       float seconds; /**< \todo Seconds, not used anymore.  */
       int xCoord, yCoord; /* Texture coordinate for actual particle */
-      GLuint partTexture; /**< Particle GL Texture */
-
-      /*!
-       **************************************************************
-       * Load the particle texture file
-       * \param fileName -> texture file name;
-       ***************************************************************/
-      GLuint LoadTexture(char* fileName);
 };
 
 

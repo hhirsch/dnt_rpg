@@ -1,7 +1,8 @@
 #include "particle.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
+#include <SDL/SDL_image.h>
 
 #include "../engine/culling.h"
 
@@ -143,19 +144,30 @@ void particleSystem::init(int total, int mode)
 }
 
 /***************************************************************
+ *                            finish                           *
+ ***************************************************************/
+void particleSystem::finish()
+{
+   if(particles)
+   {
+      delete []particles; 
+      if(drawMode == PARTICLE_DRAW_GROUPS)
+      {
+         delete[] vertexArray;
+         vertexArray = NULL;
+         delete[] colorArray;
+         colorArray = NULL;
+      }
+   }
+   particles = NULL;
+}
+
+/***************************************************************
  *                 Particle System Destructor                  *
  ***************************************************************/
 particleSystem::~particleSystem()
 {
-   delete []particles; 
-   if(drawMode == PARTICLE_DRAW_GROUPS)
-   {
-      delete[] vertexArray;
-      vertexArray = NULL;
-      delete[] colorArray;
-      colorArray = NULL;
-   }
-   particles = NULL;
+   finish();
 }
 
 /***************************************************************
@@ -174,7 +186,7 @@ void particleSystem::resetBoundingBox()
 /***************************************************************
  *                 Do a step to Particle System                *
  ***************************************************************/
-void particleSystem::DoStep(GLfloat matriz[6][4])
+void particleSystem::doStep(GLfloat matriz[6][4])
 {
    int n;
    int pendingCreate = needCreate();
@@ -183,7 +195,7 @@ void particleSystem::DoStep(GLfloat matriz[6][4])
 
    resetBoundingBox();
 
-   InitRender();
+   initRender();
 
    for(n = 0; n < maxParticles; n++)
    { 
@@ -210,7 +222,7 @@ void particleSystem::DoStep(GLfloat matriz[6][4])
       /* Only for alive particles, actualize parameters */
       if( particles[n].status == PARTICLE_STATUS_ALIVE )
       {
-         actualize(&particles[n]);
+         update(&particles[n]);
       }
 
       /* Render "not dead" particles */
@@ -271,7 +283,7 @@ void particleSystem::DoStep(GLfloat matriz[6][4])
          else if(visibleCube(boundX1, boundY1, boundZ1, boundX2, 
                                  boundY2, boundZ2,matriz))
          {
-            Render(&particles[n]);
+            render(&particles[n]);
          }
          alive += 3;
          aliveColor += 3;
@@ -292,14 +304,14 @@ void particleSystem::DoStep(GLfloat matriz[6][4])
       glDisableClientState(GL_COLOR_ARRAY);
    }
 
-   EndRender();
+   endRender();
 
 }
 
 /***********************************************************
  *                         Save                            *
  ***********************************************************/
-void particleSystem::Save( string fileName)
+void particleSystem::save( string fileName)
 {
    std::ofstream file;
    string aux;
@@ -344,6 +356,26 @@ void particleSystem::Save( string fileName)
                            dSumVel[2] << "\n";
 
    file.close();
+}
+
+/****************************************************************************
+ *                              LoadTexture                                 *
+ ****************************************************************************/
+GLuint particleSystem::loadTexture(string fileName)
+{
+   GLuint indice;
+   SDL_Surface* img = IMG_Load(fileName.c_str());
+
+   glGenTextures(1, &(indice));
+   glBindTexture(GL_TEXTURE_2D, indice);
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
+                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+   SDL_FreeSurface(img);
+   return(indice);
 }
 
 /***********************************************************

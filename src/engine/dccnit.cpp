@@ -557,6 +557,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    per = (character*) PCs->getFirst();
    for(aux=0;aux < PCs->getTotal();aux++)
    {
+      per->setState(STATE_IDLE);
       per->update(0); 
       per->calculateBoundingBox();  
       per = (character*) per->next;
@@ -568,6 +569,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
       per = (character*) NPCs->getFirst();
       for(aux=0; aux < NPCs->getTotal();aux++)
       {
+         per->setState(STATE_IDLE);
          per->update(0); 
          per->calculateBoundingBox();  
          per = (character*) per->next;
@@ -2598,17 +2600,19 @@ void engine::renderScene()
                         per->zPosition);
            glRotatef(per->orientation,0,1,0);
            per->renderFromGraphicMemory();
-         glPopMatrix();
 
            //per->renderBoundingBox();
-           /*glColor3f(1.0,0.1,0.1);
+           glColor3f(1.0,0.1,0.1);
            glBegin(GL_QUADS);
               glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
               glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+           glEnd();
+         glPopMatrix();
 
-           glEnd();*/
+
+          
 
 
            /* Draw Reflection */
@@ -2699,6 +2703,13 @@ void engine::renderScene()
                            per->zPosition);
               glRotatef(per->orientation,0,1,0);
               per->renderFromGraphicMemory();
+              glColor3f(1.0,0.1,0.1);
+              glBegin(GL_QUADS);
+                 glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
+                 glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
+                 glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
+                 glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
+              glEnd();
             glPopMatrix();
 
               //per->RenderBoundingBox();

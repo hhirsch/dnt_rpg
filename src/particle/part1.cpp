@@ -18,7 +18,7 @@ part1::part1(float cX,float cY,float cZ, string fileName):
    actualParticles = 0;
    actualPlanes = 0;
    intersections = NULL;
-   partTexture = LoadTexture(dir.getRealFile("particles/water.png"));
+   partTexture = loadTexture(dir.getRealFile("particles/water.png"));
 }
 
 /****************************************************************************
@@ -32,7 +32,7 @@ part1::~part1()
 /****************************************************************************
  *                                 Render                                   *
  ****************************************************************************/
-void part1::Render(particle* part)
+void part1::render(particle* part)
 {
    //Not Used    
 }
@@ -40,7 +40,7 @@ void part1::Render(particle* part)
 /****************************************************************************
  *                               InitRender                                 *
  ****************************************************************************/
-void part1::InitRender()
+void part1::initRender()
 {
   glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
   glEnable(GL_COLOR_MATERIAL);
@@ -79,7 +79,7 @@ void part1::InitRender()
 /****************************************************************************
  *                               EndRenderer                                *
  ****************************************************************************/
-void part1::EndRender()
+void part1::endRender()
 {
    glDisable(GL_COLOR_MATERIAL);
    glDisable(GL_CULL_FACE);
@@ -103,9 +103,9 @@ void part1::EndRender()
 }
 
 /****************************************************************************
- *                               actualize                                  *
+ *                                 update                                   *
  ****************************************************************************/
-void part1::actualize(particle* part)
+void part1::update(particle* part)
 {
    float dX = -1.0;   
    float dZ = 0.0;
@@ -183,10 +183,10 @@ void part1::createParticle(particle* part)
 /****************************************************************************
  *                                NextStep                                  *
  ****************************************************************************/
-void part1::NextStep(GLfloat matriz[6][4])
+void part1::nextStep(GLfloat matriz[6][4])
 {
    seconds = 0.02;
-   DoStep(matriz);
+   doStep(matriz);
 }
 
 /****************************************************************************
@@ -195,26 +195,6 @@ void part1::NextStep(GLfloat matriz[6][4])
 int part1::numParticles()
 {
    return(actualParticles);
-}
-
-/****************************************************************************
- *                              LoadTexture                                 *
- ****************************************************************************/
-GLuint part1::LoadTexture(string fileName)
-{
-   GLuint indice;
-   SDL_Surface* img = IMG_Load(fileName.c_str());
-
-   glGenTextures(1, &(indice));
-   glBindTexture(GL_TEXTURE_2D, indice);
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,img->w,img->h, 
-                0,GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
-
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-   SDL_FreeSurface(img);
-   return(indice);
 }
 
 /****************************************************************************
