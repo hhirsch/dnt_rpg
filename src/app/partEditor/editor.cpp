@@ -222,43 +222,43 @@ void editor::updateParticle()
       case 1:
       {         
          part1* p1 = (part1*)p;
-         p1->NextStep(viewMatrix);
+         p1->nextStep(viewMatrix);
          break;
       }
       case 2:
       {
          part2* p2 = (part2*)p;
-         p2->NextStep(viewMatrix);
+         p2->nextStep(viewMatrix);
          break;
       }
       case  3:
       {      
          part3* p3 = (part3*)p;
-         p3->NextStep(viewMatrix);
+         p3->nextStep(viewMatrix);
          break;
       }
       case 4:
       {
          part4* p4 = (part4*)p;
-         p4->NextStep(viewMatrix);
+         p4->nextStep(viewMatrix);
          break;
       }
       case 5:
       {
          part5* p5 = (part5*)p;
-         p5->NextStep(viewMatrix);
+         p5->nextStep(viewMatrix);
          break;
       }
       case 6:
       {         
          part6* p6 = (part6*)p;
-         p6->NextStep(viewMatrix);
+         p6->nextStep(viewMatrix);
          break;
       }
       case 7:
       {         
          part7* p7 = (part7*)p;
-         p7->NextStep(viewMatrix);
+         p7->nextStep(viewMatrix);
          break;
       }
    }
@@ -433,6 +433,7 @@ void editor::treatTextBars(guiObject* obj)
          value = 1;
       }
       p->setMaxParticles((int)value);
+      p->finish();
       p->init((int)value, p->getDrawMode());
    }
    else if(obj == centerXEdit)
