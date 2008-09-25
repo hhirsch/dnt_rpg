@@ -18,93 +18,93 @@ class partAux: public particleSystem
       /*! Destructor */
       ~partAux(){};
 
-      void updateMaxLive(int mLive);
+      void setMaxLive(int mLive);
       int getMaxLive();
 
-      void updateMaxParticles(int mLive);
+      void setMaxParticles(int mLive);
       int getMaxParticles();
 
-      void updateCenterX(float center);
+      void setCenterX(float center);
       float getCenterX();
-      void updateCenterY(float center);
+      void setCenterY(float center);
       float getCenterY();
-      void updateCenterZ(float center);
+      void setCenterZ(float center);
       float getCenterZ();
        
-      void updateGravity(float grv);
+      void setGravity(float grv);
       float getGravity();
 
-      void updateInitR(float cor);
+      void setInitR(float cor);
       float getInitR();
-      void updateInitG(float cor);
+      void setInitG(float cor);
       float getInitG();
-      void updateInitB(float cor);
+      void setInitB(float cor);
       float getInitB();
 
-      void updateFinalR(float cor);
+      void setFinalR(float cor);
       float getFinalR();
-      void updateFinalG(float cor);
+      void setFinalG(float cor);
       float getFinalG();
-      void updateFinalB(float cor);
+      void setFinalB(float cor);
       float getFinalB();
 
-      void updateAlpha(float a);
+      void setAlpha(float a);
       float getAlpha();
 
-      void updateDMultCenterX(float d);
+      void setDMultCenterX(float d);
       float getDMultCenterX();
-      void updateDMultCenterY(float d);
+      void setDMultCenterY(float d);
       float getDMultCenterY();
-      void updateDMultCenterZ(float d);
+      void setDMultCenterZ(float d);
       float getDMultCenterZ();
    
-      void updateDSumCenterX(float d);
+      void setDSumCenterX(float d);
       float getDSumCenterX();
-      void updateDSumCenterY(float d);
+      void setDSumCenterY(float d);
       float getDSumCenterY();
-      void updateDSumCenterZ(float d);
+      void setDSumCenterZ(float d);
       float getDSumCenterZ();
 
-      void updateDMultPosX(float d);
+      void setDMultPosX(float d);
       float getDMultPosX();
-      void updateDMultPosY(float d);
+      void setDMultPosY(float d);
       float getDMultPosY();
-      void updateDMultPosZ(float d);
+      void setDMultPosZ(float d);
       float getDMultPosZ();
    
-      void updateDSumPosX(float d);
+      void setDSumPosX(float d);
       float getDSumPosX();
-      void updateDSumPosY(float d);
+      void setDSumPosY(float d);
       float getDSumPosY();
-      void updateDSumPosZ(float d);
+      void setDSumPosZ(float d);
       float getDSumPosZ();
 
-      void updateDMultColorR(float d);
+      void setDMultColorR(float d);
       float getDMultColorR();
-      void updateDMultColorG(float d);
+      void setDMultColorG(float d);
       float getDMultColorG();
-      void updateDMultColorB(float d);
+      void setDMultColorB(float d);
       float getDMultColorB();
    
-      void updateDSumColorR(float d);
+      void setDSumColorR(float d);
       float getDSumColorR();
-      void updateDSumColorG(float d);
+      void setDSumColorG(float d);
       float getDSumColorG();
-      void updateDSumColorB(float d);
+      void setDSumColorB(float d);
       float getDSumColorB();
 
-      void updateDMultVelX(float d);
+      void setDMultVelX(float d);
       float getDMultVelX();
-      void updateDMultVelY(float d);
+      void setDMultVelY(float d);
       float getDMultVelY();
-      void updateDMultVelZ(float d);
+      void setDMultVelZ(float d);
       float getDMultVelZ();
    
-      void updateDSumVelX(float d);
+      void setDSumVelX(float d);
       float getDSumVelX();
-      void updateDSumVelY(float d);
+      void setDSumVelY(float d);
       float getDSumVelY();
-      void updateDSumVelZ(float d);
+      void setDSumVelZ(float d);
       float getDSumVelZ();
 
 };

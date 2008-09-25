@@ -306,84 +306,270 @@ void editor::createWindows()
    /* Edit Window */
    editWindow = gui->insertWindow(0,64,127,575,"Edit");
    editWindow->getObjectsList()->insertTextBox(3,17,60,33,0,"MaxLive");
-   editWindow->getObjectsList()->insertTextBar(60,17,123,33,"",0);
+   maxLiveEdit = editWindow->getObjectsList()->insertTextBar(60,17,123,33,"",0);
    editWindow->getObjectsList()->insertTextBox(3,37,60,53,0,"MaxParts");
-   editWindow->getObjectsList()->insertTextBar(60,37,123,53,"",0);
+   maxPartsEdit = editWindow->getObjectsList()->insertTextBar(60,37,123,53,
+                                                              "",0);
    editWindow->getObjectsList()->insertTextBox(3,57,60,73,0,"CenterX");
-   editWindow->getObjectsList()->insertTextBar(60,57,123,73,"",0);
+   centerXEdit = editWindow->getObjectsList()->insertTextBar(60,57,123,73,"",0);
    editWindow->getObjectsList()->insertTextBox(3,77,60,93,0,"CenterY");
-   editWindow->getObjectsList()->insertTextBar(60,77,123,93,"",0);
+   centerYEdit = editWindow->getObjectsList()->insertTextBar(60,77,123,93,"",0);
    editWindow->getObjectsList()->insertTextBox(3,97,60,113,0,"CenterZ");
-   editWindow->getObjectsList()->insertTextBar(60,97,123,113,"",0);
+   centerZEdit = editWindow->getObjectsList()->insertTextBar(60,97,123,113,
+                                                             "",0);
    editWindow->getObjectsList()->insertTextBox(3,117,60,133,0,"Gravity");
-   editWindow->getObjectsList()->insertTextBar(60,117,123,133,"",0);
+   gravityEdit = editWindow->getObjectsList()->insertTextBar(60,117,123,133,
+                                                              "",0);
    editWindow->getObjectsList()->insertTextBox(3,137,60,153,0,"InitR");
-   editWindow->getObjectsList()->insertTextBar(60,137,123,153,"",0);
+   initREdit = editWindow->getObjectsList()->insertTextBar(60,137,123,153,"",0);
    editWindow->getObjectsList()->insertTextBox(3,157,60,173,0,"InitG");
-   editWindow->getObjectsList()->insertTextBar(60,157,123,173,"",0);
+   initGEdit = editWindow->getObjectsList()->insertTextBar(60,157,123,173,"",0);
    editWindow->getObjectsList()->insertTextBox(3,177,60,193,0,"InitB");
-   editWindow->getObjectsList()->insertTextBar(60,177,123,193,"",0);
+   initBEdit = editWindow->getObjectsList()->insertTextBar(60,177,123,193,"",0);
    editWindow->getObjectsList()->insertTextBox(3,197,60,213,0,"FinalR");
-   editWindow->getObjectsList()->insertTextBar(60,197,123,213,"",0);
+   finalREdit = editWindow->getObjectsList()->insertTextBar(60,197,123,213,
+                                                            "",0);
    editWindow->getObjectsList()->insertTextBox(3,217,60,233,0,"FinalG");
-   editWindow->getObjectsList()->insertTextBar(60,217,123,233,"",0);
+   finalGEdit = editWindow->getObjectsList()->insertTextBar(60,217,123,233,
+                                                            "",0);
    editWindow->getObjectsList()->insertTextBox(3,237,60,253,0,"FinalB");
-   editWindow->getObjectsList()->insertTextBar(60,237,123,253,"",0);
+   finalBEdit = editWindow->getObjectsList()->insertTextBar(60,237,123,253,
+                                                            "",0);
    editWindow->getObjectsList()->insertTextBox(3,257,60,273,0,"Alpha");
-   editWindow->getObjectsList()->insertTextBar(60,257,123,273,"",0);
+   alphaEdit = editWindow->getObjectsList()->insertTextBar(60,257,123,273,"",0);
    editWindow->getObjectsList()->insertTextBox(3,277,60,293,0,"MCntX");
-   editWindow->getObjectsList()->insertTextBar(60,277,123,293,"",0);
+   mCntXEdit = editWindow->getObjectsList()->insertTextBar(60,277,123,293,"",0);
    editWindow->getObjectsList()->insertTextBox(3,297,60,313,0,"MCntY");
-   editWindow->getObjectsList()->insertTextBar(60,297,123,313,"",0);
+   mCntYEdit = editWindow->getObjectsList()->insertTextBar(60,297,123,313,"",0);
    editWindow->getObjectsList()->insertTextBox(3,317,60,333,0,"MCntZ");
-   editWindow->getObjectsList()->insertTextBar(60,317,123,333,"",0);
+   mCntZEdit = editWindow->getObjectsList()->insertTextBar(60,317,123,333,"",0);
    editWindow->getObjectsList()->insertTextBox(3,337,60,353,0,"SCntX");
-   editWindow->getObjectsList()->insertTextBar(60,337,123,353,"",0);
+   sCntXEdit = editWindow->getObjectsList()->insertTextBar(60,337,123,353,"",0);
    editWindow->getObjectsList()->insertTextBox(3,357,60,373,0,"SCntY");
-   editWindow->getObjectsList()->insertTextBar(60,357,123,373,"",0);
+   sCntYEdit = editWindow->getObjectsList()->insertTextBar(60,357,123,373,"",0);
    editWindow->getObjectsList()->insertTextBox(3,377,60,393,0,"SCntZ");
-   editWindow->getObjectsList()->insertTextBar(60,377,123,393,"",0);
+   sCntZEdit = editWindow->getObjectsList()->insertTextBar(60,377,123,393,"",0);
    editWindow->getObjectsList()->insertTextBox(3,397,60,413,0,"MPosX");
-   editWindow->getObjectsList()->insertTextBar(60,397,123,413,"",0);
+   mPosXEdit = editWindow->getObjectsList()->insertTextBar(60,397,123,413,"",0);
    editWindow->getObjectsList()->insertTextBox(3,417,60,433,0,"MPosY");
-   editWindow->getObjectsList()->insertTextBar(60,417,123,433,"",0);
+   mPosYEdit = editWindow->getObjectsList()->insertTextBar(60,417,123,433,"",0);
    editWindow->getObjectsList()->insertTextBox(3,437,60,453,0,"MPosZ");
-   editWindow->getObjectsList()->insertTextBar(60,437,123,453,"",0);
+   mPosZEdit = editWindow->getObjectsList()->insertTextBar(60,437,123,453,"",0);
    editWindow->getObjectsList()->insertTextBox(3,457,60,473,0,"SPosX");
-   editWindow->getObjectsList()->insertTextBar(60,457,123,473,"",0);
+   sPosXEdit = editWindow->getObjectsList()->insertTextBar(60,457,123,473,"",0);
    editWindow->getObjectsList()->insertTextBox(3,474,60,490,0,"SPosY");
-   editWindow->getObjectsList()->insertTextBar(60,474,123,490,"",0);
+   sPosYEdit = editWindow->getObjectsList()->insertTextBar(60,474,123,490,"",0);
    editWindow->getObjectsList()->insertTextBox(3,491,60,505,0,"SPosZ");
-   editWindow->getObjectsList()->insertTextBar(60,491,123,505,"",0);
+   sPosZEdit = editWindow->getObjectsList()->insertTextBar(60,491,123,505,"",0);
    gui->openWindow(editWindow);
 
    /* Second Edit Window */
    edit2Window = gui->insertWindow(672,64,799,575,"Edit-2");
    edit2Window->getObjectsList()->insertTextBox(3,17,60,33,0,"DMColorR");
-   edit2Window->getObjectsList()->insertTextBar(60,17,123,33,"",0);
+   dMColorREdit = edit2Window->getObjectsList()->insertTextBar(60,17,123,33,
+                                                               "",0);
    edit2Window->getObjectsList()->insertTextBox(3,37,60,53,0,"DMColorG");
-   edit2Window->getObjectsList()->insertTextBar(60,37,123,53,"",0);
+   dMColorGEdit = edit2Window->getObjectsList()->insertTextBar(60,37,123,53,
+                                                               "",0);
    edit2Window->getObjectsList()->insertTextBox(3,57,60,73,0,"DMColorB");
-   edit2Window->getObjectsList()->insertTextBar(60,57,123,73,"",0);
+   dMColorBEdit = edit2Window->getObjectsList()->insertTextBar(60,57,123,73,
+                                                               "",0);
    edit2Window->getObjectsList()->insertTextBox(3,77,60,93,0,"DSColorR");
-   edit2Window->getObjectsList()->insertTextBar(60,77,123,93,"",0);
+   dSColorREdit = edit2Window->getObjectsList()->insertTextBar(60,77,123,93,
+                                                               "",0);
    edit2Window->getObjectsList()->insertTextBox(3,97,60,113,0,"DSColorG");
-   edit2Window->getObjectsList()->insertTextBar(60,97,123,113,"",0);
+   dSColorGEdit = edit2Window->getObjectsList()->insertTextBar(60,97,123,113,
+                                                               "",0);
    edit2Window->getObjectsList()->insertTextBox(3,117,60,133,0,"DSColorB");
-   edit2Window->getObjectsList()->insertTextBar(60,117,123,133,"",0);
+   dSColorBEdit = edit2Window->getObjectsList()->insertTextBar(60,117,123,133,
+                                                               "",0);
    edit2Window->getObjectsList()->insertTextBox(3,137,60,153,0,"DMVelX");
-   edit2Window->getObjectsList()->insertTextBar(60,137,123,153,"",0);
+   dMVelXEdit = edit2Window->getObjectsList()->insertTextBar(60,137,123,153,
+                                                             "",0);
    edit2Window->getObjectsList()->insertTextBox(3,157,60,173,0,"DMVelY");
-   edit2Window->getObjectsList()->insertTextBar(60,157,123,173,"",0);
+   dMVelYEdit = edit2Window->getObjectsList()->insertTextBar(60,157,123,173,
+                                                             "",0);
    edit2Window->getObjectsList()->insertTextBox(3,177,60,193,0,"DMVelZ");
-   edit2Window->getObjectsList()->insertTextBar(60,177,123,193,"",0);
+   dMVelZEdit = edit2Window->getObjectsList()->insertTextBar(60,177,123,193,
+                                                             "",0);
    edit2Window->getObjectsList()->insertTextBox(3,197,60,213,0,"DSVelX");
-   edit2Window->getObjectsList()->insertTextBar(60,197,123,213,"",0);
+   dSVelXEdit = edit2Window->getObjectsList()->insertTextBar(60,197,123,213,
+                                                             "",0);
    edit2Window->getObjectsList()->insertTextBox(3,217,60,233,0,"DSVelY");
-   edit2Window->getObjectsList()->insertTextBar(60,217,123,233,"",0);
+   dSVelYEdit = edit2Window->getObjectsList()->insertTextBar(60,217,123,233,
+                                                             "",0);
    edit2Window->getObjectsList()->insertTextBox(3,237,60,253,0,"DSVelZ");
-   edit2Window->getObjectsList()->insertTextBar(60,237,123,253,"",0);
+   dSVelZEdit = edit2Window->getObjectsList()->insertTextBar(60,237,123,253,
+                                                             "",0);
    gui->openWindow(edit2Window);
+}
+
+/************************************************************************
+ *                           treatTextBars                              *
+ ************************************************************************/
+void editor::treatTextBars(guiObject* obj)
+{
+   if(!p)
+   {
+      /* No need to treat text bars if no 
+       * particle was opened */
+      return;
+   }
+
+   /* Get the value */
+   float value = 0;
+   sscanf(obj->getText().c_str(), "%f", &value);
+
+   if(obj == maxLiveEdit)
+   {
+      p->setMaxLive(value);
+   }
+   else if(obj == maxPartsEdit)
+   {
+      p->setMaxParticles((int)value);
+   }
+   else if(obj == centerXEdit)
+   {
+      p->setCenterX(value);
+   }
+   else if(obj == centerYEdit)
+   {
+      p->setCenterY(value);
+   }
+   else if(obj == centerZEdit)
+   {
+      p->setCenterZ(value);
+   }
+   else if(obj == gravityEdit)
+   {
+      p->setGravity(value);
+   }
+   else if(obj == initREdit)
+   {
+      p->setInitR(value);
+   }
+   else if(obj == initGEdit)
+   {
+      p->setInitG(value);
+   }
+   else if(obj == initBEdit)
+   {
+      p->setInitB(value);
+   }
+   else if(obj == finalREdit)
+   {
+      p->setFinalR(value);
+   }
+   else if(obj == finalGEdit)
+   {
+      p->setFinalG(value);
+   }
+   else if(obj == finalBEdit)
+   {
+      p->setFinalB(value);
+   }
+   else if(obj == alphaEdit)
+   {
+      p->setAlpha(value);
+   }
+   else if(obj == mCntXEdit)
+   {
+      p->setDMultCenterX(value);
+   }
+   else if(obj == mCntYEdit)
+   {
+      p->setDMultCenterY(value);
+   }
+   else if(obj == mCntZEdit)
+   {
+      p->setDMultCenterZ(value);
+   }
+   else if(obj == sCntXEdit)
+   {
+      p->setDSumCenterX(value);
+   }
+   else if(obj == sCntYEdit)
+   {
+      p->setDSumCenterY(value);
+   }
+   else if(obj == sCntZEdit)
+   {
+      p->setDSumCenterZ(value);
+   }
+   else if(obj == mPosXEdit)
+   {
+      p->setDMultPosX(value);
+   }
+   else if(obj == mPosYEdit)
+   {
+      p->setDMultPosY(value);
+   }
+   else if(obj == mPosZEdit)
+   {
+      p->setDMultPosZ(value);
+   }
+   else if(obj == sPosXEdit)
+   {
+      p->setDSumPosX(value);
+   }
+   else if(obj == sPosYEdit)
+   {
+      p->setDSumPosY(value);
+   }
+   else if(obj == sPosZEdit)
+   {
+      p->setDSumPosZ(value);
+   }
+
+   /**********************Edit*2*Window*****************************/
+   else if(obj == dMColorREdit)
+   {
+      p->setDMultColorR(value);
+   }
+   else if(obj == dMColorGEdit)
+   {
+      p->setDMultColorG(value);
+   }
+   else if(obj == dMColorBEdit)
+   {
+      p->setDMultColorB(value);
+   }
+   else if(obj == dSColorREdit)
+   {
+      p->setDSumColorR(value);
+   }
+   else if(obj == dSColorGEdit)
+   {
+      p->setDSumColorG(value);
+   }
+   else if(obj == dSColorBEdit)
+   {
+      p->setDSumColorB(value);
+   }
+   else if(obj == dMVelXEdit)
+   {
+      p->setDMultVelX(value);
+   }
+   else if(obj == dMVelYEdit)
+   {
+      p->setDMultVelY(value);
+   }
+   else if(obj == dMVelZEdit)
+   {
+      p->setDMultVelZ(value);
+   }
+   else if(obj == dSVelXEdit)
+   {
+      p->setDSumVelX(value);
+   }
+   else if(obj == dSVelYEdit)
+   {
+      p->setDSumVelY(value);
+   }
+   else if(obj == dSVelZEdit)
+   {
+      p->setDSumVelZ(value);
+   }
 }
 
 /************************************************************************
@@ -429,6 +615,11 @@ void editor::treatGuiEvents()
       {
          openFileWindow(true);
       }
+   }
+   /* Text Bars Change Events */
+   else if(eventInfo == WROTE_TEXT_BAR)
+   {
+      treatTextBars(obj);
    }
    /* File Selectors Things */
    else if(eventInfo == FILE_SEL_ACCEPT)

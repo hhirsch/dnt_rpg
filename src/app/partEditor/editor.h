@@ -41,6 +41,10 @@ class editor
       /*! Treat GUI Related Events */
       void treatGuiEvents();
 
+      /*! Treat text bars
+       * \param obj -> text bar object where the event occurs */
+      void treatTextBars(guiObject* obj);
+
       /*! create (or Update) the viewPort
        * \param screen -> screen used */
       void createView(SDL_Surface *screen);
@@ -96,6 +100,51 @@ class editor
       GLdouble proj[16];         /**< Current Projection Matrix */
       GLdouble modl[16];         /**< Current Model View Matrix */
       GLint viewPort[4];         /**< Current View Port Vector */
+
+      
+      /**********************Edit*Window*******************************/
+      /* One billion text bars...  */
+      textBar* maxLiveEdit;
+      textBar* maxPartsEdit;
+      textBar* centerXEdit;
+      textBar* centerYEdit;
+      textBar* centerZEdit;
+      textBar* gravityEdit;
+      textBar* initREdit;
+      textBar* initGEdit;
+      textBar* initBEdit;
+      textBar* finalREdit;
+      textBar* finalGEdit;
+      textBar* finalBEdit;
+      textBar* alphaEdit;
+      textBar* mCntXEdit;
+      textBar* mCntYEdit;
+      textBar* mCntZEdit;
+      textBar* sCntXEdit;
+      textBar* sCntYEdit;
+      textBar* sCntZEdit;
+      textBar* mPosXEdit;
+      textBar* mPosYEdit;
+      textBar* mPosZEdit;
+      textBar* sPosXEdit;
+      textBar* sPosYEdit;
+      textBar* sPosZEdit;
+
+
+      /**********************Edit*2*Window*****************************/
+      /* Two billion text bars... */
+      textBar* dMColorREdit;
+      textBar* dMColorGEdit;
+      textBar* dMColorBEdit;
+      textBar* dSColorREdit;
+      textBar* dSColorGEdit;
+      textBar* dSColorBEdit;
+      textBar* dMVelXEdit;
+      textBar* dMVelYEdit;
+      textBar* dMVelZEdit;
+      textBar* dSVelXEdit;
+      textBar* dSVelYEdit;
+      textBar* dSVelZEdit;
 };
 
 #endif
