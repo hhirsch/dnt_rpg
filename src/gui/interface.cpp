@@ -298,9 +298,10 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
             eventInfo = CLICKED_WINDOW;
             return((guiObject*) ljan->getActiveWindow());
         }
-        else /*if( (ljan->getActiveWindow() != NULL))*/
+        else if( (!ljan->getActiveWindow()->isModal()) )
         {
-           /* Test Other Windows Activation */
+           /* Test Other Windows Activation (with the current one 
+            * isn't a modal window) */
            int aux; 
            window *jaux=(window*)ljan->getFirst()->next;
            for(aux=0;aux<ljan->getTotal();aux++)

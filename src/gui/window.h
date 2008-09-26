@@ -100,6 +100,15 @@ class window: public guiObject
        * itself)  */
       bool changed();
 
+      /*! Verify if the window is a modal one or not
+       * \return -> true if is a modal window, false otherwise */
+      bool isModal();
+
+      /*! Set the window as a modal one
+       * \note the modal window don't allow window changes 
+       * while it is opened */
+      void setModal();
+
    protected:
       void* intList;             /**< Pointer to the list where the window is */
       int minX,                  /**< Min Size of X axys */
@@ -108,6 +117,7 @@ class window: public guiObject
       bool canScale;             /**< If can scale the window */
       bool canClose;             /**< If can close the window */
       bool canMove;              /**< If can move the window */
+      bool modal;                /**< If the window is modal or not */
       guiList* objects;          /**< Objects on the Window */
       SDL_Surface *surface;      /**< Window Surface */
       GLuint texture;            /**< GL texture for the window */

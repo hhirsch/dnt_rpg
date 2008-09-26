@@ -129,6 +129,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    canScale = true;
    canClose = true;
    canMove = true;
+   modal = false;
    externPointer = NULL;
 
    /* Define Machine Bit Order */
@@ -431,6 +432,22 @@ void window::setAttributes(bool close, bool move, bool scale, bool maximize)
    canMove = move;
    canScale = scale;
    canMaximize = maximize;
+}
+
+/*********************************************************************
+ *                              isModal                              *
+ *********************************************************************/
+bool window::isModal()
+{
+   return(modal);
+}
+
+/*********************************************************************
+ *                              setModal                             *
+ *********************************************************************/
+void window::setModal()
+{
+   modal = true;
 }
 
 /*********************************************************************
