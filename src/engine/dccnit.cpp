@@ -2602,13 +2602,13 @@ void engine::renderScene()
            per->renderFromGraphicMemory();
 
            //per->renderBoundingBox();
-           glColor3f(1.0,0.1,0.1);
+           /*glColor3f(1.0,0.1,0.1);
            glBegin(GL_QUADS);
               glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
               glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
               glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-           glEnd();
+           glEnd();*/
          glPopMatrix();
 
 
@@ -2703,13 +2703,13 @@ void engine::renderScene()
                            per->zPosition);
               glRotatef(per->orientation,0,1,0);
               per->renderFromGraphicMemory();
-              glColor3f(1.0,0.1,0.1);
+              /*glColor3f(1.0,0.1,0.1);
               glBegin(GL_QUADS);
                  glVertex3f(per->min[0],per->min[1]+1,per->min[2]);
                  glVertex3f(per->min[0],per->min[1]+1,per->max[2]);
                  glVertex3f(per->max[0],per->min[1]+1,per->max[2]);
                  glVertex3f(per->max[0],per->min[1]+1,per->min[2]);
-              glEnd();
+              glEnd();*/
             glPopMatrix();
 
               //per->RenderBoundingBox();

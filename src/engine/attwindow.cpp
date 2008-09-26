@@ -504,9 +504,9 @@ int attWindow::treat(guiObject* object, int eventInfo, guiInterface* inter,
          }
          else
          {
-            showMessage(gettext("Warning"), 
-                        gettext("You Need to Assign All Attributes."),
-                        proj, modl,viewPort);
+            warning warn;
+            warn.show(gettext("Warning"),
+                      gettext("You Need to Assign All Attributes."), inter);
             return(ATTW_OTHER);
          }
       }
