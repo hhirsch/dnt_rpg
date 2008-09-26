@@ -924,9 +924,10 @@ int options::treat(guiObject* object, int eventInfo, guiInterface* interf,
              (prevFullScreen != enableFullScreen) || 
              (antiAliasing != prevAntiAliasing) )
          {
-            showMessage(gettext("Warning"), 
-                  gettext("Some changes will only take effect upon restart."),
-                  proj, modl, viewPort);
+            warning warn;
+            warn.show(gettext("Warning"), 
+                    gettext("Some changes will only take effect upon restart."),
+                      interf);
             /* Disable things */
             glDisable(GL_FOG);
             glDisable(GL_LIGHTING);

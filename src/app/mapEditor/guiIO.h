@@ -97,6 +97,8 @@ class guiIO
 
       camera gameCamera;               /**< The Game Camera */
 
+      guiInterface* getGui(){return(gui);};
+
    private:
       
       grassWindow* grWindow;/**< the grass window */ 

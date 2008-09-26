@@ -29,15 +29,6 @@ string getStringFromUser(string title, string previous,
 int getOptionFromUser(string title, string message, string opt1, string opt2,
                       GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
 
-/*! Show a message to user
- * \param title -> title of the window
- * \param message -> message to show to user
- * \param proj -> projection matrix
- * \param modl -> model view matrix
- * \param viewPort -> viewPort vector */
-void showMessage(string title, string message,
-                 GLdouble proj[16],GLdouble modl[16],GLint viewPort[4]);
-
 /*! The warning class is used to show messages to the user */
 class warning
 {

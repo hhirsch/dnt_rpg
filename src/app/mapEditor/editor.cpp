@@ -355,8 +355,8 @@ void editor::newMap()
       sscanf(s.c_str(),"%d", &sizeX);
       if( (sizeX <= 0) || (sizeX > 30) )
       {
-         showMessage("Error!", "Size must be in range (0,30]", proj, modl,
-                     viewPort);
+         warning warn;
+         warn.show("Error!", "Size must be in range (0,30]", gui->getGui());
       }
    }
 
@@ -367,8 +367,8 @@ void editor::newMap()
       sscanf(s.c_str(),"%d", &sizeZ);
       if( (sizeZ <= 0) || (sizeZ > 30) )
       {
-         showMessage("Error!", "Size must be in range (0,30]", proj, modl, 
-                     viewPort);
+         warning warn;
+         warn.show("Error!", "Size must be in range (0,30]", gui->getGui()); 
       }
    }
 
