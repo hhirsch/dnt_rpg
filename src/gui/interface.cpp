@@ -3,6 +3,7 @@
  */
 
 #include "interface.h"
+#include "messages.h"
 #include <SDL/SDL_image.h>
 
 int mouseX=0,mouseY=0;
@@ -122,6 +123,14 @@ guiObject* guiInterface::verifyCompositeEvents(guiObject* actObj, int& eventInfo
          }
       }
       obj = obj->next;
+   }
+
+   /* Verify Warning Window */
+   warning warn;
+   if( (warn.isOpened()) && (eventInfo == PRESSED_BUTTON) &&
+       (actObj == warn.getOkButton()) )
+   {
+      warn.close();
    }
 
    return(actObj);
