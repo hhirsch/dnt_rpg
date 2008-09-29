@@ -9,6 +9,7 @@
 #include <math.h>
 #include <SDL/SDL_image.h>
 #include "../etc/extensions.h"
+#include "../etc/userinfo.h"
 
 /*********************************************************************
  *                       Engine's Constructor                        *
@@ -2052,6 +2053,18 @@ int engine::treatIO(SDL_Surface *screen)
          return(0);
       }
 
+      /* Screenshot */
+      if( ( keys[SDLK_F12] ) && 
+            ( (time-lastKeyb >= REFRESH_RATE) || 
+              (lastKey != SDLK_F12) ) )
+      {
+         userInfo user;
+         string screenFile = user.getUserHome() + "screenshot.bmp";
+         screenshot(screenFile);
+         lastKey = SDLK_F12;
+         lastKeyb = time;
+      }
+
       /* Enter Attack Mode or End Turn */
       if( (keys[SDLK_SPACE]) && 
             ( (time-lastKeyb >= REFRESH_RATE) || 
@@ -3023,7 +3036,7 @@ void engine::drawWithoutShadows()
    /* Render all things */
    renderScene();
    renderNoShadowThings();
-   
+
    renderGUI();
 
    /* Flush */

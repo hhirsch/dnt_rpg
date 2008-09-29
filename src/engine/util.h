@@ -170,6 +170,10 @@ void draw2DMode();
  * \param actualFarView -> the actual value of farView to set */
 void draw3DMode(float actualFarView);
 
+/*! Take screenshot from the current buffer
+ * \param fileName -> fileName of the screenShot */
+bool screenshot(string fileName); 
+
 /*! Calculate the angle with two points
  * \param prvX -> point A X
  * \param prvZ -> point A Z
