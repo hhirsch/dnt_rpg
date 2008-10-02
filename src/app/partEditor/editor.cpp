@@ -265,6 +265,29 @@ void editor::updateParticle()
 }
 
 /****************************************************************
+ *                       Open Type Window                       *
+ ****************************************************************/
+void editor::openTypeWindow()
+{
+   typeWindow = gui->insertWindow(200,100,320,285,"Particle Type");
+
+   waterButton = typeWindow->getObjectsList()->insertButton(15,27,105,45,
+                                                            "Waterfall",0);
+   fireButton = typeWindow->getObjectsList()->insertButton(15,47,105,65,
+                                                           "Fire",0);
+   smokeButton = typeWindow->getObjectsList()->insertButton(15,67,105,85,
+                                                            "Smoke",0);
+   bloodButton = typeWindow->getObjectsList()->insertButton(15,87,105,105,
+                                                            "Blood",0);
+   lightningButton = typeWindow->getObjectsList()->insertButton(15,107,105,125,
+                                                                "Lightning",0);
+   snowButton = typeWindow->getObjectsList()->insertButton(15,127,105,145,
+                                                            "Snow",0);
+   typeWindow->setExternPointer(&typeWindow);
+   gui->openWindow(typeWindow);
+}
+
+/****************************************************************
  *                      Open File  Window                       *
  ****************************************************************/
 void editor::openFileWindow(bool load)
@@ -688,8 +711,8 @@ void editor::treatGuiEvents()
          /* Reload Current Particle */
          if(p)
          {
-            //deleteParticle();
-            //createParticle(currentFileName);
+            deleteParticle();
+            createParticle(type);
          }
       }
    }
@@ -708,6 +731,39 @@ void editor::treatGuiEvents()
       {
          openFileWindow(true);
       }
+      else if(typeWindow != NULL)
+      {
+         if(obj == waterButton)
+         {
+            createParticle(1);
+            gui->closeWindow(typeWindow);
+         }
+         else if(obj == fireButton)
+         {
+            createParticle(2);
+            gui->closeWindow(typeWindow);
+         }
+         else if(obj == smokeButton)
+         {
+            createParticle(4);
+            gui->closeWindow(typeWindow);
+         }
+         else if(obj == bloodButton)
+         {
+            createParticle(5);
+            gui->closeWindow(typeWindow);
+         }
+         else if(obj == lightningButton)
+         {
+            createParticle(6);
+            gui->closeWindow(typeWindow);
+         }
+         else if(obj == snowButton)
+         {
+            createParticle(7);
+            gui->closeWindow(typeWindow);
+         }
+      }
    }
    /* Text Bars Change Events */
    else if(eventInfo == WROTE_TEXT_BAR)
@@ -725,14 +781,24 @@ void editor::treatGuiEvents()
             gui->closeWindow(fileWindow);
             if(fileLoading)
             {
-               /* Load the particle (with curFileName) */
-               //TODO Get Particle Type
-               createParticle(2);
+               /* Get Particle Type */
+               openTypeWindow();
             }
             else
             {
-              /* TODO call Save Function */
-              //saveParticle();
+               /* Save the Particle with desired fileName */
+               if(p)
+               {
+                  warning warn;
+                  if(p->save(curFileName))
+                  {
+                     warn.show("Message", "File was saved!", gui);
+                  }
+                  else
+                  {
+                     warn.show("Error", "Can't save file!", gui);
+                  }
+               }
             }
          }
       }

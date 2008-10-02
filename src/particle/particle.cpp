@@ -311,7 +311,7 @@ void particleSystem::doStep(GLfloat matriz[6][4])
 /***********************************************************
  *                         Save                            *
  ***********************************************************/
-void particleSystem::save( string fileName)
+bool particleSystem::save( string fileName)
 {
    std::ofstream file;
    string aux;
@@ -321,8 +321,7 @@ void particleSystem::save( string fileName)
 
    if(!file)
    {
-      printf("Error while opening particle file: %s\n",fileName.c_str());
-      return;
+      return(false);
    }
 
    file << "MAXLIVE " << maxLive << "\n";
@@ -356,6 +355,7 @@ void particleSystem::save( string fileName)
                            dSumVel[2] << "\n";
 
    file.close();
+   return(true);
 }
 
 /****************************************************************************

@@ -81,8 +81,9 @@ class particleSystem
        ***************************************************************
        * Save the system to a file
        * \param fileName -> name of file to save
+       * \return -> true if can save the particle
        ***************************************************************/
-      void save( string fileName);
+      bool save( string fileName);
 
 
       /*!

@@ -97,6 +97,17 @@ class editor
       bool fileLoading;        /**< If is loading or saving */
       void openFileWindow(bool load);
 
+
+      /**********************Type*Window*******************************/
+      window* typeWindow;       /**< Particle Type Window */
+      button* waterButton;      /**< Water Type */
+      button* fireButton;       /**< Fire Type */
+      button* smokeButton;      /**< Smoke Type */
+      button* bloodButton;      /**< Blood Type */
+      button* lightningButton;  /**< Lightning Type */
+      button* snowButton;       /**< Snow Type */
+      void openTypeWindow();
+
       string curFileName;      /**< Filename of Current Particle Open */
 
       GLfloat viewMatrix[6][4];  /**< Current Visible Matrix */

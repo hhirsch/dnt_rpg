@@ -32,7 +32,7 @@ $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o $(ENDETC)overlaps.o \
 $(ENDETC)defparser.o $(ENDETC)shader.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)barterwindow.o $(ENDENGINE)briefing.o $(ENDENGINE)camera.o $(ENDENGINE)charwindow.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)dialog.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)itemwindow.o $(ENDENGINE)minimapwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)character.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)shadow.o $(ENDENGINE)shortcutswindow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 OBJS = area.o editor.o guiIO.o listWindow.o mapEditor.o message.o npcs.o objects.o particles.o portal.o terrain.o wall.o
-SUBSYSTEMS = mapEditor/ #iaEditor/
+SUBSYSTEMS = mapEditor partEditor
 
 OBJS = DlgEditor.o
 BIN = ../../bin/
@@ -65,5 +65,7 @@ MapEditor:
 clean:
 	@printf "Cleaning App Bin Files... "
 	@\rm -rf *.o *.e ./mapEditor/*.o ./iaEditor/*.o $(BIN)DlgEditor $(BIN)mapEditor $(BIN)fntEditor $(BIN)dntPartEditor $(BIN)iaEditor $(BIN)dlgCompiler
-	@cd ./mapEditor; make clean;
+	@for dir in ${SUBSYSTEMS}; do \
+	   (echo " ";cd $$dir; ${MAKE} clean;echo " "); \
+	done
 	@printf "\e[0;32mDone.\e[0;0m\n"
