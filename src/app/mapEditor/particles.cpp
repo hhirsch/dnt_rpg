@@ -35,16 +35,32 @@ particles::~particles()
 void particles::deleteParticle()
 {
    if(actualParticle)
-   {
-      if(state == TOOL_PARTICLE_FIRE)
+   { 
+      /* Waterfall */
+      if(state == TOOL_PARTICLE_WATERFALL)
+      {
+         part1* tmp = (part1*) actualParticle;
+         delete(tmp);
+         actualParticle = NULL;
+      }
+      /* Fire */
+      else if(state == TOOL_PARTICLE_FIRE)
       {
          part2* tmp = (part2*) actualParticle;
          delete(tmp);
          actualParticle = NULL;
       }
+      /* Smoke */
       else if(state == TOOL_PARTICLE_SMOKE)
       {
          part4* tmp = (part4*) actualParticle;
+         delete(tmp);
+         actualParticle = NULL;
+      }
+      /* Snow */
+      else if(state == TOOL_PARTICLE_SNOW)
+      {
+         part7* tmp = (part7*) actualParticle;
          delete(tmp);
          actualParticle = NULL;
       }
@@ -263,6 +279,32 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
       }
    }
    
+   /* Snow */
+   else if( (tool == TOOL_PARTICLE_SNOW) && (!actualParticle) )
+   {
+      state = TOOL_PARTICLE_SNOW; 
+      particleType = PART_SNOW;
+      part7* tmpPart = NULL;
+      string fileToOpen = selectedText;
+      if(fileToOpen != "../data/particles/")
+      {
+         height = 0;
+         tmpPart = new part7(mouseX, height, mouseZ, fileToOpen);
+         if(!tmpPart)
+         {
+            printf("Error opening: %s\n", fileToOpen.c_str());
+            actualParticle = NULL;
+            return;
+         }
+         actualParticle = (particleSystem*) tmpPart;
+      }
+      else
+      {
+         actualParticle = NULL;
+      }
+   }
+   
+   /* Default particle Actions (Up, down, etc) */
    if( (actualParticle) )
    {
       if(keys[SDLK_EQUALS])
