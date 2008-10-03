@@ -17,7 +17,8 @@ listText::listText(int xa, int ya, int xb, int yb, SDL_Surface* surface,
    /* Nullify elements */
    first = NULL;
    totalElements = 0;
-   selectedText = "";   
+   selectedText = ""; 
+   selectedPos = -1;  
 
    dntFont fnt;
    fnt.defineFont(DNT_FONT_ARIAL, 10);
@@ -230,7 +231,7 @@ string listText::getSelectedText()
  *                      getSelectedPos                        *
  **************************************************************/
 int listText::getSelectedPos()
-{
+{  
    return(selectedPos);
 }
 

@@ -159,7 +159,7 @@ void fileSel::changeCurDir(string newDir)
          total++;
       }
 #else
-      for(total=1; (FindNextFile(hSearch,&dir)); total++);
+      for(total=0; (FindNextFile(hSearch,&dir)); total++);
 #endif
 
       if(total > 0)
