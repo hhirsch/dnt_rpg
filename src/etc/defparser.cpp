@@ -249,7 +249,14 @@ bool defParser::load(string fileName, bool fullPath)
           pos = strBuffer.find_first_not_of(" \t", pos + 1);
 
           /* get the data */
-          strData = strBuffer.substr(pos, (strBuffer.length()-1) - pos);
+          strData = strBuffer.substr(pos, strBuffer.length() - pos);
+          /* Delete last character if it is an \n or #13.
+           * This is an issue that happens mainly on windows */
+          if( (strData[strData.length()-1] == '\n') ||
+              (strData[strData.length()-1] == 13) )
+          {
+             strData.erase(strData.length()-1);
+          }
 
           /* Insert a tuple */
           insertTuple(strKey, strData);
