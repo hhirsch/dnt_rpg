@@ -249,7 +249,7 @@ bool defParser::load(string fileName, bool fullPath)
           pos = strBuffer.find_first_not_of(" \t", pos + 1);
 
           /* get the data */
-          strData = strBuffer.substr(pos, strBuffer.length() - pos);
+          strData = strBuffer.substr(pos, (strBuffer.length()-1) - pos);
 
           /* Insert a tuple */
           insertTuple(strKey, strData);
