@@ -593,7 +593,8 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                      state = INVENTORY_STATE_NONE;
                      reDraw();
                      /* Play Drop Sound */
-                     snd.addSoundEffect(X, actualMap->getHeight(X,Z), Z, false,
+                     snd.addSoundEffect(X, actualMap->getHeight(X,Z), Z,
+                                        SOUND_NO_LOOP,
                                         "sndfx/objects/drop_item.ogg");
                   }
                break;

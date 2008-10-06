@@ -10,6 +10,9 @@ using namespace std;
 #include "ogg_stream.h"
 #include "sndfx.h"
 
+#define SOUND_NO_LOOP   -1
+#define SOUND_AUTO_LOOP  0
+
 /*! The sound Class definitions */
 class sound
 {
@@ -53,14 +56,15 @@ class sound
        *  \param loop -> if sound will loop at end or not
        *  \param fileName -> name of the ogg file to open
        *  \return pointer to the added sound */
-      sndfx* addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
+      sndfx* addSoundEffect(ALfloat x, ALfloat y, ALfloat z, int loop,
                             string fileName);
       
       /*! Add sound effect without position to the list
-       *  \param loop -> if sound will loop at end or not
+       *  \param loop -> if sound will loop at end or not (see sndFx and
+       *                                                   ogg_stream)
        *  \param fileName -> name of the ogg file to open
        *  \return pointer to the added sound */
-      sndfx* addSoundEffect(bool loop, string fileName);
+      sndfx* addSoundEffect(int loop, string fileName);
 
       /*! Remove sound effect from list
        *  \param snd -> pointer to sound effect to remove */

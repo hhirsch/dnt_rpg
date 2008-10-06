@@ -243,7 +243,7 @@ void sound::flush()
 /*************************************************************************
  *                            addSoundEffect                             *
  *************************************************************************/
-sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
+sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, int loop,
                              string fileName)
 {
    if(enabled)
@@ -265,7 +265,7 @@ sndfx* sound::addSoundEffect(ALfloat x, ALfloat y, ALfloat z, bool loop,
 /*************************************************************************
  *                            addSoundEffect                             *
  *************************************************************************/
-sndfx* sound::addSoundEffect(bool loop, string fileName)
+sndfx* sound::addSoundEffect(int loop, string fileName)
 {
    if(enabled)
    {

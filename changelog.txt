@@ -21,6 +21,7 @@
  - Fixed sun/moon position;
  - Continuous Walk with Mouse;
  - Calling read-only skills window at character's window;
+ - Define sound's interval time before loop;
 
 Working on:
  - Optimizations for outdoor rendering;

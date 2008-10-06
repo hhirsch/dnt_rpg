@@ -203,7 +203,7 @@ void missionsController::completeMission(mission* m, int type)
       brief.addText(vstr);
 
       /* Play Completion Sound Effect */
-      snd.addSoundEffect(false, "sndfx/missions/mission_complete.ogg");
+      snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/missions/mission_complete.ogg");
    }
    else 
    {
@@ -211,7 +211,7 @@ void missionsController::completeMission(mission* m, int type)
       brief.addText(gettext("Mission Failure!"));
 
       /* Play Failure Sound Effect */
-      snd.addSoundEffect(false, "sndfx/missions/mission_failed.ogg");
+      snd.addSoundEffect(SOUND_NO_LOOP, "sndfx/missions/mission_failed.ogg");
    }
 }
 

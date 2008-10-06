@@ -14,7 +14,7 @@ sndfx::sndfx()
 /*************************************************************************
  *                             Constructor                               *
  *************************************************************************/
-sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
+sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, int lp,
              string fileName)
 {
    /* Create the Ogg Stream */ 
@@ -39,7 +39,7 @@ sndfx::sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
 /*************************************************************************
  *                             Constructor                               *
  *************************************************************************/
-sndfx::sndfx(bool lp, string fileName)
+sndfx::sndfx(int lp, string fileName)
 {
    /* Create the Ogg Stream */ 
    oggSndFx = new(ogg_stream);
@@ -74,7 +74,7 @@ sndfx::~sndfx()
 /*************************************************************************
  *                                setLoop                                *
  *************************************************************************/
-void sndfx::setLoop(bool lp)
+void sndfx::setLoop(int lp)
 {
    if(oggSndFx)
    {

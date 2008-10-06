@@ -19,17 +19,18 @@ class sndfx
       sndfx();
 
       /*! Constructor of Non positional Source 
-       * \param lp -> true if is to looping the source
+       * \param lp -> loop interval (<0 won't loop, =0 loop 
+       *              just after the end, >0 wait lp seconds to loop)
        * \param fileName -> name of the Ogg File to Open */
-      sndfx(bool lp, string fileName);
+      sndfx(int lp, string fileName);
       
       /*! Constructor of the Class.
        * \param centerX -> X position of the source
        * \param centerY -> Y position of the source
        * \param centerZ -> Z position of the source
-       * \param lp -> true if is to looping the source
+       * \param lp -> loop interval (see setLoop)
        * \param fileName -> name of the Ogg File to Open */
-      sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, bool lp,
+      sndfx(ALfloat centerX, ALfloat centerY, ALfloat centerZ, int lp,
             string fileName);
       /*! Destructor */
       ~sndfx();
@@ -41,8 +42,9 @@ class sndfx
       void redefinePosition(ALfloat centerX, ALfloat centerY, ALfloat centerZ);
 
       /*! Sets if the Source will Loop at end or not
-       * \param lp -> true if is to looping the source */
-      void setLoop(bool lp);
+       * \param lp -> loop interval (<0 won't loop, =0 loop 
+       *              just after the end, >0 wait lp seconds to loop) */
+      void setLoop(int lp);
 
       /*! Set the Velocity of the Source (if have one)
        * \param velX -> X velocity value
@@ -78,6 +80,7 @@ class sndfx
       sndfx* previous;        /**< Pointer to previous element on list */
 
    private:
+      int loopInterval;       /**< The sound loop interval */
       ogg_stream* oggSndFx;   /**< The Ogg stream of the Sound */
       string oggName;         /**< File Name of the Ogg Used */
 };

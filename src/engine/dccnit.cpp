@@ -1318,7 +1318,7 @@ void engine::enterBattleMode(bool surprisePC)
    if(numEnemies > 0)
    {
       /* Really Init the Battle */
-      snd->addSoundEffect(false,"sndfx/battleMode.ogg");
+      snd->addSoundEffect(SOUND_NO_LOOP,"sndfx/battleMode.ogg");
       engineMode = ENGINE_MODE_TURN_BATTLE;
       moveCircleX = activeCharacter->xPosition;
       moveCircleY = activeCharacter->yPosition;
@@ -1711,7 +1711,8 @@ int engine::verifyMouseActions(Uint8 mButton)
                    if(activeCharacter->inventories->addObject(sobj->obj))
                    {
                       snd->addSoundEffect(sobj->x, sobj->y, sobj->z, 
-                                          false,"sndfx/objects/take_item.ogg");
+                                          SOUND_NO_LOOP,
+                                          "sndfx/objects/take_item.ogg");
                                      
                       sprintf(buf,gettext("%s taken."),
                               sobj->obj->getName().c_str());
@@ -1784,7 +1785,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                   porta->status = DOOR_STATUS_CLOSED;
                   snd->addSoundEffect(porta->x, 
                                       actualMap->getHeight(porta->x, porta->z),
-                                      porta->z, false, 
+                                      porta->z, SOUND_NO_LOOP, 
                                       "sndfx/objects/door_close.ogg");
                }
                else
@@ -1794,7 +1795,7 @@ int engine::verifyMouseActions(Uint8 mButton)
                   porta->status = DOOR_STATUS_OPENED;
                   snd->addSoundEffect(porta->x, 
                                       actualMap->getHeight(porta->x, porta->z),
-                                      porta->z, false, 
+                                      porta->z, SOUND_NO_LOOP, 
                                       "sndfx/objects/door_open.ogg");
                }
             }
@@ -2503,7 +2504,8 @@ int engine::treatIO(SDL_Surface *screen)
          if( (!walkSound) && (snd) )
          {
             walkSound = snd->addSoundEffect(activeCharacter->xPosition,0.0,
-                                            activeCharacter->zPosition,true,
+                                            activeCharacter->zPosition,
+                                            SOUND_AUTO_LOOP,
                                             "sndfx/passos.ogg");
          }
          else if(walkSound)

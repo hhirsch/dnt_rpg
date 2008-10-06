@@ -10,6 +10,8 @@ void ogg_stream::open(string path)
 {
    dirs dir;
    int result;
+
+   timeEnded = 0;
     
    if(!(oggFile = fopen(dir.getRealFile(path).c_str(), "rb")))
    {
@@ -44,7 +46,7 @@ void ogg_stream::open(string path)
        format = AL_FORMAT_STEREO16;
    }
 
-   loop = false;
+   loopInterval = -1;
 
    alGenBuffers(2, buffers);
    check();
@@ -118,11 +120,19 @@ bool ogg_stream::playback()
  *************************************************************************/
 bool ogg_stream::playing()
 {
-    ALenum state;
-    
-    alGetSourcei(source, AL_SOURCE_STATE, &state);
-    
-    return (state == AL_PLAYING);
+   if( (timeEnded != 0) && (loopInterval > 0))
+   {
+      /* Just waiting time to play again */
+      return(true);
+   }
+   else
+   {
+      ALenum state;
+
+      alGetSourcei(source, AL_SOURCE_STATE, &state);
+
+      return (state == AL_PLAYING);
+   }
 }
 
 /*************************************************************************
@@ -158,7 +168,7 @@ bool ogg_stream::update()
         }
     }
  
-    return active;
+    return(active);
 }
 
 /*************************************************************************
@@ -170,6 +180,28 @@ bool ogg_stream::stream(ALuint buffer)
     int  size = 0;
     int  section;
     int  result = -1;
+    bool resumed = false;
+
+    /* Verify Waiting to loop again time */
+    if((loopInterval > 0) && (timeEnded != 0))
+    {
+       int interval = (SDL_GetTicks() - timeEnded) / 1000;
+       if(interval >= loopInterval)
+       {
+          /* Must restart the stream */
+          timeEnded = 0;
+          /* Rewind the file */
+          if(ov_raw_seek(&oggStream,0) != 0)
+          {
+             printf("Ogg Rewind Error\n");
+          }
+          resumed = true;
+       }
+       else
+       {
+          return(true);
+       }
+    }
  
     while( (size < BUFFER_SIZE) && (result != 0))
     {
@@ -186,7 +218,7 @@ bool ogg_stream::stream(ALuint buffer)
         }
         else
         {
-           if(loop)
+           if(loopInterval == 0)
            {
               /* rewind file */
               result = 1;
@@ -194,6 +226,10 @@ bool ogg_stream::stream(ALuint buffer)
               {
                  printf("Ogg Rewind Error\n");
               }
+           }
+           else if(loopInterval > 0)
+           {
+              timeEnded = SDL_GetTicks();
            }
         }
     }
@@ -206,6 +242,11 @@ bool ogg_stream::stream(ALuint buffer)
     }
     else
     {
+       if(resumed)
+       {
+          /* Restart the play */
+          alSourcePlay(source);
+       }
        /*printf("bufferdata: Buffer: %d Format: %d size: %d\n", buffer, 
                                                  format, size);*/
        alBufferData(buffer, format, data, size, vorbisInfo->rate);
@@ -292,8 +333,8 @@ void ogg_stream::changeVolume(int volume)
 /*************************************************************************
  *                               setLoop                                 *
  *************************************************************************/
-void ogg_stream::setLoop(bool lp)
+void ogg_stream::setLoop(int lp)
 {
-   loop = lp;
+   loopInterval = lp;
 }
 

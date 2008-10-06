@@ -5,6 +5,7 @@
 #include <iostream>
 using namespace std;
  
+#include <SDL/SDL.h>
 #include <AL/al.h>
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
@@ -46,8 +47,9 @@ class ogg_stream
       void changeVolume(int volume);
 
       /*! Set if will Loop at EOF or not
-       * \param lp -> loop at EOF if true */
-      void setLoop(bool lp);
+       * \param lp -> loop interval (< 0 won't loop, =0 loop just at 
+       *              the EOF, >0 wait lp seconds before loop) */
+      void setLoop(int lp);
 
  
    protected:
@@ -73,7 +75,8 @@ class ogg_stream
         vorbis_info* vorbisInfo;       /**< some formatting data */
         vorbis_comment* vorbisComment; /**< user comments */
 
-        bool loop;                     /**< if loop the source at EOF */ 
+        int loopInterval;              /**< if loop the source at EOF */ 
+        Uint32 timeEnded;              /**< SDL_Ticks when EOF found */
 
         ALuint buffers[2]; /**< front and back buffers */
         ALuint source;     /**< audio source */
