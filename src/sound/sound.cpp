@@ -195,7 +195,7 @@ bool sound::loadMusic(string fileName)
       return(false);
    }
 
-   backMusic->setLoop(true);
+   backMusic->setLoop(SOUND_AUTO_LOOP);
    backMusic->defineAsMusic();
 
    unLock();
