@@ -61,8 +61,10 @@ class ogg_stream
       /*! Empty the queue */
       void empty();      
 
-      /*! Check OpenAl errors */
-      void check();          
+      /*! Check OpenAl errors
+       * \param where -> string with information about 
+       *                 where the check occurs */
+      void check(string where); 
 
       /*! Error code
        * \param code -> numer of error

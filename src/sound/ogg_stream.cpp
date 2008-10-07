@@ -1,6 +1,9 @@
 #include "ogg_stream.h"
 #include "../etc/dirs.h"
 
+#include <iostream>
+using namespace std;
+
 #define BUFFER_SIZE (4096 * 16) /**< Size of the Ogg Buffer */
 
 /*************************************************************************
@@ -49,9 +52,9 @@ void ogg_stream::open(string path)
    loopInterval = -1;
 
    alGenBuffers(2, buffers);
-   check();
+   check("::open() -> alGenBuffers");
    alGenSources(1, &source);
-   check();
+   check("::open() -> alGenSouces");
 }
 
 /*************************************************************************
@@ -79,14 +82,24 @@ ALuint ogg_stream::getSource()
  *************************************************************************/
 void ogg_stream::release()
 {
-    alSourceStop(source);
-    empty();
-    alDeleteSources(1, &source);
-    check();
-    alDeleteBuffers(2, &buffers[0]);
-    check();
- 
-    ov_clear(&oggStream);
+   /* Stop Source (if already not stoped) */
+   if( (timeEnded == 0) )
+   {
+      alSourceStop(source);
+      check("::release() alSourceStop");
+   }
+
+   /* Empty the remaining buffers */
+   empty();
+
+   /* Delete Sources And Buffers */
+   alDeleteSources(1, &source);
+   check("::release() alDeleteSources");
+   alDeleteBuffers(2, &buffers[0]);
+   check("::release() alDeleteBuffers");
+
+   /* Finally, clear the ogg stream */
+   ov_clear(&oggStream);
 }
 
 /*************************************************************************
@@ -156,7 +169,7 @@ bool ogg_stream::update()
         ALuint buffer;
         
         alSourceUnqueueBuffers(source, 1, &buffer);
-        check();
+        check("::update() alSourceUnqueueBuffers");
  
         active = stream(buffer);
  
@@ -164,7 +177,7 @@ bool ogg_stream::update()
         {
            /* Only Queue if stream is active */
            alSourceQueueBuffers(source, 1, &buffer);
-           check();
+           check("::update() alSourceQueueBuffers");
         }
     }
  
@@ -250,7 +263,7 @@ bool ogg_stream::stream(ALuint buffer)
        /*printf("bufferdata: Buffer: %d Format: %d size: %d\n", buffer, 
                                                  format, size);*/
        alBufferData(buffer, format, data, size, vorbisInfo->rate);
-       check();
+       check("::stream() alBufferData");
     }
  
     return(true);
@@ -262,41 +275,51 @@ bool ogg_stream::stream(ALuint buffer)
 void ogg_stream::empty()
 {
     int queued;
-    
-    alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
-    
-    while(queued--)
+
+    /* Only Need to unqueue buffers, if the sound was running */
+    if(timeEnded == 0)
     {
-        ALuint buffer;
-    
-        alSourceUnqueueBuffers(source, 1, &buffer);
-        check();
+       alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
+
+       while(queued--)
+       {
+          ALuint buffer;
+
+          alSourceUnqueueBuffers(source, 1, &buffer);
+          check("::empty() alSourceUnqueueBuffers");
+       }
     }
 }
 
 /*************************************************************************
  *                                 check                                 *
  *************************************************************************/
-void ogg_stream::check()
+void ogg_stream::check(string where)
 {
     int error = alGetError();
  
     if(error != AL_NO_ERROR)
     {
-        printf("OpenAL error was raised: %d .\n", error);
+        cout << "OpenAL error was raised: " << error << endl;
         switch(error)
         {
-           case AL_INVALID_NAME: printf("Invalid name parameter\n");
+           case AL_INVALID_NAME: 
+              cout << "Invalid name parameter";
            break;
-           case AL_INVALID_ENUM: printf("Invalid parameter\n");
+           case AL_INVALID_ENUM: 
+              cout << "Invalid parameter";
            break;
-           case AL_INVALID_VALUE: printf("Invalid enum parameter value\n");
+           case AL_INVALID_VALUE: 
+              cout << "Invalid enum parameter value";
            break;
-           case AL_INVALID_OPERATION: printf("Illegal call\n");
+           case AL_INVALID_OPERATION: 
+              cout << "Illegal call";
            break;
-           case AL_OUT_OF_MEMORY: printf("Unable to allocate memory\n");
+           case AL_OUT_OF_MEMORY: 
+              cout << "Unable to allocate memory";
            break;
         }
+        cout << " at " << where << endl;
     }
 }
 
