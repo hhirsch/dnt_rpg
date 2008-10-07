@@ -91,9 +91,11 @@ class engine
        **************************************************************** 
        * Runs the Engine  
        * \param surface -> Pointer to the Screen's Surface
+       * \param commingBack -> True if comming back to game, false if
+       *                       just loaded the map
        * \return 0 when stop running the main loop in engine.
        ***************************************************************/
-      int  run(SDL_Surface *surface);    
+      int  run(SDL_Surface *surface, bool commingBack);
 
       /*!
        **************************************************************** 

@@ -1103,6 +1103,7 @@ Map::Map(lObject* lObjects)
    music = "";
    npcFileName = "";
    particlesFileName = "";
+   soundsFileName = "";
    outdoor = false;
    MapSquares = NULL;
 
@@ -1119,6 +1120,9 @@ Map::Map(lObject* lObjects)
    objects = lObjects;
    x = z = 0;
    xInic = zInic = 0;
+
+   /* Create sound */
+   sounds = new mapSound();
 }
 
 /********************************************************************
@@ -1349,6 +1353,22 @@ string Map::getParticlesFileName()
 void Map::setParticlesFileName(string fileName)
 {
    particlesFileName = fileName;
+}
+
+/********************************************************************
+ *                      getSoundsFileName                           *
+ ********************************************************************/
+string Map::getSoundsFileName()
+{
+   return(soundsFileName);
+}
+
+/********************************************************************
+ *                      setSoundsFileName                           *
+ ********************************************************************/
+void Map::setSoundsFileName(string fileName)
+{
+   soundsFileName = fileName;
 }
 
 /********************************************************************
@@ -1586,6 +1606,18 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
             fgets(buffer,sizeof(buffer),arq);
             sscanf(buffer,"%s",nome);
             music = nome;
+            break;
+         }
+         case 'S':  /* Define Sounds File */
+         {
+            fgets(buffer,sizeof(buffer),arq);
+            sscanf(buffer,"%s",nome);
+            soundsFileName = nome;
+            if(!sounds->load(soundsFileName))
+            {
+               cerr << "Error loading sounds fileName: " 
+                    << soundsFileName << endl;
+            }
             break;
          }
          case 'w': /* Define Walls and Half Walls */
@@ -2055,26 +2087,32 @@ int Map::save(string arquivo)
    /* Write fog file name, if exists */
    if( !fog.fileName.empty() )
    {
-     fprintf(arq,"f %s\n",dir.getRelativeFile(fog.fileName).c_str());
+      fprintf(arq,"f %s\n",dir.getRelativeFile(fog.fileName).c_str());
    }
   
    /* Write NPC file name, if exists */
    if( !npcFileName.empty())
    {
-     fprintf(arq,"npc %s\n",dir.getRelativeFile(npcFileName).c_str());
+      fprintf(arq,"npc %s\n",dir.getRelativeFile(npcFileName).c_str());
    }
 
    /* Write Particles file */
-   if( !particlesFileName.empty())
+   if(!particlesFileName.empty())
    {
-     fprintf(arq,"PS %s\n",dir.getRelativeFile(particlesFileName).c_str());
+      fprintf(arq,"PS %s\n",dir.getRelativeFile(particlesFileName).c_str());
    }
 
  
    /* Write music file name */
-   if( !music.empty())
+   if(!music.empty())
    {
-     fprintf(arq,"MUSICA %s\n",dir.getRelativeFile(music).c_str());
+      fprintf(arq,"MUSICA %s\n",dir.getRelativeFile(music).c_str());
+   }
+
+   /* Write sounds file name */
+   if(!soundsFileName.empty())
+   {
+      fprintf(arq,"SOUNDS %s\n",dir.getRelativeFile(soundsFileName).c_str());
    }
 
    /* Write Lights file name */
@@ -2295,6 +2333,12 @@ Map::~Map()
       delete[](MapSquares[x1]);
    }
    delete[] (MapSquares);
+
+   /* Deleting Sounds */
+   if(sounds)
+   {
+      delete(sounds);
+   }
 
    /* Deleting Lakes */
    //TODO
@@ -2657,5 +2701,16 @@ bool Map::defineThingHeight(thing* c, GLfloat nx, GLfloat nz)
 
    c->yPosition = res;
    return(true);
+}
+
+/********************************************************************
+ *                             flushSounds                          *
+ ********************************************************************/
+void Map::flushSounds()
+{
+   if(sounds)
+   {
+      sounds->flush();
+   }
 }
 

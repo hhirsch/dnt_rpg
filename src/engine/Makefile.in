@@ -26,7 +26,7 @@ ENDETC = ../etc/
 ENDCBOOK = ../cbook/
 
 OBJSCBOOK = $(ENDCBOOK)comicbox.o $(ENDCBOOK)comicbook.o $(ENDCBOOK)comicpage.o
-OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o $(ENDMAP)mapobject.o $(ENDMAP)maproad.o
+OBJSMAPA = $(ENDMAP)map.o $(ENDMAP)mapfog.o $(ENDMAP)maplights.o $(ENDMAP)mapobject.o $(ENDMAP)maproad.o $(ENDMAP)mapsound.o
 OBJSGUI = $(ENDGUI)textbar.o $(ENDGUI)button.o $(ENDGUI)color.o $(ENDGUI)cxsel.o $(ENDGUI)draw.o $(ENDGUI)messages.o $(ENDGUI)interface.o $(ENDGUI)farso.o $(ENDGUI)filesel.o $(ENDGUI)picture.o $(ENDGUI)dntfont.o $(ENDGUI)healthBar.o $(ENDGUI)window.o $(ENDGUI)guilist.o $(ENDGUI)listtext.o $(ENDGUI)menu.o $(ENDGUI)mouse.o $(ENDGUI)textbox.o $(ENDGUI)rolbar.o $(ENDGUI)seltext.o $(ENDGUI)tabbutton.o
 OBJSNET = #$(ENDNET)client.o $(ENDNET)common.o
 OBJSIA = $(ENDIA)agent.o $(ENDIA)pattAgent.o $(ENDIA)potentAgent.o $(ENDIA)astar.o $(ENDIA)fuzzy.o $(ENDIA)fuzzyvariable.o $(ENDIA)fuzzyfunction.o $(ENDIA)fuzzyrule.o  $(ENDIA)iafuncs.o $(ENDIA)iascript.o $(ENDIA)iastack.o $(ENDIA)iavariable.o

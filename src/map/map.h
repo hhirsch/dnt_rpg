@@ -9,6 +9,7 @@
 #include "mapfog.h"
 #include "maplights.h"
 #include "maproad.h"
+#include "mapsound.h"
 #include "../particle/lake.h"
 #include <string>
 using namespace std;
@@ -408,6 +409,20 @@ class Map
 
       /*! 
        **************************************************************
+       * Get Sounds File Name
+       * \return sounds fileName
+       **************************************************************/
+      string getSoundsFileName();
+
+      /*! 
+       **************************************************************
+       * Set Sounds File Name
+       * \param fileName -> New fileName
+       **************************************************************/
+      void setSoundsFileName(string fileName);
+
+      /*! 
+       **************************************************************
        * Get Particles File Name
        * \return particles fileName
        **************************************************************/
@@ -477,6 +492,12 @@ class Map
        * \return -> true if can define new heigh, false if can't move.
        ***************************************************************/
       bool defineThingHeight(thing* c, GLfloat nx, GLfloat nz);
+
+      /*!
+       ***************************************************************
+       * Flush all map sounds to the sound controller
+       ***************************************************************/
+      void flushSounds();
 
       /*!
        ***************************************************************
@@ -578,6 +599,15 @@ class Map
        **************************************************************/
       void removeUnusedTextures();
 
+      /*! 
+       **************************************************************
+       * Add a lake to the map
+       * \param x1 -> X first coordinate 
+       * \param z1 -> Z first coordinate
+       * \param x2 -> X last coordinate 
+       * \param z2 -> Z last coordinate 
+       * \return -> pointer to the lake added
+       **************************************************************/
       lake* addLake(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2);
 
       mapFog fog;           /**< Map's Fog */
@@ -634,26 +664,30 @@ class Map
                            bool outdoorCompatible=false);
 
 
-         wall* walls;          /**< Map Walls */
-         int totalWalls;       /**< Total Map Walls */
-         int x,                /**< Map X dimension (in squares) */
-             z;                /**< Map Z Dimension (in squares) */
-         bool outdoor;         /**< If it's an outdoor or indoor map */
-         Square** MapSquares;  /**< Internal Map squares */
-         lObject* objects;     /**< Map's objects list */
-         string music;         /**< Map Music */
-         string name;          /**< File name of loaded map */
-         string particlesFileName; /**< File Name of Map Particles Systens */
-         string npcFileName;   /**< Static NPC's on map filename */
-         float xInic,            /**< X coordinate where PCs starts */
-               zInic;            /**< Z Coordinate where PCs starts */
-         float angleInic;        /**< Angle for PC at initial position */
+      mapSound* sounds;      /**< Map Sound Effects */
+      string soundsFileName; /**< Sound Info File Name */
 
-         float* vertexBuffer;
-         float* uvBuffer;
-         float* uvAlphaBuffer;
-         int totalVertex;
-         GLuint commonTexture;   /**< The most common texture on the map */
+      wall* walls;          /**< Map Walls */
+      int totalWalls;       /**< Total Map Walls */
+      int x,                /**< Map X dimension (in squares) */
+          z;                /**< Map Z Dimension (in squares) */
+      bool outdoor;         /**< If it's an outdoor or indoor map */
+      Square** MapSquares;  /**< Internal Map squares */
+      lObject* objects;     /**< Map's objects list */
+      string music;         /**< Map Music */
+      string name;          /**< File name of loaded map */
+
+      string particlesFileName; /**< File Name of Map Particles Systens */
+      string npcFileName;       /**< Static NPC's on map filename */
+      float xInic,              /**< X coordinate where PCs starts */
+            zInic;              /**< Z Coordinate where PCs starts */
+      float angleInic;          /**< Angle for PC at initial position */
+
+      float* vertexBuffer;
+      float* uvBuffer;
+      float* uvAlphaBuffer;
+      int totalVertex;
+      GLuint commonTexture;   /**< The most common texture on the map */
 
 };
 

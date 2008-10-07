@@ -126,9 +126,10 @@ int main(int argc, char **argv)
          if(result == CONTINUE_GAME)
          {
             glDisable(GL_LIGHTING);
-            gameEngine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
+            gameEngine->fadeOutTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1,
+                                       800,600);
          }
-         if(gameEngine->run(screen) == 1)
+         if(gameEngine->run(screen, (result == CONTINUE_GAME)) == 1)
          {
             estado = IN_GAME;
          }
@@ -139,7 +140,8 @@ int main(int argc, char **argv)
          reloadMusic = true;
          glDisable(GL_LIGHTING);
 	      glDisable(GL_FOG);
-         gameEngine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 800, 600);
+         gameEngine->fadeInTexture(tituloID,0,0,SCREEN_X-1,SCREEN_Y-1, 
+                                   800, 600);
          result = gameEngine->menuScreen(estado,tituloID,reloadMusic);
       }
       else

@@ -622,6 +622,9 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
       snd->loadMusic(actualMap->getMusicFileName());
    }
 
+   /* Flush Sound Effects, if needed */
+   actualMap->flushSounds();
+
    /* Define Map */
    particleController->setActualMap(actualMap, &colisionDetect);
    colisionDetect.defineMap(actualMap, NPCs, PCs);
@@ -3285,11 +3288,19 @@ fightSystem* engine::getFightSystem()
 /*********************************************************************
  *                          Runs the Engine                          *
  *********************************************************************/
-int engine::run(SDL_Surface *surface)
+int engine::run(SDL_Surface *surface, bool commingBack)
 {
-   if(!actualMap->getMusicFileName().empty())
+   /* Put back map's sound and music if comming back to game */
+   if(commingBack)
    {
-      snd->loadMusic(actualMap->getMusicFileName());
+      /* Reload the map's music */
+      if(!actualMap->getMusicFileName().empty())
+      {
+         snd->loadMusic(actualMap->getMusicFileName());
+      }
+
+      /* Reload the map's sound effects */
+      actualMap->flushSounds();
    }
 
    int time;
@@ -3312,6 +3323,9 @@ int engine::run(SDL_Surface *surface)
          /* All Pcs are Dead, so Death Screen! */
          snd->loadMusic("music/musica8.ogg");
          showImage(dir.getRealFile("texturas/fightMode/death.png"));
+
+         /* Remove All Sound Effects */
+         snd->removeAllSoundEffects();
 
          /* Clear Modifications */
          modifState.clear();
@@ -3419,6 +3433,8 @@ int engine::run(SDL_Surface *surface)
      }
    }
 
+   /* Remove All Sound Effects */
+   snd->removeAllSoundEffects();
    return(1);
 }
 
