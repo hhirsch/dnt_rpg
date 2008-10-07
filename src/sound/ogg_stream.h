@@ -23,9 +23,10 @@ class ogg_stream
       /*! Release all buffers and sources relative to the file */
       void release();         
       
-      /*! playback the ogg stream 
+      /*! playback the ogg stream
+       * \param rewind -> if true, rewind the ogg file
        * \return false if is not playing */
-      bool playback();        
+      bool playback(bool rewind=false);        
       
       /*! Verify if the source is playing
        * \return false if is not playing */
@@ -55,8 +56,9 @@ class ogg_stream
    protected:
       /*! Reloads a buffer
        * \param buffer -> buffer to reload 
+       * \param rewind -> if true, rewind the ogg file
        * \return false if error occurs */
-      bool stream(ALuint buffer);   
+      bool stream(ALuint buffer, bool rewind=false);   
 
       /*! Empty the queue */
       void empty();      

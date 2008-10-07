@@ -18,8 +18,7 @@ void ogg_stream::open(string path)
     
    if(!(oggFile = fopen(dir.getRealFile(path).c_str(), "rb")))
    {
-       printf("Could not open Ogg file: %s\n",
-               dir.getRealFile(path).c_str());
+       cerr << "Could not open Ogg file: " <<  dir.getRealFile(path) << endl;
        return;
    }
    
@@ -33,7 +32,7 @@ void ogg_stream::open(string path)
    if(result < 0)
    {
        fclose(oggFile);
-       printf("Could not open Ogg stream: %s\n", errorString(result).c_str());
+       cerr << "Could not open Ogg stream: " << errorString(result) << endl;
        return;
    }
 
@@ -105,14 +104,14 @@ void ogg_stream::release()
 /*************************************************************************
  *                              playBack                                 *
  *************************************************************************/
-bool ogg_stream::playback()
+bool ogg_stream::playback(bool rewind)
 {
    if(playing())
    {
       return(true);
    }
         
-   if(!stream(buffers[0]))
+   if(!stream(buffers[0], rewind))
    {
       return(false);
    }
@@ -133,19 +132,11 @@ bool ogg_stream::playback()
  *************************************************************************/
 bool ogg_stream::playing()
 {
-   if( (timeEnded != 0) && (loopInterval > 0))
-   {
-      /* Just waiting time to play again */
-      return(true);
-   }
-   else
-   {
-      ALenum state;
+   ALenum state;
 
-      alGetSourcei(source, AL_SOURCE_STATE, &state);
+   alGetSourcei(source, AL_SOURCE_STATE, &state);
 
-      return (state == AL_PLAYING);
-   }
+   return (state == AL_PLAYING);
 }
 
 /*************************************************************************
@@ -155,27 +146,37 @@ bool ogg_stream::update()
 {
     int processed;
     bool active = true;
- 
+
     alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
 
-    /*if(!playing())
+    /* Must verify if sound is pending for loop */
+    if( (processed == 0) && (timeEnded > 0) )
     {
-       //If not playing, resume the play!
-       alSourcePlay(source);
-    }*/
+       /* Verify Waiting to loop again time */
+       if((loopInterval > 0) && (timeEnded != 0))
+       {
+          int interval = (SDL_GetTicks() - timeEnded) / 1000;
+          if(interval >= loopInterval)
+          {
+             /* Reinit the play, rewinding the file */
+             active = playback(true);
+          }
+       }
+    }
 
+    /* Process the processed buffers */
     while(processed--)
     {
         ALuint buffer;
         
         alSourceUnqueueBuffers(source, 1, &buffer);
         check("::update() alSourceUnqueueBuffers");
- 
+
         active = stream(buffer);
  
-        if(active)
+        if( (active) && (timeEnded == 0))
         {
-           /* Only Queue if stream is active */
+           /* Only Queue if stream is active, and not waiting */
            alSourceQueueBuffers(source, 1, &buffer);
            check("::update() alSourceQueueBuffers");
         }
@@ -187,7 +188,7 @@ bool ogg_stream::update()
 /*************************************************************************
  *                                stream                                 *
  *************************************************************************/
-bool ogg_stream::stream(ALuint buffer)
+bool ogg_stream::stream(ALuint buffer, bool rewind)
 {
     char data[BUFFER_SIZE] = { 0 };
     int  size = 0;
@@ -195,25 +196,21 @@ bool ogg_stream::stream(ALuint buffer)
     int  result = -1;
     bool resumed = false;
 
-    /* Verify Waiting to loop again time */
-    if((loopInterval > 0) && (timeEnded != 0))
+    if(rewind)
     {
-       int interval = (SDL_GetTicks() - timeEnded) / 1000;
-       if(interval >= loopInterval)
+       /* Must restart the stream */
+       timeEnded = 0;
+       /* Rewind the file */
+       if(ov_raw_seek(&oggStream,0) != 0)
        {
-          /* Must restart the stream */
-          timeEnded = 0;
-          /* Rewind the file */
-          if(ov_raw_seek(&oggStream,0) != 0)
-          {
-             printf("Ogg Rewind Error\n");
-          }
-          resumed = true;
+          cerr << "Ogg Rewind Error" << endl;
        }
-       else
-       {
-          return(true);
-       }
+       resumed = true;
+    }
+    else if(timeEnded > 0)
+    {
+       /* Must only wait */
+       return(true);
     }
  
     while( (size < BUFFER_SIZE) && (result != 0))
@@ -226,7 +223,7 @@ bool ogg_stream::stream(ALuint buffer)
         }
         else if(result < 0)
         {
-           printf("Ogg Buffer Error: %s\n", errorString(result).c_str());
+           cerr << "Ogg Buffer Error: " << errorString(result) << endl;
            return(false);
         }
         else
@@ -237,7 +234,7 @@ bool ogg_stream::stream(ALuint buffer)
               result = 1;
               if(ov_raw_seek(&oggStream,0) != 0)
               {
-                 printf("Ogg Rewind Error\n");
+                 cerr << "Ogg Rewind Error" << endl;
               }
            }
            else if(loopInterval > 0)
@@ -251,17 +248,12 @@ bool ogg_stream::stream(ALuint buffer)
     {
        /*empty();*/
        alSourceStop(source);
-       return(false);
+
+       /* Only return false if will no more play */
+       return(timeEnded > 0);
     }
     else
     {
-       if(resumed)
-       {
-          /* Restart the play */
-          alSourcePlay(source);
-       }
-       /*printf("bufferdata: Buffer: %d Format: %d size: %d\n", buffer, 
-                                                 format, size);*/
        alBufferData(buffer, format, data, size, vorbisInfo->rate);
        check("::stream() alBufferData");
     }
@@ -276,18 +268,15 @@ void ogg_stream::empty()
 {
     int queued;
 
-    /* Only Need to unqueue buffers, if the sound was running */
-    if(timeEnded == 0)
+    alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
+    check("::empty() AL_BUFFERS_QUEUED");
+
+    while(queued--)
     {
-       alGetSourcei(source, AL_BUFFERS_QUEUED, &queued);
+       ALuint buffer;
 
-       while(queued--)
-       {
-          ALuint buffer;
-
-          alSourceUnqueueBuffers(source, 1, &buffer);
-          check("::empty() alSourceUnqueueBuffers");
-       }
+       alSourceUnqueueBuffers(source, 1, &buffer);
+       check("::empty() alSourceUnqueueBuffers");
     }
 }
 
@@ -300,26 +289,26 @@ void ogg_stream::check(string where)
  
     if(error != AL_NO_ERROR)
     {
-        cout << "OpenAL error was raised: " << error << endl;
+        cerr << "OpenAL error was raised: " << error << endl;
         switch(error)
         {
            case AL_INVALID_NAME: 
-              cout << "Invalid name parameter";
+              cerr << "Invalid name parameter";
            break;
            case AL_INVALID_ENUM: 
-              cout << "Invalid parameter";
+              cerr << "Invalid parameter";
            break;
            case AL_INVALID_VALUE: 
-              cout << "Invalid enum parameter value";
+              cerr << "Invalid enum parameter value";
            break;
            case AL_INVALID_OPERATION: 
-              cout << "Illegal call";
+              cerr << "Illegal call";
            break;
            case AL_OUT_OF_MEMORY: 
-              cout << "Unable to allocate memory";
+              cerr << "Unable to allocate memory";
            break;
         }
-        cout << " at " << where << endl;
+        cerr << " at " << where << endl;
     }
 }
 
