@@ -52,6 +52,16 @@ class window: public guiObject
       /*! Open the Window */
       void open();
 
+      /*! Hide the Window (opposite of show()) */
+      void hide();
+
+      /*! Show the window (opposite of hide()) */
+      void show();
+
+      /*! True if the Window is visible (not hide), false if is hided
+       * \return true if not hide */
+      bool isVisible();
+
       /*! Do the Movimentation of the window
        * \param backGround -> surface used as background image, if have one.
        * \param xinic -> init X clicked
@@ -118,6 +128,7 @@ class window: public guiObject
       bool canClose;             /**< If can close the window */
       bool canMove;              /**< If can move the window */
       bool modal;                /**< If the window is modal or not */
+      bool visible;              /**< If the window is visible or not */
       guiList* objects;          /**< Objects on the Window */
       SDL_Surface *surface;      /**< Window Surface */
       GLuint texture;            /**< GL texture for the window */

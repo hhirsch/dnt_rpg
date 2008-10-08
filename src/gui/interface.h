@@ -112,6 +112,12 @@ class guiInterface
        * \return -> pointer to the active Window */
       window* getActiveWindow();
 
+      /*! Hide All Current Windows */
+      void hideAll();
+
+      /*! Show All Current Windows */
+      void showAll();
+
    private:
 
       /*! Verify events occured on gui at single components

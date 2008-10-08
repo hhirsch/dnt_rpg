@@ -315,7 +315,8 @@ guiObject* guiInterface::verifySingleEvents(int x, int y, Uint8 Mbotao,
            window *jaux=(window*)ljan->getFirst()->next;
            for(aux=0;aux<ljan->getTotal();aux++)
            {
-               if( (jaux != ljan->getActiveWindow())  && 
+               if( (jaux->isVisible()) &&
+                   (jaux != ljan->getActiveWindow())  && 
                    (jaux->isMouseIn(x,y)))
                {
                     focus = FOCUS_GAME;
@@ -625,7 +626,7 @@ void guiInterface::draw(GLdouble proj[16],GLdouble modl[16],GLint viewPort[4])
    /* Draw Inative Windows */
    for(aux = 0;aux<ljan->getTotal();aux++)
    {
-      if(jan != ljan->getActiveWindow())
+      if( (jan != ljan->getActiveWindow()) && (jan->isVisible()) )
       {
          jan->render(depth);
           depth += 0.001;
@@ -713,12 +714,40 @@ bool guiInterface::mouseOnGui(int mouseX, int mouseY)
    window *jaux=(window*)ljan->getFirst()->next;
    for(aux=0;aux<ljan->getTotal();aux++)
    {
-      if(jaux->isMouseIn(mouseX,mouseY))
+      if( (jaux->isVisible()) && (jaux->isMouseIn(mouseX,mouseY)) )
       {
          return(true);
       }
       jaux = (window*) jaux->next;
    }
    return(false);
+}
+
+/*********************************************************************
+ *                               hideAll                             *
+ *********************************************************************/
+void guiInterface::hideAll()
+{
+   int aux;
+   window *jaux=(window*)ljan->getFirst()->next;
+   for(aux=0;aux<ljan->getTotal();aux++)
+   {
+      jaux->hide();
+      jaux = (window*) jaux->next;
+   }
+}
+
+/*********************************************************************
+ *                               showAll                             *
+ *********************************************************************/
+void guiInterface::showAll()
+{
+   int aux;
+   window *jaux=(window*)ljan->getFirst()->next;
+   for(aux=0;aux<ljan->getTotal();aux++)
+   {
+      jaux->show();
+      jaux = (window*) jaux->next;
+   }
 }
 

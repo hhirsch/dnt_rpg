@@ -130,6 +130,7 @@ window::window(int xa, int ya, int xb, int yb, string title, void* list)
    canClose = true;
    canMove = true;
    modal = false;
+   visible = true;
    externPointer = NULL;
 
    /* Define Machine Bit Order */
@@ -460,6 +461,30 @@ bool window::isModal()
 void window::setModal()
 {
    modal = true;
+}
+
+/*********************************************************************
+ *                                hide                               *
+ *********************************************************************/
+void window::hide()
+{
+   visible = false;
+}
+
+/*********************************************************************
+ *                                 show                              *
+ *********************************************************************/
+void window::show()
+{
+   visible = true;
+}
+
+/*********************************************************************
+ *                             isVisible                             *
+ *********************************************************************/
+bool window::isVisible()
+{
+   return(visible);
 }
 
 /*********************************************************************
