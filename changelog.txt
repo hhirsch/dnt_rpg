@@ -8,6 +8,7 @@
    on mission controller;
  - Re-enabled the outdoor terrain view frustum culling;
  - Put Farview Distance as a Game Option;
+ - Optimizations for outdoor rendering;
  - Keep window state on map change (opened/closed);
  - Fixed a bug at mouse coordinate (Screen->World);
  - Disable particles if no GL_Point extensions found (it 
@@ -25,7 +26,6 @@
  - Define sound effects per map;
 
 Working on:
- - Optimizations for outdoor rendering;
  - Character level up;
  - Weather effects;
  - Shadows;
@@ -34,7 +34,7 @@ Working on:
  - Initial approach to NPC select the target to attack;
  - Initial approach to select better attack to NPC use;
  - Initial approach to move NPC on battle;
- - Initial approach to use other actions than attack actions at combat;
+ - Initial approach to NPC use other actions than attack actions at combat;
  - Load/Save Functions;
  - Receive XP on killing, trickering and completing missions;
  - Use of some itens;
