@@ -622,7 +622,12 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
       snd->loadMusic(actualMap->getMusicFileName());
    }
 
-   /* Flush Sound Effects, if needed */
+   /* Flush Sound Effects, if needed, setting listener before to avoid
+    * volume and positional errors */
+   snd->setListenerPosition(gameCamera.getCameraX(), gameCamera.getCameraY(),
+                            gameCamera.getCameraZ(), gameCamera.getTheta(),
+                            gameCamera.getPhi(), gameCamera.getD(),
+                            gameCamera.getDeltaY());
    actualMap->flushSounds();
 
    /* Define Map */
