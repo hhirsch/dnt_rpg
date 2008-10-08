@@ -28,7 +28,7 @@ using namespace std;
 #define MAX_HEIGHT           150       /**< Max square height */
 
 #define TEXTURE_REPEATS (OUTDOOR_SQUARE_SIZE / 256) /**< Number of Repeats */ 
-#define ALPHA_TEXTURE_INC       4 /**< Points per square on each alpha texture*/
+#define ALPHA_TEXTURE_INC       2 /**< Points per square on each alpha texture*/
 
 #define DOOR_STATUS_CLOSED      0      /**< If door is closed */
 #define DOOR_STATUS_OPENED      1      /**< If door is opened */
