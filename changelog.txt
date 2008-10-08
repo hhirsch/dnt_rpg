@@ -22,6 +22,7 @@
  - Continuous Walk with Mouse;
  - Calling read-only skills window at character's window;
  - Define sound's interval time before loop;
+ - Define sound effects per map;
 
 Working on:
  - Optimizations for outdoor rendering;
@@ -29,7 +30,7 @@ Working on:
  - Weather effects;
  - Shadows;
  - New Models;
- - Put sound effects on editor and maps;
+ - Use dntMapEditor to insert sound effects at maps;
  - Initial approach to NPC select the target to attack;
  - Initial approach to select better attack to NPC use;
  - Initial approach to move NPC on battle;
