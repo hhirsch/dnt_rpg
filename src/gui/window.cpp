@@ -405,9 +405,21 @@ void window::activate()
   windowList *ljan = (windowList*) intList;
   if (ljan->getActiveWindow() != NULL)
   {
+     if(ljan->getActiveWindow()->isModal())
+     {
+        /* The current active window is a modal one,
+         * so it continue as the active window! */
+        return;
+     }
+
+     /* Draw the Inactive TitleBar to the current active window */
      ljan->getActiveWindow()->drawInactiveBar();
   }
+
+  /* Set this window as the new active one */
   ljan->setActiveWindow(this);
+
+  /* And obviously, draw its active bar */
   drawActiveBar();
 }
 
