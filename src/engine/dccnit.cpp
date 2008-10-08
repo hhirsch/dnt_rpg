@@ -802,7 +802,7 @@ int engine::menuScreen(int Status, GLuint idTextura, bool reloadMusic)
    /* Executes Initial Screen */
    updateFrustum(visibleMatrix,proj,modl);
    initialScreen* inic = new(initialScreen);
-   int result = inic->run(Status, proj, modl, viewPort, idTextura, snd);
+   int result = inic->run(Status, proj, modl, viewPort, idTextura, snd, gui);
    delete(inic);
    return(result);
 }
@@ -812,7 +812,6 @@ int engine::menuScreen(int Status, GLuint idTextura, bool reloadMusic)
  *********************************************************************/
 int engine::optionsScreen(GLuint idTextura)
 {
-   guiInterface* interf = new guiInterface(NULL);
    int optionW = OPTIONSW_OTHER;
    int time = SDL_GetTicks();
    int timeAnterior = 0;
@@ -823,7 +822,7 @@ int engine::optionsScreen(GLuint idTextura)
 
    glDisable(GL_LIGHTING);
 
-   option->displayOptionsScreen(interf);
+   option->displayOptionsScreen(gui);
 
    while( (optionW != OPTIONSW_CANCEL) && 
           (optionW != OPTIONSW_CONFIRM))
@@ -837,12 +836,12 @@ int engine::optionsScreen(GLuint idTextura)
          glClearColor(0,0,0,1);
          keys = SDL_GetKeyState(NULL);
          Uint8 mButton = SDL_GetMouseState(&x,&y);
-         object = interf->manipulateEvents(x,y,mButton,keys, eventInfo);
+         object = gui->manipulateEvents(x,y,mButton,keys, eventInfo);
          
          glPushMatrix();
             draw2DMode();
             textureToScreen(idTextura,0,0,SCREEN_X-1,SCREEN_Y-1,800,600);
-            interf->draw(proj,modl,viewPort);
+            gui->draw(proj,modl,viewPort);
 
             glPushMatrix();
                cursors->draw(x, y);
@@ -852,7 +851,7 @@ int engine::optionsScreen(GLuint idTextura)
          glPopMatrix();
          glFlush();
          SDL_GL_SwapBuffers();
-         optionW = option->treat(object,eventInfo,interf,proj,modl,viewPort);
+         optionW = option->treat(object,eventInfo,gui,proj,modl,viewPort);
       }
       else if((UPDATE_RATE-1) - (time - timeAnterior) > 0 ) 
       {
@@ -881,8 +880,6 @@ int engine::optionsScreen(GLuint idTextura)
                         dir.getRealFile("races/races.lst"));
 
    glEnable(GL_LIGHTING);
-
-   delete(interf);
 
    return(optionW);
 }
@@ -3312,10 +3309,16 @@ int engine::run(SDL_Surface *surface, bool commingBack)
    actualFPS = 10.0;
    lastFPS = 0;
 
+   /* Unhide All Windows */
+   gui->showAll();
+
    /* Open Needed windows */
-   mapWindow->open(gui,0,0, actualMap);
-   shortcuts->open(gui);
-   brief->openWindow(gui);
+   if(!commingBack)
+   {
+      mapWindow->open(gui,0,0, actualMap);
+      shortcuts->open(gui);
+      brief->openWindow(gui);
+   }
 
    /* Main Things Run */
    while(treatIO(surface))
@@ -3440,6 +3443,10 @@ int engine::run(SDL_Surface *surface, bool commingBack)
 
    /* Remove All Sound Effects */
    snd->removeAllSoundEffects();
+
+   /* Hide All Active Windows */
+   gui->hideAll();
+
    return(1);
 }
 

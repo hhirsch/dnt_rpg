@@ -18,7 +18,7 @@
  ***************************************************************/
 initialScreen::initialScreen()
 {
-   gui  = new guiInterface(NULL);
+   gui  = NULL;
    buttonNew = NULL;
    buttonContinue = NULL;
    buttonSave = NULL;
@@ -32,8 +32,6 @@ initialScreen::initialScreen()
  ***************************************************************/
 initialScreen::~initialScreen()
 {
-   if(gui)
-      delete(gui);
 }
 
 /***************************************************************
@@ -41,7 +39,7 @@ initialScreen::~initialScreen()
  ***************************************************************/
 int initialScreen::run(int Status,GLdouble proj[16],
                        GLdouble modl[16], GLint viewPort[4],
-                       GLuint tituloID, sound* snd)
+                       GLuint tituloID, sound* snd, guiInterface* interf)
 {
    Uint32 tempo;
    Uint32 tempoAnterior = 0;
@@ -49,6 +47,7 @@ int initialScreen::run(int Status,GLdouble proj[16],
    guiObject* object = NULL;
    int eventInfo = NOTHING;
    cursor cursors;
+   gui = interf;
 
    int xPos = (int)(SCREEN_X / 2.0);
    int yPos = (int)(SCREEN_Y / 2.0);
