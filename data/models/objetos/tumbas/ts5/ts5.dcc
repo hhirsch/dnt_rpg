@@ -1,0 +1,13 @@
+name = TombStone5
+cal3d = models/objetos/tumbas/ts5/model.cfg
+inventory_sizes = 0 0
+inventory_texture = texturas/na.png
+life_points = 480
+fortitude = 5
+reflex = 2
+will = 0
+displacement = 0
+armature_class = 10
+size_modifier = 0
+cost = 550
+static_scenery = 1
