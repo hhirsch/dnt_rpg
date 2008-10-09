@@ -148,6 +148,7 @@ void guiIO::openObjectWindow()
    objectMacabreButton = objectTabButton->insertButton(0,25,24,45);
    objectBathButton = objectTabButton->insertButton(25,25,44,45);
    objectStreetButton = objectTabButton->insertButton(49,25,71,45);
+   objectJunkButton = objectTabButton->insertButton(74,25,96,45);
    objectWindow->setExternPointer(&objectWindow);
    gui->openWindow(objectWindow);
 }
@@ -566,6 +567,7 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             case STATE_MACABRE:
             case STATE_BATH:
             case STATE_STREET:
+            case STATE_JUNK:
                state = GUI_IO_STATE_OBJECTS;
                tool = TOOL_OBSTACLE_ADD;
             break;
@@ -846,6 +848,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
          {
             ltWindow->setState(STATE_STREET);
          }
+         else if(object == (guiObject*) objectJunkButton)
+         {
+            ltWindow->setState(STATE_JUNK);
+         } 
          /* Particles Buttons */
          else if(object == (guiObject*) fireButton)
          {
