@@ -292,7 +292,13 @@ Map::~Map()
    }
 
    /* Deleting Lakes */
-   //TODO
+   lake* laux;
+   for(i = 0; i < totalLakes; i++)
+   {
+      laux = lakes;
+      lakes = lakes->next;
+      delete(laux);
+   }
 
    /* Deleting Roads */
    /*if(roads)
