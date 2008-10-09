@@ -681,9 +681,12 @@ void editor::draw()
 
       /* Render Map */
       glPushMatrix();
-         map->draw(gui->gameCamera.getCameraX(), gui->gameCamera.getCameraY(), 
-                   gui->gameCamera.getCameraZ(), visibleMatrix,
-                   gui->gameCamera.getCameraX(), gui->gameCamera.getCameraZ());
+         map->render(gui->gameCamera.getCameraX(),
+                     gui->gameCamera.getCameraY(), 
+                     gui->gameCamera.getCameraZ(), 
+                     visibleMatrix,
+                     gui->gameCamera.getCameraX(), 
+                     gui->gameCamera.getCameraZ());
       glPopMatrix();
 
       /* Render All Static Scenery Objects */

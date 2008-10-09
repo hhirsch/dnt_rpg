@@ -215,7 +215,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    }
 
    /* Test Doors */
-   door* door1 = actualMap->doors;
+   door* door1 = actualMap->getFirstDoor();
    while( door1 != NULL )
    {
       GLfloat minObj[3], maxObj[3];
@@ -453,7 +453,7 @@ bool collision::canWalk(character* actor, GLfloat varX, GLfloat varY,
    }
 
    /* Test Curb */
-   if( verifyCurb( min, max, actualMap->curbs) )
+   if( verifyCurb( min, max, actualMap->getFirstCurb()) )
    {
       varHeight = CURB_HEIGHT+0.1;
    }

@@ -224,8 +224,7 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          novaPorta->z = doorZ;
          novaPorta->orientation = doorOrientation;
          novaPorta->obj = actualDoor;
-         door* paux = actualMap->doors;
-         paux = actualMap->doors;
+         door* paux = actualMap->getFirstDoor();
          actualMap->doors = novaPorta;
          novaPorta->next = paux;
          printf("Added Door: %.3f %.3f\n",doorX,doorZ);

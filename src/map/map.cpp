@@ -187,8 +187,6 @@ Map::Map(lObject* lObjects)
    uvAlphaBuffer = NULL;
    commonTexture = 0;
 
-   totalIndex = 0;
-
    lakes = NULL;
    totalLakes = 0;
    
@@ -721,9 +719,41 @@ void Map::removeWall(wall* w)
 }
 
 /********************************************************************
- *                            drawQuad                              *
+ *                          getFirstCurb                            *
  ********************************************************************/
-void drawQuad(GLfloat x1, GLfloat z1,
+wall* Map::getFirstCurb()
+{
+   return(curbs);
+}
+
+/********************************************************************
+ *                          getTotalCurbs                           *
+ ********************************************************************/
+int Map::getTotalCurbs()
+{
+   return(totalCurbs);
+}
+      
+/********************************************************************
+ *                          getFirstDoor                            *
+ ********************************************************************/
+door* Map::getFirstDoor()
+{
+   return(doors);
+}
+
+/********************************************************************
+ *                            getFog                                *
+ ********************************************************************/
+mapFog Map::getFog()
+{
+   return(fog);
+}
+
+/********************************************************************
+ *                           renderQuad                             *
+ ********************************************************************/
+void renderQuad(GLfloat x1, GLfloat z1,
               GLfloat x2, GLfloat z2,
               GLfloat h1, GLfloat h2, GLfloat h3, GLfloat h4,
               GLfloat texCoordX1, GLfloat texCoordZ1, 
@@ -744,11 +774,11 @@ void drawQuad(GLfloat x1, GLfloat z1,
 }
 
 /********************************************************************
- *                       drawFloorIndoor                            *
+ *                      renderFloorIndoor                           *
  ********************************************************************/
-void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                          GLfloat matriz[6][4], bool selectionRender,
-                          bool outdoorCompatible)
+void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                            GLfloat matriz[6][4], bool selectionRender,
+                            bool outdoorCompatible)
 {
    int aux = 0;
    int x1, z1;
@@ -810,11 +840,11 @@ void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
                              MAX_HEIGHT,
                              MapSquares[x1][z1].z2 + VIS_DELTA, matriz)))
             {
-               drawQuad(MapSquares[x1][z1].x1, MapSquares[x1][z1].z1,
-                        MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
-                        MapSquares[x1][z1].h1, MapSquares[x1][z1].h2, 
-                        MapSquares[x1][z1].h3, MapSquares[x1][z1].h4,
-                        0.0, 0.0, 1.0, 1.0);
+               renderQuad(MapSquares[x1][z1].x1, MapSquares[x1][z1].z1,
+                          MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
+                          MapSquares[x1][z1].h1, MapSquares[x1][z1].h2, 
+                          MapSquares[x1][z1].h3, MapSquares[x1][z1].h4,
+                          0.0, 0.0, 1.0, 1.0);
             }
          }
       }
@@ -833,10 +863,10 @@ void Map::drawFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 }
 
 /********************************************************************
- *                      drawFloorOutdoor                            *
+ *                     renderFloorOutdoor                           *
  ********************************************************************/
-void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                           GLfloat matriz[6][4], bool selectionRender)
+void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                             GLfloat matriz[6][4], bool selectionRender)
 {
    extensions ext;
    int aux = 0;
@@ -965,27 +995,27 @@ void Map::drawFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 }
 
 /********************************************************************
- *                            DrawFloor                             *
+ *                           renderFloor                            *
  ********************************************************************/
-void Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                    GLfloat matriz[6][4], bool selectionRender)
+void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                      GLfloat matriz[6][4], bool selectionRender)
 {
    /* Draw Terrain */
    options opt;
    if( (outdoor) && (opt.getEnableMultiTexture()) )
    {
-      drawFloorOutdoor(cameraX, cameraY, cameraZ, matriz, selectionRender);
+      renderFloorOutdoor(cameraX, cameraY, cameraZ, matriz, selectionRender);
    }
    else
    {
-      drawFloorIndoor(cameraX, cameraY, cameraZ, matriz, selectionRender, 
-                      outdoor);
+      renderFloorIndoor(cameraX, cameraY, cameraZ, matriz, selectionRender, 
+                        outdoor);
    }
 
 
    if(!selectionRender)
    {
-      /* Draw Lakes */
+      /* Render Lakes */
       lake* l = lakes;
       int i;
       for(i = 0; i < totalLakes; i++)
@@ -999,32 +1029,32 @@ void Map::drawFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 }
 
 /********************************************************************
- *                           Draw  Map                              *
+ *                             render                               *
  ********************************************************************/
-int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-              GLfloat matriz[6][4], GLfloat perX, GLfloat perZ)
+int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
+                GLfloat matriz[6][4], GLfloat perX, GLfloat perZ)
 {
-   /* Actualize Lights */
+   /* Update Lights */
    lights.actualize(perX, perZ);
 
    glEnable(GL_COLOR_MATERIAL);
 
    glColor4f(1.0, 1.0, 1.0, 1.0);
-   drawFloor( cameraX, cameraY, cameraZ, matriz );
+   renderFloor( cameraX, cameraY, cameraZ, matriz );
 
    glColor3f(1.0,1.0,1.0);
 
-   /* Draw Walls */
-   drawWalls(cameraX, cameraY, cameraZ, matriz, false);
+   /* Render Walls */
+   renderWalls(cameraX, cameraY, cameraZ, matriz, false);
 
-   /* Draw Roads */
+   /* Render Roads */
    /*if(roads)
    {
       roads->draw();
    }*/
 
-   /* Draw objects */
-   drawObjects(cameraX, cameraY, cameraZ, matriz, false);
+   /* Render objects */
+   renderObjects(cameraX, cameraY, cameraZ, matriz, false);
 
    glDisable(GL_COLOR_MATERIAL);
    glColor3f(1.0,1.0,1.0);
@@ -1033,11 +1063,11 @@ int Map::draw(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 }
 
 /********************************************************************
- *                             drawWalls                            *
+ *                            renderWalls                           *
  ********************************************************************/
-void Map::drawWalls(GLfloat cameraX, GLfloat cameraY, 
-                    GLfloat cameraZ, GLfloat matriz[6][4],
-                    bool inverted)
+void Map::renderWalls(GLfloat cameraX, GLfloat cameraY, 
+                      GLfloat cameraZ, GLfloat matriz[6][4],
+                      bool inverted)
 {
    glColor3f(1.0,1.0,1.0);
    wall* maux = walls;
@@ -1154,9 +1184,9 @@ void Map::drawWalls(GLfloat cameraX, GLfloat cameraY,
 }
 
 /********************************************************************
- *                            drawObjects                           *
+ *                           renderObjects                          *
  ********************************************************************/
-void Map::drawObjects(GLfloat cameraX, GLfloat cameraY, 
+void Map::renderObjects(GLfloat cameraX, GLfloat cameraY, 
                       GLfloat cameraZ, GLfloat matriz[6][4],
                       bool inverted)
 {
@@ -1286,7 +1316,7 @@ lake* Map::addLake(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
 }
 
 /********************************************************************
- *               Returns Square Relative to coordinate              *
+ *                           relativeSquare                         *
  ********************************************************************/
 Square* Map::relativeSquare(int xa, int za)
 {
@@ -1294,6 +1324,34 @@ Square* Map::relativeSquare(int xa, int za)
       return(NULL);
 
    return(&MapSquares[xa][za]);
+}
+
+/********************************************************************
+ *                           getInitialSquare                       *
+ ********************************************************************/
+Square* Map::getInitialSquare()
+{
+   return(squareInic);
+}
+
+/********************************************************************
+ *                             squareSize                           *
+ ********************************************************************/
+int Map::squareSize()
+{
+   if(outdoor)
+   {
+      return(OUTDOOR_SQUARE_SIZE);
+   }
+   return(INDOOR_SQUARE_SIZE);
+}
+
+/********************************************************************
+ *                         getSquareMiniSize                        *
+ ********************************************************************/
+int Map::getSquareMiniSize()
+{
+   return(squareMiniSize);
 }
 
 /********************************************************************
@@ -1372,11 +1430,11 @@ GLfloat Map::getHeight(GLfloat nx, GLfloat nz, Square* saux)
 }
 
 /********************************************************************
- *                        drawSurfaceOnMap                          *
+ *                       renderSurfaceOnMap                         *
  ********************************************************************/
-void Map::drawSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za, 
-                           GLfloat xb, GLfloat zb, GLfloat sumY,
-                           int divisions)
+void Map::renderSurfaceOnMap(GLuint image, GLfloat xa, GLfloat za, 
+                             GLfloat xb, GLfloat zb, GLfloat sumY,
+                             int divisions)
 {
    GLfloat incTex, incPosX, incPosZ;
    GLfloat texX, texZ;
@@ -1999,19 +2057,19 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    /* Define minimap sizes */
    if(isOutdoor())
    {
-      SQUAREMINISIZE = 70 / (z-14);
+      squareMiniSize = 70 / (z-14);
    }
    else
    {
-      SQUAREMINISIZE = 70 / z;
+      squareMiniSize = 70 / z;
    }
 
-   if(SQUAREMINISIZE < 1)
+   if(squareMiniSize < 1)
    {
-     SQUAREMINISIZE = 1;
+     squareMiniSize = 1;
    }
 
-   SQUAREMINIDIV = (squareSize() / SQUAREMINISIZE);
+   squareMiniDiv = (squareSize() / squareMiniSize);
 
    /* And create the splats */
    createSplats();
@@ -2058,8 +2116,8 @@ void Map::newMap(int X, int Z)
    }
 
    /* Define new minimap sizes */
-   SQUAREMINISIZE = 2;
-   SQUAREMINIDIV = (squareSize() / SQUAREMINISIZE);
+   squareMiniSize = 2;
+   squareMiniDiv = (squareSize() / squareMiniSize);
 
    xInic = 1*squareSize();
    zInic = 1*squareSize();
@@ -2394,25 +2452,25 @@ void Map::drawMinimap(SDL_Surface* img)
           color_Set(MapSquares[X][Z].R,
                     MapSquares[X][Z].G,
                     MapSquares[X][Z].B, 255);
-          rectangle_Fill(img, x1,y1,x1+SQUAREMINISIZE-1,y1+SQUAREMINISIZE-1);
-          x1+=SQUAREMINISIZE;
+          rectangle_Fill(img, x1,y1,x1+squareMiniSize-1,y1+squareMiniSize-1);
+          x1+=squareMiniSize;
       }
       x1 = 0;
-      y1+=SQUAREMINISIZE;
+      y1+=squareMiniSize;
    }
 
    color_Set(1, 1, 1, 255);
-   rectangle_2Colors(img,0,0,sX*SQUAREMINISIZE-1,sZ*SQUAREMINISIZE-1,0,0,0,255);
+   rectangle_2Colors(img,0,0,sX*squareMiniSize-1,sZ*squareMiniSize-1,0,0,0,255);
    
    wall* maux = walls;
    int wNum;
    for(wNum = 0; wNum < totalWalls; wNum++)
    {
       //FIXME walls values when outdoor!
-       x1 = (int) ( ((float)maux->x1 / (float)SQUAREMINIDIV ));
-       x2 = (int) ( (((float)maux->x2 / (float)SQUAREMINIDIV))-1 );
-       y1 = (int) ( ((float)maux->z1 / (float)SQUAREMINIDIV ));
-       y2 = (int) ( (((float)maux->z2 / (float)SQUAREMINIDIV))-1 );
+       x1 = (int) ( ((float)maux->x1 / (float)squareMiniDiv ));
+       x2 = (int) ( (((float)maux->x2 / (float)squareMiniDiv))-1 );
+       y1 = (int) ( ((float)maux->z1 / (float)squareMiniDiv ));
+       y2 = (int) ( (((float)maux->z2 / (float)squareMiniDiv))-1 );
        if( (x2-x1) < (y2-y1))
           x2 = x1;
        else 

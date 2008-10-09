@@ -439,16 +439,17 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    actualMap->open(arqMapa,*models, *weaponsTypes);
 
    /* Enable, if needed, the FOG */
-   if(actualMap->fog.enabled)
+   mapFog fog = actualMap->getFog();
+   if(fog.enabled)
    {
       glEnable(GL_FOG);
       {
         glFogi(GL_FOG_MODE,GL_LINEAR);
-        glFogfv(GL_FOG_COLOR,actualMap->fog.color);
-        glFogf(GL_FOG_DENSITY,actualMap->fog.density);
+        glFogfv(GL_FOG_COLOR, fog.color);
+        glFogf(GL_FOG_DENSITY, fog.density);
         glHint(GL_FOG_HINT,GL_DONT_CARE);
-        glFogf(GL_FOG_START,actualMap->fog.start);
-        glFogf(GL_FOG_END,actualMap->fog.end);
+        glFogf(GL_FOG_START, fog.start);
+        glFogf(GL_FOG_END, fog.end);
       }
    }
    else
@@ -606,7 +607,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
                            activeCharacter->yPosition,
                            activeCharacter->zPosition,
                            activeCharacter->orientation);
-   activeCharacter->ocSquare = actualMap->squareInic;
+   activeCharacter->ocSquare = actualMap->getInitialSquare();
 
    showLoading(img,&texturaTexto,texturaCarga,
                gettext("Loading Changes..."), progress);
@@ -1756,7 +1757,7 @@ int engine::verifyMouseActions(Uint8 mButton)
       }
 
       /* Doors Verification */
-      door* porta = actualMap->doors;
+      door* porta = actualMap->getFirstDoor();
       while( (porta != NULL) && (!pronto) )
       {
          boundingBox bound = porta->obj->getBoundingBox();
@@ -2595,8 +2596,8 @@ void engine::renderScene()
       glEnable(GL_STENCIL_TEST);
       glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
       glStencilFunc(GL_ALWAYS, 1, 0xffffffff);
-      actualMap->drawFloor(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                           gameCamera.getCameraZ(),visibleMatrix, true);
+      actualMap->renderFloor(gameCamera.getCameraX(),gameCamera.getCameraY(),
+                             gameCamera.getCameraZ(),visibleMatrix, true);
       glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
       glEnable(GL_DEPTH_TEST);
       glDisable(GL_STENCIL_TEST);
@@ -2780,13 +2781,14 @@ void engine::renderScene()
       glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
       glEnable(GL_NORMALIZE);
       glPushMatrix();
-        actualMap->drawObjects(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                               gameCamera.getCameraZ(),visibleMatrix, true);
+        actualMap->renderObjects(gameCamera.getCameraX(),
+                                 gameCamera.getCameraY(),
+                                 gameCamera.getCameraZ(), visibleMatrix, true);
       glPopMatrix();
       glPushMatrix();
          glScalef(1.0,-1.0,1.0);
-         actualMap->drawWalls(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                             gameCamera.getCameraZ(),visibleMatrix, true);
+         actualMap->renderWalls(gameCamera.getCameraX(),gameCamera.getCameraY(),
+                               gameCamera.getCameraZ(),visibleMatrix, true);
       glPopMatrix();
       glDisable(GL_NORMALIZE);
       glDisable(GL_STENCIL_TEST);
@@ -2796,10 +2798,10 @@ void engine::renderScene()
                          (!actualMap->isOutdoor()) );
 
    glPushMatrix();
-   actualMap->draw(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                   gameCamera.getCameraZ(),visibleMatrix,
-                   PCs->getActiveCharacter()->xPosition,
-                   PCs->getActiveCharacter()->zPosition);
+   actualMap->render(gameCamera.getCameraX(), gameCamera.getCameraY(),
+                     gameCamera.getCameraZ(), visibleMatrix,
+                     PCs->getActiveCharacter()->xPosition,
+                     PCs->getActiveCharacter()->zPosition);
    glPopMatrix();
 
 }
@@ -2821,16 +2823,16 @@ void engine::renderNoShadowThings()
    if( showRange )
    {
        /* Range Circle */
-       actualMap->drawSurfaceOnMap(rangeCircle,
-                                   activeCharacter->xPosition - 
+       actualMap->renderSurfaceOnMap(rangeCircle,
+                                     activeCharacter->xPosition - 
                                                            WALK_PER_MOVE_ACTION,
-                                   activeCharacter->zPosition - 
+                                     activeCharacter->zPosition - 
                                                            WALK_PER_MOVE_ACTION,
-                                   activeCharacter->xPosition + 
+                                     activeCharacter->xPosition + 
                                                            WALK_PER_MOVE_ACTION,
-                                   activeCharacter->zPosition + 
+                                     activeCharacter->zPosition + 
                                                            WALK_PER_MOVE_ACTION,
-                                   0.05, 20);
+                                     0.05, 20);
    }
 
    /* Draw Combat Mode Things */
@@ -2846,14 +2848,14 @@ void engine::renderNoShadowThings()
       if(canMove)
       {
          /* Full Circle */
-         actualMap->drawSurfaceOnMap(fullMoveCircle,
+         actualMap->renderSurfaceOnMap(fullMoveCircle,
                moveCircleX-2*WALK_PER_MOVE_ACTION,
                moveCircleZ-2*WALK_PER_MOVE_ACTION,
                moveCircleX+2*WALK_PER_MOVE_ACTION, 
                moveCircleZ+2*WALK_PER_MOVE_ACTION,
                0.1,12);
          /* Normal Circle */
-         actualMap->drawSurfaceOnMap(normalMoveCircle,
+         actualMap->renderSurfaceOnMap(normalMoveCircle,
                moveCircleX-WALK_PER_MOVE_ACTION,
                moveCircleZ-WALK_PER_MOVE_ACTION,
                moveCircleX+WALK_PER_MOVE_ACTION, 
@@ -2863,9 +2865,8 @@ void engine::renderNoShadowThings()
       if( (canAttack) || (fightStatus == FIGHT_NPC_TURN) )
       {
          /* Feat Range Circle */
-         float rangeValue = activeCharacter->getActiveFeatRange() *
-            METER_TO_DNT;
-         actualMap->drawSurfaceOnMap(featRangeCircle, 
+         float rangeValue = activeCharacter->getActiveFeatRange()*METER_TO_DNT;
+         actualMap->renderSurfaceOnMap(featRangeCircle, 
                turnCharacter->xPosition-rangeValue,
                turnCharacter->zPosition-rangeValue, 
                turnCharacter->xPosition+rangeValue, 
@@ -2888,23 +2889,23 @@ void engine::renderNoShadowThings()
        }
        destinyVariation += 0.1;
 
-       actualMap->drawSurfaceOnMap(destinyImage,
-                                   destX - (4 + destinyVariation), 
-                                   destZ - (4 + destinyVariation),
-                                   destX + (4 + destinyVariation),
-                                   destZ + (4 + destinyVariation),
-                                   0.25,4);
+       actualMap->renderSurfaceOnMap(destinyImage,
+                                     destX - (4 + destinyVariation), 
+                                     destZ - (4 + destinyVariation),
+                                     destX + (4 + destinyVariation),
+                                     destZ + (4 + destinyVariation),
+                                     0.25,4);
    }
 
    /* The SUN or MOON */
    if(actualMap->isOutdoor())
    {
-      if(!actualMap->fog.enabled)
+      if(!actualMap->getFog().enabled)
       {
          glDisable(GL_FOG);
       }
       gameSun->drawSun();
-      if(!actualMap->fog.enabled)
+      if(!actualMap->getFog().enabled)
       {
          glEnable(GL_FOG);
       }
