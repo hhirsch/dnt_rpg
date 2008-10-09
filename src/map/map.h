@@ -663,6 +663,11 @@ class Map
                            GLfloat matriz[6][4], bool selectionRender=false,
                            bool outdoorCompatible=false);
 
+     
+      /*! Alloc all needed map structures (buffers, squares, etc.)
+       * \note -> map size must be defined before call this function
+       * \note -> only call this function one time per map */
+      void alloc(); 
 
       mapSound* sounds;      /**< Map Sound Effects */
       string soundsFileName; /**< Sound Info File Name */
@@ -687,6 +692,8 @@ class Map
       float* uvBuffer;
       float* uvAlphaBuffer;
       int totalVertex;
+      int totalIndex;
+
       GLuint commonTexture;   /**< The most common texture on the map */
 
 };

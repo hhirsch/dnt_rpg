@@ -18,7 +18,9 @@
 #define VIS_DELTA 64  /**< Delta to Visible Culling */
 
 //////////////////////////////////////////////////////////////////////////////
+//                                                                          //
 //                                  SQUARE                                  //
+//                                                                          //
 //////////////////////////////////////////////////////////////////////////////
 
 /********************************************************************
@@ -152,8 +154,177 @@ void Square::setDivisions()
 }
 
 //////////////////////////////////////////////////////////////////////////////
-//                                  OTHERS                                  //
+//                                                                          //
+//                                  MAP                                     //
+//                                                                          //
 //////////////////////////////////////////////////////////////////////////////
+
+/********************************************************************
+ *                          Map Constructor                         *
+ ********************************************************************/
+Map::Map(lObject* lObjects)
+{
+   numTextures = 0;
+   textures = NULL;
+   name = "oxi!";
+   squareInic = NULL;
+   walls = NULL;
+   totalWalls = 0;
+   curbs = NULL; 
+   totalCurbs = 0;
+   MapSquares = NULL;
+   doors = NULL;
+   music = "";
+   npcFileName = "";
+   particlesFileName = "";
+   soundsFileName = "";
+   outdoor = false;
+   MapSquares = NULL;
+
+   totalVertex = 0;
+   vertexBuffer = NULL;
+   uvBuffer = NULL;
+   uvAlphaBuffer = NULL;
+   commonTexture = 0;
+
+   totalIndex = 0;
+
+   lakes = NULL;
+   totalLakes = 0;
+   
+   /* Initialize Structs */
+   objects = lObjects;
+   x = z = 0;
+   xInic = zInic = 0;
+
+   /* Create sound */
+   sounds = new mapSound();
+}
+
+/********************************************************************
+ *                         Map Destructor                           *
+ ********************************************************************/
+Map::~Map()
+{
+   /* Delete All Textures */
+   texture* tex = textures;
+   texture* au;
+   int i;
+   int aux;
+   for(i=0;i<numTextures;i++)
+   {
+      au = tex;
+      tex = tex->next;
+
+      /* Delete the OpenGL Texture */
+      glDeleteTextures(1,&(au->index));
+
+      /* Delete the alpha Texture */
+      if(au->definedAlpha)
+      {
+         glDeleteTextures(1,&(au->alphaTexture));
+      }
+
+      /* Delete the Alpha Matrix */
+      for(aux = 0; aux < (x*ALPHA_TEXTURE_INC); aux++)
+      {
+         delete[] (au->alphaValues[aux]);
+      }
+      delete[] au->alphaValues;
+
+      /* Delete the texture struct */
+      delete(au);
+   }
+   
+   /* Delete all Walls */
+   wall* m = walls;
+   wall* am =NULL;
+   int wNum;
+   for(wNum = 0; wNum < totalWalls; wNum++)
+   {
+      am = m;
+      m = m->next;
+      delete(am);
+   }
+
+   /* Deleting wall Doors */
+   door* door1 = doors;
+   door* door2 =NULL;
+   while(door1)
+   {
+      door2 = door1;
+      door1 = door1->next;
+      delete(door2);
+   }
+
+   /* Delete all Buffers */
+   if(vertexBuffer != NULL)
+   {
+      delete[] vertexBuffer;
+   }
+   if(uvBuffer != NULL)
+   {
+      delete[] uvBuffer;
+   }
+   if(uvAlphaBuffer != NULL)
+   {
+      delete[] uvAlphaBuffer;
+   }
+
+   /* Unselect the objects list */
+   objects = NULL;
+
+   /* Deleting all squares */
+   int x1;
+   if(MapSquares != NULL)
+   {
+      for(x1 = 0; x1<x;x1++)
+      {
+         delete[](MapSquares[x1]);
+      }
+      delete[] (MapSquares);
+   }
+
+   /* Deleting Sounds */
+   if(sounds)
+   {
+      delete(sounds);
+   }
+
+   /* Deleting Lakes */
+   //TODO
+
+   /* Deleting Roads */
+   /*if(roads)
+   {
+      delete(roads);
+   }*/
+}
+
+/********************************************************************
+ *                             alloc                                *
+ ********************************************************************/
+void Map::alloc()
+{
+   int i;
+
+   /* Alloc MapSquares */
+   MapSquares = new Square*[x];
+   for(i = 0; i < x; i++)
+   {
+      MapSquares[i] = new Square[z];
+   } 
+
+   /* Alloc Vertex Buffer (4 x,y,z per square, so 12 floats per square) */
+   vertexBuffer = new float[x*z*12];
+
+   /* Alloc UV Buffers (4 u,v per square, so 8 floats per square) */
+   uvBuffer = new float[x*z*8];
+   uvAlphaBuffer = new float[x*z*8];
+
+   /* Alloc Roads Struct */
+   //roads = new mapRoad(x, z);
+}
 
 /********************************************************************
  *                             Texture ID                           *
@@ -362,10 +533,6 @@ void Map::removeUnusedTextures()
       }
    }
 }
-
-//////////////////////////////////////////////////////////////////////////////
-//                                   MAP                                    //
-//////////////////////////////////////////////////////////////////////////////
 
 /********************************************************************
  *                          removeObject                            *
@@ -1085,45 +1252,7 @@ void Map::drawObjects(GLfloat cameraX, GLfloat cameraY,
    }
 }
 
-/********************************************************************
- *                          Map Constructor                         *
- ********************************************************************/
-Map::Map(lObject* lObjects)
-{
-   numTextures = 0;
-   textures = NULL;
-   name = "oxi!";
-   squareInic = NULL;
-   walls = NULL;
-   totalWalls = 0;
-   curbs = NULL; 
-   totalCurbs = 0;
-   MapSquares = NULL;
-   doors = NULL;
-   music = "";
-   npcFileName = "";
-   particlesFileName = "";
-   soundsFileName = "";
-   outdoor = false;
-   MapSquares = NULL;
 
-   totalVertex = 0;
-   vertexBuffer = NULL;
-   uvBuffer = NULL;
-   uvAlphaBuffer = NULL;
-   commonTexture = 0;
-
-   lakes = NULL;
-   totalLakes = 0;
-   
-   /* Initialize Structs */
-   objects = lObjects;
-   x = z = 0;
-   xInic = zInic = 0;
-
-   /* Create sound */
-   sounds = new mapSound();
-}
 
 /********************************************************************
  *                                addLake                           *
@@ -1465,7 +1594,6 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    char buffer[128]; // buffer used to read
    char nomeArq[128], nome[128];
    string arqVelho;
-   int i;
    int posX,posZ;    //actual position of last active square
    int IDtextureAtual = -1;
    int IDwallTexturaAtual = -1;
@@ -1503,22 +1631,8 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
       return(0);
    }
 
-
-   /* Alloc MapSquares */
-   MapSquares = new Square*[x];
-   for(i = 0; i < x; i++)
-   {
-      MapSquares[i] = new Square[z];
-   } 
-
-   /* Alloc Draw Buffers */
-   vertexBuffer = new float[x*z*12];
-   uvBuffer = new float[x*z*8];
-   uvAlphaBuffer = new float[x*z*8];
-
-   /* Alloc Roads Struct */
-   //roads = new mapRoad(x, z);
-
+   /* Alloc all Map Structures */
+   alloc();
    
    wall* maux = NULL;
    door* doorAux = NULL;
@@ -1906,27 +2020,12 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
 void Map::newMap(int X, int Z)
 {
    int auxX, auxZ;
-   int i;
-
-   /* Alloc MapSquares */
-   MapSquares = new Square*[X];//(Square***) malloc(X*sizeof(Square**));
-   for(i = 0; i < X; i++)
-   {
-      MapSquares[i] = new Square[Z];//(Square**) malloc(Z*sizeof(Square*));
-   } 
-
-   //roads = new mapRoad(X, Z);
-
-   
    Square* saux;
    x = X;
    z = Z;
 
-   /* Alloc Draw Buffers */
-   vertexBuffer = new float[x*z*12];
-   uvBuffer = new float[x*z*8];
-   uvAlphaBuffer = new float[x*z*8];
-
+   /* Alloc all buffers */
+   alloc();
 
    /* add a first default texture */
    int IDtexture = insertTexture("texturas/floor_outdoor/grass.png", 
@@ -2252,104 +2351,6 @@ int Map::save(string arquivo)
    fclose(arq);
    return(1);
 }
-
-/********************************************************************
- *                         Map Destructor                           *
- ********************************************************************/
-Map::~Map()
-{
-   /* Delete All Textures */
-   texture* tex = textures;
-   texture* au;
-   int i;
-   int aux;
-   for(i=0;i<numTextures;i++)
-   {
-      au = tex;
-      tex = tex->next;
-
-      /* Delete the OpenGL Texture */
-      glDeleteTextures(1,&(au->index));
-
-      /* Delete the alpha Texture */
-      if(au->definedAlpha)
-      {
-         glDeleteTextures(1,&(au->alphaTexture));
-      }
-
-      /* Delete the Alpha Matrix */
-      for(aux = 0; aux < (x*ALPHA_TEXTURE_INC); aux++)
-      {
-         delete[] (au->alphaValues[aux]);
-      }
-      delete[] au->alphaValues;
-
-      /* Delete the texture struct */
-      delete(au);
-   }
-   
-   /* Delete all Walls */
-   wall* m = walls;
-   wall* am =NULL;
-   int wNum;
-   for(wNum = 0; wNum < totalWalls; wNum++)
-   {
-      am = m;
-      m = m->next;
-      delete(am);
-   }
-
-   /* Deleting wall Doors */
-   door* door1 = doors;
-   door* door2 =NULL;
-   while(door1)
-   {
-      door2 = door1;
-      door1 = door1->next;
-      delete(door2);
-   }
-
-   /* Delete all Buffers */
-   if(vertexBuffer != NULL)
-   {
-      delete[] vertexBuffer;
-   }
-   if(uvBuffer != NULL)
-   {
-      delete[] uvBuffer;
-   }
-   if(uvAlphaBuffer != NULL)
-   {
-      delete[] uvAlphaBuffer;
-   }
-
-   /* Unselect the objects list */
-   objects = NULL;
-
-   /* Deleting all squares */
-   int x1;
-   for(x1 = 0; x1<x;x1++)
-   {
-      delete[](MapSquares[x1]);
-   }
-   delete[] (MapSquares);
-
-   /* Deleting Sounds */
-   if(sounds)
-   {
-      delete(sounds);
-   }
-
-   /* Deleting Lakes */
-   //TODO
-
-   /* Deleting Roads */
-   /*if(roads)
-   {
-      delete(roads);
-   }*/
-}
-
 
 /********************************************************************
  *                       Draw MiniMap on Surface                    *
