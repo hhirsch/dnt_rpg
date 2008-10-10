@@ -47,8 +47,12 @@ class wallController
 
       GLuint markTexture;     /**< Actual Wall mark Texture */
 
-      /*! Gets wall on actual Mouse Position */
+      /*! Gets wall on actual Mouse Position
+       * \return -> pointer to the wall under the mouse or NULL */
       wall* getWall();
+      /*! Get the texture of the wall side the mouse is pointing to
+       * \return pointer to the wall side texture or NULL */
+      wallTexture* getSideTexture();
       /*! Do the modifications in Horizontal Vertical Texture repeat */
       void doModifyVerHorTexture();
       /*! Do the modification on texture */

@@ -45,6 +45,42 @@ class conection
       string mapName;       /**< Map filename */ 
 };
 
+/*! Texture information to be used by an wall */
+class wallTexture
+{
+   public:
+      /*! Constructor */
+      wallTexture();
+
+      /*! Equals two textures */
+      void operator=(wallTexture* t);
+
+      /*! Get texture ID
+       * \return Id of the texture */
+      int getTextureId();
+      /*! Set the texture ID 
+       * \param id -> id of the texture */
+      void setTextureId(int id);
+
+      /*! Get Texture Deltas
+       * \param x -> deltaX
+       * \param y -> deltaY
+       * \param z -> deltaZ */
+      void getDelta(GLuint& x, GLuint& y, GLuint& z); 
+       /*! Set Texture Deltas
+       * \param x -> deltaX
+       * \param y -> deltaY
+       * \param z -> deltaZ */
+      void setDelta(GLuint x, GLuint y, GLuint z); 
+
+   protected:
+
+      int textureId;       /**< Texture ID Used*/
+      GLuint dX,           /**< Delta X of texture cycle */
+             dY,           /**< Delta Y of texture cycle */
+             dZ;           /**< Delta Z of texture cycle */ 
+};
+
 /*! A map Wall. Just a wall usually used in indoor maps */
 class wall
 {
@@ -53,13 +89,11 @@ class wall
               z1,          /**< Z min coordinates */
               x2,          /**< X max Coordinates */
               z2;          /**< Z max Coordinates */
-      GLuint dX,           /**< Delta X of texture cycle */
-             dY,           /**< Delta Y of texture cycle */
-             dZ;           /**< Delta Z of texture cycle */
-      int frontTexture;    /**< Front Texture ID */
-      int backTexture;     /**< Back Texture ID */
-      int rightTexture;    /**< Right Texture ID */
-      int leftTexture;     /**< Left Texture ID */
+      
+      wallTexture frontTexture;    /**< Front Texture ID */
+      wallTexture backTexture;     /**< Back Texture ID */
+      wallTexture rightTexture;    /**< Right Texture ID */
+      wallTexture leftTexture;     /**< Left Texture ID */
       wall* next;          /**< Next on list */
       wall* previous;      /**< Previous on List */
 };

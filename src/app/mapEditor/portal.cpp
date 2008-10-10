@@ -193,9 +193,6 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          mz2 = doorWall->z2;
          wall* novoMuro;
          novoMuro = actualMap->addWall(0,0,0,0);
-         novoMuro->dX = doorWall->dX;
-         novoMuro->dY = doorWall->dY;
-         novoMuro->dZ = doorWall->dZ;
          boundingBox bounds = actualDoor->getBoundingBox();
          if( doorOrientation == 0 )
          {

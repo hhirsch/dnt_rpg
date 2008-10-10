@@ -155,6 +155,70 @@ void Square::setDivisions()
 
 //////////////////////////////////////////////////////////////////////////////
 //                                                                          //
+//                               WallTexture                                //
+//                                                                          //
+//////////////////////////////////////////////////////////////////////////////
+
+/********************************************************************
+ *                            Constructor                           *
+ ********************************************************************/
+wallTexture::wallTexture()
+{
+   textureId = -1;
+   dX = 16;
+   dY = 16;
+   dZ = 16;
+}
+
+/********************************************************************
+ *                                 =                                *
+ ********************************************************************/
+void wallTexture::operator=(wallTexture* t)
+{
+   dX = t->dX;
+   dY = t->dY;
+   dZ = t->dZ;
+   textureId = textureId;
+}
+
+/********************************************************************
+ *                           getTextureId                           *
+ ********************************************************************/
+int wallTexture::getTextureId()
+{
+   return(textureId);
+}
+
+/********************************************************************
+ *                           setTextureId                           *
+ ********************************************************************/
+void wallTexture::setTextureId(int id)
+{
+   textureId = id;
+}
+
+/********************************************************************
+ *                              getDelta                            *
+ ********************************************************************/
+void wallTexture::getDelta(GLuint& x, GLuint& y, GLuint& z)
+{
+   x = dX;
+   y = dY;
+   z = dZ;
+}
+
+/********************************************************************
+ *                              setDelta                            *
+ ********************************************************************/
+void wallTexture::setDelta(GLuint x, GLuint y, GLuint z)
+{
+   dX = x;
+   dY = y;
+   dZ = z;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//                                                                          //
 //                                  MAP                                     //
 //                                                                          //
 //////////////////////////////////////////////////////////////////////////////
@@ -516,10 +580,10 @@ void Map::removeUnusedTextures()
       w = walls;
       for(x1 = 0; ((x1 < totalWalls) && (!used)); x1++)
       {
-         used |= (getTexture(w->frontTexture) == tex);
-         used |= (getTexture(w->backTexture) == tex);
-         used |= (getTexture(w->rightTexture) == tex);
-         used |= (getTexture(w->leftTexture) == tex);
+         used |= (getTexture(w->frontTexture.getTextureId()) == tex);
+         used |= (getTexture(w->backTexture.getTextureId()) == tex);
+         used |= (getTexture(w->rightTexture.getTextureId()) == tex);
+         used |= (getTexture(w->leftTexture.getTextureId()) == tex);
          w = w->next;
       }
 
@@ -684,10 +748,6 @@ wall* Map::addWall(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
       maux->next = maux;
       maux->previous = maux;
    }
-   maux->frontTexture = -1;
-   maux->backTexture = -1;
-   maux->leftTexture = -1;
-   maux->rightTexture = -1;
    totalWalls++;
    walls = maux;
    return(maux);
@@ -1152,7 +1212,8 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    int wNum;
    int fezMeioFio = 0;
    GLfloat altura = WALL_HEIGHT;
-   GLfloat X,Y,Z;
+   GLfloat u,v;
+   GLuint dX=0, dY=0, dZ=0;
 
    if(!maux)
    {
@@ -1180,32 +1241,40 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
       }
       if(visible)
       {
-         X = (maux->x2-maux->x1) / maux->dX;
-         Z = (maux->z2-maux->z1) / maux->dZ;
-         Y = (altura+1) / maux->dY;
-
          //FIXME TODO -> some optimations, previously grouping
          // walls at buffers per texture or something similar
          
          /* Front Face */
+         maux->frontTexture.getDelta(dX, dY, dZ);
+         u = (maux->x2-maux->x1) / dX;
+         v = (altura+1) / dY;
          texture = renderWallSide(maux->x1, maux->z1, maux->x2, maux->z1, 
-                                  altura, 0,  0, 0, X, Y, 0, 0, 1, 
-                                  texture, maux->frontTexture);
+                                  altura, 0,  0, 0, u, v, 0, 0, 1, 
+                                  texture, maux->frontTexture.getTextureId());
 
          /* Back Face */
+         maux->backTexture.getDelta(dX, dY, dZ);
+         u = (maux->x2-maux->x1) / dX;
+         v = (altura+1) / dY;
          texture = renderWallSide(maux->x1, maux->z2, maux->x2, maux->z2, 
-                                  altura, 0, 0, 0, X, Y, 0, 0, -1,
-                                  texture, maux->backTexture);
+                                  altura, 0, 0, 0, u, v, 0, 0, -1,
+                                  texture, maux->backTexture.getTextureId());
 
          /* Left Face */
+         maux->leftTexture.getDelta(dX, dY, dZ);
+         u = (maux->z2-maux->z1) / dX;
+         v = (altura+1) / dY;
          texture = renderWallSide(maux->x1, maux->z1, maux->x1, maux->z2, 
-                                  altura, 0, 0, 0, Z, Y,  -1, 0, 0,
-                                  texture, maux->leftTexture);
+                                  altura, 0, 0, 0, u, v,  -1, 0, 0,
+                                  texture, maux->leftTexture.getTextureId());
 
          /* Right Face */
+         maux->rightTexture.getDelta(dX, dY, dZ);
+         u = (maux->z2-maux->z1) / dX;
+         v = (altura+1) / dY;
          texture = renderWallSide(maux->x2, maux->z1, maux->x2, maux->z2, 
-                                 altura, 0,  0, 0, Z, Y, 1, 0, 0,
-                                 texture, maux->rightTexture);
+                                 altura, 0,  0, 0, u, v, 1, 0, 0,
+                                 texture, maux->rightTexture.getTextureId());
       }
       maux = maux->next;
       if( (!maux) && (!fezMeioFio) )
@@ -1232,18 +1301,18 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    glBegin(GL_QUADS);
    for(wNum = 0; wNum < totalWalls; wNum++)
    {
-      X = (maux->x2-maux->x1) / 16.0;
-      Z = (maux->z2-maux->z1) / 16.0;
+      u = (maux->x2-maux->x1) / 16.0;
+      v = (maux->z2-maux->z1) / 16.0;
 
       /* Upper Face */
       glNormal3i(0,1,0);
       glTexCoord2f(0,0);
       glVertex3f(maux->x1,altura,maux->z1);
-      glTexCoord2f(X,0);
+      glTexCoord2f(u,0);
       glVertex3f(maux->x2,altura,maux->z1);
-      glTexCoord2f(X,Z);
+      glTexCoord2f(u,v);
       glVertex3f(maux->x2,altura,maux->z2);
-      glTexCoord2f(0,Z);
+      glTexCoord2f(0,v);
       glVertex3f(maux->x1,altura,maux->z2);
       maux = maux->next;
    }
@@ -1875,9 +1944,8 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                {
                   maux = addWall(0,0,0,0);
                   fgets(buffer, sizeof(buffer),arq);
-                  sscanf(buffer,"%f,%f,%f,%f:%d,%d,%d",&maux->x1,&maux->z1,
-                                              &maux->x2,&maux->z2,
-                                              &maux->dX,&maux->dY,&maux->dZ);
+                  sscanf(buffer,"%f,%f,%f,%f",&maux->x1,&maux->z1,
+                                              &maux->x2,&maux->z2);
                   double tmp;
                   if(maux->x2 < maux->x1)
                   {
@@ -1891,19 +1959,16 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      maux->z2 = maux->z1;
                      maux->z1 = tmp;
                   }
-                  maux->frontTexture = -1;
-                  maux->backTexture = -1;
-                  maux->rightTexture = -1;
-                  maux->leftTexture = -1;
                   break;
                }
                case 't': /* Define Wall texture */
                {
                   char type = buffer[2];
+                  GLuint dX=0, dY=0, dZ=0;
 
                   /* Get the texture Name */
                   fgets(buffer, sizeof(buffer), arq);
-                  sscanf(buffer,"%s",nome);
+                  sscanf(buffer,"%d,%d,%d %s", &dX, &dY, &dZ, nome);
                   nameMuroTexturaAtual = nome;
                   IDwallTexturaAtual = getTextureID(nome,R,G,B);
 
@@ -1911,16 +1976,20 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                   switch(type)
                   {
                      case 'f':
-                        maux->frontTexture = IDwallTexturaAtual;
+                        maux->frontTexture.setTextureId(IDwallTexturaAtual);
+                        maux->frontTexture.setDelta(dX,dY,dZ);
                      break;
                      case 'b':
-                        maux->backTexture = IDwallTexturaAtual;
+                        maux->backTexture.setTextureId(IDwallTexturaAtual);
+                        maux->backTexture.setDelta(dX,dY,dZ);
                      break;
                      case 'l':
-                        maux->leftTexture = IDwallTexturaAtual;
+                        maux->leftTexture.setTextureId(IDwallTexturaAtual);
+                        maux->leftTexture.setDelta(dX,dY,dZ);
                      break;
                      case 'r':
-                        maux->rightTexture = IDwallTexturaAtual;
+                        maux->rightTexture.setTextureId(IDwallTexturaAtual);
+                        maux->rightTexture.setDelta(dX,dY,dZ);
                      break;
                   }
                   break;
@@ -1946,7 +2015,6 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      maux->z1 = tmp;
                   }  
                   maux->next = curbs;
-                  maux->frontTexture = -1;
                   curbs = maux;
                   totalCurbs++;
                   break;
@@ -2444,18 +2512,26 @@ int Map::save(string arquivo)
    int x1,z1,x2,z2,wNum;
    for(wNum=0; wNum < totalWalls; wNum++)
    {
-      fprintf(arq,"wall %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
-                                                maux->z2,maux->dX,maux->dY,
-                                                maux->dZ);
-      fprintf(arq,"wtf %s\n", getTextureName(maux->frontTexture).c_str());
-      fprintf(arq,"wtb %s\n", getTextureName(maux->backTexture).c_str());
-      fprintf(arq,"wtr %s\n", getTextureName(maux->rightTexture).c_str());
-      fprintf(arq,"wtl %s\n", getTextureName(maux->leftTexture).c_str());
+      GLuint dX=0, dY=0, dZ=0;
+      fprintf(arq,"wall %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
+      maux->frontTexture.getDelta(dX,dY,dZ);
+      fprintf(arq,"wtf %d,%d,%d %s\n", dX, dY, dZ, 
+                  getTextureName(maux->frontTexture.getTextureId()).c_str());
+      maux->backTexture.getDelta(dX,dY,dZ);
+      fprintf(arq,"wtb %d,%d,%d %s\n", dX,dY,dZ,
+                  getTextureName(maux->backTexture.getTextureId()).c_str());
+      maux->rightTexture.getDelta(dX,dY,dZ);
+      fprintf(arq,"wtr %d,%d,%d %s\n", dX,dY,dZ,
+                  getTextureName(maux->rightTexture.getTextureId()).c_str());
+      maux->leftTexture.getDelta(dX,dY,dZ);
+      fprintf(arq,"wtl %d,%d,%d %s\n", dX,dY,dZ,
+                  getTextureName(maux->leftTexture.getTextureId()).c_str());
       maux = (wall*)maux->next;
    }
 
    /* Write Half Walls */
-   maux = (wall*)curbs;
+   //FIXME ignoring curbs...
+   /*maux = (wall*)curbs;
    while(maux)
    {
       fprintf(arq,"we %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
@@ -2464,7 +2540,7 @@ int Map::save(string arquivo)
       fprintf(arq,"wrt %s\n", getTextureName(maux->rightTexture).c_str());
       fprintf(arq,"wlt %s\n", getTextureName(maux->leftTexture).c_str());
       maux = (wall*)maux->next;
-   }
+   }*/
 
  
    /* Write Squares, line per line */

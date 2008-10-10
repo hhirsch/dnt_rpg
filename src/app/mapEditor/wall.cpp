@@ -243,31 +243,75 @@ void wallController::drawTemporary(GLdouble modelView[16],
  ******************************************************/
 void wallController::doModifyVerHorTexture()
 {
+   GLuint dX=0, dY=0, dZ=0;
+
    state = WALL_STATE_OTHER;
    if( (actualWall) && (mB & SDL_BUTTON(1)) )
    {
-      switch(actualTool)
+      wallTexture* tex = getSideTexture();
+
+      if(tex)
       {
-         case TOOL_WALL_LESS_Y_TEXTURE:
-            actualWall->dY--;
-         break;
-         case TOOL_WALL_MORE_Y_TEXTURE:
-            actualWall->dY++;
-         break;
-         case TOOL_WALL_LESS_X_TEXTURE:
-            actualWall->dX--;
-         break;
-         case TOOL_WALL_MORE_X_TEXTURE:
-            actualWall->dX++;
-         break;
-         case TOOL_WALL_LESS_Z_TEXTURE:
-            actualWall->dZ--;
-         break;
-         case TOOL_WALL_MORE_Z_TEXTURE:
-            actualWall->dZ++;
-         break;
+         tex->getDelta(dX, dY, dZ);
+         switch(actualTool)
+         {
+            case TOOL_WALL_LESS_Y_TEXTURE:
+               tex->setDelta(dX, dY-1, dZ);
+            break;
+            case TOOL_WALL_MORE_Y_TEXTURE:
+               tex->setDelta(dX, dY+1, dZ);
+            break;
+            case TOOL_WALL_LESS_X_TEXTURE:
+               tex->setDelta(dX-1, dY, dZ);
+            break;
+            case TOOL_WALL_MORE_X_TEXTURE:
+               tex->setDelta(dX+1, dY, dZ);
+            break;
+            case TOOL_WALL_LESS_Z_TEXTURE:
+               tex->setDelta(dX, dY, dZ-1);
+            break;
+            case TOOL_WALL_MORE_Z_TEXTURE:
+               tex->setDelta(dX, dY, dZ+1);
+            break;
+         }
       }
    }
+}
+
+/******************************************************
+ *                    getSideTexture()                *
+ ******************************************************/
+wallTexture* wallController::getSideTexture()
+{
+   if((mZ > actualWall->z1) && (mZ < actualWall->z2))
+   {
+      if(mX >= actualWall->x2)
+      {
+         /* Right Texture */
+         return(&actualWall->rightTexture);
+      }
+      else if(mX <= actualWall->x1)
+      {
+         /* Left Texture */
+         return(&actualWall->leftTexture);
+      }
+   }
+   else
+   {
+      if(mZ <= actualWall->z1)
+      {
+         /* Front Texture */
+         return(&actualWall->frontTexture);
+      }
+      else if(mZ >= actualWall->z2)
+      {
+         /* Back Texture */
+         return(&actualWall->backTexture);
+      }
+   }
+
+   /* No texture Defined */
+   return(NULL);
 }
 
 /******************************************************
@@ -279,30 +323,10 @@ void wallController::doTexture()
 
    if( (actualWall) && ((mB & SDL_BUTTON(1))))
    {
-      /* Verify each side was clicked */
-      if((mZ > actualWall->z1) && (mZ < actualWall->z2))
+      wallTexture* tex = getSideTexture();
+      if(tex != NULL)
       {
-         if(mX >= actualWall->x2)
-         {
-            /* Right Texture */
-            actualWall->rightTexture = texture;
-         }
-         else if(mX <= actualWall->x1)
-         {
-            /* Left Texture */
-            actualWall->leftTexture = texture;
-         }
-      }
-      else
-      {
-         if(mZ <= actualWall->z1)
-         {
-            actualWall->frontTexture = texture;
-         }
-         else if(mZ >= actualWall->z2)
-         {
-            actualWall->backTexture = texture;
-         }
+         tex->setTextureId(texture);
       }
    }
 }
@@ -324,9 +348,6 @@ bool wallController::doCut()
       newWall->backTexture = actualWall->backTexture;
       newWall->leftTexture = actualWall->leftTexture;
       newWall->rightTexture = actualWall->rightTexture;
-      newWall->dX = actualWall->dX;
-      newWall->dY = actualWall->dY;
-      newWall->dZ = actualWall->dZ;
 
       /* Cut the wall (halt is the current, half is the new) */
       if(wallZ)
@@ -373,13 +394,12 @@ void wallController::doWall(bool X, bool Z, bool full)
          //FIXME Curbs add!
          cerr << "Error: Removed the curbs! FIXME!" << endl;
       }
-      actualWall->dX = 16; actualWall->dY = 16; actualWall->dZ = 16;
       actualWall->x1 = mX;
       actualWall->z1 = mZ;
-      actualWall->frontTexture = texture;
-      actualWall->backTexture = texture;
-      actualWall->leftTexture = texture;
-      actualWall->rightTexture = texture;
+      actualWall->frontTexture.setTextureId(texture);
+      actualWall->backTexture.setTextureId(texture);
+      actualWall->leftTexture.setTextureId(texture);
+      actualWall->rightTexture.setTextureId(texture);
       if( X )
       {
           actualWall->x2 = mX;
