@@ -238,8 +238,8 @@ void guiIO::openWallWindow()
                                  dir.getRealFile("mapEditor/wall.png").c_str());
    wallXButton = wallTabButton->insertButton(0,0,19,19);          /* Wall X */
    wallZButton = wallTabButton->insertButton(20,0,39,19);         /* Wall Z */
-   wallX2Button = wallTabButton->insertButton(40,0,59,19);        /* Wall X */
-   wallZ2Button = wallTabButton->insertButton(60,0,79,19);        /* Wall Z */
+   wallCutButton = wallTabButton->insertButton(40,0,59,19);       /* Wall Cut */
+   //wallZ2Button = wallTabButton->insertButton(60,0,79,19);        /* Wall Z */
    wallPreviousButton = wallTabButton->insertButton(80,0,99,19);  /* Previous */
    wallDestroyButton = wallTabButton->insertButton(100,0,119,19); /* Destroy */
    wallNextButton = wallTabButton->insertButton(120,0,139,19);    /* Next */
@@ -734,16 +734,10 @@ int guiIO::doIO(int mouseX, int mouseY, Uint8 mButton, Uint8 *keys,
             tool = TOOL_WALL_ADD_Z;
             return(GUI_IO_NEW_STATE);
          }
-         else if(object == (guiObject*) wallX2Button)
+         else if(object == (guiObject*) wallCutButton)
          {
             state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL2_ADD_X;
-            return(GUI_IO_NEW_STATE);
-         }
-         else if(object == (guiObject*) wallZ2Button)
-         {
-            state = GUI_IO_STATE_WALL;
-            tool = TOOL_WALL2_ADD_Z;
+            tool = TOOL_WALL_CUT;
             return(GUI_IO_NEW_STATE);
          }
          else if(object == (guiObject*) wallTextureButton)

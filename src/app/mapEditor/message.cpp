@@ -29,16 +29,15 @@ string messageForTool(int tool)
          return("Put Door on Wall");
       break;
       case TOOL_WALL_ADD_X:
-         return("Draw The Wall on X Axis (press B tor Add only on Square Borders)");
+         return("Draw The Wall on X Axis (press B tor Add only on Square "
+                "Borders)");
       break;
       case TOOL_WALL_ADD_Z:
-         return("Draw The Wall on Z axis (press B to Add only on Square Borders)");
+         return("Draw The Wall on Z axis (press B to Add only on Square "
+                "Borders)");
       break;
-      case TOOL_WALL2_ADD_X:
-         return("Draw The little Wall on X Axis (press B to Add only on Square Borders)");
-      break;
-      case TOOL_WALL2_ADD_Z:
-         return("Draw The little Wall on Z Axis (press B to Add only on Square Borders)");
+      case TOOL_WALL_CUT:
+         return("Click on the position to cut wall");
       break;
       case TOOL_WALL_TEXTURE:
          return("Select a Wall to Change Texture");
@@ -62,7 +61,8 @@ string messageForTool(int tool)
          return("Select a Wall to More Z Texture Repeat");
       break;
       case TOOL_OBSTACLE_ADD:
-         return("Put Object on Map with Left Mouse Button. Right and Middle Buttons rotate");
+         return("Put Object on Map with Left Mouse Button. "
+                "Right and Middle Buttons rotate");
       break;
       case TOOL_NPC_ADD:
          return("Put NPC on Map with left mouse Button.");

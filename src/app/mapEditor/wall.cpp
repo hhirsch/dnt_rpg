@@ -42,7 +42,6 @@ wallController::~wallController()
  ******************************************************/
 wall* wallController::getWall()
 {
-   //FIXME do the search on curbs too!
    wall* aux;
    int wNum;
 
@@ -81,27 +80,23 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
 
    wall* tmpWall = NULL;
 
+   /* Limit Wall to the square limits */
    if(keys[SDLK_b])
    {
       limitSquare = true;
    }
 
+   /* Add Wall Tools */
    if(tool == TOOL_WALL_ADD_X)
    {
       doWall(true, false, true);
-   }
-   else if(tool == TOOL_WALL2_ADD_X)
-   {
-      doWall(true, false, false);
    }
    else if(tool == TOOL_WALL_ADD_Z)
    {
       doWall(false, true, true);
    }
-   else if(tool == TOOL_WALL2_ADD_Z)
-   {
-      doWall(false, true, false);
-   }
+
+   /* Add texture to the wall */
    else if(tool == TOOL_WALL_TEXTURE)
    {
       tmpWall = getWall();
@@ -111,6 +106,8 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
          doTexture();
       }
    }
+
+   /* Modify texture repeat-rate  */
    else if( (tool == TOOL_WALL_LESS_Y_TEXTURE) || 
             (tool == TOOL_WALL_MORE_Y_TEXTURE) ||
             (tool == TOOL_WALL_LESS_X_TEXTURE) ||
@@ -125,6 +122,8 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
          doModifyVerHorTexture();
       }
    }
+
+   /* Next Wall */
    else if(tool == TOOL_WALL_NEXT)
    {
       if(actualWall)
@@ -134,6 +133,8 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
       state = WALL_STATE_OTHER;
       tool = TOOL_NONE;
    }
+
+   /* Previous Wall */
    else if(tool == TOOL_WALL_PREVIOUS)
    {
       if(actualWall)
@@ -143,6 +144,8 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
       state = WALL_STATE_OTHER;
       tool = TOOL_NONE;
    }
+
+   /* Destroy Current Wall */
    else if(tool == TOOL_WALL_DESTROY)
    {
       if(actualWall)
@@ -152,6 +155,22 @@ void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY,
       }
       state = WALL_STATE_OTHER;
       tool = TOOL_NONE;
+   }
+
+   /* Cut Current Wall */
+   else if(tool == TOOL_WALL_CUT)
+   {
+      tmpWall = getWall();
+      if(tmpWall)
+      {
+         actualWall = tmpWall;
+         if(doCut())
+         {
+            /* Cut one, so just done */
+            tool = TOOL_NONE; 
+            actualTool = TOOL_NONE;
+         }
+      }
    }
 }
 
@@ -258,9 +277,9 @@ void wallController::doTexture()
 {
    state =  WALL_STATE_OTHER;
 
-   //FIXME -> verify wich side was clicked
    if( (actualWall) && ((mB & SDL_BUTTON(1))))
    {
+      /* Verify each side was clicked */
       if((mZ > actualWall->z1) && (mZ < actualWall->z2))
       {
          if(mX >= actualWall->x2)
@@ -286,6 +305,54 @@ void wallController::doTexture()
          }
       }
    }
+}
+
+/******************************************************
+ *                        doWall()                    *
+ ******************************************************/
+bool wallController::doCut()
+{
+   state =  WALL_STATE_OTHER;
+
+   if( (actualWall) && ((mB & SDL_BUTTON(1))))
+   {
+      bool wallZ = (actualWall->x2 - actualWall->x1 == 10);
+
+      /* Insert a new wall in the map (it'll have the other half) */
+      wall* newWall = actualMap->addWall(0,0,0,0);
+      newWall->frontTexture = actualWall->frontTexture;
+      newWall->backTexture = actualWall->backTexture;
+      newWall->leftTexture = actualWall->leftTexture;
+      newWall->rightTexture = actualWall->rightTexture;
+      newWall->dX = actualWall->dX;
+      newWall->dY = actualWall->dY;
+      newWall->dZ = actualWall->dZ;
+
+      /* Cut the wall (halt is the current, half is the new) */
+      if(wallZ)
+      {
+         /* Cut Z element */
+         newWall->x1 = actualWall->x1;
+         newWall->x2 = actualWall->x2;
+         newWall->z1 = mZ;
+         newWall->z2 = actualWall->z2;
+         actualWall->z2 = mZ;
+      }
+      else
+      {
+         /* Cut X element */
+         newWall->x1 = mX;
+         newWall->x2 = actualWall->x2;
+         newWall->z1 = actualWall->z1;
+         newWall->z2 = actualWall->z2;
+         actualWall->x2 = mX;
+      }
+
+      return(true);
+   }
+
+   return(false);
+
 }
 
 /******************************************************
@@ -345,10 +412,14 @@ void wallController::doWall(bool X, bool Z, bool full)
          actualWall->x2 = mX;
          if(limitSquare)
          {
-            float cmp = ((int)(actualWall->z1) / actualMap->squareSize())*actualMap->squareSize();
-            actualWall->x1 = ((int)floor((actualWall->x1) / actualMap->squareSize()))*actualMap->squareSize();
-            actualWall->x2 = ((int)floor((actualWall->x2) / actualMap->squareSize()))*actualMap->squareSize();
-            actualWall->z1 = ((int)floor((actualWall->z1 / actualMap->squareSize())))*actualMap->squareSize();
+            float cmp = ((int)(actualWall->z1) / 
+                               actualMap->squareSize())*actualMap->squareSize();
+            actualWall->x1 = ((int)floor((actualWall->x1) / 
+                              actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->x2 = ((int)floor((actualWall->x2) / 
+                              actualMap->squareSize()))*actualMap->squareSize();
+            actualWall->z1 = ((int)floor((actualWall->z1 / 
+                             actualMap->squareSize())))*actualMap->squareSize();
             if(cmp < actualWall->z1)
             {
                if(full)
@@ -373,11 +444,14 @@ void wallController::doWall(bool X, bool Z, bool full)
          {
             float cmp = ((int)(actualWall->x1) / actualMap->squareSize()) 
                          * actualMap->squareSize();
-            actualWall->z1 = ((int)floor((actualWall->z1) / actualMap->squareSize()))
+            actualWall->z1 = ((int)floor((actualWall->z1) / 
+                              actualMap->squareSize()))
                               * actualMap->squareSize();
-            actualWall->z2 = ((int)floor((actualWall->z2) / actualMap->squareSize()))
+            actualWall->z2 = ((int)floor((actualWall->z2) / 
+                              actualMap->squareSize()))
                               * actualMap->squareSize();
-            actualWall->x1 = ((int)floor((actualWall->x1 / actualMap->squareSize())))
+            actualWall->x1 = ((int)floor((actualWall->x1 / 
+                             actualMap->squareSize())))
                              * actualMap->squareSize();
             if(cmp < actualWall->x1)
             {
@@ -417,3 +491,4 @@ void wallController::doWall(bool X, bool Z, bool full)
       
    }
 }
+

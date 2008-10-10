@@ -182,8 +182,7 @@ class guiIO
       tabButton* wallTabButton;           /**< Wall Tab Button */
       oneTabButton* wallXButton;          /**< X Wall Button */
       oneTabButton* wallZButton;          /**< Z Wall Button */
-      oneTabButton* wallX2Button;         /**< X Meio Fio Button */
-      oneTabButton* wallZ2Button;         /**< Z Meio Fio Button */
+      oneTabButton* wallCutButton;        /**< X Meio Fio Button */
       oneTabButton* wallPreviousButton;   /**< Wall Previous button */
       oneTabButton* wallDestroyButton;    /**< Wall Destroy Button */
       oneTabButton* wallNextButton;       /**< Wall Next Button */

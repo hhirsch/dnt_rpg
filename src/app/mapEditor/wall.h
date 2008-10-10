@@ -53,6 +53,9 @@ class wallController
       void doModifyVerHorTexture();
       /*! Do the modification on texture */
       void doTexture();
+      /*! Do the wall cut
+       * \return -> true if cut, false if not cut yet*/
+      bool doCut();
       /*! Do The Wall Construction */
       void doWall(bool X, bool Z, bool full);
 
