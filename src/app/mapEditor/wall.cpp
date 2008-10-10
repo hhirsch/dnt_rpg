@@ -257,10 +257,34 @@ void wallController::doModifyVerHorTexture()
 void wallController::doTexture()
 {
    state =  WALL_STATE_OTHER;
+
+   //FIXME -> verify wich side was clicked
    if( (actualWall) && ((mB & SDL_BUTTON(1))))
    {
-      actualWall->frontTexture = texture;
-      actualWall->backTexture = texture;
+      if((mZ > actualWall->z1) && (mZ < actualWall->z2))
+      {
+         if(mX >= actualWall->x2)
+         {
+            /* Right Texture */
+            actualWall->rightTexture = texture;
+         }
+         else if(mX <= actualWall->x1)
+         {
+            /* Left Texture */
+            actualWall->leftTexture = texture;
+         }
+      }
+      else
+      {
+         if(mZ <= actualWall->z1)
+         {
+            actualWall->frontTexture = texture;
+         }
+         else if(mZ >= actualWall->z2)
+         {
+            actualWall->backTexture = texture;
+         }
+      }
    }
 }
 
@@ -287,6 +311,8 @@ void wallController::doWall(bool X, bool Z, bool full)
       actualWall->z1 = mZ;
       actualWall->frontTexture = texture;
       actualWall->backTexture = texture;
+      actualWall->leftTexture = texture;
+      actualWall->rightTexture = texture;
       if( X )
       {
           actualWall->x2 = mX;
