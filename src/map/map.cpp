@@ -1063,6 +1063,26 @@ int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 }
 
 /********************************************************************
+ *                          renderWallSide                          *
+ ********************************************************************/
+inline void renderWallSide(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2, 
+                           GLfloat h1, GLfloat h2,
+                           GLfloat texU1, GLfloat texV1, 
+                           GLfloat texU2, GLfloat texV2,
+                           GLint normalX, GLint normalY, GLint normalZ)
+{
+   glNormal3i(normalX, normalY, normalZ);
+   glTexCoord2f(texU1, texV2);
+   glVertex3f(x1, h1, z1);
+   glTexCoord2f(texU2, texV2);
+   glVertex3f(x2, h1, z2);
+   glTexCoord2f(texU2, texV1);
+   glVertex3f(x2, h2, z2);
+   glTexCoord2f(texU1, texV1);
+   glVertex3f(x1, h2, z1);
+}
+
+/********************************************************************
  *                            renderWalls                           *
  ********************************************************************/
 void Map::renderWalls(GLfloat cameraX, GLfloat cameraY, 
@@ -1121,45 +1141,29 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
               double Z = (maux->z2-maux->z1) / maux->dZ;
               double Y = (altura+1) / maux->dY;
            /* Front Face */
-              glNormal3i(0,0,1);
-              glTexCoord2f(0,Y);
-              glVertex3f(maux->x1,altura,maux->z1);
-              glTexCoord2f(X,Y);
-              glVertex3f(maux->x2,altura,maux->z1);
-              glTexCoord2f(X,0);
-              glVertex3f(maux->x2,0,maux->z1);
-              glTexCoord2f(0,0);
-              glVertex3f(maux->x1,0,maux->z1);
+              renderWallSide(maux->x1, maux->z1, maux->x2, maux->z1, 
+                             altura, 0,
+                             0, 0, X, Y,
+                             0, 0, 1);
+
            /* Back Face */
-              glNormal3i(0,0,-1);
-              glTexCoord2f(0,Y);
-              glVertex3f(maux->x1,altura,maux->z2);
-              glTexCoord2f(X,Y);
-              glVertex3f(maux->x2,altura,maux->z2);
-              glTexCoord2f(X,0);
-              glVertex3f(maux->x2,0,maux->z2);
-              glTexCoord2f(0,0);
-              glVertex3f(maux->x1,0,maux->z2);
+              renderWallSide(maux->x1, maux->z2, maux->x2, maux->z2, 
+                             altura, 0,
+                             0, 0, X, Y,
+                             0, 0, -1);
+           
            /* Left Face */
-              glNormal3i(-1,0,0);
-              glTexCoord2f(0,Y);
-              glVertex3f(maux->x1,altura,maux->z1);
-              glTexCoord2f(Z,Y);
-              glVertex3f(maux->x1,altura,maux->z2);
-              glTexCoord2f(Z,0);
-              glVertex3f(maux->x1,0,maux->z2);
-              glTexCoord2f(0,0);
-              glVertex3f(maux->x1,0,maux->z1);
+              renderWallSide(maux->x1, maux->z1, maux->x1, maux->z2, 
+                             altura, 0,
+                             0, 0, Z, Y,
+                             -1, 0, 0);
+           
            /* Right Face */
-              glNormal3i(1,0,0);
-              glTexCoord2f(0,Y);
-              glVertex3f(maux->x2,altura,maux->z1);
-              glTexCoord2f(Z,Y);
-              glVertex3f(maux->x2,altura,maux->z2);
-              glTexCoord2f(Z,0);
-              glVertex3f(maux->x2,0,maux->z2);
-              glTexCoord2f(0,0);
-              glVertex3f(maux->x2,0,maux->z1);
+              renderWallSide(maux->x2, maux->z1, maux->x2, maux->z2, 
+                             altura, 0,
+                             0, 0, Z, Y,
+                             1, 0, 0);
+
            /* Upper Face */
               glNormal3i(0,1,0);
               glTexCoord2f(0,0);
