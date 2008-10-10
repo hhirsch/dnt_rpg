@@ -328,6 +328,10 @@ void Map::alloc()
 
    /* Alloc Roads Struct */
    //roads = new mapRoad(x, z);
+
+   /* Add Upper Wall Texture */
+   insertTexture("texturas/wall/upper_wall.png", 
+                 "UpperWall",235,147,89);
 }
 
 /********************************************************************
@@ -1094,97 +1098,124 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    int texture = -1;
    bool visible = false;
    int wNum;
-        int fezMeioFio = 0;
-        GLfloat altura = WALL_HEIGHT;
-        if(!maux)
-        {
-            maux = curbs;
-            fezMeioFio = 1;
-            altura = CURB_HEIGHT;
-        }
-        glBegin(GL_QUADS);
-        for(wNum=0;wNum<totalWalls;wNum++ )
-        {
-           
-           if((texture != -1) && (maux->frontTexture == -1))
-           {
-               glDisable(GL_TEXTURE_2D); 
-               texture = -1;
-           }
-           else if(texture != maux->frontTexture)
-           {
-              glEnd();
-              texture = maux->frontTexture;
-              glEnable(GL_TEXTURE_2D);
-              glBindTexture(GL_TEXTURE_2D, texture);
-              glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-              glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+   int fezMeioFio = 0;
+   GLfloat altura = WALL_HEIGHT;
+   GLfloat X,Y,Z;
 
-              glBegin(GL_QUADS);
-           }
-           if(inverted)
-           {
-              visible = visibleCube(maux->x1-VIS_DELTA,
-                                    -altura-VIS_DELTA,maux->z1-VIS_DELTA,
-                                    maux->x2+VIS_DELTA,
-                                    VIS_DELTA,maux->z2+VIS_DELTA,matriz);
-           }
-           else
-           {
-              visible = visibleCube(maux->x1-VIS_DELTA,-VIS_DELTA,
-                                    maux->z1-VIS_DELTA,maux->x2+VIS_DELTA,
-                                    altura+VIS_DELTA,maux->z2+VIS_DELTA,matriz);
-           }
-           if(visible)
-           {
-              double X = (maux->x2-maux->x1) / maux->dX;
-              double Z = (maux->z2-maux->z1) / maux->dZ;
-              double Y = (altura+1) / maux->dY;
-           /* Front Face */
-              renderWallSide(maux->x1, maux->z1, maux->x2, maux->z1, 
-                             altura, 0,
-                             0, 0, X, Y,
-                             0, 0, 1);
+   if(!maux)
+   {
+      maux = curbs;
+      fezMeioFio = 1;
+      altura = CURB_HEIGHT;
+   }
 
-           /* Back Face */
-              renderWallSide(maux->x1, maux->z2, maux->x2, maux->z2, 
-                             altura, 0,
-                             0, 0, X, Y,
-                             0, 0, -1);
-           
-           /* Left Face */
-              renderWallSide(maux->x1, maux->z1, maux->x1, maux->z2, 
-                             altura, 0,
-                             0, 0, Z, Y,
-                             -1, 0, 0);
-           
-           /* Right Face */
-              renderWallSide(maux->x2, maux->z1, maux->x2, maux->z2, 
-                             altura, 0,
-                             0, 0, Z, Y,
-                             1, 0, 0);
+   /* Render All Walls and Curbs */
+   glBegin(GL_QUADS);
+   for(wNum=0;wNum<totalWalls;wNum++ )
+   {
 
-           /* Upper Face */
-              glNormal3i(0,1,0);
-              glTexCoord2f(0,0);
-              glVertex3f(maux->x1,altura,maux->z1);
-              glTexCoord2f(X,0);
-              glVertex3f(maux->x2,altura,maux->z1);
-              glTexCoord2f(X,Z);
-              glVertex3f(maux->x2,altura,maux->z2);
-              glTexCoord2f(0,Z);
-              glVertex3f(maux->x1,altura,maux->z2);
-           }
-           maux = maux->next;
-           if( (!maux) && (!fezMeioFio) )
-           {
-               maux = curbs;
-               fezMeioFio = 1;
-               altura = CURB_HEIGHT;
-           }
-        }
-        glEnd();
-        glDisable(GL_TEXTURE_2D);
+      if((texture != -1) && (maux->frontTexture == -1))
+      {
+         glDisable(GL_TEXTURE_2D); 
+         texture = -1;
+      }
+      else if(texture != maux->frontTexture)
+      {
+         glEnd();
+         texture = maux->frontTexture;
+         glEnable(GL_TEXTURE_2D);
+         glBindTexture(GL_TEXTURE_2D, texture);
+         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+
+         glBegin(GL_QUADS);
+      }
+      if(inverted)
+      {
+         visible = visibleCube(maux->x1-VIS_DELTA,
+               -altura-VIS_DELTA,maux->z1-VIS_DELTA,
+               maux->x2+VIS_DELTA,
+               VIS_DELTA,maux->z2+VIS_DELTA,matriz);
+      }
+      else
+      {
+         visible = visibleCube(maux->x1-VIS_DELTA,-VIS_DELTA,
+               maux->z1-VIS_DELTA,maux->x2+VIS_DELTA,
+               altura+VIS_DELTA,maux->z2+VIS_DELTA,matriz);
+      }
+      if(visible)
+      {
+         X = (maux->x2-maux->x1) / maux->dX;
+         Z = (maux->z2-maux->z1) / maux->dZ;
+         Y = (altura+1) / maux->dY;
+         
+         /* Front Face */
+         renderWallSide(maux->x1, maux->z1, maux->x2, maux->z1, 
+               altura, 0,
+               0, 0, X, Y,
+               0, 0, 1);
+
+         /* Back Face */
+         renderWallSide(maux->x1, maux->z2, maux->x2, maux->z2, 
+               altura, 0,
+               0, 0, X, Y,
+               0, 0, -1);
+
+         /* Left Face */
+         renderWallSide(maux->x1, maux->z1, maux->x1, maux->z2, 
+               altura, 0,
+               0, 0, Z, Y,
+               -1, 0, 0);
+
+         /* Right Face */
+         renderWallSide(maux->x2, maux->z1, maux->x2, maux->z2, 
+               altura, 0,
+               0, 0, Z, Y,
+               1, 0, 0);         
+      }
+      maux = maux->next;
+      if( (!maux) && (!fezMeioFio) )
+      {
+         maux = curbs;
+         fezMeioFio = 1;
+         altura = CURB_HEIGHT;
+      }
+   }
+   glEnd();
+   glDisable(GL_TEXTURE_2D);
+
+   /* Now, render Upper Wall's side */
+   maux = walls;
+   GLuint R=0,G=0,B=0;
+
+   /* Define UpperWall Texture */
+   texture = getTextureID("UpperWall", R, G, B);
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, texture);
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+
+   glBegin(GL_QUADS);
+   for(wNum = 0; wNum < totalWalls; wNum++)
+   {
+      X = (maux->x2-maux->x1) / 16.0;
+      Z = (maux->z2-maux->z1) / 16.0;
+
+      /* Upper Face */
+      glNormal3i(0,1,0);
+      glTexCoord2f(0,0);
+      glVertex3f(maux->x1,altura,maux->z1);
+      glTexCoord2f(X,0);
+      glVertex3f(maux->x2,altura,maux->z1);
+      glTexCoord2f(X,Z);
+      glVertex3f(maux->x2,altura,maux->z2);
+      glTexCoord2f(0,Z);
+      glVertex3f(maux->x1,altura,maux->z2);
+      maux = maux->next;
+   }
+   glEnd();
+   glDisable(GL_TEXTURE_2D);
+
 }
 
 /********************************************************************
