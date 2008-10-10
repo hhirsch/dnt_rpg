@@ -507,12 +507,18 @@ void Map::removeUnusedTextures()
          }
       }
 
+      /* Verify Upper Wall Texture */
+      GLuint R=0,G=0,B=0;
+      used |= (getTexture(getTextureID("UpperWall", R,G,B)) == tex);
+
       /* Verify use of texture at Walls  */
       w = walls;
       for(x1 = 0; ((x1 < totalWalls) && (!used)); x1++)
       {
          used |= (getTexture(w->frontTexture) == tex);
          used |= (getTexture(w->backTexture) == tex);
+         used |= (getTexture(w->rightTexture) == tex);
+         used |= (getTexture(w->leftTexture) == tex);
          w = w->next;
       }
 
@@ -679,6 +685,8 @@ wall* Map::addWall(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2)
    }
    maux->frontTexture = -1;
    maux->backTexture = -1;
+   maux->leftTexture = -1;
+   maux->rightTexture = -1;
    totalWalls++;
    walls = maux;
    return(maux);
@@ -1069,12 +1077,32 @@ int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 /********************************************************************
  *                          renderWallSide                          *
  ********************************************************************/
-inline void renderWallSide(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2, 
-                           GLfloat h1, GLfloat h2,
-                           GLfloat texU1, GLfloat texV1, 
-                           GLfloat texU2, GLfloat texV2,
-                           GLint normalX, GLint normalY, GLint normalZ)
+inline int renderWallSide(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2, 
+                          GLfloat h1, GLfloat h2,
+                          GLfloat texU1, GLfloat texV1, 
+                          GLfloat texU2, GLfloat texV2,
+                          GLint normalX, GLint normalY, GLint normalZ,
+                          int curTexture, int useTexture)
 {
+   /* Verify Texture */
+   if( (curTexture != -1) && (useTexture == -1))
+   {
+      glEnd();
+      glDisable(GL_TEXTURE_2D); 
+      glBegin(GL_QUADS);
+   }
+   else if(curTexture != useTexture)
+   {
+      glEnd();
+      glEnable(GL_TEXTURE_2D);
+      glBindTexture(GL_TEXTURE_2D, useTexture);
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+
+      glBegin(GL_QUADS);
+   }
+
+   /* Draw the Side */
    glNormal3i(normalX, normalY, normalZ);
    glTexCoord2f(texU1, texV2);
    glVertex3f(x1, h1, z1);
@@ -1084,6 +1112,9 @@ inline void renderWallSide(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2,
    glVertex3f(x2, h2, z2);
    glTexCoord2f(texU1, texV1);
    glVertex3f(x1, h2, z1);
+
+   /* Return the used Texture */
+   return(useTexture);
 }
 
 /********************************************************************
@@ -1113,23 +1144,6 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    glBegin(GL_QUADS);
    for(wNum=0;wNum<totalWalls;wNum++ )
    {
-
-      if((texture != -1) && (maux->frontTexture == -1))
-      {
-         glDisable(GL_TEXTURE_2D); 
-         texture = -1;
-      }
-      else if(texture != maux->frontTexture)
-      {
-         glEnd();
-         texture = maux->frontTexture;
-         glEnable(GL_TEXTURE_2D);
-         glBindTexture(GL_TEXTURE_2D, texture);
-         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-
-         glBegin(GL_QUADS);
-      }
       if(inverted)
       {
          visible = visibleCube(maux->x1-VIS_DELTA,
@@ -1148,30 +1162,29 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
          X = (maux->x2-maux->x1) / maux->dX;
          Z = (maux->z2-maux->z1) / maux->dZ;
          Y = (altura+1) / maux->dY;
+
+         //FIXME TODO -> some optimations, previously grouping
+         // walls at buffers per texture or something similar
          
          /* Front Face */
-         renderWallSide(maux->x1, maux->z1, maux->x2, maux->z1, 
-               altura, 0,
-               0, 0, X, Y,
-               0, 0, 1);
+         texture = renderWallSide(maux->x1, maux->z1, maux->x2, maux->z1, 
+                                  altura, 0,  0, 0, X, Y, 0, 0, 1, 
+                                  texture, maux->frontTexture);
 
          /* Back Face */
-         renderWallSide(maux->x1, maux->z2, maux->x2, maux->z2, 
-               altura, 0,
-               0, 0, X, Y,
-               0, 0, -1);
+         texture = renderWallSide(maux->x1, maux->z2, maux->x2, maux->z2, 
+                                  altura, 0, 0, 0, X, Y, 0, 0, -1,
+                                  texture, maux->backTexture);
 
          /* Left Face */
-         renderWallSide(maux->x1, maux->z1, maux->x1, maux->z2, 
-               altura, 0,
-               0, 0, Z, Y,
-               -1, 0, 0);
+         texture = renderWallSide(maux->x1, maux->z1, maux->x1, maux->z2, 
+                                  altura, 0, 0, 0, Z, Y,  -1, 0, 0,
+                                  texture, maux->leftTexture);
 
          /* Right Face */
-         renderWallSide(maux->x2, maux->z1, maux->x2, maux->z2, 
-               altura, 0,
-               0, 0, Z, Y,
-               1, 0, 0);         
+         texture = renderWallSide(maux->x2, maux->z1, maux->x2, maux->z2, 
+                                 altura, 0,  0, 0, Z, Y, 1, 0, 0,
+                                 texture, maux->rightTexture);
       }
       maux = maux->next;
       if( (!maux) && (!fezMeioFio) )
@@ -1858,15 +1871,37 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                      maux->z1 = tmp;
                   }
                   maux->frontTexture = -1;
+                  maux->backTexture = -1;
+                  maux->rightTexture = -1;
+                  maux->leftTexture = -1;
                   break;
                }
                case 't': /* Define Wall texture */
                {
+                  char type = buffer[2];
+
+                  /* Get the texture Name */
                   fgets(buffer, sizeof(buffer), arq);
                   sscanf(buffer,"%s",nome);
-                     nameMuroTexturaAtual = nome;
-                     IDwallTexturaAtual = getTextureID(nome,R,G,B);
-                  maux->frontTexture = IDwallTexturaAtual;
+                  nameMuroTexturaAtual = nome;
+                  IDwallTexturaAtual = getTextureID(nome,R,G,B);
+
+                  /* Get Wich wall side the texture is */
+                  switch(type)
+                  {
+                     case 'f':
+                        maux->frontTexture = IDwallTexturaAtual;
+                     break;
+                     case 'b':
+                        maux->backTexture = IDwallTexturaAtual;
+                     break;
+                     case 'l':
+                        maux->leftTexture = IDwallTexturaAtual;
+                     break;
+                     case 'r':
+                        maux->rightTexture = IDwallTexturaAtual;
+                     break;
+                  }
                   break;
                }
                case 'e': /* Define Curb */
@@ -2362,9 +2397,14 @@ int Map::save(string arquivo)
    int t;
    for(t = 0; t < numTextures; t++)
    {
-      fprintf(arq,"t %s %s %d %d %d\n",tex->name.c_str(),
-              dir.getRelativeFile(tex->fileName).c_str(),
-              tex->R,tex->G,tex->B);
+      /* Don't save UpperWall texture, because it will
+       * always loaded at alloc() function */
+      if(tex->name != "UpperWall")
+      {
+         fprintf(arq,"t %s %s %d %d %d\n",tex->name.c_str(),
+                 dir.getRelativeFile(tex->fileName).c_str(),
+                 tex->R,tex->G,tex->B);
+      }
       tex = (texture*)tex->next;
    }
 
@@ -2386,7 +2426,10 @@ int Map::save(string arquivo)
       fprintf(arq,"wall %f,%f,%f,%f:%d,%d,%d\n",maux->x1,maux->z1,maux->x2,
                                                 maux->z2,maux->dX,maux->dY,
                                                 maux->dZ);
-      fprintf(arq,"wt %s\n",getTextureName(maux->frontTexture).c_str());
+      fprintf(arq,"wtf %s\n", getTextureName(maux->frontTexture).c_str());
+      fprintf(arq,"wtb %s\n", getTextureName(maux->backTexture).c_str());
+      fprintf(arq,"wtr %s\n", getTextureName(maux->rightTexture).c_str());
+      fprintf(arq,"wtl %s\n", getTextureName(maux->leftTexture).c_str());
       maux = (wall*)maux->next;
    }
 
@@ -2395,7 +2438,10 @@ int Map::save(string arquivo)
    while(maux)
    {
       fprintf(arq,"we %f,%f,%f,%f\n",maux->x1,maux->z1,maux->x2,maux->z2);
-      fprintf(arq,"wt %s\n",getTextureName(maux->frontTexture).c_str());
+      fprintf(arq,"wtf %s\n", getTextureName(maux->frontTexture).c_str());
+      fprintf(arq,"wtb %s\n", getTextureName(maux->backTexture).c_str());
+      fprintf(arq,"wrt %s\n", getTextureName(maux->rightTexture).c_str());
+      fprintf(arq,"wlt %s\n", getTextureName(maux->leftTexture).c_str());
       maux = (wall*)maux->next;
    }
 

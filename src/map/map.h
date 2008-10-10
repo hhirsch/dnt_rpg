@@ -58,6 +58,8 @@ class wall
              dZ;           /**< Delta Z of texture cycle */
       int frontTexture;    /**< Front Texture ID */
       int backTexture;     /**< Back Texture ID */
+      int rightTexture;    /**< Right Texture ID */
+      int leftTexture;     /**< Left Texture ID */
       wall* next;          /**< Next on list */
       wall* previous;      /**< Previous on List */
 };
