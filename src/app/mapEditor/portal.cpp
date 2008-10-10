@@ -215,6 +215,8 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          }
          novoMuro->frontTexture = doorWall->frontTexture;
          novoMuro->backTexture = doorWall->backTexture;
+         novoMuro->leftTexture = doorWall->leftTexture;
+         novoMuro->rightTexture = doorWall->rightTexture;
          //Coloca a Porta no Mapa
          /*inserirObjetoMapa(doorX, doorZ, doorOrientation, porta, 
                             (int)(doorX / actualMap->squareSize()), 
@@ -224,10 +226,9 @@ void portal::verifyAction(GLfloat mouseX, GLfloat mouseY,
          novaPorta->z = doorZ;
          novaPorta->orientation = doorOrientation;
          novaPorta->obj = actualDoor;
-         door* paux = actualMap->getFirstDoor();
-         actualMap->doors = novaPorta;
-         novaPorta->next = paux;
-         printf("Added Door: %.3f %.3f\n",doorX,doorZ);
+         
+         actualMap->insertDoor(novaPorta);
+         printf("Added Door: %.3f %.3f %d\n",doorX,doorZ, doorOrientation);
          while(mButton & SDL_BUTTON(1))
          {
             //Wait for Mouse Button Release
