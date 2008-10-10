@@ -174,6 +174,7 @@ Map::Map(lObject* lObjects)
    totalCurbs = 0;
    MapSquares = NULL;
    doors = NULL;
+   totalDoors = 0;
    music = "";
    npcFileName = "";
    particlesFileName = "";
@@ -752,6 +753,26 @@ int Map::getTotalCurbs()
 door* Map::getFirstDoor()
 {
    return(doors);
+}
+
+/********************************************************************
+ *                          getTotalDoors                           *
+ ********************************************************************/
+int Map::getTotalDoors()
+{
+   return(totalDoors);
+}
+
+/********************************************************************
+ *                            insertDoor                            *
+ ********************************************************************/
+void Map::insertDoor(door* newDoor)
+{
+   newDoor->next = doors;
+   doors = newDoor;
+   newDoor->status = DOOR_STATUS_CLOSED;
+   newDoor->delta = 0;
+   totalDoors++;
 }
 
 /********************************************************************

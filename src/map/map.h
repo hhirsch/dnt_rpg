@@ -470,6 +470,11 @@ class Map
       /*! Get the first door on the map's list
        * \return -> pointer to the first door or NULL */
       door* getFirstDoor();
+      /*! Get the total number of doors on list */
+      int getTotalDoors();
+      /*! Insert a door on door's list
+       * \param newDoor -> pointer to the door to insert */
+      void insertDoor(door* newDoor);
 
       /*! Get the current mapFog
        * \return -> mapFog information */
@@ -488,7 +493,6 @@ class Map
        * internal structures (that aren't needed to be exposed for 
        * other things) */
       friend class editor;
-      friend class portal;
 
    protected:
 
@@ -533,6 +537,7 @@ class Map
       wall* curbs;          /**< Map Curbs */
       int totalCurbs;       /**< Total Curbs */
       door* doors;          /**< Map Doors */
+      int totalDoors;       /**< Total Number of doors on the map */
       lake* lakes;          /**< Chain list of lakes on map */
       int totalLakes;       /**< Total lakes on map */
 
