@@ -24,6 +24,7 @@
  - Calling read-only skills window at character's window;
  - Define sound's interval time before loop;
  - Define sound effects per map;
+ - Walls with different textures per side;
 
 Working on:
  - Character level up;
@@ -43,7 +44,6 @@ Pending:
  - Minimap Tags;
  - Outdoor MiniMap rewrite;
  - Extend walls to follow map height;
- - Walls with different textures per side;
  - MapEditor: tool to cut walls (knife);
  - Define paths to improve the A* at outdoor maps;
  - New Missions;
