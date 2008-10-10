@@ -1,50 +1,98 @@
 T 10X10
 # Made by DccNiTghtmare's MapEditor, v0.2
 Outdoor: 0
-o models/objetos/geral/porta5/porta5.dcc
 o models/objetos/geral/porta2/porta2.dcc
-t texturas/floor_indoor/tile1_1.png texturas/floor_indoor/tile1_1.png 248 248 252
-t texturas/floor_indoor/tile1_2.png texturas/floor_indoor/tile1_2.png 252 250 252
-t texturas/floor_indoor/wood.png texturas/floor_indoor/wood.png 102 57 29
+o models/objetos/geral/porta5/porta5.dcc
 t texturas/floor_indoor/carpete.png texturas/floor_indoor/carpete.png 186 161 126
-d models/objetos/geral/porta5/porta5.dcc 403.580902,448.000000:0
-d models/objetos/geral/porta5/porta5.dcc 351.580658,448.000000:0
-d models/objetos/geral/porta5/porta5.dcc 640.000000,398.188385:90
-d models/objetos/geral/porta5/porta5.dcc 128.000000,287.580109:90
-d models/objetos/geral/porta5/porta5.dcc 128.000000,78.084595:90
+t texturas/floor_indoor/wood.png texturas/floor_indoor/wood.png 102 57 29
+t texturas/floor_indoor/tile1_2.png texturas/floor_indoor/tile1_2.png 252 250 252
+t texturas/floor_indoor/tile1_1.png texturas/floor_indoor/tile1_1.png 248 248 252
 d models/objetos/geral/porta2/porta2.dcc 40.760166,448.000000:0
-wall 10.000000,0.000000,630.000000,10.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 0.000000,0.000000,10.000000,640.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 630.000000,0.000000,640.000000,376.350586:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 10.000000,630.000000,630.000000,640.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 10.000000,448.000000,40.760166,458.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 192.000000,458.000000,202.000000,630.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 384.000000,458.000000,394.000000,630.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 128.000000,320.000000,630.000000,330.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 128.000000,10.000000,138.000000,56.246796:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 3021.311279,905.126160,3031.311279,905.126160:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 425.418701,448.000000,630.000000,458.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 373.418457,448.000000,403.580902,458.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 630.000000,398.188385,640.000000,640.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 128.000000,287.580109,138.000000,320.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
-wall 128.000000,78.084595,138.000000,265.742310:16,16,16
-wt texturas/floor_indoor/carpete.png
+d models/objetos/geral/porta5/porta5.dcc 128.000000,78.084595:90
+d models/objetos/geral/porta5/porta5.dcc 128.000000,287.580109:90
+d models/objetos/geral/porta5/porta5.dcc 640.000000,398.188385:90
+d models/objetos/geral/porta5/porta5.dcc 351.580658,448.000000:0
+d models/objetos/geral/porta5/porta5.dcc 403.580902,448.000000:0
 wall 62.597969,448.000000,351.580658,458.000000:16,16,16
-wt texturas/floor_indoor/carpete.png
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 128.000000,78.084595,138.000000,265.742310:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 128.000000,287.580109,138.000000,320.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 630.000000,398.188385,640.000000,640.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 373.418457,448.000000,403.580902,458.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 425.418701,448.000000,630.000000,458.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 3021.311279,905.126160,3031.311279,905.126160:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 128.000000,10.000000,138.000000,56.246796:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 128.000000,320.000000,630.000000,330.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 384.000000,458.000000,394.000000,630.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 192.000000,458.000000,202.000000,630.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 10.000000,448.000000,40.760166,458.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 10.000000,630.000000,630.000000,640.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 630.000000,0.000000,640.000000,376.350586:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 0.000000,0.000000,10.000000,640.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
+wall 10.000000,0.000000,630.000000,10.000000:16,16,16
+wtf texturas/floor_indoor/carpete.png
+wtb texturas/floor_indoor/carpete.png
+wrt texturas/floor_indoor/carpete.png
+wlt texturas/floor_indoor/carpete.png
 #Z: 0
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood.png
@@ -171,7 +219,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood.png
-uc 630.800720,378.388428,639.128906,397.932983:mapas/tutorial/school_1.map
+uc 630.800720,378.388428,639.128906,397.932983:0.000000:texturas/floor_indoor/wood.png
 #Z: 6
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood.png
@@ -193,7 +241,7 @@ p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood.png
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/wood.png
-uc 630.800720,378.388428,639.128906,397.932983:mapas/tutorial/school_1.map
+uc 630.800720,378.388428,639.128906,397.932983:0.000000:texturas/floor_indoor/wood.png
 #Z: 7
 p 1,0.000000,0.000000,0.000000,0.000000
 ut texturas/floor_indoor/tile1_1.png
