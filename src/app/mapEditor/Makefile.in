@@ -28,7 +28,8 @@ OBJSPART = $(ENDPART)part1.o $(ENDPART)part2.o $(ENDPART)part3.o $(ENDPART)part4
 OBJSFIGHT = $(ENDFIGHT)fightGroup.o $(ENDFIGHT)initiative.o $(ENDFIGHT)fightSystem.o
 OBJSETC = $(ENDETC)animodel.o $(ENDETC)extensions.o $(ENDETC)message3d.o \
 $(ENDETC)modellist.o $(ENDETC)userinfo.o $(ENDETC)dirs.o $(ENDETC)overlaps.o \
-$(ENDETC)defparser.o $(ENDETC)shader.o
+$(ENDETC)defparser.o $(ENDETC)texrenderer.o $(ENDETC)shader.o \
+$(ENDETC)btreecell.o $(ENDETC)btree.o
 OBJSENGINE = $(ENDENGINE)alignwindow.o $(ENDENGINE)aspectwindow.o $(ENDENGINE)attwindow.o $(ENDENGINE)barterwindow.o $(ENDENGINE)briefing.o $(ENDENGINE)camera.o $(ENDENGINE)charwindow.o $(ENDENGINE)classwindow.o $(ENDENGINE)collision.o $(ENDENGINE)dialog.o $(ENDENGINE)culling.o $(ENDENGINE)cursor.o $(ENDENGINE)dccnit.o $(ENDENGINE)initial.o $(ENDENGINE)inventwindow.o $(ENDENGINE)itemwindow.o $(ENDENGINE)minimapwindow.o $(ENDENGINE)modstate.o $(ENDENGINE)options.o $(ENDENGINE)character.o $(ENDENGINE)racewindow.o $(ENDENGINE)skillwindow.o $(ENDENGINE)shadow.o $(ENDENGINE)shortcutswindow.o $(ENDENGINE)sky.o $(ENDENGINE)sun.o $(ENDENGINE)util.o
 OBJS = area.o editor.o grasswindow.o guiIO.o listwindow.o mapEditor.o message.o npcs.o objects.o particles.o portal.o terrain.o wall.o waterwindow.o
 

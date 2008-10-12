@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-#define TEXTURE_INITIAL_MAX_QUADS   100 /**< Initial Max Quads per texture */
+#define TEXTURE_INITIAL_MAX_QUADS   16 /**< Initial Max Quads per texture */
 
 /*! The render texture keeps GL_QUADS related to a texture.
  * The buffers are initially alloced for TEXTURE_INITIAL_MAX_QUADS
@@ -40,30 +40,15 @@ class renderTexture: public bTreeCell
        * totalQuads counter to 0) */
       void clearBuffers();
 
-      /*! Add a GL_QUAD to the renderTexture buffers
-       * \param x1 -> quad X1 value
-       * \param z1 -> quad Z1 value
-       * \param x2 -> quad X2 value
-       * \param z2 -> quad Z2 value
-       * \param y1 -> height at x1,z1
-       * \param y2 -> height at x1,z2
-       * \param y3 -> height at x2,z2
-       * \param y4 -> height at x2,z1
-       * \param u1 -> quad texture U1 value
-       * \param v1 -> quad texture V1 value
-       * \param u2 -> quad texture U2 value
-       * \param v2 -> quad texture V2 value
-       * \param nX -> quad normal X value
-       * \param nY -> quad normal Y value
-       * \param nZ -> quad normal Z value */
-      void addQuad(GLfloat x1, GLfloat z1,
-                   GLfloat x2, GLfloat z2,
-                   GLfloat y1, GLfloat y2,
-                   GLfloat y3, GLfloat y4,
+      /*! Add a GL_QUAD to the renderTexture buffers */
+      void addQuad(GLfloat x1, GLfloat y1, GLfloat z1,
+                   GLfloat x2, GLfloat y2, GLfloat z2,
+                   GLfloat x3, GLfloat y3, GLfloat z3,
+                   GLfloat x4, GLfloat y4, GLfloat z4,
                    GLfloat u1, GLfloat v1,
                    GLfloat u2, GLfloat v2,
                    GLfloat nX, GLfloat nY, GLfloat nZ);
-                   
+      
       /*! Render the current quads related to this texture! */
       void render();
 
@@ -141,27 +126,12 @@ class texRenderer: public bTree
 
       /*! Add a GL_QUAD to the renderTexture buffers
        * \param textureId -> the Id of the  texture used
-       * \param textureName -> the name of the texture used
-       * \param x1 -> quad X1 value
-       * \param z1 -> quad Z1 value
-       * \param x2 -> quad X2 value
-       * \param z2 -> quad Z2 value
-       * \param y1 -> height at x1,z1
-       * \param y2 -> height at x1,z2
-       * \param y3 -> height at x2,z2
-       * \param y4 -> height at x2,z1
-       * \param u1 -> quad texture U1 value
-       * \param v1 -> quad texture V1 value
-       * \param u2 -> quad texture U2 value
-       * \param v2 -> quad texture V2 value
-       * \param nX -> quad normal X value
-       * \param nY -> quad normal Y value
-       * \param nZ -> quad normal Z value */
+       * \param textureName -> the name of the texture used */
       void addQuad(GLuint textureId, string textureName,
-                   GLfloat x1, GLfloat z1,
-                   GLfloat x2, GLfloat z2,
-                   GLfloat y1, GLfloat y2,
-                   GLfloat y3, GLfloat y4,
+                   GLfloat x1, GLfloat y1, GLfloat z1,
+                   GLfloat x2, GLfloat y2, GLfloat z2,
+                   GLfloat x3, GLfloat y3, GLfloat z3,
+                   GLfloat x4, GLfloat y4, GLfloat z4,
                    GLfloat u1, GLfloat v1,
                    GLfloat u2, GLfloat v2,
                    GLfloat nX, GLfloat nY, GLfloat nZ);

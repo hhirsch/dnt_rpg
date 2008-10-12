@@ -62,10 +62,10 @@ void renderTexture::clearBuffers()
 /***********************************************************************
  *                             addQuad                                 *
  ***********************************************************************/
-void renderTexture::addQuad(GLfloat x1, GLfloat z1,
-                            GLfloat x2, GLfloat z2,
-                            GLfloat y1, GLfloat y2,
-                            GLfloat y3, GLfloat y4,
+void renderTexture::addQuad(GLfloat x1, GLfloat y1, GLfloat z1,
+                            GLfloat x2, GLfloat y2, GLfloat z2,
+                            GLfloat x3, GLfloat y3, GLfloat z3,
+                            GLfloat x4, GLfloat y4, GLfloat z4,
                             GLfloat u1, GLfloat v1,
                             GLfloat u2, GLfloat v2,
                             GLfloat nX, GLfloat nY, GLfloat nZ)
@@ -98,17 +98,17 @@ void renderTexture::addQuad(GLfloat x1, GLfloat z1,
    vertexBuffer[posVertex+1] = y1;
    vertexBuffer[posVertex+2] = z1;
 
-   vertexBuffer[posVertex+3] = x1;
+   vertexBuffer[posVertex+3] = x2;
    vertexBuffer[posVertex+4] = y2;
    vertexBuffer[posVertex+5] = z2;
 
-   vertexBuffer[posVertex+6] = x2;
+   vertexBuffer[posVertex+6] = x3;
    vertexBuffer[posVertex+7] = y3;
-   vertexBuffer[posVertex+8] = z2;
+   vertexBuffer[posVertex+8] = z3;
 
-   vertexBuffer[posVertex+9] = x2;
+   vertexBuffer[posVertex+9] = x4;
    vertexBuffer[posVertex+10] = y4;
-   vertexBuffer[posVertex+11] = z1;
+   vertexBuffer[posVertex+11] = z4;
 
    /* And increase the counter! */
    totalQuads++;
@@ -158,7 +158,7 @@ void renderTexture::render()
    {
       /* Enable Array States */
       glEnableClientState(GL_VERTEX_ARRAY);
-      glEnableClientState(GL_NORMAL_ARRAY);
+      //glEnableClientState(GL_NORMAL_ARRAY);
       glEnable(GL_TEXTURE_2D);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
@@ -168,14 +168,14 @@ void renderTexture::render()
 
       /* Set the Buffers */
       glVertexPointer(3, GL_FLOAT, 0, vertexBuffer);
-      glNormalPointer(GL_FLOAT, 0, normalBuffer);
+      //glNormalPointer(GL_FLOAT, 0, normalBuffer);
       glTexCoordPointer(2, GL_FLOAT, 0, uvBuffer);
 
       /* And Render! */
-      glDrawArrays(GL_QUADS, 0, totalQuads);
+      glDrawArrays(GL_QUADS, 0, totalQuads*4);
 
       /* Disable Array States */
-      glDisableClientState(GL_NORMAL_ARRAY);
+      //glDisableClientState(GL_NORMAL_ARRAY);
       glDisableClientState(GL_VERTEX_ARRAY);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
    }
@@ -293,9 +293,12 @@ renderTexture* texRenderer::search(string textureName)
  *                                addQuad                              *
  ***********************************************************************/
 void texRenderer::addQuad(GLuint textureId, string textureName,
-                          GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2,
-                          GLfloat y1, GLfloat y2, GLfloat y3, GLfloat y4,
-                          GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2,
+                          GLfloat x1, GLfloat y1, GLfloat z1,
+                          GLfloat x2, GLfloat y2, GLfloat z2,
+                          GLfloat x3, GLfloat y3, GLfloat z3,
+                          GLfloat x4, GLfloat y4, GLfloat z4,
+                          GLfloat u1, GLfloat v1,
+                          GLfloat u2, GLfloat v2,
                           GLfloat nX, GLfloat nY, GLfloat nZ)
 {
    /* Get the desired texture */
@@ -307,7 +310,7 @@ void texRenderer::addQuad(GLuint textureId, string textureName,
    }
 
    /* Insert the GL_QUAD */
-   rt->addQuad(x1,z1,x2,z2, y1,y2,y3,y4, u1,v1,u2,v2, nX,nY,nZ);
+   rt->addQuad(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4, u1,v1,u2,v2, nX,nY,nZ);
 }
 
 /***********************************************************************

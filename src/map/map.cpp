@@ -165,6 +165,7 @@ void Square::setDivisions()
 wallTexture::wallTexture()
 {
    textureId = -1;
+   textureName = "";
    dX = 16;
    dY = 16;
    dZ = 16;
@@ -178,7 +179,8 @@ void wallTexture::operator=(wallTexture* t)
    dX = t->dX;
    dY = t->dY;
    dZ = t->dZ;
-   textureId = textureId;
+   textureId = t->textureId;
+   textureName = t->textureName;
 }
 
 /********************************************************************
@@ -195,6 +197,22 @@ int wallTexture::getTextureId()
 void wallTexture::setTextureId(int id)
 {
    textureId = id;
+}
+
+/********************************************************************
+ *                          getTextureName                          *
+ ********************************************************************/
+string wallTexture::getTextureName()
+{
+   return(textureName);
+}
+
+/********************************************************************
+ *                          setTextureName                          *
+ ********************************************************************/
+void wallTexture::setTextureName(string name)
+{
+   textureName = name;
 }
 
 /********************************************************************
@@ -262,6 +280,9 @@ Map::Map(lObject* lObjects)
 
    /* Create sound */
    sounds = new mapSound();
+
+   /* Create texture renderer for walls */
+   wallRenderer = new texRenderer();
 }
 
 /********************************************************************
@@ -333,6 +354,9 @@ Map::~Map()
    {
       delete[] uvAlphaBuffer;
    }
+
+   /* Delete the Wall texture renderer */
+   delete(wallRenderer);
 
    /* Unselect the objects list */
    objects = NULL;
@@ -1156,49 +1180,6 @@ int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
 }
 
 /********************************************************************
- *                          renderWallSide                          *
- ********************************************************************/
-inline int renderWallSide(GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2, 
-                          GLfloat h1, GLfloat h2,
-                          GLfloat texU1, GLfloat texV1, 
-                          GLfloat texU2, GLfloat texV2,
-                          GLint normalX, GLint normalY, GLint normalZ,
-                          int curTexture, int useTexture)
-{
-   /* Verify Texture */
-   if( (curTexture != -1) && (useTexture == -1))
-   {
-      glEnd();
-      glDisable(GL_TEXTURE_2D); 
-      glBegin(GL_QUADS);
-   }
-   else if(curTexture != useTexture)
-   {
-      glEnd();
-      glEnable(GL_TEXTURE_2D);
-      glBindTexture(GL_TEXTURE_2D, useTexture);
-      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-
-      glBegin(GL_QUADS);
-   }
-
-   /* Draw the Side */
-   glNormal3i(normalX, normalY, normalZ);
-   glTexCoord2f(texU1, texV2);
-   glVertex3f(x1, h1, z1);
-   glTexCoord2f(texU2, texV2);
-   glVertex3f(x2, h1, z2);
-   glTexCoord2f(texU2, texV1);
-   glVertex3f(x2, h2, z2);
-   glTexCoord2f(texU1, texV1);
-   glVertex3f(x1, h2, z1);
-
-   /* Return the used Texture */
-   return(useTexture);
-}
-
-/********************************************************************
  *                            renderWalls                           *
  ********************************************************************/
 void Map::renderWalls(GLfloat cameraX, GLfloat cameraY, 
@@ -1207,12 +1188,12 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
 {
    glColor3f(1.0,1.0,1.0);
    wall* maux = walls;
-   int texture = -1;
    bool visible = false;
    int wNum;
    int fezMeioFio = 0;
    GLfloat altura = WALL_HEIGHT;
    GLfloat u,v;
+   GLuint R=0,G=0,B=0;
    GLuint dX=0, dY=0, dZ=0;
 
    if(!maux)
@@ -1222,8 +1203,10 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
       altura = CURB_HEIGHT;
    }
 
+   /* Clear the wall renderer buffers */
+   wallRenderer->clear();
+
    /* Render All Walls and Curbs */
-   glBegin(GL_QUADS);
    for(wNum=0;wNum<totalWalls;wNum++ )
    {
       if(inverted)
@@ -1241,40 +1224,72 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
       }
       if(visible)
       {
-         //FIXME TODO -> some optimations, previously grouping
-         // walls at buffers per texture or something similar
-         
+         /* Inserting each quad at the renderer */         
+
          /* Front Face */
          maux->frontTexture.getDelta(dX, dY, dZ);
          u = (maux->x2-maux->x1) / dX;
          v = (altura+1) / dY;
-         texture = renderWallSide(maux->x1, maux->z1, maux->x2, maux->z1, 
-                                  altura, 0,  0, 0, u, v, 0, 0, 1, 
-                                  texture, maux->frontTexture.getTextureId());
-
+         wallRenderer->addQuad(maux->frontTexture.getTextureId(),
+                               maux->frontTexture.getTextureName(),
+                               maux->x1, 0, maux->z1, 
+                               maux->x1, altura, maux->z1,
+                               maux->x2, altura, maux->z1,
+                               maux->x2, 0, maux->z1,
+                               0, 0, u, v,
+                               0, 0, 1);
+         
          /* Back Face */
          maux->backTexture.getDelta(dX, dY, dZ);
          u = (maux->x2-maux->x1) / dX;
          v = (altura+1) / dY;
-         texture = renderWallSide(maux->x1, maux->z2, maux->x2, maux->z2, 
-                                  altura, 0, 0, 0, u, v, 0, 0, -1,
-                                  texture, maux->backTexture.getTextureId());
-
+         wallRenderer->addQuad(maux->backTexture.getTextureId(),
+                               maux->backTexture.getTextureName(),
+                               maux->x1, 0, maux->z2, 
+                               maux->x1, altura, maux->z2,
+                               maux->x2, altura, maux->z2,
+                               maux->x2, 0, maux->z2,
+                               0, 0, u, v,
+                               0, 0, -1);
+                                
          /* Left Face */
          maux->leftTexture.getDelta(dX, dY, dZ);
          u = (maux->z2-maux->z1) / dX;
          v = (altura+1) / dY;
-         texture = renderWallSide(maux->x1, maux->z1, maux->x1, maux->z2, 
-                                  altura, 0, 0, 0, u, v,  -1, 0, 0,
-                                  texture, maux->leftTexture.getTextureId());
+         wallRenderer->addQuad(maux->leftTexture.getTextureId(),
+                               maux->leftTexture.getTextureName(),
+                               maux->x1, 0, maux->z1,
+                               maux->x1, altura, maux->z1,
+                               maux->x1, altura, maux->z2,
+                               maux->x1, 0, maux->z2,
+                               0, 0, u, v,
+                               -1, 0, 0);
 
          /* Right Face */
          maux->rightTexture.getDelta(dX, dY, dZ);
          u = (maux->z2-maux->z1) / dX;
          v = (altura+1) / dY;
-         texture = renderWallSide(maux->x2, maux->z1, maux->x2, maux->z2, 
-                                 altura, 0,  0, 0, u, v, 1, 0, 0,
-                                 texture, maux->rightTexture.getTextureId());
+         wallRenderer->addQuad(maux->rightTexture.getTextureId(),
+                               maux->rightTexture.getTextureName(),
+                               maux->x2, 0, maux->z1,
+                               maux->x2, altura, maux->z1,
+                               maux->x2, altura, maux->z2,
+                               maux->x2, 0, maux->z2,
+                               0, 0, u, v,
+                               1, 0, 0);
+
+         /* Upper Side */
+         u = (maux->x2-maux->x1) / 16.0;
+         v = (maux->z2-maux->z1) / 16.0;
+         wallRenderer->addQuad(getTextureID("UpperWall", R, G, B),
+                               "UpperWall",
+                               maux->x1, altura, maux->z1, 
+                               maux->x1, altura, maux->z2,
+                               maux->x2, altura, maux->z2,
+                               maux->x2, altura, maux->z1,
+                               0, 0, u, v,
+                               0, 1, 0);
+                               
       }
       maux = maux->next;
       if( (!maux) && (!fezMeioFio) )
@@ -1284,40 +1299,9 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
          altura = CURB_HEIGHT;
       }
    }
-   glEnd();
-   glDisable(GL_TEXTURE_2D);
 
-   /* Now, render Upper Wall's side */
-   maux = walls;
-   GLuint R=0,G=0,B=0;
-
-   /* Define UpperWall Texture */
-   texture = getTextureID("UpperWall", R, G, B);
-   glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, texture);
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-
-   glBegin(GL_QUADS);
-   for(wNum = 0; wNum < totalWalls; wNum++)
-   {
-      u = (maux->x2-maux->x1) / 16.0;
-      v = (maux->z2-maux->z1) / 16.0;
-
-      /* Upper Face */
-      glNormal3i(0,1,0);
-      glTexCoord2f(0,0);
-      glVertex3f(maux->x1,altura,maux->z1);
-      glTexCoord2f(u,0);
-      glVertex3f(maux->x2,altura,maux->z1);
-      glTexCoord2f(u,v);
-      glVertex3f(maux->x2,altura,maux->z2);
-      glTexCoord2f(0,v);
-      glVertex3f(maux->x1,altura,maux->z2);
-      maux = maux->next;
-   }
-   glEnd();
-   glDisable(GL_TEXTURE_2D);
+   /* Now, finally render! */
+   wallRenderer->render();
 
 }
 
@@ -1977,18 +1961,22 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
                   {
                      case 'f':
                         maux->frontTexture.setTextureId(IDwallTexturaAtual);
+                        maux->frontTexture.setTextureName(nameMuroTexturaAtual);
                         maux->frontTexture.setDelta(dX,dY,dZ);
                      break;
                      case 'b':
                         maux->backTexture.setTextureId(IDwallTexturaAtual);
+                        maux->backTexture.setTextureName(nameMuroTexturaAtual);
                         maux->backTexture.setDelta(dX,dY,dZ);
                      break;
                      case 'l':
                         maux->leftTexture.setTextureId(IDwallTexturaAtual);
+                        maux->leftTexture.setTextureName(nameMuroTexturaAtual);
                         maux->leftTexture.setDelta(dX,dY,dZ);
                      break;
                      case 'r':
                         maux->rightTexture.setTextureId(IDwallTexturaAtual);
+                        maux->rightTexture.setTextureName(nameMuroTexturaAtual);
                         maux->rightTexture.setDelta(dX,dY,dZ);
                      break;
                   }

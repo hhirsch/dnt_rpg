@@ -11,6 +11,7 @@
 #include "maproad.h"
 #include "mapsound.h"
 #include "../particle/lake.h"
+#include "../etc/texrenderer.h"
 #include <string>
 using namespace std;
 
@@ -62,6 +63,14 @@ class wallTexture
        * \param id -> id of the texture */
       void setTextureId(int id);
 
+      /*! Set the texture name
+       * \param name -> texture name */
+      void setTextureName(string name);
+
+      /*! Get the texture name
+       * \return -> string with texture name */
+      string getTextureName();
+
       /*! Get Texture Deltas
        * \param x -> deltaX
        * \param y -> deltaY
@@ -76,6 +85,7 @@ class wallTexture
    protected:
 
       int textureId;       /**< Texture ID Used*/
+      string textureName;  /**< Texture Name */
       GLuint dX,           /**< Delta X of texture cycle */
              dY,           /**< Delta Y of texture cycle */
              dZ;           /**< Delta Z of texture cycle */ 
@@ -601,6 +611,8 @@ class Map
       float* uvBuffer;         /**< The UV-map array buffer used */
       float* uvAlphaBuffer;    /**< The alpha UV-map buffer for splatting */
       int totalVertex;         /**< Current total vertex at vertexBuffer */
+
+      texRenderer* wallRenderer;  /**< The texture Renderer for walls */
 
       GLuint commonTexture;   /**< The most common texture on the map */
 
