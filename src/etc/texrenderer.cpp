@@ -20,7 +20,7 @@ renderTexture::renderTexture(GLuint id, string name): bTreeCell()
    maxQuads = TEXTURE_INITIAL_MAX_QUADS;
    vertexBuffer = new GLfloat[maxQuads*12];
    uvBuffer = new GLfloat[maxQuads*8];
-   normalBuffer = new GLfloat[maxQuads*3];
+   normalBuffer = new GLfloat[maxQuads*12];
 }
 
 /***********************************************************************
@@ -72,7 +72,7 @@ void renderTexture::addQuad(GLfloat x1, GLfloat y1, GLfloat z1,
 {
    int posUv = totalQuads*8;
    int posVertex = totalQuads*12;
-   int posNormal = totalQuads*3;
+   int posNormal = totalQuads*12;
 
    if(totalQuads >= maxQuads)
    {
@@ -81,9 +81,13 @@ void renderTexture::addQuad(GLfloat x1, GLfloat y1, GLfloat z1,
    }
 
    /* Now insert the quad at each buffer */
-   normalBuffer[posNormal] = nX;
-   normalBuffer[posNormal] = nY;
-   normalBuffer[posNormal] = nZ;
+   int i;
+   for(i=0; i<4; i++)
+   {
+      normalBuffer[posNormal+i*3] = nX;
+      normalBuffer[posNormal+1+i*3] = nY;
+      normalBuffer[posNormal+2+i*3] = nZ;
+   }
 
    uvBuffer[posUv] = u1;
    uvBuffer[posUv+1] = v1;
@@ -126,14 +130,14 @@ void renderTexture::increaseBuffers()
    GLfloat* prevUv = uvBuffer;
    GLfloat* prevNormal = normalBuffer;
    int numVertex = totalQuads*12;
-   int numNormal = totalQuads*3;
+   int numNormal = totalQuads*12;
    int numUv = totalQuads*8;
 
    /* Realloc the buffers with 2*size */
    maxQuads = maxQuads*2;
    vertexBuffer = new GLfloat[maxQuads*12];
    uvBuffer = new GLfloat[maxQuads*8];
-   normalBuffer = new GLfloat[maxQuads*3];
+   normalBuffer = new GLfloat[maxQuads*12];
 
    /* And, finally, copy all values to the new buffers... ouch,
     * it really is expensive (3 new calls, 3 delete calls and
@@ -158,7 +162,7 @@ void renderTexture::render()
    {
       /* Enable Array States */
       glEnableClientState(GL_VERTEX_ARRAY);
-      //glEnableClientState(GL_NORMAL_ARRAY);
+      glEnableClientState(GL_NORMAL_ARRAY);
       glEnable(GL_TEXTURE_2D);
       glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
@@ -168,14 +172,14 @@ void renderTexture::render()
 
       /* Set the Buffers */
       glVertexPointer(3, GL_FLOAT, 0, vertexBuffer);
-      //glNormalPointer(GL_FLOAT, 0, normalBuffer);
+      glNormalPointer(GL_FLOAT, 0, normalBuffer);
       glTexCoordPointer(2, GL_FLOAT, 0, uvBuffer);
 
       /* And Render! */
       glDrawArrays(GL_QUADS, 0, totalQuads*4);
 
       /* Disable Array States */
-      //glDisableClientState(GL_NORMAL_ARRAY);
+      glDisableClientState(GL_NORMAL_ARRAY);
       glDisableClientState(GL_VERTEX_ARRAY);
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
    }
