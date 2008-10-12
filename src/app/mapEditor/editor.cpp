@@ -163,7 +163,8 @@ void editor::openMap()
       wallEditor = new wallController(map);
       objectEditor = new objects(map, models);
       particleEditor = new particles(map);
-      actualTexture = map->textures->index;
+      curTexture = map->textures->index;
+      curTextureName = map->textures->name;
 
       /* Open NPCs */
       if(NPCs)
@@ -439,7 +440,8 @@ void editor::newMap()
    wallEditor = new wallController(map);
    objectEditor = new objects(map, models);
    particleEditor = new particles(map);
-   actualTexture = map->textures->index;
+   curTexture = map->textures->index;
+   curTextureName = map->textures->name;
    NPCs = new (characterList);
    npcController = new npcs(map, NPCs, features);
    gui->showMessage("Created New Game Map!");
@@ -508,15 +510,17 @@ int editor::previousTexture()
    texture* tex = map->textures;
    while(aux < map->numTextures)
    {
-      if(tex->index == actualTexture)
+      if(tex->index == curTexture)
       {
-         actualTexture = tex->previous->index;
+         curTexture = tex->previous->index;
+         curTextureName = tex->previous->name;
          return(tex->previous->index);
       }
       tex = tex->next;
       aux++;
    }
-   actualTexture = map->textures->index;
+   curTexture = map->textures->index;
+   curTextureName = map->textures->name;
    return(map->textures->index);
 }
 
@@ -529,15 +533,17 @@ int editor::nextTexture()
    texture* tex = map->textures;
    while(aux < map->numTextures)
    {
-      if(tex->index == actualTexture)
+      if(tex->index == curTexture)
       {
-         actualTexture = tex->next->index;
+         curTexture = tex->next->index;
+         curTextureName = tex->next->name;
          return(tex->next->index);
       }
       tex = tex->next;
       aux++;
    }
-   actualTexture = map->textures->index;
+   curTexture = map->textures->index;
+   curTextureName = map->textures->name;
    return(map->textures->index);
 }
 
@@ -829,7 +835,7 @@ void editor::draw()
       glDisable(GL_LIGHTING);
       glDisable(GL_DEPTH_TEST);
       glEnable(GL_TEXTURE_2D);
-      glBindTexture(GL_TEXTURE_2D, actualTexture );
+      glBindTexture(GL_TEXTURE_2D, curTexture );
       glBegin(GL_QUADS);
          glColor3f(1,1,1);
          glTexCoord2f(1,0);
@@ -875,7 +881,7 @@ void editor::doEditorIO()
    if( (gui->getState() == GUI_IO_STATE_TERRAIN) && (mapOpened))
    {
       terrainEditor->verifyAction(xReal, yReal, zReal, mButton, gui->getTool(), 
-                                  actualTexture);
+                                  curTexture);
       particleSystem->setActualMap(map, NULL);
    }
    else if( (gui->getState() == GUI_IO_STATE_PORTAL) && (mapOpened))
@@ -898,7 +904,7 @@ void editor::doEditorIO()
    {
       int tl = gui->getTool();
       wallEditor->verifyAction(xReal, yReal, zReal, mButton, keys, 
-                               tl, actualTexture);
+                               tl, curTexture, curTextureName);
       gui->setTool(tl);
    }
    else if( (gui->getState() == GUI_IO_STATE_OBJECTS) && (mapOpened))

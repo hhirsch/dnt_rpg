@@ -95,8 +95,8 @@ class editor
       npcs* npcController;           /**< The Npcs Controller */
       weaponTypes* wTypes;           /**< The list of types */
 
-      GLuint actualTexture;          /**< Actual Texture */
-
+      GLuint curTexture;             /**< Current Texture */
+      string curTextureName;         /**< Current Texture Name */
       
       GLdouble proj[16];             /**< Projection Matrix */
       GLdouble modl[16];             /**< Model View Matrix */

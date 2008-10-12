@@ -69,10 +69,12 @@ wall* wallController::getWall()
  ******************************************************/
 void wallController::verifyAction(GLfloat mouseX, GLfloat mouseY, 
                                   GLfloat mouseZ, Uint8 mButton, 
-                                  Uint8* keys, int& tool, GLuint actualTexture)
+                                  Uint8* keys, int& tool, 
+                                  GLuint curTexture, string curTextureName)
 {
    actualTool = tool;
-   texture = actualTexture;
+   texture = curTexture;
+   textureName = curTextureName;
    mX = mouseX;
    mY = mouseY;
    mZ = mouseZ;
@@ -327,6 +329,7 @@ void wallController::doTexture()
       if(tex != NULL)
       {
          tex->setTextureId(texture);
+         tex->setTextureName(textureName);
       }
    }
 }
@@ -397,9 +400,13 @@ void wallController::doWall(bool X, bool Z, bool full)
       actualWall->x1 = mX;
       actualWall->z1 = mZ;
       actualWall->frontTexture.setTextureId(texture);
+      actualWall->frontTexture.setTextureName(textureName);
       actualWall->backTexture.setTextureId(texture);
+      actualWall->backTexture.setTextureName(textureName);
       actualWall->leftTexture.setTextureId(texture);
+      actualWall->leftTexture.setTextureName(textureName);
       actualWall->rightTexture.setTextureId(texture);
+      actualWall->rightTexture.setTextureName(textureName);
       if( X )
       {
           actualWall->x2 = mX;

@@ -21,10 +21,11 @@ class wallController
        * \param mouseZ -> mouse Z coordinate 
        * \param mButton -> mouse button state
        * \param tool -> current Tool
-       * \param actualTexture -> current Texture */
+       * \param curTexture -> current Texture Id 
+       * \param curTextureName -> current texture name */
       void verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ, 
                         Uint8 mButton, Uint8* keys, int& tool, 
-                        GLuint actualTexture);
+                        GLuint curTexture, string curTextureName);
 
       /*! If have some temporary things to draw, draw it! */
       void drawTemporary(GLdouble modelView[16], 
@@ -38,6 +39,7 @@ class wallController
       bool limitSquare;       /**< Limit Wall to square's vertices*/
 
       GLuint texture;         /**< Current Texture */
+      string textureName;     /**< Current Texture Name */
 
       GLfloat mX, mY, mZ;     /**< Mouse Coordinates */
 
