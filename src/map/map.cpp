@@ -1154,15 +1154,14 @@ int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
    /* Update Lights */
    lights.actualize(perX, perZ);
 
-   glEnable(GL_COLOR_MATERIAL);
-
-   glColor4f(1.0, 1.0, 1.0, 1.0);
-   renderFloor( cameraX, cameraY, cameraZ, matriz );
-
    glColor3f(1.0,1.0,1.0);
-
    /* Render Walls */
    renderWalls(cameraX, cameraY, cameraZ, matriz, false);
+
+   glEnable(GL_COLOR_MATERIAL);
+   /* Render Floor */
+   glColor4f(1.0, 1.0, 1.0, 1.0);
+   renderFloor( cameraX, cameraY, cameraZ, matriz );
 
    /* Render Roads */
    /*if(roads)
@@ -1301,7 +1300,9 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    }
 
    /* Now, finally render! */
-   wallRenderer->render();
+   options option;
+   wallRenderer->render((option.getReflexionType() >= REFLEXIONS_ALL) &&
+                        (!isOutdoor()));
 
 }
 

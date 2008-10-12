@@ -2772,7 +2772,7 @@ void engine::renderScene()
       }
    }
 
-   /* Draw the Map Objects && Walls with Reflexions */
+   /* Draw the Map Objects with Reflexions */
    if( (option->getReflexionType() >= REFLEXIONS_ALL) && 
        (!actualMap->isOutdoor()) )
    {
@@ -2784,11 +2784,6 @@ void engine::renderScene()
         actualMap->renderObjects(gameCamera.getCameraX(),
                                  gameCamera.getCameraY(),
                                  gameCamera.getCameraZ(), visibleMatrix, true);
-      glPopMatrix();
-      glPushMatrix();
-         glScalef(1.0,-1.0,1.0);
-         actualMap->renderWalls(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                               gameCamera.getCameraZ(),visibleMatrix, true);
       glPopMatrix();
       glDisable(GL_NORMALIZE);
       glDisable(GL_STENCIL_TEST);

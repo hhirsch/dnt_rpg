@@ -155,7 +155,7 @@ void renderTexture::increaseBuffers()
 /***********************************************************************
  *                              render                                 *
  ***********************************************************************/
-void renderTexture::render()
+void renderTexture::render(bool floorReflexion)
 {
    /* Only need to render if the quantity is not null */
    if(totalQuads > 0)
@@ -177,6 +177,21 @@ void renderTexture::render()
 
       /* And Render! */
       glDrawArrays(GL_QUADS, 0, totalQuads*4);
+
+      if(floorReflexion)
+      {
+         /* Render The Floor Reflexion */
+         glEnable(GL_STENCIL_TEST);
+         glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+         glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+         glEnable(GL_NORMALIZE);
+         glPushMatrix();
+            glScalef(1.0,-1.0,1.0);
+            glDrawArrays(GL_QUADS, 0, totalQuads*4);
+         glPopMatrix();
+         glDisable(GL_NORMALIZE);
+         glDisable(GL_STENCIL_TEST);
+      }
 
       /* Disable Array States */
       glDisableClientState(GL_NORMAL_ARRAY);
@@ -320,7 +335,7 @@ void texRenderer::addQuad(GLuint textureId, string textureName,
 /***********************************************************************
  *                                render                               *
  ***********************************************************************/
-void texRenderer::render(renderTexture* rt)
+void texRenderer::render(bool floorReflexion, renderTexture* rt)
 {
    if(!rt)
    {
@@ -331,18 +346,18 @@ void texRenderer::render(renderTexture* rt)
    if(rt)
    { 
       /* Call for root */
-      rt->render();
+      rt->render(floorReflexion);
 
       /* Call for left */
       if(rt->getLeft())
       {
-         render((renderTexture*)rt->getLeft());
+         render(floorReflexion, (renderTexture*)rt->getLeft());
       }
 
       /* Call for right */
       if(rt->getRight())
       {
-         render((renderTexture*)rt->getRight());
+         render(floorReflexion, (renderTexture*)rt->getRight());
       }
    }
 }

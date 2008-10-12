@@ -49,8 +49,9 @@ class renderTexture: public bTreeCell
                    GLfloat u2, GLfloat v2,
                    GLfloat nX, GLfloat nY, GLfloat nZ);
       
-      /*! Render the current quads related to this texture! */
-      void render();
+      /*! Render the current quads related to this texture! 
+       * \param floorReflexion -> with reflextion with floor is enabled */
+      void render(bool floorReflexion);
 
       /*! Compare with another renderTexture key
        * \param name -> name of the texture to compare with this one
@@ -112,8 +113,9 @@ class texRenderer: public bTree
       renderTexture* insertTexture(GLuint textureId, string textureName);
 
       /*! Render all renderTextures quads
+       * \param floorReflexion -> with reflextion with floor is enabled
        * \param rt -> pointer to the root (if none, will get the root) */
-      void render(renderTexture* rt=NULL);
+      void render(bool floorReflexion, renderTexture* rt=NULL);
 
       /*! Clear all renderTextures (setting its totalQuads to 0) 
        * \param rt -> pointer to the root (if none, will get the root) */
