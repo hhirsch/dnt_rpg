@@ -18,7 +18,7 @@ using namespace std;
  * so an expensive function, but is only called when needed, and only one
  * time per need.
  * \note -> if the increase function become frequently, is better increase
- *          the TEXTURE_INITIAL_QUADS value. */
+ *          the TEXTURE_INITIAL_MAX_QUADS value. */
 class renderTexture: public bTreeCell
 {
    public:
@@ -66,6 +66,11 @@ class renderTexture: public bTreeCell
                    
       /*! Render the current quads related to this texture! */
       void render();
+
+      /*! Compare with another renderTexture key
+       * \param name -> name of the texture to compare with this one
+       * \return  == 0 if equal, < 0  if lesser or > 0 if greater */
+      int compare(string name);
 
       /*! Compare with another renderTexture
        * \param cell -> pointer to cell to compare this one to
@@ -117,14 +122,22 @@ class texRenderer: public bTree
 
       /*! Insert a renderTexture information on the tree
        * \param textureId -> the texture ID
-       * \param textureName  -> the name of the texture (the key) */
-      void insertTexture(GLuint textureId, string textureName);
+       * \param textureName  -> the name of the texture (the key)
+       * \return -> pointer to the texture inserted */
+      renderTexture* insertTexture(GLuint textureId, string textureName);
 
-      /*! Render all renderTextures quads */
-      void render();
+      /*! Render all renderTextures quads
+       * \param rt -> pointer to the root (if none, will get the root) */
+      void render(renderTexture* rt=NULL);
 
-      /*! Clear all renderTextures (setting its totalQuads to 0) */
-      void clear();
+      /*! Clear all renderTextures (setting its totalQuads to 0) 
+       * \param rt -> pointer to the root (if none, will get the root) */
+      void clear(renderTexture* rt=NULL);
+
+      /*! Search for a renderTexture
+       * \param textureName -> name of the texture to search
+       * \return -> pointer to the renderTexture found or NULL */
+      renderTexture* search(string textureName);
 
       /*! Add a GL_QUAD to the renderTexture buffers
        * \param textureId -> the Id of the  texture used

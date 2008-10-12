@@ -188,7 +188,15 @@ int renderTexture::compare(bTreeCell* cell)
 {
    renderTexture* rt = (renderTexture*)cell;
 
-   return(textureName.compare(rt->getTextureName()));
+   return(compare(rt->getTextureName()));
+}
+
+/***********************************************************************
+ *                             compare                                 *
+ ***********************************************************************/
+int renderTexture::compare(string name)
+{
+   return(textureName.compare(name));
 }
 
 /***********************************************************************
@@ -241,9 +249,125 @@ void texRenderer::freeCell(bTreeCell* cell)
 /***********************************************************************
  *                           insertTexture                             *
  ***********************************************************************/
-void texRenderer::insertTexture(GLuint textureId, string textureName)
+renderTexture* texRenderer::insertTexture(GLuint textureId, string textureName)
 {
    renderTexture* rt = new renderTexture(textureId, textureName);
-   insert(rt);
+   return((renderTexture*)insert(rt));
 }
+
+/***********************************************************************
+ *                                search                               *
+ ***********************************************************************/
+renderTexture* texRenderer::search(string textureName)
+{
+   renderTexture* pos = (renderTexture*)this->getRoot();
+   int res;
+
+   while(pos != NULL)
+   {
+      /* Inverse compare (textureName with renderTexture),
+       * so must inverse the results ( >0 to left, <0 to right) */
+      res = pos->compare(textureName);
+
+      if(res == 0)
+      {
+         /* Here it is! */
+         return(pos);
+      }
+      else if(res > 0)
+      {
+         /* Must be at left */
+         pos = (renderTexture*)pos->getLeft();
+      }
+      else
+      {
+         /* Must be at right  */
+         pos = (renderTexture*)pos->getRight();
+      }
+   }
+
+   return(NULL);
+}
+
+/***********************************************************************
+ *                                addQuad                              *
+ ***********************************************************************/
+void texRenderer::addQuad(GLuint textureId, string textureName,
+                          GLfloat x1, GLfloat z1, GLfloat x2, GLfloat z2,
+                          GLfloat y1, GLfloat y2, GLfloat y3, GLfloat y4,
+                          GLfloat u1, GLfloat v1, GLfloat u2, GLfloat v2,
+                          GLfloat nX, GLfloat nY, GLfloat nZ)
+{
+   /* Get the desired texture */
+   renderTexture* rt = search(textureName);
+   if(!rt)
+   {
+      /* No texture with this name yet, so must create one and insert */
+      rt = insertTexture(textureId, textureName);
+   }
+
+   /* Insert the GL_QUAD */
+   rt->addQuad(x1,z1,x2,z2, y1,y2,y3,y4, u1,v1,u2,v2, nX,nY,nZ);
+}
+
+/***********************************************************************
+ *                                render                               *
+ ***********************************************************************/
+void texRenderer::render(renderTexture* rt)
+{
+   if(!rt)
+   {
+      /* Must get the root */
+      rt = (renderTexture*)getRoot();
+   }
+
+   if(rt)
+   { 
+      /* Call for root */
+      rt->render();
+
+      /* Call for left */
+      if(rt->getLeft())
+      {
+         render((renderTexture*)rt->getLeft());
+      }
+
+      /* Call for right */
+      if(rt->getRight())
+      {
+         render((renderTexture*)rt->getRight());
+      }
+   }
+}
+
+/***********************************************************************
+ *                                 clear                               *
+ ***********************************************************************/
+void texRenderer::clear(renderTexture* rt)
+{
+   if(!rt)
+   {
+      /* Must get the root */
+      rt = (renderTexture*)getRoot();
+   }
+
+   if(rt)
+   { 
+      /* Call for root */
+      rt->clearBuffers();
+
+      /* Call for left */
+      if(rt->getLeft())
+      {
+         clear((renderTexture*)rt->getLeft());
+      }
+
+      /* Call for right */
+      if(rt->getRight())
+      {
+         clear((renderTexture*)rt->getRight());
+      }
+   }
+}
+
 
