@@ -22,6 +22,21 @@ picture::~picture()
  ******************************************************/
 picture::picture(int x,int y,int w,int h,const char* arquivo)
 {
+   /* Define Machine Bit Order */
+   Uint32 rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+   rmask = 0xff000000;
+   gmask = 0x00ff0000;
+   bmask = 0x0000ff00;
+   amask = 0x000000ff;
+#else
+   rmask = 0x000000ff;
+   gmask = 0x0000ff00;
+   bmask = 0x00ff0000;
+   amask = 0xff000000;
+#endif
+
+
    x1 = x;
    y1 = y;
    x2 = x+w;
@@ -36,28 +51,20 @@ picture::picture(int x,int y,int w,int h,const char* arquivo)
          printf(gettext("Can't open image: %s\n"),arquivo);
          return;
       }
-      //fig = img;
+
+            //fig = img;
       fig = SDL_CreateRGBSurface(SDL_SWSURFACE,
                                  img->w,img->h,32,
-                                 0x000000FF,0x0000FF00,
-                                 0x00FF0000,0xFF000000);
+                                 rmask, gmask, bmask, amask);
       SDL_SetAlpha(img, 0,0);
       SDL_BlitSurface(img,NULL,fig,NULL);
       SDL_FreeSurface(img);
-      if ( fig == NULL )
-      {
-         printf(gettext("Warn: Can't Load Picture, may crash soon (out of memory)!\n"));
-      }
-      else
-      {
-         x2 = x1 + fig->w;
-         y2 = y1 + fig->h;
-      }
+      x2 = x1 + fig->w;
+      y2 = y1 + fig->h;
    }
    else if( (w > 0) && (h > 0) )
    {
-      fig = SDL_CreateRGBSurface(SDL_SWSURFACE,w,h,32,
-                                 0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+      fig = SDL_CreateRGBSurface(SDL_SWSURFACE,w,h,32,rmask,gmask,bmask,amask);
    }
    else
    {
