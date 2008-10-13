@@ -113,8 +113,9 @@ void model3d::draw(GLfloat** matriz, bool inverted)
          rotTransBoundingBox(pos->angle, X, Z, pos->x, 
                              pos->y+bound.y1, pos->y+bound.y2, 
                              pos->z, min, max );
-         if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
-                           matriz))
+         if( (matriz == NULL) ||
+             (visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
+                           matriz)) )
          {
             /* Is visible, so render */
             glPushMatrix();
@@ -374,6 +375,24 @@ void modelList::removeUnusedModels()
       }
    }
    printAll();
+}
+
+/********************************************************************
+ *                        RenderSceneryObjects                      *
+ ********************************************************************/
+void modelList::renderSceneryObjects(GLfloat** visibleMatrix, bool inverted)
+{
+   model3d* mdl = getFirst();
+   int i;
+   for(i = 0; i< getTotalModels(); i++)
+   {
+      /* Only Render here the Static Scenery Objects */
+      if(mdl->isStaticScenery())
+      {
+         mdl->draw(visibleMatrix, inverted);
+      }
+      mdl = mdl->next;
+   }
 }
 
 /********************************************************

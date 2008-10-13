@@ -380,7 +380,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
       
       /* create the progress bar */
       progress = new healthBar(2,20,fig->w-3,30);
-      progress->defineMaxHealth(10);
+      progress->defineMaxHealth(11);
       progress->defineActualHealth(0);
       
       /* Load the texture to opengl */
@@ -549,11 +549,17 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    }
    progress->defineActualHealth(7);
 
+   /* Create the MiniMap */
+   showLoading(img,&texturaTexto,texturaCarga,
+               gettext("Creating MiniMap"), progress);
+   actualMap->drawMiniMap(models);
+   progress->defineActualHealth(8);
+
    /* Loading Internal Windows */
    showLoading(img,&texturaTexto,texturaCarga,
                gettext("Putting GUI on Screen"), progress);
 
-   progress->defineActualHealth(8);
+   progress->defineActualHealth(9);
 
    /* Reopen, if already opened, some game Windows */
    if(mapWindow->isOpened())
@@ -599,7 +605,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
    /* Update  particle System to a stable state */
    showLoading(img,&texturaTexto,texturaCarga,
                gettext("Loading Particles"), progress);
-   progress->defineActualHealth(9);
+   progress->defineActualHealth(10);
    if(!actualMap->getParticlesFileName().empty())
    {
        particleController->loadFromFile(actualMap->getParticlesFileName());
@@ -629,7 +635,7 @@ int engine::loadMap(string arqMapa, int RecarregaPCs)
 
    showLoading(img,&texturaTexto,texturaCarga,
                gettext("Loading Changes..."), progress);
-   progress->defineActualHealth(10);
+   progress->defineActualHealth(11);
 
    /* Do Modifications */
    modifState.doMapModifications(actualMap, NPCs, *objectsList, 
@@ -2125,7 +2131,7 @@ int engine::treatIO(SDL_Surface *screen)
          lastKey = SDLK_F2;
          lastKeyb = time;
          models->printAll();
-      }
+      }      
 
       /* Open Minimap */
       if( (keys[SDLK_m]) && 
@@ -2568,24 +2574,6 @@ int engine::treatIO(SDL_Surface *screen)
 }
 
 /********************************************************************
- *                        RenderSceneryObjects                      *
- ********************************************************************/
-void engine::renderSceneryObjects(bool inverted)
-{
-   model3d* mdl = models->getFirst();
-   int i;
-   for(i = 0; i< models->getTotalModels(); i++)
-   {
-      /* Only Render here the Static Scenery Objects */
-      if(mdl->isStaticScenery())
-      {
-         mdl->draw(visibleMatrix, inverted);
-      }
-      mdl = mdl->next;
-   }
-}
-
-/********************************************************************
  *                            RenderScene                           *
  ********************************************************************/
 void engine::renderScene()
@@ -2807,8 +2795,9 @@ void engine::renderScene()
       glDisable(GL_STENCIL_TEST);
    }
 
-   renderSceneryObjects( (option->getReflexionType() >= REFLEXIONS_ALL) && 
-                         (!actualMap->isOutdoor()) );
+   models->renderSceneryObjects(visibleMatrix,
+                                (option->getReflexionType() >= REFLEXIONS_ALL) 
+                                 && (!actualMap->isOutdoor()) );
 
    glPushMatrix();
    actualMap->render(gameCamera.getCameraX(), gameCamera.getCameraY(),

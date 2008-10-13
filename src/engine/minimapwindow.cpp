@@ -19,7 +19,7 @@ miniMapWindow::~miniMapWindow()
  *                               open                                  *
  ***********************************************************************/
 void miniMapWindow::open(guiInterface* gui, float posX, float posZ,
-                         Map* openedMap)
+                         Map* openedMap) 
 {
    /* Set the current map */
    curMap = openedMap;
@@ -38,11 +38,11 @@ void miniMapWindow::open(guiInterface* gui, float posX, float posZ,
 
       charPosition = mapWindow->getObjectsList()->insertButton(0,0,1,1,
                                                                "",0);
-      picture* fig = mapWindow->getObjectsList()->insertPicture(8,20,240,95,
+      picture* fig = mapWindow->getObjectsList()->insertPicture(6,17,240,105,
                                                                 NULL);
  
       /* Draw the minimap at the picture */
-      curMap->drawMinimap(fig->get());
+      SDL_BlitSurface(curMap->getMiniMap(), NULL, fig->get(), NULL);
 
       /* Finally, open the window */
       mapWindow->setExternPointer(&mapWindow);
@@ -95,12 +95,15 @@ void miniMapWindow::updateCharacterPosition(float posX, float posZ)
          z = curMap->getSizeZ()-1;
       }
 
+      /* Invert Character Z Coordinate (the map image is flipped at Y) */
+      z = (curMap->getSizeZ()-1) - z;
+
       /* If Outdoor, must ignore the no walkable squares */
-      if(curMap->isOutdoor())
+      /*if(curMap->isOutdoor())
       {
          x -= 7;
          z -= 7;
-      }
+      }*/
 
       /* The incredible scale */
       x = 8 + (x*curMap->getSquareMiniSize());

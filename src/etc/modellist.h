@@ -158,6 +158,11 @@ class modelList
        * \return -> number of models on the list */
       int getTotalModels(){return(totalModels);}
 
+      /*! Render all Scenery Objects
+       * \param visibleMatrix -> current visible matrix
+       * \param inverted -> if will render XZ reflexions too */
+      void renderSceneryObjects(GLfloat** visibleMatrix, bool inverted);
+
       /*! Print all Models with printf for debug! */
       void printAll();
 

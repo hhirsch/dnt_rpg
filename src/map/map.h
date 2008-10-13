@@ -222,7 +222,7 @@ class Map
       int squareSize();
       /*! Get the minimap square size
        * \return -> size of each square on the minimap */
-      int getSquareMiniSize();
+      float getSquareMiniSize();
 
       /*! Gets coordinate relative square
        * \param xa -> x coordinate of square
@@ -285,10 +285,14 @@ class Map
 
 
       /*! Draw Minimap, relative to current map and character position.
-       * \param img -> Surface where minimap will be draw. Usualy a
-       *               valid window surface. */
-      void drawMinimap(SDL_Surface* img);
+       * \param models -> modelList to render scenary objects on minimap */
+      void drawMiniMap(modelList* models);
 
+      /*! Get the minimap surface
+       * \return -> pointer to the rendered minimap surface
+       * \note -> you must call drawMinimap at last one time before calling 
+       *          this function */
+      SDL_Surface* getMiniMap();
 
       /*! Create a new empty map, with new structs.
        * \param X -> number of squares on X coordinate
@@ -571,6 +575,7 @@ class Map
                              bool outdoorCompatible=false);
 
 
+      SDL_Surface* miniMap;    /**< The rendered minimap surface */
 
       mapFog fog;           /**< Map's Fog */
       mapLights lights;     /**< Map's Lights */
@@ -585,8 +590,8 @@ class Map
       lake* lakes;          /**< Chain list of lakes on map */
       int totalLakes;       /**< Total lakes on map */
 
-      int squareMiniSize;   /**< Minimap square size */
-      int squareMiniDiv;    /**< MiniMap square division relation */
+      float squareMiniSize; /**< Minimap square size */
+      float squareMiniDiv;  /**< MiniMap square division relation */
 
       mapSound* sounds;      /**< Map Sound Effects */
       string soundsFileName; /**< Sound Info File Name */

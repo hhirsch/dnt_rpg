@@ -246,6 +246,7 @@ void wallTexture::setDelta(GLuint x, GLuint y, GLuint z)
  ********************************************************************/
 Map::Map(lObject* lObjects)
 {
+   miniMap = NULL;
    numTextures = 0;
    textures = NULL;
    name = "oxi!";
@@ -385,6 +386,12 @@ Map::~Map()
       laux = lakes;
       lakes = lakes->next;
       delete(laux);
+   }
+
+   /* Free MiniMap Surface, if needed */
+   if(miniMap)
+   {
+      SDL_FreeSurface(miniMap);
    }
 
    /* Deleting Roads */
@@ -1488,7 +1495,7 @@ int Map::squareSize()
 /********************************************************************
  *                         getSquareMiniSize                        *
  ********************************************************************/
-int Map::getSquareMiniSize()
+float Map::getSquareMiniSize()
 {
    return(squareMiniSize);
 }
@@ -2219,20 +2226,7 @@ int Map::open(string arquivo, modelList& mdlList, weaponTypes& wTypes)
    }
 
    /* Define minimap sizes */
-   if(isOutdoor())
-   {
-      squareMiniSize = 70 / (z-14);
-   }
-   else
-   {
-      squareMiniSize = 70 / z;
-   }
-
-   if(squareMiniSize < 1)
-   {
-     squareMiniSize = 1;
-   }
-
+   squareMiniSize =  105.0 / z;
    squareMiniDiv = (squareSize() / squareMiniSize);
 
    /* And create the splats */
@@ -2280,7 +2274,7 @@ void Map::newMap(int X, int Z)
    }
 
    /* Define new minimap sizes */
-   squareMiniSize = 2;
+   squareMiniSize = 105.0 / z;
    squareMiniDiv = (squareSize() / squareMiniSize);
 
    xInic = 1*squareSize();
@@ -2600,68 +2594,97 @@ int Map::save(string arquivo)
 }
 
 /********************************************************************
+ *                               getMiniMap                         *
+ ********************************************************************/
+SDL_Surface* Map::getMiniMap()
+{
+   return(miniMap);
+}
+
+/********************************************************************
  *                       Draw MiniMap on Surface                    *
  ********************************************************************/
-void Map::drawMinimap(SDL_Surface* img)
+void Map::drawMiniMap(modelList* models)
 {
-   int x1,y1,x2,y2, X, Z;
+   /* Setting the View  */
+   int mapSizeX = squareMiniSize*x;
+   int mapSizeZ = squareMiniSize*z;
+   glViewport(0,0, mapSizeX, mapSizeZ);
+   glMatrixMode (GL_PROJECTION);
+   glLoadIdentity ();
+   gluPerspective(45.0, mapSizeX / (float)mapSizeZ, 1.0, OUTDOOR_FARVIEW);
+   glMatrixMode (GL_MODELVIEW);
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+   glClear (GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+   glLoadIdentity();
 
-   int limX=0, limZ=0, iX=0, iZ=0, sX = 0, sZ = 0;
 
-   if(isOutdoor())
+   /* Set the look up, at the map's center looking down at Y axys */
+   GLfloat ratio = squareMiniSize / (float)(squareSize() * 7);
+   GLfloat posX = ratio*x*squareSize()/2.0; 
+   GLfloat posZ = ratio*z*squareSize()/2.0;
+   gluLookAt(posX, 20, posZ, posX, 0.0, posZ, 0, 0, -1);
+
+   /* Put some light */
+   GLfloat color[4] = {0.8,0.8,0.8,1.0};
+   GLfloat where[4] = {(OUTDOOR_FARVIEW / 2.0)-1, 
+                       (OUTDOOR_FARVIEW / 2.0)-1 + posX,
+                       posZ, 1.0};
+   glLightfv(GL_LIGHT0, GL_AMBIENT, color);
+   glLightfv (GL_LIGHT0, GL_POSITION, where);
+   glEnable(GL_LIGHT0);
+   glEnable(GL_LIGHTING);
+
+   /* And finally draw the map, scaling it to the "full viewport" size */
+   glPushMatrix();
+      glScalef(ratio,ratio,ratio);
+      models->renderSceneryObjects(NULL, false);
+      render(posX, 529, posZ, NULL, 0, 0);
+   glPopMatrix();
+
+   printOpenGLErrors();
+
+   /* Define Machine Bit Order */
+   Uint32 rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+   rmask = 0xff000000;
+   gmask = 0x00ff0000;
+   bmask = 0x0000ff00;
+   amask = 0x000000ff;
+#else
+   rmask = 0x000000ff;
+   gmask = 0x0000ff00;
+   bmask = 0x00ff0000;
+   amask = 0xff000000;
+#endif
+
+   /* Create the minimap Surface, if needed) */
+   if(miniMap == NULL)
    {
-      limX = x-7;
-      limZ = z-7;
-      iX = 7;
-      iZ = 7;
-      sX = x-14;
-      sZ = z - 14;
-   }
-   else
-   {
-      limX = x;
-      limZ = z;
-      iX = 0;
-      iZ = 0;
-      sX = x;
-      sZ = z;
+      miniMap = SDL_CreateRGBSurface(SDL_SWSURFACE, 
+                                     mapSizeX, mapSizeZ, 32,
+                                     rmask, gmask, bmask, amask);
    }
 
-   x1 = 0; y1 = 0;
-   for(Z = iZ; Z < limZ; Z++)
-   {
-      for(X = iX; X < limX; X++)
-      {
-          color_Set(MapSquares[X][Z].R,
-                    MapSquares[X][Z].G,
-                    MapSquares[X][Z].B, 255);
-          rectangle_Fill(img, x1,y1,x1+squareMiniSize-1,y1+squareMiniSize-1);
-          x1+=squareMiniSize;
-      }
-      x1 = 0;
-      y1+=squareMiniSize;
-   }
+   /* Read the pixels to the surface */
+   glReadBuffer(GL_BACK);
+   glReadPixels(0, 0, mapSizeX, mapSizeZ, 
+                GL_RGBA, GL_UNSIGNED_BYTE, miniMap->pixels);
 
-   color_Set(1, 1, 1, 255);
-   rectangle_2Colors(img,0,0,sX*squareMiniSize-1,sZ*squareMiniSize-1,0,0,0,255);
-   
-   wall* maux = walls;
-   int wNum;
-   for(wNum = 0; wNum < totalWalls; wNum++)
-   {
-      //FIXME walls values when outdoor!
-       x1 = (int) ( ((float)maux->x1 / (float)squareMiniDiv ));
-       x2 = (int) ( (((float)maux->x2 / (float)squareMiniDiv))-1 );
-       y1 = (int) ( ((float)maux->z1 / (float)squareMiniDiv ));
-       y2 = (int) ( (((float)maux->z2 / (float)squareMiniDiv))-1 );
-       if( (x2-x1) < (y2-y1))
-          x2 = x1;
-       else 
-          y2 = y1;
-       color_Set(255,40,30,255);
-       line_Draw(img, x1,y1,x2,y2);
-       maux = maux->next;
-   }
+   /* Define Surface Params to Blit Later */
+   SDL_SetAlpha(miniMap, 0,0);
+   SDL_SetColorKey(miniMap, SDL_SRCCOLORKEY, 
+                   SDL_MapRGB(miniMap->format, 0, 0, 0));
+
+   glDisable(GL_LIGHT0);
+   glDisable(GL_LIGHTING);
+
+   /* Reset the View */
+   glViewport(0,0,SCREEN_X, SCREEN_Y);
+   glMatrixMode (GL_PROJECTION);
+   glLoadIdentity ();
+   gluPerspective(45.0, SCREEN_X / (float)SCREEN_Y, 1.0, OUTDOOR_FARVIEW);
+   glMatrixMode (GL_MODELVIEW);
 
 }
 
