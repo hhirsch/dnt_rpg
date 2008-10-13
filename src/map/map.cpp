@@ -894,7 +894,7 @@ void renderQuad(GLfloat x1, GLfloat z1,
  *                      renderFloorIndoor                           *
  ********************************************************************/
 void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                            GLfloat matriz[6][4], bool selectionRender,
+                            GLfloat** matriz, bool selectionRender,
                             bool outdoorCompatible)
 {
    int aux = 0;
@@ -951,11 +951,12 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
          {
             if( ( (MapSquares[x1][z1].texture == (int)tex->index) ||
                   (selectionRender) )                             &&
-                (visibleCube(MapSquares[x1][z1].x1 - VIS_DELTA,0,
+                ( (matriz == NULL) ||
+                  (visibleCube(MapSquares[x1][z1].x1 - VIS_DELTA,0,
                              MapSquares[x1][z1].z1 - VIS_DELTA,
                              MapSquares[x1][z1].x2 + VIS_DELTA,
                              MAX_HEIGHT,
-                             MapSquares[x1][z1].z2 + VIS_DELTA, matriz)))
+                             MapSquares[x1][z1].z2 + VIS_DELTA, matriz)) ))
             {
                renderQuad(MapSquares[x1][z1].x1, MapSquares[x1][z1].z1,
                           MapSquares[x1][z1].x2, MapSquares[x1][z1].z2,
@@ -983,7 +984,7 @@ void Map::renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
  *                     renderFloorOutdoor                           *
  ********************************************************************/
 void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                             GLfloat matriz[6][4], bool selectionRender)
+                             GLfloat** matriz, bool selectionRender)
 {
    extensions ext;
    int aux = 0;
@@ -1115,7 +1116,7 @@ void Map::renderFloorOutdoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
  *                           renderFloor                            *
  ********************************************************************/
 void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                      GLfloat matriz[6][4], bool selectionRender)
+                      GLfloat** matriz, bool selectionRender)
 {
    /* Draw Terrain */
    options opt;
@@ -1149,7 +1150,7 @@ void Map::renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
  *                             render                               *
  ********************************************************************/
 int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                GLfloat matriz[6][4], GLfloat perX, GLfloat perZ)
+                GLfloat** matriz, GLfloat perX, GLfloat perZ)
 {
    /* Update Lights */
    lights.actualize(perX, perZ);
@@ -1182,7 +1183,7 @@ int Map::render(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ,
  *                            renderWalls                           *
  ********************************************************************/
 void Map::renderWalls(GLfloat cameraX, GLfloat cameraY, 
-                      GLfloat cameraZ, GLfloat matriz[6][4],
+                      GLfloat cameraZ, GLfloat** matriz,
                       bool inverted)
 {
    glColor3f(1.0,1.0,1.0);
@@ -1210,16 +1211,30 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
    {
       if(inverted)
       {
-         visible = visibleCube(maux->x1-VIS_DELTA,
-               -altura-VIS_DELTA,maux->z1-VIS_DELTA,
-               maux->x2+VIS_DELTA,
-               VIS_DELTA,maux->z2+VIS_DELTA,matriz);
+         if(matriz)
+         {
+            visible = visibleCube(maux->x1-VIS_DELTA,
+                                  -altura-VIS_DELTA,maux->z1-VIS_DELTA,
+                                  maux->x2+VIS_DELTA,
+                                  VIS_DELTA,maux->z2+VIS_DELTA,matriz);
+         }
+         else
+         {
+            visible = true;
+         }
       }
       else
       {
-         visible = visibleCube(maux->x1-VIS_DELTA,-VIS_DELTA,
-               maux->z1-VIS_DELTA,maux->x2+VIS_DELTA,
-               altura+VIS_DELTA,maux->z2+VIS_DELTA,matriz);
+         if(matriz)
+         {
+            visible = visibleCube(maux->x1-VIS_DELTA,-VIS_DELTA,
+                                  maux->z1-VIS_DELTA,maux->x2+VIS_DELTA,
+                                  altura+VIS_DELTA,maux->z2+VIS_DELTA,matriz);
+         }
+         else
+         {
+            visible = true;
+         }
       }
       if(visible)
       {
@@ -1310,7 +1325,7 @@ void Map::renderWalls(GLfloat cameraX, GLfloat cameraY,
  *                           renderObjects                          *
  ********************************************************************/
 void Map::renderObjects(GLfloat cameraX, GLfloat cameraY, 
-                      GLfloat cameraZ, GLfloat matriz[6][4],
+                      GLfloat cameraZ, GLfloat** matriz,
                       bool inverted)
 {
    int o;
@@ -1365,8 +1380,9 @@ void Map::renderObjects(GLfloat cameraX, GLfloat cameraY,
             }
 
             /* Verify ViewFrustum Culling */
-            if(visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
-                           matriz))
+            if( (matriz == NULL) ||
+                (visibleCube(min[0],min[1],min[2],max[0],max[1],max[2],
+                             matriz)) )
             {
                glPushMatrix();
                 if(inverted)
@@ -2652,7 +2668,7 @@ void Map::drawMinimap(SDL_Surface* img)
 /********************************************************************
  *                           createBuffers                          *
  ********************************************************************/
-void Map::createBuffers(GLfloat matriz[6][4])
+void Map::createBuffers(GLfloat** matriz)
 {
    int x1, z1;
    int actualTexture = 0;
@@ -2671,11 +2687,12 @@ void Map::createBuffers(GLfloat matriz[6][4])
       for(x1=0;x1<x;x1++)
       {
          /* Only add to the buffer if the square is potentially visible */
-         if(visibleCube(MapSquares[x1][z1].x1 - VIS_DELTA,0,
+         if( (matriz == NULL) ||
+             (visibleCube(MapSquares[x1][z1].x1 - VIS_DELTA,0,
                         MapSquares[x1][z1].z1 - VIS_DELTA,
                         MapSquares[x1][z1].x2 + VIS_DELTA,
                         MAX_HEIGHT,
-                        MapSquares[x1][z1].z2 + VIS_DELTA, matriz))
+                        MapSquares[x1][z1].z2 + VIS_DELTA, matriz)))
          {
             uvBuffer[actualTexture] = 0.0;
             uvBuffer[actualTexture+1] = 0.0;

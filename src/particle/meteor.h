@@ -54,7 +54,7 @@ class meteor: public particleSystem
        * Do Next Step on System, rendering and actualizing
        * \param matriz -> View Frustum Matrix
        ***************************************************************/
-      void nextStep(GLfloat matriz[6][4]);
+      void nextStep(GLfloat** matriz);
 
       /*!
        ***************************************************************

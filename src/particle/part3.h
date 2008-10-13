@@ -62,7 +62,7 @@ class part3: public particleSystem
        * Do Next Step on System, rendering and actualizing
        * \param matriz -> view Frustum Matrix 
        ***************************************************************/
-      void nextStep(GLfloat matriz[6][4]);
+      void nextStep(GLfloat** matriz);
       /*!
        ***************************************************************
        * Gets total living particles.

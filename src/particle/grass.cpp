@@ -295,7 +295,7 @@ void grass::createParticle(particle* part)
 /**************************************************************************
  *                               NextStep                                 *
  **************************************************************************/
-void grass::nextStep(GLfloat matriz[6][4], 
+void grass::nextStep(GLfloat** matriz, 
                      GLfloat pcPosX, GLfloat pcPosY, GLfloat pcPosZ,
                      wind* affectWind)
 {

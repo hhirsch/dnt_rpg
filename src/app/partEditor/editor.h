@@ -110,7 +110,7 @@ class editor
 
       string curFileName;      /**< Filename of Current Particle Open */
 
-      GLfloat viewMatrix[6][4];  /**< Current Visible Matrix */
+      GLfloat** viewMatrix;      /**< Current Visible Matrix */
       GLdouble proj[16];         /**< Current Projection Matrix */
       GLdouble modl[16];         /**< Current Model View Matrix */
       GLint viewPort[4];         /**< Current View Port Vector */

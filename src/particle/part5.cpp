@@ -203,7 +203,7 @@ void part5::createParticle(particle* part)
 /****************************************************************************
  *                               NextStep                                   *
  ****************************************************************************/
-void part5::nextStep(GLfloat matriz[6][4])
+void part5::nextStep(GLfloat** matriz)
 {
    doStep(matriz);
 }

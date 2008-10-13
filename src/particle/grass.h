@@ -89,7 +89,7 @@ public:
        * \param pcPosZ -> PC Z position
        * \param affectWind ->the wind that affect the system
        ***************************************************************/
-      void nextStep(GLfloat matriz[6][4],
+      void nextStep(GLfloat** matriz,
                     GLfloat pcPosX, GLfloat pcPosY, GLfloat pcPosZ,
                     wind* affectWind);
       /*!

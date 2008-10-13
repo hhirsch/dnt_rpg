@@ -132,7 +132,7 @@ class particleSystem
        * Actualize and render all particles  
        * \param matriz -> viewFrustum Matrix
        ***************************************************************/
-      void doStep(GLfloat matriz[6][4]); 
+      void doStep(GLfloat** matriz); 
       /*!
        ***************************************************************
        * Define XZ position

@@ -118,7 +118,7 @@ bool meteor::isLiving()
 /****************************************************************************
  *                                NextStep                                  *
  ****************************************************************************/
-void meteor::nextStep(GLfloat matriz[6][4])
+void meteor::nextStep(GLfloat** matriz)
 {
    initRender();
    intFire->nextStep(matriz);

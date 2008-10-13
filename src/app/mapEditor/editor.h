@@ -101,7 +101,7 @@ class editor
       GLdouble proj[16];             /**< Projection Matrix */
       GLdouble modl[16];             /**< Model View Matrix */
       GLint viewPort[4];             /**< View Port Vector */
-      GLfloat visibleMatrix[6][4];   /**< Visible Matrix */
+      GLfloat** visibleMatrix;       /**< Visible Matrix */
       
 };
 

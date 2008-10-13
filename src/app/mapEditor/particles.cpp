@@ -350,7 +350,7 @@ void particles::verifyAction(GLfloat mouseX, GLfloat mouseY, GLfloat mouseZ,
 /*****************************************************************
  *                          drawTemporary                        *
  *****************************************************************/
-void particles::drawTemporary(GLfloat matriz[6][4])
+void particles::drawTemporary(GLfloat** matriz)
 {
    if(state == STATE_GRASS_INIT)
    {

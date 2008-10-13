@@ -12,6 +12,14 @@
  ************************************************************************/
 editor::editor()
 {
+   int i;
+   /* Alloc the visible Matrix */
+   viewMatrix = new GLfloat*[6];
+   for(i = 0; i < 6; i++)
+   {
+      viewMatrix[i] = new GLfloat[4];
+   }
+
    /* Get current data directories */
    dir.findDataDirectories();
 
@@ -55,6 +63,8 @@ editor::editor()
  ************************************************************************/
 editor::~editor()
 {
+   int i;
+
    /* Free Current Particle */
    if(p)
    {
@@ -64,6 +74,12 @@ editor::~editor()
    delete(gui);
    /* And free the camera */
    delete(gameCamera);
+   /* Clear the visibleMatrix */
+   for(i = 0; i < 6; i++)
+   {
+      delete[] viewMatrix[i];
+   }
+   delete[] viewMatrix;
 }
 
 /************************************************************************

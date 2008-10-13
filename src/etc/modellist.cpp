@@ -83,7 +83,7 @@ void model3d::addPosition(float x, float y, float z, float angle)
 /********************************************************
  *                        draw                          *
  ********************************************************/
-void model3d::draw(GLfloat matriz[6][4], bool inverted)
+void model3d::draw(GLfloat** matriz, bool inverted)
 {
    GLfloat min[3], max[3];
    GLfloat X[4], Z[4];

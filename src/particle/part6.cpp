@@ -155,7 +155,7 @@ void part6::createParticle(particle* part)
 /****************************************************************************
  *                               NextStep                                   *
  ****************************************************************************/
-void part6::nextStep(GLfloat matriz[6][4])
+void part6::nextStep(GLfloat** matriz)
 {
    seconds = 0.02;
    doStep(matriz);

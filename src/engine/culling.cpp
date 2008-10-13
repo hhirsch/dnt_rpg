@@ -7,9 +7,9 @@
 /*********************************************************
  *                      updateFrustum                    *
  *********************************************************/
-void updateFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16])
+void updateFrustum(GLfloat** matriz,GLdouble proj[16],GLdouble modl[16])
 {
-      GLfloat clip[16];
+   GLfloat clip[16];
 	GLfloat t;
 
 	// Get The Current PROJECTION Matrix From OpenGL
@@ -124,7 +124,7 @@ void updateFrustum(GLfloat matriz[6][4],GLdouble proj[16],GLdouble modl[16])
  *********************************************************/
 int visibleCube(GLfloat x1, GLfloat y1, GLfloat z1,
                 GLfloat x2, GLfloat y2, GLfloat z2,
-                GLfloat matriz[6][4])
+                GLfloat** matriz)
 {
    /* Apply AntiAliasing Delta */
    x1 = x1 - ANTI_ALIASING_DELTA;

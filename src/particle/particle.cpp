@@ -186,7 +186,7 @@ void particleSystem::resetBoundingBox()
 /***************************************************************
  *                 Do a step to Particle System                *
  ***************************************************************/
-void particleSystem::doStep(GLfloat matriz[6][4])
+void particleSystem::doStep(GLfloat** matriz)
 {
    int n;
    int pendingCreate = needCreate();
@@ -280,8 +280,9 @@ void particleSystem::doStep(GLfloat matriz[6][4])
             colorArray[aliveColor+2] = particles[n].B;
             //colorArray[aliveColor+3] = 1.0;
          }
-         else if(visibleCube(boundX1, boundY1, boundZ1, boundX2, 
-                                 boundY2, boundZ2,matriz))
+         else if((matriz == NULL) ||
+                 (visibleCube(boundX1, boundY1, boundZ1, boundX2, 
+                                 boundY2, boundZ2,matriz)))
          {
             render(&particles[n]);
          }
@@ -292,8 +293,9 @@ void particleSystem::doStep(GLfloat matriz[6][4])
    }
 
    if( (drawMode == PARTICLE_DRAW_GROUPS) && (aliveColor > 0) && (alive > 0) &&
-       (visibleCube(boundX1, boundY1, boundZ1, boundX2, boundY2, boundZ2,
-                           matriz)))
+       ( (matriz == NULL) || 
+         (visibleCube(boundX1, boundY1, boundZ1, boundX2, boundY2, boundZ2,
+                           matriz))))
    {
       glEnableClientState(GL_COLOR_ARRAY);
       glColorPointer(3, GL_FLOAT, 0, colorArray);

@@ -8,6 +8,7 @@
  *********************************************************************/
 editor::editor()
 {
+   int i;
    dirs dir;
    mapOpened = false;
    map = NULL;
@@ -23,6 +24,13 @@ editor::editor()
               opt.getAntiAliasing());
 
    init();
+
+   /* Alloc the visible Matrix */
+   visibleMatrix = new GLfloat*[6];
+   for(i = 0; i < 6; i++)
+   {
+      visibleMatrix[i] = new GLfloat[4];
+   }
 
    /* Load Extensions */
    extensions ext;
@@ -47,6 +55,7 @@ editor::editor()
  *********************************************************************/
 editor::~editor()
 {
+   int i;
    if(mapOpened)
    {
       delete(map);
@@ -75,6 +84,14 @@ editor::~editor()
    delete(models);
    delete(wTypes);
    Farso_End(screen);
+
+   /* Clear the visibleMatrix */
+   for(i = 0; i < 6; i++)
+   {
+      delete[] visibleMatrix[i];
+   }
+   delete[] visibleMatrix;
+
 }
 
 /*********************************************************************

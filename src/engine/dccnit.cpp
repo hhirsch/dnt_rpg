@@ -16,6 +16,8 @@
  *********************************************************************/
 engine::engine()
 {
+   int i;
+
    effect = NULL;
    /* Initialize internal lists */
    gui  = new guiInterface(NULL);
@@ -44,6 +46,13 @@ engine::engine()
    snd = new(sound);
    snd->init();
    walkSound = NULL;
+
+   /* Alloc the visible Matrix */
+   visibleMatrix = new GLfloat*[6];
+   for(i = 0; i < 6; i++)
+   {
+      visibleMatrix[i] = new GLfloat[4];
+   }
 
    /* Create Options */
    option = new options();
@@ -132,7 +141,6 @@ engine::engine()
    lastKey = 0;
 
    /* Colors */
-   int i;
    for(i = 0; i < 3; i++)
    {
       defaultColor[i] = 0.2;
@@ -148,6 +156,8 @@ engine::engine()
  *********************************************************************/
 engine::~engine()
 {
+   int i;
+
    /* Stops and free music & sounds */
    if(snd)
    {
@@ -275,6 +285,14 @@ engine::~engine()
    delete(classList);
    delete(skillsList);
    delete(weaponsTypes);
+
+   /* Clear the visibleMatrix */
+   for(i = 0; i < 6; i++)
+   {
+      delete[] visibleMatrix[i];
+   }
+   delete[] visibleMatrix;
+
 }
 
 /*********************************************************************
@@ -2597,7 +2615,7 @@ void engine::renderScene()
       glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
       glStencilFunc(GL_ALWAYS, 1, 0xffffffff);
       actualMap->renderFloor(gameCamera.getCameraX(),gameCamera.getCameraY(),
-                             gameCamera.getCameraZ(),visibleMatrix, true);
+                             gameCamera.getCameraZ(), visibleMatrix, true);
       glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
       glEnable(GL_DEPTH_TEST);
       glDisable(GL_STENCIL_TEST);

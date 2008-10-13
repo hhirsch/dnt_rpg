@@ -32,7 +32,7 @@ class particles
                         waterWindow* wtWindow, Map* actualMap);
 
       /*! If have some temporary things to draw, draw it! */
-      void drawTemporary(GLfloat matriz[6][4]);
+      void drawTemporary(GLfloat** matriz);
 
       void deleteParticle();
 

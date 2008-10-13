@@ -114,7 +114,7 @@ void partController::deleteAll()
  *                               updateAll                            *
  **********************************************************************/
 void partController::updateAll(float PCposX, float PCposY, float PCposZ, 
-                              GLfloat matriz[6][4], bool enableGrass)
+                              GLfloat** matriz, bool enableGrass)
 {
    int i, total;
 
@@ -524,7 +524,7 @@ void partController::removeParticle(int type, void* part)
 void partController::stabilizeAll()
 {
    int i;
-   GLfloat matriz[6][4];  //not needed to draw, so...
+   GLfloat** matriz = NULL;  //not needed to draw, so...
    
    for(i=0; i< PART_STABILIZE_LOOP;i++)
    {

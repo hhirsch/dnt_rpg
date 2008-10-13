@@ -49,7 +49,7 @@ class partController
        * \param enableGrass -> true if grass is enable.
        ***************************************************************/
       void updateAll(float PCposX, float PCposY, float PCposZ, 
-                     GLfloat matriz[6][4], bool enableGrass);
+                     GLfloat** matriz, bool enableGrass);
 
       /*!
        *************************************************************** 

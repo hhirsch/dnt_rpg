@@ -369,7 +369,7 @@ class engine
 
       collision colisionDetect;    /**< The collision detect Module */
  
-      GLfloat visibleMatrix[6][4]; /**< Actual Frustum Matrix */
+      GLfloat** visibleMatrix;     /**< Actual Frustum Matrix */
       int mouseX,                  /**< Actual mouse X coordinates on screen */
           mouseY;                  /**< Actual mouse Y coordinates on screen */
       double xReal,                /**< Actual mouse X coordinates on World */

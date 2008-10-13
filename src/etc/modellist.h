@@ -54,7 +54,7 @@ class model3d: public aniModel
       /*! Draw All Visible Static Scenery Objects Based on model
        * \param matrix -> visible matrix
        * \param inverted -> if inverted on Y axys. Usefull for reflexion. */
-      void draw(GLfloat matriz[6][4], bool inverted);
+      void draw(GLfloat** matriz, bool inverted);
 
       /*! Increment the used flag */
       void incUsed();

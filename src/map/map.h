@@ -242,7 +242,7 @@ class Map
        * \param perZ -> active character Z position
        * \return 1 if success. */
       int render(GLfloat cameraX, GLfloat cameraY, 
-                 GLfloat cameraZ, GLfloat matriz[6][4],
+                 GLfloat cameraZ, GLfloat** matriz,
                  GLfloat perX, GLfloat perZ);
       /*! Render the floor on screen (using view culling)  
        * \param cameraX -> X coordinate of camera
@@ -252,7 +252,7 @@ class Map
        * \param selectionRender -> true if renderng at SELECTION mode
        * \return 1 if success. */
       void renderFloor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                       GLfloat matriz[6][4], bool selectionRender=false);
+                       GLfloat** matriz, bool selectionRender=false);
       /*! Render the map objects on screen (using view culling)  
        * \param cameraX -> X coordinate of camera
        * \param cameraY -> Y coordinate of camera
@@ -260,7 +260,7 @@ class Map
        * \param matriz  -> view frustum matriz 
        * \param inverted -> usefull for reflections */
       void renderObjects(GLfloat cameraX, GLfloat cameraY, 
-                         GLfloat cameraZ, GLfloat matriz[6][4],
+                         GLfloat cameraZ, GLfloat** matriz,
                        bool inverted);
       /*! Render the map walls on screen (using view culling)  
        * \param cameraX -> X coordinate of camera
@@ -269,7 +269,7 @@ class Map
        * \param matriz  -> view frustum matriz 
        * \param inverted -> usefull for reflections */
       void renderWalls(GLfloat cameraX, GLfloat cameraY, 
-                       GLfloat cameraZ, GLfloat matriz[6][4],
+                       GLfloat cameraZ, GLfloat** matriz,
                        bool inverted);
       /*! Render a texture (surface) over map terrain (floor)
         * \param image -> openGL texture ID
@@ -546,7 +546,7 @@ class Map
       void alloc();
       /*! Fill all buffers needed to render (doing culling)
        * \param matriz -> current view frustum matrix */
-      void createBuffers(GLfloat matriz[6][4]);
+      void createBuffers(GLfloat** matriz);
 
       /*! Draw the Outdoor floor on screen
        * \param cameraX -> X coordinate of camera
@@ -556,7 +556,7 @@ class Map
        * \param selectionRender -> true if renderng at SELECTION mode
        * \return 1 if success. */
       void renderFloorOutdoor(GLfloat cameraX,GLfloat cameraY,GLfloat cameraZ, 
-                              GLfloat matriz[6][4], bool selectionRender=false);
+                              GLfloat** matriz, bool selectionRender=false);
       /*! Draw the indoor floor on screen (using view culling)  
        * \param cameraX -> X coordinate of camera
        * \param cameraY -> Y coordinate of camera
@@ -567,7 +567,7 @@ class Map
        *                             at compatible mode (without multitextures)
        * \return 1 if success. */
       void renderFloorIndoor(GLfloat cameraX, GLfloat cameraY, GLfloat cameraZ, 
-                             GLfloat matriz[6][4], bool selectionRender=false,
+                             GLfloat** matriz, bool selectionRender=false,
                              bool outdoorCompatible=false);
 
 

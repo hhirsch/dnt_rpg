@@ -95,7 +95,7 @@ class part1: public particleSystem
        * Do a step on system after sec seconds
        * \param matriz -> View Frustum Matrix
        ***************************************************************/
-      void nextStep(GLfloat matriz[6][4]);
+      void nextStep(GLfloat** matriz);
       /*!
        ***************************************************************
        * Gets the number of actual active particles
