@@ -18,6 +18,10 @@ charWindow::charWindow(guiInterface* interf)
    intWindow = NULL;
    current = NULL;
    skWindow = NULL;
+   okButton = NULL;
+   levelUpButton = NULL;
+   skillsButton = NULL;
+   infoBar = NULL;
 }
 
 /********************************************************************

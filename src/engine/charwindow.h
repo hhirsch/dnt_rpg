@@ -47,7 +47,6 @@ class charWindow
 
       window* intWindow;         /**< Pointer to the internal window */
       skillWindow* skWindow;     /**< Skill Window used */
-      object* curObject;         /**< Pointer to current object */
 
       character* current;        /**< Current character */
 
