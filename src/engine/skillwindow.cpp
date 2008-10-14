@@ -2,6 +2,9 @@
  *  DccNiTghtmare is public domain. Do whatever you want with this code. *
  *************************************************************************/
 
+#include <iostream>
+using namespace std;
+
 #include "skillwindow.h"
 #include "../classes/defs.h"
 
@@ -217,6 +220,7 @@ void skillWindow::updateSkillInfo()
       saux = tmp;
       txtAvaiblePoints->setText(saux);
    }
+   intWindow->draw(0,0);
 }
 
 /**************************************************************
