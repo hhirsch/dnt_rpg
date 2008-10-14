@@ -1,16 +1,16 @@
-# French translation for dccnitghtmare
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# Italian translation for dccnitghtmare
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the dccnitghtmare package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: dccnitghtmare\n"
 "Report-Msgid-Bugs-To: dnt@dnteam.org\n"
 "POT-Creation-Date: 2008-10-14 08:24-0200\n"
-"PO-Revision-Date: 2008-09-10 12:15+0000\n"
-"Last-Translator: Anthony Guéchoum <Unknown>\n"
-"Language-Team: French <fr@li.org>\n"
+"PO-Revision-Date: 2008-10-12 15:57+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
+"Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,64 +19,64 @@ msgstr ""
 
 #: src/classes/classes.cpp:105 src/classes/race.cpp:105
 msgid "Unknow Attribute:"
-msgstr "Attribut inconnu :"
+msgstr "Attributo Sconosciuto:"
 
 #: src/classes/feats.cpp:134
 msgid "Invalid Feat"
-msgstr "Déplacement non valide"
+msgstr ""
 
 #: src/classes/feats.cpp:142
 msgid "Too far away for action!"
-msgstr "Trop loin pour cette action !"
+msgstr "Troppo lontano per compiere un azione!"
 
 #: src/classes/feats.cpp:230 src/classes/feats.cpp:253
 msgid "Miss."
-msgstr "Loupé."
+msgstr "Mancato."
 
 #: src/classes/feats.cpp:233 src/classes/feats.cpp:237
 msgid "Critical Miss!"
-msgstr "Loupé critique !"
+msgstr "Fallimento Critico!"
 
 #: src/classes/feats.cpp:266
 #, c-format
 msgid "Healed %d points."
-msgstr "Soigné %d points."
+msgstr "Curati %d punti."
 
 #: src/classes/feats.cpp:270
 #, c-format
 msgid "Hit for %d points."
-msgstr "Touche de %d points."
+msgstr "Colpo di %d punti."
 
 #: src/classes/feats.cpp:289 src/classes/feats.cpp:292
 msgid "Critical Heal!"
-msgstr "Soin critique !"
+msgstr "Cura Critica!"
 
 #: src/classes/feats.cpp:297 src/classes/feats.cpp:301
 msgid "Critical Hit!"
-msgstr "Touche Critique !"
+msgstr "Colpo Critico!"
 
 #: src/classes/feats.cpp:341
 msgid "Not enought points to use!"
-msgstr "Pas assez de points pour utiliser !"
+msgstr "Non abbastanza punti per usare!"
 
 #: src/classes/mission.cpp:198 src/engine/dialog.cpp:653
 #, c-format
 msgid "Mission Completed: %d XP!"
-msgstr "Mission accomplie: %d XP !"
+msgstr "Missione Completata: %d Punti Esperienza!"
 
 #: src/classes/mission.cpp:211
 msgid "Mission Failure!"
-msgstr "Echec de la Mission!"
+msgstr "Fallimento Missione!"
 
 #: src/classes/skills.cpp:27
 #, c-format
 msgid "Error while opening skills list: %s\n"
-msgstr "Erreur lors de l'ouverture de la liste des compétence : %s\n"
+msgstr ""
 
 #: src/classes/skills.cpp:57 src/classes/skills.cpp:164
 #, c-format
 msgid "Can't open skill file: %s \n"
-msgstr "Impossible d'ouvrir le fichier des compétences : %s \n"
+msgstr ""
 
 #: src/classes/skills.cpp:71
 #, c-format
@@ -90,197 +90,197 @@ msgstr ""
 
 #: src/engine/alignwindow.cpp:30
 msgid "Tendency & Alignment"
-msgstr "tendance et Alignement"
+msgstr "Tendenza & Allineamento"
 
 #: src/engine/alignwindow.cpp:55 src/engine/aspectwindow.cpp:70
 #: src/engine/attwindow.cpp:218 src/engine/classwindow.cpp:107
 #: src/engine/options.cpp:720 src/engine/racewindow.cpp:102
 #: src/engine/skillwindow.cpp:136
 msgid "Confirm"
-msgstr "Confirmer"
+msgstr "Conferma"
 
 #: src/engine/alignwindow.cpp:59 src/engine/aspectwindow.cpp:74
 #: src/engine/attwindow.cpp:222 src/engine/barterwindow.cpp:48
 #: src/engine/classwindow.cpp:111 src/engine/options.cpp:724
 #: src/engine/racewindow.cpp:106 src/engine/skillwindow.cpp:139
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Annulla"
 
 #: src/engine/aspectwindow.cpp:26
 msgid "Aspect"
-msgstr "Aspect"
+msgstr "Aspetto"
 
 #: src/engine/aspectwindow.cpp:44 src/engine/charwindow.cpp:83
 msgid "Name:"
-msgstr "Nom :"
+msgstr "Nome:"
 
 #: src/engine/aspectwindow.cpp:49 src/engine/charwindow.cpp:86
 msgid "Age:"
-msgstr "Age :"
+msgstr "Età:"
 
 #: src/engine/aspectwindow.cpp:53 src/engine/charwindow.cpp:101
 msgid "Sex:"
-msgstr "Sexe :"
+msgstr "Sesso:"
 
 #: src/engine/aspectwindow.cpp:108
 #, c-format
 msgid "Can't open the list with portraits: portraits.lst!\n"
-msgstr "Impossible d'ouvrir la liste des portraits : portraits.lst !\n"
+msgstr ""
 
 #: src/engine/attwindow.cpp:40
 msgid "Attributes"
-msgstr "Attributs"
+msgstr "Attributi"
 
 #: src/engine/attwindow.cpp:62
 msgid "Roll"
-msgstr "Lancer les dés"
+msgstr "Scorrimento"
 
 #: src/engine/attwindow.cpp:65
 msgid "Clear"
-msgstr "Effacer"
+msgstr "Azzera"
 
 #: src/engine/attwindow.cpp:69
 msgid "Auto"
-msgstr "Automatique"
+msgstr "Automatico"
 
 #: src/engine/attwindow.cpp:72 src/engine/charwindow.cpp:142
 #: data/skills/forca.ski:1
 msgid "Strength"
-msgstr "Force"
+msgstr "Forza"
 
 #: src/engine/attwindow.cpp:92 src/engine/charwindow.cpp:147
 #: data/skills/destreza.ski:1
 msgid "Dexterity"
-msgstr "Dextérité"
+msgstr "Destrezza"
 
 #: src/engine/attwindow.cpp:112 src/engine/charwindow.cpp:152
 #: data/skills/constituicao.ski:1
 msgid "Constitution"
-msgstr "Constitution"
+msgstr "Costituzione"
 
 #: src/engine/attwindow.cpp:132 src/engine/charwindow.cpp:157
 #: data/skills/inteligencia.ski:1
 msgid "Intelligence"
-msgstr "Intelligence"
+msgstr "Intelligenza"
 
 #: src/engine/attwindow.cpp:153 src/engine/charwindow.cpp:162
 #: data/skills/sabedoria.ski:1
 msgid "Wisdom"
-msgstr "Sagesse"
+msgstr "Saggezza"
 
 #: src/engine/attwindow.cpp:174 src/engine/charwindow.cpp:167
 #: data/skills/carisma.ski:1
 msgid "Charism"
-msgstr "Charisme"
+msgstr "Carisma"
 
 #: src/engine/attwindow.cpp:206
 msgid "Attribute Description"
-msgstr "Description des attributs"
+msgstr "Descrizione Attributo"
 
 #: src/engine/attwindow.cpp:508 src/engine/options.cpp:928
 msgid "Warning"
-msgstr "Avertissement"
+msgstr "Avvertimento"
 
 #: src/engine/attwindow.cpp:509
 msgid "You Need to Assign All Attributes."
-msgstr "Vous devez assigner tous les attributs."
+msgstr "Devi Assegnare Tutti Gli Attributi."
 
 #: src/engine/barterwindow.cpp:32 src/engine/dialog.cpp:566
 msgid "Barter"
-msgstr "Troc"
+msgstr "Baratta"
 
 #: src/engine/barterwindow.cpp:44
 msgid "Offer"
-msgstr "Offrir"
+msgstr "Offri"
 
 #: src/engine/barterwindow.cpp:46
 msgid "Impose"
-msgstr "Imposer"
+msgstr "Imponi"
 
 #: src/engine/barterwindow.cpp:80 src/engine/barterwindow.cpp:91
 #: src/engine/inventwindow.cpp:31
 msgid "Inventory"
-msgstr "Inventaire"
+msgstr "Inventario"
 
 #: src/engine/barterwindow.cpp:246
 msgid "The barter was accepted."
-msgstr "Le troc a été accepté."
+msgstr "Il baratto è stato accettato."
 
 #: src/engine/barterwindow.cpp:251
 msgid "The barter was rejected."
-msgstr "Le troc a été refusé."
+msgstr "Il baratto è stato rifiutato."
 
 #: src/engine/barterwindow.cpp:271
 msgid "The barter imposition was accepted."
-msgstr "L'échange a été accepté."
+msgstr "L'imposizione del baratto è stata accettata."
 
 #: src/engine/barterwindow.cpp:276
 msgid "The barter imposition was rejected."
-msgstr "L'échange a été refusé."
+msgstr "L'imposizione del baratto è stata rifiutata."
 
 #: src/engine/barterwindow.cpp:295 src/engine/inventwindow.cpp:197
 msgid "Remove"
-msgstr "Retirer"
+msgstr "Rimuovi"
 
 #: src/engine/charwindow.cpp:92
 msgid "Female"
-msgstr "Femme"
+msgstr "Femmina"
 
 #: src/engine/charwindow.cpp:95
 msgid "Male"
-msgstr "Homme"
+msgstr "Maschio"
 
 #: src/engine/charwindow.cpp:98
 msgid "Undefined"
-msgstr "Indéfini"
+msgstr "Non Definito"
 
 #: src/engine/charwindow.cpp:104
 msgid "Race:"
-msgstr "Race"
+msgstr "Razza:"
 
 #: src/engine/charwindow.cpp:107
 msgid "Alignment:"
-msgstr "Alignement :"
+msgstr "Allineamento:"
 
 #: src/engine/charwindow.cpp:111
 msgid "XP"
-msgstr "XP"
+msgstr "PX"
 
 #: src/engine/charwindow.cpp:112
 msgid "Next Level"
-msgstr "Niveau suivant"
+msgstr "Prossimo Livello"
 
 #: src/engine/charwindow.cpp:118
 msgid "HP"
-msgstr "PS"
+msgstr "PV"
 
 #: src/engine/charwindow.cpp:121
 msgid "AC"
-msgstr ""
+msgstr "AC"
 
 #: src/engine/charwindow.cpp:181
 msgid "Fortitude"
-msgstr "Courage"
+msgstr "Fortitudo"
 
 #: src/engine/charwindow.cpp:185
 msgid "Reflex"
-msgstr "réflexe"
+msgstr "Riflesso"
 
 #: src/engine/charwindow.cpp:189
 msgid "I am Not a Fool"
-msgstr "Je ne suis pas un idiot"
+msgstr "Non Sono un Folle"
 
 #: src/engine/charwindow.cpp:193
 msgid "Base Attack Modifier"
-msgstr ""
+msgstr "Modificatore Attacco Base"
 
 #: src/engine/charwindow.cpp:198
 msgid "Size Modifier"
-msgstr "Modificateur de taille"
+msgstr "Modificatore Dimensione"
 
 #: src/engine/charwindow.cpp:208
 msgid "Level Up"
-msgstr "Niveau Supérieur"
+msgstr "Livello Salito"
 
 #: src/engine/charwindow.cpp:214
 msgid "Feats"
@@ -288,32 +288,32 @@ msgstr ""
 
 #: src/engine/charwindow.cpp:218 src/engine/skillwindow.cpp:58
 msgid "Skills"
-msgstr "Compétences"
+msgstr "Abilità"
 
 #: src/engine/charwindow.cpp:222 src/engine/skillwindow.cpp:146
 #: src/gui/window.cpp:172
 msgid "Close"
-msgstr "Fermer"
+msgstr "Chiudi"
 
 #: src/engine/charwindow.cpp:339
 msgid "Main Weapon"
-msgstr "arme principal"
+msgstr "Arma Principale"
 
 #: src/engine/charwindow.cpp:343
 msgid "Secondary Weapon"
-msgstr "Arme secondaire"
+msgstr "Arma Secondaria"
 
 #: src/engine/charwindow.cpp:347
 msgid "Weapon"
-msgstr "Arme"
+msgstr "Arma"
 
 #: src/engine/charwindow.cpp:359
 msgid "Unarmed"
-msgstr "pas armé"
+msgstr "Disarmato"
 
 #: src/engine/charwindow.cpp:365
 msgid "Not Applicable"
-msgstr "Non applicable"
+msgstr "Non Applicabile"
 
 #: src/engine/classwindow.cpp:67
 msgid "Class"
@@ -321,35 +321,35 @@ msgstr "Classe"
 
 #: src/engine/classwindow.cpp:76
 msgid "Class Description"
-msgstr "Description de la Classe"
+msgstr "Descrizione Classe"
 
 #: src/engine/classwindow.cpp:86
 msgid "Class Characteristics"
-msgstr "Caractéristiques de la Classe"
+msgstr "Caratteristiche Classe"
 
 #: src/engine/classwindow.cpp:140
 msgid "Life Dice"
-msgstr "Dés de Vie"
+msgstr "Dado Vita"
 
 #: src/engine/classwindow.cpp:144
 msgid "Skill Points"
-msgstr "points d' aptitudes"
+msgstr "Punti Abilità"
 
 #: src/engine/classwindow.cpp:171
 msgid "First Level"
-msgstr "Premier niveau"
+msgstr "Primo Livello"
 
 #: src/engine/classwindow.cpp:199
 msgid "Other Levels"
-msgstr "Autres niveaux"
+msgstr "Altri Livelli"
 
 #: src/engine/classwindow.cpp:204
 msgid "Class Modifiers"
-msgstr "Moficateur de classe"
+msgstr "Modificatori Classe"
 
 #: src/engine/classwindow.cpp:215 src/engine/racewindow.cpp:153
 msgid "No Modifiers."
-msgstr "Pas de modificateur."
+msgstr "Nessun Modificatore."
 
 #: src/engine/classwindow.cpp:222
 msgid "Class Feats"
@@ -361,11 +361,11 @@ msgstr ""
 
 #: src/engine/classwindow.cpp:241
 msgid "Class Skills"
-msgstr "Compétences de Classe"
+msgstr "Abilità Classe"
 
 #: src/engine/classwindow.cpp:260 src/engine/racewindow.cpp:199
 msgid "No Skills."
-msgstr "Pas de Compétences."
+msgstr "Nessuna Abilità."
 
 #: src/engine/cursor.cpp:68
 #, c-format
@@ -375,26 +375,26 @@ msgstr ""
 #: src/engine/dccnit.cpp:408
 #, c-format
 msgid "Saving Current Map Modifications"
-msgstr ""
+msgstr "Salvando Le Modifiche Alla Mappa Attuali"
 
 #: src/engine/dccnit.cpp:451
 #, c-format
 msgid "Loading Map: %s"
-msgstr "Chargement de la Carte : %s"
+msgstr "Caricando Mappa: %s"
 
 #: src/engine/dccnit.cpp:508
 #, c-format
 msgid "Ouch, can't load NPC's file: %s.\n"
-msgstr "Impossible de charger le fichier PNJ : %s\n"
+msgstr ""
 
 #: src/engine/dccnit.cpp:523
 #, c-format
 msgid "Loading NPC: %s"
-msgstr "Chargement du PNJ : %s"
+msgstr "Caricando NPC: %s"
 
 #: src/engine/dccnit.cpp:548
 msgid "Loading Character"
-msgstr "Chargement du Caractère"
+msgstr "Caricando Personaggio"
 
 #: src/engine/dccnit.cpp:554
 msgid "Creating MiniMap"
@@ -402,19 +402,19 @@ msgstr ""
 
 #: src/engine/dccnit.cpp:560
 msgid "Putting GUI on Screen"
-msgstr ""
+msgstr "Piazzando la GUI sullo Schermo"
 
 #: src/engine/dccnit.cpp:607
 msgid "Loading Particles"
-msgstr "Chargement des Particules"
+msgstr ""
 
 #: src/engine/dccnit.cpp:637
 msgid "Loading Changes..."
-msgstr "Chargement des modifications..."
+msgstr "Caricando Cambiamenti..."
 
 #: src/engine/dccnit.cpp:666
 msgid "Done!"
-msgstr "Terminé !"
+msgstr "Fatto!"
 
 #: src/engine/dccnit.cpp:758
 msgid ""
@@ -426,77 +426,77 @@ msgstr ""
 
 #: src/engine/dccnit.cpp:1286
 msgid "Too far away for the action!"
-msgstr "Trop loin pour cette action !"
+msgstr "Troppo lontano per l'azione!"
 
 #: src/engine/dccnit.cpp:1324
 msgid "No NPCs in the area."
-msgstr "Pas de PNJ dans la zone"
+msgstr "Nessun NPC nell'area"
 
 #: src/engine/dccnit.cpp:1380
 msgid "Surprise Attack Turn."
-msgstr "Tour des attaques surprises."
+msgstr "Turno Di Attacco A Sorpresa."
 
 #: src/engine/dccnit.cpp:1397
 msgid "No enemies in the area."
-msgstr "Pas d'ennemis dans la zone."
+msgstr "Nessun nemico nell'area."
 
 #: src/engine/dccnit.cpp:1576 src/engine/dccnit.cpp:1998
 msgid "Nothing"
-msgstr "Rien"
+msgstr "Niente"
 
 #: src/engine/dccnit.cpp:1747
 #, c-format
 msgid "%s taken."
-msgstr "%s pris."
+msgstr "%s preso"
 
 #: src/engine/dccnit.cpp:1769
 msgid "Inventory is full!"
-msgstr "L'inventaire est plein!"
+msgstr "L'inventario è pieno!"
 
 #: src/engine/dccnit.cpp:1803
 msgid "Door"
-msgstr "Porte"
+msgstr "Porta"
 
 #: src/engine/dccnit.cpp:1931
 #, c-format
 msgid "%s attacks %s"
-msgstr "%s attaque %s"
+msgstr "%s attacca%s"
 
 #: src/engine/dccnit.cpp:3388
 msgid "Exit Battle Mode"
-msgstr "Quitter le Mode Combat"
+msgstr "Esci Dalla Modalità Battaglia"
 
 #: src/engine/dialog.cpp:247
 msgid "Cannot open File!\n"
-msgstr "Impossible d'ouvrir le fichier !\n"
+msgstr "Non è possibile aprire il File!\n"
 
 #: src/engine/dialog.cpp:270
 msgid "Tried to define dialog before end last one!"
-msgstr "Vous tentez de définir un dialogue avant de fini le précédent !"
+msgstr "Provato a definire il dialogo prima di finire l'ultimo!"
 
 #: src/engine/dialog.cpp:286
 msgid "Tried to end an undefined dialog!"
-msgstr "Vous tentez de finir un dialague indéfini !"
+msgstr "Provato a finire un dialogo indefinito!"
 
 #: src/engine/dialog.cpp:297
 msgid "Tried to begin NPC before end something!"
-msgstr ""
+msgstr "Provato a iniziare un NPC prima di finire qualcosa!"
 
 #: src/engine/dialog.cpp:306
 msgid "Tried to end NPC before begin it!"
-msgstr ""
+msgstr "Provato a finire un NPC prima di cominciarlo!"
 
 #: src/engine/dialog.cpp:315
 msgid "Tried to begin PC before end something!"
-msgstr ""
+msgstr "Provato a iniziare un PC prima di finire qualcosa!"
 
 #: src/engine/dialog.cpp:325
 msgid "Tried to end PC before begin it!"
-msgstr ""
+msgstr "Provato a finire un PC prima di iniziarlo!"
 
 #: src/engine/dialog.cpp:352
 msgid "Option Text without option!"
-msgstr ""
+msgstr "Testo Di Opzione senza opzione!"
 
 #: src/engine/dialog.cpp:356 src/engine/dialog.cpp:444
 msgid "Options overflow!"
@@ -504,15 +504,15 @@ msgstr ""
 
 #: src/engine/dialog.cpp:362
 msgid "Text without any relation!"
-msgstr "Texte sans aucune relation !"
+msgstr "Testo senza alcuna relazione!"
 
 #: src/engine/dialog.cpp:375
 msgid "Option without begin PC!"
-msgstr ""
+msgstr "Opzione senza aver cominciato un PC!"
 
 #: src/engine/dialog.cpp:383
 msgid "Action isn't yet defined to NPC!"
-msgstr "Cette action n'est pas encore définie pour les PNJ !"
+msgstr ""
 
 #: src/engine/dialog.cpp:432
 msgid "Actions List overflow!"
@@ -520,194 +520,194 @@ msgstr ""
 
 #: src/engine/dialog.cpp:439
 msgid "Option Action without option!"
-msgstr ""
+msgstr "Azione Di Opzione senza opzione!"
 
 #: src/engine/dialog.cpp:450
 msgid "Action without any relation!\n"
-msgstr "Action sans aucune relation !\n"
+msgstr "Azione senza alcuna relazione!\n"
 
 #: src/engine/dialog.cpp:456
 msgid "Unknow Token!"
-msgstr "Marqueur inconnu !"
+msgstr "Gesto Sconosciuto!"
 
 #: src/engine/dialog.cpp:520
 #, c-format
 msgid "Not found on dialog: %d\n"
-msgstr "Introuvable dans le dialogue : %d\n"
+msgstr "Non trovato nel dialogo: %d\n"
 
 #: src/engine/dialog.cpp:564
 msgid "Dialog"
-msgstr "Dialogue"
+msgstr "Dialogo"
 
 #: src/engine/initial.cpp:63
 msgid "New"
-msgstr "Nouveau"
+msgstr "Nuovo"
 
 #: src/engine/initial.cpp:68
 msgid "Continue"
-msgstr "Continuer"
+msgstr "Continua"
 
 #: src/engine/initial.cpp:71
 msgid "Save"
-msgstr "Enregistrer"
+msgstr "Salva"
 
 #: src/engine/initial.cpp:74
 msgid "Load"
-msgstr "Charger"
+msgstr "Carica"
 
 #: src/engine/initial.cpp:77 src/engine/options.cpp:530
 msgid "Options"
-msgstr "Options"
+msgstr "Opzioni"
 
 #: src/engine/initial.cpp:79
 msgid "Exit"
-msgstr "Quitter"
+msgstr "Esci"
 
 #: src/engine/inventwindow.cpp:178
 msgid "Drop"
-msgstr "Lâcher"
+msgstr "Lascia"
 
 #: src/engine/inventwindow.cpp:185
 msgid "Buy"
-msgstr "Acheter"
+msgstr "Compra"
 
 #: src/engine/inventwindow.cpp:185
 msgid "Sell"
-msgstr "Vendre"
+msgstr "Vendi"
 
 #: src/engine/inventwindow.cpp:192
 msgid "Use"
-msgstr "Utiliser"
+msgstr "Uso"
 
 #: src/engine/inventwindow.cpp:201
 msgid "Info"
-msgstr "Informations"
+msgstr "Informazioni"
 
 #: src/engine/inventwindow.cpp:205
 msgid "Get"
-msgstr "Obtenir"
+msgstr "Ottieni"
 
 #: src/engine/itemwindow.cpp:58
 #, c-format
 msgid "Name: %s"
-msgstr "Nom : %s"
+msgstr "Nome: %s"
 
 #: src/engine/itemwindow.cpp:63
 #, c-format
 msgid "Cost: %.2f"
-msgstr "Coût : %.2f"
+msgstr "Costo: %.2f"
 
 #: src/engine/itemwindow.cpp:68
 #, c-format
 msgid "Weight: %.2f Kg"
-msgstr "Poids : %.2f Kg"
+msgstr "Peso: %.2f Kg"
 
 #: src/engine/itemwindow.cpp:88
 msgid "Category: "
-msgstr "Catégorie : "
+msgstr "Categoria: "
 
 #: src/engine/itemwindow.cpp:94
 msgid "Damage Dice: "
-msgstr ""
+msgstr "Dado Danno: "
 
 #: src/engine/itemwindow.cpp:102
 msgid "Primary Damage: "
-msgstr ""
+msgstr "Danno Primario: "
 
 #: src/engine/itemwindow.cpp:109
 msgid "Secondary Damage: "
-msgstr ""
+msgstr "Danno Secondario: "
 
 #: src/engine/itemwindow.cpp:121
 msgid "Range: "
-msgstr "Portée : "
+msgstr "Intervallo: "
 
 #: src/engine/itemwindow.cpp:126
 msgid "Size: "
-msgstr "Taille : "
+msgstr "Dimensione: "
 
 #: src/engine/itemwindow.cpp:144
 msgid "Ok"
-msgstr "Valider"
+msgstr "Ok"
 
 #: src/engine/options.cpp:19
 msgid "Portuguese"
-msgstr "Portugais"
+msgstr "Portoghese"
 
 #: src/engine/options.cpp:20
 msgid "English"
-msgstr "Anglais"
+msgstr "Inglese"
 
 #: src/engine/options.cpp:21
 msgid "French"
-msgstr "Français"
+msgstr "Francese"
 
 #: src/engine/options.cpp:22
 msgid "German"
-msgstr "Allemand"
+msgstr "Tedesco"
 
 #: src/engine/options.cpp:23
 msgid "Spanish"
-msgstr "Espagnol"
+msgstr "Spagnolo"
 
 #: src/engine/options.cpp:24
 msgid "Russian"
-msgstr "Russe"
+msgstr "Russo"
 
 #: src/engine/options.cpp:79 src/engine/options.cpp:87
 #, c-format
 msgid "Can't Open the options file: %s\n"
-msgstr "Impossible d'ouvrir le fichier des options: %s\n"
+msgstr "Non è possibile Aprire il file di opzioni: %s\n"
 
 #: src/engine/options.cpp:91
 #, c-format
 msgid "No Options File Avaible!\n"
-msgstr "Aucun fichier d'options disponible!\n"
+msgstr "Nessun File Di Opzioni Disponibile!\n"
 
 #: src/engine/options.cpp:98
 #, c-format
 msgid "Creating Directory: %s : "
-msgstr "Dossier de création : %s : "
+msgstr "Creando La Directory: %s : "
 
 #: src/engine/options.cpp:105
 #, c-format
 msgid "Creating Options: %s\n"
-msgstr "Options de création : %s\n"
+msgstr "Creando Opzioni: %s\n"
 
 #: src/engine/options.cpp:208
 #, c-format
 msgid "Unknow option: %s\n"
-msgstr ""
+msgstr "Opzione sconosciuta: %s\n"
 
 #: src/engine/options.cpp:238
 #, c-format
 msgid "Error while writing Options: %s\n"
-msgstr "Erreur lors de l'écriture des options : %s\n"
+msgstr "Errore durante la scrittura delle Opzioni: %s\n"
 
 #: src/engine/options.cpp:424 data/weapons/types/munitions.dcl:2
 msgid "None"
-msgstr "Aucun"
+msgstr "Niente"
 
 #: src/engine/options.cpp:429
 msgid "Characters"
-msgstr "Caractères"
+msgstr "Personaggi"
 
 #: src/engine/options.cpp:434
 msgid "All"
-msgstr "Tous"
+msgstr "Tutto"
 
 #: src/engine/options.cpp:450 data/weapons/types/sizes.dcl:3
 #: data/weapons/types/weights.dcl:3
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 #: src/engine/options.cpp:453
 msgid "Pursue"
-msgstr "Poursuite"
+msgstr "Inseguire"
 
 #: src/engine/options.cpp:468
 msgid "Disabled"
-msgstr "Désactivé"
+msgstr "Disabilitato"
 
 #: src/engine/options.cpp:471
 msgid "2x"
@@ -719,71 +719,71 @@ msgstr "4x"
 
 #: src/engine/options.cpp:534
 msgid "Music Volume:"
-msgstr "Volume de la musique :"
+msgstr "Volume Musica:"
 
 #: src/engine/options.cpp:553
 msgid "Effects Volume:"
-msgstr "Volume des effets :"
+msgstr "Volume Effetti:"
 
 #: src/engine/options.cpp:572
 msgid "Language:"
-msgstr "Langue :"
+msgstr "Lingua:"
 
 #: src/engine/options.cpp:590
 msgid "Camera Mode:"
-msgstr "Mode de la caméra :"
+msgstr "Modalità Camera:"
 
 #: src/engine/options.cpp:607
 msgid "Enable Grass Effects (need particles)"
-msgstr "Activer les effets de l'herbe (demande l'effet particles)"
+msgstr ""
 
 #: src/engine/options.cpp:616
 msgid "Enable Particles Effects"
-msgstr "Activer les effets de particules"
+msgstr ""
 
 #: src/engine/options.cpp:631
 msgid "Reflections:"
-msgstr "Réflections :"
+msgstr "Riflessi:"
 
 #: src/engine/options.cpp:650
 msgid "Screen Resolution:"
-msgstr ""
+msgstr "Risoluzione Schermo:"
 
 #: src/engine/options.cpp:666
 msgid "Enable FullScreen"
-msgstr "Activer le plein écran"
+msgstr "Abilita SchermoIntero"
 
 #: src/engine/options.cpp:677
 msgid "Anti-Aliasing:"
-msgstr ""
+msgstr "Anti-Aliasing:"
 
 #: src/engine/options.cpp:694
 msgid "FarView:"
-msgstr ""
+msgstr "VistaLontana:"
 
 #: src/engine/options.cpp:709
 msgid "Enable MultiTextures"
-msgstr ""
+msgstr "Abilita MultiTexture"
 
 #: src/engine/options.cpp:929
 msgid "Some changes will only take effect upon restart."
-msgstr "Certains changement prendrons effet au redémarrage."
+msgstr "Alcuni cambiamenti avranno effetto dopo il riavvio"
 
 #: src/engine/racewindow.cpp:63
 msgid "Race"
-msgstr "Race"
+msgstr "Razza"
 
 #: src/engine/racewindow.cpp:72
 msgid "Race Description"
-msgstr "Description de la Race"
+msgstr "Descrizione Razza"
 
 #: src/engine/racewindow.cpp:81
 msgid "Race Characteristcs"
-msgstr "Caractéristique de la Race"
+msgstr "Caratteristiche Razza"
 
 #: src/engine/racewindow.cpp:142
 msgid "Race Modifiers"
-msgstr "Modificateurs de Race"
+msgstr "Modificatori Razza"
 
 #: src/engine/racewindow.cpp:159
 msgid "Race Feats"
@@ -791,66 +791,66 @@ msgstr ""
 
 #: src/engine/racewindow.cpp:179
 msgid "Race Skills"
-msgstr "Aptitudes de la race"
+msgstr "Abilità Razza"
 
 #: src/engine/skillwindow.cpp:66
 msgid "Total Free Points:"
-msgstr "Total des points restant"
+msgstr "Punti Liberi Totali:"
 
 #: src/engine/skillwindow.cpp:100
 msgid "Points:"
-msgstr "Points"
+msgstr "Punti:"
 
 #: src/engine/skillwindow.cpp:126
 msgid "Cost"
-msgstr "Coût"
+msgstr "Costo"
 
 #: src/fight/fightSystem.cpp:135
 msgid "No more enemies."
-msgstr "Plus d'autre ennemi."
+msgstr "Nessun nemico rimasto."
 
 #: src/fight/fightSystem.cpp:164
 #, c-format
 msgid "%s is dead!"
-msgstr "%s est mort !"
+msgstr "%s è morto!"
 
 #: src/fight/fightSystem.cpp:206
 #, c-format
 msgid "%s receive %d XP for killing"
-msgstr "%s recois %d XP pour avoir tué"
+msgstr "%s riceve %d Punti Esperienza per aver ucciso"
 
 #: src/fight/fightSystem.cpp:252 src/fight/fightSystem.cpp:271
 msgid "New Round"
-msgstr "Nouveau tour"
+msgstr "Nouvo Round"
 
 #: src/fight/fightSystem.cpp:257 src/fight/fightSystem.cpp:276
 msgid "Error: No Characters!"
-msgstr "Ereur : pas de caractères !"
+msgstr "Errore: Nessun Personaggio!"
 
 #: src/fight/fightSystem.cpp:357
 #, c-format
 msgid "%s attacks %s|"
-msgstr "%s attaque %s|"
+msgstr "%s attacca %s|"
 
 #: src/fight/initiative.cpp:40
 #, c-format
 msgid "%s rolls initiative: "
-msgstr "Jet d'initiative de %s : "
+msgstr ""
 
 #: src/gui/farso.cpp:17
 #, c-format
 msgid "Argh! Can't init SDL!\n"
-msgstr "Impossible d'initialiser SDL !\n"
+msgstr ""
 
 #: src/gui/farso.cpp:84
 #, c-format
 msgid "Oxi! Can't ajust video mode: %s!\n"
-msgstr "Impossible d'ajuster le mode vidéo: %s !\n"
+msgstr ""
 
 #: src/gui/farso.cpp:88
 #, c-format
 msgid "Trying again without AntiAliasing.\n"
-msgstr ""
+msgstr "Provando ancora senza AntiAliasing.\n"
 
 #: src/gui/farso.cpp:96
 #, c-format
@@ -865,114 +865,111 @@ msgstr ""
 #: src/gui/dntfont.cpp:91
 #, c-format
 msgid "Can't open font file: %s\n"
-msgstr ""
+msgstr "Non è possibile aprire il file di caratteri: %s\n"
 
 #: src/gui/window.cpp:174
 msgid "Maximize"
-msgstr "Agrandir"
+msgstr "Massimizza"
 
 #: src/gui/picture.cpp:51
 #, c-format
 msgid "Can't open image: %s\n"
-msgstr "Impossible d'ouvrir l'image: %s\n"
+msgstr "Non è possibile aprire l'immagine: %s\n"
 
 #: data/comics/intro/intro.dcb:15
 msgid "Once Upon a time, there's a happy university called UFMG..."
-msgstr ""
+msgstr "C'era una volta un'allegra università chiamata UFMG..."
 
 #: data/comics/intro/intro.dcb:25
 msgid "People there used to live peacefull lives"
-msgstr "Les gens vivaient là des vies paisibles"
+msgstr "La gente del posto viveva vite tranquille"
 
 #: data/comics/intro/intro.dcb:35
 msgid ""
 "(except the medicine students, who had the habit of sacrifice one rookie per "
 "year)"
 msgstr ""
-"(excepté les étudiants en médecine, qui ont l'habitude de sacrifier un bleu "
-"par an)"
+"(tranne gli studenti di medicina, che avevano l'abitudine di sacrificare un "
+"novellino per anno)"
 
 #: data/comics/intro/intro.dcb:45
 msgid "When something happened..."
-msgstr "Quand quelque chose arriva..."
+msgstr "Quando qualcosa accadde..."
 
 #: data/comics/intro/intro.dcb:47
 msgid "a big explosion, with unknow causes."
-msgstr "une grande explosion, avec des causes inconnues."
+msgstr "una grossa esplosione, di cause sconosciute."
 
 #: data/comics/intro/intro.dcb:61
 msgid ""
 "It made the happy and peacefull city called Belo Horizonte be know as "
 "Horrivel Horizonte."
 msgstr ""
-"Cela fit connaître la joyeuse et paisible ville de Belo Horizonte sous le "
-"nom de Horrivel Horizonte."
+"Ha reso la felice e pacifica città chiamata Belo Horizonte conosciuta come "
+"Horrivel Horizonte."
 
 #: data/comics/intro/intro.dcb:71
 msgid "Trees became alive,"
-msgstr "Les arbres devinrent vivants,"
+msgstr "Gli alberi divennero vivi."
 
 #: data/comics/intro/intro.dcb:73
 msgid "Ameivas became agressive"
-msgstr "les améives devinrent agressives"
+msgstr "Ameivas diventò aggressivo"
 
 #: data/comics/intro/intro.dcb:75
 msgid "and rats became blood thirsty."
-msgstr "et les rats devinrent assoiffés de sang."
+msgstr "e i topi divennero assetati di sangue."
 
 #: data/comics/intro/intro.dcb:85
 msgid ""
 "In this chaotic scene, emerged the main race that would dominate the land:"
 msgstr ""
-"Dans ce décor chaotique émergea le race principale qui allait dominer la "
-"région:"
+"In questa scena caotica, è emersa la razza principale che avrebbe dominato "
+"il paese:"
 
 #: data/comics/intro/intro.dcb:87
 msgid "UNIVERSITY STUDENTS!"
-msgstr "LES ETUDIANTS UNIVERSITAIRES!"
+msgstr "STUDENTI UNIVERSITARI!"
 
 #: data/comics/intro/intro.dcb:89
 msgid "who desired, at all costs, obtain their legendary levels of knowledge."
 msgstr ""
-"qui désiraient, à tous prix, obtenir leurs légendaires niveaux intellectuels."
+"che desideravano ottenere ad ogni costo i loro leggendari livelli di "
+"conoscenza."
 
 #: data/comics/intro/intro.dcb:103
 msgid ""
 "On this doomed world, tells the tales spoken mouth by mouth by the risen "
 "journalists,"
 msgstr ""
-"Dans ce monde apocalyptique, racontent les contes rapportés de bouche à "
-"oreille par les journalistes,"
+"In questo mondo maledetto, racconta le storie trasmesse oralmente dai "
+"giornalisti apparsi,"
 
 #: data/comics/intro/intro.dcb:113
 msgid "the first man who walked and claimed for his right of a graduation"
-msgstr ""
-"le premier homme qui marcha et clama ses droits à une remise de diplôme"
+msgstr "il primo uomo che marciò e discusse per il suo diritto a una laurea"
 
 #: data/comics/intro/intro.dcb:123
 msgid "was Logan."
-msgstr "fut Logan."
+msgstr "era Logan."
 
 #: data/comics/intro/intro.dcb:125
 msgid "And that's how the tale began..."
-msgstr "Et voici comment le conte commence..."
+msgstr "Ed ecco come la storia cominciò..."
 
 #: data/alignment/neutrocaotico.ali:1
 msgid "Chaotic Neutral"
-msgstr "Chaotique Neutre"
+msgstr "Neutrale Caotico"
 
 #: data/alignment/neutrocaotico.ali:2
 msgid ""
 "   Chaotic Neutral creatures sometimes are free software adepts, sometimes "
 "proprietary software adepts, depending on their daily humor."
 msgstr ""
-"   Les créatures Chaotique Neutre sont parfois des adeptes du logiciel "
-"gratuit, parfois des adeptes du logiciel propriétaire. Tout dépend de leur "
-"humeur du jour."
 
 #: data/alignment/sllibertario.ali:1
 msgid "Libertarian Free-Software"
-msgstr ""
+msgstr "Software-Libero Liberitario"
 
 #: data/alignment/sllibertario.ali:2
 msgid ""
@@ -984,7 +981,7 @@ msgstr ""
 
 #: data/alignment/neutrocentrista.ali:1
 msgid "Center Neutral"
-msgstr "Centre Neutre"
+msgstr "Neutrale Centrale"
 
 #: data/alignment/neutrocentrista.ali:2
 msgid ""
@@ -994,7 +991,7 @@ msgstr ""
 
 #: data/alignment/spcaotico.ali:1
 msgid "Chaotic Proprietary-Software"
-msgstr ""
+msgstr "Software-Proprietario Caotico"
 
 #: data/alignment/spcaotico.ali:2
 msgid ""
@@ -1004,7 +1001,7 @@ msgstr ""
 
 #: data/alignment/neutrofuncional.ali:1
 msgid "Functional Neutral"
-msgstr ""
+msgstr "Neutrale Funzionale"
 
 #: data/alignment/neutrofuncional.ali:2
 msgid ""
@@ -1015,7 +1012,7 @@ msgstr ""
 
 #: data/alignment/spcapitalista.ali:1
 msgid "Capitalist Proprietary-Software"
-msgstr ""
+msgstr "Software-Proprietario Capitalista"
 
 #: data/alignment/spcapitalista.ali:2
 msgid ""
@@ -1026,7 +1023,7 @@ msgstr ""
 
 #: data/alignment/slcaotico.ali:1
 msgid "Chaotic Free-Software"
-msgstr "Logiciel Libre Chaotique"
+msgstr "Software-Libero Caotico"
 
 #: data/alignment/slcaotico.ali:2
 msgid ""
@@ -1036,7 +1033,7 @@ msgstr ""
 
 #: data/alignment/spneutro.ali:1
 msgid "Neutral Proprietary-Software"
-msgstr ""
+msgstr "Software-Proprietario Neutrale"
 
 #: data/alignment/spneutro.ali:2
 msgid ""
@@ -1046,7 +1043,7 @@ msgstr ""
 
 #: data/alignment/slcentrista.ali:1
 msgid "Center Free-Software"
-msgstr ""
+msgstr "Software-Libero Centrale"
 
 #: data/alignment/slcentrista.ali:2
 msgid ""
@@ -1058,13 +1055,13 @@ msgstr ""
 
 #: data/classes/administration.cls:1
 msgid "Administration Student"
-msgstr "Etudiant en Administration"
+msgstr "Studente Di Amministrazione"
 
 #: data/classes/administration.cls:2
 msgid "'Steel with steel is bad...'|(Zamboy, future Administration Student)"
 msgstr ""
-"\"L'acier avec l'acier est mal...\"|(Zamboy, futur Etudiant en "
-"Administration)"
+"'Acciaio con acciaio è cattivo...'|(Zamboy, futuro Studente Di "
+"Amministrazione)"
 
 #: data/classes/administration.cls:3
 msgid ""
@@ -1081,9 +1078,6 @@ msgid ""
 "Administration Students, definitively, aren't knowledge by their intelectual "
 "attributes. (Am I wrong Elis Regina?). So, they receive -2 of Intelligence."
 msgstr ""
-"Les Etudiants en Administration ne sont définitivement pas intelligents de "
-"par leur capacités intellectuelles. (Ai-je tord Elis Regina?). Ils reçoivent "
-"donc -2 en Intelligence."
 
 #: data/classes/administration.cls:9
 msgid "It's a really dumb ass to find some of them in group. -4 of Charism."
@@ -1113,13 +1107,10 @@ msgid ""
 "assimilation of other's opinions, and also to ask in a concise way some "
 "question, so they receive -6 of Listen."
 msgstr ""
-"Chacun sait que les Etudiants en Administration ont de nombreuses "
-"difficultés dans l'assimilation de l'opinion des autres ainsi que pour poser "
-"des questions de manière concise, ils reçoivent donc -6 en Ecoute."
 
 #: data/classes/medician.cls:1
 msgid "Medicine Student"
-msgstr "Etudiant en médecine"
+msgstr "Studente Di Medicina"
 
 #: data/classes/medician.cls:2
 msgid ""
@@ -1149,16 +1140,12 @@ msgid ""
 "By the dedication to the studies, the Medicine Student receive +2 of "
 "Intelligence."
 msgstr ""
-"Par le dévouement pour leurs études, les élèves en médecine reçoivent +2 en "
-"intelligence."
 
 #: data/classes/medician.cls:11
 msgid ""
 "Since their attention is only for the books, these creatures haven't any "
 "cleverness, receiving -4 of Wisdom."
 msgstr ""
-"Comme leur attention n'est dirigée que sur les livres, ces créatures n'ont "
-"aucune vivacité d'esprit, recevant -4 en Sagesse."
 
 #: data/classes/medician.cls:13
 msgid ""
@@ -1179,22 +1166,22 @@ msgstr ""
 
 #: data/classes/medician.cls:19
 msgid "They receive -2 of Diplomacy when talking to other races."
-msgstr "Ils reçoivent -2 en Diplomatie quand ils parlent aux autres races."
+msgstr ""
 
 #: data/classes/medician.cls:21
 msgid "They receive -4 of Diplomacy when talking to Physiotherapy Students."
 msgstr ""
-"Ils reçoivent -4 en Diplomatie lorsqu'ils parlent avec des Etudiants en "
-"Physiothérapie."
 
 #: data/classes/biology.cls:1
 msgid "Biology Student"
-msgstr "Etudiant en biologie"
+msgstr "Studente Di Biologia"
 
 #: data/classes/biology.cls:2
 msgid ""
 "'This place is filled with arthropodes!'|(Bin, that time, a Biology Student)"
 msgstr ""
+"'Questo posto è riempito di antropodi!'|(Bin, quella volta, uno Studente Di "
+"Biologia)"
 
 #: data/classes/biology.cls:3
 msgid ""
@@ -1216,8 +1203,6 @@ msgid ""
 "-1 of Strength, since their muscles atrophy after spent 12 hours inert "
 "observing the ameiva's coupling rituals."
 msgstr ""
-"-1 en Force, leurs muscles s'étant atrophiés après les 12 heures d'inerties "
-"à observer le rituel d'accouplement des améives."
 
 #: data/classes/biology.cls:11
 msgid ""
@@ -1234,12 +1219,10 @@ msgid ""
 "For the hard work observing ameivas, the Biology Student receveis +2 of "
 "furtivity."
 msgstr ""
-"Grâce au dur labeur durant l'observation des améives, l'Etudiant en Biologie "
-"reçoit +2 en furtivité."
 
 #: data/classes/music.cls:1
 msgid "Music Student"
-msgstr "Etudiant en Musique"
+msgstr "Studente Di Musica"
 
 #: data/classes/music.cls:2
 msgid ""
@@ -1272,16 +1255,12 @@ msgstr ""
 #: data/classes/music.cls:9
 msgid "-1 of Constitution for the hours spent in a closed ambient, playing."
 msgstr ""
-"-1 en Constitution à cause des heures passées à jouer dans une atmosphère "
-"fermée."
 
 #: data/classes/music.cls:11
 msgid ""
 "+2 of Dexterity for having the ability to play a Gb7M or a Am#5/7/9 on  "
 "their strange musical instrument."
 msgstr ""
-"+2 en Dextérité pour pouvoir jouer un Gb7M ou un Am#5/7/9 sur leur étrange "
-"instrument de musique."
 
 #: data/classes/music.cls:13
 msgid ""
@@ -1291,7 +1270,7 @@ msgstr ""
 
 #: data/classes/music.cls:15
 msgid "+2 of Charism for the capacity to joy people."
-msgstr "+2 au Carisme for leurs capacité à rendre les gens joyeux."
+msgstr ""
 
 #: data/classes/music.cls:17
 msgid ""
@@ -1299,9 +1278,6 @@ msgid ""
 "have incredible capacity to play their bizarre instrument, receiving +8 of "
 "bonus when playing it."
 msgstr ""
-"A cause du travail intensif et difficile depuis qu'ils sont enfants, les "
-"Etudiants en Musique ont la capacité incroyable de pouvoir jouer de leurs "
-"étranges instruments, recevant +8 de bonus lorsqu'ils en jouent."
 
 #: data/classes/music.cls:19
 msgid ""
@@ -1311,7 +1287,7 @@ msgstr ""
 
 #: data/classes/compsci.cls:1
 msgid "Computer Science Student"
-msgstr "Etudiant en informatique"
+msgstr "Studente Di Informatica"
 
 #: data/classes/compsci.cls:2
 msgid ""
@@ -1333,15 +1309,12 @@ msgstr ""
 #: data/classes/compsci.cls:7
 msgid "Since they have to be self-teachers, they receive +2 of Wisdom."
 msgstr ""
-"Comme ils doivent apprendre en autodidacte, ils reçoivent +2 en Sagesse."
 
 #: data/classes/compsci.cls:9
 msgid ""
 "By their natural tendency to be qualified as Geeks, being one or not, they "
 "receive -1 of Charism."
 msgstr ""
-"A cause de leur tendance naturelle à être qualifiés de Geeks, qu'ils en "
-"soient ou non, ils reçoivent -1 en Charisme."
 
 #: data/classes/compsci.cls:11
 msgid ""
@@ -1353,15 +1326,14 @@ msgstr ""
 msgid ""
 "Also receive -2 of reflexes for the lot of time spent in front of a computer."
 msgstr ""
-"Reçoivent aussi -2 de réflex pour tout le temps passé devant un ordinateur."
 
 #: data/classes/philosophy.cls:1
 msgid "Philosophy Student"
-msgstr "Etudiant en philosophie"
+msgstr "Studente Di Filosofia"
 
 #: data/classes/philosophy.cls:2
 msgid "'Better die by vodka than by boredom!'|(Vladmir Maiakovsky)"
-msgstr "'Plutôt mourir par la vodka que par l'ennui!'|(Vladmir Maiakovsky)"
+msgstr "'Meglio morire di vodka che di noia!'|(Vladimir Maiakovsky)"
 
 #: data/classes/philosophy.cls:3
 msgid ""
@@ -1371,57 +1343,40 @@ msgid ""
 "one and other, the Philosophy Student become the bohemian master and full of "
 "hot air."
 msgstr ""
-"Insatisfait de son envie de ne rien faire de leur vie, l'Etudiant en "
-"Philosophie entre à l'Université avec un seul objectif: le perfectionnement "
-"de ce je-m'en-foutisme. Adepte de la bière et de l'inactivité, il mixe son "
-"temps entre tout et rien, devenant un véritable maître bohémien. Il n'est "
-"absolument pas fiable."
 
 #: data/classes/philosophy.cls:7
 msgid ""
 "Receive +2 of Constitution, because their body is barely of a monk, fully "
 "usual to the alcohol."
 msgstr ""
-"Reçoivent +2 en Constitution, car leur corps est proche de celui du moine, "
-"fortement habitué à l'alcool."
 
 #: data/classes/philosophy.cls:9
 msgid ""
 "Since they only study complex things, the Philosophy Student easily forget "
 "all pratical and common life things, receiving -2 of Wisdom."
 msgstr ""
-"Puisqu 'ils ne font qu' étudier des choses complexes, les étudiants en "
-"philosophie oublient façilement les choses pratiques et communes de la vie, "
-"reçevants -2 en Sagesse."
 
 #: data/classes/philosophy.cls:11
 msgid ""
 "For spending almost all their student's life in pubs, the Philosophy Student "
 "acquire some kind of aptitude to deal with others, receiving +2 of Charisma."
 msgstr ""
-"Passant à peu près tout le temps de sa vie d'étudiant dans les pubs, "
-"l'Etudiant en Philosophie acquiers certaine aptitude à se créer des "
-"relations, recevant +2 en Charisme."
 
 #: data/classes/philosophy.cls:13
 msgid ""
 "The Philosophy Student receive +4 of Knowledge (Classic) for the few they "
 "learn at university."
 msgstr ""
-"L'Etudiant en Philosophie reçoit +4 en Intelligence (classique) pour le peu "
-"qu'il apprend à l'université."
 
 #: data/classes/philosophy.cls:15
 msgid "Receive +4 of Bohemia, obviously."
-msgstr "Reçoivent notamment +4 en Bohême."
+msgstr ""
 
 #: data/classes/philosophy.cls:17
 msgid ""
 "Receive -4 of all Dexterity related tests, one time they are frequently "
 "drunk."
 msgstr ""
-"Puisqu'ils sont régulièrement ivres, ils reçoivent -4 à tout les tests "
-"relatifs à la Dextérité."
 
 #: data/classes/philosophy.cls:19
 msgid ""
@@ -1431,7 +1386,7 @@ msgstr ""
 
 #: data/classes/journalism.cls:1
 msgid "Journalism Student"
-msgstr "Etudiant en journalisme"
+msgstr "Studente Di Giornalismo"
 
 #: data/classes/journalism.cls:2
 msgid ""
@@ -1439,9 +1394,6 @@ msgid ""
 "isn't God, convinces you that he is'|(Matheus de Paula, ex-Journalism "
 "student)"
 msgstr ""
-"'Le juge pense être Dieu, le Toubib joue à Dieu. Le journaliste, s'il n'est "
-"pas Dieu, vous convainc qu'il l'est'|(Matheus de Paula, ancien Etudiant en "
-"Journalisme)"
 
 #: data/classes/journalism.cls:3
 msgid ""
@@ -1458,17 +1410,12 @@ msgid ""
 "As they usually are deep involved on mental work, these organisms don't find "
 "time or will to exercise their muscles, receiving -2 of Strength."
 msgstr ""
-"Comme ils sont généralement très appliqués dans le travail mental, ces "
-"organismes n'ont pas trouvé le temps ou la volonté de faire travailler leurs "
-"muscles, ils reçoivent -2 en Force."
 
 #: data/classes/journalism.cls:9
 msgid ""
 "Journalism students have a 'know it all' need, increasing by 2 their "
 "intelligence."
 msgstr ""
-"Les étudiants en journalisme ont un besoin de 'tout savoir', ce qui augmente "
-"de 2 leurs intelligence."
 
 #: data/classes/journalism.cls:11
 msgid ""
@@ -1483,37 +1430,28 @@ msgid ""
 "d100. If the result is between 1 and 99, he can't be neutral. Else, he can "
 "be a Journalism Student of any alingment."
 msgstr ""
-"Impartialité: Avant de choisir cette classe, l'Etudiant en Journalisme lance "
-"un D100. Si le résultat est entre 1 et 99, il ne peut pas être neutre. "
-"Sinon, il peut être un Etudiant en Journalisme de n'importe quel alignement."
 
 #: data/classes/journalism.cls:15
 msgid ""
 "Journalism students neglects any penalties to their social tests, for being "
 "able to survive in turbulent environments."
 msgstr ""
-"Les Etudiants en Journalisme négligent toutes les pénalités à leurs tests "
-"sociaux, car ils sont capable de survivre dans des environnements turbulents."
 
 #: data/classes/journalism.cls:17
 msgid ""
 "As long as the Journalism Student speaks the targets language, he'll never "
 "be ignored."
 msgstr ""
-"Aussi longtemps que l'Etudiant en Journalisme parle le langage de la cible, "
-"il ne sera pas ignoré."
 
 #: data/classes/physicaled.cls:1
 msgid "Physical Education Student"
-msgstr "étudiant en éducation physique"
+msgstr "Studente Di Educazione Fisica"
 
 #: data/classes/physicaled.cls:2
 msgid ""
 "'No! The swimming class is too complex!'|(Typical Physical Education Student "
 "thought)"
 msgstr ""
-"'Non! le cours de natation est trop complexe!'(réflèxion typique d'un élève "
-"en éducation physique)"
 
 #: data/classes/physicaled.cls:3
 msgid ""
@@ -1525,28 +1463,18 @@ msgid ""
 "stars in the soccer but aren't distinguished students of mathematics (hardly "
 "knowing number's fundamentals)."
 msgstr ""
-"Ayant généralement \"Football\" et \"Basketball\" comme cours, les fervents "
-"(dans le sens physique du terme) Etudiants en Education Physique sont des "
-"choses qui font passer la force musculaire avant tout. Avec trop de muscles "
-"dans le cerveau, ces Etudiants possède rien moins qu'une résistance "
-"surnaturelle dans la tête - en échange de quelques points d'Intelligence. "
-"Finalement, ces garçons sont des stars au football mais ne sont pas des "
-"étudiants distingués en math (ils savent difficilement les rudiments du "
-"calcul)."
 
 #: data/classes/physicaled.cls:7
 msgid "Receive +3 of Strength, due to the lot of hours kicking a ball."
 msgstr ""
-"Ils reçoivent +3 en Force, dûs à toutes les heures passer à frapper une "
-"balle."
 
 #: data/classes/physicaled.cls:9
 msgid "+2 of Dexterity, due to the hours fluctuating in the water."
-msgstr "+2 en Dextérité pour les heures passées à tanguer entre les vagues."
+msgstr ""
 
 #: data/classes/physicaled.cls:11
 msgid "+4 of Constitution for hours running in circles."
-msgstr "+4 en Constitution pour les heures passées à courir en rond."
+msgstr ""
 
 #: data/classes/physicaled.cls:13
 msgid "-6 of Intelligence since they abandoned the books in a remote past."
@@ -1554,7 +1482,7 @@ msgstr ""
 
 #: data/classes/physicaled.cls:15
 msgid "-6 of Widow, by the same reason."
-msgstr "-6 en sagesse, pour les mêmes raisons."
+msgstr ""
 
 #: data/classes/physicaled.cls:17
 msgid ""
@@ -1562,17 +1490,12 @@ msgid ""
 "Swimming, Soccer, Basketball, finally, sports  in  general or anything that "
 "emanates physical power."
 msgstr ""
-"L'Etudiant en Education Physique reçoit +4 en Saut, Escalade, Natation, "
-"Football, Basketball, et finalement, dans tous les sports et toutes les "
-"activités qui émanent de la force physique..."
 
 #: data/classes/physicaled.cls:19
 msgid ""
 "Receive -5 on all Knowledges by the simple fact that they have no idea of "
 "the meaning of this word."
 msgstr ""
-"Ils reçoivent -5 dans toutes les Connaissances pour le simple fait qu'ils "
-"n'ont aucune idée du sens de ce mot."
 
 #: data/classes/physicaled.cls:21
 msgid "-4 of Hide, since they are coarse hulks."
@@ -1581,12 +1504,10 @@ msgstr ""
 #: data/classes/physicaled.cls:23
 msgid "-2 of Listen, therefore their muscles take all ear's openings."
 msgstr ""
-"-2 en Ecoute, puisque leurs muscles prennent toutes les ouvertures de leurs "
-"oreilles."
 
 #: data/classes/physicaled.cls:25
 msgid "The Student receives +1 of Natural Armor."
-msgstr "Les étudiants reçoivent +1 en Armure Naturelle."
+msgstr ""
 
 #: data/classes/physicaled.cls:27
 msgid ""
@@ -1604,8 +1525,6 @@ msgstr ""
 msgid ""
 "Receives -3 in Direction cause they usually get lost among their own muscles."
 msgstr ""
-"Ils reçoivent -3 en Direction car ils se perdent généralement dans leurs "
-"propres muscles."
 
 #: data/classes/physicaled.cls:33
 msgid ""
@@ -1630,12 +1549,10 @@ msgid ""
 "Since extremely limited on its Skills, the Physical Education Student don't "
 "have any limit on Sports graduation."
 msgstr ""
-"Parce qu'il est extrêmement limité dans ses Compétences, l'Etudiant en "
-"Education Physique n'a aucune limite de point en Sports."
 
 #: data/classes/lawner.cls:1
 msgid "Law Student"
-msgstr "Etudiant en droit"
+msgstr "Studente Di Legge"
 
 #: data/classes/lawner.cls:2
 msgid ""
@@ -1659,8 +1576,6 @@ msgid ""
 "For usually being stupids among anything that isn't related with money, they "
 "receive -2 of Intelligence."
 msgstr ""
-"Stupides dans tous les domaines n'étant pas relatifs à l'argent, ils "
-"reçoivent -2 en Intelligence."
 
 #: data/classes/lawner.cls:9
 msgid ""
@@ -1672,8 +1587,6 @@ msgstr ""
 msgid ""
 "By can modify any situation to make money from it, receive +2 of Wisdom."
 msgstr ""
-"Ils réussissent à retourner chaque situation pour en tirer de l'argent, "
-"recevant +2 en Sagesse."
 
 #: data/classes/lawner.cls:13
 msgid ""
@@ -1683,7 +1596,7 @@ msgstr ""
 
 #: data/classes/physiotherapy.cls:1
 msgid "Physiotherapy Student"
-msgstr "Etudiant en Physiothérapie"
+msgstr "Studente Di Fisioterapia"
 
 #: data/classes/physiotherapy.cls:2
 msgid ""
@@ -1712,16 +1625,12 @@ msgid ""
 "All Physiotherapy Student lost one or more years studing to be a Medicine "
 "Student, receiving +1 of Intelligence."
 msgstr ""
-"Tous les Etudiants en Physiothérapie perdent un an ou plus à étudier pour "
-"devenir Etudiant en Médecine, recevant +1 en Intelligence."
 
 #: data/classes/physiotherapy.cls:11
 msgid ""
 "Because the effort to be a Medicine Student, the little Physioterapist "
 "inherit the penalty of -2 of Wisdom."
 msgstr ""
-"A cause de tous les efforts pour être Etudiant en Médecine, le petit "
-"Physiothérapeute hérite de la pénalité de -2 en Sagesse."
 
 #: data/classes/physiotherapy.cls:13
 msgid ""
@@ -1745,7 +1654,7 @@ msgstr ""
 
 #: data/classes/mechanic.cls:1
 msgid "Mechanical Engineering Student"
-msgstr "étudiant en ingénierie mécanique"
+msgstr "Studente Di Ingegneria Meccanica"
 
 #: data/classes/mechanic.cls:2
 msgid ""
@@ -1798,7 +1707,7 @@ msgstr ""
 
 #: data/classes/to.cls:1
 msgid "Occupational Therapy Student"
-msgstr ""
+msgstr "Studente Di Terapia Occupazionale"
 
 #: data/classes/to.cls:2
 msgid ""
@@ -1852,7 +1761,7 @@ msgstr ""
 
 #: data/classes/to.cls:19
 msgid "And +5 of Intimidate for the same reason."
-msgstr "Et +5 en intimidation pour les mêmes raisons"
+msgstr ""
 
 #: data/classes/to.cls:21
 msgid ""
@@ -1862,7 +1771,7 @@ msgstr ""
 
 #: data/races/autista.rca:1
 msgid "Strange Autistic"
-msgstr ""
+msgstr "Strano Autistico"
 
 #: data/races/autista.rca:2
 msgid ""
@@ -1901,7 +1810,7 @@ msgstr ""
 
 #: data/races/boy.rca:1
 msgid "Boy / Paty"
-msgstr ""
+msgstr "Ragazzo / Paty"
 
 #: data/races/boy.rca:2
 msgid ""
@@ -1945,11 +1854,11 @@ msgstr ""
 
 #: data/races/gotico.rca:1
 msgid "Gothic"
-msgstr ""
+msgstr "Gotico"
 
 #: data/races/gotico.rca:2
 msgid "'I have a problem...'|(Creepy Susie)"
-msgstr "'j'ai un problème...'|(Creepy Susie)"
+msgstr "'Ho un problema...'|(Creepy Susie)"
 
 #: data/races/gotico.rca:3
 msgid ""
@@ -1978,6 +1887,8 @@ msgid ""
 "'They say that they want to save nature, but the only thing they do is smoke "
 "maryjane and smells bad!'|(Eric Cartman)"
 msgstr ""
+"'Dicono che vogliono salvare la natura, ma l'unica cosa che fanno è fumare "
+"marijuana e puzzano!'|(Eric Cartman)"
 
 #: data/races/hippie.rca:3
 msgid ""
@@ -2002,15 +1913,13 @@ msgstr ""
 
 #: data/races/humano.rca:1
 msgid "Common Human"
-msgstr "Humain Commun"
+msgstr "Umano Comune"
 
 #: data/races/humano.rca:2
 msgid ""
 "'Satana sum et nihil humanum a me alienum puto'|(Demon talking to Ivan "
 "Karamazov)"
 msgstr ""
-"'Satana sum et nihil humanum a me alienum puto'|(Démon parlant à Ivan "
-"Karamazov)"
 
 #: data/races/humano.rca:3
 msgid ""
@@ -2024,7 +1933,7 @@ msgstr ""
 
 #: data/races/llama.rca:1
 msgid "Human Llama"
-msgstr ""
+msgstr "Lama Umano"
 
 #: data/races/llama.rca:2
 msgid "'Is he insane??'|(Oktober Fest's Queen, while looking to a human llama)"
@@ -2049,11 +1958,11 @@ msgstr ""
 
 #: data/races/metaleiro.rca:1
 msgid "Headbanger"
-msgstr ""
+msgstr "Headbanger"
 
 #: data/races/metaleiro.rca:2
 msgid "'Dark...'|(Anamatheus Iskurium)"
-msgstr "'Obscure...'|(Anamatheus Iskurium)"
+msgstr ""
 
 #: data/races/metaleiro.rca:3
 msgid ""
@@ -2075,7 +1984,7 @@ msgstr ""
 
 #: data/races/mutante.rca:1
 msgid "Mutant Human Cricket"
-msgstr ""
+msgstr "Grillo Umano Mutante"
 
 #: data/races/mutante.rca:2
 msgid "'A tasty Cricket, please!'|(Logan in a barbecue restaurant)"
@@ -2102,7 +2011,7 @@ msgstr ""
 
 #: data/races/skinhead.rca:1
 msgid "Skinhead Maniac"
-msgstr ""
+msgstr "Maniaco Skinhead"
 
 #: data/races/skinhead.rca:2
 msgid ""
@@ -2137,7 +2046,7 @@ msgstr ""
 
 #: data/feats/im_bombadinho.fta:1
 msgid "I am Bombadinho"
-msgstr ""
+msgstr "Io sono Bombadinho"
 
 #: data/feats/im_bombadinho.fta:2
 msgid ""
@@ -2155,7 +2064,7 @@ msgstr ""
 
 #: data/feats/powerfull_esophagus.fta:1
 msgid "Powerful Esophagus"
-msgstr ""
+msgstr "Esofago Potente"
 
 #: data/feats/powerfull_esophagus.fta:2
 msgid ""
@@ -2166,15 +2075,15 @@ msgstr ""
 
 #: data/feats/ranged_attack.fta:1
 msgid "Ranged Attack"
-msgstr "Attaque à distance"
+msgstr "Attacco Intervallato"
 
 #: data/feats/ranged_attack.fta:2
 msgid "Character's ranged attack."
-msgstr "Attaque à distance du personnage"
+msgstr ""
 
 #: data/skills/acrobacias.ski:1
 msgid "Acrobatics"
-msgstr ""
+msgstr "Acrobatica"
 
 #: data/skills/acrobacias.ski:2
 msgid ""
@@ -2186,7 +2095,7 @@ msgstr ""
 
 #: data/skills/adestrarbichos.ski:1
 msgid "Train Animals"
-msgstr ""
+msgstr "Allena Animali"
 
 #: data/skills/adestrarbichos.ski:2
 msgid ""
@@ -2196,7 +2105,7 @@ msgstr ""
 
 #: data/skills/arrombar.ski:1
 msgid "Burglarize"
-msgstr ""
+msgstr "Scassinare"
 
 #: data/skills/arrombar.ski:2
 msgid ""
@@ -2206,7 +2115,7 @@ msgstr ""
 
 #: data/skills/artedoescape.ski:1
 msgid "Art of the Escape"
-msgstr "L' art de s'échapper"
+msgstr "Arte della Fuga"
 
 #: data/skills/artedoescape.ski:2
 msgid ""
@@ -2226,7 +2135,7 @@ msgstr ""
 
 #: data/skills/beber.ski:1
 msgid "Drinking"
-msgstr ""
+msgstr "Bere"
 
 #: data/skills/beber.ski:2
 msgid ""
@@ -2236,7 +2145,7 @@ msgstr ""
 
 #: data/skills/blefar.ski:1
 msgid "Bluff"
-msgstr ""
+msgstr "Bluff"
 
 #: data/skills/blefar.ski:2
 msgid ""
@@ -2245,7 +2154,7 @@ msgstr ""
 
 #: data/skills/boemia.ski:1
 msgid "Bohemia"
-msgstr ""
+msgstr "Bohemia"
 
 #: data/skills/boemia.ski:2
 msgid ""
@@ -2275,7 +2184,7 @@ msgstr ""
 
 #: data/skills/cnhgeral.ski:1
 msgid "Knowledge: (General)"
-msgstr ""
+msgstr "Conoscenza: (Generale)"
 
 #: data/skills/cnhgeral.ski:2
 msgid ""
@@ -2286,7 +2195,7 @@ msgstr ""
 
 #: data/skills/cnhsofrimento.ski:1
 msgid "Knowledge: (Suffer)"
-msgstr ""
+msgstr "Conoscenza: (Sofferenza)"
 
 #: data/skills/cnhsofrimento.ski:2
 msgid ""
@@ -2307,7 +2216,7 @@ msgstr ""
 
 #: data/skills/conducao.ski:1
 msgid "Conduction(Vehicle)"
-msgstr "Conduite (Véhicules)"
+msgstr "Conduzione(Veicolo)"
 
 #: data/skills/conducao.ski:2
 msgid ""
@@ -2326,7 +2235,7 @@ msgstr ""
 
 #: data/skills/curar.ski:1
 msgid "Heal"
-msgstr "Soin"
+msgstr "Cura"
 
 #: data/skills/curar.ski:2
 msgid ""
@@ -2336,15 +2245,13 @@ msgstr ""
 
 #: data/skills/desmentir.ski:1
 msgid "See Lies"
-msgstr "Déceler les Mensonges"
+msgstr "Guarda Bugie"
 
 #: data/skills/desmentir.ski:2
 msgid ""
 "This skill is tested when the creature is being cheated. You can resist a "
 "Bluff with this feature."
 msgstr ""
-"Cette compétence est lancée quand une créature triche. Vous pouvez résister "
-"au Bluff avec cette capacité."
 
 #: data/skills/destreza.ski:2
 msgid ""
@@ -2357,7 +2264,7 @@ msgstr ""
 
 #: data/skills/diplomacia.ski:1
 msgid "Diplomacy"
-msgstr "Diplomatie"
+msgstr "Diplomazia"
 
 #: data/skills/diplomacia.ski:2
 msgid ""
@@ -2368,7 +2275,7 @@ msgstr ""
 
 #: data/skills/discursoprof.ski:1
 msgid "Professional Speech"
-msgstr ""
+msgstr "Discorso Professionale"
 
 #: data/skills/discursoprof.ski:2
 msgid "Measures the fluency and eloquency of the character's usual words."
@@ -2376,16 +2283,15 @@ msgstr ""
 
 #: data/skills/disfarces.ski:1
 msgid "Disguises"
-msgstr "Déguisement"
+msgstr ""
 
 #: data/skills/disfarces.ski:2
 msgid "Measures the creature skill to disguise (and be unrecognizable)."
 msgstr ""
-"Indique la capacité de la créature à se déguiser (et à être méconnaissable)."
 
 #: data/skills/equilibrio.ski:1
 msgid "Balance"
-msgstr "Equilibre"
+msgstr "Bilanciamento"
 
 #: data/skills/equilibrio.ski:2
 msgid ""
@@ -2395,39 +2301,35 @@ msgstr ""
 
 #: data/skills/escalar.ski:1
 msgid "Climb"
-msgstr "Escalade"
+msgstr "Arrampicata"
 
 #: data/skills/escalar.ski:2
 msgid "Measure the organism's capacity to climb accented surfaces."
-msgstr "Indique la capacité de la créature à grimper des surface raides."
+msgstr ""
 
 #: data/skills/esconder.ski:1
 msgid "Hide"
-msgstr "Dissimulation"
+msgstr "Nascondersi"
 
 #: data/skills/esconder.ski:2
 msgid ""
 "Is the skill to put yourself on a buch or hide at the shadows, with the aim "
 "to not be spoted."
 msgstr ""
-"C'est la compétence vous permettant de vous mettre dans un buisson ou de "
-"vous cacher dans l'ombre dans l'espoir de ne pas être découvert."
 
 #: data/skills/falaridioma.ski:1
 msgid "Speak Language"
-msgstr ""
+msgstr "Parlare Linguaggio"
 
 #: data/skills/falaridioma.ski:2
 msgid ""
 "The organism with this skill is able to talk an aditional language for each "
 "point on it."
 msgstr ""
-"L'organisme possédant cette compétence est capable de parler une langue "
-"additionnelle pour chaque point."
 
 #: data/skills/falsificar.ski:1
 msgid "Counterfeit"
-msgstr "Contrefaçon"
+msgstr "Contrabbando"
 
 #: data/skills/falsificar.ski:2
 msgid ""
@@ -2446,7 +2348,7 @@ msgstr ""
 
 #: data/skills/furtividade.ski:1
 msgid "Furtive"
-msgstr "furtif"
+msgstr "Furtività"
 
 #: data/skills/furtividade.ski:2
 msgid "Is the organism's capacity to pass at some areas without making sounds."
@@ -2463,7 +2365,7 @@ msgstr ""
 
 #: data/skills/intimidar.ski:1
 msgid "Intimidate"
-msgstr "Intimidation"
+msgstr "Intimidazione"
 
 #: data/skills/intimidar.ski:2
 msgid ""
@@ -2476,7 +2378,7 @@ msgstr ""
 
 #: data/skills/montar.ski:1
 msgid "Ride Animals"
-msgstr ""
+msgstr "Cavalcare Animali"
 
 #: data/skills/montar.ski:2
 msgid ""
@@ -2486,7 +2388,7 @@ msgstr ""
 
 #: data/skills/nadar.ski:1
 msgid "Sports"
-msgstr "Sports"
+msgstr "Sport"
 
 #: data/skills/nadar.ski:2
 msgid ""
@@ -2497,16 +2399,15 @@ msgstr ""
 
 #: data/skills/notused.ski:1
 msgid "Not Used"
-msgstr "Non Utilisé"
+msgstr "Non Utilizzato"
 
 #: data/skills/notused.ski:2
 msgid "This Skill Place is Avaible for new skills in the future."
 msgstr ""
-"Cet emplacement est disponible pour de nouvelles compétences dans le futur."
 
 #: data/skills/observar.ski:1
 msgid "Observe"
-msgstr "Observation"
+msgstr "Osservazione"
 
 #: data/skills/observar.ski:2
 msgid ""
@@ -2516,7 +2417,7 @@ msgstr ""
 
 #: data/skills/obterinf.ski:1
 msgid "Get Information"
-msgstr "Obtenir des informations"
+msgstr "Ottenere Informazioni"
 
 #: data/skills/obterinf.ski:2
 msgid ""
@@ -2526,7 +2427,7 @@ msgstr ""
 
 #: data/skills/opobjele.ski:1
 msgid "Operate Eletronic Object"
-msgstr ""
+msgstr "Operare Su Oggetti Elettronici"
 
 #: data/skills/opobjele.ski:2
 msgid ""
@@ -2537,7 +2438,7 @@ msgstr ""
 
 #: data/skills/opobjmec.ski:1
 msgid "Operate Mechanic Object"
-msgstr ""
+msgstr "Operare Su Oggetti Meccanici"
 
 #: data/skills/opobjmec.ski:2
 msgid ""
@@ -2547,7 +2448,7 @@ msgstr ""
 
 #: data/skills/ouvir.ski:1
 msgid "Listen"
-msgstr "Ecoute"
+msgstr "Ascoltare"
 
 #: data/skills/ouvir.ski:2
 msgid ""
@@ -2557,7 +2458,7 @@ msgstr ""
 
 #: data/skills/passelivre.ski:1
 msgid "Free-Pass"
-msgstr ""
+msgstr "Passare-Liberamente"
 
 #: data/skills/passelivre.ski:2
 msgid ""
@@ -2568,7 +2469,7 @@ msgstr ""
 
 #: data/skills/penosaco.ski:1
 msgid "Foot on Man's Genitals"
-msgstr ""
+msgstr "Calcio sui Genitali Dell'Uomo"
 
 #: data/skills/penosaco.ski:2
 msgid ""
@@ -2578,7 +2479,7 @@ msgstr ""
 
 #: data/skills/performar.ski:1
 msgid "Perform"
-msgstr ""
+msgstr "Performare"
 
 #: data/skills/performar.ski:2
 msgid ""
@@ -2589,27 +2490,23 @@ msgstr ""
 
 #: data/skills/prestidig.ski:1
 msgid "Prestidigitation"
-msgstr "Prestidigitation"
+msgstr ""
 
 #: data/skills/prestidig.ski:2
 msgid ""
 "Is the  skill used to steal little objects that are with someone or at "
 "somewhere observed by a lot of people."
 msgstr ""
-"C'est la compétence utilisée pour voler de petits objets en la possession de "
-"quelqu'un ou dans un lieu surveillé."
 
 #: data/skills/roupasbizarras.ski:1
 msgid "Bizarre Cloths"
-msgstr "Vêtements Bizarres"
+msgstr "Vestiti Bizzarri"
 
 #: data/skills/roupasbizarras.ski:2
 msgid ""
 "It measure the capacity of a creature to wear the most bizarre things and "
 "call it 'Cloth'.)"
 msgstr ""
-"Indique la capacité d'une créature à porter des choses les plus étranges "
-"possible et à les appeler \"vêtement\"."
 
 #: data/skills/sabedoria.ski:2
 msgid ""
@@ -2622,7 +2519,7 @@ msgstr ""
 
 #: data/skills/semtempo.ski:1
 msgid "Out of Time"
-msgstr "Temps écoulé"
+msgstr ""
 
 #: data/skills/semtempo.ski:2
 msgid ""
@@ -2632,7 +2529,7 @@ msgstr ""
 
 #: data/skills/suborno.ski:1
 msgid "Bribe"
-msgstr "pots-de-vin"
+msgstr "Corrompere"
 
 #: data/skills/suborno.ski:2
 msgid ""
@@ -2642,35 +2539,33 @@ msgstr ""
 
 #: data/skills/tocarinst.ski:1
 msgid "Play Instrument"
-msgstr "Jouer d'un instrument"
+msgstr "Suonare Strumento"
 
 #: data/skills/tocarinst.ski:2
 msgid ""
 "Is the capacity to play a musical instrument. The instrument is anything "
 "that can produce at last 7 distinct notes."
 msgstr ""
-"C'est la capacité de jouer d'un instrument. L'instrument peut être n'importe "
-"quoi qui puisse produire au moins 7 notes distinctes."
 
 #: data/dialogs/ameiva1.dlg:6
 msgid "Oh, little student, what do you want?"
-msgstr "Oh, petit étudiant, que veux-tu ?"
+msgstr "Oh, piccolo studente, cosa vuoi?"
 
 #: data/dialogs/ameiva1.dlg:10
 msgid "Why can't I win a battle against the Ente?"
-msgstr "Pourquoi ne puis-je remporter de bataille contre l'Ente ?"
+msgstr ""
 
 #: data/dialogs/ameiva1.dlg:13
 msgid "I am a brutal killing machine. Die!"
-msgstr "Je suis une brutale machine à tuer. Meurs !"
+msgstr ""
 
 #: data/dialogs/ameiva1.dlg:16
 msgid "What are you?"
-msgstr "Qu'êtes-vous ?"
+msgstr "Cosa sei?"
 
 #: data/dialogs/ameiva1.dlg:19
 msgid "Nothing."
-msgstr "Rien."
+msgstr "Niente."
 
 #: data/dialogs/ameiva1.dlg:28
 msgid ""
@@ -2682,7 +2577,7 @@ msgstr ""
 
 #: data/dialogs/ameiva1.dlg:32
 msgid "Mythological, like a D&D Dragon?"
-msgstr "Mythologique ? Comme un Dragon de D&D ?"
+msgstr ""
 
 #: data/dialogs/ameiva1.dlg:35
 msgid "Bare hands? Oh, thank you DNT dev team!"
@@ -2690,16 +2585,15 @@ msgstr ""
 
 #: data/dialogs/ameiva1.dlg:38
 msgid "And you, can I kill?"
-msgstr "Et toi, je peux te tuer ?"
+msgstr "E tu, posso uccidere?"
 
 #: data/dialogs/ameiva1.dlg:47
 msgid "I am an Ameiva. A very usefull little Ameiva. An wise and great Ameiva!"
 msgstr ""
-"Je suis une Améive. Une courante petite Améive. Une sage et grande Améive!"
 
 #: data/dialogs/ameiva1.dlg:51
 msgid "Wise?  So, why can't I win a battle against the Ente?"
-msgstr "Sage? Alors, pourquoi ne puis-je gagner une bataille contre l'Ente ?"
+msgstr ""
 
 #: data/dialogs/ameiva1.dlg:54
 msgid "You are fully of yourself!"
@@ -2708,23 +2602,21 @@ msgstr ""
 #: data/dialogs/ameiva1.dlg:57 data/dialogs/ameiva1.dlg:105
 #: data/dialogs/ameiva1.dlg:121 data/dialogs/ameiva1.dlg:150
 msgid "Let's talk about something else."
-msgstr "Parlons d'autre chose."
+msgstr "Parliamo di qualcos'altro"
 
 #: data/dialogs/ameiva1.dlg:66
 msgid ""
 "Nothing? You click that ugly mouse cursor on me for nothing? I'll kill you, "
 "humanoid!"
 msgstr ""
-"Rien ? Tu as pointé ce curseur de souris immonde sur moi pour rien ? Je vais "
-"te tuer, humanoïde !"
 
 #: data/dialogs/ameiva1.dlg:70
 msgid "Come on!"
-msgstr "Allez!"
+msgstr "Dai!"
 
 #: data/dialogs/ameiva1.dlg:73
 msgid "Please, no!"
-msgstr "S'il vous plaît, non !"
+msgstr "Per favore, no!"
 
 #: data/dialogs/ameiva1.dlg:82
 msgid ""
@@ -2735,7 +2627,7 @@ msgstr ""
 
 #: data/dialogs/ameiva1.dlg:86
 msgid "Thank you DNTeam, for not modeled a Panda!"
-msgstr "Merci DNTeam, de ne pas avoir modélisé de Panda!"
+msgstr ""
 
 #: data/dialogs/ameiva1.dlg:95
 msgid "That's the way to think! I, too, won't exist without DNTeam!"
@@ -2743,7 +2635,7 @@ msgstr ""
 
 #: data/dialogs/ameiva1.dlg:99
 msgid "And I won't be killing you without them! Die little Ameiva!"
-msgstr "Et je ne pourrais pas non plus te tuer ! Meurs petite Améive !"
+msgstr ""
 
 #: data/dialogs/ameiva1.dlg:102
 msgid "Yes. See you great Ameiva!"
@@ -2758,8 +2650,6 @@ msgid ""
 "Yes, I can only be this fucking Model! I hope that on  next version the "
 "DNTeam make other humanoid model!"
 msgstr ""
-"Oui, je ne peux être que ce putain de Modèle! J'espère que dans la prochaine "
-"version, la DNTeam fera d'autres modèle humanoïdes!"
 
 #: data/dialogs/ameiva1.dlg:130
 msgid "Ok, I'll be mercy on you. Now, get out of my sight!"
@@ -2767,11 +2657,11 @@ msgstr ""
 
 #: data/dialogs/ameiva1.dlg:134
 msgid "Yes, great Ameiva!"
-msgstr "Oui, grande Améive!"
+msgstr ""
 
 #: data/dialogs/ameiva1.dlg:137
 msgid "I've changed my mind. Die!"
-msgstr "J'ai changé d'avis. Meurt!"
+msgstr "Ho cambiato idea. Muori!"
 
 #: data/dialogs/ameiva1.dlg:146
 msgid ""
@@ -2791,11 +2681,11 @@ msgstr ""
 
 #: data/dialogs/ratazana1.dlg:13
 msgid "Ha, ha, ha. A weak animal! Die!"
-msgstr "Ha, ha, ha. Un animal faible! Meurt!"
+msgstr "Ha, ha, ha. Un animale debole! Muori!"
 
 #: data/dialogs/ratazana1.dlg:16 data/dialogs/tutorial/logan.dlg:10
 msgid "Who are you?"
-msgstr "Qui êtes vous ?"
+msgstr "Chi sei?"
 
 #: data/dialogs/ratazana1.dlg:25
 msgid ""
@@ -2805,37 +2695,37 @@ msgstr ""
 
 #: data/dialogs/ratazana1.dlg:29
 msgid "I'll go. (After kill you)..."
-msgstr "Je vais y aller. (Après vous avoir tué)..."
+msgstr "Me ne andrò. (Dopo averti ucciso)..."
 
 #: data/dialogs/ratazana1.dlg:32
 msgid "Ok. Just calm down..."
-msgstr "D'accord. Simplement, calmez-vous..."
+msgstr "Ok. Calmati..."
 
 #: data/dialogs/initial.dlg:6
 msgid "Welcome to DccNiTghtmare!"
-msgstr "Bienvenu dans DccNiTghtmare !"
+msgstr "Benvenuto in DccNiTghtmare!"
 
 #: data/dialogs/initial.dlg:10 data/dialogs/initial.dlg:79
 msgid "What is DccNiTghtmare?"
-msgstr "Qu'es DccNiTghtmare !"
+msgstr "Cos'è DccNiTghtmare?"
 
 #: data/dialogs/initial.dlg:13
 msgid "I wanna help!"
-msgstr "Je veux aider !"
+msgstr "Voglio aiutare!"
 
 #: data/dialogs/initial.dlg:16 data/dialogs/initial.dlg:41
 #: data/dialogs/initial.dlg:63
 msgid "What the hell! A tree talking?"
-msgstr "Qu'est-ce que..? Un arbre qui parle ?"
+msgstr "Cosa diavolo! Un albero parlante?"
 
 #: data/dialogs/initial.dlg:19
 msgid "Die!"
-msgstr "Mort !"
+msgstr "Muori!"
 
 #: data/dialogs/initial.dlg:22 data/dialogs/tutorial/logan.dlg:157
 #: data/dialogs/tutorial/logan.dlg:171
 msgid "Bye!"
-msgstr "AU revoir !"
+msgstr "Arrivederci!"
 
 #: data/dialogs/initial.dlg:31
 msgid ""
@@ -2846,31 +2736,31 @@ msgstr ""
 
 #: data/dialogs/initial.dlg:35
 msgid "I really wanna help!"
-msgstr "Je veux vraiment aider !"
+msgstr "Voglio davvero aiutare!"
 
 #: data/dialogs/initial.dlg:38
 msgid "Die Fanatic!"
-msgstr "Meur fanatique !"
+msgstr "Muori Fanatico!"
 
 #: data/dialogs/initial.dlg:44
 msgid "So, bye!"
-msgstr "Donc, au revoir !"
+msgstr "Quindi, arrivederci!"
 
 #: data/dialogs/initial.dlg:53
 msgid "Use our foruns at dnt.dnteam.org to contact us!"
-msgstr "Utilisez notre forum dnt.dnteam.org pour nous contacter !"
+msgstr ""
 
 #: data/dialogs/initial.dlg:57
 msgid "I forgot what is DccNiTghtmare!"
-msgstr "J'ai oublié ce qu'est DccNiTghtmare !"
+msgstr ""
 
 #: data/dialogs/initial.dlg:60
 msgid "I don't like, die!"
-msgstr ""
+msgstr "Non mi piace, muori!"
 
 #: data/dialogs/initial.dlg:66
 msgid "Goodbye!"
-msgstr "Au revoir !"
+msgstr "Arrivederci!"
 
 #: data/dialogs/initial.dlg:75
 msgid ""
@@ -2881,19 +2771,19 @@ msgstr ""
 
 #: data/dialogs/initial.dlg:82
 msgid "Die Cursed Tree!"
-msgstr "Meurs Arbre Maudit !"
+msgstr "Muori Albero Maledetto!"
 
 #: data/dialogs/initial.dlg:85
 msgid "Bye Tree!"
-msgstr "Au revoir, l'Arbre !"
+msgstr "Addio Albero!"
 
 #: data/dialogs/initial.dlg:88
 msgid "Bye Ente!"
-msgstr "Au revoir, Ente !"
+msgstr "Addio Ente!"
 
 #: data/dialogs/tutorial/logan.dlg:6
 msgid "Ah, so finally you awake!"
-msgstr ""
+msgstr "Ah, finalmente ti sei svegliato!"
 
 #: data/dialogs/tutorial/logan.dlg:19
 msgid "I am Logan, maintainer of this occupation."
@@ -2905,7 +2795,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:26 data/dialogs/tutorial/logan.dlg:55
 msgid "What am I doing here?"
-msgstr "Qu'est-ce que je fais là ?"
+msgstr "Cosa ci faccio qui?"
 
 #: data/dialogs/tutorial/logan.dlg:35
 msgid ""
@@ -2916,12 +2806,12 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:39
 msgid "For the sake of your ideals? What ideals?!"
-msgstr ""
+msgstr "Per il bene dei tuoi ideali? Quali ideali?!"
 
 #: data/dialogs/tutorial/logan.dlg:42 data/dialogs/tutorial/logan.dlg:58
 #: data/dialogs/tutorial/logan.dlg:74
 msgid "What do you want of me?"
-msgstr "Que voulez-vous de moi ?"
+msgstr "Cosa vuoi da me?"
 
 #: data/dialogs/tutorial/logan.dlg:51
 msgid ""
@@ -2931,49 +2821,52 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:61
 msgid "Shut up and die!"
-msgstr "La ferme et meurs !"
+msgstr "Taci e muori!"
 
 #: data/dialogs/tutorial/logan.dlg:70
 msgid "Our ideal? It's not the time to tell you about that."
-msgstr "Notre idéal ? Ce n'est pas le moment de vous en parler..."
+msgstr "I nostri ideali? Non è il momento di parlartene"
 
 #: data/dialogs/tutorial/logan.dlg:83
 msgid ""
 "Ah, some time ago I've lost our Chrono Trigger Snes cartridge, just find it "
 "for us."
 msgstr ""
+"Ah, tempo fa ho perso la nostra cartuccia per Snes di Chrono Trigger, "
+"semplicemente ritrovala per noi."
 
 #: data/dialogs/tutorial/logan.dlg:87
 msgid "Ok, I'll search it"
-msgstr "Bien, je vais le rechercher..."
+msgstr "Ok, la cercherò"
 
 #: data/dialogs/tutorial/logan.dlg:92
 msgid "Oh, Chrono Trigger! This name resounds good memories in my head."
 msgstr ""
+"Oh, Chrono Trigger! Questo nome richiama buone memorie nella mia testa."
 
 #: data/dialogs/tutorial/logan.dlg:97
 msgid "Never! Chrono taked me 3 years! Die!"
-msgstr ""
+msgstr "Mai! Chrono mi ha preso 3 anni! Muori!"
 
 #: data/dialogs/tutorial/logan.dlg:106
 msgid "You still haven't found our Chrono Trigger Snes cartridge!"
-msgstr ""
+msgstr "Non hai ancora trovato la nostra cartuccia per Snes di Chrono Trigger!"
 
 #: data/dialogs/tutorial/logan.dlg:110
 msgid "I'm still looking..."
-msgstr "Je regarde encore..."
+msgstr "Sto ancora cercando..."
 
 #: data/dialogs/tutorial/logan.dlg:119
 msgid "Here! Chrono is here! Let me play it!"
-msgstr ""
+msgstr "Qua! Chrono è qua! Fammelo giocare!"
 
 #: data/dialogs/tutorial/logan.dlg:123
 msgid "Its all yours..."
-msgstr ""
+msgstr "È tutto tuo..."
 
 #: data/dialogs/tutorial/logan.dlg:128
 msgid "Its yours, but I want some money!"
-msgstr ""
+msgstr "È tuo, ma voglio dei soldi!"
 
 #: data/dialogs/tutorial/logan.dlg:140
 msgid ""
@@ -2983,7 +2876,7 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:144
 msgid "Thanks."
-msgstr ""
+msgstr "Grazie."
 
 #: data/dialogs/tutorial/logan.dlg:153
 msgid ""
@@ -2993,15 +2886,15 @@ msgstr ""
 
 #: data/dialogs/tutorial/logan.dlg:167
 msgid "Chrono... Chrono... Chrono!"
-msgstr ""
+msgstr "Chrono... Chrono... Chrono!"
 
 #: data/weapons/definitions/axe.wcc:1
 msgid "Great Axe"
-msgstr "Grande Hache"
+msgstr "Ascia Grande"
 
 #: data/weapons/definitions/dagger.wcc:1
 msgid "Dagger"
-msgstr "Dague"
+msgstr "Pugnale"
 
 #: data/weapons/definitions/beretta92.wcc:1
 msgid "Beretta 92"
@@ -3018,11 +2911,11 @@ msgstr "Katana"
 
 #: data/weapons/definitions/knife.wcc:1
 msgid "Knife"
-msgstr "Couteau"
+msgstr "Coltello"
 
 #: data/weapons/definitions/scimitar.wcc:1
 msgid "Scimitar"
-msgstr "Cimeterre"
+msgstr "Scimitarra"
 
 #: data/weapons/definitions/sw39.wcc:1
 msgid "S&W 39"
@@ -3034,43 +2927,43 @@ msgstr "Uzi"
 
 #: data/weapons/types/categories.dcl:2
 msgid "Martial"
-msgstr ""
+msgstr "Marziale"
 
 #: data/weapons/types/categories.dcl:3
 msgid "Exotic"
-msgstr "Exotique"
+msgstr "Esotico"
 
 #: data/weapons/types/categories.dcl:4
 msgid "Throw"
-msgstr "Jetez"
+msgstr "Lancio"
 
 #: data/weapons/types/categories.dcl:5
 msgid "Simple"
-msgstr "Simple"
+msgstr "Semplice"
 
 #: data/weapons/types/categories.dcl:6
 msgid "Two Handed"
-msgstr "A deux Mains"
+msgstr "A Due Mani"
 
 #: data/weapons/types/categories.dcl:7
 msgid "Gun"
-msgstr "Pistolet"
+msgstr "Pistola"
 
 #: data/weapons/types/categories.dcl:8
 msgid "Rifle"
-msgstr ""
+msgstr "Fucile"
 
 #: data/weapons/types/damages.dcl:2
 msgid "Piercing"
-msgstr ""
+msgstr "Perforante"
 
 #: data/weapons/types/damages.dcl:3
 msgid "Slashing"
-msgstr ""
+msgstr "Tagliente"
 
 #: data/weapons/types/damages.dcl:4
 msgid "Bludgeoning"
-msgstr ""
+msgstr "Contundente"
 
 #: data/weapons/types/munitions.dcl:3
 msgid "9mm"
@@ -3090,24 +2983,24 @@ msgstr "M43"
 
 #: data/weapons/types/ranges.dcl:2
 msgid "Melee"
-msgstr "Melée"
+msgstr "Mischia"
 
 #: data/weapons/types/ranges.dcl:3
 msgid "Ranged"
-msgstr ""
+msgstr "A distanza"
 
 #: data/weapons/types/sizes.dcl:2
 msgid "Tiny"
-msgstr ""
+msgstr "Minuscolo"
 
 #: data/weapons/types/sizes.dcl:4
 msgid "Large"
-msgstr "Large"
+msgstr "Largo"
 
 #: data/weapons/types/weights.dcl:2
 msgid "Light"
-msgstr "Léger"
+msgstr "Leggero"
 
 #: data/weapons/types/weights.dcl:4
 msgid "Heavy"
-msgstr "Lourd"
+msgstr "Pesante"
