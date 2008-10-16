@@ -135,6 +135,14 @@ SOURCE=.\src\engine\barterwindow.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\btree.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\btreecell.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\button.cpp
 # End Source File
 # Begin Source File
@@ -343,6 +351,10 @@ SOURCE=.\src\map\maproad.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\map\mapsound.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\menu.cpp
 # End Source File
 # Begin Source File
@@ -519,6 +531,10 @@ SOURCE=.\src\app\mapEditor\terrain.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\etc\texrenderer.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\textbar.cpp
 # End Source File
 # Begin Source File
@@ -600,6 +616,14 @@ SOURCE=.\src\ia\astar.h
 # Begin Source File
 
 SOURCE=.\src\classes\barter.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\btree.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\btreecell.h
 # End Source File
 # Begin Source File
 
@@ -747,6 +771,10 @@ SOURCE=.\src\map\maproad.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\map\mapsound.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\gui\menu.h
 # End Source File
 # Begin Source File
@@ -884,6 +912,10 @@ SOURCE=.\src\engine\sun.h
 # Begin Source File
 
 SOURCE=.\src\app\mapEditor\terrain.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\etc\texrenderer.h
 # End Source File
 # Begin Source File
 
