@@ -18,7 +18,9 @@ using namespace std;
  * so an expensive function, but is only called when needed, and only one
  * time per need.
  * \note -> if the increase function become frequently, is better increase
- *          the TEXTURE_INITIAL_MAX_QUADS value. */
+ *          the TEXTURE_INITIAL_MAX_QUADS value. 
+ * \note -> we keep the renderTexture in a Btree and in a chain list at the 
+ * same time, with the same structure */
 class renderTexture: public bTreeCell
 {
    public:
@@ -67,6 +69,20 @@ class renderTexture: public bTreeCell
        * \param cell -> cell to merge the current one with */
       void merge(bTreeCell* cell);
 
+      /*! Set the next texture on the chain list
+       * \param rt -> pointer to the render texture*/
+      void setNext(renderTexture* rt);
+      /*! Set the previous texture on the chain list
+       * \param rt -> pointer to the render texture */
+      void setPrevious(renderTexture* rt);
+
+      /*! Get the next renderTexture on the list
+       * \return -> pointer to the next */
+      renderTexture* getNext();
+      /*! Get the previous renderTexture on the list
+       * \return -> pointer to the previous */
+      renderTexture* getPrevious();
+
    protected:
 
       /*!Increase, when needed, the size of the buffers to keep
@@ -85,6 +101,9 @@ class renderTexture: public bTreeCell
 
       GLuint textureId;       /**< The texture Id */
       string textureName;     /**< The texture Name */
+
+      renderTexture* next;     /**< Next render texture on list */
+      renderTexture* previous; /**< Previous render texture on list */
 };
 
 /*! The texRenderer is used to render GL_QUADS per texture using
@@ -113,9 +132,8 @@ class texRenderer: public bTree
       renderTexture* insertTexture(GLuint textureId, string textureName);
 
       /*! Render all renderTextures quads
-       * \param floorReflexion -> with reflextion with floor is enabled
-       * \param rt -> pointer to the root (if none, will get the root) */
-      void render(bool floorReflexion, renderTexture* rt=NULL);
+       * \param floorReflexion -> with reflextion with floor is enabled */
+      void render(bool floorReflexion);
 
       /*! Clear all renderTextures (setting its totalQuads to 0) 
        * \param rt -> pointer to the root (if none, will get the root) */
@@ -137,6 +155,11 @@ class texRenderer: public bTree
                    GLfloat u1, GLfloat v1,
                    GLfloat u2, GLfloat v2,
                    GLfloat nX, GLfloat nY, GLfloat nZ);
+
+   protected:
+      renderTexture* texList;   /**< The texture list (to do a non-recursive
+                                     rendering) */
+      int totalTextures;        /**< Total Textures on the list */
 };
 
 

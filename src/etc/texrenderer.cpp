@@ -44,6 +44,38 @@ renderTexture::~renderTexture()
 }
 
 /***********************************************************************
+ *                               setNext                               *
+ ***********************************************************************/
+void renderTexture::setNext(renderTexture* rt)
+{
+   next = rt;
+}
+
+/***********************************************************************
+ *                             setPrevious                             *
+ ***********************************************************************/
+void renderTexture::setPrevious(renderTexture* rt)
+{
+   previous = rt;
+}
+
+/***********************************************************************
+ *                              getNext                                *
+ ***********************************************************************/
+renderTexture* renderTexture::getNext()
+{
+   return(next);
+}
+
+/***********************************************************************
+ *                             getPrevious                             *
+ ***********************************************************************/
+renderTexture* renderTexture::getPrevious()
+{
+   return(previous);
+}
+
+/***********************************************************************
  *                           getTextureName                            *
  ***********************************************************************/
 string renderTexture::getTextureName()
@@ -237,6 +269,8 @@ void renderTexture::merge(bTreeCell* cell)
  ***********************************************************************/
 texRenderer::texRenderer():bTree()
 {
+   texList = NULL;
+   totalTextures = 0;
 }
 
 /***********************************************************************
@@ -270,7 +304,26 @@ void texRenderer::freeCell(bTreeCell* cell)
  ***********************************************************************/
 renderTexture* texRenderer::insertTexture(GLuint textureId, string textureName)
 {
+   /* Create the renderTexture */
    renderTexture* rt = new renderTexture(textureId, textureName);
+
+   /* Insert it at the chain list */
+   if(!texList)
+   {
+      rt->setNext(rt);
+      rt->setPrevious(rt);
+   }
+   else
+   {
+      rt->setPrevious(texList->getPrevious());
+      rt->setNext(texList);
+      rt->getPrevious()->setNext(rt);
+      rt->getNext()->setPrevious(rt);
+   }
+   texList = rt;
+   totalTextures++;
+
+   /* Insert it at the binary tree */
    return((renderTexture*)insert(rt));
 }
 
@@ -335,30 +388,16 @@ void texRenderer::addQuad(GLuint textureId, string textureName,
 /***********************************************************************
  *                                render                               *
  ***********************************************************************/
-void texRenderer::render(bool floorReflexion, renderTexture* rt)
+void texRenderer::render(bool floorReflexion)
 {
-   if(!rt)
+   int i;
+
+   /* Render the list (to avoid recursive calls rendering the btree) */
+   renderTexture* rt = texList;
+   for(i = 0; i < totalTextures; i++)
    {
-      /* Must get the root */
-      rt = (renderTexture*)getRoot();
-   }
-
-   if(rt)
-   { 
-      /* Call for root */
       rt->render(floorReflexion);
-
-      /* Call for left */
-      if(rt->getLeft())
-      {
-         render(floorReflexion, (renderTexture*)rt->getLeft());
-      }
-
-      /* Call for right */
-      if(rt->getRight())
-      {
-         render(floorReflexion, (renderTexture*)rt->getRight());
-      }
+      rt = rt->getNext();
    }
 }
 

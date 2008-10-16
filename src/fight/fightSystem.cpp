@@ -286,13 +286,13 @@ int fightSystem::doTurn()
                 /* There's no more enemies, so no more battle */
                 return(FIGHT_END);
              }
-             sprintf(buffer, "%s's turn.", actualActor->name.c_str());
+             sprintf(buffer, gettext("%s's turn."), actualActor->name.c_str());
              brief->addText(buffer);
              return(FIGHT_PC_TURN);
          }
          else
          { 
-            sprintf(buffer, "%s's turn.", actualActor->name.c_str());
+            sprintf(buffer, gettext("%s's turn."), actualActor->name.c_str());
             brief->addText(buffer);
             
             /* If NPC hasn't script, run from here */
