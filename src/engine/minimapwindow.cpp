@@ -98,20 +98,18 @@ void miniMapWindow::updateCharacterPosition(float posX, float posZ)
       /* Invert Character Z Coordinate (the map image is flipped at Y) */
       z = (curMap->getSizeZ()-1) - z;
 
-      /* If Outdoor, must ignore the no walkable squares */
-      /*if(curMap->isOutdoor())
-      {
-         x -= 7;
-         z -= 7;
-      }*/
-
       /* The incredible scale */
       x = (GLint)(8 + (x*curMap->getSquareMiniSize()));
       z = (GLint)(20 + (z*curMap->getSquareMiniSize()));
       div2 = (GLint)(curMap->getSquareMiniSize() / 2);
 
-      charPosition->setCoordinate(x+div2, z+div2, x+div2+1, z+div2+1);
-      mapWindow->draw(-1, -1);
+      /* Only redraw the window if the position is different */
+      if( ((x+div2-1) != charPosition->getX1()) || 
+          ((z+div2-1) != charPosition->getY1()) )
+      {
+         charPosition->setCoordinate(x+div2-1, z+div2-1, x+div2+1, z+div2+1);
+         mapWindow->draw(-1, -1);
+      }
    }
 }
 
