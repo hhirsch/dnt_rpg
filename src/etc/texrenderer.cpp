@@ -404,30 +404,16 @@ void texRenderer::render(bool floorReflexion)
 /***********************************************************************
  *                                 clear                               *
  ***********************************************************************/
-void texRenderer::clear(renderTexture* rt)
+void texRenderer::clear()
 {
-   if(!rt)
+   int i;
+
+   /* Render the list (to avoid recursive calls rendering the btree) */
+   renderTexture* rt = texList;
+   for(i = 0; i < totalTextures; i++)
    {
-      /* Must get the root */
-      rt = (renderTexture*)getRoot();
-   }
-
-   if(rt)
-   { 
-      /* Call for root */
       rt->clearBuffers();
-
-      /* Call for left */
-      if(rt->getLeft())
-      {
-         clear((renderTexture*)rt->getLeft());
-      }
-
-      /* Call for right */
-      if(rt->getRight())
-      {
-         clear((renderTexture*)rt->getRight());
-      }
+      rt = rt->getNext();
    }
 }
 

@@ -135,9 +135,8 @@ class texRenderer: public bTree
        * \param floorReflexion -> with reflextion with floor is enabled */
       void render(bool floorReflexion);
 
-      /*! Clear all renderTextures (setting its totalQuads to 0) 
-       * \param rt -> pointer to the root (if none, will get the root) */
-      void clear(renderTexture* rt=NULL);
+      /*! Clear all renderTextures (setting its totalQuads to 0) */
+      void clear();
 
       /*! Search for a renderTexture
        * \param textureName -> name of the texture to search
