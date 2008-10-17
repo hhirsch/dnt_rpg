@@ -106,9 +106,9 @@ void miniMapWindow::updateCharacterPosition(float posX, float posZ)
       }*/
 
       /* The incredible scale */
-      x = 8 + (x*curMap->getSquareMiniSize());
-      z = 20 + (z*curMap->getSquareMiniSize());
-      div2 = curMap->getSquareMiniSize() / 2;
+      x = (GLint)(8 + (x*curMap->getSquareMiniSize()));
+      z = (GLint)(20 + (z*curMap->getSquareMiniSize()));
+      div2 = (GLint)(curMap->getSquareMiniSize() / 2);
 
       charPosition->setCoordinate(x+div2, z+div2, x+div2+1, z+div2+1);
       mapWindow->draw(-1, -1);
