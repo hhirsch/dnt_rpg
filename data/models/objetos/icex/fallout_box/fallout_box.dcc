@@ -1,0 +1,13 @@
+name = Fallout2
+cal3d = models/objetos/icex/fallout_box/model.cfg
+inventory_sizes = 2 2
+inventory_texture = models/objetos/icex/fallout_box/texture_inv.png
+life_points = 12
+fortitude = 10
+reflex = 0
+will = 0
+weight_value = 0.5
+displacement = 0
+armature_class = 3
+size_modifier = 0
+cost = 220

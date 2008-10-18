@@ -1,7 +1,8 @@
-17
+18
 Black_Board models/objetos/icex/quadro/quadro.dcc
 Chair models/objetos/icex/cadeira/cadeira.dcc
 Chair_Table models/objetos/icex/mesa_braco/mesa_braco.dcc
+Fallout2_Box models/objetos/icex/fallout_box/fallout_box.dcc
 Scavenger models/objetos/icex/lixo/lixo.dcc
 Icex_Table models/objetos/icex/mesa_redonda/mesa_redonda.dcc
 Ruindows_Box models/objetos/icex/ruindows_box/ruindows_box.dcc
