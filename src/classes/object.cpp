@@ -10,6 +10,36 @@
 #include "../etc/defparser.h"
 
 /**************************************************************
+ *                       getObjectTypeId                      *
+ **************************************************************/
+int getObjectTypeId(string type)
+{
+   /* Translates a type string to the object type Id */
+   if(type == "weapon")
+   {
+      return(OBJECT_TYPE_WEAPON);
+   }
+   else if(type == "armor")
+   {
+      return(OBJECT_TYPE_ARMOR);
+   }
+   else if(type == "heal")
+   {
+      return(OBJECT_TYPE_HEAL);
+   }
+   else if(type == "ammo")
+   {
+      return(OBJECT_TYPE_AMMO);
+   }
+   else if(type == "explosive")
+   {
+      return(OBJECT_TYPE_EXPLOSIVE);
+   }
+
+   return(OBJECT_TYPE_GENERIC);
+}
+
+/**************************************************************
  *                         Constructor                        *
  **************************************************************/
 object::object(string path, modelList& mdlList): thing()
@@ -43,6 +73,10 @@ object::object(string path, modelList& mdlList): thing()
       else if(key == "cal3d")
       {
          cal3DFile = value;
+      }
+      else if(key == "type")
+      {
+         type = getObjectTypeId(value);
       }
       else if(key == "inventory_sizes")
       {

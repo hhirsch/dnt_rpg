@@ -16,7 +16,9 @@ using namespace std;
 #define OBJECT_TYPE_MAPOBJECT 1
 #define OBJECT_TYPE_WEAPON    2
 #define OBJECT_TYPE_ARMOR     3
-#define OBJECT_TYPE_ITEM      4
+#define OBJECT_TYPE_HEAL      4
+#define OBJECT_TYPE_EXPLOSIVE 5
+#define OBJECT_TYPE_AMMO      6
 
 /*! Define Objects of the DNT (an object is almost everything that 
  * isn't live (like chairs, doors, equipments, weapons, etc).*/
