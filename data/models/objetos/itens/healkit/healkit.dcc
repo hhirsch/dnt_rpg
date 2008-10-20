@@ -1,5 +1,6 @@
 name = Healkit
 cal3d = models/objetos/itens/healkit/model.cfg
+type = heal
 inventory_sizes = 2 1
 inventory_texture = models/objetos/itens/healkit/texture_inv.png
 life_points = 20
