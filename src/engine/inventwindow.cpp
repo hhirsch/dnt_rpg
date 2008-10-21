@@ -534,6 +534,20 @@ bool inventWindow::treat(guiObject* guiObj, int eventInfo, cursor* mouseCursor,
                         activeObject = NULL;
                         reDraw();
                      }
+                     else if(activeObject->getType() == OBJECT_TYPE_HEAL)
+                     {
+                        /* TODO -> get the heal target (currently 
+                         * doing always on the inventory owner) */
+                        //character* target = owner;
+                        
+                        /* Apply the heal to the target */
+
+                        /* And discard the object */
+                        inventories->removeFromInventory(objX,objY, 
+                                                         currentInventory);
+                        activeObject = NULL;
+                        reDraw();
+                     }
                   }
                   else
                   {
