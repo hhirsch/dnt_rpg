@@ -23,7 +23,7 @@ class mapObject: public object
        * \param path -> path to the object file
        * \param mdlList -> list of openned models */
       mapObject(string path, modelList& mdlList):
-         object(path, mdlList){type = OBJECT_TYPE_MAPOBJECT;};
+         object(path, mdlList){};
 
    protected:
       void callDeadAnimation();

@@ -75,7 +75,7 @@ object* lObject::insertObject(string arquivo, modelList& mdlList,
       novo->next->previous = novo;
       first = novo;
    }
-   
+  
    total++;
    return(novo);
 }
