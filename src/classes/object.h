@@ -97,6 +97,10 @@ class object: public thing
       /*! Verify if the object is a Scenery one */
       bool isStaticScenery(){return(staticScenery);};
 
+      /*! Verify if the item is usable or not
+       * \return -> true if the item is usable */
+      bool isUsable();
+
       /*! Add render position to the object.
        * \note -> this function ios only valid if the object is a 
        *          static scenery one. 

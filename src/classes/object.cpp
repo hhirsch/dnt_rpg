@@ -309,6 +309,17 @@ bool object::canGet()
 }
 
 /*********************************************************************
+ *                             isUsable                              *
+ *********************************************************************/
+bool object::isUsable()
+{
+   return( (type == OBJECT_TYPE_WEAPON) ||
+           (type == OBJECT_TYPE_ARMOR) ||
+           (type == OBJECT_TYPE_HEAL) ||
+           (type == OBJECT_TYPE_EXPLOSIVE) );
+}
+
+/*********************************************************************
  *                         addRenderPosition                         *
  *********************************************************************/
 void object::addRenderPosition(float x, float y, float z, float angle)

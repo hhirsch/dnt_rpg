@@ -190,7 +190,8 @@ void inventWindow::openMenu(int x, int y, int type, bool seller)
    if(menuType == MENU_TYPE_INVENTORY)
    {
       objectMenu->insertItem(gettext("Use"),
-                             dir.getRealFile("icons/use.png"), !seller);
+                             dir.getRealFile("icons/use.png"), 
+                             (!seller) && (activeObject->isUsable()) );
    }
    else
    {
